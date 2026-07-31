@@ -841,6 +841,8 @@ export const tools: ToolMeta[] = [
     intent: 'commercial', category: 'Finance Calculators', h1: 'Income Tax Estimator',
     shortIntro: 'Estimate US federal income tax and take-home pay.', published: true,
   },
+  // TODO(未上线):salary-converter 工具目录尚未创建(app/tools/salary-converter/)。
+  // published: false 期间不会出现在首页/sitemap。补做 page.tsx + Client 组件后改为 true。
   {
     slug: 'salary-converter', name: 'Salary Converter',
     title: 'Free Salary Converter - Annual, Monthly, Bi-Weekly, Hourly',
@@ -1268,4 +1270,48 @@ export function getToolsByCategory(): Record<string, ToolMeta[]> {
     grouped[tool.category].push(tool)
   }
   return grouped
+}
+
+/**
+ * 获取某工具的相关工具(用于工具页内链)
+ *
+ * 策略:同分类优先,剩余名额从其他分类补齐,共 limit 个,排除当前工具自身。
+ * 顺序做了轻微随机但稳定(基于 slug 字符串),避免每个页面相关工具完全一致,
+ * 让内链网络看起来自然,同时 SSR 时输出确定(同一次 build 结果一致)。
+ */
+export function getRelatedTools(slug: string, limit = 6): ToolMeta[] {
+  const current = getTool(slug)
+  if (!current) return []
+
+  const published = getPublishedTools()
+  // 同分类的其他工具(排除自己)
+  const sameCategory = published.filter(
+    (t) => t.slug !== slug && t.category === current.category,
+  )
+  // 其他分类的工具(排除自己)
+  const otherCategory = published.filter(
+    (t) => t.slug !== slug && t.category !== current.category,
+  )
+
+  // 基于 slug 的简单稳定"洗牌":让不同工具看到的相关列表有差异
+  const seedShuffle = (arr: ToolMeta[], seed: string): ToolMeta[] => {
+    const hash = seed.split('').reduce((acc, c) => acc + c.charCodeAt(0), 0)
+    return [...arr].sort((a, b) => {
+      const sa = a.slug.split('').reduce((x, c) => x + c.charCodeAt(0), 0)
+      const sb = b.slug.split('').reduce((x, c) => x + c.charCodeAt(0), 0)
+      return ((sa + hash) % 97) - ((sb + hash) % 97)
+    })
+  }
+
+  const shuffledSame = seedShuffle(sameCategory, slug)
+  const shuffledOther = seedShuffle(otherCategory, slug + 'x')
+
+  // 同分类至少占一半名额(如果有的话),不足则从其他分类补
+  const sameCount = Math.min(shuffledSame.length, Math.ceil(limit / 2))
+  const picked = [
+    ...shuffledSame.slice(0, sameCount),
+    ...shuffledOther.slice(0, limit - sameCount),
+  ]
+
+  return picked.slice(0, limit)
 }

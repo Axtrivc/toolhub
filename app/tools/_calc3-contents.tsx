@@ -566,47 +566,173 @@ export function CreditCardPayoffCalculatorContent(): ReactNode {
   return (
     <ToolContent
       intro={
-        <p>
-          Credit card debt is expensive — average APRs are 20-25%. This calculator shows how long it
-          will take to pay off your balance at a given monthly payment, and how much interest
-          you&apos;ll pay. The numbers often surprise people.
-        </p>
+        <>
+          <p>
+            Credit card debt is among the most expensive borrowing you can carry. Average APRs in the
+            US sit between 20% and 28%, far higher than mortgages, auto loans, or personal loans. This
+            calculator shows exactly how long it will take to pay off your balance at a given monthly
+            payment, and &mdash; more importantly &mdash; how much of your money goes to interest
+            versus the actual debt.
+          </p>
+          <p>
+            The results often shock people. A modest balance paid at the minimum can cost more in
+            interest than the original purchases, and take decades to clear. The good news: even a
+            small increase in your monthly payment dramatically shortens the timeline and slashes the
+            total interest paid.
+          </p>
+        </>
       }
       sections={[
         {
+          heading: 'How Credit Card Interest Actually Works',
+          body: (
+            <>
+              <p>
+                Most credit cards compound interest <strong>daily</strong>, based on your average
+                daily balance. The advertised APR is divided by 365 to get a daily rate, and that
+                daily rate is applied to your balance every day. Over a month, this adds up to
+                slightly more than APR &divide; 12 would suggest.
+              </p>
+              <p>
+                When you carry a balance, your grace period disappears. New purchases start accruing
+                interest immediately, from the day of the transaction. This is why carrying a balance
+                is so costly &mdash; you lose the 21-25 day interest-free window that cardholders who
+                pay in full enjoy.
+              </p>
+            </>
+          ),
+        },
+        {
           heading: 'The Minimum Payment Trap',
           body: (
-            <p>
-              Minimum payments are typically 1-3% of your balance plus interest. At that rate, a
-              $5,000 balance at 20% APR takes <strong>over 20 years</strong> to pay off and costs
-              more in interest than the original purchases. Always pay more than the minimum.
-            </p>
+            <>
+              <p>
+                Minimum payments are deliberately set low &mdash; typically 1% to 3% of your balance
+                plus that month&apos;s interest. From the bank&apos;s perspective, a low minimum keeps
+                you paying for as long as possible. From yours, it&apos;s a trap.
+              </p>
+              <p>
+                A <strong>$5,000 balance at 22% APR</strong> with a typical minimum payment of around
+                $110/month takes <strong>over 27 years</strong> to pay off and costs roughly{' '}
+                <strong>$8,000 in interest</strong> &mdash; more than the original debt. You end up
+                paying for whatever you bought nearly three times over.
+              </p>
+            </>
           ),
         },
         {
           heading: 'The Power of Paying More',
           body: (
+            <>
+              <p>The single most effective move is paying more than the minimum. Same $5,000 at 22% APR:</p>
+              <ul>
+                <li>
+                  <strong>Minimum (~$110/month):</strong> ~27 years, ~$8,000 interest
+                </li>
+                <li>
+                  <strong>$200/month:</strong> ~2.8 years, ~$1,650 interest <em>(saves ~$6,350)</em>
+                </li>
+                <li>
+                  <strong>$300/month:</strong> ~1.8 years, ~$1,050 interest <em>(saves ~$6,950)</em>
+                </li>
+                <li>
+                  <strong>$500/month:</strong> ~1 year, ~$610 interest <em>(saves ~$7,390)</em>
+                </li>
+              </ul>
+              <p>
+                Going from the minimum to just $200/month cuts the payoff time by 90% and saves
+                thousands. Every extra dollar above the minimum goes straight to principal, which is
+                why the effect is so dramatic.
+              </p>
+            </>
+          ),
+        },
+        {
+          heading: 'Proven Strategies to Pay Off Faster',
+          body: (
+            <>
+              <p>If you have multiple cards or want a systematic approach, pick a method and stick with it:</p>
+              <ul>
+                <li>
+                  <strong>Avalanche method (cheapest):</strong> Pay the minimum on every card, then
+                  put all extra cash toward the <em>highest-APR</em> card first. Mathematically this
+                  saves the most interest. Once that card is gone, roll the payment into the next
+                  highest APR.
+                </li>
+                <li>
+                  <strong>Snowball method (psychological):</strong> Pay off the <em>smallest
+                  balance</em> first regardless of rate. The quick wins keep you motivated. It costs
+                  slightly more than avalanche but many people stick with it longer.
+                </li>
+                <li>
+                  <strong>Balance transfer card:</strong> Move debt to a 0% intro APR card (typically
+                  12-21 months). Every dollar goes to principal during the promo period. Watch out
+                  for 3-5% transfer fees, and have a plan to clear it before the promo ends.
+                </li>
+                <li>
+                  <strong>Debt consolidation loan:</strong> A personal loan at 8-15% beats a 24%
+                  credit card. You trade revolving debt for a fixed installment with a clear end date.
+                </li>
+              </ul>
+            </>
+          ),
+        },
+        {
+          heading: 'Common Mistakes That Keep You in Debt',
+          body: (
             <ul>
-              <li>$5,000 at 20% APR, minimum payment (~$100): ~30 years, ~$7,500 in interest</li>
-              <li>$5,000 at 20% APR, $200/month: ~2.5 years, ~$1,200 in interest</li>
-              <li>$5,000 at 20% APR, $500/month: ~1 year, ~$500 in interest</li>
+              <li>
+                <strong>Paying only the minimum.</strong> This is the #1 mistake. Even $20-50 extra
+                per month transforms your timeline.
+              </li>
+              <li>
+                <strong>Continuing to use the card.</strong> New charges offset your payments. Freeze
+                the card (literally, in a block of ice) while paying it down.
+              </li>
+              <li>
+                <strong>Ignoring the daily compounding.</strong> Making a payment earlier in the
+                billing cycle saves a little interest every month, because interest is calculated on
+                the daily balance.
+              </li>
+              <li>
+                <strong>Missing payments.</strong> A late payment triggers a late fee (up to $41) and
+                often a penalty APR of 29.99% that can last indefinitely. Set autopay for at least the
+                minimum.
+              </li>
             </ul>
           ),
         },
         {
-          heading: 'Strategies to Pay Off Faster',
+          heading: 'When to Consider Other Options',
           body: (
-            <ul>
-              <li><strong>Avalanche method:</strong> Pay minimums on all cards, put extra toward the highest-APR card first</li>
-              <li><strong>Snowball method:</strong> Pay off smallest balances first for psychological wins</li>
-              <li><strong>Balance transfer:</strong> Move debt to a 0% intro APR card (usually 12-18 months)</li>
-              <li><strong>Personal loan:</strong> Consolidate at a lower rate (often 8-15% vs. 20%+)</li>
-            </ul>
+            <p>
+              If your balance is large and your APR is high, a balance transfer or consolidation loan
+              can cut your effective rate to 0-15%. That often matters more than the payment amount.
+              If you&apos;re struggling to make even minimums, contact your card issuer&apos;s hardship
+              program &mdash; many offer temporary reduced rates or payment plans rather than see you
+              default. Avoid payday loans and other high-cost borrowing to &quot;cover&quot; credit
+              card payments; that trades one problem for a worse one.
+            </p>
           ),
         },
       ]}
       faqs={[
-        { q: 'What if my payment is below the interest?', a: 'The calculator will warn you. If your payment only covers interest, the balance never drops. You must pay more than the monthly interest charge to make progress.' },
+        {
+          q: 'What if my payment is below the monthly interest?',
+          a: 'The calculator will warn you. If your payment only covers interest (or less), the balance never drops &mdash; you could pay forever and never make progress. You must pay more than the monthly interest charge. For example, on $5,000 at 22% APR, monthly interest is about $92; any payment above $92 starts reducing principal.',
+        },
+        {
+          q: 'Does making biweekly payments help?',
+          a: 'Yes. Splitting your monthly payment in half and paying every two weeks results in 26 half-payments per year &mdash; the equivalent of one extra monthly payment. On a credit card, this also reduces your average daily balance slightly, lowering interest. The combination can shave months off your payoff.',
+        },
+        {
+          q: 'How is the minimum payment calculated?',
+          a: 'It varies by issuer, but is typically the higher of: a flat amount (e.g. $25-35), or 1-3% of your balance plus interest and fees. Some issuers also include any amount over your credit limit or past-due. Check your cardholder agreement for the exact formula &mdash; it determines how slowly you\'re allowed to pay.',
+        },
+        {
+          q: 'Will paying off my card hurt my credit score?',
+          a: 'No &mdash; paying off credit card debt usually helps your score. A major factor in credit scores is credit utilization (balance divided by limit). Keeping utilization under 30%, and ideally under 10%, boosts your score. Paying down balances lowers utilization. Keep the card open after paying it off to preserve your available credit and account age.',
+        },
       ]}
     />
   )

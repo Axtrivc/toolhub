@@ -44,6 +44,9 @@ export interface Dict {
   toolResult: string
   toolCopy: string
   toolCopied: string
+  // 工具页相关工具内链
+  relatedTitle: string
+  relatedSubtitle: string
   // 主题切换 aria
   themeToggle: string
   themeLight: string
@@ -81,6 +84,8 @@ const en: Dict = {
   toolResult: 'Result',
   toolCopy: 'Copy',
   toolCopied: '✓ Copied',
+  relatedTitle: 'Related Tools',
+  relatedSubtitle: 'More tools you might find useful',
   themeToggle: 'Toggle theme',
   themeLight: 'Light',
   themeDark: 'Dark',
@@ -116,6 +121,8 @@ const zh: Dict = {
   toolResult: '结果',
   toolCopy: '复制',
   toolCopied: '✓ 已复制',
+  relatedTitle: '相关工具',
+  relatedSubtitle: '你可能还会用到的工具',
   themeToggle: '切换主题',
   themeLight: '浅色',
   themeDark: '深色',
