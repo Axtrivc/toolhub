@@ -1,0 +1,24 @@
+import type { Metadata } from 'next'
+import { notFound } from 'next/navigation'
+import { getTool } from '@/lib/tools'
+import { buildToolMetadata, buildToolJsonLd } from '@/lib/seo'
+import { ToolLayout } from '@/components/ToolLayout'
+import { CubeCalculatorClient } from '@/components/calculators/batch8Calculators'
+import { CubeCalculatorContent } from './content'
+
+export const metadata: Metadata = buildToolMetadata('cube-calculator')
+
+export default function Page() {
+  const tool = getTool('cube-calculator')
+  if (!tool) notFound()
+  const jsonLd = buildToolJsonLd('cube-calculator')
+  return (
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <ToolLayout tool={tool}>
+        <CubeCalculatorClient />
+        <CubeCalculatorContent />
+      </ToolLayout>
+    </>
+  )
+}

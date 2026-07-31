@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>英文工具站：域名选择与 AdSense 收款指南</title>
+<style>
+  :root{ --bg:#f7f8fa; --card:#fff; --ink:#1f2937; --sub:#6b7280; --line:#e5e7eb; --acc:#2563eb; --good:#059669; --warn:#d97706; --bad:#dc2626; }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,"Segoe UI",Roboto,"PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--ink);line-height:1.65;padding:32px 20px}
+  .wrap{max-width:880px;margin:0 auto}
+  h1{font-size:24px;margin-bottom:4px}
+  .lead{color:var(--sub);font-size:14px;margin-bottom:24px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px 22px;margin-bottom:20px;box-shadow:0 1px 2px rgba(0,0,0,.03)}
+  h2{font-size:17px;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+  h2 .tag{font-size:11px;font-weight:600;padding:2px 8px;border-radius:999px;background:#eff6ff;color:var(--acc)}
+  table{width:100%;border-collapse:collapse;font-size:14px}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line)}
+  th{color:var(--sub);font-weight:600;font-size:13px;background:#fafafa}
+  tr:last-child td{border-bottom:none}
+  .ok{border-left:4px solid var(--good);background:#ecfdf5;padding:12px 16px;border-radius:8px;font-size:13px;color:#065f46}
+  .warn{border-left:4px solid var(--warn);background:#fffbeb;padding:12px 16px;border-radius:8px;font-size:13px;color:#92400e}
+  .bad{border-left:4px solid var(--bad);background:#fef2f2;padding:14px 16px;border-radius:8px;font-size:14px;color:#991b1b;margin-top:6px}
+  .bad b{color:var(--bad)}
+  ul{margin:8px 0 0 18px;font-size:14px}
+  li{margin:5px 0}
+  .num{font-weight:700;color:var(--acc)}
+  .foot{text-align:center;color:var(--sub);font-size:12px;margin-top:24px}
+  code{background:#f1f5f9;padding:1px 6px;border-radius:4px;font-size:13px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>英文工具站：域名选择 × AdSense 收款指南</h1>
+  <div class="lead">面向英文客户的内容站。基于 2026-07-31 对 AdSense 中国发布商收款政策的实测检索 + 仓库静态架构结论。</div>
+
+  <div class="card">
+    <h2>一、域名在腾讯云等中国注册商买，影响英文站吗？<span class="tag">不影响</span></h2>
+    <div class="ok"><b>结论：不影响排名、速度、可访问性。</b>Google 不按"注册商国籍"给英文站降权，它看的是 TLD、内容语言、外链、服务器/CDN。</div>
+    <ul style="margin-top:12px">
+      <li><b>必做：把 NS 指向 Cloudflare。</b>别用注册商默认的中国 DNS（海外解析慢）。Cloudflare 给全球 anycast DNS + 免费 CDN + 免费 SSL，海外访客反而更快。</li>
+      <li><b>实名认证：</b>腾讯云/阿里云买 <code>.com</code> 通常也要实名，正常填，不影响运营。</li>
+      <li><b>WHOIS 隐私 & 转出：</b>中国注册商隐私弱、转出偶尔麻烦。想匿名省心 → 直接用 <b>Cloudflare Registrar</b>（按成本定价+永久免费隐私）或 Namecheap/Porkbun。</li>
+      <li><b>不用 ICP 备案：</b>托管在 Cloudflare（境外）即无需备案。用 <code>.com</code> 等全球 TLD，<b>别用 .cn</b>（向中国受众发错信号）。</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>二、怎么收款（AdSense 打款到中国）<span class="tag">已核实 2026</span></h2>
+    <div class="warn"><b>4 步前置验证（卡人最多）：</b>① 付款资料国家/地区选「中国」（注册就选对，难改）② 身份验证 KYC（身份证/人脸）③ 地址验证：Google 寄<b>平信 PIN</b>到国内真实地址（无电话、不能催，约 3 周，可重寄）④ 税务：填 <b>W-8BEN</b>（非美税务居民），预扣税通常可降到 <b>0%</b>（个人）。门槛 <b>$100</b> 才打款，每月 21–26 日发上月款。</div>
+    <table style="margin-top:14px">
+      <thead><tr><th>方式</th><th>说明</th></tr></thead>
+      <tbody>
+        <tr><td><b>电汇 Wire</b></td><td>主流。填 SWIFT + 银行英文全称 + 账户名（须与实名一致）；Google 按月打 USD 到招行/中信等卡，手机银行结汇成 RMB</td></tr>
+        <tr><td><b>Hyperwallet</b></td><td>Google 官方明确支持中国发布商（阿根廷/中国/美国可用），可作替代</td></tr>
+        <tr><td>西联汇款</td><td>单笔上限 $500，不适合规模化，不推荐</td></tr>
+      </tbody>
+    </table>
+    <div class="ok" style="margin-top:12px">费用：每笔电汇中间行手续费 <b>$15–30 + 汇率折损 1.5–2.5%</b>；选 SWIFT 直连行（招行/中信）降损，避免小额多次提。</div>
+  </div>
+
+  <div class="card">
+    <h2>三、最硬的门槛：年龄（高中生重点）<span class="tag">先解决</span></h2>
+    <div class="bad"><b>AdSense 要求账户持有人达到法定签约年龄（中国 18 岁）。</b>未满 18 通常不能以自己名义开户。技术站已就绪，但主体资格得先过：<br>· <b>用父母/监护人实名开账户</b>（收款人姓名须与实名一致）；<br>· 或 <b>等成年</b>再申请。<br>这比"没流量""没排名"都硬——流量可以慢慢做，账户主体资格是准入前提。</div>
+  </div>
+
+  <div class="card">
+    <h2>四、联盟分销收款（增收主线）<span class="tag">更高 RPM</span></h2>
+    <ul>
+      <li>金融工具旁挂借贷/信用卡 affiliate（Amazon Associates、CJ、ShareASale 等）RPM 常是 AdSense 的 <b>5–20 倍</b>。</li>
+      <li>这类平台普遍支持 <b>Payoneer</b>：开虚拟美/欧账户收 USD，再提现到国内银行，是中国跨境人最常用的收款桥梁，比 AdSense 直连灵活。</li>
+      <li>同样受年龄/实名约束，主体问题用同一套（监护人）方案解决。</li>
+    </ul>
+  </div>
+
+  <div class="foot">行动清单：① 腾讯云买 .com → NS 改 Cloudflare → ② 用监护人身份备好 AdSense 账户（KYC+地址PIN+W-8BEN）→ ③ 满 $100 电汇到招行结汇 → ④ 金融工具叠加 Payoneer 联盟分销。</div>
+</div>
+</body>
+</html>

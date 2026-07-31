@@ -1,0 +1,24 @@
+import type { Metadata } from 'next'
+import { notFound } from 'next/navigation'
+import { getTool } from '@/lib/tools'
+import { buildToolMetadata, buildToolJsonLd } from '@/lib/seo'
+import { ToolLayout } from '@/components/ToolLayout'
+import { StandardDeviationCalculatorClient } from '@/components/generators/batchGenerators'
+import { StandardDeviationCalculatorContent } from './content'
+
+export const metadata: Metadata = buildToolMetadata('standard-deviation-calculator')
+
+export default function Page() {
+  const tool = getTool('standard-deviation-calculator')
+  if (!tool) notFound()
+  const jsonLd = buildToolJsonLd('standard-deviation-calculator')
+  return (
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <ToolLayout tool={tool}>
+        <StandardDeviationCalculatorClient />
+        <StandardDeviationCalculatorContent />
+      </ToolLayout>
+    </>
+  )
+}

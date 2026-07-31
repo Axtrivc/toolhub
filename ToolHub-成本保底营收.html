@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ToolHub 网站成本与保底营收测算</title>
+<style>
+  :root{ --bg:#f7f8fa; --card:#ffffff; --ink:#1f2937; --sub:#6b7280; --line:#e5e7eb; --acc:#2563eb; --good:#059669; --warn:#d97706; --bad:#dc2626; }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,"Segoe UI",Roboto,"PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;padding:32px 20px}
+  .wrap{max-width:860px;margin:0 auto}
+  h1{font-size:24px;margin-bottom:4px}
+  .lead{color:var(--sub);margin-bottom:24px;font-size:14px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px 22px;margin-bottom:20px;box-shadow:0 1px 2px rgba(0,0,0,.03)}
+  h2{font-size:17px;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+  h2 .tag{font-size:11px;font-weight:600;padding:2px 8px;border-radius:999px;background:#eff6ff;color:var(--acc)}
+  table{width:100%;border-collapse:collapse;font-size:14px}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line)}
+  th{color:var(--sub);font-weight:600;font-size:13px;background:#fafafa}
+  td.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+  tr:last-child td{border-bottom:none}
+  .total td{border-top:2px solid var(--line);font-weight:700}
+  .pill{display:inline-block;font-size:12px;font-weight:600;padding:2px 9px;border-radius:999px}
+  .free{background:#ecfdf5;color:var(--good)}
+  .paid{background:#fffbeb;color:var(--warn)}
+  .big{font-size:30px;font-weight:800;color:var(--good);margin:6px 0}
+  .note{font-size:13px;color:var(--sub);margin-top:10px}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media(max-width:640px){.grid{grid-template-columns:1fr}}
+  .box{border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+  .box h3{font-size:14px;margin-bottom:6px}
+  .box p{font-size:13px;color:var(--sub)}
+  .warnbox{border-left:4px solid var(--warn);background:#fffbeb;padding:12px 16px;border-radius:8px;font-size:13px;color:#92400e;margin-top:6px}
+  .okbox{border-left:4px solid var(--good);background:#ecfdf5;padding:12px 16px;border-radius:8px;font-size:13px;color:#065f46;margin-top:6px}
+  ul{margin:8px 0 0 18px;font-size:14px}
+  li{margin:4px 0}
+  .foot{text-align:center;color:var(--sub);font-size:12px;margin-top:24px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>ToolHub 网站成本与保底营收测算</h1>
+  <div class="lead">基于本仓库实测：Next.js 静态导出（output:'export'）+ 119 个纯客户端工具 + 无后端/无数据库/无付费 API。币种：¥ 按 $1≈¥7.2 折算。</div>
+
+  <div class="card">
+    <h2>一、网站硬成本（每年）<span class="tag">几乎可忽略</span></h2>
+    <table>
+      <thead><tr><th>项目</th><th>方案</th><th style="text-align:right">年成本</th></tr></thead>
+      <tbody>
+        <tr><td>域名 .com</td><td>腾讯云 / DNSPod / 阿里云</td><td class="num"><span class="pill paid">¥65–85</span></td></tr>
+        <tr><td>静态托管</td><td>Cloudflare Pages / Vercel / Netlify 免费层（119 页远在额度内）</td><td class="num"><span class="pill free">¥0</span></td></tr>
+        <tr><td>CDN + SSL + DNS</td><td>Cloudflare 免费</td><td class="num"><span class="pill free">¥0</span></td></tr>
+        <tr><td>访问统计</td><td>Google Analytics / Plausible / Umami 免费</td><td class="num"><span class="pill free">¥0</span></td></tr>
+        <tr><td>联系表单 / 邮件</td><td>mailto 或 Cloudflare Worker 免费</td><td class="num"><span class="pill free">¥0</span></td></tr>
+        <tr><td>构建 / 部署</td><td>GitHub + CF 直部署免费</td><td class="num"><span class="pill free">¥0</span></td></tr>
+        <tr class="total"><td>合计</td><td></td><td class="num">≈ ¥75 / 年（≈ $10）</td></tr>
+      </tbody>
+    </table>
+    <div class="okbox">零边际成本：无服务器、无数据库、无付费 API（依赖仅 next/react/qrcode 开源免费）。流量涨 100 倍，服务器账单仍是 ¥0。</div>
+  </div>
+
+  <div class="card">
+    <h2>二、保底营收<span class="tag">无合同保底</span></h2>
+    <div class="warnbox"><b>重要前提：</b>AdSense 按展示 / 点击付费，没有"保底"合同。流量 = 0 时收入 = <b>$0</b>。另：Google 付款门槛为 <b>$100</b>，需累计满才打款（月入 $5 也要攒 20 个月才首次到账）。</div>
+    <table style="margin-top:14px">
+      <thead><tr><th>阶段</th><th style="text-align:right">月 PV</th><th style="text-align:right">RPM(美元)</th><th style="text-align:right">月收入</th><th style="text-align:right">年收入</th></tr></thead>
+      <tbody>
+        <tr><td>冷启动 0–6 月</td><td class="num">~0–1k</td><td class="num">—</td><td class="num">≈$0–5</td><td class="num">≈$0–30</td></tr>
+        <tr><td>第 1 年（现实档）</td><td class="num">~20k</td><td class="num">$3–7</td><td class="num">$60–140</td><td class="num">$140–800（≈¥1k–5.6k）</td></tr>
+        <tr><td>第 2 年（权重起量）</td><td class="num">~100k</td><td class="num">$5–15</td><td class="num">$500–1500</td><td class="num">$900–15000（≈¥6.5k–10万）</td></tr>
+      </tbody>
+    </table>
+    <div class="grid" style="margin-top:14px">
+      <div class="box"><h3>字面保底</h3><p><b>$0</b>。风险 100% 在流量，不在成本。</p></div>
+      <div class="box"><h3>可预期下限</h3><p>只要被收录、吃长尾小词，第 1 年稳拿 <b>~$100–200</b>（≈¥700–1400），是域名成本近 10 倍 → <b>必然回本</b>。</p></div>
+    </div>
+    <div class="okbox">回本线极低：按 RPM $3，仅需 <b>~25 PV/月</b> 即可覆盖 ¥75 域名费——只要 Google 收录就轻松达成。</div>
+  </div>
+
+  <div class="card">
+    <h2>三、风险与增收上限</h2>
+    <ul>
+      <li><b>最大风险是流量</b>，不是成本：工具站 SEO 是红海（Calculator.net、Omni 等老站占头部），新站冷启动期长，前半年可能近乎 $0。</li>
+      <li><b>增收上限不在 AdSense</b>：金融工具（房贷/贷款/退休）旁挂联盟分销（借贷/信用卡/理财 affiliate），RPM 常是 AdSense 的 5–20 倍，是更现实的增收路径。</li>
+      <li><b>合规前置</b>：隐私政策声明广告 + Cookie 同意条（EU 合规防封），上线前必做。</li>
+    </ul>
+    <div class="note">结论：约 ¥75/年成本几乎可忽略；营收无合同保底，但回本极稳、且不受成本拖累。运营重心应放在 SEO 外链与金融长尾词扩量，而非压成本。</div>
+  </div>
+
+  <div class="foot">测算基于仓库静态导出架构与公开 AdSense RPM 区间，实际以流量质量与地区分布为准。</div>
+</div>
+</body>
+</html>
