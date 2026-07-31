@@ -23,11 +23,7 @@ export default function ContactPage() {
       <h3>Email</h3>
       <p>
         The most reliable way to reach us. Write to:{' '}
-        <a href="mailto:hello@example.com">hello@example.com</a>
-        <br />
-        <em className="text-sm text-slate-500">
-          (Please replace <code>example.com</code> with your actual domain after deployment.)
-        </em>
+        <a href="mailto:contact@axtrivc.com">contact@axtrivc.com</a>
       </p>
 
       <h3>What to Include</h3>
