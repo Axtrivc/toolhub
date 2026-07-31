@@ -1,0 +1,91 @@
+/**
+ * Slug 生成逻辑 - 纯函数,无副作用,可单独测试
+ *
+ * 设计目标:覆盖主流 slug 生成场景,输出 SEO 友好、URL 安全的字符串。
+ */
+
+export interface SlugOptions {
+  /** 分隔符,默认 '-'(SEO 推荐),可选 '_' */
+  separator?: '-' | '_'
+  /** 是否转小写,默认 true */
+  lowercase?: boolean
+  /** 是否移除特殊字符(保留字母数字和空格),默认 true */
+  removeSpecialChars?: boolean
+  /** 是否将连续多个分隔符合并为一个,默认 true */
+  collapseSeparators?: boolean
+  /** 是否去除首尾分隔符,默认 true */
+  trimSeparators?: boolean
+  /** 是否处理常见变音符号(é→e 等),默认 true */
+  normalizeUnicode?: boolean
+}
+
+const DEFAULT_OPTIONS: Required<SlugOptions> = {
+  separator: '-',
+  lowercase: true,
+  removeSpecialChars: true,
+  collapseSeparators: true,
+  trimSeparators: true,
+  normalizeUnicode: true,
+}
+
+/**
+ * 将任意文本转换为 URL slug
+ *
+ * @example
+ * generateSlug('Hello World!')           // 'hello-world'
+ * generateSlug('10 SEO Tips (2024)')     // '10-seo-tips-2024'
+ * generateSlug('Café & Résumé')          // 'cafe-resume'
+ * generateSlug('How to use Node.js')     // 'how-to-use-nodejs'
+ */
+export function generateSlug(input: string, options: SlugOptions = {}): string {
+  const opts = { ...DEFAULT_OPTIONS, ...options }
+  let s = input
+
+  if (opts.normalizeUnicode) {
+    // 将 Unicode 规范化分解形式(NFD),再移除组合字符(变音符)
+    // é -> e + ´ -> 移除 ´ -> e
+    s = s.normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+  }
+
+  if (opts.lowercase) {
+    s = s.toLowerCase()
+  }
+
+  if (opts.removeSpecialChars) {
+    // 把 CJK 全角空格、各类空白、常见标点统一成空格,便于后续按词分隔
+    s = s.replace(/[\s\u3000]+/g, ' ')
+    // 移除特殊字符,只保留:字母、数字、空格、点、连字符(用于 node.js -> nodejs)
+    s = s.replace(/[^a-z0-9\s.-]/gi, '')
+    // 点号在 SEO slug 里通常要移除(避免被当成文件扩展名),但保留单词内连续的如 "node.js"
+    s = s.replace(/\./g, '')
+  }
+
+  // 把空格、点、已有的连字符/下划线统一为目标分隔符
+  const sepRegex = new RegExp(`[\\s._-]+`, 'g')
+  s = s.replace(sepRegex, opts.separator)
+
+  if (opts.collapseSeparators) {
+    const collapseRegex = new RegExp(`${escapeRegex(opts.separator)}+`, 'g')
+    s = s.replace(collapseRegex, opts.separator)
+  }
+
+  if (opts.trimSeparators) {
+    const trimRegex = new RegExp(`^${escapeRegex(opts.separator)}+|${escapeRegex(opts.separator)}+$`, 'g')
+    s = s.replace(trimRegex, '')
+  }
+
+  return s
+}
+
+function escapeRegex(str: string): string {
+  return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+}
+
+/** 批量生成:每行一个标题 → 每行一个 slug,用于批量处理 */
+export function generateSlugsBulk(text: string, options: SlugOptions = {}): string[] {
+  return text
+    .split(/\r?\n/)
+    .map((line) => line.trim())
+    .filter((line) => line.length > 0)
+    .map((line) => generateSlug(line, options))
+}

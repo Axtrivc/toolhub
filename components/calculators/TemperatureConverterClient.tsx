@@ -1,0 +1,88 @@
+'use client'
+
+import { useState, useMemo } from 'react'
+import { CalculatorField, ResultCard, CalculatorNote } from '../calculator/CalculatorField'
+import { fmtNum, toNum } from '@/lib/format'
+
+/**
+ * 温度转换器 - 独立组件
+ * 温度转换是非线性的(C↔F 有偏移),不能用通用线性转换工厂,必须单独实现。
+ */
+export function TemperatureConverterClient() {
+  const [value, setValue] = useState('25')
+  const [from, setFrom] = useState<'c' | 'f' | 'k'>('c')
+  const [to, setTo] = useState<'c' | 'f' | 'k'>('f')
+
+  const result = useMemo(() => {
+    const v = toNum(value)
+    // 先转成 Celsius 作为中间值
+    let celsius: number
+    if (from === 'c') celsius = v
+    else if (from === 'f') celsius = ((v - 32) * 5) / 9
+    else celsius = v - 273.15 // kelvin
+
+    // 再从 Celsius 转成目标单位
+    let result: number
+    if (to === 'c') result = celsius
+    else if (to === 'f') result = (celsius * 9) / 5 + 32
+    else result = celsius + 273.15
+
+    return result
+  }, [value, from, to])
+
+  const labels: Record<string, string> = {
+    c: 'Celsius (°C)',
+    f: 'Fahrenheit (°F)',
+    k: 'Kelvin (K)',
+  }
+
+  return (
+    <div className="space-y-6">
+      <div className="grid grid-cols-1 gap-4 rounded-lg bg-slate-50 p-4 sm:grid-cols-3">
+        <CalculatorField id="value" label="Value" value={value} onChange={setValue} placeholder="25" />
+        <div>
+          <label htmlFor="from" className="mb-1.5 block text-sm font-medium text-slate-700">From</label>
+          <select
+            id="from"
+            value={from}
+            onChange={(e) => setFrom(e.target.value as 'c' | 'f' | 'k')}
+            className="w-full rounded-lg border border-slate-300 bg-white p-3 text-slate-900 shadow-sm outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200"
+          >
+            <option value="c">Celsius (°C)</option>
+            <option value="f">Fahrenheit (°F)</option>
+            <option value="k">Kelvin (K)</option>
+          </select>
+        </div>
+        <div>
+          <label htmlFor="to" className="mb-1.5 block text-sm font-medium text-slate-700">To</label>
+          <select
+            id="to"
+            value={to}
+            onChange={(e) => setTo(e.target.value as 'c' | 'f' | 'k')}
+            className="w-full rounded-lg border border-slate-300 bg-white p-3 text-slate-900 shadow-sm outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200"
+          >
+            <option value="c">Celsius (°C)</option>
+            <option value="f">Fahrenheit (°F)</option>
+            <option value="k">Kelvin (K)</option>
+          </select>
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+        <ResultCard
+          label="Converted value"
+          value={isFinite(result) ? `${fmtNum(result, 2)} °${to === 'k' ? '' : to.toUpperCase()}` : '—'}
+          highlight
+        />
+        <ResultCard
+          label="Formula"
+          value={`${fmtNum(toNum(value))} ${from === 'k' ? 'K' : '°' + from.toUpperCase()} = ${fmtNum(result, 2)} ${to === 'k' ? 'K' : '°' + to.toUpperCase()}`}
+        />
+      </div>
+
+      <CalculatorNote>
+        🌡️ Key reference points: 0°C = 32°F (freezing), 100°C = 212°F (boiling), 37°C = 98.6°F (body temp).
+      </CalculatorNote>
+    </div>
+  )
+}

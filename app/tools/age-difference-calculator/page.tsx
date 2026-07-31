@@ -1,0 +1,24 @@
+import type { Metadata } from 'next'
+import { notFound } from 'next/navigation'
+import { getTool } from '@/lib/tools'
+import { buildToolMetadata, buildToolJsonLd } from '@/lib/seo'
+import { ToolLayout } from '@/components/ToolLayout'
+import { AgeDifferenceCalculatorClient } from '@/components/calculators/batch8Calculators'
+import { AgeDifferenceCalculatorContent } from './content'
+
+export const metadata: Metadata = buildToolMetadata('age-difference-calculator')
+
+export default function Page() {
+  const tool = getTool('age-difference-calculator')
+  if (!tool) notFound()
+  const jsonLd = buildToolJsonLd('age-difference-calculator')
+  return (
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <ToolLayout tool={tool}>
+        <AgeDifferenceCalculatorClient />
+        <AgeDifferenceCalculatorContent />
+      </ToolLayout>
+    </>
+  )
+}

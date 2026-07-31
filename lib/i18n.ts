@@ -1,0 +1,136 @@
+/**
+ * i18n 字典 - 只翻译界面框架(导航/按钮/Footer 等)
+ *
+ * 策略说明:
+ * - 站点定位英文站(赚高 RPM),工具内容保持英文,不做翻译
+ * - 语言切换只影响界面元素:导航、按钮、搜索框、Footer 等
+ * - 默认语言英文,中文为可选切换
+ *
+ * 加新的界面文案:在两个字典里都加一个 key。
+ */
+
+export type Locale = 'en' | 'zh'
+
+export interface Dict {
+  // Header 导航
+  navAllTools: string
+  navAbout: string
+  navContact: string
+  // 首页 Hero
+  heroBadge: string // "{count}+ Free Online Tools" 中的 "{count}+"
+  heroTitle1: string // "Free Online Tools" 部分(被 {count} 替换)
+  heroTitle2: string // "That Just Work"
+  heroSubtitle: string
+  // 搜索 & 筛选
+  searchPlaceholder: string
+  categoryAll: string
+  showingAll: string // "Showing all {count} tools"
+  showingFiltered: string // "{filtered} of {total} tools"
+  noResults: string
+  noResultsHint: string
+  clearSearch: string
+  // 工具卡片标记
+  badgePro: string
+  badgeFree: string
+  // Footer 法律链接
+  footerAbout: string
+  footerContact: string
+  footerPrivacy: string
+  footerTerms: string
+  footerTagline: string
+  footerRights: string // "tools and counting. All rights reserved."
+  // 工具页通用
+  toolHome: string
+  toolResult: string
+  toolCopy: string
+  toolCopied: string
+  // 主题切换 aria
+  themeToggle: string
+  themeLight: string
+  themeDark: string
+  // 语言切换 aria
+  languageToggle: string
+}
+
+const en: Dict = {
+  navAllTools: 'All Tools',
+  navAbout: 'About',
+  navContact: 'Contact',
+  heroBadge: '{count}+',
+  heroTitle1: 'Free Online Tools',
+  heroTitle2: 'That Just Work',
+  heroSubtitle:
+    'Fast, privacy-friendly utilities for developers, students, and everyday tasks. Everything runs right in your browser — no signup, no upload, no tracking.',
+  searchPlaceholder: 'Search {count} tools... (e.g. "loan", "json", "kg to lb")',
+  categoryAll: 'All',
+  showingAll: 'Showing all {count} tools',
+  showingFiltered: '{filtered} of {total} tools',
+  noResults: 'No tools match "{query}".',
+  noResultsHint: 'Clear search',
+  clearSearch: 'Clear search',
+  badgePro: 'Pro',
+  badgeFree: 'Free',
+  footerAbout: 'About',
+  footerContact: 'Contact',
+  footerPrivacy: 'Privacy',
+  footerTerms: 'Terms',
+  footerTagline:
+    'Free, fast, and privacy-friendly online tools. Everything runs in your browser — no data leaves your device.',
+  footerRights: 'tools and counting. All rights reserved.',
+  toolHome: 'Home',
+  toolResult: 'Result',
+  toolCopy: 'Copy',
+  toolCopied: '✓ Copied',
+  themeToggle: 'Toggle theme',
+  themeLight: 'Light',
+  themeDark: 'Dark',
+  languageToggle: 'Switch language',
+}
+
+const zh: Dict = {
+  navAllTools: '全部工具',
+  navAbout: '关于',
+  navContact: '联系',
+  heroBadge: '{count}+',
+  heroTitle1: '免费在线工具',
+  heroTitle2: '简单好用',
+  heroSubtitle:
+    '为开发者、学生和日常任务打造的快速、注重隐私的实用工具。所有计算都在浏览器中完成 —— 无需注册,无需上传,不追踪。',
+  searchPlaceholder: '搜索 {count} 个工具...(例如 "loan"、"json"、"kg to lb")',
+  categoryAll: '全部',
+  showingAll: '显示全部 {count} 个工具',
+  showingFiltered: '共 {total} 个中的 {filtered} 个',
+  noResults: '没有匹配 "{query}" 的工具。',
+  noResultsHint: '清除搜索',
+  clearSearch: '清除搜索',
+  badgePro: '专业',
+  badgeFree: '免费',
+  footerAbout: '关于',
+  footerContact: '联系',
+  footerPrivacy: '隐私',
+  footerTerms: '条款',
+  footerTagline:
+    '免费、快速、注重隐私的在线工具。所有操作都在浏览器中完成 —— 数据不会离开你的设备。',
+  footerRights: '个工具,持续增加中。保留所有权利。',
+  toolHome: '首页',
+  toolResult: '结果',
+  toolCopy: '复制',
+  toolCopied: '✓ 已复制',
+  themeToggle: '切换主题',
+  themeLight: '浅色',
+  themeDark: '深色',
+  languageToggle: '切换语言',
+}
+
+export const dicts: Record<Locale, Dict> = { en, zh }
+
+/** 简单模板替换:支持 {count} {total} {filtered} {query} */
+export function t(locale: Locale, key: keyof Dict, vars?: Record<string, string | number>): string {
+  let str = dicts[locale][key] ?? String(key)
+  if (vars) {
+    for (const [k, v] of Object.entries(vars)) {
+      str = str.replace(`{${k}}`, String(v))
+    }
+  }
+  return str
+}

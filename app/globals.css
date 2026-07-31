@@ -1,0 +1,132 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ══════════ 主题变量(明/暗)══════════ */
+@layer base {
+  :root {
+    /* 默认浅色 */
+    --bg: 248 250 252;        /* slate-50 */
+    --bg-card: 255 255 255;   /* white */
+    --bg-subtle: 241 245 249; /* slate-100 */
+    --border: 226 232 240;    /* slate-200 */
+    --border-strong: 203 213 225; /* slate-300 */
+    --text: 15 23 42;         /* slate-900 */
+    --text-muted: 71 85 105;  /* slate-600 */
+    --text-subtle: 100 116 139; /* slate-500 */
+    --text-faint: 148 163 184;  /* slate-400 */
+    /* brand 蓝色两种主题通用 */
+  }
+
+  html.dark {
+    /* 深色主题 */
+    --bg: 15 23 42;           /* slate-900 */
+    --bg-card: 30 41 59;      /* slate-800 */
+    --bg-subtle: 51 65 85;    /* slate-700 */
+    --border: 51 65 85;       /* slate-700 */
+    --border-strong: 71 85 105; /* slate-600 */
+    --text: 241 245 249;      /* slate-100 */
+    --text-muted: 203 213 225;  /* slate-300 */
+    --text-subtle: 148 163 184; /* slate-400 */
+    --text-faint: 100 116 139;  /* slate-500 */
+  }
+
+  :root {
+    --max-width: 1100px;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: rgb(var(--bg));
+    color: rgb(var(--text));
+    -webkit-font-smoothing: antialiased;
+    font-family:
+      -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
+      Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+
+  /* 文章正文排版(适配主题) */
+  .prose-content h2 {
+    @apply mt-10 mb-4 text-2xl font-bold;
+    color: rgb(var(--text));
+  }
+  .prose-content h3 {
+    @apply mt-8 mb-3 text-xl font-semibold;
+    color: rgb(var(--text));
+  }
+  .prose-content p {
+    @apply mb-4 leading-relaxed;
+    color: rgb(var(--text-muted));
+  }
+  .prose-content ul {
+    @apply mb-4 ml-6 list-disc space-y-2;
+    color: rgb(var(--text-muted));
+  }
+  .prose-content ol {
+    @apply mb-4 ml-6 list-decimal space-y-2;
+    color: rgb(var(--text-muted));
+  }
+  .prose-content code {
+    @apply rounded px-1.5 py-0.5 font-mono text-sm;
+    background-color: rgb(var(--bg-subtle));
+    color: rgb(219 39 119); /* pink-600 两种主题都明显 */
+  }
+  html.dark .prose-content code {
+    color: rgb(244 114 182); /* pink-400 深色下更亮 */
+  }
+  .prose-content pre {
+    @apply overflow-x-auto rounded-lg p-4 text-sm;
+    background-color: rgb(15 23 42);
+    color: rgb(226 232 240);
+  }
+  html.dark .prose-content pre {
+    background-color: rgb(2 6 23);
+  }
+  .prose-content a {
+    @apply font-medium underline underline-offset-2;
+    color: rgb(37 99 235);
+  }
+  html.dark .prose-content a {
+    color: rgb(96 165 250);
+  }
+}
+
+@layer components {
+  .container-page {
+    @apply mx-auto w-full max-w-[var(--max-width)] px-4 sm:px-6;
+  }
+
+  /* 主题感知的卡片/表面 */
+  .surface {
+    background-color: rgb(var(--bg-card));
+    border-color: rgb(var(--border));
+    color: rgb(var(--text));
+  }
+  .surface-subtle {
+    background-color: rgb(var(--bg-subtle));
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2 font-medium transition-colors;
+  }
+  .btn-primary {
+    @apply text-white;
+    background-color: rgb(37 99 235); /* brand-600 */
+  }
+  .btn-primary:hover {
+    background-color: rgb(29 78 216); /* brand-700 */
+  }
+  .btn-secondary {
+    @apply border;
+    background-color: rgb(var(--bg-card));
+    border-color: rgb(var(--border-strong));
+    color: rgb(var(--text-muted));
+  }
+  .btn-secondary:hover {
+    background-color: rgb(var(--bg-subtle));
+  }
+}
