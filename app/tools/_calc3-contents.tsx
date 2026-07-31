@@ -365,47 +365,180 @@ export function MortgageCalculatorContent(): ReactNode {
   return (
     <ToolContent
       intro={
-        <p>
-          This calculator estimates your monthly mortgage payment using the standard amortization
-          formula. Enter the home price, down payment, interest rate, and loan term to see your
-          monthly payment (principal and interest), loan amount, and total interest paid over the
-          life of the loan.
-        </p>
+        <>
+          <p>
+            A mortgage is likely the largest loan you&apos;ll ever take, so understanding the real
+            numbers matters more than with any other debt. This calculator estimates your monthly
+            payment using the standard amortization formula &mdash; the same one banks use. Enter the
+            home price, down payment, interest rate, and loan term, and you&apos;ll see your monthly
+            payment (principal and interest), total loan amount, and how much interest you pay over
+            the life of the loan.
+          </p>
+          <p>
+            The headline number is just the start. Most people focus on the monthly payment, but the
+            total interest paid over 30 years often rivals &mdash; or exceeds &mdash; the price of
+            the home itself. Seeing both numbers side by side is the single most useful thing this
+            calculator does.
+          </p>
+        </>
       }
       sections={[
         {
-          heading: 'What\'s Not Included',
+          heading: 'The Math Behind Your Payment',
           body: (
-            <p>
-              This calculator shows <strong>principal and interest only</strong>. Your real monthly
-              payment also includes:
-            </p>
+            <>
+              <p>
+                A mortgage payment is calculated so that the loan is fully paid off (amortized) by
+                the end of the term. Each payment covers that month&apos;s interest first, and the
+                remainder reduces the principal. Early on, almost all of your payment is interest; by
+                the final years, almost all is principal.
+              </p>
+              <p>
+                The formula is:
+              </p>
+              <p>
+                <code>
+                  M = P &times; [ r(1+r)^n ] / [ (1+r)^n &minus; 1 ]
+                </code>
+              </p>
+              <p>
+                Where <code>M</code> is monthly payment, <code>P</code> is loan principal,{' '}
+                <code>r</code> is the monthly interest rate (annual rate &divide; 12), and{' '}
+                <code>n</code> is the number of payments (years &times; 12). The calculator handles
+                this for you, but understanding it explains why small rate changes have outsized
+                effects.
+              </p>
+            </>
+          ),
+        },
+        {
+          heading: 'PITI: Your Real Monthly Cost',
+          body: (
+            <>
+              <p>
+                This calculator shows <strong>principal and interest (P&amp;I) only</strong>. Your
+                actual monthly housing payment &mdash; called <strong>PITI</strong> &mdash; also
+                includes:
+              </p>
+              <ul>
+                <li>
+                  <strong>Property taxes:</strong> Typically 0.5%&ndash;2% of home value per year,
+                  varying widely by location. On a $400k home, budget $170&ndash;$670/month.
+                </li>
+                <li>
+                  <strong>Homeowners insurance:</strong> Usually $80&ndash;$250/month, depending on
+                  location, coverage, and home value.
+                </li>
+                <li>
+                  <strong>PMI (if under 20% down):</strong> Private mortgage insurance, typically
+                  $50&ndash;$300/month, required until you reach 20% equity.
+                </li>
+                <li>
+                  <strong>HOA dues (if applicable):</strong> Ranges from nothing to $500+/month for
+                  condos and planned communities.
+                </li>
+              </ul>
+              <p>
+                A common rule of thumb: your <em>total</em> PITI should stay under 28% of your gross
+                monthly income. Lenders also look at all your debts (PITI + car loans + student
+                loans + minimum card payments) staying under 36%&ndash;43% of gross income.
+              </p>
+            </>
           ),
         },
         {
           heading: 'How Down Payment Affects Cost',
           body: (
             <ul>
-              <li><strong>Larger down payment</strong> → smaller loan → less interest paid overall</li>
-              <li><strong>Under 20% down</strong> → most lenders require PMI (private mortgage insurance), adding $50-300/month</li>
-              <li><strong>20%+ down</strong> → no PMI, better interest rates, lower monthly payments</li>
+              <li>
+                <strong>Larger down payment</strong> &rarr; smaller loan &rarr; less interest paid
+                overall, and often a better interest rate.
+              </li>
+              <li>
+                <strong>Under 20% down</strong> &rarr; most conventional lenders require PMI, adding
+                $50&ndash;$300/month until you reach 20% equity.
+              </li>
+              <li>
+                <strong>20%+ down</strong> &rarr; no PMI, access to better rates, lower monthly
+                payments, and instant equity if home values dip.
+              </li>
+              <li>
+                <strong>3.5%&ndash;5% minimum:</strong> FHA loans allow 3.5% down, some conventional
+                loans allow 3%&ndash;5%, but you&apos;ll pay PMI and a higher rate.
+              </li>
             </ul>
           ),
         },
         {
           heading: 'Loan Term Trade-offs',
           body: (
+            <>
+              <p>
+                A 30-year mortgage has lower monthly payments but costs dramatically more in
+                interest. A 15-year mortgage has higher payments but saves tens of thousands.
+              </p>
+              <p>On a <strong>$400,000 loan at 6.8%</strong>:</p>
+              <ul>
+                <li>
+                  <strong>30-year:</strong> ~$2,612/month, ~$540,000 in total interest
+                </li>
+                <li>
+                  <strong>15-year:</strong> ~$3,554/month, ~$240,000 in total interest
+                </li>
+              </ul>
+              <p>
+                The 15-year saves about <strong>$300,000 in interest</strong> for ~$940 more per
+                month. A popular middle path: take a 30-year for flexibility, then pay extra
+                principal whenever you can. Even one extra payment a year shaves years off the term.
+              </p>
+            </>
+          ),
+        },
+        {
+          heading: 'Interest Rate vs. APR',
+          body: (
             <p>
-              A 30-year mortgage has lower monthly payments but costs dramatically more in interest.
-              A 15-year mortgage has higher payments but saves tens of thousands. On a $400,000 loan
-              at 6.8%, a 30-year term pays ~$543,000 in interest versus ~$228,000 for 15 years — but
-              the monthly payment jumps from ~$2,600 to ~$3,500.
+              The <strong>interest rate</strong> is what you pay on the loan itself. The{' '}
+              <strong>APR</strong> (annual percentage rate) includes the rate plus certain fees
+              (origination, discount points, some closing costs) expressed as a yearly rate. APR is
+              always equal to or higher than the interest rate, and it&apos;s the better number to
+              use when comparing loan offers from different lenders. A 6.5% rate with high fees can
+              have a 6.9% APR &mdash; effectively a more expensive loan than a 6.7% rate with low
+              fees (6.8% APR).
+            </p>
+          ),
+        },
+        {
+          heading: 'When Refinancing Makes Sense',
+          body: (
+            <p>
+              Refinancing replaces your current mortgage with a new one, usually to get a lower rate.
+              The old rule of thumb was to refinance if rates drop 1%+ below yours, but the real test
+              is the <strong>break-even point</strong>: divide closing costs (typically 2%&ndash;5%
+              of the loan) by the monthly savings. If you&apos;ll stay in the home longer than that,
+              refinancing pays off. Also consider refinancing to drop PMI, shorten the term, or
+              switch from an adjustable to a fixed rate &mdash; not just to lower the payment.
             </p>
           ),
         },
       ]}
       faqs={[
-        { q: 'Should I get a 15 or 30 year mortgage?', a: '30-year if you need lower payments or want to invest the difference; 15-year if you can afford it and want to save massively on interest. Many people take a 30-year and pay extra when they can.' },
+        {
+          q: 'Should I get a 15 or 30 year mortgage?',
+          a: '30-year if you need lower payments or want to invest the difference; 15-year if you can afford it and want to save massively on interest. Many people take a 30-year and pay extra when they can — this gets you the lower required payment of the 30-year with much of the interest savings of the 15-year, plus the flexibility to stop paying extra if money gets tight.',
+        },
+        {
+          q: 'How much house can I afford?',
+          a: 'A common guideline: your total monthly housing payment (PITI) should be under 28% of gross monthly income, and all debt payments under 36%. On a $100k income, that\'s roughly $2,300/month for PITI. But affordability also depends on your down payment, existing debts, credit score, property taxes in your area, and your other living costs. Use the 28/36 rule as a starting ceiling, not a target.',
+        },
+        {
+          q: 'What credit score do I need for a mortgage?',
+          a: 'Conventional loans typically require 620+. FHA loans accept scores as low as 580 (sometimes 500 with 10% down). But the rate you get improves sharply with your score — a 760+ score can mean a rate 0.5%+ lower than a 680, saving tens of thousands over the loan. Before applying, check your score and correct any report errors.',
+        },
+        {
+          q: 'Does making extra payments help?',
+          a: 'Yes, dramatically. Extra payments go straight to principal (confirm with your lender there\'s no prepayment penalty). On a $400k, 30-year, 6.8% loan, paying an extra $200/month shaves about 7 years off the term and saves roughly $130,000 in interest. Even one extra full payment per year makes a meaningful difference.',
+        },
       ]}
     />
   )

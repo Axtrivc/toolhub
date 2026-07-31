@@ -24,16 +24,159 @@ export function APYCalculatorContent(): ReactNode {
 export function CreditCardMinimumPaymentCalculatorContent(): ReactNode {
   return (
     <ToolContent
-      intro={<p>Minimum payments are calculated as a small percentage of your balance (usually 1-3%) plus any interest — which means most of your payment goes to interest, not principal. This calculator shows the brutal math.</p>}
+      intro={
+        <>
+          <p>
+            The <strong>minimum payment</strong> is the smallest amount your card issuer will accept
+            each month without charging a late fee or reporting you as delinquent. It is calculated
+            as a small percentage of your balance (usually 1%&ndash;3%) plus any interest and fees
+            accrued that month. This calculator shows exactly where your minimum payment goes &mdash;
+            how much is interest, how much actually reduces your debt, and how long you&apos;d be
+            paying if you only ever sent the minimum.
+          </p>
+          <p>
+            The math is brutal. On a typical balance, the minimum payment is deliberately set low
+            enough that most of it covers interest, leaving only a tiny sliver for principal. This
+            is by design: a low minimum keeps you paying for as long as possible. Understanding the
+            breakdown is the first step to escaping it.
+          </p>
+        </>
+      }
       sections={[
-        { heading: 'The Minimum Payment Trap', body: <p>On a $5,000 balance at 20% APR, the minimum payment is around $100. Of that, about $83 is interest — only $17 reduces your debt. At this rate, full repayment takes decades.</p> },
-        { heading: 'Always Pay More Than Minimum', body: <ul>
-          <li>Pay $200/month instead of $100 → payoff in ~2.5 years instead of 30+</li>
-          <li>Pay $500/month → payoff in about 1 year</li>
-          <li>Every extra dollar above the minimum goes 100% to principal</li>
-        </ul> },
+        {
+          heading: 'How the Minimum Payment Is Calculated',
+          body: (
+            <>
+              <p>Every issuer uses a slightly different formula, but the common pattern is:</p>
+              <ul>
+                <li>
+                  <strong>1%&ndash;3% of your statement balance</strong>, plus
+                </li>
+                <li>
+                  <strong>That month&apos;s interest charges</strong>, plus
+                </li>
+                <li>
+                  <strong>Any late fees or over-limit fees</strong> from the prior cycle.
+                </li>
+              </ul>
+              <p>
+                There&apos;s also usually a floor &mdash; a minimum dollar amount (often $25&ndash;$35)
+                that applies when the percentage calculation comes out lower. Some issuers instead use
+                a formula like &quot;interest + fees + 1% of principal,&quot; which pays the loan down
+                slightly faster. Your cardholder agreement spells out the exact method.
+              </p>
+            </>
+          ),
+        },
+        {
+          heading: 'The Interest-vs-Principal Split',
+          body: (
+            <>
+              <p>This is the part that surprises people. On a <strong>$5,000 balance at 22% APR</strong>:</p>
+              <ul>
+                <li>
+                  <strong>Monthly interest:</strong> ~$92 (22% &divide; 12 &times; $5,000)
+                </li>
+                <li>
+                  <strong>Typical minimum payment (~2%):</strong> ~$100
+                </li>
+                <li>
+                  <strong>Goes to principal:</strong> only ~$8
+                </li>
+              </ul>
+              <p>
+                In other words, 92% of your payment vanishes as interest, and just 8% reduces what
+                you owe. At that rate it takes <strong>decades</strong> to pay off &mdash; and
+                that&apos;s assuming you never charge another dollar. If your payment is at or below
+                the monthly interest, the balance never drops at all.
+              </p>
+            </>
+          ),
+        },
+        {
+          heading: 'Why Banks Set Minimums So Low',
+          body: (
+            <p>
+              Minimum payments used to be around 5% of the balance. In the 2000s, regulators pushed
+              issuers to raise minimums so consumers could actually pay off debt, and many moved to
+              the current ~1%&ndash;3% plus interest model. That formula still extends repayment over
+              many years &mdash; but it guarantees the loan is technically repayable, which satisfies
+              the rules. From the bank&apos;s perspective, a longer repayment schedule means more
+              interest income; from yours, it means thousands of dollars in avoidable interest. The
+              system is legal, but the only protection that truly helps you is paying more than the
+              minimum.
+            </p>
+          ),
+        },
+        {
+          heading: 'How to Read Your Statement',
+          body: (
+            <ul>
+              <li>
+                <strong>Minimum payment warning box:</strong> Required on US statements since 2010.
+                It shows how long repayment takes at the minimum vs. a 3-year payoff amount. Read it
+                &mdash; it&apos;s the clearest picture of your situation.
+              </li>
+              <li>
+                <strong>Late payment warning:</strong> The fee (up to ~$41) and penalty APR (often
+                29.99%) that apply if you miss the due date.
+              </li>
+              <li>
+                <strong>Interest charge:</strong> The total interest accrued this month. Compare it
+                to your minimum payment &mdash; if interest is most of the payment, you&apos;re
+                treading water.
+              </li>
+            </ul>
+          ),
+        },
+        {
+          heading: 'The Fix: Pay Above the Minimum',
+          body: (
+            <>
+              <p>
+                Every dollar you pay above the interest goes 100% to principal. The effect compounds:
+                as the principal shrinks, next month&apos;s interest shrinks too, so even more of
+                your payment goes to principal. This is the mechanism that makes small extra payments
+                so powerful.
+              </p>
+              <ul>
+                <li>
+                  <strong>$5,000 @ 22%, minimum (~$100):</strong> ~27+ years, ~$8,000 interest
+                </li>
+                <li>
+                  <strong>Same balance, $200/month:</strong> ~2.8 years, ~$1,650 interest
+                </li>
+                <li>
+                  <strong>Same balance, $500/month:</strong> ~1 year, ~$610 interest
+                </li>
+              </ul>
+              <p>
+                See our related <em>Credit Card Payoff Calculator</em> for full strategy (avalanche,
+                snowball, balance transfers) &mdash; this page focuses on understanding the minimum
+                payment itself.
+              </p>
+            </>
+          ),
+        },
       ]}
-      faqs={[{ q: 'How do credit card companies calculate minimum?', a: 'Usually 1-3% of balance plus interest and fees, with a floor around $25-35. Read your cardholder agreement for the exact formula.' }]}
+      faqs={[
+        {
+          q: 'Will paying the minimum hurt my credit score?',
+          a: 'Paying the minimum on time keeps your account in good standing and avoids late marks, so it doesn\'t directly hurt your score. But it keeps your credit utilization (balance ÷ limit) high, which is a major scoring factor. High utilization can lower your score even with perfect payment history. Paying down balances is the fastest way to improve your score.',
+        },
+        {
+          q: 'How do credit card companies calculate the minimum payment?',
+          a: 'Most use 1%–3% of your statement balance plus that month\'s interest and any fees, with a floor around $25–$35. Some use "interest + fees + 1% of principal." The exact formula is in your cardholder agreement. The CARD Act of 2009 requires issuers to apply anything above the minimum to the highest-APR balance first.',
+        },
+        {
+          q: 'What happens if I pay less than the minimum?',
+          a: 'You\'re charged a late fee (up to ~$41 for repeat late payments), reported as late to credit bureaus after 30 days, and many issuers trigger a penalty APR of 29.99% that can apply indefinitely. After 60 days late your rate can also apply to existing balances. Set autopay for at least the minimum to avoid this.',
+        },
+        {
+          q: 'Does the minimum payment change every month?',
+          a: 'Yes. Because it\'s based on your balance and that month\'s interest, it rises when you carry more or rates go up, and falls as you pay down the balance. New purchases, cash advances, and fees also push it higher. If your balance drops, the minimum eventually drops too — but never count on a low minimum as a reason to keep carrying the debt.',
+        },
+      ]}
     />
   )
 }
