@@ -6,7 +6,7 @@ import type { NextConfig } from 'next'
  * 注意:静态导出不支持服务端功能(API routes、SSR、图片优化优化器)。
  * 站点配置:修改下面 SITE_URL 为你最终的域名,影响 sitemap / canonical / og:url。
  */
-export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://axtrivc.com'
+export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://toolhub.axtrivc.com'
 
 const nextConfig: NextConfig = {
   output: 'export',
