@@ -109,23 +109,58 @@ export function buildToolMetadata(slug: string): Metadata {
   }
 }
 
+/**
+ * 按工具分类映射 schema.org 的 applicationCategory 值。
+ *
+ * Google 在对应垂直(金融/医疗等)的富媒体结果里更倾向于识别分类准确的工具。
+ * 参考 schema.org 的 applicationCategory 枚举值。
+ * 未匹配的分类回退到 UtilitiesApplication(通用工具)。
+ */
+function mapApplicationCategory(category: string): string {
+  if (/finance|financial/i.test(category)) return 'FinanceApplication'
+  if (/health|medical/i.test(category)) return 'HealthApplication'
+  if (/developer/i.test(category)) return 'DeveloperApplication'
+  if (/security/i.test(category)) return 'SecurityApplication'
+  if (/business/i.test(category)) return 'BusinessApplication'
+  if (/web\s*design/i.test(category)) return 'DesignApplication'
+  if (/education|math|time/i.test(category)) return 'EducationalApplication'
+  return 'UtilitiesApplication'
+}
+
 /** WebApplication 结构化数据(JSON-LD),帮助搜索引擎理解工具类型 */
 export function buildToolJsonLd(slug: string) {
   const tool = tools.find((t) => t.slug === slug)
   if (!tool) return null
 
+  const toolUrl = `${SITE_URL}/tools/${tool.slug}/`
+
   return {
     '@context': 'https://schema.org',
     '@type': 'WebApplication',
     name: tool.name,
-    url: `${SITE_URL}/tools/${tool.slug}/`,
+    url: toolUrl,
     description: tool.description,
-    applicationCategory: 'UtilitiesApplication',
+    applicationCategory: mapApplicationCategory(tool.category),
     operatingSystem: 'Any (Web Browser)',
+    // 浏览器内运行,跨平台
+    browserRequirements: 'Requires JavaScript. Requires a modern web browser.',
+    // 语言声明:全站英文,利于英文搜索结果匹配
+    inLanguage: 'en',
+    // 免费且无需登录 —— Google 推荐字段,强化"免费工具"信号
+    isAccessibleForFree: true,
     offers: {
       '@type': 'Offer',
       price: '0',
       priceCurrency: 'USD',
+      // 指向工具页本身,声明"购买/获取"地址(Google 推荐字段)
+      url: toolUrl,
+      availability: 'https://schema.org/InStock',
+    },
+    // 发布者信息:增强 E-E-A-T(权威性/可信度)信号
+    publisher: {
+      '@type': 'Organization',
+      name: SITE_NAME,
+      url: SITE_URL,
     },
     featureList: tool.longTailKeywords?.length
       ? Array.from(new Set([...tool.keywords, ...tool.longTailKeywords]))
