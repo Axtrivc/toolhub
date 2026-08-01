@@ -64,26 +64,6 @@ export function LengthConverterContent(): ReactNode {
         Canada is officially metric but still uses imperial for many everyday measurements due to US
         cultural influence.
       </p>
-
-      <h2>Frequently Asked Questions</h2>
-
-      <h3>How many feet are in a meter?</h3>
-      <p>
-        1 meter = 3.28084 feet. To convert meters to feet, multiply by 3.281. To convert feet to
-        meters, divide by 3.281 (or multiply by 0.3048).
-      </p>
-
-      <h3>How many inches are in a centimeter?</h3>
-      <p>
-        1 centimeter = 0.3937 inches. To convert cm to inches, multiply by 0.394. To convert inches
-        to cm, multiply by 2.54.
-      </p>
-
-      <h3>How do I convert kilometers to miles?</h3>
-      <p>
-        Multiply kilometers by 0.6214. As a quick mental shortcut, take 60% and add a bit — for
-        example, 10 km ≈ 6.2 miles.
-      </p>
     </section>
   )
 }

@@ -87,27 +87,6 @@ export function WordCounterContent(): ReactNode {
           phrases, adverbs, and repetition. Cutting usually improves the writing.
         </li>
       </ol>
-
-      <h2>Frequently Asked Questions</h2>
-
-      <h3>Does this tool count hyphenated words as one or two?</h3>
-      <p>
-        One. A hyphenated word like <code>well-being</code> counts as a single word because there is
-        no space in it. The same applies to contractions like <code>don&apos;t</code>.
-      </p>
-
-      <h3>Are numbers counted as words?</h3>
-      <p>
-        Yes. Any sequence of non-whitespace characters — including standalone numbers like{' '}
-        <code>2026</code> — counts as one word.
-      </p>
-
-      <h3>How accurate is the reading time estimate?</h3>
-      <p>
-        It&apos;s a reasonable average, not a precise measurement. Real reading speed varies from
-        100 words per minute (for dense technical material) to 400+ (for easy skimming). Treat the
-        estimate as a planning aid rather than an exact figure.
-      </p>
     </section>
   )
 }

@@ -42,23 +42,6 @@ export function DiscountCalculatorContent(): ReactNode {
         <li><strong>Minimum purchase requirements:</strong> &quot;Save 30% when you spend $100&quot; may push you to overspend</li>
         <li><strong>Compare unit prices:</strong> A discounted large size may still cost more per ounce than a full-price small size</li>
       </ul>
-
-      <h2>Frequently Asked Questions</h2>
-
-      <h3>How do I calculate 50% off?</h3>
-      <p>Just halve the price. 50% off means you pay half — the simplest discount to calculate.</p>
-
-      <h3>How do I add two discounts together?</h3>
-      <p>
-        You don&apos;t add them directly. Apply the first discount to get the new price, then apply
-        the second discount to that new price. Two 30% discounts give a total of 51% off, not 60%.
-      </p>
-
-      <h3>What does &quot;percent off&quot; mean?</h3>
-      <p>
-        It&apos;s the percentage by which the original price is reduced. 30% off means you pay 70%
-        of the original price.
-      </p>
     </section>
   )
 }

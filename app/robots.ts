@@ -14,6 +14,16 @@ export default function robots(): MetadataRoute.Robots {
   return {
     rules: [
       {
+        // Google AdSense 爬虫:抓取页面用于广告匹配与质量评估
+        userAgent: 'Mediapartners-Google',
+        allow: '/',
+      },
+      {
+        // AdSense 移动端广告爬虫
+        userAgent: 'AdsBot-Google',
+        allow: '/',
+      },
+      {
         userAgent: '*',
         allow: '/',
         // 无需屏蔽的页面留空;未来如有不想收录的页面在此加,例如:

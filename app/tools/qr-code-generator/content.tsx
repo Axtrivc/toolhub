@@ -110,30 +110,6 @@ export function QRCodeGeneratorContent(): ReactNode {
         instead of the final content, letting you change the destination later and track scan
         analytics. For most personal and small-business uses, static codes are all you need.
       </p>
-
-      <h2>Frequently Asked Questions</h2>
-
-      <h3>Do these QR codes expire?</h3>
-      <p>
-        No. Because the data is embedded directly in the code, static QR codes never expire and
-        never stop working. As long as the content itself (like a URL) remains valid, the code will
-        scan forever.
-      </p>
-
-      <h3>Is there a limit to how much data I can encode?</h3>
-      <p>
-        Yes. A single QR code holds up to roughly 4,000 alphanumeric characters or 2,900 bytes of
-        binary data. For URLs and WiFi credentials, this is more than enough. If you try to encode a
-        very long text, the code becomes denser and harder to scan.
-      </p>
-
-      <h3>Are QR codes safe?</h3>
-      <p>
-        QR codes themselves are just a way to deliver text — they are neither safe nor dangerous on
-        their own. The risk is that a malicious code could link to a phishing site. As a user, treat
-        scanned links with the same caution as any other link. As a creator, only link to
-        destinations you control and trust.
-      </p>
     </section>
   )
 }
