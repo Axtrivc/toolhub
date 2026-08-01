@@ -25,3 +25,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# 本地工作文件(非工具站代码)
+/.zcode/
+/.workbuddy/
+project-overview.html
+*.local

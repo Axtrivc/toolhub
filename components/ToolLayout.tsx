@@ -7,7 +7,7 @@ import { RelatedTools } from './RelatedTools'
 import { ToolInfoSection } from './ToolInfoSection'
 import { useApp } from './providers/AppProviders'
 import { t } from '@/lib/i18n'
-import { buildFaqJsonLd } from '@/lib/seo'
+import { buildFaqJsonLd, buildBreadcrumbJsonLd } from '@/lib/seo'
 import type { ToolMeta } from '@/lib/tools'
 
 interface ToolLayoutProps {
@@ -21,6 +21,7 @@ interface ToolLayoutProps {
 export function ToolLayout({ tool, children }: ToolLayoutProps) {
   const { locale } = useApp()
   const faqJsonLd = buildFaqJsonLd(tool.slug)
+  const breadcrumbJsonLd = buildBreadcrumbJsonLd(tool.slug)
 
   return (
     <div className="container-page py-8">
@@ -29,6 +30,14 @@ export function ToolLayout({ tool, children }: ToolLayoutProps) {
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+        />
+      )}
+
+      {/* 面包屑结构化数据 - 让 Google 展示 Home › 分类 › 工具 路径 */}
+      {breadcrumbJsonLd && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
         />
       )}
 
@@ -42,7 +51,7 @@ export function ToolLayout({ tool, children }: ToolLayoutProps) {
           </li>
           <li aria-hidden="true">/</li>
           <li>
-            <Link href={`/?category=${encodeURIComponent(tool.category)}`} className="hover:text-brand-600">
+            <Link href={`/tools/#${encodeURIComponent(tool.category)}`} className="hover:text-brand-600">
               {tool.category}
             </Link>
           </li>

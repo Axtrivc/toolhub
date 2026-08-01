@@ -298,3 +298,57 @@ export const SphereCalculatorClient = makeCalculatorClient({
   },
   note: '🔵 Sphere volume = ⁴⁄₃ π r³. Surface area = 4 π r².',
 })
+
+// ── 薪资换算(补完的唯一未上线工具)──
+
+export const SalaryConverterClient = makeCalculatorClient({
+  inputs: [
+    {
+      key: 'unit',
+      label: 'I get paid',
+      default: 'annual',
+      options: [
+        { label: 'Annually', value: 'annual' },
+        { label: 'Monthly', value: 'monthly' },
+        { label: 'Bi-weekly', value: 'biweekly' },
+        { label: 'Hourly', value: 'hourly' },
+      ],
+    },
+    { key: 'amount', label: 'Amount', suffix: '$', default: '60000' },
+    { key: 'hours', label: 'Hours per week', default: '40' },
+  ],
+  outputs: [
+    { key: 'annual', label: 'Annual salary', highlight: true },
+    { key: 'monthly', label: 'Monthly' },
+    { key: 'biweekly', label: 'Bi-weekly' },
+    { key: 'hourly', label: 'Hourly' },
+  ],
+  compute: (v) => {
+    const amount = toNum(v.amount)
+    const hours = toNum(v.hours) || 40
+    // 先把输入归一到年度总额,再派生其他三种
+    // 标准假设:每月 = 年/12,双周 = 年/26,小时 = 年/(52×每周工时)
+    let annual: number
+    switch (v.unit) {
+      case 'monthly':
+        annual = amount * 12
+        break
+      case 'biweekly':
+        annual = amount * 26
+        break
+      case 'hourly':
+        annual = amount * hours * 52
+        break
+      case 'annual':
+      default:
+        annual = amount
+    }
+    return {
+      annual: fmtUSD(annual, 0),
+      monthly: fmtUSD(annual / 12, 0),
+      biweekly: fmtUSD(annual / 26, 0),
+      hourly: fmtUSD(annual / (52 * hours), 2),
+    }
+  },
+  note: '💵 Assumes 12 monthly pays, 26 bi-weekly pays, and 52 paid weeks/year. Overtime and bonuses are not included.',
+})
