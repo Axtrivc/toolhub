@@ -841,15 +841,14 @@ export const tools: ToolMeta[] = [
     intent: 'commercial', category: 'Finance Calculators', h1: 'Income Tax Estimator',
     shortIntro: 'Estimate US federal income tax and take-home pay.', published: true,
   },
-  // TODO(未上线):salary-converter 工具目录尚未创建(app/tools/salary-converter/)。
-  // published: false 期间不会出现在首页/sitemap。补做 page.tsx + Client 组件后改为 true。
+  // 已补完:page.tsx + SalaryConverterClient + Content 均已就绪
   {
     slug: 'salary-converter', name: 'Salary Converter',
     title: 'Free Salary Converter - Annual, Monthly, Bi-Weekly, Hourly',
     description: 'Convert between annual, monthly, bi-weekly, and hourly salary instantly. Free.',
     keywords: ['salary converter', 'annual to hourly', 'salary breakdown'],
     intent: 'informational', category: 'Finance Calculators', h1: 'Salary Converter',
-    shortIntro: 'Convert salary between annual, monthly, and hourly.', published: false,
+    shortIntro: 'Convert salary between annual, monthly, bi-weekly, and hourly.', published: true,
   },
 
   {

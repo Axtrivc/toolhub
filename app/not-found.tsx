@@ -19,7 +19,7 @@ export default function NotFound() {
           <Link
             key={tool.slug}
             href={`/tools/${tool.slug}/`}
-            className="rounded-lg border p-4 text-left transition hover:border-brand-300"
+            className="group rounded-lg border p-4 text-left transition hover:border-brand-300"
             style={{
               borderColor: 'rgb(var(--border))',
               backgroundColor: 'rgb(var(--bg-card))',

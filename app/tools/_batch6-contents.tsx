@@ -9,6 +9,8 @@ export function SavingsGoalCalculatorContent(): ReactNode {
       intro={<p>Find the monthly contribution needed to hit any savings goal — a house deposit, a car, an emergency fund, or a vacation — accounting for investment growth on what you already have saved.</p>}
       sections={[
         { heading: 'How It Works', body: <p>The calculator projects the future value of your current savings, then solves for the monthly contribution that fills the gap to your goal. A higher return rate means smaller monthly contributions — but with more risk.</p> },
+        { heading: 'The Formula Behind It', body: <p>This tool uses the future value of a series (an ordinary annuity) combined with compound growth on your starting balance. The required monthly contribution <code>M</code> solves: <code>Goal = P(1+r)^n + M × [((1+r)^n − 1) / r]</code>, where <code>P</code> is your current savings, <code>r</code> is the monthly return (annual ÷ 12), and <code>n</code> is the number of months. The calculator handles the algebra — you just enter your goal, timeline, and expected return.</p> },
+        { heading: 'Worked Example', body: <p>Say you want <strong>$30,000</strong> for a house deposit in <strong>5 years</strong>, you already have <strong>$5,000</strong> saved, and you expect a <strong>5% annual return</strong>. Your $5,000 grows to about $6,416 on its own, leaving a ~$23,584 gap. Split across 60 months at a 5% growth rate, that works out to roughly <strong>$345/month</strong>. Bump the return to 7% and the required contribution drops to about $312/month — growth is doing more of the work for you.</p> },
         { heading: 'Setting Realistic Goals', body: <ul>
           <li><strong>Emergency fund:</strong> 3-6 months of expenses</li>
           <li><strong>House deposit:</strong> 10-20% of home price</li>
@@ -16,7 +18,11 @@ export function SavingsGoalCalculatorContent(): ReactNode {
           <li><strong>Wedding:</strong> Varies widely — set your number first</li>
         </ul> },
       ]}
-      faqs={[{ q: 'What return rate should I use?', a: 'Use 4-5% for high-yield savings or conservative investments. Use 7% for long-term stock market investing. Higher rates mean smaller monthly contributions but more volatility.' }]}
+      faqs={[
+        { q: 'What return rate should I use?', a: 'Use 4-5% for high-yield savings or conservative investments. Use 7% for long-term stock market investing. Higher rates mean smaller monthly contributions but more volatility. When in doubt, run the calculator twice — once with an optimistic rate and once with a conservative one — and aim for the higher contribution.' },
+        { q: 'Should I account for inflation?', a: 'Yes, if your goal is years away. A $30,000 goal in 5 years will buy less than $30,000 today. To hedge, either raise your target by ~3% per year, or use a "real" return rate (your investment return minus inflation). For example, a 7% nominal return becomes ~4% real.' },
+        { q: 'Is it better to save monthly or in lump sums?', a: 'Monthly contributions win for most people because they enforce discipline and spread risk (dollar-cost averaging). Lump-sum investing slightly outperforms on average because money is in the market longer, but it requires having the cash upfront and tolerating short-term swings.' },
+      ]}
     />
   )
 }
@@ -41,8 +47,13 @@ export function NetWorthCalculatorContent(): ReactNode {
           <li>Any other money you owe</li>
         </ul> },
         { heading: 'Where You Stand', body: <p>Net worth varies enormously by age. The US median is around $192,000 across all ages, but the median for ages 30-34 is only about $40,000. Reaching $1M+ net worth puts a household in roughly the top 10-15%.</p> },
+        { heading: 'The Formula and a Worked Example', body: <p>Net worth is simply <code>Assets − Liabilities</code>. Suppose you have $8,000 in savings, $42,000 in a retirement account, a car worth $15,000, and a home worth $320,000 — that&apos;s $385,000 in assets. Against that you owe a $220,000 mortgage, a $12,000 auto loan, and $3,000 on a credit card — $235,000 in liabilities. Your net worth is <strong>$150,000</strong>. Notice that home equity alone ($100,000) is a big slice, which is why including the residence (minus the mortgage) matters.</p> },
       ]}
-      faqs={[{ q: 'Should I include my primary residence?', a: 'Yes, but subtract the mortgage. The remaining equity is a real asset. Some calculators exclude primary residence to focus on "investable" net worth — both approaches are valid.' }]}
+      faqs={[
+        { q: 'Should I include my primary residence?', a: 'Yes, but subtract the mortgage. The remaining equity is a real asset. Some calculators exclude primary residence to focus on "investable" net worth — both approaches are valid, as long as you are consistent when comparing year to year.' },
+        { q: 'Is a negative net worth bad?', a: 'It is common for young adults with student loans and little savings. A negative number is not a moral failing — it is a starting point. The goal is steady improvement: track it every 6-12 months and focus on paying down high-interest debt while building an emergency fund first.' },
+        { q: 'How often should I recalculate?', a: 'Every 6 to 12 months is enough for most people. More frequent checks add noise (market swings) without adding insight. The trend over years matters more than any single snapshot — a net worth rising 8-12% annually is strong progress.' },
+      ]}
     />
   )
 }
@@ -53,6 +64,7 @@ export function AnnuityCalculatorContent(): ReactNode {
       intro={<p>An <strong>annuity</strong> pays out a fixed amount regularly from a principal over a set period. This calculator finds the annual and monthly payout that exhausts the principal in exactly N years, accounting for investment growth.</p>}
       sections={[
         { heading: 'The Annuity Formula', body: <p>Annual payout = <code>P × r / (1 − (1 + r)^−n)</code>, where P is principal, r is annual rate, and n is years. The formula ensures the balance hits zero exactly at year n.</p> },
+        { heading: 'Worked Example', body: <p>Suppose you retire with <strong>$500,000</strong>, want it to last <strong>25 years</strong>, and expect a <strong>5% annual return</strong>. Plugging into the formula: the annual payout is about <strong>$35,360</strong>, or roughly <strong>$2,950/month</strong>. If you only need it to last 20 years, the payout rises to about $40,120/year — a shorter horizon means more each year, but a higher risk of outliving the money.</p> },
         { heading: 'Annuity vs. Perpetuity', body: <p>An annuity pays out for a fixed term. A perpetuity pays forever (the &quot;4% rule&quot; for retirement is roughly a perpetuity designed to never run out). For very long horizons (30+ years), the two converge.</p> },
         { heading: 'Real-World Uses', body: <ul>
           <li>Retirement drawdown planning</li>
@@ -61,7 +73,11 @@ export function AnnuityCalculatorContent(): ReactNode {
           <li>Charitable gift annuities</li>
         </ul> },
       ]}
-      faqs={[{ q: 'What if I live longer than N years?', a: 'Then the annuity is exhausted. This is the core risk of self-managed drawdowns. Commercial annuities from insurance companies often pay for life, but at lower rates because they pool longevity risk.' }]}
+      faqs={[
+        { q: 'What if I live longer than N years?', a: 'Then the annuity is exhausted. This is the core risk of self-managed drawdowns. Commercial annuities from insurance companies often pay for life, but at lower rates because they pool longevity risk across many buyers.' },
+        { q: 'What return rate should I assume for retirement?', a: 'Conservative planners use 4-5% to stay safe, because retirement money needs to survive market downturns early in retirement (sequence-of-returns risk). Using 7% optimistic rates makes the payout look bigger but raises the chance of running out. Run both scenarios.' },
+        { q: 'Is an immediate annuity a good deal?', a: 'It depends on your longevity and need for guaranteed income. Annuities shine if you expect to live a long time, because the insurer keeps paying even if you outlive the actuarial average. The trade-off is losing access to the lump sum and leaving less to heirs.' },
+      ]}
     />
   )
 }
@@ -76,6 +92,7 @@ export function CapitalGainsTaxEstimatorContent(): ReactNode {
           <li><strong>Long-term (1+ years):</strong> Preferential rates of 0%, 15%, or 20% depending on income</li>
         </ul> },
         { heading: 'Why Holding Period Matters', body: <p>The difference is huge. A $10,000 gain in the 24% bracket: short-term costs $2,400 in tax; long-term costs $1,500 (a 37% tax saving). For high earners near the top bracket, holding 1+ years can save thousands.</p> },
+        { heading: 'Worked Example', body: <p>You bought 100 shares at $50 ($5,000 total) and sell them at $80 ($8,000) after <strong>14 months</strong>. Your gain is <strong>$3,000</strong>, and because you held over a year it qualifies as long-term. If your taxable income puts you in the 15% long-term bracket, you owe <strong>$450</strong> in federal tax. Had you sold one month earlier (short-term) while in the 24% ordinary bracket, the same gain would cost <strong>$720</strong> — waiting those few weeks saved $270.</p> },
         { heading: 'What\'s Not Included', body: <ul>
           <li><strong>NIIT:</strong> 3.8% surtax on investment income for high earners</li>
           <li><strong>State tax:</strong> Varies 0-13% depending on state</li>
@@ -83,7 +100,11 @@ export function CapitalGainsTaxEstimatorContent(): ReactNode {
           <li><strong>Tax-loss harvesting:</strong> Strategic loss-taking to reduce taxes</li>
         </ul> },
       ]}
-      faqs={[{ q: 'How do I calculate my capital gains tax?', a: 'Track purchase and sale prices per lot. Gains = sale − purchase − fees. Long-term gains are taxed at 0/15/20% based on your total taxable income (including the gain itself).' }]}
+      faqs={[
+        { q: 'How do I calculate my capital gains tax?', a: 'Track purchase and sale prices per lot. Gains = sale − purchase − fees. Long-term gains are taxed at 0/15/20% based on your total taxable income (including the gain itself), while short-term gains use your ordinary income bracket.' },
+        { q: 'What is tax-loss harvesting?', a: 'Selling investments at a loss to offset realized gains, lowering your tax bill. Losses offset gains dollar-for-dollar; if losses exceed gains, up to $3,000 per year can offset ordinary income, with the rest carrying forward. Watch out for the wash-sale rule: you cannot repurchase the same security within 30 days.' },
+        { q: 'Do I pay tax if I reinvest the proceeds?', a: 'Yes. Selling triggers a taxable event regardless of whether you reinvest — the IRS taxes the realized gain. Only holding inside tax-advantaged accounts (IRA, 401k) defers this, and only specific structures avoid it entirely.' },
+      ]}
     />
   )
 }
@@ -108,8 +129,13 @@ export function RentVsBuyCalculatorContent(): ReactNode {
           <li>Possibly restricted pet/renovation options</li>
         </ul> },
         { heading: 'The 5-Year Rule', body: <p>A common guideline: if you&apos;ll move within 5 years, renting is usually cheaper due to transaction costs. Beyond 5-7 years, buying often wins — assuming modest appreciation and stable employment.</p> },
+        { heading: 'Worked Example', body: <p>Consider a <strong>$400,000</strong> home with 20% down ($80,000) on a 30-year mortgage at 6.5%, versus renting a comparable place for <strong>$2,000/month</strong> over a <strong>7-year</strong> horizon. This tool compares the down payment plus mortgage interest against rent paid — buying shows roughly $132,000 in interest over the period while renting costs $168,000. But add closing costs (~$12,000), property tax (~$42,000 over 7 years), and maintenance (~$28,000), and the gap narrows dramatically. The real tie-breaker is home appreciation and the opportunity cost of that $80,000 down payment.</p> },
       ]}
-      faqs={[{ q: 'Does this account for home value increasing?', a: 'No — this simplified version ignores appreciation, which is a major benefit of buying. But it also ignores the opportunity cost of investing your down payment in stocks instead. Full rent-vs-buy models factor in both.' }]}
+      faqs={[
+        { q: 'Does this account for home value increasing?', a: 'No — this simplified version ignores appreciation, which is a major benefit of buying. But it also ignores the opportunity cost of investing your down payment in stocks instead. Full rent-vs-buy models factor in both. Historically, US homes appreciate 3-4% annually, roughly matching inflation.' },
+        { q: 'How do I know if I will stay long enough?', a: 'Job stability, relationship status, and school districts are the usual signals. A good rule of thumb: be confident you will stay at least 5 years, ideally 7-10. Every extra year you stay spreads the closing costs thinner and tilts the math further toward buying.' },
+        { q: 'What about the tax deduction for mortgage interest?', a: 'Since the 2017 US tax law change, the higher standard deduction ($14,600 single / $29,200 married in 2024) means most homeowners no longer itemize, so the mortgage-interest deduction helps fewer people than it used to. Only count on it if your total itemized deductions clearly exceed the standard deduction.' },
+      ]}
     />
   )
 }

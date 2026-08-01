@@ -1,0 +1,123 @@
+import type { Metadata } from 'next'
+import Link from 'next/link'
+import { getToolsByCategory, getPublishedTools } from '@/lib/tools'
+import { SITE_NAME } from '@/lib/seo'
+import { buildItemListJsonLd } from '@/lib/seo'
+
+export const metadata: Metadata = {
+  title: 'All Tools',
+  description: `Browse all ${getPublishedTools().length}+ free online tools on ${SITE_NAME}. Calculators, converters, text and developer utilities — organized by category.`,
+  alternates: { canonical: '/tools/' },
+  openGraph: {
+    title: `All Tools | ${SITE_NAME}`,
+    description: `Browse all ${getPublishedTools().length}+ free online tools, organized by category.`,
+    url: '/tools/',
+  },
+}
+
+export default function ToolsHubPage() {
+  // 按分类分组,并按分类内工具数量降序(大类在前)
+  const grouped = getToolsByCategory()
+  const categories = Object.entries(grouped).sort((a, b) => b[1].length - a[1].length)
+  const all = getPublishedTools()
+  const itemListLd = buildItemListJsonLd()
+
+  return (
+    <div className="container-page py-12">
+      {/* ItemList 结构化数据 */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListLd) }}
+      />
+
+      {/* Hero */}
+      <section className="mx-auto mb-12 max-w-3xl text-center">
+        <h1 className="text-4xl font-bold sm:text-5xl" style={{ color: 'rgb(var(--text))' }}>
+          All Tools
+        </h1>
+        <p className="mt-5 text-lg" style={{ color: 'rgb(var(--text-muted))' }}>
+          {all.length}+ free online tools across finance, math, health, unit conversion, text, and
+          developer utilities. Pick a category below or <Link href="/" className="text-brand-600 underline">search from the home page</Link>.
+        </p>
+      </section>
+
+      {/* 分类目录快速跳转 */}
+      <nav className="mx-auto mb-10 flex max-w-4xl flex-wrap justify-center gap-2" aria-label="Tool categories">
+        {categories.map(([category, categoryTools]) => (
+          <a
+            key={category}
+            href={`#${encodeURIComponent(category)}`}
+            className="rounded-full border px-4 py-1.5 text-sm font-medium transition hover:bg-brand-50"
+            style={{
+              borderColor: 'rgb(var(--border))',
+              backgroundColor: 'rgb(var(--bg-card))',
+              color: 'rgb(var(--text-muted))',
+            }}
+          >
+            {category} ({categoryTools.length})
+          </a>
+        ))}
+      </nav>
+
+      {/* 分类分组展示全量工具 */}
+      {categories.map(([category, categoryTools]) => (
+        <section key={category} id={category} className="mb-12 scroll-mt-20">
+          <h2 className="mb-5 text-2xl font-bold" style={{ color: 'rgb(var(--text))' }}>
+            {category}
+            <span className="ml-2 text-base font-normal" style={{ color: 'rgb(var(--text-faint))' }}>
+              {categoryTools.length}
+            </span>
+          </h2>
+          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {categoryTools.map((tool) => (
+              <Link
+                key={tool.slug}
+                href={`/tools/${tool.slug}/`}
+                className="group rounded-xl border p-6 shadow-sm transition-all hover:-translate-y-0.5 hover:border-brand-300 hover:shadow-md"
+                style={{
+                  borderColor: 'rgb(var(--border))',
+                  backgroundColor: 'rgb(var(--bg-card))',
+                }}
+              >
+                <div className="flex items-start justify-between">
+                  <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-brand-50 text-brand-600 transition-colors group-hover:bg-brand-600 group-hover:text-white">
+                    <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                      <circle cx="12" cy="12" r="9" strokeLinecap="round" />
+                    </svg>
+                  </span>
+                  <span className="text-xs font-medium uppercase tracking-wide" style={{ color: 'rgb(var(--text-faint))' }}>
+                    {tool.intent === 'commercial' ? 'Pro' : 'Free'}
+                  </span>
+                </div>
+                <h3 className="mt-4 text-lg font-semibold group-hover:text-brand-600" style={{ color: 'rgb(var(--text))' }}>
+                  {tool.name}
+                </h3>
+                <p className="mt-2 text-sm" style={{ color: 'rgb(var(--text-subtle))' }}>
+                  {tool.shortIntro}
+                </p>
+              </Link>
+            ))}
+          </div>
+        </section>
+      ))}
+
+      {/* SEO 文案区 */}
+      <section className="prose-content mt-16 max-w-3xl">
+        <h2>One Toolbox for Everyday Tasks</h2>
+        <p>
+          Instead of hunting down a different website for every small job, ToolHub puts the utilities
+          you reach for most in one place. Need to convert kilograms to pounds, calculate a mortgage
+          payment, format a JSON payload, or generate a strong password? It is all here, and it all
+          runs locally in your browser.
+        </p>
+        <p>
+          Every tool on this page is free with no signup and no upload. That means nothing you type
+          ever leaves your device, which matters for sensitive inputs like salary figures, health
+          numbers, or code snippets. Bookmark this page — we add new tools regularly based on what
+          readers actually search for.
+        </p>
+      </section>
+    </div>
+  )
+}

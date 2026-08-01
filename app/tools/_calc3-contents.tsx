@@ -923,3 +923,66 @@ export function IncomeTaxEstimatorContent(): ReactNode {
     />
   )
 }
+
+export function SalaryConverterContent(): ReactNode {
+  return (
+    <ToolContent
+      intro={
+        <p>
+          This converter translates a salary between <strong>annual</strong>, <strong>monthly</strong>,{' '}
+          <strong>bi-weekly</strong>, and <strong>hourly</strong> figures. Enter what you actually get
+          paid and pick the unit — the tool normalizes everything to an annual total and derives the
+          rest, so you can compare job offers that quote pay differently.
+        </p>
+      }
+      sections={[
+        {
+          heading: 'The Conversion Formulas',
+          body: (
+            <p>
+              Every result starts from the annual total. A year is assumed to have 12 months, 26
+              bi-weekly pay periods, and 52 paid weeks. Given an annual amount <code>A</code>:
+              <code>monthly = A ÷ 12</code>, <code>bi-weekly = A ÷ 26</code>, and{' '}
+              <code>hourly = A ÷ (52 × hours/week)</code>. The default work week is 40 hours (2,080
+              hours/year); adjust it for part-time or contract roles.
+            </p>
+          ),
+        },
+        {
+          heading: 'Common Salary Equivalents (40 hr/week)',
+          body: (
+            <ul>
+              <li>$40,000/year ≈ $3,333/month ≈ $1,538 bi-weekly ≈ $19.23/hr</li>
+              <li>$60,000/year ≈ $5,000/month ≈ $2,308 bi-weekly ≈ $28.85/hr</li>
+              <li>$75,000/year ≈ $6,250/month ≈ $2,885 bi-weekly ≈ $36.06/hr</li>
+              <li>$100,000/year ≈ $8,333/month ≈ $3,846 bi-weekly ≈ $48.08/hr</li>
+              <li>$150,000/year ≈ $12,500/month ≈ $5,769 bi-weekly ≈ $72.12/hr</li>
+            </ul>
+          ),
+        },
+        {
+          heading: 'Bi-Weekly vs Semi-Monthly',
+          body: (
+            <p>
+              Bi-weekly pay (every two weeks) gives <strong>26</strong> checks a year — which means
+              two months you get three checks instead of two. Semi-monthly pay (twice a month) gives
+              exactly <strong>24</strong> checks. Over a year, a $60,000 salary is $2,308 per
+              bi-weekly check but $2,500 per semi-monthly check. This tool uses the standard
+              bi-weekly (26-period) convention.
+            </p>
+          ),
+        },
+      ]}
+      faqs={[
+        {
+          q: 'How many hours are in a full-time work year?',
+          a: 'The standard US full-time year is 2,080 hours (40 hours × 52 weeks). The hourly rate this tool shows uses that figure, scaled by the hours-per-week you enter.',
+        },
+        {
+          q: 'Does this include taxes and benefits?',
+          a: 'No. These are gross (pre-tax) conversions. Your actual take-home pay depends on federal and state income tax, Social Security, Medicare, retirement contributions, and benefits deductions.',
+        },
+      ]}
+    />
+  )
+}
