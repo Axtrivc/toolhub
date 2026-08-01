@@ -7,6 +7,7 @@ import { RelatedTools } from './RelatedTools'
 import { ToolInfoSection } from './ToolInfoSection'
 import { VisibleFaqs } from './VisibleFaqs'
 import { EmbedTool } from './EmbedTool'
+import { Disclaimer } from './Disclaimer'
 import { useApp } from './providers/AppProviders'
 import { t } from '@/lib/i18n'
 import { buildFaqJsonLd, buildBreadcrumbJsonLd } from '@/lib/seo'
@@ -85,6 +86,9 @@ export function ToolLayout({ tool, children }: ToolLayoutProps) {
       >
         {children}
       </div>
+
+      {/* YMYL 免责声明 - 金融/健康类工具渲染,降低 Google YMYL 算法降权风险 */}
+      <Disclaimer tool={tool} />
 
       {/* 通用信息区 - 关于工具/如何使用(按工具类型生成,增厚内容) */}
       <ToolInfoSection tool={tool} />
