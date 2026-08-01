@@ -79,26 +79,6 @@ export function PercentageCalculatorContent(): ReactNode {
           more than.&quot; 200% of 50 is 100; 200% more than 50 is 150.
         </li>
       </ul>
-
-      <h2>Frequently Asked Questions</h2>
-
-      <h3>How do I calculate a discount?</h3>
-      <p>
-        Use mode 1 to find the discount amount (X% of the original price), then subtract it from the
-        original. Or use mode 4 with a negative percentage to get the final price directly.
-      </p>
-
-      <h3>How do I calculate a tip?</h3>
-      <p>
-        Enter the bill amount as Y and the tip percentage as X in mode 1. For an 18% tip on a $45
-        bill: 18% of 45 = $8.10.
-      </p>
-
-      <h3>How do I calculate my test score percentage?</h3>
-      <p>
-        Use mode 2. Enter your points earned as the part and the total possible points as the whole.
-        For 42 out of 50: 42 is what percent of 50 = 84%.
-      </p>
     </section>
   )
 }

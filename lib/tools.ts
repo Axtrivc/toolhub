@@ -35,6 +35,25 @@ export interface ToolMeta {
   shortIntro: string
   /** 是否已上线(用于首页过滤未完成工具) */
   published: boolean
+  /**
+   * 长尾关键词(可选,蓝海词,低竞争高意图)。
+   * 会被合并进 meta keywords 与 WebApplication.featureList,
+   * 并被 ToolInfoSection 自然织入页面正文(长尾 SEO 流量主力)。
+   * 留空则回退到 keywords,不影响功能。
+   */
+  longTailKeywords?: string[]
+  /**
+   * 差异化 SEO 标题(可选)。设置后 buildToolMetadata 优先用它取代 title,
+   * 用于把长尾词放进 <title>(搜索引擎最重权的字段之一)。
+   * 建议 50-60 字符,自然语句,包含主长尾词 + 品牌利益点。
+   */
+  titleLongTail?: string
+  /**
+   * 差异化 SEO 描述(可选)。设置后 buildToolMetadata 优先用它取代 description,
+   * 用于把长尾词放进 meta description(影响 SERP 摘要与点击率)。
+   * 建议 150-160 字符,含主长尾词 + 行动号召。
+   */
+  descriptionLongTail?: string
 }
 
 export const tools: ToolMeta[] = [
@@ -46,6 +65,14 @@ export const tools: ToolMeta[] = [
     keywords: ['apy calculator', 'annual percentage yield', 'apr to apy'],
     intent: 'commercial', category: 'Finance Calculators', h1: 'APY Calculator',
     shortIntro: 'Convert APR to APY accounting for compounding frequency.', published: true,
+    longTailKeywords: [
+      'apr to apy converter',
+      'apy calculator by compounding frequency',
+      'apy vs apr difference',
+      'savings apy calculator',
+    ],
+    titleLongTail: 'APY Calculator - APR to APY by Compounding - Free Tool',
+    descriptionLongTail: 'Convert APR to APY by compounding frequency - daily, monthly, or continuous. Compare savings accounts and CD yields side by side to earn more. Free, no signup.',
   },
   {
     slug: 'credit-card-minimum-payment-calculator', name: 'Credit Card Minimum Payment Calculator',
@@ -54,6 +81,14 @@ export const tools: ToolMeta[] = [
     keywords: ['credit card minimum payment', 'minimum payment calculator'],
     intent: 'commercial', category: 'Finance Calculators', h1: 'Credit Card Minimum Payment Calculator',
     shortIntro: 'See how your minimum payment splits between interest and principal.', published: true,
+    longTailKeywords: [
+      'how is minimum payment calculated',
+      'credit card minimum payment formula',
+      'minimum payment vs interest',
+      'how long paying minimum payment',
+    ],
+    titleLongTail: 'How Is Minimum Payment Calculated? - Free Online Tool',
+    descriptionLongTail: 'See how your credit card minimum payment is calculated and how little goes to principal. Compare minimum vs fixed payments to escape debt. Free, no signup.',
   },
   {
     slug: 'cash-back-calculator', name: 'Cash Back Calculator',
@@ -70,6 +105,14 @@ export const tools: ToolMeta[] = [
     keywords: ['down payment calculator', 'how much down payment', 'pmi calculator'],
     intent: 'commercial', category: 'Finance Calculators', h1: 'Down Payment Calculator',
     shortIntro: 'Find your down payment amount and PMI status.', published: true,
+    longTailKeywords: [
+      'down payment calculator by home price',
+      'how much down payment for a house',
+      'pmi threshold 20 percent calculator',
+      'down payment needed to avoid pmi',
+    ],
+    titleLongTail: 'Down Payment Calculator with PMI Threshold - Free Tool',
+    descriptionLongTail: 'Find your down payment amount by home price and check the 20% PMI threshold. Compare 5%, 10%, and 20% down scenarios side by side, instantly. Free, no signup.',
   },
   {
     slug: 'dti-calculator', name: 'Debt-to-Income Calculator',
@@ -78,6 +121,14 @@ export const tools: ToolMeta[] = [
     keywords: ['dti calculator', 'debt to income ratio', 'loan eligibility'],
     intent: 'commercial', category: 'Finance Calculators', h1: 'Debt-to-Income Calculator',
     shortIntro: 'Calculate DTI ratio and see if lenders will approve you.', published: true,
+    longTailKeywords: [
+      'dti calculator for mortgage qualification',
+      'debt to income ratio for mortgage',
+      '43 dti rule mortgage',
+      'front end back end dti calculator',
+    ],
+    titleLongTail: 'DTI Calculator for Mortgage Qualification - Free Tool',
+    descriptionLongTail: 'Calculate your debt-to-income ratio for mortgage qualification. See if your DTI meets the 43% lender threshold before you apply for a loan. Free, no signup.',
   },
   {
     slug: 'commission-calculator', name: 'Commission Calculator',
@@ -354,6 +405,14 @@ export const tools: ToolMeta[] = [
     keywords: ['body fat calculator', 'body fat percentage', 'navy body fat calculator'],
     intent: 'commercial', category: 'Health Calculators', h1: 'Body Fat Calculator',
     shortIntro: 'Estimate body fat % using circumference measurements.', published: true,
+    longTailKeywords: [
+      'body fat calculator navy method',
+      'body fat by waist and neck',
+      'us navy body fat formula',
+      'body fat percentage by measurements',
+    ],
+    titleLongTail: 'Body Fat Calculator - US Navy by Measurements - Free Tool',
+    descriptionLongTail: 'Estimate body fat percentage with the US Navy method using neck, waist, and hip measurements. Compare your result to healthy ranges instantly. Free, no signup.',
   },
   {
     slug: 'macro-calculator', name: 'Macro Calculator',
@@ -362,6 +421,14 @@ export const tools: ToolMeta[] = [
     keywords: ['macro calculator', 'macronutrient calculator', 'protein carb fat calculator'],
     intent: 'commercial', category: 'Health Calculators', h1: 'Macro Calculator',
     shortIntro: 'Split daily calories into protein, carbs, and fat.', published: true,
+    longTailKeywords: [
+      'macro calculator by goal',
+      'macro split for cutting or bulking',
+      'protein carb fat ratio calculator',
+      'macros by calorie target',
+    ],
+    titleLongTail: 'Macro Calculator by Goal - Cut or Bulk - Free Online Tool',
+    descriptionLongTail: 'Split daily calories into protein, carbs, and fat by goal - cut, maintain, or bulk. Adjust protein ratio to fit your diet plan instantly. Free, no signup.',
   },
   {
     slug: 'pregnancy-due-date-calculator', name: 'Pregnancy Due Date Calculator',
@@ -740,6 +807,14 @@ export const tools: ToolMeta[] = [
     keywords: ['calorie calculator', 'tdee calculator', 'daily calorie needs', 'bmr calculator'],
     intent: 'commercial', category: 'Health Calculators', h1: 'Calorie Calculator',
     shortIntro: 'Find your daily calorie needs for weight loss or gain.', published: true,
+    longTailKeywords: [
+      'calorie calculator by goal',
+      'calories for weight loss or gain',
+      'tdee calculator by activity level',
+      'how many calories to lose weight',
+    ],
+    titleLongTail: 'Calorie Calculator by Goal - Lose or Gain Weight - Free',
+    descriptionLongTail: 'Find your daily calories for weight loss or gain by activity level and goal pace. Get your TDEE and a macro starting point instantly. Free, no signup.',
   },
   {
     slug: 'bmr-calculator', name: 'BMR Calculator',
@@ -748,6 +823,14 @@ export const tools: ToolMeta[] = [
     keywords: ['bmr calculator', 'basal metabolic rate', 'resting calorie burn'],
     intent: 'commercial', category: 'Health Calculators', h1: 'BMR Calculator',
     shortIntro: 'Calculate calories your body burns at complete rest.', published: true,
+    longTailKeywords: [
+      'bmr calculator mifflin st jeor',
+      'bmr harris benedict formula',
+      'resting calorie burn calculator',
+      'bmr by age and gender',
+    ],
+    titleLongTail: 'BMR Calculator - Mifflin & Harris-Benedict - Free Tool',
+    descriptionLongTail: 'Calculate BMR with Mifflin-St Jeor or Harris-Benedict formulas. See calories burned at rest by age, weight, and gender instantly and privately. Free, no signup.',
   },
   {
     slug: 'water-intake-calculator', name: 'Water Intake Calculator',
@@ -756,6 +839,14 @@ export const tools: ToolMeta[] = [
     keywords: ['water intake calculator', 'daily water needs', 'hydration calculator'],
     intent: 'informational', category: 'Health Calculators', h1: 'Water Intake Calculator',
     shortIntro: 'Find your ideal daily water intake.', published: true,
+    longTailKeywords: [
+      'water intake calculator by weight',
+      'how much water should i drink',
+      'daily water intake by activity',
+      'hydration calculator by body weight',
+    ],
+    titleLongTail: 'Water Intake Calculator by Weight & Activity - Free Tool',
+    descriptionLongTail: 'Find how much water you should drink daily by body weight and activity level. Adjust for climate, exercise, and pregnancy instantly and easily. Free, no signup.',
   },
   {
     slug: 'ideal-weight-calculator', name: 'Ideal Weight Calculator',
@@ -764,6 +855,14 @@ export const tools: ToolMeta[] = [
     keywords: ['ideal weight calculator', 'healthy weight', 'devine formula'],
     intent: 'commercial', category: 'Health Calculators', h1: 'Ideal Weight Calculator',
     shortIntro: 'Find your ideal body weight based on height and gender.', published: true,
+    longTailKeywords: [
+      'ideal weight calculator by height',
+      'ideal weight by frame size',
+      'devine robinson hamwi formula',
+      'healthy weight range by gender',
+    ],
+    titleLongTail: 'Ideal Weight Calculator by Height & Frame - Free Tool',
+    descriptionLongTail: 'Find your ideal body weight by height, gender, and frame size using Devine, Robinson, and Hamwi formulas. Compare all three at once, instantly. Free, no signup.',
   },
 
   // ══════════ 第三批:数学计算器(3 个)══════════
@@ -800,6 +899,14 @@ export const tools: ToolMeta[] = [
     keywords: ['mortgage calculator', 'home loan calculator', 'monthly mortgage payment'],
     intent: 'commercial', category: 'Finance Calculators', h1: 'Mortgage Calculator',
     shortIntro: 'Calculate monthly mortgage payments and total interest.', published: true,
+    longTailKeywords: [
+      'mortgage calculator with pmi and taxes',
+      'mortgage calculator with down payment',
+      'monthly mortgage payment with taxes and insurance',
+      'mortgage payment calculator with pmi',
+    ],
+    titleLongTail: 'Mortgage Calculator with PMI & Taxes - Free Online',
+    descriptionLongTail: 'Estimate your monthly mortgage payment with PMI, taxes, and insurance. Adjust down payment and rate to compare loan scenarios side by side. Free, no signup.',
   },
   {
     slug: 'markup-calculator', name: 'Markup Calculator',
@@ -816,6 +923,14 @@ export const tools: ToolMeta[] = [
     keywords: ['hourly to salary', 'wage to salary', 'annual salary calculator'],
     intent: 'informational', category: 'Finance Calculators', h1: 'Hourly to Salary Calculator',
     shortIntro: 'Convert your hourly wage to annual salary.', published: true,
+    longTailKeywords: [
+      'hourly to salary calculator with overtime',
+      'hourly wage to annual salary',
+      'convert hourly rate to yearly',
+      'salary by hours per week',
+    ],
+    titleLongTail: 'Hourly to Salary Calculator with Overtime - Free Tool',
+    descriptionLongTail: 'Convert hourly wage to annual salary including overtime. Adjust hours per week and overtime rate to compare job offers and shifts side by side. Free, no signup.',
   },
   {
     slug: 'roi-calculator', name: 'ROI Calculator',
@@ -824,6 +939,14 @@ export const tools: ToolMeta[] = [
     keywords: ['roi calculator', 'return on investment', 'investment return calculator'],
     intent: 'commercial', category: 'Finance Calculators', h1: 'ROI Calculator',
     shortIntro: 'Calculate total and annualized return on investment.', published: true,
+    longTailKeywords: [
+      'roi calculator with annualized return',
+      'roi by time period calculator',
+      'annualized roi cagr calculator',
+      'investment return by years',
+    ],
+    titleLongTail: 'ROI Calculator with Annualized Return - Free Online Tool',
+    descriptionLongTail: 'Calculate ROI and annualized return (CAGR) by time period for any investment. Compare stocks, real estate, and crypto fairly, side by side. Free, no signup.',
   },
   {
     slug: 'credit-card-payoff-calculator', name: 'Credit Card Payoff Calculator',
@@ -832,6 +955,14 @@ export const tools: ToolMeta[] = [
     keywords: ['credit card payoff calculator', 'debt payoff', 'credit card interest'],
     intent: 'commercial', category: 'Finance Calculators', h1: 'Credit Card Payoff Calculator',
     shortIntro: 'See how long to pay off your credit card balance.', published: true,
+    longTailKeywords: [
+      'credit card payoff by monthly payment',
+      'credit card snowball calculator',
+      'how long to pay off credit card',
+      'credit card payoff timeline',
+    ],
+    titleLongTail: 'Credit Card Payoff by Monthly Payment - Free Online',
+    descriptionLongTail: 'Find how long to pay off credit card debt by monthly payment, or use the snowball method across multiple cards. See interest saved instantly. Free, no signup.',
   },
   {
     slug: 'income-tax-estimator', name: 'Income Tax Estimator',
@@ -840,6 +971,14 @@ export const tools: ToolMeta[] = [
     keywords: ['income tax estimator', 'tax calculator', 'take home pay calculator'],
     intent: 'commercial', category: 'Finance Calculators', h1: 'Income Tax Estimator',
     shortIntro: 'Estimate US federal income tax and take-home pay.', published: true,
+    longTailKeywords: [
+      'income tax estimator by bracket',
+      'federal income tax take home pay',
+      'tax bracket calculator 2024',
+      'marginal vs effective tax rate',
+    ],
+    titleLongTail: 'Income Tax Estimator by Bracket - Take-Home Pay Tool',
+    descriptionLongTail: 'Estimate US federal income tax by bracket and find your take-home pay for 2024. See marginal vs effective rate at a glance, instantly. Free, no signup.',
   },
   // 已补完:page.tsx + SalaryConverterClient + Content 均已就绪
   {
@@ -849,6 +988,14 @@ export const tools: ToolMeta[] = [
     keywords: ['salary converter', 'annual to hourly', 'salary breakdown'],
     intent: 'informational', category: 'Finance Calculators', h1: 'Salary Converter',
     shortIntro: 'Convert salary between annual, monthly, bi-weekly, and hourly.', published: true,
+    longTailKeywords: [
+      'salary to hourly calculator with overtime',
+      'annual salary to hourly converter',
+      'salary breakdown by pay period',
+      'convert yearly salary to hourly rate',
+    ],
+    titleLongTail: 'Salary to Hourly Calculator with Overtime - Free Tool',
+    descriptionLongTail: 'Convert annual salary to hourly pay with overtime and bonuses included. See take-home for any hours per week. Accurate, private, and instant. Free, no signup.',
   },
 
   {
@@ -869,6 +1016,14 @@ export const tools: ToolMeta[] = [
     h1: 'GPA Calculator',
     shortIntro: 'Calculate your GPA instantly. Add courses, credits, and letter grades.',
     published: true,
+    longTailKeywords: [
+      'gpa calculator weighted by credits',
+      'college gpa on 4.0 scale',
+      'high school gpa calculator',
+      'cumulative gpa by course credits',
+    ],
+    titleLongTail: 'GPA Calculator - Weighted & 4.0 Scale by Credits - Free',
+    descriptionLongTail: 'Calculate your GPA on a 4.0 scale, weighted by credits. Add courses and letter grades to see cumulative GPA for college or high school. Free, no signup.',
   },
   {
     slug: 'average-calculator',
@@ -907,6 +1062,14 @@ export const tools: ToolMeta[] = [
     h1: 'Date Difference Calculator',
     shortIntro: 'Find exact duration between any two dates — days, weeks, months, business days.',
     published: true,
+    longTailKeywords: [
+      'days between two dates calculator',
+      'business days between dates',
+      'date duration in weeks and months',
+      'working days calculator',
+    ],
+    titleLongTail: 'Date Difference Calculator - Days & Business Days - Free',
+    descriptionLongTail: 'Find days between two dates, plus business days excluding weekends. Perfect for project deadlines, contracts, and lease duration, instantly. Free, no signup.',
   },
   {
     slug: 'weight-converter',
@@ -926,6 +1089,14 @@ export const tools: ToolMeta[] = [
     h1: 'Weight Converter',
     shortIntro: 'Convert between metric and imperial weight units instantly.',
     published: true,
+    longTailKeywords: [
+      'kg to lbs converter for body weight',
+      'pounds to kg converter',
+      'convert kilograms to pounds',
+      'kg lbs oz grams converter',
+    ],
+    titleLongTail: 'Weight Converter - Kg to Lbs & Pounds to Kg - Free Tool',
+    descriptionLongTail: 'Convert kg to lbs for body weight, or pounds to kg for travel and gym. Accurate mass conversion including ounces, grams, and stones, instantly. Free, no signup.',
   },
   {
     slug: 'temperature-converter',
@@ -945,6 +1116,14 @@ export const tools: ToolMeta[] = [
     h1: 'Temperature Converter',
     shortIntro: 'Convert between Celsius, Fahrenheit, and Kelvin instantly.',
     published: true,
+    longTailKeywords: [
+      'celsius to fahrenheit converter',
+      'celsius fahrenheit kelvin converter',
+      'how to convert c to f',
+      'fahrenheit to celsius formula',
+    ],
+    titleLongTail: 'Temperature Converter - Celsius to Fahrenheit in Head',
+    descriptionLongTail: 'Convert Celsius to Fahrenheit in your head with our instant tool. Also handles Fahrenheit to Celsius and Kelvin for science and cooking. Free, no signup.',
   },
   {
     slug: 'speed-converter',
@@ -964,6 +1143,14 @@ export const tools: ToolMeta[] = [
     h1: 'Speed Converter',
     shortIntro: 'Convert between km/h, mph, m/s, knots, and ft/s instantly.',
     published: true,
+    longTailKeywords: [
+      'mph to kmh converter',
+      'kmh to mph converter',
+      'knots to mph converter',
+      'convert speed for driving abroad',
+    ],
+    titleLongTail: 'Speed Converter - mph to km/h & Knots - Free Online Tool',
+    descriptionLongTail: 'Convert mph to km/h for driving, or knots to mph for aviation and boating. Accurate speed conversion including m/s and ft/s, instantly. Free, no signup.',
   },
   {
     slug: 'area-converter',
@@ -983,6 +1170,14 @@ export const tools: ToolMeta[] = [
     h1: 'Area Converter',
     shortIntro: 'Convert between metric and imperial area units, including acres and hectares.',
     published: true,
+    longTailKeywords: [
+      'square feet to acres converter',
+      'square meters to square feet',
+      'acres to hectares converter',
+      'land area converter for real estate',
+    ],
+    titleLongTail: 'Area Converter - Sq Ft to Acres & Sq M to Sq Ft - Free',
+    descriptionLongTail: 'Convert square feet to acres for real estate, or square meters to square feet for construction. Accurate land area conversion instantly. Free, no signup.',
   },
   {
     slug: 'volume-converter',
@@ -1002,6 +1197,14 @@ export const tools: ToolMeta[] = [
     h1: 'Volume Converter',
     shortIntro: 'Convert between metric and US cooking volume units instantly.',
     published: true,
+    longTailKeywords: [
+      'cups to ml converter',
+      'cups to milliliters for cooking',
+      'tablespoons to ml converter',
+      'liters to gallons converter',
+    ],
+    titleLongTail: 'Volume Converter - Cups to ml & Cooking Units - Free Tool',
+    descriptionLongTail: 'Convert cups to milliliters, tablespoons to grams, and gallons to liters for cooking and baking. Accurate US and metric volume conversion. Free, no signup.',
   },
   {
     slug: 'compound-interest-calculator',
@@ -1021,6 +1224,14 @@ export const tools: ToolMeta[] = [
     h1: 'Compound Interest Calculator',
     shortIntro: 'See how your savings grow with the power of compound interest.',
     published: true,
+    longTailKeywords: [
+      'compound interest with monthly contributions',
+      'compound interest calculator with deposits',
+      'compounding frequency calculator',
+      'future value with regular contributions',
+    ],
+    titleLongTail: 'Compound Interest with Monthly Contributions - Free',
+    descriptionLongTail: 'See savings grow with compound interest and monthly contributions. Compare compounding frequencies and time horizons side by side, instantly. Free, no signup.',
   },
   {
     slug: 'sales-tax-calculator',
@@ -1040,6 +1251,14 @@ export const tools: ToolMeta[] = [
     h1: 'Sales Tax Calculator',
     shortIntro: 'Add or remove sales tax from any price instantly.',
     published: true,
+    longTailKeywords: [
+      'sales tax calculator by state',
+      'reverse sales tax calculator',
+      'add or remove sales tax',
+      'pre tax price calculator',
+    ],
+    titleLongTail: 'Sales Tax Calculator by State & Reverse - Free Tool',
+    descriptionLongTail: 'Add or reverse sales tax by state for any price. Works for VAT and GST too. Find the pre-tax amount before a sale instantly and accurately. Free, no signup.',
   },
   {
     slug: 'tip-calculator',
@@ -1059,6 +1278,14 @@ export const tools: ToolMeta[] = [
     h1: 'Tip Calculator',
     shortIntro: 'Calculate tips and split bills fairly among any number of people.',
     published: true,
+    longTailKeywords: [
+      'tip calculator split bill',
+      'tip by percentage calculator',
+      'tip splitter by number of people',
+      'restaurant tip and split calculator',
+    ],
+    titleLongTail: 'Tip Calculator - Split Bill by Percentage - Free Tool',
+    descriptionLongTail: 'Calculate the perfect tip by percentage and split the bill evenly among any number of people. Round up or down with custom tip percent. Free, no signup.',
   },
   {
     slug: 'discount-calculator',
@@ -1078,6 +1305,14 @@ export const tools: ToolMeta[] = [
     h1: 'Discount Calculator',
     shortIntro: 'Find the final price after any discount and see how much you save.',
     published: true,
+    longTailKeywords: [
+      'discount calculator percent off',
+      'stacked discount calculator',
+      'final price after discount',
+      'original price before discount',
+    ],
+    titleLongTail: 'Discount Calculator - Percent Off & Stacked Savings Tool',
+    descriptionLongTail: 'Find the final price after percent off or stacked discounts and coupons. Reverse it to find the original price before a sale, instantly. Free, no signup.',
   },
   {
     slug: 'length-converter',
@@ -1097,6 +1332,14 @@ export const tools: ToolMeta[] = [
     h1: 'Length Converter',
     shortIntro: 'Convert between metric and imperial length units instantly.',
     published: true,
+    longTailKeywords: [
+      'meters to feet converter',
+      'centimeters to inches converter',
+      'cm to inches conversion',
+      'miles to kilometers converter',
+    ],
+    titleLongTail: 'Length Converter - Meters to Feet, cm to Inches - Free',
+    descriptionLongTail: 'Convert meters to feet, centimeters to inches, and miles to kilometers instantly. Accurate length and distance conversion for any use. Free, no signup.',
   },
   {
     slug: 'loan-calculator',
@@ -1116,6 +1359,14 @@ export const tools: ToolMeta[] = [
     h1: 'Loan Calculator',
     shortIntro: 'Calculate monthly payments, total interest, and full cost of any loan.',
     published: true,
+    longTailKeywords: [
+      'loan calculator with amortization schedule',
+      'personal loan monthly payment',
+      'auto loan amortization calculator',
+      'loan payoff by loan type',
+    ],
+    titleLongTail: 'Loan Calculator with Amortization Schedule - Free Tool',
+    descriptionLongTail: 'Calculate monthly payments and a full amortization schedule for any loan - personal, auto, or student. See total interest at a glance. Free, no signup.',
   },
   {
     slug: 'percentage-calculator',
@@ -1135,6 +1386,14 @@ export const tools: ToolMeta[] = [
     h1: 'Percentage Calculator',
     shortIntro: 'Calculate percentages, increases, decreases, and discounts instantly.',
     published: true,
+    longTailKeywords: [
+      'percentage increase and decrease calculator',
+      'what is x percent of y',
+      'percentage of total calculator',
+      'percent change between two numbers',
+    ],
+    titleLongTail: 'Percentage Calculator - Increase, Decrease & Of Total',
+    descriptionLongTail: 'Find percentage increase or decrease, what is X% of Y, and percent of total. Quick, accurate math for discounts, grades, tips, and business. Free, no signup.',
   },
   {
     slug: 'bmi-calculator',
@@ -1154,6 +1413,14 @@ export const tools: ToolMeta[] = [
     h1: 'BMI Calculator',
     shortIntro: 'Calculate your Body Mass Index and see your healthy weight range.',
     published: true,
+    longTailKeywords: [
+      'bmi calculator for women',
+      'bmi calculator by age and gender',
+      'bmi prime and healthy range',
+      'bmi calculator men over 50',
+    ],
+    titleLongTail: 'BMI Calculator for Women & Men by Age - Free Online Tool',
+    descriptionLongTail: 'Calculate BMI by age and gender with a healthy weight range and BMI prime. Works in metric or imperial units, instantly and privately. Free, no signup.',
   },
   {
     slug: 'age-calculator',
@@ -1173,6 +1440,14 @@ export const tools: ToolMeta[] = [
     h1: 'Age Calculator',
     shortIntro: 'Calculate exact age in years, months, days, or time between any two dates.',
     published: true,
+    longTailKeywords: [
+      'age calculator in days',
+      'age between two dates',
+      'exact age in years months days',
+      'how old am i exactly',
+    ],
+    titleLongTail: 'Age Calculator - Exact Age in Days & Between Dates',
+    descriptionLongTail: 'Calculate your exact age in days, months, and years, or find the time between any two dates. Perfect for birthdays, deadlines, and forms. Free, no signup.',
   },
   {
     slug: 'password-generator',

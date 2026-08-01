@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { SITE_URL } from '../next.config'
 import { tools, getPublishedTools } from './tools'
+import { getToolFaqs } from './tool-faqs'
 
 export const SITE_NAME = 'ToolHub'
 export const SITE_TAGLINE = 'Free Online Tools'
@@ -79,23 +80,31 @@ export function buildToolMetadata(slug: string): Metadata {
   if (!tool) return {}
 
   const url = `${SITE_URL}/tools/${tool.slug}/`
+  // 优先使用长尾版标题/描述(把蓝海长尾词放进 <title> 与 meta description);
+  // 未配置则回退到基础 title/description,行为与原实现一致。
+  const title = tool.titleLongTail ?? tool.title
+  const description = tool.descriptionLongTail ?? tool.description
+  // 合并长尾关键词到 keywords(去重,主词在前)。
+  const keywords = tool.longTailKeywords?.length
+    ? Array.from(new Set([...tool.keywords, ...tool.longTailKeywords]))
+    : tool.keywords
 
   return {
-    title: tool.title,
-    description: tool.description,
-    keywords: tool.keywords,
+    title,
+    description,
+    keywords,
     alternates: { canonical: `/tools/${tool.slug}/` },
     openGraph: {
       type: 'website',
       url,
-      title: tool.title,
-      description: tool.description,
+      title,
+      description,
       siteName: SITE_NAME,
     },
     twitter: {
       card: 'summary_large_image',
-      title: tool.title,
-      description: tool.description,
+      title,
+      description,
     },
   }
 }
@@ -118,7 +127,9 @@ export function buildToolJsonLd(slug: string) {
       price: '0',
       priceCurrency: 'USD',
     },
-    featureList: tool.keywords,
+    featureList: tool.longTailKeywords?.length
+      ? Array.from(new Set([...tool.keywords, ...tool.longTailKeywords]))
+      : tool.keywords,
   }
 }
 
@@ -177,20 +188,24 @@ export function buildItemListJsonLd() {
  * 生成工具页的 FAQ 结构化数据(JSON-LD)
  *
  * FAQ schema 能让 Google 在搜索结果里直接展示问答(富媒体结果),
- * 显著提升点击率(CTR)。每个工具基于其元数据(关键词、分类)生成
- * 独特的问答,避免模板化被判为垃圾内容。
+ * 显著提升点击率(CTR)。
  *
- * 返回 FAQPage schema;若无可用问答返回 null。
+ * ⚠️ 数据源:统一从 `lib/tool-faqs.ts` 的 `getToolFaqs(slug)` 读取,
+ * 与页面可见的 FAQ 区块(`components/VisibleFaqs.tsx`)共用同一份数据,
+ * 保证「schema 声明的 Q&A」与「页面可见的 Q&A」完全一致。
+ *
+ * 这样做是为了避免两种 Google 处罚/降权场景:
+ *  1. 页面没有可见 FAQ 却声明 FAQPage schema(虚假结构化数据 → 可能触发手动处罚);
+ *  2. 可见 FAQ 与 schema 的 Q&A 不一致(失配 → 丧失 FAQ 富媒体结果资格)。
+ *
+ * 返回 FAQPage schema;若该工具没有注册 FAQ,返回 null(ToolLayout 有守卫,不会渲染空脚本)。
  */
 export function buildFaqJsonLd(slug: string): {
   '@context': string
   '@type': 'FAQPage'
   mainEntity: Array<{ '@type': 'Question'; name: string; acceptedAnswer: { '@type': 'Answer'; text: string } }>
 } | null {
-  const tool = tools.find((t) => t.slug === slug)
-  if (!tool) return null
-
-  const faqs = generateToolFaqs(tool)
+  const faqs = getToolFaqs(slug)
   if (faqs.length === 0) return null
 
   return {
@@ -205,71 +220,6 @@ export function buildFaqJsonLd(slug: string): {
       },
     })),
   }
-}
-
-/**
- * 根据工具的分类和关键词,生成针对性的 FAQ 问答对。
- *
- * 问答按分类走不同模板,保证内容与工具强相关且自然。
- * 每个工具至少生成 2 条高质量问答。
- */
-function generateToolFaqs(tool: {
-  name: string
-  keywords: string[]
-  category: string
-  description: string
-  shortIntro: string
-}): Array<{ q: string; a: string }> {
-  const mainKeyword = tool.keywords[0]
-  const secondKeyword = tool.keywords[1] || tool.keywords[0]
-  const faqs: Array<{ q: string; a: string }> = []
-  const isCalculator = /calculator|estimator/i.test(tool.name)
-  const isConverter = /converter/i.test(tool.name)
-
-  // Q1: 基础介绍 - 所有人都用得上
-  if (isCalculator) {
-    faqs.push({
-      q: `Is the ${tool.name} free to use?`,
-      a: `Yes, our ${tool.name} is 100% free. There is no signup, no download, and no hidden cost. You can use it as many times as you like, directly in your browser. All calculations run locally on your device, so your data never leaves your computer.`,
-    })
-  } else if (isConverter) {
-    faqs.push({
-      q: `Is the ${tool.name} free?`,
-      a: `Yes, the ${tool.name} is completely free with no limits. No account is required, and conversions are instant. Everything runs in your browser, so your input is never uploaded to any server.`,
-    })
-  } else {
-    faqs.push({
-      q: `Is the ${tool.name} free?`,
-      a: `Yes, the ${tool.name} is 100% free to use. There is no signup, no installation, and no usage limit. The tool runs entirely in your browser, so anything you enter stays private on your device.`,
-    })
-  }
-
-  // Q2: 准确性 / 原理 - 针对计算器和转换器
-  if (isCalculator) {
-    faqs.push({
-      q: `How accurate is the ${tool.name}?`,
-      a: `The ${tool.name} uses the standard formulas for ${mainKeyword} and computes results with full floating-point precision. The results are as accurate as any textbook method. For ${secondKeyword}, you can verify the math manually — we show every step and the underlying formula.`,
-    })
-  } else if (isConverter) {
-    faqs.push({
-      q: `How accurate is the ${tool.name}?`,
-      a: `The ${tool.name} uses exact conversion factors and computes with full precision. For example, when you convert ${mainKeyword}, the result matches the internationally defined ratio with no rounding until the final displayed value.`,
-    })
-  }
-
-  // Q3: 隐私 - 所有工具通用,高搜索意图
-  faqs.push({
-    q: `Is my data safe when I use the ${tool.name}?`,
-    a: `Yes. The ${tool.name} runs entirely in your browser using JavaScript. Nothing you type is uploaded, stored, or sent to any server. This makes it safe to use even for sensitive information like financial figures, health data, or personal text.`,
-  })
-
-  // Q4: 设备兼容性 - 通用
-  faqs.push({
-    q: `Does the ${tool.name} work on mobile?`,
-    a: `Yes. The ${tool.name} is a responsive web tool that works on phones, tablets, and desktops. There is no app to install — just open the page in any modern browser (Chrome, Safari, Firefox, Edge) and use it immediately.`,
-  })
-
-  return faqs
 }
 
 /** 站点级 WebSite 结构化数据(带搜索框,利于品牌曝光) */

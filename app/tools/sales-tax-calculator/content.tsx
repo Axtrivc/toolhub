@@ -57,28 +57,6 @@ export function SalesTaxCalculatorContent(): ReactNode {
         <li><strong>Canada GST:</strong> 5% (plus provincial tax in some provinces)</li>
         <li><strong>Japan Consumption Tax:</strong> 10%</li>
       </ul>
-
-      <h2>Frequently Asked Questions</h2>
-
-      <h3>Are groceries taxed?</h3>
-      <p>
-        In many US states, groceries are exempt or taxed at a lower rate. Essentials like food and
-        medicine often receive special treatment, but rules vary widely by jurisdiction.
-      </p>
-
-      <h3>Is sales tax the same as VAT?</h3>
-      <p>
-        They are both consumption taxes but work differently. Sales tax is added once at the final
-        sale to the consumer. VAT is charged at every stage of production but credited back, so the
-        final consumer effectively pays it. The math for the end buyer is similar.
-      </p>
-
-      <h3>Why do US prices not include tax?</h3>
-      <p>
-        Because the US has thousands of local tax jurisdictions, retailers display pre-tax prices so
-        they can advertise consistent national pricing. The tax is added at checkout based on where
-        you purchase.
-      </p>
     </section>
   )
 }

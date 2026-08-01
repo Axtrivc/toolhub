@@ -76,28 +76,6 @@ export function AgeCalculatorContent(): ReactNode {
         country and context. This calculator handles February 29 births by treating March 1 as the
         age-increment day in non-leap years.
       </p>
-
-      <h2>Frequently Asked Questions</h2>
-
-      <h3>How many days old am I?</h3>
-      <p>
-        Enter your date of birth and leave the &quot;age at date&quot; as today. The calculator
-        shows your total days lived — most adults are somewhere between 7,000 and 30,000 days old.
-      </p>
-
-      <h3>How do I calculate the time between two dates?</h3>
-      <p>
-        Use the &quot;date of birth&quot; field as the start date and the &quot;age at date&quot;
-        field as the end date. The result shows the precise duration between them in years, months,
-        days, weeks, and hours — useful for projects, contracts, or anniversaries.
-      </p>
-
-      <h3>How accurate is the calculation?</h3>
-      <p>
-        Fully accurate. The calculator uses your browser&apos;s built-in date handling, which
-        accounts for leap years, varying month lengths, and daylight saving time. There is no
-        approximation involved.
-      </p>
     </section>
   )
 }

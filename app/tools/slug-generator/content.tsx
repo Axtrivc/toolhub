@@ -97,36 +97,6 @@ export function SlugGeneratorContent(): ReactNode {
           <code>What is a Slug? — Complete Guide</code> → <code>what-is-a-slug-complete-guide</code>
         </li>
       </ul>
-
-      <h2>Frequently Asked Questions</h2>
-
-      <h3>Should I change a slug after publishing?</h3>
-      <p>
-        Generally, no. Changing a slug breaks the old URL and any inbound links pointing to it. If
-        you must change it, set up a 301 redirect from the old URL to the new one so visitors and
-        search engines are forwarded correctly and no ranking equity is lost.
-      </p>
-
-      <h3>Hyphens or underscores in URLs?</h3>
-      <p>
-        Use hyphens. Google has explicitly stated that it treats hyphens as word separators, while
-        underscores are considered part of a word. So <code>seo-friendly-slugs</code> is read as
-        three words, but <code>seo_friendly_slugs</code> is read as a single token. Hyphens are the
-        universal best practice.
-      </p>
-
-      <h3>How long should a URL slug be?</h3>
-      <p>
-        Three to five words is the sweet spot — roughly 30–50 characters. Shorter slugs are easier
-        to read, easier to share, and put more weight on each keyword. If your title is long, edit
-        the slug down to its essence rather than pasting the whole headline.
-      </p>
-
-      <h3>Is this tool free?</h3>
-      <p>
-        Yes, completely. There is no signup, no usage limit, and no premium tier. Your text is
-        processed locally in your browser and never uploaded anywhere.
-      </p>
     </section>
   )
 }

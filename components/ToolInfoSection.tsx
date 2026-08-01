@@ -2,6 +2,28 @@ import type { ReactNode } from 'react'
 import type { ToolMeta } from '@/lib/tools'
 
 /**
+ * 把长尾关键词短语自然织入正文(长尾 SEO 的关键:搜索引擎据页面可见文本匹配长尾查询)。
+ *
+ * 去掉短语里重复的工具主名(如 "mortgage calculator with pmi..." → "with pmi..."),
+ * 再按工具类型套一个动词("calculate"/"convert"/"work out"),
+ * 组成一句不超过 4 项的自然语列表,避免关键词堆砌被判垃圾。
+ */
+function formatUseCases(
+  longTailKeywords: string[],
+  isCalculator: boolean,
+  isConverter: boolean,
+): string {
+  // 用 "find a / look up a" 这类动词,既能跟工具名短语(如 "a mortgage calculator with..."),
+  // 又不会和短语里的 calculator/converter 语义重复。保留完整短语以利长尾精确匹配。
+  const lead = isConverter ? 'look up a' : isCalculator ? 'find a' : 'use a'
+  // 取最多 4 条,避免句子过长
+  const phrases = longTailKeywords.slice(0, 4)
+  // 末项前用 "or" 连接,其余用逗号 → 自然英语列举
+  if (phrases.length === 1) return `${lead} ${phrases[0]}`
+  return `${lead} ${phrases.slice(0, -1).join(', ')}, or ${phrases[phrases.length - 1]}`
+}
+
+/**
  * 工具页「如何使用 & 关于」通用信息区
  *
  * 作用:为所有工具页提供一段实质性、与工具类型相关的内容,
@@ -130,6 +152,15 @@ export function ToolInfoSection({ tool }: { tool: ToolMeta }): ReactNode {
     <section className="prose-content mt-10 max-w-3xl">
       <h2>About the {tool.name}</h2>
       {intro}
+
+      {/* 长尾用例段落:仅当工具配置了 longTailKeywords 时渲染,把蓝海长尾词
+          自然织入正文(搜索引擎据页面可见文本匹配长尾查询,这是长尾 SEO 的关键)。 */}
+      {tool.longTailKeywords && tool.longTailKeywords.length > 0 && (
+        <p>
+          <strong>Common uses:</strong> people reach for this tool when they need to{' '}
+          {formatUseCases(tool.longTailKeywords, isCalculator, isConverter)}.
+        </p>
+      )}
 
       <h2>How to Use This Tool</h2>
       {howTo}

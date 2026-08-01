@@ -5,6 +5,8 @@ import type { ReactNode } from 'react'
 import { AdSlot } from './AdSlot'
 import { RelatedTools } from './RelatedTools'
 import { ToolInfoSection } from './ToolInfoSection'
+import { VisibleFaqs } from './VisibleFaqs'
+import { EmbedTool } from './EmbedTool'
 import { useApp } from './providers/AppProviders'
 import { t } from '@/lib/i18n'
 import { buildFaqJsonLd, buildBreadcrumbJsonLd } from '@/lib/seo'
@@ -86,6 +88,12 @@ export function ToolLayout({ tool, children }: ToolLayoutProps) {
 
       {/* 通用信息区 - 关于工具/如何使用(按工具类型生成,增厚内容) */}
       <ToolInfoSection tool={tool} />
+
+      {/* 可见 FAQ 区块 - 与 FAQPage JSON-LD schema 同源(lib/tool-faqs.ts),无注册 FAQ 时不渲染 */}
+      <VisibleFaqs slug={tool.slug} />
+
+      {/* 嵌入工具区块 - 让博主复制 iframe 代码获取站外反向链接 */}
+      <EmbedTool tool={tool} />
 
       {/* 底部广告位 */}
       <AdSlot slot={`${tool.slug}-bottom`} format="horizontal" fullWidth />

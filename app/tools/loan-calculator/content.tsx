@@ -97,29 +97,6 @@ export function LoanCalculatorContent(): ReactNode {
           costs.
         </li>
       </ol>
-
-      <h2>Frequently Asked Questions</h2>
-
-      <h3>Does this calculator include taxes and insurance?</h3>
-      <p>
-        No. It calculates principal and interest only. For a real mortgage payment, you&apos;ll also
-        pay property taxes, homeowners insurance, and possibly PMI or HOA fees — these can add
-        hundreds of dollars to your monthly payment.
-      </p>
-
-      <h3>What is amortization?</h3>
-      <p>
-        Amortization is the process of paying off a loan in equal installments. Each payment is
-        split between interest (the cost of borrowing) and principal (reducing what you owe). The
-        schedule above shows exactly how this split evolves over time.
-      </p>
-
-      <h3>What&apos;s a good interest rate?</h3>
-      <p>
-        It depends on the loan type and your credit. As of recent years, mortgage rates have ranged
-        from 3% to 7%+, auto loans from 4% to 10%, and personal loans from 6% to 36%. The better
-        your credit score, the lower the rate you&apos;ll qualify for.
-      </p>
     </section>
   )
 }

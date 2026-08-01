@@ -86,29 +86,6 @@ export function BMICalculatorContent(): ReactNode {
           Provides what BMI cannot.
         </li>
       </ul>
-
-      <h2>Frequently Asked Questions</h2>
-
-      <h3>Is BMI accurate for everyone?</h3>
-      <p>
-        No. BMI works reasonably for the average sedentary adult but overestimates body fat in
-        muscular people and underestimates it in older adults who have lost muscle. Use it as a
-        starting point, not the final word.
-      </p>
-
-      <h3>What is a healthy BMI for me?</h3>
-      <p>
-        For most adults aged 20-65, a BMI between 18.5 and 24.9 is considered healthy. People over
-        65 may benefit from a slightly higher BMI (25-27), as some extra weight can be protective in
-        older age. Consult your doctor for personalized guidance.
-      </p>
-
-      <h3>Should I use BMI to set weight loss goals?</h3>
-      <p>
-        BMI is a useful reference point, but better goals focus on body fat percentage, waist
-        measurement, fitness level, and how you feel. A 5-10% weight loss can significantly improve
-        health markers even if your BMI doesn&apos;t cross a category line.
-      </p>
     </section>
   )
 }

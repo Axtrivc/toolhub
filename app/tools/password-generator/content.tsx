@@ -83,31 +83,6 @@ export function PasswordGeneratorContent(): ReactNode {
         passphrase (4-5 random words) rather than a short complex string. Every other password can
         be a random 20+ character string generated here, since you&apos;ll never need to type it.
       </p>
-
-      <h2>Frequently Asked Questions</h2>
-
-      <h3>Is it safe to use passwords generated online?</h3>
-      <p>
-        It depends on the tool. This generator runs entirely in your browser, so the password never
-        touches a server. Avoid generators that send your password over the internet or store it in
-        a database. When in doubt, you can view this page&apos;s source code and confirm everything
-        happens client-side.
-      </p>
-
-      <h3>How often should I change my passwords?</h3>
-      <p>
-        Modern guidance from NIST (the U.S. standards body) says you no longer need to change
-        passwords on a fixed schedule — only when there&apos;s reason to believe they&apos;ve been
-        compromised. What matters far more is using a <strong>strong, unique</strong> password for
-        each account and enabling two-factor authentication.
-      </p>
-
-      <h3>What&apos;s the ideal password length?</h3>
-      <p>
-        For online accounts protected by rate limiting, 12-16 characters is plenty. For offline
-        targets like encrypted drives or password manager master passwords, go longer — 20+
-        characters, since an attacker with the file can brute-force without rate limits.
-      </p>
     </section>
   )
 }
