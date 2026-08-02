@@ -1183,6 +1183,120 @@ export const toolFaqs: Record<string, FaqPair[]> = {
       a: 'No. The image is loaded into an in-browser canvas, cropped and scaled, and exported via canvas.toBlob — all locally. Your file never leaves your device, which also means this works offline once the page is loaded.',
     },
   ],
+
+  // ══════════ 第十一批:8 个 Web & 开发者 & 文本工具 ══════════
+  'px-to-rem': [
+    {
+      q: 'What root font size should I use?',
+      a: 'The browser default is 16px, which is what most CSS resets assume. If your design sets html { font-size: 62.5% } (10px) so 1rem = 10px for easier mental math, change the root size to 10px here to match. The rem value is always px ÷ root-font-size.',
+    },
+    {
+      q: 'What is the difference between rem and em?',
+      a: 'rem is relative to the root (html) font size, so it is consistent everywhere. em is relative to the font size of the nearest parent element, so it compounds in nested elements. Use rem for layout spacing and font sizes that must stay predictable; use em for padding and margins inside components that scale with their own text.',
+    },
+    {
+      q: 'Why does my rem value look wrong in the browser?',
+      a: 'The most common cause is a root font size that differs from 16px — a reset, a media query, or user browser settings can change it. Inspect the html element computed font-size in DevTools and enter that exact value here. rem is always calculated against the actual root, not 16px by definition.',
+    },
+  ],
+  'aspect-ratio-calculator': [
+    {
+      q: 'How is the missing dimension calculated?',
+      a: 'From the ratio W:H. If you know the width, the height = width × (H ÷ W). If you know the height, the width = height × (W ÷ H). For 16:9 with a width of 1920, the height is 1920 × (9 ÷ 16) = 1080.',
+    },
+    {
+      q: 'What is the difference between fitting and filling a box?',
+      a: 'Fit (contain) scales the image so the whole thing is visible inside the box, which may leave empty space. Fill (cover) scales so the box is completely covered, which may crop the image. This tool shows both the fitted dimensions and the scaling factor so you can choose.',
+    },
+    {
+      q: 'Which aspect ratios are most common?',
+      a: '16:9 for YouTube and modern video, 4:3 for older TVs and some cameras, 21:9 for ultrawide monitors, 1:1 for Instagram squares, 9:16 for phone stories (vertical video), and 3:2 for most DSLR photos. Use the presets or enter any custom ratio like 5:4.',
+    },
+  ],
+  'color-contrast-checker': [
+    {
+      q: 'What contrast ratio do I need to pass WCAG?',
+      a: 'For AA, you need at least 4.5:1 for normal text and 3:1 for large text (18pt or 14pt bold). For AAA, the bar rises to 7:1 for normal text and 4.5:1 for large text. Non-text UI components (icons, borders) need 3:1 under AA.',
+    },
+    {
+      q: 'How is the contrast ratio calculated?',
+      a: 'It uses the relative luminance of each color. The formula is (L1 + 0.05) ÷ (L2 + 0.05), where L1 is the lighter and L2 the darker luminance. Pure white on pure black is 21:1, the maximum. The ratio is the same whether text is on background or background on text.',
+    },
+    {
+      q: 'Does the checker handle semi-transparent colors?',
+      a: 'No — it computes the ratio for opaque foreground and background colors, which is what WCAG specifies. If your text has opacity, first blend it against its actual background to get the effective solid color, then test that. Alpha compositing changes the perceived contrast.',
+    },
+  ],
+  'yaml-to-json': [
+    {
+      q: 'Which YAML features are supported?',
+      a: 'The parser handles mappings, sequences (lists), nested structures, inline flow syntax ([a,b] and {k: v}), single and double quoted strings, plain scalars, numbers, booleans, null, block scalars (| and >), and # comments. Multi-document streams (---) are not split; only the first is converted.',
+    },
+    {
+      q: 'Why did my YAML fail to parse?',
+      a: 'YAML is indentation-sensitive — mixing tabs with spaces, or inconsistent indent depth, is the most common cause. Use spaces only and keep indent steps consistent (2 spaces is conventional). Also check for unquoted values that look like special tokens (yes/no/on/off become booleans) — quote them if you want strings.',
+    },
+    {
+      q: 'How are duplicate keys handled?',
+      a: 'Unlike some YAML libraries that silently overwrite duplicates, this parser reports an error on duplicate keys in the same mapping, because that usually signals a mistake and produces data loss. Fix the duplicate in the source YAML and re-convert.',
+    },
+  ],
+  'sql-formatter': [
+    {
+      q: 'Which SQL dialect does this format?',
+      a: 'It applies generic ANSI SQL formatting that works for MySQL, PostgreSQL, SQLite, SQL Server, and Oracle. Major keywords (SELECT, FROM, WHERE, JOIN, GROUP BY, ORDER BY, INSERT, UPDATE, DELETE) are recognized and capitalized. Dialect-specific syntax (PL/pgSQL blocks, T-SQL variables) may not get perfect indentation.',
+    },
+    {
+      q: 'Does it validate or execute my query?',
+      a: 'No. It is a pure formatter — it re-indents and capitalizes keywords but does not check that the query is valid SQL or run it against a database. That means it will happily format a query with a syntax error; it just makes the text easier to read.',
+    },
+    {
+      q: 'Can it minify SQL as well as beautify it?',
+      a: 'Yes. Use the Minify option to collapse the query into a single line with normalized whitespace, which is useful for storing or sending queries compactly. Toggle back to Format to expand it again for editing.',
+    },
+  ],
+  'markdown-to-html': [
+    {
+      q: 'Which Markdown features are supported?',
+      a: 'Headings (H1-H6), bold, italic, inline code, code blocks, blockquotes, ordered and unordered lists, links, images, horizontal rules, and GFM tables. It follows the CommonMark baseline plus the most common GitHub Flavored Markdown extensions for tables and task lists.',
+    },
+    {
+      q: 'Is the output HTML safe to embed directly?',
+      a: 'The generated HTML is escaped for inline code and code blocks, but this tool does not run a full sanitizer. If your Markdown source contains raw HTML or user-submitted content, pass the output through a sanitizer like DOMPurify before inserting it into a live page to prevent XSS.',
+    },
+    {
+      q: 'Why do my line breaks not appear?',
+      a: 'Standard Markdown treats a single newline as a space and requires two spaces at the end of a line, or a blank line, for a break. If you need every newline to render as a <br>, that is the "hard line breaks" extension — common in chat-style Markdown. This tool follows the standard soft-break behavior.',
+    },
+  ],
+  'image-to-base64': [
+    {
+      q: 'What is a data URI and when should I use one?',
+      a: 'A data URI embeds the file contents directly in a URL string (data:image/png;base64,....). Use it to inline small images into HTML, CSS, or JSON so the browser does not make a separate request — handy for icons, avatars, or email assets. Avoid it for large files: Base64 adds ~33% size and blocks rendering.',
+    },
+    {
+      q: 'Which image formats are supported?',
+      a: 'PNG, JPG/JPEG, GIF, WebP, and SVG. The data URI is tagged with the correct MIME type (image/png, image/jpeg, etc.) so browsers and email clients render it correctly. SVG can be embedded either as Base64 or as raw UTF-8 — Base64 is used here for consistency.',
+    },
+    {
+      q: 'Is my image uploaded anywhere?',
+      a: 'No. The file is read with FileReader.readAsDataURL, which produces the Base64 string entirely in your browser. The image never touches a server, which matters for private assets and also means the tool works offline.',
+    },
+  ],
+  'list-diff': [
+    {
+      q: 'What do "only in A", "only in B", and "both" mean?',
+      a: '"Only in A" lists items present in the first list but not the second; "only in B" is the reverse; "both" is the intersection (items in both). The union combines every unique item from either list. Together these four sets fully describe how the two lists differ.',
+    },
+    {
+      q: 'How are duplicates and whitespace handled?',
+      a: 'Each line is trimmed of surrounding whitespace by default, and comparison treats each item as a set member — so duplicates within a single list are collapsed. Toggle "case sensitive" off to compare case-insensitively, which is useful when casing is inconsistent across the two lists.',
+    },
+    {
+      q: 'Can I copy each result set separately?',
+      a: 'Yes. Each of the four result sections has its own Copy button that copies just that set (one item per line), so you can paste "only in A" straight into a spreadsheet or another tool without manual cleanup.',
+    },
+  ],
 }
 export function getToolFaqs(slug: string): FaqPair[] {
   return toolFaqs[slug] ?? []

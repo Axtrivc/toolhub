@@ -2457,6 +2457,184 @@ export const tools: ToolMeta[] = [
     descriptionLongTail:
       'Upload a PNG or JPG and crop it into 16x16, 32x32 favicons and an Apple Touch Icon using canvas — your image never leaves your browser. Free, no signup.',
   },
+
+  // ══════════ 第十一批:8 个高流量 Web & 开发者 & 文本工具(PX→REM / Aspect / Contrast / YAML / SQL / Markdown / ImgBase64 / ListDiff)══════════
+  {
+    slug: 'px-to-rem',
+    name: 'PX to REM / EM Converter',
+    title: 'Free PX to REM / EM Converter - Pixel to Root EM Online',
+    description:
+      'Convert pixels to rem and em units based on your root font size. Live two-way conversion table for common sizes. 100% client-side. Free, no signup.',
+    keywords: ['px to rem', 'pixel to rem', 'px to em converter', 'rem to px', 'css unit converter'],
+    intent: 'informational',
+    category: 'Web Design Tools',
+    h1: 'PX to REM / EM Converter',
+    shortIntro: 'Convert pixels to rem and em with a custom root font size.',
+    published: true,
+    longTailKeywords: [
+      'px to rem converter with root font size',
+      'pixel to em css converter online',
+      'rem to px calculator',
+      'css px to rem conversion table',
+    ],
+    titleLongTail: 'PX to REM & EM Converter with Custom Root Font Size Free',
+    descriptionLongTail:
+      'Convert pixels to rem and em units using your base font size, with a live conversion table for 8-80px. Two-way px/rem/em conversion. Free, no signup.',
+  },
+  {
+    slug: 'aspect-ratio-calculator',
+    name: 'Aspect Ratio Calculator',
+    title: 'Free Aspect Ratio Calculator - Resize Images & Video Without Stretching',
+    description:
+      'Calculate missing dimensions from any aspect ratio (16:9, 4:3, 21:9). Resize images and video while keeping proportions. 100% client-side. Free.',
+    keywords: ['aspect ratio calculator', 'image ratio calculator', '16:9 calculator', 'resize keep ratio', 'video aspect ratio'],
+    intent: 'informational',
+    category: 'Web Design Tools',
+    h1: 'Aspect Ratio Calculator',
+    shortIntro: 'Compute missing width or height to keep any aspect ratio.',
+    published: true,
+    longTailKeywords: [
+      'aspect ratio calculator resize image',
+      '16 9 ratio dimensions calculator',
+      'calculate height from width and ratio',
+      'video aspect ratio resizer',
+    ],
+    titleLongTail: 'Aspect Ratio Calculator - Resize Image & Video Keep Proportion',
+    descriptionLongTail:
+      'Enter an aspect ratio and one dimension to get the other, or fit a ratio into a bounding box. Works for 16:9, 4:3, 21:9 and any custom ratio. Free, no signup.',
+  },
+  {
+    slug: 'color-contrast-checker',
+    name: 'Color Contrast Checker (WCAG)',
+    title: 'Free WCAG Color Contrast Checker - Test Accessibility Online',
+    description:
+      'Check the contrast ratio between two colors and see if it passes WCAG AA and AAA for normal and large text. 100% client-side. Free, no signup.',
+    keywords: ['color contrast checker', 'wcag contrast checker', 'accessibility contrast', 'contrast ratio calculator', 'wcag aa aaa'],
+    intent: 'informational',
+    category: 'Web Design Tools',
+    h1: 'Color Contrast Checker (WCAG)',
+    shortIntro: 'Test color contrast against WCAG AA and AAA accessibility levels.',
+    published: true,
+    longTailKeywords: [
+      'wcag aa aaa contrast ratio checker',
+      'accessibility color contrast calculator',
+      'hex color contrast checker online',
+      'minimum contrast for accessible text',
+    ],
+    titleLongTail: 'WCAG Color Contrast Checker - AA & AAA Accessibility Test Free',
+    descriptionLongTail:
+      'Pick foreground and background colors to see the WCAG contrast ratio and whether it passes AA and AAA for normal and large text. Free, no signup.',
+  },
+  {
+    slug: 'yaml-to-json',
+    name: 'YAML to JSON Converter',
+    title: 'Free YAML to JSON Converter - Convert YAML Online',
+    description:
+      'Paste YAML and convert it to formatted JSON instantly. 100% client-side parsing — no data leaves your browser. Free, no signup, no upload.',
+    keywords: ['yaml to json', 'yaml converter', 'convert yaml to json', 'yaml parser online', 'yaml to json online'],
+    intent: 'informational',
+    category: 'Developer Tools',
+    h1: 'YAML to JSON Converter',
+    shortIntro: 'Paste YAML and get clean, formatted JSON instantly.',
+    published: true,
+    longTailKeywords: [
+      'yaml to json converter online',
+      'convert yaml config to json',
+      'yaml parser to json pretty print',
+      'frontmatter yaml to json',
+    ],
+    titleLongTail: 'YAML to JSON Converter - Paste YAML Get JSON Free Online',
+    descriptionLongTail:
+      'Paste any YAML document and get formatted JSON instantly, with a hand-written parser that handles nesting, lists, quotes, and comments. Free, no signup.',
+  },
+  {
+    slug: 'sql-formatter',
+    name: 'SQL Formatter',
+    title: 'Free SQL Formatter - Beautify & Format SQL Queries Online',
+    description:
+      'Format and beautify SQL queries with proper indentation and keyword capitalization. Supports SELECT, INSERT, UPDATE, DELETE and joins. 100% client-side. Free.',
+    keywords: ['sql formatter', 'sql beautifier', 'format sql online', 'sql pretty print', 'format query'],
+    intent: 'informational',
+    category: 'Developer Tools',
+    h1: 'SQL Formatter',
+    shortIntro: 'Beautify SQL queries with clean indentation and uppercase keywords.',
+    published: true,
+    longTailKeywords: [
+      'sql formatter with indentation online',
+      'beautify select query',
+      'sql keyword capitalizer',
+      'format mysql postgresql query online',
+    ],
+    titleLongTail: 'SQL Formatter & Beautifier - Indent & Capitalize Keywords Free',
+    descriptionLongTail:
+      'Paste a minified or messy SQL query and get clean, readable formatting with proper indentation and uppercase keywords. Works for SELECT, JOIN, INSERT, UPDATE. Free, no signup.',
+  },
+  {
+    slug: 'markdown-to-html',
+    name: 'Markdown to HTML Converter',
+    title: 'Free Markdown to HTML Converter - Render MD Online',
+    description:
+      'Convert Markdown to clean HTML instantly. Supports headings, lists, code blocks, links, bold, italic, and tables. 100% client-side. Free, no signup.',
+    keywords: ['markdown to html', 'md to html', 'markdown converter', 'convert markdown online', 'render markdown'],
+    intent: 'informational',
+    category: 'Developer Tools',
+    h1: 'Markdown to HTML Converter',
+    shortIntro: 'Turn Markdown into clean HTML with live preview.',
+    published: true,
+    longTailKeywords: [
+      'markdown to html converter online',
+      'render markdown to html with preview',
+      'convert md table to html',
+      'markdown to clean html free',
+    ],
+    titleLongTail: 'Markdown to HTML Converter with Live Preview Free Online',
+    descriptionLongTail:
+      'Type or paste Markdown and get clean HTML instantly with a live rendered preview. Supports headings, lists, code, links, bold, italic, and tables. Free, no signup.',
+  },
+  {
+    slug: 'image-to-base64',
+    name: 'Image to Base64 Converter',
+    title: 'Free Image to Base64 Converter - PNG, JPG to Data URI Online',
+    description:
+      'Convert an image (PNG, JPG, GIF, WebP) to a Base64 data URI for inline embedding in HTML, CSS, or JSON. 100% client-side, no upload. Free, no signup.',
+    keywords: ['image to base64', 'base64 image converter', 'png to base64', 'data uri generator', 'image to data uri'],
+    intent: 'informational',
+    category: 'Developer Tools',
+    h1: 'Image to Base64 Converter',
+    shortIntro: 'Turn an image into a Base64 data URI for inline embedding.',
+    published: true,
+    longTailKeywords: [
+      'image to base64 data uri converter',
+      'png to base64 online no upload',
+      'convert jpg to base64 string',
+      'base64 image for css background',
+    ],
+    titleLongTail: 'Image to Base64 Data URI Converter - PNG, JPG Free Online',
+    descriptionLongTail:
+      'Upload a PNG, JPG, GIF, or WebP and get a Base64 data URI to embed inline in HTML, CSS, or JSON. Your image is read locally and never uploaded. Free, no signup.',
+  },
+  {
+    slug: 'list-diff',
+    name: 'List Diff & Intersection Checker',
+    title: 'Free List Diff & Intersection Checker - Compare Two Lists Online',
+    description:
+      'Compare two lists line by line to find items only in A, only in B, in both, or the combined union. 100% client-side. Free, no signup.',
+    keywords: ['list diff', 'compare two lists', 'list intersection', 'list comparison tool', 'find common items'],
+    intent: 'informational',
+    category: 'Text Tools',
+    h1: 'List Diff & Intersection Checker',
+    shortIntro: 'Compare two lists to find unique and common items instantly.',
+    published: true,
+    longTailKeywords: [
+      'compare two lists online find differences',
+      'list intersection and union calculator',
+      'find items in one list not other',
+      'deduplicate and diff two text lists',
+    ],
+    titleLongTail: 'List Diff & Intersection Checker - Compare Two Lists Free',
+    descriptionLongTail:
+      'Paste two lists and instantly see items only in list A, only in list B, in both (intersection), and the combined union. Handles duplicates and trimming. Free, no signup.',
+  },
 ]
 
 /** 根据 slug 获取单个工具 */
@@ -2622,6 +2800,15 @@ const STAR_ICONS: Record<string, string> = {
   'css-shadow-generator': '🌑',
   'regex-tester': '🔍',
   'favicon-generator': '⭐',
+  // 第十一批:PX→REM / Aspect / Contrast / YAML / SQL / Markdown / ImgBase64 / ListDiff
+  'px-to-rem': '📏',
+  'aspect-ratio-calculator': '🎞️',
+  'color-contrast-checker': '👁️',
+  'yaml-to-json': '📄',
+  'sql-formatter': '🗄️',
+  'markdown-to-html': '📝',
+  'image-to-base64': '🖼️',
+  'list-diff': '🔀',
 }
 
 /** 默认兜底图标(理论上用不到,所有 category 都已映射) */
