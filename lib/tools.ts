@@ -59,6 +59,11 @@ export interface ToolMeta {
    * 仅对明星工具或与分类默认图标不符的工具单独覆盖,避免给 120+ 工具逐个配置。
    */
   icon?: string
+  /**
+   * 是否置顶推荐(可选)。true 时该工具会出现在首页 "🔥 Popular Tools" 置顶区。
+   * 仅标记高流量 / 高价值工具(当前 8 个),首页无搜索词且选中 All 分类时展示。
+   */
+  featured?: boolean
 }
 
 export const tools: ToolMeta[] = [
@@ -729,7 +734,7 @@ export const tools: ToolMeta[] = [
     description: 'Format, beautify, and validate JSON instantly. 2-space indentation. Free and private. No signup.',
     keywords: ['json formatter', 'json beautifier', 'json validator', 'pretty print json'],
     intent: 'informational', category: 'Developer Tools', h1: 'JSON Formatter',
-    shortIntro: 'Format and validate JSON with proper indentation.', published: true,
+    shortIntro: 'Format and validate JSON with proper indentation.', published: true, featured: true,
     longTailKeywords: [
       'json formatter and validator',
       'pretty print json online',
@@ -2035,7 +2040,7 @@ export const tools: ToolMeta[] = [
     category: 'Finance Calculators',
     h1: 'Loan Calculator',
     shortIntro: 'Calculate monthly payments, total interest, and full cost of any loan.',
-    published: true,
+    published: true, featured: true,
     longTailKeywords: [
       'loan calculator with amortization schedule',
       'personal loan monthly payment',
@@ -2062,7 +2067,7 @@ export const tools: ToolMeta[] = [
     category: 'Math Calculators',
     h1: 'Percentage Calculator',
     shortIntro: 'Calculate percentages, increases, decreases, and discounts instantly.',
-    published: true,
+    published: true, featured: true,
     longTailKeywords: [
       'percentage increase and decrease calculator',
       'what is x percent of y',
@@ -2197,7 +2202,7 @@ export const tools: ToolMeta[] = [
     category: 'Business Tools',
     h1: 'QR Code Generator',
     shortIntro: 'Create custom QR codes for URLs, text, and WiFi. Free, no watermark.',
-    published: true,
+    published: true, featured: true,
     longTailKeywords: [
       'qr code generator for url',
       'free qr code maker online',
@@ -2241,7 +2246,7 @@ export const tools: ToolMeta[] = [
     category: 'Developer Tools',
     h1: 'JWT Decoder',
     shortIntro: 'Decode JWT tokens and inspect header, payload, and signature locally.',
-    published: true,
+    published: true, featured: true,
     longTailKeywords: [
       'jwt decoder base64 url',
       'decode jwt payload online',
@@ -2263,7 +2268,7 @@ export const tools: ToolMeta[] = [
     category: 'Time Calculators',
     h1: 'Cron Expression Parser',
     shortIntro: 'Turn a cron expression into plain English and see the next 5 fire times.',
-    published: true,
+    published: true, featured: true,
     longTailKeywords: [
       'cron expression to english',
       'next cron run time calculator',
@@ -2285,7 +2290,7 @@ export const tools: ToolMeta[] = [
     category: 'Web Design Tools',
     h1: 'SVG to PNG / WebP Converter',
     shortIntro: 'Convert SVG to PNG or WebP in-browser with custom scale and download.',
-    published: true,
+    published: true, featured: true,
     longTailKeywords: [
       'svg to png high resolution',
       'svg to webp converter',
@@ -2307,7 +2312,7 @@ export const tools: ToolMeta[] = [
     category: 'Health Calculators',
     h1: 'TDEE Calculator',
     shortIntro: 'Find your daily calorie needs (TDEE) for cutting, maintaining, or bulking.',
-    published: true,
+    published: true, featured: true,
     longTailKeywords: [
       'tdee calculator by activity level',
       'maintenance calories calculator',
@@ -2496,6 +2501,15 @@ export function getTool(slug: string): ToolMeta | undefined {
 /** 获取所有已上线的工具(用于首页、sitemap) */
 export function getPublishedTools(): ToolMeta[] {
   return tools.filter((t) => t.published)
+}
+
+/**
+ * 获取置顶热门工具(用于首页 "🔥 Popular Tools" 模块)。
+ * 顺序与 tools.ts 中声明顺序一致(配置时即可控制展示顺序)。
+ * 未标记 featured 的工具自然不出现。
+ */
+export function getFeaturedTools(): ToolMeta[] {
+  return tools.filter((t) => t.published && t.featured)
 }
 
 /** 获取所有工具(含未上线,用于 sitemap 全量收录 - 改为 published 的话只收录已上线) */

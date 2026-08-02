@@ -29,6 +29,9 @@ export interface Dict {
   noResults: string
   noResultsHint: string
   clearSearch: string
+  // 首页置顶热门工具区
+  featuredTitle: string // "Popular Tools"
+  featuredBadge: string // 卡片右上角微型 Badge,如 "POPULAR"
   // 工具卡片标记
   badgePro: string
   badgeFree: string
@@ -87,6 +90,8 @@ const en: Dict = {
   noResults: 'No tools match "{query}".',
   noResultsHint: 'Clear search',
   clearSearch: 'Clear search',
+  featuredTitle: 'Popular Tools',
+  featuredBadge: 'POPULAR',
   badgePro: 'Pro',
   badgeFree: 'Free',
   footerAbout: 'About',
@@ -138,6 +143,8 @@ const zh: Dict = {
   noResults: '没有匹配 "{query}" 的工具。',
   noResultsHint: '清除搜索',
   clearSearch: '清除搜索',
+  featuredTitle: '热门工具',
+  featuredBadge: '热门',
   badgePro: '专业',
   badgeFree: '免费',
   footerAbout: '关于',

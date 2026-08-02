@@ -6,6 +6,7 @@ import type { ToolMeta } from '@/lib/tools'
 import { getToolIcon } from '@/lib/tools'
 import { useApp } from './providers/AppProviders'
 import { t } from '@/lib/i18n'
+import { FeaturedTools } from './FeaturedTools'
 
 interface HomePageClientProps {
   tools: ToolMeta[]
@@ -71,6 +72,11 @@ export function HomePageClient({ tools }: HomePageClientProps) {
     })
     return map
   }, [filtered])
+
+  // 置顶热门工具:取 tools 中标记 featured 的(顺序与 tools.ts 声明一致)。
+  // 仅在无搜索词 + All 分类时展示,避免与搜索/筛选结果抢焦点。
+  const featuredTools = useMemo(() => tools.filter((tl) => tl.featured), [tools])
+  const showFeatured = !query.trim() && activeCategory === null
 
   // 判断"全部"按钮是否激活
   const allActive = activeCategory === null
@@ -153,6 +159,10 @@ export function HomePageClient({ tools }: HomePageClientProps) {
           )
         })}
       </div>
+
+      {/* 置顶热门工具模块:仅无搜索词 + All 分类时展示。
+          搜索/切换分类时自动隐藏,优先展示筛选结果。 */}
+      {showFeatured && <FeaturedTools tools={featuredTools} />}
 
       {/* 结果数 */}
       <p className="text-center text-sm" style={{ color: 'rgb(var(--text-subtle))' }}>
