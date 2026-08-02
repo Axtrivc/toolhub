@@ -180,6 +180,21 @@ export function MacroCalculatorContent(): ReactNode {
           <li><strong>Maintain:</strong> Balanced (30/40/30)</li>
           <li><strong>Build muscle:</strong> Higher carbs (35/45/20) for training fuel</li>
         </ul> },
+        { heading: 'The Formula', body: (
+          <>
+            <p>Each macro&apos;s grams come from its calorie share divided by its calories-per-gram:</p>
+            <p style={{ fontFamily: 'monospace', background: 'rgb(var(--bg-subtle))', padding: '0.75rem 1rem', borderRadius: '0.5rem', fontSize: '0.95rem' }}>
+              Grams = (Daily&nbsp;Calories &times; Macro&nbsp;%) &divide; Cal&nbsp;per&nbsp;gram
+            </p>
+            <p>For a 2,000-calorie maintain target (30% protein / 40% carbs / 30% fat):</p>
+            <ul>
+              <li><strong>Protein:</strong> 2000 &times; 0.30 &divide; 4 = 150 g</li>
+              <li><strong>Carbs:</strong> 2000 &times; 0.40 &divide; 4 = 200 g</li>
+              <li><strong>Fat:</strong> 2000 &times; 0.30 &divide; 9 = 67 g</li>
+            </ul>
+            <p>The pie chart above shows the same split by calories &mdash; fat looks smaller because each gram packs more than twice the calories of protein or carbs.</p>
+          </>
+        ) },
         { heading: 'Protein Is the Most Important Macro', body: <p>For most people, hitting your protein target matters more than the exact carb/fat split. Adequate protein preserves muscle during weight loss, supports muscle gain, and increases satiety. Aim for 1.6-2.2g per kg of body weight.</p> },
       ]}
       faqs={[{ q: 'Do I have to track macros?', a: 'No. Many people lose weight or build muscle eating intuitively. But tracking macros for a few weeks teaches you portion sizes and reveals hidden calories — a valuable learning exercise even if you stop later.' }]}

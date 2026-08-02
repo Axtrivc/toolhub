@@ -151,6 +151,14 @@ export const CompoundInterestCalculatorClient = makeCalculatorClient({
     }
   },
   note: '📈 Compound interest is "interest on interest" — the longer your time horizon, the more dramatic the growth. Starting early matters more than starting big.',
+  chart: {
+    title: 'Your Contributions vs. Compound Growth',
+    centerLabel: 'Future Value',
+    slices: [
+      { valueKey: 'totalContributed', label: 'Money you put in', color: '#3b82f6' },
+      { valueKey: 'interestEarned', label: 'Interest earned (free money)', color: '#22c55e' },
+    ],
+  },
 })
 
 // ───────────────────────────────────────────
