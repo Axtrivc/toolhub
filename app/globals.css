@@ -130,3 +130,13 @@
     background-color: rgb(var(--bg-subtle));
   }
 }
+
+/* ────────────────────────────────────────────────────────────
+ * Embed 模式:页面被 iframe 嵌入时(见 EmbedDetectScript),隐藏
+ * Header / Footer / 广告 / 面包屑 / 相关工具 / 嵌入邀请 / 信息区等
+ * "chrome",只保留工具本体。让外站嵌入干净,鼓励反向链接。
+ * 用 [data-embed-hide] 属性统一标记需要隐藏的元素。
+ * ──────────────────────────────────────────────────────────── */
+html.embed [data-embed-hide] {
+  display: none !important;
+}

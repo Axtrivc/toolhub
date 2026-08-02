@@ -44,8 +44,8 @@ export function ToolLayout({ tool, children }: ToolLayoutProps) {
         />
       )}
 
-      {/* 面包屑 */}
-      <nav aria-label="Breadcrumb" className="mb-6 text-sm" style={{ color: 'rgb(var(--text-subtle))' }}>
+      {/* 面包屑(嵌入时隐藏) */}
+      <nav data-embed-hide aria-label="Breadcrumb" className="mb-6 text-sm" style={{ color: 'rgb(var(--text-subtle))' }}>
         <ol className="flex items-center gap-2">
           <li>
             <Link href="/" className="hover:text-brand-600">
@@ -73,10 +73,12 @@ export function ToolLayout({ tool, children }: ToolLayoutProps) {
         </p>
       </header>
 
-      {/* 顶部广告位 */}
-      <AdSlot slot={`${tool.slug}-top`} format="horizontal" fullWidth />
+      {/* 顶部广告位(嵌入时隐藏) */}
+      <div data-embed-hide>
+        <AdSlot slot={`${tool.slug}-top`} format="horizontal" fullWidth />
+      </div>
 
-      {/* 工具主体 */}
+      {/* 工具主体 —— 嵌入时唯一可见的核心区块 */}
       <div
         className="rounded-xl border p-6 shadow-sm sm:p-8"
         style={{
@@ -87,23 +89,28 @@ export function ToolLayout({ tool, children }: ToolLayoutProps) {
         {children}
       </div>
 
-      {/* YMYL 免责声明 - 金融/健康类工具渲染,降低 Google YMYL 算法降权风险 */}
+      {/* YMYL 免责声明 - 金融/健康类工具渲染,降低 Google YMYL 算法降权风险。
+          嵌入时保留(YMYL 合规不能因嵌入而丢失)。 */}
       <Disclaimer tool={tool} />
 
-      {/* 通用信息区 - 关于工具/如何使用(按工具类型生成,增厚内容) */}
-      <ToolInfoSection tool={tool} />
+      {/* 以下为 SEO 文案/广告/相关工具/嵌入邀请等 "chrome",
+          被 iframe 嵌入时整体隐藏,只留工具本体 + 免责声明。 */}
+      <div data-embed-hide>
+        {/* 通用信息区 - 关于工具/如何使用(按工具类型生成,增厚内容) */}
+        <ToolInfoSection tool={tool} />
 
-      {/* 可见 FAQ 区块 - 与 FAQPage JSON-LD schema 同源(lib/tool-faqs.ts),无注册 FAQ 时不渲染 */}
-      <VisibleFaqs slug={tool.slug} />
+        {/* 可见 FAQ 区块 - 与 FAQPage JSON-LD schema 同源(lib/tool-faqs.ts),无注册 FAQ 时不渲染 */}
+        <VisibleFaqs slug={tool.slug} />
 
-      {/* 嵌入工具区块 - 让博主复制 iframe 代码获取站外反向链接 */}
-      <EmbedTool tool={tool} />
+        {/* 嵌入工具区块 - 让博主复制 iframe 代码获取站外反向链接 */}
+        <EmbedTool tool={tool} />
 
-      {/* 底部广告位 */}
-      <AdSlot slot={`${tool.slug}-bottom`} format="horizontal" fullWidth />
+        {/* 底部广告位 */}
+        <AdSlot slot={`${tool.slug}-bottom`} format="horizontal" fullWidth />
 
-      {/* 相关工具内链 - SEO 内链网络 + 降低跳出率 */}
-      <RelatedTools slug={tool.slug} />
+        {/* 相关工具内链 - SEO 内链网络 + 降低跳出率 */}
+        <RelatedTools slug={tool.slug} />
+      </div>
     </div>
   )
 }

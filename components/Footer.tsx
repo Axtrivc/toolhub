@@ -20,7 +20,7 @@ export function Footer() {
   const categories = Object.entries(grouped).sort((a, b) => b[1].length - a[1].length)
 
   return (
-    <footer className="mt-16 border-t" style={{ borderColor: 'rgb(var(--border))', backgroundColor: 'rgb(var(--bg-card))' }}>
+    <footer data-embed-hide className="mt-16 border-t" style={{ borderColor: 'rgb(var(--border))', backgroundColor: 'rgb(var(--bg-card))' }}>
       <div className="container-page py-10">
         {/* 分类导航 - 大网格 */}
         <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 lg:grid-cols-4">

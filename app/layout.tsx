@@ -4,6 +4,7 @@ import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
 import { AppProviders } from '@/components/providers/AppProviders'
 import { ThemeInitScript } from '@/components/ThemeInitScript'
+import { EmbedDetectScript } from '@/components/EmbedDetectScript'
 import { AdSenseScript } from '@/components/AdSlot'
 import { CookieConsent } from '@/components/CookieConsent'
 import { siteMetadata, websiteJsonLd } from '@/lib/seo'
@@ -27,6 +28,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <head>
         {/* 主题防闪烁:在 React hydrate 前就应用主题,避免 FOUC */}
         <ThemeInitScript />
+        {/* Embed 检测:被 iframe 嵌入时给 <html> 加 embed class,隐藏 chrome(零闪烁) */}
+        <EmbedDetectScript />
         {/* AdSense 加载脚本(环境驱动:无 NEXT_PUBLIC_ADSENSE_CLIENT 时不渲染) */}
         <AdSenseScript />
         {/* AdSense 站点验证 meta(新版验证方式,env 驱动) */}
