@@ -895,6 +895,25 @@ export function IncomeTaxEstimatorContent(): ReactNode {
           ),
         },
         {
+          heading: 'The Formula',
+          body: (
+            <>
+              <p>Tax is calculated by summing each bracket&apos;s contribution:</p>
+              <p style={{ fontFamily: 'monospace', background: 'rgb(var(--bg-subtle))', padding: '0.75rem 1rem', borderRadius: '0.5rem', fontSize: '0.95rem' }}>
+                Tax = &Sigma; (income in bracket &times; bracket rate)
+              </p>
+              <p style={{ fontFamily: 'monospace', background: 'rgb(var(--bg-subtle))', padding: '0.75rem 1rem', borderRadius: '0.5rem', fontSize: '0.95rem' }}>
+                Effective&nbsp;Rate = Total&nbsp;Tax &divide; Total&nbsp;Income
+              </p>
+              <p>
+                Only the portion of income falling inside each bracket is multiplied by that
+                bracket&apos;s rate, then the pieces are added together. The pie chart above shows the
+                result: the red slice is your total federal tax, the green slice is your take-home.
+              </p>
+            </>
+          ),
+        },
+        {
           heading: 'What\'s Included and Excluded',
           body: (
             <ul>

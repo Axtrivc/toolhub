@@ -62,6 +62,14 @@ export const CreditCardMinimumCalculatorClient = makeCalculatorClient({
     }
   },
   note: '💳 Minimum payments barely cover interest — paying only the minimum means decades to pay off. Pay more whenever possible.',
+  chart: {
+    title: 'Where Your Minimum Payment Goes',
+    centerLabel: 'Payment',
+    slices: [
+      { valueKey: 'interest', label: 'Interest', color: '#ef4444' },
+      { valueKey: 'principal', label: 'Principal', color: '#22c55e' },
+    ],
+  },
 })
 
 export const CashBackCalculatorClient = makeCalculatorClient({

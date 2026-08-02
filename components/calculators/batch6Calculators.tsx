@@ -60,9 +60,20 @@ export const NetWorthCalculatorClient = makeCalculatorClient({
     return {
       networth: fmtUSD(nw),
       ratio: isFinite(ratio) ? `${fmtNum(ratio, 2)} : 1` : 'No debt',
+      // 供 chart 用:资产 vs 负债的规模对比
+      assetsOut: fmtUSD(a, 0),
+      liabilitiesOut: fmtUSD(l, 0),
     }
   },
   note: '💎 Net worth = what you own minus what you owe. The median US net worth is ~$192,000; $1M+ puts you in the top 10%.',
+  chart: {
+    title: 'Assets vs Liabilities',
+    centerLabel: 'Total',
+    slices: [
+      { valueKey: 'assetsOut', label: 'Assets (what you own)', color: '#22c55e' },
+      { valueKey: 'liabilitiesOut', label: 'Liabilities (what you owe)', color: '#ef4444' },
+    ],
+  },
 })
 
 export const AnnuityCalculatorClient = makeCalculatorClient({
@@ -235,9 +246,22 @@ export const MacroCalculatorClient = makeCalculatorClient({
       carbs: `${fmtNum(carbs, 0)} g (${fmtNum(cPct * 100, 0)}%)`,
       fat: `${fmtNum(fat, 0)} g (${fmtNum(fPct * 100, 0)}%)`,
       total: fmtNum(cal, 0),
+      // 隐藏的卡路里分量(不放 outputs,只供 chart 按卡路里画饼图,物理意义正确)
+      proteinCal: fmtNum(cal * pPct, 0),
+      carbsCal: fmtNum(cal * cPct, 0),
+      fatCal: fmtNum(cal * fPct, 0),
     }
   },
   note: '🍽️ Splits daily calories into protein/carbs/fat. Aim for 1.6-2.2g protein per kg body weight for muscle gain.',
+  chart: {
+    title: 'Calorie Breakdown by Macro',
+    centerLabel: 'Calories',
+    slices: [
+      { valueKey: 'proteinCal', label: 'Protein', color: '#3b82f6' },
+      { valueKey: 'carbsCal', label: 'Carbs', color: '#22c55e' },
+      { valueKey: 'fatCal', label: 'Fat', color: '#f59e0b' },
+    ],
+  },
 })
 
 export const PregnancyDueDateCalculatorClient = makeCalculatorClient({

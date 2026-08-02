@@ -268,9 +268,18 @@ export const MarkupCalculatorClient = makeCalculatorClient({
       profit: fmtUSD(profit),
       price: fmtUSD(price),
       margin: `${fmtNum(margin, 1)}%`,
+      cost: fmtUSD(cost),
     }
   },
   note: '💰 Markup is on COST (cost × markup%). Margin is on PRICE (profit/price). They are NOT the same.',
+  chart: {
+    title: 'Selling Price: Cost vs Profit',
+    centerLabel: 'Price',
+    slices: [
+      { valueKey: 'cost', label: 'Cost', color: '#64748b' },
+      { valueKey: 'profit', label: 'Profit', color: '#22c55e' },
+    ],
+  },
 })
 
 export const MortgageCalculatorClient = makeCalculatorClient({
@@ -302,9 +311,18 @@ export const MortgageCalculatorClient = makeCalculatorClient({
       monthly: fmtUSD(monthly),
       loan: fmtUSD(loan),
       total: fmtUSD(total, 0),
+      principal: fmtUSD(loan, 0),
     }
   },
   note: '🏠 Principal & Interest only. Add property tax, insurance, and HOA for your full payment.',
+  chart: {
+    title: 'Total Paid: Principal vs Interest',
+    centerLabel: 'Total',
+    slices: [
+      { valueKey: 'principal', label: 'Principal (loan amount)', color: '#22c55e' },
+      { valueKey: 'total', label: 'Interest (cost of borrowing)', color: '#ef4444' },
+    ],
+  },
 })
 
 export const HourlyToSalaryCalculatorClient = makeCalculatorClient({
@@ -383,6 +401,7 @@ export const CreditCardPayoffCalculatorClient = makeCalculatorClient({
         months: '⚠️ Payment too low (must cover interest)',
         total: '—',
         interest: '—',
+        principal: '—',
       }
     }
     let months = 0
@@ -399,9 +418,18 @@ export const CreditCardPayoffCalculatorClient = makeCalculatorClient({
       months: `${months} months (${Math.ceil(months / 12)} yrs)`,
       total: fmtUSD(totalPaid, 0),
       interest: fmtUSD(totalPaid - toNum(v.balance), 0),
+      principal: fmtUSD(toNum(v.balance), 0),
     }
   },
   note: '💳 Minimum payments can take decades. Paying more than the minimum saves dramatically on interest.',
+  chart: {
+    title: 'Total Paid: Principal vs Interest',
+    centerLabel: 'Total',
+    slices: [
+      { valueKey: 'principal', label: 'Principal (what you borrowed)', color: '#22c55e' },
+      { valueKey: 'interest', label: 'Interest (cost of borrowing)', color: '#ef4444' },
+    ],
+  },
 })
 
 export const IncomeTaxEstimatorClient = makeCalculatorClient({
@@ -442,6 +470,14 @@ export const IncomeTaxEstimatorClient = makeCalculatorClient({
     }
   },
   note: '📊 Simplified US 2024 federal brackets. Excludes state tax, deductions, and credits. Estimate only.',
+  chart: {
+    title: 'Where Your Income Goes',
+    centerLabel: 'Income',
+    slices: [
+      { valueKey: 'tax', label: 'Federal tax', color: '#ef4444' },
+      { valueKey: 'takehome', label: 'Take-home pay', color: '#22c55e' },
+    ],
+  },
 })
 
 // 工具函数:最大公约数(欧几里得算法)

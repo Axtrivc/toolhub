@@ -69,26 +69,49 @@ export function CreditCardMinimumPaymentCalculatorContent(): ReactNode {
           ),
         },
         {
-          heading: 'The Interest-vs-Principal Split',
+          heading: 'The Formula',
           body: (
             <>
-              <p>This is the part that surprises people. On a <strong>$5,000 balance at 22% APR</strong>:</p>
+              <p>This calculator uses the most common model &mdash; a percentage of the balance with a floor:</p>
+              <p style={{ fontFamily: 'monospace', background: 'rgb(var(--bg-subtle))', padding: '0.75rem 1rem', borderRadius: '0.5rem', fontSize: '0.95rem' }}>
+                Minimum&nbsp;Payment = max(Floor, Balance &times; Min%)
+              </p>
+              <p style={{ fontFamily: 'monospace', background: 'rgb(var(--bg-subtle))', padding: '0.75rem 1rem', borderRadius: '0.5rem', fontSize: '0.95rem' }}>
+                Monthly&nbsp;Interest = Balance &times; (APR &divide; 12)
+              </p>
+              <p style={{ fontFamily: 'monospace', background: 'rgb(var(--bg-subtle))', padding: '0.75rem 1rem', borderRadius: '0.5rem', fontSize: '0.95rem' }}>
+                Goes&nbsp;to&nbsp;Principal = Minimum&nbsp;Payment &minus; Monthly&nbsp;Interest
+              </p>
+              <p>
+                where <strong>Floor</strong> is typically $25&ndash;$35, <strong>Min%</strong> is usually
+                1%&ndash;3%, and <strong>APR &divide; 12</strong> converts the annual rate to a monthly rate.
+                This is the formula the calculator above applies to your numbers in real time.
+              </p>
+            </>
+          ),
+        },
+        {
+          heading: 'Example: $5,000 Balance at 19.99% APR',
+          body: (
+            <>
+              <p>This is the part that surprises people. Here is a worked example using this calculator&apos;s default values &mdash; a <strong>$5,000 balance at 19.99% APR</strong> with a 2% minimum payment:</p>
               <ul>
                 <li>
-                  <strong>Monthly interest:</strong> ~$92 (22% &divide; 12 &times; $5,000)
+                  <strong>Monthly interest:</strong> $83.29 (= $5,000 &times; 0.1999 &divide; 12)
                 </li>
                 <li>
-                  <strong>Typical minimum payment (~2%):</strong> ~$100
+                  <strong>Minimum payment (2%, floored at $25):</strong> $100.00 (= $5,000 &times; 2%)
                 </li>
                 <li>
-                  <strong>Goes to principal:</strong> only ~$8
+                  <strong>Goes to principal:</strong> only $16.71 (= $100.00 &minus; $83.29)
                 </li>
               </ul>
               <p>
-                In other words, 92% of your payment vanishes as interest, and just 8% reduces what
-                you owe. At that rate it takes <strong>decades</strong> to pay off &mdash; and
+                In other words, about <strong>83% of your payment vanishes as interest</strong>, and just
+                17% reduces what you owe. At that rate it takes <strong>decades</strong> to pay off &mdash; and
                 that&apos;s assuming you never charge another dollar. If your payment is at or below
-                the monthly interest, the balance never drops at all.
+                the monthly interest, the balance never drops at all. You can verify every number above
+                by entering $5,000 / 19.99 / 2 into the calculator.
               </p>
             </>
           ),
@@ -141,7 +164,7 @@ export function CreditCardMinimumPaymentCalculatorContent(): ReactNode {
               </p>
               <ul>
                 <li>
-                  <strong>$5,000 @ 22%, minimum (~$100):</strong> ~27+ years, ~$8,000 interest
+                  <strong>$5,000 @ 19.99%, minimum (~$100):</strong> ~44 years, ~$20,150 interest
                 </li>
                 <li>
                   <strong>Same balance, $200/month:</strong> ~2.8 years, ~$1,650 interest

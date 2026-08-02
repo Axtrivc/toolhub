@@ -31,3 +31,7 @@ next-env.d.ts
 /.workbuddy/
 project-overview.html
 *.local
+
+# 测试/备份产物(Playwright 截图、CSV 导出、本地备份)
+/.playwright-mcp/
+/.backups/
