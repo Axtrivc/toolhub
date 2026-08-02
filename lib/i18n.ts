@@ -31,7 +31,8 @@ export interface Dict {
   clearSearch: string
   // 首页置顶热门工具区
   featuredTitle: string // "Popular Tools"
-  featuredBadge: string // 卡片右上角微型 Badge,如 "POPULAR"
+  featuredBadgePopular: string // 卡片 Badge,热门工具,如 "POPULAR"
+  featuredBadgeNew: string // 卡片 Badge,新工具,如 "NEW"
   // 工具卡片标记
   badgePro: string
   badgeFree: string
@@ -91,7 +92,8 @@ const en: Dict = {
   noResultsHint: 'Clear search',
   clearSearch: 'Clear search',
   featuredTitle: 'Popular Tools',
-  featuredBadge: 'POPULAR',
+  featuredBadgePopular: 'POPULAR',
+  featuredBadgeNew: 'NEW',
   badgePro: 'Pro',
   badgeFree: 'Free',
   footerAbout: 'About',
@@ -144,7 +146,8 @@ const zh: Dict = {
   noResultsHint: '清除搜索',
   clearSearch: '清除搜索',
   featuredTitle: '热门工具',
-  featuredBadge: '热门',
+  featuredBadgePopular: '热门',
+  featuredBadgeNew: '新',
   badgePro: '专业',
   badgeFree: '免费',
   footerAbout: '关于',

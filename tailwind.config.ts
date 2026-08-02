@@ -18,10 +18,19 @@ const config: Config = {
     'text-brand-600',
     // 置顶工具卡片高亮态(FeaturedTools 模块)
     'border-blue-100',
+    'border-blue-200',
     'dark:border-blue-900/40',
-    'from-blue-50/30',
-    'bg-orange-500',
-    'bg-blue-500',
+    'dark:border-blue-800',
+    'from-blue-50/40',
+    // POPULAR Badge(柔和淡橙)
+    'bg-amber-50',
+    'text-amber-600',
+    'dark:bg-amber-950/50',
+    'dark:text-amber-400',
+    // NEW Badge(淡蓝)
+    'bg-blue-50',
+    'dark:bg-blue-950/50',
+    'dark:text-blue-400',
   ],
   theme: {
     extend: {

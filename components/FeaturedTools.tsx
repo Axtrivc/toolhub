@@ -11,11 +11,22 @@ interface FeaturedToolsProps {
 }
 
 /**
+ * 第九批新增工具(slug)——在置顶区标记为 NEW 而非 POPULAR。
+ * 随时间推移可从此集合移除(届时它们自然回退为 POPULAR)。
+ */
+const NEW_TOOL_SLUGS = new Set<string>([
+  'jwt-decoder',
+  'cron-parser',
+  'svg-to-image',
+  'tdee-calculator',
+])
+
+/**
  * 首页置顶热门工具模块("🔥 Popular Tools")。
  *
  * - 渲染 4 列响应式网格(移动 1 → 平板 2 → 桌面 4)。
  * - 卡片结构与 HomePageClient 的通用 ToolCard 一致,但加微弱蓝色高亮边框 +
- *   渐变背景,右上角附 POPULAR 微型 Badge,做视觉区分。
+ *   渐变背景;右上角附微型 Pill Badge(POPULAR / NEW),低饱和度,不喧宾夺主。
  * - 可见性由父组件 HomePageClient 控制(无搜索词 + All 分类时才展示)。
  */
 export function FeaturedTools({ tools }: FeaturedToolsProps) {
@@ -33,19 +44,26 @@ export function FeaturedTools({ tools }: FeaturedToolsProps) {
 
       {/* 4 列响应式网格 */}
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        {tools.map((tool) => (
-          <Link
-            key={tool.slug}
-            href={`/tools/${tool.slug}/`}
-            className="group relative rounded-xl border border-blue-100 bg-gradient-to-b from-blue-50/30 to-transparent p-6 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md dark:border-blue-900/40"
-          >
-            {/* 右上角 POPULAR 微型 Badge(橙色,极小) */}
-            <span className="absolute right-3 top-3 rounded-full bg-orange-500 px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wide text-white shadow-sm">
-              {t(locale, 'featuredBadge')}
-            </span>
+        {tools.map((tool) => {
+          const isNew = NEW_TOOL_SLUGS.has(tool.slug)
+          return (
+            <Link
+              key={tool.slug}
+              href={`/tools/${tool.slug}/`}
+              className="group relative flex flex-col rounded-xl border border-blue-100 bg-gradient-to-b from-blue-50/40 to-transparent p-5 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:border-blue-200 hover:shadow-md dark:border-blue-900/40 dark:hover:border-blue-800"
+            >
+              {/* 右上角微型 Pill Badge:NEW(淡蓝)/ POPULAR(柔和淡橙),低饱和度 */}
+              <span
+                className={`absolute right-3 top-3 rounded-full px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide ${
+                  isNew
+                    ? 'bg-blue-50 text-blue-600 dark:bg-blue-950/50 dark:text-blue-400'
+                    : 'bg-amber-50 text-amber-600 dark:bg-amber-950/50 dark:text-amber-400'
+                }`}
+              >
+                {isNew ? t(locale, 'featuredBadgeNew') : t(locale, 'featuredBadgePopular')}
+              </span>
 
-            <div className="flex items-start justify-between">
-              {/* 工具图标:复用 getToolIcon,与通用卡片口径一致 */}
+              {/* 图标容器:rounded-xl,精致圆角 */}
               <span
                 className="flex h-11 w-11 items-center justify-center rounded-xl text-2xl transition-transform group-hover:scale-110"
                 style={{ backgroundColor: 'rgb(var(--bg-subtle))' }}
@@ -53,15 +71,19 @@ export function FeaturedTools({ tools }: FeaturedToolsProps) {
               >
                 {getToolIcon(tool)}
               </span>
-            </div>
-            <h3 className="mt-4 text-lg font-semibold group-hover:text-brand-600" style={{ color: 'rgb(var(--text))' }}>
-              {tool.name}
-            </h3>
-            <p className="mt-2 text-sm" style={{ color: 'rgb(var(--text-subtle))' }}>
-              {tool.shortIntro}
-            </p>
-          </Link>
-        ))}
+
+              {/* 标题 + 描述:flex-col + flex-1 保证所有卡片高度一致 */}
+              <div className="mt-4 flex-1">
+                <h3 className="text-base font-semibold text-gray-900 transition-colors group-hover:text-brand-600 dark:text-white">
+                  {tool.name}
+                </h3>
+                <p className="mt-1.5 line-clamp-2 text-xs text-gray-500 dark:text-gray-400">
+                  {tool.shortIntro}
+                </p>
+              </div>
+            </Link>
+          )
+        })}
       </div>
     </section>
   )

@@ -113,13 +113,13 @@ export function HomePageClient({ tools }: HomePageClientProps) {
       </div>
 
       {/* 分类筛选 chips(第一项是本地化的"全部",用 allActive 控制激活态)。
-          限宽 max-w-5xl + 居中:与拉宽后的 Hero(max-w-5xl)/搜索框(max-w-3xl)同向,
-          让 chips 在 1536px 版心内自然展成 1~2 行,不再发散成稀疏多行。 */}
-      <div className="mx-auto flex max-w-5xl flex-wrap justify-center gap-2.5">
+          限宽 max-w-5xl + 居中 + gap-2 + px-3.5 收拢间距,让换行更紧凑整齐,
+          减少单字落单悬空;whitespace-nowrap 防止 Chip 内文案自身折行。 */}
+      <div className="mx-auto flex max-w-5xl flex-wrap justify-center gap-2">
         <button
           type="button"
           onClick={() => setActiveCategory(null)}
-          className={`rounded-full px-4 py-1.5 text-sm font-medium transition ${
+          className={`whitespace-nowrap rounded-full px-3.5 py-1.5 text-sm font-medium transition ${
             allActive ? 'text-white' : 'border hover:bg-brand-50'
           }`}
           style={
@@ -141,7 +141,7 @@ export function HomePageClient({ tools }: HomePageClientProps) {
               key={cat}
               type="button"
               onClick={() => setActiveCategory(cat)}
-              className={`rounded-full px-4 py-1.5 text-sm font-medium transition ${
+              className={`whitespace-nowrap rounded-full px-3.5 py-1.5 text-sm font-medium transition ${
                 active ? 'text-white' : 'border hover:bg-brand-50'
               }`}
               style={

@@ -21,9 +21,9 @@ export default function HomePage() {
   return (
     <div className="mx-auto w-full max-w-screen-2xl px-4 py-12 sm:px-6 lg:px-8">
       {/* Hero */}
-      <section className="mx-auto mb-10 max-w-5xl text-center">
+      <section className="mx-auto mb-12 max-w-5xl text-center">
         <h1
-          className="text-5xl font-extrabold sm:text-6xl lg:text-7xl"
+          className="text-5xl font-extrabold tracking-tight sm:text-6xl lg:text-7xl"
           style={{ color: 'rgb(var(--text))' }}
         >
           {t(locale, 'heroBadge', { count: String(tools.length) })}{' '}
@@ -31,7 +31,7 @@ export default function HomePage() {
           <span className="block text-brand-600">{t(locale, 'heroTitle2')}</span>
         </h1>
         <p
-          className="mx-auto mt-5 max-w-3xl text-lg sm:text-xl"
+          className="mx-auto mt-6 max-w-2xl text-base leading-relaxed sm:text-lg"
           style={{ color: 'rgb(var(--text-muted))' }}
         >
           {t(locale, 'heroSubtitle')}
