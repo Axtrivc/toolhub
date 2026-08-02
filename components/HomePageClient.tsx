@@ -78,7 +78,7 @@ export function HomePageClient({ tools }: HomePageClientProps) {
   return (
     <div className="space-y-8">
       {/* 搜索框 */}
-      <div className="mx-auto max-w-2xl">
+      <div className="mx-auto max-w-3xl">
         <div className="relative">
           <input
             type="search"
@@ -107,9 +107,9 @@ export function HomePageClient({ tools }: HomePageClientProps) {
       </div>
 
       {/* 分类筛选 chips(第一项是本地化的"全部",用 allActive 控制激活态)。
-          限宽 max-w-3xl + 居中:与上方搜索框(max-w-2xl)/Hero(max-w-3xl)同向收敛,
-          避免 chips 在 1280px 版心内横铺到边缘、最后一行只剩 2~3 个倒金字塔发飘。 */}
-      <div className="mx-auto flex max-w-3xl flex-wrap justify-center gap-2">
+          限宽 max-w-5xl + 居中:与拉宽后的 Hero(max-w-5xl)/搜索框(max-w-3xl)同向,
+          让 chips 在 1536px 版心内自然展成 1~2 行,不再发散成稀疏多行。 */}
+      <div className="mx-auto flex max-w-5xl flex-wrap justify-center gap-2.5">
         <button
           type="button"
           onClick={() => setActiveCategory(null)}
@@ -181,7 +181,7 @@ export function HomePageClient({ tools }: HomePageClientProps) {
           <h2 className="mb-5 text-2xl font-bold" style={{ color: 'rgb(var(--text))' }}>
             {category}
           </h2>
-          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
             {categoryTools.map((tool) => (
               <Link
                 key={tool.slug}

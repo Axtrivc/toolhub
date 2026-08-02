@@ -19,15 +19,21 @@ export default function HomePage() {
   const categories = Object.entries(byCategory).sort((a, b) => b[1] - a[1])
 
   return (
-    <div className="container-page py-12">
+    <div className="mx-auto w-full max-w-screen-2xl px-4 py-12 sm:px-6 lg:px-8">
       {/* Hero */}
-      <section className="mx-auto mb-10 max-w-3xl text-center">
-        <h1 className="text-4xl font-bold sm:text-5xl" style={{ color: 'rgb(var(--text))' }}>
+      <section className="mx-auto mb-10 max-w-5xl text-center">
+        <h1
+          className="text-5xl font-extrabold sm:text-6xl lg:text-7xl"
+          style={{ color: 'rgb(var(--text))' }}
+        >
           {t(locale, 'heroBadge', { count: String(tools.length) })}{' '}
           {t(locale, 'heroTitle1')}
           <span className="block text-brand-600">{t(locale, 'heroTitle2')}</span>
         </h1>
-        <p className="mt-5 text-lg" style={{ color: 'rgb(var(--text-muted))' }}>
+        <p
+          className="mx-auto mt-5 max-w-3xl text-lg sm:text-xl"
+          style={{ color: 'rgb(var(--text-muted))' }}
+        >
           {t(locale, 'heroSubtitle')}
         </p>
       </section>
@@ -39,7 +45,7 @@ export default function HomePage() {
       <AdSlot slot="homepage-mid" format="horizontal" fullWidth />
 
       {/* SEO 文案区(增加首页内容厚度,利于排名和 AdSense 审核) */}
-      <section className="prose-content mt-16 max-w-3xl">
+      <section className="prose-content mx-auto mt-16 max-w-4xl">
         <h2>Why Use Our Online Tools?</h2>
         <p>
           Most online tools ask you to sign up, accept cookies, or upload your files to a server you
