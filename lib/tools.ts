@@ -54,6 +54,11 @@ export interface ToolMeta {
    * 建议 150-160 字符,含主长尾词 + 行动号召。
    */
   descriptionLongTail?: string
+  /**
+   * 卡片/详情页用的 emoji 图标(可选)。留空则按 category 自动回退(见 CATEGORY_ICONS)。
+   * 仅对明星工具或与分类默认图标不符的工具单独覆盖,避免给 120+ 工具逐个配置。
+   */
+  icon?: string
 }
 
 export const tools: ToolMeta[] = [
@@ -2226,6 +2231,169 @@ export const tools: ToolMeta[] = [
 ]
 
 /** 根据 slug 获取单个工具 */
+/**
+ * 分类 → emoji 图标的默认映射。
+ * 11 个分类全覆盖;语义特殊的明星工具在 STAR_ICONS 按 slug 单独覆盖(见 getToolIcon)。
+ * 选图原则:贴合分类语义 + 高识别度 + 在浅/深色卡片上都清晰。
+ */
+const CATEGORY_ICONS: Record<string, string> = {
+  'Finance Calculators': '💳',
+  'Text Tools': '🔤',
+  'Developer Tools': '⚙️',
+  'Unit Converters': '📐',
+  'Math Calculators': '🧮',
+  'Health Calculators': '❤️',
+  'Time Calculators': '⏰',
+  'Education Calculators': '🎓',
+  'Security Tools': '🔒',
+  'Web Design Tools': '🎨',
+  'Business Tools': '💼',
+}
+
+/**
+ * 工具图标精准映射(slug → emoji)。
+ * 覆盖全部 120 个已上线工具,每条都按工具语义单独定制。
+ * 命名跟 tool.slug 完全一致;CATEGORY_ICONS 仅作未列出工具的安全兜底。
+ */
+const STAR_ICONS: Record<string, string> = {
+  // ── 金融 Finance ──
+  'apy-calculator': '📈',
+  'credit-card-minimum-payment-calculator': '💳',
+  'cash-back-calculator': '💵',
+  'down-payment-calculator': '🏠',
+  'dti-calculator': '⚖️',
+  'commission-calculator': '💼',
+  'savings-goal-calculator': '🎯',
+  'net-worth-calculator': '💰',
+  'annuity-calculator': '📜',
+  'capital-gains-tax-estimator': '📊',
+  'rent-vs-buy-calculator': '🏢',
+  'inflation-calculator': '🎈',
+  'retirement-calculator': '🌴',
+  'simple-interest-calculator': '🧮',
+  'compound-interest-calculator': '🔄',
+  'unit-price-calculator': '🏷️',
+  'mortgage-calculator': '🏡',
+  'markup-calculator': '📈',
+  'hourly-to-salary-calculator': '⏰',
+  'roi-calculator': '🚀',
+  'credit-card-payoff-calculator': '💳',
+  'income-tax-estimator': '🧾',
+  'salary-converter': '💸',
+  'sales-tax-calculator': '🛍️',
+  'tip-calculator': '🪙',
+  'discount-calculator': '🏷️',
+  'loan-calculator': '🏦',
+  'percentage-calculator': '％',
+  // ── 健康 Health & Fitness ──
+  'body-fat-calculator': '🧍',
+  'macro-calculator': '🥗',
+  'pregnancy-due-date-calculator': '👶',
+  'calorie-calculator': '🍎',
+  'bmr-calculator': '🔥',
+  'water-intake-calculator': '💧',
+  'ideal-weight-calculator': '⚖️',
+  'bmi-calculator': '🏋️',
+  'age-difference-calculator': '👥',
+  'age-calculator': '🎂',
+  'date-difference-calculator': '📅',
+  // ── 数学 Math & Stats ──
+  'grade-calculator': '📝',
+  'final-grade-calculator': '🎓',
+  'bill-split-calculator': '🧾',
+  'trapezoid-calculator': '📐',
+  'cube-calculator': '🧊',
+  'sphere-calculator': '⚽',
+  'circle-calculator': '⚪',
+  'triangle-calculator': '🔺',
+  'rectangle-calculator': '▭',
+  'standard-deviation-calculator': '📉',
+  'percentile-calculator': '📊',
+  'prime-number-checker': '🔢',
+  'prime-factorization-calculator': '🧩',
+  'combination-calculator': '🔀',
+  'permutation-calculator': '🔁',
+  'random-number-generator': '🎲',
+  'fraction-calculator': '🧮',
+  'ratio-calculator': '⚖️',
+  'lcm-gcd-calculator': '🔢',
+  'gpa-calculator': '🎓',
+  'average-calculator': '📊',
+  // ── 开发者 Developer Tools ──
+  'hash-generator': '🔒',
+  'slug-to-title': '🔤',
+  'binary-to-text': '0️⃣1️⃣',
+  'text-to-binary': '1️⃣0️⃣',
+  'scientific-notation-converter': '🔬',
+  'url-query-parser': '🔗',
+  'html-tag-stripper': '✂️',
+  'character-frequency': '🔤',
+  'email-extractor': '✉️',
+  'url-extractor': '🌐',
+  'text-diff': '📑',
+  'text-size-estimator': '💾',
+  'json-formatter': '⚙️',
+  'json-minifier': '📦',
+  'csv-to-json': '🔄',
+  'json-to-csv': '🔄',
+  'add-line-numbers': '🔢',
+  'text-to-list': '📋',
+  'color-converter': '🎨',
+  'uuid-generator': '🔑',
+  'lorem-ipsum-generator': '📄',
+  'password-strength-checker': '🛡️',
+  'base64-encoder': '🔐',
+  'base64-decoder': '🔓',
+  'html-escape': '🛡️',
+  'html-unescape': '🔓',
+  'url-encoder': '🌐',
+  'url-decoder': '🔗',
+  'uppercase-converter': '🔠',
+  'lowercase-converter': '🔡',
+  'title-case-converter': '🔤',
+  'sentence-case-converter': '📝',
+  'reverse-text': '🔄',
+  'remove-duplicate-lines': '🧹',
+  'sort-lines': '🔤',
+  'remove-line-breaks': '↔️',
+  'find-and-replace': '🔍',
+  'whitespace-remover': '🧹',
+  'password-generator': '🔑',
+  'word-counter': '🔢',
+  'qr-code-generator': '📱',
+  'slug-generator': '🏷️',
+  // ── 单位 Unit Converters ──
+  'mass-converter': '⚖️',
+  'density-converter': '🧪',
+  'power-converter': '⚡',
+  'flow-rate-converter': '🚰',
+  'data-storage-converter': '💾',
+  'time-converter': '⏱️',
+  'numeral-system-converter': '🔢',
+  'angle-converter': '📐',
+  'fuel-economy-converter': '⛽',
+  'pressure-converter': '⏲️',
+  'energy-converter': '🔋',
+  'frequency-converter': '📻',
+  'weight-converter': '⚖️',
+  'temperature-converter': '🌡️',
+  'speed-converter': '🚀',
+  'area-converter': '📐',
+  'volume-converter': '🧊',
+  'length-converter': '📏',
+}
+
+/** 默认兜底图标(理论上用不到,所有 category 都已映射) */
+const DEFAULT_ICON = '🛠️'
+
+/**
+ * 取工具图标:优先 STAR_ICONS(精准),其次 ToolMeta.icon,最后按 category 回退。
+ * 让首页/详情页用同一个函数,保证图标口径一致。
+ */
+export function getToolIcon(tool: Pick<ToolMeta, 'slug' | 'category' | 'icon'>): string {
+  return STAR_ICONS[tool.slug] ?? tool.icon ?? CATEGORY_ICONS[tool.category] ?? DEFAULT_ICON
+}
+
 export function getTool(slug: string): ToolMeta | undefined {
   return tools.find((t) => t.slug === slug)
 }

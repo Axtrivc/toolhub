@@ -3,6 +3,7 @@
 import { useState, useMemo } from 'react'
 import Link from 'next/link'
 import type { ToolMeta } from '@/lib/tools'
+import { getToolIcon } from '@/lib/tools'
 import { useApp } from './providers/AppProviders'
 import { t } from '@/lib/i18n'
 
@@ -176,14 +177,17 @@ export function HomePageClient({ tools }: HomePageClientProps) {
                 }}
               >
                 <div className="flex items-start justify-between">
-                  <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-brand-50 text-brand-600 transition-colors group-hover:bg-brand-600 group-hover:text-white">
-                    <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
-                      <circle cx="12" cy="12" r="9" strokeLinecap="round" />
-                    </svg>
+                  {/* 工具图标:按 category 默认映射 + 明星工具单独定制(见 lib/tools.ts getToolIcon) */}
+                  <span
+                    className="flex h-11 w-11 items-center justify-center rounded-xl text-2xl transition-transform group-hover:scale-110"
+                    style={{ backgroundColor: 'rgb(var(--bg-subtle))' }}
+                    aria-hidden="true"
+                  >
+                    {getToolIcon(tool)}
                   </span>
+                  {/* 右上角显示分类(替代原 PRO/FREE 徽章 —— 工具全免费,PRO 字样会误导用户) */}
                   <span className="text-xs font-medium uppercase tracking-wide" style={{ color: 'rgb(var(--text-faint))' }}>
-                    {tool.intent === 'commercial' ? t(locale, 'badgePro') : t(locale, 'badgeFree')}
+                    {tool.category}
                   </span>
                 </div>
                 <h3 className="mt-4 text-lg font-semibold group-hover:text-brand-600" style={{ color: 'rgb(var(--text))' }}>

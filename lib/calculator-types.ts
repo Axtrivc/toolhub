@@ -49,4 +49,25 @@ export interface CalculatorConfig {
   compute: (values: Record<string, string>) => Record<string, string>
   /** 顶部说明文字(可选) */
   note?: string
+  /**
+   * 结果可视化(可选)。声明后,结果区下方渲染一个比例分解环形图,
+   * 把若干个输出字段按值画成饼图(如"利息 vs 本金")。
+   * 未声明的计算器不受影响。
+   */
+  chart?: ChartConfig
+}
+
+/**
+ * 比例分解图配置 - 把计算器输出的若干字段画成环形图。
+ * valueKey 指向 compute 返回的某个 key;但 compute 返回的是格式化字符串
+ * (如 "$83.29"),chart 需要原始数值,因此另提供一个 parseValue 把字符串转回数字。
+ * 默认实现会剥离 $ , % 和千分位逗号。
+ */
+export interface ChartConfig {
+  /** 图表标题(如 "Where Your Payment Goes") */
+  title?: string
+  /** 中央大字(如总还款额,通常等于某个输出值) */
+  centerLabel?: string
+  /** 构成分量的输出字段。valueKey 对应 compute 返回的 key */
+  slices: { valueKey: string; label: string; color: string }[]
 }
