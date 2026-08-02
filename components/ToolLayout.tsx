@@ -66,7 +66,12 @@ export function ToolLayout({ tool, children }: ToolLayoutProps) {
           </li>
           <li aria-hidden="true">/</li>
           <li>
-            <Link href={`/tools/#${encodeURIComponent(tool.category)}`} className="hover:text-brand-600">
+            {/* 分类跳回首页:带 ?category= 选中筛选 + #锚点滚动定位。
+                统一回首页,避免落到已废弃的 /tools/ 旧枢纽页。 */}
+            <Link
+              href={`/?category=${encodeURIComponent(tool.category)}#${encodeURIComponent(tool.category)}`}
+              className="hover:text-brand-600"
+            >
               {tool.category}
             </Link>
           </li>

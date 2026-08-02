@@ -80,7 +80,12 @@ export default function HomePage() {
         <ul>
           {categories.map(([cat, count]) => (
             <li key={cat}>
-              <Link href={`/tools/#${encodeURIComponent(cat)}`}>{cat}</Link> ({count} tools)
+              {/* 分类内链回首页并选中筛选(锚点定位到对应区块),
+                  不再指向已废弃的 /tools/ 旧枢纽页。 */}
+              <Link href={`/?category=${encodeURIComponent(cat)}#${encodeURIComponent(cat)}`}>
+                {cat}
+              </Link>{' '}
+              ({count} tools)
             </li>
           ))}
         </ul>

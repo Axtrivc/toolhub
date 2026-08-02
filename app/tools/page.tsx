@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { getToolsByCategory, getPublishedTools } from '@/lib/tools'
+import { getToolsByCategory, getPublishedTools, getToolIcon } from '@/lib/tools'
 import { SITE_NAME } from '@/lib/seo'
 import { buildItemListJsonLd } from '@/lib/seo'
 
@@ -41,12 +41,13 @@ export default function ToolsHubPage() {
         </p>
       </section>
 
-      {/* 分类目录快速跳转 */}
+      {/* 分类目录快速跳转 —— 统一回首页并选中分类(与首页交互一致),
+          不再使用页内 # 锚点,避免用户留在这个只读列表页。 */}
       <nav className="mx-auto mb-10 flex max-w-4xl flex-wrap justify-center gap-2" aria-label="Tool categories">
         {categories.map(([category, categoryTools]) => (
-          <a
+          <Link
             key={category}
-            href={`#${encodeURIComponent(category)}`}
+            href={`/?category=${encodeURIComponent(category)}#${encodeURIComponent(category)}`}
             className="rounded-full border px-4 py-1.5 text-sm font-medium transition hover:bg-brand-50"
             style={{
               borderColor: 'rgb(var(--border))',
@@ -55,7 +56,7 @@ export default function ToolsHubPage() {
             }}
           >
             {category} ({categoryTools.length})
-          </a>
+          </Link>
         ))}
       </nav>
 
@@ -80,14 +81,19 @@ export default function ToolsHubPage() {
                 }}
               >
                 <div className="flex items-start justify-between">
-                  <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-brand-50 text-brand-600 transition-colors group-hover:bg-brand-600 group-hover:text-white">
-                    <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
-                      <circle cx="12" cy="12" r="9" strokeLinecap="round" />
-                    </svg>
+                  {/* 工具图标:全站统一的 getToolIcon(slug 优先 / category 兜底),
+                      不再使用默认播放按钮 ▶ 图标。 */}
+                  <span
+                    className="flex h-11 w-11 items-center justify-center rounded-xl text-2xl transition-transform group-hover:scale-110"
+                    style={{ backgroundColor: 'rgb(var(--bg-subtle))' }}
+                    aria-hidden="true"
+                  >
+                    {getToolIcon(tool)}
                   </span>
+                  {/* 右上角显示分类(替代原 PRO/FREE 徽章 —— 工具全免费,
+                      PRO 字样会误导用户)。 */}
                   <span className="text-xs font-medium uppercase tracking-wide" style={{ color: 'rgb(var(--text-faint))' }}>
-                    {tool.intent === 'commercial' ? 'Pro' : 'Free'}
+                    {tool.category}
                   </span>
                 </div>
                 <h3 className="mt-4 text-lg font-semibold group-hover:text-brand-600" style={{ color: 'rgb(var(--text))' }}>
