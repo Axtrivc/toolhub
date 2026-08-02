@@ -57,6 +57,17 @@ export interface CalculatorConfig {
   /** 顶部说明文字(可选) */
   note?: string
   /**
+   * 工具 slug(可选)。用于「Load Sample」时,自动从 lib/tool-samples.ts
+   * 取示例;同时作为导出文件名的一部分。未填时回退为静态文件名。
+   */
+  slug?: string
+  /**
+   * 内嵌示例数据(可选)。key 对应 inputs[].key。
+   * 设置后渲染「Load Sample」按钮,点击一键填充这些值。
+   * 若同时配置了 slug 且 lib/tool-samples.ts 有该工具示例,优先用注册表数据。
+   */
+  sample?: Record<string, string>
+  /**
    * 结果可视化(可选)。声明后,结果区下方渲染一个比例分解环形图,
    * 把若干个输出字段按值画成饼图(如"利息 vs 本金")。
    * 未声明的计算器不受影响。

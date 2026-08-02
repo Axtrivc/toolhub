@@ -12,7 +12,7 @@ import { Disclaimer } from './Disclaimer'
 import { FavoriteButton } from './FavoriteButton'
 import { useApp } from './providers/AppProviders'
 import { t } from '@/lib/i18n'
-import { buildFaqJsonLd, buildBreadcrumbJsonLd } from '@/lib/seo'
+import { buildFaqJsonLd, buildBreadcrumbJsonLd, buildHowToJsonLd } from '@/lib/seo'
 import type { ToolMeta } from '@/lib/tools'
 
 interface ToolLayoutProps {
@@ -35,9 +35,18 @@ export function ToolLayout({ tool, children }: ToolLayoutProps) {
   const { locale } = useApp()
   const faqJsonLd = buildFaqJsonLd(tool.slug)
   const breadcrumbJsonLd = buildBreadcrumbJsonLd(tool.slug)
+  const howToJsonLd = buildHowToJsonLd(tool.slug)
 
   return (
     <div className="container-page py-8">
+      {/* HowTo 结构化数据 - 让 Google 展示「How to」步骤化富媒体卡片(标准化 3 步) */}
+      {howToJsonLd && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(howToJsonLd) }}
+        />
+      )}
+
       {/* FAQ 结构化数据 - 让 Google 在搜索结果展示富媒体问答 */}
       {faqJsonLd && (
         <script

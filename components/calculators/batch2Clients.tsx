@@ -12,6 +12,7 @@ import { DateDifferenceClient } from './DateDifferenceClient'
 // ════════════════════════════════════════════
 
 export const WeightConverterClient = makeUnitConverter({
+  slug: 'weight-converter',
   defaultValue: '1',
   defaultFrom: 'kg',
   defaultTo: 'lb',
@@ -29,6 +30,7 @@ export const WeightConverterClient = makeUnitConverter({
 })
 
 export const SpeedConverterClient = makeUnitConverter({
+  slug: 'speed-converter',
   defaultValue: '100',
   defaultFrom: 'kmh',
   defaultTo: 'mph',
@@ -44,6 +46,7 @@ export const SpeedConverterClient = makeUnitConverter({
 })
 
 export const AreaConverterClient = makeUnitConverter({
+  slug: 'area-converter',
   defaultValue: '1',
   defaultFrom: 'sqm',
   defaultTo: 'sqft',
@@ -63,6 +66,7 @@ export const AreaConverterClient = makeUnitConverter({
 })
 
 export const VolumeConverterClient = makeUnitConverter({
+  slug: 'volume-converter',
   defaultValue: '1',
   defaultFrom: 'l',
   defaultTo: 'gal',

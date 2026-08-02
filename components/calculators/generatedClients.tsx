@@ -13,6 +13,7 @@ import { fmtUSD, fmtNum, toNum } from '@/lib/format'
 // Tip Calculator(小费计算器)
 // ───────────────────────────────────────────
 export const TipCalculatorClient = makeCalculatorClient({
+  slug: 'tip-calculator',
   inputs: [
     { key: 'bill', label: 'Bill amount', suffix: '$', default: '50', placeholder: '50.00' },
     { key: 'tipPct', label: 'Tip percentage', suffix: '%', default: '18' },
@@ -42,6 +43,7 @@ export const TipCalculatorClient = makeCalculatorClient({
 // Discount Calculator(折扣计算器)
 // ───────────────────────────────────────────
 export const DiscountCalculatorClient = makeCalculatorClient({
+  slug: 'discount-calculator',
   inputs: [
     { key: 'price', label: 'Original price', suffix: '$', default: '80' },
     { key: 'discount', label: 'Discount', suffix: '%', default: '25' },
@@ -69,6 +71,7 @@ export const DiscountCalculatorClient = makeCalculatorClient({
 // Sales Tax Calculator(销售税计算器)
 // ───────────────────────────────────────────
 export const SalesTaxCalculatorClient = makeCalculatorClient({
+  slug: 'sales-tax-calculator',
   inputs: [
     { key: 'amount', label: 'Amount', suffix: '$', default: '100' },
     { key: 'rate', label: 'Tax rate', suffix: '%', default: '8.25' },
@@ -112,6 +115,7 @@ export const SalesTaxCalculatorClient = makeCalculatorClient({
 // Compound Interest Calculator(复利计算器)
 // ───────────────────────────────────────────
 export const CompoundInterestCalculatorClient = makeCalculatorClient({
+  slug: 'compound-interest-calculator',
   inputs: [
     { key: 'principal', label: 'Initial investment', suffix: '$', default: '10000' },
     { key: 'monthly', label: 'Monthly contribution', suffix: '$', default: '200' },
@@ -176,6 +180,7 @@ const LENGTH_UNITS: Record<string, { label: string; toMeters: number }> = {
 }
 
 export const LengthConverterClient = makeCalculatorClient({
+  slug: 'length-converter',
   inputs: [
     { key: 'value', label: 'Value to convert', default: '1', placeholder: '1' },
     {

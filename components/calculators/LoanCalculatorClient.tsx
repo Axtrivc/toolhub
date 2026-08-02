@@ -1,7 +1,10 @@
 'use client'
 
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useCallback } from 'react'
 import { CalculatorField, ResultCard, CalculatorNote } from '@/components/calculator/CalculatorField'
+import { LoadSampleButton } from '@/components/LoadSampleButton'
+import { ResultActions } from '@/components/ResultActions'
+import { getCalculatorSample } from '@/lib/tool-samples'
 
 const fmtMoney = (n: number) =>
   isFinite(n)
@@ -62,12 +65,66 @@ export function LoanCalculatorClient() {
     return calcLoan(p, r, y)
   }, [amount, rate, years])
 
+  // 一键加载示例(典型房贷:$400k / 6.8% / 30 年),数据来自 lib/tool-samples.ts
+  const handleLoadSample = useCallback(() => {
+    const s = getCalculatorSample('loan-calculator')
+    if (!s) return
+    setAmount(s.amount ?? amount)
+    setRate(s.rate ?? rate)
+    setYears(s.years ?? years)
+  }, [amount, rate, years])
+
+  // 结果摘要(纯文本) - 供 Copy Summary 用
+  const summary = useMemo(() => {
+    if (!result) return 'Enter loan amount, interest rate, and term to see your monthly payment.'
+    return [
+      'Loan Calculation Summary',
+      `  Loan amount: $${Number(amount).toLocaleString()}`,
+      `  Annual rate: ${rate}%`,
+      `  Term: ${years} years (${result.months} months)`,
+      'Results:',
+      `  Monthly payment: ${fmtMoney(result.monthlyPayment)}`,
+      `  Total interest: ${fmtMoney(result.totalInterest)}`,
+      `  Total paid: ${fmtMoney(result.totalPaid)}`,
+    ].join('\n')
+  }, [result, amount, rate, years])
+
+  // CSV 导出:输入 + 结果 + 前 12 期还款明细
+  const csvContent = useMemo(() => {
+    if (!result) return summary
+    const rows: string[][] = [
+      ['Field', 'Value'],
+      ['Loan amount', `$${Number(amount).toLocaleString()}`],
+      ['Annual rate', `${rate}%`],
+      ['Term (years)', years],
+      ['Monthly payment', fmtMoney(result.monthlyPayment)],
+      ['Total interest', fmtMoney(result.totalInterest)],
+      ['Total paid', fmtMoney(result.totalPaid)],
+      [],
+      ['Month', 'Payment', 'Principal', 'Interest', 'Balance'],
+      ...result.schedule.slice(0, 12).map((r) => [
+        String(r.month),
+        fmtMoney(r.payment),
+        fmtMoney(r.principal),
+        fmtMoney(r.interest),
+        fmtMoney(r.balance),
+      ]),
+    ]
+    return rows
+      .map((r) => r.map((c) => (/[",\n]/.test(c) ? `"${c.replace(/"/g, '""')}"` : c)).join(','))
+      .join('\n')
+  }, [result, amount, rate, years, summary])
+
   // 只显示前 12 个月 + 最后 1 个月,避免列表过长(完整表可后续加导出)
   const displaySchedule = result ? [result.schedule.slice(0, 12)].flat() : []
 
   return (
     <div className="space-y-6">
-      {/* 输入区 */}
+      {/* 输入区 + 右上角 Load Sample 按钮 */}
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        <span className="text-sm font-semibold text-slate-700">Inputs</span>
+        <LoadSampleButton onLoad={handleLoadSample} />
+      </div>
       <div className="grid grid-cols-1 gap-4 rounded-lg bg-slate-50 p-4 sm:grid-cols-3">
         <CalculatorField
           id="amount"
@@ -150,6 +207,15 @@ export function LoanCalculatorClient() {
               </table>
             </div>
           </div>
+
+          {/* 结果操作行 - Copy Summary 复制纯文本摘要,Download 导出 CSV(含还款明细) */}
+          <ResultActions
+            summary={summary}
+            filename="loan-calculator-result.csv"
+            downloadContent={csvContent}
+            mime="text/csv;charset=utf-8;"
+            copyLabel="Copy Summary"
+          />
         </>
       ) : (
         <div className="rounded-lg border-2 border-dashed border-slate-200 p-6 text-center text-sm text-slate-400">

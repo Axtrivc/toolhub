@@ -9,6 +9,7 @@ import { makeUnitConverter } from '../calculators/makeUnitConverter'
 
 // ── 数据存储(Byte 转 KB/MB/GB/TB)──
 export const DataStorageConverterClient = makeUnitConverter({
+  slug: 'data-storage-converter',
   defaultValue: '1',
   defaultFrom: 'gb',
   defaultTo: 'mb',
@@ -30,6 +31,7 @@ export const DataStorageConverterClient = makeUnitConverter({
 
 // ── 时间(Time 转 ms/s/min/h/day)──
 export const TimeConverterClient = makeUnitConverter({
+  slug: 'time-converter',
   defaultValue: '1',
   defaultFrom: 'h',
   defaultTo: 'min',
@@ -53,6 +55,7 @@ export { NumeralSystemConverterClient } from './NumeralSystemConverterClient'
 
 // ── 角度(Degree/Radian/Gradian)──
 export const AngleConverterClient = makeUnitConverter({
+  slug: 'angle-converter',
   defaultValue: '90',
   defaultFrom: 'deg',
   defaultTo: 'rad',
@@ -70,6 +73,7 @@ export const AngleConverterClient = makeUnitConverter({
 
 // ── 燃油经济性(MPG vs L/100km,反向关系)──
 export const FuelEconomyConverterClient = makeUnitConverter({
+  slug: 'fuel-economy-converter',
   defaultValue: '30',
   defaultFrom: 'mpg-us',
   defaultTo: 'l100km',
@@ -84,6 +88,7 @@ export const FuelEconomyConverterClient = makeUnitConverter({
 
 // ── 压力(Pascal/Bar/PSI/atm)──
 export const PressureConverterClient = makeUnitConverter({
+  slug: 'pressure-converter',
   defaultValue: '1',
   defaultFrom: 'bar',
   defaultTo: 'psi',
@@ -103,6 +108,7 @@ export const PressureConverterClient = makeUnitConverter({
 
 // ── 能量(Joule/Calorie/kWh/BTU)──
 export const EnergyConverterClient = makeUnitConverter({
+  slug: 'energy-converter',
   defaultValue: '1',
   defaultFrom: 'kcal',
   defaultTo: 'kj',
@@ -122,6 +128,7 @@ export const EnergyConverterClient = makeUnitConverter({
 
 // ── 频率(Hz/kHz/MHz/GHz/RPM)──
 export const FrequencyConverterClient = makeUnitConverter({
+  slug: 'frequency-converter',
   defaultValue: '1',
   defaultFrom: 'mhz',
   defaultTo: 'hz',

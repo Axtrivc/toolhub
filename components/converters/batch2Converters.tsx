@@ -5,6 +5,7 @@ import { makeUnitConverter } from '../calculators/makeUnitConverter'
 /** 第七批:4 个线性单位转换器 */
 
 export const MassConverterClient = makeUnitConverter({
+  slug: 'mass-converter',
   defaultValue: '1',
   defaultFrom: 'kg',
   defaultTo: 'g',
@@ -23,6 +24,7 @@ export const MassConverterClient = makeUnitConverter({
 })
 
 export const DensityConverterClient = makeUnitConverter({
+  slug: 'density-converter',
   defaultValue: '1',
   defaultFrom: 'kgm3',
   defaultTo: 'gl',
@@ -39,6 +41,7 @@ export const DensityConverterClient = makeUnitConverter({
 })
 
 export const PowerConverterClient = makeUnitConverter({
+  slug: 'power-converter',
   defaultValue: '1',
   defaultFrom: 'kw',
   defaultTo: 'hp',
@@ -56,6 +59,7 @@ export const PowerConverterClient = makeUnitConverter({
 })
 
 export const FlowRateConverterClient = makeUnitConverter({
+  slug: 'flow-rate-converter',
   defaultValue: '1',
   defaultFrom: 'lmin',
   defaultTo: 'gpm',

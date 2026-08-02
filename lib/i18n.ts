@@ -44,6 +44,11 @@ export interface Dict {
   toolResult: string
   toolCopy: string
   toolCopied: string
+  // 工具页:加载示例 / 导出结果
+  toolLoadSample: string
+  toolSampleLoaded: string
+  toolCopySummary: string
+  toolDownload: string
   // 工具页相关工具内链
   relatedTitle: string
   relatedSubtitle: string
@@ -95,6 +100,10 @@ const en: Dict = {
   toolResult: 'Result',
   toolCopy: 'Copy',
   toolCopied: '✓ Copied',
+  toolLoadSample: 'Load Sample',
+  toolSampleLoaded: '✓ Sample loaded',
+  toolCopySummary: 'Copy Summary',
+  toolDownload: 'Download',
   relatedTitle: 'Related Tools',
   relatedSubtitle: 'More tools you might find useful',
   themeToggle: 'Toggle theme',
@@ -142,6 +151,10 @@ const zh: Dict = {
   toolResult: '结果',
   toolCopy: '复制',
   toolCopied: '✓ 已复制',
+  toolLoadSample: '加载示例',
+  toolSampleLoaded: '✓ 已加载示例',
+  toolCopySummary: '复制摘要',
+  toolDownload: '下载',
   relatedTitle: '相关工具',
   relatedSubtitle: '你可能还会用到的工具',
   themeToggle: '切换主题',

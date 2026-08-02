@@ -3,8 +3,10 @@
 import { useState, useMemo, useCallback, type ComponentType } from 'react'
 import { CalculatorField, ResultCard, CalculatorNote } from './CalculatorField'
 import { BreakdownChart } from './BreakdownChart'
-import { CopyButton } from '../CopyButton'
+import { ResultActions } from '../ResultActions'
+import { LoadSampleButton } from '../LoadSampleButton'
 import type { CalculatorConfig } from '@/lib/calculator-types'
+import { getCalculatorSample } from '@/lib/tool-samples'
 
 /**
  * 把 compute 返回的格式化字符串(如 "$83.29"、"1,234.50")解析回数字,
@@ -55,6 +57,24 @@ export function makeCalculatorClient(config: CalculatorConfig): ComponentType {
     const setValue = (key: string, v: string) =>
       setValues((prev) => ({ ...prev, [key]: v }))
 
+    // 示例数据:优先 lib/tool-samples.ts 注册表(按 slug),否则用 config.sample 内嵌。
+    const sample = useMemo(() => {
+      const regSample = config.slug ? getCalculatorSample(config.slug) : undefined
+      return regSample ?? config.sample
+    }, [])
+
+    const handleLoadSample = useCallback(() => {
+      if (!sample) return
+      // 只填充示例中提供的 key,其余保留默认值,避免覆盖未声明的字段。
+      setValues((prev) => {
+        const next = { ...prev }
+        for (const f of config.inputs) {
+          if (sample[f.key] !== undefined) next[f.key] = sample[f.key]
+        }
+        return next
+      })
+    }, [sample, config.inputs])
+
     // 结果摘要(纯文本) - 供 Copy Summary 用。只在有结果且非错误占位时生成。
     const summary = useMemo(() => {
       const inputLines = config.inputs.map(
@@ -66,28 +86,28 @@ export function makeCalculatorClient(config: CalculatorConfig): ComponentType {
       return ['Calculation Summary', 'Inputs:', ...inputLines, 'Results:', ...resultLines].join('\n')
     }, [config, values, results])
 
-    // CSV 导出 - 输入与结果两列格式,Excel/Sheets 可直接打开
-    const exportCsv = useCallback(() => {
+    // CSV 导出内容(纯字符串) - 输入与结果三列表格,Excel/Sheets 可直接打开。
+    // 实际下载交给 ResultActions(它接受 downloadContent),这里只生成内容。
+    const csvContent = useMemo(() => {
       const rows: string[][] = [
         ['Field', 'Type', 'Value'],
         ...config.inputs.map((f) => [f.label, 'Input', `${values[f.key] ?? ''}${f.suffix ?? ''}`]),
         ...config.outputs.map((o) => [o.label, 'Result', results[o.key] ?? '—']),
       ]
-      const csv = rows.map((r) => r.map(csvEscape).join(',')).join('\n')
-      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' })
-      const url = URL.createObjectURL(blob)
-      const a = document.createElement('a')
-      a.href = url
-      a.download = 'calculation-result.csv'
-      document.body.appendChild(a)
-      a.click()
-      document.body.removeChild(a)
-      URL.revokeObjectURL(url)
+      return rows.map((r) => r.map(csvEscape).join(',')).join('\n')
     }, [config, values, results])
+
+    const downloadFilename = config.slug
+      ? `${config.slug}-result.csv`
+      : 'calculation-result.csv'
 
     return (
       <div className="space-y-6">
-        {/* 输入区 */}
+        {/* 输入区 + 右上角 Load Sample 按钮 */}
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <span className="text-sm font-semibold text-slate-700">Inputs</span>
+          {sample && <LoadSampleButton onLoad={handleLoadSample} />}
+        </div>
         <div className="grid grid-cols-1 gap-4 rounded-lg bg-slate-50 p-4 sm:grid-cols-2">
           {config.inputs.map((f) => {
             // select 类型用下拉
@@ -141,17 +161,14 @@ export function makeCalculatorClient(config: CalculatorConfig): ComponentType {
           ))}
         </div>
 
-        {/* 结果操作行 - Copy Summary 复制纯文本摘要,Export CSV 导出表格 */}
-        <div className="flex flex-wrap items-center gap-3">
-          <CopyButton value={summary} label="Copy Summary" />
-          <button
-            type="button"
-            onClick={exportCsv}
-            className="btn btn-secondary"
-          >
-            Export CSV
-          </button>
-        </div>
+        {/* 结果操作行 - Copy Summary 复制纯文本摘要,Download 导出 CSV */}
+        <ResultActions
+          summary={summary}
+          filename={downloadFilename}
+          downloadContent={csvContent}
+          mime="text/csv;charset=utf-8;"
+          copyLabel="Copy Summary"
+        />
 
         {/* 比例分解图(可选) - 只在 config.chart 声明时渲染,把输出字段画成环形图 */}
         {config.chart && (() => {

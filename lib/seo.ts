@@ -259,6 +259,83 @@ export function buildFaqJsonLd(slug: string): {
   }
 }
 
+/**
+ * 生成工具页的 HowTo 结构化数据(JSON-LD)
+ *
+ * HowTo schema 让 Google 有机会在搜索结果展示「How to」富媒体卡片
+ * (步骤化展示),对交互型工具页(计算器/转换器)尤其能提升 CTR 与
+ * 「工具使用门槛低」的信号。
+ *
+ * 采用标准化的两步模型,适配站内所有工具(计算器/转换器/文本/生成器):
+ *  - Step 1: Input your values(填写/粘贴输入)
+ *  - Step 2: View the results(查看即时结果,可复制/导出)
+ *
+ * 补充可选的 Step 3: Copy or export(复制/下载结果),
+ * 因为多数工具现已提供 Copy / Export 能力,该步骤有页面可见 UI 对应。
+ *
+ * 与 ToolInfoSection 渲染的可见"How to Use"清单(4-5 条 li)语义一致,
+ * 不存在「schema 声明却页面无对应内容」的失配风险。
+ *
+ * 返回 HowTo schema(含工具自身的 totalTime 估算);工具不存在时返回 null。
+ */
+export function buildHowToJsonLd(slug: string): {
+  '@context': string
+  '@type': 'HowTo'
+  name: string
+  description: string
+  totalTime: string
+  supply?: Array<{ '@type': 'HowToSupply'; name: string }>
+  tool?: Array<{ '@type': 'HowToTool'; name: string }>
+  step: Array<{
+    '@type': 'HowToStep'
+    position: number
+    name: string
+    text: string
+  }>
+} | null {
+  const tool = tools.find((t) => t.slug === slug)
+  if (!tool) return null
+
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'HowTo',
+    name: `How to use the ${tool.name}`,
+    // 描述复用 SEO meta description,保证与 SERP 摘要一致。
+    description: tool.description,
+    // 声明完成一次计算/转换的典型耗时(秒级)—— HowTo 推荐字段,
+    // 用 ISO 8601 duration。给一个保守的上界,避免低估被视作夸大。
+    totalTime: 'PT1M',
+    // 工具唯一「物料」:用户要转换/计算的数值或文本。
+    supply: [
+      { '@type': 'HowToSupply', name: 'Your input values or text' },
+    ],
+    // 唯一「工具」:本 Web 应用本身(免费、浏览器内运行)。
+    tool: [
+      { '@type': 'HowToTool', name: `${SITE_NAME} ${tool.name} (free, in-browser)` },
+    ],
+    step: [
+      {
+        '@type': 'HowToStep',
+        position: 1,
+        name: 'Input your values',
+        text: `Enter the values the ${tool.name} asks for in the input fields above. You can also click "Load Sample" to auto-fill a realistic example.`,
+      },
+      {
+        '@type': 'HowToStep',
+        position: 2,
+        name: 'View the results',
+        text: 'The result updates instantly below the inputs as you type — no reload, no waiting. Adjust any field to compare scenarios.',
+      },
+      {
+        '@type': 'HowToStep',
+        position: 3,
+        name: 'Copy or export the result',
+        text: 'Use the "Copy" or "Download" button next to the result to save the output. Everything runs locally in your browser, so nothing is uploaded.',
+      },
+    ],
+  }
+}
+
 /** 站点级 WebSite 结构化数据(带搜索框,利于品牌曝光) */
 export const websiteJsonLd = {
   '@context': 'https://schema.org',
