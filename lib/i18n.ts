@@ -53,6 +53,17 @@ export interface Dict {
   themeDark: string
   // 语言切换 aria
   languageToggle: string
+  // 全局搜索弹窗(Cmd/Ctrl+K)
+  searchOpen: string // 打开搜索(aria-label / title)
+  searchPaletteTitle: string // 弹窗 aria-label
+  searchPalettePlaceholder: string // 输入框 placeholder
+  searchPaletteHint: string // 底部提示 "{count} tools"
+  searchNoResults: string // 无结果
+  searchClose: string // 关闭(aria-label)
+  // 底部键盘提示
+  searchKbdSelect: string // "select"
+  searchKbdMove: string // "navigate"
+  searchKbdClose: string // "close"
 }
 
 const en: Dict = {
@@ -90,6 +101,16 @@ const en: Dict = {
   themeLight: 'Light',
   themeDark: 'Dark',
   languageToggle: 'Switch language',
+  // 全局搜索弹窗(Cmd/Ctrl+K)
+  searchOpen: 'Search tools (Ctrl+K)',
+  searchPaletteTitle: 'Search tools',
+  searchPalettePlaceholder: 'Search tools by name or keyword…',
+  searchPaletteHint: '{count} tools',
+  searchNoResults: 'No matching tools. Try another keyword.',
+  searchClose: 'Close search',
+  searchKbdSelect: 'to select',
+  searchKbdMove: 'to navigate',
+  searchKbdClose: 'to close',
 }
 
 const zh: Dict = {
@@ -127,6 +148,16 @@ const zh: Dict = {
   themeLight: '浅色',
   themeDark: '深色',
   languageToggle: '切换语言',
+  // 全局搜索弹窗(Cmd/Ctrl+K)
+  searchOpen: '搜索工具(Ctrl+K)',
+  searchPaletteTitle: '搜索工具',
+  searchPalettePlaceholder: '按名称或关键词搜索工具…',
+  searchPaletteHint: '{count} 个工具',
+  searchNoResults: '没有匹配的工具,换个关键词试试。',
+  searchClose: '关闭搜索',
+  searchKbdSelect: '选择',
+  searchKbdMove: '移动',
+  searchKbdClose: '关闭',
 }
 
 export const dicts: Record<Locale, Dict> = { en, zh }

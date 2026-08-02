@@ -4,14 +4,41 @@ import { useEffect, useId, useRef, useState } from 'react'
 import Link from 'next/link'
 import { useApp } from './providers/AppProviders'
 import { t } from '@/lib/i18n'
+import { getPublishedTools } from '@/lib/tools'
 import { SITE_NAME } from '@/lib/seo'
 import { ThemeToggle } from './ThemeToggle'
 import { LanguageToggle } from './LanguageToggle'
+import { SearchPalette } from './SearchPalette'
 
 export function Header() {
   const { locale } = useApp()
   const [menuOpen, setMenuOpen] = useState(false)
+  const [searchOpen, setSearchOpen] = useState(false)
   const panelId = useId()
+
+  // 工具清单(全站搜索用)。lib/tools 是纯模块,与首页同一份口径。
+  const tools = useRef(getPublishedTools()).current
+
+  // 全局快捷键 Cmd+K(mac)/ Ctrl+K(Windows)切换搜索弹窗。
+  // 在 input/textarea/contenteditable 内不触发,避免抢占原生行为。
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && (e.key === 'k' || e.key === 'K')) {
+        const target = e.target as HTMLElement | null
+        const tag = target?.tagName
+        if (tag === 'INPUT' || tag === 'TEXTAREA' || target?.isContentEditable) {
+          // 搜索弹窗自身已打开时,让 SearchPalette 内的 input 保留默认行为
+          if (!searchOpen) return
+        }
+        e.preventDefault()
+        setSearchOpen((v) => !v)
+      }
+    }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [searchOpen])
+
+  const openSearch = () => setSearchOpen(true)
 
   // 打开/关闭时同步 body 滚动锁,并支持 ESC 关闭
   useEffect(() => {
@@ -74,8 +101,23 @@ export function Header() {
             </Link>
           </nav>
 
-          {/* 语言 + 主题切换 */}
+          {/* 搜索按钮 + 语言 + 主题切换 */}
           <div className="ml-2 flex items-center gap-1">
+            <button
+              type="button"
+              onClick={openSearch}
+              aria-label={t(locale, 'searchOpen')}
+              title={t(locale, 'searchOpen')}
+              className="flex h-9 w-9 items-center justify-center rounded-lg border transition hover:bg-slate-100 dark:hover:bg-slate-700"
+              style={{
+                borderColor: 'rgb(var(--border-strong))',
+                color: 'rgb(var(--text-muted))',
+              }}
+            >
+              <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-4.35-4.35M11 19a8 8 0 100-16 8 8 0 000 16z" />
+              </svg>
+            </button>
             <LanguageToggle />
             <ThemeToggle />
           </div>
@@ -154,6 +196,22 @@ export function Header() {
                 {t(locale, 'navContact')}
               </Link>
 
+              {/* 搜索入口:移动端抽屉里同样可达 */}
+              <button
+                type="button"
+                onClick={() => {
+                  close()
+                  openSearch()
+                }}
+                className="mt-1 flex items-center gap-2 rounded-md px-3 py-3 text-base font-medium transition-colors hover:bg-slate-100 dark:hover:bg-slate-700"
+                style={{ color: 'rgb(var(--text))' }}
+              >
+                <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-4.35-4.35M11 19a8 8 0 100-16 8 8 0 000 16z" />
+                </svg>
+                {t(locale, 'searchOpen')}
+              </button>
+
               {/* 切换按钮放在抽屉底部,触控友好 */}
               <div className="mt-2 flex items-center gap-2 border-t px-3 pb-2 pt-3" style={{ borderColor: 'rgb(var(--border))' }}>
                 <LanguageToggle />
@@ -163,6 +221,14 @@ export function Header() {
           </div>
         </div>
       )}
+
+      {/* 全局搜索弹窗(Cmd/Ctrl+K) */}
+      <SearchPalette
+        tools={tools}
+        locale={locale}
+        open={searchOpen}
+        onClose={() => setSearchOpen(false)}
+      />
     </header>
   )
 }
