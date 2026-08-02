@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation'
 import { getTool } from '@/lib/tools'
 import { buildToolMetadata, buildToolJsonLd } from '@/lib/seo'
 import { ToolLayout } from '@/components/ToolLayout'
-import { Base64EncoderClient } from '@/components/devtools/batchDevTools'
+import { Base64CodecTool } from '@/components/devtools/encoderTools'
 import { Base64EncoderContent } from './content'
 
 export const metadata: Metadata = buildToolMetadata('base64-encoder')
@@ -16,7 +16,7 @@ export default function Page() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <ToolLayout tool={tool}>
-        <Base64EncoderClient />
+        <Base64CodecTool initialMode="encode" />
         <Base64EncoderContent />
       </ToolLayout>
     </>

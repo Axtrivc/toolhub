@@ -2,26 +2,7 @@
 
 import { makeUnitConverter } from '../calculators/makeUnitConverter'
 
-/** 第七批:4 个线性单位转换器 */
-
-export const MassConverterClient = makeUnitConverter({
-  slug: 'mass-converter',
-  defaultValue: '1',
-  defaultFrom: 'kg',
-  defaultTo: 'g',
-  digits: 4,
-  units: {
-    cg: { label: 'Centigrams (cg)', factor: 1e-5 },
-    mg: { label: 'Milligrams (mg)', factor: 1e-6 },
-    g: { label: 'Grams (g)', factor: 1e-3 },
-    dag: { label: 'Decagrams (dag)', factor: 1e-2 },
-    kg: { label: 'Kilograms (kg)', factor: 1 },
-    t: { label: 'Metric tons (t)', factor: 1000 },
-    carat: { label: 'Carats (ct)', factor: 2e-4 },
-    grain: { label: 'Grains (gr)', factor: 6.479891e-5 },
-  },
-  note: '⚖️ Precise mass units including carats (for gemstones) and grains (for ammunition/medicine).',
-})
+/** 第七批:线性单位转换器(mass-converter 已合并进 WeightConverterClient,见 batch2Clients.tsx) */
 
 export const DensityConverterClient = makeUnitConverter({
   slug: 'density-converter',

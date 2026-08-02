@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation'
 import { getTool } from '@/lib/tools'
 import { buildToolMetadata, buildToolJsonLd } from '@/lib/seo'
 import { ToolLayout } from '@/components/ToolLayout'
-import { WhitespaceRemoverClient } from '@/components/texttools/batchTextTools'
+import { TextCleanerClient } from '@/components/texttools/TextCleanerClient'
 import { WhitespaceRemoverContent } from './content'
 
 export const metadata: Metadata = buildToolMetadata('whitespace-remover')
@@ -16,7 +16,8 @@ export default function Page() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <ToolLayout tool={tool}>
-        <WhitespaceRemoverClient />
+        {/* 升级为 Text Cleaner:整合空白/空行/去重/排序的增强版组件,默认勾选 collapse+trim+dropEmpty */}
+        <TextCleanerClient />
         <WhitespaceRemoverContent />
       </ToolLayout>
     </>

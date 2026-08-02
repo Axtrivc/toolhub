@@ -105,7 +105,16 @@ export function PermutationCalculatorContent(): ReactNode {
 export function MassConverterContent(): ReactNode {
   return (
     <ToolContent
-      intro={<p>This tool converts between precise mass units — including carats (for gemstones and jewelry) and grains (for ammunition and historical medicine doses). Different from weight, which is technically a force.</p>}
+      intro={
+        <>
+          <p>This tool converts between precise mass units — including carats (for gemstones and jewelry) and grains (for ammunition and historical medicine doses). Different from weight, which is technically a force.</p>
+          <p>
+            <strong>Note:</strong> mass and weight share the same converter below — every unit (metric, imperial, carats, grains) is available in one place. For everyday body-weight conversions (kg ↔ lb), our{' '}
+            <a href="/tools/weight-converter/" className="text-brand-600 underline">Weight Converter</a>{' '}
+            shows the same tool. Switch any unit freely.
+          </p>
+        </>
+      }
       sections={[
         { heading: 'Key Conversions', body: <ul>
           <li>1 carat = 200 mg = 0.2 g (standard for diamonds and gems)</li>

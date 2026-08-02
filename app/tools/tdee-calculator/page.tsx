@@ -3,21 +3,21 @@ import { notFound } from 'next/navigation'
 import { getTool } from '@/lib/tools'
 import { buildToolMetadata, buildToolJsonLd } from '@/lib/seo'
 import { ToolLayout } from '@/components/ToolLayout'
-import { URLCodecTool } from '@/components/devtools/encoderTools'
-import { URLencoderContent } from './content'
+import { TdeeCalculatorClient } from '@/components/calculators/TdeeCalculatorClient'
+import { TdeeCalculatorContent } from './content'
 
-export const metadata: Metadata = buildToolMetadata('url-encoder')
+export const metadata: Metadata = buildToolMetadata('tdee-calculator')
 
 export default function Page() {
-  const tool = getTool('url-encoder')
+  const tool = getTool('tdee-calculator')
   if (!tool) notFound()
-  const jsonLd = buildToolJsonLd('url-encoder')
+  const jsonLd = buildToolJsonLd('tdee-calculator')
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <ToolLayout tool={tool}>
-        <URLCodecTool initialMode="encode" />
-        <URLencoderContent />
+        <TdeeCalculatorClient />
+        <TdeeCalculatorContent />
       </ToolLayout>
     </>
   )

@@ -1039,6 +1039,64 @@ export const toolFaqs: Record<string, FaqPair[]> = {
       a: '1 pound (lb) = 16 ounces (oz). So 8 oz = 0.5 lb, and 24 oz = 1.5 lb. Note this is avoirdupois weight (everyday items); precious metals use troy weight, where 1 troy pound = 12 troy ounces.',
     },
   ],
+
+  // ══════════ 第九批:JWT / Cron / SVG / TDEE(4 个)══════════
+  'jwt-decoder': [
+    {
+      q: 'Is it safe to paste my real JWT here?',
+      a: 'Yes for decoding — everything runs locally in your browser via the built-in atob function, so your token never touches a server. That said, a JWT is a bearer credential: anyone who has it can act as you until it expires. Avoid pasting real access tokens into screenshots, chats, or public places. Use the "Load Sample" button if you just want to see how decoding works.',
+    },
+    {
+      q: 'Why can\'t this tool verify the signature?',
+      a: 'Verifying a signature requires the secret (for HMAC algorithms like HS256) or the public key (for RSA/ECDSA like RS256/ES256). Those are held by the issuing server, not embedded in the token. This tool only decodes the header and payload — it cannot prove the token is authentic or unmodified without that key.',
+    },
+    {
+      q: 'What do the iat, exp, and sub claims mean?',
+      a: 'iat (issued-at) and exp (expiration) are Unix timestamps in seconds. sub (subject) identifies who the token is for, usually a user ID. Other common claims include iss (issuer), aud (audience), and role/email fields your app may add. If exp is in the past, the token is expired and servers should reject it.',
+    },
+  ],
+  'cron-parser': [
+    {
+      q: 'What do the 5 fields in a cron expression mean?',
+      a: 'Left to right they are: minute (0-59), hour (0-23), day of month (1-31), month (1-12), and day of week (0-6, where 0 or 7 is Sunday). So "0 9 * * 1-5" means 09:00 on weekdays. Each field accepts *, specific values, comma lists, hyphen ranges, and /steps.',
+    },
+    {
+      q: 'How is day-of-month combined with day-of-week?',
+      a: 'By an OR rule (the Vixie cron standard). When both fields are restricted (neither is *), the job fires if EITHER matches. For example, "0 0 1 * 1" runs at midnight on the 1st of the month OR on any Monday. If one of them is *, only the other is considered.',
+    },
+    {
+      q: 'Are @daily, @hourly, and similar macros supported?',
+      a: 'This parser focuses on the standard 5-field syntax. The common shorthand macros (@yearly, @monthly, @weekly, @daily, @hourly, @reboot) are widely used but not part of the core cron spec, so verify behavior on your specific platform (Linux crontab, GitHub Actions, Kubernetes, AWS EventBridge each have quirks).',
+    },
+  ],
+  'svg-to-image': [
+    {
+      q: 'Why does my converted PNG look blurry?',
+      a: 'PNG and WebP are raster (pixel) formats, while SVG is vector and scales infinitely. If you convert a small SVG at 1x, you get few pixels. Use the 2x or 3x scale option to render more pixels for crisp output on high-DPI screens, or keep the original SVG if you need it to scale.',
+    },
+    {
+      q: 'Does this work for SVGs that reference external images or fonts?',
+      a: 'Only for self-contained SVGs. If your SVG links to external files via <image href="..."> or loads web fonts, those resources are subject to browser same-origin/canvas-tainting rules and may not render or may block export. Inline images as data URIs and convert text to outlines for the most reliable conversion.',
+    },
+    {
+      q: 'Is my SVG uploaded anywhere?',
+      a: 'No. Conversion happens entirely in your browser using an HTML5 canvas. Your SVG code or file is read locally and never sent to a server, which also means it works offline once the page is loaded.',
+    },
+  ],
+  'tdee-calculator': [
+    {
+      q: 'What activity level should I pick?',
+      a: 'Sedentary (1.2) = desk job, little exercise. Lightly active (1.375) = light exercise 1-3 days/week. Moderately active (1.55) = exercise 3-5 days/week. Very active (1.725) = hard exercise 6-7 days/week. Extra active (1.9) = physical job or training twice/day. Most people overestimate — when unsure, pick the lower level; you can adjust based on real-world weight change over 2-3 weeks.',
+    },
+    {
+      q: 'How accurate is the TDEE estimate?',
+      a: 'The Mifflin-St Jeor BMR formula this tool uses is within about 10% for most people, but individual metabolism varies. Treat the number as a starting point, track your actual weight and intake for 2-3 weeks, then adjust: if you maintain on more calories than shown, your TDEE is higher; if you gain on the "maintenance" figure, it is lower.',
+    },
+    {
+      q: 'How big a calorie surplus or deficit should I use?',
+      a: 'For fat loss, a 10-20% deficit (250-500 kcal/day) loses roughly 0.25-0.5 kg per week while preserving muscle. For lean gaining, a 5-15% surplus avoids excessive fat. Aggressive deficits (-1000 kcal) cause muscle loss, hunger, and rebound. Whatever you pick, keep protein high (1.6-2.2 g/kg) and re-evaluate every few weeks.',
+    },
+  ],
 }
 
 /**

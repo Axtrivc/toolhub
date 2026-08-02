@@ -65,6 +65,7 @@ export const calculatorSamples: Record<string, Record<string, string>> = {
   'ideal-weight-calculator': { height: '175', sex: 'male' },
   'water-intake-calculator': { weight: '70', activity: '30' },
   'pregnancy-due-date-calculator': { lmp: '2025-01-01' },
+  'tdee-calculator': { weight: '70', height: '175', age: '30', sex: 'male', activity: '1.55' },
 
   // ── 计算器型转换器(length 用 makeCalculatorClient,inputs 为 value/from/to)──
   'length-converter': { value: '100', from: 'm', to: 'ft' },
@@ -123,7 +124,7 @@ export const converterSamples: Record<string, ConverterSample> = {
   'volume-converter': { value: '2', from: 'cup', to: 'ml' },
   'time-converter': { value: '2', from: 'h', to: 'min' },
   'data-storage-converter': { value: '1', from: 'gb', to: 'mb' },
-  'mass-converter': { value: '5', from: 'kg', to: 'g' },
+  'mass-converter': { value: '5', from: 'kg', to: 'carat' },
   'density-converter': { value: '1', from: 'kgm3', to: 'gl' },
   'power-converter': { value: '1', from: 'hp', to: 'w' },
   'flow-rate-converter': { value: '1000', from: 'cfm', to: 'm3h' },

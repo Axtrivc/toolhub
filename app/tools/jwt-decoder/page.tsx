@@ -3,21 +3,21 @@ import { notFound } from 'next/navigation'
 import { getTool } from '@/lib/tools'
 import { buildToolMetadata, buildToolJsonLd } from '@/lib/seo'
 import { ToolLayout } from '@/components/ToolLayout'
-import { URLCodecTool } from '@/components/devtools/encoderTools'
-import { URLencoderContent } from './content'
+import { JwtDecoderClient } from '@/components/devtools/JwtDecoderClient'
+import { JwtDecoderContent } from './content'
 
-export const metadata: Metadata = buildToolMetadata('url-encoder')
+export const metadata: Metadata = buildToolMetadata('jwt-decoder')
 
 export default function Page() {
-  const tool = getTool('url-encoder')
+  const tool = getTool('jwt-decoder')
   if (!tool) notFound()
-  const jsonLd = buildToolJsonLd('url-encoder')
+  const jsonLd = buildToolJsonLd('jwt-decoder')
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <ToolLayout tool={tool}>
-        <URLCodecTool initialMode="encode" />
-        <URLencoderContent />
+        <JwtDecoderClient />
+        <JwtDecoderContent />
       </ToolLayout>
     </>
   )

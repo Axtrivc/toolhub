@@ -2228,6 +2228,96 @@ export const tools: ToolMeta[] = [
     titleLongTail: 'URL Slug Generator - SEO-Friendly Slugs from Title Free',
     descriptionLongTail: 'Convert titles into clean, SEO-friendly URL slugs instantly. Slugify any text with custom separators, lowercase, and transliteration. Free, no signup.',
   },
+
+  // ══════════ 第九批:4 个高频热门工具(JWT / Cron / SVG / TDEE)══════════
+  {
+    slug: 'jwt-decoder',
+    name: 'JWT Decoder',
+    title: 'Free JWT Decoder - Decode JSON Web Token Header & Payload Online',
+    description:
+      'Decode any JSON Web Token (JWT) and inspect its header, payload, and signature as formatted JSON. 100% client-side — your token never leaves your browser. Free, no signup.',
+    keywords: ['jwt decoder', 'jwt decoder online', 'decode jwt token', 'json web token decoder', 'jwt parser'],
+    intent: 'informational',
+    category: 'Developer Tools',
+    h1: 'JWT Decoder',
+    shortIntro: 'Decode JWT tokens and inspect header, payload, and signature locally.',
+    published: true,
+    longTailKeywords: [
+      'jwt decoder base64 url',
+      'decode jwt payload online',
+      'inspect jwt expiration claim',
+      'jwt token viewer no upload',
+    ],
+    titleLongTail: 'JWT Decoder - Inspect Header, Payload & Expiry Locally',
+    descriptionLongTail:
+      'Paste a JWT and instantly see its header, payload, and signature as formatted JSON. Check expiry (exp) and issued-at (iat). Fully client-side — your token is never uploaded. Free.',
+  },
+  {
+    slug: 'cron-parser',
+    name: 'Cron Expression Parser',
+    title: 'Free Cron Expression Parser - Cron to Human Readable & Next Runs',
+    description:
+      'Parse any cron expression into plain English and see the next 5 trigger times instantly. Supports 5-field cron, macros (@daily, @hourly), and lists/ranges/steps. Free, no signup.',
+    keywords: ['cron parser', 'cron expression parser', 'cron to human readable', 'cron schedule generator', 'crontab guru'],
+    intent: 'informational',
+    category: 'Time Calculators',
+    h1: 'Cron Expression Parser',
+    shortIntro: 'Turn a cron expression into plain English and see the next 5 fire times.',
+    published: true,
+    longTailKeywords: [
+      'cron expression to english',
+      'next cron run time calculator',
+      '5 field cron schedule explainer',
+      'cron job trigger time preview',
+    ],
+    titleLongTail: 'Cron Parser - Cron to English & Next 5 Run Times Free',
+    descriptionLongTail:
+      'Enter a cron expression and read it in plain English, plus see the next 5 trigger times in your timezone. Supports ranges, lists, steps, and @daily macros. Free, no signup.',
+  },
+  {
+    slug: 'svg-to-image',
+    name: 'SVG to PNG Converter',
+    title: 'Free SVG to PNG / WebP Converter - Convert SVG to Image Online',
+    description:
+      'Convert SVG to PNG or WebP in your browser. Paste SVG code or upload a file, pick a scale (1x–3x), and download instantly. No upload, no signup — 100% client-side canvas conversion.',
+    keywords: ['svg to png', 'svg to image', 'svg to webp', 'convert svg to png online', 'svg converter'],
+    intent: 'informational',
+    category: 'Web Design Tools',
+    h1: 'SVG to PNG / WebP Converter',
+    shortIntro: 'Convert SVG to PNG or WebP in-browser with custom scale and download.',
+    published: true,
+    longTailKeywords: [
+      'svg to png high resolution',
+      'svg to webp converter',
+      'convert svg code to image',
+      'rasterize svg 2x 3x scale',
+    ],
+    titleLongTail: 'SVG to PNG & WebP Converter - Any Scale, In-Browser',
+    descriptionLongTail:
+      'Turn SVG into PNG or WebP at 1x, 2x, or 3x scale. Paste code or upload a file — conversion runs locally on canvas, so your graphics never leave the browser. Free, no signup.',
+  },
+  {
+    slug: 'tdee-calculator',
+    name: 'TDEE Calculator',
+    title: 'Free TDEE Calculator - Total Daily Energy Expenditure Online',
+    description:
+      'Calculate your TDEE (Total Daily Energy Expenditure) from BMR and activity level. Get daily calories to cut, maintain, or bulk, plus a macro split. Free and instant.',
+    keywords: ['tdee calculator', 'total daily energy expenditure', 'maintenance calories calculator', 'bmr to tdee', 'calorie calculator'],
+    intent: 'commercial',
+    category: 'Health Calculators',
+    h1: 'TDEE Calculator',
+    shortIntro: 'Find your daily calorie needs (TDEE) for cutting, maintaining, or bulking.',
+    published: true,
+    longTailKeywords: [
+      'tdee calculator by activity level',
+      'maintenance calories calculator',
+      'cutting vs bulking calories',
+      'bmr times activity factor',
+    ],
+    titleLongTail: 'TDEE Calculator - Maintenance, Cut & Bulk Calories Free',
+    descriptionLongTail:
+      'Calculate your Total Daily Energy Expenditure from BMR and activity level. See daily calories to lose fat, maintain, or build muscle, with a macro starting point. Free, no signup.',
+  },
 ]
 
 /** 根据 slug 获取单个工具 */
@@ -2381,6 +2471,11 @@ const STAR_ICONS: Record<string, string> = {
   'area-converter': '📐',
   'volume-converter': '🧊',
   'length-converter': '📏',
+  // 第九批:JWT / Cron / SVG / TDEE
+  'jwt-decoder': '🔐',
+  'cron-parser': '⏰',
+  'svg-to-image': '🖼️',
+  'tdee-calculator': '🔥',
 }
 
 /** 默认兜底图标(理论上用不到,所有 category 都已映射) */

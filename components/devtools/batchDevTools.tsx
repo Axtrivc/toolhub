@@ -3,7 +3,8 @@
 import { useState, useMemo } from 'react'
 import { ResultCard, CalculatorNote } from '../calculator/CalculatorField'
 import { CopyButton } from '../CopyButton'
-import { makeTextTool } from '../tools/makeTextTool'
+// 编码/解码双向工具(Base64 / URL / HTML)已迁移到 ./encoderTools.tsx
+// (内置 Mode Toggle,各 encode/decode 路由复用同一组件)。
 
 /**
  * 8 个开发者/Web 工具 - 补齐到 60 个
@@ -131,60 +132,3 @@ function analyzePassword(pw: string) {
   const colors = ['bg-slate-200', 'bg-red-500', 'bg-orange-500', 'bg-yellow-500', 'bg-green-500']
   return { hasUpper, hasLower, hasNum, hasSym, entropy, score, label: labels[score], color: colors[score] }
 }
-
-// ── 3-8. 用 makeTextTool 的工具 ──
-export const Base64EncoderClient = makeTextTool({
-  inputLabel: 'Text to encode',
-  outputLabel: 'Base64',
-  defaultInput: 'Hello World',
-  transform: (t) => {
-    try { return btoa(unescape(encodeURIComponent(t))) } catch { return '⚠️ Cannot encode' }
-  },
-  note: '🔐 Base64 encodes binary data as text. Common in emails, data URIs, and APIs. Note: it is NOT encryption.',
-})
-
-export const Base64DecoderClient = makeTextTool({
-  inputLabel: 'Base64 to decode',
-  outputLabel: 'Decoded text',
-  defaultInput: 'SGVsbG8gV29ybGQ=',
-  transform: (t) => {
-    try { return decodeURIComponent(escape(atob(t.trim()))) } catch { return '⚠️ Invalid Base64' }
-  },
-  note: '🔓 Paste valid Base64 to decode. Handles UTF-8 properly.',
-})
-
-export const HTMLEscapeClient = makeTextTool({
-  inputLabel: 'Text or HTML',
-  outputLabel: 'Escaped HTML',
-  defaultInput: '<a href="x">Tom & Jerry</a>',
-  transform: (t) => t.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;'),
-  note: '🌐 Escapes & < > " and \'. Use before inserting user input into HTML to prevent XSS.',
-})
-
-export const HTMLUnescapeClient = makeTextTool({
-  inputLabel: 'Escaped HTML',
-  outputLabel: 'Unescaped text',
-  defaultInput: '&lt;a href=&quot;x&quot;&gt;Tom &amp; Jerry&lt;/a&gt;',
-  transform: (t) => {
-    const el = document.createElement('textarea')
-    el.innerHTML = t
-    return el.value
-  },
-  note: '🌐 Reverses HTML entities back to characters. Safe — uses a detached textarea element.',
-})
-
-export const URLencoderClient = makeTextTool({
-  inputLabel: 'Text to encode',
-  outputLabel: 'URL-encoded',
-  defaultInput: 'hello world & friends?',
-  transform: (t) => encodeURIComponent(t),
-  note: '🔗 Encodes special characters for safe use in URLs. Spaces become %20, & becomes %26.',
-})
-
-export const URLdecoderClient = makeTextTool({
-  inputLabel: 'URL-encoded text',
-  outputLabel: 'Decoded',
-  defaultInput: 'hello%20world%20%26%20friends%3F',
-  transform: (t) => { try { return decodeURIComponent(t) } catch { return '⚠️ Invalid' } },
-  note: '🔗 Decodes %20 back to spaces, %26 back to &, etc.',
-})

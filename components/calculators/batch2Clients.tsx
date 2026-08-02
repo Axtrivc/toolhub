@@ -18,15 +18,22 @@ export const WeightConverterClient = makeUnitConverter({
   defaultTo: 'lb',
   digits: 4,
   units: {
+    // metric 常用质量/重量
     mg: { label: 'Milligrams (mg)', factor: 0.000001 },
+    cg: { label: 'Centigrams (cg)', factor: 0.00001 },
     g: { label: 'Grams (g)', factor: 0.001 },
+    dag: { label: 'Decagrams (dag)', factor: 0.01 },
     kg: { label: 'Kilograms (kg)', factor: 1 },
     t: { label: 'Metric tons (t)', factor: 1000 },
+    // imperial 重量
     oz: { label: 'Ounces (oz)', factor: 0.0283495 },
     lb: { label: 'Pounds (lb)', factor: 0.453592 },
     st: { label: 'Stones (st)', factor: 6.35029 },
+    // 精密/专用质量(mass-converter 合并过来)
+    carat: { label: 'Carats (ct)', factor: 0.0002 },
+    grain: { label: 'Grains (gr)', factor: 0.00006479891 },
   },
-  note: '⚖️ Supports metric (mg, g, kg, t) and imperial (oz, lb, st) weight units.',
+  note: '⚖️ Covers both everyday weight (kg, lb, oz, stones) and precise mass units (carats for gemstones, grains for ammunition/medicine). Mass and weight share this one converter.',
 })
 
 export const SpeedConverterClient = makeUnitConverter({
