@@ -56,16 +56,15 @@ export function Header() {
   return (
     <header
       data-embed-hide
-      className="sticky top-0 z-40 border-b backdrop-blur"
+      className="sticky top-0 z-40 border-b backdrop-blur-md"
       style={{
         borderColor: 'rgb(var(--border))',
-        backgroundColor: 'rgb(var(--bg-card) / 0.9)',
+        backgroundColor: 'rgb(var(--bg-card) / 0.8)',
       }}
     >
-      {/* Header 内层容器:与下方版心(container-page)完全对齐,
-          保证 Logo 左缘和首页卡片网格左缘在同一条垂直线上。
-          max-w-7xl = --max-width(1280px),与下方 .container-page 同口径。 */}
-      <div className="container-page flex h-16 items-center justify-between">
+      {/* Header 内层容器:全宽贴边流式布局(无 max-w 限制),
+          Logo 贴最左 / 菜单组贴最右,左右用响应式 padding 留呼吸空间。 */}
+      <div className="flex w-full items-center justify-between px-6 py-3.5 sm:px-8 lg:px-10">
         <Link href="/" className="flex items-center gap-2 font-bold" style={{ color: 'rgb(var(--text))' }}>
           <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-brand-600 text-white">
             T
@@ -171,7 +170,7 @@ export function Header() {
               backgroundColor: 'rgb(var(--bg-card))',
             }}
           >
-            <nav className="container-page flex flex-col py-2" style={{ color: 'rgb(var(--text))' }}>
+            <nav className="flex w-full flex-col px-6 py-2 sm:px-8 lg:px-10" style={{ color: 'rgb(var(--text))' }}>
               <Link
                 href="/"
                 onClick={close}
