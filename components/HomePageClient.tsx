@@ -106,8 +106,10 @@ export function HomePageClient({ tools }: HomePageClientProps) {
         </div>
       </div>
 
-      {/* 分类筛选 chips(第一项是本地化的"全部",用 allActive 控制激活态)*/}
-      <div className="flex flex-wrap justify-center gap-2">
+      {/* 分类筛选 chips(第一项是本地化的"全部",用 allActive 控制激活态)。
+          限宽 max-w-3xl + 居中:与上方搜索框(max-w-2xl)/Hero(max-w-3xl)同向收敛,
+          避免 chips 在 1280px 版心内横铺到边缘、最后一行只剩 2~3 个倒金字塔发飘。 */}
+      <div className="mx-auto flex max-w-3xl flex-wrap justify-center gap-2">
         <button
           type="button"
           onClick={() => setActiveCategory(null)}
