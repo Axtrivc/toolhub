@@ -90,7 +90,7 @@ export function SlugGeneratorClient() {
               key={ex}
               type="button"
               onClick={() => setInput(ex)}
-              className="rounded-full border border-slate-200 bg-slate-50 px-2.5 py-0.5 text-xs text-slate-600 transition hover:border-brand-300 hover:bg-brand-50 hover:text-brand-600"
+              className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1.5 text-xs text-slate-600 transition hover:border-brand-300 hover:bg-brand-50 hover:text-brand-600 sm:text-sm"
             >
               {ex}
             </button>
@@ -108,7 +108,7 @@ export function SlugGeneratorClient() {
             id="separator"
             value={separator}
             onChange={(e) => setSeparator(e.target.value as '-' | '_')}
-            className="w-full rounded-md border border-slate-300 bg-white px-2 py-1.5 text-sm outline-none focus:border-brand-500"
+            className="w-full rounded-md border border-slate-300 bg-white px-3 py-2.5 text-sm outline-none focus:border-brand-500 sm:px-2 sm:py-1.5"
           >
             <option value="-">Hyphen ( - )</option>
             <option value="_">Underscore ( _ )</option>
@@ -172,7 +172,7 @@ export function SlugGeneratorClient() {
             <button
               type="button"
               onClick={clearHistory}
-              className="text-xs text-slate-400 hover:text-red-500"
+              className="-my-1 rounded-md px-2 py-1 text-xs text-slate-400 hover:text-red-500 sm:text-sm"
             >
               Clear
             </button>

@@ -161,7 +161,7 @@ export function BMICalculatorClient() {
       )}
 
       {/* BMI 范围参考表 */}
-      <div className="overflow-hidden rounded-lg border border-slate-200">
+      <div className="overflow-x-auto rounded-lg border border-slate-200">
         <table className="w-full text-left text-sm">
           <thead className="bg-slate-50 text-xs uppercase text-slate-500">
             <tr>

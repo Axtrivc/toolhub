@@ -6,8 +6,10 @@ import { AdSlot } from './AdSlot'
 import { RelatedTools } from './RelatedTools'
 import { ToolInfoSection } from './ToolInfoSection'
 import { VisibleFaqs } from './VisibleFaqs'
+import { FormulaSection } from './FormulaSection'
 import { EmbedTool } from './EmbedTool'
 import { Disclaimer } from './Disclaimer'
+import { FavoriteButton } from './FavoriteButton'
 import { useApp } from './providers/AppProviders'
 import { t } from '@/lib/i18n'
 import { buildFaqJsonLd, buildBreadcrumbJsonLd } from '@/lib/seo'
@@ -19,7 +21,15 @@ interface ToolLayoutProps {
 }
 
 /**
- * 工具页通用布局 - 主题感知 + i18n
+ * 工具页通用布局 —— 三段式 + 主题感知 + i18n
+ *
+ * 三段式结构:
+ *  ① 顶层交互区:面包屑 + 标题(+ ❤️ 收藏按钮)+ 工具主组件
+ *  ② 中部 SEO 长文本:About/How to Use + Formula 公式区 + FAQ 手风琴 + 嵌入邀请
+ *  ③ 底端关联推荐:同分类相关工具卡片
+ *
+ * 被 iframe 嵌入时(embed 模式)隐藏所有 [data-embed-hide] 元素,
+ * 只保留工具本体 + YMYL 免责声明。
  */
 export function ToolLayout({ tool, children }: ToolLayoutProps) {
   const { locale } = useApp()
@@ -44,9 +54,11 @@ export function ToolLayout({ tool, children }: ToolLayoutProps) {
         />
       )}
 
+      {/* ─────────── ① 顶层交互区 ─────────── */}
+
       {/* 面包屑(嵌入时隐藏) */}
       <nav data-embed-hide aria-label="Breadcrumb" className="mb-6 text-sm" style={{ color: 'rgb(var(--text-subtle))' }}>
-        <ol className="flex items-center gap-2">
+        <ol className="flex flex-wrap items-center gap-2">
           <li>
             <Link href="/" className="hover:text-brand-600">
               {t(locale, 'toolHome')}
@@ -63,14 +75,18 @@ export function ToolLayout({ tool, children }: ToolLayoutProps) {
         </ol>
       </nav>
 
-      {/* 工具标题 */}
-      <header className="mb-8">
-        <h1 className="text-3xl font-bold sm:text-4xl" style={{ color: 'rgb(var(--text))' }}>
-          {tool.h1}
-        </h1>
-        <p className="mt-3 max-w-2xl text-lg" style={{ color: 'rgb(var(--text-muted))' }}>
-          {tool.shortIntro}
-        </p>
+      {/* 工具标题 + 收藏按钮 */}
+      <header data-embed-hide className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+        <div className="min-w-0">
+          <h1 className="text-3xl font-bold sm:text-4xl" style={{ color: 'rgb(var(--text))' }}>
+            {tool.h1}
+          </h1>
+          <p className="mt-3 max-w-2xl text-lg" style={{ color: 'rgb(var(--text-muted))' }}>
+            {tool.shortIntro}
+          </p>
+        </div>
+        {/* ❤️ 收藏按钮:同步 localStorage.favorites,嵌入时随 header 一起隐藏 */}
+        <FavoriteButton slug={tool.slug} name={tool.name} />
       </header>
 
       {/* 顶部广告位(嵌入时隐藏) */}
@@ -80,7 +96,7 @@ export function ToolLayout({ tool, children }: ToolLayoutProps) {
 
       {/* 工具主体 —— 嵌入时唯一可见的核心区块 */}
       <div
-        className="rounded-xl border p-6 shadow-sm sm:p-8"
+        className="rounded-xl border p-5 shadow-sm sm:p-8"
         style={{
           borderColor: 'rgb(var(--border))',
           backgroundColor: 'rgb(var(--bg-card))',
@@ -93,13 +109,15 @@ export function ToolLayout({ tool, children }: ToolLayoutProps) {
           嵌入时保留(YMYL 合规不能因嵌入而丢失)。 */}
       <Disclaimer tool={tool} />
 
-      {/* 以下为 SEO 文案/广告/相关工具/嵌入邀请等 "chrome",
-          被 iframe 嵌入时整体隐藏,只留工具本体 + 免责声明。 */}
+      {/* ─────────── ② 中部 SEO 长文本区 ─────────── */}
       <div data-embed-hide>
-        {/* 通用信息区 - 关于工具/如何使用(按工具类型生成,增厚内容) */}
+        {/* 通用信息区 - About / How to Use / Why(按工具类型生成,增厚内容) */}
         <ToolInfoSection tool={tool} />
 
-        {/* 可见 FAQ 区块 - 与 FAQPage JSON-LD schema 同源(lib/tool-faqs.ts),无注册 FAQ 时不渲染 */}
+        {/* 公式区 - 闭式公式工具渲染,无注册的工具返回 null 不渲染 */}
+        <FormulaSection slug={tool.slug} tool={tool} />
+
+        {/* 可见 FAQ 手风琴 - 与 FAQPage JSON-LD schema 同源(lib/tool-faqs.ts) */}
         <VisibleFaqs slug={tool.slug} />
 
         {/* 嵌入工具区块 - 让博主复制 iframe 代码获取站外反向链接 */}
@@ -107,8 +125,11 @@ export function ToolLayout({ tool, children }: ToolLayoutProps) {
 
         {/* 底部广告位 */}
         <AdSlot slot={`${tool.slug}-bottom`} format="horizontal" fullWidth />
+      </div>
 
-        {/* 相关工具内链 - SEO 内链网络 + 降低跳出率 */}
+      {/* ─────────── ③ 底端关联推荐 ─────────── */}
+      <div data-embed-hide>
+        {/* 相关工具内链 - SEO 内链网络 + 降低跳出率,同分类优先 3~6 个 */}
         <RelatedTools slug={tool.slug} />
       </div>
     </div>

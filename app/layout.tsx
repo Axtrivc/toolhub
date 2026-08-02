@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react'
+import type { Viewport } from 'next'
 import './globals.css'
 import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
@@ -10,6 +11,23 @@ import { CookieConsent } from '@/components/CookieConsent'
 import { siteMetadata, websiteJsonLd } from '@/lib/seo'
 
 export const metadata = siteMetadata
+
+/**
+ * 显式 viewport - 移动端优化:
+ *  - viewportFit=cover:配合 safe-area,适配刘海屏/异形屏;
+ *  - themeColor:按系统明暗主题染色浏览器顶栏(移动端观感);
+ *  - initialScale=1:避免首屏缩放。
+ * Next 默认已注入基础 viewport,这里显式覆盖以加入 cover 与 themeColor。
+ */
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  viewportFit: 'cover',
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#ffffff' },
+    { media: '(prefers-color-scheme: dark)', color: '#1e293b' },
+  ],
+}
 
 /**
  * AdSense publisher ID(环境驱动)。

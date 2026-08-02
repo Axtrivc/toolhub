@@ -53,7 +53,7 @@ export function PasswordGeneratorClient() {
 
         {/* 强度指示器 */}
         <div className="mt-3 flex items-center gap-3">
-          <div className="flex h-2 flex-1 gap-1">
+          <div className="flex h-2 min-w-0 flex-1 gap-1">
             {[1, 2, 3, 4].map((i) => (
               <div
                 key={i}
@@ -63,7 +63,7 @@ export function PasswordGeneratorClient() {
               />
             ))}
           </div>
-          <span className="w-32 shrink-0 text-right text-sm font-medium text-slate-600">
+          <span className="shrink-0 whitespace-nowrap text-right text-xs font-medium text-slate-600 sm:text-sm">
             {strength.label} ({strength.entropyBits} bits)
           </span>
         </div>

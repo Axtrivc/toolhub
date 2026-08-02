@@ -37,6 +37,8 @@
 
   html {
     scroll-behavior: smooth;
+    /* 兜底:防止任何子元素意外撑宽导致横向滚动条 */
+    overflow-x: hidden;
   }
 
   body {
@@ -47,6 +49,20 @@
       -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
       Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     transition: background-color 0.2s ease, color 0.2s ease;
+    /* 移除移动端点击灰色高亮(配合按钮 active transition) */
+    -webkit-tap-highlight-color: transparent;
+    overflow-x: hidden;
+  }
+
+  /* 移动端表单元素聚焦修复:iOS Safari 在 font-size < 16px 的
+     input/textarea/select 聚焦时会自动放大整页,体验突兀。
+     在小屏下统一强制 16px,消除意外缩放。 */
+  @media (max-width: 640px) {
+    input,
+    textarea,
+    select {
+      font-size: 16px !important;
+    }
   }
 
   /* 文章正文排版(适配主题) */
@@ -98,6 +114,14 @@
 @layer components {
   .container-page {
     @apply mx-auto w-full max-w-[var(--max-width)] px-4 sm:px-6;
+  }
+
+  /* 内容区里的 SEO 长文本块(.prose-content / max-w-3xl)统一居中。
+     否则 768px 的文本块在 1100px 容器内左对齐,宽屏下右侧出现大片
+     留白、左侧贴边,视觉上像排版错乱。加 mx-auto 让其左右对称。 */
+  .container-page .max-w-3xl {
+    margin-left: auto;
+    margin-right: auto;
   }
 
   /* 主题感知的卡片/表面 */

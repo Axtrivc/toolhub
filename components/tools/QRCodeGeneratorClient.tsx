@@ -116,7 +116,7 @@ export function QRCodeGeneratorClient() {
                 key={p}
                 type="button"
                 onClick={() => setUrlInput(p)}
-                className="rounded-full border border-slate-200 bg-slate-50 px-2.5 py-0.5 text-xs text-slate-600 hover:border-brand-300 hover:bg-brand-50"
+                className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1.5 text-xs text-slate-600 hover:border-brand-300 hover:bg-brand-50 sm:text-sm"
               >
                 {p}
               </button>
@@ -199,7 +199,7 @@ export function QRCodeGeneratorClient() {
             id="size"
             value={size}
             onChange={(e) => setSize(Number(e.target.value))}
-            className="w-full rounded-md border border-slate-300 bg-white px-2 py-1.5 text-sm outline-none focus:border-brand-500"
+            className="w-full rounded-md border border-slate-300 bg-white px-3 py-2.5 text-sm outline-none focus:border-brand-500 sm:px-2 sm:py-1.5"
           >
             <option value={192}>Small (192px)</option>
             <option value={256}>Medium (256px)</option>
