@@ -2323,6 +2323,140 @@ export const tools: ToolMeta[] = [
     descriptionLongTail:
       'Calculate your Total Daily Energy Expenditure from BMR and activity level. See daily calories to lose fat, maintain, or build muscle, with a macro starting point. Free, no signup.',
   },
+
+  // ══════════ 第十批:6 个高流量 Web & 开发者工具(JSON→TS / Curl / OG / Shadow / Regex / Favicon)══════════
+  {
+    slug: 'json-to-typescript',
+    name: 'JSON to TypeScript',
+    title: 'Free JSON to TypeScript Converter - Generate TS Interfaces Online',
+    description:
+      'Paste JSON and instantly get clean nested TypeScript interfaces. 100% client-side — no data leaves your browser. Free, no signup, no upload.',
+    keywords: ['json to typescript', 'json to ts', 'typescript interface generator', 'json to interface', 'ts types from json'],
+    intent: 'informational',
+    category: 'Developer Tools',
+    h1: 'JSON to TypeScript Converter',
+    shortIntro: 'Paste JSON and generate clean, nested TypeScript interfaces instantly.',
+    published: true,
+    longTailKeywords: [
+      'json to typescript interface generator',
+      'convert json to ts types online',
+      'nested typescript interface from json',
+      'json to typescript type inference',
+    ],
+    titleLongTail: 'JSON to TypeScript Interface Generator - Nested Types Free',
+    descriptionLongTail:
+      'Paste any JSON object and instantly get clean, nested TypeScript interfaces with proper type inference (string, number, boolean, arrays, null). Runs fully in your browser. Free, no signup.',
+  },
+  {
+    slug: 'curl-converter',
+    name: 'Curl to Code Converter',
+    title: 'Free Curl to Code Converter - JavaScript Fetch & Python Requests',
+    description:
+      'Convert any curl command into JavaScript (Fetch, Axios) and Python (requests) code. Parses URL, method, headers, and body. 100% client-side. Free, no signup.',
+    keywords: ['curl to code', 'curl converter', 'curl to javascript', 'curl to python', 'curl to fetch'],
+    intent: 'informational',
+    category: 'Developer Tools',
+    h1: 'Curl to Code Converter',
+    shortIntro: 'Turn curl commands into JavaScript (Fetch/Axios) and Python requests code.',
+    published: true,
+    longTailKeywords: [
+      'curl to fetch javascript converter',
+      'curl to python requests online',
+      'curl to axios code generator',
+      'parse curl command to code',
+    ],
+    titleLongTail: 'Curl to JavaScript Fetch & Python Requests Converter Free',
+    descriptionLongTail:
+      'Paste a curl command and get ready-to-use JavaScript (Fetch, Axios) and Python (requests) code with headers and body. Runs entirely in your browser. Free, no signup.',
+  },
+  {
+    slug: 'open-graph-generator',
+    name: 'Open Graph & Meta Tag Generator',
+    title: 'Free Open Graph & Meta Tag Generator - Social Share Preview',
+    description:
+      'Generate Open Graph, Twitter Card, and standard meta tags with a live preview of how your link looks on Facebook, Twitter, and LinkedIn. 100% client-side. Free.',
+    keywords: ['open graph generator', 'meta tag generator', 'og tag generator', 'twitter card generator', 'social share preview'],
+    intent: 'informational',
+    category: 'Web Design Tools',
+    h1: 'Open Graph & Meta Tag Generator',
+    shortIntro: 'Build OG and Twitter Card meta tags with a live social share preview.',
+    published: true,
+    longTailKeywords: [
+      'open graph meta tag generator with preview',
+      'twitter card summary large image generator',
+      'facebook link preview generator',
+      'linkedin share meta tags generator',
+    ],
+    titleLongTail: 'Open Graph & Twitter Card Generator with Live Preview Free',
+    descriptionLongTail:
+      'Enter your title, description, and image URL to generate Open Graph and Twitter Card meta tags, with a live preview of how your link appears on social media. Free, no signup.',
+  },
+  {
+    slug: 'css-shadow-generator',
+    name: 'CSS Box Shadow & Glassmorphism Generator',
+    title: 'Free CSS Box Shadow & Glassmorphism Generator - Live Preview',
+    description:
+      'Visually tune box-shadow and glassmorphism (backdrop-blur) effects with live preview, then copy the CSS. 100% client-side. Free, no signup.',
+    keywords: ['css box shadow generator', 'glassmorphism generator', 'box shadow css', 'backdrop blur generator', 'css shadow maker'],
+    intent: 'informational',
+    category: 'Web Design Tools',
+    h1: 'CSS Box Shadow & Glassmorphism Generator',
+    shortIntro: 'Tune box-shadow and glassmorphism visually, preview live, copy the CSS.',
+    published: true,
+    longTailKeywords: [
+      'glassmorphism css generator backdrop blur',
+      'box shadow generator with live preview',
+      'neumorphism shadow generator',
+      'css multiple box shadow generator',
+    ],
+    titleLongTail: 'CSS Box Shadow & Glassmorphism Generator with Live Preview',
+    descriptionLongTail:
+      'Adjust box-shadow offset, blur, spread, color and glassmorphism backdrop-blur with a real-time preview, then copy clean CSS. Runs in your browser. Free, no signup.',
+  },
+  {
+    slug: 'regex-tester',
+    name: 'Regex Tester & Explainer',
+    title: 'Free Regex Tester & Explainer - Test Regular Expressions Online',
+    description:
+      'Test regular expressions against text with live highlighted matches, capture groups, and a quick syntax cheat sheet. 100% client-side. Free, no signup.',
+    keywords: ['regex tester', 'regular expression tester', 'regex checker', 'regex tester online', 'regex highlighter'],
+    intent: 'informational',
+    category: 'Developer Tools',
+    h1: 'Regex Tester & Explainer',
+    shortIntro: 'Test regex with live highlighted matches and a syntax cheat sheet.',
+    published: true,
+    longTailKeywords: [
+      'regex tester with capture groups',
+      'regular expression highlighter online',
+      'javascript regex tester online',
+      'regex cheat sheet and tester',
+    ],
+    titleLongTail: 'Regex Tester with Highlighted Matches & Capture Groups Free',
+    descriptionLongTail:
+      'Enter a regex and test text to see matches highlighted live, plus capture groups and a syntax cheat sheet. Runs entirely in your browser. Free, no signup.',
+  },
+  {
+    slug: 'favicon-generator',
+    name: 'Favicon Generator',
+    title: 'Free Favicon Generator - Create 16x16, 32x32 & Apple Touch Icon Online',
+    description:
+      'Upload an image and generate favicons (16x16, 32x32) and an Apple Touch Icon instantly using canvas. 100% client-side, no upload. Free, no signup.',
+    keywords: ['favicon generator', 'favicon maker', 'create favicon online', 'apple touch icon generator', 'favicon from image'],
+    intent: 'informational',
+    category: 'Web Design Tools',
+    h1: 'Favicon Generator',
+    shortIntro: 'Turn an image into 16x16, 32x32 favicons and an Apple Touch Icon.',
+    published: true,
+    longTailKeywords: [
+      'favicon generator from image 16x16 32x32',
+      'apple touch icon generator online',
+      'create favicon from png online',
+      'favicon maker no upload',
+    ],
+    titleLongTail: 'Favicon Generator - 16x16, 32x32 & Apple Touch Icon from Image Free',
+    descriptionLongTail:
+      'Upload a PNG or JPG and crop it into 16x16, 32x32 favicons and an Apple Touch Icon using canvas — your image never leaves your browser. Free, no signup.',
+  },
 ]
 
 /** 根据 slug 获取单个工具 */
@@ -2481,6 +2615,13 @@ const STAR_ICONS: Record<string, string> = {
   'cron-parser': '⏰',
   'svg-to-image': '🖼️',
   'tdee-calculator': '🔥',
+  // 第十批:JSON→TS / Curl / OG / Shadow / Regex / Favicon
+  'json-to-typescript': '🔷',
+  'curl-converter': '🌀',
+  'open-graph-generator': '🏷️',
+  'css-shadow-generator': '🌑',
+  'regex-tester': '🔍',
+  'favicon-generator': '⭐',
 }
 
 /** 默认兜底图标(理论上用不到,所有 category 都已映射) */

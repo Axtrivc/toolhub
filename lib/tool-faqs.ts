@@ -1097,12 +1097,93 @@ export const toolFaqs: Record<string, FaqPair[]> = {
       a: 'For fat loss, a 10-20% deficit (250-500 kcal/day) loses roughly 0.25-0.5 kg per week while preserving muscle. For lean gaining, a 5-15% surplus avoids excessive fat. Aggressive deficits (-1000 kcal) cause muscle loss, hunger, and rebound. Whatever you pick, keep protein high (1.6-2.2 g/kg) and re-evaluate every few weeks.',
     },
   ],
-}
 
-/**
- * 读取某工具的 FAQ 列表;无记录时返回空数组。
- * `buildFaqJsonLd` 和 `VisibleFaqs` 组件均通过本函数取数,保证一致。
- */
+  // ══════════ 第十批:6 个 Web & 开发者工具 ══════════
+  'json-to-typescript': [
+    {
+      q: 'Does it support arrays and nested objects?',
+      a: 'Yes. The converter recurses into nested objects and arrays. Arrays are typed as the element type (e.g. string[] for ["a","b"]); arrays of objects become an array of a generated interface. Mixed-type arrays fall back to a union (e.g. (string | number)[]).',
+    },
+    {
+      q: 'How are null and undefined handled?',
+      a: 'JSON null is typed as null (and the property marked optional in strict mode). JSON has no undefined, so it never appears. Empty objects {} become Record<string, unknown> so you can add keys later without TypeScript complaining.',
+    },
+    {
+      q: 'Can I choose interface vs type aliases?',
+      a: 'This tool generates interfaces (interface Foo {}), which is the most common and extensible convention. Interfaces support declaration merging and are easier to extend, which suits API response shapes. If you prefer type aliases you can do a find-and-replace on the output.',
+    },
+  ],
+  'curl-converter': [
+    {
+      q: 'Which curl features are supported?',
+      a: 'It parses the URL, -X / --request method, -H / --header headers (including Content-Type and Authorization), -d / --data / --data-raw request bodies, and -k / --insecure. Shell quoting (single and double quotes) and the $\'...\' ANSI-C syntax are handled. Unsupported flags are ignored.',
+    },
+    {
+      q: 'How is the request body encoded?',
+      a: 'Raw bodies (-d "..." or --data-raw) are passed through as-is. For JavaScript Fetch this becomes body: "..."; for Python requests it becomes data="..." (or json= for JSON Content-Type where possible). Multipart file uploads (-F) are not converted to multipart code — use a dedicated client for those.',
+    },
+    {
+      q: 'Is my curl command sent to a server?',
+      a: 'No. Parsing and code generation run entirely in your browser with a hand-written tokenizer. Your command, tokens, or headers are never uploaded, which also matters if your curl contains tokens or secrets — though you should still avoid pasting real credentials anywhere.',
+    },
+  ],
+  'open-graph-generator': [
+    {
+      q: 'What is the difference between Open Graph and Twitter Cards?',
+      a: 'Open Graph (og:) tags are read by Facebook, LinkedIn, Slack, Discord, and most platforms. Twitter Cards (twitter:) tags are specific to X/Twitter but fall back to Open Graph when absent. Generating both ensures the best preview everywhere with minimal duplication.',
+    },
+    {
+      q: 'What image size should I use?',
+      a: 'For og:image and twitter:image use a 1.91:1 ratio at 1200x630px, kept under 1 MB and at least 8 MB for very detailed images. Square 1080x1080 works for some platforms but 1200x630 is the safest universal choice for link previews.',
+    },
+    {
+      q: 'Why is my preview not updating after I deploy?',
+      a: 'Platforms cache share previews aggressively. Use Facebook Sharing Debugger, Twitter Card Validator, or LinkedIn Post Inspector to force a re-scrape after your tags are live. The tags must be in the raw server HTML, not injected by JavaScript, for crawlers that do not execute scripts.',
+    },
+  ],
+  'css-shadow-generator': [
+    {
+      q: 'What is the difference between box-shadow blur and spread?',
+      a: 'Blur radius softens the shadow edges — higher values give a softer, more diffuse shadow. Spread radius grows or shrinks the shadow itself — positive makes it larger than the element, negative makes it smaller. A 0 blur with positive spread creates a hard-edged duplicate.',
+    },
+    {
+      q: 'How do I make a glassmorphism effect?',
+      a: 'Glassmorphism needs three parts: a semi-transparent background (rgba with low alpha), a backdrop-filter: blur(...) on the element, and a subtle border. This tool exposes all three so you can tune them live. Note backdrop-filter requires the element to have something behind it to blur.',
+    },
+    {
+      q: 'Does backdrop-filter work in all browsers?',
+      a: 'It works in all modern Chrome, Edge, Safari (with -webkit- prefix), and Firefox 103+. Older browsers ignore it and the element shows the solid background instead. The generated CSS includes the -webkit-backdrop-filter prefix for Safari compatibility.',
+    },
+  ],
+  'regex-tester': [
+    {
+      q: 'Which regex flavor does this use?',
+      a: 'It uses the JavaScript RegExp engine (the same one running in your browser), which is close to the ECMAScript specification. It supports lookahead, named groups, unicode flag, and the s (dotAll) flag. It does not support lookbehind in older Safari, or PCRE-specific features like atomic groups.',
+    },
+    {
+      q: 'How are capture groups shown?',
+      a: 'Each match is highlighted in the text, and below the result every capture group (numbered and named) is listed with its captured value for each match. This helps debug patterns like /(\\d+)-(\\d+)/ by showing exactly what each group captured.',
+    },
+    {
+      q: 'Why did my regex throw an error?',
+      a: 'Common causes: unbalanced parentheses, an unescaped special character (use \\. to match a literal dot), or quantifier with nothing to repeat (like *+). The error message from the JavaScript engine is shown inline so you can fix the syntax.',
+    },
+  ],
+  'favicon-generator': [
+    {
+      q: 'Which image formats can I upload?',
+      a: 'PNG, JPG/JPEG, GIF, and WebP. PNG with transparency is recommended because favicons look best on coloured browser tabs. SVG source also works but is rasterised to PNG favicons here, since 16x16 and 32x32 raster favicons have the widest browser support.',
+    },
+    {
+      q: 'Why do I need multiple sizes?',
+      a: 'Different contexts use different sizes: 16x16 for the browser tab, 32x32 for retina tabs and the Windows taskbar, and 180x180 (Apple Touch Icon) for iOS home-screen bookmarks. Serving one large image and letting the browser scale it looks blurry at 16x16.',
+    },
+    {
+      q: 'Is my image uploaded to a server?',
+      a: 'No. The image is loaded into an in-browser canvas, cropped and scaled, and exported via canvas.toBlob — all locally. Your file never leaves your device, which also means this works offline once the page is loaded.',
+    },
+  ],
+}
 export function getToolFaqs(slug: string): FaqPair[] {
   return toolFaqs[slug] ?? []
 }

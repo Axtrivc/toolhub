@@ -1,0 +1,405 @@
+'use client'
+
+import { useState, useMemo, useCallback } from 'react'
+import { CopyButton } from '@/components/CopyButton'
+import { LoadSampleButton } from '@/components/LoadSampleButton'
+
+/**
+ * Curl to Code Converter —— 纯前端 tokenizer + 多语言代码生成
+ *
+ * 流程:手写 shell tokenizer(支持引号/转义/$'...')→ 解析成 ParsedCurl
+ * → 生成 JavaScript (Fetch / Axios) + Python (requests)。
+ * 不调用任何 shell,不依赖任何后端,100% 本地。
+ */
+
+const SAMPLE_CURL = `curl -X POST https://api.example.com/v1/users \\
+  -H "Content-Type: application/json" \\
+  -H "Authorization: Bearer token123" \\
+  -d '{"name":"Jane","role":"admin"}'`
+
+interface ParsedCurl {
+  url: string
+  method: string
+  headers: Record<string, string>
+  body: string
+  insecure: boolean
+}
+
+/**
+ * 手写 shell tokenizer:按空白拆分,但尊重单/双引号与反斜杠转义。
+ * 支持 $'...' (ANSI-C quoting,内容按字面处理)。
+ */
+function tokenize(input: string): string[] {
+  const tokens: string[] = []
+  let i = 0
+  const n = input.length
+  while (i < n) {
+    // 跳过空白
+    while (i < n && /\s/.test(input[i])) i++
+    if (i >= n) break
+
+    let token = ''
+    // 处理行尾续行(\ 后换行)→ 当作空格
+    while (i < n && !/\s/.test(input[i])) {
+      const c = input[i]
+
+      // $'...' ANSI-C quoting:内容按字面(无转义,除了 \\ \')
+      if (c === '$' && i + 1 < n && input[i + 1] === "'") {
+        i += 2
+        while (i < n && input[i] !== "'") {
+          token += input[i]
+          i++
+        }
+        i++ // 跳过闭合 '
+        continue
+      }
+
+      // 单引号:内容原样直到下一个单引号
+      if (c === "'") {
+        i++
+        while (i < n && input[i] !== "'") {
+          token += input[i]
+          i++
+        }
+        i++ // 跳过闭合 '
+        continue
+      }
+
+      // 双引号:支持反斜杠转义
+      if (c === '"') {
+        i++
+        while (i < n && input[i] !== '"') {
+          if (input[i] === '\\' && i + 1 < n) {
+            const next = input[i + 1]
+            // 双引号内仅 \" \\ \$ \` \<newline> 被转义,其余保留反斜杠
+            if (next === '"' || next === '\\' || next === '$' || next === '`') {
+              token += next
+              i += 2
+            } else {
+              token += input[i]
+              i++
+            }
+          } else {
+            token += input[i]
+            i++
+          }
+        }
+        i++ // 跳过闭合 "
+        continue
+      }
+
+      // 反斜杠转义(含行尾续行)
+      if (c === '\\') {
+        if (i + 1 < n) {
+          if (input[i + 1] === '\n') {
+            // 行尾续行:跳过,外层 while 会在下一轮遇空白停下
+            i += 2
+            break
+          }
+          token += input[i + 1]
+          i += 2
+          continue
+        }
+      }
+
+      // 普通字符
+      token += c
+      i++
+    }
+
+    if (token.length > 0) tokens.push(token)
+  }
+  return tokens
+}
+
+/** 解析 token 数组为结构化 ParsedCurl */
+function parseCurl(input: string): ParsedCurl {
+  const raw = tokenize(input)
+  // 去掉开头的 "curl"(不区分大小写)
+  const tokens = raw[0]?.toLowerCase() === 'curl' ? raw.slice(1) : raw
+
+  const result: ParsedCurl = {
+    url: '',
+    method: 'GET',
+    headers: {},
+    body: '',
+    insecure: false,
+  }
+
+  let hasBody = false
+  let methodFromFlag = false
+  let i = 0
+  while (i < tokens.length) {
+    const tok = tokens[i]
+    const lower = tok.toLowerCase()
+
+    // -X / --request METHOD
+    if (lower === '-x' || lower === '--request') {
+      result.method = (tokens[++i] || 'GET').toUpperCase()
+      methodFromFlag = true
+    }
+    // -H / --header "Key: Value"
+    else if (lower === '-h' || lower === '--header') {
+      const header = tokens[++i] || ''
+      const sep = header.indexOf(':')
+      if (sep > -1) {
+        const key = header.slice(0, sep).trim()
+        const val = header.slice(sep + 1).trim()
+        if (key) result.headers[key] = val
+      }
+    }
+    // -d / --data / --data-raw / --data-binary BODY
+    else if (
+      lower === '-d' ||
+      lower === '--data' ||
+      lower === '--data-raw' ||
+      lower === '--data-binary' ||
+      lower === '--data-ascii'
+    ) {
+      result.body = tokens[++i] || ''
+      hasBody = true
+    }
+    // -k / --insecure
+    else if (lower === '-k' || lower === '--insecure') {
+      result.insecure = true
+    }
+    // -u / --user(忽略,不生成代码)
+    else if (lower === '-u' || lower === '--user') {
+      i++ // 跳过值
+    }
+    // 形如 -Hvalue 的合并短选项:此处不处理,留给 URL 兜底
+    // URL(第一个非 flag 参数)
+    else if (!tok.startsWith('-') && !result.url) {
+      result.url = tok
+    }
+    i++
+  }
+
+  // 有 body 但未指定 -X → 默认 POST
+  if (hasBody && !methodFromFlag) {
+    result.method = 'POST'
+  }
+
+  return result
+}
+
+// ───────────── 代码生成 ─────────────
+
+function isJsonBody(body: string, headers: Record<string, string>): boolean {
+  const ct = Object.entries(headers).find(([k]) => k.toLowerCase() === 'content-type')?.[1] ?? ''
+  if (/application\/json/i.test(ct)) return true
+  try {
+    JSON.parse(body)
+    return true
+  } catch {
+    return false
+  }
+}
+
+/** 把字符串转成 JS 字符串字面量(双引号,转义内部双引号与反斜杠) */
+function jsString(s: string): string {
+  return `"${s.replace(/\\/g, '\\\\').replace(/"/g, '\\"')}"`
+}
+
+function genFetch(c: ParsedCurl): string {
+  const opts: string[] = []
+  opts.push(`  method: ${jsString(c.method)}`)
+  const headerKeys = Object.keys(c.headers)
+  if (headerKeys.length > 0) {
+    const pairs = headerKeys.map((k) => `    ${jsString(k)}: ${jsString(c.headers[k])}`).join(',\n')
+    opts.push(`  headers: {\n${pairs}\n  }`)
+  }
+  if (c.body) {
+    if (isJsonBody(c.body, c.headers)) {
+      opts.push(`  body: JSON.stringify(${c.body})`)
+    } else {
+      opts.push(`  body: ${jsString(c.body)}`)
+    }
+  }
+  return `const response = await fetch(${jsString(c.url)}, {
+${opts.join(',\n')}
+});
+
+const data = await response.json();
+console.log(data);`
+}
+
+function genAxios(c: ParsedCurl): string {
+  const json = isJsonBody(c.body, c.headers)
+  const headerKeys = Object.keys(c.headers)
+  const config: string[] = []
+  config.push(`  url: ${jsString(c.url)}`)
+  config.push(`  method: ${jsString(c.method.toLowerCase())}`)
+  if (headerKeys.length > 0) {
+    const pairs = headerKeys.map((k) => `      ${jsString(k)}: ${jsString(c.headers[k])}`).join(',\n')
+    config.push(`  headers: {\n${pairs}\n    }`)
+  }
+  if (c.body) {
+    if (json) {
+      config.push(`  data: ${c.body}`)
+    } else {
+      config.push(`  data: ${jsString(c.body)}`)
+    }
+  }
+  return `import axios from "axios";
+
+const response = await axios({
+${config.join(',\n')}
+});
+
+console.log(response.data);`
+}
+
+/** Python 字符串字面量(单引号,转义内部单引号) */
+function pyString(s: string): string {
+  return `'${s.replace(/\\/g, '\\\\').replace(/'/g, "\\'")}'`
+}
+
+function genPython(c: ParsedCurl): string {
+  const headerKeys = Object.keys(c.headers)
+  const lines: string[] = ['import requests', '']
+  if (headerKeys.length > 0) {
+    lines.push('headers = {')
+    headerKeys.forEach((k) => {
+      lines.push(`    ${pyString(k)}: ${pyString(c.headers[k])},`)
+    })
+    lines.push('}')
+    lines.push('')
+  }
+
+  const json = isJsonBody(c.body, c.headers)
+  let bodyArg = ''
+  if (c.body) {
+    if (json) {
+      bodyArg = `, json=${c.body}`
+    } else {
+      lines.push(`data = ${pyString(c.body)}`)
+      lines.push('')
+      bodyArg = ', data=data'
+    }
+  }
+
+  const headerArg = headerKeys.length > 0 ? ', headers=headers' : ''
+  lines.push(`response = requests.${c.method.toLowerCase()}(${pyString(c.url)}${headerArg}${bodyArg})`)
+  lines.push('')
+  lines.push('print(response.json())')
+  return lines.join('\n')
+}
+
+export function CurlConverterClient() {
+  const [input, setInput] = useState('')
+
+  const result = useMemo<{ parsed?: ParsedCurl; fetch?: string; axios?: string; python?: string; error?: string }>(() => {
+    if (!input.trim()) return {}
+    try {
+      const parsed = parseCurl(input)
+      return {
+        parsed,
+        fetch: genFetch(parsed),
+        axios: genAxios(parsed),
+        python: genPython(parsed),
+      }
+    } catch (e) {
+      return { error: e instanceof Error ? e.message : 'Invalid curl command' }
+    }
+  }, [input])
+
+  const handleLoadSample = useCallback(() => setInput(SAMPLE_CURL), [])
+
+  const tabs: { label: string; code?: string }[] = [
+    { label: 'JavaScript (Fetch)', code: result.fetch },
+    { label: 'Axios', code: result.axios },
+    { label: 'Python (requests)', code: result.python },
+  ]
+
+  return (
+    <div className="space-y-5">
+      {/* 输入区 */}
+      <div>
+        <div className="mb-2 flex items-center justify-between">
+          <label htmlFor="curl-input" className="text-sm font-medium text-slate-700">
+            Paste your curl command
+          </label>
+          <div className="flex items-center gap-2">
+            <LoadSampleButton onLoad={handleLoadSample} variant="compact" />
+            {input && (
+              <button
+                type="button"
+                onClick={() => setInput('')}
+                className="-my-1 rounded-md px-2 py-1 text-xs text-slate-400 hover:text-red-500 sm:text-sm"
+              >
+                Clear
+              </button>
+            )}
+          </div>
+        </div>
+        <textarea
+          id="curl-input"
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          placeholder="curl -X GET https://api.example.com/users -H 'Authorization: Bearer ...'"
+          rows={6}
+          spellCheck={false}
+          className="w-full rounded-lg border p-4 font-mono text-xs shadow-sm outline-none transition focus:ring-2"
+          style={{
+            borderColor: 'rgb(var(--border-strong))',
+            backgroundColor: 'rgb(var(--bg-card))',
+            color: 'rgb(var(--text))',
+          }}
+        />
+      </div>
+
+      {/* 错误提示 */}
+      {result.error && (
+        <div className="rounded-lg border border-red-200 bg-red-50 p-4 text-sm text-red-700">
+          ⚠️ {result.error}
+        </div>
+      )}
+
+      {/* 解析概要 */}
+      {result.parsed && (
+        <div className="flex flex-wrap items-center gap-2 text-xs">
+          <span className="rounded-md bg-blue-50 px-2 py-1 font-semibold text-blue-700 dark:bg-blue-950/50 dark:text-blue-300">
+            {result.parsed.method}
+          </span>
+          <span className="font-mono" style={{ color: 'rgb(var(--text-muted))' }}>
+            {result.parsed.url || '(no URL)'}
+          </span>
+          {Object.keys(result.parsed.headers).length > 0 && (
+            <span className="rounded-md px-2 py-1" style={{ backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text-subtle))' }}>
+              {Object.keys(result.parsed.headers).length} header(s)
+            </span>
+          )}
+          {result.parsed.body && (
+            <span className="rounded-md px-2 py-1" style={{ backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text-subtle))' }}>
+              has body
+            </span>
+          )}
+        </div>
+      )}
+
+      {/* 多语言输出区 */}
+      {tabs.map(
+        (tab) =>
+          tab.code && (
+            <div key={tab.label}>
+              <div className="mb-2 flex items-center justify-between">
+                <span className="text-sm font-semibold text-slate-700">{tab.label}</span>
+                <CopyButton value={tab.code} label="Copy" />
+              </div>
+              <pre
+                className="overflow-x-auto rounded-lg border bg-slate-50 p-4 text-xs"
+                style={{ borderColor: 'rgb(var(--border))' }}
+              >
+                <code>{tab.code}</code>
+              </pre>
+            </div>
+          ),
+      )}
+
+      <p className="rounded-md p-3 text-xs" style={{ backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text-subtle))' }}>
+        🔒 100% client-side — parsing runs in your browser. No command is executed; only text is converted.
+      </p>
+    </div>
+  )
+}

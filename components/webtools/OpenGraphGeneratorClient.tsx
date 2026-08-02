@@ -1,0 +1,286 @@
+'use client'
+
+import { useState, useMemo, useCallback } from 'react'
+import { CopyButton } from '@/components/CopyButton'
+import { LoadSampleButton } from '@/components/LoadSampleButton'
+
+/**
+ * Open Graph & Meta Tag Generator —— 输入标题/描述/图片,实时预览社交分享卡 + 生成 meta 标签
+ *
+ * 生成:标准 meta(title/description)、Open Graph(og:)、Twitter Card(twitter:)。
+ * 预览:模拟 Facebook/LinkedIn 大图卡 + Twitter summary_large_image。
+ * 100% 本地,不抓取任何站点。
+ */
+
+interface OgInput {
+  title: string
+  description: string
+  url: string
+  image: string
+  siteName: string
+  twitterCard: 'summary_large_image' | 'summary'
+}
+
+const SAMPLE: OgInput = {
+  title: 'Free Online Tools That Just Work',
+  description: '130+ fast, privacy-friendly utilities for developers, students, and everyday tasks. No signup, no upload.',
+  url: 'https://example.com/blog/free-tools',
+  image: 'https://example.com/images/share-card.png',
+  siteName: 'Example',
+  twitterCard: 'summary_large_image',
+}
+
+const inputCls =
+  'w-full rounded-lg border p-3 text-sm shadow-sm outline-none transition focus:ring-2'
+
+function escapeHtml(s: string): string {
+  return s
+    .replace(/&/g, '&amp;')
+    .replace(/"/g, '&quot;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+}
+
+/** 从 URL 提取 host(预览里显示的"站点名"兜底) */
+function hostOf(url: string): string {
+  try {
+    return new URL(url).host.replace(/^www\./, '')
+  } catch {
+    return url
+  }
+}
+
+export function OpenGraphGeneratorClient() {
+  const [v, setV] = useState<OgInput>({
+    title: '',
+    description: '',
+    url: '',
+    image: '',
+    siteName: '',
+    twitterCard: 'summary_large_image',
+  })
+
+  const set = useCallback((key: keyof OgInput, val: string) => {
+    setV((prev) => ({ ...prev, [key]: val }))
+  }, [])
+
+  const handleLoadSample = useCallback(() => setV(SAMPLE), [])
+
+  // 生成 meta 标签
+  const metaTags = useMemo(() => {
+    const lines: string[] = []
+    if (v.title) lines.push(`<title>${escapeHtml(v.title)}</title>`)
+    if (v.description) lines.push(`<meta name="description" content="${escapeHtml(v.description)}">`)
+
+    // Open Graph
+    if (v.title) lines.push(`<meta property="og:title" content="${escapeHtml(v.title)}">`)
+    if (v.description) lines.push(`<meta property="og:description" content="${escapeHtml(v.description)}">`)
+    if (v.url) lines.push(`<meta property="og:url" content="${escapeHtml(v.url)}">`)
+    if (v.image) lines.push(`<meta property="og:image" content="${escapeHtml(v.image)}">`)
+    if (v.siteName) lines.push(`<meta property="og:site_name" content="${escapeHtml(v.siteName)}">`)
+    lines.push(`<meta property="og:type" content="website">`)
+
+    // Twitter Card
+    lines.push(`<meta name="twitter:card" content="${v.twitterCard}">`)
+    if (v.title) lines.push(`<meta name="twitter:title" content="${escapeHtml(v.title)}">`)
+    if (v.description) lines.push(`<meta name="twitter:description" content="${escapeHtml(v.description)}">`)
+    if (v.image) lines.push(`<meta name="twitter:image" content="${escapeHtml(v.image)}">`)
+
+    return lines.join('\n')
+  }, [v])
+
+  const hasAny = Boolean(v.title || v.description || v.image)
+  const host = v.siteName || hostOf(v.url)
+
+  return (
+    <div className="space-y-5">
+      {/* 输入区 */}
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+        <div className="sm:col-span-2">
+          <label htmlFor="og-title" className="mb-1 block text-sm font-medium text-slate-700">
+            Title
+          </label>
+          <input
+            id="og-title"
+            type="text"
+            value={v.title}
+            onChange={(e) => set('title', e.target.value)}
+            placeholder="Your page title"
+            className={inputCls}
+            style={{ borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rgb(var(--bg-card))', color: 'rgb(var(--text))' }}
+          />
+        </div>
+        <div className="sm:col-span-2">
+          <label htmlFor="og-desc" className="mb-1 block text-sm font-medium text-slate-700">
+            Description
+          </label>
+          <textarea
+            id="og-desc"
+            value={v.description}
+            onChange={(e) => set('description', e.target.value)}
+            placeholder="A short summary shown under the title"
+            rows={2}
+            className={inputCls}
+            style={{ borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rgb(var(--bg-card))', color: 'rgb(var(--text))' }}
+          />
+        </div>
+        <div>
+          <label htmlFor="og-url" className="mb-1 block text-sm font-medium text-slate-700">
+            Page URL
+          </label>
+          <input
+            id="og-url"
+            type="text"
+            value={v.url}
+            onChange={(e) => set('url', e.target.value)}
+            placeholder="https://example.com/page"
+            className={inputCls}
+            style={{ borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rgb(var(--bg-card))', color: 'rgb(var(--text))' }}
+          />
+        </div>
+        <div>
+          <label htmlFor="og-site" className="mb-1 block text-sm font-medium text-slate-700">
+            Site Name (optional)
+          </label>
+          <input
+            id="og-site"
+            type="text"
+            value={v.siteName}
+            onChange={(e) => set('siteName', e.target.value)}
+            placeholder="My Site"
+            className={inputCls}
+            style={{ borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rgb(var(--bg-card))', color: 'rgb(var(--text))' }}
+          />
+        </div>
+        <div className="sm:col-span-2">
+          <label htmlFor="og-image" className="mb-1 block text-sm font-medium text-slate-700">
+            Image URL
+          </label>
+          <input
+            id="og-image"
+            type="text"
+            value={v.image}
+            onChange={(e) => set('image', e.target.value)}
+            placeholder="https://example.com/image.png  (recommended 1200×630)"
+            className={inputCls}
+            style={{ borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rgb(var(--bg-card))', color: 'rgb(var(--text))' }}
+          />
+        </div>
+        <div className="sm:col-span-2">
+          <label htmlFor="og-card" className="mb-1 block text-sm font-medium text-slate-700">
+            Twitter Card Type
+          </label>
+          <select
+            id="og-card"
+            value={v.twitterCard}
+            onChange={(e) => set('twitterCard', e.target.value)}
+            className={inputCls}
+            style={{ borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rgb(var(--bg-card))', color: 'rgb(var(--text))' }}
+          >
+            <option value="summary_large_image">summary_large_image (大图卡)</option>
+            <option value="summary">summary (小图卡)</option>
+          </select>
+        </div>
+      </div>
+
+      <div className="flex justify-end">
+        <LoadSampleButton onLoad={handleLoadSample} variant="compact" />
+      </div>
+
+      {/* 实时预览 */}
+      {hasAny && (
+        <div>
+          <h3 className="mb-3 text-sm font-semibold text-slate-700">Live Preview</h3>
+          <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+            {/* 大图卡(Facebook / LinkedIn / 通用 OG) */}
+            {v.twitterCard === 'summary_large_image' && (
+              <div className="overflow-hidden rounded-xl border bg-white shadow-sm dark:bg-slate-800" style={{ borderColor: 'rgb(var(--border))' }}>
+                <div className="flex aspect-[1.91/1] items-center justify-center bg-slate-100 dark:bg-slate-700">
+                  {v.image ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img src={v.image} alt="OG preview" className="h-full w-full object-cover" onError={(e) => { (e.target as HTMLImageElement).style.display = 'none' }} />
+                  ) : (
+                    <span className="text-xs text-slate-400">No image</span>
+                  )}
+                </div>
+                <div className="px-3 py-2.5">
+                  <div className="text-[11px] uppercase text-slate-400">{host}</div>
+                  <div className="mt-0.5 line-clamp-2 text-sm font-semibold text-slate-800 dark:text-slate-100">
+                    {v.title || 'Your title appears here'}
+                  </div>
+                  <div className="mt-1 line-clamp-2 text-xs text-slate-500 dark:text-slate-400">
+                    {v.description || 'Your description appears here'}
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Twitter summary 卡(小图) */}
+            {v.twitterCard === 'summary' && (
+              <div className="flex gap-3 rounded-xl border bg-white p-3 shadow-sm dark:bg-slate-800" style={{ borderColor: 'rgb(var(--border))' }}>
+                <div className="flex h-20 w-20 shrink-0 items-center justify-center overflow-hidden rounded-lg bg-slate-100 dark:bg-slate-700">
+                  {v.image ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img src={v.image} alt="Twitter preview" className="h-full w-full object-cover" onError={(e) => { (e.target as HTMLImageElement).style.display = 'none' }} />
+                  ) : (
+                    <span className="text-[10px] text-slate-400">No img</span>
+                  )}
+                </div>
+                <div className="min-w-0 flex-1">
+                  <div className="truncate text-[11px] text-slate-400">{host}</div>
+                  <div className="mt-0.5 line-clamp-2 text-sm font-semibold text-slate-800 dark:text-slate-100">
+                    {v.title || 'Your title'}
+                  </div>
+                  <div className="mt-0.5 line-clamp-1 text-xs text-slate-500 dark:text-slate-400">
+                    {v.description || 'Your description'}
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* 第二格:Twitter summary_large_image 卡 */}
+            <div className="overflow-hidden rounded-xl border bg-white shadow-sm dark:bg-slate-800" style={{ borderColor: 'rgb(var(--border))' }}>
+              <div className="flex aspect-[1.91/1] items-center justify-center bg-slate-100 dark:bg-slate-700">
+                {v.image ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img src={v.image} alt="Twitter large preview" className="h-full w-full object-cover" onError={(e) => { (e.target as HTMLImageElement).style.display = 'none' }} />
+                ) : (
+                  <span className="text-xs text-slate-400">No image</span>
+                )}
+              </div>
+              <div className="px-3 py-2.5">
+                <div className="text-[11px] uppercase text-slate-400">{host}</div>
+                <div className="mt-0.5 line-clamp-1 text-sm font-semibold text-slate-800 dark:text-slate-100">
+                  {v.title || 'Your title'}
+                </div>
+                <div className="mt-0.5 line-clamp-2 text-xs text-slate-500 dark:text-slate-400">
+                  {v.description || 'Your description'}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* 生成的 meta 标签 */}
+      {hasAny && (
+        <div>
+          <div className="mb-2 flex items-center justify-between">
+            <span className="text-sm font-semibold text-slate-700">Generated Meta Tags</span>
+            <CopyButton value={metaTags} label="Copy" />
+          </div>
+          <pre
+            className="overflow-x-auto rounded-lg border bg-slate-50 p-4 text-xs"
+            style={{ borderColor: 'rgb(var(--border))' }}
+          >
+            <code>{metaTags}</code>
+          </pre>
+        </div>
+      )}
+
+      <p className="rounded-md p-3 text-xs" style={{ backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text-subtle))' }}>
+        🔒 100% client-side — previews are mocked locally. Paste the generated tags into your page&apos;s <code>&lt;head&gt;</code>.
+      </p>
+    </div>
+  )
+}
