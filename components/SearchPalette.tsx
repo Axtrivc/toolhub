@@ -174,6 +174,7 @@ export function SearchPalette({ tools, locale, open, onClose }: SearchPalettePro
             placeholder={t(locale, 'searchPalettePlaceholder')}
             className="h-14 w-full bg-transparent text-base outline-none placeholder:opacity-60"
             style={{ color: 'rgb(var(--text))' }}
+            autoFocus
             autoComplete="off"
             spellCheck={false}
             aria-label={t(locale, 'searchPalettePlaceholder')}

@@ -20,23 +20,18 @@ export function Header() {
   const tools = useRef(getPublishedTools()).current
 
   // 全局快捷键 Cmd+K(mac)/ Ctrl+K(Windows)切换搜索弹窗。
-  // 在 input/textarea/contenteditable 内不触发,避免抢占原生行为。
+  // 关键:必须无条件 e.preventDefault(),否则 Chrome 会把 Ctrl+K 抢去聚焦地址栏,
+  // 尤其是当前焦点在某个 <input> 里时(旧实现因提前 return 漏掉了 preventDefault)。
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
-      if ((e.metaKey || e.ctrlKey) && (e.key === 'k' || e.key === 'K')) {
-        const target = e.target as HTMLElement | null
-        const tag = target?.tagName
-        if (tag === 'INPUT' || tag === 'TEXTAREA' || target?.isContentEditable) {
-          // 搜索弹窗自身已打开时,让 SearchPalette 内的 input 保留默认行为
-          if (!searchOpen) return
-        }
-        e.preventDefault()
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+        e.preventDefault() // 👈 拦截浏览器聚焦地址栏等默认行为
         setSearchOpen((v) => !v)
       }
     }
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)
-  }, [searchOpen])
+  }, [])
 
   const openSearch = () => setSearchOpen(true)
 
