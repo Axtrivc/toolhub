@@ -97,6 +97,14 @@ export const tools: ToolMeta[] = [
     keywords: ['cash back calculator', 'credit card rewards', 'rewards calculator'],
     intent: 'commercial', category: 'Finance Calculators', h1: 'Cash Back Calculator',
     shortIntro: 'Calculate true value of cash back rewards after annual fees.', published: true,
+    longTailKeywords: [
+      'cash back calculator with annual fee',
+      'credit card rewards value calculator',
+      'best cash back card by spend',
+      'cash back vs points value',
+    ],
+    titleLongTail: 'Cash Back Calculator with Annual Fee - Free Online Tool',
+    descriptionLongTail: 'Calculate the true value of cash back rewards after annual fees. Compare cards by monthly spend to find the best rewards card for you. Free, no signup.',
   },
   {
     slug: 'down-payment-calculator', name: 'Down Payment Calculator',
@@ -137,6 +145,14 @@ export const tools: ToolMeta[] = [
     keywords: ['commission calculator', 'sales commission', 'commission earnings'],
     intent: 'informational', category: 'Finance Calculators', h1: 'Commission Calculator',
     shortIntro: 'Calculate sales commission plus base salary.', published: true,
+    longTailKeywords: [
+      'commission calculator with base salary',
+      'sales commission calculator by rate',
+      'commission plus draw calculator',
+      'tiered commission rate calculator',
+    ],
+    titleLongTail: 'Commission Calculator with Base Salary - Free Online Tool',
+    descriptionLongTail: 'Calculate sales commission plus base salary by rate and quota. See total earnings per sale and tiered overrides in one click. Accurate. Free, no signup.',
   },
   {
     slug: 'age-difference-calculator', name: 'Age Difference Calculator',
@@ -145,6 +161,14 @@ export const tools: ToolMeta[] = [
     keywords: ['age difference calculator', 'age gap calculator'],
     intent: 'informational', category: 'Time Calculators', h1: 'Age Difference Calculator',
     shortIntro: 'Find the age gap between two people.', published: true,
+    longTailKeywords: [
+      'age gap calculator between two people',
+      'age difference from birth years',
+      'calculate age gap in years',
+      'compare two birth dates age',
+    ],
+    titleLongTail: 'Age Difference Calculator - Gap Between Two People Free',
+    descriptionLongTail: 'Find the age gap between two people from their birth years. Calculate the difference in years, months, and days instantly and accurately. Free, no signup.',
   },
   {
     slug: 'grade-calculator', name: 'Grade Calculator',
@@ -153,6 +177,14 @@ export const tools: ToolMeta[] = [
     keywords: ['grade calculator', 'test score calculator', 'percentage grade'],
     intent: 'informational', category: 'Education Calculators', h1: 'Grade Calculator',
     shortIntro: 'Find your grade percentage and letter from points.', published: true,
+    longTailKeywords: [
+      'grade calculator by points',
+      'test score to percentage grade',
+      'letter grade from points',
+      'weighted grade calculator',
+    ],
+    titleLongTail: 'Grade Calculator - Percentage & Letter from Points Free Tool',
+    descriptionLongTail: 'Find your grade percentage and letter from points earned. Convert test scores to a letter grade and track class standing, instantly, privately. Free, no signup.',
   },
   {
     slug: 'final-grade-calculator', name: 'Final Grade Calculator',
@@ -161,6 +193,14 @@ export const tools: ToolMeta[] = [
     keywords: ['final grade calculator', 'what do i need on final', 'rogerhub'],
     intent: 'informational', category: 'Education Calculators', h1: 'Final Grade Calculator',
     shortIntro: 'Find the final exam score needed for your target grade.', published: true,
+    longTailKeywords: [
+      'final exam grade calculator',
+      'score needed on final exam',
+      'final grade target calculator',
+      'final grade calculator rogerhub',
+    ],
+    titleLongTail: 'Final Grade Calculator - Score Needed on Final Exam Free',
+    descriptionLongTail: 'Find the final exam score needed for your target grade. See exactly what you need on the final to keep an A or pass a class, instantly. Free, no signup.',
   },
   {
     slug: 'bill-split-calculator', name: 'Bill Split Calculator',
@@ -169,6 +209,14 @@ export const tools: ToolMeta[] = [
     keywords: ['bill split calculator', 'split the bill', 'check splitter'],
     intent: 'informational', category: 'Finance Calculators', h1: 'Bill Split Calculator',
     shortIntro: 'Split a bill evenly including tip.', published: true,
+    longTailKeywords: [
+      'bill split calculator with tip',
+      'split check with tax and tip',
+      'restaurant bill splitter by people',
+      'tip calculator divided by people',
+    ],
+    titleLongTail: 'Bill Split Calculator with Tip - Split Checks Free Online',
+    descriptionLongTail: 'Split a bill evenly including tip and tax among any number of people. See what each person owes for a restaurant check instantly. Free, no signup required.',
   },
   {
     slug: 'trapezoid-calculator', name: 'Trapezoid Calculator',
@@ -177,6 +225,14 @@ export const tools: ToolMeta[] = [
     keywords: ['trapezoid calculator', 'area of trapezoid', 'trapezium area'],
     intent: 'informational', category: 'Math Calculators', h1: 'Trapezoid Calculator',
     shortIntro: 'Find trapezoid area from two parallel sides and height.', published: true,
+    longTailKeywords: [
+      'trapezoid area calculator',
+      'area of trapezoid with sides',
+      'trapezium area from height',
+      'trapezoid calculator with steps',
+    ],
+    titleLongTail: 'Trapezoid Area Calculator - Two Parallel Sides Free Tool',
+    descriptionLongTail: 'Find trapezoid area from two parallel sides and height. Enter base a, base b, and height to get the area with steps, instantly and accurately. Free, no signup.',
   },
   {
     slug: 'cube-calculator', name: 'Cube Calculator',
@@ -185,6 +241,14 @@ export const tools: ToolMeta[] = [
     keywords: ['cube calculator', 'volume of cube', 'cube surface area'],
     intent: 'informational', category: 'Math Calculators', h1: 'Cube Calculator',
     shortIntro: 'Find cube volume and surface area.', published: true,
+    longTailKeywords: [
+      'cube volume calculator',
+      'surface area of cube calculator',
+      'cube from side length',
+      'volume of cube with steps',
+    ],
+    titleLongTail: 'Cube Volume & Surface Area Calculator - Free Online Tool',
+    descriptionLongTail: 'Find cube volume and surface area from a single side length. Get both answers with the formulas shown, instantly and privately in your browser. Free, no signup.',
   },
   {
     slug: 'sphere-calculator', name: 'Sphere Calculator',
@@ -193,6 +257,14 @@ export const tools: ToolMeta[] = [
     keywords: ['sphere calculator', 'volume of sphere', 'sphere surface area'],
     intent: 'informational', category: 'Math Calculators', h1: 'Sphere Calculator',
     shortIntro: 'Find sphere volume and surface area from radius.', published: true,
+    longTailKeywords: [
+      'sphere volume calculator',
+      'surface area of sphere calculator',
+      'sphere from radius calculator',
+      'volume of sphere with steps',
+    ],
+    titleLongTail: 'Sphere Volume & Surface Area Calculator - Free Online Tool',
+    descriptionLongTail: 'Find sphere volume and surface area from the radius. Get both answers with formulas shown instantly and privately in your browser, no signup. Free, no signup.',
   },
   {
     slug: 'hash-generator', name: 'Hash Generator (SHA-256)',
@@ -201,6 +273,14 @@ export const tools: ToolMeta[] = [
     keywords: ['sha256 generator', 'hash generator', 'sha-256 online', 'text to hash'],
     intent: 'informational', category: 'Developer Tools', h1: 'Hash Generator',
     shortIntro: 'Generate SHA-256 and SHA-1 hashes from text.', published: true,
+    longTailKeywords: [
+      'sha 256 hash generator online',
+      'sha 1 hash from text',
+      'text to sha256 converter',
+      'cryptographic hash generator',
+    ],
+    titleLongTail: 'SHA-256 & SHA-1 Hash Generator from Text - Free Online',
+    descriptionLongTail: 'Generate SHA-256 and SHA-1 hashes from text using real SubtleCrypto. Compare checksums and verify file integrity in your browser, instantly. Free, no signup.',
   },
   {
     slug: 'slug-to-title', name: 'Slug to Title Converter',
@@ -209,6 +289,14 @@ export const tools: ToolMeta[] = [
     keywords: ['slug to title', 'url to title', 'slug converter'],
     intent: 'informational', category: 'Text Tools', h1: 'Slug to Title Converter',
     shortIntro: 'Convert URL slugs back to readable titles.', published: true,
+    longTailKeywords: [
+      'convert url slug to title',
+      'slug to readable heading',
+      'hyphen slug to title case',
+      'url slug to page title',
+    ],
+    titleLongTail: 'Slug to Title Converter - URL Slug to Heading Free Tool',
+    descriptionLongTail: 'Convert URL slugs back to readable titles. Replace hyphens with spaces and title-case the result for page headings, instantly and privately. Free, no signup.',
   },
   {
     slug: 'binary-to-text', name: 'Binary to Text Converter',
@@ -217,6 +305,14 @@ export const tools: ToolMeta[] = [
     keywords: ['binary to text', 'binary decoder', 'binary to ascii'],
     intent: 'informational', category: 'Developer Tools', h1: 'Binary to Text Converter',
     shortIntro: 'Decode binary back to readable text.', published: true,
+    longTailKeywords: [
+      'binary to text converter',
+      'decode binary to ascii',
+      'binary string to readable text',
+      'translate binary 1s and 0s',
+    ],
+    titleLongTail: 'Binary to Text Converter - Decode Binary to ASCII Free',
+    descriptionLongTail: 'Decode binary back to readable text instantly. Paste 1s and 0s to translate any binary string into ASCII characters right in your browser. Free, no signup.',
   },
   {
     slug: 'text-to-binary', name: 'Text to Binary Converter',
@@ -225,6 +321,14 @@ export const tools: ToolMeta[] = [
     keywords: ['text to binary', 'binary encoder', 'text to ascii binary'],
     intent: 'informational', category: 'Developer Tools', h1: 'Text to Binary Converter',
     shortIntro: 'Convert text characters to binary representation.', published: true,
+    longTailKeywords: [
+      'text to binary converter',
+      'encode text as binary',
+      'ascii to binary translator',
+      'string to 1s and 0s',
+    ],
+    titleLongTail: 'Text to Binary Converter - Encode Text as Binary Free',
+    descriptionLongTail: 'Convert text characters to binary representation. Encode any string into 1s and 0s per character for coding, puzzles, and learning, instantly. Free, no signup.',
   },
 
   // ══════════ 第七批:数学+单位+开发+文本工具(16 个)══════════
@@ -235,6 +339,14 @@ export const tools: ToolMeta[] = [
     keywords: ['scientific notation', 'scientific notation converter', 'engineering notation'],
     intent: 'informational', category: 'Math Calculators', h1: 'Scientific Notation Converter',
     shortIntro: 'Convert numbers to scientific, E-, and engineering notation.', published: true,
+    longTailKeywords: [
+      'convert number to scientific notation',
+      'scientific to engineering notation',
+      'e notation converter',
+      'standard form to scientific',
+    ],
+    titleLongTail: 'Scientific Notation Converter - Standard & E Form Free Tool',
+    descriptionLongTail: 'Convert numbers to scientific, E-, and engineering notation. Switch between standard form and scientific notation for any value, instantly. Free, no signup.',
   },
   {
     slug: 'prime-number-checker', name: 'Prime Number Checker',
@@ -243,6 +355,14 @@ export const tools: ToolMeta[] = [
     keywords: ['prime number checker', 'is it prime', 'prime checker'],
     intent: 'informational', category: 'Math Calculators', h1: 'Prime Number Checker',
     shortIntro: 'Check if any number is prime and find adjacent primes.', published: true,
+    longTailKeywords: [
+      'is this number prime checker',
+      'next and previous prime',
+      'prime number test online',
+      'list primes near a number',
+    ],
+    titleLongTail: 'Prime Number Checker - Is It Prime? Find Adjacent Free',
+    descriptionLongTail: 'Check if any number is prime and find the next and previous primes. Test primality for math homework or cryptography, instantly and privately. Free, no signup.',
   },
   {
     slug: 'prime-factorization-calculator', name: 'Prime Factorization Calculator',
@@ -251,6 +371,14 @@ export const tools: ToolMeta[] = [
     keywords: ['prime factorization', 'factor tree', 'prime factors calculator'],
     intent: 'informational', category: 'Math Calculators', h1: 'Prime Factorization Calculator',
     shortIntro: 'Decompose any number into its prime factors.', published: true,
+    longTailKeywords: [
+      'prime factorization calculator with steps',
+      'factor tree calculator',
+      'prime factors of a number',
+      'decompose number into primes',
+    ],
+    titleLongTail: 'Prime Factorization Calculator with Steps - Free Online',
+    descriptionLongTail: 'Decompose any number into its prime factors with a step-by-step factor tree. Get the full prime factorization for homework, instantly. Free, no signup.',
   },
   {
     slug: 'combination-calculator', name: 'Combination Calculator',
@@ -259,6 +387,14 @@ export const tools: ToolMeta[] = [
     keywords: ['combination calculator', 'ncr', 'choose calculator', 'lottery odds'],
     intent: 'informational', category: 'Math Calculators', h1: 'Combination Calculator',
     shortIntro: 'Calculate combinations (n choose r) for probability and odds.', published: true,
+    longTailKeywords: [
+      'n choose r calculator',
+      'combination calculator with steps',
+      'lottery odds combinations calculator',
+      'ncr formula calculator',
+    ],
+    titleLongTail: 'Combination Calculator - nCr, n Choose r with Steps Free',
+    descriptionLongTail: 'Calculate combinations (n choose r) for probability and odds. Solve lottery odds and nCr problems with the full formula shown, instantly. Free, no signup.',
   },
   {
     slug: 'permutation-calculator', name: 'Permutation Calculator',
@@ -267,6 +403,14 @@ export const tools: ToolMeta[] = [
     keywords: ['permutation calculator', 'npr', 'arrangements calculator'],
     intent: 'informational', category: 'Math Calculators', h1: 'Permutation Calculator',
     shortIntro: 'Calculate permutations (arrangements where order matters).', published: true,
+    longTailKeywords: [
+      'npr permutation calculator',
+      'permutation calculator with steps',
+      'arrangements where order matters',
+      'how many ways to arrange',
+    ],
+    titleLongTail: 'Permutation Calculator - nPr, Arrange r from n Free Tool',
+    descriptionLongTail: 'Calculate permutations (arrangements where order matters) with the nPr formula. Solve how many ways to arrange items, instantly and privately. Free, no signup.',
   },
   {
     slug: 'mass-converter', name: 'Mass Converter',
@@ -275,6 +419,14 @@ export const tools: ToolMeta[] = [
     keywords: ['mass converter', 'grams to milligrams', 'carat to gram', 'grain converter'],
     intent: 'informational', category: 'Unit Converters', h1: 'Mass Converter',
     shortIntro: 'Convert between metric, carats, and grains.', published: true,
+    longTailKeywords: [
+      'kg to lbs body weight',
+      'grams to milligrams converter',
+      'carat to gram converter',
+      'metric to imperial mass',
+    ],
+    titleLongTail: 'Mass Converter - kg to lbs, Carats & Grains Free Online',
+    descriptionLongTail: 'Convert between metric, carats, and grains instantly. Switch kg, g, mg, carats, and grains for jewelry and science, accurately and privately. Free, no signup.',
   },
   {
     slug: 'density-converter', name: 'Density Converter',
@@ -283,6 +435,14 @@ export const tools: ToolMeta[] = [
     keywords: ['density converter', 'kgm3 to gcm3', 'density units'],
     intent: 'informational', category: 'Unit Converters', h1: 'Density Converter',
     shortIntro: 'Convert between density units for physics and chemistry.', published: true,
+    longTailKeywords: [
+      'kg m3 to g cm3 converter',
+      'density units for physics',
+      'lb ft3 to kg m3 converter',
+      'g per liter to kg cubic',
+    ],
+    titleLongTail: 'Density Converter - kg/m3 to g/cm3 for Physics Free Tool',
+    descriptionLongTail: 'Convert between density units for physics and chemistry. Switch kg/m3, g/cm3, g/L, and lb/ft3 instantly and accurately, all in your browser. Free, no signup.',
   },
   {
     slug: 'power-converter', name: 'Power Converter',
@@ -291,6 +451,14 @@ export const tools: ToolMeta[] = [
     keywords: ['power converter', 'watts to horsepower', 'kw to hp'],
     intent: 'informational', category: 'Unit Converters', h1: 'Power Converter',
     shortIntro: 'Convert between watts, kilowatts, horsepower, and BTU.', published: true,
+    longTailKeywords: [
+      'watts to horsepower converter',
+      'kw to hp converter',
+      'watts to kilowatts calculator',
+      'btu per hour to watts',
+    ],
+    titleLongTail: 'Power Converter - Watts, kW, HP & BTU Free Online Tool',
+    descriptionLongTail: 'Convert between watts, kilowatts, horsepower, and BTU instantly. Switch power units for engines and appliances, accurately and privately. Free, no signup.',
   },
   {
     slug: 'flow-rate-converter', name: 'Flow Rate Converter',
@@ -299,6 +467,14 @@ export const tools: ToolMeta[] = [
     keywords: ['flow rate converter', 'lpm to gpm', 'gpm converter', 'cfm converter'],
     intent: 'informational', category: 'Unit Converters', h1: 'Flow Rate Converter',
     shortIntro: 'Convert between L/min, GPM, CFM and more flow units.', published: true,
+    longTailKeywords: [
+      'lpm to gpm converter',
+      'gallons per minute to liters',
+      'cfm to cubic meters per hour',
+      'flow rate for plumbing hvac',
+    ],
+    titleLongTail: 'Flow Rate Converter - L/min, GPM & CFM Free Online Tool',
+    descriptionLongTail: 'Convert between L/min, GPM, CFM and more flow units. Switch liters, gallons, and cubic feet for plumbing and HVAC, accurately and privately. Free, no signup.',
   },
   {
     slug: 'url-query-parser', name: 'URL Query Parser',
@@ -307,6 +483,14 @@ export const tools: ToolMeta[] = [
     keywords: ['url query parser', 'query string parser', 'parse url parameters'],
     intent: 'informational', category: 'Developer Tools', h1: 'URL Query Parser',
     shortIntro: 'Extract URL query parameters into a JSON object.', published: true,
+    longTailKeywords: [
+      'url query string parser',
+      'parse url parameters to json',
+      'extract query params online',
+      'query string to object',
+    ],
+    titleLongTail: 'URL Query String Parser - Parameters to JSON Free Tool',
+    descriptionLongTail: 'Extract URL query parameters into a clean JSON object. Parse and debug query strings for API and web development instantly and privately. Free, no signup.',
   },
   {
     slug: 'html-tag-stripper', name: 'HTML Tag Stripper',
@@ -315,6 +499,14 @@ export const tools: ToolMeta[] = [
     keywords: ['html tag stripper', 'remove html tags', 'html to text'],
     intent: 'informational', category: 'Text Tools', h1: 'HTML Tag Stripper',
     shortIntro: 'Remove all HTML tags to get clean readable text.', published: true,
+    longTailKeywords: [
+      'remove html tags from text',
+      'strip html to plain text',
+      'html to text converter',
+      'clean text from web page',
+    ],
+    titleLongTail: 'HTML Tag Stripper - Remove Tags to Plain Text Free Online',
+    descriptionLongTail: 'Remove all HTML tags to get clean readable text. Strip markup from copied web pages and keep only the plain content, instantly and privately. Free, no signup.',
   },
   {
     slug: 'character-frequency', name: 'Character Frequency Counter',
@@ -323,6 +515,14 @@ export const tools: ToolMeta[] = [
     keywords: ['character frequency', 'letter frequency counter', 'character count analyzer'],
     intent: 'informational', category: 'Text Tools', h1: 'Character Frequency Counter',
     shortIntro: 'Count how often each character appears in text.', published: true,
+    longTailKeywords: [
+      'character frequency counter',
+      'letter frequency in text',
+      'count each character occurrences',
+      'text character analysis tool',
+    ],
+    titleLongTail: 'Character Frequency Counter - Letter Count Free Online',
+    descriptionLongTail: 'Count how often each character appears in text. See letter frequency sorted by count for ciphers and analysis, instantly and privately. Free, no signup.',
   },
   {
     slug: 'email-extractor', name: 'Email Extractor',
@@ -331,6 +531,14 @@ export const tools: ToolMeta[] = [
     keywords: ['email extractor', 'extract emails from text', 'find email addresses'],
     intent: 'informational', category: 'Text Tools', h1: 'Email Extractor',
     shortIntro: 'Pull all email addresses out of any text.', published: true,
+    longTailKeywords: [
+      'extract emails from text',
+      'find email addresses in text',
+      'email list extractor online',
+      'pull emails remove duplicates',
+    ],
+    titleLongTail: 'Email Extractor - Find All Emails in Text Free Online Tool',
+    descriptionLongTail: 'Pull all email addresses out of any text and remove duplicates. Build clean email lists from documents and pages instantly and privately. Free, no signup.',
   },
   {
     slug: 'url-extractor', name: 'URL Extractor',
@@ -339,6 +547,14 @@ export const tools: ToolMeta[] = [
     keywords: ['url extractor', 'extract links from text', 'find urls'],
     intent: 'informational', category: 'Text Tools', h1: 'URL Extractor',
     shortIntro: 'Pull all web links out of any text.', published: true,
+    longTailKeywords: [
+      'extract urls from text',
+      'find all links in text',
+      'pull web links out of document',
+      'url list extractor online',
+    ],
+    titleLongTail: 'URL Extractor - Find All Links in Text Free Online Tool',
+    descriptionLongTail: 'Pull all web links out of any text and remove duplicates. Build clean lists of http and https URLs from documents, instantly and privately. Free, no signup.',
   },
   {
     slug: 'text-diff', name: 'Text Diff Checker',
@@ -347,6 +563,14 @@ export const tools: ToolMeta[] = [
     keywords: ['text diff', 'compare texts', 'text difference checker'],
     intent: 'informational', category: 'Text Tools', h1: 'Text Diff Checker',
     shortIntro: 'Compare two texts and see what changed.', published: true,
+    longTailKeywords: [
+      'compare two texts for differences',
+      'text diff checker online',
+      'highlight changes between texts',
+      'word by word text compare',
+    ],
+    titleLongTail: 'Text Diff Checker - Compare Two Texts Online Free Tool',
+    descriptionLongTail: 'Compare two texts and see what changed, word by word. Highlight added and removed lines for editing and proofreading instantly and privately. Free, no signup.',
   },
   {
     slug: 'text-size-estimator', name: 'Text Size Estimator',
@@ -355,6 +579,14 @@ export const tools: ToolMeta[] = [
     keywords: ['text size estimator', 'text byte counter', 'string size calculator'],
     intent: 'informational', category: 'Developer Tools', h1: 'Text Size Estimator',
     shortIntro: 'Estimate byte size of your text in various formats.', published: true,
+    longTailKeywords: [
+      'text byte size calculator',
+      'string size in bytes',
+      'utf 8 byte length',
+      'text size for database column',
+    ],
+    titleLongTail: 'Text Size Estimator - Bytes & KB of Text Free Online Tool',
+    descriptionLongTail: 'Estimate byte size of your text in UTF-8, UTF-16, and Base64. Plan database columns and API payloads by exact byte length, instantly. Free, no signup.',
   },
 
   // ══════════ 第六批:金融+健康+数据工具(14 个)══════════
@@ -365,6 +597,14 @@ export const tools: ToolMeta[] = [
     keywords: ['savings goal calculator', 'savings calculator', 'how much to save', 'goal savings'],
     intent: 'commercial', category: 'Finance Calculators', h1: 'Savings Goal Calculator',
     shortIntro: 'Find the monthly amount needed to reach any savings goal.', published: true,
+    longTailKeywords: [
+      'savings goal calculator by date',
+      'how much to save monthly',
+      'savings goal with interest',
+      'reach savings target by year',
+    ],
+    titleLongTail: 'Savings Goal Calculator by Date - How Much to Save Monthly',
+    descriptionLongTail: 'Find the monthly amount needed to reach any savings goal by a target date. Factor in interest and growth to plan deposits accurately. Free, no signup.',
   },
   {
     slug: 'net-worth-calculator', name: 'Net Worth Calculator',
@@ -373,6 +613,14 @@ export const tools: ToolMeta[] = [
     keywords: ['net worth calculator', 'assets minus liabilities', 'wealth calculator'],
     intent: 'commercial', category: 'Finance Calculators', h1: 'Net Worth Calculator',
     shortIntro: 'Calculate your net worth — assets minus liabilities.', published: true,
+    longTailKeywords: [
+      'net worth calculator by assets',
+      'assets minus liabilities calculator',
+      'personal net worth tracker',
+      'net worth by age benchmark',
+    ],
+    titleLongTail: 'Net Worth Calculator - Assets Minus Liabilities Free Tool',
+    descriptionLongTail: 'Calculate your net worth by subtracting total liabilities from assets. See your assets-to-debt ratio and track wealth over time, instantly. Free, no signup.',
   },
   {
     slug: 'annuity-calculator', name: 'Annuity Calculator',
@@ -381,6 +629,14 @@ export const tools: ToolMeta[] = [
     keywords: ['annuity calculator', 'annuity payout', 'withdrawal rate calculator'],
     intent: 'commercial', category: 'Finance Calculators', h1: 'Annuity Calculator',
     shortIntro: 'Find annual and monthly payouts from a principal over N years.', published: true,
+    longTailKeywords: [
+      'annuity payout calculator by years',
+      'how long will annuity last',
+      'monthly payout from principal',
+      'annuity withdrawal rate calculator',
+    ],
+    titleLongTail: 'Annuity Payout Calculator by Years - Monthly & Annual Free',
+    descriptionLongTail: 'Find annual and monthly payouts from a principal over N years. See how long your savings last at any withdrawal rate, instantly and accurately. Free, no signup.',
   },
   {
     slug: 'capital-gains-tax-estimator', name: 'Capital Gains Tax Estimator',
@@ -389,6 +645,14 @@ export const tools: ToolMeta[] = [
     keywords: ['capital gains tax', 'capital gains calculator', 'stock tax calculator'],
     intent: 'commercial', category: 'Finance Calculators', h1: 'Capital Gains Tax Estimator',
     shortIntro: 'Estimate capital gains tax on investments (short vs long-term rates).', published: true,
+    longTailKeywords: [
+      'capital gains tax estimator',
+      'short vs long term gains',
+      'stock capital gains calculator',
+      'crypto tax by holding period',
+    ],
+    titleLongTail: 'Capital Gains Tax Estimator - Short vs Long Term Free Tool',
+    descriptionLongTail: 'Estimate capital gains tax on stock or crypto by short vs long-term rates. See your tax bill and net proceeds by holding period, instantly. Free, no signup.',
   },
   {
     slug: 'rent-vs-buy-calculator', name: 'Rent vs Buy Calculator',
@@ -397,6 +661,14 @@ export const tools: ToolMeta[] = [
     keywords: ['rent vs buy calculator', 'buy or rent', 'home buying calculator'],
     intent: 'commercial', category: 'Finance Calculators', h1: 'Rent vs Buy Calculator',
     shortIntro: 'Compare total cost of buying vs renting over a time period.', published: true,
+    longTailKeywords: [
+      'rent vs buy calculator by years',
+      'should i rent or buy calculator',
+      'buying vs renting cost comparison',
+      'rent vs own break even calculator',
+    ],
+    titleLongTail: 'Rent vs Buy Calculator - Should You Buy or Rent? Free Tool',
+    descriptionLongTail: 'Compare the total cost of buying vs renting over any time period. See the break-even point where owning beats renting, instantly and privately. Free, no signup.',
   },
   {
     slug: 'body-fat-calculator', name: 'Body Fat Calculator',
@@ -437,6 +709,14 @@ export const tools: ToolMeta[] = [
     keywords: ['due date calculator', 'pregnancy calculator', 'pregnancy due date'],
     intent: 'informational', category: 'Health Calculators', h1: 'Pregnancy Due Date Calculator',
     shortIntro: 'Estimate due date from your last menstrual period.', published: true,
+    longTailKeywords: [
+      'due date from last menstrual period',
+      'pregnancy week by week calculator',
+      'naegele rule due date',
+      'conception date from lmp',
+    ],
+    titleLongTail: 'Pregnancy Due Date Calculator from Last Period Free Tool',
+    descriptionLongTail: 'Estimate your due date from your last menstrual period using the Naegele rule. See your pregnancy week by week and conception date, instantly. Free, no signup.',
   },
   {
     slug: 'json-formatter', name: 'JSON Formatter',
@@ -445,6 +725,14 @@ export const tools: ToolMeta[] = [
     keywords: ['json formatter', 'json beautifier', 'json validator', 'pretty print json'],
     intent: 'informational', category: 'Developer Tools', h1: 'JSON Formatter',
     shortIntro: 'Format and validate JSON with proper indentation.', published: true,
+    longTailKeywords: [
+      'json formatter and validator',
+      'pretty print json online',
+      'json beautifier 2 spaces',
+      'format and validate json',
+    ],
+    titleLongTail: 'JSON Formatter & Validator - Beautify JSON Free Online',
+    descriptionLongTail: 'Format and validate JSON with proper indentation. Pretty-print and beautify JSON with 2-space indent and instant error highlighting, privately. Free, no signup.',
   },
   {
     slug: 'json-minifier', name: 'JSON Minifier',
@@ -453,6 +741,14 @@ export const tools: ToolMeta[] = [
     keywords: ['json minifier', 'minify json', 'compress json', 'json compressor'],
     intent: 'informational', category: 'Developer Tools', h1: 'JSON Minifier',
     shortIntro: 'Remove all whitespace to minimize JSON size.', published: true,
+    longTailKeywords: [
+      'json minifier online',
+      'compress json remove whitespace',
+      'minify json for api',
+      'reduce json file size',
+    ],
+    titleLongTail: 'JSON Minifier - Compress & Remove Whitespace Free Online',
+    descriptionLongTail: 'Remove all whitespace to minimize JSON size. Compress JSON for APIs and smaller payloads in one click, instantly and privately in your browser. Free, no signup.',
   },
   {
     slug: 'csv-to-json', name: 'CSV to JSON Converter',
@@ -461,6 +757,14 @@ export const tools: ToolMeta[] = [
     keywords: ['csv to json', 'csv converter', 'convert csv to json'],
     intent: 'informational', category: 'Developer Tools', h1: 'CSV to JSON Converter',
     shortIntro: 'Convert CSV data to a JSON array using the header row.', published: true,
+    longTailKeywords: [
+      'csv to json converter online',
+      'convert csv with header to json',
+      'csv rows to json array',
+      'csv to json object keys',
+    ],
+    titleLongTail: 'CSV to JSON Converter - Header Row to Keys Free Online',
+    descriptionLongTail: 'Convert CSV data to a JSON array using the header row as object keys. Paste your CSV data and get clean JSON instantly for APIs and apps. Free, no signup.',
   },
   {
     slug: 'json-to-csv', name: 'JSON to CSV Converter',
@@ -469,6 +773,14 @@ export const tools: ToolMeta[] = [
     keywords: ['json to csv', 'json converter', 'convert json to csv'],
     intent: 'informational', category: 'Developer Tools', h1: 'JSON to CSV Converter',
     shortIntro: 'Convert a JSON array of objects to CSV format.', published: true,
+    longTailKeywords: [
+      'json to csv converter online',
+      'convert json array to csv',
+      'json objects to csv rows',
+      'export json to csv file',
+    ],
+    titleLongTail: 'JSON to CSV Converter - Array of Objects Free Online Tool',
+    descriptionLongTail: 'Convert a JSON array of objects to CSV format with proper escaping. Export JSON data to CSV for spreadsheets, instantly and privately. Free, no signup.',
   },
   {
     slug: 'add-line-numbers', name: 'Add Line Numbers',
@@ -477,6 +789,14 @@ export const tools: ToolMeta[] = [
     keywords: ['add line numbers', 'number lines', 'line numbering tool'],
     intent: 'informational', category: 'Text Tools', h1: 'Add Line Numbers',
     shortIntro: 'Add line numbers to each line of your text.', published: true,
+    longTailKeywords: [
+      'add line numbers to text',
+      'number each line of text',
+      'line numbering for code review',
+      'prefix lines with numbers',
+    ],
+    titleLongTail: 'Add Line Numbers to Text - Number Each Line Free Online',
+    descriptionLongTail: 'Add line numbers to each line of your text. Prefix lines for code review, transcripts, and documents instantly and privately in your browser. Free, no signup.',
   },
   {
     slug: 'text-to-list', name: 'Text to List Converter',
@@ -485,6 +805,14 @@ export const tools: ToolMeta[] = [
     keywords: ['text to list', 'bullet point generator', 'list maker'],
     intent: 'informational', category: 'Text Tools', h1: 'Text to List Converter',
     shortIntro: 'Add bullet points to each line of text.', published: true,
+    longTailKeywords: [
+      'convert text to bullet list',
+      'add bullet points to lines',
+      'text lines to list maker',
+      'bullet point generator',
+    ],
+    titleLongTail: 'Text to List Converter - Add Bullet Points Free Online Tool',
+    descriptionLongTail: 'Add bullet points to each line of text. Convert plain lines into a clean bulleted list for notes and outlines, instantly and privately. Free, no signup.',
   },
 
   // ══════════ 第五批:颜色/生成器/几何/统计/金融/生活(13 个)══════════
@@ -495,6 +823,14 @@ export const tools: ToolMeta[] = [
     keywords: ['hex to rgb', 'rgb to hex', 'color converter', 'hsl to rgb', 'hex color converter'],
     intent: 'informational', category: 'Web Design Tools', h1: 'Color Converter',
     shortIntro: 'Convert between HEX, RGB, and HSL with a visual picker.', published: true,
+    longTailKeywords: [
+      'hex to rgb converter',
+      'rgb to hex color converter',
+      'hsl to rgb online',
+      'hex color code converter',
+    ],
+    titleLongTail: 'Color Converter - HEX, RGB & HSL with Picker Free Online',
+    descriptionLongTail: 'Convert between HEX, RGB, and HSL with a visual picker. Get matching color codes for web design and CSS instantly, privately in your browser. Free, no signup.',
   },
   {
     slug: 'uuid-generator', name: 'UUID Generator',
@@ -503,6 +839,14 @@ export const tools: ToolMeta[] = [
     keywords: ['uuid generator', 'guid generator', 'uuid v4', 'unique id generator'],
     intent: 'informational', category: 'Developer Tools', h1: 'UUID Generator',
     shortIntro: 'Generate random v4 UUIDs for databases, sessions, and APIs.', published: true,
+    longTailKeywords: [
+      'uuid v4 generator online',
+      'generate multiple uuids at once',
+      'random guid generator',
+      'uuid for database primary key',
+    ],
+    titleLongTail: 'UUID v4 Generator - Create Multiple UUIDs Free Online Tool',
+    descriptionLongTail: 'Generate random v4 UUIDs for databases, sessions, and APIs. Create one or many RFC 4122 UUIDs with true Web Crypto randomness, instantly. Free, no signup.',
   },
   {
     slug: 'lorem-ipsum-generator', name: 'Lorem Ipsum Generator',
@@ -511,6 +855,14 @@ export const tools: ToolMeta[] = [
     keywords: ['lorem ipsum', 'lorem ipsum generator', 'placeholder text', 'dummy text'],
     intent: 'informational', category: 'Developer Tools', h1: 'Lorem Ipsum Generator',
     shortIntro: 'Generate placeholder text for mockups and designs.', published: true,
+    longTailKeywords: [
+      'lorem ipsum paragraph generator',
+      'placeholder text for mockups',
+      'generate dummy text',
+      'lorem ipsum multiple paragraphs',
+    ],
+    titleLongTail: 'Lorem Ipsum Generator - Placeholder Text for Mockups Free',
+    descriptionLongTail: 'Generate placeholder text for mockups and designs. Create one or many Lorem Ipsum paragraphs of dummy text instantly and privately. Free, no signup today.',
   },
   {
     slug: 'circle-calculator', name: 'Circle Calculator',
@@ -519,6 +871,14 @@ export const tools: ToolMeta[] = [
     keywords: ['circle calculator', 'area of circle', 'circumference calculator', 'circle area'],
     intent: 'informational', category: 'Math Calculators', h1: 'Circle Calculator',
     shortIntro: 'Find circle area, circumference, and diameter from radius.', published: true,
+    longTailKeywords: [
+      'circle area from radius',
+      'circumference from diameter calculator',
+      'circle area and circumference',
+      'diameter from radius calculator',
+    ],
+    titleLongTail: 'Circle Calculator - Area, Circumference & Diameter Free',
+    descriptionLongTail: 'Find circle area, circumference, and diameter from the radius. Get all three values with formulas shown for math and engineering, instantly. Free, no signup.',
   },
   {
     slug: 'triangle-calculator', name: 'Triangle Calculator',
@@ -527,6 +887,14 @@ export const tools: ToolMeta[] = [
     keywords: ['triangle calculator', 'pythagorean theorem', 'hypotenuse calculator', 'right triangle'],
     intent: 'informational', category: 'Math Calculators', h1: 'Triangle Calculator',
     shortIntro: 'Solve right triangles — hypotenuse, area, perimeter.', published: true,
+    longTailKeywords: [
+      'right triangle solver hypotenuse',
+      'pythagorean theorem calculator',
+      'solve right triangle area perimeter',
+      'hypotenuse from two sides',
+    ],
+    titleLongTail: 'Right Triangle Calculator - Hypotenuse & Area Free Tool',
+    descriptionLongTail: 'Solve right triangles for hypotenuse, area, and perimeter with the Pythagorean theorem. Enter two sides to get the full solution instantly. Free, no signup.',
   },
   {
     slug: 'rectangle-calculator', name: 'Rectangle Calculator',
@@ -535,6 +903,14 @@ export const tools: ToolMeta[] = [
     keywords: ['rectangle calculator', 'area of rectangle', 'rectangle area', 'square footage'],
     intent: 'informational', category: 'Math Calculators', h1: 'Rectangle Calculator',
     shortIntro: 'Find rectangle area, perimeter, and diagonal.', published: true,
+    longTailKeywords: [
+      'rectangle area from length and width',
+      'rectangle perimeter and diagonal',
+      'rectangle diagonal calculator',
+      'square footage from sides',
+    ],
+    titleLongTail: 'Rectangle Calculator - Area, Perimeter & Diagonal Free',
+    descriptionLongTail: 'Find rectangle area, perimeter, and diagonal from length and width. Get square footage for flooring and construction, instantly and privately. Free, no signup.',
   },
   {
     slug: 'standard-deviation-calculator', name: 'Standard Deviation Calculator',
@@ -543,6 +919,14 @@ export const tools: ToolMeta[] = [
     keywords: ['standard deviation calculator', 'variance calculator', 'statistics calculator'],
     intent: 'informational', category: 'Math Calculators', h1: 'Standard Deviation Calculator',
     shortIntro: 'Calculate standard deviation, variance, and mean.', published: true,
+    longTailKeywords: [
+      'standard deviation calculator with steps',
+      'population vs sample standard deviation',
+      'variance and mean calculator',
+      'standard deviation of data set',
+    ],
+    titleLongTail: 'Standard Deviation Calculator with Steps - Mean & Variance',
+    descriptionLongTail: 'Calculate standard deviation, variance, and mean from any list. Switch between population and sample deviation with steps shown, instantly. Free, no signup.',
   },
   {
     slug: 'percentile-calculator', name: 'Percentile Calculator',
@@ -551,6 +935,14 @@ export const tools: ToolMeta[] = [
     keywords: ['percentile calculator', '90th percentile', 'percentile rank', 'data percentile'],
     intent: 'informational', category: 'Math Calculators', h1: 'Percentile Calculator',
     shortIntro: 'Find the value at any percentile of your data.', published: true,
+    longTailKeywords: [
+      'percentile rank calculator',
+      '90th percentile of data set',
+      'value at percentile calculator',
+      'percentile from data points',
+    ],
+    titleLongTail: 'Percentile Calculator - Find Any Percentile of Data Free',
+    descriptionLongTail: 'Find the value at any percentile of your data set. Calculate percentile rank for test scores, salaries, and performance metrics, instantly. Free, no signup.',
   },
   {
     slug: 'inflation-calculator', name: 'Inflation Calculator',
@@ -559,6 +951,14 @@ export const tools: ToolMeta[] = [
     keywords: ['inflation calculator', 'purchasing power', 'future value of money'],
     intent: 'commercial', category: 'Finance Calculators', h1: 'Inflation Calculator',
     shortIntro: 'See how inflation reduces the value of money over time.', published: true,
+    longTailKeywords: [
+      'inflation calculator by year',
+      'purchasing power calculator',
+      'future value with inflation',
+      'money value past to present',
+    ],
+    titleLongTail: 'Inflation Calculator by Year - Purchasing Power Free Tool',
+    descriptionLongTail: 'See how inflation reduces the value of money over time. Convert past dollars to present value or project future costs by year, instantly. Free, no signup.',
   },
   {
     slug: 'retirement-calculator', name: 'Retirement Calculator',
@@ -567,6 +967,14 @@ export const tools: ToolMeta[] = [
     keywords: ['retirement calculator', 'retirement savings', 'nest egg calculator'],
     intent: 'commercial', category: 'Finance Calculators', h1: 'Retirement Calculator',
     shortIntro: 'Project your retirement savings with compound growth.', published: true,
+    longTailKeywords: [
+      'retirement calculator with social security',
+      'how much to retire by age',
+      'retirement savings projection',
+      'retirement nest egg by 65',
+    ],
+    titleLongTail: 'Retirement Calculator with Growth - Nest Egg by 65 Free Tool',
+    descriptionLongTail: 'Project your retirement savings with compound growth, contributions, and current balance. See if you are on track to retire by your target age. Free, no signup.',
   },
   {
     slug: 'simple-interest-calculator', name: 'Simple Interest Calculator',
@@ -575,6 +983,14 @@ export const tools: ToolMeta[] = [
     keywords: ['simple interest calculator', 'interest calculator', 'interest earned'],
     intent: 'commercial', category: 'Finance Calculators', h1: 'Simple Interest Calculator',
     shortIntro: 'Calculate simple interest with the I = Prt formula.', published: true,
+    longTailKeywords: [
+      'simple interest calculator i prt',
+      'simple interest loan calculator',
+      'interest earned on principal',
+      'principal rate time calculator',
+    ],
+    titleLongTail: 'Simple Interest Calculator - I = Prt Formula Free Online',
+    descriptionLongTail: 'Calculate simple interest with the I = Prt formula. Find interest earned on a principal over any time at any rate, instantly and accurately. Free, no signup.',
   },
   {
     slug: 'unit-price-calculator', name: 'Unit Price Calculator',
@@ -583,6 +999,14 @@ export const tools: ToolMeta[] = [
     keywords: ['unit price calculator', 'price comparison', 'best value calculator'],
     intent: 'informational', category: 'Finance Calculators', h1: 'Unit Price Calculator',
     shortIntro: 'Compare unit prices to find the real best deal.', published: true,
+    longTailKeywords: [
+      'unit price calculator by ounce',
+      'price comparison per unit',
+      'best value per ounce calculator',
+      'cost per unit grocery tool',
+    ],
+    titleLongTail: 'Unit Price Calculator - Compare Per Ounce & Gram Free Tool',
+    descriptionLongTail: 'Compare unit prices to find the real best deal. Calculate price per ounce, gram, or liter across packages of any size instantly and accurately. Free, no signup.',
   },
 
   // ══════════ 第四批:开发者/Web 工具(8 个,补到 60)══════════
@@ -593,6 +1017,14 @@ export const tools: ToolMeta[] = [
     keywords: ['random number generator', 'random picker', 'number randomizer', 'pick a number'],
     intent: 'informational', category: 'Developer Tools', h1: 'Random Number Generator',
     shortIntro: 'Generate random numbers in any range, with optional uniqueness.', published: true,
+    longTailKeywords: [
+      'random number generator in range',
+      'pick unique random numbers',
+      'random number no repeats',
+      'generate many random numbers',
+    ],
+    titleLongTail: 'Random Number Generator in Range - Pick Unique Free Tool',
+    descriptionLongTail: 'Generate random numbers in any range with optional uniqueness. Pick unique numbers and generate many at once for draws, instantly, privately. Free, no signup.',
   },
   {
     slug: 'password-strength-checker', name: 'Password Strength Checker',
@@ -601,6 +1033,14 @@ export const tools: ToolMeta[] = [
     keywords: ['password strength checker', 'password tester', 'how strong is my password'],
     intent: 'commercial', category: 'Security Tools', h1: 'Password Strength Checker',
     shortIntro: 'Test your password strength with entropy analysis and a checklist.', published: true,
+    longTailKeywords: [
+      'how strong is my password',
+      'password strength entropy checker',
+      'password security checklist',
+      'password crack time estimator',
+    ],
+    titleLongTail: 'Password Strength Checker - Entropy & Crack Time Free Tool',
+    descriptionLongTail: 'Test your password strength with entropy analysis and a security checklist. See estimated crack time and fix weak passwords, instantly. Free, no signup.',
   },
   {
     slug: 'base64-encoder', name: 'Base64 Encoder',
@@ -609,6 +1049,14 @@ export const tools: ToolMeta[] = [
     keywords: ['base64 encoder', 'encode base64', 'text to base64'],
     intent: 'informational', category: 'Developer Tools', h1: 'Base64 Encoder',
     shortIntro: 'Encode text to Base64 instantly with proper UTF-8 support.', published: true,
+    longTailKeywords: [
+      'base64 encode utf 8',
+      'text to base64 converter',
+      'encode string to base64',
+      'base64 with unicode support',
+    ],
+    titleLongTail: 'Base64 Encoder - Encode UTF-8 Text to Base64 Free Online',
+    descriptionLongTail: 'Encode text to Base64 instantly with proper UTF-8 support. Convert strings, emojis, and unicode to Base64 safely in your browser, privately. Free, no signup.',
   },
   {
     slug: 'base64-decoder', name: 'Base64 Decoder',
@@ -617,6 +1065,14 @@ export const tools: ToolMeta[] = [
     keywords: ['base64 decoder', 'decode base64', 'base64 to text'],
     intent: 'informational', category: 'Developer Tools', h1: 'Base64 Decoder',
     shortIntro: 'Decode Base64 back to text instantly.', published: true,
+    longTailKeywords: [
+      'base64 to text decoder',
+      'decode base64 with utf 8',
+      'base64 string to readable text',
+      'convert base64 back to text',
+    ],
+    titleLongTail: 'Base64 Decoder - Decode Base64 to Text Free Online Tool',
+    descriptionLongTail: 'Decode Base64 back to text instantly with proper UTF-8 support. Convert Base64 strings to readable text including emojis and unicode. Free, no signup.',
   },
   {
     slug: 'html-escape', name: 'HTML Escape',
@@ -625,6 +1081,14 @@ export const tools: ToolMeta[] = [
     keywords: ['html escape', 'escape html characters', 'html entity encoder'],
     intent: 'informational', category: 'Developer Tools', h1: 'HTML Escape',
     shortIntro: 'Escape HTML special characters to prevent XSS attacks.', published: true,
+    longTailKeywords: [
+      'html escape special characters',
+      'html entity encoder online',
+      'escape html for xss prevention',
+      'encode html ampersand and brackets',
+    ],
+    titleLongTail: 'HTML Escape Tool - Escape Special Characters Free Online',
+    descriptionLongTail: 'Escape HTML special characters to prevent XSS attacks. Encode ampersand, brackets, and quotes into entities for safe display, instantly. Free, no signup.',
   },
   {
     slug: 'html-unescape', name: 'HTML Unescape',
@@ -633,6 +1097,14 @@ export const tools: ToolMeta[] = [
     keywords: ['html unescape', 'decode html entities', 'html entity decoder'],
     intent: 'informational', category: 'Developer Tools', h1: 'HTML Unescape',
     shortIntro: 'Convert HTML entities back to readable characters.', published: true,
+    longTailKeywords: [
+      'html unescape entities',
+      'decode html entities online',
+      'convert amp lt gt to characters',
+      'html entity to text decoder',
+    ],
+    titleLongTail: 'HTML Unescape Tool - Decode HTML Entities Free Online',
+    descriptionLongTail: 'Convert HTML entities back to readable characters. Decode named and numeric entities into plain text instantly and privately in your browser. Free, no signup.',
   },
   {
     slug: 'url-encoder', name: 'URL Encoder',
@@ -641,6 +1113,14 @@ export const tools: ToolMeta[] = [
     keywords: ['url encoder', 'encode url', 'percent encoding', 'uri encoder'],
     intent: 'informational', category: 'Developer Tools', h1: 'URL Encoder',
     shortIntro: 'Encode text for safe use in URLs.', published: true,
+    longTailKeywords: [
+      'url encode special characters',
+      'percent encoding online',
+      'encode text for url query',
+      'uri encoder for spaces and unicode',
+    ],
+    titleLongTail: 'URL Encoder - Percent Encoding for URLs Free Online Tool',
+    descriptionLongTail: 'Encode text for safe use in URLs. Percent-encode spaces, special characters, and unicode for query strings and paths, instantly and privately. Free, no signup.',
   },
   {
     slug: 'url-decoder', name: 'URL Decoder',
@@ -649,6 +1129,14 @@ export const tools: ToolMeta[] = [
     keywords: ['url decoder', 'decode url', 'percent decoder', 'uri decoder'],
     intent: 'informational', category: 'Developer Tools', h1: 'URL Decoder',
     shortIntro: 'Decode percent-encoded URLs back to text.', published: true,
+    longTailKeywords: [
+      'url decode percent encoding',
+      'decode url encoded string',
+      'percent decoder online',
+      'uri decoder to readable text',
+    ],
+    titleLongTail: 'URL Decoder - Decode Percent-Encoded URLs Free Online',
+    descriptionLongTail: 'Decode percent-encoded URLs back to readable text. Convert percent codes into spaces and characters instantly and privately in your browser. Free, no signup.',
   },
 
   // ══════════ 第三批:文本工具(10 个)══════════
@@ -659,6 +1147,14 @@ export const tools: ToolMeta[] = [
     keywords: ['uppercase converter', 'text to uppercase', 'caps converter', 'all caps text'],
     intent: 'informational', category: 'Text Tools', h1: 'Uppercase Converter',
     shortIntro: 'Convert any text to ALL UPPERCASE instantly.', published: true,
+    longTailKeywords: [
+      'convert text to uppercase',
+      'all caps converter online',
+      'text to all capitals',
+      'make text uppercase instantly',
+    ],
+    titleLongTail: 'Uppercase Converter - Convert Text to ALL CAPS Free Online',
+    descriptionLongTail: 'Convert any text to ALL UPPERCASE instantly. Turn sentences, words, or paragraphs into all caps in your browser, privately and instantly. Free, no signup.',
   },
   {
     slug: 'lowercase-converter', name: 'Lowercase Converter',
@@ -667,6 +1163,14 @@ export const tools: ToolMeta[] = [
     keywords: ['lowercase converter', 'text to lowercase', 'small letters converter'],
     intent: 'informational', category: 'Text Tools', h1: 'Lowercase Converter',
     shortIntro: 'Convert any text to lowercase instantly.', published: true,
+    longTailKeywords: [
+      'convert text to lowercase',
+      'small letters converter',
+      'text to all lower case',
+      'make text lowercase instantly',
+    ],
+    titleLongTail: 'Lowercase Converter - Convert Text to lowercase Free Online',
+    descriptionLongTail: 'Convert any text to lowercase instantly. Turn ALL CAPS sentences into small letters in your browser, privately and with no signup required. Free, no signup.',
   },
   {
     slug: 'title-case-converter', name: 'Title Case Converter',
@@ -675,6 +1179,14 @@ export const tools: ToolMeta[] = [
     keywords: ['title case converter', 'capitalize each word', 'title case generator'],
     intent: 'informational', category: 'Text Tools', h1: 'Title Case Converter',
     shortIntro: 'Capitalize the first letter of each word for titles and headings.', published: true,
+    longTailKeywords: [
+      'capitalize first letter of each word',
+      'title case generator',
+      'convert text to title case',
+      'heading capitalizer tool',
+    ],
+    titleLongTail: 'Title Case Converter - Capitalize Each Word Free Online Tool',
+    descriptionLongTail: 'Capitalize the first letter of each word for titles and headings. Convert text to title case for blog posts, headlines, and essays, instantly. Free, no signup.',
   },
   {
     slug: 'sentence-case-converter', name: 'Sentence Case Converter',
@@ -683,6 +1195,14 @@ export const tools: ToolMeta[] = [
     keywords: ['sentence case converter', 'sentence capitalizer', 'capitalize sentences'],
     intent: 'informational', category: 'Text Tools', h1: 'Sentence Case Converter',
     shortIntro: 'Capitalize the first letter of each sentence automatically.', published: true,
+    longTailKeywords: [
+      'capitalize first letter of each sentence',
+      'sentence case generator',
+      'convert text to sentence case',
+      'auto capitalize sentence starts',
+    ],
+    titleLongTail: 'Sentence Case Converter - Capitalize Sentences Free Online',
+    descriptionLongTail: 'Capitalize the first letter of each sentence automatically. Convert text to sentence case for paragraphs and articles, instantly and privately. Free, no signup.',
   },
   {
     slug: 'reverse-text', name: 'Reverse Text Generator',
@@ -691,6 +1211,14 @@ export const tools: ToolMeta[] = [
     keywords: ['reverse text', 'text reverser', 'reverse letters', 'backwards text'],
     intent: 'informational', category: 'Text Tools', h1: 'Reverse Text Generator',
     shortIntro: 'Reverse any text — fun for puzzles and ciphers.', published: true,
+    longTailKeywords: [
+      'reverse text letters online',
+      'backwards text generator',
+      'reverse words in text',
+      'flip text for puzzles',
+    ],
+    titleLongTail: 'Reverse Text Generator - Backwards Letters Free Online Tool',
+    descriptionLongTail: 'Reverse any text backwards for puzzles and ciphers. Flip letters, words, or whole sentences instantly and privately right in your browser. Free, no signup.',
   },
   {
     slug: 'remove-duplicate-lines', name: 'Remove Duplicate Lines',
@@ -699,6 +1227,14 @@ export const tools: ToolMeta[] = [
     keywords: ['remove duplicate lines', 'dedupe lines', 'delete duplicate rows', 'unique lines'],
     intent: 'informational', category: 'Text Tools', h1: 'Remove Duplicate Lines',
     shortIntro: 'Clean up lists by removing duplicate lines while keeping order.', published: true,
+    longTailKeywords: [
+      'remove duplicate lines keep order',
+      'dedupe list of lines',
+      'delete duplicate rows in text',
+      'unique lines preserve order',
+    ],
+    titleLongTail: 'Remove Duplicate Lines - Dedupe List & Keep Order Free',
+    descriptionLongTail: 'Clean up lists by removing duplicate lines while keeping order. Dedupe any list and keep the first occurrence of each line, instantly. Free, no signup.',
   },
   {
     slug: 'sort-lines', name: 'Sort Text Lines',
@@ -707,6 +1243,14 @@ export const tools: ToolMeta[] = [
     keywords: ['sort lines', 'alphabetical sort', 'sort text lines', 'sort list online'],
     intent: 'informational', category: 'Text Tools', h1: 'Sort Text Lines',
     shortIntro: 'Sort any list alphabetically in one click.', published: true,
+    longTailKeywords: [
+      'sort lines alphabetically',
+      'alphabetical sort online',
+      'order text lines a to z',
+      'sort list ascending free',
+    ],
+    titleLongTail: 'Sort Lines Alphabetically - Order Text A to Z Free Tool',
+    descriptionLongTail: 'Sort any list alphabetically in one click. Order text lines from A to Z, remove empties, and clean up lists instantly and privately in browser. Free, no signup.',
   },
   {
     slug: 'remove-line-breaks', name: 'Remove Line Breaks',
@@ -715,6 +1259,14 @@ export const tools: ToolMeta[] = [
     keywords: ['remove line breaks', 'join lines', 'single line text', 'remove newlines'],
     intent: 'informational', category: 'Text Tools', h1: 'Remove Line Breaks',
     shortIntro: 'Join multi-line text into a single line.', published: true,
+    longTailKeywords: [
+      'remove line breaks from text',
+      'join lines into one line',
+      'replace newlines with spaces',
+      'single line text converter',
+    ],
+    titleLongTail: 'Remove Line Breaks - Join Text Into One Line Free Online',
+    descriptionLongTail: 'Join multi-line text into a single line by removing line breaks. Replace newlines with spaces or nothing instantly, privately in your browser. Free, no signup.',
   },
   {
     slug: 'find-and-replace', name: 'Find and Replace Text',
@@ -723,6 +1275,14 @@ export const tools: ToolMeta[] = [
     keywords: ['find and replace', 'text replace tool', 'bulk replace text'],
     intent: 'informational', category: 'Text Tools', h1: 'Find and Replace Text',
     shortIntro: 'Find and replace any text instantly.', published: true,
+    longTailKeywords: [
+      'find and replace text online',
+      'bulk replace in text',
+      'search replace multiple words',
+      'replace all occurrences tool',
+    ],
+    titleLongTail: 'Find and Replace Text - Bulk Replace Online Free Tool',
+    descriptionLongTail: 'Find and replace any text instantly. Bulk replace all occurrences of words or phrases in your text, privately and instantly in your browser. Free, no signup.',
   },
   {
     slug: 'whitespace-remover', name: 'Whitespace Remover',
@@ -731,6 +1291,14 @@ export const tools: ToolMeta[] = [
     keywords: ['whitespace remover', 'remove extra spaces', 'trim spaces', 'collapse whitespace'],
     intent: 'informational', category: 'Text Tools', h1: 'Whitespace Remover',
     shortIntro: 'Clean up messy spacing in any text.', published: true,
+    longTailKeywords: [
+      'remove extra spaces in text',
+      'trim leading trailing whitespace',
+      'collapse multiple spaces',
+      'clean up messy spacing',
+    ],
+    titleLongTail: 'Whitespace Remover - Trim & Collapse Spaces Free Online',
+    descriptionLongTail: 'Clean up messy spacing in any text. Remove extra spaces, trim leading and trailing whitespace, and collapse gaps instantly and privately. Free, no signup.',
   },
 
   // ══════════ 第三批:单位转换器(8 个)══════════
@@ -741,6 +1309,14 @@ export const tools: ToolMeta[] = [
     keywords: ['data storage converter', 'bytes to mb', 'gb to mb', 'file size converter'],
     intent: 'informational', category: 'Unit Converters', h1: 'Data Storage Converter',
     shortIntro: 'Convert between bytes, KB, MB, GB, TB and more.', published: true,
+    longTailKeywords: [
+      'bytes to mb converter',
+      'gb to mb conversion online',
+      'bits to bytes calculator',
+      'tb to gb file size converter',
+    ],
+    titleLongTail: 'Data Storage Converter - Bytes, KB, MB, GB, TB Free Tool',
+    descriptionLongTail: 'Convert between bytes, KB, MB, GB, TB and more instantly. Switch data units for files, drives, and bandwidth, accurately and privately. Free, no signup.',
   },
   {
     slug: 'time-converter', name: 'Time Converter',
@@ -749,6 +1325,14 @@ export const tools: ToolMeta[] = [
     keywords: ['time converter', 'hours to minutes', 'seconds to hours', 'days to weeks'],
     intent: 'informational', category: 'Unit Converters', h1: 'Time Converter',
     shortIntro: 'Convert between seconds, minutes, hours, days and more.', published: true,
+    longTailKeywords: [
+      'hours to minutes converter',
+      'seconds to hours converter',
+      'days to weeks calculator',
+      'milliseconds to seconds',
+    ],
+    titleLongTail: 'Time Converter - Seconds, Minutes, Hours & Days Free Tool',
+    descriptionLongTail: 'Convert between seconds, minutes, hours, days and more. Switch time units for schedules, durations, and timers, accurately and privately. Free, no signup.',
   },
   {
     slug: 'numeral-system-converter', name: 'Number Base Converter',
@@ -757,6 +1341,14 @@ export const tools: ToolMeta[] = [
     keywords: ['binary converter', 'hex converter', 'decimal to binary', 'number base converter'],
     intent: 'informational', category: 'Unit Converters', h1: 'Number Base Converter',
     shortIntro: 'Convert between binary, octal, decimal, and hex.', published: true,
+    longTailKeywords: [
+      'decimal to binary converter',
+      'binary to hex converter',
+      'decimal to hexadecimal online',
+      'octal to decimal converter',
+    ],
+    titleLongTail: 'Number Base Converter - Binary, Hex, Decimal Free Online',
+    descriptionLongTail: 'Convert between binary, octal, decimal, and hex instantly. Switch number bases for programming and computer science, accurately and privately. Free, no signup.',
   },
   {
     slug: 'angle-converter', name: 'Angle Converter',
@@ -765,6 +1357,14 @@ export const tools: ToolMeta[] = [
     keywords: ['angle converter', 'degrees to radians', 'radian to degree'],
     intent: 'informational', category: 'Unit Converters', h1: 'Angle Converter',
     shortIntro: 'Convert between degrees, radians, and gradians.', published: true,
+    longTailKeywords: [
+      'degrees to radians converter',
+      'radians to degrees calculator',
+      'gradians to degrees online',
+      'arcminutes to degrees',
+    ],
+    titleLongTail: 'Angle Converter - Degrees, Radians & Gradians Free Online',
+    descriptionLongTail: 'Convert between degrees, radians, and gradians instantly. Switch angle units for trigonometry, math, and engineering, accurately and privately. Free, no signup.',
   },
   {
     slug: 'fuel-economy-converter', name: 'Fuel Economy Converter',
@@ -773,6 +1373,14 @@ export const tools: ToolMeta[] = [
     keywords: ['fuel economy converter', 'mpg to l 100km', 'fuel consumption converter'],
     intent: 'informational', category: 'Unit Converters', h1: 'Fuel Economy Converter',
     shortIntro: 'Convert between MPG and L/100km for car efficiency.', published: true,
+    longTailKeywords: [
+      'mpg to l 100km converter',
+      'liters per 100km to mpg us',
+      'km per liter to mpg',
+      'fuel consumption unit converter',
+    ],
+    titleLongTail: 'Fuel Economy Converter - MPG to L/100km Free Online Tool',
+    descriptionLongTail: 'Convert between MPG and L/100km for car efficiency. Switch US MPG, UK MPG, and km/L to compare fuel economy, accurately and privately. Free, no signup.',
   },
   {
     slug: 'pressure-converter', name: 'Pressure Converter',
@@ -781,6 +1389,14 @@ export const tools: ToolMeta[] = [
     keywords: ['pressure converter', 'bar to psi', 'pascal to bar', 'atm to psi'],
     intent: 'informational', category: 'Unit Converters', h1: 'Pressure Converter',
     shortIntro: 'Convert between bar, PSI, pascal, atm and more.', published: true,
+    longTailKeywords: [
+      'bar to psi converter',
+      'pascal to bar calculator',
+      'atm to psi online',
+      'tire pressure unit converter',
+    ],
+    titleLongTail: 'Pressure Converter - Bar, PSI, Pascal & atm Free Online',
+    descriptionLongTail: 'Convert between bar, PSI, pascal, atm and more instantly. Switch pressure units for tires, weather, and engineering, accurately and privately. Free, no signup.',
   },
   {
     slug: 'energy-converter', name: 'Energy Converter',
@@ -789,6 +1405,14 @@ export const tools: ToolMeta[] = [
     keywords: ['energy converter', 'joules to calories', 'kwh to joules', 'calorie converter'],
     intent: 'informational', category: 'Unit Converters', h1: 'Energy Converter',
     shortIntro: 'Convert between joules, calories, kWh, and BTU.', published: true,
+    longTailKeywords: [
+      'joules to calories converter',
+      'kwh to joules calculator',
+      'btu to joules online',
+      'calorie to kilojoule converter',
+    ],
+    titleLongTail: 'Energy Converter - Joules, Calories, kWh & BTU Free Tool',
+    descriptionLongTail: 'Convert between joules, calories, kWh, and BTU instantly. Switch energy units for food, electricity, and physics, accurately and privately. Free, no signup.',
   },
   {
     slug: 'frequency-converter', name: 'Frequency Converter',
@@ -797,6 +1421,14 @@ export const tools: ToolMeta[] = [
     keywords: ['frequency converter', 'hz to mhz', 'ghz to hz', 'rpm to hz'],
     intent: 'informational', category: 'Unit Converters', h1: 'Frequency Converter',
     shortIntro: 'Convert between Hz, kHz, MHz, GHz, and RPM.', published: true,
+    longTailKeywords: [
+      'hz to mhz converter',
+      'ghz to hz calculator',
+      'rpm to hz online',
+      'khz to mhz frequency',
+    ],
+    titleLongTail: 'Frequency Converter - Hz, kHz, MHz & GHz Free Online Tool',
+    descriptionLongTail: 'Convert between Hz, kHz, MHz, GHz, and RPM instantly. Switch frequency units for electronics, audio, and engineering, accurately and privately. Free, no signup.',
   },
 
   // ══════════ 第三批:健康计算器(4 个)══════════
@@ -873,6 +1505,14 @@ export const tools: ToolMeta[] = [
     keywords: ['fraction calculator', 'add fractions', 'simplify fractions', 'fraction math'],
     intent: 'informational', category: 'Math Calculators', h1: 'Fraction Calculator',
     shortIntro: 'Add, subtract, multiply, divide fractions with exact math.', published: true,
+    longTailKeywords: [
+      'fraction calculator with steps',
+      'add subtract multiply divide fractions',
+      'simplify fractions calculator',
+      'fractions with exact math',
+    ],
+    titleLongTail: 'Fraction Calculator with Steps - Add & Simplify Free Tool',
+    descriptionLongTail: 'Add, subtract, multiply, and divide fractions with exact math. Get simplified results and step-by-step working for homework, instantly. Free, no signup.',
   },
   {
     slug: 'ratio-calculator', name: 'Ratio Calculator',
@@ -881,6 +1521,14 @@ export const tools: ToolMeta[] = [
     keywords: ['ratio calculator', 'proportion solver', 'solve ratio', 'cross multiply'],
     intent: 'informational', category: 'Math Calculators', h1: 'Ratio Calculator',
     shortIntro: 'Solve proportions and find missing ratio values.', published: true,
+    longTailKeywords: [
+      'ratio calculator solve proportion',
+      'find missing value in ratio',
+      'cross multiply proportion solver',
+      'solve proportion a b c d',
+    ],
+    titleLongTail: 'Ratio Calculator - Solve Proportions & Find Missing Free',
+    descriptionLongTail: 'Solve proportions and find missing ratio values with cross multiplication. Find the unknown value in any A:B = C:D ratio instantly, accurately. Free, no signup.',
   },
   {
     slug: 'lcm-gcd-calculator', name: 'LCM & GCD Calculator',
@@ -889,6 +1537,14 @@ export const tools: ToolMeta[] = [
     keywords: ['lcm calculator', 'gcd calculator', 'greatest common divisor', 'least common multiple'],
     intent: 'informational', category: 'Math Calculators', h1: 'LCM & GCD Calculator',
     shortIntro: 'Find LCM and GCD of any set of numbers.', published: true,
+    longTailKeywords: [
+      'lcm of three numbers calculator',
+      'gcd of any set of numbers',
+      'least common multiple calculator',
+      'greatest common divisor finder',
+    ],
+    titleLongTail: 'LCM & GCD Calculator - LCM of Three Numbers Free Online',
+    descriptionLongTail: 'Find LCM and GCD of any set of numbers. Get the least common multiple and greatest common divisor for fractions and homework, instantly. Free, no signup.',
   },
 
   // ══════════ 第三批:金融计算器(7 个)══════════
@@ -915,6 +1571,14 @@ export const tools: ToolMeta[] = [
     keywords: ['markup calculator', 'price markup', 'profit margin calculator'],
     intent: 'commercial', category: 'Finance Calculators', h1: 'Markup Calculator',
     shortIntro: 'Find selling price and margin from cost and markup.', published: true,
+    longTailKeywords: [
+      'markup calculator with margin',
+      'selling price from cost and markup',
+      'markup vs margin calculator',
+      'profit margin from cost calculator',
+    ],
+    titleLongTail: 'Markup Calculator - Cost, Selling Price & Margin Free Tool',
+    descriptionLongTail: 'Find selling price and margin from cost and markup percentage. See the difference between markup and margin for any product, instantly. Free, no signup.',
   },
   {
     slug: 'hourly-to-salary-calculator', name: 'Hourly to Salary Calculator',
@@ -1043,6 +1707,14 @@ export const tools: ToolMeta[] = [
     h1: 'Average Calculator',
     shortIntro: 'Calculate mean, median, sum, min, max, and range of any number list.',
     published: true,
+    longTailKeywords: [
+      'mean median mode calculator',
+      'average of list of numbers',
+      'sum min max range calculator',
+      'arithmetic mean calculator',
+    ],
+    titleLongTail: 'Average Calculator - Mean, Median, Min, Max & Range Free',
+    descriptionLongTail: 'Calculate mean, median, sum, min, max, and range of any number list. Get instant statistics by pasting your data, all in your browser. Free, no signup.',
   },
   {
     slug: 'date-difference-calculator',
@@ -1467,6 +2139,14 @@ export const tools: ToolMeta[] = [
     h1: 'Password Generator',
     shortIntro: 'Create strong, random, and secure passwords in one click.',
     published: true,
+    longTailKeywords: [
+      'strong random password generator',
+      'secure password with symbols',
+      'password length 16 generator',
+      'create unguessable password',
+    ],
+    titleLongTail: 'Strong Password Generator - Random & Secure Free Online',
+    descriptionLongTail: 'Create strong, random, and secure passwords in one click. Customize length, symbols, numbers, and uppercase, all privately in your browser. Free, no signup.',
   },
   {
     slug: 'word-counter',
@@ -1486,6 +2166,14 @@ export const tools: ToolMeta[] = [
     h1: 'Word Counter',
     shortIntro: 'Count words, characters, sentences, and reading time instantly.',
     published: true,
+    longTailKeywords: [
+      'word and character counter',
+      'count words and sentences',
+      'reading time from word count',
+      'text statistics for essays',
+    ],
+    titleLongTail: 'Word Counter - Words, Characters & Reading Time Free Tool',
+    descriptionLongTail: 'Count words, characters, sentences, and reading time instantly. Get text statistics for essays, articles, and social media, privately. Free, no signup.',
   },
   {
     slug: 'qr-code-generator',
@@ -1505,6 +2193,14 @@ export const tools: ToolMeta[] = [
     h1: 'QR Code Generator',
     shortIntro: 'Create custom QR codes for URLs, text, and WiFi. Free, no watermark.',
     published: true,
+    longTailKeywords: [
+      'qr code generator for url',
+      'free qr code maker online',
+      'create wifi qr code',
+      'qr code download png svg',
+    ],
+    titleLongTail: 'Free QR Code Generator - URL, Text & WiFi to QR Free Tool',
+    descriptionLongTail: 'Create custom QR codes for URLs, text, and WiFi with no watermark. Download your QR code as PNG or SVG instantly, privately in your browser. Free, no signup.',
   },
   {
     slug: 'slug-generator',
@@ -1518,6 +2214,14 @@ export const tools: ToolMeta[] = [
     h1: 'URL Slug Generator',
     shortIntro: 'Convert titles into clean, SEO-friendly URL slugs instantly.',
     published: true,
+    longTailKeywords: [
+      'url slug generator from title',
+      'seo friendly slug maker',
+      'slugify text with separator',
+      'clean permalink generator',
+    ],
+    titleLongTail: 'URL Slug Generator - SEO-Friendly Slugs from Title Free',
+    descriptionLongTail: 'Convert titles into clean, SEO-friendly URL slugs instantly. Slugify any text with custom separators, lowercase, and transliteration. Free, no signup.',
   },
 ]
 
