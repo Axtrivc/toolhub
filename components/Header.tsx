@@ -62,7 +62,9 @@ export function Header() {
         backgroundColor: 'rgb(var(--bg-card) / 0.9)',
       }}
     >
-      <div className="container-page flex h-16 items-center justify-between">
+      {/* Header 内层容器:全宽铺满(去掉版心 max-w-* 限制),
+          保留 flex justify-between items-center,左右贴边 + 响应式 padding。 */}
+      <div className="flex h-16 w-full items-center justify-between px-4 sm:px-8 lg:px-12">
         <Link href="/" className="flex items-center gap-2 font-bold" style={{ color: 'rgb(var(--text))' }}>
           <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-brand-600 text-white">
             T
@@ -168,7 +170,7 @@ export function Header() {
               backgroundColor: 'rgb(var(--bg-card))',
             }}
           >
-            <nav className="container-page flex flex-col py-2" style={{ color: 'rgb(var(--text))' }}>
+            <nav className="flex w-full flex-col px-4 py-2 sm:px-8 lg:px-12" style={{ color: 'rgb(var(--text))' }}>
               <Link
                 href="/"
                 onClick={close}
