@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import Link from 'next/link'
 import type { ToolMeta } from '@/lib/tools'
 import { getToolIcon } from '@/lib/tools'
@@ -23,6 +23,20 @@ export function HomePageClient({ tools }: HomePageClientProps) {
   const [query, setQuery] = useState('')
   // null = 全部;其它值 = 某个具体分类(工具的 category 字段,英文)
   const [activeCategory, setActiveCategory] = useState<string | null>(null)
+
+  // 支持通过 URL ?category=Finance%20Calculators 预选分类。
+  // 用途:工具详情页面包屑中的"分类"链接回首页时自动选中对应分类,
+  // 同时配合 URL 中的 #<Category> 锚点滚动到该分类区块。
+  // 仅在首次挂载读取一次,不覆盖用户后续的手动筛选。
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+    const params = new URLSearchParams(window.location.search)
+    const cat = params.get('category')
+    if (cat && categories.includes(cat)) {
+      setActiveCategory(cat)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   // 提取分类列表(工具的 category 字段本身是英文,不随语言变化)
   const categories = useMemo(() => {

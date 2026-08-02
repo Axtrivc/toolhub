@@ -193,7 +193,9 @@ export function buildBreadcrumbJsonLd(slug: string) {
     '@type': 'BreadcrumbList',
     itemListElement: [
       item('Home', `${SITE_URL}/`, 1),
-      item(tool.category, `${SITE_URL}/tools/#${encodeURIComponent(tool.category)}`, 2),
+      // 分类层指向首页并选中该分类(与面包屑 UI 链接保持一致),
+      // 不再指向已废弃的 /tools/ 旧枢纽页。
+      item(tool.category, `${SITE_URL}/?category=${encodeURIComponent(tool.category)}#${encodeURIComponent(tool.category)}`, 2),
       item(tool.name, `${SITE_URL}/tools/${tool.slug}/`, 3),
     ],
   }

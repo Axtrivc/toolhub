@@ -32,7 +32,9 @@
   }
 
   :root {
-    --max-width: 1100px;
+    /* 与 Tailwind max-w-7xl 对齐(80rem = 1280px)。
+       原 1100px 在宽屏下左右留白过大、3 列网格偏挤;调宽后卡片更舒展。 */
+    --max-width: 1280px;
   }
 
   html {
@@ -113,7 +115,9 @@
 
 @layer components {
   .container-page {
-    @apply mx-auto w-full max-w-[var(--max-width)] px-4 sm:px-6;
+    /* 版心:max-w-7xl(1280px)+ 响应式左右内边距。
+       宽屏下留出呼吸空间,3 列网格自然展开。 */
+    @apply mx-auto w-full max-w-[var(--max-width)] px-4 sm:px-6 lg:px-8;
   }
 
   /* 内容区里的 SEO 长文本块(.prose-content / max-w-3xl)统一居中。
