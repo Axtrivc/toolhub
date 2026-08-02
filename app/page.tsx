@@ -1,5 +1,6 @@
 'use client'
 
+import Link from 'next/link'
 import { getPublishedTools } from '@/lib/tools'
 import { AdSlot } from '@/components/AdSlot'
 import { HomePageClient } from '@/components/HomePageClient'
@@ -9,6 +10,13 @@ import { t } from '@/lib/i18n'
 export default function HomePage() {
   const tools = getPublishedTools()
   const { locale } = useApp()
+
+  // 按分类聚合,用于首页"按分类浏览"内链区(SEO 内链 + 用户导航)
+  const byCategory = tools.reduce<Record<string, number>>((acc, tool) => {
+    acc[tool.category] = (acc[tool.category] ?? 0) + 1
+    return acc
+  }, {})
+  const categories = Object.entries(byCategory).sort((a, b) => b[1] - a[1])
 
   return (
     <div className="container-page py-12">
@@ -58,6 +66,56 @@ export default function HomePage() {
           across finance, math, health, unit conversion, and developer utilities, there&apos;s a good
           chance we have what you need. New tools are added regularly, so bookmark this page.
         </p>
+
+        {/* 按分类浏览 —— 内链区:首页指向 /tools/ 枢纽页各分类锚点,
+            既利于 SEO 内链网络,也帮用户快速跳到具体类别。 */}
+        <h2>Browse Tools by Category</h2>
+        <p>
+          Looking for something specific? Jump straight to a category, or open the{' '}
+          <Link href="/tools/">
+            <strong>full tools directory</strong>
+          </Link>{' '}
+          to search all {tools.length} tools.
+        </p>
+        <ul>
+          {categories.map(([cat, count]) => (
+            <li key={cat}>
+              <Link href={`/tools/#${encodeURIComponent(cat)}`}>{cat}</Link> ({count} tools)
+            </li>
+          ))}
+        </ul>
+
+        {/* 热门工具直达 —— 高搜索量工具的站内深度内链,强化权重传递 */}
+        <h2>Popular Tools</h2>
+        <p>
+          Some of our most-used utilities, good places to start:
+        </p>
+        <ul>
+          <li>
+            <Link href="/tools/mortgage-calculator/">Mortgage Calculator with PMI and Taxes</Link> —
+            estimate monthly home-loan payments including insurance.
+          </li>
+          <li>
+            <Link href="/tools/percentage-calculator/">Percentage Calculator</Link> — percent of a
+            number, increase, decrease, and discounts.
+          </li>
+          <li>
+            <Link href="/tools/bmi-calculator/">BMI Calculator</Link> — body mass index with healthy
+            weight range, metric or imperial.
+          </li>
+          <li>
+            <Link href="/tools/json-formatter/">JSON Formatter and Validator</Link> — beautify,
+            minify, and validate JSON instantly.
+          </li>
+          <li>
+            <Link href="/tools/word-counter/">Word Counter</Link> — words, characters, sentences, and
+            estimated reading time.
+          </li>
+          <li>
+            <Link href="/tools/length-converter/">Length Converter</Link> — meters, feet, inches,
+            miles, and more.
+          </li>
+        </ul>
       </section>
     </div>
   )

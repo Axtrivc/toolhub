@@ -12,6 +12,7 @@ export function Header() {
 
   return (
     <header
+      data-embed-hide
       className="sticky top-0 z-40 border-b backdrop-blur"
       style={{
         borderColor: 'rgb(var(--border))',

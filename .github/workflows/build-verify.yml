@@ -1,0 +1,53 @@
+# 构建冒烟测试 —— 每次 push 到 main 时在 CI 里跑一次 next build,
+# 确保提交不会破坏静态导出。若失败,GitHub 会在 commit 上显示红叉,
+# 提示在 Cloudflare 构建失败、线上可能回退到旧版前及时修复。
+#
+# 这是"防回退"守卫:不替代 Cloudflare 的部署,只提前在 CI 验证可构建性。
+name: Build Verify
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+# 同分支并发 push 时取消旧的构建,节省 Actions 额度
+concurrency:
+  group: build-verify-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build (static export)
+        run: npm run build
+        env:
+          # 静态导出不需要真实 URL,但 SITE_URL 有默认值,这里保持一致
+          NEXT_PUBLIC_SITE_URL: 'https://toolhub.axtrivc.com'
+
+      - name: Verify static output exists
+        run: |
+          # 确认静态导出真的生成了工具页,而非静默失败
+          tool_count=$(find out/tools -name "index.html" -type f | wc -l)
+          echo "Generated tool pages: $tool_count"
+          if [ "$tool_count" -lt 100 ]; then
+            echo "::error::Expected 100+ tool pages, got $tool_count. Build may have failed silently."
+            exit 1
+          fi
+          # 确认 sitemap 和 ads.txt 存在
+          test -f out/sitemap.xml || { echo "::error::sitemap.xml missing"; exit 1; }
+          test -f out/ads.txt || { echo "::error::ads.txt missing"; exit 1; }
+          echo "✓ All critical files present"
