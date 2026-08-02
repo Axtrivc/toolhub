@@ -16,6 +16,13 @@ export function Header() {
   const [searchOpen, setSearchOpen] = useState(false)
   const panelId = useId()
 
+  // 平台检测:决定搜索按钮上 kbd 提示显示 ⌘K(Mac)还是 Ctrl K(Win/Linux)。
+  // 只在客户端首帧后判定,SSR 阶段默认 false(显示 Ctrl K),避免 hydration mismatch。
+  const [isMac, setIsMac] = useState(false)
+  useEffect(() => {
+    setIsMac(typeof navigator !== 'undefined' && /Mac|iPhone|iPad|iPod/.test(navigator.platform || navigator.userAgent))
+  }, [])
+
   // 工具清单(全站搜索用)。lib/tools 是纯模块,与首页同一份口径。
   const tools = useRef(getPublishedTools()).current
 
@@ -105,15 +112,20 @@ export function Header() {
               onClick={openSearch}
               aria-label={t(locale, 'searchOpen')}
               title={t(locale, 'searchOpen')}
-              className="flex h-9 w-9 items-center justify-center rounded-lg border transition hover:bg-slate-100 dark:hover:bg-slate-700"
+              className="flex h-9 items-center gap-1.5 rounded-lg border pl-2.5 pr-2 transition hover:bg-slate-100 dark:hover:bg-slate-700"
               style={{
                 borderColor: 'rgb(var(--border-strong))',
                 color: 'rgb(var(--text-muted))',
               }}
             >
-              <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <svg className="h-5 w-5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-4.35-4.35M11 19a8 8 0 100-16 8 8 0 000 16z" />
               </svg>
+              {/* 键盘快捷键微型提示:桌面端可见,极隐蔽高质感。
+                  Mac 显示 ⌘K,Windows/Linux 显示 Ctrl K;移动端 hidden。 */}
+              <kbd className="hidden items-center gap-0.5 rounded border border-gray-200 bg-gray-100 px-1.5 py-0.5 text-[10px] font-medium text-gray-400 opacity-70 transition-opacity hover:opacity-100 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-500 sm:inline-flex">
+                {isMac ? '⌘K' : 'Ctrl K'}
+              </kbd>
             </button>
             <LanguageToggle />
             <ThemeToggle />
