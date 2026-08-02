@@ -112,7 +112,7 @@ export function makeCalculatorClient(config: CalculatorConfig): ComponentType {
                 </div>
               )
             }
-            // 默认 number/text
+            // 默认 number/text:由 f.type 决定输入框 type(默认 number,select 在上方分支已处理)
             return (
               <CalculatorField
                 key={f.key}
@@ -122,7 +122,7 @@ export function makeCalculatorClient(config: CalculatorConfig): ComponentType {
                 onChange={(v) => setValue(f.key, v)}
                 suffix={f.suffix}
                 placeholder={f.placeholder}
-                type={f.suffix ? 'number' : 'number'}
+                type={f.type === 'text' ? 'text' : 'number'}
               />
             )
           })}

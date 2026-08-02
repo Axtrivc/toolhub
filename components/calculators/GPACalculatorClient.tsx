@@ -85,7 +85,7 @@ export function GPACalculatorClient() {
               value={c.name}
               onChange={(e) => updateCourse(c.id, { name: e.target.value })}
               placeholder="Course name"
-              className="col-span-12 rounded-md border border-slate-300 px-2 py-1.5 text-sm outline-none focus:border-brand-500 sm:col-span-5"
+              className="col-span-12 rounded-md border border-slate-300 px-3 py-2.5 text-sm outline-none focus:border-brand-500 sm:col-span-5 sm:px-2 sm:py-1.5"
             />
             <input
               type="number"
@@ -93,12 +93,14 @@ export function GPACalculatorClient() {
               onChange={(e) => updateCourse(c.id, { credits: e.target.value })}
               min="0"
               step="0.5"
-              className="col-span-4 rounded-md border border-slate-300 px-2 py-1.5 text-sm outline-none focus:border-brand-500 sm:col-span-2"
+              aria-label="Credits"
+              className="col-span-5 rounded-md border border-slate-300 px-3 py-2.5 text-sm outline-none focus:border-brand-500 sm:col-span-2 sm:px-2 sm:py-1.5"
             />
             <select
               value={c.grade}
               onChange={(e) => updateCourse(c.id, { grade: e.target.value })}
-              className="col-span-5 rounded-md border border-slate-300 bg-white px-2 py-1.5 text-sm outline-none focus:border-brand-500 sm:col-span-3"
+              aria-label="Grade"
+              className="col-span-7 rounded-md border border-slate-300 bg-white px-3 py-2.5 text-sm outline-none focus:border-brand-500 sm:col-span-3 sm:px-2 sm:py-1.5"
             >
               {Object.keys(GRADE_POINTS).map((g) => (
                 <option key={g} value={g}>
@@ -109,7 +111,7 @@ export function GPACalculatorClient() {
             <button
               type="button"
               onClick={() => removeCourse(c.id)}
-              className="col-span-3 rounded-md bg-red-50 px-2 py-1.5 text-xs text-red-600 hover:bg-red-100 sm:col-span-2"
+              className="col-span-12 rounded-md bg-red-50 px-3 py-2.5 text-sm text-red-600 hover:bg-red-100 sm:col-span-2 sm:px-2 sm:py-1.5 sm:text-xs"
             >
               Remove
             </button>

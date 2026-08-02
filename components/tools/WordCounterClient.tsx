@@ -115,7 +115,7 @@ export function WordCounterClient() {
             <button
               type="button"
               onClick={() => setText('')}
-              className="text-xs text-slate-400 hover:text-red-500"
+              className="-my-1 rounded-md px-2 py-1 text-xs text-slate-400 hover:text-red-500 sm:text-sm"
             >
               Clear
             </button>

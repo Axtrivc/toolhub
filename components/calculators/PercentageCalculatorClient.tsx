@@ -1,7 +1,7 @@
 'use client'
 
-import { useState } from 'react'
 import { CalculatorField, ResultCard, CalculatorNote } from '@/components/calculator/CalculatorField'
+import { useUrlState } from '@/lib/useUrlState'
 
 const fmt = (n: number, digits = 4) => {
   if (!isFinite(n)) return '—'
@@ -9,21 +9,23 @@ const fmt = (n: number, digits = 4) => {
 }
 
 export function PercentageCalculatorClient() {
+  // URL 同步示例:四个模式各自的输入都进 query string(?p1p=15&p1v=200&...),
+  // 刷新/分享链接即恢复现场。其余计算逻辑不变。
   // 模式1: X% of Y
-  const [p1Percent, setP1Percent] = useState('15')
-  const [p1Value, setP1Value] = useState('200')
+  const [p1Percent, setP1Percent] = useUrlState('p1p', '15')
+  const [p1Value, setP1Value] = useUrlState('p1v', '200')
 
   // 模式2: X is what % of Y
-  const [p2Part, setP2Part] = useState('30')
-  const [p2Whole, setP2Whole] = useState('200')
+  const [p2Part, setP2Part] = useUrlState('p2part', '30')
+  const [p2Whole, setP2Whole] = useUrlState('p2whole', '200')
 
   // 模式3: 百分比增加/减少(从 X 到 Y)
-  const [p3From, setP3From] = useState('100')
-  const [p3To, setP3To] = useState('125')
+  const [p3From, setP3From] = useUrlState('p3from', '100')
+  const [p3To, setP3To] = useUrlState('p3to', '125')
 
   // 模式4: X 加/减 Y%
-  const [p4Value, setP4Value] = useState('80')
-  const [p4Percent, setP4Percent] = useState('15')
+  const [p4Value, setP4Value] = useUrlState('p4v', '80')
+  const [p4Percent, setP4Percent] = useUrlState('p4p', '15')
 
   const r1 = (Number(p1Percent) / 100) * Number(p1Value)
   const r2Whole = Number(p2Whole)

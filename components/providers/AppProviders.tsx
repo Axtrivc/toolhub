@@ -2,6 +2,7 @@
 
 import { createContext, useContext, useState, useEffect, useCallback, type ReactNode } from 'react'
 import type { Locale } from '@/lib/i18n'
+import { FavoritesProvider } from '@/lib/useFavorites'
 
 /**
  * App 全局上下文:语言 + 主题
@@ -84,7 +85,7 @@ export function AppProviders({ children }: { children: ReactNode }) {
     <AppContext.Provider
       value={{ locale, setLocale, toggleLocale, theme, setTheme, toggleTheme }}
     >
-      {children}
+      <FavoritesProvider>{children}</FavoritesProvider>
     </AppContext.Provider>
   )
 }

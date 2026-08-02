@@ -14,6 +14,13 @@ export interface FieldDef {
   key: string
   /** 显示标签 */
   label: string
+  /**
+   * 输入框类型(仅对非 select 字段生效)。
+   *  - 'number'(默认):渲染 <input type="number">,绝大多数计算器用这个;
+   *  - 'text':渲染 <input type="text">,用于非数值输入(如姓名/代码)。
+   * select 类型由下方 options 字段判定,不受此字段影响。
+   */
+  type?: FieldType
   /** 后缀单位($、%、kg 等) */
   suffix?: string
   /** 默认值 */
