@@ -21,7 +21,7 @@ interface SearchPaletteProps {
 const MAX_RESULTS = 30
 
 /**
- * 全局搜索弹窗(命令面板风格)
+ * 全局搜索弹窗(命令面板风格,参考 Raycast / macOS Spotlight)
  *
  * - 实时过滤 name / shortIntro / keywords / longTailKeywords / category / slug
  * - ↑/↓ 选择,Enter 跳转,ESC 关闭,点击遮罩关闭
@@ -29,6 +29,12 @@ const MAX_RESULTS = 30
  *
  * 受控组件:由 Header 管理 open 状态并监听 Cmd/Ctrl+K 触发。
  * 这里只负责弹窗本身的视觉与交互。
+ *
+ * 视觉要点:
+ * - 顶部偏下对齐(非垂直居中),贴近 Spotlight / Raycast 的肌肉记忆;
+ * - 遮罩毛玻璃(blur) + 卡片 shadow-2xl + 圆角 rounded-2xl;
+ * - 列表容器用 .scrollbar-none 隐藏原生粗滚动条(定义在 globals.css);
+ * - 选中/悬停态用柔和的浅蓝(亮)/深灰(暗)+ transition-colors。
  */
 export function SearchPalette({ tools, locale, open, onClose }: SearchPaletteProps) {
   const [query, setQuery] = useState('')
@@ -121,33 +127,30 @@ export function SearchPalette({ tools, locale, open, onClose }: SearchPalettePro
 
   return (
     <div
-      className="fixed inset-0 z-[60] flex items-start justify-center p-4 pt-[12vh] sm:pt-[15vh]"
+      // 顶部偏下对齐(Raycast/Spotlight 风格),而非垂直居中
+      className="fixed inset-0 z-[60] flex items-start justify-center p-4 pt-[10vh] sm:pt-[14vh]"
       role="dialog"
       aria-modal="true"
       aria-label={t(locale, 'searchPaletteTitle')}
     >
-      {/* 遮罩:点击关闭 */}
+      {/* 遮罩:毛玻璃 + 点击关闭 */}
       <button
         type="button"
         aria-label={t(locale, 'searchClose')}
         tabIndex={-1}
         onClick={onClose}
-        className="absolute inset-0 bg-slate-900/50 backdrop-blur-sm dark:bg-black/60"
+        className="absolute inset-0 bg-black/40 backdrop-blur-sm dark:bg-black/60"
       />
 
-      {/* 面板 */}
+      {/* 面板:圆角 + 描边 + 大阴影,质感升级 */}
       <div
-        className="relative flex max-h-[70vh] w-full max-w-xl flex-col overflow-hidden rounded-2xl border shadow-2xl"
+        className="relative flex max-h-[70vh] w-full max-w-xl flex-col overflow-hidden rounded-2xl border border-gray-100 shadow-2xl ring-1 ring-black/5 dark:border-gray-800 dark:ring-white/5"
         style={{
-          borderColor: 'rgb(var(--border))',
           backgroundColor: 'rgb(var(--bg-card))',
         }}
       >
         {/* 搜索输入 */}
-        <div
-          className="flex items-center gap-3 border-b px-4"
-          style={{ borderColor: 'rgb(var(--border))' }}
-        >
+        <div className="flex items-center gap-3 border-b border-gray-100 px-4 dark:border-gray-800">
           <svg
             className="h-5 w-5 shrink-0"
             style={{ color: 'rgb(var(--text-subtle))' }}
@@ -180,26 +183,23 @@ export function SearchPalette({ tools, locale, open, onClose }: SearchPalettePro
             aria-label={t(locale, 'searchPalettePlaceholder')}
           />
           <kbd
-            className="hidden shrink-0 rounded border px-1.5 py-0.5 text-xs font-medium sm:inline-block"
-            style={{
-              borderColor: 'rgb(var(--border))',
-              color: 'rgb(var(--text-subtle))',
-            }}
+            className="hidden shrink-0 rounded border border-gray-200 px-1.5 py-0.5 text-xs font-medium dark:border-gray-700"
+            style={{ color: 'rgb(var(--text-subtle))' }}
           >
             ESC
           </kbd>
         </div>
 
-        {/* 结果列表 */}
+        {/* 结果列表(隐藏原生滚动条,见 .scrollbar-none) */}
         {results.length === 0 ? (
           <div
-            className="px-4 py-10 text-center text-sm"
+            className="px-4 py-12 text-center text-sm"
             style={{ color: 'rgb(var(--text-muted))' }}
           >
             {t(locale, 'searchNoResults')}
           </div>
         ) : (
-          <ul ref={listRef} className="flex-1 overflow-y-auto p-2">
+          <ul ref={listRef} className="scrollbar-none flex-1 overflow-y-auto p-2">
             {results.map((tool, idx) => {
               const isActive = idx === activeIndex
               const icon = getToolIcon(tool)
@@ -209,18 +209,21 @@ export function SearchPalette({ tools, locale, open, onClose }: SearchPalettePro
                     href={`/tools/${tool.slug}/`}
                     onClick={onClose}
                     onMouseEnter={() => setActiveIndex(idx)}
-                    className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm transition-colors"
-                    style={{
-                      backgroundColor: isActive
-                        ? 'rgb(var(--bg-subtle))'
-                        : 'transparent',
-                      color: 'rgb(var(--text))',
-                    }}
+                    // 选中/悬停态:柔和浅蓝(亮)/ 深灰(暗),150ms 渐变
+                    className={
+                      'flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm transition-colors duration-150 ' +
+                      (isActive
+                        ? 'bg-blue-50/80 dark:bg-gray-800/80'
+                        : 'hover:bg-blue-50/60 dark:hover:bg-gray-800/60')
+                    }
+                    style={{ color: 'rgb(var(--text))' }}
                   >
                     <span
-                      className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md text-base"
+                      className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md text-base transition-colors duration-150"
                       style={{
-                        backgroundColor: 'rgb(var(--bg-subtle))',
+                        backgroundColor: isActive
+                          ? 'rgb(255 255 255 / 0.7)'
+                          : 'rgb(var(--bg-subtle))',
                       }}
                       aria-hidden="true"
                     >
@@ -235,23 +238,25 @@ export function SearchPalette({ tools, locale, open, onClose }: SearchPalettePro
                         {tool.category}
                       </span>
                     </span>
-                    {isActive && (
-                      <svg
-                        className="h-4 w-4 shrink-0"
-                        style={{ color: 'rgb(var(--text-subtle))' }}
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                        strokeWidth={2}
-                        aria-hidden="true"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="M9 5l7 7-7 7"
-                        />
-                      </svg>
-                    )}
+                    {/* 选中态右箭头:用 opacity 过渡,避免抖动 */}
+                    <svg
+                      className="h-4 w-4 shrink-0 transition-opacity duration-150"
+                      style={{
+                        color: 'rgb(var(--text-subtle))',
+                        opacity: isActive ? 1 : 0,
+                      }}
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      strokeWidth={2}
+                      aria-hidden="true"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M9 5l7 7-7 7"
+                      />
+                    </svg>
                   </Link>
                 </li>
               )
@@ -261,11 +266,8 @@ export function SearchPalette({ tools, locale, open, onClose }: SearchPalettePro
 
         {/* 底部提示栏 */}
         <div
-          className="flex items-center justify-between gap-2 border-t px-4 py-2.5 text-xs"
-          style={{
-            borderColor: 'rgb(var(--border))',
-            color: 'rgb(var(--text-subtle))',
-          }}
+          className="flex items-center justify-between gap-2 border-t border-gray-100 px-4 py-2.5 text-xs dark:border-gray-800"
+          style={{ color: 'rgb(var(--text-subtle))' }}
         >
           <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
             <span className="flex items-center gap-1.5">
@@ -295,11 +297,8 @@ export function SearchPalette({ tools, locale, open, onClose }: SearchPalettePro
 function Kbd({ children }: { children: React.ReactNode }) {
   return (
     <kbd
-      className="inline-flex h-5 min-w-[1.25rem] items-center justify-center rounded border px-1 font-sans text-[11px] font-semibold"
-      style={{
-        borderColor: 'rgb(var(--border))',
-        color: 'rgb(var(--text-muted))',
-      }}
+      className="inline-flex h-5 min-w-[1.25rem] items-center justify-center rounded border border-gray-200 px-1 font-sans text-[11px] font-semibold dark:border-gray-700"
+      style={{ color: 'rgb(var(--text-muted))' }}
     >
       {children}
     </kbd>

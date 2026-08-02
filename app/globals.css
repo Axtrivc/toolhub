@@ -160,6 +160,23 @@
 }
 
 /* ────────────────────────────────────────────────────────────
+ * 隐藏原生滚动条工具类(命令面板等需要干净界面的容器用)。
+ * - Chrome / Safari / Edge:用 ::-webkit-scrollbar 把滚动条宽度压到 0;
+ * - Firefox:用 scrollbar-width: none(无 ::-webkit 前缀支持);
+ * - 老版 IE / Edge:用 -ms-overflow-style: none。
+ * 滚动行为本身不受影响(overflow 仍可滚、滚轮/触控板/键盘照常)。
+ * ──────────────────────────────────────────────────────────── */
+.scrollbar-none {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE10+ / legacy Edge */
+}
+.scrollbar-none::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  display: none; /* Chrome / Safari / Edge */
+}
+
+/* ────────────────────────────────────────────────────────────
  * Embed 模式:页面被 iframe 嵌入时(见 EmbedDetectScript),隐藏
  * Header / Footer / 广告 / 面包屑 / 相关工具 / 嵌入邀请 / 信息区等
  * "chrome",只保留工具本体。让外站嵌入干净,鼓励反向链接。
