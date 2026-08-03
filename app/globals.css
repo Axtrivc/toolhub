@@ -188,31 +188,16 @@ html.embed [data-embed-hide] {
 
 /* ════════════════════════════════════════════════════════════
  * 暗黑模式高级感增强(Vercel / Raycast 风格)
- * 全站基调由上面的 CSS 变量驱动;这里是组件级的精修微光/层级。
+ * 全站基调由上面的 CSS 变量驱动;这里是组件级精修。
  * ════════════════════════════════════════════════════════════ */
 
-/* Hero 标题渐变发光字("That Just Work" 等) —— 暗色下蓝紫渐变出彩 */
+/* Hero 标题渐变发光字("That Just Work" 等) —— 暗色下蓝紫渐变出彩。
+   工具卡片暗色质感已迁回组件内的 Tailwind dark: 类(因 inline style 会
+   覆盖类选择器,纯类实现更可控,见 HomePageClient/FeaturedTools)。 */
 html.dark .hero-gradient-text {
   background-image: linear-gradient(to right, rgb(96 165 250), rgb(165 180 252), rgb(56 189 248));
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
   color: transparent;
-}
-
-/* 工具卡片暗色质感:微透光半透明 + backdrop-blur,
-   替代纯实色 slate-800,营造 Vercel/Linear 式的层次纵深。 */
-html.dark .tool-card-dark {
-  background-color: rgb(15 23 42 / 0.6); /* slate-900/60 */
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-color: rgb(30 41 59 / 0.8); /* slate-800/80 极细高级边框 */
-  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
-}
-
-/* Hover 动态微光:蓝紫渐变边框 + 内发光,鼠标悬停时点亮卡片。
-   阴影用低饱和蓝色 15% 透明度,克制不刺眼。 */
-html.dark .tool-card-dark:hover {
-  border-color: rgb(59 130 246 / 0.4); /* blue-500/40 */
-  box-shadow: 0 0 20px rgb(59 130 246 / 0.15);
 }

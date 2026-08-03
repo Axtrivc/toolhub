@@ -200,30 +200,26 @@ export function HomePageClient({ tools }: HomePageClientProps) {
               <Link
                 key={tool.slug}
                 href={`/tools/${tool.slug}/`}
-                className="group rounded-xl border p-6 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md tool-card-dark"
-                style={{
-                  borderColor: 'rgb(var(--border))',
-                  backgroundColor: 'rgb(var(--bg-card))',
-                }}
+                className="group rounded-xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md dark:border-white/[0.08] dark:bg-white/[0.03] dark:backdrop-blur-md dark:shadow-none dark:hover:border-blue-500/40 dark:hover:bg-white/[0.06] dark:hover:shadow-[0_0_20px_rgba(59,130,246,0.12)]"
               >
                 <div className="flex items-start justify-between">
-                  {/* 工具图标:按 category 默认映射 + 明星工具单独定制(见 lib/tools.ts getToolIcon) */}
+                  {/* 工具图标:按 category 默认映射 + 明星工具单独定制(见 lib/tools.ts getToolIcon)。
+                      半透明气泡框(white/10 + border-white/10),替代原沉闷实色底盒。 */}
                   <span
-                    className="flex h-11 w-11 items-center justify-center rounded-xl text-2xl transition-transform group-hover:scale-110"
-                    style={{ backgroundColor: 'rgb(var(--bg-subtle))' }}
+                    className="flex h-11 w-11 items-center justify-center rounded-xl bg-slate-100 text-2xl transition-transform group-hover:scale-110 dark:border dark:border-white/10 dark:bg-white/10"
                     aria-hidden="true"
                   >
                     {getToolIcon(tool)}
                   </span>
                   {/* 右上角显示分类(替代原 PRO/FREE 徽章 —— 工具全免费,PRO 字样会误导用户) */}
-                  <span className="text-xs font-medium uppercase tracking-wide dark:text-slate-500" style={{ color: 'rgb(var(--text-faint))' }}>
+                  <span className="text-xs font-medium uppercase tracking-wide text-slate-400 dark:text-slate-500">
                     {tool.category}
                   </span>
                 </div>
-                <h3 className="mt-4 text-lg font-semibold group-hover:text-brand-600 dark:text-slate-100 dark:font-semibold" style={{ color: 'rgb(var(--text))' }}>
+                <h3 className="mt-4 text-lg font-semibold text-slate-900 group-hover:text-brand-600 dark:font-semibold dark:text-slate-100">
                   {tool.name}
                 </h3>
-                <p className="mt-2 text-sm dark:text-slate-400 dark:text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>
+                <p className="mt-2 text-sm text-slate-500 dark:text-xs dark:text-slate-400">
                   {tool.shortIntro}
                 </p>
               </Link>
