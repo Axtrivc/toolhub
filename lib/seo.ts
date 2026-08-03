@@ -27,8 +27,10 @@ export const siteMetadata: Metadata = {
   authors: [{ name: SITE_NAME }],
   creator: SITE_NAME,
   publisher: SITE_NAME,
-  // PWA + 品牌:favicon、苹果触屏图标、manifest
-  manifest: '/manifest.webmanifest',
+  // PWA + 品牌:favicon、苹果触屏图标、manifest。
+  // 指向静态 public/manifest.json(规格要求 + 双 purpose 图标声明更稳),
+  // layout.tsx 也显式 <link rel="manifest" href="/manifest.json"> 双保险。
+  manifest: '/manifest.json',
   icons: {
     icon: [
       { url: '/favicon.ico', sizes: 'any' },

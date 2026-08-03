@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { getPublishedTools } from '@/lib/tools'
 import { AdSlot } from '@/components/AdSlot'
 import { HomePageClient } from '@/components/HomePageClient'
+import { HomeRecents } from '@/components/HomeRecents'
 import { useApp } from '@/components/providers/AppProviders'
 import { t } from '@/lib/i18n'
 
@@ -36,7 +37,22 @@ export default function HomePage() {
         >
           {t(locale, 'heroSubtitle')}
         </p>
+
+        {/* PWA / 隐私卖点徽章 - 突出"纯前端 + 离线可用"差异化优势 */}
+        <div className="mt-6 flex justify-center">
+          <span
+            className="inline-flex items-center gap-1.5 rounded-full border border-emerald-200 bg-emerald-50 px-4 py-1.5 text-sm font-medium text-emerald-700 shadow-sm dark:border-emerald-800/60 dark:bg-emerald-950/40 dark:text-emerald-300"
+            title={t(locale, 'heroOfflineBadge')}
+          >
+            {t(locale, 'heroOfflineBadge')}
+          </span>
+        </div>
       </section>
+
+      {/* 最近使用 & 我的收藏 - 动态区块,无记录时自动隐藏,有记录时置顶展示 */}
+      <div className="mb-10">
+        <HomeRecents />
+      </div>
 
       {/* 搜索 + 分类 + 工具列表(客户端组件) */}
       <HomePageClient tools={tools} />

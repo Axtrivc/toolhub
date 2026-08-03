@@ -8,6 +8,7 @@ import { ThemeInitScript } from '@/components/ThemeInitScript'
 import { EmbedDetectScript } from '@/components/EmbedDetectScript'
 import { AdSenseScript } from '@/components/AdSlot'
 import { CookieConsent } from '@/components/CookieConsent'
+import { ServiceWorkerRegister } from '@/components/ServiceWorkerRegister'
 import { siteMetadata, websiteJsonLd } from '@/lib/seo'
 
 export const metadata = siteMetadata
@@ -54,6 +55,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         {ADSENSE_PUB_ID && (
           <meta name="google-adsense-account" content={ADSENSE_PUB_ID} />
         )}
+        {/* PWA Web App Manifest - 静态版(与 app/manifest.ts 动态版并存双保险),
+            让 Chrome 触发"添加到主屏幕/安装"弹窗。 */}
+        <link rel="manifest" href="/manifest.json" />
         {/* 站点级结构化数据 */}
         <script
           type="application/ld+json"
@@ -68,6 +72,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         </AppProviders>
         {/* Cookie 同意横幅 - 合规(AdSense/GDPR/CCPA),延迟挂载不影响首屏 */}
         <CookieConsent />
+        {/* PWA Service Worker 注册 - 仅生产,客户端 load 后注册 */}
+        <ServiceWorkerRegister />
       </body>
     </html>
   )

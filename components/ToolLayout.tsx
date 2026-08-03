@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import type { ReactNode } from 'react'
 import { AdSlot } from './AdSlot'
+import { AdPlaceholder } from './AdPlaceholder'
 import { RelatedTools } from './RelatedTools'
 import { ToolInfoSection } from './ToolInfoSection'
 import { VisibleFaqs } from './VisibleFaqs'
@@ -10,6 +11,7 @@ import { FormulaSection } from './FormulaSection'
 import { EmbedTool } from './EmbedTool'
 import { Disclaimer } from './Disclaimer'
 import { FavoriteButton } from './FavoriteButton'
+import { RecentlyUsedTracker } from './RecentlyUsedTracker'
 import { useApp } from './providers/AppProviders'
 import { t } from '@/lib/i18n'
 import { buildFaqJsonLd, buildBreadcrumbJsonLd, buildHowToJsonLd } from '@/lib/seo'
@@ -39,6 +41,9 @@ export function ToolLayout({ tool, children }: ToolLayoutProps) {
 
   return (
     <div className="container-page py-8">
+      {/* 最近使用记录 - 静默写入 localStorage(渲染 null,不影响布局) */}
+      <RecentlyUsedTracker slug={tool.slug} />
+
       {/* HowTo 结构化数据 - 让 Google 展示「How to」步骤化富媒体卡片(标准化 3 步) */}
       {howToJsonLd && (
         <script
@@ -119,6 +124,11 @@ export function ToolLayout({ tool, children }: ToolLayoutProps) {
         {children}
       </div>
 
+      {/* 防CLS 广告位 ① - 工具操作面板正下方(锁死 250px,避免广告加载抖动) */}
+      <div data-embed-hide>
+        <AdPlaceholder slot={`${tool.slug}-in-content`} />
+      </div>
+
       {/* YMYL 免责声明 - 金融/健康类工具渲染,降低 Google YMYL 算法降权风险。
           嵌入时保留(YMYL 合规不能因嵌入而丢失)。 */}
       <Disclaimer tool={tool} />
@@ -130,6 +140,9 @@ export function ToolLayout({ tool, children }: ToolLayoutProps) {
 
         {/* 公式区 - 闭式公式工具渲染,无注册的工具返回 null 不渲染 */}
         <FormulaSection slug={tool.slug} tool={tool} />
+
+        {/* 防CLS 广告位 ② - 文章内容区(content)与 FAQ 模块之间(锁死空间防抖动) */}
+        <AdPlaceholder slot={`${tool.slug}-mid`} />
 
         {/* 可见 FAQ 手风琴 - 与 FAQPage JSON-LD schema 同源(lib/tool-faqs.ts) */}
         <VisibleFaqs slug={tool.slug} />

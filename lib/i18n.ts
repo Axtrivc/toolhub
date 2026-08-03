@@ -21,6 +21,7 @@ export interface Dict {
   heroTitle1: string // "Free Online Tools" 部分(被 {count} 替换)
   heroTitle2: string // "That Just Work"
   heroSubtitle: string
+  heroOfflineBadge: string // PWA/隐私卖点徽章 "⚡ 100% Client-Side & Works Offline"
   // 搜索 & 筛选
   searchPlaceholder: string
   categoryAll: string
@@ -56,6 +57,11 @@ export interface Dict {
   // 工具页相关工具内链
   relatedTitle: string
   relatedSubtitle: string
+  // 首页"最近使用 / 我的收藏"动态区块
+  recentTitle: string
+  recentSubtitle: string
+  // 广告位占位标识
+  adLabel: string
   // 主题切换 aria
   themeToggle: string
   themeLight: string
@@ -84,6 +90,7 @@ const en: Dict = {
   heroTitle2: 'That Just Work',
   heroSubtitle:
     'Fast, privacy-friendly utilities for developers, students, and everyday tasks. Everything runs right in your browser — no signup, no upload, no tracking.',
+  heroOfflineBadge: '⚡ 100% Client-Side & Works Offline',
   searchPlaceholder: 'Search {count} tools... (e.g. "loan", "json", "kg to lb")',
   categoryAll: 'All',
   showingAll: 'Showing all {count} tools',
@@ -113,6 +120,9 @@ const en: Dict = {
   toolDownload: 'Download',
   relatedTitle: 'Related Tools',
   relatedSubtitle: 'More tools you might find useful',
+  recentTitle: 'Recently Used & Favorites',
+  recentSubtitle: 'Pick up right where you left off',
+  adLabel: 'Advertisement',
   themeToggle: 'Toggle theme',
   themeLight: 'Light',
   themeDark: 'Dark',
@@ -138,6 +148,7 @@ const zh: Dict = {
   heroTitle2: '简单好用',
   heroSubtitle:
     '为开发者、学生和日常任务打造的快速、注重隐私的实用工具。所有计算都在浏览器中完成 —— 无需注册,无需上传,不追踪。',
+  heroOfflineBadge: '⚡ 100% 本地运行 · 支持离线',
   searchPlaceholder: '搜索 {count} 个工具...(例如 "loan"、"json"、"kg to lb")',
   categoryAll: '全部',
   showingAll: '显示全部 {count} 个工具',
@@ -167,6 +178,9 @@ const zh: Dict = {
   toolDownload: '下载',
   relatedTitle: '相关工具',
   relatedSubtitle: '你可能还会用到的工具',
+  recentTitle: '最近使用与收藏',
+  recentSubtitle: '从上次离开的地方继续',
+  adLabel: '广告',
   themeToggle: '切换主题',
   themeLight: '浅色',
   themeDark: '深色',
