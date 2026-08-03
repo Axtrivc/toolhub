@@ -55,9 +55,6 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         {ADSENSE_PUB_ID && (
           <meta name="google-adsense-account" content={ADSENSE_PUB_ID} />
         )}
-        {/* PWA Web App Manifest - 静态版(与 app/manifest.ts 动态版并存双保险),
-            让 Chrome 触发"添加到主屏幕/安装"弹窗。 */}
-        <link rel="manifest" href="/manifest.json" />
         {/* 站点级结构化数据 */}
         <script
           type="application/ld+json"
