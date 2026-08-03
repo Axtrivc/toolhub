@@ -35,7 +35,7 @@ export function FeaturedTools({ tools }: FeaturedToolsProps) {
   if (tools.length === 0) return null
 
   return (
-    <section aria-label="Featured tools">
+    <section aria-label="Featured tools" className="w-full">
       {/* 标题:🔥 + 文案,字号 text-xl font-bold */}
       <h2 className="mb-5 flex items-center gap-2 text-xl font-bold" style={{ color: 'rgb(var(--text))' }}>
         <span aria-hidden="true">🔥</span>

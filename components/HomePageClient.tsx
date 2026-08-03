@@ -82,7 +82,7 @@ export function HomePageClient({ tools }: HomePageClientProps) {
   const allActive = activeCategory === null
 
   return (
-    <div className="space-y-8">
+    <div className="w-full space-y-8">
       {/* 搜索框 */}
       <div className="mx-auto max-w-3xl">
         <div className="relative">
