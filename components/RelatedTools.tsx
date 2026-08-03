@@ -1,11 +1,11 @@
 'use client'
 
-import Link from 'next/link'
 import { getRelatedTools } from '@/lib/tools'
 import { getToolIcon } from '@/lib/tools'
 import type { ToolMeta } from '@/lib/tools'
 import { useApp } from './providers/AppProviders'
 import { t } from '@/lib/i18n'
+import { AnimatedToolCard, StaggerGroup } from './motion/MotionPrimitives'
 
 interface RelatedToolsProps {
   /** 当前工具的 slug,用于排除自身并查找相关工具 */
@@ -57,20 +57,15 @@ export function RelatedTools({ slug, limit = 4 }: RelatedToolsProps) {
         </p>
       </header>
 
-      {/* 4 列响应式网格,与首页 ToolCard 网格断点策略一致 */}
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
+      {/* 4 列响应式网格,与首页 ToolCard 网格断点策略一致。
+          ★ 交错入场:StaggerGroup 触发卡片依次入场。 */}
+      <StaggerGroup className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
         {related.map((tool) => {
           const href = `/tools/${tool.slug}/`
           // SEO 锚文本:title 属性给出明确语义描述,强化内链信号
           const titleAttr = `${tool.name} — ${tool.shortIntro}`
           return (
-            <Link
-              key={tool.slug}
-              href={href}
-              title={titleAttr}
-              aria-label={titleAttr}
-              className="group rounded-xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md dark:border-slate-800/80 dark:bg-[#111827] dark:shadow-none dark:hover:border-blue-500/60 dark:hover:shadow-[0_0_15px_rgba(59,130,246,0.1)]"
-            >
+            <AnimatedToolCard key={tool.slug} href={href} title={titleAttr} ariaLabel={titleAttr}>
               <div className="flex items-start justify-between">
                 {/* 工具图标(与首页 ToolCard 同款) */}
                 <span
@@ -90,10 +85,10 @@ export function RelatedTools({ slug, limit = 4 }: RelatedToolsProps) {
               <p className="mt-2 text-xs text-slate-500 dark:text-slate-400">
                 {tool.shortIntro}
               </p>
-            </Link>
+            </AnimatedToolCard>
           )
         })}
-      </div>
+      </StaggerGroup>
     </section>
   )
 }

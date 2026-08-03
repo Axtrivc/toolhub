@@ -1,12 +1,22 @@
 'use client'
 
 import { useState, useMemo, useEffect } from 'react'
-import Link from 'next/link'
 import type { ToolMeta } from '@/lib/tools'
 import { getToolIcon } from '@/lib/tools'
 import { useApp } from './providers/AppProviders'
 import { t } from '@/lib/i18n'
 import { FeaturedTools } from './FeaturedTools'
+import {
+  AnimatedToolCard,
+  StaggerGroup,
+  LayoutHighlight,
+  motion,
+} from './motion/MotionPrimitives'
+
+/**
+ * 分类 Chip 的共享 layoutId —— 切换分类时高亮背景在按钮间平滑滑轨过渡。
+ */
+const ACTIVE_CATEGORY_LAYOUT_ID = 'activeCategory'
 
 interface HomePageClientProps {
   tools: ToolMeta[]
@@ -114,42 +124,32 @@ export function HomePageClient({ tools }: HomePageClientProps) {
 
       {/* 分类筛选 chips(第一项是本地化的"全部",用 allActive 控制激活态)。
           限宽 max-w-5xl + 居中 + items-center 垂直对齐 + gap-2.5 间距,
-          让换行更紧凑整齐,减少单字落单悬空;whitespace-nowrap 防止 Chip 内文案自身折行。 */}
+          让换行更紧凑整齐,减少单字落单悬空;whitespace-nowrap 防止 Chip 内文案自身折行。
+
+          ★ 极客滑轨动画:激活态的高亮背景块用 framer-motion layoutId="activeCategory"
+          共享标识,切换分类时背景块在按钮间平滑滑动过渡(spring 弹性曲线)。 */}
       <div className="mx-auto flex max-w-5xl flex-wrap items-center justify-center gap-2.5">
-        <button
-          type="button"
-          onClick={() => setActiveCategory(null)}
-          className={`whitespace-nowrap rounded-full border px-3.5 py-1.5 text-sm font-medium transition ${
-            allActive
-              ? 'border-blue-500 bg-blue-600 text-white shadow-sm shadow-blue-500/20 dark:border-blue-500 dark:bg-blue-600 dark:text-white'
-              : 'hover:bg-brand-50 dark:bg-slate-900 dark:text-slate-400 dark:border-slate-800 hover:dark:text-white hover:dark:border-slate-700'
-          }`}
-          style={
-            allActive
-              ? undefined
-              : {
-                  borderColor: 'rgb(var(--border))',
-                  backgroundColor: 'rgb(var(--bg-card))',
-                  color: 'rgb(var(--text-muted))',
-                }
-          }
-        >
-          {t(locale, 'categoryAll')}
-        </button>
-        {categories.map((cat) => {
-          const active = activeCategory === cat
-          return (
-            <button
-              key={cat}
+        {/* 渲染一个 Chip 的内联函数:激活态渲染 <LayoutHighlight>(滑轨高亮块),
+            非激活态渲染纯描边样式。 */}
+        {(() => {
+          const renderChip = (
+            key: string,
+            label: string,
+            isActive: boolean,
+            onClick: () => void,
+          ) => (
+            <motion.button
+              key={key}
               type="button"
-              onClick={() => setActiveCategory(cat)}
-              className={`whitespace-nowrap rounded-full border px-3.5 py-1.5 text-sm font-medium transition ${
-                active
-                  ? 'border-blue-500 bg-blue-600 text-white shadow-sm shadow-blue-500/20 dark:border-blue-500 dark:bg-blue-600 dark:text-white'
+              onClick={onClick}
+              // 基础描边态:非激活时显示边框 + 卡片底色
+              className={`relative whitespace-nowrap rounded-full border px-3.5 py-1.5 text-sm font-medium transition-colors ${
+                isActive
+                  ? 'border-blue-500 text-white dark:border-blue-500 dark:text-white'
                   : 'hover:bg-brand-50 dark:bg-slate-900 dark:text-slate-400 dark:border-slate-800 hover:dark:text-white hover:dark:border-slate-700'
               }`}
               style={
-                active
+                isActive
                   ? undefined
                   : {
                       borderColor: 'rgb(var(--border))',
@@ -157,11 +157,28 @@ export function HomePageClient({ tools }: HomePageClientProps) {
                       color: 'rgb(var(--text-muted))',
                     }
               }
+              whileTap={{ scale: 0.96 }}
             >
-              {cat}
-            </button>
+              {/* 激活态:渲染共享 layoutId 的高亮背景块(滑轨动画核心)。
+                  absolute inset-0 不占文本空间,文字 z-index 高于背景。 */}
+              {isActive && <LayoutHighlight layoutId={ACTIVE_CATEGORY_LAYOUT_ID} />}
+              <span className="relative z-10">{label}</span>
+            </motion.button>
           )
-        })}
+
+          return (
+            <>
+              {renderChip('all', t(locale, 'categoryAll'), allActive, () =>
+                setActiveCategory(null),
+              )}
+              {categories.map((cat) =>
+                renderChip(cat, cat, activeCategory === cat, () =>
+                  setActiveCategory(cat),
+                ),
+              )}
+            </>
+          )
+        })()}
       </div>
 
       {/* 置顶热门工具模块:仅无搜索词 + All 分类时展示。
@@ -196,13 +213,21 @@ export function HomePageClient({ tools }: HomePageClientProps) {
             {category}
           </h2>
           {/* 工具卡片网格:xl:grid-cols-4(1280px 断点)对齐 max-w-7xl 版心,
-              原 2xl:grid-cols-4(1536px)永远无法触发(版心只有 1280px),属断点 bug。 */}
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+              原 2xl:grid-cols-4(1536px)永远无法触发(版心只有 1280px),属断点 bug。
+
+              ★ 交错入场动画:用 StaggerGroup 包装网格容器,
+                卡片依次从 y:15+opacity:0 过渡进入(transform-only,CLS 安全)。
+                key 含 activeCategory+query,使筛选/搜索切换时网格重新交错入场。 */}
+          <StaggerGroup
+            key={`${category}-${activeCategory ?? 'all'}-${query}`}
+            className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+          >
             {categoryTools.map((tool) => (
-              <Link
+              <AnimatedToolCard
                 key={tool.slug}
                 href={`/tools/${tool.slug}/`}
-                className="group rounded-xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md dark:border-slate-800/80 dark:bg-[#111827] dark:shadow-none dark:hover:border-blue-500/60 dark:hover:shadow-[0_0_15px_rgba(59,130,246,0.1)]"
+                title={`${tool.name} — ${tool.shortIntro}`}
+                ariaLabel={`${tool.name} — ${tool.shortIntro}`}
               >
                 <div className="flex items-start justify-between">
                   {/* 工具图标:按 category 默认映射 + 明星工具单独定制(见 lib/tools.ts getToolIcon)。
@@ -224,9 +249,9 @@ export function HomePageClient({ tools }: HomePageClientProps) {
                 <p className="mt-2 text-xs text-slate-500 dark:text-slate-400">
                   {tool.shortIntro}
                 </p>
-              </Link>
+              </AnimatedToolCard>
             ))}
-          </div>
+          </StaggerGroup>
         </section>
       ))}
     </div>

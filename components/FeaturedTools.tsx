@@ -1,10 +1,10 @@
 'use client'
 
-import Link from 'next/link'
 import type { ToolMeta } from '@/lib/tools'
 import { getToolIcon } from '@/lib/tools'
 import { useApp } from './providers/AppProviders'
 import { t } from '@/lib/i18n'
+import { AnimatedToolCard, StaggerGroup } from './motion/MotionPrimitives'
 
 interface FeaturedToolsProps {
   tools: ToolMeta[]
@@ -42,27 +42,31 @@ export function FeaturedTools({ tools }: FeaturedToolsProps) {
         {t(locale, 'featuredTitle')}
       </h2>
 
-      {/* 4 列响应式网格:w-full 确保在父容器内自然拉伸居中,不偏向任何一侧 */}
-      <div className="grid w-full grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      {/* 4 列响应式网格:w-full 确保在父容器内自然拉伸居中,不偏向任何一侧。
+          ★ 交错入场:StaggerGroup 触发卡片依次入场(y:15+opacity:0 → y:0+opacity:1)。 */}
+      <StaggerGroup className="grid w-full grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {tools.map((tool) => {
           const isNew = NEW_TOOL_SLUGS.has(tool.slug)
           return (
-            <Link
+            <AnimatedToolCard
               key={tool.slug}
               href={`/tools/${tool.slug}/`}
-              className="group relative flex flex-col rounded-xl border border-blue-100 bg-gradient-to-b from-blue-50/40 to-transparent p-5 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:border-blue-200 hover:shadow-md dark:bg-none dark:border-slate-800/80 dark:bg-[#111827] dark:shadow-none dark:hover:border-blue-500/60 dark:hover:shadow-[0_0_15px_rgba(59,130,246,0.1)]"
+              variant="featured"
+              title={`${tool.name} — ${tool.shortIntro}`}
+              ariaLabel={`${tool.name} — ${tool.shortIntro}`}
+              // 右上角微型 Pill Badge:NEW(淡蓝)/ POPULAR(柔和淡橙),低饱和度
+              badge={
+                <span
+                  className={`absolute right-3 top-3 z-10 rounded-full px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide ${
+                    isNew
+                      ? 'bg-blue-50 text-blue-600 dark:bg-blue-950/50 dark:text-blue-400'
+                      : 'bg-amber-50 text-amber-600 dark:bg-amber-950/50 dark:text-amber-400'
+                  }`}
+                >
+                  {isNew ? t(locale, 'featuredBadgeNew') : t(locale, 'featuredBadgePopular')}
+                </span>
+              }
             >
-              {/* 右上角微型 Pill Badge:NEW(淡蓝)/ POPULAR(柔和淡橙),低饱和度 */}
-              <span
-                className={`absolute right-3 top-3 rounded-full px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide ${
-                  isNew
-                    ? 'bg-blue-50 text-blue-600 dark:bg-blue-950/50 dark:text-blue-400'
-                    : 'bg-amber-50 text-amber-600 dark:bg-amber-950/50 dark:text-amber-400'
-                }`}
-              >
-                {isNew ? t(locale, 'featuredBadgeNew') : t(locale, 'featuredBadgePopular')}
-              </span>
-
               {/* 图标容器:Clean Outlined —— 微蓝底气泡 + 蓝色细边框 */}
               <span
                 className="flex h-11 w-11 items-center justify-center rounded-lg bg-slate-100 p-2 text-2xl transition-transform group-hover:scale-110 dark:border dark:border-blue-800/40 dark:bg-blue-950/30"
@@ -80,10 +84,10 @@ export function FeaturedTools({ tools }: FeaturedToolsProps) {
                   {tool.shortIntro}
                 </p>
               </div>
-            </Link>
+            </AnimatedToolCard>
           )
         })}
-      </div>
+      </StaggerGroup>
     </section>
   )
 }

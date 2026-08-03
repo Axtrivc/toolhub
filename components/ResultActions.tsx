@@ -4,6 +4,7 @@ import { useCallback, useState } from 'react'
 import { useApp } from './providers/AppProviders'
 import { t } from '@/lib/i18n'
 import { CopyButton } from './CopyButton'
+import { motion, useReducedMotion } from './motion/MotionPrimitives'
 
 interface ResultActionsProps {
   /** 复制用的纯文本摘要(通常含输入 + 结果) */
@@ -28,6 +29,8 @@ interface ResultActionsProps {
  *
  * 文件下载用 Blob + a[download],纯客户端,无需后端。
  * MIME 默认 text/plain;导出 CSV 时传 'text/csv;charset=utf-8;'。
+ *
+ * 动画:下载按钮 whileTap scale 0.95 弹簧触感(与 CopyButton 统一)。
  */
 export function ResultActions({
   summary,
@@ -39,6 +42,7 @@ export function ResultActions({
 }: ResultActionsProps) {
   const { locale } = useApp()
   const [downloaded, setDownloaded] = useState(false)
+  const reduceMotion = useReducedMotion()
 
   const handleDownload = useCallback(() => {
     if (!downloadContent) return
@@ -58,15 +62,17 @@ export function ResultActions({
   return (
     <div className="flex flex-wrap items-center gap-3">
       <CopyButton value={summary} label={copyLabel || t(locale, 'toolCopySummary')} disabled={disabled} />
-      <button
+      <motion.button
         type="button"
         onClick={handleDownload}
         disabled={disabled || !downloadContent}
+        whileTap={reduceMotion ? undefined : { scale: 0.95 }}
+        transition={reduceMotion ? undefined : { type: 'spring', stiffness: 500, damping: 30 }}
         className={`btn ${downloaded ? 'btn-primary' : 'btn-secondary'} disabled:cursor-not-allowed disabled:opacity-50`}
         aria-live="polite"
       >
         {downloaded ? t(locale, 'toolCopied') : t(locale, 'toolDownload')}
-      </button>
+      </motion.button>
     </div>
   )
 }

@@ -2,6 +2,7 @@
 
 import { useState, useMemo, type ComponentType } from 'react'
 import { CopyButton } from '@/components/CopyButton'
+import { PulseGlow } from '@/components/motion/PulseGlow'
 
 /**
  * 文本工具工厂
@@ -94,18 +95,23 @@ export function makeTextTool(config: TextToolConfig): ComponentType {
             </label>
             <CopyButton value={output} disabled={!output} />
           </div>
-          <textarea
-            readOnly
-            value={output}
-            placeholder="Result will appear here..."
-            rows={6}
-            className="w-full rounded-lg border-2 p-4 font-mono text-sm outline-none"
-            style={{
-              borderColor: 'rgb(219 234 254)', // brand-100
-              backgroundColor: 'rgb(219 234 254 / 0.4)', // brand-50/40
-              color: 'rgb(var(--text))',
-            }}
-          />
+          {/* Pulse Border —— 结果文本变化时,输出框四周一次性高亮微光闪烁,
+              提示用户「结果已更新」(transform/opacity only,CLS 安全)。
+              PulseGlow 包裹 textarea,overlay 用 absolute inset-0 贴合边框。 */}
+          <PulseGlow trigger={output}>
+            <textarea
+              readOnly
+              value={output}
+              placeholder="Result will appear here..."
+              rows={6}
+              className="w-full rounded-lg border-2 p-4 font-mono text-sm outline-none"
+              style={{
+                borderColor: 'rgb(219 234 254)', // brand-100
+                backgroundColor: 'rgb(219 234 254 / 0.4)', // brand-50/40
+                color: 'rgb(var(--text))',
+              }}
+            />
+          </PulseGlow>
         </div>
 
         {/* 统计 */}

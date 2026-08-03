@@ -1,6 +1,5 @@
 'use client'
 
-import Link from 'next/link'
 import { useMemo } from 'react'
 import { getToolIcon } from '@/lib/tools'
 import type { ToolMeta } from '@/lib/tools'
@@ -9,6 +8,7 @@ import { useFavorites } from '@/lib/useFavorites'
 import { useRecentlyUsed } from '@/lib/useRecentlyUsed'
 import { useApp } from './providers/AppProviders'
 import { t } from '@/lib/i18n'
+import { AnimatedToolCard, StaggerGroup } from './motion/MotionPrimitives'
 
 const MAX_ITEMS = 4
 
@@ -76,18 +76,12 @@ export function HomeRecents() {
         </p>
       </header>
 
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
+      <StaggerGroup className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
         {items.map((tool) => {
           const href = `/tools/${tool.slug}/`
           const titleAttr = `${tool.name} — ${tool.shortIntro}`
           return (
-            <Link
-              key={tool.slug}
-              href={href}
-              title={titleAttr}
-              aria-label={titleAttr}
-              className="group rounded-xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md dark:border-slate-800/80 dark:bg-[#111827] dark:shadow-none dark:hover:border-blue-500/60 dark:hover:shadow-[0_0_15px_rgba(59,130,246,0.1)]"
-            >
+            <AnimatedToolCard key={tool.slug} href={href} title={titleAttr} ariaLabel={titleAttr}>
               <div className="flex items-start justify-between">
                 <span
                   className="flex h-11 w-11 items-center justify-center rounded-lg bg-slate-100 p-2 text-2xl transition-transform group-hover:scale-110 dark:border dark:border-blue-800/40 dark:bg-blue-950/30"
@@ -105,10 +99,10 @@ export function HomeRecents() {
               <p className="mt-2 text-xs text-slate-500 dark:text-slate-400">
                 {tool.shortIntro}
               </p>
-            </Link>
+            </AnimatedToolCard>
           )
         })}
-      </div>
+      </StaggerGroup>
     </section>
   )
 }

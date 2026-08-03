@@ -5,6 +5,7 @@ import { getPublishedTools } from '@/lib/tools'
 import { AdSlot } from '@/components/AdSlot'
 import { HomePageClient } from '@/components/HomePageClient'
 import { HomeRecents } from '@/components/HomeRecents'
+import { HeroGlow } from '@/components/motion/MotionPrimitives'
 import { useApp } from '@/components/providers/AppProviders'
 import { t } from '@/lib/i18n'
 
@@ -21,8 +22,10 @@ export default function HomePage() {
 
   return (
     <div className="mx-auto w-full max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-      {/* Hero */}
-      <section className="mx-auto mb-12 max-w-5xl text-center">
+      {/* Hero —— 动态流光背景(HeroGlow:多层高斯模糊光晕 + 呼吸放缩)。
+          section 设为 relative 定位,HeroGlow 用 absolute 脱离布局流(CLS=0)。 */}
+      <section className="relative mx-auto mb-12 max-w-5xl text-center">
+        <HeroGlow />
         <h1
           className="text-5xl font-extrabold tracking-tight sm:text-6xl lg:text-7xl dark:text-white"
           style={{ color: 'rgb(var(--text))' }}
