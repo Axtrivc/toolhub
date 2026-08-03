@@ -28,7 +28,10 @@ next-env.d.ts
 
 # 本地工作文件(非工具站代码)
 /.zcode/
-/.workbuddy/
+# 注意:不能忽略整个 /.workbuddy/ 目录,否则 git 不会进入该目录,
+# 下面的 ! 白名单(重新包含 memory)将无法生效(git 标准限制:
+# 父目录被忽略后无法 re-include 子文件)。改为忽略目录内容 /*。
+/.workbuddy/*
 # 例外:跨会话记忆必须同步到远程,否则换电脑/新会话会丢失用户偏好与项目上下文
 !/.workbuddy/memory/
 !/.workbuddy/memory/**
