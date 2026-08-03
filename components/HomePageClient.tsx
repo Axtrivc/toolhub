@@ -195,7 +195,9 @@ export function HomePageClient({ tools }: HomePageClientProps) {
           <h2 className="mb-5 text-2xl font-bold" style={{ color: 'rgb(var(--text))' }}>
             {category}
           </h2>
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
+          {/* 工具卡片网格:xl:grid-cols-4(1280px 断点)对齐 max-w-7xl 版心,
+              原 2xl:grid-cols-4(1536px)永远无法触发(版心只有 1280px),属断点 bug。 */}
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {categoryTools.map((tool) => (
               <Link
                 key={tool.slug}
