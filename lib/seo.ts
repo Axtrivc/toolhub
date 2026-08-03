@@ -136,12 +136,16 @@ export function buildToolJsonLd(slug: string) {
 
   return {
     '@context': 'https://schema.org',
-    '@type': 'WebApplication',
+    // SoftwareApplication 是更通用的父类型,WebApplication 是其子类型;
+    // 同时声明两者让 Google 更容易识别「这是一个免费软件应用」,
+    // 提升获得 Rich Snippet(富媒体摘要,如评分/价格/可用性)的展现率。
+    '@type': ['WebApplication', 'SoftwareApplication'],
     name: tool.name,
     url: toolUrl,
     description: tool.description,
     applicationCategory: mapApplicationCategory(tool.category),
-    operatingSystem: 'Any (Web Browser)',
+    // 规范统一为 'All'(Web 应用跨操作系统运行),与 pSEO 任务规格保持一致。
+    operatingSystem: 'All',
     // 浏览器内运行,跨平台
     browserRequirements: 'Requires JavaScript. Requires a modern web browser.',
     // 语言声明:全站英文,利于英文搜索结果匹配
