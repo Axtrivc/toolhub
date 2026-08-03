@@ -50,7 +50,7 @@ export function FeaturedTools({ tools }: FeaturedToolsProps) {
             <Link
               key={tool.slug}
               href={`/tools/${tool.slug}/`}
-              className="group relative flex flex-col rounded-xl border border-blue-100 bg-gradient-to-b from-blue-50/40 to-transparent p-5 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:border-blue-200 hover:shadow-md dark:border-white/[0.08] dark:bg-white/[0.03] dark:backdrop-blur-md dark:shadow-none dark:hover:border-blue-500/40 dark:hover:bg-white/[0.06] dark:hover:shadow-[0_0_20px_rgba(59,130,246,0.12)]"
+              className="group relative flex flex-col rounded-xl border border-blue-100 bg-gradient-to-b from-blue-50/40 to-transparent p-5 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:border-blue-200 hover:shadow-md dark:bg-none dark:border-slate-800/80 dark:bg-[#111827] dark:shadow-none dark:hover:border-blue-500/60 dark:hover:shadow-[0_0_15px_rgba(59,130,246,0.1)]"
             >
               {/* 右上角微型 Pill Badge:NEW(淡蓝)/ POPULAR(柔和淡橙),低饱和度 */}
               <span
@@ -63,9 +63,9 @@ export function FeaturedTools({ tools }: FeaturedToolsProps) {
                 {isNew ? t(locale, 'featuredBadgeNew') : t(locale, 'featuredBadgePopular')}
               </span>
 
-              {/* 图标容器:半透明气泡框(white/10 + border-white/10),替代沉闷实色底盒 */}
+              {/* 图标容器:Clean Outlined —— 微蓝底气泡 + 蓝色细边框 */}
               <span
-                className="flex h-11 w-11 items-center justify-center rounded-xl bg-slate-100 text-2xl transition-transform group-hover:scale-110 dark:border dark:border-white/10 dark:bg-white/10"
+                className="flex h-11 w-11 items-center justify-center rounded-lg bg-slate-100 p-2 text-2xl transition-transform group-hover:scale-110 dark:border dark:border-blue-800/40 dark:bg-blue-950/30"
                 aria-hidden="true"
               >
                 {getToolIcon(tool)}
@@ -73,7 +73,7 @@ export function FeaturedTools({ tools }: FeaturedToolsProps) {
 
               {/* 标题 + 描述:flex-col + flex-1 保证所有卡片高度一致 */}
               <div className="mt-4 flex-1">
-                <h3 className="text-base font-semibold text-slate-900 transition-colors group-hover:text-brand-600 dark:font-semibold dark:text-slate-100">
+                <h3 className="text-base font-medium text-slate-900 transition-colors group-hover:text-brand-600 dark:text-white">
                   {tool.name}
                 </h3>
                 <p className="mt-1.5 line-clamp-2 text-xs text-slate-500 dark:text-slate-400">
