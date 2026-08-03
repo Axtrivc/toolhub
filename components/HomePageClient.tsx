@@ -113,9 +113,9 @@ export function HomePageClient({ tools }: HomePageClientProps) {
       </div>
 
       {/* 分类筛选 chips(第一项是本地化的"全部",用 allActive 控制激活态)。
-          限宽 max-w-5xl + 居中 + gap-2 + px-3.5 收拢间距,让换行更紧凑整齐,
-          减少单字落单悬空;whitespace-nowrap 防止 Chip 内文案自身折行。 */}
-      <div className="mx-auto flex max-w-5xl flex-wrap justify-center gap-2">
+          限宽 max-w-5xl + 居中 + items-center 垂直对齐 + gap-2.5 间距,
+          让换行更紧凑整齐,减少单字落单悬空;whitespace-nowrap 防止 Chip 内文案自身折行。 */}
+      <div className="mx-auto flex max-w-5xl flex-wrap items-center justify-center gap-2.5">
         <button
           type="button"
           onClick={() => setActiveCategory(null)}

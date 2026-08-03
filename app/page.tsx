@@ -19,7 +19,7 @@ export default function HomePage() {
   const categories = Object.entries(byCategory).sort((a, b) => b[1] - a[1])
 
   return (
-    <div className="mx-auto w-full max-w-screen-2xl px-4 py-12 sm:px-6 lg:px-8">
+    <div className="mx-auto w-full max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
       {/* Hero */}
       <section className="mx-auto mb-12 max-w-5xl text-center">
         <h1

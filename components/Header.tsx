@@ -69,9 +69,9 @@ export function Header() {
         backgroundColor: 'rgb(var(--bg-card) / 0.8)',
       }}
     >
-      {/* Header 内层容器:全宽贴边流式布局(无 max-w 限制),
-          Logo 贴最左 / 菜单组贴最右,左右用响应式 padding 留呼吸空间。 */}
-      <div className="flex w-full items-center justify-between px-6 py-3.5 sm:px-8 lg:px-10">
+      {/* Header 内层容器:与全站统一的 max-w-7xl + px-4/sm:px-6/lg:px-8 版心,
+          确保 Header 左右边界与 Hero / Chips / 内容区完全对齐。 */}
+      <div className="mx-auto flex w-full max-w-7xl items-center justify-between px-4 py-3.5 sm:px-6 lg:px-8">
         <Link href="/" className="flex items-center gap-2 font-bold" style={{ color: 'rgb(var(--text))' }}>
           <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-brand-600 text-white">
             T
@@ -182,7 +182,7 @@ export function Header() {
               backgroundColor: 'rgb(var(--bg-card))',
             }}
           >
-            <nav className="flex w-full flex-col px-6 py-2 sm:px-8 lg:px-10" style={{ color: 'rgb(var(--text))' }}>
+            <nav className="mx-auto flex w-full max-w-7xl flex-col px-4 py-2 sm:px-6 lg:px-8" style={{ color: 'rgb(var(--text))' }}>
               <Link
                 href="/"
                 onClick={close}

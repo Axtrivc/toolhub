@@ -42,8 +42,8 @@ export function FeaturedTools({ tools }: FeaturedToolsProps) {
         {t(locale, 'featuredTitle')}
       </h2>
 
-      {/* 4 列响应式网格 */}
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      {/* 4 列响应式网格:w-full 确保在父容器内自然拉伸居中,不偏向任何一侧 */}
+      <div className="grid w-full grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {tools.map((tool) => {
           const isNew = NEW_TOOL_SLUGS.has(tool.slug)
           return (
