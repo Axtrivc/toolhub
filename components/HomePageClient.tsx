@@ -91,7 +91,7 @@ export function HomePageClient({ tools }: HomePageClientProps) {
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder={t(locale, 'searchPlaceholder', { count: tools.length })}
-            className="w-full rounded-xl border py-4 pl-12 pr-4 text-lg shadow-sm outline-none transition focus:ring-2"
+            className="w-full rounded-xl border py-4 pl-12 pr-4 text-lg shadow-sm outline-none transition focus:ring-2 dark:bg-slate-900 dark:border-slate-800 dark:text-white dark:placeholder-slate-500 dark:shadow-none focus:dark:border-blue-500/60 focus:dark:ring-blue-500/60"
             style={{
               borderColor: 'rgb(var(--border-strong))',
               backgroundColor: 'rgb(var(--bg-card))',
@@ -119,12 +119,14 @@ export function HomePageClient({ tools }: HomePageClientProps) {
         <button
           type="button"
           onClick={() => setActiveCategory(null)}
-          className={`whitespace-nowrap rounded-full px-3.5 py-1.5 text-sm font-medium transition ${
-            allActive ? 'text-white' : 'border hover:bg-brand-50'
+          className={`whitespace-nowrap rounded-full border px-3.5 py-1.5 text-sm font-medium transition ${
+            allActive
+              ? 'border-blue-500 bg-blue-600 text-white shadow-sm shadow-blue-500/20 dark:border-blue-500 dark:bg-blue-600 dark:text-white'
+              : 'hover:bg-brand-50 dark:bg-slate-900 dark:text-slate-400 dark:border-slate-800 hover:dark:text-white hover:dark:border-slate-700'
           }`}
           style={
             allActive
-              ? { backgroundColor: 'rgb(37 99 235)' }
+              ? undefined
               : {
                   borderColor: 'rgb(var(--border))',
                   backgroundColor: 'rgb(var(--bg-card))',
@@ -141,12 +143,14 @@ export function HomePageClient({ tools }: HomePageClientProps) {
               key={cat}
               type="button"
               onClick={() => setActiveCategory(cat)}
-              className={`whitespace-nowrap rounded-full px-3.5 py-1.5 text-sm font-medium transition ${
-                active ? 'text-white' : 'border hover:bg-brand-50'
+              className={`whitespace-nowrap rounded-full border px-3.5 py-1.5 text-sm font-medium transition ${
+                active
+                  ? 'border-blue-500 bg-blue-600 text-white shadow-sm shadow-blue-500/20 dark:border-blue-500 dark:bg-blue-600 dark:text-white'
+                  : 'hover:bg-brand-50 dark:bg-slate-900 dark:text-slate-400 dark:border-slate-800 hover:dark:text-white hover:dark:border-slate-700'
               }`}
               style={
                 active
-                  ? { backgroundColor: 'rgb(37 99 235)' }
+                  ? undefined
                   : {
                       borderColor: 'rgb(var(--border))',
                       backgroundColor: 'rgb(var(--bg-card))',
@@ -196,7 +200,7 @@ export function HomePageClient({ tools }: HomePageClientProps) {
               <Link
                 key={tool.slug}
                 href={`/tools/${tool.slug}/`}
-                className="group rounded-xl border p-6 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md"
+                className="group rounded-xl border p-6 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md tool-card-dark"
                 style={{
                   borderColor: 'rgb(var(--border))',
                   backgroundColor: 'rgb(var(--bg-card))',
@@ -212,14 +216,14 @@ export function HomePageClient({ tools }: HomePageClientProps) {
                     {getToolIcon(tool)}
                   </span>
                   {/* 右上角显示分类(替代原 PRO/FREE 徽章 —— 工具全免费,PRO 字样会误导用户) */}
-                  <span className="text-xs font-medium uppercase tracking-wide" style={{ color: 'rgb(var(--text-faint))' }}>
+                  <span className="text-xs font-medium uppercase tracking-wide dark:text-slate-500" style={{ color: 'rgb(var(--text-faint))' }}>
                     {tool.category}
                   </span>
                 </div>
-                <h3 className="mt-4 text-lg font-semibold group-hover:text-brand-600" style={{ color: 'rgb(var(--text))' }}>
+                <h3 className="mt-4 text-lg font-semibold group-hover:text-brand-600 dark:text-slate-100 dark:font-semibold" style={{ color: 'rgb(var(--text))' }}>
                   {tool.name}
                 </h3>
-                <p className="mt-2 text-sm" style={{ color: 'rgb(var(--text-subtle))' }}>
+                <p className="mt-2 text-sm dark:text-slate-400 dark:text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>
                   {tool.shortIntro}
                 </p>
               </Link>

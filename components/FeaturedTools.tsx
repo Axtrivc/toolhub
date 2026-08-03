@@ -50,7 +50,7 @@ export function FeaturedTools({ tools }: FeaturedToolsProps) {
             <Link
               key={tool.slug}
               href={`/tools/${tool.slug}/`}
-              className="group relative flex flex-col rounded-xl border border-blue-100 bg-gradient-to-b from-blue-50/40 to-transparent p-5 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:border-blue-200 hover:shadow-md dark:border-blue-900/40 dark:hover:border-blue-800"
+              className="group relative flex flex-col rounded-xl border border-blue-100 bg-gradient-to-b from-blue-50/40 to-transparent p-5 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:border-blue-200 hover:shadow-md dark:border-slate-800/80 dark:bg-slate-900/60 dark:backdrop-blur-md dark:hover:border-blue-500/40 dark:hover:shadow-[0_0_20px_rgba(59,130,246,0.15)]"
             >
               {/* 右上角微型 Pill Badge:NEW(淡蓝)/ POPULAR(柔和淡橙),低饱和度 */}
               <span

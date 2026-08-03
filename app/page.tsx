@@ -23,12 +23,12 @@ export default function HomePage() {
       {/* Hero */}
       <section className="mx-auto mb-12 max-w-5xl text-center">
         <h1
-          className="text-5xl font-extrabold tracking-tight sm:text-6xl lg:text-7xl"
+          className="text-5xl font-extrabold tracking-tight sm:text-6xl lg:text-7xl dark:text-white"
           style={{ color: 'rgb(var(--text))' }}
         >
           {t(locale, 'heroBadge', { count: String(tools.length) })}{' '}
           {t(locale, 'heroTitle1')}
-          <span className="block text-brand-600">{t(locale, 'heroTitle2')}</span>
+          <span className="hero-gradient-text block">{t(locale, 'heroTitle2')}</span>
         </h1>
         <p
           className="mx-auto mt-6 max-w-2xl text-base leading-relaxed sm:text-lg"

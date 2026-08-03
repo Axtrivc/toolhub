@@ -19,16 +19,16 @@
   }
 
   html.dark {
-    /* 深色主题 */
-    --bg: 15 23 42;           /* slate-900 */
-    --bg-card: 30 41 59;      /* slate-800 */
-    --bg-subtle: 51 65 85;    /* slate-700 */
-    --border: 51 65 85;       /* slate-700 */
-    --border-strong: 71 85 105; /* slate-600 */
-    --text: 241 245 249;      /* slate-100 */
+    /* 深色主题 —— Vercel / Raycast 风格:纯粹深沉 + 微透光层级 */
+    --bg: 9 13 22;            /* #090d16 近黑深蓝(替代原浑浊 slate-900) */
+    --bg-card: 15 23 42;      /* slate-900(卡片基底,配合 backdrop-blur 呈半透质感) */
+    --bg-subtle: 30 41 59;    /* slate-800(图标容器/次要表面) */
+    --border: 30 41 59;       /* slate-800(极细高级暗色边框) */
+    --border-strong: 51 65 85;  /* slate-700(搜索框聚焦等强调态) */
+    --text: 241 245 249;      /* slate-100(标题接近纯白) */
     --text-muted: 203 213 225;  /* slate-300 */
-    --text-subtle: 148 163 184; /* slate-400 */
-    --text-faint: 100 116 139;  /* slate-500 */
+    --text-subtle: 148 163 184; /* slate-400(描述文案) */
+    --text-faint: 100 116 139;  /* slate-500(占位符/次要标签) */
   }
 
   :root {
@@ -184,4 +184,35 @@
  * ──────────────────────────────────────────────────────────── */
 html.embed [data-embed-hide] {
   display: none !important;
+}
+
+/* ════════════════════════════════════════════════════════════
+ * 暗黑模式高级感增强(Vercel / Raycast 风格)
+ * 全站基调由上面的 CSS 变量驱动;这里是组件级的精修微光/层级。
+ * ════════════════════════════════════════════════════════════ */
+
+/* Hero 标题渐变发光字("That Just Work" 等) —— 暗色下蓝紫渐变出彩 */
+html.dark .hero-gradient-text {
+  background-image: linear-gradient(to right, rgb(96 165 250), rgb(165 180 252), rgb(56 189 248));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+/* 工具卡片暗色质感:微透光半透明 + backdrop-blur,
+   替代纯实色 slate-800,营造 Vercel/Linear 式的层次纵深。 */
+html.dark .tool-card-dark {
+  background-color: rgb(15 23 42 / 0.6); /* slate-900/60 */
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-color: rgb(30 41 59 / 0.8); /* slate-800/80 极细高级边框 */
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+/* Hover 动态微光:蓝紫渐变边框 + 内发光,鼠标悬停时点亮卡片。
+   阴影用低饱和蓝色 15% 透明度,克制不刺眼。 */
+html.dark .tool-card-dark:hover {
+  border-color: rgb(59 130 246 / 0.4); /* blue-500/40 */
+  box-shadow: 0 0 20px rgb(59 130 246 / 0.15);
 }
