@@ -78,45 +78,42 @@ export function HeroGlow() {
       }
 
   return (
-    // ★ 无边界弥散光晕(Ambient Glow):
-    //   外层不再用 inset-0 + overflow-hidden(那是把光晕关进一个矩形盒,
-    //   截图里看到的"硬矩形渐变块"就是这个裁切盒的轮廓)。
-    //   改为绝对定位、铺满视口宽、不裁切,让光晕真正溢出到整站背景上,
-    //   形成主流高质感的"无边界柔光"。body 已有 overflow-x:hidden,不会出横向滚动条。
+    // ★ 纯净无边界弥散光晕(Ambient Glow)—— Tailwind 官方 Hero 同款手法:
+    //   外层 absolute + overflow-hidden + blur-3xl 把"光场容器"整体高斯模糊,
+    //   内层只放一个 rotate-[30deg] 的纯渐变块,边缘被外层 blur 自然羽化,
+    //   ★没有任何 clipPath 多边形★(之前的 polygon 在 blur 后仍保留顶点硬边,
+    //   这就是右下角"硬边紫色三角形"Bug 的根因)。
+    //   -inset-x / -top-20 让光晕上移并横向铺满,不被 section 矩形侧边裁切。
+    //   body 已有 overflow-x:hidden,溢出不会产生横向滚动条。
     <div
       aria-hidden="true"
-      className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[520px] overflow-hidden"
+      className="pointer-events-none absolute inset-x-0 -top-20 -z-10 transform-gpu overflow-hidden blur-3xl"
     >
-      {/* 主光晕(蓝紫) —— 居中偏上,大半径椭圆 + clipPath 有机柔边 + 重模糊。
-          用 transform-gpu 走合成层,blur 一次到位,边缘彻底羽化,无可感知轮廓。 */}
+      {/* 主光晕(蓝紫) —— 居中,sm 以上放大到 72rem;rotate-30° 让渐变方向斜向,
+          视觉更接近真实"光场"而非一块矩形色块。opacity 25% 通透不抢戏。 */}
       <motion.div
-        className="absolute left-1/2 top-10 aspect-[1155/678] w-[68.125rem] max-w-[140vw] -translate-x-1/2 transform-gpu blur-[100px] opacity-60 dark:opacity-30"
-        style={{
-          backgroundImage:
-            'linear-gradient(to top right, rgba(59,130,246,0.55), rgba(139,92,246,0.45))',
-          // Tailwind 官方 Hero 同款多边形裁切:让光晕边缘呈有机弧形而非矩形。
-          clipPath:
-            'polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.5% 97.2%, 74.1% 44.1%)',
-        }}
+        className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#60a5fa] to-[#c084fc] opacity-25 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
         animate={breathingPrimary?.animate}
         transition={breathingPrimary?.transition}
       />
-      {/* 副光晕(青色) —— 左侧弥散,慢一拍错峰呼吸,补色让光场更通透 */}
+      {/* 副光晕(青色) —— 左侧弥散,慢一拍错峰呼吸,补色让光场更通透。
+          纯 radial-gradient 圆斑,rounded-full 无任何多边形顶点。
+          自身不再加 blur(外层 blur-3xl 统一接管所有子层)。 */}
       <motion.div
-        className="absolute left-[6%] top-24 h-[360px] w-[360px] max-w-[60vw] rounded-full transform-gpu blur-[110px] opacity-50 dark:opacity-25"
+        className="absolute left-[6%] top-32 h-[300px] w-[300px] max-w-[50vw] rounded-full opacity-50 dark:opacity-25"
         style={{
           background:
-            'radial-gradient(circle at center, rgba(56,189,248,0.45), transparent 70%)',
+            'radial-gradient(circle at center, rgba(56,189,248,0.50), transparent 70%)',
         }}
         animate={breathingSecondary?.animate}
         transition={breathingSecondary?.transition}
       />
-      {/* 副光晕(紫色) —— 右侧弥散,与青色副光晕反相位,增强空间感 */}
+      {/* 副光晕(紫色) —— 右侧弥散,与青色副光晕反相位,增强空间感。 */}
       <motion.div
-        className="absolute right-[8%] top-10 h-[380px] w-[380px] max-w-[60vw] rounded-full transform-gpu blur-[110px] opacity-45 dark:opacity-25"
+        className="absolute right-[8%] top-20 h-[320px] w-[320px] max-w-[50vw] rounded-full opacity-45 dark:opacity-25"
         style={{
           background:
-            'radial-gradient(circle at center, rgba(168,85,247,0.40), transparent 70%)',
+            'radial-gradient(circle at center, rgba(168,85,247,0.45), transparent 70%)',
         }}
         animate={breathingSecondary?.animate}
         transition={breathingSecondary?.transition}
