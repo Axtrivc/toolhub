@@ -61,64 +61,29 @@ export const fadeUpItemVariants: Variants = {
 export function HeroGlow() {
   const reduceMotion = useReducedMotion()
 
-  // 呼吸动画 props(reduce-motion 下为 undefined,关闭呼吸)。
-  // 内联字面量确保 ease 被收窄为 Easing 类型而非 string。
-  const breathingPrimary = reduceMotion
+  // 呼吸动画(reduce-motion 下为 undefined,关闭)。
+  // 振幅刻意收得很小(scale ±3%、opacity ±15%):光斑本身就只有 opacity-15,
+  // 大幅呼吸会让它时隐时现,反而破坏"隐隐约约一抹微光"的质感。
+  const breathing = reduceMotion
     ? undefined
     : {
-        animate: { scale: [1, 1.06, 1], opacity: [0.85, 1, 0.85] },
+        animate: { scale: [1, 1.03, 1], opacity: [0.85, 1, 0.85] },
         transition: { duration: 9, repeat: Infinity, ease: 'easeInOut' as const },
       }
 
-  const breathingSecondary = reduceMotion
-    ? undefined
-    : {
-        animate: { scale: [1.04, 1, 1.04], opacity: [0.6, 0.9, 0.6] },
-        transition: { duration: 12, repeat: Infinity, ease: 'easeInOut' as const },
-      }
-
   return (
-    // ★ 纯净无边界弥散光晕(Ambient Glow)—— Tailwind 官方 Hero 同款手法:
-    //   外层 absolute + overflow-hidden + blur-3xl 把"光场容器"整体高斯模糊,
-    //   内层只放一个 rotate-[30deg] 的纯渐变块,边缘被外层 blur 自然羽化,
-    //   ★没有任何 clipPath 多边形★(之前的 polygon 在 blur 后仍保留顶点硬边,
-    //   这就是右下角"硬边紫色三角形"Bug 的根因)。
-    //   -inset-x / -top-20 让光晕上移并横向铺满,不被 section 矩形侧边裁切。
-    //   body 已有 overflow-x:hidden,溢出不会产生横向滚动条。
-    <div
+    // ★ 极简居中微光斑(Geek-grade micro glow):
+    //   严格约束尺寸 w-[500px] h-[220px](略小于规格的 480×200,留一点呼吸余量),
+    //   ★绝对不溢出★到下方卡片区域 —— 锚定在标题外层 relative 容器正中,
+    //   opacity-15 浅色模式(暗色 dark:opacity-20 略提,否则深底完全看不见)。
+    //   blur-[80px] 让边缘丝滑羽化,无可感知轮廓。
+    //   外层容器(调用方)需 position: relative;本组件 left/top 1/2 + 负平移精确居中。
+    <motion.div
       aria-hidden="true"
-      className="pointer-events-none absolute inset-x-0 -top-20 -z-10 transform-gpu overflow-hidden blur-3xl"
-    >
-      {/* 主光晕(蓝紫) —— 居中,sm 以上放大到 72rem;rotate-30° 让渐变方向斜向,
-          视觉更接近真实"光场"而非一块矩形色块。opacity 25% 通透不抢戏。 */}
-      <motion.div
-        className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#60a5fa] to-[#c084fc] opacity-25 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
-        animate={breathingPrimary?.animate}
-        transition={breathingPrimary?.transition}
-      />
-      {/* 副光晕(青色) —— 左侧弥散,慢一拍错峰呼吸,补色让光场更通透。
-          纯 radial-gradient 圆斑,rounded-full 无任何多边形顶点。
-          自身不再加 blur(外层 blur-3xl 统一接管所有子层)。 */}
-      <motion.div
-        className="absolute left-[6%] top-32 h-[300px] w-[300px] max-w-[50vw] rounded-full opacity-50 dark:opacity-25"
-        style={{
-          background:
-            'radial-gradient(circle at center, rgba(56,189,248,0.50), transparent 70%)',
-        }}
-        animate={breathingSecondary?.animate}
-        transition={breathingSecondary?.transition}
-      />
-      {/* 副光晕(紫色) —— 右侧弥散,与青色副光晕反相位,增强空间感。 */}
-      <motion.div
-        className="absolute right-[8%] top-20 h-[320px] w-[320px] max-w-[50vw] rounded-full opacity-45 dark:opacity-25"
-        style={{
-          background:
-            'radial-gradient(circle at center, rgba(168,85,247,0.45), transparent 70%)',
-        }}
-        animate={breathingSecondary?.animate}
-        transition={breathingSecondary?.transition}
-      />
-    </div>
+      className="pointer-events-none absolute left-1/2 top-1/2 -z-10 h-[220px] w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-r from-blue-500/20 via-indigo-400/20 to-purple-400/15 opacity-15 blur-[80px] dark:opacity-20"
+      animate={breathing?.animate}
+      transition={breathing?.transition}
+    />
   )
 }
 

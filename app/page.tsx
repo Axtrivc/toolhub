@@ -22,18 +22,22 @@ export default function HomePage() {
 
   return (
     <div className="mx-auto w-full max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-      {/* Hero —— 动态流光背景(HeroGlow:多层高斯模糊光晕 + 呼吸放缩)。
-          section 设为 relative 定位,HeroGlow 用 absolute 脱离布局流(CLS=0)。 */}
+      {/* Hero —— 极简居中微光斑(HeroGlow)。
+          ★ HeroGlow 用 left-1/2 top-1/2 居中,必须锚定在标题外层 relative 容器,
+          否则光斑会跑到 section 中心(标题+副标题+badge 的几何中心)而非标题正后方。
+          光斑严格约束在 w-[500px] h-[220px],绝不溢出到下方卡片区。 */}
       <section className="relative mx-auto mb-12 max-w-5xl text-center">
-        <HeroGlow />
-        <h1
-          className="text-5xl font-extrabold tracking-tight sm:text-6xl lg:text-7xl dark:text-white"
-          style={{ color: 'rgb(var(--text))' }}
-        >
-          {t(locale, 'heroBadge', { count: String(tools.length) })}{' '}
-          {t(locale, 'heroTitle1')}
-          <span className="hero-gradient-text block">{t(locale, 'heroTitle2')}</span>
-        </h1>
+        <div className="relative">
+          <HeroGlow />
+          <h1
+            className="text-5xl font-extrabold tracking-tight sm:text-6xl lg:text-7xl dark:text-white"
+            style={{ color: 'rgb(var(--text))' }}
+          >
+            {t(locale, 'heroBadge', { count: String(tools.length) })}{' '}
+            {t(locale, 'heroTitle1')}
+            <span className="hero-gradient-text block">{t(locale, 'heroTitle2')}</span>
+          </h1>
+        </div>
         <p
           className="mx-auto mt-6 max-w-2xl text-base leading-relaxed sm:text-lg"
           style={{ color: 'rgb(var(--text-muted))' }}
