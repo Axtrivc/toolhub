@@ -88,21 +88,40 @@
     @apply mb-4 ml-6 list-decimal space-y-2;
     color: rgb(var(--text-muted));
   }
+  /* 行内 code —— 克制的品牌色调,替代刺眼的 pink-600,提升高级感。
+     底色用 bg-subtle(主题感知),文字用 indigo(亮)/ sky(暗),不抢眼但清晰。 */
   .prose-content code {
     @apply rounded px-1.5 py-0.5 font-mono text-sm;
     background-color: rgb(var(--bg-subtle));
-    color: rgb(219 39 119); /* pink-600 两种主题都明显 */
+    color: rgb(79 70 229); /* indigo-600:亮色下稳重 */
   }
   html.dark .prose-content code {
-    color: rgb(244 114 182); /* pink-400 深色下更亮 */
+    color: rgb(56 189 248); /* sky-400:暗色下通透 */
   }
+  /* ★ 代码块外层 <pre> —— 深邃 Slate-900 极客底色 + 细描边 + 大圆角。 */
   .prose-content pre {
-    @apply overflow-x-auto rounded-lg p-4 text-sm;
-    background-color: rgb(15 23 42);
-    color: rgb(226 232 240);
+    @apply overflow-x-auto rounded-xl p-5 text-sm;
+    background-color: rgb(15 23 42); /* slate-900 */
+    border: 1px solid rgb(30 41 59); /* slate-800 */
+    color: rgb(226 232 240); /* slate-200 */
   }
   html.dark .prose-content pre {
-    background-color: rgb(2 6 23);
+    background-color: rgb(2 6 23); /* slate-950 */
+  }
+  /* ★ 彻底清除 <pre> 内部 <code> 的独立背景与内边距 ——
+     否则 .prose-content code 的 bg-subtle + padding 会污染块内 code,
+     在深色 pre 里形成杂乱的粉白小方块(Bug 根源)。
+     后代选择器 pre code 特异性(0,2,1)高于 code(0,1,1),无需 !important。 */
+  .prose-content pre code {
+    background-color: transparent;
+    color: rgb(226 232 240); /* slate-200,与 pre 统一 */
+    padding: 0;
+    border: none;
+    font-size: 0.875rem;
+    line-height: 1.7;
+  }
+  html.dark .prose-content pre code {
+    color: rgb(226 232 240);
   }
   .prose-content a {
     @apply font-medium underline underline-offset-2;
