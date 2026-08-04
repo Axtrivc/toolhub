@@ -168,19 +168,21 @@ export default function BlogIndexPage() {
             Prefer doing over reading? Jump straight into the toolbox.
           </p>
           <div className="flex flex-wrap gap-3">
-            {/* ★ 用 utility 类而非 .btn 组件类:本按钮在 PageShell 的 .prose-content 内,
-                该区域的 .prose-content a 规则(specificity 0,1,1)会压过 .btn-primary 的
-                text-white(0,1,0),把文字染成 brand-600 蓝 → 与蓝色背景同色,文字消失。
-                内联 Tailwind utility 在 prose-content 内特异性仍最高,彻底规避此冲突。 */}
+            {/* ★ 按钮在 PageShell 的 .prose-content 内,该区域有规则
+                .prose-content a { color: rgb(37 99 235) } (specificity 0,1,1)。
+                它会压过 .btn-primary 的 text-white 和 Tailwind 普通 utility text-white(都是 0,1,0),
+                把文字染成 brand-600 蓝 → 与蓝色背景同色,文字彻底消失。
+                ★ 修复:用 Tailwind `!` important 前缀(!text-white / !no-underline)强制提升权重,
+                压过 prose-content a 的颜色与下划线。 */}
             <Link
               href="/"
-              className="inline-flex items-center gap-2 rounded-xl bg-blue-600 px-5 py-2.5 text-sm font-medium text-white shadow-sm hover:bg-blue-700 active:scale-95 transition-all duration-200"
+              className="inline-flex items-center gap-2 rounded-xl bg-blue-600 px-5 py-2.5 text-sm font-medium !text-white !no-underline shadow-sm hover:bg-blue-700 active:scale-95 transition-all duration-200"
             >
               Explore all tools <span aria-hidden="true">→</span>
             </Link>
             <Link
               href="/about/"
-              className="inline-flex items-center gap-2 rounded-xl border px-5 py-2.5 text-sm font-medium shadow-sm transition-all duration-200 hover:opacity-80 active:scale-95"
+              className="inline-flex items-center gap-2 rounded-xl border px-5 py-2.5 text-sm font-medium !no-underline shadow-sm transition-all duration-200 hover:opacity-80 active:scale-95"
               style={{
                 backgroundColor: 'rgb(var(--bg-card))',
                 borderColor: 'rgb(var(--border-strong))',
