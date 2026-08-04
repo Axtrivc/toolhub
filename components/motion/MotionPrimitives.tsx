@@ -162,12 +162,14 @@ export function AnimatedToolCard({
 
   // 卡片基础样式 —— 全部视觉收敛到这一个带圆角的主卡片元素上(Link):
   //   bg-white / rounded-2xl / border / shadow 全在 Link,外层 motion.div 保持透明。
+  //   ★ 等高对齐:h-full flex flex-col —— Link 占满 motion.div 高度(Grid stretch 拉伸 motion.div,
+  //     motion.div 再 h-full 撑满网格行高,Link 内 flex-col 让标题区/描述区可分配剩余空间)。
   //   ★ 不在 className 加 hover:-translate-y-1,否则与 motion 的 y:-4 双写 transform 会抖动;
   //     抬升统一交给 motion.div(它透明,只管 transform,不产生任何直角阴影/底色)。
   const baseClass =
     variant === 'featured'
-      ? 'group relative flex flex-col rounded-2xl border border-blue-100 bg-gradient-to-b from-blue-50/40 to-transparent p-5 shadow-sm transition-all duration-300 dark:bg-none dark:border-slate-800/80 dark:bg-[#111827] dark:shadow-none'
-      : 'group block rounded-2xl border border-slate-200/80 bg-white p-6 shadow-sm transition-all duration-300 dark:border-slate-800/80 dark:bg-slate-900 dark:shadow-none'
+      ? 'group relative flex h-full flex-col rounded-2xl border border-blue-100 bg-gradient-to-b from-blue-50/40 to-transparent p-5 shadow-sm transition-all duration-300 dark:bg-none dark:border-slate-800/80 dark:bg-[#111827] dark:shadow-none'
+      : 'group flex h-full flex-col rounded-2xl border border-slate-200/80 bg-white p-6 shadow-sm transition-all duration-300 dark:border-slate-800/80 dark:bg-slate-900 dark:shadow-none'
 
   // 悬停:边框高亮变蓝 + 蓝色光晕阴影(用 Tailwind 任意值,圆角元素投射圆角阴影)。
   // 阴影值与原 motion boxShadow 一致(0 20px 40px -12px /0.22),保持视觉不变。
@@ -175,7 +177,9 @@ export function AnimatedToolCard({
     'hover:border-blue-400/80 hover:shadow-[0_20px_40px_-12px_rgba(37,99,235,0.22)] dark:hover:border-blue-500/60'
 
   return (
-    <motion.div variants={variants} whileHover={hoverProps}>
+    // ★ motion.div 加 h-full:Grid 的 align-items:stretch 拉伸的是网格直接子元素(即 motion.div),
+    //   motion.div 必须显式 h-full 才能把拉伸的高度传给内层 Link(否则 Link 仍按内容高度)。
+    <motion.div variants={variants} whileHover={hoverProps} className="h-full">
       <Link
         href={href}
         title={title}

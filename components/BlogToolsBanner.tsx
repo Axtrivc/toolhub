@@ -48,7 +48,7 @@ export function BlogToolsBanner() {
       </header>
 
       {/* 响应式网格:1 / 2 / 3 列。★ 交错入场(StaggerGroup)。 */}
-      <StaggerGroup className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <StaggerGroup className="grid grid-cols-1 items-stretch gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {tools.map((tool) => {
           const href = `/tools/${tool.slug}/`
           const titleAttr = `${tool.name} — ${tool.shortIntro}`
@@ -65,10 +65,10 @@ export function BlogToolsBanner() {
                   {tool.category}
                 </span>
               </div>
-              <h3 className="mt-4 text-base font-medium text-slate-900 group-hover:text-brand-600 dark:text-white">
+              <h3 className="mt-4 flex min-h-[2.5rem] items-center text-base font-medium text-slate-900 line-clamp-2 group-hover:text-brand-600 dark:text-white">
                 {tool.name}
               </h3>
-              <p className="mt-2 text-xs text-slate-500 dark:text-slate-400">{tool.shortIntro}</p>
+              <p className="mt-2 line-clamp-2 flex-1 text-xs text-slate-500 dark:text-slate-400">{tool.shortIntro}</p>
             </AnimatedToolCard>
           )
         })}

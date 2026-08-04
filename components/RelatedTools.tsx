@@ -59,7 +59,7 @@ export function RelatedTools({ slug, limit = 4 }: RelatedToolsProps) {
 
       {/* 4 列响应式网格,与首页 ToolCard 网格断点策略一致。
           ★ 交错入场:StaggerGroup 触发卡片依次入场。 */}
-      <StaggerGroup className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
+      <StaggerGroup className="grid grid-cols-1 items-stretch gap-4 sm:grid-cols-2 xl:grid-cols-4">
         {related.map((tool) => {
           const href = `/tools/${tool.slug}/`
           // SEO 锚文本:title 属性给出明确语义描述,强化内链信号
@@ -79,10 +79,10 @@ export function RelatedTools({ slug, limit = 4 }: RelatedToolsProps) {
                   {tool.category}
                 </span>
               </div>
-              <h3 className="mt-4 text-base font-medium text-slate-900 group-hover:text-brand-600 dark:text-white">
+              <h3 className="mt-4 flex min-h-[2.5rem] items-center text-base font-medium text-slate-900 line-clamp-2 group-hover:text-brand-600 dark:text-white">
                 {tool.name}
               </h3>
-              <p className="mt-2 text-xs text-slate-500 dark:text-slate-400">
+              <p className="mt-2 line-clamp-2 flex-1 text-xs text-slate-500 dark:text-slate-400">
                 {tool.shortIntro}
               </p>
             </AnimatedToolCard>

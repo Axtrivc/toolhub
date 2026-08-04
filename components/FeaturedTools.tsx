@@ -44,7 +44,7 @@ export function FeaturedTools({ tools }: FeaturedToolsProps) {
 
       {/* 4 列响应式网格:w-full 确保在父容器内自然拉伸居中,不偏向任何一侧。
           ★ 交错入场:StaggerGroup 触发卡片依次入场(y:15+opacity:0 → y:0+opacity:1)。 */}
-      <StaggerGroup className="grid w-full grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <StaggerGroup className="grid w-full grid-cols-1 items-stretch gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {tools.map((tool) => {
           const isNew = NEW_TOOL_SLUGS.has(tool.slug)
           return (
@@ -77,7 +77,7 @@ export function FeaturedTools({ tools }: FeaturedToolsProps) {
 
               {/* 标题 + 描述:flex-col + flex-1 保证所有卡片高度一致 */}
               <div className="mt-4 flex-1">
-                <h3 className="text-base font-medium text-slate-900 transition-colors group-hover:text-brand-600 dark:text-white">
+                <h3 className="flex min-h-[2.5rem] items-center text-base font-medium text-slate-900 line-clamp-2 transition-colors group-hover:text-brand-600 dark:text-white">
                   {tool.name}
                 </h3>
                 <p className="mt-1.5 line-clamp-2 text-xs text-slate-500 dark:text-slate-400">

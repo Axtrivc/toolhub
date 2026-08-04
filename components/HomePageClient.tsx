@@ -220,7 +220,7 @@ export function HomePageClient({ tools }: HomePageClientProps) {
                 key 含 activeCategory+query,使筛选/搜索切换时网格重新交错入场。 */}
           <StaggerGroup
             key={`${category}-${activeCategory ?? 'all'}-${query}`}
-            className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+            className="grid grid-cols-1 items-stretch gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
           >
             {categoryTools.map((tool) => (
               <AnimatedToolCard
@@ -244,10 +244,14 @@ export function HomePageClient({ tools }: HomePageClientProps) {
                     {tool.category}
                   </span>
                 </div>
-                <h3 className="mt-4 text-base font-medium text-slate-900 group-hover:text-brand-600 dark:text-white">
+                {/* 标题区:line-clamp-2 防过长撑爆;min-h-[2.5rem] 强制 1 行/2 行标题占同等高度,
+                    确保下方描述起点对齐。flex items-center 让单行标题垂直居中占满预留区。 */}
+                <h3 className="mt-4 flex min-h-[2.5rem] items-center text-base font-medium text-slate-900 line-clamp-2 group-hover:text-brand-600 dark:text-white">
                   {tool.name}
                 </h3>
-                <p className="mt-2 text-xs text-slate-500 dark:text-slate-400">
+                {/* 描述:line-clamp-2 优雅省略;flex-1 在 flex-col 卡片内填充剩余空间,
+                    让卡片底部(无论 1 行还是 2 行描述)对齐到同一基线。 */}
+                <p className="mt-2 line-clamp-2 flex-1 text-xs text-slate-500 dark:text-slate-400">
                   {tool.shortIntro}
                 </p>
               </AnimatedToolCard>
