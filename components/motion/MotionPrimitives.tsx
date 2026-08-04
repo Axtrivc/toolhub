@@ -154,27 +154,25 @@ export function AnimatedToolCard({
     ? { hidden: { opacity: 0 }, show: { opacity: 1, transition: { duration: 0.2 } } }
     : fadeUpItemVariants
 
-  // Hover 抬升 + 光晕:reduce-motion 下关闭。
-  // y:-1 对应 -translate-y-1(4px),与 hoverClass 的 transition-all duration-300 配合,
-  // 提供丝滑的"卡片悬浮上抬 + 蓝色光晕散开"微交互。
-  // ★ 不在 className 里加 hover:-translate-y-1,否则与 motion 的 y 双写 transform 会抖动。
-  const hoverProps = reduceMotion
-    ? {}
-    : {
-        y: -4,
-        boxShadow: '0 20px 40px -12px rgba(37,99,235,0.22)',
-      }
+  // Hover 抬升:只做 y:-4 transform,reduce-motion 下关闭。
+  // ★ 关键:不在 motion.div 上设 boxShadow。motion.div 是直角的(没圆角),
+  //   它产生的阴影会是直角矩形 —— 抬升时会在圆角白卡下方拖出一截直角白/蓝色块(Bug 根源)。
+  //   蓝色光晕改由内层 Link 的 hover:shadow-[...] 投射(圆角元素 → 圆角阴影),见 hoverClass。
+  const hoverProps = reduceMotion ? {} : { y: -4 }
 
-  // 卡片基础样式 —— 纯白卡片悬浮在 slate-50 冷灰底上,反差拉满。
-  // rounded-2xl 更柔和现代;transition-all duration-300 让 hover 过渡丝滑。
+  // 卡片基础样式 —— 全部视觉收敛到这一个带圆角的主卡片元素上(Link):
+  //   bg-white / rounded-2xl / border / shadow 全在 Link,外层 motion.div 保持透明。
+  //   ★ 不在 className 加 hover:-translate-y-1,否则与 motion 的 y:-4 双写 transform 会抖动;
+  //     抬升统一交给 motion.div(它透明,只管 transform,不产生任何直角阴影/底色)。
   const baseClass =
     variant === 'featured'
       ? 'group relative flex flex-col rounded-2xl border border-blue-100 bg-gradient-to-b from-blue-50/40 to-transparent p-5 shadow-sm transition-all duration-300 dark:bg-none dark:border-slate-800/80 dark:bg-[#111827] dark:shadow-none'
       : 'group block rounded-2xl border border-slate-200/80 bg-white p-6 shadow-sm transition-all duration-300 dark:border-slate-800/80 dark:bg-slate-900 dark:shadow-none'
 
-  // 悬停:边框高亮变蓝(配合 motion 的阴影散开),白色卡片"凸"出冷灰底。
+  // 悬停:边框高亮变蓝 + 蓝色光晕阴影(用 Tailwind 任意值,圆角元素投射圆角阴影)。
+  // 阴影值与原 motion boxShadow 一致(0 20px 40px -12px /0.22),保持视觉不变。
   const hoverClass =
-    'hover:border-blue-400/80 dark:hover:border-blue-500/60'
+    'hover:border-blue-400/80 hover:shadow-[0_20px_40px_-12px_rgba(37,99,235,0.22)] dark:hover:border-blue-500/60'
 
   return (
     <motion.div variants={variants} whileHover={hoverProps}>
