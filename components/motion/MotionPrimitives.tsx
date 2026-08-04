@@ -154,24 +154,27 @@ export function AnimatedToolCard({
     ? { hidden: { opacity: 0 }, show: { opacity: 1, transition: { duration: 0.2 } } }
     : fadeUpItemVariants
 
-  // Hover 抬升 + 光晕:reduce-motion 下关闭
+  // Hover 抬升 + 光晕:reduce-motion 下关闭。
+  // y:-1 对应 -translate-y-1(4px),与 hoverClass 的 transition-all duration-300 配合,
+  // 提供丝滑的"卡片悬浮上抬 + 蓝色光晕散开"微交互。
+  // ★ 不在 className 里加 hover:-translate-y-1,否则与 motion 的 y 双写 transform 会抖动。
   const hoverProps = reduceMotion
     ? {}
     : {
         y: -4,
-        boxShadow: '0 8px 24px -8px rgba(37,99,235,0.18)',
+        boxShadow: '0 20px 40px -12px rgba(37,99,235,0.22)',
       }
 
-  // 卡片基础样式 —— 纯白卡片悬浮在 slate-50 底色上,反差拉满。
-  // transition-all 让 hover 的阴影 + 边框色变化丝滑(配合 motion 的 y 抬升)。
+  // 卡片基础样式 —— 纯白卡片悬浮在 slate-50 冷灰底上,反差拉满。
+  // rounded-2xl 更柔和现代;transition-all duration-300 让 hover 过渡丝滑。
   const baseClass =
     variant === 'featured'
-      ? 'group relative flex flex-col rounded-xl border border-blue-100 bg-gradient-to-b from-blue-50/40 to-transparent p-5 shadow-sm transition-all dark:bg-none dark:border-slate-800/80 dark:bg-[#111827] dark:shadow-none'
-      : 'group block rounded-xl border border-slate-200 bg-white p-6 shadow-sm transition-all dark:border-slate-800/80 dark:bg-[#111827] dark:shadow-none'
+      ? 'group relative flex flex-col rounded-2xl border border-blue-100 bg-gradient-to-b from-blue-50/40 to-transparent p-5 shadow-sm transition-all duration-300 dark:bg-none dark:border-slate-800/80 dark:bg-[#111827] dark:shadow-none'
+      : 'group block rounded-2xl border border-slate-200/80 bg-white p-6 shadow-sm transition-all duration-300 dark:border-slate-800/80 dark:bg-slate-900 dark:shadow-none'
 
-  // 悬停:边框转蓝 + 阴影加深,白色卡片在冷灰底上"悬浮上抬"的层次感。
+  // 悬停:边框高亮变蓝(配合 motion 的阴影散开),白色卡片"凸"出冷灰底。
   const hoverClass =
-    'hover:border-blue-400/60 hover:shadow-md dark:hover:border-blue-500/60'
+    'hover:border-blue-400/80 dark:hover:border-blue-500/60'
 
   return (
     <motion.div variants={variants} whileHover={hoverProps}>

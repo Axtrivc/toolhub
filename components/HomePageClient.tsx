@@ -238,8 +238,9 @@ export function HomePageClient({ tools }: HomePageClientProps) {
                   >
                     {getToolIcon(tool)}
                   </span>
-                  {/* 右上角显示分类(替代原 PRO/FREE 徽章 —— 工具全免费,PRO 字样会误导用户) */}
-                  <span className="text-xs font-medium uppercase tracking-wide text-slate-400 dark:text-slate-500">
+                  {/* 右上角分类胶囊 —— 小巧精致内嵌 Badge,不抢工具主标题视线。
+                      原 text-xs 灰字过大重复,重构为 10px 胶囊 + slate-100/slate-800 底。 */}
+                  <span className="inline-flex items-center rounded-full bg-slate-100 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-slate-500 dark:bg-slate-800 dark:text-slate-400">
                     {tool.category}
                   </span>
                 </div>
