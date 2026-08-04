@@ -62,25 +62,26 @@ export function HeroGlow() {
   const reduceMotion = useReducedMotion()
 
   // 呼吸动画(reduce-motion 下为 undefined,关闭)。
-  // 振幅刻意收得很小(scale ±3%、opacity ±15%):光斑本身就只有 opacity-15,
-  // 大幅呼吸会让它时隐时现,反而破坏"隐隐约约一抹微光"的质感。
+  // 振幅适中(scale ±4%、opacity ±12%):光斑有存在感,呼吸让光场"活"起来,
+  // 但不过度,避免抢戏或闪烁。
   const breathing = reduceMotion
     ? undefined
     : {
-        animate: { scale: [1, 1.03, 1], opacity: [0.85, 1, 0.85] },
+        animate: { scale: [1, 1.04, 1], opacity: [0.88, 1, 0.88] },
         transition: { duration: 9, repeat: Infinity, ease: 'easeInOut' as const },
       }
 
   return (
-    // ★ 极简居中微光斑(Geek-grade micro glow):
-    //   严格约束尺寸 w-[500px] h-[220px](略小于规格的 480×200,留一点呼吸余量),
-    //   ★绝对不溢出★到下方卡片区域 —— 锚定在标题外层 relative 容器正中,
-    //   opacity-15 浅色模式(暗色 dark:opacity-20 略提,否则深底完全看不见)。
-    //   blur-[80px] 让边缘丝滑羽化,无可感知轮廓。
-    //   外层容器(调用方)需 position: relative;本组件 left/top 1/2 + 负平移精确居中。
+    // ★ 黄金中庸点光斑(Golden-ratio ambient glow)—— 顶级 SaaS Hero 质感:
+    //   尺寸中等(w-[680px] h-[320px])—— 比极简微光大一档,撑得起大标题,
+    //   又比上一版 1155px 巨幕克制,绝不溢出到下方卡片区。
+    //   渐变蓝→靛→紫,饱和度适中(/35 /30 /25),blur-[100px] 丝滑羽化。
+    //   亮/暗模式分别调色:暗色用更深的 blue-600/indigo-500/purple-600 并降饱和,
+    //   避免深底上过亮的浅色光斑发灰。
+    //   锚定:调用方需 relative 容器;top-8 让光斑略偏上,正对标题主体。
     <motion.div
       aria-hidden="true"
-      className="pointer-events-none absolute left-1/2 top-1/2 -z-10 h-[220px] w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-r from-blue-500/20 via-indigo-400/20 to-purple-400/15 opacity-15 blur-[80px] dark:opacity-20"
+      className="pointer-events-none absolute left-1/2 top-8 -z-10 h-[320px] w-[680px] -translate-x-1/2 rounded-full bg-gradient-to-tr from-blue-400/35 via-indigo-400/30 to-purple-400/25 blur-[100px] dark:from-blue-600/30 dark:via-indigo-500/25 dark:to-purple-600/20"
       animate={breathing?.animate}
       transition={breathing?.transition}
     />
@@ -161,15 +162,16 @@ export function AnimatedToolCard({
         boxShadow: '0 8px 24px -8px rgba(37,99,235,0.18)',
       }
 
-  // 卡片基础样式(沿用原设计)
+  // 卡片基础样式 —— 纯白卡片悬浮在 slate-50 底色上,反差拉满。
+  // transition-all 让 hover 的阴影 + 边框色变化丝滑(配合 motion 的 y 抬升)。
   const baseClass =
     variant === 'featured'
-      ? 'group relative flex flex-col rounded-xl border border-blue-100 bg-gradient-to-b from-blue-50/40 to-transparent p-5 shadow-sm transition-colors dark:bg-none dark:border-slate-800/80 dark:bg-[#111827] dark:shadow-none'
-      : 'group block rounded-xl border border-slate-200 bg-white p-6 shadow-sm transition-colors dark:border-slate-800/80 dark:bg-[#111827] dark:shadow-none'
+      ? 'group relative flex flex-col rounded-xl border border-blue-100 bg-gradient-to-b from-blue-50/40 to-transparent p-5 shadow-sm transition-all dark:bg-none dark:border-slate-800/80 dark:bg-[#111827] dark:shadow-none'
+      : 'group block rounded-xl border border-slate-200 bg-white p-6 shadow-sm transition-all dark:border-slate-800/80 dark:bg-[#111827] dark:shadow-none'
 
-  // 悬停描边色(由 Tailwind group-hover 已接管文字变色,这里给 motion 控制阴影)
+  // 悬停:边框转蓝 + 阴影加深,白色卡片在冷灰底上"悬浮上抬"的层次感。
   const hoverClass =
-    'hover:border-blue-300 dark:hover:border-blue-500/60'
+    'hover:border-blue-400/60 hover:shadow-md dark:hover:border-blue-500/60'
 
   return (
     <motion.div variants={variants} whileHover={hoverProps}>

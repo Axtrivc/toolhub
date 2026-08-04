@@ -29,13 +29,17 @@ export default function HomePage() {
       <section className="relative mx-auto mb-12 max-w-5xl text-center">
         <div className="relative">
           <HeroGlow />
-          <h1
-            className="text-5xl font-extrabold tracking-tight sm:text-6xl lg:text-7xl dark:text-white"
-            style={{ color: 'rgb(var(--text))' }}
-          >
-            {t(locale, 'heroBadge', { count: String(tools.length) })}{' '}
-            {t(locale, 'heroTitle1')}
-            <span className="hero-gradient-text block">{t(locale, 'heroTitle2')}</span>
+          {/* 主标题"138+ Free Online Tools"用蓝紫极客渐变点睛(bg-clip-text + text-transparent)。
+              副行"That Just Work"保持实色 rgb(var(--text)) 作为视觉锚点,避免两行渐变过重。
+              ★ 去掉 <h1> 的 inline color,否则会覆盖 text-transparent 让渐变失效。 */}
+          <h1 className="text-5xl font-extrabold tracking-tight sm:text-6xl lg:text-7xl">
+            <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent dark:from-blue-400 dark:via-indigo-300 dark:to-purple-400">
+              {t(locale, 'heroBadge', { count: String(tools.length) })}{' '}
+              {t(locale, 'heroTitle1')}
+            </span>
+            <span className="block" style={{ color: 'rgb(var(--text))' }}>
+              {t(locale, 'heroTitle2')}
+            </span>
           </h1>
         </div>
         <p
