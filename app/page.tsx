@@ -13,6 +13,11 @@ export default function HomePage() {
   const tools = getPublishedTools()
   const { locale } = useApp()
 
+  // 营销展示用的取整数(向下取整到十位):138 → 130,显示为 "130+"。
+  // 规则:不精确到个位;140+ / 150+ 等按实际数量进位。当前 138 落在 130–139,故 130+。
+  // 仅用于 Hero badge / SEO 文案等营销位置;搜索框、列表计数仍用精确的 tools.length。
+  const roundedCount = Math.floor(tools.length / 10) * 10
+
   // 按分类聚合,用于首页"按分类浏览"内链区(SEO 内链 + 用户导航)
   const byCategory = tools.reduce<Record<string, number>>((acc, tool) => {
     acc[tool.category] = (acc[tool.category] ?? 0) + 1
@@ -29,12 +34,13 @@ export default function HomePage() {
       <section className="relative mx-auto mb-12 max-w-5xl text-center">
         <div className="relative">
           <HeroGlow />
-          {/* 主标题"138+ Free Online Tools"用蓝紫极客渐变点睛(bg-clip-text + text-transparent)。
+          {/* 主标题"130+ Free Online Tools"用蓝紫极客渐变点睛(bg-clip-text + text-transparent)。
+              count 取 roundedCount(向下取整到十位,138→130),不精确到个位。
               副行"That Just Work"保持实色 rgb(var(--text)) 作为视觉锚点,避免两行渐变过重。
               ★ 去掉 <h1> 的 inline color,否则会覆盖 text-transparent 让渐变失效。 */}
           <h1 className="text-5xl font-extrabold tracking-tight sm:text-6xl lg:text-7xl">
             <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent dark:from-blue-400 dark:via-indigo-300 dark:to-purple-400">
-              {t(locale, 'heroBadge', { count: String(tools.length) })}{' '}
+              {t(locale, 'heroBadge', { count: String(roundedCount) })}{' '}
               {t(locale, 'heroTitle1')}
             </span>
             <span className="block" style={{ color: 'rgb(var(--text))' }}>
@@ -95,7 +101,7 @@ export default function HomePage() {
         </ul>
         <p>
           We focus on utilities that solve a single problem well — from calculating loan payments and
-          converting units, to formatting JSON and generating QR codes. With {tools.length}+ tools
+          converting units, to formatting JSON and generating QR codes. With {roundedCount}+ tools
           across finance, math, health, unit conversion, and developer utilities, there&apos;s a good
           chance we have what you need. New tools are added regularly, so bookmark this page.
         </p>

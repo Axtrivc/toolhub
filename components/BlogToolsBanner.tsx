@@ -76,7 +76,7 @@ export function BlogToolsBanner() {
 
       <div className="mt-8">
         <a href="/#all-tools" className="btn btn-secondary">
-          Browse all 138 tools <span aria-hidden="true">→</span>
+          Browse all 130+ tools <span aria-hidden="true">→</span>
         </a>
       </div>
     </section>
