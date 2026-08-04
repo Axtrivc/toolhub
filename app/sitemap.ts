@@ -22,6 +22,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${SITE_URL}/privacy/`, lastModified: now, changeFrequency: 'yearly', priority: 0.3 },
     { url: `${SITE_URL}/terms/`, lastModified: now, changeFrequency: 'yearly', priority: 0.3 },
     // 技术博客(英文长文,面向 HN/极客社区 + SEO 拓展)
+    { url: `${SITE_URL}/blog/`, lastModified: now, changeFrequency: 'weekly', priority: 0.7 },
     {
       url: `${SITE_URL}/blog/how-i-built-toolhub/`,
       lastModified: now,

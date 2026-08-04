@@ -15,6 +15,7 @@ export interface Dict {
   // Header 导航
   navAllTools: string
   navAbout: string
+  navBlog: string
   navContact: string
   // 首页 Hero
   heroBadge: string // "{count}+ Free Online Tools" 中的 "{count}+"
@@ -84,6 +85,7 @@ export interface Dict {
 const en: Dict = {
   navAllTools: 'All Tools',
   navAbout: 'About',
+  navBlog: 'Blog',
   navContact: 'Contact',
   heroBadge: '{count}+',
   heroTitle1: 'Free Online Tools',
@@ -142,6 +144,7 @@ const en: Dict = {
 const zh: Dict = {
   navAllTools: '全部工具',
   navAbout: '关于',
+  navBlog: '博客',
   navContact: '联系',
   heroBadge: '{count}+',
   heroTitle1: '免费在线工具',

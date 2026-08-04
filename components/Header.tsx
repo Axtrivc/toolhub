@@ -91,6 +91,13 @@ export function Header() {
               {t(locale, 'navAllTools')}
             </Link>
             <Link
+              href="/blog/"
+              className="rounded-md px-3 py-2 transition-colors hover:bg-slate-100 dark:hover:bg-slate-700"
+              style={{ color: 'rgb(var(--text-muted))' }}
+            >
+              {t(locale, 'navBlog')}
+            </Link>
+            <Link
               href="/about/"
               className="rounded-md px-3 py-2 transition-colors hover:bg-slate-100 dark:hover:bg-slate-700"
               style={{ color: 'rgb(var(--text-muted))' }}
@@ -190,6 +197,13 @@ export function Header() {
                 className="rounded-md px-3 py-3 text-base font-medium transition-colors hover:bg-slate-100 dark:hover:bg-slate-700"
               >
                 {t(locale, 'navAllTools')}
+              </Link>
+              <Link
+                href="/blog/"
+                onClick={close}
+                className="rounded-md px-3 py-3 text-base font-medium transition-colors hover:bg-slate-100 dark:hover:bg-slate-700"
+              >
+                {t(locale, 'navBlog')}
               </Link>
               <Link
                 href="/about/"
