@@ -41,6 +41,10 @@ project-overview.html
 # 测试/备份产物(Playwright 截图、CSV 导出、本地备份)
 /.playwright-mcp/
 /.backups/
+# 临时提取文件(脚本调试用)
+/.tmp-*
+# Windows 误重定向产生的空文件(`> nul` 会创建名为 nul 的文件)
+nul
 
 # 根目录的诊断/预览截图(只匹配项目根的 png,不影响 public/ 子目录里的资源)
 /*.png

@@ -4,7 +4,7 @@ import { getRelatedTools } from '@/lib/tools'
 import { getToolIcon } from '@/lib/tools'
 import type { ToolMeta } from '@/lib/tools'
 import { useApp } from './providers/AppProviders'
-import { t } from '@/lib/i18n'
+import { t, tc, getToolName, getToolShortIntro } from '@/lib/i18n'
 import { AnimatedToolCard, StaggerGroup } from './motion/MotionPrimitives'
 
 interface RelatedToolsProps {
@@ -62,8 +62,10 @@ export function RelatedTools({ slug, limit = 4 }: RelatedToolsProps) {
       <StaggerGroup className="grid grid-cols-1 items-stretch gap-4 sm:grid-cols-2 xl:grid-cols-4">
         {related.map((tool) => {
           const href = `/tools/${tool.slug}/`
+          const localizedName = getToolName(locale, tool.slug, tool.name)
+          const localizedIntro = getToolShortIntro(locale, tool.slug, tool.shortIntro)
           // SEO 锚文本:title 属性给出明确语义描述,强化内链信号
-          const titleAttr = `${tool.name} — ${tool.shortIntro}`
+          const titleAttr = `${localizedName} — ${localizedIntro}`
           return (
             <AnimatedToolCard key={tool.slug} href={href} title={titleAttr} ariaLabel={titleAttr}>
               <div className="flex items-start justify-between">
@@ -76,14 +78,14 @@ export function RelatedTools({ slug, limit = 4 }: RelatedToolsProps) {
                 </span>
                 {/* 右上角分类标签 —— 小巧精致内嵌胶囊,与首页 ToolCard Badge 统一 */}
                 <span className="inline-flex items-center rounded-full bg-slate-100 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-slate-500 dark:bg-slate-800 dark:text-slate-400">
-                  {tool.category}
+                  {tc(locale, tool.category)}
                 </span>
               </div>
               <h3 className="mt-4 flex min-h-[2.5rem] items-center text-base font-medium text-slate-900 line-clamp-2 group-hover:text-brand-600 dark:text-white">
-                {tool.name}
+                {localizedName}
               </h3>
               <p className="mt-2 line-clamp-2 flex-1 text-xs text-slate-500 dark:text-slate-400">
-                {tool.shortIntro}
+                {localizedIntro}
               </p>
             </AnimatedToolCard>
           )

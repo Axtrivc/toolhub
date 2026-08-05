@@ -3,7 +3,7 @@
 import type { ToolMeta } from '@/lib/tools'
 import { getToolIcon } from '@/lib/tools'
 import { useApp } from './providers/AppProviders'
-import { t } from '@/lib/i18n'
+import { t, getToolName, getToolShortIntro } from '@/lib/i18n'
 import { AnimatedToolCard, StaggerGroup } from './motion/MotionPrimitives'
 
 interface FeaturedToolsProps {
@@ -47,13 +47,15 @@ export function FeaturedTools({ tools }: FeaturedToolsProps) {
       <StaggerGroup className="grid w-full grid-cols-1 items-stretch gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {tools.map((tool) => {
           const isNew = NEW_TOOL_SLUGS.has(tool.slug)
+          const localizedName = getToolName(locale, tool.slug, tool.name)
+          const localizedIntro = getToolShortIntro(locale, tool.slug, tool.shortIntro)
           return (
             <AnimatedToolCard
               key={tool.slug}
               href={`/tools/${tool.slug}/`}
               variant="featured"
-              title={`${tool.name} — ${tool.shortIntro}`}
-              ariaLabel={`${tool.name} — ${tool.shortIntro}`}
+              title={`${localizedName} — ${localizedIntro}`}
+              ariaLabel={`${localizedName} — ${localizedIntro}`}
               // 右上角微型 Pill Badge:NEW(淡蓝)/ POPULAR(柔和淡橙),低饱和度
               badge={
                 <span
@@ -78,10 +80,10 @@ export function FeaturedTools({ tools }: FeaturedToolsProps) {
               {/* 标题 + 描述:flex-col + flex-1 保证所有卡片高度一致 */}
               <div className="mt-4 flex-1">
                 <h3 className="flex min-h-[2.5rem] items-center text-base font-medium text-slate-900 line-clamp-2 transition-colors group-hover:text-brand-600 dark:text-white">
-                  {tool.name}
+                  {localizedName}
                 </h3>
                 <p className="mt-1.5 line-clamp-2 text-xs text-slate-500 dark:text-slate-400">
-                  {tool.shortIntro}
+                  {localizedIntro}
                 </p>
               </div>
             </AnimatedToolCard>

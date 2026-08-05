@@ -6,7 +6,7 @@ import Link from 'next/link'
 import type { ToolMeta } from '@/lib/tools'
 import { getToolIcon } from '@/lib/tools'
 import type { Locale } from '@/lib/i18n'
-import { t } from '@/lib/i18n'
+import { t, tc, getToolName, getToolShortIntro } from '@/lib/i18n'
 
 interface SearchPaletteProps {
   /** 全部已上线工具(由 Server 传入) */
@@ -232,12 +232,12 @@ export function SearchPalette({ tools, locale, open, onClose }: SearchPalettePro
                         {icon}
                       </span>
                       <span className="min-w-0 flex-1">
-                        <span className="block truncate font-medium">{tool.name}</span>
+                        <span className="block truncate font-medium">{getToolName(locale, tool.slug, tool.name)}</span>
                         <span
                           className="block truncate text-xs"
                           style={{ color: 'rgb(var(--text-subtle))' }}
                         >
-                          {tool.category}
+                          {tc(locale, tool.category)}
                         </span>
                       </span>
                       {/* 选中态右箭头:用 opacity 过渡,避免抖动 */}

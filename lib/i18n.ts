@@ -1,15 +1,66 @@
 /**
- * i18n 字典 - 只翻译界面框架(导航/按钮/Footer 等)
+ * i18n 字典 - 翻译界面框架(导航/按钮/Footer 等)
  *
  * 策略说明:
- * - 站点定位英文站(赚高 RPM),工具内容保持英文,不做翻译
- * - 语言切换只影响界面元素:导航、按钮、搜索框、Footer 等
- * - 默认语言英文,中文为可选切换
+ * - 站点定位英文站(赚高 RPM),工具 SEO 字段(title/description/h1/keywords)保持英文,
+ *   不做翻译;语言切换只影响界面元素 + 工具卡片展示文案(name/shortIntro/category)
+ * - 支持 4 种语言:en(默认)/ zh / es / de
+ * - 工具卡片的 name/shortIntro 翻译放在 lib/i18n/tools.<locale>.ts,按 slug 映射
  *
- * 加新的界面文案:在两个字典里都加一个 key。
+ * 加新的界面文案:在四个字典里都加一个 key。
  */
 
-export type Locale = 'en' | 'zh'
+import { zhTools } from './i18n/tools.zh'
+import { esTools } from './i18n/tools.es'
+import { deTools } from './i18n/tools.de'
+
+export type Locale = 'en' | 'zh' | 'es' | 'de'
+
+/** 支持的语言列表(下拉/迭代用) */
+export const SUPPORTED_LOCALES: Locale[] = ['en', 'zh', 'es', 'de']
+
+/** 语言下拉的展示标签(母语 + ISO 码) */
+export const LOCALE_LABELS: Record<Locale, string> = {
+  en: 'English',
+  zh: '中文',
+  es: 'Español',
+  de: 'Deutsch',
+}
+
+/** 语言下拉的短码(选中态徽章用) */
+export const LOCALE_CODES: Record<Locale, string> = {
+  en: 'EN',
+  zh: '中',
+  es: 'ES',
+  de: 'DE',
+}
+
+/**
+ * 首访检测浏览器语言 → 匹配支持列表。
+ * 匹配不到任何支持语言 → 返回 'en'(默认)。
+ *
+ * 匹配规则:navigator.language 形如 'zh-CN' / 'es-AR' / 'de-AT' / 'en-US',
+ * 取主语言前缀小写后比对。
+ */
+export function detectBrowserLocale(): Locale {
+  if (typeof navigator === 'undefined') return 'en'
+  const langs = [navigator.language, ...(navigator.languages ?? [])]
+    .filter(Boolean)
+    .map((l) => l.toLowerCase())
+  for (const l of langs) {
+    const primary = l.split('-')[0]
+    if (primary === 'zh') return 'zh'
+    if (primary === 'es') return 'es'
+    if (primary === 'de') return 'de'
+    if (primary === 'en') return 'en'
+  }
+  return 'en'
+}
+
+/** 校验字符串是否为合法 Locale(读取 localStorage 后用) */
+export function isLocale(v: unknown): v is Locale {
+  return v === 'en' || v === 'zh' || v === 'es' || v === 'de'
+}
 
 export interface Dict {
   // Header 导航
@@ -200,15 +251,238 @@ const zh: Dict = {
   searchKbdClose: '关闭',
 }
 
-export const dicts: Record<Locale, Dict> = { en, zh }
+const es: Dict = {
+  navAllTools: 'Todas las herramientas',
+  navAbout: 'Acerca de',
+  navBlog: 'Blog',
+  navContact: 'Contacto',
+  heroBadge: '{count}+',
+  heroTitle1: 'Herramientas online gratis',
+  heroTitle2: 'Que simplemente funcionan',
+  heroSubtitle:
+    'Utilidades rápidas y respetuosas con la privacidad para desarrolladores, estudiantes y tareas diarias. Todo se ejecuta en tu navegador: sin registro, sin subir archivos, sin rastreo.',
+  heroOfflineBadge: '⚡ 100% en el cliente · Sin conexión',
+  searchPlaceholder: 'Buscar {count} herramientas... (p. ej. "préstamo", "json", "kg a lb")',
+  categoryAll: 'Todas',
+  showingAll: 'Mostrando las {count} herramientas',
+  showingFiltered: '{filtered} de {total} herramientas',
+  noResults: 'Ninguna herramienta coincide con "{query}".',
+  noResultsHint: 'Limpiar búsqueda',
+  clearSearch: 'Limpiar búsqueda',
+  featuredTitle: 'Herramientas populares',
+  featuredBadgePopular: 'POPULAR',
+  featuredBadgeNew: 'NUEVO',
+  badgePro: 'Pro',
+  badgeFree: 'Gratis',
+  footerAbout: 'Acerca de',
+  footerContact: 'Contacto',
+  footerPrivacy: 'Privacidad',
+  footerTerms: 'Términos',
+  footerTagline:
+    'Herramientas online gratuitas, rápidas y respetuosas con la privacidad. Todo se ejecuta en tu navegador: ningún dato sale de tu dispositivo.',
+  footerRights: 'herramientas y contando. Todos los derechos reservados.',
+  toolHome: 'Inicio',
+  toolResult: 'Resultado',
+  toolCopy: 'Copiar',
+  toolCopied: '✓ Copiado',
+  toolLoadSample: 'Cargar ejemplo',
+  toolSampleLoaded: '✓ Ejemplo cargado',
+  toolCopySummary: 'Copiar resumen',
+  toolDownload: 'Descargar',
+  relatedTitle: 'Herramientas relacionadas',
+  relatedSubtitle: 'Más herramientas que podrían ser útiles',
+  recentTitle: 'Usadas recientemente y favoritos',
+  recentSubtitle: 'Continúa justo donde lo dejaste',
+  adLabel: 'Publicidad',
+  themeToggle: 'Cambiar tema',
+  themeLight: 'Claro',
+  themeDark: 'Oscuro',
+  languageToggle: 'Cambiar idioma',
+  // 全局搜索弹窗(Cmd/Ctrl+K)
+  searchOpen: 'Buscar herramientas (Ctrl+K)',
+  searchPaletteTitle: 'Buscar herramientas',
+  searchPalettePlaceholder: 'Busca herramientas por nombre o palabra clave…',
+  searchPaletteHint: '{count} herramientas',
+  searchNoResults: 'Sin coincidencias. Prueba con otra palabra clave.',
+  searchClose: 'Cerrar búsqueda',
+  searchKbdSelect: 'para seleccionar',
+  searchKbdMove: 'para navegar',
+  searchKbdClose: 'para cerrar',
+}
+
+const de: Dict = {
+  navAllTools: 'Alle Werkzeuge',
+  navAbout: 'Über',
+  navBlog: 'Blog',
+  navContact: 'Kontakt',
+  heroBadge: '{count}+',
+  heroTitle1: 'Kostenlose Online-Werkzeuge',
+  heroTitle2: 'Die einfach funktionieren',
+  heroSubtitle:
+    'Schnelle, datenschutzfreundliche Helfer für Entwickler, Studierende und Alltag. Alles läuft direkt im Browser — keine Anmeldung, kein Upload, kein Tracking.',
+  heroOfflineBadge: '⚡ 100% clientseitig · Offline-fähig',
+  searchPlaceholder: '{count} Werkzeuge durchsuchen... (z. B. "Kredit", "json", "kg in lb")',
+  categoryAll: 'Alle',
+  showingAll: 'Zeige alle {count} Werkzeuge',
+  showingFiltered: '{filtered} von {total} Werkzeugen',
+  noResults: 'Keine Werkzeuge passen zu „{query}".',
+  noResultsHint: 'Suche löschen',
+  clearSearch: 'Suche löschen',
+  featuredTitle: 'Beliebte Werkzeuge',
+  featuredBadgePopular: 'BELIEBT',
+  featuredBadgeNew: 'NEU',
+  badgePro: 'Pro',
+  badgeFree: 'Gratis',
+  footerAbout: 'Über',
+  footerContact: 'Kontakt',
+  footerPrivacy: 'Datenschutz',
+  footerTerms: 'AGB',
+  footerTagline:
+    'Kostenlose, schnelle und datenschutzfreundliche Online-Werkzeuge. Alles läuft im Browser — keine Daten verlassen dein Gerät.',
+  footerRights: 'Werkzeuge und es werden mehr. Alle Rechte vorbehalten.',
+  toolHome: 'Start',
+  toolResult: 'Ergebnis',
+  toolCopy: 'Kopieren',
+  toolCopied: '✓ Kopiert',
+  toolLoadSample: 'Beispiel laden',
+  toolSampleLoaded: '✓ Beispiel geladen',
+  toolCopySummary: 'Zusammenfassung kopieren',
+  toolDownload: 'Herunterladen',
+  relatedTitle: 'Verwandte Werkzeuge',
+  relatedSubtitle: 'Weitere Werkzeuge, die nützlich sein könnten',
+  recentTitle: 'Zuletzt genutzt & Favoriten',
+  recentSubtitle: 'Mach genau da weiter, wo du aufgehört hast',
+  adLabel: 'Werbung',
+  themeToggle: 'Theme wechseln',
+  themeLight: 'Hell',
+  themeDark: 'Dunkel',
+  languageToggle: 'Sprache wechseln',
+  // 全局搜索弹窗(Cmd/Ctrl+K)
+  searchOpen: 'Werkzeuge suchen (Strg+K)',
+  searchPaletteTitle: 'Werkzeuge suchen',
+  searchPalettePlaceholder: 'Werkzeuge nach Name oder Stichwort suchen…',
+  searchPaletteHint: '{count} Werkzeuge',
+  searchNoResults: 'Keine Treffer. Versuche ein anderes Stichwort.',
+  searchClose: 'Suche schließen',
+  searchKbdSelect: 'zum Auswählen',
+  searchKbdMove: 'zum Navigieren',
+  searchKbdClose: 'zum Schließen',
+}
+
+export const dicts: Record<Locale, Dict> = { en, zh, es, de }
+
+// ─────────────────────────────────────────────────────────────────────────────
+// 分类标签本地化(11 个英文分类键 → 4 语映射)
+//
+// tools.ts 的 category 字段始终是英文键(如 'Finance Calculators'),用作 i18n key。
+// tc() 取不到映射时回退到原英文键,保证永不破图。
+// ─────────────────────────────────────────────────────────────────────────────
+
+export type CategoryKey =
+  | 'Finance Calculators'
+  | 'Developer Tools'
+  | 'Text Tools'
+  | 'Unit Converters'
+  | 'Math Calculators'
+  | 'Health Calculators'
+  | 'Education Calculators'
+  | 'Time Calculators'
+  | 'Web Design Tools'
+  | 'Business Tools'
+  | 'Security Tools'
+
+const categoryDicts: Record<Locale, Partial<Record<CategoryKey, string>>> = {
+  en: {},
+  zh: {
+    'Finance Calculators': '金融计算器',
+    'Developer Tools': '开发者工具',
+    'Text Tools': '文本工具',
+    'Unit Converters': '单位换算器',
+    'Math Calculators': '数学计算器',
+    'Health Calculators': '健康计算器',
+    'Education Calculators': '教育计算器',
+    'Time Calculators': '时间计算器',
+    'Web Design Tools': '网页设计工具',
+    'Business Tools': '商业工具',
+    'Security Tools': '安全工具',
+  },
+  es: {
+    'Finance Calculators': 'Calculadoras financieras',
+    'Developer Tools': 'Herramientas para desarrolladores',
+    'Text Tools': 'Herramientas de texto',
+    'Unit Converters': 'Conversores de unidades',
+    'Math Calculators': 'Calculadoras matemáticas',
+    'Health Calculators': 'Calculadoras de salud',
+    'Education Calculators': 'Calculadoras educativas',
+    'Time Calculators': 'Calculadoras de tiempo',
+    'Web Design Tools': 'Herramientas de diseño web',
+    'Business Tools': 'Herramientas de negocios',
+    'Security Tools': 'Herramientas de seguridad',
+  },
+  de: {
+    'Finance Calculators': 'Finanzrechner',
+    'Developer Tools': 'Entwickler-Werkzeuge',
+    'Text Tools': 'Text-Werkzeuge',
+    'Unit Converters': 'Einheiten-Umrechner',
+    'Math Calculators': 'Mathe-Rechner',
+    'Health Calculators': 'Gesundheitsrechner',
+    'Education Calculators': 'Bildungsrechner',
+    'Time Calculators': 'Zeitrechner',
+    'Web Design Tools': 'Webdesign-Werkzeuge',
+    'Business Tools': 'Business-Werkzeuge',
+    'Security Tools': 'Sicherheits-Werkzeuge',
+  },
+}
 
 /** 简单模板替换:支持 {count} {total} {filtered} {query} */
 export function t(locale: Locale, key: keyof Dict, vars?: Record<string, string | number>): string {
-  let str = dicts[locale][key] ?? String(key)
+  let str = dicts[locale]?.[key] ?? dicts.en[key] ?? String(key)
   if (vars) {
     for (const [k, v] of Object.entries(vars)) {
       str = str.replace(`{${k}}`, String(v))
     }
   }
   return str
+}
+
+/**
+ * 取分类本地化文案。tools.ts 的 category 字段是英文键(如 'Finance Calculators'),
+ * 英文本身无需翻译,其它语种查表;查不到回退到原英文键,永不破图。
+ */
+export function tc(locale: Locale, categoryKey: string): string {
+  if (locale === 'en') return categoryKey
+  const map = categoryDicts[locale]
+  return (map?.[categoryKey as CategoryKey]) ?? categoryKey
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// 工具卡片文案本地化(name + shortIntro)
+//
+// 翻译文件:lib/i18n/tools.<locale>.ts,Record<slug, { name, shortIntro }>
+// 缺失某 slug 时 → 回退到 tool.name / tool.shortIntro(英文原值)。
+// ─────────────────────────────────────────────────────────────────────────────
+
+export interface ToolI18nEntry {
+  name: string
+  shortIntro: string
+}
+type ToolI18nMap = Record<string, ToolI18nEntry>
+
+const toolI18nMaps: Record<Locale, ToolI18nMap> = {
+  en: {}, // 英文回退到 tools.ts 原值
+  zh: zhTools as ToolI18nMap,
+  es: esTools as ToolI18nMap,
+  de: deTools as ToolI18nMap,
+}
+
+/** 取工具本地化名(回退到英文原值) */
+export function getToolName(locale: Locale, slug: string, fallback: string): string {
+  if (locale === 'en') return fallback
+  return toolI18nMaps[locale]?.[slug]?.name ?? fallback
+}
+
+/** 取工具本地化简介(回退到英文原值) */
+export function getToolShortIntro(locale: Locale, slug: string, fallback: string): string {
+  if (locale === 'en') return fallback
+  return toolI18nMaps[locale]?.[slug]?.shortIntro ?? fallback
 }

@@ -7,7 +7,7 @@ import { getPublishedTools } from '@/lib/tools'
 import { useFavorites } from '@/lib/useFavorites'
 import { useRecentlyUsed } from '@/lib/useRecentlyUsed'
 import { useApp } from './providers/AppProviders'
-import { t } from '@/lib/i18n'
+import { t, tc, getToolName, getToolShortIntro } from '@/lib/i18n'
 import { AnimatedToolCard, StaggerGroup } from './motion/MotionPrimitives'
 
 const MAX_ITEMS = 4
@@ -79,7 +79,9 @@ export function HomeRecents() {
       <StaggerGroup className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
         {items.map((tool) => {
           const href = `/tools/${tool.slug}/`
-          const titleAttr = `${tool.name} — ${tool.shortIntro}`
+          const localizedName = getToolName(locale, tool.slug, tool.name)
+          const localizedIntro = getToolShortIntro(locale, tool.slug, tool.shortIntro)
+          const titleAttr = `${localizedName} — ${localizedIntro}`
           return (
             <AnimatedToolCard key={tool.slug} href={href} title={titleAttr} ariaLabel={titleAttr}>
               <div className="flex items-start justify-between">
@@ -90,14 +92,14 @@ export function HomeRecents() {
                   {getToolIcon(tool)}
                 </span>
                 <span className="text-xs font-medium uppercase tracking-wide text-slate-400 dark:text-slate-500">
-                  {tool.category}
+                  {tc(locale, tool.category)}
                 </span>
               </div>
               <h3 className="mt-4 text-base font-medium text-slate-900 group-hover:text-brand-600 dark:text-white">
-                {tool.name}
+                {localizedName}
               </h3>
               <p className="mt-2 text-xs text-slate-500 dark:text-slate-400">
-                {tool.shortIntro}
+                {localizedIntro}
               </p>
             </AnimatedToolCard>
           )

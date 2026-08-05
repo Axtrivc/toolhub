@@ -4,7 +4,7 @@ import { useState, useMemo, useEffect } from 'react'
 import type { ToolMeta } from '@/lib/tools'
 import { getToolIcon } from '@/lib/tools'
 import { useApp } from './providers/AppProviders'
-import { t } from '@/lib/i18n'
+import { t, tc, getToolName, getToolShortIntro } from '@/lib/i18n'
 import { FeaturedTools } from './FeaturedTools'
 import {
   AnimatedToolCard,
@@ -172,7 +172,7 @@ export function HomePageClient({ tools }: HomePageClientProps) {
                 setActiveCategory(null),
               )}
               {categories.map((cat) =>
-                renderChip(cat, cat, activeCategory === cat, () =>
+                renderChip(cat, tc(locale, cat), activeCategory === cat, () =>
                   setActiveCategory(cat),
                 ),
               )}
@@ -210,7 +210,7 @@ export function HomePageClient({ tools }: HomePageClientProps) {
       {Object.entries(grouped).map(([category, categoryTools]) => (
         <section key={category} id={category} className="scroll-mt-20">
           <h2 className="mb-5 text-2xl font-bold" style={{ color: 'rgb(var(--text))' }}>
-            {category}
+            {tc(locale, category)}
           </h2>
           {/* 工具卡片网格:xl:grid-cols-4(1280px 断点)对齐 max-w-7xl 版心,
               原 2xl:grid-cols-4(1536px)永远无法触发(版心只有 1280px),属断点 bug。
@@ -222,12 +222,15 @@ export function HomePageClient({ tools }: HomePageClientProps) {
             key={`${category}-${activeCategory ?? 'all'}-${query}`}
             className="grid grid-cols-1 items-stretch gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
           >
-            {categoryTools.map((tool) => (
+            {categoryTools.map((tool) => {
+              const localizedName = getToolName(locale, tool.slug, tool.name)
+              const localizedIntro = getToolShortIntro(locale, tool.slug, tool.shortIntro)
+              return (
               <AnimatedToolCard
                 key={tool.slug}
                 href={`/tools/${tool.slug}/`}
-                title={`${tool.name} — ${tool.shortIntro}`}
-                ariaLabel={`${tool.name} — ${tool.shortIntro}`}
+                title={`${localizedName} — ${localizedIntro}`}
+                ariaLabel={`${localizedName} — ${localizedIntro}`}
               >
                 <div className="flex items-start justify-between">
                   {/* 工具图标:按 category 默认映射 + 明星工具单独定制(见 lib/tools.ts getToolIcon)。
@@ -241,21 +244,22 @@ export function HomePageClient({ tools }: HomePageClientProps) {
                   {/* 右上角分类胶囊 —— 小巧精致内嵌 Badge,不抢工具主标题视线。
                       原 text-xs 灰字过大重复,重构为 10px 胶囊 + slate-100/slate-800 底。 */}
                   <span className="inline-flex items-center rounded-full bg-slate-100 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-slate-500 dark:bg-slate-800 dark:text-slate-400">
-                    {tool.category}
+                    {tc(locale, tool.category)}
                   </span>
                 </div>
                 {/* 标题区:line-clamp-2 防过长撑爆;min-h-[2.5rem] 强制 1 行/2 行标题占同等高度,
                     确保下方描述起点对齐。flex items-center 让单行标题垂直居中占满预留区。 */}
                 <h3 className="mt-4 flex min-h-[2.5rem] items-center text-base font-medium text-slate-900 line-clamp-2 group-hover:text-brand-600 dark:text-white">
-                  {tool.name}
+                  {localizedName}
                 </h3>
                 {/* 描述:line-clamp-2 优雅省略;flex-1 在 flex-col 卡片内填充剩余空间,
                     让卡片底部(无论 1 行还是 2 行描述)对齐到同一基线。 */}
                 <p className="mt-2 line-clamp-2 flex-1 text-xs text-slate-500 dark:text-slate-400">
-                  {tool.shortIntro}
+                  {localizedIntro}
                 </p>
               </AnimatedToolCard>
-            ))}
+              )
+            })}
           </StaggerGroup>
         </section>
       ))}
