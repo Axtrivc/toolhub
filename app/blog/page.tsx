@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
-import Link from 'next/link'
 import { PageShell } from '@/components/PageShell'
+import { BlogIndex, type BlogPostMeta } from '@/components/BlogIndex'
 import { SITE_NAME } from '@/lib/seo'
 import { SITE_URL } from '../../next.config'
 
@@ -11,19 +11,13 @@ import { SITE_URL } from '../../next.config'
  * 新增文章只需 ① 在 app/blog/<slug>/ 建文章页 ② 在这里加一条元数据。
  * 静态导出兼容:纯 server component,无运行时数据请求。
  *
+ * i18n 策略:本文件保留 server component(以导出 metadata/JSON-LD,SEO 字段保持英文);
+ * 卡片渲染交给客户端组件 BlogIndex(随语言切换标题/描述/日期/按钮文案)。
+ * 文章正文仍是英文(面向 HN/极客社区的英文长文,翻译会稀释主语种权重);
+ * 卡片层 i18n 字段缺失则回退英文原值。
+ *
  * 当前仅 1 篇(技术架构复盘),未来扩展为多篇文章的列表 + 卡片网格。
  */
-
-interface BlogPostMeta {
-  slug: string // URL slug → /blog/<slug>/
-  title: string
-  description: string
-  date: string // ISO 日期,用于排序与展示
-  readTime: string
-  tags: string[]
-  /** 是否已发布(预留,后续草稿态用) */
-  published: boolean
-}
 
 /** 博客文章注册表(单一数据源)。按日期倒序排列。 */
 const posts: BlogPostMeta[] = [
@@ -33,9 +27,26 @@ const posts: BlogPostMeta[] = [
     description:
       'A no-bullshit architecture retrospective — Next.js static export, lazy Service-Worker caching, 138+ JSON-LD pSEO schemas, and zero-CLS AdSense. The tradeoffs and the numbers.',
     date: '2026-08-04',
-    readTime: '9 min read',
+    readTime: '9 min',
     tags: ['architecture', 'seo', 'pwa', 'build-in-public'],
     published: true,
+    i18n: {
+      zh: {
+        title: '我是如何构建 ToolHub 的:138 个工具的静态 PWA,始终亚秒级',
+        description:
+          '一份不掺水的架构复盘 —— Next.js 静态导出、懒加载 Service Worker 缓存、138+ JSON-LD pSEO 结构化数据,以及零 CLS 的 AdSense。讲清取舍与真实数字。',
+      },
+      es: {
+        title: 'Cómo construí ToolHub: una PWA estática de 138 herramientas que sigue siendo sub-segundo',
+        description:
+          'Una retrospectiva de arquitectura sin rodeos — Next.js estático, caché Service Worker perezosa, 138+ esquemas pSEO JSON-LD y AdSense sin CLS. Los tradeoffs y los números.',
+      },
+      de: {
+        title: 'Wie ich ToolHub baute: Eine statische PWA mit 138 Werkzeugen, die unter einer Sekunde bleibt',
+        description:
+          'Ein ehrlicher Architektur-Rückblick — Next.js Static Export, Lazy Service-Worker-Cache, 138+ JSON-LD-pSEO-Schemata und Zero-CLS AdSense. Die Tradeoffs und die Zahlen.',
+      },
+    },
   },
 ]
 
@@ -79,15 +90,6 @@ const blogJsonLd = {
   })),
 }
 
-/** 人类可读日期格式(Aug 4, 2026) */
-function formatDate(iso: string): string {
-  return new Date(iso).toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'short',
-    day: 'numeric',
-  })
-}
-
 export default function BlogIndexPage() {
   return (
     <>
@@ -100,99 +102,11 @@ export default function BlogIndexPage() {
         description="Engineering deep-dives, architecture tradeoffs, and build-in-public notes from behind the toolbox."
         crumb="Blog"
       >
-        {publishedPosts.length === 0 ? (
-          <p>No posts yet — check back soon.</p>
-        ) : (
-          <ul className="mt-2 space-y-8">
-            {publishedPosts.map((post) => (
-              <li key={post.slug}>
-                <article
-                  className="group rounded-2xl border border-slate-200/80 bg-white p-6 shadow-sm transition-all duration-300 hover:border-blue-400/80 hover:shadow-[0_20px_40px_-12px_rgba(37,99,235,0.22)] dark:border-slate-800/80 dark:bg-slate-900 dark:hover:border-blue-500/60"
-                >
-                  <Link href={`/blog/${post.slug}/`} className="block">
-                    {/* 元信息行:日期 · 阅读时长 · 标签 */}
-                    <div
-                      className="mb-3 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs"
-                      style={{ color: 'rgb(var(--text-subtle))' }}
-                    >
-                      <time dateTime={post.date}>{formatDate(post.date)}</time>
-                      <span aria-hidden="true">·</span>
-                      <span>{post.readTime}</span>
-                    </div>
-
-                    {/* 文章标题 */}
-                    <h2
-                      className="text-xl font-bold transition-colors group-hover:text-brand-600 sm:text-2xl"
-                      style={{ color: 'rgb(var(--text))' }}
-                    >
-                      {post.title}
-                    </h2>
-
-                    {/* 文章摘要 */}
-                    <p
-                      className="mt-3 line-clamp-2 text-sm leading-relaxed sm:text-base"
-                      style={{ color: 'rgb(var(--text-muted))' }}
-                    >
-                      {post.description}
-                    </p>
-
-                    {/* 标签 + 阅读链接 */}
-                    <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
-                      <div className="flex flex-wrap gap-1.5">
-                        {post.tags.map((tag) => (
-                          <span
-                            key={tag}
-                            className="inline-flex items-center rounded-full bg-slate-100 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-slate-500 dark:bg-slate-800 dark:text-slate-400"
-                          >
-                            #{tag}
-                          </span>
-                        ))}
-                      </div>
-                      <span
-                        className="text-sm font-medium"
-                        style={{ color: 'rgb(var(--text-muted))' }}
-                      >
-                        Read more <span aria-hidden="true">→</span>
-                      </span>
-                    </div>
-                  </Link>
-                </article>
-              </li>
-            ))}
-          </ul>
-        )}
-
-        {/* 底部:返回首页 / 探索工具箱 */}
-        <div className="mt-12 border-t pt-8" style={{ borderColor: 'rgb(var(--border))' }}>
-          <p className="mb-4" style={{ color: 'rgb(var(--text-muted))' }}>
-            Prefer doing over reading? Jump straight into the toolbox.
-          </p>
-          <div className="flex flex-wrap gap-3">
-            {/* ★ 按钮在 PageShell 的 .prose-content 内,该区域有规则
-                .prose-content a { color: rgb(37 99 235) } (specificity 0,1,1)。
-                它会压过 .btn-primary 的 text-white 和 Tailwind 普通 utility text-white(都是 0,1,0),
-                把文字染成 brand-600 蓝 → 与蓝色背景同色,文字彻底消失。
-                ★ 修复:用 Tailwind `!` important 前缀(!text-white / !no-underline)强制提升权重,
-                压过 prose-content a 的颜色与下划线。 */}
-            <Link
-              href="/"
-              className="inline-flex items-center gap-2 rounded-xl bg-blue-600 px-5 py-2.5 text-sm font-medium !text-white !no-underline shadow-sm hover:bg-blue-700 active:scale-95 transition-all duration-200"
-            >
-              Explore all tools <span aria-hidden="true">→</span>
-            </Link>
-            <Link
-              href="/about/"
-              className="inline-flex items-center gap-2 rounded-xl border px-5 py-2.5 text-sm font-medium !no-underline shadow-sm transition-all duration-200 hover:opacity-80 active:scale-95"
-              style={{
-                backgroundColor: 'rgb(var(--bg-card))',
-                borderColor: 'rgb(var(--border-strong))',
-                color: 'rgb(var(--text-muted))',
-              }}
-            >
-              About {SITE_NAME}
-            </Link>
-          </div>
-        </div>
+        {/* 卡片渲染交给客户端组件(随语言切换标题/描述/日期/按钮文案)。
+            本页(server component)保留 metadata + JSON-LD(英文,SEO 稳定),
+            仅 PageShell 的 title/description 仍是英文(server 端拿不到 locale);
+            客户端 BlogIndex 内部用 blogReadTime/blogReadMore/blogCta* 等做 i18n。 */}
+        <BlogIndex posts={publishedPosts} />
       </PageShell>
     </>
   )

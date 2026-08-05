@@ -66,10 +66,11 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           <Header />
           <main className="flex-1">{children}</main>
           <Footer />
+          {/* Cookie 同意横幅 - 合规(AdSense/GDPR/CCPA),延迟挂载不影响首屏。
+              必须在 AppProviders 内:它消费 useApp() 读取 locale 做 4 语本地化。 */}
+          <CookieConsent />
         </AppProviders>
-        {/* Cookie 同意横幅 - 合规(AdSense/GDPR/CCPA),延迟挂载不影响首屏 */}
-        <CookieConsent />
-        {/* PWA Service Worker 注册 - 仅生产,客户端 load 后注册 */}
+        {/* PWA Service worker 注册 - 仅生产,客户端 load 后注册 */}
         <ServiceWorkerRegister />
       </body>
     </html>

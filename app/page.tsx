@@ -7,7 +7,7 @@ import { HomePageClient } from '@/components/HomePageClient'
 import { HomeRecents } from '@/components/HomeRecents'
 import { HeroGlow } from '@/components/motion/MotionPrimitives'
 import { useApp } from '@/components/providers/AppProviders'
-import { t } from '@/lib/i18n'
+import { t, tc, getToolName, getToolShortIntro } from '@/lib/i18n'
 
 export default function HomePage() {
   const tools = getPublishedTools()
@@ -24,6 +24,18 @@ export default function HomePage() {
     return acc
   }, {})
   const categories = Object.entries(byCategory).sort((a, b) => b[1] - a[1])
+
+  // 热门工具直达区:精选 6 个高搜索量工具,展示名 + 描述走 i18n,URL 不变。
+  // slug 取自原英文 SEO 区,顺序保留(置顶金融/数学/健康/开发者/文本/单位 各 1 个,覆盖面广)。
+  const popularToolSlugs = [
+    'mortgage-calculator',
+    'percentage-calculator',
+    'bmi-calculator',
+    'json-formatter',
+    'word-counter',
+    'length-converter',
+  ]
+  const toolsBySlug = new Map(tools.map((tool) => [tool.slug, tool]))
 
   return (
     <div className="mx-auto w-full max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
@@ -55,13 +67,21 @@ export default function HomePage() {
           {t(locale, 'heroSubtitle')}
         </p>
 
-        {/* PWA / 隐私卖点徽章 - 突出"纯前端 + 离线可用"差异化优势 */}
-        <div className="mt-6 flex justify-center">
+        {/* 卖点徽章组 - PWA/隐私(emerald) + 多语支持(indigo),
+            两枚胶囊上下堆叠居中,保持简约不喧宾夺主。
+            多语 Badge 用 indigo 色系与 emerald 区分,文字偏小(text-xs)避免抢主标题。 */}
+        <div className="mt-6 flex flex-col items-center gap-2.5">
           <span
             className="inline-flex items-center gap-1.5 rounded-full border border-emerald-200 bg-emerald-50 px-4 py-1.5 text-sm font-medium text-emerald-700 shadow-sm dark:border-emerald-800/60 dark:bg-emerald-950/40 dark:text-emerald-300"
             title={t(locale, 'heroOfflineBadge')}
           >
             {t(locale, 'heroOfflineBadge')}
+          </span>
+          <span
+            className="inline-flex items-center gap-1.5 rounded-full border border-indigo-200 bg-indigo-50 px-4 py-1.5 text-xs font-medium text-indigo-700 shadow-sm dark:border-indigo-800/60 dark:bg-indigo-950/40 dark:text-indigo-300"
+            title={t(locale, 'heroMultilingualBadge')}
+          >
+            {t(locale, 'heroMultilingualBadge')}
           </span>
         </div>
       </section>
@@ -79,42 +99,49 @@ export default function HomePage() {
 
       {/* SEO 文案区(增加首页内容厚度,利于排名和 AdSense 审核) */}
       <section className="prose-content mx-auto mt-16 max-w-4xl">
-        <h2>Why Use Our Online Tools?</h2>
-        <p>
-          Most online tools ask you to sign up, accept cookies, or upload your files to a server you
-          can&apos;t audit. We do things differently: every tool here runs entirely in your browser.
-          That means three things for you:
-        </p>
+        <h2>{t(locale, 'seoWhyTitle')}</h2>
+        <p>{t(locale, 'seoWhyBody1')}</p>
         <ul>
           <li>
-            <strong>Privacy by design.</strong> Your text and files never leave your device. There is
-            no server processing your input, so there is nothing to leak.
+            <strong>{t(locale, 'seoWhyPrivacy')}</strong>
+            {t(locale, 'seoWhyPrivacyBody')}
           </li>
           <li>
-            <strong>Instant results.</strong> No round-trip to a server means no waiting. Tools
-            respond as fast as you can type.
+            <strong>{t(locale, 'seoWhyInstant')}</strong>
+            {t(locale, 'seoWhyInstantBody')}
           </li>
           <li>
-            <strong>No friction.</strong> No account, no paywall, no &quot;upgrade to continue.&quot;
-            Open the page and start using it.
+            <strong>{t(locale, 'seoWhyNoFriction')}</strong>
+            {t(locale, 'seoWhyNoFrictionBody')}
           </li>
         </ul>
-        <p>
-          We focus on utilities that solve a single problem well — from calculating loan payments and
-          converting units, to formatting JSON and generating QR codes. With {roundedCount}+ tools
-          across finance, math, health, unit conversion, and developer utilities, there&apos;s a good
-          chance we have what you need. New tools are added regularly, so bookmark this page.
-        </p>
+        <p>{t(locale, 'seoWhyBody2', { count: String(roundedCount) })}</p>
 
         {/* 按分类浏览 —— 内链区:首页指向 /tools/ 枢纽页各分类锚点,
-            既利于 SEO 内链网络,也帮用户快速跳到具体类别。 */}
-        <h2>Browse Tools by Category</h2>
+            既利于 SEO 内链网络,也帮用户快速跳到具体类别。
+            分类链接文本走 tc() 本地化,但 URL 锚点 #cat 保持英文键
+            (与 HomePageClient 的 section id 对齐,切语言不破坏锚点定位)。 */}
+        <h2>{t(locale, 'seoBrowseTitle')}</h2>
         <p>
-          Looking for something specific? Jump straight to a category, or open the{' '}
-          <Link href="/tools/">
-            <strong>full tools directory</strong>
-          </Link>{' '}
-          to search all {tools.length} tools.
+          {(() => {
+            // seoBrowseBody 含 {fullDir} 占位,需把占位替换为可点击的内链。
+            // 用本地化的 fullDir 标签作为分隔符 split,得到 [before, after] 两段。
+            const fullDirLabel = t(locale, 'seoBrowseFullDir')
+            const body = t(locale, 'seoBrowseBody', {
+              fullDir: fullDirLabel,
+              count: String(tools.length),
+            })
+            const [before, after = ''] = body.split(fullDirLabel)
+            return (
+              <>
+                {before}
+                <Link href="/tools/">
+                  <strong>{fullDirLabel}</strong>
+                </Link>
+                {after}
+              </>
+            )
+          })()}
         </p>
         <ul>
           {categories.map(([cat, count]) => (
@@ -122,43 +149,31 @@ export default function HomePage() {
               {/* 分类内链回首页并选中筛选(锚点定位到对应区块),
                   不再指向已废弃的 /tools/ 旧枢纽页。 */}
               <Link href={`/?category=${encodeURIComponent(cat)}#${encodeURIComponent(cat)}`}>
-                {cat}
+                {tc(locale, cat)}
               </Link>{' '}
-              ({count} tools)
+              {t(locale, 'seoBrowseCountSuffix', { count: String(count) })}
             </li>
           ))}
         </ul>
 
-        {/* 热门工具直达 —— 高搜索量工具的站内深度内链,强化权重传递 */}
-        <h2>Popular Tools</h2>
-        <p>
-          Some of our most-used utilities, good places to start:
-        </p>
+        {/* 热门工具直达 —— 高搜索量工具的站内深度内链,强化权重传递。
+            工具名与描述走 getToolName/getToolShortIntro 跟随语言;
+            URL 不变(英文 slug),SEO 权重稳定。 */}
+        <h2>{t(locale, 'seoPopularTitle')}</h2>
+        <p>{t(locale, 'seoPopularBody')}</p>
         <ul>
-          <li>
-            <Link href="/tools/mortgage-calculator/">Mortgage Calculator with PMI and Taxes</Link> —
-            estimate monthly home-loan payments including insurance.
-          </li>
-          <li>
-            <Link href="/tools/percentage-calculator/">Percentage Calculator</Link> — percent of a
-            number, increase, decrease, and discounts.
-          </li>
-          <li>
-            <Link href="/tools/bmi-calculator/">BMI Calculator</Link> — body mass index with healthy
-            weight range, metric or imperial.
-          </li>
-          <li>
-            <Link href="/tools/json-formatter/">JSON Formatter and Validator</Link> — beautify,
-            minify, and validate JSON instantly.
-          </li>
-          <li>
-            <Link href="/tools/word-counter/">Word Counter</Link> — words, characters, sentences, and
-            estimated reading time.
-          </li>
-          <li>
-            <Link href="/tools/length-converter/">Length Converter</Link> — meters, feet, inches,
-            miles, and more.
-          </li>
+          {popularToolSlugs.map((slug) => {
+            const tool = toolsBySlug.get(slug)
+            if (!tool) return null
+            return (
+              <li key={slug}>
+                <Link href={`/tools/${slug}/`}>
+                  {getToolName(locale, slug, tool.name)}
+                </Link>{' '}
+                — {getToolShortIntro(locale, slug, tool.shortIntro)}
+              </li>
+            )
+          })}
         </ul>
       </section>
     </div>
