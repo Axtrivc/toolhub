@@ -97,6 +97,7 @@ export interface Dict {
   footerTerms: string
   footerTagline: string
   footerRights: string // "tools and counting. All rights reserved."
+  footerMore: string // "+N more" (分类下展示超出 6 个时的"更多"链接)
   // 工具页通用
   toolHome: string
   toolResult: string
@@ -195,6 +196,7 @@ const en: Dict = {
   footerTagline:
     'Free, fast, and privacy-friendly online tools. Everything runs in your browser — no data leaves your device.',
   footerRights: 'tools and counting. All rights reserved.',
+  footerMore: '+{count} more',
   toolHome: 'Home',
   toolResult: 'Result',
   toolCopy: 'Copy',
@@ -286,6 +288,7 @@ const zh: Dict = {
   footerTagline:
     '免费、快速、注重隐私的在线工具。所有操作都在浏览器中完成 —— 数据不会离开你的设备。',
   footerRights: '个工具,持续增加中。保留所有权利。',
+  footerMore: '还有 {count} 个',
   toolHome: '首页',
   toolResult: '结果',
   toolCopy: '复制',
@@ -377,6 +380,7 @@ const es: Dict = {
   footerTagline:
     'Herramientas online gratuitas, rápidas y respetuosas con la privacidad. Todo se ejecuta en tu navegador: ningún dato sale de tu dispositivo.',
   footerRights: 'herramientas y contando. Todos los derechos reservados.',
+  footerMore: '+{count} más',
   toolHome: 'Inicio',
   toolResult: 'Resultado',
   toolCopy: 'Copiar',
@@ -468,6 +472,7 @@ const de: Dict = {
   footerTagline:
     'Kostenlose, schnelle und datenschutzfreundliche Online-Werkzeuge. Alles läuft im Browser — keine Daten verlassen dein Gerät.',
   footerRights: 'Werkzeuge und es werden mehr. Alle Rechte vorbehalten.',
+  footerMore: '+{count} weitere',
   toolHome: 'Start',
   toolResult: 'Ergebnis',
   toolCopy: 'Kopieren',

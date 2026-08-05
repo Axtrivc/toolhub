@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { useApp } from './providers/AppProviders'
-import { t } from '@/lib/i18n'
+import { t, tc, getToolName } from '@/lib/i18n'
 import { SITE_NAME } from '@/lib/seo'
 import { getPublishedTools } from '@/lib/tools'
 
@@ -27,13 +27,13 @@ export function Footer() {
           {categories.map(([category, categoryTools]) => (
             <div key={category}>
               <h3 className="mb-3 text-sm font-semibold" style={{ color: 'rgb(var(--text))' }}>
-                {category}
+                {tc(locale, category)}
               </h3>
               <ul className="space-y-1.5 text-sm" style={{ color: 'rgb(var(--text-subtle))' }}>
                 {categoryTools.slice(0, 6).map((tool) => (
                   <li key={tool.slug}>
                     <Link href={`/tools/${tool.slug}/`} className="hover:text-brand-600">
-                      {tool.name}
+                      {getToolName(locale, tool.slug, tool.name)}
                     </Link>
                   </li>
                 ))}
@@ -43,7 +43,7 @@ export function Footer() {
                       href={`/?category=${encodeURIComponent(category)}`}
                       className="text-xs font-medium text-brand-600 hover:underline"
                     >
-                      +{categoryTools.length - 6} more
+                      {t(locale, 'footerMore', { count: categoryTools.length - 6 })}
                     </Link>
                   </li>
                 )}
