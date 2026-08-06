@@ -45,12 +45,33 @@ console.log(x);
 [Visit ToolHub](https://example.com)
 `
 
-/** HTML 转义 */
+/** HTML 转义(含引号,防属性注入) */
 function escapeHtml(s: string): string {
   return s
     .replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;')
+}
+
+/**
+ * URL 协议白名单:只允许 http/https/mailto/相对路径/锚点。
+ * 拒绝 javascript:/data: 等危险协议(防 XSS)。
+ */
+function isSafeUrl(url: string): boolean {
+  const trimmed = url.trim()
+  if (trimmed === '') return false
+  // 锚点 / 相对路径 / 协议相对
+  if (trimmed.startsWith('#') || trimmed.startsWith('/') || trimmed.startsWith('?')) return true
+  // 协议绝对 URL:取协议部分校验白名单
+  const match = trimmed.match(/^([a-zA-Z][a-zA-Z0-9+.-]*):/)
+  if (match) {
+    const proto = match[1].toLowerCase()
+    return proto === 'http' || proto === 'https' || proto === 'mailto'
+  }
+  // 无协议、非锚点/相对 → 视为相对路径(如 example.com/foo)
+  return true
 }
 
 /** 行内格式:粗体/斜体/删除线/代码/链接/图片 */
@@ -58,10 +79,16 @@ function renderInline(text: string): string {
   let s = escapeHtml(text)
   // 行内代码 `code`(先处理,避免内部被其它规则匹配)
   s = s.replace(/`([^`]+)`/g, (_m, code) => `<code>${code}</code>`)
-  // 图片 ![alt](url) — 先于链接
-  s = s.replace(/!\[([^\]]*)\]\(([^)\s]+)\)/g, (_m, alt, url) => `<img src="${url}" alt="${alt}" />`)
-  // 链接 [text](url)
-  s = s.replace(/\[([^\]]+)\]\(([^)\s]+)\)/g, (_m, txt, url) => `<a href="${url}">${txt}</a>`)
+  // 图片 ![alt](url) — 先于链接。不安全 URL 退化为纯 alt 文本。
+  s = s.replace(/!\[([^\]]*)\]\(([^)\s]+)\)/g, (_m, alt, url) => {
+    if (!isSafeUrl(url)) return alt
+    return `<img src="${escapeHtml(url)}" alt="${alt}" />`
+  })
+  // 链接 [text](url)。不安全 URL(javascript: 等)退化为纯文本,不渲染 href。
+  s = s.replace(/\[([^\]]+)\]\(([^)\s]+)\)/g, (_m, txt, url) => {
+    if (!isSafeUrl(url)) return txt
+    return `<a href="${escapeHtml(url)}">${txt}</a>`
+  })
   // 删除线 ~~text~~
   s = s.replace(/~~([^~]+)~~/g, '<del>$1</del>')
   // 粗体 **text**
@@ -105,7 +132,8 @@ function markdownToHtml(md: string): string {
         i++
       }
       i++ // 跳过闭合 ```
-      const cls = lang ? ` class="language-${lang}"` : ''
+      // 语言串直接拼进 class 属性,必须先 escape 防 attribute 注入
+      const cls = lang ? ` class="language-${escapeHtml(lang)}"` : ''
       out.push(`<pre><code${cls}>${escapeHtml(codeLines.join('\n'))}</code></pre>`)
       continue
     }
