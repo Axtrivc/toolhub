@@ -52,6 +52,10 @@ export function generateSlug(input: string, options: SlugOptions = {}): string {
   }
 
   if (opts.removeSpecialChars) {
+    // 把下划线先转成空格:否则下方白名单 [^a-z0-9\s.-] 会把 _ 直接删除
+    // (与注释声称的"统一为目标分隔符"矛盾,如 hello_world → helloworld)。
+    // 转空格后由后续统一分隔符逻辑处理为 opts.separator(默认 '-')。
+    s = s.replace(/_/g, ' ')
     // 把 CJK 全角空格、各类空白、常见标点统一成空格,便于后续按词分隔
     s = s.replace(/[\s\u3000]+/g, ' ')
     // 移除特殊字符,只保留:字母、数字、空格、点、连字符(用于 node.js -> nodejs)
