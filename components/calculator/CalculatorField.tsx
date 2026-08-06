@@ -67,20 +67,22 @@ export function ResultCard({
   highlight?: boolean
 }) {
   return (
+    // 高亮态:主色梯度淡底(from-primary/5 → to-primary/10)+ 主色细描边 +
+    // 渐变大字号数字(text-primary,暗色主题自动切换为 blue-400);
+    // 令牌化后暗色模式不再出现旧版硬编码浅蓝底的违和感。
     <div
-      className="rounded-lg border p-5 text-center"
-      style={
+      className={`rounded-xl border p-5 text-center shadow-sm transition-shadow hover:shadow-md ${
         highlight
-          ? { borderColor: 'rgb(147 197 253)', backgroundColor: 'rgb(219 234 254 / 0.4)' } // brand-200 / brand-50
-          : { borderColor: 'rgb(var(--border))', backgroundColor: 'rgb(var(--bg-card))' }
-      }
+          ? 'border-primary/20 bg-gradient-to-br from-primary/5 to-primary/10'
+          : 'border-border bg-card'
+      }`}
     >
       <div className="text-xs font-medium uppercase tracking-wide" style={{ color: 'rgb(var(--text-subtle))' }}>
         {label}
       </div>
       <div
-        className="mt-1.5 text-2xl font-bold sm:text-3xl"
-        style={{ color: highlight ? 'rgb(37 99 235)' : 'rgb(var(--text))' }}
+        className={`mt-1.5 text-2xl font-bold sm:text-3xl ${highlight ? 'text-primary' : ''}`}
+        style={highlight ? undefined : { color: 'rgb(var(--text))' }}
       >
         {value}
       </div>

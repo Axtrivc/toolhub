@@ -15,6 +15,8 @@
     --text-muted: 71 85 105;  /* slate-600 */
     --text-subtle: 100 116 139; /* slate-500 */
     --text-faint: 148 163 184;  /* slate-400 */
+    /* 语义主色(结果高亮卡/焦点环/表格 hover 等),tailwind 令牌 primary 映射此变量 */
+    --primary: 37 99 235;     /* brand-600 */
     /* brand 蓝色两种主题通用 */
   }
 
@@ -29,6 +31,8 @@
     --text-muted: 203 213 225;  /* slate-300 */
     --text-subtle: 148 163 184; /* slate-400(描述文案) */
     --text-faint: 100 116 139;  /* slate-500(占位符/次要标签) */
+    /* 暗色下主色提亮一档,保证 text-primary / ring 对比度 */
+    --primary: 96 165 250;    /* blue-400 */
   }
 
   :root {
@@ -270,4 +274,148 @@ html.dark .hero-gradient-text {
   background-clip: text;
   -webkit-text-fill-color: transparent;
   color: transparent;
+}
+
+/* ────────────────────────────────────────────────────────────
+ * Ambient Aurora —— Hero 背景持续流动光晕:
+ * 两个绝对定位的渐变 Blob(见 app/page.tsx Hero)以 8s/13s 不同周期
+ * 做微小的 scale(1 → 1.08 → 1)与纵向位移,形成持续但不抢眼的光影流动。
+ *  - 用独立的 translate/scale 属性做动画(而非 transform):
+ *    与 Tailwind 的 -translate-x-1/2 等 transform 工具类叠加而不互相覆盖。
+ *  - 仅重绘合成层(transform 族),不重排,CLS=0。
+ *  - prefers-reduced-motion 下静止。
+ * ──────────────────────────────────────────────────────────── */
+@keyframes aurora-slow {
+  0%,
+  100% {
+    translate: 0 0;
+    scale: 1;
+  }
+  50% {
+    translate: 0 14px;
+    scale: 1.08;
+  }
+}
+
+.animate-aurora-slow {
+  animation: aurora-slow 8s ease-in-out infinite;
+}
+
+/* 第二枚光斑:同帧不同周期 + 负延迟起跑,与主光斑错相位,避免同步呼吸感 */
+.animate-aurora-slower {
+  animation: aurora-slow 13s ease-in-out -5s infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-aurora-slow,
+  .animate-aurora-slower {
+    animation: none;
+  }
+}
+
+/* ────────────────────────────────────────────────────────────
+ * 通用淡入(fade-in):面包屑、标题区等入场用。
+ * opacity + 4px 位移,0.5s ease-out,both 填充防首帧闪现。
+ * ──────────────────────────────────────────────────────────── */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.5s ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-in {
+    animation: none;
+  }
+}
+
+/* ────────────────────────────────────────────────────────────
+ * 原生 <select> 下拉选项统一排版:内边距 + 字号 + 主题色,
+ * 让 Windows Chrome / Firefox 桌面端的展开列表渲染更自然
+ * (macOS/iOS 原生渲染忽略大部分 option 样式,无副作用)。
+ * ──────────────────────────────────────────────────────────── */
+select option {
+  padding: 8px 12px;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  background-color: rgb(var(--bg-card));
+  color: rgb(var(--text));
+}
+
+/* ════════════════════════════════════════════════════════════
+ * 工具详情页 Shell(.tool-shell,见 ToolLayout 工具主体卡片)
+ * 统一精修输入焦点态与数据表格 —— 130+ 工具页共享,无需逐个改组件。
+ * ════════════════════════════════════════════════════════════ */
+
+/* 输入焦点:双层 Ring 高亮(内环卡片色留出间隙 + 外环主色 35%),
+   平滑过渡;排除 range/checkbox/radio/color 等非文本控件(阴影环会畸形)。
+   组件 inline borderColor 不变,仅靠 box-shadow 叠加,互不冲突。 */
+.tool-shell :where(input, select, textarea) {
+  transition: box-shadow 0.18s ease, border-color 0.18s ease;
+}
+.tool-shell
+  :where(
+    input:not([type='range']):not([type='checkbox']):not([type='radio']):not(
+        [type='color']
+      ),
+    select,
+    textarea
+  ):focus {
+  outline: none;
+  box-shadow:
+    0 0 0 2px rgb(var(--bg-card)),
+    0 0 0 4px rgb(var(--primary) / 0.4);
+}
+
+/* 数据表格:圆角边框容器 + 斑马纹 + hover 高亮。
+   全站数据表统一包在 overflow-x-auto rounded-lg border 的 div 里
+   (LoanCalculator/TDEE/BMI/PxToRem 等),故:
+   - div:has(> table) 选中该容器 → 升级 rounded-xl + 主题边框色;
+   - table 用 border-collapse: separate + border-spacing 0,
+     四角单元格补 ~11px 圆角,防表头/末行背景在容器圆角处溢出;
+   - 表头 bg-muted/50 + font-semibold;斑马纹;行 hover 主色微光。
+   :has() 不支持的老浏览器自动降级为仅表格内部样式,无破坏。 */
+.tool-shell div:has(> table) {
+  border-color: rgb(var(--border));
+  border-radius: 0.75rem;
+}
+.tool-shell table {
+  border-collapse: separate;
+  border-spacing: 0;
+}
+.tool-shell thead tr:first-child > :first-child {
+  border-top-left-radius: 11px;
+}
+.tool-shell thead tr:first-child > :last-child {
+  border-top-right-radius: 11px;
+}
+.tool-shell tbody tr:last-child > :first-child {
+  border-bottom-left-radius: 11px;
+}
+.tool-shell tbody tr:last-child > :last-child {
+  border-bottom-right-radius: 11px;
+}
+.tool-shell thead {
+  background-color: rgb(var(--bg-subtle) / 0.5);
+}
+.tool-shell thead th {
+  font-weight: 600;
+}
+.tool-shell tbody tr {
+  transition: background-color 0.15s ease;
+}
+.tool-shell tbody tr:nth-child(even) {
+  background-color: rgb(var(--bg-subtle) / 0.35);
+}
+.tool-shell tbody tr:hover {
+  background-color: rgb(var(--primary) / 0.07);
 }

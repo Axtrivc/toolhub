@@ -59,6 +59,17 @@ export default function HomePage() {
         animate="show"
         className="relative mx-auto mb-12 max-w-5xl text-center"
       >
+        {/* Ambient Aurora —— 静止状态下的持续流动光影:两枚渐变光晕 Blob
+            以 8s/13s 错相位做微小 scale + 位移呼吸(globals.css aurora-slow),
+            低饱和不抢眼;-z-10 压在 Hero 内容背后;reduced-motion 下静止。 */}
+        <div
+          aria-hidden="true"
+          className="animate-aurora-slow pointer-events-none absolute -top-20 left-1/2 -z-10 h-[300px] w-[600px] -translate-x-1/2 rounded-full bg-gradient-to-tr from-blue-500/15 to-purple-500/15 blur-[100px] dark:from-blue-500/10 dark:to-purple-500/10"
+        />
+        <div
+          aria-hidden="true"
+          className="animate-aurora-slower pointer-events-none absolute -right-16 top-32 -z-10 h-[360px] w-[420px] rounded-full bg-gradient-to-bl from-cyan-400/10 to-indigo-500/10 blur-[110px]"
+        />
         {/* 卖点徽章组(置顶,入场第一拍)- PWA/隐私(emerald) + 多语支持(indigo),
             两枚胶囊横排居中 + flex-wrap 防窄屏溢出;保持小巧不喧宾夺主。 */}
         <motion.div
@@ -69,6 +80,12 @@ export default function HomePage() {
             className="inline-flex items-center gap-1.5 rounded-full border border-emerald-200 bg-emerald-50 px-4 py-1.5 text-sm font-medium text-emerald-700 shadow-sm dark:border-emerald-800/60 dark:bg-emerald-950/40 dark:text-emerald-300"
             title={t(locale, 'heroOfflineBadge')}
           >
+            {/* 在线状态绿点:animate-ping 扩散涟漪 + 实心核,暗示"本地运行、随时可用"。
+                motion-reduce 下关闭涟漪,保留静态绿点。 */}
+            <span className="relative mr-1.5 flex h-2 w-2">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75 motion-reduce:animate-none" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
+            </span>
             {t(locale, 'heroOfflineBadge')}
           </span>
           <span

@@ -35,6 +35,14 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        // 语义化令牌 —— 映射 globals.css 的 CSS 变量,支持 /alpha 修饰符。
+        // 让组件可用 border-border/80、bg-card、bg-primary/5、text-primary
+        // 等语义类,而不是散落 inline style 或硬编码 slate。
+        border: 'rgb(var(--border) / <alpha-value>)',
+        background: 'rgb(var(--bg) / <alpha-value>)',
+        card: 'rgb(var(--bg-card) / <alpha-value>)',
+        muted: 'rgb(var(--bg-subtle) / <alpha-value>)',
+        primary: 'rgb(var(--primary) / <alpha-value>)',
         // 中性专业色调,适合工具站
         brand: {
           50: '#eff6ff',

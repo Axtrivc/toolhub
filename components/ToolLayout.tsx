@@ -15,7 +15,7 @@ import { RecentlyUsedTracker } from './RecentlyUsedTracker'
 import { useApp } from './providers/AppProviders'
 import { t } from '@/lib/i18n'
 import { buildFaqJsonLd, buildBreadcrumbJsonLd, buildHowToJsonLd } from '@/lib/seo'
-import type { ToolMeta } from '@/lib/tools'
+import { getToolIcon, type ToolMeta } from '@/lib/tools'
 
 interface ToolLayoutProps {
   tool: ToolMeta
@@ -70,8 +70,8 @@ export function ToolLayout({ tool, children }: ToolLayoutProps) {
 
       {/* ─────────── ① 顶层交互区 ─────────── */}
 
-      {/* 面包屑(嵌入时隐藏) */}
-      <nav data-embed-hide aria-label="Breadcrumb" className="mb-6 text-sm" style={{ color: 'rgb(var(--text-subtle))' }}>
+      {/* 面包屑(嵌入时隐藏;animate-fade-in 入场淡入,见 globals.css) */}
+      <nav data-embed-hide aria-label="Breadcrumb" className="mb-6 animate-fade-in text-sm" style={{ color: 'rgb(var(--text-subtle))' }}>
         <ol className="flex flex-wrap items-center gap-2">
           <li>
             <Link href="/" className="hover:text-brand-600">
@@ -96,13 +96,23 @@ export function ToolLayout({ tool, children }: ToolLayoutProps) {
 
       {/* 工具标题 + 收藏按钮 */}
       <header data-embed-hide className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
-        <div className="min-w-0">
-          <h1 className="text-3xl font-bold sm:text-4xl" style={{ color: 'rgb(var(--text))' }}>
-            {tool.h1}
-          </h1>
-          <p className="mt-3 max-w-2xl text-lg" style={{ color: 'rgb(var(--text-muted))' }}>
-            {tool.shortIntro}
-          </p>
+        <div className="flex min-w-0 items-start gap-4">
+          {/* 工具图标 Badge:与首页工具卡同一套 getToolIcon 映射,
+              主色淡底 + 细描边的圆角容器,给标题区一个视觉锚点 */}
+          <span
+            aria-hidden="true"
+            className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-primary/20 bg-primary/5 text-2xl"
+          >
+            {getToolIcon(tool)}
+          </span>
+          <div className="min-w-0">
+            <h1 className="text-3xl font-bold sm:text-4xl" style={{ color: 'rgb(var(--text))' }}>
+              {tool.h1}
+            </h1>
+            <p className="mt-3 max-w-2xl text-lg leading-relaxed" style={{ color: 'rgb(var(--text-muted))' }}>
+              {tool.shortIntro}
+            </p>
+          </div>
         </div>
         {/* ❤️ 收藏按钮:同步 localStorage.favorites,嵌入时随 header 一起隐藏 */}
         <FavoriteButton slug={tool.slug} name={tool.name} />
@@ -113,14 +123,11 @@ export function ToolLayout({ tool, children }: ToolLayoutProps) {
         <AdSlot slot={`${tool.slug}-top`} format="horizontal" fullWidth />
       </div>
 
-      {/* 工具主体 —— 嵌入时唯一可见的核心区块 */}
-      <div
-        className="rounded-xl border p-5 shadow-sm sm:p-8"
-        style={{
-          borderColor: 'rgb(var(--border))',
-          backgroundColor: 'rgb(var(--bg-card))',
-        }}
-      >
+      {/* 工具主体 —— 嵌入时唯一可见的核心区块。
+          .tool-shell 挂钩 globals.css:内部输入框双层 Ring 焦点态、
+          数据表格圆角容器/斑马纹/表头/行 hover 统一由全局 CSS 提供;
+          卡片自身 hover 升阴影(transition-all 平滑过渡)。 */}
+      <div className="tool-shell rounded-xl border border-border/60 bg-card p-6 shadow-sm transition-all hover:shadow-md sm:p-8">
         {children}
       </div>
 
