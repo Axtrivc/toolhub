@@ -20,16 +20,32 @@ export function RandomNumberGeneratorClient() {
   const [unique, setUnique] = useState(false)
 
   const generate = () => {
-    const lo = Math.ceil(Number(min))
-    const hi = Math.floor(Number(max))
-    const n = Math.min(Number(count) || 1, 1000)
-    if (lo > hi) { setResult('⚠️ Min > Max'); return }
-    const range = hi - lo + 1
-    if (unique && n > range) { setResult(`⚠️ Can't pick ${n} unique from ${range}`); return }
+    // 显式校验非法输入(Number() 对 'e'/'-'/空值得 NaN,守卫会漏),
+    // 避免在 unique 模式下进入 while 死循环导致标签页冻结。
+    const lo = Number(min)
+    const hi = Number(max)
+    const n = Number(count)
+    if (!Number.isFinite(lo) || !Number.isFinite(hi) || !Number.isFinite(n)) {
+      setResult('⚠️ Please enter valid numbers for Min, Max, and Count')
+      return
+    }
+    if (n < 1) {
+      setResult('⚠️ Count must be at least 1')
+      return
+    }
+    const loInt = Math.ceil(lo)
+    const hiInt = Math.floor(hi)
+    if (loInt > hiInt) { setResult('⚠️ Min must be ≤ Max'); return }
+    const range = hiInt - loInt + 1
+    const limit = Math.min(n, 1000)
+    if (unique && limit > range) {
+      setResult(`⚠️ Can't pick ${limit} unique numbers from a range of ${range}`)
+      return
+    }
     const picked = new Set<number>()
     const out: number[] = []
-    while (out.length < n) {
-      const r = Math.floor(Math.random() * range) + lo
+    while (out.length < limit) {
+      const r = Math.floor(Math.random() * range) + loInt
       if (unique) { if (!picked.has(r)) { picked.add(r); out.push(r) } }
       else out.push(r)
     }
