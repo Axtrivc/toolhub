@@ -215,28 +215,31 @@ export function HomePageClient({ tools }: HomePageClientProps) {
           {/* 工具卡片网格:xl:grid-cols-4(1280px 断点)对齐 max-w-7xl 版心,
               原 2xl:grid-cols-4(1536px)永远无法触发(版心只有 1280px),属断点 bug。
 
-              ★ 交错入场动画:用 StaggerGroup 包装网格容器,
-                卡片依次从 y:15+opacity:0 过渡进入(transform-only,CLS 安全)。
-                key 含 activeCategory+query,使筛选/搜索切换时网格重新交错入场。 */}
+              ★ 列交错入场:每张卡片独立 whileInView 触发(滚入视口才浮现),
+                延迟按列(index % 4 × 0.07s)左→右波纹弹入,spring 带过冲
+                (见 MotionPrimitives toolCardEnterVariants;transform-only,CLS 安全)。
+                key 含 activeCategory+query,筛选/搜索切换时网格重挂载、重播交错渐显。 */}
           <StaggerGroup
             key={`${category}-${activeCategory ?? 'all'}-${query}`}
             className="grid grid-cols-1 items-stretch gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
           >
-            {categoryTools.map((tool) => {
+            {categoryTools.map((tool, index) => {
               const localizedName = getToolName(locale, tool.slug, tool.name)
               const localizedIntro = getToolShortIntro(locale, tool.slug, tool.shortIntro)
               return (
               <AnimatedToolCard
                 key={tool.slug}
+                index={index}
                 href={`/tools/${tool.slug}/`}
                 title={`${localizedName} — ${localizedIntro}`}
                 ariaLabel={`${localizedName} — ${localizedIntro}`}
               >
                 <div className="flex items-start justify-between">
                   {/* 工具图标:按 category 默认映射 + 明星工具单独定制(见 lib/tools.ts getToolIcon)。
-                      Clean Outlined:微蓝底气泡 + 蓝色细边框,替代灰底盒。 */}
+                      Clean Outlined:微蓝底气泡 + 蓝色细边框,替代灰底盒。
+                      Hover 弹簧缩放 1.08:cubic-bezier(0.34,1.56,0.64,1) 带 overshoot 回弹。 */}
                   <span
-                    className="flex h-11 w-11 items-center justify-center rounded-lg bg-slate-100 p-2 text-2xl transition-transform group-hover:scale-110 dark:border dark:border-blue-800/40 dark:bg-blue-950/30"
+                    className="flex h-11 w-11 items-center justify-center rounded-lg bg-slate-100 p-2 text-2xl transition-transform duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:scale-[1.08] dark:border dark:border-blue-800/40 dark:bg-blue-950/30"
                     aria-hidden="true"
                   >
                     {getToolIcon(tool)}

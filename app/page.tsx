@@ -46,7 +46,8 @@ export default function HomePage() {
 
   return (
     <div className="mx-auto w-full max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-      {/* Hero —— 入场交响:Badge → 主标题 → 副标题 → 快捷操作栏依次 Slide-up + Fade-in。
+      {/* Hero —— 入场交响:Badge → 主标题 → 副标题 → 快捷操作栏依次 spring 弹跳浮现
+          (damping 20 / stiffness 300,起步快、落点带过冲回弹,见 heroItemVariants)。
           ★ 用 animate(非 whileInView):Hero 在首屏,页面加载即播放。
           ★ reduce-motion 时 initial={false},所有内容瞬时可见、无位移(无障碍)。
           ★ HeroGlow 用 left-1/2 top-8 居中,必须锚定在标题外层 relative 容器,
@@ -83,11 +84,14 @@ export default function HomePage() {
           {/* 主标题"130+ Free Online Tools"用蓝紫极客渐变点睛(bg-clip-text + text-transparent)。
               count 取 roundedCount(向下取整到十位,138→130),不精确到个位。
               副行"That Just Work"保持实色 rgb(var(--text)) 作为视觉锚点,避免两行渐变过重。
-              ★ 渐变行叠加 .hero-animated-gradient(见 globals.css):8s 缓慢流光,
-                reduced-motion 下静止。
+              ★ 渐变行为 .hero-animated-gradient"色彩河流"(见 globals.css):
+                五色首尾相接渐变带 + background-position 0%→200% 匀速平移,14s 无缝单向循环,
+                文字内部颜色如河水般持续流动;reduced-motion 下静止。
+                渐变 background-image 由该 CSS 类提供(globals.css 无 layer,优先于
+                Tailwind utilities),此处不再写 from-/via-/to-(写了也会被覆盖,误导)。
               ★ 去掉 <h1> 的 inline color,否则会覆盖 text-transparent 让渐变失效。 */}
           <h1 className="text-5xl font-extrabold tracking-tight sm:text-6xl lg:text-7xl">
-            <span className="hero-animated-gradient bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent dark:from-blue-400 dark:via-indigo-300 dark:to-purple-400">
+            <span className="hero-animated-gradient bg-clip-text text-transparent">
               {t(locale, 'heroBadge', { count: String(roundedCount) })}{' '}
               {t(locale, 'heroTitle1')}
             </span>

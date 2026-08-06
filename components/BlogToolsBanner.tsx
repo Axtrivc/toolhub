@@ -50,18 +50,18 @@ export function BlogToolsBanner() {
         </p>
       </header>
 
-      {/* 响应式网格:1 / 2 / 3 列。★ 交错入场(StaggerGroup)。 */}
+      {/* 响应式网格:1 / 2 / 3 列。★ 列交错入场:卡片独立 whileInView + 按列延迟。 */}
       <StaggerGroup className="grid grid-cols-1 items-stretch gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {tools.map((tool) => {
+        {tools.map((tool, index) => {
           const href = `/tools/${tool.slug}/`
           const localizedName = getToolName(locale, tool.slug, tool.name)
           const localizedIntro = getToolShortIntro(locale, tool.slug, tool.shortIntro)
           const titleAttr = `${localizedName} — ${localizedIntro}`
           return (
-            <AnimatedToolCard key={tool.slug} href={href} title={titleAttr} ariaLabel={titleAttr}>
+            <AnimatedToolCard key={tool.slug} index={index} href={href} title={titleAttr} ariaLabel={titleAttr}>
               <div className="flex items-start justify-between">
                 <span
-                  className="flex h-11 w-11 items-center justify-center rounded-lg bg-slate-100 p-2 text-2xl transition-transform group-hover:scale-110 dark:border dark:border-blue-800/40 dark:bg-blue-950/30"
+                  className="flex h-11 w-11 items-center justify-center rounded-lg bg-slate-100 p-2 text-2xl transition-transform duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:scale-[1.08] dark:border dark:border-blue-800/40 dark:bg-blue-950/30"
                   aria-hidden="true"
                 >
                   {getToolIcon(tool)}

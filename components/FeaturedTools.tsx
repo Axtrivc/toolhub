@@ -43,15 +43,17 @@ export function FeaturedTools({ tools }: FeaturedToolsProps) {
       </h2>
 
       {/* 4 列响应式网格:w-full 确保在父容器内自然拉伸居中,不偏向任何一侧。
-          ★ 交错入场:StaggerGroup 触发卡片依次入场(y:15+opacity:0 → y:0+opacity:1)。 */}
+          ★ 列交错入场:卡片独立 whileInView 触发,延迟按列(index % 4 × 0.07s)
+            左→右波纹弹入(spring 带过冲,见 MotionPrimitives)。 */}
       <StaggerGroup className="grid w-full grid-cols-1 items-stretch gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        {tools.map((tool) => {
+        {tools.map((tool, index) => {
           const isNew = NEW_TOOL_SLUGS.has(tool.slug)
           const localizedName = getToolName(locale, tool.slug, tool.name)
           const localizedIntro = getToolShortIntro(locale, tool.slug, tool.shortIntro)
           return (
             <AnimatedToolCard
               key={tool.slug}
+              index={index}
               href={`/tools/${tool.slug}/`}
               variant="featured"
               title={`${localizedName} — ${localizedIntro}`}
@@ -69,9 +71,10 @@ export function FeaturedTools({ tools }: FeaturedToolsProps) {
                 </span>
               }
             >
-              {/* 图标容器:Clean Outlined —— 微蓝底气泡 + 蓝色细边框 */}
+              {/* 图标容器:Clean Outlined —— 微蓝底气泡 + 蓝色细边框;
+                  Hover 弹簧缩放 1.08(overshoot 贝塞尔回弹) */}
               <span
-                className="flex h-11 w-11 items-center justify-center rounded-lg bg-slate-100 p-2 text-2xl transition-transform group-hover:scale-110 dark:border dark:border-blue-800/40 dark:bg-blue-950/30"
+                className="flex h-11 w-11 items-center justify-center rounded-lg bg-slate-100 p-2 text-2xl transition-transform duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:scale-[1.08] dark:border dark:border-blue-800/40 dark:bg-blue-950/30"
                 aria-hidden="true"
               >
                 {getToolIcon(tool)}

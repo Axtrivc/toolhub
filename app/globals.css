@@ -206,24 +206,48 @@ html.embed [data-embed-hide] {
 }
 
 /* ────────────────────────────────────────────────────────────
- * Hero 标题渐变流光:background-size 放大到 200% 后缓慢平移
- * background-position,让 bg-clip-text 渐变文字有"流动"的光泽感。
- * 仅重绘单元素背景(不重排、不动盒模型),CLS=0。
- * 开启 prefers-reduced-motion 时静止(尊重系统减少动画设置)。
+ * Hero 标题"色彩河流"(Gradient River):
+ * 五色首尾相接的渐变带(蓝→靛→紫→靛→蓝)铺在 200% 宽的背景上,
+ * background-position 从 0% 匀速平移到 200% —— 恰好走过一整块背景
+ * 周期,与起点完全重合 → 无缝单向循环,文字内部的颜色如岩浆/河水般
+ * 持续朝一个方向流动,永不停顿。
+ *  - 14s + linear:极缓慢且匀速(ease 会让"河水"到站减速,破坏连续感)。
+ *  - background-image 在此覆盖 Tailwind 的 bg-gradient-to-r:本文件样式
+ *    不在 @layer 中,优先级高于 @tailwind utilities 层,暗色用 html.dark 覆写。
+ *  - 仅重绘单元素背景(不重排、不动盒模型),CLS=0。
+ *  - 开启 prefers-reduced-motion 时静止(尊重系统减少动画设置)。
  * ──────────────────────────────────────────────────────────── */
-@keyframes gradient-pan {
-  0%,
-  100% {
+@keyframes gradient-river {
+  0% {
     background-position: 0% 50%;
   }
-  50% {
-    background-position: 100% 50%;
+  100% {
+    background-position: 200% 50%;
   }
 }
 
 .hero-animated-gradient {
-  background-size: 200% auto;
-  animation: gradient-pan 8s ease-in-out infinite;
+  background-image: linear-gradient(
+    90deg,
+    #2563eb 0%,
+    #4f46e5 25%,
+    #7c3aed 50%,
+    #4f46e5 75%,
+    #2563eb 100%
+  );
+  background-size: 200% 100%;
+  animation: gradient-river 14s linear infinite;
+}
+
+html.dark .hero-animated-gradient {
+  background-image: linear-gradient(
+    90deg,
+    #60a5fa 0%,
+    #818cf8 25%,
+    #c084fc 50%,
+    #818cf8 75%,
+    #60a5fa 100%
+  );
 }
 
 @media (prefers-reduced-motion: reduce) {

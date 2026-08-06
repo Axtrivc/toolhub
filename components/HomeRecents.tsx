@@ -77,16 +77,16 @@ export function HomeRecents() {
       </header>
 
       <StaggerGroup className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
-        {items.map((tool) => {
+        {items.map((tool, index) => {
           const href = `/tools/${tool.slug}/`
           const localizedName = getToolName(locale, tool.slug, tool.name)
           const localizedIntro = getToolShortIntro(locale, tool.slug, tool.shortIntro)
           const titleAttr = `${localizedName} — ${localizedIntro}`
           return (
-            <AnimatedToolCard key={tool.slug} href={href} title={titleAttr} ariaLabel={titleAttr}>
+            <AnimatedToolCard key={tool.slug} index={index} href={href} title={titleAttr} ariaLabel={titleAttr}>
               <div className="flex items-start justify-between">
                 <span
-                  className="flex h-11 w-11 items-center justify-center rounded-lg bg-slate-100 p-2 text-2xl transition-transform group-hover:scale-110 dark:border dark:border-blue-800/40 dark:bg-blue-950/30"
+                  className="flex h-11 w-11 items-center justify-center rounded-lg bg-slate-100 p-2 text-2xl transition-transform duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:scale-[1.08] dark:border dark:border-blue-800/40 dark:bg-blue-950/30"
                   aria-hidden="true"
                 >
                   {getToolIcon(tool)}

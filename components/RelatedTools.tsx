@@ -58,20 +58,20 @@ export function RelatedTools({ slug, limit = 4 }: RelatedToolsProps) {
       </header>
 
       {/* 4 列响应式网格,与首页 ToolCard 网格断点策略一致。
-          ★ 交错入场:StaggerGroup 触发卡片依次入场。 */}
+          ★ 列交错入场:卡片独立 whileInView 触发,延迟按列(index % 4)波纹弹入。 */}
       <StaggerGroup className="grid grid-cols-1 items-stretch gap-4 sm:grid-cols-2 xl:grid-cols-4">
-        {related.map((tool) => {
+        {related.map((tool, index) => {
           const href = `/tools/${tool.slug}/`
           const localizedName = getToolName(locale, tool.slug, tool.name)
           const localizedIntro = getToolShortIntro(locale, tool.slug, tool.shortIntro)
           // SEO 锚文本:title 属性给出明确语义描述,强化内链信号
           const titleAttr = `${localizedName} — ${localizedIntro}`
           return (
-            <AnimatedToolCard key={tool.slug} href={href} title={titleAttr} ariaLabel={titleAttr}>
+            <AnimatedToolCard key={tool.slug} index={index} href={href} title={titleAttr} ariaLabel={titleAttr}>
               <div className="flex items-start justify-between">
-                {/* 工具图标(与首页 ToolCard 同款) */}
+                {/* 工具图标(与首页 ToolCard 同款);Hover 弹簧缩放 1.08 */}
                 <span
-                  className="flex h-11 w-11 items-center justify-center rounded-lg bg-slate-100 p-2 text-2xl transition-transform group-hover:scale-110 dark:border dark:border-blue-800/40 dark:bg-blue-950/30"
+                  className="flex h-11 w-11 items-center justify-center rounded-lg bg-slate-100 p-2 text-2xl transition-transform duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:scale-[1.08] dark:border dark:border-blue-800/40 dark:bg-blue-950/30"
                   aria-hidden="true"
                 >
                   {getToolIcon(tool)}
