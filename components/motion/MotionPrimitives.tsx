@@ -46,6 +46,31 @@ export const fadeUpItemVariants: Variants = {
   },
 }
 
+/** Hero 入场交响容器:比卡片区更慢的 stagger(0.12s),营造"依次点亮"的节奏感 */
+export const heroStaggerContainerVariants: Variants = {
+  hidden: { opacity: 1 },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.12,
+      delayChildren: 0.05,
+    },
+  },
+}
+
+/**
+ * Hero 单项入场:比卡片略大的位移(y:20)与时长(0.5s),
+ * 大标题需要更沉稳的浮现感;仍 transform-only(CLS 安全)。
+ */
+export const heroItemVariants: Variants = {
+  hidden: { opacity: 0, y: 20 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] }, // easeOutQuart
+  },
+}
+
 /* ════════════════════════════════════════
  * 2. Hero 背景呼吸光晕
  * ════════════════════════════════════════ */

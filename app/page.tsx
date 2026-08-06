@@ -5,13 +5,20 @@ import { getPublishedTools } from '@/lib/tools'
 import { AdSlot } from '@/components/AdSlot'
 import { HomePageClient } from '@/components/HomePageClient'
 import { HomeRecents } from '@/components/HomeRecents'
-import { HeroGlow } from '@/components/motion/MotionPrimitives'
+import {
+  HeroGlow,
+  motion,
+  useReducedMotion,
+  heroStaggerContainerVariants,
+  heroItemVariants,
+} from '@/components/motion/MotionPrimitives'
 import { useApp } from '@/components/providers/AppProviders'
 import { t, tc, getToolName, getToolShortIntro } from '@/lib/i18n'
 
 export default function HomePage() {
   const tools = getPublishedTools()
   const { locale } = useApp()
+  const reduceMotion = useReducedMotion()
 
   // 营销展示用的取整数(向下取整到十位):138 → 130,显示为 "130+"。
   // 规则:不精确到个位;140+ / 150+ 等按实际数量进位。当前 138 落在 130–139,故 130+。
@@ -39,38 +46,24 @@ export default function HomePage() {
 
   return (
     <div className="mx-auto w-full max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-      {/* Hero —— 极简居中微光斑(HeroGlow)。
-          ★ HeroGlow 用 left-1/2 top-1/2 居中,必须锚定在标题外层 relative 容器,
+      {/* Hero —— 入场交响:Badge → 主标题 → 副标题 → 快捷操作栏依次 Slide-up + Fade-in。
+          ★ 用 animate(非 whileInView):Hero 在首屏,页面加载即播放。
+          ★ reduce-motion 时 initial={false},所有内容瞬时可见、无位移(无障碍)。
+          ★ HeroGlow 用 left-1/2 top-8 居中,必须锚定在标题外层 relative 容器,
           否则光斑会跑到 section 中心(标题+副标题+badge 的几何中心)而非标题正后方。
-          光斑严格约束在 w-[500px] h-[220px],绝不溢出到下方卡片区。 */}
-      <section className="relative mx-auto mb-12 max-w-5xl text-center">
-        <div className="relative">
-          <HeroGlow />
-          {/* 主标题"130+ Free Online Tools"用蓝紫极客渐变点睛(bg-clip-text + text-transparent)。
-              count 取 roundedCount(向下取整到十位,138→130),不精确到个位。
-              副行"That Just Work"保持实色 rgb(var(--text)) 作为视觉锚点,避免两行渐变过重。
-              ★ 去掉 <h1> 的 inline color,否则会覆盖 text-transparent 让渐变失效。 */}
-          <h1 className="text-5xl font-extrabold tracking-tight sm:text-6xl lg:text-7xl">
-            <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent dark:from-blue-400 dark:via-indigo-300 dark:to-purple-400">
-              {t(locale, 'heroBadge', { count: String(roundedCount) })}{' '}
-              {t(locale, 'heroTitle1')}
-            </span>
-            <span className="block" style={{ color: 'rgb(var(--text))' }}>
-              {t(locale, 'heroTitle2')}
-            </span>
-          </h1>
-        </div>
-        <p
-          className="mx-auto mt-6 max-w-2xl text-base leading-relaxed sm:text-lg"
-          style={{ color: 'rgb(var(--text-muted))' }}
+          光斑严格约束在 w-[680px] h-[320px],绝不溢出到下方卡片区。 */}
+      <motion.section
+        variants={reduceMotion ? undefined : heroStaggerContainerVariants}
+        initial={reduceMotion ? false : 'hidden'}
+        animate="show"
+        className="relative mx-auto mb-12 max-w-5xl text-center"
+      >
+        {/* 卖点徽章组(置顶,入场第一拍)- PWA/隐私(emerald) + 多语支持(indigo),
+            两枚胶囊横排居中 + flex-wrap 防窄屏溢出;保持小巧不喧宾夺主。 */}
+        <motion.div
+          variants={heroItemVariants}
+          className="mb-6 flex flex-wrap items-center justify-center gap-2.5"
         >
-          {t(locale, 'heroSubtitle')}
-        </p>
-
-        {/* 卖点徽章组 - PWA/隐私(emerald) + 多语支持(indigo),
-            两枚胶囊上下堆叠居中,保持简约不喧宾夺主。
-            多语 Badge 用 indigo 色系与 emerald 区分,文字偏小(text-xs)避免抢主标题。 */}
-        <div className="mt-6 flex flex-col items-center gap-2.5">
           <span
             className="inline-flex items-center gap-1.5 rounded-full border border-emerald-200 bg-emerald-50 px-4 py-1.5 text-sm font-medium text-emerald-700 shadow-sm dark:border-emerald-800/60 dark:bg-emerald-950/40 dark:text-emerald-300"
             title={t(locale, 'heroOfflineBadge')}
@@ -83,16 +76,67 @@ export default function HomePage() {
           >
             {t(locale, 'heroMultilingualBadge')}
           </span>
-        </div>
-      </section>
+        </motion.div>
+
+        <motion.div variants={heroItemVariants} className="relative">
+          <HeroGlow />
+          {/* 主标题"130+ Free Online Tools"用蓝紫极客渐变点睛(bg-clip-text + text-transparent)。
+              count 取 roundedCount(向下取整到十位,138→130),不精确到个位。
+              副行"That Just Work"保持实色 rgb(var(--text)) 作为视觉锚点,避免两行渐变过重。
+              ★ 渐变行叠加 .hero-animated-gradient(见 globals.css):8s 缓慢流光,
+                reduced-motion 下静止。
+              ★ 去掉 <h1> 的 inline color,否则会覆盖 text-transparent 让渐变失效。 */}
+          <h1 className="text-5xl font-extrabold tracking-tight sm:text-6xl lg:text-7xl">
+            <span className="hero-animated-gradient bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent dark:from-blue-400 dark:via-indigo-300 dark:to-purple-400">
+              {t(locale, 'heroBadge', { count: String(roundedCount) })}{' '}
+              {t(locale, 'heroTitle1')}
+            </span>
+            <span className="block" style={{ color: 'rgb(var(--text))' }}>
+              {t(locale, 'heroTitle2')}
+            </span>
+          </h1>
+        </motion.div>
+        <motion.p
+          variants={heroItemVariants}
+          className="mx-auto mt-6 max-w-2xl text-base leading-relaxed sm:text-lg"
+          style={{ color: 'rgb(var(--text-muted))' }}
+        >
+          {t(locale, 'heroSubtitle')}
+        </motion.p>
+
+        {/* 快捷操作栏(入场收尾):主 CTA 锚到下方工具目录 #all-tools,
+            平滑滚动由 html { scroll-behavior: smooth } 提供;
+            按钮 hover 位移/阴影均为 transform/opacity 级别,不触发重排。 */}
+        <motion.div variants={heroItemVariants} className="mt-8">
+          <Link
+            href="#all-tools"
+            className="group inline-flex items-center gap-2 rounded-full bg-blue-600 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-blue-600/25 transition-all duration-300 hover:-translate-y-0.5 hover:bg-blue-700 hover:shadow-xl hover:shadow-blue-600/30 dark:shadow-blue-500/20"
+          >
+            {t(locale, 'heroCtaExplore', { count: String(roundedCount) })}
+            <svg
+              className="h-4 w-4 transition-transform duration-300 group-hover:translate-y-0.5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={2.5}
+              aria-hidden="true"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+            </svg>
+          </Link>
+        </motion.div>
+      </motion.section>
 
       {/* 最近使用 & 我的收藏 - 动态区块,无记录时自动隐藏,有记录时置顶展示 */}
       <div className="mb-10">
         <HomeRecents />
       </div>
 
-      {/* 搜索 + 分类 + 工具列表(客户端组件) */}
-      <HomePageClient tools={tools} />
+      {/* 搜索 + 分类 + 工具列表(客户端组件)。
+          id="all-tools" 是 Hero CTA 的锚点目标;scroll-mt-24 给 sticky header 留出偏移。 */}
+      <div id="all-tools" className="scroll-mt-24">
+        <HomePageClient tools={tools} />
+      </div>
 
       {/* 首页中部广告位 */}
       <AdSlot slot="homepage-mid" format="horizontal" fullWidth />

@@ -75,6 +75,7 @@ export interface Dict {
   heroSubtitle: string
   heroOfflineBadge: string // PWA/隐私卖点徽章 "⚡ 100% Client-Side & Works Offline"
   heroMultilingualBadge: string // 多语卖点徽章 "🌐 Available in 4 Languages: EN | 中文 | Español | Deutsch"
+  heroCtaExplore: string // Hero 快捷操作栏主 CTA "Explore {count}+ Free Tools"
   // 搜索 & 筛选
   searchPlaceholder: string
   categoryAll: string
@@ -177,6 +178,7 @@ const en: Dict = {
   heroSubtitle:
     'Fast, privacy-friendly utilities for developers, students, and everyday tasks. Everything runs right in your browser — no signup, no upload, no tracking.',
   heroOfflineBadge: '⚡ 100% Client-Side & Works Offline',
+  heroCtaExplore: 'Explore {count}+ Free Tools',
   searchPlaceholder: 'Search {count} tools... (e.g. "loan", "json", "kg to lb")',
   categoryAll: 'All',
   showingAll: 'Showing all {count} tools',
@@ -269,6 +271,7 @@ const zh: Dict = {
   heroSubtitle:
     '为开发者、学生和日常任务打造的快速、注重隐私的实用工具。所有计算都在浏览器中完成 —— 无需注册,无需上传,不追踪。',
   heroOfflineBadge: '⚡ 100% 本地运行 · 支持离线',
+  heroCtaExplore: '探索 {count}+ 免费工具',
   searchPlaceholder: '搜索 {count} 个工具...(例如 "loan"、"json"、"kg to lb")',
   categoryAll: '全部',
   showingAll: '显示全部 {count} 个工具',
@@ -361,6 +364,7 @@ const es: Dict = {
   heroSubtitle:
     'Utilidades rápidas y respetuosas con la privacidad para desarrolladores, estudiantes y tareas diarias. Todo se ejecuta en tu navegador: sin registro, sin subir archivos, sin rastreo.',
   heroOfflineBadge: '⚡ 100% en el cliente · Sin conexión',
+  heroCtaExplore: 'Explorar más de {count} herramientas gratuitas',
   searchPlaceholder: 'Buscar {count} herramientas... (p. ej. "préstamo", "json", "kg a lb")',
   categoryAll: 'Todas',
   showingAll: 'Mostrando las {count} herramientas',
@@ -453,6 +457,7 @@ const de: Dict = {
   heroSubtitle:
     'Schnelle, datenschutzfreundliche Helfer für Entwickler, Studierende und Alltag. Alles läuft direkt im Browser — keine Anmeldung, kein Upload, kein Tracking.',
   heroOfflineBadge: '⚡ 100% clientseitig · Offline-fähig',
+  heroCtaExplore: 'Über {count} kostenlose Tools entdecken',
   searchPlaceholder: '{count} Werkzeuge durchsuchen... (z. B. "Kredit", "json", "kg in lb")',
   categoryAll: 'Alle',
   showingAll: 'Zeige alle {count} Werkzeuge',

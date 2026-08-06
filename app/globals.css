@@ -205,6 +205,33 @@ html.embed [data-embed-hide] {
   display: none !important;
 }
 
+/* ────────────────────────────────────────────────────────────
+ * Hero 标题渐变流光:background-size 放大到 200% 后缓慢平移
+ * background-position,让 bg-clip-text 渐变文字有"流动"的光泽感。
+ * 仅重绘单元素背景(不重排、不动盒模型),CLS=0。
+ * 开启 prefers-reduced-motion 时静止(尊重系统减少动画设置)。
+ * ──────────────────────────────────────────────────────────── */
+@keyframes gradient-pan {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+.hero-animated-gradient {
+  background-size: 200% auto;
+  animation: gradient-pan 8s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-animated-gradient {
+    animation: none;
+  }
+}
+
 /* ════════════════════════════════════════════════════════════
  * 暗黑模式高级感增强(Vercel / Raycast 风格)
  * 全站基调由上面的 CSS 变量驱动;这里是组件级精修。
