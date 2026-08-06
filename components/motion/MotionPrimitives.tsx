@@ -194,7 +194,7 @@ export function AnimatedToolCard({
   const baseClass =
     variant === 'featured'
       ? 'group relative flex h-full flex-col rounded-2xl border border-blue-100 bg-gradient-to-b from-blue-50/40 to-transparent p-5 shadow-sm transition-all duration-300 dark:bg-none dark:border-slate-800/80 dark:bg-[#111827] dark:shadow-none'
-      : 'group flex h-full flex-col rounded-2xl border border-slate-200/80 bg-white p-6 shadow-sm transition-all duration-300 dark:border-slate-800/80 dark:bg-slate-900 dark:shadow-none'
+      : 'group relative flex h-full flex-col rounded-2xl border border-slate-200/80 bg-white p-6 shadow-sm transition-all duration-300 dark:border-slate-800/80 dark:bg-slate-900 dark:shadow-none'
 
   // 悬停:边框高亮变蓝 + 蓝色光晕阴影(用 Tailwind 任意值,圆角元素投射圆角阴影)。
   // 阴影值与原 motion boxShadow 一致(0 20px 40px -12px /0.22),保持视觉不变。
@@ -211,6 +211,14 @@ export function AnimatedToolCard({
         aria-label={ariaLabel}
         className={`${baseClass} ${hoverClass}`}
       >
+        {/* Hover 光泽层(Sheen):左上角蓝靛微光渐变,hover 时 opacity 0→1 淡入。
+            纯 opacity 过渡(不重排、GPU 合成);absolute inset-0 + rounded-2xl 贴合卡片圆角,
+            无需 overflow-hidden;pointer-events-none 不拦截交互;
+            位于内容之前(DOM 序)自然压在卡片底上、文字之下,不遮盖内容。 */}
+        <span
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 rounded-2xl bg-gradient-to-br from-blue-500/[0.07] via-indigo-500/[0.03] to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100 dark:from-blue-400/10 dark:via-indigo-400/[0.06]"
+        />
         {badge}
         {children}
       </Link>
