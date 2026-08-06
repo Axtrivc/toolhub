@@ -332,8 +332,10 @@ export function buildHowToJsonLd(slug: string): {
       {
         '@type': 'HowToStep',
         position: 1,
-        name: 'Input your values',
-        text: `Enter the values the ${tool.name} asks for in the input fields above. You can also click "Load Sample" to auto-fill a realistic example.`,
+        name: 'Open the tool',
+        // 多数工具页没有 "Load Sample" 按钮,Step 1 改为通用文案,
+        // 不依赖该按钮,避免 schema 声称存在但页面无对应 UI 的失配风险。
+        text: `Open the ${tool.name} page in your browser. The tool runs entirely client-side — no signup, no upload, no installation required.`,
       },
       {
         '@type': 'HowToStep',
