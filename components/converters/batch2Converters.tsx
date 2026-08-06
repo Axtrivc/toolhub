@@ -48,10 +48,16 @@ export const FlowRateConverterClient = makeUnitConverter({
   units: {
     'ls': { label: 'Liters/sec (L/s)', factor: 1 },
     'lmin': { label: 'Liters/min (L/min)', factor: 1 / 60 },
-    'm3h': { label: 'm³/hour', factor: 1 / 3600 },
-    'gpm': { label: 'Gallons/min US (gpm)', factor: 6.309e-5 },
-    'gps': { label: 'Gallons/sec US', factor: 0.003785 },
-    'cfm': { label: 'ft³/min (CFM)', factor: 4.719e-4 },
+    // m³/hour:1 m³ = 1000 L,1 h = 3600 s → 1000/3600 L/s
+    'm3h': { label: 'm³/hour', factor: 1000 / 3600 },
+    // 基准是 L/s(1 L/s),系数须换算到升:
+    //   1 US gallon/min = 3.785411784 L / 60 s = 0.0630902 L/s
+    //   1 US gallon/sec = 3.785411784 L/s
+    //   1 ft³/min = 28.316846592 L / 60 s = 0.471947443 L/s
+    // (旧值按 m³/s 基准写,全部差 1000 倍)
+    'gpm': { label: 'Gallons/min US (gpm)', factor: 0.0630902 },
+    'gps': { label: 'Gallons/sec US', factor: 3.785411784 },
+    'cfm': { label: 'ft³/min (CFM)', factor: 0.471947443 },
   },
   note: '🚰 Pipe and pump flow rates. Used in plumbing, HVAC, and irrigation.',
 })
