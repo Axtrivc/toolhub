@@ -148,8 +148,10 @@ export function nextFires(expr: string, n: number, from: Date = new Date()): Dat
     const next = nextFire(expr, cursor)
     if (!next) break
     result.push(next)
-    // 从该次触发之后继续找下一次
-    cursor = new Date(next.getTime() + 60000)
+    // 游标推进 +1 秒(而非 +60000):nextFire 内部会先 +60000 再截断到整分,
+    // 若游标正好落在整分边界(next+60000),下一次 +60000 会越过该整分导致跳秒。
+    // +1000 让 nextFire 的 +60000→截断 正好落在下一个整分。
+    cursor = new Date(next.getTime() + 1000)
   }
   return result
 }
