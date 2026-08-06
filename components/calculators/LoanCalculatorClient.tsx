@@ -61,7 +61,9 @@ export function LoanCalculatorClient() {
     const p = Number(amount)
     const r = Number(rate)
     const y = Number(years)
-    if (p <= 0 || y <= 0 || !isFinite(p) || !isFinite(r) || !isFinite(y)) return null
+    // 年限过短(y < 1/12 ⇒ months = Math.round(0.04×12) = 0)会导致除零 → Infinity/NaN。
+    // 要求 months >= 1,即 years >= 1/12(约 0.0833 年),否则显示空结果提示。
+    if (p <= 0 || y < 1 / 12 || !isFinite(p) || !isFinite(r) || !isFinite(y)) return null
     return calcLoan(p, r, y)
   }, [amount, rate, years])
 
