@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useMemo, type ComponentType } from 'react'
+import { useState, useEffect, useMemo, type ComponentType } from 'react'
 import { CopyButton } from '@/components/CopyButton'
 import { PulseGlow } from '@/components/motion/PulseGlow'
 
@@ -41,14 +41,20 @@ export interface TextToolConfig {
 export function makeTextTool(config: TextToolConfig): ComponentType {
   function GeneratedTextTool() {
     const [input, setInput] = useState(config.defaultInput ?? '')
+    // mounted 标记:部分 transform 依赖 document(如 HTMLTagStripper 的 DOMParser),
+    // SSR 期 transform 抛错被 catch 吞掉,导致 SSR 与首帧输出不一致 → hydration mismatch。
+    // 挂载前输出固定空串,挂载后再 transform,保证 SSR/CSR 首帧一致。
+    const [mounted, setMounted] = useState(false)
+    useEffect(() => setMounted(true), [])
 
     const output = useMemo(() => {
+      if (!mounted) return ''
       try {
         return config.transform(input)
       } catch {
         return ''
       }
-    }, [input])
+    }, [input, mounted])
 
     const showStats = config.showStats !== false
     const charCount = input.length

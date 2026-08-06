@@ -54,20 +54,25 @@ function calcAge(from: Date, to: Date) {
 }
 
 export function AgeCalculatorClient() {
-  const today = new Date()
+  // 初始 state 用固定值,挂载后(mounted)再填入"今天",避免 SSR/CSR 首帧
+  // 因 new Date() 不同导致 hydration mismatch(构建次日访问即不一致)。
   const [birth, setBirth] = useState('2000-01-01')
-  const [target, setTarget] = useState(toInputDate(today))
-
-  // 实时更新"今天"(每分钟)
+  const [target, setTarget] = useState('')
+  const [todayStr, setTodayStr] = useState('')
   const [, setTick] = useState(0)
+
   useEffect(() => {
+    setTodayStr(toInputDate(new Date()))
+    setTarget((prev) => prev || toInputDate(new Date()))
     const timer = setInterval(() => setTick((t) => t + 1), 60000)
     return () => clearInterval(timer)
   }, [])
 
+  // 渲染期用 state(todayStr)而非直接 new Date(),保证首帧与 SSR 一致
+  const today = todayStr ? new Date(todayStr) : null
   const birthDate = new Date(birth)
-  const targetDate = new Date(target)
-  const result = calcAge(birthDate, targetDate)
+  const targetDate = target ? new Date(target) : today
+  const result = targetDate ? calcAge(birthDate, targetDate) : null
 
   const fmt = (n: number) => n.toLocaleString()
 
@@ -84,7 +89,7 @@ export function AgeCalculatorClient() {
             type="date"
             value={birth}
             onChange={(e) => setBirth(e.target.value)}
-            max={toInputDate(today)}
+            max={todayStr || undefined}
             className="w-full rounded-lg border border-slate-300 p-3 text-slate-900 shadow-sm outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200"
           />
         </div>

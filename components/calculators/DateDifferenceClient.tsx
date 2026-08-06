@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useMemo } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import { ResultCard, CalculatorNote } from '../calculator/CalculatorField'
 
 function toInputDate(d: Date): string {
@@ -12,9 +12,16 @@ function toInputDate(d: Date): string {
  * 计算两个日期之间的年/月/日/总天数/工作日等。
  */
 export function DateDifferenceClient() {
-  const today = new Date()
-  const [start, setStart] = useState(toInputDate(new Date(today.getFullYear(), 0, 1)))
-  const [end, setEnd] = useState(toInputDate(today))
+  // 初始 state 用固定值,挂载后(mounted)再填入"今天/年初",
+  // 避免 SSR/CSR 首帧因 new Date() 不同导致 hydration mismatch。
+  const [start, setStart] = useState('')
+  const [end, setEnd] = useState('')
+
+  useEffect(() => {
+    const now = new Date()
+    setStart((prev) => prev || toInputDate(new Date(now.getFullYear(), 0, 1)))
+    setEnd((prev) => prev || toInputDate(now))
+  }, [])
 
   const result = useMemo(() => {
     const s = new Date(start)

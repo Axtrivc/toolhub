@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useMemo, useCallback } from 'react'
+import { useState, useEffect, useMemo, useCallback } from 'react'
 import { CopyButton } from '@/components/CopyButton'
 
 /**
@@ -44,14 +44,19 @@ export function EncoderDecoderTool({ encode, decode, initialMode = 'encode' }: E
   const [mode, setMode] = useState<'encode' | 'decode'>(initialMode)
   const spec = mode === 'encode' ? encode : decode
   const [input, setInput] = useState(spec.defaultInput)
+  // mounted 标记:部分 transform 依赖 document(SSR 期抛错被吞 → hydration mismatch)。
+  // 挂载前输出固定空串,挂载后再 transform,保证 SSR/CSR 首帧一致。
+  const [mounted, setMounted] = useState(false)
+  useEffect(() => setMounted(true), [])
 
   const output = useMemo(() => {
+    if (!mounted) return ''
     try {
       return spec.transform(input)
     } catch {
       return ''
     }
-  }, [input, spec])
+  }, [input, spec, mounted])
 
   const switchMode = useCallback(
     (next: 'encode' | 'decode') => {

@@ -30,11 +30,12 @@ export const HTMLTagStripperClient = makeTextTool({
   outputLabel: 'Plain text (tags removed)',
   defaultInput: '<h1>Title</h1><p>This is <strong>bold</strong> text.</p>',
   transform: (t) => {
-    const el = document.createElement('div')
-    el.innerHTML = t
-    return el.textContent || el.innerText || ''
+    // 用 DOMParser 解析(浏览器内运行,纯客户端)并取 body.textContent,
+    // 自动剥离所有标签与脚本内容。<script> 内的代码不会作为文本返回。
+    const doc = new DOMParser().parseFromString(t, 'text/html')
+    return doc.body.textContent || ''
   },
-  note: '🌐 Strips all HTML tags, leaving readable text. Safe — uses DOM parsing.',
+  note: '🌐 Strips all HTML tags, leaving readable text. Uses the browser DOM parser — runs client-side only.',
 })
 
 // ── 字符频率统计 ──
