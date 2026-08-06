@@ -351,18 +351,15 @@ export function buildHowToJsonLd(slug: string): {
   }
 }
 
-/** 站点级 WebSite 结构化数据(带搜索框,利于品牌曝光) */
+/** 站点级 WebSite 结构化数据(利于品牌曝光) */
 export const websiteJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'WebSite',
   name: SITE_NAME,
   url: SITE_URL,
   description: SITE_DESCRIPTION,
-  potentialAction: {
-    '@type': 'SearchAction',
-    target: `${SITE_URL}/?q={search_term_string}`,
-    'query-input': 'required name=search_term_string',
-  },
+  // 不声明 potentialAction/SearchAction:首页从不消费 ?q 搜索参数,
+  // 声明失实的搜索框会触发 Google 失配风险(声明功能却无对应实现)。
 }
 
 /** 所有已上线工具的 URL(供 sitemap 用) */
