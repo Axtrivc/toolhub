@@ -71,7 +71,11 @@ export const AngleConverterClient = makeUnitConverter({
   note: '📐 Used in math, engineering, and navigation. 1 revolution = 360° = 2π rad.',
 })
 
-// ── 燃油经济性(MPG vs L/100km,反向关系)──
+// ── 燃油经济性(MPG vs L/100km,倒数关系)──
+// L/100km 与 mpg 是倒数关系(L/100km = 235.215 ÷ mpg),
+// 不能用线性 factor,故对 l100km 单位配置自定义 toBase/fromBase 钩子。
+// 基准单位 = US mpg(等效):1 US mpg = 235.215 / 1 L/100km。
+// UK mpg → US mpg:1 UK gallon = 1.20095 US gallon,故 x mpg(UK) = x/1.20095 mpg(US) = x*0.83267。
 export const FuelEconomyConverterClient = makeUnitConverter({
   slug: 'fuel-economy-converter',
   defaultValue: '30',
@@ -80,10 +84,15 @@ export const FuelEconomyConverterClient = makeUnitConverter({
   digits: 3,
   units: {
     'mpg-us': { label: 'Miles/Gallon US (mpg)', factor: 1 },
-    'mpg-uk': { label: 'Miles/Gallon UK (mpg)', factor: 1.20095 },
-    'l100km': { label: 'Liters/100km (L/100km)', factor: 235.215 }, // 反比关系用因子近似
+    'mpg-uk': { label: 'Miles/Gallon UK (mpg)', factor: 0.83267 },
+    'l100km': {
+      label: 'Liters/100km (L/100km)',
+      factor: 0, // 占位,实际走 toBase/fromBase(倒数关系)
+      toBase: (v) => 235.215 / v, // L/100km → US mpg
+      fromBase: (b) => 235.215 / b, // US mpg → L/100km
+    },
   },
-  note: '⛽ Note: L/100km is inverse to mpg (lower = better). Values are approximate.',
+  note: '⛽ Note: L/100km is inverse to mpg (lower = better). 1 US mpg = 235.215 L/100km; 1 UK mpg ≈ 1.20095 US mpg. Values are approximate.',
 })
 
 // ── 压力(Pascal/Bar/PSI/atm)──

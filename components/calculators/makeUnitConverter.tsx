@@ -22,8 +22,19 @@ import { getConverterSample, type ConverterSample } from '@/lib/tool-samples'
  */
 export interface UnitDef {
   label: string
-  /** 相对基准单位的换算系数 */
+  /** 相对基准单位的换算系数(线性单位用,如 1 kg = 1000 g → factor 1000) */
   factor: number
+  /**
+   * 自定义"转到基准单位"函数(可选)。覆盖 factor,用于非线性换算。
+   * 例:燃油经济性 L/100km 与 mpg 是倒数关系,toBase = 235.215 / x。
+   * 不提供则回退到 value × factor。
+   */
+  toBase?: (v: number) => number
+  /**
+   * 自定义"从基准单位转出"函数(可选)。覆盖 factor。
+   * 不提供则回退到 base / factor(若 toBase 也缺省)或 1/toBase(base)。
+   */
+  fromBase?: (b: number) => number
 }
 
 export function makeUnitConverter(config: {
@@ -52,8 +63,16 @@ export function makeUnitConverter(config: {
       const fromDef = config.units[from]
       const toDef = config.units[to]
       if (!fromDef || !toDef) return NaN
-      // 转到基准单位,再从基准转到目标单位
-      return (v * fromDef.factor) / toDef.factor
+      // 转到基准单位:value → base
+      // 有自定义 toBase(非线性,如燃油经济性倒数)则用之,否则线性 value × factor
+      const toBase = (def: UnitDef, val: number): number =>
+        def.toBase ? def.toBase(val) : val * def.factor
+      // 从基准单位转出:base → target
+      // 有自定义 fromBase 则用之;否则线性 base / factor
+      const fromBase = (def: UnitDef, base: number): number =>
+        def.fromBase ? def.fromBase(base) : base / def.factor
+      const baseVal = toBase(fromDef, v)
+      return fromBase(toDef, baseVal)
     }, [value, from, to])
 
     const options = unitKeys.map((k) => ({ label: config.units[k].label, value: k }))
