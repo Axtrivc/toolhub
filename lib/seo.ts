@@ -102,11 +102,20 @@ export function buildToolMetadata(slug: string): Metadata {
       title,
       description,
       siteName: SITE_NAME,
+      images: [
+        {
+          url: '/og.png',
+          width: 1200,
+          height: 630,
+          alt: `${tool.name} — ${SITE_TAGLINE}`,
+        },
+      ],
     },
     twitter: {
       card: 'summary_large_image',
       title,
       description,
+      images: ['/og.png'],
     },
   }
 }

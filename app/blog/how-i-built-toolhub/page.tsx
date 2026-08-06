@@ -42,12 +42,21 @@ export const metadata: Metadata = {
     siteName: SITE_NAME,
     publishedTime: PUBLISH_DATE,
     authors: [SITE_NAME],
+    images: [
+      {
+        url: '/og.png',
+        width: 1200,
+        height: 630,
+        alt: 'How I Built ToolHub: A 138-Tool Static PWA That Stays Sub-Second',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'How I Built ToolHub: A 138-Tool Static PWA That Stays Sub-Second',
     description:
       'Next.js static export, lazy Service-Worker caching, 138+ JSON-LD schemas, zero-CLS AdSense. The tradeoffs and the numbers.',
+    images: ['/og.png'],
   },
 }
 

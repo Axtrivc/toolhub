@@ -62,11 +62,20 @@ export const metadata: Metadata = {
     title: `${SITE_NAME} Blog`,
     description: `Engineering notes, architecture deep-dives, and build-in-public updates from the ${SITE_NAME} team.`,
     siteName: SITE_NAME,
+    images: [
+      {
+        url: '/og.png',
+        width: 1200,
+        height: 630,
+        alt: `${SITE_NAME} Blog`,
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
     title: `${SITE_NAME} Blog`,
     description: `Engineering notes and build-in-public updates from the ${SITE_NAME} team.`,
+    images: ['/og.png'],
   },
 }
 

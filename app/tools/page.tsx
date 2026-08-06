@@ -12,6 +12,20 @@ export const metadata: Metadata = {
     title: `All Tools | ${SITE_NAME}`,
     description: `Browse all ${getPublishedTools().length}+ free online tools, organized by category.`,
     url: '/tools/',
+    images: [
+      {
+        url: '/og.png',
+        width: 1200,
+        height: 630,
+        alt: `${SITE_NAME} — All Tools`,
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: `All Tools | ${SITE_NAME}`,
+    description: `Browse all ${getPublishedTools().length}+ free online tools, organized by category.`,
+    images: ['/og.png'],
   },
 }
 
