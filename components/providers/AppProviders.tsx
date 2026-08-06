@@ -1,6 +1,6 @@
 'use client'
 
-import { createContext, useContext, useState, useEffect, useCallback, type ReactNode } from 'react'
+import { createContext, useContext, useState, useEffect, useCallback, useRef, type ReactNode } from 'react'
 import type { Locale } from '@/lib/i18n'
 import { isLocale, detectBrowserLocale } from '@/lib/i18n'
 import { FavoritesProvider } from '@/lib/useFavorites'
@@ -38,6 +38,9 @@ export function AppProviders({ children }: { children: ReactNode }) {
   const [locale, setLocaleState] = useState<Locale>('en')
   const [theme, setThemeState] = useState<Theme>('light')
   const [mounted, setMounted] = useState(false)
+  // 区分"初始推断值"(从 localStorage/系统偏好得出,不写回)与"用户显式操作"。
+  // 仅用户点击切换后才把 theme 写回 localStorage,避免首访即覆盖系统偏好推断。
+  const userTouchedThemeRef = useRef(false)
 
   // 初始化:从 localStorage 读取用户偏好;语言缺失时按浏览器语言自动匹配
   useEffect(() => {
@@ -49,11 +52,11 @@ export function AppProviders({ children }: { children: ReactNode }) {
       const detected = detectBrowserLocale()
       if (detected !== 'en') {
         setLocaleState(detected)
-        localStorage.setItem(LOCALE_KEY, detected)
+        try { localStorage.setItem(LOCALE_KEY, detected) } catch { /* 无痕模式/禁用存储 */ }
       }
     }
 
-    // 主题:localStorage > 系统偏好 > light
+    // 主题:localStorage > 系统偏好 > light(仅推断,不写回 localStorage)
     const savedTheme = typeof localStorage !== 'undefined' && localStorage.getItem(THEME_KEY)
     if (savedTheme === 'light' || savedTheme === 'dark') {
       setThemeState(savedTheme)
@@ -64,13 +67,15 @@ export function AppProviders({ children }: { children: ReactNode }) {
     setMounted(true)
   }, [])
 
-  // 主题变化时:写 localStorage + 切 html 的 class
+  // 主题变化时:切 html 的 class;localStorage 仅在用户显式操作后写入
   useEffect(() => {
     if (!mounted) return
     const root = document.documentElement
     if (theme === 'dark') root.classList.add('dark')
     else root.classList.remove('dark')
-    localStorage.setItem(THEME_KEY, theme)
+    if (userTouchedThemeRef.current) {
+      try { localStorage.setItem(THEME_KEY, theme) } catch { /* 无痕模式/禁用存储 */ }
+    }
   }, [theme, mounted])
 
   // 语言变化时:同步 <html lang>(SEO/可访问性)
@@ -81,7 +86,7 @@ export function AppProviders({ children }: { children: ReactNode }) {
 
   const setLocale = useCallback((l: Locale) => {
     setLocaleState(l)
-    localStorage.setItem(LOCALE_KEY, l)
+    try { localStorage.setItem(LOCALE_KEY, l) } catch { /* 无痕模式/禁用存储 */ }
   }, [])
 
   // 兼容旧调用点(多语下拉直接用 setLocale;此处保留一个有意义的轮换行为)
@@ -90,16 +95,18 @@ export function AppProviders({ children }: { children: ReactNode }) {
       const order: Locale[] = ['en', 'zh', 'es', 'de']
       const idx = order.indexOf(prev)
       const next = order[(idx + 1) % order.length]
-      localStorage.setItem(LOCALE_KEY, next)
+      try { localStorage.setItem(LOCALE_KEY, next) } catch { /* 无痕模式/禁用存储 */ }
       return next
     })
   }, [])
 
   const setTheme = useCallback((t: Theme) => {
+    userTouchedThemeRef.current = true
     setThemeState(t)
   }, [])
 
   const toggleTheme = useCallback(() => {
+    userTouchedThemeRef.current = true
     setThemeState((prev) => (prev === 'light' ? 'dark' : 'light'))
   }, [])
 

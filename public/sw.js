@@ -24,7 +24,7 @@
  */
 
 // ===== 版本号:每次更新本文件递增此值,触发新 SW 接管 + 旧缓存清理 =====
-const VERSION = 'toolhub-sw-v1.0.0'
+const VERSION = 'toolhub-sw-v1.0.1'
 const STATIC_CACHE = `static-${VERSION}`
 const RUNTIME_CACHE = `runtime-${VERSION}`
 
@@ -89,6 +89,13 @@ self.addEventListener('fetch', (event) => {
     return
   }
 
+  // 无哈希的文本/RSC 资源(*.txt、含 __next. 的 RSC payload):发版后内容会变,
+  // 落入 SWR 兜底会有陈旧内容窗口,改走 network-first 保证拿到最新。
+  if (isVersionedTextAsset(url.pathname)) {
+    event.respondWith(networkFirst(request))
+    return
+  }
+
   // 其它同源 GET 也走 SWR(如 API、动态数据),保持一致性
   event.respondWith(staleWhileRevalidate(request))
 })
@@ -105,7 +112,7 @@ async function networkFirst(request) {
     const fresh = await fetch(request)
     // 成功则更新缓存(仅缓存有效响应)
     if (fresh && fresh.ok && fresh.type === 'basic') {
-      cache.put(request, fresh.clone()).catch(() => {})
+      cache.put(request, fresh.clone()).then(() => trimRuntimeCache(cache)).catch(() => {})
     }
     return fresh
   } catch (err) {
@@ -130,7 +137,7 @@ async function staleWhileRevalidate(request) {
   const networkPromise = fetch(request)
     .then((fresh) => {
       if (fresh && fresh.ok && fresh.type === 'basic') {
-        cache.put(request, fresh.clone()).catch(() => {})
+        cache.put(request, fresh.clone()).then(() => trimRuntimeCache(cache)).catch(() => {})
       }
       return fresh
     })
@@ -146,6 +153,28 @@ function isStaticAsset(pathname) {
     pathname.startsWith('/_next/static/') ||
     /\.(?:js|css|woff2?|ttf|otf|png|jpe?g|gif|webp|svg|ico|avif)$/i.test(pathname)
   )
+}
+
+/**
+ * 判断是否为"无哈希但发版会变"的文本/RSC 资源。
+ * 这些资源没有内容哈希,落入 SWR 兜底会有陈旧窗口,改走 network-first。
+ *  - *.txt:IndexNow 密钥、ads.txt、robots.txt 等,发版可能更新
+ *  - 含 __next. 的路径:Next 的 RSC payload(__next.js / __next/data 等),无哈希
+ */
+function isVersionedTextAsset(pathname) {
+  return /\.txt$/i.test(pathname) || pathname.includes('__next.')
+}
+
+/** RUNTIME_CACHE 容量上限:超过则删最旧的条目,避免长期运行无限膨胀。 */
+const RUNTIME_CACHE_MAX = 100
+async function trimRuntimeCache(cache) {
+  const keys = await cache.keys()
+  if (keys.length <= RUNTIME_CACHE_MAX) return
+  // cache.keys() 按插入顺序返回,删最旧的若干条直至回到上限内
+  const excess = keys.length - RUNTIME_CACHE_MAX
+  for (let i = 0; i < excess; i++) {
+    await cache.delete(keys[i])
+  }
 }
 
 // ─────────── 消息通道:页面可主动通知 SW 立即激活(skipWaiting) ───────────

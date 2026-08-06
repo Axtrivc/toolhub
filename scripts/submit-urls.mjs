@@ -136,6 +136,8 @@ function buildUrlList(siteUrl) {
     siteUrl + '/contact/',
     siteUrl + '/privacy/',
     siteUrl + '/terms/',
+    siteUrl + '/blog/',
+    siteUrl + '/blog/how-i-built-toolhub/',
   ]
   for (const slug of slugs) {
     urls.push(`${siteUrl}/tools/${slug}/`)
@@ -184,7 +186,7 @@ async function submitToIndexNow({ urls, host, key, endpoint, label }) {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json; charset=utf-8',
-      Host: host,
+      // Host 是 forbidden header,fetch 会拒绝设置;host 信息已在 payload.body 的 host 字段里
     },
     body: JSON.stringify(payload),
   })
