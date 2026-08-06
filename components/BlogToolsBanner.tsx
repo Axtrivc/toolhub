@@ -2,6 +2,7 @@
 
 import { getFeaturedTools } from '@/lib/tools'
 import { getToolIcon } from '@/lib/tools'
+import { getPublishedTools } from '@/lib/tools'
 import { useApp } from './providers/AppProviders'
 import { tc, getToolName, getToolShortIntro } from '@/lib/i18n'
 import { AnimatedToolCard, StaggerGroup } from './motion/MotionPrimitives'
@@ -14,7 +15,7 @@ import { AnimatedToolCard, StaggerGroup } from './motion/MotionPrimitives'
  *  - 视觉与站内其它卡片(首页 ToolCard / RelatedTools)严格一致,
  *    复用 AnimatedToolCard + StaggerGroup(主题感知 + reduce-motion 降级)。
  *
- * 数据源:getFeaturedTools() —— 首页置顶的高价值/高流量工具(当前约 8 个),
+ * 数据源:getFeaturedTools() —— 首页置顶的高价值/高流量工具(当前约 10 个),
  *  这里取前 6 个铺满响应式网格(1 / 2 / 3 列)。
  *
  * 客户端组件:AnimatedToolCard / StaggerGroup 依赖 framer-motion(useReducedMotion),
@@ -25,6 +26,8 @@ const BANNER_LIMIT = 6
 export function BlogToolsBanner() {
   const { locale } = useApp()
   const tools = getFeaturedTools().slice(0, BANNER_LIMIT)
+  // 已发布工具总数(动态),替代原硬编码 "130+"
+  const publishedCount = getPublishedTools().length
 
   if (tools.length === 0) return null
 
@@ -81,7 +84,7 @@ export function BlogToolsBanner() {
 
       <div className="mt-8">
         <a href="/#all-tools" className="btn btn-secondary">
-          Browse all 130+ tools <span aria-hidden="true">→</span>
+          Browse all {publishedCount}+ tools <span aria-hidden="true">→</span>
         </a>
       </div>
     </section>

@@ -56,7 +56,7 @@ export function PercentageCalculatorClient() {
           <CalculatorField id="p2whole" label="Whole" value={p2Whole} onChange={setP2Whole} />
         </div>
         <div className="mt-3">
-          <ResultCard label="Result" value={`${fmt(r2, 2)}%`} highlight />
+          <ResultCard label="Result" value={isFinite(r2) ? `${fmt(r2, 2)}%` : '—'} highlight />
         </div>
       </section>
 
@@ -70,9 +70,9 @@ export function PercentageCalculatorClient() {
         <div className="mt-3">
           <ResultCard
             label="Change"
-            value={`${r3 > 0 ? '+' : ''}${fmt(r3, 2)}%`}
+            value={isFinite(r3) ? `${r3 > 0 ? '+' : ''}${fmt(r3, 2)}%` : '—'}
             highlight
-            sublabel={r3 > 0 ? 'Increase' : r3 < 0 ? 'Decrease' : 'No change'}
+            sublabel={isFinite(r3) ? (r3 > 0 ? 'Increase' : r3 < 0 ? 'Decrease' : 'No change') : undefined}
           />
         </div>
       </section>

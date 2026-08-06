@@ -61,7 +61,7 @@ export interface ToolMeta {
   icon?: string
   /**
    * 是否置顶推荐(可选)。true 时该工具会出现在首页 "🔥 Popular Tools" 置顶区。
-   * 仅标记高流量 / 高价值工具(当前 8 个),首页无搜索词且选中 All 分类时展示。
+   * 仅标记高流量 / 高价值工具(当前 10 个),首页无搜索词且选中 All 分类时展示。
    */
   featured?: boolean
 }

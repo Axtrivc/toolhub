@@ -14,7 +14,7 @@ const nextConfig: NextConfig = {
   images: {
     unoptimized: true,
   },
-  // 让 /me 重定向为 /me/,并输出 /me/index.html,兼容纯静态托管的路由
+  // trailingSlash:为每个路由输出 <slug>/index.html,兼容纯静态托管的路由约定
   trailingSlash: true,
   // 自动为每个页面生成带 locale 的 HTML 文件
   reactStrictMode: true,

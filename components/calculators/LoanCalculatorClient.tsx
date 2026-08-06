@@ -117,7 +117,7 @@ export function LoanCalculatorClient() {
       .join('\n')
   }, [result, amount, rate, years, summary])
 
-  // 只显示前 12 个月 + 最后 1 个月,避免列表过长(完整表可后续加导出)
+  // 只显示前 12 个月,避免列表过长(完整表可经下方 Download 导出 CSV)
   const displaySchedule = result ? [result.schedule.slice(0, 12)].flat() : []
 
   return (

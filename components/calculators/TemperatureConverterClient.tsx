@@ -71,7 +71,7 @@ export function TemperatureConverterClient() {
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
         <ResultCard
           label="Converted value"
-          value={isFinite(result) ? `${fmtNum(result, 2)} °${to === 'k' ? '' : to.toUpperCase()}` : '—'}
+          value={isFinite(result) ? `${fmtNum(result, 2)} ${to === 'k' ? 'K' : '°' + to.toUpperCase()}` : '—'}
           highlight
         />
         <ResultCard

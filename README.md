@@ -1,7 +1,7 @@
 # ToolHub — Free Online Tools
 
-一个基于 Next.js 15 静态导出的工具站,零服务器成本,部署到 Cloudflare Pages 免费。
-定位:英文为主的多工具集合站,通过 SEO 获取流量 + AdSense 变现。
+一个基于 Next.js 16 静态导出的工具站,零服务器成本,部署到 Cloudflare Pages 免费。
+定位:英文为主、四语言 i18n(en/zh/es/de)的多工具集合站,通过 SEO 获取流量 + AdSense 变现。
 
 ## 快速开始
 
@@ -91,9 +91,12 @@ npx wrangler pages deploy out --project-name=toolhub
 
 | 组件 | 选择 |
 |---|---|
-| 框架 | Next.js 15 App Router + TypeScript |
-| 样式 | Tailwind CSS |
+| 框架 | Next.js 16 App Router + TypeScript |
+| 样式 | Tailwind CSS + 语义化设计 token(明暗主题) |
+| 动效 | Framer Motion(按列交错入场、卡片悬浮、reduce-motion 降级) |
 | 部署 | Cloudflare Pages(静态导出) |
+| PWA | Service Worker(惰性缓存 + network-first HTML + SWR 静态资源) |
+| i18n | 四语言(en/zh/es/de),客户端组件随语言切换 |
 | 分析 | Cloudflare Analytics + Google Search Console |
 
 ## 项目结构
@@ -104,11 +107,14 @@ app/                  # Next.js App Router 页面
   page.tsx            # 首页
   sitemap.ts          # 自动生成 sitemap.xml
   robots.ts           # 自动生成 robots.txt
-  about/ contact/ privacy/ terms/   # AdSense 审核必备页
-  tools/
-    slug-generator/   # 第一个工具
-components/           # 复用组件(Header/Footer/AdSlot 等)
-lib/                  # 工具元数据、SEO 函数、slug 逻辑
+  about/ contact/ privacy/ terms/   # 合规必备页
+  blog/               # 技术博客(架构复盘等长文)
+  tools/              # 138 个工具页(每个 <slug>/page.tsx)
+    slug-generator/   # 示例工具
+components/           # 复用组件(Header/Footer/AdSlot/CalculatorField 等)
+  motion/             # FramerMotion 动效原语(AnimatedToolCard/StaggerGroup 等)
+lib/                  # 工具元数据、SEO/JSON-LD 函数、cron、slug、i18n
+public/sw.js          # Service Worker(PWA 离线)
 next.config.ts        # 静态导出配置
 ```
 
