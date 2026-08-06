@@ -7,6 +7,7 @@ import type { ToolMeta } from '@/lib/tools'
 import { getToolIcon } from '@/lib/tools'
 import type { Locale } from '@/lib/i18n'
 import { t, tc, getToolName, getToolShortIntro } from '@/lib/i18n'
+import { motion, AnimatePresence, useReducedMotion } from './motion/MotionPrimitives'
 
 interface SearchPaletteProps {
   /** 全部已上线工具(由 Server 传入) */
@@ -42,6 +43,7 @@ export function SearchPalette({ tools, locale, open, onClose }: SearchPalettePro
   const [mounted, setMounted] = useState(false) // SSR 安全:仅在 client 渲染 portal
   const inputRef = useRef<HTMLInputElement>(null)
   const listRef = useRef<HTMLUListElement>(null)
+  const reduceMotion = useReducedMotion()
 
   // ── 过滤:匹配 name / 介绍 / 关键词 / 长尾词 / 分类 / slug ──
   const results = useMemo(() => {
@@ -127,31 +129,70 @@ export function SearchPalette({ tools, locale, open, onClose }: SearchPalettePro
     }
   }
 
-  // 未开 / SSR 期间不渲染任何东西(portal 也没有 DOM 可挂)
-  if (!open || !mounted) return null
+  // SSR 期间不渲染(portal 没有 DOM 可挂);open 的开/关交给 AnimatePresence 做进出动画。
+  if (!mounted) return null
+
+  // 面板进出动画:打开 = 遮罩淡入 + 面板 scale-up(0.96→1)+ 轻微下落;
+  // 关闭 = 反向快速消散(0.15s)。reduced-motion 下仅保留淡入淡出,无位移/缩放。
+  // 仅 opacity/transform,不触发重排;portal 脱离布局流,CLS=0。
+  const panelMotion = reduceMotion
+    ? {
+        initial: { opacity: 0 },
+        animate: { opacity: 1 },
+        exit: { opacity: 0, transition: { duration: 0.15 } },
+      }
+    : {
+        initial: { opacity: 0, scale: 0.96, y: -8 },
+        animate: { opacity: 1, scale: 1, y: 0 },
+        exit: { opacity: 0, scale: 0.97, y: -6, transition: { duration: 0.15 } },
+      }
 
   // 用 Portal 把弹窗挂到 <body> 根,脱离 Header 的 backdrop-filter 包含块。
   // 注意:遮罩(z-50)与面板(z-60)是兄弟节点,面板在上层。
+  // AnimatePresence 直接子节点需带 key,卸载时播完 exit 动画再移除 DOM。
   return createPortal(
-    <>
-      {/* 全屏遮罩:fixed 相对真正的视口(已脱离 Header 的 containing block) */}
-      <button
-        type="button"
-        aria-label={t(locale, 'searchClose')}
-        tabIndex={-1}
-        onClick={onClose}
-        className="fixed inset-0 z-50 h-screen w-screen bg-black/20 backdrop-blur-sm dark:bg-black/50"
-      />
+    <AnimatePresence>
+      {open && (
+        /* 全屏遮罩:fixed 相对真正的视口(已脱离 Header 的 containing block) */
+        <motion.button
+          key="backdrop"
+          type="button"
+          aria-label={t(locale, 'searchClose')}
+          tabIndex={-1}
+          onClick={onClose}
+          className="fixed inset-0 z-50 h-screen w-screen bg-black/20 backdrop-blur-sm dark:bg-black/50"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0, transition: { duration: 0.15 } }}
+          transition={{ duration: 0.2 }}
+        />
+      )}
 
-      {/* 顶部偏下对齐的定位容器(Raycast/Spotlight 风格) */}
-      <div
-        className="fixed inset-0 z-[60] flex items-start justify-center p-4 pt-[10vh] sm:pt-[14vh]"
-        role="dialog"
-        aria-modal="true"
-        aria-label={t(locale, 'searchPaletteTitle')}
-      >
-        {/* 面板:圆角 + 描边 + 大阴影,质感升级 */}
-        <div className="relative flex max-h-[70vh] w-full max-w-xl flex-col overflow-hidden rounded-2xl border border-gray-100 shadow-2xl ring-1 ring-black/5 dark:border-gray-800 dark:ring-white/5" style={{ backgroundColor: 'rgb(var(--bg-card))' }}>
+      {open && (
+        /* 顶部偏下对齐的定位容器(Raycast/Spotlight 风格)。
+           ★ 点击关闭挂在容器上:容器 fixed inset-0 覆盖在遮罩之上,
+           点击面板外区域实际落在容器(而非遮罩按钮)——onClick={onClose} 让
+           "点击外部关闭"真实生效;面板内 onClick stopPropagation 防误关。 */
+        <motion.div
+          key="panel-wrap"
+          className="fixed inset-0 z-[60] flex items-start justify-center p-4 pt-[10vh] sm:pt-[14vh]"
+          role="dialog"
+          aria-modal="true"
+          aria-label={t(locale, 'searchPaletteTitle')}
+          onClick={onClose}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0, transition: { duration: 0.15 } }}
+          transition={{ duration: 0.2 }}
+        >
+          {/* 面板:圆角 + 描边 + 大阴影,质感升级;transformOrigin 顶中,
+              像从 Header 搜索栏"展开"下来。 */}
+          <motion.div
+            {...panelMotion}
+            onClick={(e) => e.stopPropagation()}
+            className="relative flex max-h-[70vh] w-full max-w-xl flex-col overflow-hidden rounded-2xl border border-gray-100 shadow-2xl ring-1 ring-black/5 dark:border-gray-800 dark:ring-white/5"
+            style={{ transformOrigin: '50% 0%', backgroundColor: 'rgb(var(--bg-card))' }}
+          >
           {/* 搜索输入 */}
           <div className="flex items-center gap-3 border-b border-gray-100 px-4 dark:border-gray-800">
             <svg
@@ -290,9 +331,10 @@ export function SearchPalette({ tools, locale, open, onClose }: SearchPalettePro
               {t(locale, 'searchPaletteHint', { count: tools.length })}
             </span>
           </div>
-        </div>
-      </div>
-    </>,
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>,
     document.body,
   )
 }
