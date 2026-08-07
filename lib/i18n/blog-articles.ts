@@ -210,7 +210,7 @@ export const howIBuiltToolHubArticle: LocalizedArticle = {
           {
             list: [
               '**Canonical English URLs**: The core HTML routes and SEO schema remain clean in English for high-RPM search indexing.',
-              '**Isolated Dictionary Files**: Translations for 138+ tools across 4 languages (EN, ZH, ES, DE) are split into isolated modules (`lib/i18n/tools.{locale}.ts`), mapped by tool `slug`.',
+              '**Isolated Dictionary Files**: Translations for 138+ tools are split into per-locale modules (`lib/i18n/tools.{zh,es,de}.ts`), mapped by tool `slug`, with English as the base data in `lib/tools.ts`.',
               '**Automatic Fallback & Detection**: The app auto-detects `navigator.language` on first visit. If a specific translation key is missing in German or Spanish, it gracefully falls back to English without crashing or leaving blank text.',
             ],
           },
@@ -237,7 +237,7 @@ export const howIBuiltToolHubArticle: LocalizedArticle = {
           {
             list: [
               '**Default to static.** 95% of "tools" have no business being server-rendered. `output: \'export\'` deletes an entire class of latency and ops problems.',
-              '**A Service Worker is a caching layer, not a framework.** 150 lines of vanilla JS gave me offline support + SWR across 138 pages. No `workbox`, no abstraction.',
+              '**A Service Worker is a caching layer, not a framework.** Under 200 lines of vanilla JS gave me offline support + SWR across 138 pages. No `workbox`, no abstraction.',
               '**pSEO is a data model, not a content farm.** One config file → 552+ structured-data blocks + an automatic internal-link mesh. The schema and the visible page share one source of truth, so they can never disagree.',
               '**Reserve ad space always.** Zero-CLS is not a polish task; it\'s a 1-component architectural decision that pays off in UX, CWV, and ad review.',
               '**Privacy is an architecture, not a promise.** "Your data never leaves the device" is a true statement here only because the tools literally have no backend to send it to.',
@@ -340,7 +340,7 @@ export const howIBuiltToolHubArticle: LocalizedArticle = {
           {
             list: [
               '**Canonical 英文 URL**:核心 HTML 路由和 SEO schema 保持干净的英文,服务高 RPM 的搜索索引。',
-              '**隔离的字典文件**:138+ 个工具、4 种语言(EN、ZH、ES、DE)的翻译被拆成独立模块(`lib/i18n/tools.{locale}.ts`),按工具 `slug` 映射。',
+              '**隔离的字典文件**:138+ 个工具的翻译按语言拆成独立模块(`lib/i18n/tools.{zh,es,de}.ts`),按工具 `slug` 映射,英文作为基准数据放在 `lib/tools.ts`。',
               '**自动回退与检测**:首次访问时自动检测 `navigator.language`。如果德语或西语缺某个翻译键,会优雅回退到英文,不会崩溃,也不会留下空白文本。',
             ],
           },
@@ -367,7 +367,7 @@ export const howIBuiltToolHubArticle: LocalizedArticle = {
           {
             list: [
               '**默认走静态。** 95% 的"工具"根本不该是服务端渲染的。`output: \'export\'` 直接删掉一整类延迟和运维问题。',
-              '**Service Worker 是缓存层,不是框架。** 150 行原生 JS 就给了我跨 138 页的离线 + SWR。不用 `workbox`,不做抽象。',
+              '**Service Worker 是缓存层,不是框架。** 不到 200 行原生 JS 就给了我跨 138 页的离线 + SWR。不用 `workbox`,不做抽象。',
               '**pSEO 是数据模型,不是内容农场。** 一个配置文件 → 552+ 结构化数据块 + 自动内链网。schema 和可见页共享同一事实源,所以永远对不上。',
               '**永远预留广告空间。** 零 CLS 不是打磨任务,而是一个组件级的架构决策,在 UX、CWV、广告审核三处都回报。',
               '**隐私是架构,不是承诺。** "你的数据永不离开设备"在这里是句真话,仅仅是因为这些工具压根没有可发送的后端。',
@@ -470,7 +470,7 @@ export const howIBuiltToolHubArticle: LocalizedArticle = {
           {
             list: [
               '**URLs canónicas en inglés**: las rutas HTML centrales y el schema SEO se mantienen limpios en inglés para la indexación de búsqueda de alto RPM.',
-              '**Archivos de diccionario aislados**: las traducciones de las 138+ herramientas en 4 idiomas (EN, ZH, ES, DE) se dividen en módulos aislados (`lib/i18n/tools.{locale}.ts`), mapeados por el `slug` de cada herramienta.',
+              '**Archivos de diccionario aislados**: las traducciones de las 138+ herramientas se dividen en módulos por idioma (`lib/i18n/tools.{zh,es,de}.ts`), mapeados por el `slug` de cada herramienta, con el inglés como datos base en `lib/tools.ts`.',
               '**Detección y fallback automáticos**: la app detecta `navigator.language` en la primera visita. Si falta una clave de traducción en alemán o español, recurre elegantemente al inglés sin romperse ni dejar texto en blanco.',
             ],
           },
@@ -497,7 +497,7 @@ export const howIBuiltToolHubArticle: LocalizedArticle = {
           {
             list: [
               '**Por defecto, estático.** El 95% de las "herramientas" no tienen nada que hacer renderizadas en servidor. `output: \'export\'` elimina toda una clase de problemas de latencia y ops.',
-              '**Un Service Worker es una capa de caché, no un framework.** 150 líneas de JS plano me dieron offline + SWR en 138 páginas. Sin `workbox`, sin abstracción.',
+              '**Un Service Worker es una capa de caché, no un framework.** Menos de 200 líneas de JS plano me dieron offline + SWR en 138 páginas. Sin `workbox`, sin abstracción.',
               '**pSEO es un modelo de datos, no una granja de contenido.** Un archivo de configuración → 552+ bloques estructurados + una malla de enlaces internos automática. El schema y la página visible comparten una sola fuente de verdad, así nunca pueden discrepar.',
               '**Reserva siempre el espacio de anuncios.** Cero CLS no es tarea de pulido; es una decisión arquitectónica de un componente que se paga en UX, CWV y revisión de anuncios.',
               '**La privacidad es una arquitectura, no una promesa.** "Tus datos nunca salen del dispositivo" es cierto aquí solo porque las herramientas literalmente no tienen backend al que enviarlos.',
@@ -600,7 +600,7 @@ export const howIBuiltToolHubArticle: LocalizedArticle = {
           {
             list: [
               '**Kanonische englische URLs**: Die zentralen HTML-Routen und das SEO-Schema bleiben sauber auf Englisch für die Suchindexierung mit hohem RPM.',
-              '**Isolierte Wörterbuch-Dateien**: Übersetzungen für 138+ Werkzeuge in 4 Sprachen (EN, ZH, ES, DE) sind in isolierte Module aufgeteilt (`lib/i18n/tools.{locale}.ts`), gemappt über den `slug` des Werkzeugs.',
+              '**Isolierte Wörterbuch-Dateien**: Übersetzungen für 138+ Werkzeuge sind in Module pro Sprache aufgeteilt (`lib/i18n/tools.{zh,es,de}.ts`), gemappt über den `slug` des Werkzeugs, mit Englisch als Basisdaten in `lib/tools.ts`.',
               '**Automatische Erkennung & Fallbacks**: Die App erkennt beim ersten Besuch `navigator.language`. Fehlt ein Übersetzungsschlüssel auf Deutsch oder Spanisch, fällt sie sauber auf Englisch zurück — ohne Absturz und ohne leere Texte.',
             ],
           },
@@ -627,7 +627,7 @@ export const howIBuiltToolHubArticle: LocalizedArticle = {
           {
             list: [
               '**Standardmäßig statisch.** 95% der „Werkzeuge" haben nichts als Server-Render gesucht. `output: \'export\'` löscht eine ganze Klasse von Latenz- und Ops-Problemen.',
-              '**Ein Service Worker ist eine Caching-Schicht, kein Framework.** 150 Zeilen Vanilla-JS haben mir Offline-Support + SWR über 138 Seiten gegeben. Kein `workbox`, keine Abstraktion.',
+              '**Ein Service Worker ist eine Caching-Schicht, kein Framework.** Unter 200 Zeilen Vanilla-JS haben mir Offline-Support + SWR über 138 Seiten gegeben. Kein `workbox`, keine Abstraktion.',
               '**pSEO ist ein Datenmodell, keine Content-Farm.** Eine Config-Datei → 552+ strukturierte Datenblöcke + ein automatisches Internal-Link-Mesh. Schema und sichtbare Seite teilen sich eine Source of Truth, also können sie nie uneinig sein.',
               '**Reserviere Ad-Space immer.** Zero-CLS ist keine Polier-Aufgabe; es ist eine 1-Komponenten-Architekturentscheidung, die sich in UX, CWV und Ad-Review auszahlt.',
               '**Datenschutz ist Architektur, kein Versprechen.** „Deine Daten verlassen nie das Gerät" stimmt hier nur, weil die Werkzeuge buchstäblich kein Backend haben, an das sie etwas senden könnten.',
