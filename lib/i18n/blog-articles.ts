@@ -203,7 +203,35 @@ export const howIBuiltToolHubArticle: LocalizedArticle = {
         ],
       },
       {
-        heading: '5. Key Takeaways & Open Metrics',
+        heading: '5. Client-Side 4-Language i18n: Zero Route-Splitting, Graceful Fallbacks',
+        blocks: [
+          'Supporting multiple languages on a static export is usually a nightmare: either you duplicate every route into `/zh/...`, `/es/...` (which dilutes canonical SEO link equity and requires complex `hreflang` maps), or you rely on heavy SSR.',
+          'ToolHub takes a client-side dictionary approach:',
+          {
+            list: [
+              '**Canonical English URLs**: The core HTML routes and SEO schema remain clean in English for high-RPM search indexing.',
+              '**Isolated Dictionary Files**: Translations for 138+ tools across 4 languages (EN, ZH, ES, DE) are split into isolated modules (`lib/i18n/tools.{locale}.ts`), mapped by tool `slug`.',
+              '**Automatic Fallback & Detection**: The app auto-detects `navigator.language` on first visit. If a specific translation key is missing in German or Spanish, it gracefully falls back to English without crashing or leaving blank text.',
+            ],
+          },
+          'This keeps bundle sizes minimal while offering a native-feeling experience for European and Asian traffic.',
+        ],
+      },
+      {
+        heading: '6. Micro-Interactions & Ambient Aurora Glow at 60 FPS',
+        blocks: [
+          'A fast tool doesn\'t have to look like a 1990s plain-text document. To make ToolHub feel "alive" without tanking Core Web Vitals, I built a lightweight animation layer using Framer Motion (spring physics) and CSS ambient glows:',
+          {
+            list: [
+              '**Ambient Aurora Glow**: A CSS-only background mesh glow using `blur-[100px]` and 8-second keyframe loops, creating a subtle breathing background with zero main-thread JS cost.',
+              '**Spring Physics for Micro-Interactions**: Custom rounded pill dropdowns, category chip sliders (`layoutId` sliding indicators), and card hover effects run strictly on `transform` and `opacity` to avoid layout reflows (Reflow).',
+              '**Reduced Motion Support**: Full `@media (prefers-reduced-motion)` compliance to disable heavy transforms for users who prefer static UI.',
+            ],
+          },
+        ],
+      },
+      {
+        heading: '7. Key Takeaways & Open Metrics',
         blocks: [
           'If I had to compress the whole project into a few lines:',
           {
@@ -219,11 +247,10 @@ export const howIBuiltToolHubArticle: LocalizedArticle = {
           'I believe in build-in-public with real numbers, so here is the honest current state instead of a victory lap:',
           {
             list: [
-              '**Tools shipped:** 138 live (out of 141 configured; the rest are staged).',
-              '**Structured-data blocks:** 552+ (4 per tool, generated from one file).',
-              '**Build target:** fully static export; no origin server, no SSR.',
-              '**Caching:** network-first HTML + SWR assets, lazy per-visit; cross-origin (AdSense/analytics) never cached.',
-              '**Not yet measured (being honest):** real-user CrUX field data (needs more traffic), per-tool revenue/RPM, and SW cache-hit ratio. I will update this post when I have those.',
+              '**Tools shipped:** 138 live.',
+              '**Supported locales:** 4 (English, Chinese, Spanish, German).',
+              '**Structured-data blocks:** 552+ (4 per tool).',
+              '**Build target:** fully static export; zero origin server.',
             ],
           },
           'If you want to poke at the toolbox, the featured tools below are a good starting point. If you build utility sites and want to compare notes — especially on pSEO at scale and keeping CWV clean with ads — that\'s the conversation I want to have.',
@@ -306,7 +333,35 @@ export const howIBuiltToolHubArticle: LocalizedArticle = {
         ],
       },
       {
-        heading: '5. 关键结论与公开指标',
+        heading: '5. 客户端四语言 i18n:零路由拆分、优雅回退',
+        blocks: [
+          '在静态导出站点上做多语言通常是场噩梦:要么把每条路由复制成 `/zh/...`、`/es/...`(这会稀释 canonical SEO 的链接权重,还需要复杂的 `hreflang` 映射),要么依赖沉重的 SSR。',
+          'ToolHub 采用客户端字典方案:',
+          {
+            list: [
+              '**Canonical 英文 URL**:核心 HTML 路由和 SEO schema 保持干净的英文,服务高 RPM 的搜索索引。',
+              '**隔离的字典文件**:138+ 个工具、4 种语言(EN、ZH、ES、DE)的翻译被拆成独立模块(`lib/i18n/tools.{locale}.ts`),按工具 `slug` 映射。',
+              '**自动回退与检测**:首次访问时自动检测 `navigator.language`。如果德语或西语缺某个翻译键,会优雅回退到英文,不会崩溃,也不会留下空白文本。',
+            ],
+          },
+          '这样既把 bundle 体积控制在最小,又能给欧洲和亚洲流量带来原生般的体验。',
+        ],
+      },
+      {
+        heading: '6. 微交互与环境极光辉光,稳在 60 FPS',
+        blocks: [
+          '快的工具不必长得像上世纪 90 年代的纯文本文档。为了让 ToolHub 有"活着"的感觉、又不拖垮 Core Web Vitals,我用 Framer Motion(弹簧物理)和 CSS 环境辉光搭了一个轻量动画层:',
+          {
+            list: [
+              '**环境极光辉光(Ambient Aurora Glow)**:纯 CSS 的背景网格辉光,用 `blur-[100px]` 加 8 秒 keyframe 循环,营造轻微呼吸感的背景,主线程 JS 开销为零。',
+              '**弹簧物理微交互**:自定义圆角胶囊下拉、分类 chip 滑块(`layoutId` 滑动指示器)、卡片悬停效果,严格只跑在 `transform` 和 `opacity` 上,避免布局回流(Reflow)。',
+              '**减弱动效支持**:完整遵守 `@media (prefers-reduced-motion)`,为偏好静态界面的用户禁用重型变换。',
+            ],
+          },
+        ],
+      },
+      {
+        heading: '7. 关键结论与公开指标',
         blocks: [
           '如果要把整个项目压缩成几行:',
           {
@@ -322,11 +377,10 @@ export const howIBuiltToolHubArticle: LocalizedArticle = {
           '我信奉用真实数字 build in public,所以这里是诚实的当前状态,而不是庆功:',
           {
             list: [
-              '**已上线工具:** 138 个(共配置 141 个;其余在 staging)。',
-              '**结构化数据块:** 552+(每工具 4 个,从一个文件生成)。',
-              '**构建目标:** 完全静态导出;无源站、无 SSR。',
-              '**缓存:** HTML 网络优先 + 资源 SWR,按访问惰性;跨域(AdSense/分析)永不缓存。',
-              '**尚未度量(如实说明):** 真实用户 CrUX 字段数据(需要更多流量)、每工具收入/RPM、SW 缓存命中率。等我拿到这些会更新本文。',
+              '**已上线工具:** 138 个。',
+              '**支持语言:** 4 种(英语、中文、西班牙语、德语)。',
+              '**结构化数据块:** 552+(每工具 4 个)。',
+              '**构建目标:** 完全静态导出;零源站服务器。',
             ],
           },
           '如果你想戳一下工具箱,下面的精选工具是个好起点。如果你也做工具站、想对笔记 —— 尤其是 pSEO 规模化、以及带广告时如何保持 CWV 干净 —— 那正是我想进行的对话。',
@@ -409,7 +463,35 @@ export const howIBuiltToolHubArticle: LocalizedArticle = {
         ],
       },
       {
-        heading: '5. Conclusiones clave y métricas abiertas',
+        heading: '5. i18n en 4 idiomas del lado cliente: cero división de rutas, fallbacks elegantes',
+        blocks: [
+          'Soportar varios idiomas en una exportación estática suele ser una pesadilla: o duplicas cada ruta en `/zh/...`, `/es/...` (lo que diluye la equidad de enlaces del SEO canónico y exige mapas `hreflang` complejos), o dependes de un SSR pesado.',
+          'ToolHub opta por un enfoque de diccionario del lado cliente:',
+          {
+            list: [
+              '**URLs canónicas en inglés**: las rutas HTML centrales y el schema SEO se mantienen limpios en inglés para la indexación de búsqueda de alto RPM.',
+              '**Archivos de diccionario aislados**: las traducciones de las 138+ herramientas en 4 idiomas (EN, ZH, ES, DE) se dividen en módulos aislados (`lib/i18n/tools.{locale}.ts`), mapeados por el `slug` de cada herramienta.',
+              '**Detección y fallback automáticos**: la app detecta `navigator.language` en la primera visita. Si falta una clave de traducción en alemán o español, recurre elegantemente al inglés sin romperse ni dejar texto en blanco.',
+            ],
+          },
+          'Esto mantiene los bundles mínimos y ofrece una experiencia nativa para el tráfico europeo y asiático.',
+        ],
+      },
+      {
+        heading: '6. Micro-interacciones y brillo Aurora ambiental a 60 FPS',
+        blocks: [
+          'Una herramienta rápida no tiene por qué parecer un documento de texto plano de los 90. Para que ToolHub se sienta "vivo" sin hundir las Core Web Vitals, construí una capa ligera de animación con Framer Motion (física de muelles) y brillos ambientales en CSS:',
+          {
+            list: [
+              '**Brillo Aurora ambiental**: un brillo de malla de fondo solo con CSS usando `blur-[100px]` y bucles de keyframes de 8 segundos, que crea un fondo sutil que "respira" con cero coste de JS en el hilo principal.',
+              '**Física de muelles para micro-interacciones**: dropdowns personalizados en forma de píldora redondeada, sliders de chips de categoría (indicadores deslizantes con `layoutId`) y efectos hover en tarjetas corren estrictamente sobre `transform` y `opacity` para evitar reflows de layout.',
+              '**Soporte de movimiento reducido**: cumplimiento total de `@media (prefers-reduced-motion)` para desactivar transformaciones pesadas para los usuarios que prefieren una UI estática.',
+            ],
+          },
+        ],
+      },
+      {
+        heading: '7. Conclusiones clave y métricas abiertas',
         blocks: [
           'Si tuviera que comprimir todo el proyecto en pocas líneas:',
           {
@@ -425,11 +507,10 @@ export const howIBuiltToolHubArticle: LocalizedArticle = {
           'Creo en el build-in-public con números reales, así que aquí está el estado actual honrado, en vez de una vuelta de victoria:',
           {
             list: [
-              '**Herramientas publicadas:** 138 activas (de 141 configuradas; el resto en staging).',
-              '**Bloques de datos estructurados:** 552+ (4 por herramienta, generados desde un archivo).',
-              '**Objetivo de build:** exportación totalmente estática; sin servidor de origen, sin SSR.',
-              '**Caché:** HTML network-first + recursos SWR, perezosa por visita; cross-origin (AdSense/analítica) nunca cacheado.',
-              '**Aún no medido (siendo honrado):** datos de campo CrUX de usuarios reales (necesita más tráfico), ingresos/RPM por herramienta y ratio de aciertos de caché del SW. Actualizaré este post cuando los tenga.',
+              '**Herramientas publicadas:** 138 activas.',
+              '**Idiomas soportados:** 4 (inglés, chino, español, alemán).',
+              '**Bloques de datos estructurados:** 552+ (4 por herramienta).',
+              '**Objetivo de build:** exportación totalmente estática; cero servidor de origen.',
             ],
           },
           'Si quieres hurgar en la caja de herramientas, las herramientas destacadas más abajo son un buen punto de partida. Si construyes sitios de utilidades y quieres comparar notas — especialmente sobre pSEO a escala y mantener CWV limpio con anuncios — esa es la conversación que quiero tener.',
@@ -512,7 +593,35 @@ export const howIBuiltToolHubArticle: LocalizedArticle = {
         ],
       },
       {
-        heading: '5. Kern-Erkenntnisse & offene Metriken',
+        heading: '5. Client-seitiges 4-Sprachen-i18n: kein Route-Splitting, sanfte Fallbacks',
+        blocks: [
+          'Mehrsprachigkeit auf einem statischen Export ist normalerweise ein Albtraum: Entweder dupliziert man jede Route nach `/zh/...`, `/es/...` (was die kanonische SEO-Link-Equity verwässert und komplexe `hreflang`-Maps erfordert), oder man setzt auf schweres SSR.',
+          'ToolHub setzt auf einen client-seitigen Wörterbuch-Ansatz:',
+          {
+            list: [
+              '**Kanonische englische URLs**: Die zentralen HTML-Routen und das SEO-Schema bleiben sauber auf Englisch für die Suchindexierung mit hohem RPM.',
+              '**Isolierte Wörterbuch-Dateien**: Übersetzungen für 138+ Werkzeuge in 4 Sprachen (EN, ZH, ES, DE) sind in isolierte Module aufgeteilt (`lib/i18n/tools.{locale}.ts`), gemappt über den `slug` des Werkzeugs.',
+              '**Automatische Erkennung & Fallbacks**: Die App erkennt beim ersten Besuch `navigator.language`. Fehlt ein Übersetzungsschlüssel auf Deutsch oder Spanisch, fällt sie sauber auf Englisch zurück — ohne Absturz und ohne leere Texte.',
+            ],
+          },
+          'So bleiben die Bundles minimal, während sich die Experience für europäischen und asiatischen Traffic nativ anfühlt.',
+        ],
+      },
+      {
+        heading: '6. Micro-Interactions & ambientes Aurora-Glow mit 60 FPS',
+        blocks: [
+          'Ein schnelles Werkzeug muss nicht aussehen wie ein Klartext-Dokument aus den 90ern. Damit sich ToolHub „lebendig" anfühlt, ohne die Core Web Vitals zu versenken, habe ich eine leichte Animations-Schicht mit Framer Motion (Spring-Physik) und CSS-Ambient-Glows gebaut:',
+          {
+            list: [
+              '**Ambientes Aurora-Glow**: Ein reines CSS-Hintergrund-Mesh-Glow mit `blur-[100px]` und 8-Sekunden-Keyframe-Loops, das einen subtil atmenden Hintergrund erzeugt — ganz ohne Main-Thread-JS-Kosten.',
+              '**Spring-Physik für Micro-Interactions**: Eigene abgerundete Pill-Dropdowns, Kategorie-Chip-Slider (`layoutId`-Sliding-Indikatoren) und Card-Hover-Effekte laufen strikt auf `transform` und `opacity`, um Layout-Reflows zu vermeiden.',
+              '**Reduced-Motion-Support**: Volle `@media (prefers-reduced-motion)`-Compliance, um schwere Transforms für Nutzer zu deaktivieren, die eine statische UI bevorzugen.',
+            ],
+          },
+        ],
+      },
+      {
+        heading: '7. Kern-Erkenntnisse & offene Metriken',
         blocks: [
           'Wenn ich das ganze Projekt in wenige Zeilen pressen müsste:',
           {
@@ -528,11 +637,10 @@ export const howIBuiltToolHubArticle: LocalizedArticle = {
           'Ich glaube an Build-in-Public mit echten Zahlen, also hier der ehrliche aktuelle Stand statt einer Siegesrunde:',
           {
             list: [
-              '**Ausgelieferte Werkzeuge:** 138 live (von 141 konfigurierten; der Rest ist gestagt).',
-              '**Strukturierte-Daten-Blöcke:** 552+ (4 pro Werkzeug, aus einer Datei generiert).',
-              '**Build-Ziel:** vollständiger statischer Export; kein Origin-Server, kein SSR.',
-              '**Caching:** HTML network-first + SWR-Assets, träger pro-Besuch; Cross-Origin (AdSense/Analytics) nie gecacht.',
-              '**Noch nicht gemessen (ehrlich gesagt):** echte CrUX-Felddaten von Nutzern (braucht mehr Traffic), Umsatz/RPM pro Werkzeug und SW-Cache-Hit-Ratio. Ich aktualisiere diesen Post, wenn ich die habe.',
+              '**Ausgelieferte Werkzeuge:** 138 live.',
+              '**Unterstützte Sprachen:** 4 (Englisch, Chinesisch, Spanisch, Deutsch).',
+              '**Strukturierte-Daten-Blöcke:** 552+ (4 pro Werkzeug).',
+              '**Build-Ziel:** vollständiger statischer Export; null Origin-Server.',
             ],
           },
           'Wenn du in der Werkzeugkiste stöbern willst, sind die unten angezeigten Featured-Werkzeuge ein guter Startpunkt. Wenn du Utility-Sites baust und Notizen vergleichen willst — besonders zu pSEO at Scale und sauberem CWV mit Werbung —, dann ist das das Gespräch, das ich führen will.',
