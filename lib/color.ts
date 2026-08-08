@@ -63,16 +63,20 @@ export function hslToRgb({ h, s, l }: HSL): RGB {
   return { r: Math.round(r * 255), g: Math.round(g * 255), b: Math.round(b * 255) }
 }
 
-/** 解析 rgb() 字符串 */
+/** 解析 rgb() 字符串;各通道必须 0-255,否则返回 null(避免静默产出错误颜色) */
 export function parseRgb(str: string): RGB | null {
   const m = str.match(/rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)/i)
   if (!m) return null
-  return { r: +m[1], g: +m[2], b: +m[3] }
+  const r = +m[1], g = +m[2], b = +m[3]
+  if (r > 255 || g > 255 || b > 255) return null
+  return { r, g, b }
 }
 
-/** 解析 hsl() 字符串 */
+/** 解析 hsl() 字符串;h 必须 0-360,s/l 必须 0-100,否则返回 null */
 export function parseHsl(str: string): HSL | null {
   const m = str.match(/hsla?\(\s*(\d+)\s*,\s*(\d+)%?\s*,\s*(\d+)%?/i)
   if (!m) return null
-  return { h: +m[1], s: +m[2], l: +m[3] }
+  const h = +m[1], s = +m[2], l = +m[3]
+  if (h > 360 || s > 100 || l > 100) return null
+  return { h, s, l }
 }

@@ -188,8 +188,8 @@ export const FractionCalculatorClient = makeCalculatorClient({
     const rem = num % den
     let result: string
     if (rem === 0) result = `${sign}${whole}`
-    else if (whole === 0) result = `${sign}${rem}/${den / g}`
-    else result = `${sign}${whole} ${rem}/${den / g}`
+    else if (whole === 0) result = `${sign}${rem / g}/${den / g}`
+    else result = `${sign}${whole} ${rem / g}/${den / g}`
     const decimal = ((num / den) * (sign ? -1 : 1)).toFixed(4)
     return { result, decimal }
   },
@@ -448,17 +448,19 @@ export const IncomeTaxEstimatorClient = makeCalculatorClient({
   compute: (v) => {
     const income = toNum(v.income)
     // 简化的 2024 美国联邦税档次(单身/已婚)
+    // 每档语义:[该档下限, 税率];最后一档无上限(适用于"下限"以上的全部收入)
     const brackets = v.filing === 'married'
       ? [[0, 0.10], [23200, 0.12], [94300, 0.22], [201050, 0.24], [383900, 0.32], [487450, 0.35], [731200, 0.37]]
       : [[0, 0.10], [11600, 0.12], [47150, 0.22], [100525, 0.24], [191950, 0.32], [243725, 0.35], [609350, 0.37]]
     let tax = 0
-    let prev = 0
-    for (const [threshold, rate] of brackets) {
-      if (income > threshold) {
-        tax += (threshold - prev) * (rate as number)
-        prev = threshold as number
+    for (let i = 0; i < brackets.length; i++) {
+      const low = brackets[i][0] as number
+      const rate = brackets[i][1] as number
+      const high = i + 1 < brackets.length ? (brackets[i + 1][0] as number) : Infinity
+      if (income > low) {
+        // 本档应税额 = min(income, high) - low(末档 high=Infinity)
+        tax += (Math.min(income, high) - low) * rate
       } else {
-        tax += (income - prev) * (rate as number)
         break
       }
     }

@@ -25,8 +25,17 @@ export function NumeralSystemConverterClient() {
   const [from, setFrom] = useState<Base>('10')
 
   const results = useMemo(() => {
-    const n = parseInt(value, Number(from))
-    if (isNaN(n)) return null
+    // 各进制的合法字符集(含可选负号),严格校验避免 parseInt 静默截断小数/非法尾随字符
+    const validChars: Record<Base, RegExp> = {
+      '2': /^-?[01]+$/,
+      '8': /^-?[0-7]+$/,
+      '10': /^-?\d+$/,
+      '16': /^-?[0-9a-f]+$/i,
+    }
+    const trimmed = value.trim()
+    if (!trimmed || !validChars[from].test(trimmed)) return null
+    const n = parseInt(trimmed, Number(from))
+    if (!Number.isFinite(n)) return null
     return {
       '2': n.toString(2),
       '8': n.toString(8),

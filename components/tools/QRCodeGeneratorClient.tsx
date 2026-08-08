@@ -34,13 +34,22 @@ export function QRCodeGeneratorClient() {
     return `WIFI:T:${wifi.encryption};S:${escapeWifi(wifi.ssid)};P:${escapeWifi(wifi.password)};;`
   })()
 
-  // 内容或样式变化时重新生成
+  // 内容或样式变化时重新生成(合并 dataURL + canvas 为一个 effect,避免两个异步
+  // promise reject 时对 error 字段的竞争覆盖;同时对内容长度设上限,避免超长文本
+  // 触发 QR 矩阵构建长时间阻塞主线程)
   useEffect(() => {
     if (!content) {
       setDataUrl('')
       setError('')
       return
     }
+    // M 级纠错下 QR 码容量约 2000-2900 字节;超长内容提前拒绝,避免卡顿
+    if (content.length > 2000) {
+      setDataUrl('')
+      setError('Content is too long for a QR code (max ~2000 characters). Try URL or text mode with shorter input.')
+      return
+    }
+    let cancelled = false
     const opts = {
       width: size,
       margin: 2,
@@ -49,23 +58,26 @@ export function QRCodeGeneratorClient() {
     }
     QRCode.toDataURL(content, opts)
       .then((url) => {
-        setDataUrl(url)
-        setError('')
+        if (!cancelled) {
+          setDataUrl(url)
+          setError('')
+        }
       })
-      .catch((e) => setError(String(e)))
-  }, [content, size, fgColor, bgColor])
-
-  // 同时也绘制到 canvas(用于高质量 PNG 下载)
-  useEffect(() => {
-    if (!content || !canvasRef.current) return
-    const opts = {
-      width: Math.max(size, 512), // 下载用高分辨率
-      margin: 2,
-      color: { dark: fgColor, light: bgColor },
-      errorCorrectionLevel: 'M' as const,
+      .catch((e) => {
+        if (!cancelled) setError(String(e))
+      })
+    // canvas 用更高分辨率(用于 PNG 下载)
+    if (canvasRef.current) {
+      QRCode.toCanvas(canvasRef.current, content, { ...opts, width: Math.max(size, 512) }).catch(
+        (e) => {
+          if (!cancelled) setError(String(e))
+        },
+      )
     }
-    QRCode.toCanvas(canvasRef.current, content, opts).catch((e) => setError(String(e)))
-  }, [content, fgColor, bgColor, size])
+    return () => {
+      cancelled = true
+    }
+  }, [content, size, fgColor, bgColor])
 
   const handleDownload = () => {
     if (!canvasRef.current) return

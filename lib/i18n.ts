@@ -609,7 +609,8 @@ export function t(locale: Locale, key: keyof Dict, vars?: Record<string, string 
   let str = dicts[locale]?.[key] ?? dicts.en[key] ?? String(key)
   if (vars) {
     for (const [k, v] of Object.entries(vars)) {
-      str = str.replace(`{${k}}`, String(v))
+      // 用 replaceAll 全量替换,支持同一变量在模板里多次出现(否则只替第一个)
+      str = str.replaceAll(`{${k}}`, String(v))
     }
   }
   return str

@@ -1,5 +1,6 @@
 'use client'
 
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { useApp } from './providers/AppProviders'
 import { t, tc, getToolName } from '@/lib/i18n'
@@ -7,7 +8,10 @@ import { SITE_NAME } from '@/lib/seo'
 import { getPublishedTools } from '@/lib/tools'
 
 export function Footer() {
-  const year = new Date().getFullYear()
+  // hydration 安全:首帧用 null(SSR 与 CSR 首帧一致,渲染时不显示年份),
+  // 挂载后再读真实年份,避免 SSR(构建时年份)≠ CSR(运行时年份)的 mismatch。
+  const [year, setYear] = useState<number | null>(null)
+  useEffect(() => setYear(new Date().getFullYear()), [])
   const { locale } = useApp()
   const tools = getPublishedTools()
 
@@ -83,7 +87,7 @@ export function Footer() {
         </div>
 
         <div className="mt-6 border-t pt-6 text-sm" style={{ borderColor: 'rgb(var(--border))', color: 'rgb(var(--text-faint))' }}>
-          © {year} {SITE_NAME}. {tools.length} {t(locale, 'footerRights')}
+          © {year ?? ''} {SITE_NAME}. {tools.length} {t(locale, 'footerRights')}
         </div>
       </div>
     </footer>

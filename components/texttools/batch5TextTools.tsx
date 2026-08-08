@@ -85,7 +85,7 @@ export const SlugToTitleClient = makeTextTool({
   note: '🔤 Reverses URL slugs back to readable titles. Replaces hyphens with spaces and capitalizes words.',
 })
 
-// ── 二进制 ↔ 文本 ──
+// ── 二进制 ↔ 文本(UTF-8 字节,支持中文/emoji,两工具互逆)──
 export const BinaryToTextClient = makeTextTool({
   inputLabel: 'Binary (space-separated bytes)',
   outputLabel: 'Decoded text',
@@ -94,20 +94,25 @@ export const BinaryToTextClient = makeTextTool({
     const bytes = s.trim().split(/\s+/).filter(Boolean)
     try {
       const codes = bytes.map((b) => parseInt(b, 2))
-      if (codes.some((c) => isNaN(c) || c < 0 || c > 255)) return '⚠️ Invalid binary'
-      return String.fromCharCode(...codes)
+      // 每组必须是 8 位以内的合法字节(0-255)
+      if (codes.some((c) => isNaN(c) || c < 0 || c > 255)) return '⚠️ Invalid binary (use 8-bit groups)'
+      // 用 TextDecoder 按 UTF-8 解码,与 TextToBinary 的 UTF-8 编码互逆
+      return new TextDecoder('utf-8').decode(new Uint8Array(codes))
     } catch {
       return '⚠️ Could not decode'
     }
   },
-  note: '💾 Each group of 8 bits (1s and 0s) represents one ASCII character.',
+  note: '💾 Each group of 8 bits is one UTF-8 byte. Supports Unicode (Chinese, emoji).',
 })
 
 export const TextToBinaryClient = makeTextTool({
   inputLabel: 'Text',
   outputLabel: 'Binary',
   defaultInput: 'Hi',
-  transform: (s) =>
-    [...s].map((c) => c.charCodeAt(0).toString(2).padStart(8, '0')).join(' '),
-  note: '💾 Converts each character to its 8-bit binary representation (ASCII/UTF-8).',
+  transform: (s) => {
+    // 按 UTF-8 字节编码(而非 UTF-16 码元),与 BinaryToText 互逆,支持中文/emoji
+    const bytes = new TextEncoder().encode(s)
+    return [...bytes].map((b) => b.toString(2).padStart(8, '0')).join(' ')
+  },
+  note: '💾 Converts text to UTF-8 binary — each character becomes one or more 8-bit bytes.',
 })

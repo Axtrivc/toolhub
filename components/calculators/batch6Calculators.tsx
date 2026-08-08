@@ -144,7 +144,7 @@ export const RentVsBuyCalculatorClient = makeCalculatorClient({
   ],
   outputs: [
     { key: 'buyTotal', label: 'Total cost to buy', sublabel: 'Mortgage + interest' },
-    { key: 'rentTotal', label: 'Total cost to rent', sublabel: `${'years'} years` },
+    { key: 'rentTotal', label: 'Total cost to rent', sublabel: 'Rent over the holding period' },
     { key: 'winner', label: 'Cheaper option', highlight: true },
   ],
   compute: (v) => {

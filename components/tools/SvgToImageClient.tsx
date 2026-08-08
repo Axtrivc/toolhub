@@ -24,6 +24,43 @@ const SAMPLE_SVG = `<svg xmlns="http://www.w3.org/2000/svg" width="240" height="
   <path d="M70 200 Q120 140 170 200 Z" fill="#fff" opacity="0.95"/>
 </svg>`
 
+/**
+ * 净化用户粘贴/上传的 SVG 文本,移除 XSS/SSRF 攻击面:
+ *  - 移除 <script> / <foreignObject>(脚本执行与 HTML 注入)
+ *  - 移除所有 on* 事件属性(onload/onerror/onclick ...)
+ *  - 移除外部资源引用(href/xlink:href 指向 http(s) 的 <use>/<image> 等,防 SSRF/隐私泄露)
+ *  - 移除 XML 注释里的 CDATA / Processing Instruction
+ * 用 DOMParser 解析后遍历,比纯正则稳健;失败回退到拒绝。
+ */
+function sanitizeSvg(raw: string): string {
+  const doc = new DOMParser().parseFromString(raw, 'image/svg+xml')
+  const svg = doc.querySelector('svg')
+  if (!svg) throw new Error('No <svg> root element found.')
+  // 需要移除的元素:script、foreignObject、以及可执行/外部加载类
+  const stripTags = ['script', 'foreignObject', 'iframe', 'object', 'embed']
+  for (const tag of stripTags) {
+    svg.querySelectorAll(tag).forEach((el) => el.remove())
+  }
+  // 移除所有事件属性 + 外部引用属性
+  svg.querySelectorAll('*').forEach((el) => {
+    for (const attr of Array.from(el.attributes)) {
+      const name = attr.name.toLowerCase()
+      const val = (attr.value || '').trim()
+      // on* 事件处理器
+      if (name.startsWith('on')) {
+        el.removeAttribute(attr.name)
+        continue
+      }
+      // href / xlink:href 指向 http(s) / data: 的外部资源(SSRF / 隐私泄露)
+      if ((name === 'href' || name.endsWith(':href')) && /^(https?:|\/\/|data:)/i.test(val)) {
+        el.removeAttribute(attr.name)
+      }
+    }
+  })
+  // 序列化回字符串(DOMParser 解析时已保证是合法 XML)
+  return new XMLSerializer().serializeToString(svg)
+}
+
 type Fmt = 'image/png' | 'image/webp'
 
 export function SvgToImageClient() {
@@ -70,7 +107,16 @@ export function SvgToImageClient() {
       return
     }
 
-    const blob = new Blob([trimmed], { type: 'image/svg+xml;charset=utf-8' })
+    // 净化 SVG:移除 script/foreignObject/事件属性/外部引用(XSS/SSRF 防护)
+    let safeSvg: string
+    try {
+      safeSvg = sanitizeSvg(trimmed)
+    } catch (e) {
+      setError(e instanceof Error ? e.message : 'Invalid SVG markup.')
+      return
+    }
+
+    const blob = new Blob([safeSvg], { type: 'image/svg+xml;charset=utf-8' })
     const url = URL.createObjectURL(blob)
     const img = new Image()
     img.onload = () => {

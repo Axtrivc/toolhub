@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useMemo, useCallback } from 'react'
+import { useState, useMemo, useCallback, useEffect } from 'react'
 import { CopyButton } from '@/components/CopyButton'
 import { LoadSampleButton } from '@/components/LoadSampleButton'
 
@@ -109,10 +109,26 @@ const CHEAT_SHEET: { syntax: string; desc: string }[] = [
 const inputCls =
   'w-full rounded-lg border p-4 font-mono text-xs shadow-sm outline-none transition focus:ring-2'
 
+// 防止 ReDoS / 性能问题的输入上限
+const MAX_TEXT_LEN = 50000 // 测试文本长度上限(~50KB),超过截断,避免超长输入放大回溯
+
 export function RegexTesterClient() {
   const [pattern, setPattern] = useState('')
   const [flags, setFlags] = useState('g')
   const [text, setText] = useState('')
+
+  // 防抖:用户每按键都重新编译+全文扫描,对病态正则会反复触发回溯,
+  // 且大文本全量扫描造成卡顿。加 200ms 防抖,只在输入停顿后执行一次。
+  const [debouncedPattern, setDebouncedPattern] = useState('')
+  const [debouncedText, setDebouncedText] = useState('')
+  useEffect(() => {
+    const id = setTimeout(() => setDebouncedPattern(pattern), 200)
+    return () => clearTimeout(id)
+  }, [pattern])
+  useEffect(() => {
+    const id = setTimeout(() => setDebouncedText(text), 200)
+    return () => clearTimeout(id)
+  }, [text])
 
   const handleLoadSample = useCallback(() => {
     setPattern('Order #(\\d+).*?\\$(\\d+[\\d.]*)')
@@ -120,17 +136,21 @@ export function RegexTesterClient() {
     setText(SAMPLE)
   }, [])
 
-  const compiled = useMemo(() => safeCompile(pattern, flags), [pattern, flags])
+  // 实际参与编译/匹配的文本:截断到上限,防超长输入放大 ReDoS 回溯
+  const safeText = debouncedText.length > MAX_TEXT_LEN ? debouncedText.slice(0, MAX_TEXT_LEN) : debouncedText
+  const textTruncated = debouncedText.length > MAX_TEXT_LEN
+
+  const compiled = useMemo(() => safeCompile(debouncedPattern, flags), [debouncedPattern, flags])
 
   const segments = useMemo<HighlightSegment[]>(() => {
-    if (!compiled.re || !text) return []
-    return buildSegments(text, compiled.re)
-  }, [compiled, text])
+    if (!compiled.re || !safeText) return []
+    return buildSegments(safeText, compiled.re)
+  }, [compiled, safeText])
 
   const matches = useMemo<MatchDetail[]>(() => {
-    if (!compiled.re || !text) return []
-    return collectMatches(text, compiled.re)
-  }, [compiled, text])
+    if (!compiled.re || !safeText) return []
+    return collectMatches(safeText, compiled.re)
+  }, [compiled, safeText])
 
   return (
     <div className="space-y-5">
@@ -181,6 +201,13 @@ export function RegexTesterClient() {
       {compiled.error && (
         <div className="rounded-lg border border-red-200 bg-red-50 p-4 text-sm text-red-700">
           ⚠️ {compiled.error}
+        </div>
+      )}
+
+      {/* 文本超长截断提示(防 ReDoS / 性能退化) */}
+      {textTruncated && (
+        <div className="rounded-lg border border-amber-200 bg-amber-50 p-3 text-xs text-amber-700 dark:bg-amber-950/40 dark:text-amber-300">
+          ⚠️ Text exceeds {MAX_TEXT_LEN.toLocaleString()} characters — truncated for matching to protect against slow/ReDoS patterns.
         </div>
       )}
 

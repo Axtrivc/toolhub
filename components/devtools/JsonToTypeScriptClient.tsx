@@ -101,19 +101,15 @@ function generateInterfaces(jsonStr: string): string {
   }
 
   if (Array.isArray(parsed)) {
-    // 数组根:Root 是某类型的数组
-    const elemType = parsed.length
-      ? inferType(parsed[0], rootName + 'Item', interfaces, reg)
-      : 'unknown'
-    // 合并所有元素类型(去重)
-    if (parsed.length > 1) {
-      const all = parsed.map((el) => inferType(el, rootName + 'Item', interfaces, reg))
-      const unique = Array.from(new Set(all))
-      const elem = unique.length === 1 ? unique[0] : `(${unique.join(' | ')})`
-      interfaces.unshift(`type Root = ${elem}[];`)
-    } else {
-      interfaces.unshift(`type Root = ${elemType}[];`)
+    // 数组根:Root 是某类型的数组。对所有元素统一推导并合并去重,
+    // 不再对首元素单独推导(否则会重复生成同名 interface → TS Duplicate identifier)。
+    if (parsed.length === 0) {
+      return 'type Root = unknown[];'
     }
+    const all = parsed.map((el) => inferType(el, rootName + 'Item', interfaces, reg))
+    const unique = Array.from(new Set(all))
+    const elem = unique.length === 1 ? unique[0] : `(${unique.join(' | ')})`
+    interfaces.unshift(`type Root = ${elem}[];`)
     return interfaces.join('\n\n')
   }
 

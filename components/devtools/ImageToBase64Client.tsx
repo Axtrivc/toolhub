@@ -35,10 +35,18 @@ export function ImageToBase64Client() {
   const [error, setError] = useState('')
   const [dragging, setDragging] = useState(false)
 
+  // 文件大小上限:readAsDataURL 会把整文件 base64 化(膨胀 ~33%)常驻内存,
+  // 超大文件会冻结标签页甚至触发浏览器 OOM。20MB 覆盖绝大多数正常图片。
+  const MAX_BYTES = 20 * 1024 * 1024
+
   const handleFile = useCallback((file: File) => {
     setError('')
     if (!file.type.startsWith('image/')) {
       setError('Please upload an image file (PNG, JPG, GIF, WebP, or SVG).')
+      return
+    }
+    if (file.size > MAX_BYTES) {
+      setError(`File is too large (${formatBytes(file.size)}). Maximum size is 20 MB.`)
       return
     }
     const reader = new FileReader()
