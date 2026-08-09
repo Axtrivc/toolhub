@@ -2,6 +2,7 @@
 
 import { getRelatedTools } from '@/lib/tools'
 import { getToolIcon } from '@/lib/tools'
+import { SmartIcon } from '@/components/SmartIcon'
 import type { ToolMeta } from '@/lib/tools'
 import { useApp } from './providers/AppProviders'
 import { t, tc, getToolName, getToolShortIntro } from '@/lib/i18n'
@@ -25,7 +26,7 @@ interface RelatedToolsProps {
  * 匹配逻辑(见 lib/tools.ts#getRelatedTools):
  *  ① 同分类优先(featured 置顶),不足 4 个时用全站热门工具补齐。
  *
- * 卡片视觉与首页 ToolCard(HomePageClient)严格一致:
+ * 卡片视觉与首页 ToolCard(WorkspaceToolGrid)严格一致:
  *  - Clean Outlined Dark Theme(solid bg + crisp border)
  *  - 微边框 + Hover 提亮(hover:-translate-y-0.5 + 蓝色发光阴影)
  *  - 响应式 4 列网格:1 / 2 / 4
@@ -71,10 +72,10 @@ export function RelatedTools({ slug, limit = 4 }: RelatedToolsProps) {
               <div className="flex items-start justify-between">
                 {/* 工具图标(与首页 ToolCard 同款);Hover 弹簧缩放 1.08 */}
                 <span
-                  className="flex h-11 w-11 items-center justify-center rounded-lg bg-slate-100 p-2 text-2xl transition-transform duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:scale-[1.08] dark:border dark:border-blue-800/40 dark:bg-blue-950/30"
+                  className="flex h-11 w-11 items-center justify-center rounded-lg bg-slate-100 p-2 text-slate-600 transition-transform duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:scale-[1.08] dark:border dark:border-blue-800/40 dark:bg-blue-950/30"
                   aria-hidden="true"
                 >
-                  {getToolIcon(tool)}
+                  <SmartIcon icon={getToolIcon(tool)} className="h-5 w-5" />
                 </span>
                 {/* 右上角分类标签 —— 小巧精致内嵌胶囊,与首页 ToolCard Badge 统一 */}
                 <span className="inline-flex items-center rounded-full bg-slate-100 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-slate-500 dark:bg-slate-800 dark:text-slate-400">

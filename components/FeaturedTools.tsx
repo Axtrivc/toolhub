@@ -1,7 +1,9 @@
 'use client'
 
 import type { ToolMeta } from '@/lib/tools'
+import { Flame } from 'lucide-react'
 import { getToolIcon } from '@/lib/tools'
+import { SmartIcon } from '@/components/SmartIcon'
 import { useApp } from './providers/AppProviders'
 import { t, getToolName, getToolShortIntro } from '@/lib/i18n'
 import { AnimatedToolCard, StaggerGroup } from './motion/MotionPrimitives'
@@ -25,9 +27,9 @@ const NEW_TOOL_SLUGS = new Set<string>([
  * 首页置顶热门工具模块("🔥 Popular Tools")。
  *
  * - 渲染 4 列响应式网格(移动 1 → 平板 2 → 桌面 4)。
- * - 卡片结构与 HomePageClient 的通用 ToolCard 一致,但加微弱蓝色高亮边框 +
+ * - 卡片结构与 WorkspaceToolGrid 的通用 ToolCard 一致,但加微弱蓝色高亮边框 +
  *   渐变背景;右上角附微型 Pill Badge(POPULAR / NEW),低饱和度,不喧宾夺主。
- * - 可见性由父组件 HomePageClient 控制(无搜索词 + All 分类时才展示)。
+ * - 可见性由父组件 WorkspaceToolGrid 控制(无搜索词 + All Tab 时才展示)。
  */
 export function FeaturedTools({ tools }: FeaturedToolsProps) {
   const { locale } = useApp()
@@ -36,9 +38,9 @@ export function FeaturedTools({ tools }: FeaturedToolsProps) {
 
   return (
     <section aria-label="Featured tools" className="w-full">
-      {/* 标题:🔥 + 文案,字号 text-xl font-bold */}
+      {/* 标题:Flame SVG + 文案,字号 text-xl font-bold */}
       <h2 className="mb-5 flex items-center gap-2 text-xl font-bold" style={{ color: 'rgb(var(--text))' }}>
-        <span aria-hidden="true">🔥</span>
+        <Flame className="h-5 w-5 text-amber-500" aria-hidden="true" />
         {t(locale, 'featuredTitle')}
       </h2>
 
@@ -74,10 +76,10 @@ export function FeaturedTools({ tools }: FeaturedToolsProps) {
               {/* 图标容器:Clean Outlined —— 微蓝底气泡 + 蓝色细边框;
                   Hover 弹簧缩放 1.08(overshoot 贝塞尔回弹) */}
               <span
-                className="flex h-11 w-11 items-center justify-center rounded-lg bg-slate-100 p-2 text-2xl transition-transform duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:scale-[1.08] dark:border dark:border-blue-800/40 dark:bg-blue-950/30"
+                className="flex h-11 w-11 items-center justify-center rounded-lg bg-slate-100 p-2 text-slate-600 transition-transform duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:scale-[1.08] dark:border dark:border-blue-800/40 dark:bg-blue-950/30"
                 aria-hidden="true"
               >
-                {getToolIcon(tool)}
+                <SmartIcon icon={getToolIcon(tool)} className="h-5 w-5" />
               </span>
 
               {/* 标题 + 描述:flex-col + flex-1 保证所有卡片高度一致 */}

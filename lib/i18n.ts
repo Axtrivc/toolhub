@@ -115,6 +115,41 @@ export interface Dict {
   // 首页"最近使用 / 我的收藏"动态区块
   recentTitle: string
   recentSubtitle: string
+  // 首页 Workspace 仪表盘(Hero 状态行 / 价值徽章)
+  workspaceEyebrow: string // "Workspace / Developer & Creator Toolhub" 眉头等宽行
+  workspaceStatus: string // 状态指示 "● 100% LOCAL COMPUTE ENGINE · ZERO DATA LOGS"
+  workspaceBadgeEngines: string // "{count}+ Utility Engines"
+  workspaceBadgeInstant: string // "Instant Local Compute"
+  workspaceBadgeZeroLogs: string // "Zero Server Storage"
+  // 首页 Quick Access 面板(Pinned + Recent)
+  workspaceQuickAccess: string // 面板标题 "Quick Access"
+  workspacePinnedTitle: string // "Pinned Tools"
+  workspacePinnedEmpty: string // 空态引导文案
+  workspaceRecentTitle: string // "Recent"
+  workspacePin: string // 图钉 aria:"Pin to workspace"
+  workspaceUnpin: string // "Unpin"
+  // 首页 Scratchpad 随手记
+  scratchpadTitle: string
+  scratchpadSubtitle: string
+  scratchpadPlaceholder: string
+  scratchpadClear: string
+  scratchpadStats: string // "{words} words · {chars} chars"
+  scratchpadSaved: string // 自动保存指示 "Saved"
+  // Scratchpad 快捷工具栏
+  scratchpadFormatJson: string // "Format JSON"
+  scratchpadB64Enc: string // "Base64 Enc"
+  scratchpadB64Dec: string // "Base64 Dec"
+  scratchpadUpper: string // "UPPER"
+  scratchpadLower: string // "lower"
+  scratchpadTrim: string // "Trim"
+  scratchpadErrorJson: string // 非法 JSON 错误提示
+  scratchpadErrorBase64: string // 非法 Base64 错误提示
+  // 首页 Workspace 分类 Tabs(固定 6 个;All 复用 categoryAll)
+  workspaceTabDeveloper: string
+  workspaceTabDesign: string
+  workspaceTabText: string
+  workspaceTabConverters: string
+  workspaceTabUtilities: string
   // 广告位占位标识
   adLabel: string
   // 主题切换 aria
@@ -211,6 +246,37 @@ const en: Dict = {
   relatedSubtitle: 'More tools you might find useful',
   recentTitle: 'Recently Used & Favorites',
   recentSubtitle: 'Pick up right where you left off',
+  // Workspace 仪表盘
+  workspaceEyebrow: 'Workspace / Developer & Creator Toolhub',
+  workspaceStatus: '100% LOCAL COMPUTE ENGINE · ZERO DATA LOGS',
+  workspaceBadgeEngines: '{count}+ Utility Engines',
+  workspaceBadgeInstant: 'Instant Local Compute',
+  workspaceBadgeZeroLogs: 'Zero Server Storage',
+  workspaceQuickAccess: 'Quick Access',
+  workspacePinnedTitle: 'Pinned Tools',
+  workspacePinnedEmpty: 'Nothing pinned yet — hit the pin on any tool card to dock it here.',
+  workspaceRecentTitle: 'Recent Tools',
+  workspacePin: 'Pin to workspace',
+  workspaceUnpin: 'Unpin',
+  scratchpadTitle: 'Scratchpad & Quick Utility',
+  scratchpadSubtitle: 'Auto-saves to your browser — nothing is uploaded.',
+  scratchpadPlaceholder: 'Paste JSON, Base64, tokens, or temporary notes here for quick transform...',
+  scratchpadClear: 'Clear',
+  scratchpadStats: '{words} words · {chars} chars',
+  scratchpadSaved: 'Saved',
+  scratchpadFormatJson: 'Format JSON',
+  scratchpadB64Enc: 'Base64 Enc',
+  scratchpadB64Dec: 'Base64 Dec',
+  scratchpadUpper: 'UPPER',
+  scratchpadLower: 'lower',
+  scratchpadTrim: 'Trim',
+  scratchpadErrorJson: 'invalid JSON',
+  scratchpadErrorBase64: 'invalid Base64',
+  workspaceTabDeveloper: 'Developer',
+  workspaceTabDesign: 'Design & Color',
+  workspaceTabText: 'Text & Writing',
+  workspaceTabConverters: 'Converters',
+  workspaceTabUtilities: 'Utilities',
   adLabel: 'Advertisement',
   themeToggle: 'Toggle theme',
   themeLight: 'Light',
@@ -304,6 +370,37 @@ const zh: Dict = {
   relatedSubtitle: '你可能还会用到的工具',
   recentTitle: '最近使用与收藏',
   recentSubtitle: '从上次离开的地方继续',
+  // Workspace 仪表盘
+  workspaceEyebrow: '工作台 / 开发者与创作者工具中心',
+  workspaceStatus: '100% 本地计算引擎 · 零数据日志',
+  workspaceBadgeEngines: '{count}+ 个实用引擎',
+  workspaceBadgeInstant: '即时本地计算',
+  workspaceBadgeZeroLogs: '零服务器存储',
+  workspaceQuickAccess: '快速访问',
+  workspacePinnedTitle: '已固定工具',
+  workspacePinnedEmpty: '还没有固定工具 —— 点击任意工具卡片上的图钉,把它固定到这里。',
+  workspaceRecentTitle: '最近使用',
+  workspacePin: '固定到工作台',
+  workspaceUnpin: '取消固定',
+  scratchpadTitle: '随手记与快捷工具',
+  scratchpadSubtitle: '自动保存到浏览器 —— 内容不会上传。',
+  scratchpadPlaceholder: '粘贴 JSON、Base64、令牌或临时笔记,就地快速变换…',
+  scratchpadClear: '清空',
+  scratchpadStats: '{words} 词 · {chars} 字符',
+  scratchpadSaved: '已保存',
+  scratchpadFormatJson: '格式化 JSON',
+  scratchpadB64Enc: 'Base64 编码',
+  scratchpadB64Dec: 'Base64 解码',
+  scratchpadUpper: '大写',
+  scratchpadLower: '小写',
+  scratchpadTrim: '清理空白',
+  scratchpadErrorJson: 'JSON 无效',
+  scratchpadErrorBase64: 'Base64 无效',
+  workspaceTabDeveloper: '开发',
+  workspaceTabDesign: '设计与颜色',
+  workspaceTabText: '文本与写作',
+  workspaceTabConverters: '转换器',
+  workspaceTabUtilities: '实用工具',
   adLabel: '广告',
   themeToggle: '切换主题',
   themeLight: '浅色',
@@ -397,6 +494,37 @@ const es: Dict = {
   relatedSubtitle: 'Más herramientas que podrían ser útiles',
   recentTitle: 'Usadas recientemente y favoritos',
   recentSubtitle: 'Continúa justo donde lo dejaste',
+  // Workspace 仪表盘
+  workspaceEyebrow: 'Workspace / Centro de herramientas para desarrolladores y creadores',
+  workspaceStatus: 'MOTOR DE CÓMPUTO 100% LOCAL · CERO REGISTROS DE DATOS',
+  workspaceBadgeEngines: '{count}+ motores de utilidad',
+  workspaceBadgeInstant: 'Cómputo local instantáneo',
+  workspaceBadgeZeroLogs: 'Cero almacenamiento en servidor',
+  workspaceQuickAccess: 'Acceso rápido',
+  workspacePinnedTitle: 'Herramientas fijadas',
+  workspacePinnedEmpty: 'Nada fijado aún — toca el pin en cualquier tarjeta para anclarla aquí.',
+  workspaceRecentTitle: 'Herramientas recientes',
+  workspacePin: 'Fijar al workspace',
+  workspaceUnpin: 'Quitar fijación',
+  scratchpadTitle: 'Bloc y utilidades rápidas',
+  scratchpadSubtitle: 'Se guarda automáticamente en tu navegador — nada se sube.',
+  scratchpadPlaceholder: 'Pega JSON, Base64, tokens o notas temporales para transformarlas al instante…',
+  scratchpadClear: 'Limpiar',
+  scratchpadStats: '{words} palabras · {chars} caracteres',
+  scratchpadSaved: 'Guardado',
+  scratchpadFormatJson: 'Formatear JSON',
+  scratchpadB64Enc: 'Base64 Cod',
+  scratchpadB64Dec: 'Base64 Dec',
+  scratchpadUpper: 'MAYÚS',
+  scratchpadLower: 'minús',
+  scratchpadTrim: 'Recortar',
+  scratchpadErrorJson: 'JSON no válido',
+  scratchpadErrorBase64: 'Base64 no válido',
+  workspaceTabDeveloper: 'Desarrollo',
+  workspaceTabDesign: 'Diseño y color',
+  workspaceTabText: 'Texto y escritura',
+  workspaceTabConverters: 'Conversores',
+  workspaceTabUtilities: 'Utilidades',
   adLabel: 'Publicidad',
   themeToggle: 'Cambiar tema',
   themeLight: 'Claro',
@@ -490,6 +618,37 @@ const de: Dict = {
   relatedSubtitle: 'Weitere Werkzeuge, die nützlich sein könnten',
   recentTitle: 'Zuletzt genutzt & Favoriten',
   recentSubtitle: 'Mach genau da weiter, wo du aufgehört hast',
+  // Workspace 仪表盘
+  workspaceEyebrow: 'Workspace / Toolhub für Entwickler & Creator',
+  workspaceStatus: '100% LOKALE COMPUTE-ENGINE · KEINE DATENPROTOKOLLE',
+  workspaceBadgeEngines: '{count}+ Utility-Engines',
+  workspaceBadgeInstant: 'Sofortige lokale Berechnung',
+  workspaceBadgeZeroLogs: 'Keine Server-Speicherung',
+  workspaceQuickAccess: 'Schnellzugriff',
+  workspacePinnedTitle: 'Angepinnte Tools',
+  workspacePinnedEmpty: 'Noch nichts angepinnt — tippe auf die Pinnadel einer Tool-Karte, um sie hier abzulegen.',
+  workspaceRecentTitle: 'Zuletzt genutzt',
+  workspacePin: 'An Workspace pinnen',
+  workspaceUnpin: 'Pin entfernen',
+  scratchpadTitle: 'Notizblock & Quick-Tools',
+  scratchpadSubtitle: 'Speichert automatisch im Browser — nichts wird hochgeladen.',
+  scratchpadPlaceholder: 'JSON, Base64, Tokens oder Notizen hier einfügen und direkt umwandeln…',
+  scratchpadClear: 'Leeren',
+  scratchpadStats: '{words} Wörter · {chars} Zeichen',
+  scratchpadSaved: 'Gespeichert',
+  scratchpadFormatJson: 'JSON formatieren',
+  scratchpadB64Enc: 'Base64 Enc',
+  scratchpadB64Dec: 'Base64 Dec',
+  scratchpadUpper: 'GROSS',
+  scratchpadLower: 'klein',
+  scratchpadTrim: 'Trimmen',
+  scratchpadErrorJson: 'ungültiges JSON',
+  scratchpadErrorBase64: 'ungültiges Base64',
+  workspaceTabDeveloper: 'Developer',
+  workspaceTabDesign: 'Design & Farbe',
+  workspaceTabText: 'Text & Schreiben',
+  workspaceTabConverters: 'Konverter',
+  workspaceTabUtilities: 'Werkzeuge',
   adLabel: 'Werbung',
   themeToggle: 'Theme wechseln',
   themeLight: 'Hell',

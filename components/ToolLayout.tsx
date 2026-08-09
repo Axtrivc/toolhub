@@ -16,6 +16,7 @@ import { useApp } from './providers/AppProviders'
 import { t } from '@/lib/i18n'
 import { buildFaqJsonLd, buildBreadcrumbJsonLd, buildHowToJsonLd } from '@/lib/seo'
 import { getToolIcon, type ToolMeta } from '@/lib/tools'
+import { SmartIcon } from '@/components/SmartIcon'
 
 interface ToolLayoutProps {
   tool: ToolMeta
@@ -101,9 +102,9 @@ export function ToolLayout({ tool, children }: ToolLayoutProps) {
               主色淡底 + 细描边的圆角容器,给标题区一个视觉锚点 */}
           <span
             aria-hidden="true"
-            className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-primary/20 bg-primary/5 text-2xl"
+            className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-primary/20 bg-primary/5 text-primary"
           >
-            {getToolIcon(tool)}
+            <SmartIcon icon={getToolIcon(tool)} className="h-6 w-6" />
           </span>
           <div className="min-w-0">
             <h1 className="text-3xl font-bold sm:text-4xl" style={{ color: 'rgb(var(--text))' }}>

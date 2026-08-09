@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { getToolsByCategory, getPublishedTools, getToolIcon } from '@/lib/tools'
+import { SmartIcon } from '@/components/SmartIcon'
 import { SITE_NAME } from '@/lib/seo'
 import { buildItemListJsonLd } from '@/lib/seo'
 
@@ -98,11 +99,11 @@ export default function ToolsHubPage() {
                   {/* 工具图标:全站统一的 getToolIcon(slug 优先 / category 兜底),
                       不再使用默认播放按钮 ▶ 图标。 */}
                   <span
-                    className="flex h-11 w-11 items-center justify-center rounded-xl text-2xl transition-transform group-hover:scale-110"
+                    className="flex h-11 w-11 items-center justify-center rounded-xl transition-transform group-hover:scale-110"
                     style={{ backgroundColor: 'rgb(var(--bg-subtle))' }}
                     aria-hidden="true"
                   >
-                    {getToolIcon(tool)}
+                    <SmartIcon icon={getToolIcon(tool)} className="h-5 w-5" />
                   </span>
                   {/* 右上角显示分类(替代原 PRO/FREE 徽章 —— 工具全免费,
                       PRO 字样会误导用户)。 */}

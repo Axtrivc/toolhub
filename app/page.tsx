@@ -1,10 +1,11 @@
 'use client'
 
 import Link from 'next/link'
+import dynamic from 'next/dynamic'
+import { Boxes, ShieldCheck, Terminal, Zap } from 'lucide-react'
 import { getPublishedTools } from '@/lib/tools'
 import { AdSlot } from '@/components/AdSlot'
-import { HomePageClient } from '@/components/HomePageClient'
-import { HomeRecents } from '@/components/HomeRecents'
+import { WorkspaceToolGrid } from '@/components/workspace/WorkspaceToolGrid'
 import {
   HeroGlow,
   motion,
@@ -15,6 +16,24 @@ import {
 import { useApp } from '@/components/providers/AppProviders'
 import { t, tc, getToolName, getToolShortIntro } from '@/lib/i18n'
 
+// ─── 个性化工作台组件(零 SEO 价值、纯本地数据)→ 动态加载,首屏 bundle 最小化 ───
+// ssr:false:内容来自 localStorage,静态导出的 HTML 无需占位;
+// 挂载前返回 null,布局由后续区块自然承接。
+const WorkspaceDashboard = dynamic(
+  () => import('@/components/workspace/WorkspaceDashboard').then((m) => m.WorkspaceDashboard),
+  { ssr: false },
+)
+
+/**
+ * 首页 —— 个人极客工作台(Linear / Raycast 风格仪表盘)
+ *
+ * 分区(自上而下):
+ *  ① Workspace Header & Hero:眉头等宽行 + 状态指示 + H1(SEO 文案不变)+ 价值徽章;
+ *  ② Quick Access 面板:Pinned Tools + Recent(localStorage,dynamic 加载);
+ *  ③ Scratchpad 随手记:自动保存的临时文本/代码暂存(dynamic 加载);
+ *  ④ Workspace Tabs 工具矩阵:6 分类 Tab + 网格形变;
+ *  ⑤ 中部广告位 + 底部 SEO 文案区(★ 绝对保留,一字未动)。
+ */
 export default function HomePage() {
   const tools = getPublishedTools()
   const { locale } = useApp()
@@ -44,203 +63,204 @@ export default function HomePage() {
   ]
   const toolsBySlug = new Map(tools.map((tool) => [tool.slug, tool]))
 
+  // 价值徽章组(Linear 式 mono 微标签):引擎数 / 即时本地计算 / 零服务器存储
+  const valueBadges = [
+    { icon: Boxes, text: t(locale, 'workspaceBadgeEngines', { count: String(roundedCount) }) },
+    { icon: Zap, text: t(locale, 'workspaceBadgeInstant') },
+    { icon: ShieldCheck, text: t(locale, 'workspaceBadgeZeroLogs') },
+  ]
+
   return (
-    <div className="mx-auto w-full max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-      {/* Hero —— 入场交响:Badge → 主标题 → 副标题 → 快捷操作栏依次 spring 弹跳浮现
-          (damping 20 / stiffness 300,起步快、落点带过冲回弹,见 heroItemVariants)。
-          ★ 用 animate(非 whileInView):Hero 在首屏,页面加载即播放。
-          ★ reduce-motion 时 initial={false},所有内容瞬时可见、无位移(无障碍)。
-          ★ HeroGlow 用 left-1/2 top-8 居中,必须锚定在标题外层 relative 容器,
-          否则光斑会跑到 section 中心(标题+副标题+badge 的几何中心)而非标题正后方。
-          光斑严格约束在 w-[680px] h-[320px],绝不溢出到下方卡片区。 */}
-      <motion.section
-        variants={reduceMotion ? undefined : heroStaggerContainerVariants}
-        initial={reduceMotion ? false : 'hidden'}
-        animate="show"
-        className="relative mx-auto mb-12 max-w-5xl text-center"
-      >
-        {/* Ambient Aurora —— 静止状态下的持续流动光影:两枚渐变光晕 Blob
-            以 8s/13s 错相位做微小 scale + 位移呼吸(globals.css aurora-slow),
-            低饱和不抢眼;-z-10 压在 Hero 内容背后;reduced-motion 下静止。 */}
-        <div
-          aria-hidden="true"
-          className="animate-aurora-slow pointer-events-none absolute -top-20 left-1/2 -z-10 h-[300px] w-[600px] -translate-x-1/2 rounded-full bg-gradient-to-tr from-blue-500/15 to-purple-500/15 blur-[100px] dark:from-blue-500/10 dark:to-purple-500/10"
-        />
-        <div
-          aria-hidden="true"
-          className="animate-aurora-slower pointer-events-none absolute -right-16 top-32 -z-10 h-[360px] w-[420px] rounded-full bg-gradient-to-bl from-cyan-400/10 to-indigo-500/10 blur-[110px]"
-        />
-        {/* 卖点徽章组(置顶,入场第一拍)- PWA/隐私(emerald) + 多语支持(indigo),
-            两枚胶囊横排居中 + flex-wrap 防窄屏溢出;保持小巧不喧宾夺主。 */}
-        <motion.div
-          variants={heroItemVariants}
-          className="mb-6 flex flex-wrap items-center justify-center gap-2.5"
-        >
-          <span
-            className="inline-flex items-center gap-1.5 rounded-full border border-emerald-200 bg-emerald-50 px-4 py-1.5 text-sm font-medium text-emerald-700 shadow-sm dark:border-emerald-800/60 dark:bg-emerald-950/40 dark:text-emerald-300"
-            title={t(locale, 'heroOfflineBadge')}
-          >
-            {/* 在线状态绿点:animate-ping 扩散涟漪 + 实心核,暗示"本地运行、随时可用"。
-                motion-reduce 下关闭涟漪,保留静态绿点。 */}
-            <span className="relative mr-1.5 flex h-2 w-2">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75 motion-reduce:animate-none" />
-              <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
-            </span>
-            {t(locale, 'heroOfflineBadge')}
-          </span>
-          <span
-            className="inline-flex items-center gap-1.5 rounded-full border border-indigo-200 bg-indigo-50 px-4 py-1.5 text-xs font-medium text-indigo-700 shadow-sm dark:border-indigo-800/60 dark:bg-indigo-950/40 dark:text-indigo-300"
-            title={t(locale, 'heroMultilingualBadge')}
-          >
-            {t(locale, 'heroMultilingualBadge')}
-          </span>
-        </motion.div>
+    <div className="relative">
+      {/* ── Ambient Backdrop(规格:柔和分层工作台渐变)──
+          顶部 indigo 环境光洗墙 → slate-50 基底渐隐;暗色同构低饱和。
+          pointer-events-none + absolute,完全脱离布局流(CLS=0)。 */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-0 top-0 h-[560px] bg-gradient-to-b from-indigo-100/30 via-slate-50 to-transparent dark:from-indigo-950/20 dark:via-slate-950 dark:to-transparent"
+      />
 
-        <motion.div variants={heroItemVariants} className="relative">
-          <HeroGlow />
-          {/* 主标题"130+ Free Online Tools"用蓝紫极客渐变点睛(bg-clip-text + text-transparent)。
-              count 取 roundedCount(向下取整到十位,138→130),不精确到个位。
-              副行"That Just Work"保持实色 rgb(var(--text)) 作为视觉锚点,避免两行渐变过重。
-              ★ 渐变行为 .hero-animated-gradient"色彩河流"(见 globals.css):
-                五色首尾相接渐变带 + background-position 0%→200% 匀速平移,14s 无缝单向循环,
-                文字内部颜色如河水般持续流动;reduced-motion 下静止。
-                渐变 background-image 由该 CSS 类提供(globals.css 无 layer,优先于
-                Tailwind utilities),此处不再写 from-/via-/to-(写了也会被覆盖,误导)。
-              ★ 去掉 <h1> 的 inline color,否则会覆盖 text-transparent 让渐变失效。 */}
-          <h1 className="text-5xl font-extrabold tracking-tight sm:text-6xl lg:text-7xl">
-            <span className="hero-animated-gradient bg-clip-text text-transparent">
-              {t(locale, 'heroBadge', { count: String(roundedCount) })}{' '}
-              {t(locale, 'heroTitle1')}
-            </span>
-            <span className="block" style={{ color: 'rgb(var(--text))' }}>
-              {t(locale, 'heroTitle2')}
-            </span>
-          </h1>
-        </motion.div>
-        <motion.p
-          variants={heroItemVariants}
-          className="mx-auto mt-6 max-w-2xl text-base leading-relaxed sm:text-lg"
-          style={{ color: 'rgb(var(--text-muted))' }}
+      <div className="relative mx-auto w-full max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+        {/* ════════ ① Workspace Header & Hero ════════ */}
+        <motion.section
+          variants={reduceMotion ? undefined : heroStaggerContainerVariants}
+          initial={reduceMotion ? false : 'hidden'}
+          animate="show"
+          className="relative mx-auto mb-12 max-w-5xl"
         >
-          {t(locale, 'heroSubtitle')}
-        </motion.p>
-
-        {/* 快捷操作栏(入场收尾):主 CTA 锚到下方工具目录 #all-tools,
-            平滑滚动由 html { scroll-behavior: smooth } 提供;
-            按钮 hover 位移/阴影均为 transform/opacity 级别,不触发重排。 */}
-        <motion.div variants={heroItemVariants} className="mt-8">
-          <Link
-            href="#all-tools"
-            className="group inline-flex items-center gap-2 rounded-full bg-blue-600 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-blue-600/25 transition-all duration-300 hover:-translate-y-0.5 hover:bg-blue-700 hover:shadow-xl hover:shadow-blue-600/30 dark:shadow-blue-500/20"
+          {/* 工作台顶栏:眉头等宽行 + 本地计算状态指示(脉冲绿点)。
+              玻璃胶囊容器,mono 微字号 —— Linear/Raycast 式的"控制台铭牌"。 */}
+          <motion.div
+            variants={heroItemVariants}
+            className="mb-10 flex flex-col items-center justify-between gap-3 rounded-2xl border border-slate-200/80 bg-white/80 px-4 py-2.5 font-mono text-[11px] uppercase tracking-wider text-slate-500 shadow-[0_2px_8px_rgba(15,23,42,0.04)] backdrop-blur-xl dark:border-slate-800/80 dark:bg-slate-900/70 dark:text-slate-400 dark:shadow-none sm:flex-row"
           >
-            {t(locale, 'heroCtaExplore', { count: String(roundedCount) })}
-            <svg
-              className="h-4 w-4 transition-transform duration-300 group-hover:translate-y-0.5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              strokeWidth={2.5}
-              aria-hidden="true"
+            <span className="inline-flex items-center gap-2">
+              <Terminal className="h-3.5 w-3.5 text-slate-400 dark:text-slate-500" aria-hidden="true" />
+              {t(locale, 'workspaceEyebrow')}
+            </span>
+            <span className="inline-flex items-center gap-2 text-emerald-600 dark:text-emerald-400">
+              <span className="relative flex h-1.5 w-1.5">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75 motion-reduce:animate-none" />
+                <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-500" />
+              </span>
+              {t(locale, 'workspaceStatus')}
+            </span>
+          </motion.div>
+
+          <div className="text-center">
+            <motion.div variants={heroItemVariants} className="relative">
+              <HeroGlow />
+              {/* 主标题(SEO 关键 H1,文案与键值保持原样):
+                  "130+ Free Online Tools" 渐变河流(globals.css hero-animated-gradient)
+                  + 副行 "That Just Work" 实色锚点。 */}
+              <h1 className="text-5xl font-extrabold tracking-tight sm:text-6xl lg:text-7xl">
+                <span className="hero-animated-gradient bg-clip-text text-transparent">
+                  {t(locale, 'heroBadge', { count: String(roundedCount) })}{' '}
+                  {t(locale, 'heroTitle1')}
+                </span>
+                <span className="block" style={{ color: 'rgb(var(--text))' }}>
+                  {t(locale, 'heroTitle2')}
+                </span>
+              </h1>
+            </motion.div>
+            <motion.p
+              variants={heroItemVariants}
+              className="mx-auto mt-6 max-w-2xl text-base leading-relaxed sm:text-lg"
+              style={{ color: 'rgb(var(--text-muted))' }}
             >
-              <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-            </svg>
-          </Link>
-        </motion.div>
-      </motion.section>
+              {t(locale, 'heroSubtitle')}
+            </motion.p>
 
-      {/* 最近使用 & 我的收藏 - 动态区块,无记录时自动隐藏,有记录时置顶展示 */}
-      <div className="mb-10">
-        <HomeRecents />
-      </div>
+            {/* 价值徽章组:mono + tabular-nums 的精密工程感微标签 */}
+            <motion.div
+              variants={heroItemVariants}
+              className="mt-7 flex flex-wrap items-center justify-center gap-2.5"
+            >
+              {valueBadges.map(({ icon: Icon, text }) => (
+                <span
+                  key={text}
+                  className="inline-flex items-center gap-1.5 rounded-full border border-slate-200/80 bg-white/80 px-3.5 py-1.5 font-mono text-[11px] uppercase tracking-wider text-slate-500 shadow-[0_2px_8px_rgba(15,23,42,0.04)] backdrop-blur-xl dark:border-slate-800/80 dark:bg-slate-900/70 dark:text-slate-400 dark:shadow-none"
+                >
+                  <Icon className="h-3.5 w-3.5 text-indigo-500 dark:text-indigo-400" aria-hidden="true" />
+                  <span className="tabular-nums">{text}</span>
+                </span>
+              ))}
+            </motion.div>
 
-      {/* 搜索 + 分类 + 工具列表(客户端组件)。
-          id="all-tools" 是 Hero CTA 的锚点目标;scroll-mt-24 给 sticky header 留出偏移。 */}
-      <div id="all-tools" className="scroll-mt-24">
-        <HomePageClient tools={tools} />
-      </div>
+            {/* 快捷操作栏:主 CTA 锚到下方工具矩阵 #all-tools */}
+            <motion.div variants={heroItemVariants} className="mt-8">
+              <Link
+                href="#all-tools"
+                className="group inline-flex items-center gap-2 rounded-full bg-blue-600 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-blue-600/25 transition-all duration-300 hover:-translate-y-0.5 hover:bg-blue-700 hover:shadow-xl hover:shadow-blue-600/30 dark:shadow-blue-500/20"
+              >
+                {t(locale, 'heroCtaExplore', { count: String(roundedCount) })}
+                <svg
+                  className="h-4 w-4 transition-transform duration-300 group-hover:translate-y-0.5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={2.5}
+                  aria-hidden="true"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                </svg>
+              </Link>
+            </motion.div>
+          </div>
+        </motion.section>
 
-      {/* 首页中部广告位 */}
-      <AdSlot slot="homepage-mid" format="horizontal" fullWidth />
+        {/* ════════ ②③ 双栏仪表盘:Quick Access(左 5)+ Scratchpad(右 7)════════
+            无记录时左栏隐藏、随手记独占整行;dynamic + ssr:false 不进静态 HTML。 */}
+        <div className="mb-10">
+          <WorkspaceDashboard />
+        </div>
 
-      {/* SEO 文案区(增加首页内容厚度,利于排名和 AdSense 审核) */}
-      <section className="prose-content mx-auto mt-16 max-w-4xl">
-        <h2>{t(locale, 'seoWhyTitle')}</h2>
-        <p>{t(locale, 'seoWhyBody1')}</p>
-        <ul>
-          <li>
-            <strong>{t(locale, 'seoWhyPrivacy')}</strong>
-            {t(locale, 'seoWhyPrivacyBody')}
-          </li>
-          <li>
-            <strong>{t(locale, 'seoWhyInstant')}</strong>
-            {t(locale, 'seoWhyInstantBody')}
-          </li>
-          <li>
-            <strong>{t(locale, 'seoWhyNoFriction')}</strong>
-            {t(locale, 'seoWhyNoFrictionBody')}
-          </li>
-        </ul>
-        <p>{t(locale, 'seoWhyBody2', { count: String(roundedCount) })}</p>
+        {/* ════════ ④ Workspace Tabs 工具矩阵 ════════
+            id="all-tools" 是 Hero CTA 与既有内链的锚点目标;scroll-mt-24 给 sticky header 留偏移。 */}
+        <div id="all-tools" className="scroll-mt-24">
+          <WorkspaceToolGrid tools={tools} />
+        </div>
 
-        {/* 按分类浏览 —— 内链区:首页指向 /tools/ 枢纽页各分类锚点,
-            既利于 SEO 内链网络,也帮用户快速跳到具体类别。
-            分类链接文本走 tc() 本地化,但 URL 锚点 #cat 保持英文键
-            (与 HomePageClient 的 section id 对齐,切语言不破坏锚点定位)。 */}
-        <h2>{t(locale, 'seoBrowseTitle')}</h2>
-        <p>
-          {(() => {
-            // seoBrowseBody 含 {fullDir} 占位,需把占位替换为可点击的内链。
-            // 用本地化的 fullDir 标签作为分隔符 split,得到 [before, after] 两段。
-            const fullDirLabel = t(locale, 'seoBrowseFullDir')
-            const body = t(locale, 'seoBrowseBody', {
-              fullDir: fullDirLabel,
-              count: String(tools.length),
-            })
-            const [before, after = ''] = body.split(fullDirLabel)
-            return (
-              <>
-                {before}
-                <Link href="/tools/">
-                  <strong>{fullDirLabel}</strong>
-                </Link>
-                {after}
-              </>
-            )
-          })()}
-        </p>
-        <ul>
-          {categories.map(([cat, count]) => (
-            <li key={cat}>
-              {/* 分类内链回首页并选中筛选(锚点定位到对应区块),
-                  不再指向已废弃的 /tools/ 旧枢纽页。 */}
-              <Link href={`/?category=${encodeURIComponent(cat)}#${encodeURIComponent(cat)}`}>
-                {tc(locale, cat)}
-              </Link>{' '}
-              {t(locale, 'seoBrowseCountSuffix', { count: String(count) })}
+        {/* 首页中部广告位 */}
+        <AdSlot slot="homepage-mid" format="horizontal" fullWidth />
+
+        {/* ════════ ⑤ SEO 文案区(★ 绝对保留,与原首页一致)════════ */}
+        <section className="prose-content mx-auto mt-16 max-w-4xl">
+          <h2>{t(locale, 'seoWhyTitle')}</h2>
+          <p>{t(locale, 'seoWhyBody1')}</p>
+          <ul>
+            <li>
+              <strong>{t(locale, 'seoWhyPrivacy')}</strong>
+              {t(locale, 'seoWhyPrivacyBody')}
             </li>
-          ))}
-        </ul>
+            <li>
+              <strong>{t(locale, 'seoWhyInstant')}</strong>
+              {t(locale, 'seoWhyInstantBody')}
+            </li>
+            <li>
+              <strong>{t(locale, 'seoWhyNoFriction')}</strong>
+              {t(locale, 'seoWhyNoFrictionBody')}
+            </li>
+          </ul>
+          <p>{t(locale, 'seoWhyBody2', { count: String(roundedCount) })}</p>
 
-        {/* 热门工具直达 —— 高搜索量工具的站内深度内链,强化权重传递。
-            工具名与描述走 getToolName/getToolShortIntro 跟随语言;
-            URL 不变(英文 slug),SEO 权重稳定。 */}
-        <h2>{t(locale, 'seoPopularTitle')}</h2>
-        <p>{t(locale, 'seoPopularBody')}</p>
-        <ul>
-          {popularToolSlugs.map((slug) => {
-            const tool = toolsBySlug.get(slug)
-            if (!tool) return null
-            return (
-              <li key={slug}>
-                <Link href={`/tools/${slug}/`}>
-                  {getToolName(locale, slug, tool.name)}
+          {/* 按分类浏览 —— 内链区:分类链接文本走 tc() 本地化,
+              URL 锚点保持英文键(与 WorkspaceGrid 的 ?category= 映射对齐)。 */}
+          <h2>{t(locale, 'seoBrowseTitle')}</h2>
+          <p>
+            {(() => {
+              // seoBrowseBody 含 {fullDir} 占位,需把占位替换为可点击的内链。
+              // 用本地化的 fullDir 标签作为分隔符 split,得到 [before, after] 两段。
+              const fullDirLabel = t(locale, 'seoBrowseFullDir')
+              const body = t(locale, 'seoBrowseBody', {
+                fullDir: fullDirLabel,
+                count: String(tools.length),
+              })
+              const [before, after = ''] = body.split(fullDirLabel)
+              return (
+                <>
+                  {before}
+                  <Link href="/tools/">
+                    <strong>{fullDirLabel}</strong>
+                  </Link>
+                  {after}
+                </>
+              )
+            })()}
+          </p>
+          <ul>
+            {categories.map(([cat, count]) => (
+              <li key={cat}>
+                {/* 分类内链回首页并由 WorkspaceGrid 映射到对应 Tab */}
+                <Link href={`/?category=${encodeURIComponent(cat)}#all-tools`}>
+                  {tc(locale, cat)}
                 </Link>{' '}
-                — {getToolShortIntro(locale, slug, tool.shortIntro)}
+                {t(locale, 'seoBrowseCountSuffix', { count: String(count) })}
               </li>
-            )
-          })}
-        </ul>
-      </section>
+            ))}
+          </ul>
+
+          {/* 热门工具直达 —— 高搜索量工具的站内深度内链,强化权重传递。
+              工具名与描述走 getToolName/getToolShortIntro 跟随语言;
+              URL 不变(英文 slug),SEO 权重稳定。 */}
+          <h2>{t(locale, 'seoPopularTitle')}</h2>
+          <p>{t(locale, 'seoPopularBody')}</p>
+          <ul>
+            {popularToolSlugs.map((slug) => {
+              const tool = toolsBySlug.get(slug)
+              if (!tool) return null
+              return (
+                <li key={slug}>
+                  <Link href={`/tools/${slug}/`}>
+                    {getToolName(locale, slug, tool.name)}
+                  </Link>{' '}
+                  — {getToolShortIntro(locale, slug, tool.shortIntro)}
+                </li>
+              )
+            })}
+          </ul>
+        </section>
+      </div>
     </div>
   )
 }

@@ -267,7 +267,7 @@ html.dark .hero-animated-gradient {
 
 /* Hero 标题渐变发光字("That Just Work" 等) —— 暗色下蓝紫渐变出彩。
    工具卡片暗色质感已迁回组件内的 Tailwind dark: 类(因 inline style 会
-   覆盖类选择器,纯类实现更可控,见 HomePageClient/FeaturedTools)。 */
+   覆盖类选择器,纯类实现更可控,见 WorkspaceToolGrid/FeaturedTools)。 */
 html.dark .hero-gradient-text {
   background-image: linear-gradient(to right, rgb(96 165 250), rgb(165 180 252), rgb(56 189 248));
   -webkit-background-clip: text;

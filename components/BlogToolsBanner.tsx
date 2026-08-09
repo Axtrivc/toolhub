@@ -2,6 +2,7 @@
 
 import { getFeaturedTools } from '@/lib/tools'
 import { getToolIcon } from '@/lib/tools'
+import { SmartIcon } from '@/components/SmartIcon'
 import { getPublishedTools } from '@/lib/tools'
 import { useApp } from './providers/AppProviders'
 import { tc, getToolName, getToolShortIntro } from '@/lib/i18n'
@@ -64,10 +65,10 @@ export function BlogToolsBanner() {
             <AnimatedToolCard key={tool.slug} index={index} href={href} title={titleAttr} ariaLabel={titleAttr}>
               <div className="flex items-start justify-between">
                 <span
-                  className="flex h-11 w-11 items-center justify-center rounded-lg bg-slate-100 p-2 text-2xl transition-transform duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:scale-[1.08] dark:border dark:border-blue-800/40 dark:bg-blue-950/30"
+                  className="flex h-11 w-11 items-center justify-center rounded-lg bg-slate-100 p-2 text-slate-600 transition-transform duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:scale-[1.08] dark:border dark:border-blue-800/40 dark:bg-blue-950/30"
                   aria-hidden="true"
                 >
-                  {getToolIcon(tool)}
+                  <SmartIcon icon={getToolIcon(tool)} className="h-5 w-5" />
                 </span>
                 <span className="inline-flex items-center rounded-full bg-slate-100 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-slate-500 dark:bg-slate-800 dark:text-slate-400">
                   {tc(locale, tool.category)}

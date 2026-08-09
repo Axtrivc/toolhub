@@ -5,6 +5,7 @@ import { createPortal } from 'react-dom'
 import Link from 'next/link'
 import type { ToolMeta } from '@/lib/tools'
 import { getToolIcon } from '@/lib/tools'
+import { SmartIcon } from '@/components/SmartIcon'
 import type { Locale } from '@/lib/i18n'
 import { t, tc, getToolName, getToolShortIntro } from '@/lib/i18n'
 import { motion, AnimatePresence, useReducedMotion } from './motion/MotionPrimitives'
@@ -270,7 +271,7 @@ export function SearchPalette({ tools, locale, open, onClose }: SearchPalettePro
                         }}
                         aria-hidden="true"
                       >
-                        {icon}
+                        <SmartIcon icon={icon} className="h-4 w-4" />
                       </span>
                       <span className="min-w-0 flex-1">
                         <span className="block truncate font-medium">{getToolName(locale, tool.slug, tool.name)}</span>
