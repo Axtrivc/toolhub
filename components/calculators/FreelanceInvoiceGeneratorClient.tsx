@@ -1,0 +1,393 @@
+'use client'
+
+import { useState, useMemo, useEffect, useRef } from 'react'
+import { CalculatorField } from '@/components/calculator/CalculatorField'
+
+const CURRENCIES: { code: string; symbol: string; decimals: number }[] = [
+  { code: 'USD', symbol: '$', decimals: 2 },
+  { code: 'EUR', symbol: '€', decimals: 2 },
+  { code: 'GBP', symbol: '£', decimals: 2 },
+  { code: 'JPY', symbol: '¥', decimals: 0 },
+]
+
+const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+
+interface LineItem {
+  id: number
+  description: string
+  qty: string
+  rate: string
+}
+
+/** 'YYYY-MM-DD' → 'Aug 9, 2026'(手写映射,避免 locale 导致的 SSG/水合不一致) */
+function formatDate(iso: string): string {
+  const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(iso)
+  if (!m) return iso
+  return `${MONTHS[Number(m[2]) - 1]} ${Number(m[3])}, ${m[1]}`
+}
+
+function toISODate(d: Date): string {
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`
+}
+
+function escapeHtml(s: string): string {
+  return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;')
+}
+
+/**
+ * 自由职业者发票生成器:左侧表单 + 右侧实时预览,
+ * 打印/下载均为完全自包含的内联样式 HTML(纯客户端,刷新即丢数据)。
+ */
+export function FreelanceInvoiceGeneratorClient() {
+  const [yourName, setYourName] = useState('')
+  const [yourEmail, setYourEmail] = useState('')
+  const [clientName, setClientName] = useState('')
+  const [invoiceNumber, setInvoiceNumber] = useState('INV-0001')
+  const [issueDate, setIssueDate] = useState('')
+  const [dueDate, setDueDate] = useState('')
+  const [currency, setCurrency] = useState('USD')
+  const [taxPct, setTaxPct] = useState('')
+  const [notes, setNotes] = useState('')
+  const [items, setItems] = useState<LineItem[]>([{ id: 1, description: '', qty: '1', rate: '0' }])
+  const nextId = useRef(2)
+
+  // 日期默认值依赖"今天",挂载后在 useEffect 中设置,避免 SSG 输出与水合不一致
+  useEffect(() => {
+    const today = new Date()
+    const due = new Date(today)
+    due.setDate(due.getDate() + 30)
+    setIssueDate((v) => v || toISODate(today))
+    setDueDate((v) => v || toISODate(due))
+  }, [])
+
+  const cur = CURRENCIES.find((c) => c.code === currency) ?? CURRENCIES[0]
+  const fmt = (n: number) =>
+    `${cur.symbol}${n.toLocaleString(undefined, { minimumFractionDigits: cur.decimals, maximumFractionDigits: cur.decimals })}`
+
+  const rows = useMemo(
+    () =>
+      items.map((it) => {
+        const qty = Number(it.qty)
+        const rate = Number(it.rate)
+        const valid = isFinite(qty) && isFinite(rate) && qty >= 0 && rate >= 0
+        return { ...it, qtyN: qty, rateN: rate, amount: valid ? qty * rate : 0, valid }
+      }),
+    [items]
+  )
+
+  const subtotal = useMemo(() => rows.reduce((s, r) => s + r.amount, 0), [rows])
+  const taxN = Number(taxPct)
+  const taxRate = taxPct.trim() === '' || !isFinite(taxN) || taxN < 0 ? 0 : taxN
+  const taxAmount = (subtotal * taxRate) / 100
+  const total = subtotal + taxAmount
+
+  const updateItem = (id: number, patch: Partial<LineItem>) =>
+    setItems((list) => list.map((it) => (it.id === id ? { ...it, ...patch } : it)))
+  const addItem = () => setItems((list) => [...list, { id: nextId.current++, description: '', qty: '1', rate: '0' }])
+  const removeItem = (id: number) => setItems((list) => (list.length > 1 ? list.filter((it) => it.id !== id) : list))
+
+  // 自包含 HTML(内联样式,无外部 CSS)—— 用于打印窗口与 Download HTML
+  const invoiceHtml = useMemo(() => {
+    const e = escapeHtml
+    const itemRows = rows
+      .map(
+        (r) => `<tr>
+  <td style="padding:10px 12px;border-bottom:1px solid #e5e7eb;">${e(r.description) || '<span style="color:#9ca3af;">—</span>'}</td>
+  <td style="padding:10px 12px;border-bottom:1px solid #e5e7eb;text-align:right;font-family:ui-monospace,monospace;">${r.valid ? r.qtyN : '—'}</td>
+  <td style="padding:10px 12px;border-bottom:1px solid #e5e7eb;text-align:right;font-family:ui-monospace,monospace;">${r.valid ? fmt(r.rateN) : '—'}</td>
+  <td style="padding:10px 12px;border-bottom:1px solid #e5e7eb;text-align:right;font-family:ui-monospace,monospace;">${r.valid ? fmt(r.amount) : '—'}</td>
+</tr>`
+      )
+      .join('\n')
+    const taxRow =
+      taxRate > 0
+        ? `<tr><td style="padding:6px 12px;color:#6b7280;">Tax (${taxRate}%)</td><td style="padding:6px 12px;text-align:right;font-family:ui-monospace,monospace;">${fmt(taxAmount)}</td></tr>`
+        : ''
+    const notesBlock = notes.trim()
+      ? `<div style="margin-top:32px;padding-top:16px;border-top:1px solid #e5e7eb;">
+  <div style="font-size:11px;text-transform:uppercase;letter-spacing:0.08em;color:#9ca3af;margin-bottom:6px;">Notes</div>
+  <div style="font-size:13px;color:#4b5563;white-space:pre-wrap;">${e(notes)}</div>
+</div>`
+      : ''
+    return `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Invoice ${e(invoiceNumber)}</title>
+<style>@media print { body { margin: 0; } }</style>
+</head>
+<body style="margin:0;padding:40px;background:#f9fafb;font-family:-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:#111827;">
+<div style="max-width:720px;margin:0 auto;background:#ffffff;border:1px solid #e5e7eb;border-radius:12px;padding:48px;">
+  <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:16px;">
+    <div>
+      <div style="font-size:24px;font-weight:700;">${e(yourName) || 'Your Name'}</div>
+      ${yourEmail ? `<div style="font-size:13px;color:#6b7280;margin-top:4px;">${e(yourEmail)}</div>` : ''}
+    </div>
+    <div style="text-align:right;">
+      <div style="font-size:28px;font-weight:800;letter-spacing:0.12em;color:#2563eb;">INVOICE</div>
+      <div style="font-size:13px;color:#6b7280;margin-top:4px;font-family:ui-monospace,monospace;">${e(invoiceNumber)}</div>
+    </div>
+  </div>
+  <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:24px;margin-top:32px;">
+    <div>
+      <div style="font-size:11px;text-transform:uppercase;letter-spacing:0.08em;color:#9ca3af;margin-bottom:6px;">Bill To</div>
+      <div style="font-size:14px;font-weight:600;">${e(clientName) || '<span style="color:#9ca3af;">Client name</span>'}</div>
+    </div>
+    <div style="text-align:right;font-size:13px;">
+      <div><span style="color:#9ca3af;">Issue date:</span> <span style="font-family:ui-monospace,monospace;">${formatDate(issueDate) || '—'}</span></div>
+      <div style="margin-top:4px;"><span style="color:#9ca3af;">Due date:</span> <span style="font-family:ui-monospace,monospace;">${formatDate(dueDate) || '—'}</span></div>
+    </div>
+  </div>
+  <table style="width:100%;border-collapse:collapse;margin-top:32px;font-size:14px;">
+    <thead>
+      <tr style="background:#f3f4f6;">
+        <th style="padding:10px 12px;text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:0.08em;color:#6b7280;">Description</th>
+        <th style="padding:10px 12px;text-align:right;font-size:11px;text-transform:uppercase;letter-spacing:0.08em;color:#6b7280;">Qty</th>
+        <th style="padding:10px 12px;text-align:right;font-size:11px;text-transform:uppercase;letter-spacing:0.08em;color:#6b7280;">Rate</th>
+        <th style="padding:10px 12px;text-align:right;font-size:11px;text-transform:uppercase;letter-spacing:0.08em;color:#6b7280;">Amount</th>
+      </tr>
+    </thead>
+    <tbody>
+${itemRows}
+    </tbody>
+  </table>
+  <div style="display:flex;justify-content:flex-end;margin-top:16px;">
+    <table style="font-size:14px;min-width:240px;">
+      <tr><td style="padding:6px 12px;color:#6b7280;">Subtotal</td><td style="padding:6px 12px;text-align:right;font-family:ui-monospace,monospace;">${fmt(subtotal)}</td></tr>
+      ${taxRow}
+      <tr style="border-top:2px solid #111827;"><td style="padding:10px 12px;font-weight:700;font-size:16px;">Total</td><td style="padding:10px 12px;text-align:right;font-weight:700;font-size:16px;font-family:ui-monospace,monospace;">${fmt(total)}</td></tr>
+    </table>
+  </div>
+  ${notesBlock}
+</div>
+<script>window.onload = function () { window.print(); };</script>
+</body>
+</html>`
+  }, [rows, taxRate, taxAmount, subtotal, total, notes, invoiceNumber, yourName, yourEmail, clientName, issueDate, dueDate, currency]) // eslint-disable-line react-hooks/exhaustive-deps
+
+  const handlePrint = () => {
+    const win = window.open('', '_blank')
+    if (!win) return
+    win.document.write(invoiceHtml)
+    win.document.close()
+  }
+
+  const handleDownload = () => {
+    const blob = new Blob([invoiceHtml], { type: 'text/html;charset=utf-8;' })
+    const url = URL.createObjectURL(blob)
+    const a = document.createElement('a')
+    a.href = url
+    a.download = `${invoiceNumber || 'invoice'}.html`
+    document.body.appendChild(a)
+    a.click()
+    document.body.removeChild(a)
+    URL.revokeObjectURL(url)
+  }
+
+  const inputCls = 'w-full rounded-lg border p-3 shadow-sm outline-none transition focus:ring-2'
+  const inputStyle = {
+    borderColor: 'rgb(var(--border-strong))',
+    backgroundColor: 'rgb(var(--bg-card))',
+    color: 'rgb(var(--text))',
+  } as const
+
+  return (
+    <div className="space-y-5">
+      <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+        {/* 左侧表单 */}
+        <div className="space-y-4">
+          <CalculatorField id="your-name" label="Your name / company" value={yourName} onChange={setYourName} type="text" placeholder="Acme Design Studio" />
+          <CalculatorField id="your-email" label="Your email" value={yourEmail} onChange={setYourEmail} type="text" placeholder="you@example.com" />
+          <CalculatorField id="client-name" label="Client name" value={clientName} onChange={setClientName} type="text" placeholder="Client Inc." />
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+            <CalculatorField id="invoice-number" label="Invoice number" value={invoiceNumber} onChange={setInvoiceNumber} type="text" placeholder="INV-0001" />
+            <CalculatorField id="issue-date" label="Issue date" value={issueDate} onChange={setIssueDate} type="date" />
+            <CalculatorField id="due-date" label="Due date" value={dueDate} onChange={setDueDate} type="date" />
+          </div>
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+            <div>
+              <label htmlFor="currency" className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
+                Currency
+              </label>
+              <select id="currency" value={currency} onChange={(e) => setCurrency(e.target.value)} className={inputCls} style={inputStyle}>
+                {CURRENCIES.map((c) => (
+                  <option key={c.code} value={c.code}>
+                    {c.code} ({c.symbol})
+                  </option>
+                ))}
+              </select>
+            </div>
+            <CalculatorField id="tax-pct" label="Tax (optional)" value={taxPct} onChange={setTaxPct} suffix="%" placeholder="0" />
+          </div>
+
+          {/* 行项目 */}
+          <div>
+            <div className="mb-1.5 flex items-center justify-between">
+              <span className="text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
+                Line items
+              </span>
+              <button type="button" onClick={addItem} className="btn btn-secondary text-xs">
+                + Add item
+              </button>
+            </div>
+            <div className="space-y-2">
+              {items.map((it, idx) => (
+                <div key={it.id} className="flex items-start gap-2">
+                  <input
+                    type="text"
+                    value={it.description}
+                    onChange={(e) => updateItem(it.id, { description: e.target.value })}
+                    placeholder={`Description of item ${idx + 1}`}
+                    aria-label={`Item ${idx + 1} description`}
+                    className={`${inputCls} min-w-0 flex-1 p-2.5 text-sm`}
+                    style={inputStyle}
+                  />
+                  <input
+                    type="number"
+                    value={it.qty}
+                    onChange={(e) => updateItem(it.id, { qty: e.target.value })}
+                    placeholder="Qty"
+                    aria-label={`Item ${idx + 1} quantity`}
+                    min="0"
+                    step="any"
+                    className={`${inputCls} w-20 p-2.5 text-sm`}
+                    style={inputStyle}
+                  />
+                  <input
+                    type="number"
+                    value={it.rate}
+                    onChange={(e) => updateItem(it.id, { rate: e.target.value })}
+                    placeholder="Rate"
+                    aria-label={`Item ${idx + 1} unit rate`}
+                    min="0"
+                    step="any"
+                    className={`${inputCls} w-28 p-2.5 text-sm`}
+                    style={inputStyle}
+                  />
+                  <button
+                    type="button"
+                    onClick={() => removeItem(it.id)}
+                    disabled={items.length <= 1}
+                    aria-label={`Remove item ${idx + 1}`}
+                    className="rounded-lg border px-2.5 py-2 text-sm transition disabled:cursor-not-allowed disabled:opacity-40"
+                    style={{ borderColor: 'rgb(var(--border))', color: 'rgb(var(--text-muted))' }}
+                  >
+                    ✕
+                  </button>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div>
+            <label htmlFor="notes" className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
+              Notes (payment terms, thank-you message…)
+            </label>
+            <textarea
+              id="notes"
+              value={notes}
+              onChange={(e) => setNotes(e.target.value)}
+              rows={3}
+              placeholder="Payment due within 30 days. Thank you for your business!"
+              className={`${inputCls} font-mono text-sm`}
+              style={inputStyle}
+            />
+          </div>
+
+          {/* 操作按钮 */}
+          <div className="flex flex-wrap gap-3">
+            <button type="button" onClick={handlePrint} className="btn btn-primary">
+              Print / Save as PDF
+            </button>
+            <button type="button" onClick={handleDownload} className="btn btn-secondary">
+              Download HTML
+            </button>
+          </div>
+        </div>
+
+        {/* 右侧实时预览(纸质发票风格) */}
+        <div className="rounded-xl border bg-white p-6 text-slate-900 shadow-sm sm:p-8" style={{ borderColor: 'rgb(var(--border))' }}>
+          <div className="flex flex-wrap items-start justify-between gap-3">
+            <div>
+              <div className="text-xl font-bold">{yourName || <span className="text-slate-300">Your Name</span>}</div>
+              {yourEmail && <div className="mt-0.5 text-xs text-slate-500">{yourEmail}</div>}
+            </div>
+            <div className="text-right">
+              <div className="text-2xl font-extrabold tracking-widest text-blue-600">INVOICE</div>
+              <div className="mt-0.5 font-mono text-xs text-slate-500">{invoiceNumber}</div>
+            </div>
+          </div>
+
+          <div className="mt-6 flex flex-wrap justify-between gap-4">
+            <div>
+              <div className="text-[10px] font-medium uppercase tracking-wider text-slate-400">Bill To</div>
+              <div className="mt-1 text-sm font-semibold">{clientName || <span className="text-slate-300">Client name</span>}</div>
+            </div>
+            <div className="text-right text-xs">
+              <div>
+                <span className="text-slate-400">Issue date:</span>{' '}
+                <span className="font-mono">{issueDate ? formatDate(issueDate) : '—'}</span>
+              </div>
+              <div className="mt-1">
+                <span className="text-slate-400">Due date:</span>{' '}
+                <span className="font-mono">{dueDate ? formatDate(dueDate) : '—'}</span>
+              </div>
+            </div>
+          </div>
+
+          <table className="mt-6 w-full text-sm">
+            <thead>
+              <tr className="bg-slate-100 text-[10px] uppercase tracking-wider text-slate-500">
+                <th className="rounded-l-md px-3 py-2 text-left font-medium">Description</th>
+                <th className="px-3 py-2 text-right font-medium">Qty</th>
+                <th className="px-3 py-2 text-right font-medium">Rate</th>
+                <th className="rounded-r-md px-3 py-2 text-right font-medium">Amount</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-slate-100">
+              {rows.map((r) => (
+                <tr key={r.id}>
+                  <td className="px-3 py-2.5">{r.description || <span className="text-slate-300">—</span>}</td>
+                  <td className="px-3 py-2.5 text-right font-mono text-sm">{r.valid ? r.qtyN : '—'}</td>
+                  <td className="px-3 py-2.5 text-right font-mono text-sm">{r.valid ? fmt(r.rateN) : '—'}</td>
+                  <td className="px-3 py-2.5 text-right font-mono text-sm">{r.valid ? fmt(r.amount) : '—'}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+
+          <div className="mt-4 flex justify-end">
+            <div className="w-56 text-sm">
+              <div className="flex justify-between px-3 py-1.5">
+                <span className="text-slate-500">Subtotal</span>
+                <span className="font-mono">{fmt(subtotal)}</span>
+              </div>
+              {taxRate > 0 && (
+                <div className="flex justify-between px-3 py-1.5">
+                  <span className="text-slate-500">Tax ({taxRate}%)</span>
+                  <span className="font-mono">{fmt(taxAmount)}</span>
+                </div>
+              )}
+              <div className="flex justify-between border-t-2 border-slate-900 px-3 py-2 text-base font-bold">
+                <span>Total</span>
+                <span className="font-mono">{fmt(total)}</span>
+              </div>
+            </div>
+          </div>
+
+          {notes.trim() && (
+            <div className="mt-6 border-t border-slate-200 pt-4">
+              <div className="text-[10px] font-medium uppercase tracking-wider text-slate-400">Notes</div>
+              <div className="mt-1 whitespace-pre-wrap text-xs text-slate-600">{notes}</div>
+            </div>
+          )}
+        </div>
+      </div>
+
+      <p className="rounded-md p-3 text-xs" style={{ backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text-subtle))' }}>
+        🔒 Everything stays in your browser — no data is uploaded or saved anywhere. That also means{' '}
+        <strong>refreshing the page discards your invoice</strong>, so print or download the HTML before leaving.
+      </p>
+    </div>
+  )
+}

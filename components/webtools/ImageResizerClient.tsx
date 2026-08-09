@@ -1,0 +1,436 @@
+'use client'
+
+import { useState, useRef, useCallback, useEffect } from 'react'
+
+/**
+ * Image Resizer —— 纯前端 canvas 缩放
+ *
+ * 上传图片 → 设定目标宽高(可锁纵横比 / 快捷缩放 25–100%)→ 离屏 canvas 高质量重采样
+ * → toBlob 实时估算输出体积并生成缩略图预览 → 下载 name-WxH.ext。
+ */
+
+type OutFormat = 'original' | 'png' | 'jpeg' | 'webp'
+
+interface ResultMeta {
+  url: string
+  size: number
+  mime: string
+}
+
+/** 字节数格式化 */
+function formatBytes(bytes: number): string {
+  if (bytes < 1024) return `${bytes} B`
+  if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`
+  return `${(bytes / (1024 * 1024)).toFixed(2)} MB`
+}
+
+/** canvas 可导出的格式;original 时保留源格式,无法保留的(gif 等)回退 PNG */
+function resolveMime(format: OutFormat, fileType: string): string {
+  if (format === 'png') return 'image/png'
+  if (format === 'jpeg') return 'image/jpeg'
+  if (format === 'webp') return 'image/webp'
+  return ['image/png', 'image/jpeg', 'image/webp'].includes(fileType) ? fileType : 'image/png'
+}
+
+function extOf(mime: string): string {
+  if (mime === 'image/jpeg') return 'jpg'
+  if (mime === 'image/webp') return 'webp'
+  return 'png'
+}
+
+const SCALE_PRESETS = [25, 50, 75, 100]
+
+export function ImageResizerClient() {
+  const [imgSrc, setImgSrc] = useState<string>('')
+  const [imgName, setImgName] = useState<string>('image')
+  const [fileType, setFileType] = useState<string>('image/png')
+  const [origSize, setOrigSize] = useState(0)
+  const [natural, setNatural] = useState<{ w: number; h: number } | null>(null)
+  const [widthStr, setWidthStr] = useState('')
+  const [heightStr, setHeightStr] = useState('')
+  const [lockRatio, setLockRatio] = useState(true)
+  const [format, setFormat] = useState<OutFormat>('original')
+  const [quality, setQuality] = useState(0.85)
+  const [result, setResult] = useState<ResultMeta | null>(null)
+  const [error, setError] = useState('')
+  const [dragging, setDragging] = useState(false)
+  const imgRef = useRef<HTMLImageElement | null>(null)
+  const outUrlRef = useRef<string>('')
+
+  // 处理文件上传
+  const handleFile = useCallback((file: File) => {
+    setError('')
+    if (!file.type.startsWith('image/')) {
+      setError('Please upload an image file (PNG, JPG, GIF, or WebP).')
+      return
+    }
+    const reader = new FileReader()
+    reader.onload = () => {
+      setImgSrc(reader.result as string)
+      setImgName(file.name.replace(/\.[^.]+$/, '') || 'image')
+      setFileType(file.type)
+      setOrigSize(file.size)
+      setNatural(null)
+      setResult(null)
+    }
+    reader.onerror = () => setError('Could not read the file.')
+    reader.readAsDataURL(file)
+  }, [])
+
+  const onInputChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const file = e.target.files?.[0]
+      if (file) handleFile(file)
+    },
+    [handleFile],
+  )
+
+  const onDrop = useCallback(
+    (e: React.DragEvent) => {
+      e.preventDefault()
+      setDragging(false)
+      const file = e.dataTransfer.files?.[0]
+      if (file) handleFile(file)
+    },
+    [handleFile],
+  )
+
+  // 解码图片,记录自然尺寸并初始化目标宽高
+  useEffect(() => {
+    if (!imgSrc) {
+      imgRef.current = null
+      return
+    }
+    const img = new Image()
+    img.onload = () => {
+      imgRef.current = img
+      setNatural({ w: img.naturalWidth, h: img.naturalHeight })
+      setWidthStr(String(img.naturalWidth))
+      setHeightStr(String(img.naturalHeight))
+    }
+    img.onerror = () => setError('Could not decode the image file.')
+    img.src = imgSrc
+  }, [imgSrc])
+
+  // 宽高联动(锁定时按原始纵横比推算另一边)
+  const onWidthChange = useCallback(
+    (v: string) => {
+      setWidthStr(v)
+      if (lockRatio && natural) {
+        const w = parseInt(v, 10)
+        if (w > 0) setHeightStr(String(Math.max(1, Math.round((w * natural.h) / natural.w))))
+      }
+    },
+    [lockRatio, natural],
+  )
+
+  const onHeightChange = useCallback(
+    (v: string) => {
+      setHeightStr(v)
+      if (lockRatio && natural) {
+        const h = parseInt(v, 10)
+        if (h > 0) setWidthStr(String(Math.max(1, Math.round((h * natural.w) / natural.h))))
+      }
+    },
+    [lockRatio, natural],
+  )
+
+  // 快捷缩放百分比
+  const applyScale = useCallback(
+    (pct: number) => {
+      if (!natural) return
+      setWidthStr(String(Math.max(1, Math.round((natural.w * pct) / 100))))
+      setHeightStr(String(Math.max(1, Math.round((natural.h * pct) / 100))))
+    },
+    [natural],
+  )
+
+  const targetW = parseInt(widthStr, 10)
+  const targetH = parseInt(heightStr, 10)
+  const dimsValid = Number.isFinite(targetW) && Number.isFinite(targetH) && targetW >= 1 && targetH >= 1
+
+  const outMime = resolveMime(format, fileType)
+  const isLossy = outMime === 'image/jpeg' || outMime === 'image/webp'
+
+  // 防抖实时渲染:离屏 canvas 重采样 + toBlob 测真实体积 + 生成预览
+  useEffect(() => {
+    if (!imgRef.current || !dimsValid) {
+      setResult(null)
+      return
+    }
+    const timer = setTimeout(() => {
+      const img = imgRef.current
+      if (!img) return
+      const canvas = document.createElement('canvas')
+      canvas.width = targetW
+      canvas.height = targetH
+      const ctx = canvas.getContext('2d')
+      if (!ctx) return
+      ctx.imageSmoothingEnabled = true
+      ctx.imageSmoothingQuality = 'high'
+      ctx.clearRect(0, 0, targetW, targetH)
+      ctx.drawImage(img, 0, 0, targetW, targetH)
+      canvas.toBlob(
+        (blob) => {
+          if (!blob) return
+          if (outUrlRef.current) URL.revokeObjectURL(outUrlRef.current)
+          const url = URL.createObjectURL(blob)
+          outUrlRef.current = url
+          setResult({ url, size: blob.size, mime: blob.type })
+        },
+        outMime,
+        isLossy ? quality : undefined,
+      )
+    }, 300)
+    return () => clearTimeout(timer)
+  }, [imgSrc, natural, targetW, targetH, dimsValid, outMime, isLossy, quality])
+
+  // 卸载时回收 objectURL
+  useEffect(
+    () => () => {
+      if (outUrlRef.current) URL.revokeObjectURL(outUrlRef.current)
+    },
+    [],
+  )
+
+  const download = useCallback(() => {
+    if (!result || !dimsValid) return
+    const a = document.createElement('a')
+    a.href = result.url
+    a.download = `${imgName}-${targetW}x${targetH}.${extOf(result.mime)}`
+    document.body.appendChild(a)
+    a.click()
+    document.body.removeChild(a)
+  }, [result, dimsValid, imgName, targetW, targetH])
+
+  const inputClass =
+    'w-full rounded-lg border p-2.5 text-sm shadow-sm outline-none transition focus:ring-2'
+  const inputStyle = {
+    borderColor: 'rgb(var(--border-strong))',
+    backgroundColor: 'rgb(var(--bg-card))',
+    color: 'rgb(var(--text))',
+  }
+
+  return (
+    <div className="space-y-5">
+      {/* 上传区 */}
+      {!imgSrc && (
+        <label
+          htmlFor="resizer-upload"
+          onDragOver={(e) => {
+            e.preventDefault()
+            setDragging(true)
+          }}
+          onDragLeave={() => setDragging(false)}
+          onDrop={onDrop}
+          className={`flex cursor-pointer flex-col items-center justify-center rounded-xl border-2 border-dashed p-12 text-center transition ${
+            dragging ? 'border-blue-400 bg-blue-50/50 dark:bg-blue-950/20' : ''
+          }`}
+          style={{ borderColor: dragging ? undefined : 'rgb(var(--border-strong))' }}
+        >
+          <span className="text-4xl" aria-hidden="true">🖼️</span>
+          <span className="mt-3 text-sm font-medium" style={{ color: 'rgb(var(--text))' }}>
+            Click to upload or drag &amp; drop
+          </span>
+          <span className="mt-1 text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>
+            PNG, JPG, GIF, or WebP
+          </span>
+          <input id="resizer-upload" type="file" accept="image/*" onChange={onInputChange} className="hidden" />
+        </label>
+      )}
+
+      {/* 错误提示 */}
+      {error && (
+        <div className="rounded-lg border border-red-200 bg-red-50 p-4 text-sm text-red-700">
+          ⚠️ {error}
+        </div>
+      )}
+
+      {imgSrc && natural && (
+        <div className="space-y-5">
+          {/* 源图信息 + 重选 */}
+          <div className="flex items-center gap-4">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={imgSrc}
+              alt="Uploaded source"
+              className="h-20 w-20 rounded-lg border object-contain"
+              style={{ borderColor: 'rgb(var(--border))' }}
+            />
+            <div className="flex-1">
+              <div className="text-sm font-medium" style={{ color: 'rgb(var(--text))' }}>
+                {imgName}
+              </div>
+              <div className="text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>
+                Original: {natural.w} × {natural.h} px · {formatBytes(origSize)}
+              </div>
+            </div>
+            <label htmlFor="resizer-reupload" className="btn btn-secondary cursor-pointer text-xs">
+              Change
+              <input id="resizer-reupload" type="file" accept="image/*" onChange={onInputChange} className="hidden" />
+            </label>
+          </div>
+
+          {/* 尺寸 + 格式控制 */}
+          <div
+            className="grid grid-cols-1 gap-4 rounded-lg p-4 sm:grid-cols-2"
+            style={{ backgroundColor: 'rgb(var(--bg-subtle))' }}
+          >
+            <div>
+              <label
+                htmlFor="resizer-width"
+                className="mb-1.5 block text-sm font-medium"
+                style={{ color: 'rgb(var(--text-muted))' }}
+              >
+                Target width (px)
+              </label>
+              <input
+                id="resizer-width"
+                type="number"
+                min={1}
+                value={widthStr}
+                onChange={(e) => onWidthChange(e.target.value)}
+                className={inputClass}
+                style={inputStyle}
+              />
+            </div>
+            <div>
+              <label
+                htmlFor="resizer-height"
+                className="mb-1.5 block text-sm font-medium"
+                style={{ color: 'rgb(var(--text-muted))' }}
+              >
+                Target height (px)
+              </label>
+              <input
+                id="resizer-height"
+                type="number"
+                min={1}
+                value={heightStr}
+                onChange={(e) => onHeightChange(e.target.value)}
+                className={inputClass}
+                style={inputStyle}
+              />
+            </div>
+
+            {/* 纵横比锁 + 快捷缩放 */}
+            <div className="sm:col-span-2">
+              <div className="flex flex-wrap items-center gap-3">
+                <label
+                  className="flex cursor-pointer items-center gap-2 text-sm"
+                  style={{ color: 'rgb(var(--text))' }}
+                >
+                  <input
+                    type="checkbox"
+                    checked={lockRatio}
+                    onChange={(e) => setLockRatio(e.target.checked)}
+                    className="h-4 w-4 accent-blue-600"
+                  />
+                  Lock aspect ratio
+                </label>
+                <div className="flex flex-wrap gap-2">
+                  {SCALE_PRESETS.map((pct) => (
+                    <button
+                      key={pct}
+                      type="button"
+                      onClick={() => applyScale(pct)}
+                      className="btn btn-secondary text-xs"
+                    >
+                      {pct}%
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <label
+                htmlFor="resizer-format"
+                className="mb-1.5 block text-sm font-medium"
+                style={{ color: 'rgb(var(--text-muted))' }}
+              >
+                Output format
+              </label>
+              <select
+                id="resizer-format"
+                value={format}
+                onChange={(e) => setFormat(e.target.value as OutFormat)}
+                className={inputClass}
+                style={inputStyle}
+              >
+                <option value="original">Keep original format</option>
+                <option value="png">PNG</option>
+                <option value="jpeg">JPEG</option>
+                <option value="webp">WebP</option>
+              </select>
+            </div>
+            {isLossy && (
+              <div>
+                <label
+                  htmlFor="resizer-quality"
+                  className="mb-1.5 block text-sm font-medium"
+                  style={{ color: 'rgb(var(--text-muted))' }}
+                >
+                  Quality — {Math.round(quality * 100)}%
+                </label>
+                <input
+                  id="resizer-quality"
+                  type="range"
+                  min={0.05}
+                  max={1}
+                  step={0.01}
+                  value={quality}
+                  onChange={(e) => setQuality(Number(e.target.value))}
+                  className="w-full accent-blue-600"
+                />
+              </div>
+            )}
+          </div>
+
+          {/* 尺寸校验 */}
+          {!dimsValid && (
+            <div className="rounded-lg border border-red-200 bg-red-50 p-4 text-sm text-red-700">
+              ⚠️ Width and height must be whole numbers of at least 1 px.
+            </div>
+          )}
+
+          {/* 结果:预览 + 对比 + 下载 */}
+          {dimsValid && result && (
+            <div
+              className="flex flex-wrap items-center gap-4 rounded-lg border p-4"
+              style={{ borderColor: 'rgb(var(--border))', backgroundColor: 'rgb(var(--bg-card))' }}
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={result.url}
+                alt={`Resized preview ${targetW} by ${targetH}`}
+                className="max-h-24 max-w-32 rounded-lg border object-contain"
+                style={{ borderColor: 'rgb(var(--border))' }}
+              />
+              <div className="flex-1 text-sm" style={{ color: 'rgb(var(--text))' }}>
+                <div className="font-semibold">
+                  {natural.w} × {natural.h} → {targetW} × {targetH} px
+                </div>
+                <div className="mt-1 font-mono text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>
+                  {formatBytes(origSize)} → {formatBytes(result.size)} ·{' '}
+                  {extOf(result.mime).toUpperCase()}
+                  {result.size < origSize
+                    ? ` · ${Math.round((1 - result.size / origSize) * 100)}% smaller`
+                    : ''}
+                </div>
+              </div>
+              <button type="button" onClick={download} className="btn btn-primary text-sm">
+                Download {targetW}×{targetH}
+              </button>
+            </div>
+          )}
+        </div>
+      )}
+
+      <p className="rounded-md p-3 text-xs" style={{ backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text-subtle))' }}>
+        🔒 100% client-side — resizing happens locally in an in-browser canvas with high-quality
+        smoothing. The size shown is the real encoded output, measured with <code>canvas.toBlob</code>.
+      </p>
+    </div>
+  )
+}

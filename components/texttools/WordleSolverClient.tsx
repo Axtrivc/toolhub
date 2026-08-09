@@ -1,0 +1,306 @@
+'use client'
+
+import { useState, useMemo, useCallback } from 'react'
+import { FIVE_LETTER_WORDS } from '@/lib/wordle-words'
+
+/**
+ * Wordle Solver / Word Finder
+ *
+ * 两个模式:
+ *  - Solver:5 个绿格定位字母 + 必含字母(黄)+ 排除字母(灰)实时过滤词典;
+ *    灰色字母若同时出现在绿/黄中,则仅限制其不得出现在非绿格位置(重复字母场景)。
+ *  - Anagram:输入 3-10 个字母,找词典中可由其拼出(多重集子集)的词,按长度降序。
+ * 支持粘贴补充词表并入本会话词典。100% 本地,无网络请求。
+ */
+
+const MAX_SHOWN = 200
+
+const inputStyle = {
+  borderColor: 'rgb(var(--border-strong))',
+  backgroundColor: 'rgb(var(--bg-card))',
+  color: 'rgb(var(--text))',
+}
+
+/** 从补充词表文本提取合法单词(小写字母,长度 ≤ 10) */
+function parseExtraWords(text: string): string[] {
+  return text
+    .toLowerCase()
+    .split(/[^a-z]+/)
+    .filter((w) => w.length >= 2 && w.length <= 10)
+}
+
+type Mode = 'solver' | 'anagram'
+
+export function WordleSolverClient() {
+  const [mode, setMode] = useState<Mode>('solver')
+  const [greens, setGreens] = useState<string[]>(['', '', '', '', ''])
+  const [yellows, setYellows] = useState('')
+  const [greys, setGreys] = useState('')
+  const [anagramLetters, setAnagramLetters] = useState('')
+  const [extraText, setExtraText] = useState('')
+  const [copiedWord, setCopiedWord] = useState<string | null>(null)
+
+  // 内置词典 + 用户补充词,去重
+  const dictionary = useMemo(() => {
+    const set = new Set(FIVE_LETTER_WORDS)
+    for (const w of parseExtraWords(extraText)) set.add(w)
+    return Array.from(set)
+  }, [extraText])
+
+  const hasSolverInput = greens.some((g) => g !== '') || yellows.trim() !== '' || greys.trim() !== ''
+
+  const solverResults = useMemo(() => {
+    if (!hasSolverInput) return []
+    const g = greens.map((x) => x.trim().toLowerCase())
+    const must = new Set(yellows.toLowerCase().replace(/[^a-z]/g, '').split(''))
+    const greySet = new Set(greys.toLowerCase().replace(/[^a-z]/g, '').split(''))
+    return dictionary
+      .filter((w) => {
+        if (w.length !== 5) return false
+        for (let i = 0; i < 5; i++) if (g[i] && w[i] !== g[i]) return false
+        for (const ch of must) if (!w.includes(ch)) return false
+        for (const ch of greySet) {
+          // 灰色字母若同时是已知(绿/黄)字母:出现次数不得超过已确认数
+          // (真实 Wordle 语义:多余重复字母才会被标灰)
+          const known = g.filter((x) => x === ch).length + (must.has(ch) ? 1 : 0)
+          const count = w.split('').filter((x) => x === ch).length
+          if (count > known) return false
+        }
+        return true
+      })
+      .sort()
+  }, [dictionary, greens, yellows, greys, hasSolverInput])
+
+  const anagramResults = useMemo(() => {
+    const letters = anagramLetters.toLowerCase().replace(/[^a-z]/g, '')
+    if (letters.length < 3) return []
+    const counts = new Map<string, number>()
+    for (const ch of letters) counts.set(ch, (counts.get(ch) ?? 0) + 1)
+    return dictionary
+      .filter((w) => {
+        if (w.length > 5) return false
+        const need = new Map<string, number>()
+        for (const ch of w) need.set(ch, (need.get(ch) ?? 0) + 1)
+        for (const [ch, n] of need) if ((counts.get(ch) ?? 0) < n) return false
+        return true
+      })
+      .sort((a, b) => b.length - a.length || a.localeCompare(b))
+  }, [dictionary, anagramLetters])
+
+  const results = mode === 'solver' ? solverResults : anagramResults
+  const shown = results.slice(0, MAX_SHOWN)
+  const remaining = results.length - shown.length
+
+  const setGreen = useCallback((i: number, v: string) => {
+    const letter = v.replace(/[^a-zA-Z]/g, '').slice(-1).toLowerCase()
+    setGreens((prev) => {
+      const next = [...prev]
+      next[i] = letter
+      return next
+    })
+  }, [])
+
+  const copyWord = useCallback(async (word: string) => {
+    try {
+      await navigator.clipboard.writeText(word)
+      setCopiedWord(word)
+      setTimeout(() => setCopiedWord(null), 1200)
+    } catch {
+      // 剪贴板不可用时静默
+    }
+  }, [])
+
+  const resultList = (
+    <>
+      {results.length > 0 && (
+        <div className="flex flex-wrap gap-2">
+          {shown.map((w) => (
+            <button
+              key={w}
+              type="button"
+              onClick={() => copyWord(w)}
+              title="Click to copy"
+              className={`rounded-md border px-3 py-1.5 font-mono text-sm uppercase tracking-wider transition hover:border-blue-400 ${
+                copiedWord === w ? 'border-green-400' : ''
+              }`}
+              style={{
+                borderColor: copiedWord === w ? undefined : 'rgb(var(--border))',
+                backgroundColor: 'rgb(var(--bg-subtle))',
+                color: 'rgb(var(--text))',
+              }}
+            >
+              {copiedWord === w ? `${w} ✓` : w}
+            </button>
+          ))}
+          {remaining > 0 && (
+            <span className="px-2 py-1.5 text-sm" style={{ color: 'rgb(var(--text-faint))' }}>
+              +{remaining} more
+            </span>
+          )}
+        </div>
+      )}
+    </>
+  )
+
+  return (
+    <div className="space-y-5">
+      {/* 模式切换 */}
+      <div className="flex gap-2">
+        <button
+          type="button"
+          onClick={() => setMode('solver')}
+          className={`btn ${mode === 'solver' ? 'btn-primary' : 'btn-secondary'}`}
+        >
+          Wordle solver
+        </button>
+        <button
+          type="button"
+          onClick={() => setMode('anagram')}
+          className={`btn ${mode === 'anagram' ? 'btn-primary' : 'btn-secondary'}`}
+        >
+          Anagram mode
+        </button>
+      </div>
+
+      {mode === 'solver' ? (
+        <>
+          {/* 绿格:已知位置 */}
+          <div>
+            <label className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
+              Known positions (green)
+            </label>
+            <div className="flex gap-2">
+              {greens.map((v, i) => (
+                <input
+                  key={i}
+                  type="text"
+                  inputMode="text"
+                  maxLength={1}
+                  value={v}
+                  onChange={(e) => setGreen(i, e.target.value)}
+                  aria-label={`Letter in position ${i + 1}`}
+                  className="h-12 w-12 rounded-lg border text-center font-mono text-lg uppercase shadow-sm outline-none transition focus:ring-2"
+                  style={inputStyle}
+                />
+              ))}
+            </div>
+          </div>
+
+          <div className="grid gap-4 sm:grid-cols-2">
+            <div>
+              <label htmlFor="wordle-must" className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
+                Must contain (yellow)
+              </label>
+              <input
+                id="wordle-must"
+                type="text"
+                value={yellows}
+                onChange={(e) => setYellows(e.target.value)}
+                placeholder="e.g. ar"
+                spellCheck={false}
+                className="w-full rounded-lg border p-3 font-mono text-sm shadow-sm outline-none transition focus:ring-2"
+                style={inputStyle}
+              />
+            </div>
+            <div>
+              <label htmlFor="wordle-not" className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
+                Must NOT contain (grey)
+              </label>
+              <input
+                id="wordle-not"
+                type="text"
+                value={greys}
+                onChange={(e) => setGreys(e.target.value)}
+                placeholder="e.g. xyz"
+                spellCheck={false}
+                className="w-full rounded-lg border p-3 font-mono text-sm shadow-sm outline-none transition focus:ring-2"
+                style={inputStyle}
+              />
+            </div>
+          </div>
+
+          {/* 结果区 */}
+          {!hasSolverInput ? (
+            <p className="rounded-md p-3 text-sm" style={{ backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text-subtle))' }}>
+              Enter at least one constraint above — a green position, letters the word must contain, or letters to
+              exclude — and matching words will appear here.
+            </p>
+          ) : results.length === 0 ? (
+            <p className="rounded-md p-3 text-sm" style={{ backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text-subtle))' }}>
+              No words match those constraints. Double-check that grey letters aren&apos;t also marked green or yellow.
+            </p>
+          ) : (
+            <div className="space-y-3">
+              <span className="text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>
+                {results.length} matching word{results.length === 1 ? '' : 's'} — click any word to copy it
+              </span>
+              {resultList}
+            </div>
+          )}
+        </>
+      ) : (
+        <>
+          {/* 字母重排模式 */}
+          <div>
+            <label htmlFor="wordle-anagram" className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
+              Available letters (3–10)
+            </label>
+            <input
+              id="wordle-anagram"
+              type="text"
+              value={anagramLetters}
+              onChange={(e) => setAnagramLetters(e.target.value)}
+              placeholder="e.g. rates"
+              maxLength={10}
+              spellCheck={false}
+              className="w-full max-w-md rounded-lg border p-3 font-mono text-sm shadow-sm outline-none transition focus:ring-2"
+              style={inputStyle}
+            />
+            <p className="mt-1.5 text-xs" style={{ color: 'rgb(var(--text-faint))' }}>
+              Finds dictionary words (up to 5 letters) that can be spelled using only these letters.
+            </p>
+          </div>
+
+          {anagramLetters.replace(/[^a-zA-Z]/g, '').length < 3 ? (
+            <p className="rounded-md p-3 text-sm" style={{ backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text-subtle))' }}>
+              Type at least 3 letters to find words you can build from them.
+            </p>
+          ) : results.length === 0 ? (
+            <p className="rounded-md p-3 text-sm" style={{ backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text-subtle))' }}>
+              No words can be built from those letters. Try adding more letters or paste extra words below.
+            </p>
+          ) : (
+            <div className="space-y-3">
+              <span className="text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>
+                {results.length} word{results.length === 1 ? '' : 's'} found — click any word to copy it
+              </span>
+              {resultList}
+            </div>
+          )}
+        </>
+      )}
+
+      {/* 补充词表 */}
+      <div>
+        <label htmlFor="wordle-extra" className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
+          Extra words (optional — one per line or space-separated, merged into this session&apos;s dictionary)
+        </label>
+        <textarea
+          id="wordle-extra"
+          value={extraText}
+          onChange={(e) => setExtraText(e.target.value)}
+          placeholder={'scone\nbrake\nquirt'}
+          rows={3}
+          spellCheck={false}
+          className="w-full rounded-lg border p-4 font-mono text-sm shadow-sm outline-none transition focus:ring-2"
+          style={inputStyle}
+        />
+      </div>
+
+      <p className="rounded-md p-3 text-xs" style={{ backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text-subtle))' }}>
+        🔒 100% client-side — a {FIVE_LETTER_WORDS.length.toLocaleString('en-US')}-word dictionary is bundled with the
+        page; nothing is looked up online.
+      </p>
+    </div>
+  )
+}
