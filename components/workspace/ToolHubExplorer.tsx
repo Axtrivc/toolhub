@@ -257,27 +257,31 @@ export function ToolHubExplorer({ tools, query, onQueryChange }: ToolHubExplorer
             <div
               className={`group flex h-full flex-col justify-between rounded-2xl border border-slate-200/80 bg-white/80 p-6 shadow-[0_2px_8px_rgba(15,23,42,0.04)] backdrop-blur-xl transition-all duration-200 hover:-translate-y-1 hover:shadow-xl dark:border-slate-800/80 dark:bg-slate-900/70 dark:shadow-none ${hub.cardHoverClass} ${hub.glowClass}`}
             >
-              {/* 头部:渐变图标徽章 + 标题/副标语 + 计数 Pill */}
-              <div className="flex items-start gap-3.5">
-                <span
-                  className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br text-white ${hub.badgeClass}`}
-                  aria-hidden="true"
-                >
-                  <HubIcon className="h-5 w-5" />
-                </span>
-                <div className="min-w-0 flex-1">
-                  <h3 className="text-base font-semibold text-slate-900 dark:text-white">
-                    {t(locale, hub.titleKey)}
-                  </h3>
-                  <p className="mt-0.5 line-clamp-2 text-xs leading-relaxed text-slate-500 dark:text-slate-400">
-                    {t(locale, hub.taglineKey)}
-                  </p>
+              {/* 头部:第一行 = 渐变图标徽章 + 标题 + 计数 Pill;副标语通栏置底。
+                  min-h-[88px] + 副标语 line-clamp-2 h-[36px] 锁死 → 6 张 Hub 卡头严格同高,
+                  下方 2×2 精选网格在所有列起始于同一 Y 坐标。 */}
+              <div className="mb-4 flex min-h-[88px] flex-col justify-between">
+                <div className="flex items-start gap-3.5">
+                  <span
+                    className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br text-white ${hub.badgeClass}`}
+                    aria-hidden="true"
+                  >
+                    <HubIcon className="h-5 w-5" />
+                  </span>
+                  <div className="min-w-0 flex-1">
+                    <h3 className="text-base font-semibold text-slate-900 dark:text-white">
+                      {t(locale, hub.titleKey)}
+                    </h3>
+                  </div>
+                  <span
+                    className={`shrink-0 rounded-full border px-2.5 py-0.5 font-mono text-xs font-bold tracking-tight tabular-nums ${hub.pillClass}`}
+                  >
+                    {count}
+                  </span>
                 </div>
-                <span
-                  className={`shrink-0 rounded-full border px-2.5 py-0.5 font-mono text-xs font-bold tracking-tight tabular-nums ${hub.pillClass}`}
-                >
-                  {count}
-                </span>
+                <p className="mt-1 line-clamp-2 h-[36px] text-xs text-slate-500 dark:text-slate-400">
+                  {t(locale, hub.taglineKey)}
+                </p>
               </div>
 
               {/* Top 4 精选工具:2×2 小格,严格 72px 固定高 + 单行截断,两行锁定 152px */}
