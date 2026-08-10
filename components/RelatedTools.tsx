@@ -26,7 +26,7 @@ interface RelatedToolsProps {
  * 匹配逻辑(见 lib/tools.ts#getRelatedTools):
  *  ① 同分类优先(featured 置顶),不足 4 个时用全站热门工具补齐。
  *
- * 卡片视觉与首页 ToolCard(WorkspaceToolGrid)严格一致:
+ * 卡片视觉与首页 ToolCard(ToolHubExplorer)严格一致:
  *  - Clean Outlined Dark Theme(solid bg + crisp border)
  *  - 微边框 + Hover 提亮(hover:-translate-y-0.5 + 蓝色发光阴影)
  *  - 响应式 4 列网格:1 / 2 / 4

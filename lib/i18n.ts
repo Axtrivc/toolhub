@@ -150,6 +150,25 @@ export interface Dict {
   workspaceTabText: string
   workspaceTabConverters: string
   workspaceTabUtilities: string
+  // 首页主题 Hub(6 大主题卡:标题 / 副标语 / CTA)
+  hubTitleDeveloper: string
+  hubTitleDesign: string
+  hubTitleText: string
+  hubTitleFinance: string
+  hubTitleConverters: string
+  hubTitleUtilities: string
+  hubTaglineDeveloper: string
+  hubTaglineDesign: string
+  hubTaglineText: string
+  hubTaglineFinance: string
+  hubTaglineConverters: string
+  hubTaglineUtilities: string
+  hubExploreAll: string // "Explore all {count} tools"
+  hubBackToThemes: string // 从主题过滤视图返回总览 "All themes"
+  // 工作台折叠抽屉(Quick Access + Scratchpad 容器)
+  workspaceDrawerSubtitle: string // 折叠条副标题 "Pinned tools, recents & scratchpad"
+  // 首页底部玻璃目录(HomeSitemap)
+  sitemapDirectory: string // "Directory" 栏标题
   // 广告位占位标识
   adLabel: string
   // 主题切换 aria
@@ -277,6 +296,22 @@ const en: Dict = {
   workspaceTabText: 'Text & Writing',
   workspaceTabConverters: 'Converters',
   workspaceTabUtilities: 'Utilities',
+  hubTitleDeveloper: 'Developer & Code',
+  hubTitleDesign: 'Design & CSS Utilities',
+  hubTitleText: 'Text & Content Creation',
+  hubTitleFinance: 'Finance & SaaS Calculators',
+  hubTitleConverters: 'Converters & Formats',
+  hubTitleUtilities: 'Utilities & Math',
+  hubTaglineDeveloper: 'Essential tools for modern devs & API tasks',
+  hubTaglineDesign: 'Color, gradients & layout utilities for pixel-perfect UI',
+  hubTaglineText: 'Write, count, convert & polish words at speed',
+  hubTaglineFinance: 'Loans, mortgages, ROI & pricing math made simple',
+  hubTaglineConverters: 'Units, time & number formats — instant conversions',
+  hubTaglineUtilities: 'Everyday math, health, time & education helpers',
+  hubExploreAll: 'Explore all {count} tools',
+  hubBackToThemes: 'All themes',
+  workspaceDrawerSubtitle: 'Pinned tools, recents & scratchpad',
+  sitemapDirectory: 'Directory',
   adLabel: 'Advertisement',
   themeToggle: 'Toggle theme',
   themeLight: 'Light',
@@ -401,6 +436,22 @@ const zh: Dict = {
   workspaceTabText: '文本与写作',
   workspaceTabConverters: '转换器',
   workspaceTabUtilities: '实用工具',
+  hubTitleDeveloper: '开发与代码',
+  hubTitleDesign: '设计与 CSS 工具',
+  hubTitleText: '文本与内容创作',
+  hubTitleFinance: '金融与 SaaS 计算器',
+  hubTitleConverters: '转换器与格式',
+  hubTitleUtilities: '实用工具与数学',
+  hubTaglineDeveloper: '现代开发与 API 任务的必备工具',
+  hubTaglineDesign: '颜色、渐变与布局工具,打造像素级 UI',
+  hubTaglineText: '快速写作、统计、转换与润色文本',
+  hubTaglineFinance: '贷款、按揭、ROI 与定价计算,一算即得',
+  hubTaglineConverters: '单位、时间与数字格式,即时转换',
+  hubTaglineUtilities: '日常数学、健康、时间与教育小助手',
+  hubExploreAll: '浏览全部 {count} 个工具',
+  hubBackToThemes: '全部主题',
+  workspaceDrawerSubtitle: '固定工具、最近使用与随手记',
+  sitemapDirectory: '站点目录',
   adLabel: '广告',
   themeToggle: '切换主题',
   themeLight: '浅色',
@@ -525,6 +576,22 @@ const es: Dict = {
   workspaceTabText: 'Texto y escritura',
   workspaceTabConverters: 'Conversores',
   workspaceTabUtilities: 'Utilidades',
+  hubTitleDeveloper: 'Desarrollo y código',
+  hubTitleDesign: 'Diseño y utilidades CSS',
+  hubTitleText: 'Texto y creación de contenido',
+  hubTitleFinance: 'Calculadoras financieras y SaaS',
+  hubTitleConverters: 'Conversores y formatos',
+  hubTitleUtilities: 'Utilidades y matemáticas',
+  hubTaglineDeveloper: 'Herramientas esenciales para desarrollo moderno y tareas de API',
+  hubTaglineDesign: 'Color, gradientes y layout para una UI perfecta al píxel',
+  hubTaglineText: 'Escribe, cuenta, convierte y pule textos a toda velocidad',
+  hubTaglineFinance: 'Préstamos, hipotecas, ROI y precios sin complicaciones',
+  hubTaglineConverters: 'Unidades, tiempo y formatos numéricos — conversiones al instante',
+  hubTaglineUtilities: 'Ayudas de matemáticas, salud, tiempo y educación para el día a día',
+  hubExploreAll: 'Explorar las {count} herramientas',
+  hubBackToThemes: 'Todos los temas',
+  workspaceDrawerSubtitle: 'Fijados, recientes y bloc de notas',
+  sitemapDirectory: 'Directorio',
   adLabel: 'Publicidad',
   themeToggle: 'Cambiar tema',
   themeLight: 'Claro',
@@ -649,6 +716,22 @@ const de: Dict = {
   workspaceTabText: 'Text & Schreiben',
   workspaceTabConverters: 'Konverter',
   workspaceTabUtilities: 'Werkzeuge',
+  hubTitleDeveloper: 'Entwickler & Code',
+  hubTitleDesign: 'Design & CSS-Tools',
+  hubTitleText: 'Text & Content-Erstellung',
+  hubTitleFinance: 'Finanz- & SaaS-Rechner',
+  hubTitleConverters: 'Konverter & Formate',
+  hubTitleUtilities: 'Werkzeuge & Mathe',
+  hubTaglineDeveloper: 'Essenzielle Tools für moderne Devs & API-Aufgaben',
+  hubTaglineDesign: 'Farben, Verläufe & Layout-Tools für pixelgenaue UI',
+  hubTaglineText: 'Texte schreiben, zählen, umwandeln & polieren – blitzschnell',
+  hubTaglineFinance: 'Kredite, Hypotheken, ROI & Preise einfach berechnet',
+  hubTaglineConverters: 'Einheiten, Zeit & Zahlenformate – sofort umgerechnet',
+  hubTaglineUtilities: 'Alltagshelfer für Mathe, Gesundheit, Zeit & Bildung',
+  hubExploreAll: 'Alle {count} Tools entdecken',
+  hubBackToThemes: 'Alle Themen',
+  workspaceDrawerSubtitle: 'Pins, Verlauf & Notizblock',
+  sitemapDirectory: 'Verzeichnis',
   adLabel: 'Werbung',
   themeToggle: 'Theme wechseln',
   themeLight: 'Hell',

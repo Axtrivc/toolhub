@@ -71,7 +71,7 @@ export function QuickAccessPanel() {
   return (
     <section
       aria-label={t(locale, 'workspaceQuickAccess')}
-      className="flex h-full flex-col gap-4 rounded-xl border border-slate-200/80 bg-white/80 p-4 shadow-sm backdrop-blur-xl dark:border-slate-800/80 dark:bg-slate-900/70 dark:shadow-none"
+      className="flex h-full flex-col gap-4 rounded-2xl border border-slate-200/80 bg-white/70 p-4 shadow-sm backdrop-blur-md dark:border-slate-800/80 dark:bg-slate-900/60 dark:shadow-none"
     >
       {/* ── ① PINNED TOOLS ── */}
       <div>
@@ -88,7 +88,7 @@ export function QuickAccessPanel() {
           /* ★ 不用 AnimatePresence 退出动画:framer-motion v12 + React 19 下,
              退出节点可能不卸载(幽灵卡片)。改为 key-remount:固定列表变化时
              整个小网格重挂载,入场 spring 重放(网格很小,开销可忽略)。
-             与 WorkspaceToolGrid 的 tab 切换方案一致。 */
+             与 ToolHubExplorer 的主题切换方案一致。 */
           <div
             key={pinnedTools.map((tool) => tool.slug).join(',')}
             className="grid grid-cols-1 gap-2 sm:grid-cols-2"
