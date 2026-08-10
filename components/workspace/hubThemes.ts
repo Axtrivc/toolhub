@@ -9,6 +9,9 @@
  *  ⑤ Converters & Formats  —— Unit Converters(青/天空蓝渐变)
  *  ⑥ Utilities & Math      —— Math/Health/Time/Education Calculators(石板灰渐变)
  *
+ * 兜底:未知/缺失 category 的工具一律归入 ⑥ Utilities & Math(hubTools 计数、
+ * hubForCategory 取主题色),保证每个工具都有归属,永不出现 "Untitled"/无 Pill。
+ *
  * 消费方:ToolHubExplorer(主题卡 + 过滤网格)、HomeSitemap(底部玻璃目录)。
  * 类名全部是完整字面量(Tailwind 静态扫描安全),不做字符串拼接。
  */
@@ -24,6 +27,8 @@ export interface HubTheme {
   icon: LucideIcon
   /** 覆盖的真实 category 键(tools.ts 的 category 字段,英文不随语言变) */
   categories: readonly string[]
+  /** Hub 卡 Top 4 精选 slug(按序展示,跨分类全局解析;缺失/不足自动回退补齐) */
+  featuredToolIds: readonly string[]
   titleKey: keyof Dict
   taglineKey: keyof Dict
   /** 标题左侧渐变图标徽章(含投影色) */
@@ -45,6 +50,7 @@ export const HUB_THEMES: readonly HubTheme[] = [
     id: 'developer',
     icon: Code2,
     categories: ['Developer Tools', 'Security Tools'],
+    featuredToolIds: ['json-formatter', 'jwt-decoder', 'gpt-token-counter', 'regex-tester'],
     titleKey: 'hubTitleDeveloper',
     taglineKey: 'hubTaglineDeveloper',
     badgeClass: 'from-blue-500 to-indigo-600 shadow-md shadow-blue-500/25',
@@ -59,6 +65,7 @@ export const HUB_THEMES: readonly HubTheme[] = [
     id: 'design',
     icon: Palette,
     categories: ['Web Design Tools'],
+    featuredToolIds: ['svg-to-image', 'css-gradient-generator', 'png-to-webp-converter', 'px-to-rem'],
     titleKey: 'hubTitleDesign',
     taglineKey: 'hubTaglineDesign',
     badgeClass: 'from-purple-500 to-pink-600 shadow-md shadow-purple-500/25',
@@ -73,6 +80,7 @@ export const HUB_THEMES: readonly HubTheme[] = [
     id: 'text',
     icon: PenLine,
     categories: ['Text Tools'],
+    featuredToolIds: ['word-counter', 'text-diff', 'markdown-to-html', 'code-beautifier'],
     titleKey: 'hubTitleText',
     taglineKey: 'hubTaglineText',
     badgeClass: 'from-emerald-500 to-teal-600 shadow-md shadow-emerald-500/25',
@@ -87,6 +95,7 @@ export const HUB_THEMES: readonly HubTheme[] = [
     id: 'finance',
     icon: Wallet,
     categories: ['Finance Calculators', 'Business Tools'],
+    featuredToolIds: ['loan-calculator', 'mortgage-calculator', 'auto-loan-calculator', 'reverse-stripe-fee-calculator'],
     titleKey: 'hubTitleFinance',
     taglineKey: 'hubTaglineFinance',
     badgeClass: 'from-amber-500 to-orange-600 shadow-md shadow-amber-500/25',
@@ -101,6 +110,7 @@ export const HUB_THEMES: readonly HubTheme[] = [
     id: 'converters',
     icon: ArrowLeftRight,
     categories: ['Unit Converters'],
+    featuredToolIds: ['webp-to-png-converter', 'csv-to-json', 'numeral-system-converter', 'timezone-converter'],
     titleKey: 'hubTitleConverters',
     taglineKey: 'hubTaglineConverters',
     badgeClass: 'from-cyan-500 to-sky-600 shadow-md shadow-cyan-500/25',
@@ -115,6 +125,7 @@ export const HUB_THEMES: readonly HubTheme[] = [
     id: 'utilities',
     icon: Zap,
     categories: ['Math Calculators', 'Health Calculators', 'Time Calculators', 'Education Calculators'],
+    featuredToolIds: ['qr-code-generator', 'password-generator', 'bmi-calculator', 'percentage-calculator'],
     titleKey: 'hubTitleUtilities',
     taglineKey: 'hubTaglineUtilities',
     badgeClass: 'from-slate-500 to-zinc-600 shadow-md shadow-slate-500/25',
@@ -127,25 +138,58 @@ export const HUB_THEMES: readonly HubTheme[] = [
   },
 ]
 
-/** 该主题下的全部工具(保持 tools.ts 声明顺序) */
+/** 未知/缺失 category 的兜底主题 id(Utilities & Math) */
+const FALLBACK_HUB_ID = 'utilities'
+
+/**
+ * 该主题下的全部工具(保持 tools.ts 声明顺序)。
+ * 未知/缺失 category 的工具兜底归入 Utilities & Math,保证每个工具都有归属。
+ */
 export function hubTools(tools: ToolMeta[], hub: HubTheme): ToolMeta[] {
-  return tools.filter((tool) => hub.categories.includes(tool.category))
+  return tools.filter(
+    (tool) =>
+      hub.categories.includes(tool.category) ||
+      (hub.id === FALLBACK_HUB_ID && !findHubByCategory(tool.category)),
+  )
 }
 
 /**
- * Hub 卡内的 Top N 精选:featured 标记优先,不足部分按声明顺序补齐。
+ * Hub 卡内的 Top N 精选:featuredToolIds 显式指定优先(按声明顺序,跨分类全局解析),
+ * 缺失或不足的部分按 featured 标记 + 声明顺序从本主题内补齐。
  * 确定性输出(SSG/CSR 一致),不依赖任何运行时状态。
  */
 export function hubTopPicks(tools: ToolMeta[], hub: HubTheme, count = 4): ToolMeta[] {
-  const inHub = hubTools(tools, hub)
-  const featured = inHub.filter((tool) => tool.featured)
-  const rest = inHub.filter((tool) => !tool.featured)
-  return [...featured, ...rest].slice(0, count)
+  const bySlug = new Map(tools.map((tool) => [tool.slug, tool]))
+  const picked: ToolMeta[] = []
+  const seen = new Set<string>()
+  for (const slug of hub.featuredToolIds) {
+    const tool = bySlug.get(slug)
+    if (tool && !seen.has(tool.slug)) {
+      picked.push(tool)
+      seen.add(tool.slug)
+    }
+  }
+  if (picked.length < count) {
+    const inHub = hubTools(tools, hub).filter((tool) => !seen.has(tool.slug))
+    const featured = inHub.filter((tool) => tool.featured)
+    const rest = inHub.filter((tool) => !tool.featured)
+    picked.push(...featured, ...rest)
+  }
+  return picked.slice(0, count)
 }
 
-/** ?category=<真实分类> → 所属主题(兼容旧 SEO 内链 / 工具页面包屑) */
+/** ?category=<真实分类> → 所属主题(严格匹配,兼容旧 SEO 内链 / 工具页面包屑) */
 export function findHubByCategory(category: string): HubTheme | undefined {
   return HUB_THEMES.find((hub) => hub.categories.includes(category))
+}
+
+/**
+ * category → 所属主题(兜底版):未知/缺失分类一律归入 Utilities & Math,
+ * 用于工具卡 Pill 取色等"必须有归属"的场景,永不返回 undefined。
+ */
+export function hubForCategory(category: string): HubTheme {
+  const fallback = HUB_THEMES.find((hub) => hub.id === FALLBACK_HUB_ID) as HubTheme
+  return findHubByCategory(category) ?? fallback
 }
 
 /** ?hub=<id> → 主题 */

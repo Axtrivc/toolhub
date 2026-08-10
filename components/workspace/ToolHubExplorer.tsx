@@ -38,9 +38,9 @@ import {
   HUB_THEMES,
   findHubByCategory,
   findHubById,
+  hubForCategory,
   hubTools,
   hubTopPicks,
-  type HubTheme,
 } from './hubThemes'
 
 interface ToolHubExplorerProps {
@@ -85,15 +85,6 @@ export function ToolHubExplorer({ tools, query, onQueryChange }: ToolHubExplorer
 
   const activeHub = activeHubId ? findHubById(activeHubId) : undefined
 
-  // category → 所属主题(工具卡右上角 Pill 取主题色)
-  const hubByCategory = useMemo(() => {
-    const map = new Map<string, HubTheme>()
-    for (const hub of HUB_THEMES) {
-      for (const cat of hub.categories) map.set(cat, hub)
-    }
-    return map
-  }, [])
-
   // 每个主题的工具数(Hub 卡计数徽章 + Explore CTA)
   const hubCounts = useMemo(() => {
     const counts = new Map<string, number>()
@@ -125,7 +116,8 @@ export function ToolHubExplorer({ tools, query, onQueryChange }: ToolHubExplorer
     const localizedName = getToolName(locale, tool.slug, tool.name)
     const localizedIntro = getToolShortIntro(locale, tool.slug, tool.shortIntro)
     const titleAttr = `${localizedName} — ${localizedIntro}`
-    const hub = hubByCategory.get(tool.category)
+    // 未知/缺失 category 兜底进 Utilities & Math,Pill 永不禁缺
+    const hub = hubForCategory(tool.category)
     return (
       <motion.div
         key={tool.slug}
@@ -160,13 +152,11 @@ export function ToolHubExplorer({ tools, query, onQueryChange }: ToolHubExplorer
               图钉未固定时 opacity-0 但占位,避免 Pill 左右跳动。 */}
           <div className="absolute right-3 top-3 z-10 flex items-center gap-1.5">
             <PinButton slug={tool.slug} name={localizedName} />
-            {hub && (
-              <span
-                className={`inline-flex items-center rounded-full border px-2 py-0.5 font-mono text-[10px] uppercase tracking-wider ${hub.pillClass}`}
-              >
-                {tc(locale, tool.category)}
-              </span>
-            )}
+            <span
+              className={`inline-flex items-center rounded-full border px-2 py-0.5 font-mono text-[10px] uppercase tracking-wider ${hub.pillClass}`}
+            >
+              {tc(locale, tool.category)}
+            </span>
           </div>
         </div>
       </motion.div>
@@ -265,7 +255,7 @@ export function ToolHubExplorer({ tools, query, onQueryChange }: ToolHubExplorer
             className="h-full"
           >
             <div
-              className={`group flex h-full flex-col rounded-2xl border border-slate-200/80 bg-white/80 p-6 shadow-[0_2px_8px_rgba(15,23,42,0.04)] backdrop-blur-xl transition-all duration-200 hover:-translate-y-1 hover:shadow-xl dark:border-slate-800/80 dark:bg-slate-900/70 dark:shadow-none ${hub.cardHoverClass} ${hub.glowClass}`}
+              className={`group flex h-full flex-col justify-between rounded-2xl border border-slate-200/80 bg-white/80 p-6 shadow-[0_2px_8px_rgba(15,23,42,0.04)] backdrop-blur-xl transition-all duration-200 hover:-translate-y-1 hover:shadow-xl dark:border-slate-800/80 dark:bg-slate-900/70 dark:shadow-none ${hub.cardHoverClass} ${hub.glowClass}`}
             >
               {/* 头部:渐变图标徽章 + 标题/副标语 + 计数 Pill */}
               <div className="flex items-start gap-3.5">
@@ -284,14 +274,14 @@ export function ToolHubExplorer({ tools, query, onQueryChange }: ToolHubExplorer
                   </p>
                 </div>
                 <span
-                  className={`shrink-0 rounded-full border px-2 py-0.5 font-mono text-[10px] tabular-nums ${hub.pillClass}`}
+                  className={`shrink-0 rounded-full border px-2.5 py-0.5 font-mono text-xs font-bold tracking-tight tabular-nums ${hub.pillClass}`}
                 >
                   {count}
                 </span>
               </div>
 
-              {/* Top 4 精选工具:2×2 小格(crisp 图标 + 名称 + 子徽章) */}
-              <div className="mt-5 grid grid-cols-1 gap-2 sm:grid-cols-2">
+              {/* Top 4 精选工具:2×2 小格,严格 72px 固定高 + 单行截断,两行锁定 152px */}
+              <div className="mt-5 grid h-[152px] grid-cols-2 gap-2.5">
                 {picks.map((tool) => {
                   const name = getToolName(locale, tool.slug, tool.name)
                   return (
@@ -299,7 +289,7 @@ export function ToolHubExplorer({ tools, query, onQueryChange }: ToolHubExplorer
                       key={tool.slug}
                       href={`/tools/${tool.slug}/`}
                       title={name}
-                      className="flex items-center gap-2 rounded-lg border border-slate-200/70 bg-slate-50/60 px-2.5 py-2 transition-all duration-150 hover:-translate-y-px hover:border-slate-300 hover:bg-white hover:shadow-sm dark:border-slate-800/70 dark:bg-slate-800/40 dark:hover:border-slate-700 dark:hover:bg-slate-800"
+                      className="flex h-[72px] min-w-0 items-center gap-2 rounded-xl border border-slate-200/70 bg-slate-50/60 p-3 transition-all duration-150 hover:-translate-y-px hover:border-slate-300 hover:bg-white hover:shadow-sm dark:border-slate-800/70 dark:bg-slate-800/40 dark:hover:border-slate-700 dark:hover:bg-slate-800"
                     >
                       <span
                         className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md bg-white text-slate-500 shadow-sm dark:bg-slate-900 dark:text-slate-300"
@@ -308,11 +298,11 @@ export function ToolHubExplorer({ tools, query, onQueryChange }: ToolHubExplorer
                         <SmartIcon icon={getToolIcon(tool)} className="h-3.5 w-3.5" />
                       </span>
                       <span className="min-w-0 flex-1">
-                        <span className="block truncate text-xs font-medium text-slate-700 dark:text-slate-200">
+                        <span className="block truncate text-sm font-medium text-slate-800 dark:text-slate-200">
                           {name}
                         </span>
                         <span
-                          className={`mt-0.5 inline-flex rounded border px-1 py-px font-mono text-[9px] uppercase tracking-wide ${hub.pillClass}`}
+                          className={`mt-0.5 block truncate rounded border px-1 py-px font-mono text-[10px] uppercase tracking-wider ${hub.pillClass}`}
                         >
                           {tc(locale, tool.category)}
                         </span>
