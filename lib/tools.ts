@@ -594,7 +594,7 @@ export const tools: ToolMeta[] = [
     name: 'JWT Decoder',
     title: 'Free JWT Decoder - Decode JSON Web Token Header & Payload Online',
     description:
-      'Decode any JSON Web Token (JWT) and inspect its header, payload, and signature as formatted JSON. 100% client-side — your token never leaves your browser. Free, no signup.',
+      'Decode and inspect JWT tokens (JSON Web Tokens) online instantly. View header, payload, and signature with 100% local browser privacy.',
     keywords: ['jwt decoder', 'jwt decoder online', 'decode jwt token', 'json web token decoder', 'jwt parser'],
     intent: 'informational',
     category: 'Developer Tools',
@@ -609,7 +609,7 @@ export const tools: ToolMeta[] = [
     ],
     titleLongTail: 'JWT Decoder - Inspect Header, Payload & Expiry Locally',
     descriptionLongTail:
-      'Paste a JWT and instantly see its header, payload, and signature as formatted JSON. Check expiry (exp) and issued-at (iat). Fully client-side — your token is never uploaded. Free.',
+      'Decode and inspect JWT tokens (JSON Web Tokens) online instantly. View header, payload, and signature with 100% local browser privacy.',
   },
   {
     slug: 'base64-encoder', name: 'Base64 Encoder',
