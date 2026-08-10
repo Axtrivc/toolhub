@@ -50,6 +50,11 @@ export const toolFormulas: Record<string, ToolFormula> = {
     formula: 'APY = (1 + r/n)^n − 1',
     explain: '年化收益率。r = 名义年利率,n = 每年计息次数。APY 反映复利后的真实年收益。',
   },
+  'cash-back-calculator': {
+    formula: 'Cash back = Σ ( spendᵢ × rateᵢ ) − annual fee',
+    explain:
+      'Multiply spend in each category by its reward rate, sum across categories, then subtract the card annual fee. Bonus rates apply only up to their quarterly or yearly spend caps.',
+  },
 
   // ───────── 百分比 ─────────
   'percentage-calculator': {
@@ -72,6 +77,11 @@ export const toolFormulas: Record<string, ToolFormula> = {
     explain:
       'Mifflin-St Jeor 基础代谢率。W = 体重(kg),H = 身高(cm),A = 年龄。BMR 为静息状态下每日热量消耗。',
   },
+  'water-intake-calculator': {
+    formula: 'Water (oz) ≈ weight (lb) × ⅔    [ ≈ 33 ml × weight (kg) ]',
+    explain:
+      'A common hydration baseline: about two-thirds of your body weight in pounds, in ounces per day — roughly 33 ml per kg. The calculator then adjusts this baseline upward for exercise, hot climate, and pregnancy.',
+  },
 
   // ───────── 几何 ─────────
   'circle-calculator': {
@@ -92,6 +102,16 @@ export const toolFormulas: Record<string, ToolFormula> = {
   },
 
   // ───────── 单位 / 数学 ─────────
+  'weight-converter': {
+    formula: 'lb = kg × 2.2046226218    oz = lb × 16    kg = lb × 0.45359237',
+    explain:
+      'Kilograms to pounds and ounces. 1 kg = 2.20462 lb, 1 lb = 16 oz, 1 g = 0.035274 oz. Conversions use the international avoirdupois pound, the exact standard since 1959.',
+  },
+  'prime-number-checker': {
+    formula: 'n is prime ⟺ n > 1 and n mod d ≠ 0 for every d in [2, √n]',
+    explain:
+      'Trial division up to the square root: any composite n must have a factor at or below √n, so testing larger divisors is unnecessary. 1 is not prime by definition; 2 is the only even prime.',
+  },
   'temperature-converter': {
     formula: '°C = (°F − 32) × 5/9\nK = °C + 273.15',
     explain: '华氏→摄氏→开尔文换算。',

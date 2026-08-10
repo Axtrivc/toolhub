@@ -236,6 +236,14 @@ export const toolFaqs: Record<string, FaqPair[]> = {
       q: 'Is 1 a prime?',
       a: "No. By modern definition, primes have exactly two distinct divisors (1 and itself). 1 has only one divisor, so it's excluded. This keeps the Fundamental Theorem of Arithmetic (unique factorization) clean.",
     },
+    {
+      q: 'How does the checker test primality?',
+      a: 'By trial division: it tests divisors from 2 up to √n. If none divides n evenly, n is prime. Stopping at the square root works because any composite number must have at least one factor at or below its square root.',
+    },
+    {
+      q: 'Are all prime numbers odd?',
+      a: 'No — 2 is the only even prime. Every other even number is divisible by 2, giving it at least three divisors, so it cannot be prime. After 2, all primes are odd; after 2 and 5, every prime ends in 1, 3, 7, or 9.',
+    },
   ],
   'prime-factorization-calculator': [
     {
@@ -352,6 +360,14 @@ export const toolFaqs: Record<string, FaqPair[]> = {
       q: 'Points vs cash back?',
       a: 'Cash back is simpler and guaranteed value. Points can be worth more if redeemed for travel (especially business/first class), but require more effort and have variable value.',
     },
+    {
+      q: 'When is a card with an annual fee worth it?',
+      a: 'When your yearly rewards exceed the fee. Divide the annual fee by the earning rate to find break-even spend — a $95 fee on a 3% dining card breaks even at about $3,167 of dining spend per year. Below that, a no-fee card is the better deal.',
+    },
+    {
+      q: 'Do cash back rewards expire?',
+      a: "Usually not while the account stays open and in good standing, but issuers can forfeit rewards on closure or after long inactivity. Points programs can also be devalued over time, while cash back redeemed as a statement credit keeps a fixed dollar value.",
+    },
   ],
   'down-payment-calculator': [
     {
@@ -455,6 +471,14 @@ export const toolFaqs: Record<string, FaqPair[]> = {
     {
       q: 'Does coffee and tea count?',
       a: 'Yes. Despite being mild diuretics, caffeinated beverages still contribute net positive water. The old idea that coffee "doesn\'t count" has been debunked.',
+    },
+    {
+      q: 'How much water should I drink a day?',
+      a: 'A common baseline is 30–35 ml per kg of body weight — about two-thirds of your weight in pounds, in ounces. A 70 kg adult lands near 2.3 L daily before adjusting for exercise, hot climate, or pregnancy, which this calculator adds on top.',
+    },
+    {
+      q: 'Can you drink too much water?',
+      a: 'Yes. Overhydration (hyponatremia) dilutes blood sodium and can be dangerous, mostly during endurance events. Healthy kidneys clear about 0.8–1.0 L per hour, so spread intake across the day instead of drinking large amounts at once.',
     },
   ],
   'ideal-weight-calculator': [

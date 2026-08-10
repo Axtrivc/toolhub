@@ -188,8 +188,8 @@ export const tools: ToolMeta[] = [
   },
   {
     slug: 'cash-back-calculator', name: 'Cash Back Calculator',
-    title: 'Free Cash Back Calculator - Credit Card Rewards Value',
-    description: 'Calculate annual cash back value from your spending. Compare cards with annual fees. Free.',
+    title: 'Credit Card Cashback Calculator (Points & Rewards Value)',
+    description: 'Calculate credit card cashback earnings, bonus percentage rewards, and net savings effortlessly.',
     keywords: ['cash back calculator', 'credit card rewards', 'rewards calculator'],
     intent: 'commercial', category: 'Finance Calculators', h1: 'Cash Back Calculator',
     shortIntro: 'Calculate true value of cash back rewards after annual fees.', published: true,
@@ -199,8 +199,8 @@ export const tools: ToolMeta[] = [
       'best cash back card by spend',
       'cash back vs points value',
     ],
-    titleLongTail: 'Cash Back Calculator with Annual Fee - Free Online Tool',
-    descriptionLongTail: 'Calculate the true value of cash back rewards after annual fees. Compare cards by monthly spend to find the best rewards card for you. Free, no signup.',
+    titleLongTail: 'Credit Card Cashback Calculator (Points & Rewards Value)',
+    descriptionLongTail: 'Calculate credit card cashback earnings, bonus percentage rewards, and net savings effortlessly.',
   },
   {
     slug: 'down-payment-calculator', name: 'Down Payment Calculator',
@@ -1594,9 +1594,9 @@ export const tools: ToolMeta[] = [
   {
     slug: 'weight-converter',
     name: 'Weight Converter',
-    title: 'Free Weight Converter - kg, lb, oz, g, tons and More',
+    title: 'KG to LBS and Ounces Converter (Fast & Instant)',
     description:
-      'Free weight converter. Convert between kilograms, pounds, ounces, grams, metric tons, and stones instantly. Accurate and easy. No signup required.',
+      'Convert kilograms (kg) to pounds (lbs) and ounces (oz) instantly in your browser. Free online weight converter with zero data tracking.',
     keywords: [
       'weight converter',
       'kg to lbs',
@@ -1615,8 +1615,8 @@ export const tools: ToolMeta[] = [
       'convert kilograms to pounds',
       'kg lbs oz grams converter',
     ],
-    titleLongTail: 'Weight Converter - Kg to Lbs & Pounds to Kg - Free Tool',
-    descriptionLongTail: 'Convert kg to lbs for body weight, or pounds to kg for travel and gym. Accurate mass conversion including ounces, grams, and stones, instantly. Free, no signup.',
+    titleLongTail: 'KG to LBS and Ounces Converter (Fast & Instant)',
+    descriptionLongTail: 'Convert kilograms (kg) to pounds (lbs) and ounces (oz) instantly in your browser. Free online weight converter with zero data tracking.',
   },
   {
     slug: 'temperature-converter',
@@ -1821,8 +1821,8 @@ export const tools: ToolMeta[] = [
   },
   {
     slug: 'prime-number-checker', name: 'Prime Number Checker',
-    title: 'Free Prime Number Checker - Is a Number Prime?',
-    description: 'Check if any number is prime. Find the next and previous primes. Free and instant. For math and cryptography.',
+    title: 'Prime Number Checker & Factorization Online',
+    description: 'Check if any number is prime instantly, find prime factors, and explore number theory online.',
     keywords: ['prime number checker', 'is it prime', 'prime checker'],
     intent: 'informational', category: 'Math Calculators', h1: 'Prime Number Checker',
     shortIntro: 'Check if any number is prime and find adjacent primes.', published: true,
@@ -1832,8 +1832,8 @@ export const tools: ToolMeta[] = [
       'prime number test online',
       'list primes near a number',
     ],
-    titleLongTail: 'Prime Number Checker - Is It Prime? Find Adjacent Free',
-    descriptionLongTail: 'Check if any number is prime and find the next and previous primes. Test primality for math homework or cryptography, instantly and privately. Free, no signup.',
+    titleLongTail: 'Prime Number Checker & Factorization Online',
+    descriptionLongTail: 'Check if any number is prime instantly, find prime factors, and explore number theory online.',
   },
   {
     slug: 'prime-factorization-calculator', name: 'Prime Factorization Calculator',
@@ -2198,8 +2198,8 @@ export const tools: ToolMeta[] = [
   },
   {
     slug: 'water-intake-calculator', name: 'Water Intake Calculator',
-    title: 'Free Water Intake Calculator - How Much Water Should You Drink',
-    description: 'Calculate how much water you should drink daily based on weight, activity, and climate. Free.',
+    title: 'Daily Water Intake Calculator (Hydration & Weight)',
+    description: 'Calculate your recommended daily water intake based on body weight, activity level, and climate.',
     keywords: ['water intake calculator', 'daily water needs', 'hydration calculator'],
     intent: 'informational', category: 'Health Calculators', h1: 'Water Intake Calculator',
     shortIntro: 'Find your ideal daily water intake.', published: true,
@@ -2209,8 +2209,8 @@ export const tools: ToolMeta[] = [
       'daily water intake by activity',
       'hydration calculator by body weight',
     ],
-    titleLongTail: 'Water Intake Calculator by Weight & Activity - Free Tool',
-    descriptionLongTail: 'Find how much water you should drink daily by body weight and activity level. Adjust for climate, exercise, and pregnancy instantly and easily. Free, no signup.',
+    titleLongTail: 'Daily Water Intake Calculator (Hydration & Weight)',
+    descriptionLongTail: 'Calculate your recommended daily water intake based on body weight, activity level, and climate.',
   },
   {
     slug: 'ideal-weight-calculator', name: 'Ideal Weight Calculator',
