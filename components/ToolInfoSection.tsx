@@ -1,5 +1,15 @@
-import type { ReactNode } from 'react'
+'use client'
+
+import { Fragment, type ReactNode } from 'react'
 import type { ToolMeta } from '@/lib/tools'
+import { useApp } from './providers/AppProviders'
+import { getToolName } from '@/lib/i18n'
+import { getToolL10n } from '@/lib/i18n/tool-l10n'
+import {
+  toolInfoTemplates,
+  joinUseCases,
+  type ToolInfoType,
+} from '@/lib/i18n/tool-info-templates'
 
 /**
  * 把长尾关键词短语自然织入正文(长尾 SEO 的关键:搜索引擎据页面可见文本匹配长尾查询)。
@@ -7,32 +17,58 @@ import type { ToolMeta } from '@/lib/tools'
  * 去掉短语里重复的工具主名(如 "mortgage calculator with pmi..." → "with pmi..."),
  * 再按工具类型套一个动词("calculate"/"convert"/"work out"),
  * 组成一句不超过 4 项的自然语列表,避免关键词堆砌被判垃圾。
+ *
+ * 仅 en 路径使用;非英文走 lib/i18n/tools-l10n/<slug>.ts 的 useCases。
  */
 function formatUseCases(
   longTailKeywords: string[],
   isCalculator: boolean,
   isConverter: boolean,
 ): string {
-  // 用 "find a / look up a" 这类动词,既能跟工具名短语(如 "a mortgage calculator with..."),
-  // 又不会和短语里的 calculator/converter 语义重复。保留完整短语以利长尾精确匹配。
   const lead = isConverter ? 'look up a' : isCalculator ? 'find a' : 'use a'
-  // 取最多 4 条,避免句子过长
   const phrases = longTailKeywords.slice(0, 4)
-  // 末项前用 "or" 连接,其余用逗号 → 自然英语列举
   if (phrases.length === 1) return `${lead} ${phrases[0]}`
   return `${lead} ${phrases.slice(0, -1).join(', ')}, or ${phrases[phrases.length - 1]}`
+}
+
+/** 按工具名探测类型(与英文分支判定保持一致) */
+function detectType(name: string): ToolInfoType {
+  if (/calculator|estimator/i.test(name)) return 'calculator'
+  if (/converter/i.test(name)) return 'converter'
+  if (/generator/i.test(name)) return 'generator'
+  return 'tool'
+}
+
+/**
+ * 把模板字符串里的 {name} 渲染为加粗的本地化工具名(对标 en 里 <strong>{name}</strong>)。
+ * 不含 {name} 的字符串原样返回。
+ */
+function renderInlineBold(s: string, name: string): ReactNode {
+  if (!s.includes('{name}')) return s
+  return s.split('{name}').map((part, i) => (
+    <Fragment key={i}>
+      {i > 0 && <strong>{name}</strong>}
+      {part}
+    </Fragment>
+  ))
 }
 
 /**
  * 工具页「如何使用 & 关于」通用信息区
  *
- * 作用:为所有工具页提供一段实质性、与工具类型相关的内容,
- * 解决多数工具页内容偏薄的问题(利于 SEO 长尾词覆盖)。
- *
- * 内容按工具类型(计算器/转换器/文本/开发者)走不同模板,
- * 并结合工具自身的 name/keywords,保证每段都有针对性而非纯套话。
+ * 渲染策略(SEO 安全):
+ *  - locale === 'en' → 走下方 EnglishToolInfo 的原 JSX(字节不变,Google 索引不变)
+ *  - 非 en → 走 lib/i18n/tool-info-templates.ts 的模板 + 该工具的 useCases 本地化
  */
 export function ToolInfoSection({ tool }: { tool: ToolMeta }): ReactNode {
+  const { locale } = useApp()
+  if (locale === 'en') return <EnglishToolInfo tool={tool} />
+  return <LocalizedToolInfo tool={tool} />
+}
+
+// ──────────────────────────── en 原路径(保持不变) ────────────────────────────
+
+function EnglishToolInfo({ tool }: { tool: ToolMeta }): ReactNode {
   const mainKeyword = tool.keywords[0]
   const isCalculator = /calculator|estimator/i.test(tool.name)
   const isConverter = /converter/i.test(tool.name)
@@ -122,7 +158,6 @@ export function ToolInfoSection({ tool }: { tool: ToolMeta }): ReactNode {
       </ol>
     )
   } else {
-    // 文本/开发者工具通用
     intro = (
       <>
         <p>
@@ -153,8 +188,6 @@ export function ToolInfoSection({ tool }: { tool: ToolMeta }): ReactNode {
       <h2>About the {tool.name}</h2>
       {intro}
 
-      {/* 长尾用例段落:仅当工具配置了 longTailKeywords 时渲染,把蓝海长尾词
-          自然织入正文(搜索引擎据页面可见文本匹配长尾查询,这是长尾 SEO 的关键)。 */}
       {tool.longTailKeywords && tool.longTailKeywords.length > 0 && (
         <p>
           <strong>Common uses:</strong> people reach for this tool when they need to{' '}
@@ -187,6 +220,52 @@ export function ToolInfoSection({ tool }: { tool: ToolMeta }): ReactNode {
           <strong>Free and unlimited.</strong> Use it as often as you like, with no account and no
           caps.
         </li>
+      </ul>
+    </section>
+  )
+}
+
+// ──────────────────────────── 非英文模板路径 ────────────────────────────
+
+function LocalizedToolInfo({ tool }: { tool: ToolMeta }): ReactNode {
+  const { locale } = useApp()
+  const tpl = toolInfoTemplates[locale]
+  // 无模板(理论上不会发生,zh/es/de 都有)→ 回退英文路径,保证不破图。
+  if (!tpl) return <EnglishToolInfo tool={tool} />
+
+  const type = detectType(tool.name)
+  const name = getToolName(locale, tool.slug, tool.name)
+  const l10n = getToolL10n(tool.slug, locale)
+  const useCases = l10n?.useCases
+
+  return (
+    <section className="prose-content mt-10 max-w-3xl">
+      <h2>{tpl.aboutTitle.replaceAll('{name}', name)}</h2>
+      {tpl.intros[type].map((p, i) => (
+        <p key={i}>{renderInlineBold(p, name)}</p>
+      ))}
+
+      {useCases && useCases.length > 0 && (
+        <p>
+          <strong>{tpl.commonUsesLabel}</strong> {tpl.commonUsesLead} {joinUseCases(locale, useCases)}.
+        </p>
+      )}
+
+      <h2>{tpl.howToTitle}</h2>
+      <ol>
+        {tpl.howTos[type].map((s, i) => (
+          <li key={i}>{renderInlineBold(s, name)}</li>
+        ))}
+      </ol>
+
+      <h2>{tpl.whyTitleByType[type]}</h2>
+      <p>{tpl.whyIntro}</p>
+      <ul>
+        {tpl.whyBullets.map((b, i) => (
+          <li key={i}>
+            <strong>{b.label}</strong> {b.body}
+          </li>
+        ))}
       </ul>
     </section>
   )

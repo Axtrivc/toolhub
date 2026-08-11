@@ -13,9 +13,12 @@
  */
 
 import { useFavorites } from '@/lib/useFavorites'
+import { useApp } from './providers/AppProviders'
+import { t } from '@/lib/i18n'
 
 export function FavoriteButton({ slug, name }: { slug: string; name: string }) {
   const { isFavorite, toggleFavorite, favoritesReady } = useFavorites()
+  const { locale } = useApp()
 
   // 挂载前统一按 false 渲染,保证 SSR 与首屏一致;挂载后才用真实状态
   const saved = favoritesReady ? isFavorite(slug) : false
@@ -25,8 +28,8 @@ export function FavoriteButton({ slug, name }: { slug: string; name: string }) {
       type="button"
       onClick={() => toggleFavorite(slug)}
       aria-pressed={saved}
-      aria-label={saved ? `Remove ${name} from favorites` : `Add ${name} to favorites`}
-      title={saved ? 'Saved to favorites' : 'Save to favorites'}
+      aria-label={t(locale, saved ? 'favRemoveAria' : 'favAddAria', { name })}
+      title={t(locale, saved ? 'favSavedTitle' : 'favSaveTitle')}
       className="inline-flex shrink-0 items-center gap-1.5 rounded-lg border px-3 py-2 text-sm font-medium transition hover:bg-slate-100 dark:border-slate-600 dark:hover:bg-slate-700"
       style={{
         borderColor: 'rgb(var(--border-strong))',
@@ -49,7 +52,7 @@ export function FavoriteButton({ slug, name }: { slug: string; name: string }) {
           d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
         />
       </svg>
-      <span className="hidden sm:inline">{saved ? 'Saved' : 'Save'}</span>
+      <span className="hidden sm:inline">{t(locale, saved ? 'favSaved' : 'favSave')}</span>
     </button>
   )
 }

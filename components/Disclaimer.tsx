@@ -1,4 +1,8 @@
+'use client'
+
 import type { ToolMeta } from '@/lib/tools'
+import { useApp } from './providers/AppProviders'
+import { t } from '@/lib/i18n'
 
 /**
  * YMYL(Your Money or Your Life)免责声明 —— 防范 Google 金融/医疗类算法降权
@@ -9,6 +13,8 @@ import type { ToolMeta } from '@/lib/tools'
  *
  * 触发条件:工具分类属于金融或健康类时渲染对应免责声明;其他工具不渲染。
  * 位置:工具卡片之后(靠近计算结果)、内容区之前 —— 符合用户阅读动线。
+ *
+ * 本地化:文案走 dict(seoDisclaimer 在 lib/i18n.ts);en 回退英文原值(SSR 恒英文)。
  */
 
 type DisclaimerType = 'finance' | 'health'
@@ -19,23 +25,19 @@ function getDisclaimerType(category: string): DisclaimerType | null {
   return null
 }
 
-const DISCLAIMER_TEXT: Record<DisclaimerType, string> = {
-  finance:
-    'Disclaimer: This calculator is for informational and educational purposes only and does not constitute financial, investment, or legal advice. Calculated results are estimates based on the inputs you provide; actual figures may vary. Always consult a qualified professional before making financial decisions.',
-  health:
-    'Disclaimer: This tool is for educational purposes only and is not a substitute for professional medical advice, diagnosis, or treatment. Results are estimates and should be discussed with a qualified healthcare provider before making health-related decisions.',
-}
-
 export function Disclaimer({ tool }: { tool: ToolMeta }) {
+  const { locale } = useApp()
   const type = getDisclaimerType(tool.category)
   if (!type) return null
+
+  const key = type === 'finance' ? 'disclaimerFinance' : 'disclaimerHealth'
 
   return (
     <p
       className="mt-6 max-w-3xl text-xs leading-relaxed"
       style={{ color: 'rgb(var(--text-subtle))' }}
     >
-      {DISCLAIMER_TEXT[type]}
+      {t(locale, key)}
     </p>
   )
 }

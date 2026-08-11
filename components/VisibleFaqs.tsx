@@ -14,14 +14,19 @@
  */
 
 import { getToolFaqs } from '@/lib/tool-faqs'
+import { getToolFaqsL10n } from '@/lib/i18n/tool-l10n'
+import { useApp } from './providers/AppProviders'
+import { t } from '@/lib/i18n'
 
 export function VisibleFaqs({ slug }: { slug: string }) {
-  const faqs = getToolFaqs(slug)
+  const { locale } = useApp()
+  // 本地化 Q&A 优先;无本地化 → 回退英文 getToolFaqs(SSR 恒英文)。
+  const faqs = getToolFaqsL10n(slug, locale, getToolFaqs(slug))
   if (faqs.length === 0) return null
 
   return (
     <section className="prose-content mt-10 max-w-3xl">
-      <h2>Frequently Asked Questions</h2>
+      <h2>{t(locale, 'faqsTitle')}</h2>
       <div className="not-prose space-y-2">
         {faqs.map((f, i) => (
           <details

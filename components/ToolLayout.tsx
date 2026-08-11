@@ -13,7 +13,7 @@ import { Disclaimer } from './Disclaimer'
 import { FavoriteButton } from './FavoriteButton'
 import { RecentlyUsedTracker } from './RecentlyUsedTracker'
 import { useApp } from './providers/AppProviders'
-import { t } from '@/lib/i18n'
+import { t, getToolName, getToolShortIntro, tc } from '@/lib/i18n'
 import { buildFaqJsonLd, buildBreadcrumbJsonLd, buildHowToJsonLd } from '@/lib/seo'
 import { getToolIcon, type ToolMeta } from '@/lib/tools'
 import { SmartIcon } from '@/components/SmartIcon'
@@ -36,6 +36,12 @@ interface ToolLayoutProps {
  */
 export function ToolLayout({ tool, children }: ToolLayoutProps) {
   const { locale } = useApp()
+  // 可见标题/简介/面包屑本地化(en 回退 tool.h1/shortIntro/name 原值,SSR 恒英文)。
+  // 注意:SEO <title>/meta/JSON-LD 仍走英文(见 buildToolMetadata/build*JsonLd),不受影响。
+  const visibleH1 = getToolName(locale, tool.slug, tool.h1)
+  const visibleShortIntro = getToolShortIntro(locale, tool.slug, tool.shortIntro)
+  const visibleName = getToolName(locale, tool.slug, tool.name)
+  const visibleCategory = tc(locale, tool.category)
   const faqJsonLd = buildFaqJsonLd(tool.slug)
   const breadcrumbJsonLd = buildBreadcrumbJsonLd(tool.slug)
   const howToJsonLd = buildHowToJsonLd(tool.slug)
@@ -87,11 +93,11 @@ export function ToolLayout({ tool, children }: ToolLayoutProps) {
               href={`/?category=${encodeURIComponent(tool.category)}#${encodeURIComponent(tool.category)}`}
               className="hover:text-brand-600"
             >
-              {tool.category}
+              {visibleCategory}
             </Link>
           </li>
           <li aria-hidden="true">/</li>
-          <li style={{ color: 'rgb(var(--text-muted))' }}>{tool.name}</li>
+          <li style={{ color: 'rgb(var(--text-muted))' }}>{visibleName}</li>
         </ol>
       </nav>
 
@@ -108,15 +114,15 @@ export function ToolLayout({ tool, children }: ToolLayoutProps) {
           </span>
           <div className="min-w-0">
             <h1 className="text-3xl font-bold sm:text-4xl" style={{ color: 'rgb(var(--text))' }}>
-              {tool.h1}
+              {visibleH1}
             </h1>
             <p className="mt-3 max-w-2xl text-lg leading-relaxed" style={{ color: 'rgb(var(--text-muted))' }}>
-              {tool.shortIntro}
+              {visibleShortIntro}
             </p>
           </div>
         </div>
         {/* ❤️ 收藏按钮:同步 localStorage.favorites,嵌入时随 header 一起隐藏 */}
-        <FavoriteButton slug={tool.slug} name={tool.name} />
+        <FavoriteButton slug={tool.slug} name={visibleName} />
       </header>
 
       {/* 顶部广告位(嵌入时隐藏) */}

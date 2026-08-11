@@ -5,6 +5,8 @@ import { CalculatorField, ResultCard, CalculatorNote } from '@/components/calcul
 import { LoadSampleButton } from '@/components/LoadSampleButton'
 import { ResultActions } from '@/components/ResultActions'
 import { getCalculatorSample } from '@/lib/tool-samples'
+import { useApp } from '@/components/providers/AppProviders'
+import { tui } from '@/lib/i18n/tool-l10n'
 
 const fmtMoney = (n: number) =>
   isFinite(n)
@@ -53,6 +55,10 @@ function calcLoan(principal: number, annualRate: number, years: number) {
 }
 
 export function LoanCalculatorClient() {
+  const { locale } = useApp()
+  // 取本地化 UI 串;缺失回退英文(SSR 恒英文)。
+  const L = (key: string, fb: string) => tui('loan-calculator', locale, key, fb)
+
   const [amount, setAmount] = useState('20000')
   const [rate, setRate] = useState('7.5')
   const [years, setYears] = useState('5')
@@ -78,32 +84,41 @@ export function LoanCalculatorClient() {
 
   // 结果摘要(纯文本) - 供 Copy Summary 用
   const summary = useMemo(() => {
-    if (!result) return 'Enter loan amount, interest rate, and term to see your monthly payment.'
+    if (!result) {
+      return L('summaryEmpty', 'Enter loan amount, interest rate, and term to see your monthly payment.')
+    }
     return [
-      'Loan Calculation Summary',
-      `  Loan amount: $${Number(amount).toLocaleString()}`,
-      `  Annual rate: ${rate}%`,
-      `  Term: ${years} years (${result.months} months)`,
-      'Results:',
-      `  Monthly payment: ${fmtMoney(result.monthlyPayment)}`,
-      `  Total interest: ${fmtMoney(result.totalInterest)}`,
-      `  Total paid: ${fmtMoney(result.totalPaid)}`,
+      L('summaryTitle', 'Loan Calculation Summary'),
+      `  ${L('sLoanAmount', 'Loan amount:')} $${Number(amount).toLocaleString()}`,
+      `  ${L('sAnnualRate', 'Annual rate:')} ${rate}%`,
+      `  ${L('sTerm', 'Term:')} ${years} ${L('yearsSuffix', 'years')} (${result.months} ${L('months', 'months')})`,
+      L('sResults', 'Results:'),
+      `  ${L('sMonthlyPayment', 'Monthly payment:')} ${fmtMoney(result.monthlyPayment)}`,
+      `  ${L('sTotalInterest', 'Total interest:')} ${fmtMoney(result.totalInterest)}`,
+      `  ${L('sTotalPaid', 'Total paid:')} ${fmtMoney(result.totalPaid)}`,
     ].join('\n')
-  }, [result, amount, rate, years])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [result, amount, rate, years, locale])
 
   // CSV 导出:输入 + 结果 + 前 12 期还款明细
   const csvContent = useMemo(() => {
     if (!result) return summary
     const rows: string[][] = [
-      ['Field', 'Value'],
-      ['Loan amount', `$${Number(amount).toLocaleString()}`],
-      ['Annual rate', `${rate}%`],
-      ['Term (years)', years],
-      ['Monthly payment', fmtMoney(result.monthlyPayment)],
-      ['Total interest', fmtMoney(result.totalInterest)],
-      ['Total paid', fmtMoney(result.totalPaid)],
+      [L('csvField', 'Field'), L('csvValue', 'Value')],
+      [L('csvLoanAmount', 'Loan amount'), `$${Number(amount).toLocaleString()}`],
+      [L('csvAnnualRate', 'Annual rate'), `${rate}%`],
+      [L('csvTermYears', 'Term (years)'), years],
+      [L('sMonthlyPayment', 'Monthly payment'), fmtMoney(result.monthlyPayment)],
+      [L('sTotalInterest', 'Total interest'), fmtMoney(result.totalInterest)],
+      [L('sTotalPaid', 'Total paid'), fmtMoney(result.totalPaid)],
       [],
-      ['Month', 'Payment', 'Principal', 'Interest', 'Balance'],
+      [
+        L('thMonth', 'Month'),
+        L('thPayment', 'Payment'),
+        L('thPrincipal', 'Principal'),
+        L('thInterest', 'Interest'),
+        L('thBalance', 'Balance'),
+      ],
       ...result.schedule.slice(0, 12).map((r) => [
         String(r.month),
         fmtMoney(r.payment),
@@ -115,7 +130,8 @@ export function LoanCalculatorClient() {
     return rows
       .map((r) => r.map((c) => (/[",\n]/.test(c) ? `"${c.replace(/"/g, '""')}"` : c)).join(','))
       .join('\n')
-  }, [result, amount, rate, years, summary])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [result, amount, rate, years, summary, locale])
 
   // 只显示前 12 个月,避免列表过长(完整表可经下方 Download 导出 CSV)
   const displaySchedule = result ? [result.schedule.slice(0, 12)].flat() : []
@@ -124,13 +140,13 @@ export function LoanCalculatorClient() {
     <div className="space-y-6">
       {/* 输入区 + 右上角 Load Sample 按钮 */}
       <div className="flex flex-wrap items-center justify-between gap-3">
-        <span className="text-sm font-semibold text-slate-700">Inputs</span>
+        <span className="text-sm font-semibold text-slate-700">{L('inputs', 'Inputs')}</span>
         <LoadSampleButton onLoad={handleLoadSample} />
       </div>
       <div className="grid grid-cols-1 gap-4 rounded-lg bg-slate-50 p-4 sm:grid-cols-3">
         <CalculatorField
           id="amount"
-          label="Loan amount"
+          label={L('loanAmount', 'Loan amount')}
           value={amount}
           onChange={setAmount}
           suffix="$"
@@ -138,7 +154,7 @@ export function LoanCalculatorClient() {
         />
         <CalculatorField
           id="rate"
-          label="Annual interest rate"
+          label={L('annualRate', 'Annual interest rate')}
           value={rate}
           onChange={setRate}
           suffix="%"
@@ -146,10 +162,10 @@ export function LoanCalculatorClient() {
         />
         <CalculatorField
           id="years"
-          label="Loan term"
+          label={L('loanTerm', 'Loan term')}
           value={years}
           onChange={setYears}
-          suffix="years"
+          suffix={L('yearsSuffix', 'years')}
           placeholder="5"
         />
       </div>
@@ -159,36 +175,36 @@ export function LoanCalculatorClient() {
         <>
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
             <ResultCard
-              label="Monthly payment"
+              label={L('monthlyPayment', 'Monthly payment')}
               value={fmtMoney(result.monthlyPayment)}
               highlight
             />
             <ResultCard
-              label="Total interest paid"
+              label={L('totalInterestPaid', 'Total interest paid')}
               value={fmtMoney(result.totalInterest)}
-              sublabel={`Over ${result.months} months`}
+              sublabel={L('overMonths', 'Over {n} months').replace('{n}', String(result.months))}
             />
             <ResultCard
-              label="Total paid"
+              label={L('totalPaid', 'Total paid')}
               value={fmtMoney(result.totalPaid)}
-              sublabel="Principal + interest"
+              sublabel={L('principalPlusInterest', 'Principal + interest')}
             />
           </div>
 
           {/* 还款明细表(前 12 期) */}
           <div>
             <h3 className="mb-2 text-sm font-semibold text-slate-700">
-              Amortization schedule (first 12 months)
+              {L('amortTitle', 'Amortization schedule (first 12 months)')}
             </h3>
             <div className="overflow-x-auto rounded-lg border border-slate-200">
               <table className="w-full text-left text-sm">
                 <thead className="bg-slate-50 text-xs uppercase text-slate-500">
                   <tr>
-                    <th className="px-3 py-2">Month</th>
-                    <th className="px-3 py-2 text-right">Payment</th>
-                    <th className="px-3 py-2 text-right">Principal</th>
-                    <th className="px-3 py-2 text-right">Interest</th>
-                    <th className="px-3 py-2 text-right">Balance</th>
+                    <th className="px-3 py-2">{L('thMonth', 'Month')}</th>
+                    <th className="px-3 py-2 text-right">{L('thPayment', 'Payment')}</th>
+                    <th className="px-3 py-2 text-right">{L('thPrincipal', 'Principal')}</th>
+                    <th className="px-3 py-2 text-right">{L('thInterest', 'Interest')}</th>
+                    <th className="px-3 py-2 text-right">{L('thBalance', 'Balance')}</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-100">
@@ -210,25 +226,22 @@ export function LoanCalculatorClient() {
             </div>
           </div>
 
-          {/* 结果操作行 - Copy Summary 复制纯文本摘要,Download 导出 CSV(含还款明细) */}
+          {/* 结果操作行 - Copy Summary 复制纯文本摘要,Download 导出 CSV(含还款明细)。
+              copyLabel 不传 → ResultActions 自动用 i18n 的 toolCopySummary(已本地化)。 */}
           <ResultActions
             summary={summary}
             filename="loan-calculator-result.csv"
             downloadContent={csvContent}
             mime="text/csv;charset=utf-8;"
-            copyLabel="Copy Summary"
           />
         </>
       ) : (
         <div className="rounded-lg border-2 border-dashed border-slate-200 p-6 text-center text-sm text-slate-400">
-          Enter loan amount, interest rate, and term to see your monthly payment
+          {L('emptyState', 'Enter loan amount, interest rate, and term to see your monthly payment')}
         </div>
       )}
 
-      <CalculatorNote>
-        💰 This calculator uses the standard amortization formula (equal monthly payments). Rates
-        shown are estimates — your actual rate depends on your credit, lender, and loan type.
-      </CalculatorNote>
+      <CalculatorNote>{L('noteText', '💰 This calculator uses the standard amortization formula (equal monthly payments). Rates shown are estimates — your actual rate depends on your credit, lender, and loan type.')}</CalculatorNote>
     </div>
   )
 }

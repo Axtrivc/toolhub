@@ -219,6 +219,34 @@ export interface Dict {
   seoBrowseCountSuffix: string // "({count} tools)" 列表项后缀
   seoPopularTitle: string
   seoPopularBody: string
+  // ── 工具页共享组件本地化(FavoriteButton / VisibleFaqs / EmbedTool /
+  //    Disclaimer / FormulaSection / makeTextTool 等共享 chrome) ──
+  // FavoriteButton
+  favSave: string // "Save"
+  favSaved: string // "Saved"
+  favAddAria: string // "Add {name} to favorites"
+  favRemoveAria: string // "Remove {name} from favorites"
+  favSaveTitle: string // "Save to favorites"
+  favSavedTitle: string // "Saved to favorites"
+  // VisibleFaqs
+  faqsTitle: string // "Frequently Asked Questions"
+  // EmbedTool
+  embedTitle: string // "Embed this free tool on your blog"
+  embedSubtitle: string // "copy & paste, no attribution required"
+  embedBody: string // "Paste this HTML anywhere on your site to embed the {name}. ..."
+  embedCopyLabel: string // "Copy embed code"
+  // Disclaimer(金融/健康)
+  disclaimerFinance: string
+  disclaimerHealth: string
+  // FormulaSection
+  formulaTitle: string // "Formula & How It Works"
+  formulaIntro: string // "The {name} is based on the following formula:"
+  // makeTextTool 工厂 chrome(覆盖 ~28 个文本工具)
+  textToolClear: string // "Clear"
+  textToolInputPlaceholder: string // "Type or paste your text here..."
+  textToolResultPlaceholder: string // "Result will appear here..."
+  textToolChars: string // "{count} characters"
+  textToolWords: string // "{count} words"
 }
 
 const en: Dict = {
@@ -359,6 +387,30 @@ const en: Dict = {
   seoBrowseCountSuffix: '({count} tools)',
   seoPopularTitle: 'Popular Tools',
   seoPopularBody: 'Some of our most-used utilities, good places to start:',
+  // ── 工具页共享组件 chrome ──
+  favSave: 'Save',
+  favSaved: 'Saved',
+  favAddAria: 'Add {name} to favorites',
+  favRemoveAria: 'Remove {name} from favorites',
+  favSaveTitle: 'Save to favorites',
+  favSavedTitle: 'Saved to favorites',
+  faqsTitle: 'Frequently Asked Questions',
+  embedTitle: 'Embed this free tool on your blog',
+  embedSubtitle: 'copy & paste, no attribution required',
+  embedBody:
+    'Paste this HTML anywhere on your site to embed the {name}. Adjust the height and max-width to fit your layout.',
+  embedCopyLabel: 'Copy embed code',
+  disclaimerFinance:
+    'Disclaimer: This calculator is for informational and educational purposes only and does not constitute financial, investment, or legal advice. Calculated results are estimates based on the inputs you provide; actual figures may vary. Always consult a qualified professional before making financial decisions.',
+  disclaimerHealth:
+    'Disclaimer: This tool is for educational purposes only and is not a substitute for professional medical advice, diagnosis, or treatment. Results are estimates and should be discussed with a qualified healthcare provider before making health-related decisions.',
+  formulaTitle: 'Formula & How It Works',
+  formulaIntro: 'The {name} is based on the following formula:',
+  textToolClear: 'Clear',
+  textToolInputPlaceholder: 'Type or paste your text here...',
+  textToolResultPlaceholder: 'Result will appear here...',
+  textToolChars: '{count} characters',
+  textToolWords: '{count} words',
 }
 
 const zh: Dict = {
@@ -499,6 +551,29 @@ const zh: Dict = {
   seoBrowseCountSuffix: '({count} 个工具)',
   seoPopularTitle: '热门工具',
   seoPopularBody: '我们最常用的几款工具,适合从这里开始:',
+  // ── 工具页共享组件 chrome ──
+  favSave: '收藏',
+  favSaved: '已收藏',
+  favAddAria: '将 {name} 加入收藏',
+  favRemoveAria: '将 {name} 移出收藏',
+  favSaveTitle: '加入收藏',
+  favSavedTitle: '已收藏',
+  faqsTitle: '常见问题',
+  embedTitle: '将此免费工具嵌入你的博客',
+  embedSubtitle: '复制粘贴即可,无需注明出处',
+  embedBody: '把这段 HTML 粘贴到你网站的任意位置即可嵌入 {name}。可按需调整 height 与 max-width 以适配你的版式。',
+  embedCopyLabel: '复制嵌入代码',
+  disclaimerFinance:
+    '免责声明:本计算器仅供信息与教育用途,不构成金融、投资或法律建议。计算结果基于你输入的数值估算,实际数字可能有所不同。做出金融决策前请务必咨询合格的专业人士。',
+  disclaimerHealth:
+    '免责声明:本工具仅供教育用途,不能替代专业的医疗建议、诊断或治疗。结果仅为估算值,做出与健康相关的决定前请与合格的医疗服务提供者商讨。',
+  formulaTitle: '公式与原理',
+  formulaIntro: '{name} 基于以下公式:',
+  textToolClear: '清空',
+  textToolInputPlaceholder: '在此输入或粘贴文本…',
+  textToolResultPlaceholder: '结果将显示在这里…',
+  textToolChars: '{count} 字符',
+  textToolWords: '{count} 词',
 }
 
 const es: Dict = {
@@ -639,6 +714,29 @@ const es: Dict = {
   seoBrowseCountSuffix: '({count} herramientas)',
   seoPopularTitle: 'Herramientas populares',
   seoPopularBody: 'Algunas de nuestras utilidades más usadas, un buen punto de partida:',
+  // ── 工具页共享组件 chrome ──
+  favSave: 'Guardar',
+  favSaved: 'Guardado',
+  favAddAria: 'Añadir {name} a favoritos',
+  favRemoveAria: 'Quitar {name} de favoritos',
+  favSaveTitle: 'Guardar en favoritos',
+  favSavedTitle: 'Guardado en favoritos',
+  faqsTitle: 'Preguntas frecuentes',
+  embedTitle: 'Embebe esta herramienta gratuita en tu blog',
+  embedSubtitle: 'copia y pega, sin necesidad de atribución',
+  embedBody: 'Pega este HTML en cualquier parte de tu sitio para embeber {name}. Ajusta el height y el max-width para que encaje en tu diseño.',
+  embedCopyLabel: 'Copiar código para embeber',
+  disclaimerFinance:
+    'Aviso legal: Esta calculadora es solo para fines informativos y educativos y no constituye asesoramiento financiero, de inversión ni legal. Los resultados calculados son estimaciones basadas en los datos que introduces; las cifras reales pueden variar. Consulta siempre a un profesional cualificado antes de tomar decisiones financieras.',
+  disclaimerHealth:
+    'Aviso legal: Esta herramienta es solo para fines educativos y no sustituye el consejo, diagnóstico ni tratamiento médico profesional. Los resultados son estimaciones y deben comentarse con un profesional sanitario cualificado antes de tomar decisiones relacionadas con la salud.',
+  formulaTitle: 'Fórmula y cómo funciona',
+  formulaIntro: '{name} se basa en la siguiente fórmula:',
+  textToolClear: 'Limpiar',
+  textToolInputPlaceholder: 'Escribe o pega tu texto aquí…',
+  textToolResultPlaceholder: 'El resultado aparecerá aquí…',
+  textToolChars: '{count} caracteres',
+  textToolWords: '{count} palabras',
 }
 
 const de: Dict = {
@@ -779,6 +877,29 @@ const de: Dict = {
   seoBrowseCountSuffix: '({count} Werkzeuge)',
   seoPopularTitle: 'Beliebte Werkzeuge',
   seoPopularBody: 'Einige unserer meistgenutzten Helfer — ein guter Startpunkt:',
+  // ── 工具页共享组件 chrome ──
+  favSave: 'Merken',
+  favSaved: 'Gemerkt',
+  favAddAria: '{name} zu Favoriten hinzufügen',
+  favRemoveAria: '{name} aus Favoriten entfernen',
+  favSaveTitle: 'Zu Favoriten hinzufügen',
+  favSavedTitle: 'Gespeichert als Favorit',
+  faqsTitle: 'Häufig gestellte Fragen',
+  embedTitle: 'Binde dieses kostenlose Tool in deinen Blog ein',
+  embedSubtitle: 'kopieren & einfügen, ohne Quellenangabe',
+  embedBody: 'Füge diesen HTML-Code überall auf deiner Seite ein, um {name} einzubetten. Passe height und max-width an dein Layout an.',
+  embedCopyLabel: 'Einbettungscode kopieren',
+  disclaimerFinance:
+    'Hinweis: Dieser Rechner dient nur Informations- und Bildungszwecken und stellt keine Finanz-, Anlage- oder Rechtsberatung dar. Die Ergebnisse sind Schätzungen auf Basis deiner Eingaben; die tatsächlichen Zahlen können abweichen. Konsultiere vor finanziellen Entscheidungen immer eine qualifizierte Fachkraft.',
+  disclaimerHealth:
+    'Hinweis: Dieses Werkzeug dient nur Bildungszwecken und ersetzt keine professionelle medizinische Beratung, Diagnose oder Behandlung. Die Ergebnisse sind Schätzwerte und sollten mit einer qualifizierten Fachkraft besprochen werden, bevor gesundheitsbezogene Entscheidungen getroffen werden.',
+  formulaTitle: 'Formel & Funktionsweise',
+  formulaIntro: '{name} beruht auf der folgenden Formel:',
+  textToolClear: 'Leeren',
+  textToolInputPlaceholder: 'Text hier eingeben oder einfügen…',
+  textToolResultPlaceholder: 'Das Ergebnis erscheint hier…',
+  textToolChars: '{count} Zeichen',
+  textToolWords: '{count} Wörter',
 }
 
 export const dicts: Record<Locale, Dict> = { en, zh, es, de }
