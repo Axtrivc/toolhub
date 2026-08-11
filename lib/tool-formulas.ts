@@ -14,6 +14,9 @@
  *  - formula 支持纯文本;组件以等宽字体渲染,保留换行;
  *  - 只给有明确闭式公式的工具填,工具型(文本/生成器)不要硬凑。
  *
+ * 语言:explain 为英文(英文站面向 Google 的可见正文,必须英文)。
+ * 本地化的 explain 见 lib/i18n/tools-l10n/<slug>.ts(FormulaSection 优先取本地化)。
+ *
  * 用法:
  *   <FormulaSection slug="loan-calculator" />
  *   getToolFormula('loan-calculator') → ToolFormula | null
@@ -22,7 +25,7 @@
 export interface ToolFormula {
   /** 主公式,等宽展示,保留换行。例: "M = P × r(1+r)^n / ((1+r)^n − 1)" */
   formula: string
-  /** 变量说明 / 通俗解释(可选),普通文本 */
+  /** 变量说明 / 通俗解释(可选),普通文本(英文) */
   explain?: string
 }
 
@@ -31,24 +34,27 @@ export const toolFormulas: Record<string, ToolFormula> = {
   'loan-calculator': {
     formula: 'M = P × [ r(1 + r)^n ] / [ (1 + r)^n − 1 ]',
     explain:
-      '等额本息月供。P = 本金,r = 月利率(年利率 ÷ 12),n = 总月数。结果 M 即每月固定还款额。',
+      'Equal monthly payment (amortization). P = principal, r = monthly rate (annual rate ÷ 12), n = total number of months. M is the fixed monthly payment.',
   },
   'mortgage-calculator': {
     formula: 'M = P × [ r(1 + r)^n ] / [ (1 + r)^n − 1 ]',
     explain:
-      '房贷月供(等额本息)。P = 贷款本金,r = 月利率,n = 期数(月)。本工具在此基础上另加 PMI、房产税与保险估算。',
+      'Monthly mortgage payment (amortization). P = loan principal, r = monthly rate, n = number of months. This tool adds PMI, property tax, and insurance estimates on top.',
   },
   'simple-interest-calculator': {
     formula: 'I = P × r × t',
-    explain: '单利。P = 本金,r = 年利率(小数),t = 年数。I 为到期利息。',
+    explain:
+      'Simple interest. P = principal, r = annual rate (as a decimal), t = years. I is the interest accrued over the period.',
   },
   'compound-interest-calculator': {
     formula: 'A = P × (1 + r/n)^(n·t)',
-    explain: '复利终值。P = 本金,r = 年利率,n = 每年计息次数,t = 年数,A = 到期本息和。',
+    explain:
+      'Compound interest (future value). P = principal, r = annual rate, n = compounding periods per year, t = years. A is the total balance at the end.',
   },
   'apy-calculator': {
     formula: 'APY = (1 + r/n)^n − 1',
-    explain: '年化收益率。r = 名义年利率,n = 每年计息次数。APY 反映复利后的真实年收益。',
+    explain:
+      'Annual Percentage Yield. r = nominal annual rate, n = compounding periods per year. APY reflects the true annual return after compounding.',
   },
   'cash-back-calculator': {
     formula: 'Cash back = Σ ( spendᵢ × rateᵢ ) − annual fee',
@@ -59,23 +65,25 @@ export const toolFormulas: Record<string, ToolFormula> = {
   // ───────── 百分比 ─────────
   'percentage-calculator': {
     formula: 'part = ( percent / 100 ) × whole',
-    explain: '求"某数的百分之几":把百分数化为小数后乘以整体。反向:percent = part / whole × 100。',
+    explain:
+      'Finding "a percent of a number": convert the percent to a decimal and multiply by the whole. Reverse: percent = part / whole × 100.',
   },
   'percentage-change-calculator': {
     formula: 'change% = ( new − old ) / old × 100',
-    explain: '百分比增减。new、old 为新旧值;正值表增长,负值表下降。',
+    explain:
+      'Percentage change. new and old are the new and previous values; positive means an increase, negative means a decrease.',
   },
 
   // ───────── 健康 ─────────
   'bmi-calculator': {
     formula: 'BMI = weight(kg) / height(m)^2',
     explain:
-      '公制 BMI。英制改用 BMI = 703 × weight(lb) / height(in)^2。WHO 成人分级:18.5–24.9 为健康区间。',
+      'Metric BMI. For imperial units, use BMI = 703 × weight(lb) / height(in)². WHO adult categories: 18.5–24.9 is the healthy range.',
   },
   'bmr-calculator': {
     formula: 'BMR(men) = 10W + 6.25H − 5A + 5\nBMR(women) = 10W + 6.25H − 5A − 161',
     explain:
-      'Mifflin-St Jeor 基础代谢率。W = 体重(kg),H = 身高(cm),A = 年龄。BMR 为静息状态下每日热量消耗。',
+      'Mifflin-St Jeor basal metabolic rate. W = weight (kg), H = height (cm), A = age. BMR is the daily calories burned at rest.',
   },
   'water-intake-calculator': {
     formula: 'Water (oz) ≈ weight (lb) × ⅔    [ ≈ 33 ml × weight (kg) ]',
@@ -86,19 +94,19 @@ export const toolFormulas: Record<string, ToolFormula> = {
   // ───────── 几何 ─────────
   'circle-calculator': {
     formula: 'A = π·r²    C = 2π·r',
-    explain: '圆面积 A 与周长 C,r 为半径。',
+    explain: 'Circle area A and circumference C, where r is the radius.',
   },
   'triangle-calculator': {
     formula: 'A = ½ × b × h',
-    explain: '三角形面积。b = 底边长,h = 对应高。',
+    explain: 'Triangle area. b = base length, h = corresponding height.',
   },
   'rectangle-calculator': {
     formula: 'A = w × h',
-    explain: '矩形面积。w = 宽,h = 高。',
+    explain: 'Rectangle area. w = width, h = height.',
   },
   'cube-calculator': {
     formula: 'V = s³    SA = 6s²',
-    explain: '正方体体积 V 与表面积 SA,s 为棱长。',
+    explain: 'Cube volume V and surface area SA, where s is the edge length.',
   },
 
   // ───────── 单位 / 数学 ─────────
@@ -114,15 +122,16 @@ export const toolFormulas: Record<string, ToolFormula> = {
   },
   'temperature-converter': {
     formula: '°C = (°F − 32) × 5/9\nK = °C + 273.15',
-    explain: '华氏→摄氏→开尔文换算。',
+    explain: 'Fahrenheit → Celsius → Kelvin conversion.',
   },
   'average-calculator': {
     formula: 'mean = ( Σ xᵢ ) / n',
-    explain: '算术平均。xᵢ 为各数据点,n 为个数。',
+    explain: 'Arithmetic mean. xᵢ are the data points, n is the count.',
   },
   'standard-deviation-calculator': {
     formula: 'σ = √[ Σ(xᵢ − x̄)² / n ]',
-    explain: '总体标准差。x̄ 为均值,n 为数据点数。样本标准差分母用 n−1。',
+    explain:
+      'Population standard deviation. x̄ is the mean, n is the number of data points. Sample standard deviation uses n−1 in the denominator.',
   },
   'ip-checker': {
     formula: 'Risk Score = W_type × S_datacenter + W_tz × S_timezone_diff + W_bl × S_blacklist',
