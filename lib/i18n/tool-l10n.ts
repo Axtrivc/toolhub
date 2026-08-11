@@ -37,9 +37,11 @@ export type ToolL10n = Partial<Record<Exclude<Locale, 'en'>, ToolL10nEntry>>
 
 // ──────────── 注册表:slug → ToolL10n ────────────
 import { loanCalculatorL10n } from './tools-l10n/loan-calculator'
+import { mortgageCalculatorL10n } from './tools-l10n/mortgage-calculator'
 
 const registry: Record<string, ToolL10n> = {
   'loan-calculator': loanCalculatorL10n,
+  'mortgage-calculator': mortgageCalculatorL10n,
 }
 
 /**

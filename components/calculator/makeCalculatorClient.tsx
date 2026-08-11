@@ -7,6 +7,8 @@ import { ResultActions } from '../ResultActions'
 import { LoadSampleButton } from '../LoadSampleButton'
 import type { CalculatorConfig } from '@/lib/calculator-types'
 import { getCalculatorSample } from '@/lib/tool-samples'
+import { useApp } from '@/components/providers/AppProviders'
+import { tui } from '@/lib/i18n/tool-l10n'
 
 /**
  * 把 compute 返回的格式化字符串(如 "$83.29"、"1,234.50")解析回数字,
@@ -36,9 +38,25 @@ function csvEscape(s: string): string {
  *   })
  *
  * 这样新增一个计算器只需写配置 + compute 函数,无需重复写 UI 代码。
+ *
+ * 本地化:当 config.slug 已注册本地化 bundle 时,所有可见串(label /
+ * suffix / note / chart / 表头 / summary / CSV)经 tui() 取本地化值;
+ * 未注册或 locale==='en' 时回退英文原值(config 里的字符串 / 字面量),
+ * 保证 SSR/预渲染恒英文、SEO 不变。
  */
 export function makeCalculatorClient(config: CalculatorConfig): ComponentType {
   function GeneratedCalculator() {
+    const { locale } = useApp()
+    // slug 未设 → tui 返回 fallback(英文原值),行为与改造前一致。
+    const slug = config.slug ?? ''
+    const L = (key: string, fb: string) => tui(slug, locale, key, fb)
+
+    // 输入/输出标签的本地化解析器
+    const inLabel = (key: string, fb: string) => L(`in.${key}`, fb)
+    const inSuffix = (key: string, fb: string) => L(`inSuffix.${key}`, fb)
+    const outLabel = (key: string, fb: string) => L(`out.${key}`, fb)
+    const outSub = (key: string, fb: string) => L(`outSub.${key}`, fb)
+
     // 初始化输入为各字段的默认值
     const [values, setValues] = useState<Record<string, string>>(() => {
       const init: Record<string, string> = {}
@@ -78,24 +96,40 @@ export function makeCalculatorClient(config: CalculatorConfig): ComponentType {
     // 结果摘要(纯文本) - 供 Copy Summary 用。只在有结果且非错误占位时生成。
     const summary = useMemo(() => {
       const inputLines = config.inputs.map(
-        (f) => `  ${f.label}: ${values[f.key] ?? ''}${f.suffix ?? ''}`,
+        (f) => `  ${inLabel(f.key, f.label)}: ${values[f.key] ?? ''}${f.suffix ? inSuffix(f.key, f.suffix) : ''}`,
       )
       const resultLines = config.outputs.map(
-        (o) => `  ${o.label}: ${results[o.key] ?? '—'}`,
+        (o) => `  ${outLabel(o.key, o.label)}: ${results[o.key] ?? '—'}`,
       )
-      return ['Calculation Summary', 'Inputs:', ...inputLines, 'Results:', ...resultLines].join('\n')
-    }, [config, values, results])
+      return [
+        L('summaryTitle', 'Calculation Summary'),
+        L('inputsLabel', 'Inputs:'),
+        ...inputLines,
+        L('resultsLabel', 'Results:'),
+        ...resultLines,
+      ].join('\n')
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [config, values, results, locale])
 
     // CSV 导出内容(纯字符串) - 输入与结果三列表格,Excel/Sheets 可直接打开。
     // 实际下载交给 ResultActions(它接受 downloadContent),这里只生成内容。
     const csvContent = useMemo(() => {
       const rows: string[][] = [
-        ['Field', 'Type', 'Value'],
-        ...config.inputs.map((f) => [f.label, 'Input', `${values[f.key] ?? ''}${f.suffix ?? ''}`]),
-        ...config.outputs.map((o) => [o.label, 'Result', results[o.key] ?? '—']),
+        [L('csvField', 'Field'), L('csvType', 'Type'), L('csvValue', 'Value')],
+        ...config.inputs.map((f) => [
+          inLabel(f.key, f.label),
+          L('csvInput', 'Input'),
+          `${values[f.key] ?? ''}${f.suffix ? inSuffix(f.key, f.suffix) : ''}`,
+        ]),
+        ...config.outputs.map((o) => [
+          outLabel(o.key, o.label),
+          L('csvResult', 'Result'),
+          results[o.key] ?? '—',
+        ]),
       ]
       return rows.map((r) => r.map(csvEscape).join(',')).join('\n')
-    }, [config, values, results])
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [config, values, results, locale])
 
     const downloadFilename = config.slug
       ? `${config.slug}-result.csv`
@@ -105,7 +139,7 @@ export function makeCalculatorClient(config: CalculatorConfig): ComponentType {
       <div className="space-y-6">
         {/* 输入区 + 右上角 Load Sample 按钮 */}
         <div className="flex flex-wrap items-center justify-between gap-3">
-          <span className="text-sm font-semibold text-slate-700">Inputs</span>
+          <span className="text-sm font-semibold text-slate-700">{L('inputs', 'Inputs')}</span>
           {sample && <LoadSampleButton onLoad={handleLoadSample} />}
         </div>
         <div className="grid grid-cols-1 gap-4 rounded-lg bg-slate-50 p-4 sm:grid-cols-2">
@@ -115,7 +149,7 @@ export function makeCalculatorClient(config: CalculatorConfig): ComponentType {
               return (
                 <div key={f.key}>
                   <label htmlFor={f.key} className="mb-1.5 block text-sm font-medium text-slate-700">
-                    {f.label}
+                    {inLabel(f.key, f.label)}
                   </label>
                   <select
                     id={f.key}
@@ -125,7 +159,7 @@ export function makeCalculatorClient(config: CalculatorConfig): ComponentType {
                   >
                     {f.options.map((opt) => (
                       <option key={opt.value} value={opt.value}>
-                        {opt.label}
+                        {L(`opt.${f.key}.${opt.value}`, opt.label)}
                       </option>
                     ))}
                   </select>
@@ -137,10 +171,10 @@ export function makeCalculatorClient(config: CalculatorConfig): ComponentType {
               <CalculatorField
                 key={f.key}
                 id={f.key}
-                label={f.label}
+                label={inLabel(f.key, f.label)}
                 value={values[f.key] ?? ''}
                 onChange={(v) => setValue(f.key, v)}
-                suffix={f.suffix}
+                suffix={f.suffix ? inSuffix(f.key, f.suffix) : undefined}
                 placeholder={f.placeholder}
                 type={f.type === 'text' ? 'text' : 'number'}
               />
@@ -153,10 +187,10 @@ export function makeCalculatorClient(config: CalculatorConfig): ComponentType {
           {config.outputs.map((o) => (
             <ResultCard
               key={o.key}
-              label={o.label}
+              label={outLabel(o.key, o.label)}
               value={results[o.key] ?? '—'}
               highlight={o.highlight}
-              sublabel={o.sublabel}
+              sublabel={o.sublabel ? outSub(o.key, o.sublabel) : undefined}
             />
           ))}
         </div>
@@ -167,14 +201,14 @@ export function makeCalculatorClient(config: CalculatorConfig): ComponentType {
           filename={downloadFilename}
           downloadContent={csvContent}
           mime="text/csv;charset=utf-8;"
-          copyLabel="Copy Summary"
+          copyLabel={L('copySummary', 'Copy Summary')}
         />
 
         {/* 比例分解图(可选) - 只在 config.chart 声明时渲染,把输出字段画成环形图 */}
         {config.chart && (() => {
           const slices = config.chart.slices
             .map((s) => ({
-              label: s.label,
+              label: L(`slice.${s.valueKey}`, s.label),
               value: parseNumeric(results[s.valueKey]),
               color: s.color,
             }))
@@ -182,14 +216,14 @@ export function makeCalculatorClient(config: CalculatorConfig): ComponentType {
           if (slices.length === 0) return null
           return (
             <BreakdownChart
-              title={config.chart.title}
-              centerLabel={config.chart.centerLabel}
+              title={config.chart.title ? L('chartTitle', config.chart.title) : undefined}
+              centerLabel={config.chart.centerLabel ? L('chartCenter', config.chart.centerLabel) : undefined}
               slices={slices}
             />
           )
         })()}
 
-        {config.note && <CalculatorNote>{config.note}</CalculatorNote>}
+        {config.note && <CalculatorNote>{L('note', config.note)}</CalculatorNote>}
       </div>
     )
   }
