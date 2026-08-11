@@ -39,11 +39,15 @@ export type ToolL10n = Partial<Record<Exclude<Locale, 'en'>, ToolL10nEntry>>
 import { loanCalculatorL10n } from './tools-l10n/loan-calculator'
 import { mortgageCalculatorL10n } from './tools-l10n/mortgage-calculator'
 import { compoundInterestCalculatorL10n } from './tools-l10n/compound-interest-calculator'
+import { apyCalculatorL10n } from './tools-l10n/apy-calculator'
+import { roiCalculatorL10n } from './tools-l10n/roi-calculator'
 
 const registry: Record<string, ToolL10n> = {
   'loan-calculator': loanCalculatorL10n,
   'mortgage-calculator': mortgageCalculatorL10n,
   'compound-interest-calculator': compoundInterestCalculatorL10n,
+  'apy-calculator': apyCalculatorL10n,
+  'roi-calculator': roiCalculatorL10n,
 }
 
 /**

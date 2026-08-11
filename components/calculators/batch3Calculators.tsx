@@ -353,6 +353,7 @@ export const HourlyToSalaryCalculatorClient = makeCalculatorClient({
 })
 
 export const ROIcalculatorClient = makeCalculatorClient({
+  slug: 'roi-calculator',
   inputs: [
     { key: 'initial', label: 'Initial investment', suffix: '$', default: '10000' },
     { key: 'final', label: 'Final value', suffix: '$', default: '13500' },

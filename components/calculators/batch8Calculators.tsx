@@ -8,6 +8,7 @@ import { fmtUSD, fmtNum, toNum } from '@/lib/format'
 // ── 金融类 ──
 
 export const APYCalculatorClient = makeCalculatorClient({
+  slug: 'apy-calculator',
   inputs: [
     { key: 'principal', label: 'Principal', suffix: '$', default: '10000' },
     { key: 'apr', label: 'Annual rate (APR)', suffix: '%', default: '5' },
