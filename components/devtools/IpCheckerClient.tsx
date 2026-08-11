@@ -115,11 +115,22 @@ function classifyTarget(raw: string): 'ipv4' | 'ipv6' | 'domain' | null {
 
 // ─────────────────────────── 数据获取 ───────────────────────────
 
-async function fetchJson<T>(url: string, timeoutMs = 9000): Promise<T> {
+/** 只接受真正的字符串;对象/数组/数字一律归一为 ''(防止 API 返回嵌套对象时 React 渲染崩溃) */
+function asStr(v: unknown): string {
+  return typeof v === 'string' ? v : ''
+}
+
+/** 只接受有限数字,否则回退 null(防止 NaN 进入 SVG path / toFixed) */
+function asNum(v: unknown): number | null {
+  const n = typeof v === 'number' ? v : typeof v === 'string' ? Number(v) : NaN
+  return Number.isFinite(n) ? n : null
+}
+
+async function fetchJson<T>(url: string, timeoutMs = 9000, headers?: Record<string, string>): Promise<T> {
   const ctrl = new AbortController()
   const timer = setTimeout(() => ctrl.abort(), timeoutMs)
   try {
-    const res = await fetch(url, { signal: ctrl.signal, cache: 'no-store' })
+    const res = await fetch(url, { signal: ctrl.signal, cache: 'no-store', headers })
     if (!res.ok) throw new Error(`HTTP ${res.status}`)
     return (await res.json()) as T
   } finally {
@@ -127,81 +138,97 @@ async function fetchJson<T>(url: string, timeoutMs = 9000): Promise<T> {
   }
 }
 
+/** 从 speed.cloudflare.com/meta 的 colo 字段提取 IATA 码——该字段历史上是字符串,现在是对象 {iata, lat, lon, cca2, region, city} */
+function extractColo(colo: unknown): string {
+  if (typeof colo === 'string') return colo
+  if (colo && typeof colo === 'object') return asStr((colo as Record<string, unknown>).iata)
+  return ''
+}
+
 /** Tier 1:即时拿到出口 IP / 国家码 / Cloudflare Colo */
 async function fetchTrace(): Promise<TraceData | null> {
   try {
-    const meta = await fetchJson<{ clientIp?: string; colo?: string; country?: string }>(
+    const meta = await fetchJson<{ clientIp?: unknown; colo?: unknown; country?: unknown }>(
       'https://speed.cloudflare.com/meta',
       5000,
     )
-    if (meta.clientIp) return { ip: meta.clientIp, colo: meta.colo ?? '', countryCode: meta.country ?? '' }
+    const ip = asStr(meta.clientIp)
+    if (ip) return { ip, colo: extractColo(meta.colo), countryCode: asStr(meta.country) }
   } catch { /* fall through */ }
   try {
     const res = await fetch('/cdn-cgi/trace', { cache: 'no-store' })
     if (res.ok) {
       const text = await res.text()
-      const map = Object.fromEntries(text.trim().split('\n').map((l) => l.split('=')))
-      if (map.ip) return { ip: map.ip, colo: map.colo ?? '', countryCode: map.loc ?? '' }
+      const map = Object.fromEntries(
+        text.trim().split('\n').map((l) => {
+          const idx = l.indexOf('=')
+          return idx === -1 ? [l, ''] : [l.slice(0, idx), l.slice(idx + 1)]
+        }),
+      )
+      const ip = asStr(map.ip)
+      if (ip) return { ip, colo: asStr(map.colo), countryCode: asStr(map.loc) }
     }
   } catch { /* fall through */ }
   try {
-    const data = await fetchJson<{ ip?: string }>('https://api.ipify.org?format=json', 5000)
-    if (data.ip) return { ip: data.ip, colo: '', countryCode: '' }
+    const data = await fetchJson<{ ip?: unknown }>('https://api.ipify.org?format=json', 5000)
+    const ip = asStr(data.ip)
+    if (ip) return { ip, colo: '', countryCode: '' }
   } catch { /* give up */ }
   return null
 }
 
 interface IpWhoIsResponse {
   success: boolean
-  ip: string
-  type?: string
-  country?: string
-  country_code?: string
-  region?: string
-  city?: string
-  latitude?: number
-  longitude?: number
-  postal?: string
-  flag?: { emoji?: string }
-  connection?: { asn?: number; org?: string; isp?: string }
-  timezone?: { id?: string }
+  ip?: unknown
+  type?: unknown
+  country?: unknown
+  country_code?: unknown
+  region?: unknown
+  city?: unknown
+  latitude?: unknown
+  longitude?: unknown
+  postal?: unknown
+  flag?: { emoji?: unknown }
+  connection?: { asn?: unknown; org?: unknown; isp?: unknown }
+  timezone?: { id?: unknown }
 }
 
 interface IpApiCoResponse {
-  ip: string
-  version?: string
-  country_name?: string
-  country_code?: string
-  region?: string
-  city?: string
-  latitude?: number
-  longitude?: number
-  postal?: string
-  timezone?: string
-  asn?: string
-  org?: string
+  ip?: unknown
+  version?: unknown
+  country_name?: unknown
+  country_code?: unknown
+  region?: unknown
+  city?: unknown
+  latitude?: unknown
+  longitude?: unknown
+  postal?: unknown
+  timezone?: unknown
+  asn?: unknown
+  org?: unknown
 }
 
-/** Tier 2:富 Geo + ASN,双源回退 */
+/** Tier 2:富 Geo + ASN,双源回退;所有字段经 asStr/asNum 归一,杜绝嵌套对象/NaN 流入渲染层 */
 async function fetchGeo(ip: string): Promise<GeoData> {
   try {
     const d = await fetchJson<IpWhoIsResponse>(`https://ipwho.is/${encodeURIComponent(ip)}`)
-    if (d.success) {
+    const resolvedIp = asStr(d?.ip)
+    if (d?.success && resolvedIp) {
       return {
-        ip: d.ip,
+        ip: resolvedIp,
         ipType: d.type === 'IPv6' ? 'IPv6' : 'IPv4',
-        asn: d.connection?.asn ?? null,
-        asnOrg: d.connection?.org ?? '',
-        isp: d.connection?.isp ?? '',
-        country: d.country ?? '',
-        countryCode: d.country_code ?? '',
-        flagEmoji: d.flag?.emoji ?? '',
-        region: d.region ?? '',
-        city: d.city ?? '',
-        latitude: d.latitude ?? null,
-        longitude: d.longitude ?? null,
-        postal: d.postal ?? '',
-        timezoneId: d.timezone?.id ?? '',
+        asn: asNum(d.connection?.asn),
+        asnOrg: asStr(d.connection?.org),
+        isp: asStr(d.connection?.isp),
+        country: asStr(d.country),
+        countryCode: asStr(d.country_code),
+        flagEmoji: asStr(d.flag?.emoji),
+        region: asStr(d.region),
+        city: asStr(d.city),
+        latitude: asNum(d.latitude),
+        longitude: asNum(d.longitude),
+        postal: asStr(d.postal),
+        timezoneId: asStr(d.timezone?.id),
         source: 'ipwho.is',
       }
     }
@@ -209,22 +236,24 @@ async function fetchGeo(ip: string): Promise<GeoData> {
   } catch { /* fallback below */ }
 
   const d = await fetchJson<IpApiCoResponse>(`https://ipapi.co/${encodeURIComponent(ip)}/json/`)
-  if (!d.ip) throw new Error('Geo lookup failed on all sources')
+  const resolvedIp = asStr(d?.ip)
+  if (!resolvedIp) throw new Error('Geo lookup failed on all sources')
+  const asnRaw = asStr(d.asn)
   return {
-    ip: d.ip,
+    ip: resolvedIp,
     ipType: d.version === 'IPv6' ? 'IPv6' : 'IPv4',
-    asn: d.asn ? Number(d.asn.replace(/^AS/i, '')) : null,
-    asnOrg: d.org ?? '',
-    isp: d.org ?? '',
-    country: d.country_name ?? '',
-    countryCode: d.country_code ?? '',
+    asn: asnRaw ? asNum(asnRaw.replace(/^AS/i, '')) : null,
+    asnOrg: asStr(d.org),
+    isp: asStr(d.org),
+    country: asStr(d.country_name),
+    countryCode: asStr(d.country_code),
     flagEmoji: '',
-    region: d.region ?? '',
-    city: d.city ?? '',
-    latitude: d.latitude ?? null,
-    longitude: d.longitude ?? null,
-    postal: d.postal ?? '',
-    timezoneId: d.timezone ?? '',
+    region: asStr(d.region),
+    city: asStr(d.city),
+    latitude: asNum(d.latitude),
+    longitude: asNum(d.longitude),
+    postal: asStr(d.postal),
+    timezoneId: asStr(d.timezone),
     source: 'ipapi.co',
   }
 }
@@ -233,11 +262,13 @@ interface DohAnswer { type: number; data: string }
 interface DohResponse { Answer?: DohAnswer[] }
 
 async function dohQuery(name: string, type: string): Promise<DohAnswer[]> {
+  // 必须带 accept: application/dns-json,否则 cloudflare-dns.com 返回 400
   const d = await fetchJson<DohResponse>(
     `https://cloudflare-dns.com/dns-query?name=${encodeURIComponent(name)}&type=${type}`,
     6000,
-    )
-  return d.Answer ?? []
+    { accept: 'application/dns-json' },
+  )
+  return Array.isArray(d?.Answer) ? d.Answer : []
 }
 
 /** 域名 → IP(优先 A,回退 AAAA) */
@@ -245,9 +276,12 @@ async function resolveDomain(domain: string): Promise<string | null> {
   try {
     const a = await dohQuery(domain, 'A')
     const hit = a.find((x) => x.type === 1)
-    if (hit) return hit.data
+    const ipv4 = hit ? asStr(hit.data) : ''
+    if (ipv4) return ipv4
     const aaaa = await dohQuery(domain, 'AAAA')
-    return aaaa.find((x) => x.type === 28)?.data ?? null
+    const hit6 = aaaa.find((x) => x.type === 28)
+    const ipv6 = hit6 ? asStr(hit6.data) : ''
+    return ipv6 || null
   } catch {
     return null
   }
@@ -279,7 +313,9 @@ async function fetchPtr(ip: string): Promise<string | null> {
       name = ip.split('.').reverse().join('.') + '.in-addr.arpa'
     }
     const answers = await dohQuery(name, 'PTR')
-    return answers.find((a) => a.type === 12)?.data ?? null
+    const hit = answers.find((a) => a.type === 12)
+    const ptr = hit ? asStr(hit.data) : ''
+    return ptr || null
   } catch {
     return null
   }
@@ -318,7 +354,11 @@ function analyze(geo: GeoData, ptr: string | null): IpAnalysis {
   // 免费数据源无法精确判定,这里用「有机房特征但无 PTR」作为广播 IP 近似。
   const isBroadcast = isDatacenter && !ptr
 
-  const deviceTz = Intl.DateTimeFormat().resolvedOptions().timeZone || ''
+  // Intl 只在浏览器可用;异常环境(隐私模式/极端 UA)下兜底为空串
+  let deviceTz = ''
+  try {
+    deviceTz = typeof Intl !== 'undefined' ? Intl.DateTimeFormat().resolvedOptions().timeZone || '' : ''
+  } catch { /* leave empty */ }
   const tzMismatch = Boolean(geo.timezoneId && deviceTz && geo.timezoneId !== deviceTz)
 
   // 权重:机房 52 / 时区不一致 20 / 代理关键词 22(对应公式 W_type·W_tz·W_bl)
@@ -394,18 +434,20 @@ function RiskGauge({ score, level }: { score: number; level: RiskLevel }) {
     const [x1, y1] = polar(s1)
     return `M ${x0.toFixed(2)} ${y0.toFixed(2)} A ${r} ${r} 0 0 1 ${x1.toFixed(2)} ${y1.toFixed(2)}`
   }
-  const [nx, ny] = polar(score)
+  // 防御:任何非有限分数一律归零,杜绝 NaN 流入 SVG path / needle 坐标
+  const safeScore = Number.isFinite(score) ? Math.max(0, Math.min(100, score)) : 0
+  const [nx, ny] = polar(safeScore)
   const style = LEVEL_STYLE[level]
   return (
     <div className="flex flex-col items-center">
-      <svg viewBox="0 0 200 104" className="w-full max-w-[240px]" role="img" aria-label={`Risk score ${score} of 100`}>
+      <svg viewBox="0 0 200 104" className="w-full max-w-[240px]" role="img" aria-label={`Risk score ${safeScore} of 100`}>
         <path d={arc(0, 20)} fill="none" stroke="#22c55e" strokeWidth="14" strokeLinecap="round" opacity="0.9" />
         <path d={arc(21, 60)} fill="none" stroke="#f59e0b" strokeWidth="14" opacity="0.9" />
         <path d={arc(61, 100)} fill="none" stroke="#ef4444" strokeWidth="14" strokeLinecap="round" opacity="0.9" />
         <line x1={cx} y1={cy} x2={nx} y2={ny} stroke={style.color} strokeWidth="3.5" strokeLinecap="round" />
         <circle cx={cx} cy={cy} r="5" fill={style.color} />
         <text x={cx} y={cy - 26} textAnchor="middle" fontSize="26" fontWeight="800" fill={style.color}>
-          {score}
+          {safeScore}
         </text>
         <text x={cx} y={cy - 10} textAnchor="middle" fontSize="9" fill="rgb(var(--text-subtle))">
           FRAUD SCORE / 100
@@ -806,7 +848,7 @@ export function IpCheckerClient() {
             </thead>
             <tbody>
               {EDGE_ENDPOINTS.map((ep) => {
-                const p = pings[ep.id]
+                const p: PingResult = pings[ep.id] ?? { status: 'idle', ms: null }
                 return (
                   <tr key={ep.id} className="border-b last:border-0" style={{ borderColor: 'rgb(var(--border))' }}>
                     <td className="py-2.5 pr-4 whitespace-nowrap">{ep.flag} {ep.label}</td>
