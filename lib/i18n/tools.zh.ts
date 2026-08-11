@@ -234,6 +234,10 @@ export const zhTools: Record<string, { name: string; shortIntro: string }> = {
     name: '图片转 Base64',
     shortIntro: '把图片转为 Base64 data URI,用于内联嵌入。',
   },
+  'ip-checker': {
+    name: 'IP 质量与欺诈检测',
+    shortIntro: '检测 IP 质量、ASN 类型、欺诈评分与时区一致性。',
+  },
 
   // ─────────── 🔤 文本工具 ───────────
   'word-counter': {

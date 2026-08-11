@@ -233,6 +233,10 @@ export const esTools: Record<string, { name: string; shortIntro: string }> = {
     name: 'Conversor de imagen a Base64',
     shortIntro: 'Convierte una imagen en un data URI Base64 para incrustar.',
   },
+  'ip-checker': {
+    name: 'Verificador de calidad y fraude de IP',
+    shortIntro: 'Inspecciona la calidad de la IP, el tipo de ASN, la puntuación de fraude y la consistencia de zona horaria.',
+  },
 
   // ─────────── 🔤 Herramientas de texto ───────────
   'word-counter': {

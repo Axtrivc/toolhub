@@ -2,6 +2,8 @@
 
 import { useState, useEffect, useCallback, useRef } from 'react'
 import { CopyButton } from '@/components/CopyButton'
+import { useApp } from '@/components/providers/AppProviders'
+import { ipCheckerDicts, type IpCheckerDict, type UseCaseKey } from '@/lib/i18n/ip-checker'
 
 /**
  * IP Quality & Fraud Score Inspector —— 纯客户端多源探测仪表盘
@@ -372,28 +374,16 @@ function analyze(geo: GeoData, ptr: string | null): IpAnalysis {
   return { geo, ptr, isDatacenter, isBroadcast, proxyKeyword, tzMismatch, deviceTz, score, level }
 }
 
-/** 跨境场景星级(1-5) */
-function useCaseStars(a: IpAnalysis): { key: string; label: string; en: string; stars: number }[] {
+/** 跨境场景星级(1-5);文案由字典按 locale 提供,这里只产出 key + stars */
+function useCaseStars(a: IpAnalysis): { key: UseCaseKey; stars: number }[] {
   const dc = a.isDatacenter
   const aiBlocked = AI_BLOCKED_COUNTRIES.includes(a.geo.countryCode)
   const tzPenalty = a.tzMismatch ? 1 : 0
   return [
-    {
-      key: 'tiktok', label: 'TikTok / 短视频出海', en: 'TikTok & Video Outreach',
-      stars: clamp1to5((dc ? 1 : 5) - tzPenalty),
-    },
-    {
-      key: 'ecom', label: '跨境电商 (Amazon/eBay/Shopify)', en: 'Cross-Border E-Commerce',
-      stars: clamp1to5((dc ? 2 : 4) - tzPenalty),
-    },
-    {
-      key: 'social', label: '社媒运营 (X/Facebook/Instagram)', en: 'Social Media Ops',
-      stars: clamp1to5((dc ? 2 : 4) - tzPenalty),
-    },
-    {
-      key: 'ai', label: 'AI 服务 (ChatGPT/Claude/Gemini)', en: 'AI Services Access',
-      stars: aiBlocked ? 1 : clamp1to5((dc ? 3 : 5) - tzPenalty),
-    },
+    { key: 'tiktok', stars: clamp1to5((dc ? 1 : 5) - tzPenalty) },
+    { key: 'ecom', stars: clamp1to5((dc ? 2 : 4) - tzPenalty) },
+    { key: 'social', stars: clamp1to5((dc ? 2 : 4) - tzPenalty) },
+    { key: 'ai', stars: aiBlocked ? 1 : clamp1to5((dc ? 3 : 5) - tzPenalty) },
   ]
 }
 
@@ -403,10 +393,11 @@ function clamp1to5(n: number): number {
 
 // ─────────────────────────── 小组件 ───────────────────────────
 
-const LEVEL_STYLE: Record<RiskLevel, { color: string; bg: string; zh: string; en: string }> = {
-  low: { color: '#16a34a', bg: 'rgba(34,197,94,0.12)', zh: '低风险 · 干净', en: 'Low Risk - Clean' },
-  medium: { color: '#d97706', bg: 'rgba(245,158,11,0.12)', zh: '中风险 · 机房/VPN', en: 'Medium Risk - Hosting / VPN' },
-  high: { color: '#dc2626', bg: 'rgba(239,68,68,0.12)', zh: '高风险 · 代理/黑名单', en: 'High Risk - Proxy / Blacklisted' },
+/** 风险等级 → 颜色样式;文案按等级从字典取(riskLow/riskMedium/riskHigh) */
+const LEVEL_STYLE: Record<RiskLevel, { color: string; bg: string }> = {
+  low: { color: '#16a34a', bg: 'rgba(34,197,94,0.12)' },
+  medium: { color: '#d97706', bg: 'rgba(245,158,11,0.12)' },
+  high: { color: '#dc2626', bg: 'rgba(239,68,68,0.12)' },
 }
 
 function Badge({ color, bg, children }: { color: string; bg: string; children: React.ReactNode }) {
@@ -421,7 +412,7 @@ function Badge({ color, bg, children }: { color: string; bg: string; children: R
 }
 
 /** 半圆分段仪表盘:0-20 绿 / 21-60 黄 / 61-100 红 */
-function RiskGauge({ score, level }: { score: number; level: RiskLevel }) {
+function RiskGauge({ score, level, gaugeLabel, riskLabel }: { score: number; level: RiskLevel; gaugeLabel: string; riskLabel: string }) {
   const cx = 100
   const cy = 92
   const r = 76
@@ -450,11 +441,11 @@ function RiskGauge({ score, level }: { score: number; level: RiskLevel }) {
           {safeScore}
         </text>
         <text x={cx} y={cy - 10} textAnchor="middle" fontSize="9" fill="rgb(var(--text-subtle))">
-          FRAUD SCORE / 100
+          {gaugeLabel}
         </text>
       </svg>
       <Badge color={style.color} bg={style.bg}>
-        {style.zh} · {style.en}
+        {riskLabel}
       </Badge>
     </div>
   )
@@ -469,10 +460,10 @@ function StarRow({ stars }: { stars: number }) {
   )
 }
 
-function RatingPill({ stars }: { stars: number }) {
-  if (stars >= 4) return <Badge color="#16a34a" bg="rgba(34,197,94,0.12)">推荐</Badge>
-  if (stars === 3) return <Badge color="#d97706" bg="rgba(245,158,11,0.12)">谨慎使用</Badge>
-  return <Badge color="#dc2626" bg="rgba(239,68,68,0.12)">不推荐</Badge>
+function RatingPill({ stars, d }: { stars: number; d: IpCheckerDict }) {
+  if (stars >= 4) return <Badge color="#16a34a" bg="rgba(34,197,94,0.12)">{d.ratingRecommended}</Badge>
+  if (stars === 3) return <Badge color="#d97706" bg="rgba(245,158,11,0.12)">{d.ratingCaution}</Badge>
+  return <Badge color="#dc2626" bg="rgba(239,68,68,0.12)">{d.ratingNotRecommended}</Badge>
 }
 
 function DetailRow({ label, value, mono }: { label: string; value: string; mono?: boolean }) {
@@ -487,12 +478,16 @@ function DetailRow({ label, value, mono }: { label: string; value: string; mono?
 // ─────────────────────────── 主组件 ───────────────────────────
 
 export function IpCheckerClient() {
+  const { locale } = useApp()
+  // 缺失整包回退 en(与 LocalizedPageShell 同款兜底)
+  const d: IpCheckerDict = ipCheckerDicts[locale] ?? ipCheckerDicts.en
   const [trace, setTrace] = useState<TraceData | null>(null)
   const [analysis, setAnalysis] = useState<IpAnalysis | null>(null)
   const [loading, setLoading] = useState(true)
-  const [error, setError] = useState('')
+  // 错误存字典 key 而非字符串,保证切换语言后错误提示也跟随变化
+  const [errorKey, setErrorKey] = useState<'errorSources' | 'errorQuery' | ''>('')
   const [query, setQuery] = useState('')
-  const [queryError, setQueryError] = useState('')
+  const [queryErrorKey, setQueryErrorKey] = useState<'errorInvalidInput' | ''>('')
   const [webRtcIps, setWebRtcIps] = useState<string[] | null>(null)
   const [pings, setPings] = useState<Record<string, PingResult>>(
     () => Object.fromEntries(EDGE_ENDPOINTS.map((e) => [e.id, { status: 'idle', ms: null }])),
@@ -507,7 +502,7 @@ export function IpCheckerClient() {
 
   const refresh = useCallback(async () => {
     setLoading(true)
-    setError('')
+    setErrorKey('')
     try {
       const t = await fetchTrace()
       setTrace(t)
@@ -518,7 +513,7 @@ export function IpCheckerClient() {
         await loadGeo('')
       }
     } catch {
-      setError('所有数据源暂时不可用,请稍后重试(可能是免费 API 限流)。')
+      setErrorKey('errorSources')
     } finally {
       setLoading(false)
     }
@@ -558,14 +553,14 @@ export function IpCheckerClient() {
   }, [analysis, runPingTest])
 
   const handleQuery = useCallback(async () => {
-    setQueryError('')
+    setQueryErrorKey('')
     const kind = classifyTarget(query)
     if (!kind) {
-      setQueryError('请输入合法的 IPv4 / IPv6 地址或域名(如 8.8.8.8 或 example.com)。')
+      setQueryErrorKey('errorInvalidInput')
       return
     }
     setLoading(true)
-    setError('')
+    setErrorKey('')
     try {
       let ip = query.trim()
       if (kind === 'domain') {
@@ -575,7 +570,7 @@ export function IpCheckerClient() {
       }
       await loadGeo(ip)
     } catch {
-      setError('查询失败:无法解析或定位该目标,请检查输入或稍后重试。')
+      setErrorKey('errorQuery')
     } finally {
       setLoading(false)
     }
@@ -597,7 +592,7 @@ export function IpCheckerClient() {
         <div className="flex flex-wrap items-center gap-3">
           <div className="min-w-0 flex-1">
             <p className="text-xs font-medium uppercase tracking-wider" style={{ color: 'rgb(var(--text-subtle))' }}>
-              Your Current IP / 当前出口 IP
+              {d.yourCurrentIp}
             </p>
             <div className="mt-1 flex flex-wrap items-center gap-3">
               <span className="break-all font-mono text-2xl font-bold sm:text-3xl">{ipDisplay}</span>
@@ -607,13 +602,13 @@ export function IpCheckerClient() {
             </div>
           </div>
           <div className="flex items-center gap-2">
-            <CopyButton value={ipDisplay === '…' ? '' : ipDisplay} label="Copy IP" />
-            <button type="button" onClick={() => void refresh()} disabled={loading} className="btn btn-secondary" title="Refresh">
+            <CopyButton value={ipDisplay === '…' ? '' : ipDisplay} label={d.copyIp} />
+            <button type="button" onClick={() => void refresh()} disabled={loading} className="btn btn-secondary" title={d.refresh}>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={loading ? 'animate-spin' : ''}>
                 <path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8" />
                 <path d="M21 3v5h-5" />
               </svg>
-              Refresh
+              {d.refresh}
             </button>
           </div>
         </div>
@@ -624,26 +619,26 @@ export function IpCheckerClient() {
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             onKeyDown={(e) => e.key === 'Enter' && void handleQuery()}
-            placeholder="查询任意 IP 或域名,如 1.1.1.1 / 2606:4700::1111 / example.com"
+            placeholder={d.queryPlaceholder}
             className="flex-1 rounded-lg border px-3 py-2 font-mono text-sm outline-none transition focus:ring-2"
             style={{ borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rgb(var(--bg-card))' }}
             aria-label="Custom IP or domain query"
           />
           <button type="button" onClick={() => void handleQuery()} disabled={loading} className="btn btn-primary">
-            {loading ? 'Analyzing…' : 'Analyze / 检测'}
+            {loading ? d.analyzing : d.analyze}
           </button>
         </div>
-        {queryError && <p className="mt-2 text-sm text-red-600 dark:text-red-400">{queryError}</p>}
-        {error && (
+        {queryErrorKey && <p className="mt-2 text-sm text-red-600 dark:text-red-400">{d[queryErrorKey]}</p>}
+        {errorKey && (
           <p className="mt-3 rounded-md p-3 text-sm text-red-700 dark:text-red-300" style={{ backgroundColor: 'rgba(239,68,68,0.1)' }}>
-            {error}
+            {d[errorKey]}
           </p>
         )}
       </div>
 
       {loading && !analysis && (
         <div className="surface rounded-xl border p-8 text-center text-sm shadow-sm" style={{ color: 'rgb(var(--text-subtle))' }}>
-          正在通过多源接口探测您的 IP 指纹… (Cloudflare → ipwho.is → DoH)
+          {d.loadingHint}
         </div>
       )}
 
@@ -654,61 +649,64 @@ export function IpCheckerClient() {
             {/* Card A:IP 身份 */}
             <div className="surface rounded-xl border p-5 shadow-sm">
               <h3 className="text-sm font-semibold uppercase tracking-wider" style={{ color: 'rgb(var(--text-subtle))' }}>
-                IP Identity / 身份
+                {d.cardIdentity}
               </h3>
               <div className="mt-3 flex items-center gap-2">
                 <span className="text-3xl">{geo.flagEmoji || '🌐'}</span>
                 <div>
                   <p className="font-semibold leading-tight">
-                    {[geo.country, geo.region, geo.city].filter(Boolean).join(' · ') || 'Unknown'}
+                    {[geo.country, geo.region, geo.city].filter(Boolean).join(' · ') || d.locationUnknown}
                   </p>
                   <p className="text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>
-                    {geo.ipType} · {geo.timezoneId || 'tz unknown'}
+                    {geo.ipType} · {geo.timezoneId || d.tzUnknown}
                   </p>
                 </div>
               </div>
               <div className="mt-3 flex flex-wrap gap-1.5">
                 {analysis.isDatacenter ? (
-                  <Badge color="#dc2626" bg="rgba(239,68,68,0.12)">IDC 机房 IP / 商业宽带</Badge>
+                  <Badge color="#dc2626" bg="rgba(239,68,68,0.12)">{d.badgeDatacenter}</Badge>
                 ) : (
-                  <Badge color="#16a34a" bg="rgba(34,197,94,0.12)">原生住宅 ISP</Badge>
+                  <Badge color="#16a34a" bg="rgba(34,197,94,0.12)">{d.badgeResidential}</Badge>
                 )}
                 {analysis.isBroadcast ? (
-                  <Badge color="#d97706" bg="rgba(245,158,11,0.12)">广播 IP</Badge>
+                  <Badge color="#d97706" bg="rgba(245,158,11,0.12)">{d.badgeBroadcast}</Badge>
                 ) : (
-                  <Badge color="#16a34a" bg="rgba(34,197,94,0.12)">原生 IP</Badge>
+                  <Badge color="#16a34a" bg="rgba(34,197,94,0.12)">{d.badgeNativeIp}</Badge>
                 )}
               </div>
               <div className="mt-3 divide-y" style={{ borderColor: 'rgb(var(--border))' }}>
                 <DetailRow label="ASN" value={geo.asn ? `AS${geo.asn}` : ''} mono />
-                <DetailRow label="ASN Owner" value={geo.asnOrg} />
-                <DetailRow label="ISP / Company" value={geo.isp} />
-                <DetailRow label="Postal" value={geo.postal} mono />
-                <DetailRow label="PTR (Reverse DNS)" value={analysis.ptr ?? ''} mono />
-                <DetailRow label="Data Source" value={geo.source} mono />
+                <DetailRow label={d.rowAsnOwner} value={geo.asnOrg} />
+                <DetailRow label={d.rowIsp} value={geo.isp} />
+                <DetailRow label={d.rowPostal} value={geo.postal} mono />
+                <DetailRow label={d.rowPtr} value={analysis.ptr ?? ''} mono />
+                <DetailRow label={d.rowSource} value={geo.source} mono />
               </div>
             </div>
 
             {/* Card B:风险仪表盘 */}
             <div className="surface rounded-xl border p-5 shadow-sm">
               <h3 className="text-sm font-semibold uppercase tracking-wider" style={{ color: 'rgb(var(--text-subtle))' }}>
-                Risk / Fraud Score / 风险评分
+                {d.cardRisk}
               </h3>
               <div className="mt-4">
-                <RiskGauge score={analysis.score} level={analysis.level} />
+                <RiskGauge
+                  score={analysis.score}
+                  level={analysis.level}
+                  gaugeLabel={d.gaugeLabel}
+                  riskLabel={analysis.level === 'low' ? d.riskLow : analysis.level === 'medium' ? d.riskMedium : d.riskHigh}
+                />
               </div>
               <p className="mt-3 text-center text-sm" style={{ color: 'rgb(var(--text-muted))' }}>
-                {analysis.isDatacenter
-                  ? '机房出口节点 · Datacenter exit node'
-                  : '真实住宅信号 · Genuine residential signal'}
-                {analysis.tzMismatch && ' + 时区不一致'}
+                {analysis.isDatacenter ? d.summaryDatacenter : d.summaryResidential}
+                {analysis.tzMismatch && d.summaryTzMismatch}
               </p>
             </div>
 
             {/* Card C:地图 */}
             <div className="surface overflow-hidden rounded-xl border shadow-sm">
               <h3 className="px-5 pt-5 text-sm font-semibold uppercase tracking-wider" style={{ color: 'rgb(var(--text-subtle))' }}>
-                Geo Location / 地理定位
+                {d.cardGeo}
               </h3>
               {mapUrl ? (
                 <iframe
@@ -719,7 +717,7 @@ export function IpCheckerClient() {
                   loading="lazy"
                 />
               ) : (
-                <p className="p-5 text-sm" style={{ color: 'rgb(var(--text-subtle))' }}>坐标不可用,无法渲染地图。</p>
+                <p className="p-5 text-sm" style={{ color: 'rgb(var(--text-subtle))' }}>{d.mapUnavailable}</p>
               )}
               {geo.latitude != null && geo.longitude != null && (
                 <p className="px-5 pb-3 pt-1 font-mono text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>
@@ -733,47 +731,47 @@ export function IpCheckerClient() {
           <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
             <div className="surface rounded-xl border p-4 shadow-sm">
               <p className="text-xs font-semibold uppercase tracking-wider" style={{ color: 'rgb(var(--text-subtle))' }}>
-                Proxy / VPN 检测
+                {d.cardProxyTitle}
               </p>
               <div className="mt-2">
                 {analysis.proxyKeyword || analysis.isDatacenter ? (
-                  <Badge color="#d97706" bg="rgba(245,158,11,0.12)">检测到数据中心特征</Badge>
+                  <Badge color="#d97706" bg="rgba(245,158,11,0.12)">{d.proxyDetected}</Badge>
                 ) : (
-                  <Badge color="#16a34a" bg="rgba(34,197,94,0.12)">未检测到公开代理</Badge>
+                  <Badge color="#16a34a" bg="rgba(34,197,94,0.12)">{d.proxyClean}</Badge>
                 )}
               </div>
               <p className="mt-2 text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>
-                基于 ASN 归属关键词的启发式判定
+                {d.proxyNote}
               </p>
             </div>
 
             <div className="surface rounded-xl border p-4 shadow-sm">
               <p className="text-xs font-semibold uppercase tracking-wider" style={{ color: 'rgb(var(--text-subtle))' }}>
-                时区一致性
+                {d.cardTzTitle}
               </p>
               <div className="mt-2">
                 {analysis.tzMismatch ? (
-                  <Badge color="#d97706" bg="rgba(245,158,11,0.12)">时区不一致(代理信号)</Badge>
+                  <Badge color="#d97706" bg="rgba(245,158,11,0.12)">{d.tzMismatchBadge}</Badge>
                 ) : (
-                  <Badge color="#16a34a" bg="rgba(34,197,94,0.12)">时区一致</Badge>
+                  <Badge color="#16a34a" bg="rgba(34,197,94,0.12)">{d.tzMatchBadge}</Badge>
                 )}
               </div>
               <p className="mt-2 font-mono text-xs leading-relaxed" style={{ color: 'rgb(var(--text-subtle))' }}>
-                Device: {analysis.deviceTz || '—'}
+                {d.tzDevice}: {analysis.deviceTz || '—'}
                 <br />
-                IP: {geo.timezoneId || '—'}
+                {d.tzIp}: {geo.timezoneId || '—'}
               </p>
             </div>
 
             <div className="surface rounded-xl border p-4 shadow-sm">
               <p className="text-xs font-semibold uppercase tracking-wider" style={{ color: 'rgb(var(--text-subtle))' }}>
-                IP 协议
+                {d.cardProtoTitle}
               </p>
               <div className="mt-2">
                 {geo.ipType === 'IPv6' ? (
-                  <Badge color="#2563eb" bg="rgba(37,99,235,0.12)">Dual Stack IPv6</Badge>
+                  <Badge color="#2563eb" bg="rgba(37,99,235,0.12)">{d.protoV6}</Badge>
                 ) : (
-                  <Badge color="#2563eb" bg="rgba(37,99,235,0.12)">IPv4 出口</Badge>
+                  <Badge color="#2563eb" bg="rgba(37,99,235,0.12)">{d.protoV4}</Badge>
                 )}
               </div>
               <p className="mt-2 font-mono text-xs break-all" style={{ color: 'rgb(var(--text-subtle))' }}>
@@ -783,17 +781,17 @@ export function IpCheckerClient() {
 
             <div className="surface rounded-xl border p-4 shadow-sm">
               <p className="text-xs font-semibold uppercase tracking-wider" style={{ color: 'rgb(var(--text-subtle))' }}>
-                WebRTC / Header 泄漏
+                {d.cardWebrtcTitle}
               </p>
               <div className="mt-2">
                 {webRtcIps === null ? (
-                  <Badge color="#d97706" bg="rgba(245,158,11,0.12)">检测中…</Badge>
+                  <Badge color="#d97706" bg="rgba(245,158,11,0.12)">{d.webrtcTesting}</Badge>
                 ) : webRtcIps.length === 0 ? (
-                  <Badge color="#16a34a" bg="rgba(34,197,94,0.12)">无泄漏(浏览器已防护)</Badge>
+                  <Badge color="#16a34a" bg="rgba(34,197,94,0.12)">{d.webrtcNoLeak}</Badge>
                 ) : webRtcIps.some((ip) => ip !== geo.ip) ? (
-                  <Badge color="#dc2626" bg="rgba(239,68,68,0.12)">检测到 WebRTC 泄漏</Badge>
+                  <Badge color="#dc2626" bg="rgba(239,68,68,0.12)">{d.webrtcLeak}</Badge>
                 ) : (
-                  <Badge color="#16a34a" bg="rgba(34,197,94,0.12)">WebRTC 与出口一致</Badge>
+                  <Badge color="#16a34a" bg="rgba(34,197,94,0.12)">{d.webrtcConsistent}</Badge>
                 )}
               </div>
               <p className="mt-2 text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>
@@ -805,22 +803,21 @@ export function IpCheckerClient() {
           {/* ───── 跨境场景评级矩阵 ───── */}
           <div className="surface rounded-xl border p-5 shadow-sm">
             <h3 className="text-sm font-semibold uppercase tracking-wider" style={{ color: 'rgb(var(--text-subtle))' }}>
-              跨境场景适用性评级 · Cross-Border Use-Case Ratings
+              {d.ratingsTitle}
             </h3>
             <div className="mt-4 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
               {ratings.map((r) => (
                 <div key={r.key} className="rounded-lg border p-4" style={{ borderColor: 'rgb(var(--border))' }}>
-                  <p className="text-sm font-semibold leading-snug">{r.label}</p>
-                  <p className="mt-0.5 text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>{r.en}</p>
+                  <p className="text-sm font-semibold leading-snug">{d.useCaseLabels[r.key]}</p>
                   <div className="mt-2 flex items-center justify-between">
                     <StarRow stars={r.stars} />
-                    <RatingPill stars={r.stars} />
+                    <RatingPill stars={r.stars} d={d} />
                   </div>
                 </div>
               ))}
             </div>
             <p className="mt-3 text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>
-              评级基于 ASN 类型(住宅/机房)、时区一致性与目标国家服务可用性启发式推算,仅供参考。
+              {d.ratingsNote}
             </p>
           </div>
         </>
@@ -830,20 +827,20 @@ export function IpCheckerClient() {
       <div className="surface rounded-xl border p-5 shadow-sm">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <h3 className="text-sm font-semibold uppercase tracking-wider" style={{ color: 'rgb(var(--text-subtle))' }}>
-            全球边缘延迟探测 · Global Edge Latency
+            {d.latencyTitle}
           </h3>
           <button type="button" onClick={() => void runPingTest()} className="btn btn-secondary">
-            Run Ping Test
+            {d.runPingTest}
           </button>
         </div>
         <div className="mt-4 overflow-x-auto">
           <table className="w-full min-w-[520px] text-sm">
             <thead>
               <tr className="border-b text-left text-xs uppercase tracking-wider" style={{ borderColor: 'rgb(var(--border))', color: 'rgb(var(--text-subtle))' }}>
-                <th className="pb-2 pr-4 font-medium">Region</th>
-                <th className="pb-2 pr-4 font-medium">Endpoint</th>
-                <th className="pb-2 pr-4 font-medium">Latency</th>
-                <th className="pb-2 font-medium">Status</th>
+                <th className="pb-2 pr-4 font-medium">{d.thRegion}</th>
+                <th className="pb-2 pr-4 font-medium">{d.thEndpoint}</th>
+                <th className="pb-2 pr-4 font-medium">{d.thLatency}</th>
+                <th className="pb-2 font-medium">{d.thStatus}</th>
               </tr>
             </thead>
             <tbody>
@@ -863,7 +860,7 @@ export function IpCheckerClient() {
                       ) : p.status === 'running' ? '…' : '—'}
                     </td>
                     <td className="py-2.5 text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>
-                      {p.status === 'ok' ? 'OK' : p.status === 'running' ? 'Measuring…' : p.status === 'fail' ? 'Timeout / blocked' : 'Idle'}
+                      {p.status === 'ok' ? 'OK' : p.status === 'running' ? d.pingMeasuring : p.status === 'fail' ? d.pingTimeout : d.pingIdle}
                     </td>
                   </tr>
                 )
@@ -872,7 +869,7 @@ export function IpCheckerClient() {
           </table>
         </div>
         <p className="mt-3 text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>
-          通过 <code>fetch</code> + <code>performance.now()</code> 测量浏览器到各 AWS 区域端点的 HTTP 往返时间(含 DNS/TLS 首连开销),仅用于相对比较。
+          {d.latencyNote}
         </p>
       </div>
     </div>

@@ -233,6 +233,10 @@ export const deTools: Record<string, { name: string; shortIntro: string }> = {
     name: 'Bild-zu-Base64-Konverter',
     shortIntro: 'Macht aus einem Bild eine Base64-Data-URI zum Einbetten.',
   },
+  'ip-checker': {
+    name: 'IP-Qualitäts- & Fraud-Checker',
+    shortIntro: 'Prüft IP-Qualität, ASN-Typ, Fraud-Score und Zeitzonen-Konsistenz.',
+  },
 
   // ─────────── 🔤 Text-Werkzeuge ───────────
   'word-counter': {

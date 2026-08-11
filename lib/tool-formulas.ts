@@ -127,7 +127,7 @@ export const toolFormulas: Record<string, ToolFormula> = {
   'ip-checker': {
     formula: 'Risk Score = W_type × S_datacenter + W_tz × S_timezone_diff + W_bl × S_blacklist',
     explain:
-      '启发式加权模型。S_datacenter 由 ASN 归属判定(命中 AWS、hosting、cloud 等机房关键词记 1),权重 W_type 最高;S_timezone_diff 表示设备时区与 IP 地理时区是否不一致(代理泄漏信号);S_blacklist 近似代理/VPN 关键词与公开黑名单特征。总分缩放至 0–100:0–20 低风险(原生住宅),21–60 中风险(机房/VPN 特征),61–100 高风险(代理/Tor/黑名单)。',
+      'A heuristic weighted model. S_datacenter is scored 1 when the ASN owner matches datacenter keywords such as AWS, hosting, or cloud, and carries the highest weight W_type. S_timezone_diff flags a mismatch between your device timezone and the IP geolocation timezone (a classic proxy leak signal). S_blacklist approximates proxy/VPN keywords and public blacklist traits. The total is scaled to 0–100: 0–20 low risk (native residential), 21–60 medium risk (hosting/VPN traits), 61–100 high risk (proxy/Tor/blacklisted).',
   },
 }
 
