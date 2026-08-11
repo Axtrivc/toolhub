@@ -3119,6 +3119,22 @@ export const tools: ToolMeta[] = [
     titleLongTail: 'Wordle Solver Online - Find 5-Letter Words by Clues Free',
     descriptionLongTail: 'Enter your green, yellow, and grey clues to filter a built-in dictionary of five-letter words. Includes anagram mode for other word games. Free.',
   },
+  {
+    slug: 'ip-checker', name: 'IP Quality & Fraud Checker',
+    title: 'IP Quality & Fraud Score Checker Online (Fast & Free)',
+    description: 'Check IP address quality, ASN, fraud score, proxy status, and browser timezone consistency instantly in your browser.',
+    keywords: ['ip lookup', 'fraud score', 'ip quality', 'proxy detector', 'whois', 'asn lookup'],
+    intent: 'informational', category: 'Developer Tools', h1: 'IP Quality & Fraud Score Checker',
+    shortIntro: 'Inspect IP quality, ASN type, fraud score, and timezone consistency.', published: true,
+    longTailKeywords: [
+      'ip fraud score checker',
+      'residential vs datacenter ip check',
+      'ip quality checker for tiktok',
+      'proxy vpn detector online free',
+    ],
+    titleLongTail: 'IP Fraud Score Checker - Residential vs Datacenter IP Test',
+    descriptionLongTail: 'Instantly check any IP for fraud risk, ASN type, proxy signals, and timezone mismatch. See platform ratings for TikTok, e-commerce, and AI tools. Free.',
+  },
 ]
 /**
  * 分类 → emoji 图标的默认映射。
@@ -3322,6 +3338,7 @@ const STAR_ICONS: Record<string, string> = {
   'reading-speaking-time': 'book-open',
   'random-choice-picker': 'dices',
   'wordle-solver': 'puzzle',
+  'ip-checker': 'shield-check',
 }
 
 /** 默认兜底图标键(理论上用不到,所有 category 都已映射) */

@@ -1321,6 +1321,20 @@ export const toolFaqs: Record<string, FaqPair[]> = {
       a: 'Yes. Each of the four result sections has its own Copy button that copies just that set (one item per line), so you can paste "only in A" straight into a spreadsheet or another tool without manual cleanup.',
     },
   ],
+  'ip-checker': [
+    {
+      q: 'What is an IP fraud score and how is it calculated?',
+      a: 'A fraud score is a 0-100 heuristic rating of how risky an IP looks to online platforms. It blends signals like the ASN type (datacenter vs residential), mismatches between your device timezone and the IP geolocation timezone, and hosting/proxy keywords in the ASN owner name. The higher the score, the more the IP resembles a bot, VPN, or proxy exit node.',
+    },
+    {
+      q: 'What is the difference between a residential ISP IP and a datacenter (IDC) IP?',
+      a: 'Residential IPs are assigned by consumer ISPs to real households, so platforms treat their traffic as human. Datacenter IPs come from cloud providers like AWS, Google Cloud, or DigitalOcean; they are cheap to obtain in bulk, which is why TikTok, Amazon, and similar platforms flag them — accounts operated on datacenter IPs face far more verification challenges and bans.',
+    },
+    {
+      q: 'Why does my device timezone differ from my IP timezone?',
+      a: 'Your device timezone comes from the browser/OS settings, while the IP timezone is derived from geolocating your exit IP. If they disagree — for example the device reports Asia/Shanghai but the IP resolves to America/New_York — you are almost certainly behind a VPN or proxy, and anti-fraud systems use exactly this mismatch as a leak signal.',
+    },
+  ],
 }
 export function getToolFaqs(slug: string): FaqPair[] {
   return toolFaqs[slug] ?? []
