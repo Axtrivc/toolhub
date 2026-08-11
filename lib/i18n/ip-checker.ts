@@ -33,8 +33,11 @@ export interface IpCheckerDict {
   tzUnknown: string
   badgeDatacenter: string
   badgeResidential: string
-  badgeBroadcast: string
+  badgeUnverifiedHost: string // 机房 IP 且无 PTR(原 isBroadcast,语义修正)
   badgeNativeIp: string
+  // 当检测的是第三方 IP 时,本机相关信号(时区一致性 / WebRTC 泄漏)不适用
+  signalNaBadge: string
+  signalNaNote: string
   rowAsnOwner: string
   rowIsp: string
   rowPostal: string
@@ -106,8 +109,10 @@ const en: IpCheckerDict = {
   tzUnknown: 'tz unknown',
   badgeDatacenter: 'Datacenter (IDC) IP',
   badgeResidential: 'Native Residential ISP',
-  badgeBroadcast: 'Broadcast IP',
+  badgeUnverifiedHost: 'Hosting (no rDNS)',
   badgeNativeIp: 'Native IP',
+  signalNaBadge: 'Own-IP only',
+  signalNaNote: 'This signal only applies when inspecting your own exit IP.',
   rowAsnOwner: 'ASN Owner',
   rowIsp: 'ISP / Company',
   rowPostal: 'Postal',
@@ -181,8 +186,10 @@ const zh: IpCheckerDict = {
   tzUnknown: '时区未知',
   badgeDatacenter: 'IDC 机房 IP / 商业宽带',
   badgeResidential: '原生住宅 ISP',
-  badgeBroadcast: '广播 IP',
+  badgeUnverifiedHost: '机房(无 rDNS)',
   badgeNativeIp: '原生 IP',
+  signalNaBadge: '仅本机 IP',
+  signalNaNote: '该信号仅在检测您自己的出口 IP 时有效。',
   rowAsnOwner: 'ASN 归属',
   rowIsp: 'ISP / 公司',
   rowPostal: '邮编',
@@ -255,8 +262,10 @@ const es: IpCheckerDict = {
   tzUnknown: 'zona horaria desconocida',
   badgeDatacenter: 'IP de centro de datos (IDC)',
   badgeResidential: 'ISP residencial nativo',
-  badgeBroadcast: 'IP broadcast',
+  badgeUnverifiedHost: 'Hosting (sin rDNS)',
   badgeNativeIp: 'IP nativa',
+  signalNaBadge: 'Solo IP propia',
+  signalNaNote: 'Esta señal solo aplica al inspeccionar tu propia IP de salida.',
   rowAsnOwner: 'Propietario del ASN',
   rowIsp: 'ISP / Empresa',
   rowPostal: 'Código postal',
@@ -330,8 +339,10 @@ const de: IpCheckerDict = {
   tzUnknown: 'Zeitzone unbekannt',
   badgeDatacenter: 'Rechenzentrums-IP (IDC)',
   badgeResidential: 'Nativer Privat-ISP',
-  badgeBroadcast: 'Broadcast-IP',
+  badgeUnverifiedHost: 'Hosting (ohne rDNS)',
   badgeNativeIp: 'Native IP',
+  signalNaBadge: 'Nur eigene IP',
+  signalNaNote: 'Dieses Signal gilt nur bei der Prüfung der eigenen Exit-IP.',
   rowAsnOwner: 'ASN-Inhaber',
   rowIsp: 'ISP / Firma',
   rowPostal: 'PLZ',

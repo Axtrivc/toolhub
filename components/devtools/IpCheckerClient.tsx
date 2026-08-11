@@ -50,7 +50,7 @@ interface IpAnalysis {
   geo: GeoData
   ptr: string | null
   isDatacenter: boolean
-  isBroadcast: boolean
+  isUnverifiedHosting: boolean // 机房 IP 且无 PTR(原 isBroadcast,语义修正)
   proxyKeyword: boolean
   tzMismatch: boolean
   deviceTz: string
@@ -237,7 +237,11 @@ async function fetchGeo(ip: string): Promise<GeoData> {
     throw new Error('ipwho.is unsuccessful')
   } catch { /* fallback below */ }
 
-  const d = await fetchJson<IpApiCoResponse>(`https://ipapi.co/${encodeURIComponent(ip)}/json/`)
+  // ip 为空(Tier 1 全失败、走 Tier 2 自报调用方 IP)时用裸根端点,
+  // 避免 `https://ipapi.co//json/`(双斜杠)被服务端 404。
+  const d = await fetchJson<IpApiCoResponse>(
+    ip ? `https://ipapi.co/${encodeURIComponent(ip)}/json/` : 'https://ipapi.co/json/',
+  )
   const resolvedIp = asStr(d?.ip)
   if (!resolvedIp) throw new Error('Geo lookup failed on all sources')
   const asnRaw = asStr(d.asn)
@@ -348,20 +352,23 @@ async function detectWebRtcIps(timeoutMs = 3000): Promise<string[]> {
 
 // ─────────────────────────── 评分模型 ───────────────────────────
 
-function analyze(geo: GeoData, ptr: string | null): IpAnalysis {
+function analyze(geo: GeoData, ptr: string | null, isSelf: boolean): IpAnalysis {
   const haystack = `${geo.asnOrg} ${geo.isp}`.toLowerCase()
   const isDatacenter = DATACENTER_KEYWORDS.some((k) => haystack.includes(k))
   const proxyKeyword = PROXY_KEYWORDS.some((k) => haystack.includes(k))
-  // 广播 IP 近似判定:Geo 归属与注册归属分离的典型信号是 PTR 缺失且城市级精度可疑;
-  // 免费数据源无法精确判定,这里用「有机房特征但无 PTR」作为广播 IP 近似。
-  const isBroadcast = isDatacenter && !ptr
+  // 机房 IP 且无 PTR:身份未经验证的 hosting 节点(城市级 Geo 精度往往也差)。
+  // 免费数据源无法精确判定广播/未注册段,这里只如实标注「机房 + 无 rDNS」。
+  const isUnverifiedHosting = isDatacenter && !ptr
 
   // Intl 只在浏览器可用;异常环境(隐私模式/极端 UA)下兜底为空串
   let deviceTz = ''
   try {
     deviceTz = typeof Intl !== 'undefined' ? Intl.DateTimeFormat().resolvedOptions().timeZone || '' : ''
   } catch { /* leave empty */ }
-  const tzMismatch = Boolean(geo.timezoneId && deviceTz && geo.timezoneId !== deviceTz)
+  // 时区一致性只在检测「本机出口 IP」时有意义(本机设备时区 vs 出口 IP 时区 → VPN 泄漏信号)。
+  // 查询任意第三方 IP 时,被查 IP 的地理时区与检测者所在时区无关,不计入评分,否则会
+  // 给所有国外 IP 虚加 20 分,污染风险评分与跨境评级矩阵。
+  const tzMismatch = isSelf && Boolean(geo.timezoneId && deviceTz && geo.timezoneId !== deviceTz)
 
   // 权重:机房 52 / 时区不一致 20 / 代理关键词 22(对应公式 W_type·W_tz·W_bl)
   let score = 6
@@ -371,7 +378,7 @@ function analyze(geo: GeoData, ptr: string | null): IpAnalysis {
   score = Math.max(0, Math.min(100, score))
 
   const level: RiskLevel = score <= 20 ? 'low' : score <= 60 ? 'medium' : 'high'
-  return { geo, ptr, isDatacenter, isBroadcast, proxyKeyword, tzMismatch, deviceTz, score, level }
+  return { geo, ptr, isDatacenter, isUnverifiedHosting, proxyKeyword, tzMismatch, deviceTz, score, level }
 }
 
 /** 跨境场景星级(1-5);文案由字典按 locale 提供,这里只产出 key + stars */
@@ -483,6 +490,9 @@ export function IpCheckerClient() {
   const d: IpCheckerDict = ipCheckerDicts[locale] ?? ipCheckerDicts.en
   const [trace, setTrace] = useState<TraceData | null>(null)
   const [analysis, setAnalysis] = useState<IpAnalysis | null>(null)
+  // 当前分析的是「本机出口 IP」还是「用户查询的第三方 IP」。本机相关信号
+  // (时区一致性 / WebRTC 泄漏)只对自查有效,查第三方 IP 时需显示 N/A。
+  const [isSelfIp, setIsSelfIp] = useState(true)
   const [loading, setLoading] = useState(true)
   // 错误存字典 key 而非字符串,保证切换语言后错误提示也跟随变化
   const [errorKey, setErrorKey] = useState<'errorSources' | 'errorQuery' | ''>('')
@@ -494,10 +504,11 @@ export function IpCheckerClient() {
   )
   const pingRanRef = useRef(false)
 
-  const loadGeo = useCallback(async (targetIp: string) => {
+  const loadGeo = useCallback(async (targetIp: string, isSelf: boolean) => {
     const geo = await fetchGeo(targetIp)
     const ptr = await fetchPtr(geo.ip)
-    setAnalysis(analyze(geo, ptr))
+    setAnalysis(analyze(geo, ptr, isSelf))
+    setIsSelfIp(isSelf)
   }, [])
 
   const refresh = useCallback(async () => {
@@ -507,10 +518,10 @@ export function IpCheckerClient() {
       const t = await fetchTrace()
       setTrace(t)
       if (t?.ip) {
-        await loadGeo(t.ip)
+        await loadGeo(t.ip, true)
       } else {
         // Tier 1 全失败时让 Tier 2 自报 IP(ipwho.is 无参 = 调用方 IP)
-        await loadGeo('')
+        await loadGeo('', true)
       }
     } catch {
       setErrorKey('errorSources')
@@ -568,7 +579,8 @@ export function IpCheckerClient() {
         if (!resolved) throw new Error('resolve')
         ip = resolved
       }
-      await loadGeo(ip)
+      // 用户主动查询的是第三方 IP —— 本机相关信号(时区/WebRTC)对它无意义
+      await loadGeo(ip, false)
     } catch {
       setErrorKey('errorQuery')
     } finally {
@@ -668,8 +680,8 @@ export function IpCheckerClient() {
                 ) : (
                   <Badge color="#16a34a" bg="rgba(34,197,94,0.12)">{d.badgeResidential}</Badge>
                 )}
-                {analysis.isBroadcast ? (
-                  <Badge color="#d97706" bg="rgba(245,158,11,0.12)">{d.badgeBroadcast}</Badge>
+                {analysis.isUnverifiedHosting ? (
+                  <Badge color="#d97706" bg="rgba(245,158,11,0.12)">{d.badgeUnverifiedHost}</Badge>
                 ) : (
                   <Badge color="#16a34a" bg="rgba(34,197,94,0.12)">{d.badgeNativeIp}</Badge>
                 )}
@@ -750,17 +762,27 @@ export function IpCheckerClient() {
                 {d.cardTzTitle}
               </p>
               <div className="mt-2">
-                {analysis.tzMismatch ? (
-                  <Badge color="#d97706" bg="rgba(245,158,11,0.12)">{d.tzMismatchBadge}</Badge>
+                {isSelfIp ? (
+                  analysis.tzMismatch ? (
+                    <Badge color="#d97706" bg="rgba(245,158,11,0.12)">{d.tzMismatchBadge}</Badge>
+                  ) : (
+                    <Badge color="#16a34a" bg="rgba(34,197,94,0.12)">{d.tzMatchBadge}</Badge>
+                  )
                 ) : (
-                  <Badge color="#16a34a" bg="rgba(34,197,94,0.12)">{d.tzMatchBadge}</Badge>
+                  <Badge color="rgb(var(--text-muted))" bg="rgba(120,120,120,0.12)">{d.signalNaBadge}</Badge>
                 )}
               </div>
-              <p className="mt-2 font-mono text-xs leading-relaxed" style={{ color: 'rgb(var(--text-subtle))' }}>
-                {d.tzDevice}: {analysis.deviceTz || '—'}
-                <br />
-                {d.tzIp}: {geo.timezoneId || '—'}
-              </p>
+              {isSelfIp ? (
+                <p className="mt-2 font-mono text-xs leading-relaxed" style={{ color: 'rgb(var(--text-subtle))' }}>
+                  {d.tzDevice}: {analysis.deviceTz || '—'}
+                  <br />
+                  {d.tzIp}: {geo.timezoneId || '—'}
+                </p>
+              ) : (
+                <p className="mt-2 text-xs leading-relaxed" style={{ color: 'rgb(var(--text-subtle))' }}>
+                  {d.signalNaNote}
+                </p>
+              )}
             </div>
 
             <div className="surface rounded-xl border p-4 shadow-sm">
@@ -784,18 +806,24 @@ export function IpCheckerClient() {
                 {d.cardWebrtcTitle}
               </p>
               <div className="mt-2">
-                {webRtcIps === null ? (
-                  <Badge color="#d97706" bg="rgba(245,158,11,0.12)">{d.webrtcTesting}</Badge>
-                ) : webRtcIps.length === 0 ? (
-                  <Badge color="#16a34a" bg="rgba(34,197,94,0.12)">{d.webrtcNoLeak}</Badge>
-                ) : webRtcIps.some((ip) => ip !== geo.ip) ? (
-                  <Badge color="#dc2626" bg="rgba(239,68,68,0.12)">{d.webrtcLeak}</Badge>
+                {isSelfIp ? (
+                  webRtcIps === null ? (
+                    <Badge color="#d97706" bg="rgba(245,158,11,0.12)">{d.webrtcTesting}</Badge>
+                  ) : webRtcIps.length === 0 ? (
+                    <Badge color="#16a34a" bg="rgba(34,197,94,0.12)">{d.webrtcNoLeak}</Badge>
+                  ) : webRtcIps.some((ip) => ip !== geo.ip) ? (
+                    <Badge color="#dc2626" bg="rgba(239,68,68,0.12)">{d.webrtcLeak}</Badge>
+                  ) : (
+                    <Badge color="#16a34a" bg="rgba(34,197,94,0.12)">{d.webrtcConsistent}</Badge>
+                  )
                 ) : (
-                  <Badge color="#16a34a" bg="rgba(34,197,94,0.12)">{d.webrtcConsistent}</Badge>
+                  <Badge color="rgb(var(--text-muted))" bg="rgba(120,120,120,0.12)">{d.signalNaBadge}</Badge>
                 )}
               </div>
               <p className="mt-2 text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>
-                UA: {typeof navigator !== 'undefined' ? navigator.userAgent.slice(0, 42) : ''}…
+                {isSelfIp
+                  ? `UA: ${typeof navigator !== 'undefined' ? navigator.userAgent.slice(0, 42) : ''}…`
+                  : d.signalNaNote}
               </p>
             </div>
           </div>
