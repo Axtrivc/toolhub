@@ -192,6 +192,18 @@ import { cssClampCalculatorL10n } from './tools-l10n/css-clamp-calculator'
 import { csvToMarkdownTableL10n } from './tools-l10n/csv-to-markdown-table'
 import { textCleanerL10n } from './tools-l10n/text-cleaner'
 import { srtSubtitleShiftL10n } from './tools-l10n/srt-subtitle-shift'
+import { codeBeautifierL10n } from './tools-l10n/code-beautifier'
+import { secretKeyGeneratorL10n } from './tools-l10n/secret-key-generator'
+import { autoLoanCalculatorL10n } from './tools-l10n/auto-loan-calculator'
+import { ebayFeeCalculatorL10n } from './tools-l10n/ebay-fee-calculator'
+import { saasLtvChurnCalculatorL10n } from './tools-l10n/saas-ltv-churn-calculator'
+import { freelanceInvoiceGeneratorL10n } from './tools-l10n/freelance-invoice-generator'
+import { reverseStripeFeeCalculatorL10n } from './tools-l10n/reverse-stripe-fee-calculator'
+import { timezoneConverterL10n } from './tools-l10n/timezone-converter'
+import { daysCountdownCalculatorL10n } from './tools-l10n/days-countdown-calculator'
+import { readingSpeakingTimeL10n } from './tools-l10n/reading-speaking-time'
+import { randomChoicePickerL10n } from './tools-l10n/random-choice-picker'
+import { wordleSolverL10n } from './tools-l10n/wordle-solver'
 
 const registry: Record<string, ToolL10n> = {
   'loan-calculator': loanCalculatorL10n,
@@ -350,6 +362,18 @@ const registry: Record<string, ToolL10n> = {
   'csv-to-markdown-table': csvToMarkdownTableL10n,
   'text-cleaner': textCleanerL10n,
   'srt-subtitle-shift': srtSubtitleShiftL10n,
+  'code-beautifier': codeBeautifierL10n,
+  'secret-key-generator': secretKeyGeneratorL10n,
+  'auto-loan-calculator': autoLoanCalculatorL10n,
+  'ebay-fee-calculator': ebayFeeCalculatorL10n,
+  'saas-ltv-churn-calculator': saasLtvChurnCalculatorL10n,
+  'freelance-invoice-generator': freelanceInvoiceGeneratorL10n,
+  'reverse-stripe-fee-calculator': reverseStripeFeeCalculatorL10n,
+  'timezone-converter': timezoneConverterL10n,
+  'days-countdown-calculator': daysCountdownCalculatorL10n,
+  'reading-speaking-time': readingSpeakingTimeL10n,
+  'random-choice-picker': randomChoicePickerL10n,
+  'wordle-solver': wordleSolverL10n,
 }
 
 /**
