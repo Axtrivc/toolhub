@@ -166,10 +166,16 @@ ${itemRows}
   }, [rows, taxRate, taxAmount, subtotal, total, notes, invoiceNumber, yourName, yourEmail, clientName, issueDate, dueDate, currency]) // eslint-disable-line react-hooks/exhaustive-deps
 
   const handlePrint = () => {
-    const win = window.open('', '_blank')
-    if (!win) return
-    win.document.write(invoiceHtml)
-    win.document.close()
+    // 用 Blob URL 替代 win.document.write(老 API,部分浏览器已限制)
+    const blob = new Blob([invoiceHtml], { type: 'text/html;charset=utf-8;' })
+    const url = URL.createObjectURL(blob)
+    const win = window.open(url, '_blank')
+    if (!win) {
+      URL.revokeObjectURL(url)
+      return
+    }
+    // 文档解析完成后即可回收 URL;revoke 不影响已加载文档
+    win.addEventListener('load', () => URL.revokeObjectURL(url), { once: true })
   }
 
   const handleDownload = () => {

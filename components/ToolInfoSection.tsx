@@ -240,7 +240,7 @@ function LocalizedToolInfo({ tool }: { tool: ToolMeta }): ReactNode {
 
   return (
     <section className="prose-content mt-10 max-w-3xl">
-      <h2>{tpl.aboutTitle.replaceAll('{name}', name)}</h2>
+      <h2>{tpl.aboutTitle.split('{name}').join(name)}</h2>
       {tpl.intros[type].map((p, i) => (
         <p key={i}>{renderInlineBold(p, name)}</p>
       ))}

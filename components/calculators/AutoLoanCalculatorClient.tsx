@@ -215,8 +215,8 @@ export function AutoLoanCalculatorClient() {
                     <tr key={row.month}>
                       <td className="px-3 py-2 font-mono text-sm" style={{ color: 'rgb(var(--text-subtle))' }}>{row.month}</td>
                       <td className="px-3 py-2 text-right font-mono text-sm" style={{ color: 'rgb(var(--text))' }}>{fmtMoney(row.payment)}</td>
-                      <td className="px-3 py-2 text-right font-mono text-sm text-green-600">{fmtMoney(row.principal)}</td>
-                      <td className="px-3 py-2 text-right font-mono text-sm text-orange-600">{fmtMoney(row.interest)}</td>
+                      <td className="px-3 py-2 text-right font-mono text-sm text-green-600 dark:text-green-400">{fmtMoney(row.principal)}</td>
+                      <td className="px-3 py-2 text-right font-mono text-sm text-orange-600 dark:text-orange-400">{fmtMoney(row.interest)}</td>
                       <td className="px-3 py-2 text-right font-mono text-sm" style={{ color: 'rgb(var(--text))' }}>{fmtMoney(row.balance)}</td>
                     </tr>
                   ))}

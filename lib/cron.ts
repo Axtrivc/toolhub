@@ -126,16 +126,17 @@ export function nextFire(expr: string, from: Date = new Date()): Date | null {
   start.setSeconds(0, 0)
 
   const cursor = new Date(start)
-  // 上限:扫描 4 年(闰年周期),超过认为无解
-  const limit = new Date(start.getTime() + 4 * 365 * 24 * 3600 * 1000)
+  // 上限:扫描 4 年(1461 天,闰年周期含 1 个闰日),超过认为无解
+  const limit = new Date(start.getTime() + 1461 * 24 * 3600 * 1000)
   while (cursor <= limit) {
-    if (matches(cursor, s)) return cursor
-    cursor.setMinutes(cursor.getMinutes() + 1)
-    // 月份不匹配时快进:若 month 集合不含当前月,跳到下个可能月份的 1 号 0 点
-    if (!s.month.has(cursor.getMonth() + 1)) {
+    // 月份不匹配时逐月快进:连续不匹配连续跳,避免逐分钟空扫
+    while (!s.month.has(cursor.getMonth() + 1)) {
       cursor.setMonth(cursor.getMonth() + 1, 1)
       cursor.setHours(0, 0, 0, 0)
+      if (cursor > limit) return null
     }
+    if (matches(cursor, s)) return cursor
+    cursor.setMinutes(cursor.getMinutes() + 1)
   }
   return null
 }

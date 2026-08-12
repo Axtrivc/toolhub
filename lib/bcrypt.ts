@@ -6,8 +6,12 @@
  */
 import bcrypt from './vendor/bcryptjs.umd'
 
-/** 生成 $2a$ 格式盐字符串;rounds 为 cost(2^rounds 次迭代) */
+/** 生成 $2a$ 格式盐字符串;rounds 为 cost(2^rounds 次迭代),合法范围 4-31 */
 export function genSaltSync(rounds: number): string {
+  // bcryptjs 对非法 rounds 行为不定(负值异常、过大直接卡死页面),先校验
+  if (!Number.isInteger(rounds) || rounds < 4 || rounds > 31) {
+    throw new Error(`bcrypt rounds must be an integer between 4 and 31, got ${rounds}`)
+  }
   return bcrypt.genSaltSync(rounds)
 }
 

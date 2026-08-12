@@ -232,7 +232,7 @@ export const RatioCalculatorClient = makeCalculatorClient({
 export const LCMGcdCalculatorClient = makeCalculatorClient({
   slug: 'lcm-gcd-calculator',
   inputs: [
-    { key: 'numbers', label: 'Numbers (comma-separated)', default: '12, 18, 24' },
+    { key: 'numbers', label: 'Numbers (comma-separated)', default: '12, 18, 24', type: 'text' },
   ],
   outputs: [
     { key: 'gcd', label: 'GCD (greatest common divisor)', highlight: true },

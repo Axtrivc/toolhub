@@ -26,7 +26,7 @@ export function WorkspaceDashboard() {
   const { pinned, recent, pinnedReady, recentReady } = useWorkspace()
   const [open, setOpen] = useState(false)
 
-  const ready = pinnedReady || recentReady
+  const ready = pinnedReady && recentReady
   const showQuickAccess = ready && (pinned.length > 0 || recent.length > 0)
   const recordCount = showQuickAccess ? pinned.length + recent.length : 0
 

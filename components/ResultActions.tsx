@@ -71,7 +71,7 @@ export function ResultActions({
         className={`btn ${downloaded ? 'btn-primary' : 'btn-secondary'} disabled:cursor-not-allowed disabled:opacity-50`}
         aria-live="polite"
       >
-        {downloaded ? t(locale, 'toolCopied') : t(locale, 'toolDownload')}
+        {downloaded ? t(locale, 'toolDownloaded') : t(locale, 'toolDownload')}
       </motion.button>
     </div>
   )

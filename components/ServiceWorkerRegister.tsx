@@ -20,8 +20,8 @@ import { useEffect } from 'react'
  * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
  *
  * 行为:
- *  - 注册成功/失败均输出日志,便于在 DevTools 控制台排查
- *    (之前静默 catch 导致 SW 面板为空时无法定位原因)。
+ *  - 注册失败输出 console.error,便于在 DevTools 控制台排查
+ *    (成功路径不打日志,避免生产环境泄露部署细节)。
  *  - 注册后调 registration.update():绕过浏览器默认 24h 更新检查间隔,
  *    让 sw.js 新版本分钟级生效(配合 sw.js 内 VERSION 常量)。
  *
@@ -44,14 +44,8 @@ export function ServiceWorkerRegister() {
         const registration = await navigator.serviceWorker.register('/sw.js', {
           scope: '/',
         })
-        // 成功日志:DevTools 控制台可见,确认注册生效
-        console.log('SW registered successfully:', registration.scope)
         // 主动检查更新(绕过浏览器默认 24h 间隔),让新版本尽快接管
         await registration.update()
-        // 监听新 SW 接管
-        navigator.serviceWorker.addEventListener('controllerchange', () => {
-          console.log('SW: new controller activated')
-        })
       } catch (err) {
         // 失败日志:暴露具体错误(如 sw.js 语法错、HTTPS 缺失、scope 问题)
         console.error('SW registration failed:', err)

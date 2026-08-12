@@ -109,6 +109,7 @@ export interface Dict {
   toolSampleLoaded: string
   toolCopySummary: string
   toolDownload: string
+  toolDownloaded: string
   // 工具页相关工具内链
   relatedTitle: string
   relatedSubtitle: string
@@ -293,6 +294,7 @@ const en: Dict = {
   toolSampleLoaded: '✓ Sample loaded',
   toolCopySummary: 'Copy Summary',
   toolDownload: 'Download',
+  toolDownloaded: '✓ Downloaded',
   relatedTitle: 'Related Tools',
   relatedSubtitle: 'More tools you might find useful',
   recentTitle: 'Recently Used & Favorites',
@@ -462,6 +464,7 @@ const zh: Dict = {
   toolSampleLoaded: '✓ 已加载示例',
   toolCopySummary: '复制摘要',
   toolDownload: '下载',
+  toolDownloaded: '✓ 已下载',
   relatedTitle: '相关工具',
   relatedSubtitle: '你可能还会用到的工具',
   recentTitle: '最近使用与收藏',
@@ -629,6 +632,7 @@ const es: Dict = {
   toolSampleLoaded: '✓ Ejemplo cargado',
   toolCopySummary: 'Copiar resumen',
   toolDownload: 'Descargar',
+  toolDownloaded: '✓ Descargado',
   relatedTitle: 'Herramientas relacionadas',
   relatedSubtitle: 'Más herramientas que podrían ser útiles',
   recentTitle: 'Usadas recientemente y favoritos',
@@ -797,6 +801,7 @@ const de: Dict = {
   toolSampleLoaded: '✓ Beispiel geladen',
   toolCopySummary: 'Zusammenfassung kopieren',
   toolDownload: 'Herunterladen',
+  toolDownloaded: '✓ Heruntergeladen',
   relatedTitle: 'Verwandte Werkzeuge',
   relatedSubtitle: 'Weitere Werkzeuge, die nützlich sein könnten',
   recentTitle: 'Zuletzt genutzt & Favoriten',
@@ -995,8 +1000,9 @@ export function t(locale: Locale, key: keyof Dict, vars?: Record<string, string 
   let str = dicts[locale]?.[key] ?? dicts.en[key] ?? String(key)
   if (vars) {
     for (const [k, v] of Object.entries(vars)) {
-      // 用 replaceAll 全量替换,支持同一变量在模板里多次出现(否则只替第一个)
-      str = str.replaceAll(`{${k}}`, String(v))
+      // 用 split/join 全量替换(等效 replaceAll,但兼容 ES2021 之前的老浏览器),
+      // 支持同一变量在模板里多次出现(否则只替第一个)
+      str = str.split(`{${k}}`).join(String(v))
     }
   }
   return str

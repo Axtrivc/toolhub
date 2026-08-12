@@ -42,7 +42,7 @@ export function ToolLayout({ tool, children }: ToolLayoutProps) {
   const visibleShortIntro = getToolShortIntro(locale, tool.slug, tool.shortIntro)
   const visibleName = getToolName(locale, tool.slug, tool.name)
   const visibleCategory = tc(locale, tool.category)
-  const faqJsonLd = buildFaqJsonLd(tool.slug)
+  const faqJsonLd = buildFaqJsonLd(tool.slug, locale)
   const breadcrumbJsonLd = buildBreadcrumbJsonLd(tool.slug)
   const howToJsonLd = buildHowToJsonLd(tool.slug)
 

@@ -58,10 +58,9 @@ export function generateSlug(input: string, options: SlugOptions = {}): string {
     s = s.replace(/_/g, ' ')
     // 把 CJK 全角空格、各类空白、常见标点统一成空格,便于后续按词分隔
     s = s.replace(/[\s\u3000]+/g, ' ')
-    // 移除特殊字符,只保留:字母、数字、空格、点、连字符(用于 node.js -> nodejs)
-    s = s.replace(/[^a-z0-9\s.-]/gi, '')
-    // 点号在 SEO slug 里通常要移除(避免被当成文件扩展名),但保留单词内连续的如 "node.js"
-    s = s.replace(/\./g, '')
+    // 移除特殊字符,只保留:字母、数字、空格、连字符
+    // (点号在此一并删除:避免被当成文件扩展名,如 node.js -> nodejs)
+    s = s.replace(/[^a-z0-9\s-]/gi, '')
   }
 
   // 把空格、点、已有的连字符/下划线统一为目标分隔符

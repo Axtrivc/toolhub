@@ -56,6 +56,7 @@ function renderWithLinks(
   // 构造分割正则:{key1}|{key2}|...
   const pattern = new RegExp(
     keys.map((k) => `{${k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}}`).join('|'),
+    'g',
   )
   const parts = text.split(pattern)
   const matches = text.match(pattern) ?? []

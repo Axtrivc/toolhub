@@ -125,6 +125,8 @@ export function ImageToBase64Client() {
             <img
               src={img.dataUrl}
               alt={img.name}
+              width={80}
+              height={80}
               className="h-20 w-20 rounded-lg border object-cover"
               style={{ borderColor: 'rgb(var(--border))' }}
             />

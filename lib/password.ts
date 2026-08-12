@@ -33,18 +33,36 @@ const CHARSETS = {
 
 const AMBIGUOUS = new Set(['0', 'O', '1', 'l', 'I'])
 
+type CharsetKey = keyof typeof CHARSETS
+
+// 预计算的字符数组(保留易混淆 / 已剔除两版),避免每次生成重复 split/filter
+const CHAR_ARRAYS: Record<'keep' | 'unambiguous', Record<CharsetKey, string[]>> = {
+  keep: {
+    uppercase: CHARSETS.uppercase.split(''),
+    lowercase: CHARSETS.lowercase.split(''),
+    numbers: CHARSETS.numbers.split(''),
+    symbols: CHARSETS.symbols.split(''),
+  },
+  unambiguous: {
+    uppercase: CHARSETS.uppercase.split('').filter((c) => !AMBIGUOUS.has(c)),
+    lowercase: CHARSETS.lowercase.split('').filter((c) => !AMBIGUOUS.has(c)),
+    numbers: CHARSETS.numbers.split('').filter((c) => !AMBIGUOUS.has(c)),
+    symbols: CHARSETS.symbols.split('').filter((c) => !AMBIGUOUS.has(c)),
+  },
+}
+
+/** 取某一字符集的字符数组(excludeAmbiguous 时剔除易混淆字符) */
+function charsetChars(key: CharsetKey, excludeAmbiguous: boolean): string[] {
+  return excludeAmbiguous ? CHAR_ARRAYS.unambiguous[key] : CHAR_ARRAYS.keep[key]
+}
+
 /** 收集启用的字符池,排除易混淆字符 */
 function buildPool(opts: PasswordOptions): string[] {
   const pool: string[] = []
-  const filterFn = opts.excludeAmbiguous
-    ? (c: string) => !AMBIGUOUS.has(c)
-    : () => true
-
-  if (opts.uppercase) pool.push(...CHARSETS.uppercase.split('').filter(filterFn))
-  if (opts.lowercase) pool.push(...CHARSETS.lowercase.split('').filter(filterFn))
-  if (opts.numbers) pool.push(...CHARSETS.numbers.split('').filter(filterFn))
-  if (opts.symbols) pool.push(...CHARSETS.symbols.split('').filter(filterFn))
-
+  if (opts.uppercase) pool.push(...charsetChars('uppercase', opts.excludeAmbiguous))
+  if (opts.lowercase) pool.push(...charsetChars('lowercase', opts.excludeAmbiguous))
+  if (opts.numbers) pool.push(...charsetChars('numbers', opts.excludeAmbiguous))
+  if (opts.symbols) pool.push(...charsetChars('symbols', opts.excludeAmbiguous))
   return pool
 }
 
@@ -58,10 +76,10 @@ export function generatePassword(opts: PasswordOptions): string {
 
   // 先确保每种启用类型至少出现一次
   const guaranteed: string[] = []
-  if (opts.uppercase) guaranteed.push(randomFrom(CHARSETS.uppercase.split('').filter((c) => !opts.excludeAmbiguous || !AMBIGUOUS.has(c))))
-  if (opts.lowercase) guaranteed.push(randomFrom(CHARSETS.lowercase.split('').filter((c) => !opts.excludeAmbiguous || !AMBIGUOUS.has(c))))
-  if (opts.numbers) guaranteed.push(randomFrom(CHARSETS.numbers.split('').filter((c) => !opts.excludeAmbiguous || !AMBIGUOUS.has(c))))
-  if (opts.symbols) guaranteed.push(randomFrom(CHARSETS.symbols.split('').filter((c) => !opts.excludeAmbiguous || !AMBIGUOUS.has(c))))
+  if (opts.uppercase) guaranteed.push(randomFrom(charsetChars('uppercase', opts.excludeAmbiguous)))
+  if (opts.lowercase) guaranteed.push(randomFrom(charsetChars('lowercase', opts.excludeAmbiguous)))
+  if (opts.numbers) guaranteed.push(randomFrom(charsetChars('numbers', opts.excludeAmbiguous)))
+  if (opts.symbols) guaranteed.push(randomFrom(charsetChars('symbols', opts.excludeAmbiguous)))
 
   // 用 pool 填满剩余长度
   const remaining = Math.max(0, opts.length - guaranteed.length)

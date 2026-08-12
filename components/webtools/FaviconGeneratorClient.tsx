@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useRef, useCallback, useMemo, useEffect } from 'react'
+import { useState, useRef, useCallback, useEffect } from 'react'
 
 /**
  * Favicon Generator —— 纯前端 Canvas 剪裁 + 多尺寸导出
@@ -46,6 +46,8 @@ export function FaviconGeneratorClient() {
   const [error, setError] = useState<string>('')
   const imgRef = useRef<HTMLImageElement | null>(null)
   const canvasRef = useRef<HTMLCanvasElement | null>(null)
+  // 各尺寸预览 dataURL(图片加载完成后生成,见下方 effect)
+  const [previews, setPreviews] = useState<{ size: number; dataUrl: string }[]>([])
 
   // 处理文件上传
   const handleFile = useCallback((file: File) => {
@@ -83,15 +85,24 @@ export function FaviconGeneratorClient() {
     [handleFile],
   )
 
-  // 图片加载完成后存到 ref
+  // 图片加载完成后存到 ref,并生成各尺寸预览
+  // (预览必须在这里生成:onload 是异步的,若在 render 期读 imgRef 会拿到旧图/空图)
   useEffect(() => {
     if (!imgSrc) {
       imgRef.current = null
+      setPreviews([])
       return
     }
     const img = new Image()
     img.onload = () => {
       imgRef.current = img
+      const tmp = document.createElement('canvas')
+      setPreviews(
+        SIZES.map((s) => {
+          drawSquare(tmp, img, s.size)
+          return { size: s.size, dataUrl: tmp.toDataURL('image/png') }
+        }),
+      )
     }
     img.src = imgSrc
   }, [imgSrc])
@@ -125,18 +136,6 @@ export function FaviconGeneratorClient() {
       setTimeout(() => exportSize(s.size), i * 250)
     })
   }, [exportSize])
-
-  // 预览各尺寸(用一个小 canvas 实时绘制 dataURL)
-  const previews = useMemo<{ size: number; dataUrl: string }[]>(() => {
-    const img = imgRef.current
-    if (!img) return []
-    const tmp = document.createElement('canvas')
-    return SIZES.map((s) => {
-      drawSquare(tmp, img, s.size)
-      return { size: s.size, dataUrl: tmp.toDataURL('image/png') }
-    })
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [imgSrc])
 
   return (
     <div className="space-y-5">
@@ -191,6 +190,8 @@ export function FaviconGeneratorClient() {
             <img
               src={imgSrc}
               alt="Uploaded source"
+              width={80}
+              height={80}
               className="h-20 w-20 rounded-lg border object-cover"
               style={{ borderColor: 'rgb(var(--border))' }}
             />
@@ -233,6 +234,8 @@ export function FaviconGeneratorClient() {
                       <img
                         src={preview.dataUrl}
                         alt={`${s.label} preview`}
+                        width={Math.min(s.size, 64)}
+                        height={Math.min(s.size, 64)}
                         style={{ width: Math.min(s.size, 64), height: Math.min(s.size, 64) }}
                         className="image-render-pixel"
                       />

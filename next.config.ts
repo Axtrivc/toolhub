@@ -4,9 +4,10 @@ import type { NextConfig } from 'next'
  * 静态导出配置
  * build 后生成 out/ 目录,可直接上传到 Cloudflare Pages / Vercel / Netlify 等静态托管。
  * 注意:静态导出不支持服务端功能(API routes、SSR、图片优化优化器)。
- * 站点配置:修改下面 SITE_URL 为你最终的域名,影响 sitemap / canonical / og:url。
+ * 站点配置:修改 lib/constants.ts 的 SITE_URL 为你最终的域名,影响 sitemap / canonical / og:url。
+ * (此处 re-export 仅为兼容既有引用;新代码请直接 import '@/lib/constants')
  */
-export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://toolhub.axtrivc.com'
+export { SITE_URL } from './lib/constants'
 
 const nextConfig: NextConfig = {
   output: 'export',

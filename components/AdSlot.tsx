@@ -2,7 +2,6 @@
 
 import { useEffect, useRef } from 'react'
 import Script from 'next/script'
-import { SITE_URL } from '../next.config'
 
 /**
  * 广告位组件 - 环境驱动的 AdSense 接入
@@ -104,6 +103,3 @@ export function AdSenseScript() {
     />
   )
 }
-
-// 保留 SITE_URL 引用,避免未来扩展(如广告位回传地址)时重新引入
-export const _ADSENSE_BASE = SITE_URL

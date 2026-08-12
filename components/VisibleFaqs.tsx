@@ -4,8 +4,8 @@
  * 工具页可见 FAQ 区块 —— 手风琴样式
  *
  * 数据源不变:lib/tool-faqs.ts → getToolFaqs(slug),与 FAQPage JSON-LD
- * (lib/seo.ts 的 buildFaqJsonLd)共用同一份数据,保证页面所见与结构化数据
- * 声明完全一致(避免 Google 失配降权)。
+ * (lib/seo.ts 的 buildFaqJsonLd)共用同一份本地化数据(均经 getToolFaqsL10n),
+ * 保证各 locale 下页面所见与结构化数据声明完全一致(避免 Google 失配降权)。
  *
  * 交互:每个 Q 为可展开/收起的 <details>(原生,无 JS 依赖,SSR 友好,
  * 键盘可达,默认第一个展开便于首屏可读)。首个 FAQ 用 open 属性默认展开。

@@ -105,6 +105,7 @@ export const AverageCalculatorClient = makeCalculatorClient({
       label: 'Numbers (separate with commas, spaces, or new lines)',
       default: '12, 15, 18, 22, 9, 14',
       placeholder: '12, 15, 18, 22',
+      type: 'text',
     },
   ],
   outputs: [

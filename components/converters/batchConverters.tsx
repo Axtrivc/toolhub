@@ -92,7 +92,7 @@ export const FuelEconomyConverterClient = makeUnitConverter({
       fromBase: (b) => 235.215 / b, // US mpg → L/100km
     },
   },
-  note: '⛽ Note: L/100km is inverse to mpg (lower = better). 1 US mpg = 235.215 L/100km; 1 UK mpg ≈ 1.20095 US mpg. Values are approximate.',
+  note: '⛽ Note: L/100km is inverse to mpg (lower = better). L/100km = 235.215 ÷ US mpg; 1 UK mpg ≈ 1.20095 US mpg. Values are approximate.',
 })
 
 // ── 压力(Pascal/Bar/PSI/atm)──

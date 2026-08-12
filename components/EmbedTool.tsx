@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { CopyButton } from './CopyButton'
-import { SITE_URL } from '../next.config'
+import { SITE_URL } from '@/lib/constants'
 import type { ToolMeta } from '@/lib/tools'
 import { useApp } from './providers/AppProviders'
 import { t, getToolName } from '@/lib/i18n'
@@ -56,12 +56,7 @@ export function EmbedTool({ tool }: { tool: ToolMeta }) {
           style={{ borderColor: 'rgb(var(--border))', backgroundColor: 'rgb(var(--bg-card))' }}
         >
           <p className="mb-3 text-sm" style={{ color: 'rgb(var(--text-muted))' }}>
-            {t(locale, 'embedBody', { name }).split('{name}').map((part, i, arr) => (
-              <span key={i}>
-                {part}
-                {i < arr.length - 1 && name}
-              </span>
-            ))}
+            {t(locale, 'embedBody', { name })}
           </p>
           <pre
             className="overflow-x-auto rounded-md p-3 text-xs"

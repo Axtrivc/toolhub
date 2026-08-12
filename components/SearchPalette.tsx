@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import type { ToolMeta } from '@/lib/tools'
 import { getToolIcon } from '@/lib/tools'
 import { SmartIcon } from '@/components/SmartIcon'
@@ -45,6 +46,7 @@ export function SearchPalette({ tools, locale, open, onClose }: SearchPalettePro
   const inputRef = useRef<HTMLInputElement>(null)
   const listRef = useRef<HTMLUListElement>(null)
   const reduceMotion = useReducedMotion()
+  const router = useRouter()
 
   // ── 过滤:匹配 name / 介绍 / 关键词 / 长尾词 / 分类 / slug ──
   const results = useMemo(() => {
@@ -125,7 +127,8 @@ export function SearchPalette({ tools, locale, open, onClose }: SearchPalettePro
       if (results[activeIndex]) {
         e.preventDefault()
         // 用编程式导航;Link 的 onClick 在 Enter 路径上不会触发
-        window.location.href = `/tools/${results[activeIndex].slug}/`
+        onClose()
+        router.push(`/tools/${results[activeIndex].slug}/`)
       }
     }
   }

@@ -1,7 +1,9 @@
 import type { Metadata } from 'next'
-import { SITE_URL } from '../next.config'
+import { SITE_URL } from './constants'
 import { tools, getPublishedTools } from './tools'
 import { getToolFaqs } from './tool-faqs'
+import type { Locale } from './i18n'
+import { getToolFaqsL10n } from './i18n/tool-l10n'
 
 export const SITE_NAME = 'ToolHub'
 export const SITE_TAGLINE = 'Free Online Tools'
@@ -79,7 +81,8 @@ export const siteMetadata: Metadata = {
 /** 生成工具页的 metadata */
 export function buildToolMetadata(slug: string): Metadata {
   const tool = tools.find((t) => t.slug === slug)
-  if (!tool) return {}
+  // slug 未注册(防御路径):返回最小合法 Metadata,而不是空对象
+  if (!tool) return { title: 'Tool Not Found' }
 
   const url = `${SITE_URL}/tools/${tool.slug}/`
   // 优先使用长尾版标题/描述(把蓝海长尾词放进 <title> 与 meta description);
@@ -245,6 +248,8 @@ export function buildItemListJsonLd() {
  * ⚠️ 数据源:统一从 `lib/tool-faqs.ts` 的 `getToolFaqs(slug)` 读取,
  * 与页面可见的 FAQ 区块(`components/VisibleFaqs.tsx`)共用同一份数据,
  * 保证「schema 声明的 Q&A」与「页面可见的 Q&A」完全一致。
+ * 传入 locale 时经 getToolFaqsL10n 取本地化 Q&A(与可见区块同源),
+ * 使非英文页面的 schema 字面与页面所见保持一致。
  *
  * 这样做是为了避免两种 Google 处罚/降权场景:
  *  1. 页面没有可见 FAQ 却声明 FAQPage schema(虚假结构化数据 → 可能触发手动处罚);
@@ -252,12 +257,12 @@ export function buildItemListJsonLd() {
  *
  * 返回 FAQPage schema;若该工具没有注册 FAQ,返回 null(ToolLayout 有守卫,不会渲染空脚本)。
  */
-export function buildFaqJsonLd(slug: string): {
+export function buildFaqJsonLd(slug: string, locale: Locale = 'en'): {
   '@context': string
   '@type': 'FAQPage'
   mainEntity: Array<{ '@type': 'Question'; name: string; acceptedAnswer: { '@type': 'Answer'; text: string } }>
 } | null {
-  const faqs = getToolFaqs(slug)
+  const faqs = getToolFaqsL10n(slug, locale, getToolFaqs(slug))
   if (faqs.length === 0) return null
 
   return {

@@ -1,5 +1,5 @@
 import type { MetadataRoute } from 'next'
-import { SITE_URL } from '../next.config'
+import { SITE_URL } from '@/lib/constants'
 
 /**
  * robots.txt - 控制爬虫访问

@@ -1,5 +1,6 @@
 'use client'
 
+import Link from 'next/link'
 import { getFeaturedTools } from '@/lib/tools'
 import { getToolIcon } from '@/lib/tools'
 import { SmartIcon } from '@/components/SmartIcon'
@@ -84,9 +85,9 @@ export function BlogToolsBanner() {
       </StaggerGroup>
 
       <div className="mt-8">
-        <a href="/#all-tools" className="btn btn-secondary">
+        <Link href="/#all-tools" className="btn btn-secondary">
           Browse all {publishedCount}+ tools <span aria-hidden="true">→</span>
-        </a>
+        </Link>
       </div>
     </section>
   )

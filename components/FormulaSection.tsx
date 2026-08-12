@@ -29,12 +29,14 @@ export function FormulaSection({ slug, tool }: { slug: string; tool: ToolMeta })
     <section className="prose-content mt-10 max-w-3xl">
       <h2>{t(locale, 'formulaTitle')}</h2>
       <p>
-        {t(locale, 'formulaIntro', { name }).split('{name}').map((part, i, arr) => (
-          <span key={i}>
-            {part}
-            {i < arr.length - 1 && <strong>{name}</strong>}
-          </span>
-        ))}
+        {t(locale, 'formulaIntro')
+          .split('{name}')
+          .map((part, i, arr) => (
+            <span key={i}>
+              {part}
+              {i < arr.length - 1 && <strong>{name}</strong>}
+            </span>
+          ))}
       </p>
       <pre className="overflow-x-auto">{formula.formula}</pre>
       {formula.explain && <p>{formula.explain}</p>}
