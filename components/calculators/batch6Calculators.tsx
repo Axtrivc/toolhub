@@ -11,6 +11,7 @@ import { fmtUSD, fmtNum, toNum } from '@/lib/format'
 // ── 金融类 ──
 
 export const SavingsGoalCalculatorClient = makeCalculatorClient({
+  slug: 'savings-goal-calculator',
   inputs: [
     { key: 'goal', label: 'Savings goal', suffix: '$', default: '50000' },
     { key: 'current', label: 'Currently saved', suffix: '$', default: '5000' },

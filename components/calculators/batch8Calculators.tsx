@@ -75,6 +75,7 @@ export const CreditCardMinimumCalculatorClient = makeCalculatorClient({
 })
 
 export const CashBackCalculatorClient = makeCalculatorClient({
+  slug: 'cash-back-calculator',
   inputs: [
     { key: 'spend', label: 'Monthly spending', suffix: '$', default: '2000' },
     { key: 'rate', label: 'Cash back rate', suffix: '%', default: '2' },
@@ -101,6 +102,7 @@ export const CashBackCalculatorClient = makeCalculatorClient({
 })
 
 export const DownPaymentCalculatorClient = makeCalculatorClient({
+  slug: 'down-payment-calculator',
   inputs: [
     { key: 'price', label: 'Home price', suffix: '$', default: '400000' },
     { key: 'down', label: 'Down payment', suffix: '%', default: '20' },
@@ -124,6 +126,7 @@ export const DownPaymentCalculatorClient = makeCalculatorClient({
 })
 
 export const DTICalculatorClient = makeCalculatorClient({
+  slug: 'dti-calculator',
   inputs: [
     { key: 'income', label: 'Monthly gross income', suffix: '$', default: '6000' },
     { key: 'debts', label: 'Monthly debt payments', suffix: '$', default: '1500' },
@@ -152,6 +155,7 @@ export const DTICalculatorClient = makeCalculatorClient({
 })
 
 export const CommissionCalculatorClient = makeCalculatorClient({
+  slug: 'commission-calculator',
   inputs: [
     { key: 'sales', label: 'Total sales', suffix: '$', default: '50000' },
     { key: 'rate', label: 'Commission rate', suffix: '%', default: '5' },
@@ -234,6 +238,7 @@ export const FinalGradeCalculatorClient = makeCalculatorClient({
 })
 
 export const BillSplitCalculatorClient = makeCalculatorClient({
+  slug: 'bill-split-calculator',
   inputs: [
     { key: 'total', label: 'Bill total', suffix: '$', default: '120' },
     { key: 'tip', label: 'Tip', suffix: '%', default: '18' },

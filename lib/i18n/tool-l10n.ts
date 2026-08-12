@@ -42,6 +42,12 @@ import { compoundInterestCalculatorL10n } from './tools-l10n/compound-interest-c
 import { apyCalculatorL10n } from './tools-l10n/apy-calculator'
 import { roiCalculatorL10n } from './tools-l10n/roi-calculator'
 import { creditCardMinimumPaymentCalculatorL10n } from './tools-l10n/credit-card-minimum-payment-calculator'
+import { cashBackCalculatorL10n } from './tools-l10n/cash-back-calculator'
+import { downPaymentCalculatorL10n } from './tools-l10n/down-payment-calculator'
+import { dtiCalculatorL10n } from './tools-l10n/dti-calculator'
+import { commissionCalculatorL10n } from './tools-l10n/commission-calculator'
+import { billSplitCalculatorL10n } from './tools-l10n/bill-split-calculator'
+import { savingsGoalCalculatorL10n } from './tools-l10n/savings-goal-calculator'
 
 const registry: Record<string, ToolL10n> = {
   'loan-calculator': loanCalculatorL10n,
@@ -50,6 +56,12 @@ const registry: Record<string, ToolL10n> = {
   'apy-calculator': apyCalculatorL10n,
   'roi-calculator': roiCalculatorL10n,
   'credit-card-minimum-payment-calculator': creditCardMinimumPaymentCalculatorL10n,
+  'cash-back-calculator': cashBackCalculatorL10n,
+  'down-payment-calculator': downPaymentCalculatorL10n,
+  'dti-calculator': dtiCalculatorL10n,
+  'commission-calculator': commissionCalculatorL10n,
+  'bill-split-calculator': billSplitCalculatorL10n,
+  'savings-goal-calculator': savingsGoalCalculatorL10n,
 }
 
 /**

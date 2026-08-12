@@ -1,0 +1,44 @@
+/**
+ * bill-split-calculator 本地化 bundle —— zh / es / de
+ * 覆盖:faqs + ui + useCases（无 formula 条目）
+ */
+import type { ToolL10n } from '../tool-l10n'
+
+export const billSplitCalculatorL10n: ToolL10n = {
+  zh: {
+    useCases: ['算带小费的 AA 账单', '拆分含税含小费的账单', '按人数分摊餐厅账单', '算分摊后每人付多少'],
+    faqs: [
+      { q: '有人没喝酒怎么办?', a: '把酒水部分单算。从总额中减去酒水费用，由喝酒的人分摊，食物则所有人均摊。' },
+    ],
+    ui: {
+      inputs: '输入', 'in.total': '账单总额', 'in.tip': '小费', 'in.people': '人数',
+      'out.perPerson': '每人应付', 'out.tipAmount': '小费总额', 'out.grandTotal': '总计',
+      note: '🍽️ 含小费均摊账单。如果需要按各自点的菜分摊，请单独计算每人的金额。',
+      summaryTitle: '计算摘要', inputsLabel: '输入:', resultsLabel: '结果:', copySummary: '复制摘要', csvField: '字段', csvType: '类型', csvValue: '数值', csvInput: '输入', csvResult: '结果',
+    },
+  },
+  es: {
+    useCases: ['dividir la cuenta con propina', 'repartir la cuenta con impuestos y propina', 'dividir la cuenta entre personas', 'calcular cuánto paga cada persona'],
+    faqs: [
+      { q: '¿Qué hacemos si alguien no bebió?', a: 'Detalla esa parte por separado. Resta el coste del alcohol del total, repártelo entre los que bebieron y divide la comida a partes iguales.' },
+    ],
+    ui: {
+      inputs: 'Entradas', 'in.total': 'Total de la cuenta', 'in.tip': 'Propina', 'in.people': 'Número de personas',
+      'out.perPerson': 'Cada persona paga', 'out.tipAmount': 'Propina total', 'out.grandTotal': 'Total general',
+      note: '🍽️ Divide la cuenta a partes iguales incluyendo propina. Para dividir por platos, calcula los importes individuales por separado.',
+      summaryTitle: 'Resumen del cálculo', inputsLabel: 'Entradas:', resultsLabel: 'Resultados:', copySummary: 'Copiar resumen', csvField: 'Campo', csvType: 'Tipo', csvValue: 'Valor', csvInput: 'Entrada', csvResult: 'Resultado',
+    },
+  },
+  de: {
+    useCases: ['die Rechnung mit Trinkgeld teilen', 'die Rechnung mit Steuer und Trinkgeld splitten', 'die Restaurantrechnung auf Personen aufteilen', 'ausrechnen, was jeder zahlt'],
+    faqs: [
+      { q: 'Was tun, wenn jemand nichts getrunken hat?', a: 'Diesen Teil separat abrechnen. Ziehe die Getränkekosten vom Gesamtbetrag ab, teile sie unter den Trinkenden auf und teile das Essen zu gleichen Teilen.' },
+    ],
+    ui: {
+      inputs: 'Eingaben', 'in.total': 'Rechnungsbetrag', 'in.tip': 'Trinkgeld', 'in.people': 'Anzahl Personen',
+      'out.perPerson': 'Jeder zahlt', 'out.tipAmount': 'Trinkgeld gesamt', 'out.grandTotal': 'Gesamtbetrag',
+      note: '🍽️ Teilt eine Rechnung inklusive Trinkgeld gleichmäßig. Für einzelne Posten rechne die Beträge pro Person separat.',
+      summaryTitle: 'Zusammenfassung der Berechnung', inputsLabel: 'Eingaben:', resultsLabel: 'Ergebnis:', copySummary: 'Zusammenfassung kopieren', csvField: 'Feld', csvType: 'Typ', csvValue: 'Wert', csvInput: 'Eingabe', csvResult: 'Ergebnis',
+    },
+  },
+}
