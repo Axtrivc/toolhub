@@ -13,10 +13,9 @@ export const tipCalculatorL10n: ToolL10n = {
       { q: '多人怎么分摊小费?', a: '先把小费加到总账单上,再除以人数即可均摊。如果各人消费差距大,可先算每人应付的餐费,再分别乘以相同的小费比例后求和。' },
     ],
     ui: {
-      inputs: '输入', 'in.bill': '账单金额', 'inSuffix.bill': '$', 'in.tipPct': '小费比例', 'inSuffix.tipPct': '%', 'in.people': '人数',
+      'in.bill': '账单金额', 'inSuffix.bill': '$', 'in.tipPct': '小费比例', 'inSuffix.tipPct': '%', 'in.people': '人数',
       'out.tip': '小费金额', 'out.total': '总账单', 'out.perPerson': '人均', 'outSub.perPerson': '均摊',
       note: '💡 常见小费比例:服务尚可 15%,服务不错 18%,服务很好 20% 以上。',
-      summaryTitle: '计算摘要', inputsLabel: '输入:', resultsLabel: '结果:', copySummary: '复制摘要', csvField: '字段', csvType: '类型', csvValue: '数值', csvInput: '输入', csvResult: '结果',
     },
   },
   es: {
@@ -27,10 +26,9 @@ export const tipCalculatorL10n: ToolL10n = {
       { q: '¿Cómo reparto la propina en un grupo?', a: 'Primero suma la propina a la cuenta total, luego divide entre el número de personas para un reparto igualitario. Si los pedidos varían mucho, calcula la parte de cada persona, aplica el mismo porcentaje de propina a cada una y suma.' },
     ],
     ui: {
-      inputs: 'Entradas', 'in.bill': 'Importe de la cuenta', 'inSuffix.bill': '$', 'in.tipPct': 'Porcentaje de propina', 'inSuffix.tipPct': '%', 'in.people': 'Número de personas',
+      'in.bill': 'Importe de la cuenta', 'inSuffix.bill': '$', 'in.tipPct': 'Porcentaje de propina', 'inSuffix.tipPct': '%', 'in.people': 'Número de personas',
       'out.tip': 'Importe de propina', 'out.total': 'Cuenta total', 'out.perPerson': 'Por persona', 'outSub.perPerson': 'Reparto igualitario',
       note: '💡 Propinas habituales: 15 % para servicio adecuado, 18 % para buen servicio, 20 %+ para servicio excelente.',
-      summaryTitle: 'Resumen del cálculo', inputsLabel: 'Entradas:', resultsLabel: 'Resultados:', copySummary: 'Copiar resumen', csvField: 'Campo', csvType: 'Tipo', csvValue: 'Valor', csvInput: 'Entrada', csvResult: 'Resultado',
     },
   },
   de: {
@@ -41,10 +39,9 @@ export const tipCalculatorL10n: ToolL10n = {
       { q: 'Wie teile ich das Trinkgeld in einer Gruppe?', a: 'Addiere zuerst das Trinkgeld zur Gesamtrechnung und teile dann durch die Personenanzahl für eine gleiche Aufteilung. Wenn die Bestellungen stark abweichen, berechne den Anteil jeder Person, wende denselben Trinkgeld-Prozentsatz auf jeden an und summiere.' },
     ],
     ui: {
-      inputs: 'Eingaben', 'in.bill': 'Rechnungsbetrag', 'inSuffix.bill': '$', 'in.tipPct': 'Trinkgeld-Prozentsatz', 'inSuffix.tipPct': '%', 'in.people': 'Anzahl Personen',
+      'in.bill': 'Rechnungsbetrag', 'inSuffix.bill': '$', 'in.tipPct': 'Trinkgeld-Prozentsatz', 'inSuffix.tipPct': '%', 'in.people': 'Anzahl Personen',
       'out.tip': 'Trinkgeldbetrag', 'out.total': 'Gesamtrechnung', 'out.perPerson': 'Pro Person', 'outSub.perPerson': 'Gleiche Aufteilung',
       note: '💡 Übliche Trinkgelder: 15 % für ordentlichen Service, 18 % für guten Service, 20 %+ für ausgezeichneten Service.',
-      summaryTitle: 'Zusammenfassung der Berechnung', inputsLabel: 'Eingaben:', resultsLabel: 'Ergebnis:', copySummary: 'Zusammenfassung kopieren', csvField: 'Feld', csvType: 'Typ', csvValue: 'Wert', csvInput: 'Eingabe', csvResult: 'Ergebnis',
     },
   },
 }

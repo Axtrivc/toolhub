@@ -13,11 +13,10 @@ export const salesTaxCalculatorL10n: ToolL10n = {
       { q: '为什么美国标价不含税?', a: '因为美国有成千上万个地方税区,零售商显示税前价格以便做全国统一广告。税款在结账时根据购买地加上。' },
     ],
     ui: {
-      inputs: '输入', 'in.amount': '金额', 'inSuffix.amount': '$', 'in.rate': '税率', 'inSuffix.rate': '%', 'in.mode': '计算方式',
+      'in.amount': '金额', 'inSuffix.amount': '$', 'in.rate': '税率', 'inSuffix.rate': '%', 'in.mode': '计算方式',
       'opt.mode.add': '加税(税前 → 含税)', 'opt.mode.remove': '去税(含税 → 税前)',
       'out.tax': '税额', 'out.result': '最终金额',
       note: '💰 当你只有最终总价时,用「去税」反推税前金额——VAT 和 GST 场景常用。',
-      summaryTitle: '计算摘要', inputsLabel: '输入:', resultsLabel: '结果:', copySummary: '复制摘要', csvField: '字段', csvType: '类型', csvValue: '数值', csvInput: '输入', csvResult: '结果',
     },
   },
   es: {
@@ -28,11 +27,10 @@ export const salesTaxCalculatorL10n: ToolL10n = {
       { q: '¿Por qué los precios en EE. UU. no incluyen impuestos?', a: 'Como EE. UU. tiene miles de jurisdicciones fiscales locales, los minoristas muestran precios sin impuesto para poder publicar precios nacionales consistentes. El impuesto se añade en caja según el lugar de compra.' },
     ],
     ui: {
-      inputs: 'Entradas', 'in.amount': 'Importe', 'inSuffix.amount': '$', 'in.rate': 'Tasa de impuesto', 'inSuffix.rate': '%', 'in.mode': 'Modo de cálculo',
+      'in.amount': 'Importe', 'inSuffix.amount': '$', 'in.rate': 'Tasa de impuesto', 'inSuffix.rate': '%', 'in.mode': 'Modo de cálculo',
       'opt.mode.add': 'Añadir impuesto (antes → con impuesto)', 'opt.mode.remove': 'Quitar impuesto (con impuesto → antes)',
       'out.tax': 'Importe del impuesto', 'out.result': 'Importe final',
       note: '💰 Usa «Quitar impuesto» para hallar el importe antes de impuestos cuando solo tienes el total final — común para IVA y GST.',
-      summaryTitle: 'Resumen del cálculo', inputsLabel: 'Entradas:', resultsLabel: 'Resultados:', copySummary: 'Copiar resumen', csvField: 'Campo', csvType: 'Tipo', csvValue: 'Valor', csvInput: 'Entrada', csvResult: 'Resultado',
     },
   },
   de: {
@@ -43,11 +41,10 @@ export const salesTaxCalculatorL10n: ToolL10n = {
       { q: 'Warum enthalten US-Preise keine Steuer?', a: 'Da die USA Tausende lokale Steuergebiete haben, zeigen Händler Nettopreise, um einheitliche nationale Werbung zu schalten. Die Steuer wird an der Kasse basierend auf dem Kaufort hinzugefügt.' },
     ],
     ui: {
-      inputs: 'Eingaben', 'in.amount': 'Betrag', 'inSuffix.amount': '$', 'in.rate': 'Steuersatz', 'inSuffix.rate': '%', 'in.mode': 'Berechnungsmodus',
+      'in.amount': 'Betrag', 'inSuffix.amount': '$', 'in.rate': 'Steuersatz', 'inSuffix.rate': '%', 'in.mode': 'Berechnungsmodus',
       'opt.mode.add': 'Steuer hinzufügen (netto → brutto)', 'opt.mode.remove': 'Steuer abziehen (brutto → netto)',
       'out.tax': 'Steuerbetrag', 'out.result': 'Endbetrag',
       note: '💰 Nutze „Steuer abziehen", um den Nettobetrag zu finden, wenn du nur das Bruttototal hast — häufig bei Mehrwertsteuer und GST.',
-      summaryTitle: 'Zusammenfassung der Berechnung', inputsLabel: 'Eingaben:', resultsLabel: 'Ergebnis:', copySummary: 'Zusammenfassung kopieren', csvField: 'Feld', csvType: 'Typ', csvValue: 'Wert', csvInput: 'Eingabe', csvResult: 'Ergebnis',
     },
   },
 }
