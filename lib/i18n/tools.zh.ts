@@ -124,6 +124,18 @@ export const zhTools: Record<string, { name: string; shortIntro: string }> = {
     name: '折扣计算器',
     shortIntro: '查询折扣后的最终价格和省下的金额。',
   },
+  'auto-loan-calculator': {
+    name: '汽车贷款计算器',
+    shortIntro: '含首付、置换抵扣和税费,计算车贷月供。',
+  },
+  'ebay-fee-calculator': {
+    name: 'eBay 费用计算器',
+    shortIntro: '算清扣除 eBay 或 Etsy 费用后的实际净收入。',
+  },
+  'reverse-stripe-fee-calculator': {
+    name: 'Stripe 手续费反算器',
+    shortIntro: '反推应收金额,让扣除手续费后的净收入正好是你要的数。',
+  },
 
   // ─────────── ⚙️ 开发者工具 ───────────
   'json-formatter': {
@@ -238,6 +250,42 @@ export const zhTools: Record<string, { name: string; shortIntro: string }> = {
     name: 'IP 质量与欺诈检测',
     shortIntro: '检测 IP 质量、ASN 类型、欺诈评分与时区一致性。',
   },
+  'chmod-calculator': {
+    name: 'Chmod 权限计算器',
+    shortIntro: '在八进制 755 与符号式 rwxr-xr-x 权限之间互转。',
+  },
+  'code-beautifier': {
+    name: '代码美化器',
+    shortIntro: '格式化并缩进压缩过的 HTML、CSS、JS 和 JSON。',
+  },
+  'gpt-token-counter': {
+    name: 'GPT Token 计数器',
+    shortIntro: '估算 GPT 和 Claude 提示词的 token 数与 API 成本。',
+  },
+  'ip-subnet-calculator': {
+    name: 'IP 子网计算器',
+    shortIntro: '由 CIDR 计算子网掩码、网络地址、广播地址和主机范围。',
+  },
+  'json-schema-generator': {
+    name: 'JSON Schema 生成器',
+    shortIntro: '把任意 JSON 数据转成 Draft-07 JSON Schema。',
+  },
+  'naming-case-converter': {
+    name: '命名风格转换器',
+    shortIntro: '在 camelCase、snake_case、kebab-case 等命名风格间互转。',
+  },
+  'nginx-config-generator': {
+    name: 'Nginx 配置生成器',
+    shortIntro: '生成带 SSL 和缓存的反向代理 nginx server 配置块。',
+  },
+  'random-choice-picker': {
+    name: '随机选择器',
+    shortIntro: '粘贴选项,转一转,让运气替你做决定。',
+  },
+  'user-agent-parser': {
+    name: 'User-Agent 解析器',
+    shortIntro: '把 user-agent 字符串解析为浏览器、操作系统、引擎和设备。',
+  },
 
   // ─────────── 🔤 文本工具 ───────────
   'word-counter': {
@@ -319,6 +367,22 @@ export const zhTools: Record<string, { name: string; shortIntro: string }> = {
   'list-diff': {
     name: '列表差异与交集对比',
     shortIntro: '即时对比两个列表,找出独有和共有的项。',
+  },
+  'csv-to-markdown-table': {
+    name: 'CSV 转 Markdown 表格',
+    shortIntro: '把 CSV/TSV 数据转成可直接用于 GitHub 的 Markdown 表格。',
+  },
+  'srt-subtitle-shift': {
+    name: 'SRT 字幕平移器',
+    shortIntro: '按任意偏移量平移字幕时间轴,并去除格式标签。',
+  },
+  'text-cleaner': {
+    name: '文本清理器',
+    shortIntro: '去除文本中的 emoji、重音符号和特殊字符。',
+  },
+  'wordle-solver': {
+    name: 'Wordle 求解器',
+    shortIntro: '按已知、包含和排除的字母缩小 Wordle 答案范围。',
   },
 
   // ─────────── 📐 单位换算器 ───────────
@@ -534,6 +598,18 @@ export const zhTools: Record<string, { name: string; shortIntro: string }> = {
     name: '年龄差计算器',
     shortIntro: '求两人之间的年龄差。',
   },
+  'days-countdown-calculator': {
+    name: '天数倒计时计算器',
+    shortIntro: '实时倒计时到任意日期,或计算两个日期之间的天数。',
+  },
+  'reading-speaking-time': {
+    name: '阅读时长计算器',
+    shortIntro: '估算任意文本的阅读和演讲时长。',
+  },
+  'timezone-converter': {
+    name: '时区转换器',
+    shortIntro: '跨时区换算时间,找出适合开会的时间段。',
+  },
 
   // ─────────── 🎨 网页设计工具 ───────────
   'svg-to-image': {
@@ -568,6 +644,30 @@ export const zhTools: Record<string, { name: string; shortIntro: string }> = {
     name: 'Favicon 生成器',
     shortIntro: '把图片转为 16×16、32×32 favicon 和 Apple Touch Icon。',
   },
+  'css-clamp-calculator': {
+    name: 'CSS Clamp 计算器',
+    shortIntro: '用 CSS clamp() 生成流体式字号。',
+  },
+  'css-gradient-generator': {
+    name: 'CSS 渐变生成器',
+    shortIntro: '可视化构建线性、径向和网格渐变,实时预览。',
+  },
+  'image-resizer': {
+    name: '图片尺寸调整器',
+    shortIntro: '调整并压缩图片,实时预览文件大小。',
+  },
+  'png-to-webp-converter': {
+    name: 'PNG 转 WebP 转换器',
+    shortIntro: '把 PNG/JPG 转成 WebP,直观看到节省的体积。',
+  },
+  'svg-minifier': {
+    name: 'SVG 压缩器',
+    shortIntro: '去除 SVG 文件中的注释、元数据和多余空白。',
+  },
+  'webp-to-png-converter': {
+    name: 'WebP 转 PNG 转换器',
+    shortIntro: '在浏览器中把 WebP 图片转成 PNG 或 JPG。',
+  },
 
   // ─────────── 🔒 安全工具 ───────────
   'password-strength-checker': {
@@ -578,11 +678,31 @@ export const zhTools: Record<string, { name: string; shortIntro: string }> = {
     name: '密码生成器',
     shortIntro: '一键创建强随机安全密码。',
   },
+  'bcrypt-hash-generator': {
+    name: 'Bcrypt 哈希生成器',
+    shortIntro: '在浏览器中用 bcrypt 或加盐 SHA 哈希并校验密码。',
+  },
+  'secret-key-generator': {
+    name: '密钥生成器',
+    shortIntro: '在浏览器中生成高熵 API 密钥和机密。',
+  },
+  'ssh-key-generator': {
+    name: 'SSH 密钥生成器',
+    shortIntro: '在浏览器中生成 RSA 或 Ed25519 SSH 密钥对。',
+  },
 
   // ─────────── 💼 商业工具 ───────────
   'qr-code-generator': {
     name: '二维码生成器',
     shortIntro: '为网址、文本和 WiFi 创建二维码,免费无水印。',
+  },
+  'freelance-invoice-generator': {
+    name: '发票生成器',
+    shortIntro: '免费制作、预览并打印专业发票。',
+  },
+  'saas-ltv-churn-calculator': {
+    name: 'SaaS LTV 计算器',
+    shortIntro: '为你的 SaaS 建模 LTV、流失率、CAC 回收期和 LTV:CAC。',
   },
 
   // ─────────── 🛠️ 开发者工具(其它) ───────────

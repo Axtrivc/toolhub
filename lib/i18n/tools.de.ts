@@ -123,6 +123,18 @@ export const deTools: Record<string, { name: string; shortIntro: string }> = {
     name: 'Rabattrechner',
     shortIntro: 'Finde den Endpreis nach Rabatt und dein Sparpotenzial.',
   },
+  'auto-loan-calculator': {
+    name: 'Autokredit-Rechner',
+    shortIntro: 'Berechne die Autorate mit Anzahlung, Inzahlungnahme und Steuern.',
+  },
+  'ebay-fee-calculator': {
+    name: 'eBay-Gebührenrechner',
+    shortIntro: 'Sieh genau, was nach eBay- oder Etsy-Gebühren netto übrig bleibt.',
+  },
+  'reverse-stripe-fee-calculator': {
+    name: 'Stripe-Gebühren-Rückrechner',
+    shortIntro: 'Berechne, wie viel du verlangen musst, um netto genau den Wunschbetrag zu erhalten.',
+  },
 
   // ─────────── ⚙️ Entwickler-Werkzeuge ───────────
   'json-formatter': {
@@ -237,6 +249,42 @@ export const deTools: Record<string, { name: string; shortIntro: string }> = {
     name: 'IP-Qualitäts- & Fraud-Checker',
     shortIntro: 'Prüft IP-Qualität, ASN-Typ, Fraud-Score und Zeitzonen-Konsistenz.',
   },
+  'chmod-calculator': {
+    name: 'Chmod-Rechner',
+    shortIntro: 'Zwischen oktalen 755 und symbolischen rwxr-xr-x Rechten umrechnen.',
+  },
+  'code-beautifier': {
+    name: 'Code-Beautifier',
+    shortIntro: 'Minifiziertes HTML, CSS, JS und JSON formatieren und einrücken.',
+  },
+  'gpt-token-counter': {
+    name: 'GPT-Token-Zähler',
+    shortIntro: 'Tokens und API-Kosten für GPT- und Claude-Prompts schätzen.',
+  },
+  'ip-subnet-calculator': {
+    name: 'IP-Subnetz-Rechner',
+    shortIntro: 'Netzmaske, Netzwerk, Broadcast und Host-Bereich aus CIDR berechnen.',
+  },
+  'json-schema-generator': {
+    name: 'JSON-Schema-Generator',
+    shortIntro: 'Beliebige JSON-Daten in ein Draft-07-JSON-Schema umwandeln.',
+  },
+  'naming-case-converter': {
+    name: 'Namenskonvention-Konverter',
+    shortIntro: 'Namen zwischen camelCase, snake_case, kebab-case u. a. umwandeln.',
+  },
+  'nginx-config-generator': {
+    name: 'Nginx-Konfiggenerator',
+    shortIntro: 'Reverse-Proxy-Serverblock für nginx mit SSL und Caching erstellen.',
+  },
+  'random-choice-picker': {
+    name: 'Zufallsauswahl',
+    shortIntro: 'Optionen einfügen, drehen und den Zufall entscheiden lassen.',
+  },
+  'user-agent-parser': {
+    name: 'User-Agent-Parser',
+    shortIntro: 'User-Agent-Strings in Browser, OS, Engine und Gerät zerlegen.',
+  },
 
   // ─────────── 🔤 Text-Werkzeuge ───────────
   'word-counter': {
@@ -318,6 +366,22 @@ export const deTools: Record<string, { name: string; shortIntro: string }> = {
   'list-diff': {
     name: 'Listen-Diff- und Schnittmengen-Prüfer',
     shortIntro: 'Vergleiche zwei Listen und finde eindeutige/gemeinsame Items.',
+  },
+  'csv-to-markdown-table': {
+    name: 'CSV zu Markdown-Tabelle',
+    shortIntro: 'CSV-/TSV-Daten in GitHub-fertige Markdown-Tabellen umwandeln.',
+  },
+  'srt-subtitle-shift': {
+    name: 'SRT-Untertitel-Shifter',
+    shortIntro: 'Untertitel-Zeiten um einen beliebigen Offset verschieben und Formatierung entfernen.',
+  },
+  'text-cleaner': {
+    name: 'Text-Bereiniger',
+    shortIntro: 'Emojis, Akzente und Sonderzeichen aus Text entfernen.',
+  },
+  'wordle-solver': {
+    name: 'Wordle-Löser',
+    shortIntro: 'Wordle-Antworten anhand bekannter, enthaltener und ausgeschlossener Buchstaben eingrenzen.',
   },
 
   // ─────────── 📐 Einheiten-Umrechner ───────────
@@ -533,6 +597,18 @@ export const deTools: Record<string, { name: string; shortIntro: string }> = {
     name: 'Altersunterschied-Rechner',
     shortIntro: 'Findet den Altersunterschied zwischen zwei Personen.',
   },
+  'days-countdown-calculator': {
+    name: 'Countdown-Rechner',
+    shortIntro: 'Live-Countdown bis zu einem Datum oder Tage zwischen zwei Daten.',
+  },
+  'reading-speaking-time': {
+    name: 'Lesezeit-Rechner',
+    shortIntro: 'Lese- und Sprechzeit für beliebige Texte schätzen.',
+  },
+  'timezone-converter': {
+    name: 'Zeitzonen-Konverter',
+    shortIntro: 'Zeiten zwischen Zonen umrechnen und meetingfreundliche Stunden finden.',
+  },
 
   // ─────────── 🎨 Webdesign-Werkzeuge ───────────
   'svg-to-image': {
@@ -567,6 +643,30 @@ export const deTools: Record<string, { name: string; shortIntro: string }> = {
     name: 'Favicon-Generator',
     shortIntro: 'Macht aus einem Bild 16×16-, 32×32-Favicons und Apple-Touch-Icon.',
   },
+  'css-clamp-calculator': {
+    name: 'CSS-Clamp-Rechner',
+    shortIntro: 'Fluide Schriftgrößen mit CSS clamp() erzeugen.',
+  },
+  'css-gradient-generator': {
+    name: 'CSS-Verlaufsgenerator',
+    shortIntro: 'Lineare, radiale und Mesh-Verläufe mit Live-Vorschau erstellen.',
+  },
+  'image-resizer': {
+    name: 'Bild-Resizer',
+    shortIntro: 'Bilder skalieren und komprimieren, mit Live-Vorschau der Dateigröße.',
+  },
+  'png-to-webp-converter': {
+    name: 'PNG-zu-WebP-Konverter',
+    shortIntro: 'PNG/JPG in WebP umwandeln und die Ersparnis sehen.',
+  },
+  'svg-minifier': {
+    name: 'SVG-Minifier',
+    shortIntro: 'Kommentare, Metadaten und Leerzeichen aus SVG-Dateien entfernen.',
+  },
+  'webp-to-png-converter': {
+    name: 'WebP-zu-PNG-Konverter',
+    shortIntro: 'WebP-Bilder im Browser in PNG oder JPG umwandeln.',
+  },
 
   // ─────────── 🔒 Sicherheits-Werkzeuge ───────────
   'password-strength-checker': {
@@ -577,11 +677,31 @@ export const deTools: Record<string, { name: string; shortIntro: string }> = {
     name: 'Passwort-Generator',
     shortIntro: 'Erzeuge mit einem Klick starke, zufällige, sichere Passwörter.',
   },
+  'bcrypt-hash-generator': {
+    name: 'Bcrypt-Hash-Generator',
+    shortIntro: 'Passwörter mit Bcrypt oder gesalzenem SHA im Browser hashen und prüfen.',
+  },
+  'secret-key-generator': {
+    name: 'Secret-Key-Generator',
+    shortIntro: 'API-Keys und Secrets mit hoher Entropie im Browser erzeugen.',
+  },
+  'ssh-key-generator': {
+    name: 'SSH-Key-Generator',
+    shortIntro: 'RSA- oder Ed25519-SSH-Schlüsselpaare im Browser erzeugen.',
+  },
 
   // ─────────── 💼 Business-Werkzeuge ───────────
   'qr-code-generator': {
     name: 'QR-Code-Generator',
     shortIntro: 'QR-Codes für URLs, Text und WLAN. Kostenlos, ohne Wasserzeichen.',
+  },
+  'freelance-invoice-generator': {
+    name: 'Rechnungsgenerator',
+    shortIntro: 'Professionelle Rechnungen kostenlos erstellen, ansehen und drucken.',
+  },
+  'saas-ltv-churn-calculator': {
+    name: 'SaaS-LTV-Rechner',
+    shortIntro: 'LTV, Churn, CAC-Amortisation und LTV:CAC für dein SaaS modellieren.',
   },
 
   // ─────────── 🛠️ Weitere Entwickler-Werkzeuge ───────────

@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useMemo, useCallback } from 'react'
+import DOMPurify from 'dompurify'
 import { CopyButton } from '@/components/CopyButton'
 import { LoadSampleButton } from '@/components/LoadSampleButton'
 
@@ -10,6 +11,7 @@ import { LoadSampleButton } from '@/components/LoadSampleButton'
  * 支持:标题 H1-H6、粗体/斜体/删除线、行内代码、代码块(```lang)、
  * 引用、有序/无序列表、链接、图片、水平线、GFM 表格。
  * 不支持:原始 HTML 直通(转义)、脚注、任务列表(简化支持)。
+ * 输出经 DOMPurify 白名单消毒后才进 dangerouslySetInnerHTML。
  * 100% 本地。
  */
 
@@ -255,7 +257,10 @@ export function MarkdownToHtmlClient() {
   const result = useMemo<{ output?: string; error?: string }>(() => {
     if (!input.trim()) return {}
     try {
-      return { output: markdownToHtml(input) }
+      // 生成器本身已做转义 + URL 协议白名单,这里再过一道 DOMPurify 白名单消毒,
+      // 作为 dangerouslySetInnerHTML 前的纵深防御,防未来规则改动引入 XSS。
+      // (初始输入为空,SSR 不会走到这里;sanitize 实际在浏览器执行。)
+      return { output: DOMPurify.sanitize(markdownToHtml(input)) }
     } catch (e) {
       return { error: e instanceof Error ? e.message : 'Could not convert Markdown' }
     }

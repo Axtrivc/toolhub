@@ -123,6 +123,18 @@ export const esTools: Record<string, { name: string; shortIntro: string }> = {
     name: 'Calculadora de descuentos',
     shortIntro: 'Hallar el precio final tras el descuento y cuánto ahorras.',
   },
+  'auto-loan-calculator': {
+    name: 'Calculadora de préstamo de auto',
+    shortIntro: 'Calcula las cuotas del coche con entrada, entrega a cuenta e impuestos.',
+  },
+  'ebay-fee-calculator': {
+    name: 'Calculadora de comisiones de eBay',
+    shortIntro: 'Mira exactamente cuánto te queda tras las comisiones de eBay o Etsy.',
+  },
+  'reverse-stripe-fee-calculator': {
+    name: 'Calculadora inversa de comisiones de Stripe',
+    shortIntro: 'Calcula cuánto cobrar para recibir neto exactamente lo que quieres.',
+  },
 
   // ─────────── ⚙️ Herramientas para desarrolladores ───────────
   'json-formatter': {
@@ -237,6 +249,42 @@ export const esTools: Record<string, { name: string; shortIntro: string }> = {
     name: 'Verificador de calidad y fraude de IP',
     shortIntro: 'Inspecciona la calidad de la IP, el tipo de ASN, la puntuación de fraude y la consistencia de zona horaria.',
   },
+  'chmod-calculator': {
+    name: 'Calculadora de chmod',
+    shortIntro: 'Convierte entre permisos octales 755 y simbólicos rwxr-xr-x.',
+  },
+  'code-beautifier': {
+    name: 'Embellecedor de código',
+    shortIntro: 'Formatea e indenta HTML, CSS, JS y JSON minificados.',
+  },
+  'gpt-token-counter': {
+    name: 'Contador de tokens GPT',
+    shortIntro: 'Estima tokens y coste de API para prompts de GPT y Claude.',
+  },
+  'ip-subnet-calculator': {
+    name: 'Calculadora de subredes IP',
+    shortIntro: 'Calcula máscara, red, broadcast y rango de hosts desde CIDR.',
+  },
+  'json-schema-generator': {
+    name: 'Generador de JSON Schema',
+    shortIntro: 'Convierte cualquier JSON en un JSON Schema Draft-07.',
+  },
+  'naming-case-converter': {
+    name: 'Conversor de estilos de nombre',
+    shortIntro: 'Convierte nombres entre camelCase, snake_case, kebab-case y más.',
+  },
+  'nginx-config-generator': {
+    name: 'Generador de configuración de Nginx',
+    shortIntro: 'Crea un bloque server de nginx de proxy inverso con SSL y caché.',
+  },
+  'random-choice-picker': {
+    name: 'Selector aleatorio',
+    shortIntro: 'Pega opciones, gira y deja que el azar decida por ti.',
+  },
+  'user-agent-parser': {
+    name: 'Analizador de User-Agent',
+    shortIntro: 'Decodifica cadenas user-agent en navegador, SO, motor y dispositivo.',
+  },
 
   // ─────────── 🔤 Herramientas de texto ───────────
   'word-counter': {
@@ -318,6 +366,22 @@ export const esTools: Record<string, { name: string; shortIntro: string }> = {
   'list-diff': {
     name: 'Comparador de listas e intersección',
     shortIntro: 'Compara dos listas y halla elementos únicos y comunes al instante.',
+  },
+  'csv-to-markdown-table': {
+    name: 'CSV a tabla Markdown',
+    shortIntro: 'Convierte datos CSV/TSV en tablas Markdown listas para GitHub.',
+  },
+  'srt-subtitle-shift': {
+    name: 'Desplazador de subtítulos SRT',
+    shortIntro: 'Desplaza los tiempos de los subtítulos cualquier cantidad y elimina el formato.',
+  },
+  'text-cleaner': {
+    name: 'Limpiador de texto',
+    shortIntro: 'Elimina emojis, acentos y caracteres especiales del texto.',
+  },
+  'wordle-solver': {
+    name: 'Solucionador de Wordle',
+    shortIntro: 'Acota las respuestas de Wordle por letras conocidas, incluidas y excluidas.',
   },
 
   // ─────────── 📐 Conversores de unidades ───────────
@@ -533,6 +597,18 @@ export const esTools: Record<string, { name: string; shortIntro: string }> = {
     name: 'Calculadora de diferencia de edad',
     shortIntro: 'Hallar la diferencia de edad entre dos personas.',
   },
+  'days-countdown-calculator': {
+    name: 'Calculadora de cuenta regresiva',
+    shortIntro: 'Cuenta regresiva en vivo a cualquier fecha, o días entre dos fechas.',
+  },
+  'reading-speaking-time': {
+    name: 'Calculadora de tiempo de lectura',
+    shortIntro: 'Estima el tiempo de lectura y de locución de cualquier texto.',
+  },
+  'timezone-converter': {
+    name: 'Conversor de zonas horarias',
+    shortIntro: 'Convierte horas entre zonas y encuentra horarios cómodos para reuniones.',
+  },
 
   // ─────────── 🎨 Herramientas de diseño web ───────────
   'svg-to-image': {
@@ -567,6 +643,30 @@ export const esTools: Record<string, { name: string; shortIntro: string }> = {
     name: 'Generador de favicon',
     shortIntro: 'Convierte una imagen en favicons 16×16, 32×32 y Apple Touch.',
   },
+  'css-clamp-calculator': {
+    name: 'Calculadora de CSS clamp',
+    shortIntro: 'Genera tamaños de fuente fluidos con CSS clamp().',
+  },
+  'css-gradient-generator': {
+    name: 'Generador de gradientes CSS',
+    shortIntro: 'Crea gradientes lineales, radiales y de malla con vista previa en vivo.',
+  },
+  'image-resizer': {
+    name: 'Redimensionador de imágenes',
+    shortIntro: 'Redimensiona y comprime imágenes con vista previa del tamaño en vivo.',
+  },
+  'png-to-webp-converter': {
+    name: 'Convertidor de PNG a WebP',
+    shortIntro: 'Convierte PNG/JPG a WebP y mira cuánto espacio ahorras.',
+  },
+  'svg-minifier': {
+    name: 'Minificador de SVG',
+    shortIntro: 'Elimina comentarios, metadatos y espacios de los archivos SVG.',
+  },
+  'webp-to-png-converter': {
+    name: 'Convertidor de WebP a PNG',
+    shortIntro: 'Convierte imágenes WebP a PNG o JPG en tu navegador.',
+  },
 
   // ─────────── 🔒 Herramientas de seguridad ───────────
   'password-strength-checker': {
@@ -577,11 +677,31 @@ export const esTools: Record<string, { name: string; shortIntro: string }> = {
     name: 'Generador de contraseñas',
     shortIntro: 'Crea contraseñas fuertes, aleatorias y seguras con un clic.',
   },
+  'bcrypt-hash-generator': {
+    name: 'Generador de hash Bcrypt',
+    shortIntro: 'Genera y verifica contraseñas con bcrypt o SHA con sal en el navegador.',
+  },
+  'secret-key-generator': {
+    name: 'Generador de claves secretas',
+    shortIntro: 'Genera claves API y secretos de alta entropía en tu navegador.',
+  },
+  'ssh-key-generator': {
+    name: 'Generador de claves SSH',
+    shortIntro: 'Genera pares de claves SSH RSA o Ed25519 en tu navegador.',
+  },
 
   // ─────────── 💼 Herramientas de negocios ───────────
   'qr-code-generator': {
     name: 'Generador de código QR',
     shortIntro: 'Crea QR para URLs, texto y WiFi. Gratis, sin marca de agua.',
+  },
+  'freelance-invoice-generator': {
+    name: 'Generador de facturas',
+    shortIntro: 'Crea, previsualiza e imprime facturas profesionales gratis.',
+  },
+  'saas-ltv-churn-calculator': {
+    name: 'Calculadora de LTV para SaaS',
+    shortIntro: 'Modela LTV, churn, recuperación de CAC y LTV:CAC para tu SaaS.',
   },
 
   // ─────────── 🛠️ Otras herramientas para desarrolladores ───────────

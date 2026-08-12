@@ -177,47 +177,12 @@ export function SshKeyGeneratorClient() {
             <option value="rsa">RSA</option>
           </select>
         </div>
-        {keyType === 'rsa' ? (
-          <div>
-            <label htmlFor="ssh-rsa-bits" className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
-              RSA modulus (bits)
-            </label>
-            <select
-              id="ssh-rsa-bits"
-              value={modulusLength}
-              onChange={(e) => setModulusLength(Number(e.target.value) as 2048 | 4096)}
-              className="w-full rounded-lg border p-3 text-sm shadow-sm outline-none transition focus:ring-2"
-              style={{ borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rgb(var(--bg-card))', color: 'rgb(var(--text))' }}
-            >
-              <option value={2048}>2048</option>
-              <option value={4096}>4096</option>
-            </select>
-          </div>
-        ) : (
-          <div>
-            <label htmlFor="ssh-comment" className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
-              Comment (optional)
-            </label>
-            <input
-              id="ssh-comment"
-              type="text"
-              value={comment}
-              onChange={(e) => setComment(e.target.value)}
-              placeholder="you@example.com"
-              spellCheck={false}
-              className="w-full rounded-lg border p-3 text-sm shadow-sm outline-none transition focus:ring-2"
-              style={{ borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rgb(var(--bg-card))', color: 'rgb(var(--text))' }}
-            />
-          </div>
-        )}
-      </div>
-      {keyType === 'rsa' && (
         <div>
-          <label htmlFor="ssh-comment-rsa" className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
+          <label htmlFor="ssh-comment" className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
             Comment (optional)
           </label>
           <input
-            id="ssh-comment-rsa"
+            id="ssh-comment"
             type="text"
             value={comment}
             onChange={(e) => setComment(e.target.value)}
@@ -226,6 +191,23 @@ export function SshKeyGeneratorClient() {
             className="w-full rounded-lg border p-3 text-sm shadow-sm outline-none transition focus:ring-2"
             style={{ borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rgb(var(--bg-card))', color: 'rgb(var(--text))' }}
           />
+        </div>
+      </div>
+      {keyType === 'rsa' && (
+        <div>
+          <label htmlFor="ssh-rsa-bits" className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
+            RSA modulus (bits)
+          </label>
+          <select
+            id="ssh-rsa-bits"
+            value={modulusLength}
+            onChange={(e) => setModulusLength(Number(e.target.value) as 2048 | 4096)}
+            className="w-full rounded-lg border p-3 text-sm shadow-sm outline-none transition focus:ring-2"
+            style={{ borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rgb(var(--bg-card))', color: 'rgb(var(--text))' }}
+          >
+            <option value={2048}>2048</option>
+            <option value={4096}>4096</option>
+          </select>
         </div>
       )}
 

@@ -188,6 +188,10 @@ export interface Dict {
   searchKbdSelect: string // "select"
   searchKbdMove: string // "navigate"
   searchKbdClose: string // "close"
+  // 404 页面(app/not-found.tsx)
+  notFoundTitle: string // "Page not found"
+  notFoundBody: string // 说明 + 引导看热门工具
+  notFoundBack: string // "← Back to all tools" 按钮
   // Cookie 同意横幅
   cookieAriaLabel: string // dialog aria-label
   cookieBody: string // 横幅正文(含占位 {privacy} 用于插入隐私政策链接)
@@ -355,6 +359,11 @@ const en: Dict = {
   searchKbdSelect: 'to select',
   searchKbdMove: 'to navigate',
   searchKbdClose: 'to close',
+  // 404 页面
+  notFoundTitle: 'Page not found',
+  notFoundBody:
+    "We couldn't find that page. It may have been moved or never existed. Try one of our popular tools instead:",
+  notFoundBack: '← Back to all tools',
   heroMultilingualBadge: '🌐 Available in 4 Languages: EN | 中文 | Español | Deutsch',
   // Cookie 同意横幅
   cookieAriaLabel: 'Cookie consent',
@@ -519,6 +528,10 @@ const zh: Dict = {
   searchKbdSelect: '选择',
   searchKbdMove: '移动',
   searchKbdClose: '关闭',
+  // 404 页面
+  notFoundTitle: '页面不存在',
+  notFoundBody: '抱歉,找不到这个页面。它可能已被移动或从未存在。试试下面这些热门工具:',
+  notFoundBack: '← 返回全部工具',
   heroMultilingualBadge: '🌐 已支持 4 种语言:EN | 中文 | Español | Deutsch',
   // Cookie 同意横幅
   cookieAriaLabel: 'Cookie 同意',
@@ -682,6 +695,11 @@ const es: Dict = {
   searchKbdSelect: 'para seleccionar',
   searchKbdMove: 'para navegar',
   searchKbdClose: 'para cerrar',
+  // 404 页面
+  notFoundTitle: 'Página no encontrada',
+  notFoundBody:
+    'No pudimos encontrar esa página. Puede que se haya movido o que nunca haya existido. Prueba una de nuestras herramientas populares:',
+  notFoundBack: '← Volver a todas las herramientas',
   heroMultilingualBadge: '🌐 Disponible en 4 idiomas: EN | 中文 | Español | Deutsch',
   // Cookie 同意横幅
   cookieAriaLabel: 'Consentimiento de cookies',
@@ -845,6 +863,11 @@ const de: Dict = {
   searchKbdSelect: 'zum Auswählen',
   searchKbdMove: 'zum Navigieren',
   searchKbdClose: 'zum Schließen',
+  // 404 页面
+  notFoundTitle: 'Seite nicht gefunden',
+  notFoundBody:
+    'Wir konnten diese Seite nicht finden. Vielleicht wurde sie verschoben oder hat nie existiert. Probiere eines unserer beliebten Tools:',
+  notFoundBack: '← Zurück zu allen Tools',
   heroMultilingualBadge: '🌐 In 4 Sprachen verfügbar: EN | 中文 | Español | Deutsch',
   // Cookie 同意横幅
   cookieAriaLabel: 'Cookie-Einwilligung',
