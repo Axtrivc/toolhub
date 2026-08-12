@@ -40,6 +40,7 @@ export const APYCalculatorClient = makeCalculatorClient({
 })
 
 export const CreditCardMinimumCalculatorClient = makeCalculatorClient({
+  slug: 'credit-card-minimum-payment-calculator',
   inputs: [
     { key: 'balance', label: 'Current balance', suffix: '$', default: '5000' },
     { key: 'apr', label: 'APR', suffix: '%', default: '19.99' },
