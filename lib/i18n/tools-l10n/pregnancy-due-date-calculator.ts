@@ -1,11 +1,19 @@
 /**
  * pregnancy-due-date-calculator 本地化 bundle —— zh / es / de
- * 覆盖:faqs + useCases(client = PregnancyDueDateCalculatorClient = makeCalculatorClient)
+ * 覆盖:faqs + ui + useCases(client = PregnancyDueDateCalculatorClient = makeCalculatorClient)
  */
 import type { ToolL10n } from '../tool-l10n'
 
 export const pregnancyDueDateCalculatorL10n: ToolL10n = {
   zh: {
+    ui: {
+      'in.lmp': '末次月经首日(YYYY-MM-DD)',
+      'out.due': '预计预产期',
+      'out.conceived': '可能受孕日',
+      'out.weeks': '当前孕周',
+      'outSub.weeks': '以今天为准',
+      note: '🤰 Naegele 法则:预产期 = 末次月经 + 280 天。仅为估算——只有约 5% 的宝宝在预产期当天出生。',
+    },
     useCases: [
       '根据末次月经推算预产期',
       '估算受孕日期与当前孕周',
@@ -17,6 +25,14 @@ export const pregnancyDueDateCalculatorL10n: ToolL10n = {
     ],
   },
   es: {
+    ui: {
+      'in.lmp': 'Primer día de la última menstruación (AAAA-MM-DD)',
+      'out.due': 'Fecha probable de parto',
+      'out.conceived': 'Fecha probable de concepción',
+      'out.weeks': 'Semana actual',
+      'outSub.weeks': 'Asumiendo hoy',
+      note: '🤰 Regla de Naegele: fecha probable = FUM + 280 días. Solo es una estimación — solo el 5 % de los bebés nacen en su fecha.',
+    },
     useCases: [
       'calcular la fecha probable de parto desde la última menstruación',
       'estimar la fecha de concepción y la semana actual',
@@ -28,6 +44,14 @@ export const pregnancyDueDateCalculatorL10n: ToolL10n = {
     ],
   },
   de: {
+    ui: {
+      'in.lmp': 'Erster Tag der letzten Periode (JJJJ-MM-TT)',
+      'out.due': 'Berechneter Geburtstermin',
+      'out.conceived': 'Wahrscheinlicher Empfängniszeitpunkt',
+      'out.weeks': 'Aktuelle Woche',
+      'outSub.weeks': 'Geht von heute aus',
+      note: '🤰 Naegele-Regel: Geburtstermin = LMP + 280 Tage. Nur eine Schätzung — nur 5 % der Babys kommen am errechneten Termin.',
+    },
     useCases: [
       'den errechneten Geburtstermin anhand der letzten Periode bestimmen',
       'den Empfängniszeitpunkt und die aktuelle Schwangerschaftswoche schätzen',

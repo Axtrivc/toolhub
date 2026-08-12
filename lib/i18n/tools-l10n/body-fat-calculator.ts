@@ -1,11 +1,23 @@
 /**
  * body-fat-calculator 本地化 bundle —— zh / es / de
- * 覆盖:faqs + useCases(client = BodyFatCalculatorClient = makeCalculatorClient)
+ * 覆盖:faqs + ui + useCases(client = BodyFatCalculatorClient = makeCalculatorClient)
  */
 import type { ToolL10n } from '../tool-l10n'
 
 export const bodyFatCalculatorL10n: ToolL10n = {
   zh: {
+    ui: {
+      'in.gender': '性别',
+      'opt.gender.male': '男',
+      'opt.gender.female': '女',
+      'in.height': '身高',
+      'in.neck': '颈围',
+      'in.waist': '腰围',
+      'in.hip': '臀围(仅女性)',
+      'out.bodyfat': '体脂率',
+      'out.category': '类别',
+      note: '⚖️ 美国海军法,用围度估算。不如 DEXA 扫描精确,但适合居家估算。',
+    },
     useCases: [
       '在家用皮尺估算体脂率',
       '区分肌肉与脂肪(BMI 做不到)',
@@ -17,6 +29,18 @@ export const bodyFatCalculatorL10n: ToolL10n = {
     ],
   },
   es: {
+    ui: {
+      'in.gender': 'Sexo',
+      'opt.gender.male': 'Hombre',
+      'opt.gender.female': 'Mujer',
+      'in.height': 'Altura',
+      'in.neck': 'Cuello (circunferencia)',
+      'in.waist': 'Cintura (circunferencia)',
+      'in.hip': 'Cadera (solo mujeres)',
+      'out.bodyfat': 'Porcentaje de grasa corporal',
+      'out.category': 'Categoría',
+      note: '⚖️ Método de la Marina de EE. UU. mediante circunferencia. Menos preciso que un escáner DEXA, pero una estimación práctica en casa.',
+    },
     useCases: [
       'estimar el porcentaje de grasa en casa con una cinta métrica',
       'distinguir músculo de grasa (algo que el IMC no puede)',
@@ -28,6 +52,18 @@ export const bodyFatCalculatorL10n: ToolL10n = {
     ],
   },
   de: {
+    ui: {
+      'in.gender': 'Geschlecht',
+      'opt.gender.male': 'Männlich',
+      'opt.gender.female': 'Weiblich',
+      'in.height': 'Körpergröße',
+      'in.neck': 'Halsumfang',
+      'in.waist': 'Taillenumfang',
+      'in.hip': 'Hüftumfang (nur Frauen)',
+      'out.bodyfat': 'Körperfettanteil',
+      'out.category': 'Kategorie',
+      note: '⚖️ US-Navy-Methode anhand des Umfangs. Weniger genau als DEXA-Scans, aber eine praktische Haus-Schätzung.',
+    },
     useCases: [
       'den Körperfettanteil zu Hause mit dem Maßband schätzen',
       'Muskel von Fett unterscheiden (was der BMI nicht kann)',

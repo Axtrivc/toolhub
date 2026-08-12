@@ -13,10 +13,9 @@ export const savingsGoalCalculatorL10n: ToolL10n = {
       { q: '按月存好还是一次性存好?', a: '大多数人按月存更好，因为它强制纪律、分散风险（定投）。一次性投入因为钱在市场上时间更长，平均略优，但需要手里有现金并能承受短期波动。' },
     ],
     ui: {
-      inputs: '输入', 'in.goal': '储蓄目标', 'in.current': '已存金额', 'in.rate': '年回报率', 'in.years': '目标年限',
+      'in.goal': '储蓄目标', 'in.current': '已存金额', 'in.rate': '年回报率', 'in.years': '目标年限',
       'out.monthly': '每月需存金额', 'out.gap': '还需存入', 'out.growth': '投资增长',
       note: '🎯 算出达到任何储蓄目标所需的每月金额，同时考虑已有存款的投资增长。',
-      summaryTitle: '计算摘要', inputsLabel: '输入:', resultsLabel: '结果:', copySummary: '复制摘要', csvField: '字段', csvType: '类型', csvValue: '数值', csvInput: '输入', csvResult: '结果',
     },
   },
   es: {
@@ -27,10 +26,9 @@ export const savingsGoalCalculatorL10n: ToolL10n = {
       { q: '¿Es mejor ahorrar mensualmente o en importes únicos?', a: 'Las aportaciones mensuales ganan para la mayoría porque imponen disciplina y reparten el riesgo (promedio de coste). La inversión a tanto alzado rinde algo más de media porque el dinero pasa más tiempo en el mercado, pero requiere tener el efectivo por adelantado y tolerar las oscilaciones.' },
     ],
     ui: {
-      inputs: 'Entradas', 'in.goal': 'Objetivo de ahorro', 'in.current': 'Ahorrado actualmente', 'in.rate': 'Retorno anual', 'in.years': 'Años hasta la meta',
+      'in.goal': 'Objetivo de ahorro', 'in.current': 'Ahorrado actualmente', 'in.rate': 'Retorno anual', 'in.years': 'Años hasta la meta',
       'out.monthly': 'Aportación mensual necesaria', 'out.gap': 'Importe a ahorrar', 'out.growth': 'Crecimiento de la inversión',
       note: '🎯 Calcula el importe mensual necesario para alcanzar cualquier meta de ahorro, considerando el crecimiento de lo que ya tienes ahorrado.',
-      summaryTitle: 'Resumen del cálculo', inputsLabel: 'Entradas:', resultsLabel: 'Resultados:', copySummary: 'Copiar resumen', csvField: 'Campo', csvType: 'Tipo', csvValue: 'Valor', csvInput: 'Entrada', csvResult: 'Resultado',
     },
   },
   de: {
@@ -41,10 +39,9 @@ export const savingsGoalCalculatorL10n: ToolL10n = {
       { q: 'Ist monatliches Sparen oder Einmalanlage besser?', a: 'Monatliche Einzahlungen gewinnen für die meisten, weil sie Disziplin erzwingen und Risiko streuen (Cost-Average-Effekt). Die Einmalanlage schneidet im Schnitt leicht besser ab, weil das Geld länger am Markt ist, erfordert aber Bargeld auf Hand und kurze Schwankungen auszuhalten.' },
     ],
     ui: {
-      inputs: 'Eingaben', 'in.goal': 'Sparziel', 'in.current': 'Bereits gespart', 'in.rate': 'Jahresrendite', 'in.years': 'Jahre bis Ziel',
+      'in.goal': 'Sparziel', 'in.current': 'Bereits gespart', 'in.rate': 'Jahresrendite', 'in.years': 'Jahre bis Ziel',
       'out.monthly': 'Nötiger monatlicher Beitrag', 'out.gap': 'Noch zu sparen', 'out.growth': 'Investment-Wachstum',
       note: '🎯 Berechnet den monatlichen Betrag, der nötig ist, um jedes Sparziel zu erreichen — inklusive Wachstum auf das bereits Ersparte.',
-      summaryTitle: 'Zusammenfassung der Berechnung', inputsLabel: 'Eingaben:', resultsLabel: 'Ergebnis:', copySummary: 'Zusammenfassung kopieren', csvField: 'Feld', csvType: 'Typ', csvValue: 'Wert', csvInput: 'Eingabe', csvResult: 'Ergebnis',
     },
   },
 }

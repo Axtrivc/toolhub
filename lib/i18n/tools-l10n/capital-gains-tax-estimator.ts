@@ -13,10 +13,9 @@ export const capitalGainsTaxEstimatorL10n: ToolL10n = {
       { q: '如果我把收益再投资,还要交税吗?', a: '要。卖出即触发应税事件,无论你是否再投资——IRS 对已实现利得征税。只有在税收优惠账户(IRA、401k)内持有才能递延,且只有特定结构能完全避免。' },
     ],
     ui: {
-      inputs: '输入', 'in.purchase': '买入价', 'in.sale': '卖出价', 'in.years': '持有年限', 'in.bracket': '所得税档位',
+      'in.purchase': '买入价', 'in.sale': '卖出价', 'in.years': '持有年限', 'in.bracket': '所得税档位',
       'out.gain': '资本利得', 'out.rate': '税率', 'out.tax': '预估应缴税款',
       note: '📈 美国资本利得:持有 1 年以上 = 长期(0/15/20%)。持有不足 1 年 = 短期(按普通收入税率)。简化估算——未含 NIIT 和州税。',
-      summaryTitle: '计算摘要', inputsLabel: '输入:', resultsLabel: '结果:', copySummary: '复制摘要', csvField: '字段', csvType: '类型', csvValue: '数值', csvInput: '输入', csvResult: '结果',
     },
   },
   es: {
@@ -27,10 +26,9 @@ export const capitalGainsTaxEstimatorL10n: ToolL10n = {
       { q: '¿Pago impuestos si reinvierto lo obtenido?', a: 'Sí. Vender dispara un evento imponible aunque reinviertas — Hacienda grava la ganancia realizada. Solo mantener dentro de cuentas con ventajas fiscales (IRA, 401k) lo difiere, y solo estructuras específicas lo evitan por completo.' },
     ],
     ui: {
-      inputs: 'Entradas', 'in.purchase': 'Precio de compra', 'in.sale': 'Precio de venta', 'in.years': 'Años mantenido', 'in.bracket': 'Tramo impositivo',
+      'in.purchase': 'Precio de compra', 'in.sale': 'Precio de venta', 'in.years': 'Años mantenido', 'in.bracket': 'Tramo impositivo',
       'out.gain': 'Plusvalía', 'out.rate': 'Tipo impositivo', 'out.tax': 'Impuesto estimado',
       note: '📈 Plusvalías en EE. UU.: mantenido 1+ año = largo plazo (0/15/20 %). Mantenido <1 año = corto plazo (tipo de renta ordinaria). Estimación simplificada — excluye NIIT e impuesto estatal.',
-      summaryTitle: 'Resumen del cálculo', inputsLabel: 'Entradas:', resultsLabel: 'Resultados:', copySummary: 'Copiar resumen', csvField: 'Campo', csvType: 'Tipo', csvValue: 'Valor', csvInput: 'Entrada', csvResult: 'Resultado',
     },
   },
   de: {
@@ -41,10 +39,9 @@ export const capitalGainsTaxEstimatorL10n: ToolL10n = {
       { q: 'Zahle ich Steuer, wenn ich den Erlös reinvestiere?', a: 'Ja. Der Verkauf löst ein steuerpflichtiges Ereignis aus, unabhängig davon, ob du reinvestierst — die Steuer behandelt den realisierten Gewinn. Nur das Halten innerhalb steuervergünstigter Konten (IRA, 401k) schiebt das auf, und nur bestimmte Strukturen vermeiden es ganz.' },
     ],
     ui: {
-      inputs: 'Eingaben', 'in.purchase': 'Kaufpreis', 'in.sale': 'Verkaufspreis', 'in.years': 'Haltedauer (Jahre)', 'in.bracket': 'Einkommensteuersatz',
+      'in.purchase': 'Kaufpreis', 'in.sale': 'Verkaufspreis', 'in.years': 'Haltedauer (Jahre)', 'in.bracket': 'Einkommensteuersatz',
       'out.gain': 'Kapitalgewinn', 'out.rate': 'Steuersatz', 'out.tax': 'Geschätzte Steuerschuld',
       note: '📈 US-Kapitalgewinne: 1+ Jahr gehalten = langfristig (0/15/20 %). <1 Jahr gehalten = kurzfristig (Grenzsteuersatz). Vereinfachte Schätzung — ohne NIIT und Steuer des Bundesstaates.',
-      summaryTitle: 'Zusammenfassung der Berechnung', inputsLabel: 'Eingaben:', resultsLabel: 'Ergebnis:', copySummary: 'Zusammenfassung kopieren', csvField: 'Feld', csvType: 'Typ', csvValue: 'Wert', csvInput: 'Eingabe', csvResult: 'Ergebnis',
     },
   },
 }

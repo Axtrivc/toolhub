@@ -1,11 +1,28 @@
 /**
  * macro-calculator 本地化 bundle —— zh / es / de
- * 覆盖:faqs + useCases(client = MacroCalculatorClient = makeCalculatorClient)
+ * 覆盖:faqs + ui + useCases(client = MacroCalculatorClient = makeCalculatorClient)
  */
 import type { ToolL10n } from '../tool-l10n'
 
 export const macroCalculatorL10n: ToolL10n = {
   zh: {
+    ui: {
+      'in.calories': '每日热量目标',
+      'in.goal': '目标',
+      'opt.goal.lose': '减脂(低碳)',
+      'opt.goal.maintain': '维持',
+      'opt.goal.gain': '增肌(高蛋白)',
+      'out.protein': '蛋白质',
+      'out.carbs': '碳水化合物',
+      'out.fat': '脂肪',
+      'out.total': '总热量',
+      chartTitle: '按宏量营养素的卡路里分布',
+      chartCenter: '卡路里',
+      'slice.proteinCal': '蛋白质',
+      'slice.carbsCal': '碳水化合物',
+      'slice.fatCal': '脂肪',
+      note: '🍽️ 把每日热量拆分为蛋白质/碳水/脂肪。增肌建议每公斤体重摄入 1.6–2.2g 蛋白质。',
+    },
     useCases: [
       '把每日热量目标拆分为蛋白质/碳水/脂肪',
       '为减脂或增肌选择合适的宏量配比',
@@ -17,6 +34,23 @@ export const macroCalculatorL10n: ToolL10n = {
     ],
   },
   es: {
+    ui: {
+      'in.calories': 'Objetivo calórico diario',
+      'in.goal': 'Objetivo',
+      'opt.goal.lose': 'Perder peso (bajo en carbohidratos)',
+      'opt.goal.maintain': 'Mantener',
+      'opt.goal.gain': 'Ganar músculo (alto en proteína)',
+      'out.protein': 'Proteína',
+      'out.carbs': 'Carbohidratos',
+      'out.fat': 'Grasa',
+      'out.total': 'Calorías totales',
+      chartTitle: 'Desglose de calorías por macro',
+      chartCenter: 'Calorías',
+      'slice.proteinCal': 'Proteína',
+      'slice.carbsCal': 'Carbohidratos',
+      'slice.fatCal': 'Grasa',
+      note: '🍽️ Reparte las calorías diarias en proteínas, carbohidratos y grasas. Para ganar músculo apunta a 1,6-2,2 g de proteína por kg de peso.',
+    },
     useCases: [
       'repartir tu objetivo calórico en proteínas, carbohidratos y grasas',
       'elegir la proporción de macros adecuada para perder o ganar peso',
@@ -28,6 +62,23 @@ export const macroCalculatorL10n: ToolL10n = {
     ],
   },
   de: {
+    ui: {
+      'in.calories': 'Tägliches Kalorienziel',
+      'in.goal': 'Ziel',
+      'opt.goal.lose': 'Abnehmen (low carb)',
+      'opt.goal.maintain': 'Halten',
+      'opt.goal.gain': 'Muskelaufbau (eiweißreich)',
+      'out.protein': 'Protein',
+      'out.carbs': 'Kohlenhydrate',
+      'out.fat': 'Fett',
+      'out.total': 'Gesamtkalorien',
+      chartTitle: 'Kalorienaufteilung nach Makro',
+      chartCenter: 'Kalorien',
+      'slice.proteinCal': 'Protein',
+      'slice.carbsCal': 'Kohlenhydrate',
+      'slice.fatCal': 'Fett',
+      note: '🍽️ Teilt die täglichen Kalorien in Protein/Kohlenhydrate/Fett auf. Für Muskelaufbau strebe 1,6–2,2 g Protein pro kg Körpergewicht an.',
+    },
     useCases: [
       'dein Kalorienziel auf Protein/Kohlenhydrate/Fett aufteilen',
       'das passende Makro-Verhältnis für Abnehmen oder Aufbau wählen',

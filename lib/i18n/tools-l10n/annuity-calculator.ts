@@ -13,10 +13,9 @@ export const annuityCalculatorL10n: ToolL10n = {
       { q: '即期年金划算吗?', a: '取决于你的寿命和对有保障收入的需求。如果你预期长寿,年金很有优势,因为即使你活过精算平均寿命,保险公司也会继续支付。代价是失去对一次性本金的支配权,留给继承人的也更少。' },
     ],
     ui: {
-      inputs: '输入', 'in.principal': '初始本金', 'in.rate': '年回报率', 'in.years': '取款年限', 'inSuffix.years': '年',
+      'in.principal': '初始本金', 'in.rate': '年回报率', 'in.years': '取款年限', 'inSuffix.years': '年',
       'out.annual': '年支付额', 'out.monthly': '月支付额', 'out.total': '总支付额',
       note: '🏦 年金:每年能取多少钱,让本金刚好撑满 N 年。常用于退休规划。',
-      summaryTitle: '计算摘要', inputsLabel: '输入:', resultsLabel: '结果:', copySummary: '复制摘要', csvField: '字段', csvType: '类型', csvValue: '数值', csvInput: '输入', csvResult: '结果',
     },
   },
   es: {
@@ -27,10 +26,9 @@ export const annuityCalculatorL10n: ToolL10n = {
       { q: '¿Vale la pena una anualidad inmediata?', a: 'Depende de tu longevidad y de la necesidad de ingresos garantizados. Las anualidades brillan si esperas vivir mucho, porque la aseguradora sigue pagando incluso si superas el promedio actuarial. La contrapartida es perder acceso a la suma única y dejar menos a los herederos.' },
     ],
     ui: {
-      inputs: 'Entradas', 'in.principal': 'Capital inicial', 'in.rate': 'Retorno anual', 'in.years': 'Periodo de pago', 'inSuffix.years': 'años',
+      'in.principal': 'Capital inicial', 'in.rate': 'Retorno anual', 'in.years': 'Periodo de pago', 'inSuffix.years': 'años',
       'out.annual': 'Pago anual', 'out.monthly': 'Pago mensual', 'out.total': 'Pagos totales',
       note: '🏦 Anualidad: cuánto puedes retirar al año para que el dinero dure exactamente N años. Habitual en la planificación de la jubilación.',
-      summaryTitle: 'Resumen del cálculo', inputsLabel: 'Entradas:', resultsLabel: 'Resultados:', copySummary: 'Copiar resumen', csvField: 'Campo', csvType: 'Tipo', csvValue: 'Valor', csvInput: 'Entrada', csvResult: 'Resultado',
     },
   },
   de: {
@@ -41,10 +39,9 @@ export const annuityCalculatorL10n: ToolL10n = {
       { q: 'Lohnt sich eine sofortbeginnende Rente?', a: 'Es hängt von deiner Lebenserwartung und dem Bedarf an garantiertem Einkommen ab. Renten glänzen, wenn du lange zu leben erwartest, weil der Versicherer weiter zahlt, auch wenn du das Versicherungsalter überlebst. Der Preis ist der Verlust des Zugriffs auf den Einmalbetrag und weniger für die Erben.' },
     ],
     ui: {
-      inputs: 'Eingaben', 'in.principal': 'Anfangskapital', 'in.rate': 'Jahresrendite', 'in.years': 'Auszahlungszeitraum', 'inSuffix.years': 'Jahre',
+      'in.principal': 'Anfangskapital', 'in.rate': 'Jahresrendite', 'in.years': 'Auszahlungszeitraum', 'inSuffix.years': 'Jahre',
       'out.annual': 'Jährliche Auszahlung', 'out.monthly': 'Monatliche Auszahlung', 'out.total': 'Gesamtauszahlungen',
       note: '🏦 Rente: wie viel du jährlich entnehmen kannst, damit das Geld genau N Jahre reicht. Typisch für die Rentenplanung.',
-      summaryTitle: 'Zusammenfassung der Berechnung', inputsLabel: 'Eingaben:', resultsLabel: 'Ergebnis:', copySummary: 'Zusammenfassung kopieren', csvField: 'Feld', csvType: 'Typ', csvValue: 'Wert', csvInput: 'Eingabe', csvResult: 'Ergebnis',
     },
   },
 }
