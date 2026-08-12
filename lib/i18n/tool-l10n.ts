@@ -144,6 +144,18 @@ import { standardDeviationCalculatorL10n } from './tools-l10n/standard-deviation
 import { percentileCalculatorL10n } from './tools-l10n/percentile-calculator'
 import { fractionCalculatorL10n } from './tools-l10n/fraction-calculator'
 import { ratioCalculatorL10n } from './tools-l10n/ratio-calculator'
+import { lcmGcdCalculatorL10n } from './tools-l10n/lcm-gcd-calculator'
+import { averageCalculatorL10n } from './tools-l10n/average-calculator'
+import { percentageCalculatorL10n } from './tools-l10n/percentage-calculator'
+import { bmiCalculatorL10n } from './tools-l10n/bmi-calculator'
+import { calorieCalculatorL10n } from './tools-l10n/calorie-calculator'
+import { tdeeCalculatorL10n } from './tools-l10n/tdee-calculator'
+import { bmrCalculatorL10n } from './tools-l10n/bmr-calculator'
+import { bodyFatCalculatorL10n } from './tools-l10n/body-fat-calculator'
+import { macroCalculatorL10n } from './tools-l10n/macro-calculator'
+import { pregnancyDueDateCalculatorL10n } from './tools-l10n/pregnancy-due-date-calculator'
+import { waterIntakeCalculatorL10n } from './tools-l10n/water-intake-calculator'
+import { idealWeightCalculatorL10n } from './tools-l10n/ideal-weight-calculator'
 
 const registry: Record<string, ToolL10n> = {
   'loan-calculator': loanCalculatorL10n,
@@ -254,6 +266,18 @@ const registry: Record<string, ToolL10n> = {
   'percentile-calculator': percentileCalculatorL10n,
   'fraction-calculator': fractionCalculatorL10n,
   'ratio-calculator': ratioCalculatorL10n,
+  'lcm-gcd-calculator': lcmGcdCalculatorL10n,
+  'average-calculator': averageCalculatorL10n,
+  'percentage-calculator': percentageCalculatorL10n,
+  'bmi-calculator': bmiCalculatorL10n,
+  'calorie-calculator': calorieCalculatorL10n,
+  'tdee-calculator': tdeeCalculatorL10n,
+  'bmr-calculator': bmrCalculatorL10n,
+  'body-fat-calculator': bodyFatCalculatorL10n,
+  'macro-calculator': macroCalculatorL10n,
+  'pregnancy-due-date-calculator': pregnancyDueDateCalculatorL10n,
+  'water-intake-calculator': waterIntakeCalculatorL10n,
+  'ideal-weight-calculator': idealWeightCalculatorL10n,
 }
 
 /**

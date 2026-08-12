@@ -98,6 +98,7 @@ export const VolumeConverterClient = makeUnitConverter({
 // ════════════════════════════════════════════
 
 export const AverageCalculatorClient = makeCalculatorClient({
+  slug: 'average-calculator',
   inputs: [
     {
       key: 'numbers',

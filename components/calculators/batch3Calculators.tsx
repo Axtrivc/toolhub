@@ -11,6 +11,7 @@ import { fmtUSD, fmtNum, toNum } from '@/lib/format'
 // ── 健康类 ──
 
 export const CalorieCalculatorClient = makeCalculatorClient({
+  slug: 'calorie-calculator',
   inputs: [
     { key: 'gender', label: 'Gender', default: 'male', options: [
       { label: 'Male', value: 'male' },
@@ -53,6 +54,7 @@ export const CalorieCalculatorClient = makeCalculatorClient({
 })
 
 export const BMRCalculatorClient = makeCalculatorClient({
+  slug: 'bmr-calculator',
   inputs: [
     { key: 'gender', label: 'Gender', default: 'male', options: [
       { label: 'Male', value: 'male' },
@@ -83,6 +85,7 @@ export const BMRCalculatorClient = makeCalculatorClient({
 })
 
 export const WaterIntakeCalculatorClient = makeCalculatorClient({
+  slug: 'water-intake-calculator',
   inputs: [
     { key: 'weight', label: 'Body weight', suffix: 'kg', default: '70' },
     { key: 'activity', label: 'Exercise (min/day)', default: '30' },
@@ -113,6 +116,7 @@ export const WaterIntakeCalculatorClient = makeCalculatorClient({
 })
 
 export const IdealWeightCalculatorClient = makeCalculatorClient({
+  slug: 'ideal-weight-calculator',
   inputs: [
     { key: 'gender', label: 'Gender', default: 'male', options: [
       { label: 'Male', value: 'male' },
@@ -226,6 +230,7 @@ export const RatioCalculatorClient = makeCalculatorClient({
 })
 
 export const LCMGcdCalculatorClient = makeCalculatorClient({
+  slug: 'lcm-gcd-calculator',
   inputs: [
     { key: 'numbers', label: 'Numbers (comma-separated)', default: '12, 18, 24' },
   ],

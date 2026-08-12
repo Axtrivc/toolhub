@@ -1,0 +1,47 @@
+/**
+ * tdee-calculator 本地化 bundle —— zh / es / de
+ * 覆盖:faqs + useCases(client = TdeeCalculatorClient,自定义 client)
+ */
+import type { ToolL10n } from '../tool-l10n'
+
+export const tdeeCalculatorL10n: ToolL10n = {
+  zh: {
+    useCases: [
+      '计算每日总能量消耗',
+      '为减脂、维持或增肌设定热量目标',
+      '根据活动强度调整热量需求',
+      '搭配宏量营养素规划饮食',
+    ],
+    faqs: [
+      { q: '该选哪个活动水平?', a: '久坐(1.2)= 办公室工作、几乎不运动。轻度活动(1.375)= 每周 1–3 天轻度运动。中度活动(1.55)= 每周 3–5 天运动。高度活动(1.725)= 每周 6–7 天剧烈运动。极度活动(1.9)= 体力工作或每天训练两次。多数人会高估自己——不确定时选较低的一档,可根据 2–3 周的实际体重变化再调整。' },
+      { q: 'TDEE 估算有多准?', a: '本工具用的 Mifflin-St Jeor BMR 公式对多数人误差在约 10 % 以内,但个体代谢有差异。把这个数字当作起点,跟踪 2–3 周的实际体重和摄入再调整:如果在比显示值更高的热量下维持体重,说明你的 TDEE 更高;如果在「维持」热量下增重,则更低。' },
+      { q: '该用多大的热量盈余或缺口?', a: '减脂时,10–20 % 的缺口(每天 250–500 kcal)约每周减 0.25–0.5 kg,同时保留肌肉。精瘦增肌时,5–15 % 的盈余可避免过多长脂。过激的缺口(−1000 kcal)会导致掉肌肉、饥饿和反弹。无论选哪个,都保持高蛋白(1.6–2.2 g/kg)并每隔几周重新评估。' },
+    ],
+  },
+  es: {
+    useCases: [
+      'calcular el gasto energético diario total',
+      'fijar un objetivo de calorías para perder, mantener o ganar peso',
+      'ajustar las calorías según tu nivel de actividad',
+      'planificar la dieta junto con los macronutrientes',
+    ],
+    faqs: [
+      { q: '¿Qué nivel de actividad debo elegir?', a: 'Sedentario (1,2) = trabajo de escritorio, poco ejercicio. Ligeramente activo (1,375) = ejercicio ligero 1–3 días/semana. Moderadamente activo (1,55) = ejercicio 3–5 días/semana. Muy activo (1,725) = ejercicio intenso 6–7 días/semana. Extremadamente activo (1,9) = trabajo físico o entrenamiento dos veces al día. La mayoría sobreestima; ante la duda elige el nivel inferior y ajusta según el cambio de peso real en 2–3 semanas.' },
+      { q: '¿Qué tan precisa es la estimación del TDEE?', a: 'La fórmula de BMR de Mifflin-St Jeor que usa esta herramienta tiene un margen de unas 10 veces el 10 % para la mayoría, pero el metabolismo individual varía. Trata el número como punto de partida, sigue tu peso e ingesta reales durante 2–3 semanas y ajusta: si mantienes el peso con más calorías de las mostradas, tu TDEE es mayor; si subes con la cifra de «mantenimiento», es menor.' },
+      { q: '¿Qué superávit o déficit calórico debo usar?', a: 'Para perder grasa, un déficit del 10–20 % (250–500 kcal/día) pierde unos 0,25–0,5 kg por semana preservando músculo. Para ganar masa magra, un superávit del 5–15 % evita ganar demasiada grasa. Déficits agresivos (−1000 kcal) provocan pérdida muscular, hambre y rebote. Sea cual sea, mantén la proteína alta (1,6–2,2 g/kg) y reevalúa cada pocas semanas.' },
+    ],
+  },
+  de: {
+    useCases: [
+      'den täglichen Gesamtenergieverbrauch berechnen',
+      'ein Kalorienziel für Abnehmen, Halten oder Aufbau setzen',
+      'den Kalorienbedarf an die Aktivität anpassen',
+      'die Ernährung zusammen mit den Makronährstoffen planen',
+    ],
+    faqs: [
+      { q: 'Welches Aktivitätslevel soll ich wählen?', a: 'Sitzend (1,2) = Schreibtischtätigkeit, wenig Sport. Leicht aktiv (1,375) = leichte Bewegung 1–3 Tage/Woche. Mäßig aktiv (1,55) = Sport 3–5 Tage/Woche. Sehr aktiv (1,725) = harter Sport 6–7 Tage/Woche. Extrem aktiv (1,9) = körperlicher Beruf oder zweimal tägliches Training. Die meisten überschätzen sich — im Zweifel wähle die niedrigere Stufe und passe nach der tatsächlichen Gewichtsveränderung über 2–3 Wochen an.' },
+      { q: 'Wie genau ist die TDEE-Schätzung?', a: 'Die Mifflin-St Jeor-BMR-Formel dieses Tools liegt bei den meisten innerhalb von etwa 10 %, aber der individuelle Stoffwechsel variiert. Behandle die Zahl als Startpunkt, verfolge 2–3 Wochen lang dein tatsächliches Gewicht und deine Aufnahme und passe an: Hältst du dein Gewicht mit mehr Kalorien als angezeigt, ist dein TDEE höher; nimmst du beim «Erhaltungswert» zu, ist er niedriger.' },
+      { q: 'Wie groß soll mein Kalorienüberschuss oder das Defizit sein?', a: 'Für Fettabbau führt ein Defizit von 10–20 % (250–500 kcal/Tag) zu etwa 0,25–0,5 kg pro Woche bei Muskelerhalt. Für mageren Aufbau vermeidet ein Überschuss von 5–15 % zu viel Fett. Aggressive Defizite (−1000 kcal) führen zu Muskelverlust, Hunger und Jojo-Effekt. Wie auch immer du dich entscheidest, halte die Proteinzufuhr hoch (1,6–2,2 g/kg) und werte alle paar Wochen neu aus.' },
+    ],
+  },
+}

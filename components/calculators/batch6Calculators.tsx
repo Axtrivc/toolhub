@@ -179,6 +179,7 @@ export const RentVsBuyCalculatorClient = makeCalculatorClient({
 // ── 健康类 ──
 
 export const BodyFatCalculatorClient = makeCalculatorClient({
+  slug: 'body-fat-calculator',
   inputs: [
     { key: 'gender', label: 'Gender', default: 'male', options: [
       { label: 'Male', value: 'male' }, { label: 'Female', value: 'female' },
@@ -223,6 +224,7 @@ export const BodyFatCalculatorClient = makeCalculatorClient({
 })
 
 export const MacroCalculatorClient = makeCalculatorClient({
+  slug: 'macro-calculator',
   inputs: [
     { key: 'calories', label: 'Daily calorie target', default: '2000' },
     { key: 'goal', label: 'Goal', default: 'maintain', options: [
@@ -270,6 +272,7 @@ export const MacroCalculatorClient = makeCalculatorClient({
 })
 
 export const PregnancyDueDateCalculatorClient = makeCalculatorClient({
+  slug: 'pregnancy-due-date-calculator',
   inputs: [
     { key: 'lmp', label: 'First day of last period (YYYY-MM-DD)', default: '2026-01-01' },
   ],
