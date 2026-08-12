@@ -267,6 +267,7 @@ export const BillSplitCalculatorClient = makeCalculatorClient({
 // ── 几何类 ──
 
 export const TrapezoidCalculatorClient = makeCalculatorClient({
+  slug: 'trapezoid-calculator',
   inputs: [
     { key: 'a', label: 'Top side (a)', default: '5' },
     { key: 'b', label: 'Bottom side (b)', default: '10' },
@@ -283,6 +284,7 @@ export const TrapezoidCalculatorClient = makeCalculatorClient({
 })
 
 export const CubeCalculatorClient = makeCalculatorClient({
+  slug: 'cube-calculator',
   inputs: [{ key: 'side', label: 'Side length', default: '5' }],
   outputs: [
     { key: 'volume', label: 'Volume', highlight: true },
@@ -299,6 +301,7 @@ export const CubeCalculatorClient = makeCalculatorClient({
 })
 
 export const SphereCalculatorClient = makeCalculatorClient({
+  slug: 'sphere-calculator',
   inputs: [{ key: 'r', label: 'Radius', default: '5' }],
   outputs: [
     { key: 'volume', label: 'Volume', highlight: true },

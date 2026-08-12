@@ -120,6 +120,18 @@ import { timeConverterL10n } from './tools-l10n/time-converter'
 import { numeralSystemConverterL10n } from './tools-l10n/numeral-system-converter'
 import { angleConverterL10n } from './tools-l10n/angle-converter'
 import { fuelEconomyConverterL10n } from './tools-l10n/fuel-economy-converter'
+import { pressureConverterL10n } from './tools-l10n/pressure-converter'
+import { energyConverterL10n } from './tools-l10n/energy-converter'
+import { frequencyConverterL10n } from './tools-l10n/frequency-converter'
+import { weightConverterL10n } from './tools-l10n/weight-converter'
+import { temperatureConverterL10n } from './tools-l10n/temperature-converter'
+import { speedConverterL10n } from './tools-l10n/speed-converter'
+import { areaConverterL10n } from './tools-l10n/area-converter'
+import { volumeConverterL10n } from './tools-l10n/volume-converter'
+import { lengthConverterL10n } from './tools-l10n/length-converter'
+import { trapezoidCalculatorL10n } from './tools-l10n/trapezoid-calculator'
+import { cubeCalculatorL10n } from './tools-l10n/cube-calculator'
+import { sphereCalculatorL10n } from './tools-l10n/sphere-calculator'
 
 const registry: Record<string, ToolL10n> = {
   'loan-calculator': loanCalculatorL10n,
@@ -206,6 +218,18 @@ const registry: Record<string, ToolL10n> = {
   'numeral-system-converter': numeralSystemConverterL10n,
   'angle-converter': angleConverterL10n,
   'fuel-economy-converter': fuelEconomyConverterL10n,
+  'pressure-converter': pressureConverterL10n,
+  'energy-converter': energyConverterL10n,
+  'frequency-converter': frequencyConverterL10n,
+  'weight-converter': weightConverterL10n,
+  'temperature-converter': temperatureConverterL10n,
+  'speed-converter': speedConverterL10n,
+  'area-converter': areaConverterL10n,
+  'volume-converter': volumeConverterL10n,
+  'length-converter': lengthConverterL10n,
+  'trapezoid-calculator': trapezoidCalculatorL10n,
+  'cube-calculator': cubeCalculatorL10n,
+  'sphere-calculator': sphereCalculatorL10n,
 }
 
 /**
