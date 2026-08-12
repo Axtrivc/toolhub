@@ -72,6 +72,18 @@ import { regexTesterL10n } from './tools-l10n/regex-tester'
 import { uuidGeneratorL10n } from './tools-l10n/uuid-generator'
 import { curlConverterL10n } from './tools-l10n/curl-converter'
 import { markdownToHtmlL10n } from './tools-l10n/markdown-to-html'
+import { hashGeneratorL10n } from './tools-l10n/hash-generator'
+import { binaryToTextL10n } from './tools-l10n/binary-to-text'
+import { textToBinaryL10n } from './tools-l10n/text-to-binary'
+import { urlQueryParserL10n } from './tools-l10n/url-query-parser'
+import { textSizeEstimatorL10n } from './tools-l10n/text-size-estimator'
+import { jsonMinifierL10n } from './tools-l10n/json-minifier'
+import { csvToJsonL10n } from './tools-l10n/csv-to-json'
+import { jsonToCsvL10n } from './tools-l10n/json-to-csv'
+import { loremIpsumGeneratorL10n } from './tools-l10n/lorem-ipsum-generator'
+import { randomNumberGeneratorL10n } from './tools-l10n/random-number-generator'
+import { htmlEscapeL10n } from './tools-l10n/html-escape'
+import { htmlUnescapeL10n } from './tools-l10n/html-unescape'
 
 const registry: Record<string, ToolL10n> = {
   'loan-calculator': loanCalculatorL10n,
@@ -110,6 +122,18 @@ const registry: Record<string, ToolL10n> = {
   'uuid-generator': uuidGeneratorL10n,
   'curl-converter': curlConverterL10n,
   'markdown-to-html': markdownToHtmlL10n,
+  'hash-generator': hashGeneratorL10n,
+  'binary-to-text': binaryToTextL10n,
+  'text-to-binary': textToBinaryL10n,
+  'url-query-parser': urlQueryParserL10n,
+  'text-size-estimator': textSizeEstimatorL10n,
+  'json-minifier': jsonMinifierL10n,
+  'csv-to-json': csvToJsonL10n,
+  'json-to-csv': jsonToCsvL10n,
+  'lorem-ipsum-generator': loremIpsumGeneratorL10n,
+  'random-number-generator': randomNumberGeneratorL10n,
+  'html-escape': htmlEscapeL10n,
+  'html-unescape': htmlUnescapeL10n,
 }
 
 /**
