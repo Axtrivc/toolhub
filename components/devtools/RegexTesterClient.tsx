@@ -89,21 +89,21 @@ function collectMatches(text: string, re: RegExp): MatchDetail[] {
 }
 
 const CHEAT_SHEET: { syntax: string; desc: string }[] = [
-  { syntax: '.', desc: '任意字符(不含换行,除非用 s flag)' },
-  { syntax: '\\d \\D', desc: '数字 / 非数字' },
-  { syntax: '\\w \\W', desc: '单词字符 [A-Za-z0-9_] / 非' },
-  { syntax: '\\s \\S', desc: '空白 / 非空白' },
-  { syntax: '^ $', desc: '行首 / 行尾(m flag 下)' },
-  { syntax: '\\b \\B', desc: '单词边界 / 非边界' },
-  { syntax: '[abc]', desc: '字符集(任选其一)' },
-  { syntax: '[^abc]', desc: '取反字符集' },
-  { syntax: 'a|b', desc: '或' },
-  { syntax: '(...)', desc: '捕获组' },
-  { syntax: '(?:...)', desc: '非捕获组' },
-  { syntax: '(?<name>...)', desc: '命名捕获组' },
-  { syntax: '* + ?', desc: '0+ / 1+ / 0或1' },
-  { syntax: '{n} {n,m}', desc: '恰好 n 次 / n 到 m 次' },
-  { syntax: '(?=...) (?!...)', desc: '正向 / 负向先行断言' },
+  { syntax: '.', desc: 'Any char (no newline, unless s flag)' },
+  { syntax: '\\d \\D', desc: 'Digit / Non-digit' },
+  { syntax: '\\w \\W', desc: 'Word char [A-Za-z0-9_] / Non-word' },
+  { syntax: '\\s \\S', desc: 'Whitespace / Non-whitespace' },
+  { syntax: '^ $', desc: 'Start / End of line (with m flag)' },
+  { syntax: '\\b \\B', desc: 'Word boundary / Non-boundary' },
+  { syntax: '[abc]', desc: 'Character set (any of)' },
+  { syntax: '[^abc]', desc: 'Negated character set' },
+  { syntax: 'a|b', desc: 'OR' },
+  { syntax: '(...)', desc: 'Capture group' },
+  { syntax: '(?:...)', desc: 'Non-capturing group' },
+  { syntax: '(?<name>...)', desc: 'Named capture group' },
+  { syntax: '* + ?', desc: '0+ / 1+ / 0 or 1' },
+  { syntax: '{n} {n,m}', desc: 'Exactly n / n to m times' },
+  { syntax: '(?=...) (?!...)', desc: 'Positive / Negative lookahead' },
 ]
 
 const inputCls =

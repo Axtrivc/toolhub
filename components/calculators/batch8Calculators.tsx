@@ -317,6 +317,7 @@ export const SphereCalculatorClient = makeCalculatorClient({
 // ── 薪资换算(补完的唯一未上线工具)──
 
 export const SalaryConverterClient = makeCalculatorClient({
+  slug: 'salary-converter',
   inputs: [
     {
       key: 'unit',

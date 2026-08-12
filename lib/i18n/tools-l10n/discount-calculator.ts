@@ -1,0 +1,50 @@
+/**
+ * discount-calculator 本地化 bundle —— zh / es / de
+ * 覆盖:faqs + ui + useCases
+ */
+import type { ToolL10n } from '../tool-l10n'
+
+export const discountCalculatorL10n: ToolL10n = {
+  zh: {
+    useCases: ['算出打折后的实付价格和省下的金额', '处理叠加折扣(先打第一轮,再用结果当原价)', '根据到手价和折扣率反推原价', '购物时判断折扣是否真的划算'],
+    faqs: [
+      { q: '怎么算 5 折(50% off)?', a: '直接把价格减半。50% off 意味着你付一半——这是最简单的折扣计算。' },
+      { q: '两个折扣怎么叠加?', a: '不能直接相加。先用第一个折扣算出新价,再用第二个折扣对新价打折。两个 30% off 叠加是总共 51% off,不是 60%。' },
+      { q: '「几折/percent off」是什么意思?', a: '指原价被减去的百分比。30% off 表示你付原价的 70%。' },
+    ],
+    ui: {
+      inputs: '输入', 'in.price': '原价', 'inSuffix.price': '$', 'in.discount': '折扣', 'inSuffix.discount': '%',
+      'out.savings': '你省下', 'out.final': '最终价格', 'out.paid': '你支付', 'outSub.paid': '含折扣后',
+      note: '🛍️ 叠加两个折扣时,先算第一个折扣,再把结果当作新的原价算第二个。',
+      summaryTitle: '计算摘要', inputsLabel: '输入:', resultsLabel: '结果:', copySummary: '复制摘要', csvField: '字段', csvType: '类型', csvValue: '数值', csvInput: '输入', csvResult: '结果',
+    },
+  },
+  es: {
+    useCases: ['calcular el precio final y el ahorro tras un descuento', 'aplicar descuentos apilados (primero el primero, el resultado como nuevo precio)', 'obtener el precio original a partir del precio de oferta y el porcentaje', 'juzgar al comprar si un descuento realmente merece la pena'],
+    faqs: [
+      { q: '¿Cómo calculo el 50 % de descuento?', a: 'Simplemente divide el precio entre dos. 50 % off significa que pagas la mitad — el descuento más fácil de calcular.' },
+      { q: '¿Cómo sumo dos descuentos?', a: 'No se suman directamente. Aplica el primer descuento para obtener el nuevo precio, luego aplica el segundo sobre ese nuevo precio. Dos descuentos del 30 % dan un 51 % total, no un 60 %.' },
+      { q: '¿Qué significa «porcentaje de descuento»?', a: 'Es el porcentaje en que se reduce el precio original. 30 % off significa que pagas el 70 % del precio original.' },
+    ],
+    ui: {
+      inputs: 'Entradas', 'in.price': 'Precio original', 'inSuffix.price': '$', 'in.discount': 'Descuento', 'inSuffix.discount': '%',
+      'out.savings': 'Ahorrado', 'out.final': 'Precio final', 'out.paid': 'Pagas', 'outSub.paid': 'Tras descuento',
+      note: '🛍️ Para apilar dos descuentos, calcula el primero y usa el resultado como nuevo precio original.',
+      summaryTitle: 'Resumen del cálculo', inputsLabel: 'Entradas:', resultsLabel: 'Resultados:', copySummary: 'Copiar resumen', csvField: 'Campo', csvType: 'Tipo', csvValue: 'Valor', csvInput: 'Entrada', csvResult: 'Resultado',
+    },
+  },
+  de: {
+    useCases: ['den Endpreis und die Ersparnis nach einem Rabatt berechnen', 'gestaffelte Rabatte anwenden (erst den ersten, das Ergebnis als neuer Preis)', 'den Originalpreis aus Angebotspreis und Prozentsatz zurückrechnen', 'beim Einkaufen beurteilen, ob ein Rabatt wirklich lohnt'],
+    faqs: [
+      { q: 'Wie berechne ich 50 % Rabatt?', a: 'Teile den Preis einfach durch zwei. 50 % off bedeutet, du zahlst die Hälfte — der einfachste Rabatt.' },
+      { q: 'Wie addiere ich zwei Rabatte?', a: 'Du addierst sie nicht direkt. Wende den ersten Rabatt an, um den neuen Preis zu erhalten, dann den zweiten auf diesen neuen Preis. Zwei 30 %-Rabatte ergeben zusammen 51 %, nicht 60 %.' },
+      { q: 'Was bedeutet „Prozent Rabatt»?', a: 'Es ist der Prozentsatz, um den der Originalpreis gesenkt wird. 30 % off bedeutet, du zahlst 70 % des Originalpreises.' },
+    ],
+    ui: {
+      inputs: 'Eingaben', 'in.price': 'Originalpreis', 'inSuffix.price': '$', 'in.discount': 'Rabatt', 'inSuffix.discount': '%',
+      'out.savings': 'Du sparst', 'out.final': 'Endpreis', 'out.paid': 'Du zahlst', 'outSub.paid': 'Inklusive Rabatt',
+      note: '🛍️ Um zwei Rabatte zu stapeln, berechne den ersten und nutze das Ergebnis als neuen Originalpreis.',
+      summaryTitle: 'Zusammenfassung der Berechnung', inputsLabel: 'Eingaben:', resultsLabel: 'Ergebnis:', copySummary: 'Zusammenfassung kopieren', csvField: 'Feld', csvType: 'Typ', csvValue: 'Wert', csvInput: 'Eingabe', csvResult: 'Ergebnis',
+    },
+  },
+}

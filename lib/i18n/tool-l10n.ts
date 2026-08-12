@@ -60,6 +60,18 @@ import { markupCalculatorL10n } from './tools-l10n/markup-calculator'
 import { hourlyToSalaryCalculatorL10n } from './tools-l10n/hourly-to-salary-calculator'
 import { creditCardPayoffCalculatorL10n } from './tools-l10n/credit-card-payoff-calculator'
 import { incomeTaxEstimatorL10n } from './tools-l10n/income-tax-estimator'
+import { salaryConverterL10n } from './tools-l10n/salary-converter'
+import { salesTaxCalculatorL10n } from './tools-l10n/sales-tax-calculator'
+import { tipCalculatorL10n } from './tools-l10n/tip-calculator'
+import { discountCalculatorL10n } from './tools-l10n/discount-calculator'
+import { jsonFormatterL10n } from './tools-l10n/json-formatter'
+import { jwtDecoderL10n } from './tools-l10n/jwt-decoder'
+import { base64EncoderL10n } from './tools-l10n/base64-encoder'
+import { base64DecoderL10n } from './tools-l10n/base64-decoder'
+import { regexTesterL10n } from './tools-l10n/regex-tester'
+import { uuidGeneratorL10n } from './tools-l10n/uuid-generator'
+import { curlConverterL10n } from './tools-l10n/curl-converter'
+import { markdownToHtmlL10n } from './tools-l10n/markdown-to-html'
 
 const registry: Record<string, ToolL10n> = {
   'loan-calculator': loanCalculatorL10n,
@@ -86,6 +98,18 @@ const registry: Record<string, ToolL10n> = {
   'hourly-to-salary-calculator': hourlyToSalaryCalculatorL10n,
   'credit-card-payoff-calculator': creditCardPayoffCalculatorL10n,
   'income-tax-estimator': incomeTaxEstimatorL10n,
+  'salary-converter': salaryConverterL10n,
+  'sales-tax-calculator': salesTaxCalculatorL10n,
+  'tip-calculator': tipCalculatorL10n,
+  'discount-calculator': discountCalculatorL10n,
+  'json-formatter': jsonFormatterL10n,
+  'jwt-decoder': jwtDecoderL10n,
+  'base64-encoder': base64EncoderL10n,
+  'base64-decoder': base64DecoderL10n,
+  'regex-tester': regexTesterL10n,
+  'uuid-generator': uuidGeneratorL10n,
+  'curl-converter': curlConverterL10n,
+  'markdown-to-html': markdownToHtmlL10n,
 }
 
 /**
