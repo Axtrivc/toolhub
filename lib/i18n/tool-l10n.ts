@@ -132,6 +132,18 @@ import { lengthConverterL10n } from './tools-l10n/length-converter'
 import { trapezoidCalculatorL10n } from './tools-l10n/trapezoid-calculator'
 import { cubeCalculatorL10n } from './tools-l10n/cube-calculator'
 import { sphereCalculatorL10n } from './tools-l10n/sphere-calculator'
+import { scientificNotationConverterL10n } from './tools-l10n/scientific-notation-converter'
+import { primeNumberCheckerL10n } from './tools-l10n/prime-number-checker'
+import { primeFactorizationCalculatorL10n } from './tools-l10n/prime-factorization-calculator'
+import { combinationCalculatorL10n } from './tools-l10n/combination-calculator'
+import { permutationCalculatorL10n } from './tools-l10n/permutation-calculator'
+import { circleCalculatorL10n } from './tools-l10n/circle-calculator'
+import { triangleCalculatorL10n } from './tools-l10n/triangle-calculator'
+import { rectangleCalculatorL10n } from './tools-l10n/rectangle-calculator'
+import { standardDeviationCalculatorL10n } from './tools-l10n/standard-deviation-calculator'
+import { percentileCalculatorL10n } from './tools-l10n/percentile-calculator'
+import { fractionCalculatorL10n } from './tools-l10n/fraction-calculator'
+import { ratioCalculatorL10n } from './tools-l10n/ratio-calculator'
 
 const registry: Record<string, ToolL10n> = {
   'loan-calculator': loanCalculatorL10n,
@@ -230,6 +242,18 @@ const registry: Record<string, ToolL10n> = {
   'trapezoid-calculator': trapezoidCalculatorL10n,
   'cube-calculator': cubeCalculatorL10n,
   'sphere-calculator': sphereCalculatorL10n,
+  'scientific-notation-converter': scientificNotationConverterL10n,
+  'prime-number-checker': primeNumberCheckerL10n,
+  'prime-factorization-calculator': primeFactorizationCalculatorL10n,
+  'combination-calculator': combinationCalculatorL10n,
+  'permutation-calculator': permutationCalculatorL10n,
+  'circle-calculator': circleCalculatorL10n,
+  'triangle-calculator': triangleCalculatorL10n,
+  'rectangle-calculator': rectangleCalculatorL10n,
+  'standard-deviation-calculator': standardDeviationCalculatorL10n,
+  'percentile-calculator': percentileCalculatorL10n,
+  'fraction-calculator': fractionCalculatorL10n,
+  'ratio-calculator': ratioCalculatorL10n,
 }
 
 /**

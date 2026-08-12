@@ -9,6 +9,7 @@ import { fmtNum, toNum } from '@/lib/format'
 
 // 科学计数法转换器
 export const ScientificNotationCalculatorClient = makeCalculatorClient({
+  slug: 'scientific-notation-converter',
   inputs: [{ key: 'number', label: 'Number', default: '123456789' }],
   outputs: [
     { key: 'sci', label: 'Scientific notation', highlight: true },
@@ -36,6 +37,7 @@ export const ScientificNotationCalculatorClient = makeCalculatorClient({
 
 // 质数检查器
 export const PrimeNumberCheckerClient = makeCalculatorClient({
+  slug: 'prime-number-checker',
   inputs: [{ key: 'n', label: 'Number to check', default: '97' }],
   outputs: [
     { key: 'isPrime', label: 'Is prime?', highlight: true },
@@ -67,6 +69,7 @@ export const PrimeNumberCheckerClient = makeCalculatorClient({
 
 // 质因数分解
 export const PrimeFactorizationCalculatorClient = makeCalculatorClient({
+  slug: 'prime-factorization-calculator',
   inputs: [{ key: 'n', label: 'Number to factor', default: '360' }],
   outputs: [{ key: 'factors', label: 'Prime factorization', highlight: true }],
   compute: (v) => {
@@ -91,6 +94,7 @@ export const PrimeFactorizationCalculatorClient = makeCalculatorClient({
 
 // 组合数计算器(C(n,r))
 export const CombinationCalculatorClient = makeCalculatorClient({
+  slug: 'combination-calculator',
   inputs: [
     { key: 'n', label: 'Total items (n)', default: '10' },
     { key: 'r', label: 'Choose (r)', default: '3' },
@@ -116,6 +120,7 @@ export const CombinationCalculatorClient = makeCalculatorClient({
 
 // 排列数计算器(P(n,r))
 export const PermutationCalculatorClient = makeCalculatorClient({
+  slug: 'permutation-calculator',
   inputs: [
     { key: 'n', label: 'Total items (n)', default: '5' },
     { key: 'r', label: 'Arrange (r)', default: '3' },

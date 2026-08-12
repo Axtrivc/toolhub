@@ -103,6 +103,7 @@ export function LoremIpsumGeneratorClient() {
 
 // ── 几何计算器(圆)──
 export const CircleCalculatorClient = makeCalculatorClient({
+  slug: 'circle-calculator',
   inputs: [{ key: 'r', label: 'Radius', suffix: 'r', default: '5' }],
   outputs: [
     { key: 'area', label: 'Area', highlight: true },
@@ -122,6 +123,7 @@ export const CircleCalculatorClient = makeCalculatorClient({
 
 // ── 几何计算器(三角形 - 勾股定理)──
 export const TriangleCalculatorClient = makeCalculatorClient({
+  slug: 'triangle-calculator',
   inputs: [
     { key: 'a', label: 'Side a', default: '3' },
     { key: 'b', label: 'Side b', default: '4' },
@@ -146,6 +148,7 @@ export const TriangleCalculatorClient = makeCalculatorClient({
 
 // ── 矩形计算器 ──
 export const RectangleCalculatorClient = makeCalculatorClient({
+  slug: 'rectangle-calculator',
   inputs: [
     { key: 'w', label: 'Width', default: '8' },
     { key: 'h', label: 'Height', default: '5' },
@@ -169,6 +172,7 @@ export const RectangleCalculatorClient = makeCalculatorClient({
 
 // ── 标准差计算器 ──
 export const StandardDeviationCalculatorClient = makeCalculatorClient({
+  slug: 'standard-deviation-calculator',
   inputs: [{ key: 'numbers', label: 'Numbers (comma-separated)', default: '4, 8, 15, 16, 23, 42' }],
   outputs: [
     { key: 'mean', label: 'Mean' },
@@ -195,6 +199,7 @@ export const StandardDeviationCalculatorClient = makeCalculatorClient({
 
 // ── 百分位数计算器 ──
 export const PercentileCalculatorClient = makeCalculatorClient({
+  slug: 'percentile-calculator',
   inputs: [
     { key: 'numbers', label: 'Numbers (comma-separated)', default: '15, 20, 35, 40, 50' },
     { key: 'p', label: 'Percentile', suffix: '%', default: '90' },

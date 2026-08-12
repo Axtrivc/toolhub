@@ -150,6 +150,7 @@ export const IdealWeightCalculatorClient = makeCalculatorClient({
 // ── 数学类 ──
 
 export const FractionCalculatorClient = makeCalculatorClient({
+  slug: 'fraction-calculator',
   inputs: [
     { key: 'num1', label: 'Numerator 1', default: '1' },
     { key: 'den1', label: 'Denominator 1', default: '2' },
@@ -197,6 +198,7 @@ export const FractionCalculatorClient = makeCalculatorClient({
 })
 
 export const RatioCalculatorClient = makeCalculatorClient({
+  slug: 'ratio-calculator',
   inputs: [
     { key: 'a', label: 'A', default: '3' },
     { key: 'b', label: 'B', default: '4' },
