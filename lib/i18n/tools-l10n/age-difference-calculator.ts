@@ -6,6 +6,12 @@ import type { ToolL10n } from '../tool-l10n'
 
 export const ageDifferenceCalculatorL10n: ToolL10n = {
   zh: {
+    ui: {
+      'in.birth1': '人物 1 出生年份',
+      'in.birth2': '人物 2 出生年份',
+      'out.diff': '年龄差',
+      note: '🎂 计算两个人之间的年龄差距。适用于恋爱关系和家族史研究。',
+    },
     useCases: [
       '计算两个人之间的年龄差',
       '根据出生年份推算年龄差距',
@@ -17,6 +23,12 @@ export const ageDifferenceCalculatorL10n: ToolL10n = {
     ],
   },
   es: {
+    ui: {
+      'in.birth1': 'Año de nacimiento (persona 1)',
+      'in.birth2': 'Año de nacimiento (persona 2)',
+      'out.diff': 'Diferencia de edad',
+      note: '🎂 Calcula la diferencia de edad entre dos personas. Útil para relaciones e historia familiar.',
+    },
     useCases: [
       'calcular la diferencia de edad entre dos personas',
       'obtener la brecha de edad a partir de los años de nacimiento',
@@ -28,6 +40,12 @@ export const ageDifferenceCalculatorL10n: ToolL10n = {
     ],
   },
   de: {
+    ui: {
+      'in.birth1': 'Geburtsjahr (Person 1)',
+      'in.birth2': 'Geburtsjahr (Person 2)',
+      'out.diff': 'Altersunterschied',
+      note: '🎂 Berechnet den Altersunterschied zwischen zwei Personen. Nützlich für Beziehungen und Familienforschung.',
+    },
     useCases: [
       'den Altersunterschied zwischen zwei Personen berechnen',
       'die Alterslücke aus den Geburtsjahren ermitteln',

@@ -6,6 +6,12 @@ import type { ToolL10n } from '../tool-l10n'
 
 export const sphereCalculatorL10n: ToolL10n = {
   zh: {
+    ui: {
+      'in.r': '半径',
+      'out.volume': '体积',
+      'out.surface': '表面积',
+      note: '🔵 球体体积 = ⁴⁄₃ π r³。表面积 = 4 π r²。',
+    },
     useCases: [
       '由半径计算球体的体积和表面积',
       '求篮球、足球、网球等球体的尺寸',
@@ -16,6 +22,12 @@ export const sphereCalculatorL10n: ToolL10n = {
     ],
   },
   es: {
+    ui: {
+      'in.r': 'Radio',
+      'out.volume': 'Volumen',
+      'out.surface': 'Área de superficie',
+      note: '🔵 Volumen de la esfera = ⁴⁄₃ π r³. Área de superficie = 4 π r².',
+    },
     useCases: [
       'calcular volumen y superficie de una esfera a partir del radio',
       'determinar las dimensiones de balones de baloncesto, fútbol o tenis',
@@ -26,6 +38,12 @@ export const sphereCalculatorL10n: ToolL10n = {
     ],
   },
   de: {
+    ui: {
+      'in.r': 'Radius',
+      'out.volume': 'Volumen',
+      'out.surface': 'Oberfläche',
+      note: '🔵 Kugelvolumen = ⁴⁄₃ π r³. Oberfläche = 4 π r².',
+    },
     useCases: [
       'Volumen und Oberfläche einer Kugel aus dem Radius berechnen',
       'Abmessungen von Basketbällen, Fußbällen oder Tennisbällen bestimmen',

@@ -12,11 +12,10 @@ export const salaryConverterL10n: ToolL10n = {
       { q: '结果包含税费和福利吗?', a: '不包含。这些都是税前总额(gross)换算。你的实际到手收入取决于联邦和州所得税、社保、医保、退休缴款及福利扣款。' },
     ],
     ui: {
-      inputs: '输入', 'in.unit': '我的工资按', 'in.amount': '金额', 'inSuffix.amount': '$', 'in.hours': '每周工时',
+      'in.unit': '我的工资按', 'in.amount': '金额', 'inSuffix.amount': '$', 'in.hours': '每周工时',
       'opt.unit.annual': '年薪', 'opt.unit.monthly': '月薪', 'opt.unit.biweekly': '双周薪', 'opt.unit.hourly': '时薪',
       'out.annual': '年薪', 'out.monthly': '月薪', 'out.biweekly': '双周薪', 'out.hourly': '时薪',
       note: '💵 假设每年 12 个月薪、26 个双周薪周期、52 个带薪周。加班和奖金不计入。',
-      summaryTitle: '计算摘要', inputsLabel: '输入:', resultsLabel: '结果:', copySummary: '复制摘要', csvField: '字段', csvType: '类型', csvValue: '数值', csvInput: '输入', csvResult: '结果',
     },
   },
   es: {
@@ -26,11 +25,10 @@ export const salaryConverterL10n: ToolL10n = {
       { q: '¿Esto incluye impuestos y prestaciones?', a: 'No. Son conversiones brutas (antes de impuestos). Tu sueldo neto real depende del impuesto federal y estatal, Seguridad Social, Medicare, aportaciones a jubilación y deducciones de prestaciones.' },
     ],
     ui: {
-      inputs: 'Entradas', 'in.unit': 'Cobro por', 'in.amount': 'Importe', 'inSuffix.amount': '$', 'in.hours': 'Horas por semana',
+      'in.unit': 'Cobro por', 'in.amount': 'Importe', 'inSuffix.amount': '$', 'in.hours': 'Horas por semana',
       'opt.unit.annual': 'Anual', 'opt.unit.monthly': 'Mensual', 'opt.unit.biweekly': 'Quincenal', 'opt.unit.hourly': 'Por hora',
       'out.annual': 'Sueldo anual', 'out.monthly': 'Mensual', 'out.biweekly': 'Quincenal', 'out.hourly': 'Por hora',
       note: '💵 Asume 12 pagas mensuales, 26 pagas quincenales y 52 semanas pagadas/año. No incluye horas extra ni bonos.',
-      summaryTitle: 'Resumen del cálculo', inputsLabel: 'Entradas:', resultsLabel: 'Resultados:', copySummary: 'Copiar resumen', csvField: 'Campo', csvType: 'Tipo', csvValue: 'Valor', csvInput: 'Entrada', csvResult: 'Resultado',
     },
   },
   de: {
@@ -40,11 +38,10 @@ export const salaryConverterL10n: ToolL10n = {
       { q: 'Sind Steuern und Leistungen enthalten?', a: 'Nein. Dies sind Brutto-Umrechnungen (vor Steuern). Dein tatsächliches Nettoeinkommen hängt von Bundes- und Landessteuer, Sozialversicherung, Medicare, Rentenbeiträgen und Leistungseinbehalten ab.' },
     ],
     ui: {
-      inputs: 'Eingaben', 'in.unit': 'Ich werde bezahlt', 'in.amount': 'Betrag', 'inSuffix.amount': '$', 'in.hours': 'Stunden pro Woche',
+      'in.unit': 'Ich werde bezahlt', 'in.amount': 'Betrag', 'inSuffix.amount': '$', 'in.hours': 'Stunden pro Woche',
       'opt.unit.annual': 'Jährlich', 'opt.unit.monthly': 'Monatlich', 'opt.unit.biweekly': '14-tägig', 'opt.unit.hourly': 'Stündlich',
       'out.annual': 'Jahresgehalt', 'out.monthly': 'Monatlich', 'out.biweekly': '14-tägig', 'out.hourly': 'Stündlich',
       note: '💵 Geht von 12 Monatsgehältern, 26 14-tägigen Zahlungen und 52 bezahlten Wochen/Jahr aus. Überstunden und Boni sind nicht enthalten.',
-      summaryTitle: 'Zusammenfassung der Berechnung', inputsLabel: 'Eingaben:', resultsLabel: 'Ergebnis:', copySummary: 'Zusammenfassung kopieren', csvField: 'Feld', csvType: 'Typ', csvValue: 'Wert', csvInput: 'Eingabe', csvResult: 'Ergebnis',
     },
   },
 }

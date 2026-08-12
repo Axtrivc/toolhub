@@ -6,6 +6,12 @@ import type { ToolL10n } from '../tool-l10n'
 
 export const cubeCalculatorL10n: ToolL10n = {
   zh: {
+    ui: {
+      'in.side': '边长',
+      'out.volume': '体积',
+      'out.surface': '表面积',
+      note: '🧊 正方体体积 = 边³。表面积 = 6 × 边²。',
+    },
     useCases: [
       '由边长计算正方体的体积和表面积',
       '估算立方包装箱的容积',
@@ -16,6 +22,12 @@ export const cubeCalculatorL10n: ToolL10n = {
     ],
   },
   es: {
+    ui: {
+      'in.side': 'Longitud de la arista',
+      'out.volume': 'Volumen',
+      'out.surface': 'Área de superficie',
+      note: '🧊 Volumen del cubo = arista³. Área de superficie = 6 × arista².',
+    },
     useCases: [
       'calcular volumen y superficie de un cubo a partir de la arista',
       'estimar la capacidad de cajas de embalaje cúbicas',
@@ -26,6 +38,12 @@ export const cubeCalculatorL10n: ToolL10n = {
     ],
   },
   de: {
+    ui: {
+      'in.side': 'Kantenlänge',
+      'out.volume': 'Volumen',
+      'out.surface': 'Oberfläche',
+      note: '🧊 Würfelvolumen = Kante³. Oberfläche = 6 × Kante².',
+    },
     useCases: [
       'Volumen und Oberfläche eines Würfels aus der Kantenlänge berechnen',
       'Fassungsvermögen von würfelförmigen Verpackungen abschätzen',

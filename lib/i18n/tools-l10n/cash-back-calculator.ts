@@ -16,10 +16,9 @@ export const cashBackCalculatorL10n: ToolL10n = {
     ],
     formula: { formula: FORMULA, explain: '将每个类别的消费乘以其返现比例，跨类别求和，再减去卡年费。额外比例仅在其季度或年度消费上限内适用。' },
     ui: {
-      inputs: '输入', 'in.spend': '月消费额', 'in.rate': '返现比例', 'in.fee': '卡年费',
+      'in.spend': '月消费额', 'in.rate': '返现比例', 'in.fee': '卡年费',
       'out.monthly': '月返现', 'out.annual': '年返现（扣费前）', 'out.net': '净价值（扣费后）',
       note: '💳 诚实比较各奖励卡。$95 年费只有当你额外赚到的奖励超过 $95 时才划算。',
-      summaryTitle: '计算摘要', inputsLabel: '输入:', resultsLabel: '结果:', copySummary: '复制摘要', csvField: '字段', csvType: '类型', csvValue: '数值', csvInput: '输入', csvResult: '结果',
     },
   },
   es: {
@@ -31,10 +30,9 @@ export const cashBackCalculatorL10n: ToolL10n = {
     ],
     formula: { formula: FORMULA, explain: 'Multiplica el gasto de cada categoría por su tasa de recompensa, suma todas las categorías y resta la cuota anual de la tarjeta. Las tasas bonus solo se aplican hasta sus límites trimestrales o anuales.' },
     ui: {
-      inputs: 'Entradas', 'in.spend': 'Gasto mensual', 'in.rate': 'Tasa de reembolso', 'in.fee': 'Cuota anual',
+      'in.spend': 'Gasto mensual', 'in.rate': 'Tasa de reembolso', 'in.fee': 'Cuota anual',
       'out.monthly': 'Reembolso mensual', 'out.annual': 'Reembolso anual (antes de cuota)', 'out.net': 'Valor neto (después de cuota)',
       note: '💳 Compara tarjetas de recompensa con honestidad. Una cuota de 95 $ solo compensa si ganas más de 95 $ extra en recompensas.',
-      summaryTitle: 'Resumen del cálculo', inputsLabel: 'Entradas:', resultsLabel: 'Resultados:', copySummary: 'Copiar resumen', csvField: 'Campo', csvType: 'Tipo', csvValue: 'Valor', csvInput: 'Entrada', csvResult: 'Resultado',
     },
   },
   de: {
@@ -46,10 +44,9 @@ export const cashBackCalculatorL10n: ToolL10n = {
     ],
     formula: { formula: FORMULA, explain: 'Multipliziere die Ausgaben jeder Kategorie mit ihrer Bonusrate, summiere über alle Kategorien und ziehe die Jahresgebühr der Karte ab. Bonusraten gelten nur bis zu ihren quartals- oder jahresweisen Obergrenzen.' },
     ui: {
-      inputs: 'Eingaben', 'in.spend': 'Monatliche Ausgaben', 'in.rate': 'Cashback-Rate', 'in.fee': 'Jahresgebühr',
+      'in.spend': 'Monatliche Ausgaben', 'in.rate': 'Cashback-Rate', 'in.fee': 'Jahresgebühr',
       'out.monthly': 'Monatliches Cashback', 'out.annual': 'Jährliches Cashback (vor Gebühr)', 'out.net': 'Nettowert (nach Gebühr)',
       note: '💳 Vergleiche Prämienkarten ehrlich. Eine 95 $-Gebühr lohnt sich nur, wenn du mehr als 95 $ extra an Prämien verdienst.',
-      summaryTitle: 'Zusammenfassung der Berechnung', inputsLabel: 'Eingaben:', resultsLabel: 'Ergebnis:', copySummary: 'Zusammenfassung kopieren', csvField: 'Feld', csvType: 'Typ', csvValue: 'Wert', csvInput: 'Eingabe', csvResult: 'Ergebnis',
     },
   },
 }

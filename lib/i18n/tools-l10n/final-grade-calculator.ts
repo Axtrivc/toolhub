@@ -6,6 +6,13 @@ import type { ToolL10n } from '../tool-l10n'
 
 export const finalGradeCalculatorL10n: ToolL10n = {
   zh: {
+    ui: {
+      'in.current': '当前成绩',
+      'in.goal': '目标成绩',
+      'in.finalWeight': '期末考权重',
+      'out.needed': '期末考所需分数',
+      note: '🎓 求解达到目标成绩所需的期末考分数。若超过 100%,则目标无法实现。',
+    },
     useCases: [
       '期末考试成绩计算器',
       '计算期末考试需要多少分',
@@ -17,6 +24,13 @@ export const finalGradeCalculatorL10n: ToolL10n = {
     ],
   },
   es: {
+    ui: {
+      'in.current': 'Nota actual',
+      'in.goal': 'Nota objetivo',
+      'in.finalWeight': 'Peso del examen final',
+      'out.needed': 'Nota necesaria en el final',
+      note: '🎓 Calcula la nota necesaria en el examen final para alcanzar tu nota objetivo. Si supera el 100 %, el objetivo es inalcanzable.',
+    },
     useCases: [
       'calculadora de nota del examen final',
       'calcular la puntuación necesaria en el examen final',
@@ -28,6 +42,13 @@ export const finalGradeCalculatorL10n: ToolL10n = {
     ],
   },
   de: {
+    ui: {
+      'in.current': 'Aktuelle Note',
+      'in.goal': 'Zielnote',
+      'in.finalWeight': 'Gewicht der Abschlussprüfung',
+      'out.needed': 'Benötigte Punktzahl im Abschluss',
+      note: '🎓 Berechnet die im Abschluss benötigte Punktzahl, um die Zielnote zu erreichen. Über 100 % ist das Ziel unerreichbar.',
+    },
     useCases: [
       'Rechner für die Abschlussprüfungsnote',
       'die benötigte Punktzahl in der Abschlussprüfung berechnen',

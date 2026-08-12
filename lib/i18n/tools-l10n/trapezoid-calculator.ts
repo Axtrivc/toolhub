@@ -6,6 +6,13 @@ import type { ToolL10n } from '../tool-l10n'
 
 export const trapezoidCalculatorL10n: ToolL10n = {
   zh: {
+    ui: {
+      'in.a': '上底 (a)',
+      'in.b': '下底 (b)',
+      'in.h': '高 (h)',
+      'out.area': '面积',
+      note: '📐 梯形面积 = 平行边平均值 × 高。',
+    },
     useCases: [
       '计算房产中不规则地块的面积',
       '求梯形窗户或建筑构件的面积',
@@ -16,6 +23,13 @@ export const trapezoidCalculatorL10n: ToolL10n = {
     ],
   },
   es: {
+    ui: {
+      'in.a': 'Lado superior (a)',
+      'in.b': 'Lado inferior (b)',
+      'in.h': 'Altura (h)',
+      'out.area': 'Área',
+      note: '📐 El área del trapecio = promedio de los lados paralelos × altura.',
+    },
     useCases: [
       'calcular el área de parcelas irregulares en bienes raíces',
       'hallar el área de ventanas o elementos arquitectónicos trapezoidales',
@@ -26,6 +40,13 @@ export const trapezoidCalculatorL10n: ToolL10n = {
     ],
   },
   de: {
+    ui: {
+      'in.a': 'Obere Seite (a)',
+      'in.b': 'Untere Seite (b)',
+      'in.h': 'Höhe (h)',
+      'out.area': 'Fläche',
+      note: '📐 Trapezfläche = Durchschnitt der parallelen Seiten × Höhe.',
+    },
     useCases: [
       'Fläche unregelmäßiger Grundstücke berechnen',
       'Fläche von trapezförmigen Fenstern oder Architekturelementen bestimmen',
