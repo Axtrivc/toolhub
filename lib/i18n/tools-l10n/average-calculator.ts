@@ -1,6 +1,6 @@
 /**
  * average-calculator 本地化 bundle —— zh / es / de
- * 覆盖:faqs + useCases + formula(client = AverageCalculatorClient = makeCalculatorClient)
+ * 覆盖:faqs + ui + useCases + formula(client = AverageCalculatorClient = makeCalculatorClient)
  */
 import type { ToolL10n } from '../tool-l10n'
 
@@ -8,6 +8,17 @@ const FORMULA = 'mean = ( Σ xᵢ ) / n'
 
 export const averageCalculatorL10n: ToolL10n = {
   zh: {
+    ui: {
+      'in.numbers': '数字(用逗号、空格或换行分隔)',
+      'out.count': '个数',
+      'out.sum': '总和',
+      'out.mean': '平均值(均值)',
+      'out.median': '中位数',
+      'out.min': '最小值',
+      'out.max': '最大值',
+      'out.range': '极差',
+      note: '📊 输入任意一组数字。支持逗号、空格或换行作为分隔符。',
+    },
     useCases: [
       '计算一组数据的均值、中位数和极差',
       '处理含异常值的数据(用中位数)',
@@ -25,6 +36,17 @@ export const averageCalculatorL10n: ToolL10n = {
     ],
   },
   es: {
+    ui: {
+      'in.numbers': 'Números (sepáralos con comas, espacios o saltos de línea)',
+      'out.count': 'Cantidad',
+      'out.sum': 'Suma',
+      'out.mean': 'Promedio (media)',
+      'out.median': 'Mediana',
+      'out.min': 'Mínimo',
+      'out.max': 'Máximo',
+      'out.range': 'Rango',
+      note: '📊 Introduce cualquier lista de números. Admite comas, espacios o saltos de línea como separadores.',
+    },
     useCases: [
       'calcular la media, la mediana y el rango de un conjunto de datos',
       'trabajar con datos atípicos (usa la mediana)',
@@ -42,6 +64,17 @@ export const averageCalculatorL10n: ToolL10n = {
     ],
   },
   de: {
+    ui: {
+      'in.numbers': 'Zahlen (trenne mit Kommas, Leerzeichen oder Zeilenumbrüchen)',
+      'out.count': 'Anzahl',
+      'out.sum': 'Summe',
+      'out.mean': 'Durchschnitt (Mittelwert)',
+      'out.median': 'Median',
+      'out.min': 'Minimum',
+      'out.max': 'Maximum',
+      'out.range': 'Spannweite',
+      note: '📊 Gib beliebige Zahlen ein. Kommas, Leerzeichen oder Zeilenumbrüche als Trenner werden unterstützt.',
+    },
     useCases: [
       'Mittelwert, Median und Spannweite eines Datensatzes berechnen',
       'mit Ausreißern umgehen (verwende den Median)',

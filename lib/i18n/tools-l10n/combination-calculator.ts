@@ -1,11 +1,18 @@
 /**
  * combination-calculator 本地化 bundle —— zh / es / de
- * 覆盖:faqs + useCases(client = CombinationCalculatorClient = makeCalculatorClient)
+ * 覆盖:faqs + ui + useCases(client = CombinationCalculatorClient = makeCalculatorClient)
  */
 import type { ToolL10n } from '../tool-l10n'
 
 export const combinationCalculatorL10n: ToolL10n = {
   zh: {
+    ui: {
+      'in.n': '总数 (n)',
+      'in.r': '选取 (r)',
+      'out.result': '组合数 C(n,r)',
+      'out.formula': '公式',
+      note: '🃏 组合:从 n 个中选 r 个,不考虑顺序。彩票概率就用这个。',
+    },
     useCases: [
       '彩票概率:从 49 中选 6',
       '卡牌游戏:5 张扑克牌的组合数',
@@ -17,6 +24,13 @@ export const combinationCalculatorL10n: ToolL10n = {
     ],
   },
   es: {
+    ui: {
+      'in.n': 'Total de elementos (n)',
+      'in.r': 'Elegir (r)',
+      'out.result': 'Combinaciones C(n,r)',
+      'out.formula': 'Fórmula',
+      note: '🃏 Combinaciones: elegir r elementos de n, el orden no importa. Las probabilidades de lotería usan esto.',
+    },
     useCases: [
       'probabilidad de lotería: elegir 6 de 49',
       'juegos de cartas: combinaciones de 5 cartas',
@@ -28,6 +42,13 @@ export const combinationCalculatorL10n: ToolL10n = {
     ],
   },
   de: {
+    ui: {
+      'in.n': 'Gesamtanzahl (n)',
+      'in.r': 'Auswählen (r)',
+      'out.result': 'Kombinationen C(n,r)',
+      'out.formula': 'Formel',
+      note: '🃏 Kombinationen: r Elemente aus n wählen, die Reihenfolge spielt keine Rolle. Lottochancen nutzen das.',
+    },
     useCases: [
       'Lottochancen: 6 aus 49 wählen',
       'Kartenspiele: Kombinationen von 5 Karten',

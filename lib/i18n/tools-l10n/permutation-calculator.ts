@@ -1,11 +1,18 @@
 /**
  * permutation-calculator 本地化 bundle —— zh / es / de
- * 覆盖:faqs + useCases(client = PermutationCalculatorClient = makeCalculatorClient)
+ * 覆盖:faqs + ui + useCases(client = PermutationCalculatorClient = makeCalculatorClient)
  */
 import type { ToolL10n } from '../tool-l10n'
 
 export const permutationCalculatorL10n: ToolL10n = {
   zh: {
+    ui: {
+      'in.n': '总数 (n)',
+      'in.r': '排列 (r)',
+      'out.result': '排列数 P(n,r)',
+      'out.formula': '公式',
+      note: '🎰 排列:从 n 个中排列 r 个,考虑顺序。密码可能性就用这个。',
+    },
     useCases: [
       '密码:4 位 PIN = 10⁴ 种排列',
       '比赛名次:8 名选手的前 3 名(有序)',
@@ -17,6 +24,13 @@ export const permutationCalculatorL10n: ToolL10n = {
     ],
   },
   es: {
+    ui: {
+      'in.n': 'Total de elementos (n)',
+      'in.r': 'Ordenar (r)',
+      'out.result': 'Permutaciones P(n,r)',
+      'out.formula': 'Fórmula',
+      note: '🎰 Permutaciones: ordenar r elementos de n, el orden importa. Las posibilidades de contraseñas usan esto.',
+    },
     useCases: [
       'contraseñas: un PIN de 4 dígitos = 10⁴ permutaciones',
       'resultados de carrera: los 3 primeros de 8 corredores (ordenados)',
@@ -28,6 +42,13 @@ export const permutationCalculatorL10n: ToolL10n = {
     ],
   },
   de: {
+    ui: {
+      'in.n': 'Gesamtanzahl (n)',
+      'in.r': 'Anordnen (r)',
+      'out.result': 'Permutationen P(n,r)',
+      'out.formula': 'Formel',
+      note: '🎰 Permutationen: r Elemente aus n anordnen, die Reihenfolge zählt. Passwortmöglichkeiten nutzen das.',
+    },
     useCases: [
       'Passwörter: eine 4-stellige PIN = 10⁴ Permutationen',
       'Rennergebnisse: die ersten 3 von 8 Läufern (geordnet)',

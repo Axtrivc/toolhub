@@ -1,11 +1,18 @@
 /**
  * scientific-notation-converter 本地化 bundle —— zh / es / de
- * 覆盖:faqs + useCases(client = ScientificNotationCalculatorClient = makeCalculatorClient)
+ * 覆盖:faqs + ui + useCases(client = ScientificNotationCalculatorClient = makeCalculatorClient)
  */
 import type { ToolL10n } from '../tool-l10n'
 
 export const scientificNotationConverterL10n: ToolL10n = {
   zh: {
+    ui: {
+      'in.number': '数字',
+      'out.sci': '科学计数法',
+      'out.e': 'E 记数法',
+      'out.engineering': '工程计数法',
+      note: '🔬 科学计数法用于简洁地表示极大或极小的数。6.022 × 10²³ 是阿伏伽德罗常数。',
+    },
     useCases: [
       '物理与化学作业',
       '编程中处理极大或极小的数字',
@@ -17,6 +24,13 @@ export const scientificNotationConverterL10n: ToolL10n = {
     ],
   },
   es: {
+    ui: {
+      'in.number': 'Número',
+      'out.sci': 'Notación científica',
+      'out.e': 'Notación E',
+      'out.engineering': 'Notación de ingeniería',
+      note: '🔬 La notación científica expresa números muy grandes o pequeños de forma compacta. 6,022 × 10²³ es el número de Avogadro.',
+    },
     useCases: [
       'tareas de física y química',
       'programar con números muy grandes o pequeños',
@@ -28,6 +42,13 @@ export const scientificNotationConverterL10n: ToolL10n = {
     ],
   },
   de: {
+    ui: {
+      'in.number': 'Zahl',
+      'out.sci': 'Wissenschaftliche Schreibweise',
+      'out.e': 'E-Schreibweise',
+      'out.engineering': 'Technische Schreibweise',
+      note: '🔬 Die wissenschaftliche Schreibweise drückt sehr große/kleine Zahlen kompakt aus. 6,022 × 10²³ ist die Avogadro-Zahl.',
+    },
     useCases: [
       'Physik- und Chemiehausaufgaben',
       'Programmieren mit sehr großen oder kleinen Zahlen',

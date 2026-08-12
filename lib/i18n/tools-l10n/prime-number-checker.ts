@@ -1,11 +1,18 @@
 /**
  * prime-number-checker 本地化 bundle —— zh / es / de
- * 覆盖:faqs + useCases(client = PrimeNumberCheckerClient = makeCalculatorClient)
+ * 覆盖:faqs + ui + useCases(client = PrimeNumberCheckerClient = makeCalculatorClient)
  */
 import type { ToolL10n } from '../tool-l10n'
 
 export const primeNumberCheckerL10n: ToolL10n = {
   zh: {
+    ui: {
+      'in.n': '要检查的数',
+      'out.isPrime': '是否为质数?',
+      'out.next': '下一个质数',
+      'out.prev': '上一个质数',
+      note: '🔢 质数只能被 1 和它本身整除。质数是密码学(RSA)的基石。',
+    },
     useCases: [
       '密码学:RSA 加密依赖大质数分解的难度',
       '哈希表:质数容量的桶能减少冲突',
@@ -19,6 +26,13 @@ export const primeNumberCheckerL10n: ToolL10n = {
     ],
   },
   es: {
+    ui: {
+      'in.n': 'Número a comprobar',
+      'out.isPrime': '¿Es primo?',
+      'out.next': 'Siguiente primo',
+      'out.prev': 'Primo anterior',
+      note: '🔢 Un primo solo es divisible entre 1 y entre sí mismo. Los primos son la base de la criptografía (RSA).',
+    },
     useCases: [
       'criptografía: el cifrado RSA se basa en la dificultad de factorizar primos grandes',
       'tablas hash: los cubos de tamaño primo reducen las colisiones',
@@ -32,6 +46,13 @@ export const primeNumberCheckerL10n: ToolL10n = {
     ],
   },
   de: {
+    ui: {
+      'in.n': 'Zu prüfende Zahl',
+      'out.isPrime': 'Primzahl?',
+      'out.next': 'Nächste Primzahl',
+      'out.prev': 'Vorige Primzahl',
+      note: '🔢 Eine Primzahl ist nur durch 1 und sich selbst teilbar. Primzahlen sind die Bausteine der Kryptografie (RSA).',
+    },
     useCases: [
       'Kryptografie: Die RSA-Verschlüsselung beruht auf der Schwierigkeit, große Primzahlen zu faktorisieren',
       'Hash-Tabellen: Eimer mit primzahliger Größe verringern Kollisionen',

@@ -1,11 +1,16 @@
 /**
  * prime-factorization-calculator 本地化 bundle —— zh / es / de
- * 覆盖:faqs + useCases(client = PrimeFactorizationCalculatorClient = makeCalculatorClient)
+ * 覆盖:faqs + ui + useCases(client = PrimeFactorizationCalculatorClient = makeCalculatorClient)
  */
 import type { ToolL10n } from '../tool-l10n'
 
 export const primeFactorizationCalculatorL10n: ToolL10n = {
   zh: {
+    ui: {
+      'in.n': '要分解的数',
+      'out.factors': '质因数分解',
+      note: '🧮 每个大于 1 的整数都有唯一的质因数分解(算术基本定理)。',
+    },
     useCases: [
       '化简分数:GCD 来自公共质因数',
       '密码学:RSA 密钥依赖分解难度',
@@ -17,6 +22,11 @@ export const primeFactorizationCalculatorL10n: ToolL10n = {
     ],
   },
   es: {
+    ui: {
+      'in.n': 'Número a factorizar',
+      'out.factors': 'Factorización en primos',
+      note: '🧮 Cada entero > 1 tiene una factorización en primos única (teorema fundamental de la aritmética).',
+    },
     useCases: [
       'simplificar fracciones: el MCD proviene de los factores primos comunes',
       'criptografía: las claves RSA dependen de la dificultad de factorización',
@@ -28,6 +38,11 @@ export const primeFactorizationCalculatorL10n: ToolL10n = {
     ],
   },
   de: {
+    ui: {
+      'in.n': 'Zu faktorisierende Zahl',
+      'out.factors': 'Primfaktorzerlegung',
+      note: '🧮 Jede ganze Zahl > 1 hat eine eindeutige Primfaktorzerlegung (Fundamentalsatz der Arithmetik).',
+    },
     useCases: [
       'Brüche kürzen: der ggT stammt aus gemeinsamen Primfaktoren',
       'Kryptografie: RSA-Schlüssel beruhen auf Faktorisierungsschwierigkeit',
