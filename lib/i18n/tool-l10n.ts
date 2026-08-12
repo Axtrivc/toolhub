@@ -180,6 +180,18 @@ import { chmodCalculatorL10n } from './tools-l10n/chmod-calculator'
 import { sshKeyGeneratorL10n } from './tools-l10n/ssh-key-generator'
 import { bcryptHashGeneratorL10n } from './tools-l10n/bcrypt-hash-generator'
 import { userAgentParserL10n } from './tools-l10n/user-agent-parser'
+import { jsonSchemaGeneratorL10n } from './tools-l10n/json-schema-generator'
+import { namingCaseConverterL10n } from './tools-l10n/naming-case-converter'
+import { nginxConfigGeneratorL10n } from './tools-l10n/nginx-config-generator'
+import { webpToPngConverterL10n } from './tools-l10n/webp-to-png-converter'
+import { pngToWebpConverterL10n } from './tools-l10n/png-to-webp-converter'
+import { imageResizerL10n } from './tools-l10n/image-resizer'
+import { svgMinifierL10n } from './tools-l10n/svg-minifier'
+import { cssGradientGeneratorL10n } from './tools-l10n/css-gradient-generator'
+import { cssClampCalculatorL10n } from './tools-l10n/css-clamp-calculator'
+import { csvToMarkdownTableL10n } from './tools-l10n/csv-to-markdown-table'
+import { textCleanerL10n } from './tools-l10n/text-cleaner'
+import { srtSubtitleShiftL10n } from './tools-l10n/srt-subtitle-shift'
 
 const registry: Record<string, ToolL10n> = {
   'loan-calculator': loanCalculatorL10n,
@@ -326,6 +338,18 @@ const registry: Record<string, ToolL10n> = {
   'ssh-key-generator': sshKeyGeneratorL10n,
   'bcrypt-hash-generator': bcryptHashGeneratorL10n,
   'user-agent-parser': userAgentParserL10n,
+  'json-schema-generator': jsonSchemaGeneratorL10n,
+  'naming-case-converter': namingCaseConverterL10n,
+  'nginx-config-generator': nginxConfigGeneratorL10n,
+  'webp-to-png-converter': webpToPngConverterL10n,
+  'png-to-webp-converter': pngToWebpConverterL10n,
+  'image-resizer': imageResizerL10n,
+  'svg-minifier': svgMinifierL10n,
+  'css-gradient-generator': cssGradientGeneratorL10n,
+  'css-clamp-calculator': cssClampCalculatorL10n,
+  'csv-to-markdown-table': csvToMarkdownTableL10n,
+  'text-cleaner': textCleanerL10n,
+  'srt-subtitle-shift': srtSubtitleShiftL10n,
 }
 
 /**
