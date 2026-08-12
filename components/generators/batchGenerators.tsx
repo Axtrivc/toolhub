@@ -216,6 +216,7 @@ export const PercentileCalculatorClient = makeCalculatorClient({
 
 // ── 通货膨胀计算器 ──
 export const InflationCalculatorClient = makeCalculatorClient({
+  slug: 'inflation-calculator',
   inputs: [
     { key: 'amount', label: 'Amount', suffix: '$', default: '1000' },
     { key: 'rate', label: 'Annual inflation', suffix: '%', default: '3' },
@@ -244,6 +245,7 @@ function fmtUSDValue(n: number): string {
 
 // ── 退休计算器 ──
 export const RetirementCalculatorClient = makeCalculatorClient({
+  slug: 'retirement-calculator',
   inputs: [
     { key: 'current', label: 'Current savings', suffix: '$', default: '25000' },
     { key: 'monthly', label: 'Monthly contribution', suffix: '$', default: '500' },
@@ -278,6 +280,7 @@ export const RetirementCalculatorClient = makeCalculatorClient({
 
 // ── 单利计算器 ──
 export const SimpleInterestCalculatorClient = makeCalculatorClient({
+  slug: 'simple-interest-calculator',
   inputs: [
     { key: 'principal', label: 'Principal', suffix: '$', default: '10000' },
     { key: 'rate', label: 'Annual rate', suffix: '%', default: '5' },
@@ -302,6 +305,7 @@ export const SimpleInterestCalculatorClient = makeCalculatorClient({
 
 // ── 单价比较器 ──
 export const UnitPriceCalculatorClient = makeCalculatorClient({
+  slug: 'unit-price-calculator',
   inputs: [
     { key: 'price1', label: 'Price 1', suffix: '$', default: '12.99' },
     { key: 'size1', label: 'Size 1', default: '500' },

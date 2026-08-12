@@ -249,6 +249,7 @@ export const LCMGcdCalculatorClient = makeCalculatorClient({
 // ── 金融类 ──
 
 export const MarkupCalculatorClient = makeCalculatorClient({
+  slug: 'markup-calculator',
   inputs: [
     { key: 'cost', label: 'Cost', suffix: '$', default: '50' },
     { key: 'markup', label: 'Markup', suffix: '%', default: '40' },
@@ -327,6 +328,7 @@ export const MortgageCalculatorClient = makeCalculatorClient({
 })
 
 export const HourlyToSalaryCalculatorClient = makeCalculatorClient({
+  slug: 'hourly-to-salary-calculator',
   inputs: [
     { key: 'hourly', label: 'Hourly wage', suffix: '$/hr', default: '25' },
     { key: 'hours', label: 'Hours per week', default: '40' },
@@ -383,6 +385,7 @@ export const ROIcalculatorClient = makeCalculatorClient({
 })
 
 export const CreditCardPayoffCalculatorClient = makeCalculatorClient({
+  slug: 'credit-card-payoff-calculator',
   inputs: [
     { key: 'balance', label: 'Current balance', suffix: '$', default: '5000' },
     { key: 'apr', label: 'Annual rate (APR)', suffix: '%', default: '19.99' },
@@ -435,6 +438,7 @@ export const CreditCardPayoffCalculatorClient = makeCalculatorClient({
 })
 
 export const IncomeTaxEstimatorClient = makeCalculatorClient({
+  slug: 'income-tax-estimator',
   inputs: [
     { key: 'income', label: 'Annual income', suffix: '$', default: '75000' },
     { key: 'filing', label: 'Filing status', default: 'single', options: [

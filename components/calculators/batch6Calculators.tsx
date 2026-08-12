@@ -45,6 +45,7 @@ export const SavingsGoalCalculatorClient = makeCalculatorClient({
 })
 
 export const NetWorthCalculatorClient = makeCalculatorClient({
+  slug: 'net-worth-calculator',
   inputs: [
     { key: 'assets', label: 'Total assets (cash, home, investments)', suffix: '$', default: '250000' },
     { key: 'liabilities', label: 'Total liabilities (mortgage, loans, debt)', suffix: '$', default: '150000' },
@@ -78,6 +79,7 @@ export const NetWorthCalculatorClient = makeCalculatorClient({
 })
 
 export const AnnuityCalculatorClient = makeCalculatorClient({
+  slug: 'annuity-calculator',
   inputs: [
     { key: 'principal', label: ' Initial principal', suffix: '$', default: '100000' },
     { key: 'rate', label: 'Annual return', suffix: '%', default: '5' },
@@ -104,6 +106,7 @@ export const AnnuityCalculatorClient = makeCalculatorClient({
 })
 
 export const CapitalGainsTaxEstimatorClient = makeCalculatorClient({
+  slug: 'capital-gains-tax-estimator',
   inputs: [
     { key: 'purchase', label: 'Purchase price', suffix: '$', default: '10000' },
     { key: 'sale', label: 'Sale price', suffix: '$', default: '15000' },
@@ -136,6 +139,7 @@ export const CapitalGainsTaxEstimatorClient = makeCalculatorClient({
 })
 
 export const RentVsBuyCalculatorClient = makeCalculatorClient({
+  slug: 'rent-vs-buy-calculator',
   inputs: [
     { key: 'home', label: 'Home price', suffix: '$', default: '400000' },
     { key: 'rent', label: 'Comparable rent', suffix: '$/mo', default: '2000' },

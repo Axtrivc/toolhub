@@ -48,6 +48,18 @@ import { dtiCalculatorL10n } from './tools-l10n/dti-calculator'
 import { commissionCalculatorL10n } from './tools-l10n/commission-calculator'
 import { billSplitCalculatorL10n } from './tools-l10n/bill-split-calculator'
 import { savingsGoalCalculatorL10n } from './tools-l10n/savings-goal-calculator'
+import { netWorthCalculatorL10n } from './tools-l10n/net-worth-calculator'
+import { annuityCalculatorL10n } from './tools-l10n/annuity-calculator'
+import { capitalGainsTaxEstimatorL10n } from './tools-l10n/capital-gains-tax-estimator'
+import { rentVsBuyCalculatorL10n } from './tools-l10n/rent-vs-buy-calculator'
+import { inflationCalculatorL10n } from './tools-l10n/inflation-calculator'
+import { retirementCalculatorL10n } from './tools-l10n/retirement-calculator'
+import { simpleInterestCalculatorL10n } from './tools-l10n/simple-interest-calculator'
+import { unitPriceCalculatorL10n } from './tools-l10n/unit-price-calculator'
+import { markupCalculatorL10n } from './tools-l10n/markup-calculator'
+import { hourlyToSalaryCalculatorL10n } from './tools-l10n/hourly-to-salary-calculator'
+import { creditCardPayoffCalculatorL10n } from './tools-l10n/credit-card-payoff-calculator'
+import { incomeTaxEstimatorL10n } from './tools-l10n/income-tax-estimator'
 
 const registry: Record<string, ToolL10n> = {
   'loan-calculator': loanCalculatorL10n,
@@ -62,6 +74,18 @@ const registry: Record<string, ToolL10n> = {
   'commission-calculator': commissionCalculatorL10n,
   'bill-split-calculator': billSplitCalculatorL10n,
   'savings-goal-calculator': savingsGoalCalculatorL10n,
+  'net-worth-calculator': netWorthCalculatorL10n,
+  'annuity-calculator': annuityCalculatorL10n,
+  'capital-gains-tax-estimator': capitalGainsTaxEstimatorL10n,
+  'rent-vs-buy-calculator': rentVsBuyCalculatorL10n,
+  'inflation-calculator': inflationCalculatorL10n,
+  'retirement-calculator': retirementCalculatorL10n,
+  'simple-interest-calculator': simpleInterestCalculatorL10n,
+  'unit-price-calculator': unitPriceCalculatorL10n,
+  'markup-calculator': markupCalculatorL10n,
+  'hourly-to-salary-calculator': hourlyToSalaryCalculatorL10n,
+  'credit-card-payoff-calculator': creditCardPayoffCalculatorL10n,
+  'income-tax-estimator': incomeTaxEstimatorL10n,
 }
 
 /**
