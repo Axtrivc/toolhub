@@ -84,6 +84,18 @@ import { loremIpsumGeneratorL10n } from './tools-l10n/lorem-ipsum-generator'
 import { randomNumberGeneratorL10n } from './tools-l10n/random-number-generator'
 import { htmlEscapeL10n } from './tools-l10n/html-escape'
 import { htmlUnescapeL10n } from './tools-l10n/html-unescape'
+import { urlEncoderL10n } from './tools-l10n/url-encoder'
+import { urlDecoderL10n } from './tools-l10n/url-decoder'
+import { slugGeneratorL10n } from './tools-l10n/slug-generator'
+import { jsonToTypeScriptL10n } from './tools-l10n/json-to-typescript'
+import { yamlToJsonL10n } from './tools-l10n/yaml-to-json'
+import { sqlFormatterL10n } from './tools-l10n/sql-formatter'
+import { imageToBase64L10n } from './tools-l10n/image-to-base64'
+import { wordCounterL10n } from './tools-l10n/word-counter'
+import { textDiffL10n } from './tools-l10n/text-diff'
+import { removeLineBreaksL10n } from './tools-l10n/remove-line-breaks'
+import { findAndReplaceL10n } from './tools-l10n/find-and-replace'
+import { uppercaseConverterL10n } from './tools-l10n/uppercase-converter'
 
 const registry: Record<string, ToolL10n> = {
   'loan-calculator': loanCalculatorL10n,
@@ -134,6 +146,18 @@ const registry: Record<string, ToolL10n> = {
   'random-number-generator': randomNumberGeneratorL10n,
   'html-escape': htmlEscapeL10n,
   'html-unescape': htmlUnescapeL10n,
+  'url-encoder': urlEncoderL10n,
+  'url-decoder': urlDecoderL10n,
+  'slug-generator': slugGeneratorL10n,
+  'json-to-typescript': jsonToTypeScriptL10n,
+  'yaml-to-json': yamlToJsonL10n,
+  'sql-formatter': sqlFormatterL10n,
+  'image-to-base64': imageToBase64L10n,
+  'word-counter': wordCounterL10n,
+  'text-diff': textDiffL10n,
+  'remove-line-breaks': removeLineBreaksL10n,
+  'find-and-replace': findAndReplaceL10n,
+  'uppercase-converter': uppercaseConverterL10n,
 }
 
 /**
