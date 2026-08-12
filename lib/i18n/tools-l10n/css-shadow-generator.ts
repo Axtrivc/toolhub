@@ -1,0 +1,47 @@
+/**
+ * css-shadow-generator 本地化 bundle —— zh / es / de
+ * 覆盖:faqs + useCases(client = CssShadowGeneratorClient,自定义 client)
+ */
+import type { ToolL10n } from '../tool-l10n'
+
+export const cssShadowGeneratorL10n: ToolL10n = {
+  zh: {
+    useCases: [
+      '用滑块调出理想的 box-shadow',
+      '打造毛玻璃(glassmorphism)质感',
+      '实时预览并一键复制 CSS',
+      '为新拟态(neumorphism)组件生成投影',
+    ],
+    faqs: [
+      { q: 'box-shadow 的模糊(blur)和扩展(spread)有什么区别？', a: '模糊半径会柔化阴影边缘——数值越大,阴影越柔和、越分散。扩展半径会让阴影本身变大或缩小——正值让它比元素更大,负值让它更小。0 模糊加正扩展会产生一个硬边的副本。' },
+      { q: '怎么做毛玻璃效果？', a: '毛玻璃需要三部分:半透明背景(低 alpha 的 rgba)、元素上的 backdrop-filter: blur(...) 以及一条细边框。本工具同时提供这三项,方便你实时调整。注意 backdrop-filter 要求元素背后有内容才能产生模糊。' },
+      { q: 'backdrop-filter 所有浏览器都支持吗？', a: '所有现代 Chrome、Edge、Safari(需 -webkit- 前缀)和 Firefox 103+ 都支持。旧浏览器会忽略它,元素则显示为纯色背景。生成的 CSS 已包含 -webkit-backdrop-filter 前缀以兼容 Safari。' },
+    ],
+  },
+  es: {
+    useCases: [
+      'crear el box-shadow ideal con controles deslizantes',
+      'lograr un efecto de cristal esmerilado (glassmorphism)',
+      'previsualizar en vivo y copiar el CSS con un clic',
+      'generar sombras para componentes neumórficos',
+    ],
+    faqs: [
+      { q: '¿Cuál es la diferencia entre blur y spread de box-shadow?', a: 'El radio de desenfoque (blur) suaviza los bordes de la sombra: valores más altos dan una sombra más suave y difusa. El radio de propagación (spread) agranda o reduce la sombra misma: positivo la hace más grande que el elemento, negativo más pequeña. Un blur de 0 con propagación positiva crea un duplicado de bordes duros.' },
+      { q: '¿Cómo hago un efecto glassmorphism?', a: 'El glassmorphism necesita tres partes: un fondo semitransparente (rgba con poco alfa), un backdrop-filter: blur(...) en el elemento y un borde sutil. Esta herramienta expone los tres para que los ajustes en vivo. Ten en cuenta que backdrop-filter requiere que el elemento tenga algo detrás que difuminar.' },
+      { q: '¿Funciona backdrop-filter en todos los navegadores?', a: 'Funciona en todos los Chrome, Edge y Safari modernos (con el prefijo -webkit-) y en Firefox 103+. Los navegadores antiguos lo ignoran y el elemento muestra el fondo sólido en su lugar. El CSS generado incluye el prefijo -webkit-backdrop-filter para compatibilidad con Safari.' },
+    ],
+  },
+  de: {
+    useCases: [
+      'den idealen box-shadow mit Schiebereglern erstellen',
+      'einen Glassmorphismus-Effekt (Frosglas) erzeugen',
+      'live vorschauen und CSS mit einem Klick kopieren',
+      'Schatten für Neumorphismus-Komponenten generieren',
+    ],
+    faqs: [
+      { q: 'Was ist der Unterschied zwischen Blur und Spread bei box-shadow?', a: 'Der Blur-Radius weicht die Schattenkanten auf — höhere Werte ergeben einen weicheren, diffuseren Schatten. Der Spread-Radius vergrößert oder verkleinert den Schatten selbst — positiv macht ihn größer als das Element, negativ kleiner. Ein Blur von 0 mit positivem Spread erzeugt eine harte Kante eines Duplikats.' },
+      { q: 'Wie erstelle ich einen Glassmorphismus-Effekt?', a: 'Glassmorphismus braucht drei Teile: einen halbtransparenten Hintergrund (rgba mit niedrigem Alpha), ein backdrop-filter: blur(...) auf dem Element und einen dezenten Rand. Dieses Werkzeug bietet alle drei, sodass du sie live einstellen kannst. Beachte, dass backdrop-filter voraussetzt, dass sich etwas hinter dem Element befindet, das verschwommen werden kann.' },
+      { q: 'Funktioniert backdrop-filter in allen Browsern?', a: 'Es funktioniert in allen modernen Chrome-, Edge- und Safari-Versionen (mit -webkit-Präfix) sowie in Firefox 103+. Ältere Browser ignorieren es und das Element zeigt stattdessen den deckenden Hintergrund. Das generierte CSS enthält das Präfix -webkit-backdrop-filter für Safari-Kompatibilität.' },
+    ],
+  },
+}

@@ -156,6 +156,18 @@ import { macroCalculatorL10n } from './tools-l10n/macro-calculator'
 import { pregnancyDueDateCalculatorL10n } from './tools-l10n/pregnancy-due-date-calculator'
 import { waterIntakeCalculatorL10n } from './tools-l10n/water-intake-calculator'
 import { idealWeightCalculatorL10n } from './tools-l10n/ideal-weight-calculator'
+import { svgToImageL10n } from './tools-l10n/svg-to-image'
+import { pxToRemL10n } from './tools-l10n/px-to-rem'
+import { aspectRatioCalculatorL10n } from './tools-l10n/aspect-ratio-calculator'
+import { colorContrastCheckerL10n } from './tools-l10n/color-contrast-checker'
+import { colorConverterL10n } from './tools-l10n/color-converter'
+import { openGraphGeneratorL10n } from './tools-l10n/open-graph-generator'
+import { cssShadowGeneratorL10n } from './tools-l10n/css-shadow-generator'
+import { faviconGeneratorL10n } from './tools-l10n/favicon-generator'
+import { cronParserL10n } from './tools-l10n/cron-parser'
+import { ageCalculatorL10n } from './tools-l10n/age-calculator'
+import { dateDifferenceCalculatorL10n } from './tools-l10n/date-difference-calculator'
+import { ageDifferenceCalculatorL10n } from './tools-l10n/age-difference-calculator'
 
 const registry: Record<string, ToolL10n> = {
   'loan-calculator': loanCalculatorL10n,
@@ -278,6 +290,18 @@ const registry: Record<string, ToolL10n> = {
   'pregnancy-due-date-calculator': pregnancyDueDateCalculatorL10n,
   'water-intake-calculator': waterIntakeCalculatorL10n,
   'ideal-weight-calculator': idealWeightCalculatorL10n,
+  'svg-to-image': svgToImageL10n,
+  'px-to-rem': pxToRemL10n,
+  'aspect-ratio-calculator': aspectRatioCalculatorL10n,
+  'color-contrast-checker': colorContrastCheckerL10n,
+  'color-converter': colorConverterL10n,
+  'open-graph-generator': openGraphGeneratorL10n,
+  'css-shadow-generator': cssShadowGeneratorL10n,
+  'favicon-generator': faviconGeneratorL10n,
+  'cron-parser': cronParserL10n,
+  'age-calculator': ageCalculatorL10n,
+  'date-difference-calculator': dateDifferenceCalculatorL10n,
+  'age-difference-calculator': ageDifferenceCalculatorL10n,
 }
 
 /**

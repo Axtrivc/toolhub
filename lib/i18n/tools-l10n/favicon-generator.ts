@@ -1,0 +1,47 @@
+/**
+ * favicon-generator 本地化 bundle —— zh / es / de
+ * 覆盖:faqs + useCases(client = FaviconGeneratorClient,自定义 client)
+ */
+import type { ToolL10n } from '../tool-l10n'
+
+export const faviconGeneratorL10n: ToolL10n = {
+  zh: {
+    useCases: [
+      '导出多尺寸的 PNG favicon',
+      '生成 iOS 用的 Apple Touch Icon',
+      '把 logo 裁剪为居中正方形图标',
+      '一键生成 16×16 和 32×32 图标',
+    ],
+    faqs: [
+      { q: '可以上传哪些图片格式？', a: 'PNG、JPG/JPEG、GIF 和 WebP。推荐使用带透明通道的 PNG,因为 favicon 在彩色浏览器标签上效果最好。SVG 源文件也可以,但会在此被栅格化为 PNG favicon,因为 16x16 和 32x32 的栅格 favicon 拥有最广泛的浏览器支持。' },
+      { q: '为什么需要多个尺寸？', a: '不同场景使用不同尺寸:16x16 用于浏览器标签,32x32 用于高分屏标签和 Windows 任务栏,180×180(Apple Touch Icon)用于 iOS 主屏幕书签。只提供一张大图让浏览器缩放,在 16x16 时会显得模糊。' },
+      { q: '我的图片会被上传到服务器吗？', a: '不会。图片加载到浏览器内的 canvas 中,裁剪并缩放后通过 canvas.toBlob 导出——全部在本地完成。你的文件绝不会离开你的设备,这也意味着页面加载后即可离线使用。' },
+    ],
+  },
+  es: {
+    useCases: [
+      'exportar favicons PNG en varios tamaños',
+      'generar el Apple Touch Icon para iOS',
+      'recortar un logo a un icono cuadrado centrado',
+      'crear iconos de 16×16 y 32×32 con un clic',
+    ],
+    faqs: [
+      { q: '¿Qué formatos de imagen puedo subir?', a: 'PNG, JPG/JPEG, GIF y WebP. Se recomienda PNG con transparencia porque los favicons se ven mejor en pestañas de navegador de color. El SVG de origen también funciona, pero aquí se rasteriza a favicons PNG, ya que los favicons raster de 16x16 y 32x32 tienen el soporte más amplio en los navegadores.' },
+      { q: '¿Por qué necesito varios tamaños?', a: 'Distintos contextos usan distintos tamaños: 16x16 para la pestaña del navegador, 32x32 para pestañas retina y la barra de tareas de Windows, y 180×180 (Apple Touch Icon) para los marcadores en la pantalla de inicio de iOS. Servir una sola imagen grande y dejar que el navegador la escale se ve borroso a 16x16.' },
+      { q: '¿Mi imagen se sube a un servidor?', a: 'No. La imagen se carga en un canvas del navegador, se recorta y se escala, y se exporta con canvas.toBlob, todo localmente. Tu archivo nunca sale de tu dispositivo, lo que también significa que funciona sin conexión una vez cargada la página.' },
+    ],
+  },
+  de: {
+    useCases: [
+      'PNG-Favicons in mehreren Größen exportieren',
+      'das Apple-Touch-Icon für iOS erzeugen',
+      'ein Logo auf ein zentriertes Quadrat zuschneiden',
+      '16×16- und 32×32-Icons mit einem Klick erstellen',
+    ],
+    faqs: [
+      { q: 'Welche Bildformate kann ich hochladen?', a: 'PNG, JPG/JPEG, GIF und WebP. PNG mit Transparenz wird empfohlen, da Favicons auf farbigen Browser-Tabs am besten aussehen. SVG-Quellen funktionieren ebenfalls, werden hier aber zu PNG-Favicons rasterisiert, da 16x16- und 32x32-Rasterfavicons die breiteste Browserunterstützung haben.' },
+      { q: 'Warum brauche ich mehrere Größen?', a: 'Verschiedene Kontexte verwenden verschiedene Größen: 16x16 für den Browser-Tab, 32x32 für Retina-Tabs und die Windows-Taskleiste sowie 180×180 (Apple-Touch-Icon) für iOS-Startbildschirm-Lesezeichen. Ein einziges großes Bild auszuliefern und den Browser skalieren zu lassen, sieht bei 16x16 verschwommen aus.' },
+      { q: 'Wird mein Bild auf einen Server hochgeladen?', a: 'Nein. Das Bild wird in ein In-Browser-Canvas geladen, zugeschnitten und skaliert und über canvas.toBlob exportiert — alles lokal. Deine Datei verlässt niemals dein Gerät, was auch bedeutet, dass es nach dem Laden der Seite offline funktioniert.' },
+    ],
+  },
+}

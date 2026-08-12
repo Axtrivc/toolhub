@@ -177,8 +177,8 @@ export function OpenGraphGeneratorClient() {
             className={inputCls}
             style={{ borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rgb(var(--bg-card))', color: 'rgb(var(--text))' }}
           >
-            <option value="summary_large_image">summary_large_image (大图卡)</option>
-            <option value="summary">summary (小图卡)</option>
+            <option value="summary_large_image">summary_large_image (large card)</option>
+            <option value="summary">summary (small card)</option>
           </select>
         </div>
       </div>

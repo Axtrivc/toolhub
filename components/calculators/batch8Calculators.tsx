@@ -181,6 +181,7 @@ export const CommissionCalculatorClient = makeCalculatorClient({
 // ── 生活实用 ──
 
 export const AgeDifferenceCalculatorClient = makeCalculatorClient({
+  slug: 'age-difference-calculator',
   inputs: [
     { key: 'birth1', label: 'Person 1 birth year', default: '1990' },
     { key: 'birth2', label: 'Person 2 birth year', default: '1995' },

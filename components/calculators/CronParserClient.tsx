@@ -40,7 +40,7 @@ export function CronParserClient() {
 
   const summary = useMemo(() => {
     if ('error' in result) return `Cron "${expr}": ${result.error}`
-    const lines = result.fires.map((d, i) => `  ${i + 1}. ${d.toLocaleString()}`)
+    const lines = result.fires.map((d, i) => `  ${i + 1}. ${d.toLocaleString('en-US')}`)
     return ['Cron Schedule Summary', `Expression: ${expr}`, `Meaning: ${result.description}`, 'Next 5 runs:', ...lines].join('\n')
   }, [result, expr])
 
@@ -138,9 +138,9 @@ export function CronParserClient() {
                   >
                     {i + 1}
                   </span>
-                  <span style={{ color: 'rgb(var(--text))' }}>{d.toLocaleString()}</span>
+                  <span style={{ color: 'rgb(var(--text))' }}>{d.toLocaleString('en-US')}</span>
                   <span className="ml-auto text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>
-                    {d.toLocaleDateString(undefined, { weekday: 'short' })}
+                    {d.toLocaleDateString('en-US', { weekday: 'short' })}
                   </span>
                 </li>
               ))}
