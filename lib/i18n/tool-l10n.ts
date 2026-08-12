@@ -96,6 +96,18 @@ import { textDiffL10n } from './tools-l10n/text-diff'
 import { removeLineBreaksL10n } from './tools-l10n/remove-line-breaks'
 import { findAndReplaceL10n } from './tools-l10n/find-and-replace'
 import { uppercaseConverterL10n } from './tools-l10n/uppercase-converter'
+import { lowercaseConverterL10n } from './tools-l10n/lowercase-converter'
+import { titleCaseConverterL10n } from './tools-l10n/title-case-converter'
+import { sentenceCaseConverterL10n } from './tools-l10n/sentence-case-converter'
+import { reverseTextL10n } from './tools-l10n/reverse-text'
+import { removeDuplicateLinesL10n } from './tools-l10n/remove-duplicate-lines'
+import { slugToTitleL10n } from './tools-l10n/slug-to-title'
+import { htmlTagStripperL10n } from './tools-l10n/html-tag-stripper'
+import { characterFrequencyL10n } from './tools-l10n/character-frequency'
+import { emailExtractorL10n } from './tools-l10n/email-extractor'
+import { urlExtractorL10n } from './tools-l10n/url-extractor'
+import { addLineNumbersL10n } from './tools-l10n/add-line-numbers'
+import { textToListL10n } from './tools-l10n/text-to-list'
 
 const registry: Record<string, ToolL10n> = {
   'loan-calculator': loanCalculatorL10n,
@@ -158,6 +170,18 @@ const registry: Record<string, ToolL10n> = {
   'remove-line-breaks': removeLineBreaksL10n,
   'find-and-replace': findAndReplaceL10n,
   'uppercase-converter': uppercaseConverterL10n,
+  'lowercase-converter': lowercaseConverterL10n,
+  'title-case-converter': titleCaseConverterL10n,
+  'sentence-case-converter': sentenceCaseConverterL10n,
+  'reverse-text': reverseTextL10n,
+  'remove-duplicate-lines': removeDuplicateLinesL10n,
+  'slug-to-title': slugToTitleL10n,
+  'html-tag-stripper': htmlTagStripperL10n,
+  'character-frequency': characterFrequencyL10n,
+  'email-extractor': emailExtractorL10n,
+  'url-extractor': urlExtractorL10n,
+  'add-line-numbers': addLineNumbersL10n,
+  'text-to-list': textToListL10n,
 }
 
 /**
