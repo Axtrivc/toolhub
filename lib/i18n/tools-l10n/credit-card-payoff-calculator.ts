@@ -14,11 +14,10 @@ export const creditCardPayoffCalculatorL10n: ToolL10n = {
       { q: '还清信用卡会伤信用分吗?', a: '不会——还清信用卡债务通常对信用分有利。信用分的一大因素是信用利用率(余额除以额度)。利用率保持在 30% 以下、最好 10% 以下,能提分。还清余额会降低利用率。还清后保留卡片,以保住可用额度和账户年限。' },
     ],
     ui: {
-      inputs: '输入', 'in.balance': '当前余额', 'in.apr': '年利率 (APR)', 'in.payment': '月供',
+      'in.balance': '当前余额', 'in.apr': '年利率 (APR)', 'in.payment': '月供',
       'out.months': '还清时间', 'out.total': '总还款额', 'out.interest': '总利息',
       note: '💳 只还最低还款可能要几十年。多还会大幅节省利息。',
       chartTitle: '总还款:本金 vs 利息', chartCenter: '总计', 'slice.principal': '本金(你借的)', 'slice.interest': '利息(借钱成本)',
-      summaryTitle: '计算摘要', inputsLabel: '输入:', resultsLabel: '结果:', copySummary: '复制摘要', csvField: '字段', csvType: '类型', csvValue: '数值', csvInput: '输入', csvResult: '结果',
     },
   },
   es: {
@@ -30,11 +29,10 @@ export const creditCardPayoffCalculatorL10n: ToolL10n = {
       { q: '¿Pagar la tarjeta perjudica mi puntuación de crédito?', a: 'No — saldar la deuda de la tarjeta suele ayudar. Un factor clave es la utilización del crédito (saldo entre límite). Mantenerla por debajo del 30 %, idealmente del 10 %, mejora la puntuación. Reducir saldos baja la utilización. Conserva la tarjeta abierta tras saldarla para preservar el crédito disponible y la antigüedad de la cuenta.' },
     ],
     ui: {
-      inputs: 'Entradas', 'in.balance': 'Saldo actual', 'in.apr': 'Tasa anual (APR)', 'in.payment': 'Pago mensual',
+      'in.balance': 'Saldo actual', 'in.apr': 'Tasa anual (APR)', 'in.payment': 'Pago mensual',
       'out.months': 'Tiempo hasta saldar', 'out.total': 'Total pagado', 'out.interest': 'Interés total',
       note: '💳 Los pagos mínimos pueden tardar décadas. Pagar más del mínimo ahorra muchísimo interés.',
       chartTitle: 'Total pagado: principal vs interés', chartCenter: 'Total', 'slice.principal': 'Principal (lo que pediste prestado)', 'slice.interest': 'Interés (coste de la deuda)',
-      summaryTitle: 'Resumen del cálculo', inputsLabel: 'Entradas:', resultsLabel: 'Resultados:', copySummary: 'Copiar resumen', csvField: 'Campo', csvType: 'Tipo', csvValue: 'Valor', csvInput: 'Entrada', csvResult: 'Resultado',
     },
   },
   de: {
@@ -46,11 +44,10 @@ export const creditCardPayoffCalculatorL10n: ToolL10n = {
       { q: 'Schadet das Tilgen meiner Karte meinem Kredit-Score?', a: 'Nein — Kredite tilgen hilft deinem Score meist. Ein Hauptfaktor ist die Kreditnutzung (Saldo geteilt durch Limit). Unter 30 %, idealerweise unter 10 %, verbessert den Score. Salden abbauen senkt die Nutzung. Behalte die Karte nach dem Tilgen offen, um verfügbaren Kredit und Kontoalter zu erhalten.' },
     ],
     ui: {
-      inputs: 'Eingaben', 'in.balance': 'Aktueller Saldo', 'in.apr': 'Jahressatz (APR)', 'in.payment': 'Monatliche Rate',
+      'in.balance': 'Aktueller Saldo', 'in.apr': 'Jahressatz (APR)', 'in.payment': 'Monatliche Rate',
       'out.months': 'Zeit bis tilgung', 'out.total': 'Insgesamt gezahlt', 'out.interest': 'Zinsen gesamt',
       note: '💳 Mindestraten können Jahrzehnte dauern. Mehr als das Minimum zu zahlen, spart dramatisch Zinsen.',
       chartTitle: 'Gesamt gezahlt: Tilgung vs. Zinsen', chartCenter: 'Gesamt', 'slice.principal': 'Tilgung (was du geliehen hast)', 'slice.interest': 'Zinsen (Kosten des Kredits)',
-      summaryTitle: 'Zusammenfassung der Berechnung', inputsLabel: 'Eingaben:', resultsLabel: 'Ergebnis:', copySummary: 'Zusammenfassung kopieren', csvField: 'Feld', csvType: 'Typ', csvValue: 'Wert', csvInput: 'Eingabe', csvResult: 'Ergebnis',
     },
   },
 }

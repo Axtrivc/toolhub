@@ -409,3 +409,54 @@ export function tui(slug: string, locale: Locale, key: string, fallback: string)
   const entry = getToolL10n(slug, locale)
   return entry?.ui?.[key] ?? fallback
 }
+
+// ──────────── makeCalculatorClient 通用 UI key(跨工具共享) ────────────
+// 这些 key(summaryTitle / inputsLabel / csvField ...)在所有 makeCalculatorClient
+// 生成的计算器里语义一致,译一次即可,不必逐 bundle 重复。en 不在此 → 回退英文。
+export const COMMON_CALC_UI: Record<Exclude<Locale, 'en'>, Record<string, string>> = {
+  zh: {
+    summaryTitle: '计算摘要',
+    inputsLabel: '输入:',
+    resultsLabel: '结果:',
+    copySummary: '复制摘要',
+    csvField: '字段',
+    csvType: '类型',
+    csvValue: '数值',
+    csvInput: '输入',
+    csvResult: '结果',
+    inputs: '输入',
+  },
+  es: {
+    summaryTitle: 'Resumen del cálculo',
+    inputsLabel: 'Entradas:',
+    resultsLabel: 'Resultados:',
+    copySummary: 'Copiar resumen',
+    csvField: 'Campo',
+    csvType: 'Tipo',
+    csvValue: 'Valor',
+    csvInput: 'Entrada',
+    csvResult: 'Resultado',
+    inputs: 'Entradas',
+  },
+  de: {
+    summaryTitle: 'Zusammenfassung der Berechnung',
+    inputsLabel: 'Eingaben:',
+    resultsLabel: 'Ergebnis:',
+    copySummary: 'Zusammenfassung kopieren',
+    csvField: 'Feld',
+    csvType: 'Typ',
+    csvValue: 'Wert',
+    csvInput: 'Eingabe',
+    csvResult: 'Ergebnis',
+    inputs: 'Eingaben',
+  },
+}
+
+/**
+ * 取 makeCalculatorClient 通用 UI key 的本地化值(跨工具共享)。
+ * locale==='en' 或缺失 → 回退 fallback(英文原值),保证 SSR 恒英文。
+ */
+export function tuiCalc(key: string, locale: Locale, fallback: string): string {
+  if (locale === 'en') return fallback
+  return COMMON_CALC_UI[locale]?.[key] ?? fallback
+}

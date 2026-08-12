@@ -6,6 +6,15 @@ import type { ToolL10n } from '../tool-l10n'
 
 export const ratioCalculatorL10n: ToolL10n = {
   zh: {
+    ui: {
+      'in.a': 'A',
+      'in.b': 'B',
+      'in.c': 'C(留空则求解)',
+      'in.d': 'D(解出的)',
+      'out.ratio': 'A : B = C : D',
+      'out.d': 'D = ',
+      note: '⚖️ 求解比例。示例:3/4 = 9/D → D = 12。适用于配方、缩放和地图。',
+    },
     useCases: [
       '食谱:从 4 人份放大到 6 人份',
       '地图:1 寸 = 50 英里换算',
@@ -17,6 +26,15 @@ export const ratioCalculatorL10n: ToolL10n = {
     ],
   },
   es: {
+    ui: {
+      'in.a': 'A',
+      'in.b': 'B',
+      'in.c': 'C (o déjalo en blanco para resolver)',
+      'in.d': 'D (resuelto)',
+      'out.ratio': 'A : B = C : D',
+      'out.d': 'D = ',
+      note: '⚖️ Resuelve proporciones. Ejemplo: 3/4 = 9/D → D = 12. Útil para recetas, escalas y mapas.',
+    },
     useCases: [
       'recetas: escalar de 4 a 6 raciones',
       'mapas: 1 pulgada = 50 millas, ¿cuánto es 3,5 pulgadas?',
@@ -28,6 +46,15 @@ export const ratioCalculatorL10n: ToolL10n = {
     ],
   },
   de: {
+    ui: {
+      'in.a': 'A',
+      'in.b': 'B',
+      'in.c': 'C (oder leer lassen zum Lösen)',
+      'in.d': 'D (gelöst)',
+      'out.ratio': 'A : B = C : D',
+      'out.d': 'D = ',
+      note: '⚖️ Löst Proportionen. Beispiel: 3/4 = 9/D → D = 12. Nützlich für Rezepte, Skalierung und Karten.',
+    },
     useCases: [
       'Rezepte: von 4 auf 6 Portionen skalieren',
       'Landkarten: 1 Zoll = 50 Meilen umrechnen',

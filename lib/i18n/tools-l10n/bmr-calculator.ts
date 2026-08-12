@@ -8,6 +8,18 @@ const FORMULA = 'BMR(men) = 10W + 6.25H − 5A + 5\nBMR(women) = 10W + 6.25H −
 
 export const bmrCalculatorL10n: ToolL10n = {
   zh: {
+    ui: {
+      'in.gender': '性别',
+      'opt.gender.male': '男',
+      'opt.gender.female': '女',
+      'in.age': '年龄',
+      'inSuffix.age': '岁',
+      'in.weight': '体重',
+      'in.height': '身高',
+      'out.bmr': '你的 BMR',
+      'out.bmi': '你的 BMI',
+      note: '⚛️ BMR = 基础代谢率,即身体在完全静息状态下所需的最低能量。',
+    },
     useCases: [
       '了解完全静息时的基础热量消耗',
       '为减脂或增肌设定热量起点',
@@ -23,6 +35,18 @@ export const bmrCalculatorL10n: ToolL10n = {
     ],
   },
   es: {
+    ui: {
+      'in.gender': 'Sexo',
+      'opt.gender.male': 'Hombre',
+      'opt.gender.female': 'Mujer',
+      'in.age': 'Edad',
+      'inSuffix.age': 'años',
+      'in.weight': 'Peso',
+      'in.height': 'Altura',
+      'out.bmr': 'Tu BMR',
+      'out.bmi': 'Tu IMC',
+      note: '⚛️ BMR = tasa metabólica basal. La energía mínima que tu cuerpo necesita en reposo absoluto.',
+    },
     useCases: [
       'conocer las calorías que quemas en reposo absoluto',
       'fijar un punto de partida calórico para perder o ganar peso',
@@ -38,6 +62,18 @@ export const bmrCalculatorL10n: ToolL10n = {
     ],
   },
   de: {
+    ui: {
+      'in.gender': 'Geschlecht',
+      'opt.gender.male': 'Männlich',
+      'opt.gender.female': 'Weiblich',
+      'in.age': 'Alter',
+      'inSuffix.age': 'Jahre',
+      'in.weight': 'Gewicht',
+      'in.height': 'Größe',
+      'out.bmr': 'Dein BMR',
+      'out.bmi': 'Dein BMI',
+      note: '⚛️ BMR = Grundumsatz (Basal Metabolic Rate). Die minimale Energie, die dein Körper in völliger Ruhe benötigt.',
+    },
     useCases: [
       'die Kalorien kennen, die du in völliger Ruhe verbrennst',
       'einen Kalorien-Startpunkt für Fettabbau oder Aufbau setzen',

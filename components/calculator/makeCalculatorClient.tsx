@@ -8,7 +8,17 @@ import { LoadSampleButton } from '../LoadSampleButton'
 import type { CalculatorConfig } from '@/lib/calculator-types'
 import { getCalculatorSample } from '@/lib/tool-samples'
 import { useApp } from '@/components/providers/AppProviders'
-import { tui } from '@/lib/i18n/tool-l10n'
+import { tui, tuiCalc } from '@/lib/i18n/tool-l10n'
+
+/**
+ * makeCalculatorClient 通用 UI key(跨工具共享,译一次在 COMMON_CALC_UI)。
+ * 命中 → 走 tuiCalc(共享表);其余特有 key(in / out / opt / note / chart /
+ * slice 等)走 tui(slug, ...)(每工具 bundle 自带)。
+ */
+const COMMON_CALC_KEYS = new Set([
+  'summaryTitle', 'inputsLabel', 'resultsLabel', 'copySummary',
+  'csvField', 'csvType', 'csvValue', 'csvInput', 'csvResult', 'inputs',
+])
 
 /**
  * 把 compute 返回的格式化字符串(如 "$83.29"、"1,234.50")解析回数字,
@@ -49,7 +59,8 @@ export function makeCalculatorClient(config: CalculatorConfig): ComponentType {
     const { locale } = useApp()
     // slug 未设 → tui 返回 fallback(英文原值),行为与改造前一致。
     const slug = config.slug ?? ''
-    const L = (key: string, fb: string) => tui(slug, locale, key, fb)
+    const L = (key: string, fb: string) =>
+      COMMON_CALC_KEYS.has(key) ? tuiCalc(key, locale, fb) : tui(slug, locale, key, fb)
 
     // 输入/输出标签的本地化解析器
     const inLabel = (key: string, fb: string) => L(`in.${key}`, fb)

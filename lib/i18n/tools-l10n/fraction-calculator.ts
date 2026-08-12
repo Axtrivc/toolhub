@@ -6,6 +6,20 @@ import type { ToolL10n } from '../tool-l10n'
 
 export const fractionCalculatorL10n: ToolL10n = {
   zh: {
+    ui: {
+      'in.num1': '分子 1',
+      'in.den1': '分母 1',
+      'in.op': '运算',
+      'opt.op.add': '+ (加)',
+      'opt.op.sub': '− (减)',
+      'opt.op.mul': '× (乘)',
+      'opt.op.div': '÷ (除)',
+      'in.num2': '分子 2',
+      'in.den2': '分母 2',
+      'out.result': '结果(分数)',
+      'out.decimal': '化为小数',
+      note: '➗ 结果自动约分至最简。使用精确分数运算,非小数。',
+    },
     useCases: [
       '木工和建筑的精确测量',
       '烹饪食谱的分数换算',
@@ -17,6 +31,20 @@ export const fractionCalculatorL10n: ToolL10n = {
     ],
   },
   es: {
+    ui: {
+      'in.num1': 'Numerador 1',
+      'in.den1': 'Denominador 1',
+      'in.op': 'Operación',
+      'opt.op.add': '+ (Sumar)',
+      'opt.op.sub': '− (Restar)',
+      'opt.op.mul': '× (Multiplicar)',
+      'opt.op.div': '÷ (Dividir)',
+      'in.num2': 'Numerador 2',
+      'in.den2': 'Denominador 2',
+      'out.result': 'Resultado (fracción)',
+      'out.decimal': 'Como decimal',
+      note: '➗ Simplifica los resultados a su mínima expresión. Usa aritmética exacta de fracciones, no decimales.',
+    },
     useCases: [
       'mediciones precisas en carpintería y construcción',
       'conversiones de fracciones en recetas de cocina',
@@ -28,6 +56,20 @@ export const fractionCalculatorL10n: ToolL10n = {
     ],
   },
   de: {
+    ui: {
+      'in.num1': 'Zähler 1',
+      'in.den1': 'Nenner 1',
+      'in.op': 'Operation',
+      'opt.op.add': '+ (Addieren)',
+      'opt.op.sub': '− (Subtrahieren)',
+      'opt.op.mul': '× (Multiplizieren)',
+      'opt.op.div': '÷ (Dividieren)',
+      'in.num2': 'Zähler 2',
+      'in.den2': 'Nenner 2',
+      'out.result': 'Ergebnis (Bruch)',
+      'out.decimal': 'Als Dezimalzahl',
+      note: '➗ Kürzt Ergebnisse auf den kleinsten Bruch. Verwendet exakte Bruchrechnung, keine Dezimalzahlen.',
+    },
     useCases: [
       'präzise Messungen in Tischlerei und Bauwesen',
       'Bruchumrechnungen in Kochrezepten',

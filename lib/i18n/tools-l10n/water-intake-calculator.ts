@@ -8,6 +8,17 @@ const FORMULA = 'Water (oz) ≈ weight (lb) × ⅔    [ ≈ 33 ml × weight (kg)
 
 export const waterIntakeCalculatorL10n: ToolL10n = {
   zh: {
+    ui: {
+      'in.weight': '体重',
+      'in.activity': '运动量(分钟/天)',
+      'in.climate': '气候',
+      'opt.climate.normal': '正常 / 温带',
+      'opt.climate.hot': '炎热 / 潮湿',
+      'out.liters': '每日需水量',
+      'out.cups': '以杯计(250ml)',
+      'out.oz': '以盎司计(美制)',
+      note: '💧 一般建议:每公斤体重约 35 ml,运动或高温时需更多。个人需求因人而异。',
+    },
     useCases: [
       '根据体重估算每日饮水量',
       '为运动或炎热天气调整补水',
@@ -25,6 +36,17 @@ export const waterIntakeCalculatorL10n: ToolL10n = {
     ],
   },
   es: {
+    ui: {
+      'in.weight': 'Peso',
+      'in.activity': 'Ejercicio (min/día)',
+      'in.climate': 'Clima',
+      'opt.climate.normal': 'Normal / templado',
+      'opt.climate.hot': 'Cálido / húmedo',
+      'out.liters': 'Necesidad diaria de agua',
+      'out.cups': 'En tazas (250 ml)',
+      'out.oz': 'En onzas (EE. UU.)',
+      note: '💧 Guía general: ~35 ml por kg de peso corporal, más con ejercicio o calor. Las necesidades individuales varían.',
+    },
     useCases: [
       'estimar cuánta agua beber según tu peso',
       'ajustar la hidratación para el ejercicio o el calor',
@@ -42,6 +64,17 @@ export const waterIntakeCalculatorL10n: ToolL10n = {
     ],
   },
   de: {
+    ui: {
+      'in.weight': 'Gewicht',
+      'in.activity': 'Bewegung (Min./Tag)',
+      'in.climate': 'Klima',
+      'opt.climate.normal': 'Normal / gemäßigt',
+      'opt.climate.hot': 'Heiß / schwül',
+      'out.liters': 'Täglicher Wasserbedarf',
+      'out.cups': 'In Tassen (250 ml)',
+      'out.oz': 'In Unzen (US)',
+      note: '💧 Richtwert: ~35 ml pro kg Körpergewicht, mehr bei Sport oder Hitze. Der Einzelbedarf variiert.',
+    },
     useCases: [
       'abschätzen, wie viel Wasser du nach Körpergewicht trinken solltest',
       'die Flüssigkeitsaufnahme für Sport oder Hitze anpassen',

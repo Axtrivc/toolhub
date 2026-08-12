@@ -6,6 +6,12 @@ import type { ToolL10n } from '../tool-l10n'
 
 export const lcmGcdCalculatorL10n: ToolL10n = {
   zh: {
+    ui: {
+      'in.numbers': '数字(逗号分隔)',
+      'out.gcd': 'GCD(最大公约数)',
+      'out.lcm': 'LCM(最小公倍数)',
+      note: '🔢 GCD = 能整除所有输入的最大数。LCM = 能被所有输入整除的最小数。',
+    },
     useCases: [
       '为分数加法求公分母',
       '安排周期性事件的会合时间',
@@ -17,6 +23,12 @@ export const lcmGcdCalculatorL10n: ToolL10n = {
     ],
   },
   es: {
+    ui: {
+      'in.numbers': 'Números (separados por comas)',
+      'out.gcd': 'MCD (máximo común divisor)',
+      'out.lcm': 'MCM (mínimo común múltiplo)',
+      note: '🔢 MCD = el mayor número que divide a todas las entradas. MCM = el menor número divisible por todas las entradas.',
+    },
     useCases: [
       'encontrar el denominador común para sumar fracciones',
       'programar cuándo coinciden eventos periódicos',
@@ -28,6 +40,12 @@ export const lcmGcdCalculatorL10n: ToolL10n = {
     ],
   },
   de: {
+    ui: {
+      'in.numbers': 'Zahlen (kommagetrennt)',
+      'out.gcd': 'ggT (größter gemeinsamer Teiler)',
+      'out.lcm': 'kgV (kleinstes gemeinsames Vielfaches)',
+      note: '🔢 ggT = größte Zahl, die alle Eingaben teilt. kgV = kleinste Zahl, die durch alle Eingaben teilbar ist.',
+    },
     useCases: [
       'einen gemeinsamen Nenner für die Bruchaddition finden',
       'zeitplanen, wann periodische Ereignisse zusammenfallen',

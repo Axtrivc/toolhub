@@ -6,6 +6,17 @@ import type { ToolL10n } from '../tool-l10n'
 
 export const idealWeightCalculatorL10n: ToolL10n = {
   zh: {
+    ui: {
+      'in.gender': '性别',
+      'opt.gender.male': '男',
+      'opt.gender.female': '女',
+      'in.height': '身高',
+      'out.devine': 'Devine 公式',
+      'out.robinson': 'Robinson 公式',
+      'out.hamwi': 'Hamwi 公式',
+      'out.bmi': '健康 BMI 范围(18.5–24.9)',
+      note: '⚖️ 理想体重只是粗略估算。肌肉量、体型和整体健康状况比单一数字更重要。',
+    },
     useCases: [
       '用 Devine、Robinson、Hamwi 三种公式估算理想体重',
       '查看基于 BMI 的健康体重区间',
@@ -17,6 +28,17 @@ export const idealWeightCalculatorL10n: ToolL10n = {
     ],
   },
   es: {
+    ui: {
+      'in.gender': 'Sexo',
+      'opt.gender.male': 'Hombre',
+      'opt.gender.female': 'Mujer',
+      'in.height': 'Altura',
+      'out.devine': 'Fórmula de Devine',
+      'out.robinson': 'Fórmula de Robinson',
+      'out.hamwi': 'Fórmula de Hamwi',
+      'out.bmi': 'Rango de IMC saludable (18.5-24.9)',
+      note: '⚖️ El peso ideal es una estimación aproximada. La masa muscular, el complexión y la salud importan más que un solo número.',
+    },
     useCases: [
       'estimar el peso ideal con las fórmulas de Devine, Robinson y Hamwi',
       'consultar el rango de peso saludable basado en el IMC',
@@ -28,6 +50,17 @@ export const idealWeightCalculatorL10n: ToolL10n = {
     ],
   },
   de: {
+    ui: {
+      'in.gender': 'Geschlecht',
+      'opt.gender.male': 'Männlich',
+      'opt.gender.female': 'Weiblich',
+      'in.height': 'Größe',
+      'out.devine': 'Devine-Formel',
+      'out.robinson': 'Robinson-Formel',
+      'out.hamwi': 'Hamwi-Formel',
+      'out.bmi': 'Gesunder BMI-Bereich (18.5-24.9)',
+      note: '⚖️ Das Idealgewicht ist nur eine grobe Schätzung. Muskelmasse, Körperbau und Gesundheit zählen mehr als eine einzelne Zahl.',
+    },
     useCases: [
       'das Idealgewicht mit den Formeln von Devine, Robinson und Hamwi schätzen',
       'die BMI-basierte Spanne für gesundes Gewicht ansehen',
