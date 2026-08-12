@@ -11,10 +11,9 @@ export const retirementCalculatorL10n: ToolL10n = {
       { q: '我需要多少钱才能退休?', a: '一个常见法则是年支出的 25 倍(4% 法则的倒数)。年支出 $40,000 的话,目标约 $1 百万。鉴于寿命延长,许多理财顾问现在建议 30 倍更稳妥。' },
     ],
     ui: {
-      inputs: '输入', 'in.current': '当前储蓄', 'in.monthly': '每月供款', 'in.rate': '年回报率', 'in.years': '距退休年数',
+      'in.current': '当前储蓄', 'in.monthly': '每月供款', 'in.rate': '年回报率', 'in.years': '距退休年数',
       'out.total': '退休储蓄总额', 'out.contributed': '你的累计投入', 'out.growth': '投资增长',
       note: '👵 把当前储蓄的复利增长与定期供款结合。尽早开始——时间比金额更重要。',
-      summaryTitle: '计算摘要', inputsLabel: '输入:', resultsLabel: '结果:', copySummary: '复制摘要', csvField: '字段', csvType: '类型', csvValue: '数值', csvInput: '输入', csvResult: '结果',
     },
   },
   es: {
@@ -23,10 +22,9 @@ export const retirementCalculatorL10n: ToolL10n = {
       { q: '¿Cuánto necesito para jubilarme?', a: 'Una regla común es 25× tus gastos anuales (el inverso de la regla del 4 %). Con $40,000 de gastos anuales, apunta a $1 millón. Muchos asesores sugieren ahora 30× para ir sobre seguro dada la mayor esperanza de vida.' },
     ],
     ui: {
-      inputs: 'Entradas', 'in.current': 'Ahorros actuales', 'in.monthly': 'Aportación mensual', 'in.rate': 'Retorno anual', 'in.years': 'Años hasta la jubilación',
+      'in.current': 'Ahorros actuales', 'in.monthly': 'Aportación mensual', 'in.rate': 'Retorno anual', 'in.years': 'Años hasta la jubilación',
       'out.total': 'Ahorro para la jubilación', 'out.contributed': 'Tus aportaciones', 'out.growth': 'Crecimiento de la inversión',
       note: '👩‍🦳 Combina el crecimiento compuesto de los ahorros actuales con aportaciones regulares. Empieza pronto — el tiempo importa más que la cantidad.',
-      summaryTitle: 'Resumen del cálculo', inputsLabel: 'Entradas:', resultsLabel: 'Resultados:', copySummary: 'Copiar resumen', csvField: 'Campo', csvType: 'Tipo', csvValue: 'Valor', csvInput: 'Entrada', csvResult: 'Resultado',
     },
   },
   de: {
@@ -35,10 +33,9 @@ export const retirementCalculatorL10n: ToolL10n = {
       { q: 'Wie viel brauche ich für die Rente?', a: 'Eine gängige Regel ist das 25-Fache deiner Jahresausgaben (der Kehrwert der 4 %-Regel). Bei $40,000 Jahresausgaben peile $1 Million an. Viele Berater empfehlen inzwischen das 30-Fache, um wegen längerer Lebenserwartung auf der sicheren Seite zu sein.' },
     ],
     ui: {
-      inputs: 'Eingaben', 'in.current': 'Aktuelle Ersparnisse', 'in.monthly': 'Monatlicher Beitrag', 'in.rate': 'Jahresrendite', 'in.years': 'Jahre bis zur Rente',
+      'in.current': 'Aktuelle Ersparnisse', 'in.monthly': 'Monatlicher Beitrag', 'in.rate': 'Jahresrendite', 'in.years': 'Jahre bis zur Rente',
       'out.total': 'Rentenersparnisse', 'out.contributed': 'Deine Einzahlungen', 'out.growth': 'Investment-Wachstum',
       note: '👵 Kombiniert Zinseszins auf aktuelle Ersparnisse mit regelmäßigen Beiträgen. Fang früh an — Zeit zählt mehr als Betrag.',
-      summaryTitle: 'Zusammenfassung der Berechnung', inputsLabel: 'Eingaben:', resultsLabel: 'Ergebnis:', copySummary: 'Zusammenfassung kopieren', csvField: 'Feld', csvType: 'Typ', csvValue: 'Wert', csvInput: 'Eingabe', csvResult: 'Ergebnis',
     },
   },
 }

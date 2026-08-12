@@ -1,11 +1,18 @@
 /**
  * circle-calculator 本地化 bundle —— zh / es / de
- * 覆盖:faqs + useCases(client = CircleCalculatorClient = makeCalculatorClient)
+ * 覆盖:faqs + ui + useCases(client = CircleCalculatorClient = makeCalculatorClient)
  */
 import type { ToolL10n } from '../tool-l10n'
 
 export const circleCalculatorL10n: ToolL10n = {
   zh: {
+    ui: {
+      'in.r': '半径',
+      'out.area': '面积',
+      'out.circumference': '周长',
+      'out.diameter': '直径',
+      note: '⭕ 面积 = π r²。周长 = 2 π r。直径 = 2 r。',
+    },
     useCases: [
       '建筑:计算圆柱的混凝土用量',
       '比萨:对比 12 寸和 16 寸大小',
@@ -17,6 +24,13 @@ export const circleCalculatorL10n: ToolL10n = {
     ],
   },
   es: {
+    ui: {
+      'in.r': 'Radio',
+      'out.area': 'Área',
+      'out.circumference': 'Circunferencia',
+      'out.diameter': 'Diámetro',
+      note: '⭕ Área = π r². Circunferencia = 2 π r. Diámetro = 2 r.',
+    },
     useCases: [
       'construcción: calcular el hormigón para columnas circulares',
       'pizzas: comparar tamaños de 12 y 16 pulgadas',
@@ -28,6 +42,13 @@ export const circleCalculatorL10n: ToolL10n = {
     ],
   },
   de: {
+    ui: {
+      'in.r': 'Radius',
+      'out.area': 'Fläche',
+      'out.circumference': 'Umfang',
+      'out.diameter': 'Durchmesser',
+      note: '⭕ Fläche = π r². Umfang = 2 π r. Durchmesser = 2 r.',
+    },
     useCases: [
       'Bauwesen: Betonbedarf für runde Säulen berechnen',
       'Pizza: Größen von 12 und 16 Zoll vergleichen',

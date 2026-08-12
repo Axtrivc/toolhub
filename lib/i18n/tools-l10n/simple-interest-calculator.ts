@@ -14,10 +14,9 @@ export const simpleInterestCalculatorL10n: ToolL10n = {
     ],
     formula: { formula: FORMULA, explain: '单利。P = 本金,r = 年利率(小数形式),t = 年数。I 是这段时间内累计的利息。' },
     ui: {
-      inputs: '输入', 'in.principal': '本金', 'in.rate': '年利率', 'in.years': '年数',
+      'in.principal': '本金', 'in.rate': '年利率', 'in.years': '年数',
       'out.interest': '利息', 'out.total': '总金额',
       note: '💵 单利:I = P × r × t。与复利不同,你不会对已累计的利息再赚利息。',
-      summaryTitle: '计算摘要', inputsLabel: '输入:', resultsLabel: '结果:', copySummary: '复制摘要', csvField: '字段', csvType: '类型', csvValue: '数值', csvInput: '输入', csvResult: '结果',
     },
   },
   es: {
@@ -27,10 +26,9 @@ export const simpleInterestCalculatorL10n: ToolL10n = {
     ],
     formula: { formula: FORMULA, explain: 'Interés simple. P = principal, r = tasa anual (en decimal), t = años. I es el interés acumulado durante el periodo.' },
     ui: {
-      inputs: 'Entradas', 'in.principal': 'Principal', 'in.rate': 'Tasa anual', 'in.years': 'Años',
+      'in.principal': 'Principal', 'in.rate': 'Tasa anual', 'in.years': 'Años',
       'out.interest': 'Interés generado', 'out.total': 'Cantidad total',
       note: '💵 Interés simple: I = P × r × t. A diferencia del interés compuesto, no ganas interés sobre el interés acumulado.',
-      summaryTitle: 'Resumen del cálculo', inputsLabel: 'Entradas:', resultsLabel: 'Resultados:', copySummary: 'Copiar resumen', csvField: 'Campo', csvType: 'Tipo', csvValue: 'Valor', csvInput: 'Entrada', csvResult: 'Resultado',
     },
   },
   de: {
@@ -40,10 +38,9 @@ export const simpleInterestCalculatorL10n: ToolL10n = {
     ],
     formula: { formula: FORMULA, explain: 'Einfacher Zins. P = Kapital, r = Jahressatz (als Dezimalzahl), t = Jahre. I ist der über den Zeitraum angefallene Zins.' },
     ui: {
-      inputs: 'Eingaben', 'in.principal': 'Kapital', 'in.rate': 'Jahressatz', 'in.years': 'Jahre',
+      'in.principal': 'Kapital', 'in.rate': 'Jahressatz', 'in.years': 'Jahre',
       'out.interest': 'Zinsen', 'out.total': 'Gesamtbetrag',
       note: '💵 Einfacher Zins: I = P × r × t. Anders als beim Zinseszins erhältst du keine Zinsen auf bereits angefallene Zinsen.',
-      summaryTitle: 'Zusammenfassung der Berechnung', inputsLabel: 'Eingaben:', resultsLabel: 'Ergebnis:', copySummary: 'Zusammenfassung kopieren', csvField: 'Feld', csvType: 'Typ', csvValue: 'Wert', csvInput: 'Eingabe', csvResult: 'Ergebnis',
     },
   },
 }

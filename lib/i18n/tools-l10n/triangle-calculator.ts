@@ -1,11 +1,19 @@
 /**
  * triangle-calculator 本地化 bundle —— zh / es / de
- * 覆盖:faqs + useCases(client = TriangleCalculatorClient = makeCalculatorClient)
+ * 覆盖:faqs + ui + useCases(client = TriangleCalculatorClient = makeCalculatorClient)
  */
 import type { ToolL10n } from '../tool-l10n'
 
 export const triangleCalculatorL10n: ToolL10n = {
   zh: {
+    ui: {
+      'in.a': '边 a',
+      'in.b': '边 b',
+      'out.c': '斜边 (c)',
+      'out.area': '面积',
+      'out.perimeter': '周长',
+      note: '📐 勾股定理:a² + b² = c²。仅适用于直角三角形。',
+    },
     useCases: [
       '建筑:直角校验(3-4-5 法)',
       '导航:两个 GPS 点之间的直线距离',
@@ -17,6 +25,14 @@ export const triangleCalculatorL10n: ToolL10n = {
     ],
   },
   es: {
+    ui: {
+      'in.a': 'Lado a',
+      'in.b': 'Lado b',
+      'out.c': 'Hipotenusa (c)',
+      'out.area': 'Área',
+      'out.perimeter': 'Perímetro',
+      note: '📐 Teorema de Pitágoras: a² + b² = c². Solo para triángulos rectángulos.',
+    },
     useCases: [
       'construcción: escuadrar esquinas (método 3-4-5)',
       'navegación: distancia en línea recta entre dos puntos GPS',
@@ -28,6 +44,14 @@ export const triangleCalculatorL10n: ToolL10n = {
     ],
   },
   de: {
+    ui: {
+      'in.a': 'Seite a',
+      'in.b': 'Seite b',
+      'out.c': 'Hypotenuse (c)',
+      'out.area': 'Fläche',
+      'out.perimeter': 'Umfang',
+      note: '📐 Satz des Pythagoras: a² + b² = c². Nur für rechtwinklige Dreiecke.',
+    },
     useCases: [
       'Bauwesen: Ecken rechtwinklig machen (3-4-5-Methode)',
       'Navigation: Luftlinie zwischen zwei GPS-Punkten',

@@ -1,11 +1,19 @@
 /**
  * rectangle-calculator 本地化 bundle —— zh / es / de
- * 覆盖:faqs + useCases(client = RectangleCalculatorClient = makeCalculatorClient)
+ * 覆盖:faqs + ui + useCases(client = RectangleCalculatorClient = makeCalculatorClient)
  */
 import type { ToolL10n } from '../tool-l10n'
 
 export const rectangleCalculatorL10n: ToolL10n = {
   zh: {
+    ui: {
+      'in.w': '宽',
+      'in.h': '高',
+      'out.area': '面积',
+      'out.perimeter': '周长',
+      'out.diagonal': '对角线',
+      note: '▭ 面积 = 宽 × 高。对角线用勾股定理计算。',
+    },
     useCases: [
       '地板:买多少瓷砖或地毯',
       '油漆:估算墙面面积',
@@ -17,6 +25,14 @@ export const rectangleCalculatorL10n: ToolL10n = {
     ],
   },
   es: {
+    ui: {
+      'in.w': 'Ancho',
+      'in.h': 'Alto',
+      'out.area': 'Área',
+      'out.perimeter': 'Perímetro',
+      'out.diagonal': 'Diagonal',
+      note: '▭ Área = ancho × alto. La diagonal usa el teorema de Pitágoras.',
+    },
     useCases: [
       'suelos: cuánto azulejo o moqueta comprar',
       'pintura: estimar el área de las paredes',
@@ -28,6 +44,14 @@ export const rectangleCalculatorL10n: ToolL10n = {
     ],
   },
   de: {
+    ui: {
+      'in.w': 'Breite',
+      'in.h': 'Höhe',
+      'out.area': 'Fläche',
+      'out.perimeter': 'Umfang',
+      'out.diagonal': 'Diagonale',
+      note: '▭ Fläche = Breite × Höhe. Die Diagonale nutzt den Satz des Pythagoras.',
+    },
     useCases: [
       'Bodenbelag: wie viel Fliese oder Teppich nötig ist',
       'Farbe: Wandfläche für den Anstrich schätzen',

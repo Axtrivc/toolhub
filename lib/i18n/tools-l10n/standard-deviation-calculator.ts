@@ -1,11 +1,19 @@
 /**
  * standard-deviation-calculator 本地化 bundle —— zh / es / de
- * 覆盖:faqs + useCases(client = StandardDeviationCalculatorClient = makeCalculatorClient)
+ * 覆盖:faqs + ui + useCases(client = StandardDeviationCalculatorClient = makeCalculatorClient)
  */
 import type { ToolL10n } from '../tool-l10n'
 
 export const standardDeviationCalculatorL10n: ToolL10n = {
   zh: {
+    ui: {
+      'in.numbers': '数字(逗号分隔)',
+      'out.mean': '平均值',
+      'out.stddev': '标准差',
+      'out.variance': '方差',
+      'out.count': '个数',
+      note: '📊 使用总体标准差(÷N)。若要样本标准差,乘以 √(N/(N−1))。',
+    },
     useCases: [
       '分析考试成绩的离散程度',
       '评估数据集的波动性与稳定性',
@@ -17,6 +25,14 @@ export const standardDeviationCalculatorL10n: ToolL10n = {
     ],
   },
   es: {
+    ui: {
+      'in.numbers': 'Números (separados por comas)',
+      'out.mean': 'Media',
+      'out.stddev': 'Desviación típica',
+      'out.variance': 'Varianza',
+      'out.count': 'Cantidad',
+      note: '📊 Usa la desviación típica poblacional (÷N). Para la muestral, multiplica por √(N/(N−1)).',
+    },
     useCases: [
       'analizar la dispersión de las notas de un examen',
       'evaluar la variabilidad y estabilidad de un conjunto de datos',
@@ -28,6 +44,14 @@ export const standardDeviationCalculatorL10n: ToolL10n = {
     ],
   },
   de: {
+    ui: {
+      'in.numbers': 'Zahlen (kommagetrennt)',
+      'out.mean': 'Mittelwert',
+      'out.stddev': 'Standardabweichung',
+      'out.variance': 'Varianz',
+      'out.count': 'Anzahl',
+      note: '📊 Verwendet die Standardabweichung der Grundgesamtheit (÷N). Für die Stichprobe multipliziere mit √(N/(N−1)).',
+    },
     useCases: [
       'Streuung von Prüfungsergebnissen analysieren',
       'Schwankung und Stabilität eines Datensatzes bewerten',
