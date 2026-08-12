@@ -108,6 +108,18 @@ import { emailExtractorL10n } from './tools-l10n/email-extractor'
 import { urlExtractorL10n } from './tools-l10n/url-extractor'
 import { addLineNumbersL10n } from './tools-l10n/add-line-numbers'
 import { textToListL10n } from './tools-l10n/text-to-list'
+import { sortLinesL10n } from './tools-l10n/sort-lines'
+import { whitespaceRemoverL10n } from './tools-l10n/whitespace-remover'
+import { listDiffL10n } from './tools-l10n/list-diff'
+import { massConverterL10n } from './tools-l10n/mass-converter'
+import { densityConverterL10n } from './tools-l10n/density-converter'
+import { powerConverterL10n } from './tools-l10n/power-converter'
+import { flowRateConverterL10n } from './tools-l10n/flow-rate-converter'
+import { dataStorageConverterL10n } from './tools-l10n/data-storage-converter'
+import { timeConverterL10n } from './tools-l10n/time-converter'
+import { numeralSystemConverterL10n } from './tools-l10n/numeral-system-converter'
+import { angleConverterL10n } from './tools-l10n/angle-converter'
+import { fuelEconomyConverterL10n } from './tools-l10n/fuel-economy-converter'
 
 const registry: Record<string, ToolL10n> = {
   'loan-calculator': loanCalculatorL10n,
@@ -182,6 +194,18 @@ const registry: Record<string, ToolL10n> = {
   'url-extractor': urlExtractorL10n,
   'add-line-numbers': addLineNumbersL10n,
   'text-to-list': textToListL10n,
+  'sort-lines': sortLinesL10n,
+  'whitespace-remover': whitespaceRemoverL10n,
+  'list-diff': listDiffL10n,
+  'mass-converter': massConverterL10n,
+  'density-converter': densityConverterL10n,
+  'power-converter': powerConverterL10n,
+  'flow-rate-converter': flowRateConverterL10n,
+  'data-storage-converter': dataStorageConverterL10n,
+  'time-converter': timeConverterL10n,
+  'numeral-system-converter': numeralSystemConverterL10n,
+  'angle-converter': angleConverterL10n,
+  'fuel-economy-converter': fuelEconomyConverterL10n,
 }
 
 /**
