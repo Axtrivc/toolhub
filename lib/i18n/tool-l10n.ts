@@ -204,6 +204,7 @@ import { daysCountdownCalculatorL10n } from './tools-l10n/days-countdown-calcula
 import { readingSpeakingTimeL10n } from './tools-l10n/reading-speaking-time'
 import { randomChoicePickerL10n } from './tools-l10n/random-choice-picker'
 import { wordleSolverL10n } from './tools-l10n/wordle-solver'
+import { ipCheckerL10n } from './tools-l10n/ip-checker'
 
 const registry: Record<string, ToolL10n> = {
   'loan-calculator': loanCalculatorL10n,
@@ -374,6 +375,7 @@ const registry: Record<string, ToolL10n> = {
   'reading-speaking-time': readingSpeakingTimeL10n,
   'random-choice-picker': randomChoicePickerL10n,
   'wordle-solver': wordleSolverL10n,
+  'ip-checker': ipCheckerL10n,
 }
 
 /**
