@@ -168,6 +168,18 @@ import { cronParserL10n } from './tools-l10n/cron-parser'
 import { ageCalculatorL10n } from './tools-l10n/age-calculator'
 import { dateDifferenceCalculatorL10n } from './tools-l10n/date-difference-calculator'
 import { ageDifferenceCalculatorL10n } from './tools-l10n/age-difference-calculator'
+import { gradeCalculatorL10n } from './tools-l10n/grade-calculator'
+import { finalGradeCalculatorL10n } from './tools-l10n/final-grade-calculator'
+import { gpaCalculatorL10n } from './tools-l10n/gpa-calculator'
+import { passwordStrengthCheckerL10n } from './tools-l10n/password-strength-checker'
+import { passwordGeneratorL10n } from './tools-l10n/password-generator'
+import { qrCodeGeneratorL10n } from './tools-l10n/qr-code-generator'
+import { gptTokenCounterL10n } from './tools-l10n/gpt-token-counter'
+import { ipSubnetCalculatorL10n } from './tools-l10n/ip-subnet-calculator'
+import { chmodCalculatorL10n } from './tools-l10n/chmod-calculator'
+import { sshKeyGeneratorL10n } from './tools-l10n/ssh-key-generator'
+import { bcryptHashGeneratorL10n } from './tools-l10n/bcrypt-hash-generator'
+import { userAgentParserL10n } from './tools-l10n/user-agent-parser'
 
 const registry: Record<string, ToolL10n> = {
   'loan-calculator': loanCalculatorL10n,
@@ -302,6 +314,18 @@ const registry: Record<string, ToolL10n> = {
   'age-calculator': ageCalculatorL10n,
   'date-difference-calculator': dateDifferenceCalculatorL10n,
   'age-difference-calculator': ageDifferenceCalculatorL10n,
+  'grade-calculator': gradeCalculatorL10n,
+  'final-grade-calculator': finalGradeCalculatorL10n,
+  'gpa-calculator': gpaCalculatorL10n,
+  'password-strength-checker': passwordStrengthCheckerL10n,
+  'password-generator': passwordGeneratorL10n,
+  'qr-code-generator': qrCodeGeneratorL10n,
+  'gpt-token-counter': gptTokenCounterL10n,
+  'ip-subnet-calculator': ipSubnetCalculatorL10n,
+  'chmod-calculator': chmodCalculatorL10n,
+  'ssh-key-generator': sshKeyGeneratorL10n,
+  'bcrypt-hash-generator': bcryptHashGeneratorL10n,
+  'user-agent-parser': userAgentParserL10n,
 }
 
 /**

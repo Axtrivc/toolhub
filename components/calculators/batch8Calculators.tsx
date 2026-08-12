@@ -197,6 +197,7 @@ export const AgeDifferenceCalculatorClient = makeCalculatorClient({
 })
 
 export const GradeCalculatorClient = makeCalculatorClient({
+  slug: 'grade-calculator',
   inputs: [
     { key: 'earned', label: 'Points earned', default: '85' },
     { key: 'possible', label: 'Points possible', default: '100' },
@@ -222,6 +223,7 @@ export const GradeCalculatorClient = makeCalculatorClient({
 })
 
 export const FinalGradeCalculatorClient = makeCalculatorClient({
+  slug: 'final-grade-calculator',
   inputs: [
     { key: 'current', label: 'Current grade', suffix: '%', default: '85' },
     { key: 'goal', label: 'Target grade', suffix: '%', default: '90' },

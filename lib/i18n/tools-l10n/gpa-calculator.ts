@@ -1,0 +1,47 @@
+/**
+ * gpa-calculator 本地化 bundle —— zh / es / de
+ * 覆盖:faqs + useCases(client = GPACalculatorClient = 自定义 client,无需 slug)
+ */
+import type { ToolL10n } from '../tool-l10n'
+
+export const gpaCalculatorL10n: ToolL10n = {
+  zh: {
+    useCases: [
+      '按学分加权的 GPA 计算器',
+      '4.0 制大学 GPA 计算',
+      '高中 GPA 计算器',
+      '按各科学分计算累计 GPA',
+    ],
+    faqs: [
+      { q: '4.0 制 GPA 是怎么算的?', a: '每个字母等级对应一个积分(A=4、B=3、C=2、D=1)。把每门课的积分乘以其学分时数,求和后再除以总学分时数。一门 4 学分的课拿到 A 贡献 16 分;一门 3 学分的课拿到 C 贡献 6 分。加权平均值就是你的 GPA。' },
+      { q: '加权 GPA 和不加权 GPA 有什么区别?', a: '不加权 GPA 上限为 4.0,所有课程一视同仁。加权 GPA 会对荣誉课程、AP 或 IB 课程额外加分(通常最高可达 5.0),以此奖励更有难度的课程。各大学会按自己的方式重新计算 GPA,因此请按你所在学校使用的类型来填报。' },
+      { q: '上大学需要多少 GPA?', a: '差异很大。录取门槛较低的学校,录取学生的平均 GPA 大约在 3.0 左右;而选拔性强的大学平均往往在 3.7–3.9(不加权)。GPA 会结合课程难度和你所在学校的评分标准综合评估,而不是只看一个绝对数字。' },
+    ],
+  },
+  es: {
+    useCases: [
+      'calculadora de GPA ponderada por créditos',
+      'GPA universitario en escala 4.0',
+      'calculadora de GPA de secundaria',
+      'GPA acumulado por créditos de cada curso',
+    ],
+    faqs: [
+      { q: '¿Cómo se calcula el GPA en una escala de 4.0?', a: 'Cada letra de calificación se mapea a puntos (A=4, B=3, C=2, D=1). Multiplica los puntos de cada curso por sus horas-crédito, súmalos y divide entre el total de horas-crédito. Una A en un curso de 4 créditos aporta 16 puntos; una C en uno de 3 créditos aporta 6. El promedio ponderado es tu GPA.' },
+      { q: '¿Cuál es la diferencia entre GPA ponderado y no ponderado?', a: 'El GPA no ponderado tiene un tope de 4.0 y trata todas las clases por igual. El ponderado da puntos extra por cursos de honores, AP o IB (a menudo hasta 5.0), premiando las clases más difíciles. Las universidades recalculan el GPA a su manera, así que reporta el tipo que usa tu escuela.' },
+      { q: '¿Qué GPA necesito para la universidad?', a: 'Varía mucho. El estudiante admittedo promedio en escuelas menos selectivas tiene alrededor de 3.0, mientras que las universidades selectivas suelen promediar 3,7–3,9 sin ponderar. El GPA se revisa en el contexto de la rigurosidad de los cursos y los estándares de tu escuela, no como un número aislado.' },
+    ],
+  },
+  de: {
+    useCases: [
+      'nach Credit-Punkten gewichteter GPA-Rechner',
+      'Universitäts-GPA auf der 4,0-Skala',
+      'GPA-Rechner für die Oberstufe',
+      'kumulierte GPA nach Credit-Punkten der einzelnen Kurse',
+    ],
+    faqs: [
+      { q: 'Wie wird der GPA auf einer 4,0-Skala berechnet?', a: 'Jede Buchstabennote entspricht Punkten (A=4, B=3, C=2, D=1). Multipliziere die Punkte jedes Kurses mit seinen Credit-Stunden, summiere sie und teile durch die gesamten Credit-Stunden. Ein A in einem 4-Credit-Kurs bringt 16 Punkte; ein C in einem 3-Credit-Kurs bringt 6. Der gewichtete Durchschnitt ist dein GPA.' },
+      { q: 'Was ist der Unterschied zwischen gewichtetem und ungewichtetem GPA?', a: 'Der ungewichtete GPA ist auf 4,0 begrenzt und behandelt alle Kurse gleich. Der gewichtete GPA gibt zusätzliche Punkte für Honors-, AP- oder IB-Kurse (oft bis zu 5,0) und belohnt so schwerere Kurse. Universitäten berechnen den GPA auf ihre eigene Weise, also gib die Art an, die deine Schule verwendet.' },
+      { q: 'Welchen GPA brauche ich für die Universität?', a: 'Das variiert stark. Der durchschnittliche zugelassene Studierende an weniger selektiven Schulen hat etwa einen 3,0, während selektive Universitäten oft 3,7–3,9 (ungewichtet) im Schnitt aufweisen. Der GPA wird im Kontext der Kursanspruchsniveaus und der Notenstandards deiner Schule betrachtet, nicht als bloße Zahl.' },
+    ],
+  },
+}
