@@ -34,8 +34,19 @@ export function NumeralSystemConverterClient() {
     }
     const trimmed = value.trim()
     if (!trimmed || !validChars[from].test(trimmed)) return null
-    const n = parseInt(trimmed, Number(from))
-    if (!Number.isFinite(n)) return null
+    // 用 BigInt 做任意精度转换，避免 number 双精度在 > 2^53 时丢失低位
+    const negative = trimmed.startsWith('-')
+    const digits = negative ? trimmed.slice(1) : trimmed
+    let n: bigint
+    try {
+      if (from === '16') n = BigInt('0x' + digits)
+      else if (from === '2') n = BigInt('0b' + digits)
+      else if (from === '8') n = BigInt('0o' + digits)
+      else n = BigInt(digits)
+    } catch {
+      return null
+    }
+    if (negative) n = -n
     return {
       '2': n.toString(2),
       '8': n.toString(8),
@@ -46,9 +57,9 @@ export function NumeralSystemConverterClient() {
 
   return (
     <div className="space-y-6">
-      <div className="grid grid-cols-1 gap-4 rounded-lg bg-slate-50 p-4 sm:grid-cols-2">
+      <div className="grid grid-cols-1 gap-4 rounded-lg p-4 sm:grid-cols-2" style={{ backgroundColor: 'rgb(var(--bg-subtle))' }}>
         <div>
-          <label htmlFor="value" className="mb-1.5 block text-sm font-medium text-slate-700">
+          <label htmlFor="value" className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
             Number
           </label>
           <input
@@ -57,18 +68,18 @@ export function NumeralSystemConverterClient() {
             value={value}
             onChange={(e) => setValue(e.target.value)}
             placeholder="255"
-            className="w-full rounded-lg border border-slate-300 p-3 font-mono text-slate-900 shadow-sm outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200"
+            className="w-full rounded-lg border p-3 font-mono shadow-sm outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200" style={{ borderColor: 'rgb(var(--border-strong))', color: 'rgb(var(--text))' }}
           />
         </div>
         <div>
-          <label htmlFor="from" className="mb-1.5 block text-sm font-medium text-slate-700">
+          <label htmlFor="from" className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
             From base
           </label>
           <select
             id="from"
             value={from}
             onChange={(e) => setFrom(e.target.value as Base)}
-            className="w-full rounded-lg border border-slate-300 bg-white p-3 text-slate-900 shadow-sm outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200"
+            className="w-full rounded-lg border p-3 shadow-sm outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200" style={{ borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rgb(var(--bg-card))', color: 'rgb(var(--text))' }}
           >
             {(Object.keys(BASE_LABELS) as Base[]).map((b) => (
               <option key={b} value={b}>
@@ -92,7 +103,7 @@ export function NumeralSystemConverterClient() {
           ))}
         </div>
       ) : (
-        <div className="rounded-lg border-2 border-dashed border-slate-200 p-6 text-center text-sm text-slate-400">
+        <div className="rounded-lg border-2 border-dashed p-6 text-center text-sm" style={{ borderColor: 'rgb(var(--border-strong))', color: 'rgb(var(--text-faint))' }}>
           Enter a valid number for the selected base
         </div>
       )}
