@@ -31,7 +31,19 @@ next-env.d.ts
 /.zcode/
 /.workbuddy/
 # 临时修复任务书(用完即删,不进仓库)
-/GLM-FIX-TASKS.md
+/GLM-FIX-TASKS*.md
+# 代码审查报告与临时过程文件(本地)
+/code-review-report*.html
+/code-review-tasks.txt
+/tmp_all_components.txt
+/tool-names-copy.html
+/ipchecker-fixed-snapshot.yml
+# 编辑器/工具生成的本地目录
+/.kimi-code/
+/.serena/
+/.vscode/
+# 一次性调试脚本
+/scripts/gen-toolnames-html.mjs
 # 内部财务/营收/广告分析文档,含个人敏感信息,不进 public 仓库
 ToolHub-*.html
 AdSense-*.html
