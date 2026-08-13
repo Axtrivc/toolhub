@@ -4,7 +4,16 @@ import { useState, useEffect } from 'react'
 import { ResultCard, CalculatorNote } from '@/components/calculator/CalculatorField'
 
 function toInputDate(d: Date): string {
-  return d.toISOString().slice(0, 10)
+  const y = d.getFullYear()
+  const m = String(d.getMonth() + 1).padStart(2, '0')
+  const dd = String(d.getDate()).padStart(2, '0')
+  return `${y}-${m}-${dd}`
+}
+
+/** 把 'YYYY-MM-DD' 按本地时区解析（避免 new Date('YYYY-MM-DD') 按 UTC 解析导致西半球差一天） */
+function parseLocalDate(s: string): Date {
+  const [y, m, d] = s.split('-').map(Number)
+  return new Date(y, m - 1, d)
 }
 
 /** 计算两个日期之间的差,精确到年/月/日 */
@@ -69,9 +78,9 @@ export function AgeCalculatorClient() {
   }, [])
 
   // 渲染期用 state(todayStr)而非直接 new Date(),保证首帧与 SSR 一致
-  const today = todayStr ? new Date(todayStr) : null
-  const birthDate = new Date(birth)
-  const targetDate = target ? new Date(target) : today
+  const today = todayStr ? parseLocalDate(todayStr) : null
+  const birthDate = parseLocalDate(birth)
+  const targetDate = target ? parseLocalDate(target) : today
   const result = targetDate ? calcAge(birthDate, targetDate) : null
 
   const fmt = (n: number) => n.toLocaleString()

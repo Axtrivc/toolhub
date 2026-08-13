@@ -234,6 +234,7 @@ export const FinalGradeCalculatorClient = makeCalculatorClient({
     const current = toNum(v.current)
     const goal = toNum(v.goal)
     const w = toNum(v.finalWeight) / 100
+    if (w <= 0) return { needed: '⚠️ Final exam weight must be greater than 0%' }
     const needed = (goal - current * (1 - w)) / w
     return { needed: needed > 100 ? `⚠️ ${fmtNum(needed, 1)}% — impossible` : `${fmtNum(needed, 1)}%` }
   },
@@ -255,11 +256,11 @@ export const BillSplitCalculatorClient = makeCalculatorClient({
   compute: (v) => {
     const total = toNum(v.total)
     const tipPct = toNum(v.tip) / 100
-    const people = Math.max(1, Math.round(toNum(v.people)))
+    const people = Math.round(toNum(v.people))
     const tipAmount = total * tipPct
     const grand = total + tipAmount
     return {
-      perPerson: fmtUSD(grand / people),
+      perPerson: people >= 1 ? fmtUSD(grand / people) : '⚠️ Enter at least 1 person',
       tipAmount: fmtUSD(tipAmount),
       grandTotal: fmtUSD(grand),
     }

@@ -32,7 +32,7 @@ export interface UnitDef {
   toBase?: (v: number) => number
   /**
    * 自定义"从基准单位转出"函数(可选)。覆盖 factor。
-   * 不提供则回退到 base / factor(若 toBase 也缺省)或 1/toBase(base)。
+   * 不提供则回退到 base / factor。
    */
   fromBase?: (b: number) => number
 }

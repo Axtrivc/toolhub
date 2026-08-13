@@ -213,7 +213,8 @@ export function describeCron(expr: string): string {
 function expand(field: string, min: number, max: number): number[] {
   try {
     return Array.from(parseField(field, min, max)).sort((a, b) => a - b)
-  } catch {
+  } catch (err) {
+    console.warn('cron expand failed:', field, err)
     return []
   }
 }

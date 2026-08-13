@@ -71,6 +71,9 @@ function buildPool(opts: PasswordOptions): string[] {
  * 保证至少包含每个启用类型的一个字符(避免出现"全是数字"的极端情况)
  */
 export function generatePassword(opts: PasswordOptions): string {
+  // 长度不足以保证每类字符至少出现一次时，直接返回空（由调用方提示）
+  const enabledCount = [opts.uppercase, opts.lowercase, opts.numbers, opts.symbols].filter(Boolean).length
+  if (opts.length < enabledCount) return ''
   const pool = buildPool(opts)
   if (pool.length === 0) return ''
 

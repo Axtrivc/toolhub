@@ -94,6 +94,7 @@ export const AnnuityCalculatorClient = makeCalculatorClient({
     const p = toNum(v.principal)
     const r = toNum(v.rate) / 100
     const n = toNum(v.years)
+    if (n <= 0) return { annual: '⚠️ Enter years greater than 0', monthly: '—', total: '—' }
     // 年金现值公式反推每年支付
     const annual = r === 0 ? p / n : (p * r) / (1 - Math.pow(1 + r, -n))
     return {
@@ -159,6 +160,7 @@ export const RentVsBuyCalculatorClient = makeCalculatorClient({
     const loan = home * (1 - downPct / 100)
     const rate = toNum(v.rate) / 100 / 12
     const months = toNum(v.years) * 12
+    if (months <= 0) return { buyTotal: '⚠️ Enter years greater than 0', rentTotal: '—', winner: '—' }
     let monthly: number
     if (rate === 0) monthly = loan / months
     else {

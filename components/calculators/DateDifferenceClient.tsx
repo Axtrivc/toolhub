@@ -4,7 +4,16 @@ import { useState, useEffect, useMemo } from 'react'
 import { ResultCard, CalculatorNote } from '../calculator/CalculatorField'
 
 function toInputDate(d: Date): string {
-  return d.toISOString().slice(0, 10)
+  const y = d.getFullYear()
+  const m = String(d.getMonth() + 1).padStart(2, '0')
+  const dd = String(d.getDate()).padStart(2, '0')
+  return `${y}-${m}-${dd}`
+}
+
+/** 把 'YYYY-MM-DD' 按本地时区解析（避免 new Date('YYYY-MM-DD') 按 UTC 解析导致西半球差一天） */
+function parseLocalDate(s: string): Date {
+  const [y, m, d] = s.split('-').map(Number)
+  return new Date(y, m - 1, d)
 }
 
 /**
@@ -24,8 +33,8 @@ export function DateDifferenceClient() {
   }, [])
 
   const result = useMemo(() => {
-    const s = new Date(start)
-    const e = new Date(end)
+    const s = parseLocalDate(start)
+    const e = parseLocalDate(end)
     if (isNaN(s.getTime()) || isNaN(e.getTime())) return null
     if (s > e) return null
 
@@ -52,10 +61,13 @@ export function DateDifferenceClient() {
     // 计算工作日(排除周六日)
     let businessDays = 0
     const cur = new Date(s)
-    while (cur <= e) {
+    const MAX_SCAN_DAYS = 100000 // 防极端日期范围卡顿
+    let scanned = 0
+    while (cur <= e && scanned < MAX_SCAN_DAYS) {
       const dow = cur.getDay()
       if (dow !== 0 && dow !== 6) businessDays++
       cur.setDate(cur.getDate() + 1)
+      scanned++
     }
 
     return { years, months, days, totalDays, totalWeeks, totalMonths, totalHours, businessDays }

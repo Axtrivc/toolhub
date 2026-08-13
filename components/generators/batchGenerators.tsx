@@ -208,7 +208,7 @@ export const PercentileCalculatorClient = makeCalculatorClient({
   compute: (v) => {
     const nums = (v.numbers || '').split(/[\s,]+/).map(Number).filter((n) => isFinite(n)).sort((a, b) => a - b)
     if (nums.length === 0) return { result: '—' }
-    const p = toNum(v.p)
+    const p = Math.min(100, Math.max(0, toNum(v.p)))
     // 线性插值法
     const rank = (p / 100) * (nums.length - 1)
     const lo = Math.floor(rank)

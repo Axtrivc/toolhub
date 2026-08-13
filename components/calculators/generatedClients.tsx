@@ -27,13 +27,13 @@ export const TipCalculatorClient = makeCalculatorClient({
   compute: (v) => {
     const bill = toNum(v.bill)
     const tipPct = toNum(v.tipPct)
-    const people = Math.max(1, Math.round(toNum(v.people)))
+    const people = Math.round(toNum(v.people))
     const tip = bill * (tipPct / 100)
     const total = bill + tip
     return {
       tip: fmtUSD(tip),
       total: fmtUSD(total),
-      perPerson: fmtUSD(total / people),
+      perPerson: people >= 1 ? fmtUSD(total / people) : '⚠️ Enter at least 1 person',
     }
   },
   note: '💡 Common tip rates: 15% for adequate service, 18% for good service, 20%+ for excellent service.',

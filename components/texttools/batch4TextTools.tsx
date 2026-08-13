@@ -86,7 +86,9 @@ export const TextDiffClient = makeTextTool({
   outputLabel: 'Comparison',
   defaultInput: 'the quick brown fox ||| the slow brown fox',
   transform: (t) => {
-    const [a = '', b = ''] = t.split(/\s*\|\|\|\s*/)
+    const parts = t.split(/\s*\|\|\|\s*/)
+    if (parts.length > 2) return '⚠️ Use exactly one " ||| " separator between the two texts'
+    const [a = '', b = ''] = parts
     const aWords = a.split(/\s+/).filter(Boolean)
     const bWords = b.split(/\s+/).filter(Boolean)
     const maxLen = Math.max(aWords.length, bWords.length)

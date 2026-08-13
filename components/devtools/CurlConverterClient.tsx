@@ -220,8 +220,7 @@ function genFetch(c: ParsedCurl): string {
 ${opts.join(',\n')}
 });
 
-const data = await response.json();
-console.log(data);`
+const data = await response.json();`
 }
 
 function genAxios(c: ParsedCurl): string {
@@ -245,9 +244,7 @@ function genAxios(c: ParsedCurl): string {
 
 const response = await axios({
 ${config.join(',\n')}
-});
-
-console.log(response.data);`
+});`
 }
 
 /** Python 字符串字面量(单引号,转义内部单引号) */
