@@ -38,6 +38,8 @@ next-env.d.ts
 /tmp_all_components.txt
 /tool-names-copy.html
 /ipchecker-fixed-snapshot.yml
+# 首页工具热度重排计划(过程文档,本地保留)
+/tool-reorder-plan.md
 # 编辑器/工具生成的本地目录
 /.kimi-code/
 /.serena/

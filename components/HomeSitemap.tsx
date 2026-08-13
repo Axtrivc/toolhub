@@ -27,12 +27,12 @@ import { HUB_THEMES } from './workspace/hubThemes'
 
 /** 热门工具直达(与原首页 SEO 区同一组 slug,顺序保留) */
 const POPULAR_TOOL_SLUGS = [
-  'mortgage-calculator',
-  'percentage-calculator',
-  'bmi-calculator',
-  'json-formatter',
-  'word-counter',
-  'length-converter',
+  'reading-speaking-time',
+  'weight-converter',
+  'loan-calculator',
+  'wordle-solver',
+  'remove-line-breaks',
+  'days-countdown-calculator',
 ] as const
 
 /** 小节标题:mono 微字号大写 */
