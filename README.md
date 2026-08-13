@@ -109,7 +109,7 @@ app/                  # Next.js App Router 页面
   robots.ts           # 自动生成 robots.txt
   about/ contact/ privacy/ terms/   # 合规必备页
   blog/               # 技术博客(架构复盘等长文)
-  tools/              # 138 个工具页(每个 <slug>/page.tsx)
+  tools/              # 169 个工具页(每个 <slug>/page.tsx)
     slug-generator/   # 示例工具
 components/           # 复用组件(Header/Footer/AdSlot/CalculatorField 等)
   motion/             # FramerMotion 动效原语(AnimatedToolCard/StaggerGroup 等)

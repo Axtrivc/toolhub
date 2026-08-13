@@ -41,11 +41,11 @@ jobs:
       - name: Verify static output exists
         run: |
           # 确认静态导出真的生成了工具页,而非静默失败
-          # 当前已发布 138 个工具页(+1 个 /tools/ 枢纽页),阈值定为 138
+          # 当前已发布 169 个工具页(+1 个 /tools/ 枢纽页),阈值定为 169
           tool_count=$(find out/tools -name "index.html" -type f | wc -l)
           echo "Generated tool pages: $tool_count"
-          if [ "$tool_count" -lt 138 ]; then
-            echo "::error::Expected 138+ tool pages, got $tool_count. Build may have failed silently."
+          if [ "$tool_count" -lt 169 ]; then
+            echo "::error::Expected 169+ tool pages, got $tool_count. Build may have failed silently."
             exit 1
           fi
           # 确认关键静态资源存在(sitemap、ads.txt、sw.js、manifest、robots)

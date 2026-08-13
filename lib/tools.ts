@@ -92,7 +92,7 @@ export const tools: ToolMeta[] = [
       'auto loan amortization calculator',
       'loan payoff by loan type',
     ],
-    titleLongTail: 'Loan Calculator with Amortization Schedule - Free Tool',
+    titleLongTail: 'Loan Calculator with Amortization Schedule',
     descriptionLongTail: 'Calculate monthly payments and an amortization schedule for any loan - personal, auto, or student. See total interest at a glance. Free, no signup.',
   },
   {
@@ -108,7 +108,7 @@ export const tools: ToolMeta[] = [
       'monthly mortgage payment with taxes and insurance',
       'mortgage payment calculator with pmi',
     ],
-    titleLongTail: 'Mortgage Calculator with PMI & Taxes - Free Online',
+    titleLongTail: 'Mortgage Calculator with PMI & Taxes',
     descriptionLongTail: 'Estimate your monthly mortgage payment with PMI, taxes, and insurance. Adjust down payment and rate to compare loan scenarios. Free, no signup.',
   },
   {
@@ -135,7 +135,7 @@ export const tools: ToolMeta[] = [
       'compounding frequency calculator',
       'future value with regular contributions',
     ],
-    titleLongTail: 'Compound Interest with Monthly Contributions - Free',
+    titleLongTail: 'Compound Interest with Monthly Contributions',
     descriptionLongTail: 'See savings grow with compound interest and monthly contributions. Compare compounding frequencies and time horizons, instantly. Free, no signup.',
   },
   {
@@ -151,7 +151,7 @@ export const tools: ToolMeta[] = [
       'apy vs apr difference',
       'savings apy calculator',
     ],
-    titleLongTail: 'APY Calculator - APR to APY by Compounding - Free Tool',
+    titleLongTail: 'APY Calculator - APR to APY by Compounding',
     descriptionLongTail: 'Convert APR to APY by compounding frequency - daily, monthly, or continuous. Compare savings accounts and CD yields to earn more. Free, no signup.',
   },
   {
@@ -167,7 +167,7 @@ export const tools: ToolMeta[] = [
       'annualized roi cagr calculator',
       'investment return by years',
     ],
-    titleLongTail: 'ROI Calculator with Annualized Return - Free Online Tool',
+    titleLongTail: 'ROI Calculator with Annualized Return',
     descriptionLongTail: 'Calculate ROI and annualized return (CAGR) by time period for any investment. Compare stocks, real estate, and crypto fairly. Free, no signup.',
   },
   {
@@ -183,7 +183,7 @@ export const tools: ToolMeta[] = [
       'minimum payment vs interest',
       'how long paying minimum payment',
     ],
-    titleLongTail: 'How Is Minimum Payment Calculated? - Free Online Tool',
+    titleLongTail: 'How Is Minimum Payment Calculated?',
     descriptionLongTail: 'See how your credit card minimum payment is calculated and how little goes to principal. Compare minimum vs fixed payments. Free, no signup.',
   },
   {
@@ -199,7 +199,7 @@ export const tools: ToolMeta[] = [
       'best cash back card by spend',
       'cash back vs points value',
     ],
-    titleLongTail: 'Credit Card Cashback Calculator (Points & Rewards Value)',
+    titleLongTail: 'Credit Card Cashback Calculator - Rewards Value',
     descriptionLongTail: 'Calculate credit card cashback earnings, bonus percentage rewards, and net savings effortlessly.',
   },
   {
@@ -215,7 +215,7 @@ export const tools: ToolMeta[] = [
       'pmi threshold 20 percent calculator',
       'down payment needed to avoid pmi',
     ],
-    titleLongTail: 'Down Payment Calculator with PMI Threshold - Free Tool',
+    titleLongTail: 'Down Payment Calculator with PMI Threshold',
     descriptionLongTail: 'Find your down payment amount by home price and check the 20% PMI threshold. Compare 5%, 10%, and 20% down scenarios instantly. Free, no signup.',
   },
   {
@@ -231,7 +231,7 @@ export const tools: ToolMeta[] = [
       '43 dti rule mortgage',
       'front end back end dti calculator',
     ],
-    titleLongTail: 'DTI Calculator for Mortgage Qualification - Free Tool',
+    titleLongTail: 'DTI Calculator for Mortgage Qualification',
     descriptionLongTail: 'Calculate your debt-to-income ratio for mortgage qualification. See if your DTI meets the 43% lender threshold before you apply. Free, no signup.',
   },
   {
@@ -247,7 +247,7 @@ export const tools: ToolMeta[] = [
       'commission plus draw calculator',
       'tiered commission rate calculator',
     ],
-    titleLongTail: 'Commission Calculator with Base Salary - Free Online Tool',
+    titleLongTail: 'Commission Calculator with Base Salary',
     descriptionLongTail: 'Calculate sales commission plus base salary by rate and quota. See total earnings per sale and tiered overrides. Accurate. Free, no signup.',
   },
   {
@@ -263,7 +263,7 @@ export const tools: ToolMeta[] = [
       'restaurant bill splitter by people',
       'tip calculator divided by people',
     ],
-    titleLongTail: 'Bill Split Calculator with Tip - Split Checks Free Online',
+    titleLongTail: 'Bill Split Calculator with Tip - Split Checks',
     descriptionLongTail: 'Split a bill evenly including tip and tax among any number of people. See what each person owes for a restaurant check instantly. Free, no signup.',
   },
   {
@@ -279,7 +279,7 @@ export const tools: ToolMeta[] = [
       'savings goal with interest',
       'reach savings target by year',
     ],
-    titleLongTail: 'Savings Goal Calculator by Date - How Much to Save Monthly',
+    titleLongTail: 'Savings Goal Calculator - How Much to Save',
     descriptionLongTail: 'Find the monthly amount needed to reach any savings goal by a target date. Factor in interest and growth to plan deposits accurately. Free, no signup.',
   },
   {
@@ -295,7 +295,7 @@ export const tools: ToolMeta[] = [
       'personal net worth tracker',
       'net worth by age benchmark',
     ],
-    titleLongTail: 'Net Worth Calculator - Assets Minus Liabilities Free Tool',
+    titleLongTail: 'Net Worth Calculator - Assets Minus Liabilities',
     descriptionLongTail: 'Calculate your net worth by subtracting total liabilities from assets. See your assets-to-debt ratio and track wealth over time. Free, no signup.',
   },
   {
@@ -311,7 +311,7 @@ export const tools: ToolMeta[] = [
       'monthly payout from principal',
       'annuity withdrawal rate calculator',
     ],
-    titleLongTail: 'Annuity Payout Calculator by Years - Monthly & Annual Free',
+    titleLongTail: 'Annuity Payout Calculator by Years - Monthly &',
     descriptionLongTail: 'Find annual and monthly payouts from a principal over N years. See how long your savings last at any withdrawal rate, instantly. Free, no signup.',
   },
   {
@@ -327,7 +327,7 @@ export const tools: ToolMeta[] = [
       'stock capital gains calculator',
       'crypto tax by holding period',
     ],
-    titleLongTail: 'Capital Gains Tax Estimator - Short vs Long Term Free Tool',
+    titleLongTail: 'Capital Gains Tax Estimator - Short vs Long Term',
     descriptionLongTail: 'Estimate capital gains tax on stock or crypto by short vs long-term rates. See your tax bill and net proceeds by holding period. Free, no signup.',
   },
   {
@@ -343,7 +343,7 @@ export const tools: ToolMeta[] = [
       'buying vs renting cost comparison',
       'rent vs own break even calculator',
     ],
-    titleLongTail: 'Rent vs Buy Calculator - Should You Buy or Rent? Free Tool',
+    titleLongTail: 'Rent vs Buy Calculator - Should You Buy or Rent?',
     descriptionLongTail: 'Compare the total cost of buying vs renting over any time period. See the break-even point where owning beats renting, privately. Free, no signup.',
   },
   {
@@ -359,7 +359,7 @@ export const tools: ToolMeta[] = [
       'future value with inflation',
       'money value past to present',
     ],
-    titleLongTail: 'Inflation Calculator by Year - Purchasing Power Free Tool',
+    titleLongTail: 'Inflation Calculator by Year - Purchasing Power',
     descriptionLongTail: 'See how inflation reduces the value of money over time. Convert past dollars to present value or project future costs, instantly. Free, no signup.',
   },
   {
@@ -375,7 +375,7 @@ export const tools: ToolMeta[] = [
       'retirement savings projection',
       'retirement nest egg by 65',
     ],
-    titleLongTail: 'Retirement Calculator with Growth - Nest Egg by 65 Free Tool',
+    titleLongTail: 'Retirement Calculator with Growth - Nest Egg by',
     descriptionLongTail: 'Project your retirement savings with compound growth and contributions. See if you are on track to retire by your target age. Free, no signup.',
   },
   {
@@ -391,7 +391,7 @@ export const tools: ToolMeta[] = [
       'interest earned on principal',
       'principal rate time calculator',
     ],
-    titleLongTail: 'Simple Interest Calculator - I = Prt Formula Free Online',
+    titleLongTail: 'Simple Interest Calculator - I = Prt Formula Free',
     descriptionLongTail: 'Calculate simple interest with the I = Prt formula. Find interest earned on a principal over any time at any rate, instantly. Free, no signup.',
   },
   {
@@ -407,7 +407,7 @@ export const tools: ToolMeta[] = [
       'best value per ounce calculator',
       'cost per unit grocery tool',
     ],
-    titleLongTail: 'Unit Price Calculator - Compare Per Ounce & Gram Free Tool',
+    titleLongTail: 'Unit Price Calculator - Compare Per Ounce & Gram',
     descriptionLongTail: 'Compare unit prices to find the real best deal. Calculate price per ounce, gram, or liter across packages of any size instantly. Free, no signup.',
   },
   {
@@ -423,7 +423,7 @@ export const tools: ToolMeta[] = [
       'markup vs margin calculator',
       'profit margin from cost calculator',
     ],
-    titleLongTail: 'Markup Calculator - Cost, Selling Price & Margin Free Tool',
+    titleLongTail: 'Markup Calculator - Cost, Selling Price & Margin',
     descriptionLongTail: 'Find selling price and margin from cost and markup percentage. See the difference between markup and margin, instantly. Free, no signup.',
   },
   {
@@ -439,7 +439,7 @@ export const tools: ToolMeta[] = [
       'convert hourly rate to yearly',
       'salary by hours per week',
     ],
-    titleLongTail: 'Hourly to Salary Calculator with Overtime - Free Tool',
+    titleLongTail: 'Hourly to Salary Calculator with Overtime',
     descriptionLongTail: 'Convert hourly wage to annual salary including overtime. Adjust hours per week and overtime rate to compare job offers side by side. Free, no signup.',
   },
   {
@@ -455,7 +455,7 @@ export const tools: ToolMeta[] = [
       'how long to pay off credit card',
       'credit card payoff timeline',
     ],
-    titleLongTail: 'Credit Card Payoff by Monthly Payment - Free Online',
+    titleLongTail: 'Credit Card Payoff by Monthly Payment',
     descriptionLongTail: 'Find how long to pay off credit card debt by monthly payment, or use the snowball method. See interest saved instantly. Free, no signup.',
   },
   {
@@ -471,7 +471,7 @@ export const tools: ToolMeta[] = [
       'tax bracket calculator 2024',
       'marginal vs effective tax rate',
     ],
-    titleLongTail: 'Income Tax Estimator by Bracket - Take-Home Pay Tool',
+    titleLongTail: 'Income Tax Estimator by Bracket - Take-Home Pay',
     descriptionLongTail: 'Estimate US federal income tax by bracket and find your take-home pay for 2024. See marginal vs effective rate, instantly. Free, no signup.',
   },
   {
@@ -487,7 +487,7 @@ export const tools: ToolMeta[] = [
       'salary breakdown by pay period',
       'convert yearly salary to hourly rate',
     ],
-    titleLongTail: 'Salary to Hourly Calculator with Overtime - Free Tool',
+    titleLongTail: 'Salary to Hourly Calculator with Overtime',
     descriptionLongTail: 'Convert annual salary to hourly pay with overtime and bonuses. See take-home for any hours per week. Accurate, private, and instant. Free, no signup.',
   },
   {
@@ -514,7 +514,7 @@ export const tools: ToolMeta[] = [
       'add or remove sales tax',
       'pre tax price calculator',
     ],
-    titleLongTail: 'Sales Tax Calculator by State & Reverse - Free Tool',
+    titleLongTail: 'Sales Tax Calculator by State & Reverse',
     descriptionLongTail: 'Add or reverse sales tax by state for any price. Works for VAT and GST too. Find the pre-tax amount before a sale, instantly. Free, no signup.',
   },
   {
@@ -541,7 +541,7 @@ export const tools: ToolMeta[] = [
       'tip splitter by number of people',
       'restaurant tip and split calculator',
     ],
-    titleLongTail: 'Tip Calculator - Split Bill by Percentage - Free Tool',
+    titleLongTail: 'Tip Calculator - Split Bill by Percentage',
     descriptionLongTail: 'Calculate the perfect tip by percentage and split the bill among any number of people. Round up or down with custom tip percent. Free, no signup.',
   },
   {
@@ -568,7 +568,7 @@ export const tools: ToolMeta[] = [
       'final price after discount',
       'original price before discount',
     ],
-    titleLongTail: 'Discount Calculator - Percent Off & Stacked Savings Tool',
+    titleLongTail: 'Discount Calculator - Percent Off & Stacked',
     descriptionLongTail: 'Find the final price after percent off or stacked discounts and coupons. Reverse it to find the original price, instantly. Free, no signup.',
   },
 
@@ -586,7 +586,7 @@ export const tools: ToolMeta[] = [
       'json beautifier 2 spaces',
       'format and validate json',
     ],
-    titleLongTail: 'JSON Formatter & Validator - Beautify JSON Free Online',
+    titleLongTail: 'JSON Formatter & Validator - Beautify JSON Free',
     descriptionLongTail: 'Format and validate JSON with proper indentation. Pretty-print JSON with 2-space indent and instant error highlighting, privately. Free, no signup.',
   },
   {
@@ -607,7 +607,7 @@ export const tools: ToolMeta[] = [
       'inspect jwt expiration claim',
       'jwt token viewer no upload',
     ],
-    titleLongTail: 'JWT Decoder - Inspect Header, Payload & Expiry Locally',
+    titleLongTail: 'JWT Decoder - Inspect Header, Payload & Expiry',
     descriptionLongTail:
       'Decode and inspect JWT tokens (JSON Web Tokens) online instantly. View header, payload, and signature with 100% local browser privacy.',
   },
@@ -624,7 +624,7 @@ export const tools: ToolMeta[] = [
       'encode string to base64',
       'base64 with unicode support',
     ],
-    titleLongTail: 'Base64 Encoder - Encode UTF-8 Text to Base64 Free Online',
+    titleLongTail: 'Base64 Encoder - Encode UTF-8 Text to Base64 Free',
     descriptionLongTail: 'Encode text to Base64 instantly with proper UTF-8 support. Convert strings, emojis, and unicode safely in your browser, privately. Free, no signup.',
   },
   {
@@ -640,7 +640,7 @@ export const tools: ToolMeta[] = [
       'base64 string to readable text',
       'convert base64 back to text',
     ],
-    titleLongTail: 'Base64 Decoder - Decode Base64 to Text Free Online Tool',
+    titleLongTail: 'Base64 Decoder - Decode Base64 to Text Free',
     descriptionLongTail: 'Decode Base64 back to text instantly with proper UTF-8 support. Convert Base64 strings to readable text including emojis and unicode. Free, no signup.',
   },
   {
@@ -661,7 +661,7 @@ export const tools: ToolMeta[] = [
       'javascript regex tester online',
       'regex cheat sheet and tester',
     ],
-    titleLongTail: 'Regex Tester with Highlighted Matches & Capture Groups Free',
+    titleLongTail: 'Regex Tester with Highlighted Matches & Capture',
     descriptionLongTail:
       'Enter a regex and test text to see matches highlighted live, plus capture groups and a syntax cheat sheet. Runs in your browser. Free, no signup.',
   },
@@ -678,7 +678,7 @@ export const tools: ToolMeta[] = [
       'random guid generator',
       'uuid for database primary key',
     ],
-    titleLongTail: 'UUID v4 Generator - Create Multiple UUIDs Free Online Tool',
+    titleLongTail: 'UUID v4 Generator - Create Multiple UUIDs Free',
     descriptionLongTail: 'Generate random v4 UUIDs for databases, sessions, and APIs. Create one or many RFC 4122 UUIDs with true Web Crypto randomness. Free, no signup.',
   },
   {
@@ -699,7 +699,7 @@ export const tools: ToolMeta[] = [
       'curl to axios code generator',
       'parse curl command to code',
     ],
-    titleLongTail: 'Curl to JavaScript Fetch & Python Requests Converter Free',
+    titleLongTail: 'Curl to JavaScript Fetch & Python Requests',
     descriptionLongTail:
       'Paste a curl command and get JavaScript (Fetch, Axios) and Python (requests) code with headers and body. Runs in your browser. Free, no signup.',
   },
@@ -721,7 +721,7 @@ export const tools: ToolMeta[] = [
       'convert md table to html',
       'markdown to clean html free',
     ],
-    titleLongTail: 'Markdown to HTML Converter with Live Preview Free Online',
+    titleLongTail: 'Markdown to HTML Converter with Live Preview Free',
     descriptionLongTail:
       'Type or paste Markdown and get clean HTML instantly with a live rendered preview. Supports headings, lists, code, links, and tables. Free, no signup.',
   },
@@ -738,7 +738,7 @@ export const tools: ToolMeta[] = [
       'text to sha256 converter',
       'cryptographic hash generator',
     ],
-    titleLongTail: 'SHA-256 & SHA-1 Hash Generator from Text - Free Online',
+    titleLongTail: 'SHA-256 & SHA-1 Hash Generator from Text',
     descriptionLongTail: 'Generate SHA-256 and SHA-1 hashes from text using real SubtleCrypto. Compare checksums and verify file integrity in your browser. Free, no signup.',
   },
   {
@@ -754,7 +754,7 @@ export const tools: ToolMeta[] = [
       'binary string to readable text',
       'translate binary 1s and 0s',
     ],
-    titleLongTail: 'Binary to Text Converter - Decode Binary to ASCII Free',
+    titleLongTail: 'Binary to Text Converter - Decode Binary to ASCII',
     descriptionLongTail: 'Decode binary back to readable text instantly. Paste 1s and 0s to translate any binary string into ASCII characters in your browser. Free, no signup.',
   },
   {
@@ -770,7 +770,7 @@ export const tools: ToolMeta[] = [
       'ascii to binary translator',
       'string to 1s and 0s',
     ],
-    titleLongTail: 'Text to Binary Converter - Encode Text as Binary Free',
+    titleLongTail: 'Text to Binary Converter - Encode Text as Binary',
     descriptionLongTail: 'Convert text characters to binary representation. Encode any string into 1s and 0s per character for coding, puzzles, and learning. Free, no signup.',
   },
   {
@@ -786,7 +786,7 @@ export const tools: ToolMeta[] = [
       'extract query params online',
       'query string to object',
     ],
-    titleLongTail: 'URL Query String Parser - Parameters to JSON Free Tool',
+    titleLongTail: 'URL Query String Parser - Parameters to JSON Free',
     descriptionLongTail: 'Extract URL query parameters into a clean JSON object. Parse and debug query strings for API and web development, privately. Free, no signup.',
   },
   {
@@ -802,7 +802,7 @@ export const tools: ToolMeta[] = [
       'utf 8 byte length',
       'text size for database column',
     ],
-    titleLongTail: 'Text Size Estimator - Bytes & KB of Text Free Online Tool',
+    titleLongTail: 'Text Size Estimator - Bytes & KB of Text Free',
     descriptionLongTail: 'Estimate byte size of your text in UTF-8, UTF-16, and Base64. Plan database columns and API payloads by exact byte length, instantly. Free, no signup.',
   },
   {
@@ -818,7 +818,7 @@ export const tools: ToolMeta[] = [
       'minify json for api',
       'reduce json file size',
     ],
-    titleLongTail: 'JSON Minifier - Compress & Remove Whitespace Free Online',
+    titleLongTail: 'JSON Minifier - Compress & Remove Whitespace Free',
     descriptionLongTail: 'Remove all whitespace to minimize JSON size. Compress JSON for APIs and smaller payloads in one click, instantly and privately. Free, no signup.',
   },
   {
@@ -834,7 +834,7 @@ export const tools: ToolMeta[] = [
       'csv rows to json array',
       'csv to json object keys',
     ],
-    titleLongTail: 'CSV to JSON Converter - Header Row to Keys Free Online',
+    titleLongTail: 'CSV to JSON Converter - Header Row to Keys Free',
     descriptionLongTail: 'Convert CSV data to a JSON array using the header row as object keys. Paste your CSV and get clean JSON instantly for APIs and apps. Free, no signup.',
   },
   {
@@ -850,7 +850,7 @@ export const tools: ToolMeta[] = [
       'json objects to csv rows',
       'export json to csv file',
     ],
-    titleLongTail: 'JSON to CSV Converter - Array of Objects Free Online Tool',
+    titleLongTail: 'JSON to CSV Converter - Array of Objects Free',
     descriptionLongTail: 'Convert a JSON array of objects to CSV format with proper escaping. Export JSON data to CSV for spreadsheets, privately. Free, no signup.',
   },
   {
@@ -866,7 +866,7 @@ export const tools: ToolMeta[] = [
       'generate dummy text',
       'lorem ipsum multiple paragraphs',
     ],
-    titleLongTail: 'Lorem Ipsum Generator - Placeholder Text for Mockups Free',
+    titleLongTail: 'Lorem Ipsum Generator - Placeholder Text for',
     descriptionLongTail: 'Generate placeholder text for mockups and designs. Create one or many Lorem Ipsum paragraphs of dummy text instantly and privately. Free, no signup.',
   },
   {
@@ -882,7 +882,7 @@ export const tools: ToolMeta[] = [
       'random number no repeats',
       'generate many random numbers',
     ],
-    titleLongTail: 'Random Number Generator in Range - Pick Unique Free Tool',
+    titleLongTail: 'Random Number Generator in Range - Pick Unique',
     descriptionLongTail: 'Generate random numbers in any range with optional uniqueness. Pick unique numbers and generate many at once for draws, privately. Free, no signup.',
   },
   {
@@ -898,7 +898,7 @@ export const tools: ToolMeta[] = [
       'escape html for xss prevention',
       'encode html ampersand and brackets',
     ],
-    titleLongTail: 'HTML Escape Tool - Escape Special Characters Free Online',
+    titleLongTail: 'HTML Escape Tool - Escape Special Characters Free',
     descriptionLongTail: 'Escape HTML special characters to prevent XSS attacks. Encode ampersand, brackets, and quotes into entities for safe display. Free, no signup.',
   },
   {
@@ -914,7 +914,7 @@ export const tools: ToolMeta[] = [
       'convert amp lt gt to characters',
       'html entity to text decoder',
     ],
-    titleLongTail: 'HTML Unescape Tool - Decode HTML Entities Free Online',
+    titleLongTail: 'HTML Unescape Tool - Decode HTML Entities Free',
     descriptionLongTail: 'Convert HTML entities back to readable characters. Decode named and numeric entities into plain text instantly and privately. Free, no signup.',
   },
   {
@@ -930,7 +930,7 @@ export const tools: ToolMeta[] = [
       'encode text for url query',
       'uri encoder for spaces and unicode',
     ],
-    titleLongTail: 'URL Encoder - Percent Encoding for URLs Free Online Tool',
+    titleLongTail: 'URL Encoder - Percent Encoding for URLs Free',
     descriptionLongTail: 'Encode text for safe use in URLs. Percent-encode spaces, special characters, and unicode for query strings, instantly and privately. Free, no signup.',
   },
   {
@@ -946,7 +946,7 @@ export const tools: ToolMeta[] = [
       'percent decoder online',
       'uri decoder to readable text',
     ],
-    titleLongTail: 'URL Decoder - Decode Percent-Encoded URLs Free Online',
+    titleLongTail: 'URL Decoder - Decode Percent-Encoded URLs Free',
     descriptionLongTail: 'Decode percent-encoded URLs back to readable text. Convert percent codes into spaces and characters instantly and privately. Free, no signup.',
   },
   {
@@ -967,7 +967,7 @@ export const tools: ToolMeta[] = [
       'slugify text with separator',
       'clean permalink generator',
     ],
-    titleLongTail: 'URL Slug Generator - SEO-Friendly Slugs from Title Free',
+    titleLongTail: 'URL Slug Generator - SEO-Friendly Slugs from',
     descriptionLongTail: 'Convert titles into clean, SEO-friendly URL slugs instantly. Slugify any text with custom separators, lowercase, and transliteration. Free, no signup.',
   },
   {
@@ -988,7 +988,7 @@ export const tools: ToolMeta[] = [
       'nested typescript interface from json',
       'json to typescript type inference',
     ],
-    titleLongTail: 'JSON to TypeScript Interface Generator - Nested Types Free',
+    titleLongTail: 'JSON to TypeScript Interface Generator - Nested',
     descriptionLongTail:
       'Paste any JSON and instantly get clean, nested TypeScript interfaces with proper type inference. Runs fully in your browser. Free, no signup.',
   },
@@ -1010,7 +1010,7 @@ export const tools: ToolMeta[] = [
       'yaml parser to json pretty print',
       'frontmatter yaml to json',
     ],
-    titleLongTail: 'YAML to JSON Converter - Paste YAML Get JSON Free Online',
+    titleLongTail: 'YAML to JSON Converter - Paste YAML Get JSON Free',
     descriptionLongTail:
       'Paste a YAML document and get formatted JSON instantly, with a hand-written parser for nesting, lists, quotes, and comments. Free, no signup.',
   },
@@ -1032,7 +1032,7 @@ export const tools: ToolMeta[] = [
       'sql keyword capitalizer',
       'format mysql postgresql query online',
     ],
-    titleLongTail: 'SQL Formatter & Beautifier - Indent & Capitalize Keywords Free',
+    titleLongTail: 'SQL Formatter & Beautifier - Indent & Capitalize',
     descriptionLongTail:
       'Paste a messy SQL query and get clean formatting with indentation and uppercase keywords. Works for SELECT, JOIN, INSERT, UPDATE. Free, no signup.',
   },
@@ -1054,7 +1054,7 @@ export const tools: ToolMeta[] = [
       'convert jpg to base64 string',
       'base64 image for css background',
     ],
-    titleLongTail: 'Image to Base64 Data URI Converter - PNG, JPG Free Online',
+    titleLongTail: 'Image to Base64 Data URI Converter - PNG, JPG',
     descriptionLongTail:
       'Upload a PNG, JPG, or WebP and get a Base64 data URI to embed in HTML, CSS, or JSON. Your image is read locally and never uploaded. Free, no signup.',
   },
@@ -1084,7 +1084,7 @@ export const tools: ToolMeta[] = [
       'reading time from word count',
       'text statistics for essays',
     ],
-    titleLongTail: 'Word Counter - Words, Characters & Reading Time Free Tool',
+    titleLongTail: 'Word Counter - Words, Characters & Reading Time',
     descriptionLongTail: 'Count words, characters, sentences, and reading time. Get text statistics for essays, articles, and social media, privately. Free, no signup.',
   },
   {
@@ -1100,7 +1100,7 @@ export const tools: ToolMeta[] = [
       'highlight changes between texts',
       'word by word text compare',
     ],
-    titleLongTail: 'Text Diff Checker - Compare Two Texts Online Free Tool',
+    titleLongTail: 'Text Diff Checker - Compare Two Texts Online Free',
     descriptionLongTail: 'Compare two texts and see what changed, word by word. Highlight added and removed lines for editing and proofreading, privately. Free, no signup.',
   },
   {
@@ -1116,7 +1116,7 @@ export const tools: ToolMeta[] = [
       'replace newlines with spaces',
       'single line text converter',
     ],
-    titleLongTail: 'Remove Line Breaks - Join Text Into One Line Free Online',
+    titleLongTail: 'Remove Line Breaks - Join Text Into One Line Free',
     descriptionLongTail: 'Join multi-line text into a single line by removing line breaks. Replace newlines with spaces or nothing instantly, privately. Free, no signup.',
   },
   {
@@ -1132,7 +1132,7 @@ export const tools: ToolMeta[] = [
       'search replace multiple words',
       'replace all occurrences tool',
     ],
-    titleLongTail: 'Find and Replace Text - Bulk Replace Online Free Tool',
+    titleLongTail: 'Find and Replace Text - Bulk Replace Online Free',
     descriptionLongTail: 'Find and replace any text instantly. Bulk replace all occurrences of words or phrases in your text, privately and instantly. Free, no signup.',
   },
   {
@@ -1148,7 +1148,7 @@ export const tools: ToolMeta[] = [
       'text to all capitals',
       'make text uppercase instantly',
     ],
-    titleLongTail: 'Uppercase Converter - Convert Text to ALL CAPS Free Online',
+    titleLongTail: 'Uppercase Converter - Convert Text to ALL CAPS',
     descriptionLongTail: 'Convert any text to ALL UPPERCASE instantly. Turn sentences, words, or paragraphs into all caps in your browser, privately. Free, no signup.',
   },
   {
@@ -1164,7 +1164,7 @@ export const tools: ToolMeta[] = [
       'text to all lower case',
       'make text lowercase instantly',
     ],
-    titleLongTail: 'Lowercase Converter - Convert Text to lowercase Free Online',
+    titleLongTail: 'Lowercase Converter - Convert Text to lowercase',
     descriptionLongTail: 'Convert any text to lowercase instantly. Turn ALL CAPS sentences into small letters right in your browser, privately and instantly. Free, no signup.',
   },
   {
@@ -1180,7 +1180,7 @@ export const tools: ToolMeta[] = [
       'convert text to title case',
       'heading capitalizer tool',
     ],
-    titleLongTail: 'Title Case Converter - Capitalize Each Word Free Online Tool',
+    titleLongTail: 'Title Case Converter - Capitalize Each Word Free',
     descriptionLongTail: 'Capitalize the first letter of each word for titles and headings. Convert text to title case for blog posts, headlines, and essays. Free, no signup.',
   },
   {
@@ -1196,7 +1196,7 @@ export const tools: ToolMeta[] = [
       'convert text to sentence case',
       'auto capitalize sentence starts',
     ],
-    titleLongTail: 'Sentence Case Converter - Capitalize Sentences Free Online',
+    titleLongTail: 'Sentence Case Converter - Capitalize Sentences',
     descriptionLongTail: 'Capitalize the first letter of each sentence automatically. Convert text to sentence case for paragraphs and articles, privately. Free, no signup.',
   },
   {
@@ -1212,7 +1212,7 @@ export const tools: ToolMeta[] = [
       'hyphen slug to title case',
       'url slug to page title',
     ],
-    titleLongTail: 'Slug to Title Converter - URL Slug to Heading Free Tool',
+    titleLongTail: 'Slug to Title Converter - URL Slug to Heading',
     descriptionLongTail: 'Convert URL slugs back to readable titles. Replace hyphens with spaces and title-case the result for page headings, privately. Free, no signup.',
   },
   {
@@ -1228,7 +1228,7 @@ export const tools: ToolMeta[] = [
       'html to text converter',
       'clean text from web page',
     ],
-    titleLongTail: 'HTML Tag Stripper - Remove Tags to Plain Text Free Online',
+    titleLongTail: 'HTML Tag Stripper - Remove Tags to Plain Text',
     descriptionLongTail: 'Remove all HTML tags to get clean readable text. Strip markup from copied web pages and keep only the plain content, privately. Free, no signup.',
   },
   {
@@ -1244,7 +1244,7 @@ export const tools: ToolMeta[] = [
       'count each character occurrences',
       'text character analysis tool',
     ],
-    titleLongTail: 'Character Frequency Counter - Letter Count Free Online',
+    titleLongTail: 'Character Frequency Counter - Letter Count Free',
     descriptionLongTail: 'Count how often each character appears in text. See letter frequency sorted by count for ciphers and analysis, privately. Free, no signup.',
   },
   {
@@ -1260,7 +1260,7 @@ export const tools: ToolMeta[] = [
       'email list extractor online',
       'pull emails remove duplicates',
     ],
-    titleLongTail: 'Email Extractor - Find All Emails in Text Free Online Tool',
+    titleLongTail: 'Email Extractor - Find All Emails in Text Free',
     descriptionLongTail: 'Pull all email addresses out of any text and remove duplicates. Build clean email lists from documents and pages, privately. Free, no signup.',
   },
   {
@@ -1276,7 +1276,7 @@ export const tools: ToolMeta[] = [
       'pull web links out of document',
       'url list extractor online',
     ],
-    titleLongTail: 'URL Extractor - Find All Links in Text Free Online Tool',
+    titleLongTail: 'URL Extractor - Find All Links in Text Free',
     descriptionLongTail: 'Pull all web links out of any text and remove duplicates. Build clean lists of http and https URLs from documents, privately. Free, no signup.',
   },
   {
@@ -1292,7 +1292,7 @@ export const tools: ToolMeta[] = [
       'line numbering for code review',
       'prefix lines with numbers',
     ],
-    titleLongTail: 'Add Line Numbers to Text - Number Each Line Free Online',
+    titleLongTail: 'Add Line Numbers to Text - Number Each Line Free',
     descriptionLongTail: 'Add line numbers to each line of your text. Prefix lines for code review, transcripts, and documents instantly and privately. Free, no signup.',
   },
   {
@@ -1308,7 +1308,7 @@ export const tools: ToolMeta[] = [
       'text lines to list maker',
       'bullet point generator',
     ],
-    titleLongTail: 'Text to List Converter - Add Bullet Points Free Online Tool',
+    titleLongTail: 'Text to List Converter - Add Bullet Points Free',
     descriptionLongTail: 'Add bullet points to each line of text. Convert plain lines into a clean bulleted list for notes and outlines, privately. Free, no signup.',
   },
   {
@@ -1324,7 +1324,7 @@ export const tools: ToolMeta[] = [
       'reverse words in text',
       'flip text for puzzles',
     ],
-    titleLongTail: 'Reverse Text Generator - Backwards Letters Free Online Tool',
+    titleLongTail: 'Reverse Text Generator - Backwards Letters Free',
     descriptionLongTail: 'Reverse any text backwards for puzzles and ciphers. Flip letters, words, or whole sentences instantly and privately. Free, no signup.',
   },
   {
@@ -1340,7 +1340,7 @@ export const tools: ToolMeta[] = [
       'delete duplicate rows in text',
       'unique lines preserve order',
     ],
-    titleLongTail: 'Remove Duplicate Lines - Dedupe List & Keep Order Free',
+    titleLongTail: 'Remove Duplicate Lines - Dedupe List & Keep Order',
     descriptionLongTail: 'Clean up lists by removing duplicate lines while keeping order. Dedupe any list and keep the first occurrence of each line. Free, no signup.',
   },
   {
@@ -1356,7 +1356,7 @@ export const tools: ToolMeta[] = [
       'order text lines a to z',
       'sort list ascending free',
     ],
-    titleLongTail: 'Sort Lines Alphabetically - Order Text A to Z Free Tool',
+    titleLongTail: 'Sort Lines Alphabetically - Order Text A to Z',
     descriptionLongTail: 'Sort any list alphabetically in one click. Order text lines from A to Z, remove empties, and clean up lists instantly and privately. Free, no signup.',
   },
   {
@@ -1372,7 +1372,7 @@ export const tools: ToolMeta[] = [
       'collapse multiple spaces',
       'clean up messy spacing',
     ],
-    titleLongTail: 'Whitespace Remover - Trim & Collapse Spaces Free Online',
+    titleLongTail: 'Whitespace Remover - Trim & Collapse Spaces Free',
     descriptionLongTail: 'Clean up messy spacing in any text. Remove extra spaces, trim leading and trailing whitespace, and collapse gaps, privately. Free, no signup.',
   },
   {
@@ -1393,7 +1393,7 @@ export const tools: ToolMeta[] = [
       'find items in one list not other',
       'deduplicate and diff two text lists',
     ],
-    titleLongTail: 'List Diff & Intersection Checker - Compare Two Lists Free',
+    titleLongTail: 'List Diff & Intersection Checker - Compare Two',
     descriptionLongTail:
       'Paste two lists and instantly see items only in list A, only in list B, in both (intersection), and the union. Handles duplicates. Free, no signup.',
   },
@@ -1412,7 +1412,7 @@ export const tools: ToolMeta[] = [
       'carat to gram converter',
       'metric to imperial mass',
     ],
-    titleLongTail: 'Mass Converter - kg to lbs, Carats & Grains Free Online',
+    titleLongTail: 'Mass Converter - kg to lbs, Carats & Grains Free',
     descriptionLongTail: 'Convert between metric, carats, and grains instantly. Switch kg, g, mg, carats, and grains for jewelry and science, privately. Free, no signup.',
   },
   {
@@ -1428,7 +1428,7 @@ export const tools: ToolMeta[] = [
       'lb ft3 to kg m3 converter',
       'g per liter to kg cubic',
     ],
-    titleLongTail: 'Density Converter - kg/m3 to g/cm3 for Physics Free Tool',
+    titleLongTail: 'Density Converter - kg/m3 to g/cm3 for Physics',
     descriptionLongTail: 'Convert between density units for physics and chemistry. Switch kg/m3, g/cm3, g/L, and lb/ft3 instantly and accurately. Free, no signup.',
   },
   {
@@ -1444,7 +1444,7 @@ export const tools: ToolMeta[] = [
       'watts to kilowatts calculator',
       'btu per hour to watts',
     ],
-    titleLongTail: 'Power Converter - Watts, kW, HP & BTU Free Online Tool',
+    titleLongTail: 'Power Converter - Watts, kW, HP & BTU Free Online',
     descriptionLongTail: 'Convert between watts, kilowatts, horsepower, and BTU instantly. Switch power units for engines and appliances, privately. Free, no signup.',
   },
   {
@@ -1460,7 +1460,7 @@ export const tools: ToolMeta[] = [
       'cfm to cubic meters per hour',
       'flow rate for plumbing hvac',
     ],
-    titleLongTail: 'Flow Rate Converter - L/min, GPM & CFM Free Online Tool',
+    titleLongTail: 'Flow Rate Converter - L/min, GPM & CFM Free',
     descriptionLongTail: 'Convert between L/min, GPM, CFM and more flow units. Switch liters, gallons, and cubic feet for plumbing and HVAC, privately. Free, no signup.',
   },
   {
@@ -1476,7 +1476,7 @@ export const tools: ToolMeta[] = [
       'bits to bytes calculator',
       'tb to gb file size converter',
     ],
-    titleLongTail: 'Data Storage Converter - Bytes, KB, MB, GB, TB Free Tool',
+    titleLongTail: 'Data Storage Converter - Bytes, KB, MB, GB, TB',
     descriptionLongTail: 'Convert between bytes, KB, MB, GB, TB and more instantly. Switch data units for files, drives, and bandwidth, privately. Free, no signup.',
   },
   {
@@ -1492,7 +1492,7 @@ export const tools: ToolMeta[] = [
       'days to weeks calculator',
       'milliseconds to seconds',
     ],
-    titleLongTail: 'Time Converter - Seconds, Minutes, Hours & Days Free Tool',
+    titleLongTail: 'Time Converter - Seconds, Minutes, Hours & Days',
     descriptionLongTail: 'Convert between seconds, minutes, hours, days and more. Switch time units for schedules, durations, and timers, privately. Free, no signup.',
   },
   {
@@ -1508,7 +1508,7 @@ export const tools: ToolMeta[] = [
       'decimal to hexadecimal online',
       'octal to decimal converter',
     ],
-    titleLongTail: 'Number Base Converter - Binary, Hex, Decimal Free Online',
+    titleLongTail: 'Number Base Converter - Binary, Hex, Decimal Free',
     descriptionLongTail: 'Convert between binary, octal, decimal, and hex instantly. Switch number bases for programming and computer science, privately. Free, no signup.',
   },
   {
@@ -1524,7 +1524,7 @@ export const tools: ToolMeta[] = [
       'gradians to degrees online',
       'arcminutes to degrees',
     ],
-    titleLongTail: 'Angle Converter - Degrees, Radians & Gradians Free Online',
+    titleLongTail: 'Angle Converter - Degrees, Radians & Gradians',
     descriptionLongTail: 'Convert between degrees, radians, and gradians instantly. Switch angle units for trigonometry, math, and engineering, privately. Free, no signup.',
   },
   {
@@ -1540,7 +1540,7 @@ export const tools: ToolMeta[] = [
       'km per liter to mpg',
       'fuel consumption unit converter',
     ],
-    titleLongTail: 'Fuel Economy Converter - MPG to L/100km Free Online Tool',
+    titleLongTail: 'Fuel Economy Converter - MPG to L/100km Free',
     descriptionLongTail: 'Convert between MPG and L/100km for car efficiency. Switch US MPG, UK MPG, and km/L to compare fuel economy, privately. Free, no signup.',
   },
   {
@@ -1556,7 +1556,7 @@ export const tools: ToolMeta[] = [
       'atm to psi online',
       'tire pressure unit converter',
     ],
-    titleLongTail: 'Pressure Converter - Bar, PSI, Pascal & atm Free Online',
+    titleLongTail: 'Pressure Converter - Bar, PSI, Pascal & atm Free',
     descriptionLongTail: 'Convert between bar, PSI, pascal, atm and more instantly. Switch pressure units for tires, weather, and engineering, privately. Free, no signup.',
   },
   {
@@ -1572,7 +1572,7 @@ export const tools: ToolMeta[] = [
       'btu to joules online',
       'calorie to kilojoule converter',
     ],
-    titleLongTail: 'Energy Converter - Joules, Calories, kWh & BTU Free Tool',
+    titleLongTail: 'Energy Converter - Joules, Calories, kWh & BTU',
     descriptionLongTail: 'Convert between joules, calories, kWh, and BTU instantly. Switch energy units for food, electricity, and physics, privately. Free, no signup.',
   },
   {
@@ -1588,7 +1588,7 @@ export const tools: ToolMeta[] = [
       'rpm to hz online',
       'khz to mhz frequency',
     ],
-    titleLongTail: 'Frequency Converter - Hz, kHz, MHz & GHz Free Online Tool',
+    titleLongTail: 'Frequency Converter - Hz, kHz, MHz & GHz Free',
     descriptionLongTail: 'Convert between Hz, kHz, MHz, GHz, and RPM instantly. Switch frequency units for electronics, audio, and engineering, privately. Free, no signup.',
   },
   {
@@ -1642,7 +1642,7 @@ export const tools: ToolMeta[] = [
       'how to convert c to f',
       'fahrenheit to celsius formula',
     ],
-    titleLongTail: 'Temperature Converter - Celsius to Fahrenheit in Head',
+    titleLongTail: 'Temperature Converter - Celsius to Fahrenheit in',
     descriptionLongTail: 'Convert Celsius to Fahrenheit with our instant tool. Also handles Fahrenheit to Celsius and Kelvin for science and cooking. Free, no signup.',
   },
   {
@@ -1669,7 +1669,7 @@ export const tools: ToolMeta[] = [
       'knots to mph converter',
       'convert speed for driving abroad',
     ],
-    titleLongTail: 'Speed Converter - mph to km/h & Knots - Free Online Tool',
+    titleLongTail: 'Speed Converter - mph to km/h & Knots',
     descriptionLongTail: 'Convert mph to km/h for driving, or knots to mph for aviation and boating. Accurate speed conversion including m/s and ft/s. Free, no signup.',
   },
   {
@@ -1696,7 +1696,7 @@ export const tools: ToolMeta[] = [
       'acres to hectares converter',
       'land area converter for real estate',
     ],
-    titleLongTail: 'Area Converter - Sq Ft to Acres & Sq M to Sq Ft - Free',
+    titleLongTail: 'Area Converter - Sq Ft to Acres & Sq M to Sq Ft',
     descriptionLongTail: 'Convert square feet to acres for real estate, or square meters to square feet for construction. Accurate land area conversion. Free, no signup.',
   },
   {
@@ -1723,7 +1723,7 @@ export const tools: ToolMeta[] = [
       'tablespoons to ml converter',
       'liters to gallons converter',
     ],
-    titleLongTail: 'Volume Converter - Cups to ml & Cooking Units - Free Tool',
+    titleLongTail: 'Volume Converter - Cups to ml & Cooking Units',
     descriptionLongTail: 'Convert cups to milliliters, tablespoons to grams, and gallons to liters for cooking and baking. US and metric volume conversion. Free, no signup.',
   },
   {
@@ -1750,7 +1750,7 @@ export const tools: ToolMeta[] = [
       'cm to inches conversion',
       'miles to kilometers converter',
     ],
-    titleLongTail: 'Length Converter - Meters to Feet, cm to Inches - Free',
+    titleLongTail: 'Length Converter - Meters to Feet, cm to Inches',
     descriptionLongTail: 'Convert meters to feet, centimeters to inches, and miles to kilometers. Accurate length and distance conversion for any use. Free, no signup.',
   },
 
@@ -1768,7 +1768,7 @@ export const tools: ToolMeta[] = [
       'trapezium area from height',
       'trapezoid calculator with steps',
     ],
-    titleLongTail: 'Trapezoid Area Calculator - Two Parallel Sides Free Tool',
+    titleLongTail: 'Trapezoid Area Calculator - Two Parallel Sides',
     descriptionLongTail: 'Find trapezoid area from two parallel sides and height. Enter base a, base b, and height to get the area with steps, instantly. Free, no signup.',
   },
   {
@@ -1784,7 +1784,7 @@ export const tools: ToolMeta[] = [
       'cube from side length',
       'volume of cube with steps',
     ],
-    titleLongTail: 'Cube Volume & Surface Area Calculator - Free Online Tool',
+    titleLongTail: 'Cube Volume & Surface Area Calculator',
     descriptionLongTail: 'Find cube volume and surface area from a single side length. Get both answers with the formulas shown, instantly and privately. Free, no signup.',
   },
   {
@@ -1800,7 +1800,7 @@ export const tools: ToolMeta[] = [
       'sphere from radius calculator',
       'volume of sphere with steps',
     ],
-    titleLongTail: 'Sphere Volume & Surface Area Calculator - Free Online Tool',
+    titleLongTail: 'Sphere Volume & Surface Area Calculator',
     descriptionLongTail: 'Find sphere volume and surface area from the radius. Get both answers with formulas shown, instantly and privately in your browser. Free, no signup.',
   },
   {
@@ -1816,7 +1816,7 @@ export const tools: ToolMeta[] = [
       'e notation converter',
       'standard form to scientific',
     ],
-    titleLongTail: 'Scientific Notation Converter - Standard & E Form Free Tool',
+    titleLongTail: 'Scientific Notation Converter - Standard & E Form',
     descriptionLongTail: 'Convert numbers to scientific, E-, and engineering notation. Switch between standard form and scientific notation, instantly. Free, no signup.',
   },
   {
@@ -1848,7 +1848,7 @@ export const tools: ToolMeta[] = [
       'prime factors of a number',
       'decompose number into primes',
     ],
-    titleLongTail: 'Prime Factorization Calculator with Steps - Free Online',
+    titleLongTail: 'Prime Factorization Calculator with Steps',
     descriptionLongTail: 'Decompose any number into its prime factors with a step-by-step factor tree. Get the full prime factorization for homework. Free, no signup.',
   },
   {
@@ -1864,7 +1864,7 @@ export const tools: ToolMeta[] = [
       'lottery odds combinations calculator',
       'ncr formula calculator',
     ],
-    titleLongTail: 'Combination Calculator - nCr, n Choose r with Steps Free',
+    titleLongTail: 'Combination Calculator - nCr, n Choose r with',
     descriptionLongTail: 'Calculate combinations (n choose r) for probability and odds. Solve lottery odds and nCr problems with the full formula shown. Free, no signup.',
   },
   {
@@ -1880,7 +1880,7 @@ export const tools: ToolMeta[] = [
       'arrangements where order matters',
       'how many ways to arrange',
     ],
-    titleLongTail: 'Permutation Calculator - nPr, Arrange r from n Free Tool',
+    titleLongTail: 'Permutation Calculator - nPr, Arrange r from n',
     descriptionLongTail: 'Calculate permutations (arrangements where order matters) with the nPr formula. Solve how many ways to arrange items, privately. Free, no signup.',
   },
   {
@@ -1896,7 +1896,7 @@ export const tools: ToolMeta[] = [
       'circle area and circumference',
       'diameter from radius calculator',
     ],
-    titleLongTail: 'Circle Calculator - Area, Circumference & Diameter Free',
+    titleLongTail: 'Circle Calculator - Area, Circumference &',
     descriptionLongTail: 'Find circle area, circumference, and diameter from the radius. Get all three values with formulas shown for math and engineering. Free, no signup.',
   },
   {
@@ -1912,7 +1912,7 @@ export const tools: ToolMeta[] = [
       'solve right triangle area perimeter',
       'hypotenuse from two sides',
     ],
-    titleLongTail: 'Right Triangle Calculator - Hypotenuse & Area Free Tool',
+    titleLongTail: 'Right Triangle Calculator - Hypotenuse & Area',
     descriptionLongTail: 'Solve right triangles for hypotenuse, area, and perimeter with the Pythagorean theorem. Enter two sides to get the solution. Free, no signup.',
   },
   {
@@ -1928,7 +1928,7 @@ export const tools: ToolMeta[] = [
       'rectangle diagonal calculator',
       'square footage from sides',
     ],
-    titleLongTail: 'Rectangle Calculator - Area, Perimeter & Diagonal Free',
+    titleLongTail: 'Rectangle Calculator - Area, Perimeter & Diagonal',
     descriptionLongTail: 'Find rectangle area, perimeter, and diagonal from length and width. Get square footage for flooring and construction, privately. Free, no signup.',
   },
   {
@@ -1944,7 +1944,7 @@ export const tools: ToolMeta[] = [
       'variance and mean calculator',
       'standard deviation of data set',
     ],
-    titleLongTail: 'Standard Deviation Calculator with Steps - Mean & Variance',
+    titleLongTail: 'Standard Deviation Calculator with Steps - Mean &',
     descriptionLongTail: 'Calculate standard deviation, variance, and mean from any list. Switch between population and sample deviation with steps shown. Free, no signup.',
   },
   {
@@ -1960,7 +1960,7 @@ export const tools: ToolMeta[] = [
       'value at percentile calculator',
       'percentile from data points',
     ],
-    titleLongTail: 'Percentile Calculator - Find Any Percentile of Data Free',
+    titleLongTail: 'Percentile Calculator - Find Any Percentile of',
     descriptionLongTail: 'Find the value at any percentile of your data set. Calculate percentile rank for test scores, salaries, and performance metrics. Free, no signup.',
   },
   {
@@ -1976,7 +1976,7 @@ export const tools: ToolMeta[] = [
       'simplify fractions calculator',
       'fractions with exact math',
     ],
-    titleLongTail: 'Fraction Calculator with Steps - Add & Simplify Free Tool',
+    titleLongTail: 'Fraction Calculator with Steps - Add & Simplify',
     descriptionLongTail: 'Add, subtract, multiply, and divide fractions with exact math. Get simplified results and step-by-step working for homework. Free, no signup.',
   },
   {
@@ -1992,7 +1992,7 @@ export const tools: ToolMeta[] = [
       'cross multiply proportion solver',
       'solve proportion a b c d',
     ],
-    titleLongTail: 'Ratio Calculator - Solve Proportions & Find Missing Free',
+    titleLongTail: 'Ratio Calculator - Solve Proportions & Find',
     descriptionLongTail: 'Solve proportions and find missing ratio values with cross multiplication. Find the unknown value in any A:B = C:D ratio instantly. Free, no signup.',
   },
   {
@@ -2008,7 +2008,7 @@ export const tools: ToolMeta[] = [
       'least common multiple calculator',
       'greatest common divisor finder',
     ],
-    titleLongTail: 'LCM & GCD Calculator - LCM of Three Numbers Free Online',
+    titleLongTail: 'LCM & GCD Calculator - LCM of Three Numbers Free',
     descriptionLongTail: 'Find LCM and GCD of any set of numbers. Get the least common multiple and greatest common divisor for fractions and homework. Free, no signup.',
   },
   {
@@ -2035,7 +2035,7 @@ export const tools: ToolMeta[] = [
       'sum min max range calculator',
       'arithmetic mean calculator',
     ],
-    titleLongTail: 'Average Calculator - Mean, Median, Min, Max & Range Free',
+    titleLongTail: 'Average Calculator - Mean, Median, Min, Max &',
     descriptionLongTail: 'Calculate mean, median, sum, min, max, and range of any number list. Get instant statistics by pasting your data. Free, no signup.',
   },
   {
@@ -2062,7 +2062,7 @@ export const tools: ToolMeta[] = [
       'percentage of total calculator',
       'percent change between two numbers',
     ],
-    titleLongTail: 'Percentage Calculator - Increase, Decrease & Of Total',
+    titleLongTail: 'Percentage Calculator - Increase, Decrease & Of',
     descriptionLongTail: 'Find percentage increase or decrease, what is X% of Y, and percent of total. Quick, accurate math for discounts, grades, and tips. Free, no signup.',
   },
 
@@ -2091,7 +2091,7 @@ export const tools: ToolMeta[] = [
       'bmi prime and healthy range',
       'bmi calculator men over 50',
     ],
-    titleLongTail: 'BMI Calculator for Women & Men by Age - Free Online Tool',
+    titleLongTail: 'BMI Calculator for Women & Men by Age',
     descriptionLongTail: 'Calculate BMI by age and gender with a healthy weight range and BMI prime. Works in metric or imperial units, privately. Free, no signup.',
   },
   {
@@ -2107,7 +2107,7 @@ export const tools: ToolMeta[] = [
       'tdee calculator by activity level',
       'how many calories to lose weight',
     ],
-    titleLongTail: 'Calorie Calculator by Goal - Lose or Gain Weight - Free',
+    titleLongTail: 'Calorie Calculator by Goal - Lose or Gain Weight',
     descriptionLongTail: 'Find your daily calories for weight loss or gain by activity level and goal pace. Get your TDEE and a macro starting point instantly. Free, no signup.',
   },
   {
@@ -2128,7 +2128,7 @@ export const tools: ToolMeta[] = [
       'cutting vs bulking calories',
       'bmr times activity factor',
     ],
-    titleLongTail: 'TDEE Calculator - Maintenance, Cut & Bulk Calories Free',
+    titleLongTail: 'TDEE Calculator - Maintenance, Cut & Bulk',
     descriptionLongTail:
       'Calculate Total Daily Energy Expenditure from BMR and activity level. See daily calories to lose fat, maintain, or build muscle. Free, no signup.',
   },
@@ -2145,7 +2145,7 @@ export const tools: ToolMeta[] = [
       'resting calorie burn calculator',
       'bmr by age and gender',
     ],
-    titleLongTail: 'BMR Calculator - Mifflin & Harris-Benedict - Free Tool',
+    titleLongTail: 'BMR Calculator - Mifflin & Harris-Benedict',
     descriptionLongTail: 'Calculate BMR with Mifflin-St Jeor or Harris-Benedict formulas. See calories burned at rest by age, weight, and gender, privately. Free, no signup.',
   },
   {
@@ -2161,7 +2161,7 @@ export const tools: ToolMeta[] = [
       'us navy body fat formula',
       'body fat percentage by measurements',
     ],
-    titleLongTail: 'Body Fat Calculator - US Navy by Measurements - Free Tool',
+    titleLongTail: 'Body Fat Calculator - US Navy by Measurements',
     descriptionLongTail: 'Estimate body fat percentage with the US Navy method using neck, waist, and hip measurements. Compare your result to healthy ranges. Free, no signup.',
   },
   {
@@ -2177,7 +2177,7 @@ export const tools: ToolMeta[] = [
       'protein carb fat ratio calculator',
       'macros by calorie target',
     ],
-    titleLongTail: 'Macro Calculator by Goal - Cut or Bulk - Free Online Tool',
+    titleLongTail: 'Macro Calculator by Goal - Cut or Bulk',
     descriptionLongTail: 'Split daily calories into protein, carbs, and fat by goal - cut, maintain, or bulk. Adjust protein ratio to fit your diet plan. Free, no signup.',
   },
   {
@@ -2193,7 +2193,7 @@ export const tools: ToolMeta[] = [
       'naegele rule due date',
       'conception date from lmp',
     ],
-    titleLongTail: 'Pregnancy Due Date Calculator from Last Period Free Tool',
+    titleLongTail: 'Pregnancy Due Date Calculator from Last Period',
     descriptionLongTail: 'Estimate your due date from your last menstrual period using the Naegele rule. See your pregnancy week by week and conception date. Free, no signup.',
   },
   {
@@ -2225,7 +2225,7 @@ export const tools: ToolMeta[] = [
       'devine robinson hamwi formula',
       'healthy weight range by gender',
     ],
-    titleLongTail: 'Ideal Weight Calculator by Height & Frame - Free Tool',
+    titleLongTail: 'Ideal Weight Calculator by Height & Frame',
     descriptionLongTail: 'Find your ideal body weight by height, gender, and frame size using Devine, Robinson, and Hamwi formulas. Compare all three at once. Free, no signup.',
   },
 
@@ -2248,7 +2248,7 @@ export const tools: ToolMeta[] = [
       'convert svg code to image',
       'rasterize svg 2x 3x scale',
     ],
-    titleLongTail: 'SVG to PNG & WebP Converter - Any Scale, In-Browser',
+    titleLongTail: 'SVG to PNG & WebP Converter - Any Scale,',
     descriptionLongTail:
       'Turn SVG into PNG or WebP at 1x-3x scale in your browser - your graphics never leave the device. Paste code or upload a file. Free, no signup.',
   },
@@ -2270,7 +2270,7 @@ export const tools: ToolMeta[] = [
       'rem to px calculator',
       'css px to rem conversion table',
     ],
-    titleLongTail: 'PX to REM & EM Converter with Custom Root Font Size Free',
+    titleLongTail: 'PX to REM & EM Converter with Custom Root Font',
     descriptionLongTail:
       'Convert pixels to rem and em units using your base font size, with a live conversion table for 8-80px. Two-way px/rem/em conversion. Free, no signup.',
   },
@@ -2292,7 +2292,7 @@ export const tools: ToolMeta[] = [
       'calculate height from width and ratio',
       'video aspect ratio resizer',
     ],
-    titleLongTail: 'Aspect Ratio Calculator - Resize Image & Video Keep Proportion',
+    titleLongTail: 'Aspect Ratio Calculator - Resize Image & Video',
     descriptionLongTail:
       'Enter an aspect ratio and one dimension to get the other, or fit a ratio into a bounding box. Works for 16:9, 4:3, 21:9 and more. Free, no signup.',
   },
@@ -2314,7 +2314,7 @@ export const tools: ToolMeta[] = [
       'hex color contrast checker online',
       'minimum contrast for accessible text',
     ],
-    titleLongTail: 'WCAG Color Contrast Checker - AA & AAA Accessibility Test Free',
+    titleLongTail: 'WCAG Color Contrast Checker - AA & AAA',
     descriptionLongTail:
       'Pick foreground and background colors to see the WCAG contrast ratio and whether it passes AA and AAA for normal and large text. Free, no signup.',
   },
@@ -2331,7 +2331,7 @@ export const tools: ToolMeta[] = [
       'hsl to rgb online',
       'hex color code converter',
     ],
-    titleLongTail: 'Color Converter - HEX, RGB & HSL with Picker Free Online',
+    titleLongTail: 'Color Converter - HEX, RGB & HSL with Picker Free',
     descriptionLongTail: 'Convert between HEX, RGB, and HSL with a visual picker. Get matching color codes for web design and CSS instantly, privately. Free, no signup.',
   },
   {
@@ -2352,7 +2352,7 @@ export const tools: ToolMeta[] = [
       'facebook link preview generator',
       'linkedin share meta tags generator',
     ],
-    titleLongTail: 'Open Graph & Twitter Card Generator with Live Preview Free',
+    titleLongTail: 'Open Graph & Twitter Card Generator with Live',
     descriptionLongTail:
       'Enter title, description, and image URL to generate Open Graph and Twitter Card meta tags with a live social-media preview. Free, no signup.',
   },
@@ -2374,7 +2374,7 @@ export const tools: ToolMeta[] = [
       'neumorphism shadow generator',
       'css multiple box shadow generator',
     ],
-    titleLongTail: 'CSS Box Shadow & Glassmorphism Generator with Live Preview',
+    titleLongTail: 'CSS Box Shadow & Glassmorphism Generator with',
     descriptionLongTail:
       'Adjust box-shadow offset, blur, spread, color and glassmorphism backdrop-blur with a live preview, copy CSS. Runs in your browser. Free, no signup.',
   },
@@ -2396,7 +2396,7 @@ export const tools: ToolMeta[] = [
       'create favicon from png online',
       'favicon maker no upload',
     ],
-    titleLongTail: 'Favicon Generator - 16x16, 32x32 & Apple Touch Icon from Image Free',
+    titleLongTail: 'Favicon Generator - 16x16, 32x32 & Apple Touch',
     descriptionLongTail:
       'Upload a PNG or JPG and crop it into 16x16 and 32x32 favicons plus an Apple Touch Icon - your image never leaves your browser. Free, no signup.',
   },
@@ -2420,7 +2420,7 @@ export const tools: ToolMeta[] = [
       '5 field cron schedule explainer',
       'cron job trigger time preview',
     ],
-    titleLongTail: 'Cron Parser - Cron to English & Next 5 Run Times Free',
+    titleLongTail: 'Cron Parser - Cron to English & Next 5 Run Times',
     descriptionLongTail:
       'Enter a cron expression and read it in plain English with the next 5 trigger times. Supports ranges, lists, steps, and macros. Free, no signup.',
   },
@@ -2475,7 +2475,7 @@ export const tools: ToolMeta[] = [
       'date duration in weeks and months',
       'working days calculator',
     ],
-    titleLongTail: 'Date Difference Calculator - Days & Business Days - Free',
+    titleLongTail: 'Date Difference Calculator - Days & Business Days',
     descriptionLongTail: 'Find days between two dates, plus business days excluding weekends. Perfect for project deadlines, contracts, and lease duration. Free, no signup.',
   },
   {
@@ -2491,7 +2491,7 @@ export const tools: ToolMeta[] = [
       'calculate age gap in years',
       'compare two birth dates age',
     ],
-    titleLongTail: 'Age Difference Calculator - Gap Between Two People Free',
+    titleLongTail: 'Age Difference Calculator - Gap Between Two',
     descriptionLongTail: 'Find the age gap between two people from their birth years. Calculate the difference in years, months, and days instantly. Free, no signup.',
   },
 
@@ -2509,7 +2509,7 @@ export const tools: ToolMeta[] = [
       'letter grade from points',
       'weighted grade calculator',
     ],
-    titleLongTail: 'Grade Calculator - Percentage & Letter from Points Free Tool',
+    titleLongTail: 'Grade Calculator - Percentage & Letter from',
     descriptionLongTail: 'Find your grade percentage and letter from points earned. Convert test scores to a letter grade and track class standing, privately. Free, no signup.',
   },
   {
@@ -2525,7 +2525,7 @@ export const tools: ToolMeta[] = [
       'final grade target calculator',
       'final grade calculator rogerhub',
     ],
-    titleLongTail: 'Final Grade Calculator - Score Needed on Final Exam Free',
+    titleLongTail: 'Final Grade Calculator - Score Needed on Final',
     descriptionLongTail: 'Find the final exam score needed for your target grade. See exactly what you need on the final to keep an A or pass a class. Free, no signup.',
   },
   {
@@ -2552,7 +2552,7 @@ export const tools: ToolMeta[] = [
       'high school gpa calculator',
       'cumulative gpa by course credits',
     ],
-    titleLongTail: 'GPA Calculator - Weighted & 4.0 Scale by Credits - Free',
+    titleLongTail: 'GPA Calculator - Weighted & 4.0 Scale by Credits',
     descriptionLongTail: 'Calculate GPA on a 4.0 scale, weighted by credits. Add courses and letter grades to see cumulative GPA for college or high school. Free, no signup.',
   },
 
@@ -2570,7 +2570,7 @@ export const tools: ToolMeta[] = [
       'password security checklist',
       'password crack time estimator',
     ],
-    titleLongTail: 'Password Strength Checker - Entropy & Crack Time Free Tool',
+    titleLongTail: 'Password Strength Checker - Entropy & Crack Time',
     descriptionLongTail: 'Test your password strength with entropy analysis and a security checklist. See estimated crack time and fix weak passwords. Free, no signup.',
   },
   {
@@ -2597,7 +2597,7 @@ export const tools: ToolMeta[] = [
       'password length 16 generator',
       'create unguessable password',
     ],
-    titleLongTail: 'Strong Password Generator - Random & Secure Free Online',
+    titleLongTail: 'Strong Password Generator - Random & Secure Free',
     descriptionLongTail: 'Create strong, random, secure passwords. Customize length, symbols, numbers, and uppercase, all privately in your browser. Free, no signup.',
   },
 
@@ -2626,7 +2626,7 @@ export const tools: ToolMeta[] = [
       'create wifi qr code',
       'qr code download png svg',
     ],
-    titleLongTail: 'Free QR Code Generator - URL, Text & WiFi to QR Free Tool',
+    titleLongTail: 'Free QR Code Generator - URL, Text & WiFi to QR',
     descriptionLongTail: 'Create custom QR codes for URLs, text, and WiFi with no watermark. Download your QR code as PNG or SVG instantly, privately. Free, no signup.',
   },
 
@@ -2644,7 +2644,7 @@ export const tools: ToolMeta[] = [
       'how many tokens is my prompt',
       'openai api cost calculator per prompt',
     ],
-    titleLongTail: 'GPT-4o & Claude Token Counter - Estimate API Cost Free',
+    titleLongTail: 'GPT-4o & Claude Token Counter - Estimate API Cost',
     descriptionLongTail: 'Paste your prompt and instantly see tokens, words, and API cost for GPT-4o and Claude models. Runs fully in your browser — free, private, no signup.',
   },
   {
@@ -2660,7 +2660,7 @@ export const tools: ToolMeta[] = [
       'wildcard mask calculator online',
       'how many hosts in a /24 subnet',
     ],
-    titleLongTail: 'CIDR Subnet Calculator - Network, Broadcast & Host Range',
+    titleLongTail: 'CIDR Subnet Calculator - Network, Broadcast &',
     descriptionLongTail: 'Enter IPv4 CIDR like 192.168.1.0/24 and get subnet mask, wildcard, network and broadcast addresses plus host range. Free, instant, browser-based.',
   },
   {
@@ -2676,7 +2676,7 @@ export const tools: ToolMeta[] = [
       'linux file permission generator',
       'chmod command builder online',
     ],
-    titleLongTail: 'Chmod Calculator - Convert 755, 644 & rwxr-xr-x Free',
+    titleLongTail: 'Chmod Calculator - Convert 755, 644 & rwxr-xr-x',
     descriptionLongTail: 'Build Linux permissions visually and get the chmod command instantly. Convert octal 755/644 to symbolic rwxr-xr-x and back. Free, no signup.',
   },
   {
@@ -2692,7 +2692,7 @@ export const tools: ToolMeta[] = [
       'create ssh keys without terminal',
       'authorized_keys public key generator',
     ],
-    titleLongTail: 'SSH Key Generator Online - Ed25519 & RSA in Browser',
+    titleLongTail: 'SSH Key Generator Online - Ed25519 & RSA in',
     descriptionLongTail: 'Create Ed25519 or RSA SSH key pairs with Web Crypto — nothing is uploaded. Get an authorized_keys-ready public key and PKCS#8 private key. Free.',
   },
   {
@@ -2708,7 +2708,7 @@ export const tools: ToolMeta[] = [
       'password hashing tool for developers',
       'bcrypt cost factor explained',
     ],
-    titleLongTail: 'Bcrypt Generator Online - Hash & Verify with Salt Rounds',
+    titleLongTail: 'Bcrypt Generator Online - Hash & Verify with Salt',
     descriptionLongTail: 'Create bcrypt hashes with custom cost (4-15 rounds) and verify them in your browser. Includes salted SHA-256/512 options. Free, private, no signup.',
   },
   {
@@ -2724,7 +2724,7 @@ export const tools: ToolMeta[] = [
       'detect browser from user agent',
       'user agent lookup tool',
     ],
-    titleLongTail: 'User Agent Parser Online - Browser, OS & Device Detector',
+    titleLongTail: 'User Agent Parser Online - Browser, OS & Device',
     descriptionLongTail: 'Paste any user-agent string or auto-detect yours to see browser, version, engine, OS, and device type in a clean breakdown. Free, instant, no signup.',
   },
   {
@@ -2740,7 +2740,7 @@ export const tools: ToolMeta[] = [
       'infer schema from json payload',
       'json schema required fields generator',
     ],
-    titleLongTail: 'JSON to JSON Schema Generator - Draft-07 Free Online',
+    titleLongTail: 'JSON to JSON Schema Generator - Draft-07 Free',
     descriptionLongTail: 'Paste JSON and get a Draft-07 schema with types, required fields, nested objects, arrays, and format detection. Free, private, runs in your browser.',
   },
   {
@@ -2756,7 +2756,7 @@ export const tools: ToolMeta[] = [
       'convert variable naming conventions',
       'constant case generator online',
     ],
-    titleLongTail: 'camelCase to snake_case Converter - Code Naming Free',
+    titleLongTail: 'camelCase to snake_case Converter - Code Naming',
     descriptionLongTail: 'Convert between camelCase, PascalCase, snake_case, CONSTANT_CASE, and kebab-case instantly — even for pasted lists of names. Free, no signup.',
   },
   {
@@ -2772,7 +2772,7 @@ export const tools: ToolMeta[] = [
       'nginx websocket proxy config',
       'letsencrypt nginx ssl config template',
     ],
-    titleLongTail: 'Nginx Reverse Proxy Config Generator - SSL Ready Free',
+    titleLongTail: 'Nginx Reverse Proxy Config Generator - SSL Ready',
     descriptionLongTail: 'Answer questions and get a complete nginx server block: proxy headers, SSL redirect, WebSocket upgrade, gzip, and static caching. Free, no signup.',
   },
 
@@ -2822,7 +2822,7 @@ export const tools: ToolMeta[] = [
       'compress image to target size',
       'resize photo without uploading',
     ],
-    titleLongTail: 'Image Resizer Online - Exact Pixels, No Upload, Free',
+    titleLongTail: 'Image Resizer Online - Exact Pixels, No Upload,',
     descriptionLongTail: 'Resize any image to exact width and height with aspect-ratio lock, choose PNG/JPG/WebP output, and see the real file size before you download. Free.',
   },
   {
@@ -2838,7 +2838,7 @@ export const tools: ToolMeta[] = [
       'svg optimizer without upload',
       'clean svg code for web',
     ],
-    titleLongTail: 'SVG Minifier Online - Strip Metadata & Shrink Files',
+    titleLongTail: 'SVG Minifier Online - Strip Metadata & Shrink',
     descriptionLongTail: 'Paste or upload SVG and remove comments, editor metadata, and whitespace in one click. See exact byte savings and copy clean code. Free, private.',
   },
   {
@@ -2854,7 +2854,7 @@ export const tools: ToolMeta[] = [
       'css gradient background generator',
       'copy css gradient code',
     ],
-    titleLongTail: 'CSS Gradient Generator with Live Preview - Free Online',
+    titleLongTail: 'CSS Gradient Generator with Live Preview',
     descriptionLongTail: 'Create beautiful linear, radial, and mesh gradients visually. Adjust color stops and angles, preview live, and copy production-ready CSS. Free.',
   },
   {
@@ -2870,7 +2870,7 @@ export const tools: ToolMeta[] = [
       'responsive font size without media queries',
       'clamp min preferred max calculator',
     ],
-    titleLongTail: 'CSS Clamp() Calculator - Fluid Typography in One Line',
+    titleLongTail: 'CSS Clamp() Calculator - Fluid Typography in One',
     descriptionLongTail: 'Stop writing media queries for font sizes. Enter min/max sizes and viewport range to get a fluid clamp() expression with a preview scale table. Free.',
   },
 
@@ -2888,7 +2888,7 @@ export const tools: ToolMeta[] = [
       'markdown table generator from csv',
       'github readme table generator',
     ],
-    titleLongTail: 'CSV to Markdown Table - GitHub-Ready, Handles Quotes',
+    titleLongTail: 'CSV to Markdown Table - GitHub-Ready, Handles',
     descriptionLongTail: 'Paste CSV or TSV and get a properly escaped, optionally padded Markdown table for GitHub, docs, or wikis. Handles quoted cells. Free, no signup.',
   },
   {
@@ -2904,7 +2904,7 @@ export const tools: ToolMeta[] = [
       'remove special characters from string',
       'clean text for database import',
     ],
-    titleLongTail: 'Text Cleaner Online - Strip Emojis, Accents & Junk Free',
+    titleLongTail: 'Text Cleaner Online - Strip Emojis, Accents &',
     descriptionLongTail: 'Paste messy text and remove emojis, accents, symbols, URLs, and extra spaces with toggles for exactly what to strip. Free, instant, no upload.',
   },
   {
@@ -2936,7 +2936,7 @@ export const tools: ToolMeta[] = [
       'unminify css online free',
       'json pretty print tool',
     ],
-    titleLongTail: 'Code Beautifier Online - Unminify HTML, CSS & JS Free',
+    titleLongTail: 'Code Beautifier Online - Unminify HTML, CSS & JS',
     descriptionLongTail: 'Paste minified code and get clean, properly indented HTML, CSS, JavaScript, or JSON back. Pick your indent size and copy instantly. Free, no signup.',
   },
   {
@@ -2952,7 +2952,7 @@ export const tools: ToolMeta[] = [
       'cryptographically secure token generator',
       'hex secret key generator',
     ],
-    titleLongTail: 'Random API Key Generator - High-Entropy Secrets Free',
+    titleLongTail: 'Random API Key Generator - High-Entropy Secrets',
     descriptionLongTail: 'Create unguessable API keys and secrets with crypto-grade randomness. Choose hex, Base64, or sk_live-style formats and copy in one click. Free.',
   },
 
@@ -2970,7 +2970,7 @@ export const tools: ToolMeta[] = [
       'car loan amortization schedule',
       'how much is my car payment',
     ],
-    titleLongTail: 'Auto Loan Calculator with Trade-In & Tax - Free Online',
+    titleLongTail: 'Auto Loan Calculator with Trade-In & Tax',
     descriptionLongTail: 'Estimate your monthly car payment with down payment, trade-in value, sales tax, and APR. Export the full amortization schedule to CSV. Free.',
   },
   {
@@ -2986,7 +2986,7 @@ export const tools: ToolMeta[] = [
       'how much does ebay take per sale',
       'ebay net profit calculator',
     ],
-    titleLongTail: 'eBay Fee Calculator 2025 - Know Your Net Profit Free',
+    titleLongTail: 'eBay Fee Calculator 2025 - Know Your Net Profit',
     descriptionLongTail: 'Enter your sale price and costs to see exact eBay or Etsy fees, payout, and profit margin. Editable rates keep it accurate. Free, no signup.',
   },
   {
@@ -3002,7 +3002,7 @@ export const tools: ToolMeta[] = [
       'churn rate impact on revenue',
       'cac payback period calculator',
     ],
-    titleLongTail: 'SaaS LTV & Churn Calculator - Free Metrics Tool Online',
+    titleLongTail: 'SaaS LTV & Churn Calculator - Free Metrics Tool',
     descriptionLongTail: 'Enter ARPU, margin, and churn to get customer lifetime, LTV, LTV:CAC ratio, and CAC payback — with formulas explained. Free, no signup.',
   },
   {
@@ -3018,7 +3018,7 @@ export const tools: ToolMeta[] = [
       'print invoice as pdf free',
       'simple invoice template generator',
     ],
-    titleLongTail: 'Free Invoice Generator - Print or Save as PDF, No Signup',
+    titleLongTail: 'Free Invoice Generator - Print or Save as PDF, No',
     descriptionLongTail: 'Fill in client, items, and tax to get a polished invoice with live preview. Print or save as PDF instantly — your data never leaves the browser.',
   },
   {
@@ -3034,7 +3034,7 @@ export const tools: ToolMeta[] = [
       'stripe fee gross up calculator',
       'pass processing fees to customer calculator',
     ],
-    titleLongTail: 'Reverse Stripe Fee Calculator - Gross Up Your Invoice Free',
+    titleLongTail: 'Reverse Stripe Fee Calculator - Gross Up Your',
     descriptionLongTail: 'Want to net exactly $100 after fees? Enter your target and get the amount to charge for Stripe or PayPal, with forward-check mode included. Free.',
   },
 
@@ -3052,7 +3052,7 @@ export const tools: ToolMeta[] = [
       'time difference calculator between cities',
       'best time for meeting across timezones',
     ],
-    titleLongTail: 'Timezone Converter & Meeting Planner - Free Online',
+    titleLongTail: 'Timezone Converter & Meeting Planner',
     descriptionLongTail: 'Pick a time in one zone and instantly see it in up to six others, with UTC offsets and business-hours highlighting for painless scheduling. Free.',
   },
   {
@@ -3068,7 +3068,7 @@ export const tools: ToolMeta[] = [
       'business days between two dates',
       'days since event calculator',
     ],
-    titleLongTail: 'Days Until Calculator - Live Countdown & Business Days',
+    titleLongTail: 'Days Until Calculator - Live Countdown & Business',
     descriptionLongTail: 'Enter any target date for a live countdown in days, hours, minutes, and seconds — plus business days and weeks. Switch to days-between mode. Free.',
   },
   {
@@ -3084,7 +3084,7 @@ export const tools: ToolMeta[] = [
       'reading time estimator for blog posts',
       'words per minute speaking calculator',
     ],
-    titleLongTail: 'Reading & Speaking Time Calculator - WPM Based, Free',
+    titleLongTail: 'Reading & Speaking Time Calculator - WPM Based,',
     descriptionLongTail: 'Paste your article or script to see reading time at multiple speeds and speech duration for presentations. Custom WPM slider included. Free.',
   },
   {
@@ -3100,7 +3100,7 @@ export const tools: ToolMeta[] = [
       'pick random winner from list',
       'random choice generator with animation',
     ],
-    titleLongTail: 'Random Choice Picker - Spin Animation, Unique Winners',
+    titleLongTail: 'Random Choice Picker - Spin Animation, Unique',
     descriptionLongTail: 'Add your options and spin for a truly random pick with crypto-grade randomness. Draw multiple unique winners and track pick history. Free.',
   },
   {
@@ -3116,7 +3116,7 @@ export const tools: ToolMeta[] = [
       'wordle helper green yellow grey',
       'anagram finder for word games',
     ],
-    titleLongTail: 'Wordle Solver Online - Find 5-Letter Words by Clues Free',
+    titleLongTail: 'Wordle Solver Online - Find 5-Letter Words by',
     descriptionLongTail: 'Enter your green, yellow, and grey clues to filter a built-in dictionary of five-letter words. Includes anagram mode for other word games. Free.',
   },
   {
@@ -3132,7 +3132,7 @@ export const tools: ToolMeta[] = [
       'ip quality checker for tiktok',
       'proxy vpn detector online free',
     ],
-    titleLongTail: 'IP Fraud Score Checker - Residential vs Datacenter IP Test',
+    titleLongTail: 'IP Fraud Checker - Residential vs Datacenter',
     descriptionLongTail: 'Instantly check any IP for fraud risk, ASN type, proxy signals, and timezone mismatch. See platform ratings for TikTok, e-commerce, and AI tools. Free.',
   },
 ]
