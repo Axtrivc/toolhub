@@ -244,7 +244,7 @@ export function SvgToImageClient() {
       {downloadUrl && previewUrl && (
         <div className="space-y-3">
           <div className="flex flex-wrap items-center justify-between gap-2">
-            <span className="text-sm font-semibold text-slate-700">
+            <span className="text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>
               Result {dims && <span className="font-normal text-slate-400">({dims.w} × {dims.h}px)</span>}
             </span>
             <a

@@ -38,15 +38,15 @@ export function TemperatureConverterClient() {
 
   return (
     <div className="space-y-6">
-      <div className="grid grid-cols-1 gap-4 rounded-lg bg-slate-50 p-4 sm:grid-cols-3">
+      <div className="grid grid-cols-1 gap-4 rounded-lg p-4 sm:grid-cols-3" style={{ backgroundColor: 'rgb(var(--bg-subtle))' }}>
         <CalculatorField id="value" label="Value" value={value} onChange={setValue} placeholder="25" />
         <div>
-          <label htmlFor="from" className="mb-1.5 block text-sm font-medium text-slate-700">From</label>
+          <label htmlFor="from" className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>From</label>
           <select
             id="from"
             value={from}
             onChange={(e) => setFrom(e.target.value as 'c' | 'f' | 'k')}
-            className="w-full rounded-lg border border-slate-300 bg-white p-3 text-slate-900 shadow-sm outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200"
+            className="w-full rounded-lg border p-3 shadow-sm outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200" style={{ borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rgb(var(--bg-card))', color: 'rgb(var(--text))' }}
           >
             <option value="c">Celsius (°C)</option>
             <option value="f">Fahrenheit (°F)</option>
@@ -54,12 +54,12 @@ export function TemperatureConverterClient() {
           </select>
         </div>
         <div>
-          <label htmlFor="to" className="mb-1.5 block text-sm font-medium text-slate-700">To</label>
+          <label htmlFor="to" className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>To</label>
           <select
             id="to"
             value={to}
             onChange={(e) => setTo(e.target.value as 'c' | 'f' | 'k')}
-            className="w-full rounded-lg border border-slate-300 bg-white p-3 text-slate-900 shadow-sm outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200"
+            className="w-full rounded-lg border p-3 shadow-sm outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200" style={{ borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rgb(var(--bg-card))', color: 'rgb(var(--text))' }}
           >
             <option value="c">Celsius (°C)</option>
             <option value="f">Fahrenheit (°F)</option>

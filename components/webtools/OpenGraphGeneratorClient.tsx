@@ -190,7 +190,7 @@ export function OpenGraphGeneratorClient() {
       {/* 实时预览 */}
       {hasAny && (
         <div>
-          <h3 className="mb-3 text-sm font-semibold text-slate-700">Live Preview</h3>
+          <h3 className="mb-3 text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>Live Preview</h3>
           <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
             {/* 大图卡(Facebook / LinkedIn / 通用 OG) */}
             {v.twitterCard === 'summary_large_image' && (
@@ -266,7 +266,7 @@ export function OpenGraphGeneratorClient() {
       {hasAny && (
         <div>
           <div className="mb-2 flex items-center justify-between">
-            <span className="text-sm font-semibold text-slate-700">Generated Meta Tags</span>
+            <span className="text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>Generated Meta Tags</span>
             <CopyButton value={metaTags} label="Copy" />
           </div>
           <pre

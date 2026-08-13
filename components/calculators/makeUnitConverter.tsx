@@ -116,10 +116,10 @@ export function makeUnitConverter(config: {
       <div className="space-y-6">
         {/* 输入区 + 右上角 Load Sample 按钮 */}
         <div className="flex flex-wrap items-center justify-between gap-3">
-          <span className="text-sm font-semibold text-slate-700">Convert</span>
+          <span className="text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>Convert</span>
           {sample && <LoadSampleButton onLoad={handleLoadSample} />}
         </div>
-        <div className="grid grid-cols-1 gap-4 rounded-lg bg-slate-50 p-4 sm:grid-cols-3">
+        <div className="grid grid-cols-1 gap-4 rounded-lg p-4 sm:grid-cols-3" style={{ backgroundColor: 'rgb(var(--bg-subtle))' }}>
           <CalculatorField
             id="value"
             label="Value"
@@ -128,14 +128,14 @@ export function makeUnitConverter(config: {
             placeholder="1"
           />
           <div>
-            <label htmlFor="from" className="mb-1.5 block text-sm font-medium text-slate-700">
+            <label htmlFor="from" className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
               From
             </label>
             <select
               id="from"
               value={from}
               onChange={(e) => setFrom(e.target.value)}
-              className="w-full rounded-lg border border-slate-300 bg-white p-3 text-slate-900 shadow-sm outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200"
+              className="w-full rounded-lg border p-3 shadow-sm outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200" style={{ borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rgb(var(--bg-card))', color: 'rgb(var(--text))' }}
             >
               {options.map((o) => (
                 <option key={o.value} value={o.value}>
@@ -145,14 +145,14 @@ export function makeUnitConverter(config: {
             </select>
           </div>
           <div>
-            <label htmlFor="to" className="mb-1.5 block text-sm font-medium text-slate-700">
+            <label htmlFor="to" className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
               To
             </label>
             <select
               id="to"
               value={to}
               onChange={(e) => setTo(e.target.value)}
-              className="w-full rounded-lg border border-slate-300 bg-white p-3 text-slate-900 shadow-sm outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200"
+              className="w-full rounded-lg border p-3 shadow-sm outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200" style={{ borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rgb(var(--bg-card))', color: 'rgb(var(--text))' }}
             >
               {options.map((o) => (
                 <option key={o.value} value={o.value}>

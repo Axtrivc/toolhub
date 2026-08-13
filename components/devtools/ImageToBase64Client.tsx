@@ -149,7 +149,7 @@ export function ImageToBase64Client() {
             {/* Data URI */}
             <div>
               <div className="mb-2 flex items-center justify-between">
-                <span className="text-sm font-semibold text-slate-700">Base64 Data URI</span>
+                <span className="text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>Base64 Data URI</span>
                 <CopyButton value={img.dataUrl} label="Copy" />
               </div>
               <pre
@@ -163,7 +163,7 @@ export function ImageToBase64Client() {
             {/* <img> tag */}
             <div>
               <div className="mb-2 flex items-center justify-between">
-                <span className="text-sm font-semibold text-slate-700">&lt;img&gt; tag</span>
+                <span className="text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>&lt;img&gt; tag</span>
                 <CopyButton value={imgTag} label="Copy" />
               </div>
               <pre
@@ -177,7 +177,7 @@ export function ImageToBase64Client() {
             {/* CSS background */}
             <div>
               <div className="mb-2 flex items-center justify-between">
-                <span className="text-sm font-semibold text-slate-700">CSS background-image</span>
+                <span className="text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>CSS background-image</span>
                 <CopyButton value={cssBg} label="Copy" />
               </div>
               <pre

@@ -3358,8 +3358,10 @@ export function getTool(slug: string): ToolMeta | undefined {
 }
 
 /** 获取所有已上线的工具(用于首页、sitemap) */
+let publishedCache: ToolMeta[] | null = null
 export function getPublishedTools(): ToolMeta[] {
-  return tools.filter((t) => t.published)
+  if (!publishedCache) publishedCache = tools.filter((t) => t.published)
+  return publishedCache
 }
 
 /**

@@ -191,8 +191,14 @@ function formatSql(sql: string): string {
       continue
     }
 
-    // 普通标识符:大写关键字、保留大小写的其它标识符
-    const isKeyword = /^[A-Z_]+$/i.test(tok) && tok.length > 1
+    // 普通标识符:仅真正的 SQL 关键字大写，其余标识符(表名/列名)保留原大小写
+    const SQL_KEYWORDS = new Set([
+      'AND','OR','NOT','IN','AS','IS','NULL','LIKE','ASC','DESC','DISTINCT',
+      'CASE','WHEN','THEN','ELSE','END','BETWEEN','EXISTS','ALL','ANY','SOME',
+      'COUNT','SUM','AVG','MIN','MAX','PRIMARY','KEY','FOREIGN','REFERENCES',
+      'TABLE','INDEX','VIEW','UNIQUE','DEFAULT','CONSTRAINT',
+    ])
+    const isKeyword = SQL_KEYWORDS.has(tok.toUpperCase())
     currentLine += (isKeyword ? tok.toUpperCase() : tok) + ' '
   }
   pushLine()
@@ -283,7 +289,7 @@ export function SqlFormatterClient() {
       {result.output && (
         <div>
           <div className="mb-2 flex items-center justify-between">
-            <span className="text-sm font-semibold text-slate-700">{mode === 'format' ? 'Formatted SQL' : 'Minified SQL'}</span>
+            <span className="text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>{mode === 'format' ? 'Formatted SQL' : 'Minified SQL'}</span>
             <CopyButton value={result.output} label="Copy" />
           </div>
           <pre

@@ -89,7 +89,7 @@ export function AspectRatioClient() {
       {/* 已知宽 / 高 */}
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <div className="rounded-lg border p-4" style={{ borderColor: 'rgb(var(--border))' }}>
-          <div className="mb-2 text-sm font-semibold text-slate-700">Width (px)</div>
+          <div className="mb-2 text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>Width (px)</div>
           <input
             type="number"
             value={width}
@@ -103,7 +103,7 @@ export function AspectRatioClient() {
           />
         </div>
         <div className="rounded-lg border p-4" style={{ borderColor: 'rgb(var(--border))' }}>
-          <div className="mb-2 text-sm font-semibold text-slate-700">Height (px)</div>
+          <div className="mb-2 text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>Height (px)</div>
           <input
             type="number"
             value={height}

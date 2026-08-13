@@ -110,32 +110,32 @@ export function TdeeCalculatorClient() {
     <div className="space-y-6">
       {/* 输入区 + Load Sample */}
       <div className="flex flex-wrap items-center justify-between gap-3">
-        <span className="text-sm font-semibold text-slate-700">Your stats</span>
+        <span className="text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>Your stats</span>
         <LoadSampleButton onLoad={handleLoadSample} />
       </div>
-      <div className="grid grid-cols-1 gap-4 rounded-lg bg-slate-50 p-4 sm:grid-cols-3">
+      <div className="grid grid-cols-1 gap-4 rounded-lg p-4 sm:grid-cols-3" style={{ backgroundColor: 'rgb(var(--bg-subtle))' }}>
         <CalculatorField id="weight" label="Weight" value={weight} onChange={setWeight} suffix="kg" placeholder="70" />
         <CalculatorField id="height" label="Height" value={height} onChange={setHeight} suffix="cm" placeholder="175" />
         <CalculatorField id="age" label="Age" value={age} onChange={setAge} suffix="yrs" placeholder="30" />
         <div>
-          <label htmlFor="sex" className="mb-1.5 block text-sm font-medium text-slate-700">Sex</label>
+          <label htmlFor="sex" className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>Sex</label>
           <select
             id="sex"
             value={sex}
             onChange={(e) => setSex(e.target.value as 'male' | 'female')}
-            className="w-full rounded-lg border border-slate-300 bg-white p-3 text-slate-900 shadow-sm outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200"
+            className="w-full rounded-lg border p-3 shadow-sm outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200" style={{ borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rgb(var(--bg-card))', color: 'rgb(var(--text))' }}
           >
             <option value="male">Male</option>
             <option value="female">Female</option>
           </select>
         </div>
         <div className="sm:col-span-2">
-          <label htmlFor="activity" className="mb-1.5 block text-sm font-medium text-slate-700">Activity level</label>
+          <label htmlFor="activity" className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>Activity level</label>
           <select
             id="activity"
             value={activity}
             onChange={(e) => setActivity(e.target.value)}
-            className="w-full rounded-lg border border-slate-300 bg-white p-3 text-slate-900 shadow-sm outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200"
+            className="w-full rounded-lg border p-3 shadow-sm outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200" style={{ borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rgb(var(--bg-card))', color: 'rgb(var(--text))' }}
           >
             {ACTIVITY.map((a) => (
               <option key={a.key} value={a.key}>{a.label}</option>
@@ -154,10 +154,10 @@ export function TdeeCalculatorClient() {
 
           {/* 四档热量目标 + 宏量 */}
           <div>
-            <h3 className="mb-2 text-sm font-semibold text-slate-700">Daily calorie targets & macros</h3>
-            <div className="overflow-x-auto rounded-lg border border-slate-200">
+            <h3 className="mb-2 text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>Daily calorie targets & macros</h3>
+            <div className="overflow-x-auto rounded-lg border" style={{ borderColor: 'rgb(var(--border-strong))' }}>
               <table className="w-full text-left text-sm">
-                <thead className="bg-slate-50 text-xs uppercase text-slate-500">
+                <thead className="text-xs uppercase" style={{ backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text-subtle))' }}>
                   <tr>
                     <th className="px-3 py-2">Goal</th>
                     <th className="px-3 py-2 text-right">Calories</th>
@@ -196,7 +196,7 @@ export function TdeeCalculatorClient() {
           />
         </>
       ) : (
-        <div className="rounded-lg border-2 border-dashed border-slate-200 p-6 text-center text-sm text-slate-400">
+        <div className="rounded-lg border-2 border-dashed p-6 text-center text-sm" style={{ borderColor: 'rgb(var(--border-strong))', color: 'rgb(var(--text-faint))' }}>
           Enter your weight, height, age, and activity level to see your TDEE and calorie targets
         </div>
       )}

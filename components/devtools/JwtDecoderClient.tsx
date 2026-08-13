@@ -148,7 +148,7 @@ export function JwtDecoderClient() {
             {/* Header */}
             <div>
               <div className="mb-2 flex items-center justify-between">
-                <span className="text-sm font-semibold text-slate-700">
+                <span className="text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>
                   Header{' '}
                   <span className="font-normal text-slate-400">
                     ({(result.decoded.header as { alg?: string })?.alg ?? 'alg'})
@@ -164,7 +164,7 @@ export function JwtDecoderClient() {
             {/* Payload */}
             <div>
               <div className="mb-2 flex items-center justify-between">
-                <span className="text-sm font-semibold text-slate-700">Payload</span>
+                <span className="text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>Payload</span>
                 <CopyButton value={payloadStr} label="Copy" />
               </div>
               <pre className="overflow-x-auto rounded-lg border bg-slate-50 p-4 text-xs" style={{ borderColor: 'rgb(var(--border))' }}>
@@ -176,7 +176,7 @@ export function JwtDecoderClient() {
           {/* Signature(原样展示,无法解码) */}
           <div>
             <div className="mb-2 flex items-center justify-between">
-              <span className="text-sm font-semibold text-slate-700">
+              <span className="text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>
                 Signature{' '}
                 <span className="font-normal text-slate-400">(verifying requires the secret/public key)</span>
               </span>

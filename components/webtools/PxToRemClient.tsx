@@ -59,7 +59,7 @@ export function PxToRemClient() {
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         {/* px → rem */}
         <div className="rounded-lg border p-4" style={{ borderColor: 'rgb(var(--border))' }}>
-          <div className="mb-2 text-sm font-semibold text-slate-700">PX → REM / EM</div>
+          <div className="mb-2 text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>PX → REM / EM</div>
           <input
             type="number"
             value={px}
@@ -86,7 +86,7 @@ export function PxToRemClient() {
 
         {/* rem → px */}
         <div className="rounded-lg border p-4" style={{ borderColor: 'rgb(var(--border))' }}>
-          <div className="mb-2 text-sm font-semibold text-slate-700">REM → PX</div>
+          <div className="mb-2 text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>REM → PX</div>
           <input
             type="number"
             value={rem}
@@ -109,7 +109,7 @@ export function PxToRemClient() {
 
       {/* 常用尺寸表 */}
       <div>
-        <h3 className="mb-2 text-sm font-semibold text-slate-700">Common Sizes (root = {rootSize}px)</h3>
+        <h3 className="mb-2 text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>Common Sizes (root = {rootSize}px)</h3>
         <div className="overflow-x-auto rounded-lg border" style={{ borderColor: 'rgb(var(--border))' }}>
           <table className="w-full text-left text-xs">
             <thead style={{ backgroundColor: 'rgb(var(--bg-subtle))' }}>

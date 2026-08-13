@@ -119,6 +119,7 @@ export function SearchPalette({ tools, locale, open, onClose }: SearchPalettePro
   const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'ArrowDown') {
       e.preventDefault()
+      if (results.length === 0) return
       setActiveIndex((i) => Math.min(i + 1, results.length - 1))
     } else if (e.key === 'ArrowUp') {
       e.preventDefault()

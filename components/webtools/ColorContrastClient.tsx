@@ -67,7 +67,7 @@ export function ColorContrastClient() {
       {/* 颜色输入 */}
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <div className="rounded-lg border p-4" style={{ borderColor: 'rgb(var(--border))' }}>
-          <label htmlFor="contrast-fg" className="mb-2 block text-sm font-semibold text-slate-700">
+          <label htmlFor="contrast-fg" className="mb-2 block text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>
             Foreground (text)
           </label>
           <div className="flex items-center gap-3">
@@ -83,7 +83,7 @@ export function ColorContrastClient() {
           </div>
         </div>
         <div className="rounded-lg border p-4" style={{ borderColor: 'rgb(var(--border))' }}>
-          <label htmlFor="contrast-bg" className="mb-2 block text-sm font-semibold text-slate-700">
+          <label htmlFor="contrast-bg" className="mb-2 block text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>
             Background
           </label>
           <div className="flex items-center gap-3">

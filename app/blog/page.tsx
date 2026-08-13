@@ -23,28 +23,28 @@ import { SITE_URL } from '../../next.config'
 const posts: BlogPostMeta[] = [
   {
     slug: 'how-i-built-toolhub',
-    title: 'How I Built ToolHub: A 138-Tool Static PWA That Stays Sub-Second',
+    title: 'How I Built ToolHub: A 169-Tool Static PWA That Stays Sub-Second',
     description:
-      'A no-bullshit architecture retrospective — Next.js static export, lazy Service-Worker caching, 138+ JSON-LD pSEO schemas, and zero-CLS AdSense. The tradeoffs and the numbers.',
+      'A no-bullshit architecture retrospective — Next.js static export, lazy Service-Worker caching, 169+ JSON-LD pSEO schemas, and zero-CLS AdSense. The tradeoffs and the numbers.',
     date: '2026-08-04',
     readTime: '9 min',
     tags: ['architecture', 'seo', 'pwa', 'build-in-public'],
     published: true,
     i18n: {
       zh: {
-        title: '我是如何构建 ToolHub 的:138 个工具的静态 PWA,始终亚秒级',
+        title: '我是如何构建 ToolHub 的:169 个工具的静态 PWA,始终亚秒级',
         description:
-          '一份不掺水的架构复盘 —— Next.js 静态导出、懒加载 Service Worker 缓存、138+ JSON-LD pSEO 结构化数据,以及零 CLS 的 AdSense。讲清取舍与真实数字。',
+          '一份不掺水的架构复盘 —— Next.js 静态导出、懒加载 Service Worker 缓存、169+ JSON-LD pSEO 结构化数据,以及零 CLS 的 AdSense。讲清取舍与真实数字。',
       },
       es: {
-        title: 'Cómo construí ToolHub: una PWA estática de 138 herramientas que sigue siendo sub-segundo',
+        title: 'Cómo construí ToolHub: una PWA estática de 169 herramientas que sigue siendo sub-segundo',
         description:
-          'Una retrospectiva de arquitectura sin rodeos — Next.js estático, caché Service Worker perezosa, 138+ esquemas pSEO JSON-LD y AdSense sin CLS. Los tradeoffs y los números.',
+          'Una retrospectiva de arquitectura sin rodeos — Next.js estático, caché Service Worker perezosa, 169+ esquemas pSEO JSON-LD y AdSense sin CLS. Los tradeoffs y los números.',
       },
       de: {
-        title: 'Wie ich ToolHub baute: Eine statische PWA mit 138 Werkzeugen, die unter einer Sekunde bleibt',
+        title: 'Wie ich ToolHub baute: Eine statische PWA mit 169 Werkzeugen, die unter einer Sekunde bleibt',
         description:
-          'Ein ehrlicher Architektur-Rückblick — Next.js Static Export, Lazy Service-Worker-Cache, 138+ JSON-LD-pSEO-Schemata und Zero-CLS AdSense. Die Tradeoffs und die Zahlen.',
+          'Ein ehrlicher Architektur-Rückblick — Next.js Static Export, Lazy Service-Worker-Cache, 169+ JSON-LD-pSEO-Schemata und Zero-CLS AdSense. Die Tradeoffs und die Zahlen.',
       },
     },
   },

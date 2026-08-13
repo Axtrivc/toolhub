@@ -239,7 +239,7 @@ export function RegexTesterClient() {
       {segments.length > 0 && (
         <div>
           <div className="mb-2 flex items-center justify-between">
-            <span className="text-sm font-semibold text-slate-700">Highlighted Matches</span>
+            <span className="text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>Highlighted Matches</span>
             <CopyButton value={matches.map((m) => m.match).join('\n')} label="Copy Matches" disabled={matches.length === 0} />
           </div>
           <pre
@@ -264,7 +264,7 @@ export function RegexTesterClient() {
       {/* 匹配详情(含 capture groups) */}
       {matches.length > 0 && (
         <div>
-          <h3 className="mb-2 text-sm font-semibold text-slate-700">Match Details &amp; Capture Groups</h3>
+          <h3 className="mb-2 text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>Match Details &amp; Capture Groups</h3>
           <div className="space-y-2">
             {matches.slice(0, 50).map((m, i) => (
               <div key={i} className="rounded-md border p-2 text-xs" style={{ borderColor: 'rgb(var(--border))', backgroundColor: 'rgb(var(--bg-card))' }}>
@@ -290,7 +290,7 @@ export function RegexTesterClient() {
 
       {/* 速查表 */}
       <div>
-        <h3 className="mb-2 text-sm font-semibold text-slate-700">Regex Cheat Sheet</h3>
+        <h3 className="mb-2 text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>Regex Cheat Sheet</h3>
         <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-3">
           {CHEAT_SHEET.map((c) => (
             <div key={c.syntax} className="rounded-md border p-2 text-xs" style={{ borderColor: 'rgb(var(--border))', backgroundColor: 'rgb(var(--bg-card))' }}>

@@ -312,7 +312,7 @@ export function MarkdownToHtmlClient() {
         <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
           <div>
             <div className="mb-2 flex items-center justify-between">
-              <span className="text-sm font-semibold text-slate-700">HTML</span>
+              <span className="text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>HTML</span>
               <CopyButton value={result.output} label="Copy" />
             </div>
             <pre
@@ -323,7 +323,7 @@ export function MarkdownToHtmlClient() {
             </pre>
           </div>
           <div>
-            <span className="mb-2 block text-sm font-semibold text-slate-700">Preview</span>
+            <span className="mb-2 block text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>Preview</span>
             <div
               className="prose-content rounded-lg border p-4 text-sm"
               style={{ borderColor: 'rgb(var(--border))', backgroundColor: 'rgb(var(--bg-card))' }}

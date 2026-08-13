@@ -38,8 +38,8 @@ export function PercentageCalculatorClient() {
     <div className="space-y-8">
       {/* 模式1 */}
       <section>
-        <h2 className="mb-3 text-lg font-semibold text-slate-900">What is X% of Y?</h2>
-        <div className="grid grid-cols-1 gap-4 rounded-lg bg-slate-50 p-4 sm:grid-cols-2">
+        <h2 className="mb-3 text-lg font-semibold" style={{ color: 'rgb(var(--text))' }}>What is X% of Y?</h2>
+        <div className="grid grid-cols-1 gap-4 rounded-lg p-4 sm:grid-cols-2" style={{ backgroundColor: 'rgb(var(--bg-subtle))' }}>
           <CalculatorField id="p1p" label="Percentage (%)" value={p1Percent} onChange={setP1Percent} suffix="%" />
           <CalculatorField id="p1v" label="Of value" value={p1Value} onChange={setP1Value} />
         </div>
@@ -50,8 +50,8 @@ export function PercentageCalculatorClient() {
 
       {/* 模式2 */}
       <section>
-        <h2 className="mb-3 text-lg font-semibold text-slate-900">X is what percent of Y?</h2>
-        <div className="grid grid-cols-1 gap-4 rounded-lg bg-slate-50 p-4 sm:grid-cols-2">
+        <h2 className="mb-3 text-lg font-semibold" style={{ color: 'rgb(var(--text))' }}>X is what percent of Y?</h2>
+        <div className="grid grid-cols-1 gap-4 rounded-lg p-4 sm:grid-cols-2" style={{ backgroundColor: 'rgb(var(--bg-subtle))' }}>
           <CalculatorField id="p2part" label="Part" value={p2Part} onChange={setP2Part} />
           <CalculatorField id="p2whole" label="Whole" value={p2Whole} onChange={setP2Whole} />
         </div>
@@ -62,8 +62,8 @@ export function PercentageCalculatorClient() {
 
       {/* 模式3 */}
       <section>
-        <h2 className="mb-3 text-lg font-semibold text-slate-900">Percentage change from X to Y</h2>
-        <div className="grid grid-cols-1 gap-4 rounded-lg bg-slate-50 p-4 sm:grid-cols-2">
+        <h2 className="mb-3 text-lg font-semibold" style={{ color: 'rgb(var(--text))' }}>Percentage change from X to Y</h2>
+        <div className="grid grid-cols-1 gap-4 rounded-lg p-4 sm:grid-cols-2" style={{ backgroundColor: 'rgb(var(--bg-subtle))' }}>
           <CalculatorField id="p3from" label="From (original)" value={p3From} onChange={setP3From} />
           <CalculatorField id="p3to" label="To (new)" value={p3To} onChange={setP3To} />
         </div>
@@ -79,8 +79,8 @@ export function PercentageCalculatorClient() {
 
       {/* 模式4 */}
       <section>
-        <h2 className="mb-3 text-lg font-semibold text-slate-900">Add or subtract X%</h2>
-        <div className="grid grid-cols-1 gap-4 rounded-lg bg-slate-50 p-4 sm:grid-cols-2">
+        <h2 className="mb-3 text-lg font-semibold" style={{ color: 'rgb(var(--text))' }}>Add or subtract X%</h2>
+        <div className="grid grid-cols-1 gap-4 rounded-lg p-4 sm:grid-cols-2" style={{ backgroundColor: 'rgb(var(--bg-subtle))' }}>
           <CalculatorField id="p4v" label="Value" value={p4Value} onChange={setP4Value} />
           <CalculatorField id="p4p" label="Percentage to add" value={p4Percent} onChange={setP4Percent} suffix="%" />
         </div>

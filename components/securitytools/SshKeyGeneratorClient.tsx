@@ -91,7 +91,7 @@ function downloadTextFile(filename: string, content: string): void {
   document.body.appendChild(a)
   a.click()
   document.body.removeChild(a)
-  URL.revokeObjectURL(url)
+  setTimeout(() => URL.revokeObjectURL(url), 1000)
 }
 
 const MASK = '•'.repeat(48)

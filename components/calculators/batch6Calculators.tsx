@@ -26,6 +26,7 @@ export const SavingsGoalCalculatorClient = makeCalculatorClient({
   compute: (v) => {
     const goal = toNum(v.goal)
     const current = toNum(v.current)
+    if (toNum(v.years) <= 0) return { monthly: '⚠️ Years must be greater than 0', gap: '—', growth: '—' }
     const rate = toNum(v.rate) / 100 / 12
     const months = toNum(v.years) * 12
     const futureCurrent = rate === 0 ? current : current * Math.pow(1 + rate, months)

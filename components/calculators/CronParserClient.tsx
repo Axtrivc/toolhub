@@ -50,7 +50,7 @@ export function CronParserClient() {
     <div className="space-y-5">
       {/* 输入区 */}
       <div>
-        <label htmlFor="cron-input" className="mb-1.5 block text-sm font-medium text-slate-700">
+        <label htmlFor="cron-input" className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
           Cron expression (5 fields: minute hour day-of-month month day-of-week)
         </label>
         <input
@@ -119,7 +119,7 @@ export function CronParserClient() {
 
           {/* 下 5 次触发时间 */}
           <div>
-            <h3 className="mb-2 text-sm font-semibold text-slate-700">Next 5 trigger times (your timezone)</h3>
+            <h3 className="mb-2 text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>Next 5 trigger times (your timezone)</h3>
             <ol className="space-y-2">
               {result.fires.length === 0 && (
                 <li className="text-sm" style={{ color: 'rgb(var(--text-muted))' }}>

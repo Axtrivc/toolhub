@@ -166,7 +166,7 @@ export function SvgMinifierClient() {
     document.body.appendChild(a)
     a.click()
     document.body.removeChild(a)
-    URL.revokeObjectURL(url)
+    setTimeout(() => URL.revokeObjectURL(url), 1000)
   }, [output])
 
   const toggle = useCallback((key: keyof Omit<MinifyOptions, 'decimals'>) => {

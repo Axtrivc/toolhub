@@ -232,8 +232,8 @@ export function CssShadowGeneratorClient() {
             }}
           >
             <div
-              className="flex h-40 w-40 items-center justify-center rounded-2xl text-sm font-semibold text-slate-700"
-              style={previewStyle}
+              className="flex h-40 w-40 items-center justify-center rounded-2xl text-sm font-semibold"
+              style={{ color: 'rgb(var(--text-muted))', ...previewStyle }}
             >
               Preview
             </div>
@@ -244,7 +244,7 @@ export function CssShadowGeneratorClient() {
       {/* 生成的 CSS */}
       <div>
         <div className="mb-2 flex items-center justify-between">
-          <span className="text-sm font-semibold text-slate-700">Generated CSS</span>
+          <span className="text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>Generated CSS</span>
           <CopyButton value={cssCode} label="Copy" />
         </div>
         <pre

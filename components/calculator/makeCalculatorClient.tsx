@@ -150,23 +150,23 @@ export function makeCalculatorClient(config: CalculatorConfig): ComponentType {
       <div className="space-y-6">
         {/* 输入区 + 右上角 Load Sample 按钮 */}
         <div className="flex flex-wrap items-center justify-between gap-3">
-          <span className="text-sm font-semibold text-slate-700">{L('inputs', 'Inputs')}</span>
+          <span className="text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>{L('inputs', 'Inputs')}</span>
           {sample && <LoadSampleButton onLoad={handleLoadSample} />}
         </div>
-        <div className="grid grid-cols-1 gap-4 rounded-lg bg-slate-50 p-4 sm:grid-cols-2">
+        <div className="grid grid-cols-1 gap-4 rounded-lg p-4 sm:grid-cols-2" style={{ backgroundColor: 'rgb(var(--bg-subtle))' }}>
           {config.inputs.map((f) => {
             // select 类型用下拉
             if (f.options && f.options.length > 0) {
               return (
                 <div key={f.key}>
-                  <label htmlFor={f.key} className="mb-1.5 block text-sm font-medium text-slate-700">
+                  <label htmlFor={f.key} className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
                     {inLabel(f.key, f.label)}
                   </label>
                   <select
                     id={f.key}
                     value={values[f.key] ?? ''}
                     onChange={(e) => setValue(f.key, e.target.value)}
-                    className="w-full rounded-lg border border-slate-300 bg-white p-3 text-slate-900 shadow-sm outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200"
+                    className="w-full rounded-lg border p-3 shadow-sm outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200" style={{ borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rgb(var(--bg-card))', color: 'rgb(var(--text))' }}
                   >
                     {f.options.map((opt) => (
                       <option key={opt.value} value={opt.value}>

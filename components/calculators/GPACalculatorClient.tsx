@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useRef } from 'react'
 import { ResultCard, CalculatorNote } from '../calculator/CalculatorField'
 import { fmtNum } from '@/lib/format'
 
@@ -33,17 +33,16 @@ const GRADE_POINTS: Record<string, number> = {
   'F': 0.0,
 }
 
-let nextId = 4
-
 export function GPACalculatorClient() {
   const [courses, setCourses] = useState<Course[]>([
     { id: 1, name: 'Mathematics', credits: '3', grade: 'A' },
     { id: 2, name: 'English', credits: '3', grade: 'B+' },
     { id: 3, name: 'History', credits: '4', grade: 'A-' },
   ])
+  const nextId = useRef(4)
 
   const addCourse = () =>
-    setCourses([...courses, { id: nextId++, name: '', credits: '3', grade: 'A' }])
+    setCourses([...courses, { id: nextId.current++, name: '', credits: '3', grade: 'A' }])
 
   const removeCourse = (id: number) =>
     setCourses(courses.filter((c) => c.id !== id))
@@ -79,13 +78,13 @@ export function GPACalculatorClient() {
         </div>
 
         {courses.map((c) => (
-          <div key={c.id} className="grid grid-cols-12 gap-2 rounded-lg border border-slate-200 bg-white p-2">
+          <div key={c.id} className="grid grid-cols-12 gap-2 rounded-lg border p-2" style={{ borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rgb(var(--bg-card))' }}>
             <input
               type="text"
               value={c.name}
               onChange={(e) => updateCourse(c.id, { name: e.target.value })}
               placeholder="Course name"
-              className="col-span-12 rounded-md border border-slate-300 px-3 py-2.5 text-sm outline-none focus:border-brand-500 sm:col-span-5 sm:px-2 sm:py-1.5"
+              className="col-span-12 rounded-md border px-3 py-2.5 text-sm outline-none focus:border-brand-500 sm:col-span-5 sm:px-2 sm:py-1.5" style={{ borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rgb(var(--bg-card))', color: 'rgb(var(--text))' }}
             />
             <input
               type="number"
@@ -94,13 +93,13 @@ export function GPACalculatorClient() {
               min="0"
               step="0.5"
               aria-label="Credits"
-              className="col-span-5 rounded-md border border-slate-300 px-3 py-2.5 text-sm outline-none focus:border-brand-500 sm:col-span-2 sm:px-2 sm:py-1.5"
+              className="col-span-5 rounded-md border px-3 py-2.5 text-sm outline-none focus:border-brand-500 sm:col-span-2 sm:px-2 sm:py-1.5" style={{ borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rgb(var(--bg-card))', color: 'rgb(var(--text))' }}
             />
             <select
               value={c.grade}
               onChange={(e) => updateCourse(c.id, { grade: e.target.value })}
               aria-label="Grade"
-              className="col-span-7 rounded-md border border-slate-300 bg-white px-3 py-2.5 text-sm outline-none focus:border-brand-500 sm:col-span-3 sm:px-2 sm:py-1.5"
+              className="col-span-7 rounded-md border px-3 py-2.5 text-sm outline-none focus:border-brand-500 sm:col-span-3 sm:px-2 sm:py-1.5" style={{ borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rgb(var(--bg-card))', color: 'rgb(var(--text))' }}
             >
               {Object.keys(GRADE_POINTS).map((g) => (
                 <option key={g} value={g}>

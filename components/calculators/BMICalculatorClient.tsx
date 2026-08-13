@@ -107,7 +107,7 @@ export function BMICalculatorClient() {
       </div>
 
       {/* 输入区 */}
-      <div className="grid grid-cols-1 gap-4 rounded-lg bg-slate-50 p-4 sm:grid-cols-2">
+      <div className="grid grid-cols-1 gap-4 rounded-lg p-4 sm:grid-cols-2" style={{ backgroundColor: 'rgb(var(--bg-subtle))' }}>
         <CalculatorField
           id="height"
           label="Height"
@@ -135,7 +135,7 @@ export function BMICalculatorClient() {
             highlight
             sublabel="Body Mass Index"
           />
-          <div className="rounded-lg border border-slate-200 bg-white p-5 text-center">
+          <div className="rounded-lg border p-5 text-center" style={{ borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rgb(var(--bg-card))' }}>
             <div className="text-xs font-medium uppercase tracking-wide text-slate-500">Category</div>
             <div className={`mt-1.5 text-2xl font-bold sm:text-3xl ${category?.color}`}>
               {category?.label}
@@ -143,11 +143,11 @@ export function BMICalculatorClient() {
             <div className="mt-1 text-xs text-slate-400">{category?.advice}</div>
           </div>
           {healthyLow && healthyHigh && (
-            <div className="rounded-lg border border-slate-200 bg-white p-5 text-center sm:col-span-2">
+            <div className="rounded-lg border p-5 text-center sm:col-span-2" style={{ borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rgb(var(--bg-card))' }}>
               <div className="text-xs font-medium uppercase tracking-wide text-slate-500">
                 Healthy weight range for your height
               </div>
-              <div className="mt-1.5 text-xl font-semibold text-slate-900">
+              <div className="mt-1.5 text-xl font-semibold" style={{ color: 'rgb(var(--text))' }}>
                 {healthyLow.toFixed(1)} – {healthyHigh.toFixed(1)}{' '}
                 {unit === 'metric' ? 'kg' : 'lb'}
               </div>
@@ -155,15 +155,15 @@ export function BMICalculatorClient() {
           )}
         </div>
       ) : (
-        <div className="rounded-lg border-2 border-dashed border-slate-200 p-6 text-center text-sm text-slate-400">
+        <div className="rounded-lg border-2 border-dashed p-6 text-center text-sm" style={{ borderColor: 'rgb(var(--border-strong))', color: 'rgb(var(--text-faint))' }}>
           Enter your height and weight to calculate your BMI
         </div>
       )}
 
       {/* BMI 范围参考表 */}
-      <div className="overflow-x-auto rounded-lg border border-slate-200">
+      <div className="overflow-x-auto rounded-lg border" style={{ borderColor: 'rgb(var(--border-strong))' }}>
         <table className="w-full text-left text-sm">
-          <thead className="bg-slate-50 text-xs uppercase text-slate-500">
+          <thead className="text-xs uppercase" style={{ backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text-subtle))' }}>
             <tr>
               <th className="px-4 py-2">BMI Range</th>
               <th className="px-4 py-2">Category</th>

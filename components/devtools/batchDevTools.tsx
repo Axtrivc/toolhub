@@ -54,17 +54,17 @@ export function RandomNumberGeneratorClient() {
 
   return (
     <div className="space-y-6">
-      <div className="grid grid-cols-1 gap-4 rounded-lg bg-slate-50 p-4 sm:grid-cols-3">
+      <div className="grid grid-cols-1 gap-4 rounded-lg p-4 sm:grid-cols-3" style={{ backgroundColor: 'rgb(var(--bg-subtle))' }}>
         <div>
-          <label className="mb-1.5 block text-sm font-medium text-slate-700">Min</label>
+          <label className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>Min</label>
           <input type="number" value={min} onChange={(e) => setMin(e.target.value)} className="w-full rounded-lg border border-slate-300 p-3 outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200" />
         </div>
         <div>
-          <label className="mb-1.5 block text-sm font-medium text-slate-700">Max</label>
+          <label className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>Max</label>
           <input type="number" value={max} onChange={(e) => setMax(e.target.value)} className="w-full rounded-lg border border-slate-300 p-3 outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200" />
         </div>
         <div>
-          <label className="mb-1.5 block text-sm font-medium text-slate-700">How many</label>
+          <label className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>How many</label>
           <input type="number" value={count} onChange={(e) => setCount(e.target.value)} min="1" className="w-full rounded-lg border border-slate-300 p-3 outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200" />
         </div>
       </div>
@@ -112,7 +112,7 @@ export function PasswordStrengthCheckerClient() {
             <ResultCard label="Entropy" value={`${analysis.entropy} bits`} />
           </div>
           <div className="rounded-lg border border-slate-200 p-4">
-            <h3 className="mb-2 text-sm font-semibold text-slate-700">Checklist</h3>
+            <h3 className="mb-2 text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>Checklist</h3>
             <ul className="space-y-1 text-sm">
               <li className={analysis.hasUpper ? 'text-green-600' : 'text-slate-400'}>{analysis.hasUpper ? '✓' : '✗'} Uppercase letters</li>
               <li className={analysis.hasLower ? 'text-green-600' : 'text-slate-400'}>{analysis.hasLower ? '✓' : '✗'} Lowercase letters</li>

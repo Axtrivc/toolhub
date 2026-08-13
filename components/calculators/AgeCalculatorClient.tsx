@@ -88,9 +88,9 @@ export function AgeCalculatorClient() {
   return (
     <div className="space-y-6">
       {/* 输入区 */}
-      <div className="grid grid-cols-1 gap-4 rounded-lg bg-slate-50 p-4 sm:grid-cols-2">
+      <div className="grid grid-cols-1 gap-4 rounded-lg p-4 sm:grid-cols-2" style={{ backgroundColor: 'rgb(var(--bg-subtle))' }}>
         <div>
-          <label htmlFor="birth" className="mb-1.5 block text-sm font-medium text-slate-700">
+          <label htmlFor="birth" className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
             Date of birth
           </label>
           <input
@@ -99,11 +99,11 @@ export function AgeCalculatorClient() {
             value={birth}
             onChange={(e) => setBirth(e.target.value)}
             max={todayStr || undefined}
-            className="w-full rounded-lg border border-slate-300 p-3 text-slate-900 shadow-sm outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200"
+            className="w-full rounded-lg border p-3 shadow-sm outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200" style={{ borderColor: 'rgb(var(--border-strong))', color: 'rgb(var(--text))' }}
           />
         </div>
         <div>
-          <label htmlFor="target" className="mb-1.5 block text-sm font-medium text-slate-700">
+          <label htmlFor="target" className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
             Age at date
           </label>
           <input
@@ -111,7 +111,7 @@ export function AgeCalculatorClient() {
             type="date"
             value={target}
             onChange={(e) => setTarget(e.target.value)}
-            className="w-full rounded-lg border border-slate-300 p-3 text-slate-900 shadow-sm outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200"
+            className="w-full rounded-lg border p-3 shadow-sm outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200" style={{ borderColor: 'rgb(var(--border-strong))', color: 'rgb(var(--text))' }}
           />
         </div>
       </div>
@@ -151,7 +151,7 @@ export function AgeCalculatorClient() {
           </div>
         </>
       ) : (
-        <div className="rounded-lg border-2 border-dashed border-slate-200 p-6 text-center text-sm text-slate-400">
+        <div className="rounded-lg border-2 border-dashed p-6 text-center text-sm" style={{ borderColor: 'rgb(var(--border-strong))', color: 'rgb(var(--text-faint))' }}>
           The &quot;age at date&quot; must be after the date of birth
         </div>
       )}

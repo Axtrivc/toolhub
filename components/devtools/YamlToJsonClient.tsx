@@ -303,7 +303,7 @@ export function YamlToJsonClient() {
       {result.output && (
         <div>
           <div className="mb-2 flex items-center justify-between">
-            <span className="text-sm font-semibold text-slate-700">JSON Output</span>
+            <span className="text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>JSON Output</span>
             <CopyButton value={result.output} label="Copy" />
           </div>
           <pre

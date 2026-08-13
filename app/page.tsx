@@ -60,8 +60,8 @@ export default function HomePage() {
     window.dispatchEvent(new KeyboardEvent('keydown', { key: 'k', metaKey: true, cancelable: true }))
   }
 
-  // 营销展示用的取整数(向下取整到十位):138 → 130,显示为 "130+"。
-  // 规则:不精确到个位;140+ / 150+ 等按实际数量进位。当前 138 落在 130–139,故 130+。
+  // 营销展示用的取整数(向下取整到十位):169 → 160,显示为 "160+"。
+  // 规则:不精确到个位;140+ / 150+ 等按实际数量进位。当前 169 落在 160–169,故 160+。
   // 仅用于 Hero badge / SEO 文案等营销位置;搜索框、列表计数仍用精确的 tools.length。
   const roundedCount = Math.floor(tools.length / 10) * 10
 
@@ -113,7 +113,7 @@ export default function HomePage() {
             <motion.div variants={heroItemVariants} className="relative">
               <HeroGlow />
               {/* 主标题(SEO 关键 H1,文案与键值保持原样):
-                  "130+ Free Online Tools" 渐变河流(globals.css hero-animated-gradient)
+                  "160+ Free Online Tools" 渐变河流(globals.css hero-animated-gradient)
                   + 副行 "That Just Work" 实色锚点。 */}
               <h1 className="text-5xl font-extrabold tracking-tight sm:text-6xl lg:text-7xl">
                 <span className="hero-animated-gradient bg-clip-text text-transparent">

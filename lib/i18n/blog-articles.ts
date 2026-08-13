@@ -130,7 +130,7 @@ const CODE_AD_EN = `// components/AdPlaceholder.tsx (simplified)
 // ─────────────────────────────────────────────────────────────────────────────
 export const howIBuiltToolHubArticle: LocalizedArticle = {
   en: {
-    lead: 'A no-bullshit retrospective on shipping a Next.js static export of 138 in-browser tools — the architecture, the pSEO engine, the zero-CLS ad story, and what I would do differently.',
+    lead: 'A no-bullshit retrospective on shipping a Next.js static export of 169 in-browser tools — the architecture, the pSEO engine, the zero-CLS ad story, and what I would do differently.',
     sections: [
       {
         heading: '1. The Problem: Modern Web Tools Are Quietly Broken',
@@ -144,7 +144,7 @@ export const howIBuiltToolHubArticle: LocalizedArticle = {
               '**Slow server rendering.** A tool that could be a static HTML file is instead a Node/PHP render that takes 600–1200 ms TTFB on a cold origin, because someone thought every URL needed to be "dynamic".',
             ],
           },
-          'None of this is necessary. A *unit converter* does not need a database. A *JSON formatter* does not need a backend. The honest version of these tools is: one HTML file, one small script, runs in your tab, forgets everything when you close it. ToolHub is my attempt to build the honest version, at scale, across **138 tools**.',
+          'None of this is necessary. A *unit converter* does not need a database. A *JSON formatter* does not need a backend. The honest version of these tools is: one HTML file, one small script, runs in your tab, forgets everything when you close it. ToolHub is my attempt to build the honest version, at scale, across **169 tools**.',
         ],
       },
       {
@@ -163,11 +163,11 @@ export const howIBuiltToolHubArticle: LocalizedArticle = {
           'The SWR handler is a dozen lines:',
           { code: CODE_SW_EN },
           'Two details that matter: (a) the SW explicitly **does not cache cross-origin requests** — AdSense and analytics traffic is passed straight through, so I never accidentally cache ad creatives or break impression counting; (b) the SW bumps a `VERSION` constant on every deploy and pairs it with `skipWaiting()` + old-cache eviction on `activate`, which sidesteps the browser\'s 24-hour `sw.js` max-age and gets new code to users in minutes. The registration side also calls `registration.update()` on every page load.',
-          'The result is "lazy" caching by design: only pages a visitor actually opens get cached. Across 138 tool pages, I do not pre-cache the long tail — that would balloon install time. People get offline access to *the tools they use*, which is the only offline access that means anything.',
+          'The result is "lazy" caching by design: only pages a visitor actually opens get cached. Across 169 tool pages, I do not pre-cache the long tail — that would balloon install time. People get offline access to *the tools they use*, which is the only offline access that means anything.',
         ],
       },
       {
-        heading: '3. The pSEO Engine: 138+ JSON-LD Schemas & an Automated Internal-Link Mesh',
+        heading: '3. The pSEO Engine: 169+ JSON-LD Schemas & an Automated Internal-Link Mesh',
         blocks: [
           'Programmatic SEO (pSEO) gets a bad name because most of it is thin, templated junk. The version that actually works has two halves: **real structured data per page**, and a **real internal-link graph** so crawlers can find and trust all of it.',
           'Every tool is described once in a single source of truth (`lib/tools.ts`) and then generates four JSON-LD blocks automatically:',
@@ -179,8 +179,8 @@ export const howIBuiltToolHubArticle: LocalizedArticle = {
               '`HowTo` — the standard three steps (input → view → copy/export), with a `totalTime` estimate.',
             ],
           },
-          'That\'s **138 pages × 4 schemas = 552+ structured-data blocks**, all generated from one config file. Adding a tool is literally three steps: drop a `page.tsx`, add one entry to `tools.ts`, mark `published: true`. Homepage, sitemap, breadcrumbs, related tools, and all four schemas update themselves.',
-          'The second half is the link mesh. Every tool page ends with a **Related Tools** grid computed by category (same category first, featured pinned, backfilled with site-wide populars to always fill the grid). The homepage groups all 138 tools by category, which builds clean topical silos. Net effect: crawlers reach every tool in ≤ 3 hops, and link equity flows from the high-traffic tools outward to the long tail. This is the boring 80% of pSEO — no AI content, just a real graph.',
+          'That\'s **169 pages × 4 schemas = 676+ structured-data blocks**, all generated from one config file. Adding a tool is literally three steps: drop a `page.tsx`, add one entry to `tools.ts`, mark `published: true`. Homepage, sitemap, breadcrumbs, related tools, and all four schemas update themselves.',
+          'The second half is the link mesh. Every tool page ends with a **Related Tools** grid computed by category (same category first, featured pinned, backfilled with site-wide populars to always fill the grid). The homepage groups all 169 tools by category, which builds clean topical silos. Net effect: crawlers reach every tool in ≤ 3 hops, and link equity flows from the high-traffic tools outward to the long tail. This is the boring 80% of pSEO — no AI content, just a real graph.',
         ],
       },
       {
@@ -210,7 +210,7 @@ export const howIBuiltToolHubArticle: LocalizedArticle = {
           {
             list: [
               '**Canonical English URLs**: The core HTML routes and SEO schema remain clean in English for high-RPM search indexing.',
-              '**Isolated Dictionary Files**: Translations for 138+ tools are split into per-locale modules (`lib/i18n/tools.{zh,es,de}.ts`), mapped by tool `slug`, with English as the base data in `lib/tools.ts`.',
+              '**Isolated Dictionary Files**: Translations for 169+ tools are split into per-locale modules (`lib/i18n/tools.{zh,es,de}.ts`), mapped by tool `slug`, with English as the base data in `lib/tools.ts`.',
               '**Automatic Fallback & Detection**: The app auto-detects `navigator.language` on first visit. If a specific translation key is missing in German or Spanish, it gracefully falls back to English without crashing or leaving blank text.',
             ],
           },
@@ -237,8 +237,8 @@ export const howIBuiltToolHubArticle: LocalizedArticle = {
           {
             list: [
               '**Default to static.** 95% of "tools" have no business being server-rendered. `output: \'export\'` deletes an entire class of latency and ops problems.',
-              '**A Service Worker is a caching layer, not a framework.** Under 200 lines of vanilla JS gave me offline support + SWR across 138 pages. No `workbox`, no abstraction.',
-              '**pSEO is a data model, not a content farm.** One config file → 552+ structured-data blocks + an automatic internal-link mesh. The schema and the visible page share one source of truth, so they can never disagree.',
+              '**A Service Worker is a caching layer, not a framework.** Under 200 lines of vanilla JS gave me offline support + SWR across 169 pages. No `workbox`, no abstraction.',
+              '**pSEO is a data model, not a content farm.** One config file → 676+ structured-data blocks + an automatic internal-link mesh. The schema and the visible page share one source of truth, so they can never disagree.',
               '**Reserve ad space always.** Zero-CLS is not a polish task; it\'s a 1-component architectural decision that pays off in UX, CWV, and ad review.',
               '**Privacy is an architecture, not a promise.** "Your data never leaves the device" is a true statement here only because the tools literally have no backend to send it to.',
             ],
@@ -247,9 +247,9 @@ export const howIBuiltToolHubArticle: LocalizedArticle = {
           'I believe in build-in-public with real numbers, so here is the honest current state instead of a victory lap:',
           {
             list: [
-              '**Tools shipped:** 138 live.',
+              '**Tools shipped:** 169 live.',
               '**Supported locales:** 4 (English, Chinese, Spanish, German).',
-              '**Structured-data blocks:** 552+ (4 per tool).',
+              '**Structured-data blocks:** 676+ (4 per tool).',
               '**Build target:** fully static export; zero origin server.',
             ],
           },
@@ -260,7 +260,7 @@ export const howIBuiltToolHubArticle: LocalizedArticle = {
   },
 
   zh: {
-    lead: '一篇不绕弯子的复盘:用 Next.js 静态导出做出 138 个浏览器内工具 —— 聊架构、pSEO 引擎、零 CLS 的广告方案,以及我会重做的部分。',
+    lead: '一篇不绕弯子的复盘:用 Next.js 静态导出做出 169 个浏览器内工具 —— 聊架构、pSEO 引擎、零 CLS 的广告方案,以及我会重做的部分。',
     sections: [
       {
         heading: '1. 问题:现代在线工具其实都坏得悄无声息',
@@ -274,7 +274,7 @@ export const howIBuiltToolHubArticle: LocalizedArticle = {
               '**服务端渲染慢。** 一个本可以是静态 HTML 文件的工具,非要做成 Node/PHP 渲染,冷启动 TTFB 600–1200 毫秒,因为有人觉得每个 URL 都得"动态"。',
             ],
           },
-          '这些都没必要。一个*单位换算器*不需要数据库。一个 *JSON 格式化器*不需要后端。这些工具诚实的样子是:一个 HTML 文件、一小段脚本、在你的标签页里跑、关掉就忘掉一切。ToolHub 是我尝试在 **138 个工具**的规模上,把这种诚实版本做出来。',
+          '这些都没必要。一个*单位换算器*不需要数据库。一个 *JSON 格式化器*不需要后端。这些工具诚实的样子是:一个 HTML 文件、一小段脚本、在你的标签页里跑、关掉就忘掉一切。ToolHub 是我尝试在 **169 个工具**的规模上,把这种诚实版本做出来。',
         ],
       },
       {
@@ -293,11 +293,11 @@ export const howIBuiltToolHubArticle: LocalizedArticle = {
           'SWR 处理器就十几行:',
           { code: CODE_SW },
           '有两个细节很关键:(a) SW 明确**不缓存跨域请求** —— AdSense 和分析流量直接放行,所以我绝不会误缓存广告素材,也不会破坏曝光计数;(b) SW 每次部署都把 `VERSION` 常量往上推一档,并在 `activate` 阶段配合 `skipWaiting()` + 旧缓存清理,绕过浏览器对 `sw.js` 的 24 小时 max-age,让新代码几分钟内到达用户。注册那一端还在每次页面加载时调 `registration.update()`。',
-          '结果就是"惰性"缓存:只有访客实际打开过的页面才会被缓存。138 个工具页我不会去预缓存长尾 —— 那会让安装时间膨胀。人们获得的是*他们用到的工具*的离线访问,这才是唯一有意义的离线访问。',
+          '结果就是"惰性"缓存:只有访客实际打开过的页面才会被缓存。169 个工具页我不会去预缓存长尾 —— 那会让安装时间膨胀。人们获得的是*他们用到的工具*的离线访问,这才是唯一有意义的离线访问。',
         ],
       },
       {
-        heading: '3. pSEO 引擎:138+ JSON-LD schema + 自动化内链网',
+        heading: '3. pSEO 引擎:169+ JSON-LD schema + 自动化内链网',
         blocks: [
           '程序化 SEO(pSEO)名声不好,因为大部分都是稀薄、模板化的垃圾。真正有效的版本有两半:**每页真实的结构化数据**,以及**真实的内链图谱**,让爬虫能发现并信任这一切。',
           '每个工具在唯一事实源(`lib/tools.ts`)里描述一次,然后自动生成四个 JSON-LD 块:',
@@ -305,12 +305,12 @@ export const howIBuiltToolHubArticle: LocalizedArticle = {
             list: [
               '`WebApplication` + `SoftwareApplication` —— 告诉 Google"这是一个免费的浏览器内应用",带一个价格 0 的 `Offer` 和正确的 `applicationCategory`(Finance / Developer / Health / …)。',
               '`BreadcrumbList` —— 首页 › 分类 › 工具,既渲染为可见的 `<nav>`,也作为机器可读的 schema。',
-              '`FAQPage` —— 从渲染页面上可见 FAQ 的同一份数据文件里取,所以 schema 和可见内容永远对不上(divergence)是不可能的(对不上才会招致人工处罚)。',
+              '`FAQPage` —— 从渲染页面上可见 FAQ 的同一份数据文件里取,所以 schema 和可见内容不可能对不上(divergence 不会发生;只有对不上才会招致人工处罚)。',
               '`HowTo` —— 标准三步(输入 → 查看 → 复制/导出),带一个 `totalTime` 估算。',
             ],
           },
-          '也就是 **138 页 × 4 schema = 552+ 结构化数据块**,全部从一个配置文件生成。加一个工具真的就三步:丢一个 `page.tsx`,在 `tools.ts` 加一条,标 `published: true`。主页、sitemap、面包屑、相关工具、四个 schema 全部自动更新。',
-          '另一半是内链网。每个工具页结尾都有一个按分类计算的**相关工具**网格(同分类优先、置顶工具钉住、用全站热门回填以填满网格)。主页把 138 个工具按分类分组,构建干净的主题簇。净效果:爬虫在 ≤ 3 跳内到达任意工具,链接权重从高流量工具流向长尾。这就是 pSEO 里那无聊的 80% —— 没有 AI 内容,只有一张真实的图。',
+          '也就是 **169 页 × 4 schema = 676+ 结构化数据块**,全部从一个配置文件生成。加一个工具真的就三步:丢一个 `page.tsx`,在 `tools.ts` 加一条,标 `published: true`。主页、sitemap、面包屑、相关工具、四个 schema 全部自动更新。',
+          '另一半是内链网。每个工具页结尾都有一个按分类计算的**相关工具**网格(同分类优先、置顶工具钉住、用全站热门回填以填满网格)。主页把 169 个工具按分类分组,构建干净的主题簇。净效果:爬虫在 ≤ 3 跳内到达任意工具,链接权重从高流量工具流向长尾。这就是 pSEO 里那无聊的 80% —— 没有 AI 内容,只有一张真实的图。',
         ],
       },
       {
@@ -340,7 +340,7 @@ export const howIBuiltToolHubArticle: LocalizedArticle = {
           {
             list: [
               '**Canonical 英文 URL**:核心 HTML 路由和 SEO schema 保持干净的英文,服务高 RPM 的搜索索引。',
-              '**隔离的字典文件**:138+ 个工具的翻译按语言拆成独立模块(`lib/i18n/tools.{zh,es,de}.ts`),按工具 `slug` 映射,英文作为基准数据放在 `lib/tools.ts`。',
+              '**隔离的字典文件**:169+ 个工具的翻译按语言拆成独立模块(`lib/i18n/tools.{zh,es,de}.ts`),按工具 `slug` 映射,英文作为基准数据放在 `lib/tools.ts`。',
               '**自动回退与检测**:首次访问时自动检测 `navigator.language`。如果德语或西语缺某个翻译键,会优雅回退到英文,不会崩溃,也不会留下空白文本。',
             ],
           },
@@ -367,8 +367,8 @@ export const howIBuiltToolHubArticle: LocalizedArticle = {
           {
             list: [
               '**默认走静态。** 95% 的"工具"根本不该是服务端渲染的。`output: \'export\'` 直接删掉一整类延迟和运维问题。',
-              '**Service Worker 是缓存层,不是框架。** 不到 200 行原生 JS 就给了我跨 138 页的离线 + SWR。不用 `workbox`,不做抽象。',
-              '**pSEO 是数据模型,不是内容农场。** 一个配置文件 → 552+ 结构化数据块 + 自动内链网。schema 和可见页共享同一事实源,所以永远对不上。',
+              '**Service Worker 是缓存层,不是框架。** 不到 200 行原生 JS 就给了我跨 169 页的离线 + SWR。不用 `workbox`,不做抽象。',
+              '**pSEO 是数据模型,不是内容农场。** 一个配置文件 → 676+ 结构化数据块 + 自动内链网。schema 和可见页共享同一事实源,所以永远不会产生分歧。',
               '**永远预留广告空间。** 零 CLS 不是打磨任务,而是一个组件级的架构决策,在 UX、CWV、广告审核三处都回报。',
               '**隐私是架构,不是承诺。** "你的数据永不离开设备"在这里是句真话,仅仅是因为这些工具压根没有可发送的后端。',
             ],
@@ -377,9 +377,9 @@ export const howIBuiltToolHubArticle: LocalizedArticle = {
           '我信奉用真实数字 build in public,所以这里是诚实的当前状态,而不是庆功:',
           {
             list: [
-              '**已上线工具:** 138 个。',
+              '**已上线工具:** 169 个。',
               '**支持语言:** 4 种(英语、中文、西班牙语、德语)。',
-              '**结构化数据块:** 552+(每工具 4 个)。',
+              '**结构化数据块:** 676+(每工具 4 个)。',
               '**构建目标:** 完全静态导出;零源站服务器。',
             ],
           },
@@ -390,7 +390,7 @@ export const howIBuiltToolHubArticle: LocalizedArticle = {
   },
 
   es: {
-    lead: 'Una retrospectiva sin rodeos sobre haber publicado una exportación estática de Next.js con 138 herramientas en el navegador — la arquitectura, el motor de pSEO, la historia de anuncios sin CLS y qué haría distinto.',
+    lead: 'Una retrospectiva sin rodeos sobre haber publicado una exportación estática de Next.js con 169 herramientas en el navegador — la arquitectura, el motor de pSEO, la historia de anuncios sin CLS y qué haría distinto.',
     sections: [
       {
         heading: '1. El problema: las herramientas web modernas están rotas en silencio',
@@ -404,7 +404,7 @@ export const howIBuiltToolHubArticle: LocalizedArticle = {
               '**Render lento en servidor.** Una herramienta que podría ser un HTML estático se convierte en un render Node/PHP con 600–1200 ms de TTFB en un origen frío, porque alguien decidió que toda URL tenía que ser "dinámica".',
             ],
           },
-          'Nada de esto es necesario. Un *conversor de unidades* no necesita base de datos. Un *formateador JSON* no necesita backend. La versión honrada de estas herramientas es: un archivo HTML, un script pequeño, se ejecuta en tu pestaña y lo olvida todo al cerrarla. ToolHub es mi intento de construir la versión honrada, a escala, en **138 herramientas**.',
+          'Nada de esto es necesario. Un *conversor de unidades* no necesita base de datos. Un *formateador JSON* no necesita backend. La versión honrada de estas herramientas es: un archivo HTML, un script pequeño, se ejecuta en tu pestaña y lo olvida todo al cerrarla. ToolHub es mi intento de construir la versión honrada, a escala, en **169 herramientas**.',
         ],
       },
       {
@@ -423,11 +423,11 @@ export const howIBuiltToolHubArticle: LocalizedArticle = {
           'El manejador SWR son unas doce líneas:',
           { code: CODE_SW_EN },
           'Dos detalles importantes: (a) el SW **no cachea peticiones cross-origin** — el tráfico de AdSense y analítica pasa directo, así que nunca cacheo creatividades de anuncios ni rompo el conteo de impresiones; (b) el SW sube una constante `VERSION` en cada despliegue y la acompaña con `skipWaiting()` + expulsión de cachés viejas en `activate`, lo que evita el max-age de 24 horas del navegador para `sw.js` y lleva el código nuevo a los usuarios en minutos. El registro además llama `registration.update()` en cada carga de página.',
-          'El resultado es una caché "perezosa" por diseño: solo se cachean las páginas que un visitante abre de verdad. En 138 páginas no pre-cacheo la cola larga — eso inflaría el tiempo de instalación. La gente obtiene acceso offline a *las herramientas que usa*, que es el único acceso offline que importa.',
+          'El resultado es una caché "perezosa" por diseño: solo se cachean las páginas que un visitante abre de verdad. En 169 páginas no pre-cacheo la cola larga — eso inflaría el tiempo de instalación. La gente obtiene acceso offline a *las herramientas que usa*, que es el único acceso offline que importa.',
         ],
       },
       {
-        heading: '3. El motor de pSEO: 138+ schemas JSON-LD y una malla de enlaces internos automatizada',
+        heading: '3. El motor de pSEO: 169+ schemas JSON-LD y una malla de enlaces internos automatizada',
         blocks: [
           'El SEO programático (pSEO) tiene mala fama porque la mayor parte es chatarra fina y plantillada. La versión que funciona de verdad tiene dos mitades: **datos estructurados reales por página** y un **grafo de enlaces internos real**, para que los crawlers encuentren y confíen en todo.',
           'Cada herramienta se describe una vez en una única fuente de verdad (`lib/tools.ts`) y luego genera cuatro bloques JSON-LD automáticamente:',
@@ -439,8 +439,8 @@ export const howIBuiltToolHubArticle: LocalizedArticle = {
               '`HowTo` — los tres pasos estándar (entrada → ver → copiar/exportar), con una estimación de `totalTime`.',
             ],
           },
-          'Eso son **138 páginas × 4 schemas = 552+ bloques de datos estructurados**, todos generados desde un archivo de configuración. Añadir una herramienta son literalmente tres pasos: dejar caer un `page.tsx`, añadir una entrada a `tools.ts`, marcar `published: true`. Homepage, sitemap, migas, herramientas relacionadas y los cuatro schemas se actualizan solos.',
-          'La segunda mitad es la malla de enlaces. Cada página de herramienta termina con una cuadrícula de **Herramientas relacionadas** calculada por categoría (primero la misma categoría, fijadas las destacadas, relleno con populares globales para llenar siempre la cuadrícula). La homepage agrupa las 138 herramientas por categoría, lo que crea silos temáticos limpios. Efecto neto: los crawlers llegan a cualquier herramienta en ≤ 3 saltos, y el valor de los enlaces fluye de las herramientas con mucho tráfico hacia la cola larga. Este es el 80% aburrido del pSEO — nada de contenido con IA, solo un grafo real.',
+          'Eso son **169 páginas × 4 schemas = 676+ bloques de datos estructurados**, todos generados desde un archivo de configuración. Añadir una herramienta son literalmente tres pasos: dejar caer un `page.tsx`, añadir una entrada a `tools.ts`, marcar `published: true`. Homepage, sitemap, migas, herramientas relacionadas y los cuatro schemas se actualizan solos.',
+          'La segunda mitad es la malla de enlaces. Cada página de herramienta termina con una cuadrícula de **Herramientas relacionadas** calculada por categoría (primero la misma categoría, fijadas las destacadas, relleno con populares globales para llenar siempre la cuadrícula). La homepage agrupa las 169 herramientas por categoría, lo que crea silos temáticos limpios. Efecto neto: los crawlers llegan a cualquier herramienta en ≤ 3 saltos, y el valor de los enlaces fluye de las herramientas con mucho tráfico hacia la cola larga. Este es el 80% aburrido del pSEO — nada de contenido con IA, solo un grafo real.',
         ],
       },
       {
@@ -470,7 +470,7 @@ export const howIBuiltToolHubArticle: LocalizedArticle = {
           {
             list: [
               '**URLs canónicas en inglés**: las rutas HTML centrales y el schema SEO se mantienen limpios en inglés para la indexación de búsqueda de alto RPM.',
-              '**Archivos de diccionario aislados**: las traducciones de las 138+ herramientas se dividen en módulos por idioma (`lib/i18n/tools.{zh,es,de}.ts`), mapeados por el `slug` de cada herramienta, con el inglés como datos base en `lib/tools.ts`.',
+              '**Archivos de diccionario aislados**: las traducciones de las 169+ herramientas se dividen en módulos por idioma (`lib/i18n/tools.{zh,es,de}.ts`), mapeados por el `slug` de cada herramienta, con el inglés como datos base en `lib/tools.ts`.',
               '**Detección y fallback automáticos**: la app detecta `navigator.language` en la primera visita. Si falta una clave de traducción en alemán o español, recurre elegantemente al inglés sin romperse ni dejar texto en blanco.',
             ],
           },
@@ -497,8 +497,8 @@ export const howIBuiltToolHubArticle: LocalizedArticle = {
           {
             list: [
               '**Por defecto, estático.** El 95% de las "herramientas" no tienen nada que hacer renderizadas en servidor. `output: \'export\'` elimina toda una clase de problemas de latencia y ops.',
-              '**Un Service Worker es una capa de caché, no un framework.** Menos de 200 líneas de JS plano me dieron offline + SWR en 138 páginas. Sin `workbox`, sin abstracción.',
-              '**pSEO es un modelo de datos, no una granja de contenido.** Un archivo de configuración → 552+ bloques estructurados + una malla de enlaces internos automática. El schema y la página visible comparten una sola fuente de verdad, así nunca pueden discrepar.',
+              '**Un Service Worker es una capa de caché, no un framework.** Menos de 200 líneas de JS plano me dieron offline + SWR en 169 páginas. Sin `workbox`, sin abstracción.',
+              '**pSEO es un modelo de datos, no una granja de contenido.** Un archivo de configuración → 676+ bloques estructurados + una malla de enlaces internos automática. El schema y la página visible comparten una sola fuente de verdad, así nunca pueden discrepar.',
               '**Reserva siempre el espacio de anuncios.** Cero CLS no es tarea de pulido; es una decisión arquitectónica de un componente que se paga en UX, CWV y revisión de anuncios.',
               '**La privacidad es una arquitectura, no una promesa.** "Tus datos nunca salen del dispositivo" es cierto aquí solo porque las herramientas literalmente no tienen backend al que enviarlos.',
             ],
@@ -507,9 +507,9 @@ export const howIBuiltToolHubArticle: LocalizedArticle = {
           'Creo en el build-in-public con números reales, así que aquí está el estado actual honrado, en vez de una vuelta de victoria:',
           {
             list: [
-              '**Herramientas publicadas:** 138 activas.',
+              '**Herramientas publicadas:** 169 activas.',
               '**Idiomas soportados:** 4 (inglés, chino, español, alemán).',
-              '**Bloques de datos estructurados:** 552+ (4 por herramienta).',
+              '**Bloques de datos estructurados:** 676+ (4 por herramienta).',
               '**Objetivo de build:** exportación totalmente estática; cero servidor de origen.',
             ],
           },
@@ -520,7 +520,7 @@ export const howIBuiltToolHubArticle: LocalizedArticle = {
   },
 
   de: {
-    lead: 'Ein ungeschönter Rückblick darauf, wie ich einen statischen Next.js-Export mit 138 In-Browser-Werkzeugen veröffentlicht habe — Architektur, die pSEO-Engine, die Zero-CLS-Werbegeschichte und was ich anders machen würde.',
+    lead: 'Ein ungeschönter Rückblick darauf, wie ich einen statischen Next.js-Export mit 169 In-Browser-Werkzeugen veröffentlicht habe — Architektur, die pSEO-Engine, die Zero-CLS-Werbegeschichte und was ich anders machen würde.',
     sections: [
       {
         heading: '1. Das Problem: Moderne Web-Werkzeuge sind leise kaputt',
@@ -534,7 +534,7 @@ export const howIBuiltToolHubArticle: LocalizedArticle = {
               '**Langsames Server-Rendering.** Ein Werkzeug, das eine statische HTML-Datei sein könnte, ist stattdessen ein Node/PHP-Render mit 600–1200 ms TTFB an einem kalten Origin, weil jemand meinte, jede URL müsse „dynamisch" sein.',
             ],
           },
-          'Nichts davon ist nötig. Ein *Einheiten-Umrechner* braucht keine Datenbank. Ein *JSON-Formatter* braucht kein Backend. Die ehrliche Version dieser Werkzeuge ist: eine HTML-Datei, ein kleines Script, läuft in deinem Tab, vergisst alles beim Schließen. ToolHub ist mein Versuch, die ehrliche Version zu bauen — skaliert, über **138 Werkzeuge**.',
+          'Nichts davon ist nötig. Ein *Einheiten-Umrechner* braucht keine Datenbank. Ein *JSON-Formatter* braucht kein Backend. Die ehrliche Version dieser Werkzeuge ist: eine HTML-Datei, ein kleines Script, läuft in deinem Tab, vergisst alles beim Schließen. ToolHub ist mein Versuch, die ehrliche Version zu bauen — skaliert, über **169 Werkzeuge**.',
         ],
       },
       {
@@ -553,11 +553,11 @@ export const howIBuiltToolHubArticle: LocalizedArticle = {
           'Der SWR-Handler ist ein Dutzend Zeilen:',
           { code: CODE_SW_EN },
           'Zwei Details zählen: (a) der SW **cacht explizit keine Cross-Origin-Requests** — AdSense- und Analytics-Traffic wird direkt durchgereicht, sodass ich nie versehentlich Ad-Creatives cache oder Impression-Zählungen kaputt mache; (b) der SW bumpht bei jedem Deploy eine `VERSION`-Konstante und kombiniert sie mit `skipWaiting()` + Alt-Cache-Räumung bei `activate`, was die 24-Stunden-Max-Age des Browsers für `sw.js` umgeht und neuen Code in Minuten zu den Nutzern bringt. Die Registrierungsseite ruft außerdem bei jedem Page-Load `registration.update()` auf.',
-          'Das Ergebnis ist „träges" Caching by Design: nur Seiten, die ein Besucher wirklich öffnet, werden gecacht. Über 138 Werkzeugseiten hinweg pre-cache ich den Long Tail nicht — das würde die Installationszeit aufblähen. Leute bekommen Offline-Zugriff auf *die Werkzeuge, die sie nutzen*, und das ist der einzige Offline-Zugriff, der zählt.',
+          'Das Ergebnis ist „träges" Caching by Design: nur Seiten, die ein Besucher wirklich öffnet, werden gecacht. Über 169 Werkzeugseiten hinweg pre-cache ich den Long Tail nicht — das würde die Installationszeit aufblähen. Leute bekommen Offline-Zugriff auf *die Werkzeuge, die sie nutzen*, und das ist der einzige Offline-Zugriff, der zählt.',
         ],
       },
       {
-        heading: '3. Die pSEO-Engine: 138+ JSON-LD-Schemas & ein automatisiertes Internal-Link-Mesh',
+        heading: '3. Die pSEO-Engine: 169+ JSON-LD-Schemas & ein automatisiertes Internal-Link-Mesh',
         blocks: [
           'Programmatic SEO (pSEO) hat einen schlechten Ruf, weil das meiste dünne, templatisierte Schrott ist. Die Version, die wirklich funktioniert, hat zwei Hälften: **echte strukturierte Daten pro Seite** und ein **echter Internal-Link-Graph**, damit Crawler all das finden und vertrauen.',
           'Jedes Werkzeug wird einmal in einer einzigen Source of Truth (`lib/tools.ts`) beschrieben und generiert dann automatisch vier JSON-LD-Blöcke:',
@@ -569,8 +569,8 @@ export const howIBuiltToolHubArticle: LocalizedArticle = {
               '`HowTo` — die drei Standardschritte (Eingabe → Ansehen → Kopieren/Exportieren), mit einer `totalTime`-Schätzung.',
             ],
           },
-          'Das sind **138 Seiten × 4 Schemas = 552+ strukturierte Datenblöcke**, alle aus einer Config-Datei generiert. Ein Werkzeug hinzuzufügen ist buchstäblich in drei Schritten erledigt: ein `page.tsx` ablegen, einen Eintrag in `tools.ts` ergänzen, `published: true` setzen. Homepage, Sitemap, Breadcrumbs, verwandte Werkzeuge und alle vier Schemas aktualisieren sich selbst.',
-          'Die zweite Hälfte ist das Link-Mesh. Jede Werkzeugseite endet mit einem **Verwandte Werkzeuge**-Grid, das nach Kategorie berechnet wird (gleiche Kategorie zuerst, Featured angepinnt, mit seitenweiten Popularen aufgefüllt, damit das Grid immer voll ist). Die Homepage gruppiert alle 138 Werkzeuge nach Kategorie und baut so saubere Topical Silos. Nettoeffekt: Crawler erreichen jedes Werkzeug in ≤ 3 Hops, und Link-Equity fließt von den Werkzeugen mit hohem Traffic in den Long Tail. Das sind die langweiligen 80% des pSEO — kein AI-Content, nur ein echter Graph.',
+          'Das sind **169 Seiten × 4 Schemas = 676+ strukturierte Datenblöcke**, alle aus einer Config-Datei generiert. Ein Werkzeug hinzuzufügen ist buchstäblich in drei Schritten erledigt: ein `page.tsx` ablegen, einen Eintrag in `tools.ts` ergänzen, `published: true` setzen. Homepage, Sitemap, Breadcrumbs, verwandte Werkzeuge und alle vier Schemas aktualisieren sich selbst.',
+          'Die zweite Hälfte ist das Link-Mesh. Jede Werkzeugseite endet mit einem **Verwandte Werkzeuge**-Grid, das nach Kategorie berechnet wird (gleiche Kategorie zuerst, Featured angepinnt, mit seitenweiten Popularen aufgefüllt, damit das Grid immer voll ist). Die Homepage gruppiert alle 169 Werkzeuge nach Kategorie und baut so saubere Topical Silos. Nettoeffekt: Crawler erreichen jedes Werkzeug in ≤ 3 Hops, und Link-Equity fließt von den Werkzeugen mit hohem Traffic in den Long Tail. Das sind die langweiligen 80% des pSEO — kein AI-Content, nur ein echter Graph.',
         ],
       },
       {
@@ -600,7 +600,7 @@ export const howIBuiltToolHubArticle: LocalizedArticle = {
           {
             list: [
               '**Kanonische englische URLs**: Die zentralen HTML-Routen und das SEO-Schema bleiben sauber auf Englisch für die Suchindexierung mit hohem RPM.',
-              '**Isolierte Wörterbuch-Dateien**: Übersetzungen für 138+ Werkzeuge sind in Module pro Sprache aufgeteilt (`lib/i18n/tools.{zh,es,de}.ts`), gemappt über den `slug` des Werkzeugs, mit Englisch als Basisdaten in `lib/tools.ts`.',
+              '**Isolierte Wörterbuch-Dateien**: Übersetzungen für 169+ Werkzeuge sind in Module pro Sprache aufgeteilt (`lib/i18n/tools.{zh,es,de}.ts`), gemappt über den `slug` des Werkzeugs, mit Englisch als Basisdaten in `lib/tools.ts`.',
               '**Automatische Erkennung & Fallbacks**: Die App erkennt beim ersten Besuch `navigator.language`. Fehlt ein Übersetzungsschlüssel auf Deutsch oder Spanisch, fällt sie sauber auf Englisch zurück — ohne Absturz und ohne leere Texte.',
             ],
           },
@@ -627,8 +627,8 @@ export const howIBuiltToolHubArticle: LocalizedArticle = {
           {
             list: [
               '**Standardmäßig statisch.** 95% der „Werkzeuge" haben nichts als Server-Render gesucht. `output: \'export\'` löscht eine ganze Klasse von Latenz- und Ops-Problemen.',
-              '**Ein Service Worker ist eine Caching-Schicht, kein Framework.** Unter 200 Zeilen Vanilla-JS haben mir Offline-Support + SWR über 138 Seiten gegeben. Kein `workbox`, keine Abstraktion.',
-              '**pSEO ist ein Datenmodell, keine Content-Farm.** Eine Config-Datei → 552+ strukturierte Datenblöcke + ein automatisches Internal-Link-Mesh. Schema und sichtbare Seite teilen sich eine Source of Truth, also können sie nie uneinig sein.',
+              '**Ein Service Worker ist eine Caching-Schicht, kein Framework.** Unter 200 Zeilen Vanilla-JS haben mir Offline-Support + SWR über 169 Seiten gegeben. Kein `workbox`, keine Abstraktion.',
+              '**pSEO ist ein Datenmodell, keine Content-Farm.** Eine Config-Datei → 676+ strukturierte Datenblöcke + ein automatisches Internal-Link-Mesh. Schema und sichtbare Seite teilen sich eine Source of Truth, also können sie nie uneinig sein.',
               '**Reserviere Ad-Space immer.** Zero-CLS ist keine Polier-Aufgabe; es ist eine 1-Komponenten-Architekturentscheidung, die sich in UX, CWV und Ad-Review auszahlt.',
               '**Datenschutz ist Architektur, kein Versprechen.** „Deine Daten verlassen nie das Gerät" stimmt hier nur, weil die Werkzeuge buchstäblich kein Backend haben, an das sie etwas senden könnten.',
             ],
@@ -637,9 +637,9 @@ export const howIBuiltToolHubArticle: LocalizedArticle = {
           'Ich glaube an Build-in-Public mit echten Zahlen, also hier der ehrliche aktuelle Stand statt einer Siegesrunde:',
           {
             list: [
-              '**Ausgelieferte Werkzeuge:** 138 live.',
+              '**Ausgelieferte Werkzeuge:** 169 live.',
               '**Unterstützte Sprachen:** 4 (Englisch, Chinesisch, Spanisch, Deutsch).',
-              '**Strukturierte-Daten-Blöcke:** 552+ (4 pro Werkzeug).',
+              '**Strukturierte-Daten-Blöcke:** 676+ (4 pro Werkzeug).',
               '**Build-Ziel:** vollständiger statischer Export; null Origin-Server.',
             ],
           },

@@ -2,7 +2,7 @@
  * Werkzeuge — deutsche Übersetzungen (de)
  *
  * Struktur: Record<slug, { name, shortIntro }>
- * - Die slugs entsprechen 1:1 lib/tools.ts (138 Werkzeuge).
+ * - Die slugs entsprechen 1:1 lib/tools.ts (169 Werkzeuge).
  * - Fehlt ein slug, wird auf den englischen Originalwert zurückgegriffen
  *   (siehe lib/i18n.ts getToolName/getToolShortIntro).
  * - Übersetzt werden nur name + shortIntro der Karten;

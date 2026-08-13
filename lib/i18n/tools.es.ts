@@ -2,7 +2,7 @@
  * Herramientas — traducciones al español (es)
  *
  * Estructura: Record<slug, { name, shortIntro }>
- * - Los slug coinciden 1:1 con lib/tools.ts (138 herramientas).
+ * - Los slug coinciden 1:1 con lib/tools.ts (169 herramientas).
  * - Cualquier slug ausente revierte al valor inglés original
  *   (ver lib/i18n.ts getToolName/getToolShortIntro).
  * - Solo se traducen el name + shortIntro de las tarjetas;

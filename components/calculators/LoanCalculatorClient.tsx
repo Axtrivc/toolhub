@@ -140,10 +140,10 @@ export function LoanCalculatorClient() {
     <div className="space-y-6">
       {/* 输入区 + 右上角 Load Sample 按钮 */}
       <div className="flex flex-wrap items-center justify-between gap-3">
-        <span className="text-sm font-semibold text-slate-700">{L('inputs', 'Inputs')}</span>
+        <span className="text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>{L('inputs', 'Inputs')}</span>
         <LoadSampleButton onLoad={handleLoadSample} />
       </div>
-      <div className="grid grid-cols-1 gap-4 rounded-lg bg-slate-50 p-4 sm:grid-cols-3">
+      <div className="grid grid-cols-1 gap-4 rounded-lg p-4 sm:grid-cols-3" style={{ backgroundColor: 'rgb(var(--bg-subtle))' }}>
         <CalculatorField
           id="amount"
           label={L('loanAmount', 'Loan amount')}
@@ -193,12 +193,12 @@ export function LoanCalculatorClient() {
 
           {/* 还款明细表(前 12 期) */}
           <div>
-            <h3 className="mb-2 text-sm font-semibold text-slate-700">
+            <h3 className="mb-2 text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>
               {L('amortTitle', 'Amortization schedule (first 12 months)')}
             </h3>
-            <div className="overflow-x-auto rounded-lg border border-slate-200">
+            <div className="overflow-x-auto rounded-lg border" style={{ borderColor: 'rgb(var(--border-strong))' }}>
               <table className="w-full text-left text-sm">
-                <thead className="bg-slate-50 text-xs uppercase text-slate-500">
+                <thead className="text-xs uppercase" style={{ backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text-subtle))' }}>
                   <tr>
                     <th className="px-3 py-2">{L('thMonth', 'Month')}</th>
                     <th className="px-3 py-2 text-right">{L('thPayment', 'Payment')}</th>
@@ -236,7 +236,7 @@ export function LoanCalculatorClient() {
           />
         </>
       ) : (
-        <div className="rounded-lg border-2 border-dashed border-slate-200 p-6 text-center text-sm text-slate-400">
+        <div className="rounded-lg border-2 border-dashed p-6 text-center text-sm" style={{ borderColor: 'rgb(var(--border-strong))', color: 'rgb(var(--text-faint))' }}>
           {L('emptyState', 'Enter loan amount, interest rate, and term to see your monthly payment')}
         </div>
       )}

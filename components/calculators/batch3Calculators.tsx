@@ -306,6 +306,7 @@ export const MortgageCalculatorClient = makeCalculatorClient({
   compute: (v) => {
     const home = toNum(v.home)
     const downPct = toNum(v.down)
+    if (toNum(v.years) <= 0) return { monthly: '⚠️ Years must be greater than 0', loan: '—', total: '—', principal: '—' }
     const loan = home * (1 - downPct / 100)
     const rate = toNum(v.rate) / 100 / 12
     const months = toNum(v.years) * 12
@@ -425,6 +426,14 @@ export const CreditCardPayoffCalculatorClient = makeCalculatorClient({
       balance -= pay
       totalPaid += pay
       months++
+    }
+    if (balance > 0) {
+      return {
+        months: '⚠️ Not paid off within 100 years at this payment',
+        total: fmtUSD(totalPaid, 0),
+        interest: fmtUSD(totalPaid - toNum(v.balance), 0),
+        principal: fmtUSD(toNum(v.balance), 0),
+      }
     }
     return {
       months: `${months} months (${Math.ceil(months / 12)} yrs)`,

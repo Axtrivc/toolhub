@@ -36,8 +36,7 @@ function computeDiff(a: string, b: string, opts: { trim: boolean; caseSensitive:
   const split = (s: string) => {
     let arr = s.replace(/\r\n/g, '\n').split('\n')
     if (opts.trim) arr = arr.map((x) => x.trim())
-    if (!opts.caseSensitive) arr = arr.map((x) => x.toLowerCase())
-    // 过滤空行
+    // 过滤空行（不做 lowercase；大小写归一化只在 toMap 的 key 上做，value 保留原值）
     arr = arr.filter((x) => x !== '')
     return arr
   }

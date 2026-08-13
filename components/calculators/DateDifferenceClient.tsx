@@ -77,25 +77,25 @@ export function DateDifferenceClient() {
 
   return (
     <div className="space-y-6">
-      <div className="grid grid-cols-1 gap-4 rounded-lg bg-slate-50 p-4 sm:grid-cols-2">
+      <div className="grid grid-cols-1 gap-4 rounded-lg p-4 sm:grid-cols-2" style={{ backgroundColor: 'rgb(var(--bg-subtle))' }}>
         <div>
-          <label htmlFor="start" className="mb-1.5 block text-sm font-medium text-slate-700">Start date</label>
+          <label htmlFor="start" className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>Start date</label>
           <input
             id="start"
             type="date"
             value={start}
             onChange={(e) => setStart(e.target.value)}
-            className="w-full rounded-lg border border-slate-300 p-3 text-slate-900 shadow-sm outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200"
+            className="w-full rounded-lg border p-3 shadow-sm outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200" style={{ borderColor: 'rgb(var(--border-strong))', color: 'rgb(var(--text))' }}
           />
         </div>
         <div>
-          <label htmlFor="end" className="mb-1.5 block text-sm font-medium text-slate-700">End date</label>
+          <label htmlFor="end" className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>End date</label>
           <input
             id="end"
             type="date"
             value={end}
             onChange={(e) => setEnd(e.target.value)}
-            className="w-full rounded-lg border border-slate-300 p-3 text-slate-900 shadow-sm outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200"
+            className="w-full rounded-lg border p-3 shadow-sm outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200" style={{ borderColor: 'rgb(var(--border-strong))', color: 'rgb(var(--text))' }}
           />
         </div>
       </div>
@@ -122,7 +122,7 @@ export function DateDifferenceClient() {
           </div>
         </>
       ) : (
-        <div className="rounded-lg border-2 border-dashed border-slate-200 p-6 text-center text-sm text-slate-400">
+        <div className="rounded-lg border-2 border-dashed p-6 text-center text-sm" style={{ borderColor: 'rgb(var(--border-strong))', color: 'rgb(var(--text-faint))' }}>
           End date must be after start date
         </div>
       )}

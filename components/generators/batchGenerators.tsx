@@ -26,7 +26,7 @@ export function UUIDGeneratorClient() {
     <div className="space-y-6">
       <div className="flex flex-wrap items-end gap-3">
         <div>
-          <label htmlFor="count" className="mb-1.5 block text-sm font-medium text-slate-700">How many</label>
+          <label htmlFor="count" className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>How many</label>
           <input id="count" type="number" min="1" max="100" value={count} onChange={(e) => setCount(e.target.value)} className="w-28 rounded-lg border border-slate-300 p-3 outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200" />
         </div>
         <button onClick={generate} className="btn btn-primary">🎲 Generate UUIDs</button>
@@ -85,7 +85,7 @@ export function LoremIpsumGeneratorClient() {
     <div className="space-y-6">
       <div className="flex flex-wrap items-end gap-3">
         <div>
-          <label htmlFor="para" className="mb-1.5 block text-sm font-medium text-slate-700">Paragraphs</label>
+          <label htmlFor="para" className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>Paragraphs</label>
           <input id="para" type="number" min="1" max="20" value={paragraphs} onChange={(e) => setParagraphs(e.target.value)} className="w-28 rounded-lg border border-slate-300 p-3 outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200" />
         </div>
         <button onClick={generate} className="btn btn-primary">📝 Generate</button>

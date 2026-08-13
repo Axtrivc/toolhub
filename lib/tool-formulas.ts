@@ -68,11 +68,6 @@ export const toolFormulas: Record<string, ToolFormula> = {
     explain:
       'Finding "a percent of a number": convert the percent to a decimal and multiply by the whole. Reverse: percent = part / whole × 100.',
   },
-  'percentage-change-calculator': {
-    formula: 'change% = ( new − old ) / old × 100',
-    explain:
-      'Percentage change. new and old are the new and previous values; positive means an increase, negative means a decrease.',
-  },
 
   // ───────── 健康 ─────────
   'bmi-calculator': {
@@ -86,7 +81,7 @@ export const toolFormulas: Record<string, ToolFormula> = {
       'Mifflin-St Jeor basal metabolic rate. W = weight (kg), H = height (cm), A = age. BMR is the daily calories burned at rest.',
   },
   'water-intake-calculator': {
-    formula: 'Water (oz) ≈ weight (lb) × ⅔    [ ≈ 33 ml × weight (kg) ]',
+    formula: 'Water (ml) ≈ 35 ml × weight (kg)   [ ≈ 0.5 oz × weight (lb) ]',
     explain:
       'A common hydration baseline: about two-thirds of your body weight in pounds, in ounces per day — roughly 33 ml per kg. The calculator then adjusts this baseline upward for exercise, hot climate, and pregnancy.',
   },

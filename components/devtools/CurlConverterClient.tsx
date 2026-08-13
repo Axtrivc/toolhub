@@ -381,7 +381,7 @@ export function CurlConverterClient() {
           tab.code && (
             <div key={tab.label}>
               <div className="mb-2 flex items-center justify-between">
-                <span className="text-sm font-semibold text-slate-700">{tab.label}</span>
+                <span className="text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>{tab.label}</span>
                 <CopyButton value={tab.code} label="Copy" />
               </div>
               <pre

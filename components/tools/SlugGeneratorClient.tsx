@@ -99,7 +99,7 @@ export function SlugGeneratorClient() {
       </div>
 
       {/* 选项区 */}
-      <div className="grid grid-cols-1 gap-4 rounded-lg bg-slate-50 p-4 sm:grid-cols-3">
+      <div className="grid grid-cols-1 gap-4 rounded-lg p-4 sm:grid-cols-3" style={{ backgroundColor: 'rgb(var(--bg-subtle))' }}>
         <div>
           <label htmlFor="separator" className="mb-1.5 block text-xs font-medium text-slate-600">
             Separator

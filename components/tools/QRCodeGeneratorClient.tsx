@@ -156,7 +156,7 @@ export function QRCodeGeneratorClient() {
       {mode === 'wifi' && (
         <div className="space-y-3">
           <div>
-            <label htmlFor="ssid" className="mb-1.5 block text-sm font-medium text-slate-700">
+            <label htmlFor="ssid" className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
               Network name (SSID)
             </label>
             <input
@@ -170,7 +170,7 @@ export function QRCodeGeneratorClient() {
           </div>
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
             <div>
-              <label htmlFor="wifi-pass" className="mb-1.5 block text-sm font-medium text-slate-700">
+              <label htmlFor="wifi-pass" className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
                 Password
               </label>
               <input
@@ -183,7 +183,7 @@ export function QRCodeGeneratorClient() {
               />
             </div>
             <div>
-              <label htmlFor="enc" className="mb-1.5 block text-sm font-medium text-slate-700">
+              <label htmlFor="enc" className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
                 Encryption
               </label>
               <select
@@ -202,7 +202,7 @@ export function QRCodeGeneratorClient() {
       )}
 
       {/* 样式选项 */}
-      <div className="grid grid-cols-1 gap-4 rounded-lg bg-slate-50 p-4 sm:grid-cols-3">
+      <div className="grid grid-cols-1 gap-4 rounded-lg p-4 sm:grid-cols-3" style={{ backgroundColor: 'rgb(var(--bg-subtle))' }}>
         <div>
           <label htmlFor="size" className="mb-1.5 block text-xs font-medium text-slate-600">
             Preview size

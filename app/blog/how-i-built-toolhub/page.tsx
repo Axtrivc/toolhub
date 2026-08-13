@@ -18,9 +18,9 @@ const PUBLISH_DATE = '2026-08-04'
 const READ_TIME = '9 min read'
 
 export const metadata: Metadata = {
-  title: 'How I Built ToolHub: A 138-Tool Static PWA That Stays Sub-Second',
+  title: 'How I Built ToolHub: A 169-Tool Static PWA That Stays Sub-Second',
   description:
-    'A no-bullshit architecture retrospective on building ToolHub — a Next.js static export of 138 in-browser tools with lazy Service-Worker caching, 138+ JSON-LD pSEO schemas, and zero-CLS AdSense. The tradeoffs, the numbers, and what I would do differently.',
+    'A no-bullshit architecture retrospective on building ToolHub — a Next.js static export of 169 in-browser tools with lazy Service-Worker caching, 169+ JSON-LD pSEO schemas, and zero-CLS AdSense. The tradeoffs, the numbers, and what I would do differently.',
   keywords: [
     'nextjs static export',
     'programmatic seo',
@@ -36,9 +36,9 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'article',
     url: `${SITE_URL}${SLUG}`,
-    title: 'How I Built ToolHub: A 138-Tool Static PWA That Stays Sub-Second',
+    title: 'How I Built ToolHub: A 169-Tool Static PWA That Stays Sub-Second',
     description:
-      'A no-bullshit architecture retrospective — Next.js static export, lazy SW caching, 138+ JSON-LD pSEO schemas, zero-CLS AdSense.',
+      'A no-bullshit architecture retrospective — Next.js static export, lazy SW caching, 169+ JSON-LD pSEO schemas, zero-CLS AdSense.',
     siteName: SITE_NAME,
     publishedTime: PUBLISH_DATE,
     authors: [SITE_NAME],
@@ -47,15 +47,15 @@ export const metadata: Metadata = {
         url: '/og.png',
         width: 1200,
         height: 630,
-        alt: 'How I Built ToolHub: A 138-Tool Static PWA That Stays Sub-Second',
+        alt: 'How I Built ToolHub: A 169-Tool Static PWA That Stays Sub-Second',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'How I Built ToolHub: A 138-Tool Static PWA That Stays Sub-Second',
+    title: 'How I Built ToolHub: A 169-Tool Static PWA That Stays Sub-Second',
     description:
-      'Next.js static export, lazy Service-Worker caching, 138+ JSON-LD schemas, zero-CLS AdSense. The tradeoffs and the numbers.',
+      'Next.js static export, lazy Service-Worker caching, 169+ JSON-LD schemas, zero-CLS AdSense. The tradeoffs and the numbers.',
     images: ['/og.png'],
   },
 }
@@ -64,7 +64,7 @@ export const metadata: Metadata = {
 const articleJsonLd = {
   '@context': 'https://schema.org',
   '@type': ['BlogPosting', 'TechArticle'],
-  headline: 'How I Built ToolHub: A 138-Tool Static PWA That Stays Sub-Second',
+  headline: 'How I Built ToolHub: A 169-Tool Static PWA That Stays Sub-Second',
   description:
     'A no-bullshit architecture retrospective on building ToolHub — Next.js static export, lazy SW caching, pSEO, and zero-CLS AdSense.',
   datePublished: PUBLISH_DATE,
@@ -139,7 +139,7 @@ export default function HowIBuiltToolHubPost() {
           </span>
         </div>
         <h1 className="text-3xl font-bold leading-tight sm:text-4xl" style={{ color: 'rgb(var(--text))' }}>
-          How I Built ToolHub: A 138-Tool Static PWA That Stays Sub-Second
+          How I Built ToolHub: A 169-Tool Static PWA That Stays Sub-Second
         </h1>
         <div
           className="mt-5 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm"

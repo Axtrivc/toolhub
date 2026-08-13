@@ -2,7 +2,7 @@
  * 工具卡片文案 - 中文翻译(zh)
  *
  * 结构:Record<slug, { name, shortIntro }>
- * - slug 与 lib/tools.ts 的 slug 字段一一对应(共 138 个)
+ * - slug 与 lib/tools.ts 的 slug 字段一一对应(共 169 个)
  * - 缺失的 slug 自动回退到英文原值(见 lib/i18n.ts getToolName/getToolShortIntro)
  * - 此文件只翻译首页/卡片展示用的 name + shortIntro,
  *   不碰 SEO 字段(title/description/h1/keywords 等保持英文)
