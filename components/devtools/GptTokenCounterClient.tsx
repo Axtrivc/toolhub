@@ -5,6 +5,7 @@ import { CopyButton } from '@/components/CopyButton'
 import { ResultCard } from '@/components/calculator/CalculatorField'
 import { useApp } from '@/components/providers/AppProviders'
 import { tui } from '@/lib/i18n/tool-l10n'
+import { MODEL_GROUPS, MODEL_PRICES, type ModelPrice } from '@/lib/model-pricing'
 
 /**
  * GPT / Claude Token Counter —— 纯前端启发式 token 估算
@@ -25,20 +26,8 @@ For example, "Hello, world!" is roughly 4 tokens. Longer English prose averages 
 
 Remember: real billing uses the provider's exact tokenizer (cl100k_base for GPT-4o), so treat every number here as an estimate.`
 
-interface ModelPrice {
-  id: string
-  label: string
-  inputPer1M: number // USD / 1M input tokens
-  outputPer1M: number // USD / 1M output tokens
-}
-
-// 价格单位:USD / 1M tokens(2025 年参考价,UI 已提示以官网为准)
-const MODELS: ModelPrice[] = [
-  { id: 'gpt-4o', label: 'GPT-4o', inputPer1M: 2.5, outputPer1M: 10 },
-  { id: 'gpt-4o-mini', label: 'GPT-4o mini', inputPer1M: 0.15, outputPer1M: 0.6 },
-  { id: 'claude-3-5-sonnet', label: 'Claude 3.5 Sonnet', inputPer1M: 3, outputPer1M: 15 },
-  { id: 'claude-3-5-haiku', label: 'Claude 3.5 Haiku', inputPer1M: 0.8, outputPer1M: 4 },
-]
+// 模型价格集中管理在 lib/model-pricing.ts（数据源 tokencost.app，最后核对 2026-08-14）
+const MODELS: ModelPrice[] = MODEL_PRICES
 
 /** 启发式 token 估算:chars/4 基线 + 词/标点细化,取平均 */
 function estimateTokens(text: string): number {
@@ -147,10 +136,14 @@ export function GptTokenCounterClient() {
               color: 'rgb(var(--text))',
             }}
           >
-            {MODELS.map((m) => (
-              <option key={m.id} value={m.id}>
-                {m.label} — ${m.inputPer1M}/1M {L('inShort', 'in')} · ${m.outputPer1M}/1M {L('outShort', 'out')}
-              </option>
+            {MODEL_GROUPS.map((g) => (
+              <optgroup key={g.provider} label={g.provider}>
+                {g.models.map((m) => (
+                  <option key={m.id} value={m.id}>
+                    {m.label} — ${m.inputPer1M}/1M {L('inShort', 'in')} · ${m.outputPer1M}/1M {L('outShort', 'out')}
+                  </option>
+                ))}
+              </optgroup>
             ))}
           </select>
         </div>
