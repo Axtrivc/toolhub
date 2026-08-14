@@ -6,6 +6,14 @@ import type { ToolL10n } from '../tool-l10n'
 
 export const speedConverterL10n: ToolL10n = {
   zh: {
+    ui: {
+      'note': '🏃 支持 m/s、km/h、mph、节和 ft/s。常见用途:在不同国家间换算限速。',
+      'unit.fps': '英尺/秒 (ft/s)',
+      'unit.kmh': '千米/小时 (km/h)',
+      'unit.knot': '节 (kn)',
+      'unit.mph': '英里/小时 (mph)',
+      'unit.ms': '米/秒 (m/s)',
+    },
     useCases: [
       '在国外自驾时换算限速(km/h ↔ mph)',
       '把航空速度从节(knots)换算成 km/h',
@@ -18,6 +26,14 @@ export const speedConverterL10n: ToolL10n = {
     ],
   },
   es: {
+    ui: {
+      'note': '🏃 Admite m/s, km/h, mph, nudos y ft/s. Uso común: convertir límites de velocidad entre países.',
+      'unit.fps': 'Pies/seg (ft/s)',
+      'unit.kmh': 'Kilómetros/hora (km/h)',
+      'unit.knot': 'Nudos (kn)',
+      'unit.mph': 'Millas/hora (mph)',
+      'unit.ms': 'Metros/seg (m/s)',
+    },
     useCases: [
       'convertir límites de velocidad al conducir en el extranjero (km/h ↔ mph)',
       'pasar velocidades de aviación de nudos a km/h',
@@ -30,6 +46,14 @@ export const speedConverterL10n: ToolL10n = {
     ],
   },
   de: {
+    ui: {
+      'note': '🏃 Unterstützt m/s, km/h, mph, Knoten und ft/s. Häufig: Tempolimits zwischen Ländern umrechnen.',
+      'unit.fps': 'Fuß/Sek (ft/s)',
+      'unit.kmh': 'Kilometer/Stunde (km/h)',
+      'unit.knot': 'Knoten (kn)',
+      'unit.mph': 'Meilen/Stunde (mph)',
+      'unit.ms': 'Meter/Sek (m/s)',
+    },
     useCases: [
       'Geschwindigkeitsbegrenzungen beim Fahren im Ausland umrechnen (km/h ↔ mph)',
       'Fluggeschwindigkeiten von Knoten in km/h umrechnen',

@@ -6,6 +6,10 @@ import type { ToolL10n } from '../tool-l10n'
 
 export const calorieCalculatorL10n: ToolL10n = {
   zh: {
+    formula: {
+      formula: 'TDEE = BMR × activity factor',
+      explain: '每日总能量消耗。BMR(用 Mifflin-St Jeor)是静息热量;活动系数(久坐约 1.2 到非常活跃约 1.9)按运动放大。低于 TDEE 摄入可减重。',
+    },
     ui: {
       'in.gender': '性别',
       'opt.gender.male': '男',
@@ -40,6 +44,10 @@ export const calorieCalculatorL10n: ToolL10n = {
     ],
   },
   es: {
+    formula: {
+      formula: 'TDEE = BMR × activity factor',
+      explain: 'Gasto energético diario total. El BMR (Mifflin-St Jeor) son las calorías en reposo; el factor de actividad (~1,2 sedentario a ~1,9 muy activo) lo escala. Comer bajo el TDEE adelgaza.',
+    },
     ui: {
       'in.gender': 'Sexo',
       'opt.gender.male': 'Hombre',
@@ -74,6 +82,10 @@ export const calorieCalculatorL10n: ToolL10n = {
     ],
   },
   de: {
+    formula: {
+      formula: 'TDEE = BMR × activity factor',
+      explain: 'Täglicher Gesamtenergiebedarf. BMR (Mifflin-St Jeor) ist die Ruhewärme; der Aktivitätsfaktor (~1,2 sitzend bis ~1,9 sehr aktiv) skaliert sie. Unter dem TDEE essen führt zum Abnehmen.',
+    },
     ui: {
       'in.gender': 'Geschlecht',
       'opt.gender.male': 'Männlich',

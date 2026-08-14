@@ -3,6 +3,8 @@
 import { useState, useMemo, useCallback, useEffect } from 'react'
 import { CopyButton } from '@/components/CopyButton'
 import { LoadSampleButton } from '@/components/LoadSampleButton'
+import { useApp } from '@/components/providers/AppProviders'
+import { tui } from '@/lib/i18n/tool-l10n'
 
 /**
  * Regex Tester & Explainer
@@ -113,6 +115,10 @@ const inputCls =
 const MAX_TEXT_LEN = 50000 // 测试文本长度上限(~50KB),超过截断,避免超长输入放大回溯
 
 export function RegexTesterClient() {
+  const { locale } = useApp()
+  // 取本地化 UI 串;缺失回退英文(SSR 恒英文)。
+  const L = (key: string, fb: string) => tui('regex-tester', locale, key, fb)
+
   const [pattern, setPattern] = useState('')
   const [flags, setFlags] = useState('g')
   const [text, setText] = useState('')
@@ -158,7 +164,7 @@ export function RegexTesterClient() {
       <div>
         <div className="mb-2 flex items-center justify-between">
           <label htmlFor="regex-pattern" className="text-sm font-medium text-slate-700">
-            Regular Expression
+            {L('patternLabel', 'Regular Expression')}
           </label>
           <div className="flex items-center gap-2">
             <LoadSampleButton onLoad={handleLoadSample} variant="compact" />
@@ -189,11 +195,11 @@ export function RegexTesterClient() {
             spellCheck={false}
             className={`${inputCls} w-20 text-center`}
             style={{ borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rgb(var(--bg-card))', color: 'rgb(var(--text))' }}
-            title="Flags: g (global), i (case-insensitive), m (multiline), s (dotAll), u (unicode), y (sticky)"
+            title={L('flagsTitle', 'Flags: g (global), i (case-insensitive), m (multiline), s (dotAll), u (unicode), y (sticky)')}
           />
         </div>
         <p className="mt-1 text-[11px] text-slate-400">
-          Flags: <code>g</code> global · <code>i</code> ignore case · <code>m</code> multiline · <code>s</code> dotAll · <code>u</code> unicode · <code>y</code> sticky
+          {L('flagsLabel', 'Flags:')} <code>g</code> {L('flagGlobal', 'global')} · <code>i</code> {L('flagIgnoreCase', 'ignore case')} · <code>m</code> {L('flagMultiline', 'multiline')} · <code>s</code> {L('flagDotAll', 'dotAll')} · <code>u</code> {L('flagUnicode', 'unicode')} · <code>y</code> {L('flagSticky', 'sticky')}
         </p>
       </div>
 
@@ -207,7 +213,7 @@ export function RegexTesterClient() {
       {/* 文本超长截断提示(防 ReDoS / 性能退化) */}
       {textTruncated && (
         <div className="rounded-lg border border-amber-200 bg-amber-50 p-3 text-xs text-amber-700 dark:bg-amber-950/40 dark:text-amber-300">
-          ⚠️ Text exceeds {MAX_TEXT_LEN.toLocaleString()} characters — truncated for matching to protect against slow/ReDoS patterns.
+          ⚠️ {L('textExceeds', 'Text exceeds')} {MAX_TEXT_LEN.toLocaleString()} {L('truncatedForSafety', 'characters — truncated for matching to protect against slow/ReDoS patterns.')}
         </div>
       )}
 
@@ -215,11 +221,11 @@ export function RegexTesterClient() {
       <div>
         <div className="mb-2 flex items-center justify-between">
           <label htmlFor="regex-text" className="text-sm font-medium text-slate-700">
-            Test Text
+            {L('testTextLabel', 'Test Text')}
           </label>
           {matches.length > 0 && (
             <span className="rounded-md bg-green-50 px-2 py-0.5 text-xs font-semibold text-green-700 dark:bg-green-950/50 dark:text-green-300">
-              {matches.length} match{matches.length === 1 ? '' : 'es'}
+              {matches.length} {L('matchWord', 'match')}{matches.length === 1 ? '' : L('matchPluralSuffix', 'es')}
             </span>
           )}
         </div>
@@ -227,7 +233,7 @@ export function RegexTesterClient() {
           id="regex-text"
           value={text}
           onChange={(e) => setText(e.target.value)}
-          placeholder="Paste the text you want to test against..."
+          placeholder={L('placeholder', 'Paste the text you want to test against...')}
           rows={6}
           spellCheck={false}
           className={inputCls}
@@ -239,8 +245,8 @@ export function RegexTesterClient() {
       {segments.length > 0 && (
         <div>
           <div className="mb-2 flex items-center justify-between">
-            <span className="text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>Highlighted Matches</span>
-            <CopyButton value={matches.map((m) => m.match).join('\n')} label="Copy Matches" disabled={matches.length === 0} />
+            <span className="text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>{L('highlightedMatches', 'Highlighted Matches')}</span>
+            <CopyButton value={matches.map((m) => m.match).join('\n')} label={L('copyMatches', 'Copy Matches')} disabled={matches.length === 0} />
           </div>
           <pre
             className="whitespace-pre-wrap break-words rounded-lg border bg-slate-50 p-4 text-xs leading-relaxed"
@@ -264,20 +270,20 @@ export function RegexTesterClient() {
       {/* 匹配详情(含 capture groups) */}
       {matches.length > 0 && (
         <div>
-          <h3 className="mb-2 text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>Match Details &amp; Capture Groups</h3>
+          <h3 className="mb-2 text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>{L('matchDetails', 'Match Details & Capture Groups')}</h3>
           <div className="space-y-2">
             {matches.slice(0, 50).map((m, i) => (
               <div key={i} className="rounded-md border p-2 text-xs" style={{ borderColor: 'rgb(var(--border))', backgroundColor: 'rgb(var(--bg-card))' }}>
                 <div className="flex items-center gap-2">
                   <span className="font-semibold text-slate-500">#{i + 1}</span>
                   <span className="font-mono text-slate-700 dark:text-slate-200">“{m.match}”</span>
-                  <span className="text-slate-400">@ index {m.index}</span>
+                  <span className="text-slate-400">{L('atIndex', '@ index')} {m.index}</span>
                 </div>
                 {m.groups.length > 0 && (
                   <div className="mt-1 flex flex-wrap gap-1.5">
                     {m.groups.map((g, gi) => (
                       <span key={gi} className="rounded bg-blue-50 px-1.5 py-0.5 font-mono text-[11px] text-blue-700 dark:bg-blue-950/50 dark:text-blue-300">
-                        ${gi + 1}: {g ?? '(empty)'}
+                        ${gi + 1}: {g ?? L('emptyGroup', '(empty)')}
                       </span>
                     ))}
                   </div>
@@ -290,7 +296,7 @@ export function RegexTesterClient() {
 
       {/* 速查表 */}
       <div>
-        <h3 className="mb-2 text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>Regex Cheat Sheet</h3>
+        <h3 className="mb-2 text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>{L('cheatSheetTitle', 'Regex Cheat Sheet')}</h3>
         <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-3">
           {CHEAT_SHEET.map((c) => (
             <div key={c.syntax} className="rounded-md border p-2 text-xs" style={{ borderColor: 'rgb(var(--border))', backgroundColor: 'rgb(var(--bg-card))' }}>
@@ -302,7 +308,7 @@ export function RegexTesterClient() {
       </div>
 
       <p className="rounded-md p-3 text-xs" style={{ backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text-subtle))' }}>
-        🔒 100% client-side — uses your browser&apos;s native RegExp engine (JavaScript / ECMAScript flavor).
+        {L('note', "🔒 100% client-side — uses your browser's native RegExp engine (JavaScript / ECMAScript flavor).")}
       </p>
     </div>
   )

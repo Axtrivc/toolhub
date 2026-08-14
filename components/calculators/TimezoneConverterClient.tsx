@@ -3,6 +3,8 @@
 import { useEffect, useMemo, useState } from 'react'
 import { CopyButton } from '@/components/CopyButton'
 import { CalculatorNote } from '@/components/calculator/CalculatorField'
+import { useApp } from '@/components/providers/AppProviders'
+import { tui } from '@/lib/i18n/tool-l10n'
 
 /**
  * Timezone Converter 客户端组件
@@ -153,10 +155,50 @@ const inputStyle = {
 }
 
 export function TimezoneConverterClient() {
+  const { locale } = useApp()
+  // 取本地化 UI 串;缺失回退英文(SSR 恒英文)。
+  const L = (key: string, fb: string) => tui('timezone-converter', locale, key, fb)
+
   const [localZone, setLocalZone] = useState('')
   const [dt, setDt] = useState('')
   const [source, setSource] = useState<string>(LOCAL)
   const [targets, setTargets] = useState<string[]>(['UTC', 'America/New_York', 'Asia/Tokyo'])
+
+  // 时区选项文案本地化(value → 已翻译标签);表头同理(原始英文 → key,key={h} 保持原始值)。
+  const zoneLabels: Record<string, string> = {
+    [LOCAL]: localZone ? `${L('myLocal', 'My local')} (${localZone})` : L('myLocalZone', 'My local zone'),
+    'America/Los_Angeles': L('zonePacificLa', 'Pacific Time (Los Angeles)'),
+    'America/Denver': L('zoneMountainDenver', 'Mountain Time (Denver)'),
+    'America/Chicago': L('zoneCentralChicago', 'Central Time (Chicago)'),
+    'America/New_York': L('zoneEasternNy', 'Eastern Time (New York)'),
+    'America/Toronto': L('zoneToronto', 'Toronto'),
+    'America/Mexico_City': L('zoneMexicoCity', 'Mexico City'),
+    'America/Sao_Paulo': L('zoneSaoPaulo', 'São Paulo'),
+    UTC: L('zoneUtc', 'UTC'),
+    'Europe/London': L('zoneLondon', 'London'),
+    'Europe/Dublin': L('zoneDublin', 'Dublin'),
+    'Europe/Berlin': L('zoneBerlin', 'Berlin (CET)'),
+    'Europe/Paris': L('zoneParis', 'Paris'),
+    'Europe/Athens': L('zoneAthens', 'Athens'),
+    'Europe/Moscow': L('zoneMoscow', 'Moscow'),
+    'Europe/Istanbul': L('zoneIstanbul', 'Istanbul'),
+    'Asia/Dubai': L('zoneDubai', 'Dubai'),
+    'Asia/Kolkata': L('zoneIndia', 'India (IST)'),
+    'Asia/Bangkok': L('zoneBangkok', 'Bangkok'),
+    'Asia/Singapore': L('zoneSingapore', 'Singapore'),
+    'Asia/Hong_Kong': L('zoneHongKong', 'Hong Kong'),
+    'Asia/Shanghai': L('zoneShanghai', 'Shanghai'),
+    'Asia/Tokyo': L('zoneTokyo', 'Tokyo (JST)'),
+    'Australia/Sydney': L('zoneSydney', 'Sydney'),
+    'Pacific/Auckland': L('zoneAuckland', 'Auckland'),
+  }
+  const thKeys: Record<string, string> = {
+    Zone: 'thZone',
+    'Local time': 'thLocalTime',
+    'UTC offset': 'thUtcOffset',
+    'Day shift': 'thDayShift',
+  }
+
 
   // 挂载后解析本地时区,并用本地当前时间初始化输入(SSR 期间不读)
   useEffect(() => {
@@ -186,7 +228,7 @@ export function TimezoneConverterClient() {
       return {
         value,
         zone,
-        label: zoneLabel(value, localZone),
+        label: zoneLabels[value] ?? zoneLabel(value, localZone),
         time: getDisplayFmt(zone).format(instant),
         offset: offsetLabel(zone, instant),
         shift: Math.round((Date.UTC(p.year, p.month - 1, p.day) - srcDay) / 86400000),
@@ -195,7 +237,8 @@ export function TimezoneConverterClient() {
       }
     }
     return { src: mkRow(source), targets: targets.map(mkRow) }
-  }, [dt, source, targets, localZone])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dt, source, targets, localZone, locale])
 
   const updateTarget = (i: number, v: string) => setTargets((t) => t.map((x, j) => (j === i ? v : x)))
   const removeTarget = (i: number) => setTargets((t) => (t.length <= 1 ? t : t.filter((_, j) => j !== i)))
@@ -213,11 +256,12 @@ export function TimezoneConverterClient() {
     if (!computed) return ''
     const lines = computed.targets.map((r) => `${r.label}: ${r.time} (${r.offset})`)
     return [
-      'Timezone Conversion',
-      `Source: ${computed.src.label} — ${computed.src.time} (${computed.src.offset})`,
+      L('summaryTitle', 'Timezone Conversion'),
+      `${L('sSource', 'Source: ')}${computed.src.label} — ${computed.src.time} (${computed.src.offset})`,
       ...lines,
     ].join('\n')
-  }, [computed])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [computed, locale])
 
   return (
     <div className="space-y-5">
@@ -226,10 +270,10 @@ export function TimezoneConverterClient() {
         <div>
           <div className="mb-1.5 flex items-center justify-between">
             <label htmlFor="tz-dt" className="block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
-              Date &amp; time (in source zone)
+              {L('dateTimeLabel', 'Date & time (in source zone)')}
             </label>
             <button type="button" onClick={handleNow} className="text-xs font-medium text-primary hover:underline">
-              Now
+              {L('now', 'Now')}
             </button>
           </div>
           <input
@@ -243,7 +287,7 @@ export function TimezoneConverterClient() {
         </div>
         <div>
           <label htmlFor="tz-source" className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
-            Source timezone
+            {L('sourceTimezone', 'Source timezone')}
           </label>
           <select
             id="tz-source"
@@ -252,10 +296,10 @@ export function TimezoneConverterClient() {
             className="w-full rounded-lg border p-3 text-sm shadow-sm outline-none transition focus:ring-2"
             style={inputStyle}
           >
-            <option value={LOCAL}>My local zone{localZone ? ` (${localZone})` : ''}</option>
+            <option value={LOCAL}>{L('myLocalZone', 'My local zone')}{localZone ? ` (${localZone})` : ''}</option>
             {ZONES.map((z) => (
               <option key={z.value} value={z.value}>
-                {z.label}
+                {zoneLabels[z.value] ?? z.label}
               </option>
             ))}
           </select>
@@ -265,7 +309,7 @@ export function TimezoneConverterClient() {
       {/* 目标时区选择行(最多 6) */}
       <div>
         <div className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
-          Target timezones (up to 6)
+          {L('targetTimezones', 'Target timezones (up to 6)')}
         </div>
         <div className="space-y-2">
           {targets.map((t, i) => (
@@ -273,14 +317,14 @@ export function TimezoneConverterClient() {
               <select
                 value={t}
                 onChange={(e) => updateTarget(i, e.target.value)}
-                aria-label={`Target timezone ${i + 1}`}
+                aria-label={`${L('targetTimezone', 'Target timezone')} ${i + 1}`}
                 className="w-full rounded-lg border p-3 text-sm shadow-sm outline-none transition focus:ring-2"
                 style={inputStyle}
               >
-                <option value={LOCAL}>My local zone{localZone ? ` (${localZone})` : ''}</option>
+                <option value={LOCAL}>{L('myLocalZone', 'My local zone')}{localZone ? ` (${localZone})` : ''}</option>
                 {ZONES.map((z) => (
                   <option key={z.value} value={z.value}>
-                    {z.label}
+                    {zoneLabels[z.value] ?? z.label}
                   </option>
                 ))}
               </select>
@@ -288,7 +332,7 @@ export function TimezoneConverterClient() {
                 type="button"
                 onClick={() => removeTarget(i)}
                 disabled={targets.length <= 1}
-                aria-label={`Remove target timezone ${i + 1}`}
+                aria-label={`${L('removeTargetTimezone', 'Remove target timezone')} ${i + 1}`}
                 className="btn btn-secondary shrink-0 px-3 disabled:cursor-not-allowed disabled:opacity-50"
               >
                 ×
@@ -298,7 +342,7 @@ export function TimezoneConverterClient() {
         </div>
         {targets.length < 6 && (
           <button type="button" onClick={addTarget} className="btn btn-secondary mt-2">
-            + Add timezone
+            {L('addTimezone', '+ Add timezone')}
           </button>
         )}
       </div>
@@ -306,7 +350,7 @@ export function TimezoneConverterClient() {
       {/* 结果表 */}
       {!computed ? (
         <div className="rounded-lg border p-4 text-sm" style={{ borderColor: 'rgb(var(--border))', color: 'rgb(var(--text-muted))' }}>
-          Pick a date &amp; time to see the conversion.
+          {L('emptyState', 'Pick a date & time to see the conversion.')}
         </div>
       ) : (
         <>
@@ -320,7 +364,7 @@ export function TimezoneConverterClient() {
                       className="px-4 py-2.5 text-left text-xs font-medium uppercase tracking-wide"
                       style={{ color: 'rgb(var(--text-subtle))' }}
                     >
-                      {h}
+                      {L(thKeys[h], h)}
                     </th>
                   ))}
                 </tr>
@@ -358,7 +402,7 @@ export function TimezoneConverterClient() {
                           className="rounded-full px-2 py-0.5 text-xs font-medium"
                           style={{ backgroundColor: 'rgb(251 191 36 / 0.2)', color: 'rgb(180 83 9)' }}
                         >
-                          {r.shift > 0 ? `+${r.shift} day` : `${r.shift} day`}
+                          {r.shift > 0 ? `+${r.shift} ${L('day', 'day')}` : `${r.shift} ${L('day', 'day')}`}
                         </span>
                       )}
                     </td>
@@ -371,7 +415,7 @@ export function TimezoneConverterClient() {
           {/* 会议规划:0–23 小时条 */}
           <div>
             <h3 className="mb-2 text-sm font-semibold" style={{ color: 'rgb(var(--text))' }}>
-              Meeting planner — hour of day in each zone
+              {L('meetingPlanner', 'Meeting planner — hour of day in each zone')}
             </h3>
             <div className="space-y-2 rounded-lg border p-4" style={{ borderColor: 'rgb(var(--border))' }}>
               {[computed.src, ...computed.targets].map((r, i) => (
@@ -404,26 +448,25 @@ export function TimezoneConverterClient() {
               <div className="flex flex-wrap gap-4 pt-1 text-xs" style={{ color: 'rgb(var(--text-faint))' }}>
                 <span className="flex items-center gap-1.5">
                   <span className="inline-block h-3 w-3 rounded-[2px]" style={{ backgroundColor: 'rgb(37 99 235)' }} />
-                  Selected hour
+                  {L('selectedHour', 'Selected hour')}
                 </span>
                 <span className="flex items-center gap-1.5">
                   <span className="inline-block h-3 w-3 rounded-[2px]" style={{ backgroundColor: 'rgb(74 222 128 / 0.45)' }} />
-                  Business hours (9–17)
+                  {L('businessHours', 'Business hours (9–17)')}
                 </span>
               </div>
             </div>
           </div>
 
           <div className="flex flex-wrap gap-2">
-            <CopyButton value={summary} label="Copy summary" />
+            <CopyButton value={summary} label={L('copySummary', 'Copy summary')} />
           </div>
         </>
       )}
 
       <CalculatorNote>
-        🌍 Offsets and daylight-saving rules come from your browser&apos;s built-in <code>Intl</code> database — no data
-        leaves your device. Rows tinted green are inside local business hours (9:00–17:00); a day-shift badge appears
-        when the converted date differs from the source date.
+        {L('noteIntro', '🌍 Offsets and daylight-saving rules come from your browser\'s built-in ')}<code>Intl</code>
+        {L('noteOutro', ' database — no data leaves your device. Rows tinted green are inside local business hours (9:00–17:00); a day-shift badge appears when the converted date differs from the source date.')}
       </CalculatorNote>
     </div>
   )

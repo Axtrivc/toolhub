@@ -6,6 +6,11 @@ import type { ToolL10n } from '../tool-l10n'
 
 export const sortLinesL10n: ToolL10n = {
   zh: {
+    ui: {
+      inputLabel: '列表(每行一项)',
+      outputLabel: '已排序(A → Z)',
+      note: '🔤 按字母顺序排序各行。空行会被移除。',
+    },
     useCases: [
       '整理头脑风暴产生的想法列表',
       '按字母顺序排序姓名,制作通讯录',
@@ -19,6 +24,11 @@ export const sortLinesL10n: ToolL10n = {
     ],
   },
   es: {
+    ui: {
+      inputLabel: 'Lista (un elemento por línea)',
+      outputLabel: 'Ordenado (A → Z)',
+      note: '🔤 Ordena las líneas alfabéticamente. Se eliminan las líneas vacías.',
+    },
     useCases: [
       'organizar una lista de ideas de una lluvia de ideas',
       'ordenar nombres alfabéticamente para un directorio',
@@ -32,6 +42,11 @@ export const sortLinesL10n: ToolL10n = {
     ],
   },
   de: {
+    ui: {
+      inputLabel: 'Liste (ein Eintrag pro Zeile)',
+      outputLabel: 'Sortiert (A → Z)',
+      note: '🔤 Sortiert die Zeilen alphabetisch. Leere Zeilen werden entfernt.',
+    },
     useCases: [
       'eine Liste von Brainstorming-Ideen ordnen',
       'Namen alphabetisch für ein Verzeichnis sortieren',

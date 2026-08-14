@@ -6,6 +6,10 @@ import type { ToolL10n } from '../tool-l10n'
 
 export const retirementCalculatorL10n: ToolL10n = {
   zh: {
+    formula: {
+      formula: 'Balance = P(1+r)^n + PMT × [ ((1+r)^n − 1) / r ]\nSafe withdrawal ≈ Balance × 4%',
+      explain: '复利储蓄(起始 P 加定期 PMT,收益率 r,n 年)构成养老金;一个常用经验法则是每年提取约 4%。',
+    },
     useCases: ['按当前储蓄和供款预测退休金', '看自己是否走在退休目标的正轨上', '比较不同回报率下的退休积累', '算还要存多少年才能退休'],
     faqs: [
       { q: '我需要多少钱才能退休?', a: '一个常见法则是年支出的 25 倍(4% 法则的倒数)。年支出 $40,000 的话,目标约 $1 百万。鉴于寿命延长,许多理财顾问现在建议 30 倍更稳妥。' },
@@ -17,6 +21,10 @@ export const retirementCalculatorL10n: ToolL10n = {
     },
   },
   es: {
+    formula: {
+      formula: 'Balance = P(1+r)^n + PMT × [ ((1+r)^n − 1) / r ]\nSafe withdrawal ≈ Balance × 4%',
+      explain: 'Ahorro capitalizado (saldo inicial P más PMT recurrente al rendimiento r durante n años) forma el fondo; una regla común es retirar ~4% anual.',
+    },
     useCases: ['proyectar el ahorro para la jubilación con el capital y las aportaciones actuales', 'ver si vas camino de tu meta de jubilación', 'comparar la acumulación con distintas rentabilidades', 'calcular cuántos años más debes ahorrar'],
     faqs: [
       { q: '¿Cuánto necesito para jubilarme?', a: 'Una regla común es 25× tus gastos anuales (el inverso de la regla del 4 %). Con $40,000 de gastos anuales, apunta a $1 millón. Muchos asesores sugieren ahora 30× para ir sobre seguro dada la mayor esperanza de vida.' },
@@ -28,6 +36,10 @@ export const retirementCalculatorL10n: ToolL10n = {
     },
   },
   de: {
+    formula: {
+      formula: 'Balance = P(1+r)^n + PMT × [ ((1+r)^n − 1) / r ]\nSafe withdrawal ≈ Balance × 4%',
+      explain: 'Verzinstes Sparen (Startguthaben P plus wiederkehrendes PMT bei Rendite r über n Jahre) bildet das Altersvermögen; eine Daumenregel ist, etwa 4% pro Jahr zu entnehmen.',
+    },
     useCases: ['das Rentenkapital mit aktuellem Sparstand und Beiträgen hochrechnen', 'sehen, ob du auf Kurs für dein Rentenziel bist', 'die Ansparung bei verschiedenen Renditen vergleichen', 'berechnen, wie viele Jahre du noch sparen musst'],
     faqs: [
       { q: 'Wie viel brauche ich für die Rente?', a: 'Eine gängige Regel ist das 25-Fache deiner Jahresausgaben (der Kehrwert der 4 %-Regel). Bei $40,000 Jahresausgaben peile $1 Million an. Viele Berater empfehlen inzwischen das 30-Fache, um wegen längerer Lebenserwartung auf der sicheren Seite zu sein.' },

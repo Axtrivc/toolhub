@@ -6,6 +6,14 @@ import type { ToolL10n } from '../tool-l10n'
 
 export const jsonToTypeScriptL10n: ToolL10n = {
   zh: {
+    ui: {
+      'clear': '清空',
+      'copy': '复制',
+      'invalidJson': '无效 JSON',
+      'note': '🔒 100% 在客户端——你的 JSON 仅在你的浏览器中解析,绝不发送到任何服务器。',
+      'pasteJson': '粘贴你的 JSON',
+      'tsInterfaces': 'TypeScript 接口',
+    },
     useCases: [
       '从 API 响应生成 TypeScript 类型',
       '用示例 JSON 快速搭建 interface',
@@ -19,6 +27,14 @@ export const jsonToTypeScriptL10n: ToolL10n = {
     ],
   },
   es: {
+    ui: {
+      'clear': 'Limpiar',
+      'copy': 'Copiar',
+      'invalidJson': 'JSON inválido',
+      'note': '🔒 100% en el cliente — tu JSON se analiza solo en tu navegador y nunca se envía a ningún servidor.',
+      'pasteJson': 'Pega tu JSON',
+      'tsInterfaces': 'Interfaces de TypeScript',
+    },
     useCases: [
       'generar tipos de TypeScript a partir de respuestas de API',
       'montar interfaces rápidamente con JSON de ejemplo',
@@ -32,6 +48,14 @@ export const jsonToTypeScriptL10n: ToolL10n = {
     ],
   },
   de: {
+    ui: {
+      'clear': 'Leeren',
+      'copy': 'Kopieren',
+      'invalidJson': 'Ungültiges JSON',
+      'note': '🔒 100% clientseitig — dein JSON wird nur in deinem Browser geparst und nie an einen Server gesendet.',
+      'pasteJson': 'Füge dein JSON ein',
+      'tsInterfaces': 'TypeScript-Interfaces',
+    },
     useCases: [
       'TypeScript-Typen aus API-Antworten erzeugen',
       'mit Beispiel-JSON schnell interfaces aufbauen',

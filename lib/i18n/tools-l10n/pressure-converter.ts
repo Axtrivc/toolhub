@@ -6,6 +6,17 @@ import type { ToolL10n } from '../tool-l10n'
 
 export const pressureConverterL10n: ToolL10n = {
   zh: {
+    ui: {
+      'note': '🎈 用于胎压、气象和工程。1 大气压 = 101325 Pa = 14.7 psi。',
+      'unit.atm': '大气压 (atm)',
+      'unit.bar': '巴 (bar)',
+      'unit.kpa': '千帕 (kPa)',
+      'unit.mbar': '毫巴 (mbar)',
+      'unit.mpa': '兆帕 (MPa)',
+      'unit.pa': '帕斯卡 (Pa)',
+      'unit.psi': '磅/平方英寸 (psi)',
+      'unit.torr': '托 (mmHg)',
+    },
     useCases: [
       '检查汽车轮胎气压(PSI ↔ bar)',
       '换算血压的毫米汞柱(mmHg)值',
@@ -16,6 +27,17 @@ export const pressureConverterL10n: ToolL10n = {
     ],
   },
   es: {
+    ui: {
+      'note': '🎈 Usado en presión de neumáticos, meteorología e ingeniería. 1 atm = 101325 Pa = 14,7 psi.',
+      'unit.atm': 'Atmósferas (atm)',
+      'unit.bar': 'Bares (bar)',
+      'unit.kpa': 'Kilopascales (kPa)',
+      'unit.mbar': 'Milibares (mbar)',
+      'unit.mpa': 'Megapascales (MPa)',
+      'unit.pa': 'Pascales (Pa)',
+      'unit.psi': 'Libras/pulgada² (psi)',
+      'unit.torr': 'Torr (mmHg)',
+    },
     useCases: [
       'comprobar la presión de los neumáticos (PSI ↔ bar)',
       'convertir valores de presión arterial en mmHg',
@@ -26,6 +48,17 @@ export const pressureConverterL10n: ToolL10n = {
     ],
   },
   de: {
+    ui: {
+      'note': '🎈 Für Reifendruck, Wetter und Technik. 1 atm = 101325 Pa = 14,7 psi.',
+      'unit.atm': 'Atmosphären (atm)',
+      'unit.bar': 'Bar (bar)',
+      'unit.kpa': 'Kilopascal (kPa)',
+      'unit.mbar': 'Millibar (mbar)',
+      'unit.mpa': 'Megapascal (MPa)',
+      'unit.pa': 'Pascal (Pa)',
+      'unit.psi': 'Pfund/Zoll² (psi)',
+      'unit.torr': 'Torr (mmHg)',
+    },
     useCases: [
       'Reifendruck prüfen (PSI ↔ bar)',
       'Blutdruckwerte in mmHg umrechnen',

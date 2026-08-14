@@ -3,6 +3,8 @@
 import { useState, useMemo, useCallback } from 'react'
 import { CopyButton } from '@/components/CopyButton'
 import { LoadSampleButton } from '@/components/LoadSampleButton'
+import { useApp } from '@/components/providers/AppProviders'
+import { tui } from '@/lib/i18n/tool-l10n'
 
 /**
  * Text Cleaner —— 增强版文本清理工具
@@ -35,7 +37,9 @@ const DEFAULTS: Options = {
   sortAZ: false,
 }
 
-export function TextCleanerClient() {
+export function TextCleanerClient({ slug = 'whitespace-remover' }: { slug?: string }) {
+  const { locale } = useApp()
+  const L = (key: string, fb: string) => tui(slug, locale, key, fb)
   const [input, setInput] = useState('')
   const [opts, setOpts] = useState<Options>(DEFAULTS)
 
@@ -87,22 +91,22 @@ export function TextCleanerClient() {
     <div className="space-y-5">
       {/* 选项区 */}
       <div className="grid grid-cols-2 gap-3 rounded-lg p-4 sm:grid-cols-3" style={{ backgroundColor: 'rgb(var(--bg-subtle))' }}>
-        {checkbox('trimEachLine', 'Trim each line')}
-        {checkbox('collapseSpaces', 'Collapse multiple spaces')}
-        {checkbox('dropEmptyLines', 'Remove empty lines')}
-        {checkbox('dedupe', 'Remove duplicate lines')}
-        {checkbox('sortAZ', 'Sort A → Z')}
+        {checkbox('trimEachLine', L('trimEachLine', 'Trim each line'))}
+        {checkbox('collapseSpaces', L('collapseSpaces', 'Collapse multiple spaces'))}
+        {checkbox('dropEmptyLines', L('dropEmptyLines', 'Remove empty lines'))}
+        {checkbox('dedupe', L('dedupe', 'Remove duplicate lines'))}
+        {checkbox('sortAZ', L('sortAZ', 'Sort A → Z'))}
         <label className="flex items-center gap-2 text-sm" style={{ color: 'rgb(var(--text-muted))' }}>
-          <span>Join:</span>
+          <span>{L('join', 'Join:')}</span>
           <select
             value={opts.joinMode}
             onChange={(e) => setOpt('joinMode', e.target.value as Options['joinMode'])}
             className="rounded border bg-white px-2 py-1 text-xs"
             style={{ borderColor: 'rgb(var(--border-strong))', color: 'rgb(var(--text))' }}
           >
-            <option value="newline">Newlines (multi-line)</option>
-            <option value="space">Spaces (paragraph)</option>
-            <option value="single">Single line</option>
+            <option value="newline">{L('joinNewline', 'Newlines (multi-line)')}</option>
+            <option value="space">{L('joinSpace', 'Spaces (paragraph)')}</option>
+            <option value="single">{L('joinSingle', 'Single line')}</option>
           </select>
         </label>
       </div>
@@ -111,7 +115,7 @@ export function TextCleanerClient() {
       <div>
         <div className="mb-2 flex items-center justify-between">
           <label htmlFor="text-input" className="text-sm font-medium text-slate-700">
-            Your text
+            {L('yourText', 'Your text')}
           </label>
           <div className="flex items-center gap-2">
             <LoadSampleButton onLoad={handleLoadSample} variant="compact" />
@@ -121,7 +125,7 @@ export function TextCleanerClient() {
                 onClick={() => setInput('')}
                 className="-my-1 rounded-md px-2 py-1 text-xs text-slate-400 hover:text-red-500 sm:text-sm"
               >
-                Clear
+                {L('clear', 'Clear')}
               </button>
             )}
           </div>
@@ -130,7 +134,7 @@ export function TextCleanerClient() {
           id="text-input"
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          placeholder="Paste messy text with extra spaces, blank lines, or duplicates..."
+          placeholder={L('placeholder', 'Paste messy text with extra spaces, blank lines, or duplicates...')}
           rows={6}
           className="w-full rounded-lg border p-4 font-mono text-sm shadow-sm outline-none transition focus:ring-2"
           style={{
@@ -145,14 +149,14 @@ export function TextCleanerClient() {
       <div>
         <div className="mb-2 flex items-center justify-between">
           <label className="text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
-            Cleaned text
+            {L('cleanedText', 'Cleaned text')}
           </label>
           <CopyButton value={output} disabled={!output} />
         </div>
         <textarea
           readOnly
           value={output}
-          placeholder="Result will appear here..."
+          placeholder={L('resultPlaceholder', 'Result will appear here...')}
           rows={6}
           className="w-full rounded-lg border-2 p-4 font-mono text-sm outline-none"
           style={{
@@ -165,12 +169,12 @@ export function TextCleanerClient() {
 
       {/* 统计 */}
       <div className="flex gap-4 text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>
-        <span>{charCount.toLocaleString()} characters</span>
-        <span>{wordCount.toLocaleString()} words</span>
+        <span>{charCount.toLocaleString()} {L('characters', 'characters')}</span>
+        <span>{wordCount.toLocaleString()} {L('words', 'words')}</span>
       </div>
 
       <p className="rounded-md p-3 text-xs" style={{ backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text-subtle))' }}>
-        🧹 Combines whitespace collapsing, blank-line removal, deduplication, and sorting into one tool. Toggle any option above; everything runs locally in your browser.
+        {L('note', '🧹 Combines whitespace collapsing, blank-line removal, deduplication, and sorting into one tool. Toggle any option above; everything runs locally in your browser.')}
       </p>
     </div>
   )

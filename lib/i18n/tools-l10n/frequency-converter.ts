@@ -6,6 +6,16 @@ import type { ToolL10n } from '../tool-l10n'
 
 export const frequencyConverterL10n: ToolL10n = {
   zh: {
+    ui: {
+      'note': '📡 CPU 时钟用 GHz,音频用 Hz–kHz,转速用 RPM。',
+      'unit.deg-s': '度/秒 (°/s)',
+      'unit.ghz': '吉赫 (GHz)',
+      'unit.hz': '赫兹 (Hz)',
+      'unit.khz': '千赫 (kHz)',
+      'unit.mhz': '兆赫 (MHz)',
+      'unit.rad-s': '弧度/秒 (rad/s)',
+      'unit.rpm': '转/分 (RPM)',
+    },
     useCases: [
       '把电机转速(RPM)换算成赫兹',
       '在无线电频率单位之间互转(kHz/MHz/GHz)',
@@ -16,6 +26,16 @@ export const frequencyConverterL10n: ToolL10n = {
     ],
   },
   es: {
+    ui: {
+      'note': '📡 Relojes de CPU en GHz, audio en Hz-kHz, rotación en RPM.',
+      'unit.deg-s': 'Grados/segundo (°/s)',
+      'unit.ghz': 'Gigahercios (GHz)',
+      'unit.hz': 'Hercios (Hz)',
+      'unit.khz': 'Kilohercios (kHz)',
+      'unit.mhz': 'Megahercios (MHz)',
+      'unit.rad-s': 'Radianes/segundo (rad/s)',
+      'unit.rpm': 'Revoluciones/min (RPM)',
+    },
     useCases: [
       'convertir rpm de motor a hercios',
       'alternar entre unidades de radio (kHz / MHz / GHz)',
@@ -26,6 +46,16 @@ export const frequencyConverterL10n: ToolL10n = {
     ],
   },
   de: {
+    ui: {
+      'note': '📡 CPU-Takte in GHz, Audio in Hz–kHz, Drehung in RPM.',
+      'unit.deg-s': 'Grad/Sekunde (°/s)',
+      'unit.ghz': 'Gigahertz (GHz)',
+      'unit.hz': 'Hertz (Hz)',
+      'unit.khz': 'Kilohertz (kHz)',
+      'unit.mhz': 'Megahertz (MHz)',
+      'unit.rad-s': 'Bogenmaß/Sekunde (rad/s)',
+      'unit.rpm': 'Umdrehungen/Min (RPM)',
+    },
     useCases: [
       'Motordrehzahl (RPM) in Hertz umrechnen',
       'zwischen Funkfrequenzeinheiten wechseln (kHz / MHz / GHz)',

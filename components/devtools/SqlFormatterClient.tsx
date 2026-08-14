@@ -3,6 +3,8 @@
 import { useState, useMemo, useCallback } from 'react'
 import { CopyButton } from '@/components/CopyButton'
 import { LoadSampleButton } from '@/components/LoadSampleButton'
+import { useApp } from '@/components/providers/AppProviders'
+import { tui } from '@/lib/i18n/tool-l10n'
 
 /**
  * SQL Formatter / Beautifier
@@ -221,6 +223,10 @@ function minifySql(sql: string): string {
 }
 
 export function SqlFormatterClient() {
+  const { locale } = useApp()
+  // 取本地化 UI 串;缺失回退英文(SSR 恒英文)。
+  const L = (key: string, fb: string) => tui('sql-formatter', locale, key, fb)
+
   const [input, setInput] = useState('')
   const [mode, setMode] = useState<'format' | 'minify'>('format')
 
@@ -229,9 +235,10 @@ export function SqlFormatterClient() {
     try {
       return { output: mode === 'format' ? formatSql(input) : minifySql(input) }
     } catch (e) {
-      return { error: e instanceof Error ? e.message : 'Could not format SQL' }
+      return { error: e instanceof Error ? e.message : L('couldNotFormat', 'Could not format SQL') }
     }
-  }, [input, mode])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [input, mode, locale])
 
   const handleLoadSample = useCallback(() => setInput(SAMPLE_SQL), [])
 
@@ -243,7 +250,7 @@ export function SqlFormatterClient() {
       <div>
         <div className="mb-2 flex items-center justify-between">
           <label htmlFor="sql-input" className="text-sm font-medium text-slate-700">
-            Paste your SQL
+            {L('inputLabel', 'Paste your SQL')}
           </label>
           <div className="flex items-center gap-2">
             <LoadSampleButton onLoad={handleLoadSample} variant="compact" />
@@ -277,7 +284,7 @@ export function SqlFormatterClient() {
                 : { borderColor: 'rgb(var(--border))', color: 'rgb(var(--text-muted))' }
             }
           >
-            {m}
+            {m === 'format' ? L('modeFormat', 'format') : L('modeMinify', 'minify')}
           </button>
         ))}
       </div>
@@ -289,8 +296,8 @@ export function SqlFormatterClient() {
       {result.output && (
         <div>
           <div className="mb-2 flex items-center justify-between">
-            <span className="text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>{mode === 'format' ? 'Formatted SQL' : 'Minified SQL'}</span>
-            <CopyButton value={result.output} label="Copy" />
+            <span className="text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>{mode === 'format' ? L('formattedSql', 'Formatted SQL') : L('minifiedSql', 'Minified SQL')}</span>
+            <CopyButton value={result.output} label={L('copy', 'Copy')} />
           </div>
           <pre
             className="overflow-x-auto rounded-lg border bg-slate-50 p-4 text-xs"
@@ -302,7 +309,7 @@ export function SqlFormatterClient() {
       )}
 
       <p className="rounded-md p-3 text-xs" style={{ backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text-subtle))' }}>
-        🔒 100% client-side — a generic ANSI SQL formatter. Keywords are capitalized; indentation follows clause hierarchy.
+        {L('note', '🔒 100% client-side — a generic ANSI SQL formatter. Keywords are capitalized; indentation follows clause hierarchy.')}
       </p>
     </div>
   )

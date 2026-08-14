@@ -3,6 +3,8 @@
 import { useState, useMemo, useEffect } from 'react'
 import { generateSlug, type SlugOptions } from '@/lib/slug'
 import { CopyButton } from '@/components/CopyButton'
+import { useApp } from '@/components/providers/AppProviders'
+import { tui } from '@/lib/i18n/tool-l10n'
 
 interface HistoryItem {
   input: string
@@ -21,6 +23,9 @@ const PRESET_EXAMPLES = [
 ]
 
 export function SlugGeneratorClient() {
+  const { locale } = useApp()
+  const L = (key: string, fb: string) => tui('slug-generator', locale, key, fb)
+
   const [input, setInput] = useState('')
   const [separator, setSeparator] = useState<'-' | '_'>('-')
   const [lowercase, setLowercase] = useState(true)
@@ -71,20 +76,20 @@ export function SlugGeneratorClient() {
       {/* 输入区 */}
       <div>
         <label htmlFor="slug-input" className="mb-2 block text-sm font-medium text-slate-700">
-          Enter your title or text
+          {L('enterTitle', 'Enter your title or text')}
         </label>
         <textarea
           id="slug-input"
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          placeholder="e.g. 10 Proven Ways to Increase Website Traffic"
+          placeholder={L('inputPlaceholder', 'e.g. 10 Proven Ways to Increase Website Traffic')}
           rows={3}
           className="w-full rounded-lg border border-slate-300 p-3 text-slate-900 shadow-sm outline-none transition focus:border-brand-500 focus:ring-2 focus:ring-brand-200"
           autoFocus
         />
         {/* 快速示例 */}
         <div className="mt-2 flex flex-wrap gap-2">
-          <span className="text-xs text-slate-400">Try:</span>
+          <span className="text-xs text-slate-400">{L('try', 'Try:')}</span>
           {PRESET_EXAMPLES.map((ex) => (
             <button
               key={ex}
@@ -102,7 +107,7 @@ export function SlugGeneratorClient() {
       <div className="grid grid-cols-1 gap-4 rounded-lg p-4 sm:grid-cols-3" style={{ backgroundColor: 'rgb(var(--bg-subtle))' }}>
         <div>
           <label htmlFor="separator" className="mb-1.5 block text-xs font-medium text-slate-600">
-            Separator
+            {L('separator', 'Separator')}
           </label>
           <select
             id="separator"
@@ -110,8 +115,8 @@ export function SlugGeneratorClient() {
             onChange={(e) => setSeparator(e.target.value as '-' | '_')}
             className="w-full rounded-md border border-slate-300 bg-white px-3 py-2.5 text-sm outline-none focus:border-brand-500 sm:px-2 sm:py-1.5"
           >
-            <option value="-">Hyphen ( - )</option>
-            <option value="_">Underscore ( _ )</option>
+            <option value="-">{L('sepHyphen', 'Hyphen ( - )')}</option>
+            <option value="_">{L('sepUnderscore', 'Underscore ( _ )')}</option>
           </select>
         </div>
 
@@ -122,7 +127,7 @@ export function SlugGeneratorClient() {
             onChange={(e) => setLowercase(e.target.checked)}
             className="h-4 w-4 rounded border-slate-300 text-brand-600 focus:ring-brand-500"
           />
-          Lowercase
+          {L('lowercase', 'Lowercase')}
         </label>
 
         <label className="flex items-end gap-2 pb-1.5 text-sm text-slate-700">
@@ -132,7 +137,7 @@ export function SlugGeneratorClient() {
             onChange={(e) => setRemoveSpecialChars(e.target.checked)}
             className="h-4 w-4 rounded border-slate-300 text-brand-600 focus:ring-brand-500"
           />
-          Strip symbols
+          {L('stripSymbols', 'Strip symbols')}
         </label>
       </div>
 
@@ -140,7 +145,7 @@ export function SlugGeneratorClient() {
       <div>
         <div className="mb-2 flex items-center justify-between">
           <label htmlFor="slug-output" className="text-sm font-medium text-slate-700">
-            Result
+            {L('result', 'Result')}
           </label>
           <div className="flex gap-2">
             <button
@@ -149,7 +154,7 @@ export function SlugGeneratorClient() {
               disabled={!slug}
               className="btn btn-secondary px-3 py-1.5 text-sm disabled:cursor-not-allowed disabled:opacity-50"
             >
-              Save
+              {L('save', 'Save')}
             </button>
             <CopyButton value={slug} disabled={!slug} />
           </div>
@@ -159,7 +164,7 @@ export function SlugGeneratorClient() {
             id="slug-output"
             className="min-h-[1.75rem] flex-1 break-all font-mono text-lg text-brand-700"
           >
-            {slug || <span className="text-slate-300">your-slug-will-appear-here</span>}
+            {slug || <span className="text-slate-300">{L('slugPlaceholder', 'your-slug-will-appear-here')}</span>}
           </code>
         </div>
       </div>
@@ -168,13 +173,13 @@ export function SlugGeneratorClient() {
       {history.length > 0 && (
         <div>
           <div className="mb-2 flex items-center justify-between">
-            <h3 className="text-sm font-medium text-slate-700">Recent</h3>
+            <h3 className="text-sm font-medium text-slate-700">{L('recent', 'Recent')}</h3>
             <button
               type="button"
               onClick={clearHistory}
               className="-my-1 rounded-md px-2 py-1 text-xs text-slate-400 hover:text-red-500 sm:text-sm"
             >
-              Clear
+              {L('clear', 'Clear')}
             </button>
           </div>
           <ul className="divide-y divide-slate-100 rounded-lg border border-slate-200">
@@ -186,7 +191,7 @@ export function SlugGeneratorClient() {
                   </div>
                   <code className="font-mono text-brand-600">{item.slug}</code>
                 </div>
-                <CopyButton value={item.slug} label="Copy" />
+                <CopyButton value={item.slug} label={L('copy', 'Copy')} />
               </li>
             ))}
           </ul>

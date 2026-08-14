@@ -13,10 +13,11 @@ import { EncoderDecoderTool } from '../tools/EncoderDecoderTool'
  */
 
 // ── Base64 编解码 ──
-export function Base64CodecTool({ initialMode = 'encode' }: { initialMode?: 'encode' | 'decode' }) {
+export function Base64CodecTool({ initialMode = 'encode', slug = 'base64-encoder' }: { initialMode?: 'encode' | 'decode'; slug?: string }) {
   return (
     <EncoderDecoderTool
       initialMode={initialMode}
+      slug={slug}
       encode={{
         inputLabel: 'Text to encode',
         outputLabel: 'Base64',
@@ -48,10 +49,11 @@ export function Base64CodecTool({ initialMode = 'encode' }: { initialMode?: 'enc
 }
 
 // ── URL 编解码 ──
-export function URLCodecTool({ initialMode = 'encode' }: { initialMode?: 'encode' | 'decode' }) {
+export function URLCodecTool({ initialMode = 'encode', slug = 'url-encoder' }: { initialMode?: 'encode' | 'decode'; slug?: string }) {
   return (
     <EncoderDecoderTool
       initialMode={initialMode}
+      slug={slug}
       encode={{
         inputLabel: 'Text to encode',
         outputLabel: 'URL-encoded',
@@ -77,10 +79,11 @@ export function URLCodecTool({ initialMode = 'encode' }: { initialMode?: 'encode
 }
 
 // ── HTML 转义/反转义 ──
-export function HTMLEscapeTool({ initialMode = 'encode' }: { initialMode?: 'encode' | 'decode' }) {
+export function HTMLEscapeTool({ initialMode = 'encode', slug = 'html-escape' }: { initialMode?: 'encode' | 'decode'; slug?: string }) {
   return (
     <EncoderDecoderTool
       initialMode={initialMode}
+      slug={slug}
       encode={{
         inputLabel: 'Text or HTML',
         outputLabel: 'Escaped HTML',

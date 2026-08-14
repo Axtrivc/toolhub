@@ -6,6 +6,19 @@ import type { ToolL10n } from '../tool-l10n'
 
 export const wordCounterL10n: ToolL10n = {
   zh: {
+    ui: {
+      'characters': '字符数',
+      'charactersNoSpaces': '字符数(不含空格)',
+      'clear': '清空',
+      'paragraphs': '段落数',
+      'privacyNote': '🔒 你的文本在你的浏览器中本地分析,绝不上传到任何地方。',
+      'readingTime': '阅读时间',
+      'sentences': '句数',
+      'speakingTime': '演讲时间',
+      'textPlaceholder': '在此输入或粘贴文本…',
+      'words': '词数',
+      'yourText': '你的文本',
+    },
     useCases: [
       '满足论文和稿件的字数限制',
       '撰写符合 SEO 要求的内容',
@@ -19,6 +32,19 @@ export const wordCounterL10n: ToolL10n = {
     ],
   },
   es: {
+    ui: {
+      'characters': 'Caracteres',
+      'charactersNoSpaces': 'Caracteres (sin espacios)',
+      'clear': 'Limpiar',
+      'paragraphs': 'Párrafos',
+      'privacyNote': '🔒 Tu texto se analiza localmente en tu navegador y nunca se sube a ningún sitio.',
+      'readingTime': 'Tiempo de lectura',
+      'sentences': 'Oraciones',
+      'speakingTime': 'Tiempo de habla',
+      'textPlaceholder': 'Escribe o pega tu texto aquí…',
+      'words': 'Palabras',
+      'yourText': 'Tu texto',
+    },
     useCases: [
       'cumplir los límites de palabras de ensayos y artículos',
       'escribir contenido alineado con SEO',
@@ -32,6 +58,19 @@ export const wordCounterL10n: ToolL10n = {
     ],
   },
   de: {
+    ui: {
+      'characters': 'Zeichen',
+      'charactersNoSpaces': 'Zeichen (ohne Leerzeichen)',
+      'clear': 'Leeren',
+      'paragraphs': 'Absätze',
+      'privacyNote': '🔒 Dein Text wird lokal in deinem Browser analysiert und nirgendwo hochgeladen.',
+      'readingTime': 'Lesezeit',
+      'sentences': 'Sätze',
+      'speakingTime': 'Sprechzeit',
+      'textPlaceholder': 'Text hier eingeben oder einfügen…',
+      'words': 'Wörter',
+      'yourText': 'Dein Text',
+    },
     useCases: [
       'Wortlimits für Aufsätze und Manuskripte einhalten',
       'SEO-gerechte Inhalte schreiben',

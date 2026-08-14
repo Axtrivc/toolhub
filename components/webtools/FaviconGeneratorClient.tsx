@@ -1,6 +1,8 @@
 'use client'
 
 import { useState, useRef, useCallback, useEffect } from 'react'
+import { useApp } from '@/components/providers/AppProviders'
+import { tui } from '@/lib/i18n/tool-l10n'
 
 /**
  * Favicon Generator —— 纯前端 Canvas 剪裁 + 多尺寸导出
@@ -41,6 +43,9 @@ function drawSquare(canvas: HTMLCanvasElement, img: HTMLImageElement, target: nu
 }
 
 export function FaviconGeneratorClient() {
+  const { locale } = useApp()
+  const L = (key: string, fb: string) => tui('favicon-generator', locale, key, fb)
+
   const [imgSrc, setImgSrc] = useState<string>('')
   const [imgName, setImgName] = useState<string>('favicon')
   const [error, setError] = useState<string>('')
@@ -53,7 +58,7 @@ export function FaviconGeneratorClient() {
   const handleFile = useCallback((file: File) => {
     setError('')
     if (!file.type.startsWith('image/')) {
-      setError('Please upload an image file (PNG, JPG, GIF, or WebP).')
+      setError(L('errUploadImage', 'Please upload an image file (PNG, JPG, GIF, or WebP).'))
       return
     }
     const reader = new FileReader()
@@ -61,9 +66,9 @@ export function FaviconGeneratorClient() {
       setImgSrc(reader.result as string)
       setImgName(file.name.replace(/\.[^.]+$/, '') || 'favicon')
     }
-    reader.onerror = () => setError('Could not read the file.')
+    reader.onerror = () => setError(L('errCouldNotRead', 'Could not read the file.'))
     reader.readAsDataURL(file)
-  }, [])
+  }, [locale])
 
   const onInputChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -159,10 +164,10 @@ export function FaviconGeneratorClient() {
         >
           <span className="text-4xl" aria-hidden="true">🖼️</span>
           <span className="mt-3 text-sm font-medium" style={{ color: 'rgb(var(--text))' }}>
-            Click to upload or drag &amp; drop
+            {L('uploadPrompt', 'Click to upload or drag & drop')}
           </span>
           <span className="mt-1 text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>
-            PNG, JPG, GIF, or WebP — recommended ≥ 256×256
+            {L('uploadHint', 'PNG, JPG, GIF, or WebP — recommended ≥ 256×256')}
           </span>
           <input
             id="favicon-upload"
@@ -189,7 +194,7 @@ export function FaviconGeneratorClient() {
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={imgSrc}
-              alt="Uploaded source"
+              alt={L('uploadedSourceAlt', 'Uploaded source')}
               width={80}
               height={80}
               className="h-20 w-20 rounded-lg border object-cover"
@@ -200,14 +205,14 @@ export function FaviconGeneratorClient() {
                 {imgName}
               </div>
               <div className="text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>
-                Image cropped to a centered square, then scaled to each size.
+                {L('croppedNote', 'Image cropped to a centered square, then scaled to each size.')}
               </div>
             </div>
             <label
               htmlFor="favicon-reupload"
               className="btn btn-secondary cursor-pointer text-xs"
             >
-              Change
+              {L('change', 'Change')}
               <input
                 id="favicon-reupload"
                 type="file"
@@ -233,7 +238,7 @@ export function FaviconGeneratorClient() {
                       // eslint-disable-next-line @next/next/no-img-element
                       <img
                         src={preview.dataUrl}
-                        alt={`${s.label} preview`}
+                        alt={`${s.label}${L('previewWord', ' preview')}`}
                         width={Math.min(s.size, 64)}
                         height={Math.min(s.size, 64)}
                         style={{ width: Math.min(s.size, 64), height: Math.min(s.size, 64) }}
@@ -247,14 +252,14 @@ export function FaviconGeneratorClient() {
                     {s.label}
                   </div>
                   <div className="text-[11px]" style={{ color: 'rgb(var(--text-subtle))' }}>
-                    {s.desc}
+                    {L(`sizeDesc.${s.size}`, s.desc)}
                   </div>
                   <button
                     type="button"
                     onClick={() => exportSize(s.size)}
                     className="btn btn-secondary mt-3 w-full text-xs"
                   >
-                    Download PNG
+                    {L('downloadPng', 'Download PNG')}
                   </button>
                 </div>
               )
@@ -264,15 +269,16 @@ export function FaviconGeneratorClient() {
           {/* 一键导出全部 */}
           <div className="flex justify-center">
             <button type="button" onClick={exportAll} className="btn btn-primary text-sm">
-              Download All Sizes
+              {L('downloadAllSizes', 'Download All Sizes')}
             </button>
           </div>
         </div>
       )}
 
       <p className="rounded-md p-3 text-xs" style={{ backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text-subtle))' }}>
-        🔒 100% client-side — your image is loaded into an in-browser canvas and exported via{' '}
-        <code>canvas.toBlob</code>. It never leaves your device.
+        {L('noteIntro', '🔒 100% client-side — your image is loaded into an in-browser canvas and exported via ')}
+        <code>canvas.toBlob</code>
+        {L('noteOutro', '. It never leaves your device.')}
       </p>
     </div>
   )

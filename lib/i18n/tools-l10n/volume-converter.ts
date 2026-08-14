@@ -6,6 +6,19 @@ import type { ToolL10n } from '../tool-l10n'
 
 export const volumeConverterL10n: ToolL10n = {
   zh: {
+    ui: {
+      'note': '🥤 包含公制(ml、L、m³)和美制烹饪单位(茶匙、汤匙、杯、加仑)。',
+      'unit.cbm': '立方米 (m³)',
+      'unit.cup': '杯 (美)',
+      'unit.floz': '液量盎司 (美)',
+      'unit.gal': '加仑 (美)',
+      'unit.l': '升 (L)',
+      'unit.ml': '毫升 (ml)',
+      'unit.pt': '品脱 (美)',
+      'unit.qt': '夸脱 (美)',
+      'unit.tbsp': '汤匙 (美)',
+      'unit.tsp': '茶匙 (美)',
+    },
     useCases: [
       '在杯/汤匙/茶匙和毫升之间换算烘焙用量',
       '在美国加仑和升之间换算汽油量',
@@ -18,6 +31,19 @@ export const volumeConverterL10n: ToolL10n = {
     ],
   },
   es: {
+    ui: {
+      'note': '🥤 Incluye métricas (ml, L, m³) y unidades culinarias EE. UU. (tsp, tbsp, taza, galón).',
+      'unit.cbm': 'Metros cúbicos (m³)',
+      'unit.cup': 'Tazas (EE. UU.)',
+      'unit.floz': 'Onzas líquidas (EE. UU.)',
+      'unit.gal': 'Galones (EE. UU.)',
+      'unit.l': 'Litros (L)',
+      'unit.ml': 'Mililitros (ml)',
+      'unit.pt': 'Pintas (EE. UU.)',
+      'unit.qt': 'Cuartos (EE. UU.)',
+      'unit.tbsp': 'Cucharadas (EE. UU.)',
+      'unit.tsp': 'Cucharaditas (EE. UU.)',
+    },
     useCases: [
       'convertir cantidades de repostería entre tazas/cucharadas y mililitros',
       'pasar volumen de gasolina entre galones estadounidenses y litros',
@@ -30,6 +56,19 @@ export const volumeConverterL10n: ToolL10n = {
     ],
   },
   de: {
+    ui: {
+      'note': '🥤 Metrisch (ml, L, m³) und US-Kochmaße (TL, EL, Tasse, Gallone).',
+      'unit.cbm': 'Kubikmeter (m³)',
+      'unit.cup': 'Tassen (US)',
+      'unit.floz': 'Flüssigunzen (US)',
+      'unit.gal': 'Gallonen (US)',
+      'unit.l': 'Liter (L)',
+      'unit.ml': 'Milliliter (ml)',
+      'unit.pt': 'Pinten (US)',
+      'unit.qt': 'Quart (US)',
+      'unit.tbsp': 'Esslöffel (US)',
+      'unit.tsp': 'Teelöffel (US)',
+    },
     useCases: [
       'Backmengen zwischen Tassen/Esslöffeln und Millilitern umrechnen',
       'Kraftstoffvolumen zwischen US-Gallonen und Litern umrechnen',

@@ -4,6 +4,8 @@ import { useState, useMemo, useCallback } from 'react'
 import { CopyButton } from '@/components/CopyButton'
 import { LoadSampleButton } from '@/components/LoadSampleButton'
 import { ResultActions } from '@/components/ResultActions'
+import { useApp } from '@/components/providers/AppProviders'
+import { tui } from '@/lib/i18n/tool-l10n'
 
 /**
  * CSV/TSV → GitHub-flavored Markdown 表格
@@ -200,6 +202,10 @@ const inputStyle = {
 }
 
 export function CsvToMarkdownTableClient() {
+  const { locale } = useApp()
+  // 取本地化 UI 串;缺失回退英文(SSR 恒英文)。
+  const L = (key: string, fb: string) => tui('csv-to-markdown-table', locale, key, fb)
+
   const [input, setInput] = useState('')
   const [delimiter, setDelimiter] = useState<Delimiter>('auto')
   const [hasHeader, setHasHeader] = useState(true)
@@ -219,7 +225,7 @@ export function CsvToMarkdownTableClient() {
       <div>
         <div className="mb-2 flex items-center justify-between">
           <label htmlFor="csv-md-input" className="text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
-            Paste your CSV / TSV
+            {L('inputLabel', 'Paste your CSV / TSV')}
           </label>
           <div className="flex items-center gap-2">
             <LoadSampleButton onLoad={handleLoadSample} variant="compact" />
@@ -230,7 +236,7 @@ export function CsvToMarkdownTableClient() {
                 className="-my-1 rounded-md px-2 py-1 text-xs hover:text-red-500 sm:text-sm"
                 style={{ color: 'rgb(var(--text-faint))' }}
               >
-                Clear
+                {L('clear', 'Clear')}
               </button>
             )}
           </div>
@@ -251,7 +257,7 @@ export function CsvToMarkdownTableClient() {
       <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
         <div>
           <label htmlFor="csv-md-delim" className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
-            Delimiter
+            {L('delimiter', 'Delimiter')}
           </label>
           <select
             id="csv-md-delim"
@@ -260,15 +266,15 @@ export function CsvToMarkdownTableClient() {
             className="rounded-lg border px-3 py-2 text-sm shadow-sm outline-none transition focus:ring-2"
             style={inputStyle}
           >
-            <option value="auto">Auto-detect</option>
-            <option value=",">Comma (,)</option>
-            <option value={'\t'}>Tab (\t)</option>
-            <option value=";">Semicolon (;)</option>
+            <option value="auto">{L('delimiterAuto', 'Auto-detect')}</option>
+            <option value=",">{L('delimiterComma', 'Comma (,)')}</option>
+            <option value={'\t'}>{L('delimiterTab', 'Tab (\\t)')}</option>
+            <option value=";">{L('delimiterSemicolon', 'Semicolon (;)')}</option>
           </select>
         </div>
         <div>
           <label htmlFor="csv-md-align" className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
-            Column alignment
+            {L('alignment', 'Column alignment')}
           </label>
           <select
             id="csv-md-align"
@@ -277,19 +283,19 @@ export function CsvToMarkdownTableClient() {
             className="rounded-lg border px-3 py-2 text-sm shadow-sm outline-none transition focus:ring-2"
             style={inputStyle}
           >
-            <option value="default">Default (---)</option>
-            <option value="left">Left (:---)</option>
-            <option value="center">Center (:---:)</option>
-            <option value="right">Right (---:)</option>
+            <option value="default">{L('alignDefault', 'Default (---)')}</option>
+            <option value="left">{L('alignLeft', 'Left (:---)')}</option>
+            <option value="center">{L('alignCenter', 'Center (:---:)')}</option>
+            <option value="right">{L('alignRight', 'Right (---:)')}</option>
           </select>
         </div>
         <label className="flex cursor-pointer items-center gap-2 text-sm" style={{ color: 'rgb(var(--text))' }}>
           <input type="checkbox" checked={hasHeader} onChange={(e) => setHasHeader(e.target.checked)} className="h-4 w-4 accent-blue-600" />
-          First row is header
+          {L('firstRowHeader', 'First row is header')}
         </label>
         <label className="flex cursor-pointer items-center gap-2 text-sm" style={{ color: 'rgb(var(--text))' }}>
           <input type="checkbox" checked={pretty} onChange={(e) => setPretty(e.target.checked)} className="h-4 w-4 accent-blue-600" />
-          Pretty pad columns
+          {L('prettyPad', 'Pretty pad columns')}
         </label>
       </div>
 
@@ -298,15 +304,24 @@ export function CsvToMarkdownTableClient() {
         <div className="space-y-3">
           <div className="flex flex-wrap items-center justify-between gap-2">
             <span className="text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>
-              Markdown table — {result.rowCount} row{result.rowCount === 1 ? '' : 's'} × {result.colCount} column
-              {result.colCount === 1 ? '' : 's'} · delimiter: {result.usedDelimiter}
+              {L('resultTitle', 'Markdown table')} — {result.rowCount}{' '}
+              {result.rowCount === 1 ? L('rowSingular', 'row') : L('rowPlural', 'rows')} × {result.colCount}{' '}
+              {result.colCount === 1 ? L('columnSingular', 'column') : L('columnPlural', 'columns')} ·{' '}
+              {L('delimiterWord', 'delimiter')}:{' '}
+              {result.usedDelimiter === 'Tab'
+                ? L('delimiterTab', 'Tab')
+                : result.usedDelimiter === 'Semicolon'
+                  ? L('delimiterSemicolon', 'Semicolon')
+                  : L('delimiterComma', 'Comma')}
             </span>
-            <CopyButton value={result.markdown} label="Copy" />
+            <CopyButton value={result.markdown} label={L('copy', 'Copy')} />
           </div>
           {result.raggedRows > 0 && (
             <p className="rounded-md p-3 text-xs" style={{ backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text-subtle))' }}>
-              ⚠️ {result.raggedRows} row{result.raggedRows === 1 ? '' : 's'} had fewer than {result.colCount} cells and
-              {result.raggedRows === 1 ? ' was' : ' were'} padded with empty cells.
+              ⚠️ {result.raggedRows} {result.raggedRows === 1 ? L('rowSingular', 'row') : L('rowPlural', 'rows')}{' '}
+              {L('raggedHadFewerThan', 'had fewer than')} {result.colCount} {L('raggedCellsAnd', 'cells and')}{' '}
+              {result.raggedRows === 1 ? L('raggedWas', 'was') : L('raggedWere', 'were')}{' '}
+              {L('raggedPaddedWithEmptyCells', 'padded with empty cells.')}
             </p>
           )}
           <pre
@@ -320,13 +335,13 @@ export function CsvToMarkdownTableClient() {
             filename="table.md"
             downloadContent={result.markdown}
             mime="text/markdown;charset=utf-8;"
-            copyLabel="Copy Markdown"
+            copyLabel={L('copyMarkdown', 'Copy Markdown')}
           />
         </div>
       )}
 
       <p className="rounded-md p-3 text-xs" style={{ backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text-subtle))' }}>
-        🔒 100% client-side — your data never leaves your browser.
+        {L('privacyNote', '🔒 100% client-side — your data never leaves your browser.')}
       </p>
     </div>
   )

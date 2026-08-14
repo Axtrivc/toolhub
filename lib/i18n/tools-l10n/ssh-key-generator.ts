@@ -1,33 +1,149 @@
 /**
  * ssh-key-generator 本地化 bundle —— zh / es / de
- * 覆盖:useCases(client = SshKeyGeneratorClient = 自定义 securitytool client,无需 slug)
- * 注:该工具在 tool-faqs.ts 无 FAQ 条目,故 bundle 仅含 useCases
+ * 覆盖:useCases + faqs(client = SshKeyGeneratorClient = 自定义 securitytool client)
  */
 import type { ToolL10n } from '../tool-l10n'
 
 export const sshKeyGeneratorL10n: ToolL10n = {
   zh: {
+    ui: {
+      'comment': '注释(可选)',
+      'copyPrivateKey': '复制私钥',
+      'copyPublicKey': '复制公钥',
+      'ed25519Recommended': 'Ed25519(推荐)',
+      'errorKeyGenFailed': '生成密钥失败。',
+      'errorNoEd25519': '此浏览器不支持 Web Crypto API 中的 Ed25519。请用当前的 Chrome、Edge、Firefox 或 Safari——或在下方切换为 RSA。',
+      'errorNoWebCrypto': '此处无法使用 Web Crypto API。它需要安全(HTTPS)上下文和现代浏览器。',
+      'errorRsaExport': '无法导出 RSA 公钥参数。',
+      'fingerprint': '指纹 (SHA-256)',
+      'generateKeyPair': '生成密钥对',
+      'generating': '生成中…',
+      'hide': '隐藏',
+      'keyType': '密钥类型',
+      'noteIntro': '🔒 把私钥妥善保存,并用 ',
+      'noteMid1': ' 锁好。私钥以 PKCS#8 PEM 导出——许多工具(包括 OpenSSH ≥ 7.8)可直接读取,你也可以随时用 ',
+      'noteOutro': ' 把它转成经典 OpenSSH 格式。密钥完全在你的浏览器中生成并保存——不上传任何东西。',
+      'privateKeyMasked': '私钥(已遮蔽)',
+      'privateKeyPem': '私钥 (PKCS#8 PEM)',
+      'publicKeyPrefix': '公钥——粘贴到 ',
+      'reveal': '显示',
+      'rsa': 'RSA',
+      'rsa4096Wait': 'RSA-4096 可能需要几秒…',
+      'rsaModulus': 'RSA 模数(位)',
+    },
     useCases: [
       '在线生成 Ed25519 密钥对',
       'ssh-keygen 的在线替代',
       '无需终端创建 SSH 密钥',
       'authorized_keys 公钥生成器',
     ],
+    faqs: [
+      {
+        q: 'Ed25519 和 RSA 该选哪个?',
+        a: '推荐 Ed25519:密钥更短、更快,安全性等同甚至优于 RSA-4096。只有在必须连接尚不支持 Ed25519 的老服务器或硬件时才用 RSA。',
+      },
+      {
+        q: '我的私钥会被上传到任何地方吗?',
+        a: '不会。密钥对在你的浏览器里用 Web Crypto API 本地生成,私钥从不离开你的设备。只有你能复制或下载它——没有任何服务端存储。',
+      },
+      {
+        q: 'RSA 应该用多大的密钥?',
+        a: '想要长期安全余量就用 4096 位;为了兼容性 2048 位也仍然可接受。更大的密钥生成和使用都更慢,所以大多数新场景 Ed25519 是更好的选择。',
+      },
+    ],
   },
   es: {
+    ui: {
+      'comment': 'Comentario (opcional)',
+      'copyPrivateKey': 'Copiar clave privada',
+      'copyPublicKey': 'Copiar clave pública',
+      'ed25519Recommended': 'Ed25519 (recomendado)',
+      'errorKeyGenFailed': 'Falló la generación de claves.',
+      'errorNoEd25519': 'Este navegador no admite Ed25519 en la Web Crypto API. Prueba un Chrome, Edge, Firefox o Safari actual — o cambia a RSA abajo.',
+      'errorNoWebCrypto': 'La Web Crypto API no está disponible aquí. Requiere un contexto seguro (HTTPS) y un navegador moderno.',
+      'errorRsaExport': 'No se pudieron exportar los parámetros de la clave pública RSA.',
+      'fingerprint': 'Huella (SHA-256)',
+      'generateKeyPair': 'Generar par de claves',
+      'generating': 'Generando…',
+      'hide': 'Ocultar',
+      'keyType': 'Tipo de clave',
+      'noteIntro': '🔒 Guarda la clave privada en un lugar seguro y protégela con ',
+      'noteMid1': '. Se exporta en PKCS#8 PEM — muchas herramientas (incluido OpenSSH ≥ 7.8) la leen directamente, y puedes convertirla al formato clásico OpenSSH en cualquier momento con ',
+      'noteOutro': '. Las claves se generan y guardan totalmente en tu navegador — nada se sube.',
+      'privateKeyMasked': 'Clave privada (enmascarada)',
+      'privateKeyPem': 'Clave privada (PKCS#8 PEM)',
+      'publicKeyPrefix': 'Clave pública — pega en ',
+      'reveal': 'Mostrar',
+      'rsa': 'RSA',
+      'rsa4096Wait': 'RSA-4096 puede tardar unos segundos…',
+      'rsaModulus': 'Módulo RSA (bits)',
+    },
     useCases: [
       'generar par de claves Ed25519 online',
       'alternativa online a ssh-keygen',
       'crear claves SSH sin terminal',
       'generador de clave pública para authorized_keys',
     ],
+    faqs: [
+      {
+        q: '¿Ed25519 o RSA, cuál elegir?',
+        a: 'Prefiere Ed25519: las claves son mucho más cortas, rápidas y ofrecen seguridad equivalente o mejor que RSA-4096. Usa RSA solo cuando debas conectar a servidores o hardware antiguos que aún no admiten Ed25519.',
+      },
+      {
+        q: '¿Mi clave privada se sube a algún sitio?',
+        a: 'No. El par de claves se genera localmente en tu navegador con la Web Crypto API y la clave privada nunca sale de tu dispositivo. Solo tú puedes copiarla o descargarla; no hay almacenamiento en el servidor.',
+      },
+      {
+        q: '¿Qué tamaño de clave RSA debo usar?',
+        a: '4096 bits si quieres un margen a largo plazo; 2048 sigue siendo aceptable por compatibilidad. Las claves más grandes son más lentas de generar y usar, así que para la mayoría de casos nuevos Ed25519 es mejor opción.',
+      },
+    ],
   },
   de: {
+    ui: {
+      'comment': 'Kommentar (optional)',
+      'copyPrivateKey': 'Private Key kopieren',
+      'copyPublicKey': 'Public Key kopieren',
+      'ed25519Recommended': 'Ed25519 (empfohlen)',
+      'errorKeyGenFailed': 'Schlüsselgenerierung fehlgeschlagen.',
+      'errorNoEd25519': 'Dieser Browser unterstützt Ed25519 in der Web Crypto API nicht. Aktuellen Chrome, Edge, Firefox oder Safari probieren — oder unten auf RSA wechseln.',
+      'errorNoWebCrypto': 'Die Web Crypto API ist hier nicht verfügbar. Sie erfordert einen sicheren (HTTPS-)Kontext und einen modernen Browser.',
+      'errorRsaExport': 'Die RSA-Public-Key-Parameter konnten nicht exportiert werden.',
+      'fingerprint': 'Fingerabdruck (SHA-256)',
+      'generateKeyPair': 'Schlüsselpaar erzeugen',
+      'generating': 'Generieren…',
+      'hide': 'Verbergen',
+      'keyType': 'Schlüsseltyp',
+      'noteIntro': '🔒 Speichere den Private Key an einem sicheren Ort und sichere ihn mit ',
+      'noteMid1': '. Er wird als PKCS#8 PEM exportiert — viele Tools (inkl. OpenSSH ≥ 7.8) lesen ihn direkt, und du kannst ihn jederzeit mit ',
+      'noteOutro': ' ins klassische OpenSSH-Format umwandeln. Schlüssel werden vollständig in deinem Browser erzeugt und aufbewahrt — nichts wird hochgeladen.',
+      'privateKeyMasked': 'Private Key (maskiert)',
+      'privateKeyPem': 'Private Key (PKCS#8 PEM)',
+      'publicKeyPrefix': 'Public Key — einfügen in ',
+      'reveal': 'Anzeigen',
+      'rsa': 'RSA',
+      'rsa4096Wait': 'RSA-4096 kann einige Sekunden dauern…',
+      'rsaModulus': 'RSA-Modulus (Bits)',
+    },
     useCases: [
       'Ed25519-Schlüsselpaar online erzeugen',
       'Online-Alternative zu ssh-keygen',
       'SSH-Schlüssel ohne Terminal erstellen',
       'Public-Key-Generator für authorized_keys',
+    ],
+    faqs: [
+      {
+        q: 'Ed25519 oder RSA — was soll ich wählen?',
+        a: 'Bevorzuge Ed25519: Die Schlüssel sind deutlich kürzer, schneller und bieten eine zu RSA-4096 äquivalente oder bessere Sicherheit. Verwende RSA nur, wenn du ältere Server oder Hardware anbinden musst, die Ed25519 noch nicht unterstützen.',
+      },
+      {
+        q: 'Wird mein privater Schlüssel irgendwo hochgeladen?',
+        a: 'Nein. Das Schlüsselpaar wird lokal in deinem Browser mit der Web Crypto API erzeugt, und der private Schlüssel verlässt nie dein Gerät. Nur du kannst ihn kopieren oder herunterladen — es gibt keine serverseitige Speicherung.',
+      },
+      {
+        q: 'Welche RSA-Schlüsselgröße soll ich verwenden?',
+        a: '4096 Bit für einen langfristigen Sicherheitsaufschlag; 2048 ist aus Kompatibilitätsgründen noch akzeptabel. Größere Schlüssel sind beim Erzeugen und Nutzen langsamer, daher ist Ed25519 für die meisten neuen Setups die bessere Wahl.',
+      },
     ],
   },
 }

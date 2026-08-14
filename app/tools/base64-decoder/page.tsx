@@ -16,7 +16,7 @@ export default function Page() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <ToolLayout tool={tool}>
-        <Base64CodecTool initialMode="decode" />
+        <Base64CodecTool initialMode="decode" slug="base64-decoder" />
         <Base64DecoderContent />
       </ToolLayout>
     </>

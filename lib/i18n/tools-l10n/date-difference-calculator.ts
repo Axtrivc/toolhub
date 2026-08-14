@@ -6,6 +6,26 @@ import type { ToolL10n } from '../tool-l10n'
 
 export const dateDifferenceCalculatorL10n: ToolL10n = {
   zh: {
+    ui: {
+      'businessDays': '营业日',
+      'daysWord': ' 天',
+      'duration': '时长',
+      'emptyState': '结束日期必须晚于开始日期',
+      'endDate': '结束日期',
+      'moAbbr': ' 月 ',
+      'monFri': '周一至周五',
+      'note': '📅 适用于项目规划、合同期限、年龄计算和截止日期跟踪。营业日不含周末(周六和周日)。',
+      'startDate': '开始日期',
+      'totalDays': '总天数',
+      'totalHours': '总小时数',
+      'totalMonths': '总月数',
+      'totalWeeks': '总周数',
+      'yrAbbr': ' 年 ',
+    },
+    formula: {
+      formula: 'days = date₂ − date₁',
+      explain: '两个日历日期之间的整天数,每跨过一个午夜计一次。时间和时区设置可能在边缘多算或少算一天。',
+    },
     useCases: [
       '统计到截止日期还有多少工作日',
       '计算合同或租约的持续时长',
@@ -19,6 +39,26 @@ export const dateDifferenceCalculatorL10n: ToolL10n = {
     ],
   },
   es: {
+    ui: {
+      'businessDays': 'Días laborables',
+      'daysWord': ' días',
+      'duration': 'Duración',
+      'emptyState': 'La fecha de fin debe ser posterior a la de inicio',
+      'endDate': 'Fecha de fin',
+      'moAbbr': ' mes ',
+      'monFri': 'Lun–Vie',
+      'note': '📅 Útil para planificación de proyectos, duraciones de contrato, cálculos de edad y seguimiento de plazos. Los días laborables excluyen fines de semana (sábado y domingo).',
+      'startDate': 'Fecha de inicio',
+      'totalDays': 'Días totales',
+      'totalHours': 'Horas totales',
+      'totalMonths': 'Meses totales',
+      'totalWeeks': 'Semanas totales',
+      'yrAbbr': ' año ',
+    },
+    formula: {
+      formula: 'days = date₂ − date₁',
+      explain: 'Diferencia en días completos entre dos fechas calendario, contando cada medianoche cruzada. La hora del día y la zona horaria pueden sumar o restar un día en los bordes.',
+    },
     useCases: [
       'contar cuántos días laborables faltan para una fecha límite',
       'calcular la duración de un contrato o alquiler',
@@ -32,6 +72,26 @@ export const dateDifferenceCalculatorL10n: ToolL10n = {
     ],
   },
   de: {
+    ui: {
+      'businessDays': 'Werktage',
+      'daysWord': ' Tage',
+      'duration': 'Dauer',
+      'emptyState': 'Das Enddatum muss nach dem Startdatum liegen',
+      'endDate': 'Enddatum',
+      'moAbbr': ' Mo ',
+      'monFri': 'Mo–Fr',
+      'note': '📅 Nützlich für Projektplanung, Vertragslaufzeiten, Altersberechnungen und Fristverfolgung. Werktage schließen Wochenenden (Samstag und Sonntag) aus.',
+      'startDate': 'Startdatum',
+      'totalDays': 'Tage gesamt',
+      'totalHours': 'Stunden gesamt',
+      'totalMonths': 'Monate gesamt',
+      'totalWeeks': 'Wochen gesamt',
+      'yrAbbr': ' Jahr ',
+    },
+    formula: {
+      formula: 'days = date₂ − date₁',
+      explain: 'Ganztägige Differenz zwischen zwei Kalenderdaten, jede überschrittene Mitternacht zählt. Uhrzeit und Zeitzone können am Rand einen Tag addieren oder abziehen.',
+    },
     useCases: [
       'zählen, wie viele Werktage bis zu einer Frist bleiben',
       'die Laufzeit eines Vertrags oder Mietverhältnisses berechnen',

@@ -6,6 +6,20 @@ import type { ToolL10n } from '../tool-l10n'
 
 export const passwordGeneratorL10n: ToolL10n = {
   zh: {
+    ui: {
+      'bits': '比特',
+      'clickGenerate': '点击生成',
+      'copyPassword': '复制密码',
+      'excludeAmbiguous': '排除易混淆字符 (0/O, 1/l/I)',
+      'generatedPassword': '生成的密码',
+      'length': '长度',
+      'lowercase': '小写字母 (a-z)',
+      'numbers': '数字 (0-9)',
+      'privacyNote': '🔒 隐私说明:密码在你的浏览器中用 Web Crypto API 本地生成,绝不通过网络发送。',
+      'regenerate': '重新生成',
+      'symbols': '符号 (!@#$)',
+      'uppercase': '大写字母 (A-Z)',
+    },
     useCases: [
       '高强度随机密码生成器',
       '带符号的安全密码',
@@ -19,6 +33,20 @@ export const passwordGeneratorL10n: ToolL10n = {
     ],
   },
   es: {
+    ui: {
+      'bits': 'bits',
+      'clickGenerate': 'Pulsa generar',
+      'copyPassword': 'Copiar contraseña',
+      'excludeAmbiguous': 'Excluir ambiguos (0/O, 1/l/I)',
+      'generatedPassword': 'Contraseña generada',
+      'length': 'Longitud',
+      'lowercase': 'Minúsculas (a-z)',
+      'numbers': 'Números (0-9)',
+      'privacyNote': '🔒 Nota de privacidad: las contraseñas se generan localmente en tu navegador con la Web Crypto API y nunca se envían por la red.',
+      'regenerate': 'Regenerar',
+      'symbols': 'Símbolos (!@#$)',
+      'uppercase': 'Mayúsculas (A-Z)',
+    },
     useCases: [
       'generador de contraseñas aleatorias y fuertes',
       'contraseña segura con símbolos',
@@ -32,6 +60,20 @@ export const passwordGeneratorL10n: ToolL10n = {
     ],
   },
   de: {
+    ui: {
+      'bits': 'Bits',
+      'clickGenerate': 'Auf Generieren klicken',
+      'copyPassword': 'Passwort kopieren',
+      'excludeAmbiguous': 'Mehrdeutige ausschließen (0/O, 1/l/I)',
+      'generatedPassword': 'Generiertes Passwort',
+      'length': 'Länge',
+      'lowercase': 'Kleinbuchstaben (a-z)',
+      'numbers': 'Zahlen (0-9)',
+      'privacyNote': '🔒 Hinweis zum Datenschutz: Passwörter werden lokal in deinem Browser mit der Web Crypto API erzeugt und nie über das Netzwerk gesendet.',
+      'regenerate': 'Neu generieren',
+      'symbols': 'Symbole (!@#$)',
+      'uppercase': 'Großbuchstaben (A-Z)',
+    },
     useCases: [
       'Generator für starke Zufallspasswörter',
       'sicheres Passwort mit Sonderzeichen',

@@ -2,6 +2,8 @@
 
 import { useState, useEffect, useRef } from 'react'
 import QRCode from 'qrcode'
+import { useApp } from '@/components/providers/AppProviders'
+import { tui } from '@/lib/i18n/tool-l10n'
 
 type QRMode = 'text' | 'url' | 'wifi'
 
@@ -14,6 +16,9 @@ interface WifiCreds {
 const PRESET_URLS = ['https://example.com', 'mailto:hello@example.com', 'tel:+1234567890']
 
 export function QRCodeGeneratorClient() {
+  const { locale } = useApp()
+  const L = (key: string, fb: string) => tui('qr-code-generator', locale, key, fb)
+
   const [mode, setMode] = useState<QRMode>('url')
   const [text, setText] = useState('https://example.com')
   const [urlInput, setUrlInput] = useState('https://example.com')
@@ -46,7 +51,7 @@ export function QRCodeGeneratorClient() {
     // M 级纠错下 QR 码容量约 2000-2900 字节;超长内容提前拒绝,避免卡顿
     if (content.length > 2000) {
       setDataUrl('')
-      setError('Content is too long for a QR code (max ~2000 characters). Try URL or text mode with shorter input.')
+      setError(L('errorTooLong', 'Content is too long for a QR code (max ~2000 characters). Try URL or text mode with shorter input.'))
       return
     }
     let cancelled = false
@@ -102,7 +107,7 @@ export function QRCodeGeneratorClient() {
                 : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
             }`}
           >
-            {m === 'url' ? 'URL / Link' : m === 'wifi' ? 'WiFi' : 'Text'}
+            {m === 'url' ? L('modeUrl', 'URL / Link') : m === 'wifi' ? L('modeWifi', 'WiFi') : L('modeText', 'Text')}
           </button>
         ))}
       </div>
@@ -111,7 +116,7 @@ export function QRCodeGeneratorClient() {
       {mode === 'url' && (
         <div>
           <label htmlFor="url-input" className="mb-2 block text-sm font-medium text-slate-700">
-            Website URL
+            {L('websiteUrl', 'Website URL')}
           </label>
           <input
             id="url-input"
@@ -122,7 +127,7 @@ export function QRCodeGeneratorClient() {
             className="w-full rounded-lg border border-slate-300 p-3 shadow-sm outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200"
           />
           <div className="mt-2 flex flex-wrap gap-2">
-            <span className="text-xs text-slate-400">Quick:</span>
+            <span className="text-xs text-slate-400">{L('quick', 'Quick:')}</span>
             {PRESET_URLS.map((p) => (
               <button
                 key={p}
@@ -140,13 +145,13 @@ export function QRCodeGeneratorClient() {
       {mode === 'text' && (
         <div>
           <label htmlFor="text-input" className="mb-2 block text-sm font-medium text-slate-700">
-            Text to encode
+            {L('textToEncode', 'Text to encode')}
           </label>
           <textarea
             id="text-input"
             value={text}
             onChange={(e) => setText(e.target.value)}
-            placeholder="Any text..."
+            placeholder={L('anyTextPlaceholder', 'Any text...')}
             rows={3}
             className="w-full rounded-lg border border-slate-300 p-3 shadow-sm outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200"
           />
@@ -157,7 +162,7 @@ export function QRCodeGeneratorClient() {
         <div className="space-y-3">
           <div>
             <label htmlFor="ssid" className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
-              Network name (SSID)
+              {L('networkName', 'Network name (SSID)')}
             </label>
             <input
               id="ssid"
@@ -171,7 +176,7 @@ export function QRCodeGeneratorClient() {
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
             <div>
               <label htmlFor="wifi-pass" className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
-                Password
+                {L('password', 'Password')}
               </label>
               <input
                 id="wifi-pass"
@@ -184,7 +189,7 @@ export function QRCodeGeneratorClient() {
             </div>
             <div>
               <label htmlFor="enc" className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
-                Encryption
+                {L('encryption', 'Encryption')}
               </label>
               <select
                 id="enc"
@@ -192,9 +197,9 @@ export function QRCodeGeneratorClient() {
                 onChange={(e) => setWifi({ ...wifi, encryption: e.target.value as WifiCreds['encryption'] })}
                 className="w-full rounded-lg border border-slate-300 bg-white p-3 shadow-sm outline-none focus:border-brand-500"
               >
-                <option value="WPA">WPA / WPA2</option>
-                <option value="WEP">WEP</option>
-                <option value="nopass">No password</option>
+                <option value="WPA">{L('encWpa', 'WPA / WPA2')}</option>
+                <option value="WEP">{L('encWep', 'WEP')}</option>
+                <option value="nopass">{L('encNoPass', 'No password')}</option>
               </select>
             </div>
           </div>
@@ -205,7 +210,7 @@ export function QRCodeGeneratorClient() {
       <div className="grid grid-cols-1 gap-4 rounded-lg p-4 sm:grid-cols-3" style={{ backgroundColor: 'rgb(var(--bg-subtle))' }}>
         <div>
           <label htmlFor="size" className="mb-1.5 block text-xs font-medium text-slate-600">
-            Preview size
+            {L('previewSize', 'Preview size')}
           </label>
           <select
             id="size"
@@ -213,14 +218,14 @@ export function QRCodeGeneratorClient() {
             onChange={(e) => setSize(Number(e.target.value))}
             className="w-full rounded-md border border-slate-300 bg-white px-3 py-2.5 text-sm outline-none focus:border-brand-500 sm:px-2 sm:py-1.5"
           >
-            <option value={192}>Small (192px)</option>
-            <option value={256}>Medium (256px)</option>
-            <option value={384}>Large (384px)</option>
+            <option value={192}>{L('sizeSmall', 'Small (192px)')}</option>
+            <option value={256}>{L('sizeMedium', 'Medium (256px)')}</option>
+            <option value={384}>{L('sizeLarge', 'Large (384px)')}</option>
           </select>
         </div>
         <div>
           <label htmlFor="fg" className="mb-1.5 block text-xs font-medium text-slate-600">
-            Foreground
+            {L('foreground', 'Foreground')}
           </label>
           <input
             id="fg"
@@ -232,7 +237,7 @@ export function QRCodeGeneratorClient() {
         </div>
         <div>
           <label htmlFor="bg" className="mb-1.5 block text-xs font-medium text-slate-600">
-            Background
+            {L('background', 'Background')}
           </label>
           <input
             id="bg"
@@ -253,7 +258,7 @@ export function QRCodeGeneratorClient() {
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={dataUrl}
-              alt="Generated QR code"
+              alt={L('generatedQrAlt', 'Generated QR code')}
               width={size}
               height={size}
               className="rounded-lg"
@@ -262,12 +267,12 @@ export function QRCodeGeneratorClient() {
               <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
               </svg>
-              Download PNG
+              {L('downloadPng', 'Download PNG')}
             </button>
           </>
         ) : (
           <p className="text-sm text-slate-400">
-            {mode === 'wifi' ? 'Enter a network name to generate the code' : 'Enter content to generate a QR code'}
+            {mode === 'wifi' ? L('emptyWifi', 'Enter a network name to generate the code') : L('emptyContent', 'Enter content to generate a QR code')}
           </p>
         )}
       </div>
@@ -276,7 +281,7 @@ export function QRCodeGeneratorClient() {
       <canvas ref={canvasRef} className="hidden" />
 
       <p className="rounded-md bg-slate-50 p-3 text-xs text-slate-500">
-        🔒 QR codes are generated locally in your browser. Your data is never uploaded to any server.
+        {L('privacyNote', '🔒 QR codes are generated locally in your browser. Your data is never uploaded to any server.')}
       </p>
     </div>
   )

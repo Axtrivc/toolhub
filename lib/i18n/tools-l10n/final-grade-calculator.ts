@@ -6,6 +6,10 @@ import type { ToolL10n } from '../tool-l10n'
 
 export const finalGradeCalculatorL10n: ToolL10n = {
   zh: {
+    formula: {
+      formula: 'needed = ( target − current × (1 − w) ) / w',
+      explain: '为达到目标总成绩,期末需要考的分数。current 是你目前的分数,w 是期末占比(小数)。它告诉你剩余部分必须考多少。',
+    },
     ui: {
       'in.current': '当前成绩',
       'in.goal': '目标成绩',
@@ -24,6 +28,10 @@ export const finalGradeCalculatorL10n: ToolL10n = {
     ],
   },
   es: {
+    formula: {
+      formula: 'needed = ( target − current × (1 − w) ) / w',
+      explain: 'Nota necesaria en el final para alcanzar una nota global objetivo. current es tu nota hasta ahora, w el peso del final (decimal). Indica lo que debes sacar en lo que queda.',
+    },
     ui: {
       'in.current': 'Nota actual',
       'in.goal': 'Nota objetivo',
@@ -42,6 +50,10 @@ export const finalGradeCalculatorL10n: ToolL10n = {
     ],
   },
   de: {
+    formula: {
+      formula: 'needed = ( target − current × (1 − w) ) / w',
+      explain: 'Im Finale nötige Punktzahl, um eine Zielgesamtnote zu erreichen. current ist dein bisheriger Stand, w das Finale-Gewicht (Dezimal). Sagt, was du im Verbleibenden schaffen musst.',
+    },
     ui: {
       'in.current': 'Aktuelle Note',
       'in.goal': 'Zielnote',

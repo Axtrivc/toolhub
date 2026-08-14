@@ -6,6 +6,11 @@ import type { ToolL10n } from '../tool-l10n'
 
 export const titleCaseConverterL10n: ToolL10n = {
   zh: {
+    ui: {
+      inputLabel: '你的文本',
+      outputLabel: '标题大写',
+      note: '📝 把每个单词的首字母大写。适合标题和表头。',
+    },
     useCases: [
       '为博客文章和新闻标题做首字母大写',
       '整理 YouTube 视频标题',
@@ -17,6 +22,11 @@ export const titleCaseConverterL10n: ToolL10n = {
     ],
   },
   es: {
+    ui: {
+      inputLabel: 'Tu texto',
+      outputLabel: 'Tipo Título',
+      note: '📝 Capitaliza la primera letra de cada palabra. Ideal para títulos y encabezados.',
+    },
     useCases: [
       'aplicar capitalización a titulares de blog y noticias',
       'dar formato a títulos de vídeos de YouTube',
@@ -28,6 +38,11 @@ export const titleCaseConverterL10n: ToolL10n = {
     ],
   },
   de: {
+    ui: {
+      inputLabel: 'Dein Text',
+      outputLabel: 'Titel-Schreibweise',
+      note: '📝 Schreibt den ersten Buchstaben jedes Wortes groß. Ideal für Titel und Überschriften.',
+    },
     useCases: [
       'Blog- und Nachrichtentitel mit Anfangsgroßschreibung versehen',
       'YouTube-Videotitel formatieren',

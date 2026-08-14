@@ -6,6 +6,11 @@ import type { ToolL10n } from '../tool-l10n'
 
 export const textSizeEstimatorL10n: ToolL10n = {
   zh: {
+    ui: {
+      inputLabel: '你的文本',
+      outputLabel: '大小估算',
+      note: '📏 估算不同单位下的存储大小。适合在把文本存入数据库或 API 前预估。',
+    },
     useCases: [
       '规划数据库 VARCHAR 字段长度',
       '检查 API 载荷大小限制',
@@ -17,6 +22,11 @@ export const textSizeEstimatorL10n: ToolL10n = {
     ],
   },
   es: {
+    ui: {
+      inputLabel: 'Tu texto',
+      outputLabel: 'Estimaciones de tamaño',
+      note: '📏 Estima el tamaño de almacenamiento en distintas unidades. Útil antes de guardar texto en bases de datos o APIs.',
+    },
     useCases: [
       'planificar tamaños VARCHAR de base de datos',
       'comprobar límites de carga útil de la API',
@@ -28,6 +38,11 @@ export const textSizeEstimatorL10n: ToolL10n = {
     ],
   },
   de: {
+    ui: {
+      inputLabel: 'Dein Text',
+      outputLabel: 'Größen­schätzungen',
+      note: '📏 Schätzt die Speichergröße in verschiedenen Einheiten. Nützlich vor dem Speichern von Text in Datenbanken oder APIs.',
+    },
     useCases: [
       'VARCHAR-Größen in der Datenbank planen',
       'API-Payload-Limits prüfen',

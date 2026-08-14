@@ -6,6 +6,15 @@ import type { ToolL10n } from '../tool-l10n'
 
 export const flowRateConverterL10n: ToolL10n = {
   zh: {
+    ui: {
+      'note': '🚰 管道和泵的流量。用于管道、暖通和灌溉。',
+      'unit.cfm': 'ft³/分 (CFM)',
+      'unit.gpm': '加仑/分 美 (gpm)',
+      'unit.gps': '加仑/秒 美',
+      'unit.lmin': '升/分 (L/min)',
+      'unit.ls': '升/秒 (L/s)',
+      'unit.m3h': 'm³/小时',
+    },
     useCases: [
       '计算管道和水泵的流量',
       '估算淋浴喷头或花园水管的水流',
@@ -16,6 +25,15 @@ export const flowRateConverterL10n: ToolL10n = {
     ],
   },
   es: {
+    ui: {
+      'note': '🚰 Caudales de tuberías y bombas. Usado en plomería, climatización y riego.',
+      'unit.cfm': 'ft³/min (CFM)',
+      'unit.gpm': 'Galones/min EE. UU. (gpm)',
+      'unit.gps': 'Galones/seg EE. UU.',
+      'unit.lmin': 'Litros/min (L/min)',
+      'unit.ls': 'Litros/seg (L/s)',
+      'unit.m3h': 'm³/hora',
+    },
     useCases: [
       'calcular el caudal de tuberías y bombas',
       'estimar el flujo de una ducha o manguera de jardín',
@@ -26,6 +44,15 @@ export const flowRateConverterL10n: ToolL10n = {
     ],
   },
   de: {
+    ui: {
+      'note': '🚰 Rohr- und Pumpen-Durchflussmengen. Für Sanitär, Klima und Bewässerung.',
+      'unit.cfm': 'ft³/Min (CFM)',
+      'unit.gpm': 'Gallonen/Min US (gpm)',
+      'unit.gps': 'Gallonen/Sek US',
+      'unit.lmin': 'Liter/Min (L/min)',
+      'unit.ls': 'Liter/Sek (L/s)',
+      'unit.m3h': 'm³/Stunde',
+    },
     useCases: [
       'Durchflussmengen von Rohren und Pumpen berechnen',
       'den Wasserfluss von Duschköpfen oder Gartenschläuchen abschätzen',

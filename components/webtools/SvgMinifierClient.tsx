@@ -2,6 +2,8 @@
 
 import { useState, useCallback, useMemo } from 'react'
 import { CopyButton } from '@/components/CopyButton'
+import { useApp } from '@/components/providers/AppProviders'
+import { tui } from '@/lib/i18n/tool-l10n'
 
 /**
  * SVG Minifier —— 纯前端 SVG 压缩
@@ -88,17 +90,20 @@ function minifySvg(input: string, opts: MinifyOptions): string {
   return out
 }
 
-const TOGGLES: { key: keyof Omit<MinifyOptions, 'decimals'>; label: string; hint: string }[] = [
-  { key: 'removeDecl', label: 'XML declaration & DOCTYPE', hint: '<?xml …?> and <!DOCTYPE …>' },
-  { key: 'removeComments', label: 'Comments', hint: '<!-- … -->' },
-  { key: 'removeMeta', label: 'Metadata blocks', hint: '<metadata>, <title>, <desc>' },
-  { key: 'removeEditorData', label: 'Editor leftovers', hint: 'inkscape:, sodipodi:, Adobe namespaces, enable-background' },
-  { key: 'collapseWhitespace', label: 'Whitespace between tags', hint: '> < collapses to ><' },
-  { key: 'roundNumbers', label: 'Round numeric values', hint: 'Inside attribute values & path data' },
-  { key: 'removeDefaultAttrs', label: 'Default attributes', hint: 'version="1.1", fill-rule="nonzero"' },
-]
-
 export function SvgMinifierClient() {
+  const { locale } = useApp()
+  const L = (key: string, fb: string) => tui('svg-minifier', locale, key, fb)
+
+  const TOGGLES: { key: keyof Omit<MinifyOptions, 'decimals'>; label: string; hint: string }[] = [
+    { key: 'removeDecl', label: L('toggleRemoveDeclLabel', 'XML declaration & DOCTYPE'), hint: L('toggleRemoveDeclHint', '<?xml …?> and <!DOCTYPE …>') },
+    { key: 'removeComments', label: L('toggleRemoveCommentsLabel', 'Comments'), hint: L('toggleRemoveCommentsHint', '<!-- … -->') },
+    { key: 'removeMeta', label: L('toggleRemoveMetaLabel', 'Metadata blocks'), hint: L('toggleRemoveMetaHint', '<metadata>, <title>, <desc>') },
+    { key: 'removeEditorData', label: L('toggleRemoveEditorDataLabel', 'Editor leftovers'), hint: L('toggleRemoveEditorDataHint', 'inkscape:, sodipodi:, Adobe namespaces, enable-background') },
+    { key: 'collapseWhitespace', label: L('toggleCollapseWhitespaceLabel', 'Whitespace between tags'), hint: L('toggleCollapseWhitespaceHint', '> < collapses to ><') },
+    { key: 'roundNumbers', label: L('toggleRoundNumbersLabel', 'Round numeric values'), hint: L('toggleRoundNumbersHint', 'Inside attribute values & path data') },
+    { key: 'removeDefaultAttrs', label: L('toggleRemoveDefaultAttrsLabel', 'Default attributes'), hint: L('toggleRemoveDefaultAttrsHint', 'version="1.1", fill-rule="nonzero"') },
+  ]
+
   const [input, setInput] = useState('')
   const [error, setError] = useState('')
   const [dragging, setDragging] = useState(false)
@@ -118,12 +123,12 @@ export function SvgMinifierClient() {
     setError('')
     const looksSvg = file.type === 'image/svg+xml' || /\.svg$/i.test(file.name)
     if (!looksSvg) {
-      setError('Please upload an .svg file (or paste SVG markup into the textarea).')
+      setError(L('errUploadSvg', 'Please upload an .svg file (or paste SVG markup into the textarea).'))
       return
     }
     const reader = new FileReader()
     reader.onload = () => setInput(String(reader.result || ''))
-    reader.onerror = () => setError('Could not read the file.')
+    reader.onerror = () => setError(L('errReadFile', 'Could not read the file.'))
     reader.readAsText(file)
   }, [])
 
@@ -183,10 +188,10 @@ export function SvgMinifierClient() {
             className="block text-sm font-medium"
             style={{ color: 'rgb(var(--text-muted))' }}
           >
-            SVG markup
+            {L('svgMarkupLabel', 'SVG markup')}
           </label>
           <label htmlFor="svg-file" className="btn btn-secondary cursor-pointer text-xs">
-            Upload .svg
+            {L('uploadSvg', 'Upload .svg')}
             <input
               id="svg-file"
               type="file"
@@ -213,7 +218,7 @@ export function SvgMinifierClient() {
             id="svg-input"
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder={'Paste SVG markup here, or drag & drop a .svg file…'}
+            placeholder={L('svgPlaceholder', 'Paste SVG markup here, or drag & drop a .svg file…')}
             rows={8}
             spellCheck={false}
             className="w-full rounded-lg border p-4 font-mono text-sm shadow-sm outline-none transition focus:ring-2"
@@ -236,8 +241,7 @@ export function SvgMinifierClient() {
       {/* 输入不是 SVG */}
       {trimmed && !looksLikeSvg && (
         <div className="rounded-lg border border-red-200 bg-red-50 p-4 text-sm text-red-700">
-          ⚠️ This does not look like SVG — no <code>&lt;svg&gt;</code> element found. Check for a
-          truncated paste.
+          ⚠️ {L('errNotSvgPrefix', 'This does not look like SVG — no')} <code>&lt;svg&gt;</code>{L('errNotSvgSuffix', ' element found. Check for a truncated paste.')}
         </div>
       )}
 
@@ -269,7 +273,7 @@ export function SvgMinifierClient() {
         {/* 数值精度 */}
         {opts.roundNumbers && (
           <label className="flex items-center gap-2 text-sm" style={{ color: 'rgb(var(--text))' }}>
-            <span style={{ color: 'rgb(var(--text-muted))' }}>Decimals</span>
+            <span style={{ color: 'rgb(var(--text-muted))' }}>{L('decimalsLabel', 'Decimals')}</span>
             <input
               type="number"
               min={0}
@@ -281,7 +285,7 @@ export function SvgMinifierClient() {
                   decimals: Math.min(6, Math.max(0, parseInt(e.target.value, 10) || 0)),
                 }))
               }
-              aria-label="Decimal places for number rounding"
+              aria-label={L('decimalsAriaLabel', 'Decimal places for number rounding')}
               className="w-16 rounded-lg border p-1.5 text-sm shadow-sm outline-none transition focus:ring-2"
               style={{
                 borderColor: 'rgb(var(--border-strong))',
@@ -303,7 +307,7 @@ export function SvgMinifierClient() {
           >
             <div>
               <div className="text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>
-                Before
+                {L('before', 'Before')}
               </div>
               <div className="mt-1 font-mono text-sm font-semibold" style={{ color: 'rgb(var(--text))' }}>
                 {formatBytes(beforeBytes)}
@@ -311,7 +315,7 @@ export function SvgMinifierClient() {
             </div>
             <div>
               <div className="text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>
-                After
+                {L('after', 'After')}
               </div>
               <div className="mt-1 font-mono text-sm font-semibold" style={{ color: 'rgb(var(--text))' }}>
                 {formatBytes(afterBytes)}
@@ -319,7 +323,7 @@ export function SvgMinifierClient() {
             </div>
             <div>
               <div className="text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>
-                Savings
+                {L('savings', 'Savings')}
               </div>
               <div
                 className="mt-1 font-mono text-sm font-semibold"
@@ -337,7 +341,7 @@ export function SvgMinifierClient() {
               className="mb-1.5 block text-sm font-medium"
               style={{ color: 'rgb(var(--text-muted))' }}
             >
-              Minified SVG
+              {L('minifiedSvgLabel', 'Minified SVG')}
             </label>
             <textarea
               id="svg-output"
@@ -357,31 +361,29 @@ export function SvgMinifierClient() {
           {/* 安全预览 */}
           <div>
             <div className="mb-1.5 text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
-              Preview (rendered from the minified output)
+              {L('previewRendered', 'Preview (rendered from the minified output)')}
             </div>
             <div
               className="flex min-h-24 items-center justify-center rounded-lg border p-4"
               style={{ borderColor: 'rgb(var(--border))', backgroundColor: 'rgb(var(--bg-card))' }}
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={previewSrc} alt="Minified SVG preview" className="max-h-40 max-w-full" />
+              <img src={previewSrc} alt={L('minifiedSvgPreviewAlt', 'Minified SVG preview')} className="max-h-40 max-w-full" />
             </div>
           </div>
 
           {/* 操作行 */}
           <div className="flex flex-wrap items-center gap-3">
-            <CopyButton value={output} label="Copy SVG" />
+            <CopyButton value={output} label={L('copySvg', 'Copy SVG')} />
             <button type="button" onClick={download} className="btn btn-secondary">
-              Download minified.svg
+              {L('downloadMinified', 'Download minified.svg')}
             </button>
           </div>
         </div>
       )}
 
       <p className="rounded-md p-3 text-xs" style={{ backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text-subtle))' }}>
-        🔒 100% client-side — minification is plain string processing in your browser. The preview
-        renders via a data-URI <code>&lt;img&gt;</code>, never <code>dangerouslySetInnerHTML</code>,
-        so scripts inside SVG cannot execute.
+        {L('noteTextPrefix', '🔒 100% client-side — minification is plain string processing in your browser. The preview renders via a data-URI')} <code>&lt;img&gt;</code>{L('noteTextMiddle', ', never')} <code>dangerouslySetInnerHTML</code>{L('noteTextSuffix', ', so scripts inside SVG cannot execute.')}
       </p>
     </div>
   )

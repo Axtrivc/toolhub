@@ -6,6 +6,10 @@ import type { ToolL10n } from '../tool-l10n'
 
 export const annuityCalculatorL10n: ToolL10n = {
   zh: {
+    formula: {
+      formula: 'PMT = P × [ r(1+r)^n / ((1+r)^n − 1) ]',
+      explain: '在 n 期、利率 r 下偿还现值 P 的固定每期还款(PMT)——与贷款摊销公式相同,这里用于年金领取规划。',
+    },
     useCases: ['规划退休取款能撑多少年', '在一次性领取和年金之间做选择', '评估养老金或结构化和解金', '按年限算每月可取多少钱'],
     faqs: [
       { q: '如果我活过 N 年怎么办?', a: '那年金就领完了。这是自己管理取款的核心风险。保险公司发售的商业年金通常会终身支付,但费率较低,因为他们把长寿风险分摊到了众多购买者身上。' },
@@ -19,6 +23,10 @@ export const annuityCalculatorL10n: ToolL10n = {
     },
   },
   es: {
+    formula: {
+      formula: 'PMT = P × [ r(1+r)^n / ((1+r)^n − 1) ]',
+      explain: 'Pago fijo (PMT) que amortiza un valor presente P en n periodos al tipo r — la misma fórmula de amortización de un préstamo, aquí usada para planificar el cobro de una anualidad.',
+    },
     useCases: ['planificar cuántos años durarán los retiros en la jubilación', 'decidir entre suma única o anualidad', 'valorar pensiones o acuerdos estructurados', 'calcular cuánto puedes retirar al mes por años'],
     faqs: [
       { q: '¿Y si vivo más de N años?', a: 'Entonces la anualidad se agota. Es el riesgo principal de gestionar los retiros uno mismo. Las anualidades comerciales de aseguradoras suelen pagar de por vida, pero a tasas más bajas porque reparten el riesgo de longevidad entre muchos compradores.' },
@@ -32,6 +40,10 @@ export const annuityCalculatorL10n: ToolL10n = {
     },
   },
   de: {
+    formula: {
+      formula: 'PMT = P × [ r(1+r)^n / ((1+r)^n − 1) ]',
+      explain: 'Feste Rate (PMT), die einen Barwert P über n Perioden zum Zins r tilgt — dieselbe Tilgungsformel wie bei einem Kredit, hier für die Auszahlungsplanung einer Annuität.',
+    },
     useCases: ['planen, wie viele Jahre das Entsparen in der Rente reicht', 'zwischen Einmalbetrag und Rente wählen', 'Pensionen oder Strukturierte Vergleiche bewerten', 'pro Jahr und Monat berechnen, was du entnehmen kannst'],
     faqs: [
       { q: 'Was, wenn ich länger als N Jahre lebe?', a: 'Dann ist die Rente aufgebraucht. Das ist das Kernrisiko selbst verwalteter Entnahmen. Gewerbliche Renten von Versicherungen zahlen oft lebenslang, aber zu niedrigeren Sätzen, weil sie das Langlebigkeitsrisiko über viele Käufer streuen.' },

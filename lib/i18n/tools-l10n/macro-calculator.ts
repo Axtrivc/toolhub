@@ -6,6 +6,10 @@ import type { ToolL10n } from '../tool-l10n'
 
 export const macroCalculatorL10n: ToolL10n = {
   zh: {
+    formula: {
+      formula: 'grams = ( calories × macro% ) / kcalPerGram',
+      explain: '把每日热量按百分比分成蛋白质、碳水、脂肪,再换算成克(蛋白质和碳水 4 kcal/g,脂肪 9 kcal/g)。',
+    },
     ui: {
       'in.calories': '每日热量目标',
       'in.goal': '目标',
@@ -34,6 +38,10 @@ export const macroCalculatorL10n: ToolL10n = {
     ],
   },
   es: {
+    formula: {
+      formula: 'grams = ( calories × macro% ) / kcalPerGram',
+      explain: 'Reparte las calorías diarias en proteína, carbohidratos y grasa por porcentaje y convierte cada uno a gramos (proteína y carbohidratos = 4 kcal/g, grasa = 9 kcal/g).',
+    },
     ui: {
       'in.calories': 'Objetivo calórico diario',
       'in.goal': 'Objetivo',
@@ -62,6 +70,10 @@ export const macroCalculatorL10n: ToolL10n = {
     ],
   },
   de: {
+    formula: {
+      formula: 'grams = ( calories × macro% ) / kcalPerGram',
+      explain: 'Teilt die Tageskalorien prozentual in Protein, Kohlenhydrate und Fett auf und rechnet jedes in Gramm um (Protein und Kohlenhydrate = 4 kcal/g, Fett = 9 kcal/g).',
+    },
     ui: {
       'in.calories': 'Tägliches Kalorienziel',
       'in.goal': 'Ziel',

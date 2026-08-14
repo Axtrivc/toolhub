@@ -1,6 +1,8 @@
 'use client'
 
 import { useState, useRef, useCallback, useEffect } from 'react'
+import { useApp } from '@/components/providers/AppProviders'
+import { tui } from '@/lib/i18n/tool-l10n'
 
 /**
  * WebP to PNG / JPEG Converter —— 纯前端 canvas 转码
@@ -31,6 +33,9 @@ function formatBytes(bytes: number): string {
 }
 
 export function WebpToPngConverterClient() {
+  const { locale } = useApp()
+  const L = (key: string, fb: string) => tui('webp-to-png-converter', locale, key, fb)
+
   const [imgSrc, setImgSrc] = useState<string>('')
   const [imgName, setImgName] = useState<string>('image')
   const [source, setSource] = useState<SourceMeta | null>(null)
@@ -47,7 +52,7 @@ export function WebpToPngConverterClient() {
   const handleFile = useCallback((file: File) => {
     setError('')
     if (file.type !== 'image/webp') {
-      setError('Please upload a WebP image file (.webp).')
+      setError(L('errUploadWebp', 'Please upload a WebP image file (.webp).'))
       return
     }
     const reader = new FileReader()
@@ -56,7 +61,7 @@ export function WebpToPngConverterClient() {
       setImgName(file.name.replace(/\.[^.]+$/, '') || 'image')
       setSource({ width: 0, height: 0, size: file.size })
     }
-    reader.onerror = () => setError('Could not read the file.')
+    reader.onerror = () => setError(L('errReadFile', 'Could not read the file.'))
     reader.readAsDataURL(file)
   }, [])
 
@@ -91,7 +96,7 @@ export function WebpToPngConverterClient() {
         prev ? { ...prev, width: img.naturalWidth, height: img.naturalHeight } : null,
       )
     }
-    img.onerror = () => setError('Could not decode the image file.')
+    img.onerror = () => setError(L('errDecodeImage', 'Could not decode the image file.'))
     img.src = imgSrc
   }, [imgSrc])
 
@@ -114,7 +119,7 @@ export function WebpToPngConverterClient() {
     canvas.toBlob(
       (blob) => {
         if (!blob) {
-          setError('Conversion failed in canvas.')
+          setError(L('errConversionFailed', 'Conversion failed in canvas.'))
           return
         }
         if (outUrlRef.current) URL.revokeObjectURL(outUrlRef.current)
@@ -172,10 +177,10 @@ export function WebpToPngConverterClient() {
         >
           <span className="text-4xl" aria-hidden="true">🖼️</span>
           <span className="mt-3 text-sm font-medium" style={{ color: 'rgb(var(--text))' }}>
-            Click to upload or drag &amp; drop
+            {L('uploadPrompt', 'Click to upload or drag & drop')}
           </span>
           <span className="mt-1 text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>
-            WebP images only (.webp)
+            {L('uploadHint', 'WebP images only (.webp)')}
           </span>
           <input id="webp-upload" type="file" accept="image/*" onChange={onInputChange} className="hidden" />
         </label>
@@ -195,7 +200,7 @@ export function WebpToPngConverterClient() {
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={imgSrc}
-              alt="Uploaded WebP source"
+              alt={L('uploadedWebpSourceAlt', 'Uploaded WebP source')}
               className="h-20 w-20 rounded-lg border object-contain"
               style={{ borderColor: 'rgb(var(--border))' }}
             />
@@ -204,12 +209,12 @@ export function WebpToPngConverterClient() {
                 {imgName}.webp
               </div>
               <div className="text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>
-                {source.width > 0 ? `${source.width} × ${source.height} px` : 'Reading…'} ·{' '}
-                {formatBytes(source.size)} · WebP
+                {source.width > 0 ? `${source.width} × ${source.height} px` : L('reading', 'Reading…')} ·{' '}
+                {formatBytes(source.size)} · {L('webpLabel', 'WebP')}
               </div>
             </div>
             <label htmlFor="webp-reupload" className="btn btn-secondary cursor-pointer text-xs">
-              Change
+              {L('change', 'Change')}
               <input id="webp-reupload" type="file" accept="image/*" onChange={onInputChange} className="hidden" />
             </label>
           </div>
@@ -225,7 +230,7 @@ export function WebpToPngConverterClient() {
                 className="mb-1.5 block text-sm font-medium"
                 style={{ color: 'rgb(var(--text-muted))' }}
               >
-                Output format
+                {L('outputFormat', 'Output format')}
               </label>
               <select
                 id="webp-out-format"
@@ -234,8 +239,8 @@ export function WebpToPngConverterClient() {
                 className={selectClass}
                 style={selectStyle}
               >
-                <option value="png">PNG (lossless)</option>
-                <option value="jpeg">JPEG (smaller, lossy)</option>
+                <option value="png">{L('pngLossless', 'PNG (lossless)')}</option>
+                <option value="jpeg">{L('jpegSmallerLossy', 'JPEG (smaller, lossy)')}</option>
               </select>
             </div>
             {format === 'jpeg' && (
@@ -246,7 +251,7 @@ export function WebpToPngConverterClient() {
                     className="mb-1.5 block text-sm font-medium"
                     style={{ color: 'rgb(var(--text-muted))' }}
                   >
-                    JPEG quality — {Math.round(quality * 100)}%
+                    {L('jpegQualityLabel', 'JPEG quality —')} {Math.round(quality * 100)}%
                   </label>
                   <input
                     id="webp-quality"
@@ -265,7 +270,7 @@ export function WebpToPngConverterClient() {
                     className="mb-1.5 block text-sm font-medium"
                     style={{ color: 'rgb(var(--text-muted))' }}
                   >
-                    Background color (flattens transparency)
+                    {L('bgColorLabel', 'Background color (flattens transparency)')}
                   </label>
                   <div className="flex items-center gap-2">
                     <input
@@ -292,18 +297,18 @@ export function WebpToPngConverterClient() {
               style={{ borderColor: 'rgb(var(--border))', backgroundColor: 'rgb(var(--bg-card))' }}
             >
               <div className="text-sm" style={{ color: 'rgb(var(--text))' }}>
-                <span className="font-semibold">{format === 'png' ? 'PNG' : 'JPEG'} output</span>
+                <span className="font-semibold">{format === 'png' ? L('png', 'PNG') : L('jpeg', 'JPEG')} {L('outputSuffix', 'output')}</span>
                 <span className="ml-2 font-mono text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>
                   {formatBytes(output.size)} · {source.width} × {source.height} px
                 </span>
                 {format === 'jpeg' && output.size > source.size && (
                   <span className="ml-2 text-xs" style={{ color: 'rgb(var(--text-faint))' }}>
-                    (larger than the original — try lowering quality)
+                    {L('largerThanOriginal', '(larger than the original — try lowering quality)')}
                   </span>
                 )}
               </div>
               <button type="button" onClick={download} className="btn btn-primary text-sm">
-                Download {format === 'png' ? 'PNG' : 'JPG'}
+                {L('download', 'Download')} {format === 'png' ? L('png', 'PNG') : L('jpg', 'JPG')}
               </button>
             </div>
           )}
@@ -311,8 +316,7 @@ export function WebpToPngConverterClient() {
       )}
 
       <p className="rounded-md p-3 text-xs" style={{ backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text-subtle))' }}>
-        🔒 100% client-side — conversion happens locally in an in-browser canvas via{' '}
-        <code>canvas.toBlob</code>. Your image never leaves your device.
+        {L('noteText', '🔒 100% client-side — conversion happens locally in an in-browser canvas via')} <code>canvas.toBlob</code>{L('noteTextSuffix', '. Your image never leaves your device.')}
       </p>
     </div>
   )

@@ -2,6 +2,8 @@
 
 import { useState, useMemo } from 'react'
 import { ResultCard, CalculatorNote } from '../calculator/CalculatorField'
+import { useApp } from '@/components/providers/AppProviders'
+import { tui } from '@/lib/i18n/tool-l10n'
 
 type Base = '2' | '8' | '10' | '16'
 
@@ -21,8 +23,17 @@ const BASE_NAMES: Record<Base, string> = {
 
 /** 数字进制转换器 - 非线性(基于进制基数),专门实现 */
 export function NumeralSystemConverterClient() {
+  const { locale } = useApp()
+  const L = (key: string, fb: string) => tui('numeral-system-converter', locale, key, fb)
+
   const [value, setValue] = useState('255')
   const [from, setFrom] = useState<Base>('10')
+
+  const baseLabel = (b: Base) =>
+    b === '2' ? L('baseBinary', 'Binary (Base 2)')
+      : b === '8' ? L('baseOctal', 'Octal (Base 8)')
+        : b === '10' ? L('baseDecimal', 'Decimal (Base 10)')
+          : L('baseHex', 'Hexadecimal (Base 16)')
 
   const results = useMemo(() => {
     // 各进制的合法字符集(含可选负号),严格校验避免 parseInt 静默截断小数/非法尾随字符
@@ -60,7 +71,7 @@ export function NumeralSystemConverterClient() {
       <div className="grid grid-cols-1 gap-4 rounded-lg p-4 sm:grid-cols-2" style={{ backgroundColor: 'rgb(var(--bg-subtle))' }}>
         <div>
           <label htmlFor="value" className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
-            Number
+            {L('number', 'Number')}
           </label>
           <input
             id="value"
@@ -73,7 +84,7 @@ export function NumeralSystemConverterClient() {
         </div>
         <div>
           <label htmlFor="from" className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
-            From base
+            {L('fromBase', 'From base')}
           </label>
           <select
             id="from"
@@ -83,7 +94,7 @@ export function NumeralSystemConverterClient() {
           >
             {(Object.keys(BASE_LABELS) as Base[]).map((b) => (
               <option key={b} value={b}>
-                {BASE_LABELS[b]}
+                {baseLabel(b)}
               </option>
             ))}
           </select>
@@ -98,19 +109,18 @@ export function NumeralSystemConverterClient() {
               label={BASE_NAMES[b]}
               value={results[b]}
               highlight={b === '10'}
-              sublabel={BASE_LABELS[b]}
+              sublabel={baseLabel(b)}
             />
           ))}
         </div>
       ) : (
         <div className="rounded-lg border-2 border-dashed p-6 text-center text-sm" style={{ borderColor: 'rgb(var(--border-strong))', color: 'rgb(var(--text-faint))' }}>
-          Enter a valid number for the selected base
+          {L('emptyState', 'Enter a valid number for the selected base')}
         </div>
       )}
 
       <CalculatorNote>
-        🔢 Common uses: programming (hex colors, memory addresses), digital electronics (binary),
-        and file permissions (octal). Try 255 in decimal = FF in hex.
+        {L('note', '🔢 Common uses: programming (hex colors, memory addresses), digital electronics (binary), and file permissions (octal). Try 255 in decimal = FF in hex.')}
       </CalculatorNote>
     </div>
   )

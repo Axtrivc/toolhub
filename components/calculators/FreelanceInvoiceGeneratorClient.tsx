@@ -2,6 +2,8 @@
 
 import { useState, useMemo, useEffect, useRef } from 'react'
 import { CalculatorField } from '@/components/calculator/CalculatorField'
+import { useApp } from '@/components/providers/AppProviders'
+import { tui } from '@/lib/i18n/tool-l10n'
 
 const CURRENCIES: { code: string; symbol: string; decimals: number }[] = [
   { code: 'USD', symbol: '$', decimals: 2 },
@@ -39,6 +41,9 @@ function escapeHtml(s: string): string {
  * 打印/下载均为完全自包含的内联样式 HTML(纯客户端,刷新即丢数据)。
  */
 export function FreelanceInvoiceGeneratorClient() {
+  const { locale } = useApp()
+  const L = (key: string, fb: string) => tui('freelance-invoice-generator', locale, key, fb)
+
   const [yourName, setYourName] = useState('')
   const [yourEmail, setYourEmail] = useState('')
   const [clientName, setClientName] = useState('')
@@ -101,11 +106,11 @@ export function FreelanceInvoiceGeneratorClient() {
       .join('\n')
     const taxRow =
       taxRate > 0
-        ? `<tr><td style="padding:6px 12px;color:#6b7280;">Tax (${taxRate}%)</td><td style="padding:6px 12px;text-align:right;font-family:ui-monospace,monospace;">${fmt(taxAmount)}</td></tr>`
+        ? `<tr><td style="padding:6px 12px;color:#6b7280;">${L('tax', 'Tax')} (${taxRate}%)</td><td style="padding:6px 12px;text-align:right;font-family:ui-monospace,monospace;">${fmt(taxAmount)}</td></tr>`
         : ''
     const notesBlock = notes.trim()
       ? `<div style="margin-top:32px;padding-top:16px;border-top:1px solid #e5e7eb;">
-  <div style="font-size:11px;text-transform:uppercase;letter-spacing:0.08em;color:#9ca3af;margin-bottom:6px;">Notes</div>
+  <div style="font-size:11px;text-transform:uppercase;letter-spacing:0.08em;color:#9ca3af;margin-bottom:6px;">${L('notes', 'Notes')}</div>
   <div style="font-size:13px;color:#4b5563;white-space:pre-wrap;">${e(notes)}</div>
 </div>`
       : ''
@@ -113,38 +118,38 @@ export function FreelanceInvoiceGeneratorClient() {
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Invoice ${e(invoiceNumber)}</title>
+<title>${L('invoiceTitle', 'Invoice')} ${e(invoiceNumber)}</title>
 <style>@media print { body { margin: 0; } }</style>
 </head>
 <body style="margin:0;padding:40px;background:#f9fafb;font-family:-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:#111827;">
 <div style="max-width:720px;margin:0 auto;background:#ffffff;border:1px solid #e5e7eb;border-radius:12px;padding:48px;">
   <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:16px;">
     <div>
-      <div style="font-size:24px;font-weight:700;">${e(yourName) || 'Your Name'}</div>
+      <div style="font-size:24px;font-weight:700;">${e(yourName) || L('yourNamePlaceholder', 'Your Name')}</div>
       ${yourEmail ? `<div style="font-size:13px;color:#6b7280;margin-top:4px;">${e(yourEmail)}</div>` : ''}
     </div>
     <div style="text-align:right;">
-      <div style="font-size:28px;font-weight:800;letter-spacing:0.12em;color:#2563eb;">INVOICE</div>
+      <div style="font-size:28px;font-weight:800;letter-spacing:0.12em;color:#2563eb;">${L('invoiceLabel', 'INVOICE')}</div>
       <div style="font-size:13px;color:#6b7280;margin-top:4px;font-family:ui-monospace,monospace;">${e(invoiceNumber)}</div>
     </div>
   </div>
   <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:24px;margin-top:32px;">
     <div>
-      <div style="font-size:11px;text-transform:uppercase;letter-spacing:0.08em;color:#9ca3af;margin-bottom:6px;">Bill To</div>
-      <div style="font-size:14px;font-weight:600;">${e(clientName) || '<span style="color:#9ca3af;">Client name</span>'}</div>
+      <div style="font-size:11px;text-transform:uppercase;letter-spacing:0.08em;color:#9ca3af;margin-bottom:6px;">${L('billTo', 'Bill To')}</div>
+      <div style="font-size:14px;font-weight:600;">${e(clientName) || `<span style="color:#9ca3af;">${L('clientNamePlaceholder', 'Client name')}</span>`}</div>
     </div>
     <div style="text-align:right;font-size:13px;">
-      <div><span style="color:#9ca3af;">Issue date:</span> <span style="font-family:ui-monospace,monospace;">${formatDate(issueDate) || '—'}</span></div>
-      <div style="margin-top:4px;"><span style="color:#9ca3af;">Due date:</span> <span style="font-family:ui-monospace,monospace;">${formatDate(dueDate) || '—'}</span></div>
+      <div><span style="color:#9ca3af;">${L('issueDate', 'Issue date:')}</span> <span style="font-family:ui-monospace,monospace;">${formatDate(issueDate) || '—'}</span></div>
+      <div style="margin-top:4px;"><span style="color:#9ca3af;">${L('dueDate', 'Due date:')}</span> <span style="font-family:ui-monospace,monospace;">${formatDate(dueDate) || '—'}</span></div>
     </div>
   </div>
   <table style="width:100%;border-collapse:collapse;margin-top:32px;font-size:14px;">
     <thead>
       <tr style="background:#f3f4f6;">
-        <th style="padding:10px 12px;text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:0.08em;color:#6b7280;">Description</th>
-        <th style="padding:10px 12px;text-align:right;font-size:11px;text-transform:uppercase;letter-spacing:0.08em;color:#6b7280;">Qty</th>
-        <th style="padding:10px 12px;text-align:right;font-size:11px;text-transform:uppercase;letter-spacing:0.08em;color:#6b7280;">Rate</th>
-        <th style="padding:10px 12px;text-align:right;font-size:11px;text-transform:uppercase;letter-spacing:0.08em;color:#6b7280;">Amount</th>
+        <th style="padding:10px 12px;text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:0.08em;color:#6b7280;">${L('description', 'Description')}</th>
+        <th style="padding:10px 12px;text-align:right;font-size:11px;text-transform:uppercase;letter-spacing:0.08em;color:#6b7280;">${L('qty', 'Qty')}</th>
+        <th style="padding:10px 12px;text-align:right;font-size:11px;text-transform:uppercase;letter-spacing:0.08em;color:#6b7280;">${L('rate', 'Rate')}</th>
+        <th style="padding:10px 12px;text-align:right;font-size:11px;text-transform:uppercase;letter-spacing:0.08em;color:#6b7280;">${L('amount', 'Amount')}</th>
       </tr>
     </thead>
     <tbody>
@@ -153,9 +158,9 @@ ${itemRows}
   </table>
   <div style="display:flex;justify-content:flex-end;margin-top:16px;">
     <table style="font-size:14px;min-width:240px;">
-      <tr><td style="padding:6px 12px;color:#6b7280;">Subtotal</td><td style="padding:6px 12px;text-align:right;font-family:ui-monospace,monospace;">${fmt(subtotal)}</td></tr>
+      <tr><td style="padding:6px 12px;color:#6b7280;">${L('subtotal', 'Subtotal')}</td><td style="padding:6px 12px;text-align:right;font-family:ui-monospace,monospace;">${fmt(subtotal)}</td></tr>
       ${taxRow}
-      <tr style="border-top:2px solid #111827;"><td style="padding:10px 12px;font-weight:700;font-size:16px;">Total</td><td style="padding:10px 12px;text-align:right;font-weight:700;font-size:16px;font-family:ui-monospace,monospace;">${fmt(total)}</td></tr>
+      <tr style="border-top:2px solid #111827;"><td style="padding:10px 12px;font-weight:700;font-size:16px;">${L('total', 'Total')}</td><td style="padding:10px 12px;text-align:right;font-weight:700;font-size:16px;font-family:ui-monospace,monospace;">${fmt(total)}</td></tr>
     </table>
   </div>
   ${notesBlock}
@@ -163,7 +168,7 @@ ${itemRows}
 <script>window.onload = function () { window.print(); };</script>
 </body>
 </html>`
-  }, [rows, taxRate, taxAmount, subtotal, total, notes, invoiceNumber, yourName, yourEmail, clientName, issueDate, dueDate, currency]) // eslint-disable-line react-hooks/exhaustive-deps
+  }, [rows, taxRate, taxAmount, subtotal, total, notes, invoiceNumber, yourName, yourEmail, clientName, issueDate, dueDate, currency, locale]) // eslint-disable-line react-hooks/exhaustive-deps
 
   const handlePrint = () => {
     // 用 Blob URL 替代 win.document.write(老 API,部分浏览器已限制)
@@ -202,18 +207,18 @@ ${itemRows}
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
         {/* 左侧表单 */}
         <div className="space-y-4">
-          <CalculatorField id="your-name" label="Your name / company" value={yourName} onChange={setYourName} type="text" placeholder="Acme Design Studio" />
-          <CalculatorField id="your-email" label="Your email" value={yourEmail} onChange={setYourEmail} type="text" placeholder="you@example.com" />
-          <CalculatorField id="client-name" label="Client name" value={clientName} onChange={setClientName} type="text" placeholder="Client Inc." />
+          <CalculatorField id="your-name" label={L('yourNameCompany', 'Your name / company')} value={yourName} onChange={setYourName} type="text" placeholder="Acme Design Studio" />
+          <CalculatorField id="your-email" label={L('yourEmail', 'Your email')} value={yourEmail} onChange={setYourEmail} type="text" placeholder="you@example.com" />
+          <CalculatorField id="client-name" label={L('clientName', 'Client name')} value={clientName} onChange={setClientName} type="text" placeholder="Client Inc." />
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
-            <CalculatorField id="invoice-number" label="Invoice number" value={invoiceNumber} onChange={setInvoiceNumber} type="text" placeholder="INV-0001" />
-            <CalculatorField id="issue-date" label="Issue date" value={issueDate} onChange={setIssueDate} type="date" />
-            <CalculatorField id="due-date" label="Due date" value={dueDate} onChange={setDueDate} type="date" />
+            <CalculatorField id="invoice-number" label={L('invoiceNumber', 'Invoice number')} value={invoiceNumber} onChange={setInvoiceNumber} type="text" placeholder="INV-0001" />
+            <CalculatorField id="issue-date" label={L('issueDateLabel', 'Issue date')} value={issueDate} onChange={setIssueDate} type="date" />
+            <CalculatorField id="due-date" label={L('dueDateLabel', 'Due date')} value={dueDate} onChange={setDueDate} type="date" />
           </div>
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             <div>
               <label htmlFor="currency" className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
-                Currency
+                {L('currency', 'Currency')}
               </label>
               <select id="currency" value={currency} onChange={(e) => setCurrency(e.target.value)} className={inputCls} style={inputStyle}>
                 {CURRENCIES.map((c) => (
@@ -223,17 +228,17 @@ ${itemRows}
                 ))}
               </select>
             </div>
-            <CalculatorField id="tax-pct" label="Tax (optional)" value={taxPct} onChange={setTaxPct} suffix="%" placeholder="0" />
+            <CalculatorField id="tax-pct" label={L('taxOptional', 'Tax (optional)')} value={taxPct} onChange={setTaxPct} suffix="%" placeholder="0" />
           </div>
 
           {/* 行项目 */}
           <div>
             <div className="mb-1.5 flex items-center justify-between">
               <span className="text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
-                Line items
+                {L('lineItems', 'Line items')}
               </span>
               <button type="button" onClick={addItem} className="btn btn-secondary text-xs">
-                + Add item
+                {L('addItem', '+ Add item')}
               </button>
             </div>
             <div className="space-y-2">
@@ -243,8 +248,8 @@ ${itemRows}
                     type="text"
                     value={it.description}
                     onChange={(e) => updateItem(it.id, { description: e.target.value })}
-                    placeholder={`Description of item ${idx + 1}`}
-                    aria-label={`Item ${idx + 1} description`}
+                    placeholder={`${L('descriptionOfItem', 'Description of item ')}${idx + 1}`}
+                    aria-label={`${L('itemPrefix', 'Item ')}${idx + 1} ${L('descriptionWord', 'description')}`}
                     className={`${inputCls} min-w-0 flex-1 p-2.5 text-sm`}
                     style={inputStyle}
                   />
@@ -252,8 +257,8 @@ ${itemRows}
                     type="number"
                     value={it.qty}
                     onChange={(e) => updateItem(it.id, { qty: e.target.value })}
-                    placeholder="Qty"
-                    aria-label={`Item ${idx + 1} quantity`}
+                    placeholder={L('qty', 'Qty')}
+                    aria-label={`${L('itemPrefix', 'Item ')}${idx + 1} ${L('quantityWord', 'quantity')}`}
                     min="0"
                     step="any"
                     className={`${inputCls} w-20 p-2.5 text-sm`}
@@ -263,8 +268,8 @@ ${itemRows}
                     type="number"
                     value={it.rate}
                     onChange={(e) => updateItem(it.id, { rate: e.target.value })}
-                    placeholder="Rate"
-                    aria-label={`Item ${idx + 1} unit rate`}
+                    placeholder={L('rate', 'Rate')}
+                    aria-label={`${L('itemPrefix', 'Item ')}${idx + 1} ${L('unitRateWord', 'unit rate')}`}
                     min="0"
                     step="any"
                     className={`${inputCls} w-28 p-2.5 text-sm`}
@@ -274,7 +279,7 @@ ${itemRows}
                     type="button"
                     onClick={() => removeItem(it.id)}
                     disabled={items.length <= 1}
-                    aria-label={`Remove item ${idx + 1}`}
+                    aria-label={`${L('removeItemPrefix', 'Remove item ')}${idx + 1}`}
                     className="rounded-lg border px-2.5 py-2 text-sm transition disabled:cursor-not-allowed disabled:opacity-40"
                     style={{ borderColor: 'rgb(var(--border))', color: 'rgb(var(--text-muted))' }}
                   >
@@ -287,14 +292,14 @@ ${itemRows}
 
           <div>
             <label htmlFor="notes" className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
-              Notes (payment terms, thank-you message…)
+              {L('notesLabel', 'Notes (payment terms, thank-you message…)')}
             </label>
             <textarea
               id="notes"
               value={notes}
               onChange={(e) => setNotes(e.target.value)}
               rows={3}
-              placeholder="Payment due within 30 days. Thank you for your business!"
+              placeholder={L('notesPlaceholder', 'Payment due within 30 days. Thank you for your business!')}
               className={`${inputCls} font-mono text-sm`}
               style={inputStyle}
             />
@@ -303,10 +308,10 @@ ${itemRows}
           {/* 操作按钮 */}
           <div className="flex flex-wrap gap-3">
             <button type="button" onClick={handlePrint} className="btn btn-primary">
-              Print / Save as PDF
+              {L('printSavePdf', 'Print / Save as PDF')}
             </button>
             <button type="button" onClick={handleDownload} className="btn btn-secondary">
-              Download HTML
+              {L('downloadHtml', 'Download HTML')}
             </button>
           </div>
         </div>
@@ -315,27 +320,27 @@ ${itemRows}
         <div className="rounded-xl border bg-white p-6 text-slate-900 shadow-sm sm:p-8" style={{ borderColor: 'rgb(var(--border))' }}>
           <div className="flex flex-wrap items-start justify-between gap-3">
             <div>
-              <div className="text-xl font-bold">{yourName || <span className="text-slate-300">Your Name</span>}</div>
+              <div className="text-xl font-bold">{yourName || <span className="text-slate-300">{L('yourNamePlaceholder', 'Your Name')}</span>}</div>
               {yourEmail && <div className="mt-0.5 text-xs text-slate-500">{yourEmail}</div>}
             </div>
             <div className="text-right">
-              <div className="text-2xl font-extrabold tracking-widest text-blue-600">INVOICE</div>
+              <div className="text-2xl font-extrabold tracking-widest text-blue-600">{L('invoiceLabel', 'INVOICE')}</div>
               <div className="mt-0.5 font-mono text-xs text-slate-500">{invoiceNumber}</div>
             </div>
           </div>
 
           <div className="mt-6 flex flex-wrap justify-between gap-4">
             <div>
-              <div className="text-[10px] font-medium uppercase tracking-wider text-slate-400">Bill To</div>
-              <div className="mt-1 text-sm font-semibold">{clientName || <span className="text-slate-300">Client name</span>}</div>
+              <div className="text-[10px] font-medium uppercase tracking-wider text-slate-400">{L('billTo', 'Bill To')}</div>
+              <div className="mt-1 text-sm font-semibold">{clientName || <span className="text-slate-300">{L('clientNamePlaceholder', 'Client name')}</span>}</div>
             </div>
             <div className="text-right text-xs">
               <div>
-                <span className="text-slate-400">Issue date:</span>{' '}
+                <span className="text-slate-400">{L('issueDate', 'Issue date:')}</span>{' '}
                 <span className="font-mono">{issueDate ? formatDate(issueDate) : '—'}</span>
               </div>
               <div className="mt-1">
-                <span className="text-slate-400">Due date:</span>{' '}
+                <span className="text-slate-400">{L('dueDate', 'Due date:')}</span>{' '}
                 <span className="font-mono">{dueDate ? formatDate(dueDate) : '—'}</span>
               </div>
             </div>
@@ -344,10 +349,10 @@ ${itemRows}
           <table className="mt-6 w-full text-sm">
             <thead>
               <tr className="bg-slate-100 text-[10px] uppercase tracking-wider text-slate-500">
-                <th className="rounded-l-md px-3 py-2 text-left font-medium">Description</th>
-                <th className="px-3 py-2 text-right font-medium">Qty</th>
-                <th className="px-3 py-2 text-right font-medium">Rate</th>
-                <th className="rounded-r-md px-3 py-2 text-right font-medium">Amount</th>
+                <th className="rounded-l-md px-3 py-2 text-left font-medium">{L('description', 'Description')}</th>
+                <th className="px-3 py-2 text-right font-medium">{L('qty', 'Qty')}</th>
+                <th className="px-3 py-2 text-right font-medium">{L('rate', 'Rate')}</th>
+                <th className="rounded-r-md px-3 py-2 text-right font-medium">{L('amount', 'Amount')}</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-100">
@@ -365,17 +370,17 @@ ${itemRows}
           <div className="mt-4 flex justify-end">
             <div className="w-56 text-sm">
               <div className="flex justify-between px-3 py-1.5">
-                <span className="text-slate-500">Subtotal</span>
+                <span className="text-slate-500">{L('subtotal', 'Subtotal')}</span>
                 <span className="font-mono">{fmt(subtotal)}</span>
               </div>
               {taxRate > 0 && (
                 <div className="flex justify-between px-3 py-1.5">
-                  <span className="text-slate-500">Tax ({taxRate}%)</span>
+                  <span className="text-slate-500">{L('tax', 'Tax')} ({taxRate}%)</span>
                   <span className="font-mono">{fmt(taxAmount)}</span>
                 </div>
               )}
               <div className="flex justify-between border-t-2 border-slate-900 px-3 py-2 text-base font-bold">
-                <span>Total</span>
+                <span>{L('total', 'Total')}</span>
                 <span className="font-mono">{fmt(total)}</span>
               </div>
             </div>
@@ -383,7 +388,7 @@ ${itemRows}
 
           {notes.trim() && (
             <div className="mt-6 border-t border-slate-200 pt-4">
-              <div className="text-[10px] font-medium uppercase tracking-wider text-slate-400">Notes</div>
+              <div className="text-[10px] font-medium uppercase tracking-wider text-slate-400">{L('notes', 'Notes')}</div>
               <div className="mt-1 whitespace-pre-wrap text-xs text-slate-600">{notes}</div>
             </div>
           )}
@@ -391,8 +396,8 @@ ${itemRows}
       </div>
 
       <p className="rounded-md p-3 text-xs" style={{ backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text-subtle))' }}>
-        🔒 Everything stays in your browser — no data is uploaded or saved anywhere. That also means{' '}
-        <strong>refreshing the page discards your invoice</strong>, so print or download the HTML before leaving.
+        {L('noteP1', '🔒 Everything stays in your browser — no data is uploaded or saved anywhere. That also means')}{' '}
+        <strong>{L('noteStrong', 'refreshing the page discards your invoice')}</strong>{L('noteP2', ', so print or download the HTML before leaving.')}
       </p>
     </div>
   )

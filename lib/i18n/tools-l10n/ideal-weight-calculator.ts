@@ -6,6 +6,10 @@ import type { ToolL10n } from '../tool-l10n'
 
 export const idealWeightCalculatorL10n: ToolL10n = {
   zh: {
+    formula: {
+      formula: 'Devine: men 50 + 2.3×(height_in − 60)\n         women 45.5 + 2.3×(height_in − 60)',
+      explain: '一个常用公式(Devine)按身高超过 5 英尺的部分估算理想体重(千克)。它是人群参考,不是个人健康目标——体型和肌肉量差异很大。',
+    },
     ui: {
       'in.gender': '性别',
       'opt.gender.male': '男',
@@ -28,6 +32,10 @@ export const idealWeightCalculatorL10n: ToolL10n = {
     ],
   },
   es: {
+    formula: {
+      formula: 'Devine: men 50 + 2.3×(height_in − 60)\n         women 45.5 + 2.3×(height_in − 60)',
+      explain: 'Una fórmula común (Devine) estima el peso ideal en kg a partir de la altura sobre 5 pies. Es una referencia poblacional, no una meta personal — complexión y músculo varían mucho.',
+    },
     ui: {
       'in.gender': 'Sexo',
       'opt.gender.male': 'Hombre',
@@ -50,6 +58,10 @@ export const idealWeightCalculatorL10n: ToolL10n = {
     ],
   },
   de: {
+    formula: {
+      formula: 'Devine: men 50 + 2.3×(height_in − 60)\n         women 45.5 + 2.3×(height_in − 60)',
+      explain: 'Eine gängige Formel (Devine) schätzt das Idealgewicht in kg aus der Größe über 5 Fuß. Es ist ein Populations­richtwert, kein persönliches Gesundheitsziel — Statur und Muskeln variieren stark.',
+    },
     ui: {
       'in.gender': 'Geschlecht',
       'opt.gender.male': 'Männlich',

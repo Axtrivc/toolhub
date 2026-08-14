@@ -6,6 +6,19 @@ import type { ToolL10n } from '../tool-l10n'
 
 export const dataStorageConverterL10n: ToolL10n = {
   zh: {
+    ui: {
+      'note': '💾 采用二进制单位(1 KB = 1024 字节)。常用于文件大小和存储。',
+      'unit.b': '字节 (B)',
+      'unit.bit': '比特 (bit)',
+      'unit.gb': '吉字节 (GB)',
+      'unit.gbit': '吉比特 (Gb)',
+      'unit.kb': '千字节 (KB)',
+      'unit.kbit': '千比特 (Kb)',
+      'unit.mb': '兆字节 (MB)',
+      'unit.mbit': '兆比特 (Mb)',
+      'unit.pb': '拍字节 (PB)',
+      'unit.tb': '太字节 (TB)',
+    },
     useCases: [
       '规划数据库字段和存储容量',
       '核对 API 负载大小限制',
@@ -17,6 +30,19 @@ export const dataStorageConverterL10n: ToolL10n = {
     ],
   },
   es: {
+    ui: {
+      'note': '💾 Usa unidades binarias (1 KB = 1024 bytes). Común para tamaños de archivo y almacenamiento.',
+      'unit.b': 'Bytes (B)',
+      'unit.bit': 'Bits (bit)',
+      'unit.gb': 'Gigabytes (GB)',
+      'unit.gbit': 'Gigabits (Gb)',
+      'unit.kb': 'Kilobytes (KB)',
+      'unit.kbit': 'Kilobits (Kb)',
+      'unit.mb': 'Megabytes (MB)',
+      'unit.mbit': 'Megabits (Mb)',
+      'unit.pb': 'Petabytes (PB)',
+      'unit.tb': 'Terabytes (TB)',
+    },
     useCases: [
       'planificar campos de base de datos y capacidad de almacenamiento',
       'comprobar los límites de tamaño de las cargas de API',
@@ -28,6 +54,19 @@ export const dataStorageConverterL10n: ToolL10n = {
     ],
   },
   de: {
+    ui: {
+      'note': '💾 Verwendet binäre Einheiten (1 KB = 1024 Bytes). Üblich für Dateigrößen und Speicher.',
+      'unit.b': 'Bytes (B)',
+      'unit.bit': 'Bits (bit)',
+      'unit.gb': 'Gigabyte (GB)',
+      'unit.gbit': 'Gigabits (Gb)',
+      'unit.kb': 'Kilobytes (KB)',
+      'unit.kbit': 'Kilobits (Kb)',
+      'unit.mb': 'Megabyte (MB)',
+      'unit.mbit': 'Megabits (Mb)',
+      'unit.pb': 'Petabyte (PB)',
+      'unit.tb': 'Terabyte (TB)',
+    },
     useCases: [
       'Datenbankfelder und Speicherkapazität planen',
       'Größenbeschränkungen von API-Payloads prüfen',

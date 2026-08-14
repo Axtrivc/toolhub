@@ -2,6 +2,8 @@
 
 import { useState, useMemo } from 'react'
 import { CopyButton } from '@/components/CopyButton'
+import { useApp } from '@/components/providers/AppProviders'
+import { tui } from '@/lib/i18n/tool-l10n'
 
 /**
  * Naming Case Converter —— 代码命名风格互转
@@ -47,6 +49,10 @@ const CASES: CaseDef[] = [
 ]
 
 export function NamingCaseConverterClient() {
+  const { locale } = useApp()
+  // 取本地化 UI 串;缺失回退英文(SSR 恒英文)。
+  const L = (key: string, fb: string) => tui('naming-case-converter', locale, key, fb)
+
   const [input, setInput] = useState('user profile settings')
   const [bulk, setBulk] = useState(false)
 
@@ -71,7 +77,7 @@ export function NamingCaseConverterClient() {
       <div>
         <div className="mb-2 flex items-center justify-between">
           <label htmlFor="naming-input" className="text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
-            {bulk ? 'One phrase per line' : 'Phrase to convert'}
+            {bulk ? L('bulkInputLabel', 'One phrase per line') : L('inputLabel', 'Phrase to convert')}
           </label>
           <label
             className="flex cursor-pointer items-center gap-2 text-sm"
@@ -83,7 +89,7 @@ export function NamingCaseConverterClient() {
               onChange={(e) => setBulk(e.target.checked)}
               className="h-4 w-4 accent-brand-600"
             />
-            Bulk mode
+            {L('bulkMode', 'Bulk mode')}
           </label>
         </div>
         {bulk ? (
@@ -91,7 +97,7 @@ export function NamingCaseConverterClient() {
             id="naming-input"
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder={'user profile settings\ngetHTTPResponse\nAPI_BASE_URL'}
+            placeholder={L('bulkPlaceholder', 'user profile settings\ngetHTTPResponse\nAPI_BASE_URL')}
             rows={6}
             spellCheck={false}
             className="w-full rounded-lg border p-4 font-mono text-sm shadow-sm outline-none transition focus:ring-2"
@@ -107,7 +113,7 @@ export function NamingCaseConverterClient() {
             type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder="user profile settings"
+            placeholder={L('placeholder', 'user profile settings')}
             spellCheck={false}
             className="w-full rounded-lg border p-4 font-mono text-sm shadow-sm outline-none transition focus:ring-2"
             style={{
@@ -118,7 +124,7 @@ export function NamingCaseConverterClient() {
           />
         )}
         <p className="mt-1.5 text-xs" style={{ color: 'rgb(var(--text-faint))' }}>
-          Handles spaces, underscores, hyphens, dots, slashes and camelCase/PascalCase boundaries.
+          {L('hint', 'Handles spaces, underscores, hyphens, dots, slashes and camelCase/PascalCase boundaries.')}
         </p>
       </div>
 
@@ -134,7 +140,7 @@ export function NamingCaseConverterClient() {
               <span className="text-xs font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
                 {r.label}
               </span>
-              <CopyButton value={r.value} label="Copy" disabled={!r.value} />
+              <CopyButton value={r.value} label={L('copy', 'Copy')} disabled={!r.value} />
             </div>
             {bulk ? (
               <pre
@@ -156,7 +162,7 @@ export function NamingCaseConverterClient() {
         className="rounded-md p-3 text-xs"
         style={{ backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text-subtle))' }}
       >
-        🔒 100% client-side — everything is converted in your browser, nothing leaves the page.
+        {L('note', '🔒 100% client-side — everything is converted in your browser, nothing leaves the page.')}
       </p>
     </div>
   )

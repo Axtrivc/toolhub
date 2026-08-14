@@ -4,12 +4,17 @@ import { useState, useMemo } from 'react'
 import { hexToRgb, rgbToHex, rgbToHsl, hslToRgb, parseRgb, parseHsl, type RGB } from '@/lib/color'
 import { ResultCard, CalculatorNote } from '../calculator/CalculatorField'
 import { CopyButton } from '../CopyButton'
+import { useApp } from '@/components/providers/AppProviders'
+import { tui } from '@/lib/i18n/tool-l10n'
 
 /**
  * 统一颜色转换器 - 输入任一格式(hex/rgb/hsl),自动转成全部格式
  * 一个组件覆盖 hex-to-rgb / rgb-to-hex / hsl-to-rgb 等多个搜索词
  */
 export function ColorConverterClient() {
+  const { locale } = useApp()
+  const L = (key: string, fb: string) => tui('color-converter', locale, key, fb)
+
   const [input, setInput] = useState('#3b82f6')
 
   const parsed = useMemo(() => {
@@ -33,7 +38,7 @@ export function ColorConverterClient() {
     <div className="space-y-6">
       <div>
         <label htmlFor="color-input" className="mb-2 block text-sm font-medium text-slate-700">
-          Color value (hex, rgb, or hsl)
+          {L('colorValueLabel', 'Color value (hex, rgb, or hsl)')}
         </label>
         <div className="flex gap-2">
           <input
@@ -49,7 +54,7 @@ export function ColorConverterClient() {
             value={parsed?.hex || '#3b82f6'}
             onChange={(e) => setInput(e.target.value)}
             className="h-[50px] w-16 cursor-pointer rounded-lg border border-slate-300"
-            aria-label="Color picker"
+            aria-label={L('colorPickerAria', 'Color picker')}
           />
         </div>
       </div>
@@ -69,13 +74,12 @@ export function ColorConverterClient() {
         </>
       ) : (
         <div className="rounded-lg border-2 border-dashed p-6 text-center text-sm" style={{ borderColor: 'rgb(var(--border-strong))', color: 'rgb(var(--text-faint))' }}>
-          Enter a valid hex (#3b82f6), rgb(59,130,246), or hsl(217,91%,60%)
+          {L('emptyState', 'Enter a valid hex (#3b82f6), rgb(59,130,246), or hsl(217,91%,60%)')}
         </div>
       )}
 
       <CalculatorNote>
-        🎨 Use the color picker or type any format — converts to all three instantly. Common for
-        web design, CSS, and brand guidelines.
+        {L('note', '🎨 Use the color picker or type any format — converts to all three instantly. Common for web design, CSS, and brand guidelines.')}
       </CalculatorNote>
     </div>
   )

@@ -6,6 +6,23 @@ import type { ToolL10n } from '../tool-l10n'
 
 export const svgToImageL10n: ToolL10n = {
   zh: {
+    ui: {
+      'convert': '转换',
+      'convertedPreviewAlt': '转换预览',
+      'download': '下载',
+      'errorConvertFailed': '转换失败。',
+      'errorEmpty': '请先粘贴 SVG 代码或上传文件。',
+      'errorEncodeFailed': '转换失败:浏览器无法编码图片。',
+      'errorInvalidSvg': '无效的 SVG 标记。',
+      'errorInvalidSvgMarkup': '无效 SVG——确保含 xmlns 以及 viewBox 或 width/height。',
+      'errorReadFile': '读取文件失败。',
+      'format': '格式:',
+      'note': '🖼️ 转换完全在你的浏览器中通过 HTML5 画布完成——你的 SVG 绝不上传。高 DPI 屏幕上想要清晰输出,请用 2x 或 3x 缩放。自包含的 SVG(内联图片为 data URI、内嵌字体)转换最稳定。',
+      'pasteSvgCode': '粘贴 SVG 代码',
+      'result': '结果',
+      'scale': '缩放:',
+      'uploadSvg': '上传 .svg',
+    },
     useCases: [
       '把 SVG logo 转成邮件用的 PNG',
       '生成社交媒体通用的 WebP 缩略图',
@@ -19,6 +36,23 @@ export const svgToImageL10n: ToolL10n = {
     ],
   },
   es: {
+    ui: {
+      'convert': 'Convertir',
+      'convertedPreviewAlt': 'Vista de conversión',
+      'download': 'Descargar',
+      'errorConvertFailed': 'Falló la conversión.',
+      'errorEmpty': 'Pega código SVG o sube un archivo primero.',
+      'errorEncodeFailed': 'Falló la conversión: el navegador no pudo codificar la imagen.',
+      'errorInvalidSvg': 'Marcado SVG no válido.',
+      'errorInvalidSvgMarkup': 'SVG no válido — asegúrate de que tiene xmlns y un viewBox o width/height.',
+      'errorReadFile': 'No se pudo leer el archivo.',
+      'format': 'Formato:',
+      'note': '🖼️ La conversión se hace totalmente en tu navegador vía canvas HTML5 — tu SVG nunca se sube. Para una salida nítida en pantallas de alta densidad usa escala 2x o 3x. Los SVG autónomos (imágenes inline como data URI, fuentes embebidas) se convierten de forma más fiable.',
+      'pasteSvgCode': 'Pega código SVG',
+      'result': 'Resultado',
+      'scale': 'Escala:',
+      'uploadSvg': 'Subir .svg',
+    },
     useCases: [
       'convertir un logo SVG a PNG para correos',
       'generar miniaturas WebP compatibles con redes sociales',
@@ -32,6 +66,23 @@ export const svgToImageL10n: ToolL10n = {
     ],
   },
   de: {
+    ui: {
+      'convert': 'Konvertieren',
+      'convertedPreviewAlt': 'Konvertierungs-Vorschau',
+      'download': 'Herunterladen',
+      'errorConvertFailed': 'Konvertierung fehlgeschlagen.',
+      'errorEmpty': 'Bitte zuerst SVG-Code einfügen oder Datei hochladen.',
+      'errorEncodeFailed': 'Konvertierung fehlgeschlagen: Browser konnte das Bild nicht codieren.',
+      'errorInvalidSvg': 'Ungültiges SVG-Markup.',
+      'errorInvalidSvgMarkup': 'Ungültiges SVG — sicherstellen, dass xmlns und ein viewBox oder width/height vorhanden sind.',
+      'errorReadFile': 'Datei konnte nicht gelesen werden.',
+      'format': 'Format:',
+      'note': '🖼️ Die Konvertierung läuft vollständig in deinem Browser über ein HTML5-Canvas — dein SVG wird nie hochgeladen. Für scharfe Ausgabe auf High-DPI-Bildschirmen 2x- oder 3x-Skalierung verwenden. Autarke SVGs (Inline-Bilder als Data-URI, eingebettete Schriften) konvertieren am zuverlässigsten.',
+      'pasteSvgCode': 'SVG-Code einfügen',
+      'result': 'Ergebnis',
+      'scale': 'Skalierung:',
+      'uploadSvg': '.svg hochladen',
+    },
     useCases: [
       'ein SVG-Logo für E-Mails in PNG umwandeln',
       'WebP-Miniaturansichten für soziale Netzwerke erzeugen',

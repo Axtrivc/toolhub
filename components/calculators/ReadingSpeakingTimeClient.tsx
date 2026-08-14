@@ -3,6 +3,8 @@
 import { useMemo, useState } from 'react'
 import { CopyButton } from '@/components/CopyButton'
 import { ResultCard, CalculatorNote } from '@/components/calculator/CalculatorField'
+import { useApp } from '@/components/providers/AppProviders'
+import { tui } from '@/lib/i18n/tool-l10n'
 
 /**
  * Reading & Speaking Time 客户端组件
@@ -42,6 +44,21 @@ const inputStyle = {
 }
 
 export function ReadingSpeakingTimeClient() {
+  const { locale } = useApp()
+  // 取本地化 UI 串;缺失回退英文(SSR 恒英文)。
+  const L = (key: string, fb: string) => tui('reading-speaking-time', locale, key, fb)
+
+  // 预设文案本地化(原始英文 → key;key={p.label} 保持原始值)
+  const presetLabelKeys: Record<string, string> = {
+    Slow: 'presetSlow',
+    Average: 'presetAverage',
+    Fast: 'presetFast',
+    Skim: 'presetSkim',
+    Presentation: 'presetPresentation',
+    Conversation: 'presetConversation',
+    'Fast speaker': 'presetFastSpeaker',
+  }
+
   const [text, setText] = useState('')
   const [readWpm, setReadWpm] = useState(150)
   const [speakWpm, setSpeakWpm] = useState(130)
@@ -60,15 +77,16 @@ export function ReadingSpeakingTimeClient() {
   const summary = useMemo(
     () =>
       [
-        'Reading & Speaking Time',
-        `Words: ${words}`,
-        `Characters: ${chars}`,
-        `Sentences: ${sentences}`,
-        `Pages (250 words/page): ${words === 0 ? '0' : pages.toFixed(1)}`,
-        `Reading time @ ${readWpm} wpm: ${mmss((words / readWpm) * 60)}`,
-        `Speaking time @ ${speakWpm} wpm: ${mmss((words / speakWpm) * 60)}`,
+        L('summaryTitle', 'Reading & Speaking Time'),
+        `${L('sWords', 'Words: ')}${words}`,
+        `${L('sCharacters', 'Characters: ')}${chars}`,
+        `${L('sSentences', 'Sentences: ')}${sentences}`,
+        `${L('sPages', 'Pages (250 words/page): ')}${words === 0 ? '0' : pages.toFixed(1)}`,
+        `${L('sReadingTime', 'Reading time @ ')}${readWpm} wpm: ${mmss((words / readWpm) * 60)}`,
+        `${L('sSpeakingTime', 'Speaking time @ ')}${speakWpm} wpm: ${mmss((words / speakWpm) * 60)}`,
       ].join('\n'),
-    [words, chars, sentences, pages, readWpm, speakWpm],
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [words, chars, sentences, pages, readWpm, speakWpm, locale],
   )
 
   const presetTable = (
@@ -88,9 +106,9 @@ export function ReadingSpeakingTimeClient() {
               }}
             >
               <td className="px-4 py-2" style={{ color: 'rgb(var(--text))' }}>
-                {p.label}
+                {L(presetLabelKeys[p.label], p.label)}
                 {p.wpm === active && (
-                  <span className="ml-2 text-xs font-medium text-primary">selected</span>
+                  <span className="ml-2 text-xs font-medium text-primary">{L('selected', 'selected')}</span>
                 )}
               </td>
               <td className="px-4 py-2 text-right font-mono" style={{ color: 'rgb(var(--text-muted))' }}>
@@ -123,7 +141,7 @@ export function ReadingSpeakingTimeClient() {
             color: p.wpm === active ? 'rgb(var(--text))' : 'rgb(var(--text-muted))',
           }}
         >
-          {p.label} · {p.wpm}
+          {L(presetLabelKeys[p.label], p.label)} · {p.wpm}
         </button>
       ))}
     </div>
@@ -134,14 +152,14 @@ export function ReadingSpeakingTimeClient() {
       {/* 文本输入 */}
       <div>
         <label htmlFor="rst-text" className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
-          Paste your text
+          {L('pasteYourText', 'Paste your text')}
         </label>
         <textarea
           id="rst-text"
           value={text}
           onChange={(e) => setText(e.target.value)}
           rows={8}
-          placeholder="Paste an article, script, or speech draft here…"
+          placeholder={L('placeholder', 'Paste an article, script, or speech draft here…')}
           className="w-full rounded-lg border p-4 font-mono text-sm shadow-sm outline-none transition focus:ring-2"
           style={inputStyle}
         />
@@ -149,21 +167,21 @@ export function ReadingSpeakingTimeClient() {
 
       {/* 基础统计 */}
       <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
-        <ResultCard label="Words" value={words} />
-        <ResultCard label="Characters" value={chars} />
-        <ResultCard label="Sentences" value={sentences} />
-        <ResultCard label="Pages" value={words === 0 ? '0' : pages.toFixed(1)} sublabel="at 250 words per page" />
+        <ResultCard label={L('words', 'Words')} value={words} />
+        <ResultCard label={L('characters', 'Characters')} value={chars} />
+        <ResultCard label={L('sentences', 'Sentences')} value={sentences} />
+        <ResultCard label={L('pages', 'Pages')} value={words === 0 ? '0' : pages.toFixed(1)} sublabel={L('at250WordsPerPage', 'at 250 words per page')} />
       </div>
 
       {/* 朗读时间 */}
       <div className="space-y-3 rounded-lg border p-4" style={{ borderColor: 'rgb(var(--border))' }}>
         <h3 className="text-sm font-semibold" style={{ color: 'rgb(var(--text))' }}>
-          Reading time
+          {L('readingTime', 'Reading time')}
         </h3>
         {presetButtons(READING_PRESETS, readWpm, setReadWpm)}
         <div>
           <label htmlFor="rst-read-wpm" className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
-            Custom speed: <span className="font-mono">{readWpm} wpm</span>
+            {L('customSpeed', 'Custom speed: ')}<span className="font-mono">{readWpm} wpm</span>
           </label>
           <input
             id="rst-read-wpm"
@@ -178,10 +196,10 @@ export function ReadingSpeakingTimeClient() {
         </div>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <ResultCard
-            label={`Reading time @ ${readWpm} wpm`}
+            label={`${L('readingTimeAt', 'Reading time @ ')}${readWpm} wpm`}
             value={<span className="font-mono">{mmss((words / readWpm) * 60)}</span>}
             highlight
-            sublabel={words === 0 ? 'paste some text first' : `${words} words`}
+            sublabel={words === 0 ? L('pasteSomeTextFirst', 'paste some text first') : `${words} ${L('wordsUnit', 'words')}`}
           />
           {presetTable(READING_PRESETS, readWpm)}
         </div>
@@ -190,28 +208,26 @@ export function ReadingSpeakingTimeClient() {
       {/* 演讲时间 */}
       <div className="space-y-3 rounded-lg border p-4" style={{ borderColor: 'rgb(var(--border))' }}>
         <h3 className="text-sm font-semibold" style={{ color: 'rgb(var(--text))' }}>
-          Speaking time
+          {L('speakingTime', 'Speaking time')}
         </h3>
         {presetButtons(SPEAKING_PRESETS, speakWpm, setSpeakWpm)}
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <ResultCard
-            label={`Speaking time @ ${speakWpm} wpm`}
+            label={`${L('speakingTimeAt', 'Speaking time @ ')}${speakWpm} wpm`}
             value={<span className="font-mono">{mmss((words / speakWpm) * 60)}</span>}
             highlight
-            sublabel={words === 0 ? 'paste some text first' : `${words} words`}
+            sublabel={words === 0 ? L('pasteSomeTextFirst', 'paste some text first') : `${words} ${L('wordsUnit', 'words')}`}
           />
           {presetTable(SPEAKING_PRESETS, speakWpm)}
         </div>
       </div>
 
       <div className="flex flex-wrap gap-2">
-        <CopyButton value={summary} label="Copy summary" disabled={words === 0} />
+        <CopyButton value={summary} label={L('copySummary', 'Copy summary')} disabled={words === 0} />
       </div>
 
       <CalculatorNote>
-        ⏱️ Estimates assume steady pacing: silent reading averages roughly 150–200 wpm for adults, while clear
-        presentation speech sits near 100–130 wpm. Real delivery runs slower with pauses, slides, and audience
-        interaction — budget a 10–20% buffer for live talks.
+        {L('noteText', '⏱️ Estimates assume steady pacing: silent reading averages roughly 150–200 wpm for adults, while clear presentation speech sits near 100–130 wpm. Real delivery runs slower with pauses, slides, and audience interaction — budget a 10–20% buffer for live talks.')}
       </CalculatorNote>
     </div>
   )

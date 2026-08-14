@@ -10,6 +10,10 @@ import type { ToolL10n } from '../tool-l10n'
 export const creditCardMinimumPaymentCalculatorL10n: ToolL10n = {
   // ──────────────────────────── 中文 ────────────────────────────
   zh: {
+    formula: {
+      formula: 'Min payment = max( balance × min%, fixed floor )',
+      explain: '发卡行取「余额的小百分比(通常 1–3%)」与「固定下限(如 $25)」中较大者。剩余余额继续计息,直至还清。',
+    },
     useCases: [
       '了解最低还款额怎么算',
       '查看最低还款公式',
@@ -51,6 +55,10 @@ export const creditCardMinimumPaymentCalculatorL10n: ToolL10n = {
 
   // ──────────────────────────── Español ────────────────────────────
   es: {
+    formula: {
+      formula: 'Min payment = max( balance × min%, fixed floor )',
+      explain: 'El emisor cobra el mayor entre un pequeño porcentaje del saldo (a menudo 1–3%) y un suelo fijo (p. ej. 25 $). Luego se añaden intereses sobre el saldo restante hasta saldarlo.',
+    },
     useCases: [
       'entender cómo se calcula el pago mínimo',
       'ver la fórmula del pago mínimo',
@@ -92,6 +100,10 @@ export const creditCardMinimumPaymentCalculatorL10n: ToolL10n = {
 
   // ──────────────────────────── Deutsch ────────────────────────────
   de: {
+    formula: {
+      formula: 'Min payment = max( balance × min%, fixed floor )',
+      explain: 'Der Herausgeber verlangt das größere aus einem kleinen Prozentsatz des Saldos (oft 1–3%) und einem festen Mindestbetrag (z. B. 25 $). Auf den Restsaldo werden weiterhin Zinsen berechnet, bis er getilgt ist.',
+    },
     useCases: [
       'verstehen, wie die Mindestzahlung berechnet wird',
       'die Formel für die Mindestzahlung sehen',

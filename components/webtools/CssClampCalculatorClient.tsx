@@ -3,6 +3,8 @@
 import { useState, useMemo } from 'react'
 import { CalculatorField, ResultCard, CalculatorShell, CalculatorNote } from '@/components/calculator/CalculatorField'
 import { CopyButton } from '@/components/CopyButton'
+import { useApp } from '@/components/providers/AppProviders'
+import { tui } from '@/lib/i18n/tool-l10n'
 
 /**
  * CSS clamp() Fluid Typography Calculator —— 纯前端计算
@@ -25,6 +27,9 @@ function preferredPart(intercept: number, slopeVw: number, unit: 'px' | 'rem'): 
 }
 
 export function CssClampCalculatorClient() {
+  const { locale } = useApp()
+  const L = (key: string, fb: string) => tui('css-clamp-calculator', locale, key, fb)
+
   const [minFs, setMinFs] = useState('16')
   const [maxFs, setMaxFs] = useState('24')
   const [minVp, setMinVp] = useState('375')
@@ -40,18 +45,18 @@ export function CssClampCalculatorClient() {
     const maxV = Number(maxVp)
     const rootF = Number(root)
     if (![minF, maxF, minV, maxV, rootF].every(Number.isFinite)) {
-      return { error: 'All fields must be valid numbers.' as const }
+      return { error: L('errValidNumbers', 'All fields must be valid numbers.') }
     }
-    if (rootF <= 0) return { error: 'Root font size must be greater than 0.' as const }
-    if (minF <= 0 || maxF <= 0) return { error: 'Font sizes must be greater than 0.' as const }
-    if (minF >= maxF) return { error: 'Min font size must be smaller than max font size.' as const }
+    if (rootF <= 0) return { error: L('errRootPositive', 'Root font size must be greater than 0.') }
+    if (minF <= 0 || maxF <= 0) return { error: L('errFontSizesPositive', 'Font sizes must be greater than 0.') }
+    if (minF >= maxF) return { error: L('errMinSmallerThanMax', 'Min font size must be smaller than max font size.') }
     if (minV <= 0 || minV >= maxV) {
-      return { error: 'Min viewport must be smaller than max viewport.' as const }
+      return { error: L('errMinVpSmallerThanMaxVp', 'Min viewport must be smaller than max viewport.') }
     }
     const slopeVw = ((maxF - minF) / (maxV - minV)) * 100
     const interceptPx = minF - (slopeVw * minV) / 100
     return { minF, maxF, minV, maxV, rootF, slopeVw, interceptPx }
-  }, [minFs, maxFs, minVp, maxVp, root])
+  }, [minFs, maxFs, minVp, maxVp, root, locale])
 
   const error = 'error' in calc ? calc.error : null
 
@@ -82,12 +87,12 @@ export function CssClampCalculatorClient() {
     <CalculatorShell
       inputs={
         <>
-          <CalculatorField id="clamp-min-fs" label="Min font size" suffix="px" value={minFs} onChange={setMinFs} />
-          <CalculatorField id="clamp-max-fs" label="Max font size" suffix="px" value={maxFs} onChange={setMaxFs} />
-          <CalculatorField id="clamp-min-vp" label="Min viewport" suffix="px" value={minVp} onChange={setMinVp} />
-          <CalculatorField id="clamp-max-vp" label="Max viewport" suffix="px" value={maxVp} onChange={setMaxVp} />
-          <CalculatorField id="clamp-root" label="Root font size (for rem)" suffix="px" value={root} onChange={setRoot} />
-          <CalculatorField id="clamp-test-vp" label="Test at viewport" suffix="px" value={testVp} onChange={setTestVp} />
+          <CalculatorField id="clamp-min-fs" label={L('minFontSize', 'Min font size')} suffix="px" value={minFs} onChange={setMinFs} />
+          <CalculatorField id="clamp-max-fs" label={L('maxFontSize', 'Max font size')} suffix="px" value={maxFs} onChange={setMaxFs} />
+          <CalculatorField id="clamp-min-vp" label={L('minViewport', 'Min viewport')} suffix="px" value={minVp} onChange={setMinVp} />
+          <CalculatorField id="clamp-max-vp" label={L('maxViewport', 'Max viewport')} suffix="px" value={maxVp} onChange={setMaxVp} />
+          <CalculatorField id="clamp-root" label={L('rootFontSize', 'Root font size (for rem)')} suffix="px" value={root} onChange={setRoot} />
+          <CalculatorField id="clamp-test-vp" label={L('testAtViewport', 'Test at viewport')} suffix="px" value={testVp} onChange={setTestVp} />
         </>
       }
       results={
@@ -98,16 +103,16 @@ export function CssClampCalculatorClient() {
         ) : (
           c && (
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
-              <ResultCard label="Slope" value={`${fmt(c.slopeVw)}vw`} sublabel="growth per 100px of viewport" />
+              <ResultCard label={L('slope', 'Slope')} value={`${fmt(c.slopeVw)}vw`} sublabel={L('slopeSublabel', 'growth per 100px of viewport')} />
               <ResultCard
-                label="Intercept"
+                label={L('intercept', 'Intercept')}
                 value={`${fmt(c.interceptPx)}px`}
-                sublabel="preferred size at 0 viewport width"
+                sublabel={L('interceptSublabel', 'preferred size at 0 viewport width')}
               />
               <ResultCard
-                label={output && output.tvValid ? `Size at ${fmt(output.tv)}px` : 'Test viewport'}
+                label={output && output.tvValid ? `${L('sizeAt', 'Size at ')}${fmt(output.tv)}px` : L('testViewport', 'Test viewport')}
                 value={tvFluid !== null ? `${fmt(tvFluid)}px` : '—'}
-                sublabel={tvFluid !== null && c ? `${fmt(tvFluid / c.rootF)}rem` : 'enter a width above'}
+                sublabel={tvFluid !== null && c ? `${fmt(tvFluid / c.rootF)}rem` : L('enterWidthAbove', 'enter a width above')}
                 highlight
               />
             </div>
@@ -118,9 +123,7 @@ export function CssClampCalculatorClient() {
       {/* 测试视口超出范围提示 */}
       {tvClamped && c && output && (
         <div className="rounded-lg border border-red-200 bg-red-50 p-4 text-sm text-red-700">
-          ⚠️ {fmt(output.tv)}px is outside your {fmt(c.minV)}–{fmt(c.maxV)}px viewport range, so the
-          font size is clamped at {output.tv < c.minV ? 'the minimum' : 'the maximum'} (
-          {fmt(tvFluid ?? 0)}px) rather than scaling further.
+          ⚠️ {fmt(output.tv)}{L('clampedPxOutside', 'px is outside your ')}{fmt(c.minV)}–{fmt(c.maxV)}{L('clampedRange', 'px viewport range, so the font size is clamped at ')}{output.tv < c.minV ? L('clampedTheMinimum', 'the minimum') : L('clampedTheMaximum', 'the maximum')} ({fmt(tvFluid ?? 0)}{L('clampedEnd', 'px) rather than scaling further.')})
         </div>
       )}
 
@@ -131,7 +134,7 @@ export function CssClampCalculatorClient() {
             <span className="text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
               CSS clamp()
             </span>
-            <CopyButton value={output.css} label="Copy CSS" />
+            <CopyButton value={output.css} label={L('copyCss', 'Copy CSS')} />
           </div>
           <pre
             className="w-full overflow-x-auto rounded-lg border p-4 font-mono text-sm shadow-sm"
@@ -150,7 +153,7 @@ export function CssClampCalculatorClient() {
       {output && c && fluidPx && (
         <div>
           <div className="mb-1.5 text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
-            Computed size at common viewports
+            {L('commonViewportsTitle', 'Computed size at common viewports')}
           </div>
           <div
             className="overflow-x-auto rounded-lg border"
@@ -160,16 +163,16 @@ export function CssClampCalculatorClient() {
               <thead>
                 <tr style={{ backgroundColor: 'rgb(var(--bg-subtle))' }}>
                   <th className="px-4 py-2.5 text-left font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
-                    Viewport
+                    {L('thViewport', 'Viewport')}
                   </th>
                   <th className="px-4 py-2.5 text-left font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
-                    Fluid size
+                    {L('thFluidSize', 'Fluid size')}
                   </th>
                   <th className="px-4 py-2.5 text-left font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
                     rem
                   </th>
                   <th className="px-4 py-2.5 text-left font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
-                    State
+                    {L('thState', 'State')}
                   </th>
                 </tr>
               </thead>
@@ -190,7 +193,7 @@ export function CssClampCalculatorClient() {
                         {fmt(px / c.rootF)}rem
                       </td>
                       <td className="px-4 py-2.5 text-xs" style={{ color: 'rgb(var(--text-faint))' }}>
-                        {clampedLow ? 'clamped (min)' : clampedHigh ? 'clamped (max)' : 'scaling'}
+                        {clampedLow ? L('stateClampedMin', 'clamped (min)') : clampedHigh ? L('stateClampedMax', 'clamped (max)') : L('stateScaling', 'scaling')}
                       </td>
                     </tr>
                   )
@@ -202,12 +205,17 @@ export function CssClampCalculatorClient() {
       )}
 
       <CalculatorNote>
-        📐 The math: fluid type scales linearly between your two viewport points.{' '}
-        <code>slope = (maxFs − minFs) / (maxVp − minVp) × 100</code> gives the growth in <code>vw</code>
-        , and <code>intercept = minFs − slope × minVp / 100</code> is the px offset. The preferred
-        value <code>intercept + slope × vw</code> scales with the viewport, while{' '}
-        <code>clamp(min, preferred, max)</code> pins it inside your font-size range. rem output uses
-        your root font size, so the result respects user zoom preferences.
+        {L('noteMath', '📐 The math: fluid type scales linearly between your two viewport points. ')}
+        <code>slope = (maxFs − minFs) / (maxVp − minVp) × 100</code>
+        {L('noteGrowth', ' gives the growth in ')}
+        <code>vw</code>
+        {L('noteAnd', ', and ')}
+        <code>intercept = minFs − slope × minVp / 100</code>
+        {L('notePxOffset', ' is the px offset. The preferred value ')}
+        <code>intercept + slope × vw</code>
+        {L('noteScalesWith', ' scales with the viewport, while ')}
+        <code>clamp(min, preferred, max)</code>
+        {L('notePinsRange', ' pins it inside your font-size range. rem output uses your root font size, so the result respects user zoom preferences.')}
       </CalculatorNote>
     </CalculatorShell>
   )

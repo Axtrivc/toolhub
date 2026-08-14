@@ -1,33 +1,158 @@
 /**
  * srt-subtitle-shift 本地化 bundle —— zh / es / de
- * 覆盖:useCases(client = SrtSubtitleShiftClient = 自定义 texttool client,无需 slug)
- * 注:该工具在 tool-faqs.ts 无 FAQ 条目,故 bundle 仅含 useCases
+ * 覆盖:useCases + faqs
  */
 import type { ToolL10n } from '../tool-l10n'
 
 export const srtSubtitleShiftL10n: ToolL10n = {
   zh: {
+    ui: {
+      'blockPlural': '块',
+      'blockSingular': '块',
+      'clampClampedTo': '被钳制为 00:00:00,000。',
+      'clampLabel': '将负时间钳制为 00:00:00,000',
+      'clampWas': '是',
+      'clampWentBelowZero': '偏移后低于零,且',
+      'clampWere': '是',
+      'clear': '清空',
+      'copy': '复制',
+      'copySrt': '复制 SRT',
+      'cuePlural': '条字幕',
+      'cueSingular': '条字幕',
+      'inputLabel': '粘贴 SRT 字幕',
+      'invalidOffsetOr': ' 或 ',
+      'invalidOffsetPrefix': '⚠️ 请输入有效的秒数,如 ',
+      'invalidOffsetSuffix': '。',
+      'offsetLabel': '偏移(秒,可为负)',
+      'parseCouldNotBeParsed': '无法解析(没有有效时间戳行),且',
+      'parseSkipped': '已跳过。',
+      'parseWas': '是',
+      'parseWere': '是',
+      'privacyNote': '🔒 100% 在客户端——你的字幕文件绝不离开浏览器。',
+      'renumberLabel': '重新编号字幕',
+      'resultTitle': '偏移后的 SRT',
+      'stripLabel': '剥离格式(标签、ASS 块、♪)',
+      'uploadSrt': '上传 .srt',
+    },
     useCases: [
       '在线按秒偏移 SRT 字幕',
       '修复不同步的字幕',
       '免费字幕偏移调节器',
       '移除 SRT 文件的 HTML 标签',
     ],
+    faqs: [
+      {
+        q: '正偏移是把字幕提前还是延后?',
+        a: '正偏移是加时间,所以每条字幕都更晚开始——字幕比说话早时用这个。负偏移是减时间,把字幕提前,适合字幕滞后于音频的情况。',
+      },
+      {
+        q: '它会重新编号字幕序号吗?',
+        a: '会。偏移后,字幕会按新的时间顺序从 1 重新连续编号,所以即使偏移改变了字幕之间的相对位置,输出也始终是合法、顺序正确的 SRT 文件。',
+      },
+      {
+        q: '能剥离 HTML 和 ASS 格式标签吗?',
+        a: '能。剥离标签选项会移除行内 HTML(<i>、<b>)和 ASS 样式覆盖标签,留下干净的纯文本字幕。当播放器把标签当成可见乱码而非样式来渲染时,这个功能很有用。',
+      },
+    ],
   },
   es: {
+    ui: {
+      'blockPlural': 'bloques',
+      'blockSingular': 'bloque',
+      'clampClampedTo': 'limitado a 00:00:00,000.',
+      'clampLabel': 'Limitar tiempos negativos a 00:00:00,000',
+      'clampWas': 'fue',
+      'clampWentBelowZero': 'quedó por debajo de cero al desplazar y',
+      'clampWere': 'fueron',
+      'clear': 'Limpiar',
+      'copy': 'Copiar',
+      'copySrt': 'Copiar SRT',
+      'cuePlural': 'entradas',
+      'cueSingular': 'entrada',
+      'inputLabel': 'Pega subtítulos SRT',
+      'invalidOffsetOr': ' o ',
+      'invalidOffsetPrefix': '⚠️ Introduce un número válido de segundos, p. ej. ',
+      'invalidOffsetSuffix': '.',
+      'offsetLabel': 'Desfase (segundos, negativo permitido)',
+      'parseCouldNotBeParsed': 'no se pudo analizar (sin línea de tiempo válida) y',
+      'parseSkipped': 'omitido.',
+      'parseWas': 'fue',
+      'parseWere': 'fueron',
+      'privacyNote': '🔒 100% en el cliente — tu archivo de subtítulos nunca sale del navegador.',
+      'renumberLabel': 'Renumerar pistas',
+      'resultTitle': 'SRT desplazado',
+      'stripLabel': 'Quitar formato (etiquetas, bloques ASS, ♪)',
+      'uploadSrt': 'Subir .srt',
+    },
     useCases: [
       'desplazar subtítulos SRT por segundos online',
       'arreglar subtítulos desincronizados',
       'ajustador de offset de subtítulos gratis',
       'eliminar etiquetas HTML de archivos SRT',
     ],
+    faqs: [
+      {
+        q: '¿Un offset positivo adelanta o retrasa los subtítulos?',
+        a: 'Un offset positivo suma tiempo, así que cada entrada empieza más tarde — úsalo cuando los subtítulos aparecen antes que la voz. Un offset negativo resta tiempo y adelanta las entradas, para cuando van por detrás del audio.',
+      },
+      {
+        q: '¿Renumerar los índices de las entradas?',
+        a: 'Sí. Tras desplazar, las entradas se renumeran secuencialmente desde 1 en su nuevo orden cronológico, así la salida es siempre un archivo SRT válido y correctamente ordenado aunque los offsets muevan entradas unas respecto a otras.',
+      },
+      {
+        q: '¿Puede eliminar etiquetas de formato HTML y ASS?',
+        a: 'Sí. La opción de quitar etiquetas elimina el HTML en línea (<i>, <b>) y las etiquetas de anulación de estilo ASS, dejando subtítulos limpios en texto plano. Es útil cuando un reproductor muestra las etiquetas como galimatías visible en vez de aplicar estilo.',
+      },
+    ],
   },
   de: {
+    ui: {
+      'blockPlural': 'Blöcke',
+      'blockSingular': 'Block',
+      'clampClampedTo': 'auf 00:00:00,000 begrenzt.',
+      'clampLabel': 'Negative Zeiten auf 00:00:00,000 begrenzen',
+      'clampWas': 'wurde',
+      'clampWentBelowZero': 'rutschte beim Verschieben unter null und',
+      'clampWere': 'wurden',
+      'clear': 'Leeren',
+      'copy': 'Kopieren',
+      'copySrt': 'SRT kopieren',
+      'cuePlural': 'Einträge',
+      'cueSingular': 'Eintrag',
+      'inputLabel': 'SRT-Untertitel einfügen',
+      'invalidOffsetOr': ' oder ',
+      'invalidOffsetPrefix': '⚠️ Bitte gültige Sekundenzahl eingeben, z. B. ',
+      'invalidOffsetSuffix': '.',
+      'offsetLabel': 'Verschiebung (Sekunden, negativ erlaubt)',
+      'parseCouldNotBeParsed': 'konnte nicht analysiert werden (keine gültige Zeitstempelzeile) und',
+      'parseSkipped': 'übersprungen.',
+      'parseWas': 'wurde',
+      'parseWere': 'wurden',
+      'privacyNote': '🔒 100% clientseitig — deine Untertiteldatei verlässt nie den Browser.',
+      'renumberLabel': 'Einträge neu nummerieren',
+      'resultTitle': 'Verschobenes SRT',
+      'stripLabel': 'Format entfernen (Tags, ASS-Blöcke, ♪)',
+      'uploadSrt': '.srt hochladen',
+    },
     useCases: [
       'SRT-Untertitel online um Sekunden verschieben',
       'nicht synchronisierte Untertitel reparieren',
       'kostenloser Untertitel-Offset-Anpasser',
       'HTML-Tags aus SRT-Datei entfernen',
+    ],
+    faqs: [
+      {
+        q: 'Verschiebt ein positiver Offset Untertitel nach früher oder später?',
+        a: 'Ein positiver Offset addiert Zeit, sodass jeder Eintrag später startet — verwende das, wenn die Untertitel vor der Sprachausgabe erscheinen. Ein negativer Offset zieht Zeit ab und verschiebt Einträge nach früher, wenn sie dem Audio hinterherhinken.',
+      },
+      {
+        q: 'Werden die Eintrags-Indizes neu nummeriert?',
+        a: 'Ja. Nach dem Verschieben werden die Einträge in ihrer neuen chronologischen Reihung ab 1 fortlaufend nummeriert, sodass die Ausgabe immer eine gültige, korrekt sortierte SRT-Datei ist — selbst wenn Offsets Einträge gegeneinander verschieben.',
+      },
+      {
+        q: 'Können HTML- und ASS-Format-Tags entfernt werden?',
+        a: 'Ja. Die Option zum Tag-Entfernen löscht Inline-HTML (<i>, <b>) und ASS-Stil-Override-Tags und lässt saubere Klartext-Untertitel zurück. Das hilft, wenn ein Player die Tags als sichtbaren Zeichensalat statt als Formatierung rendert.',
+      },
     ],
   },
 }

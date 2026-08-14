@@ -6,6 +6,20 @@ import type { ToolL10n } from '../tool-l10n'
 
 export const aspectRatioCalculatorL10n: ToolL10n = {
   zh: {
+    ui: {
+      'aspectRatio': '宽高比',
+      'enterWidthPlaceholder': '输入宽度…',
+      'height': '高度',
+      'heightPx': '高度 (px)',
+      'note': '🔒 100% 在客户端。输入比例和一个维度,另一个按 ',
+      'orEnterHeightPlaceholder': '或输入高度…',
+      'width': '宽度',
+      'widthPx': '宽度 (px)',
+    },
+    formula: {
+      formula: 'h₂ = h₁ × ( w₂ / w₁ )',
+      explain: '保持宽高比缩放:高度按与宽度相同的系数缩放。给定一个新尺寸,另一个按比例算出,以保持比例。',
+    },
     useCases: [
       '缩放图片而不失真变形',
       '把视频嵌入固定容器并保持比例',
@@ -19,6 +33,20 @@ export const aspectRatioCalculatorL10n: ToolL10n = {
     ],
   },
   es: {
+    ui: {
+      'aspectRatio': 'Relación de aspecto',
+      'enterWidthPlaceholder': 'introduce el ancho…',
+      'height': 'Alto',
+      'heightPx': 'Alto (px)',
+      'note': '🔒 100% en el cliente. Introduce una relación y una dimensión; la otra se calcula como ',
+      'orEnterHeightPlaceholder': 'o introduce el alto…',
+      'width': 'Ancho',
+      'widthPx': 'Ancho (px)',
+    },
+    formula: {
+      formula: 'h₂ = h₁ × ( w₂ / w₁ )',
+      explain: 'Escalar manteniendo la relación de aspecto: la altura cambia en el mismo factor que la anchura. Dada una nueva dimensión, la otra se calcula para preservar la proporción.',
+    },
     useCases: [
       'escalar imágenes sin distorsión',
       'incrustar vídeos en un contenedor fijo manteniendo la proporción',
@@ -32,6 +60,20 @@ export const aspectRatioCalculatorL10n: ToolL10n = {
     ],
   },
   de: {
+    ui: {
+      'aspectRatio': 'Seitenverhältnis',
+      'enterWidthPlaceholder': 'Breite eingeben…',
+      'height': 'Höhe',
+      'heightPx': 'Höhe (px)',
+      'note': '🔒 100% clientseitig. Gib ein Verhältnis und eine Dimension ein; die andere wird berechnet als ',
+      'orEnterHeightPlaceholder': 'oder Höhe eingeben…',
+      'width': 'Breite',
+      'widthPx': 'Breite (px)',
+    },
+    formula: {
+      formula: 'h₂ = h₁ × ( w₂ / w₁ )',
+      explain: 'Skalieren unter Beibehaltung des Seitenverhältnisses: die Höhe wird um denselben Faktor wie die Breite skaliert. Bei einer neuen Dimension wird die andere proportional berechnet.',
+    },
     useCases: [
       'Bilder ohne Verzerrung skalieren',
       'Videos in einen festen Container im richtigen Verhältnis einbetten',

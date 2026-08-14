@@ -460,3 +460,63 @@ export function tuiCalc(key: string, locale: Locale, fallback: string): string {
   if (locale === 'en') return fallback
   return COMMON_CALC_UI[locale]?.[key] ?? fallback
 }
+
+// ──────────── makeUnitConverter 通用 UI key(跨工具共享)────────────
+// 单位转换器的 chrome(Convert / Value / From / To / Formula / 摘要)在所有
+// makeUnitConverter 生成的转换器里语义一致,译一次即可。en 不在此 → 回退英文。
+export const COMMON_UC_UI: Record<Exclude<Locale, 'en'>, Record<string, string>> = {
+  zh: {
+    convert: '转换',
+    value: '数值',
+    from: '从',
+    to: '到',
+    convertedValue: '换算结果',
+    formula: '公式',
+    conversionSummary: '换算摘要',
+    summaryValue: '数值:',
+    summaryResult: '结果:',
+    summaryFormula: '公式:',
+    conversionNone: '换算: —',
+    conversionTitle: '{from} 转换为 {to}',
+    generatedBy: '由 ToolHub 生成',
+  },
+  es: {
+    convert: 'Convertir',
+    value: 'Valor',
+    from: 'De',
+    to: 'A',
+    convertedValue: 'Valor convertido',
+    formula: 'Fórmula',
+    conversionSummary: 'Resumen de conversión',
+    summaryValue: 'Valor:',
+    summaryResult: 'Resultado:',
+    summaryFormula: 'Fórmula:',
+    conversionNone: 'Conversión: —',
+    conversionTitle: 'Conversión de {from} a {to}',
+    generatedBy: 'Generado por ToolHub',
+  },
+  de: {
+    convert: 'Umrechnen',
+    value: 'Wert',
+    from: 'Von',
+    to: 'Nach',
+    convertedValue: 'Umgerechneter Wert',
+    formula: 'Formel',
+    conversionSummary: 'Umrechnungs­zusammenfassung',
+    summaryValue: 'Wert:',
+    summaryResult: 'Ergebnis:',
+    summaryFormula: 'Formel:',
+    conversionNone: 'Umrechnung: —',
+    conversionTitle: '{from} nach {to} Umrechnung',
+    generatedBy: 'Erstellt von ToolHub',
+  },
+}
+
+/**
+ * 取 makeUnitConverter 通用 UI key 的本地化值(跨工具共享)。
+ * locale==='en' 或缺失 → 回退 fallback(英文原值),保证 SSR 恒英文。
+ */
+export function tuiUc(key: string, locale: Locale, fallback: string): string {
+  if (locale === 'en') return fallback
+  return COMMON_UC_UI[locale]?.[key] ?? fallback
+}

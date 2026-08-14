@@ -9,6 +9,7 @@ import { makeTextTool } from '../tools/makeTextTool'
 
 // ── JSON 格式化(美化/压缩)──
 export const JSONFormatterClient = makeTextTool({
+  slug: 'json-formatter',
   inputLabel: 'JSON (raw or minified)',
   outputLabel: 'Formatted JSON',
   defaultInput: '{"name":"John","age":30,"city":"NYC","skills":["js","css"]}',
@@ -24,6 +25,7 @@ export const JSONFormatterClient = makeTextTool({
 
 // ── JSON 压缩(minify)──
 export const JSONMinifierClient = makeTextTool({
+  slug: 'json-minifier',
   inputLabel: 'JSON (formatted)',
   outputLabel: 'Minified JSON',
   defaultInput: '{\n  "name": "John",\n  "age": 30\n}',
@@ -39,6 +41,7 @@ export const JSONMinifierClient = makeTextTool({
 
 // ── CSV 转 JSON ──
 export const CSVtoJSONClient = makeTextTool({
+  slug: 'csv-to-json',
   inputLabel: 'CSV (with header row)',
   outputLabel: 'JSON array',
   defaultInput: 'name,age,city\nJohn,30,NYC\nJane,25,LA',
@@ -63,6 +66,7 @@ export const CSVtoJSONClient = makeTextTool({
 
 // ── JSON 转 CSV ──
 export const JSONtoCSVClient = makeTextTool({
+  slug: 'json-to-csv',
   inputLabel: 'JSON array of objects',
   outputLabel: 'CSV',
   defaultInput: '[{"name":"John","age":30},{"name":"Jane","age":25}]',
@@ -86,6 +90,7 @@ export const JSONtoCSVClient = makeTextTool({
 
 // ── 添加行号 ──
 export const AddLineNumbersClient = makeTextTool({
+  slug: 'add-line-numbers',
   inputLabel: 'Your text',
   outputLabel: 'With line numbers',
   defaultInput: 'First line\nSecond line\nThird line',
@@ -96,6 +101,7 @@ export const AddLineNumbersClient = makeTextTool({
 
 // ── 文本转列表(每行加项目符号)──
 export const TextToListClient = makeTextTool({
+  slug: 'text-to-list',
   inputLabel: 'Lines of text',
   outputLabel: 'Bulleted list',
   defaultInput: 'Apple\nBanana\nCherry',

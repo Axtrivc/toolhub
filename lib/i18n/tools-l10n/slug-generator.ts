@@ -6,6 +6,22 @@ import type { ToolL10n } from '../tool-l10n'
 
 export const slugGeneratorL10n: ToolL10n = {
   zh: {
+    ui: {
+      'clear': '清空',
+      'copy': '复制',
+      'enterTitle': '输入你的标题或文本',
+      'inputPlaceholder': '如:提升网站流量的 10 种已验证方法',
+      'lowercase': '小写',
+      'recent': '最近',
+      'result': '结果',
+      'save': '保存',
+      'sepHyphen': '连字符 ( - )',
+      'sepUnderscore': '下划线 ( _ )',
+      'separator': '分隔符',
+      'slugPlaceholder': '你的 slug 会显示在这里',
+      'stripSymbols': '去除符号',
+      'try': '试试:',
+    },
     useCases: [
       '生成对 SEO 友好的 URL slug',
       '为博客文章创建简洁的网址路径',
@@ -20,6 +36,22 @@ export const slugGeneratorL10n: ToolL10n = {
     ],
   },
   es: {
+    ui: {
+      'clear': 'Limpiar',
+      'copy': 'Copiar',
+      'enterTitle': 'Introduce tu título o texto',
+      'inputPlaceholder': 'p. ej. 10 formas probadas de aumentar el tráfico web',
+      'lowercase': 'Minúsculas',
+      'recent': 'Recientes',
+      'result': 'Resultado',
+      'save': 'Guardar',
+      'sepHyphen': 'Guion ( - )',
+      'sepUnderscore': 'Guion bajo ( _ )',
+      'separator': 'Separador',
+      'slugPlaceholder': 'tu-slug-aparecerá-aquí',
+      'stripSymbols': 'Quitar símbolos',
+      'try': 'Prueba:',
+    },
     useCases: [
       'generar slugs de URL aptos para SEO',
       'crear rutas de URL limpias para artículos de blog',
@@ -34,6 +66,22 @@ export const slugGeneratorL10n: ToolL10n = {
     ],
   },
   de: {
+    ui: {
+      'clear': 'Leeren',
+      'copy': 'Kopieren',
+      'enterTitle': 'Titel oder Text eingeben',
+      'inputPlaceholder': 'z. B. 10 bewährte Wege den Website-Traffic zu steigern',
+      'lowercase': 'Kleinbuchstaben',
+      'recent': 'Zuletzt',
+      'result': 'Ergebnis',
+      'save': 'Speichern',
+      'sepHyphen': 'Bindestrich ( - )',
+      'sepUnderscore': 'Unterstrich ( _ )',
+      'separator': 'Trennzeichen',
+      'slugPlaceholder': 'dein-slug-erscheint-hier',
+      'stripSymbols': 'Symbole entfernen',
+      'try': 'Probier:',
+    },
     useCases: [
       'SEO-freundliche URL-Slugs erzeugen',
       'saubere URL-Pfade für Blogartikel erstellen',

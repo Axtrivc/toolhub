@@ -2,6 +2,8 @@
 
 import { useState, useMemo, useCallback } from 'react'
 import { CopyButton } from '@/components/CopyButton'
+import { useApp } from '@/components/providers/AppProviders'
+import { tui } from '@/lib/i18n/tool-l10n'
 
 /**
  * chmod Calculator —— Linux 文件权限位交互计算器
@@ -74,6 +76,18 @@ function parseModeInput(raw: string): number | null {
 }
 
 export function ChmodCalculatorClient() {
+  const { locale } = useApp()
+  const L = (key: string, fb: string) => tui('chmod-calculator', locale, key, fb)
+  // 本地化可见标签(数据源仍由 GROUP_LABELS / SPECIAL 驱动,此处仅提供译文字符串)
+  const groupL10n = [L('owner', 'Owner'), L('group', 'Group'), L('others', 'Others')]
+  const permL10n = [L('read', 'Read'), L('write', 'Write'), L('execute', 'Execute')]
+  const permAriaL10n = [L('readAria', 'read'), L('writeAria', 'write'), L('executeAria', 'execute')]
+  const specialHintL10n = [
+    L('hintSetuid', 'run as file owner'),
+    L('hintSetgid', 'run as file group'),
+    L('hintSticky', 'restricted delete'),
+  ]
+
   const [mode, setMode] = useState(0o755)
   const [textValue, setTextValue] = useState('755')
   const [textError, setTextError] = useState(false)
@@ -119,8 +133,8 @@ export function ChmodCalculatorClient() {
         <table className="w-full min-w-[320px] text-sm">
           <thead>
             <tr style={{ color: 'rgb(var(--text-subtle))' }}>
-              <th className="pb-2 text-left font-medium">Permission</th>
-              {['Read', 'Write', 'Execute'].map((h) => (
+              <th className="pb-2 text-left font-medium">{L('permission', 'Permission')}</th>
+              {permL10n.map((h) => (
                 <th key={h} className="pb-2 text-center font-medium">
                   {h}
                 </th>
@@ -131,7 +145,7 @@ export function ChmodCalculatorClient() {
             {GROUP_LABELS.map((group, g) => (
               <tr key={group} className="border-t" style={{ borderColor: 'rgb(var(--border))' }}>
                 <td className="py-2.5 font-medium" style={{ color: 'rgb(var(--text))' }}>
-                  {group}
+                  {groupL10n[g]}
                 </td>
                 {[R[g], W[g], X[g]].map((bit, i) => (
                   <td key={i} className="py-2.5 text-center">
@@ -141,7 +155,7 @@ export function ChmodCalculatorClient() {
                       onChange={() => toggleBit(bit)}
                       className="h-4 w-4 cursor-pointer"
                       style={{ accentColor: 'rgb(37 99 235)' }}
-                      aria-label={`${group} ${['read', 'write', 'execute'][i]}`}
+                      aria-label={`${groupL10n[g]} ${permAriaL10n[i]}`}
                     />
                   </td>
                 ))}
@@ -152,7 +166,7 @@ export function ChmodCalculatorClient() {
 
         {/* 特殊位 */}
         <div className="mt-3 flex flex-wrap gap-x-6 gap-y-2 border-t pt-3" style={{ borderColor: 'rgb(var(--border))' }}>
-          {SPECIAL.map(({ bit, label, hint }) => (
+          {SPECIAL.map(({ bit, label }, idx) => (
             <label key={label} className="flex cursor-pointer items-center gap-2 text-sm" style={{ color: 'rgb(var(--text-muted))' }}>
               <input
                 type="checkbox"
@@ -163,7 +177,7 @@ export function ChmodCalculatorClient() {
               />
               <span className="font-mono font-medium">{label}</span>
               <span className="text-xs" style={{ color: 'rgb(var(--text-faint))' }}>
-                {hint}
+                {specialHintL10n[idx]}
               </span>
             </label>
           ))}
@@ -173,9 +187,9 @@ export function ChmodCalculatorClient() {
       {/* 实时输出 */}
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
         {[
-          { label: 'Octal', value: octal },
-          { label: 'Symbolic', value: symbolic },
-          { label: 'Command', value: command },
+          { label: L('octal', 'Octal'), value: octal },
+          { label: L('symbolic', 'Symbolic'), value: symbolic },
+          { label: L('command', 'Command'), value: command },
         ].map(({ label, value }) => (
           <div key={label} className="rounded-xl border p-4 text-center shadow-sm" style={{ borderColor: 'rgb(var(--border))', backgroundColor: 'rgb(var(--bg-card))' }}>
             <div className="text-xs font-medium uppercase tracking-wide" style={{ color: 'rgb(var(--text-subtle))' }}>
@@ -191,7 +205,7 @@ export function ChmodCalculatorClient() {
       {/* 双向输入 */}
       <div>
         <label htmlFor="chmod-text" className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
-          Or type octal / symbolic — checkboxes update automatically
+          {L('typeHint', 'Or type octal / symbolic — checkboxes update automatically')}
         </label>
         <input
           id="chmod-text"
@@ -199,7 +213,7 @@ export function ChmodCalculatorClient() {
           value={textValue}
           onChange={(e) => handleTextChange(e.target.value)}
           spellCheck={false}
-          placeholder="644 or rwxr--r--"
+          placeholder={L('inputPlaceholder', '644 or rwxr--r--')}
           className="w-full rounded-lg border p-4 font-mono text-sm shadow-sm outline-none transition focus:ring-2"
           style={{
             borderColor: textError ? 'rgb(239 68 68)' : 'rgb(var(--border-strong))',
@@ -209,8 +223,11 @@ export function ChmodCalculatorClient() {
         />
         {textError && (
           <p className="mt-1.5 text-xs text-red-600">
-            Invalid format — use 3–4 octal digits (0–7, e.g. <code>644</code>) or 9 symbolic chars (e.g.{' '}
-            <code>rwxr--r--</code>).
+            {L('errInvalidPrefix', 'Invalid format — use 3–4 octal digits (0–7, e.g. ')}
+            <code>644</code>
+            {L('errInvalidMid', ') or 9 symbolic chars (e.g. ')}
+            <code>rwxr--r--</code>
+            {L('errInvalidSuffix', ').')}
           </p>
         )}
       </div>
@@ -232,15 +249,20 @@ export function ChmodCalculatorClient() {
 
       {/* 复制 */}
       <div className="flex flex-wrap items-center gap-3">
-        <CopyButton value={octal} label="Copy octal" />
-        <CopyButton value={command} label="Copy command" />
+        <CopyButton value={octal} label={L('copyOctal', 'Copy octal')} />
+        <CopyButton value={command} label={L('copyCommand', 'Copy command')} />
       </div>
 
       <p className="rounded-md p-3 text-xs" style={{ backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text-subtle))' }}>
-        🔒 Octal digits are Owner / Group / Others, each the sum of read (4), write (2), execute (1). A leading fourth
-        digit encodes the special bits: setuid (4), setgid (2), sticky (1) — so <code>4755</code> means setuid +{' '}
-        <code>rwxr-xr-x</code>. In symbolic form they appear as <code>s</code>/<code>S</code> and <code>t</code>/
-        <code>T</code> over the execute slot.
+        {L('noteF1', '🔒 Octal digits are Owner / Group / Others, each the sum of read (4), write (2), execute (1). A leading fourth digit encodes the special bits: setuid (4), setgid (2), sticky (1) — so ')}
+        <code>4755</code>
+        {L('noteF2', ' means setuid + ')}
+        <code>rwxr-xr-x</code>
+        {L('noteF3', '. In symbolic form they appear as ')}
+        <code>s</code>/<code>S</code>
+        {L('noteAnd', ' and ')}
+        <code>t</code>/<code>T</code>
+        {L('noteF4', ' over the execute slot.')}
       </p>
     </div>
   )

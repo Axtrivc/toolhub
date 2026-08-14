@@ -6,6 +6,10 @@ import type { ToolL10n } from '../tool-l10n'
 
 export const combinationCalculatorL10n: ToolL10n = {
   zh: {
+    formula: {
+      formula: 'C(n, k) = n! / [ k! × (n − k)! ]',
+      explain: '从 n 个物品中不计顺序地选出 k 个的方法数。读作「n 选 k」;是二项概率和帕斯卡三角的核心。',
+    },
     ui: {
       'in.n': '总数 (n)',
       'in.r': '选取 (r)',
@@ -24,6 +28,10 @@ export const combinationCalculatorL10n: ToolL10n = {
     ],
   },
   es: {
+    formula: {
+      formula: 'C(n, k) = n! / [ k! × (n − k)! ]',
+      explain: 'Número de formas de elegir k elementos de n sin importar el orden. Se lee «n sobre k»; central en la probabilidad binomial y el triángulo de Pascal.',
+    },
     ui: {
       'in.n': 'Total de elementos (n)',
       'in.r': 'Elegir (r)',
@@ -42,6 +50,10 @@ export const combinationCalculatorL10n: ToolL10n = {
     ],
   },
   de: {
+    formula: {
+      formula: 'C(n, k) = n! / [ k! × (n − k)! ]',
+      explain: 'Anzahl, k aus n ohne Beachtung der Reihenfolge zu wählen. Gelesen als „n über k“; zentral für Binomialwahrscheinlichkeit und das Pascalsche Dreieck.',
+    },
     ui: {
       'in.n': 'Gesamtanzahl (n)',
       'in.r': 'Auswählen (r)',

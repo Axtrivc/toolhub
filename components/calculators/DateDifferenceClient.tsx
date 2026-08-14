@@ -2,6 +2,8 @@
 
 import { useState, useEffect, useMemo } from 'react'
 import { ResultCard, CalculatorNote } from '../calculator/CalculatorField'
+import { useApp } from '@/components/providers/AppProviders'
+import { tui } from '@/lib/i18n/tool-l10n'
 
 function toInputDate(d: Date): string {
   const y = d.getFullYear()
@@ -21,6 +23,9 @@ function parseLocalDate(s: string): Date {
  * 计算两个日期之间的年/月/日/总天数/工作日等。
  */
 export function DateDifferenceClient() {
+  const { locale } = useApp()
+  const L = (key: string, fb: string) => tui('date-difference-calculator', locale, key, fb)
+
   // 初始 state 用固定值,挂载后(mounted)再填入"今天/年初",
   // 避免 SSR/CSR 首帧因 new Date() 不同导致 hydration mismatch。
   const [start, setStart] = useState('')
@@ -79,7 +84,7 @@ export function DateDifferenceClient() {
     <div className="space-y-6">
       <div className="grid grid-cols-1 gap-4 rounded-lg p-4 sm:grid-cols-2" style={{ backgroundColor: 'rgb(var(--bg-subtle))' }}>
         <div>
-          <label htmlFor="start" className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>Start date</label>
+          <label htmlFor="start" className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>{L('startDate', 'Start date')}</label>
           <input
             id="start"
             type="date"
@@ -89,7 +94,7 @@ export function DateDifferenceClient() {
           />
         </div>
         <div>
-          <label htmlFor="end" className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>End date</label>
+          <label htmlFor="end" className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>{L('endDate', 'End date')}</label>
           <input
             id="end"
             type="date"
@@ -103,33 +108,32 @@ export function DateDifferenceClient() {
       {result ? (
         <>
           <ResultCard
-            label="Duration"
+            label={L('duration', 'Duration')}
             value={
               <span>
-                {result.years > 0 && `${result.years} yr `}
-                {result.months > 0 && `${result.months} mo `}
-                {result.days} days
+                {result.years > 0 && `${result.years}${L('yrAbbr', ' yr ')}`}
+                {result.months > 0 && `${result.months}${L('moAbbr', ' mo ')}`}
+                {result.days}{L('daysWord', ' days')}
               </span>
             }
             highlight
           />
           <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
-            <ResultCard label="Total days" value={fmt(result.totalDays)} />
-            <ResultCard label="Total weeks" value={fmt(result.totalWeeks)} />
-            <ResultCard label="Total months" value={fmt(result.totalMonths)} />
-            <ResultCard label="Total hours" value={fmt(result.totalHours)} />
-            <ResultCard label="Business days" value={fmt(result.businessDays)} sublabel="Mon–Fri" />
+            <ResultCard label={L('totalDays', 'Total days')} value={fmt(result.totalDays)} />
+            <ResultCard label={L('totalWeeks', 'Total weeks')} value={fmt(result.totalWeeks)} />
+            <ResultCard label={L('totalMonths', 'Total months')} value={fmt(result.totalMonths)} />
+            <ResultCard label={L('totalHours', 'Total hours')} value={fmt(result.totalHours)} />
+            <ResultCard label={L('businessDays', 'Business days')} value={fmt(result.businessDays)} sublabel={L('monFri', 'Mon–Fri')} />
           </div>
         </>
       ) : (
         <div className="rounded-lg border-2 border-dashed p-6 text-center text-sm" style={{ borderColor: 'rgb(var(--border-strong))', color: 'rgb(var(--text-faint))' }}>
-          End date must be after start date
+          {L('emptyState', 'End date must be after start date')}
         </div>
       )}
 
       <CalculatorNote>
-        📅 Useful for project planning, contract durations, age calculations, and deadline tracking.
-        Business days exclude weekends (Saturday and Sunday).
+        {L('note', '📅 Useful for project planning, contract durations, age calculations, and deadline tracking. Business days exclude weekends (Saturday and Sunday).')}
       </CalculatorNote>
     </div>
   )

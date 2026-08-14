@@ -6,6 +6,11 @@ import type { ToolL10n } from '../tool-l10n'
 
 export const sentenceCaseConverterL10n: ToolL10n = {
   zh: {
+    ui: {
+      inputLabel: '你的文本',
+      outputLabel: '句首大写',
+      note: '✍️ 把每个句子的首字母大写。专有名词最好手动保留。',
+    },
     useCases: [
       '整理文章、邮件和文档的正文段落',
       '为新闻报道撰写标题(句首大写为主)',
@@ -17,6 +22,11 @@ export const sentenceCaseConverterL10n: ToolL10n = {
     ],
   },
   es: {
+    ui: {
+      inputLabel: 'Tu texto',
+      outputLabel: 'Tipo oración',
+      note: '✍️ Capitaliza la primera letra de cada oración. Los nombres propios conviene revisarlos a mano.',
+    },
     useCases: [
       'ordenar el cuerpo de artículos, correos y documentación',
       'redactar titulares de prensa (capitalización de frase)',
@@ -28,6 +38,11 @@ export const sentenceCaseConverterL10n: ToolL10n = {
     ],
   },
   de: {
+    ui: {
+      inputLabel: 'Dein Text',
+      outputLabel: 'Satz-Schreibweise',
+      note: '✍️ Schreibt den ersten Buchstaben jedes Satzes groß. Eigennamen am besten manuell prüfen.',
+    },
     useCases: [
       'Fließtext in Artikeln, E-Mails und Dokumentation ordnen',
       'Nachrichtentitel verfassen (Satzanfang-Großschreibung)',

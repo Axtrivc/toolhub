@@ -3,6 +3,8 @@
 import { useState, useMemo, useCallback } from 'react'
 import { CopyButton } from '@/components/CopyButton'
 import { LoadSampleButton } from '@/components/LoadSampleButton'
+import { useApp } from '@/components/providers/AppProviders'
+import { tui } from '@/lib/i18n/tool-l10n'
 
 /**
  * CSS Box Shadow & Glassmorphism Generator
@@ -97,6 +99,9 @@ function Slider({
 }
 
 export function CssShadowGeneratorClient() {
+  const { locale } = useApp()
+  const L = (key: string, fb: string) => tui('css-shadow-generator', locale, key, fb)
+
   const [shadow, setShadow] = useState<ShadowState>(DEFAULT_SHADOW)
   const [glass, setGlass] = useState<GlassState>(DEFAULT_GLASS)
 
@@ -158,16 +163,16 @@ export function CssShadowGeneratorClient() {
         <div className="space-y-6">
           {/* Box Shadow 控件 */}
           <div className="rounded-lg border p-4" style={{ borderColor: 'rgb(var(--border))' }}>
-            <h3 className="mb-3 text-sm font-semibold text-slate-700 dark:text-slate-200">Box Shadow</h3>
+            <h3 className="mb-3 text-sm font-semibold text-slate-700 dark:text-slate-200">{L('boxShadowTitle', 'Box Shadow')}</h3>
             <div className="grid grid-cols-2 gap-x-4 gap-y-3">
-              <Slider label="Offset X" value={shadow.offsetX} min={-50} max={50} onChange={(v) => updateShadow('offsetX', v)} />
-              <Slider label="Offset Y" value={shadow.offsetY} min={-50} max={50} onChange={(v) => updateShadow('offsetY', v)} />
-              <Slider label="Blur" value={shadow.blur} min={0} max={100} onChange={(v) => updateShadow('blur', v)} />
-              <Slider label="Spread" value={shadow.spread} min={-50} max={50} onChange={(v) => updateShadow('spread', v)} />
-              <Slider label="Opacity" value={shadow.opacity} min={0} max={100} unit="%" onChange={(v) => updateShadow('opacity', v)} />
+              <Slider label={L('offsetX', 'Offset X')} value={shadow.offsetX} min={-50} max={50} onChange={(v) => updateShadow('offsetX', v)} />
+              <Slider label={L('offsetY', 'Offset Y')} value={shadow.offsetY} min={-50} max={50} onChange={(v) => updateShadow('offsetY', v)} />
+              <Slider label={L('blur', 'Blur')} value={shadow.blur} min={0} max={100} onChange={(v) => updateShadow('blur', v)} />
+              <Slider label={L('spread', 'Spread')} value={shadow.spread} min={-50} max={50} onChange={(v) => updateShadow('spread', v)} />
+              <Slider label={L('opacity', 'Opacity')} value={shadow.opacity} min={0} max={100} unit="%" onChange={(v) => updateShadow('opacity', v)} />
               <div className="flex items-end gap-3">
                 <div>
-                  <div className="mb-1 text-xs font-medium text-slate-600 dark:text-slate-300">Color</div>
+                  <div className="mb-1 text-xs font-medium text-slate-600 dark:text-slate-300">{L('colorLabel', 'Color')}</div>
                   <input
                     type="color"
                     value={shadow.color}
@@ -182,7 +187,7 @@ export function CssShadowGeneratorClient() {
                     onChange={(e) => updateShadow('inset', e.target.checked)}
                     className="accent-blue-600"
                   />
-                  Inset
+                  {L('insetLabel', 'Inset')}
                 </label>
               </div>
             </div>
@@ -191,7 +196,7 @@ export function CssShadowGeneratorClient() {
           {/* Glassmorphism 控件 */}
           <div className="rounded-lg border p-4" style={{ borderColor: 'rgb(var(--border))' }}>
             <div className="mb-3 flex items-center justify-between">
-              <h3 className="text-sm font-semibold text-slate-700 dark:text-slate-200">Glassmorphism</h3>
+              <h3 className="text-sm font-semibold text-slate-700 dark:text-slate-200">{L('glassmorphismTitle', 'Glassmorphism')}</h3>
               <label className="flex items-center gap-1.5 text-xs font-medium text-slate-600 dark:text-slate-300">
                 <input
                   type="checkbox"
@@ -199,15 +204,15 @@ export function CssShadowGeneratorClient() {
                   onChange={(e) => updateGlass('enabled', e.target.checked)}
                   className="accent-blue-600"
                 />
-                Enable
+                {L('enableLabel', 'Enable')}
               </label>
             </div>
             {glass.enabled && (
               <div className="grid grid-cols-2 gap-x-4 gap-y-3">
-                <Slider label="Backdrop Blur" value={glass.blur} min={0} max={40} onChange={(v) => updateGlass('blur', v)} />
-                <Slider label="Background Opacity" value={glass.bgOpacity} min={0} max={100} unit="%" onChange={(v) => updateGlass('bgOpacity', v)} />
+                <Slider label={L('backdropBlur', 'Backdrop Blur')} value={glass.blur} min={0} max={40} onChange={(v) => updateGlass('blur', v)} />
+                <Slider label={L('backgroundOpacity', 'Background Opacity')} value={glass.bgOpacity} min={0} max={100} unit="%" onChange={(v) => updateGlass('bgOpacity', v)} />
                 <div>
-                  <div className="mb-1 text-xs font-medium text-slate-600 dark:text-slate-300">Border Color</div>
+                  <div className="mb-1 text-xs font-medium text-slate-600 dark:text-slate-300">{L('borderColorLabel', 'Border Color')}</div>
                   <input
                     type="color"
                     value={glass.borderColor}
@@ -222,7 +227,7 @@ export function CssShadowGeneratorClient() {
 
         {/* 右:预览 */}
         <div>
-          <h3 className="mb-3 text-sm font-semibold text-slate-700 dark:text-slate-200">Live Preview</h3>
+          <h3 className="mb-3 text-sm font-semibold text-slate-700 dark:text-slate-200">{L('livePreview', 'Live Preview')}</h3>
           {/* 带渐变背景的容器,让 glass 效果可见 */}
           <div
             className="flex min-h-[280px] items-center justify-center rounded-lg border p-8"
@@ -235,7 +240,7 @@ export function CssShadowGeneratorClient() {
               className="flex h-40 w-40 items-center justify-center rounded-2xl text-sm font-semibold"
               style={{ color: 'rgb(var(--text-muted))', ...previewStyle }}
             >
-              Preview
+              {L('previewLabel', 'Preview')}
             </div>
           </div>
         </div>
@@ -244,8 +249,8 @@ export function CssShadowGeneratorClient() {
       {/* 生成的 CSS */}
       <div>
         <div className="mb-2 flex items-center justify-between">
-          <span className="text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>Generated CSS</span>
-          <CopyButton value={cssCode} label="Copy" />
+          <span className="text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>{L('generatedCss', 'Generated CSS')}</span>
+          <CopyButton value={cssCode} label={L('copy', 'Copy')} />
         </div>
         <pre
           className="overflow-x-auto rounded-lg border bg-slate-50 p-4 text-xs"
@@ -256,7 +261,7 @@ export function CssShadowGeneratorClient() {
       </div>
 
       <p className="rounded-md p-3 text-xs" style={{ backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text-subtle))' }}>
-        🔒 100% client-side — all values compute locally. The preview uses a gradient backdrop so glassmorphism is visible.
+        {L('note', '🔒 100% client-side — all values compute locally. The preview uses a gradient backdrop so glassmorphism is visible.')}
       </p>
     </div>
   )

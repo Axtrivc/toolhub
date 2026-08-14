@@ -3,6 +3,8 @@
 import { useState, useMemo, useCallback } from 'react'
 import { CopyButton } from '@/components/CopyButton'
 import { LoadSampleButton } from '@/components/LoadSampleButton'
+import { useApp } from '@/components/providers/AppProviders'
+import { tui } from '@/lib/i18n/tool-l10n'
 
 /**
  * YAML to JSON Converter —— 手写 YAML 子集解析器
@@ -247,6 +249,10 @@ function yamlToJson(yaml: string): unknown {
 }
 
 export function YamlToJsonClient() {
+  const { locale } = useApp()
+  // 取本地化 UI 串;缺失回退英文(SSR 恒英文)。
+  const L = (key: string, fb: string) => tui('yaml-to-json', locale, key, fb)
+
   const [input, setInput] = useState('')
 
   const result = useMemo<{ output?: string; error?: string }>(() => {
@@ -255,9 +261,10 @@ export function YamlToJsonClient() {
       const parsed = yamlToJson(input)
       return { output: JSON.stringify(parsed, null, 2) }
     } catch (e) {
-      return { error: e instanceof Error ? e.message : 'Invalid YAML' }
+      return { error: e instanceof Error ? e.message : L('invalidYaml', 'Invalid YAML') }
     }
-  }, [input])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [input, locale])
 
   const handleLoadSample = useCallback(() => setInput(SAMPLE_YAML), [])
 
@@ -269,7 +276,7 @@ export function YamlToJsonClient() {
       <div>
         <div className="mb-2 flex items-center justify-between">
           <label htmlFor="yaml-input" className="text-sm font-medium text-slate-700">
-            Paste your YAML
+            {L('inputLabel', 'Paste your YAML')}
           </label>
           <div className="flex items-center gap-2">
             <LoadSampleButton onLoad={handleLoadSample} variant="compact" />
@@ -279,7 +286,7 @@ export function YamlToJsonClient() {
                 onClick={() => setInput('')}
                 className="-my-1 rounded-md px-2 py-1 text-xs text-slate-400 hover:text-red-500 sm:text-sm"
               >
-                Clear
+                {L('clear', 'Clear')}
               </button>
             )}
           </div>
@@ -303,8 +310,8 @@ export function YamlToJsonClient() {
       {result.output && (
         <div>
           <div className="mb-2 flex items-center justify-between">
-            <span className="text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>JSON Output</span>
-            <CopyButton value={result.output} label="Copy" />
+            <span className="text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>{L('outputLabel', 'JSON Output')}</span>
+            <CopyButton value={result.output} label={L('copy', 'Copy')} />
           </div>
           <pre
             className="overflow-x-auto rounded-lg border bg-slate-50 p-4 text-xs"
@@ -316,7 +323,7 @@ export function YamlToJsonClient() {
       )}
 
       <p className="rounded-md p-3 text-xs" style={{ backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text-subtle))' }}>
-        🔒 100% client-side — a hand-written YAML subset parser. Supports mappings, sequences, inline flow, quotes, and comments.
+        {L('note', '🔒 100% client-side — a hand-written YAML subset parser. Supports mappings, sequences, inline flow, quotes, and comments.')}
       </p>
     </div>
   )

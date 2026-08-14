@@ -6,6 +6,10 @@ import type { ToolL10n } from '../tool-l10n'
 
 export const fractionCalculatorL10n: ToolL10n = {
   zh: {
+    formula: {
+      formula: 'a/b ± c/d = (a·d ± b·c) / (b·d)\na/b × c/d = (a·c)/(b·d)',
+      explain: '加减用公分母,乘法分子分母分别相乘。结果除以最大公约数化为最简。',
+    },
     ui: {
       'in.num1': '分子 1',
       'in.den1': '分母 1',
@@ -31,6 +35,10 @@ export const fractionCalculatorL10n: ToolL10n = {
     ],
   },
   es: {
+    formula: {
+      formula: 'a/b ± c/d = (a·d ± b·c) / (b·d)\na/b × c/d = (a·c)/(b·d)',
+      explain: 'Suma/resta con denominador común, multiplica numeradores y denominadores. Los resultados se reducen dividiendo entre el máximo común divisor.',
+    },
     ui: {
       'in.num1': 'Numerador 1',
       'in.den1': 'Denominador 1',
@@ -56,6 +64,10 @@ export const fractionCalculatorL10n: ToolL10n = {
     ],
   },
   de: {
+    formula: {
+      formula: 'a/b ± c/d = (a·d ± b·c) / (b·d)\na/b × c/d = (a·c)/(b·d)',
+      explain: 'Addition/Subtraktion mit gemeinsamem Nenner, Multiplikation von Zählern und Nennern. Ergebnisse werden durch den ggT gekürzt.',
+    },
     ui: {
       'in.num1': 'Zähler 1',
       'in.den1': 'Nenner 1',

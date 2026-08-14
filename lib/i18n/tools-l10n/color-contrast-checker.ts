@@ -6,6 +6,24 @@ import type { ToolL10n } from '../tool-l10n'
 
 export const colorContrastCheckerL10n: ToolL10n = {
   zh: {
+    ui: {
+      'aaLarge': 'AA(大号)',
+      'aaNormal': 'AA(正常)',
+      'aaaLarge': 'AAA(大号)',
+      'aaaNormal': 'AAA(正常)',
+      'background': '背景',
+      'bgPickerAria': '背景色选择器',
+      'contrastRatio': '对比度',
+      'errorInvalidHex': '请输入有效的十六进制颜色(如 #ffffff)。',
+      'fgPickerAria': '前景色选择器',
+      'foregroundText': '前景(文字)',
+      'note': '🔒 100% 在客户端——使用 WCAG 2.1 相对亮度公式。大号文字 = ≥18pt 或 ≥14pt 加粗。',
+      'sampleText': '敏捷的棕色狐狸跳过那只懒狗。1234567890',
+    },
+    formula: {
+      formula: 'CR = ( L_lighter + 0.05 ) / ( L_darker + 0.05 )',
+      explain: '两种颜色由相对亮度 L 算出的 WCAG 对比度。比值 ≥ 4.5 普通文本达 AA;≥ 7 达 AAA。0.05 用于补偿环境光眩光。',
+    },
     useCases: [
       '检测配色是否达到 WCAG 标准',
       '审计网页的可访问性合规情况',
@@ -19,6 +37,24 @@ export const colorContrastCheckerL10n: ToolL10n = {
     ],
   },
   es: {
+    ui: {
+      'aaLarge': 'AA (grande)',
+      'aaNormal': 'AA (normal)',
+      'aaaLarge': 'AAA (grande)',
+      'aaaNormal': 'AAA (normal)',
+      'background': 'Fondo',
+      'bgPickerAria': 'Selector de color de fondo',
+      'contrastRatio': 'Relación de contraste',
+      'errorInvalidHex': 'Introduce colores hex válidos (p. ej. #ffffff).',
+      'fgPickerAria': 'Selector de color de primer plano',
+      'foregroundText': 'Primer plano (texto)',
+      'note': '🔒 100% en el cliente — usa la fórmula de luminancia relativa WCAG 2.1. Texto grande = ≥18pt o ≥14pt en negrita.',
+      'sampleText': 'El veloz murciélago hindú comía feliz cardillo y kiwi. 1234567890',
+    },
+    formula: {
+      formula: 'CR = ( L_lighter + 0.05 ) / ( L_darker + 0.05 )',
+      explain: 'Ratio de contraste WCAG de dos colores a partir de su luminancia relativa L. Ratios ≥ 4,5 cumplen AA para texto normal; ≥ 7 cumplen AAA. El 0,05 compensa el destello de luz ambiente.',
+    },
     useCases: [
       'comprobar si una combinación de colores cumple WCAG',
       'auditar la conformidad de accesibilidad de una página',
@@ -32,6 +68,24 @@ export const colorContrastCheckerL10n: ToolL10n = {
     ],
   },
   de: {
+    ui: {
+      'aaLarge': 'AA (groß)',
+      'aaNormal': 'AA (normal)',
+      'aaaLarge': 'AAA (groß)',
+      'aaaNormal': 'AAA (normal)',
+      'background': 'Hintergrund',
+      'bgPickerAria': 'Hintergrundfarbe wählen',
+      'contrastRatio': 'Kontrastverhältnis',
+      'errorInvalidHex': 'Gültige Hex-Farben eingeben (z. B. #ffffff).',
+      'fgPickerAria': 'Vordergrundfarbe wählen',
+      'foregroundText': 'Vordergrund (Text)',
+      'note': '🔒 100% clientseitig — nutzt die WCAG-2.1-Formel für relative Leuchtdichte. Großer Text = ≥18pt oder ≥14pt fett.',
+      'sampleText': 'Franz jagt im komplett verwahrlosten Taxi quer durch Bayern. 1234567890',
+    },
+    formula: {
+      formula: 'CR = ( L_lighter + 0.05 ) / ( L_darker + 0.05 )',
+      explain: 'WCAG-Kontrastverhältnis zweier Farben aus ihrer relativen Leuchtdichte L. Werte ≥ 4,5 erfüllen AA für normalen Text; ≥ 7 erfüllen AAA. Die 0,05 gleicht Streulicht aus.',
+    },
     useCases: [
       'prüfen, ob eine Farbkombination WCAG entspricht',
       'die Barrierefrei-Konformität einer Seite auditieren',

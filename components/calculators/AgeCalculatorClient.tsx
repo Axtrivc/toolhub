@@ -2,6 +2,8 @@
 
 import { useState, useEffect } from 'react'
 import { ResultCard, CalculatorNote } from '@/components/calculator/CalculatorField'
+import { useApp } from '@/components/providers/AppProviders'
+import { tui } from '@/lib/i18n/tool-l10n'
 
 function toInputDate(d: Date): string {
   const y = d.getFullYear()
@@ -63,6 +65,9 @@ function calcAge(from: Date, to: Date) {
 }
 
 export function AgeCalculatorClient() {
+  const { locale } = useApp()
+  const L = (key: string, fb: string) => tui('age-calculator', locale, key, fb)
+
   // 初始 state 用固定值,挂载后(mounted)再填入"今天",避免 SSR/CSR 首帧
   // 因 new Date() 不同导致 hydration mismatch(构建次日访问即不一致)。
   const [birth, setBirth] = useState('2000-01-01')
@@ -91,7 +96,7 @@ export function AgeCalculatorClient() {
       <div className="grid grid-cols-1 gap-4 rounded-lg p-4 sm:grid-cols-2" style={{ backgroundColor: 'rgb(var(--bg-subtle))' }}>
         <div>
           <label htmlFor="birth" className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
-            Date of birth
+            {L('dateOfBirth', 'Date of birth')}
           </label>
           <input
             id="birth"
@@ -104,7 +109,7 @@ export function AgeCalculatorClient() {
         </div>
         <div>
           <label htmlFor="target" className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
-            Age at date
+            {L('ageAtDate', 'Age at date')}
           </label>
           <input
             id="target"
@@ -120,45 +125,44 @@ export function AgeCalculatorClient() {
       {result ? (
         <>
           <ResultCard
-            label="Your age"
+            label={L('yourAge', 'Your age')}
             value={
               <span>
                 {result.years}
-                <span className="text-base font-normal text-slate-500"> yrs </span>
+                <span className="text-base font-normal text-slate-500">{L('yrsAbbr', ' yrs ')}</span>
                 {result.months}
-                <span className="text-base font-normal text-slate-500"> mo </span>
+                <span className="text-base font-normal text-slate-500">{L('moAbbr', ' mo ')}</span>
                 {result.days}
-                <span className="text-base font-normal text-slate-500"> days</span>
+                <span className="text-base font-normal text-slate-500">{L('daysAbbr', ' days')}</span>
               </span>
             }
             highlight
-            sublabel="As of the selected date"
+            sublabel={L('asOfSelectedDate', 'As of the selected date')}
           />
 
           {/* 其他单位 */}
           <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-            <ResultCard label="Total months" value={fmt(result.totalMonths)} />
-            <ResultCard label="Total weeks" value={fmt(result.totalWeeks)} />
-            <ResultCard label="Total days" value={fmt(result.totalDays)} />
-            <ResultCard label="Total hours" value={fmt(result.totalHours)} />
+            <ResultCard label={L('totalMonths', 'Total months')} value={fmt(result.totalMonths)} />
+            <ResultCard label={L('totalWeeks', 'Total weeks')} value={fmt(result.totalWeeks)} />
+            <ResultCard label={L('totalDays', 'Total days')} value={fmt(result.totalDays)} />
+            <ResultCard label={L('totalHours', 'Total hours')} value={fmt(result.totalHours)} />
           </div>
 
           {/* 下一个生日 */}
           <div className="rounded-lg border border-brand-200 bg-brand-50 p-5 text-center">
             <div className="text-sm font-medium text-brand-600">
-              🎂 Next birthday in {result.daysToBirthday} {result.daysToBirthday === 1 ? 'day' : 'days'}
+              {L('nextBirthdayIn', '🎂 Next birthday in ')}{result.daysToBirthday} {result.daysToBirthday === 1 ? L('day', 'day') : L('days', 'days')}
             </div>
           </div>
         </>
       ) : (
         <div className="rounded-lg border-2 border-dashed p-6 text-center text-sm" style={{ borderColor: 'rgb(var(--border-strong))', color: 'rgb(var(--text-faint))' }}>
-          The &quot;age at date&quot; must be after the date of birth
+          {L('emptyState', 'The "age at date" must be after the date of birth')}
         </div>
       )}
 
       <CalculatorNote>
-        📅 You can change the &quot;age at date&quot; to calculate age at any past or future date —
-        useful for deadlines, age verification, or historical calculations.
+        {L('note', '📅 You can change the "age at date" to calculate age at any past or future date — useful for deadlines, age verification, or historical calculations.')}
       </CalculatorNote>
     </div>
   )

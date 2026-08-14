@@ -6,6 +6,12 @@ import type { ToolL10n } from '../tool-l10n'
 
 export const hashGeneratorL10n: ToolL10n = {
   zh: {
+    ui: {
+      'generateHashes': '# 生成哈希',
+      'hashing': '哈希计算中…',
+      'note': '🔐 使用 SubtleCrypto API(真正的加密哈希)。MD5 在安全上已被攻破——推荐使用 SHA-256。',
+      'textToHash': '要哈希的文本',
+    },
     useCases: [
       '校验文件完整性(下载后比对哈希)',
       '密码存储(网站保存哈希而非明文)',
@@ -17,6 +23,12 @@ export const hashGeneratorL10n: ToolL10n = {
     ],
   },
   es: {
+    ui: {
+      'generateHashes': '# Generar hashes',
+      'hashing': 'Calculando hash…',
+      'note': '🔐 Usa la API SubtleCrypto (hash criptográfico real). MD5 está roto para seguridad — se recomienda SHA-256.',
+      'textToHash': 'Texto a hashear',
+    },
     useCases: [
       'verificar la integridad de los archivos (comparar el hash tras la descarga)',
       'almacenar contraseñas (los sitios guardan hashes, no texto plano)',
@@ -28,6 +40,12 @@ export const hashGeneratorL10n: ToolL10n = {
     ],
   },
   de: {
+    ui: {
+      'generateHashes': '# Hashes erzeugen',
+      'hashing': 'Hash wird berechnet…',
+      'note': '🔐 Nutzt die SubtleCrypto-API (echtes kryptografisches Hashing). MD5 ist für Sicherheit gebrochen — SHA-256 wird empfohlen.',
+      'textToHash': 'Zu hashender Text',
+    },
     useCases: [
       'Dateiintegrität prüfen (Hash nach dem Download abgleichen)',
       'Passwortspeicherung (Seiten speichern Hashes, nicht Klartext)',

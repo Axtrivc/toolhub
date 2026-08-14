@@ -6,6 +6,11 @@ import type { ToolL10n } from '../tool-l10n'
 
 export const findAndReplaceL10n: ToolL10n = {
   zh: {
+    ui: {
+      inputLabel: '格式:文本 ||| 查找 ||| 替换\n(用 " ||| " 分隔)',
+      outputLabel: '结果',
+      note: '🔍 用 " ||| " 分隔你的文本、查找内容和替换内容。示例:hello world ||| world ||| there',
+    },
     useCases: [
       '在长文档里批量替换某个术语',
       '把 [NAME] 等占位符替换成真实值',
@@ -18,6 +23,11 @@ export const findAndReplaceL10n: ToolL10n = {
     ],
   },
   es: {
+    ui: {
+      inputLabel: 'Formato: texto ||| buscar ||| reemplazar\n(separa con " ||| ")',
+      outputLabel: 'Resultado',
+      note: '🔍 Separa tu texto, término de búsqueda y reemplazo con " ||| ". Ejemplo: hello world ||| world ||| there',
+    },
     useCases: [
       'reemplazar un término a lo largo de un documento largo',
       'sustituir marcadores como [NAME] por el valor real',
@@ -30,6 +40,11 @@ export const findAndReplaceL10n: ToolL10n = {
     ],
   },
   de: {
+    ui: {
+      inputLabel: 'Format: Text ||| suchen ||| ersetzen\n(mit " ||| " trennen)',
+      outputLabel: 'Ergebnis',
+      note: '🔍 Trenne Text, Suchbegriff und Ersetzung mit " ||| ". Beispiel: hello world ||| world ||| there',
+    },
     useCases: [
       'einen Begriff in einem langen Dokument durchgängig ersetzen',
       'Platzhalter wie [NAME] durch echte Werte tauschen',

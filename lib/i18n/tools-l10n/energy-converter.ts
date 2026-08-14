@@ -6,6 +6,17 @@ import type { ToolL10n } from '../tool-l10n'
 
 export const energyConverterL10n: ToolL10n = {
   zh: {
+    ui: {
+      'note': '⚡ 食物标示的「卡路里」其实是千卡 (kcal)。1 千卡 = 4.184 千焦。',
+      'unit.btu': '英热单位 (BTU)',
+      'unit.cal': '卡路里 (cal)',
+      'unit.ev': '电子伏特 (eV)',
+      'unit.j': '焦耳 (J)',
+      'unit.kcal': '千卡 (kcal)',
+      'unit.kj': '千焦 (kJ)',
+      'unit.kwh': '千瓦时 (kWh)',
+      'unit.wh': '瓦时 (Wh)',
+    },
     useCases: [
       '读懂电费账单上的 kWh 用量',
       '在食物卡路里和大卡之间换算',
@@ -16,6 +27,17 @@ export const energyConverterL10n: ToolL10n = {
     ],
   },
   es: {
+    ui: {
+      'note': '⚡ Las «Calorías» de los alimentos son en realidad kilocalorías (kcal). 1 kcal = 4,184 kJ.',
+      'unit.btu': 'Unidades térmicas británicas (BTU)',
+      'unit.cal': 'Calorías (cal)',
+      'unit.ev': 'Electronvoltios (eV)',
+      'unit.j': 'Julios (J)',
+      'unit.kcal': 'Kilocalorías (kcal)',
+      'unit.kj': 'Kilojulios (kJ)',
+      'unit.kwh': 'Kilovatio-hora (kWh)',
+      'unit.wh': 'Vatio-hora (Wh)',
+    },
     useCases: [
       'entender el consumo en kWh de la factura eléctrica',
       'convertir entre calorías pequeñas y kilocalorías de alimentos',
@@ -26,6 +48,17 @@ export const energyConverterL10n: ToolL10n = {
     ],
   },
   de: {
+    ui: {
+      'note': '⚡ Nahrungs-«Kalorien» sind eigentlich Kilokalorien (kcal). 1 kcal = 4,184 kJ.',
+      'unit.btu': 'British Thermal Units (BTU)',
+      'unit.cal': 'Kalorien (cal)',
+      'unit.ev': 'Elektronenvolt (eV)',
+      'unit.j': 'Joule (J)',
+      'unit.kcal': 'Kilokalorien (kcal)',
+      'unit.kj': 'Kilojoule (kJ)',
+      'unit.kwh': 'Kilowattstunden (kWh)',
+      'unit.wh': 'Wattstunden (Wh)',
+    },
     useCases: [
       'den kWh-Verbrauch auf der Stromrechnung verstehen',
       'zwischen kleinen Kalorien und Lebensmittelskalorien umrechnen',

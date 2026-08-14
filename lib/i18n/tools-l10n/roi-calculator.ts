@@ -10,6 +10,10 @@ import type { ToolL10n } from '../tool-l10n'
 export const roiCalculatorL10n: ToolL10n = {
   // ──────────────────────────── 中文 ────────────────────────────
   zh: {
+    formula: {
+      formula: 'ROI = (Gain − Cost) / Cost × 100%',
+      explain: '投资回报率。收益 = 终值 − 成本(或卖出价 − 买入价),以原始成本的百分比表示。',
+    },
     useCases: [
       '计算带年化回报的 ROI',
       '按时间段算 ROI',
@@ -35,6 +39,10 @@ export const roiCalculatorL10n: ToolL10n = {
 
   // ──────────────────────────── Español ────────────────────────────
   es: {
+    formula: {
+      formula: 'ROI = (Gain − Cost) / Cost × 100%',
+      explain: 'Rentabilidad de la inversión. Ganancia = valor final − coste (o precio de venta − precio de compra). Se expresa como porcentaje del coste original.',
+    },
     useCases: [
       'calcular el ROI con retorno anualizado',
       'calcular el ROI por periodo',
@@ -60,6 +68,10 @@ export const roiCalculatorL10n: ToolL10n = {
 
   // ──────────────────────────── Deutsch ────────────────────────────
   de: {
+    formula: {
+      formula: 'ROI = (Gain − Cost) / Cost × 100%',
+      explain: 'Rendite der Investition. Gewinn = Endwert − Kosten (oder Verkaufspreis − Kaufpreis), ausgedrückt als Prozentsatz der ursprünglichen Kosten.',
+    },
     useCases: [
       'den ROI mit annualisierter Rendite berechnen',
       'den ROI nach Zeitraum berechnen',

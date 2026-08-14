@@ -1,33 +1,176 @@
 /**
  * chmod-calculator 本地化 bundle —— zh / es / de
- * 覆盖:useCases(client = ChmodCalculatorClient = 自定义 devtool client,无需 slug)
- * 注:该工具在 tool-faqs.ts 无 FAQ 条目,故 bundle 仅含 useCases
+ * 覆盖:useCases + faqs(client = ChmodCalculatorClient = 自定义 devtool client)
  */
 import type { ToolL10n } from '../tool-l10n'
 
 export const chmodCalculatorL10n: ToolL10n = {
   zh: {
+    ui: {
+      'command': '命令',
+      'copyCommand': '复制命令',
+      'copyOctal': '复制八进制',
+      'errInvalidMid': ')或 9 个符号字符(如 ',
+      'errInvalidPrefix': '无效格式——请用 3–4 位八进制(0–7,如 ',
+      'errInvalidSuffix': ')。',
+      'execute': '执行',
+      'executeAria': '执行',
+      'group': '属组',
+      'hintSetgid': '以文件属组身份运行',
+      'hintSetuid': '以文件属主身份运行',
+      'hintSticky': '受限删除',
+      'inputPlaceholder': '644 或 rwxr--r--',
+      'noteAnd': ' 和 "',
+      'noteF1': '🔒 八进制数字依次为属主 / 属组 / 其他,每位是 read(4)+write(2)+execute(1) 之和。前导第四位编码特殊位:setuid(4)、setgid(2)、sticky(1)——所以 ',
+      'noteF2': ' 表示 setuid + "',
+      'noteF3': '"。在符号形式中它们出现在执行位之上,显示为 "',
+      'noteF4': '"。',
+      'octal': '八进制',
+      'others': '其他人',
+      'owner': '属主',
+      'permission': '权限',
+      'read': '读取',
+      'readAria': '读取',
+      'symbolic': '符号',
+      'typeHint': '或输入八进制 / 符号——复选框会自动更新',
+      'write': '写入',
+      'writeAria': '写入',
+    },
+    formula: {
+      formula: 'octal digit = read(4) + write(2) + execute(1)',
+      explain: '三组(属主、属组、其他人)各成一个八进制位,把启用的权限值相加。rwx = 7,rw- = 6,r-x = 5。',
+    },
     useCases: [
       'chmod 755 的含义',
       '八进制与符号权限互转',
       'Linux 文件权限生成器',
       '在线 chmod 命令构建器',
     ],
+    faqs: [
+      {
+        q: 'chmod 777 是什么意思,安全吗?',
+        a: '777 给所有人(属主、属组、其他人)读、写、执行权限。测试时很方便,但在服务器上不安全,因为任何用户都能修改或运行该文件。目录和可执行脚本建议用 755,普通文件用 644。',
+      },
+      {
+        q: 'rwx 字母和八进制数字怎么对应?',
+        a: '每个权限位有一个数值:读 = 4,写 = 2,执行 = 1。按组把它们相加。所以 rwx = 7(4+2+1),r-x = 5(4+0+1),rw- = 6(4+2+0)。因此 755 就表示 rwxr-xr-x。',
+      },
+      {
+        q: '755 和 644 有什么区别?',
+        a: '755(rwxr-xr-x)让属主可读、写、执行,其他人只能读和执行——适合目录和脚本。644(rw-r--r--)让属主可读、写,其他人只能读——是 HTML、图片等静态文件的安全默认值。',
+      },
+    ],
   },
   es: {
+    ui: {
+      'command': 'Comando',
+      'copyCommand': 'Copiar comando',
+      'copyOctal': 'Copiar octal',
+      'errInvalidMid': ') o 9 caracteres simbólicos (p. ej. ',
+      'errInvalidPrefix': 'Formato inválido — usa 3–4 dígitos octales (0–7, p. ej. ',
+      'errInvalidSuffix': ').',
+      'execute': 'Ejecución',
+      'executeAria': 'ejecución',
+      'group': 'Grupo',
+      'hintSetgid': 'ejecutar como grupo del archivo',
+      'hintSetuid': 'ejecutar como propietario del archivo',
+      'hintSticky': 'eliminación restringida',
+      'inputPlaceholder': '644 o rwxr--r--',
+      'noteAnd': ' y "',
+      'noteF1': '🔒 Los dígitos octales son Propietario / Grupo / Otros, cada uno la suma de lectura (4), escritura (2), ejecución (1). Un cuarto dígito inicial codifica los bits especiales: setuid (4), setgid (2), sticky (1) — así que ',
+      'noteF2': ' significa setuid + "',
+      'noteF3': '". En forma simbólica aparecen sobre el bit de ejecución como "',
+      'noteF4': '".',
+      'octal': 'Octal',
+      'others': 'Otros',
+      'owner': 'Propietario',
+      'permission': 'Permiso',
+      'read': 'Lectura',
+      'readAria': 'lectura',
+      'symbolic': 'Simbólico',
+      'typeHint': 'O escribe octal / simbólico — las casillas se actualizan solas',
+      'write': 'Escritura',
+      'writeAria': 'escritura',
+    },
+    formula: {
+      formula: 'octal digit = read(4) + write(2) + execute(1)',
+      explain: 'Cada uno de los tres grupos (propietario, grupo, otros) forma un dígito octal sumando los permisos activados. rwx = 7, rw- = 6, r-x = 5.',
+    },
     useCases: [
       'qué significa chmod 755',
       'convertir permisos octales a simbólicos',
       'generador de permisos de archivos Linux',
       'constructor de comandos chmod online',
     ],
+    faqs: [
+      {
+        q: '¿Qué significa chmod 777 y es seguro?',
+        a: '777 da permisos de lectura, escritura y ejecución a todos (propietario, grupo y otros). Es práctico para pruebas, pero inseguro en un servidor, porque cualquier usuario puede modificar o ejecutar el archivo. Usa 755 para directorios y scripts, y 644 para archivos normales.',
+      },
+      {
+        q: '¿Cómo se corresponden las letras rwx con los dígitos octales?',
+        a: 'Cada posición tiene un valor: lectura = 4, escritura = 2, ejecución = 1. Súmalos por grupo. Así rwx = 7 (4+2+1), r-x = 5 (4+0+1), rw- = 6 (4+2+0). Por tanto 755 significa rwxr-xr-x.',
+      },
+      {
+        q: '¿Cuál es la diferencia entre 755 y 644?',
+        a: '755 (rwxr-xr-x) permite al propietario leer, escribir y ejecutar mientras otros solo leen y ejecutan — correcto para directorios y scripts. 644 (rw-r--r--) permite al propietario leer y escribir y a los demás solo leer — el valor por defecto seguro para archivos estáticos como HTML e imágenes.',
+      },
+    ],
   },
   de: {
+    ui: {
+      'command': 'Befehl',
+      'copyCommand': 'Befehl kopieren',
+      'copyOctal': 'Oktal kopieren',
+      'errInvalidMid': ') oder 9 symbolische Zeichen (z. B. ',
+      'errInvalidPrefix': 'Ungültiges Format — 3–4 Oktalziffern (0–7, z. B. ',
+      'errInvalidSuffix': ').',
+      'execute': 'Ausführen',
+      'executeAria': 'ausführen',
+      'group': 'Gruppe',
+      'hintSetgid': 'als Dateigruppe ausführen',
+      'hintSetuid': 'als Dateieigentümer ausführen',
+      'hintSticky': 'eingeschränktes Löschen',
+      'inputPlaceholder': '644 oder rwxr--r--',
+      'noteAnd': ' und "',
+      'noteF1': '🔒 Die Oktalziffern sind Eigentümer / Gruppe / Sonstige, jeweils die Summe aus Lesen (4), Schreiben (2), Ausführen (1). Eine führende vierte Ziffer codiert die Spezialbits: setuid (4), setgid (2), sticky (1) — also bedeutet ',
+      'noteF2': ' setuid + "',
+      'noteF3': '". In symbolischer Form erscheinen sie über dem Ausführungs-Bit als "',
+      'noteF4': '".',
+      'octal': 'Oktal',
+      'others': 'Sonstige',
+      'owner': 'Eigentümer',
+      'permission': 'Berechtigung',
+      'read': 'Lesen',
+      'readAria': 'lesen',
+      'symbolic': 'Symbolisch',
+      'typeHint': 'Oder Oktal / Symbolisch eingeben — Kontrollkästchen aktualisieren sich automatisch',
+      'write': 'Schreiben',
+      'writeAria': 'schreiben',
+    },
+    formula: {
+      formula: 'octal digit = read(4) + write(2) + execute(1)',
+      explain: 'Jede der drei Gruppen (Eigentümer, Gruppe, Sonstige) wird zu einer Oktalziffer, indem die aktivierten Berechtigungswerte addiert werden. rwx = 7, rw- = 6, r-x = 5.',
+    },
     useCases: [
       'Bedeutung von chmod 755',
       'Oktale in symbolische Berechtigungen umwandeln',
       'Generator für Linux-Dateiberechtigungen',
       'Online-Baukasten für chmod-Befehle',
+    ],
+    faqs: [
+      {
+        q: 'Was bedeutet chmod 777 und ist es sicher?',
+        a: '777 gibt allen (Eigentümer, Gruppe und Sonstige) Lese-, Schreib- und Ausführungsrechte. Praktisch für Tests, aber auf einem Server unsicher, da jeder Nutzer die Datei ändern oder ausführen kann. Nutze 755 für Verzeichnisse und Skripte und 644 für reguläre Dateien.',
+      },
+      {
+        q: 'Wie entsprechen die rwx-Buchstaben den Oktalziffern?',
+        a: 'Jede Position hat einen Wert: Lesen = 4, Schreiben = 2, Ausführen = 1. Addiere sie pro Gruppe. Also rwx = 7 (4+2+1), r-x = 5 (4+0+1), rw- = 6 (4+2+0). 755 bedeutet daher rwxr-xr-x.',
+      },
+      {
+        q: 'Was ist der Unterschied zwischen 755 und 644?',
+        a: '755 (rwxr-xr-x) erlaubt dem Eigentümer Lesen, Schreiben und Ausführen, während andere nur lesen und ausführen dürfen — richtig für Verzeichnisse und Skripte. 644 (rw-r--r--) erlaubt dem Eigentümer Lesen und Schreiben, anderen nur Lesen — der sichere Standard für statische Dateien wie HTML und Bilder.',
+      },
     ],
   },
 }

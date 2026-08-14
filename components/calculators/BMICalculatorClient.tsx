@@ -2,42 +2,50 @@
 
 import { useState } from 'react'
 import { CalculatorField, ResultCard, CalculatorNote } from '@/components/calculator/CalculatorField'
+import { useApp } from '@/components/providers/AppProviders'
+import { tui } from '@/lib/i18n/tool-l10n'
 
 type Unit = 'metric' | 'imperial'
 
 // BMI 分类(基于 WHO 标准,适用于成人)
-function getCategory(bmi: number): { label: string; color: string; advice: string } {
+function getCategory(bmi: number): { key: string; label: string; color: string; advice: string } {
   if (bmi < 18.5)
     return {
+      key: 'underweight',
       label: 'Underweight',
       color: 'text-blue-600',
       advice: 'Below the healthy range. Consider consulting a nutritionist.',
     }
   if (bmi < 25)
     return {
+      key: 'healthyWeight',
       label: 'Healthy weight',
       color: 'text-green-600',
       advice: 'In the healthy range. Keep up your current habits.',
     }
   if (bmi < 30)
     return {
+      key: 'overweight',
       label: 'Overweight',
       color: 'text-yellow-600',
       advice: 'Slightly above the healthy range. Diet and exercise can help.',
     }
   if (bmi < 35)
     return {
+      key: 'obeseI',
       label: 'Obese (Class I)',
       color: 'text-orange-600',
       advice: 'Above the healthy range. Consider medical guidance.',
     }
   if (bmi < 40)
     return {
+      key: 'obeseII',
       label: 'Obese (Class II)',
       color: 'text-red-600',
       advice: 'Significantly above range. Medical consultation recommended.',
     }
   return {
+    key: 'obeseIII',
     label: 'Obese (Class III)',
     color: 'text-red-700',
     advice: 'Severely above range. Please consult a healthcare provider.',
@@ -45,6 +53,9 @@ function getCategory(bmi: number): { label: string; color: string; advice: strin
 }
 
 export function BMICalculatorClient() {
+  const { locale } = useApp()
+  const L = (key: string, fb: string) => tui('bmi-calculator', locale, key, fb)
+
   const [unit, setUnit] = useState<Unit>('metric')
   const [height, setHeight] = useState('170')
   const [weight, setWeight] = useState('65')
@@ -101,7 +112,7 @@ export function BMICalculatorClient() {
               unit === u ? 'bg-brand-600 text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
             }`}
           >
-            {u === 'metric' ? 'Metric (cm / kg)' : 'Imperial (in / lb)'}
+            {u === 'metric' ? L('metric', 'Metric (cm / kg)') : L('imperial', 'Imperial (in / lb)')}
           </button>
         ))}
       </div>
@@ -110,7 +121,7 @@ export function BMICalculatorClient() {
       <div className="grid grid-cols-1 gap-4 rounded-lg p-4 sm:grid-cols-2" style={{ backgroundColor: 'rgb(var(--bg-subtle))' }}>
         <CalculatorField
           id="height"
-          label="Height"
+          label={L('height', 'Height')}
           value={height}
           onChange={setHeight}
           suffix={unit === 'metric' ? 'cm' : 'in'}
@@ -118,7 +129,7 @@ export function BMICalculatorClient() {
         />
         <CalculatorField
           id="weight"
-          label="Weight"
+          label={L('weight', 'Weight')}
           value={weight}
           onChange={setWeight}
           suffix={unit === 'metric' ? 'kg' : 'lb'}
@@ -130,22 +141,22 @@ export function BMICalculatorClient() {
       {valid ? (
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
           <ResultCard
-            label="Your BMI"
+            label={L('yourBmi', 'Your BMI')}
             value={bmi.toFixed(1)}
             highlight
-            sublabel="Body Mass Index"
+            sublabel={L('bodyMassIndex', 'Body Mass Index')}
           />
           <div className="rounded-lg border p-5 text-center" style={{ borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rgb(var(--bg-card))' }}>
-            <div className="text-xs font-medium uppercase tracking-wide text-slate-500">Category</div>
+            <div className="text-xs font-medium uppercase tracking-wide text-slate-500">{L('category', 'Category')}</div>
             <div className={`mt-1.5 text-2xl font-bold sm:text-3xl ${category?.color}`}>
-              {category?.label}
+              {category ? L('catLabel_' + category.key, category.label) : null}
             </div>
-            <div className="mt-1 text-xs text-slate-400">{category?.advice}</div>
+            <div className="mt-1 text-xs text-slate-400">{category ? L('catAdvice_' + category.key, category.advice) : null}</div>
           </div>
           {healthyLow && healthyHigh && (
             <div className="rounded-lg border p-5 text-center sm:col-span-2" style={{ borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rgb(var(--bg-card))' }}>
               <div className="text-xs font-medium uppercase tracking-wide text-slate-500">
-                Healthy weight range for your height
+                {L('healthyWeightRange', 'Healthy weight range for your height')}
               </div>
               <div className="mt-1.5 text-xl font-semibold" style={{ color: 'rgb(var(--text))' }}>
                 {healthyLow.toFixed(1)} – {healthyHigh.toFixed(1)}{' '}
@@ -156,7 +167,7 @@ export function BMICalculatorClient() {
         </div>
       ) : (
         <div className="rounded-lg border-2 border-dashed p-6 text-center text-sm" style={{ borderColor: 'rgb(var(--border-strong))', color: 'rgb(var(--text-faint))' }}>
-          Enter your height and weight to calculate your BMI
+          {L('emptyState', 'Enter your height and weight to calculate your BMI')}
         </div>
       )}
 
@@ -165,25 +176,23 @@ export function BMICalculatorClient() {
         <table className="w-full text-left text-sm">
           <thead className="text-xs uppercase" style={{ backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text-subtle))' }}>
             <tr>
-              <th className="px-4 py-2">BMI Range</th>
-              <th className="px-4 py-2">Category</th>
+              <th className="px-4 py-2">{L('thBmiRange', 'BMI Range')}</th>
+              <th className="px-4 py-2">{L('thCategory', 'Category')}</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-slate-100">
-            <tr><td className="px-4 py-2 font-mono">Below 18.5</td><td className="px-4 py-2 text-blue-600">Underweight</td></tr>
-            <tr><td className="px-4 py-2 font-mono">18.5 – 24.9</td><td className="px-4 py-2 text-green-600">Healthy weight</td></tr>
-            <tr><td className="px-4 py-2 font-mono">25.0 – 29.9</td><td className="px-4 py-2 text-yellow-600">Overweight</td></tr>
-            <tr><td className="px-4 py-2 font-mono">30.0 – 34.9</td><td className="px-4 py-2 text-orange-600">Obese (Class I)</td></tr>
-            <tr><td className="px-4 py-2 font-mono">35.0 – 39.9</td><td className="px-4 py-2 text-red-600">Obese (Class II)</td></tr>
-            <tr><td className="px-4 py-2 font-mono">40.0 and above</td><td className="px-4 py-2 text-red-700">Obese (Class III)</td></tr>
+            <tr><td className="px-4 py-2 font-mono">{L('rangeBelow', 'Below 18.5')}</td><td className="px-4 py-2 text-blue-600">{L('catLabel_underweight', 'Underweight')}</td></tr>
+            <tr><td className="px-4 py-2 font-mono">18.5 – 24.9</td><td className="px-4 py-2 text-green-600">{L('catLabel_healthyWeight', 'Healthy weight')}</td></tr>
+            <tr><td className="px-4 py-2 font-mono">25.0 – 29.9</td><td className="px-4 py-2 text-yellow-600">{L('catLabel_overweight', 'Overweight')}</td></tr>
+            <tr><td className="px-4 py-2 font-mono">30.0 – 34.9</td><td className="px-4 py-2 text-orange-600">{L('catLabel_obeseI', 'Obese (Class I)')}</td></tr>
+            <tr><td className="px-4 py-2 font-mono">35.0 – 39.9</td><td className="px-4 py-2 text-red-600">{L('catLabel_obeseII', 'Obese (Class II)')}</td></tr>
+            <tr><td className="px-4 py-2 font-mono">{L('range40Above', '40.0 and above')}</td><td className="px-4 py-2 text-red-700">{L('catLabel_obeseIII', 'Obese (Class III)')}</td></tr>
           </tbody>
         </table>
       </div>
 
       <CalculatorNote>
-        ⚕️ This calculator is for adults aged 20+ and is a general screening tool, not a medical
-        diagnosis. BMI does not distinguish between muscle and fat, so very muscular people may
-        score high without being unhealthy. Consult a doctor for personalized advice.
+        {L('note', '⚕️ This calculator is for adults aged 20+ and is a general screening tool, not a medical diagnosis. BMI does not distinguish between muscle and fat, so very muscular people may score high without being unhealthy. Consult a doctor for personalized advice.')}
       </CalculatorNote>
     </div>
   )

@@ -6,6 +6,23 @@ import type { ToolL10n } from '../tool-l10n'
 
 export const faviconGeneratorL10n: ToolL10n = {
   zh: {
+    ui: {
+      'change': '更换',
+      'croppedNote': '图片先裁剪为居中正方形,再缩放到各尺寸。',
+      'downloadAllSizes': '下载所有尺寸',
+      'downloadPng': '下载 PNG',
+      'errCouldNotRead': '无法读取文件。',
+      'errUploadImage': '请上传图片文件(PNG、JPG、GIF 或 WebP)。',
+      'noteIntro': '🔒 100% 在客户端——你的图片载入浏览器内画布并经 ',
+      'noteOutro': ' 导出。它绝不离开你的设备。',
+      'previewWord': ' 预览',
+      'sizeDesc.16': '浏览器标签页(经典)',
+      'sizeDesc.180': 'Apple 触摸图标 (iOS)',
+      'sizeDesc.32': 'Retina 标签页与任务栏',
+      'uploadHint': 'PNG、JPG、GIF 或 WebP——推荐 ≥ 256×256',
+      'uploadPrompt': '点击上传或拖放',
+      'uploadedSourceAlt': '已上传的原图',
+    },
     useCases: [
       '导出多尺寸的 PNG favicon',
       '生成 iOS 用的 Apple Touch Icon',
@@ -19,6 +36,23 @@ export const faviconGeneratorL10n: ToolL10n = {
     ],
   },
   es: {
+    ui: {
+      'change': 'Cambiar',
+      'croppedNote': 'La imagen se recorta a un cuadrado centrado y luego se escala a cada tamaño.',
+      'downloadAllSizes': 'Descargar todos los tamaños',
+      'downloadPng': 'Descargar PNG',
+      'errCouldNotRead': 'No se pudo leer el archivo.',
+      'errUploadImage': 'Sube una imagen (PNG, JPG, GIF o WebP).',
+      'noteIntro': '🔒 100% en el cliente — tu imagen se carga en un lienzo del navegador y se exporta vía ',
+      'noteOutro': '. Nunca sale de tu dispositivo.',
+      'previewWord': ' vista previa',
+      'sizeDesc.16': 'Pestaña del navegador (clásico)',
+      'sizeDesc.180': 'Apple Touch Icon (iOS)',
+      'sizeDesc.32': 'Pestaña Retina y barra de tareas',
+      'uploadHint': 'PNG, JPG, GIF o WebP — recomendado ≥ 256×256',
+      'uploadPrompt': 'Clic para subir o arrastra',
+      'uploadedSourceAlt': 'Origen subido',
+    },
     useCases: [
       'exportar favicons PNG en varios tamaños',
       'generar el Apple Touch Icon para iOS',
@@ -32,6 +66,23 @@ export const faviconGeneratorL10n: ToolL10n = {
     ],
   },
   de: {
+    ui: {
+      'change': 'Ändern',
+      'croppedNote': 'Das Bild wird auf ein zentriertes Quadrat beschnitten und dann auf jede Größe skaliert.',
+      'downloadAllSizes': 'Alle Größen herunterladen',
+      'downloadPng': 'PNG herunterladen',
+      'errCouldNotRead': 'Datei konnte nicht gelesen werden.',
+      'errUploadImage': 'Bitte eine Bilddatei hochladen (PNG, JPG, GIF oder WebP).',
+      'noteIntro': '🔒 100% clientseitig — dein Bild wird in eine Browser-Canvas geladen und per ',
+      'noteOutro': ' exportiert. Es verlässt nie dein Gerät.',
+      'previewWord': ' Vorschau',
+      'sizeDesc.16': 'Browser-Tab (klassisch)',
+      'sizeDesc.180': 'Apple Touch Icon (iOS)',
+      'sizeDesc.32': 'Retina-Tab & Taskleiste',
+      'uploadHint': 'PNG, JPG, GIF oder WebP — empfohlen ≥ 256×256',
+      'uploadPrompt': 'Zum Hochladen klicken oder hineinziehen',
+      'uploadedSourceAlt': 'Hochgeladene Quelle',
+    },
     useCases: [
       'PNG-Favicons in mehreren Größen exportieren',
       'das Apple-Touch-Icon für iOS erzeugen',

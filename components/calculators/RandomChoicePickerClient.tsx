@@ -3,6 +3,8 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { CopyButton } from '@/components/CopyButton'
 import { CalculatorNote } from '@/components/calculator/CalculatorField'
+import { useApp } from '@/components/providers/AppProviders'
+import { tui } from '@/lib/i18n/tool-l10n'
 
 /**
  * Random Choice Picker 客户端组件
@@ -42,6 +44,10 @@ const inputStyle = {
 }
 
 export function RandomChoicePickerClient() {
+  const { locale } = useApp()
+  // 取本地化 UI 串;缺失回退英文(SSR 恒英文)。
+  const L = (key: string, fb: string) => tui('random-choice-picker', locale, key, fb)
+
   const [text, setText] = useState(SAMPLE)
   const [countStr, setCountStr] = useState('1')
   const [unique, setUnique] = useState(true)
@@ -143,7 +149,7 @@ export function RandomChoicePickerClient() {
       {/* 选项输入 */}
       <div>
         <label htmlFor="rcp-options" className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
-          Options — one per line ({options.length} {options.length === 1 ? 'option' : 'options'})
+          {L('optionsLabel', 'Options — one per line')} ({options.length} {options.length === 1 ? L('optionSingular', 'option') : L('optionPlural', 'options')})
         </label>
         <textarea
           id="rcp-options"
@@ -158,7 +164,7 @@ export function RandomChoicePickerClient() {
 
       {tooFew && (
         <div className="rounded-lg border border-red-200 bg-red-50 p-4 text-sm text-red-700">
-          ⚠️ Add at least 2 options (one per line) to pick from.
+          {L('tooFewError', '⚠️ Add at least 2 options (one per line) to pick from.')}
         </div>
       )}
 
@@ -169,7 +175,7 @@ export function RandomChoicePickerClient() {
       >
         <div>
           <label htmlFor="rcp-count" className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
-            Number of winners
+            {L('numberOfWinners', 'Number of winners')}
           </label>
           <input
             id="rcp-count"
@@ -191,7 +197,7 @@ export function RandomChoicePickerClient() {
           style={toggleStyle(unique)}
         >
           <span className="mr-2 inline-block h-2.5 w-2.5 rounded-full" style={{ backgroundColor: unique ? 'rgb(34 197 94)' : 'rgb(var(--border-strong))' }} />
-          No repeat winners {unique ? '(on)' : '(off)'}
+          {L('noRepeatWinners', 'No repeat winners')} {unique ? L('stateOn', '(on)') : L('stateOff', '(off)')}
         </button>
         <button
           type="button"
@@ -201,7 +207,7 @@ export function RandomChoicePickerClient() {
           style={toggleStyle(removeAfter)}
         >
           <span className="mr-2 inline-block h-2.5 w-2.5 rounded-full" style={{ backgroundColor: removeAfter ? 'rgb(34 197 94)' : 'rgb(var(--border-strong))' }} />
-          Remove winner after picking {removeAfter ? '(on)' : '(off)'}
+          {L('removeWinnerAfterPicking', 'Remove winner after picking')} {removeAfter ? L('stateOn', '(on)') : L('stateOff', '(off)')}
         </button>
       </div>
 
@@ -217,14 +223,14 @@ export function RandomChoicePickerClient() {
           className={`text-2xl font-bold sm:text-3xl ${spinning ? 'animate-pulse' : ''}`}
           style={{ color: display ? 'rgb(var(--text))' : 'rgb(var(--text-faint))' }}
         >
-          {spinning ? display : display || 'Press Pick to choose'}
+          {spinning ? display : display || L('pressPickToChoose', 'Press Pick to choose')}
         </span>
       </div>
       <div className="flex flex-wrap items-center gap-2">
         <button type="button" onClick={pick} disabled={spinning || tooFew} className="btn btn-primary disabled:cursor-not-allowed disabled:opacity-50">
-          {spinning ? 'Picking…' : `Pick ${k} winner${k === 1 ? '' : 's'}`}
+          {spinning ? L('picking', 'Picking…') : `${L('pick', 'Pick')} ${k} ${k === 1 ? L('winnerSingular', 'winner') : L('winnerPlural', 'winners')}`}
         </button>
-        <CopyButton value={winners.join('\n')} label="Copy winners" disabled={winners.length === 0} />
+        <CopyButton value={winners.join('\n')} label={L('copyWinners', 'Copy winners')} disabled={winners.length === 0} />
       </div>
 
       {/* 获奖者卡片 */}
@@ -246,14 +252,14 @@ export function RandomChoicePickerClient() {
         <div>
           <div className="mb-2 flex items-center justify-between">
             <h3 className="text-sm font-semibold" style={{ color: 'rgb(var(--text))' }}>
-              History
+              {L('history', 'History')}
             </h3>
             <button
               type="button"
               onClick={() => setHistory([])}
               className="text-xs font-medium text-primary hover:underline"
             >
-              Clear
+              {L('clear', 'Clear')}
             </button>
           </div>
           <ol className="space-y-2">
@@ -276,9 +282,10 @@ export function RandomChoicePickerClient() {
       )}
 
       <CalculatorNote>
-        🎲 Winners are drawn with <code>crypto.getRandomValues</code> and rejection sampling (no modulo bias), so every
-        option has an exactly equal chance. With &quot;no repeat winners&quot; on, picks are sampled without
-        replacement; turn it off to allow the same option to win multiple times in one draw.
+        {L('noteIntro', '🎲 Winners are drawn with ')}<code>crypto.getRandomValues</code>
+        {L('noteMid', ' and rejection sampling (no modulo bias), so every option has an exactly equal chance. With ')}
+        &quot;{L('noteNoRepeat', 'no repeat winners')}&quot;
+        {L('noteOutro', ' on, picks are sampled without replacement; turn it off to allow the same option to win multiple times in one draw.')}
       </CalculatorNote>
     </div>
   )

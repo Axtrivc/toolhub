@@ -3,6 +3,8 @@
 import { useCallback, useState } from 'react'
 import { Download, Eye, EyeOff } from 'lucide-react'
 import { CopyButton } from '@/components/CopyButton'
+import { useApp } from '@/components/providers/AppProviders'
+import { tui } from '@/lib/i18n/tool-l10n'
 
 /**
  * SSH Key Generator —— 纯 Web Crypto 客户端生成 SSH 密钥对
@@ -97,6 +99,9 @@ function downloadTextFile(filename: string, content: string): void {
 const MASK = '•'.repeat(48)
 
 export function SshKeyGeneratorClient() {
+  const { locale } = useApp()
+  const L = (key: string, fb: string) => tui('ssh-key-generator', locale, key, fb)
+
   const [keyType, setKeyType] = useState<KeyType>('ed25519')
   const [modulusLength, setModulusLength] = useState<2048 | 4096>(2048)
   const [comment, setComment] = useState('')
@@ -110,7 +115,7 @@ export function SshKeyGeneratorClient() {
     setBusy(true)
     try {
       if (typeof crypto === 'undefined' || !crypto.subtle) {
-        throw new Error('Web Crypto API is not available here. It requires a secure (HTTPS) context and a modern browser.')
+        throw new Error(L('errorNoWebCrypto', 'Web Crypto API is not available here. It requires a secure (HTTPS) context and a modern browser.'))
       }
       let blob: Uint8Array<ArrayBuffer>
       let privatePem: string
@@ -121,7 +126,7 @@ export function SshKeyGeneratorClient() {
           pair = (await crypto.subtle.generateKey({ name: 'Ed25519' }, true, ['sign', 'verify'])) as CryptoKeyPair
         } catch {
           throw new Error(
-            'This browser does not support Ed25519 in the Web Crypto API. Try a current Chrome, Edge, Firefox or Safari — or switch to RSA below.',
+            L('errorNoEd25519', 'This browser does not support Ed25519 in the Web Crypto API. Try a current Chrome, Edge, Firefox or Safari — or switch to RSA below.'),
           )
         }
         const raw = await crypto.subtle.exportKey('raw', pair.publicKey)
@@ -139,7 +144,7 @@ export function SshKeyGeneratorClient() {
           ['sign', 'verify'],
         )
         const jwk = await crypto.subtle.exportKey('jwk', pair.publicKey)
-        if (!jwk.e || !jwk.n) throw new Error('Could not export the RSA public key parameters.')
+        if (!jwk.e || !jwk.n) throw new Error(L('errorRsaExport', 'Could not export the RSA public key parameters.'))
         blob = concatBytes(sshString(te.encode('ssh-rsa')), sshMpint(b64urlToBytes(jwk.e)), sshMpint(b64urlToBytes(jwk.n)))
         privatePem = pemWrap(await crypto.subtle.exportKey('pkcs8', pair.privateKey))
       }
@@ -152,11 +157,11 @@ export function SshKeyGeneratorClient() {
       setRevealed(false)
     } catch (e) {
       setKeys(null)
-      setError(e instanceof Error ? e.message : 'Key generation failed.')
+      setError(e instanceof Error ? e.message : L('errorKeyGenFailed', 'Key generation failed.'))
     } finally {
       setBusy(false)
     }
-  }, [keyType, modulusLength, comment])
+  }, [keyType, modulusLength, comment, locale])
 
   return (
     <div className="space-y-5">
@@ -164,7 +169,7 @@ export function SshKeyGeneratorClient() {
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <div>
           <label htmlFor="ssh-key-type" className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
-            Key type
+            {L('keyType', 'Key type')}
           </label>
           <select
             id="ssh-key-type"
@@ -173,13 +178,13 @@ export function SshKeyGeneratorClient() {
             className="w-full rounded-lg border p-3 text-sm shadow-sm outline-none transition focus:ring-2"
             style={{ borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rgb(var(--bg-card))', color: 'rgb(var(--text))' }}
           >
-            <option value="ed25519">Ed25519 (recommended)</option>
-            <option value="rsa">RSA</option>
+            <option value="ed25519">{L('ed25519Recommended', 'Ed25519 (recommended)')}</option>
+            <option value="rsa">{L('rsa', 'RSA')}</option>
           </select>
         </div>
         <div>
           <label htmlFor="ssh-comment" className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
-            Comment (optional)
+            {L('comment', 'Comment (optional)')}
           </label>
           <input
             id="ssh-comment"
@@ -196,7 +201,7 @@ export function SshKeyGeneratorClient() {
       {keyType === 'rsa' && (
         <div>
           <label htmlFor="ssh-rsa-bits" className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
-            RSA modulus (bits)
+            {L('rsaModulus', 'RSA modulus (bits)')}
           </label>
           <select
             id="ssh-rsa-bits"
@@ -213,11 +218,11 @@ export function SshKeyGeneratorClient() {
 
       <div className="flex flex-wrap items-center gap-3">
         <button type="button" onClick={generate} disabled={busy} className="btn btn-primary disabled:cursor-not-allowed disabled:opacity-50">
-          {busy ? 'Generating…' : 'Generate key pair'}
+          {busy ? L('generating', 'Generating…') : L('generateKeyPair', 'Generate key pair')}
         </button>
         {busy && (
           <span className="text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>
-            RSA-4096 can take a few seconds…
+            {L('rsa4096Wait', 'RSA-4096 can take a few seconds…')}
           </span>
         )}
       </div>
@@ -232,7 +237,7 @@ export function SshKeyGeneratorClient() {
             style={{ borderColor: 'rgb(147 197 253)', backgroundColor: 'rgb(219 234 254 / 0.4)' }}
           >
             <div className="text-xs font-medium uppercase tracking-wide" style={{ color: 'rgb(var(--text-subtle))' }}>
-              Fingerprint (SHA-256)
+              {L('fingerprint', 'Fingerprint (SHA-256)')}
             </div>
             <div className="mt-1.5 font-mono text-sm font-semibold" style={{ color: 'rgb(37 99 235)' }}>
               {keys.fingerprint}
@@ -243,9 +248,9 @@ export function SshKeyGeneratorClient() {
           <div>
             <div className="mb-1.5 flex flex-wrap items-center justify-between gap-2">
               <span className="text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
-                Public key — paste into <code>~/.ssh/authorized_keys</code>
+                {L('publicKeyPrefix', 'Public key — paste into ')}<code>~/.ssh/authorized_keys</code>
               </span>
-              <CopyButton value={keys.publicLine} label="Copy public key" />
+              <CopyButton value={keys.publicLine} label={L('copyPublicKey', 'Copy public key')} />
             </div>
             <pre
               className="w-full overflow-x-auto whitespace-pre-wrap break-all rounded-lg border p-4 font-mono text-sm shadow-sm"
@@ -259,23 +264,23 @@ export function SshKeyGeneratorClient() {
           <div>
             <div className="mb-1.5 flex flex-wrap items-center justify-between gap-2">
               <span className="text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
-                Private key (PKCS#8 PEM)
+                {L('privateKeyPem', 'Private key (PKCS#8 PEM)')}
               </span>
               <button type="button" onClick={() => setRevealed((r) => !r)} className="btn btn-secondary">
                 {revealed ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
-                {revealed ? 'Hide' : 'Reveal'}
+                {revealed ? L('hide', 'Hide') : L('reveal', 'Reveal')}
               </button>
             </div>
             <textarea
               readOnly
               rows={revealed ? 12 : 3}
               value={revealed ? keys.privatePem : `${MASK}\n${MASK}\n${MASK}`}
-              aria-label="Private key (masked)"
+              aria-label={L('privateKeyMasked', 'Private key (masked)')}
               className="w-full rounded-lg border p-4 font-mono text-sm shadow-sm outline-none"
               style={{ borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rgb(var(--bg-card))', color: 'rgb(var(--text))' }}
             />
             <div className="mt-3 flex flex-wrap gap-3">
-              <CopyButton value={keys.privatePem} label="Copy private key" />
+              <CopyButton value={keys.privatePem} label={L('copyPrivateKey', 'Copy private key')} />
               <button
                 type="button"
                 onClick={() => downloadTextFile(`${keys.baseName}.pub`, `${keys.publicLine}\n`)}
@@ -297,11 +302,7 @@ export function SshKeyGeneratorClient() {
             className="rounded-md p-3 text-xs"
             style={{ backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text-subtle))' }}
           >
-            🔒 Store the private key somewhere safe and lock it down with <code>chmod 600 ~/.ssh/{keys.baseName}</code>. The
-            private key is exported in PKCS#8 PEM — many tools (including OpenSSH ≥ 7.8) read it directly, and you can
-            convert it to the classic OpenSSH format any time with{' '}
-            <code>ssh-keygen -p -m PEM -f {keys.baseName}</code>. Keys are generated and kept entirely in your browser —
-            nothing is uploaded.
+            {L('noteIntro', '🔒 Store the private key somewhere safe and lock it down with ')}<code>chmod 600 ~/.ssh/{keys.baseName}</code>{L('noteMid1', '. The private key is exported in PKCS#8 PEM — many tools (including OpenSSH ≥ 7.8) read it directly, and you can convert it to the classic OpenSSH format any time with ')}<code>ssh-keygen -p -m PEM -f {keys.baseName}</code>{L('noteOutro', '. Keys are generated and kept entirely in your browser — nothing is uploaded.')}
           </p>
         </>
       )}

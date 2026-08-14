@@ -6,6 +6,20 @@ import type { ToolL10n } from '../tool-l10n'
 
 export const listDiffL10n: ToolL10n = {
   zh: {
+    ui: {
+      'caseSensitive': '区分大小写',
+      'copy': '复制',
+      'inBoth': '在两者中(交集)',
+      'listA': '列表 A',
+      'listB': '列表 B',
+      'noItems': '无项目。',
+      'onlyInA': '仅在 A',
+      'onlyInB': '仅在 B',
+      'placeholder': '每行一项…',
+      'privacyNote': '🔒 100% 在客户端——列表在本地比较。默认会折叠每个列表内的重复项。',
+      'trimWhitespace': '修剪空白',
+      'union': '并集(全部唯一)',
+    },
     useCases: [
       '对比两份电子邮件或联系人列表',
       '找出只存在于某个文件夹或某份报表中的条目',
@@ -19,6 +33,20 @@ export const listDiffL10n: ToolL10n = {
     ],
   },
   es: {
+    ui: {
+      'caseSensitive': 'Distingue mayúsculas',
+      'copy': 'Copiar',
+      'inBoth': 'En ambas (intersección)',
+      'listA': 'Lista A',
+      'listB': 'Lista B',
+      'noItems': 'Sin elementos.',
+      'onlyInA': 'Solo en A',
+      'onlyInB': 'Solo en B',
+      'placeholder': 'Un elemento por línea…',
+      'privacyNote': '🔒 100% en el cliente — las listas se comparan localmente. Los duplicados dentro de cada lista se colapsan por defecto.',
+      'trimWhitespace': 'Recortar espacios',
+      'union': 'Unión (todos únicos)',
+    },
     useCases: [
       'comparar dos listas de correos o contactos',
       'encontrar elementos que solo están en una carpeta o informe',
@@ -32,6 +60,20 @@ export const listDiffL10n: ToolL10n = {
     ],
   },
   de: {
+    ui: {
+      'caseSensitive': 'Groß-/Kleinschreibung',
+      'copy': 'Kopieren',
+      'inBoth': 'In beiden (Schnittmenge)',
+      'listA': 'Liste A',
+      'listB': 'Liste B',
+      'noItems': 'Keine Einträge.',
+      'onlyInA': 'Nur in A',
+      'onlyInB': 'Nur in B',
+      'placeholder': 'Ein Eintrag pro Zeile…',
+      'privacyNote': '🔒 100% clientseitig — Listen werden lokal verglichen. Duplikate innerhalb jeder Liste werden standardmäßig zusammengefasst.',
+      'trimWhitespace': 'Leerzeichen trimmen',
+      'union': 'Vereinigung (alle eindeutig)',
+    },
     useCases: [
       'zwei E-Mail- oder Kontaktlisten vergleichen',
       'Einträge finden, die nur in einem Ordner oder Bericht stehen',

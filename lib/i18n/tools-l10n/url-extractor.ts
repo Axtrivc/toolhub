@@ -6,6 +6,11 @@ import type { ToolL10n } from '../tool-l10n'
 
 export const urlExtractorL10n: ToolL10n = {
   zh: {
+    ui: {
+      inputLabel: '含网址的文本',
+      outputLabel: '提取出的网址',
+      note: '🔗 从任意文本中提取所有网址。自动去重。',
+    },
     useCases: [
       '从文章或邮件中抓取全部链接',
       '基于内容建立链接清单',
@@ -17,6 +22,11 @@ export const urlExtractorL10n: ToolL10n = {
     ],
   },
   es: {
+    ui: {
+      inputLabel: 'Texto con URLs',
+      outputLabel: 'URLs extraídas',
+      note: '🔗 Extrae todas las URLs de cualquier texto. Elimina duplicados.',
+    },
     useCases: [
       'extraer todos los enlaces de un artículo o correo',
       'crear un inventario de enlaces a partir de contenido',
@@ -28,6 +38,11 @@ export const urlExtractorL10n: ToolL10n = {
     ],
   },
   de: {
+    ui: {
+      inputLabel: 'Text mit URLs',
+      outputLabel: 'Extrahierte URLs',
+      note: '🔗 Extrahiert alle URLs aus beliebigem Text. Entfernt Duplikate.',
+    },
     useCases: [
       'alle Links aus einem Artikel oder einer E-Mail ziehen',
       'aus Inhalten ein Link-Inventar erstellen',

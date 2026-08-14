@@ -6,6 +6,10 @@ import type { ToolL10n } from '../tool-l10n'
 
 export const capitalGainsTaxEstimatorL10n: ToolL10n = {
   zh: {
+    formula: {
+      formula: 'Gain = sale − basis\nTax = gain × rate\nNet = gain − tax',
+      explain: 'basis 通常是买入价加费用。收益按持有期长短适用短期(按收入)或长期(优惠)税率。',
+    },
     useCases: ['估算股票/加密资产的资本利得税', '比较短期 vs 长期持有税率', '按持有期算税前应缴税款', '决定现在卖还是再持有一段时间'],
     faqs: [
       { q: '怎么计算资本利得税?', a: '按每个批次跟踪买入价和卖出价。利得 = 卖价 − 买价 − 手续费。长期利得按 0/15/20% 征税,依据你的应税总收入(含利得本身);短期利得按普通收入档位征税。' },
@@ -19,6 +23,10 @@ export const capitalGainsTaxEstimatorL10n: ToolL10n = {
     },
   },
   es: {
+    formula: {
+      formula: 'Gain = sale − basis\nTax = gain × rate\nNet = gain − tax',
+      explain: 'Basis suele ser el precio de compra más costes. La ganancia tributa al tipo corto plazo (renta) o largo plazo (preferente) según el tiempo de tenencia.',
+    },
     useCases: ['estimar el impuesto sobre plusvalías de acciones o cripto', 'comparar tipos de corto vs largo plazo', 'calcular lo que debes según el periodo de tenencia', 'decidir si vender ahora o seguir manteniendo'],
     faqs: [
       { q: '¿Cómo calculo mi impuesto sobre plusvalías?', a: 'Lleva el precio de compra y venta de cada lote. Ganancia = venta − compra − comisiones. Las plusvalías a largo plazo tributan al 0/15/20 % según tu renta total taxable (incluida la propia ganancia); las de corto plazo usan tu tramo de renta ordinaria.' },
@@ -32,6 +40,10 @@ export const capitalGainsTaxEstimatorL10n: ToolL10n = {
     },
   },
   de: {
+    formula: {
+      formula: 'Gain = sale − basis\nTax = gain × rate\nNet = gain − tax',
+      explain: 'Basis ist meist Kaufpreis plus Kosten. Der Gewinn wird je nach Haltedauer mit dem kurzfristigen (Einkommen) oder langfristigen (ermäßigten) Satz besteuert.',
+    },
     useCases: ['die Kapitalertragsteuer für Aktien oder Krypto schätzen', 'kurz- vs. langfristige Steuersätze vergleichen', 'die Schuld nach Haltedauer berechnen', 'entscheiden, jetzt verkaufen oder länger halten'],
     faqs: [
       { q: 'Wie berechne ich meine Kapitalertragsteuer?', a: 'Verfolge Kauf- und Verkaufspreis je Tranche. Gewinn = Verkauf − Kauf − Gebühren. Langfristige Gewinne werden mit 0/15/20 % besteuert, je nach gesamtem zu versteuerndem Einkommen (inklusive des Gewinns selbst); kurzfristige Gewinne verwenden deinen Grenzsteuersatz.' },

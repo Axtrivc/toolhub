@@ -6,6 +6,17 @@ import type { ToolL10n } from '../tool-l10n'
 
 export const temperatureConverterL10n: ToolL10n = {
   zh: {
+    ui: {
+      'convertedValue': '换算结果',
+      'formula': '公式',
+      'from': '从',
+      'noteText': '🌡️ 关键参考点:0°C = 32°F(冰点),100°C = 212°F(沸点),37°C = 98.6°F(体温)。',
+      'optCelsius': '摄氏度 (°C)',
+      'optFahrenheit': '华氏度 (°F)',
+      'optKelvin': '开尔文 (K)',
+      'to': '到',
+      'value': '数值',
+    },
     useCases: [
       '在摄氏度、华氏度和开尔文之间换算',
       '把美国食谱的烤箱温度转换成摄氏度',
@@ -18,6 +29,17 @@ export const temperatureConverterL10n: ToolL10n = {
     ],
   },
   es: {
+    ui: {
+      'convertedValue': 'Valor convertido',
+      'formula': 'Fórmula',
+      'from': 'De',
+      'noteText': '🌡️ Puntos de referencia: 0°C = 32°F (congelación), 100°C = 212°F (ebullición), 37°C = 98.6°F (corporal).',
+      'optCelsius': 'Celsius (°C)',
+      'optFahrenheit': 'Fahrenheit (°F)',
+      'optKelvin': 'Kelvin (K)',
+      'to': 'A',
+      'value': 'Valor',
+    },
     useCases: [
       'convertir entre Celsius, Fahrenheit y Kelvin',
       'pasar temperaturas de horno de recetas estadounidenses a Celsius',
@@ -30,6 +52,17 @@ export const temperatureConverterL10n: ToolL10n = {
     ],
   },
   de: {
+    ui: {
+      'convertedValue': 'Umgerechneter Wert',
+      'formula': 'Formel',
+      'from': 'Von',
+      'noteText': '🌡️ Referenzpunkte: 0°C = 32°F (Gefrierpunkt), 100°C = 212°F (Siedepunkt), 37°C = 98.6°F (Körper).',
+      'optCelsius': 'Celsius (°C)',
+      'optFahrenheit': 'Fahrenheit (°F)',
+      'optKelvin': 'Kelvin (K)',
+      'to': 'Nach',
+      'value': 'Wert',
+    },
     useCases: [
       'zwischen Celsius, Fahrenheit und Kelvin umrechnen',
       'Ofentemperaturen aus US-Rezepten in Celsius umrechnen',

@@ -6,6 +6,10 @@ import type { ToolL10n } from '../tool-l10n'
 
 export const sphereCalculatorL10n: ToolL10n = {
   zh: {
+    formula: {
+      formula: 'V = 4/3 × π × r³\nSA = 4 × π × r²',
+      explain: '球体体积 V 和表面积 SA,r 为半径。',
+    },
     ui: {
       'in.r': '半径',
       'out.volume': '体积',
@@ -22,6 +26,10 @@ export const sphereCalculatorL10n: ToolL10n = {
     ],
   },
   es: {
+    formula: {
+      formula: 'V = 4/3 × π × r³\nSA = 4 × π × r²',
+      explain: 'Volumen V y área superficial SA de una esfera, donde r es el radio.',
+    },
     ui: {
       'in.r': 'Radio',
       'out.volume': 'Volumen',
@@ -38,6 +46,10 @@ export const sphereCalculatorL10n: ToolL10n = {
     ],
   },
   de: {
+    formula: {
+      formula: 'V = 4/3 × π × r³\nSA = 4 × π × r²',
+      explain: 'Kugelvolumen V und Oberfläche SA, wobei r der Radius ist.',
+    },
     ui: {
       'in.r': 'Radius',
       'out.volume': 'Volumen',

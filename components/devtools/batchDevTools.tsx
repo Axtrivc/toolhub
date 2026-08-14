@@ -3,6 +3,8 @@
 import { useState, useMemo } from 'react'
 import { ResultCard, CalculatorNote } from '../calculator/CalculatorField'
 import { CopyButton } from '../CopyButton'
+import { useApp } from '@/components/providers/AppProviders'
+import { tui } from '@/lib/i18n/tool-l10n'
 // 编码/解码双向工具(Base64 / URL / HTML)已迁移到 ./encoderTools.tsx
 // (内置 Mode Toggle,各 encode/decode 路由复用同一组件)。
 
@@ -13,6 +15,8 @@ import { CopyButton } from '../CopyButton'
 
 // ── 1. 随机数生成器(独立交互)──
 export function RandomNumberGeneratorClient() {
+  const { locale } = useApp()
+  const L = (key: string, fb: string) => tui('random-number-generator', locale, key, fb)
   const [min, setMin] = useState('1')
   const [max, setMax] = useState('100')
   const [count, setCount] = useState('1')
@@ -26,20 +30,24 @@ export function RandomNumberGeneratorClient() {
     const hi = Number(max)
     const n = Number(count)
     if (!Number.isFinite(lo) || !Number.isFinite(hi) || !Number.isFinite(n)) {
-      setResult('⚠️ Please enter valid numbers for Min, Max, and Count')
+      setResult(L('invalidNumbersError', '⚠️ Please enter valid numbers for Min, Max, and Count'))
       return
     }
     if (n < 1) {
-      setResult('⚠️ Count must be at least 1')
+      setResult(L('countAtLeastOneError', '⚠️ Count must be at least 1'))
       return
     }
     const loInt = Math.ceil(lo)
     const hiInt = Math.floor(hi)
-    if (loInt > hiInt) { setResult('⚠️ Min must be ≤ Max'); return }
+    if (loInt > hiInt) { setResult(L('minLteMaxError', '⚠️ Min must be ≤ Max')); return }
     const range = hiInt - loInt + 1
     const limit = Math.min(n, 1000)
     if (unique && limit > range) {
-      setResult(`⚠️ Can't pick ${limit} unique numbers from a range of ${range}`)
+      setResult(
+        L('cantPickUniqueError', '⚠️ Can\'t pick {limit} unique numbers from a range of {range}')
+          .replace('{limit}', String(limit))
+          .replace('{range}', String(range)),
+      )
       return
     }
     const picked = new Set<number>()
@@ -56,24 +64,24 @@ export function RandomNumberGeneratorClient() {
     <div className="space-y-6">
       <div className="grid grid-cols-1 gap-4 rounded-lg p-4 sm:grid-cols-3" style={{ backgroundColor: 'rgb(var(--bg-subtle))' }}>
         <div>
-          <label className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>Min</label>
+          <label className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>{L('min', 'Min')}</label>
           <input type="number" value={min} onChange={(e) => setMin(e.target.value)} className="w-full rounded-lg border border-slate-300 p-3 outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200" />
         </div>
         <div>
-          <label className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>Max</label>
+          <label className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>{L('max', 'Max')}</label>
           <input type="number" value={max} onChange={(e) => setMax(e.target.value)} className="w-full rounded-lg border border-slate-300 p-3 outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200" />
         </div>
         <div>
-          <label className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>How many</label>
+          <label className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>{L('howMany', 'How many')}</label>
           <input type="number" value={count} onChange={(e) => setCount(e.target.value)} min="1" className="w-full rounded-lg border border-slate-300 p-3 outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200" />
         </div>
       </div>
       <label className="flex items-center gap-2 text-sm text-slate-700">
         <input type="checkbox" checked={unique} onChange={(e) => setUnique(e.target.checked)} className="h-4 w-4 rounded border-slate-300 text-brand-600" />
-        No repeats (unique numbers)
+        {L('noRepeats', 'No repeats (unique numbers)')}
       </label>
       <div className="flex gap-3">
-        <button onClick={generate} className="btn btn-primary">🎲 Generate</button>
+        <button onClick={generate} className="btn btn-primary">{L('generate', '🎲 Generate')}</button>
         <CopyButton value={result} />
       </div>
       <div className="rounded-lg border-2 border-brand-100 bg-brand-50/40 p-4">
@@ -85,17 +93,20 @@ export function RandomNumberGeneratorClient() {
 
 // ── 2. 密码强度检测器(独立)──
 export function PasswordStrengthCheckerClient() {
+  const { locale } = useApp()
+  const L = (key: string, fb: string) => tui('password-strength-checker', locale, key, fb)
+  const strengthKeys = ['strengthEmpty', 'strengthVeryWeak', 'strengthWeak', 'strengthStrong', 'strengthVeryStrong']
   const [pw, setPw] = useState('')
   const analysis = useMemo(() => analyzePassword(pw), [pw])
   return (
     <div className="space-y-6">
       <div>
-        <label className="mb-2 block text-sm font-medium text-slate-700">Enter a password to test</label>
+        <label className="mb-2 block text-sm font-medium text-slate-700">{L('enterPasswordLabel', 'Enter a password to test')}</label>
         <input
           type="text"
           value={pw}
           onChange={(e) => setPw(e.target.value)}
-          placeholder="Type your password..."
+          placeholder={L('passwordPlaceholder', 'Type your password...')}
           className="w-full rounded-lg border border-slate-300 p-3 font-mono outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200"
         />
       </div>
@@ -107,23 +118,23 @@ export function PasswordStrengthCheckerClient() {
             ))}
           </div>
           <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
-            <ResultCard label="Strength" value={analysis.label} highlight />
-            <ResultCard label="Length" value={String(pw.length)} />
-            <ResultCard label="Entropy" value={`${analysis.entropy} bits`} />
+            <ResultCard label={L('strength', 'Strength')} value={L(strengthKeys[analysis.score], analysis.label)} highlight />
+            <ResultCard label={L('length', 'Length')} value={String(pw.length)} />
+            <ResultCard label={L('entropy', 'Entropy')} value={`${analysis.entropy} ${L('bits', 'bits')}`} />
           </div>
           <div className="rounded-lg border border-slate-200 p-4">
-            <h3 className="mb-2 text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>Checklist</h3>
+            <h3 className="mb-2 text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>{L('checklist', 'Checklist')}</h3>
             <ul className="space-y-1 text-sm">
-              <li className={analysis.hasUpper ? 'text-green-600' : 'text-slate-400'}>{analysis.hasUpper ? '✓' : '✗'} Uppercase letters</li>
-              <li className={analysis.hasLower ? 'text-green-600' : 'text-slate-400'}>{analysis.hasLower ? '✓' : '✗'} Lowercase letters</li>
-              <li className={analysis.hasNum ? 'text-green-600' : 'text-slate-400'}>{analysis.hasNum ? '✓' : '✗'} Numbers</li>
-              <li className={analysis.hasSym ? 'text-green-600' : 'text-slate-400'}>{analysis.hasSym ? '✓' : '✗'} Symbols</li>
-              <li className={pw.length >= 12 ? 'text-green-600' : 'text-slate-400'}>{pw.length >= 12 ? '✓' : '✗'} At least 12 characters</li>
+              <li className={analysis.hasUpper ? 'text-green-600' : 'text-slate-400'}>{analysis.hasUpper ? '✓' : '✗'} {L('uppercaseLetters', 'Uppercase letters')}</li>
+              <li className={analysis.hasLower ? 'text-green-600' : 'text-slate-400'}>{analysis.hasLower ? '✓' : '✗'} {L('lowercaseLetters', 'Lowercase letters')}</li>
+              <li className={analysis.hasNum ? 'text-green-600' : 'text-slate-400'}>{analysis.hasNum ? '✓' : '✗'} {L('numbers', 'Numbers')}</li>
+              <li className={analysis.hasSym ? 'text-green-600' : 'text-slate-400'}>{analysis.hasSym ? '✓' : '✗'} {L('symbols', 'Symbols')}</li>
+              <li className={pw.length >= 12 ? 'text-green-600' : 'text-slate-400'}>{pw.length >= 12 ? '✓' : '✗'} {L('atLeast12Chars', 'At least 12 characters')}</li>
             </ul>
           </div>
         </div>
       )}
-      <CalculatorNote>🔒 Tested locally in your browser. Your password is never sent anywhere.</CalculatorNote>
+      <CalculatorNote>{L('localPrivacyNote', '🔒 Tested locally in your browser. Your password is never sent anywhere.')}</CalculatorNote>
     </div>
   )
 }

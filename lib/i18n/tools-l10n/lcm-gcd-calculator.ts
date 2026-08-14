@@ -6,6 +6,10 @@ import type { ToolL10n } from '../tool-l10n'
 
 export const lcmGcdCalculatorL10n: ToolL10n = {
   zh: {
+    formula: {
+      formula: 'GCD via Euclid\nLCM(a, b) = (a × b) / GCD(a, b)',
+      explain: '用反复取余(欧几里得算法)求 GCD。LCM 由连接两者的恒等式得出——两数相乘再除以 GCD。',
+    },
     ui: {
       'in.numbers': '数字(逗号分隔)',
       'out.gcd': 'GCD(最大公约数)',
@@ -23,6 +27,10 @@ export const lcmGcdCalculatorL10n: ToolL10n = {
     ],
   },
   es: {
+    formula: {
+      formula: 'GCD via Euclid\nLCM(a, b) = (a × b) / GCD(a, b)',
+      explain: 'El GCD se halla por restas sucesivas (Euclides). El LCM sigue de la identidad que los une — multiplica y divide entre el GCD.',
+    },
     ui: {
       'in.numbers': 'Números (separados por comas)',
       'out.gcd': 'MCD (máximo común divisor)',
@@ -40,6 +48,10 @@ export const lcmGcdCalculatorL10n: ToolL10n = {
     ],
   },
   de: {
+    formula: {
+      formula: 'GCD via Euclid\nLCM(a, b) = (a × b) / GCD(a, b)',
+      explain: 'Der ggT wird durch fortgesetzte Restbildung (Euklid) gefunden. Das kgV folgt aus der Identität — multiplizieren und durch den ggT teilen.',
+    },
     ui: {
       'in.numbers': 'Zahlen (kommagetrennt)',
       'out.gcd': 'ggT (größter gemeinsamer Teiler)',

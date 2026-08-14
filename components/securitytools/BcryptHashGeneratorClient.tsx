@@ -4,6 +4,8 @@ import { useCallback, useEffect, useState } from 'react'
 import { RefreshCw } from 'lucide-react'
 import { CopyButton } from '@/components/CopyButton'
 import { compareSync, genSaltSync, hashSync } from '@/lib/bcrypt'
+import { useApp } from '@/components/providers/AppProviders'
+import { tui } from '@/lib/i18n/tool-l10n'
 
 /**
  * Bcrypt Hash Generator —— 纯客户端密码哈希/校验
@@ -53,6 +55,9 @@ async function saltedShaHash(kind: 'SHA-256' | 'SHA-512', saltHex: string, passw
 const nextTick = () => new Promise<void>((r) => setTimeout(r, 30))
 
 export function BcryptHashGeneratorClient() {
+  const { locale } = useApp()
+  const L = (key: string, fb: string) => tui('bcrypt-hash-generator', locale, key, fb)
+
   const [password, setPassword] = useState('')
   const [algorithm, setAlgorithm] = useState<Algorithm>('bcrypt')
   const [cost, setCost] = useState(10)
@@ -75,13 +80,13 @@ export function BcryptHashGeneratorClient() {
     setError(null)
     setVerifyResult(null)
     if (!password) {
-      setError('Enter a password first.')
+      setError(L('errorEnterPassword', 'Enter a password first.'))
       return
     }
     setBusy(true)
     try {
       if (typeof crypto === 'undefined' || !crypto.subtle) {
-        throw new Error('Web Crypto API is not available here. It requires a secure (HTTPS) context and a modern browser.')
+        throw new Error(L('errorNoWebCrypto', 'Web Crypto API is not available here. It requires a secure (HTTPS) context and a modern browser.'))
       }
       await nextTick()
       let out: string
@@ -94,18 +99,18 @@ export function BcryptHashGeneratorClient() {
       setVerifyHash(out)
     } catch (e) {
       setHash('')
-      setError(e instanceof Error ? e.message : 'Hashing failed.')
+      setError(e instanceof Error ? e.message : L('errorHashingFailed', 'Hashing failed.'))
     } finally {
       setBusy(false)
     }
-  }, [password, algorithm, cost, saltHex])
+  }, [password, algorithm, cost, saltHex, locale])
 
   const handleVerify = useCallback(async () => {
     setError(null)
     setVerifyResult(null)
     const h = verifyHash.trim()
     if (!h || !verifyPassword) {
-      setError('Paste a hash and enter the password to check.')
+      setError(L('errorPasteHash', 'Paste a hash and enter the password to check.'))
       return
     }
     setBusy(true)
@@ -118,14 +123,14 @@ export function BcryptHashGeneratorClient() {
         const recomputed = await saltedShaHash(tag === 'sha256' ? 'SHA-256' : 'SHA-512', salt, verifyPassword)
         setVerifyResult(recomputed === h)
       } else {
-        throw new Error('Unrecognized hash format. Expected bcrypt ($2a$/$2b$/$2y$…) or sha256$salt$hash / sha512$salt$hash from this tool.')
+        throw new Error(L('errorUnrecognizedHash', 'Unrecognized hash format. Expected bcrypt ($2a$/$2b$/$2y$…) or sha256$salt$hash / sha512$salt$hash from this tool.'))
       }
     } catch (e) {
-      setError(e instanceof Error ? e.message : 'Verification failed.')
+      setError(e instanceof Error ? e.message : L('errorVerifyFailed', 'Verification failed.'))
     } finally {
       setBusy(false)
     }
-  }, [verifyHash, verifyPassword])
+  }, [verifyHash, verifyPassword, locale])
 
   return (
     <div className="space-y-5">
@@ -133,14 +138,14 @@ export function BcryptHashGeneratorClient() {
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <div>
           <label htmlFor="bh-password" className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
-            Password
+            {L('password', 'Password')}
           </label>
           <input
             id="bh-password"
             type="text"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            placeholder="Password to hash"
+            placeholder={L('passwordToHash', 'Password to hash')}
             spellCheck={false}
             autoComplete="off"
             className="w-full rounded-lg border p-4 font-mono text-sm shadow-sm outline-none transition focus:ring-2"
@@ -149,7 +154,7 @@ export function BcryptHashGeneratorClient() {
         </div>
         <div>
           <label htmlFor="bh-algorithm" className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
-            Algorithm
+            {L('algorithm', 'Algorithm')}
           </label>
           <select
             id="bh-algorithm"
@@ -158,9 +163,9 @@ export function BcryptHashGeneratorClient() {
             className="w-full rounded-lg border p-3 text-sm shadow-sm outline-none transition focus:ring-2"
             style={{ borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rgb(var(--bg-card))', color: 'rgb(var(--text))' }}
           >
-            <option value="bcrypt">bcrypt (recommended)</option>
-            <option value="sha256">Salted SHA-256</option>
-            <option value="sha512">Salted SHA-512</option>
+            <option value="bcrypt">{L('algoBcrypt', 'bcrypt (recommended)')}</option>
+            <option value="sha256">{L('algoSha256', 'Salted SHA-256')}</option>
+            <option value="sha512">{L('algoSha512', 'Salted SHA-512')}</option>
           </select>
         </div>
       </div>
@@ -169,7 +174,7 @@ export function BcryptHashGeneratorClient() {
       {algorithm === 'bcrypt' && (
         <div>
           <label htmlFor="bh-cost" className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
-            Cost factor: <span className="font-mono">{cost}</span> ({(2 ** cost).toLocaleString()} iterations)
+            {L('costFactor', 'Cost factor:')} <span className="font-mono">{cost}</span> ({(2 ** cost).toLocaleString()} {L('iterations', 'iterations')})
           </label>
           <input
             id="bh-cost"
@@ -182,14 +187,13 @@ export function BcryptHashGeneratorClient() {
             className="w-full accent-blue-600"
           />
           <div className="mt-1 flex justify-between text-xs" style={{ color: 'rgb(var(--text-faint))' }}>
-            <span>4 (fast, weak)</span>
-            <span>10–12 typical</span>
-            <span>15 (slow, strong)</span>
+            <span>{L('costFastWeak', '4 (fast, weak)')}</span>
+            <span>{L('costTypical', '10–12 typical')}</span>
+            <span>{L('costSlowStrong', '15 (slow, strong)')}</span>
           </div>
           {cost > 12 && (
             <div className="mt-2 rounded-lg border border-amber-200 bg-amber-50 p-3 text-xs text-amber-800">
-              ⚠️ Cost above 12 is deliberately slow — each step doubles the work, so 15 can take several seconds in the
-              browser.
+              {L('costWarn', '⚠️ Cost above 12 is deliberately slow — each step doubles the work, so 15 can take several seconds in the browser.')}
             </div>
           )}
         </div>
@@ -199,7 +203,7 @@ export function BcryptHashGeneratorClient() {
       {algorithm !== 'bcrypt' && (
         <div>
           <label htmlFor="bh-salt" className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
-            Salt (hex, 16 bytes)
+            {L('salt', 'Salt (hex, 16 bytes)')}
           </label>
           <div className="flex gap-2">
             <input
@@ -211,8 +215,8 @@ export function BcryptHashGeneratorClient() {
               className="w-full rounded-lg border p-4 font-mono text-sm shadow-sm outline-none transition focus:ring-2"
               style={{ borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rgb(var(--bg-card))', color: 'rgb(var(--text))' }}
             />
-            <button type="button" onClick={regenerateSalt} className="btn btn-secondary shrink-0" title="New random salt">
-              <RefreshCw className="h-4 w-4" /> Regenerate
+            <button type="button" onClick={regenerateSalt} className="btn btn-secondary shrink-0" title={L('newRandomSalt', 'New random salt')}>
+              <RefreshCw className="h-4 w-4" /> {L('regenerate', 'Regenerate')}
             </button>
           </div>
         </div>
@@ -225,11 +229,11 @@ export function BcryptHashGeneratorClient() {
           disabled={busy}
           className="btn btn-primary disabled:cursor-not-allowed disabled:opacity-50"
         >
-          {busy ? 'Hashing…' : 'Generate hash'}
+          {busy ? L('hashing', 'Hashing…') : L('generateHash', 'Generate hash')}
         </button>
         {busy && algorithm === 'bcrypt' && cost >= 12 && (
           <span className="text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>
-            High cost — this can take a moment…
+            {L('highCostWait', 'High cost — this can take a moment…')}
           </span>
         )}
       </div>
@@ -241,9 +245,9 @@ export function BcryptHashGeneratorClient() {
         <div>
           <div className="mb-1.5 flex flex-wrap items-center justify-between gap-2">
             <span className="text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
-              Hash
+              {L('hash', 'Hash')}
             </span>
-            <CopyButton value={hash} label="Copy hash" />
+            <CopyButton value={hash} label={L('copyHash', 'Copy hash')} />
           </div>
           <pre
             className="w-full overflow-x-auto whitespace-pre-wrap break-all rounded-lg border p-4 font-mono text-sm shadow-sm"
@@ -257,12 +261,12 @@ export function BcryptHashGeneratorClient() {
       {/* 校验区 */}
       <div className="rounded-lg border p-4" style={{ borderColor: 'rgb(var(--border))' }}>
         <h3 className="mb-3 text-sm font-semibold" style={{ color: 'rgb(var(--text))' }}>
-          Verify a password against a hash
+          {L('verifyHeading', 'Verify a password against a hash')}
         </h3>
         <div className="space-y-3">
           <div>
             <label htmlFor="bh-verify-hash" className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
-              Hash
+              {L('hash', 'Hash')}
             </label>
             <input
               id="bh-verify-hash"
@@ -280,7 +284,7 @@ export function BcryptHashGeneratorClient() {
           </div>
           <div>
             <label htmlFor="bh-verify-password" className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
-              Password to check
+              {L('passwordToCheck', 'Password to check')}
             </label>
             <input
               id="bh-verify-password"
@@ -303,16 +307,16 @@ export function BcryptHashGeneratorClient() {
               disabled={busy}
               className="btn btn-secondary disabled:cursor-not-allowed disabled:opacity-50"
             >
-              {busy ? 'Checking…' : 'Verify'}
+              {busy ? L('checking', 'Checking…') : L('verify', 'Verify')}
             </button>
             {verifyResult !== null &&
               (verifyResult ? (
                 <span className="rounded-full border border-green-200 bg-green-50 px-3 py-1 text-xs font-semibold text-green-700">
-                  ✓ Match — password is correct
+                  {L('matchCorrect', '✓ Match — password is correct')}
                 </span>
               ) : (
                 <span className="rounded-full border border-red-200 bg-red-50 px-3 py-1 text-xs font-semibold text-red-700">
-                  ✗ No match — wrong password or hash
+                  {L('noMatch', '✗ No match — wrong password or hash')}
                 </span>
               ))}
           </div>
@@ -323,10 +327,7 @@ export function BcryptHashGeneratorClient() {
         className="rounded-md p-3 text-xs"
         style={{ backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text-subtle))' }}
       >
-        ⚠️ This is a <strong>client-side demo</strong>: hashing runs locally in your browser and nothing is uploaded.
-        In production, hash passwords <strong>server-side</strong> with a dedicated password-hashing algorithm —
-        <code>argon2id</code> or <code>bcrypt</code> — never with a bare SHA-2 hash. Salted SHA-256/SHA-512 is included
-        here for learning and legacy-format verification only.
+        {L('noteIntro', '⚠️ This is a ')}<strong>{L('noteClientSide', 'client-side demo')}</strong>{L('noteMid1', ': hashing runs locally in your browser and nothing is uploaded. In production, hash passwords ')}<strong>{L('noteServerSide', 'server-side')}</strong>{L('noteMid2', ' with a dedicated password-hashing algorithm — ')}<code>argon2id</code>{L('noteOr', ' or ')}<code>bcrypt</code>{L('noteOutro', ' — never with a bare SHA-2 hash. Salted SHA-256/SHA-512 is included here for learning and legacy-format verification only.')}
       </p>
     </div>
   )

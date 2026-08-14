@@ -2,6 +2,8 @@
 
 import { useState, useCallback, useMemo, useRef } from 'react'
 import { CopyButton } from '@/components/CopyButton'
+import { useApp } from '@/components/providers/AppProviders'
+import { tui } from '@/lib/i18n/tool-l10n'
 
 /**
  * CSS Gradient Generator —— Linear / Radial / Mesh 三种模式
@@ -56,6 +58,9 @@ const PASTEL_PALETTES: string[][] = [
 ]
 
 export function CssGradientGeneratorClient() {
+  const { locale } = useApp()
+  const L = (key: string, fb: string) => tui('css-gradient-generator', locale, key, fb)
+
   const [mode, setMode] = useState<Mode>('linear')
   const [angle, setAngle] = useState(135)
   const [stops, setStops] = useState<Stop[]>([
@@ -162,11 +167,11 @@ export function CssGradientGeneratorClient() {
             onClick={() => setMode(m)}
             className={`btn ${mode === m ? 'btn-primary' : 'btn-secondary'} text-sm capitalize`}
           >
-            {m}
+            {L(`mode.${m}`, m)}
           </button>
         ))}
         <button type="button" onClick={randomize} className="btn btn-secondary text-sm">
-          Random palette
+          {L('randomPalette', 'Random palette')}
         </button>
       </div>
 
@@ -174,7 +179,7 @@ export function CssGradientGeneratorClient() {
       <div
         className="min-h-[220px] rounded-xl border transition-all"
         style={{ ...previewStyle, borderColor: 'rgb(var(--border))' }}
-        aria-label="Gradient live preview"
+        aria-label={L('gradientPreviewAria', 'Gradient live preview')}
       />
 
       {/* 模式控件 */}
@@ -186,7 +191,7 @@ export function CssGradientGeneratorClient() {
               className="mb-1.5 block text-sm font-medium"
               style={{ color: 'rgb(var(--text-muted))' }}
             >
-              Angle — {angle}°
+              {L('angleLabel', 'Angle — ')}{angle}°
             </label>
             <input
               id="gradient-angle"
@@ -209,7 +214,7 @@ export function CssGradientGeneratorClient() {
                 className="mb-1.5 block text-sm font-medium"
                 style={{ color: 'rgb(var(--text-muted))' }}
               >
-                Shape
+                {L('shape', 'Shape')}
               </label>
               <select
                 id="radial-shape"
@@ -218,8 +223,8 @@ export function CssGradientGeneratorClient() {
                 className={selectClass}
                 style={selectStyle}
               >
-                <option value="ellipse">Ellipse</option>
-                <option value="circle">Circle</option>
+                <option value="ellipse">{L('optionEllipse', 'Ellipse')}</option>
+                <option value="circle">{L('optionCircle', 'Circle')}</option>
               </select>
             </div>
             <div>
@@ -228,7 +233,7 @@ export function CssGradientGeneratorClient() {
                 className="mb-1.5 block text-sm font-medium"
                 style={{ color: 'rgb(var(--text-muted))' }}
               >
-                Position
+                {L('position', 'Position')}
               </label>
               <select
                 id="radial-position"
@@ -239,7 +244,7 @@ export function CssGradientGeneratorClient() {
               >
                 {RADIAL_POSITIONS.map((p) => (
                   <option key={p} value={p} className="capitalize">
-                    {p}
+                    {L(`pos.${p}`, p)}
                   </option>
                 ))}
               </select>
@@ -252,10 +257,10 @@ export function CssGradientGeneratorClient() {
           <div className="space-y-2">
             <div className="flex items-center justify-between">
               <span className="text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
-                Color stops
+                {L('colorStops', 'Color stops')}
               </span>
               <button type="button" onClick={addStop} className="btn btn-secondary text-xs">
-                + Add stop
+                {L('addStop', '+ Add stop')}
               </button>
             </div>
             {sortedStops.map((s) => (
@@ -264,7 +269,7 @@ export function CssGradientGeneratorClient() {
                   type="color"
                   value={s.color}
                   onChange={(e) => updateStop(s.id, { color: e.target.value })}
-                  aria-label={`Stop color ${s.color}`}
+                  aria-label={`${L('stopColorAria', 'Stop color ')}${s.color}`}
                   className="h-10 w-14 cursor-pointer rounded-lg border p-1"
                   style={{ borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rgb(var(--bg-card))' }}
                 />
@@ -281,7 +286,7 @@ export function CssGradientGeneratorClient() {
                       position: Math.min(100, Math.max(0, Number(e.target.value) || 0)),
                     })
                   }
-                  aria-label="Stop position percent"
+                  aria-label={L('stopPositionAria', 'Stop position percent')}
                   className="w-20 rounded-lg border p-2 text-sm shadow-sm outline-none transition focus:ring-2"
                   style={selectStyle}
                 />
@@ -294,7 +299,7 @@ export function CssGradientGeneratorClient() {
                   disabled={stops.length <= 2}
                   className="btn btn-secondary ml-auto text-xs disabled:cursor-not-allowed disabled:opacity-50"
                 >
-                  Remove
+                  {L('remove', 'Remove')}
                 </button>
               </div>
             ))}
@@ -313,7 +318,7 @@ export function CssGradientGeneratorClient() {
                     onChange={(e) =>
                       setMeshColors((prev) => prev.map((p, j) => (j === i ? e.target.value : p)))
                     }
-                    aria-label={`Mesh color ${i + 1}`}
+                    aria-label={`${L('meshColorAria', 'Mesh color ')}${i + 1}`}
                     className="h-10 w-14 cursor-pointer rounded-lg border p-1"
                     style={{ borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rgb(var(--bg-card))' }}
                   />
@@ -325,7 +330,7 @@ export function CssGradientGeneratorClient() {
             </div>
             <div>
               <span className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
-                Position preset
+                {L('positionPreset', 'Position preset')}
               </span>
               <div className="flex flex-wrap gap-2">
                 {MESH_PRESETS.map((p, i) => (
@@ -335,7 +340,7 @@ export function CssGradientGeneratorClient() {
                     onClick={() => setMeshPreset(i)}
                     className={`btn ${meshPreset === i ? 'btn-primary' : 'btn-secondary'} text-xs`}
                   >
-                    {p.name}
+                    {L(`meshPreset.${i}`, p.name)}
                   </button>
                 ))}
               </div>
@@ -350,7 +355,7 @@ export function CssGradientGeneratorClient() {
           <span className="text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
             CSS
           </span>
-          <CopyButton value={cssText} label="Copy CSS" />
+          <CopyButton value={cssText} label={L('copyCss', 'Copy CSS')} />
         </div>
         <pre
           className="w-full overflow-x-auto rounded-lg border p-4 font-mono text-sm shadow-sm"
@@ -365,9 +370,13 @@ export function CssGradientGeneratorClient() {
       </div>
 
       <p className="rounded-md p-3 text-xs" style={{ backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text-subtle))' }}>
-        💡 Mesh gradients are faked with stacked <code>radial-gradient</code> layers — each color
-        fades to <code>transparent</code> over a base <code>background-color</code>. That works in
-        every modern browser without images, SVG, or JavaScript.
+        {L('noteIntro', '💡 Mesh gradients are faked with stacked ')}
+        <code>radial-gradient</code>
+        {L('noteMid', ' layers — each color fades to ')}
+        <code>transparent</code>
+        {L('noteOverBase', ' over a base ')}
+        <code>background-color</code>
+        {L('noteOutro', '. That works in every modern browser without images, SVG, or JavaScript.')}
       </p>
     </div>
   )

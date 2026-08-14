@@ -6,6 +6,16 @@ import type { ToolL10n } from '../tool-l10n'
 
 export const sqlFormatterL10n: ToolL10n = {
   zh: {
+    ui: {
+      'copy': '复制',
+      'couldNotFormat': '无法格式化 SQL',
+      'formattedSql': '格式化后的 SQL',
+      'inputLabel': '粘贴你的 SQL',
+      'minifiedSql': '压缩后的 SQL',
+      'modeFormat': '格式化',
+      'modeMinify': '压缩',
+      'note': '🔒 100% 在客户端——通用 ANSI SQL 格式化器。关键字大写;缩进遵循子句层级。',
+    },
     useCases: [
       '格式化从日志复制的压缩 SQL',
       '为代码审查准备可读查询',
@@ -19,6 +29,16 @@ export const sqlFormatterL10n: ToolL10n = {
     ],
   },
   es: {
+    ui: {
+      'copy': 'Copiar',
+      'couldNotFormat': 'No se pudo formatear el SQL',
+      'formattedSql': 'SQL formateado',
+      'inputLabel': 'Pega tu SQL',
+      'minifiedSql': 'SQL minificado',
+      'modeFormat': 'formatear',
+      'modeMinify': 'minificar',
+      'note': '🔒 100% en el cliente — un formateador SQL ANSI genérico. Las palabras clave se capitalizan; la sangría sigue la jerarquía de cláusulas.',
+    },
     useCases: [
       'formatear SQL minimizado copiado de registros',
       'preparar consultas legibles para revisión de código',
@@ -32,6 +52,16 @@ export const sqlFormatterL10n: ToolL10n = {
     ],
   },
   de: {
+    ui: {
+      'copy': 'Kopieren',
+      'couldNotFormat': 'SQL konnte nicht formatiert werden',
+      'formattedSql': 'Formatiertes SQL',
+      'inputLabel': 'Füge dein SQL ein',
+      'minifiedSql': 'Minifiziertes SQL',
+      'modeFormat': 'formatieren',
+      'modeMinify': 'minifizieren',
+      'note': '🔒 100% clientseitig — ein generischer ANSI-SQL-Formatter. Schlüsselwörter werden großgeschrieben; die Einrückung folgt der Klausel­hierarchie.',
+    },
     useCases: [
       'minimiertes SQL aus Logs formatieren',
       'lesbare Queries für Code-Reviews vorbereiten',

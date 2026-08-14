@@ -2,6 +2,8 @@
 
 import { useState, useCallback } from 'react'
 import { CopyButton } from '@/components/CopyButton'
+import { useApp } from '@/components/providers/AppProviders'
+import { tui } from '@/lib/i18n/tool-l10n'
 
 /**
  * Image to Base64 Converter
@@ -31,6 +33,8 @@ function mimeFromDataUrl(dataUrl: string): string {
 }
 
 export function ImageToBase64Client() {
+  const { locale } = useApp()
+  const L = (key: string, fb: string) => tui('image-to-base64', locale, key, fb)
   const [img, setImg] = useState<LoadedImage | null>(null)
   const [error, setError] = useState('')
   const [dragging, setDragging] = useState(false)
@@ -42,11 +46,11 @@ export function ImageToBase64Client() {
   const handleFile = useCallback((file: File) => {
     setError('')
     if (!file.type.startsWith('image/')) {
-      setError('Please upload an image file (PNG, JPG, GIF, WebP, or SVG).')
+      setError(L('errUploadImage', 'Please upload an image file (PNG, JPG, GIF, WebP, or SVG).'))
       return
     }
     if (file.size > MAX_BYTES) {
-      setError(`File is too large (${formatBytes(file.size)}). Maximum size is 20 MB.`)
+      setError(L('errTooLarge', 'File is too large ({size}). Maximum size is 20 MB.').replace('{size}', formatBytes(file.size)))
       return
     }
     const reader = new FileReader()
@@ -58,7 +62,7 @@ export function ImageToBase64Client() {
         dataUrl: reader.result as string,
       })
     }
-    reader.onerror = () => setError('Could not read the file.')
+    reader.onerror = () => setError(L('errReadFile', 'Could not read the file.'))
     reader.readAsDataURL(file)
   }, [])
 
@@ -103,10 +107,10 @@ export function ImageToBase64Client() {
         >
           <span className="text-4xl" aria-hidden="true">🖼️</span>
           <span className="mt-3 text-sm font-medium" style={{ color: 'rgb(var(--text))' }}>
-            Click to upload or drag &amp; drop
+            {L('uploadPrompt', 'Click to upload or drag & drop')}
           </span>
           <span className="mt-1 text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>
-            PNG, JPG, GIF, WebP, SVG — up to a few MB recommended
+            {L('uploadHint', 'PNG, JPG, GIF, WebP, SVG — up to a few MB recommended')}
           </span>
           <input id="img-upload" type="file" accept="image/*" onChange={onInputChange} className="hidden" />
         </label>
@@ -139,7 +143,7 @@ export function ImageToBase64Client() {
               </div>
             </div>
             <label htmlFor="img-reupload" className="btn btn-secondary cursor-pointer text-xs">
-              Change
+              {L('change', 'Change')}
               <input id="img-reupload" type="file" accept="image/*" onChange={onInputChange} className="hidden" />
             </label>
           </div>
@@ -149,8 +153,8 @@ export function ImageToBase64Client() {
             {/* Data URI */}
             <div>
               <div className="mb-2 flex items-center justify-between">
-                <span className="text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>Base64 Data URI</span>
-                <CopyButton value={img.dataUrl} label="Copy" />
+                <span className="text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>{L('base64DataUri', 'Base64 Data URI')}</span>
+                <CopyButton value={img.dataUrl} label={L('copy', 'Copy')} />
               </div>
               <pre
                 className="overflow-x-auto rounded-lg border bg-slate-50 p-3 text-xs"
@@ -163,8 +167,8 @@ export function ImageToBase64Client() {
             {/* <img> tag */}
             <div>
               <div className="mb-2 flex items-center justify-between">
-                <span className="text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>&lt;img&gt; tag</span>
-                <CopyButton value={imgTag} label="Copy" />
+                <span className="text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>&lt;img&gt; {L('imgTag', 'tag')}</span>
+                <CopyButton value={imgTag} label={L('copy', 'Copy')} />
               </div>
               <pre
                 className="overflow-x-auto rounded-lg border bg-slate-50 p-3 text-xs"
@@ -177,8 +181,8 @@ export function ImageToBase64Client() {
             {/* CSS background */}
             <div>
               <div className="mb-2 flex items-center justify-between">
-                <span className="text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>CSS background-image</span>
-                <CopyButton value={cssBg} label="Copy" />
+                <span className="text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>{L('cssBg', 'CSS background-image')}</span>
+                <CopyButton value={cssBg} label={L('copy', 'Copy')} />
               </div>
               <pre
                 className="overflow-x-auto rounded-lg border bg-slate-50 p-3 text-xs"
@@ -192,7 +196,7 @@ export function ImageToBase64Client() {
       )}
 
       <p className="rounded-md p-3 text-xs" style={{ backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text-subtle))' }}>
-        🔒 100% client-side — read via <code>FileReader.readAsDataURL</code>. Your image never leaves your device.
+        {L('notePrefix', '🔒 100% client-side — read via ')}<code>FileReader.readAsDataURL</code>{L('noteSuffix', '. Your image never leaves your device.')}
       </p>
     </div>
   )

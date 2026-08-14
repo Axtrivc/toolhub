@@ -4,6 +4,8 @@ import { useState, useMemo, useCallback } from 'react'
 import { CopyButton } from '@/components/CopyButton'
 import { LoadSampleButton } from '@/components/LoadSampleButton'
 import { ResultActions } from '@/components/ResultActions'
+import { useApp } from '@/components/providers/AppProviders'
+import { tui } from '@/lib/i18n/tool-l10n'
 
 /**
  * Deep Text Cleaner(组件名 TextScrubber,与既有 TextCleanerClient 区分)
@@ -91,7 +93,9 @@ const inputStyle = {
   color: 'rgb(var(--text))',
 }
 
-export function TextScrubberClient() {
+export function TextScrubberClient({ slug = 'text-cleaner' }: { slug?: string }) {
+  const { locale } = useApp()
+  const L = (key: string, fb: string) => tui(slug, locale, key, fb)
   const [input, setInput] = useState('')
   const [opts, setOpts] = useState<CleanOptions>({
     stripEmojis: false,
@@ -133,7 +137,7 @@ export function TextScrubberClient() {
       <div>
         <div className="mb-2 flex items-center justify-between">
           <label htmlFor="scrub-input" className="text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
-            Paste messy text
+            {L('inputLabel', 'Paste messy text')}
           </label>
           <div className="flex items-center gap-2">
             <LoadSampleButton onLoad={handleLoadSample} variant="compact" />
@@ -144,7 +148,7 @@ export function TextScrubberClient() {
                 className="-my-1 rounded-md px-2 py-1 text-xs hover:text-red-500 sm:text-sm"
                 style={{ color: 'rgb(var(--text-faint))' }}
               >
-                Clear
+                {L('clear', 'Clear')}
               </button>
             )}
           </div>
@@ -153,7 +157,7 @@ export function TextScrubberClient() {
           id="scrub-input"
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          placeholder="Paste or type the text you want to clean…"
+          placeholder={L('placeholder', 'Paste or type the text you want to clean…')}
           rows={8}
           spellCheck={false}
           className="w-full rounded-lg border p-4 font-mono text-sm shadow-sm outline-none transition focus:ring-2"
@@ -176,8 +180,8 @@ export function TextScrubberClient() {
               className="mt-0.5 h-4 w-4 accent-blue-600"
             />
             <span>
-              <span className="block font-medium" style={{ color: 'rgb(var(--text))' }}>{t.label}</span>
-              <span className="block text-xs" style={{ color: 'rgb(var(--text-faint))' }}>{t.hint}</span>
+              <span className="block font-medium" style={{ color: 'rgb(var(--text))' }}>{L(`toggle.${t.key}`, t.label)}</span>
+              <span className="block text-xs" style={{ color: 'rgb(var(--text-faint))' }}>{L(`toggleHint.${t.key}`, t.hint)}</span>
             </span>
           </label>
         ))}
@@ -187,7 +191,7 @@ export function TextScrubberClient() {
       {opts.removeSpecial && (
         <div>
           <label htmlFor="scrub-keep" className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
-            Characters to keep (besides letters, digits, spaces)
+            {L('keepLabel', 'Characters to keep (besides letters, digits, spaces)')}
           </label>
           <input
             id="scrub-keep"
@@ -206,12 +210,12 @@ export function TextScrubberClient() {
         <div className="space-y-3">
           <div className="flex flex-wrap items-center justify-between gap-2">
             <span className="text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>
-              Cleaned text — {input.length.toLocaleString('en-US')} chars → {output.length.toLocaleString('en-US')} chars
+              {L('cleanedText', 'Cleaned text')} — {input.length.toLocaleString('en-US')} {L('chars', 'chars')} → {output.length.toLocaleString('en-US')} {L('chars', 'chars')}
               <span style={{ color: 'rgb(var(--text-faint))' }}>
-                {' '}({(input.length - output.length).toLocaleString('en-US')} removed)
+                {' '}({(input.length - output.length).toLocaleString('en-US')} {L('removed', 'removed')})
               </span>
             </span>
-            <CopyButton value={output} label="Copy" />
+            <CopyButton value={output} label={L('copy', 'Copy')} />
           </div>
           <textarea
             readOnly
@@ -226,13 +230,13 @@ export function TextScrubberClient() {
             filename="cleaned.txt"
             downloadContent={output}
             disabled={!output}
-            copyLabel="Copy cleaned text"
+            copyLabel={L('copyCleaned', 'Copy cleaned text')}
           />
         </div>
       )}
 
       <p className="rounded-md p-3 text-xs" style={{ backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text-subtle))' }}>
-        🔒 100% client-side — your text never leaves your browser.
+        {L('note', '🔒 100% client-side — your text never leaves your browser.')}
       </p>
     </div>
   )

@@ -6,6 +6,10 @@ import type { ToolL10n } from '../tool-l10n'
 
 export const permutationCalculatorL10n: ToolL10n = {
   zh: {
+    formula: {
+      formula: 'P(n, k) = n! / (n − k)!',
+      explain: '从 n 个物品中选出 k 个的有序排列数。与组合不同,顺序有关,所以 P(n,k) ≥ C(n,k)。',
+    },
     ui: {
       'in.n': '总数 (n)',
       'in.r': '排列 (r)',
@@ -24,6 +28,10 @@ export const permutationCalculatorL10n: ToolL10n = {
     ],
   },
   es: {
+    formula: {
+      formula: 'P(n, k) = n! / (n − k)!',
+      explain: 'Número de ordenaciones de k elementos elegidos de n. A diferencia de las combinaciones, el orden importa, por eso P(n,k) ≥ C(n,k).',
+    },
     ui: {
       'in.n': 'Total de elementos (n)',
       'in.r': 'Ordenar (r)',
@@ -42,6 +50,10 @@ export const permutationCalculatorL10n: ToolL10n = {
     ],
   },
   de: {
+    formula: {
+      formula: 'P(n, k) = n! / (n − k)!',
+      explain: 'Anzahl geordneter Anordnungen von k aus n gewählten Elementen. Anders als bei Kombinationen zählt die Reihenfolge, daher P(n,k) ≥ C(n,k).',
+    },
     ui: {
       'in.n': 'Gesamtanzahl (n)',
       'in.r': 'Anordnen (r)',

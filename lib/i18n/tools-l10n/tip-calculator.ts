@@ -6,6 +6,10 @@ import type { ToolL10n } from '../tool-l10n'
 
 export const tipCalculatorL10n: ToolL10n = {
   zh: {
+    formula: {
+      formula: 'tip = bill × rate\ntotal = bill + tip',
+      explain: '小费是账单的一个自选百分比(美国堂食常见 15–20%)。把总额除以用餐人数得到每人分摊。',
+    },
     useCases: ['在餐厅就餐后快速算出小费和平摊金额', '给外卖或打车算合适的小费比例', '多人聚餐时均摊账单', '旅行时参考各地小费惯例'],
     faqs: [
       { q: '小费该给多少?', a: '在美国,堂食服务一般给 15-20%,18% 是常见默认值。15% 表示服务尚可,20% 以上表示很满意。很多其他国家不期望小费或已含服务费——出国时请留意当地习惯。' },
@@ -19,6 +23,10 @@ export const tipCalculatorL10n: ToolL10n = {
     },
   },
   es: {
+    formula: {
+      formula: 'tip = bill × rate\ntotal = bill + tip',
+      explain: 'La propina es un porcentaje elegido de la cuenta (15–20% es común en servicio de mesa en EE. UU.). Divide el total entre comensales para el reparto por persona.',
+    },
     useCases: ['calcular rápidamente la propina y el reparto tras una comida en restaurante', 'sacar una propina adecuada para comida a domicilio o taxi', 'repartir la cuenta a partes iguales entre varias personas', 'consultar las costumbres de propina al viajar'],
     faqs: [
       { q: '¿Cuánta propina debo dejar?', a: 'En EE. UU., el 15-20 % es lo habitual para servicio en mesa, con un 18 % como default común. El 15 % indica servicio adecuado; el 20 %+, servicio excelente. En muchos otros países no se espera propina o ya se incluye como cargo por servicio — revisa las costumbres locales al viajar.' },
@@ -32,6 +40,10 @@ export const tipCalculatorL10n: ToolL10n = {
     },
   },
   de: {
+    formula: {
+      formula: 'tip = bill × rate\ntotal = bill + tip',
+      explain: 'Trinkgeld ist ein gewählter Prozentsatz der Rechnung (in den USA 15–20 % üblich am Tisch). Gesamtbetrag durch Personen teilen ergibt den Anteil pro Kopf.',
+    },
     useCases: ['Trinkgeld und Anteil nach einem Restaurantbesuch schnell berechnen', 'ein passendes Trinkgeld für Lieferung oder Fahrt ermitteln', 'die Rechnung unter mehreren Personen gerecht teilen', 'beim Reisen die lokalen Trinkgeld-Sitten nachschlagen'],
     faqs: [
       { q: 'Wie viel Trinkgeld sollte ich geben?', a: 'In den USA sind 15-20 % für Bedienung üblich, 18 % ein häufiger Standard. 15 % stehen für ordentlichen Service, 20 %+ für ausgezeichneten. In vielen anderen Ländern wird kein Trinkgeld erwartet oder es ist als Servicegebühr enthalten — beim Reisen sieh dich nach den lokalen Gepflogenheiten um.' },

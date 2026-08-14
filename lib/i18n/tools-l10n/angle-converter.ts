@@ -6,6 +6,15 @@ import type { ToolL10n } from '../tool-l10n'
 
 export const angleConverterL10n: ToolL10n = {
   zh: {
+    ui: {
+      'note': '📐 用于数学、工程和导航。1 转 = 360° = 2π 弧度。',
+      'unit.arcmin': '角分 (′)',
+      'unit.arcsec': '角秒 (″)',
+      'unit.deg': '度 (°)',
+      'unit.grad': '梯度 (grad)',
+      'unit.rad': '弧度 (rad)',
+      'unit.rev': '转 (rev)',
+    },
     useCases: [
       '在数学课上进行三角函数(弧度)与几何(角度)换算',
       '编程时在角度和弧度之间转换(大多数数学函数用弧度)',
@@ -16,6 +25,15 @@ export const angleConverterL10n: ToolL10n = {
     ],
   },
   es: {
+    ui: {
+      'note': '📐 Usado en matemáticas, ingeniería y navegación. 1 revolución = 360° = 2π rad.',
+      'unit.arcmin': 'Minutos de arco (′)',
+      'unit.arcsec': 'Segundos de arco (″)',
+      'unit.deg': 'Grados (°)',
+      'unit.grad': 'Gradianes (grad)',
+      'unit.rad': 'Radianes (rad)',
+      'unit.rev': 'Revoluciones (rev)',
+    },
     useCases: [
       'en clase de matemáticas convertir entre trigonometría (radianes) y geometría (grados)',
       'al programar, pasar entre grados y radianes (la mayoría de funciones matemáticas usan radianes)',
@@ -26,6 +44,15 @@ export const angleConverterL10n: ToolL10n = {
     ],
   },
   de: {
+    ui: {
+      'note': '📐 Für Mathematik, Ingenieurwesen und Navigation. 1 Umdrehung = 360° = 2π rad.',
+      'unit.arcmin': 'Bogenminuten (′)',
+      'unit.arcsec': 'Bogensekunden (″)',
+      'unit.deg': 'Grad (°)',
+      'unit.grad': 'Gon (grad)',
+      'unit.rad': 'Bogenmaß (rad)',
+      'unit.rev': 'Umdrehungen (rev)',
+    },
     useCases: [
       'im Mathematikunterricht zwischen Trigonometrie (Bogenmaß) und Geometrie (Grad) umrechnen',
       'beim Programmieren zwischen Grad und Bogenmaß wechseln (die meisten Mathefunktionen nutzen Bogenmaß)',

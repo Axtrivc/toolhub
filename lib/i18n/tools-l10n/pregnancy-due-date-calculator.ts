@@ -6,6 +6,10 @@ import type { ToolL10n } from '../tool-l10n'
 
 export const pregnancyDueDateCalculatorL10n: ToolL10n = {
   zh: {
+    formula: {
+      formula: 'Due date = LMP + 280 days',
+      explain: '内格莱法则:末次月经首日加 280 天(40 周)。实际分娩可能前后差约两周;这是估算,不是保证。',
+    },
     ui: {
       'in.lmp': '末次月经首日(YYYY-MM-DD)',
       'out.due': '预计预产期',
@@ -25,6 +29,10 @@ export const pregnancyDueDateCalculatorL10n: ToolL10n = {
     ],
   },
   es: {
+    formula: {
+      formula: 'Due date = LMP + 280 days',
+      explain: 'Regla de Naegele: suma 280 días (40 semanas) al primer día de la última menstruación. El parto real varía unas dos semanas; es una estimación, no una garantía.',
+    },
     ui: {
       'in.lmp': 'Primer día de la última menstruación (AAAA-MM-DD)',
       'out.due': 'Fecha probable de parto',
@@ -44,6 +52,10 @@ export const pregnancyDueDateCalculatorL10n: ToolL10n = {
     ],
   },
   de: {
+    formula: {
+      formula: 'Due date = LMP + 280 days',
+      explain: 'Naegele-Regel: 280 Tage (40 Wochen) zum ersten Tag der letzten Periode addieren. Der eigentliche Geburtstermin schwankt um etwa zwei Wochen — es ist eine Schätzung, keine Garantie.',
+    },
     ui: {
       'in.lmp': 'Erster Tag der letzten Periode (JJJJ-MM-TT)',
       'out.due': 'Berechneter Geburtstermin',

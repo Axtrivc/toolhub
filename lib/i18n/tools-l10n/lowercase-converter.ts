@@ -6,6 +6,12 @@ import type { ToolL10n } from '../tool-l10n'
 
 export const lowercaseConverterL10n: ToolL10n = {
   zh: {
+    ui: {
+      inputLabel: '你的文本',
+      outputLabel: '小写',
+      placeholder: '输入或粘贴文本…',
+      note: '🔡 把每个字母转为小写。适合邮箱、网址和代码。',
+    },
     useCases: [
       '规范邮箱地址、URL 与 slug 用小写',
       '编写程序变量(camelCase、snake_case)',
@@ -17,6 +23,12 @@ export const lowercaseConverterL10n: ToolL10n = {
     ],
   },
   es: {
+    ui: {
+      inputLabel: 'Tu texto',
+      outputLabel: 'minúsculas',
+      placeholder: 'Escribe o pega texto…',
+      note: '🔡 Convierte cada letra a minúsculas. Útil para correos, URLs y código.',
+    },
     useCases: [
       'normalizar direcciones de correo, URL y slugs en minúsculas',
       'escribir variables de programa (camelCase, snake_case)',
@@ -28,6 +40,12 @@ export const lowercaseConverterL10n: ToolL10n = {
     ],
   },
   de: {
+    ui: {
+      inputLabel: 'Dein Text',
+      outputLabel: 'kleinbuchstaben',
+      placeholder: 'Text eingeben oder einfügen…',
+      note: '🔡 Wandelt jeden Buchstaben in Kleinbuchstaben um. Nützlich für E-Mails, URLs und Code.',
+    },
     useCases: [
       'E-Mail-Adressen, URLs und Slugs kleinschreiben',
       'Programmvariablen schreiben (camelCase, snake_case)',

@@ -1,6 +1,8 @@
 'use client'
 
 import { useState, useMemo } from 'react'
+import { useApp } from '@/components/providers/AppProviders'
+import { tui } from '@/lib/i18n/tool-l10n'
 
 /**
  * Color Contrast Checker (WCAG)
@@ -54,6 +56,9 @@ const PASS = '✓'
 const FAIL = '✗'
 
 export function ColorContrastClient() {
+  const { locale } = useApp()
+  const L = (key: string, fb: string) => tui('color-contrast-checker', locale, key, fb)
+
   const [fg, setFg] = useState('#000000')
   const [bg, setBg] = useState('#ffffff')
 
@@ -68,10 +73,10 @@ export function ColorContrastClient() {
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <div className="rounded-lg border p-4" style={{ borderColor: 'rgb(var(--border))' }}>
           <label htmlFor="contrast-fg" className="mb-2 block text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>
-            Foreground (text)
+            {L('foregroundText', 'Foreground (text)')}
           </label>
           <div className="flex items-center gap-3">
-            <input type="color" value={fg} onChange={(e) => setFg(e.target.value)} className={swatchCls} aria-label="Foreground color picker" />
+            <input type="color" value={fg} onChange={(e) => setFg(e.target.value)} className={swatchCls} aria-label={L('fgPickerAria', 'Foreground color picker')} />
             <input
               id="contrast-fg"
               type="text"
@@ -84,10 +89,10 @@ export function ColorContrastClient() {
         </div>
         <div className="rounded-lg border p-4" style={{ borderColor: 'rgb(var(--border))' }}>
           <label htmlFor="contrast-bg" className="mb-2 block text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>
-            Background
+            {L('background', 'Background')}
           </label>
           <div className="flex items-center gap-3">
-            <input type="color" value={bg} onChange={(e) => setBg(e.target.value)} className={swatchCls} aria-label="Background color picker" />
+            <input type="color" value={bg} onChange={(e) => setBg(e.target.value)} className={swatchCls} aria-label={L('bgPickerAria', 'Background color picker')} />
             <input
               id="contrast-bg"
               type="text"
@@ -102,7 +107,7 @@ export function ColorContrastClient() {
 
       {/* 错误 */}
       {error && (
-        <div className="rounded-lg border border-red-200 bg-red-50 p-4 text-sm text-red-700">⚠️ {error}</div>
+        <div className="rounded-lg border border-red-200 bg-red-50 p-4 text-sm text-red-700">⚠️ {L('errorInvalidHex', error)}</div>
       )}
 
       {/* 预览 */}
@@ -112,7 +117,7 @@ export function ColorContrastClient() {
           style={{ backgroundColor: bg, borderColor: 'rgb(var(--border))' }}
         >
           <span className="text-2xl font-bold" style={{ color: fg }}>
-            The quick brown fox jumps over the lazy dog. 1234567890
+            {L('sampleText', 'The quick brown fox jumps over the lazy dog. 1234567890')}
           </span>
         </div>
       )}
@@ -121,7 +126,7 @@ export function ColorContrastClient() {
       {!error && (
         <div className="rounded-lg border border-blue-100 bg-gradient-to-b from-blue-50/40 to-transparent p-4 dark:border-blue-900/40">
           <div className="text-center">
-            <div className="text-xs uppercase text-slate-400">Contrast Ratio</div>
+            <div className="text-xs uppercase text-slate-400">{L('contrastRatio', 'Contrast Ratio')}</div>
             <div className="mt-1 text-4xl font-extrabold" style={{ color: 'rgb(var(--text))' }}>
               {ratio.toFixed(2)}
               <span className="ml-1 text-lg font-normal text-slate-400">: 1</span>
@@ -131,10 +136,10 @@ export function ColorContrastClient() {
           {/* WCAG 判定表 */}
           <div className="mt-4 grid grid-cols-2 gap-3 text-sm sm:grid-cols-4">
             {[
-              { label: 'AA (normal)', pass: pass.aaNormal },
-              { label: 'AA (large)', pass: pass.aaLarge },
-              { label: 'AAA (normal)', pass: pass.aaaNormal },
-              { label: 'AAA (large)', pass: pass.aaaLarge },
+              { label: L('aaNormal', 'AA (normal)'), pass: pass.aaNormal },
+              { label: L('aaLarge', 'AA (large)'), pass: pass.aaLarge },
+              { label: L('aaaNormal', 'AAA (normal)'), pass: pass.aaaNormal },
+              { label: L('aaaLarge', 'AAA (large)'), pass: pass.aaaLarge },
             ].map((row) => (
               <div
                 key={row.label}
@@ -153,7 +158,7 @@ export function ColorContrastClient() {
       )}
 
       <p className="rounded-md p-3 text-xs" style={{ backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text-subtle))' }}>
-        🔒 100% client-side — uses the WCAG 2.1 relative luminance formula. Large text = ≥18pt or ≥14pt bold.
+        {L('note', '🔒 100% client-side — uses the WCAG 2.1 relative luminance formula. Large text = ≥18pt or ≥14pt bold.')}
       </p>
     </div>
   )

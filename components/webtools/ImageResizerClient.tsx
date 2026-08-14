@@ -1,6 +1,8 @@
 'use client'
 
 import { useState, useRef, useCallback, useEffect } from 'react'
+import { useApp } from '@/components/providers/AppProviders'
+import { tui } from '@/lib/i18n/tool-l10n'
 
 /**
  * Image Resizer —— 纯前端 canvas 缩放
@@ -41,6 +43,9 @@ function extOf(mime: string): string {
 const SCALE_PRESETS = [25, 50, 75, 100]
 
 export function ImageResizerClient() {
+  const { locale } = useApp()
+  const L = (key: string, fb: string) => tui('image-resizer', locale, key, fb)
+
   const [imgSrc, setImgSrc] = useState<string>('')
   const [imgName, setImgName] = useState<string>('image')
   const [fileType, setFileType] = useState<string>('image/png')
@@ -61,7 +66,7 @@ export function ImageResizerClient() {
   const handleFile = useCallback((file: File) => {
     setError('')
     if (!file.type.startsWith('image/')) {
-      setError('Please upload an image file (PNG, JPG, GIF, or WebP).')
+      setError(L('errUploadImage', 'Please upload an image file (PNG, JPG, GIF, or WebP).'))
       return
     }
     const reader = new FileReader()
@@ -73,7 +78,7 @@ export function ImageResizerClient() {
       setNatural(null)
       setResult(null)
     }
-    reader.onerror = () => setError('Could not read the file.')
+    reader.onerror = () => setError(L('errReadFile', 'Could not read the file.'))
     reader.readAsDataURL(file)
   }, [])
 
@@ -108,7 +113,7 @@ export function ImageResizerClient() {
       setWidthStr(String(img.naturalWidth))
       setHeightStr(String(img.naturalHeight))
     }
-    img.onerror = () => setError('Could not decode the image file.')
+    img.onerror = () => setError(L('errDecodeImage', 'Could not decode the image file.'))
     img.src = imgSrc
   }, [imgSrc])
 
@@ -230,10 +235,10 @@ export function ImageResizerClient() {
         >
           <span className="text-4xl" aria-hidden="true">🖼️</span>
           <span className="mt-3 text-sm font-medium" style={{ color: 'rgb(var(--text))' }}>
-            Click to upload or drag &amp; drop
+            {L('uploadPrompt', 'Click to upload or drag & drop')}
           </span>
           <span className="mt-1 text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>
-            PNG, JPG, GIF, or WebP
+            {L('uploadHint', 'PNG, JPG, GIF, or WebP')}
           </span>
           <input id="resizer-upload" type="file" accept="image/*" onChange={onInputChange} className="hidden" />
         </label>
@@ -253,7 +258,7 @@ export function ImageResizerClient() {
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={imgSrc}
-              alt="Uploaded source"
+              alt={L('uploadedSourceAlt', 'Uploaded source')}
               className="h-20 w-20 rounded-lg border object-contain"
               style={{ borderColor: 'rgb(var(--border))' }}
             />
@@ -262,11 +267,11 @@ export function ImageResizerClient() {
                 {imgName}
               </div>
               <div className="text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>
-                Original: {natural.w} × {natural.h} px · {formatBytes(origSize)}
+                {L('originalInfo', 'Original:')} {natural.w} × {natural.h} px · {formatBytes(origSize)}
               </div>
             </div>
             <label htmlFor="resizer-reupload" className="btn btn-secondary cursor-pointer text-xs">
-              Change
+              {L('change', 'Change')}
               <input id="resizer-reupload" type="file" accept="image/*" onChange={onInputChange} className="hidden" />
             </label>
           </div>
@@ -282,7 +287,7 @@ export function ImageResizerClient() {
                 className="mb-1.5 block text-sm font-medium"
                 style={{ color: 'rgb(var(--text-muted))' }}
               >
-                Target width (px)
+                {L('targetWidth', 'Target width (px)')}
               </label>
               <input
                 id="resizer-width"
@@ -300,7 +305,7 @@ export function ImageResizerClient() {
                 className="mb-1.5 block text-sm font-medium"
                 style={{ color: 'rgb(var(--text-muted))' }}
               >
-                Target height (px)
+                {L('targetHeight', 'Target height (px)')}
               </label>
               <input
                 id="resizer-height"
@@ -326,7 +331,7 @@ export function ImageResizerClient() {
                     onChange={(e) => setLockRatio(e.target.checked)}
                     className="h-4 w-4 accent-blue-600"
                   />
-                  Lock aspect ratio
+                  {L('lockAspectRatio', 'Lock aspect ratio')}
                 </label>
                 <div className="flex flex-wrap gap-2">
                   {SCALE_PRESETS.map((pct) => (
@@ -349,7 +354,7 @@ export function ImageResizerClient() {
                 className="mb-1.5 block text-sm font-medium"
                 style={{ color: 'rgb(var(--text-muted))' }}
               >
-                Output format
+                {L('outputFormat', 'Output format')}
               </label>
               <select
                 id="resizer-format"
@@ -358,10 +363,10 @@ export function ImageResizerClient() {
                 className={inputClass}
                 style={inputStyle}
               >
-                <option value="original">Keep original format</option>
-                <option value="png">PNG</option>
-                <option value="jpeg">JPEG</option>
-                <option value="webp">WebP</option>
+                <option value="original">{L('keepOriginalFormat', 'Keep original format')}</option>
+                <option value="png">{L('formatPng', 'PNG')}</option>
+                <option value="jpeg">{L('formatJpeg', 'JPEG')}</option>
+                <option value="webp">{L('formatWebp', 'WebP')}</option>
               </select>
             </div>
             {isLossy && (
@@ -371,7 +376,7 @@ export function ImageResizerClient() {
                   className="mb-1.5 block text-sm font-medium"
                   style={{ color: 'rgb(var(--text-muted))' }}
                 >
-                  Quality — {Math.round(quality * 100)}%
+                  {L('qualityLabel', 'Quality —')} {Math.round(quality * 100)}%
                 </label>
                 <input
                   id="resizer-quality"
@@ -390,7 +395,7 @@ export function ImageResizerClient() {
           {/* 尺寸校验 */}
           {!dimsValid && (
             <div className="rounded-lg border border-red-200 bg-red-50 p-4 text-sm text-red-700">
-              ⚠️ Width and height must be whole numbers of at least 1 px.
+              ⚠️ {L('errDimsValid', 'Width and height must be whole numbers of at least 1 px.')}
             </div>
           )}
 
@@ -403,7 +408,7 @@ export function ImageResizerClient() {
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={result.url}
-                alt={`Resized preview ${targetW} by ${targetH}`}
+                alt={`${L('resizedPreviewAlt', 'Resized preview')} ${targetW} ${L('byWord', 'by')} ${targetH}`}
                 className="max-h-24 max-w-32 rounded-lg border object-contain"
                 style={{ borderColor: 'rgb(var(--border))' }}
               />
@@ -415,12 +420,12 @@ export function ImageResizerClient() {
                   {formatBytes(origSize)} → {formatBytes(result.size)} ·{' '}
                   {extOf(result.mime).toUpperCase()}
                   {result.size < origSize
-                    ? ` · ${Math.round((1 - result.size / origSize) * 100)}% smaller`
+                    ? ` · ${Math.round((1 - result.size / origSize) * 100)}% ${L('smaller', 'smaller')}`
                     : ''}
                 </div>
               </div>
               <button type="button" onClick={download} className="btn btn-primary text-sm">
-                Download {targetW}×{targetH}
+                {L('download', 'Download')} {targetW}×{targetH}
               </button>
             </div>
           )}
@@ -428,8 +433,7 @@ export function ImageResizerClient() {
       )}
 
       <p className="rounded-md p-3 text-xs" style={{ backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text-subtle))' }}>
-        🔒 100% client-side — resizing happens locally in an in-browser canvas with high-quality
-        smoothing. The size shown is the real encoded output, measured with <code>canvas.toBlob</code>.
+        {L('noteText', '🔒 100% client-side — resizing happens locally in an in-browser canvas with high-quality smoothing. The size shown is the real encoded output, measured with')} <code>canvas.toBlob</code>.
       </p>
     </div>
   )

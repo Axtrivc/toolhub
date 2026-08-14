@@ -6,6 +6,10 @@ import type { ToolL10n } from '../tool-l10n'
 
 export const trapezoidCalculatorL10n: ToolL10n = {
   zh: {
+    formula: {
+      formula: 'A = ½ × (a + b) × h',
+      explain: '梯形面积。a、b 是两条平行边(底),h 是它们之间的垂直高。',
+    },
     ui: {
       'in.a': '上底 (a)',
       'in.b': '下底 (b)',
@@ -23,6 +27,10 @@ export const trapezoidCalculatorL10n: ToolL10n = {
     ],
   },
   es: {
+    formula: {
+      formula: 'A = ½ × (a + b) × h',
+      explain: 'Área de un trapecio. a y b son los dos lados paralelos (bases), h es la altura perpendicular entre ellos.',
+    },
     ui: {
       'in.a': 'Lado superior (a)',
       'in.b': 'Lado inferior (b)',
@@ -40,6 +48,10 @@ export const trapezoidCalculatorL10n: ToolL10n = {
     ],
   },
   de: {
+    formula: {
+      formula: 'A = ½ × (a + b) × h',
+      explain: 'Trapezfläche. a und b sind die beiden parallelen Seiten (Grundseiten), h ist der senkrechte Abstand zwischen ihnen.',
+    },
     ui: {
       'in.a': 'Obere Seite (a)',
       'in.b': 'Untere Seite (b)',

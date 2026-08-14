@@ -3,6 +3,8 @@
 import { useState, useMemo, useCallback } from 'react'
 import { CopyButton } from '@/components/CopyButton'
 import { LoadSampleButton } from '@/components/LoadSampleButton'
+import { useApp } from '@/components/providers/AppProviders'
+import { tui } from '@/lib/i18n/tool-l10n'
 
 /**
  * JWT Decoder —— 纯前端解析 JSON Web Token
@@ -55,6 +57,10 @@ function pretty(obj: unknown): string {
 }
 
 export function JwtDecoderClient() {
+  const { locale } = useApp()
+  // 取本地化 UI 串;缺失回退英文(SSR 恒英文)。
+  const L = (key: string, fb: string) => tui('jwt-decoder', locale, key, fb)
+
   const [token, setToken] = useState('')
 
   const result = useMemo<{ decoded?: DecodedJwt; error?: string }>(() => {
@@ -62,9 +68,10 @@ export function JwtDecoderClient() {
     try {
       return { decoded: decodeJwt(token) }
     } catch (e) {
-      return { error: e instanceof Error ? e.message : 'Invalid JWT' }
+      return { error: e instanceof Error ? e.message : L('invalidJwt', 'Invalid JWT') }
     }
-  }, [token])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [token, locale])
 
   // exp 过期检查(payload.exp 为秒级 Unix 时间戳)
   const expiry = useMemo<{ label: string; expired: boolean } | null>(() => {
@@ -74,10 +81,11 @@ export function JwtDecoderClient() {
     const expired = p.exp < nowSec
     const date = new Date(p.exp * 1000)
     return {
-      label: `${date.toLocaleString()} (${expired ? 'expired' : 'valid'})`,
+      label: `${date.toLocaleString()} (${expired ? L('statusExpired', 'expired') : L('statusValid', 'valid')})`,
       expired,
     }
-  }, [result])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [result, locale])
 
   const handleLoadSample = useCallback(() => setToken(SAMPLE_TOKEN), [])
 
@@ -90,7 +98,7 @@ export function JwtDecoderClient() {
       <div>
         <div className="mb-2 flex items-center justify-between">
           <label htmlFor="jwt-input" className="text-sm font-medium text-slate-700">
-            Paste your JWT
+            {L('inputLabel', 'Paste your JWT')}
           </label>
           <div className="flex items-center gap-2">
             <LoadSampleButton onLoad={handleLoadSample} variant="compact" />
@@ -100,7 +108,7 @@ export function JwtDecoderClient() {
                 onClick={() => setToken('')}
                 className="-my-1 rounded-md px-2 py-1 text-xs text-slate-400 hover:text-red-500 sm:text-sm"
               >
-                Clear
+                {L('clear', 'Clear')}
               </button>
             )}
           </div>
@@ -140,7 +148,7 @@ export function JwtDecoderClient() {
                   : 'border-green-200 bg-green-50 text-green-700'
               }`}
             >
-              <strong>Expiry (exp):</strong> {expiry.label}
+              <strong>{L('expiryLabel', 'Expiry (exp):')}</strong> {expiry.label}
             </div>
           )}
 
@@ -149,12 +157,12 @@ export function JwtDecoderClient() {
             <div>
               <div className="mb-2 flex items-center justify-between">
                 <span className="text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>
-                  Header{' '}
+                  {L('header', 'Header')}{' '}
                   <span className="font-normal text-slate-400">
                     ({(result.decoded.header as { alg?: string })?.alg ?? 'alg'})
                   </span>
                 </span>
-                <CopyButton value={headerStr} label="Copy" />
+                <CopyButton value={headerStr} label={L('copy', 'Copy')} />
               </div>
               <pre className="overflow-x-auto rounded-lg border bg-slate-50 p-4 text-xs" style={{ borderColor: 'rgb(var(--border))' }}>
                 <code>{headerStr}</code>
@@ -164,8 +172,8 @@ export function JwtDecoderClient() {
             {/* Payload */}
             <div>
               <div className="mb-2 flex items-center justify-between">
-                <span className="text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>Payload</span>
-                <CopyButton value={payloadStr} label="Copy" />
+                <span className="text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>{L('payload', 'Payload')}</span>
+                <CopyButton value={payloadStr} label={L('copy', 'Copy')} />
               </div>
               <pre className="overflow-x-auto rounded-lg border bg-slate-50 p-4 text-xs" style={{ borderColor: 'rgb(var(--border))' }}>
                 <code>{payloadStr}</code>
@@ -177,10 +185,10 @@ export function JwtDecoderClient() {
           <div>
             <div className="mb-2 flex items-center justify-between">
               <span className="text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>
-                Signature{' '}
-                <span className="font-normal text-slate-400">(verifying requires the secret/public key)</span>
+                {L('signature', 'Signature')}{' '}
+                <span className="font-normal text-slate-400">{L('signatureHint', '(verifying requires the secret/public key)')}</span>
               </span>
-              <CopyButton value={result.decoded.signature} label="Copy" />
+              <CopyButton value={result.decoded.signature} label={L('copy', 'Copy')} />
             </div>
             <pre className="overflow-x-auto rounded-lg border bg-slate-50 p-4 text-xs" style={{ borderColor: 'rgb(var(--border))' }}>
               <code>{result.decoded.signature}</code>
@@ -190,8 +198,7 @@ export function JwtDecoderClient() {
       )}
 
       <p className="rounded-md p-3 text-xs" style={{ backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text-subtle))' }}>
-        🔒 100% client-side — your token is parsed in your browser only and never sent to any server. This tool decodes
-        tokens; it cannot verify the signature without the matching secret or public key.
+        {L('note', '🔒 100% client-side — your token is parsed in your browser only and never sent to any server. This tool decodes tokens; it cannot verify the signature without the matching secret or public key.')}
       </p>
     </div>
   )

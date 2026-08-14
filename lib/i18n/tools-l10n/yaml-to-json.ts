@@ -6,6 +6,14 @@ import type { ToolL10n } from '../tool-l10n'
 
 export const yamlToJsonL10n: ToolL10n = {
   zh: {
+    ui: {
+      'clear': '清空',
+      'copy': '复制',
+      'inputLabel': '粘贴你的 YAML',
+      'invalidYaml': '无效 YAML',
+      'note': '🔒 100% 在客户端——手写的 YAML 子集解析器。支持映射、序列、内联流、引号和注释。',
+      'outputLabel': 'JSON 输出',
+    },
     useCases: [
       '把 Docker Compose / Kubernetes 配置转成 JSON',
       '把 CI 配置喂给只接受 JSON 的工具',
@@ -19,6 +27,14 @@ export const yamlToJsonL10n: ToolL10n = {
     ],
   },
   es: {
+    ui: {
+      'clear': 'Limpiar',
+      'copy': 'Copiar',
+      'inputLabel': 'Pega tu YAML',
+      'invalidYaml': 'YAML inválido',
+      'note': '🔒 100% en el cliente — un parser de un subconjunto YAML hecho a mano. Admite mapeos, secuencias, flujo en línea, comillas y comentarios.',
+      'outputLabel': 'Salida JSON',
+    },
     useCases: [
       'convertir configuraciones de Docker Compose / Kubernetes a JSON',
       'pasar configuración de CI a herramientas que solo aceptan JSON',
@@ -32,6 +48,14 @@ export const yamlToJsonL10n: ToolL10n = {
     ],
   },
   de: {
+    ui: {
+      'clear': 'Leeren',
+      'copy': 'Kopieren',
+      'inputLabel': 'Füge dein YAML ein',
+      'invalidYaml': 'Ungültiges YAML',
+      'note': '🔒 100% clientseitig — ein handgeschriebener Parser für eine YAML-Teilmenge. Unterstützt Mappings, Sequenzen, Inline-Flow, Anführungszeichen und Kommentare.',
+      'outputLabel': 'JSON-Ausgabe',
+    },
     useCases: [
       'Docker-Compose-/Kubernetes-Konfigurationen in JSON umwandeln',
       'CI-Konfiguration an Werkzeuge übergeben, die nur JSON akzeptieren',

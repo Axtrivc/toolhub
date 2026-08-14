@@ -16,7 +16,7 @@ export default function Page() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <ToolLayout tool={tool}>
-        <URLCodecTool initialMode="decode" />
+        <URLCodecTool initialMode="decode" slug="url-decoder" />
         <URLdecoderContent />
       </ToolLayout>
     </>

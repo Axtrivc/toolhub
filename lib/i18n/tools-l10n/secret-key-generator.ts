@@ -1,32 +1,149 @@
 /**
  * secret-key-generator 本地化 bundle —— zh / es / de
- * 覆盖:useCases(无 FAQ / formula 条目 → 仅 useCases)
+ * 覆盖:useCases + faqs
  */
 import type { ToolL10n } from '../tool-l10n'
 
 export const secretKeyGeneratorL10n: ToolL10n = {
   zh: {
+    ui: {
+      'bits': '比特',
+      'bytes': '字节',
+      'chars': '字符',
+      'copy': '复制',
+      'copyAll': '全部复制',
+      'entropy': '熵:',
+      'fmtAlnum': '字母数字 (A–Z a–z 0–9)',
+      'fmtApiKey': 'API key 风格(前缀 + 随机)',
+      'fmtBase64': 'Base64',
+      'fmtBase64Url': 'Base64URL',
+      'fmtHex': '十六进制',
+      'fmtUuid': 'UUID v4',
+      'format': '格式',
+      'generate': '生成',
+      'length': '长度:',
+      'noteIntro': '🔒 用 ',
+      'noteMid1': ' ——你的浏览器 CSPRNG——完全在本设备生成;不上传任何东西。字母数字输出使用 ',
+      'noteOutro': ',所以每个字符均匀分布(无取模偏差)。请把生成的密钥存到密码管理器或平台密钥库里;任何出现在日志、工单或截图里的密钥都要轮换。',
+      'noteRejectionSampling': '拒绝采样',
+      'prefix': '前缀',
+      'randomChars': '随机字符',
+      'randomPart': '随机部分:',
+      'regenerateAll': '全部重新生成',
+    },
     useCases: [
       '在线随机 API 密钥生成器',
       '为 JWT 生成密钥',
       '加密安全的令牌生成器',
       '十六进制密钥生成器',
     ],
+    faqs: [
+      {
+        q: '这些密钥是加密安全的吗?',
+        a: '是。它们用的是浏览器的安全随机源(crypto.getRandomValues),和 TLS 密钥用的是同一个 CSPRNG,所以输出适合用于 API 密钥、会话令牌等安全敏感的值——而不是 Math.random()。',
+      },
+      {
+        q: 'API 密钥应该多长?',
+        a: '32 个十六进制字符(128 位)是合理的下限,64 个十六进制字符(256 位)则留有充足余量。对抗暴力破解时,长度远比字符表更重要,所以宁可更长,也不要更花哨的字符。',
+      },
+      {
+        q: '十六进制和 Base64 输出有什么区别?',
+        a: '在随机量相同的情况下,十六进制只用 0-9 和 a-f(字符串更长),Base64 用更大的字符表(字符串更短)。在相同位数下两者同样安全——选你下游系统期望的那种即可。',
+      },
+    ],
   },
   es: {
+    ui: {
+      'bits': 'bits',
+      'bytes': 'bytes',
+      'chars': 'caracteres',
+      'copy': 'Copiar',
+      'copyAll': 'Copiar todo',
+      'entropy': 'Entropía:',
+      'fmtAlnum': 'Alfanumérico (A–Z a–z 0–9)',
+      'fmtApiKey': 'Estilo API key (prefijo + aleatorio)',
+      'fmtBase64': 'Base64',
+      'fmtBase64Url': 'Base64URL',
+      'fmtHex': 'Hex',
+      'fmtUuid': 'UUID v4',
+      'format': 'Formato',
+      'generate': 'Generar',
+      'length': 'Longitud:',
+      'noteIntro': '🔒 Generado con ',
+      'noteMid1': ' — el CSPRNG de tu navegador — totalmente en este dispositivo; nada se sube. La salida alfanumérica usa ',
+      'noteOutro': ', por lo que cada carácter está distribuido uniformemente (sin sesgo de módulo). Guarda los secretos en un gestor de contraseñas o en el almacén de secretos de tu plataforma, y rota cualquier clave que aparezca en logs, tickets o capturas.',
+      'noteRejectionSampling': 'muestreo por rechazo',
+      'prefix': 'Prefijo',
+      'randomChars': 'caracteres aleatorios',
+      'randomPart': 'Parte aleatoria:',
+      'regenerateAll': 'Regenerar todo',
+    },
     useCases: [
       'generador de claves API aleatorias online',
       'generar clave secreta para JWT',
       'generador de tokens criptográficamente seguro',
       'generador de claves hexadecimales',
     ],
+    faqs: [
+      {
+        q: '¿Estas claves son criptográficamente seguras?',
+        a: 'Sí. Usan la fuente aleatoria segura del navegador (crypto.getRandomValues), el mismo CSPRNG que para claves TLS, así que la salida sirve para secretos de API, tokens de sesión y otros valores sensibles — no Math.random().',
+      },
+      {
+        q: '¿Qué longitud debe tener una clave API?',
+        a: '32 caracteres hexadecimales (128 bits) es un mínimo razonable y 64 hex (256 bits) da un buen margen. La longitud importa mucho más que el alfabeto para resistir fuerza bruta, así que prefiere más longitud a caracteres más exóticos.',
+      },
+      {
+        q: '¿Cuál es la diferencia entre salida hexadecimal y Base64?',
+        a: 'Para la misma cantidad de aleatoriedad, hex usa solo 0-9 y a-f (cadena más larga), mientras que Base64 usa un alfabeto mayor (cadena más corta). Ambos son igual de seguros a igual longitud de bits; elige el que espere tu sistema consumidor.',
+      },
+    ],
   },
   de: {
+    ui: {
+      'bits': 'Bits',
+      'bytes': 'Bytes',
+      'chars': 'Zeichen',
+      'copy': 'Kopieren',
+      'copyAll': 'Alle kopieren',
+      'entropy': 'Entropie:',
+      'fmtAlnum': 'Alphanumerisch (A–Z a–z 0–9)',
+      'fmtApiKey': 'API-Key-Stil (Präfix + Zufall)',
+      'fmtBase64': 'Base64',
+      'fmtBase64Url': 'Base64URL',
+      'fmtHex': 'Hex',
+      'fmtUuid': 'UUID v4',
+      'format': 'Format',
+      'generate': 'Generieren',
+      'length': 'Länge:',
+      'noteIntro': '🔒 Erzeugt mit ',
+      'noteMid1': ' — dem CSPRNG deines Browsers — vollständig auf diesem Gerät; nichts wird hochgeladen. Die alphanumerische Ausgabe nutzt ',
+      'noteOutro': ', sodass jedes Zeichen gleichverteilt ist (kein Modulo-Bias). Speichere Secrets in einem Passwort-Manager oder dem Secrets-Speicher deiner Plattform und rotiere jeden Key, der jemals in Logs, Tickets oder Screenshots auftaucht.',
+      'noteRejectionSampling': 'Rejection-Sampling',
+      'prefix': 'Präfix',
+      'randomChars': 'Zufallszeichen',
+      'randomPart': 'Zufallsteil:',
+      'regenerateAll': 'Alle neu generieren',
+    },
     useCases: [
       'Zufalls-API-Key-Generator online',
       'Geheimschlüssel für JWT erzeugen',
       'kryptografisch sicherer Token-Generator',
       'Hex-Secret-Key-Generator',
+    ],
+    faqs: [
+      {
+        q: 'Sind diese Schlüssel kryptografisch sicher?',
+        a: 'Ja. Sie nutzen die sichere Zufallsquelle des Browsers (crypto.getRandomValues), denselben CSPRNG wie für TLS-Schlüssel, sodass die Ausgabe für API-Secrets, Session-Tokens und andere sicherheitsrelevante Werte taugt — nicht Math.random().',
+      },
+      {
+        q: 'Wie lang sollte ein API-Key sein?',
+        a: '32 Hex-Zeichen (128 Bit) sind ein sinnvolles Minimum, 64 Hex-Zeichen (256 Bit) geben einen starken Aufschlag. Gegen Brute Force zählt die Länge weit mehr als das Alphabet, daher ziehe länger vor statt exotischere Zeichen.',
+      },
+      {
+        q: 'Was ist der Unterschied zwischen Hex- und Base64-Ausgabe?',
+        a: 'Bei gleicher Zufälligkeit verwendet Hex nur 0-9 und a-f (längerer String), Base64 ein größeres Alphabet (kürzerer String). Beide sind bei gleicher Bitlänge gleich sicher — wähle, was dein verarbeitendes System erwartet.',
+      },
     ],
   },
 }

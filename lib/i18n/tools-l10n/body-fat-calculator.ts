@@ -6,6 +6,10 @@ import type { ToolL10n } from '../tool-l10n'
 
 export const bodyFatCalculatorL10n: ToolL10n = {
   zh: {
+    formula: {
+      formula: 'BF% (US Navy) from height, neck, waist (and hip for women)',
+      explain: '美国海军法用身高、颈围、腰围(女性加臀围)估算体脂率。方便免费,但不如 DEXA 或水下称重等临床方法精确。',
+    },
     ui: {
       'in.gender': '性别',
       'opt.gender.male': '男',
@@ -29,6 +33,10 @@ export const bodyFatCalculatorL10n: ToolL10n = {
     ],
   },
   es: {
+    formula: {
+      formula: 'BF% (US Navy) from height, neck, waist (and hip for women)',
+      explain: 'El método de la Marina de EE. UU. estima el % de grasa a partir de talla, cuello y cintura (y cadera en mujeres). Es cómodo y gratis, pero menos preciso que DEXA o pesaje hidrostático.',
+    },
     ui: {
       'in.gender': 'Sexo',
       'opt.gender.male': 'Hombre',
@@ -52,6 +60,10 @@ export const bodyFatCalculatorL10n: ToolL10n = {
     ],
   },
   de: {
+    formula: {
+      formula: 'BF% (US Navy) from height, neck, waist (and hip for women)',
+      explain: 'Die U.S.-Navy-Methode schätzt den Körperfettanteil aus Größe, Hals- und Bauchumfang (bei Frauen plus Hüfte). Praktisch und gratis, aber ungenauer als DEXA oder Hydrostatik.',
+    },
     ui: {
       'in.gender': 'Geschlecht',
       'opt.gender.male': 'Männlich',

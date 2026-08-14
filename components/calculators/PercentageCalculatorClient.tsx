@@ -2,6 +2,8 @@
 
 import { CalculatorField, ResultCard, CalculatorNote } from '@/components/calculator/CalculatorField'
 import { useUrlState } from '@/lib/useUrlState'
+import { useApp } from '@/components/providers/AppProviders'
+import { tui } from '@/lib/i18n/tool-l10n'
 
 const fmt = (n: number, digits = 4) => {
   if (!isFinite(n)) return '—'
@@ -9,6 +11,10 @@ const fmt = (n: number, digits = 4) => {
 }
 
 export function PercentageCalculatorClient() {
+  const { locale } = useApp()
+  // 取本地化 UI 串;缺失回退英文(SSR 恒英文)。
+  const L = (key: string, fb: string) => tui('percentage-calculator', locale, key, fb)
+
   // URL 同步示例:四个模式各自的输入都进 query string(?p1p=15&p1v=200&...),
   // 刷新/分享链接即恢复现场。其余计算逻辑不变。
   // 模式1: X% of Y
@@ -38,60 +44,60 @@ export function PercentageCalculatorClient() {
     <div className="space-y-8">
       {/* 模式1 */}
       <section>
-        <h2 className="mb-3 text-lg font-semibold" style={{ color: 'rgb(var(--text))' }}>What is X% of Y?</h2>
+        <h2 className="mb-3 text-lg font-semibold" style={{ color: 'rgb(var(--text))' }}>{L('mode1Title', 'What is X% of Y?')}</h2>
         <div className="grid grid-cols-1 gap-4 rounded-lg p-4 sm:grid-cols-2" style={{ backgroundColor: 'rgb(var(--bg-subtle))' }}>
-          <CalculatorField id="p1p" label="Percentage (%)" value={p1Percent} onChange={setP1Percent} suffix="%" />
-          <CalculatorField id="p1v" label="Of value" value={p1Value} onChange={setP1Value} />
+          <CalculatorField id="p1p" label={L('percentage', 'Percentage (%)')} value={p1Percent} onChange={setP1Percent} suffix="%" />
+          <CalculatorField id="p1v" label={L('ofValue', 'Of value')} value={p1Value} onChange={setP1Value} />
         </div>
         <div className="mt-3">
-          <ResultCard label="Result" value={fmt(r1, 2)} highlight />
+          <ResultCard label={L('result', 'Result')} value={fmt(r1, 2)} highlight />
         </div>
       </section>
 
       {/* 模式2 */}
       <section>
-        <h2 className="mb-3 text-lg font-semibold" style={{ color: 'rgb(var(--text))' }}>X is what percent of Y?</h2>
+        <h2 className="mb-3 text-lg font-semibold" style={{ color: 'rgb(var(--text))' }}>{L('mode2Title', 'X is what percent of Y?')}</h2>
         <div className="grid grid-cols-1 gap-4 rounded-lg p-4 sm:grid-cols-2" style={{ backgroundColor: 'rgb(var(--bg-subtle))' }}>
-          <CalculatorField id="p2part" label="Part" value={p2Part} onChange={setP2Part} />
-          <CalculatorField id="p2whole" label="Whole" value={p2Whole} onChange={setP2Whole} />
+          <CalculatorField id="p2part" label={L('part', 'Part')} value={p2Part} onChange={setP2Part} />
+          <CalculatorField id="p2whole" label={L('whole', 'Whole')} value={p2Whole} onChange={setP2Whole} />
         </div>
         <div className="mt-3">
-          <ResultCard label="Result" value={isFinite(r2) ? `${fmt(r2, 2)}%` : '—'} highlight />
+          <ResultCard label={L('result', 'Result')} value={isFinite(r2) ? `${fmt(r2, 2)}%` : '—'} highlight />
         </div>
       </section>
 
       {/* 模式3 */}
       <section>
-        <h2 className="mb-3 text-lg font-semibold" style={{ color: 'rgb(var(--text))' }}>Percentage change from X to Y</h2>
+        <h2 className="mb-3 text-lg font-semibold" style={{ color: 'rgb(var(--text))' }}>{L('mode3Title', 'Percentage change from X to Y')}</h2>
         <div className="grid grid-cols-1 gap-4 rounded-lg p-4 sm:grid-cols-2" style={{ backgroundColor: 'rgb(var(--bg-subtle))' }}>
-          <CalculatorField id="p3from" label="From (original)" value={p3From} onChange={setP3From} />
-          <CalculatorField id="p3to" label="To (new)" value={p3To} onChange={setP3To} />
+          <CalculatorField id="p3from" label={L('fromOriginal', 'From (original)')} value={p3From} onChange={setP3From} />
+          <CalculatorField id="p3to" label={L('toNew', 'To (new)')} value={p3To} onChange={setP3To} />
         </div>
         <div className="mt-3">
           <ResultCard
-            label="Change"
+            label={L('change', 'Change')}
             value={isFinite(r3) ? `${r3 > 0 ? '+' : ''}${fmt(r3, 2)}%` : '—'}
             highlight
-            sublabel={isFinite(r3) ? (r3 > 0 ? 'Increase' : r3 < 0 ? 'Decrease' : 'No change') : undefined}
+            sublabel={isFinite(r3) ? (r3 > 0 ? L('increase', 'Increase') : r3 < 0 ? L('decrease', 'Decrease') : L('noChange', 'No change')) : undefined}
           />
         </div>
       </section>
 
       {/* 模式4 */}
       <section>
-        <h2 className="mb-3 text-lg font-semibold" style={{ color: 'rgb(var(--text))' }}>Add or subtract X%</h2>
+        <h2 className="mb-3 text-lg font-semibold" style={{ color: 'rgb(var(--text))' }}>{L('mode4Title', 'Add or subtract X%')}</h2>
         <div className="grid grid-cols-1 gap-4 rounded-lg p-4 sm:grid-cols-2" style={{ backgroundColor: 'rgb(var(--bg-subtle))' }}>
-          <CalculatorField id="p4v" label="Value" value={p4Value} onChange={setP4Value} />
-          <CalculatorField id="p4p" label="Percentage to add" value={p4Percent} onChange={setP4Percent} suffix="%" />
+          <CalculatorField id="p4v" label={L('value', 'Value')} value={p4Value} onChange={setP4Value} />
+          <CalculatorField id="p4p" label={L('percentageToAdd', 'Percentage to add')} value={p4Percent} onChange={setP4Percent} suffix="%" />
         </div>
         <div className="mt-3 grid grid-cols-2 gap-3">
-          <ResultCard label={`Value + ${p4Percent || 0}%`} value={fmt(r4, 2)} />
-          <ResultCard label={`Value - ${p4Percent || 0}%`} value={fmt(Number(p4Value) * (1 - Number(p4Percent) / 100), 2)} />
+          <ResultCard label={`${L('value', 'Value')} + ${p4Percent || 0}%`} value={fmt(r4, 2)} />
+          <ResultCard label={`${L('value', 'Value')} - ${p4Percent || 0}%`} value={fmt(Number(p4Value) * (1 - Number(p4Percent) / 100), 2)} />
         </div>
       </section>
 
       <CalculatorNote>
-        💡 Tip: Leave a field empty to treat it as 0. This calculator runs entirely in your browser.
+        {L('tipNote', '💡 Tip: Leave a field empty to treat it as 0. This calculator runs entirely in your browser.')}
       </CalculatorNote>
     </div>
   )

@@ -5,6 +5,8 @@ import { ResultCard, CalculatorNote } from '../calculator/CalculatorField'
 import { CopyButton } from '../CopyButton'
 import { makeCalculatorClient } from '../calculator/makeCalculatorClient'
 import { fmtNum, toNum } from '@/lib/format'
+import { useApp } from '@/components/providers/AppProviders'
+import { tui } from '@/lib/i18n/tool-l10n'
 
 /**
  * 生成器类工具(UUID、Lorem Ipsum)+ 几何 + 统计计算器
@@ -12,6 +14,10 @@ import { fmtNum, toNum } from '@/lib/format'
 
 // ── UUID 生成器 ──
 export function UUIDGeneratorClient() {
+  const { locale } = useApp()
+  // 取本地化 UI 串;缺失回退英文(SSR 恒英文)。
+  const L = (key: string, fb: string) => tui('uuid-generator', locale, key, fb)
+
   const [uuids, setUuids] = useState<string[]>([])
   const [count, setCount] = useState('5')
 
@@ -26,10 +32,10 @@ export function UUIDGeneratorClient() {
     <div className="space-y-6">
       <div className="flex flex-wrap items-end gap-3">
         <div>
-          <label htmlFor="count" className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>How many</label>
+          <label htmlFor="count" className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>{L('howMany', 'How many')}</label>
           <input id="count" type="number" min="1" max="100" value={count} onChange={(e) => setCount(e.target.value)} className="w-28 rounded-lg border border-slate-300 p-3 outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200" />
         </div>
-        <button onClick={generate} className="btn btn-primary">🎲 Generate UUIDs</button>
+        <button onClick={generate} className="btn btn-primary">{L('generate', '🎲 Generate UUIDs')}</button>
       </div>
       {uuids.length > 0 && (
         <div className="space-y-2">
@@ -41,7 +47,12 @@ export function UUIDGeneratorClient() {
           ))}
         </div>
       )}
-      <CalculatorNote>🆔 Generates RFC 4122 v4 UUIDs using the Web Crypto API. Used for unique IDs in databases, sessions, and distributed systems.</CalculatorNote>
+      <CalculatorNote>
+        {L(
+          'note',
+          '🆔 Generates RFC 4122 v4 UUIDs using the Web Crypto API. Used for unique IDs in databases, sessions, and distributed systems.',
+        )}
+      </CalculatorNote>
     </div>
   )
 }
@@ -60,6 +71,10 @@ function generateUUID(): string {
 const LOREM_WORDS = 'lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua enim ad minim veniam quis nostrud exercitation ullamco laboris nisi aliquip ex ea commodo consequat duis aute irure in reprehenderit voluptate velit esse cillum eu fugiat nulla pariatur excepteur sint occaecat cupidatat non proident sunt culpa qui officia deserunt mollit anim id est laborum'.split(' ')
 
 export function LoremIpsumGeneratorClient() {
+  const { locale } = useApp()
+  // 取本地化 UI 串;缺失回退英文(SSR 恒英文)。
+  const L = (key: string, fb: string) => tui('lorem-ipsum-generator', locale, key, fb)
+
   const [paragraphs, setParagraphs] = useState('3')
   const [output, setOutput] = useState('')
 
@@ -85,10 +100,10 @@ export function LoremIpsumGeneratorClient() {
     <div className="space-y-6">
       <div className="flex flex-wrap items-end gap-3">
         <div>
-          <label htmlFor="para" className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>Paragraphs</label>
+          <label htmlFor="para" className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>{L('paragraphs', 'Paragraphs')}</label>
           <input id="para" type="number" min="1" max="20" value={paragraphs} onChange={(e) => setParagraphs(e.target.value)} className="w-28 rounded-lg border border-slate-300 p-3 outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200" />
         </div>
-        <button onClick={generate} className="btn btn-primary">📝 Generate</button>
+        <button onClick={generate} className="btn btn-primary">{L('generate', '📝 Generate')}</button>
         {output && <CopyButton value={output} />}
       </div>
       {output && (
@@ -96,7 +111,12 @@ export function LoremIpsumGeneratorClient() {
           {output}
         </div>
       )}
-      <CalculatorNote>📄 Generates placeholder text for mockups, designs, and layouts. Based on a 1st-century BC text by Cicero.</CalculatorNote>
+      <CalculatorNote>
+        {L(
+          'note',
+          '📄 Generates placeholder text for mockups, designs, and layouts. Based on a 1st-century BC text by Cicero.',
+        )}
+      </CalculatorNote>
     </div>
   )
 }

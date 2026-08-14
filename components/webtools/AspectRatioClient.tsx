@@ -1,6 +1,8 @@
 'use client'
 
 import { useState, useMemo } from 'react'
+import { useApp } from '@/components/providers/AppProviders'
+import { tui } from '@/lib/i18n/tool-l10n'
 
 /**
  * Aspect Ratio Calculator
@@ -20,6 +22,9 @@ const PRESETS: { label: string; w: number; h: number }[] = [
 ]
 
 export function AspectRatioClient() {
+  const { locale } = useApp()
+  const L = (key: string, fb: string) => tui('aspect-ratio-calculator', locale, key, fb)
+
   const [ratioW, setRatioW] = useState(16)
   const [ratioH, setRatioH] = useState(9)
   const [width, setWidth] = useState('1920')
@@ -51,7 +56,7 @@ export function AspectRatioClient() {
     <div className="space-y-5">
       {/* 比例输入 + 预设 */}
       <div>
-        <label className="mb-2 block text-sm font-medium text-slate-700">Aspect Ratio</label>
+        <label className="mb-2 block text-sm font-medium text-slate-700">{L('aspectRatio', 'Aspect Ratio')}</label>
         <div className="flex items-center gap-2">
           <input
             type="number"
@@ -89,7 +94,7 @@ export function AspectRatioClient() {
       {/* 已知宽 / 高 */}
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <div className="rounded-lg border p-4" style={{ borderColor: 'rgb(var(--border))' }}>
-          <div className="mb-2 text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>Width (px)</div>
+          <div className="mb-2 text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>{L('widthPx', 'Width (px)')}</div>
           <input
             type="number"
             value={width}
@@ -97,13 +102,13 @@ export function AspectRatioClient() {
               setWidth(e.target.value)
               setHeight('')
             }}
-            placeholder="enter width…"
+            placeholder={L('enterWidthPlaceholder', 'enter width…')}
             className={inputCls}
             style={{ borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rgb(var(--bg-card))', color: 'rgb(var(--text))' }}
           />
         </div>
         <div className="rounded-lg border p-4" style={{ borderColor: 'rgb(var(--border))' }}>
-          <div className="mb-2 text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>Height (px)</div>
+          <div className="mb-2 text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>{L('heightPx', 'Height (px)')}</div>
           <input
             type="number"
             value={height}
@@ -111,7 +116,7 @@ export function AspectRatioClient() {
               setHeight(e.target.value)
               setWidth('')
             }}
-            placeholder="or enter height…"
+            placeholder={L('orEnterHeightPlaceholder', 'or enter height…')}
             className={inputCls}
             style={{ borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rgb(var(--bg-card))', color: 'rgb(var(--text))' }}
           />
@@ -123,14 +128,14 @@ export function AspectRatioClient() {
         <div className="rounded-lg border border-blue-100 bg-gradient-to-b from-blue-50/40 to-transparent p-4 dark:border-blue-900/40">
           <div className="grid grid-cols-2 gap-4 text-center">
             <div>
-              <div className="text-xs uppercase text-slate-400">Width</div>
+              <div className="text-xs uppercase text-slate-400">{L('width', 'Width')}</div>
               <div className="mt-1 text-2xl font-bold" style={{ color: 'rgb(var(--text))' }}>
                 {computed.width || '—'}
                 <span className="ml-1 text-sm font-normal text-slate-400">px</span>
               </div>
             </div>
             <div>
-              <div className="text-xs uppercase text-slate-400">Height</div>
+              <div className="text-xs uppercase text-slate-400">{L('height', 'Height')}</div>
               <div className="mt-1 text-2xl font-bold" style={{ color: 'rgb(var(--text))' }}>
                 {computed.height || '—'}
                 <span className="ml-1 text-sm font-normal text-slate-400">px</span>
@@ -141,7 +146,7 @@ export function AspectRatioClient() {
       )}
 
       <p className="rounded-md p-3 text-xs" style={{ backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text-subtle))' }}>
-        🔒 100% client-side. Enter a ratio and one dimension; the other is computed as{' '}
+        {L('note', '🔒 100% client-side. Enter a ratio and one dimension; the other is computed as ')}{' '}
         <code>dim = known × (target / source)</code>.
       </p>
     </div>

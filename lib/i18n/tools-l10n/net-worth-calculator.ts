@@ -6,6 +6,10 @@ import type { ToolL10n } from '../tool-l10n'
 
 export const netWorthCalculatorL10n: ToolL10n = {
   zh: {
+    formula: {
+      formula: 'Net worth = total assets − total liabilities',
+      explain: '资产是你拥有的(现金、投资、房产、车),负债是你欠的(房贷、贷款、卡账)。净资产为正意味着资产超过债务。',
+    },
     useCases: ['算出资产减去负债后的净资产', '追踪净资产随时间的变化', '看自己处于哪个财富区间', '区分「可投资资产」与含自住的净资产'],
     faqs: [
       { q: '自住房算不算资产?', a: '算,但要减去房贷。剩下的净值是真实资产。有些计算器会剔除自住房,只看「可投资」净资产——两种做法都成立,只要逐年比较时口径一致即可。' },
@@ -20,6 +24,10 @@ export const netWorthCalculatorL10n: ToolL10n = {
     },
   },
   es: {
+    formula: {
+      formula: 'Net worth = total assets − total liabilities',
+      explain: 'Los activos son lo que posees (caja, inversiones, casa, coche); los pasivos lo que debes (hipoteca, préstamos, tarjetas). Un patrimonio positivo significa que los activos superan a las deudas.',
+    },
     useCases: ['calcular el patrimonio neto (activos menos pasivos)', 'hacer seguimiento del patrimonio neto en el tiempo', 'ver en qué tramo de riqueza estás', 'distinguir patrimonio «invertible» del que incluye la vivienda'],
     faqs: [
       { q: '¿Debo incluir mi vivienda habitual?', a: 'Sí, pero restando la hipoteca. El capital restante es un activo real. Algunas calculadoras excluyen la vivienda habitual para centrarse en el patrimonio neto «invertible»; ambos enfoques son válidos, siempre que seas constante al comparar año a año.' },
@@ -34,6 +42,10 @@ export const netWorthCalculatorL10n: ToolL10n = {
     },
   },
   de: {
+    formula: {
+      formula: 'Net worth = total assets − total liabilities',
+      explain: 'Vermögenswerte sind das, was du hast (Bar, Anlagen, Haus, Auto); Verbindlichkeiten das, was du schuldest (Hypothek, Kredite, Karten). Positives Reinvermögen heißt, Aktiva übersteigen Schulden.',
+    },
     useCases: ['das Reinvermögen berechnen (Aktiva minus Verbindlichkeiten)', 'die Entwicklung des Reinvermögens über Zeit verfolgen', 'sehen, in welcher Vermögensstufe du liegst', 'zwischen „anlagefähigem" und Wohnimmobilie-inkludiertem Vermögen unterscheiden'],
     faqs: [
       { q: 'Zählt meine selbstgenutzte Immobilie?', a: 'Ja, aber ziehe die Hypothek ab. Das verbleibende Eigenkapital ist ein echter Vermögenswert. Manche Rechner lassen die selbstgenutzte Immobilie weg, um sich auf „anlagefähiges" Reinvermögen zu konzentrieren — beide Ansätze sind gültig, solange du beim Jahresvergleich konsistent bleibst.' },

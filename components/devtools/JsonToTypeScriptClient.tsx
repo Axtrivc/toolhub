@@ -3,6 +3,8 @@
 import { useState, useMemo, useCallback } from 'react'
 import { CopyButton } from '@/components/CopyButton'
 import { LoadSampleButton } from '@/components/LoadSampleButton'
+import { useApp } from '@/components/providers/AppProviders'
+import { tui } from '@/lib/i18n/tool-l10n'
 
 /**
  * JSON to TypeScript —— 纯前端推导嵌套 Interface
@@ -122,6 +124,9 @@ function generateInterfaces(jsonStr: string): string {
 }
 
 export function JsonToTypeScriptClient() {
+  const { locale } = useApp()
+  const L = (key: string, fb: string) => tui('json-to-typescript', locale, key, fb)
+
   const [input, setInput] = useState('')
 
   const result = useMemo<{ output?: string; error?: string }>(() => {
@@ -129,9 +134,10 @@ export function JsonToTypeScriptClient() {
     try {
       return { output: generateInterfaces(input) }
     } catch (e) {
-      return { error: e instanceof Error ? e.message : 'Invalid JSON' }
+      return { error: e instanceof Error ? e.message : L('invalidJson', 'Invalid JSON') }
     }
-  }, [input])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [input, locale])
 
   const handleLoadSample = useCallback(() => setInput(SAMPLE_JSON), [])
 
@@ -141,7 +147,7 @@ export function JsonToTypeScriptClient() {
       <div>
         <div className="mb-2 flex items-center justify-between">
           <label htmlFor="json-ts-input" className="text-sm font-medium text-slate-700">
-            Paste your JSON
+            {L('pasteJson', 'Paste your JSON')}
           </label>
           <div className="flex items-center gap-2">
             <LoadSampleButton onLoad={handleLoadSample} variant="compact" />
@@ -151,7 +157,7 @@ export function JsonToTypeScriptClient() {
                 onClick={() => setInput('')}
                 className="-my-1 rounded-md px-2 py-1 text-xs text-slate-400 hover:text-red-500 sm:text-sm"
               >
-                Clear
+                {L('clear', 'Clear')}
               </button>
             )}
           </div>
@@ -183,8 +189,8 @@ export function JsonToTypeScriptClient() {
       {result.output && (
         <div>
           <div className="mb-2 flex items-center justify-between">
-            <span className="text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>TypeScript Interfaces</span>
-            <CopyButton value={result.output} label="Copy" />
+            <span className="text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>{L('tsInterfaces', 'TypeScript Interfaces')}</span>
+            <CopyButton value={result.output} label={L('copy', 'Copy')} />
           </div>
           <pre
             className="overflow-x-auto rounded-lg border bg-slate-50 p-4 text-xs"
@@ -196,7 +202,7 @@ export function JsonToTypeScriptClient() {
       )}
 
       <p className="rounded-md p-3 text-xs" style={{ backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text-subtle))' }}>
-        🔒 100% client-side — your JSON is parsed in your browser only and never sent to any server.
+        {L('note', '🔒 100% client-side — your JSON is parsed in your browser only and never sent to any server.')}
       </p>
     </div>
   )

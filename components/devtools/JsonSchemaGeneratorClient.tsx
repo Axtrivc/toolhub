@@ -4,6 +4,8 @@ import { useState, useMemo, useCallback } from 'react'
 import { CopyButton } from '@/components/CopyButton'
 import { ResultActions } from '@/components/ResultActions'
 import { LoadSampleButton } from '@/components/LoadSampleButton'
+import { useApp } from '@/components/providers/AppProviders'
+import { tui } from '@/lib/i18n/tool-l10n'
 
 /**
  * JSON Schema Generator —— 从示例 JSON 推导 Draft-07 Schema
@@ -166,6 +168,9 @@ function generateSchema(jsonStr: string): string {
 }
 
 export function JsonSchemaGeneratorClient() {
+  const { locale } = useApp()
+  const L = (key: string, fb: string) => tui('json-schema-generator', locale, key, fb)
+
   const [input, setInput] = useState('')
 
   const result = useMemo<{ output?: string; error?: string }>(() => {
@@ -173,9 +178,10 @@ export function JsonSchemaGeneratorClient() {
     try {
       return { output: generateSchema(input) }
     } catch (e) {
-      return { error: e instanceof Error ? e.message : 'Invalid JSON' }
+      return { error: e instanceof Error ? e.message : L('invalidJson', 'Invalid JSON') }
     }
-  }, [input])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [input, locale])
 
   const handleLoadSample = useCallback(() => setInput(SAMPLE_JSON), [])
 
@@ -185,7 +191,7 @@ export function JsonSchemaGeneratorClient() {
       <div>
         <div className="mb-2 flex items-center justify-between">
           <label htmlFor="json-schema-input" className="text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
-            Paste your JSON
+            {L('pasteJson', 'Paste your JSON')}
           </label>
           <div className="flex items-center gap-2">
             <LoadSampleButton onLoad={handleLoadSample} variant="compact" />
@@ -196,7 +202,7 @@ export function JsonSchemaGeneratorClient() {
                 className="-my-1 rounded-md px-2 py-1 text-xs hover:text-red-500 sm:text-sm"
                 style={{ color: 'rgb(var(--text-faint))' }}
               >
-                Clear
+                {L('clear', 'Clear')}
               </button>
             )}
           </div>
@@ -229,9 +235,9 @@ export function JsonSchemaGeneratorClient() {
         <div className="space-y-3">
           <div className="flex items-center justify-between">
             <span className="text-sm font-semibold" style={{ color: 'rgb(var(--text))' }}>
-              JSON Schema (Draft-07)
+              {L('schemaTitle', 'JSON Schema (Draft-07)')}
             </span>
-            <CopyButton value={result.output} label="Copy" />
+            <CopyButton value={result.output} label={L('copy', 'Copy')} />
           </div>
           <pre
             className="w-full overflow-x-auto rounded-lg border p-4 font-mono text-sm shadow-sm"
@@ -256,7 +262,7 @@ export function JsonSchemaGeneratorClient() {
         className="rounded-md p-3 text-xs"
         style={{ backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text-subtle))' }}
       >
-        🔒 100% client-side — your JSON is analyzed in your browser only and never sent to any server.
+        {L('note', '🔒 100% client-side — your JSON is analyzed in your browser only and never sent to any server.')}
       </p>
     </div>
   )

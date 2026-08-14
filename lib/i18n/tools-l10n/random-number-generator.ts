@@ -6,6 +6,17 @@ import type { ToolL10n } from '../tool-l10n'
 
 export const randomNumberGeneratorL10n: ToolL10n = {
   zh: {
+    ui: {
+      'cantPickUniqueError': '⚠️ 无法从 {range} 个数的范围中选出 {limit} 个不重复的数',
+      'countAtLeastOneError': '⚠️ 个数至少为 1',
+      'generate': '🎲 生成',
+      'howMany': '生成个数',
+      'invalidNumbersError': '⚠️ 请为最小值、最大值和个数输入有效数字',
+      'max': '最大值',
+      'min': '最小值',
+      'minLteMaxError': '⚠️ 最小值必须 ≤ 最大值',
+      'noRepeats': '不重复(唯一数字)',
+    },
     useCases: [
       '公平抽取比赛或抽奖中奖者',
       '生成彩票号码组合',
@@ -17,6 +28,17 @@ export const randomNumberGeneratorL10n: ToolL10n = {
     ],
   },
   es: {
+    ui: {
+      'cantPickUniqueError': '⚠️ No se pueden elegir {limit} números únicos de un rango de {range}',
+      'countAtLeastOneError': '⚠️ La cantidad debe ser al menos 1',
+      'generate': '🎲 Generar',
+      'howMany': 'Cuántos',
+      'invalidNumbersError': '⚠️ Introduce números válidos para Mín, Máx y Cantidad',
+      'max': 'Máx',
+      'min': 'Mín',
+      'minLteMaxError': '⚠️ Mín debe ser ≤ Máx',
+      'noRepeats': 'Sin repetir (números únicos)',
+    },
     useCases: [
       'elegir ganadores de concursos o rifas de forma justa',
       'generar combinaciones de lotería',
@@ -28,6 +50,17 @@ export const randomNumberGeneratorL10n: ToolL10n = {
     ],
   },
   de: {
+    ui: {
+      'cantPickUniqueError': '⚠️ Können keine {limit} eindeutigen Zahlen aus einem Bereich von {range} wählen',
+      'countAtLeastOneError': '⚠️ Anzahl muss mindestens 1 sein',
+      'generate': '🎲 Generieren',
+      'howMany': 'Wie viele',
+      'invalidNumbersError': '⚠️ Bitte gültige Zahlen für Min, Max und Anzahl eingeben',
+      'max': 'Max',
+      'min': 'Min',
+      'minLteMaxError': '⚠️ Min muss ≤ Max sein',
+      'noRepeats': 'Keine Wiederholungen (eindeutige Zahlen)',
+    },
     useCases: [
       'Gewinner für Wettbewerbe oder Verlosungen fair ziehen',
       'Lottokombinationen erzeugen',

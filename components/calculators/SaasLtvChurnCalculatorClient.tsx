@@ -3,6 +3,8 @@
 import { useState, useMemo } from 'react'
 import { CalculatorField, ResultCard, CalculatorShell, CalculatorNote } from '@/components/calculator/CalculatorField'
 import { ResultActions } from '@/components/ResultActions'
+import { useApp } from '@/components/providers/AppProviders'
+import { tui } from '@/lib/i18n/tool-l10n'
 
 const fmtMoney = (n: number) =>
   isFinite(n)
@@ -19,6 +21,10 @@ const fmtMoney = (n: number) =>
  *  - NRR 提示 ≈ 1 + 增长率 − 流失率
  */
 export function SaasLtvChurnCalculatorClient() {
+  const { locale } = useApp()
+  // 取本地化 UI 串;缺失回退英文(SSR 恒英文)。
+  const L = (key: string, fb: string) => tui('saas-ltv-churn-calculator', locale, key, fb)
+
   const [arpu, setArpu] = useState('50')
   const [margin, setMargin] = useState('80')
   const [churn, setChurn] = useState('5')
@@ -35,8 +41,10 @@ export function SaasLtvChurnCalculatorClient() {
     const cust = Number(customers)
     if ([a, m, c, cacN, g, cust].some((v) => !isFinite(v)) || a <= 0 || c < 0 || cacN < 0 || cust < 0 || m <= 0 || m > 100) {
       return {
-        error:
+        error: L(
+          'errInvalid',
           'Please enter valid numbers: ARPU above 0, margin 1–100%, churn / CAC / customers at least 0.',
+        ),
       }
     }
     const churnFrac = c / 100
@@ -46,40 +54,42 @@ export function SaasLtvChurnCalculatorClient() {
     const lifetimeMonths = churnFrac > 0 ? 1 / churnFrac : Infinity
     const ltv = churnFrac > 0 ? grossProfitPerCustomer / churnFrac : Infinity
     const ltvCac = cacN > 0 && isFinite(ltv) ? ltv / cacN : null
-    const health = ltvCac === null ? null : ltvCac < 1 ? 'Unsustainable — you lose money per customer' : ltvCac <= 3 ? 'OK — room to improve' : 'Great — efficient growth'
+    const health = ltvCac === null ? null : ltvCac < 1 ? L('healthUnsustainable', 'Unsustainable — you lose money per customer') : ltvCac <= 3 ? L('healthOk', 'OK — room to improve') : L('healthGreat', 'Great — efficient growth')
     const paybackMonths = cacN > 0 && grossProfitPerCustomer > 0 ? cacN / grossProfitPerCustomer : null
     const churnedCustomers = cust * churnFrac
     const lostMrr = churnedCustomers * a
     const nrr = (1 + g / 100 - churnFrac) * 100
 
     return { lifetimeMonths, ltv, ltvCac, health, paybackMonths, churnedCustomers, lostMrr, nrr, grossProfitPerCustomer }
-  }, [arpu, margin, churn, cac, growth, customers])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [arpu, margin, churn, cac, growth, customers, locale])
 
   const summary = useMemo(() => {
-    if ('error' in parsed) return `SaaS metrics calculator: ${parsed.error}`
+    if ('error' in parsed) return `${L('summaryPrefix', 'SaaS metrics calculator: ')}${parsed.error}`
     const fmtMaybe = (n: number) => (isFinite(n) ? fmtMoney(n) : '∞')
     return [
-      'SaaS Metrics Summary',
-      `  ARPU: ${fmtMoney(Number(arpu))}/mo  •  Gross margin: ${margin}%  •  Churn: ${churn}%/mo`,
-      `  CAC: ${fmtMoney(Number(cac))}  •  Growth: ${growth}%/mo  •  Customers: ${customers}`,
-      'Results:',
-      `  Expected customer lifetime: ${isFinite(parsed.lifetimeMonths) ? `${parsed.lifetimeMonths.toFixed(1)} months` : '∞ (200+ months)'}`,
-      `  LTV: ${fmtMaybe(parsed.ltv)}`,
-      `  LTV:CAC: ${parsed.ltvCac !== null ? parsed.ltvCac.toFixed(2) : 'n/a'} ${parsed.health ? `(${parsed.health})` : ''}`,
-      `  CAC payback: ${parsed.paybackMonths !== null ? `${parsed.paybackMonths.toFixed(1)} months` : 'n/a'}`,
-      `  Customers lost per month: ${parsed.churnedCustomers.toFixed(1)} (${fmtMoney(parsed.lostMrr)} MRR)`,
-      `  Net revenue retention hint: ${parsed.nrr.toFixed(0)}%`,
+      L('summaryTitle', 'SaaS Metrics Summary'),
+      `  ${L('sArpu', 'ARPU: ')}${fmtMoney(Number(arpu))}/mo  •  ${L('sGrossMargin', 'Gross margin: ')}${margin}%  •  ${L('sChurn', 'Churn: ')}${churn}%/mo`,
+      `  ${L('sCac', 'CAC: ')}${fmtMoney(Number(cac))}  •  ${L('sGrowth', 'Growth: ')}${growth}%/mo  •  ${L('sCustomers', 'Customers: ')}${customers}`,
+      L('sResults', 'Results:'),
+      `  ${L('sExpectedLifetime', 'Expected customer lifetime: ')}${isFinite(parsed.lifetimeMonths) ? `${parsed.lifetimeMonths.toFixed(1)} ${L('months', 'months')}` : L('infinityMonths', '∞ (200+ months)')}`,
+      `  ${L('sLtv', 'LTV: ')}${fmtMaybe(parsed.ltv)}`,
+      `  ${L('sLtvCac', 'LTV:CAC: ')}${parsed.ltvCac !== null ? parsed.ltvCac.toFixed(2) : L('na', 'n/a')} ${parsed.health ? `(${parsed.health})` : ''}`,
+      `  ${L('sCacPayback', 'CAC payback: ')}${parsed.paybackMonths !== null ? `${parsed.paybackMonths.toFixed(1)} ${L('months', 'months')}` : L('na', 'n/a')}`,
+      `  ${L('sCustomersLost', 'Customers lost per month: ')}${parsed.churnedCustomers.toFixed(1)} (${fmtMoney(parsed.lostMrr)} MRR)`,
+      `  ${L('sNrrHint', 'Net revenue retention hint: ')}${parsed.nrr.toFixed(0)}%`,
     ].join('\n')
-  }, [parsed, arpu, margin, churn, cac, growth, customers])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [parsed, arpu, margin, churn, cac, growth, customers, locale])
 
   const inputs = (
     <>
-      <CalculatorField id="arpu" label="Monthly ARPU" value={arpu} onChange={setArpu} suffix="$ / mo" placeholder="50" />
-      <CalculatorField id="margin" label="Gross margin" value={margin} onChange={setMargin} suffix="%" placeholder="80" />
-      <CalculatorField id="churn" label="Monthly churn rate" value={churn} onChange={setChurn} suffix="% / mo" placeholder="5" />
-      <CalculatorField id="cac" label="CAC (optional)" value={cac} onChange={setCac} suffix="$" placeholder="0" />
-      <CalculatorField id="growth" label="Monthly growth rate (optional)" value={growth} onChange={setGrowth} suffix="% / mo" placeholder="0" />
-      <CalculatorField id="customers" label="Number of customers" value={customers} onChange={setCustomers} placeholder="100" />
+      <CalculatorField id="arpu" label={L('monthlyArpu', 'Monthly ARPU')} value={arpu} onChange={setArpu} suffix="$ / mo" placeholder="50" />
+      <CalculatorField id="margin" label={L('grossMargin', 'Gross margin')} value={margin} onChange={setMargin} suffix="%" placeholder="80" />
+      <CalculatorField id="churn" label={L('monthlyChurnRate', 'Monthly churn rate')} value={churn} onChange={setChurn} suffix="% / mo" placeholder="5" />
+      <CalculatorField id="cac" label={L('cacOptional', 'CAC (optional)')} value={cac} onChange={setCac} suffix="$" placeholder="0" />
+      <CalculatorField id="growth" label={L('monthlyGrowthRate', 'Monthly growth rate (optional)')} value={growth} onChange={setGrowth} suffix="% / mo" placeholder="0" />
+      <CalculatorField id="customers" label={L('numberOfCustomers', 'Number of customers')} value={customers} onChange={setCustomers} placeholder="100" />
     </>
   )
 
@@ -98,52 +108,54 @@ export function SaasLtvChurnCalculatorClient() {
       results={
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
           <ResultCard
-            label="Customer lifetime value (LTV)"
+            label={L('customerLifetimeValue', 'Customer lifetime value (LTV)')}
             value={isFinite(parsed.ltv) ? fmtMoney(parsed.ltv) : '∞'}
-            sublabel="ARPU × margin ÷ churn"
+            sublabel={L('ltvFormula', 'ARPU × margin ÷ churn')}
             highlight
           />
           <ResultCard
-            label="Expected customer lifetime"
+            label={L('expectedCustomerLifetime', 'Expected customer lifetime')}
             value={isFinite(parsed.lifetimeMonths) ? `${parsed.lifetimeMonths.toFixed(1)} mo` : '∞'}
-            sublabel={isFinite(parsed.lifetimeMonths) ? '1 ÷ monthly churn' : 'No churn — 200+ months'}
+            sublabel={isFinite(parsed.lifetimeMonths) ? L('oneOverChurn', '1 ÷ monthly churn') : L('noChurnHint', 'No churn — 200+ months')}
           />
           <ResultCard
-            label="LTV : CAC ratio"
+            label={L('ltvCacRatio', 'LTV : CAC ratio')}
             value={parsed.ltvCac !== null ? parsed.ltvCac.toFixed(2) : '—'}
-            sublabel={parsed.health ?? 'Enter a CAC above $0'}
+            sublabel={parsed.health ?? L('enterCacAboveZero', 'Enter a CAC above $0')}
           />
           <ResultCard
-            label="CAC payback period"
+            label={L('cacPaybackPeriod', 'CAC payback period')}
             value={parsed.paybackMonths !== null ? `${parsed.paybackMonths.toFixed(1)} mo` : '—'}
-            sublabel="CAC ÷ (ARPU × margin)"
+            sublabel={L('paybackFormula', 'CAC ÷ (ARPU × margin)')}
           />
           <ResultCard
-            label="Customers lost / month"
+            label={L('customersLostPerMonth', 'Customers lost / month')}
             value={parsed.churnedCustomers.toFixed(1)}
-            sublabel={`${fmtMoney(parsed.lostMrr)} MRR lost monthly`}
+            sublabel={`${fmtMoney(parsed.lostMrr)} ${L('mrrLostMonthly', 'MRR lost monthly')}`}
           />
           <ResultCard
-            label="Net revenue retention (hint)"
+            label={L('netRevenueRetention', 'Net revenue retention (hint)')}
             value={`${parsed.nrr.toFixed(0)}%`}
-            sublabel="1 + growth − churn (simplified)"
+            sublabel={L('nrrFormula', '1 + growth − churn (simplified)')}
           />
         </div>
       }
     >
-      <ResultActions summary={summary} filename="saas-metrics.txt" downloadContent={summary} copyLabel="Copy Summary" />
+      <ResultActions summary={summary} filename="saas-metrics.txt" downloadContent={summary} copyLabel={L('copySummary', 'Copy Summary')} />
       <FormulasNote />
     </CalculatorShell>
   )
 }
 
 function FormulasNote() {
+  const { locale } = useApp()
+  const L = (key: string, fb: string) => tui('saas-ltv-churn-calculator', locale, key, fb)
+
   return (
     <CalculatorNote>
-      📐 Formulas: <code>Lifetime = 1 / churn</code> · <code>LTV = ARPU × gross margin / churn</code> ·{' '}
-      <code>LTV:CAC &lt; 1</code> is unsustainable, <code>1–3</code> is OK, <code>&gt; 3</code> is great ·{' '}
-      <code>CAC payback = CAC / (ARPU × margin)</code> · <code>NRR ≈ (1 + growth − churn)</code>. With 0% churn the
-      lifetime is unbounded, shown as ∞. Real NRR also includes expansion, contraction, and reactivation revenue.
+      {L('fnFormulasTitle', '📐 Formulas: ')}<code>Lifetime = 1 / churn</code> · <code>LTV = ARPU × gross margin / churn</code> ·{' '}
+      <code>LTV:CAC &lt; 1</code>{L('fnIsUnsustainable', ' is unsustainable, ')}<code>1–3</code>{L('fnIsOk', ' is OK, ')}<code>&gt; 3</code>{L('fnIsGreat', ' is great ·')}{' '}
+      <code>CAC payback = CAC / (ARPU × margin)</code> · <code>NRR ≈ (1 + growth − churn)</code>{L('fnOutro', '. With 0% churn the lifetime is unbounded, shown as ∞. Real NRR also includes expansion, contraction, and reactivation revenue.')}
     </CalculatorNote>
   )
 }

@@ -6,6 +6,11 @@ import type { ToolL10n } from '../tool-l10n'
 
 export const removeLineBreaksL10n: ToolL10n = {
   zh: {
+    ui: {
+      inputLabel: '你的文本',
+      outputLabel: '单行结果',
+      note: '📝 移除所有换行,把文本合并为一行。',
+    },
     useCases: [
       '清理从 PDF 复制时夹带的换行',
       '修复邮件转发中断裂的引用行',
@@ -17,6 +22,11 @@ export const removeLineBreaksL10n: ToolL10n = {
     ],
   },
   es: {
+    ui: {
+      inputLabel: 'Tu texto',
+      outputLabel: 'Una sola línea',
+      note: '📝 Elimina todos los saltos de línea y une el texto en una sola línea.',
+    },
     useCases: [
       'limpiar los saltos de línea al copiar desde un PDF',
       'arreglar las líneas de cita rotas al reenviar correos',
@@ -28,6 +38,11 @@ export const removeLineBreaksL10n: ToolL10n = {
     ],
   },
   de: {
+    ui: {
+      inputLabel: 'Dein Text',
+      outputLabel: 'Eine Zeile',
+      note: '📝 Entfernt alle Zeilenumbrüche und verbindet den Text zu einer Zeile.',
+    },
     useCases: [
       'Zeilenumbrüche beim Kopieren aus PDFs entfernen',
       'abgebrochene Zeilen beim Weiterleiten von E-Mails reparieren',

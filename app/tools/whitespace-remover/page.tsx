@@ -17,7 +17,7 @@ export default function Page() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <ToolLayout tool={tool}>
         {/* 升级为 Text Cleaner:整合空白/空行/去重/排序的增强版组件,默认勾选 collapse+trim+dropEmpty */}
-        <TextCleanerClient />
+        <TextCleanerClient slug="whitespace-remover" />
         <WhitespaceRemoverContent />
       </ToolLayout>
     </>

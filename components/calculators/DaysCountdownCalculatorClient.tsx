@@ -2,6 +2,8 @@
 
 import { useEffect, useMemo, useState } from 'react'
 import { CalculatorField, ResultCard, CalculatorNote } from '@/components/calculator/CalculatorField'
+import { useApp } from '@/components/providers/AppProviders'
+import { tui } from '@/lib/i18n/tool-l10n'
 
 /**
  * Days Countdown Calculator 客户端组件
@@ -69,6 +71,9 @@ const inputStyle = {
 }
 
 export function DaysCountdownCalculatorClient() {
+  const { locale } = useApp()
+  const L = (key: string, fb: string) => tui('days-countdown-calculator', locale, key, fb)
+
   const [tab, setTab] = useState<Tab>('countdown')
 
   // Countdown 状态
@@ -118,7 +123,7 @@ export function DaysCountdownCalculatorClient() {
     if (!fromStr && !toStr) return null
     const a = parseDate(fromStr)
     const b = parseDate(toStr)
-    if (!a || !b) return { error: 'Enter both dates in YYYY-MM-DD format.' }
+    if (!a || !b) return { error: L('errBothDates', 'Enter both dates in YYYY-MM-DD format.') }
     const total = Math.round((b.getTime() - a.getTime()) / 86400000)
     const absDays = Math.abs(total)
     const business = Math.abs(businessDaysBetween(a, b))
@@ -131,7 +136,8 @@ export function DaysCountdownCalculatorClient() {
       business,
       weekend: absDays - business,
     }
-  }, [fromStr, toStr])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [fromStr, toStr, locale])
 
   const applyPreset = (kind: 'newyear' | 'christmas' | 'plus30' | 'plus90') => {
     const n = new Date()
@@ -176,7 +182,7 @@ export function DaysCountdownCalculatorClient() {
                 : { color: 'rgb(var(--text-muted))' }
             }
           >
-            {t.label}
+            {L('tab_' + t.id, t.label)}
           </button>
         ))}
       </div>
@@ -187,10 +193,10 @@ export function DaysCountdownCalculatorClient() {
             className="grid grid-cols-1 gap-4 rounded-lg p-4 sm:grid-cols-2"
             style={{ backgroundColor: 'rgb(var(--bg-subtle))' }}
           >
-            <CalculatorField id="cd-date" label="Target date" type="date" value={dateStr} onChange={setDateStr} />
+            <CalculatorField id="cd-date" label={L('targetDate', 'Target date')} type="date" value={dateStr} onChange={setDateStr} />
             <div>
               <label htmlFor="cd-time" className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
-                Time (optional)
+                {L('timeOptional', 'Time (optional)')}
               </label>
               <input
                 id="cd-time"
@@ -220,14 +226,14 @@ export function DaysCountdownCalculatorClient() {
                 className="rounded-full border px-3 py-1 text-xs font-medium transition-colors hover:bg-brand-50"
                 style={{ borderColor: 'rgb(var(--border))', color: 'rgb(var(--text-muted))' }}
               >
-                {label}
+                {L('preset_' + kind, label)}
               </button>
             ))}
           </div>
 
           {dateStr && !target && (
             <div className="rounded-lg border border-red-200 bg-red-50 p-4 text-sm text-red-700">
-              ⚠️ That doesn&apos;t look like a valid date — pick one with the date input above.
+              {L('invalidDateWarn', "⚠️ That doesn't look like a valid date — pick one with the date input above.")}
             </div>
           )}
 
@@ -236,14 +242,14 @@ export function DaysCountdownCalculatorClient() {
               {/* 主时钟 */}
               <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
                 <ResultCard
-                  label={countdown.future ? 'Days left' : 'Days ago'}
+                  label={countdown.future ? L('daysLeft', 'Days left') : L('daysAgo', 'Days ago')}
                   value={countdown.clock.days}
                   highlight
-                  sublabel={countdown.future ? 'until target' : 'since target'}
+                  sublabel={countdown.future ? L('untilTarget', 'until target') : L('sinceTarget', 'since target')}
                 />
-                <ResultCard label="Hours" value={pad(countdown.clock.hours)} />
-                <ResultCard label="Minutes" value={pad(countdown.clock.mins)} />
-                <ResultCard label="Seconds" value={pad(countdown.clock.secs)} />
+                <ResultCard label={L('hours', 'Hours')} value={pad(countdown.clock.hours)} />
+                <ResultCard label={L('minutes', 'Minutes')} value={pad(countdown.clock.mins)} />
+                <ResultCard label={L('seconds', 'Seconds')} value={pad(countdown.clock.secs)} />
               </div>
 
               {!countdown.future && (
@@ -251,26 +257,26 @@ export function DaysCountdownCalculatorClient() {
                   className="rounded-lg border px-4 py-2.5 text-sm"
                   style={{ borderColor: 'rgb(var(--border))', backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text-muted))' }}
                 >
-                  ⏳ The target has already passed — counting elapsed time instead.
+                  {L('targetPassed', '⏳ The target has already passed — counting elapsed time instead.')}
                 </div>
               )}
 
               {/* 分解卡片 */}
               <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
                 <ResultCard
-                  label="Total days"
+                  label={L('totalDays', 'Total days')}
                   value={countdown.totalDays.toFixed(1)}
-                  sublabel="including partial days"
+                  sublabel={L('includingPartialDays', 'including partial days')}
                 />
                 <ResultCard
-                  label="Weeks"
-                  value={`${Math.floor(countdown.clock.days / 7)} wk ${countdown.clock.days % 7} d`}
-                  sublabel="weeks + remaining days"
+                  label={L('weeks', 'Weeks')}
+                  value={`${Math.floor(countdown.clock.days / 7)}${L('wkAbbr', ' wk ')}${countdown.clock.days % 7}${L('dAbbr', ' d')}`}
+                  sublabel={L('weeksRemainingDays', 'weeks + remaining days')}
                 />
                 <ResultCard
-                  label={countdown.future ? 'Business days left' : 'Business days ago'}
+                  label={countdown.future ? L('businessDaysLeft', 'Business days left') : L('businessDaysAgo', 'Business days ago')}
                   value={Math.abs(countdown.business)}
-                  sublabel="Mon–Fri, weekends skipped"
+                  sublabel={L('monFriWeekendsSkipped', 'Mon–Fri, weekends skipped')}
                 />
               </div>
             </>
@@ -284,8 +290,8 @@ export function DaysCountdownCalculatorClient() {
             className="grid grid-cols-1 gap-4 rounded-lg p-4 sm:grid-cols-2"
             style={{ backgroundColor: 'rgb(var(--bg-subtle))' }}
           >
-            <CalculatorField id="db-from" label="Start date" type="date" value={fromStr} onChange={setFromStr} />
-            <CalculatorField id="db-to" label="End date" type="date" value={toStr} onChange={setToStr} />
+            <CalculatorField id="db-from" label={L('startDate', 'Start date')} type="date" value={fromStr} onChange={setFromStr} />
+            <CalculatorField id="db-to" label={L('endDate', 'End date')} type="date" value={toStr} onChange={setToStr} />
           </div>
 
           {!between ? (
@@ -293,27 +299,26 @@ export function DaysCountdownCalculatorClient() {
               className="rounded-lg border p-4 text-sm"
               style={{ borderColor: 'rgb(var(--border))', color: 'rgb(var(--text-muted))' }}
             >
-              Pick two dates to see the gap between them.
+              {L('pickTwoDates', 'Pick two dates to see the gap between them.')}
             </div>
           ) : 'error' in between ? (
-            <div className="rounded-lg border border-red-200 bg-red-50 p-4 text-sm text-red-700">⚠️ {between.error}</div>
+            <div className="rounded-lg border border-red-200 bg-red-50 p-4 text-sm text-red-700">{L('errorWarn', '⚠️ ')}{between.error}</div>
           ) : (
             <>
               <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
                 <ResultCard
-                  label="Total days"
+                  label={L('totalDays', 'Total days')}
                   value={between.absDays}
                   highlight
-                  sublabel={between.days < 0 ? 'end date is earlier' : `${between.days} days apart`}
+                  sublabel={between.days < 0 ? L('endEarlier', 'end date is earlier') : `${between.days} ${L('daysApart', 'days apart')}`}
                 />
-                <ResultCard label="Weeks" value={`${between.weeks} wk ${between.weekDays} d`} sublabel="weeks + days" />
-                <ResultCard label="≈ Months" value={between.months} sublabel="based on 30.44-day months" />
-                <ResultCard label="Business days" value={between.business} sublabel="Mon–Fri only" />
-                <ResultCard label="Weekend days" value={between.weekend} sublabel="Saturdays + Sundays" />
+                <ResultCard label={L('weeks', 'Weeks')} value={`${between.weeks}${L('wkAbbr', ' wk ')}${between.weekDays}${L('dAbbr', ' d')}`} sublabel={L('weeksDays', 'weeks + days')} />
+                <ResultCard label={L('approxMonths', '≈ Months')} value={between.months} sublabel={L('basedOn3044', 'based on 30.44-day months')} />
+                <ResultCard label={L('businessDays', 'Business days')} value={between.business} sublabel={L('monFriOnly', 'Mon–Fri only')} />
+                <ResultCard label={L('weekendDays', 'Weekend days')} value={between.weekend} sublabel={L('satsSuns', 'Saturdays + Sundays')} />
               </div>
               <CalculatorNote>
-                📅 The count treats the start date as day zero and counts up to (and including) the end date. Swapping
-                the two dates gives the same magnitudes with a negative sign.
+                {L('note', '📅 The count treats the start date as day zero and counts up to (and including) the end date. Swapping the two dates gives the same magnitudes with a negative sign.')}
               </CalculatorNote>
             </>
           )}

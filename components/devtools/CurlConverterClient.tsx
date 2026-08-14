@@ -3,6 +3,8 @@
 import { useState, useMemo, useCallback } from 'react'
 import { CopyButton } from '@/components/CopyButton'
 import { LoadSampleButton } from '@/components/LoadSampleButton'
+import { useApp } from '@/components/providers/AppProviders'
+import { tui } from '@/lib/i18n/tool-l10n'
 
 /**
  * Curl to Code Converter —— 纯前端 tokenizer + 多语言代码生成
@@ -284,6 +286,9 @@ function genPython(c: ParsedCurl): string {
 }
 
 export function CurlConverterClient() {
+  const { locale } = useApp()
+  const L = (key: string, fb: string) => tui('curl-converter', locale, key, fb)
+
   const [input, setInput] = useState('')
 
   const result = useMemo<{ parsed?: ParsedCurl; fetch?: string; axios?: string; python?: string; error?: string }>(() => {
@@ -297,9 +302,10 @@ export function CurlConverterClient() {
         python: genPython(parsed),
       }
     } catch (e) {
-      return { error: e instanceof Error ? e.message : 'Invalid curl command' }
+      return { error: e instanceof Error ? e.message : L('invalidCurl', 'Invalid curl command') }
     }
-  }, [input])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [input, locale])
 
   const handleLoadSample = useCallback(() => setInput(SAMPLE_CURL), [])
 
@@ -315,7 +321,7 @@ export function CurlConverterClient() {
       <div>
         <div className="mb-2 flex items-center justify-between">
           <label htmlFor="curl-input" className="text-sm font-medium text-slate-700">
-            Paste your curl command
+            {L('pasteCurl', 'Paste your curl command')}
           </label>
           <div className="flex items-center gap-2">
             <LoadSampleButton onLoad={handleLoadSample} variant="compact" />
@@ -325,7 +331,7 @@ export function CurlConverterClient() {
                 onClick={() => setInput('')}
                 className="-my-1 rounded-md px-2 py-1 text-xs text-slate-400 hover:text-red-500 sm:text-sm"
               >
-                Clear
+                {L('clear', 'Clear')}
               </button>
             )}
           </div>
@@ -360,16 +366,16 @@ export function CurlConverterClient() {
             {result.parsed.method}
           </span>
           <span className="font-mono" style={{ color: 'rgb(var(--text-muted))' }}>
-            {result.parsed.url || '(no URL)'}
+            {result.parsed.url || L('noUrl', '(no URL)')}
           </span>
           {Object.keys(result.parsed.headers).length > 0 && (
             <span className="rounded-md px-2 py-1" style={{ backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text-subtle))' }}>
-              {Object.keys(result.parsed.headers).length} header(s)
+              {Object.keys(result.parsed.headers).length} {L('headers', 'header(s)')}
             </span>
           )}
           {result.parsed.body && (
             <span className="rounded-md px-2 py-1" style={{ backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text-subtle))' }}>
-              has body
+              {L('hasBody', 'has body')}
             </span>
           )}
         </div>
@@ -382,7 +388,7 @@ export function CurlConverterClient() {
             <div key={tab.label}>
               <div className="mb-2 flex items-center justify-between">
                 <span className="text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>{tab.label}</span>
-                <CopyButton value={tab.code} label="Copy" />
+                <CopyButton value={tab.code} label={L('copy', 'Copy')} />
               </div>
               <pre
                 className="overflow-x-auto rounded-lg border bg-slate-50 p-4 text-xs"
@@ -395,7 +401,7 @@ export function CurlConverterClient() {
       )}
 
       <p className="rounded-md p-3 text-xs" style={{ backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text-subtle))' }}>
-        🔒 100% client-side — parsing runs in your browser. No command is executed; only text is converted.
+        {L('note', '🔒 100% client-side — parsing runs in your browser. No command is executed; only text is converted.')}
       </p>
     </div>
   )

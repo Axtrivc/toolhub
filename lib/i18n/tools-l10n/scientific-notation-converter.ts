@@ -6,6 +6,10 @@ import type { ToolL10n } from '../tool-l10n'
 
 export const scientificNotationConverterL10n: ToolL10n = {
   zh: {
+    formula: {
+      formula: 'N = a × 10^n    (1 ≤ |a| < 10)',
+      explain: '科学记数法把一个数写成尾数 a 乘以 10 的幂。指数 n 表示数量级;转换只是移动小数点。',
+    },
     ui: {
       'in.number': '数字',
       'out.sci': '科学计数法',
@@ -24,6 +28,10 @@ export const scientificNotationConverterL10n: ToolL10n = {
     ],
   },
   es: {
+    formula: {
+      formula: 'N = a × 10^n    (1 ≤ |a| < 10)',
+      explain: 'La notación científica escribe un número como mantisa a por una potencia de diez. El exponente n indica el orden de magnitud; convertir solo mueve el decimal.',
+    },
     ui: {
       'in.number': 'Número',
       'out.sci': 'Notación científica',
@@ -42,6 +50,10 @@ export const scientificNotationConverterL10n: ToolL10n = {
     ],
   },
   de: {
+    formula: {
+      formula: 'N = a × 10^n    (1 ≤ |a| < 10)',
+      explain: 'Die wissenschaftliche Notation schreibt eine Zahl als Mantisse a mal einer Zehnerpotenz. Der Exponent n zeigt die Größenordnung; Umrechnen verschiebt nur das Komma.',
+    },
     ui: {
       'in.number': 'Zahl',
       'out.sci': 'Wissenschaftliche Schreibweise',

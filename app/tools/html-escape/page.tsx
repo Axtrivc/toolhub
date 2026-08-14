@@ -16,7 +16,7 @@ export default function Page() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <ToolLayout tool={tool}>
-        <HTMLEscapeTool initialMode="encode" />
+        <HTMLEscapeTool initialMode="encode" slug="html-escape" />
         <HTMLEscapeContent />
       </ToolLayout>
     </>

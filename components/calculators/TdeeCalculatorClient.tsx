@@ -4,6 +4,8 @@ import { useState, useMemo, useCallback } from 'react'
 import { CalculatorField, ResultCard, CalculatorNote } from '@/components/calculator/CalculatorField'
 import { LoadSampleButton } from '@/components/LoadSampleButton'
 import { ResultActions } from '@/components/ResultActions'
+import { useApp } from '@/components/providers/AppProviders'
+import { tui } from '@/lib/i18n/tool-l10n'
 
 /**
  * TDEE Calculator —— 每日总能量消耗
@@ -26,6 +28,19 @@ const ACTIVITY = [
 const round = (n: number) => Math.round(n)
 
 export function TdeeCalculatorClient() {
+  const { locale } = useApp()
+  // 取本地化 UI 串;缺失回退英文(SSR 恒英文)。
+  const L = (key: string, fb: string) => tui('tdee-calculator', locale, key, fb)
+
+  // 活动等级选项文案本地化(key → 已翻译标签)
+  const activityLabels: Record<string, string> = {
+    '1.2': L('activitySedentary', 'Sedentary (little or no exercise)'),
+    '1.375': L('activityLight', 'Lightly active (1-3 days/week)'),
+    '1.55': L('activityModerate', 'Moderately active (3-5 days/week)'),
+    '1.725': L('activityVery', 'Very active (6-7 days/week)'),
+    '1.9': L('activityExtra', 'Extra active (physical job / 2x day)'),
+  }
+
   const [weight, setWeight] = useState('70') // kg
   const [height, setHeight] = useState('175') // cm
   const [age, setAge] = useState('30')
@@ -68,69 +83,71 @@ export function TdeeCalculatorClient() {
   }, [result])
 
   const summary = useMemo(() => {
-    if (!result || !goals) return 'Enter your stats to calculate TDEE.'
+    if (!result || !goals) return L('summaryEmpty', 'Enter your stats to calculate TDEE.')
     return [
-      'TDEE Calculation Summary',
-      `  Sex: ${sex}, Age: ${age}, Weight: ${weight} kg, Height: ${height} cm`,
-      `  Activity factor: ${activity}`,
-      `  BMR (Mifflin-St Jeor): ${round(result.bmr)} kcal/day`,
-      `  TDEE (maintenance): ${round(result.tdee)} kcal/day`,
-      'Daily calorie targets:',
-      `    Aggressive cut (-20%): ${goals.cut.cal} kcal`,
-      `    Mild cut (-10%): ${goals.mildCut.cal} kcal`,
-      `    Maintain: ${goals.maintain.cal} kcal`,
-      `    Lean bulk (+10%): ${goals.bulk.cal} kcal`,
-      `    Fast bulk (+20%): ${goals.fastBulk.cal} kcal`,
+      L('summaryTitle', 'TDEE Calculation Summary'),
+      `  ${L('sSex', 'Sex: ')}${sex}, ${L('sAge', 'Age: ')}${age}, ${L('sWeight', 'Weight: ')}${weight} kg, ${L('sHeight', 'Height: ')}${height} cm`,
+      `  ${L('sActivityFactor', 'Activity factor: ')}${activity}`,
+      `  ${L('sBmr', 'BMR (Mifflin-St Jeor): ')}${round(result.bmr)} kcal/day`,
+      `  ${L('sTdee', 'TDEE (maintenance): ')}${round(result.tdee)} kcal/day`,
+      L('sDailyTargets', 'Daily calorie targets:'),
+      `    ${L('sAggressiveCut', 'Aggressive cut (-20%): ')}${goals.cut.cal} kcal`,
+      `    ${L('sMildCut', 'Mild cut (-10%): ')}${goals.mildCut.cal} kcal`,
+      `    ${L('sMaintain', 'Maintain: ')}${goals.maintain.cal} kcal`,
+      `    ${L('sLeanBulk', 'Lean bulk (+10%): ')}${goals.bulk.cal} kcal`,
+      `    ${L('sFastBulk', 'Fast bulk (+20%): ')}${goals.fastBulk.cal} kcal`,
     ].join('\n')
-  }, [result, goals, sex, age, weight, height, activity])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [result, goals, sex, age, weight, height, activity, locale])
 
   const csvContent = useMemo(() => {
     if (!result || !goals) return summary
     const rows: string[][] = [
-      ['Field', 'Value'],
-      ['Sex', sex],
-      ['Age', `${age} yrs`],
-      ['Weight', `${weight} kg`],
-      ['Height', `${height} cm`],
-      ['Activity factor', activity],
-      ['BMR', `${round(result.bmr)} kcal/day`],
-      ['TDEE (maintenance)', `${round(result.tdee)} kcal/day`],
+      [L('csvField', 'Field'), L('csvValue', 'Value')],
+      [L('csvSex', 'Sex'), sex],
+      [L('csvAge', 'Age'), `${age} ${L('yrsSuffix', 'yrs')}`],
+      [L('csvWeight', 'Weight'), `${weight} kg`],
+      [L('csvHeight', 'Height'), `${height} cm`],
+      [L('csvActivityFactor', 'Activity factor'), activity],
+      [L('csvBmr', 'BMR'), `${round(result.bmr)} kcal/day`],
+      [L('csvTdeeMaintenance', 'TDEE (maintenance)'), `${round(result.tdee)} kcal/day`],
       [],
-      ['Goal', 'Calories', 'Protein (g)', 'Carbs (g)', 'Fat (g)'],
-      ['Aggressive cut (-20%)', String(goals.cut.cal), String(goals.cut.proteinG), String(goals.cut.carbG), String(goals.cut.fatG)],
-      ['Mild cut (-10%)', String(goals.mildCut.cal), String(goals.mildCut.proteinG), String(goals.mildCut.carbG), String(goals.mildCut.fatG)],
-      ['Maintain', String(goals.maintain.cal), String(goals.maintain.proteinG), String(goals.maintain.carbG), String(goals.maintain.fatG)],
-      ['Lean bulk (+10%)', String(goals.bulk.cal), String(goals.bulk.proteinG), String(goals.bulk.carbG), String(goals.bulk.fatG)],
-      ['Fast bulk (+20%)', String(goals.fastBulk.cal), String(goals.fastBulk.proteinG), String(goals.fastBulk.carbG), String(goals.fastBulk.fatG)],
+      [L('csvGoal', 'Goal'), L('csvCalories', 'Calories'), L('csvProteinG', 'Protein (g)'), L('csvCarbsG', 'Carbs (g)'), L('csvFatG', 'Fat (g)')],
+      [L('csvAggressiveCut', 'Aggressive cut (-20%)'), String(goals.cut.cal), String(goals.cut.proteinG), String(goals.cut.carbG), String(goals.cut.fatG)],
+      [L('csvMildCut', 'Mild cut (-10%)'), String(goals.mildCut.cal), String(goals.mildCut.proteinG), String(goals.mildCut.carbG), String(goals.mildCut.fatG)],
+      [L('csvMaintain', 'Maintain'), String(goals.maintain.cal), String(goals.maintain.proteinG), String(goals.maintain.carbG), String(goals.maintain.fatG)],
+      [L('csvLeanBulk', 'Lean bulk (+10%)'), String(goals.bulk.cal), String(goals.bulk.proteinG), String(goals.bulk.carbG), String(goals.bulk.fatG)],
+      [L('csvFastBulk', 'Fast bulk (+20%)'), String(goals.fastBulk.cal), String(goals.fastBulk.proteinG), String(goals.fastBulk.carbG), String(goals.fastBulk.fatG)],
     ]
     return rows.map((r) => r.map((c) => (/[",\n]/.test(c) ? `"${c.replace(/"/g, '""')}"` : c)).join(',')).join('\n')
-  }, [result, goals, summary, sex, age, weight, height, activity])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [result, goals, summary, sex, age, weight, height, activity, locale])
 
   return (
     <div className="space-y-6">
       {/* 输入区 + Load Sample */}
       <div className="flex flex-wrap items-center justify-between gap-3">
-        <span className="text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>Your stats</span>
+        <span className="text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>{L('yourStats', 'Your stats')}</span>
         <LoadSampleButton onLoad={handleLoadSample} />
       </div>
       <div className="grid grid-cols-1 gap-4 rounded-lg p-4 sm:grid-cols-3" style={{ backgroundColor: 'rgb(var(--bg-subtle))' }}>
-        <CalculatorField id="weight" label="Weight" value={weight} onChange={setWeight} suffix="kg" placeholder="70" />
-        <CalculatorField id="height" label="Height" value={height} onChange={setHeight} suffix="cm" placeholder="175" />
-        <CalculatorField id="age" label="Age" value={age} onChange={setAge} suffix="yrs" placeholder="30" />
+        <CalculatorField id="weight" label={L('weight', 'Weight')} value={weight} onChange={setWeight} suffix="kg" placeholder="70" />
+        <CalculatorField id="height" label={L('height', 'Height')} value={height} onChange={setHeight} suffix="cm" placeholder="175" />
+        <CalculatorField id="age" label={L('age', 'Age')} value={age} onChange={setAge} suffix={L('yrsSuffix', 'yrs')} placeholder="30" />
         <div>
-          <label htmlFor="sex" className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>Sex</label>
+          <label htmlFor="sex" className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>{L('sex', 'Sex')}</label>
           <select
             id="sex"
             value={sex}
             onChange={(e) => setSex(e.target.value as 'male' | 'female')}
             className="w-full rounded-lg border p-3 shadow-sm outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200" style={{ borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rgb(var(--bg-card))', color: 'rgb(var(--text))' }}
           >
-            <option value="male">Male</option>
-            <option value="female">Female</option>
+            <option value="male">{L('optMale', 'Male')}</option>
+            <option value="female">{L('optFemale', 'Female')}</option>
           </select>
         </div>
         <div className="sm:col-span-2">
-          <label htmlFor="activity" className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>Activity level</label>
+          <label htmlFor="activity" className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>{L('activityLevel', 'Activity level')}</label>
           <select
             id="activity"
             value={activity}
@@ -138,7 +155,7 @@ export function TdeeCalculatorClient() {
             className="w-full rounded-lg border p-3 shadow-sm outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200" style={{ borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rgb(var(--bg-card))', color: 'rgb(var(--text))' }}
           >
             {ACTIVITY.map((a) => (
-              <option key={a.key} value={a.key}>{a.label}</option>
+              <option key={a.key} value={a.key}>{activityLabels[a.key] ?? a.label}</option>
             ))}
           </select>
         </div>
@@ -148,22 +165,22 @@ export function TdeeCalculatorClient() {
         <>
           {/* 主结果:BMR + TDEE */}
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-            <ResultCard label="BMR (at rest)" value={`${round(result.bmr)} kcal`} sublabel="Mifflin-St Jeor formula" />
-            <ResultCard label="TDEE (maintenance)" value={`${round(result.tdee)} kcal`} highlight sublabel="BMR × activity factor" />
+            <ResultCard label={L('bmrAtRest', 'BMR (at rest)')} value={`${round(result.bmr)} kcal`} sublabel={L('mifflinStJeor', 'Mifflin-St Jeor formula')} />
+            <ResultCard label={L('tdeeMaintenance', 'TDEE (maintenance)')} value={`${round(result.tdee)} kcal`} highlight sublabel={L('bmrTimesActivity', 'BMR × activity factor')} />
           </div>
 
           {/* 四档热量目标 + 宏量 */}
           <div>
-            <h3 className="mb-2 text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>Daily calorie targets & macros</h3>
+            <h3 className="mb-2 text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>{L('dailyTargetsTitle', 'Daily calorie targets & macros')}</h3>
             <div className="overflow-x-auto rounded-lg border" style={{ borderColor: 'rgb(var(--border-strong))' }}>
               <table className="w-full text-left text-sm">
                 <thead className="text-xs uppercase" style={{ backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text-subtle))' }}>
                   <tr>
-                    <th className="px-3 py-2">Goal</th>
-                    <th className="px-3 py-2 text-right">Calories</th>
-                    <th className="px-3 py-2 text-right">Protein</th>
-                    <th className="px-3 py-2 text-right">Carbs</th>
-                    <th className="px-3 py-2 text-right">Fat</th>
+                    <th className="px-3 py-2">{L('thGoal', 'Goal')}</th>
+                    <th className="px-3 py-2 text-right">{L('thCalories', 'Calories')}</th>
+                    <th className="px-3 py-2 text-right">{L('thProtein', 'Protein')}</th>
+                    <th className="px-3 py-2 text-right">{L('thCarbs', 'Carbs')}</th>
+                    <th className="px-3 py-2 text-right">{L('thFat', 'Fat')}</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-100">
@@ -175,7 +192,20 @@ export function TdeeCalculatorClient() {
                     ['Fast bulk (+20%)', goals.fastBulk, 'text-emerald-700'],
                   ] as const).map(([label, g, color]) => (
                     <tr key={label} className={label === 'Maintain' ? 'bg-brand-50/50' : ''}>
-                      <td className={`px-3 py-2 font-medium ${color}`}>{label}</td>
+                      <td className={`px-3 py-2 font-medium ${color}`}>
+                        {L(
+                          label === 'Aggressive cut (−20%)'
+                            ? 'goalAggressiveCut'
+                            : label === 'Mild cut (−10%)'
+                              ? 'goalMildCut'
+                              : label === 'Maintain'
+                                ? 'goalMaintain'
+                                : label === 'Lean bulk (+10%)'
+                                  ? 'goalLeanBulk'
+                                  : 'goalFastBulk',
+                          label,
+                        )}
+                      </td>
                       <td className="px-3 py-2 text-right font-mono font-semibold">{g.cal}</td>
                       <td className="px-3 py-2 text-right font-mono">{g.proteinG} g</td>
                       <td className="px-3 py-2 text-right font-mono">{g.carbG} g</td>
@@ -192,19 +222,17 @@ export function TdeeCalculatorClient() {
             filename="tdee-calculator-result.csv"
             downloadContent={csvContent}
             mime="text/csv;charset=utf-8;"
-            copyLabel="Copy Summary"
+            copyLabel={L('copySummary', 'Copy Summary')}
           />
         </>
       ) : (
         <div className="rounded-lg border-2 border-dashed p-6 text-center text-sm" style={{ borderColor: 'rgb(var(--border-strong))', color: 'rgb(var(--text-faint))' }}>
-          Enter your weight, height, age, and activity level to see your TDEE and calorie targets
+          {L('emptyState', 'Enter your weight, height, age, and activity level to see your TDEE and calorie targets')}
         </div>
       )}
 
       <CalculatorNote>
-        🔥 TDEE (Total Daily Energy Expenditure) is your maintenance calories — what you burn in a day. Eat less to lose
-        fat, more to gain. The macro split shown (30% protein / 40% carbs / 30% fat) is a balanced starting point;
-        adjust protein to 1.6–2.2 g/kg of body weight for best results. Estimates vary ~10% by individual metabolism.
+        {L('noteText', '🔥 TDEE (Total Daily Energy Expenditure) is your maintenance calories — what you burn in a day. Eat less to lose fat, more to gain. The macro split shown (30% protein / 40% carbs / 30% fat) is a balanced starting point; adjust protein to 1.6–2.2 g/kg of body weight for best results. Estimates vary ~10% by individual metabolism.')}
       </CalculatorNote>
     </div>
   )

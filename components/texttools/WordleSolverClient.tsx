@@ -2,6 +2,8 @@
 
 import { useState, useMemo, useCallback } from 'react'
 import { FIVE_LETTER_WORDS } from '@/lib/wordle-words'
+import { useApp } from '@/components/providers/AppProviders'
+import { tui } from '@/lib/i18n/tool-l10n'
 
 /**
  * Wordle Solver / Word Finder
@@ -32,6 +34,10 @@ function parseExtraWords(text: string): string[] {
 type Mode = 'solver' | 'anagram'
 
 export function WordleSolverClient() {
+  const { locale } = useApp()
+  // 取本地化 UI 串;缺失回退英文(SSR 恒英文)。
+  const L = (key: string, fb: string) => tui('wordle-solver', locale, key, fb)
+
   const [mode, setMode] = useState<Mode>('solver')
   const [greens, setGreens] = useState<string[]>(['', '', '', '', ''])
   const [yellows, setYellows] = useState('')
@@ -119,7 +125,7 @@ export function WordleSolverClient() {
               key={w}
               type="button"
               onClick={() => copyWord(w)}
-              title="Click to copy"
+              title={L('clickToCopy', 'Click to copy')}
               className={`rounded-md border px-3 py-1.5 font-mono text-sm uppercase tracking-wider transition hover:border-blue-400 ${
                 copiedWord === w ? 'border-green-400' : ''
               }`}
@@ -134,7 +140,7 @@ export function WordleSolverClient() {
           ))}
           {remaining > 0 && (
             <span className="px-2 py-1.5 text-sm" style={{ color: 'rgb(var(--text-faint))' }}>
-              +{remaining} more
+              +{remaining} {L('more', 'more')}
             </span>
           )}
         </div>
@@ -151,14 +157,14 @@ export function WordleSolverClient() {
           onClick={() => setMode('solver')}
           className={`btn ${mode === 'solver' ? 'btn-primary' : 'btn-secondary'}`}
         >
-          Wordle solver
+          {L('solverMode', 'Wordle solver')}
         </button>
         <button
           type="button"
           onClick={() => setMode('anagram')}
           className={`btn ${mode === 'anagram' ? 'btn-primary' : 'btn-secondary'}`}
         >
-          Anagram mode
+          {L('anagramMode', 'Anagram mode')}
         </button>
       </div>
 
@@ -167,7 +173,7 @@ export function WordleSolverClient() {
           {/* 绿格:已知位置 */}
           <div>
             <label className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
-              Known positions (green)
+              {L('knownPositions', 'Known positions (green)')}
             </label>
             <div className="flex gap-2">
               {greens.map((v, i) => (
@@ -178,7 +184,7 @@ export function WordleSolverClient() {
                   maxLength={1}
                   value={v}
                   onChange={(e) => setGreen(i, e.target.value)}
-                  aria-label={`Letter in position ${i + 1}`}
+                  aria-label={L('letterPosition', 'Letter in position {n}').replace('{n}', String(i + 1))}
                   className="h-12 w-12 rounded-lg border text-center font-mono text-lg uppercase shadow-sm outline-none transition focus:ring-2"
                   style={inputStyle}
                 />
@@ -189,14 +195,14 @@ export function WordleSolverClient() {
           <div className="grid gap-4 sm:grid-cols-2">
             <div>
               <label htmlFor="wordle-must" className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
-                Must contain (yellow)
+                {L('mustContain', 'Must contain (yellow)')}
               </label>
               <input
                 id="wordle-must"
                 type="text"
                 value={yellows}
                 onChange={(e) => setYellows(e.target.value)}
-                placeholder="e.g. ar"
+                placeholder={L('mustPlaceholder', 'e.g. ar')}
                 spellCheck={false}
                 className="w-full rounded-lg border p-3 font-mono text-sm shadow-sm outline-none transition focus:ring-2"
                 style={inputStyle}
@@ -204,14 +210,14 @@ export function WordleSolverClient() {
             </div>
             <div>
               <label htmlFor="wordle-not" className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
-                Must NOT contain (grey)
+                {L('mustNotContain', 'Must NOT contain (grey)')}
               </label>
               <input
                 id="wordle-not"
                 type="text"
                 value={greys}
                 onChange={(e) => setGreys(e.target.value)}
-                placeholder="e.g. xyz"
+                placeholder={L('notPlaceholder', 'e.g. xyz')}
                 spellCheck={false}
                 className="w-full rounded-lg border p-3 font-mono text-sm shadow-sm outline-none transition focus:ring-2"
                 style={inputStyle}
@@ -222,17 +228,24 @@ export function WordleSolverClient() {
           {/* 结果区 */}
           {!hasSolverInput ? (
             <p className="rounded-md p-3 text-sm" style={{ backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text-subtle))' }}>
-              Enter at least one constraint above — a green position, letters the word must contain, or letters to
-              exclude — and matching words will appear here.
+              {L(
+                'solverEmpty',
+                'Enter at least one constraint above — a green position, letters the word must contain, or letters to exclude — and matching words will appear here.',
+              )}
             </p>
           ) : results.length === 0 ? (
             <p className="rounded-md p-3 text-sm" style={{ backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text-subtle))' }}>
-              No words match those constraints. Double-check that grey letters aren&apos;t also marked green or yellow.
+              {L(
+                'solverNoMatch',
+                "No words match those constraints. Double-check that grey letters aren't also marked green or yellow.",
+              )}
             </p>
           ) : (
             <div className="space-y-3">
               <span className="text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>
-                {results.length} matching word{results.length === 1 ? '' : 's'} — click any word to copy it
+                {results.length}{' '}
+                {results.length === 1 ? L('matchingWordSingular', 'matching word') : L('matchingWordPlural', 'matching words')}{' '}
+                — {L('clickAnyWordToCopy', 'click any word to copy it')}
               </span>
               {resultList}
             </div>
@@ -243,36 +256,37 @@ export function WordleSolverClient() {
           {/* 字母重排模式 */}
           <div>
             <label htmlFor="wordle-anagram" className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
-              Available letters (3–10)
+              {L('anagramLabel', 'Available letters (3–10)')}
             </label>
             <input
               id="wordle-anagram"
               type="text"
               value={anagramLetters}
               onChange={(e) => setAnagramLetters(e.target.value)}
-              placeholder="e.g. rates"
+              placeholder={L('anagramPlaceholder', 'e.g. rates')}
               maxLength={10}
               spellCheck={false}
               className="w-full max-w-md rounded-lg border p-3 font-mono text-sm shadow-sm outline-none transition focus:ring-2"
               style={inputStyle}
             />
             <p className="mt-1.5 text-xs" style={{ color: 'rgb(var(--text-faint))' }}>
-              Finds dictionary words (up to 5 letters) that can be spelled using only these letters.
+              {L('anagramHint', 'Finds dictionary words (up to 5 letters) that can be spelled using only these letters.')}
             </p>
           </div>
 
           {anagramLetters.replace(/[^a-zA-Z]/g, '').length < 3 ? (
             <p className="rounded-md p-3 text-sm" style={{ backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text-subtle))' }}>
-              Type at least 3 letters to find words you can build from them.
+              {L('anagramEmpty', 'Type at least 3 letters to find words you can build from them.')}
             </p>
           ) : results.length === 0 ? (
             <p className="rounded-md p-3 text-sm" style={{ backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text-subtle))' }}>
-              No words can be built from those letters. Try adding more letters or paste extra words below.
+              {L('anagramNoMatch', 'No words can be built from those letters. Try adding more letters or paste extra words below.')}
             </p>
           ) : (
             <div className="space-y-3">
               <span className="text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>
-                {results.length} word{results.length === 1 ? '' : 's'} found — click any word to copy it
+                {results.length} {results.length === 1 ? L('wordSingular', 'word') : L('wordPlural', 'words')}{' '}
+                {L('foundClickToCopy', 'found — click any word to copy it')}
               </span>
               {resultList}
             </div>
@@ -283,7 +297,10 @@ export function WordleSolverClient() {
       {/* 补充词表 */}
       <div>
         <label htmlFor="wordle-extra" className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
-          Extra words (optional — one per line or space-separated, merged into this session&apos;s dictionary)
+          {L(
+            'extraWordsLabel',
+            "Extra words (optional — one per line or space-separated, merged into this session's dictionary)",
+          )}
         </label>
         <textarea
           id="wordle-extra"
@@ -298,8 +315,9 @@ export function WordleSolverClient() {
       </div>
 
       <p className="rounded-md p-3 text-xs" style={{ backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text-subtle))' }}>
-        🔒 100% client-side — a {FIVE_LETTER_WORDS.length.toLocaleString('en-US')}-word dictionary is bundled with the
-        page; nothing is looked up online.
+        {L('privacyIntro', '🔒 100% client-side — a ')}
+        {FIVE_LETTER_WORDS.length.toLocaleString('en-US')}
+        {L('privacyOutro', '-word dictionary is bundled with the page; nothing is looked up online.')}
       </p>
     </div>
   )

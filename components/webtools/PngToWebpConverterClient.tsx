@@ -1,6 +1,8 @@
 'use client'
 
 import { useState, useRef, useCallback, useEffect } from 'react'
+import { useApp } from '@/components/providers/AppProviders'
+import { tui } from '@/lib/i18n/tool-l10n'
 
 /**
  * PNG / JPG to WebP Converter —— 纯前端 canvas 转码为 WebP
@@ -29,6 +31,9 @@ function formatBytes(bytes: number): string {
 }
 
 export function PngToWebpConverterClient() {
+  const { locale } = useApp()
+  const L = (key: string, fb: string) => tui('png-to-webp-converter', locale, key, fb)
+
   const [imgSrc, setImgSrc] = useState<string>('')
   const [imgName, setImgName] = useState<string>('image')
   const [source, setSource] = useState<SourceMeta | null>(null)
@@ -45,7 +50,7 @@ export function PngToWebpConverterClient() {
     setError('')
     setUnsupported(false)
     if (file.type !== 'image/png' && file.type !== 'image/jpeg') {
-      setError('Please upload a PNG or JPG image file.')
+      setError(L('errUploadPngJpg', 'Please upload a PNG or JPG image file.'))
       return
     }
     const reader = new FileReader()
@@ -59,7 +64,7 @@ export function PngToWebpConverterClient() {
         format: file.type === 'image/png' ? 'PNG' : 'JPG',
       })
     }
-    reader.onerror = () => setError('Could not read the file.')
+    reader.onerror = () => setError(L('errReadFile', 'Could not read the file.'))
     reader.readAsDataURL(file)
   }, [])
 
@@ -94,7 +99,7 @@ export function PngToWebpConverterClient() {
         prev ? { ...prev, width: img.naturalWidth, height: img.naturalHeight } : null,
       )
     }
-    img.onerror = () => setError('Could not decode the image file.')
+    img.onerror = () => setError(L('errDecodeImage', 'Could not decode the image file.'))
     img.src = imgSrc
   }, [imgSrc])
 
@@ -111,7 +116,7 @@ export function PngToWebpConverterClient() {
     canvas.toBlob(
       (blob) => {
         if (!blob) {
-          setError('Conversion failed in canvas.')
+          setError(L('errConversionFailed', 'Conversion failed in canvas.'))
           return
         }
         // 老 Safari 的 toBlob 不认识 image/webp,会静默回退为 PNG
@@ -170,10 +175,10 @@ export function PngToWebpConverterClient() {
         >
           <span className="text-4xl" aria-hidden="true">🖼️</span>
           <span className="mt-3 text-sm font-medium" style={{ color: 'rgb(var(--text))' }}>
-            Click to upload or drag &amp; drop
+            {L('uploadPrompt', 'Click to upload or drag & drop')}
           </span>
           <span className="mt-1 text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>
-            PNG or JPG images
+            {L('uploadHint', 'PNG or JPG images')}
           </span>
           <input id="png-webp-upload" type="file" accept="image/*" onChange={onInputChange} className="hidden" />
         </label>
@@ -189,8 +194,7 @@ export function PngToWebpConverterClient() {
       {/* 浏览器不支持 WebP 编码 */}
       {unsupported && (
         <div className="rounded-lg border border-red-200 bg-red-50 p-4 text-sm text-red-700">
-          ⚠️ Your browser cannot encode WebP (canvas.toBlob fell back to PNG). This affects older
-          versions of Safari — please use a current Chrome, Edge, Firefox, or Safari 14+ to convert.
+          ⚠️ {L('errUnsupportedWebp', 'Your browser cannot encode WebP (canvas.toBlob fell back to PNG). This affects older versions of Safari — please use a current Chrome, Edge, Firefox, or Safari 14+ to convert.')}
         </div>
       )}
 
@@ -201,7 +205,7 @@ export function PngToWebpConverterClient() {
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={imgSrc}
-              alt="Uploaded source"
+              alt={L('uploadedSourceAlt', 'Uploaded source')}
               className="h-20 w-20 rounded-lg border object-contain"
               style={{ borderColor: 'rgb(var(--border))' }}
             />
@@ -210,12 +214,12 @@ export function PngToWebpConverterClient() {
                 {imgName}
               </div>
               <div className="text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>
-                {source.width > 0 ? `${source.width} × ${source.height} px` : 'Reading…'} ·{' '}
+                {source.width > 0 ? `${source.width} × ${source.height} px` : L('reading', 'Reading…')} ·{' '}
                 {formatBytes(source.size)} · {source.format}
               </div>
             </div>
             <label htmlFor="png-webp-reupload" className="btn btn-secondary cursor-pointer text-xs">
-              Change
+              {L('change', 'Change')}
               <input id="png-webp-reupload" type="file" accept="image/*" onChange={onInputChange} className="hidden" />
             </label>
           </div>
@@ -227,7 +231,7 @@ export function PngToWebpConverterClient() {
               className="mb-1.5 block text-sm font-medium"
               style={{ color: 'rgb(var(--text-muted))' }}
             >
-              WebP quality — {Math.round(quality * 100)}%
+              {L('webpQualityLabel', 'WebP quality —')} {Math.round(quality * 100)}%
             </label>
             <input
               id="webp-quality"
@@ -240,8 +244,8 @@ export function PngToWebpConverterClient() {
               className="w-full accent-blue-600"
             />
             <div className="mt-1 flex justify-between text-[11px]" style={{ color: 'rgb(var(--text-faint))' }}>
-              <span>Smallest file</span>
-              <span>Best quality</span>
+              <span>{L('smallestFile', 'Smallest file')}</span>
+              <span>{L('bestQuality', 'Best quality')}</span>
             </div>
           </div>
 
@@ -254,7 +258,7 @@ export function PngToWebpConverterClient() {
               <div className="grid grid-cols-3 gap-4 text-center">
                 <div>
                   <div className="text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>
-                    Original ({source.format})
+                    {L('originalLabel', 'Original')} ({source.format})
                   </div>
                   <div className="mt-1 font-mono text-sm font-semibold" style={{ color: 'rgb(var(--text))' }}>
                     {formatBytes(source.size)}
@@ -262,7 +266,7 @@ export function PngToWebpConverterClient() {
                 </div>
                 <div>
                   <div className="text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>
-                    WebP
+                    {L('webpLabel', 'WebP')}
                   </div>
                   <div className="mt-1 font-mono text-sm font-semibold" style={{ color: 'rgb(var(--text))' }}>
                     {formatBytes(output.size)}
@@ -270,7 +274,7 @@ export function PngToWebpConverterClient() {
                 </div>
                 <div>
                   <div className="text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>
-                    Savings
+                    {L('savings', 'Savings')}
                   </div>
                   <div
                     className="mt-1 font-mono text-sm font-semibold"
@@ -300,14 +304,13 @@ export function PngToWebpConverterClient() {
               </div>
               {savings < 0 && (
                 <p className="text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>
-                  This image is already well compressed — WebP at {Math.round(quality * 100)}% quality
-                  is larger than the source. Try lowering the quality slider.
+                  {L('alreadyCompressedPrefix', 'This image is already well compressed — WebP at')} {Math.round(quality * 100)}% {L('alreadyCompressedSuffix', 'quality is larger than the source. Try lowering the quality slider.')}
                 </p>
               )}
 
               <div className="flex justify-end">
                 <button type="button" onClick={download} className="btn btn-primary text-sm">
-                  Download WebP
+                  {L('downloadWebp', 'Download WebP')}
                 </button>
               </div>
             </div>
@@ -316,8 +319,7 @@ export function PngToWebpConverterClient() {
       )}
 
       <p className="rounded-md p-3 text-xs" style={{ backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text-subtle))' }}>
-        🔒 100% client-side — encoding happens locally in an in-browser canvas via{' '}
-        <code>canvas.toBlob</code>. Your image never leaves your device.
+        {L('noteText', '🔒 100% client-side — encoding happens locally in an in-browser canvas via')} <code>canvas.toBlob</code>{L('noteTextSuffix', '. Your image never leaves your device.')}
       </p>
     </div>
   )

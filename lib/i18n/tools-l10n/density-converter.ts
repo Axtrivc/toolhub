@@ -6,6 +6,15 @@ import type { ToolL10n } from '../tool-l10n'
 
 export const densityConverterL10n: ToolL10n = {
   zh: {
+    ui: {
+      'note': '🧪 密度 = 质量 ÷ 体积。水 = 1000 kg/m³ = 1 g/cm³。金 = 19,320 kg/m³。',
+      'unit.gcm3': 'g/cm³',
+      'unit.gl': 'g/L',
+      'unit.gml': 'g/mL',
+      'unit.kgm3': 'kg/m³',
+      'unit.lbft3': 'lb/ft³',
+      'unit.lbin3': 'lb/in³',
+    },
     useCases: [
       '判断物体在液体中会上浮还是下沉',
       '通过密度辅助识别未知材料',
@@ -16,6 +25,15 @@ export const densityConverterL10n: ToolL10n = {
     ],
   },
   es: {
+    ui: {
+      'note': '🧪 Densidad = masa ÷ volumen. Agua = 1000 kg/m³ = 1 g/cm³. Oro = 19.320 kg/m³.',
+      'unit.gcm3': 'g/cm³',
+      'unit.gl': 'g/L',
+      'unit.gml': 'g/mL',
+      'unit.kgm3': 'kg/m³',
+      'unit.lbft3': 'lb/ft³',
+      'unit.lbin3': 'lb/in³',
+    },
     useCases: [
       'determinar si un objeto flota o se hunde en un líquido',
       'ayudar a identificar materiales desconocidos por su densidad',
@@ -26,6 +44,15 @@ export const densityConverterL10n: ToolL10n = {
     ],
   },
   de: {
+    ui: {
+      'note': '🧪 Dichte = Masse ÷ Volumen. Wasser = 1000 kg/m³ = 1 g/cm³. Gold = 19.320 kg/m³.',
+      'unit.gcm3': 'g/cm³',
+      'unit.gl': 'g/L',
+      'unit.gml': 'g/mL',
+      'unit.kgm3': 'kg/m³',
+      'unit.lbft3': 'lb/ft³',
+      'unit.lbin3': 'lb/in³',
+    },
     useCases: [
       'beurteilen, ob ein Gegenstand in einer Flüssigkeit schwimmt oder sinkt',
       'unbekannte Materialien anhand ihrer Dichte erkennen',

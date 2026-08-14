@@ -32,6 +32,8 @@ next-env.d.ts
 /.workbuddy/
 # 临时修复任务书(用完即删,不进仓库)
 /GLM-FIX-TASKS*.md
+# 内容补全任务书(过程文件,用完即删,不进仓库)
+/GLM-CONTENT-TASKS*.md
 # 代码审查报告与临时过程文件(本地)
 /code-review-report*.html
 /code-review-tasks.txt

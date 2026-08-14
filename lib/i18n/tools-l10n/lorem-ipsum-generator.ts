@@ -6,6 +6,11 @@ import type { ToolL10n } from '../tool-l10n'
 
 export const loremIpsumGeneratorL10n: ToolL10n = {
   zh: {
+    ui: {
+      'generate': '📝 生成',
+      'note': '📄 为模型、设计和布局生成占位文本。基于公元前 1 世纪西塞罗的一段文本。',
+      'paragraphs': '段落数',
+    },
     useCases: [
       '原型图与线框图',
       '网站模板与演示',
@@ -17,6 +22,11 @@ export const loremIpsumGeneratorL10n: ToolL10n = {
     ],
   },
   es: {
+    ui: {
+      'generate': '📝 Generar',
+      'note': '📄 Genera texto de marcador para maquetas, diseños y layouts. Basado en un texto de Cicerón del siglo I a. C.',
+      'paragraphs': 'Párrafos',
+    },
     useCases: [
       'mockups y wireframes',
       'plantillas y demos de sitios web',
@@ -28,6 +38,11 @@ export const loremIpsumGeneratorL10n: ToolL10n = {
     ],
   },
   de: {
+    ui: {
+      'generate': '📝 Generieren',
+      'note': '📄 Erzeugt Platzhaltertext für Mockups, Designs und Layouts. Basiert auf einem Text von Cicero aus dem 1. Jh. v. Chr.',
+      'paragraphs': 'Absätze',
+    },
     useCases: [
       'Mockups und Wireframes',
       'Website-Templates und Demos',

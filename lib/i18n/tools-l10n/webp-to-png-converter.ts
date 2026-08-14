@@ -1,33 +1,149 @@
 /**
  * webp-to-png-converter 本地化 bundle —— zh / es / de
- * 覆盖:useCases(client = WebpToPngConverterClient = 自定义 webtool client,无需 slug)
- * 注:该工具在 tool-faqs.ts 无 FAQ 条目,故 bundle 仅含 useCases
+ * 覆盖:useCases + faqs
  */
 import type { ToolL10n } from '../tool-l10n'
 
 export const webpToPngConverterL10n: ToolL10n = {
   zh: {
+    ui: {
+      'bgColorLabel': '背景色(压平透明)',
+      'change': '更换',
+      'download': '下载',
+      'errConversionFailed': '在画布上转换失败。',
+      'errDecodeImage': '无法解码图片文件。',
+      'errReadFile': '无法读取文件。',
+      'errUploadWebp': '请上传 WebP 图片文件 (.webp)。',
+      'jpeg': 'JPEG',
+      'jpegQualityLabel': 'JPEG 质量 —',
+      'jpegSmallerLossy': 'JPEG(更小,有损)',
+      'jpg': 'JPG',
+      'largerThanOriginal': '(比原图更大——试着调低质量)',
+      'noteText': '🔒 100% 在客户端——转换在浏览器内画布上经',
+      'noteTextSuffix': ' 完成。你的图片绝不离开你的设备。',
+      'outputFormat': '输出格式',
+      'outputSuffix': '输出',
+      'png': 'PNG',
+      'pngLossless': 'PNG(无损)',
+      'reading': '读取中…',
+      'uploadHint': '仅 WebP 图片 (.webp)',
+      'uploadPrompt': '点击上传或拖放',
+      'uploadedWebpSourceAlt': '已上传的 WebP 原图',
+      'webpLabel': 'WebP',
+    },
     useCases: [
       '免上传将 WebP 转 PNG',
       '免费在线 WebP 转 JPG',
       '把 WebP 图片另存为 PNG',
       '无损 WebP 转换器',
     ],
+    faqs: [
+      {
+        q: '把 WebP 转成 PNG 会丢失透明通道吗?',
+        a: '不会。PNG 支持完整的 alpha 透明度且无损,所以带透明的 WebP 会变成带透明的 PNG,没有任何画质损失。当必须把图片交给不支持 WebP 的软件时,PNG 是最安全的格式。',
+      },
+      {
+        q: '把 WebP 转成 JPG 会损失画质吗?',
+        a: 'JPG 始终是有损格式且不支持透明,所以透明区域会被填上背景色,细节会被重新压缩。需要无损或透明效果时请用 PNG;只有在更小的文件比完美画质更重要时才用 JPG。',
+      },
+      {
+        q: '我的图片会被上传到服务器吗?',
+        a: '不会。转换完全在你的浏览器里完成,图片从不离开你的设备。这让私密素材保持私密,也让这个工具可以离线使用。',
+      },
+    ],
   },
   es: {
+    ui: {
+      'bgColorLabel': 'Color de fondo (aplana transparencia)',
+      'change': 'Cambiar',
+      'download': 'Descargar',
+      'errConversionFailed': 'Falló la conversión en el lienzo.',
+      'errDecodeImage': 'No se pudo decodificar la imagen.',
+      'errReadFile': 'No se pudo leer el archivo.',
+      'errUploadWebp': 'Sube un archivo WebP (.webp).',
+      'jpeg': 'JPEG',
+      'jpegQualityLabel': 'Calidad JPEG —',
+      'jpegSmallerLossy': 'JPEG (más pequeño, con pérdida)',
+      'jpg': 'JPG',
+      'largerThanOriginal': '(más grande que el original — prueba a bajar la calidad)',
+      'noteText': '🔒 100% en el cliente — la conversión se hace localmente en un lienzo vía',
+      'noteTextSuffix': '. Tu imagen nunca sale de tu dispositivo.',
+      'outputFormat': 'Formato de salida',
+      'outputSuffix': 'salida',
+      'png': 'PNG',
+      'pngLossless': 'PNG (sin pérdida)',
+      'reading': 'Leyendo…',
+      'uploadHint': 'Solo imágenes WebP (.webp)',
+      'uploadPrompt': 'Clic para subir o arrastra',
+      'uploadedWebpSourceAlt': 'Origen WebP subido',
+      'webpLabel': 'WebP',
+    },
     useCases: [
       'convertir WebP a PNG sin subir',
       'convertidor de WebP a JPG online gratis',
       'guardar imagen WebP como PNG',
       'convertidor WebP sin pérdida de calidad',
     ],
+    faqs: [
+      {
+        q: '¿Perderé la transparencia al pasar de WebP a PNG?',
+        a: 'No. PNG admite transparencia alfa completa y es sin pérdida, así que un WebP transparente se convierte en un PNG transparente sin pérdida de calidad. Es el formato más seguro cuando debes entregar una imagen a software que no admite WebP.',
+      },
+      {
+        q: '¿Convertir WebP a JPG pierde calidad?',
+        a: 'JPG siempre es con pérdida y no admite transparencia, así que las zonas transparentes se rellenan con un color de fondo y el detalle se recomprime. Usa PNG para salida sin pérdida o transparente, y JPG solo cuando un archivo más pequeño importe más que la fidelidad perfecta.',
+      },
+      {
+        q: '¿Mi imagen se sube a un servidor?',
+        a: 'No. La conversión ocurre totalmente en tu navegador, así que la imagen nunca sale de tu dispositivo. Eso mantiene los recursos privados y permite que la herramienta funcione sin conexión.',
+      },
+    ],
   },
   de: {
+    ui: {
+      'bgColorLabel': 'Hintergrundfarbe (transparent wird flächig)',
+      'change': 'Ändern',
+      'download': 'Herunterladen',
+      'errConversionFailed': 'Konvertierung auf der Canvas fehlgeschlagen.',
+      'errDecodeImage': 'Bild konnte nicht dekodiert werden.',
+      'errReadFile': 'Datei konnte nicht gelesen werden.',
+      'errUploadWebp': 'Bitte eine WebP-Datei (.webp) hochladen.',
+      'jpeg': 'JPEG',
+      'jpegQualityLabel': 'JPEG-Qualität —',
+      'jpegSmallerLossy': 'JPEG (kleiner, verlustbehaftet)',
+      'jpg': 'JPG',
+      'largerThanOriginal': '(größer als das Original — niedrigere Qualität probieren)',
+      'noteText': '🔒 100% clientseitig — die Konvertierung erfolgt lokal auf einer Browser-Canvas via',
+      'noteTextSuffix': '. Dein Bild verlässt nie dein Gerät.',
+      'outputFormat': 'Ausgabeformat',
+      'outputSuffix': 'Ausgabe',
+      'png': 'PNG',
+      'pngLossless': 'PNG (verlustfrei)',
+      'reading': 'Lesen…',
+      'uploadHint': 'Nur WebP-Bilder (.webp)',
+      'uploadPrompt': 'Zum Hochladen klicken oder hineinziehen',
+      'uploadedWebpSourceAlt': 'Hochgeladene WebP-Quelle',
+      'webpLabel': 'WebP',
+    },
     useCases: [
       'WebP ohne Upload in PNG umwandeln',
       'kostenloser Online-Umwandler von WebP zu JPG',
       'WebP-Bild als PNG speichern',
       'WebP-Umwandler ohne Qualitätsverlust',
+    ],
+    faqs: [
+      {
+        q: 'Geht beim Umwandeln von WebP zu PNG die Transparenz verloren?',
+        a: 'Nein. PNG unterstützt volle Alpha-Transparenz und ist verlustfrei, sodass ein transparentes WebP ein transparentes PNG ohne Qualitätsverlust wird. Das ist das sicherste Format, wenn ein Bild an Software gehen muss, die kein WebP unterstützt.',
+      },
+      {
+        q: 'Verliert WebP-zu-JPG an Qualität?',
+        a: 'JPG ist immer verlustbehaftet und unterstützt keine Transparenz, also werden transparente Bereiche mit einer Hintergrundfarbe gefüllt und Feindetails neu komprimiert. Nutze PNG für verlustfreie oder transparente Ausgabe und JPG nur, wenn eine kleinere Datei wichtiger ist als perfekte Treue.',
+      },
+      {
+        q: 'Wird mein Bild auf einen Server hochgeladen?',
+        a: 'Nein. Die Umwandlung läuft vollständig in deinem Browser, das Bild verlässt nie dein Gerät. Das hält private Inhalte privat und lässt das Werkzeug offline funktionieren.',
+      },
     ],
   },
 }

@@ -6,6 +6,10 @@ import type { ToolL10n } from '../tool-l10n'
 
 export const salaryConverterL10n: ToolL10n = {
   zh: {
+    formula: {
+      formula: 'Annual = hourly × 2080\nMonthly = annual / 12',
+      explain: '在时薪、周薪、月薪和年薪之间换算。假设每年工作 2,080 小时(40 h × 52 周);按不同排班调整工时。',
+    },
     useCases: ['比较以不同方式报价(年薪/月薪/时薪)的工作机会', '把兼职或合同工时薪换算成年收入', '搞清双周薪和半月薪的区别', '做预算时在年薪、月薪、时薪之间换算'],
     faqs: [
       { q: '全职一年有多少工时?', a: '美国标准全职一年为 2,080 工时(每周 40 小时 × 52 周)。本工具显示的时薪即以此为基础,再按你输入的每周工时折算。' },
@@ -19,6 +23,10 @@ export const salaryConverterL10n: ToolL10n = {
     },
   },
   es: {
+    formula: {
+      formula: 'Annual = hourly × 2080\nMonthly = annual / 12',
+      explain: 'Convierte entre paga por hora, semana, mes y año. Asume 2.080 horas laborales al año (40 h × 52 s); ajusta las horas para otro horario.',
+    },
     useCases: ['comparar ofertas que cotizan el sueldo de forma distinta (anual/mensual/hora)', 'convertir una tarifa por hora a sueldo anual para trabajos a tiempo parcial o por contrato', 'entender la diferencia entre pago quincenal y semestral', 'pasar entre sueldo anual, mensual y por hora al hacer presupuesto'],
     faqs: [
       { q: '¿Cuántas horas tiene un año laboral a tiempo completo?', a: 'El año estándar a tiempo completo en EE. UU. son 2.080 horas (40 horas × 52 semanas). La tarifa por hora que muestra esta herramienta usa esa cifra, escalada por las horas semanales que ingreses.' },
@@ -32,6 +40,10 @@ export const salaryConverterL10n: ToolL10n = {
     },
   },
   de: {
+    formula: {
+      formula: 'Annual = hourly × 2080\nMonthly = annual / 12',
+      explain: 'Rechnet zwischen Stunden-, Wochen-, Monats- und Jahreslohn um. Setzt 2.080 Arbeitsstunden pro Jahr (40 Std. × 52 W.) voraus; Stunden für andere Modelle anpassen.',
+    },
     useCases: ['Jobangebote vergleichen, die das Gehalt unterschiedlich angeben (jährlich/monatlich/stündlich)', 'einen Stundenlohn in Jahresgehalt umrechnen für Teilzeit- oder Vertragsarbeit', 'den Unterschied zwischen 14-tägigem und halbmonatlichem Gehalt verstehen', 'zwischen Jahres-, Monats- und Stundenlohn für die Budgetplanung umrechnen'],
     faqs: [
       { q: 'Wie viele Stunden hat ein Vollzeitjahr?', a: 'Ein Standard-Vollzeitjahr in den USA umfasst 2.080 Stunden (40 Stunden × 52 Wochen). Der Stundenlohn, den dieses Tool anzeigt, basiert auf dieser Zahl, skaliert mit den von dir eingegebenen Wochenstunden.' },

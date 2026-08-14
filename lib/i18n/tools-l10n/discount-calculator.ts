@@ -6,6 +6,10 @@ import type { ToolL10n } from '../tool-l10n'
 
 export const discountCalculatorL10n: ToolL10n = {
   zh: {
+    formula: {
+      formula: 'saved = price × discount%\nfinal = price × (1 − discount%)',
+      explain: '百分比折扣降低原价。多个折扣叠加时要依次应用——每一个都作用在已打折的价格上。',
+    },
     useCases: ['算出打折后的实付价格和省下的金额', '处理叠加折扣(先打第一轮,再用结果当原价)', '根据到手价和折扣率反推原价', '购物时判断折扣是否真的划算'],
     faqs: [
       { q: '怎么算 5 折(50% off)?', a: '直接把价格减半。50% off 意味着你付一半——这是最简单的折扣计算。' },
@@ -19,6 +23,10 @@ export const discountCalculatorL10n: ToolL10n = {
     },
   },
   es: {
+    formula: {
+      formula: 'saved = price × discount%\nfinal = price × (1 − discount%)',
+      explain: 'Un descuento porcentual reduce el precio original. Con descuentos apilados aplícalos en secuencia — cada uno sobre el precio ya rebajado.',
+    },
     useCases: ['calcular el precio final y el ahorro tras un descuento', 'aplicar descuentos apilados (primero el primero, el resultado como nuevo precio)', 'obtener el precio original a partir del precio de oferta y el porcentaje', 'juzgar al comprar si un descuento realmente merece la pena'],
     faqs: [
       { q: '¿Cómo calculo el 50 % de descuento?', a: 'Simplemente divide el precio entre dos. 50 % off significa que pagas la mitad — el descuento más fácil de calcular.' },
@@ -32,6 +40,10 @@ export const discountCalculatorL10n: ToolL10n = {
     },
   },
   de: {
+    formula: {
+      formula: 'saved = price × discount%\nfinal = price × (1 − discount%)',
+      explain: 'Ein prozentualer Rabatt senkt den Originalpreis. Bei gestaffelten Rabatten nacheinander anwenden — jeder auf den bereits reduzierten Preis.',
+    },
     useCases: ['den Endpreis und die Ersparnis nach einem Rabatt berechnen', 'gestaffelte Rabatte anwenden (erst den ersten, das Ergebnis als neuer Preis)', 'den Originalpreis aus Angebotspreis und Prozentsatz zurückrechnen', 'beim Einkaufen beurteilen, ob ein Rabatt wirklich lohnt'],
     faqs: [
       { q: 'Wie berechne ich 50 % Rabatt?', a: 'Teile den Preis einfach durch zwei. 50 % off bedeutet, du zahlst die Hälfte — der einfachste Rabatt.' },

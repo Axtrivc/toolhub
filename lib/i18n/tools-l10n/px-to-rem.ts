@@ -6,6 +6,17 @@ import type { ToolL10n } from '../tool-l10n'
 
 export const pxToRemL10n: ToolL10n = {
   zh: {
+    ui: {
+      'commonSizesPrefix': '常用尺寸(root =',
+      'noteText': '🔒 100% 在客户端——所有换算都在本地完成。',
+      'pxToRemHeading': 'PX → REM / EM',
+      'remToPxHeading': 'REM → PX',
+      'rootFontSize': '根字号',
+    },
+    formula: {
+      formula: 'rem = px / root font size (px)',
+      explain: '把像素换算成相对根字号的 rem(默认 16 px)。rem 会随用户字号设置缩放,是更无障碍的排版和间距单位。',
+    },
     useCases: [
       '把 Figma 标注的 px 值转成 rem',
       '搭建随用户字号缩放的自适应布局',
@@ -19,6 +30,17 @@ export const pxToRemL10n: ToolL10n = {
     ],
   },
   es: {
+    ui: {
+      'commonSizesPrefix': 'Tamaños comunes (root =',
+      'noteText': '🔒 100% en el cliente — todas las conversiones son locales.',
+      'pxToRemHeading': 'PX → REM / EM',
+      'remToPxHeading': 'REM → PX',
+      'rootFontSize': 'Tamaño de fuente raíz',
+    },
+    formula: {
+      formula: 'rem = px / root font size (px)',
+      explain: 'Convierte píxeles a rem respecto al tamaño de fuente raíz (por defecto 16 px). rem escala con la configuración tipográfica del usuario, la unidad accesiva para texto y espaciado.',
+    },
     useCases: [
       'convertir valores px de Figma a rem',
       'crear diseños adaptables que escalan con el tamaño de fuente',
@@ -32,6 +54,17 @@ export const pxToRemL10n: ToolL10n = {
     ],
   },
   de: {
+    ui: {
+      'commonSizesPrefix': 'Gängige Größen (root =',
+      'noteText': '🔒 100% clientseitig — alle Umrechnungen erfolgen lokal.',
+      'pxToRemHeading': 'PX → REM / EM',
+      'remToPxHeading': 'REM → PX',
+      'rootFontSize': 'Wurzel-Schriftgröße',
+    },
+    formula: {
+      formula: 'rem = px / root font size (px)',
+      explain: 'Rechnet Pixel in rem relativ zur Wurzel-Schriftgröße um (Standard 16 px). rem skaliert mit den Schrift­einstellungen des Nutzers — die zugängliche Einheit für Typo und Abstände.',
+    },
     useCases: [
       'px-Werte aus Figma in rem umwandeln',
       'Responsive Layouts bauen, die mit der Schriftgröße skalieren',

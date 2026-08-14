@@ -8,6 +8,8 @@ import {
   type PasswordOptions,
 } from '@/lib/password'
 import { CopyButton } from '@/components/CopyButton'
+import { useApp } from '@/components/providers/AppProviders'
+import { tui } from '@/lib/i18n/tool-l10n'
 
 const STRENGTH_COLORS = [
   'bg-slate-200',
@@ -18,6 +20,9 @@ const STRENGTH_COLORS = [
 ]
 
 export function PasswordGeneratorClient() {
+  const { locale } = useApp()
+  const L = (key: string, fb: string) => tui('password-generator', locale, key, fb)
+
   const [opts, setOpts] = useState<PasswordOptions>(DEFAULT_OPTIONS)
   const [password, setPassword] = useState('')
 
@@ -44,9 +49,9 @@ export function PasswordGeneratorClient() {
           <div className="flex items-stretch overflow-hidden rounded-lg border-2 border-slate-200 bg-slate-50">
             <code
               className="flex-1 break-all px-4 py-4 font-mono text-lg text-slate-900 sm:text-xl"
-              aria-label="Generated password"
+              aria-label={L('generatedPassword', 'Generated password')}
             >
-              {password || <span className="text-slate-300">Click generate</span>}
+              {password || <span className="text-slate-300">{L('clickGenerate', 'Click generate')}</span>}
             </code>
           </div>
         </div>
@@ -64,7 +69,7 @@ export function PasswordGeneratorClient() {
             ))}
           </div>
           <span className="shrink-0 whitespace-nowrap text-right text-xs font-medium text-slate-600 sm:text-sm">
-            {strength.label} ({strength.entropyBits} bits)
+            {strength.label} ({strength.entropyBits} {L('bits', 'bits')})
           </span>
         </div>
       </div>
@@ -75,16 +80,16 @@ export function PasswordGeneratorClient() {
           <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
           </svg>
-          Regenerate
+          {L('regenerate', 'Regenerate')}
         </button>
-        <CopyButton value={password} label="Copy Password" disabled={!password} />
+        <CopyButton value={password} label={L('copyPassword', 'Copy Password')} disabled={!password} />
       </div>
 
       {/* 长度滑块 */}
       <div>
         <div className="mb-2 flex items-center justify-between">
           <label htmlFor="length" className="text-sm font-medium text-slate-700">
-            Length
+            {L('length', 'Length')}
           </label>
           <span className="rounded-md bg-brand-50 px-2 py-0.5 font-mono text-sm font-semibold text-brand-600">
             {opts.length}
@@ -106,33 +111,32 @@ export function PasswordGeneratorClient() {
         <Toggle
           checked={opts.uppercase}
           onChange={(v) => update({ uppercase: v })}
-          label="Uppercase (A-Z)"
+          label={L('uppercase', 'Uppercase (A-Z)')}
         />
         <Toggle
           checked={opts.lowercase}
           onChange={(v) => update({ lowercase: v })}
-          label="Lowercase (a-z)"
+          label={L('lowercase', 'Lowercase (a-z)')}
         />
         <Toggle
           checked={opts.numbers}
           onChange={(v) => update({ numbers: v })}
-          label="Numbers (0-9)"
+          label={L('numbers', 'Numbers (0-9)')}
         />
         <Toggle
           checked={opts.symbols}
           onChange={(v) => update({ symbols: v })}
-          label="Symbols (!@#$)"
+          label={L('symbols', 'Symbols (!@#$)')}
         />
         <Toggle
           checked={opts.excludeAmbiguous}
           onChange={(v) => update({ excludeAmbiguous: v })}
-          label="Exclude ambiguous (0/O, 1/l/I)"
+          label={L('excludeAmbiguous', 'Exclude ambiguous (0/O, 1/l/I)')}
         />
       </div>
 
       <p className="rounded-md bg-slate-50 p-3 text-xs text-slate-500">
-        🔒 Privacy note: Passwords are generated locally in your browser using the Web Crypto API
-        and never sent over the network.
+        {L('privacyNote', '🔒 Privacy note: Passwords are generated locally in your browser using the Web Crypto API and never sent over the network.')}
       </p>
     </div>
   )

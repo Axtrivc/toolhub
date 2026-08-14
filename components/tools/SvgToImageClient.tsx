@@ -2,6 +2,8 @@
 
 import { useState, useMemo, useCallback, useRef } from 'react'
 import { LoadSampleButton } from '@/components/LoadSampleButton'
+import { useApp } from '@/components/providers/AppProviders'
+import { tui } from '@/lib/i18n/tool-l10n'
 
 /**
  * SVG to PNG/WebP Converter —— 纯前端 canvas 转换
@@ -64,6 +66,9 @@ function sanitizeSvg(raw: string): string {
 type Fmt = 'image/png' | 'image/webp'
 
 export function SvgToImageClient() {
+  const { locale } = useApp()
+  const L = (key: string, fb: string) => tui('svg-to-image', locale, key, fb)
+
   const [svgText, setSvgText] = useState('')
   const [scale, setScale] = useState(2)
   const [format, setFormat] = useState<Fmt>('image/png')
@@ -83,7 +88,7 @@ export function SvgToImageClient() {
       setSvgText(String(reader.result || ''))
       setDownloadName(file.name.replace(/\.svg$/i, '') || 'converted')
     }
-    reader.onerror = () => setError('Failed to read file.')
+    reader.onerror = () => setError(L('errorReadFile', 'Failed to read file.'))
     reader.readAsText(file)
   }, [])
 
@@ -103,7 +108,7 @@ export function SvgToImageClient() {
     setDims(null)
     const trimmed = svgText.trim()
     if (!trimmed) {
-      setError('Paste SVG code or upload a file first.')
+      setError(L('errorEmpty', 'Paste SVG code or upload a file first.'))
       return
     }
 
@@ -112,7 +117,7 @@ export function SvgToImageClient() {
     try {
       safeSvg = sanitizeSvg(trimmed)
     } catch (e) {
-      setError(e instanceof Error ? e.message : 'Invalid SVG markup.')
+      setError(e instanceof Error ? e.message : L('errorInvalidSvg', 'Invalid SVG markup.'))
       return
     }
 
@@ -137,7 +142,7 @@ export function SvgToImageClient() {
         canvas.toBlob(
           (outBlob) => {
             if (!outBlob) {
-              setError('Conversion failed: browser could not encode the image.')
+              setError(L('errorEncodeFailed', 'Conversion failed: browser could not encode the image.'))
               return
             }
             const outUrl = URL.createObjectURL(outBlob)
@@ -151,12 +156,12 @@ export function SvgToImageClient() {
           0.92,
         )
       } catch (e) {
-        setError(e instanceof Error ? e.message : 'Conversion failed.')
+        setError(e instanceof Error ? e.message : L('errorConvertFailed', 'Conversion failed.'))
       }
     }
     img.onerror = () => {
       URL.revokeObjectURL(url)
-      setError('Invalid SVG — make sure it has xmlns and a viewBox or width/height.')
+      setError(L('errorInvalidSvgMarkup', 'Invalid SVG — make sure it has xmlns and a viewBox or width/height.'))
     }
     img.src = url
   }, [svgText, scale, format])
@@ -169,7 +174,7 @@ export function SvgToImageClient() {
       <div>
         <div className="mb-2 flex items-center justify-between">
           <label htmlFor="svg-input" className="text-sm font-medium text-slate-700">
-            Paste SVG code
+            {L('pasteSvgCode', 'Paste SVG code')}
           </label>
           <div className="flex items-center gap-2">
             <LoadSampleButton onLoad={handleLoadSample} variant="compact" />
@@ -178,7 +183,7 @@ export function SvgToImageClient() {
               onClick={() => fileInputRef.current?.click()}
               className="btn btn-secondary px-3 py-1.5 text-xs"
             >
-              Upload .svg
+              {L('uploadSvg', 'Upload .svg')}
             </button>
             <input
               ref={fileInputRef}
@@ -208,7 +213,7 @@ export function SvgToImageClient() {
       {/* 选项:格式 + 缩放 */}
       <div className="flex flex-wrap items-center gap-4">
         <div className="flex items-center gap-2 text-sm" style={{ color: 'rgb(var(--text-muted))' }}>
-          <span>Format:</span>
+          <span>{L('format', 'Format:')}</span>
           <select
             value={format}
             onChange={(e) => setFormat(e.target.value as Fmt)}
@@ -220,7 +225,7 @@ export function SvgToImageClient() {
           </select>
         </div>
         <div className="flex items-center gap-2 text-sm" style={{ color: 'rgb(var(--text-muted))' }}>
-          <span>Scale:</span>
+          <span>{L('scale', 'Scale:')}</span>
           <select
             value={scale}
             onChange={(e) => setScale(Number(e.target.value))}
@@ -233,7 +238,7 @@ export function SvgToImageClient() {
           </select>
         </div>
         <button type="button" onClick={convert} className="btn btn-primary">
-          Convert
+          {L('convert', 'Convert')}
         </button>
       </div>
 
@@ -245,14 +250,14 @@ export function SvgToImageClient() {
         <div className="space-y-3">
           <div className="flex flex-wrap items-center justify-between gap-2">
             <span className="text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>
-              Result {dims && <span className="font-normal text-slate-400">({dims.w} × {dims.h}px)</span>}
+              {L('result', 'Result')} {dims && <span className="font-normal text-slate-400">({dims.w} × {dims.h}px)</span>}
             </span>
             <a
               href={downloadUrl}
               download={downloadName || `converted.${ext}`}
               className="btn btn-primary"
             >
-              Download .{ext}
+              {L('download', 'Download')} .{ext}
             </a>
           </div>
           {/* 预览窗(棋盘格背景便于看透明) */}
@@ -269,7 +274,7 @@ export function SvgToImageClient() {
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={previewUrl}
-              alt="Converted preview"
+              alt={L('convertedPreviewAlt', 'Converted preview')}
               width={dims?.w}
               height={dims?.h}
               className="max-h-64 max-w-full"
@@ -279,9 +284,7 @@ export function SvgToImageClient() {
       )}
 
       <p className="rounded-md p-3 text-xs" style={{ backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text-subtle))' }}>
-        🖼️ Conversion runs entirely in your browser via HTML5 canvas — your SVG is never uploaded. For crisp output on
-        high-DPI screens, use 2x or 3x scale. Self-contained SVGs (inline images as data URIs, embedded fonts) convert
-        most reliably.
+        {L('note', '🖼️ Conversion runs entirely in your browser via HTML5 canvas — your SVG is never uploaded. For crisp output on high-DPI screens, use 2x or 3x scale. Self-contained SVGs (inline images as data URIs, embedded fonts) convert most reliably.')}
       </p>
     </div>
   )

@@ -6,6 +6,11 @@ import type { ToolL10n } from '../tool-l10n'
 
 export const binaryToTextL10n: ToolL10n = {
   zh: {
+    ui: {
+      inputLabel: '二进制(字节间用空格分隔)',
+      outputLabel: '解码后的文本',
+      note: '💾 每 8 位为一组,代表一个 UTF-8 字节。支持 Unicode(中文、emoji)。',
+    },
     useCases: [
       '把二进制(0 和 1)解码回可读文本',
       '学习计算机如何存储字符',
@@ -17,6 +22,11 @@ export const binaryToTextL10n: ToolL10n = {
     ],
   },
   es: {
+    ui: {
+      inputLabel: 'Binario (bytes separados por espacios)',
+      outputLabel: 'Texto decodificado',
+      note: '💾 Cada grupo de 8 bits es un byte UTF-8. Admite Unicode (chino, emoji).',
+    },
     useCases: [
       'decodificar binario (0 y 1) a texto legible',
       'aprender cómo las computadoras almacenan caracteres',
@@ -28,6 +38,11 @@ export const binaryToTextL10n: ToolL10n = {
     ],
   },
   de: {
+    ui: {
+      inputLabel: 'Binär (leerzeichengetrennte Bytes)',
+      outputLabel: 'Dekodierter Text',
+      note: '💾 Jede 8-Bit-Gruppe ist ein UTF-8-Byte. Unterstützt Unicode (Chinesisch, Emoji).',
+    },
     useCases: [
       'Binär (0 und 1) in lesbaren Text dekodieren',
       'verstehen, wie Computer Zeichen speichern',

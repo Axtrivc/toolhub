@@ -3,6 +3,8 @@
 import { useState, useMemo } from 'react'
 import { CalculatorField, ResultCard, CalculatorShell, CalculatorNote } from '@/components/calculator/CalculatorField'
 import { CopyButton } from '@/components/CopyButton'
+import { useApp } from '@/components/providers/AppProviders'
+import { tui } from '@/lib/i18n/tool-l10n'
 
 const fmtMoney = (n: number) =>
   isFinite(n)
@@ -25,6 +27,19 @@ type Mode = 'forward' | 'reverse'
  *  - reverse:  需净得 X → charge = (X + fixed) / (1 − pct),再回算 fee 与净额校验
  */
 export function ReverseStripeFeeCalculatorClient() {
+  const { locale } = useApp()
+  // 取本地化 UI 串;缺失回退英文(SSR 恒英文)。
+  const L = (key: string, fb: string) => tui('reverse-stripe-fee-calculator', locale, key, fb)
+
+  // 预设选项文案本地化(key → 已翻译标签)
+  const presetLabels: Record<string, string> = {
+    'stripe-us': L('presetStripeUs', 'Stripe US online (2.9% + $0.30)'),
+    'stripe-intl': L('presetStripeIntl', 'Stripe + international card (4.4% + $0.30)'),
+    'stripe-intl-fx': L('presetStripeIntlFx', 'Stripe + intl card + currency conversion (5.4% + $0.30)'),
+    'paypal-us': L('presetPaypalUs', 'PayPal US (3.49% + $0.49)'),
+    custom: L('presetCustom', 'Custom rate'),
+  }
+
   const [mode, setMode] = useState<Mode>('forward')
   const [presetKey, setPresetKey] = useState('stripe-us')
   const [customPct, setCustomPct] = useState('2.9')
@@ -45,10 +60,10 @@ export function ReverseStripeFeeCalculatorClient() {
     const a = Number(amount)
     const { pct, fixed } = fees
     if (!isFinite(a) || a < 0 || !isFinite(pct) || pct < 0 || !isFinite(fixed) || fixed < 0) {
-      return { error: 'Please enter valid non-negative numbers.' }
+      return { error: L('errInvalidNumbers', 'Please enter valid non-negative numbers.') }
     }
     if (pct >= 100) {
-      return { error: 'The percentage fee must be below 100%.' }
+      return { error: L('errPctBelow100', 'The percentage fee must be below 100%.') }
     }
     const frac = pct / 100
 
@@ -63,30 +78,32 @@ export function ReverseStripeFeeCalculatorClient() {
     const fee = charge - a
     const netCheck = charge - fee
     return { mode, charge, fee, net: netCheck, targetNet: a, effective: charge > 0 ? (fee / charge) * 100 : 0 }
-  }, [mode, amount, fees])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [mode, amount, fees, locale])
 
   const summary = useMemo(() => {
-    if ('error' in parsed) return `Payment fee calculator: ${parsed.error}`
-    const presetLabel = PRESETS.find((p) => p.key === presetKey)?.label ?? ''
+    if ('error' in parsed) return `${L('summaryPrefix', 'Payment fee calculator: ')}${parsed.error}`
+    const presetLabel = presetLabels[presetKey] ?? PRESETS.find((p) => p.key === presetKey)?.label ?? ''
     if (parsed.mode === 'forward') {
       return [
-        'Payment Fee Summary',
-        `  Rate: ${presetLabel}`,
-        `  You charge: ${fmtMoney(parsed.charge)}`,
-        `  Processing fee: ${fmtMoney(parsed.fee)}`,
-        `  You receive: ${fmtMoney(parsed.net)}`,
-        `  Effective fee: ${parsed.effective.toFixed(2)}%`,
+        L('summaryTitle', 'Payment Fee Summary'),
+        `  ${L('sRate', 'Rate: ')}${presetLabel}`,
+        `  ${L('sYouCharge', 'You charge: ')}${fmtMoney(parsed.charge)}`,
+        `  ${L('sProcessingFee', 'Processing fee: ')}${fmtMoney(parsed.fee)}`,
+        `  ${L('sYouReceive', 'You receive: ')}${fmtMoney(parsed.net)}`,
+        `  ${L('sEffectiveFee', 'Effective fee: ')}${parsed.effective.toFixed(2)}%`,
       ].join('\n')
     }
     return [
-      'Payment Fee Summary (reverse)',
-      `  Rate: ${presetLabel}`,
-      `  You need to net: ${fmtMoney(parsed.targetNet ?? 0)}`,
-      `  You must charge: ${fmtMoney(parsed.charge)}`,
-      `  Processing fee: ${fmtMoney(parsed.fee)}`,
-      `  Net check: ${fmtMoney(parsed.net)}`,
+      L('summaryTitleReverse', 'Payment Fee Summary (reverse)'),
+      `  ${L('sRate', 'Rate: ')}${presetLabel}`,
+      `  ${L('sYouNeedToNet', 'You need to net: ')}${fmtMoney(parsed.targetNet ?? 0)}`,
+      `  ${L('sYouMustCharge', 'You must charge: ')}${fmtMoney(parsed.charge)}`,
+      `  ${L('sProcessingFee', 'Processing fee: ')}${fmtMoney(parsed.fee)}`,
+      `  ${L('sNetCheck', 'Net check: ')}${fmtMoney(parsed.net)}`,
     ].join('\n')
-  }, [parsed, presetKey])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [parsed, presetKey, locale])
 
   const tabBtn = (m: Mode, label: string) => (
     <button
@@ -108,7 +125,7 @@ export function ReverseStripeFeeCalculatorClient() {
     <>
       <div className="sm:col-span-2">
         <label htmlFor="fee-preset" className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
-          Fee preset
+          {L('feePreset', 'Fee preset')}
         </label>
         <select
           id="fee-preset"
@@ -123,20 +140,20 @@ export function ReverseStripeFeeCalculatorClient() {
         >
           {PRESETS.map((p) => (
             <option key={p.key} value={p.key}>
-              {p.label}
+              {presetLabels[p.key] ?? p.label}
             </option>
           ))}
         </select>
       </div>
       {presetKey === 'custom' && (
         <>
-          <CalculatorField id="custom-pct" label="Custom percentage fee" value={customPct} onChange={setCustomPct} suffix="%" placeholder="2.9" />
-          <CalculatorField id="custom-fixed" label="Custom fixed fee" value={customFixed} onChange={setCustomFixed} suffix="$" placeholder="0.30" />
+          <CalculatorField id="custom-pct" label={L('customPercentageFee', 'Custom percentage fee')} value={customPct} onChange={setCustomPct} suffix="%" placeholder="2.9" />
+          <CalculatorField id="custom-fixed" label={L('customFixedFee', 'Custom fixed fee')} value={customFixed} onChange={setCustomFixed} suffix="$" placeholder="0.30" />
         </>
       )}
       <CalculatorField
         id="amount"
-        label={mode === 'forward' ? 'Amount you charge' : 'Amount you need to net'}
+        label={mode === 'forward' ? L('amountYouCharge', 'Amount you charge') : L('amountYouNeedToNet', 'Amount you need to net')}
         value={amount}
         onChange={setAmount}
         suffix="$"
@@ -149,8 +166,8 @@ export function ReverseStripeFeeCalculatorClient() {
     <div className="space-y-6">
       {/* 模式切换 */}
       <div className="flex flex-wrap gap-2">
-        {tabBtn('forward', 'I charge X')}
-        {tabBtn('reverse', 'I need to net X')}
+        {tabBtn('forward', L('tabForward', 'I charge X'))}
+        {tabBtn('reverse', L('tabReverse', 'I need to net X'))}
       </div>
 
       {'error' in parsed ? (
@@ -167,29 +184,27 @@ export function ReverseStripeFeeCalculatorClient() {
             <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
               {parsed.mode === 'forward' ? (
                 <>
-                  <ResultCard label="Processing fee" value={fmtMoney(parsed.fee)} sublabel={`${fees.pct}% + ${fmtMoney(fees.fixed)}`} />
-                  <ResultCard label="You receive" value={fmtMoney(parsed.net)} sublabel="After fees" highlight />
-                  <ResultCard label="Effective fee rate" value={`${parsed.effective.toFixed(2)}%`} sublabel="Fee ÷ charge amount" />
+                  <ResultCard label={L('processingFee', 'Processing fee')} value={fmtMoney(parsed.fee)} sublabel={`${fees.pct}% + ${fmtMoney(fees.fixed)}`} />
+                  <ResultCard label={L('youReceive', 'You receive')} value={fmtMoney(parsed.net)} sublabel={L('afterFees', 'After fees')} highlight />
+                  <ResultCard label={L('effectiveFeeRate', 'Effective fee rate')} value={`${parsed.effective.toFixed(2)}%`} sublabel={L('feeDividedByCharge', 'Fee ÷ charge amount')} />
                 </>
               ) : (
                 <>
-                  <ResultCard label="You must charge" value={fmtMoney(parsed.charge)} sublabel="To net your target amount" highlight />
-                  <ResultCard label="Processing fee" value={fmtMoney(parsed.fee)} sublabel={`${fees.pct}% + ${fmtMoney(fees.fixed)}`} />
-                  <ResultCard label="Net check" value={fmtMoney(parsed.net)} sublabel="Charge − fee (should match target)" />
+                  <ResultCard label={L('youMustCharge', 'You must charge')} value={fmtMoney(parsed.charge)} sublabel={L('toNetYourTarget', 'To net your target amount')} highlight />
+                  <ResultCard label={L('processingFee', 'Processing fee')} value={fmtMoney(parsed.fee)} sublabel={`${fees.pct}% + ${fmtMoney(fees.fixed)}`} />
+                  <ResultCard label={L('netCheck', 'Net check')} value={fmtMoney(parsed.net)} sublabel={L('chargeMinusFeeNote', 'Charge − fee (should match target)')} />
                 </>
               )}
             </div>
           }
         >
           <div className="flex flex-wrap items-center gap-3">
-            <CopyButton value={summary} label="Copy Summary" />
+            <CopyButton value={summary} label={L('copySummary', 'Copy Summary')} />
           </div>
         </CalculatorShell>
       )}
       <CalculatorNote>
-        ⚠️ Passing processing fees on to customers (surcharging) is regulated and varies by country, US state, and
-        card network — some regions ban it, others cap it or require disclosure. Check local rules before adding a
-        surcharge. Rates shown are common presets as of 2025; your Stripe/PayPal plan may differ.
+        {L('noteText', '⚠️ Passing processing fees on to customers (surcharging) is regulated and varies by country, US state, and card network — some regions ban it, others cap it or require disclosure. Check local rules before adding a surcharge. Rates shown are common presets as of 2025; your Stripe/PayPal plan may differ.')}
       </CalculatorNote>
     </div>
   )

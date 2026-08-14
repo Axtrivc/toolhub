@@ -6,6 +6,23 @@ import type { ToolL10n } from '../tool-l10n'
 
 export const urlEncoderL10n: ToolL10n = {
   zh: {
+    ui: {
+      'characters': '字符',
+      'clear': '清空',
+      'decode': '解码',
+      'decodeInputLabel': 'URL 编码的文本',
+      'decodeNote': '🔗 把 %20 还原为空格、%26 还原为 & 等。',
+      'decodeOutputLabel': '解码结果',
+      'encode': '编码',
+      'encodeInputLabel': '要编码的文本',
+      'encodeNote': '🔗 为在 URL 中安全使用而编码特殊字符。空格变成 %20,& 变成 %26。',
+      'encodeOutputLabel': 'URL 编码结果',
+      'mode': '模式',
+      'modeAria': '编码/解码模式',
+      'placeholder': '在此输入或粘贴…',
+      'resultPlaceholder': '结果将显示在这里…',
+      'words': '词',
+    },
     useCases: [
       '编码查询参数值以便安全放入 URL',
       '处理空格、&、= 等特殊字符',
@@ -17,6 +34,23 @@ export const urlEncoderL10n: ToolL10n = {
     ],
   },
   es: {
+    ui: {
+      'characters': 'caracteres',
+      'clear': 'Limpiar',
+      'decode': 'Decodificar',
+      'decodeInputLabel': 'Texto URL codificado',
+      'decodeNote': '🔗 Decodifica %20 a espacios, %26 a &, etc.',
+      'decodeOutputLabel': 'Decodificado',
+      'encode': 'Codificar',
+      'encodeInputLabel': 'Texto a codificar',
+      'encodeNote': '🔗 Codifica caracteres especiales para uso seguro en URLs. Los espacios pasan a %20, & a %26.',
+      'encodeOutputLabel': 'URL codificado',
+      'mode': 'Modo',
+      'modeAria': 'Modo codificar/decodificar',
+      'placeholder': 'Escribe o pega aquí…',
+      'resultPlaceholder': 'El resultado aparecerá aquí…',
+      'words': 'palabras',
+    },
     useCases: [
       'codificar valores de parámetros de consulta para usarlos en una URL',
       'gestionar caracteres especiales como espacios, & y =',
@@ -28,6 +62,23 @@ export const urlEncoderL10n: ToolL10n = {
     ],
   },
   de: {
+    ui: {
+      'characters': 'Zeichen',
+      'clear': 'Leeren',
+      'decode': 'Dekodieren',
+      'decodeInputLabel': 'URL-kodierter Text',
+      'decodeNote': '🔗 Dekodiert %20 zu Leerzeichen, %26 zu & usw.',
+      'decodeOutputLabel': 'Dekodiert',
+      'encode': 'Kodieren',
+      'encodeInputLabel': 'Zu kodierender Text',
+      'encodeNote': '🔗 Kodiert Sonderzeichen zur sicheren Nutzung in URLs. Leerzeichen werden %20, & wird %26.',
+      'encodeOutputLabel': 'URL-kodiert',
+      'mode': 'Modus',
+      'modeAria': 'Modus Kodieren/Dekodieren',
+      'placeholder': 'Hier eingeben oder einfügen…',
+      'resultPlaceholder': 'Das Ergebnis erscheint hier…',
+      'words': 'Wörter',
+    },
     useCases: [
       'Query-Parameterwerte für die sichere Nutzung in URLs kodieren',
       'Sonderzeichen wie Leerzeichen, & und = behandeln',

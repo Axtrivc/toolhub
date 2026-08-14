@@ -4,6 +4,8 @@ import { useCallback, useEffect, useMemo, useState } from 'react'
 import { RefreshCw } from 'lucide-react'
 import { CopyButton } from '@/components/CopyButton'
 import { ResultActions } from '@/components/ResultActions'
+import { useApp } from '@/components/providers/AppProviders'
+import { tui } from '@/lib/i18n/tool-l10n'
 
 /**
  * Secret Key Generator —— crypto.getRandomValues 高熵密钥/令牌生成
@@ -122,6 +124,9 @@ function strengthOf(bits: number): Strength {
 }
 
 export function SecretKeyGeneratorClient() {
+  const { locale } = useApp()
+  const L = (key: string, fb: string) => tui('secret-key-generator', locale, key, fb)
+
   const [format, setFormat] = useState<Format>('hex')
   const [byteLen, setByteLen] = useState(32)
   const [prefix, setPrefix] = useState('sk_live_')
@@ -149,7 +154,7 @@ export function SecretKeyGeneratorClient() {
   const allText = useMemo(() => secrets.join('\n'), [secrets])
 
   const formatLabel =
-    format === 'alnum' || format === 'apikey' ? `${byteLen} random chars` : `${byteLen} bytes`
+    format === 'alnum' || format === 'apikey' ? `${byteLen} ${L('randomChars', 'random chars')}` : `${byteLen} ${L('bytes', 'bytes')}`
 
   return (
     <div className="space-y-5">
@@ -157,7 +162,7 @@ export function SecretKeyGeneratorClient() {
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <div>
           <label htmlFor="sk-format" className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
-            Format
+            {L('format', 'Format')}
           </label>
           <select
             id="sk-format"
@@ -166,18 +171,18 @@ export function SecretKeyGeneratorClient() {
             className="w-full rounded-lg border p-3 text-sm shadow-sm outline-none transition focus:ring-2"
             style={{ borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rgb(var(--bg-card))', color: 'rgb(var(--text))' }}
           >
-            <option value="hex">Hex</option>
-            <option value="base64">Base64</option>
-            <option value="base64url">Base64URL</option>
-            <option value="alnum">Alphanumeric (A–Z a–z 0–9)</option>
-            <option value="apikey">API key style (prefix + random)</option>
-            <option value="uuid">UUID v4</option>
+            <option value="hex">{L('fmtHex', 'Hex')}</option>
+            <option value="base64">{L('fmtBase64', 'Base64')}</option>
+            <option value="base64url">{L('fmtBase64Url', 'Base64URL')}</option>
+            <option value="alnum">{L('fmtAlnum', 'Alphanumeric (A–Z a–z 0–9)')}</option>
+            <option value="apikey">{L('fmtApiKey', 'API key style (prefix + random)')}</option>
+            <option value="uuid">{L('fmtUuid', 'UUID v4')}</option>
           </select>
         </div>
         {format === 'apikey' ? (
           <div>
             <label htmlFor="sk-prefix" className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
-              Prefix
+              {L('prefix', 'Prefix')}
             </label>
             <input
               id="sk-prefix"
@@ -218,7 +223,7 @@ export function SecretKeyGeneratorClient() {
       {format === 'apikey' && (
         <div>
           <label htmlFor="sk-length-api" className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
-            Random part: <span className="font-mono">{byteLen}</span> chars
+            {L('randomPart', 'Random part:')} <span className="font-mono">{byteLen}</span> {L('chars', 'chars')}
           </label>
           <input
             id="sk-length-api"
@@ -241,10 +246,10 @@ export function SecretKeyGeneratorClient() {
       {/* 统计徽标 */}
       <div className="flex flex-wrap gap-2 text-xs">
         <span className="rounded-full border px-3 py-1 font-medium" style={{ borderColor: 'rgb(var(--border))', color: 'rgb(var(--text-muted))' }}>
-          Length: <span className="font-mono">{chars}</span> chars
+          {L('length', 'Length:')} <span className="font-mono">{chars}</span> {L('chars', 'chars')}
         </span>
         <span className="rounded-full border px-3 py-1 font-medium" style={{ borderColor: 'rgb(var(--border))', color: 'rgb(var(--text-muted))' }}>
-          Entropy: <span className="font-mono">{bits}</span> bits
+          {L('entropy', 'Entropy:')} <span className="font-mono">{bits}</span> {L('bits', 'bits')}
         </span>
         <span className="rounded-full border px-3 py-1 font-semibold" style={{ borderColor: strength.color, color: strength.color }}>
           {strength.label}
@@ -255,7 +260,7 @@ export function SecretKeyGeneratorClient() {
       <div className="flex flex-wrap items-center gap-3">
         {[1, 5, 10].map((n) => (
           <button key={n} type="button" onClick={() => handleCount(n)} className={`btn ${count === n ? 'btn-primary' : 'btn-secondary'}`}>
-            Generate {n}
+            {L('generate', 'Generate')} {n}
           </button>
         ))}
       </div>
@@ -272,7 +277,7 @@ export function SecretKeyGeneratorClient() {
               <code className="min-w-0 flex-1 break-all font-mono text-sm" style={{ color: 'rgb(var(--text))' }}>
                 {s}
               </code>
-              <CopyButton value={s} label="Copy" />
+              <CopyButton value={s} label={L('copy', 'Copy')} />
             </div>
           ))}
         </div>
@@ -282,9 +287,9 @@ export function SecretKeyGeneratorClient() {
       {secrets.length > 0 && (
         <div className="flex flex-wrap items-center gap-3">
           <button type="button" onClick={() => regenerate(count)} className="btn btn-secondary">
-            <RefreshCw className="h-4 w-4" /> Regenerate all
+            <RefreshCw className="h-4 w-4" /> {L('regenerateAll', 'Regenerate all')}
           </button>
-          <ResultActions summary={allText} filename="secrets.txt" downloadContent={`${allText}\n`} copyLabel="Copy all" />
+          <ResultActions summary={allText} filename="secrets.txt" downloadContent={`${allText}\n`} copyLabel={L('copyAll', 'Copy all')} />
         </div>
       )}
 
@@ -292,10 +297,7 @@ export function SecretKeyGeneratorClient() {
         className="rounded-md p-3 text-xs"
         style={{ backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text-subtle))' }}
       >
-        🔒 Generated with <code>crypto.getRandomValues</code> — your browser&apos;s CSPRNG — entirely on this device;
-        nothing is uploaded. Alphanumeric output uses <strong>rejection sampling</strong> so every character is
-        uniformly distributed (no modulo bias). Store generated secrets in a password manager or your
-        platform&apos;s secrets store, and rotate any key that ever appears in logs, tickets, or screenshots.
+        {L('noteIntro', '🔒 Generated with ')}<code>crypto.getRandomValues</code>{L('noteMid1', ' — your browser&apos;s CSPRNG — entirely on this device; nothing is uploaded. Alphanumeric output uses ')}<strong>{L('noteRejectionSampling', 'rejection sampling')}</strong>{L('noteOutro', ' so every character is uniformly distributed (no modulo bias). Store generated secrets in a password manager or your platform&apos;s secrets store, and rotate any key that ever appears in logs, tickets, or screenshots.')}
       </p>
     </div>
   )

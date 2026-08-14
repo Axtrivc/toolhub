@@ -6,6 +6,10 @@ import type { ToolL10n } from '../tool-l10n'
 
 export const unitPriceCalculatorL10n: ToolL10n = {
   zh: {
+    formula: {
+      formula: 'Unit price = total price / quantity',
+      explain: '单件价格(每盎司、每件、每米)。比较单价——而非整包价格——才能在规格不同时找到真正最划算的。',
+    },
     useCases: ['按每克/每毫升/每件比较真实性价比', '看大包装是不是真的更划算', '对比不同单位的产品价格', '找到每单位最便宜的选项'],
     faqs: [
       { q: '这个工具能用在非食品上吗?', a: '能。卫生纸、纸尿裤、电池等按件数出售的,单位选「件」。液体用 ml,固体用 g。计算方法一样。' },
@@ -19,6 +23,10 @@ export const unitPriceCalculatorL10n: ToolL10n = {
     },
   },
   es: {
+    formula: {
+      formula: 'Unit price = total price / quantity',
+      explain: 'Precio por unidad (por onza, por pieza, por metro). Comparar el precio unitario — no el del paquete — revela la mejor compra real cuando los tamaños difieren.',
+    },
     useCases: ['comparar el valor real por gramo/ml/unidad', 'ver si el formato grande sale realmente más barato', 'comparar precios con unidades distintas', 'encontrar la opción más barata por unidad'],
     faqs: [
       { q: '¿Sirve para productos que no son alimentos?', a: 'Sí. Usa «unidad» para papel higiénico, pañales, pilas o cualquier producto vendido por cantidad. Usa ml para líquidos y g para sólidos. La matemática es la misma.' },
@@ -32,6 +40,10 @@ export const unitPriceCalculatorL10n: ToolL10n = {
     },
   },
   de: {
+    formula: {
+      formula: 'Unit price = total price / quantity',
+      explain: 'Preis pro Einheit (pro Unze, pro Stück, pro Meter). Den Einheitspreis zu vergleichen — nicht den Packungspreis — zeigt bei unterschiedlichen Größen den wahren Bestkauf.',
+    },
     useCases: ['den echten Wert pro Gramm/ml/Stück vergleichen', 'sehen, ob die Großpackung wirklich günstiger ist', 'Preise bei unterschiedlichen Einheiten vergleichen', 'die günstigste Option pro Einheit finden'],
     faqs: [
       { q: 'Funktioniert das für Nicht-Lebensmittel?', a: 'Ja. Verwende „Stück" als Einheit für Toilettenpapier, Windeln, Batterien oder alles, was pro Stück verkauft wird. Für Flüssigkeiten ml, für Feststoffe g. Die Rechnung ist dieselbe.' },

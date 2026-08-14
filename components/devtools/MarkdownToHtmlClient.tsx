@@ -4,6 +4,8 @@ import { useState, useMemo, useCallback } from 'react'
 import DOMPurify from 'dompurify'
 import { CopyButton } from '@/components/CopyButton'
 import { LoadSampleButton } from '@/components/LoadSampleButton'
+import { useApp } from '@/components/providers/AppProviders'
+import { tui } from '@/lib/i18n/tool-l10n'
 
 /**
  * Markdown to HTML Converter —— 手写 CommonMark 子集 + GFM 表格
@@ -252,6 +254,10 @@ function markdownToHtml(md: string): string {
 }
 
 export function MarkdownToHtmlClient() {
+  const { locale } = useApp()
+  // 取本地化 UI 串;缺失回退英文(SSR 恒英文)。
+  const L = (key: string, fb: string) => tui('markdown-to-html', locale, key, fb)
+
   const [input, setInput] = useState('')
 
   const result = useMemo<{ output?: string; error?: string }>(() => {
@@ -262,9 +268,10 @@ export function MarkdownToHtmlClient() {
       // (初始输入为空,SSR 不会走到这里;sanitize 实际在浏览器执行。)
       return { output: DOMPurify.sanitize(markdownToHtml(input)) }
     } catch (e) {
-      return { error: e instanceof Error ? e.message : 'Could not convert Markdown' }
+      return { error: e instanceof Error ? e.message : L('couldNotConvert', 'Could not convert Markdown') }
     }
-  }, [input])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [input, locale])
 
   const handleLoadSample = useCallback(() => setInput(SAMPLE_MD), [])
 
@@ -276,7 +283,7 @@ export function MarkdownToHtmlClient() {
       <div>
         <div className="mb-2 flex items-center justify-between">
           <label htmlFor="md-input" className="text-sm font-medium text-slate-700">
-            Markdown
+            {L('inputLabel', 'Markdown')}
           </label>
           <div className="flex items-center gap-2">
             <LoadSampleButton onLoad={handleLoadSample} variant="compact" />
@@ -286,7 +293,7 @@ export function MarkdownToHtmlClient() {
                 onClick={() => setInput('')}
                 className="-my-1 rounded-md px-2 py-1 text-xs text-slate-400 hover:text-red-500 sm:text-sm"
               >
-                Clear
+                {L('clear', 'Clear')}
               </button>
             )}
           </div>
@@ -295,7 +302,7 @@ export function MarkdownToHtmlClient() {
           id="md-input"
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          placeholder={'# Heading\n\nSome **bold** text.'}
+          placeholder={L('placeholder', '# Heading\n\nSome **bold** text.')}
           rows={10}
           spellCheck={false}
           className={inputCls}
@@ -313,7 +320,7 @@ export function MarkdownToHtmlClient() {
           <div>
             <div className="mb-2 flex items-center justify-between">
               <span className="text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>HTML</span>
-              <CopyButton value={result.output} label="Copy" />
+              <CopyButton value={result.output} label={L('copy', 'Copy')} />
             </div>
             <pre
               className="overflow-x-auto rounded-lg border bg-slate-50 p-4 text-xs"
@@ -323,7 +330,7 @@ export function MarkdownToHtmlClient() {
             </pre>
           </div>
           <div>
-            <span className="mb-2 block text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>Preview</span>
+            <span className="mb-2 block text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>{L('preview', 'Preview')}</span>
             <div
               className="prose-content rounded-lg border p-4 text-sm"
               style={{ borderColor: 'rgb(var(--border))', backgroundColor: 'rgb(var(--bg-card))' }}
@@ -334,7 +341,7 @@ export function MarkdownToHtmlClient() {
       )}
 
       <p className="rounded-md p-3 text-xs" style={{ backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text-subtle))' }}>
-        🔒 100% client-side — supports headings, lists, code, tables, links, bold, italic.
+        {L('note', '🔒 100% client-side — supports headings, lists, code, tables, links, bold, italic.')}
       </p>
     </div>
   )

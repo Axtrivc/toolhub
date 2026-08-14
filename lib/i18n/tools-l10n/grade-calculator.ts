@@ -6,6 +6,10 @@ import type { ToolL10n } from '../tool-l10n'
 
 export const gradeCalculatorL10n: ToolL10n = {
   zh: {
+    formula: {
+      formula: 'grade = Σ ( scoreᵢ × weightᵢ ) / Σ weightᵢ',
+      explain: '加权平均。每项分数乘以其权重(如考试 40%、作业 60%),再除以总权重。权重高的项目对成绩影响更大。',
+    },
     ui: {
       'in.earned': '得分点数',
       'in.possible': '满分点数',
@@ -24,6 +28,10 @@ export const gradeCalculatorL10n: ToolL10n = {
     ],
   },
   es: {
+    formula: {
+      formula: 'grade = Σ ( scoreᵢ × weightᵢ ) / Σ weightᵢ',
+      explain: 'Promedio ponderado. Cada nota se multiplica por su peso (p. ej. examen 40%, deberes 60%) y se divide entre el peso total. Los ítems con más peso mueven más la nota.',
+    },
     ui: {
       'in.earned': 'Puntos obtenidos',
       'in.possible': 'Puntos posibles',
@@ -42,6 +50,10 @@ export const gradeCalculatorL10n: ToolL10n = {
     ],
   },
   de: {
+    formula: {
+      formula: 'grade = Σ ( scoreᵢ × weightᵢ ) / Σ weightᵢ',
+      explain: 'Gewichteter Durchschnitt. Jede Note wird mit ihrer Gewichtung multipliziert (z. B. Klausur 40%, Hausaufgaben 60%) und durch das Gesamtgewicht geteilt. Höher gewichtete Posten bewegen die Note mehr.',
+    },
     ui: {
       'in.earned': 'Erreichte Punkte',
       'in.possible': 'Mögliche Punkte',

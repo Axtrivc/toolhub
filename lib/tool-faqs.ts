@@ -1335,6 +1335,427 @@ export const toolFaqs: Record<string, FaqPair[]> = {
       a: 'Your device timezone comes from the browser/OS settings, while the IP timezone is derived from geolocating your exit IP. If they disagree — for example the device reports Asia/Shanghai but the IP resolves to America/New_York — you are almost certainly behind a VPN or proxy, and anti-fraud systems use exactly this mismatch as a leak signal.',
     },
   ],
+  // ══════════ _batch-faqs-gap(30 个补缺)══════════
+  'gpt-token-counter': [
+    {
+      q: 'Is this token count exact or an estimate?',
+      a: 'An estimate. It uses the ~4-characters-per-token rule of thumb refined by a word/punctuation split, so it lands near cl100k_base. Real billing uses the provider\'s exact tokenizer, so treat the number as an order-of-magnitude guide.',
+    },
+    {
+      q: 'Why does my real token count differ from this estimate?',
+      a: 'Different models use different tokenizers (cl100k_base, o200k_base, Claude\'s tokenizer), and code, CJK text, emojis, and rare Unicode each break the 4-chars-per-token average. Non-English text typically needs more tokens per character, so the estimate drifts most there.',
+    },
+    {
+      q: 'How is the API cost calculated?',
+      a: 'Estimated tokens × the per-million-token price you pick for the chosen model. Because the token count itself is approximate, the cost is also a planning estimate — check your provider dashboard for exact billing.',
+    },
+  ],
+  'ip-subnet-calculator': [
+    {
+      q: 'What is CIDR notation (e.g. /24)?',
+      a: 'CIDR is the /number after an IP that says how many bits are the network part. /24 means the first 24 bits are fixed and the last 8 vary, giving 256 addresses. Smaller numbers (like /16) cover more hosts; larger numbers (like /30) cover fewer.',
+    },
+    {
+      q: 'Why are there two fewer usable hosts than the address count?',
+      a: 'In every subnet the first address is reserved as the network address and the last as the broadcast address, so neither can be assigned to a device. A /24 has 256 addresses but only 254 usable hosts; a /30 has 4 addresses but only 2 usable.',
+    },
+    {
+      q: 'What are the network address and broadcast address for?',
+      a: 'The network address identifies the subnet itself and is used by routers; the broadcast address sends a packet to every host in that subnet. Neither belongs to an individual device, which is why both are excluded from the usable host range.',
+    },
+  ],
+  'chmod-calculator': [
+    {
+      q: 'What does chmod 777 mean, and is it safe?',
+      a: '777 grants read, write, and execute to everyone (owner, group, and others). It is convenient for testing but unsafe on a server, because any user can modify or run the file. Use 755 for directories and executable scripts, and 644 for regular files, instead.',
+    },
+    {
+      q: 'How do the rwx letters map to octal digits?',
+      a: 'Each permission position has a value: read = 4, write = 2, execute = 1. Add them up per group. So rwx = 7 (4+2+1), r-x = 5 (4+0+1), rw- = 6 (4+2+0). 755 therefore means rwxr-xr-x.',
+    },
+    {
+      q: 'What is the difference between 755 and 644?',
+      a: '755 (rwxr-xr-x) lets the owner read, write, and execute while others can only read and execute — correct for directories and scripts. 644 (rw-r--r--) lets the owner read and write while others can only read — the safe default for static files like HTML and images.',
+    },
+  ],
+  'ssh-key-generator': [
+    {
+      q: 'Ed25519 or RSA — which should I choose?',
+      a: 'Prefer Ed25519: the keys are much shorter, faster, and offer equivalent or better security than RSA-4096. Use RSA only when you must connect to older servers or hardware that does not yet support Ed25519.',
+    },
+    {
+      q: 'Is my private key ever uploaded anywhere?',
+      a: 'No. The key pair is generated locally in your browser with the Web Crypto API, and the private key never leaves your device. Only you can copy or download it — there is no server-side storage.',
+    },
+    {
+      q: 'What RSA key size should I use?',
+      a: '4096 bits if you want a long-term margin; 2048 is still acceptable for compatibility. Larger keys are slower to generate and use, so for most new setups Ed25519 is the better choice.',
+    },
+  ],
+  'bcrypt-hash-generator': [
+    {
+      q: 'Why is bcrypt better than SHA-256 for passwords?',
+      a: 'bcrypt is deliberately slow and has a tunable cost factor, so brute-forcing a leaked hash becomes prohibitively expensive as hardware improves. SHA-256 is fast by design — great for file checksums, but bad for passwords because an attacker can guess billions per second.',
+    },
+    {
+      q: 'What cost factor should I use?',
+      a: 'Pick the highest value your server can afford at login (commonly 10–12 today). Each increment roughly doubles the hashing time, so the right number depends on your hardware and acceptable login latency. Re-evaluate it every year or two.',
+    },
+    {
+      q: 'Can a bcrypt hash be reversed back to the password?',
+      a: 'No — hashing is one-way. What attackers do instead is guess passwords, hash each guess, and compare. That is exactly why the slow cost factor matters: it makes each guess expensive. The salt (embedded in the hash) prevents reusing precomputed rainbow tables.',
+    },
+  ],
+  'user-agent-parser': [
+    {
+      q: 'Why does my UA say "Chrome" when I use Edge or Brave?',
+      a: 'Chromium-based browsers (Edge, Brave, Opera, Vivaldi) all include "Chrome" in their UA string for site compatibility, plus their own token. The parser reports the most specific recognized browser, so Edge and Brave are detected from their dedicated tokens rather than the shared "Chrome" one.',
+    },
+    {
+      q: 'How reliable is browser and OS detection from a UA string?',
+      a: 'Useful but not infallible. Browsers are phasing out granular UA strings (User-Agent Client Hints), privacy tools freeze or spoof them, and new or niche products may not yet be in the detection database. Treat the result as a hint, not a guarantee.',
+    },
+    {
+      q: 'What is a user-agent string actually used for?',
+      a: 'Servers and analytics use it to choose content (e.g. mobile layout), log browser share, or block known bots. Increasingly, feature detection in JavaScript is preferred over UA sniffing, because UA strings are unreliable and easily spoofed.',
+    },
+  ],
+  'json-schema-generator': [
+    {
+      q: 'Which JSON Schema draft does it output?',
+      a: 'Draft-07. It uses the standard "type", "properties", "required", and "items" keywords that all major validators support, so the schema drops into most existing validation pipelines without changes.',
+    },
+    {
+      q: 'How does it decide which fields are "required"?',
+      a: 'A field is marked required when it appears in every object of the sample data. Fields missing in at least one record stay optional, which mirrors how real-world data usually looks and avoids over-constraining your schema.',
+    },
+    {
+      q: 'Does it handle nested objects and arrays?',
+      a: 'Yes. Nested objects become nested "properties", and arrays are described with "items" based on their element type. When an array mixes shapes, the tool infers from the elements it can see, so richer samples produce more accurate schemas.',
+    },
+  ],
+  'naming-case-converter': [
+    {
+      q: 'What is the difference between camelCase and PascalCase?',
+      a: 'camelCase starts lowercase and capitalizes each following word (parseHtml), while PascalCase (a.k.a. UpperCamelCase) capitalizes the first word too (ParseHtml). camelCase is the convention for variables and functions; PascalCase is used for classes and React components.',
+    },
+    {
+      q: 'How are word boundaries detected in a name?',
+      a: 'The converter splits on hyphens, underscores, spaces, and case transitions, so "HTMLParser", "html_parser", and "html-parser" all become the same word list before reformatting. This lets you convert between every style in either direction.',
+    },
+    {
+      q: 'Does bulk mode keep one converted name per line?',
+      a: 'Yes. Paste a whole list (one identifier per line) and each line is converted independently, preserving the line order. Blank lines stay blank, so the output aligns one-to-one with your input.',
+    },
+  ],
+  'nginx-config-generator': [
+    {
+      q: 'Does this replace manual nginx tuning?',
+      a: 'It gives you a correct, production-ready starting server block, but high-traffic setups still need tuning (worker counts, buffering, rate limits) matched to your hardware and traffic. Treat the output as a solid baseline to edit, not a final optimized config.',
+    },
+    {
+      q: 'Does the output include SSL / HTTPS?',
+      a: 'When you enable SSL it generates the certificate paths, the HTTPS server block, HTTP-to-HTTPS redirect, and modern cipher/protocol settings. You still point the paths at your real certificates (e.g. from Let\'s Encrypt) before deploying.',
+    },
+    {
+      q: 'Can it configure a WebSocket reverse proxy?',
+      a: 'Yes. Enabling the WebSocket option adds the Upgrade and Connection headers and the proxy timeout tuning that WebSocket long-lived connections need, so real-time apps work behind the proxy without extra editing.',
+    },
+  ],
+  'webp-to-png-converter': [
+    {
+      q: 'Will I lose transparency converting WebP to PNG?',
+      a: 'No. PNG supports full alpha transparency and is lossless, so a transparent WebP becomes a transparent PNG with no quality loss. This is the safest format when you must hand an image to software that does not support WebP.',
+    },
+    {
+      q: 'Does converting WebP to JPG lose quality?',
+      a: 'JPG is always lossy and does not support transparency, so transparent areas get filled with a background color and fine detail is recompressed. Use PNG for lossless or transparent output, and JPG only when a smaller file matters more than perfect fidelity.',
+    },
+    {
+      q: 'Is my image uploaded to a server?',
+      a: 'No. Conversion happens entirely in your browser, so the image never leaves your device. That keeps private assets private and lets the tool work offline.',
+    },
+  ],
+  'png-to-webp-converter': [
+    {
+      q: 'How much smaller will WebP be than PNG?',
+      a: 'Typically 25–35% smaller for the same image at visually identical quality, and often far more for photos. PNG is lossless and inefficient for photographs, so converting photographic PNGs to WebP usually gives the biggest savings.',
+    },
+    {
+      q: 'Does WebP support transparency?',
+      a: 'Yes. WebP has lossless alpha transparency just like PNG, so cut-outs, logos, and icons keep their transparent backgrounds while shrinking the file size. Set a high quality value to preserve sharp edges.',
+    },
+    {
+      q: 'What quality setting should I choose?',
+      a: 'For photos, 75–85 is visually near-indistinguishable from the original and much smaller. For graphics with flat colors or text, push quality to 90+ (or use lossless) to avoid banding and blurry edges.',
+    },
+  ],
+  'image-resizer': [
+    {
+      q: 'Does resizing reduce image quality?',
+      a: 'Downscaling discards pixels and applies resampling, so there is some softening, but at normal viewing sizes it is barely noticeable. Upscaling cannot add real detail and will look blurry, so always prefer resizing from a larger original.',
+    },
+    {
+      q: 'Can I resize without distorting the aspect ratio?',
+      a: 'Yes. The aspect-ratio lock keeps width and height proportional, so when you change one dimension the other updates automatically. Turn it off only when you need a forced, non-proportional crop.',
+    },
+    {
+      q: 'Which output format should I pick after resizing?',
+      a: 'WebP for the smallest files, JPG for photographs, and PNG when you need lossless quality or transparency. The tool previews the resulting file size for each option so you can choose the best trade-off before downloading.',
+    },
+  ],
+  'svg-minifier': [
+    {
+      q: 'Will the SVG look the same after minifying?',
+      a: 'Yes. Minification removes only data the renderer ignores — comments, editor metadata, hidden layers, redundant whitespace, and default attributes — so the visual output is identical, just encoded more compactly.',
+    },
+    {
+      q: 'What exactly gets removed?',
+      a: 'Comments, the inkscape/sodipodi namespace cruft that editors inject, empty groups and definitions, trailing whitespace, and rounded coordinates where safe. Anything that affects rendering is preserved, so the file size drops without changing the picture.',
+    },
+    {
+      q: 'How much size can I expect to save?',
+      a: 'Usually 20–60%, and much more for files exported straight from design tools that bloat the markup with metadata. The before/after byte counts are shown instantly so you can see the exact savings.',
+    },
+  ],
+  'css-gradient-generator': [
+    {
+      q: 'What is the difference between linear and radial gradients?',
+      a: 'A linear gradient blends colors along a straight line at an angle you set, while a radial gradient radiates outward from a center point in a circle or ellipse. Use linear for backgrounds and buttons; radial for spotlights and spherical effects.',
+    },
+      {
+      q: 'How do I add more than two color stops?',
+      a: 'Add stops on the preview bar and drag them to position; each gets a percentage position automatically. The generator writes the full stops list into the CSS, so multi-color blends and hard-edged bands both copy out ready to paste.',
+    },
+    {
+      q: 'Does the output work in all browsers?',
+      a: 'Yes. It outputs standard linear-gradient() / radial-gradient() CSS, supported by all current browsers. For legacy engines you can add a solid-color fallback behind the gradient, but modern browsers need no extra prefixes.',
+    },
+  ],
+  'css-clamp-calculator': [
+    {
+      q: 'What does clamp() actually do?',
+      a: 'clamp(min, preferred, max) lets a value grow and shrink with the viewport (via the preferred vw part) but never goes below min or above max. It is the cleanest way to make font sizes and spacing fluid without media queries.',
+    },
+      {
+      q: 'Why is my text too big on mobile or too small on desktop?',
+      a: 'Usually the min/max bounds or the viewport range are mis-set. Set the min font size for the smallest screen and the max for the largest, then give the viewport range that spans those two breakpoints — the calculator builds the preferred value so the scaling stays smooth between them.',
+    },
+    {
+      q: 'What is "fluid typography"?',
+      a: 'Text that scales smoothly with the viewport instead of jumping between fixed sizes at breakpoints. With clamp() one rule covers every screen width, which feels more natural and needs far less CSS than a stack of media queries.',
+    },
+  ],
+  'csv-to-markdown-table': [
+    {
+      q: 'How does it handle commas inside quoted fields?',
+      a: 'It parses the CSV properly, so a comma inside double quotes is treated as literal text, not a delimiter. Quoted fields with newlines and escaped quotes are also handled, so real-world exports from spreadsheets convert cleanly.',
+    },
+    {
+      q: 'Can I control column alignment?',
+      a: 'Yes. You can set left, center, or right alignment per column, which becomes the Markdown alignment row (:---, :---:, ---:). Default is left alignment, matching what most READMEs expect.',
+    },
+    {
+      q: 'Does it accept TSV (tab-separated) input?',
+      a: 'Yes. Tab-separated data is detected and split the same way as comma-separated, so you can paste output from spreadsheets or databases directly without first converting the delimiter.',
+    },
+  ],
+  'text-cleaner': [
+    {
+      q: 'What does "remove accents" do exactly?',
+      a: 'It converts accented characters to their base form — café becomes cafe, Münster becomes Munster — using Unicode normalization (NFD then stripping combining marks). It removes the diacritic marks, not the letters themselves, so the text stays readable.',
+    },
+    {
+      q: 'Will it delete my normal punctuation?',
+      a: 'Only if you enable the "remove special characters" option. By default regular punctuation, digits, and letters are kept; the tool is opt-in per cleaning rule, so you control exactly which transformations run.',
+    },
+    {
+      q: 'Does it remove emojis and URLs?',
+      a: 'Yes, both are optional rules. Emojis and symbols are stripped via their Unicode ranges, and URLs are removed by pattern matching — handy for cleaning user comments or preparing text for analysis.',
+    },
+  ],
+  'srt-subtitle-shift': [
+    {
+      q: 'Does a positive offset shift subtitles earlier or later?',
+      a: 'A positive offset adds time, so every cue starts later — use this when the subtitles appear before the speech. A negative offset subtracts time, pulling cues earlier for when they lag behind the audio.',
+    },
+    {
+      q: 'Does it renumber the cue indices?',
+      a: 'Yes. After shifting, the cues are renumbered sequentially from 1 in their new chronological order, so the output is always a valid, correctly ordered SRT file even if offsets move cues relative to each other.',
+    },
+    {
+      q: 'Can it strip HTML and ASS formatting tags?',
+      a: 'Yes. The tag-stripping option removes inline HTML (<i>, <b>) and ASS-style override tags, leaving clean plain-text subtitles. This is useful when a player renders the tags as visible gibberish instead of styling.',
+    },
+  ],
+  'code-beautifier': [
+    {
+      q: 'Which languages does it format?',
+      a: 'HTML, CSS, JavaScript, and JSON. Each is parsed with a language-aware formatter that re-indents and normalizes spacing, so minified or messy code becomes readable without changing its meaning.',
+    },
+    {
+      q: 'Will beautifying change how my code runs?',
+      a: 'No. Formatting only adjusts whitespace, line breaks, and indentation — it does not alter tokens, logic, or values. The beautified output is functionally identical to the input, just easier to read.',
+    },
+    {
+      q: 'Should I use 2 or 4 spaces?',
+      a: 'Match your project\'s existing style. Two spaces is common for HTML, CSS, and JSON; four is often used in JavaScript. Consistency within a codebase matters more than the specific number, so pick the option that matches your team\'s convention.',
+    },
+  ],
+  'secret-key-generator': [
+    {
+      q: 'Are these keys cryptographically secure?',
+      a: 'Yes. They use the browser\'s secure random source (crypto.getRandomValues), the same CSPRNG used for TLS keys, so the output is suitable for API secrets, session tokens, and other security-sensitive values — not Math.random().',
+    },
+    {
+      q: 'How long should an API key be?',
+      a: '32 hex characters (128 bits) is a sensible minimum and 64 hex characters (256 bits) gives a strong margin. Length matters far more than the alphabet for brute-force resistance, so prefer longer over more exotic characters.',
+    },
+    {
+      q: 'What is the difference between hex and Base64 output?',
+      a: 'For the same amount of randomness, hex uses only 0-9 and a-f (longer string), while Base64 uses a larger alphabet (shorter string). Both are equally secure for a given bit length — pick whichever your consuming system expects.',
+    },
+  ],
+  'auto-loan-calculator': [
+    {
+      q: 'Does it include sales tax and fees?',
+      a: 'It factors in sales tax on the purchase price and lets you add fees and a trade-in value, so the loan amount reflects what you actually finance. Registration, dealer doc fees, and add-on products are not itemized — add them as a lump fee if needed.',
+    },
+    {
+      q: 'How does the down payment affect my monthly payment?',
+      a: 'A larger down payment shrinks the principal you borrow, which lowers both the monthly payment and the total interest. Putting 20% or more down can also help you qualify for a better APR and avoid being "underwater" on the loan.',
+    },
+    {
+      q: 'What APR is typical for a car loan?',
+      a: 'It depends heavily on your credit and whether the car is new or used. In recent years new-car loans have ranged from roughly 5% to 10%+ and used-car loans a few points higher; excellent credit gets the lowest rates. Always check the APR, not just the monthly payment.',
+    },
+  ],
+  'ebay-fee-calculator': [
+    {
+      q: 'Which fees does eBay charge sellers?',
+      a: 'Mainly the final value fee (a percentage of the total sale amount including shipping) plus a per-order fixed fee, and the payment processing fee for handling the buyer\'s payment. Optional promoted-listing fees apply only if you use them.',
+    },
+    {
+      q: 'Is the payment processing fee included?',
+      a: 'Yes. The calculator bundles eBay\'s managed-payments processing fee with the final value fee, since both are deducted from your payout on most accounts. The result shows the net you actually receive after both.',
+    },
+    {
+      q: 'Does it work for Etsy too?',
+      a: 'Yes. The tool supports Etsy\'s listing, transaction, and payment processing fees so you can compare the true net payout across marketplaces before deciding where to list.',
+    },
+  ],
+  'saas-ltv-churn-calculator': [
+    {
+      q: 'What is the difference between LTV and ARPU?',
+      a: 'ARPU (average revenue per user) is what one customer pays per period right now; LTV (lifetime value) is the total revenue you expect from that customer over their whole relationship. LTV is essentially ARPU multiplied by how many periods an average customer stays.',
+    },
+    {
+      q: 'How does churn rate affect LTV?',
+      a: 'LTV is inversely tied to churn: with monthly churn c, the average customer lifetime is about 1/c months, so halving your churn roughly doubles your LTV. That is why retention improvements compound so powerfully into revenue.',
+    },
+    {
+      q: 'What is a healthy LTV:CAC ratio?',
+      a: 'A common benchmark is 3:1 — you earn three times what it costs to acquire a customer. Below 2:1 growth is hard to sustain; above 5:1 you may be under-investing in growth and leaving market share on the table.',
+    },
+  ],
+  'freelance-invoice-generator': [
+    {
+      q: 'Can I save the invoice as a PDF?',
+      a: 'Yes. The invoice is laid out for printing, so use your browser\'s "Print to PDF" to save a clean, watermark-free PDF. Because everything runs in your browser, the layout stays exactly as previewed.',
+    },
+    {
+      q: 'Does it store my client or business data?',
+      a: 'No. All details — your info, client info, line items, and tax — live only in your browser for the current session; nothing is uploaded or persisted on a server. Refresh or close the tab and the data is gone.',
+    },
+    {
+      q: 'Can I add tax and discounts?',
+      a: 'Yes. You set a tax rate that applies to the subtotal, and per-line or overall discounts flow through to the totals automatically, so the final amount due is always calculated consistently.',
+    },
+  ],
+  'reverse-stripe-fee-calculator': [
+    {
+      q: 'Why is the payout less than the amount I charged?',
+      a: 'Stripe deducts a percentage plus a fixed fee from each transaction, so the money that arrives in your account is always below the charge total. For micro-payments the fixed fee eats a large share, which is why small charges feel especially costly.',
+    },
+    {
+      q: 'How does reverse mode work?',
+      a: 'You enter the amount you want to actually receive, and it works backward through the fee formula to find the price you must charge so that, after fees, you net exactly your target. This is how you pass fees on to the customer cleanly.',
+    },
+    {
+      q: 'What are Stripe\'s current fees?',
+      a: 'In the US the standard rate is around 2.9% + $0.30 per successful card charge, but it varies by country, payment method, and volume. The presets are editable, so update them to match your exact rate from the Stripe dashboard.',
+    },
+  ],
+  'timezone-converter': [
+    {
+      q: 'Does it account for daylight saving time (DST)?',
+      a: 'Yes. Each time zone is handled by its IANA identifier (e.g. America/New_York), which carries its own DST rules, so offsets and the "is it next day" flag update correctly on the exact transition dates. You do not have to add or subtract an hour manually.',
+    },
+    {
+      q: 'How do I find overlapping working hours across regions?',
+      a: 'Add every participant\'s time zone, set the meeting time in one, and read off what the local clock says for each. The day-shift indicators show who would be on the next or previous calendar day, so you can spot awkward late-night slots instantly.',
+    },
+    {
+      q: 'What does a "next day" or "previous day" label mean?',
+      a: 'It means that while it is still the same calendar moment everywhere, the local date in that time zone has rolled forward (next day) or backward (previous day) relative to the time you entered. It flags scheduling that crosses midnight for one or more attendees.',
+    },
+  ],
+  'days-countdown-calculator': [
+    {
+      q: 'Can it count business days only?',
+      a: 'Yes. The business-days mode excludes Saturdays and Sundays, so contract deadlines, shipping, and SLA windows that are measured in working days are counted correctly. (Public holidays vary by country, so add those manually if needed.)',
+    },
+    {
+      q: 'Does it include or exclude the start and end dates?',
+      a: 'It counts the difference between the two dates, so by default neither endpoint is double-counted — the result is the number of full days between them. For a "days until" countdown, the target date is the reference point the timer counts down to.',
+    },
+    {
+      q: 'Can it show hours, minutes, and seconds, not just days?',
+      a: 'Yes. The live countdown breaks the remaining time into days, hours, minutes, and seconds and updates in real time, so you see the exact time remaining down to the second for an event or deadline.',
+    },
+  ],
+  'reading-speaking-time': [
+    {
+      q: 'What reading speed counts as "average"?',
+      a: 'Around 200–250 words per minute for silent reading of adult non-fiction. The presets give slow (~150), average (~230), and fast (~320) options, and a custom slider lets you match your own pace or a specific audience.',
+    },
+    {
+      q: 'Why is speaking time longer than reading time?',
+      a: 'People read faster than they speak — aloud you add pauses, emphasis, and breath. A common public-speaking pace is 130–150 words per minute, so the same text takes noticeably longer to present than to read silently.',
+    },
+    {
+      q: 'Can I set my own words-per-minute speed?',
+      a: 'Yes. The custom speed slider overrides the presets, so you can match a known narration rate, a slide-deck time budget, or a podcast script length precisely instead of relying on the average values.',
+    },
+  ],
+  'random-choice-picker': [
+    {
+      q: 'Is the selection truly random?',
+      a: 'It uses your browser\'s built-in random number generator, which is sufficient for fair picks, raffles, and decision-making. For cryptographic security you would want a dedicated CSPRNG, but for choosing among options it is unbiased and unpredictable enough.',
+    },
+    {
+      q: 'Can it pick multiple unique winners?',
+      a: 'Yes. You can draw several winners without repeats — each option is picked at most once per draw — which is ideal for giveaways and assigning prizes or tasks fairly across a list.',
+    },
+    {
+      q: 'Does it keep a history of past picks?',
+      a: 'Yes, recent results are kept in a history list so you can review what was chosen across multiple draws. This helps when running several rounds and you need to confirm no one was skipped or double-picked.',
+    },
+  ],
+  'wordle-solver': [
+    {
+      q: 'Does it use the official Wordle answer list?',
+      a: 'It uses a large built-in English word list sized to cover Wordle-style five-letter answers, so suggestions match the kind of words the game accepts. It is a strong solving aid, though no third-party list is guaranteed to mirror the game exactly on every future day.',
+    },
+    {
+      q: 'How do green, yellow, and gray hints map to the inputs?',
+      a: 'Green (correct spot) letters go in the "known position" fields; yellow (in the word, wrong spot) go in the "included letters" box; gray (not in the word) go in "excluded letters." The solver filters the dictionary against all three to narrow the candidates.',
+    },
+    {
+      q: 'Does it support anagram and pattern solving?',
+      a: 'Yes. Beyond the standard hint filters it can match anagram patterns and known letter positions, which helps when you have scrambled letters or partial information and want every dictionary word that fits.',
+    },
+  ],
 }
 export function getToolFaqs(slug: string): FaqPair[] {
   return toolFaqs[slug] ?? []

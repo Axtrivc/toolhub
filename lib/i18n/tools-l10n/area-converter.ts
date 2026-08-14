@@ -6,6 +6,18 @@ import type { ToolL10n } from '../tool-l10n'
 
 export const areaConverterL10n: ToolL10n = {
   zh: {
+    ui: {
+      'note': '📐 用于房地产、土地和建筑。包含英亩和公顷。',
+      'unit.acre': '英亩 (ac)',
+      'unit.hectare': '公顷 (ha)',
+      'unit.sqcm': '平方厘米 (cm²)',
+      'unit.sqft': '平方英尺 (ft²)',
+      'unit.sqin': '平方英寸 (in²)',
+      'unit.sqkm': '平方千米 (km²)',
+      'unit.sqm': '平方米 (m²)',
+      'unit.sqmm': '平方毫米 (mm²)',
+      'unit.sqyd': '平方码 (yd²)',
+    },
     useCases: [
       '在平方米和平方英尺之间换算房屋面积',
       '在英亩和公顷之间换算农田面积',
@@ -18,6 +30,18 @@ export const areaConverterL10n: ToolL10n = {
     ],
   },
   es: {
+    ui: {
+      'note': '📐 Para bienes raíces, terrenos y construcción. Incluye acres y hectáreas.',
+      'unit.acre': 'Acres (ac)',
+      'unit.hectare': 'Hectáreas (ha)',
+      'unit.sqcm': 'Centímetros² (cm²)',
+      'unit.sqft': 'Pies² (ft²)',
+      'unit.sqin': 'Pulgadas² (in²)',
+      'unit.sqkm': 'Kilómetros² (km²)',
+      'unit.sqm': 'Metros² (m²)',
+      'unit.sqmm': 'Milímetros² (mm²)',
+      'unit.sqyd': 'Yardas² (yd²)',
+    },
     useCases: [
       'convertir la superficie de viviendas entre m² y ft²',
       'pasar superficie agrícola entre acres y hectáreas',
@@ -30,6 +54,18 @@ export const areaConverterL10n: ToolL10n = {
     ],
   },
   de: {
+    ui: {
+      'note': '📐 Für Immobilien, Grundstücke und Bau. Enthält Acres und Hektar.',
+      'unit.acre': 'Morgen (ac)',
+      'unit.hectare': 'Hektar (ha)',
+      'unit.sqcm': 'Quadratzentimeter (cm²)',
+      'unit.sqft': 'Quadratfuß (ft²)',
+      'unit.sqin': 'Quadratzoll (in²)',
+      'unit.sqkm': 'Quadratkilometer (km²)',
+      'unit.sqm': 'Quadratmeter (m²)',
+      'unit.sqmm': 'Quadratmillimeter (mm²)',
+      'unit.sqyd': 'Quadratyard (yd²)',
+    },
     useCases: [
       'Wohnfläche zwischen m² und ft² umrechnen',
       'Agrarfläche zwischen Acres und Hektar umrechnen',

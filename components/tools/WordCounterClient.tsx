@@ -1,6 +1,8 @@
 'use client'
 
 import { useState, useMemo } from 'react'
+import { useApp } from '@/components/providers/AppProviders'
+import { tui } from '@/lib/i18n/tool-l10n'
 
 export interface TextStats {
   characters: number
@@ -72,18 +74,21 @@ function formatTime(minutes: number): string {
 }
 
 export function WordCounterClient() {
+  const { locale } = useApp()
+  const L = (key: string, fb: string) => tui('word-counter', locale, key, fb)
+
   const [text, setText] = useState('')
 
   const stats = useMemo(() => analyzeText(text), [text])
 
   const metricCards = [
-    { label: 'Words', value: stats.words.toLocaleString(), highlight: true },
-    { label: 'Characters', value: stats.characters.toLocaleString() },
-    { label: 'Characters (no spaces)', value: stats.charactersNoSpaces.toLocaleString() },
-    { label: 'Sentences', value: stats.sentences.toLocaleString() },
-    { label: 'Paragraphs', value: stats.paragraphs.toLocaleString() },
-    { label: 'Reading Time', value: formatTime(stats.readingTime) },
-    { label: 'Speaking Time', value: formatTime(stats.speakingTime) },
+    { label: L('words', 'Words'), value: stats.words.toLocaleString(), highlight: true },
+    { label: L('characters', 'Characters'), value: stats.characters.toLocaleString() },
+    { label: L('charactersNoSpaces', 'Characters (no spaces)'), value: stats.charactersNoSpaces.toLocaleString() },
+    { label: L('sentences', 'Sentences'), value: stats.sentences.toLocaleString() },
+    { label: L('paragraphs', 'Paragraphs'), value: stats.paragraphs.toLocaleString() },
+    { label: L('readingTime', 'Reading Time'), value: formatTime(stats.readingTime) },
+    { label: L('speakingTime', 'Speaking Time'), value: formatTime(stats.speakingTime) },
   ]
 
   return (
@@ -115,7 +120,7 @@ export function WordCounterClient() {
       <div>
         <div className="mb-2 flex items-center justify-between">
           <label htmlFor="text-input" className="text-sm font-medium text-slate-700">
-            Your text
+            {L('yourText', 'Your text')}
           </label>
           {text && (
             <button
@@ -123,7 +128,7 @@ export function WordCounterClient() {
               onClick={() => setText('')}
               className="-my-1 rounded-md px-2 py-1 text-xs text-slate-400 hover:text-red-500 sm:text-sm"
             >
-              Clear
+              {L('clear', 'Clear')}
             </button>
           )}
         </div>
@@ -131,14 +136,14 @@ export function WordCounterClient() {
           id="text-input"
           value={text}
           onChange={(e) => setText(e.target.value)}
-          placeholder="Type or paste your text here..."
+          placeholder={L('textPlaceholder', 'Type or paste your text here...')}
           rows={10}
           className="w-full rounded-lg border border-slate-300 p-4 text-slate-900 shadow-sm outline-none transition focus:border-brand-500 focus:ring-2 focus:ring-brand-200"
         />
       </div>
 
       <p className="rounded-md bg-slate-50 p-3 text-xs text-slate-500">
-        🔒 Your text is analyzed locally in your browser and never uploaded anywhere.
+        {L('privacyNote', '🔒 Your text is analyzed locally in your browser and never uploaded anywhere.')}
       </p>
     </div>
   )

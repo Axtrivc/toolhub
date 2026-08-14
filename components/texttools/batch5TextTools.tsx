@@ -4,11 +4,15 @@ import { useState, useMemo } from 'react'
 import { ResultCard, CalculatorNote } from '../calculator/CalculatorField'
 import { CopyButton } from '../CopyButton'
 import { makeTextTool } from '../tools/makeTextTool'
+import { useApp } from '@/components/providers/AppProviders'
+import { tui } from '@/lib/i18n/tool-l10n'
 
 /** 第八批:编码 + 文本工具 4 个 */
 
 // ── MD5/SHA 哈希生成器 ──
 export function HashGeneratorClient() {
+  const { locale } = useApp()
+  const L = (key: string, fb: string) => tui('hash-generator', locale, key, fb)
   const [input, setInput] = useState('Hello World')
   const [hashes, setHashes] = useState<{ sha256: string; sha1: string } | null>(null)
   const [loading, setLoading] = useState(false)
@@ -34,7 +38,7 @@ export function HashGeneratorClient() {
   return (
     <div className="space-y-6">
       <div>
-        <label htmlFor="hash-input" className="mb-2 block text-sm font-medium text-slate-700">Text to hash</label>
+        <label htmlFor="hash-input" className="mb-2 block text-sm font-medium text-slate-700">{L('textToHash', 'Text to hash')}</label>
         <textarea
           id="hash-input"
           value={input}
@@ -44,7 +48,7 @@ export function HashGeneratorClient() {
         />
       </div>
       <button onClick={generate} disabled={loading || !input} className="btn btn-primary disabled:opacity-50">
-        {loading ? 'Hashing…' : '# Generate Hashes'}
+        {loading ? L('hashing', 'Hashing…') : L('generateHashes', '# Generate Hashes')}
       </button>
       {hashes && (
         <div className="space-y-4">
@@ -53,7 +57,7 @@ export function HashGeneratorClient() {
         </div>
       )}
       <CalculatorNote>
-        🔐 Uses SubtleCrypto API (true cryptographic hashing). MD5 is broken for security — SHA-256 is recommended.
+        {L('note', '🔐 Uses SubtleCrypto API (true cryptographic hashing). MD5 is broken for security — SHA-256 is recommended.')}
       </CalculatorNote>
     </div>
   )
@@ -73,6 +77,7 @@ function HashResult({ label, value }: { label: string; value: string }) {
 
 // ── Slug → Title(反转 slug generator)──
 export const SlugToTitleClient = makeTextTool({
+  slug: 'slug-to-title',
   inputLabel: 'URL slug',
   outputLabel: 'Title',
   defaultInput: 'how-to-make-pancakes',
@@ -87,6 +92,7 @@ export const SlugToTitleClient = makeTextTool({
 
 // ── 二进制 ↔ 文本(UTF-8 字节,支持中文/emoji,两工具互逆)──
 export const BinaryToTextClient = makeTextTool({
+  slug: 'binary-to-text',
   inputLabel: 'Binary (space-separated bytes)',
   outputLabel: 'Decoded text',
   defaultInput: '01001000 01101001',
@@ -106,6 +112,7 @@ export const BinaryToTextClient = makeTextTool({
 })
 
 export const TextToBinaryClient = makeTextTool({
+  slug: 'text-to-binary',
   inputLabel: 'Text',
   outputLabel: 'Binary',
   defaultInput: 'Hi',

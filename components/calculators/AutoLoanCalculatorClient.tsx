@@ -3,6 +3,8 @@
 import { useState, useMemo, useEffect } from 'react'
 import { CalculatorField, ResultCard, CalculatorNote } from '@/components/calculator/CalculatorField'
 import { ResultActions } from '@/components/ResultActions'
+import { useApp } from '@/components/providers/AppProviders'
+import { tui } from '@/lib/i18n/tool-l10n'
 
 const fmtMoney = (n: number) =>
   isFinite(n)
@@ -43,6 +45,9 @@ function calcAutoLoan(principal: number, apr: number, months: number) {
 }
 
 export function AutoLoanCalculatorClient() {
+  const { locale } = useApp()
+  const L = (key: string, fb: string) => tui('auto-loan-calculator', locale, key, fb)
+
   const [price, setPrice] = useState('35000')
   const [down, setDown] = useState('5000')
   const [tradeIn, setTradeIn] = useState('0')
@@ -62,18 +67,19 @@ export function AutoLoanCalculatorClient() {
     const n = Number(term)
     const nums = [p, d, t, tax, rate]
     if (nums.some((v) => !isFinite(v)) || p <= 0 || d < 0 || t < 0 || tax < 0 || rate < 0) {
-      return { error: 'Please enter valid non-negative numbers (vehicle price must be greater than 0).' }
+      return { error: L('errInvalidNumbers', 'Please enter valid non-negative numbers (vehicle price must be greater than 0).') }
     }
     const taxable = Math.max(0, p - t)
     const taxAmount = taxable * (tax / 100)
     const loanAmount = p - d - t + taxAmount
     if (loanAmount <= 0) {
-      return { error: 'Loan amount is $0 or less — reduce the down payment / trade-in or increase the vehicle price.' }
+      return { error: L('errLoanZero', 'Loan amount is $0 or less — reduce the down payment / trade-in or increase the vehicle price.') }
     }
     const r = calcAutoLoan(loanAmount, rate, n)
     const totalCost = d + t + r.totalPayments
     return { loanAmount, taxAmount, months: n, ...r, totalCost }
-  }, [price, down, tradeIn, taxPct, apr, term])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [price, down, tradeIn, taxPct, apr, term, locale])
 
   useEffect(() => {
     if ('error' in parsed) {
@@ -86,27 +92,28 @@ export function AutoLoanCalculatorClient() {
   }, [parsed])
 
   const summary = useMemo(() => {
-    if ('error' in parsed) return `Auto loan calculator: ${parsed.error}`
+    if ('error' in parsed) return `${L('summaryErrorPrefix', 'Auto loan calculator: ')}${parsed.error}`
     return [
-      'Auto Loan Calculation Summary',
-      `  Vehicle price: ${fmtMoney(Number(price))}`,
-      `  Down payment: ${fmtMoney(Number(down))}`,
-      `  Trade-in value: ${fmtMoney(Number(tradeIn))}`,
-      `  Sales tax: ${taxPct}% (${fmtMoney(parsed.taxAmount)})`,
-      `  APR: ${apr}%  •  Term: ${parsed.months} months`,
-      'Results:',
-      `  Loan amount: ${fmtMoney(parsed.loanAmount)}`,
-      `  Monthly payment: ${fmtMoney(parsed.monthlyPayment)}`,
-      `  Total interest: ${fmtMoney(parsed.totalInterest)}`,
-      `  Total cost (down + trade-in + all payments): ${fmtMoney(parsed.totalCost)}`,
+      L('summaryTitle', 'Auto Loan Calculation Summary'),
+      `  ${L('sVehiclePrice', 'Vehicle price: ')}${fmtMoney(Number(price))}`,
+      `  ${L('sDownPayment', 'Down payment: ')}${fmtMoney(Number(down))}`,
+      `  ${L('sTradeInValue', 'Trade-in value: ')}${fmtMoney(Number(tradeIn))}`,
+      `  ${L('sSalesTax', 'Sales tax: ')}${taxPct}% (${fmtMoney(parsed.taxAmount)})`,
+      `  ${L('sApr', 'APR: ')}${apr}%  •  ${L('sTerm', 'Term: ')}${parsed.months} ${L('months', 'months')}`,
+      L('results', 'Results:'),
+      `  ${L('sLoanAmount', 'Loan amount: ')}${fmtMoney(parsed.loanAmount)}`,
+      `  ${L('sMonthlyPayment', 'Monthly payment: ')}${fmtMoney(parsed.monthlyPayment)}`,
+      `  ${L('sTotalInterest', 'Total interest: ')}${fmtMoney(parsed.totalInterest)}`,
+      `  ${L('sTotalCost', 'Total cost (down + trade-in + all payments): ')}${fmtMoney(parsed.totalCost)}`,
     ].join('\n')
-  }, [parsed, price, down, tradeIn, taxPct, apr])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [parsed, price, down, tradeIn, taxPct, apr, locale])
 
   // 完整还款计划 CSV(全期数)
   const csvContent = useMemo(() => {
     if ('error' in parsed) return summary
     const rows: string[][] = [
-      ['Month', 'Payment', 'Principal', 'Interest', 'Balance'],
+      [L('thMonth', 'Month'), L('thPayment', 'Payment'), L('thPrincipal', 'Principal'), L('thInterest', 'Interest'), L('thBalance', 'Balance')],
       ...parsed.schedule.map((r) => [
         String(r.month),
         r.payment.toFixed(2),
@@ -116,7 +123,8 @@ export function AutoLoanCalculatorClient() {
       ]),
     ]
     return rows.map((r) => r.join(',')).join('\n')
-  }, [parsed, summary])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [parsed, summary, locale])
 
   const visibleRows = 'error' in parsed ? [] : showAll ? parsed.schedule : parsed.schedule.slice(0, 12)
 
@@ -124,14 +132,14 @@ export function AutoLoanCalculatorClient() {
     <div className="space-y-6">
       {/* 输入区 */}
       <div className="grid grid-cols-1 gap-4 rounded-lg p-4 sm:grid-cols-2 lg:grid-cols-3" style={{ backgroundColor: 'rgb(var(--bg-subtle))' }}>
-        <CalculatorField id="vehicle-price" label="Vehicle price" value={price} onChange={setPrice} suffix="$" placeholder="35000" />
-        <CalculatorField id="down-payment" label="Down payment" value={down} onChange={setDown} suffix="$" placeholder="5000" />
-        <CalculatorField id="trade-in" label="Trade-in value" value={tradeIn} onChange={setTradeIn} suffix="$" placeholder="0" />
-        <CalculatorField id="sales-tax" label="Sales tax" value={taxPct} onChange={setTaxPct} suffix="%" placeholder="6" />
-        <CalculatorField id="apr" label="Interest rate (APR)" value={apr} onChange={setApr} suffix="%" placeholder="7.5" />
+        <CalculatorField id="vehicle-price" label={L('vehiclePrice', 'Vehicle price')} value={price} onChange={setPrice} suffix="$" placeholder="35000" />
+        <CalculatorField id="down-payment" label={L('downPayment', 'Down payment')} value={down} onChange={setDown} suffix="$" placeholder="5000" />
+        <CalculatorField id="trade-in" label={L('tradeInValue', 'Trade-in value')} value={tradeIn} onChange={setTradeIn} suffix="$" placeholder="0" />
+        <CalculatorField id="sales-tax" label={L('salesTax', 'Sales tax')} value={taxPct} onChange={setTaxPct} suffix="%" placeholder="6" />
+        <CalculatorField id="apr" label={L('interestRateApr', 'Interest rate (APR)')} value={apr} onChange={setApr} suffix="%" placeholder="7.5" />
         <div>
           <label htmlFor="term" className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
-            Loan term
+            {L('loanTerm', 'Loan term')}
           </label>
           <select
             id="term"
@@ -146,7 +154,7 @@ export function AutoLoanCalculatorClient() {
           >
             {TERMS.map((t) => (
               <option key={t} value={t}>
-                {t} months ({Number(t) / 12} years)
+                {t} {L('optMonths', 'months')} ({Number(t) / 12} {L('optYears', 'years')})
               </option>
             ))}
           </select>
@@ -160,25 +168,25 @@ export function AutoLoanCalculatorClient() {
           {/* 结果卡片 */}
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
             <ResultCard
-              label="Monthly payment"
+              label={L('monthlyPayment', 'Monthly payment')}
               value={fmtMoney(parsed.monthlyPayment)}
-              sublabel={payoffDate ? `Paid off by ${payoffDate}` : `${parsed.months} monthly payments`}
+              sublabel={payoffDate ? `${L('paidOffBy', 'Paid off by ')}${payoffDate}` : `${parsed.months} ${L('monthlyPayments', 'monthly payments')}`}
               highlight
             />
             <ResultCard
-              label="Loan amount"
+              label={L('loanAmount', 'Loan amount')}
               value={fmtMoney(parsed.loanAmount)}
-              sublabel={`Includes ${fmtMoney(parsed.taxAmount)} sales tax`}
+              sublabel={`${L('includes', 'Includes ')}${fmtMoney(parsed.taxAmount)} ${L('salesTaxWord', 'sales tax')}`}
             />
             <ResultCard
-              label="Total interest"
+              label={L('totalInterest', 'Total interest')}
               value={fmtMoney(parsed.totalInterest)}
-              sublabel={`Over ${parsed.months} months`}
+              sublabel={`${L('over', 'Over ')}${parsed.months} ${L('months', 'months')}`}
             />
             <ResultCard
-              label="Total cost"
+              label={L('totalCost', 'Total cost')}
               value={fmtMoney(parsed.totalCost)}
-              sublabel="Down + trade-in + all payments"
+              sublabel={L('downTradeInPayments', 'Down + trade-in + all payments')}
             />
           </div>
 
@@ -186,7 +194,7 @@ export function AutoLoanCalculatorClient() {
           <div>
             <div className="mb-2 flex items-center justify-between">
               <h3 className="text-sm font-semibold" style={{ color: 'rgb(var(--text))' }}>
-                Amortization schedule {showAll ? `(all ${parsed.months} months)` : '(first 12 months)'}
+                {L('amortTitle', 'Amortization schedule ')}{showAll ? `(${L('optAll', 'all ')}${parsed.months} ${L('months', 'months')})` : `(${L('first12Months', 'first 12 months')})`}
               </h3>
               {parsed.schedule.length > 12 && (
                 <button
@@ -195,7 +203,7 @@ export function AutoLoanCalculatorClient() {
                   className="text-xs font-medium underline underline-offset-2"
                   style={{ color: 'rgb(var(--text-muted))' }}
                 >
-                  {showAll ? 'Show first 12' : `Show all ${parsed.schedule.length}`}
+                  {showAll ? L('showFirst12', 'Show first 12') : `${L('showAll', 'Show all ')}${parsed.schedule.length}`}
                 </button>
               )}
             </div>
@@ -203,11 +211,11 @@ export function AutoLoanCalculatorClient() {
               <table className="w-full text-left text-sm">
                 <thead className="text-xs uppercase" style={{ backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text-subtle))' }}>
                   <tr>
-                    <th className="px-3 py-2">Month</th>
-                    <th className="px-3 py-2 text-right">Payment</th>
-                    <th className="px-3 py-2 text-right">Principal</th>
-                    <th className="px-3 py-2 text-right">Interest</th>
-                    <th className="px-3 py-2 text-right">Balance</th>
+                    <th className="px-3 py-2">{L('thMonth', 'Month')}</th>
+                    <th className="px-3 py-2 text-right">{L('thPayment', 'Payment')}</th>
+                    <th className="px-3 py-2 text-right">{L('thPrincipal', 'Principal')}</th>
+                    <th className="px-3 py-2 text-right">{L('thInterest', 'Interest')}</th>
+                    <th className="px-3 py-2 text-right">{L('thBalance', 'Balance')}</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y" style={{ borderColor: 'rgb(var(--border))' }}>
@@ -230,15 +238,13 @@ export function AutoLoanCalculatorClient() {
             filename="auto-loan-amortization.csv"
             downloadContent={csvContent}
             mime="text/csv;charset=utf-8;"
-            copyLabel="Copy Summary"
+            copyLabel={L('copySummary', 'Copy Summary')}
           />
         </>
       )}
 
       <CalculatorNote>
-        🚗 Sales tax is computed on <strong>(vehicle price − trade-in value)</strong>, the rule in most US states — a few
-        states tax the full price before the trade-in credit, and tax rules vary. This calculator assumes fixed-rate,
-        equal monthly payments and excludes dealer fees, registration, and insurance.
+        {L('notePrefix', '🚗 Sales tax is computed on ')}<strong>{L('noteStrong', '(vehicle price − trade-in value)')}</strong>{L('noteSuffix', ', the rule in most US states — a few states tax the full price before the trade-in credit, and tax rules vary. This calculator assumes fixed-rate, equal monthly payments and excludes dealer fees, registration, and insurance.')}
       </CalculatorNote>
     </div>
   )

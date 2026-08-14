@@ -3,6 +3,8 @@
 import { useState, useMemo } from 'react'
 import { CopyButton } from '@/components/CopyButton'
 import { ResultActions } from '@/components/ResultActions'
+import { useApp } from '@/components/providers/AppProviders'
+import { tui } from '@/lib/i18n/tool-l10n'
 
 /**
  * Nginx Config Generator —— 反向代理配置生成器
@@ -150,6 +152,10 @@ function Toggle({
 }
 
 export function NginxConfigGeneratorClient() {
+  const { locale } = useApp()
+  // 取本地化 UI 串;缺失回退英文(SSR 恒英文)。
+  const L = (key: string, fb: string) => tui('nginx-config-generator', locale, key, fb)
+
   const [domain, setDomain] = useState('example.com')
   const [target, setTarget] = useState('http://127.0.0.1:3000')
   const [ssl, setSsl] = useState(true)
@@ -180,7 +186,7 @@ export function NginxConfigGeneratorClient() {
       <div className="grid gap-4 sm:grid-cols-2">
         <div>
           <label htmlFor="nginx-domain" className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
-            Server name (domain)
+            {L('serverNameLabel', 'Server name (domain)')}
           </label>
           <input
             id="nginx-domain"
@@ -195,7 +201,7 @@ export function NginxConfigGeneratorClient() {
         </div>
         <div>
           <label htmlFor="nginx-target" className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
-            Proxy target
+            {L('proxyTargetLabel', 'Proxy target')}
           </label>
           <input
             id="nginx-target"
@@ -211,7 +217,7 @@ export function NginxConfigGeneratorClient() {
         {!ssl && (
           <div>
             <label htmlFor="nginx-port" className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
-              Listen port
+              {L('listenPortLabel', 'Listen port')}
             </label>
             <input
               id="nginx-port"
@@ -246,19 +252,19 @@ export function NginxConfigGeneratorClient() {
 
       {/* 开关 */}
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-        <Toggle checked={ssl} onChange={setSsl} label="Enable SSL (HTTPS + HTTP redirect)" />
-        <Toggle checked={websocket} onChange={setWebsocket} label="WebSocket support" />
-        <Toggle checked={gzip} onChange={setGzip} label="Gzip compression" />
-        <Toggle checked={staticCache} onChange={setStaticCache} label="Static assets caching (30d)" />
+        <Toggle checked={ssl} onChange={setSsl} label={L('enableSsl', 'Enable SSL (HTTPS + HTTP redirect)')} />
+        <Toggle checked={websocket} onChange={setWebsocket} label={L('websocketSupport', 'WebSocket support')} />
+        <Toggle checked={gzip} onChange={setGzip} label={L('gzipCompression', 'Gzip compression')} />
+        <Toggle checked={staticCache} onChange={setStaticCache} label={L('staticAssetsCaching', 'Static assets caching (30d)')} />
       </div>
 
       {/* 输出 */}
       <div className="space-y-3">
         <div className="flex items-center justify-between">
           <span className="text-sm font-semibold" style={{ color: 'rgb(var(--text))' }}>
-            Generated config
+            {L('generatedConfig', 'Generated config')}
           </span>
-          <CopyButton value={config} label="Copy" />
+          <CopyButton value={config} label={L('copy', 'Copy')} />
         </div>
         <pre
           className="w-full overflow-x-auto rounded-lg border p-4 font-mono text-sm shadow-sm"
@@ -281,9 +287,9 @@ export function NginxConfigGeneratorClient() {
         className="rounded-md p-3 text-xs"
         style={{ backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text-subtle))' }}
       >
-        📁 Place the file in <code>/etc/nginx/sites-available/</code> and symlink it into{' '}
-        <code>/etc/nginx/sites-enabled/</code>, then run <code>sudo nginx -t &amp;&amp; sudo systemctl reload nginx</code>.
-        🔒 Generated 100% client-side — nothing is sent anywhere.
+        {L('notePlace', '📁 Place the file in')} <code>/etc/nginx/sites-available/</code> {L('noteSymlink', 'and symlink it into')}{' '}
+        <code>/etc/nginx/sites-enabled/</code>{L('noteThenRun', ', then run')} <code>sudo nginx -t &amp;&amp; sudo systemctl reload nginx</code>.{' '}
+        {L('noteClientSide', '🔒 Generated 100% client-side — nothing is sent anywhere.')}
       </p>
     </div>
   )

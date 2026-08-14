@@ -6,6 +6,11 @@ import type { ToolL10n } from '../tool-l10n'
 
 export const jsonToCsvL10n: ToolL10n = {
   zh: {
+    ui: {
+      inputLabel: '对象 JSON 数组',
+      outputLabel: 'CSV',
+      note: '🔄 把对象的 JSON 数组转成 CSV。会对逗号和引号做正确转义。',
+    },
     useCases: [
       '从应用导出数据用于电子表格分析',
       '为数据库导入准备数据',
@@ -17,6 +22,11 @@ export const jsonToCsvL10n: ToolL10n = {
     ],
   },
   es: {
+    ui: {
+      inputLabel: 'Array JSON de objetos',
+      outputLabel: 'CSV',
+      note: '🔄 Convierte un array JSON de objetos a CSV. Gestiona comas y comillas con el escape correcto.',
+    },
     useCases: [
       'exportar datos de una app para analizarlos en hojas de cálculo',
       'preparar datos para importarlos a una base de datos',
@@ -28,6 +38,11 @@ export const jsonToCsvL10n: ToolL10n = {
     ],
   },
   de: {
+    ui: {
+      inputLabel: 'JSON-Array von Objekten',
+      outputLabel: 'CSV',
+      note: '🔄 Wandelt ein JSON-Array von Objekten in CSV um. Behandelt Kommas und Anführungszeichen mit korrektem Escaping.',
+    },
     useCases: [
       'Daten aus einer App für die Tabellenanalyse exportieren',
       'Daten für den Datenbank-Import aufbereiten',

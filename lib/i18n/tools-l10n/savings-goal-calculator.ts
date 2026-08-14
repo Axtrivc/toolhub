@@ -6,6 +6,10 @@ import type { ToolL10n } from '../tool-l10n'
 
 export const savingsGoalCalculatorL10n: ToolL10n = {
   zh: {
+    formula: {
+      formula: 'FV = P(1+r)^n + PMT × [ ((1+r)^n − 1) / r ]',
+      explain: '起始本金 P 加上定期存入 PMT 的终值。r = 期利率,n = 期数。这就是定期投入如何复利滚向储蓄目标的过程。',
+    },
     useCases: ['按截止日期算储蓄目标', '算每月要存多少钱', '算带利息的储蓄目标', '算到某年需要的存款'],
     faqs: [
       { q: '用什么回报率?', a: '高收益储蓄或保守投资用 4–5%。股市长期投资用 7%。回报率越高，月供越少，但波动也越大。拿不准就算两次——一次乐观、一次保守——按较高的金额存。' },
@@ -19,6 +23,10 @@ export const savingsGoalCalculatorL10n: ToolL10n = {
     },
   },
   es: {
+    formula: {
+      formula: 'FV = P(1+r)^n + PMT × [ ((1+r)^n − 1) / r ]',
+      explain: 'Valor futuro de un saldo inicial P más un depósito recurrente PMT. r = tasa por periodo, n = periodos. Así es como los aportes regulares capitalizan hacia una meta de ahorro.',
+    },
     useCases: ['calcular el objetivo de ahorro por fecha', 'saber cuánto ahorrar al mes', 'calcular el objetivo con intereses', 'alcanzar la meta de ahorro para un año'],
     faqs: [
       { q: '¿Qué tasa de retorno debo usar?', a: 'Usa un 4–5 % para cuentas de ahorro de alto rendimiento o inversiones conservadoras. Usa un 7 % para inversión bursátil a largo plazo. Tasas más altas implican aportaciones mensuales menores, pero más volatilidad. Ante la duda, calcula dos veces — una con una tasa optimista y otra con una conservadora — y apunta a la aportación más alta.' },
@@ -32,6 +40,10 @@ export const savingsGoalCalculatorL10n: ToolL10n = {
     },
   },
   de: {
+    formula: {
+      formula: 'FV = P(1+r)^n + PMT × [ ((1+r)^n − 1) / r ]',
+      explain: 'Endwert eines Startguthabens P plus wiederkehrender Einzahlung PMT. r = Periodenzins, n = Perioden. So wachsen regelmäßige Beiträge durch Zinseszins auf ein Sparziel an.',
+    },
     useCases: ['das Sparziel nach Datum berechnen', 'herausfinden, wie viel monatlich zu sparen ist', 'das Sparziel mit Zinsen berechnen', 'das Sparen bis zu einem Jahr erreichen'],
     faqs: [
       { q: 'Welche Rendite soll ich annehmen?', a: 'Nutze 4–5 % für Hochzinstagesgeld oder konservative Anlagen. Nutze 7 % für langfristige Aktienanlage. Höhere Raten bedeuten niedrigere Monatsbeiträge, aber mehr Schwankung. Im Zweifel rechne zweimal — einmal optimistisch, einmal konservativ — und ziele auf den höheren Beitrag.' },

@@ -7,6 +7,7 @@ import { makeTextTool } from '../tools/makeTextTool'
  */
 
 export const UppercaseConverterClient = makeTextTool({
+  slug: 'uppercase-converter',
   inputLabel: 'Your text',
   outputLabel: 'UPPERCASE',
   placeholder: 'Type or paste text...',
@@ -16,6 +17,7 @@ export const UppercaseConverterClient = makeTextTool({
 })
 
 export const LowercaseConverterClient = makeTextTool({
+  slug: 'lowercase-converter',
   inputLabel: 'Your text',
   outputLabel: 'lowercase',
   placeholder: 'Type or paste text...',
@@ -25,6 +27,7 @@ export const LowercaseConverterClient = makeTextTool({
 })
 
 export const TitleCaseConverterClient = makeTextTool({
+  slug: 'title-case-converter',
   inputLabel: 'Your text',
   outputLabel: 'Title Case',
   defaultInput: 'the quick brown fox',
@@ -34,6 +37,7 @@ export const TitleCaseConverterClient = makeTextTool({
 })
 
 export const SentenceCaseConverterClient = makeTextTool({
+  slug: 'sentence-case-converter',
   inputLabel: 'Your text',
   outputLabel: 'Sentence case',
   defaultInput: 'hello. my name is john. how are you?',
@@ -46,6 +50,7 @@ export const SentenceCaseConverterClient = makeTextTool({
 })
 
 export const ReverseTextClient = makeTextTool({
+  slug: 'reverse-text',
   inputLabel: 'Your text',
   outputLabel: 'Reversed',
   defaultInput: 'Hello World',
@@ -54,6 +59,7 @@ export const ReverseTextClient = makeTextTool({
 })
 
 export const RemoveDuplicatesClient = makeTextTool({
+  slug: 'remove-duplicate-lines',
   inputLabel: 'List (one item per line)',
   outputLabel: 'Unique items',
   defaultInput: 'apple\nbanana\napple\ncherry\nbanana\ndate',
@@ -74,6 +80,7 @@ export const RemoveDuplicatesClient = makeTextTool({
 })
 
 export const SortLinesClient = makeTextTool({
+  slug: 'sort-lines',
   inputLabel: 'List (one item per line)',
   outputLabel: 'Sorted (A → Z)',
   defaultInput: 'cherry\napple\ndate\nbanana',
@@ -88,6 +95,7 @@ export const SortLinesClient = makeTextTool({
 })
 
 export const RemoveLineBreaksClient = makeTextTool({
+  slug: 'remove-line-breaks',
   inputLabel: 'Your text',
   outputLabel: 'Single line',
   defaultInput: 'This text\nspans multiple\nlines.',
@@ -96,6 +104,7 @@ export const RemoveLineBreaksClient = makeTextTool({
 })
 
 export const FindReplaceClient = makeTextTool({
+  slug: 'find-and-replace',
   inputLabel: 'Format: text ||| find ||| replace\n(separate with " ||| ")',
   outputLabel: 'Result',
   defaultInput: 'I love cats and cats are great ||| cats ||| dogs',

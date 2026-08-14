@@ -6,6 +6,12 @@ import type { ToolL10n } from '../tool-l10n'
 
 export const fuelEconomyConverterL10n: ToolL10n = {
   zh: {
+    ui: {
+      'note': '⛽ 注意:L/100km 与 mpg 成反比(越低越好)。L/100km = 235.215 ÷ 美制 mpg;1 英制 mpg ≈ 1.20095 美制 mpg。数值为近似值。',
+      'unit.l100km': '升/百公里 (L/100km)',
+      'unit.mpg-uk': '英里/加仑 英 (mpg)',
+      'unit.mpg-us': '英里/加仑 美 (mpg)',
+    },
     useCases: [
       '对比汽车的 MPG 和百公里油耗(升)',
       '估算美制和英制加仑对应的油耗差异',
@@ -16,6 +22,12 @@ export const fuelEconomyConverterL10n: ToolL10n = {
     ],
   },
   es: {
+    ui: {
+      'note': '⛽ Nota: L/100km es inverso a mpg (menor = mejor). L/100km = 235,215 ÷ mpg EE. UU.; 1 mpg UK ≈ 1,20095 mpg EE. UU. Valores aproximados.',
+      'unit.l100km': 'Litros/100km (L/100km)',
+      'unit.mpg-uk': 'Millas/Galón UK (mpg)',
+      'unit.mpg-us': 'Millas/Galón EE. UU. (mpg)',
+    },
     useCases: [
       'comparar el MPG de un auto con su consumo en L/100 km',
       'estimar la diferencia de consumo entre galones EE. UU. e imperiales',
@@ -26,6 +38,12 @@ export const fuelEconomyConverterL10n: ToolL10n = {
     ],
   },
   de: {
+    ui: {
+      'note': '⛽ Hinweis: L/100km ist invers zu mpg (niedriger = besser). L/100km = 235,215 ÷ US-mpg; 1 UK-mpg ≈ 1,20095 US-mpg. Werte sind gerundet.',
+      'unit.l100km': 'Liter/100km (L/100km)',
+      'unit.mpg-uk': 'Meilen/Gallone UK (mpg)',
+      'unit.mpg-us': 'Meilen/Gallone US (mpg)',
+    },
     useCases: [
       'den MPG-Wert eines Autos mit dem Verbrauch in L/100 km vergleichen',
       'den Verbrauchsunterschied zwischen US- und imperialen Gallonen abschätzen',

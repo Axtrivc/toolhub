@@ -2,6 +2,8 @@
 
 import { useState, useMemo } from 'react'
 import { CopyButton } from '@/components/CopyButton'
+import { useApp } from '@/components/providers/AppProviders'
+import { tui } from '@/lib/i18n/tool-l10n'
 
 /**
  * IP Subnet Calculator —— IPv4 CIDR 全量计算(32 位无符号位运算)
@@ -164,6 +166,9 @@ function computeSubnet(input: string): SubnetResult | { error: string } {
 }
 
 export function IpSubnetCalculatorClient() {
+  const { locale } = useApp()
+  const L = (key: string, fb: string) => tui('ip-subnet-calculator', locale, key, fb)
+
   const [input, setInput] = useState('192.168.1.10/24')
 
   const result = useMemo(() => computeSubnet(input), [input])
@@ -171,32 +176,34 @@ export function IpSubnetCalculatorClient() {
   const rows: [string, string][] = useMemo(() => {
     if ('error' in result) return []
     return [
-      ['IP Address', `${result.ip}/${result.prefix}`],
-      ['Subnet Mask', result.subnetMask],
-      ['Wildcard Mask', result.wildcardMask],
-      ['Network Address', result.network],
-      ['Broadcast Address', result.broadcast],
-      ['First Usable Host', result.firstUsable],
-      ['Last Usable Host', result.lastUsable],
-      ['Usable Hosts', result.usableHosts.toLocaleString()],
-      ['Total Addresses', result.totalAddresses.toLocaleString()],
-      ['IP Class', result.ipClass],
-      ['Address Type', result.addressType],
-      ['Binary Mask', result.binaryMask],
+      [L('ipAddress', 'IP Address'), `${result.ip}/${result.prefix}`],
+      [L('subnetMask', 'Subnet Mask'), result.subnetMask],
+      [L('wildcardMask', 'Wildcard Mask'), result.wildcardMask],
+      [L('networkAddress', 'Network Address'), result.network],
+      [L('broadcastAddress', 'Broadcast Address'), result.broadcast],
+      [L('firstUsableHost', 'First Usable Host'), result.firstUsable],
+      [L('lastUsableHost', 'Last Usable Host'), result.lastUsable],
+      [L('usableHosts', 'Usable Hosts'), result.usableHosts.toLocaleString()],
+      [L('totalAddresses', 'Total Addresses'), result.totalAddresses.toLocaleString()],
+      [L('ipClass', 'IP Class'), result.ipClass],
+      [L('addressType', 'Address Type'), result.addressType],
+      [L('binaryMask', 'Binary Mask'), result.binaryMask],
     ]
-  }, [result])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [result, locale])
 
   const summary = useMemo(() => {
     if ('error' in result) return ''
-    return ['IP Subnet Summary', `Input: ${input.trim()}`, ...rows.map(([k, v]) => `${k}: ${v}`)].join('\n')
-  }, [result, rows, input])
+    return [L('summaryTitle', 'IP Subnet Summary'), `${L('sInput', 'Input:')} ${input.trim()}`, ...rows.map(([k, v]) => `${k}: ${v}`)].join('\n')
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [result, rows, input, locale])
 
   return (
     <div className="space-y-5">
       {/* 输入区 */}
       <div>
         <label htmlFor="subnet-input" className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
-          IPv4 address with prefix (CIDR, dotted mask, or space-separated)
+          {L('inputLabel', 'IPv4 address with prefix (CIDR, dotted mask, or space-separated)')}
         </label>
         <input
           id="subnet-input"
@@ -236,15 +243,23 @@ export function IpSubnetCalculatorClient() {
           </dl>
 
           <div className="flex flex-wrap items-center gap-3">
-            <CopyButton value={summary} label="Copy summary" />
+            <CopyButton value={summary} label={L('copySummary', 'Copy summary')} />
           </div>
         </>
       )}
 
       <p className="rounded-md p-3 text-xs" style={{ backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text-subtle))' }}>
-        🔒 Accepted inputs: <code>192.168.1.10/24</code>, <code>192.168.1.10/255.255.255.0</code>, or{' '}
-        <code>192.168.1.10 255.255.255.0</code>. Edge cases follow the RFCs: <code>/31</code> is a point-to-point link
-        with 2 usable addresses (RFC 3021) and <code>/32</code> identifies a single host.
+        {L('noteF1', '🔒 Accepted inputs: ')}
+        <code>192.168.1.10/24</code>
+        {L('noteF2', ', ')}
+        <code>192.168.1.10/255.255.255.0</code>
+        {L('noteF3', ', or ')}
+        <code>192.168.1.10 255.255.255.0</code>
+        {L('noteF4', '. Edge cases follow the RFCs: ')}
+        <code>/31</code>
+        {L('noteF5', ' is a point-to-point link with 2 usable addresses (RFC 3021) and ')}
+        <code>/32</code>
+        {L('noteF6', ' identifies a single host.')}
       </p>
     </div>
   )

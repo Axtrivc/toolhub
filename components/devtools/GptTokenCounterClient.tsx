@@ -3,6 +3,8 @@
 import { useState, useMemo } from 'react'
 import { CopyButton } from '@/components/CopyButton'
 import { ResultCard } from '@/components/calculator/CalculatorField'
+import { useApp } from '@/components/providers/AppProviders'
+import { tui } from '@/lib/i18n/tool-l10n'
 
 /**
  * GPT / Claude Token Counter —— 纯前端启发式 token 估算
@@ -62,6 +64,9 @@ function formatUsd(cost: number): string {
 }
 
 export function GptTokenCounterClient() {
+  const { locale } = useApp()
+  const L = (key: string, fb: string) => tui('gpt-token-counter', locale, key, fb)
+
   const [text, setText] = useState(SAMPLE_TEXT)
   const [modelId, setModelId] = useState(MODELS[0].id)
 
@@ -80,16 +85,17 @@ export function GptTokenCounterClient() {
   const summary = useMemo(
     () =>
       [
-        'Token Count Summary (estimate)',
-        `Estimated tokens: ~${stats.tokens.toLocaleString()} (heuristic, ~cl100k_base)`,
-        `Characters: ${stats.chars.toLocaleString()}`,
-        `Characters (no spaces): ${stats.charsNoSpaces.toLocaleString()}`,
-        `Words: ${stats.words.toLocaleString()}`,
-        `Sentences: ${stats.sentences.toLocaleString()}`,
-        `Model: ${model.label} ($${model.inputPer1M}/1M input, $${model.outputPer1M}/1M output)`,
-        `Estimated input cost: ${formatUsd(inputCost)}`,
+        L('summaryTitle', 'Token Count Summary (estimate)'),
+        `${L('sEstimatedTokens', 'Estimated tokens:')} ~${stats.tokens.toLocaleString()} ${L('sHeuristic', '(heuristic, ~cl100k_base)')}`,
+        `${L('sCharacters', 'Characters:')} ${stats.chars.toLocaleString()}`,
+        `${L('sCharactersNoSpaces', 'Characters (no spaces):')} ${stats.charsNoSpaces.toLocaleString()}`,
+        `${L('sWords', 'Words:')} ${stats.words.toLocaleString()}`,
+        `${L('sSentences', 'Sentences:')} ${stats.sentences.toLocaleString()}`,
+        `${L('sModel', 'Model:')} ${model.label} ($${model.inputPer1M}/1M ${L('input', 'input')}, $${model.outputPer1M}/1M ${L('output', 'output')})`,
+        `${L('sEstimatedInputCost', 'Estimated input cost:')} ${formatUsd(inputCost)}`,
       ].join('\n'),
-    [stats, model, inputCost],
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [stats, model, inputCost, locale],
   )
 
   return (
@@ -97,7 +103,7 @@ export function GptTokenCounterClient() {
       {/* 输入区 */}
       <div>
         <label htmlFor="token-input" className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
-          Paste your prompt or document
+          {L('pastePrompt', 'Paste your prompt or document')}
         </label>
         <textarea
           id="token-input"
@@ -105,7 +111,7 @@ export function GptTokenCounterClient() {
           onChange={(e) => setText(e.target.value)}
           rows={10}
           spellCheck={false}
-          placeholder="Paste text here to estimate its token count…"
+          placeholder={L('placeholder', 'Paste text here to estimate its token count…')}
           className="w-full rounded-lg border p-4 font-mono text-sm shadow-sm outline-none transition focus:ring-2"
           style={{
             borderColor: 'rgb(var(--border-strong))',
@@ -117,18 +123,18 @@ export function GptTokenCounterClient() {
 
       {/* 统计卡片 */}
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
-        <ResultCard label="Est. tokens" value={`~${stats.tokens.toLocaleString()}`} sublabel="heuristic estimate" highlight />
-        <ResultCard label="Characters" value={stats.chars.toLocaleString()} />
-        <ResultCard label="No spaces" value={stats.charsNoSpaces.toLocaleString()} sublabel="characters" />
-        <ResultCard label="Words" value={stats.words.toLocaleString()} />
-        <ResultCard label="Sentences" value={stats.sentences.toLocaleString()} />
+        <ResultCard label={L('estTokens', 'Est. tokens')} value={`~${stats.tokens.toLocaleString()}`} sublabel={L('heuristicEstimate', 'heuristic estimate')} highlight />
+        <ResultCard label={L('characters', 'Characters')} value={stats.chars.toLocaleString()} />
+        <ResultCard label={L('noSpaces', 'No spaces')} value={stats.charsNoSpaces.toLocaleString()} sublabel={L('charactersSub', 'characters')} />
+        <ResultCard label={L('words', 'Words')} value={stats.words.toLocaleString()} />
+        <ResultCard label={L('sentences', 'Sentences')} value={stats.sentences.toLocaleString()} />
       </div>
 
       {/* 模型定价 + 成本 */}
       <div className="grid grid-cols-1 gap-4 rounded-lg p-4 sm:grid-cols-2" style={{ backgroundColor: 'rgb(var(--bg-subtle))' }}>
         <div>
           <label htmlFor="model-select" className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
-            Model pricing (as of 2025 — check provider pricing)
+            {L('modelPricing', 'Model pricing (as of 2025 — check provider pricing)')}
           </label>
           <select
             id="model-select"
@@ -143,7 +149,7 @@ export function GptTokenCounterClient() {
           >
             {MODELS.map((m) => (
               <option key={m.id} value={m.id}>
-                {m.label} — ${m.inputPer1M}/1M in · ${m.outputPer1M}/1M out
+                {m.label} — ${m.inputPer1M}/1M {L('inShort', 'in')} · ${m.outputPer1M}/1M {L('outShort', 'out')}
               </option>
             ))}
           </select>
@@ -153,11 +159,11 @@ export function GptTokenCounterClient() {
             className="w-full rounded-xl border border-primary/20 bg-gradient-to-br from-primary/5 to-primary/10 p-4 text-center shadow-sm"
           >
             <div className="text-xs font-medium uppercase tracking-wide" style={{ color: 'rgb(var(--text-subtle))' }}>
-              Estimated input cost ({model.label})
+              {L('estimatedInputCost', 'Estimated input cost')} ({model.label})
             </div>
             <div className="mt-1 font-mono text-2xl font-bold text-primary sm:text-3xl">{formatUsd(inputCost)}</div>
             <div className="mt-1 text-xs" style={{ color: 'rgb(var(--text-faint))' }}>
-              for ~{stats.tokens.toLocaleString()} input tokens · output billed separately
+              {L('forPrefix', 'for')} ~{stats.tokens.toLocaleString()} {L('inputTokens', 'input tokens')} · {L('outputBilledSeparately', 'output billed separately')}
             </div>
           </div>
         </div>
@@ -165,14 +171,15 @@ export function GptTokenCounterClient() {
 
       {/* 复制摘要 */}
       <div className="flex flex-wrap items-center gap-3">
-        <CopyButton value={summary} label="Copy summary" />
+        <CopyButton value={summary} label={L('copySummary', 'Copy summary')} />
       </div>
 
       <p className="rounded-md p-3 text-xs" style={{ backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text-subtle))' }}>
-        ⚠️ This is an <strong>estimate</strong>, not an exact count. Real billing uses each provider&apos;s tokenizer
-        (GPT-4o uses <code>cl100k_base</code>); this heuristic averages the 4-chars-per-token rule of thumb with a
-        word/punctuation split. Prices are listed as of 2025 and change often — always confirm on the provider&apos;s
-        pricing page.
+        {L('noteF1', '⚠️ This is an ')}
+        <strong>{L('estimateWord', 'estimate')}</strong>
+        {L('noteF2', ", not an exact count. Real billing uses each provider's tokenizer (GPT-4o uses ")}
+        <code>cl100k_base</code>
+        {L('noteF3', "); this heuristic averages the 4-chars-per-token rule of thumb with a word/punctuation split. Prices are listed as of 2025 and change often — always confirm on the provider's pricing page.")}
       </p>
     </div>
   )

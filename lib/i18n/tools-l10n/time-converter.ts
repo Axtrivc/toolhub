@@ -6,6 +6,17 @@ import type { ToolL10n } from '../tool-l10n'
 
 export const timeConverterL10n: ToolL10n = {
   zh: {
+    ui: {
+      'note': '⏱️ 月和年用平均值(每月 30.44 天,每年 365.25 天)。',
+      'unit.day': '天 (d)',
+      'unit.h': '小时 (h)',
+      'unit.min': '分钟 (min)',
+      'unit.month': '月 (mo)',
+      'unit.ms': '毫秒 (ms)',
+      'unit.s': '秒 (s)',
+      'unit.week': '周 (wk)',
+      'unit.year': '年 (yr)',
+    },
     useCases: [
       '换算跑步配速(分钟/公里 ↔ 分钟/英里)',
       '计算工作时长和报酬',
@@ -17,6 +28,17 @@ export const timeConverterL10n: ToolL10n = {
     ],
   },
   es: {
+    ui: {
+      'note': '⏱️ Meses y años usan promedios (30,44 días/mes, 365,25 días/año).',
+      'unit.day': 'Días (d)',
+      'unit.h': 'Horas (h)',
+      'unit.min': 'Minutos (min)',
+      'unit.month': 'Meses (mo)',
+      'unit.ms': 'Milisegundos (ms)',
+      'unit.s': 'Segundos (s)',
+      'unit.week': 'Semanas (wk)',
+      'unit.year': 'Años (yr)',
+    },
     useCases: [
       'convertir ritmos de carrera (min/km a min/milla)',
       'calcular horas de trabajo y pago',
@@ -28,6 +50,17 @@ export const timeConverterL10n: ToolL10n = {
     ],
   },
   de: {
+    ui: {
+      'note': '⏱️ Monate und Jahre nutzen Durchschnitte (30,44 Tage/Monat, 365,25 Tage/Jahr).',
+      'unit.day': 'Tage (d)',
+      'unit.h': 'Stunden (h)',
+      'unit.min': 'Minuten (min)',
+      'unit.month': 'Monate (mo)',
+      'unit.ms': 'Millisekunden (ms)',
+      'unit.s': 'Sekunden (s)',
+      'unit.week': 'Wochen (wk)',
+      'unit.year': 'Jahre (yr)',
+    },
     useCases: [
       'Laufschritte umrechnen (min/km in min/Meile)',
       'Arbeitsstunden und Bezahlung berechnen',

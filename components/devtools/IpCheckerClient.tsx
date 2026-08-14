@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback, useRef } from 'react'
 import { CopyButton } from '@/components/CopyButton'
 import { useApp } from '@/components/providers/AppProviders'
 import { ipCheckerDicts, type IpCheckerDict, type UseCaseKey } from '@/lib/i18n/ip-checker'
+import { tui } from '@/lib/i18n/tool-l10n'
 
 /**
  * IP Quality & Fraud Score Inspector —— 纯客户端多源探测仪表盘
@@ -420,6 +421,8 @@ function Badge({ color, bg, children }: { color: string; bg: string; children: R
 
 /** 半圆分段仪表盘:0-20 绿 / 21-60 黄 / 61-100 红 */
 function RiskGauge({ score, level, gaugeLabel, riskLabel }: { score: number; level: RiskLevel; gaugeLabel: string; riskLabel: string }) {
+  const { locale } = useApp()
+  const L = (key: string, fb: string) => tui('ip-checker', locale, key, fb)
   const cx = 100
   const cy = 92
   const r = 76
@@ -438,7 +441,7 @@ function RiskGauge({ score, level, gaugeLabel, riskLabel }: { score: number; lev
   const style = LEVEL_STYLE[level]
   return (
     <div className="flex flex-col items-center">
-      <svg viewBox="0 0 200 104" className="w-full max-w-[240px]" role="img" aria-label={`Risk score ${safeScore} of 100`}>
+      <svg viewBox="0 0 200 104" className="w-full max-w-[240px]" role="img" aria-label={`${L('riskScoreAria', 'Risk score')} ${safeScore} ${L('of100', 'of 100')}`}>
         <path d={arc(0, 20)} fill="none" stroke="#22c55e" strokeWidth="14" strokeLinecap="round" opacity="0.9" />
         <path d={arc(21, 60)} fill="none" stroke="#f59e0b" strokeWidth="14" opacity="0.9" />
         <path d={arc(61, 100)} fill="none" stroke="#ef4444" strokeWidth="14" strokeLinecap="round" opacity="0.9" />
@@ -459,8 +462,10 @@ function RiskGauge({ score, level, gaugeLabel, riskLabel }: { score: number; lev
 }
 
 function StarRow({ stars }: { stars: number }) {
+  const { locale } = useApp()
+  const L = (key: string, fb: string) => tui('ip-checker', locale, key, fb)
   return (
-    <span className="text-lg tracking-wide" style={{ color: '#f59e0b' }} aria-label={`${stars} out of 5 stars`}>
+    <span className="text-lg tracking-wide" style={{ color: '#f59e0b' }} aria-label={`${stars} ${L('outOf5Stars', 'out of 5 stars')}`}>
       {'★'.repeat(stars)}
       <span style={{ color: 'rgb(var(--text-faint))' }}>{'★'.repeat(5 - stars)}</span>
     </span>
@@ -488,6 +493,8 @@ export function IpCheckerClient() {
   const { locale } = useApp()
   // 缺失整包回退 en(与 LocalizedPageShell 同款兜底)
   const d: IpCheckerDict = ipCheckerDicts[locale] ?? ipCheckerDicts.en
+  // 字典未覆盖的零散硬编码英文走 tui(同样缺失回退英文)
+  const L = (key: string, fb: string) => tui('ip-checker', locale, key, fb)
   const [trace, setTrace] = useState<TraceData | null>(null)
   const [analysis, setAnalysis] = useState<IpAnalysis | null>(null)
   // 当前分析的是「本机出口 IP」还是「用户查询的第三方 IP」。本机相关信号
@@ -609,7 +616,7 @@ export function IpCheckerClient() {
             <div className="mt-1 flex flex-wrap items-center gap-3">
               <span className="break-all font-mono text-2xl font-bold sm:text-3xl">{ipDisplay}</span>
               {trace?.colo && (
-                <Badge color="#2563eb" bg="rgba(37,99,235,0.12)">CF Colo: {trace.colo}</Badge>
+                <Badge color="#2563eb" bg="rgba(37,99,235,0.12)">{L('cfColo', 'CF Colo')}: {trace.colo}</Badge>
               )}
             </div>
           </div>
@@ -634,7 +641,7 @@ export function IpCheckerClient() {
             placeholder={d.queryPlaceholder}
             className="flex-1 rounded-lg border px-3 py-2 font-mono text-sm outline-none transition focus:ring-2"
             style={{ borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rgb(var(--bg-card))' }}
-            aria-label="Custom IP or domain query"
+            aria-label={L('customQueryAria', 'Custom IP or domain query')}
           />
           <button type="button" onClick={() => void handleQuery()} disabled={loading} className="btn btn-primary">
             {loading ? d.analyzing : d.analyze}
@@ -687,7 +694,7 @@ export function IpCheckerClient() {
                 )}
               </div>
               <div className="mt-3 divide-y" style={{ borderColor: 'rgb(var(--border))' }}>
-                <DetailRow label="ASN" value={geo.asn ? `AS${geo.asn}` : ''} mono />
+                <DetailRow label={L('asn', 'ASN')} value={geo.asn ? `AS${geo.asn}` : ''} mono />
                 <DetailRow label={d.rowAsnOwner} value={geo.asnOrg} />
                 <DetailRow label={d.rowIsp} value={geo.isp} />
                 <DetailRow label={d.rowPostal} value={geo.postal} mono />
@@ -724,7 +731,7 @@ export function IpCheckerClient() {
                 <iframe
                   key={mapUrl}
                   src={mapUrl}
-                  title="IP location map (OpenStreetMap)"
+                  title={L('mapTitle', 'IP location map (OpenStreetMap)')}
                   className="mt-3 h-56 w-full border-0 lg:h-[calc(100%-3.5rem)]"
                   loading="lazy"
                 />
@@ -822,7 +829,7 @@ export function IpCheckerClient() {
               </div>
               <p className="mt-2 text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>
                 {isSelfIp
-                  ? `UA: ${typeof navigator !== 'undefined' ? navigator.userAgent.slice(0, 42) : ''}…`
+                  ? `${L('uaPrefix', 'UA')}: ${typeof navigator !== 'undefined' ? navigator.userAgent.slice(0, 42) : ''}…`
                   : d.signalNaNote}
               </p>
             </div>
@@ -888,7 +895,7 @@ export function IpCheckerClient() {
                       ) : p.status === 'running' ? '…' : '—'}
                     </td>
                     <td className="py-2.5 text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>
-                      {p.status === 'ok' ? 'OK' : p.status === 'running' ? d.pingMeasuring : p.status === 'fail' ? d.pingTimeout : d.pingIdle}
+                      {p.status === 'ok' ? L('statusOk', 'OK') : p.status === 'running' ? d.pingMeasuring : p.status === 'fail' ? d.pingTimeout : d.pingIdle}
                     </td>
                   </tr>
                 )

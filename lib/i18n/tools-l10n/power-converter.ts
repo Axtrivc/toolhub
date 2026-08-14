@@ -6,6 +6,16 @@ import type { ToolL10n } from '../tool-l10n'
 
 export const powerConverterL10n: ToolL10n = {
   zh: {
+    ui: {
+      'note': '⚡ 发动机功率用马力,电力用千瓦,大型电厂用兆瓦。1 马力 ≈ 746 瓦。',
+      'unit.bs': 'BTU/秒',
+      'unit.cal-s': '卡路里/秒',
+      'unit.hp': '马力 (hp)',
+      'unit.hp-metric': '公制马力 (PS)',
+      'unit.kw': '千瓦 (kW)',
+      'unit.mw': '兆瓦 (MW)',
+      'unit.w': '瓦特 (W)',
+    },
     useCases: [
       '比较汽车发动机的马力与千瓦',
       '把电器瓦数换算成千瓦',
@@ -16,6 +26,16 @@ export const powerConverterL10n: ToolL10n = {
     ],
   },
   es: {
+    ui: {
+      'note': '⚡ Potencia de motor en hp, eléctrica en kW, grandes plantas en MW. 1 hp ≈ 746 W.',
+      'unit.bs': 'BTU/seg',
+      'unit.cal-s': 'Calorías/seg',
+      'unit.hp': 'Caballos de fuerza (hp)',
+      'unit.hp-metric': 'CV métricos (PS)',
+      'unit.kw': 'Kilovatios (kW)',
+      'unit.mw': 'Megavatios (MW)',
+      'unit.w': 'Vatios (W)',
+    },
     useCases: [
       'comparar caballos de fuerza y kilovatios de un motor de auto',
       'pasar el vatiaje de un electrodoméstico a kilovatios',
@@ -26,6 +46,16 @@ export const powerConverterL10n: ToolL10n = {
     ],
   },
   de: {
+    ui: {
+      'note': '⚡ Motorleistung in hp, elektrisch in kW, Großkraftwerke in MW. 1 hp ≈ 746 W.',
+      'unit.bs': 'BTU/Sek',
+      'unit.cal-s': 'Kalorien/Sek',
+      'unit.hp': 'Pferdestärke (hp)',
+      'unit.hp-metric': 'Metrische PS (PS)',
+      'unit.kw': 'Kilowatt (kW)',
+      'unit.mw': 'Megawatt (MW)',
+      'unit.w': 'Watt (W)',
+    },
     useCases: [
       'Pferdestärken und Kilowatt eines Automotors vergleichen',
       'die Wattzahl eines Geräts in Kilowatt umrechnen',

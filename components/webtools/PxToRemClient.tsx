@@ -2,6 +2,8 @@
 
 import { useState, useMemo } from 'react'
 import { CopyButton } from '@/components/CopyButton'
+import { useApp } from '@/components/providers/AppProviders'
+import { tui } from '@/lib/i18n/tool-l10n'
 
 /**
  * PX to REM / EM Converter
@@ -13,6 +15,9 @@ import { CopyButton } from '@/components/CopyButton'
 const COMMON_PX = [8, 10, 12, 14, 16, 18, 20, 24, 28, 32, 40, 48, 56, 64, 80]
 
 export function PxToRemClient() {
+  const { locale } = useApp()
+  const L = (key: string, fb: string) => tui('px-to-rem', locale, key, fb)
+
   const [rootSize, setRootSize] = useState(16)
   const [px, setPx] = useState('')
   const [rem, setRem] = useState('')
@@ -41,7 +46,7 @@ export function PxToRemClient() {
       {/* 根字号 */}
       <div className="flex items-center gap-3">
         <label htmlFor="root-size" className="text-sm font-medium text-slate-700">
-          Root font size
+          {L('rootFontSize', 'Root font size')}
         </label>
         <input
           id="root-size"
@@ -59,7 +64,7 @@ export function PxToRemClient() {
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         {/* px → rem */}
         <div className="rounded-lg border p-4" style={{ borderColor: 'rgb(var(--border))' }}>
-          <div className="mb-2 text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>PX → REM / EM</div>
+          <div className="mb-2 text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>{L('pxToRemHeading', 'PX → REM / EM')}</div>
           <input
             type="number"
             value={px}
@@ -86,7 +91,7 @@ export function PxToRemClient() {
 
         {/* rem → px */}
         <div className="rounded-lg border p-4" style={{ borderColor: 'rgb(var(--border))' }}>
-          <div className="mb-2 text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>REM → PX</div>
+          <div className="mb-2 text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>{L('remToPxHeading', 'REM → PX')}</div>
           <input
             type="number"
             value={rem}
@@ -109,7 +114,7 @@ export function PxToRemClient() {
 
       {/* 常用尺寸表 */}
       <div>
-        <h3 className="mb-2 text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>Common Sizes (root = {rootSize}px)</h3>
+        <h3 className="mb-2 text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>{L('commonSizesPrefix', 'Common Sizes (root =')} {rootSize}px)</h3>
         <div className="overflow-x-auto rounded-lg border" style={{ borderColor: 'rgb(var(--border))' }}>
           <table className="w-full text-left text-xs">
             <thead style={{ backgroundColor: 'rgb(var(--bg-subtle))' }}>
@@ -136,7 +141,7 @@ export function PxToRemClient() {
       </div>
 
       <p className="rounded-md p-3 text-xs" style={{ backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text-subtle))' }}>
-        🔒 100% client-side — all conversions compute locally. <code>rem = px ÷ root-font-size</code>.
+        {L('noteText', '🔒 100% client-side — all conversions compute locally.')} <code>rem = px ÷ root-font-size</code>.
       </p>
     </div>
   )

@@ -6,6 +6,11 @@ import type { ToolL10n } from '../tool-l10n'
 
 export const addLineNumbersL10n: ToolL10n = {
   zh: {
+    ui: {
+      inputLabel: '你的文本',
+      outputLabel: '带行号结果',
+      note: '🔢 给每一行加上行号。适合代码评审、文字记录和引用。',
+    },
     useCases: [
       '代码评审——便于引用「第 42 行有个 bug」',
       '整理访谈记录和逐字稿',
@@ -17,6 +22,11 @@ export const addLineNumbersL10n: ToolL10n = {
     ],
   },
   es: {
+    ui: {
+      inputLabel: 'Tu texto',
+      outputLabel: 'Con números de línea',
+      note: '🔢 Añade números de línea a cada línea. Útil para revisión de código, transcripciones y referencias.',
+    },
     useCases: [
       'revisión de código — para decir «la línea 42 tiene un error»',
       'ordenar entrevistas y transcripciones',
@@ -28,6 +38,11 @@ export const addLineNumbersL10n: ToolL10n = {
     ],
   },
   de: {
+    ui: {
+      inputLabel: 'Dein Text',
+      outputLabel: 'Mit Zeilennummern',
+      note: '🔢 Fügt jeder Zeile Zeilennummern hinzu. Nützlich für Code-Review, Transkripte und Referenzen.',
+    },
     useCases: [
       'Code-Review — praktisch für „in Zeile 42 ist ein Bug"',
       'Interviews und Transkripte ordnen',

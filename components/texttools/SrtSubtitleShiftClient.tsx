@@ -4,6 +4,8 @@ import { useState, useMemo, useCallback, useRef } from 'react'
 import { CopyButton } from '@/components/CopyButton'
 import { LoadSampleButton } from '@/components/LoadSampleButton'
 import { ResultActions } from '@/components/ResultActions'
+import { useApp } from '@/components/providers/AppProviders'
+import { tui } from '@/lib/i18n/tool-l10n'
 
 /**
  * SRT Subtitle Shifter —— 字幕时间轴平移/清洗
@@ -139,6 +141,10 @@ const inputStyle = {
 }
 
 export function SrtSubtitleShiftClient() {
+  const { locale } = useApp()
+  // 取本地化 UI 串;缺失回退英文(SSR 恒英文)。
+  const L = (key: string, fb: string) => tui('srt-subtitle-shift', locale, key, fb)
+
   const [input, setInput] = useState('')
   const [offsetStr, setOffsetStr] = useState('0')
   const [clamp, setClamp] = useState(true)
@@ -176,12 +182,12 @@ export function SrtSubtitleShiftClient() {
       <div>
         <div className="mb-2 flex items-center justify-between">
           <label htmlFor="srt-input" className="text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
-            Paste SRT subtitles
+            {L('inputLabel', 'Paste SRT subtitles')}
           </label>
           <div className="flex items-center gap-2">
             <LoadSampleButton onLoad={handleLoadSample} variant="compact" />
             <button type="button" onClick={() => fileRef.current?.click()} className="btn btn-secondary px-3 py-1.5 text-xs">
-              Upload .srt
+              {L('uploadSrt', 'Upload .srt')}
             </button>
             <input ref={fileRef} type="file" accept=".srt,text/plain" onChange={handleFile} className="hidden" />
             {input && (
@@ -191,7 +197,7 @@ export function SrtSubtitleShiftClient() {
                 className="-my-1 rounded-md px-2 py-1 text-xs hover:text-red-500 sm:text-sm"
                 style={{ color: 'rgb(var(--text-faint))' }}
               >
-                Clear
+                {L('clear', 'Clear')}
               </button>
             )}
           </div>
@@ -212,7 +218,7 @@ export function SrtSubtitleShiftClient() {
       <div className="flex flex-wrap items-end gap-x-6 gap-y-3">
         <div>
           <label htmlFor="srt-offset" className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
-            Offset (seconds, negative ok)
+            {L('offsetLabel', 'Offset (seconds, negative ok)')}
           </label>
           <input
             id="srt-offset"
@@ -226,22 +232,26 @@ export function SrtSubtitleShiftClient() {
         </div>
         <label className="flex cursor-pointer items-center gap-2 pb-2 text-sm" style={{ color: 'rgb(var(--text))' }}>
           <input type="checkbox" checked={clamp} onChange={(e) => setClamp(e.target.checked)} className="h-4 w-4 accent-blue-600" />
-          Clamp negative times to 00:00:00,000
+          {L('clampLabel', 'Clamp negative times to 00:00:00,000')}
         </label>
         <label className="flex cursor-pointer items-center gap-2 pb-2 text-sm" style={{ color: 'rgb(var(--text))' }}>
           <input type="checkbox" checked={renumber} onChange={(e) => setRenumber(e.target.checked)} className="h-4 w-4 accent-blue-600" />
-          Renumber cues
+          {L('renumberLabel', 'Renumber cues')}
         </label>
         <label className="flex cursor-pointer items-center gap-2 pb-2 text-sm" style={{ color: 'rgb(var(--text))' }}>
           <input type="checkbox" checked={strip} onChange={(e) => setStrip(e.target.checked)} className="h-4 w-4 accent-blue-600" />
-          Strip formatting (tags, ASS blocks, ♪)
+          {L('stripLabel', 'Strip formatting (tags, ASS blocks, ♪)')}
         </label>
       </div>
 
       {/* 无效 offset 提示 */}
       {offsetSeconds === null && (
         <div className="rounded-lg border border-red-200 bg-red-50 p-4 text-sm text-red-700">
-          ⚠️ Please enter a valid number of seconds, e.g. <code>-2.5</code> or <code>1.75</code>.
+          {L('invalidOffsetPrefix', '⚠️ Please enter a valid number of seconds, e.g. ')}
+          <code>-2.5</code>
+          {L('invalidOffsetOr', ' or ')}
+          <code>1.75</code>
+          {L('invalidOffsetSuffix', '.')}
         </div>
       )}
 
@@ -250,20 +260,24 @@ export function SrtSubtitleShiftClient() {
         <div className="space-y-3">
           <div className="flex flex-wrap items-center justify-between gap-2">
             <span className="text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>
-              Shifted SRT — {result.cueCount} cue{result.cueCount === 1 ? '' : 's'}
+              {L('resultTitle', 'Shifted SRT')} — {result.cueCount}{' '}
+              {result.cueCount === 1 ? L('cueSingular', 'cue') : L('cuePlural', 'cues')}
             </span>
-            <CopyButton value={result.output} label="Copy" />
+            <CopyButton value={result.output} label={L('copy', 'Copy')} />
           </div>
           {result.errorBlocks > 0 && (
             <div className="rounded-lg border border-red-200 bg-red-50 p-4 text-sm text-red-700">
-              ⚠️ {result.errorBlocks} block{result.errorBlocks === 1 ? '' : 's'} could not be parsed (no valid
-              timestamp line) and {result.errorBlocks === 1 ? 'was' : 'were'} skipped.
+              ⚠️ {result.errorBlocks} {result.errorBlocks === 1 ? L('blockSingular', 'block') : L('blockPlural', 'blocks')}{' '}
+              {L('parseCouldNotBeParsed', 'could not be parsed (no valid timestamp line) and')}{' '}
+              {result.errorBlocks === 1 ? L('parseWas', 'was') : L('parseWere', 'were')} {L('parseSkipped', 'skipped.')}
             </div>
           )}
           {result.clampedCues > 0 && clamp && (
             <p className="rounded-md p-3 text-xs" style={{ backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text-subtle))' }}>
-              ⚠️ {result.clampedCues} cue{result.clampedCues === 1 ? '' : 's'} went below zero after shifting and
-              {result.clampedCues === 1 ? ' was' : ' were'} clamped to 00:00:00,000.
+              ⚠️ {result.clampedCues} {result.clampedCues === 1 ? L('cueSingular', 'cue') : L('cuePlural', 'cues')}{' '}
+              {L('clampWentBelowZero', 'went below zero after shifting and')}{' '}
+              {result.clampedCues === 1 ? L('clampWas', 'was') : L('clampWere', 'were')}{' '}
+              {L('clampClampedTo', 'clamped to 00:00:00,000.')}
             </p>
           )}
           <pre
@@ -277,13 +291,13 @@ export function SrtSubtitleShiftClient() {
             filename="shifted.srt"
             downloadContent={result.output}
             disabled={!result.output}
-            copyLabel="Copy SRT"
+            copyLabel={L('copySrt', 'Copy SRT')}
           />
         </div>
       )}
 
       <p className="rounded-md p-3 text-xs" style={{ backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text-subtle))' }}>
-        🔒 100% client-side — your subtitle file never leaves your browser.
+        {L('privacyNote', '🔒 100% client-side — your subtitle file never leaves your browser.')}
       </p>
     </div>
   )

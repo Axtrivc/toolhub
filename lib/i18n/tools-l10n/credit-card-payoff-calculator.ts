@@ -6,6 +6,10 @@ import type { ToolL10n } from '../tool-l10n'
 
 export const creditCardPayoffCalculatorL10n: ToolL10n = {
   zh: {
+    formula: {
+      formula: 'months = − ln( 1 + r·B / PMT ) / ln(1 + r)',
+      explain: '以固定月供 PMT、月利率 r 还清余额 B 所需的月数。还款越大,每月 accruing 的利息越少,时间显著缩短。',
+    },
     useCases: ['看还清信用卡要多久', '算还清过程中要付多少利息', '比较不同月供的还款时间', '决定用雪崩法还是滚雪球法还债'],
     faqs: [
       { q: '如果月供低于当月利息怎么办?', a: '计算器会警告你。如果你的还款只够付利息(或更少),余额永远不会下降——你可能永远还不完。你必须还多于当月利息。例如 $5,000、APR 22% 的账单,月利息约 $92;任何高于 $92 的还款才开始减少本金。' },
@@ -21,6 +25,10 @@ export const creditCardPayoffCalculatorL10n: ToolL10n = {
     },
   },
   es: {
+    formula: {
+      formula: 'months = − ln( 1 + r·B / PMT ) / ln(1 + r)',
+      explain: 'Meses para saldar el saldo B con un pago fijo PMT al interés mensual r. Pagos mayores acortan mucho el plazo porque se acumulan menos intereses cada mes.',
+    },
     useCases: ['ver cuánto tardas en pagar la tarjeta', 'calcular cuánto interés pagarás al saldarla', 'comparar el plazo con distintos pagos mensuales', 'decidir entre método avalancha o bola de nieve'],
     faqs: [
       { q: '¿Y si mi pago es menor que el interés mensual?', a: 'La calculadora te avisará. Si tu pago solo cubre el interés (o menos), el saldo nunca baja — podrías pagar para siempre sin avanzar. Debes pagar más que el interés mensual. Por ejemplo, en $5,000 al 22 % APR, el interés mensual es de unos $92; cualquier pago por encima de $92 empieza a reducir el principal.' },
@@ -36,6 +44,10 @@ export const creditCardPayoffCalculatorL10n: ToolL10n = {
     },
   },
   de: {
+    formula: {
+      formula: 'months = − ln( 1 + r·B / PMT ) / ln(1 + r)',
+      explain: 'Monate, um den Saldo B mit fester Rate PMT bei monatlichem Zins r zu tilgen. Höhere Raten verkürzen die Zeit deutlich, da jeden Monat weniger Zinsen anfallen.',
+    },
     useCases: ['sehen, wie lange die Kartenschuld noch läuft', 'berechnen, wie viel Zins bis zur Tilgung anfallen', 'die Laufzeit bei verschiedenen monatlichen Raten vergleichen', 'zwischen Lawinen- und Schneeballmethode wählen'],
     faqs: [
       { q: 'Was, wenn meine Rate unter den Monatszinsen liegt?', a: 'Der Rechner warnt dich. Wenn deine Zahlung nur die Zinsen (oder weniger) deckt, sinkt der Saldo nie — du könntest ewig zahlen, ohne Fortschritt. Du musst mehr als die monatlichen Zinsen zahlen. Bei $5,000 und 22 % APR sind die Monatszinsen etwa $92; jede Zahlung über $92 beginnt, die Kreditsumme zu tilgen.' },

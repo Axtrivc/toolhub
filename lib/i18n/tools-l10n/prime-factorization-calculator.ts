@@ -6,6 +6,10 @@ import type { ToolL10n } from '../tool-l10n'
 
 export const primeFactorizationCalculatorL10n: ToolL10n = {
   zh: {
+    formula: {
+      formula: 'n = p₁^e₁ × p₂^e₂ × … × pₖ^eₖ',
+      explain: '每个大于 1 的整数都能唯一分解为素数。指数表示每个素数整除 n 的次数。工具依次除尽 2、3、5……直到 √n。',
+    },
     ui: {
       'in.n': '要分解的数',
       'out.factors': '质因数分解',
@@ -22,6 +26,10 @@ export const primeFactorizationCalculatorL10n: ToolL10n = {
     ],
   },
   es: {
+    formula: {
+      formula: 'n = p₁^e₁ × p₂^e₂ × … × pₖ^eₖ',
+      explain: 'Cada entero > 1 se descompone de forma única en primos. Los exponentes cuentan cuántas veces cada primo divide a n. La herramienta divide entre 2, luego 3, 5, … hasta √n.',
+    },
     ui: {
       'in.n': 'Número a factorizar',
       'out.factors': 'Factorización en primos',
@@ -38,6 +46,10 @@ export const primeFactorizationCalculatorL10n: ToolL10n = {
     ],
   },
   de: {
+    formula: {
+      formula: 'n = p₁^e₁ × p₂^e₂ × … × pₖ^eₖ',
+      explain: 'Jede ganze Zahl > 1 zerfällt eindeutig in Primzahlen. Die Exponenten zählen, wie oft jede Primzahl n teilt. Das Werkzeug dividiert 2, dann 3, 5, … bis √n heraus.',
+    },
     ui: {
       'in.n': 'Zu faktorisierende Zahl',
       'out.factors': 'Primfaktorzerlegung',

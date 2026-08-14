@@ -6,6 +6,10 @@ import type { ToolL10n } from '../tool-l10n'
 
 export const salesTaxCalculatorL10n: ToolL10n = {
   zh: {
+    formula: {
+      formula: 'tax = price × rate\ntotal = price × (1 + rate)',
+      explain: '销售税是税前价格的一个百分比,在结账时加上。rate 用小数表示(如 8% 写 0.08)。',
+    },
     useCases: ['结账前算出商品的含税总价', '从含税总额反推税前金额(报销、对账)', '比较不同州/县的合并销售税率', '理解 VAT/GST 与销售税的换算关系'],
     faqs: [
       { q: '食品杂货要交税吗?', a: '在美国很多州,食品杂货免税或适用更低税率。食品和药品等必需品通常有特殊规定,但各地差异很大。' },
@@ -20,6 +24,10 @@ export const salesTaxCalculatorL10n: ToolL10n = {
     },
   },
   es: {
+    formula: {
+      formula: 'tax = price × rate\ntotal = price × (1 + rate)',
+      explain: 'El impuesto sobre las ventas es un porcentaje del precio sin impuestos añadido en caja. Rate se expresa como decimal (p. ej. 0,08 para 8%).',
+    },
     useCases: ['calcular el total con impuestos antes de pagar', 'obtener el importe antes de impuestos a partir del total (reembolsos, conciliación)', 'comparar las tasas combinadas de distintos estados o condados', 'entender la relación entre IVA/GST y el impuesto sobre ventas'],
     faqs: [
       { q: '¿Los alimentos básicos tributan?', a: 'En muchos estados de EE. UU., los alimentos básicos están exentos o se gravan a una tasa menor. Los productos esenciales como comida y medicinas suelen tener un trato especial, pero las reglas varían mucho según la jurisdicción.' },
@@ -34,6 +42,10 @@ export const salesTaxCalculatorL10n: ToolL10n = {
     },
   },
   de: {
+    formula: {
+      formula: 'tax = price × rate\ntotal = price × (1 + rate)',
+      explain: 'Die Mehrwertsteuer ist ein Prozentsatz des Nettopreises, der an der Kasse addiert wird. Rate als Dezimalzahl (z. B. 0,08 für 8%).',
+    },
     useCases: ['den Endpreis inklusive Steuer vor dem Bezahlen ausrechnen', 'den Netto­betrag aus dem Brutto­total zurückrechnen (Spesen, Abrechnung)', 'kombinierte Steuersätze verschiedener Bundesstaaten/Kantone vergleichen', 'den Zusammenhang zwischen Mehrwertsteuer/GST und Sales Tax verstehen'],
     faqs: [
       { q: 'Werden Lebensmittel besteuert?', a: 'In vielen US-Bundesstaaten sind Lebensmittel befreit oder werden niedriger besteuert. Grundnahrungsmittel und Medikamente erhalten oft eine Sonderbehandlung, aber die Regeln unterscheiden sich je nach Gebiet stark.' },

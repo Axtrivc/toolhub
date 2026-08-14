@@ -3,6 +3,8 @@
 import { useState, useMemo } from 'react'
 import { CopyButton } from '@/components/CopyButton'
 import { ResultActions } from '@/components/ResultActions'
+import { useApp } from '@/components/providers/AppProviders'
+import { tui } from '@/lib/i18n/tool-l10n'
 
 /**
  * Code Beautifier —— HTML / CSS / JavaScript / JSON 格式化
@@ -464,6 +466,9 @@ function beautifyHtml(src: string, unit: string): string {
 /* ---------------- 组件 ---------------- */
 
 export function CodeBeautifierClient() {
+  const { locale } = useApp()
+  const L = (key: string, fb: string) => tui('code-beautifier', locale, key, fb)
+
   const [lang, setLang] = useState<Lang>('json')
   const [indent, setIndent] = useState<'2' | '4'>('2')
   const [input, setInput] = useState('')
@@ -483,9 +488,10 @@ export function CodeBeautifierClient() {
           return { output: beautifyHtml(input, unit) }
       }
     } catch (e) {
-      return { error: e instanceof Error ? e.message : 'Unable to format input' }
+      return { error: e instanceof Error ? e.message : L('unableToFormat', 'Unable to format input') }
     }
-  }, [input, lang, indent])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [input, lang, indent, locale])
 
   return (
     <div className="space-y-5">
@@ -505,7 +511,7 @@ export function CodeBeautifierClient() {
         </div>
         <div className="flex items-center gap-2">
           <label htmlFor="beautify-indent" className="text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
-            Indent
+            {L('indent', 'Indent')}
           </label>
           <select
             id="beautify-indent"
@@ -518,8 +524,8 @@ export function CodeBeautifierClient() {
               color: 'rgb(var(--text))',
             }}
           >
-            <option value="2">2 spaces</option>
-            <option value="4">4 spaces</option>
+            <option value="2">{L('twoSpaces', '2 spaces')}</option>
+            <option value="4">{L('fourSpaces', '4 spaces')}</option>
           </select>
         </div>
       </div>
@@ -527,7 +533,7 @@ export function CodeBeautifierClient() {
       {/* 输入区 */}
       <div>
         <label htmlFor="beautify-input" className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
-          Paste your {LANGS.find((l) => l.key === lang)?.label} code
+          {L('pasteYour', 'Paste your')} {LANGS.find((l) => l.key === lang)?.label} {L('code', 'code')}
         </label>
         <textarea
           id="beautify-input"
@@ -557,9 +563,9 @@ export function CodeBeautifierClient() {
         <div className="space-y-3">
           <div className="flex items-center justify-between">
             <span className="text-sm font-semibold" style={{ color: 'rgb(var(--text))' }}>
-              Beautified output
+              {L('beautifiedOutput', 'Beautified output')}
             </span>
-            <CopyButton value={result.output} label="Copy" />
+            <CopyButton value={result.output} label={L('copy', 'Copy')} />
           </div>
           <pre
             className="w-full overflow-x-auto rounded-lg border p-4 font-mono text-sm shadow-sm"
@@ -583,7 +589,7 @@ export function CodeBeautifierClient() {
         className="rounded-md p-3 text-xs"
         style={{ backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text-subtle))' }}
       >
-        🔒 100% client-side — your code is formatted in your browser only and never sent to any server.
+        {L('note', '🔒 100% client-side — your code is formatted in your browser only and never sent to any server.')}
       </p>
     </div>
   )

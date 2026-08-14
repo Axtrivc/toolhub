@@ -6,6 +6,25 @@ import type { ToolL10n } from '../tool-l10n'
 
 export const gpaCalculatorL10n: ToolL10n = {
   zh: {
+    ui: {
+      'addCourse': '+ 添加课程',
+      'courseName': '课程名',
+      'credits': '学分',
+      'grade': '等级',
+      'gradePoints': '绩点',
+      'note': '📚 使用标准 4.0 GPA 量表。荣誉/AP 课程在你校可能权重不同——请调整等级以匹配你所在学校的体系。',
+      'on4Scale': '4.0 量表',
+      'remove': '移除',
+      'thCourseName': '课程名',
+      'thCredits': '学分',
+      'thGrade': '等级',
+      'totalCredits': '总学分',
+      'yourGpa': '你的 GPA',
+    },
+    formula: {
+      formula: 'GPA = Σ ( gradePoint × credits ) / Σ credits',
+      explain: '平均绩点。把每个字母等级换成积分(A = 4.0),乘以学分,求和,再除以总学分。加权 GPA 给荣誉/AP 课程加分。',
+    },
     useCases: [
       '按学分加权的 GPA 计算器',
       '4.0 制大学 GPA 计算',
@@ -19,6 +38,25 @@ export const gpaCalculatorL10n: ToolL10n = {
     ],
   },
   es: {
+    ui: {
+      'addCourse': '+ Añadir curso',
+      'courseName': 'Nombre del curso',
+      'credits': 'Créditos',
+      'grade': 'Nota',
+      'gradePoints': 'Puntos de calificación',
+      'note': '📚 Usa la escala estándar de GPA 4.0. Las clases honors/AP pueden ponderar distinto en tu escuela — ajusta la nota al sistema de tu institución.',
+      'on4Scale': 'En escala 4.0',
+      'remove': 'Quitar',
+      'thCourseName': 'Nombre del curso',
+      'thCredits': 'Créditos',
+      'thGrade': 'Nota',
+      'totalCredits': 'Créditos totales',
+      'yourGpa': 'Tu GPA',
+    },
+    formula: {
+      formula: 'GPA = Σ ( gradePoint × credits ) / Σ credits',
+      explain: 'Promedio de calificaciones. Convierte cada letra a puntos (A = 4,0), multiplica por créditos, suma y divide entre los créditos totales. El GPA ponderado suma puntos por honors/AP.',
+    },
     useCases: [
       'calculadora de GPA ponderada por créditos',
       'GPA universitario en escala 4.0',
@@ -32,6 +70,25 @@ export const gpaCalculatorL10n: ToolL10n = {
     ],
   },
   de: {
+    ui: {
+      'addCourse': '+ Kurs hinzufügen',
+      'courseName': 'Kursname',
+      'credits': 'Credits',
+      'grade': 'Note',
+      'gradePoints': 'Notenpunkte',
+      'note': '📚 Nutzt die Standard-GPA-4,0-Skala. Honors/AP-Kurse können an deiner Schule anders gewichtet sein — passe die Note an das System deiner Einrichtung an.',
+      'on4Scale': 'Auf 4,0-Skala',
+      'remove': 'Entfernen',
+      'thCourseName': 'Kursname',
+      'thCredits': 'Credits',
+      'thGrade': 'Note',
+      'totalCredits': 'Credits gesamt',
+      'yourGpa': 'Dein GPA',
+    },
+    formula: {
+      formula: 'GPA = Σ ( gradePoint × credits ) / Σ credits',
+      explain: 'Notendurchschnitt. Jede Buchstabennote wird in Punkte umgerechnet (A = 4,0), mit Credits multipliziert, summiert und durch die Gesamtcredits geteilt. Gewichtetes GPA gibt Bonus für Honors/AP.',
+    },
     useCases: [
       'nach Credit-Punkten gewichteter GPA-Rechner',
       'Universitäts-GPA auf der 4,0-Skala',

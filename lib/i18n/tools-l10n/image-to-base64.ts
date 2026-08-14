@@ -6,6 +6,20 @@ import type { ToolL10n } from '../tool-l10n'
 
 export const imageToBase64L10n: ToolL10n = {
   zh: {
+    ui: {
+      'base64DataUri': 'Base64 Data URI',
+      'change': '更换',
+      'copy': '复制',
+      'cssBg': 'CSS background-image',
+      'errReadFile': '无法读取文件。',
+      'errTooLarge': '文件过大({size})。最大为 20 MB。',
+      'errUploadImage': '请上传图片文件(PNG、JPG、GIF、WebP 或 SVG)。',
+      'imgTag': '标签',
+      'notePrefix': '🔒 100% 在客户端——经 ',
+      'noteSuffix': ' 读取。你的图片绝不离开你的设备。',
+      'uploadHint': 'PNG、JPG、GIF、WebP、SVG——建议几 MB 以内',
+      'uploadPrompt': '点击上传或拖放',
+    },
     useCases: [
       '把小图标内联进 CSS',
       '在邮件签名或简报中嵌入图片',
@@ -19,6 +33,20 @@ export const imageToBase64L10n: ToolL10n = {
     ],
   },
   es: {
+    ui: {
+      'base64DataUri': 'Data URI en Base64',
+      'change': 'Cambiar',
+      'copy': 'Copiar',
+      'cssBg': 'CSS background-image',
+      'errReadFile': 'No se pudo leer el archivo.',
+      'errTooLarge': 'El archivo es demasiado grande ({size}). El máximo es 20 MB.',
+      'errUploadImage': 'Sube una imagen (PNG, JPG, GIF, WebP o SVG).',
+      'imgTag': 'etiqueta',
+      'notePrefix': '🔒 100% en el cliente — leído vía ',
+      'noteSuffix': '. Tu imagen nunca sale de tu dispositivo.',
+      'uploadHint': 'PNG, JPG, GIF, WebP, SVG — hasta unos pocos MB',
+      'uploadPrompt': 'Clic para subir o arrastra',
+    },
     useCases: [
       'inlinear iconos pequeños en CSS',
       'incrustar imágenes en firmas de correo o boletines',
@@ -32,6 +60,20 @@ export const imageToBase64L10n: ToolL10n = {
     ],
   },
   de: {
+    ui: {
+      'base64DataUri': 'Base64-Data-URI',
+      'change': 'Ändern',
+      'copy': 'Kopieren',
+      'cssBg': 'CSS background-image',
+      'errReadFile': 'Datei konnte nicht gelesen werden.',
+      'errTooLarge': 'Datei ist zu groß ({size}). Maximum 20 MB.',
+      'errUploadImage': 'Bitte eine Bilddatei hochladen (PNG, JPG, GIF, WebP oder SVG).',
+      'imgTag': 'Tag',
+      'notePrefix': '🔒 100% clientseitig — gelesen via ',
+      'noteSuffix': '. Dein Bild verlässt nie dein Gerät.',
+      'uploadHint': 'PNG, JPG, GIF, WebP, SVG — bis zu wenigen MB empfohlen',
+      'uploadPrompt': 'Zum Hochladen klicken oder hineinziehen',
+    },
     useCases: [
       'kleine Icons inline in CSS einbetten',
       'Bilder in E-Mail-Signaturen oder Newsletters einfügen',

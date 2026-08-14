@@ -6,6 +6,11 @@ import type { ToolL10n } from '../tool-l10n'
 
 export const textToListL10n: ToolL10n = {
   zh: {
+    ui: {
+      inputLabel: '多行文本',
+      outputLabel: '项目符号列表',
+      note: '📝 给每行加上项目符号。用于笔记、提纲和文档排版。',
+    },
     useCases: [
       '把随手记下的笔记整理成结构化列表',
       '从零散想法生成大纲',
@@ -17,6 +22,11 @@ export const textToListL10n: ToolL10n = {
     ],
   },
   es: {
+    ui: {
+      inputLabel: 'Líneas de texto',
+      outputLabel: 'Lista con viñetas',
+      note: '📝 Añade viñetas a cada línea. Para notas, esquemas y formato de documentos.',
+    },
     useCases: [
       'convertir notas rápidas en una lista estructurada',
       'crear esquemas a partir de ideas sueltas',
@@ -28,6 +38,11 @@ export const textToListL10n: ToolL10n = {
     ],
   },
   de: {
+    ui: {
+      inputLabel: 'Textzeilen',
+      outputLabel: 'Aufzählungsliste',
+      note: '📝 Fügt jeder Zeile Aufzählungszeichen hinzu. Für Notizen, Gliederungen und Dokumentformatierung.',
+    },
     useCases: [
       'schnell notierte Gedanken in eine strukturierte Liste umwandeln',
       'aus verteilten Ideen eine Gliederung erstellen',

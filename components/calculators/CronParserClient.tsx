@@ -3,6 +3,8 @@
 import { useState, useMemo, useCallback } from 'react'
 import { ResultActions } from '@/components/ResultActions'
 import { describeCron, nextFires } from '@/lib/cron'
+import { useApp } from '@/components/providers/AppProviders'
+import { tui } from '@/lib/i18n/tool-l10n'
 
 /**
  * Cron Expression Parser 客户端组件
@@ -12,18 +14,21 @@ import { describeCron, nextFires } from '@/lib/cron'
  *  - 下 5 次触发时间(本地时区)
  * 引擎见 lib/cron.ts(零依赖手写,支持 *, 列表, 范围, 步长, DOM/DOW OR 语义)。
  */
-const PRESETS: { label: string; expr: string }[] = [
-  { label: 'Every minute', expr: '* * * * *' },
-  { label: 'Hourly', expr: '0 * * * *' },
-  { label: 'Daily at 00:00', expr: '0 0 * * *' },
-  { label: 'Weekdays 09:00', expr: '0 9 * * 1-5' },
-  { label: 'Weekly (Mon)', expr: '0 0 * * 1' },
-  { label: 'Monthly (1st)', expr: '0 0 1 * *' },
-  { label: 'Every 15 min', expr: '*/15 * * * *' },
-  { label: 'Every night 2am', expr: '0 2 * * *' },
+const PRESETS: { key: string; label: string; expr: string }[] = [
+  { key: 'everyMinute', label: 'Every minute', expr: '* * * * *' },
+  { key: 'hourly', label: 'Hourly', expr: '0 * * * *' },
+  { key: 'daily', label: 'Daily at 00:00', expr: '0 0 * * *' },
+  { key: 'weekdays', label: 'Weekdays 09:00', expr: '0 9 * * 1-5' },
+  { key: 'weekly', label: 'Weekly (Mon)', expr: '0 0 * * 1' },
+  { key: 'monthly', label: 'Monthly (1st)', expr: '0 0 1 * *' },
+  { key: 'every15min', label: 'Every 15 min', expr: '*/15 * * * *' },
+  { key: 'nightly', label: 'Every night 2am', expr: '0 2 * * *' },
 ]
 
 export function CronParserClient() {
+  const { locale } = useApp()
+  const L = (key: string, fb: string) => tui('cron-parser', locale, key, fb)
+
   const [expr, setExpr] = useState('0 9 * * 1-5')
 
   const result = useMemo(() => {
@@ -32,17 +37,25 @@ export function CronParserClient() {
       const fires = nextFires(expr, 5)
       return { description, fires }
     } catch (e) {
-      return { error: e instanceof Error ? e.message : 'Invalid cron expression' }
+      return { error: e instanceof Error ? e.message : L('invalidCron', 'Invalid cron expression') }
     }
-  }, [expr])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [expr, locale])
 
   const handlePreset = useCallback((e: string) => setExpr(e), [])
 
   const summary = useMemo(() => {
-    if ('error' in result) return `Cron "${expr}": ${result.error}`
+    if ('error' in result) return `${L('summaryErrorPrefix', 'Cron ')}"${expr}": ${result.error}`
     const lines = result.fires.map((d, i) => `  ${i + 1}. ${d.toLocaleString('en-US')}`)
-    return ['Cron Schedule Summary', `Expression: ${expr}`, `Meaning: ${result.description}`, 'Next 5 runs:', ...lines].join('\n')
-  }, [result, expr])
+    return [
+      L('summaryTitle', 'Cron Schedule Summary'),
+      `${L('sExpression', 'Expression: ')}${expr}`,
+      `${L('sMeaning', 'Meaning: ')}${result.description}`,
+      L('next5Runs', 'Next 5 runs:'),
+      ...lines,
+    ].join('\n')
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [result, expr, locale])
 
   const downloadContent = summary
 
@@ -51,7 +64,7 @@ export function CronParserClient() {
       {/* 输入区 */}
       <div>
         <label htmlFor="cron-input" className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
-          Cron expression (5 fields: minute hour day-of-month month day-of-week)
+          {L('cronExpressionLabel', 'Cron expression (5 fields: minute hour day-of-month month day-of-week)')}
         </label>
         <input
           id="cron-input"
@@ -80,14 +93,20 @@ export function CronParserClient() {
             style={{ borderColor: 'rgb(var(--border))', color: 'rgb(var(--text-muted))' }}
             title={p.expr}
           >
-            {p.label}
+            {L('preset_' + p.key, p.label)}
           </button>
         ))}
       </div>
 
       {/* 字段提示 */}
       <div className="grid grid-cols-2 gap-2 text-xs sm:grid-cols-5" style={{ color: 'rgb(var(--text-subtle))' }}>
-        {['Minute (0-59)', 'Hour (0-23)', 'Day of month (1-31)', 'Month (1-12)', 'Day of week (0-6)'].map((label, i) => {
+        {[
+          L('fieldMinute', 'Minute (0-59)'),
+          L('fieldHour', 'Hour (0-23)'),
+          L('fieldDayOfMonth', 'Day of month (1-31)'),
+          L('fieldMonth', 'Month (1-12)'),
+          L('fieldDayOfWeek', 'Day of week (0-6)'),
+        ].map((label, i) => {
           const val = expr.trim().split(/\s+/)[i] ?? '?'
           return (
             <div key={label} className="rounded-md border p-2 text-center" style={{ borderColor: 'rgb(var(--border))' }}>
@@ -110,7 +129,7 @@ export function CronParserClient() {
           {/* 人类可读说明 */}
           <div className="rounded-lg border p-5" style={{ borderColor: 'rgb(147 197 253)', backgroundColor: 'rgb(219 234 254 / 0.4)' }}>
             <div className="text-xs font-medium uppercase tracking-wide" style={{ color: 'rgb(var(--text-subtle))' }}>
-              Human-readable
+              {L('humanReadable', 'Human-readable')}
             </div>
             <div className="mt-1.5 text-lg font-semibold" style={{ color: 'rgb(37 99 235)' }}>
               {result.description}
@@ -119,11 +138,11 @@ export function CronParserClient() {
 
           {/* 下 5 次触发时间 */}
           <div>
-            <h3 className="mb-2 text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>Next 5 trigger times (your timezone)</h3>
+            <h3 className="mb-2 text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>{L('next5Triggers', 'Next 5 trigger times (your timezone)')}</h3>
             <ol className="space-y-2">
               {result.fires.length === 0 && (
                 <li className="text-sm" style={{ color: 'rgb(var(--text-muted))' }}>
-                  No upcoming run found within 4 years.
+                  {L('noUpcomingRun', 'No upcoming run found within 4 years.')}
                 </li>
               )}
               {result.fires.map((d, i) => (
@@ -153,9 +172,7 @@ export function CronParserClient() {
       )}
 
       <p className="rounded-md p-3 text-xs" style={{ backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text-subtle))' }}>
-        ⏰ Supports standard 5-field cron: <code>*</code> (any), <code>,</code> lists, <code>-</code> ranges, <code>/</code>{' '}
-        steps, and named months/days (JAN–DEC, SUN–SAT). Day-of-month and day-of-week follow Vixie cron OR-logic: when
-        both are restricted, the job runs if either matches.
+        {L('noteP1', '⏰ Supports standard 5-field cron: ')}<code>*</code>{L('noteP2', ' (any), ')}<code>,</code>{L('noteP3', ' lists, ')}<code>-</code>{L('noteP4', ' ranges, ')}<code>/</code>{' '}{L('noteP5', 'steps, and named months/days (JAN–DEC, SUN–SAT). Day-of-month and day-of-week follow Vixie cron OR-logic: when both are restricted, the job runs if either matches.')}
       </p>
     </div>
   )

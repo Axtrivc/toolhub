@@ -6,6 +6,23 @@ import type { ToolL10n } from '../tool-l10n'
 
 export const htmlUnescapeL10n: ToolL10n = {
   zh: {
+    ui: {
+      'characters': '字符',
+      'clear': '清空',
+      'decode': '解码',
+      'decodeInputLabel': '转义后的 HTML',
+      'decodeNote': '🌐 把 HTML 实体反转义回字符。安全——使用一个独立的 textarea 元素。',
+      'decodeOutputLabel': '反转义后的文本',
+      'encode': '编码',
+      'encodeInputLabel': '文本或 HTML',
+      'encodeNote': '🌐 转义 & < > " 和 \'。在把用户输入插入 HTML 前使用,以防 XSS。',
+      'encodeOutputLabel': '转义后的 HTML',
+      'mode': '模式',
+      'modeAria': '编码/解码模式',
+      'placeholder': '在此输入或粘贴…',
+      'resultPlaceholder': '结果将显示在这里…',
+      'words': '词',
+    },
     useCases: [
       '清理从网页抓取的内容',
       '读取数据库或 API 里的转义文本',
@@ -17,6 +34,23 @@ export const htmlUnescapeL10n: ToolL10n = {
     ],
   },
   es: {
+    ui: {
+      'characters': 'caracteres',
+      'clear': 'Limpiar',
+      'decode': 'Decodificar',
+      'decodeInputLabel': 'HTML escapado',
+      'decodeNote': '🌐 Revierte entidades HTML a caracteres. Seguro — usa un elemento textarea separado.',
+      'decodeOutputLabel': 'Texto sin escapar',
+      'encode': 'Codificar',
+      'encodeInputLabel': 'Texto o HTML',
+      'encodeNote': '🌐 Escapa & < > " y \'. Úsalo antes de insertar entrada de usuario en HTML para evitar XSS.',
+      'encodeOutputLabel': 'HTML escapado',
+      'mode': 'Modo',
+      'modeAria': 'Modo codificar/decodificar',
+      'placeholder': 'Escribe o pega aquí…',
+      'resultPlaceholder': 'El resultado aparecerá aquí…',
+      'words': 'palabras',
+    },
     useCases: [
       'limpiar contenido extraído de sitios web',
       'leer texto escapado de bases de datos o APIs',
@@ -28,6 +62,23 @@ export const htmlUnescapeL10n: ToolL10n = {
     ],
   },
   de: {
+    ui: {
+      'characters': 'Zeichen',
+      'clear': 'Leeren',
+      'decode': 'Dekodieren',
+      'decodeInputLabel': 'Escaptes HTML',
+      'decodeNote': '🌐 Wandelt HTML-Entities zurück in Zeichen. Sicher — verwendet ein losgelöstes textarea-Element.',
+      'decodeOutputLabel': 'Unescapter Text',
+      'encode': 'Kodieren',
+      'encodeInputLabel': 'Text oder HTML',
+      'encodeNote': '🌐 Escapt & < > " und \'. Verwenden vor dem Einfügen von Nutzereingaben in HTML, um XSS zu verhindern.',
+      'encodeOutputLabel': 'Escaptes HTML',
+      'mode': 'Modus',
+      'modeAria': 'Modus Kodieren/Dekodieren',
+      'placeholder': 'Hier eingeben oder einfügen…',
+      'resultPlaceholder': 'Das Ergebnis erscheint hier…',
+      'words': 'Wörter',
+    },
     useCases: [
       'vom Web kopierte Inhalte bereinigen',
       'escapten Text aus Datenbanken oder APIs lesen',

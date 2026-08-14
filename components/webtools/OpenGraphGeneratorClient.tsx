@@ -3,6 +3,8 @@
 import { useState, useMemo, useCallback } from 'react'
 import { CopyButton } from '@/components/CopyButton'
 import { LoadSampleButton } from '@/components/LoadSampleButton'
+import { useApp } from '@/components/providers/AppProviders'
+import { tui } from '@/lib/i18n/tool-l10n'
 
 /**
  * Open Graph & Meta Tag Generator —— 输入标题/描述/图片,实时预览社交分享卡 + 生成 meta 标签
@@ -51,6 +53,9 @@ function hostOf(url: string): string {
 }
 
 export function OpenGraphGeneratorClient() {
+  const { locale } = useApp()
+  const L = (key: string, fb: string) => tui('open-graph-generator', locale, key, fb)
+
   const [v, setV] = useState<OgInput>({
     title: '',
     description: '',
@@ -98,27 +103,27 @@ export function OpenGraphGeneratorClient() {
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <div className="sm:col-span-2">
           <label htmlFor="og-title" className="mb-1 block text-sm font-medium text-slate-700">
-            Title
+            {L('titleLabel', 'Title')}
           </label>
           <input
             id="og-title"
             type="text"
             value={v.title}
             onChange={(e) => set('title', e.target.value)}
-            placeholder="Your page title"
+            placeholder={L('titlePlaceholder', 'Your page title')}
             className={inputCls}
             style={{ borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rgb(var(--bg-card))', color: 'rgb(var(--text))' }}
           />
         </div>
         <div className="sm:col-span-2">
           <label htmlFor="og-desc" className="mb-1 block text-sm font-medium text-slate-700">
-            Description
+            {L('descriptionLabel', 'Description')}
           </label>
           <textarea
             id="og-desc"
             value={v.description}
             onChange={(e) => set('description', e.target.value)}
-            placeholder="A short summary shown under the title"
+            placeholder={L('descPlaceholder', 'A short summary shown under the title')}
             rows={2}
             className={inputCls}
             style={{ borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rgb(var(--bg-card))', color: 'rgb(var(--text))' }}
@@ -126,49 +131,49 @@ export function OpenGraphGeneratorClient() {
         </div>
         <div>
           <label htmlFor="og-url" className="mb-1 block text-sm font-medium text-slate-700">
-            Page URL
+            {L('pageUrlLabel', 'Page URL')}
           </label>
           <input
             id="og-url"
             type="text"
             value={v.url}
             onChange={(e) => set('url', e.target.value)}
-            placeholder="https://example.com/page"
+            placeholder={L('urlPlaceholder', 'https://example.com/page')}
             className={inputCls}
             style={{ borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rgb(var(--bg-card))', color: 'rgb(var(--text))' }}
           />
         </div>
         <div>
           <label htmlFor="og-site" className="mb-1 block text-sm font-medium text-slate-700">
-            Site Name (optional)
+            {L('siteNameLabel', 'Site Name (optional)')}
           </label>
           <input
             id="og-site"
             type="text"
             value={v.siteName}
             onChange={(e) => set('siteName', e.target.value)}
-            placeholder="My Site"
+            placeholder={L('siteNamePlaceholder', 'My Site')}
             className={inputCls}
             style={{ borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rgb(var(--bg-card))', color: 'rgb(var(--text))' }}
           />
         </div>
         <div className="sm:col-span-2">
           <label htmlFor="og-image" className="mb-1 block text-sm font-medium text-slate-700">
-            Image URL
+            {L('imageUrlLabel', 'Image URL')}
           </label>
           <input
             id="og-image"
             type="text"
             value={v.image}
             onChange={(e) => set('image', e.target.value)}
-            placeholder="https://example.com/image.png  (recommended 1200×630)"
+            placeholder={L('imagePlaceholder', 'https://example.com/image.png  (recommended 1200×630)')}
             className={inputCls}
             style={{ borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rgb(var(--bg-card))', color: 'rgb(var(--text))' }}
           />
         </div>
         <div className="sm:col-span-2">
           <label htmlFor="og-card" className="mb-1 block text-sm font-medium text-slate-700">
-            Twitter Card Type
+            {L('twitterCardTypeLabel', 'Twitter Card Type')}
           </label>
           <select
             id="og-card"
@@ -177,8 +182,8 @@ export function OpenGraphGeneratorClient() {
             className={inputCls}
             style={{ borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rgb(var(--bg-card))', color: 'rgb(var(--text))' }}
           >
-            <option value="summary_large_image">summary_large_image (large card)</option>
-            <option value="summary">summary (small card)</option>
+            <option value="summary_large_image">{L('cardLargeOption', 'summary_large_image (large card)')}</option>
+            <option value="summary">{L('cardSmallOption', 'summary (small card)')}</option>
           </select>
         </div>
       </div>
@@ -190,7 +195,7 @@ export function OpenGraphGeneratorClient() {
       {/* 实时预览 */}
       {hasAny && (
         <div>
-          <h3 className="mb-3 text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>Live Preview</h3>
+          <h3 className="mb-3 text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>{L('livePreview', 'Live Preview')}</h3>
           <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
             {/* 大图卡(Facebook / LinkedIn / 通用 OG) */}
             {v.twitterCard === 'summary_large_image' && (
@@ -198,18 +203,18 @@ export function OpenGraphGeneratorClient() {
                 <div className="flex aspect-[1.91/1] items-center justify-center bg-slate-100 dark:bg-slate-700">
                   {v.image ? (
                     // eslint-disable-next-line @next/next/no-img-element
-                    <img src={v.image} alt="OG preview" className="h-full w-full object-cover" onError={(e) => { (e.target as HTMLImageElement).style.display = 'none' }} />
+                    <img src={v.image} alt={L('ogPreviewAlt', 'OG preview')} className="h-full w-full object-cover" onError={(e) => { (e.target as HTMLImageElement).style.display = 'none' }} />
                   ) : (
-                    <span className="text-xs text-slate-400">No image</span>
+                    <span className="text-xs text-slate-400">{L('noImage', 'No image')}</span>
                   )}
                 </div>
                 <div className="px-3 py-2.5">
                   <div className="text-[11px] uppercase text-slate-400">{host}</div>
                   <div className="mt-0.5 line-clamp-2 text-sm font-semibold text-slate-800 dark:text-slate-100">
-                    {v.title || 'Your title appears here'}
+                    {v.title || L('titlePreviewDefault', 'Your title appears here')}
                   </div>
                   <div className="mt-1 line-clamp-2 text-xs text-slate-500 dark:text-slate-400">
-                    {v.description || 'Your description appears here'}
+                    {v.description || L('descPreviewDefault', 'Your description appears here')}
                   </div>
                 </div>
               </div>
@@ -221,18 +226,18 @@ export function OpenGraphGeneratorClient() {
                 <div className="flex h-20 w-20 shrink-0 items-center justify-center overflow-hidden rounded-lg bg-slate-100 dark:bg-slate-700">
                   {v.image ? (
                     // eslint-disable-next-line @next/next/no-img-element
-                    <img src={v.image} alt="Twitter preview" className="h-full w-full object-cover" onError={(e) => { (e.target as HTMLImageElement).style.display = 'none' }} />
+                    <img src={v.image} alt={L('twitterPreviewAlt', 'Twitter preview')} className="h-full w-full object-cover" onError={(e) => { (e.target as HTMLImageElement).style.display = 'none' }} />
                   ) : (
-                    <span className="text-[10px] text-slate-400">No img</span>
+                    <span className="text-[10px] text-slate-400">{L('noImg', 'No img')}</span>
                   )}
                 </div>
                 <div className="min-w-0 flex-1">
                   <div className="truncate text-[11px] text-slate-400">{host}</div>
                   <div className="mt-0.5 line-clamp-2 text-sm font-semibold text-slate-800 dark:text-slate-100">
-                    {v.title || 'Your title'}
+                    {v.title || L('titleDefault', 'Your title')}
                   </div>
                   <div className="mt-0.5 line-clamp-1 text-xs text-slate-500 dark:text-slate-400">
-                    {v.description || 'Your description'}
+                    {v.description || L('descDefault', 'Your description')}
                   </div>
                 </div>
               </div>
@@ -243,7 +248,7 @@ export function OpenGraphGeneratorClient() {
               <div className="flex aspect-[1.91/1] items-center justify-center bg-slate-100 dark:bg-slate-700">
                 {v.image ? (
                   // eslint-disable-next-line @next/next/no-img-element
-                  <img src={v.image} alt="Twitter large preview" className="h-full w-full object-cover" onError={(e) => { (e.target as HTMLImageElement).style.display = 'none' }} />
+                    <img src={v.image} alt={L('twitterLargePreviewAlt', 'Twitter large preview')} className="h-full w-full object-cover" onError={(e) => { (e.target as HTMLImageElement).style.display = 'none' }} />
                 ) : (
                   <span className="text-xs text-slate-400">No image</span>
                 )}
@@ -266,8 +271,8 @@ export function OpenGraphGeneratorClient() {
       {hasAny && (
         <div>
           <div className="mb-2 flex items-center justify-between">
-            <span className="text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>Generated Meta Tags</span>
-            <CopyButton value={metaTags} label="Copy" />
+            <span className="text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>{L('generatedMetaTags', 'Generated Meta Tags')}</span>
+            <CopyButton value={metaTags} label={L('copy', 'Copy')} />
           </div>
           <pre
             className="overflow-x-auto rounded-lg border bg-slate-50 p-4 text-xs"
@@ -279,7 +284,7 @@ export function OpenGraphGeneratorClient() {
       )}
 
       <p className="rounded-md p-3 text-xs" style={{ backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text-subtle))' }}>
-        🔒 100% client-side — previews are mocked locally. Paste the generated tags into your page&apos;s <code>&lt;head&gt;</code>.
+        {L('noteText', '🔒 100% client-side — previews are mocked locally. Paste the generated tags into your page\'s')} <code>&lt;head&gt;</code>.
       </p>
     </div>
   )

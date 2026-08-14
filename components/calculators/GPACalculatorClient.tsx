@@ -3,6 +3,8 @@
 import { useState, useMemo, useRef } from 'react'
 import { ResultCard, CalculatorNote } from '../calculator/CalculatorField'
 import { fmtNum } from '@/lib/format'
+import { useApp } from '@/components/providers/AppProviders'
+import { tui } from '@/lib/i18n/tool-l10n'
 
 /**
  * GPA 计算器 - 独立组件
@@ -34,6 +36,9 @@ const GRADE_POINTS: Record<string, number> = {
 }
 
 export function GPACalculatorClient() {
+  const { locale } = useApp()
+  const L = (key: string, fb: string) => tui('gpa-calculator', locale, key, fb)
+
   const [courses, setCourses] = useState<Course[]>([
     { id: 1, name: 'Mathematics', credits: '3', grade: 'A' },
     { id: 2, name: 'English', credits: '3', grade: 'B+' },
@@ -71,9 +76,9 @@ export function GPACalculatorClient() {
       <div className="space-y-3">
         {/* 表头 */}
         <div className="hidden grid-cols-12 gap-2 px-2 text-xs font-medium uppercase tracking-wide text-slate-500 sm:grid">
-          <div className="col-span-5">Course name</div>
-          <div className="col-span-2">Credits</div>
-          <div className="col-span-3">Grade</div>
+          <div className="col-span-5">{L('thCourseName', 'Course name')}</div>
+          <div className="col-span-2">{L('thCredits', 'Credits')}</div>
+          <div className="col-span-3">{L('thGrade', 'Grade')}</div>
           <div className="col-span-2"></div>
         </div>
 
@@ -83,7 +88,7 @@ export function GPACalculatorClient() {
               type="text"
               value={c.name}
               onChange={(e) => updateCourse(c.id, { name: e.target.value })}
-              placeholder="Course name"
+              placeholder={L('courseName', 'Course name')}
               className="col-span-12 rounded-md border px-3 py-2.5 text-sm outline-none focus:border-brand-500 sm:col-span-5 sm:px-2 sm:py-1.5" style={{ borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rgb(var(--bg-card))', color: 'rgb(var(--text))' }}
             />
             <input
@@ -92,13 +97,13 @@ export function GPACalculatorClient() {
               onChange={(e) => updateCourse(c.id, { credits: e.target.value })}
               min="0"
               step="0.5"
-              aria-label="Credits"
+              aria-label={L('credits', 'Credits')}
               className="col-span-5 rounded-md border px-3 py-2.5 text-sm outline-none focus:border-brand-500 sm:col-span-2 sm:px-2 sm:py-1.5" style={{ borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rgb(var(--bg-card))', color: 'rgb(var(--text))' }}
             />
             <select
               value={c.grade}
               onChange={(e) => updateCourse(c.id, { grade: e.target.value })}
-              aria-label="Grade"
+              aria-label={L('grade', 'Grade')}
               className="col-span-7 rounded-md border px-3 py-2.5 text-sm outline-none focus:border-brand-500 sm:col-span-3 sm:px-2 sm:py-1.5" style={{ borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rgb(var(--bg-card))', color: 'rgb(var(--text))' }}
             >
               {Object.keys(GRADE_POINTS).map((g) => (
@@ -112,26 +117,25 @@ export function GPACalculatorClient() {
               onClick={() => removeCourse(c.id)}
               className="col-span-12 rounded-md bg-red-50 px-3 py-2.5 text-sm text-red-600 hover:bg-red-100 sm:col-span-2 sm:px-2 sm:py-1.5 sm:text-xs"
             >
-              Remove
+              {L('remove', 'Remove')}
             </button>
           </div>
         ))}
       </div>
 
       <button type="button" onClick={addCourse} className="btn btn-secondary">
-        + Add course
+        {L('addCourse', '+ Add course')}
       </button>
 
       {/* 结果 */}
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
-        <ResultCard label="Your GPA" value={fmtNum(result.gpa, 2)} highlight sublabel="On 4.0 scale" />
-        <ResultCard label="Total credits" value={fmtNum(result.totalCredits, 1)} />
-        <ResultCard label="Grade points" value={fmtNum(result.totalPoints, 1)} />
+        <ResultCard label={L('yourGpa', 'Your GPA')} value={fmtNum(result.gpa, 2)} highlight sublabel={L('on4Scale', 'On 4.0 scale')} />
+        <ResultCard label={L('totalCredits', 'Total credits')} value={fmtNum(result.totalCredits, 1)} />
+        <ResultCard label={L('gradePoints', 'Grade points')} value={fmtNum(result.totalPoints, 1)} />
       </div>
 
       <CalculatorNote>
-        📚 Uses the standard 4.0 GPA scale. Honors/AP classes may weight differently at your school —
-        adjust the grade to match your institution&apos;s system.
+        {L('note', "📚 Uses the standard 4.0 GPA scale. Honors/AP classes may weight differently at your school — adjust the grade to match your institution's system.")}
       </CalculatorNote>
     </div>
   )

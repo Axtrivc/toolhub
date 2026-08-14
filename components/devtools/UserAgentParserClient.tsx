@@ -3,6 +3,8 @@
 import { useState, useEffect, useMemo } from 'react'
 import { CopyButton } from '@/components/CopyButton'
 import { ResultCard } from '@/components/calculator/CalculatorField'
+import { useApp } from '@/components/providers/AppProviders'
+import { tui } from '@/lib/i18n/tool-l10n'
 
 /**
  * User-Agent Parser —— 纯正则 UA 解析(浏览器/引擎/OS/设备/Bot)
@@ -113,6 +115,10 @@ function parseUserAgent(ua: string): UaResult {
 }
 
 export function UserAgentParserClient() {
+  const { locale } = useApp()
+  // 取本地化 UI 串;缺失回退英文(SSR 恒英文)。
+  const L = (key: string, fb: string) => tui('user-agent-parser', locale, key, fb)
+
   const [text, setText] = useState('')
 
   // 挂载后自动填入当前浏览器 UA(仅 useEffect,避免 hydration 不一致)
@@ -128,7 +134,7 @@ export function UserAgentParserClient() {
       {/* 输入区 */}
       <div>
         <label htmlFor="ua-input" className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
-          User-Agent string
+          {L('inputLabel', 'User-Agent string')}
         </label>
         <textarea
           id="ua-input"
@@ -148,33 +154,32 @@ export function UserAgentParserClient() {
 
       <div className="flex flex-wrap items-center gap-3">
         <button type="button" onClick={() => setText(navigator.userAgent)} className="btn btn-secondary">
-          Load my UA
+          {L('loadMyUa', 'Load my UA')}
         </button>
       </div>
 
       {parsed === null ? (
         <p className="rounded-md p-3 text-sm" style={{ backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text-subtle))' }}>
-          Paste any User-Agent string above, or click <strong>Load my UA</strong> to parse your current browser.
+          {L('emptyHint', 'Paste any User-Agent string above, or click')} <strong>{L('loadMyUa', 'Load my UA')}</strong> {L('emptyHintSuffix', 'to parse your current browser.')}
         </p>
       ) : (
         <>
           {/* 概览卡片 */}
           <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
-            <ResultCard label="Browser" value={parsed.browser} sublabel={parsed.browserVersion ? `v${parsed.browserVersion}` : 'version unknown'} highlight />
-            <ResultCard label="Operating System" value={parsed.os} sublabel={parsed.osVersion || 'version unknown'} />
+            <ResultCard label={L('browserLabel', 'Browser')} value={parsed.browser} sublabel={parsed.browserVersion ? `v${parsed.browserVersion}` : L('versionUnknown', 'version unknown')} highlight />
+            <ResultCard label={L('osLabel', 'Operating System')} value={parsed.os} sublabel={parsed.osVersion || L('versionUnknown', 'version unknown')} />
             <ResultCard
-              label="Device Type"
+              label={L('deviceTypeLabel', 'Device Type')}
               value={parsed.deviceType[0].toUpperCase() + parsed.deviceType.slice(1)}
-              sublabel={parsed.isBot ? `Bot: ${parsed.botName}` : 'not a known bot'}
+              sublabel={parsed.isBot ? `${L('botPrefix', 'Bot:')} ${parsed.botName}` : L('notABot', 'not a known bot')}
             />
-            <ResultCard label="Engine" value={parsed.engine} />
+            <ResultCard label={L('engineLabel', 'Engine')} value={parsed.engine} />
           </div>
 
           {/* 爬虫提示 */}
           {parsed.isBot && (
             <div className="rounded-lg border border-amber-200 bg-amber-50 p-4 text-sm text-amber-800">
-              ⚠️ This looks like an automated crawler (<strong>{parsed.botName}</strong>), not a human visitor.
-              Browser/OS fields in bot UAs often imitate real browsers and may be unreliable.
+              ⚠️ {L('botLooksLike', 'This looks like an automated crawler (')}<strong>{parsed.botName}</strong>{L('botNotHuman', '), not a human visitor.')} {L('botFieldsUnreliable', 'Browser/OS fields in bot UAs often imitate real browsers and may be unreliable.')}
             </div>
           )}
 
@@ -182,7 +187,7 @@ export function UserAgentParserClient() {
           <div>
             <div className="mb-1.5 flex items-center justify-between">
               <span className="text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
-                Parsed result (JSON)
+                {L('parsedResultLabel', 'Parsed result (JSON)')}
               </span>
             </div>
             <pre
@@ -198,15 +203,14 @@ export function UserAgentParserClient() {
           </div>
 
           <div className="flex flex-wrap items-center gap-3">
-            <CopyButton value={json} label="Copy JSON" />
+            <CopyButton value={json} label={L('copyJson', 'Copy JSON')} />
           </div>
         </>
       )}
 
       <p className="rounded-md p-3 text-xs" style={{ backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text-subtle))' }}>
-        🔒 Parsing is 100% local — the string never leaves your browser. UA sniffing is heuristic by nature: clients can
-        lie about any field, and Windows 10 vs 11 is intentionally indistinguishable (both report{' '}
-        <code>Windows NT 10.0</code>).
+        {L('noteMain', '🔒 Parsing is 100% local — the string never leaves your browser. UA sniffing is heuristic by nature: clients can lie about any field, and Windows 10 vs 11 is intentionally indistinguishable (both report')}{' '}
+        <code>Windows NT 10.0</code>{L('noteSuffix', ').')}
       </p>
     </div>
   )

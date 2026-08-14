@@ -6,6 +6,11 @@ import type { ToolL10n } from '../tool-l10n'
 
 export const jsonMinifierL10n: ToolL10n = {
   zh: {
+    ui: {
+      inputLabel: 'JSON(已格式化)',
+      outputLabel: '压缩后的 JSON',
+      note: '📦 移除所有空白以最小化 JSON 体积。用于 API 负载和存储。',
+    },
     useCases: [
       'API 响应(通常还会再 gzip)',
       '嵌入 HTML 或 JavaScript 的 JSON',
@@ -17,6 +22,11 @@ export const jsonMinifierL10n: ToolL10n = {
     ],
   },
   es: {
+    ui: {
+      inputLabel: 'JSON (con formato)',
+      outputLabel: 'JSON minificado',
+      note: '📦 Elimina todos los espacios para minimizar el tamaño del JSON. Para payloads de API y almacenamiento.',
+    },
     useCases: [
       'respuestas de API (a menudo además comprimidas con gzip)',
       'JSON incrustado en HTML o JavaScript',
@@ -28,6 +38,11 @@ export const jsonMinifierL10n: ToolL10n = {
     ],
   },
   de: {
+    ui: {
+      inputLabel: 'JSON (formatiert)',
+      outputLabel: 'Minimiertes JSON',
+      note: '📦 Entfernt sämtliche Leerzeichen, um die JSON-Größe zu minimieren. Für API-Payloads und Speicherung.',
+    },
     useCases: [
       'API-Antworten (oft zusätzlich gzip-komprimiert)',
       'eingebettetes JSON in HTML oder JavaScript',

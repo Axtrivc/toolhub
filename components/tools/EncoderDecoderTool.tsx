@@ -2,6 +2,8 @@
 
 import { useState, useEffect, useMemo, useCallback } from 'react'
 import { CopyButton } from '@/components/CopyButton'
+import { useApp } from '@/components/providers/AppProviders'
+import { tui } from '@/lib/i18n/tool-l10n'
 
 /**
  * 单个方向的变换规格(与 makeTextTool 的相关字段同构)。
@@ -26,6 +28,8 @@ interface EncoderDecoderToolProps {
   decode: ModeSpec
   /** 初始方向(由各自 pSEO 路由决定,encode 入口传 'encode',decode 入口传 'decode') */
   initialMode?: 'encode' | 'decode'
+  /** 工具 slug(用于交互界面本地化;未传 → 回退英文原值) */
+  slug?: string
 }
 
 /**
@@ -40,7 +44,9 @@ interface EncoderDecoderToolProps {
  *
  * 用法见 components/devtools/encoderTools.tsx 的 Base64CodecTool / URLCodecTool / HTMLEscapeTool。
  */
-export function EncoderDecoderTool({ encode, decode, initialMode = 'encode' }: EncoderDecoderToolProps) {
+export function EncoderDecoderTool({ encode, decode, initialMode = 'encode', slug = '' }: EncoderDecoderToolProps) {
+  const { locale } = useApp()
+  const L = (key: string, fb: string) => tui(slug, locale, key, fb)
   const [mode, setMode] = useState<'encode' | 'decode'>(initialMode)
   const spec = mode === 'encode' ? encode : decode
   const [input, setInput] = useState(spec.defaultInput)
@@ -77,13 +83,13 @@ export function EncoderDecoderTool({ encode, decode, initialMode = 'encode' }: E
       {/* Mode Toggle(Encode ↔ Decode) */}
       <div className="flex items-center gap-2">
         <span className="text-xs font-medium uppercase tracking-wide" style={{ color: 'rgb(var(--text-subtle))' }}>
-          Mode
+          {L('mode', 'Mode')}
         </span>
         <div
           className="inline-flex overflow-hidden rounded-lg border"
           style={{ borderColor: 'rgb(var(--border-strong))' }}
           role="group"
-          aria-label="Encode / Decode mode"
+          aria-label={L('modeAria', 'Encode / Decode mode')}
         >
           {(['encode', 'decode'] as const).map((m) => {
             const active = m === mode
@@ -102,7 +108,7 @@ export function EncoderDecoderTool({ encode, decode, initialMode = 'encode' }: E
                     : { backgroundColor: 'rgb(var(--bg-card))', color: 'rgb(var(--text-muted))' }
                 }
               >
-                {m}
+                {L(m === 'encode' ? 'encode' : 'decode', m)}
               </button>
             )
           })}
@@ -113,7 +119,7 @@ export function EncoderDecoderTool({ encode, decode, initialMode = 'encode' }: E
       <div>
         <div className="mb-2 flex items-center justify-between">
           <label htmlFor="text-input" className="text-sm font-medium text-slate-700">
-            {spec.inputLabel}
+            {L(mode === 'encode' ? 'encodeInputLabel' : 'decodeInputLabel', spec.inputLabel)}
           </label>
           {input && (
             <button
@@ -121,7 +127,7 @@ export function EncoderDecoderTool({ encode, decode, initialMode = 'encode' }: E
               onClick={() => setInput('')}
               className="-my-1 rounded-md px-2 py-1 text-xs text-slate-400 hover:text-red-500 sm:text-sm"
             >
-              Clear
+              {L('clear', 'Clear')}
             </button>
           )}
         </div>
@@ -129,7 +135,7 @@ export function EncoderDecoderTool({ encode, decode, initialMode = 'encode' }: E
           id="text-input"
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          placeholder="Type or paste here..."
+          placeholder={L('placeholder', 'Type or paste here...')}
           rows={6}
           className="w-full rounded-lg border p-4 font-mono text-sm shadow-sm outline-none transition focus:ring-2"
           style={{
@@ -144,14 +150,14 @@ export function EncoderDecoderTool({ encode, decode, initialMode = 'encode' }: E
       <div>
         <div className="mb-2 flex items-center justify-between">
           <label className="text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
-            {spec.outputLabel}
+            {L(mode === 'encode' ? 'encodeOutputLabel' : 'decodeOutputLabel', spec.outputLabel)}
           </label>
           <CopyButton value={output} disabled={!output} />
         </div>
         <textarea
           readOnly
           value={output}
-          placeholder="Result will appear here..."
+          placeholder={L('resultPlaceholder', 'Result will appear here...')}
           rows={6}
           className="w-full rounded-lg border-2 p-4 font-mono text-sm outline-none"
           style={{
@@ -164,8 +170,8 @@ export function EncoderDecoderTool({ encode, decode, initialMode = 'encode' }: E
 
       {/* 统计 */}
       <div className="flex gap-4 text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>
-        <span>{charCount.toLocaleString()} characters</span>
-        <span>{wordCount.toLocaleString()} words</span>
+        <span>{charCount.toLocaleString()} {L('characters', 'characters')}</span>
+        <span>{wordCount.toLocaleString()} {L('words', 'words')}</span>
       </div>
 
       {/* 说明 */}
@@ -174,7 +180,7 @@ export function EncoderDecoderTool({ encode, decode, initialMode = 'encode' }: E
           className="rounded-md p-3 text-xs"
           style={{ backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text-subtle))' }}
         >
-          {spec.note}
+          {L(mode === 'encode' ? 'encodeNote' : 'decodeNote', spec.note)}
         </p>
       )}
     </div>

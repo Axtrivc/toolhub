@@ -6,6 +6,11 @@ import type { ToolL10n } from '../tool-l10n'
 
 export const textToBinaryL10n: ToolL10n = {
   zh: {
+    ui: {
+      inputLabel: '文本',
+      outputLabel: '二进制',
+      note: '💾 把文本转成 UTF-8 二进制——每个字符变成一个或多个 8 位字节。',
+    },
     useCases: [
       '计算机科学作业',
       '理解文本在计算机中的存储方式',
@@ -17,6 +22,11 @@ export const textToBinaryL10n: ToolL10n = {
     ],
   },
   es: {
+    ui: {
+      inputLabel: 'Texto',
+      outputLabel: 'Binario',
+      note: '💾 Convierte texto a binario UTF-8 — cada carácter pasa a ser uno o más bytes de 8 bits.',
+    },
     useCases: [
       'tareas de informática',
       'entender cómo se almacena el texto en la computadora',
@@ -28,6 +38,11 @@ export const textToBinaryL10n: ToolL10n = {
     ],
   },
   de: {
+    ui: {
+      inputLabel: 'Text',
+      outputLabel: 'Binär',
+      note: '💾 Wandelt Text in UTF-8-Binär um — jedes Zeichen wird zu einem oder mehreren 8-Bit-Bytes.',
+    },
     useCases: [
       'Informatik-Hausaufgaben',
       'verstehen, wie Text gespeichert wird',

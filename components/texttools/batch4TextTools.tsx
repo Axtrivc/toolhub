@@ -6,6 +6,7 @@ import { makeTextTool } from '../tools/makeTextTool'
 
 // ── URL 查询字符串解析 ──
 export const URLQueryParserClient = makeTextTool({
+  slug: 'url-query-parser',
   inputLabel: 'URL with query string',
   outputLabel: 'Parsed query parameters',
   defaultInput: 'https://example.com/search?q=hello&page=2&sort=desc',
@@ -26,6 +27,7 @@ export const URLQueryParserClient = makeTextTool({
 
 // ── HTML 标签删除 ──
 export const HTMLTagStripperClient = makeTextTool({
+  slug: 'html-tag-stripper',
   inputLabel: 'HTML source',
   outputLabel: 'Plain text (tags removed)',
   defaultInput: '<h1>Title</h1><p>This is <strong>bold</strong> text.</p>',
@@ -40,6 +42,7 @@ export const HTMLTagStripperClient = makeTextTool({
 
 // ── 字符频率统计 ──
 export const CharacterFrequencyClient = makeTextTool({
+  slug: 'character-frequency',
   inputLabel: 'Text to analyze',
   outputLabel: 'Character frequency',
   defaultInput: 'hello world',
@@ -56,6 +59,7 @@ export const CharacterFrequencyClient = makeTextTool({
 
 // ── Email 提取器 ──
 export const EmailExtractorClient = makeTextTool({
+  slug: 'email-extractor',
   inputLabel: 'Text containing emails',
   outputLabel: 'Extracted emails',
   defaultInput: 'Contact us at hello@example.com or support@test.org for help.',
@@ -69,6 +73,7 @@ export const EmailExtractorClient = makeTextTool({
 
 // ── URL 提取器 ──
 export const URLExtractorClient = makeTextTool({
+  slug: 'url-extractor',
   inputLabel: 'Text containing URLs',
   outputLabel: 'Extracted URLs',
   defaultInput: 'Visit https://example.com or http://test.org/page?q=1 today!',
@@ -82,6 +87,7 @@ export const URLExtractorClient = makeTextTool({
 
 // ── 文本差异比较 ──
 export const TextDiffClient = makeTextTool({
+  slug: 'text-diff',
   inputLabel: 'Format: text1 ||| text2',
   outputLabel: 'Comparison',
   defaultInput: 'the quick brown fox ||| the slow brown fox',
@@ -106,6 +112,7 @@ export const TextDiffClient = makeTextTool({
 
 // ── 文本大小估算 ──
 export const TextSizeEstimatorClient = makeTextTool({
+  slug: 'text-size-estimator',
   inputLabel: 'Your text',
   outputLabel: 'Size estimates',
   defaultInput: 'Hello, this is some sample text to measure.',

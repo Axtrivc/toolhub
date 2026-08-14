@@ -6,6 +6,16 @@ import type { ToolL10n } from '../tool-l10n'
 
 export const numeralSystemConverterL10n: ToolL10n = {
   zh: {
+    ui: {
+      'baseBinary': '二进制(基 2)',
+      'baseDecimal': '十进制(基 10)',
+      'baseHex': '十六进制(基 16)',
+      'baseOctal': '八进制(基 8)',
+      'emptyState': '为所选基数输入有效数字',
+      'fromBase': '从基数',
+      'note': '🔢 常见用途:编程(十六进制颜色、内存地址)、数字电子(二进制)、文件权限(八进制)。试试十进制 255 = 十六进制 FF。',
+      'number': '数字',
+    },
     useCases: [
       '在网页设计里用十六进制颜色(如 #FFFFFF)',
       '查看调试器中以十六进制显示的内存地址',
@@ -16,6 +26,16 @@ export const numeralSystemConverterL10n: ToolL10n = {
     ],
   },
   es: {
+    ui: {
+      'baseBinary': 'Binario (base 2)',
+      'baseDecimal': 'Decimal (base 10)',
+      'baseHex': 'Hexadecimal (base 16)',
+      'baseOctal': 'Octal (base 8)',
+      'emptyState': 'Introduce un número válido para la base seleccionada',
+      'fromBase': 'De base',
+      'note': '🔢 Usos comunes: programación (colores hex, direcciones de memoria), electrónica digital (binario) y permisos de archivos (octal). Prueba 255 decimal = FF hex.',
+      'number': 'Número',
+    },
     useCases: [
       'usar colores hexadecimales en diseño web (p. ej., #FFFFFF)',
       'revisar direcciones de memoria que el depurador muestra en hexadecimal',
@@ -26,6 +46,16 @@ export const numeralSystemConverterL10n: ToolL10n = {
     ],
   },
   de: {
+    ui: {
+      'baseBinary': 'Binär (Basis 2)',
+      'baseDecimal': 'Dezimal (Basis 10)',
+      'baseHex': 'Hexadezimal (Basis 16)',
+      'baseOctal': 'Oktal (Basis 8)',
+      'emptyState': 'Gültige Zahl für die gewählte Basis eingeben',
+      'fromBase': 'Von Basis',
+      'note': '🔢 Häufige Nutzung: Programmierung (Hex-Farben, Speicheradressen), Digitaltechnik (Binär), Dateirechte (Oktal). Probier 255 dezimal = FF hex.',
+      'number': 'Zahl',
+    },
     useCases: [
       'Hexadezimal-Farben im Webdesign verwenden (z. B. #FFFFFF)',
       'Speicheradressen im Debugger im Hexadezimalsystem nachvollziehen',

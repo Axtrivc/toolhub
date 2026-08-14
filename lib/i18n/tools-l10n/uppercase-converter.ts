@@ -6,6 +6,12 @@ import type { ToolL10n } from '../tool-l10n'
 
 export const uppercaseConverterL10n: ToolL10n = {
   zh: {
+    ui: {
+      inputLabel: '你的文本',
+      outputLabel: '大写',
+      placeholder: '输入或粘贴文本…',
+      note: '🔤 把每个字母转为大写。适合标题、表头和强调。',
+    },
     useCases: [
       '为标题或设计强调使用大写',
       '书写首字母缩略词(如 NASA、HTML)',
@@ -17,6 +23,12 @@ export const uppercaseConverterL10n: ToolL10n = {
     ],
   },
   es: {
+    ui: {
+      inputLabel: 'Tu texto',
+      outputLabel: 'MAYÚSCULAS',
+      placeholder: 'Escribe o pega texto…',
+      note: '🔤 Convierte cada letra a mayúsculas. Útil para títulos, encabezados y énfasis.',
+    },
     useCases: [
       'usar mayúsculas para títulos o diseño',
       'escribir acrónimos (NASA, HTML)',
@@ -28,6 +40,12 @@ export const uppercaseConverterL10n: ToolL10n = {
     ],
   },
   de: {
+    ui: {
+      inputLabel: 'Dein Text',
+      outputLabel: 'GROSSBUCHSTABEN',
+      placeholder: 'Text eingeben oder einfügen…',
+      note: '🔤 Wandelt jeden Buchstaben in Großbuchstaben um. Nützlich für Titel, Überschriften und Hervorhebungen.',
+    },
     useCases: [
       'Großbuchstaben für Titel oder Design einsetzen',
       'Akronyme schreiben (NASA, HTML)',

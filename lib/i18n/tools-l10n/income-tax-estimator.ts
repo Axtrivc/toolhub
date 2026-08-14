@@ -6,6 +6,10 @@ import type { ToolL10n } from '../tool-l10n'
 
 export const incomeTaxEstimatorL10n: ToolL10n = {
   zh: {
+    formula: {
+      formula: 'Tax = Σ ( income in bracket × bracket rate )',
+      explain: '累进(分档)税:收入的每一部分按其所在档次的税率计算后相加。你的边际税率是触及的最高档;有效税率是税额 ÷ 收入。',
+    },
     useCases: ['用 2024 美国联邦税率档估算所得税', '算到手工资(effective + marginal rate)', '比较单身 vs 已婚联合申报的税额', '看自己处于哪个税率档'],
     faqs: [
       { q: '为什么工资条上预扣的税更多?', a: '雇主按你预计的年度税款加上一个安全余量来预扣。预扣是估算;你的实际税款在报税时结算。多预了就会退税。' },
@@ -19,6 +23,10 @@ export const incomeTaxEstimatorL10n: ToolL10n = {
     },
   },
   es: {
+    formula: {
+      formula: 'Tax = Σ ( income in bracket × bracket rate )',
+      explain: 'Impuesto progresivo (por tramos): cada porción de la renta tributa a su propio tipo y se suma. Tu tipo marginal es el tramo superior que tocas; el efectivo es impuesto ÷ renta.',
+    },
     useCases: ['estimar el impuesto sobre la renta con los tramos federales de EE. UU. 2024', 'calcular la renta neta (tipo efectivo y marginal)', 'comparar el impuesto entre declaración única y conjunta', 'ver en qué tramo impositivo estás'],
     faqs: [
       { q: '¿Por qué mi nómina muestra más impuesto retenido?', a: 'Los empleadores retienen según tu impuesto anual previsto más un margen de seguridad. Las retenciones son estimaciones; tu impuesto real se ajusta al declarar. Si pagaste de más, recibes un reembolso.' },
@@ -32,6 +40,10 @@ export const incomeTaxEstimatorL10n: ToolL10n = {
     },
   },
   de: {
+    formula: {
+      formula: 'Tax = Σ ( income in bracket × bracket rate )',
+      explain: 'Progressive (Staffel-)Steuer: jeder Einkommensanteil wird mit seinem eigenen Grenzsatz versteuert und summiert. Dein Grenzsatz ist die höchste erreichte Stufe; der effektive Satz ist Steuer ÷ Einkommen.',
+    },
     useCases: ['die Einkommensteuer mit den US-Bundestranchen 2024 schätzen', 'das Nettoeinkommen berechnen (effektiver + Grenzsteuersatz)', 'die Steuer zwischen Alleinveranlagung und Zusammenveranlagung vergleichen', 'sehen, in welcher Steuertranche du bist'],
     faqs: [
       { q: 'Warum zeigt meine Lohnabrechnung mehr einbehaltene Steuer?', a: 'Argeber behalten nach deiner voraussichtlichen Jahressteuer plus einer Sicherheitsmarge ein. Die Einbehalte sind Schätzungen; deine tatsächliche Steuer wird bei der Steuererklärung verrechnet. Zu viel gezahlt führt zu einer Rückerstattung.' },

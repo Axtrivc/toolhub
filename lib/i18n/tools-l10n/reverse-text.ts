@@ -6,6 +6,11 @@ import type { ToolL10n } from '../tool-l10n'
 
 export const reverseTextL10n: ToolL10n = {
   zh: {
+    ui: {
+      inputLabel: '你的文本',
+      outputLabel: '反转结果',
+      note: '🔁 反转所有字符。适合谜题和密码。',
+    },
     useCases: [
       '解谜和文字游戏(破译倒序信息)',
       '制作回文或对称设计',
@@ -17,6 +22,11 @@ export const reverseTextL10n: ToolL10n = {
     ],
   },
   es: {
+    ui: {
+      inputLabel: 'Tu texto',
+      outputLabel: 'Invertido',
+      note: '🔁 Invierte todos los caracteres. Útil para acertijos y cifrados.',
+    },
     useCases: [
       'acertijos y juegos de palabras (descifrar mensajes invertidos)',
       'crear ambigramas o diseños simétricos',
@@ -28,6 +38,11 @@ export const reverseTextL10n: ToolL10n = {
     ],
   },
   de: {
+    ui: {
+      inputLabel: 'Dein Text',
+      outputLabel: 'Umgekehrt',
+      note: '🔁 Kehrt alle Zeichen um. Lustig für Rätsel und Chiffren.',
+    },
     useCases: [
       'Rätsel und Wortspiele (umgekehrte Nachrichten entschlüsseln)',
       'Ambigramme oder symmetrische Designs erstellen',

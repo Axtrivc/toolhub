@@ -6,6 +6,10 @@ import type { ToolL10n } from '../tool-l10n'
 
 export const ratioCalculatorL10n: ToolL10n = {
   zh: {
+    formula: {
+      formula: 'a : b = (a/g) : (b/g),    g = GCD(a, b)',
+      explain: '用两项的最大公约数去除以化简比。缩放时两项乘以同一系数,比例保持不变。',
+    },
     ui: {
       'in.a': 'A',
       'in.b': 'B',
@@ -26,6 +30,10 @@ export const ratioCalculatorL10n: ToolL10n = {
     ],
   },
   es: {
+    formula: {
+      formula: 'a : b = (a/g) : (b/g),    g = GCD(a, b)',
+      explain: 'Simplifica una razón dividiendo ambos términos entre su máximo común divisor. Escalar multiplica ambos términos por el mismo factor, conservando la proporción.',
+    },
     ui: {
       'in.a': 'A',
       'in.b': 'B',
@@ -46,6 +54,10 @@ export const ratioCalculatorL10n: ToolL10n = {
     ],
   },
   de: {
+    formula: {
+      formula: 'a : b = (a/g) : (b/g),    g = GCD(a, b)',
+      explain: 'Ein Verhältnis wird vereinfacht, indem man beide Seiten durch ihren ggT teilt. Beim Skalieren werden beide Seiten mit demselben Faktor multipliziert, das Verhältnis bleibt erhalten.',
+    },
     ui: {
       'in.a': 'A',
       'in.b': 'B',

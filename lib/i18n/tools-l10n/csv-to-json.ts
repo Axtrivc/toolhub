@@ -6,6 +6,11 @@ import type { ToolL10n } from '../tool-l10n'
 
 export const csvToJsonL10n: ToolL10n = {
   zh: {
+    ui: {
+      inputLabel: 'CSV(含表头行)',
+      outputLabel: 'JSON 数组',
+      note: '🔄 把 CSV 转成 JSON 对象。每行用表头作为键组成一个对象。',
+    },
     useCases: [
       '把电子表格数据导入应用程序',
       '将 CSV 表头转为 JSON 对象键',
@@ -17,6 +22,11 @@ export const csvToJsonL10n: ToolL10n = {
     ],
   },
   es: {
+    ui: {
+      inputLabel: 'CSV (con fila de encabezado)',
+      outputLabel: 'Array JSON',
+      note: '🔄 Convierte CSV a objetos JSON. Cada fila pasa a ser un objeto usando la fila de encabezado como claves.',
+    },
     useCases: [
       'importar datos de hojas de cálculo a aplicaciones',
       'convertir encabezados CSV en claves de objetos JSON',
@@ -28,6 +38,11 @@ export const csvToJsonL10n: ToolL10n = {
     ],
   },
   de: {
+    ui: {
+      inputLabel: 'CSV (mit Kopfzeile)',
+      outputLabel: 'JSON-Array',
+      note: '🔄 Wandelt CSV in JSON-Objekte um. Jede Zeile wird mit der Kopfzeile als Schlüssel zu einem Objekt.',
+    },
     useCases: [
       'Tabellendaten in Anwendungen importieren',
       'CSV-Header zu JSON-Objektschlüsseln machen',

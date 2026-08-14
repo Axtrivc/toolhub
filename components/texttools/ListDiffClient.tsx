@@ -3,6 +3,8 @@
 import { useState, useMemo, useCallback } from 'react'
 import { CopyButton } from '@/components/CopyButton'
 import { LoadSampleButton } from '@/components/LoadSampleButton'
+import { useApp } from '@/components/providers/AppProviders'
+import { tui } from '@/lib/i18n/tool-l10n'
 
 /**
  * List Diff & Intersection Checker
@@ -81,6 +83,10 @@ function computeDiff(a: string, b: string, opts: { trim: boolean; caseSensitive:
 }
 
 export function ListDiffClient() {
+  const { locale } = useApp()
+  // 取本地化 UI 串;缺失回退英文(SSR 恒英文)。
+  const L = (key: string, fb: string) => tui('list-diff', locale, key, fb)
+
   const [a, setA] = useState('')
   const [b, setB] = useState('')
   const [trim, setTrim] = useState(true)
@@ -103,10 +109,10 @@ export function ListDiffClient() {
     'w-full rounded-lg border p-4 font-mono text-xs shadow-sm outline-none transition focus:ring-2'
 
   const sections: { label: string; items: string[]; color: string }[] = [
-    { label: 'Only in A', items: result.onlyA, color: 'text-blue-600' },
-    { label: 'Only in B', items: result.onlyB, color: 'text-orange-600' },
-    { label: 'In Both (Intersection)', items: result.both, color: 'text-green-600' },
-    { label: 'Union (All Unique)', items: result.union, color: 'text-slate-600' },
+    { label: L('onlyInA', 'Only in A'), items: result.onlyA, color: 'text-blue-600' },
+    { label: L('onlyInB', 'Only in B'), items: result.onlyB, color: 'text-orange-600' },
+    { label: L('inBoth', 'In Both (Intersection)'), items: result.both, color: 'text-green-600' },
+    { label: L('union', 'Union (All Unique)'), items: result.union, color: 'text-slate-600' },
   ]
 
   return (
@@ -116,14 +122,14 @@ export function ListDiffClient() {
         <div>
           <div className="mb-2 flex items-center justify-between">
             <label htmlFor="list-a" className="text-sm font-medium text-slate-700">
-              List A
+              {L('listA', 'List A')}
             </label>
           </div>
           <textarea
             id="list-a"
             value={a}
             onChange={(e) => setA(e.target.value)}
-            placeholder="One item per line…"
+            placeholder={L('placeholder', 'One item per line…')}
             rows={8}
             spellCheck={false}
             className={taCls}
@@ -133,14 +139,14 @@ export function ListDiffClient() {
         <div>
           <div className="mb-2 flex items-center justify-between">
             <label htmlFor="list-b" className="text-sm font-medium text-slate-700">
-              List B
+              {L('listB', 'List B')}
             </label>
           </div>
           <textarea
             id="list-b"
             value={b}
             onChange={(e) => setB(e.target.value)}
-            placeholder="One item per line…"
+            placeholder={L('placeholder', 'One item per line…')}
             rows={8}
             spellCheck={false}
             className={taCls}
@@ -154,7 +160,7 @@ export function ListDiffClient() {
         <div className="flex flex-wrap gap-4">
           <label className="flex items-center gap-1.5 text-xs font-medium text-slate-600 dark:text-slate-300">
             <input type="checkbox" checked={trim} onChange={(e) => setTrim(e.target.checked)} className="accent-blue-600" />
-            Trim whitespace
+            {L('trimWhitespace', 'Trim whitespace')}
           </label>
           <label className="flex items-center gap-1.5 text-xs font-medium text-slate-600 dark:text-slate-300">
             <input
@@ -163,7 +169,7 @@ export function ListDiffClient() {
               onChange={(e) => setCaseSensitive(e.target.checked)}
               className="accent-blue-600"
             />
-            Case sensitive
+            {L('caseSensitive', 'Case sensitive')}
           </label>
         </div>
         <LoadSampleButton onLoad={handleLoadSample} variant="compact" />
@@ -185,10 +191,10 @@ export function ListDiffClient() {
                   <pre className="mb-2 max-h-40 overflow-auto whitespace-pre-wrap break-words font-mono text-xs" style={{ color: 'rgb(var(--text))' }}>
                     {sec.items.join('\n')}
                   </pre>
-                  <CopyButton value={sec.items.join('\n')} label="Copy" />
+                  <CopyButton value={sec.items.join('\n')} label={L('copy', 'Copy')} />
                 </>
               ) : (
-                <p className="text-xs text-slate-400">No items.</p>
+                <p className="text-xs text-slate-400">{L('noItems', 'No items.')}</p>
               )}
             </div>
           ))}
@@ -196,7 +202,7 @@ export function ListDiffClient() {
       )}
 
       <p className="rounded-md p-3 text-xs" style={{ backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text-subtle))' }}>
-        🔒 100% client-side — lists are compared locally. Duplicates within each list are collapsed by default.
+        {L('privacyNote', '🔒 100% client-side — lists are compared locally. Duplicates within each list are collapsed by default.')}
       </p>
     </div>
   )
