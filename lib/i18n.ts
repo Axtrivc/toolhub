@@ -224,6 +224,10 @@ export interface Dict {
   seoBrowseCountSuffix: string // "({count} tools)" 列表项后缀
   seoPopularTitle: string
   seoPopularBody: string
+  // ── 姊妹站 WhatIf 横幅(whatif.axtrivc.com 投资回放动画) ──
+  whatifTitle: string
+  whatifBody: string
+  whatifCta: string
   // ── 工具页共享组件本地化(FavoriteButton / VisibleFaqs / EmbedTool /
   //    Disclaimer / FormulaSection / makeTextTool 等共享 chrome) ──
   // FavoriteButton
@@ -398,6 +402,9 @@ const en: Dict = {
   seoBrowseCountSuffix: '({count} tools)',
   seoPopularTitle: 'Popular Tools',
   seoPopularBody: 'Some of our most-used utilities, good places to start:',
+  whatifTitle: 'WhatIf — Investment Replay',
+  whatifBody: 'What if you had bought Microsoft in 1996, or Bitcoin in 2013? Pick a stock, a year and an amount, then watch compound growth replay day by day.',
+  whatifCta: 'Try the replay →',
   // ── 工具页共享组件 chrome ──
   favSave: 'Save',
   favSaved: 'Saved',
@@ -567,6 +574,9 @@ const zh: Dict = {
   seoBrowseCountSuffix: '({count} 个工具)',
   seoPopularTitle: '热门工具',
   seoPopularBody: '我们最常用的几款工具,适合从这里开始:',
+  whatifTitle: '假如当时买了 · WhatIf',
+  whatifBody: '假如 1996 年买入微软、2013 年买入比特币,今天值多少钱?选一只股票、一个年份、一笔本金,看复利逐日回放的动画。',
+  whatifCta: '去看回放 →',
   // ── 工具页共享组件 chrome ──
   favSave: '收藏',
   favSaved: '已收藏',
@@ -736,6 +746,9 @@ const es: Dict = {
   seoBrowseCountSuffix: '({count} herramientas)',
   seoPopularTitle: 'Herramientas populares',
   seoPopularBody: 'Algunas de nuestras utilidades más usadas, un buen punto de partida:',
+  whatifTitle: 'WhatIf — Replay de inversión',
+  whatifBody: '¿Y si hubieras comprado Microsoft en 1996 o Bitcoin en 2013? Elige una acción, un año y un capital, y mira el interés compuesto día a día.',
+  whatifCta: 'Ver la simulación →',
   // ── 工具页共享组件 chrome ──
   favSave: 'Guardar',
   favSaved: 'Guardado',
@@ -905,6 +918,9 @@ const de: Dict = {
   seoBrowseCountSuffix: '({count} Werkzeuge)',
   seoPopularTitle: 'Beliebte Werkzeuge',
   seoPopularBody: 'Einige unserer meistgenutzten Helfer — ein guter Startpunkt:',
+  whatifTitle: 'WhatIf — Investment-Replay',
+  whatifBody: 'Was wäre, wenn Sie 1996 Microsoft oder 2013 Bitcoin gekauft hätten? Wählen Sie Aktie, Jahr und Betrag und sehen Sie den Zinseszinseffekt Tag für Tag.',
+  whatifCta: 'Replay ansehen →',
   // ── 工具页共享组件 chrome ──
   favSave: 'Merken',
   favSaved: 'Gemerkt',

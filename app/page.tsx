@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import dynamic from 'next/dynamic'
-import { Boxes, Search, ShieldCheck, Terminal, Zap } from 'lucide-react'
+import { Boxes, Search, ShieldCheck, Terminal, TrendingUp, Zap } from 'lucide-react'
 import { getPublishedTools } from '@/lib/tools'
 import { AdSlot } from '@/components/AdSlot'
 import { ToolHubExplorer } from '@/components/workspace/ToolHubExplorer'
@@ -191,6 +191,35 @@ export default function HomePage() {
         <div id="all-tools" className="scroll-mt-24">
           <ToolHubExplorer tools={tools} query={query} onQueryChange={setQuery} />
         </div>
+
+        {/* ════════ 姊妹站 WhatIf 外链横幅(whatif.axtrivc.com 投资回放动画) ════════ */}
+        <a
+          href="https://whatif.axtrivc.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="group mx-auto mt-12 flex max-w-3xl items-center gap-4 rounded-2xl border border-slate-200/80 bg-white/80 p-5 shadow-[0_2px_8px_rgba(15,23,42,0.04)] backdrop-blur-xl transition hover:border-red-300 hover:shadow-[0_4px_16px_rgba(239,68,68,0.08)] dark:border-slate-800/80 dark:bg-slate-900/70 dark:shadow-none dark:hover:border-red-500/40"
+        >
+          <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-red-500 to-orange-500 text-white shadow-[0_4px_12px_rgba(239,68,68,0.35)]">
+            <TrendingUp className="h-5 w-5" aria-hidden="true" />
+          </span>
+          <span className="min-w-0 flex-1">
+            <span
+              className="block text-sm font-bold"
+              style={{ color: 'rgb(var(--text))' }}
+            >
+              {t(locale, 'whatifTitle')}
+            </span>
+            <span
+              className="mt-0.5 block truncate text-xs leading-relaxed sm:whitespace-normal"
+              style={{ color: 'rgb(var(--text-muted))' }}
+            >
+              {t(locale, 'whatifBody')}
+            </span>
+          </span>
+          <span className="shrink-0 font-mono text-xs font-semibold text-red-500 transition-transform group-hover:translate-x-0.5 dark:text-red-400">
+            {t(locale, 'whatifCta')}
+          </span>
+        </a>
 
         {/* 首页中部广告位 */}
         <AdSlot slot="homepage-mid" format="horizontal" fullWidth />
