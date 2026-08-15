@@ -49,7 +49,7 @@ const en: ReactNode = (
         Free shipping is never free: since fees apply to the shipping you charge, rolling shipping into the item
         price changes nothing in fees but can improve search placement. Watch the ad rate — a 10% Promoted
         Listings campaign can quietly double your effective fee. And remember these are approximations as of
-        2025: store subscriptions, top-rated discounts, international sales, and category-specific rates all
+        2026: store subscriptions, top-rated discounts, international sales, and category-specific rates all
         change the math, so verify against the platform&apos;s current fee schedule before committing to a
         price.
       </p>
@@ -95,7 +95,7 @@ const zh: ReactNode = (
         「包邮」从来都不是免费的：因为手续费会作用在你收取的运费上，把运费并入商品
         价格在手续费上没有任何变化，但可能改善搜索排名。留意广告费率——一场 10% 的 Promoted
         Listings 推广可能悄悄让你的实际手续费翻倍。另外请记住，这些都是
-        2025 年时的近似值：店铺订阅、顶尖卖家折扣、国际销售以及类目专属费率都会
+        2026 年时的近似值：店铺订阅、顶尖卖家折扣、国际销售以及类目专属费率都会
         改变计算结果，因此在敲定价格前，请对照平台当前的费率表核实。
       </p>
     </div>
@@ -119,7 +119,7 @@ const es: ReactNode = (
         <em>más</em> envío cobrado al comprador. Para eBay eso significa la comisión de valor final
         (<code>13.6%</code> para la mayoría de categorías) más una tarifa de <code>$0.30</code> por pedido y, opcionalmente, una
         tasa de anuncios de Promoted Listings si publicitas. Para Etsy son una tarifa de publicación de <code>$0.20</code>, una{' '}
-        <code>6.5%</code> de tarifa de transacción y el procesamiento de pagos (ajuste de EE. UU.: <code>3% + $0.25</code>). El
+        <code>6.5%</code> de tarifa de transacción y el procesamiento de pagos (valor predefinido de EE. UU.: <code>3% + $0.25</code>). El
         conmutador avanzado te permite sobrescribir el porcentaje cuando tu categoría o región difiere.
       </p>
     </div>
@@ -141,7 +141,7 @@ const es: ReactNode = (
         El envío gratuito nunca es gratis: dado que las comisiones se aplican al envío que cobras, meter el envío en el precio
         del artículo no cambia las comisiones, pero puede mejorar tu posicionamiento en búsquedas. Vigila la tasa de anuncios — una campaña de Promoted
         Listings del 10 % puede duplicar silenciosamente tu comisión efectiva. Y recuerda que son aproximaciones a fecha de
-        2025: las suscripciones a tiendas, los descuentos de vendedor top, las ventas internacionales y las tarifas por categoría
+        2026: las suscripciones a tiendas, los descuentos de vendedor top, las ventas internacionales y las tarifas por categoría
         cambian todas el cálculo, así que verifica con la tabla de comisiones actual de la plataforma antes de fijar un
         precio.
       </p>
@@ -186,9 +186,9 @@ const de: ReactNode = (
       <h2>Preis-Tipps für Verkäufer</h2>
       <p>
         Gratisversand ist nie gratis: Da Gebühren auf den Versand anfallen, den du berechnest, ändert das Einrollen des Versands in den Artikel
-        preis nichts an den Gebühren, kann aber die Suchplatzierung verbessern. Behalte die Anzeigenrate im Blick — eine 10-%-Promoted
-        -Listings-Kampagne kann deine effektive Gebühr leise verdoppeln. Und denk daran, dass dies Näherungen Stand
-        2025 sind: Shop-Abos, Top-Rated-Rabatte, internationale Verkäufe und kategoriespezifische Sätze
+        preis nichts an den Gebühren, kann aber die Suchplatzierung verbessern. Behalte die Anzeigenrate im Blick — eine{' '}
+        10-%-Promoted-Listings-Kampagne kann deine effektive Gebühr leise verdoppeln. Und denk daran, dass dies Näherungen Stand
+        2026 sind: Shop-Abos, Top-Rated-Rabatte, internationale Verkäufe und kategoriespezifische Sätze
         ändern die Rechnung alle, also gleiche gegen die aktuelle Gebührentabelle der Plattform ab, bevor du dich auf einen
         Preis festlegst.
       </p>

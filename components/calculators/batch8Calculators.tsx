@@ -3,6 +3,7 @@
 import { makeCalculatorClient } from '../calculator/makeCalculatorClient'
 import { fmtUSD, fmtNum, toNum } from '@/lib/format'
 import { calendarDaysBetween } from '@/lib/date-utils'
+import { tui } from '@/lib/i18n/tool-l10n'
 
 /** 第八批:金融 6 + 生活 4 + 几何 3 = 13 个计算器 */
 
@@ -114,14 +115,15 @@ export const DownPaymentCalculatorClient = makeCalculatorClient({
     { key: 'loan', label: 'Loan amount' },
     { key: 'pmi', label: 'PMI required?' },
   ],
-  compute: (v) => {
+  compute: (v, locale) => {
     const price = toNum(v.price)
     const pct = toNum(v.down) / 100
     const amount = price * pct
+    const T = (key: string, fb: string) => tui('down-payment-calculator', locale, key, fb)
     return {
       amount: fmtUSD(amount),
       loan: fmtUSD(price - amount),
-      pmi: pct >= 0.2 ? 'No (20%+ down)' : 'Yes (under 20%)',
+      pmi: pct >= 0.2 ? T('pmiNo', 'No (20%+ down)') : T('pmiYes', 'Yes (under 20%)'),
     }
   },
   note: '🏠 Under 20% down usually requires PMI ($50-300/month). 20%+ avoids this cost entirely.',
@@ -138,19 +140,20 @@ export const DTICalculatorClient = makeCalculatorClient({
     { key: 'max', label: 'Max mortgage payment (28% rule)' },
     { key: 'verdict', label: 'Lender assessment' },
   ],
-  compute: (v) => {
+  compute: (v, locale) => {
+    const T = (key: string, fb: string) => tui('dti-calculator', locale, key, fb)
     const inc = toNum(v.income)
     const debts = toNum(v.debts)
     // 收入为 0/空时无法计算比率,不能给「健康」结论
     if (inc <= 0) {
-      return { dti: '—', max: '—', verdict: '⚠️ Enter your monthly income' }
+      return { dti: '—', max: '—', verdict: `⚠️ ${T('errIncome', 'Enter your monthly income')}` }
     }
     const dti = (debts / inc) * 100
     const max28 = inc * 0.28
     let verdict: string
-    if (dti < 36) verdict = '✓ Healthy — most lenders approve'
-    else if (dti < 43) verdict = '⚠️ Tight — maximum most lenders allow'
-    else verdict = '✗ High — likely to be denied'
+    if (dti < 36) verdict = T('verdictHealthy', '✓ Healthy — most lenders approve')
+    else if (dti < 43) verdict = T('verdictTight', '⚠️ Tight — maximum most lenders allow')
+    else verdict = T('verdictHigh', '✗ High — likely to be denied')
     return {
       dti: `${fmtNum(dti, 1)}%`,
       max: fmtUSD(max28),
@@ -196,11 +199,12 @@ export const AgeDifferenceCalculatorClient = makeCalculatorClient({
     { key: 'diff', label: 'Age difference', highlight: true },
     { key: 'days', label: 'Difference in days' },
   ],
-  compute: (v) => {
+  compute: (v, locale) => {
+    const T = (key: string, fb: string) => tui('age-difference-calculator', locale, key, fb)
     const d1 = new Date(v.birth1)
     const d2 = new Date(v.birth2)
     if (isNaN(d1.getTime()) || isNaN(d2.getTime())) {
-      return { diff: '⚠️ Invalid date (use YYYY-MM-DD)', days: '—' }
+      return { diff: `⚠️ ${T('errInvalidDate', 'Invalid date (use YYYY-MM-DD)')}`, days: '—' }
     }
     const [a, b] = d1 <= d2 ? [d1, d2] : [d2, d1]
     const totalDays = calendarDaysBetween(a, b)
@@ -217,8 +221,11 @@ export const AgeDifferenceCalculatorClient = makeCalculatorClient({
       months += 12
     }
     return {
-      diff: `${years} years, ${months} months, ${days} days`,
-      days: `${fmtNum(totalDays, 0)} days`,
+      diff: T('ymdFormat', '{y} years, {m} months, {d} days')
+        .replace('{y}', String(years))
+        .replace('{m}', String(months))
+        .replace('{d}', String(days)),
+      days: T('daysN', '{n} days').replace('{n}', fmtNum(totalDays, 0)),
     }
   },
   note: '🎂 Calculates the gap between two birth dates, broken down into years, months, and days. Useful for relationships and family history.',
@@ -258,13 +265,19 @@ export const FinalGradeCalculatorClient = makeCalculatorClient({
     { key: 'finalWeight', label: 'Final exam weight', suffix: '%', default: '25' },
   ],
   outputs: [{ key: 'needed', label: 'Score needed on final', highlight: true }],
-  compute: (v) => {
+  compute: (v, locale) => {
+    const T = (key: string, fb: string) => tui('final-grade-calculator', locale, key, fb)
     const current = toNum(v.current)
     const goal = toNum(v.goal)
     const w = toNum(v.finalWeight) / 100
-    if (w <= 0) return { needed: '⚠️ Final exam weight must be greater than 0%' }
+    if (w <= 0) return { needed: `⚠️ ${T('errWeight', 'Final exam weight must be greater than 0%')}` }
     const needed = (goal - current * (1 - w)) / w
-    return { needed: needed > 100 ? `⚠️ ${fmtNum(needed, 1)}% — impossible` : `${fmtNum(needed, 1)}%` }
+    if (needed <= 0) return { needed: T('alreadyAchieved', '🎉 Already achieved — any score keeps your target') }
+    return {
+      needed: needed > 100
+        ? `⚠️ ${fmtNum(needed, 1)}% — ${T('impossible', 'impossible')}`
+        : `${fmtNum(needed, 1)}%`,
+    }
   },
   note: '🎓 Solves for the final exam score needed to reach your target grade. If over 100%, the goal is unreachable.',
 })
@@ -281,14 +294,14 @@ export const BillSplitCalculatorClient = makeCalculatorClient({
     { key: 'tipAmount', label: 'Total tip' },
     { key: 'grandTotal', label: 'Grand total' },
   ],
-  compute: (v) => {
+  compute: (v, locale) => {
     const total = toNum(v.total)
     const tipPct = toNum(v.tip) / 100
     const people = Math.round(toNum(v.people))
     const tipAmount = total * tipPct
     const grand = total + tipAmount
     return {
-      perPerson: people >= 1 ? fmtUSD(grand / people) : '⚠️ Enter at least 1 person',
+      perPerson: people >= 1 ? fmtUSD(grand / people) : `⚠️ ${tui('bill-split-calculator', locale, 'errMinOnePerson', 'Enter at least 1 person')}`,
       tipAmount: fmtUSD(tipAmount),
       grandTotal: fmtUSD(grand),
     }
@@ -376,7 +389,9 @@ export const SalaryConverterClient = makeCalculatorClient({
   ],
   compute: (v) => {
     const amount = toNum(v.amount)
-    const hours = toNum(v.hours) || 40
+    const rawHours = toNum(v.hours)
+    // hours=0/负/非法时回退 40(年→小时换算的除数,防止 Infinity/负值)
+    const hours = rawHours > 0 ? rawHours : 40
     // 先把输入归一到年度总额,再派生其他三种
     // 标准假设:每月 = 年/12,双周 = 年/26,小时 = 年/(52×每周工时)
     let annual: number

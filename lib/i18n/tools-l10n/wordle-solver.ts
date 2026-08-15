@@ -8,7 +8,7 @@ export const wordleSolverL10n: ToolL10n = {
   zh: {
     ui: {
       'anagramEmpty': '输入至少 3 个字母即可查找可拼出的词。',
-      'anagramHint': '找出能用这些字母拼出的词典词(最多 5 个字母)。',
+      'anagramHint': '找出能用这些字母拼出的词典词(最多为输入的字母数)。',
       'anagramLabel': '可用字母(3–10)',
       'anagramMode': '易位构词模式',
       'anagramNoMatch': '没有词能由这些字母拼出。试着加更多字母,或在下方粘贴额外词汇。',
@@ -58,7 +58,7 @@ export const wordleSolverL10n: ToolL10n = {
   es: {
     ui: {
       'anagramEmpty': 'Escribe al menos 3 letras para encontrar palabras que puedas formar.',
-      'anagramHint': 'Encuentra palabras del diccionario (hasta 5 letras) que se puedan formar solo con estas letras.',
+      'anagramHint': 'Encuentra palabras del diccionario (hasta el número de letras que escribas) que se puedan formar solo con estas letras.',
       'anagramLabel': 'Letras disponibles (3–10)',
       'anagramMode': 'Modo anagrama',
       'anagramNoMatch': 'No se puede formar ninguna palabra con esas letras. Prueba a añadir más letras o pega palabras extra abajo.',
@@ -108,7 +108,7 @@ export const wordleSolverL10n: ToolL10n = {
   de: {
     ui: {
       'anagramEmpty': 'Mindestens 3 Buchstaben eingeben, um bildbare Wörter zu finden.',
-      'anagramHint': 'Findet Wörterbuchwörter (bis 5 Buchstaben), die nur aus diesen Buchstaben bildbar sind.',
+      'anagramHint': 'Findet Wörterbuchwörter (bis zur Anzahl der eingegebenen Buchstaben), die nur aus diesen Buchstaben bildbar sind.',
       'anagramLabel': 'Verfügbare Buchstaben (3–10)',
       'anagramMode': 'Anagramm-Modus',
       'anagramNoMatch': 'Aus diesen Buchstaben lässt sich kein Wort bilden. Probier mehr Buchstaben oder füge unten zusätzliche Wörter ein.',

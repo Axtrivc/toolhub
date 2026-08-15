@@ -7,6 +7,7 @@ import type { ToolL10n } from '../tool-l10n'
 export const timezoneConverterL10n: ToolL10n = {
   zh: {
     ui: {
+      days: '天',
       'addTimezone': '+ 添加时区',
       'businessHours': '工作时间(9–17)',
       'copySummary': '复制摘要',
@@ -82,6 +83,7 @@ export const timezoneConverterL10n: ToolL10n = {
   },
   es: {
     ui: {
+      days: 'días',
       'addTimezone': '+ Añadir zona',
       'businessHours': 'Horario laboral (9–17)',
       'copySummary': 'Copiar resumen',
@@ -157,6 +159,7 @@ export const timezoneConverterL10n: ToolL10n = {
   },
   de: {
     ui: {
+      days: 'Tage',
       'addTimezone': '+ Zeitzone hinzufügen',
       'businessHours': 'Arbeitszeit (9–17)',
       'copySummary': 'Zusammenfassung kopieren',

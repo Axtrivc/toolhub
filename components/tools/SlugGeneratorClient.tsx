@@ -15,6 +15,27 @@ interface HistoryItem {
 const STORAGE_KEY = 'slug-history'
 const MAX_HISTORY = 8
 
+/** 安全读取 localStorage 里的历史记录(镜像 useFavorites.readStored:防损坏 JSON / 异形条目) */
+function readStoredHistory(): HistoryItem[] {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY)
+    if (!raw) return []
+    const parsed: unknown = JSON.parse(raw)
+    if (!Array.isArray(parsed)) return []
+    return parsed.filter(
+      (h): h is HistoryItem =>
+        typeof h === 'object' &&
+        h !== null &&
+        typeof (h as HistoryItem).input === 'string' &&
+        typeof (h as HistoryItem).slug === 'string' &&
+        typeof (h as HistoryItem).ts === 'number',
+    )
+  } catch {
+    // 隐私模式 / JSON 损坏 → 视为空
+    return []
+  }
+}
+
 const PRESET_EXAMPLES = [
   '10 SEO Tips for Better Rankings',
   'How to Build a SaaS in 2026',
@@ -34,12 +55,7 @@ export function SlugGeneratorClient() {
 
   // 从 localStorage 恢复历史记录
   useEffect(() => {
-    try {
-      const raw = localStorage.getItem(STORAGE_KEY)
-      if (raw) setHistory(JSON.parse(raw))
-    } catch {
-      // ignore
-    }
+    setHistory(readStoredHistory())
   }, [])
 
   const options: SlugOptions = {
@@ -75,7 +91,7 @@ export function SlugGeneratorClient() {
     <div className="space-y-6">
       {/* 输入区 */}
       <div>
-        <label htmlFor="slug-input" className="mb-2 block text-sm font-medium text-slate-700">
+        <label htmlFor="slug-input" className="mb-2 block text-sm font-medium text-slate-700 dark:text-slate-300">
           {L('enterTitle', 'Enter your title or text')}
         </label>
         <textarea
@@ -84,18 +100,18 @@ export function SlugGeneratorClient() {
           onChange={(e) => setInput(e.target.value)}
           placeholder={L('inputPlaceholder', 'e.g. 10 Proven Ways to Increase Website Traffic')}
           rows={3}
-          className="w-full rounded-lg border border-slate-300 p-3 text-slate-900 shadow-sm outline-none transition focus:border-brand-500 focus:ring-2 focus:ring-brand-200"
+          className="w-full rounded-lg border border-slate-300 bg-white p-3 text-slate-900 shadow-sm outline-none transition focus:border-brand-500 focus:ring-2 focus:ring-brand-200 dark:border-slate-700 dark:bg-slate-800/50 dark:text-slate-100 dark:focus:ring-brand-500/30"
           autoFocus
         />
         {/* 快速示例 */}
         <div className="mt-2 flex flex-wrap gap-2">
-          <span className="text-xs text-slate-400">{L('try', 'Try:')}</span>
+          <span className="text-xs text-slate-400 dark:text-slate-500">{L('try', 'Try:')}</span>
           {PRESET_EXAMPLES.map((ex) => (
             <button
               key={ex}
               type="button"
               onClick={() => setInput(ex)}
-              className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1.5 text-xs text-slate-600 transition hover:border-brand-300 hover:bg-brand-50 hover:text-brand-600 sm:text-sm"
+              className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1.5 text-xs text-slate-600 transition hover:border-brand-300 hover:bg-brand-50 hover:text-brand-600 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-300 dark:hover:border-brand-600 dark:hover:bg-brand-950/40 dark:hover:text-brand-300 sm:text-sm"
             >
               {ex}
             </button>
@@ -106,21 +122,21 @@ export function SlugGeneratorClient() {
       {/* 选项区 */}
       <div className="grid grid-cols-1 gap-4 rounded-lg p-4 sm:grid-cols-3" style={{ backgroundColor: 'rgb(var(--bg-subtle))' }}>
         <div>
-          <label htmlFor="separator" className="mb-1.5 block text-xs font-medium text-slate-600">
+          <label htmlFor="separator" className="mb-1.5 block text-xs font-medium text-slate-600 dark:text-slate-400">
             {L('separator', 'Separator')}
           </label>
           <select
             id="separator"
             value={separator}
             onChange={(e) => setSeparator(e.target.value as '-' | '_')}
-            className="w-full rounded-md border border-slate-300 bg-white px-3 py-2.5 text-sm outline-none focus:border-brand-500 sm:px-2 sm:py-1.5"
+            className="w-full rounded-md border border-slate-300 bg-white px-3 py-2.5 text-sm text-slate-900 outline-none focus:border-brand-500 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100 sm:px-2 sm:py-1.5"
           >
             <option value="-">{L('sepHyphen', 'Hyphen ( - )')}</option>
             <option value="_">{L('sepUnderscore', 'Underscore ( _ )')}</option>
           </select>
         </div>
 
-        <label className="flex items-end gap-2 pb-1.5 text-sm text-slate-700">
+        <label className="flex items-end gap-2 pb-1.5 text-sm text-slate-700 dark:text-slate-300">
           <input
             type="checkbox"
             checked={lowercase}
@@ -130,7 +146,7 @@ export function SlugGeneratorClient() {
           {L('lowercase', 'Lowercase')}
         </label>
 
-        <label className="flex items-end gap-2 pb-1.5 text-sm text-slate-700">
+        <label className="flex items-end gap-2 pb-1.5 text-sm text-slate-700 dark:text-slate-300">
           <input
             type="checkbox"
             checked={removeSpecialChars}
@@ -144,7 +160,7 @@ export function SlugGeneratorClient() {
       {/* 输出区 */}
       <div>
         <div className="mb-2 flex items-center justify-between">
-          <label htmlFor="slug-output" className="text-sm font-medium text-slate-700">
+          <label htmlFor="slug-output" className="text-sm font-medium text-slate-700 dark:text-slate-300">
             {L('result', 'Result')}
           </label>
           <div className="flex gap-2">
@@ -159,12 +175,12 @@ export function SlugGeneratorClient() {
             <CopyButton value={slug} disabled={!slug} />
           </div>
         </div>
-        <div className="flex items-center rounded-lg border-2 border-dashed border-brand-200 bg-brand-50/40 p-4">
+        <div className="flex items-center rounded-lg border-2 border-dashed border-brand-200 bg-brand-50/40 dark:border-brand-800/60 dark:bg-brand-900/20 p-4">
           <code
             id="slug-output"
-            className="min-h-[1.75rem] flex-1 break-all font-mono text-lg text-brand-700"
+            className="min-h-[1.75rem] flex-1 break-all font-mono text-lg text-brand-700 dark:text-brand-300"
           >
-            {slug || <span className="text-slate-300">{L('slugPlaceholder', 'your-slug-will-appear-here')}</span>}
+            {slug || <span className="text-slate-300 dark:text-slate-600">{L('slugPlaceholder', 'your-slug-will-appear-here')}</span>}
           </code>
         </div>
       </div>
@@ -173,23 +189,23 @@ export function SlugGeneratorClient() {
       {history.length > 0 && (
         <div>
           <div className="mb-2 flex items-center justify-between">
-            <h3 className="text-sm font-medium text-slate-700">{L('recent', 'Recent')}</h3>
+            <h3 className="text-sm font-medium text-slate-700 dark:text-slate-300">{L('recent', 'Recent')}</h3>
             <button
               type="button"
               onClick={clearHistory}
-              className="-my-1 rounded-md px-2 py-1 text-xs text-slate-400 hover:text-red-500 sm:text-sm"
+              className="-my-1 rounded-md px-2 py-1 text-xs text-slate-400 hover:text-red-500 dark:text-slate-500 dark:hover:text-red-400 sm:text-sm"
             >
               {L('clear', 'Clear')}
             </button>
           </div>
-          <ul className="divide-y divide-slate-100 rounded-lg border border-slate-200">
+          <ul className="divide-y divide-slate-100 rounded-lg border border-slate-200 dark:divide-slate-700/60 dark:border-slate-700">
             {history.map((item) => (
               <li key={item.ts} className="flex items-center justify-between gap-3 px-3 py-2.5 text-sm">
                 <div className="min-w-0 flex-1">
-                  <div className="truncate text-slate-500" title={item.input}>
+                  <div className="truncate text-slate-500 dark:text-slate-400" title={item.input}>
                     {item.input}
                   </div>
-                  <code className="font-mono text-brand-600">{item.slug}</code>
+                  <code className="font-mono text-brand-600 dark:text-brand-400">{item.slug}</code>
                 </div>
                 <CopyButton value={item.slug} label={L('copy', 'Copy')} />
               </li>

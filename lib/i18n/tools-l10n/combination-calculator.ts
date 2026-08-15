@@ -11,6 +11,7 @@ export const combinationCalculatorL10n: ToolL10n = {
       explain: '从 n 个物品中不计顺序地选出 k 个的方法数。读作「n 选 k」;是二项概率和帕斯卡三角的核心。',
     },
     ui: {
+      errRange: '需要 0 ≤ r ≤ n',
       'in.n': '总数 (n)',
       'in.r': '选取 (r)',
       'out.result': '组合数 C(n,r)',
@@ -33,6 +34,7 @@ export const combinationCalculatorL10n: ToolL10n = {
       explain: 'Número de formas de elegir k elementos de n sin importar el orden. Se lee «n sobre k»; central en la probabilidad binomial y el triángulo de Pascal.',
     },
     ui: {
+      errRange: 'Se necesita 0 ≤ r ≤ n',
       'in.n': 'Total de elementos (n)',
       'in.r': 'Elegir (r)',
       'out.result': 'Combinaciones C(n,r)',
@@ -55,6 +57,7 @@ export const combinationCalculatorL10n: ToolL10n = {
       explain: 'Anzahl, k aus n ohne Beachtung der Reihenfolge zu wählen. Gelesen als „n über k“; zentral für Binomialwahrscheinlichkeit und das Pascalsche Dreieck.',
     },
     ui: {
+      errRange: 'Es gilt 0 ≤ r ≤ n',
       'in.n': 'Gesamtanzahl (n)',
       'in.r': 'Auswählen (r)',
       'out.result': 'Kombinationen C(n,r)',

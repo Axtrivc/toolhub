@@ -135,7 +135,7 @@ const es: ReactNode = (
     <ul>
       <li><strong>Precios originales inflados:</strong> algunos minoristas suben el precio «de antes» para que el descuento parezca mayor</li>
       <li><strong>Requisitos de compra mínima:</strong> «Ahorra un 30 % cuando gastes $100» puede empujarte a gastar de más</li>
-      <li><strong>Compara precios unitarios:</strong> una talla grande rebajada puede seguir costando más por onza que una talla pequeña a precio completo</li>
+      <li><strong>Compara precios unitarios:</strong> un envase grande rebajado puede seguir costando más por onza que un envase pequeño a precio completo</li>
     </ul>
   </section>
 )

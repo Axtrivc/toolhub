@@ -117,10 +117,10 @@ const en: ReactNode = (
       <p>On a <strong>$400,000 loan at 6.8%</strong>:</p>
       <ul>
         <li>
-          <strong>30-year:</strong> ~$2,612/month, ~$540,000 in total interest
+          <strong>30-year:</strong> ~$2,608/month, ~$540,000 in total interest
         </li>
         <li>
-          <strong>15-year:</strong> ~$3,554/month, ~$240,000 in total interest
+          <strong>15-year:</strong> ~$3,551/month, ~$240,000 in total interest
         </li>
       </ul>
       <p>
@@ -232,10 +232,10 @@ const zh: ReactNode = (
       <p>以 <strong>$400,000 贷款、6.8% 利率</strong>为例:</p>
       <ul>
         <li>
-          <strong>30 年:</strong>约 $2,612/月,总利息约 $540,000
+          <strong>30 年:</strong>约 $2,608/月,总利息约 $540,000
         </li>
         <li>
-          <strong>15 年:</strong>约 $3,554/月,总利息约 $240,000
+          <strong>15 年:</strong>约 $3,551/月,总利息约 $240,000
         </li>
       </ul>
       <p>
@@ -363,10 +363,10 @@ const es: ReactNode = (
       <p>En un <strong>préstamo de 400 000 $ al 6,8 %</strong>:</p>
       <ul>
         <li>
-          <strong>30 años:</strong> ~2 612 $/mes, ~540 000 $ en intereses totales
+          <strong>30 años:</strong> ~2 608 $/mes, ~540 000 $ en intereses totales
         </li>
         <li>
-          <strong>15 años:</strong> ~3 554 $/mes, ~240 000 $ en intereses totales
+          <strong>15 años:</strong> ~3 551 $/mes, ~240 000 $ en intereses totales
         </li>
       </ul>
       <p>
@@ -506,10 +506,10 @@ const de: ReactNode = (
       <p>Bei einem <strong>400 000 $-Kredit und 6,8 %</strong>:</p>
       <ul>
         <li>
-          <strong>30 Jahre:</strong> ~2 612 $/Monat, ~540 000 $ Zinsen gesamt
+          <strong>30 Jahre:</strong> ~2 608 $/Monat, ~540 000 $ Zinsen gesamt
         </li>
         <li>
-          <strong>15 Jahre:</strong> ~3 554 $/Monat, ~240 000 $ Zinsen gesamt
+          <strong>15 Jahre:</strong> ~3 551 $/Monat, ~240 000 $ Zinsen gesamt
         </li>
       </ul>
       <p>

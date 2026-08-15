@@ -19,7 +19,7 @@ const en: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>What Is This Tool?</h2>
     <p>
-      This estimator calculates your US federal income tax using 2024 tax brackets. It applies
+      This estimator calculates your US federal income tax using 2026 tax brackets. It applies
       the standard deduction automatically and shows your estimated tax, effective rate, and
       take-home pay. This is an estimate only &mdash; your actual tax depends on deductions, credits,
       and state taxes.
@@ -51,9 +51,9 @@ const en: ReactNode = (
     <div>
       <h2>What&apos;s Included and Excluded</h2>
       <ul>
-        <li><strong>Included:</strong> Federal income tax using 2024 brackets</li>
+        <li><strong>Included:</strong> Federal income tax using 2026 brackets</li>
         <li><strong>NOT included:</strong> State tax (0-13% depending on state), FICA (Social Security + Medicare = 7.65%), local taxes</li>
-        <li><strong>Standard deduction:</strong> $14,600 single / $29,200 married (2024)</li>
+        <li><strong>Standard deduction:</strong> $16,100 single / $32,200 married (2026)</li>
         <li><strong>Not considered:</strong> 401(k) contributions, child credits, education credits, itemized deductions</li>
       </ul>
     </div>
@@ -61,7 +61,7 @@ const en: ReactNode = (
       <h2>Marginal vs. Effective Rate</h2>
       <p>
         A single person earning $75,000 has a <strong>marginal rate</strong> of 22% (their
-        top bracket), but their <strong>effective rate</strong> is only about 13% because most
+        top bracket), but their <strong>effective rate</strong> is only about 10% because most
         of their income is taxed at lower rates. Always know your effective rate &mdash; that&apos;s
         what you actually pay.
       </p>
@@ -74,7 +74,7 @@ const zh: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>这是什么工具?</h2>
     <p>
-      本估算器使用 2024 年税率档位计算你的美国联邦所得税。它会自动应用标准扣除额,并显示你的预计税款、有效税率和到手收入。这只是一个估算——你的实际税额取决于各项扣除、抵免以及州税。
+      本估算器使用 2026 年税率档位计算你的美国联邦所得税。它会自动应用标准扣除额,并显示你的预计税款、有效税率和到手收入。这只是一个估算——你的实际税额取决于各项扣除、抵免以及州税。
     </p>
     <div>
       <h2>累进税档如何运作</h2>
@@ -98,16 +98,16 @@ const zh: ReactNode = (
     <div>
       <h2>包含与不包含的项目</h2>
       <ul>
-        <li><strong>包含:</strong>使用 2024 年档位的联邦所得税</li>
+        <li><strong>包含:</strong>使用 2026 年档位的联邦所得税</li>
         <li><strong>不包含:</strong>州税(视各州而定,0-13%)、FICA(社会保障 + 医疗保险 = 7.65%)、地方税</li>
-        <li><strong>标准扣除额:</strong>$14,600 单身 / $29,200 已婚(2024 年)</li>
+        <li><strong>标准扣除额:</strong>$16,100 单身 / $32,200 已婚(2026 年)</li>
         <li><strong>未考虑:</strong>401(k) 缴款、子女抵免、教育抵免、逐项扣除</li>
       </ul>
     </div>
     <div>
       <h2>边际税率 vs. 有效税率</h2>
       <p>
-        一个年收入 $75,000 的单身人士,其<strong>边际税率</strong>为 22%(最高档位),但<strong>有效税率</strong>只有约 13%,因为大部分收入按更低的税率征税。永远要清楚自己的有效税率——那才是你真正支付的税率。
+        一个年收入 $75,000 的单身人士,其<strong>边际税率</strong>为 22%(最高档位),但<strong>有效税率</strong>只有约 10%,因为大部分收入按更低的税率征税。永远要清楚自己的有效税率——那才是你真正支付的税率。
       </p>
     </div>
   </section>
@@ -119,7 +119,7 @@ const es: ReactNode = (
     <h2>¿Qué es esta herramienta?</h2>
     <p>
       Este estimador calcula tu impuesto federal sobre la renta de EE. UU. usando los tramos
-      fiscales de 2024. Aplica automáticamente la deducción estándar y muestra tu impuesto
+      fiscales de 2026. Aplica automáticamente la deducción estándar y muestra tu impuesto
       estimado, tu tasa efectiva y tu sueldo neto. Esto es solo una estimación — tu impuesto real
       depende de deducciones, créditos e impuestos estatales.
     </p>
@@ -150,9 +150,9 @@ const es: ReactNode = (
     <div>
       <h2>Lo que se incluye y lo que no</h2>
       <ul>
-        <li><strong>Incluido:</strong> Impuesto federal sobre la renta con los tramos de 2024</li>
+        <li><strong>Incluido:</strong> Impuesto federal sobre la renta con los tramos de 2026</li>
         <li><strong>NO incluido:</strong> Impuesto estatal (0-13 % según el estado), FICA (Seguridad Social + Medicare = 7,65 %), impuestos locales</li>
-        <li><strong>Deducción estándar:</strong> $14,600 soltero / $29,200 casado (2024)</li>
+        <li><strong>Deducción estándar:</strong> $16,100 soltero / $32,200 casado (2026)</li>
         <li><strong>No considerado:</strong> Aportaciones 401(k), créditos por hijos, créditos educativos, deducciones detalladas</li>
       </ul>
     </div>
@@ -160,7 +160,7 @@ const es: ReactNode = (
       <h2>Tasa marginal frente a tasa efectiva</h2>
       <p>
         Una persona soltera que gana $75,000 tiene una <strong>tasa marginal</strong> del 22 %
-        (su tramo superior), pero su <strong>tasa efectiva</strong> es de solo alrededor del 13 %
+        (su tramo superior), pero su <strong>tasa efectiva</strong> es de solo alrededor del 10 %
         porque la mayor parte de sus ingresos se grava a tipos más bajos. Conoce siempre tu tasa
         efectiva — es lo que realmente pagas.
       </p>
@@ -173,7 +173,7 @@ const de: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>Was ist dieses Werkzeug?</h2>
     <p>
-      Dieser Schätzer berechnet deine US-Bundeseinkommensteuer anhand der Steuerklassen von 2024.
+      Dieser Schätzer berechnet deine US-Bundeseinkommensteuer anhand der Steuerklassen von 2026.
       Er wendet den Standardpauschbetrag automatisch an und zeigt deine geschätzte Steuer, deinen
       effektiven Steuersatz und dein Nettoeinkommen. Dies ist nur eine Schätzung — deine
       tatsächliche Steuer hängt von Abzügen, Freibeträgen und Landessteuern ab.
@@ -206,9 +206,9 @@ const de: ReactNode = (
     <div>
       <h2>Was enthalten ist und was nicht</h2>
       <ul>
-        <li><strong>Enthalten:</strong> Bundeseinkommensteuer mit den Klassen von 2024</li>
+        <li><strong>Enthalten:</strong> Bundeseinkommensteuer mit den Klassen von 2026</li>
         <li><strong>NICHT enthalten:</strong> Landessteuer (0-13 % je nach Bundesstaat), FICA (Social Security + Medicare = 7,65 %), lokale Steuern</li>
-        <li><strong>Standardpauschbetrag:</strong> $14,600 Single / $29,200 verheiratet (2024)</li>
+        <li><strong>Standardpauschbetrag:</strong> $16,100 Single / $32,200 verheiratet (2026)</li>
         <li><strong>Nicht berücksichtigt:</strong> 401(k)-Beiträge, Kinderfreibeträge, Bildungsfreibeträge, itemisierte Abzüge</li>
       </ul>
     </div>
@@ -217,7 +217,7 @@ const de: ReactNode = (
       <p>
         Eine Einzelperson mit $75,000 Einkommen hat einen <strong>Grenzsteuersatz</strong> von
         22 % (ihre oberste Klasse), aber ihr <strong>effektiver Steuersatz</strong> liegt nur bei
-        etwa 13 %, weil der größte Teil ihres Einkommens mit niedrigeren Sätzen besteuert wird.
+        etwa 10 %, weil der größte Teil ihres Einkommens mit niedrigeren Sätzen besteuert wird.
         Kenne immer deinen effektiven Steuersatz — das ist das, was du tatsächlich zahlst.
       </p>
     </div>

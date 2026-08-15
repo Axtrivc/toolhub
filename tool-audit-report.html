@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ToolHub 全站工具精修审计报告</title>
+<style>
+  :root {
+    --bg: #f7f8fa; --card: #ffffff; --border: #e5e7eb;
+    --text: #1f2937; --muted: #6b7280; --faint: #9ca3af;
+    --high: #dc2626; --high-bg: #fef2f2; --high-bd: #fecaca;
+    --mid: #d97706; --mid-bg: #fffbeb; --mid-bd: #fde68a;
+    --low: #6b7280; --low-bg: #f9fafb; --low-bd: #e5e7eb;
+    --accent: #2563eb;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+    line-height: 1.6; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 32px 24px 80px; }
+  header { padding: 8px 0 24px; }
+  h1 { font-size: 26px; margin: 0 0 6px; }
+  .sub { color: var(--muted); font-size: 14px; }
+  .stats { display: flex; gap: 12px; flex-wrap: wrap; margin: 20px 0 8px; }
+  .stat { flex: 1; min-width: 120px; border: 1px solid var(--border); background: var(--card);
+    border-radius: 12px; padding: 16px; text-align: center; }
+  .stat .num { font-size: 32px; font-weight: 800; }
+  .stat .lbl { font-size: 13px; color: var(--muted); margin-top: 2px; }
+  .stat.high .num { color: var(--high); }
+  .stat.mid .num { color: var(--mid); }
+  .stat.low .num { color: var(--low); }
+  .stat.total .num { color: var(--accent); }
+  h2 { font-size: 19px; margin: 34px 0 12px; display: flex; align-items: center; gap: 8px; }
+  .badge { display: inline-block; font-size: 12px; font-weight: 700; padding: 2px 10px; border-radius: 999px; }
+  .badge.high { background: var(--high-bg); color: var(--high); border: 1px solid var(--high-bd); }
+  .badge.mid { background: var(--mid-bg); color: var(--mid); border: 1px solid var(--mid-bd); }
+  .badge.low { background: var(--low-bg); color: var(--low); border: 1px solid var(--low-bd); }
+  .dim { font-size: 14px; color: var(--accent); font-weight: 700; margin: 22px 0 8px; }
+  .item { background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--border);
+    border-radius: 10px; padding: 12px 16px; margin-bottom: 8px; }
+  .item.high { border-left-color: var(--high); }
+  .item.mid { border-left-color: var(--mid); }
+  .item.low { border-left-color: var(--low); }
+  .item .tool { font-weight: 700; font-size: 15px; }
+  .item .loc { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 12px; color: var(--accent); background: #eff6ff; padding: 1px 6px; border-radius: 4px; }
+  .item .desc { color: var(--muted); font-size: 14px; margin-top: 4px; }
+  .item .impact { font-size: 13px; margin-top: 4px; }
+  .impact b.h { color: var(--high); } .impact b.m { color: var(--mid); } .impact b.l { color: var(--low); }
+  details { margin: 6px 0; }
+  summary { cursor: pointer; color: var(--muted); font-size: 14px; padding: 6px 2px; }
+  table { width: 100%; border-collapse: collapse; background: var(--card); border-radius: 10px; overflow: hidden; }
+  th, td { text-align: left; padding: 8px 12px; border-bottom: 1px solid var(--border); font-size: 13px; vertical-align: top; }
+  th { background: #f3f4f6; color: var(--muted); font-weight: 600; }
+  td.tool { font-weight: 600; white-space: nowrap; }
+  td.loc { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 12px; color: var(--accent); }
+  .legend { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 14px 18px; font-size: 13px; color: var(--muted); margin-bottom: 8px; }
+  .legend ul { margin: 6px 0 0; padding-left: 20px; }
+  footer { color: var(--faint); font-size: 12px; margin-top: 40px; text-align: center; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>ToolHub 全站工具「精修」审计报告</h1>
+  <div class="sub">审查范围：169 个工具的交互组件（components/ 全量）+ 关联 lib 工具函数 · 审查日期：2026-08-14 · 状态：仅审计，未修复</div>
+</header>
+
+<div class="stats">
+  <div class="stat total"><div class="num">100+</div><div class="lbl">发现的问题（去重后）</div></div>
+  <div class="stat high"><div class="num">4</div><div class="lbl">高危 · 核心功能失效</div></div>
+  <div class="stat mid"><div class="num">~40</div><div class="lbl">中危 · 逻辑/本地化/时效</div></div>
+  <div class="stat low"><div class="num">~55</div><div class="lbl">低危 · 体验/边界</div></div>
+</div>
+
+<div class="legend">
+  审查维度（5 类）：
+  <ul>
+    <li><b>逻辑 bug / 边界</b>：除零、NaN、精度丢失、正则写错、条件判断错误</li>
+    <li><b>中文本地化缺陷</b>：英文示例/占位、英文正则对中文失效、英文经验法则不适用</li>
+    <li><b>功能完整性</b>：只算一半、缺关键输入项、缺清空/复制</li>
+    <li><b>UX 体验</b>：默认值不合理、非法输入静默、结果无说明</li>
+    <li><b>数据时效</b>：硬编码会过期的税率/费率/价格/年份</li>
+  </ul>
+</div>
+
+<!-- ===================== 高危 ===================== -->
+<h2><span class="badge high">高危</span> 核心功能直接失效（4 个工具）</h2>
+
+<div class="item high">
+  <span class="tool">pregnancy-due-date-calculator</span> <span class="loc">batch6Calculators.tsx:280</span>
+  <div class="desc">LMP（末次月经）输入项未声明 <code>type:'text'</code>，被工厂渲染成 <code>&lt;input type="number"&gt;</code>，而默认值/占位是日期格式「2026-01-01」——数字框根本打不进日期，工具形同失效。</div>
+  <div class="impact"><b class="h">影响：</b>用户无法输入日期，整个预产期计算无法使用。</div>
+</div>
+
+<div class="item high">
+  <span class="tool">reading-speaking-time</span> <span class="loc">ReadingSpeakingTimeClient.tsx:68-75</span>
+  <div class="desc">三个统计链路对中文全部失效：词数 <code>split(/\s+/)</code>（中文无空格 → 恒 1 词）；句数正则 <code>[^.!?]+[.!?]+</code>（不认中文标点 → 恒 1 句）；页数 = 词数/250 连锁为 ≈0。</div>
+  <div class="impact"><b class="h">影响：</b>纯中文文本的「字数/句数/页数/阅读时长」结果全部错误。</div>
+</div>
+
+<div class="item high">
+  <span class="tool">text-cleaner（TextScrubber）</span> <span class="loc">TextScrubberClient.tsx:60</span>
+  <div class="desc">「删除特殊字符」正则 <code>[^a-zA-Z0-9\s${keep}]</code> 把中文汉字全部当作「特殊字符」删光——中文用户勾选该项即整篇清空。</div>
+  <div class="impact"><b class="h">影响：</b>中文文本一键清空，数据丢失式体验。</div>
+</div>
+
+<div class="item high">
+  <span class="tool">slug-generator</span> <span class="loc">lib/slug.ts:63</span>
+  <div class="desc"><code>s.replace(/[^a-z0-9\s-]/gi, '')</code> 删除全部 CJK 字符，纯中文标题（如「你好世界」）生成<b>空 slug</b>；既不转拼音也不保留中文。</div>
+  <div class="impact"><b class="h">影响：</b>中文用户（占主体）无法为中文标题生成 URL slug。</div>
+</div>
+
+<!-- ===================== 中危 ===================== -->
+<h2><span class="badge mid">中危</span> 逻辑 / 本地化 / 功能 / 时效</h2>
+
+<div class="dim">▎数据时效（硬编码过期数据）</div>
+<table>
+<tr><th>工具</th><th>位置</th><th>问题</th></tr>
+<tr><td class="tool">income-tax-estimator</td><td class="loc">batch3Calculators.tsx:472-496</td><td>硬编码「2024 美国联邦税档」，已过期 2 个纳税年度</td></tr>
+<tr><td class="tool">ebay-fee-calculator</td><td class="loc">EbayFeeCalculatorClient.tsx:16-22,90-95</td><td>eBay 类目费率 + Etsy 费率硬编码，note 自标「as of 2025」</td></tr>
+<tr><td class="tool">reverse-stripe-fee-calculator</td><td class="loc">ReverseStripeFeeCalculatorClient.tsx:14-19</td><td>Stripe/PayPal 费率硬编码，note 自标「as of 2025」</td></tr>
+<tr><td class="tool">hash-generator</td><td class="loc">batch5TextTools.tsx:27,55-60</td><td>仍提供 SHA-1 且无「已不安全」警示（仅提示 MD5 已破解）</td></tr>
+</table>
+
+<div class="dim">▎逻辑 bug / 边界</div>
+<table>
+<tr><th>工具</th><th>位置</th><th>问题</th></tr>
+<tr><td class="tool">fraction-calculator</td><td class="loc">batch3Calculators.tsx:185</td><td>除法分子 2 为 0 时输出「Infinity NaN/0」而非报错</td></tr>
+<tr><td class="tool">income-tax-estimator</td><td class="loc">batch3Calculators.tsx:478-488</td><td>直接对毛收入套边际档、未扣标准扣除额，税额系统性高估</td></tr>
+<tr><td class="tool">capital-gains-tax-estimator</td><td class="loc">batch6Calculators.tsx:128-133</td><td>长期资本利得税率用「边际档≥15%→15%、≥37%→20%」映射，与真实 0/15/20% 收入阈值无关</td></tr>
+<tr><td class="tool">age / date-difference</td><td class="loc">AgeCalculatorClient.tsx:40-44</td><td>用 <code>Math.floor(ms/86400000)</code> 算天数，跨夏令时会少算 1 天</td></tr>
+<tr><td class="tool">credit-card-minimum-payment</td><td class="loc">batch8Calculators.tsx:59</td><td>余额为 0 仍输出「最低还款 $25」（应为 $0）</td></tr>
+<tr><td class="tool">dti-calculator</td><td class="loc">batch8Calculators.tsx:142</td><td>收入 0/空时判为「✓ Healthy」，空输入给健康结论</td></tr>
+<tr><td class="tool">random-number-generator</td><td class="loc">batchDevTools.tsx:44,55</td><td>count 非整数时生成个数错乱；&gt;1000 被静默截断无提示</td></tr>
+<tr><td class="tool">curl-converter</td><td class="loc">CurlConverterClient.tsx:165-171</td><td><code>-k</code> 被解析但三个生成器从不输出；<code>-u</code>（Basic Auth）凭据被静默丢弃</td></tr>
+<tr><td class="tool">json-to-typescript</td><td class="loc">JsonToTypeScriptClient.tsx:33-39,69,98</td><td>中文/非拉丁 key 全部塌缩为同名「Root」，与根 interface 重名 → 生成重复 interface（TS 报错）</td></tr>
+<tr><td class="tool">yaml-to-json</td><td class="loc">YamlToJsonClient.tsx:74</td><td>超过 2^53 的大整数（订单 ID/毫秒时间戳）静默丢精度</td></tr>
+<tr><td class="tool">yaml-to-json</td><td class="loc">YamlToJsonClient.tsx:12,202-206</td><td>注释声明支持 block scalar（<code>|</code>/<code>&gt;</code>），实际零实现，遇 <code>description: |</code> 报错</td></tr>
+<tr><td class="tool">text-size-estimator</td><td class="loc">batch4TextTools.tsx:127</td><td>Base64 长度公式 <code>Math.ceil(bytes*4/3)</code> 漏算 <code>=</code> 填充（1 字节报 2，实际 4）</td></tr>
+<tr><td class="tool">standard-deviation / percentile</td><td class="loc">batchGenerators.tsx:204,229</td><td><code>split(/[\s,]+/)</code> 把尾逗号产生的空串当 0，污染均值/方差/排序</td></tr>
+<tr><td class="tool">binary-to-text</td><td class="loc">batch5TextTools.tsx:102</td><td><code>parseInt(b,2)</code> 宽松解析，非法 token 静默解析、不校验 8 位一组</td></tr>
+<tr><td class="tool">json-to-csv</td><td class="loc">batch3TextTools.tsx:77</td><td>表头只取首对象字段，后续多出字段被静默丢弃</td></tr>
+<tr><td class="tool">csv-to-json</td><td class="loc">batch3TextTools.tsx:53</td><td><code>line.split(',')</code> 不支持引号内逗号/转义引号</td></tr>
+<tr><td class="tool">text-diff</td><td class="loc">batch4TextTools.tsx:98-107</td><td>按词索引硬对齐而非真实 diff，中间插入/删除后后续词全误报</td></tr>
+<tr><td class="tool">html-tag-stripper</td><td class="loc">batch4TextTools.tsx:37-38</td><td><code>body.textContent</code> 会带上 script/style 内文本（与注释相反）</td></tr>
+<tr><td class="tool">password-generator</td><td class="loc">PasswordGeneratorClient.tsx:167-174</td><td>熵值估算与实际字符池不一致（符号记 24 实为 26），且忽略 excludeAmbiguous 开关，强度评级偏高</td></tr>
+</table>
+
+<div class="dim">▎中文本地化缺陷</div>
+<table>
+<tr><th>工具</th><th>位置</th><th>问题</th></tr>
+<tr><td class="tool">gpt-token-counter</td><td class="loc">GptTokenCounterClient.tsx:35-47,65</td><td>中文句子/词数恒 1、token 按「4 字符≈1 token」英文经验法则系统性低估约 1/3，无中文提示</td></tr>
+<tr><td class="tool">cron-parser</td><td class="loc">CronParserClient.tsx:49,160-162</td><td>触发时间/星期/描述硬编码 <code>en-US</code>，中文界面看英文日期</td></tr>
+<tr><td class="tool">reading-speaking-time</td><td class="loc">ReadingSpeakingTimeClient.tsx:17-28,230</td><td>语速预设 100/150/200/300「wpm」是英文语速，对中文（300-500 字/分）不适用且无提示</td></tr>
+<tr><td class="tool">freelance-invoice-generator</td><td class="loc">FreelanceInvoiceGeneratorClient.tsx:8-13</td><td>货币仅 USD/EUR/GBP/JPY，无 CNY，中文用户开不出人民币发票</td></tr>
+<tr><td class="tool">批量文本工具（工厂）</td><td class="loc">makeTextTool.tsx:73 等</td><td>词数 <code>split(/\s+/)</code> 中文恒 1；defaultInput 全英文；错误/空态串（Invalid JSON 等）硬编码英文</td></tr>
+<tr><td class="tool">sentence-case / title-case</td><td class="loc">batchTextTools.tsx:35,46</td><td>正则只认英文 <code>.?!</code> 与 <code>\w</code>，纯中文输入无效果</td></tr>
+<tr><td class="tool">word-counter</td><td class="loc">WordCounterClient.tsx:38,68-73</td><td>句子正则缺全角 <code>！？</code>；阅读/演讲时长单位硬编码英文</td></tr>
+<tr><td class="tool">encoder-decoder-tool</td><td class="loc">EncoderDecoderTool.tsx:79</td><td>词数 <code>split(/\s+/)</code> 中文恒 1</td></tr>
+</table>
+
+<div class="dim">▎功能完整性</div>
+<table>
+<tr><th>工具</th><th>位置</th><th>问题</th></tr>
+<tr><td class="tool">gpt-token-counter</td><td class="loc">GptTokenCounterClient.tsx:71-72,159</td><td>只算输入成本，输出侧仅有「output billed separately」文案，无法算输出/总成本</td></tr>
+<tr><td class="tool">temperature-converter</td><td class="loc">TemperatureConverterClient.tsx:77-92</td><td>缺「复制/下载」，与站内其它单位转换器不一致</td></tr>
+<tr><td class="tool">age-difference-calculator</td><td class="loc">batch8Calculators.tsx:186-194</td><td>只输入「年份」差，同年出生=0 岁差，缺月/日输入，精度不足</td></tr>
+<tr><td class="tool">wordle-solver</td><td class="loc">WordleSolverClient.tsx:87</td><td>Anagram 模式只筛 5 字母词，2-4 字母词（tea/art）永远找不到</td></tr>
+</table>
+
+<!-- ===================== 低危 ===================== -->
+<h2><span class="badge low">低危</span> 体验 / 边界 / 小缺陷（约 55 条）</h2>
+
+<details open>
+<summary>展开查看全部低危项</summary>
+
+<div class="dim">▎逻辑 / 边界</div>
+<table>
+<tr><th>工具</th><th>位置</th><th>问题</th></tr>
+<tr><td class="tool">age-calculator</td><td class="loc">AgeCalculatorClient.tsx:86-89</td><td>清空出生日期后渲染「NaN yrs NaN mo NaN days」，无空值防护</td></tr>
+<tr><td class="tool">全部数字计算器</td><td class="loc">lib/format.ts:29</td><td><code>toNum</code> 空串返回 0，清空输入被静默按 0 计算（根因，影响多处）</td></tr>
+<tr><td class="tool">ratio-calculator</td><td class="loc">batch3Calculators.tsx:210</td><td>D 是死字段：可编辑但 compute 从不读取，用户填写被忽略</td></tr>
+<tr><td class="tool">combination / permutation</td><td class="loc">batch7Calculators.tsx:112,137</td><td>大 n 精度丢失 / 阶乘溢出为 Infinity，无提示</td></tr>
+<tr><td class="tool">prime-number / factorization</td><td class="loc">batch7Calculators.tsx:48,76</td><td>小数被静默向下取整，未提示「仅支持整数」</td></tr>
+<tr><td class="tool">final-grade-calculator</td><td class="loc">batch8Calculators.tsx:236-239</td><td>finalWeight 无上限校验；已达标时显示「-X%」无提示</td></tr>
+<tr><td class="tool">sales-tax / discount</td><td class="loc">generatedClients.tsx:60-97</td><td>税率 -100% 触发除零；折扣 &gt;100% 变负价无校验</td></tr>
+<tr><td class="tool">saas-ltv-churn</td><td class="loc">SaasLtvChurnCalculatorClient.tsx:42-60</td><td>churn&gt;100% 未校验；客户数可为小数</td></tr>
+<tr><td class="tool">temperature-converter</td><td class="loc">TemperatureConverterClient.tsx:28</td><td>Kelvin &lt;0（低于绝对零度）不校验</td></tr>
+<tr><td class="tool">scientific-notation</td><td class="loc">batch7Calculators.tsx:28</td><td>负指数渲染错误，显示「×10-⁴」而非「×10⁻⁴」</td></tr>
+<tr><td class="tool">ip-checker</td><td class="loc">IpCheckerClient.tsx:105-109</td><td>IPv6 校验不查组数，<code>1:2:3</code>、9 组也被判合法</td></tr>
+<tr><td class="tool">ip-subnet-calculator</td><td class="loc">IpSubnetCalculatorClient.tsx:79-86</td><td>漏 CGNAT（100.64/10）等保留段，误判为 Public</td></tr>
+<tr><td class="tool">sql-formatter</td><td class="loc">SqlFormatterClient.tsx:173-189</td><td>任意 <code>(</code> 强制换行，<code>count(o.id)</code> 被拆坏；逗号拆列不缩进</td></tr>
+<tr><td class="tool">text-size-estimator</td><td class="loc">batch4TextTools.tsx:126</td><td>空输入时 Lines 恒为 1（应为 0）</td></tr>
+<tr><td class="tool">find-and-replace</td><td class="loc">batchTextTools.tsx:112-113</td><td>文本含 &gt;2 个 <code>|||</code> 时静默丢弃第 4 段起内容</td></tr>
+<tr><td class="tool">url-query-parser</td><td class="loc">batch4TextTools.tsx:19</td><td>重复 query key 只保留最后一个</td></tr>
+<tr><td class="tool">url-extractor</td><td class="loc">batch4TextTools.tsx:81</td><td>正则吞掉句尾标点（<code>example.com,</code>）</td></tr>
+<tr><td class="tool">csv-to-markdown-table</td><td class="loc">CsvToMarkdownTableClient.tsx:101-110</td><td>首行分隔符探测把引号内逗号计入，可能误判</td></tr>
+<tr><td class="tool">color-converter</td><td class="loc">lib/color.ts:68,77</td><td>rgba/hsla 的 alpha 被静默丢弃</td></tr>
+<tr><td class="tool">px-to-rem</td><td class="loc">PxToRemClient.tsx:29</td><td>em 与 rem 等同换算，但 CSS 中 em 相对父元素字号</td></tr>
+<tr><td class="tool">fuel-economy-converter</td><td class="loc">batchConverters.tsx:91-92</td><td>输入 0 时除零 → Infinity，静默显示「—」</td></tr>
+<tr><td class="tool">numeral-system-converter</td><td class="loc">NumeralSystemConverterClient.tsx:44</td><td>不认 <code>0xFF</code>/<code>0b101</code> 前缀写法</td></tr>
+<tr><td class="tool">svg-to-image</td><td class="loc">SvgToImageClient.tsx:125,149</td><td>ObjectURL 未 revoke，反复转换累积内存泄漏</td></tr>
+</table>
+
+<div class="dim">▎中文本地化 / 体验</div>
+<table>
+<tr><th>工具</th><th>位置</th><th>问题</th></tr>
+<tr><td class="tool">body-fat / capital-gains 等</td><td class="loc">batch6Calculators.tsx:136,216-220 等</td><td>compute 内输出的分类标签/结果串硬编码英文，未走 i18n</td></tr>
+<tr><td class="tool">auto-loan-calculator</td><td class="loc">AutoLoanCalculatorClient.tsx:9-11</td><td>货币硬编码 USD，默认值全美式，无 CNY/地区选项</td></tr>
+<tr><td class="tool">dti / down-payment / credit-card</td><td class="loc">batch8Calculators.tsx:59,122,136</td><td>硬编码美式规则（$25 最低还款、28% 房贷、PMI）无区域说明</td></tr>
+<tr><td class="tool">gpa / random-choice</td><td class="loc">GPACalculatorClient.tsx:43-45 等</td><td>默认示例全英文（Mathematics/Pizza/Sushi…）</td></tr>
+<tr><td class="tool">regex-tester</td><td class="loc">RegexTesterClient.tsx:93-109</td><td>速查表 desc 全英文，是唯一绕过 L() 的文案</td></tr>
+<tr><td class="tool">password / secret-key / body-fat</td><td class="loc">PasswordGeneratorClient.tsx:72 等</td><td>强度标签 Weak/Good/Strong 硬编码英文未本地化</td></tr>
+<tr><td class="tool">csv-to-markdown-table</td><td class="loc">CsvToMarkdownTableClient.tsx:156</td><td>无表头时列名「Column 1/2/3」硬编码英文</td></tr>
+<tr><td class="tool">inflation / retirement / unit-price</td><td class="loc">batchGenerators.tsx:267-358</td><td>金额固定 en-US+USD；winner 返回英文「Option 1/2」</td></tr>
+<tr><td class="tool">slug / color-contrast / qr-code</td><td class="loc">SlugGeneratorClient.tsx:18-23 等</td><td>示例全英文（SEO Tips / pangram / example.com）</td></tr>
+<tr><td class="tool">ip-checker</td><td class="loc">IpCheckerClient.tsx:599-617</td><td>查第三方 IP 后标签仍显示「Your current IP」，与内容不符</td></tr>
+<tr><td class="tool">random-number-generator</td><td class="loc">batchDevTools.tsx:23,88</td><td>初始即显示假结果「42」</td></tr>
+<tr><td class="tool">timezone-converter</td><td class="loc">TimezoneConverterClient.tsx:236,436</td><td>营业时间硬编码 9:00-17:00 不可配置</td></tr>
+</table>
+
+<div class="dim">▎功能完整性 / 其它</div>
+<table>
+<tr><th>工具</th><th>位置</th><th>问题</th></tr>
+<tr><td class="tool">批量计算器 + 独立组件</td><td class="loc">makeCalculatorClient.tsx 等</td><td>多数无「清空/重置」按钮，改乱后无法一键复原</td></tr>
+<tr><td class="tool">age / date-difference / bmi / days-countdown</td><td class="loc">对应独立组件</td><td>未接入 ResultActions，结果无法一键复制/下载</td></tr>
+<tr><td class="tool">image-to-base64</td><td class="loc">ImageToBase64Client.tsx:145-148</td><td>加载后无「移除/清空」按钮；size 估值把 base64 前缀也算入</td></tr>
+<tr><td class="tool">wordle-solver</td><td class="loc">WordleSolverClient.tsx:31,87</td><td>用户补充的 6-10 字母词被双过滤，永远用不到</td></tr>
+<tr><td class="tool">list-diff</td><td class="loc">ListDiffClient.tsx</td><td>无清空按钮；dedupe 写死无开关</td></tr>
+<tr><td class="tool">favicon-generator</td><td class="loc">FaviconGeneratorClient.tsx:20-24</td><td>仅 16/32/180 三种尺寸，缺 48/192/512</td></tr>
+<tr><td class="tool">image-resizer</td><td class="loc">ImageResizerClient.tsx:30-35</td><td>GIF「保留原格式」静默回退 PNG，动画丢失无提示</td></tr>
+<tr><td class="tool">svg-minifier</td><td class="loc">SvgMinifierClient.tsx:170</td><td>下载固定命名 minified.svg，丢失原文件名</td></tr>
+<tr><td class="tool">open-graph-generator</td><td class="loc">OpenGraphGeneratorClient.tsx:28</td><td>示例写「130+ tools」，实际已 169，数字过时</td></tr>
+<tr><td class="tool">gpt-token-counter</td><td class="loc">GptTokenCounterClient.tsx:126,175</td><td>UI 文案「as of 2025」与数据源「2026-08-14」互相矛盾</td></tr>
+</table>
+
+</details>
+
+<footer>本报告由全站代码审计生成 · 覆盖 components/ 全量交互组件 + lib/ 关联工具函数 · 未做任何代码修改，待确认后分批修复</footer>
+
+</div>
+</body>
+</html>

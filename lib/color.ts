@@ -63,20 +63,30 @@ export function hslToRgb({ h, s, l }: HSL): RGB {
   return { r: Math.round(r * 255), g: Math.round(g * 255), b: Math.round(b * 255) }
 }
 
-/** 解析 rgb() 字符串;各通道必须 0-255,否则返回 null(避免静默产出错误颜色) */
+/** 解析 rgb() 字符串;各通道必须 0-255(百分比按 255 折算,上限 100%),否则返回 null。
+ *  兼容逗号/空格分隔与现代空格语法:rgb(59 130 246)、rgb(50% 20% 90%)、
+ *  rgba(59 130 246 / 0.5)(alpha 忽略,RGB 通道照常解析)。 */
 export function parseRgb(str: string): RGB | null {
-  const m = str.match(/rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)/i)
+  const m = str.match(
+    /rgba?\(\s*(\d+(?:\.\d+)?)(%)?\s*[, ]\s*(\d+(?:\.\d+)?)(%)?\s*[, ]\s*(\d+(?:\.\d+)?)(%)?/i,
+  )
   if (!m) return null
-  const r = +m[1], g = +m[2], b = +m[3]
+  const chan = (raw: string, pct: string | undefined) =>
+    pct ? Math.round((parseFloat(raw) / 100) * 255) : parseFloat(raw)
+  if ((m[2] && +m[1] > 100) || (m[4] && +m[3] > 100) || (m[6] && +m[5] > 100)) return null
+  const r = chan(m[1], m[2]), g = chan(m[3], m[4]), b = chan(m[5], m[6])
   if (r > 255 || g > 255 || b > 255) return null
   return { r, g, b }
 }
 
-/** 解析 hsl() 字符串;h 必须 0-360,s/l 必须 0-100,否则返回 null */
+/** 解析 hsl() 字符串;h 必须 0-360,s/l 必须 0-100,否则返回 null。
+ *  兼容逗号与空格分隔:hsl(210 40% 50%)、hsl(210, 40%, 50%),s/l 的 % 可省;alpha 忽略。 */
 export function parseHsl(str: string): HSL | null {
-  const m = str.match(/hsla?\(\s*(\d+)\s*,\s*(\d+)%?\s*,\s*(\d+)%?/i)
+  const m = str.match(
+    /hsla?\(\s*(\d+(?:\.\d+)?)(?:deg)?\s*[, ]\s*(\d+(?:\.\d+)?)%?\s*[, ]\s*(\d+(?:\.\d+)?)%?/i,
+  )
   if (!m) return null
   const h = +m[1], s = +m[2], l = +m[3]
   if (h > 360 || s > 100 || l > 100) return null
-  return { h, s, l }
+  return { h: Math.round(h), s: Math.round(s), l: Math.round(l) }
 }

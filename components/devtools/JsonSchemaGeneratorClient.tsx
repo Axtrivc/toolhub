@@ -45,7 +45,7 @@ const RE_DATETIME = /^\d{4}-\d{2}-\d{2}[Tt ]\d{2}:\d{2}:\d{2}(\.\d+)?([Zz]|[+-]\
 const RE_DATE = /^\d{4}-\d{2}-\d{2}$/
 const RE_EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 const RE_UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i
-const RE_SCHEME = /^[a-zA-Z][a-zA-Z0-9+.-]*:/
+const RE_URI_SCHEME = /^(https?|urn|mailto|ftp|file|tag|git\+https):/i
 
 /** 校验 YYYY-MM-DD 是否为真实日期(排除 2024-13-45 之类) */
 function isRealDate(s: string): boolean {
@@ -61,7 +61,9 @@ function detectStringFormat(s: string): string | null {
   if (RE_DATETIME.test(s)) return 'date-time'
   if (RE_DATE.test(s) && isRealDate(s)) return 'date'
   if (RE_EMAIL.test(s)) return 'email'
-  if (RE_SCHEME.test(s)) {
+  if (RE_URI_SCHEME.test(s)) {
+    // format:"uri" 不容忍内部空白(RFC 3986),即使 WHATWG URL 会静默编码空格
+    if (/\s/.test(s)) return null
     try {
       new URL(s)
       return 'uri'

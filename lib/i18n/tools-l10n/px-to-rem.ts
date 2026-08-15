@@ -8,9 +8,13 @@ export const pxToRemL10n: ToolL10n = {
   zh: {
     ui: {
       'commonSizesPrefix': '常用尺寸(root =',
+      'emParentRoot': 'em(父级 = 根字号)',
+      'emParentRootHeader': 'EM(父级 = 根字号)',
       'noteText': '🔒 100% 在客户端——所有换算都在本地完成。',
       'pxToRemHeading': 'PX → REM / EM',
+      'pxValueAriaLabel': '像素值',
       'remToPxHeading': 'REM → PX',
+      'remValueAriaLabel': 'REM 值',
       'rootFontSize': '根字号',
     },
     formula: {
@@ -32,9 +36,13 @@ export const pxToRemL10n: ToolL10n = {
   es: {
     ui: {
       'commonSizesPrefix': 'Tamaños comunes (root =',
+      'emParentRoot': 'em (padre = raíz)',
+      'emParentRootHeader': 'EM (padre = raíz)',
       'noteText': '🔒 100% en el cliente — todas las conversiones son locales.',
       'pxToRemHeading': 'PX → REM / EM',
+      'pxValueAriaLabel': 'Valor en píxeles',
       'remToPxHeading': 'REM → PX',
+      'remValueAriaLabel': 'Valor en REM',
       'rootFontSize': 'Tamaño de fuente raíz',
     },
     formula: {
@@ -56,9 +64,13 @@ export const pxToRemL10n: ToolL10n = {
   de: {
     ui: {
       'commonSizesPrefix': 'Gängige Größen (root =',
+      'emParentRoot': 'em (parent = Root)',
+      'emParentRootHeader': 'EM (parent = Root)',
       'noteText': '🔒 100% clientseitig — alle Umrechnungen erfolgen lokal.',
       'pxToRemHeading': 'PX → REM / EM',
+      'pxValueAriaLabel': 'Pixelwert',
       'remToPxHeading': 'REM → PX',
+      'remValueAriaLabel': 'REM-Wert',
       'rootFontSize': 'Wurzel-Schriftgröße',
     },
     formula: {

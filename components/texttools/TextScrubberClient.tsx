@@ -27,7 +27,9 @@ Visit www.example.com or email <i>someone@example.com</i> for details ✉️`
 // + 地区指示符/肤色(U+1F1E6-1F1FF, U+1F3FB-1F3FF)+ 变体选择符(U+FE00-FE0F)+ ZWJ
 const EMOJI_RE =
   /[☀-➿⬀-⯿️‍\p{Extended_Pictographic}🇦-🇿🏻-🏿]/gu
-const URL_RE = /(?:https?:\/\/|www\.)[^\s<>"']+/gi
+// www. 前必须是行首/空白/开括号(捕获组而非 lookbehind,兼容旧 Safari),
+// 否则会把「Awwww. cute」这类词中 www. 误当 URL
+const URL_RE = /(?:https?:\/\/|(^|[\s<(])www\.)[^\s<>"']+/gi
 const HTML_TAG_RE = /<\/?[a-zA-Z][^>]*>/g
 const DIACRITICS_RE = /[̀-ͯ]/g
 
@@ -51,7 +53,8 @@ function escapeForCharClass(s: string): string {
 function cleanText(input: string, opts: CleanOptions): string {
   let out = input
   if (opts.stripHtml) out = out.replace(HTML_TAG_RE, '')
-  if (opts.stripUrls) out = out.replace(URL_RE, '')
+  // 命中 www. 分支时保留捕获的前导分隔符(空格/括号),只删 URL 本身
+  if (opts.stripUrls) out = out.replace(URL_RE, (_m, sep?: string) => sep ?? '')
   if (opts.stripEmojis) out = out.replace(EMOJI_RE, '')
   if (opts.removeAccents) out = out.normalize('NFD').replace(DIACRITICS_RE, '')
   if (opts.removeSpecial) {

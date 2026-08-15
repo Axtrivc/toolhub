@@ -7,6 +7,8 @@
  * 用法示例见 components/calculator/makeCalculatorClient.tsx
  */
 
+import type { Locale } from './i18n'
+
 export type FieldType = 'number' | 'select' | 'text'
 
 export interface FieldDef {
@@ -51,9 +53,16 @@ export interface CalculatorConfig {
   outputs: OutputDef[]
   /**
    * 纯计算函数
-   * 接收所有输入(都是 string,需自己转换),返回 key-value 的结果对象
+   * 接收所有输入(都是 string,需自己转换),返回 key-value 的结果对象。
+   * 第二个参数 locale:需要本地化输出串(如 'cal/day'、结论文案)的 compute
+   * 可用它经 tui() 取译文;工厂恒以当前 locale 调用,忽略该参数的旧实现不受影响。
    */
-  compute: (values: Record<string, string>) => Record<string, string>
+  compute: (values: Record<string, string>, locale: Locale) => Record<string, string>
+  /**
+   * 依赖"当前时间"的派生结果(可选)。SSR/首帧不调用(结果卡显示 '—'),
+   * 挂载后在 useEffect 中执行并合并进 results —— 保证静态导出水合一致。
+   */
+  deriveNow?: (values: Record<string, string>, locale: Locale) => Record<string, string>
   /** 顶部说明文字(可选) */
   note?: string
   /**

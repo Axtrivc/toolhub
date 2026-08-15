@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useEffect, useRef } from 'react'
 import { useApp } from './providers/AppProviders'
 import { t } from '@/lib/i18n'
 
@@ -31,12 +31,22 @@ interface LoadSampleButtonProps {
 export function LoadSampleButton({ onLoad, disabled, variant = 'default' }: LoadSampleButtonProps) {
   const { locale } = useApp()
   const [loaded, setLoaded] = useState(false)
+  // "✓ Sample loaded" 回退计时器:重复点击时重置;卸载时清理,避免对已卸载组件 setState
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   const handleClick = useCallback(() => {
     onLoad()
     setLoaded(true)
-    setTimeout(() => setLoaded(false), 1500)
+    if (timerRef.current) clearTimeout(timerRef.current)
+    timerRef.current = setTimeout(() => setLoaded(false), 1500)
   }, [onLoad])
+
+  useEffect(
+    () => () => {
+      if (timerRef.current) clearTimeout(timerRef.current)
+    },
+    [],
+  )
 
   return (
     <button
@@ -47,7 +57,7 @@ export function LoadSampleButton({ onLoad, disabled, variant = 'default' }: Load
       className={`btn ${loaded ? 'btn-primary' : 'btn-secondary'} ${
         variant === 'compact' ? 'px-3 py-1.5 text-xs' : ''
       } disabled:cursor-not-allowed disabled:opacity-50`}
-      title="Auto-fill a realistic example"
+      title={t(locale, 'toolLoadSampleTitle')}
     >
       {loaded ? t(locale, 'toolSampleLoaded') : t(locale, 'toolLoadSample')}
     </button>

@@ -17,9 +17,14 @@ import { t } from '@/lib/i18n'
  *    cookieAcceptAll / cookieNecessaryOnly)。
  *
  * 与 AdSense 的关系:AdSense 的个性化广告默认依赖用户同意(EU/UK)。
- * 当前实现记录同意状态;未来如需精细化(个性化 vs 非个性化),可在此分支。
+ * 本组件写入的同意状态同时是广告投放开关 —— AdSlot / AdSenseScript 读取
+ * 同一 CONSENT_STORAGE_KEY,仅当值为 'all' 时才注入/渲染广告单元。
+ * 写入后派发 CONSENT_CHANGED_EVENT,让同页签的 AdSlot 即时响应(跨页签走原生 storage 事件)。
  */
-const STORAGE_KEY = 'toolhub-cookie-consent'
+/** 同意状态 localStorage key(AdSlot 读取同一 key 做广告门控) */
+export const CONSENT_STORAGE_KEY = 'toolhub-cookie-consent'
+/** 同页签同意状态变更通知事件(AdSlot 监听;跨页签由原生 storage 事件覆盖) */
+export const CONSENT_CHANGED_EVENT = 'toolhub-cookie-consent-changed'
 
 export function CookieConsent() {
   const { locale } = useApp()
@@ -29,7 +34,7 @@ export function CookieConsent() {
     // 延迟到首屏后判断,避免影响 LCP
     const timer = setTimeout(() => {
       try {
-        if (!localStorage.getItem(STORAGE_KEY)) setVisible(true)
+        if (!localStorage.getItem(CONSENT_STORAGE_KEY)) setVisible(true)
       } catch {
         // 隐私模式 localStorage 不可用时,默认不显示,避免阻塞
       }
@@ -39,10 +44,11 @@ export function CookieConsent() {
 
   const decide = (choice: 'all' | 'necessary') => {
     try {
-      localStorage.setItem(STORAGE_KEY, choice)
+      localStorage.setItem(CONSENT_STORAGE_KEY, choice)
     } catch {
       // ignore
     }
+    window.dispatchEvent(new Event(CONSENT_CHANGED_EVENT))
     setVisible(false)
   }
 

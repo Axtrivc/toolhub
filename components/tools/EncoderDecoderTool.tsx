@@ -61,9 +61,10 @@ export function EncoderDecoderTool({ encode, decode, initialMode = 'encode', slu
     try {
       return spec.transform(input)
     } catch {
-      return ''
+      // 解码输入非法时给出可见提示,而不是静默输出空串
+      return tui(slug, locale, 'invalidInput', '⚠️ Invalid input for this direction')
     }
-  }, [input, spec, mounted])
+  }, [input, spec, mounted, slug, locale])
 
   const switchMode = useCallback(
     (next: 'encode' | 'decode') => {

@@ -5,6 +5,7 @@ import { CopyButton } from '@/components/CopyButton'
 import { LoadSampleButton } from '@/components/LoadSampleButton'
 import { useApp } from '@/components/providers/AppProviders'
 import { tui } from '@/lib/i18n/tool-l10n'
+import { countWords } from '@/lib/text-stats'
 
 /**
  * Text Cleaner —— 增强版文本清理工具
@@ -73,7 +74,8 @@ export function TextCleanerClient({ slug = 'whitespace-remover' }: { slug?: stri
   }, [input, opts])
 
   const charCount = input.length
-  const wordCount = input.trim() ? input.trim().split(/\s+/).length : 0
+  // 中英混合口径:无空格的 CJK 文本按字计数,不再恒为 1 词
+  const wordCount = countWords(input)
 
   const checkbox = (key: keyof Options, label: string) => (
     <label className="flex cursor-pointer items-center gap-2 text-sm" style={{ color: 'rgb(var(--text-muted))' }}>

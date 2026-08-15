@@ -8,11 +8,6 @@ import { getCalculatorSample } from '@/lib/tool-samples'
 import { useApp } from '@/components/providers/AppProviders'
 import { tui } from '@/lib/i18n/tool-l10n'
 
-const fmtMoney = (n: number) =>
-  isFinite(n)
-    ? n.toLocaleString(undefined, { style: 'currency', currency: 'USD', maximumFractionDigits: 2 })
-    : '—'
-
 interface AmortRow {
   month: number
   payment: number
@@ -58,6 +53,13 @@ export function LoanCalculatorClient() {
   const { locale } = useApp()
   // 取本地化 UI 串;缺失回退英文(SSR 恒英文)。
   const L = (key: string, fb: string) => tui('loan-calculator', locale, key, fb)
+  // 数字/货币按应用 locale 格式化;en 首帧恒 en-US(与服务端一致,无水合差异),
+  // de/es 切换后得到本地分隔符(如 1.234,56 $)。
+  const localeTag = locale === 'en' ? 'en-US' : locale
+  const fmtMoney = (n: number) =>
+    isFinite(n)
+      ? n.toLocaleString(localeTag, { style: 'currency', currency: 'USD', maximumFractionDigits: 2 })
+      : '—'
 
   const [amount, setAmount] = useState('20000')
   const [rate, setRate] = useState('7.5')
@@ -89,7 +91,7 @@ export function LoanCalculatorClient() {
     }
     return [
       L('summaryTitle', 'Loan Calculation Summary'),
-      `  ${L('sLoanAmount', 'Loan amount:')} $${Number(amount).toLocaleString()}`,
+      `  ${L('sLoanAmount', 'Loan amount:')} $${Number(amount).toLocaleString(localeTag)}`,
       `  ${L('sAnnualRate', 'Annual rate:')} ${rate}%`,
       `  ${L('sTerm', 'Term:')} ${years} ${L('yearsSuffix', 'years')} (${result.months} ${L('months', 'months')})`,
       L('sResults', 'Results:'),
@@ -105,7 +107,7 @@ export function LoanCalculatorClient() {
     if (!result) return summary
     const rows: string[][] = [
       [L('csvField', 'Field'), L('csvValue', 'Value')],
-      [L('csvLoanAmount', 'Loan amount'), `$${Number(amount).toLocaleString()}`],
+      [L('csvLoanAmount', 'Loan amount'), `$${Number(amount).toLocaleString(localeTag)}`],
       [L('csvAnnualRate', 'Annual rate'), `${rate}%`],
       [L('csvTermYears', 'Term (years)'), years],
       [L('sMonthlyPayment', 'Monthly payment'), fmtMoney(result.monthlyPayment)],

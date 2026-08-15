@@ -70,6 +70,7 @@ export function PxToRemClient() {
             value={px}
             onChange={(e) => setPx(e.target.value)}
             placeholder="16"
+            aria-label={L('pxValueAriaLabel', 'PX value')}
             className={inputCls}
             style={{ borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rgb(var(--bg-card))', color: 'rgb(var(--text))' }}
           />
@@ -81,7 +82,7 @@ export function PxToRemClient() {
               </code>
             </div>
             <div className="flex items-center justify-between">
-              <span className="text-slate-500">em:</span>
+              <span className="text-slate-500">{L('emParentRoot', 'em (parent = root)')}:</span>
               <code className="rounded bg-blue-50 px-2 py-0.5 text-blue-700 dark:bg-blue-950/50 dark:text-blue-300">
                 {fromPx.em || '—'}
               </code>
@@ -98,6 +99,7 @@ export function PxToRemClient() {
             onChange={(e) => setRem(e.target.value)}
             placeholder="1"
             step={0.1}
+            aria-label={L('remValueAriaLabel', 'REM value')}
             className={inputCls}
             style={{ borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rgb(var(--bg-card))', color: 'rgb(var(--text))' }}
           />
@@ -121,7 +123,7 @@ export function PxToRemClient() {
               <tr>
                 <th className="px-3 py-2 font-semibold text-slate-600 dark:text-slate-300">PX</th>
                 <th className="px-3 py-2 font-semibold text-slate-600 dark:text-slate-300">REM</th>
-                <th className="px-3 py-2 font-semibold text-slate-600 dark:text-slate-300">EM</th>
+                <th className="px-3 py-2 font-semibold text-slate-600 dark:text-slate-300">{L('emParentRootHeader', 'EM (parent = root)')}</th>
               </tr>
             </thead>
             <tbody>

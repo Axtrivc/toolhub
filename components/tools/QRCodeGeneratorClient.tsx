@@ -35,8 +35,10 @@ export function QRCodeGeneratorClient() {
     if (mode === 'text') return text
     if (mode === 'url') return urlInput
     // wifi 模式:WIFI:T:WPA;S:mynetwork;P:mypass;;
+    // 开放网络(T:nopass)按规范整体省略 P: 段,不能输出空的 P:;
     if (!wifi.ssid) return ''
-    return `WIFI:T:${wifi.encryption};S:${escapeWifi(wifi.ssid)};P:${escapeWifi(wifi.password)};;`
+    const passSeg = wifi.encryption === 'nopass' ? '' : `P:${escapeWifi(wifi.password)};`
+    return `WIFI:T:${wifi.encryption};S:${escapeWifi(wifi.ssid)};${passSeg};`
   })()
 
   // 内容或样式变化时重新生成(合并 dataURL + canvas 为一个 effect,避免两个异步
@@ -68,21 +70,22 @@ export function QRCodeGeneratorClient() {
           setError('')
         }
       })
-      .catch((e) => {
-        if (!cancelled) setError(String(e))
+      .catch(() => {
+        // 不透传库的原始异常文本,统一映射为可读的本地化提示
+        if (!cancelled) setError(L('errGenerate', 'Could not generate the QR code. Please check your input and try again.'))
       })
     // canvas 用更高分辨率(用于 PNG 下载)
     if (canvasRef.current) {
       QRCode.toCanvas(canvasRef.current, content, { ...opts, width: Math.max(size, 512) }).catch(
-        (e) => {
-          if (!cancelled) setError(String(e))
+        () => {
+          if (!cancelled) setError(L('errGenerate', 'Could not generate the QR code. Please check your input and try again.'))
         },
       )
     }
     return () => {
       cancelled = true
     }
-  }, [content, size, fgColor, bgColor])
+  }, [content, size, fgColor, bgColor, locale])
 
   const handleDownload = () => {
     if (!canvasRef.current) return

@@ -17,6 +17,7 @@ export const salesTaxCalculatorL10n: ToolL10n = {
       { q: '为什么美国标价不含税?', a: '因为美国有成千上万个地方税区,零售商显示税前价格以便做全国统一广告。税款在结账时根据购买地加上。' },
     ],
     ui: {
+      errTaxRate: '税率必须高于 −100%',
       'in.amount': '金额', 'inSuffix.amount': '$', 'in.rate': '税率', 'inSuffix.rate': '%', 'in.mode': '计算方式',
       'opt.mode.add': '加税(税前 → 含税)', 'opt.mode.remove': '去税(含税 → 税前)',
       'out.tax': '税额', 'out.result': '最终金额',
@@ -35,6 +36,7 @@ export const salesTaxCalculatorL10n: ToolL10n = {
       { q: '¿Por qué los precios en EE. UU. no incluyen impuestos?', a: 'Como EE. UU. tiene miles de jurisdicciones fiscales locales, los minoristas muestran precios sin impuesto para poder publicar precios nacionales consistentes. El impuesto se añade en caja según el lugar de compra.' },
     ],
     ui: {
+      errTaxRate: 'La tasa de impuesto debe ser superior a −100 %',
       'in.amount': 'Importe', 'inSuffix.amount': '$', 'in.rate': 'Tasa de impuesto', 'inSuffix.rate': '%', 'in.mode': 'Modo de cálculo',
       'opt.mode.add': 'Añadir impuesto (antes → con impuesto)', 'opt.mode.remove': 'Quitar impuesto (con impuesto → antes)',
       'out.tax': 'Importe del impuesto', 'out.result': 'Importe final',
@@ -53,6 +55,7 @@ export const salesTaxCalculatorL10n: ToolL10n = {
       { q: 'Warum enthalten US-Preise keine Steuer?', a: 'Da die USA Tausende lokale Steuergebiete haben, zeigen Händler Nettopreise, um einheitliche nationale Werbung zu schalten. Die Steuer wird an der Kasse basierend auf dem Kaufort hinzugefügt.' },
     ],
     ui: {
+      errTaxRate: 'Der Steuersatz muss über −100 % liegen',
       'in.amount': 'Betrag', 'inSuffix.amount': '$', 'in.rate': 'Steuersatz', 'inSuffix.rate': '%', 'in.mode': 'Berechnungsmodus',
       'opt.mode.add': 'Steuer hinzufügen (netto → brutto)', 'opt.mode.remove': 'Steuer abziehen (brutto → netto)',
       'out.tax': 'Steuerbetrag', 'out.result': 'Endbetrag',

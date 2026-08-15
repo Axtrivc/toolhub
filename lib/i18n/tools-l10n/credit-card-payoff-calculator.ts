@@ -18,6 +18,9 @@ export const creditCardPayoffCalculatorL10n: ToolL10n = {
       { q: '还清信用卡会伤信用分吗?', a: '不会——还清信用卡债务通常对信用分有利。信用分的一大因素是信用利用率(余额除以额度)。利用率保持在 30% 以下、最好 10% 以下,能提分。还清余额会降低利用率。还清后保留卡片,以保住可用额度和账户年限。' },
     ],
     ui: {
+      errPaymentTooLow: '月供过低(必须覆盖利息)',
+      errNotPaidOff: '按此月供 100 年内无法还清',
+      monthsYrs: '{m} 个月({y} 年)',
       'in.balance': '当前余额', 'in.apr': '年利率 (APR)', 'in.payment': '月供',
       'out.months': '还清时间', 'out.total': '总还款额', 'out.interest': '总利息',
       note: '💳 只还最低还款可能要几十年。多还会大幅节省利息。',
@@ -37,6 +40,9 @@ export const creditCardPayoffCalculatorL10n: ToolL10n = {
       { q: '¿Pagar la tarjeta perjudica mi puntuación de crédito?', a: 'No — saldar la deuda de la tarjeta suele ayudar. Un factor clave es la utilización del crédito (saldo entre límite). Mantenerla por debajo del 30 %, idealmente del 10 %, mejora la puntuación. Reducir saldos baja la utilización. Conserva la tarjeta abierta tras saldarla para preservar el crédito disponible y la antigüedad de la cuenta.' },
     ],
     ui: {
+      errPaymentTooLow: 'El pago es demasiado bajo (debe cubrir los intereses)',
+      errNotPaidOff: 'No se paga en 100 años con este pago',
+      monthsYrs: '{m} meses ({y} años)',
       'in.balance': 'Saldo actual', 'in.apr': 'Tasa anual (APR)', 'in.payment': 'Pago mensual',
       'out.months': 'Tiempo hasta saldar', 'out.total': 'Total pagado', 'out.interest': 'Interés total',
       note: '💳 Los pagos mínimos pueden tardar décadas. Pagar más del mínimo ahorra muchísimo interés.',
@@ -56,6 +62,9 @@ export const creditCardPayoffCalculatorL10n: ToolL10n = {
       { q: 'Schadet das Tilgen meiner Karte meinem Kredit-Score?', a: 'Nein — Kredite tilgen hilft deinem Score meist. Ein Hauptfaktor ist die Kreditnutzung (Saldo geteilt durch Limit). Unter 30 %, idealerweise unter 10 %, verbessert den Score. Salden abbauen senkt die Nutzung. Behalte die Karte nach dem Tilgen offen, um verfügbaren Kredit und Kontoalter zu erhalten.' },
     ],
     ui: {
+      errPaymentTooLow: 'Die Rate ist zu niedrig (sie muss die Zinsen decken)',
+      errNotPaidOff: 'Mit dieser Rate wird er in 100 Jahren nicht getilgt',
+      monthsYrs: '{m} Monate ({y} Jahre)',
       'in.balance': 'Aktueller Saldo', 'in.apr': 'Jahressatz (APR)', 'in.payment': 'Monatliche Rate',
       'out.months': 'Zeit bis tilgung', 'out.total': 'Insgesamt gezahlt', 'out.interest': 'Zinsen gesamt',
       note: '💳 Mindestraten können Jahrzehnte dauern. Mehr als das Minimum zu zahlen, spart dramatisch Zinsen.',

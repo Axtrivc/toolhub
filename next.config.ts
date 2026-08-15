@@ -17,7 +17,7 @@ const nextConfig: NextConfig = {
   },
   // trailingSlash:为每个路由输出 <slug>/index.html,兼容纯静态托管的路由约定
   trailingSlash: true,
-  // 自动为每个页面生成带 locale 的 HTML 文件
+  // React Strict Mode:开发环境下组件双重渲染/ effects 双跑,及早暴露副作用问题(不影响生产构建)
   reactStrictMode: true,
 }
 

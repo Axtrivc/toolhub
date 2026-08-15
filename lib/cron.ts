@@ -78,6 +78,13 @@ const DOW_NAMES: Record<string, number> = {
   SUN: 0, MON: 1, TUE: 2, WED: 3, THU: 4, FRI: 5, SAT: 6,
 }
 
+/** dow 字段解析:7 是 0(周日)的别名,按 0-7 展开后把 7 映射回 0(覆盖 1,7 / 0-7 / 5-7) */
+function parseDowField(field: string): Set<number> {
+  const result = parseField(field, 0, 7, DOW_NAMES)
+  if (result.delete(7)) result.add(0)
+  return result
+}
+
 /** 解析 5-field cron 字符串为 CronSchedule(正确标记 domStar/dowStar 用于 OR 语义判断)。 */
 export function parseCronSchedule(expr: string): CronSchedule {
   const parts = expr.trim().split(/\s+/)
@@ -85,15 +92,14 @@ export function parseCronSchedule(expr: string): CronSchedule {
     throw new Error(`Expected 5 fields, got ${parts.length}. Use: minute hour day month weekday`)
   }
   const [minute, hour, dom, month, dowRaw] = parts
-  const dowField = dowRaw === '7' ? '0' : dowRaw
   return {
     minute: parseField(minute, 0, 59),
     hour: parseField(hour, 0, 23),
     dom: parseField(dom, 1, 31),
     month: parseField(month, 1, 12, MONTH_NAMES),
-    dow: parseField(dowField, 0, 6, DOW_NAMES),
+    dow: parseDowField(dowRaw),
     domStar: dom === '*',
-    dowStar: dowField === '*',
+    dowStar: dowRaw === '*',
   }
 }
 
@@ -195,13 +201,13 @@ export function describeCron(expr: string, locale: Locale = 'en'): string {
   if (domF === '*' && dowF === '*') {
     day = L('everyDay', 'every day')
   } else if (domF === '*') {
-    const dows = expand(dowF === '7' ? '0' : dowF, 0, 6)
+    const dows = expandDow(dowF)
     day = L('onDays', 'on {days}').replace('{days}', dows.map((d) => dowNames[d]).join(', '))
   } else if (dowF === '*') {
     day = L('onDayOfMonth', 'on day-of-month {doms}').replace('{doms}', describeList(domF))
   } else {
     // OR 语义
-    const dows = expand(dowF === '7' ? '0' : dowF, 0, 6)
+    const dows = expandDow(dowF)
     const doms = expand(domF, 1, 31)
     day = L('onDomOrDow', 'on day-of-month {doms} OR on {dows}')
       .replace('{doms}', doms.join(', '))
@@ -231,6 +237,14 @@ export function describeCron(expr: string, locale: Locale = 'en'): string {
 function expand(field: string, min: number, max: number): number[] {
   try {
     return Array.from(parseField(field, min, max)).sort((a, b) => a - b)
+  } catch (err) {
+    console.warn('cron expand failed:', field, err)
+    return []
+  }
+}
+function expandDow(field: string): number[] {
+  try {
+    return Array.from(parseDowField(field)).sort((a, b) => a - b)
   } catch (err) {
     console.warn('cron expand failed:', field, err)
     return []

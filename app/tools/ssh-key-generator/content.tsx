@@ -54,8 +54,8 @@ const en: ReactNode = (
         The private key is the <em>only</em> half that must stay secret, and this page never transmits it — but
         what you do next matters. Save it as <code>~/.ssh/id_ed25519</code> (or <code>id_rsa</code>) and lock it
         down immediately with <code>chmod 600</code>, or ssh will refuse to use it. The exported format is{' '}
-        <strong>PKCS#8 PEM</strong>, which modern OpenSSH reads directly; to convert it to the classic OpenSSH
-        private-key format, run <code>ssh-keygen -p -m PEM -f id_ed25519</code> (press Enter when asked for a
+        <strong>PKCS#8 PEM</strong>, which modern OpenSSH reads directly; to convert it to the OpenSSH native
+        private-key format (<code>BEGIN OPENSSH PRIVATE KEY</code>), run <code>ssh-keygen -p -f id_ed25519</code> (press Enter when asked for a
         passphrase, or set one). Finally, treat a key made in a browser tab like any credential: store it in
         your SSH agent or a password manager, and <strong>regenerate a fresh pair on your own machine</strong>{' '}
         for high-value production systems.
@@ -89,7 +89,7 @@ const zh: ReactNode = (
     <div>
       <h2>保护好私钥</h2>
       <p>
-        私钥是<em>唯一</em>必须保密的一半,本页面也绝不传输它——但你接下来的操作同样重要。请将它保存为 <code>~/.ssh/id_ed25519</code>(或 <code>id_rsa</code>),并立即用 <code>chmod 600</code> 锁定,否则 ssh 会拒绝使用。导出格式为 <strong>PKCS#8 PEM</strong>,现代 OpenSSH 可直接读取;若要转换为经典的 OpenSSH 私钥格式,请运行 <code>ssh-keygen -p -m PEM -f id_ed25519</code>(提示输入口令时按回车跳过,或设置一个)。最后,请把在浏览器标签页中生成的密钥当作普通凭据对待:存入 SSH agent 或密码管理器,并为高价值的生产系统<strong>在你自己的机器上重新生成一对全新密钥</strong>。
+        私钥是<em>唯一</em>必须保密的一半,本页面也绝不传输它——但你接下来的操作同样重要。请将它保存为 <code>~/.ssh/id_ed25519</code>(或 <code>id_rsa</code>),并立即用 <code>chmod 600</code> 锁定,否则 ssh 会拒绝使用。导出格式为 <strong>PKCS#8 PEM</strong>,现代 OpenSSH 可直接读取;若要转换为 OpenSSH 原生私钥格式(<code>BEGIN OPENSSH PRIVATE KEY</code>),请运行 <code>ssh-keygen -p -f id_ed25519</code>(提示输入口令时按回车跳过,或设置一个)。最后,请把在浏览器标签页中生成的密钥当作普通凭据对待:存入 SSH agent 或密码管理器,并为高价值的生产系统<strong>在你自己的机器上重新生成一对全新密钥</strong>。
       </p>
     </div>
   </section>
@@ -120,7 +120,7 @@ const es: ReactNode = (
     <div>
       <h2>Mantener la clave privada a salvo</h2>
       <p>
-        La clave privada es la <em>única</em> mitad que debe permanecer secreta, y esta página nunca la transmite — pero lo que hagas después importa. Guárdala como <code>~/.ssh/id_ed25519</code> (o <code>id_rsa</code>) y bloquéala de inmediato con <code>chmod 600</code>, o ssh se negará a usarla. El formato exportado es <strong>PKCS#8 PEM</strong>, que OpenSSH moderno lee directamente; para convertirlo al clásico formato de clave privada OpenSSH, ejecuta <code>ssh-keygen -p -m PEM -f id_ed25519</code> (pulsa Enter cuando te pida una frase de paso, o establece una). Por último, trata una clave creada en una pestaña del navegador como cualquier credencial: guárdala en tu agente SSH o en un gestor de contraseñas, y <strong>regenera un par nuevo en tu propia máquina</strong> para sistemas de producción de alto valor.
+        La clave privada es la <em>única</em> mitad que debe permanecer secreta, y esta página nunca la transmite — pero lo que hagas después importa. Guárdala como <code>~/.ssh/id_ed25519</code> (o <code>id_rsa</code>) y bloquéala de inmediato con <code>chmod 600</code>, o ssh se negará a usarla. El formato exportado es <strong>PKCS#8 PEM</strong>, que OpenSSH moderno lee directamente; para convertirlo al formato nativo de OpenSSH (<code>BEGIN OPENSSH PRIVATE KEY</code>), ejecuta <code>ssh-keygen -p -f id_ed25519</code> (pulsa Enter cuando te pida una frase de paso, o establece una). Por último, trata una clave creada en una pestaña del navegador como cualquier credencial: guárdala en tu agente SSH o en un gestor de contraseñas, y <strong>regenera un par nuevo en tu propia máquina</strong> para sistemas de producción de alto valor.
       </p>
     </div>
   </section>
@@ -151,7 +151,7 @@ const de: ReactNode = (
     <div>
       <h2>Den privaten Schlüssel sicher aufbewahren</h2>
       <p>
-        Der private Schlüssel ist die <em>einzige</em> Hälfte, die geheim bleiben muss, und diese Seite überträgt ihn nie — aber was du danach tust, ist entscheidend. Speichere ihn als <code>~/.ssh/id_ed25519</code> (oder <code>id_rsa</code>) und sperre ihn sofort mit <code>chmod 600</code>, sonst verweigert ssh die Nutzung. Das exportierte Format ist <strong>PKCS#8 PEM</strong>, das moderne OpenSSH direkt liest; um es ins klassische OpenSSH-Private-Key-Format umzuwandeln, führe <code>ssh-keygen -p -m PEM -f id_ed25519</code> aus (drücke Enter, wenn nach einer Passphrase gefragt wird, oder lege eine fest). Behandle einen in einem Browser-Tab erzeugten Schlüssel schließlich wie jede andere Zugangsdaten: Speichere ihn in deinem SSH-Agent oder einem Passwort-Manager und <strong>erzeuge für wertvolle Produktionssysteme ein frisches Paar auf deiner eigenen Maschine</strong>.
+        Der private Schlüssel ist die <em>einzige</em> Hälfte, die geheim bleiben muss, und diese Seite überträgt ihn nie — aber was du danach tust, ist entscheidend. Speichere ihn als <code>~/.ssh/id_ed25519</code> (oder <code>id_rsa</code>) und sperre ihn sofort mit <code>chmod 600</code>, sonst verweigert ssh die Nutzung. Das exportierte Format ist <strong>PKCS#8 PEM</strong>, das moderne OpenSSH direkt liest; um es ins native OpenSSH-Private-Key-Format (<code>BEGIN OPENSSH PRIVATE KEY</code>) umzuwandeln, führe <code>ssh-keygen -p -f id_ed25519</code> aus (drücke Enter, wenn nach einer Passphrase gefragt wird, oder lege eine fest). Behandle einen in einem Browser-Tab erzeugten Schlüssel schließlich wie jede andere Zugangsdaten: Speichere ihn in deinem SSH-Agent oder einem Passwort-Manager und <strong>erzeuge für wertvolle Produktionssysteme ein frisches Paar auf deiner eigenen Maschine</strong>.
       </p>
     </div>
   </section>

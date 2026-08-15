@@ -305,7 +305,7 @@ const es: ReactNode = (
         y solo el 17 % reduce lo que debes. A ese ritmo se tardan <strong>décadas</strong> en
         pagar — y eso asumiendo que no cargues ni un dólar más. Si tu pago es igual o inferior al
         interés mensual, el saldo no baja en absoluto. Puedes verificar todas las cifras
-        anteriores introduciendo 5000 / 19,99 / 2 en la calculadora.
+        anteriores introduciendo 5000 / 19.99 / 2 en la calculadora.
       </p>
     </div>
 
@@ -337,7 +337,7 @@ const es: ReactNode = (
         </li>
         <li>
           <strong>Cargo por intereses:</strong> el interés total devengado este mes. Compáralo
-          con tu pago mínimo — si el interés es la mayor parte del pago, estás nadando en seco.
+          con tu pago mínimo — si el interés es la mayor parte del pago, no estás avanzando.
         </li>
       </ul>
     </div>
@@ -425,14 +425,14 @@ const de: ReactNode = (
         17 % reduzieren deine Schuld. In diesem Tempo dauert es <strong>Jahrzehnte</strong> bis zur
         Tilgung — und das unter der Annahme, dass du keinen einzigen Dollar mehr belastest. Wenn
         deine Zahlung beim Monatszins oder darunter liegt, sinkt der Saldo gar nicht. Du kannst jede
-        Zahl oben nachprüfen, indem du 5000 / 19,99 / 2 in den Rechner eingibst.
+        Zahl oben nachprüfen, indem du 5000 / 19.99 / 2 in den Rechner eingibst.
       </p>
     </div>
 
     <div>
       <h2>Warum Banken die Mindestzahlung so niedrig ansetzen</h2>
       <p>
-        Mindestzahlungen früheren lagen bei etwa 5 % des Saldos. In den 2000ern drängten
+        Mindestzahlungen früher lagen bei etwa 5 % des Saldos. In den 2000ern drängten
         Aufsichtsbehörden die Aussteller, die Mindestzahlungen zu erhöhen, damit Verbraucher ihre
         Schulden tatsächlich tilgen konnten, und viele wechselten zum aktuellen Modell aus ~1 %–3 %
         plus Zinsen. Diese Formel streckt die Rückzahlung noch über viele Jahre — aber sie

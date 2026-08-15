@@ -11,10 +11,10 @@ export function fmtUSD(n: number, digits = 2): string {
   })
 }
 
-/** 格式化为带千分位的数字 */
-export function fmtNum(n: number, digits = 2): string {
+/** 格式化为带千分位的数字(locale 默认固定 'en-US',保证 SSR/静态 HTML 与客户端渲染一致) */
+export function fmtNum(n: number, digits = 2, locale = 'en-US'): string {
   if (!isFinite(n)) return '—'
-  return Number(n.toFixed(digits)).toLocaleString(undefined, {
+  return Number(n.toFixed(digits)).toLocaleString(locale, {
     maximumFractionDigits: digits,
   })
 }

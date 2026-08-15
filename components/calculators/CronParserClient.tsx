@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useMemo, useCallback } from 'react'
+import { useState, useMemo, useCallback, useEffect } from 'react'
 import { ResultActions } from '@/components/ResultActions'
 import { describeCron, nextFires } from '@/lib/cron'
 import { useApp } from '@/components/providers/AppProviders'
@@ -31,16 +31,24 @@ export function CronParserClient() {
 
   const [expr, setExpr] = useState('0 9 * * 1-5')
 
+  // nextFires 依赖当前时刻:SSR 预渲染的构建时间与访问时刻必然不同 → 水合不一致。
+  // 挂载后才计算,首帧(SSR/水合)统一显示 '—' 占位行;now 存 state 保证稳定。
+  const [now, setNow] = useState<Date | null>(null)
+  useEffect(() => {
+    setNow(new Date())
+  }, [])
+
   const result = useMemo(() => {
     try {
       const description = describeCron(expr, locale)
-      const fires = nextFires(expr, 5)
+      // 未挂载:只给出说明,触发时间列表渲染 '—' 占位
+      const fires = now ? nextFires(expr, 5, now) : []
       return { description, fires }
     } catch (e) {
       return { error: e instanceof Error ? e.message : L('invalidCron', 'Invalid cron expression') }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [expr, locale])
+  }, [expr, locale, now])
 
   const handlePreset = useCallback((e: string) => setExpr(e), [])
 
@@ -136,11 +144,19 @@ export function CronParserClient() {
             </div>
           </div>
 
-          {/* 下 5 次触发时间 */}
+          {/* 下 5 次触发时间(挂载前显示 '—' 占位,见上方 now 说明) */}
           <div>
             <h3 className="mb-2 text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>{L('next5Triggers', 'Next 5 trigger times (your timezone)')}</h3>
             <ol className="space-y-2">
-              {result.fires.length === 0 && (
+              {!now && (
+                <li
+                  className="rounded-md border px-4 py-2.5 text-sm"
+                  style={{ borderColor: 'rgb(var(--border))', backgroundColor: 'rgb(var(--bg-card))', color: 'rgb(var(--text-faint))' }}
+                >
+                  —
+                </li>
+              )}
+              {now && result.fires.length === 0 && (
                 <li className="text-sm" style={{ color: 'rgb(var(--text-muted))' }}>
                   {L('noUpcomingRun', 'No upcoming run found within 4 years.')}
                 </li>

@@ -11,6 +11,7 @@ export const permutationCalculatorL10n: ToolL10n = {
       explain: '从 n 个物品中选出 k 个的有序排列数。与组合不同,顺序有关,所以 P(n,k) ≥ C(n,k)。',
     },
     ui: {
+      errRange: '需要 0 ≤ r ≤ n',
       'in.n': '总数 (n)',
       'in.r': '排列 (r)',
       'out.result': '排列数 P(n,r)',
@@ -33,6 +34,7 @@ export const permutationCalculatorL10n: ToolL10n = {
       explain: 'Número de ordenaciones de k elementos elegidos de n. A diferencia de las combinaciones, el orden importa, por eso P(n,k) ≥ C(n,k).',
     },
     ui: {
+      errRange: 'Se necesita 0 ≤ r ≤ n',
       'in.n': 'Total de elementos (n)',
       'in.r': 'Ordenar (r)',
       'out.result': 'Permutaciones P(n,r)',
@@ -55,6 +57,7 @@ export const permutationCalculatorL10n: ToolL10n = {
       explain: 'Anzahl geordneter Anordnungen von k aus n gewählten Elementen. Anders als bei Kombinationen zählt die Reihenfolge, daher P(n,k) ≥ C(n,k).',
     },
     ui: {
+      errRange: 'Es gilt 0 ≤ r ≤ n',
       'in.n': 'Gesamtanzahl (n)',
       'in.r': 'Anordnen (r)',
       'out.result': 'Permutationen P(n,r)',

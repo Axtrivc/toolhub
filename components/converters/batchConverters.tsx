@@ -62,7 +62,7 @@ export const AngleConverterClient = makeUnitConverter({
   digits: 6,
   units: {
     deg: { label: 'Degrees (°)', factor: 1 },
-    rad: { label: 'Radians (rad)', factor: 57.2958 },
+    rad: { label: 'Radians (rad)', factor: 180 / Math.PI },
     grad: { label: 'Gradians (grad)', factor: 0.9 },
     arcmin: { label: 'Arc minutes (′)', factor: 1 / 60 },
     arcsec: { label: 'Arc seconds (″)', factor: 1 / 3600 },

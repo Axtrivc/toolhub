@@ -9,6 +9,7 @@ const FORMULA = 'Water (oz) ≈ weight (lb) × ⅔    [ ≈ 33 ml × weight (kg)
 export const waterIntakeCalculatorL10n: ToolL10n = {
   zh: {
     ui: {
+      litersPerDay: '升/天', cupsUnit: '杯', ozUnit: '盎司',
       'in.weight': '体重',
       'in.activity': '运动量(分钟/天)',
       'in.climate': '气候',
@@ -37,6 +38,7 @@ export const waterIntakeCalculatorL10n: ToolL10n = {
   },
   es: {
     ui: {
+      litersPerDay: 'litros/día', cupsUnit: 'tazas', ozUnit: 'oz',
       'in.weight': 'Peso',
       'in.activity': 'Ejercicio (min/día)',
       'in.climate': 'Clima',
@@ -65,6 +67,7 @@ export const waterIntakeCalculatorL10n: ToolL10n = {
   },
   de: {
     ui: {
+      litersPerDay: 'Liter/Tag', cupsUnit: 'Tassen', ozUnit: 'oz',
       'in.weight': 'Gewicht',
       'in.activity': 'Bewegung (Min./Tag)',
       'in.climate': 'Klima',

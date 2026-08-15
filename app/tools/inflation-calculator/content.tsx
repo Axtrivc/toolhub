@@ -26,8 +26,8 @@ const en: ReactNode = (
       <h2>Why Inflation Matters</h2>
       <p>
         At 3% annual inflation (roughly the US historical average), prices double every 24
-        years. That means a $50,000 salary in 2000 has the same buying power as about $85,000
-        today. Wages that don&apos;t keep up with inflation make you gradually poorer, even
+        years. That means a $50,000 salary in 2000 has the same buying power as about $94,000
+        in early 2026. Wages that don&apos;t keep up with inflation make you gradually poorer, even
         if the number stays the same.
       </p>
     </div>
@@ -61,13 +61,13 @@ const zh: ReactNode = (
     <div>
       <h2>为什么通胀很重要</h2>
       <p>
-        在 3% 的年通胀率(约为美国历史平均水平)下,价格每 24 年翻一番。这意味着 2000 年的 $50,000 薪水,购买力相当于今天的约 $85,000。跟不上通胀的工资会让你逐渐变穷,即使数字保持不变。
+        在 3% 的年通胀率(约为美国历史平均水平)下,价格每 24 年翻一番。这意味着 2000 年的 $50,000 薪水,购买力相当于 2026 年初的约 $94,000。跟不上通胀的工资会让你逐渐变穷,即使数字保持不变。
       </p>
     </div>
     <div>
       <h2>70 法则</h2>
       <p>
-        一个快速的心算捷径:用 70 除以通胀率,即可得到价格翻倍所需的时间。在 3.5% 的通胀率下,价格在 <code>70 &divide; 3.5 = 20 years</code> 翻一番。在 7% 时,10 年翻一番。
+        一个快速的心算捷径:用 70 除以通胀率,即可得到价格翻倍所需的时间。在 3.5% 的通胀率下,价格在 <code>70 &divide; 3.5 = 20</code> 年内翻一番。在 7% 时,10 年翻一番。
       </p>
     </div>
     <div>
@@ -92,8 +92,8 @@ const es: ReactNode = (
       <h2>Por qué importa la inflación</h2>
       <p>
         Con una inflación anual del 3 % (aproximadamente la media histórica de EE. UU.), los precios se duplican cada 24
-        años. Eso significa que un salario de $50,000 en 2000 tiene el mismo poder adquisitivo que unos $85,000
-        hoy. Los salarios que no siguen el ritmo de la inflación te empobrecen gradualmente, aunque
+        años. Eso significa que un salario de $50,000 en 2000 tiene el mismo poder adquisitivo que unos $94,000
+        a principios de 2026. Los salarios que no siguen el ritmo de la inflación te empobrecen gradualmente, aunque
         la cifra se mantenga igual.
       </p>
     </div>
@@ -101,7 +101,7 @@ const es: ReactNode = (
       <h2>La regla del 70</h2>
       <p>
         Un atajo mental rápido: divide 70 entre la tasa de inflación para hallar el tiempo de duplicación.
-        Con una inflación del 3,5 %, los precios se duplican en <code>70 &divide; 3.5 = 20 years</code>. Al 7 %, se
+        Con una inflación del 3,5 %, los precios se duplican en <code>70 &divide; 3.5 = 20</code> años. Al 7 %, se
         duplican en 10 años.
       </p>
     </div>
@@ -130,7 +130,7 @@ const de: ReactNode = (
       <h2>Warum Inflation wichtig ist</h2>
       <p>
         Bei 3 % jährlicher Inflation (etwa dem historischen US-Durchschnitt) verdoppeln sich die Preise alle 24
-        Jahre. Das bedeutet, dass ein Gehalt von $50,000 im Jahr 2000 heute etwa die gleiche Kaufkraft wie $85,000
+        Jahre. Das bedeutet, dass ein Gehalt von $50,000 im Jahr 2000 Anfang 2026 etwa die gleiche Kaufkraft wie $94,000
         hat. Löhne, die mit der Inflation nicht Schritt halten, machen dich allmählich ärmer, selbst
         wenn die Zahl gleich bleibt.
       </p>
@@ -139,7 +139,7 @@ const de: ReactNode = (
       <h2>Die 70er-Regel</h2>
       <p>
         Eine schnelle Kopfübung: Teile 70 durch die Inflationsrate, um die Verdopplungszeit zu finden.
-        Bei 3,5 % Inflation verdoppeln sich die Preise in <code>70 &divide; 3.5 = 20 years</code>. Bei 7 %
+        Bei 3,5 % Inflation verdoppeln sich die Preise in <code>70 &divide; 3.5 = 20</code> Jahren. Bei 7 %
         verdoppeln sie sich in 10 Jahren.
       </p>
     </div>

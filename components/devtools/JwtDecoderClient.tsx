@@ -81,7 +81,7 @@ export function JwtDecoderClient() {
     const expired = p.exp < nowSec
     const date = new Date(p.exp * 1000)
     return {
-      label: `${date.toLocaleString()} (${expired ? L('statusExpired', 'expired') : L('statusValid', 'valid')})`,
+      label: `${date.toLocaleString(locale)} (${expired ? L('statusExpired', 'expired') : L('statusValid', 'valid')})`,
       expired,
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

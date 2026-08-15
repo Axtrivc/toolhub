@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useEffect, useRef } from 'react'
 import { useApp } from './providers/AppProviders'
 import { t } from '@/lib/i18n'
 import { motion, AnimatePresence, useReducedMotion } from './motion/MotionPrimitives'
@@ -24,13 +24,27 @@ export function CopyButton({ value, label, disabled }: CopyButtonProps) {
   const { locale } = useApp()
   const [copied, setCopied] = useState(false)
   const reduceMotion = useReducedMotion()
+  // "✓ Copied" 回退计时器:重复复制时重置;卸载时清理,避免对已卸载组件 setState
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+
+  const armCopiedReset = useCallback(() => {
+    if (timerRef.current) clearTimeout(timerRef.current)
+    timerRef.current = setTimeout(() => setCopied(false), 1500)
+  }, [])
+
+  useEffect(
+    () => () => {
+      if (timerRef.current) clearTimeout(timerRef.current)
+    },
+    [],
+  )
 
   const handleCopy = useCallback(async () => {
     if (!value) return
     try {
       await navigator.clipboard.writeText(value)
       setCopied(true)
-      setTimeout(() => setCopied(false), 1500)
+      armCopiedReset()
     } catch {
       const textarea = document.createElement('textarea')
       textarea.value = value
@@ -41,13 +55,13 @@ export function CopyButton({ value, label, disabled }: CopyButtonProps) {
       try {
         document.execCommand('copy')
         setCopied(true)
-        setTimeout(() => setCopied(false), 1500)
+        armCopiedReset()
       } catch {
         // ignore
       }
       document.body.removeChild(textarea)
     }
-  }, [value])
+  }, [value, armCopiedReset])
 
   return (
     <motion.button

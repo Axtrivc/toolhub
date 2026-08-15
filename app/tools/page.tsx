@@ -62,7 +62,7 @@ export default function ToolsHubPage() {
         {categories.map(([category, categoryTools]) => (
           <Link
             key={category}
-            href={`/?category=${encodeURIComponent(category)}#${encodeURIComponent(category)}`}
+            href={`/?category=${encodeURIComponent(category)}#all-tools`}
             className="rounded-full border px-4 py-1.5 text-sm font-medium transition hover:bg-brand-50"
             style={{
               borderColor: 'rgb(var(--border))',

@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useMemo, useCallback } from 'react'
+import { useState, useMemo, useCallback, useId } from 'react'
 import { CopyButton } from '@/components/CopyButton'
 import { LoadSampleButton } from '@/components/LoadSampleButton'
 import { useApp } from '@/components/providers/AppProviders'
@@ -76,16 +76,19 @@ function Slider({
   onChange: (v: number) => void
   unit?: string
 }) {
+  // useId 保证同页多个 Slider 的 label/input 正确配对(可访问性)
+  const id = useId()
   return (
     <div>
       <div className="mb-1 flex items-center justify-between">
-        <label className="text-xs font-medium text-slate-600 dark:text-slate-300">{label}</label>
+        <label htmlFor={id} className="text-xs font-medium text-slate-600 dark:text-slate-300">{label}</label>
         <span className="font-mono text-xs text-slate-400">
           {value}
           {unit}
         </span>
       </div>
       <input
+        id={id}
         type="range"
         min={min}
         max={max}

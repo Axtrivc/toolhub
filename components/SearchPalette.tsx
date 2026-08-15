@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useId, useMemo, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
@@ -45,6 +45,11 @@ export function SearchPalette({ tools, locale, open, onClose }: SearchPalettePro
   const [mounted, setMounted] = useState(false) // SSR 安全:仅在 client 渲染 portal
   const inputRef = useRef<HTMLInputElement>(null)
   const listRef = useRef<HTMLUListElement>(null)
+  // 打开前的焦点元素:所有关闭路径(ESC / Enter 跳转 / 点击遮罩)统一经 open=false
+  // 触发下方 effect cleanup,把焦点归还给它(键盘用户不掉焦点)。
+  const restoreFocusRef = useRef<HTMLElement | null>(null)
+  // listbox 语义:listId 用于 input aria-controls 与 option id(aria-activedescendant)
+  const listId = useId()
   const reduceMotion = useReducedMotion()
   const router = useRouter()
 
@@ -75,6 +80,9 @@ export function SearchPalette({ tools, locale, open, onClose }: SearchPalettePro
   // ── 打开/关闭副作用 ──
   useEffect(() => {
     if (!open) return
+    // 记录打开前的焦点元素(通常为 Header 搜索按钮),供关闭时归还
+    restoreFocusRef.current =
+      document.activeElement instanceof HTMLElement ? document.activeElement : null
     // 每次打开重置状态 + 聚焦输入框(下一帧,确保已挂载)
     setQuery('')
     setActiveIndex(0)
@@ -85,6 +93,8 @@ export function SearchPalette({ tools, locale, open, onClose }: SearchPalettePro
     return () => {
       window.cancelAnimationFrame(id)
       document.body.style.overflow = prev
+      // 关闭(open 翻 false / 组件卸载)时归还焦点,覆盖 ESC/Enter/遮罩点击全部路径
+      restoreFocusRef.current?.focus()
     }
   }, [open])
 
@@ -229,7 +239,14 @@ export function SearchPalette({ tools, locale, open, onClose }: SearchPalettePro
               autoFocus
               autoComplete="off"
               spellCheck={false}
+              role="combobox"
+              aria-expanded="true"
+              aria-autocomplete="list"
               aria-label={t(locale, 'searchPalettePlaceholder')}
+              aria-controls={listId}
+              aria-activedescendant={
+                results[activeIndex] ? `${listId}-opt-${activeIndex}` : undefined
+              }
             />
             <kbd
               className="hidden shrink-0 rounded border border-gray-200 px-1.5 py-0.5 text-xs font-medium dark:border-gray-700"
@@ -248,12 +265,18 @@ export function SearchPalette({ tools, locale, open, onClose }: SearchPalettePro
               {t(locale, 'searchNoResults')}
             </div>
           ) : (
-            <ul ref={listRef} className="scrollbar-none flex-1 overflow-y-auto p-2">
+            <ul ref={listRef} id={listId} role="listbox" className="scrollbar-none flex-1 overflow-y-auto p-2">
               {results.map((tool, idx) => {
                 const isActive = idx === activeIndex
                 const icon = getToolIcon(tool)
                 return (
-                  <li key={tool.slug} data-idx={idx}>
+                  <li
+                    key={tool.slug}
+                    data-idx={idx}
+                    id={`${listId}-opt-${idx}`}
+                    role="option"
+                    aria-selected={isActive}
+                  >
                     <Link
                       href={`/tools/${tool.slug}/`}
                       onClick={onClose}

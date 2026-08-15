@@ -378,7 +378,7 @@ function beautifyJs(src: string, unit: string): string {
 const VOID_TAGS = new Set(['area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input', 'link', 'meta', 'param', 'source', 'track', 'wbr'])
 const INLINE_TAGS = new Set(['a', 'abbr', 'b', 'bdi', 'bdo', 'br', 'button', 'cite', 'code', 'data', 'dfn', 'em', 'i', 'img', 'input', 'kbd', 'label', 'mark', 'q', 'rp', 'rt', 'ruby', 's', 'samp', 'select', 'small', 'span', 'strong', 'sub', 'sup', 'textarea', 'time', 'u', 'var', 'wbr'])
 
-const TOKEN_RE = /<!--[\s\S]*?-->|<!doctype[^>]*>|<script\b[\s\S]*?<\/script\s*>|<style\b[\s\S]*?<\/style\s*>|<\/?[a-zA-Z][^>]*>|[^<]+/gi
+const TOKEN_RE = /<!--[\s\S]*?-->|<!doctype[^>]*>|<script\b[\s\S]*?<\/script\s*>|<style\b[\s\S]*?<\/style\s*>|<\/?[a-zA-Z][^>]*>|[^<]+|</gi
 
 function beautifyHtml(src: string, unit: string): string {
   const tokens = src.match(TOKEN_RE) ?? []
@@ -438,8 +438,8 @@ function beautifyHtml(src: string, unit: string): string {
       lines.push(unit.repeat(level) + `</${name}>`)
       continue
     }
-    // 开标签
-    if (/^</.test(token)) {
+    // 开标签(裸 `<` 落入下方文本分支)
+    if (/^<[a-zA-Z]/.test(token)) {
       const name = (token.match(/^<\s*([a-zA-Z0-9-]+)/)?.[1] ?? '').toLowerCase()
       const selfClose = /\/\s*>$/.test(token) || VOID_TAGS.has(name)
       if (INLINE_TAGS.has(name)) {

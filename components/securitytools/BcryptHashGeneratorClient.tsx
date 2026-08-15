@@ -115,6 +115,9 @@ export function BcryptHashGeneratorClient() {
     }
     setBusy(true)
     try {
+      if (typeof crypto === 'undefined' || !crypto.subtle) {
+        throw new Error(L('errorNoWebCrypto', 'Web Crypto API is not available here. It requires a secure (HTTPS) context and a modern browser.'))
+      }
       await nextTick()
       if (h.startsWith('$2a$') || h.startsWith('$2b$') || h.startsWith('$2y$')) {
         setVerifyResult(compareSync(verifyPassword, h))

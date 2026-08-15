@@ -329,6 +329,17 @@ export const SimpleInterestCalculatorClient = makeCalculatorClient({
 })
 
 // ── 单价比较器 ──
+// 量纲家族:重量/体积/件数互不可比;只有同家族才折算到基准单位(g / ml / ct)比单价
+const UNIT_FAMILY: Record<string, string> = {
+  mg: 'weight', g: 'weight', kg: 'weight', oz: 'weight', lb: 'weight',
+  ml: 'volume', l: 'volume',
+  ct: 'count',
+}
+const UNIT_TO_BASE: Record<string, number> = {
+  mg: 0.001, g: 1, kg: 1000, oz: 28.349523125, lb: 453.59237,
+  ml: 1, l: 1000,
+  ct: 1,
+}
 export const UnitPriceCalculatorClient = makeCalculatorClient({
   slug: 'unit-price-calculator',
   inputs: [
@@ -355,11 +366,19 @@ export const UnitPriceCalculatorClient = makeCalculatorClient({
     const p2 = toNum(v.price2), s2 = toNum(v.size2)
     if (s1 <= 0 || s2 <= 0) return { unit1price: '—', unit2price: '—', winner: '—' }
     const u1 = p1 / s1, u2 = p2 / s2
-    const cheaper = u1 <= u2 ? 'Option 1' : 'Option 2'
+    // 同家族归一后比较(如 g vs kg 折到每克);跨家族(g vs ml/ct)只展示单价,不判定优劣
+    const fam1 = UNIT_FAMILY[v.unit1] ?? v.unit1
+    const fam2 = UNIT_FAMILY[v.unit2] ?? v.unit2
+    let winner = '—'
+    if (fam1 === fam2) {
+      const n1 = u1 / (UNIT_TO_BASE[v.unit1] ?? 1)
+      const n2 = u2 / (UNIT_TO_BASE[v.unit2] ?? 1)
+      winner = n1 <= n2 ? 'Option 1' : 'Option 2'
+    }
     return {
       unit1price: `${fmtUSDValue(u1)} / ${v.unit1}`,
       unit2price: `${fmtUSDValue(u2)} / ${v.unit2}`,
-      winner: cheaper,
+      winner,
     }
   },
   note: '🛒 Compare real value across package sizes. The bigger box isn\'t always cheaper per unit.',

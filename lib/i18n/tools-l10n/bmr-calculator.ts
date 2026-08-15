@@ -9,6 +9,7 @@ const FORMULA = 'BMR(men) = 10W + 6.25H − 5A + 5\nBMR(women) = 10W + 6.25H −
 export const bmrCalculatorL10n: ToolL10n = {
   zh: {
     ui: {
+      caloriesPerDay: '千卡/天',
       'in.gender': '性别',
       'opt.gender.male': '男',
       'opt.gender.female': '女',
@@ -36,6 +37,7 @@ export const bmrCalculatorL10n: ToolL10n = {
   },
   es: {
     ui: {
+      caloriesPerDay: 'kcal/día',
       'in.gender': 'Sexo',
       'opt.gender.male': 'Hombre',
       'opt.gender.female': 'Mujer',
@@ -63,6 +65,7 @@ export const bmrCalculatorL10n: ToolL10n = {
   },
   de: {
     ui: {
+      caloriesPerDay: 'kcal/Tag',
       'in.gender': 'Geschlecht',
       'opt.gender.male': 'Männlich',
       'opt.gender.female': 'Weiblich',

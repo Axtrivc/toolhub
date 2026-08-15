@@ -94,15 +94,29 @@ export function FaviconGeneratorClient() {
   )
 
   // 图片加载完成后存到 ref,并生成各尺寸预览
-  // (预览必须在这里生成:onload 是异步的,若在 render 期读 imgRef 会拿到旧图/空图)
+  // (预览必须在这里生成:onload 是异步的,若在 render 期读 imgRef 会拿到旧图/空图;
+  //  cancelled 防快速换图时旧图 onload 回写;解码失败或尺寸为 0 时必须报错,
+  //  否则 drawSquare 的 side=0 会静默导出一张空白 PNG)
   useEffect(() => {
     if (!imgSrc) {
       imgRef.current = null
       setPreviews([])
       return
     }
+    let cancelled = false
     const img = new Image()
+    const fail = (msg: string) => {
+      if (cancelled) return
+      imgRef.current = null
+      setPreviews([])
+      setError(msg)
+    }
     img.onload = () => {
+      if (cancelled) return
+      if (img.naturalWidth < 1 || img.naturalHeight < 1) {
+        fail(L('errImageEmpty', 'The image has no usable dimensions (empty or broken file).'))
+        return
+      }
       imgRef.current = img
       const tmp = document.createElement('canvas')
       setPreviews(
@@ -112,8 +126,12 @@ export function FaviconGeneratorClient() {
         }),
       )
     }
+    img.onerror = () => fail(L('errDecodeImage', 'Could not decode the image file.'))
     img.src = imgSrc
-  }, [imgSrc])
+    return () => {
+      cancelled = true
+    }
+  }, [imgSrc, locale])
 
   // 导出指定尺寸的 PNG
   const exportSize = useCallback(

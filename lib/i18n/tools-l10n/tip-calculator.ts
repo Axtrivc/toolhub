@@ -17,6 +17,7 @@ export const tipCalculatorL10n: ToolL10n = {
       { q: '多人怎么分摊小费?', a: '先把小费加到总账单上,再除以人数即可均摊。如果各人消费差距大,可先算每人应付的餐费,再分别乘以相同的小费比例后求和。' },
     ],
     ui: {
+      errMinOnePerson: '请至少输入 1 人',
       'in.bill': '账单金额', 'inSuffix.bill': '$', 'in.tipPct': '小费比例', 'inSuffix.tipPct': '%', 'in.people': '人数',
       'out.tip': '小费金额', 'out.total': '总账单', 'out.perPerson': '人均', 'outSub.perPerson': '均摊',
       note: '💡 常见小费比例:服务尚可 15%,服务不错 18%,服务很好 20% 以上。',
@@ -34,6 +35,7 @@ export const tipCalculatorL10n: ToolL10n = {
       { q: '¿Cómo reparto la propina en un grupo?', a: 'Primero suma la propina a la cuenta total, luego divide entre el número de personas para un reparto igualitario. Si los pedidos varían mucho, calcula la parte de cada persona, aplica el mismo porcentaje de propina a cada una y suma.' },
     ],
     ui: {
+      errMinOnePerson: 'Introduce al menos 1 persona',
       'in.bill': 'Importe de la cuenta', 'inSuffix.bill': '$', 'in.tipPct': 'Porcentaje de propina', 'inSuffix.tipPct': '%', 'in.people': 'Número de personas',
       'out.tip': 'Importe de propina', 'out.total': 'Cuenta total', 'out.perPerson': 'Por persona', 'outSub.perPerson': 'Reparto igualitario',
       note: '💡 Propinas habituales: 15 % para servicio adecuado, 18 % para buen servicio, 20 %+ para servicio excelente.',
@@ -51,6 +53,7 @@ export const tipCalculatorL10n: ToolL10n = {
       { q: 'Wie teile ich das Trinkgeld in einer Gruppe?', a: 'Addiere zuerst das Trinkgeld zur Gesamtrechnung und teile dann durch die Personenanzahl für eine gleiche Aufteilung. Wenn die Bestellungen stark abweichen, berechne den Anteil jeder Person, wende denselben Trinkgeld-Prozentsatz auf jeden an und summiere.' },
     ],
     ui: {
+      errMinOnePerson: 'Gib mindestens 1 Person an',
       'in.bill': 'Rechnungsbetrag', 'inSuffix.bill': '$', 'in.tipPct': 'Trinkgeld-Prozentsatz', 'inSuffix.tipPct': '%', 'in.people': 'Anzahl Personen',
       'out.tip': 'Trinkgeldbetrag', 'out.total': 'Gesamtrechnung', 'out.perPerson': 'Pro Person', 'outSub.perPerson': 'Gleiche Aufteilung',
       note: '💡 Übliche Trinkgelder: 15 % für ordentlichen Service, 18 % für guten Service, 20 %+ für ausgezeichneten Service.',

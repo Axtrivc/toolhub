@@ -1158,7 +1158,7 @@ export const toolFaqs: Record<string, FaqPair[]> = {
     },
     {
       q: 'What image size should I use?',
-      a: 'For og:image and twitter:image use a 1.91:1 ratio at 1200x630px, kept under 1 MB and at least 8 MB for very detailed images. Square 1080x1080 works for some platforms but 1200x630 is the safest universal choice for link previews.',
+      a: 'For og:image and twitter:image use a 1.91:1 ratio at 1200x630px, kept under 1 MB (most platforms cap at 5–8 MB). Square 1080x1080 works for some platforms but 1200x630 is the safest universal choice for link previews.',
     },
     {
       q: 'Why is my preview not updating after I deploy?',

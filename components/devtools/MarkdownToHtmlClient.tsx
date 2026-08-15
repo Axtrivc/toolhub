@@ -81,8 +81,12 @@ function isSafeUrl(url: string): boolean {
 /** 行内格式:粗体/斜体/删除线/代码/链接/图片 */
 function renderInline(text: string): string {
   let s = escapeHtml(text)
-  // 行内代码 `code`(先处理,避免内部被其它规则匹配)
-  s = s.replace(/`([^`]+)`/g, (_m, code) => `<code>${code}</code>`)
+  // 行内代码 `code`:先摘出为占位符,内容不再被后续规则改写
+  const codes: string[] = []
+  s = s.replace(/`([^`]+)`/g, (_m, code) => {
+    codes.push(code)
+    return `\uE000${codes.length - 1}\uE001`
+  })
   // 图片 ![alt](url) — 先于链接。不安全 URL 退化为纯 alt 文本。
   s = s.replace(/!\[([^\]]*)\]\(([^)\s]+)\)/g, (_m, alt, url) => {
     if (!isSafeUrl(url)) return alt
@@ -99,6 +103,8 @@ function renderInline(text: string): string {
   s = s.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
   // 斜体 *text*
   s = s.replace(/(^|[^*])\*([^*]+)\*/g, '$1<em>$2</em>')
+  // 还原行内代码占位符
+  s = s.replace(/\uE000(\d+)\uE001/g, (_m, idx) => `<code>${codes[Number(idx)] ?? ''}</code>`)
   return s
 }
 
@@ -113,12 +119,25 @@ function markdownToHtml(md: string): string {
   let i = 0
   const n = lines.length
 
-  // 列表状态
-  let listType: 'ul' | 'ol' | null = null
+  // 列表状态:栈式管理,按缩进支持嵌套;每层 li 延迟闭合以容纳嵌套列表
+  const listStack: { type: 'ul' | 'ol'; indent: number; liOpen: boolean }[] = []
+  const closeLi = () => {
+    const top = listStack[listStack.length - 1]
+    if (top?.liOpen) {
+      out.push('</li>')
+      top.liOpen = false
+    }
+  }
+  const closeListTo = (indent: number) => {
+    while (listStack.length && listStack[listStack.length - 1].indent > indent) {
+      closeLi()
+      out.push(`</${listStack.pop()!.type}>`)
+    }
+  }
   const closeList = () => {
-    if (listType) {
-      out.push(`</${listType}>`)
-      listType = null
+    while (listStack.length) {
+      closeLi()
+      out.push(`</${listStack.pop()!.type}>`)
     }
   }
 
@@ -199,36 +218,39 @@ function markdownToHtml(md: string): string {
       continue
     }
 
-    // 无序列表 - / * / +
+    // 无序列表 - / * / +(有序列表 1. 同一状态机处理,支持缩进嵌套)
     const ulMatch = line.match(/^(\s*)[-*+]\s+(.*)$/)
-    if (ulMatch) {
-      if (listType !== 'ul') {
-        closeList()
-        out.push('<ul>')
-        listType = 'ul'
+    const olMatch = ulMatch ? null : line.match(/^(\s*)\d+\.\s+(.*)$/)
+    if (ulMatch || olMatch) {
+      const m = (ulMatch ?? olMatch)!
+      const type: 'ul' | 'ol' = ulMatch ? 'ul' : 'ol'
+      const indent = m[1].length
+      const item = m[2]
+      closeListTo(indent)
+      const top = listStack[listStack.length - 1]
+      let openedNested = false
+      if (!top || indent > top.indent) {
+        // 嵌套列表在父 li 内展开,父 li 不闭合
+        out.push(`<${type}>`)
+        listStack.push({ type, indent, liOpen: false })
+        openedNested = true
+      } else if (top.type !== type) {
+        closeLi()
+        out.push(`</${top.type}>`)
+        listStack.pop()
+        out.push(`<${type}>`)
+        listStack.push({ type, indent, liOpen: false })
       }
-      // 任务列表项
-      const item = ulMatch[2]
-      const taskMatch = item.match(/^\[(x| )\]\s+(.*)$/i)
+      if (!openedNested) closeLi()
+      // 任务列表项(仅无序列表)
+      const taskMatch = type === 'ul' ? item.match(/^\[(x| )\]\s+(.*)$/i) : null
       if (taskMatch) {
         const checked = taskMatch[1].toLowerCase() === 'x'
-        out.push(`<li><input type="checkbox" disabled${checked ? ' checked' : ''} /> ${renderInline(taskMatch[2])}</li>`)
+        out.push(`<li><input type="checkbox" disabled${checked ? ' checked' : ''} /> ${renderInline(taskMatch[2])}`)
       } else {
-        out.push(`<li>${renderInline(item)}</li>`)
+        out.push(`<li>${renderInline(item)}`)
       }
-      i++
-      continue
-    }
-
-    // 有序列表 1.
-    const olMatch = line.match(/^(\s*)\d+\.\s+(.*)$/)
-    if (olMatch) {
-      if (listType !== 'ol') {
-        closeList()
-        out.push('<ol>')
-        listType = 'ol'
-      }
-      out.push(`<li>${renderInline(olMatch[2])}</li>`)
+      listStack[listStack.length - 1].liOpen = true
       i++
       continue
     }

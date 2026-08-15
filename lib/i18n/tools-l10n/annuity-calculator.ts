@@ -17,6 +17,7 @@ export const annuityCalculatorL10n: ToolL10n = {
       { q: '即期年金划算吗?', a: '取决于你的寿命和对有保障收入的需求。如果你预期长寿,年金很有优势,因为即使你活过精算平均寿命,保险公司也会继续支付。代价是失去对一次性本金的支配权,留给继承人的也更少。' },
     ],
     ui: {
+      errYears: '请输入大于 0 的年数',
       'in.principal': '初始本金', 'in.rate': '年回报率', 'in.years': '取款年限', 'inSuffix.years': '年',
       'out.annual': '年支付额', 'out.monthly': '月支付额', 'out.total': '总支付额',
       note: '🏦 年金:每年能取多少钱,让本金刚好撑满 N 年。常用于退休规划。',
@@ -34,6 +35,7 @@ export const annuityCalculatorL10n: ToolL10n = {
       { q: '¿Vale la pena una anualidad inmediata?', a: 'Depende de tu longevidad y de la necesidad de ingresos garantizados. Las anualidades brillan si esperas vivir mucho, porque la aseguradora sigue pagando incluso si superas el promedio actuarial. La contrapartida es perder acceso a la suma única y dejar menos a los herederos.' },
     ],
     ui: {
+      errYears: 'Introduce un número de años mayor que 0',
       'in.principal': 'Capital inicial', 'in.rate': 'Retorno anual', 'in.years': 'Periodo de pago', 'inSuffix.years': 'años',
       'out.annual': 'Pago anual', 'out.monthly': 'Pago mensual', 'out.total': 'Pagos totales',
       note: '🏦 Anualidad: cuánto puedes retirar al año para que el dinero dure exactamente N años. Habitual en la planificación de la jubilación.',
@@ -51,6 +53,7 @@ export const annuityCalculatorL10n: ToolL10n = {
       { q: 'Lohnt sich eine sofortbeginnende Rente?', a: 'Es hängt von deiner Lebenserwartung und dem Bedarf an garantiertem Einkommen ab. Renten glänzen, wenn du lange zu leben erwartest, weil der Versicherer weiter zahlt, auch wenn du das Versicherungsalter überlebst. Der Preis ist der Verlust des Zugriffs auf den Einmalbetrag und weniger für die Erben.' },
     ],
     ui: {
+      errYears: 'Gib eine Anzahl von Jahren größer als 0 ein',
       'in.principal': 'Anfangskapital', 'in.rate': 'Jahresrendite', 'in.years': 'Auszahlungszeitraum', 'inSuffix.years': 'Jahre',
       'out.annual': 'Jährliche Auszahlung', 'out.monthly': 'Monatliche Auszahlung', 'out.total': 'Gesamtauszahlungen',
       note: '🏦 Rente: wie viel du jährlich entnehmen kannst, damit das Geld genau N Jahre reicht. Typisch für die Rentenplanung.',

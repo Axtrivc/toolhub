@@ -9,7 +9,7 @@ export const reverseTextL10n: ToolL10n = {
     ui: {
       inputLabel: '你的文本',
       outputLabel: '反转结果',
-      note: '🔁 反转所有字符。适合谜题和密码。',
+      note: '🔁 反转所有字符。ZWJ 组合 emoji(家庭、旗帜)与组合变音符可能被拆开。适合谜题和密码。',
     },
     useCases: [
       '解谜和文字游戏(破译倒序信息)',
@@ -25,7 +25,7 @@ export const reverseTextL10n: ToolL10n = {
     ui: {
       inputLabel: 'Tu texto',
       outputLabel: 'Invertido',
-      note: '🔁 Invierte todos los caracteres. Útil para acertijos y cifrados.',
+      note: '🔁 Invierte todos los caracteres. Los emojis combinados (ZWJ, banderas) y los diacríticos combinantes pueden separarse. Útil para acertijos y cifrados.',
     },
     useCases: [
       'acertijos y juegos de palabras (descifrar mensajes invertidos)',
@@ -41,7 +41,7 @@ export const reverseTextL10n: ToolL10n = {
     ui: {
       inputLabel: 'Dein Text',
       outputLabel: 'Umgekehrt',
-      note: '🔁 Kehrt alle Zeichen um. Lustig für Rätsel und Chiffren.',
+      note: '🔁 Kehrt alle Zeichen um. Kombinierte Emojis (ZWJ, Flaggen) und kombinierende diakritische Zeichen können auseinanderfallen. Lustig für Rätsel und Chiffren.',
     },
     useCases: [
       'Rätsel und Wortspiele (umgekehrte Nachrichten entschlüsseln)',

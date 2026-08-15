@@ -17,6 +17,7 @@ export const capitalGainsTaxEstimatorL10n: ToolL10n = {
       { q: '如果我把收益再投资,还要交税吗?', a: '要。卖出即触发应税事件,无论你是否再投资——IRS 对已实现利得征税。只有在税收优惠账户(IRA、401k)内持有才能递延,且只有特定结构能完全避免。' },
     ],
     ui: {
+      longTerm: '长期', shortTerm: '短期',
       'in.purchase': '买入价', 'in.sale': '卖出价', 'in.years': '持有年限', 'in.taxableIncome': '应税收入', 'in.filing': '申报身份',
       'opt.filing.single': '单身', 'opt.filing.married': '已婚,联合申报',
       'out.gain': '资本利得', 'out.rate': '税率', 'out.tax': '预估应缴税款',
@@ -35,6 +36,7 @@ export const capitalGainsTaxEstimatorL10n: ToolL10n = {
       { q: '¿Pago impuestos si reinvierto lo obtenido?', a: 'Sí. Vender dispara un evento imponible aunque reinviertas — Hacienda grava la ganancia realizada. Solo mantener dentro de cuentas con ventajas fiscales (IRA, 401k) lo difiere, y solo estructuras específicas lo evitan por completo.' },
     ],
     ui: {
+      longTerm: 'Largo plazo', shortTerm: 'Corto plazo',
       'in.purchase': 'Precio de compra', 'in.sale': 'Precio de venta', 'in.years': 'Años mantenido', 'in.taxableIncome': 'Ingresos imponibles', 'in.filing': 'Estado civil',
       'opt.filing.single': 'Soltero', 'opt.filing.married': 'Casado, declaración conjunta',
       'out.gain': 'Plusvalía', 'out.rate': 'Tipo impositivo', 'out.tax': 'Impuesto estimado',
@@ -53,6 +55,7 @@ export const capitalGainsTaxEstimatorL10n: ToolL10n = {
       { q: 'Zahle ich Steuer, wenn ich den Erlös reinvestiere?', a: 'Ja. Der Verkauf löst ein steuerpflichtiges Ereignis aus, unabhängig davon, ob du reinvestierst — die Steuer behandelt den realisierten Gewinn. Nur das Halten innerhalb steuervergünstigter Konten (IRA, 401k) schiebt das auf, und nur bestimmte Strukturen vermeiden es ganz.' },
     ],
     ui: {
+      longTerm: 'Langfristig', shortTerm: 'Kurzfristig',
       'in.purchase': 'Kaufpreis', 'in.sale': 'Verkaufspreis', 'in.years': 'Haltedauer (Jahre)', 'in.taxableIncome': 'Zu versteuerndes Einkommen', 'in.filing': 'Steuerklasse',
       'opt.filing.single': 'Allein', 'opt.filing.married': 'Verheiratet, gemeinsam',
       'out.gain': 'Kapitalgewinn', 'out.rate': 'Steuersatz', 'out.tax': 'Geschätzte Steuerschuld',

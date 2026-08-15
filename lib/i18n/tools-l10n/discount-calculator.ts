@@ -17,6 +17,8 @@ export const discountCalculatorL10n: ToolL10n = {
       { q: '「几折/percent off」是什么意思?', a: '指原价被减去的百分比。30% off 表示你付原价的 70%。' },
     ],
     ui: {
+      errDiscountRange: '折扣必须在 0–100% 之间',
+      ofOriginal: '占原价',
       'in.price': '原价', 'inSuffix.price': '$', 'in.discount': '折扣', 'inSuffix.discount': '%',
       'out.savings': '你省下', 'out.final': '最终价格', 'out.paid': '你支付', 'outSub.paid': '含折扣后',
       note: '🛍️ 叠加两个折扣时,先算第一个折扣,再把结果当作新的原价算第二个。',
@@ -34,6 +36,8 @@ export const discountCalculatorL10n: ToolL10n = {
       { q: '¿Qué significa «porcentaje de descuento»?', a: 'Es el porcentaje en que se reduce el precio original. 30 % off significa que pagas el 70 % del precio original.' },
     ],
     ui: {
+      errDiscountRange: 'El descuento debe estar entre 0 y 100 %',
+      ofOriginal: 'del precio original',
       'in.price': 'Precio original', 'inSuffix.price': '$', 'in.discount': 'Descuento', 'inSuffix.discount': '%',
       'out.savings': 'Ahorrado', 'out.final': 'Precio final', 'out.paid': 'Pagas', 'outSub.paid': 'Tras descuento',
       note: '🛍️ Para apilar dos descuentos, calcula el primero y usa el resultado como nuevo precio original.',
@@ -51,6 +55,8 @@ export const discountCalculatorL10n: ToolL10n = {
       { q: 'Was bedeutet „Prozent Rabatt»?', a: 'Es ist der Prozentsatz, um den der Originalpreis gesenkt wird. 30 % off bedeutet, du zahlst 70 % des Originalpreises.' },
     ],
     ui: {
+      errDiscountRange: 'Der Rabatt muss zwischen 0 und 100 % liegen',
+      ofOriginal: 'vom Originalpreis',
       'in.price': 'Originalpreis', 'inSuffix.price': '$', 'in.discount': 'Rabatt', 'inSuffix.discount': '%',
       'out.savings': 'Du sparst', 'out.final': 'Endpreis', 'out.paid': 'Du zahlst', 'outSub.paid': 'Inklusive Rabatt',
       note: '🛍️ Um zwei Rabatte zu stapeln, berechne den ersten und nutze das Ergebnis als neuen Originalpreis.',

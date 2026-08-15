@@ -135,7 +135,9 @@ function buildMarkdown(
   const rawRows = parseDelimited(input, delim)
   if (rawRows.length === 0) return null
 
-  const colCount = Math.max(...rawRows.map((r) => r.length))
+  // 列数用普通循环求最大值:超大 CSV 下 Math.max(...arr) 会超出参数个数上限
+  let colCount = 0
+  for (const r of rawRows) if (r.length > colCount) colCount = r.length
   // ragged 行用空单元格补齐
   let raggedRows = 0
   const rows = rawRows.map((r) => {
@@ -164,10 +166,12 @@ function buildMarkdown(
 
   let lines: string[]
   if (pretty) {
-    // 等宽对齐:每列取该列最大显示宽度
-    const widths = Array.from({ length: colCount }, (_, i) =>
-      Math.max(escHeader[i].length, sepCell.length, ...escBody.map((r) => r[i].length)),
-    )
+    // 等宽对齐:每列取该列最大显示宽度(循环求最大,避免 spread 参数上限)
+    const widths = Array.from({ length: colCount }, (_, i) => {
+      let w = Math.max(escHeader[i].length, sepCell.length)
+      for (const r of escBody) if (r[i].length > w) w = r[i].length
+      return w
+    })
     const pad = (s: string, w: number) => s + ' '.repeat(Math.max(0, w - s.length))
     const fmtRow = (cells: string[]) => `| ${cells.map((c, i) => pad(c, widths[i])).join(' | ')} |`
     const sep = escHeader.map((_, i) => {

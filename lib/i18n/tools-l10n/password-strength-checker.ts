@@ -98,7 +98,7 @@ export const passwordStrengthCheckerL10n: ToolL10n = {
     ],
     faqs: [
       { q: 'Ist es sicher, hier mein echtes Passwort einzugeben?', a: 'Ja. Dieses Werkzeug verarbeitet alles lokal in deinem Browser. Es gibt keine Netzwerkanfrage – dein Passwort verlässt nie dein Gerät. Du kannst auch Variationen testen.' },
-      { q: 'Was, wenn mein Passwort in einem Datenleck auftaucht?', a: 'Die Stärke misst nur die Ratability, nicht ob es geleakt wurde. Prüfe auf Have I Been Pwned, ob dein Passwort in bekannten Lecks aufgetaucht ist.' },
+      { q: 'Was, wenn mein Passwort in einem Datenleck auftaucht?', a: 'Die Stärke misst nur die Erratbarkeit, nicht ob es geleakt wurde. Prüfe auf Have I Been Pwned, ob dein Passwort in bekannten Lecks aufgetaucht ist.' },
     ],
   },
 }

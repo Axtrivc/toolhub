@@ -69,8 +69,8 @@ function buildSegments(text: string, re: RegExp): HighlightSegment[] {
   return segments
 }
 
-/** 收集所有匹配的详情(含 capture groups) */
-function collectMatches(text: string, re: RegExp): MatchDetail[] {
+/** 收集所有匹配的详情(含 capture groups);上限与高亮一致,触及上限时 truncated=true */
+function collectMatches(text: string, re: RegExp): { details: MatchDetail[]; truncated: boolean } {
   const globalRe = new RegExp(re.source, re.flags.includes('g') ? re.flags : re.flags + 'g')
   const details: MatchDetail[] = []
   let m: RegExpExecArray | null
@@ -85,9 +85,9 @@ function collectMatches(text: string, re: RegExp): MatchDetail[] {
       match: m[0],
       groups: m.slice(1),
     })
-    if (++safety > 200) break
+    if (++safety >= 5000) return { details, truncated: true }
   }
-  return details
+  return { details, truncated: false }
 }
 
 const CHEAT_SHEET: { syntax: string; desc: string }[] = [
@@ -153,10 +153,11 @@ export function RegexTesterClient() {
     return buildSegments(safeText, compiled.re)
   }, [compiled, safeText])
 
-  const matches = useMemo<MatchDetail[]>(() => {
-    if (!compiled.re || !safeText) return []
+  const matchResult = useMemo<{ details: MatchDetail[]; truncated: boolean }>(() => {
+    if (!compiled.re || !safeText) return { details: [], truncated: false }
     return collectMatches(safeText, compiled.re)
   }, [compiled, safeText])
+  const matches = matchResult.details
 
   return (
     <div className="space-y-5">
@@ -225,7 +226,8 @@ export function RegexTesterClient() {
           </label>
           {matches.length > 0 && (
             <span className="rounded-md bg-green-50 px-2 py-0.5 text-xs font-semibold text-green-700 dark:bg-green-950/50 dark:text-green-300">
-              {matches.length} {L('matchWord', 'match')}{matches.length === 1 ? '' : L('matchPluralSuffix', 'es')}
+              {matches.length}
+              {matchResult.truncated ? '+' : ''} {L('matchWord', 'match')}{matches.length === 1 && !matchResult.truncated ? '' : L('matchPluralSuffix', 'es')}
             </span>
           )}
         </div>
@@ -290,6 +292,12 @@ export function RegexTesterClient() {
                 )}
               </div>
             ))}
+            {matches.length > 50 && (
+              <p className="text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>
+                +{matches.length - 50} {L('moreNotShown', 'more not shown')}
+                {matchResult.truncated ? L('capReached', ' — match limit reached, list truncated') : ''}
+              </p>
+            )}
           </div>
         </div>
       )}

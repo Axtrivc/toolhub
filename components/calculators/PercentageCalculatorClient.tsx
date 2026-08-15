@@ -5,15 +5,16 @@ import { useUrlState } from '@/lib/useUrlState'
 import { useApp } from '@/components/providers/AppProviders'
 import { tui } from '@/lib/i18n/tool-l10n'
 
-const fmt = (n: number, digits = 4) => {
-  if (!isFinite(n)) return '—'
-  return Number(n.toFixed(digits)).toLocaleString(undefined, { maximumFractionDigits: digits })
-}
-
 export function PercentageCalculatorClient() {
   const { locale } = useApp()
   // 取本地化 UI 串;缺失回退英文(SSR 恒英文)。
   const L = (key: string, fb: string) => tui('percentage-calculator', locale, key, fb)
+  // 数字按应用 locale 格式化;en 首帧恒 en-US(与 SSR 一致),de/es 得到本地分隔符
+  const localeTag = locale === 'en' ? 'en-US' : locale
+  const fmt = (n: number, digits = 4) => {
+    if (!isFinite(n)) return '—'
+    return Number(n.toFixed(digits)).toLocaleString(localeTag, { maximumFractionDigits: digits })
+  }
 
   // URL 同步示例:四个模式各自的输入都进 query string(?p1p=15&p1v=200&...),
   // 刷新/分享链接即恢复现场。其余计算逻辑不变。

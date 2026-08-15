@@ -81,10 +81,12 @@ function getPartsFmt(tz: string): Intl.DateTimeFormat {
 }
 
 const displayFmtCache = new Map<string, Intl.DateTimeFormat>()
-function getDisplayFmt(tz: string): Intl.DateTimeFormat {
-  let f = displayFmtCache.get(tz)
+/** 结果展示 formatter:按 tz + locale 缓存(locale 变化不影响 parts 解析,只影响展示) */
+function getDisplayFmt(tz: string, localeTag: string): Intl.DateTimeFormat {
+  const key = `${localeTag}|${tz}`
+  let f = displayFmtCache.get(key)
   if (!f) {
-    f = new Intl.DateTimeFormat('en-US', {
+    f = new Intl.DateTimeFormat(localeTag, {
       timeZone: tz,
       hourCycle: 'h23',
       weekday: 'short',
@@ -93,7 +95,7 @@ function getDisplayFmt(tz: string): Intl.DateTimeFormat {
       hour: '2-digit',
       minute: '2-digit',
     })
-    displayFmtCache.set(tz, f)
+    displayFmtCache.set(key, f)
   }
   return f
 }
@@ -158,6 +160,8 @@ export function TimezoneConverterClient() {
   const { locale } = useApp()
   // 取本地化 UI 串;缺失回退英文(SSR 恒英文)。
   const L = (key: string, fb: string) => tui('timezone-converter', locale, key, fb)
+  // 展示用 locale:en 首帧恒 en-US(computed 只在挂载后非空,SSR 不受影响)
+  const localeTag = locale === 'en' ? 'en-US' : locale
 
   const [localZone, setLocalZone] = useState('')
   const [dt, setDt] = useState('')
@@ -229,7 +233,7 @@ export function TimezoneConverterClient() {
         value,
         zone,
         label: zoneLabels[value] ?? zoneLabel(value, localZone),
-        time: getDisplayFmt(zone).format(instant),
+        time: getDisplayFmt(zone, localeTag).format(instant),
         offset: offsetLabel(zone, instant),
         shift: Math.round((Date.UTC(p.year, p.month - 1, p.day) - srcDay) / 86400000),
         hour: p.hour,
@@ -402,7 +406,9 @@ export function TimezoneConverterClient() {
                           className="rounded-full px-2 py-0.5 text-xs font-medium"
                           style={{ backgroundColor: 'rgb(251 191 36 / 0.2)', color: 'rgb(180 83 9)' }}
                         >
-                          {r.shift > 0 ? `+${r.shift} ${L('day', 'day')}` : `${r.shift} ${L('day', 'day')}`}
+                          {r.shift > 0
+                            ? `+${r.shift} ${Math.abs(r.shift) === 1 ? L('day', 'day') : L('days', 'days')}`
+                            : `${r.shift} ${Math.abs(r.shift) === 1 ? L('day', 'day') : L('days', 'days')}`}
                         </span>
                       )}
                     </td>

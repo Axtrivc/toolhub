@@ -15,7 +15,11 @@ export const URLQueryParserClient = makeTextTool({
   transform: (t) => {
     try {
       const qIndex = t.indexOf('?')
-      const query = qIndex >= 0 ? t.slice(qIndex + 1) : t
+      let query = qIndex >= 0 ? t.slice(qIndex + 1) : t
+      // #fragment 不是查询串的一部分:剥掉 ? 之后出现的首个 # 及其后内容
+      // (无 ? 的纯锚点 URL 同样只去掉锚点,不会把 fragment 混进参数)
+      const hashIndex = query.indexOf('#')
+      if (hashIndex >= 0) query = query.slice(0, hashIndex)
       const params = new URLSearchParams(query)
       // 重复 key 聚合成数组,而不是静默保留最后一个
       const obj: Record<string, string | string[]> = {}
@@ -114,12 +118,21 @@ export const TextDiffClient = makeTextTool({
   inputLabel: 'Format: text1 ||| text2',
   outputLabel: 'Comparison',
   defaultInput: 'the quick brown fox ||| the slow brown fox',
-  transform: (t) => {
+  transform: (t, locale) => {
     const parts = t.split(/\s*\|\|\|\s*/)
     if (parts.length > 2) return '⚠️ Use exactly one " ||| " separator between the two texts'
     const [a = '', b = ''] = parts
     const aw = a.split(/\s+/).filter(Boolean)
     const bw = b.split(/\s+/).filter(Boolean)
+    // LCS 是 O(n×m) 且每次击键都重算:超长输入直接友好提示,避免页面卡死
+    if (aw.length > 3000 || bw.length > 3000 || a.length > 20000 || b.length > 20000) {
+      return tui(
+        'text-diff',
+        locale,
+        'tooLongNote',
+        '⚠️ These texts are too long to compare here — keep each side under about 3,000 words (or 20,000 characters).',
+      )
+    }
     // 词级 LCS 对齐:中间插入/删除后,后续相同词不再被逐位误报为差异。
     // dp[i][j] = aw[i:] 与 bw[j:] 的最长公共子序列长度
     const n = aw.length

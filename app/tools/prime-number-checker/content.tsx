@@ -23,7 +23,7 @@ const en: ReactNode = (
       <ul>
         <li>2 is the only even prime</li>
         <li>There are infinitely many primes (Euclid proved this ~300 BC)</li>
-        <li>The largest known prime has over 24 million digits</li>
+        <li>The largest known prime, 2^136,279,841 − 1 (found October 2024), has over 41 million digits</li>
         <li>Primes become less common as numbers get larger, but never run out</li>
       </ul>
     </div>
@@ -49,7 +49,7 @@ const zh: ReactNode = (
       <ul>
         <li>2 是唯一的偶数质数</li>
         <li>质数有无穷多个(欧几里得在约公元前 300 年证明了这一点)</li>
-        <li>已知最大的质数超过 2400 万位</li>
+        <li>已知最大的质数是 2^136,279,841 − 1(2024 年 10 月发现),超过 4100 万位</li>
         <li>数字越大,质数越稀少,但永远不会耗尽</li>
       </ul>
     </div>
@@ -75,7 +75,7 @@ const es: ReactNode = (
       <ul>
         <li>2 es el único primo par</li>
         <li>Hay infinitos primos (Euclides lo demostró ~300 a. C.)</li>
-        <li>El mayor primo conocido tiene más de 24 millones de dígitos</li>
+        <li>El mayor primo conocido, 2^136,279,841 − 1 (hallado en octubre de 2024), tiene más de 41 millones de dígitos</li>
         <li>Los primos se vuelven menos frecuentes a medida que los números crecen, pero nunca se agotan</li>
       </ul>
     </div>
@@ -101,7 +101,7 @@ const de: ReactNode = (
       <ul>
         <li>2 ist die einzige gerade Primzahl</li>
         <li>Es gibt unendlich viele Primzahlen (Euklid bewies das ~300 v. Chr.)</li>
-        <li>Die größte bekannte Primzahl hat über 24 Millionen Stellen</li>
+        <li>Die größte bekannte Primzahl, 2^136,279,841 − 1 (entdeckt im Oktober 2024), hat über 41 Millionen Stellen</li>
         <li>Primzahlen werden seltener, je größer die Zahlen werden, gehen aber nie aus</li>
       </ul>
     </div>

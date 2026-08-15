@@ -62,8 +62,7 @@ const zh: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>这是什么工具？</h2>
     <p>
-      这个<strong>汽车贷款计算器</strong>根据车辆价格、首
-      付、置换价值、销售税、APR 和贷款期限来估算你每月的车贷还款——然后生成一份可以
+      这个<strong>汽车贷款计算器</strong>根据车辆价格、首付、置换价值、销售税、APR 和贷款期限来估算你每月的车贷还款——然后生成一份可以
       导出为 CSV 的完整摊销计划。它 100% 在你的浏览器中运行，你输入的数字永远不会离开你的设备。
     </p>
 
@@ -151,8 +150,7 @@ const de: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>Was ist dieses Werkzeug?</h2>
     <p>
-      Dieser <strong>Autokredit-Rechner</strong> schätzt deine monatliche Autorate aus Fahrzeugpreis, An
-      zahlung, Trade-in-Wert, Mehrwertsteuer, APR und Kreditlaufzeit — und erstellt danach einen vollständigen Tilgungsplan, den du
+      Dieser <strong>Autokredit-Rechner</strong> schätzt deine monatliche Autorate aus Fahrzeugpreis, Anzahlung, Trade-in-Wert, Mehrwertsteuer, APR und Kreditlaufzeit — und erstellt danach einen vollständigen Tilgungsplan, den du
       als CSV exportieren kannst. Er läuft zu 100 % in deinem Browser, sodass die Zahlen, die du eingibst, dein Gerät nie verlassen.
     </p>
 
@@ -185,7 +183,7 @@ const de: ReactNode = (
       <p>
         Längere Laufzeiten (72–84 Monate) senken die Monatsrate, treiben aber den Gesamtzins stark nach oben — vergleiche dasselbe
         Auto bei 48 gegenüber 84 Monaten, um den Unterschied zu sehen. Eine höhere Anzahlung oder ein Trade-in senken sowohl
-        die Rate als auch den Zins und bewahren dich davor, <em>„underwater"</em> zu sein (mehr zu schulden, als das Auto
+        die Rate als auch den Zins und bewahren dich davor, <em>„underwater“</em> zu sein (mehr zu schulden, als das Auto
         wert ist). Hol dir vor dem Händlerbesuch eine Vorabgenehmigung von einer Bank oder Kreditgenossenschaft, damit du APRs vergleichen kannst, und
         verhandle immer den Fahrzeugpreis, nicht die Monatsrate.
       </p>

@@ -11,6 +11,7 @@ export const ratioCalculatorL10n: ToolL10n = {
       explain: '用两项的最大公约数去除以化简比。缩放时两项乘以同一系数,比例保持不变。',
     },
     ui: {
+      errAB: 'A 和 B 不能为 0',
       'in.a': 'A',
       'in.b': 'B',
       'in.c': 'C(留空则求解)',
@@ -35,6 +36,7 @@ export const ratioCalculatorL10n: ToolL10n = {
       explain: 'Simplifica una razón dividiendo ambos términos entre su máximo común divisor. Escalar multiplica ambos términos por el mismo factor, conservando la proporción.',
     },
     ui: {
+      errAB: 'A y B no pueden ser 0',
       'in.a': 'A',
       'in.b': 'B',
       'in.c': 'C (o déjalo en blanco para resolver)',
@@ -59,6 +61,7 @@ export const ratioCalculatorL10n: ToolL10n = {
       explain: 'Ein Verhältnis wird vereinfacht, indem man beide Seiten durch ihren ggT teilt. Beim Skalieren werden beide Seiten mit demselben Faktor multipliziert, das Verhältnis bleibt erhalten.',
     },
     ui: {
+      errAB: 'A und B dürfen nicht 0 sein',
       'in.a': 'A',
       'in.b': 'B',
       'in.c': 'C (oder leer lassen zum Lösen)',

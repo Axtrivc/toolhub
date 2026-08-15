@@ -20,6 +20,15 @@ const STRENGTH_COLORS = [
   'bg-green-500',
 ]
 
+// score(0-4)→ tui key / 英文兜底(lib/password.ts 只给数值,文案由 UI 层按 locale 映射)
+const STRENGTH_KEYS = [
+  { key: 'strengthEmpty', fb: 'Empty' },
+  { key: 'strengthVeryWeak', fb: 'Very Weak' },
+  { key: 'strengthWeak', fb: 'Weak' },
+  { key: 'strengthStrong', fb: 'Strong' },
+  { key: 'strengthVeryStrong', fb: 'Very Strong' },
+]
+
 export function PasswordGeneratorClient() {
   const { locale } = useApp()
   const L = (key: string, fb: string) => tui('password-generator', locale, key, fb)
@@ -70,7 +79,7 @@ export function PasswordGeneratorClient() {
             ))}
           </div>
           <span className="shrink-0 whitespace-nowrap text-right text-xs font-medium text-slate-600 sm:text-sm">
-            {strength.label} ({strength.entropyBits} {L('bits', 'bits')})
+            {L(STRENGTH_KEYS[strength.score].key, STRENGTH_KEYS[strength.score].fb)} ({strength.entropyBits} {L('bits', 'bits')})
           </span>
         </div>
       </div>

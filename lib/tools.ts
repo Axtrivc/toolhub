@@ -311,7 +311,7 @@ export const tools: ToolMeta[] = [
       'monthly payout from principal',
       'annuity withdrawal rate calculator',
     ],
-    titleLongTail: 'Annuity Payout Calculator by Years - Monthly &',
+    titleLongTail: 'Annuity Payout Calculator - Monthly & Annual Income',
     descriptionLongTail: 'Find annual and monthly payouts from a principal over N years. See how long your savings last at any withdrawal rate, instantly. Free, no signup.',
   },
   {
@@ -375,7 +375,7 @@ export const tools: ToolMeta[] = [
       'retirement savings projection',
       'retirement nest egg by 65',
     ],
-    titleLongTail: 'Retirement Calculator with Growth - Nest Egg by',
+    titleLongTail: 'Retirement Calculator - Project Your Nest Egg',
     descriptionLongTail: 'Project your retirement savings with compound growth and contributions. See if you are on track to retire by your target age. Free, no signup.',
   },
   {
@@ -572,7 +572,7 @@ export const tools: ToolMeta[] = [
     descriptionLongTail: 'Find the final price after percent off or stacked discounts and coupons. Reverse it to find the original price, instantly. Free, no signup.',
   },
 
-  // ─────────── ⚙️ Developer Tools (19) ───────────
+  // ─────────── ⚙️ Developer Tools (37) ───────────
   {
     slug: 'json-formatter', name: 'JSON Formatter',
     title: 'Free JSON Formatter - Beautify & Validate JSON Online',
@@ -866,7 +866,7 @@ export const tools: ToolMeta[] = [
       'generate dummy text',
       'lorem ipsum multiple paragraphs',
     ],
-    titleLongTail: 'Lorem Ipsum Generator - Placeholder Text for',
+    titleLongTail: 'Lorem Ipsum Generator - Placeholder Text for Mockups',
     descriptionLongTail: 'Generate placeholder text for mockups and designs. Create one or many Lorem Ipsum paragraphs of dummy text instantly and privately. Free, no signup.',
   },
   {
@@ -967,7 +967,7 @@ export const tools: ToolMeta[] = [
       'slugify text with separator',
       'clean permalink generator',
     ],
-    titleLongTail: 'URL Slug Generator - SEO-Friendly Slugs from',
+    titleLongTail: 'URL Slug Generator - SEO-Friendly Slugs from Text',
     descriptionLongTail: 'Convert titles into clean, SEO-friendly URL slugs instantly. Slugify any text with custom separators, lowercase, and transliteration. Free, no signup.',
   },
   {
@@ -1059,7 +1059,7 @@ export const tools: ToolMeta[] = [
       'Upload a PNG, JPG, or WebP and get a Base64 data URI to embed in HTML, CSS, or JSON. Your image is read locally and never uploaded. Free, no signup.',
   },
 
-  // ─────────── 🔤 Text Tools (12) ───────────
+  // ─────────── 🔤 Text Tools (24) ───────────
   {
     slug: 'word-counter',
     name: 'Word Counter',
@@ -1393,7 +1393,7 @@ export const tools: ToolMeta[] = [
       'find items in one list not other',
       'deduplicate and diff two text lists',
     ],
-    titleLongTail: 'List Diff & Intersection Checker - Compare Two',
+    titleLongTail: 'List Diff & Intersection Checker - Compare Lists',
     descriptionLongTail:
       'Paste two lists and instantly see items only in list A, only in list B, in both (intersection), and the union. Handles duplicates. Free, no signup.',
   },
@@ -1642,7 +1642,7 @@ export const tools: ToolMeta[] = [
       'how to convert c to f',
       'fahrenheit to celsius formula',
     ],
-    titleLongTail: 'Temperature Converter - Celsius to Fahrenheit in',
+    titleLongTail: 'Temperature Converter - Celsius to Fahrenheit & Kelvin',
     descriptionLongTail: 'Convert Celsius to Fahrenheit with our instant tool. Also handles Fahrenheit to Celsius and Kelvin for science and cooking. Free, no signup.',
   },
   {
@@ -1864,7 +1864,7 @@ export const tools: ToolMeta[] = [
       'lottery odds combinations calculator',
       'ncr formula calculator',
     ],
-    titleLongTail: 'Combination Calculator - nCr, n Choose r with',
+    titleLongTail: 'Combination Calculator - nCr, n Choose r with Steps',
     descriptionLongTail: 'Calculate combinations (n choose r) for probability and odds. Solve lottery odds and nCr problems with the full formula shown. Free, no signup.',
   },
   {
@@ -1896,7 +1896,7 @@ export const tools: ToolMeta[] = [
       'circle area and circumference',
       'diameter from radius calculator',
     ],
-    titleLongTail: 'Circle Calculator - Area, Circumference &',
+    titleLongTail: 'Circle Calculator - Area, Circumference & Diameter',
     descriptionLongTail: 'Find circle area, circumference, and diameter from the radius. Get all three values with formulas shown for math and engineering. Free, no signup.',
   },
   {
@@ -1944,7 +1944,7 @@ export const tools: ToolMeta[] = [
       'variance and mean calculator',
       'standard deviation of data set',
     ],
-    titleLongTail: 'Standard Deviation Calculator with Steps - Mean &',
+    titleLongTail: 'Standard Deviation Calculator with Steps - Mean & Variance',
     descriptionLongTail: 'Calculate standard deviation, variance, and mean from any list. Switch between population and sample deviation with steps shown. Free, no signup.',
   },
   {
@@ -2035,7 +2035,7 @@ export const tools: ToolMeta[] = [
       'sum min max range calculator',
       'arithmetic mean calculator',
     ],
-    titleLongTail: 'Average Calculator - Mean, Median, Min, Max &',
+    titleLongTail: 'Average Calculator - Mean, Median, Min, Max & Range',
     descriptionLongTail: 'Calculate mean, median, sum, min, max, and range of any number list. Get instant statistics by pasting your data. Free, no signup.',
   },
   {
@@ -2248,7 +2248,7 @@ export const tools: ToolMeta[] = [
       'convert svg code to image',
       'rasterize svg 2x 3x scale',
     ],
-    titleLongTail: 'SVG to PNG & WebP Converter - Any Scale,',
+    titleLongTail: 'SVG to PNG & WebP Converter - Any Scale, In-Browser',
     descriptionLongTail:
       'Turn SVG into PNG or WebP at 1x-3x scale in your browser - your graphics never leave the device. Paste code or upload a file. Free, no signup.',
   },
@@ -2401,7 +2401,7 @@ export const tools: ToolMeta[] = [
       'Upload a PNG or JPG and crop it into 16x16 and 32x32 favicons plus an Apple Touch Icon - your image never leaves your browser. Free, no signup.',
   },
 
-  // ─────────── ⏰ Time Calculators (1) ───────────
+  // ─────────── ⏰ Time Calculators (7) ───────────
   {
     slug: 'cron-parser',
     name: 'Cron Expression Parser',
@@ -2556,7 +2556,7 @@ export const tools: ToolMeta[] = [
     descriptionLongTail: 'Calculate GPA on a 4.0 scale, weighted by credits. Add courses and letter grades to see cumulative GPA for college or high school. Free, no signup.',
   },
 
-  // ─────────── 🔒 Security Tools (2) ───────────
+  // ─────────── 🔒 Security Tools (5) ───────────
   {
     slug: 'password-strength-checker', name: 'Password Strength Checker',
     title: 'Free Password Strength Checker - Test Your Password',
@@ -2601,7 +2601,7 @@ export const tools: ToolMeta[] = [
     descriptionLongTail: 'Create strong, random, secure passwords. Customize length, symbols, numbers, and uppercase, all privately in your browser. Free, no signup.',
   },
 
-  // ─────────── 💼 Business Tools (1) ───────────
+  // ─────────── 💼 Business Tools (3) ───────────
   {
     slug: 'qr-code-generator',
     name: 'QR Code Generator',
@@ -3018,7 +3018,7 @@ export const tools: ToolMeta[] = [
       'print invoice as pdf free',
       'simple invoice template generator',
     ],
-    titleLongTail: 'Free Invoice Generator - Print or Save as PDF, No',
+    titleLongTail: 'Free Invoice Generator - Print or Save as PDF, No Signup',
     descriptionLongTail: 'Fill in client, items, and tax to get a polished invoice with live preview. Print or save as PDF instantly — your data never leaves the browser.',
   },
   {
@@ -3068,7 +3068,7 @@ export const tools: ToolMeta[] = [
       'business days between two dates',
       'days since event calculator',
     ],
-    titleLongTail: 'Days Until Calculator - Live Countdown & Business',
+    titleLongTail: 'Days Until Calculator - Live Countdown & Business Days',
     descriptionLongTail: 'Enter any target date for a live countdown in days, hours, minutes, and seconds — plus business days and weeks. Switch to days-between mode. Free.',
   },
   {
@@ -3084,7 +3084,7 @@ export const tools: ToolMeta[] = [
       'reading time estimator for blog posts',
       'words per minute speaking calculator',
     ],
-    titleLongTail: 'Reading & Speaking Time Calculator - WPM Based,',
+    titleLongTail: 'Reading & Speaking Time Calculator - WPM Based, Free',
     descriptionLongTail: 'Paste your article or script to see reading time at multiple speeds and speech duration for presentations. Custom WPM slider included. Free.',
   },
   {
@@ -3116,7 +3116,7 @@ export const tools: ToolMeta[] = [
       'wordle helper green yellow grey',
       'anagram finder for word games',
     ],
-    titleLongTail: 'Wordle Solver Online - Find 5-Letter Words by',
+    titleLongTail: 'Wordle Solver Online - Find 5-Letter Words by Clues',
     descriptionLongTail: 'Enter your green, yellow, and grey clues to filter a built-in dictionary of five-letter words. Includes anagram mode for other word games. Free.',
   },
   {

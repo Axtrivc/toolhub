@@ -42,9 +42,12 @@ export function Header() {
 
   const openSearch = () => setSearchOpen(true)
 
-  // 打开/关闭时同步 body 滚动锁,并支持 ESC 关闭
+  // 打开/关闭时同步 body 滚动锁,并支持 ESC 关闭;关闭时把焦点归还给汉堡按钮
+  const drawerFocusRef = useRef<HTMLElement | null>(null)
   useEffect(() => {
     if (!menuOpen) return
+    drawerFocusRef.current =
+      document.activeElement instanceof HTMLElement ? document.activeElement : null
     const prevOverflow = document.body.style.overflow
     document.body.style.overflow = 'hidden'
     const onKey = (e: KeyboardEvent) => {
@@ -54,6 +57,7 @@ export function Header() {
     return () => {
       document.body.style.overflow = prevOverflow
       window.removeEventListener('keydown', onKey)
+      drawerFocusRef.current?.focus()
     }
   }, [menuOpen])
 
@@ -144,7 +148,7 @@ export function Header() {
         <button
           type="button"
           onClick={() => setMenuOpen((v) => !v)}
-          aria-label="Toggle menu"
+          aria-label={t(locale, 'menuToggle')}
           aria-expanded={menuOpen}
           aria-controls={panelId}
           className="flex h-10 w-10 items-center justify-center rounded-lg border transition hover:bg-slate-100 dark:border-slate-600 dark:hover:bg-slate-700 md:hidden"
@@ -173,7 +177,7 @@ export function Header() {
           {/* 遮罩层 */}
           <button
             type="button"
-            aria-label="Close menu"
+            aria-label={t(locale, 'menuClose')}
             tabIndex={-1}
             onClick={close}
             className="fixed inset-0 top-16 z-30 bg-black/40"
@@ -183,7 +187,7 @@ export function Header() {
             id={panelId}
             role="dialog"
             aria-modal="true"
-            aria-label="Menu"
+            aria-label={t(locale, 'menuLabel')}
             className="absolute inset-x-0 top-16 z-40 border-b shadow-lg"
             style={{
               borderColor: 'rgb(var(--border))',

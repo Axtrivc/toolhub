@@ -2,6 +2,7 @@
 
 import { makeCalculatorClient } from '../calculator/makeCalculatorClient'
 import { fmtUSD, fmtNum, toNum } from '@/lib/format'
+import { tui } from '@/lib/i18n/tool-l10n'
 
 /**
  * 第三批计算器 - 健康类 + 数学类 + 金融类
@@ -34,7 +35,7 @@ export const CalorieCalculatorClient = makeCalculatorClient({
     { key: 'lose', label: 'Mild weight loss', sublabel: '−0.25 kg/week' },
     { key: 'gain', label: 'Mild weight gain', sublabel: '+0.25 kg/week' },
   ],
-  compute: (v) => {
+  compute: (v, locale) => {
     const w = toNum(v.weight)
     const h = toNum(v.height)
     const a = toNum(v.age)
@@ -43,11 +44,12 @@ export const CalorieCalculatorClient = makeCalculatorClient({
       ? 10 * w + 6.25 * h - 5 * a + 5
       : 10 * w + 6.25 * h - 5 * a - 161
     const tdee = bmr * toNum(v.activity)
+    const unit = tui('calorie-calculator', locale, 'calPerDay', 'cal/day')
     return {
-      bmr: `${fmtNum(bmr, 0)} cal/day`,
-      tdee: `${fmtNum(tdee, 0)} cal/day`,
-      lose: `${fmtNum(tdee - 250, 0)} cal/day`,
-      gain: `${fmtNum(tdee + 250, 0)} cal/day`,
+      bmr: `${fmtNum(bmr, 0)} ${unit}`,
+      tdee: `${fmtNum(tdee, 0)} ${unit}`,
+      lose: `${fmtNum(tdee - 250, 0)} ${unit}`,
+      gain: `${fmtNum(tdee + 250, 0)} ${unit}`,
     }
   },
   note: '🔥 BMR = calories burned at complete rest. TDEE = total daily burn including activity. Eat less than TDEE to lose weight.',
@@ -68,7 +70,7 @@ export const BMRCalculatorClient = makeCalculatorClient({
     { key: 'bmr', label: 'Your BMR', highlight: true, sublabel: 'Mifflin-St Jeor' },
     { key: 'bmi', label: 'Your BMI' },
   ],
-  compute: (v) => {
+  compute: (v, locale) => {
     const w = toNum(v.weight)
     const h = toNum(v.height)
     const a = toNum(v.age)
@@ -77,7 +79,7 @@ export const BMRCalculatorClient = makeCalculatorClient({
       : 10 * w + 6.25 * h - 5 * a - 161
     const bmi = w / Math.pow(h / 100, 2)
     return {
-      bmr: `${fmtNum(bmr, 0)} calories/day`,
+      bmr: `${fmtNum(bmr, 0)} ${tui('bmr-calculator', locale, 'caloriesPerDay', 'calories/day')}`,
       bmi: fmtNum(bmi, 1),
     }
   },
@@ -99,17 +101,18 @@ export const WaterIntakeCalculatorClient = makeCalculatorClient({
     { key: 'cups', label: 'In cups (250ml)' },
     { key: 'oz', label: 'In ounces (US)' },
   ],
-  compute: (v) => {
+  compute: (v, locale) => {
     const w = toNum(v.weight)
     const exercise = toNum(v.activity)
     // 基础 35ml/kg + 运动 12ml/min×30min
     let ml = w * 35 + exercise * 12
     if (v.climate === 'hot') ml *= 1.1
     const liters = ml / 1000
+    const T = (key: string, fb: string) => tui('water-intake-calculator', locale, key, fb)
     return {
-      liters: `${fmtNum(liters, 2)} liters/day`,
-      cups: `${fmtNum(liters * 4, 1)} cups`,
-      oz: `${fmtNum(liters * 33.814, 1)} oz`,
+      liters: `${fmtNum(liters, 2)} ${T('litersPerDay', 'liters/day')}`,
+      cups: `${fmtNum(liters * 4, 1)} ${T('cupsUnit', 'cups')}`,
+      oz: `${fmtNum(liters * 33.814, 1)} ${T('ozUnit', 'oz')}`,
     }
   },
   note: '💧 General guideline: ~35 ml per kg body weight, more with exercise or heat. Individual needs vary.',
@@ -171,15 +174,16 @@ export const FractionCalculatorClient = makeCalculatorClient({
     { key: 'result', label: 'Result (fraction)', highlight: true },
     { key: 'decimal', label: 'As decimal' },
   ],
-  compute: (v) => {
+  compute: (v, locale) => {
+    const T = (key: string, fb: string) => tui('fraction-calculator', locale, key, fb)
     const a = toNum(v.num1)
     const b = toNum(v.den1)
     const c = toNum(v.num2)
     const d = toNum(v.den2)
-    if (b === 0 || d === 0) return { result: '⚠️ Denominator cannot be 0', decimal: '—' }
+    if (b === 0 || d === 0) return { result: `⚠️ ${T('errDenominator', 'Denominator cannot be 0')}`, decimal: '—' }
     if (v.op === 'div' && b * c === 0) {
       // 除法 a/b ÷ c/d = a·d / (b·c):c=0 是「除以 0」;a=0 时结果恒 0,直接短路
-      if (c === 0) return { result: '⚠️ Cannot divide by 0', decimal: '—' }
+      if (c === 0) return { result: `⚠️ ${T('errDivideByZero', 'Cannot divide by 0')}`, decimal: '—' }
       return { result: '0', decimal: '0.0000' }
     }
     let num: number, den: number
@@ -217,11 +221,11 @@ export const RatioCalculatorClient = makeCalculatorClient({
     { key: 'ratio', label: 'A : B = C : D', highlight: true },
     { key: 'd', label: 'D = ' },
   ],
-  compute: (v) => {
+  compute: (v, locale) => {
     const a = toNum(v.a)
     const b = toNum(v.b)
     const c = toNum(v.c)
-    if (a === 0 || b === 0) return { ratio: '⚠️ A and B cannot be 0', d: '—' }
+    if (a === 0 || b === 0) return { ratio: `⚠️ ${tui('ratio-calculator', locale, 'errAB', 'A and B cannot be 0')}`, d: '—' }
     // 解比例:A/B = C/D → D = B*C/A
     const d = (b * c) / a
     const g = gcd(a, b)
@@ -307,10 +311,10 @@ export const MortgageCalculatorClient = makeCalculatorClient({
     { key: 'loan', label: 'Loan amount' },
     { key: 'total', label: 'Total interest paid' },
   ],
-  compute: (v) => {
+  compute: (v, locale) => {
     const home = toNum(v.home)
     const downPct = toNum(v.down)
-    if (toNum(v.years) <= 0) return { monthly: '⚠️ Years must be greater than 0', loan: '—', total: '—', principal: '—' }
+    if (toNum(v.years) <= 0) return { monthly: `⚠️ ${tui('mortgage-calculator', locale, 'errYears', 'Years must be greater than 0')}`, loan: '—', total: '—', principal: '—' }
     const loan = home * (1 - downPct / 100)
     const rate = toNum(v.rate) / 100 / 12
     const months = toNum(v.years) * 12
@@ -408,14 +412,15 @@ export const CreditCardPayoffCalculatorClient = makeCalculatorClient({
     { key: 'total', label: 'Total paid' },
     { key: 'interest', label: 'Total interest' },
   ],
-  compute: (v) => {
+  compute: (v, locale) => {
+    const T = (key: string, fb: string) => tui('credit-card-payoff-calculator', locale, key, fb)
     let balance = toNum(v.balance)
     const monthlyRate = toNum(v.apr) / 100 / 12
     const payment = toNum(v.payment)
     const minInterest = balance * monthlyRate
     if (payment <= minInterest) {
       return {
-        months: '⚠️ Payment too low (must cover interest)',
+        months: `⚠️ ${T('errPaymentTooLow', 'Payment too low (must cover interest)')}`,
         total: '—',
         interest: '—',
         principal: '—',
@@ -433,14 +438,16 @@ export const CreditCardPayoffCalculatorClient = makeCalculatorClient({
     }
     if (balance > 0) {
       return {
-        months: '⚠️ Not paid off within 100 years at this payment',
+        months: `⚠️ ${T('errNotPaidOff', 'Not paid off within 100 years at this payment')}`,
         total: fmtUSD(totalPaid, 0),
         interest: fmtUSD(totalPaid - toNum(v.balance), 0),
         principal: fmtUSD(toNum(v.balance), 0),
       }
     }
     return {
-      months: `${months} months (${Math.ceil(months / 12)} yrs)`,
+      months: T('monthsYrs', '{m} months ({y} yrs)')
+        .replace('{m}', String(months))
+        .replace('{y}', String(Math.ceil(months / 12))),
       total: fmtUSD(totalPaid, 0),
       interest: fmtUSD(totalPaid - toNum(v.balance), 0),
       principal: fmtUSD(toNum(v.balance), 0),

@@ -6,11 +6,6 @@ import { ResultActions } from '@/components/ResultActions'
 import { useApp } from '@/components/providers/AppProviders'
 import { tui } from '@/lib/i18n/tool-l10n'
 
-const fmtMoney = (n: number) =>
-  isFinite(n)
-    ? n.toLocaleString(undefined, { style: 'currency', currency: 'USD', maximumFractionDigits: 2 })
-    : '—'
-
 /**
  * SaaS 指标计算:
  *  - 客户生命周期(月) = 1 / 月流失率
@@ -24,6 +19,12 @@ export function SaasLtvChurnCalculatorClient() {
   const { locale } = useApp()
   // 取本地化 UI 串;缺失回退英文(SSR 恒英文)。
   const L = (key: string, fb: string) => tui('saas-ltv-churn-calculator', locale, key, fb)
+  // 货币按应用 locale 格式化;en 首帧恒 en-US(与 SSR 一致),de/es 得到本地分隔符
+  const localeTag = locale === 'en' ? 'en-US' : locale
+  const fmtMoney = (n: number) =>
+    isFinite(n)
+      ? n.toLocaleString(localeTag, { style: 'currency', currency: 'USD', maximumFractionDigits: 2 })
+      : '—'
 
   const [arpu, setArpu] = useState('50')
   const [margin, setMargin] = useState('80')

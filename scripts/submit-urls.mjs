@@ -3,7 +3,7 @@
  *
  * 功能:
  *  1. 自动解析全站 tools.ts 中所有已上线(published: true)工具的 URL 列表
- *     (138+ 个),并补齐首页 / 分类页 / 静态页。
+ *     (169 个),并补齐首页 / 工具目录 / 静态页。
  *  2. 通过 IndexNow 协议一键批量推送到 Bing / Yandex 节点,实现秒级收录。
  *     IndexNow 是 Bing、Yandex、Naver、Seznam、Yep 联合支持的开放推送协议,
  *     单次 POST 即可同时通知多个搜索引擎,无需逐家配置。
@@ -46,21 +46,17 @@ function resolveSiteUrl() {
   return 'http://localhost:3000'
 }
 
-/** IndexNow 密钥:优先环境变量,否则扫描 public/<32+位 hex>.txt 自动发现 */
+/**
+ * IndexNow 密钥:优先环境变量,否则使用固定常量。
+ * 常量与 public/7ecd3d1526f94b9b80df4c417fced50409f3.txt(当前唯一/活跃密钥文件)
+ * 严格一致 —— 之前靠扫描 public/<hex>.txt 自动发现,当目录里出现多个密钥文件时
+ * 会因文件排序不稳定而拿到错误密钥,故改为固定值(换密钥时两处同步更新)。
+ */
+const INDEXNOW_KEY_DEFAULT = '7ecd3d1526f94b9b80df4c417fced50409f3'
+
 function resolveIndexNowKey() {
   if (process.env.INDEXNOW_KEY) return process.env.INDEXNOW_KEY
-  try {
-    const files = readdirSync(join(ROOT, 'public'))
-    // IndexNow 密钥规范:8-128 位十六进制;匹配本项目生成的 32+hex 密钥文件
-    const keyFile = files.find((f) => /^[0-9a-f]{16,128}\.txt$/i.test(f))
-    if (keyFile) {
-      const key = readFileSync(join(ROOT, 'public', keyFile), 'utf8').trim()
-      if (key) return key
-    }
-  } catch {
-    /* ignore */
-  }
-  return null
+  return INDEXNOW_KEY_DEFAULT
 }
 
 /** IndexNow 提交端点(Bing/Yandex 联合官方节点,通杀) */
@@ -132,6 +128,7 @@ function buildUrlList(siteUrl) {
   const slugs = parseToolSlugs()
   const urls = [
     siteUrl + '/',
+    siteUrl + '/tools/',
     siteUrl + '/about/',
     siteUrl + '/contact/',
     siteUrl + '/privacy/',

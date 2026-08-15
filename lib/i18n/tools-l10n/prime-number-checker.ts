@@ -7,6 +7,11 @@ import type { ToolL10n } from '../tool-l10n'
 export const primeNumberCheckerL10n: ToolL10n = {
   zh: {
     ui: {
+      noUnder2: '否(质数从 2 开始)',
+      errTooBig: '请输入不超过 1,000,000,000,000(10¹²)的数',
+      yesPrime: '是 — {n} 是质数',
+      noNotPrime: '否 — {n} 不是质数',
+      tooLarge: '过大', none: '无',
       'in.n': '要检查的数',
       'out.isPrime': '是否为质数?',
       'out.next': '下一个质数',
@@ -27,6 +32,11 @@ export const primeNumberCheckerL10n: ToolL10n = {
   },
   es: {
     ui: {
+      noUnder2: 'No (los números primos empiezan en 2)',
+      errTooBig: 'Introduce un número ≤ 1 000 000 000 000 (10¹²)',
+      yesPrime: 'Sí — {n} es primo',
+      noNotPrime: 'No — {n} no es primo',
+      tooLarge: 'Demasiado grande', none: 'Ninguno',
       'in.n': 'Número a comprobar',
       'out.isPrime': '¿Es primo?',
       'out.next': 'Siguiente primo',
@@ -47,6 +57,11 @@ export const primeNumberCheckerL10n: ToolL10n = {
   },
   de: {
     ui: {
+      noUnder2: 'Nein (Primzahlen beginnen bei 2)',
+      errTooBig: 'Gib eine Zahl ≤ 1.000.000.000.000 (10¹²) ein',
+      yesPrime: 'Ja — {n} ist eine Primzahl',
+      noNotPrime: 'Nein — {n} ist keine Primzahl',
+      tooLarge: 'Zu groß', none: 'Keine',
       'in.n': 'Zu prüfende Zahl',
       'out.isPrime': 'Primzahl?',
       'out.next': 'Nächste Primzahl',

@@ -36,8 +36,8 @@ const en: ReactNode = (
     <div>
       <h2>Which number should you use?</h2>
       <p>
-        For a <strong>blog read-time badge</strong>, the 150–200 wpm range matches what Medium and most CMSs
-        assume. For a <strong>speech or voice-over</strong>, use the speaking figures — and remember they assume
+        For a <strong>blog read-time badge</strong>, some CMS plugins assume 150–200 wpm; Medium, for example,
+        assumes ~265 wpm. For a <strong>speech or voice-over</strong>, use the speaking figures — and remember they assume
         continuous delivery. Slides, demos, pauses for laughter, and Q&amp;A easily add 10–20%, so if the tool
         says 9:30, plan a 10–11 minute slot. The <em>pages</em> estimate (250 words/page) helps when a brief asks
         for &quot;about four pages&quot;.
@@ -75,7 +75,7 @@ const zh: ReactNode = (
     <div>
       <h2>你该用哪个数字?</h2>
       <p>
-        做<strong>博客阅读时长徽章</strong>时,150–200 wpm 的区间与 Medium 及大多数 CMS 的假设一致。做<strong>演讲或配音</strong>时,请使用口语数据 —— 并记住它们假定不间断地表达。幻灯片、演示、等笑声的停顿以及 Q&A 很容易额外增加 10–20%,所以如果工具显示 9:30,请预留 10–11 分钟的档期。<em>页数</em>估算(250 词/页)在需求写「约四页」时很有用。
+        做<strong>博客阅读时长徽章</strong>时,一些 CMS 插件假设 150–200 wpm;而 Medium,例如,假设约 265 wpm。做<strong>演讲或配音</strong>时,请使用口语数据 —— 并记住它们假定不间断地表达。幻灯片、演示、等笑声的停顿以及 Q&A 很容易额外增加 10–20%,所以如果工具显示 9:30,请预留 10–11 分钟的档期。<em>页数</em>估算(250 词/页)在需求写「约四页」时很有用。
       </p>
     </div>
 
@@ -116,8 +116,8 @@ const es: ReactNode = (
     <div>
       <h2>¿Qué número deberías usar?</h2>
       <p>
-        Para una <strong>insignia de tiempo de lectura de blog</strong>, el rango de 150–200 wpm coincide con lo que
-        asumen Medium y la mayoría de los CMS. Para un <strong>discurso o locución</strong>, usa las cifras de habla
+        Para una <strong>insignia de tiempo de lectura de blog</strong>, algunos plugins de CMS asumen 150–200
+        wpm; Medium, por ejemplo, asume ~265 wpm. Para un <strong>discurso o locución</strong>, usa las cifras de habla
         — y recuerda que asumen una entrega continua. Diapositivas, demos, pausas para las risas y Q&A añaden
         fácilmente un 10–20 %, así que si la herramienta dice 9:30, planifica un hueco de 10–11 minutos. La
         estimación de <em>páginas</em> (250 palabras/página) ayuda cuando un brief pide «unas cuatro páginas».
@@ -166,8 +166,8 @@ const de: ReactNode = (
     <div>
       <h2>Welche Zahl solltest du verwenden?</h2>
       <p>
-        Für ein <strong>Blog-Read-Time-Badge</strong> entspricht der Bereich 150–200 wpm dem, was Medium und die
-        meisten CMS annehmen. Für eine <strong>Rede oder Sprechrolle</strong> verwende die Sprech-Zahlen — und denke
+        Für ein <strong>Blog-Read-Time-Badge</strong> nehmen manche CMS-Plugins 150–200 wpm an; Medium geht
+        beispielsweise von ~265 wpm aus. Für eine <strong>Rede oder Sprechrolle</strong> verwende die Sprech-Zahlen — und denke
         daran, dass sie durchgehendes Sprechen voraussetzen. Folien, Demos, Lach-Pausen und Q&A bringen leicht
         10–20 % extra, also plane bei einer Tool-Angabe von 9:30 einen 10–11-Minuten-Slot ein. Die{' '}
         <em>Seiten</em>-Schätzung (250 Wörter/Seite) hilft bei Briefings, die „ungefähr vier Seiten" verlangen.

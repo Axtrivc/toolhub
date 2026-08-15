@@ -71,9 +71,12 @@ export function makeTextTool(config: TextToolConfig): ComponentType {
     }, [input, mounted, locale])
 
     const showStats = config.showStats !== false
-    const charCount = input.length
+    // 字符数按 Unicode 码点计([...input] 按码位拆分):emoji 等增补平面字符不再按 2 计
+    const charCount = [...input].length
     // 词数走中英混合口径:纯中文不再恒为 1 词
     const wordCount = countWords(input)
+    // 数字格式跟随应用语言(en 固定 en-US,保证 SSR 首屏与英文输出不变)
+    const numberLocale = locale === 'en' ? 'en-US' : locale
 
     // 每工具可本地化字符串:有 slug → tui 取本地化;无 → config 英文原值。
     const inputLabel = config.slug && config.inputLabel
@@ -152,8 +155,8 @@ export function makeTextTool(config: TextToolConfig): ComponentType {
         {/* 统计 */}
         {showStats && (
           <div className="flex gap-4 text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>
-            <span>{t(locale, 'textToolChars', { count: charCount.toLocaleString() })}</span>
-            <span>{t(locale, 'textToolWords', { count: wordCount.toLocaleString() })}</span>
+            <span>{t(locale, 'textToolChars', { count: charCount.toLocaleString(numberLocale) })}</span>
+            <span>{t(locale, 'textToolWords', { count: wordCount.toLocaleString(numberLocale) })}</span>
           </div>
         )}
 

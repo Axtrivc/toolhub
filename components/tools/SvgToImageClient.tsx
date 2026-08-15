@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useMemo, useCallback, useRef } from 'react'
+import { useState, useMemo, useCallback, useRef, useEffect } from 'react'
 import { LoadSampleButton } from '@/components/LoadSampleButton'
 import { useApp } from '@/components/providers/AppProviders'
 import { tui } from '@/lib/i18n/tool-l10n'
@@ -30,7 +30,8 @@ const SAMPLE_SVG = `<svg xmlns="http://www.w3.org/2000/svg" width="240" height="
  * 净化用户粘贴/上传的 SVG 文本,移除 XSS/SSRF 攻击面:
  *  - 移除 <script> / <foreignObject>(脚本执行与 HTML 注入)
  *  - 移除所有 on* 事件属性(onload/onerror/onclick ...)
- *  - 移除外部资源引用(href/xlink:href 指向 http(s) 的 <use>/<image> 等,防 SSRF/隐私泄露)
+ *  - 移除外部资源引用(href/xlink:href 指向 http(s) 的 <use>/<image> 等,防 SSRF/隐私泄露;
+ *    data: URI 内联资源不发网络请求,允许保留)
  *  - 移除 XML 注释里的 CDATA / Processing Instruction
  * 用 DOMParser 解析后遍历,比纯正则稳健;失败回退到拒绝。
  */
@@ -53,8 +54,9 @@ function sanitizeSvg(raw: string): string {
         el.removeAttribute(attr.name)
         continue
       }
-      // href / xlink:href 指向 http(s) / data: 的外部资源(SSRF / 隐私泄露)
-      if ((name === 'href' || name.endsWith(':href')) && /^(https?:|\/\/|data:)/i.test(val)) {
+      // href / xlink:href 指向 http(s) / 协议相对的外部资源(SSRF / 隐私泄露)。
+      // data: URI 是内联自包含资源,不发网络请求,允许保留(自包含 SVG 的常规做法)。
+      if ((name === 'href' || name.endsWith(':href')) && /^(https?:|\/\/)/i.test(val)) {
         el.removeAttribute(attr.name)
       }
     }
@@ -78,6 +80,23 @@ export function SvgToImageClient() {
   const [downloadUrl, setDownloadUrl] = useState<string | null>(null)
   const [downloadName, setDownloadName] = useState('converted.png')
   const fileInputRef = useRef<HTMLInputElement>(null)
+  // 本次会话持有的 ObjectURL(SVG 输入 blob + 导出预览/下载 blob)。
+  // 连续转换前先 revoke 旧值,卸载时统一回收,避免泄漏累积。
+  const svgUrlRef = useRef<string | null>(null)
+  const previewUrlRef = useRef<string | null>(null)
+  const downloadUrlRef = useRef<string | null>(null)
+  // 转换序号:快速连点 Convert 时,只有最新一次的结果允许落盘(防旧回调覆盖新结果)
+  const runIdRef = useRef(0)
+
+  // 卸载时回收所有仍在持有的 ObjectURL
+  useEffect(
+    () => () => {
+      for (const url of [svgUrlRef.current, previewUrlRef.current, downloadUrlRef.current]) {
+        if (url) URL.revokeObjectURL(url)
+      }
+    },
+    [],
+  )
 
   const handleLoadSample = useCallback(() => setSvgText(SAMPLE_SVG), [])
 
@@ -90,7 +109,7 @@ export function SvgToImageClient() {
     }
     reader.onerror = () => setError(L('errorReadFile', 'Failed to read file.'))
     reader.readAsText(file)
-  }, [])
+  }, [locale])
 
   const onFileChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -102,6 +121,15 @@ export function SvgToImageClient() {
 
   // 执行转换
   const convert = useCallback(() => {
+    const runId = ++runIdRef.current
+    const releaseHeldUrls = () => {
+      // 先释放上一轮持有的全部 ObjectURL(输入 SVG + 预览 + 下载),再开新转换
+      for (const ref of [svgUrlRef, previewUrlRef, downloadUrlRef]) {
+        if (ref.current) URL.revokeObjectURL(ref.current)
+        ref.current = null
+      }
+    }
+    releaseHeldUrls()
     setError(null)
     setPreviewUrl(null)
     setDownloadUrl(null)
@@ -123,8 +151,10 @@ export function SvgToImageClient() {
 
     const blob = new Blob([safeSvg], { type: 'image/svg+xml;charset=utf-8' })
     const url = URL.createObjectURL(blob)
+    svgUrlRef.current = url
     const img = new Image()
     img.onload = () => {
+      if (runId !== runIdRef.current) return
       try {
         // SVG 需要显式 width/height 或 viewBox;取 img.naturalWidth/Height
         const baseW = img.naturalWidth || 300
@@ -141,20 +171,16 @@ export function SvgToImageClient() {
 
         canvas.toBlob(
           (outBlob) => {
+            if (runId !== runIdRef.current) return
             if (!outBlob) {
               setError(L('errorEncodeFailed', 'Conversion failed: browser could not encode the image.'))
               return
             }
             const outUrl = URL.createObjectURL(outBlob)
-            // 替换前先释放旧 ObjectURL,避免连续转换累积内存泄漏
-            setPreviewUrl((prev) => {
-              if (prev) URL.revokeObjectURL(prev)
-              return url
-            })
-            setDownloadUrl((prev) => {
-              if (prev) URL.revokeObjectURL(prev)
-              return outUrl
-            })
+            previewUrlRef.current = url
+            downloadUrlRef.current = outUrl
+            setPreviewUrl(url)
+            setDownloadUrl(outUrl)
             setDims({ w, h })
             const ext = format === 'image/png' ? 'png' : 'webp'
             setDownloadName((n) => (n.endsWith(`.${ext}`) ? n : n.replace(/\.(png|webp|svg)$/i, '') + `.${ext}`))
@@ -163,15 +189,18 @@ export function SvgToImageClient() {
           0.92,
         )
       } catch (e) {
+        if (runId !== runIdRef.current) return
         setError(e instanceof Error ? e.message : L('errorConvertFailed', 'Conversion failed.'))
       }
     }
     img.onerror = () => {
+      if (runId !== runIdRef.current) return
+      if (svgUrlRef.current === url) svgUrlRef.current = null
       URL.revokeObjectURL(url)
       setError(L('errorInvalidSvgMarkup', 'Invalid SVG — make sure it has xmlns and a viewBox or width/height.'))
     }
     img.src = url
-  }, [svgText, scale, format])
+  }, [svgText, scale, format, locale])
 
   const ext = format === 'image/png' ? 'png' : 'webp'
 
@@ -224,6 +253,7 @@ export function SvgToImageClient() {
           <select
             value={format}
             onChange={(e) => setFormat(e.target.value as Fmt)}
+            aria-label={L('format', 'Format:')}
             className="rounded border bg-white px-2 py-1 text-xs"
             style={{ borderColor: 'rgb(var(--border-strong))', color: 'rgb(var(--text))' }}
           >
@@ -236,6 +266,7 @@ export function SvgToImageClient() {
           <select
             value={scale}
             onChange={(e) => setScale(Number(e.target.value))}
+            aria-label={L('scale', 'Scale:')}
             className="rounded border bg-white px-2 py-1 text-xs"
             style={{ borderColor: 'rgb(var(--border-strong))', color: 'rgb(var(--text))' }}
           >

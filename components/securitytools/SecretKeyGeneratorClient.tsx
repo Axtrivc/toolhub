@@ -113,14 +113,15 @@ function entropyBits(format: Format, len: number): number {
 }
 
 interface Strength {
+  key: string
   label: string
   color: string
 }
 
 function strengthOf(bits: number): Strength {
-  if (bits < 80) return { label: 'Weak', color: 'rgb(220 38 38)' }
-  if (bits <= 128) return { label: 'Good', color: 'rgb(217 119 6)' }
-  return { label: 'Strong', color: 'rgb(22 163 74)' }
+  if (bits < 80) return { key: 'strengthWeak', label: 'Weak', color: 'rgb(220 38 38)' }
+  if (bits <= 128) return { key: 'strengthGood', label: 'Good', color: 'rgb(217 119 6)' }
+  return { key: 'strengthStrong', label: 'Strong', color: 'rgb(22 163 74)' }
 }
 
 export function SecretKeyGeneratorClient() {
@@ -252,7 +253,7 @@ export function SecretKeyGeneratorClient() {
           {L('entropy', 'Entropy:')} <span className="font-mono">{bits}</span> {L('bits', 'bits')}
         </span>
         <span className="rounded-full border px-3 py-1 font-semibold" style={{ borderColor: strength.color, color: strength.color }}>
-          {strength.label}
+          {L(strength.key, strength.label)}
         </span>
       </div>
 

@@ -31,7 +31,7 @@ const en: ReactNode = (
       <h2>Typical Markups by Industry</h2>
       <ul>
         <li><strong>Grocery:</strong> 10-15% markup, ~10% margin</li>
-        <li><strong>Restaurants:</strong> 60-70% markup on food (food cost ~30-40%)</li>
+        <li><strong>Restaurants:</strong> gross margin of 60-70% (food cost ~30-40% of the menu price)</li>
         <li><strong>Apparel:</strong> 100-300% markup (keystone = 100% = 50% margin)</li>
         <li><strong>Electronics:</strong> 20-40% markup, thin margins</li>
         <li><strong>Jewelry:</strong> 200-400% markup</li>
@@ -65,7 +65,7 @@ const zh: ReactNode = (
       <h2>各行业的典型加价率</h2>
       <ul>
         <li><strong>食品杂货:</strong>加价率 10-15%, 利润率约 10%</li>
-        <li><strong>餐厅:</strong>食物加价率 60-70% (食材成本约 30-40%)</li>
+        <li><strong>餐厅:</strong>毛利率 60-70% (食材成本约占菜单售价的 30-40%)</li>
         <li><strong>服装:</strong>加价率 100-300% (keystone = 100% = 50% 利润率)</li>
         <li><strong>电子产品:</strong>加价率 20-40%, 利润率薄</li>
         <li><strong>珠宝:</strong>加价率 200-400%</li>
@@ -100,7 +100,7 @@ const es: ReactNode = (
       <h2>Marcados típicos por sector</h2>
       <ul>
         <li><strong>Alimentación:</strong> marcado del 10-15 %, margen ~10 %</li>
-        <li><strong>Restaurantes:</strong> marcado del 60-70 % en comida (coste de comida ~30-40 %)</li>
+        <li><strong>Restaurantes:</strong> margen bruto del 60-70 % (coste de comida ~30-40 % del precio del menú)</li>
         <li><strong>Moda:</strong> marcado del 100-300 % (keystone = 100 % = 50 % de margen)</li>
         <li><strong>Electrónica:</strong> marcado del 20-40 %, márgenes estrechos</li>
         <li><strong>Joyería:</strong> marcado del 200-400 %</li>
@@ -136,7 +136,7 @@ const de: ReactNode = (
       <h2>Typische Aufschläge nach Branche</h2>
       <ul>
         <li><strong>Lebensmittel:</strong> 10-15 % Aufschlag, ~10 % Marge</li>
-        <li><strong>Restaurants:</strong> 60-70 % Aufschlag auf Essen (Wareneinsatz ~30-40 %)</li>
+        <li><strong>Restaurants:</strong> Bruttomarge von 60-70 % (Wareneinsatz ~30-40 % des Menüpreises)</li>
         <li><strong>Bekleidung:</strong> 100-300 % Aufschlag (Keystone = 100 % = 50 % Marge)</li>
         <li><strong>Elektronik:</strong> 20-40 % Aufschlag, geringe Margen</li>
         <li><strong>Schmuck:</strong> 200-400 % Aufschlag</li>

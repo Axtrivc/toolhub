@@ -6,11 +6,6 @@ import { ResultActions } from '@/components/ResultActions'
 import { useApp } from '@/components/providers/AppProviders'
 import { tui } from '@/lib/i18n/tool-l10n'
 
-const fmtMoney = (n: number) =>
-  isFinite(n)
-    ? n.toLocaleString(undefined, { style: 'currency', currency: 'USD', maximumFractionDigits: 2 })
-    : '—'
-
 const TERMS = ['24', '36', '48', '60', '72', '84']
 
 interface AmortRow {
@@ -47,6 +42,12 @@ function calcAutoLoan(principal: number, apr: number, months: number) {
 export function AutoLoanCalculatorClient() {
   const { locale } = useApp()
   const L = (key: string, fb: string) => tui('auto-loan-calculator', locale, key, fb)
+  // 货币按应用 locale 格式化;en 首帧恒 en-US(与 SSR 一致),de/es 得到本地分隔符
+  const localeTag = locale === 'en' ? 'en-US' : locale
+  const fmtMoney = (n: number) =>
+    isFinite(n)
+      ? n.toLocaleString(localeTag, { style: 'currency', currency: 'USD', maximumFractionDigits: 2 })
+      : '—'
 
   const [price, setPrice] = useState('35000')
   const [down, setDown] = useState('5000')
@@ -88,8 +89,9 @@ export function AutoLoanCalculatorClient() {
     }
     const d = new Date()
     d.setMonth(d.getMonth() + parsed.months)
-    setPayoffDate(d.toLocaleDateString(undefined, { month: 'long', year: 'numeric' }))
-  }, [parsed])
+    // 结清月份名同样走应用 locale(effect 内执行,不影响 SSR 首帧)
+    setPayoffDate(d.toLocaleDateString(localeTag, { month: 'long', year: 'numeric' }))
+  }, [parsed, localeTag])
 
   const summary = useMemo(() => {
     if ('error' in parsed) return `${L('summaryErrorPrefix', 'Auto loan calculator: ')}${parsed.error}`
@@ -122,7 +124,7 @@ export function AutoLoanCalculatorClient() {
         r.balance.toFixed(2),
       ]),
     ]
-    return rows.map((r) => r.join(',')).join('\n')
+    return rows.map((r) => r.map((c) => (/[",\n]/.test(c) ? `"${c.replace(/"/g, '""')}"` : c)).join(',')).join('\n')
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [parsed, summary, locale])
 

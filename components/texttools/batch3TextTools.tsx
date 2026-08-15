@@ -39,16 +39,17 @@ export const JSONMinifierClient = makeTextTool({
   note: '📦 Removes all whitespace to minimize JSON size. For API payloads and storage.',
 })
 
-/** 解析一行 CSV 为字段数组:支持 "..." 引号包裹(内含逗号)与 "" 转义引号 */
-function parseCsvLine(line: string): string[] {
-  const cells: string[] = []
+/** RFC 4180 CSV 解析(字符级状态机):支持 "..." 引号字段(内含逗号/换行)与 "" 转义引号 */
+function parseCsv(text: string): string[][] {
+  const rows: string[][] = []
+  let row: string[] = []
   let cur = ''
   let inQ = false
-  for (let i = 0; i < line.length; i++) {
-    const c = line[i]
+  for (let i = 0; i < text.length; i++) {
+    const c = text[i]
     if (inQ) {
       if (c === '"') {
-        if (line[i + 1] === '"') {
+        if (text[i + 1] === '"') {
           cur += '"'
           i++
         } else {
@@ -60,14 +61,24 @@ function parseCsvLine(line: string): string[] {
     } else if (c === '"') {
       inQ = true
     } else if (c === ',') {
-      cells.push(cur)
+      row.push(cur.trim())
       cur = ''
+    } else if (c === '\n' || c === '\r') {
+      if (c === '\r' && text[i + 1] === '\n') i++
+      row.push(cur.trim())
+      cur = ''
+      rows.push(row)
+      row = []
     } else {
       cur += c
     }
   }
-  cells.push(cur)
-  return cells.map((s) => s.trim())
+  // 末尾无换行符时收尾;以换行结尾则不再追加空行
+  if (cur !== '' || row.length > 0) {
+    row.push(cur.trim())
+    rows.push(row)
+  }
+  return rows
 }
 
 // ── CSV 转 JSON ──
@@ -77,16 +88,15 @@ export const CSVtoJSONClient = makeTextTool({
   outputLabel: 'JSON array',
   defaultInput: 'name,age,city\nJohn,30,NYC\nJane,25,LA',
   transform: (t) => {
-    const lines = t.trim().split(/\r?\n/).filter(Boolean)
-    if (lines.length < 2) return '[]'
-    const headers = parseCsvLine(lines[0])
-    const rows = lines.slice(1).map((line) => {
-      const cells = parseCsvLine(line)
+    const rows = parseCsv(t).filter((r) => r.some((c) => c !== ''))
+    if (rows.length < 2) return '[]'
+    const headers = rows[0]
+    const data = rows.slice(1).map((cells) => {
       const obj: Record<string, string> = {}
       headers.forEach((h, i) => { obj[h] = cells[i] ?? '' })
       return obj
     })
-    return JSON.stringify(rows, null, 2)
+    return JSON.stringify(data, null, 2)
   },
   note: '🔄 Converts CSV to JSON objects. Each row becomes an object using the header row as keys. Quoted fields with commas are supported.',
 })
@@ -110,7 +120,7 @@ export const JSONtoCSVClient = makeTextTool({
           }
         }
       }
-      const escape = (s: unknown) => /[",\n]/.test(String(s)) ? `"${String(s).replace(/"/g, '""')}"` : String(s)
+      const escape = (s: unknown) => /[",\n\r]/.test(String(s)) ? `"${String(s).replace(/"/g, '""')}"` : String(s)
       const lines = [headers.join(',')]
       for (const row of data) {
         const obj = (row && typeof row === 'object' && !Array.isArray(row) ? row : {}) as Record<string, unknown>

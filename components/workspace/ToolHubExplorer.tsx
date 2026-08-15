@@ -92,19 +92,18 @@ export function ToolHubExplorer({ tools, query, onQueryChange }: ToolHubExplorer
     return counts
   }, [tools])
 
-  // 过滤:搜索词(名称/简介/关键词/H1)+ 可选主题桶
+  // 过滤:搜索词(名称/简介/关键词/H1)+ 可选主题桶。
+  // 主题桶复用 hubTools 同一谓词(含兜底主题归属),保证与 hubCounts 计数徽章一致。
   const q = query.trim().toLowerCase()
   const filtered = useMemo(() => {
-    return tools.filter((tl) => {
-      if (!q && activeHub && !activeHub.categories.includes(tl.category)) return false
-      if (!q) return true
-      return (
+    if (!q) return activeHub ? hubTools(tools, activeHub) : tools
+    return tools.filter(
+      (tl) =>
         tl.name.toLowerCase().includes(q) ||
         tl.shortIntro.toLowerCase().includes(q) ||
         tl.keywords.some((k) => k.toLowerCase().includes(q)) ||
-        tl.h1.toLowerCase().includes(q)
-      )
-    })
+        tl.h1.toLowerCase().includes(q),
+    )
   }, [tools, q, activeHub])
 
   const enterVariants = reduceMotion
@@ -222,7 +221,7 @@ export function ToolHubExplorer({ tools, query, onQueryChange }: ToolHubExplorer
                 {t(locale, activeHub.titleKey)}
               </h2>
               <p className="truncate font-mono text-[11px] uppercase tracking-wider text-slate-400 dark:text-slate-500">
-                <span className="tabular-nums">{count}</span> tools · {t(locale, activeHub.taglineKey)}
+                {t(locale, 'toolsCount', { count })} · {t(locale, activeHub.taglineKey)}
               </p>
             </div>
           </div>

@@ -308,7 +308,7 @@ export const deTools: Record<string, { name: string; shortIntro: string }> = {
     shortIntro: 'Wandelt jeden Text sofort in GROSSBUCHSTABEN um.',
   },
   'lowercase-converter': {
-    name: 'In kleinbuchstaben',
+    name: 'In Kleinbuchstaben',
     shortIntro: 'Wandelt jeden Text sofort in kleinbuchstaben um.',
   },
   'title-case-converter': {

@@ -2,6 +2,7 @@
 
 import { makeCalculatorClient } from '@/components/calculator/makeCalculatorClient'
 import { fmtUSD, fmtNum, toNum } from '@/lib/format'
+import { tui } from '@/lib/i18n/tool-l10n'
 
 /**
  * 批量生成的计算器客户端组件
@@ -24,7 +25,7 @@ export const TipCalculatorClient = makeCalculatorClient({
     { key: 'total', label: 'Total bill', highlight: true },
     { key: 'perPerson', label: 'Per person', sublabel: 'Split evenly' },
   ],
-  compute: (v) => {
+  compute: (v, locale) => {
     const bill = toNum(v.bill)
     const tipPct = toNum(v.tipPct)
     const people = Math.round(toNum(v.people))
@@ -33,7 +34,10 @@ export const TipCalculatorClient = makeCalculatorClient({
     return {
       tip: fmtUSD(tip),
       total: fmtUSD(total),
-      perPerson: people >= 1 ? fmtUSD(total / people) : '⚠️ Enter at least 1 person',
+      perPerson:
+        people >= 1
+          ? fmtUSD(total / people)
+          : `⚠️ ${tui('tip-calculator', locale, 'errMinOnePerson', 'Enter at least 1 person')}`,
     }
   },
   note: '💡 Common tip rates: 15% for adequate service, 18% for good service, 20%+ for excellent service.',
@@ -53,19 +57,20 @@ export const DiscountCalculatorClient = makeCalculatorClient({
     { key: 'final', label: 'Final price', highlight: true },
     { key: 'paid', label: 'You pay', sublabel: 'Including discount' },
   ],
-  compute: (v) => {
+  compute: (v, locale) => {
     const price = toNum(v.price)
     const discount = toNum(v.discount)
+    const T = (key: string, fb: string) => tui('discount-calculator', locale, key, fb)
     // 折扣超出 0–100% 会算出负价,直接拦截
     if (discount < 0 || discount > 100) {
-      return { savings: '—', final: '⚠️ Discount must be 0–100%', paid: '—' }
+      return { savings: '—', final: `⚠️ ${T('errDiscountRange', 'Discount must be 0–100%')}`, paid: '—' }
     }
     const savings = price * (discount / 100)
     const final = price - savings
     return {
       savings: fmtUSD(savings),
       final: fmtUSD(final),
-      paid: `${fmtNum((1 - discount / 100) * 100, 0)}% of original`,
+      paid: `${fmtNum((1 - discount / 100) * 100, 0)}% ${T('ofOriginal', 'of original')}`,
     }
   },
   note: '🛍️ To stack two discounts, calculate the first discount, then use the result as the new original price.',
@@ -93,12 +98,12 @@ export const SalesTaxCalculatorClient = makeCalculatorClient({
     { key: 'tax', label: 'Tax amount' },
     { key: 'result', label: 'Final amount', highlight: true },
   ],
-  compute: (v) => {
+  compute: (v, locale) => {
     const amount = toNum(v.amount)
     const rate = toNum(v.rate)
     // remove 模式下 1 + rate/100 作分母:rate ≤ -100% 时除零/负数无意义
     if (v.mode === 'remove' && rate <= -100) {
-      return { tax: '—', result: '⚠️ Tax rate must be above −100%' }
+      return { tax: '—', result: `⚠️ ${tui('sales-tax-calculator', locale, 'errTaxRate', 'Tax rate must be above −100%')}` }
     }
     if (v.mode === 'remove') {
       // 反推:amount 是含税价,求税前

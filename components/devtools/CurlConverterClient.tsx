@@ -31,7 +31,7 @@ interface ParsedCurl {
 
 /**
  * 手写 shell tokenizer:按空白拆分,但尊重单/双引号与反斜杠转义。
- * 支持 $'...' (ANSI-C quoting,内容按字面处理)。
+ * 支持 $'...' (ANSI-C quoting,解释常见转义)。
  */
 function tokenize(input: string): string[] {
   const tokens: string[] = []
@@ -47,10 +47,23 @@ function tokenize(input: string): string[] {
     while (i < n && !/\s/.test(input[i])) {
       const c = input[i]
 
-      // $'...' ANSI-C quoting:内容按字面(无转义,除了 \\ \')
+      // $'...' ANSI-C quoting:解释 \n \t \r \\ \' \" \0,未知转义保留反斜杠+字符
       if (c === '$' && i + 1 < n && input[i + 1] === "'") {
         i += 2
         while (i < n && input[i] !== "'") {
+          if (input[i] === '\\' && i + 1 < n) {
+            const next = input[i + 1]
+            if (next === 'n') token += '\n'
+            else if (next === 't') token += '\t'
+            else if (next === 'r') token += '\r'
+            else if (next === '\\') token += '\\'
+            else if (next === "'") token += "'"
+            else if (next === '"') token += '"'
+            else if (next === '0') token += '\0'
+            else token += '\\' + next
+            i += 2
+            continue
+          }
           token += input[i]
           i++
         }

@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { CalculatorField, ResultCard, CalculatorNote } from '@/components/calculator/CalculatorField'
 import { useApp } from '@/components/providers/AppProviders'
 import { tui } from '@/lib/i18n/tool-l10n'
+import { calendarDaysBetween } from '@/lib/date-utils'
 
 /**
  * Days Countdown Calculator 客户端组件
@@ -44,16 +45,18 @@ function businessDaysBetween(a: Date, b: Date): number {
   const start = new Date(a.getFullYear(), a.getMonth(), a.getDate())
   const end = new Date(b.getFullYear(), b.getMonth(), b.getDate())
   if (start.getTime() === end.getTime()) return 0
-  const dir = start < end ? 1 : -1
-  let count = 0
-  const d = new Date(start)
-  for (let i = 0; i < 37000; i++) {
-    d.setDate(d.getDate() + dir)
-    const dow = d.getDay()
+  if (start > end) return -businessDaysBetween(b, a)
+  // 算术法(旧实现按天循环、37000 次封顶,超长区间会静默截断):
+  // 每整周恰含 5 个工作日 → 整周 ×5,剩余 ≤6 天逐个核对星期。
+  const totalDays = calendarDaysBetween(start, end)
+  const dowStart = start.getDay()
+  const fullWeeks = Math.floor(totalDays / 7)
+  let count = fullWeeks * 5
+  for (let k = fullWeeks * 7 + 1; k <= totalDays; k++) {
+    const dow = (dowStart + k) % 7
     if (dow !== 0 && dow !== 6) count++
-    if (d.getTime() === end.getTime()) break
   }
-  return count * dir
+  return count
 }
 
 function fmtClock(totalSec: number) {

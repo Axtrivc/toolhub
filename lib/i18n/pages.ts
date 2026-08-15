@@ -1146,7 +1146,7 @@ export const termsPage: LocalizedPage = {
       {
         heading: '7. Enlaces a terceros',
         blocks: [
-          'El Servicio puede contener enlaces a sitios de terceros. No nos responsabilizamos del contenido, las políticas o las prácticas de sitios de terceros y no asumimos liability alguno por ellos.',
+          'El Servicio puede contener enlaces a sitios de terceros. No nos responsabilizamos del contenido, las políticas o las prácticas de sitios de terceros y no asumimos responsabilidad alguna por ellos.',
         ],
       },
       {

@@ -11,6 +11,7 @@ export const scientificNotationConverterL10n: ToolL10n = {
       explain: '科学记数法把一个数写成尾数 a 乘以 10 的幂。指数 n 表示数量级;转换只是移动小数点。',
     },
     ui: {
+      errInvalid: '无效数字',
       'in.number': '数字',
       'out.sci': '科学计数法',
       'out.e': 'E 记数法',
@@ -33,6 +34,7 @@ export const scientificNotationConverterL10n: ToolL10n = {
       explain: 'La notación científica escribe un número como mantisa a por una potencia de diez. El exponente n indica el orden de magnitud; convertir solo mueve el decimal.',
     },
     ui: {
+      errInvalid: 'Número no válido',
       'in.number': 'Número',
       'out.sci': 'Notación científica',
       'out.e': 'Notación E',
@@ -55,6 +57,7 @@ export const scientificNotationConverterL10n: ToolL10n = {
       explain: 'Die wissenschaftliche Notation schreibt eine Zahl als Mantisse a mal einer Zehnerpotenz. Der Exponent n zeigt die Größenordnung; Umrechnen verschiebt nur das Komma.',
     },
     ui: {
+      errInvalid: 'Ungültige Zahl',
       'in.number': 'Zahl',
       'out.sci': 'Wissenschaftliche Schreibweise',
       'out.e': 'E-Schreibweise',

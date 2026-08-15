@@ -66,7 +66,7 @@ export const gpaCalculatorL10n: ToolL10n = {
     faqs: [
       { q: '¿Cómo se calcula el GPA en una escala de 4.0?', a: 'Cada letra de calificación se mapea a puntos (A=4, B=3, C=2, D=1). Multiplica los puntos de cada curso por sus horas-crédito, súmalos y divide entre el total de horas-crédito. Una A en un curso de 4 créditos aporta 16 puntos; una C en uno de 3 créditos aporta 6. El promedio ponderado es tu GPA.' },
       { q: '¿Cuál es la diferencia entre GPA ponderado y no ponderado?', a: 'El GPA no ponderado tiene un tope de 4.0 y trata todas las clases por igual. El ponderado da puntos extra por cursos de honores, AP o IB (a menudo hasta 5.0), premiando las clases más difíciles. Las universidades recalculan el GPA a su manera, así que reporta el tipo que usa tu escuela.' },
-      { q: '¿Qué GPA necesito para la universidad?', a: 'Varía mucho. El estudiante admittedo promedio en escuelas menos selectivas tiene alrededor de 3.0, mientras que las universidades selectivas suelen promediar 3,7–3,9 sin ponderar. El GPA se revisa en el contexto de la rigurosidad de los cursos y los estándares de tu escuela, no como un número aislado.' },
+      { q: '¿Qué GPA necesito para la universidad?', a: 'Varía mucho. El estudiante admitido promedio en escuelas menos selectivas tiene alrededor de 3.0, mientras que las universidades selectivas suelen promediar 3,7–3,9 sin ponderar. El GPA se revisa en el contexto de la rigurosidad de los cursos y los estándares de tu escuela, no como un número aislado.' },
     ],
   },
   de: {

@@ -11,6 +11,7 @@ export const fractionCalculatorL10n: ToolL10n = {
       explain: '加减用公分母,乘法分子分母分别相乘。结果除以最大公约数化为最简。',
     },
     ui: {
+      errDenominator: '分母不能为 0', errDivideByZero: '不能除以 0',
       'in.num1': '分子 1',
       'in.den1': '分母 1',
       'in.op': '运算',
@@ -40,6 +41,7 @@ export const fractionCalculatorL10n: ToolL10n = {
       explain: 'Suma/resta con denominador común, multiplica numeradores y denominadores. Los resultados se reducen dividiendo entre el máximo común divisor.',
     },
     ui: {
+      errDenominator: 'El denominador no puede ser 0', errDivideByZero: 'No se puede dividir entre 0',
       'in.num1': 'Numerador 1',
       'in.den1': 'Denominador 1',
       'in.op': 'Operación',
@@ -69,6 +71,7 @@ export const fractionCalculatorL10n: ToolL10n = {
       explain: 'Addition/Subtraktion mit gemeinsamem Nenner, Multiplikation von Zählern und Nennern. Ergebnisse werden durch den ggT gekürzt.',
     },
     ui: {
+      errDenominator: 'Der Nenner darf nicht 0 sein', errDivideByZero: 'Division durch 0 ist nicht möglich',
       'in.num1': 'Zähler 1',
       'in.den1': 'Nenner 1',
       'in.op': 'Operation',

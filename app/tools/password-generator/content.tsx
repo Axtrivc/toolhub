@@ -31,7 +31,8 @@ const en: ReactNode = (
       </li>
       <li>
         <strong>Mix character types.</strong> Combine uppercase letters, lowercase letters,
-        numbers, and symbols. Each type you add roughly doubles the character pool.
+        numbers, and symbols. Mixing all four types expands the pool from 26 (lowercase only) to
+        about 95 characters — every extra character then adds ~6.6 bits of entropy.
       </li>
       <li>
         <strong>Avoid the predictable.</strong> Never use names, birthdays, &quot;password123,&quot;
@@ -110,7 +111,7 @@ const zh: ReactNode = (
         <strong>加长。</strong>长度胜过复杂度。一个 20 位的随机单词密码比一个短而杂乱的密码更强。至少要 12 位;16 位以上最理想。
       </li>
       <li>
-        <strong>混合多种字符类型。</strong>结合大写字母、小写字母、数字和符号。每多一种类型,字符空间大约翻一倍。
+        <strong>混合多种字符类型。</strong>结合大写字母、小写字母、数字和符号。四种类型全部混用,字符池会从 26 个(仅小写字母)扩大到约 95 个字符——此后每多一个字符大约增加 6.6 比特的熵。
       </li>
       <li>
         <strong>避开可预测的内容。</strong>绝不使用姓名、生日、「password123」、键盘图案(qwerty)或任何能在字典里查到的词。攻击者会最先尝试这些。
@@ -176,8 +177,9 @@ const es: ReactNode = (
         aleatorias es más fuerte que una corta y embrollada. Apunta a al menos 12 caracteres; 16+ es ideal.
       </li>
       <li>
-        <strong>Mezcla tipos de caracteres.</strong> Combina mayúsculas, minúsculas, números y símbolos. Cada tipo que
-        añades duplica aproxamente el conjunto de caracteres.
+        <strong>Mezcla tipos de caracteres.</strong> Combina mayúsculas, minúsculas, números y símbolos. Mezclando
+        los cuatro tipos, el conjunto pasa de 26 (solo minúsculas) a unos 95 caracteres — cada carácter adicional
+        añade entonces ~6,6 bits de entropía.
       </li>
       <li>
         <strong>Evita lo predecible.</strong> Nunca uses nombres, cumpleaños, «password123», patrones de teclado
@@ -244,7 +246,7 @@ const de: ReactNode = (
       Passwortstärke kommt auf eins hinaus: <strong>Entropie</strong> — wie unvorhersehbar das Passwort für einen
       Angreifer ist. Je mehr Entropie (gemessen in Bit), desto länger dauert das Knacken. Ein zufälliges 16-stelliges
       Passwort aus Groß-, Kleinbuchstaben, Zahlen und Symbolen hat rund 100 Bit Entropie und würde auf moderner
-      Hardware Milliarden Jahre zum Brute-Force-Need brauchen.
+      Hardware Milliarden Jahre für eine Brute-Force-Attacke brauchen.
     </p>
 
     <h2>Wie du ein starkes Passwort erstellst</h2>
@@ -255,8 +257,9 @@ const de: ReactNode = (
         stärker als ein kurzes, wirres. Ziel auf mindestens 12 Zeichen; 16+ ist ideal.
       </li>
       <li>
-        <strong>Mische Zeichentypen.</strong> Kombiniere Groß-, Kleinbuchstaben, Zahlen und Symbole. Jeder hinzugefügte
-        Typ verdoppelt ungefähr den Zeichenpool.
+        <strong>Mische Zeichentypen.</strong> Kombiniere Groß-, Kleinbuchstaben, Zahlen und Symbole. Mischst du alle
+        vier Typen, wächst der Pool von 26 (nur Kleinbuchstaben) auf etwa 95 Zeichen — jedes zusätzliche Zeichen
+        bringt dann ~6,6 Bit Entropie.
       </li>
       <li>
         <strong>Vermeide das Vorhersehbare.</strong> Nutze nie Namen, Geburtstage, „password123", Tastaturmuster

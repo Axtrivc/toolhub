@@ -24,7 +24,7 @@ const en: ReactNode = (
     <div>
       <h2>How the estimate is computed</h2>
       <p>
-        Tokenizers such as <code>cl100k_base</code> (used by GPT-4o) split text into sub-word units, so a token
+        Tokenizers such as <code>cl100k_base</code> (used by GPT-4 and GPT-3.5) split text into sub-word units, so a token
         is roughly <strong>4 characters or 0.75 words</strong> of English. This tool starts from that classic
         chars÷4 rule of thumb, then refines it by splitting your text into word runs and punctuation: short
         words count as about one token, long words as roughly one per five characters, and each punctuation mark
@@ -47,11 +47,13 @@ const en: ReactNode = (
     <div>
       <h2>Budgeting prompts with the price table</h2>
       <p>
-        The dropdown lists per-million-token prices for GPT-4o, GPT-4o mini, Claude 3.5 Sonnet, and Claude 3.5
-        Haiku <em>as of 2025</em> — providers change pricing frequently, so verify before committing. A quick
-        sanity check: a 1,000-word prompt is roughly 1,300 tokens, which at GPT-4o input prices costs well under
-        a cent. Costs only become meaningful at scale, so multiply by your real request volume — and remember
-        that <strong>output tokens are billed separately</strong>, usually at 3–5× the input rate.
+        The dropdown lists per-million-token prices for the current flagship models from OpenAI, Anthropic,
+        Google, DeepSeek and others — for example GPT-5.6, Claude Sonnet 5 and Gemini 3.6 Flash —{' '}
+        <em>as of 2026</em>. Providers change pricing frequently, so verify before committing. A quick sanity
+        check: a 1,000-word prompt is roughly 1,300 tokens, which at the input prices in the dropdown costs at
+        most a cent or two. Costs only become meaningful at scale, so multiply by your real request volume — and
+        remember that <strong>output tokens are billed separately</strong>, usually at several times the input
+        rate.
       </p>
     </div>
   </section>
@@ -68,7 +70,7 @@ const zh: ReactNode = (
     <div>
       <h2>估算值是如何算出来的</h2>
       <p>
-        诸如 <code>cl100k_base</code>(GPT-4o 使用)之类的分词器会把文本切成子词单元,因此一个 token 大约对应英文的 <strong>4 个字符或 0.75 个单词</strong>。本工具以这条经典的「字符数 ÷ 4」经验法则为起点,再通过把文本拆分为单词段和标点来细化:短词大约算 1 个 token,长词大约每 5 个字符算 1 个,每个标点符号各算 1 个 token,最后取两种启发式的平均值。结果通常与真实计数相差约 10–20%——足够做预算估算,但不足以用于计费争议。
+        诸如 <code>cl100k_base</code>(GPT-4 和 GPT-3.5 使用)之类的分词器会把文本切成子词单元,因此一个 token 大约对应英文的 <strong>4 个字符或 0.75 个单词</strong>。本工具以这条经典的「字符数 ÷ 4」经验法则为起点,再通过把文本拆分为单词段和标点来细化:短词大约算 1 个 token,长词大约每 5 个字符算 1 个,每个标点符号各算 1 个 token,最后取两种启发式的平均值。结果通常与真实计数相差约 10–20%——足够做预算估算,但不足以用于计费争议。
       </p>
     </div>
 
@@ -82,7 +84,7 @@ const zh: ReactNode = (
     <div>
       <h2>用价格表估算 prompt 成本</h2>
       <p>
-        下拉菜单列出了 GPT-4o、GPT-4o mini、Claude 3.5 Sonnet 和 Claude 3.5 Haiku 每百万 token 的价格(<em>截至 2025 年</em>)——各提供商调价频繁,正式使用前请核实。一个快速的直觉校验:1,000 个单词的 prompt 大约是 1,300 个 token,按 GPT-4o 输入价格算远低于 1 美分。成本只有在规模上来之后才有意义,所以请乘以你的实际请求量——并记住<strong>输出 token 单独计费</strong>,通常费率是输入的 3–5 倍。
+        下拉菜单列出了 OpenAI、Anthropic、Google、DeepSeek 等各家当前旗舰模型(例如 GPT-5.6、Claude Sonnet 5、Gemini 3.6 Flash)每百万 token 的价格(<em>截至 2026 年</em>)——各提供商调价频繁,正式使用前请核实。一个快速的直觉校验:1,000 个单词的 prompt 大约是 1,300 个 token,按下拉菜单中的输入价格算最多也就一两美分。成本只有在规模上来之后才有意义,所以请乘以你的实际请求量——并记住<strong>输出 token 单独计费</strong>,通常费率是输入的数倍。
       </p>
     </div>
   </section>
@@ -102,7 +104,7 @@ const es: ReactNode = (
     <div>
       <h2>Cómo se calcula la estimación</h2>
       <p>
-        Los tokenizadores como <code>cl100k_base</code> (usado por GPT-4o) dividen el texto en unidades subléxicas,
+        Los tokenizadores como <code>cl100k_base</code> (usado por GPT-4 y GPT-3.5) dividen el texto en unidades subléxicas,
         así que un token corresponde aproximadamente a <strong>4 caracteres o 0,75 palabras</strong> de inglés. Esta
         herramienta parte de esa regla clásica de caracteres÷4 y luego la refina dividiendo tu texto en secuencias
         de palabras y signos de puntuación: las palabras cortas cuentan como un token, las largas como uno por cada
@@ -125,12 +127,13 @@ const es: ReactNode = (
     <div>
       <h2>Presupuestar prompts con la tabla de precios</h2>
       <p>
-        El menú desplegable lista los precios por millón de tokens de GPT-4o, GPT-4o mini, Claude 3.5 Sonnet y
-        Claude 3.5 Haiku <em>a fecha de 2025</em> — los proveedores cambian los precios con frecuencia, así que
-        verifica antes de comprometerte. Una comprobación rápida: un prompt de 1.000 palabras son unos 1.300 tokens,
-        que a los precios de entrada de GPT-4o cuesta bastante menos de un céntimo. Los costes solo importan a escala,
-        así que multiplícalos por tu volumen real de peticiones — y recuerda que los <strong>tokens de salida se
-        facturan aparte</strong>, normalmente a 3–5× la tarifa de entrada.
+        El menú desplegable lista los precios por millón de tokens de los modelos insignia actuales de OpenAI,
+        Anthropic, Google, DeepSeek y otros — por ejemplo GPT-5.6, Claude Sonnet 5 y Gemini 3.6 Flash —{' '}
+        <em>a fecha de 2026</em>. Los proveedores cambian los precios con frecuencia, así que verifica antes de
+        comprometerte. Una comprobación rápida: un prompt de 1.000 palabras son unos 1.300 tokens, que a los
+        precios de entrada del desplegable cuesta como mucho uno o dos céntimos. Los costes solo importan a
+        escala, así que multiplícalos por tu volumen real de peticiones — y recuerda que los{' '}
+        <strong>tokens de salida se facturan aparte</strong>, normalmente a varias veces la tarifa de entrada.
       </p>
     </div>
   </section>
@@ -150,7 +153,7 @@ const de: ReactNode = (
     <div>
       <h2>Wie die Schätzung berechnet wird</h2>
       <p>
-        Tokenizer wie <code>cl100k_base</code> (von GPT-4o verwendet) zerlegen Text in sublexikalische Einheiten,
+        Tokenizer wie <code>cl100k_base</code> (von GPT-4 und GPT-3.5 verwendet) zerlegen Text in sublexikalische Einheiten,
         sodass ein Token etwa <strong>4 Zeichen oder 0,75 Wörter</strong> Englisch entspricht. Dieses Werkzeug geht
         von dieser klassischen Zeichen÷4-Regel aus und verfeinert sie, indem es deinen Text in Wortfolgen und
         Satzzeichen zerlegt: Kurze Wörter zählen als etwa ein Token, lange als grob eins pro fünf Zeichen und jedes
@@ -173,12 +176,13 @@ const de: ReactNode = (
     <div>
       <h2>Prompts mit der Preistabelle budgetieren</h2>
       <p>
-        Das Dropdown listet die Preise pro Million Tokens für GPT-4o, GPT-4o mini, Claude 3.5 Sonnet und Claude 3.5
-        Haiku <em>Stand 2025</em> — Anbieter ändern ihre Preise häufig, also prüfe sie vor der Verbindlichkeit. Ein
-        kurzer Plausibilitätscheck: Ein 1.000-Wörter-Prompt sind etwa 1.300 Tokens, was zu GPT-4o-Eingabepreisen
-        deutlich unter einem Cent kostet. Kosten werden erst bei Skalierung relevant, also multipliziere sie mit
-        deinem tatsächlichen Anfragevolumen — und denk daran, dass <strong>Ausgabe-Tokens separat abgerechnet
-        werden</strong>, meist zum 3–5-fachen des Eingabepreises.
+        Das Dropdown listet die Preise pro Million Tokens für die aktuellen Flaggschiff-Modelle von OpenAI,
+        Anthropic, Google, DeepSeek und anderen — etwa GPT-5.6, Claude Sonnet 5 und Gemini 3.6 Flash —{' '}
+        <em>Stand 2026</em>. Anbieter ändern ihre Preise häufig, also prüfe sie vor der Verbindlichkeit. Ein
+        kurzer Plausibilitätscheck: Ein 1.000-Wörter-Prompt sind etwa 1.300 Tokens, was zu den Eingabepreisen
+        im Dropdown höchstens ein bis zwei Cent kostet. Kosten werden erst bei Skalierung relevant, also
+        multipliziere sie mit deinem tatsächlichen Anfragevolumen — und denk daran, dass{' '}
+        <strong>Ausgabe-Tokens separat abgerechnet werden</strong>, meist zum Mehrfachen des Eingabepreises.
       </p>
     </div>
   </section>

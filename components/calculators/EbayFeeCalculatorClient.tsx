@@ -6,11 +6,6 @@ import { ResultActions } from '@/components/ResultActions'
 import { useApp } from '@/components/providers/AppProviders'
 import { tui } from '@/lib/i18n/tool-l10n'
 
-const fmtMoney = (n: number) =>
-  isFinite(n)
-    ? n.toLocaleString(undefined, { style: 'currency', currency: 'USD', maximumFractionDigits: 2 })
-    : '—'
-
 type Platform = 'ebay' | 'etsy'
 
 const EBAY_PRESETS: { label: string; pct: number }[] = [
@@ -31,6 +26,12 @@ const EBAY_PRESETS: { label: string; pct: number }[] = [
 export function EbayFeeCalculatorClient() {
   const { locale } = useApp()
   const L = (key: string, fb: string) => tui('ebay-fee-calculator', locale, key, fb)
+  // 货币按应用 locale 格式化;en 首帧恒 en-US(与 SSR 一致),de/es 得到本地分隔符
+  const localeTag = locale === 'en' ? 'en-US' : locale
+  const fmtMoney = (n: number) =>
+    isFinite(n)
+      ? n.toLocaleString(localeTag, { style: 'currency', currency: 'USD', maximumFractionDigits: 2 })
+      : '—'
 
   const [platform, setPlatform] = useState<Platform>('ebay')
   const [price, setPrice] = useState('50')

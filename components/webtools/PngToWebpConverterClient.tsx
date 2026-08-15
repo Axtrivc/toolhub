@@ -66,7 +66,7 @@ export function PngToWebpConverterClient() {
     }
     reader.onerror = () => setError(L('errReadFile', 'Could not read the file.'))
     reader.readAsDataURL(file)
-  }, [])
+  }, [locale])
 
   const onInputChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -86,27 +86,36 @@ export function PngToWebpConverterClient() {
     [handleFile],
   )
 
-  // 图片解码完成后写入 ref + 记录原始尺寸
+  // 图片解码完成后写入 ref + 记录原始尺寸(cancelled 防快速换图时旧图 onload 回写)
   useEffect(() => {
     if (!imgSrc) {
       imgRef.current = null
       return
     }
+    let cancelled = false
     const img = new Image()
     img.onload = () => {
+      if (cancelled) return
       imgRef.current = img
       setSource((prev) =>
         prev ? { ...prev, width: img.naturalWidth, height: img.naturalHeight } : null,
       )
     }
-    img.onerror = () => setError(L('errDecodeImage', 'Could not decode the image file.'))
+    img.onerror = () => {
+      if (!cancelled) setError(L('errDecodeImage', 'Could not decode the image file.'))
+    }
     img.src = imgSrc
-  }, [imgSrc])
+    return () => {
+      cancelled = true
+    }
+  }, [imgSrc, locale])
 
   // 实时转换:质量滑杆或图片变化时重新编码
+  // (cancelled 防旧 toBlob 乱序覆盖:拖动质量滑杆会并发多次编码,只认最新一次)
   useEffect(() => {
     const img = imgRef.current
     if (!img || !source || source.width === 0) return
+    let cancelled = false
     const canvas = document.createElement('canvas')
     canvas.width = img.naturalWidth
     canvas.height = img.naturalHeight
@@ -115,6 +124,7 @@ export function PngToWebpConverterClient() {
     ctx.drawImage(img, 0, 0)
     canvas.toBlob(
       (blob) => {
+        if (cancelled) return
         if (!blob) {
           setError(L('errConversionFailed', 'Conversion failed in canvas.'))
           return
@@ -133,7 +143,10 @@ export function PngToWebpConverterClient() {
       'image/webp',
       quality,
     )
-  }, [imgSrc, source, quality])
+    return () => {
+      cancelled = true
+    }
+  }, [imgSrc, source, quality, locale])
 
   // 卸载时回收 objectURL
   useEffect(
@@ -180,7 +193,7 @@ export function PngToWebpConverterClient() {
           <span className="mt-1 text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>
             {L('uploadHint', 'PNG or JPG images')}
           </span>
-          <input id="png-webp-upload" type="file" accept="image/*" onChange={onInputChange} className="hidden" />
+          <input id="png-webp-upload" type="file" accept=".png,.jpg,.jpeg,image/png,image/jpeg" onChange={onInputChange} className="hidden" />
         </label>
       )}
 
@@ -220,7 +233,7 @@ export function PngToWebpConverterClient() {
             </div>
             <label htmlFor="png-webp-reupload" className="btn btn-secondary cursor-pointer text-xs">
               {L('change', 'Change')}
-              <input id="png-webp-reupload" type="file" accept="image/*" onChange={onInputChange} className="hidden" />
+              <input id="png-webp-reupload" type="file" accept=".png,.jpg,.jpeg,image/png,image/jpeg" onChange={onInputChange} className="hidden" />
             </label>
           </div>
 
@@ -285,11 +298,12 @@ export function PngToWebpConverterClient() {
                 </div>
               </div>
 
-              {/* 压缩率进度条 */}
+              {/* 压缩率指示条(meter:表示当前节省比例,而非可操作进度) */}
               <div
                 className="h-2 w-full overflow-hidden rounded-full"
                 style={{ backgroundColor: 'rgb(var(--bg-subtle))' }}
-                role="progressbar"
+                role="meter"
+                aria-label={L('savings', 'Savings')}
                 aria-valuenow={savingsWidth}
                 aria-valuemin={0}
                 aria-valuemax={100}

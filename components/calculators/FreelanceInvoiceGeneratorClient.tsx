@@ -13,8 +13,6 @@ const CURRENCIES: { code: string; symbol: string; decimals: number }[] = [
   { code: 'CNY', symbol: '¥', decimals: 2 },
 ]
 
-const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-
 interface LineItem {
   id: number
   description: string
@@ -22,11 +20,15 @@ interface LineItem {
   rate: string
 }
 
-/** 'YYYY-MM-DD' → 'Aug 9, 2026'(手写映射,避免 locale 导致的 SSG/水合不一致) */
-function formatDate(iso: string): string {
+/**
+ * 'YYYY-MM-DD' → 本地化短日期(en → 'Aug 9, 2026',与旧手写英文映射逐字节一致)。
+ * 只在挂载后(日期已在 effect 中填充)被调用,locale 走应用语言,首帧不受影响。
+ */
+function formatDate(iso: string, localeTag: string): string {
   const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(iso)
   if (!m) return iso
-  return `${MONTHS[Number(m[2]) - 1]} ${Number(m[3])}, ${m[1]}`
+  const d = new Date(Number(m[1]), Number(m[2]) - 1, Number(m[3]))
+  return d.toLocaleDateString(localeTag, { year: 'numeric', month: 'short', day: 'numeric' })
 }
 
 function toISODate(d: Date): string {
@@ -44,6 +46,8 @@ function escapeHtml(s: string): string {
 export function FreelanceInvoiceGeneratorClient() {
   const { locale } = useApp()
   const L = (key: string, fb: string) => tui('freelance-invoice-generator', locale, key, fb)
+  // 数字/日期按应用 locale 格式化;en 首帧恒 en-US(与 SSR 一致),zh/es/de 得到本地格式
+  const localeTag = locale === 'en' ? 'en-US' : locale
 
   const [yourName, setYourName] = useState('')
   const [yourEmail, setYourEmail] = useState('')
@@ -68,7 +72,7 @@ export function FreelanceInvoiceGeneratorClient() {
 
   const cur = CURRENCIES.find((c) => c.code === currency) ?? CURRENCIES[0]
   const fmt = (n: number) =>
-    `${cur.symbol}${n.toLocaleString(undefined, { minimumFractionDigits: cur.decimals, maximumFractionDigits: cur.decimals })}`
+    `${cur.symbol}${n.toLocaleString(localeTag, { minimumFractionDigits: cur.decimals, maximumFractionDigits: cur.decimals })}`
 
   const rows = useMemo(
     () =>
@@ -140,8 +144,8 @@ export function FreelanceInvoiceGeneratorClient() {
       <div style="font-size:14px;font-weight:600;">${e(clientName) || `<span style="color:#9ca3af;">${L('clientNamePlaceholder', 'Client name')}</span>`}</div>
     </div>
     <div style="text-align:right;font-size:13px;">
-      <div><span style="color:#9ca3af;">${L('issueDate', 'Issue date:')}</span> <span style="font-family:ui-monospace,monospace;">${formatDate(issueDate) || '—'}</span></div>
-      <div style="margin-top:4px;"><span style="color:#9ca3af;">${L('dueDate', 'Due date:')}</span> <span style="font-family:ui-monospace,monospace;">${formatDate(dueDate) || '—'}</span></div>
+      <div><span style="color:#9ca3af;">${L('issueDate', 'Issue date:')}</span> <span style="font-family:ui-monospace,monospace;">${formatDate(issueDate, localeTag) || '—'}</span></div>
+      <div style="margin-top:4px;"><span style="color:#9ca3af;">${L('dueDate', 'Due date:')}</span> <span style="font-family:ui-monospace,monospace;">${formatDate(dueDate, localeTag) || '—'}</span></div>
     </div>
   </div>
   <table style="width:100%;border-collapse:collapse;margin-top:32px;font-size:14px;">
@@ -338,11 +342,11 @@ ${itemRows}
             <div className="text-right text-xs">
               <div>
                 <span className="text-slate-400">{L('issueDate', 'Issue date:')}</span>{' '}
-                <span className="font-mono">{issueDate ? formatDate(issueDate) : '—'}</span>
+                <span className="font-mono">{issueDate ? formatDate(issueDate, localeTag) : '—'}</span>
               </div>
               <div className="mt-1">
                 <span className="text-slate-400">{L('dueDate', 'Due date:')}</span>{' '}
-                <span className="font-mono">{dueDate ? formatDate(dueDate) : '—'}</span>
+                <span className="font-mono">{dueDate ? formatDate(dueDate, localeTag) : '—'}</span>
               </div>
             </div>
           </div>

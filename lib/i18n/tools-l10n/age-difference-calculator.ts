@@ -7,6 +7,9 @@ import type { ToolL10n } from '../tool-l10n'
 export const ageDifferenceCalculatorL10n: ToolL10n = {
   zh: {
     ui: {
+      errInvalidDate: '日期无效(请用 YYYY-MM-DD)',
+      ymdFormat: '{y} 年 {m} 个月 {d} 天',
+      daysN: '{n} 天',
       'in.birth1': '人物 1 出生日期(YYYY-MM-DD)',
       'in.birth2': '人物 2 出生日期(YYYY-MM-DD)',
       'out.days': '相差天数',
@@ -25,6 +28,9 @@ export const ageDifferenceCalculatorL10n: ToolL10n = {
   },
   es: {
     ui: {
+      errInvalidDate: 'Fecha no válida (usa AAAA-MM-DD)',
+      ymdFormat: '{y} años, {m} meses, {d} días',
+      daysN: '{n} días',
       'in.birth1': 'Fecha de nacimiento (persona 1, AAAA-MM-DD)',
       'in.birth2': 'Fecha de nacimiento (persona 2, AAAA-MM-DD)',
       'out.days': 'Diferencia en días',
@@ -43,6 +49,9 @@ export const ageDifferenceCalculatorL10n: ToolL10n = {
   },
   de: {
     ui: {
+      errInvalidDate: 'Ungültiges Datum (verwende JJJJ-MM-TT)',
+      ymdFormat: '{y} Jahre, {m} Monate, {d} Tage',
+      daysN: '{n} Tage',
       'in.birth1': 'Geburtsdatum (Person 1, JJJJ-MM-TT)',
       'in.birth2': 'Geburtsdatum (Person 2, JJJJ-MM-TT)',
       'out.days': 'Differenz in Tagen',

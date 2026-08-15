@@ -211,9 +211,9 @@ export function buildBreadcrumbJsonLd(slug: string) {
     '@type': 'BreadcrumbList',
     itemListElement: [
       item('Home', `${SITE_URL}/`, 1),
-      // 分类层指向首页并选中该分类(与面包屑 UI 链接保持一致),
-      // 不再指向已废弃的 /tools/ 旧枢纽页。
-      item(tool.category, `${SITE_URL}/?category=${encodeURIComponent(tool.category)}#${encodeURIComponent(tool.category)}`, 2),
+      // 分类层指向首页并选中该分类(与面包屑 UI 链接保持一致;#all-tools 为
+      // 首页工具目录区锚点)。/tools/ 列表页仍在线,但分类筛选交互统一走首页。
+      item(tool.category, `${SITE_URL}/?category=${encodeURIComponent(tool.category)}#all-tools`, 2),
       item(tool.name, `${SITE_URL}/tools/${tool.slug}/`, 3),
     ],
   }
@@ -367,9 +367,4 @@ export const websiteJsonLd = {
   description: SITE_DESCRIPTION,
   // 不声明 potentialAction/SearchAction:首页从不消费 ?q 搜索参数,
   // 声明失实的搜索框会触发 Google 失配风险(声明功能却无对应实现)。
-}
-
-/** 所有已上线工具的 URL(供 sitemap 用) */
-export function getToolUrls(): string[] {
-  return getPublishedTools().map((t) => `/tools/${t.slug}/`)
 }

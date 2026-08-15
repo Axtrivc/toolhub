@@ -30,7 +30,7 @@ const en: ReactNode = (
     </div>
     <div>
       <h2>Worked Example</h2>
-      <p>You bought 100 shares at $50 ($5,000 total) and sell them at $80 ($8,000) after <strong>14 months</strong>. Your gain is <strong>$3,000</strong>, and because you held over a year it qualifies as long-term. If your taxable income puts you in the 15% long-term bracket, you owe <strong>$450</strong> in federal tax. Had you sold one month earlier (short-term) while in the 24% ordinary bracket, the same gain would cost <strong>$720</strong> &mdash; waiting those few weeks saved $270.</p>
+      <p>You bought 100 shares at $50 ($5,000 total) and sell them at $80 ($8,000) after <strong>14 months</strong>. Your gain is <strong>$3,000</strong>, and because you held over a year it qualifies as long-term. If your taxable income puts you in the 15% long-term bracket, you owe <strong>$450</strong> in federal tax. Had you sold just a few weeks earlier, before the one-year mark (short-term), while in the 24% ordinary bracket, the same gain would cost <strong>$720</strong> &mdash; holding past the one-year mark saved $270.</p>
     </div>
     <div>
       <h2>What&apos;s Not Included</h2>
@@ -62,7 +62,7 @@ const zh: ReactNode = (
     </div>
     <div>
       <h2>计算示例</h2>
-      <p>你以每股 $50 买入 100 股(合计 $5,000),在 <strong>14 个月</strong>后以 $80 卖出($8,000)。你的利得是 <strong>$3,000</strong>,由于持有超过一年,符合长期资本利得条件。如果你的应税收入处于 15% 的长期税级,需缴纳联邦税 <strong>$450</strong>。如果你在一个月前(短期)卖出,同时处于 24% 的普通税级,同样的利得需缴税 <strong>$720</strong>——多等这几周就省下了 $270。</p>
+      <p>你以每股 $50 买入 100 股(合计 $5,000),在 <strong>14 个月</strong>后以 $80 卖出($8,000)。你的利得是 <strong>$3,000</strong>,由于持有超过一年,符合长期资本利得条件。如果你的应税收入处于 15% 的长期税级,需缴纳联邦税 <strong>$450</strong>。如果你早几周、在满一年之前(短期)卖出,同时处于 24% 的普通税级,同样的利得需缴税 <strong>$720</strong>——持有满一年就省下了 $270。</p>
     </div>
     <div>
       <h2>未包含的内容</h2>
@@ -94,7 +94,7 @@ const es: ReactNode = (
     </div>
     <div>
       <h2>Ejemplo resuelto</h2>
-      <p>Compraste 100 acciones a $50 ($5,000 en total) y las vendes a $80 ($8,000) tras <strong>14 meses</strong>. Tu ganancia es <strong>$3,000</strong> y, como mantuviste las acciones más de un año, califica como largo plazo. Si tu ingreso gravable te sitúa en el tramo del 15 % de largo plazo, debes <strong>$450</strong> en impuestos federales. Si las hubieras vendido un mes antes (corto plazo) estando en el tramo ordinario del 24 %, la misma ganancia costaría <strong>$720</strong> — esperar esas pocas semanas ahorró $270.</p>
+      <p>Compraste 100 acciones a $50 ($5,000 en total) y las vendes a $80 ($8,000) tras <strong>14 meses</strong>. Tu ganancia es <strong>$3,000</strong> y, como mantuviste las acciones más de un año, califica como largo plazo. Si tu ingreso gravable te sitúa en el tramo del 15 % de largo plazo, debes <strong>$450</strong> en impuestos federales. Si las hubieras vendido unas pocas semanas antes, antes de cumplir el año (corto plazo), estando en el tramo ordinario del 24 %, la misma ganancia costaría <strong>$720</strong> — mantener la inversión más allá del año ahorró $270.</p>
     </div>
     <div>
       <h2>Lo que no está incluido</h2>
@@ -126,7 +126,7 @@ const de: ReactNode = (
     </div>
     <div>
       <h2>Durchgerechnetes Beispiel</h2>
-      <p>Du hast 100 Aktien zu $50 gekauft (insgesamt $5,000) und verkaufst sie nach <strong>14 Monaten</strong> zu $80 ($8,000). Dein Gewinn ist <strong>$3,000</strong>, und da du sie länger als ein Jahr gehalten hast, gilt er als langfristig. Wenn dein zu versteuerndes Einkommen dich in den 15 %-Langfriststeuersatz bringt, schuldest du <strong>$450</strong> Bundessteuer. Hättest du einen Monat früher (kurzfristig) verkauft, während du im 24 %-Ordentlichkeitssteuersatz lagst, würde derselbe Gewinn <strong>$720</strong> kosten — diese wenigen Wochen zu warten, hat $270 gespart.</p>
+      <p>Du hast 100 Aktien zu $50 gekauft (insgesamt $5,000) und verkaufst sie nach <strong>14 Monaten</strong> zu $80 ($8,000). Dein Gewinn ist <strong>$3,000</strong>, und da du sie länger als ein Jahr gehalten hast, gilt er als langfristig. Wenn dein zu versteuerndes Einkommen dich in den 15 %-Langfriststeuersatz bringt, schuldest du <strong>$450</strong> Bundessteuer. Hättest du nur wenige Wochen früher verkauft — vor dem Ablauf des einen Jahres (kurzfristig) —, während du im 24 %-Ordentlichkeitssteuersatz warst, würde derselbe Gewinn <strong>$720</strong> kosten — das Halten über die Ein-Jahres-Grenze hinaus hat $270 gespart.</p>
     </div>
     <div>
       <h2>Was nicht enthalten ist</h2>

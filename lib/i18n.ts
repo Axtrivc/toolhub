@@ -78,6 +78,7 @@ export interface Dict {
   heroCtaExplore: string // Hero 快捷操作栏主 CTA "Explore {count}+ Free Tools"
   // 搜索 & 筛选
   searchPlaceholder: string
+  heroSearchLabel: string // 首页 Hero 主搜索框 aria-label "Search tools"
   categoryAll: string
   showingAll: string // "Showing all {count} tools"
   showingFiltered: string // "{filtered} of {total} tools"
@@ -107,6 +108,7 @@ export interface Dict {
   // 工具页:加载示例 / 导出结果
   toolLoadSample: string
   toolSampleLoaded: string
+  toolLoadSampleTitle: string // "Auto-fill a realistic example"(按钮 title 提示)
   toolCopySummary: string
   toolDownload: string
   toolDownloaded: string
@@ -165,6 +167,7 @@ export interface Dict {
   hubTaglineConverters: string
   hubTaglineUtilities: string
   hubExploreAll: string // "Explore all {count} tools"
+  toolsCount: string // 主题头 "{count} tools"
   hubBackToThemes: string // 从主题过滤视图返回总览 "All themes"
   // 工作台折叠抽屉(Quick Access + Scratchpad 容器)
   workspaceDrawerSubtitle: string // 折叠条副标题 "Pinned tools, recents & scratchpad"
@@ -178,6 +181,10 @@ export interface Dict {
   themeDark: string
   // 语言切换 aria
   languageToggle: string
+  // 移动端菜单抽屉 aria(Header)
+  menuToggle: string // "Toggle menu"
+  menuClose: string // "Close menu"
+  menuLabel: string // "Menu"(抽屉 dialog aria-label)
   // 全局搜索弹窗(Cmd/Ctrl+K)
   searchOpen: string // 打开搜索(aria-label / title)
   searchPaletteTitle: string // 弹窗 aria-label
@@ -193,6 +200,12 @@ export interface Dict {
   notFoundTitle: string // "Page not found"
   notFoundBody: string // 说明 + 引导看热门工具
   notFoundBack: string // "← Back to all tools" 按钮
+  // 错误边界 & 全局 Loading(app/error.tsx / app/loading.tsx)
+  errorTitle: string // "Something went wrong"
+  errorBody: string // 说明 + 引导
+  errorRetry: string // "Try again"
+  errorHome: string // "Back to home"
+  loading: string // "Loading…"
   // Cookie 同意横幅
   cookieAriaLabel: string // dialog aria-label
   cookieBody: string // 横幅正文(含占位 {privacy} 用于插入隐私政策链接)
@@ -208,6 +221,11 @@ export interface Dict {
   blogCtaBody: string // 底部" Prefer doing over reading?" 段
   blogCtaExplore: string // "Explore all tools"
   blogCtaAbout: string // "About {site}"
+  // 博客文章底部工具箱推荐 Banner(BlogToolsBanner)
+  blogBannerEyebrow: string // "Try the toolbox"
+  blogBannerTitle: string // "Featured tools, free and in-browser"
+  blogBannerBody: string
+  blogBannerBrowse: string // "Browse all {count}+ tools"
   // 首页底部 SEO 文案区(Why Use / Browse / Popular 三段)
   seoWhyTitle: string
   seoWhyBody1: string
@@ -271,6 +289,7 @@ const en: Dict = {
   heroOfflineBadge: '⚡ 100% Client-Side & Works Offline',
   heroCtaExplore: 'Explore {count}+ Free Tools',
   searchPlaceholder: 'Search {count} tools... (e.g. "loan", "json", "kg to lb")',
+  heroSearchLabel: 'Search tools',
   categoryAll: 'All',
   showingAll: 'Showing all {count} tools',
   showingFiltered: '{filtered} of {total} tools',
@@ -296,6 +315,7 @@ const en: Dict = {
   toolCopied: '✓ Copied',
   toolLoadSample: 'Load Sample',
   toolSampleLoaded: '✓ Sample loaded',
+  toolLoadSampleTitle: 'Auto-fill a realistic example',
   toolCopySummary: 'Copy Summary',
   toolDownload: 'Download',
   toolDownloaded: '✓ Downloaded',
@@ -347,6 +367,7 @@ const en: Dict = {
   hubTaglineConverters: 'Units, time & number formats — instant conversions',
   hubTaglineUtilities: 'Everyday math, health, time & education helpers',
   hubExploreAll: 'Explore all {count} tools',
+  toolsCount: '{count} tools',
   hubBackToThemes: 'All themes',
   workspaceDrawerSubtitle: 'Pinned tools, recents & scratchpad',
   sitemapDirectory: 'Directory',
@@ -355,6 +376,9 @@ const en: Dict = {
   themeLight: 'Light',
   themeDark: 'Dark',
   languageToggle: 'Switch language',
+  menuToggle: 'Toggle menu',
+  menuClose: 'Close menu',
+  menuLabel: 'Menu',
   // 全局搜索弹窗(Cmd/Ctrl+K)
   searchOpen: 'Search tools (Ctrl+K)',
   searchPaletteTitle: 'Search tools',
@@ -370,6 +394,11 @@ const en: Dict = {
   notFoundBody:
     "We couldn't find that page. It may have been moved or never existed. Try one of our popular tools instead:",
   notFoundBack: '← Back to all tools',
+  errorTitle: 'Something went wrong',
+  errorBody: 'An unexpected error occurred. Please try again, or return to the homepage.',
+  errorRetry: 'Try again',
+  errorHome: 'Back to home',
+  loading: 'Loading…',
   heroMultilingualBadge: '🌐 Available in 4 Languages: EN | 中文 | Español | Deutsch',
   // Cookie 同意横幅
   cookieAriaLabel: 'Cookie consent',
@@ -386,6 +415,11 @@ const en: Dict = {
   blogCtaBody: 'Prefer doing over reading? Jump straight into the toolbox.',
   blogCtaExplore: 'Explore all tools',
   blogCtaAbout: 'About {site}',
+  blogBannerEyebrow: 'Try the toolbox',
+  blogBannerTitle: 'Featured tools, free and in-browser',
+  blogBannerBody:
+    'No signup, no upload, no tracking. Everything below runs entirely in your tab — exactly the architecture this post describes.',
+  blogBannerBrowse: 'Browse all {count}+ tools',
   // 首页底部 SEO 文案区
   seoWhyTitle: 'Why Use Our Online Tools?',
   seoWhyBody1: 'Most online tools ask you to sign up, accept cookies, or upload your files to a server you can\'t audit. We do things differently: every tool here runs entirely in your browser. That means three things for you:',
@@ -444,6 +478,7 @@ const zh: Dict = {
   heroOfflineBadge: '⚡ 100% 本地运行 · 支持离线',
   heroCtaExplore: '探索 {count}+ 免费工具',
   searchPlaceholder: '搜索 {count} 个工具...(例如 "loan"、"json"、"kg to lb")',
+  heroSearchLabel: '搜索工具',
   categoryAll: '全部',
   showingAll: '显示全部 {count} 个工具',
   showingFiltered: '共 {total} 个中的 {filtered} 个',
@@ -469,6 +504,7 @@ const zh: Dict = {
   toolCopied: '✓ 已复制',
   toolLoadSample: '加载示例',
   toolSampleLoaded: '✓ 已加载示例',
+  toolLoadSampleTitle: '自动填充一个真实示例',
   toolCopySummary: '复制摘要',
   toolDownload: '下载',
   toolDownloaded: '✓ 已下载',
@@ -520,6 +556,7 @@ const zh: Dict = {
   hubTaglineConverters: '单位、时间与数字格式,即时转换',
   hubTaglineUtilities: '日常数学、健康、时间与教育小助手',
   hubExploreAll: '浏览全部 {count} 个工具',
+  toolsCount: '{count} 个工具',
   hubBackToThemes: '全部主题',
   workspaceDrawerSubtitle: '固定工具、最近使用与随手记',
   sitemapDirectory: '站点目录',
@@ -528,6 +565,9 @@ const zh: Dict = {
   themeLight: '浅色',
   themeDark: '深色',
   languageToggle: '切换语言',
+  menuToggle: '切换菜单',
+  menuClose: '关闭菜单',
+  menuLabel: '菜单',
   // 全局搜索弹窗(Cmd/Ctrl+K)
   searchOpen: '搜索工具(Ctrl+K)',
   searchPaletteTitle: '搜索工具',
@@ -542,6 +582,11 @@ const zh: Dict = {
   notFoundTitle: '页面不存在',
   notFoundBody: '抱歉,找不到这个页面。它可能已被移动或从未存在。试试下面这些热门工具:',
   notFoundBack: '← 返回全部工具',
+  errorTitle: '出错了',
+  errorBody: '发生了意外错误。请重试,或返回首页。',
+  errorRetry: '重试',
+  errorHome: '返回首页',
+  loading: '加载中…',
   heroMultilingualBadge: '🌐 已支持 4 种语言:EN | 中文 | Español | Deutsch',
   // Cookie 同意横幅
   cookieAriaLabel: 'Cookie 同意',
@@ -558,6 +603,11 @@ const zh: Dict = {
   blogCtaBody: '比起阅读更想动手?直接进入工具箱。',
   blogCtaExplore: '探索全部工具',
   blogCtaAbout: '关于 {site}',
+  blogBannerEyebrow: '试试工具箱',
+  blogBannerTitle: '精选工具,免费、浏览器内运行',
+  blogBannerBody:
+    '无需注册、无需上传、不追踪。下面的工具全部在你的浏览器标签页内运行 —— 正如本文所描述的架构。',
+  blogBannerBrowse: '浏览全部 {count}+ 个工具',
   // 首页底部 SEO 文案区
   seoWhyTitle: '为什么要用我们的在线工具?',
   seoWhyBody1: '大多数在线工具都要你注册、接受 cookie,或把文件上传到无法审计的服务器。我们不一样:这里的每个工具都完全在你的浏览器中运行。这对你意味着三件事:',
@@ -615,6 +665,7 @@ const es: Dict = {
   heroOfflineBadge: '⚡ 100% en el cliente · Sin conexión',
   heroCtaExplore: 'Explorar más de {count} herramientas gratuitas',
   searchPlaceholder: 'Buscar {count} herramientas... (p. ej. "préstamo", "json", "kg a lb")',
+  heroSearchLabel: 'Buscar herramientas',
   categoryAll: 'Todas',
   showingAll: 'Mostrando las {count} herramientas',
   showingFiltered: '{filtered} de {total} herramientas',
@@ -640,6 +691,7 @@ const es: Dict = {
   toolCopied: '✓ Copiado',
   toolLoadSample: 'Cargar ejemplo',
   toolSampleLoaded: '✓ Ejemplo cargado',
+  toolLoadSampleTitle: 'Rellenar automáticamente un ejemplo realista',
   toolCopySummary: 'Copiar resumen',
   toolDownload: 'Descargar',
   toolDownloaded: '✓ Descargado',
@@ -691,6 +743,7 @@ const es: Dict = {
   hubTaglineConverters: 'Unidades, tiempo y formatos numéricos — conversiones al instante',
   hubTaglineUtilities: 'Ayudas de matemáticas, salud, tiempo y educación para el día a día',
   hubExploreAll: 'Explorar las {count} herramientas',
+  toolsCount: '{count} herramientas',
   hubBackToThemes: 'Todos los temas',
   workspaceDrawerSubtitle: 'Fijados, recientes y bloc de notas',
   sitemapDirectory: 'Directorio',
@@ -699,6 +752,9 @@ const es: Dict = {
   themeLight: 'Claro',
   themeDark: 'Oscuro',
   languageToggle: 'Cambiar idioma',
+  menuToggle: 'Alternar menú',
+  menuClose: 'Cerrar menú',
+  menuLabel: 'Menú',
   // 全局搜索弹窗(Cmd/Ctrl+K)
   searchOpen: 'Buscar herramientas (Ctrl+K)',
   searchPaletteTitle: 'Buscar herramientas',
@@ -714,6 +770,11 @@ const es: Dict = {
   notFoundBody:
     'No pudimos encontrar esa página. Puede que se haya movido o que nunca haya existido. Prueba una de nuestras herramientas populares:',
   notFoundBack: '← Volver a todas las herramientas',
+  errorTitle: 'Algo ha salido mal',
+  errorBody: 'Ha ocurrido un error inesperado. Inténtalo de nuevo o vuelve al inicio.',
+  errorRetry: 'Reintentar',
+  errorHome: 'Volver al inicio',
+  loading: 'Cargando…',
   heroMultilingualBadge: '🌐 Disponible en 4 idiomas: EN | 中文 | Español | Deutsch',
   // Cookie 同意横幅
   cookieAriaLabel: 'Consentimiento de cookies',
@@ -730,6 +791,11 @@ const es: Dict = {
   blogCtaBody: '¿Prefieres hacer a leer? Entra directo a la caja de herramientas.',
   blogCtaExplore: 'Explorar todas las herramientas',
   blogCtaAbout: 'Acerca de {site}',
+  blogBannerEyebrow: 'Prueba la caja de herramientas',
+  blogBannerTitle: 'Herramientas destacadas, gratis y en el navegador',
+  blogBannerBody:
+    'Sin registro, sin subidas, sin rastreo. Todo lo que ves abajo se ejecuta por completo en tu pestaña — exactamente la arquitectura que describe este artículo.',
+  blogBannerBrowse: 'Ver las {count}+ herramientas',
   // 首页底部 SEO 文案区
   seoWhyTitle: '¿Por qué usar nuestras herramientas online?',
   seoWhyBody1: 'La mayoría de herramientas online te piden registrarte, aceptar cookies o subir tus archivos a un servidor que no puedes auditar. Nosotros lo hacemos distinto: cada herramienta aquí se ejecuta por completo en tu navegador. Para ti eso significa tres cosas:',
@@ -787,6 +853,7 @@ const de: Dict = {
   heroOfflineBadge: '⚡ 100% clientseitig · Offline-fähig',
   heroCtaExplore: 'Über {count} kostenlose Tools entdecken',
   searchPlaceholder: '{count} Werkzeuge durchsuchen... (z. B. "Kredit", "json", "kg in lb")',
+  heroSearchLabel: 'Werkzeuge suchen',
   categoryAll: 'Alle',
   showingAll: 'Zeige alle {count} Werkzeuge',
   showingFiltered: '{filtered} von {total} Werkzeugen',
@@ -812,6 +879,7 @@ const de: Dict = {
   toolCopied: '✓ Kopiert',
   toolLoadSample: 'Beispiel laden',
   toolSampleLoaded: '✓ Beispiel geladen',
+  toolLoadSampleTitle: 'Automatisch mit einem realistischen Beispiel füllen',
   toolCopySummary: 'Zusammenfassung kopieren',
   toolDownload: 'Herunterladen',
   toolDownloaded: '✓ Heruntergeladen',
@@ -863,6 +931,7 @@ const de: Dict = {
   hubTaglineConverters: 'Einheiten, Zeit & Zahlenformate – sofort umgerechnet',
   hubTaglineUtilities: 'Alltagshelfer für Mathe, Gesundheit, Zeit & Bildung',
   hubExploreAll: 'Alle {count} Tools entdecken',
+  toolsCount: '{count} Tools',
   hubBackToThemes: 'Alle Themen',
   workspaceDrawerSubtitle: 'Pins, Verlauf & Notizblock',
   sitemapDirectory: 'Verzeichnis',
@@ -871,6 +940,9 @@ const de: Dict = {
   themeLight: 'Hell',
   themeDark: 'Dunkel',
   languageToggle: 'Sprache wechseln',
+  menuToggle: 'Menü umschalten',
+  menuClose: 'Menü schließen',
+  menuLabel: 'Menü',
   // 全局搜索弹窗(Cmd/Ctrl+K)
   searchOpen: 'Werkzeuge suchen (Strg+K)',
   searchPaletteTitle: 'Werkzeuge suchen',
@@ -886,6 +958,11 @@ const de: Dict = {
   notFoundBody:
     'Wir konnten diese Seite nicht finden. Vielleicht wurde sie verschoben oder hat nie existiert. Probiere eines unserer beliebten Tools:',
   notFoundBack: '← Zurück zu allen Tools',
+  errorTitle: 'Etwas ist schiefgelaufen',
+  errorBody: 'Ein unerwarteter Fehler ist aufgetreten. Bitte versuche es erneut oder kehre zur Startseite zurück.',
+  errorRetry: 'Erneut versuchen',
+  errorHome: 'Zurück zur Startseite',
+  loading: 'Wird geladen…',
   heroMultilingualBadge: '🌐 In 4 Sprachen verfügbar: EN | 中文 | Español | Deutsch',
   // Cookie 同意横幅
   cookieAriaLabel: 'Cookie-Einwilligung',
@@ -902,6 +979,11 @@ const de: Dict = {
   blogCtaBody: 'Lieber selbst machen als lesen? Spring direkt in die Werkzeugkiste.',
   blogCtaExplore: 'Alle Werkzeuge erkunden',
   blogCtaAbout: 'Über {site}',
+  blogBannerEyebrow: 'Probier die Werkzeugkiste',
+  blogBannerTitle: 'Empfohlene Tools, kostenlos und im Browser',
+  blogBannerBody:
+    'Keine Anmeldung, kein Upload, kein Tracking. Alles darunter läuft komplett in deinem Tab — genau die Architektur, die dieser Beitrag beschreibt.',
+  blogBannerBrowse: 'Alle {count}+ Werkzeuge ansehen',
   // 首页底部 SEO 文案区
   seoWhyTitle: 'Warum unsere Online-Werkzeuge nutzen?',
   seoWhyBody1: 'Die meisten Online-Tools verlangen Anmeldung, Cookie-Zustimmung oder laden deine Dateien auf einen Server, den du nicht prüfen kannst. Wir machen es anders: Jedes Werkzeug hier läuft vollständig in deinem Browser. Für dich bedeutet das drei Dinge:',

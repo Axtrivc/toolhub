@@ -153,7 +153,9 @@ export function AgeCalculatorClient() {
           {/* 下一个生日 */}
           <div className="rounded-lg border border-brand-200 bg-brand-50 p-5 text-center">
             <div className="text-sm font-medium text-brand-600">
-              {L('nextBirthdayIn', '🎂 Next birthday in ')}{result.daysToBirthday} {result.daysToBirthday === 1 ? L('day', 'day') : L('days', 'days')}
+              {result.daysToBirthday === 0
+                ? L('birthdayToday', '🎂 Happy birthday — today is the day!')
+                : `${L('nextBirthdayIn', '🎂 Next birthday in ')}${result.daysToBirthday} ${result.daysToBirthday === 1 ? L('day', 'day') : L('days', 'days')}`}
             </div>
           </div>
         </>

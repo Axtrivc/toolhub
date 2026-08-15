@@ -6,10 +6,6 @@ import { ToolLayout } from '@/components/ToolLayout'
 import { SlugGeneratorClient } from '@/components/tools/SlugGeneratorClient'
 import { SlugGeneratorContent } from './content'
 
-export function generateStaticParams() {
-  return [{ slug: 'slug-generator' }]
-}
-
 export const metadata: Metadata = buildToolMetadata('slug-generator')
 
 export default function SlugGeneratorPage() {

@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { SITE_NAME } from '@/lib/seo'
-import { SITE_URL } from '../../../next.config'
+import { SITE_URL } from '@/lib/constants'
 import { BlogToolsBanner } from '@/components/BlogToolsBanner'
 import { BlogArticleBody } from '@/components/BlogArticleBody'
 
@@ -113,7 +113,7 @@ export default function HowIBuiltToolHubPost() {
           </li>
           <li aria-hidden="true">/</li>
           <li>
-            <Link href="/blog/how-i-built-toolhub/" className="hover:text-brand-600">
+            <Link href="/blog/" className="hover:text-brand-600">
               Blog
             </Link>
           </li>

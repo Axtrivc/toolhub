@@ -59,7 +59,8 @@ function buildNginxConfig(o: NginxOptions): string {
 
   lines.push('server {')
   if (o.ssl) {
-    lines.push('    listen 443 ssl http2;')
+    lines.push('    listen 443 ssl;')
+    lines.push('    http2 on;')
   } else {
     lines.push(`    listen ${port};`)
   }

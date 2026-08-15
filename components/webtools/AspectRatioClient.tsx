@@ -56,9 +56,10 @@ export function AspectRatioClient() {
     <div className="space-y-5">
       {/* 比例输入 + 预设 */}
       <div>
-        <label className="mb-2 block text-sm font-medium text-slate-700">{L('aspectRatio', 'Aspect Ratio')}</label>
+        <label htmlFor="ar-ratio-w" className="mb-2 block text-sm font-medium text-slate-700">{L('aspectRatio', 'Aspect Ratio')}</label>
         <div className="flex items-center gap-2">
           <input
+            id="ar-ratio-w"
             type="number"
             min={1}
             value={ratioW}
@@ -68,6 +69,7 @@ export function AspectRatioClient() {
           />
           <span className="text-lg text-slate-400">:</span>
           <input
+            id="ar-ratio-h"
             type="number"
             min={1}
             value={ratioH}
@@ -94,8 +96,9 @@ export function AspectRatioClient() {
       {/* 已知宽 / 高 */}
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <div className="rounded-lg border p-4" style={{ borderColor: 'rgb(var(--border))' }}>
-          <div className="mb-2 text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>{L('widthPx', 'Width (px)')}</div>
+          <label htmlFor="ar-width" className="mb-2 block text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>{L('widthPx', 'Width (px)')}</label>
           <input
+            id="ar-width"
             type="number"
             value={width}
             onChange={(e) => {
@@ -108,8 +111,9 @@ export function AspectRatioClient() {
           />
         </div>
         <div className="rounded-lg border p-4" style={{ borderColor: 'rgb(var(--border))' }}>
-          <div className="mb-2 text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>{L('heightPx', 'Height (px)')}</div>
+          <label htmlFor="ar-height" className="mb-2 block text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>{L('heightPx', 'Height (px)')}</label>
           <input
+            id="ar-height"
             type="number"
             value={height}
             onChange={(e) => {

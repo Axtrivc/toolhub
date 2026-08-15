@@ -44,6 +44,7 @@ export const mortgageCalculatorL10n: ToolL10n = {
         '月供(等额本息)。P = 贷款本金,r = 月利率,n = 总月数。本工具在此基础上叠加 PMI、房产税和保险的估算。',
     },
     ui: {
+      errYears: '年限必须大于 0',
       'in.home': '房屋价格',
       'in.down': '首付款',
       'in.rate': '利率',
@@ -92,6 +93,7 @@ export const mortgageCalculatorL10n: ToolL10n = {
         'Cuota mensual de la hipoteca (amortización). P = capital del préstamo, r = tasa mensual, n = número de meses. Esta herramienta añade además estimaciones de PMI, impuesto a la propiedad y seguro.',
     },
     ui: {
+      errYears: 'Los años deben ser mayores que 0',
       'in.home': 'Precio de la vivienda',
       'in.down': 'Pago inicial',
       'in.rate': 'Tasa de interés',
@@ -140,6 +142,7 @@ export const mortgageCalculatorL10n: ToolL10n = {
         'Monatliche Hypothekenrate (Annuitätentilgung). P = Kreditbetrag, r = monatlicher Zins, n = Anzahl der Monate. Dieses Werkzeug legt zusätzlich Schätzungen für PMI, Grundsteuer und Versicherung darüber.',
     },
     ui: {
+      errYears: 'Die Laufzeit muss größer als 0 sein',
       'in.home': 'Hauspreis',
       'in.down': 'Anzahlung',
       'in.rate': 'Zinssatz',

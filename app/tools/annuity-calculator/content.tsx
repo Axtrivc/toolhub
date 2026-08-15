@@ -23,7 +23,7 @@ const en: ReactNode = (
     </div>
     <div>
       <h2>Worked Example</h2>
-      <p>Suppose you retire with <strong>$500,000</strong>, want it to last <strong>25 years</strong>, and expect a <strong>5% annual return</strong>. Plugging into the formula: the annual payout is about <strong>$35,360</strong>, or roughly <strong>$2,950/month</strong>. If you only need it to last 20 years, the payout rises to about $40,120/year &mdash; a shorter horizon means more each year, but a higher risk of outliving the money.</p>
+      <p>Suppose you retire with <strong>$500,000</strong>, want it to last <strong>25 years</strong>, and expect a <strong>5% annual return</strong>. Plugging into the formula: the annual payout is about <strong>$35,480</strong>, or roughly <strong>$2,960/month</strong>. If you only need it to last 20 years, the payout rises to about $40,120/year &mdash; a shorter horizon means more each year, but a higher risk of outliving the money.</p>
     </div>
     <div>
       <h2>Annuity vs. Perpetuity</h2>
@@ -52,7 +52,7 @@ const zh: ReactNode = (
     </div>
     <div>
       <h2>计算示例</h2>
-      <p>假设你带着 <strong>$500,000</strong> 退休,希望它维持 <strong>25 年</strong>,预期 <strong>年回报率 5%</strong>。代入公式:年度支付额约为 <strong>$35,360</strong>,约合 <strong>$2,950/月</strong>。如果只需要维持 20 年,支付额会升至约 $40,120/年——期限越短,每年拿得越多,但钱被花光的风险也更高。</p>
+      <p>假设你带着 <strong>$500,000</strong> 退休,希望它维持 <strong>25 年</strong>,预期 <strong>年回报率 5%</strong>。代入公式:年度支付额约为 <strong>$35,480</strong>,约合 <strong>$2,960/月</strong>。如果只需要维持 20 年,支付额会升至约 $40,120/年——期限越短,每年拿得越多,但钱被花光的风险也更高。</p>
     </div>
     <div>
       <h2>年金与永续年金</h2>
@@ -81,7 +81,7 @@ const es: ReactNode = (
     </div>
     <div>
       <h2>Ejemplo resuelto</h2>
-      <p>Supón que te jubilas con <strong>$500,000</strong>, quieres que dure <strong>25 años</strong> y esperas un <strong>5 % de retorno anual</strong>. Sustituyendo en la fórmula: el pago anual es de unos <strong>$35,360</strong>, o sea aproximadamente <strong>$2,950/mes</strong>. Si solo necesitas que dure 20 años, el pago sube a unos $40,120/año — un horizonte más corto significa más cada año, pero un riesgo mayor de sobrevivir al dinero.</p>
+      <p>Supón que te jubilas con <strong>$500,000</strong>, quieres que dure <strong>25 años</strong> y esperas un <strong>5 % de retorno anual</strong>. Sustituyendo en la fórmula: el pago anual es de unos <strong>$35,480</strong>, o sea aproximadamente <strong>$2,960/mes</strong>. Si solo necesitas que dure 20 años, el pago sube a unos $40,120/año — un horizonte más corto significa más cada año, pero un riesgo mayor de sobrevivir al dinero.</p>
     </div>
     <div>
       <h2>Anualidad frente a perpetuidad</h2>
@@ -110,7 +110,7 @@ const de: ReactNode = (
     </div>
     <div>
       <h2>Durchgerechnetes Beispiel</h2>
-      <p>Angenommen, du gehst mit <strong>$500,000</strong> in Rente, möchtest, dass es <strong>25 Jahre</strong> reicht, und erwartest eine <strong>5 % Jahresrendite</strong>. Einsetzen in die Formel: Die jährliche Auszahlung liegt bei etwa <strong>$35,360</strong> oder rund <strong>$2,950/Monat</strong>. Wenn es nur 20 Jahre reichen muss, steigt die Auszahlung auf etwa $40,120/Jahr — ein kürzerer Horizont bedeutet mehr pro Jahr, aber ein höheres Risiko, das Geld zu überleben.</p>
+      <p>Angenommen, du gehst mit <strong>$500,000</strong> in Rente, möchtest, dass es <strong>25 Jahre</strong> reicht, und erwartest eine <strong>5 % Jahresrendite</strong>. Einsetzen in die Formel: Die jährliche Auszahlung liegt bei etwa <strong>$35,480</strong> oder rund <strong>$2,960/Monat</strong>. Wenn es nur 20 Jahre reichen muss, steigt die Auszahlung auf etwa $40,120/Jahr — ein kürzerer Horizont bedeutet mehr pro Jahr, aber ein höheres Risiko, das Geld zu überleben.</p>
     </div>
     <div>
       <h2>Rente versus ewige Rente</h2>

@@ -87,10 +87,11 @@ export function ToolLayout({ tool, children }: ToolLayoutProps) {
           </li>
           <li aria-hidden="true">/</li>
           <li>
-            {/* 分类跳回首页:带 ?category= 选中筛选 + #锚点滚动定位。
-                统一回首页,避免落到已废弃的 /tools/ 旧枢纽页。 */}
+            {/* 分类跳回首页:带 ?category= 选中筛选 + #all-tools 锚点滚动定位
+                (首页工具目录区的固定锚点,见 app/page.tsx 的 id="all-tools")。
+                /tools/ 列表页仍在线,但分类筛选交互统一走首页。 */}
             <Link
-              href={`/?category=${encodeURIComponent(tool.category)}#${encodeURIComponent(tool.category)}`}
+              href={`/?category=${encodeURIComponent(tool.category)}#all-tools`}
               className="hover:text-brand-600"
             >
               {visibleCategory}

@@ -82,6 +82,40 @@ function parseScalar(raw: string): unknown {
   return v
 }
 
+/** 引号感知的 inline flow 逗号切分:引号内的逗号不拆 */
+function splitFlowItems(s: string): string[] {
+  const parts: string[] = []
+  let cur = ''
+  let inS = false
+  let inD = false
+  for (let i = 0; i < s.length; i++) {
+    const c = s[i]
+    if (c === "'" && !inD) inS = !inS
+    else if (c === '"' && !inS) inD = !inD
+    if (c === ',' && !inS && !inD) {
+      parts.push(cur)
+      cur = ''
+    } else {
+      cur += c
+    }
+  }
+  parts.push(cur)
+  return parts
+}
+
+/** 找第一个引号外冒号的位置;没有返回 -1 */
+function indexFlowColon(s: string): number {
+  let inS = false
+  let inD = false
+  for (let i = 0; i < s.length; i++) {
+    const c = s[i]
+    if (c === "'" && !inD) inS = !inS
+    else if (c === '"' && !inS) inD = !inD
+    else if (c === ':' && !inS && !inD) return i
+  }
+  return -1
+}
+
 /** 解析 inline flow 值:[a, b] / {k: v}。仅做扁平(不嵌套 flow) */
 function parseFlow(raw: string): unknown {
   const v = raw.trim()
@@ -89,15 +123,15 @@ function parseFlow(raw: string): unknown {
   if (v.startsWith('[') && v.endsWith(']')) {
     const inner = v.slice(1, -1).trim()
     if (!inner) return []
-    return inner.split(',').map((p) => parseScalar(p))
+    return splitFlowItems(inner).map((p) => parseScalar(p))
   }
   // 对象 {k: v, k2: v2}
   if (v.startsWith('{') && v.endsWith('}')) {
     const inner = v.slice(1, -1).trim()
     if (!inner) return {}
     const obj: Record<string, unknown> = {}
-    inner.split(',').forEach((pair) => {
-      const ci = pair.indexOf(':')
+    splitFlowItems(inner).forEach((pair) => {
+      const ci = indexFlowColon(pair)
       if (ci > -1) {
         const k = pair.slice(0, ci).trim()
         obj[k] = parseScalar(pair.slice(ci + 1))
@@ -217,7 +251,6 @@ function parseBlock(ctx: ParseContext, baseIndent: number): unknown {
             }
             const ni = indentOf(ns)
             if (ni <= ind) break
-            if (ni !== ind + 2) break
             const nc = ns.slice(ni)
             const nci = nc.indexOf(':')
             if (nci === -1) break

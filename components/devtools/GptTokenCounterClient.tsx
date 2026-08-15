@@ -13,7 +13,7 @@ import { countWords, countSentences } from '@/lib/text-stats'
  *
  * 估算策略(不使用任何 tokenizer 库):
  *  - 基线:拉丁字符 / 4(OpenAI 官方经验法则,1 token ≈ 4 个英文字符);
- *  - CJK:汉字按约 0.75 token/字(现代 tokenizer 常见 0.6–1.0 区间取中);
+ *  - CJK(汉字/假名/谚文)按约 0.75 token/字(现代 tokenizer 常见 0.6–1.0 区间取中);
  *  - 细化:按「词串 / 标点」拆分,短词 ≈ 1 token,长词约每 5 字符 1 token,
  *    标点各计 1 token;
  *  - 取两者平均,结果仅作数量级参考(≈ cl100k_base),UI 中明确标注为估算。
@@ -31,9 +31,9 @@ Remember: real billing uses the provider's exact tokenizer (cl100k_base for GPT-
 // 模型价格集中管理在 lib/model-pricing.ts（数据源 tokencost.app，最后核对 2026-08-14）
 const MODELS: ModelPrice[] = MODEL_PRICES
 
-const CJK_RE = /[\u3400-\u4dbf\u4e00-\u9fff\uf900-\ufaff]/g
+const CJK_RE = /[\u3040-\u30ff\u3400-\u4dbf\u4e00-\u9fff\uf900-\ufaff\uac00-\ud7af]/g
 
-/** 启发式 token 估算:拉丁 chars/4 + 词/标点细化取平均;汉字单独按 ≈0.75 token/字 */
+/** 启发式 token 估算:拉丁 chars/4 + 词/标点细化取平均;CJK 字符单独按 ≈0.75 token/字 */
 function estimateTokens(text: string): number {
   if (!text.trim()) return 0
   const cjkCount = (text.match(CJK_RE) || []).length

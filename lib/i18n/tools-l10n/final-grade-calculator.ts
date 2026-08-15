@@ -11,6 +11,9 @@ export const finalGradeCalculatorL10n: ToolL10n = {
       explain: '为达到目标总成绩,期末需要考的分数。current 是你目前的分数,w 是期末占比(小数)。它告诉你剩余部分必须考多少。',
     },
     ui: {
+      errWeight: '期末考试占比必须大于 0%',
+      alreadyAchieved: '🎉 目标已达成 — 任意分数都能保住目标',
+      impossible: '无法实现',
       'in.current': '当前成绩',
       'in.goal': '目标成绩',
       'in.finalWeight': '期末考权重',
@@ -33,6 +36,9 @@ export const finalGradeCalculatorL10n: ToolL10n = {
       explain: 'Nota necesaria en el final para alcanzar una nota global objetivo. current es tu nota hasta ahora, w el peso del final (decimal). Indica lo que debes sacar en lo que queda.',
     },
     ui: {
+      errWeight: 'El peso del examen final debe ser mayor que 0 %',
+      alreadyAchieved: '🎉 Objetivo ya alcanzado — cualquier nota mantiene tu meta',
+      impossible: 'imposible',
       'in.current': 'Nota actual',
       'in.goal': 'Nota objetivo',
       'in.finalWeight': 'Peso del examen final',
@@ -55,6 +61,9 @@ export const finalGradeCalculatorL10n: ToolL10n = {
       explain: 'Im Finale nötige Punktzahl, um eine Zielgesamtnote zu erreichen. current ist dein bisheriger Stand, w das Finale-Gewicht (Dezimal). Sagt, was du im Verbleibenden schaffen musst.',
     },
     ui: {
+      errWeight: 'Das Gewicht der Abschlussprüfung muss größer als 0 % sein',
+      alreadyAchieved: '🎉 Ziel bereits erreicht — jede Punktzahl reicht aus',
+      impossible: 'unmöglich',
       'in.current': 'Aktuelle Note',
       'in.goal': 'Zielnote',
       'in.finalWeight': 'Gewicht der Abschlussprüfung',

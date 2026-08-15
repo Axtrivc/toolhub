@@ -24,7 +24,10 @@ export function Base64CodecTool({ initialMode = 'encode', slug = 'base64-encoder
         defaultInput: 'Hello World',
         transform: (t) => {
           try {
-            return btoa(unescape(encodeURIComponent(t)))
+            const bytes = new TextEncoder().encode(t)
+            let s = ''
+            for (let i = 0; i < bytes.length; i++) s += String.fromCharCode(bytes[i])
+            return btoa(s)
           } catch {
             return '⚠️ Cannot encode'
           }
@@ -37,7 +40,10 @@ export function Base64CodecTool({ initialMode = 'encode', slug = 'base64-encoder
         defaultInput: 'SGVsbG8gV29ybGQ=',
         transform: (t) => {
           try {
-            return decodeURIComponent(escape(atob(t.trim())))
+            const bin = atob(t.replace(/\s+/g, ''))
+            const bytes = new Uint8Array(bin.length)
+            for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i)
+            return new TextDecoder().decode(bytes)
           } catch {
             return '⚠️ Invalid Base64'
           }

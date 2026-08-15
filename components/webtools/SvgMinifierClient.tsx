@@ -83,7 +83,12 @@ function minifySvg(input: string, opts: MinifyOptions): string {
   }
 
   if (opts.collapseWhitespace) {
-    out = out.replace(/>\s+</g, '><')
+    // <text>…</text>(含嵌套 <tspan>)区域内的标签间空白对渲染有意义(词间距),
+    // 不能折叠 —— 先把文本区域切出来原样保留,只折叠区域外的 >\s+<
+    const parts = out.split(/(<text[\s\S]*?<\/text>)/gi)
+    out = parts
+      .map((part, i) => (i % 2 === 1 ? part : part.replace(/>\s+</g, '><')))
+      .join('')
     out = out.trim()
   }
 
@@ -135,7 +140,7 @@ export function SvgMinifierClient() {
     }
     reader.onerror = () => setError(L('errReadFile', 'Could not read the file.'))
     reader.readAsText(file)
-  }, [])
+  }, [locale])
 
   const onDrop = useCallback(
     (e: React.DragEvent) => {

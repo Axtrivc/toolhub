@@ -175,7 +175,8 @@ export function makeUnitConverter(config: {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+        {/* 结果区(aria-live:换算结果变化时屏幕阅读器播报) */}
+        <div role="status" aria-live="polite" className="grid grid-cols-1 gap-3 sm:grid-cols-2">
           <ResultCard
             label={LC('convertedValue', 'Converted value')}
             value={isFinite(result) ? `${fmtNum(result, digits)} ${toLabel}` : '—'}

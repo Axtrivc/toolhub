@@ -207,19 +207,20 @@ function formatSql(sql: string): string {
   return lines.join('\n').trim()
 }
 
-/** 压缩 SQL:合并成一行,关键字之间单空格 */
+/** 压缩 SQL:按 token 拼接,字符串字面量内的空白/逗号/括号原样保留 */
 function minifySql(sql: string): string {
-  return tokenize(sql)
-    .map((t) => {
-      // 逗号/分号/括号紧跟前一个 token,不加空格
-      return t
-    })
-    .join(' ')
-    .replace(/\s+,/g, ',')
-    .replace(/\(\s+/g, '(')
-    .replace(/\s+\)/g, ')')
-    .replace(/\s{2,}/g, ' ')
-    .trim()
+  const tokens = tokenize(sql)
+  let out = ''
+  for (let i = 0; i < tokens.length; i++) {
+    const t = tokens[i]
+    if (i > 0) {
+      // 逗号/右括号紧跟前 token;左括号后不加空格
+      const tight = t === ',' || t === ')' || tokens[i - 1] === '('
+      if (!tight && !/\s$/.test(out)) out += ' '
+    }
+    out += t
+  }
+  return out
 }
 
 export function SqlFormatterClient() {

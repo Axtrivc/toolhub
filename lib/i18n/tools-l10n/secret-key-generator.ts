@@ -30,6 +30,9 @@ export const secretKeyGeneratorL10n: ToolL10n = {
       'randomChars': '随机字符',
       'randomPart': '随机部分:',
       'regenerateAll': '全部重新生成',
+      'strengthGood': '一般',
+      'strengthStrong': '强',
+      'strengthWeak': '弱',
     },
     useCases: [
       '在线随机 API 密钥生成器',
@@ -77,6 +80,9 @@ export const secretKeyGeneratorL10n: ToolL10n = {
       'randomChars': 'caracteres aleatorios',
       'randomPart': 'Parte aleatoria:',
       'regenerateAll': 'Regenerar todo',
+      'strengthGood': 'Aceptable',
+      'strengthStrong': 'Fuerte',
+      'strengthWeak': 'Débil',
     },
     useCases: [
       'generador de claves API aleatorias online',
@@ -124,6 +130,9 @@ export const secretKeyGeneratorL10n: ToolL10n = {
       'randomChars': 'Zufallszeichen',
       'randomPart': 'Zufallsteil:',
       'regenerateAll': 'Alle neu generieren',
+      'strengthGood': 'Gut',
+      'strengthStrong': 'Stark',
+      'strengthWeak': 'Schwach',
     },
     useCases: [
       'Zufalls-API-Key-Generator online',

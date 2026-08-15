@@ -6,7 +6,7 @@ import { getToolIcon } from '@/lib/tools'
 import { SmartIcon } from '@/components/SmartIcon'
 import { getPublishedTools } from '@/lib/tools'
 import { useApp } from './providers/AppProviders'
-import { tc, getToolName, getToolShortIntro } from '@/lib/i18n'
+import { t, tc, getToolName, getToolShortIntro } from '@/lib/i18n'
 import { AnimatedToolCard, StaggerGroup } from './motion/MotionPrimitives'
 
 /**
@@ -28,8 +28,8 @@ const BANNER_LIMIT = 6
 export function BlogToolsBanner() {
   const { locale } = useApp()
   const tools = getFeaturedTools().slice(0, BANNER_LIMIT)
-  // 已发布工具总数(动态),替代原硬编码 "130+"
-  const publishedCount = getPublishedTools().length
+  // 已发布工具总数(动态,向下取整到十位 —— 与首页 heroBadge 同一口径),替代原硬编码 "130+"
+  const publishedCount = Math.floor(getPublishedTools().length / 10) * 10
 
   if (tools.length === 0) return null
 
@@ -44,14 +44,13 @@ export function BlogToolsBanner() {
           className="text-xs font-semibold uppercase tracking-widest"
           style={{ color: 'rgb(var(--text-faint))' }}
         >
-          Try the toolbox
+          {t(locale, 'blogBannerEyebrow')}
         </p>
         <h2 id="blog-tools-heading" className="mt-1 text-2xl font-bold" style={{ color: 'rgb(var(--text))' }}>
-          Featured tools, free and in-browser
+          {t(locale, 'blogBannerTitle')}
         </h2>
         <p className="mt-2 max-w-2xl text-sm" style={{ color: 'rgb(var(--text-muted))' }}>
-          No signup, no upload, no tracking. Everything below runs entirely in your tab — exactly the
-          architecture this post describes.
+          {t(locale, 'blogBannerBody')}
         </p>
       </header>
 
@@ -86,7 +85,7 @@ export function BlogToolsBanner() {
 
       <div className="mt-8">
         <Link href="/#all-tools" className="btn btn-secondary">
-          Browse all {publishedCount}+ tools <span aria-hidden="true">→</span>
+          {t(locale, 'blogBannerBrowse', { count: publishedCount })} <span aria-hidden="true">→</span>
         </Link>
       </div>
     </section>

@@ -11,6 +11,7 @@ export const primeFactorizationCalculatorL10n: ToolL10n = {
       explain: '每个大于 1 的整数都能唯一分解为素数。指数表示每个素数整除 n 的次数。工具依次除尽 2、3、5……直到 √n。',
     },
     ui: {
+      errMinTwo: '请输入 ≥ 2 的数',
       'in.n': '要分解的数',
       'out.factors': '质因数分解',
       note: '🧮 每个大于 1 的整数都有唯一的质因数分解(算术基本定理)。',
@@ -31,6 +32,7 @@ export const primeFactorizationCalculatorL10n: ToolL10n = {
       explain: 'Cada entero > 1 se descompone de forma única en primos. Los exponentes cuentan cuántas veces cada primo divide a n. La herramienta divide entre 2, luego 3, 5, … hasta √n.',
     },
     ui: {
+      errMinTwo: 'Introduce un número ≥ 2',
       'in.n': 'Número a factorizar',
       'out.factors': 'Factorización en primos',
       note: '🧮 Cada entero > 1 tiene una factorización en primos única (teorema fundamental de la aritmética).',
@@ -51,6 +53,7 @@ export const primeFactorizationCalculatorL10n: ToolL10n = {
       explain: 'Jede ganze Zahl > 1 zerfällt eindeutig in Primzahlen. Die Exponenten zählen, wie oft jede Primzahl n teilt. Das Werkzeug dividiert 2, dann 3, 5, … bis √n heraus.',
     },
     ui: {
+      errMinTwo: 'Gib eine Zahl ≥ 2 ein',
       'in.n': 'Zu faktorisierende Zahl',
       'out.factors': 'Primfaktorzerlegung',
       note: '🧮 Jede ganze Zahl > 1 hat eine eindeutige Primfaktorzerlegung (Fundamentalsatz der Arithmetik).',

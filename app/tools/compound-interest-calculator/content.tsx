@@ -49,16 +49,16 @@ const en: ReactNode = (
     <ul>
       <li>
         <strong>Saver A</strong> invests $200/month from age 25 to 35 (10 years, $24,000 total),
-        then stops. At 7% return, by age 65 they have ~$245,000.
+        then stops. At 7% return, by age 65 they have ~$281,000.
       </li>
       <li>
         <strong>Saver B</strong> waits until age 35, then invests $200/month for 30 years until
-        age 65 ($72,000 total). At 7% return, by age 65 they have ~$245,000.
+        age 65 ($72,000 total). At 7% return, by age 65 they have ~$244,000.
       </li>
     </ul>
     <p>
-      Despite investing one-third as much money, Saver A ends up roughly even — because their
-      money had 30 extra years to compound.
+      Despite investing only one-third as much money, Saver A still ends up meaningfully ahead —
+      because their money had 30 extra years to compound.
     </p>
 
     <h2>Realistic Return Rates</h2>
@@ -121,14 +121,14 @@ const zh: ReactNode = (
     <p>时间比投资金额更重要。看看两位储蓄者:</p>
     <ul>
       <li>
-        <strong>储蓄者 A</strong> 从 25 岁到 35 岁每月投 $200(10 年,共 $24,000),然后停止。按 7% 回报率,到 65 岁约有 ~$245,000。
+        <strong>储蓄者 A</strong> 从 25 岁到 35 岁每月投 $200(10 年,共 $24,000),然后停止。按 7% 回报率,到 65 岁约有 ~$281,000。
       </li>
       <li>
-        <strong>储蓄者 B</strong> 等到 35 岁才开始,然后每月投 $200、持续 30 年到 65 岁(共 $72,000)。按 7% 回报率,到 65 岁约有 ~$245,000。
+        <strong>储蓄者 B</strong> 等到 35 岁才开始,然后每月投 $200、持续 30 年到 65 岁(共 $72,000)。按 7% 回报率,到 65 岁约有 ~$244,000。
       </li>
     </ul>
     <p>
-      尽管只投了三分之一的钱,储蓄者 A 最终几乎持平——因为他们的钱多了 30 年的复利时间。
+      尽管只投了三分之一的钱,储蓄者 A 最终仍然明显领先——因为他们的钱多了 30 年的复利时间。
     </p>
 
     <h2>合理的回报率参考</h2>
@@ -195,16 +195,16 @@ const es: ReactNode = (
     <ul>
       <li>
         El <strong>Ahorrador A</strong> invierte 200 $/mes desde los 25 hasta los 35 (10 años,
-        24 000 $ en total) y luego para. Al 7 % de retorno, a los 65 tiene ~245 000 $.
+        24 000 $ en total) y luego para. Al 7 % de retorno, a los 65 tiene ~281 000 $.
       </li>
       <li>
         El <strong>Ahorrador B</strong> espera hasta los 35 y luego invierte 200 $/mes durante
-        30 años hasta los 65 (72 000 $ en total). Al 7 % de retorno, a los 65 tiene ~245 000 $.
+        30 años hasta los 65 (72 000 $ en total). Al 7 % de retorno, a los 65 tiene ~244 000 $.
       </li>
     </ul>
     <p>
-      A pesar de invertir un tercio del dinero, el Ahorrador A acaba más o menos igual — porque su
-      dinero tuvo 30 años extra de capitalización.
+      A pesar de invertir solo un tercio del dinero, el Ahorrador A acaba claramente por delante —
+      porque su dinero tuvo 30 años extra de capitalización.
     </p>
 
     <h2>Tasas de retorno realistas</h2>
@@ -275,15 +275,15 @@ const de: ReactNode = (
     <ul>
       <li>
         <strong>Sparer A</strong> investiert 200 $/Monat von 25 bis 35 (10 Jahre, insgesamt
-        24 000 $) und hört dann auf. Bei 7 % Rendite hat er mit 65 etwa ~245 000 $.
+        24 000 $) und hört dann auf. Bei 7 % Rendite hat er mit 65 etwa ~281 000 $.
       </li>
       <li>
         <strong>Sparer B</strong> wartet bis 35 und investiert dann 200 $/Monat für 30 Jahre bis
-        65 (insgesamt 72 000 $). Bei 7 % Rendite hat er mit 65 etwa ~245 000 $.
+        65 (insgesamt 72 000 $). Bei 7 % Rendite hat er mit 65 etwa ~244 000 $.
       </li>
     </ul>
     <p>
-      Obwohl er nur ein Drittel investiert hat, endet Sparer A fast gleich auf — weil sein Geld
+      Obwohl er nur ein Drittel investiert hat, endet Sparer A deutlich vorn — weil sein Geld
       30 Jahre länger Zinseszins sammeln konnte.
     </p>
 

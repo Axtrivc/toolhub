@@ -61,7 +61,7 @@ const en: ReactNode = (
     <div>
       <h2>This engine is JavaScript flavor</h2>
       <p>
-        The matches reflect the JavaScript (ECAScript) RegExp engine running in your browser. It
+        The matches reflect the JavaScript (ECMAScript) RegExp engine running in your browser. It
         supports lookahead, named groups, and the <code>s</code>/<code>u</code> flags. It does{' '}
         <em>not</em> support lookbehind in older Safari (pre-16.4) or PCRE-only features like atomic
         groups and possessive quantifiers. If you test a pattern here it will behave identically in

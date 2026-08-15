@@ -61,7 +61,7 @@ const en: ReactNode = (
     <ul>
       <li><strong>3-year term:</strong> ~$622/month, ~$2,400 in total interest</li>
       <li><strong>5-year term:</strong> ~$400/month, ~$4,000 in total interest</li>
-      <li><strong>7-year term:</strong> ~$306/month, ~$5,700 in total interest</li>
+      <li><strong>7-year term:</strong> ~$306/month, ~$5,770 in total interest</li>
     </ul>
     <p>
       Going from 3 to 7 years cuts your monthly payment by half — but more than doubles your
@@ -151,7 +151,7 @@ const zh: ReactNode = (
     <ul>
       <li><strong>3 年期:</strong>月供约 $622,总利息约 $2,400</li>
       <li><strong>5 年期:</strong>月供约 $400,总利息约 $4,000</li>
-      <li><strong>7 年期:</strong>月供约 $306,总利息约 $5,700</li>
+      <li><strong>7 年期:</strong>月供约 $306,总利息约 $5,770</li>
     </ul>
     <p>
       把期限从 3 年拉到 7 年,月供减半——但利息成本翻了一倍多。永远要看<em>总利息</em>,别只盯着月供数字。
@@ -241,7 +241,7 @@ const es: ReactNode = (
     <ul>
       <li><strong>Plazo de 3 años:</strong> ~622 $/mes, ~2 400 $ en intereses totales</li>
       <li><strong>Plazo de 5 años:</strong> ~400 $/mes, ~4 000 $ en intereses totales</li>
-      <li><strong>Plazo de 7 años:</strong> ~306 $/mes, ~5 700 $ en intereses totales</li>
+      <li><strong>Plazo de 7 años:</strong> ~306 $/mes, ~5 770 $ en intereses totales</li>
     </ul>
     <p>
       Pasar de 3 a 7 años reduce tu pago mensual a la mitad, pero más que duplica el coste en
@@ -340,10 +340,11 @@ const de: ReactNode = (
     <ul>
       <li><strong>3 Jahre Laufzeit:</strong> ~622 $/Monat, ~2 400 $ Zinsen gesamt</li>
       <li><strong>5 Jahre Laufzeit:</strong> ~400 $/Monat, ~4 000 $ Zinsen gesamt</li>
-      <li><strong>7 Jahre Laufzeit:</strong> ~306 $/Monat, ~5 700 $ Zinsen gesamt</li>
+      <li><strong>7 Jahre Laufzeit:</strong> ~306 $/Monat, ~5 770 $ Zinsen gesamt</li>
     </ul>
     <p>
-      Ein Wechsel von 3 auf 7 Jahre halbiert die Monatsrate —verdoppelt aber die Zinskosten fast.
+      Ein Wechsel von 3 auf 7 Jahre halbiert die Monatsrate —mehr als verdoppelt aber die
+      Zinskosten.
       Schau immer auf die <em>gesamten Zinsen</em>, nicht nur auf die Monatsrate.
     </p>
 

@@ -63,7 +63,7 @@ export function WebpToPngConverterClient() {
     }
     reader.onerror = () => setError(L('errReadFile', 'Could not read the file.'))
     reader.readAsDataURL(file)
-  }, [])
+  }, [locale])
 
   const onInputChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -83,27 +83,36 @@ export function WebpToPngConverterClient() {
     [handleFile],
   )
 
-  // 图片解码完成后写入 ref + 记录原始尺寸
+  // 图片解码完成后写入 ref + 记录原始尺寸(cancelled 防快速换图时旧图 onload 回写)
   useEffect(() => {
     if (!imgSrc) {
       imgRef.current = null
       return
     }
+    let cancelled = false
     const img = new Image()
     img.onload = () => {
+      if (cancelled) return
       imgRef.current = img
       setSource((prev) =>
         prev ? { ...prev, width: img.naturalWidth, height: img.naturalHeight } : null,
       )
     }
-    img.onerror = () => setError(L('errDecodeImage', 'Could not decode the image file.'))
+    img.onerror = () => {
+      if (!cancelled) setError(L('errDecodeImage', 'Could not decode the image file.'))
+    }
     img.src = imgSrc
-  }, [imgSrc])
+    return () => {
+      cancelled = true
+    }
+  }, [imgSrc, locale])
 
   // 实时转换:图片或选项变化时重新渲染 canvas 并生成输出 blob
+  // (cancelled 防旧 toBlob 乱序覆盖:拖动质量滑杆会并发多次编码,只认最新一次)
   useEffect(() => {
     const img = imgRef.current
     if (!img || !source || source.width === 0) return
+    let cancelled = false
     const canvas = document.createElement('canvas')
     canvas.width = img.naturalWidth
     canvas.height = img.naturalHeight
@@ -118,6 +127,7 @@ export function WebpToPngConverterClient() {
     const mime = format === 'png' ? 'image/png' : 'image/jpeg'
     canvas.toBlob(
       (blob) => {
+        if (cancelled) return
         if (!blob) {
           setError(L('errConversionFailed', 'Conversion failed in canvas.'))
           return
@@ -130,7 +140,10 @@ export function WebpToPngConverterClient() {
       mime,
       format === 'jpeg' ? quality : undefined,
     )
-  }, [imgSrc, source, format, quality, bgColor])
+    return () => {
+      cancelled = true
+    }
+  }, [imgSrc, source, format, quality, bgColor, locale])
 
   // 卸载时回收 objectURL
   useEffect(
@@ -182,7 +195,7 @@ export function WebpToPngConverterClient() {
           <span className="mt-1 text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>
             {L('uploadHint', 'WebP images only (.webp)')}
           </span>
-          <input id="webp-upload" type="file" accept="image/*" onChange={onInputChange} className="hidden" />
+          <input id="webp-upload" type="file" accept=".webp,image/webp" onChange={onInputChange} className="hidden" />
         </label>
       )}
 
@@ -215,7 +228,7 @@ export function WebpToPngConverterClient() {
             </div>
             <label htmlFor="webp-reupload" className="btn btn-secondary cursor-pointer text-xs">
               {L('change', 'Change')}
-              <input id="webp-reupload" type="file" accept="image/*" onChange={onInputChange} className="hidden" />
+              <input id="webp-reupload" type="file" accept=".webp,image/webp" onChange={onInputChange} className="hidden" />
             </label>
           </div>
 

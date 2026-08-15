@@ -46,7 +46,7 @@ const en: ReactNode = (
     </div>
     <div>
       <h2>Worked Example</h2>
-      <p>Consider a <strong>$400,000</strong> home with 20% down ($80,000) on a 30-year mortgage at 6.5%, versus renting a comparable place for <strong>$2,000/month</strong> over a <strong>7-year</strong> horizon. This tool compares the down payment plus mortgage interest against rent paid &mdash; buying shows roughly $132,000 in interest over the period while renting costs $168,000. But add closing costs (~$12,000), property tax (~$42,000 over 7 years), and maintenance (~$28,000), and the gap narrows dramatically. The real tie-breaker is home appreciation and the opportunity cost of that $80,000 down payment.</p>
+      <p>Consider a <strong>$400,000</strong> home with 20% down ($80,000) on a 30-year mortgage at 6.5%, versus renting a comparable place for <strong>$2,000/month</strong> over a <strong>7-year</strong> horizon. This tool compares the down payment plus mortgage interest against rent paid &mdash; buying shows roughly $139,000 in interest over the period while renting costs $168,000. But add closing costs (~$12,000), property tax (~$42,000 over 7 years), and maintenance (~$28,000), and the gap narrows dramatically. The real tie-breaker is home appreciation and the opportunity cost of that $80,000 down payment.</p>
     </div>
   </section>
 )
@@ -85,7 +85,7 @@ const zh: ReactNode = (
     </div>
     <div>
       <h2>计算示例</h2>
-      <p>考虑一套 <strong>$400,000</strong> 的房子,首付 20%($80,000),30 年期贷款利率 6.5%,对比租住相当房源 <strong>$2,000/月</strong>,期限 <strong>7 年</strong>。本工具将首付加贷款利息与所付租金对比——买房在该期间利息约为 $132,000,而租房花费 $168,000。但加上交易成本(约 $12,000)、房产税(7 年约 $42,000)和维护费用(约 $28,000),差距会大幅缩小。真正的决胜因素是房屋升值,以及那 $80,000 首付的机会成本。</p>
+      <p>考虑一套 <strong>$400,000</strong> 的房子,首付 20%($80,000),30 年期贷款利率 6.5%,对比租住相当房源 <strong>$2,000/月</strong>,期限 <strong>7 年</strong>。本工具将首付加贷款利息与所付租金对比——买房在该期间利息约为 $139,000,而租房花费 $168,000。但加上交易成本(约 $12,000)、房产税(7 年约 $42,000)和维护费用(约 $28,000),差距会大幅缩小。真正的决胜因素是房屋升值,以及那 $80,000 首付的机会成本。</p>
     </div>
   </section>
 )
@@ -124,7 +124,7 @@ const es: ReactNode = (
     </div>
     <div>
       <h2>Ejemplo resuelto</h2>
-      <p>Considera una vivienda de <strong>$400,000</strong> con un 20 % de entrada ($80,000) sobre una hipoteca a 30 años al 6,5 %, frente a alquilar un lugar comparable por <strong>$2,000/mes</strong> durante un horizonte de <strong>7 años</strong>. Esta herramienta compara la entrada más los intereses de la hipoteca frente al alquiler pagado — comprar muestra aproximadamente $132,000 en intereses durante el periodo, mientras que alquilar cuesta $168,000. Pero suma los costes de cierre (~$12,000), el impuesto sobre la propiedad (~$42,000 en 7 años) y el mantenimiento (~$28,000), y la diferencia se reduce drásticamente. El verdadero factor decisivo es la revalorización de la vivienda y el coste de oportunidad de esos $80,000 de entrada.</p>
+      <p>Considera una vivienda de <strong>$400,000</strong> con un 20 % de entrada ($80,000) sobre una hipoteca a 30 años al 6,5 %, frente a alquilar un lugar comparable por <strong>$2,000/mes</strong> durante un horizonte de <strong>7 años</strong>. Esta herramienta compara la entrada más los intereses de la hipoteca frente al alquiler pagado — comprar muestra aproximadamente $139,000 en intereses durante el periodo, mientras que alquilar cuesta $168,000. Pero suma los costes de cierre (~$12,000), el impuesto sobre la propiedad (~$42,000 en 7 años) y el mantenimiento (~$28,000), y la diferencia se reduce drásticamente. El verdadero factor decisivo es la revalorización de la vivienda y el coste de oportunidad de esos $80,000 de entrada.</p>
     </div>
   </section>
 )
@@ -163,7 +163,7 @@ const de: ReactNode = (
     </div>
     <div>
       <h2>Durchgerechnetes Beispiel</h2>
-      <p>Betrachte ein <strong>$400,000</strong>-Haus mit 20 % Eigenkapital ($80,000) bei einer 30-jährigen Hypothek mit 6,5 %, gegenüber dem Mieten einer vergleichbaren Wohnung für <strong>$2,000/Monat</strong> über einen Zeitraum von <strong>7 Jahren</strong>. Dieses Werkzeug vergleicht das Eigenkapital plus Hypothekenzinsen mit der gezahlten Miete — Kaufen zeigt rund $132,000 an Zinsen über den Zeitraum, während Mieten $168,000 kostet. Aber rechne Kaufnebenkosten (~$12,000), Grundsteuer (~$42,000 über 7 Jahre) und Instandhaltung (~$28,000) dazu, und die Lücke schrumpft drastisch. Der echte Entscheidungsgrund ist die Wertsteigerung des Hauses und die Opportunitätskosten jener $80,000 Eigenkapital.</p>
+      <p>Betrachte ein <strong>$400,000</strong>-Haus mit 20 % Eigenkapital ($80,000) bei einer 30-jährigen Hypothek mit 6,5 %, gegenüber dem Mieten einer vergleichbaren Wohnung für <strong>$2,000/Monat</strong> über einen Zeitraum von <strong>7 Jahren</strong>. Dieses Werkzeug vergleicht das Eigenkapital plus Hypothekenzinsen mit der gezahlten Miete — Kaufen zeigt rund $139,000 an Zinsen über den Zeitraum, während Mieten $168,000 kostet. Aber rechne Kaufnebenkosten (~$12,000), Grundsteuer (~$42,000 über 7 Jahre) und Instandhaltung (~$28,000) dazu, und die Lücke schrumpft drastisch. Der echte Entscheidungsgrund ist die Wertsteigerung des Hauses und die Opportunitätskosten jener $80,000 Eigenkapital.</p>
     </div>
   </section>
 )

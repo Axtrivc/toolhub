@@ -52,10 +52,11 @@ const en: ReactNode = (
         you paying for as long as possible. From yours, it&apos;s a trap.
       </p>
       <p>
-        A <strong>$5,000 balance at 22% APR</strong> with a typical minimum payment of around
-        $110/month takes <strong>over 27 years</strong> to pay off and costs roughly{' '}
-        <strong>$8,000 in interest</strong> &mdash; more than the original debt. You end up
-        paying for whatever you bought nearly three times over.
+        A <strong>$5,000 balance at 22% APR</strong> paid off at a fixed $110/month still takes{' '}
+        <strong>over 8 years</strong> to clear and costs roughly <strong>$5,850 in interest</strong>{' '}
+        &mdash; more than the original debt. You end up paying for whatever you bought more than
+        twice over, and a declining minimum payment (starting near that same $110) stretches out
+        even longer.
       </p>
     </div>
     <div>
@@ -169,7 +170,7 @@ const zh: ReactNode = (
         最低还款额被刻意设得很低——通常是余额的 1% 到 3% 加上当月利息。从银行的角度看,低最低还款能让你尽可能长久地还下去。从你的角度看,这是个陷阱。
       </p>
       <p>
-        一笔 <strong>22% APR 的 $5,000 余额</strong>,按约 $110/月的典型最低还款,需要 <strong>超过 27 年</strong>才能还清,利息大约 <strong>$8,000</strong>——比原来的债务还多。你最终为你买的东西付了近三倍的价钱。
+        一笔 <strong>22% APR 的 $5,000 余额</strong>,即使按固定 $110/月偿还,也需要 <strong>超过 8 年</strong>才能还清,利息大约 <strong>$5,850</strong>——比原来的债务还多。你最终为你买的东西付了两倍多的价钱;而按逐月递减的最低还款(起点同样约为 $110)则会拖得更久。
       </p>
     </div>
     <div>
@@ -277,10 +278,11 @@ const es: ReactNode = (
         pagando el mayor tiempo posible. Desde el tuyo, es una trampa.
       </p>
       <p>
-        Un <strong>saldo de $5,000 al 22 % de APR</strong> con un pago mínimo típico de unos
-        $110/mes tarda <strong>más de 27 años</strong> en pagarse y cuesta aproximadamente{' '}
-        <strong>$8,000 en intereses</strong> — más que la deuda original. Acabas pagando por lo que
-        compraste casi al triple.
+        Un <strong>saldo de $5,000 al 22 % de APR</strong> pagado con $110 fijos al mes tarda{' '}
+        <strong>más de 8 años</strong> en liquidarse y cuesta aproximadamente{' '}
+        <strong>$5,850 en intereses</strong> — más que la deuda original. Acabas pagando por lo que
+        compraste más del doble, y un pago mínimo decreciente (que empieza en esos mismos $110) se
+        alarga todavía más.
       </p>
     </div>
     <div>
@@ -411,10 +413,11 @@ const de: ReactNode = (
         möglichst lange am Zahlen. Aus deiner Sicht ist es eine Falle.
       </p>
       <p>
-        Ein <strong>Saldo von $5,000 bei 22 % APR</strong> mit einer typischen Mindestzahlung von
-        etwa $110/Monat braucht <strong>über 27 Jahre</strong> bis zur Tilgung und kostet rund{' '}
-        <strong>$8,000 an Zinsen</strong> — mehr als die ursprüngliche Schuld. Du zahlst für das,
-        was du gekauft hast, am Ende fast dreimal.
+        Ein <strong>Saldo von $5,000 bei 22 % APR</strong>, der mit einer festen Zahlung von
+        $110/Monat getilgt wird, braucht <strong>über 8 Jahre</strong> bis zur Tilgung und kostet
+        rund <strong>$5,850 an Zinsen</strong> — mehr als die ursprüngliche Schuld. Du zahlst für
+        das, was du gekauft hast, am Ende mehr als doppelt — und eine sinkende Mindestzahlung (die
+        bei etwa denselben $110 beginnt) zieht sich noch viel länger hin.
       </p>
     </div>
     <div>

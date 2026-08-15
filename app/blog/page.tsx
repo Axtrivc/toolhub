@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import { PageShell } from '@/components/PageShell'
 import { BlogIndex, type BlogPostMeta } from '@/components/BlogIndex'
 import { SITE_NAME } from '@/lib/seo'
-import { SITE_URL } from '../../next.config'
+import { SITE_URL } from '@/lib/constants'
 
 /**
  * 博客索引页 —— /blog/

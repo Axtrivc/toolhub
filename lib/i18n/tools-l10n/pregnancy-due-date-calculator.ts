@@ -11,6 +11,7 @@ export const pregnancyDueDateCalculatorL10n: ToolL10n = {
       explain: '内格莱法则:末次月经首日加 280 天(40 周)。实际分娩可能前后差约两周;这是估算,不是保证。',
     },
     ui: {
+      weekN: '第 {n} 周', notPregnant: '未怀孕 / 已过预产期',
       'in.lmp': '末次月经首日(YYYY-MM-DD)',
       'out.due': '预计预产期',
       'out.conceived': '可能受孕日',
@@ -34,6 +35,7 @@ export const pregnancyDueDateCalculatorL10n: ToolL10n = {
       explain: 'Regla de Naegele: suma 280 días (40 semanas) al primer día de la última menstruación. El parto real varía unas dos semanas; es una estimación, no una garantía.',
     },
     ui: {
+      weekN: 'Semana {n}', notPregnant: 'No embarazada / parto ya vencido',
       'in.lmp': 'Primer día de la última menstruación (AAAA-MM-DD)',
       'out.due': 'Fecha probable de parto',
       'out.conceived': 'Fecha probable de concepción',
@@ -57,6 +59,7 @@ export const pregnancyDueDateCalculatorL10n: ToolL10n = {
       explain: 'Naegele-Regel: 280 Tage (40 Wochen) zum ersten Tag der letzten Periode addieren. Der eigentliche Geburtstermin schwankt um etwa zwei Wochen — es ist eine Schätzung, keine Garantie.',
     },
     ui: {
+      weekN: 'Woche {n}', notPregnant: 'Nicht schwanger / Termin überschritten',
       'in.lmp': 'Erster Tag der letzten Periode (JJJJ-MM-TT)',
       'out.due': 'Berechneter Geburtstermin',
       'out.conceived': 'Wahrscheinlicher Empfängniszeitpunkt',

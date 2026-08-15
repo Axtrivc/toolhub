@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useMemo, useCallback, type ComponentType } from 'react'
+import { useState, useMemo, useCallback, useEffect, type ComponentType } from 'react'
 import { CalculatorField, ResultCard, CalculatorNote } from './CalculatorField'
 import { BreakdownChart } from './BreakdownChart'
 import { ResultActions } from '../ResultActions'
@@ -77,11 +77,30 @@ export function makeCalculatorClient(config: CalculatorConfig): ComponentType {
 
     const results = useMemo(() => {
       try {
-        return config.compute(values)
+        return config.compute(values, locale)
       } catch {
         return {}
       }
-    }, [values])
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [values, locale])
+
+    // 依赖"当前时间"的派生结果(如 PregnancyDueDate 的 Current week):
+    // 仅挂载后在 effect 里计算并覆盖合并,SSR/首帧保持 compute 的 '—' 占位,
+    // 避免构建期与访问期 now 不同导致的水合不一致。
+    const [nowDerived, setNowDerived] = useState<Record<string, string>>({})
+    useEffect(() => {
+      if (!config.deriveNow) return
+      try {
+        setNowDerived(config.deriveNow(values, locale))
+      } catch {
+        setNowDerived({})
+      }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [values, locale])
+    const mergedResults = useMemo(
+      () => ({ ...results, ...nowDerived }),
+      [results, nowDerived],
+    )
 
     const setValue = (key: string, v: string) =>
       setValues((prev) => ({ ...prev, [key]: v }))
@@ -110,7 +129,7 @@ export function makeCalculatorClient(config: CalculatorConfig): ComponentType {
         (f) => `  ${inLabel(f.key, f.label)}: ${values[f.key] ?? ''}${f.suffix ? inSuffix(f.key, f.suffix) : ''}`,
       )
       const resultLines = config.outputs.map(
-        (o) => `  ${outLabel(o.key, o.label)}: ${results[o.key] ?? '—'}`,
+        (o) => `  ${outLabel(o.key, o.label)}: ${mergedResults[o.key] ?? '—'}`,
       )
       return [
         L('summaryTitle', 'Calculation Summary'),
@@ -120,10 +139,11 @@ export function makeCalculatorClient(config: CalculatorConfig): ComponentType {
         ...resultLines,
       ].join('\n')
       // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [config, values, results, locale])
+    }, [config, values, mergedResults, locale])
 
     // CSV 导出内容(纯字符串) - 输入与结果三列表格,Excel/Sheets 可直接打开。
     // 实际下载交给 ResultActions(它接受 downloadContent),这里只生成内容。
+    // 前置 UTF-8 BOM,确保 Excel 正确识别 UTF-8(本地化表头含非 ASCII 字符)。
     const csvContent = useMemo(() => {
       const rows: string[][] = [
         [L('csvField', 'Field'), L('csvType', 'Type'), L('csvValue', 'Value')],
@@ -135,12 +155,12 @@ export function makeCalculatorClient(config: CalculatorConfig): ComponentType {
         ...config.outputs.map((o) => [
           outLabel(o.key, o.label),
           L('csvResult', 'Result'),
-          results[o.key] ?? '—',
+          mergedResults[o.key] ?? '—',
         ]),
       ]
-      return rows.map((r) => r.map(csvEscape).join(',')).join('\n')
+      return '\uFEFF' + rows.map((r) => r.map(csvEscape).join(',')).join('\n')
       // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [config, values, results, locale])
+    }, [config, values, mergedResults, locale])
 
     const downloadFilename = config.slug
       ? `${config.slug}-result.csv`
@@ -193,13 +213,13 @@ export function makeCalculatorClient(config: CalculatorConfig): ComponentType {
           })}
         </div>
 
-        {/* 结果区 */}
-        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+        {/* 结果区(aria-live:输入变化时屏幕阅读器播报结果更新) */}
+        <div role="status" aria-live="polite" className="grid grid-cols-1 gap-3 sm:grid-cols-2">
           {config.outputs.map((o) => (
             <ResultCard
               key={o.key}
               label={outLabel(o.key, o.label)}
-              value={results[o.key] ?? '—'}
+              value={mergedResults[o.key] ?? '—'}
               highlight={o.highlight}
               sublabel={o.sublabel ? outSub(o.key, o.sublabel) : undefined}
             />
@@ -220,7 +240,7 @@ export function makeCalculatorClient(config: CalculatorConfig): ComponentType {
           const slices = config.chart.slices
             .map((s) => ({
               label: L(`slice.${s.valueKey}`, s.label),
-              value: parseNumeric(results[s.valueKey]),
+              value: parseNumeric(mergedResults[s.valueKey]),
               color: s.color,
             }))
             .filter((s) => s.value > 0)

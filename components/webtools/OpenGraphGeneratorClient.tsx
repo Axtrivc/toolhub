@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useMemo, useCallback } from 'react'
+import { useState, useMemo, useCallback, type ReactNode } from 'react'
 import { CopyButton } from '@/components/CopyButton'
 import { LoadSampleButton } from '@/components/LoadSampleButton'
 import { useApp } from '@/components/providers/AppProviders'
@@ -50,6 +50,20 @@ function hostOf(url: string): string {
   } catch {
     return url
   }
+}
+
+/**
+ * 预览图:加载失败时在 React state 里记账并渲染占位元素(而非改 style.display,
+ * 那样子 URL 修正后永远不会恢复)。父组件用 key={src} 换图即重置失败态,
+ * 逐字符输入 URL 时一旦合法就能恢复显示。
+ */
+function OgPreviewImage({ src, alt, placeholder }: { src: string; alt: string; placeholder: ReactNode }) {
+  const [failed, setFailed] = useState(false)
+  if (failed) return <>{placeholder}</>
+  return (
+    // eslint-disable-next-line @next/next/no-img-element
+    <img src={src} alt={alt} className="h-full w-full object-cover" onError={() => setFailed(true)} />
+  )
 }
 
 export function OpenGraphGeneratorClient() {
@@ -202,8 +216,12 @@ export function OpenGraphGeneratorClient() {
               <div className="overflow-hidden rounded-xl border bg-white shadow-sm dark:bg-slate-800" style={{ borderColor: 'rgb(var(--border))' }}>
                 <div className="flex aspect-[1.91/1] items-center justify-center bg-slate-100 dark:bg-slate-700">
                   {v.image ? (
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img src={v.image} alt={L('ogPreviewAlt', 'OG preview')} className="h-full w-full object-cover" onError={(e) => { (e.target as HTMLImageElement).style.display = 'none' }} />
+                    <OgPreviewImage
+                      key={v.image}
+                      src={v.image}
+                      alt={L('ogPreviewAlt', 'OG preview')}
+                      placeholder={<span className="text-xs text-slate-400">{L('noImage', 'No image')}</span>}
+                    />
                   ) : (
                     <span className="text-xs text-slate-400">{L('noImage', 'No image')}</span>
                   )}
@@ -225,8 +243,12 @@ export function OpenGraphGeneratorClient() {
               <div className="flex gap-3 rounded-xl border bg-white p-3 shadow-sm dark:bg-slate-800" style={{ borderColor: 'rgb(var(--border))' }}>
                 <div className="flex h-20 w-20 shrink-0 items-center justify-center overflow-hidden rounded-lg bg-slate-100 dark:bg-slate-700">
                   {v.image ? (
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img src={v.image} alt={L('twitterPreviewAlt', 'Twitter preview')} className="h-full w-full object-cover" onError={(e) => { (e.target as HTMLImageElement).style.display = 'none' }} />
+                    <OgPreviewImage
+                      key={v.image}
+                      src={v.image}
+                      alt={L('twitterPreviewAlt', 'Twitter preview')}
+                      placeholder={<span className="text-[10px] text-slate-400">{L('noImg', 'No img')}</span>}
+                    />
                   ) : (
                     <span className="text-[10px] text-slate-400">{L('noImg', 'No img')}</span>
                   )}
@@ -247,19 +269,23 @@ export function OpenGraphGeneratorClient() {
             <div className="overflow-hidden rounded-xl border bg-white shadow-sm dark:bg-slate-800" style={{ borderColor: 'rgb(var(--border))' }}>
               <div className="flex aspect-[1.91/1] items-center justify-center bg-slate-100 dark:bg-slate-700">
                 {v.image ? (
-                  // eslint-disable-next-line @next/next/no-img-element
-                    <img src={v.image} alt={L('twitterLargePreviewAlt', 'Twitter large preview')} className="h-full w-full object-cover" onError={(e) => { (e.target as HTMLImageElement).style.display = 'none' }} />
+                  <OgPreviewImage
+                    key={v.image}
+                    src={v.image}
+                    alt={L('twitterLargePreviewAlt', 'Twitter large preview')}
+                    placeholder={<span className="text-xs text-slate-400">{L('noImage', 'No image')}</span>}
+                  />
                 ) : (
-                  <span className="text-xs text-slate-400">No image</span>
+                  <span className="text-xs text-slate-400">{L('noImage', 'No image')}</span>
                 )}
               </div>
               <div className="px-3 py-2.5">
                 <div className="text-[11px] uppercase text-slate-400">{host}</div>
                 <div className="mt-0.5 line-clamp-1 text-sm font-semibold text-slate-800 dark:text-slate-100">
-                  {v.title || 'Your title'}
+                  {v.title || L('titleDefault', 'Your title')}
                 </div>
                 <div className="mt-0.5 line-clamp-2 text-xs text-slate-500 dark:text-slate-400">
-                  {v.description || 'Your description'}
+                  {v.description || L('descDefault', 'Your description')}
                 </div>
               </div>
             </div>

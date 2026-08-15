@@ -48,7 +48,7 @@ const en: ReactNode = (
       <p>
         Surcharging is <em>regulated</em>: some US states and countries restrict or ban it, and card networks
         impose caps and disclosure rules. A common alternative is raising your base price and offering a
-        cash/ACH discount instead. Rates shown here are approximations as of 2025 — confirm against your actual
+        cash/ACH discount instead. Rates shown here are approximations as of 2026 — confirm against your actual
         Stripe or PayPal agreement, since pricing changes and negotiated rates are common.
       </p>
     </div>
@@ -88,7 +88,7 @@ const zh: ReactNode = (
       <p>
         附加费是<em>受监管的</em>：美国部分州和其他一些国家会限制或禁止这种做法，银行卡组织也会
         规定上限和披露规则。一个常见的替代方案是先提高基础价格，再提供现金/ACH
-        折扣。这里显示的费率是 2025 年的近似值 —— 请以你实际的
+        折扣。这里显示的费率是 2026 年的近似值 —— 请以你实际的
         Stripe 或 PayPal 协议为准，因为定价会变化，且协商费率很常见。
       </p>
     </div>
@@ -133,7 +133,7 @@ const es: ReactNode = (
       <p>
         El recargo está <em>regulado</em>: algunos estados de EE. UU. y otros países lo restringen o prohíben, y las redes de tarjetas
         imponen topes y normas de divulgación. Una alternativa habitual es subir el precio base y ofrecer en su lugar un
-        descuento por pago en efectivo/ACH. Las tarifas que se muestran aquí son aproximaciones a 2025 — confírmalas frente a tu acuerdo real
+        descuento por pago en efectivo/ACH. Las tarifas que se muestran aquí son aproximaciones a 2026 — confírmalas frente a tu acuerdo real
         de Stripe o PayPal, ya que los precios cambian y las tarifas negociadas son frecuentes.
       </p>
     </div>
@@ -177,7 +177,7 @@ const de: ReactNode = (
       <p>
         Zuschläge sind <em>reguliert</em>: einige US-Bundesstaaten und andere Länder schränken sie ein oder verbieten sie, und die Kartennetzwerke
         schreiben Obergrenzen und Offenlegungspflichten vor. Eine gängige Alternative ist, den Basispreis anzuheben und stattdessen einen
-        Bargeld-/ACH-Rabatt anzubieten. Die hier gezeigten Gebühren sind Näherungswerte Stand 2025 — bestätige sie gegen deine tatsächliche
+        Bargeld-/ACH-Rabatt anzubieten. Die hier gezeigten Gebühren sind Näherungswerte Stand 2026 — bestätige sie gegen deine tatsächliche
         Stripe- oder PayPal-Vereinbarung, da sich Preise ändern und verhandelte Tarife häufig sind.
       </p>
     </div>

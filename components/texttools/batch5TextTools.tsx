@@ -16,10 +16,12 @@ export function HashGeneratorClient() {
   const [input, setInput] = useState('Hello World')
   const [hashes, setHashes] = useState<{ sha256: string; sha1: string } | null>(null)
   const [loading, setLoading] = useState(false)
+  const [error, setError] = useState('')
 
   const generate = async () => {
     if (!input) return
     setLoading(true)
+    setError('')
     try {
       const data = new TextEncoder().encode(input)
       const [sha256Buf, sha1Buf] = await Promise.all([
@@ -30,7 +32,9 @@ export function HashGeneratorClient() {
         [...new Uint8Array(buf)].map((b) => b.toString(16).padStart(2, '0')).join('')
       setHashes({ sha256: toHex(sha256Buf), sha1: toHex(sha1Buf) })
     } catch {
+      // crypto.subtle 仅在安全上下文(https / localhost)可用:失败要可见,不能静默空白
       setHashes(null)
+      setError(L('cryptoUnavailable', '⚠️ Secure hashing (SubtleCrypto) is not available in this context — open this page over HTTPS or localhost'))
     }
     setLoading(false)
   }
@@ -50,6 +54,7 @@ export function HashGeneratorClient() {
       <button onClick={generate} disabled={loading || !input} className="btn btn-primary disabled:opacity-50">
         {loading ? L('hashing', 'Hashing…') : L('generateHashes', '# Generate Hashes')}
       </button>
+      {error && <p className="text-sm text-red-600">{error}</p>}
       {hashes && (
         <div className="space-y-4">
           <HashResult label="SHA-256" value={hashes.sha256} />
@@ -61,7 +66,7 @@ export function HashGeneratorClient() {
         </div>
       )}
       <CalculatorNote>
-        {L('note', '🔐 Uses SubtleCrypto API (true cryptographic hashing). Both MD5 and SHA-1 are cryptographically broken — SHA-256 is recommended.')}
+        {L('note', '🔐 Uses SubtleCrypto API (true cryptographic hashing). SHA-1 is cryptographically broken — SHA-256 is recommended.')}
       </CalculatorNote>
     </div>
   )
@@ -91,7 +96,8 @@ export const SlugToTitleClient = makeTextTool({
       .replace(/[-_]+/g, ' ')
       .replace(/\s+/g, ' ')
       .trim()
-      .replace(/\b\w/g, (c) => c.toUpperCase()),
+      // Unicode 感知的词首大写(与 title-case-converter 同口径),避免 ñ/o 之间被误判为词首
+      .replace(/(^|[^\p{L}\p{N}_])(\p{L})/gu, (_m, p1: string, p2: string) => p1 + p2.toUpperCase()),
   note: '🔤 Reverses URL slugs back to readable titles. Replaces hyphens with spaces and capitalizes words.',
 })
 

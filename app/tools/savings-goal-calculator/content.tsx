@@ -29,7 +29,7 @@ const en: ReactNode = (
 
     <div>
       <h2>Worked Example</h2>
-      <p>Say you want <strong>$30,000</strong> for a house deposit in <strong>5 years</strong>, you already have <strong>$5,000</strong> saved, and you expect a <strong>5% annual return</strong>. Your $5,000 grows to about $6,416 on its own, leaving a ~$23,584 gap. Split across 60 months at a 5% growth rate, that works out to roughly <strong>$345/month</strong>. Bump the return to 7% and the required contribution drops to about $312/month &mdash; growth is doing more of the work for you.</p>
+      <p>Say you want <strong>$30,000</strong> for a house deposit in <strong>5 years</strong>, you already have <strong>$5,000</strong> saved, and you expect a <strong>5% annual return</strong>. Your $5,000 grows to about $6,381 on its own, leaving a ~$23,619 gap. Split across 60 months at a 5% growth rate, that works out to roughly <strong>$345/month</strong>. Bump the return to 7% and the required contribution drops to about $320/month &mdash; growth is doing more of the work for you.</p>
     </div>
 
     <div>
@@ -62,7 +62,7 @@ const zh: ReactNode = (
 
     <div>
       <h2>计算示例</h2>
-      <p>假设你想在 <strong>5 年</strong>内存够 <strong>$30,000</strong> 作为买房首付,你已经有 <strong>$5,000</strong> 存款,预期 <strong>年回报率 5%</strong>。你的 $5,000 自身会增长到约 $6,416,留下约 $23,584 的缺口。按 5% 的增长率分摊到 60 个月,大约需要每月存 <strong>$345</strong>。若把回报率提高到 7%,所需每月供款会降到约 $312——增长在帮你分担更多。</p>
+      <p>假设你想在 <strong>5 年</strong>内存够 <strong>$30,000</strong> 作为买房首付,你已经有 <strong>$5,000</strong> 存款,预期 <strong>年回报率 5%</strong>。你的 $5,000 自身会增长到约 $6,381,留下约 $23,619 的缺口。按 5% 的增长率分摊到 60 个月,大约需要每月存 <strong>$345</strong>。若把回报率提高到 7%,所需每月供款会降到约 $320——增长在帮你分担更多。</p>
     </div>
 
     <div>
@@ -95,7 +95,7 @@ const es: ReactNode = (
 
     <div>
       <h2>Ejemplo resuelto</h2>
-      <p>Supón que quieres <strong>$30,000</strong> para una entrada de casa en <strong>5 años</strong>, ya tienes <strong>$5,000</strong> ahorrados y esperas un <strong>5 % de retorno anual</strong>. Tus $5,000 crecen por sí solos hasta unos $6,416, dejando un hueco de ~$23,584. Repartido en 60 meses a una tasa del 5 %, sale a unos <strong>$345/mes</strong>. Si subes el retorno al 7 %, la aportación necesaria baja a unos $312/mes — el crecimiento hace más del trabajo por ti.</p>
+      <p>Supón que quieres <strong>$30,000</strong> para una entrada de casa en <strong>5 años</strong>, ya tienes <strong>$5,000</strong> ahorrados y esperas un <strong>5 % de retorno anual</strong>. Tus $5,000 crecen por sí solos hasta unos $6,381, dejando un hueco de ~$23,619. Repartido en 60 meses a una tasa del 5 %, sale a unos <strong>$345/mes</strong>. Si subes el retorno al 7 %, la aportación necesaria baja a unos $320/mes — el crecimiento hace más del trabajo por ti.</p>
     </div>
 
     <div>
@@ -128,7 +128,7 @@ const de: ReactNode = (
 
     <div>
       <h2>Durchgerechnetes Beispiel</h2>
-      <p>Angenommen, du willst in <strong>5 Jahren</strong> <strong>$30,000</strong> für eine Haus-Anzahlung, hast bereits <strong>$5,000</strong> gespart und erwartest eine <strong>5 % Jahresrendite</strong>. Deine $5,000 wachsen allein auf etwa $6,416, es bleibt eine Lücke von ~$23,584. Auf 60 Monate bei 5 % Wachstum verteilt, sind das rund <strong>$345/Monat</strong>. Erhöhst du die Rendite auf 7 %, sinkt die nötige Rate auf etwa $312/Monat — das Wachstum macht mehr von der Arbeit für dich.</p>
+      <p>Angenommen, du willst in <strong>5 Jahren</strong> <strong>$30,000</strong> für eine Haus-Anzahlung, hast bereits <strong>$5,000</strong> gespart und erwartest eine <strong>5 % Jahresrendite</strong>. Deine $5,000 wachsen allein auf etwa $6,381, es bleibt eine Lücke von ~$23,619. Auf 60 Monate bei 5 % Wachstum verteilt, sind das rund <strong>$345/Monat</strong>. Erhöhst du die Rendite auf 7 %, sinkt die nötige Rate auf etwa $320/Monat — das Wachstum macht mehr von der Arbeit für dich.</p>
     </div>
 
     <div>

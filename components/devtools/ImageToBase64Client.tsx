@@ -64,7 +64,7 @@ export function ImageToBase64Client() {
     }
     reader.onerror = () => setError(L('errReadFile', 'Could not read the file.'))
     reader.readAsDataURL(file)
-  }, [])
+  }, [locale])
 
   const onInputChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {

@@ -85,10 +85,17 @@ function addressType(octets: number[]): string {
   return 'Public'
 }
 
+/** 校验错误:key 用于 tui 查询,fb 为英文原值,vars 填充 {name} 占位符 */
+interface SubnetError {
+  key: string
+  fb: string
+  vars?: Record<string, string>
+}
+
 /** 解析输入并计算全部子网字段;失败返回 { error } */
-function computeSubnet(input: string): SubnetResult | { error: string } {
+function computeSubnet(input: string): SubnetResult | { error: SubnetError } {
   const trimmed = input.trim()
-  if (!trimmed) return { error: 'Enter an IPv4 address with a prefix, e.g. 192.168.1.10/24' }
+  if (!trimmed) return { error: { key: 'errEnterIp', fb: 'Enter an IPv4 address with a prefix, e.g. 192.168.1.10/24' } }
 
   // 拆出 IP 部分与前缀/掩码部分(支持 "/" 或空格分隔)
   let ipPart = trimmed
@@ -99,28 +106,46 @@ function computeSubnet(input: string): SubnetResult | { error: string } {
     suffix = trimmed.slice(idx + 1)
   } else if (/\s/.test(trimmed)) {
     const parts = trimmed.split(/\s+/)
-    if (parts.length !== 2) return { error: 'Use formats like 192.168.1.10/24 or 192.168.1.10 255.255.255.0' }
+    if (parts.length !== 2) {
+      return { error: { key: 'errTwoParts', fb: 'Use formats like 192.168.1.10/24 or 192.168.1.10 255.255.255.0' } }
+    }
     ipPart = parts[0]
     suffix = parts[1]
   } else {
-    return { error: 'Missing prefix length — add /24 (or a space + mask) after the IP' }
+    return { error: { key: 'errMissingPrefix', fb: 'Missing prefix length — add /24 (or a space + mask) after the IP' } }
   }
 
   const octets = parseIpv4(ipPart)
-  if (!octets) return { error: `Invalid IPv4 address "${ipPart}" — four octets of 0–255 expected` }
+  if (!octets) {
+    return { error: { key: 'errInvalidIp', fb: 'Invalid IPv4 address "{ip}" — four octets of 0–255 expected', vars: { ip: ipPart } } }
+  }
 
   // 后缀:数字前缀(0-32)或点分掩码
   let prefix: number
   if (suffix.includes('.')) {
     const maskOctets = parseIpv4(suffix)
-    if (!maskOctets) return { error: `Invalid subnet mask "${suffix}"` }
+    if (!maskOctets) {
+      return { error: { key: 'errInvalidMask', fb: 'Invalid subnet mask "{mask}"', vars: { mask: suffix } } }
+    }
     const p = maskToPrefix(maskOctets)
-    if (p === null) return { error: `Mask "${suffix}" is not contiguous (bits must be 1s followed by 0s)` }
+    if (p === null) {
+      return {
+        error: {
+          key: 'errNonContiguousMask',
+          fb: 'Mask "{mask}" is not contiguous (bits must be 1s followed by 0s)',
+          vars: { mask: suffix },
+        },
+      }
+    }
     prefix = p
   } else {
-    if (!/^\d{1,2}$/.test(suffix)) return { error: `Invalid prefix "/${suffix}" — use 0–32` }
+    if (!/^\d{1,2}$/.test(suffix)) {
+      return { error: { key: 'errInvalidPrefix', fb: 'Invalid prefix "/{prefix}" — use 0–32', vars: { prefix: suffix } } }
+    }
     prefix = parseInt(suffix, 10)
-    if (prefix > 32) return { error: `Prefix /${prefix} is out of range (0–32)` }
+    if (prefix > 32) {
+      return { error: { key: 'errPrefixRange', fb: 'Prefix /{prefix} is out of range (0–32)', vars: { prefix: String(prefix) } } }
+    }
   }
 
   const ipNum = octetsToNum(octets)
@@ -173,6 +198,16 @@ export function IpSubnetCalculatorClient() {
 
   const result = useMemo(() => computeSubnet(input), [input])
 
+  const errorText = useMemo(() => {
+    if (!('error' in result)) return ''
+    let s = L(result.error.key, result.error.fb)
+    if (result.error.vars) {
+      for (const [k, v] of Object.entries(result.error.vars)) s = s.replace(`{${k}}`, v)
+    }
+    return s
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [result, locale])
+
   const rows: [string, string][] = useMemo(() => {
     if ('error' in result) return []
     return [
@@ -223,7 +258,7 @@ export function IpSubnetCalculatorClient() {
 
       {/* 错误或结果 */}
       {'error' in result ? (
-        <div className="rounded-lg border border-red-200 bg-red-50 p-4 text-sm text-red-700">⚠️ {result.error}</div>
+        <div className="rounded-lg border border-red-200 bg-red-50 p-4 text-sm text-red-700">⚠️ {errorText}</div>
       ) : (
         <>
           <dl

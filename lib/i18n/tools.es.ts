@@ -121,7 +121,7 @@ export const esTools: Record<string, { name: string; shortIntro: string }> = {
   },
   'discount-calculator': {
     name: 'Calculadora de descuentos',
-    shortIntro: 'Hallar el precio final tras el descuento y cuánto ahorras.',
+    shortIntro: 'Calcula el precio final tras el descuento y cuánto ahorras.',
   },
   'auto-loan-calculator': {
     name: 'Calculadora de préstamo de auto',
@@ -304,19 +304,19 @@ export const esTools: Record<string, { name: string; shortIntro: string }> = {
     shortIntro: 'Busca y reemplaza cualquier texto al instante.',
   },
   'uppercase-converter': {
-    name: 'Converter a MAYÚSCULAS',
+    name: 'Convertidor a MAYÚSCULAS',
     shortIntro: 'Convierte cualquier texto a MAYÚSCULAS al instante.',
   },
   'lowercase-converter': {
-    name: 'Converter a minúsculas',
+    name: 'Convertidor a minúsculas',
     shortIntro: 'Convierte cualquier texto a minúsculas al instante.',
   },
   'title-case-converter': {
-    name: 'Converter a Tipo Título',
+    name: 'Convertidor a Tipo Título',
     shortIntro: 'Capitaliza la primera letra de cada palabra para títulos.',
   },
   'sentence-case-converter': {
-    name: 'Converter a Tipo Oración',
+    name: 'Convertidor a Tipo Oración',
     shortIntro: 'Capitaliza la primera letra de cada frase automáticamente.',
   },
   'slug-to-title': {
@@ -373,7 +373,7 @@ export const esTools: Record<string, { name: string; shortIntro: string }> = {
   },
   'srt-subtitle-shift': {
     name: 'Desplazador de subtítulos SRT',
-    shortIntro: 'Desplaza los tiempos de los subtítulos cualquier cantidad y elimina el formato.',
+    shortIntro: 'Desplaza los tiempos de los subtítulos en cualquier cantidad y elimina el formato.',
   },
   'text-cleaner': {
     name: 'Limpiador de texto',
@@ -489,7 +489,7 @@ export const esTools: Record<string, { name: string; shortIntro: string }> = {
   },
   'permutation-calculator': {
     name: 'Calculadora de permutaciones',
-    shortIntro: 'Calcula permutaciones (orden_importa).',
+    shortIntro: 'Calcula permutaciones (el orden importa).',
   },
   'circle-calculator': {
     name: 'Calculadora de círculo',
@@ -509,7 +509,7 @@ export const esTools: Record<string, { name: string; shortIntro: string }> = {
   },
   'percentile-calculator': {
     name: 'Calculadora de percentil',
-    shortIntro: 'Hallar el valor de cualquier percentil de tus datos.',
+    shortIntro: 'Calcula el valor de cualquier percentil de tus datos.',
   },
   'fraction-calculator': {
     name: 'Calculadora de fracciones',
@@ -521,7 +521,7 @@ export const esTools: Record<string, { name: string; shortIntro: string }> = {
   },
   'lcm-gcd-calculator': {
     name: 'Calculadora de MCM y MCD',
-    shortIntro: 'Hallar el MCM y MCD de cualquier conjunto de números.',
+    shortIntro: 'Calcula el MCM y MCD de cualquier conjunto de números.',
   },
   'average-calculator': {
     name: 'Calculadora de promedio',
@@ -539,11 +539,11 @@ export const esTools: Record<string, { name: string; shortIntro: string }> = {
   },
   'calorie-calculator': {
     name: 'Calculadora de calorías',
-    shortIntro: 'Hallar tus necesidades calóricas diarias para perder o ganar peso.',
+    shortIntro: 'Calcula tus necesidades calóricas diarias para perder o ganar peso.',
   },
   'tdee-calculator': {
     name: 'Calculadora de TDEE',
-    shortIntro: 'Hallar tus calorías diarias (TDEE) para definir, mantener o volumen.',
+    shortIntro: 'Calcula tus calorías diarias (TDEE) para definir, mantener o volumen.',
   },
   'bmr-calculator': {
     name: 'Calculadora de TMB',
@@ -563,11 +563,11 @@ export const esTools: Record<string, { name: string; shortIntro: string }> = {
   },
   'water-intake-calculator': {
     name: 'Calculadora de ingesta de agua',
-    shortIntro: 'Hallar tu ingesta diaria ideal de agua.',
+    shortIntro: 'Calcula tu ingesta diaria ideal de agua.',
   },
   'ideal-weight-calculator': {
     name: 'Calculadora de peso ideal',
-    shortIntro: 'Hallar tu peso corporal ideal según altura y género.',
+    shortIntro: 'Calcula tu peso corporal ideal según altura y género.',
   },
 
   // ─────────── 🎓 Calculadoras educativas ───────────
@@ -577,7 +577,7 @@ export const esTools: Record<string, { name: string; shortIntro: string }> = {
   },
   'final-grade-calculator': {
     name: 'Calculadora de nota final',
-    shortIntro: 'Hallar la nota de examen necesaria para tu objetivo.',
+    shortIntro: 'Calcula la nota de examen necesaria para tu objetivo.',
   },
   'gpa-calculator': {
     name: 'Calculadora de GPA',
@@ -595,7 +595,7 @@ export const esTools: Record<string, { name: string; shortIntro: string }> = {
   },
   'age-difference-calculator': {
     name: 'Calculadora de diferencia de edad',
-    shortIntro: 'Hallar la diferencia de edad entre dos personas.',
+    shortIntro: 'Calcula la diferencia de edad entre dos personas.',
   },
   'days-countdown-calculator': {
     name: 'Calculadora de cuenta regresiva',

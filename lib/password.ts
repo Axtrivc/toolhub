@@ -138,12 +138,13 @@ function shuffle<T>(arr: T[]): T[] {
  *   40-60:      弱 (2)
  *   60-80:      强 (3)
  *   > 80:       非常强 (4)
+ * 只返回数值 score,不附带文案 —— 展示标签由调用方按 locale 自行映射。
  */
 export function estimateStrength(
   password: string,
   poolSize: number,
-): { score: 0 | 1 | 2 | 3 | 4; label: string; entropyBits: number } {
-  if (!password) return { score: 0, label: 'Empty', entropyBits: 0 }
+): { score: 0 | 1 | 2 | 3 | 4; entropyBits: number } {
+  if (!password) return { score: 0, entropyBits: 0 }
   const entropyBits = Math.round(password.length * Math.log2(Math.max(poolSize, 2)))
 
   let score: 0 | 1 | 2 | 3 | 4
@@ -152,6 +153,5 @@ export function estimateStrength(
   else if (entropyBits < 80) score = 3
   else score = 4
 
-  const labels = ['', 'Very Weak', 'Weak', 'Strong', 'Very Strong']
-  return { score, label: labels[score], entropyBits }
+  return { score, entropyBits }
 }

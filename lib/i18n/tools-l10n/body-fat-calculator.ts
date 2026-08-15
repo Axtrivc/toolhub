@@ -11,6 +11,9 @@ export const bodyFatCalculatorL10n: ToolL10n = {
       explain: '美国海军法用身高、颈围、腰围(女性加臀围)估算体脂率。方便免费,但不如 DEXA 或水下称重等临床方法精确。',
     },
     ui: {
+      errWaist: '腰围必须大于颈围',
+      errInvalid: '测量值无效',
+      catEssential: '必需脂肪', catAthlete: '运动员', catFitness: '健康体型', catAverage: '平均水平', catHigh: '偏高',
       'in.gender': '性别',
       'opt.gender.male': '男',
       'opt.gender.female': '女',
@@ -38,6 +41,9 @@ export const bodyFatCalculatorL10n: ToolL10n = {
       explain: 'El método de la Marina de EE. UU. estima el % de grasa a partir de talla, cuello y cintura (y cadera en mujeres). Es cómodo y gratis, pero menos preciso que DEXA o pesaje hidrostático.',
     },
     ui: {
+      errWaist: 'La cintura debe ser mayor que el cuello',
+      errInvalid: 'Medidas no válidas',
+      catEssential: 'Grasa esencial', catAthlete: 'Atleta', catFitness: 'En forma', catAverage: 'Promedio', catHigh: 'Alto',
       'in.gender': 'Sexo',
       'opt.gender.male': 'Hombre',
       'opt.gender.female': 'Mujer',
@@ -65,6 +71,9 @@ export const bodyFatCalculatorL10n: ToolL10n = {
       explain: 'Die U.S.-Navy-Methode schätzt den Körperfettanteil aus Größe, Hals- und Bauchumfang (bei Frauen plus Hüfte). Praktisch und gratis, aber ungenauer als DEXA oder Hydrostatik.',
     },
     ui: {
+      errWaist: 'Der Taillenumfang muss größer als der Halsumfang sein',
+      errInvalid: 'Ungültige Messwerte',
+      catEssential: 'Essentielle Fette', catAthlete: 'Sportler', catFitness: 'Fit', catAverage: 'Durchschnitt', catHigh: 'Hoch',
       'in.gender': 'Geschlecht',
       'opt.gender.male': 'Männlich',
       'opt.gender.female': 'Weiblich',

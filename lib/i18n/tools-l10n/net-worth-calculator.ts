@@ -17,6 +17,7 @@ export const netWorthCalculatorL10n: ToolL10n = {
       { q: '多久重新算一次?', a: '大多数人每 6 到 12 个月算一次就够了。更频繁只会增加噪音(市场波动)而不增加洞察。多年的趋势比任何单次快照更重要——净资产每年增长 8-12% 就算很强了。' },
     ],
     ui: {
+      noDebt: '无负债',
       'in.assets': '总资产(现金、房产、投资)', 'in.liabilities': '总负债(房贷、贷款、债务)',
       'out.networth': '你的净资产', 'out.ratio': '资产负债比',
       note: '💎 净资产 = 你拥有的减去你欠的。美国净资产中位数约 $192,000;超过 $1M 就进入了前 10%。',
@@ -35,6 +36,7 @@ export const netWorthCalculatorL10n: ToolL10n = {
       { q: '¿Con qué frecuencia debo recalcularlo?', a: 'Cada 6 a 12 meses basta para la mayoría. Revisiones más frecuentes solo añaden ruido (vaivenes del mercado) sin aportar información. La tendencia a lo largo de los años importa más que cualquier foto fija; un patrimonio que crece 8-12 % anual es un progreso sólido.' },
     ],
     ui: {
+      noDebt: 'Sin deudas',
       'in.assets': 'Activos totales (efectivo, vivienda, inversiones)', 'in.liabilities': 'Pasivos totales (hipoteca, préstamos, deudas)',
       'out.networth': 'Tu patrimonio neto', 'out.ratio': 'Ratio activos/deuda',
       note: '💎 Patrimonio neto = lo que tienes menos lo que debes. La mediana en EE. UU. es ~$192,000; más de $1M te sitúa en el 10 % principal.',
@@ -53,6 +55,7 @@ export const netWorthCalculatorL10n: ToolL10n = {
       { q: 'Wie oft sollte ich neu rechnen?', a: 'Alle 6 bis 12 Monate reicht für die meisten. Häufigeres Prüfen bringt nur Rauschen (Marktchwankungen) ohne Erkenntnis. Der Trend über Jahre zählt mehr als jede Momentaufnahme — ein Reinvermögen, das 8-12 % pro Jahr steigt, ist ein starker Fortschritt.' },
     ],
     ui: {
+      noDebt: 'Keine Schulden',
       'in.assets': 'Gesamtaktiva (Bargeld, Haus, Investitionen)', 'in.liabilities': 'Gesamtverbindlichkeiten (Hypothek, Kredite, Schulden)',
       'out.networth': 'Dein Reinvermögen', 'out.ratio': 'Aktiva-zu-Schulden-Verhältnis',
       note: '💎 Reinvermögen = was du hast minus was du schuldest. Der US-Median liegt bei ~$192,000; über $1M brings dich in die obersten 10 %.',

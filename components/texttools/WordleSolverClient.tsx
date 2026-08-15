@@ -272,7 +272,7 @@ export function WordleSolverClient() {
               style={inputStyle}
             />
             <p className="mt-1.5 text-xs" style={{ color: 'rgb(var(--text-faint))' }}>
-              {L('anagramHint', 'Finds dictionary words (up to 5 letters) that can be spelled using only these letters.')}
+              {L('anagramHint', 'Finds dictionary words (up to the number of letters you enter) that can be spelled using only these letters.')}
             </p>
           </div>
 

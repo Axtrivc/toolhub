@@ -107,6 +107,9 @@ function isValidIPv6(s: string): boolean {
   const doubleColons = (s.match(/::/g) ?? []).length
   if (doubleColons > 1) return false
   if (!/^[0-9a-fA-F:]+$/.test(s)) return false
+  // 边界裸单冒号(:x 或 x:)非法;边界 :: 压缩(::1 / fe80::)合法
+  if (s.startsWith(':') && !s.startsWith('::')) return false
+  if (s.endsWith(':') && !s.endsWith('::')) return false
   const groups = s.split(':')
   if (!groups.every((h) => h.length <= 4)) return false
   // 组数校验:无 :: 压缩时必须恰好 8 组;有 :: 时非空组 ≤ 7(:: 展开补零)

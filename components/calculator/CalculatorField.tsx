@@ -70,7 +70,10 @@ export function ResultCard({
     // 高亮态:主色梯度淡底(from-primary/5 → to-primary/10)+ 主色细描边 +
     // 渐变大字号数字(text-primary,暗色主题自动切换为 blue-400);
     // 令牌化后暗色模式不再出现旧版硬编码浅蓝底的违和感。
+    // role=status + aria-live:数值变化时屏幕阅读器播报(仅结果容器,输入不加)。
     <div
+      role="status"
+      aria-live="polite"
       className={`rounded-xl border p-5 text-center shadow-sm transition-shadow hover:shadow-md ${
         highlight
           ? 'border-primary/20 bg-gradient-to-br from-primary/5 to-primary/10'

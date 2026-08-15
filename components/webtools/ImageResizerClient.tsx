@@ -80,7 +80,7 @@ export function ImageResizerClient() {
     }
     reader.onerror = () => setError(L('errReadFile', 'Could not read the file.'))
     reader.readAsDataURL(file)
-  }, [])
+  }, [locale])
 
   const onInputChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -100,22 +100,29 @@ export function ImageResizerClient() {
     [handleFile],
   )
 
-  // 解码图片,记录自然尺寸并初始化目标宽高
+  // 解码图片,记录自然尺寸并初始化目标宽高(cancelled 防快速换图时旧图 onload 回写)
   useEffect(() => {
     if (!imgSrc) {
       imgRef.current = null
       return
     }
+    let cancelled = false
     const img = new Image()
     img.onload = () => {
+      if (cancelled) return
       imgRef.current = img
       setNatural({ w: img.naturalWidth, h: img.naturalHeight })
       setWidthStr(String(img.naturalWidth))
       setHeightStr(String(img.naturalHeight))
     }
-    img.onerror = () => setError(L('errDecodeImage', 'Could not decode the image file.'))
+    img.onerror = () => {
+      if (!cancelled) setError(L('errDecodeImage', 'Could not decode the image file.'))
+    }
     img.src = imgSrc
-  }, [imgSrc])
+    return () => {
+      cancelled = true
+    }
+  }, [imgSrc, locale])
 
   // 宽高联动(锁定时按原始纵横比推算另一边)
   const onWidthChange = useCallback(
@@ -158,11 +165,13 @@ export function ImageResizerClient() {
   const isLossy = outMime === 'image/jpeg' || outMime === 'image/webp'
 
   // 防抖实时渲染:离屏 canvas 重采样 + toBlob 测真实体积 + 生成预览
+  // (cancelled 防旧 toBlob 回调乱序覆盖:拖动质量滑杆会并发多次编码,只认最新一次)
   useEffect(() => {
     if (!imgRef.current || !dimsValid) {
       setResult(null)
       return
     }
+    let cancelled = false
     const timer = setTimeout(() => {
       const img = imgRef.current
       if (!img) return
@@ -173,10 +182,17 @@ export function ImageResizerClient() {
       if (!ctx) return
       ctx.imageSmoothingEnabled = true
       ctx.imageSmoothingQuality = 'high'
-      ctx.clearRect(0, 0, targetW, targetH)
+      // JPEG 无透明通道:透明像素会被编码成黑色 → 先铺白底再绘制(镜像 WebP→PNG 转换器的做法)
+      if (outMime === 'image/jpeg') {
+        ctx.fillStyle = '#ffffff'
+        ctx.fillRect(0, 0, targetW, targetH)
+      } else {
+        ctx.clearRect(0, 0, targetW, targetH)
+      }
       ctx.drawImage(img, 0, 0, targetW, targetH)
       canvas.toBlob(
         (blob) => {
+          if (cancelled) return
           if (!blob) return
           if (outUrlRef.current) URL.revokeObjectURL(outUrlRef.current)
           const url = URL.createObjectURL(blob)
@@ -187,7 +203,10 @@ export function ImageResizerClient() {
         isLossy ? quality : undefined,
       )
     }, 300)
-    return () => clearTimeout(timer)
+    return () => {
+      cancelled = true
+      clearTimeout(timer)
+    }
   }, [imgSrc, natural, targetW, targetH, dimsValid, outMime, isLossy, quality])
 
   // 卸载时回收 objectURL

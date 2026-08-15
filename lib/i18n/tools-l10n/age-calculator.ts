@@ -7,6 +7,7 @@ import type { ToolL10n } from '../tool-l10n'
 export const ageCalculatorL10n: ToolL10n = {
   zh: {
     ui: {
+      birthdayToday: '🎂 生日快乐 — 就是今天!',
       'ageAtDate': '截止日期时的年龄',
       'asOfSelectedDate': '截至所选日期',
       'dateOfBirth': '出生日期',
@@ -38,6 +39,7 @@ export const ageCalculatorL10n: ToolL10n = {
   },
   es: {
     ui: {
+      birthdayToday: '🎂 ¡Feliz cumpleaños — hoy es el día!',
       'ageAtDate': 'Edad en la fecha',
       'asOfSelectedDate': 'A la fecha seleccionada',
       'dateOfBirth': 'Fecha de nacimiento',
@@ -69,6 +71,7 @@ export const ageCalculatorL10n: ToolL10n = {
   },
   de: {
     ui: {
+      birthdayToday: '🎂 Alles Gute zum Geburtstag — heute ist der Tag!',
       'ageAtDate': 'Alter am Datum',
       'asOfSelectedDate': 'Zum gewählten Datum',
       'dateOfBirth': 'Geburtsdatum',

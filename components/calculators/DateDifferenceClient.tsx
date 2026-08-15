@@ -65,16 +65,13 @@ export function DateDifferenceClient() {
     const totalMonths = years * 12 + months
     const totalHours = Math.floor(totalMs / (1000 * 60 * 60))
 
-    // 计算工作日(排除周六日)
-    let businessDays = 0
-    const cur = new Date(s)
-    const MAX_SCAN_DAYS = 100000 // 防极端日期范围卡顿
-    let scanned = 0
-    while (cur <= e && scanned < MAX_SCAN_DAYS) {
-      const dow = cur.getDay()
+    // 计算工作日(排除周六日,含首尾两天)——算术法:整周 ×5 + 剩余 ≤6 天逐个核对
+    // (旧实现逐日循环、MAX_SCAN_DAYS 封顶,超长区间会静默截断)
+    const dowStart = s.getDay()
+    let businessDays = totalWeeks * 5
+    for (let k = totalWeeks * 7; k <= totalDays; k++) {
+      const dow = (dowStart + k) % 7
       if (dow !== 0 && dow !== 6) businessDays++
-      cur.setDate(cur.getDate() + 1)
-      scanned++
     }
 
     return { years, months, days, totalDays, totalWeeks, totalMonths, totalHours, businessDays }

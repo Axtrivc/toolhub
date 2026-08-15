@@ -34,7 +34,11 @@ export const TitleCaseConverterClient = makeTextTool({
   outputLabel: 'Title Case',
   defaultInput: 'the quick brown fox',
   transform: (t, locale) => {
-    const out = t.toLowerCase().replace(/\b\w/g, (c) => c.toUpperCase())
+    // Unicode 感知的词首大写:\b\w 会把「ñ 后的 o」当词首(EspañOl),
+    // 改为「行首或非[字母数字_]字符后的字母」才大写,ASCII 行为与 \b\w 完全一致
+    const out = t
+      .toLowerCase()
+      .replace(/(^|[^\p{L}\p{N}_])(\p{L})/gu, (_m, p1: string, p2: string) => p1 + p2.toUpperCase())
     // 纯中文无大小写概念:明确提示而非静默无效果
     if (out === t && hasCJK(t)) {
       return t + '\n\n' + tui('title-case-converter', locale, 'cjkNoEffectNote', 'ℹ️ Case conversion only affects Latin letters — Chinese characters are unchanged.')
@@ -51,8 +55,9 @@ export const SentenceCaseConverterClient = makeTextTool({
   defaultInput: 'hello. my name is john. how are you?',
   transform: (t, locale) => {
     let out = t.toLowerCase()
-    // 句末标点扩展中文全角(。！?),中文句读后的拉丁词也能触发句首大写
-    out = out.replace(/(^\s*\w|[.!?。！？]\s*\w)/g, (c) => c.toUpperCase())
+    // 句末标点扩展中文全角(。！?),中文句读后的拉丁词也能触发句首大写;
+    // 词首用 \p{L} 匹配,带变音符的首字母(é/ñ/ü)也能正确大写
+    out = out.replace(/(^\s*\p{L}|[.!?。！？]\s*\p{L})/gu, (c) => c.toUpperCase())
     if (out === t && hasCJK(t)) {
       return t + '\n\n' + tui('sentence-case-converter', locale, 'cjkNoEffectNote', 'ℹ️ Case conversion only affects Latin letters — Chinese characters are unchanged.')
     }
@@ -67,7 +72,7 @@ export const ReverseTextClient = makeTextTool({
   outputLabel: 'Reversed',
   defaultInput: 'Hello World',
   transform: (t) => [...t].reverse().join(''),
-  note: '🔁 Reverses all characters. Fun for puzzles and ciphers.',
+  note: '🔁 Reverses all characters. Multi-codepoint emoji (ZWJ sequences, flags) and combining marks may split apart. Fun for puzzles and ciphers.',
 })
 
 export const RemoveDuplicatesClient = makeTextTool({

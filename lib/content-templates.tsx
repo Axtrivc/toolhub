@@ -2,8 +2,8 @@
  * 通用内容组件 - 为批量生成的工具提供统一的内容外壳
  *
  * 设计:大多数工具的"什么是 X / 如何使用"结构高度相似,
- * 用这个模板传入标题和段落即可,避免 31 个 content.tsx 全部手写重复结构。
- * 每个工具的内容由 lib/tool-content/*.ts 提供数据,保证每篇都是独立原创。
+ * 用这个模板传入标题和段落即可,避免 content.tsx 全部手写重复结构。
+ * 每个工具的内容由 app/tools/<slug>/content.tsx 提供数据,保证每篇都是独立原创。
  *
  * FAQ 渲染已上移到 `components/ToolLayout.tsx` 的 `VisibleFaqs`(与 JSON-LD schema
  * 同源 lib/tool-faqs.ts)。本组件的 `faqs` 入参已停用(保留入参仅为向后兼容,

@@ -6,11 +6,6 @@ import { CopyButton } from '@/components/CopyButton'
 import { useApp } from '@/components/providers/AppProviders'
 import { tui } from '@/lib/i18n/tool-l10n'
 
-const fmtMoney = (n: number) =>
-  isFinite(n)
-    ? n.toLocaleString(undefined, { style: 'currency', currency: 'USD', maximumFractionDigits: 2 })
-    : '—'
-
 const PRESETS: { key: string; label: string; pct: number; fixed: number }[] = [
   { key: 'stripe-us', label: 'Stripe US online (2.9% + $0.30)', pct: 2.9, fixed: 0.3 },
   { key: 'stripe-intl', label: 'Stripe + international card (4.4% + $0.30)', pct: 4.4, fixed: 0.3 },
@@ -30,6 +25,12 @@ export function ReverseStripeFeeCalculatorClient() {
   const { locale } = useApp()
   // 取本地化 UI 串;缺失回退英文(SSR 恒英文)。
   const L = (key: string, fb: string) => tui('reverse-stripe-fee-calculator', locale, key, fb)
+  // 货币按应用 locale 格式化;en 首帧恒 en-US(与 SSR 一致),de/es 得到本地分隔符
+  const localeTag = locale === 'en' ? 'en-US' : locale
+  const fmtMoney = (n: number) =>
+    isFinite(n)
+      ? n.toLocaleString(localeTag, { style: 'currency', currency: 'USD', maximumFractionDigits: 2 })
+      : '—'
 
   // 预设选项文案本地化(key → 已翻译标签)
   const presetLabels: Record<string, string> = {

@@ -302,7 +302,7 @@ export function SshKeyGeneratorClient() {
             className="rounded-md p-3 text-xs"
             style={{ backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text-subtle))' }}
           >
-            {L('noteIntro', '🔒 Store the private key somewhere safe and lock it down with ')}<code>chmod 600 ~/.ssh/{keys.baseName}</code>{L('noteMid1', '. The private key is exported in PKCS#8 PEM — many tools (including OpenSSH ≥ 7.8) read it directly, and you can convert it to the classic OpenSSH format any time with ')}<code>ssh-keygen -p -m PEM -f {keys.baseName}</code>{L('noteOutro', '. Keys are generated and kept entirely in your browser — nothing is uploaded.')}
+            {L('noteIntro', '🔒 Store the private key somewhere safe and lock it down with ')}<code>chmod 600 ~/.ssh/{keys.baseName}</code>{L('noteMid1', '. The private key is exported in PKCS#8 PEM — many tools (including OpenSSH ≥ 7.8) read it directly, and you can convert it to the OpenSSH "BEGIN OPENSSH PRIVATE KEY" format any time with ')}<code>ssh-keygen -p -f {keys.baseName}</code>{L('noteOutro', '. Keys are generated and kept entirely in your browser — nothing is uploaded.')}
           </p>
         </>
       )}

@@ -51,8 +51,8 @@ const en: ReactNode = (
     </p>
     <ul>
       <li>
-        <strong>Reading time:</strong> ~200 words per minute (the average silent reading speed for
-        an adult).
+        <strong>Reading time:</strong> ~200 words per minute (around the average for adult fiction
+        reading; conservative estimates use 150 — see our Reading Time tool).
       </li>
       <li>
         <strong>Speaking time:</strong> ~130 words per minute (the average pace for a clear
@@ -129,7 +129,7 @@ const zh: ReactNode = (
     </p>
     <ul>
       <li>
-        <strong>阅读时间:</strong>每分钟约 200 词(成人默读的平均速度)。
+        <strong>阅读时间:</strong>每分钟约 200 词(约为成年人阅读小说的平均速度;保守估计会用 150——参见我们的阅读时长工具)。
       </li>
       <li>
         <strong>讲述时间:</strong>每分钟约 130 词(清晰演示或播客的平均语速)。
@@ -214,8 +214,9 @@ const es: ReactNode = (
     </p>
     <ul>
       <li>
-        <strong>Tiempo de lectura:</strong> ~200 palabras por minuto (la velocidad media de lectura
-        silenciosa de un adulto).
+        <strong>Tiempo de lectura:</strong> ~200 palabras por minuto (un ritmo medio de lectura de
+        ficción para adultos; las estimaciones conservadoras usan 150 — consulta nuestra
+        herramienta de tiempo de lectura).
       </li>
       <li>
         <strong>Tiempo de exposición:</strong> ~130 palabras por minuto (el ritmo medio de una
@@ -304,8 +305,9 @@ const de: ReactNode = (
     </p>
     <ul>
       <li>
-        <strong>Lesezeit:</strong> ~200 Wörter pro Minute (die durchschnittliche stille
-        Lesegeschwindigkeit eines Erwachsenen).
+        <strong>Lesezeit:</strong> ~200 Wörter pro Minute (etwa das Durchschnittstempo erwachsener
+        Leser bei Belletristik; konservative Schätzungen nehmen 150 — siehe unser Tool zur
+        Lesezeit).
       </li>
       <li>
         <strong>Sprechzeit:</strong> ~130 Wörter pro Minute (das durchschnittliche Tempo einer

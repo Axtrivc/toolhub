@@ -13,6 +13,9 @@ export const rentVsBuyCalculatorL10n: ToolL10n = {
       { q: '房贷利息的税前扣除怎么算?', a: '自 2017 年美国税改后,更高的标准扣除额(2024 年单身 $14,600 / 已婚 $29,200)意味着大多数房主不再逐项列报,所以房贷利息扣除帮到的人比以前少。只有当你的逐项扣除总额明显超过标准扣除额时,才指望得上。' },
     ],
     ui: {
+      errYears: '请输入大于 0 的年数',
+      winnerBuying: '买房更划算(约省 {amount})',
+      winnerRenting: '租房更划算(约省 {amount})',
       'in.home': '房价', 'in.rent': '可比月租金', 'in.down': '首付比例', 'in.rate': '房贷利率', 'in.years': '居住年限',
       'out.buyTotal': '买房总成本', 'outSub.buyTotal': '房贷 + 利息', 'out.rentTotal': '租房总成本', 'outSub.rentTotal': '持有期内的租金', 'out.winner': '更省的选项',
       note: '🏠 简化估算——不含税费、维护费、升值以及投资的机会成本。作为初步粗略对比使用。',
@@ -26,6 +29,9 @@ export const rentVsBuyCalculatorL10n: ToolL10n = {
       { q: '¿Y la deducción fiscal por intereses de la hipoteca?', a: 'Desde el cambio fiscal de 2017 en EE. UU., el mayor mínimo deducible ($14,600 soltero / $29,200 matrimonio en 2024) hace que la mayoría de propietarios ya no detallen, así que la deducción por intereses beneficia a menos gente que antes. Cuenta con ella solo si tus deducciones detalladas superan claramente el mínimo.' },
     ],
     ui: {
+      errYears: 'Introduce un número de años mayor que 0',
+      winnerBuying: 'Comprar (~{amount} más barato)',
+      winnerRenting: 'Alquilar (~{amount} más barato)',
       'in.home': 'Precio de la vivienda', 'in.rent': 'Alquiler comparable', 'in.down': 'Entrada', 'in.rate': 'Tipo de la hipoteca', 'in.years': 'Años en la vivienda',
       'out.buyTotal': 'Coste total de comprar', 'outSub.buyTotal': 'Hipoteca + intereses', 'out.rentTotal': 'Coste total de alquilar', 'outSub.rentTotal': 'Alquiler durante el periodo', 'out.winner': 'Opción más barata',
       note: '🏠 Simplificado — sin impuestos, mantenimiento, revalorización ni coste de oportunidad de invertir. Úsalo como comparación aproximada inicial.',
@@ -39,6 +45,9 @@ export const rentVsBuyCalculatorL10n: ToolL10n = {
       { q: 'Was ist mit dem Steuerabzug für Hypothekenzinsen?', a: 'Seit der US-Steuerreform 2017 bedeutet der höhere Pauschbetrag ($14,600 Single / $29,200 Verheiratet 2024), dass die meisten Eigentümer nicht mehr itemisieren, also hilft der Hypothekenzinsabzug weniger Leuten als früher. Rechne nur damit, wenn deine itemisierten Abzüge den Pauschbetrag deutlich übersteigen.' },
     ],
     ui: {
+      errYears: 'Gib eine Anzahl von Jahren größer als 0 ein',
+      winnerBuying: 'Kaufen (~{amount} günstiger)',
+      winnerRenting: 'Mieten (~{amount} günstiger)',
       'in.home': 'Hauspreis', 'in.rent': 'Vergleichsmiete', 'in.down': 'Anzahlung', 'in.rate': 'Hypothekenzins', 'in.years': 'Wohnjahre',
       'out.buyTotal': 'Gesamtkosten Kauf', 'outSub.buyTotal': 'Hypothek + Zinsen', 'out.rentTotal': 'Gesamtkosten Miete', 'outSub.rentTotal': 'Miete über den Zeitraum', 'out.winner': 'Günstigere Option',
       note: '🏠 Vereinfacht — ohne Steuern, Instandhaltung, Wertsteigerung und Opportunitätskosten der Investition. Als grober Erstrieg-Vergleich nutzen.',

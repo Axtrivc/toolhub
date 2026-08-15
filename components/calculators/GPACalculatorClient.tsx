@@ -50,7 +50,7 @@ export function GPACalculatorClient() {
     setCourses([...courses, { id: nextId.current++, name: '', credits: '3', grade: 'A' }])
 
   const removeCourse = (id: number) =>
-    setCourses(courses.filter((c) => c.id !== id))
+    setCourses(courses.length > 1 ? courses.filter((c) => c.id !== id) : courses)
 
   const updateCourse = (id: number, patch: Partial<Course>) =>
     setCourses(courses.map((c) => (c.id === id ? { ...c, ...patch } : c)))
@@ -89,6 +89,7 @@ export function GPACalculatorClient() {
               value={c.name}
               onChange={(e) => updateCourse(c.id, { name: e.target.value })}
               placeholder={L('courseName', 'Course name')}
+              aria-label={`${L('courseName', 'Course name')} ${c.id}`}
               className="col-span-12 rounded-md border px-3 py-2.5 text-sm outline-none focus:border-brand-500 sm:col-span-5 sm:px-2 sm:py-1.5" style={{ borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rgb(var(--bg-card))', color: 'rgb(var(--text))' }}
             />
             <input
@@ -115,7 +116,9 @@ export function GPACalculatorClient() {
             <button
               type="button"
               onClick={() => removeCourse(c.id)}
-              className="col-span-12 rounded-md bg-red-50 px-3 py-2.5 text-sm text-red-600 hover:bg-red-100 sm:col-span-2 sm:px-2 sm:py-1.5 sm:text-xs"
+              disabled={courses.length <= 1}
+              aria-label={`${L('remove', 'Remove')} ${L('courseName', 'Course name')} ${c.id}`}
+              className="col-span-12 rounded-md bg-red-50 px-3 py-2.5 text-sm text-red-600 hover:bg-red-100 disabled:cursor-not-allowed disabled:opacity-40 sm:col-span-2 sm:px-2 sm:py-1.5 sm:text-xs"
             >
               {L('remove', 'Remove')}
             </button>
