@@ -25,7 +25,7 @@ export const ScientificNotationCalculatorClient = makeCalculatorClient({
     // 工程计数法:指数是 3 的倍数
     const engExp = Math.floor(exp / 3) * 3
     const engMantissa = n / Math.pow(10, engExp)
-    const sup = (e: number) => e === 0 ? '⁰' : e.toString().split('').map((d) => '⁰¹²³⁴⁵⁶⁷⁸⁹'[Number(d)] || d).join('')
+    const sup = (e: number) => e.toString().split('').map((d) => d === '-' ? '⁻' : ('⁰¹²³⁴⁵⁶⁷⁸⁹'[Number(d)] || d)).join('')
     return {
       sci: `${fmtNum(mantissa, 6)} × 10${sup(exp)}`,
       e: `${fmtNum(mantissa, 6)}e${exp}`,

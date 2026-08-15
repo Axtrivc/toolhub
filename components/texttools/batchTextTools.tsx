@@ -1,6 +1,8 @@
 'use client'
 
 import { makeTextTool } from '../tools/makeTextTool'
+import { tui } from '@/lib/i18n/tool-l10n'
+import { hasCJK } from '@/lib/text-stats'
 
 /**
  * 批量文本工具 - 全部用 makeTextTool 工厂,每个仅需一个 transform 函数
@@ -31,8 +33,14 @@ export const TitleCaseConverterClient = makeTextTool({
   inputLabel: 'Your text',
   outputLabel: 'Title Case',
   defaultInput: 'the quick brown fox',
-  transform: (t) =>
-    t.toLowerCase().replace(/\b\w/g, (c) => c.toUpperCase()),
+  transform: (t, locale) => {
+    const out = t.toLowerCase().replace(/\b\w/g, (c) => c.toUpperCase())
+    // 纯中文无大小写概念:明确提示而非静默无效果
+    if (out === t && hasCJK(t)) {
+      return t + '\n\n' + tui('title-case-converter', locale, 'cjkNoEffectNote', 'ℹ️ Case conversion only affects Latin letters — Chinese characters are unchanged.')
+    }
+    return out
+  },
   note: '📝 Capitalizes the first letter of each word. Ideal for titles and headings.',
 })
 
@@ -41,9 +49,13 @@ export const SentenceCaseConverterClient = makeTextTool({
   inputLabel: 'Your text',
   outputLabel: 'Sentence case',
   defaultInput: 'hello. my name is john. how are you?',
-  transform: (t) => {
+  transform: (t, locale) => {
     let out = t.toLowerCase()
-    out = out.replace(/(^\s*\w|[.!?]\s*\w)/g, (c) => c.toUpperCase())
+    // 句末标点扩展中文全角(。！?),中文句读后的拉丁词也能触发句首大写
+    out = out.replace(/(^\s*\w|[.!?。！？]\s*\w)/g, (c) => c.toUpperCase())
+    if (out === t && hasCJK(t)) {
+      return t + '\n\n' + tui('sentence-case-converter', locale, 'cjkNoEffectNote', 'ℹ️ Case conversion only affects Latin letters — Chinese characters are unchanged.')
+    }
     return out
   },
   note: '✍️ Capitalizes the first letter of each sentence. Preserves proper nouns best manually.',
@@ -109,9 +121,15 @@ export const FindReplaceClient = makeTextTool({
   outputLabel: 'Result',
   defaultInput: 'I love cats and cats are great ||| cats ||| dogs',
   transform: (t) => {
-    const parts = t.split(/\s*\|\|\|\s*/)
-    if (parts.length < 3) return '⚠️ Use format: text ||| find ||| replace'
-    const [text, find, replace] = parts
+    // 只在前两个分隔符处切开:正文自身含 ||| 时不能丢第 4 段起的内容
+    const i1 = t.indexOf('|||')
+    if (i1 === -1) return '⚠️ Use format: text ||| find ||| replace'
+    const rest = t.slice(i1 + 3)
+    const i2 = rest.indexOf('|||')
+    if (i2 === -1) return '⚠️ Use format: text ||| find ||| replace'
+    const text = t.slice(0, i1).replace(/\s+$/, '')
+    const find = rest.slice(0, i2).trim()
+    const replace = rest.slice(i2 + 3).replace(/^\s+/, '')
     if (!find) return text
     return text.split(find).join(replace)
   },

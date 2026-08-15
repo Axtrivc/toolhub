@@ -7,6 +7,13 @@ import type { ToolL10n } from '../tool-l10n'
 export const cronParserL10n: ToolL10n = {
   zh: {
     ui: {
+      'dow0': '星期日', 'dow1': '星期一', 'dow2': '星期二', 'dow3': '星期三', 'dow4': '星期四', 'dow5': '星期五', 'dow6': '星期六',
+      'mon1': '一月', 'mon2': '二月', 'mon3': '三月', 'mon4': '四月', 'mon5': '五月', 'mon6': '六月',
+      'mon7': '七月', 'mon8': '八月', 'mon9': '九月', 'mon10': '十月', 'mon11': '十一月', 'mon12': '十二月',
+      'everyMinute': '每分钟', 'everyMinuteDuring': '{hours} 内的每分钟', 'atMinuteOfEveryHour': '每小时的第 {mins} 分钟',
+      'atTimes': '于 {times}', 'everyDay': '每天', 'onDays': '每逢 {days}', 'onDayOfMonth': '每月第 {doms} 天',
+      'onDomOrDow': '每月第 {doms} 天或每逢 {dows}', 'inMonths': '（{months}）',
+      'everyMinuteEveryDay': '每分钟,每天', 'finalTemplate': '{time},{day}{month}',
       'cronExpressionLabel': 'Cron 表达式(5 个字段:分 时 日 月 周)',
       'fieldDayOfMonth': '日 (1-31)',
       'fieldDayOfWeek': '星期 (0-6)',
@@ -50,6 +57,13 @@ export const cronParserL10n: ToolL10n = {
   },
   es: {
     ui: {
+      'dow0': 'domingo', 'dow1': 'lunes', 'dow2': 'martes', 'dow3': 'miércoles', 'dow4': 'jueves', 'dow5': 'viernes', 'dow6': 'sábado',
+      'mon1': 'enero', 'mon2': 'febrero', 'mon3': 'marzo', 'mon4': 'abril', 'mon5': 'mayo', 'mon6': 'junio',
+      'mon7': 'julio', 'mon8': 'agosto', 'mon9': 'septiembre', 'mon10': 'octubre', 'mon11': 'noviembre', 'mon12': 'diciembre',
+      'everyMinute': 'cada minuto', 'everyMinuteDuring': 'cada minuto durante las {hours}', 'atMinuteOfEveryHour': 'en el minuto {mins} de cada hora',
+      'atTimes': 'a las {times}', 'everyDay': 'todos los días', 'onDays': 'los {days}', 'onDayOfMonth': 'el día {doms} del mes',
+      'onDomOrDow': 'el día {doms} del mes O los {dows}', 'inMonths': ' en {months}',
+      'everyMinuteEveryDay': 'Cada minuto, todos los días', 'finalTemplate': '{time}, {day}{month}',
       'cronExpressionLabel': 'Expresión cron (5 campos: minuto hora día-mes mes día-semana)',
       'fieldDayOfMonth': 'Día del mes (1-31)',
       'fieldDayOfWeek': 'Día de la semana (0-6)',
@@ -93,6 +107,13 @@ export const cronParserL10n: ToolL10n = {
   },
   de: {
     ui: {
+      'dow0': 'Sonntag', 'dow1': 'Montag', 'dow2': 'Dienstag', 'dow3': 'Mittwoch', 'dow4': 'Donnerstag', 'dow5': 'Freitag', 'dow6': 'Samstag',
+      'mon1': 'Januar', 'mon2': 'Februar', 'mon3': 'März', 'mon4': 'April', 'mon5': 'Mai', 'mon6': 'Juni',
+      'mon7': 'Juli', 'mon8': 'August', 'mon9': 'September', 'mon10': 'Oktober', 'mon11': 'November', 'mon12': 'Dezember',
+      'everyMinute': 'jede Minute', 'everyMinuteDuring': 'jede Minute während der {hours}', 'atMinuteOfEveryHour': 'bei Minute {mins} jeder Stunde',
+      'atTimes': 'um {times}', 'everyDay': 'jeden Tag', 'onDays': 'am {days}', 'onDayOfMonth': 'am {doms}. Tag des Monats',
+      'onDomOrDow': 'am {doms}. Tag des Monats oder am {dows}', 'inMonths': ' im {months}',
+      'everyMinuteEveryDay': 'Jede Minute, jeden Tag', 'finalTemplate': '{time}, {day}{month}',
       'cronExpressionLabel': 'Cron-Ausdruck (5 Felder: Minute Stunde Tag-des-Monats Monat Wochentag)',
       'fieldDayOfMonth': 'Tag des Monats (1-31)',
       'fieldDayOfWeek': 'Wochentag (0-6)',

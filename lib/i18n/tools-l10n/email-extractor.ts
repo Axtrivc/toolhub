@@ -7,6 +7,7 @@ import type { ToolL10n } from '../tool-l10n'
 export const emailExtractorL10n: ToolL10n = {
   zh: {
     ui: {
+      'noEmailsFound': '未找到邮箱',
       inputLabel: '含邮箱的文本',
       outputLabel: '提取出的邮箱',
       note: '📧 从任意文本中提取所有邮箱地址。自动去重。',
@@ -23,6 +24,7 @@ export const emailExtractorL10n: ToolL10n = {
   },
   es: {
     ui: {
+      'noEmailsFound': 'No se encontraron correos',
       inputLabel: 'Texto con correos',
       outputLabel: 'Correos extraídos',
       note: '📧 Extrae todas las direcciones de correo de cualquier texto. Elimina duplicados automáticamente.',
@@ -39,6 +41,7 @@ export const emailExtractorL10n: ToolL10n = {
   },
   de: {
     ui: {
+      'noEmailsFound': 'Keine E-Mails gefunden',
       inputLabel: 'Text mit E-Mails',
       outputLabel: 'Extrahierte E-Mails',
       note: '📧 Extrahiert alle E-Mail-Adressen aus beliebigem Text. Entfernt automatisch Duplikate.',

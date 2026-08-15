@@ -7,6 +7,7 @@ import type { ToolL10n } from '../tool-l10n'
 export const wordCounterL10n: ToolL10n = {
   zh: {
     ui: {
+      'tZero': '0 秒', 'tSec': '秒', 'tMin': '分',
       'characters': '字符数',
       'charactersNoSpaces': '字符数(不含空格)',
       'clear': '清空',
@@ -33,6 +34,7 @@ export const wordCounterL10n: ToolL10n = {
   },
   es: {
     ui: {
+      'tZero': '0 s', 'tSec': 's', 'tMin': 'min',
       'characters': 'Caracteres',
       'charactersNoSpaces': 'Caracteres (sin espacios)',
       'clear': 'Limpiar',
@@ -59,6 +61,7 @@ export const wordCounterL10n: ToolL10n = {
   },
   de: {
     ui: {
+      'tZero': '0 Sek.', 'tSec': 'Sek.', 'tMin': 'Min.',
       'characters': 'Zeichen',
       'charactersNoSpaces': 'Zeichen (ohne Leerzeichen)',
       'clear': 'Leeren',

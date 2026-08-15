@@ -38,6 +38,7 @@ export const readingSpeakingTimeL10n: ToolL10n = {
       'summaryTitle': '阅读与演讲时长',
       'words': '词数',
       'wordsUnit': '词',
+      'wpmUnit': '字/分',
     },
     useCases: [
       '读 1000 字需要多长时间',
@@ -93,6 +94,7 @@ export const readingSpeakingTimeL10n: ToolL10n = {
       'summaryTitle': 'Tiempo de lectura y habla',
       'words': 'Palabras',
       'wordsUnit': 'palabras',
+      'wpmUnit': 'ppm',
     },
     useCases: [
       'cuánto tarda leer 1000 palabras',
@@ -148,6 +150,7 @@ export const readingSpeakingTimeL10n: ToolL10n = {
       'summaryTitle': 'Lese- und Sprechzeit',
       'words': 'Wörter',
       'wordsUnit': 'Wörter',
+      'wpmUnit': 'WpM',
     },
     useCases: [
       'wie lange dauert es 1000 Wörter zu lesen',

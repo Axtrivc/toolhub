@@ -39,7 +39,8 @@ export function EbayFeeCalculatorClient() {
   const [shipCost, setShipCost] = useState('4.5')
   // eBay
   const [ebayPreset, setEbayPreset] = useState('0')
-  const [ebayFixed, setEbayFixed] = useState('0.30')
+  // 官方每单固定费:订单 ≤$10 收 $0.30,>$10 收 $0.40(多数订单是 0.40)
+  const [ebayFixed, setEbayFixed] = useState('0.40')
   const [adRate, setAdRate] = useState('0')
   // Etsy
   const [etsyProcPct, setEtsyProcPct] = useState('3')
@@ -176,7 +177,7 @@ export function EbayFeeCalculatorClient() {
                 ))}
               </select>
             </div>
-            <CalculatorField id="ebay-fixed" label={L('perOrderFixedFee', 'Per-order fixed fee')} value={ebayFixed} onChange={setEbayFixed} suffix="$" placeholder="0.30" />
+            <CalculatorField id="ebay-fixed" label={L('perOrderFixedFee', 'Per-order fixed fee')} value={ebayFixed} onChange={setEbayFixed} suffix="$" placeholder="0.40" />
             <CalculatorField id="ad-rate" label={L('promotedAdRate', 'Promoted listings ad rate (optional)')} value={adRate} onChange={setAdRate} suffix="%" placeholder="0" />
           </>
         ) : (
@@ -245,7 +246,7 @@ export function EbayFeeCalculatorClient() {
       )}
 
       <CalculatorNote>
-        {L('notePrefix', '⚠️ Fees are approximations as of 2025. Both platforms adjust rates by category, seller tier, store subscription, and region — always verify against the current ')}{platform === 'ebay' ? 'eBay' : 'Etsy'}{L('noteSuffix', ' fee schedule before pricing an item.')}
+        {L('notePrefix', '⚠️ Fees are approximations as of 2026 (eBay per-order fee: $0.40, or $0.30 for orders $10 and under). Both platforms adjust rates by category, seller tier, store subscription, and region — always verify against the current ')}{platform === 'ebay' ? 'eBay' : 'Etsy'}{L('noteSuffix', ' fee schedule before pricing an item.')}
       </CalculatorNote>
     </div>
   )

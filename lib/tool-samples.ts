@@ -47,7 +47,7 @@ export const calculatorSamples: Record<string, Record<string, string>> = {
   'down-payment-calculator': { price: '400000', down: '20' },
   'dti-calculator': { income: '6000', debts: '1500' },
   'income-tax-estimator': { income: '75000', filing: 'single' },
-  'capital-gains-tax-estimator': { purchase: '10000', sale: '16000', years: '2', bracket: '24' },
+  'capital-gains-tax-estimator': { purchase: '10000', sale: '16000', years: '2', taxableIncome: '80000', filing: 'single' },
   'rent-vs-buy-calculator': { home: '400000', rent: '1800', down: '20', rate: '6.8', years: '7' },
   'hourly-to-salary-calculator': { hourly: '28', hours: '40' },
   'salary-converter': { unit: 'annual', amount: '65000', hours: '40' },
@@ -93,7 +93,7 @@ export const calculatorSamples: Record<string, Record<string, string>> = {
   'grade-calculator': { earned: '85', possible: '100' },
   'final-grade-calculator': { current: '85', goal: '90', finalWeight: '25' },
   'age-calculator': { dob: '1995-06-15' },
-  'age-difference-calculator': { birth1: '1990', birth2: '1998' },
+  'age-difference-calculator': { birth1: '1990-06-15', birth2: '1995-03-20' },
   'date-difference-calculator': { start: '2024-01-01', end: '2024-12-31' },
 
   // ── 其它 ──

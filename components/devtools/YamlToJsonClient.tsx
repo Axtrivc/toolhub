@@ -71,7 +71,12 @@ function parseScalar(raw: string): unknown {
   if (lower === 'true') return true
   if (lower === 'false') return false
   // 数字
-  if (/^-?\d+$/.test(v)) return parseInt(v, 10)
+  if (/^-?\d+$/.test(v)) {
+    // 超出安全整数范围的大整数(16 位订单 ID、毫秒时间戳)保留原始字符串,
+    // 避免 parseInt 静默丢精度(JSON 输出带引号但值不变)
+    const n = Number(v)
+    return Number.isSafeInteger(n) ? n : v
+  }
   if (/^-?\d*\.\d+$/.test(v)) return parseFloat(v)
   // 其它当作字符串
   return v
@@ -106,6 +111,52 @@ function parseFlow(raw: string): unknown {
 interface ParseContext {
   lines: string[]
   index: number
+}
+
+/**
+ * 块标量(| 字面 与 > 折叠):收集比 key 缩进更深的连续行。
+ * chomp 修饰:省略 = clip(末尾恰一个换行)、- = strip(无换行)、+ = keep(保留全部空行)。
+ */
+function parseBlockScalar(ctx: ParseContext, keyIndent: number, folded: boolean, chomp: string): string {
+  const raw: string[] = []
+  let blockIndent = -1
+  while (ctx.index < ctx.lines.length) {
+    const line = ctx.lines[ctx.index]
+    // 空行:可能是块内空行,先缓存,由结尾 chomp 逻辑统一处理
+    if (line.trim() === '') {
+      raw.push('')
+      ctx.index++
+      continue
+    }
+    const ind = indentOf(line)
+    // 缩进回到 key 层级或更浅 → 块结束
+    if (ind <= keyIndent) break
+    if (blockIndent === -1) blockIndent = ind
+    if (ind < blockIndent) break
+    raw.push(line.slice(blockIndent))
+    ctx.index++
+  }
+
+  let end = raw.length
+  while (end > 0 && raw[end - 1] === '') end--
+  const body = raw.slice(0, end)
+  const trailing = raw.length - end
+
+  let text: string
+  if (folded) {
+    // 折叠:相邻非空行以空格连接,空行变成换行
+    text = ''
+    for (let i = 0; i < body.length; i++) {
+      if (i > 0 && body[i] !== '' && body[i - 1] !== '') text += ' '
+      text += body[i] === '' ? '\n' : body[i]
+    }
+  } else {
+    text = body.join('\n')
+  }
+
+  if (chomp === '-') return text
+  if (chomp === '+') return text + '\n'.repeat(trailing + 1)
+  return text === '' ? '' : text + '\n'
 }
 
 /** 解析一个 block(从 baseIndent 起),返回 [value, 结束行号] */
@@ -200,7 +251,13 @@ function parseBlock(ctx: ParseContext, baseIndent: number): unknown {
       const rest = content.slice(ci + 1).trim()
       ctx.index++
       if (rest) {
-        map[key] = parseFlow(rest)
+        // 块标量指示符:| / |- / |+ / > / >- / >+
+        const blockScalar = /^([|>])([+-]?)$/.exec(rest)
+        if (blockScalar) {
+          map[key] = parseBlockScalar(ctx, ind, blockScalar[1] === '>', blockScalar[2] ?? '')
+        } else {
+          map[key] = parseFlow(rest)
+        }
       } else {
         map[key] = parseChild(ctx, ind + 1)
       }
@@ -323,7 +380,7 @@ export function YamlToJsonClient() {
       )}
 
       <p className="rounded-md p-3 text-xs" style={{ backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text-subtle))' }}>
-        {L('note', '🔒 100% client-side — a hand-written YAML subset parser. Supports mappings, sequences, inline flow, quotes, and comments.')}
+        {L('note', '🔒 100% client-side — a hand-written YAML subset parser. Supports mappings, sequences, inline flow, quotes, comments, and block scalars (| and >).')}
       </p>
     </div>
   )

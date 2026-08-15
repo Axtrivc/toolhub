@@ -20,7 +20,10 @@ interface SizedIcon {
 const SIZES: SizedIcon[] = [
   { size: 16, label: '16×16', desc: 'Browser tab (classic)' },
   { size: 32, label: '32×32', desc: 'Retina tab & taskbar' },
+  { size: 48, label: '48×48', desc: 'Windows shortcut icon' },
   { size: 180, label: '180×180', desc: 'Apple Touch Icon (iOS)' },
+  { size: 192, label: '192×192', desc: 'Android home screen (PWA)' },
+  { size: 512, label: '512×512', desc: 'Splash screen & app stores (PWA)' },
 ]
 
 /** 把图片画成正方形居中裁剪后的 canvas(源图 → cover 到 target×target) */

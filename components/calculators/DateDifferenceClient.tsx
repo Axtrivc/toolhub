@@ -4,6 +4,7 @@ import { useState, useEffect, useMemo } from 'react'
 import { ResultCard, CalculatorNote } from '../calculator/CalculatorField'
 import { useApp } from '@/components/providers/AppProviders'
 import { tui } from '@/lib/i18n/tool-l10n'
+import { calendarDaysBetween } from '@/lib/date-utils'
 
 function toInputDate(d: Date): string {
   const y = d.getFullYear()
@@ -58,7 +59,8 @@ export function DateDifferenceClient() {
     }
 
     const totalMs = e.getTime() - s.getTime()
-    const totalDays = Math.floor(totalMs / (1000 * 60 * 60 * 24))
+    // 日/周差用日历日(DST 安全),小时差保留真实流逝毫秒
+    const totalDays = calendarDaysBetween(s, e)
     const totalWeeks = Math.floor(totalDays / 7)
     const totalMonths = years * 12 + months
     const totalHours = Math.floor(totalMs / (1000 * 60 * 60))

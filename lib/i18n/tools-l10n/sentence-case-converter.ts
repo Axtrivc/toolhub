@@ -10,6 +10,7 @@ export const sentenceCaseConverterL10n: ToolL10n = {
       inputLabel: '你的文本',
       outputLabel: '句首大写',
       note: '✍️ 把每个句子的首字母大写。专有名词最好手动保留。',
+      'cjkNoEffectNote': 'ℹ️ 大小写转换只作用于英文字母——中文字符保持不变。',
     },
     useCases: [
       '整理文章、邮件和文档的正文段落',
@@ -26,6 +27,7 @@ export const sentenceCaseConverterL10n: ToolL10n = {
       inputLabel: 'Tu texto',
       outputLabel: 'Tipo oración',
       note: '✍️ Capitaliza la primera letra de cada oración. Los nombres propios conviene revisarlos a mano.',
+      'cjkNoEffectNote': 'ℹ️ La conversión de mayúsculas solo afecta a letras latinas: los caracteres chinos no cambian.',
     },
     useCases: [
       'ordenar el cuerpo de artículos, correos y documentación',
@@ -42,6 +44,7 @@ export const sentenceCaseConverterL10n: ToolL10n = {
       inputLabel: 'Dein Text',
       outputLabel: 'Satz-Schreibweise',
       note: '✍️ Schreibt den ersten Buchstaben jedes Satzes groß. Eigennamen am besten manuell prüfen.',
+      'cjkNoEffectNote': 'ℹ️ Die Groß-/Kleinschreibung betrifft nur lateinische Buchstaben — chinesische Zeichen bleiben unverändert.',
     },
     useCases: [
       'Fließtext in Artikeln, E-Mails und Dokumentation ordnen',

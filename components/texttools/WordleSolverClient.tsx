@@ -84,7 +84,9 @@ export function WordleSolverClient() {
     for (const ch of letters) counts.set(ch, (counts.get(ch) ?? 0) + 1)
     return dictionary
       .filter((w) => {
-        if (w.length > 5) return false
+        // 任何长度 ≤ 输入字母数的词都可参与(2-10 字母都支持),
+        // 能否拼出由下方多重集判定,不再按 5 截断
+        if (w.length < 2 || w.length > letters.length) return false
         const need = new Map<string, number>()
         for (const ch of w) need.set(ch, (need.get(ch) ?? 0) + 1)
         for (const [ch, n] of need) if ((counts.get(ch) ?? 0) < n) return false

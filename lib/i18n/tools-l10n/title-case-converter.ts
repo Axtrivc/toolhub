@@ -10,6 +10,7 @@ export const titleCaseConverterL10n: ToolL10n = {
       inputLabel: '你的文本',
       outputLabel: '标题大写',
       note: '📝 把每个单词的首字母大写。适合标题和表头。',
+      'cjkNoEffectNote': 'ℹ️ 大小写转换只作用于英文字母——中文字符保持不变。',
     },
     useCases: [
       '为博客文章和新闻标题做首字母大写',
@@ -26,6 +27,7 @@ export const titleCaseConverterL10n: ToolL10n = {
       inputLabel: 'Tu texto',
       outputLabel: 'Tipo Título',
       note: '📝 Capitaliza la primera letra de cada palabra. Ideal para títulos y encabezados.',
+      'cjkNoEffectNote': 'ℹ️ La conversión de mayúsculas solo afecta a letras latinas: los caracteres chinos no cambian.',
     },
     useCases: [
       'aplicar capitalización a titulares de blog y noticias',
@@ -42,6 +44,7 @@ export const titleCaseConverterL10n: ToolL10n = {
       inputLabel: 'Dein Text',
       outputLabel: 'Titel-Schreibweise',
       note: '📝 Schreibt den ersten Buchstaben jedes Wortes groß. Ideal für Titel und Überschriften.',
+      'cjkNoEffectNote': 'ℹ️ Die Groß-/Kleinschreibung betrifft nur lateinische Buchstaben — chinesische Zeichen bleiben unverändert.',
     },
     useCases: [
       'Blog- und Nachrichtentitel mit Anfangsgroßschreibung versehen',

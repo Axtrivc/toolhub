@@ -146,8 +146,15 @@ export function SvgToImageClient() {
               return
             }
             const outUrl = URL.createObjectURL(outBlob)
-            setPreviewUrl(url) // 预览用原始 SVG 渲染
-            setDownloadUrl(outUrl)
+            // 替换前先释放旧 ObjectURL,避免连续转换累积内存泄漏
+            setPreviewUrl((prev) => {
+              if (prev) URL.revokeObjectURL(prev)
+              return url
+            })
+            setDownloadUrl((prev) => {
+              if (prev) URL.revokeObjectURL(prev)
+              return outUrl
+            })
             setDims({ w, h })
             const ext = format === 'image/png' ? 'png' : 'webp'
             setDownloadName((n) => (n.endsWith(`.${ext}`) ? n : n.replace(/\.(png|webp|svg)$/i, '') + `.${ext}`))

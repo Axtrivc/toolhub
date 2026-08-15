@@ -53,23 +53,28 @@ export function HashGeneratorClient() {
       {hashes && (
         <div className="space-y-4">
           <HashResult label="SHA-256" value={hashes.sha256} />
-          <HashResult label="SHA-1" value={hashes.sha1} />
+          <HashResult
+            label="SHA-1"
+            value={hashes.sha1}
+            warning={L('sha1Warning', '⚠️ Collision-broken since 2017 — not safe for signatures/certificates; use for legacy checksums only')}
+          />
         </div>
       )}
       <CalculatorNote>
-        {L('note', '🔐 Uses SubtleCrypto API (true cryptographic hashing). MD5 is broken for security — SHA-256 is recommended.')}
+        {L('note', '🔐 Uses SubtleCrypto API (true cryptographic hashing). Both MD5 and SHA-1 are cryptographically broken — SHA-256 is recommended.')}
       </CalculatorNote>
     </div>
   )
 }
 
-function HashResult({ label, value }: { label: string; value: string }) {
+function HashResult({ label, value, warning }: { label: string; value: string; warning?: string }) {
   return (
     <div className="rounded-lg border border-slate-200 bg-white p-4">
       <div className="mb-1 flex items-center justify-between">
         <span className="text-xs font-medium uppercase text-slate-500">{label}</span>
         <CopyButton value={value} label="" />
       </div>
+      {warning && <p className="mb-1 text-xs text-amber-600">{warning}</p>}
       <code className="block break-all font-mono text-xs text-slate-900">{value}</code>
     </div>
   )
@@ -99,9 +104,9 @@ export const BinaryToTextClient = makeTextTool({
   transform: (s) => {
     const bytes = s.trim().split(/\s+/).filter(Boolean)
     try {
+      // 每组必须是纯 0/1 且 ≤8 位:parseInt('102', 2) 会宽松解析成 2,必须显式拦截
+      if (bytes.some((b) => !/^[01]{1,8}$/.test(b))) return '⚠️ Invalid binary (use groups of 0s and 1s, up to 8 bits each)'
       const codes = bytes.map((b) => parseInt(b, 2))
-      // 每组必须是 8 位以内的合法字节(0-255)
-      if (codes.some((c) => isNaN(c) || c < 0 || c > 255)) return '⚠️ Invalid binary (use 8-bit groups)'
       // 用 TextDecoder 按 UTF-8 解码,与 TextToBinary 的 UTF-8 编码互逆
       return new TextDecoder('utf-8').decode(new Uint8Array(codes))
     } catch {

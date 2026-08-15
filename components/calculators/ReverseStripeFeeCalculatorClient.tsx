@@ -204,7 +204,7 @@ export function ReverseStripeFeeCalculatorClient() {
         </CalculatorShell>
       )}
       <CalculatorNote>
-        {L('noteText', '⚠️ Passing processing fees on to customers (surcharging) is regulated and varies by country, US state, and card network — some regions ban it, others cap it or require disclosure. Check local rules before adding a surcharge. Rates shown are common presets as of 2025; your Stripe/PayPal plan may differ.')}
+        {L('noteText', '⚠️ Passing processing fees on to customers (surcharging) is regulated and varies by country, US state, and card network — some regions ban it, others cap it or require disclosure. Check local rules before adding a surcharge. Rates shown are common presets as of 2026; your Stripe/PayPal plan may differ.')}
       </CalculatorNote>
     </div>
   )

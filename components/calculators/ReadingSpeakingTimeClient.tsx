@@ -5,11 +5,12 @@ import { CopyButton } from '@/components/CopyButton'
 import { ResultCard, CalculatorNote } from '@/components/calculator/CalculatorField'
 import { useApp } from '@/components/providers/AppProviders'
 import { tui } from '@/lib/i18n/tool-l10n'
+import { countWords, countSentences } from '@/lib/text-stats'
 
 /**
  * Reading & Speaking Time 客户端组件
  *
- * 粘贴文本,实时统计:词数(空白切分)、字符数、句子数;
+ * 粘贴文本,实时统计:词数(中英混合,汉字按字计)、字符数、句数(中英标点);
  * 按 WPM 预设/自定义滑块估算朗读时间(mm:ss),演讲时间同理;
  * 附 250 词/页的页数估算。全部本地计算。
  */
@@ -25,6 +26,21 @@ const SPEAKING_PRESETS = [
   { label: 'Presentation', wpm: 100 },
   { label: 'Conversation', wpm: 130 },
   { label: 'Fast speaker', wpm: 160 },
+]
+
+// 中文语速口径是「字/分钟」(阅读 300–500、演讲 150–250),与英文 wpm 预设不同:
+// 词数统计对汉字按字计,预设数值必须同步切换,否则中文时长被高估一倍以上。
+const READING_PRESETS_ZH = [
+  { label: 'Slow', wpm: 200 },
+  { label: 'Average', wpm: 300 },
+  { label: 'Fast', wpm: 400 },
+  { label: 'Skim', wpm: 600 },
+]
+
+const SPEAKING_PRESETS_ZH = [
+  { label: 'Presentation', wpm: 150 },
+  { label: 'Conversation', wpm: 200 },
+  { label: 'Fast speaker', wpm: 250 },
 ]
 
 function pad(n: number) {
@@ -60,14 +76,20 @@ export function ReadingSpeakingTimeClient() {
   }
 
   const [text, setText] = useState('')
-  const [readWpm, setReadWpm] = useState(150)
-  const [speakWpm, setSpeakWpm] = useState(130)
+  // null = 未自定义,按 locale 取默认语速(中文 300/200 字/分,英文 150/130 wpm)
+  const [readWpmRaw, setReadWpm] = useState<number | null>(null)
+  const [speakWpmRaw, setSpeakWpm] = useState<number | null>(null)
+  const isZh = locale === 'zh'
+  const readWpm = readWpmRaw ?? (isZh ? 300 : 150)
+  const speakWpm = speakWpmRaw ?? (isZh ? 200 : 130)
+  const READING = isZh ? READING_PRESETS_ZH : READING_PRESETS
+  const SPEAKING = isZh ? SPEAKING_PRESETS_ZH : SPEAKING_PRESETS
+  const speedUnit = L('wpmUnit', 'wpm')
 
   const stats = useMemo(() => {
     const trimmed = text.trim()
-    const words = trimmed ? trimmed.split(/\s+/).length : 0
-    const sentenceMatches = trimmed ? trimmed.match(/[^.!?]+[.!?]+/g) : null
-    const sentences = sentenceMatches ? sentenceMatches.length : trimmed ? 1 : 0
+    const words = countWords(trimmed)
+    const sentences = countSentences(trimmed)
     return { words, chars: text.length, sentences }
   }, [text])
 
@@ -82,8 +104,8 @@ export function ReadingSpeakingTimeClient() {
         `${L('sCharacters', 'Characters: ')}${chars}`,
         `${L('sSentences', 'Sentences: ')}${sentences}`,
         `${L('sPages', 'Pages (250 words/page): ')}${words === 0 ? '0' : pages.toFixed(1)}`,
-        `${L('sReadingTime', 'Reading time @ ')}${readWpm} wpm: ${mmss((words / readWpm) * 60)}`,
-        `${L('sSpeakingTime', 'Speaking time @ ')}${speakWpm} wpm: ${mmss((words / speakWpm) * 60)}`,
+        `${L('sReadingTime', 'Reading time @ ')}${readWpm} ${speedUnit}: ${mmss((words / readWpm) * 60)}`,
+        `${L('sSpeakingTime', 'Speaking time @ ')}${speakWpm} ${speedUnit}: ${mmss((words / speakWpm) * 60)}`,
       ].join('\n'),
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [words, chars, sentences, pages, readWpm, speakWpm, locale],
@@ -112,7 +134,7 @@ export function ReadingSpeakingTimeClient() {
                 )}
               </td>
               <td className="px-4 py-2 text-right font-mono" style={{ color: 'rgb(var(--text-muted))' }}>
-                {p.wpm} wpm
+                {p.wpm} {speedUnit}
               </td>
               <td className="px-4 py-2 text-right font-mono font-semibold" style={{ color: 'rgb(var(--text))' }}>
                 {mmss((words / p.wpm) * 60)}
@@ -178,16 +200,16 @@ export function ReadingSpeakingTimeClient() {
         <h3 className="text-sm font-semibold" style={{ color: 'rgb(var(--text))' }}>
           {L('readingTime', 'Reading time')}
         </h3>
-        {presetButtons(READING_PRESETS, readWpm, setReadWpm)}
+        {presetButtons(READING, readWpm, setReadWpm)}
         <div>
           <label htmlFor="rst-read-wpm" className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
-            {L('customSpeed', 'Custom speed: ')}<span className="font-mono">{readWpm} wpm</span>
+            {L('customSpeed', 'Custom speed: ')}<span className="font-mono">{readWpm} {speedUnit}</span>
           </label>
           <input
             id="rst-read-wpm"
             type="range"
             min={50}
-            max={400}
+            max={isZh ? 800 : 400}
             step={5}
             value={readWpm}
             onChange={(e) => setReadWpm(+e.target.value)}
@@ -196,12 +218,12 @@ export function ReadingSpeakingTimeClient() {
         </div>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <ResultCard
-            label={`${L('readingTimeAt', 'Reading time @ ')}${readWpm} wpm`}
+            label={`${L('readingTimeAt', 'Reading time @ ')}${readWpm} ${speedUnit}`}
             value={<span className="font-mono">{mmss((words / readWpm) * 60)}</span>}
             highlight
             sublabel={words === 0 ? L('pasteSomeTextFirst', 'paste some text first') : `${words} ${L('wordsUnit', 'words')}`}
           />
-          {presetTable(READING_PRESETS, readWpm)}
+          {presetTable(READING, readWpm)}
         </div>
       </div>
 
@@ -210,15 +232,15 @@ export function ReadingSpeakingTimeClient() {
         <h3 className="text-sm font-semibold" style={{ color: 'rgb(var(--text))' }}>
           {L('speakingTime', 'Speaking time')}
         </h3>
-        {presetButtons(SPEAKING_PRESETS, speakWpm, setSpeakWpm)}
+        {presetButtons(SPEAKING, speakWpm, setSpeakWpm)}
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <ResultCard
-            label={`${L('speakingTimeAt', 'Speaking time @ ')}${speakWpm} wpm`}
+            label={`${L('speakingTimeAt', 'Speaking time @ ')}${speakWpm} ${speedUnit}`}
             value={<span className="font-mono">{mmss((words / speakWpm) * 60)}</span>}
             highlight
             sublabel={words === 0 ? L('pasteSomeTextFirst', 'paste some text first') : `${words} ${L('wordsUnit', 'words')}`}
           />
-          {presetTable(SPEAKING_PRESETS, speakWpm)}
+          {presetTable(SPEAKING, speakWpm)}
         </div>
       </div>
 

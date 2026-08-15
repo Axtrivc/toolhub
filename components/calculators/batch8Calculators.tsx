@@ -2,6 +2,7 @@
 
 import { makeCalculatorClient } from '../calculator/makeCalculatorClient'
 import { fmtUSD, fmtNum, toNum } from '@/lib/format'
+import { calendarDaysBetween } from '@/lib/date-utils'
 
 /** 第八批:金融 6 + 生活 4 + 几何 3 = 13 个计算器 */
 
@@ -56,7 +57,8 @@ export const CreditCardMinimumCalculatorClient = makeCalculatorClient({
     const monthlyRate = toNum(v.apr) / 100 / 12
     const interest = bal * monthlyRate
     const minPct = toNum(v.minPct) / 100
-    const minPayment = Math.max(25, bal * minPct) // 多数银行最低 $25
+    // 余额为 0/负时最低还款为 0(无 $25 下限),否则环形图会把 $25 全画进本金
+    const minPayment = bal <= 0 ? 0 : Math.max(25, bal * minPct) // 多数银行最低 $25
     return {
       minPayment: fmtUSD(minPayment),
       interest: fmtUSD(interest),
@@ -139,7 +141,11 @@ export const DTICalculatorClient = makeCalculatorClient({
   compute: (v) => {
     const inc = toNum(v.income)
     const debts = toNum(v.debts)
-    const dti = inc > 0 ? (debts / inc) * 100 : 0
+    // 收入为 0/空时无法计算比率,不能给「健康」结论
+    if (inc <= 0) {
+      return { dti: '—', max: '—', verdict: '⚠️ Enter your monthly income' }
+    }
+    const dti = (debts / inc) * 100
     const max28 = inc * 0.28
     let verdict: string
     if (dti < 36) verdict = '✓ Healthy — most lenders approve'
@@ -183,17 +189,39 @@ export const CommissionCalculatorClient = makeCalculatorClient({
 export const AgeDifferenceCalculatorClient = makeCalculatorClient({
   slug: 'age-difference-calculator',
   inputs: [
-    { key: 'birth1', label: 'Person 1 birth year', default: '1990' },
-    { key: 'birth2', label: 'Person 2 birth year', default: '1995' },
+    { key: 'birth1', label: 'Person 1 birth date (YYYY-MM-DD)', default: '1990-06-15', type: 'text', placeholder: 'YYYY-MM-DD' },
+    { key: 'birth2', label: 'Person 2 birth date (YYYY-MM-DD)', default: '1995-03-20', type: 'text', placeholder: 'YYYY-MM-DD' },
   ],
-  outputs: [{ key: 'diff', label: 'Age difference', highlight: true }],
+  outputs: [
+    { key: 'diff', label: 'Age difference', highlight: true },
+    { key: 'days', label: 'Difference in days' },
+  ],
   compute: (v) => {
-    const y1 = toNum(v.birth1)
-    const y2 = toNum(v.birth2)
-    const diff = Math.abs(y1 - y2)
-    return { diff: `${fmtNum(diff, 0)} years` }
+    const d1 = new Date(v.birth1)
+    const d2 = new Date(v.birth2)
+    if (isNaN(d1.getTime()) || isNaN(d2.getTime())) {
+      return { diff: '⚠️ Invalid date (use YYYY-MM-DD)', days: '—' }
+    }
+    const [a, b] = d1 <= d2 ? [d1, d2] : [d2, d1]
+    const totalDays = calendarDaysBetween(a, b)
+    // 按日历分解年/月/日(同年不同月也能得出非 0 的精确差)
+    let years = b.getFullYear() - a.getFullYear()
+    let months = b.getMonth() - a.getMonth()
+    let days = b.getDate() - a.getDate()
+    if (days < 0) {
+      months--
+      days += new Date(b.getFullYear(), b.getMonth(), 0).getDate()
+    }
+    if (months < 0) {
+      years--
+      months += 12
+    }
+    return {
+      diff: `${years} years, ${months} months, ${days} days`,
+      days: `${fmtNum(totalDays, 0)} days`,
+    }
   },
-  note: '🎂 Calculates the gap between two people\'s ages. Useful for relationships and family history.',
+  note: '🎂 Calculates the gap between two birth dates, broken down into years, months, and days. Useful for relationships and family history.',
 })
 
 export const GradeCalculatorClient = makeCalculatorClient({

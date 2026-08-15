@@ -36,6 +36,7 @@ const DEFAULT_OPTIONS: Required<SlugOptions> = {
  * generateSlug('10 SEO Tips (2024)')     // '10-seo-tips-2024'
  * generateSlug('Café & Résumé')          // 'cafe-resume'
  * generateSlug('How to use Node.js')     // 'how-to-use-nodejs'
+ * generateSlug('你好世界 2026')           // '你好世界-2026'(非拉丁文字保留)
  */
 export function generateSlug(input: string, options: SlugOptions = {}): string {
   const opts = { ...DEFAULT_OPTIONS, ...options }
@@ -52,15 +53,15 @@ export function generateSlug(input: string, options: SlugOptions = {}): string {
   }
 
   if (opts.removeSpecialChars) {
-    // 把下划线先转成空格:否则下方白名单 [^a-z0-9\s.-] 会把 _ 直接删除
+    // 把下划线先转成空格:否则下方白名单会把 _ 直接删除
     // (与注释声称的"统一为目标分隔符"矛盾,如 hello_world → helloworld)。
     // 转空格后由后续统一分隔符逻辑处理为 opts.separator(默认 '-')。
     s = s.replace(/_/g, ' ')
     // 把 CJK 全角空格、各类空白、常见标点统一成空格,便于后续按词分隔
     s = s.replace(/[\s\u3000]+/g, ' ')
-    // 移除特殊字符,只保留:字母、数字、空格、连字符
+    // 移除特殊字符,只保留:Unicode 字母(含汉字等非拉丁文字)、数字、空格、连字符
     // (点号在此一并删除:避免被当成文件扩展名,如 node.js -> nodejs)
-    s = s.replace(/[^a-z0-9\s-]/gi, '')
+    s = s.replace(/[^\p{L}\p{N}\s-]/gu, '')
   }
 
   // 把空格、点、已有的连字符/下划线统一为目标分隔符

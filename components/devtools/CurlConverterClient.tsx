@@ -25,6 +25,8 @@ interface ParsedCurl {
   headers: Record<string, string>
   body: string
   insecure: boolean
+  /** -u/--user 的原始值(user:pass),转成 Authorization: Basic 头 */
+  user?: string
 }
 
 /**
@@ -165,9 +167,9 @@ function parseCurl(input: string): ParsedCurl {
     else if (lower === '-k' || lower === '--insecure') {
       result.insecure = true
     }
-    // -u / --user(忽略,不生成代码)
+    // -u / --user user:pass → 转成 Authorization: Basic 头输出
     else if (lower === '-u' || lower === '--user') {
-      i++ // 跳过值
+      result.user = tokens[++i] || ''
     }
     // 形如 -Hvalue 的合并短选项:此处不处理,留给 URL 兜底
     // URL(第一个非 flag 参数)
@@ -203,22 +205,48 @@ function jsString(s: string): string {
   return `"${s.replace(/\\/g, '\\\\').replace(/"/g, '\\"')}"`
 }
 
+/**
+ * 输出用请求头:-u/--user 转成 Authorization: Basic(base64 在浏览器端计算,
+ * 非 latin1 凭据 btoa 会抛错,此时留占位符让用户自行替换)。
+ * 已显式提供 Authorization 头时不覆盖。
+ */
+function effectiveHeaders(c: ParsedCurl): Record<string, string> {
+  const h = { ...c.headers }
+  if (c.user && !Object.keys(h).some((k) => k.toLowerCase() === 'authorization')) {
+    let encoded: string
+    try {
+      encoded = btoa(c.user)
+    } catch {
+      encoded = 'BASE64(user:password)'
+    }
+    h['Authorization'] = `Basic ${encoded}`
+  }
+  return h
+}
+
 function genFetch(c: ParsedCurl): string {
   const opts: string[] = []
   opts.push(`  method: ${jsString(c.method)}`)
-  const headerKeys = Object.keys(c.headers)
+  const headers = effectiveHeaders(c)
+  const headerKeys = Object.keys(headers)
   if (headerKeys.length > 0) {
-    const pairs = headerKeys.map((k) => `    ${jsString(k)}: ${jsString(c.headers[k])}`).join(',\n')
+    const pairs = headerKeys.map((k) => `    ${jsString(k)}: ${jsString(headers[k])}`).join(',\n')
     opts.push(`  headers: {\n${pairs}\n  }`)
   }
   if (c.body) {
-    if (isJsonBody(c.body, c.headers)) {
+    if (isJsonBody(c.body, headers)) {
       opts.push(`  body: JSON.stringify(${c.body})`)
     } else {
       opts.push(`  body: ${jsString(c.body)}`)
     }
   }
-  return `const response = await fetch(${jsString(c.url)}, {
+  const insecureNote = c.insecure
+    ? `// ⚠️ curl -k equivalent: skips TLS certificate verification.
+// Node.js: process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0' (global, avoid in production)
+// Browsers: fetch cannot disable TLS verification.
+`
+    : ''
+  return `${insecureNote}const response = await fetch(${jsString(c.url)}, {
 ${opts.join(',\n')}
 });
 
@@ -227,12 +255,13 @@ const data = await response.json();`
 
 function genAxios(c: ParsedCurl): string {
   const json = isJsonBody(c.body, c.headers)
-  const headerKeys = Object.keys(c.headers)
+  const headers = effectiveHeaders(c)
+  const headerKeys = Object.keys(headers)
   const config: string[] = []
   config.push(`  url: ${jsString(c.url)}`)
   config.push(`  method: ${jsString(c.method.toLowerCase())}`)
   if (headerKeys.length > 0) {
-    const pairs = headerKeys.map((k) => `      ${jsString(k)}: ${jsString(c.headers[k])}`).join(',\n')
+    const pairs = headerKeys.map((k) => `      ${jsString(k)}: ${jsString(headers[k])}`).join(',\n')
     config.push(`  headers: {\n${pairs}\n    }`)
   }
   if (c.body) {
@@ -242,7 +271,14 @@ function genAxios(c: ParsedCurl): string {
       config.push(`  data: ${jsString(c.body)}`)
     }
   }
-  return `import axios from "axios";
+  // curl -k 等价:仅 Node 环境可用 https.Agent 关闭证书校验
+  if (c.insecure) {
+    config.push(`  // ⚠️ curl -k equivalent (Node only)\n  httpsAgent: new https.Agent({ rejectUnauthorized: false })`)
+  }
+  const importLine = c.insecure
+    ? `import axios from "axios";\nimport https from "node:https";`
+    : `import axios from "axios";`
+  return `${importLine}
 
 const response = await axios({
 ${config.join(',\n')}
@@ -255,12 +291,13 @@ function pyString(s: string): string {
 }
 
 function genPython(c: ParsedCurl): string {
-  const headerKeys = Object.keys(c.headers)
+  const headers = effectiveHeaders(c)
+  const headerKeys = Object.keys(headers)
   const lines: string[] = ['import requests', '']
   if (headerKeys.length > 0) {
     lines.push('headers = {')
     headerKeys.forEach((k) => {
-      lines.push(`    ${pyString(k)}: ${pyString(c.headers[k])},`)
+      lines.push(`    ${pyString(k)}: ${pyString(headers[k])},`)
     })
     lines.push('}')
     lines.push('')
@@ -279,7 +316,9 @@ function genPython(c: ParsedCurl): string {
   }
 
   const headerArg = headerKeys.length > 0 ? ', headers=headers' : ''
-  lines.push(`response = requests.${c.method.toLowerCase()}(${pyString(c.url)}${headerArg}${bodyArg})`)
+  // curl -k 等价:verify=False 跳过证书校验(requests 会发 InsecureRequestWarning)
+  const verifyArg = c.insecure ? ', verify=False' : ''
+  lines.push(`response = requests.${c.method.toLowerCase()}(${pyString(c.url)}${headerArg}${bodyArg}${verifyArg})`)
   lines.push('')
   lines.push('print(response.json())')
   return lines.join('\n')

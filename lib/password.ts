@@ -66,6 +66,11 @@ function buildPool(opts: PasswordOptions): string[] {
   return pool
 }
 
+/** 当前选项下的实际字符池大小(与生成用 buildPool 一致,含易混淆字符剔减) */
+export function poolSizeOf(opts: PasswordOptions): number {
+  return buildPool(opts).length
+}
+
 /**
  * 使用 crypto 安全随机生成密码
  * 保证至少包含每个启用类型的一个字符(避免出现"全是数字"的极端情况)

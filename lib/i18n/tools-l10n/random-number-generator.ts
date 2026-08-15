@@ -9,6 +9,9 @@ export const randomNumberGeneratorL10n: ToolL10n = {
     ui: {
       'cantPickUniqueError': '⚠️ 无法从 {range} 个数的范围中选出 {limit} 个不重复的数',
       'countAtLeastOneError': '⚠️ 个数至少为 1',
+      'countIntegerError': '⚠️ 个数必须是整数',
+      'countMaxError': '⚠️ 个数上限为 1000',
+      'clickGenerateHint': '点击「生成」开始掷随机数',
       'generate': '🎲 生成',
       'howMany': '生成个数',
       'invalidNumbersError': '⚠️ 请为最小值、最大值和个数输入有效数字',
@@ -31,6 +34,9 @@ export const randomNumberGeneratorL10n: ToolL10n = {
     ui: {
       'cantPickUniqueError': '⚠️ No se pueden elegir {limit} números únicos de un rango de {range}',
       'countAtLeastOneError': '⚠️ La cantidad debe ser al menos 1',
+      'countIntegerError': '⚠️ La cantidad debe ser un número entero',
+      'countMaxError': '⚠️ La cantidad está limitada a 1000',
+      'clickGenerateHint': 'Pulsa «Generar» para lanzar números aleatorios',
       'generate': '🎲 Generar',
       'howMany': 'Cuántos',
       'invalidNumbersError': '⚠️ Introduce números válidos para Mín, Máx y Cantidad',
@@ -53,6 +59,9 @@ export const randomNumberGeneratorL10n: ToolL10n = {
     ui: {
       'cantPickUniqueError': '⚠️ Können keine {limit} eindeutigen Zahlen aus einem Bereich von {range} wählen',
       'countAtLeastOneError': '⚠️ Anzahl muss mindestens 1 sein',
+      'countIntegerError': '⚠️ Die Anzahl muss eine ganze Zahl sein',
+      'countMaxError': '⚠️ Die Anzahl ist auf 1000 begrenzt',
+      'clickGenerateHint': 'Klicke auf «Generieren», um Zahlen zu würfeln',
       'generate': '🎲 Generieren',
       'howMany': 'Wie viele',
       'invalidNumbersError': '⚠️ Bitte gültige Zahlen für Min, Max und Anzahl eingeben',

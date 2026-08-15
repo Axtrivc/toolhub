@@ -7,6 +7,7 @@ import type { ToolL10n } from '../tool-l10n'
 export const urlExtractorL10n: ToolL10n = {
   zh: {
     ui: {
+      'noUrlsFound': '未找到 URL',
       inputLabel: '含网址的文本',
       outputLabel: '提取出的网址',
       note: '🔗 从任意文本中提取所有网址。自动去重。',
@@ -23,6 +24,7 @@ export const urlExtractorL10n: ToolL10n = {
   },
   es: {
     ui: {
+      'noUrlsFound': 'No se encontraron URLs',
       inputLabel: 'Texto con URLs',
       outputLabel: 'URLs extraídas',
       note: '🔗 Extrae todas las URLs de cualquier texto. Elimina duplicados.',
@@ -39,6 +41,7 @@ export const urlExtractorL10n: ToolL10n = {
   },
   de: {
     ui: {
+      'noUrlsFound': 'Keine URLs gefunden',
       inputLabel: 'Text mit URLs',
       outputLabel: 'Extrahierte URLs',
       note: '🔗 Extrahiert alle URLs aus beliebigem Text. Entfernt Duplikate.',

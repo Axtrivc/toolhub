@@ -10,6 +10,9 @@
  * 用法:见 components/calculators/CronParserClient.tsx
  */
 
+import { tui } from './i18n/tool-l10n'
+import type { Locale } from './i18n'
+
 export interface CronSchedule {
   minute: Set<number>
   hour: Set<number>
@@ -157,42 +160,52 @@ export function nextFires(expr: string, n: number, from: Date = new Date()): Dat
   return result
 }
 
-/** 把 5-field cron 翻译成一句人类可读英文。 */
-export function describeCron(expr: string): string {
+/** 把 5-field cron 翻译成一句人类可读描述(locale 缺省英文;非英文经 cron-parser bundle 取模板)。 */
+export function describeCron(expr: string, locale: Locale = 'en'): string {
   const [minF, hrF, domF, monF, dowF] = expr.trim().split(/\s+/)
-  const dowNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
-  const monNames = ['', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+  const L = (key: string, fb: string) => tui('cron-parser', locale, key, fb)
+  const dowNames = [
+    L('dow0', 'Sunday'), L('dow1', 'Monday'), L('dow2', 'Tuesday'), L('dow3', 'Wednesday'),
+    L('dow4', 'Thursday'), L('dow5', 'Friday'), L('dow6', 'Saturday'),
+  ]
+  const monNames = [
+    '', L('mon1', 'January'), L('mon2', 'February'), L('mon3', 'March'), L('mon4', 'April'),
+    L('mon5', 'May'), L('mon6', 'June'), L('mon7', 'July'), L('mon8', 'August'),
+    L('mon9', 'September'), L('mon10', 'October'), L('mon11', 'November'), L('mon12', 'December'),
+  ]
 
   // 时间部分
   let time: string
   if (minF === '*' && hrF === '*') {
-    time = 'every minute'
+    time = L('everyMinute', 'every minute')
   } else if (minF === '*' ) {
-    time = `every minute during the ${describeHourList(hrF)}`
+    time = L('everyMinuteDuring', 'every minute during the {hours}').replace('{hours}', describeHourList(hrF))
   } else if (hrF === '*') {
-    time = `at minute ${describeList(minF)} of every hour`
+    time = L('atMinuteOfEveryHour', 'at minute {mins} of every hour').replace('{mins}', describeList(minF))
   } else {
     // 组合具体时分
     const minutes = expand(minF, 0, 59)
     const hours = expand(hrF, 0, 23)
     const times = minutes.flatMap((m) => hours.map((h) => formatTime(h, m)))
-    time = `at ${times.join(', ')}`
+    time = L('atTimes', 'at {times}').replace('{times}', times.join(', '))
   }
 
   // 日期部分
   let day: string
   if (domF === '*' && dowF === '*') {
-    day = 'every day'
+    day = L('everyDay', 'every day')
   } else if (domF === '*') {
     const dows = expand(dowF === '7' ? '0' : dowF, 0, 6)
-    day = `on ${dows.map((d) => dowNames[d]).join(', ')}`
+    day = L('onDays', 'on {days}').replace('{days}', dows.map((d) => dowNames[d]).join(', '))
   } else if (dowF === '*') {
-    day = `on day-of-month ${describeList(domF)}`
+    day = L('onDayOfMonth', 'on day-of-month {doms}').replace('{doms}', describeList(domF))
   } else {
     // OR 语义
     const dows = expand(dowF === '7' ? '0' : dowF, 0, 6)
     const doms = expand(domF, 1, 31)
-    day = `on day-of-month ${doms.join(', ')} OR on ${dows.map((d) => dowNames[d]).join(', ')}`
+    day = L('onDomOrDow', 'on day-of-month {doms} OR on {dows}')
+      .replace('{doms}', doms.join(', '))
+      .replace('{dows}', dows.map((d) => dowNames[d]).join(', '))
   }
 
   // 月份部分
@@ -201,12 +214,17 @@ export function describeCron(expr: string): string {
     month = ''
   } else {
     const months = expand(monF, 1, 12)
-    month = ` in ${months.map((m) => monNames[m]).join(', ')}`
+    month = L('inMonths', ' in {months}').replace('{months}', months.map((m) => monNames[m]).join(', '))
   }
 
   // 简化常见情况
-  if (time === 'every minute' && day === 'every day' && !month) return 'Every minute, every day'
-  return capitalize(`${time}, ${day}${month}`)
+  if (minF === '*' && hrF === '*' && domF === '*' && dowF === '*' && monF === '*') {
+    return L('everyMinuteEveryDay', 'Every minute, every day')
+  }
+  return capitalize(L('finalTemplate', '{time}, {day}{month}')
+    .replace('{time}', time)
+    .replace('{day}', day)
+    .replace('{month}', month))
 }
 
 // ── describeCron 的小工具 ──

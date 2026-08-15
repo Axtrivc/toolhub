@@ -25,7 +25,7 @@ interface OgInput {
 
 const SAMPLE: OgInput = {
   title: 'Free Online Tools That Just Work',
-  description: '130+ fast, privacy-friendly utilities for developers, students, and everyday tasks. No signup, no upload.',
+  description: '169 fast, privacy-friendly utilities for developers, students, and everyday tasks. No signup, no upload.',
   url: 'https://example.com/blog/free-tools',
   image: 'https://example.com/images/share-card.png',
   siteName: 'Example',

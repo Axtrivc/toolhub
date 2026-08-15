@@ -106,6 +106,8 @@ export function SvgMinifierClient() {
 
   const [input, setInput] = useState('')
   const [error, setError] = useState('')
+  // 记录源文件名,下载时沿用(icon.svg → icon.min.svg)而非固定 minified.svg
+  const [sourceName, setSourceName] = useState('')
   const [dragging, setDragging] = useState(false)
   const [opts, setOpts] = useState<MinifyOptions>({
     removeDecl: true,
@@ -127,7 +129,10 @@ export function SvgMinifierClient() {
       return
     }
     const reader = new FileReader()
-    reader.onload = () => setInput(String(reader.result || ''))
+    reader.onload = () => {
+      setInput(String(reader.result || ''))
+      setSourceName(file.name)
+    }
     reader.onerror = () => setError(L('errReadFile', 'Could not read the file.'))
     reader.readAsText(file)
   }, [])
@@ -167,7 +172,9 @@ export function SvgMinifierClient() {
     const url = URL.createObjectURL(blob)
     const a = document.createElement('a')
     a.href = url
-    a.download = 'minified.svg'
+    a.download = sourceName
+      ? sourceName.replace(/\.svg$/i, '') + '.min.svg'
+      : 'minified.svg'
     document.body.appendChild(a)
     a.click()
     document.body.removeChild(a)
@@ -217,7 +224,10 @@ export function SvgMinifierClient() {
           <textarea
             id="svg-input"
             value={input}
-            onChange={(e) => setInput(e.target.value)}
+            onChange={(e) => {
+                setInput(e.target.value)
+                setSourceName('')
+              }}
             placeholder={L('svgPlaceholder', 'Paste SVG markup here, or drag & drop a .svg file…')}
             rows={8}
             spellCheck={false}

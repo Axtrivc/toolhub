@@ -57,9 +57,12 @@ function cleanText(input: string, opts: CleanOptions): string {
   if (opts.removeSpecial) {
     const keep = escapeForCharClass(opts.keepChars)
     try {
-      out = out.replace(new RegExp(`[^a-zA-Z0-9\\s${keep}]`, 'g'), '')
+      // 用 Unicode 属性保留所有语言文字(\p{L} 含汉字)而非仅 ASCII,
+      // 否则中文/日文等非拉丁文本会被整篇当作「特殊字符」删光。
+      out = out.replace(new RegExp(`[^\\p{L}\\p{N}\\s${keep}]`, 'gu'), '')
     } catch {
       // 保底:理论上 escape 后不会失败
+      out = out.replace(/[^a-zA-Z0-9\s]/g, '')
     }
   }
   if (opts.lowercase) out = out.toLowerCase()
@@ -78,7 +81,7 @@ interface ToggleDef {
 const TOGGLES: ToggleDef[] = [
   { key: 'stripEmojis', label: 'Strip emojis & pictographs', hint: 'Removes 😀 symbols, dingbats, flags' },
   { key: 'removeAccents', label: 'Remove accents & diacritics', hint: 'café → cafe, naïve → naive' },
-  { key: 'removeSpecial', label: 'Remove special characters', hint: 'Keep letters, digits, spaces + your list' },
+  { key: 'removeSpecial', label: 'Remove special characters', hint: 'Keep letters (incl. Chinese), digits, spaces + your list' },
   { key: 'stripUrls', label: 'Strip URLs', hint: 'Removes http(s):// and www. links' },
   { key: 'stripHtml', label: 'Strip HTML tags', hint: '<b>bold</b> → bold' },
   { key: 'lowercase', label: 'Convert to lowercase', hint: 'ABC → abc' },

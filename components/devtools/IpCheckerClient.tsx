@@ -104,8 +104,15 @@ function isValidIPv4(s: string): boolean {
 
 function isValidIPv6(s: string): boolean {
   if (!s.includes(':')) return false
-  if ((s.match(/::/g) ?? []).length > 1) return false
-  return /^[0-9a-fA-F:]+$/.test(s) && s.split(':').every((h) => h.length <= 4)
+  const doubleColons = (s.match(/::/g) ?? []).length
+  if (doubleColons > 1) return false
+  if (!/^[0-9a-fA-F:]+$/.test(s)) return false
+  const groups = s.split(':')
+  if (!groups.every((h) => h.length <= 4)) return false
+  // 组数校验:无 :: 压缩时必须恰好 8 组;有 :: 时非空组 ≤ 7(:: 展开补零)
+  const nonEmpty = groups.filter((h) => h !== '').length
+  if (doubleColons === 0) return groups.length === 8
+  return nonEmpty <= 7
 }
 
 function classifyTarget(raw: string): 'ipv4' | 'ipv6' | 'domain' | null {

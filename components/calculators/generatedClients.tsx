@@ -56,6 +56,10 @@ export const DiscountCalculatorClient = makeCalculatorClient({
   compute: (v) => {
     const price = toNum(v.price)
     const discount = toNum(v.discount)
+    // 折扣超出 0–100% 会算出负价,直接拦截
+    if (discount < 0 || discount > 100) {
+      return { savings: '—', final: '⚠️ Discount must be 0–100%', paid: '—' }
+    }
     const savings = price * (discount / 100)
     const final = price - savings
     return {
@@ -92,6 +96,10 @@ export const SalesTaxCalculatorClient = makeCalculatorClient({
   compute: (v) => {
     const amount = toNum(v.amount)
     const rate = toNum(v.rate)
+    // remove 模式下 1 + rate/100 作分母:rate ≤ -100% 时除零/负数无意义
+    if (v.mode === 'remove' && rate <= -100) {
+      return { tax: '—', result: '⚠️ Tax rate must be above −100%' }
+    }
     if (v.mode === 'remove') {
       // 反推:amount 是含税价,求税前
       const preTax = amount / (1 + rate / 100)

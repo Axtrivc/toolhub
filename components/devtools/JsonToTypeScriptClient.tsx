@@ -29,14 +29,15 @@ const SAMPLE_JSON = `{
   ]
 }`
 
-/** PascalCase:把字符串转成合法 TS 标识符(数字开头加下划线) */
+/** PascalCase:把字符串转成合法 TS 标识符(数字开头加下划线;保留 Unicode 字母,中文 key 不再被剥空) */
 function toPascalCase(input: string): string {
-  const parts = input.replace(/[^a-zA-Z0-9]+/g, ' ').trim().split(/\s+/)
+  const parts = input.replace(/[^\p{L}\p{N}]+/gu, ' ').trim().split(/\s+/)
   const pascal = parts
     .map((p) => (p.length === 0 ? '' : p[0].toUpperCase() + p.slice(1)))
     .join('')
   const safe = pascal.replace(/^[0-9]/, '_$&')
-  return safe || 'Root'
+  // 兜底名不用 'Root':根 interface 固定叫 Root,嵌套层再叫 Root 会重名
+  return safe || 'Sub'
 }
 
 /** interface 名计数器,保证 Sub / Sub2 / Sub3 不冲突 */
@@ -95,23 +96,24 @@ function generateInterfaces(jsonStr: string): string {
   const parsed: unknown = JSON.parse(jsonStr)
   const reg = new NameRegistry()
   const interfaces: string[] = []
-  const rootName = 'Root'
+  // 根名也走注册表:后续若有 key 恰好叫 root,会得到 Root2 而非与根重名
+  const rootName = reg.next('Root')
 
   if (parsed === null || typeof parsed !== 'object') {
     // 标量根:直接给一个 type 别名
-    return `type Root = ${inferType(parsed, rootName, interfaces, reg)};`
+    return `type ${rootName} = ${inferType(parsed, rootName, interfaces, reg)};`
   }
 
   if (Array.isArray(parsed)) {
     // 数组根:Root 是某类型的数组。对所有元素统一推导并合并去重,
     // 不再对首元素单独推导(否则会重复生成同名 interface → TS Duplicate identifier)。
     if (parsed.length === 0) {
-      return 'type Root = unknown[];'
+      return `type ${rootName} = unknown[];`
     }
     const all = parsed.map((el) => inferType(el, rootName + 'Item', interfaces, reg))
     const unique = Array.from(new Set(all))
     const elem = unique.length === 1 ? unique[0] : `(${unique.join(' | ')})`
-    interfaces.unshift(`type Root = ${elem}[];`)
+    interfaces.unshift(`type ${rootName} = ${elem}[];`)
     return interfaces.join('\n\n')
   }
 

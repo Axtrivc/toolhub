@@ -113,7 +113,11 @@ export const CapitalGainsTaxEstimatorClient = makeCalculatorClient({
     { key: 'purchase', label: 'Purchase price', suffix: '$', default: '10000' },
     { key: 'sale', label: 'Sale price', suffix: '$', default: '15000' },
     { key: 'years', label: 'Years held', default: '2' },
-    { key: 'bracket', label: 'Income tax bracket', suffix: '%', default: '24' },
+    { key: 'taxableIncome', label: 'Taxable income', suffix: '$', default: '80000' },
+    { key: 'filing', label: 'Filing status', default: 'single', options: [
+      { label: 'Single', value: 'single' },
+      { label: 'Married, filing jointly', value: 'married' },
+    ]},
   ],
   outputs: [
     { key: 'gain', label: 'Capital gain' },
@@ -123,21 +127,32 @@ export const CapitalGainsTaxEstimatorClient = makeCalculatorClient({
   compute: (v) => {
     const gain = toNum(v.sale) - toNum(v.purchase)
     const years = toNum(v.years)
-    const bracket = toNum(v.bracket)
-    // 长期持有(>1年)享受优惠税率
+    const income = toNum(v.taxableIncome)
+    const married = v.filing === 'married'
+    // 长期持有(>1年)按 0/15/20% 优惠税率,阈值取决于应税收入(2026 年,IRS Rev. Proc. 2025-32)
+    const zeroMax = married ? 98900 : 49450
+    const fifteenMax = married ? 613700 : 545500
+    // 短期(<1年)按普通收入边际档征税(2026)
+    const ordinaryBrackets = married
+      ? [[0, 0.10], [24800, 0.12], [100800, 0.22], [211400, 0.24], [403550, 0.32], [512450, 0.35], [768700, 0.37]]
+      : [[0, 0.10], [12400, 0.12], [50400, 0.22], [105700, 0.24], [201775, 0.32], [256225, 0.35], [640600, 0.37]]
+    let marginal = 0
+    for (const b of ordinaryBrackets) {
+      if (income >= (b[0] as number)) marginal = b[1] as number
+    }
     const isLong = years > 1
-    let rate: number
-    if (!isLong) rate = bracket // 短期按普通收入
-    else if (bracket >= 37) rate = 20 // 高收入长期
-    else if (bracket >= 15) rate = 15
-    else rate = 0 // 低收入长期 0%
+    const rate = !isLong
+      ? marginal * 100
+      : income > fifteenMax ? 20
+      : income > zeroMax ? 15
+      : 0
     return {
       gain: fmtUSD(gain),
       rate: `${isLong ? 'Long-term ' : 'Short-term '} ${rate}%`,
       tax: fmtUSD(Math.max(0, gain) * rate / 100),
     }
   },
-  note: '📈 US capital gains: held 1+ year = long-term (0/15/20%). Held <1 year = short-term (ordinary income rate). Simplified — excludes NIIT and state tax.',
+  note: '📈 US capital gains: held 1+ year = long-term (0/15/20% by 2026 taxable income). Held <1 year = short-term (ordinary income rate). Simplified — excludes NIIT and state tax.',
 })
 
 export const RentVsBuyCalculatorClient = makeCalculatorClient({
@@ -277,7 +292,7 @@ export const MacroCalculatorClient = makeCalculatorClient({
 export const PregnancyDueDateCalculatorClient = makeCalculatorClient({
   slug: 'pregnancy-due-date-calculator',
   inputs: [
-    { key: 'lmp', label: 'First day of last period (YYYY-MM-DD)', default: '2026-01-01' },
+    { key: 'lmp', label: 'First day of last period (YYYY-MM-DD)', default: '2026-01-01', type: 'text', placeholder: 'YYYY-MM-DD' },
   ],
   outputs: [
     { key: 'due', label: 'Estimated due date', highlight: true },

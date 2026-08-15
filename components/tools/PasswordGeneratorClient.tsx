@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback } from 'react'
 import {
   generatePassword,
   estimateStrength,
+  poolSizeOf,
   DEFAULT_OPTIONS,
   type PasswordOptions,
 } from '@/lib/password'
@@ -35,8 +36,8 @@ export function PasswordGeneratorClient() {
     regenerate()
   }, [regenerate])
 
-  // 计算字符池大小(用于强度估算)
-  const poolSize = calculatePoolSize(opts)
+  // 字符池大小直接取生成器的真实池(符号集 26 个、剔混淆后更小),熵位数不再高估
+  const poolSize = poolSizeOf(opts)
   const strength = estimateStrength(password, poolSize)
 
   const update = (patch: Partial<PasswordOptions>) => setOpts((prev) => ({ ...prev, ...patch }))
@@ -162,13 +163,4 @@ function Toggle({
       {label}
     </label>
   )
-}
-
-function calculatePoolSize(opts: PasswordOptions): number {
-  let size = 0
-  if (opts.uppercase) size += 26
-  if (opts.lowercase) size += 26
-  if (opts.numbers) size += 10
-  if (opts.symbols) size += 24
-  return size
 }

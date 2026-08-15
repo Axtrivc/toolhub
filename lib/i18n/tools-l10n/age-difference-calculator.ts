@@ -7,8 +7,9 @@ import type { ToolL10n } from '../tool-l10n'
 export const ageDifferenceCalculatorL10n: ToolL10n = {
   zh: {
     ui: {
-      'in.birth1': '人物 1 出生年份',
-      'in.birth2': '人物 2 出生年份',
+      'in.birth1': '人物 1 出生日期(YYYY-MM-DD)',
+      'in.birth2': '人物 2 出生日期(YYYY-MM-DD)',
+      'out.days': '相差天数',
       'out.diff': '年龄差',
       note: '🎂 计算两个人之间的年龄差距。适用于恋爱关系和家族史研究。',
     },
@@ -24,8 +25,9 @@ export const ageDifferenceCalculatorL10n: ToolL10n = {
   },
   es: {
     ui: {
-      'in.birth1': 'Año de nacimiento (persona 1)',
-      'in.birth2': 'Año de nacimiento (persona 2)',
+      'in.birth1': 'Fecha de nacimiento (persona 1, AAAA-MM-DD)',
+      'in.birth2': 'Fecha de nacimiento (persona 2, AAAA-MM-DD)',
+      'out.days': 'Diferencia en días',
       'out.diff': 'Diferencia de edad',
       note: '🎂 Calcula la diferencia de edad entre dos personas. Útil para relaciones e historia familiar.',
     },
@@ -41,8 +43,9 @@ export const ageDifferenceCalculatorL10n: ToolL10n = {
   },
   de: {
     ui: {
-      'in.birth1': 'Geburtsjahr (Person 1)',
-      'in.birth2': 'Geburtsjahr (Person 2)',
+      'in.birth1': 'Geburtsdatum (Person 1, JJJJ-MM-TT)',
+      'in.birth2': 'Geburtsdatum (Person 2, JJJJ-MM-TT)',
+      'out.days': 'Differenz in Tagen',
       'out.diff': 'Altersunterschied',
       note: '🎂 Berechnet den Altersunterschied zwischen zwei Personen. Nützlich für Beziehungen und Familienforschung.',
     },

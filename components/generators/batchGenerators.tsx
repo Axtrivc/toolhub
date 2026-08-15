@@ -201,7 +201,7 @@ export const StandardDeviationCalculatorClient = makeCalculatorClient({
     { key: 'count', label: 'Count' },
   ],
   compute: (v) => {
-    const nums = (v.numbers || '').split(/[\s,]+/).map(Number).filter((n) => isFinite(n))
+    const nums = (v.numbers || '').split(/[\s,]+/).filter(Boolean).map(Number).filter((n) => isFinite(n))
     if (nums.length === 0) return { mean: '—', stddev: '—', variance: '—', count: '0' }
     const n = nums.length
     const mean = nums.reduce((a, b) => a + b, 0) / n
@@ -226,7 +226,7 @@ export const PercentileCalculatorClient = makeCalculatorClient({
   ],
   outputs: [{ key: 'result', label: 'Percentile value', highlight: true }],
   compute: (v) => {
-    const nums = (v.numbers || '').split(/[\s,]+/).map(Number).filter((n) => isFinite(n)).sort((a, b) => a - b)
+    const nums = (v.numbers || '').split(/[\s,]+/).filter(Boolean).map(Number).filter((n) => isFinite(n)).sort((a, b) => a - b)
     if (nums.length === 0) return { result: '—' }
     const p = Math.min(100, Math.max(0, toNum(v.p)))
     // 线性插值法

@@ -20,7 +20,7 @@ export function RandomNumberGeneratorClient() {
   const [min, setMin] = useState('1')
   const [max, setMax] = useState('100')
   const [count, setCount] = useState('1')
-  const [result, setResult] = useState('42')
+  const [result, setResult] = useState('')
   const [unique, setUnique] = useState(false)
 
   const generate = () => {
@@ -33,15 +33,24 @@ export function RandomNumberGeneratorClient() {
       setResult(L('invalidNumbersError', '⚠️ Please enter valid numbers for Min, Max, and Count'))
       return
     }
+    if (!Number.isInteger(n)) {
+      setResult(L('countIntegerError', '⚠️ Count must be a whole number'))
+      return
+    }
     if (n < 1) {
       setResult(L('countAtLeastOneError', '⚠️ Count must be at least 1'))
+      return
+    }
+    if (n > 1000) {
+      // 不再静默截断:明确提示上限,避免「要 5000 个只给了 1000 个」
+      setResult(L('countMaxError', '⚠️ Count is capped at 1000'))
       return
     }
     const loInt = Math.ceil(lo)
     const hiInt = Math.floor(hi)
     if (loInt > hiInt) { setResult(L('minLteMaxError', '⚠️ Min must be ≤ Max')); return }
     const range = hiInt - loInt + 1
-    const limit = Math.min(n, 1000)
+    const limit = n
     if (unique && limit > range) {
       setResult(
         L('cantPickUniqueError', '⚠️ Can\'t pick {limit} unique numbers from a range of {range}')
@@ -82,10 +91,10 @@ export function RandomNumberGeneratorClient() {
       </label>
       <div className="flex gap-3">
         <button onClick={generate} className="btn btn-primary">{L('generate', '🎲 Generate')}</button>
-        <CopyButton value={result} />
+        <CopyButton value={result} disabled={!result} />
       </div>
       <div className="rounded-lg border-2 border-brand-100 bg-brand-50/40 p-4">
-        <code className="font-mono text-lg text-brand-700">{result}</code>
+        <code className="font-mono text-lg text-brand-700">{result || L('clickGenerateHint', 'Click Generate to roll')}</code>
       </div>
     </div>
   )

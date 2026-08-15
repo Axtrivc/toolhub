@@ -11,7 +11,7 @@ export const yamlToJsonL10n: ToolL10n = {
       'copy': '复制',
       'inputLabel': '粘贴你的 YAML',
       'invalidYaml': '无效 YAML',
-      'note': '🔒 100% 在客户端——手写的 YAML 子集解析器。支持映射、序列、内联流、引号和注释。',
+      'note': '🔒 100% 在客户端——手写的 YAML 子集解析器。支持映射、序列、内联流、引号、注释和块标量(| 与 >)。',
       'outputLabel': 'JSON 输出',
     },
     useCases: [
@@ -32,7 +32,7 @@ export const yamlToJsonL10n: ToolL10n = {
       'copy': 'Copiar',
       'inputLabel': 'Pega tu YAML',
       'invalidYaml': 'YAML inválido',
-      'note': '🔒 100% en el cliente — un parser de un subconjunto YAML hecho a mano. Admite mapeos, secuencias, flujo en línea, comillas y comentarios.',
+      'note': '🔒 100% en el cliente — un parser de un subconjunto YAML hecho a mano. Admite mapeos, secuencias, flujo en línea, comillas, comentarios y escalares de bloque (| y >).',
       'outputLabel': 'Salida JSON',
     },
     useCases: [
@@ -53,7 +53,7 @@ export const yamlToJsonL10n: ToolL10n = {
       'copy': 'Kopieren',
       'inputLabel': 'Füge dein YAML ein',
       'invalidYaml': 'Ungültiges YAML',
-      'note': '🔒 100% clientseitig — ein handgeschriebener Parser für eine YAML-Teilmenge. Unterstützt Mappings, Sequenzen, Inline-Flow, Anführungszeichen und Kommentare.',
+      'note': '🔒 100% clientseitig — ein handgeschriebener Parser für eine YAML-Teilmenge. Unterstützt Mappings, Sequenzen, Inline-Flow, Anführungszeichen, Kommentare und Block-Skalare (| und >).',
       'outputLabel': 'JSON-Ausgabe',
     },
     useCases: [

@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import { ResultCard, CalculatorNote } from '@/components/calculator/CalculatorField'
 import { useApp } from '@/components/providers/AppProviders'
 import { tui } from '@/lib/i18n/tool-l10n'
+import { calendarDaysBetween } from '@/lib/date-utils'
 
 function toInputDate(d: Date): string {
   const y = d.getFullYear()
@@ -20,6 +21,8 @@ function parseLocalDate(s: string): Date {
 
 /** 计算两个日期之间的差,精确到年/月/日 */
 function calcAge(from: Date, to: Date) {
+  // 清空日期输入后 parseLocalDate('') 会得到 Invalid Date,直接走空态而非渲染 NaN
+  if (isNaN(from.getTime()) || isNaN(to.getTime())) return null
   if (from > to) return null
 
   let years = to.getFullYear() - from.getFullYear()
@@ -38,7 +41,8 @@ function calcAge(from: Date, to: Date) {
   }
 
   const totalMs = to.getTime() - from.getTime()
-  const totalDays = Math.floor(totalMs / (1000 * 60 * 60 * 24))
+  // 日/周差用日历日(DST 安全),小时差保留真实流逝毫秒
+  const totalDays = calendarDaysBetween(from, to)
   const totalWeeks = Math.floor(totalDays / 7)
   const totalMonths = years * 12 + months
   const totalHours = Math.floor(totalMs / (1000 * 60 * 60))
@@ -48,9 +52,7 @@ function calcAge(from: Date, to: Date) {
   if (nextBirthday < to) {
     nextBirthday = new Date(to.getFullYear() + 1, from.getMonth(), from.getDate())
   }
-  const daysToBirthday = Math.ceil(
-    (nextBirthday.getTime() - to.getTime()) / (1000 * 60 * 60 * 24),
-  )
+  const daysToBirthday = calendarDaysBetween(to, nextBirthday)
 
   return {
     years,

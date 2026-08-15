@@ -4,8 +4,9 @@ import { useState, useEffect, useMemo, type ComponentType } from 'react'
 import { CopyButton } from '@/components/CopyButton'
 import { PulseGlow } from '@/components/motion/PulseGlow'
 import { useApp } from '@/components/providers/AppProviders'
-import { t } from '@/lib/i18n'
+import { t, type Locale } from '@/lib/i18n'
 import { tui } from '@/lib/i18n/tool-l10n'
+import { countWords } from '@/lib/text-stats'
 
 /**
  * 文本工具工厂
@@ -40,9 +41,10 @@ export interface TextToolConfig {
   defaultInput?: string
   /**
    * 核心变换函数(纯函数)
-   * 接收输入文本,返回输出文本
+   * 接收输入文本与当前 locale,返回输出文本。
+   * locale 供需要本地化提示的 transform 使用(如「大小写转换仅对英文有效」)。
    */
-  transform: (input: string) => string
+  transform: (input: string, locale: Locale) => string
   /** 底部说明 */
   note?: string
   /** 是否显示字符/单词统计(默认 true) */
@@ -62,15 +64,16 @@ export function makeTextTool(config: TextToolConfig): ComponentType {
     const output = useMemo(() => {
       if (!mounted) return ''
       try {
-        return config.transform(input)
+        return config.transform(input, locale)
       } catch {
         return ''
       }
-    }, [input, mounted])
+    }, [input, mounted, locale])
 
     const showStats = config.showStats !== false
     const charCount = input.length
-    const wordCount = input.trim() ? input.trim().split(/\s+/).length : 0
+    // 词数走中英混合口径:纯中文不再恒为 1 词
+    const wordCount = countWords(input)
 
     // 每工具可本地化字符串:有 slug → tui 取本地化;无 → config 英文原值。
     const inputLabel = config.slug && config.inputLabel

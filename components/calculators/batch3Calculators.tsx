@@ -177,6 +177,11 @@ export const FractionCalculatorClient = makeCalculatorClient({
     const c = toNum(v.num2)
     const d = toNum(v.den2)
     if (b === 0 || d === 0) return { result: '⚠️ Denominator cannot be 0', decimal: '—' }
+    if (v.op === 'div' && b * c === 0) {
+      // 除法 a/b ÷ c/d = a·d / (b·c):c=0 是「除以 0」;a=0 时结果恒 0,直接短路
+      if (c === 0) return { result: '⚠️ Cannot divide by 0', decimal: '—' }
+      return { result: '0', decimal: '0.0000' }
+    }
     let num: number, den: number
     switch (v.op) {
       case 'add': num = a * d + c * b; den = b * d; break
@@ -207,7 +212,6 @@ export const RatioCalculatorClient = makeCalculatorClient({
     { key: 'a', label: 'A', default: '3' },
     { key: 'b', label: 'B', default: '4' },
     { key: 'c', label: 'C (or leave blank to solve)', default: '9' },
-    { key: 'd', label: 'D (solved)', default: '' },
   ],
   outputs: [
     { key: 'ratio', label: 'A : B = C : D', highlight: true },
@@ -469,19 +473,22 @@ export const IncomeTaxEstimatorClient = makeCalculatorClient({
   ],
   compute: (v) => {
     const income = toNum(v.income)
-    // 简化的 2024 美国联邦税档次(单身/已婚)
+    // 2026 美国联邦税档次(单身/已婚,IRS Rev. Proc. 2025-32)
     // 每档语义:[该档下限, 税率];最后一档无上限(适用于"下限"以上的全部收入)
     const brackets = v.filing === 'married'
-      ? [[0, 0.10], [23200, 0.12], [94300, 0.22], [201050, 0.24], [383900, 0.32], [487450, 0.35], [731200, 0.37]]
-      : [[0, 0.10], [11600, 0.12], [47150, 0.22], [100525, 0.24], [191950, 0.32], [243725, 0.35], [609350, 0.37]]
+      ? [[0, 0.10], [24800, 0.12], [100800, 0.22], [211400, 0.24], [403550, 0.32], [512450, 0.35], [768700, 0.37]]
+      : [[0, 0.10], [12400, 0.12], [50400, 0.22], [105700, 0.24], [201775, 0.32], [256225, 0.35], [640600, 0.37]]
+    // 先扣标准扣除额(2026:单身 $16,100 / 已婚联合 $32,200)再套边际档
+    const stdDeduction = v.filing === 'married' ? 32200 : 16100
+    const taxable = Math.max(0, income - stdDeduction)
     let tax = 0
     for (let i = 0; i < brackets.length; i++) {
       const low = brackets[i][0] as number
       const rate = brackets[i][1] as number
       const high = i + 1 < brackets.length ? (brackets[i + 1][0] as number) : Infinity
-      if (income > low) {
-        // 本档应税额 = min(income, high) - low(末档 high=Infinity)
-        tax += (Math.min(income, high) - low) * rate
+      if (taxable > low) {
+        // 本档应税额 = min(taxable, high) - low(末档 high=Infinity)
+        tax += (Math.min(taxable, high) - low) * rate
       } else {
         break
       }
@@ -493,7 +500,7 @@ export const IncomeTaxEstimatorClient = makeCalculatorClient({
       takehome: fmtUSD(income - tax, 0),
     }
   },
-  note: '📊 Simplified US 2024 federal brackets. Excludes state tax, deductions, and credits. Estimate only.',
+  note: '📊 US 2026 federal brackets with standard deduction applied ($16,100 single / $32,200 joint). Excludes state tax and credits. Estimate only.',
   chart: {
     title: 'Where Your Income Goes',
     centerLabel: 'Income',

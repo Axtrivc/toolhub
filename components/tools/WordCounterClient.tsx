@@ -32,10 +32,10 @@ function analyzeText(text: string): TextStats {
   const cjkChars = (trimmed.match(cjkRegex) || []).length
   const words = trimmed ? westernWords + cjkChars : 0
 
-  // 句子数:按西文 . ! ? 和 CJK 句末标点 。!? 分割,过滤空串
+  // 句子数:按西文 . ! ? 和 CJK 句末标点 。！？(全角)分割,过滤空串
   const sentences = trimmed
     ? trimmed
-        .split(/[.!?。!?]+/)
+        .split(/[.!?。！？…]+/)
         .map((s) => s.trim())
         .filter(Boolean).length
     : 0
@@ -63,14 +63,14 @@ function analyzeText(text: string): TextStats {
   }
 }
 
-/** 把分钟数格式化为 "X 分 Y 秒" */
-function formatTime(minutes: number): string {
-  if (minutes <= 0) return '0 sec'
+/** 把分钟数格式化为 "X 分 Y 秒"(单位经 L 本地化) */
+function formatTime(minutes: number, L: (key: string, fb: string) => string): string {
+  if (minutes <= 0) return L('tZero', '0 sec')
   const totalSec = Math.round(minutes * 60)
   const m = Math.floor(totalSec / 60)
   const s = totalSec % 60
-  if (m === 0) return `${s} sec`
-  return `${m} min ${s} sec`
+  if (m === 0) return `${s} ${L('tSec', 'sec')}`
+  return `${m} ${L('tMin', 'min')} ${s} ${L('tSec', 'sec')}`
 }
 
 export function WordCounterClient() {
@@ -87,8 +87,8 @@ export function WordCounterClient() {
     { label: L('charactersNoSpaces', 'Characters (no spaces)'), value: stats.charactersNoSpaces.toLocaleString() },
     { label: L('sentences', 'Sentences'), value: stats.sentences.toLocaleString() },
     { label: L('paragraphs', 'Paragraphs'), value: stats.paragraphs.toLocaleString() },
-    { label: L('readingTime', 'Reading Time'), value: formatTime(stats.readingTime) },
-    { label: L('speakingTime', 'Speaking Time'), value: formatTime(stats.speakingTime) },
+    { label: L('readingTime', 'Reading Time'), value: formatTime(stats.readingTime, L) },
+    { label: L('speakingTime', 'Speaking Time'), value: formatTime(stats.speakingTime, L) },
   ]
 
   return (

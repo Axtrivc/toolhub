@@ -10,6 +10,7 @@ const CURRENCIES: { code: string; symbol: string; decimals: number }[] = [
   { code: 'EUR', symbol: '€', decimals: 2 },
   { code: 'GBP', symbol: '£', decimals: 2 },
   { code: 'JPY', symbol: '¥', decimals: 0 },
+  { code: 'CNY', symbol: '¥', decimals: 2 },
 ]
 
 const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']

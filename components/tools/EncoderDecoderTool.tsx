@@ -4,6 +4,7 @@ import { useState, useEffect, useMemo, useCallback } from 'react'
 import { CopyButton } from '@/components/CopyButton'
 import { useApp } from '@/components/providers/AppProviders'
 import { tui } from '@/lib/i18n/tool-l10n'
+import { countWords } from '@/lib/text-stats'
 
 /**
  * 单个方向的变换规格(与 makeTextTool 的相关字段同构)。
@@ -76,7 +77,8 @@ export function EncoderDecoderTool({ encode, decode, initialMode = 'encode', slu
   )
 
   const charCount = input.length
-  const wordCount = input.trim() ? input.trim().split(/\s+/).length : 0
+  // 中英混合口径:纯中文不再恒为 1 词
+  const wordCount = countWords(input)
 
   return (
     <div className="space-y-5">

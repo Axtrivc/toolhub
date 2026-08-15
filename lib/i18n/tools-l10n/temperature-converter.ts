@@ -7,6 +7,11 @@ import type { ToolL10n } from '../tool-l10n'
 export const temperatureConverterL10n: ToolL10n = {
   zh: {
     ui: {
+      'summaryTitle': '温度换算',
+      'sInput': '输入: ',
+      'sResult': '结果: ',
+      'copySummary': '复制摘要',
+      'belowAbsZero': '⚠️ 温度低于绝对零度(−273.15°C / 0K)——物理上不可能。',
       'convertedValue': '换算结果',
       'formula': '公式',
       'from': '从',
@@ -30,6 +35,11 @@ export const temperatureConverterL10n: ToolL10n = {
   },
   es: {
     ui: {
+      'summaryTitle': 'Conversión de temperatura',
+      'sInput': 'Entrada: ',
+      'sResult': 'Resultado: ',
+      'copySummary': 'Copiar resumen',
+      'belowAbsZero': '⚠️ La temperatura está por debajo del cero absoluto (−273,15°C / 0K): físicamente imposible.',
       'convertedValue': 'Valor convertido',
       'formula': 'Fórmula',
       'from': 'De',
@@ -53,6 +63,11 @@ export const temperatureConverterL10n: ToolL10n = {
   },
   de: {
     ui: {
+      'summaryTitle': 'Temperaturumrechnung',
+      'sInput': 'Eingabe: ',
+      'sResult': 'Ergebnis: ',
+      'copySummary': 'Zusammenfassung kopieren',
+      'belowAbsZero': '⚠️ Temperatur unter dem absoluten Nullpunkt (−273,15 °C / 0 K) — physikalisch unmöglich.',
       'convertedValue': 'Umgerechneter Wert',
       'formula': 'Formel',
       'from': 'Von',

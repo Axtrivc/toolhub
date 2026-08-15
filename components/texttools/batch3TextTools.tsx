@@ -39,6 +39,37 @@ export const JSONMinifierClient = makeTextTool({
   note: '📦 Removes all whitespace to minimize JSON size. For API payloads and storage.',
 })
 
+/** 解析一行 CSV 为字段数组:支持 "..." 引号包裹(内含逗号)与 "" 转义引号 */
+function parseCsvLine(line: string): string[] {
+  const cells: string[] = []
+  let cur = ''
+  let inQ = false
+  for (let i = 0; i < line.length; i++) {
+    const c = line[i]
+    if (inQ) {
+      if (c === '"') {
+        if (line[i + 1] === '"') {
+          cur += '"'
+          i++
+        } else {
+          inQ = false
+        }
+      } else {
+        cur += c
+      }
+    } else if (c === '"') {
+      inQ = true
+    } else if (c === ',') {
+      cells.push(cur)
+      cur = ''
+    } else {
+      cur += c
+    }
+  }
+  cells.push(cur)
+  return cells.map((s) => s.trim())
+}
+
 // ── CSV 转 JSON ──
 export const CSVtoJSONClient = makeTextTool({
   slug: 'csv-to-json',
@@ -48,20 +79,16 @@ export const CSVtoJSONClient = makeTextTool({
   transform: (t) => {
     const lines = t.trim().split(/\r?\n/).filter(Boolean)
     if (lines.length < 2) return '[]'
-    const parseLine = (line: string) => {
-      // 简单 CSV 解析(不支持引号内逗号)
-      return line.split(',').map((c) => c.trim())
-    }
-    const headers = parseLine(lines[0])
+    const headers = parseCsvLine(lines[0])
     const rows = lines.slice(1).map((line) => {
-      const cells = parseLine(line)
+      const cells = parseCsvLine(line)
       const obj: Record<string, string> = {}
       headers.forEach((h, i) => { obj[h] = cells[i] ?? '' })
       return obj
     })
     return JSON.stringify(rows, null, 2)
   },
-  note: '🔄 Converts CSV to JSON objects. Each row becomes an object using the header row as keys.',
+  note: '🔄 Converts CSV to JSON objects. Each row becomes an object using the header row as keys. Quoted fields with commas are supported.',
 })
 
 // ── JSON 转 CSV ──
@@ -74,18 +101,27 @@ export const JSONtoCSVClient = makeTextTool({
     try {
       const data = JSON.parse(t)
       if (!Array.isArray(data) || data.length === 0) return '⚠️ Need a non-empty JSON array'
-      const headers = Object.keys(data[0])
-      const escape = (s: string) => /[",\n]/.test(String(s)) ? `"${String(s).replace(/"/g, '""')}"` : String(s)
+      // 表头取所有对象 key 的并集(保序):只取 data[0] 会丢弃后续对象多出的字段
+      const headers: string[] = []
+      for (const row of data) {
+        if (row && typeof row === 'object' && !Array.isArray(row)) {
+          for (const k of Object.keys(row)) {
+            if (!headers.includes(k)) headers.push(k)
+          }
+        }
+      }
+      const escape = (s: unknown) => /[",\n]/.test(String(s)) ? `"${String(s).replace(/"/g, '""')}"` : String(s)
       const lines = [headers.join(',')]
       for (const row of data) {
-        lines.push(headers.map((h) => escape(row[h] ?? '')).join(','))
+        const obj = (row && typeof row === 'object' && !Array.isArray(row) ? row : {}) as Record<string, unknown>
+        lines.push(headers.map((h) => escape(obj[h] ?? '')).join(','))
       }
       return lines.join('\n')
     } catch (e) {
       return `⚠️ Invalid JSON: ${(e as Error).message}`
     }
   },
-  note: '🔄 Converts a JSON array of objects to CSV. Handles commas and quotes with proper escaping.',
+  note: '🔄 Converts a JSON array of objects to CSV. Handles commas and quotes with proper escaping. Fields missing from later objects are included in the header union.',
 })
 
 // ── 添加行号 ──

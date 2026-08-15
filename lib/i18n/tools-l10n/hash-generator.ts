@@ -9,7 +9,8 @@ export const hashGeneratorL10n: ToolL10n = {
     ui: {
       'generateHashes': '# 生成哈希',
       'hashing': '哈希计算中…',
-      'note': '🔐 使用 SubtleCrypto API(真正的加密哈希)。MD5 在安全上已被攻破——推荐使用 SHA-256。',
+      'note': '🔐 使用 SubtleCrypto API(真正的加密哈希)。MD5 与 SHA-1 在安全上均已被攻破——推荐使用 SHA-256。',
+      'sha1Warning': '⚠️ 2017 年起已可构造碰撞——不适用于签名/证书,仅限遗留校验用途',
       'textToHash': '要哈希的文本',
     },
     useCases: [
@@ -26,7 +27,8 @@ export const hashGeneratorL10n: ToolL10n = {
     ui: {
       'generateHashes': '# Generar hashes',
       'hashing': 'Calculando hash…',
-      'note': '🔐 Usa la API SubtleCrypto (hash criptográfico real). MD5 está roto para seguridad — se recomienda SHA-256.',
+      'note': '🔐 Usa la API SubtleCrypto (hash criptográfico real). MD5 y SHA-1 están rotos para seguridad — se recomienda SHA-256.',
+      'sha1Warning': '⚠️ Colisiones prácticas desde 2017 — no es seguro para firmas/certificados; solo para checksums heredados',
       'textToHash': 'Texto a hashear',
     },
     useCases: [
@@ -43,7 +45,8 @@ export const hashGeneratorL10n: ToolL10n = {
     ui: {
       'generateHashes': '# Hashes erzeugen',
       'hashing': 'Hash wird berechnet…',
-      'note': '🔐 Nutzt die SubtleCrypto-API (echtes kryptografisches Hashing). MD5 ist für Sicherheit gebrochen — SHA-256 wird empfohlen.',
+      'note': '🔐 Nutzt die SubtleCrypto-API (echtes kryptografisches Hashing). MD5 und SHA-1 sind für Sicherheit gebrochen — SHA-256 wird empfohlen.',
+      'sha1Warning': '⚠️ Seit 2017 praktische Kollisionen — nicht sicher für Signaturen/Zertifikate; nur für Legacy-Prüfsummen',
       'textToHash': 'Zu hashender Text',
     },
     useCases: [
