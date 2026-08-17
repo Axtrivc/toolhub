@@ -1,6 +1,7 @@
 /**
  * bmr-calculator 本地化 bundle —— zh / es / de
- * 覆盖:faqs + useCases + formula(client = BMRCalculatorClient = makeCalculatorClient)
+ * 覆盖:faqs + useCases + formula(client = BMRCalculatorClient,自定义 client:
+ * 含 metric/imperial 单位切换,通用 chrome 键走 COMMON_CALC_UI)
  */
 import type { ToolL10n } from '../tool-l10n'
 
@@ -10,15 +11,21 @@ export const bmrCalculatorL10n: ToolL10n = {
   zh: {
     ui: {
       caloriesPerDay: '千卡/天',
-      'in.gender': '性别',
-      'opt.gender.male': '男',
-      'opt.gender.female': '女',
-      'in.age': '年龄',
-      'inSuffix.age': '岁',
-      'in.weight': '体重',
-      'in.height': '身高',
-      'out.bmr': '你的 BMR',
-      'out.bmi': '你的 BMI',
+      metric: '公制 (cm / kg)',
+      imperial: '英制 (ft/in / lb)',
+      gender: '性别',
+      optMale: '男',
+      optFemale: '女',
+      age: '年龄',
+      yrsSuffix: '岁',
+      weight: '体重',
+      height: '身高',
+      heightFt: '身高(英尺)',
+      heightIn: '身高(英寸)',
+      outBmr: '你的 BMR',
+      outBmi: '你的 BMI',
+      subMifflin: 'Mifflin-St Jeor 公式',
+      emptyState: '输入性别、年龄、体重和身高即可计算你的 BMR',
       note: '⚛️ BMR = 基础代谢率,即身体在完全静息状态下所需的最低能量。',
     },
     useCases: [
@@ -38,15 +45,21 @@ export const bmrCalculatorL10n: ToolL10n = {
   es: {
     ui: {
       caloriesPerDay: 'kcal/día',
-      'in.gender': 'Sexo',
-      'opt.gender.male': 'Hombre',
-      'opt.gender.female': 'Mujer',
-      'in.age': 'Edad',
-      'inSuffix.age': 'años',
-      'in.weight': 'Peso',
-      'in.height': 'Altura',
-      'out.bmr': 'Tu BMR',
-      'out.bmi': 'Tu IMC',
+      metric: 'Métrico (cm / kg)',
+      imperial: 'Imperial (ft/in / lb)',
+      gender: 'Sexo',
+      optMale: 'Hombre',
+      optFemale: 'Mujer',
+      age: 'Edad',
+      yrsSuffix: 'años',
+      weight: 'Peso',
+      height: 'Altura',
+      heightFt: 'Altura (ft)',
+      heightIn: 'Altura (in)',
+      outBmr: 'Tu BMR',
+      outBmi: 'Tu IMC',
+      subMifflin: 'Fórmula Mifflin-St Jeor',
+      emptyState: 'Introduce sexo, edad, peso y altura para calcular tu BMR',
       note: '⚛️ BMR = tasa metabólica basal. La energía mínima que tu cuerpo necesita en reposo absoluto.',
     },
     useCases: [
@@ -66,15 +79,21 @@ export const bmrCalculatorL10n: ToolL10n = {
   de: {
     ui: {
       caloriesPerDay: 'kcal/Tag',
-      'in.gender': 'Geschlecht',
-      'opt.gender.male': 'Männlich',
-      'opt.gender.female': 'Weiblich',
-      'in.age': 'Alter',
-      'inSuffix.age': 'Jahre',
-      'in.weight': 'Gewicht',
-      'in.height': 'Größe',
-      'out.bmr': 'Dein BMR',
-      'out.bmi': 'Dein BMI',
+      metric: 'Metrisch (cm / kg)',
+      imperial: 'Imperial (ft/in / lb)',
+      gender: 'Geschlecht',
+      optMale: 'Männlich',
+      optFemale: 'Weiblich',
+      age: 'Alter',
+      yrsSuffix: 'Jahre',
+      weight: 'Gewicht',
+      height: 'Größe',
+      heightFt: 'Größe (ft)',
+      heightIn: 'Größe (in)',
+      outBmr: 'Dein BMR',
+      outBmi: 'Dein BMI',
+      subMifflin: 'Mifflin-St-Jeor-Formel',
+      emptyState: 'Gib Geschlecht, Alter, Gewicht und Größe ein, um deinen BMR zu berechnen',
       note: '⚛️ BMR = Grundumsatz (Basal Metabolic Rate). Die minimale Energie, die dein Körper in völliger Ruhe benötigt.',
     },
     useCases: [

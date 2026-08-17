@@ -1,6 +1,7 @@
 /**
  * water-intake-calculator 本地化 bundle —— zh / es / de
- * 覆盖:faqs + useCases + formula(client = WaterIntakeCalculatorClient = makeCalculatorClient)
+ * 覆盖:faqs + useCases + formula(client = WaterIntakeCalculatorClient,自定义 client:
+ * 含 metric/imperial 单位切换,通用 chrome 键走 COMMON_CALC_UI)
  */
 import type { ToolL10n } from '../tool-l10n'
 
@@ -10,14 +11,17 @@ export const waterIntakeCalculatorL10n: ToolL10n = {
   zh: {
     ui: {
       litersPerDay: '升/天', cupsUnit: '杯', ozUnit: '盎司',
-      'in.weight': '体重',
-      'in.activity': '运动量(分钟/天)',
-      'in.climate': '气候',
-      'opt.climate.normal': '正常 / 温带',
-      'opt.climate.hot': '炎热 / 潮湿',
-      'out.liters': '每日需水量',
-      'out.cups': '以杯计(250ml)',
-      'out.oz': '以盎司计(美制)',
+      metric: '公制 (cm / kg)',
+      imperial: '英制 (ft/in / lb)',
+      weight: '体重',
+      activity: '运动量(分钟/天)',
+      climate: '气候',
+      climateNormal: '正常 / 温带',
+      climateHot: '炎热 / 潮湿',
+      outLiters: '每日需水量',
+      outCups: '以杯计(250ml)',
+      outOz: '以盎司计(美制)',
+      emptyState: '输入体重、运动量和气候即可估算每日需水量',
       note: '💧 一般建议:每公斤体重约 35 ml,运动或高温时需更多。个人需求因人而异。',
     },
     useCases: [
@@ -39,14 +43,17 @@ export const waterIntakeCalculatorL10n: ToolL10n = {
   es: {
     ui: {
       litersPerDay: 'litros/día', cupsUnit: 'tazas', ozUnit: 'oz',
-      'in.weight': 'Peso',
-      'in.activity': 'Ejercicio (min/día)',
-      'in.climate': 'Clima',
-      'opt.climate.normal': 'Normal / templado',
-      'opt.climate.hot': 'Cálido / húmedo',
-      'out.liters': 'Necesidad diaria de agua',
-      'out.cups': 'En tazas (250 ml)',
-      'out.oz': 'En onzas (EE. UU.)',
+      metric: 'Métrico (cm / kg)',
+      imperial: 'Imperial (ft/in / lb)',
+      weight: 'Peso',
+      activity: 'Ejercicio (min/día)',
+      climate: 'Clima',
+      climateNormal: 'Normal / templado',
+      climateHot: 'Cálido / húmedo',
+      outLiters: 'Necesidad diaria de agua',
+      outCups: 'En tazas (250 ml)',
+      outOz: 'En onzas (EE. UU.)',
+      emptyState: 'Introduce peso, ejercicio y clima para estimar tu necesidad diaria de agua',
       note: '💧 Guía general: ~35 ml por kg de peso corporal, más con ejercicio o calor. Las necesidades individuales varían.',
     },
     useCases: [
@@ -68,14 +75,17 @@ export const waterIntakeCalculatorL10n: ToolL10n = {
   de: {
     ui: {
       litersPerDay: 'Liter/Tag', cupsUnit: 'Tassen', ozUnit: 'oz',
-      'in.weight': 'Gewicht',
-      'in.activity': 'Bewegung (Min./Tag)',
-      'in.climate': 'Klima',
-      'opt.climate.normal': 'Normal / gemäßigt',
-      'opt.climate.hot': 'Heiß / schwül',
-      'out.liters': 'Täglicher Wasserbedarf',
-      'out.cups': 'In Tassen (250 ml)',
-      'out.oz': 'In Unzen (US)',
+      metric: 'Metrisch (cm / kg)',
+      imperial: 'Imperial (ft/in / lb)',
+      weight: 'Gewicht',
+      activity: 'Bewegung (Min./Tag)',
+      climate: 'Klima',
+      climateNormal: 'Normal / gemäßigt',
+      climateHot: 'Heiß / schwül',
+      outLiters: 'Täglicher Wasserbedarf',
+      outCups: 'In Tassen (250 ml)',
+      outOz: 'In Unzen (US)',
+      emptyState: 'Gib Gewicht, Bewegung und Klima ein, um deinen täglichen Wasserbedarf zu schätzen',
       note: '💧 Richtwert: ~35 ml pro kg Körpergewicht, mehr bei Sport oder Hitze. Der Einzelbedarf variiert.',
     },
     useCases: [

@@ -1,13 +1,119 @@
 'use client'
 
+import { useState, useMemo, useCallback } from 'react'
+import { CalculatorField, ResultCard, CalculatorNote } from '@/components/calculator/CalculatorField'
+import { LoadSampleButton } from '@/components/LoadSampleButton'
+import { ResultActions } from '@/components/ResultActions'
 import { makeCalculatorClient } from '../calculator/makeCalculatorClient'
 import { fmtUSD, fmtNum, toNum } from '@/lib/format'
-import { tui } from '@/lib/i18n/tool-l10n'
+import { useApp } from '@/components/providers/AppProviders'
+import { tui, tuiCalc } from '@/lib/i18n/tool-l10n'
 
 /**
  * 第六批:金融 5 个 + 健康 3 个 = 8 个计算器
- * 全部用 makeCalculatorClient 配置引擎
+ * 金融类 + macro/pregnancy 用 makeCalculatorClient 配置引擎;
+ * body-fat 为自定义 client:支持 metric/imperial 单位切换与
+ * Navy / BMI(Deurenberg)双方法。
  */
+
+// ── 健康类(body-fat 自定义 client 用)──
+
+// 换算常数(精确定义):1 in = 2.54 cm,1 lb = 0.45359237 kg
+const CM_PER_IN = 2.54
+const LB_PER_KG = 0.45359237
+
+type Unit = 'metric' | 'imperial'
+
+/** 输入框字符串换算:空/非法/非正值保留空串,避免切换单位把 '' 变成 '0' */
+function convertInput(s: string, factor: number): string {
+  if (s.trim() === '') return ''
+  const n = Number(s)
+  if (!isFinite(n) || n <= 0) return ''
+  return String(Number((n * factor).toFixed(1)))
+}
+
+/** 总英寸 → (ft, in) 双输入框字符串;英寸保留 1 位小数,四舍五入满 12 时进位到英尺 */
+function splitInches(totalIn: number): [string, string] {
+  let ft = Math.floor(totalIn / 12)
+  let inch = Number((totalIn - ft * 12).toFixed(1))
+  if (inch >= 12) {
+    ft += 1
+    inch = 0
+  }
+  return [String(ft), String(inch)]
+}
+
+/** 切到目标单位制时换算身高 (cm ↔ ft+in) 并保留数值,不清空 */
+function convertHeightFields(
+  u: Unit,
+  height: string,
+  heightFt: string,
+  heightIn: string,
+): { height: string; heightFt: string; heightIn: string } {
+  if (u === 'imperial') {
+    const cm = Number(height)
+    const [ft, inch] = isFinite(cm) && cm > 0 ? splitInches(cm / CM_PER_IN) : ['', '']
+    return { height, heightFt: ft, heightIn: inch }
+  }
+  const totalIn = Number(heightFt) * 12 + Number(heightIn)
+  const cm = isFinite(totalIn) && totalIn > 0 ? String(Number((totalIn * CM_PER_IN).toFixed(1))) : ''
+  return { height: cm, heightFt, heightIn }
+}
+
+/** CSV 字段转义:含逗号/引号/换行则双引号包裹,内部引号翻倍(与工厂同款) */
+function csvEscape(s: string): string {
+  if (/[",\n]/.test(s)) return `"${s.replace(/"/g, '""')}"`
+  return s
+}
+
+/** 单位制切换按钮组(metric | imperial),样式与 BMICalculatorClient 一致 */
+function UnitToggle({ unit, onSwitch, L }: {
+  unit: Unit
+  onSwitch: (u: Unit) => void
+  L: (key: string, fb: string) => string
+}) {
+  return (
+    <div className="flex gap-2">
+      {(['metric', 'imperial'] as const).map((u) => (
+        <button
+          key={u}
+          type="button"
+          onClick={() => onSwitch(u)}
+          className={`rounded-lg px-4 py-2 text-sm font-medium transition ${
+            unit === u ? 'bg-brand-600 text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+          }`}
+        >
+          {u === 'metric' ? L('metric', 'Metric (cm / kg)') : L('imperial', 'Imperial (ft/in / lb)')}
+        </button>
+      ))}
+    </div>
+  )
+}
+
+/** 下拉选择字段(样式与工厂/手写计算器的 select 一致) */
+function CalcSelect({ id, label, value, onChange, options }: {
+  id: string
+  label: string
+  value: string
+  onChange: (v: string) => void
+  options: { label: string; value: string }[]
+}) {
+  return (
+    <div>
+      <label htmlFor={id} className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>{label}</label>
+      <select
+        id={id}
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        className="w-full rounded-lg border p-3 shadow-sm outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200" style={{ borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rgb(var(--bg-card))', color: 'rgb(var(--text))' }}
+      >
+        {options.map((o) => (
+          <option key={o.value} value={o.value}>{o.label}</option>
+        ))}
+      </select>
+    </div>
+  )
+}
 
 // ── 金融类 ──
 
@@ -235,51 +341,241 @@ export const RentVsBuyCalculatorClient = makeCalculatorClient({
 
 // ── 健康类 ──
 
-export const BodyFatCalculatorClient = makeCalculatorClient({
-  slug: 'body-fat-calculator',
-  inputs: [
-    { key: 'gender', label: 'Gender', default: 'male', options: [
-      { label: 'Male', value: 'male' }, { label: 'Female', value: 'female' },
-    ]},
-    { key: 'height', label: 'Height', suffix: 'cm', default: '175' },
-    { key: 'neck', label: 'Neck circumference', suffix: 'cm', default: '38' },
-    { key: 'waist', label: 'Waist circumference', suffix: 'cm', default: '85' },
-    { key: 'hip', label: 'Hip (females only)', suffix: 'cm', default: '95' },
-  ],
-  outputs: [
-    { key: 'bodyfat', label: 'Body fat percentage', highlight: true },
-    { key: 'category', label: 'Category' },
-  ],
-  compute: (v, locale) => {
-    const T = (key: string, fb: string) => tui('body-fat-calculator', locale, key, fb)
-    const h = toNum(v.height)
-    const n = toNum(v.neck)
-    const w = toNum(v.waist)
-    const hip = toNum(v.hip)
-    // US Navy 公式
+type Method = 'navy' | 'bmi'
+
+/**
+ * Body Fat Calculator —— 体脂率估算
+ * 方法一 US Navy:身高 + 颈围 + 腰围(女性加臀围),公式按公制 cm;
+ * 方法二 BMI(Deurenberg):BF% = 1.20×BMI + 0.23×age − 10.8×sex − 5.4(sex 男=1 女=0),
+ * 需补体重输入。英制输入一律换算成 kg/cm 后计算。
+ */
+export function BodyFatCalculatorClient() {
+  const { locale } = useApp()
+  const L = (key: string, fb: string) => tui('body-fat-calculator', locale, key, fb)
+  const C = (key: string, fb: string) => tuiCalc(key, locale, fb)
+
+  const [unit, setUnit] = useState<Unit>('metric')
+  const [method, setMethod] = useState<Method>('navy')
+  const [gender, setGender] = useState<'male' | 'female'>('male')
+  const [height, setHeight] = useState('175') // metric: cm
+  const [heightFt, setHeightFt] = useState('') // imperial: ft + in 双输入框
+  const [heightIn, setHeightIn] = useState('')
+  const [neck, setNeck] = useState('38') // 围度:metric cm / imperial in
+  const [waist, setWaist] = useState('85')
+  const [hip, setHip] = useState('95')
+  const [weight, setWeight] = useState('70') // BMI 法用:metric kg / imperial lb
+  const [age, setAge] = useState('30') // BMI 法用
+
+  // 切单位制:身高 cm↔ft/in、体重 kg↔lb、围度 cm↔in 全部就地换算保留数值
+  const switchUnit = (u: Unit) => {
+    if (u === unit) return
+    const h = convertHeightFields(u, height, heightFt, heightIn)
+    setHeight(h.height)
+    setHeightFt(h.heightFt)
+    setHeightIn(h.heightIn)
+    setWeight(convertInput(weight, u === 'imperial' ? 1 / LB_PER_KG : LB_PER_KG))
+    const circ = u === 'imperial' ? 1 / CM_PER_IN : CM_PER_IN
+    setNeck(convertInput(neck, circ))
+    setWaist(convertInput(waist, circ))
+    setHip(convertInput(hip, circ))
+    setUnit(u)
+  }
+
+  const handleLoadSample = useCallback(() => {
+    setUnit('metric')
+    setMethod('navy')
+    setGender('male'); setHeight('175'); setHeightFt(''); setHeightIn('')
+    setNeck('38'); setWaist('85'); setHip('95'); setWeight('70'); setAge('30')
+  }, [])
+
+  const result = useMemo(() => {
+    const hCm = unit === 'metric' ? Number(height) : (Number(heightFt) * 12 + Number(heightIn)) * CM_PER_IN
+    if (!isFinite(hCm) || hCm <= 0) return null
+    // 围度输入换算成 cm(Navy 公式按 cm)
+    const cm = (s: string) => (unit === 'metric' ? Number(s) : Number(s) * CM_PER_IN)
     let bf: number
-    if (v.gender === 'male') {
-      if (w <= n) return { bodyfat: `⚠️ ${T('errWaist', 'Waist must be > neck')}`, category: '—' }
-      bf = 495 / (1.0324 - 0.19077 * Math.log10(w - n) + 0.15456 * Math.log10(h)) - 450
+    let sublabel: string
+    if (method === 'bmi') {
+      // Deurenberg 公式(sex:男=1,女=0)
+      const kg = unit === 'metric' ? Number(weight) : Number(weight) * LB_PER_KG
+      const a = Number(age)
+      if (!(kg > 0) || !(a > 0) || !isFinite(kg) || !isFinite(a)) return null
+      const bmi = kg / Math.pow(hCm / 100, 2)
+      bf = 1.2 * bmi + 0.23 * a - 10.8 * (gender === 'male' ? 1 : 0) - 5.4
+      sublabel = L('subDeurenberg', 'Deurenberg formula')
     } else {
-      if (w + hip <= n) return { bodyfat: `⚠️ ${T('errInvalid', 'Invalid measurements')}`, category: '—' }
-      bf = 495 / (1.29579 - 0.35004 * Math.log10(w + hip - n) + 0.221 * Math.log10(h)) - 450
+      const n = cm(neck)
+      const w = cm(waist)
+      const hp = cm(hip)
+      if (!(n > 0) || !(w > 0) || !isFinite(n) || !isFinite(w)) return null
+      if (gender === 'female' && (!(hp > 0) || !isFinite(hp))) return null
+      // US Navy 公式
+      if (gender === 'male') {
+        if (w <= n) return { error: L('errWaist', 'Waist must be > neck') }
+        bf = 495 / (1.0324 - 0.19077 * Math.log10(w - n) + 0.15456 * Math.log10(hCm)) - 450
+      } else {
+        if (w + hp <= n) return { error: L('errInvalid', 'Invalid measurements') }
+        bf = 495 / (1.29579 - 0.35004 * Math.log10(w + hp - n) + 0.221 * Math.log10(hCm)) - 450
+      }
+      sublabel = L('subNavy', 'US Navy method')
     }
+    if (!isFinite(bf)) return null
     bf = Math.max(2, Math.min(60, bf))
     let cat: string
-    const isMale = v.gender === 'male'
-    if (bf < (isMale ? 6 : 14)) cat = T('catEssential', 'Essential fat')
-    else if (bf < (isMale ? 14 : 21)) cat = T('catAthlete', 'Athlete')
-    else if (bf < (isMale ? 18 : 25)) cat = T('catFitness', 'Fitness')
-    else if (bf < (isMale ? 25 : 32)) cat = T('catAverage', 'Average')
-    else cat = T('catHigh', 'High')
-    return {
-      bodyfat: `${fmtNum(bf, 1)}%`,
-      category: cat,
-    }
-  },
-  note: '⚖️ US Navy method using circumference. Less accurate than DEXA scans but a practical at-home estimate.',
-})
+    const isMale = gender === 'male'
+    if (bf < (isMale ? 6 : 14)) cat = L('catEssential', 'Essential fat')
+    else if (bf < (isMale ? 14 : 21)) cat = L('catAthlete', 'Athlete')
+    else if (bf < (isMale ? 18 : 25)) cat = L('catFitness', 'Fitness')
+    else if (bf < (isMale ? 25 : 32)) cat = L('catAverage', 'Average')
+    else cat = L('catHigh', 'High')
+    return { bf, cat, sublabel }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [unit, method, gender, height, heightFt, heightIn, neck, waist, hip, weight, age, locale])
+
+  const sexLabel = gender === 'male' ? L('optMale', 'Male') : L('optFemale', 'Female')
+  const wUnit = unit === 'metric' ? 'kg' : 'lb'
+  const cUnit = unit === 'metric' ? 'cm' : 'in'
+  const hDisplay = unit === 'metric' ? `${height} cm` : `${heightFt} ft ${heightIn} in`
+
+  // 摘要/CSV 的输入行随方法变化(Navy 用围度,BMI 法用体重+年龄;臀围仅女性)
+  const inputRows: [string, string][] = [
+    [L('gender', 'Gender'), sexLabel],
+    [L('height', 'Height'), hDisplay],
+  ]
+  if (method === 'navy') {
+    inputRows.push(
+      [L('neck', 'Neck circumference'), `${neck} ${cUnit}`],
+      [L('waist', 'Waist circumference'), `${waist} ${cUnit}`],
+    )
+    if (gender === 'female') inputRows.push([L('hip', 'Hip (females only)'), `${hip} ${cUnit}`])
+  } else {
+    inputRows.push(
+      [L('weight', 'Weight'), `${weight} ${wUnit}`],
+      [L('age', 'Age'), `${age} ${L('yrsSuffix', 'years')}`],
+    )
+  }
+
+  const summary = useMemo(() => {
+    if (!result) return L('emptyState', 'Enter your measurements to estimate your body fat')
+    const bfText = 'error' in result ? `⚠️ ${result.error}` : `${fmtNum(result.bf, 1)}%`
+    const catText = 'error' in result ? '—' : result.cat
+    return [
+      C('summaryTitle', 'Calculation Summary'),
+      C('inputsLabel', 'Inputs:'),
+      ...inputRows.map(([k, v]) => `  ${k}: ${v}`),
+      C('resultsLabel', 'Results:'),
+      `  ${L('outBodyfat', 'Body fat percentage')}: ${bfText}`,
+      `  ${L('outCategory', 'Category')}: ${catText}`,
+    ].join('\n')
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [result, inputRows, locale])
+
+  const csvContent = useMemo(() => {
+    if (!result) return summary
+    const bfText = 'error' in result ? `⚠️ ${result.error}` : `${fmtNum(result.bf, 1)}%`
+    const catText = 'error' in result ? '—' : result.cat
+    const rows: string[][] = [
+      [C('csvField', 'Field'), C('csvType', 'Type'), C('csvValue', 'Value')],
+      ...inputRows.map(([k, v]) => [k, C('csvInput', 'Input'), v] as string[]),
+      [L('outBodyfat', 'Body fat percentage'), C('csvResult', 'Result'), bfText],
+      [L('outCategory', 'Category'), C('csvResult', 'Result'), catText],
+    ]
+    return '\uFEFF' + rows.map((r) => r.map(csvEscape).join(',')).join('\n')
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [summary, result, inputRows, locale])
+
+  return (
+    <div className="space-y-6">
+      {/* 单位切换 */}
+      <UnitToggle unit={unit} onSwitch={switchUnit} L={L} />
+
+      {/* 方法切换:US Navy 围度法 / BMI(Deurenberg) */}
+      <div>
+        <span className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>{L('method', 'Method')}</span>
+        <div className="flex gap-2">
+          {(['navy', 'bmi'] as const).map((m) => (
+            <button
+              key={m}
+              type="button"
+              onClick={() => setMethod(m)}
+              className={`rounded-lg px-4 py-2 text-sm font-medium transition ${
+                method === m ? 'bg-brand-600 text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+              }`}
+            >
+              {m === 'navy' ? L('methodNavy', 'Navy (tape measure)') : L('methodBmi', 'BMI (Deurenberg)')}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        <span className="text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>{C('inputs', 'Inputs')}</span>
+        <LoadSampleButton onLoad={handleLoadSample} />
+      </div>
+      <div className="grid grid-cols-1 gap-4 rounded-lg p-4 sm:grid-cols-2" style={{ backgroundColor: 'rgb(var(--bg-subtle))' }}>
+        <CalcSelect
+          id="gender"
+          label={L('gender', 'Gender')}
+          value={gender}
+          onChange={(v) => setGender(v as 'male' | 'female')}
+          options={[
+            { label: L('optMale', 'Male'), value: 'male' },
+            { label: L('optFemale', 'Female'), value: 'female' },
+          ]}
+        />
+        {unit === 'metric' ? (
+          <CalculatorField id="height" label={L('height', 'Height')} value={height} onChange={setHeight} suffix="cm" placeholder="175" />
+        ) : (
+          <>
+            <CalculatorField id="heightFt" label={L('heightFt', 'Height (ft)')} value={heightFt} onChange={setHeightFt} placeholder="5" />
+            <CalculatorField id="heightIn" label={L('heightIn', 'Height (in)')} value={heightIn} onChange={setHeightIn} placeholder="9" />
+          </>
+        )}
+        {method === 'navy' ? (
+          <>
+            <CalculatorField id="neck" label={L('neck', 'Neck circumference')} value={neck} onChange={setNeck} suffix={cUnit} placeholder={unit === 'metric' ? '38' : '15'} />
+            <CalculatorField id="waist" label={L('waist', 'Waist circumference')} value={waist} onChange={setWaist} suffix={cUnit} placeholder={unit === 'metric' ? '85' : '33'} />
+            <CalculatorField id="hip" label={L('hip', 'Hip (females only)')} value={hip} onChange={setHip} suffix={cUnit} placeholder={unit === 'metric' ? '95' : '37'} />
+          </>
+        ) : (
+          <>
+            <CalculatorField id="weight" label={L('weight', 'Weight')} value={weight} onChange={setWeight} suffix={wUnit} placeholder={unit === 'metric' ? '70' : '155'} />
+            <CalculatorField id="age" label={L('age', 'Age')} value={age} onChange={setAge} suffix={L('yrsSuffix', 'years')} placeholder="30" />
+          </>
+        )}
+      </div>
+
+      {result ? (
+        <>
+          <div role="status" aria-live="polite" className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+            <ResultCard
+              label={L('outBodyfat', 'Body fat percentage')}
+              value={'error' in result ? `⚠️ ${result.error}` : `${fmtNum(result.bf, 1)}%`}
+              highlight
+              sublabel={'error' in result ? undefined : result.sublabel}
+            />
+            <ResultCard label={L('outCategory', 'Category')} value={'error' in result ? '—' : result.cat} />
+          </div>
+          <ResultActions
+            summary={summary}
+            filename="body-fat-calculator-result.csv"
+            downloadContent={csvContent}
+            mime="text/csv;charset=utf-8;"
+            copyLabel={C('copySummary', 'Copy Summary')}
+          />
+        </>
+      ) : (
+        <div className="rounded-lg border-2 border-dashed p-6 text-center text-sm" style={{ borderColor: 'rgb(var(--border-strong))', color: 'rgb(var(--text-faint))' }}>
+          {L('emptyState', 'Enter your measurements to estimate your body fat')}
+        </div>
+      )}
+
+      <CalculatorNote>
+        {L('note', '⚖️ The US Navy method estimates body fat from tape measurements; the BMI method (Deurenberg formula) estimates it from your BMI, age, and sex. Both are less accurate than DEXA scans but practical at-home estimates.')}
+      </CalculatorNote>
+    </div>
+  )
+}
 
 export const MacroCalculatorClient = makeCalculatorClient({
   slug: 'macro-calculator',

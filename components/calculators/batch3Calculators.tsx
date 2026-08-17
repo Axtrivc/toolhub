@@ -1,164 +1,725 @@
 'use client'
 
+import { useState, useMemo, useCallback } from 'react'
+import { CalculatorField, ResultCard, CalculatorNote } from '@/components/calculator/CalculatorField'
+import { LoadSampleButton } from '@/components/LoadSampleButton'
+import { ResultActions } from '@/components/ResultActions'
 import { makeCalculatorClient } from '../calculator/makeCalculatorClient'
 import { fmtUSD, fmtNum, toNum } from '@/lib/format'
-import { tui } from '@/lib/i18n/tool-l10n'
+import { useApp } from '@/components/providers/AppProviders'
+import { tui, tuiCalc } from '@/lib/i18n/tool-l10n'
 
 /**
  * 第三批计算器 - 健康类 + 数学类 + 金融类
- * 全部用 makeCalculatorClient 配置引擎
+ * 数学/金融类用 makeCalculatorClient 配置引擎;
+ * 健康类 4 个(calorie/bmr/water-intake/ideal-weight)为自定义 client:
+ * 支持 metric/imperial 单位切换(英制按 1lb=0.45359237kg、1in=2.54cm 换算成
+ * 公制后走原公式),初始恒公制保证 SSR/水合一致。
  */
 
 // ── 健康类 ──
 
-export const CalorieCalculatorClient = makeCalculatorClient({
-  slug: 'calorie-calculator',
-  inputs: [
-    { key: 'gender', label: 'Gender', default: 'male', options: [
-      { label: 'Male', value: 'male' },
-      { label: 'Female', value: 'female' },
-    ]},
-    { key: 'age', label: 'Age', suffix: 'years', default: '30' },
-    { key: 'weight', label: 'Weight', suffix: 'kg', default: '70' },
-    { key: 'height', label: 'Height', suffix: 'cm', default: '175' },
-    { key: 'activity', label: 'Activity level', default: '1.55', options: [
-      { label: 'Sedentary (little exercise)', value: '1.2' },
-      { label: 'Light (1-3 days/week)', value: '1.375' },
-      { label: 'Moderate (3-5 days/week)', value: '1.55' },
-      { label: 'Active (6-7 days/week)', value: '1.725' },
-      { label: 'Very active (physical job)', value: '1.9' },
-    ]},
-  ],
-  outputs: [
-    { key: 'bmr', label: 'BMR (at rest)', sublabel: 'Mifflin-St Jeor' },
-    { key: 'tdee', label: 'Maintenance', highlight: true, sublabel: 'To stay same weight' },
-    { key: 'lose', label: 'Mild weight loss', sublabel: '−0.25 kg/week' },
-    { key: 'gain', label: 'Mild weight gain', sublabel: '+0.25 kg/week' },
-    { key: 'lose500', label: 'Weight loss', sublabel: '−0.5 kg/week' },
-    { key: 'gain500', label: 'Weight gain', sublabel: '+0.5 kg/week' },
-  ],
-  compute: (v, locale) => {
-    const w = toNum(v.weight)
-    const h = toNum(v.height)
-    const a = toNum(v.age)
+// 换算常数(精确定义):1 in = 2.54 cm,1 lb = 0.45359237 kg
+const CM_PER_IN = 2.54
+const LB_PER_KG = 0.45359237
+
+type Unit = 'metric' | 'imperial'
+
+/** 输入框字符串换算:空/非法/非正值保留空串,避免切换单位把 '' 变成 '0' */
+function convertInput(s: string, factor: number): string {
+  if (s.trim() === '') return ''
+  const n = Number(s)
+  if (!isFinite(n) || n <= 0) return ''
+  return String(Number((n * factor).toFixed(1)))
+}
+
+/** 总英寸 → (ft, in) 双输入框字符串;英寸保留 1 位小数,四舍五入满 12 时进位到英尺 */
+function splitInches(totalIn: number): [string, string] {
+  let ft = Math.floor(totalIn / 12)
+  let inch = Number((totalIn - ft * 12).toFixed(1))
+  if (inch >= 12) {
+    ft += 1
+    inch = 0
+  }
+  return [String(ft), String(inch)]
+}
+
+/** 切到目标单位制时换算身高 (cm ↔ ft+in) 并保留数值,不清空 */
+function convertHeightFields(
+  u: Unit,
+  height: string,
+  heightFt: string,
+  heightIn: string,
+): { height: string; heightFt: string; heightIn: string } {
+  if (u === 'imperial') {
+    const cm = Number(height)
+    const [ft, inch] = isFinite(cm) && cm > 0 ? splitInches(cm / CM_PER_IN) : ['', '']
+    return { height, heightFt: ft, heightIn: inch }
+  }
+  const totalIn = Number(heightFt) * 12 + Number(heightIn)
+  const cm = isFinite(totalIn) && totalIn > 0 ? String(Number((totalIn * CM_PER_IN).toFixed(1))) : ''
+  return { height: cm, heightFt, heightIn }
+}
+
+/** 切到目标单位制时换算 (weight, heightCm, heightFt, heightIn) 并保留数值,不清空 */
+function convertUnitFields(
+  u: Unit,
+  weight: string,
+  height: string,
+  heightFt: string,
+  heightIn: string,
+): { weight: string; height: string; heightFt: string; heightIn: string } {
+  return {
+    weight: convertInput(weight, u === 'imperial' ? 1 / LB_PER_KG : LB_PER_KG),
+    ...convertHeightFields(u, height, heightFt, heightIn),
+  }
+}
+
+/** CSV 字段转义:含逗号/引号/换行则双引号包裹,内部引号翻倍(与工厂同款) */
+function csvEscape(s: string): string {
+  if (/[",\n]/.test(s)) return `"${s.replace(/"/g, '""')}"`
+  return s
+}
+
+/** 单位制切换按钮组(metric | imperial),样式与 BMICalculatorClient 一致 */
+function UnitToggle({ unit, onSwitch, L }: {
+  unit: Unit
+  onSwitch: (u: Unit) => void
+  L: (key: string, fb: string) => string
+}) {
+  return (
+    <div className="flex gap-2">
+      {(['metric', 'imperial'] as const).map((u) => (
+        <button
+          key={u}
+          type="button"
+          onClick={() => onSwitch(u)}
+          className={`rounded-lg px-4 py-2 text-sm font-medium transition ${
+            unit === u ? 'bg-brand-600 text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+          }`}
+        >
+          {u === 'metric' ? L('metric', 'Metric (cm / kg)') : L('imperial', 'Imperial (ft/in / lb)')}
+        </button>
+      ))}
+    </div>
+  )
+}
+
+/** 下拉选择字段(样式与工厂/手写计算器的 select 一致) */
+function CalcSelect({ id, label, value, onChange, options }: {
+  id: string
+  label: string
+  value: string
+  onChange: (v: string) => void
+  options: { label: string; value: string }[]
+}) {
+  return (
+    <div>
+      <label htmlFor={id} className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>{label}</label>
+      <select
+        id={id}
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        className="w-full rounded-lg border p-3 shadow-sm outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200" style={{ borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rgb(var(--bg-card))', color: 'rgb(var(--text))' }}
+      >
+        {options.map((o) => (
+          <option key={o.value} value={o.value}>{o.label}</option>
+        ))}
+      </select>
+    </div>
+  )
+}
+
+const CALORIE_ACTIVITY = [
+  { key: '1.2', label: 'Sedentary (little exercise)' },
+  { key: '1.375', label: 'Light (1-3 days/week)' },
+  { key: '1.55', label: 'Moderate (3-5 days/week)' },
+  { key: '1.725', label: 'Active (6-7 days/week)' },
+  { key: '1.9', label: 'Very active (physical job)' },
+]
+
+/**
+ * Calorie Calculator —— BMR/TDEE 与增减重热量目标
+ * Mifflin-St Jeor 公式(公制口径);英制输入换算成 kg/cm 后计算。
+ */
+export function CalorieCalculatorClient() {
+  const { locale } = useApp()
+  const L = (key: string, fb: string) => tui('calorie-calculator', locale, key, fb)
+  const C = (key: string, fb: string) => tuiCalc(key, locale, fb)
+
+  const [unit, setUnit] = useState<Unit>('metric')
+  const [gender, setGender] = useState<'male' | 'female'>('male')
+  const [age, setAge] = useState('30')
+  const [weight, setWeight] = useState('70') // metric: kg / imperial: lb
+  const [height, setHeight] = useState('175') // metric: cm
+  const [heightFt, setHeightFt] = useState('') // imperial: ft + in 双输入框
+  const [heightIn, setHeightIn] = useState('')
+  const [activity, setActivity] = useState('1.55')
+
+  const switchUnit = (u: Unit) => {
+    if (u === unit) return
+    const next = convertUnitFields(u, weight, height, heightFt, heightIn)
+    setWeight(next.weight)
+    setHeight(next.height)
+    setHeightFt(next.heightFt)
+    setHeightIn(next.heightIn)
+    setUnit(u)
+  }
+
+  const handleLoadSample = useCallback(() => {
+    setUnit('metric')
+    setGender('male'); setAge('30'); setWeight('70'); setHeight('175'); setHeightFt(''); setHeightIn(''); setActivity('1.55')
+  }, [])
+
+  const result = useMemo(() => {
+    const w = unit === 'metric' ? Number(weight) : Number(weight) * LB_PER_KG
+    const h = unit === 'metric' ? Number(height) : (Number(heightFt) * 12 + Number(heightIn)) * CM_PER_IN
+    const a = Number(age)
+    if (w <= 0 || h <= 0 || a <= 0 || !isFinite(w) || !isFinite(h) || !isFinite(a)) return null
     // Mifflin-St Jeor 公式
-    const bmr = v.gender === 'male'
+    const bmr = gender === 'male'
       ? 10 * w + 6.25 * h - 5 * a + 5
       : 10 * w + 6.25 * h - 5 * a - 161
-    const tdee = bmr * toNum(v.activity)
-    const unit = tui('calorie-calculator', locale, 'calPerDay', 'cal/day')
-    return {
-      bmr: `${fmtNum(bmr, 0)} ${unit}`,
-      tdee: `${fmtNum(tdee, 0)} ${unit}`,
-      lose: `${fmtNum(tdee - 250, 0)} ${unit}`,
-      gain: `${fmtNum(tdee + 250, 0)} ${unit}`,
-      lose500: `${fmtNum(tdee - 500, 0)} ${unit}`,
-      gain500: `${fmtNum(tdee + 500, 0)} ${unit}`,
-    }
-  },
-  note: '🔥 BMR = calories burned at complete rest. TDEE = total daily burn including activity. Eat less than TDEE to lose weight.',
-})
+    const tdee = bmr * Number(activity)
+    if (!isFinite(tdee)) return null
+    return { bmr, tdee }
+  }, [unit, weight, height, heightFt, heightIn, age, gender, activity])
 
-export const BMRCalculatorClient = makeCalculatorClient({
-  slug: 'bmr-calculator',
-  inputs: [
-    { key: 'gender', label: 'Gender', default: 'male', options: [
-      { label: 'Male', value: 'male' },
-      { label: 'Female', value: 'female' },
-    ]},
-    { key: 'age', label: 'Age', suffix: 'years', default: '30' },
-    { key: 'weight', label: 'Weight', suffix: 'kg', default: '70' },
-    { key: 'height', label: 'Height', suffix: 'cm', default: '175' },
-  ],
-  outputs: [
-    { key: 'bmr', label: 'Your BMR', highlight: true, sublabel: 'Mifflin-St Jeor' },
-    { key: 'bmi', label: 'Your BMI' },
-  ],
-  compute: (v, locale) => {
-    const w = toNum(v.weight)
-    const h = toNum(v.height)
-    const a = toNum(v.age)
-    const bmr = v.gender === 'male'
+  const sexLabel = gender === 'male' ? L('optMale', 'Male') : L('optFemale', 'Female')
+  const wUnit = unit === 'metric' ? 'kg' : 'lb'
+  const hDisplay = unit === 'metric' ? `${height} cm` : `${heightFt} ft ${heightIn} in`
+  const activityLabels: Record<string, string> = {
+    '1.2': L('actSedentary', 'Sedentary (little exercise)'),
+    '1.375': L('actLight', 'Light (1-3 days/week)'),
+    '1.55': L('actModerate', 'Moderate (3-5 days/week)'),
+    '1.725': L('actActive', 'Active (6-7 days/week)'),
+    '1.9': L('actVery', 'Very active (physical job)'),
+  }
+  // 增减重速率副标签跟随单位制:0.25kg≈0.55lb、0.5kg≈1.1lb
+  const subLose = unit === 'metric' ? L('subLose', '−0.25 kg/week') : L('subLoseLb', '−0.55 lb/week')
+  const subGain = unit === 'metric' ? L('subGain', '+0.25 kg/week') : L('subGainLb', '+0.55 lb/week')
+  const subLose500 = unit === 'metric' ? L('subLose500', '−0.5 kg/week') : L('subLose500Lb', '−1.1 lb/week')
+  const subGain500 = unit === 'metric' ? L('subGain500', '+0.5 kg/week') : L('subGain500Lb', '+1.1 lb/week')
+
+  const summary = useMemo(() => {
+    if (!result) return L('emptyState', 'Enter your weight, height, age, and activity level to see your calorie targets')
+    const cal = L('calPerDay', 'cal/day')
+    return [
+      C('summaryTitle', 'Calculation Summary'),
+      C('inputsLabel', 'Inputs:'),
+      `  ${L('gender', 'Gender')}: ${sexLabel}`,
+      `  ${L('age', 'Age')}: ${age} ${L('yrsSuffix', 'years')}`,
+      `  ${L('weight', 'Weight')}: ${weight} ${wUnit}`,
+      `  ${L('height', 'Height')}: ${hDisplay}`,
+      `  ${L('activity', 'Activity level')}: ${activityLabels[activity] ?? activity}`,
+      C('resultsLabel', 'Results:'),
+      `  ${L('outBmr', 'BMR (at rest)')}: ${fmtNum(result.bmr, 0)} ${cal}`,
+      `  ${L('outTdee', 'Maintenance')}: ${fmtNum(result.tdee, 0)} ${cal}`,
+      `  ${L('outLose', 'Mild weight loss')}: ${fmtNum(result.tdee - 250, 0)} ${cal}`,
+      `  ${L('outGain', 'Mild weight gain')}: ${fmtNum(result.tdee + 250, 0)} ${cal}`,
+      `  ${L('outLose500', 'Weight loss')}: ${fmtNum(result.tdee - 500, 0)} ${cal}`,
+      `  ${L('outGain500', 'Weight gain')}: ${fmtNum(result.tdee + 500, 0)} ${cal}`,
+    ].join('\n')
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [result, unit, weight, height, heightFt, heightIn, age, gender, activity, locale])
+
+  const csvContent = useMemo(() => {
+    if (!result) return summary
+    const cal = L('calPerDay', 'cal/day')
+    const rows: string[][] = [
+      [C('csvField', 'Field'), C('csvType', 'Type'), C('csvValue', 'Value')],
+      [L('gender', 'Gender'), C('csvInput', 'Input'), sexLabel],
+      [L('age', 'Age'), C('csvInput', 'Input'), `${age} ${L('yrsSuffix', 'years')}`],
+      [L('weight', 'Weight'), C('csvInput', 'Input'), `${weight} ${wUnit}`],
+      [L('height', 'Height'), C('csvInput', 'Input'), hDisplay],
+      [L('activity', 'Activity level'), C('csvInput', 'Input'), activityLabels[activity] ?? activity],
+      [L('outBmr', 'BMR (at rest)'), C('csvResult', 'Result'), `${fmtNum(result.bmr, 0)} ${cal}`],
+      [L('outTdee', 'Maintenance'), C('csvResult', 'Result'), `${fmtNum(result.tdee, 0)} ${cal}`],
+      [L('outLose', 'Mild weight loss'), C('csvResult', 'Result'), `${fmtNum(result.tdee - 250, 0)} ${cal}`],
+      [L('outGain', 'Mild weight gain'), C('csvResult', 'Result'), `${fmtNum(result.tdee + 250, 0)} ${cal}`],
+      [L('outLose500', 'Weight loss'), C('csvResult', 'Result'), `${fmtNum(result.tdee - 500, 0)} ${cal}`],
+      [L('outGain500', 'Weight gain'), C('csvResult', 'Result'), `${fmtNum(result.tdee + 500, 0)} ${cal}`],
+    ]
+    return '\uFEFF' + rows.map((r) => r.map(csvEscape).join(',')).join('\n')
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [summary, result, unit, weight, height, heightFt, heightIn, age, gender, activity, locale])
+
+  return (
+    <div className="space-y-6">
+      <UnitToggle unit={unit} onSwitch={switchUnit} L={L} />
+
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        <span className="text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>{C('inputs', 'Inputs')}</span>
+        <LoadSampleButton onLoad={handleLoadSample} />
+      </div>
+      <div className="grid grid-cols-1 gap-4 rounded-lg p-4 sm:grid-cols-2" style={{ backgroundColor: 'rgb(var(--bg-subtle))' }}>
+        <CalcSelect
+          id="gender"
+          label={L('gender', 'Gender')}
+          value={gender}
+          onChange={(v) => setGender(v as 'male' | 'female')}
+          options={[
+            { label: L('optMale', 'Male'), value: 'male' },
+            { label: L('optFemale', 'Female'), value: 'female' },
+          ]}
+        />
+        <CalculatorField id="age" label={L('age', 'Age')} value={age} onChange={setAge} suffix={L('yrsSuffix', 'years')} placeholder="30" />
+        <CalculatorField id="weight" label={L('weight', 'Weight')} value={weight} onChange={setWeight} suffix={unit === 'metric' ? 'kg' : 'lb'} placeholder={unit === 'metric' ? '70' : '155'} />
+        {unit === 'metric' ? (
+          <CalculatorField id="height" label={L('height', 'Height')} value={height} onChange={setHeight} suffix="cm" placeholder="175" />
+        ) : (
+          <>
+            <CalculatorField id="heightFt" label={L('heightFt', 'Height (ft)')} value={heightFt} onChange={setHeightFt} placeholder="5" />
+            <CalculatorField id="heightIn" label={L('heightIn', 'Height (in)')} value={heightIn} onChange={setHeightIn} placeholder="11" />
+          </>
+        )}
+        <CalcSelect
+          id="activity"
+          label={L('activity', 'Activity level')}
+          value={activity}
+          onChange={setActivity}
+          options={CALORIE_ACTIVITY.map((a) => ({ label: activityLabels[a.key] ?? a.label, value: a.key }))}
+        />
+      </div>
+
+      {result ? (
+        <>
+          <div role="status" aria-live="polite" className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+            <ResultCard label={L('outBmr', 'BMR (at rest)')} value={`${fmtNum(result.bmr, 0)} ${L('calPerDay', 'cal/day')}`} sublabel={L('subMifflin', 'Mifflin-St Jeor')} />
+            <ResultCard label={L('outTdee', 'Maintenance')} value={`${fmtNum(result.tdee, 0)} ${L('calPerDay', 'cal/day')}`} highlight sublabel={L('subTdee', 'To stay same weight')} />
+            <ResultCard label={L('outLose', 'Mild weight loss')} value={`${fmtNum(result.tdee - 250, 0)} ${L('calPerDay', 'cal/day')}`} sublabel={subLose} />
+            <ResultCard label={L('outGain', 'Mild weight gain')} value={`${fmtNum(result.tdee + 250, 0)} ${L('calPerDay', 'cal/day')}`} sublabel={subGain} />
+            <ResultCard label={L('outLose500', 'Weight loss')} value={`${fmtNum(result.tdee - 500, 0)} ${L('calPerDay', 'cal/day')}`} sublabel={subLose500} />
+            <ResultCard label={L('outGain500', 'Weight gain')} value={`${fmtNum(result.tdee + 500, 0)} ${L('calPerDay', 'cal/day')}`} sublabel={subGain500} />
+          </div>
+          <ResultActions
+            summary={summary}
+            filename="calorie-calculator-result.csv"
+            downloadContent={csvContent}
+            mime="text/csv;charset=utf-8;"
+            copyLabel={C('copySummary', 'Copy Summary')}
+          />
+        </>
+      ) : (
+        <div className="rounded-lg border-2 border-dashed p-6 text-center text-sm" style={{ borderColor: 'rgb(var(--border-strong))', color: 'rgb(var(--text-faint))' }}>
+          {L('emptyState', 'Enter your weight, height, age, and activity level to see your calorie targets')}
+        </div>
+      )}
+
+      <CalculatorNote>
+        {L('note', '🔥 BMR = calories burned at complete rest. TDEE = total daily burn including activity. Eat less than TDEE to lose weight.')}
+      </CalculatorNote>
+    </div>
+  )
+}
+
+/**
+ * BMR Calculator —— 基础代谢率(Mifflin-St Jeor)+ BMI
+ * 英制输入换算成 kg/cm 后计算,公式不变。
+ */
+export function BMRCalculatorClient() {
+  const { locale } = useApp()
+  const L = (key: string, fb: string) => tui('bmr-calculator', locale, key, fb)
+  const C = (key: string, fb: string) => tuiCalc(key, locale, fb)
+
+  const [unit, setUnit] = useState<Unit>('metric')
+  const [gender, setGender] = useState<'male' | 'female'>('male')
+  const [age, setAge] = useState('30')
+  const [weight, setWeight] = useState('70') // metric: kg / imperial: lb
+  const [height, setHeight] = useState('175') // metric: cm
+  const [heightFt, setHeightFt] = useState('') // imperial: ft + in 双输入框
+  const [heightIn, setHeightIn] = useState('')
+
+  const switchUnit = (u: Unit) => {
+    if (u === unit) return
+    const next = convertUnitFields(u, weight, height, heightFt, heightIn)
+    setWeight(next.weight)
+    setHeight(next.height)
+    setHeightFt(next.heightFt)
+    setHeightIn(next.heightIn)
+    setUnit(u)
+  }
+
+  const handleLoadSample = useCallback(() => {
+    setUnit('metric')
+    setGender('male'); setAge('30'); setWeight('70'); setHeight('175'); setHeightFt(''); setHeightIn('')
+  }, [])
+
+  const result = useMemo(() => {
+    const w = unit === 'metric' ? Number(weight) : Number(weight) * LB_PER_KG
+    const h = unit === 'metric' ? Number(height) : (Number(heightFt) * 12 + Number(heightIn)) * CM_PER_IN
+    const a = Number(age)
+    if (w <= 0 || h <= 0 || a <= 0 || !isFinite(w) || !isFinite(h) || !isFinite(a)) return null
+    // Mifflin-St Jeor 公式
+    const bmr = gender === 'male'
       ? 10 * w + 6.25 * h - 5 * a + 5
       : 10 * w + 6.25 * h - 5 * a - 161
     const bmi = w / Math.pow(h / 100, 2)
-    return {
-      bmr: `${fmtNum(bmr, 0)} ${tui('bmr-calculator', locale, 'caloriesPerDay', 'calories/day')}`,
-      bmi: fmtNum(bmi, 1),
-    }
-  },
-  note: '⚛️ BMR = Basal Metabolic Rate. The minimum energy your body needs at complete rest.',
-})
+    if (!isFinite(bmr) || !isFinite(bmi)) return null
+    return { bmr, bmi }
+  }, [unit, weight, height, heightFt, heightIn, age, gender])
 
-export const WaterIntakeCalculatorClient = makeCalculatorClient({
-  slug: 'water-intake-calculator',
-  inputs: [
-    { key: 'weight', label: 'Body weight', suffix: 'kg', default: '70' },
-    { key: 'activity', label: 'Exercise (min/day)', default: '30' },
-    { key: 'climate', label: 'Climate', default: 'normal', options: [
-      { label: 'Normal / temperate', value: 'normal' },
-      { label: 'Hot / humid', value: 'hot' },
-    ]},
-  ],
-  outputs: [
-    { key: 'liters', label: 'Daily water need', highlight: true },
-    { key: 'cups', label: 'In cups (250ml)' },
-    { key: 'oz', label: 'In ounces (US)' },
-  ],
-  compute: (v, locale) => {
-    const w = toNum(v.weight)
-    const exercise = toNum(v.activity)
+  const sexLabel = gender === 'male' ? L('optMale', 'Male') : L('optFemale', 'Female')
+  const wUnit = unit === 'metric' ? 'kg' : 'lb'
+  const hDisplay = unit === 'metric' ? `${height} cm` : `${heightFt} ft ${heightIn} in`
+
+  const summary = useMemo(() => {
+    if (!result) return L('emptyState', 'Enter your gender, age, weight, and height to calculate your BMR')
+    return [
+      C('summaryTitle', 'Calculation Summary'),
+      C('inputsLabel', 'Inputs:'),
+      `  ${L('gender', 'Gender')}: ${sexLabel}`,
+      `  ${L('age', 'Age')}: ${age} ${L('yrsSuffix', 'years')}`,
+      `  ${L('weight', 'Weight')}: ${weight} ${wUnit}`,
+      `  ${L('height', 'Height')}: ${hDisplay}`,
+      C('resultsLabel', 'Results:'),
+      `  ${L('outBmr', 'Your BMR')}: ${fmtNum(result.bmr, 0)} ${L('caloriesPerDay', 'calories/day')}`,
+      `  ${L('outBmi', 'Your BMI')}: ${fmtNum(result.bmi, 1)}`,
+    ].join('\n')
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [result, unit, weight, height, heightFt, heightIn, age, gender, locale])
+
+  const csvContent = useMemo(() => {
+    if (!result) return summary
+    const rows: string[][] = [
+      [C('csvField', 'Field'), C('csvType', 'Type'), C('csvValue', 'Value')],
+      [L('gender', 'Gender'), C('csvInput', 'Input'), sexLabel],
+      [L('age', 'Age'), C('csvInput', 'Input'), `${age} ${L('yrsSuffix', 'years')}`],
+      [L('weight', 'Weight'), C('csvInput', 'Input'), `${weight} ${wUnit}`],
+      [L('height', 'Height'), C('csvInput', 'Input'), hDisplay],
+      [L('outBmr', 'Your BMR'), C('csvResult', 'Result'), `${fmtNum(result.bmr, 0)} ${L('caloriesPerDay', 'calories/day')}`],
+      [L('outBmi', 'Your BMI'), C('csvResult', 'Result'), fmtNum(result.bmi, 1)],
+    ]
+    return '\uFEFF' + rows.map((r) => r.map(csvEscape).join(',')).join('\n')
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [summary, result, unit, weight, height, heightFt, heightIn, age, gender, locale])
+
+  return (
+    <div className="space-y-6">
+      <UnitToggle unit={unit} onSwitch={switchUnit} L={L} />
+
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        <span className="text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>{C('inputs', 'Inputs')}</span>
+        <LoadSampleButton onLoad={handleLoadSample} />
+      </div>
+      <div className="grid grid-cols-1 gap-4 rounded-lg p-4 sm:grid-cols-2" style={{ backgroundColor: 'rgb(var(--bg-subtle))' }}>
+        <CalcSelect
+          id="gender"
+          label={L('gender', 'Gender')}
+          value={gender}
+          onChange={(v) => setGender(v as 'male' | 'female')}
+          options={[
+            { label: L('optMale', 'Male'), value: 'male' },
+            { label: L('optFemale', 'Female'), value: 'female' },
+          ]}
+        />
+        <CalculatorField id="age" label={L('age', 'Age')} value={age} onChange={setAge} suffix={L('yrsSuffix', 'years')} placeholder="30" />
+        <CalculatorField id="weight" label={L('weight', 'Weight')} value={weight} onChange={setWeight} suffix={unit === 'metric' ? 'kg' : 'lb'} placeholder={unit === 'metric' ? '70' : '155'} />
+        {unit === 'metric' ? (
+          <CalculatorField id="height" label={L('height', 'Height')} value={height} onChange={setHeight} suffix="cm" placeholder="175" />
+        ) : (
+          <>
+            <CalculatorField id="heightFt" label={L('heightFt', 'Height (ft)')} value={heightFt} onChange={setHeightFt} placeholder="5" />
+            <CalculatorField id="heightIn" label={L('heightIn', 'Height (in)')} value={heightIn} onChange={setHeightIn} placeholder="11" />
+          </>
+        )}
+      </div>
+
+      {result ? (
+        <>
+          <div role="status" aria-live="polite" className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+            <ResultCard label={L('outBmr', 'Your BMR')} value={`${fmtNum(result.bmr, 0)} ${L('caloriesPerDay', 'calories/day')}`} highlight sublabel={L('subMifflin', 'Mifflin-St Jeor')} />
+            <ResultCard label={L('outBmi', 'Your BMI')} value={fmtNum(result.bmi, 1)} />
+          </div>
+          <ResultActions
+            summary={summary}
+            filename="bmr-calculator-result.csv"
+            downloadContent={csvContent}
+            mime="text/csv;charset=utf-8;"
+            copyLabel={C('copySummary', 'Copy Summary')}
+          />
+        </>
+      ) : (
+        <div className="rounded-lg border-2 border-dashed p-6 text-center text-sm" style={{ borderColor: 'rgb(var(--border-strong))', color: 'rgb(var(--text-faint))' }}>
+          {L('emptyState', 'Enter your gender, age, weight, and height to calculate your BMR')}
+        </div>
+      )}
+
+      <CalculatorNote>
+        {L('note', '⚛️ BMR = Basal Metabolic Rate. The minimum energy your body needs at complete rest.')}
+      </CalculatorNote>
+    </div>
+  )
+}
+
+/**
+ * Water Intake Calculator —— 每日需水量
+ * 口径:35 ml/kg 体重 + 运动 12 ml/min;英制体重先换算成 kg。
+ * 输出升/杯/盎司双显(1 ml ≈ 0.033814 US fl oz)。
+ */
+export function WaterIntakeCalculatorClient() {
+  const { locale } = useApp()
+  const L = (key: string, fb: string) => tui('water-intake-calculator', locale, key, fb)
+  const C = (key: string, fb: string) => tuiCalc(key, locale, fb)
+
+  const [unit, setUnit] = useState<Unit>('metric')
+  const [weight, setWeight] = useState('70') // metric: kg / imperial: lb
+  const [activity, setActivity] = useState('30') // 运动(分钟/天)
+  const [climate, setClimate] = useState<'normal' | 'hot'>('normal')
+
+  const switchUnit = (u: Unit) => {
+    if (u === unit) return
+    setWeight(convertInput(weight, u === 'imperial' ? 1 / LB_PER_KG : LB_PER_KG))
+    setUnit(u)
+  }
+
+  const handleLoadSample = useCallback(() => {
+    setUnit('metric')
+    setWeight('70'); setActivity('30'); setClimate('normal')
+  }, [])
+
+  const result = useMemo(() => {
+    const kg = unit === 'metric' ? Number(weight) : Number(weight) * LB_PER_KG
+    const exercise = Number(activity)
+    if (kg <= 0 || !isFinite(kg) || !isFinite(exercise) || exercise < 0) return null
     // 基础 35ml/kg + 运动 12ml/min×30min
-    let ml = w * 35 + exercise * 12
-    if (v.climate === 'hot') ml *= 1.1
-    const liters = ml / 1000
-    const T = (key: string, fb: string) => tui('water-intake-calculator', locale, key, fb)
-    return {
-      liters: `${fmtNum(liters, 2)} ${T('litersPerDay', 'liters/day')}`,
-      cups: `${fmtNum(liters * 4, 1)} ${T('cupsUnit', 'cups')}`,
-      oz: `${fmtNum(liters * 33.814, 1)} ${T('ozUnit', 'oz')}`,
-    }
-  },
-  note: '💧 General guideline: ~35 ml per kg body weight, more with exercise or heat. Individual needs vary.',
-})
+    let ml = kg * 35 + exercise * 12
+    if (climate === 'hot') ml *= 1.1
+    if (!isFinite(ml)) return null
+    return { ml }
+  }, [unit, weight, activity, climate])
 
-export const IdealWeightCalculatorClient = makeCalculatorClient({
-  slug: 'ideal-weight-calculator',
-  inputs: [
-    { key: 'gender', label: 'Gender', default: 'male', options: [
-      { label: 'Male', value: 'male' },
-      { label: 'Female', value: 'female' },
-    ]},
-    { key: 'height', label: 'Height', suffix: 'cm', default: '175' },
-  ],
-  outputs: [
-    { key: 'devine', label: 'Devine formula', highlight: true },
-    { key: 'robinson', label: 'Robinson formula' },
-    { key: 'hamwi', label: 'Hamwi formula' },
-    { key: 'bmi', label: 'Healthy BMI range (18.5-24.9)' },
-  ],
-  compute: (v) => {
-    const h = toNum(v.height)
+  const wUnit = unit === 'metric' ? 'kg' : 'lb'
+  const climateLabel = climate === 'hot'
+    ? L('climateHot', 'Hot / humid')
+    : L('climateNormal', 'Normal / temperate')
+
+  const summary = useMemo(() => {
+    if (!result) return L('emptyState', 'Enter your weight, exercise, and climate to estimate your daily water needs')
+    const liters = result.ml / 1000
+    return [
+      C('summaryTitle', 'Calculation Summary'),
+      C('inputsLabel', 'Inputs:'),
+      `  ${L('weight', 'Body weight')}: ${weight} ${wUnit}`,
+      `  ${L('activity', 'Exercise (min/day)')}: ${activity}`,
+      `  ${L('climate', 'Climate')}: ${climateLabel}`,
+      C('resultsLabel', 'Results:'),
+      `  ${L('outLiters', 'Daily water need')}: ${fmtNum(liters, 2)} ${L('litersPerDay', 'liters/day')}`,
+      `  ${L('outCups', 'In cups (250ml)')}: ${fmtNum(liters * 4, 1)} ${L('cupsUnit', 'cups')}`,
+      `  ${L('outOz', 'In ounces (US)')}: ${fmtNum(result.ml * 0.0338140227, 1)} ${L('ozUnit', 'oz')}`,
+    ].join('\n')
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [result, unit, weight, activity, climate, locale])
+
+  const csvContent = useMemo(() => {
+    if (!result) return summary
+    const liters = result.ml / 1000
+    const rows: string[][] = [
+      [C('csvField', 'Field'), C('csvType', 'Type'), C('csvValue', 'Value')],
+      [L('weight', 'Body weight'), C('csvInput', 'Input'), `${weight} ${wUnit}`],
+      [L('activity', 'Exercise (min/day)'), C('csvInput', 'Input'), activity],
+      [L('climate', 'Climate'), C('csvInput', 'Input'), climateLabel],
+      [L('outLiters', 'Daily water need'), C('csvResult', 'Result'), `${fmtNum(liters, 2)} ${L('litersPerDay', 'liters/day')}`],
+      [L('outCups', 'In cups (250ml)'), C('csvResult', 'Result'), `${fmtNum(liters * 4, 1)} ${L('cupsUnit', 'cups')}`],
+      [L('outOz', 'In ounces (US)'), C('csvResult', 'Result'), `${fmtNum(result.ml * 0.0338140227, 1)} ${L('ozUnit', 'oz')}`],
+    ]
+    return '\uFEFF' + rows.map((r) => r.map(csvEscape).join(',')).join('\n')
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [summary, result, unit, weight, activity, climate, locale])
+
+  return (
+    <div className="space-y-6">
+      <UnitToggle unit={unit} onSwitch={switchUnit} L={L} />
+
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        <span className="text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>{C('inputs', 'Inputs')}</span>
+        <LoadSampleButton onLoad={handleLoadSample} />
+      </div>
+      <div className="grid grid-cols-1 gap-4 rounded-lg p-4 sm:grid-cols-2" style={{ backgroundColor: 'rgb(var(--bg-subtle))' }}>
+        <CalculatorField id="weight" label={L('weight', 'Body weight')} value={weight} onChange={setWeight} suffix={unit === 'metric' ? 'kg' : 'lb'} placeholder={unit === 'metric' ? '70' : '155'} />
+        <CalculatorField id="activity" label={L('activity', 'Exercise (min/day)')} value={activity} onChange={setActivity} suffix="min" placeholder="30" />
+        <CalcSelect
+          id="climate"
+          label={L('climate', 'Climate')}
+          value={climate}
+          onChange={(v) => setClimate(v as 'normal' | 'hot')}
+          options={[
+            { label: L('climateNormal', 'Normal / temperate'), value: 'normal' },
+            { label: L('climateHot', 'Hot / humid'), value: 'hot' },
+          ]}
+        />
+      </div>
+
+      {result ? (
+        <>
+          <div role="status" aria-live="polite" className="grid grid-cols-1 gap-3 sm:grid-cols-3">
+            <ResultCard label={L('outLiters', 'Daily water need')} value={`${fmtNum(result.ml / 1000, 2)} ${L('litersPerDay', 'liters/day')}`} highlight />
+            <ResultCard label={L('outCups', 'In cups (250ml)')} value={`${fmtNum((result.ml / 1000) * 4, 1)} ${L('cupsUnit', 'cups')}`} />
+            <ResultCard label={L('outOz', 'In ounces (US)')} value={`${fmtNum(result.ml * 0.0338140227, 1)} ${L('ozUnit', 'oz')}`} />
+          </div>
+          <ResultActions
+            summary={summary}
+            filename="water-intake-calculator-result.csv"
+            downloadContent={csvContent}
+            mime="text/csv;charset=utf-8;"
+            copyLabel={C('copySummary', 'Copy Summary')}
+          />
+        </>
+      ) : (
+        <div className="rounded-lg border-2 border-dashed p-6 text-center text-sm" style={{ borderColor: 'rgb(var(--border-strong))', color: 'rgb(var(--text-faint))' }}>
+          {L('emptyState', 'Enter your weight, exercise, and climate to estimate your daily water needs')}
+        </div>
+      )}
+
+      <CalculatorNote>
+        {L('note', '💧 General guideline: ~35 ml per kg body weight, more with exercise or heat. Individual needs vary.')}
+      </CalculatorNote>
+    </div>
+  )
+}
+
+/**
+ * Ideal Weight Calculator —— Devine / Robinson / Hamwi + BMI 健康区间
+ * 公式按「身高超过 5 英尺的英寸数」线性外推(输出 kg);英制 ft/in 输入最自然。
+ * 输出体重跟随所选单位制(kg / lb,1lb=0.45359237kg)。
+ */
+export function IdealWeightCalculatorClient() {
+  const { locale } = useApp()
+  const L = (key: string, fb: string) => tui('ideal-weight-calculator', locale, key, fb)
+  const C = (key: string, fb: string) => tuiCalc(key, locale, fb)
+
+  const [unit, setUnit] = useState<Unit>('metric')
+  const [gender, setGender] = useState<'male' | 'female'>('male')
+  const [height, setHeight] = useState('175') // metric: cm
+  const [heightFt, setHeightFt] = useState('') // imperial: ft + in 双输入框
+  const [heightIn, setHeightIn] = useState('')
+
+  const switchUnit = (u: Unit) => {
+    if (u === unit) return
+    const next = convertHeightFields(u, height, heightFt, heightIn)
+    setHeight(next.height)
+    setHeightFt(next.heightFt)
+    setHeightIn(next.heightIn)
+    setUnit(u)
+  }
+
+  const handleLoadSample = useCallback(() => {
+    setUnit('metric')
+    setGender('male'); setHeight('175'); setHeightFt(''); setHeightIn('')
+  }, [])
+
+  const result = useMemo(() => {
+    const totalIn = unit === 'metric' ? Number(height) / CM_PER_IN : Number(heightFt) * 12 + Number(heightIn)
+    if (!isFinite(totalIn) || totalIn <= 0) return null
     // 身高换算成英寸、减去 5 英尺(60 英寸)。低于 5 英尺时为负值,直接代入公式
     // (Devine 1974 原式:50 + 2.3 × 每超 1 英寸;不足部分线性递减,不钳制为 0)
-    const inchesOver5ft = h / 2.54 - 60
-    const isMale = v.gender === 'male'
-    // 三个经典公式
+    const inchesOver5ft = totalIn - 60
+    const isMale = gender === 'male'
+    // 三个经典公式(输出 kg)
     const devine = isMale ? 50 + 2.3 * inchesOver5ft : 45.5 + 2.3 * inchesOver5ft
     const robinson = isMale ? 52 + 1.9 * inchesOver5ft : 49 + 1.7 * inchesOver5ft
     const hamwi = isMale ? 48 + 2.7 * inchesOver5ft : 45.5 + 2.2 * inchesOver5ft
-    const m = h / 100
+    const m = (totalIn * CM_PER_IN) / 100
     const low = 18.5 * m * m
     const high = 24.9 * m * m
-    return {
-      devine: `${fmtNum(devine, 1)} kg`,
-      robinson: `${fmtNum(robinson, 1)} kg`,
-      hamwi: `${fmtNum(hamwi, 1)} kg`,
-      bmi: `${fmtNum(low, 1)} – ${fmtNum(high, 1)} kg`,
-    }
-  },
-  note: '⚖️ Ideal weight is a rough estimate. Muscle mass, body frame, and health matter more than any single number.',
-})
+    if (![devine, robinson, hamwi, low, high].every(isFinite)) return null
+    return { devine, robinson, hamwi, low, high }
+  }, [unit, height, heightFt, heightIn, gender])
+
+  const sexLabel = gender === 'male' ? L('optMale', 'Male') : L('optFemale', 'Female')
+  const wUnit = unit === 'metric' ? 'kg' : 'lb'
+  const hDisplay = unit === 'metric' ? `${height} cm` : `${heightFt} ft ${heightIn} in`
+  // 体重类结果跟随单位制:metric 显示 kg,imperial 换算成 lb
+  const w = (kg: number) => (unit === 'metric' ? kg : kg / LB_PER_KG)
+
+  const summary = useMemo(() => {
+    if (!result) return L('emptyState', 'Enter your gender and height to see your ideal weight estimates')
+    return [
+      C('summaryTitle', 'Calculation Summary'),
+      C('inputsLabel', 'Inputs:'),
+      `  ${L('gender', 'Gender')}: ${sexLabel}`,
+      `  ${L('height', 'Height')}: ${hDisplay}`,
+      C('resultsLabel', 'Results:'),
+      `  ${L('outDevine', 'Devine formula')}: ${fmtNum(w(result.devine), 1)} ${wUnit}`,
+      `  ${L('outRobinson', 'Robinson formula')}: ${fmtNum(w(result.robinson), 1)} ${wUnit}`,
+      `  ${L('outHamwi', 'Hamwi formula')}: ${fmtNum(w(result.hamwi), 1)} ${wUnit}`,
+      `  ${L('outBmi', 'Healthy BMI range (18.5-24.9)')}: ${fmtNum(w(result.low), 1)} – ${fmtNum(w(result.high), 1)} ${wUnit}`,
+    ].join('\n')
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [result, unit, height, heightFt, heightIn, gender, locale])
+
+  const csvContent = useMemo(() => {
+    if (!result) return summary
+    const rows: string[][] = [
+      [C('csvField', 'Field'), C('csvType', 'Type'), C('csvValue', 'Value')],
+      [L('gender', 'Gender'), C('csvInput', 'Input'), sexLabel],
+      [L('height', 'Height'), C('csvInput', 'Input'), hDisplay],
+      [L('outDevine', 'Devine formula'), C('csvResult', 'Result'), `${fmtNum(w(result.devine), 1)} ${wUnit}`],
+      [L('outRobinson', 'Robinson formula'), C('csvResult', 'Result'), `${fmtNum(w(result.robinson), 1)} ${wUnit}`],
+      [L('outHamwi', 'Hamwi formula'), C('csvResult', 'Result'), `${fmtNum(w(result.hamwi), 1)} ${wUnit}`],
+      [L('outBmi', 'Healthy BMI range (18.5-24.9)'), C('csvResult', 'Result'), `${fmtNum(w(result.low), 1)} – ${fmtNum(w(result.high), 1)} ${wUnit}`],
+    ]
+    return '\uFEFF' + rows.map((r) => r.map(csvEscape).join(',')).join('\n')
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [summary, result, unit, height, heightFt, heightIn, gender, locale])
+
+  return (
+    <div className="space-y-6">
+      <UnitToggle unit={unit} onSwitch={switchUnit} L={L} />
+
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        <span className="text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>{C('inputs', 'Inputs')}</span>
+        <LoadSampleButton onLoad={handleLoadSample} />
+      </div>
+      <div className="grid grid-cols-1 gap-4 rounded-lg p-4 sm:grid-cols-2" style={{ backgroundColor: 'rgb(var(--bg-subtle))' }}>
+        <CalcSelect
+          id="gender"
+          label={L('gender', 'Gender')}
+          value={gender}
+          onChange={(v) => setGender(v as 'male' | 'female')}
+          options={[
+            { label: L('optMale', 'Male'), value: 'male' },
+            { label: L('optFemale', 'Female'), value: 'female' },
+          ]}
+        />
+        {unit === 'metric' ? (
+          <CalculatorField id="height" label={L('height', 'Height')} value={height} onChange={setHeight} suffix="cm" placeholder="175" />
+        ) : (
+          <>
+            <CalculatorField id="heightFt" label={L('heightFt', 'Height (ft)')} value={heightFt} onChange={setHeightFt} placeholder="5" />
+            <CalculatorField id="heightIn" label={L('heightIn', 'Height (in)')} value={heightIn} onChange={setHeightIn} placeholder="9" />
+          </>
+        )}
+      </div>
+
+      {result ? (
+        <>
+          <div role="status" aria-live="polite" className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+            <ResultCard label={L('outDevine', 'Devine formula')} value={`${fmtNum(w(result.devine), 1)} ${wUnit}`} highlight />
+            <ResultCard label={L('outRobinson', 'Robinson formula')} value={`${fmtNum(w(result.robinson), 1)} ${wUnit}`} />
+            <ResultCard label={L('outHamwi', 'Hamwi formula')} value={`${fmtNum(w(result.hamwi), 1)} ${wUnit}`} />
+            <ResultCard label={L('outBmi', 'Healthy BMI range (18.5-24.9)')} value={`${fmtNum(w(result.low), 1)} – ${fmtNum(w(result.high), 1)} ${wUnit}`} />
+          </div>
+          <ResultActions
+            summary={summary}
+            filename="ideal-weight-calculator-result.csv"
+            downloadContent={csvContent}
+            mime="text/csv;charset=utf-8;"
+            copyLabel={C('copySummary', 'Copy Summary')}
+          />
+        </>
+      ) : (
+        <div className="rounded-lg border-2 border-dashed p-6 text-center text-sm" style={{ borderColor: 'rgb(var(--border-strong))', color: 'rgb(var(--text-faint))' }}>
+          {L('emptyState', 'Enter your gender and height to see your ideal weight estimates')}
+        </div>
+      )}
+
+      <CalculatorNote>
+        {L('note', '⚖️ Ideal weight is a rough estimate. Muscle mass, body frame, and health matter more than any single number.')}
+      </CalculatorNote>
+    </div>
+  )
+}
 
 // ── 数学类 ──
 

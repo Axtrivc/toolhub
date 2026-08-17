@@ -1,6 +1,7 @@
 /**
  * ideal-weight-calculator 本地化 bundle —— zh / es / de
- * 覆盖:faqs + useCases(client = IdealWeightCalculatorClient = makeCalculatorClient)
+ * 覆盖:faqs + useCases(client = IdealWeightCalculatorClient,自定义 client:
+ * 含 metric/imperial 单位切换,通用 chrome 键走 COMMON_CALC_UI)
  */
 import type { ToolL10n } from '../tool-l10n'
 
@@ -11,14 +12,19 @@ export const idealWeightCalculatorL10n: ToolL10n = {
       explain: '一个常用公式(Devine)按身高超过 5 英尺的部分估算理想体重(千克)。它是人群参考,不是个人健康目标——体型和肌肉量差异很大。',
     },
     ui: {
-      'in.gender': '性别',
-      'opt.gender.male': '男',
-      'opt.gender.female': '女',
-      'in.height': '身高',
-      'out.devine': 'Devine 公式',
-      'out.robinson': 'Robinson 公式',
-      'out.hamwi': 'Hamwi 公式',
-      'out.bmi': '健康 BMI 范围(18.5–24.9)',
+      metric: '公制 (cm / kg)',
+      imperial: '英制 (ft/in / lb)',
+      gender: '性别',
+      optMale: '男',
+      optFemale: '女',
+      height: '身高',
+      heightFt: '身高(英尺)',
+      heightIn: '身高(英寸)',
+      outDevine: 'Devine 公式',
+      outRobinson: 'Robinson 公式',
+      outHamwi: 'Hamwi 公式',
+      outBmi: '健康 BMI 范围(18.5–24.9)',
+      emptyState: '输入性别和身高即可查看理想体重估算',
       note: '⚖️ 理想体重只是粗略估算。肌肉量、体型和整体健康状况比单一数字更重要。',
     },
     useCases: [
@@ -37,14 +43,19 @@ export const idealWeightCalculatorL10n: ToolL10n = {
       explain: 'Una fórmula común (Devine) estima el peso ideal en kg a partir de la altura sobre 5 pies. Es una referencia poblacional, no una meta personal — complexión y músculo varían mucho.',
     },
     ui: {
-      'in.gender': 'Sexo',
-      'opt.gender.male': 'Hombre',
-      'opt.gender.female': 'Mujer',
-      'in.height': 'Altura',
-      'out.devine': 'Fórmula de Devine',
-      'out.robinson': 'Fórmula de Robinson',
-      'out.hamwi': 'Fórmula de Hamwi',
-      'out.bmi': 'Rango de IMC saludable (18.5-24.9)',
+      metric: 'Métrico (cm / kg)',
+      imperial: 'Imperial (ft/in / lb)',
+      gender: 'Sexo',
+      optMale: 'Hombre',
+      optFemale: 'Mujer',
+      height: 'Altura',
+      heightFt: 'Altura (ft)',
+      heightIn: 'Altura (in)',
+      outDevine: 'Fórmula de Devine',
+      outRobinson: 'Fórmula de Robinson',
+      outHamwi: 'Fórmula de Hamwi',
+      outBmi: 'Rango de IMC saludable (18.5-24.9)',
+      emptyState: 'Introduce sexo y altura para ver tus estimaciones de peso ideal',
       note: '⚖️ El peso ideal es una estimación aproximada. La masa muscular, el complexión y la salud importan más que un solo número.',
     },
     useCases: [
@@ -63,14 +74,19 @@ export const idealWeightCalculatorL10n: ToolL10n = {
       explain: 'Eine gängige Formel (Devine) schätzt das Idealgewicht in kg aus der Größe über 5 Fuß. Es ist ein Populations­richtwert, kein persönliches Gesundheitsziel — Statur und Muskeln variieren stark.',
     },
     ui: {
-      'in.gender': 'Geschlecht',
-      'opt.gender.male': 'Männlich',
-      'opt.gender.female': 'Weiblich',
-      'in.height': 'Größe',
-      'out.devine': 'Devine-Formel',
-      'out.robinson': 'Robinson-Formel',
-      'out.hamwi': 'Hamwi-Formel',
-      'out.bmi': 'Gesunder BMI-Bereich (18.5-24.9)',
+      metric: 'Metrisch (cm / kg)',
+      imperial: 'Imperial (ft/in / lb)',
+      gender: 'Geschlecht',
+      optMale: 'Männlich',
+      optFemale: 'Weiblich',
+      height: 'Größe',
+      heightFt: 'Größe (ft)',
+      heightIn: 'Größe (in)',
+      outDevine: 'Devine-Formel',
+      outRobinson: 'Robinson-Formel',
+      outHamwi: 'Hamwi-Formel',
+      outBmi: 'Gesunder BMI-Bereich (18.5-24.9)',
+      emptyState: 'Gib Geschlecht und Größe ein, um deine Idealgewicht-Schätzungen zu sehen',
       note: '⚖️ Das Idealgewicht ist nur eine grobe Schätzung. Muskelmasse, Körperbau und Gesundheit zählen mehr als eine einzelne Zahl.',
     },
     useCases: [

@@ -15,7 +15,34 @@ import { tui } from '@/lib/i18n/tool-l10n'
  *   女:10*kg + 6.25*cm − 5*age − 161
  * TDEE = BMR × 活动系数。
  * 输出:维持热量 + 减脂/温和减脂/增肌/快速增肌四档 + 宏量分配(蛋白/碳水/脂肪 g)。
+ * 单位:公制(kg/cm)与英制(lb / ft+in)可切换;英制输入按 1lb=0.45359237kg、
+ * 1in=2.54cm 换算成 kg/cm 后走同一公式(公式本身不区分单位制)。
  */
+
+// 换算常数(精确定义):1 in = 2.54 cm,1 lb = 0.45359237 kg
+const CM_PER_IN = 2.54
+const LB_PER_KG = 0.45359237
+
+/** 输入框字符串换算:空/非法/非正值保留空串,避免切换单位把 '' 变成 '0' */
+function convertInput(s: string, factor: number): string {
+  if (s.trim() === '') return ''
+  const n = Number(s)
+  if (!isFinite(n) || n <= 0) return ''
+  return String(Number((n * factor).toFixed(1)))
+}
+
+/** 总英寸 → (ft, in) 双输入框字符串;英寸保留 1 位小数,四舍五入满 12 时进位到英尺 */
+function splitInches(totalIn: number): [string, string] {
+  let ft = Math.floor(totalIn / 12)
+  let inch = Number((totalIn - ft * 12).toFixed(1))
+  if (inch >= 12) {
+    ft += 1
+    inch = 0
+  }
+  return [String(ft), String(inch)]
+}
+
+type Unit = 'metric' | 'imperial'
 
 const ACTIVITY = [
   { key: '1.2', label: 'Sedentary (little or no exercise)' },
@@ -41,18 +68,48 @@ export function TdeeCalculatorClient() {
     '1.9': L('activityExtra', 'Extra active (physical job / 2x day)'),
   }
 
-  const [weight, setWeight] = useState('70') // kg
-  const [height, setHeight] = useState('175') // cm
+  const [unit, setUnit] = useState<Unit>('metric')
+  const [weight, setWeight] = useState('70') // metric: kg / imperial: lb
+  const [height, setHeight] = useState('175') // metric: cm
+  const [heightFt, setHeightFt] = useState('') // imperial: ft + in 双输入框,内部合成英寸
+  const [heightIn, setHeightIn] = useState('')
   const [age, setAge] = useState('30')
   const [sex, setSex] = useState<'male' | 'female'>('male')
   const [activity, setActivity] = useState('1.55')
 
+  // 切换单位制:按 1in=2.54cm、1lb=0.45359237kg 就地换算并保留数值,不清空
+  const switchUnit = (u: Unit) => {
+    if (u === unit) return
+    if (u === 'imperial') {
+      const cm = Number(height)
+      if (isFinite(cm) && cm > 0) {
+        const [ft, inch] = splitInches(cm / CM_PER_IN)
+        setHeightFt(ft)
+        setHeightIn(inch)
+      } else {
+        setHeightFt('')
+        setHeightIn('')
+      }
+      setWeight(convertInput(weight, 1 / LB_PER_KG))
+    } else {
+      const totalIn = Number(heightFt) * 12 + Number(heightIn)
+      if (isFinite(totalIn) && totalIn > 0) setHeight(String(Number((totalIn * CM_PER_IN).toFixed(1))))
+      else setHeight('')
+      setWeight(convertInput(weight, LB_PER_KG))
+    }
+    setUnit(u)
+  }
+
   const handleLoadSample = useCallback(() => {
-    setWeight('70'); setHeight('175'); setAge('30'); setSex('male'); setActivity('1.55')
+    setUnit('metric')
+    setWeight('70'); setHeight('175'); setHeightFt(''); setHeightIn(''); setAge('30'); setSex('male'); setActivity('1.55')
   }, [])
 
   const result = useMemo(() => {
-    const w = Number(weight), h = Number(height), a = Number(age)
+    // 英制输入换算成 kg/cm 后走 Mifflin-St Jeor(公式不变)
+    const w = unit === 'metric' ? Number(weight) : Number(weight) * LB_PER_KG
+    const h = unit === 'metric' ? Number(height) : (Number(heightFt) * 12 + Number(heightIn)) * CM_PER_IN
+    const a = Number(age)
     if (w <= 0 || h <= 0 || a <= 0 || !isFinite(w) || !isFinite(h) || !isFinite(a)) return null
     // Mifflin-St Jeor
     const bmr = 10 * w + 6.25 * h - 5 * a + (sex === 'male' ? 5 : -161)
@@ -60,7 +117,7 @@ export function TdeeCalculatorClient() {
     const tdee = bmr * factor
     if (!isFinite(tdee)) return null
     return { bmr, tdee }
-  }, [weight, height, age, sex, activity])
+  }, [unit, weight, height, heightFt, heightIn, age, sex, activity])
 
   // 四档热量目标 + 宏量分配(以 TDEE 为基准)
   const goals = useMemo(() => {
@@ -82,14 +139,17 @@ export function TdeeCalculatorClient() {
     }
   }, [result])
 
-  // 复制摘要里 Sex 取本地化值(optMale/optFemale),不输出原始枚举 male/female
+  // 复制摘要里 Sex 取本地化值(optMale/optFemale),不输出原始枚举 male/female;
+  // 体重/身高按当前单位制输出(kg/lb、cm 或 ft+in)
   const sexLabel = sex === 'male' ? L('optMale', 'Male') : L('optFemale', 'Female')
+  const wUnit = unit === 'metric' ? 'kg' : 'lb'
+  const hDisplay = unit === 'metric' ? `${height} cm` : `${heightFt} ft ${heightIn} in`
 
   const summary = useMemo(() => {
     if (!result || !goals) return L('summaryEmpty', 'Enter your stats to calculate TDEE.')
     return [
       L('summaryTitle', 'TDEE Calculation Summary'),
-      `  ${L('sSex', 'Sex: ')}${sexLabel}, ${L('sAge', 'Age: ')}${age}, ${L('sWeight', 'Weight: ')}${weight} kg, ${L('sHeight', 'Height: ')}${height} cm`,
+      `  ${L('sSex', 'Sex: ')}${sexLabel}, ${L('sAge', 'Age: ')}${age}, ${L('sWeight', 'Weight: ')}${weight} ${wUnit}, ${L('sHeight', 'Height: ')}${hDisplay}`,
       `  ${L('sActivityFactor', 'Activity factor: ')}${activity}`,
       `  ${L('sBmr', 'BMR (Mifflin-St Jeor): ')}${round(result.bmr)} kcal/day`,
       `  ${L('sTdee', 'TDEE (maintenance): ')}${round(result.tdee)} kcal/day`,
@@ -101,7 +161,7 @@ export function TdeeCalculatorClient() {
       `    ${L('sFastBulk', 'Fast bulk (+20%): ')}${goals.fastBulk.cal} kcal`,
     ].join('\n')
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [result, goals, sex, age, weight, height, activity, locale])
+  }, [result, goals, sex, age, weight, height, heightFt, heightIn, activity, unit, locale])
 
   const csvContent = useMemo(() => {
     if (!result || !goals) return summary
@@ -109,8 +169,8 @@ export function TdeeCalculatorClient() {
       [L('csvField', 'Field'), L('csvValue', 'Value')],
       [L('csvSex', 'Sex'), sex],
       [L('csvAge', 'Age'), `${age} ${L('yrsSuffix', 'yrs')}`],
-      [L('csvWeight', 'Weight'), `${weight} kg`],
-      [L('csvHeight', 'Height'), `${height} cm`],
+      [L('csvWeight', 'Weight'), `${weight} ${wUnit}`],
+      [L('csvHeight', 'Height'), hDisplay],
       [L('csvActivityFactor', 'Activity factor'), activity],
       [L('csvBmr', 'BMR'), `${round(result.bmr)} kcal/day`],
       [L('csvTdeeMaintenance', 'TDEE (maintenance)'), `${round(result.tdee)} kcal/day`],
@@ -124,18 +184,41 @@ export function TdeeCalculatorClient() {
     ]
     return rows.map((r) => r.map((c) => (/[",\n]/.test(c) ? `"${c.replace(/"/g, '""')}"` : c)).join(',')).join('\n')
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [result, goals, summary, sex, age, weight, height, activity, locale])
+  }, [result, goals, summary, sex, age, weight, height, heightFt, heightIn, activity, unit, locale])
 
   return (
     <div className="space-y-6">
+      {/* 单位切换 */}
+      <div className="flex gap-2">
+        {(['metric', 'imperial'] as const).map((u) => (
+          <button
+            key={u}
+            type="button"
+            onClick={() => switchUnit(u)}
+            className={`rounded-lg px-4 py-2 text-sm font-medium transition ${
+              unit === u ? 'bg-brand-600 text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+            }`}
+          >
+            {u === 'metric' ? L('metric', 'Metric (cm / kg)') : L('imperial', 'Imperial (ft/in / lb)')}
+          </button>
+        ))}
+      </div>
+
       {/* 输入区 + Load Sample */}
       <div className="flex flex-wrap items-center justify-between gap-3">
         <span className="text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>{L('yourStats', 'Your stats')}</span>
         <LoadSampleButton onLoad={handleLoadSample} />
       </div>
       <div className="grid grid-cols-1 gap-4 rounded-lg p-4 sm:grid-cols-3" style={{ backgroundColor: 'rgb(var(--bg-subtle))' }}>
-        <CalculatorField id="weight" label={L('weight', 'Weight')} value={weight} onChange={setWeight} suffix="kg" placeholder="70" />
-        <CalculatorField id="height" label={L('height', 'Height')} value={height} onChange={setHeight} suffix="cm" placeholder="175" />
+        <CalculatorField id="weight" label={L('weight', 'Weight')} value={weight} onChange={setWeight} suffix={unit === 'metric' ? 'kg' : 'lb'} placeholder={unit === 'metric' ? '70' : '155'} />
+        {unit === 'metric' ? (
+          <CalculatorField id="height" label={L('height', 'Height')} value={height} onChange={setHeight} suffix="cm" placeholder="175" />
+        ) : (
+          <>
+            <CalculatorField id="heightFt" label={L('heightFt', 'Height (ft)')} value={heightFt} onChange={setHeightFt} placeholder="5" />
+            <CalculatorField id="heightIn" label={L('heightIn', 'Height (in)')} value={heightIn} onChange={setHeightIn} placeholder="11" />
+          </>
+        )}
         <CalculatorField id="age" label={L('age', 'Age')} value={age} onChange={setAge} suffix={L('yrsSuffix', 'yrs')} placeholder="30" />
         <div>
           <label htmlFor="sex" className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>{L('sex', 'Sex')}</label>

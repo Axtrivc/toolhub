@@ -7,6 +7,29 @@ import { tui } from '@/lib/i18n/tool-l10n'
 
 type Unit = 'metric' | 'imperial'
 
+// 换算常数(精确定义):1 in = 2.54 cm,1 lb = 0.45359237 kg
+const CM_PER_IN = 2.54
+const LB_PER_KG = 0.45359237
+
+/** 输入框字符串换算:空/非法/非正值保留空串,避免切换单位把 '' 变成 '0' */
+function convertInput(s: string, factor: number): string {
+  if (s.trim() === '') return ''
+  const n = Number(s)
+  if (!isFinite(n) || n <= 0) return ''
+  return String(Number((n * factor).toFixed(1)))
+}
+
+/** 总英寸 → (ft, in) 双输入框字符串;英寸保留 1 位小数,四舍五入满 12 时进位到英尺 */
+function splitInches(totalIn: number): [string, string] {
+  let ft = Math.floor(totalIn / 12)
+  let inch = Number((totalIn - ft * 12).toFixed(1))
+  if (inch >= 12) {
+    ft += 1
+    inch = 0
+  }
+  return [String(ft), String(inch)]
+}
+
 // BMI 分类(基于 WHO 标准,适用于成人)
 function getCategory(bmi: number): { key: string; label: string; color: string; advice: string } {
   if (bmi < 18.5)
@@ -57,27 +80,42 @@ export function BMICalculatorClient() {
   const L = (key: string, fb: string) => tui('bmi-calculator', locale, key, fb)
 
   const [unit, setUnit] = useState<Unit>('metric')
-  const [height, setHeight] = useState('170')
-  const [weight, setWeight] = useState('65')
+  const [height, setHeight] = useState('170') // metric: cm
+  const [heightFt, setHeightFt] = useState('') // imperial: ft + in 双输入框,内部合成英寸
+  const [heightIn, setHeightIn] = useState('')
+  const [weight, setWeight] = useState('65') // metric: kg / imperial: lb
 
-  // 切换单位时清空,避免单位混淆
+  // 切换单位制:按 1in=2.54cm、1lb=0.45359237kg 就地换算并保留数值,不清空
   const switchUnit = (u: Unit) => {
-    if (u !== unit) {
-      setHeight('')
-      setWeight('')
-      setUnit(u)
+    if (u === unit) return
+    if (u === 'imperial') {
+      const cm = Number(height)
+      if (isFinite(cm) && cm > 0) {
+        const [ft, inch] = splitInches(cm / CM_PER_IN)
+        setHeightFt(ft)
+        setHeightIn(inch)
+      } else {
+        setHeightFt('')
+        setHeightIn('')
+      }
+      setWeight(convertInput(weight, 1 / LB_PER_KG))
+    } else {
+      const totalIn = Number(heightFt) * 12 + Number(heightIn)
+      if (isFinite(totalIn) && totalIn > 0) setHeight(String(Number((totalIn * CM_PER_IN).toFixed(1))))
+      else setHeight('')
+      setWeight(convertInput(weight, LB_PER_KG))
     }
+    setUnit(u)
   }
 
-  const h = Number(height)
+  // metric: height(cm) weight(kg);imperial: height(ft+in) weight(lb)
+  const h = unit === 'metric' ? Number(height) : Number(heightFt) * 12 + Number(heightIn)
   const w = Number(weight)
   let bmi = NaN
   if (h > 0 && w > 0) {
     if (unit === 'metric') {
-      // metric: height(cm) weight(kg)
       bmi = w / Math.pow(h / 100, 2)
     } else {
-      // imperial: height(in) weight(lb)
       bmi = (w / Math.pow(h, 2)) * 703
     }
   }
@@ -112,21 +150,40 @@ export function BMICalculatorClient() {
               unit === u ? 'bg-brand-600 text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
             }`}
           >
-            {u === 'metric' ? L('metric', 'Metric (cm / kg)') : L('imperial', 'Imperial (in / lb)')}
+            {u === 'metric' ? L('metric', 'Metric (cm / kg)') : L('imperial', 'Imperial (ft/in / lb)')}
           </button>
         ))}
       </div>
 
       {/* 输入区 */}
       <div className="grid grid-cols-1 gap-4 rounded-lg p-4 sm:grid-cols-2" style={{ backgroundColor: 'rgb(var(--bg-subtle))' }}>
-        <CalculatorField
-          id="height"
-          label={L('height', 'Height')}
-          value={height}
-          onChange={setHeight}
-          suffix={unit === 'metric' ? 'cm' : 'in'}
-          placeholder={unit === 'metric' ? '170' : '67'}
-        />
+        {unit === 'metric' ? (
+          <CalculatorField
+            id="height"
+            label={L('height', 'Height')}
+            value={height}
+            onChange={setHeight}
+            suffix="cm"
+            placeholder="170"
+          />
+        ) : (
+          <>
+            <CalculatorField
+              id="heightFt"
+              label={L('heightFt', 'Height (ft)')}
+              value={heightFt}
+              onChange={setHeightFt}
+              placeholder="5"
+            />
+            <CalculatorField
+              id="heightIn"
+              label={L('heightIn', 'Height (in)')}
+              value={heightIn}
+              onChange={setHeightIn}
+              placeholder="11"
+            />
+          </>
+        )}
         <CalculatorField
           id="weight"
           label={L('weight', 'Weight')}
