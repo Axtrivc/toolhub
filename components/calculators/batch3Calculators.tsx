@@ -890,34 +890,108 @@ export const MortgageCalculatorClient = makeCalculatorClient({
     { key: 'down', label: 'Down payment', suffix: '%', default: '20' },
     { key: 'rate', label: 'Interest rate', suffix: '%', default: '6.8' },
     { key: 'years', label: 'Loan term', suffix: 'years', default: '30' },
+    { key: 'tax', label: 'Property tax (per year)', suffix: '$', default: '3600' },
+    { key: 'insurance', label: 'Home insurance (per year)', suffix: '$', default: '1500' },
+    { key: 'hoa', label: 'HOA fees (per month)', suffix: '$', default: '0' },
+    { key: 'pmiRate', label: 'PMI rate (yearly)', suffix: '%', default: '0.5' },
+    { key: 'extra', label: 'Extra monthly payment', suffix: '$', default: '0' },
   ],
   outputs: [
-    { key: 'monthly', label: 'Monthly payment (P&I)', highlight: true },
+    { key: 'piti', label: 'Total monthly payment (PITI)', highlight: true },
+    { key: 'monthly', label: 'Monthly payment (P&I)' },
     { key: 'loan', label: 'Loan amount' },
     { key: 'total', label: 'Total interest paid' },
+    { key: 'taxM', label: 'Property tax / month' },
+    { key: 'insM', label: 'Insurance / month' },
+    { key: 'pmiM', label: 'PMI / month', sublabel: 'Auto $0 at 20%+ down' },
+    { key: 'hoaM', label: 'HOA / month' },
+    { key: 'payoff', label: 'Payoff with extra payment', sublabel: 'Enter extra > $0' },
+    { key: 'saved', label: 'Interest saved by extra' },
+    { key: 'timeSaved', label: 'Time saved' },
   ],
   compute: (v, locale) => {
+    const T = (key: string, fb: string) => tui('mortgage-calculator', locale, key, fb)
     const home = toNum(v.home)
     const downPct = toNum(v.down)
-    if (toNum(v.years) <= 0) return { monthly: `⚠️ ${tui('mortgage-calculator', locale, 'errYears', 'Years must be greater than 0')}`, loan: '—', total: '—', principal: '—' }
+    const months = Math.round(toNum(v.years) * 12)
+    if (months <= 0) {
+      return {
+        piti: `⚠️ ${T('errYears', 'Years must be greater than 0')}`,
+        monthly: '—', loan: '—', total: '—', taxM: '—', insM: '—',
+        pmiM: '—', hoaM: '—', payoff: '—', saved: '—', timeSaved: '—', principal: '—',
+      }
+    }
     const loan = home * (1 - downPct / 100)
     const rate = toNum(v.rate) / 100 / 12
-    const months = toNum(v.years) * 12
-    let monthly: number
-    if (rate === 0) monthly = loan / months
+    // 标准摊销月供,与 LoanCalculatorClient 同式:M = P·r(1+r)^n / ((1+r)^n − 1)
+    let pi: number
+    if (rate === 0) pi = loan / months
     else {
       const f = Math.pow(1 + rate, months)
-      monthly = (loan * rate * f) / (f - 1)
+      pi = (loan * rate * f) / (f - 1)
     }
-    const total = monthly * months - loan
+    // 税/保险按年额 ÷ 12 折月;HOA 输入本身就是月度
+    const taxM = toNum(v.tax) / 12
+    const insM = toNum(v.insurance) / 12
+    const hoaM = toNum(v.hoa)
+    // PMI = 贷款额 × 年PMI率 / 12,仅当首付 < 20%(LTV > 80%)时计收,否则自动 $0
+    const pmiM = downPct < 20 ? (loan * (toNum(v.pmiRate) / 100)) / 12 : 0
+    const piti = pi + taxM + insM + pmiM + hoaM
+    // 基线总利息(不含额外还款)
+    const total = pi * months - loan
+
+    // 提前还款模拟:每月额外金额直接冲本金;600 个月上限防死循环
+    let payoff = '—'
+    let saved = '—'
+    let timeSaved = '—'
+    const extra = toNum(v.extra)
+    if (extra > 0 && loan > 0) {
+      let bal = loan
+      let interestPaid = 0
+      let m = 0
+      while (bal > 0 && m < 600) {
+        const interest = bal * rate
+        const pay = Math.min(pi + extra, bal + interest)
+        interestPaid += interest
+        bal = bal + interest - pay
+        m++
+      }
+      if (bal > 0) {
+        payoff = `⚠️ ${T('errPayoffCap', 'Not paid off within 600 months')}`
+      } else {
+        // "N months (X.Y yrs)" 格式;单复数:<12 个月只显月数
+        const fmtMonths = (n: number): string => {
+          if (n < 12) {
+            return n === 1
+              ? T('monthsOne', '1 month')
+              : T('monthsN', '{m} months').replace('{m}', String(n))
+          }
+          const yrs = T('yrsN', '{y} yrs').replace('{y}', fmtNum(n / 12, 1))
+          return T('monthsYrs', '{m} months ({y})')
+            .replace('{m}', String(n))
+            .replace('{y}', yrs)
+        }
+        payoff = fmtMonths(m)
+        saved = fmtUSD(Math.max(0, total - interestPaid), 0)
+        timeSaved = fmtMonths(months - m)
+      }
+    }
     return {
-      monthly: fmtUSD(monthly),
+      piti: fmtUSD(piti),
+      monthly: fmtUSD(pi),
       loan: fmtUSD(loan),
       total: fmtUSD(total, 0),
+      taxM: fmtUSD(taxM),
+      insM: fmtUSD(insM),
+      pmiM: fmtUSD(pmiM),
+      hoaM: fmtUSD(hoaM),
+      payoff,
+      saved,
+      timeSaved,
       principal: fmtUSD(loan, 0),
     }
   },
-  note: '🏠 Principal & Interest only. Add property tax, insurance, and HOA for your full payment.',
+  note: '🏠 PMI is added automatically only when your down payment is under 20% (LTV above 80%) — at 20%+ down it is $0. Tax & insurance are yearly amounts ÷ 12; HOA is monthly. Extra payments go straight to principal.',
   chart: {
     title: 'Total Paid: Principal vs Interest',
     centerLabel: 'Total',

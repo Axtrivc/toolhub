@@ -507,6 +507,10 @@ export const toolFaqs: Record<string, FaqPair[]> = {
   ],
   'mortgage-calculator': [
     {
+      q: 'Does this calculator include PMI, property taxes, and insurance?',
+      a: "Yes. Enter your yearly property tax and homeowners insurance, monthly HOA dues, and a PMI rate (0.5% per year is typical). PMI is added automatically only when your down payment is under 20% — with 20% or more down it drops to $0. The highlighted result is your full PITI payment, with each component broken out separately.",
+    },
+    {
       q: 'Should I get a 15 or 30 year mortgage?',
       a: '30-year if you need lower payments or want to invest the difference; 15-year if you can afford it and want to save massively on interest. Many people take a 30-year and pay extra when they can — this gets you the lower required payment of the 30-year with much of the interest savings of the 15-year, plus the flexibility to stop paying extra if money gets tight.',
     },
@@ -520,7 +524,7 @@ export const toolFaqs: Record<string, FaqPair[]> = {
     },
     {
       q: 'Does making extra payments help?',
-      a: 'Yes, dramatically. Extra payments go straight to principal (confirm with your lender there\'s no prepayment penalty). On a $400k, 30-year, 6.8% loan, paying an extra $200/month shaves about 7 years off the term and saves roughly $130,000 in interest. Even one extra full payment per year makes a meaningful difference.',
+      a: 'Yes, dramatically. Extra payments go straight to principal (confirm with your lender there\'s no prepayment penalty). On a $400k, 30-year, 6.8% loan, paying an extra $200/month shaves about 7 years off the term and saves roughly $130,000 in interest. Even one extra full payment per year makes a meaningful difference. Use the extra monthly payment field to simulate it on your own loan — you\'ll see the new payoff time, interest saved, and months cut.',
     },
   ],
   'markup-calculator': [

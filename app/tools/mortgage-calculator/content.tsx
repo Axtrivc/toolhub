@@ -20,9 +20,10 @@ const en: ReactNode = (
       A mortgage is likely the largest loan you&apos;ll ever take, so understanding the real
       numbers matters more than with any other debt. This calculator estimates your monthly
       payment using the standard amortization formula &mdash; the same one banks use. Enter the
-      home price, down payment, interest rate, and loan term, and you&apos;ll see your monthly
-      payment (principal and interest), total loan amount, and how much interest you pay over
-      the life of the loan.
+      home price, down payment, interest rate, and loan term &mdash; plus property tax,
+      insurance, HOA dues, and a PMI rate &mdash; and you&apos;ll see your full monthly payment
+      (PITI) broken out by component, your total loan amount, how much interest you pay over
+      the life of the loan, and what an extra monthly payment saves you.
     </p>
     <p>
       The headline number is just the start. Most people focus on the monthly payment, but the
@@ -57,9 +58,9 @@ const en: ReactNode = (
     <div>
       <h2>PITI: Your Real Monthly Cost</h2>
       <p>
-        This calculator shows <strong>principal and interest (P&amp;I) only</strong>. Your
-        actual monthly housing payment &mdash; called <strong>PITI</strong> &mdash; also
-        includes:
+        Principal and interest are only the loan itself. Your actual monthly housing payment
+        &mdash; called <strong>PITI</strong> &mdash; adds the following, and each item can be
+        entered above so the calculator folds it into your total:
       </p>
       <ul>
         <li>
@@ -72,7 +73,8 @@ const en: ReactNode = (
         </li>
         <li>
           <strong>PMI (if under 20% down):</strong> Private mortgage insurance, typically
-          $50&ndash;$300/month, required until you reach 20% equity.
+          $50&ndash;$300/month, required until you reach 20% equity. This calculator adds it
+          automatically when your down payment is under 20%; at 20% or more it is $0.
         </li>
         <li>
           <strong>HOA dues (if applicable):</strong> Ranges from nothing to $500+/month for
@@ -126,7 +128,9 @@ const en: ReactNode = (
       <p>
         The 15-year saves about <strong>$300,000 in interest</strong> for ~$940 more per
         month. A popular middle path: take a 30-year for flexibility, then pay extra
-        principal whenever you can. Even one extra payment a year shaves years off the term.
+        principal whenever you can. Even one extra payment a year shaves years off the term
+        &mdash; use the extra monthly payment field above to see the exact payoff time,
+        interest saved, and months cut on your own numbers.
       </p>
     </div>
 
@@ -162,7 +166,7 @@ const zh: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>这是什么工具?</h2>
     <p>
-      房贷可能是你这辈子最大的一笔贷款,所以搞清楚真实数字比其他任何债务都重要。这个计算器用银行同样的标准等额本息公式估算你的月供。输入房价、首付、利率和贷款期限,你就能看到月供(本金+利息)、贷款总额,以及整个贷款期你要付多少利息。
+      房贷可能是你这辈子最大的一笔贷款,所以搞清楚真实数字比其他任何债务都重要。这个计算器用银行同样的标准等额本息公式估算你的月供。输入房价、首付、利率和贷款期限,再加上房产税、保险、物业费和 PMI 费率,你就能看到按分项拆解的完整月供(PITI)、贷款总额、整个贷款期要付的总利息,以及每月额外还款能带来什么变化。
     </p>
     <p>
       月供只是个开始。大多数人只盯着月供,但 30 年下来的总利息往往足以媲美——甚至超过——房价本身。把两个数字放在一起看,是这个计算器最有用的地方。
@@ -185,7 +189,7 @@ const zh: ReactNode = (
     <div>
       <h2>PITI:你的真实月成本</h2>
       <p>
-        这个计算器只显示<strong>本金和利息(P&I)</strong>。你实际的每月住房支出——称为 <strong>PITI</strong>——还包括:
+        本金和利息只是贷款本身。你实际的每月住房支出——称为 <strong>PITI</strong>——还要加上以下各项,每一项都可以在上方的输入框里填写,由计算器并入你的总月供:
       </p>
       <ul>
         <li>
@@ -195,7 +199,7 @@ const zh: ReactNode = (
           <strong>房屋保险:</strong>通常 $80–$250/月,取决于地区、保额和房屋价值。
         </li>
         <li>
-          <strong>PMI(首付不足 20% 时):</strong>私人房贷保险,通常 $50–$300/月,直到你的权益达到 20% 才能取消。
+          <strong>PMI(首付不足 20% 时):</strong>私人房贷保险,通常 $50–$300/月,直到你的权益达到 20% 才能取消。首付不足 20% 时本计算器会自动计入 PMI;首付达到 20% 及以上则为 $0。
         </li>
         <li>
           <strong>物业费/HOA(如适用):</strong>从零到 $500+/月不等,公寓和规划社区通常较高。
@@ -239,7 +243,7 @@ const zh: ReactNode = (
         </li>
       </ul>
       <p>
-        15 年能省下约 <strong>$300,000 利息</strong>,代价是每月多付约 $940。一个流行的折中方案:先选 30 年以保留灵活性,然后有余力时多还本金。哪怕一年只多还一次,也能缩短好几年。
+        15 年能省下约 <strong>$300,000 利息</strong>,代价是每月多付约 $940。一个流行的折中方案:先选 30 年以保留灵活性,然后有余力时多还本金。哪怕一年只多还一次,也能缩短好几年——用上方「每月额外还款」字段,就能在你自己的数字上看到确切的还清时间、节省的利息和缩短的月数。
       </p>
     </div>
 
@@ -267,9 +271,10 @@ const es: ReactNode = (
       Una hipoteca es probablemente el préstamo más grande que pedirás jamás, así que entender
       las cifras reales importa más que con cualquier otra deuda. Esta calculadora estima tu
       cuota mensual con la fórmula de amortización estándar — la misma que usan los bancos.
-      Introduce el precio de la vivienda, el pago inicial, la tasa de interés y el plazo, y
-      verás tu cuota mensual (capital e intereses), el importe total del préstamo y cuánto
-      pagarás en intereses a lo largo del préstamo.
+      Introduce el precio de la vivienda, el pago inicial, la tasa de interés y el plazo — más
+      impuestos, seguro, cuota de comunidad y tasa de PMI — y verás tu cuota mensual completa
+      (PITI) desglosada por componentes, el importe total del préstamo, cuánto pagarás en
+      intereses a lo largo del préstamo y qué te ahorra un pago extra mensual.
     </p>
     <p>
       La cifra del titular es solo el principio. La mayoría se fija en la cuota mensual, pero
@@ -301,8 +306,9 @@ const es: ReactNode = (
     <div>
       <h2>PITI: tu coste mensual real</h2>
       <p>
-        Esta calculadora muestra <strong>solo capital e intereses (P&I)</strong>. Tu pago
-        mensual real de vivienda — llamado <strong>PITI</strong> — también incluye:
+        El capital y los intereses son solo el préstamo en sí. Tu pago mensual real de
+        vivienda — llamado <strong>PITI</strong> — añade lo siguiente, y cada componente
+        puedes introducirlo arriba para que la calculadora lo sume a tu total:
       </p>
       <ul>
         <li>
@@ -316,7 +322,9 @@ const es: ReactNode = (
         </li>
         <li>
           <strong>PMI (si pagas menos del 20 % inicial):</strong> seguro privado de la hipoteca,
-          normalmente 50–300 $/mes, obligatorio hasta alcanzar el 20 % de patrimonio.
+          normalmente 50–300 $/mes, obligatorio hasta alcanzar el 20 % de patrimonio. Esta
+          calculadora lo añade automáticamente cuando el pago inicial es inferior al 20 %; con
+          un 20 % o más, es 0 $.
         </li>
         <li>
           <strong>Cuotas de la comunidad (si aplica):</strong> desde nada hasta más de
@@ -373,7 +381,8 @@ const es: ReactNode = (
         El plazo de 15 años ahorra unos <strong>300 000 $ en intereses</strong> por unos
         940 $ más al mes. Un camino intermedio popular: elige 30 años por flexibilidad y luego
         paga capital extra cuando puedas. Incluso un pago adicional al año recorta años del
-        plazo.
+        plazo — usa el campo de pago extra mensual para ver la fecha exacta de amortización,
+        el interés ahorrado y los meses recortados en tus propias cifras.
       </p>
     </div>
 
@@ -413,9 +422,10 @@ const de: ReactNode = (
       Eine Hypothek ist wahrscheinlich der größte Kredit, den du jemals aufnehmen wirst,
       deshalb ist es wichtiger als bei jeder anderen Schuld, die echten Zahlen zu verstehen.
       Dieser Rechner schätzt deine Monatsrate mit der Standard-Tilgungsformel — derselben, die
-      Banken verwenden. Gib Hauspreis, Anzahlung, Zinssatz und Laufzeit ein und du siehst deine
-      Monatsrate (Kredit + Zins), den Gesamtkreditbetrag und wie viel Zins du über die Laufzeit
-      zahlst.
+      Banken verwenden. Gib Hauspreis, Anzahlung, Zinssatz und Laufzeit ein — dazu Grundsteuer,
+      Versicherung, Hausgeld und PMI-Satz — und du siehst deine vollständige Monatsrate (PITI)
+      nach Komponenten aufgeschlüsselt, den Gesamtkreditbetrag, wie viel Zins du über die
+      Laufzeit zahlst und was eine zusätzliche Monatsrate spart.
     </p>
     <p>
       Die Headline-Zahl ist nur der Anfang. Die meisten schauen auf die Monatsrate, aber die
@@ -446,8 +456,9 @@ const de: ReactNode = (
     <div>
       <h2>PITI: deine tatsächlichen Monatkosten</h2>
       <p>
-        Dieser Rechner zeigt <strong>nur Kredit und Zinsen (P&I)</strong>. Deine tatsächliche
-        monatliche Wohnbelastung — genannt <strong>PITI</strong> — umfasst zusätzlich:
+        Kredit und Zins sind nur der Kredit selbst. Deine tatsächliche monatliche
+        Wohnbelastung — genannt <strong>PITI</strong> — kommt mit folgendem hinzu, das du
+        jeweils oben eingeben kannst, damit der Rechner es in deine Gesamtrate einrechnet:
       </p>
       <ul>
         <li>
@@ -460,7 +471,9 @@ const de: ReactNode = (
         </li>
         <li>
           <strong>PMI (bei unter 20 % Anzahlung):</strong> private Hypothekenversicherung,
-          typischerweise 50–300 $/Monat, erforderlich bis du 20 % Eigenanteil erreichst.
+          typischerweise 50–300 $/Monat, erforderlich bis du 20 % Eigenanteil erreichst. Dieser
+          Rechner fügt sie automatisch hinzu, wenn die Anzahlung unter 20 % liegt; ab 20 % sind
+          es 0 $.
         </li>
         <li>
           <strong>Hausgeld (falls zutreffend):</strong> von null bis über 500 $/Monat bei
@@ -515,7 +528,9 @@ const de: ReactNode = (
       <p>
         Die 15 Jahre sparen etwa <strong>300 000 $ Zinsen</strong> für ~940 $ mehr pro Monat.
         Ein beliebter Mittelweg: Wähl 30 Jahre für Flexibilität und tilge dann zusätzlich, wann
-        immer du kannst. Schon eine zusätzliche Rate pro Jahr kürzt die Laufzeit um Jahre.
+        immer du kannst. Schon eine zusätzliche Rate pro Jahr kürzt die Laufzeit um Jahre — mit
+        dem Feld für die zusätzliche Monatsrate oben siehst du das exakte Tilgungsende, die
+        Zinsersparnis und die gekürzten Monate für deine eigenen Zahlen.
       </p>
     </div>
 
