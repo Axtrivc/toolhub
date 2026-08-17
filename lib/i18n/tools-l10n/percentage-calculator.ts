@@ -10,6 +10,7 @@ export const percentageCalculatorL10n: ToolL10n = {
   zh: {
     ui: {
       'change': '变化',
+      'crossesZero': '无定义——变化跨越了零点',
       'decrease': '减少',
       'fromOriginal': '从(原值)',
       'increase': '增加',
@@ -47,6 +48,7 @@ export const percentageCalculatorL10n: ToolL10n = {
   es: {
     ui: {
       'change': 'Cambio',
+      'crossesZero': 'Indefinido: el cambio cruza el cero',
       'decrease': 'Disminución',
       'fromOriginal': 'De (original)',
       'increase': 'Aumento',
@@ -84,6 +86,7 @@ export const percentageCalculatorL10n: ToolL10n = {
   de: {
     ui: {
       'change': 'Änderung',
+      'crossesZero': 'Undefiniert – die Änderung überschreitet die Null',
       'decrease': 'Senkung',
       'fromOriginal': 'Von (ursprünglich)',
       'increase': 'Steigerung',

@@ -42,6 +42,14 @@ function extOf(mime: string): string {
 
 const SCALE_PRESETS = [25, 50, 75, 100]
 
+/**
+ * 画布安全上限:单边 ≤ 8192px 且总像素 ≤ 40MP。
+ * 超限时部分浏览器会把 canvas 静默渲染成空白图 / toBlob 返回 null,
+ * 必须在渲染前拦截并明确报错。
+ */
+const MAX_SIDE = 8192
+const MAX_PIXELS = 40 * 1000 * 1000
+
 export function ImageResizerClient() {
   const { locale } = useApp()
   const L = (key: string, fb: string) => tui('image-resizer', locale, key, fb)
@@ -171,6 +179,17 @@ export function ImageResizerClient() {
       setResult(null)
       return
     }
+    // 渲染前的画布尺寸上限校验:超限直接报错,避免静默产出空白图
+    if (targetW > MAX_SIDE || targetH > MAX_SIDE || targetW * targetH > MAX_PIXELS) {
+      setResult(null)
+      setError(
+        L(
+          'errTooLarge',
+          'Target size is too large — keep each side at 8192 px or below and the total under 40 megapixels.',
+        ),
+      )
+      return
+    }
     let cancelled = false
     const timer = setTimeout(() => {
       const img = imgRef.current
@@ -193,7 +212,24 @@ export function ImageResizerClient() {
       canvas.toBlob(
         (blob) => {
           if (cancelled) return
-          if (!blob) return
+          if (!blob) {
+            setError(
+              L('errEncodeFailed', 'Encoding failed — the browser could not generate the image. Try a smaller target size.'),
+            )
+            return
+          }
+          // 老 Safari 的 toBlob 不认识 image/webp,会静默回退为 PNG → 显式报错而非伪装成功
+          if (outMime === 'image/webp' && blob.type !== 'image/webp') {
+            setError(
+              L(
+                'errWebpUnsupported',
+                'Your browser cannot encode WebP (canvas.toBlob fell back to PNG). Use a current Chrome, Edge, Firefox, or Safari 14+, or choose PNG output.',
+              ),
+            )
+            setResult(null)
+            return
+          }
+          setError('')
           if (outUrlRef.current) URL.revokeObjectURL(outUrlRef.current)
           const url = URL.createObjectURL(blob)
           outUrlRef.current = url
@@ -207,7 +243,7 @@ export function ImageResizerClient() {
       cancelled = true
       clearTimeout(timer)
     }
-  }, [imgSrc, natural, targetW, targetH, dimsValid, outMime, isLossy, quality])
+  }, [imgSrc, natural, targetW, targetH, dimsValid, outMime, isLossy, quality, locale])
 
   // 卸载时回收 objectURL
   useEffect(

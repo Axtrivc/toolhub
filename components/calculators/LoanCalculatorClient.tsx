@@ -64,6 +64,8 @@ export function LoanCalculatorClient() {
   const [amount, setAmount] = useState('20000')
   const [rate, setRate] = useState('7.5')
   const [years, setYears] = useState('5')
+  // 展示区是否展开全部期数(默认只显示前 12 期)
+  const [showAll, setShowAll] = useState(false)
 
   const result = useMemo(() => {
     const p = Number(amount)
@@ -72,8 +74,12 @@ export function LoanCalculatorClient() {
     // 年限过短(y < 1/12 ⇒ months = Math.round(0.04×12) = 0)会导致除零 → Infinity/NaN。
     // 要求 months >= 1,即 years >= 1/12(约 0.0833 年),否则显示空结果提示。
     if (p <= 0 || y < 1 / 12 || !isFinite(p) || !isFinite(r) || !isFinite(y)) return null
+    // 负利率会算出负利息;期限过长会生成数百万行摊销表卡死页面,均直接拦截(0% 利率合法)。
+    if (r < 0) return { error: L('errNegativeRate', 'Interest rate cannot be negative — enter 0% or more.') }
+    if (y > 50) return { error: L('errTermTooLong', 'Loan term is too long — 50 years (600 months) maximum.') }
     return calcLoan(p, r, y)
-  }, [amount, rate, years])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [amount, rate, years, locale])
 
   // 一键加载示例(典型房贷:$400k / 6.8% / 30 年),数据来自 lib/tool-samples.ts
   const handleLoadSample = useCallback(() => {
@@ -89,6 +95,9 @@ export function LoanCalculatorClient() {
     if (!result) {
       return L('summaryEmpty', 'Enter loan amount, interest rate, and term to see your monthly payment.')
     }
+    if ('error' in result) {
+      return `${L('summaryErrorPrefix', 'Loan calculator: ')}${result.error}`
+    }
     return [
       L('summaryTitle', 'Loan Calculation Summary'),
       `  ${L('sLoanAmount', 'Loan amount:')} $${Number(amount).toLocaleString(localeTag)}`,
@@ -102,9 +111,9 @@ export function LoanCalculatorClient() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [result, amount, rate, years, locale])
 
-  // CSV 导出:输入 + 结果 + 前 12 期还款明细
+  // CSV 导出:输入 + 结果 + 完整还款明细(全部期数,与下方展示区的"显示全部"无关)
   const csvContent = useMemo(() => {
-    if (!result) return summary
+    if (!result || 'error' in result) return summary
     const rows: string[][] = [
       [L('csvField', 'Field'), L('csvValue', 'Value')],
       [L('csvLoanAmount', 'Loan amount'), `$${Number(amount).toLocaleString(localeTag)}`],
@@ -121,7 +130,7 @@ export function LoanCalculatorClient() {
         L('thInterest', 'Interest'),
         L('thBalance', 'Balance'),
       ],
-      ...result.schedule.slice(0, 12).map((r) => [
+      ...result.schedule.map((r) => [
         String(r.month),
         fmtMoney(r.payment),
         fmtMoney(r.principal),
@@ -135,8 +144,9 @@ export function LoanCalculatorClient() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [result, amount, rate, years, summary, locale])
 
-  // 只显示前 12 个月,避免列表过长(完整表可经下方 Download 导出 CSV)
-  const displaySchedule = result ? [result.schedule.slice(0, 12)].flat() : []
+  // 展示区默认只显示前 12 期,可切换显示全部(完整表始终可经下方 Download 导出 CSV)
+  const displaySchedule =
+    result && !('error' in result) ? (showAll ? result.schedule : result.schedule.slice(0, 12)) : []
 
   return (
     <div className="space-y-6">
@@ -173,7 +183,9 @@ export function LoanCalculatorClient() {
       </div>
 
       {/* 结果区 */}
-      {result ? (
+      {result && 'error' in result ? (
+        <div className="rounded-lg border border-red-200 bg-red-50 p-4 text-sm text-red-700">⚠️ {result.error}</div>
+      ) : result ? (
         <>
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
             <ResultCard
@@ -193,11 +205,24 @@ export function LoanCalculatorClient() {
             />
           </div>
 
-          {/* 还款明细表(前 12 期) */}
+          {/* 还款明细表(默认前 12 期,可展开全部) */}
           <div>
-            <h3 className="mb-2 text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>
-              {L('amortTitle', 'Amortization schedule (first 12 months)')}
-            </h3>
+            <div className="mb-2 flex items-center justify-between">
+              <h3 className="text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>
+                {L('amortTitle', 'Amortization schedule ')}
+                {showAll ? `(${L('optAll', 'all ')}${result.months} ${L('months', 'months')})` : `(${L('first12Months', 'first 12 months')})`}
+              </h3>
+              {result.schedule.length > 12 && (
+                <button
+                  type="button"
+                  onClick={() => setShowAll((s) => !s)}
+                  className="text-xs font-medium underline underline-offset-2"
+                  style={{ color: 'rgb(var(--text-muted))' }}
+                >
+                  {showAll ? L('showFirst12', 'Show first 12') : `${L('showAll', 'Show all ')}${result.schedule.length}`}
+                </button>
+              )}
+            </div>
             <div className="overflow-x-auto rounded-lg border" style={{ borderColor: 'rgb(var(--border-strong))' }}>
               <table className="w-full text-left text-sm">
                 <thead className="text-xs uppercase" style={{ backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text-subtle))' }}>

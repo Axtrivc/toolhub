@@ -32,6 +32,10 @@ export const calorieCalculatorL10n: ToolL10n = {
       'outSub.lose': '−0.25 kg/周',
       'out.gain': '轻度增重',
       'outSub.gain': '+0.25 kg/周',
+      'out.lose500': '减重',
+      'outSub.lose500': '−0.5 kg/周',
+      'out.gain500': '增重',
+      'outSub.gain500': '+0.5 kg/周',
       note: '🔥 BMR = 完全静息时消耗的热量。TDEE = 包含活动在内的每日总消耗。摄入低于 TDEE 即可减重。',
     },
     useCases: [
@@ -71,6 +75,10 @@ export const calorieCalculatorL10n: ToolL10n = {
       'outSub.lose': '−0.25 kg/semana',
       'out.gain': 'Ganancia ligera',
       'outSub.gain': '+0.25 kg/semana',
+      'out.lose500': 'Pérdida de peso',
+      'outSub.lose500': '−0,5 kg/semana',
+      'out.gain500': 'Ganancia de peso',
+      'outSub.gain500': '+0,5 kg/semana',
       note: '🔥 BMR = calorías quemadas en reposo absoluto. TDEE = quema diaria total incluyendo actividad. Consume menos que el TDEE para perder peso.',
     },
     useCases: [
@@ -110,6 +118,10 @@ export const calorieCalculatorL10n: ToolL10n = {
       'outSub.lose': '−0.25 kg/Woche',
       'out.gain': 'Leichte Zunahme',
       'outSub.gain': '+0.25 kg/Woche',
+      'out.lose500': 'Gewichtsverlust',
+      'outSub.lose500': '−0.5 kg/Woche',
+      'out.gain500': 'Gewichtszunahme',
+      'outSub.gain500': '+0.5 kg/Woche',
       note: '🔥 BMR = Kalorienverbrauch in völliger Ruhe. TDEE = täglicher Gesamtverbrauch inkl. Aktivität. Iss weniger als den TDEE, um abzunehmen.',
     },
     useCases: [

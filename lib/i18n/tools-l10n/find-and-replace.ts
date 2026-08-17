@@ -7,9 +7,17 @@ import type { ToolL10n } from '../tool-l10n'
 export const findAndReplaceL10n: ToolL10n = {
   zh: {
     ui: {
-      inputLabel: '格式:文本 ||| 查找 ||| 替换\n(用 " ||| " 分隔)',
+      inputLabel: '你的文本',
       outputLabel: '结果',
-      note: '🔍 用 " ||| " 分隔你的文本、查找内容和替换内容。示例:hello world ||| world ||| there',
+      placeholder: '输入或粘贴文本...',
+      resultPlaceholder: '结果将显示在这里...',
+      findLabel: '查找',
+      replaceLabel: '替换为',
+      caseSensitive: '区分大小写',
+      regexLabel: '正则表达式',
+      invalidRegex: '⚠️ 正则表达式无效——请检查模式语法',
+      clear: '清空',
+      note: '🔍 替换所有匹配。勾选「正则表达式」可用模式匹配(如 \\d+),替换串支持 $1 反向引用。默认不区分大小写,勾选「区分大小写」后区分。',
     },
     useCases: [
       '在长文档里批量替换某个术语',
@@ -18,15 +26,23 @@ export const findAndReplaceL10n: ToolL10n = {
       '分享前抹掉敏感数据',
     ],
     faqs: [
-      { q: '搜索区分大小写吗?', a: '区分——"Cat" 和 "cat" 是不同的。要做不区分大小写的替换,请先把整段文本统一成一种大小写,再替换。' },
-      { q: '能用正则表达式吗?', a: '这个基础版本只做字面匹配。正则支持可能会在后续版本中加入。' },
+      { q: '搜索区分大小写吗?', a: '默认不区分——"Cat" 会匹配 "cat"。勾选「区分大小写」后,只有大小写完全一致才算匹配。' },
+      { q: '能用正则表达式吗?', a: '能。勾选「正则表达式」后,查找框按正则模式匹配(如 \\d+、[a-z]+),替换串可用 $1、$& 等反向引用;模式非法时会显示友好提示而不是报错。' },
     ],
   },
   es: {
     ui: {
-      inputLabel: 'Formato: texto ||| buscar ||| reemplazar\n(separa con " ||| ")',
+      inputLabel: 'Tu texto',
       outputLabel: 'Resultado',
-      note: '🔍 Separa tu texto, término de búsqueda y reemplazo con " ||| ". Ejemplo: hello world ||| world ||| there',
+      placeholder: 'Escribe o pega texto...',
+      resultPlaceholder: 'El resultado aparecerá aquí...',
+      findLabel: 'Buscar',
+      replaceLabel: 'Reemplazar con',
+      caseSensitive: 'Distinguir mayúsculas',
+      regexLabel: 'Expresión regular',
+      invalidRegex: '⚠️ Expresión regular no válida — revisa la sintaxis del patrón',
+      clear: 'Limpiar',
+      note: '🔍 Reemplaza todas las coincidencias. Activa «Expresión regular» para usar patrones (p. ej. \\d+); $1 funciona en el reemplazo. Por defecto no distingue mayúsculas; marca «Distinguir mayúsculas» para distinguirlas.',
     },
     useCases: [
       'reemplazar un término a lo largo de un documento largo',
@@ -35,15 +51,23 @@ export const findAndReplaceL10n: ToolL10n = {
       'censurar datos sensibles antes de compartir el texto',
     ],
     faqs: [
-      { q: '¿La búsqueda distingue mayúsculas y minúsculas?', a: 'Sí — «Cat» y «cat» son distintas. Para un reemplazo sin distinción, pasa todo el texto a un mismo formato antes de reemplazar.' },
-      { q: '¿Puedo usar expresiones regulares?', a: 'Esta versión básica solo coincide con texto literal. El soporte de regex podría llegar en una próxima actualización.' },
+      { q: '¿La búsqueda distingue mayúsculas y minúsculas?', a: 'Por defecto no — «Cat» coincide con «cat». Activa «Distinguir mayúsculas» para que solo coincidan las coincidencias exactas.' },
+      { q: '¿Puedo usar expresiones regulares?', a: 'Sí. Con «Expresión regular» activado, el campo de búsqueda coincide por patrón (p. ej. \\d+, [a-z]+) y el reemplazo admite referencias como $1 o $&; un patrón no válido muestra un aviso amable en lugar de un error.' },
     ],
   },
   de: {
     ui: {
-      inputLabel: 'Format: Text ||| suchen ||| ersetzen\n(mit " ||| " trennen)',
+      inputLabel: 'Dein Text',
       outputLabel: 'Ergebnis',
-      note: '🔍 Trenne Text, Suchbegriff und Ersetzung mit " ||| ". Beispiel: hello world ||| world ||| there',
+      placeholder: 'Text eingeben oder einfügen...',
+      resultPlaceholder: 'Ergebnis erscheint hier...',
+      findLabel: 'Suchen',
+      replaceLabel: 'Ersetzen mit',
+      caseSensitive: 'Groß-/Kleinschreibung beachten',
+      regexLabel: 'Regulärer Ausdruck',
+      invalidRegex: '⚠️ Ungültiger regulärer Ausdruck — prüfe die Mustersyntax',
+      clear: 'Leeren',
+      note: '🔍 Ersetzt jedes Vorkommen. Aktiviere „Regulärer Ausdruck“ für Muster (z. B. \\d+); $1-Rückverweise funktionieren in der Ersetzung. Standardmäßig wird die Groß-/Kleinschreibung ignoriert; aktiviere die Option, um sie zu beachten.',
     },
     useCases: [
       'einen Begriff in einem langen Dokument durchgängig ersetzen',
@@ -52,8 +76,8 @@ export const findAndReplaceL10n: ToolL10n = {
       'sensible Daten vor dem Teilen schwärzen',
     ],
     faqs: [
-      { q: 'Wird bei der Suche Groß-/Kleinschreibung unterschieden?', a: 'Ja — „Cat" und „cat" sind verschieden. Für ein case-insensitives Ersetzen wandle zuerst den gesamten Text in eine Schreibweise um und ersetze dann.' },
-      { q: 'Kann ich reguläre Ausdrücke verwenden?', a: 'Diese Grundversion gleicht nur wörtlichen Text ab. Regex-Support könnte in einem späteren Update kommen.' },
+      { q: 'Wird bei der Suche Groß-/Kleinschreibung unterschieden?', a: 'Standardmäßig nein — „Cat" matcht „cat". Aktiviere „Groß-/Kleinschreibung beachten", damit nur exakte Schreibweisen treffen.' },
+      { q: 'Kann ich reguläre Ausdrücke verwenden?', a: 'Ja. Mit aktiviertem „Regulärer Ausdruck" matcht das Suchfeld nach Muster (z. B. \\d+, [a-z]+), und die Ersetzung unterstützt Rückverweise wie $1 oder $&; ein ungültiges Muster zeigt einen freundlichen Hinweis statt eines Fehlers.' },
     ],
   },
 }

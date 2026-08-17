@@ -18,6 +18,7 @@ export const discountCalculatorL10n: ToolL10n = {
     ],
     ui: {
       errDiscountRange: '折扣必须在 0–100% 之间',
+      errNonNegativePrice: '原价不能为负',
       ofOriginal: '占原价',
       'in.price': '原价', 'inSuffix.price': '$', 'in.discount': '折扣', 'inSuffix.discount': '%',
       'out.savings': '你省下', 'out.final': '最终价格', 'out.paid': '你支付', 'outSub.paid': '含折扣后',
@@ -37,6 +38,7 @@ export const discountCalculatorL10n: ToolL10n = {
     ],
     ui: {
       errDiscountRange: 'El descuento debe estar entre 0 y 100 %',
+      errNonNegativePrice: 'El precio original no puede ser negativo',
       ofOriginal: 'del precio original',
       'in.price': 'Precio original', 'inSuffix.price': '$', 'in.discount': 'Descuento', 'inSuffix.discount': '%',
       'out.savings': 'Ahorrado', 'out.final': 'Precio final', 'out.paid': 'Pagas', 'outSub.paid': 'Tras descuento',
@@ -56,6 +58,7 @@ export const discountCalculatorL10n: ToolL10n = {
     ],
     ui: {
       errDiscountRange: 'Der Rabatt muss zwischen 0 und 100 % liegen',
+      errNonNegativePrice: 'Der Originalpreis darf nicht negativ sein',
       ofOriginal: 'vom Originalpreis',
       'in.price': 'Originalpreis', 'inSuffix.price': '$', 'in.discount': 'Rabatt', 'inSuffix.discount': '%',
       'out.savings': 'Du sparst', 'out.final': 'Endpreis', 'out.paid': 'Du zahlst', 'outSub.paid': 'Inklusive Rabatt',

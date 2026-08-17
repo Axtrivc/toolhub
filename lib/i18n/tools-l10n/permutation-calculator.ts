@@ -12,6 +12,7 @@ export const permutationCalculatorL10n: ToolL10n = {
     },
     ui: {
       errRange: '需要 0 ≤ r ≤ n',
+      errIntegers: '请为 n 和 r 输入整数',
       'in.n': '总数 (n)',
       'in.r': '排列 (r)',
       'out.result': '排列数 P(n,r)',
@@ -35,6 +36,7 @@ export const permutationCalculatorL10n: ToolL10n = {
     },
     ui: {
       errRange: 'Se necesita 0 ≤ r ≤ n',
+      errIntegers: 'Introduce números enteros para n y r',
       'in.n': 'Total de elementos (n)',
       'in.r': 'Ordenar (r)',
       'out.result': 'Permutaciones P(n,r)',
@@ -58,6 +60,7 @@ export const permutationCalculatorL10n: ToolL10n = {
     },
     ui: {
       errRange: 'Es gilt 0 ≤ r ≤ n',
+      errIntegers: 'Gib ganze Zahlen für n und r ein',
       'in.n': 'Gesamtanzahl (n)',
       'in.r': 'Anordnen (r)',
       'out.result': 'Permutationen P(n,r)',

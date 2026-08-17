@@ -17,7 +17,9 @@ export const unitPriceCalculatorL10n: ToolL10n = {
     ui: {
       'in.price1': '价格 1', 'in.size1': '规格 1', 'in.unit1': '单位 1', 'in.price2': '价格 2', 'in.size2': '规格 2', 'in.unit2': '单位 2',
       'opt.unit1.g': '克 (g)', 'opt.unit1.ml': '毫升 (ml)', 'opt.unit1.ct': '件 (ct)', 'opt.unit1.kg': '千克 (kg)',
+      'opt.unit1.oz': '盎司 (oz)', 'opt.unit1.lb': '磅 (lb)', 'opt.unit1.l': '升 (l)', 'opt.unit1.mg': '毫克 (mg)',
       'opt.unit2.g': '克 (g)', 'opt.unit2.ml': '毫升 (ml)', 'opt.unit2.ct': '件 (ct)', 'opt.unit2.kg': '千克 (kg)',
+      'opt.unit2.oz': '盎司 (oz)', 'opt.unit2.lb': '磅 (lb)', 'opt.unit2.l': '升 (l)', 'opt.unit2.mg': '毫克 (mg)',
       'out.unit1price': '选项 1 单价', 'out.unit2price': '选项 2 单价', 'out.winner': '更划算',
       note: '🛒 比较不同包装的真实性价比。大包装未必每单位更便宜。',
     },
@@ -34,7 +36,9 @@ export const unitPriceCalculatorL10n: ToolL10n = {
     ui: {
       'in.price1': 'Precio 1', 'in.size1': 'Tamaño 1', 'in.unit1': 'Unidad 1', 'in.price2': 'Precio 2', 'in.size2': 'Tamaño 2', 'in.unit2': 'Unidad 2',
       'opt.unit1.g': 'gramos (g)', 'opt.unit1.ml': 'mililitros (ml)', 'opt.unit1.ct': 'unidades (ct)', 'opt.unit1.kg': 'kilogramos (kg)',
+      'opt.unit1.oz': 'onzas (oz)', 'opt.unit1.lb': 'libras (lb)', 'opt.unit1.l': 'litros (l)', 'opt.unit1.mg': 'miligramos (mg)',
       'opt.unit2.g': 'gramos (g)', 'opt.unit2.ml': 'mililitros (ml)', 'opt.unit2.ct': 'unidades (ct)', 'opt.unit2.kg': 'kilogramos (kg)',
+      'opt.unit2.oz': 'onzas (oz)', 'opt.unit2.lb': 'libras (lb)', 'opt.unit2.l': 'litros (l)', 'opt.unit2.mg': 'miligramos (mg)',
       'out.unit1price': 'Precio unitario opción 1', 'out.unit2price': 'Precio unitario opción 2', 'out.winner': 'Mejor oferta',
       note: '🛒 Compara el valor real entre tamaños de envase. El bote grande no siempre es más barato por unidad.',
     },
@@ -51,7 +55,9 @@ export const unitPriceCalculatorL10n: ToolL10n = {
     ui: {
       'in.price1': 'Preis 1', 'in.size1': 'Größe 1', 'in.unit1': 'Einheit 1', 'in.price2': 'Preis 2', 'in.size2': 'Größe 2', 'in.unit2': 'Einheit 2',
       'opt.unit1.g': 'Gramm (g)', 'opt.unit1.ml': 'Milliliter (ml)', 'opt.unit1.ct': 'Stück (ct)', 'opt.unit1.kg': 'Kilogramm (kg)',
+      'opt.unit1.oz': 'Unzen (oz)', 'opt.unit1.lb': 'Pfund (lb)', 'opt.unit1.l': 'Liter (l)', 'opt.unit1.mg': 'Milligramm (mg)',
       'opt.unit2.g': 'Gramm (g)', 'opt.unit2.ml': 'Milliliter (ml)', 'opt.unit2.ct': 'Stück (ct)', 'opt.unit2.kg': 'Kilogramm (kg)',
+      'opt.unit2.oz': 'Unzen (oz)', 'opt.unit2.lb': 'Pfund (lb)', 'opt.unit2.l': 'Liter (l)', 'opt.unit2.mg': 'Milligramm (mg)',
       'out.unit1price': 'Stückpreis Option 1', 'out.unit2price': 'Stückpreis Option 2', 'out.winner': 'Besseres Angebot',
       note: '🛒 Vergleiche den wahren Wert über Verpackungsgrößen hinweg. Die große Box ist nicht immer pro Einheit günstiger.',
     },

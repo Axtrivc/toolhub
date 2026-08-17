@@ -3,7 +3,7 @@
 import { useState, useMemo } from 'react'
 import { useApp } from '@/components/providers/AppProviders'
 import { tui } from '@/lib/i18n/tool-l10n'
-import { countWords } from '@/lib/text-stats'
+import { countWords, hasCJK } from '@/lib/text-stats'
 
 export interface TextStats {
   characters: number
@@ -43,9 +43,12 @@ function analyzeText(text: string): TextStats {
         .filter(Boolean).length
     : 0
 
-  // 阅读速度:平均 200 词/分钟;演讲速度:130 词/分钟
-  const readingTime = words / 200
-  const speakingTime = words / 130
+  // 阅读速度分口径:纯拉丁文本 200 词/分、朗读 130 词/分;含 CJK 时按字计
+  // (words 为混合口径,CJK 按字数),阅读 350 字/分、朗读 220 字/分——否则
+  // 中文按 200 词/分会高估约 2 倍
+  const cjk = hasCJK(trimmed)
+  const readingTime = words / (cjk ? 350 : 200)
+  const speakingTime = words / (cjk ? 220 : 130)
 
   return {
     characters,

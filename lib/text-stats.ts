@@ -32,9 +32,10 @@ export function countWords(text: string): number {
   return cjkCount + latinTokens.length
 }
 
-/** 句数:中英句末标点均可断句;无标点的非空文本按 1 句 */
+/** 句数:中英句末标点均可断句;无标点的非空文本按 1 句。
+ *  断句前先抹掉小数点("3.14"→"314"),避免 "Pi is 3.14." 被计成 2 句。 */
 export function countSentences(text: string): number {
-  const trimmed = text.trim()
+  const trimmed = text.replace(/(\d)\.(\d)/g, '$1$2').trim()
   if (!trimmed) return 0
   const matches = trimmed.match(/[^.!?。！？…]+[.!?。！？…]+/g)
   if (matches && matches.length > 0) return matches.length

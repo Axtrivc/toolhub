@@ -12,6 +12,7 @@ export const primeFactorizationCalculatorL10n: ToolL10n = {
     },
     ui: {
       errMinTwo: '请输入 ≥ 2 的数',
+      errTooBig: '请输入不超过 1,000,000,000,000(10¹²)的数',
       'in.n': '要分解的数',
       'out.factors': '质因数分解',
       note: '🧮 每个大于 1 的整数都有唯一的质因数分解(算术基本定理)。',
@@ -33,6 +34,7 @@ export const primeFactorizationCalculatorL10n: ToolL10n = {
     },
     ui: {
       errMinTwo: 'Introduce un número ≥ 2',
+      errTooBig: 'Introduce un número ≤ 1 000 000 000 000 (10¹²)',
       'in.n': 'Número a factorizar',
       'out.factors': 'Factorización en primos',
       note: '🧮 Cada entero > 1 tiene una factorización en primos única (teorema fundamental de la aritmética).',
@@ -54,6 +56,7 @@ export const primeFactorizationCalculatorL10n: ToolL10n = {
     },
     ui: {
       errMinTwo: 'Gib eine Zahl ≥ 2 ein',
+      errTooBig: 'Gib eine Zahl ≤ 1.000.000.000.000 (10¹²) ein',
       'in.n': 'Zu faktorisierende Zahl',
       'out.factors': 'Primfaktorzerlegung',
       note: '🧮 Jede ganze Zahl > 1 hat eine eindeutige Primfaktorzerlegung (Fundamentalsatz der Arithmetik).',

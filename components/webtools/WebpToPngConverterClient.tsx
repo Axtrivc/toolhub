@@ -309,7 +309,26 @@ export function WebpToPngConverterClient() {
               className="flex flex-wrap items-center justify-between gap-4 rounded-lg border p-4"
               style={{ borderColor: 'rgb(var(--border))', backgroundColor: 'rgb(var(--bg-card))' }}
             >
-              <div className="text-sm" style={{ color: 'rgb(var(--text))' }}>
+              {/* 输出预览:棋盘格底衬出 PNG 的 alpha 透明(JPEG 已被背景色压平) */}
+              <div
+                className="flex h-24 w-32 shrink-0 items-center justify-center overflow-hidden rounded-lg border"
+                style={{
+                  borderColor: 'rgb(var(--border))',
+                  backgroundColor: 'rgb(var(--bg-subtle))',
+                  backgroundImage:
+                    'linear-gradient(45deg, rgb(var(--border) / 0.5) 25%, transparent 25%, transparent 75%, rgb(var(--border) / 0.5) 75%), linear-gradient(45deg, rgb(var(--border) / 0.5) 25%, transparent 25%, transparent 75%, rgb(var(--border) / 0.5) 75%)',
+                  backgroundSize: '12px 12px',
+                  backgroundPosition: '0 0, 6px 6px',
+                }}
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={output.url}
+                  alt={L('outputPreviewAlt', 'Output preview')}
+                  className="max-h-24 max-w-full object-contain"
+                />
+              </div>
+              <div className="min-w-0 flex-1 text-sm" style={{ color: 'rgb(var(--text))' }}>
                 <span className="font-semibold">{format === 'png' ? L('png', 'PNG') : L('jpeg', 'JPEG')} {L('outputSuffix', 'output')}</span>
                 <span className="ml-2 font-mono text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>
                   {formatBytes(output.size)} · {source.width} × {source.height} px

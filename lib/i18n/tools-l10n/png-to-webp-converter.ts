@@ -27,6 +27,7 @@ export const pngToWebpConverterL10n: ToolL10n = {
       'uploadPrompt': '点击上传或拖放',
       'uploadedSourceAlt': '已上传的原图',
       'webpLabel': 'WebP',
+      'webpPreviewAlt': 'WebP 输出预览',
       'webpQualityLabel': 'WebP 质量 —',
     },
     useCases: [
@@ -72,6 +73,7 @@ export const pngToWebpConverterL10n: ToolL10n = {
       'uploadPrompt': 'Clic para subir o arrastra',
       'uploadedSourceAlt': 'Origen subido',
       'webpLabel': 'WebP',
+      'webpPreviewAlt': 'Vista previa de la salida WebP',
       'webpQualityLabel': 'Calidad WebP —',
     },
     useCases: [
@@ -117,6 +119,7 @@ export const pngToWebpConverterL10n: ToolL10n = {
       'uploadPrompt': 'Zum Hochladen klicken oder hineinziehen',
       'uploadedSourceAlt': 'Hochgeladene Quelle',
       'webpLabel': 'WebP',
+      'webpPreviewAlt': 'WebP-Ausgabevorschau',
       'webpQualityLabel': 'WebP-Qualität —',
     },
     useCases: [

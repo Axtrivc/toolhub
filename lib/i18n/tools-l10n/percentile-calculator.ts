@@ -15,7 +15,7 @@ export const percentileCalculatorL10n: ToolL10n = {
       'in.p': '百分位数',
       'inSuffix.p': '%',
       'out.result': '百分位值',
-      note: '📈 第 90 百分位表示 90% 的数值低于此数。常用于考试成绩和性能指标。',
+      note: '📈 第 90 百分位表示 90% 的数值低于此数。采用线性插值(inclusive 口径,同 Excel 的 PERCENTILE.INC)。常用于考试成绩和性能指标。',
     },
     useCases: [
       '考试成绩:SAT、GRE 百分位排名',
@@ -37,7 +37,7 @@ export const percentileCalculatorL10n: ToolL10n = {
       'in.p': 'Percentil',
       'inSuffix.p': '%',
       'out.result': 'Valor del percentil',
-      note: '📈 El percentil 90 significa que el 90 % de los valores están por debajo de este número. Se usa en notas de exámenes y métricas de rendimiento.',
+      note: '📈 El percentil 90 significa que el 90 % de los valores están por debajo de este número. Usa interpolación lineal (método inclusivo, igual que PERCENTILE.INC de Excel). Común en notas de exámenes y métricas de rendimiento.',
     },
     useCases: [
       'notas de exámenes: percentiles de SAT y GRE',
@@ -59,7 +59,7 @@ export const percentileCalculatorL10n: ToolL10n = {
       'in.p': 'Perzentil',
       'inSuffix.p': '%',
       'out.result': 'Perzentilwert',
-      note: '📈 Das 90. Perzentil bedeutet, dass 90 % der Werte unter dieser Zahl liegen. Verwendet in Prüfungsergebnissen und Leistungskennzahlen.',
+      note: '📈 Das 90. Perzentil bedeutet, dass 90 % der Werte unter dieser Zahl liegen. Verwendet lineare Interpolation (inklusive Methode, wie Excel PERCENTILE.INC). Häufig bei Prüfungsergebnissen und Leistungskennzahlen.',
     },
     useCases: [
       'Prüfungsergebnisse: SAT- und GRE-Perzentile',

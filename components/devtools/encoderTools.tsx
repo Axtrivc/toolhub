@@ -1,5 +1,8 @@
 'use client'
 
+import { useState } from 'react'
+import { useApp } from '@/components/providers/AppProviders'
+import { tui } from '@/lib/i18n/tool-l10n'
 import { EncoderDecoderTool } from '../tools/EncoderDecoderTool'
 
 /**
@@ -40,7 +43,10 @@ export function Base64CodecTool({ initialMode = 'encode', slug = 'base64-encoder
         defaultInput: 'SGVsbG8gV29ybGQ=',
         transform: (t) => {
           try {
-            const bin = atob(t.replace(/\s+/g, ''))
+            // 兼容 base64url(-/_ 字符,如 JWT 段)与省略 padding 的输入
+            let s = t.replace(/\s+/g, '').replace(/-/g, '+').replace(/_/g, '/')
+            while (s.length % 4) s += '='
+            const bin = atob(s)
             const bytes = new Uint8Array(bin.length)
             for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i)
             return new TextDecoder().decode(bytes)
@@ -56,31 +62,84 @@ export function Base64CodecTool({ initialMode = 'encode', slug = 'base64-encoder
 
 // ── URL 编解码 ──
 export function URLCodecTool({ initialMode = 'encode', slug = 'url-encoder' }: { initialMode?: 'encode' | 'decode'; slug?: string }) {
+  const { locale } = useApp()
+  const L = (key: string, fb: string) => tui(slug, locale, key, fb)
+  // 编码口径:Component (encodeURIComponent) ↔ Full URI (encodeURI);
+  // 解码另提供可选的 + → 空格开关(表单提交的 query string 里 + 表示空格)。
+  const [fullUri, setFullUri] = useState(false)
+  const [plusToSpace, setPlusToSpace] = useState(false)
+
   return (
-    <EncoderDecoderTool
-      initialMode={initialMode}
-      slug={slug}
-      encode={{
-        inputLabel: 'Text to encode',
-        outputLabel: 'URL-encoded',
-        defaultInput: 'hello world & friends?',
-        transform: (t) => encodeURIComponent(t),
-        note: '🔗 Encodes special characters for safe use in URLs. Spaces become %20, & becomes %26.',
-      }}
-      decode={{
-        inputLabel: 'URL-encoded text',
-        outputLabel: 'Decoded',
-        defaultInput: 'hello%20world%20%26%20friends%3F',
-        transform: (t) => {
-          try {
-            return decodeURIComponent(t)
-          } catch {
-            return '⚠️ Invalid'
-          }
-        },
-        note: '🔗 Decodes %20 back to spaces, %26 back to &, etc.',
-      }}
-    />
+    <div className="space-y-5">
+      {/* 编码口径切换(Component ↔ Full URI) */}
+      <div className="flex flex-wrap items-center gap-2">
+        <span className="text-xs font-medium uppercase tracking-wide" style={{ color: 'rgb(var(--text-subtle))' }}>
+          {L('uriTarget', 'Target')}
+        </span>
+        <div
+          className="inline-flex overflow-hidden rounded-lg border"
+          style={{ borderColor: 'rgb(var(--border-strong))' }}
+          role="group"
+          aria-label={L('uriTarget', 'Target')}
+        >
+          {([
+            { key: 'component', label: L('componentMode', 'Component (encodeURIComponent)'), active: !fullUri, onClick: () => setFullUri(false) },
+            { key: 'fullUri', label: L('fullUriMode', 'Full URI (encodeURI)'), active: fullUri, onClick: () => setFullUri(true) },
+          ] as const).map((opt) => (
+            <button
+              key={opt.key}
+              type="button"
+              onClick={opt.onClick}
+              aria-pressed={opt.active}
+              className={`px-4 py-1.5 text-sm font-medium transition-colors ${opt.active ? 'text-white' : ''}`}
+              style={
+                opt.active
+                  ? { backgroundColor: 'rgb(37 99 235)' } // brand-600
+                  : { backgroundColor: 'rgb(var(--bg-card))', color: 'rgb(var(--text-muted))' }
+              }
+            >
+              {opt.label}
+            </button>
+          ))}
+        </div>
+        {/* + → 空格(仅解码生效):处理 application/x-www-form-urlencoded 的 query */}
+        <label className="ml-1 flex items-center gap-2 text-sm text-slate-700">
+          <input
+            type="checkbox"
+            checked={plusToSpace}
+            onChange={(e) => setPlusToSpace(e.target.checked)}
+            className="h-4 w-4 rounded border-slate-300 text-brand-600"
+          />
+          {L('plusToSpace', 'Treat + as space when decoding')}
+        </label>
+      </div>
+
+      <EncoderDecoderTool
+        initialMode={initialMode}
+        slug={slug}
+        encode={{
+          inputLabel: 'Text to encode',
+          outputLabel: 'URL-encoded',
+          defaultInput: 'hello world & friends?',
+          transform: (t) => (fullUri ? encodeURI(t) : encodeURIComponent(t)),
+          note: '🔗 Encodes special characters for safe use in URLs. Spaces become %20, & becomes %26.',
+        }}
+        decode={{
+          inputLabel: 'URL-encoded text',
+          outputLabel: 'Decoded',
+          defaultInput: 'hello%20world%20%26%20friends%3F',
+          transform: (t) => {
+            try {
+              const s = plusToSpace ? t.replace(/\+/g, ' ') : t
+              return fullUri ? decodeURI(s) : decodeURIComponent(s)
+            } catch {
+              return '⚠️ Invalid'
+            }
+          },
+          note: '🔗 Decodes %20 back to spaces, %26 back to &, etc.',
+        }}
+      />
+    </div>
   )
 }
 

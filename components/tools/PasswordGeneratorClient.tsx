@@ -56,12 +56,12 @@ export function PasswordGeneratorClient() {
       {/* 密码展示区 */}
       <div>
         <div className="relative">
-          <div className="flex items-stretch overflow-hidden rounded-lg border-2 border-slate-200 bg-slate-50">
+          <div className="flex items-stretch overflow-hidden rounded-lg border-2 border-slate-200 bg-slate-50 dark:border-slate-700 dark:bg-slate-800">
             <code
-              className="flex-1 break-all px-4 py-4 font-mono text-lg text-slate-900 sm:text-xl"
+              className="flex-1 break-all px-4 py-4 font-mono text-lg text-slate-900 dark:text-slate-100 sm:text-xl"
               aria-label={L('generatedPassword', 'Generated password')}
             >
-              {password || <span className="text-slate-300">{L('clickGenerate', 'Click generate')}</span>}
+              {password || <span className="text-slate-300 dark:text-slate-600">{L('clickGenerate', 'Click generate')}</span>}
             </code>
           </div>
         </div>
@@ -73,12 +73,12 @@ export function PasswordGeneratorClient() {
               <div
                 key={i}
                 className={`flex-1 rounded-full transition-colors ${
-                  strength.score >= i ? STRENGTH_COLORS[strength.score] : 'bg-slate-200'
+                  strength.score >= i ? STRENGTH_COLORS[strength.score] : 'bg-slate-200 dark:bg-slate-700'
                 }`}
               />
             ))}
           </div>
-          <span className="shrink-0 whitespace-nowrap text-right text-xs font-medium text-slate-600 sm:text-sm">
+          <span className="shrink-0 whitespace-nowrap text-right text-xs font-medium text-slate-600 dark:text-slate-400 sm:text-sm">
             {L(STRENGTH_KEYS[strength.score].key, STRENGTH_KEYS[strength.score].fb)} ({strength.entropyBits} {L('bits', 'bits')})
           </span>
         </div>
@@ -98,10 +98,10 @@ export function PasswordGeneratorClient() {
       {/* 长度滑块 */}
       <div>
         <div className="mb-2 flex items-center justify-between">
-          <label htmlFor="length" className="text-sm font-medium text-slate-700">
+          <label htmlFor="length" className="text-sm font-medium text-slate-700 dark:text-slate-300">
             {L('length', 'Length')}
           </label>
-          <span className="rounded-md bg-brand-50 px-2 py-0.5 font-mono text-sm font-semibold text-brand-600">
+          <span className="rounded-md bg-brand-50 px-2 py-0.5 font-mono text-sm font-semibold text-brand-600 dark:bg-brand-900/30 dark:text-brand-400">
             {opts.length}
           </span>
         </div>
@@ -145,7 +145,7 @@ export function PasswordGeneratorClient() {
         />
       </div>
 
-      <p className="rounded-md bg-slate-50 p-3 text-xs text-slate-500">
+      <p className="rounded-md bg-slate-50 p-3 text-xs text-slate-500 dark:bg-slate-800 dark:text-slate-400">
         {L('privacyNote', '🔒 Privacy note: Passwords are generated locally in your browser using the Web Crypto API and never sent over the network.')}
       </p>
     </div>
@@ -162,7 +162,7 @@ function Toggle({
   label: string
 }) {
   return (
-    <label className="flex cursor-pointer items-center gap-2 rounded-lg border border-slate-200 p-3 text-sm text-slate-700 transition hover:bg-slate-50">
+    <label className="flex cursor-pointer items-center gap-2 rounded-lg border border-slate-200 p-3 text-sm text-slate-700 transition hover:bg-slate-50 dark:border-slate-700 dark:text-slate-300 dark:hover:bg-slate-800">
       <input
         type="checkbox"
         checked={checked}

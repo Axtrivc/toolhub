@@ -13,6 +13,7 @@ export const densityConverterL10n: ToolL10n = {
       'unit.gml': 'g/mL',
       'unit.kgm3': 'kg/m³',
       'unit.lbft3': 'lb/ft³',
+      'unit.lbgal': 'lb/US gal',
       'unit.lbin3': 'lb/in³',
     },
     useCases: [
@@ -32,6 +33,7 @@ export const densityConverterL10n: ToolL10n = {
       'unit.gml': 'g/mL',
       'unit.kgm3': 'kg/m³',
       'unit.lbft3': 'lb/ft³',
+      'unit.lbgal': 'lb/US gal',
       'unit.lbin3': 'lb/in³',
     },
     useCases: [
@@ -51,6 +53,7 @@ export const densityConverterL10n: ToolL10n = {
       'unit.gml': 'g/mL',
       'unit.kgm3': 'kg/m³',
       'unit.lbft3': 'lb/ft³',
+      'unit.lbgal': 'lb/US gal',
       'unit.lbin3': 'lb/in³',
     },
     useCases: [

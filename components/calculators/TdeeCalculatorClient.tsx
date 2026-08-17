@@ -82,11 +82,14 @@ export function TdeeCalculatorClient() {
     }
   }, [result])
 
+  // 复制摘要里 Sex 取本地化值(optMale/optFemale),不输出原始枚举 male/female
+  const sexLabel = sex === 'male' ? L('optMale', 'Male') : L('optFemale', 'Female')
+
   const summary = useMemo(() => {
     if (!result || !goals) return L('summaryEmpty', 'Enter your stats to calculate TDEE.')
     return [
       L('summaryTitle', 'TDEE Calculation Summary'),
-      `  ${L('sSex', 'Sex: ')}${sex}, ${L('sAge', 'Age: ')}${age}, ${L('sWeight', 'Weight: ')}${weight} kg, ${L('sHeight', 'Height: ')}${height} cm`,
+      `  ${L('sSex', 'Sex: ')}${sexLabel}, ${L('sAge', 'Age: ')}${age}, ${L('sWeight', 'Weight: ')}${weight} kg, ${L('sHeight', 'Height: ')}${height} cm`,
       `  ${L('sActivityFactor', 'Activity factor: ')}${activity}`,
       `  ${L('sBmr', 'BMR (Mifflin-St Jeor): ')}${round(result.bmr)} kcal/day`,
       `  ${L('sTdee', 'TDEE (maintenance): ')}${round(result.tdee)} kcal/day`,

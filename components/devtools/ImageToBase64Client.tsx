@@ -32,6 +32,21 @@ function mimeFromDataUrl(dataUrl: string): string {
   return m ? m[1] : 'image/png'
 }
 
+/** HTML 属性转义:文件名含 " & < > 时保证生成的 <img> alt 不破损 */
+function escapeAttr(s: string): string {
+  return s
+    .replace(/&/g, '&amp;')
+    .replace(/"/g, '&quot;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+}
+
+/** data URI 中 "," 之后的纯 Base64 负载(排除 data:image/...;base64, 前缀) */
+function base64Payload(dataUrl: string): string {
+  const idx = dataUrl.indexOf(',')
+  return idx >= 0 ? dataUrl.slice(idx + 1) : dataUrl
+}
+
 export function ImageToBase64Client() {
   const { locale } = useApp()
   const L = (key: string, fb: string) => tui('image-to-base64', locale, key, fb)
@@ -85,7 +100,7 @@ export function ImageToBase64Client() {
   )
 
   const mime = img ? mimeFromDataUrl(img.dataUrl) : 'image/png'
-  const imgTag = img ? `<img src="${img.dataUrl}" alt="${img.name}" />` : ''
+  const imgTag = img ? `<img src="${img.dataUrl}" alt="${escapeAttr(img.name)}" />` : ''
   const cssBg = img ? `background-image: url("${img.dataUrl}");` : ''
 
   return (
@@ -139,7 +154,7 @@ export function ImageToBase64Client() {
                 {img.name}
               </div>
               <div className="text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>
-                {mime} · {formatBytes(img.size)} · Base64 size ≈ {formatBytes(Math.ceil((img.dataUrl.length * 3) / 4))}
+                {mime} · {formatBytes(img.size)} · Base64 size ≈ {formatBytes(Math.ceil((base64Payload(img.dataUrl).length * 3) / 4))}
               </div>
             </div>
             <label htmlFor="img-reupload" className="btn btn-secondary cursor-pointer text-xs">

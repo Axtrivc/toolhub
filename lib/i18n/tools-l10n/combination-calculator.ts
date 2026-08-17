@@ -12,10 +12,14 @@ export const combinationCalculatorL10n: ToolL10n = {
     },
     ui: {
       errRange: '需要 0 ≤ r ≤ n',
+      errIntegers: '请为 n 和 r 输入整数',
       'in.n': '总数 (n)',
       'in.r': '选取 (r)',
       'out.result': '组合数 C(n,r)',
       'out.formula': '公式',
+      'out.odds': '中奖概率',
+      'outSub.odds': '随机选一组恰好命中',
+      oddsOneIn: '{c} 分之一',
       note: '🃏 组合:从 n 个中选 r 个,不考虑顺序。彩票概率就用这个。',
     },
     useCases: [
@@ -35,10 +39,14 @@ export const combinationCalculatorL10n: ToolL10n = {
     },
     ui: {
       errRange: 'Se necesita 0 ≤ r ≤ n',
+      errIntegers: 'Introduce números enteros para n y r',
       'in.n': 'Total de elementos (n)',
       'in.r': 'Elegir (r)',
       'out.result': 'Combinaciones C(n,r)',
       'out.formula': 'Fórmula',
+      'out.odds': 'Probabilidad',
+      'outSub.odds': 'Acertar una elección concreta al azar',
+      oddsOneIn: '1 entre {c}',
       note: '🃏 Combinaciones: elegir r elementos de n, el orden no importa. Las probabilidades de lotería usan esto.',
     },
     useCases: [
@@ -58,10 +66,14 @@ export const combinationCalculatorL10n: ToolL10n = {
     },
     ui: {
       errRange: 'Es gilt 0 ≤ r ≤ n',
+      errIntegers: 'Gib ganze Zahlen für n und r ein',
       'in.n': 'Gesamtanzahl (n)',
       'in.r': 'Auswählen (r)',
       'out.result': 'Kombinationen C(n,r)',
       'out.formula': 'Formel',
+      'out.odds': 'Chance',
+      'outSub.odds': 'Eine bestimmte Auswahl zufällig treffen',
+      oddsOneIn: '1 zu {c}',
       note: '🃏 Kombinationen: r Elemente aus n wählen, die Reihenfolge spielt keine Rolle. Lottochancen nutzen das.',
     },
     useCases: [

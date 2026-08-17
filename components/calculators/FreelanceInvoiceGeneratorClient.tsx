@@ -11,6 +11,11 @@ const CURRENCIES: { code: string; symbol: string; decimals: number }[] = [
   { code: 'GBP', symbol: '£', decimals: 2 },
   { code: 'JPY', symbol: '¥', decimals: 0 },
   { code: 'CNY', symbol: '¥', decimals: 2 },
+  { code: 'CAD', symbol: 'C$', decimals: 2 },
+  { code: 'AUD', symbol: 'A$', decimals: 2 },
+  { code: 'CHF', symbol: 'Fr', decimals: 2 },
+  { code: 'INR', symbol: '₹', decimals: 2 },
+  { code: 'KRW', symbol: '₩', decimals: 0 },
 ]
 
 interface LineItem {
@@ -38,6 +43,10 @@ function toISODate(d: Date): string {
 function escapeHtml(s: string): string {
   return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;')
 }
+
+// 打印窗口注入此 script 在加载后自动弹出打印对话框;
+// 下载存档的 HTML 不带它,避免每次打开存档都弹打印。
+const AUTO_PRINT_SCRIPT = '\n<script>window.onload = function () { window.print(); };</script>'
 
 /**
  * 自由职业者发票生成器:左侧表单 + 右侧实时预览,
@@ -170,14 +179,13 @@ ${itemRows}
   </div>
   ${notesBlock}
 </div>
-<script>window.onload = function () { window.print(); };</script>
 </body>
 </html>`
   }, [rows, taxRate, taxAmount, subtotal, total, notes, invoiceNumber, yourName, yourEmail, clientName, issueDate, dueDate, currency, locale]) // eslint-disable-line react-hooks/exhaustive-deps
 
   const handlePrint = () => {
-    // 用 Blob URL 替代 win.document.write(老 API,部分浏览器已限制)
-    const blob = new Blob([invoiceHtml], { type: 'text/html;charset=utf-8;' })
+    // 用 Blob URL 替代 win.document.write(老 API,部分浏览器已限制);打印窗口注入自动打印 script
+    const blob = new Blob([invoiceHtml + AUTO_PRINT_SCRIPT], { type: 'text/html;charset=utf-8;' })
     const url = URL.createObjectURL(blob)
     const win = window.open(url, '_blank')
     if (!win) {

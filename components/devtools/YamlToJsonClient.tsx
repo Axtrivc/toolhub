@@ -323,19 +323,27 @@ function parseChild(ctx: ParseContext, minIndent: number): unknown {
   return null
 }
 
-function yamlToJson(yaml: string): unknown {
+function yamlToJson(yaml: string): { value: unknown; multiDoc: boolean } {
   const rawLines = yaml.replace(/\r\n/g, '\n').split('\n')
-  // 预处理:去掉文档分隔符 --- 后的内容(只取第一个文档)
+  // 预处理:出现在任何实际内容之前的 --- 只是文档起始分隔符,跳过继续解析;
+  // 之后再遇到 --- 视为多文档流,不支持 → 只取第一个文档并提示。
   const lines: string[] = []
+  let seenContent = false
+  let multiDoc = false
   for (const l of rawLines) {
-    if (/^---\s*$/.test(l)) break
+    if (/^---\s*$/.test(l)) {
+      if (!seenContent) continue
+      multiDoc = true
+      break
+    }
     // tab 在缩进里是非法的
     if (/^\t/.test(l)) throw new Error('Tabs are not allowed for indentation in YAML (use spaces).')
+    if (!(l.trim() === '' || l.trim().startsWith('#'))) seenContent = true
     lines.push(l)
   }
   const ctx: ParseContext = { lines, index: 0 }
   const result = parseBlock(ctx, 0)
-  return result
+  return { value: result, multiDoc }
 }
 
 export function YamlToJsonClient() {
@@ -345,11 +353,11 @@ export function YamlToJsonClient() {
 
   const [input, setInput] = useState('')
 
-  const result = useMemo<{ output?: string; error?: string }>(() => {
+  const result = useMemo<{ output?: string; error?: string; multiDoc?: boolean }>(() => {
     if (!input.trim()) return {}
     try {
       const parsed = yamlToJson(input)
-      return { output: JSON.stringify(parsed, null, 2) }
+      return { output: JSON.stringify(parsed.value, null, 2), multiDoc: parsed.multiDoc }
     } catch (e) {
       return { error: e instanceof Error ? e.message : L('invalidYaml', 'Invalid YAML') }
     }
@@ -395,6 +403,12 @@ export function YamlToJsonClient() {
 
       {result.error && (
         <div className="rounded-lg border border-red-200 bg-red-50 p-4 text-sm text-red-700">⚠️ {result.error}</div>
+      )}
+
+      {result.multiDoc && (
+        <div className="rounded-lg border border-amber-200 bg-amber-50 p-4 text-sm text-amber-800 dark:border-amber-800 dark:bg-amber-950/50 dark:text-amber-300">
+          ⚠️ {L('multiDocWarning', 'Multiple YAML documents detected (---). Only the first document was converted.')}
+        </div>
       )}
 
       {result.output && (

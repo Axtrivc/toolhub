@@ -11,6 +11,9 @@ export const lcmGcdCalculatorL10n: ToolL10n = {
       explain: '用反复取余(欧几里得算法)求 GCD。LCM 由连接两者的恒等式得出——两数相乘再除以 GCD。',
     },
     ui: {
+      errNoValid: '请输入非 0 的整数(如 12, 18, 24)',
+      ignoredEntries: '已忽略:{list}',
+      absUsed: '负数按绝对值处理',
       'in.numbers': '数字(逗号分隔)',
       'out.gcd': 'GCD(最大公约数)',
       'out.lcm': 'LCM(最小公倍数)',
@@ -32,6 +35,9 @@ export const lcmGcdCalculatorL10n: ToolL10n = {
       explain: 'El GCD se halla por restas sucesivas (Euclides). El LCM sigue de la identidad que los une — multiplica y divide entre el GCD.',
     },
     ui: {
+      errNoValid: 'Introduce números enteros distintos de 0 (p. ej. 12, 18, 24)',
+      ignoredEntries: 'ignorados: {list}',
+      absUsed: 'los negativos se tratan como valor absoluto',
       'in.numbers': 'Números (separados por comas)',
       'out.gcd': 'MCD (máximo común divisor)',
       'out.lcm': 'MCM (mínimo común múltiplo)',
@@ -53,6 +59,9 @@ export const lcmGcdCalculatorL10n: ToolL10n = {
       explain: 'Der ggT wird durch fortgesetzte Restbildung (Euklid) gefunden. Das kgV folgt aus der Identität — multiplizieren und durch den ggT teilen.',
     },
     ui: {
+      errNoValid: 'Gib ganze Zahlen außer 0 ein (z. B. 12, 18, 24)',
+      ignoredEntries: 'ignoriert: {list}',
+      absUsed: 'negative Zahlen werden als Betrag behandelt',
       'in.numbers': 'Zahlen (kommagetrennt)',
       'out.gcd': 'ggT (größter gemeinsamer Teiler)',
       'out.lcm': 'kgV (kleinstes gemeinsames Vielfaches)',

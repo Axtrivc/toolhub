@@ -16,10 +16,10 @@ export const incomeTaxEstimatorL10n: ToolL10n = {
     ],
     ui: {
       'in.income': '年收入', 'in.filing': '申报身份',
-      'opt.filing.single': '单身', 'opt.filing.married': '已婚,联合申报',
-      'out.tax': '预估联邦税', 'out.effective': '实际税率', 'out.takehome': '预估到手收入',
-      note: '📊 美国 2026 联邦税率档,已扣标准扣除额(单身 $16,100 / 已婚联合 $32,200)。未含州税和抵免。仅供参考。',
-      chartTitle: '你的收入去了哪里', chartCenter: '收入', 'slice.tax': '联邦税', 'slice.takehome': '到手收入',
+      'opt.filing.single': '单身', 'opt.filing.hoh': '户主', 'opt.filing.married': '已婚,联合申报',
+      'out.tax': '预估联邦税', 'out.effective': '实际税率', 'out.fica': '预估 FICA', 'outSub.fica': '社保 + 医保', 'out.takehome': '预估到手收入', 'outSub.takehome': '扣除联邦税 + FICA 后',
+      note: '📊 美国 2026 联邦税率档,已扣标准扣除额(单身 $16,100 / 户主 $24,150 / 已婚联合 $32,200)。FICA 按社保工资基数上限 $184,500 以内 7.65%、超出部分仅医保 1.45% 估算(忽略超 $200k 的 0.9% 附加税)。未含州税和抵免。仅供参考。',
+      chartTitle: '你的收入去了哪里', chartCenter: '收入', 'slice.tax': '联邦税', 'slice.fica': 'FICA(社保+医保)', 'slice.takehome': '到手收入',
     },
   },
   es: {
@@ -33,10 +33,10 @@ export const incomeTaxEstimatorL10n: ToolL10n = {
     ],
     ui: {
       'in.income': 'Ingresos anuales', 'in.filing': 'Estado civil',
-      'opt.filing.single': 'Soltero', 'opt.filing.married': 'Casado, declaración conjunta',
-      'out.tax': 'Impuesto federal estimado', 'out.effective': 'Tipo efectivo', 'out.takehome': 'Renta neta estimada',
-      note: '📊 Tramos federales EE. UU. 2026 con deducción estándar aplicada ($16,100 individual / $32,200 conjunta). Sin impuesto estatal ni créditos. Solo estimación.',
-      chartTitle: 'A dónde va tu ingreso', chartCenter: 'Ingreso', 'slice.tax': 'Impuesto federal', 'slice.takehome': 'Renta neta',
+      'opt.filing.single': 'Soltero', 'opt.filing.hoh': 'Cabeza de familia', 'opt.filing.married': 'Casado, declaración conjunta',
+      'out.tax': 'Impuesto federal estimado', 'out.effective': 'Tipo efectivo', 'out.fica': 'FICA estimado', 'outSub.fica': 'Seguridad Social + Medicare', 'out.takehome': 'Renta neta estimada', 'outSub.takehome': 'Tras impuesto federal + FICA',
+      note: '📊 Tramos federales EE. UU. 2026 con deducción estándar aplicada ($16,100 individual / $24,150 cabeza de familia / $32,200 conjunta). FICA estimado al 7,65 % hasta la base salarial de la Seguridad Social de $184,500 (1,45 % de Medicare por encima; se ignora el recargo del 0,9 % sobre $200k). Sin impuesto estatal ni créditos. Solo estimación.',
+      chartTitle: 'A dónde va tu ingreso', chartCenter: 'Ingreso', 'slice.tax': 'Impuesto federal', 'slice.fica': 'FICA (Seguridad Social + Medicare)', 'slice.takehome': 'Renta neta',
     },
   },
   de: {
@@ -50,10 +50,10 @@ export const incomeTaxEstimatorL10n: ToolL10n = {
     ],
     ui: {
       'in.income': 'Jahreseinkommen', 'in.filing': 'Steuerklasse',
-      'opt.filing.single': 'Allein', 'opt.filing.married': 'Verheiratet, gemeinsam',
-      'out.tax': 'Geschätzte Bundessteuer', 'out.effective': 'Effektivsteuersatz', 'out.takehome': 'Geschätztes Netto',
-      note: '📊 US-Bundestranchen 2026 mit Standardabzug ($16,100 Single / $32,200 zusammen). Ohne Bundesstaatensteuer und Freibeträge. Nur Schätzung.',
-      chartTitle: 'Wohin dein Einkommen geht', chartCenter: 'Einkommen', 'slice.tax': 'Bundessteuer', 'slice.takehome': 'Nettoeinkommen',
+      'opt.filing.single': 'Allein', 'opt.filing.hoh': 'Haushaltsvorstand', 'opt.filing.married': 'Verheiratet, gemeinsam',
+      'out.tax': 'Geschätzte Bundessteuer', 'out.effective': 'Effektivsteuersatz', 'out.fica': 'Geschätzte FICA', 'outSub.fica': 'Social Security + Medicare', 'out.takehome': 'Geschätztes Netto', 'outSub.takehome': 'Nach Bundessteuer + FICA',
+      note: '📊 US-Bundestranchen 2026 mit Standardabzug ($16,100 Single / $24,150 Haushaltsvorstand / $32,200 zusammen). FICA geschätzt mit 7,65 % bis zur Social-Security-Bemessungsgrenze von $184,500 (darüber 1,45 % Medicare; der 0,9 %-Zuschlag über $200k wird ignoriert). Ohne Bundesstaatensteuer und Freibeträge. Nur Schätzung.',
+      chartTitle: 'Wohin dein Einkommen geht', chartCenter: 'Einkommen', 'slice.tax': 'Bundessteuer', 'slice.fica': 'FICA (Social Security + Medicare)', 'slice.takehome': 'Nettoeinkommen',
     },
   },
 }

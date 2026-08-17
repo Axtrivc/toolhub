@@ -17,6 +17,8 @@ export interface SlugOptions {
   trimSeparators?: boolean
   /** 是否处理常见变音符号(é→e 等),默认 true */
   normalizeUnicode?: boolean
+  /** 是否强制 ASCII 输出(剔除非 ASCII 字符,如汉字/谚文),默认 true */
+  asciiOnly?: boolean
 }
 
 const DEFAULT_OPTIONS: Required<SlugOptions> = {
@@ -26,6 +28,7 @@ const DEFAULT_OPTIONS: Required<SlugOptions> = {
   collapseSeparators: true,
   trimSeparators: true,
   normalizeUnicode: true,
+  asciiOnly: true,
 }
 
 /**
@@ -36,7 +39,7 @@ const DEFAULT_OPTIONS: Required<SlugOptions> = {
  * generateSlug('10 SEO Tips (2024)')     // '10-seo-tips-2024'
  * generateSlug('Café & Résumé')          // 'cafe-resume'
  * generateSlug('How to use Node.js')     // 'how-to-use-nodejs'
- * generateSlug('你好世界 2026')           // '你好世界-2026'(非拉丁文字保留)
+ * generateSlug('你好世界 2026')           // '2026'(默认 asciiOnly:true 剔除非拉丁文字;传 { asciiOnly: false } 保留 '你好世界-2026')
  */
 export function generateSlug(input: string, options: SlugOptions = {}): string {
   const opts = { ...DEFAULT_OPTIONS, ...options }
@@ -62,6 +65,13 @@ export function generateSlug(input: string, options: SlugOptions = {}): string {
     // 移除特殊字符,只保留:Unicode 字母(含汉字等非拉丁文字)、数字、空格、连字符
     // (点号在此一并删除:避免被当成文件扩展名,如 node.js -> nodejs)
     s = s.replace(/[^\p{L}\p{N}\s-]/gu, '')
+  }
+
+  if (opts.asciiOnly) {
+    // 强制 ASCII:剔除非 ASCII 字符(NFD 变音折叠已处理 é→e 一类;汉字等非拉丁
+    // 文字无音译表,替换为空格保留词边界)。主流 slug 工具默认强制 ASCII,
+    // 残留的多余空白由下方分隔符折叠/修剪统一清理
+    s = s.replace(/[^\x20-\x7E]/g, ' ')
   }
 
   // 把空格、点、已有的连字符/下划线统一为目标分隔符

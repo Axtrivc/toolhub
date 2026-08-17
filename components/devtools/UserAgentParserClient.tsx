@@ -11,7 +11,8 @@ import { tui } from '@/lib/i18n/tool-l10n'
  *
  * navigator.userAgent 只在 useEffect / 按钮事件里读取,保证 SSG 预渲染安全
  * (初始 text 为空串,预渲染输出与客户端首帧一致)。
- * 解析顺序敏感:Edge/Opera/Samsung 的 UA 都含 "Chrome",必须先于 Chrome 匹配;
+ * 解析顺序敏感:Edge/Opera/Samsung/Yandex 的 UA 都含 "Chrome",必须先于 Chrome 匹配;
+ * Firefox iOS 的 UA 只含 "FxiOS/" 不含 "Firefox/",需独立分支先于 Firefox 匹配;
  * Android/iOS UA 含 "Linux"/"Mac OS X" 字样,必须先于桌面 OS 匹配。
  */
 
@@ -46,6 +47,15 @@ function parseUserAgent(ua: string): UaResult {
     browserVersion = m[1]
   } else if ((m = ua.match(/SamsungBrowser\/([\d.]+)/))) {
     browser = 'Samsung Internet'
+    browserVersion = m[1]
+  } else if ((m = ua.match(/YaBrowser\/([\d.]+)/))) {
+    browser = 'Yandex Browser'
+    browserVersion = m[1]
+  } else if ((m = ua.match(/OPT\/([\d.]+)/))) {
+    browser = 'Opera Touch'
+    browserVersion = m[1]
+  } else if ((m = ua.match(/FxiOS\/([\d.]+)/))) {
+    browser = 'Firefox iOS'
     browserVersion = m[1]
   } else if ((m = ua.match(/Firefox\/([\d.]+)/))) {
     browser = 'Mozilla Firefox'

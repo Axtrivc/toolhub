@@ -27,6 +27,8 @@ interface ParsedCurl {
   insecure: boolean
   /** -u/--user 的原始值(user:pass),转成 Authorization: Basic 头 */
   user?: string
+  /** 未支持但已安全忽略的 flag(带值的已连值一起消费),解析概要区提示 */
+  ignoredFlags: string[]
 }
 
 /**
@@ -108,9 +110,13 @@ function tokenize(input: string): string[] {
       // 反斜杠转义(含行尾续行)
       if (c === '\\') {
         if (i + 1 < n) {
+          // 行尾续行:支持 \ + \n 与 \ + \r\n(Windows CRLF 粘贴)
           if (input[i + 1] === '\n') {
-            // 行尾续行:跳过,外层 while 会在下一轮遇空白停下
             i += 2
+            break
+          }
+          if (input[i + 1] === '\r' && i + 2 < n && input[i + 2] === '\n') {
+            i += 3
             break
           }
           token += input[i + 1]
@@ -129,6 +135,39 @@ function tokenize(input: string): string[] {
   return tokens
 }
 
+/** 疑似 URL 的 token(带协议或 www 前缀)——未知 flag 不把它误当自己的值吞掉 */
+function looksLikeUrl(s: string): boolean {
+  return /^[a-zA-Z][a-zA-Z0-9+.-]*:\/\//.test(s) || s.startsWith('www.')
+}
+
+/** 无值 flag(布尔开关,不消费后续 token;不影响生成请求的语义,安全忽略) */
+const VALUELESS_FLAGS = new Set([
+  '-4', '-6', '-B', '--use-ascii', '-M', '--manual', '-O', '--remote-name',
+  '-J', '--remote-header-name', '-Z', '--parallel', '-a', '--append', '-f', '--fail',
+  '--fail-early', '-G', '--get', '-i', '--include', '-I', '--head', '-k', '--insecure',
+  '-L', '--location', '--location-trusted', '-N', '--no-buffer', '--compressed', '-s',
+  '--silent', '-S', '--show-error', '-v', '--verbose', '-#', '--progress-bar', '-q',
+  '--http1.1', '--http2', '--http3', '--tlsv1', '--sslv3', '--no-keepalive', '--keepalive',
+  '--digest', '--negotiate', '--ntlm', '--anyauth',
+])
+
+/** 带值 flag(与生成代码无关,连值一起消费并提示已忽略) */
+const VALUED_FLAGS = new Set([
+  '-A', '--user-agent', '-b', '--cookie', '-c', '--cookie-jar', '-C', '--continue-at',
+  '-D', '--dump-header', '-e', '--referer', '-E', '--cert', '--cacert', '--capath',
+  '--cert-type', '--connect-timeout', '--interface', '--key', '--key-type', '--krb',
+  '--libcurl', '--limit-rate', '-m', '--max-time', '-o', '--output', '-U', '--proxy-user',
+  '-r', '--range', '--resolve', '--retry', '--retry-delay', '--retry-max-time',
+  '-T', '--upload-file', '--url', '-w', '--write-out', '-x', '--proxy', '-y', '--speed-time',
+  '-Y', '--speed-limit', '-z', '--time-cond', '--trace', '--trace-ascii',
+])
+
+/** 带值短 flag 的首字母(识别 -Avalue 这类值紧跟的合并短选项) */
+const SHORT_VALUED_CHARS = new Set(['A', 'b', 'c', 'C', 'd', 'D', 'e', 'E', 'H', 'h', 'm', 'o', 'r', 'T', 'U', 'u', 'w', 'x', 'X', 'y', 'Y', 'z'])
+
+/** 无值短 flag 字母(识别 -sSv 这类组合开关) */
+const SHORT_VALUELESS_CHARS = new Set(['4', '6', 'B', 'M', 'O', 'J', 'Z', 'a', 'f', 'G', 'i', 'I', 'k', 'L', 'N', 's', 'S', 'v', 'q', '#'])
+
 /** 解析 token 数组为结构化 ParsedCurl */
 function parseCurl(input: string): ParsedCurl {
   const raw = tokenize(input)
@@ -141,10 +180,13 @@ function parseCurl(input: string): ParsedCurl {
     headers: {},
     body: '',
     insecure: false,
+    ignoredFlags: [],
   }
 
   let hasBody = false
   let methodFromFlag = false
+  // 多个 -d/--data* 按 curl 语义用 & 拼接
+  const dataParts: string[] = []
   let i = 0
   while (i < tokens.length) {
     const tok = tokens[i]
@@ -165,7 +207,7 @@ function parseCurl(input: string): ParsedCurl {
         if (key) result.headers[key] = val
       }
     }
-    // -d / --data / --data-raw / --data-binary BODY
+    // -d / --data / --data-raw / --data-binary BODY(多次出现用 & 拼接)
     else if (
       lower === '-d' ||
       lower === '--data' ||
@@ -173,7 +215,14 @@ function parseCurl(input: string): ParsedCurl {
       lower === '--data-binary' ||
       lower === '--data-ascii'
     ) {
-      result.body = tokens[++i] || ''
+      dataParts.push(tokens[++i] || '')
+      hasBody = true
+    }
+    // --data-urlencode name=value:value 部分 encodeURIComponent 后并入 body
+    else if (lower === '--data-urlencode') {
+      const v = tokens[++i] || ''
+      const eq = v.indexOf('=')
+      dataParts.push(eq === -1 ? encodeURIComponent(v) : `${v.slice(0, eq)}=${encodeURIComponent(v.slice(eq + 1))}`)
       hasBody = true
     }
     // -k / --insecure
@@ -184,13 +233,43 @@ function parseCurl(input: string): ParsedCurl {
     else if (lower === '-u' || lower === '--user') {
       result.user = tokens[++i] || ''
     }
-    // 形如 -Hvalue 的合并短选项:此处不处理,留给 URL 兜底
+    // 其余 flag:按 arity 表消费,未支持的记入 ignoredFlags 在概要区提示
+    else if (tok.startsWith('-') && tok.length > 1) {
+      if (VALUELESS_FLAGS.has(lower)) {
+        // 已知无值开关(-s/-v/-L 等):安全忽略
+      } else if (VALUED_FLAGS.has(lower)) {
+        i++ // 连值一起消费
+        result.ignoredFlags.push(tok)
+      } else if (tok.startsWith('--')) {
+        if (lower.includes('=')) {
+          // --flag=value 自带值,整体忽略
+          result.ignoredFlags.push(lower.split('=')[0])
+        } else {
+          // 未知长 flag:假定带值,连值一起消费(不吞疑似 URL 的 token)
+          const next = tokens[i + 1]
+          if (next !== undefined && !next.startsWith('-') && !looksLikeUrl(next)) i++
+          result.ignoredFlags.push(tok)
+        }
+      } else if (tok.length > 2 && SHORT_VALUED_CHARS.has(tok[1])) {
+        // -Avalue 合并短选项:值已附带,只提示不消费下一 token
+        result.ignoredFlags.push('-' + tok[1])
+      } else if (/^-[A-Za-z0-9#]{2,}$/.test(tok) && [...tok.slice(1)].every((ch) => SHORT_VALUELESS_CHARS.has(ch))) {
+        // -sSv 组合无值开关:安全忽略
+      } else {
+        // 未知短 flag:假定带值,连值一起消费(不吞疑似 URL 的 token)
+        const next = tokens[i + 1]
+        if (next !== undefined && !next.startsWith('-') && !looksLikeUrl(next)) i++
+        result.ignoredFlags.push(tok)
+      }
+    }
     // URL(第一个非 flag 参数)
     else if (!tok.startsWith('-') && !result.url) {
       result.url = tok
     }
     i++
   }
+
+  result.body = dataParts.join('&')
 
   // 有 body 但未指定 -X → 默认 POST
   if (hasBody && !methodFromFlag) {
@@ -213,9 +292,14 @@ function isJsonBody(body: string, headers: Record<string, string>): boolean {
   }
 }
 
-/** 把字符串转成 JS 字符串字面量(双引号,转义内部双引号与反斜杠) */
+/** 把字符串转成 JS 字符串字面量(双引号,转义内部双引号、反斜杠与换行/制表符) */
 function jsString(s: string): string {
-  return `"${s.replace(/\\/g, '\\\\').replace(/"/g, '\\"')}"`
+  return `"${s
+    .replace(/\\/g, '\\\\')
+    .replace(/"/g, '\\"')
+    .replace(/\n/g, '\\n')
+    .replace(/\r/g, '\\r')
+    .replace(/\t/g, '\\t')}"`
 }
 
 /**
@@ -298,9 +382,14 @@ ${config.join(',\n')}
 });`
 }
 
-/** Python 字符串字面量(单引号,转义内部单引号) */
+/** Python 字符串字面量(单引号,转义内部单引号、反斜杠与换行/制表符) */
 function pyString(s: string): string {
-  return `'${s.replace(/\\/g, '\\\\').replace(/'/g, "\\'")}'`
+  return `'${s
+    .replace(/\\/g, '\\\\')
+    .replace(/'/g, "\\'")
+    .replace(/\n/g, '\\n')
+    .replace(/\r/g, '\\r')
+    .replace(/\t/g, '\\t')}'`
 }
 
 function genPython(c: ParsedCurl): string {
@@ -428,6 +517,11 @@ export function CurlConverterClient() {
           {result.parsed.body && (
             <span className="rounded-md px-2 py-1" style={{ backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text-subtle))' }}>
               {L('hasBody', 'has body')}
+            </span>
+          )}
+          {result.parsed.ignoredFlags.length > 0 && (
+            <span className="rounded-md border border-amber-200 bg-amber-50 px-2 py-1 text-amber-700 dark:border-amber-800 dark:bg-amber-950/50 dark:text-amber-300">
+              ⚠️ {L('ignoredFlags', 'unsupported flag(s) ignored')}: {result.parsed.ignoredFlags.join(', ')}
             </span>
           )}
         </div>

@@ -65,6 +65,37 @@ function sanitizeSvg(raw: string): string {
   return new XMLSerializer().serializeToString(svg)
 }
 
+/** 从 SVG 文本抽 viewBox 的 4 个数字,返回宽高(minX/minY 归零后的视口尺寸);缺失/非法返回 null */
+function parseViewBox(svg: string): { w: number; h: number } | null {
+  const m = svg.match(/viewBox\s*=\s*["']\s*([-\d.eE]+)[\s,]+([-\d.eE]+)[\s,]+([-\d.eE]+)[\s,]+([-\d.eE]+)\s*["']/i)
+  if (!m) return null
+  const w = Number(m[3]) - Number(m[1])
+  const h = Number(m[4]) - Number(m[2])
+  if (!isFinite(w) || !isFinite(h) || w <= 0 || h <= 0) return null
+  return { w, h }
+}
+
+/**
+ * 向 viewBox-only(根标签缺 width/height)的 SVG 注入显式尺寸:
+ * 按 viewBox 比例取最长边 512px(如 0 0 24 24 → 512×512,100×50 → 512×256)。
+ * 部分浏览器对无显式尺寸的 SVG 图片 naturalWidth=0,canvas 光栅化回退 300×150
+ * 会造成比例失真;仅在根标签缺少对应属性时注入,保证结果仍是合法 XML。
+ */
+function injectSvgSize(svg: string, vb: { w: number; h: number }): string {
+  const root = svg.match(/<svg\b[^>]*>/i)
+  if (!root) return svg
+  const tag = root[0]
+  const k = 512 / Math.max(vb.w, vb.h)
+  let next = tag
+  if (!/\swidth\s*=/i.test(tag)) {
+    next = next.replace(/^<svg\b/i, `<svg width="${Math.round(vb.w * k)}"`)
+  }
+  if (!/\sheight\s*=/i.test(tag)) {
+    next = next.replace(/^<svg\b/i, `<svg height="${Math.round(vb.h * k)}"`)
+  }
+  return next === tag ? svg : svg.replace(tag, next)
+}
+
 type Fmt = 'image/png' | 'image/webp'
 
 export function SvgToImageClient() {
@@ -149,6 +180,11 @@ export function SvgToImageClient() {
       return
     }
 
+    // viewBox-only SVG:加载前注入按比例的显式 width/height,避免部分浏览器
+    // naturalWidth=0 → 300×150 光栅化失真;naturalWidth 仍为 0 时再兜底 viewBox 尺寸
+    const viewBox = parseViewBox(safeSvg)
+    if (viewBox) safeSvg = injectSvgSize(safeSvg, viewBox)
+
     const blob = new Blob([safeSvg], { type: 'image/svg+xml;charset=utf-8' })
     const url = URL.createObjectURL(blob)
     svgUrlRef.current = url
@@ -156,9 +192,10 @@ export function SvgToImageClient() {
     img.onload = () => {
       if (runId !== runIdRef.current) return
       try {
-        // SVG 需要显式 width/height 或 viewBox;取 img.naturalWidth/Height
-        const baseW = img.naturalWidth || 300
-        const baseH = img.naturalHeight || 150
+        // 优先 naturalWidth;viewBox-only SVG 注入显式尺寸后此处应非 0,
+        // 极端情况下再回退 viewBox 尺寸,最后才是浏览器默认 300×150
+        const baseW = img.naturalWidth || viewBox?.w || 300
+        const baseH = img.naturalHeight || viewBox?.h || 150
         const w = Math.max(1, Math.round(baseW * scale))
         const h = Math.max(1, Math.round(baseH * scale))
 

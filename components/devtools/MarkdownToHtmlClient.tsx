@@ -11,7 +11,7 @@ import { tui } from '@/lib/i18n/tool-l10n'
  * Markdown to HTML Converter —— 手写 CommonMark 子集 + GFM 表格
  *
  * 支持:标题 H1-H6、粗体/斜体/删除线、行内代码、代码块(```lang)、
- * 引用、有序/无序列表、链接、图片、水平线、GFM 表格。
+ * 引用、有序/无序列表、链接(含 [t](url "title") 与 GFM 裸链接自动链接)、图片、水平线、GFM 表格。
  * 不支持:原始 HTML 直通(转义)、脚注、任务列表(简化支持)。
  * 输出经 DOMPurify 白名单消毒后才进 dangerouslySetInnerHTML。
  * 100% 本地。
@@ -47,6 +47,10 @@ console.log(x);
 | Jane | 30  |
 
 [Visit ToolHub](https://example.com)
+
+[ToolHub with a title](https://example.com "Official site")
+
+Bare URL: https://example.com
 `
 
 /** HTML 转义(含引号,防属性注入) */
@@ -78,7 +82,7 @@ function isSafeUrl(url: string): boolean {
   return true
 }
 
-/** 行内格式:粗体/斜体/删除线/代码/链接/图片 */
+/** 行内格式:粗体/斜体/删除线/代码/链接(含 title)/图片/GFM 裸链接自动链接 */
 function renderInline(text: string): string {
   let s = escapeHtml(text)
   // 行内代码 `code`:先摘出为占位符,内容不再被后续规则改写
@@ -87,15 +91,42 @@ function renderInline(text: string): string {
     codes.push(code)
     return `\uE000${codes.length - 1}\uE001`
   })
+  // 已生成的 HTML 标签同样摘出为占位符,避免后面的裸链接自动链接把 href 里的 URL 再包一层 <a>
+  const tags: string[] = []
+  const stash = (html: string) => {
+    tags.push(html)
+    return `\uE002${tags.length - 1}\uE003`
+  }
   // 图片 ![alt](url) — 先于链接。不安全 URL 退化为纯 alt 文本。
+  // 注:s 已整体转义,url/alt 均为已转义串,可直接进属性(勿二次 escapeHtml,否则 &amp; 会变 &amp;amp;)。
   s = s.replace(/!\[([^\]]*)\]\(([^)\s]+)\)/g, (_m, alt, url) => {
     if (!isSafeUrl(url)) return alt
-    return `<img src="${escapeHtml(url)}" alt="${alt}" />`
+    return stash(`<img src="${url}" alt="${alt}" />`)
   })
-  // 链接 [text](url)。不安全 URL(javascript: 等)退化为纯文本,不渲染 href。
-  s = s.replace(/\[([^\]]+)\]\(([^)\s]+)\)/g, (_m, txt, url) => {
+  // 链接 [text](url) 或 [text](url "title")。不安全 URL(javascript: 等)退化为纯文本,不渲染 href。
+  // 源码里的 "title" 此刻已是 &quot;title&quot;(整体转义过),title 同样为已转义串,可直接进属性。
+  s = s.replace(/\[([^\]]+)\]\(([^)\s]+)(?:\s+&quot;(.*?)&quot;)?\)/g, (_m, txt, url, title) => {
     if (!isSafeUrl(url)) return txt
-    return `<a href="${escapeHtml(url)}">${txt}</a>`
+    const t = title ? ` title="${title}"` : ''
+    return stash(`<a href="${url}"${t}>${txt}</a>`)
+  })
+  // GFM 自动链接:裸 http/https 文本 → <a>。剥掉尾部标点(句点/逗号等);
+  // URL 内含未闭合 '(' 时保留尾部 ')'(wiki 风格括号)。
+  s = s.replace(/\bhttps?:\/\/[^\s<]+/g, (m) => {
+    let url = m
+    let trailing = ''
+    const t = url.match(/[.,;:!?)\]]+$/)
+    if (t) {
+      trailing = t[0]
+      url = url.slice(0, -trailing.length)
+      let open = (url.match(/\(/g) || []).length
+      while (trailing.startsWith(')') && open > 0) {
+        url += ')'
+        trailing = trailing.slice(1)
+        open--
+      }
+    }
+    return `<a href="${url}">${url}</a>${trailing}`
   })
   // 删除线 ~~text~~
   s = s.replace(/~~([^~]+)~~/g, '<del>$1</del>')
@@ -103,8 +134,9 @@ function renderInline(text: string): string {
   s = s.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
   // 斜体 *text*
   s = s.replace(/(^|[^*])\*([^*]+)\*/g, '$1<em>$2</em>')
-  // 还原行内代码占位符
+  // 还原行内代码与暂存标签占位符
   s = s.replace(/\uE000(\d+)\uE001/g, (_m, idx) => `<code>${codes[Number(idx)] ?? ''}</code>`)
+  s = s.replace(/\uE002(\d+)\uE003/g, (_m, idx) => tags[Number(idx)] ?? '')
   return s
 }
 

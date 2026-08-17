@@ -21,6 +21,11 @@ const PRESETS: { label: string; w: number; h: number }[] = [
   { label: '5:4', w: 5, h: 4 },
 ]
 
+/** 欧几里得 GCD:把 1920:1080 这类大数比例约分成 16:9 */
+function gcd(a: number, b: number): number {
+  return b ? gcd(b, a % b) : a
+}
+
 export function AspectRatioClient() {
   const { locale } = useApp()
   const L = (key: string, fb: string) => tui('aspect-ratio-calculator', locale, key, fb)
@@ -43,6 +48,13 @@ export function AspectRatioClient() {
     }
     return { width: '', height: '' }
   }, [ratioW, ratioH, width, height])
+
+  // GCD 约分:整数比例且公约数 > 1 时显示最简形式(1920:1080 → 16:9)
+  const reduced = useMemo(() => {
+    if (!Number.isInteger(ratioW) || !Number.isInteger(ratioH)) return null
+    const g = gcd(ratioW, ratioH)
+    return g > 1 ? `${ratioW / g}:${ratioH / g}` : null
+  }, [ratioW, ratioH])
 
   const inputCls =
     'w-full rounded-lg border p-3 text-sm shadow-sm outline-none transition focus:ring-2 font-mono'
@@ -91,6 +103,15 @@ export function AspectRatioClient() {
             </button>
           ))}
         </div>
+        {/* 约分后的最简比例,如 1920:1080 → 16:9 */}
+        {reduced && (
+          <div className="mt-2 text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>
+            {L('reducedRatio', 'Reduced ratio')}:&nbsp;
+            <span className="font-mono font-semibold" style={{ color: 'rgb(var(--text))' }}>
+              {reduced}
+            </span>
+          </div>
+        )}
       </div>
 
       {/* 已知宽 / 高 */}

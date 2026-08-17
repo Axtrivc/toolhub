@@ -130,7 +130,8 @@ export function SecretKeyGeneratorClient() {
 
   const [format, setFormat] = useState<Format>('hex')
   const [byteLen, setByteLen] = useState(32)
-  const [prefix, setPrefix] = useState('sk_live_')
+  // 默认前缀用中性的 key_,避免 sk_live_(Stripe 生产前缀)被误当真实凭据
+  const [prefix, setPrefix] = useState('key_')
   const [count, setCount] = useState(1)
   const [secrets, setSecrets] = useState<string[]>([])
 
@@ -190,7 +191,7 @@ export function SecretKeyGeneratorClient() {
               type="text"
               value={prefix}
               onChange={(e) => setPrefix(e.target.value)}
-              placeholder="sk_live_"
+              placeholder="key_"
               spellCheck={false}
               className="w-full rounded-lg border p-3 font-mono text-sm shadow-sm outline-none transition focus:ring-2"
               style={{ borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rgb(var(--bg-card))', color: 'rgb(var(--text))' }}

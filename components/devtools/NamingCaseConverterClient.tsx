@@ -10,7 +10,7 @@ import { tui } from '@/lib/i18n/tool-l10n'
  *
  * 分词:先按空格/_/-/./\// 切分,再处理 camelCase/PascalCase 边界
  * (getHTTPResponse → get/HTTP/Response → 全小写单词)。
- * 支持单个短语或多行批量模式(每行一个短语),实时输出 8 种命名风格。
+ * 支持单个短语或多行批量模式(每行一个短语),实时输出 10 种命名风格。
  */
 
 /** 把任意命名串切成小写单词数组 */
@@ -40,6 +40,10 @@ interface CaseDef {
 const CASES: CaseDef[] = [
   { key: 'camel', label: 'camelCase', convert: (w) => w.map((x, i) => (i === 0 ? x : cap(x))).join('') },
   { key: 'pascal', label: 'PascalCase', convert: (w) => w.map(cap).join('') },
+  // Title/Sentence Case:词已按边界切分为完整单词,仅对词首字符大写(cap),
+  // 不用 \b 类词边界正则 → 撇号(' / ')不构成边界,"don't" → "Don't",不会变 "Don'T"。
+  { key: 'title', label: 'Title Case', convert: (w) => w.map(cap).join(' ') },
+  { key: 'sentence', label: 'Sentence case', convert: (w) => w.map((x, i) => (i === 0 ? cap(x) : x)).join(' ') },
   { key: 'snake', label: 'snake_case', convert: (w) => w.join('_') },
   { key: 'constant', label: 'CONSTANT_CASE', convert: (w) => w.join('_').toUpperCase() },
   { key: 'kebab', label: 'kebab-case', convert: (w) => w.join('-') },

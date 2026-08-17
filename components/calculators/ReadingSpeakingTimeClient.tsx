@@ -5,7 +5,7 @@ import { CopyButton } from '@/components/CopyButton'
 import { ResultCard, CalculatorNote } from '@/components/calculator/CalculatorField'
 import { useApp } from '@/components/providers/AppProviders'
 import { tui } from '@/lib/i18n/tool-l10n'
-import { countWords, countSentences } from '@/lib/text-stats'
+import { countWords, countSentences, hasCJK } from '@/lib/text-stats'
 
 /**
  * Reading & Speaking Time 客户端组件
@@ -76,14 +76,15 @@ export function ReadingSpeakingTimeClient() {
   }
 
   const [text, setText] = useState('')
-  // null = 未自定义,按 locale 取默认语速(中文 300/200 字/分,英文 150/130 wpm)
+  // null = 未自定义,默认语速按文本内容选择(含 CJK → 中文速率 300/200 字/分,
+  // 否则英文 150/130 wpm)——英文界面贴中文不再按 150 wpm 高估一倍;空文本回退按 locale。
   const [readWpmRaw, setReadWpm] = useState<number | null>(null)
   const [speakWpmRaw, setSpeakWpm] = useState<number | null>(null)
-  const isZh = locale === 'zh'
-  const readWpm = readWpmRaw ?? (isZh ? 300 : 150)
-  const speakWpm = speakWpmRaw ?? (isZh ? 200 : 130)
-  const READING = isZh ? READING_PRESETS_ZH : READING_PRESETS
-  const SPEAKING = isZh ? SPEAKING_PRESETS_ZH : SPEAKING_PRESETS
+  const textIsZh = text.trim() ? hasCJK(text) : locale === 'zh'
+  const readWpm = readWpmRaw ?? (textIsZh ? 300 : 150)
+  const speakWpm = speakWpmRaw ?? (textIsZh ? 200 : 130)
+  const READING = textIsZh ? READING_PRESETS_ZH : READING_PRESETS
+  const SPEAKING = textIsZh ? SPEAKING_PRESETS_ZH : SPEAKING_PRESETS
   const speedUnit = L('wpmUnit', 'wpm')
 
   const stats = useMemo(() => {
@@ -209,7 +210,7 @@ export function ReadingSpeakingTimeClient() {
             id="rst-read-wpm"
             type="range"
             min={50}
-            max={isZh ? 800 : 400}
+            max={textIsZh ? 800 : 400}
             step={5}
             value={readWpm}
             onChange={(e) => setReadWpm(+e.target.value)}

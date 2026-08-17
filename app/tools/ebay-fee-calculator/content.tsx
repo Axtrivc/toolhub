@@ -25,10 +25,11 @@ const en: ReactNode = (
       <p>
         Both platforms charge their percentage on the <strong>total sale amount</strong> — item price{' '}
         <em>plus</em> shipping charged to the buyer. For eBay that means the final value fee
-        (<code>13.6%</code> for most categories) plus a <code>$0.30</code> per-order fee, and an optional
-        Promoted Listings ad rate if you advertise. For Etsy it is a <code>$0.20</code> listing fee, a{' '}
-        <code>6.5%</code> transaction fee, and payment processing (US preset: <code>3% + $0.25</code>). The
-        advanced toggle lets you override the percentage when your category or region differs.
+        (<code>13.6%</code> for most categories) plus a <code>$0.40</code> per-order fee (<code>$0.30</code>{' '}
+        for orders <code>$10</code> and under), and an optional Promoted Listings ad rate if you
+        advertise. For Etsy it is a <code>$0.20</code> listing fee, a <code>6.5%</code> transaction fee,
+        and payment processing (US preset: <code>3% + $0.25</code>). The advanced toggle lets you override
+        the percentage when your category or region differs.
       </p>
     </div>
 
@@ -72,7 +73,8 @@ const zh: ReactNode = (
       <p>
         两个平台都按<strong>销售总额</strong>收取它们的百分比——即商品价格{' '}
         <em>加上</em>向买家收取的运费。对 eBay 而言，这意味着最终价值费
-        （<code>13.6%</code>，适用于大多数类目），加上每笔订单 <code>$0.30</code> 的费用，以及如果你投放广告时可选的
+        （<code>13.6%</code>，适用于大多数类目），加上每笔订单 <code>$0.40</code> 的费用（$10 及以下的订单为{' '}
+        <code>$0.30</code>），以及如果你投放广告时可选的
         Promoted Listings 广告费率。对 Etsy 而言，则是一笔 <code>$0.20</code> 的上架费、一笔{' '}
         <code>6.5%</code> 的交易费，以及支付处理费（美国预设：<code>3% + $0.25</code>）。这个
         高级开关允许你在类目或地区不同时覆盖这个百分比。
@@ -117,7 +119,8 @@ const es: ReactNode = (
       <p>
         Ambas plataformas cobran su porcentaje sobre el <strong>importe total de la venta</strong> — precio del artículo{' '}
         <em>más</em> envío cobrado al comprador. Para eBay eso significa la comisión de valor final
-        (<code>13.6%</code> para la mayoría de categorías) más una tarifa de <code>$0.30</code> por pedido y, opcionalmente, una
+        (<code>13.6%</code> para la mayoría de categorías) más una tarifa de <code>$0.40</code> por pedido
+        (<code>$0.30</code> en pedidos de <code>$10</code> o menos) y, opcionalmente, una
         tasa de anuncios de Promoted Listings si publicitas. Para Etsy son una tarifa de publicación de <code>$0.20</code>, una{' '}
         <code>6.5%</code> de tarifa de transacción y el procesamiento de pagos (valor predefinido de EE. UU.: <code>3% + $0.25</code>). El
         conmutador avanzado te permite sobrescribir el porcentaje cuando tu categoría o región difiere.
@@ -164,7 +167,8 @@ const de: ReactNode = (
       <p>
         Beide Plattformen berechnen ihren Prozentsatz auf den <strong>Gesamtverkaufsbetrag</strong> — Artikelpreis{' '}
         <em>plus</em> Versand, den du vom Käufer verlangst. Bei eBay bedeutet das die Final-Value-Gebühr
-        (<code>13.6%</code> für die meisten Kategorien) plus einer <code>$0.30</code>-Gebühr pro Bestellung und optional einer
+        (<code>13.6%</code> für die meisten Kategorien) plus einer <code>$0.40</code>-Gebühr pro Bestellung
+        (<code>$0.30</code> für Bestellungen von <code>$10</code> oder weniger) und optional einer
         Promoted-Listings-Anzeigenrate, wenn du Werbung schaltest. Bei Etsy sind es eine <code>$0.20</code>-Einstellgebühr, eine{' '}
         <code>6.5%</code>-Transaktionsgebühr und die Zahlungsabwicklung (US-Voreinstellung: <code>3% + $0.25</code>). Der
         erweiterte Schalter lässt dich den Prozentsatz überschreiben, wenn deine Kategorie oder Region abweicht.

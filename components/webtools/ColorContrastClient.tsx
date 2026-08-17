@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useMemo } from 'react'
+import { rgbToHex, rgbToHsl, hslToRgb } from '@/lib/color'
 import { useApp } from '@/components/providers/AppProviders'
 import { tui } from '@/lib/i18n/tool-l10n'
 
@@ -13,8 +14,9 @@ import { tui } from '@/lib/i18n/tool-l10n'
 
 function hexToRgb(hex: string): [number, number, number] | null {
   const clean = hex.replace('#', '').trim()
+  // 先整串校验 3/6 位 hex,非法字符报错而不是被 parseInt 截断
+  if (!/^[0-9a-f]{3}([0-9a-f]{3})?$/i.test(clean)) return null
   const full = clean.length === 3 ? clean.split('').map((c) => c + c).join('') : clean
-  if (full.length !== 6) return null
   const r = parseInt(full.slice(0, 2), 16)
   const g = parseInt(full.slice(2, 4), 16)
   const b = parseInt(full.slice(4, 6), 16)
@@ -52,6 +54,31 @@ function ratioLabel(ratio: number): { aaNormal: boolean; aaLarge: boolean; aaaNo
   }
 }
 
+/**
+ * 建议色:按 2% 步长调整前景色 HSL lightness 直到对比度 ≥ 4.5:1。
+ * 向上/向下两个方向都试,取改动量(步数)最小的方向;
+ * lightness 始终在 0–100 区间内,循环最多 50 步必然终止。
+ */
+function suggestAccessibleFg(fg: string, bg: string): string | null {
+  const fgRgb = hexToRgb(fg)
+  if (!fgRgb) return null
+  const { h, s, l } = rgbToHsl({ r: fgRgb[0], g: fgRgb[1], b: fgRgb[2] })
+  const STEP = 2
+  const probe = (dir: 1 | -1): { hex: string; steps: number } | null => {
+    for (let k = STEP; k <= 100; k += STEP) {
+      const cand = l + dir * k
+      if (cand < 0 || cand > 100) return null
+      const hex = rgbToHex(hslToRgb({ h, s, l: cand }))
+      if (contrastRatio(hex, bg).ratio >= 4.5) return { hex, steps: k }
+    }
+    return null
+  }
+  const up = probe(1)
+  const down = probe(-1)
+  const best = up && down ? (up.steps <= down.steps ? up : down) : up || down
+  return best ? best.hex : null
+}
+
 const PASS = '✓'
 const FAIL = '✗'
 
@@ -64,6 +91,11 @@ export function ColorContrastClient() {
 
   const { ratio, error } = useMemo(() => contrastRatio(fg, bg), [fg, bg])
   const pass = ratioLabel(ratio)
+
+  // 建议色:点击 Suggest 时计算;fg/bg 任一变化后快照不再匹配 → 自动失效
+  const [suggestion, setSuggestion] = useState<{ fg: string; bg: string; hex: string | null } | null>(null)
+  const suggested = suggestion && suggestion.fg === fg && suggestion.bg === bg ? suggestion : null
+  const onSuggest = () => setSuggestion({ fg, bg, hex: suggestAccessibleFg(fg, bg) })
 
   const swatchCls = 'h-10 w-16 cursor-pointer rounded border-0 bg-transparent p-0'
 
@@ -154,6 +186,45 @@ export function ColorContrastClient() {
               </div>
             ))}
           </div>
+
+          {/* AA(normal) 未达标时:建议最接近的可达标前景色 */}
+          {!pass.aaNormal && (
+            <div className="mt-4 flex flex-wrap items-center justify-center gap-3 text-sm" style={{ color: 'rgb(var(--text))' }}>
+              <button type="button" onClick={onSuggest} className="btn btn-secondary text-xs">
+                {L('suggestBtn', 'Suggest accessible color')}
+              </button>
+              {suggested && suggested.hex ? (
+                <>
+                  <span className="flex items-center gap-2">
+                    <span className="text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>
+                      {L('suggestedLabel', 'Nearest passing foreground:')}
+                    </span>
+                    <span
+                      className="inline-block h-5 w-5 rounded border"
+                      style={{ backgroundColor: suggested.hex, borderColor: 'rgb(var(--border-strong))' }}
+                    />
+                    <span className="font-mono">{suggested.hex}</span>
+                    <span className="font-mono text-xs" style={{ color: 'rgb(22 163 74)' }}>
+                      {contrastRatio(suggested.hex, suggested.bg).ratio.toFixed(2)}:1
+                    </span>
+                  </span>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      if (suggested?.hex) setFg(suggested.hex)
+                    }}
+                    className="btn btn-secondary text-xs"
+                  >
+                    {L('applySuggested', 'Apply as foreground')}
+                  </button>
+                </>
+              ) : suggested ? (
+                <span className="text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>
+                  {L('suggestNone', 'No accessible variant found by adjusting lightness — try changing the background color.')}
+                </span>
+              ) : null}
+            </div>
+          )}
         </div>
       )}
 

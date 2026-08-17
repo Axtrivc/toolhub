@@ -26,13 +26,13 @@ export const ScientificNotationCalculatorClient = makeCalculatorClient({
     // 工程计数法:指数是 3 的倍数
     let engExp = Math.floor(exp / 3) * 3
     let engMantissa = n / Math.pow(10, engExp)
-    // 浮点误差边界:尾数按显示精度(6 位)四舍五入后可能到 10(如 1e23 → 9.99…×10²²
-    // 显示为 10 × 10²²),此时进位:指数 +1、尾数重算,保证显示恒为 1 ≤ |m| < 10。
-    if (Number(mantissa.toFixed(6)) >= 10) {
+    // 浮点误差边界:尾数按显示精度(6 位)四舍五入后可能到 ±10(如 1e23 → 9.99…×10²²
+    // 显示为 10 × 10²²,负数则是 −10),此时进位:指数 +1、尾数重算,保证显示恒为 1 ≤ |m| < 10。
+    if (Math.abs(Number(mantissa.toFixed(6))) >= 10) {
       exp += 1
       mantissa = n / Math.pow(10, exp)
     }
-    if (Number(engMantissa.toFixed(6)) >= 1000) {
+    if (Math.abs(Number(engMantissa.toFixed(6))) >= 1000) {
       engExp += 3
       engMantissa = n / Math.pow(10, engExp)
     }
@@ -60,6 +60,11 @@ export const PrimeNumberCheckerClient = makeCalculatorClient({
   ],
   compute: (v, locale) => {
     const T = (key: string, fb: string) => tui('prime-number-checker', locale, key, fb)
+    // 先看原始值:toNum 会把 Infinity("1e999")折叠成 0 绕过下面的守卫
+    const raw = Number(v.n)
+    if (!isFinite(raw)) {
+      return { isPrime: `⚠️ ${T('errTooBig', 'Enter a number ≤ 1,000,000,000,000 (10¹²)')}`, next: '—', prev: '—' }
+    }
     const n = Math.floor(toNum(v.n))
     if (n < 2) return { isPrime: T('noUnder2', 'No (primes start at 2)'), next: '2', prev: '—' }
     if (n > PRIME_MAX) {
@@ -73,14 +78,14 @@ export const PrimeNumberCheckerClient = makeCalculatorClient({
       return true
     }
     let next = n + 1
-    while (next < 1e7 && !check(next)) next++
+    while (next < PRIME_MAX && !check(next)) next++
     let prev = n - 1
     while (prev >= 2 && !check(prev)) prev--
     return {
       isPrime: check(n)
         ? T('yesPrime', 'Yes — {n} is prime').replace('{n}', String(n))
         : T('noNotPrime', 'No — {n} is not prime').replace('{n}', String(n)),
-      next: next < 1e7 ? String(next) : T('tooLarge', 'Too large'),
+      next: next < PRIME_MAX ? String(next) : T('tooLarge', 'Too large'),
       prev: prev >= 2 ? String(prev) : T('none', 'None'),
     }
   },
@@ -93,6 +98,12 @@ export const PrimeFactorizationCalculatorClient = makeCalculatorClient({
   inputs: [{ key: 'n', label: 'Number to factor', default: '360' }],
   outputs: [{ key: 'factors', label: 'Prime factorization', highlight: true }],
   compute: (v, locale) => {
+    // 同 prime-checker 的守卫模式:先看原始值(toNum 会把 "1e999" 折叠成 0),
+    // 再拦 n > 1e12(试除 √1e12 = 1e6 次迭代以内,毫秒级;更大的输入会卡死页面)
+    const raw = Number(v.n)
+    if (!isFinite(raw) || Math.floor(toNum(v.n)) > PRIME_MAX) {
+      return { factors: `⚠️ ${tui('prime-factorization-calculator', locale, 'errTooBig', 'Enter a number ≤ 1,000,000,000,000 (10¹²)')}` }
+    }
     let n = Math.floor(toNum(v.n))
     if (n < 2) return { factors: `⚠️ ${tui('prime-factorization-calculator', locale, 'errMinTwo', 'Enter a number ≥ 2')}` }
     const factors: number[] = []
@@ -122,17 +133,25 @@ export const CombinationCalculatorClient = makeCalculatorClient({
   outputs: [
     { key: 'result', label: 'Combinations C(n,r)', highlight: true },
     { key: 'formula', label: 'Formula' },
+    { key: 'odds', label: 'Odds', sublabel: 'Chances of one specific pick' },
   ],
   compute: (v, locale) => {
-    const n = Math.floor(toNum(v.n))
-    const r = Math.floor(toNum(v.r))
-    if (r > n || n < 0 || r < 0) return { result: `⚠️ ${tui('combination-calculator', locale, 'errRange', 'Need 0 ≤ r ≤ n')}`, formula: '—' }
+    const T = (key: string, fb: string) => tui('combination-calculator', locale, key, fb)
+    const n = toNum(v.n)
+    const r = toNum(v.r)
+    // 非整数直接提示,不再静默取整
+    if (!Number.isInteger(n) || !Number.isInteger(r)) {
+      return { result: `⚠️ ${T('errIntegers', 'Enter whole numbers for n and r')}`, formula: '—', odds: '—' }
+    }
+    if (r > n || n < 0 || r < 0) return { result: `⚠️ ${T('errRange', 'Need 0 ≤ r ≤ n')}`, formula: '—', odds: '—' }
     // C(n,r) = n!/(r!(n-r)!),用迭代避免大数阶乘溢出
     let result = 1
     for (let i = 0; i < r; i++) result = (result * (n - i)) / (i + 1)
     return {
       result: fmtNum(result, 0),
       formula: `C(${n},${r}) = ${n}! / (${r}! × ${(n - r)}!)`,
+      // 彩票式赔率:随机选一组恰好命中 = 1 / C(n,r)
+      odds: result > 0 ? T('oddsOneIn', '1 in {c}').replace('{c}', fmtNum(result, 0)) : '—',
     }
   },
   note: '🃏 Combinations: choosing r items from n, order doesn\'t matter. Lottery odds use this.',
@@ -150,9 +169,14 @@ export const PermutationCalculatorClient = makeCalculatorClient({
     { key: 'formula', label: 'Formula' },
   ],
   compute: (v, locale) => {
-    const n = Math.floor(toNum(v.n))
-    const r = Math.floor(toNum(v.r))
-    if (r > n || n < 0 || r < 0) return { result: `⚠️ ${tui('permutation-calculator', locale, 'errRange', 'Need 0 ≤ r ≤ n')}`, formula: '—' }
+    const T = (key: string, fb: string) => tui('permutation-calculator', locale, key, fb)
+    const n = toNum(v.n)
+    const r = toNum(v.r)
+    // 非整数直接提示,不再静默取整
+    if (!Number.isInteger(n) || !Number.isInteger(r)) {
+      return { result: `⚠️ ${T('errIntegers', 'Enter whole numbers for n and r')}`, formula: '—' }
+    }
+    if (r > n || n < 0 || r < 0) return { result: `⚠️ ${T('errRange', 'Need 0 ≤ r ≤ n')}`, formula: '—' }
     let result = 1
     for (let i = 0; i < r; i++) result *= (n - i)
     return {

@@ -271,6 +271,10 @@ export function SshKeyGeneratorClient() {
                 {revealed ? L('hide', 'Hide') : L('reveal', 'Reveal')}
               </button>
             </div>
+            {/* 显眼警示:导出的私钥无口令保护(底部说明仅弱提示,此处直标) */}
+            <div className="mb-1.5 rounded-lg border border-amber-300 bg-amber-50 px-3 py-2 text-xs font-semibold text-amber-800 dark:border-amber-600/60 dark:bg-amber-900/20 dark:text-amber-300">
+              ⚠️ {L('unencryptedBadge', 'Unencrypted — no passphrase')}
+            </div>
             <textarea
               readOnly
               rows={revealed ? 12 : 3}

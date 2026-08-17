@@ -71,10 +71,13 @@ export function EncoderDecoderTool({ encode, decode, initialMode = 'encode', slu
       if (next === mode) return
       const nextSpec = next === 'encode' ? encode : decode
       setMode(next)
-      // 切换方向时重置为目标方向的默认示例,避免用 encode 的输出当 decode 输入造成困惑。
-      setInput(nextSpec.defaultInput)
+      // 切换方向时保留用户已粘贴/编辑的输入,避免输入丢失;仅当输入仍是
+      // 当前方向的默认示例(未被改动)或恰为另一方向的默认示例时,才重置为
+      // 目标方向的默认示例
+      const untouchedSample = input === spec.defaultInput || input === nextSpec.defaultInput
+      if (untouchedSample) setInput(nextSpec.defaultInput)
     },
-    [mode, encode, decode],
+    [mode, encode, decode, input, spec],
   )
 
   const charCount = input.length
@@ -121,7 +124,7 @@ export function EncoderDecoderTool({ encode, decode, initialMode = 'encode', slu
       {/* 输入区 */}
       <div>
         <div className="mb-2 flex items-center justify-between">
-          <label htmlFor="text-input" className="text-sm font-medium text-slate-700">
+          <label htmlFor="text-input" className="text-sm font-medium text-slate-700 dark:text-slate-300">
             {L(mode === 'encode' ? 'encodeInputLabel' : 'decodeInputLabel', spec.inputLabel)}
           </label>
           {input && (

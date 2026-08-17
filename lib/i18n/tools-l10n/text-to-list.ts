@@ -9,7 +9,7 @@ export const textToListL10n: ToolL10n = {
     ui: {
       inputLabel: '多行文本',
       outputLabel: '项目符号列表',
-      note: '📝 给每行加上项目符号。用于笔记、提纲和文档排版。',
+      note: '📝 给每行加上项目符号(默认 •)。在文本末尾追加 " ||| -"、" ||| *" 或 " ||| 1." 可改用连字符、星号或数字编号。',
     },
     useCases: [
       '把随手记下的笔记整理成结构化列表',
@@ -18,14 +18,14 @@ export const textToListL10n: ToolL10n = {
       '为幻灯片和文档排版数据',
     ],
     faqs: [
-      { q: '能用不同的项目符号吗?', a: '本工具使用「•」(圆点)。需要编号列表请用「添加行号」工具。其他样式(–、*、1.)可能会在后续版本中加入。' },
+      { q: '能用不同的项目符号吗?', a: '能。默认使用「•」(圆点);在文本末尾加 " ||| -" 或 " ||| *" 可换成连字符或星号,加 " ||| 1." 则用数字编号。' },
     ],
   },
   es: {
     ui: {
       inputLabel: 'Líneas de texto',
       outputLabel: 'Lista con viñetas',
-      note: '📝 Añade viñetas a cada línea. Para notas, esquemas y formato de documentos.',
+      note: '📝 Añade una viñeta (•) a cada línea. Añade " ||| -", " ||| *" o " ||| 1." tras el texto para usar guiones, asteriscos o numeración.',
     },
     useCases: [
       'convertir notas rápidas en una lista estructurada',
@@ -34,14 +34,14 @@ export const textToListL10n: ToolL10n = {
       'dar formato a datos para diapositivas y documentos',
     ],
     faqs: [
-      { q: '¿Puedo usar otros estilos de viñeta?', a: 'Esta herramienta usa «•» (viñeta). Para listas numeradas, usa la herramienta Añadir números de línea. Para otros estilos (–, *, 1.), una próxima actualización podría añadir opciones.' },
+      { q: '¿Puedo usar otros estilos de viñeta?', a: 'Sí. Por defecto usa «•» (viñeta); añade " ||| -" o " ||| *" al final del texto para usar guiones o asteriscos, o " ||| 1." para numeración.' },
     ],
   },
   de: {
     ui: {
       inputLabel: 'Textzeilen',
       outputLabel: 'Aufzählungsliste',
-      note: '📝 Fügt jeder Zeile Aufzählungszeichen hinzu. Für Notizen, Gliederungen und Dokumentformatierung.',
+      note: '📝 Fügt jeder Zeile ein Aufzählungszeichen (•) hinzu. Hänge " ||| -", " ||| *" oder " ||| 1." an den Text an, um Bindestriche, Sterne oder Nummerierung zu verwenden.',
     },
     useCases: [
       'schnell notierte Gedanken in eine strukturierte Liste umwandeln',
@@ -50,7 +50,7 @@ export const textToListL10n: ToolL10n = {
       'Daten für Folien und Dokumente formatieren',
     ],
     faqs: [
-      { q: 'Kann ich andere Aufzählungszeichen verwenden?', a: 'Dieses Werkzeug verwendet „•" (Aufzählungspunkt). Für nummerierte Listen nutze das Werkzeug Zeilen nummerieren. Andere Stile (–, *, 1.) könnten in einem späteren Update hinzukommen.' },
+      { q: 'Kann ich andere Aufzählungszeichen verwenden?', a: 'Ja. Standardmäßig wird „•" (Aufzählungspunkt) verwendet; hänge " ||| -" oder " ||| *" an den Text an, um Bindestriche oder Sterne zu nutzen, oder " ||| 1." für Nummerierung.' },
     ],
   },
 }

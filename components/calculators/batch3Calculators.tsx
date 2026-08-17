@@ -34,6 +34,8 @@ export const CalorieCalculatorClient = makeCalculatorClient({
     { key: 'tdee', label: 'Maintenance', highlight: true, sublabel: 'To stay same weight' },
     { key: 'lose', label: 'Mild weight loss', sublabel: '−0.25 kg/week' },
     { key: 'gain', label: 'Mild weight gain', sublabel: '+0.25 kg/week' },
+    { key: 'lose500', label: 'Weight loss', sublabel: '−0.5 kg/week' },
+    { key: 'gain500', label: 'Weight gain', sublabel: '+0.5 kg/week' },
   ],
   compute: (v, locale) => {
     const w = toNum(v.weight)
@@ -50,6 +52,8 @@ export const CalorieCalculatorClient = makeCalculatorClient({
       tdee: `${fmtNum(tdee, 0)} ${unit}`,
       lose: `${fmtNum(tdee - 250, 0)} ${unit}`,
       gain: `${fmtNum(tdee + 250, 0)} ${unit}`,
+      lose500: `${fmtNum(tdee - 500, 0)} ${unit}`,
+      gain500: `${fmtNum(tdee + 500, 0)} ${unit}`,
     }
   },
   note: '🔥 BMR = calories burned at complete rest. TDEE = total daily burn including activity. Eat less than TDEE to lose weight.',
@@ -135,7 +139,9 @@ export const IdealWeightCalculatorClient = makeCalculatorClient({
   ],
   compute: (v) => {
     const h = toNum(v.height)
-    const inchesOver5ft = Math.max(0, (h - 152.4) / 2.54)
+    // 身高换算成英寸、减去 5 英尺(60 英寸)。低于 5 英尺时为负值,直接代入公式
+    // (Devine 1974 原式:50 + 2.3 × 每超 1 英寸;不足部分线性递减,不钳制为 0)
+    const inchesOver5ft = h / 2.54 - 60
     const isMale = v.gender === 'male'
     // 三个经典公式
     const devine = isMale ? 50 + 2.3 * inchesOver5ft : 45.5 + 2.3 * inchesOver5ft
@@ -246,17 +252,35 @@ export const LCMGcdCalculatorClient = makeCalculatorClient({
     { key: 'gcd', label: 'GCD (greatest common divisor)', highlight: true },
     { key: 'lcm', label: 'LCM (least common multiple)' },
   ],
-  compute: (v) => {
-    const nums = (v.numbers || '')
-      .split(/[\s,]+/)
-      .map(Number)
-      .filter((n) => Number.isInteger(n) && n > 0)
-    if (nums.length === 0) return { gcd: '—', lcm: '—' }
+  compute: (v, locale) => {
+    const T = (key: string, fb: string) => tui('lcm-gcd-calculator', locale, key, fb)
+    const tokens = (v.numbers || '').split(/[\s,]+/).filter((s) => s !== '')
+    const nums: number[] = []
+    const ignored: string[] = []
+    let usedAbs = false
+    for (const tok of tokens) {
+      const n = Number(tok)
+      if (Number.isInteger(n) && n !== 0) {
+        // 负整数按绝对值参与(GCD/LCM 定义在正整数上)
+        if (n < 0) { nums.push(Math.abs(n)); usedAbs = true }
+        else nums.push(n)
+      } else {
+        // 0 与非整数无法参与,收集起来在结果后提示
+        ignored.push(tok)
+      }
+    }
+    if (nums.length === 0) {
+      return { gcd: `⚠️ ${T('errNoValid', 'Enter whole numbers other than 0 (e.g. 12, 18, 24)')}`, lcm: '—' }
+    }
     let g = nums[0]
     for (const n of nums.slice(1)) g = gcd(g, n)
     let l = nums[0]
     for (const n of nums.slice(1)) l = (l * n) / gcd(l, n)
-    return { gcd: String(g), lcm: String(l) }
+    const warns: string[] = []
+    if (ignored.length > 0) warns.push(T('ignoredEntries', 'ignored: {list}').replace('{list}', ignored.join(', ')))
+    if (usedAbs) warns.push(T('absUsed', 'negative numbers treated as absolute values'))
+    const suffix = warns.length > 0 ? ` ⚠️ ${warns.join('; ')}` : ''
+    return { gcd: String(g) + suffix, lcm: String(l) }
   },
   note: '🔢 GCD = largest number dividing all inputs. LCM = smallest number divisible by all inputs.',
 })
@@ -382,13 +406,21 @@ export const ROIcalculatorClient = makeCalculatorClient({
     { key: 'annualized', label: 'Annualized return' },
     { key: 'profit', label: 'Profit' },
   ],
-  compute: (v) => {
+  compute: (v, locale) => {
     const initial = toNum(v.initial)
     const final = toNum(v.final)
     const years = toNum(v.years)
+    // 初始投资 ≤ 0 时 ROI/年化在数学上未定义,给友好错误而不是误导性的 0.00%
+    if (initial <= 0) {
+      return {
+        roi: `⚠️ ${tui('roi-calculator', locale, 'errInitial', 'Initial investment must be greater than 0')}`,
+        annualized: '—',
+        profit: '—',
+      }
+    }
     const profit = final - initial
-    const roi = initial > 0 ? (profit / initial) * 100 : 0
-    const annualized = years > 0 && initial > 0
+    const roi = (profit / initial) * 100
+    const annualized = years > 0
       ? (Math.pow(final / initial, 1 / years) - 1) * 100
       : 0
     return {
@@ -444,10 +476,23 @@ export const CreditCardPayoffCalculatorClient = makeCalculatorClient({
         principal: fmtUSD(toNum(v.balance), 0),
       }
     }
-    return {
-      months: T('monthsYrs', '{m} months ({y} yrs)')
+    // <12 个月只显示月数;≥12 个月补年数(取整)且单复数正确(1 yr / 2 yrs)
+    let monthsLabel: string
+    if (months < 12) {
+      monthsLabel = months === 1
+        ? T('monthsOne', '1 month')
+        : T('monthsN', '{m} months').replace('{m}', String(months))
+    } else {
+      const yrs = Math.max(1, Math.round(months / 12))
+      const yrsLabel = yrs === 1
+        ? T('yrOne', '1 yr')
+        : T('yrsN', '{y} yrs').replace('{y}', String(yrs))
+      monthsLabel = T('monthsYrs', '{m} months ({y})')
         .replace('{m}', String(months))
-        .replace('{y}', String(Math.ceil(months / 12))),
+        .replace('{y}', yrsLabel)
+    }
+    return {
+      months: monthsLabel,
       total: fmtUSD(totalPaid, 0),
       interest: fmtUSD(totalPaid - toNum(v.balance), 0),
       principal: fmtUSD(toNum(v.balance), 0),
@@ -470,23 +515,27 @@ export const IncomeTaxEstimatorClient = makeCalculatorClient({
     { key: 'income', label: 'Annual income', suffix: '$', default: '75000' },
     { key: 'filing', label: 'Filing status', default: 'single', options: [
       { label: 'Single', value: 'single' },
+      { label: 'Head of household', value: 'hoh' },
       { label: 'Married, filing jointly', value: 'married' },
     ]},
   ],
   outputs: [
     { key: 'tax', label: 'Estimated federal tax', highlight: true },
     { key: 'effective', label: 'Effective rate' },
-    { key: 'takehome', label: 'Estimated take-home' },
+    { key: 'fica', label: 'Estimated FICA', sublabel: 'Social Security + Medicare' },
+    { key: 'takehome', label: 'Estimated take-home', sublabel: 'After federal tax + FICA' },
   ],
   compute: (v) => {
     const income = toNum(v.income)
-    // 2026 美国联邦税档次(单身/已婚,IRS Rev. Proc. 2025-32)
+    // 2026 美国联邦税档次(单身/户主/已婚,IRS Rev. Proc. 2025-32)
     // 每档语义:[该档下限, 税率];最后一档无上限(适用于"下限"以上的全部收入)
     const brackets = v.filing === 'married'
       ? [[0, 0.10], [24800, 0.12], [100800, 0.22], [211400, 0.24], [403550, 0.32], [512450, 0.35], [768700, 0.37]]
-      : [[0, 0.10], [12400, 0.12], [50400, 0.22], [105700, 0.24], [201775, 0.32], [256225, 0.35], [640600, 0.37]]
-    // 先扣标准扣除额(2026:单身 $16,100 / 已婚联合 $32,200)再套边际档
-    const stdDeduction = v.filing === 'married' ? 32200 : 16100
+      : v.filing === 'hoh'
+        ? [[0, 0.10], [16350, 0.12], [66300, 0.22], [107150, 0.24], [205700, 0.32], [260600, 0.35], [414400, 0.37]]
+        : [[0, 0.10], [12400, 0.12], [50400, 0.22], [105700, 0.24], [201775, 0.32], [256225, 0.35], [640600, 0.37]]
+    // 先扣标准扣除额(2026:单身 $16,100 / 户主 $24,150 / 已婚联合 $32,200)再套边际档
+    const stdDeduction = v.filing === 'married' ? 32200 : v.filing === 'hoh' ? 24150 : 16100
     const taxable = Math.max(0, income - stdDeduction)
     let tax = 0
     for (let i = 0; i < brackets.length; i++) {
@@ -500,19 +549,26 @@ export const IncomeTaxEstimatorClient = makeCalculatorClient({
         break
       }
     }
+    // FICA 估算(雇员侧):OASDI 6.2% + Medicare 1.45% = 7.65%,
+    // OASDI 只对 ≤ 2026 SSA 工资基数($184,500)的部分征收,超出仅 1.45% Medicare;
+    // 超 $200k 的 0.9% 附加税简化忽略
+    const WAGE_BASE = 184500
+    const fica = Math.min(income, WAGE_BASE) * 0.0765 + Math.max(0, income - WAGE_BASE) * 0.0145
     const effective = income > 0 ? (tax / income) * 100 : 0
     return {
       tax: fmtUSD(tax, 0),
       effective: `${fmtNum(effective, 1)}%`,
-      takehome: fmtUSD(income - tax, 0),
+      fica: fmtUSD(fica, 0),
+      takehome: fmtUSD(income - tax - fica, 0),
     }
   },
-  note: '📊 US 2026 federal brackets with standard deduction applied ($16,100 single / $32,200 joint). Excludes state tax and credits. Estimate only.',
+  note: '📊 US 2026 federal brackets with standard deduction applied ($16,100 single / $24,150 head of household / $32,200 joint). FICA estimated at 7.65% up to the $184,500 Social Security wage base (1.45% Medicare above; additional Medicare surtax ignored). Excludes state tax and credits. Estimate only.',
   chart: {
     title: 'Where Your Income Goes',
     centerLabel: 'Income',
     slices: [
       { valueKey: 'tax', label: 'Federal tax', color: '#ef4444' },
+      { valueKey: 'fica', label: 'FICA (Social Security + Medicare)', color: '#f59e0b' },
       { valueKey: 'takehome', label: 'Take-home pay', color: '#22c55e' },
     ],
   },

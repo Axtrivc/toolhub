@@ -7,9 +7,15 @@ import type { ToolL10n } from '../tool-l10n'
 export const loremIpsumGeneratorL10n: ToolL10n = {
   zh: {
     ui: {
+      'count': '数量',
       'generate': '📝 生成',
       'note': '📄 为模型、设计和布局生成占位文本。基于公元前 1 世纪西塞罗的一段文本。',
       'paragraphs': '段落数',
+      'startWithLorem': '以 "Lorem ipsum" 开头',
+      'unit': '单位',
+      'unitParagraphs': '段落',
+      'unitSentences': '句子',
+      'unitWords': '词',
     },
     useCases: [
       '原型图与线框图',
@@ -23,9 +29,15 @@ export const loremIpsumGeneratorL10n: ToolL10n = {
   },
   es: {
     ui: {
+      'count': 'Cantidad',
       'generate': '📝 Generar',
       'note': '📄 Genera texto de marcador para maquetas, diseños y layouts. Basado en un texto de Cicerón del siglo I a. C.',
       'paragraphs': 'Párrafos',
+      'startWithLorem': 'Empezar con "Lorem ipsum"',
+      'unit': 'Unidad',
+      'unitParagraphs': 'Párrafos',
+      'unitSentences': 'Oraciones',
+      'unitWords': 'Palabras',
     },
     useCases: [
       'mockups y wireframes',
@@ -39,9 +51,15 @@ export const loremIpsumGeneratorL10n: ToolL10n = {
   },
   de: {
     ui: {
+      'count': 'Anzahl',
       'generate': '📝 Generieren',
       'note': '📄 Erzeugt Platzhaltertext für Mockups, Designs und Layouts. Basiert auf einem Text von Cicero aus dem 1. Jh. v. Chr.',
       'paragraphs': 'Absätze',
+      'startWithLorem': 'Mit „Lorem ipsum" beginnen',
+      'unit': 'Einheit',
+      'unitParagraphs': 'Absätze',
+      'unitSentences': 'Sätze',
+      'unitWords': 'Wörter',
     },
     useCases: [
       'Mockups und Wireframes',

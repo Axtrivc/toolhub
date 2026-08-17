@@ -39,10 +39,13 @@ export function DateDifferenceClient() {
   }, [])
 
   const result = useMemo(() => {
+    // 空日期(清空输入框/首帧)直接走空态:parseLocalDate('') 会得到 Invalid/1899 值,
+    // 不拦会在首帧闪 "0 天"
+    if (!start || !end) return null
     const s = parseLocalDate(start)
     const e = parseLocalDate(end)
-    if (isNaN(s.getTime()) || isNaN(e.getTime())) return null
-    if (s > e) return null
+    if (isNaN(s.getTime()) || isNaN(e.getTime())) return { error: L('errInvalidDate', 'Enter both dates in YYYY-MM-DD format.') }
+    if (s > e) return { error: L('errEndBeforeStart', 'End date is earlier than start date.') }
 
     // 精确年月日
     let years = e.getFullYear() - s.getFullYear()
@@ -75,7 +78,8 @@ export function DateDifferenceClient() {
     }
 
     return { years, months, days, totalDays, totalWeeks, totalMonths, totalHours, businessDays }
-  }, [start, end])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [start, end, locale])
 
   const fmt = (n: number) => n.toLocaleString()
 
@@ -104,7 +108,15 @@ export function DateDifferenceClient() {
         </div>
       </div>
 
-      {result ? (
+      {!result ? (
+        <div className="rounded-lg border-2 border-dashed p-6 text-center text-sm" style={{ borderColor: 'rgb(var(--border-strong))', color: 'rgb(var(--text-faint))' }}>
+          {L('emptyState', 'Pick two dates to see the duration between them.')}
+        </div>
+      ) : 'error' in result ? (
+        <div className="rounded-lg border border-red-200 bg-red-50 p-4 text-sm text-red-700">
+          ⚠️ {result.error}
+        </div>
+      ) : (
         <>
           <ResultCard
             label={L('duration', 'Duration')}
@@ -125,10 +137,6 @@ export function DateDifferenceClient() {
             <ResultCard label={L('businessDays', 'Business days')} value={fmt(result.businessDays)} sublabel={L('monFri', 'Mon–Fri')} />
           </div>
         </>
-      ) : (
-        <div className="rounded-lg border-2 border-dashed p-6 text-center text-sm" style={{ borderColor: 'rgb(var(--border-strong))', color: 'rgb(var(--text-faint))' }}>
-          {L('emptyState', 'End date must be after start date')}
-        </div>
       )}
 
       <CalculatorNote>

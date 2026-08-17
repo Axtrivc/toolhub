@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useMemo } from 'react'
+import { useState } from 'react'
 import { ResultCard, CalculatorNote } from '../calculator/CalculatorField'
 import { CopyButton } from '../CopyButton'
 import { makeTextTool } from '../tools/makeTextTool'
@@ -10,11 +10,16 @@ import { tui } from '@/lib/i18n/tool-l10n'
 /** 第八批:编码 + 文本工具 4 个 */
 
 // ── MD5/SHA 哈希生成器 ──
+/** SubtleCrypto 支持的全部算法(MD5 不在其列);默认 SHA-256 */
+const HASH_ALGOS = ['SHA-256', 'SHA-384', 'SHA-512', 'SHA-1'] as const
+type HashAlgo = (typeof HASH_ALGOS)[number]
+
 export function HashGeneratorClient() {
   const { locale } = useApp()
   const L = (key: string, fb: string) => tui('hash-generator', locale, key, fb)
   const [input, setInput] = useState('Hello World')
-  const [hashes, setHashes] = useState<{ sha256: string; sha1: string } | null>(null)
+  const [algo, setAlgo] = useState<HashAlgo>('SHA-256')
+  const [hash, setHash] = useState<string | null>(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
 
@@ -24,16 +29,13 @@ export function HashGeneratorClient() {
     setError('')
     try {
       const data = new TextEncoder().encode(input)
-      const [sha256Buf, sha1Buf] = await Promise.all([
-        crypto.subtle.digest('SHA-256', data),
-        crypto.subtle.digest('SHA-1', data),
-      ])
+      const buf = await crypto.subtle.digest(algo, data)
       const toHex = (buf: ArrayBuffer) =>
         [...new Uint8Array(buf)].map((b) => b.toString(16).padStart(2, '0')).join('')
-      setHashes({ sha256: toHex(sha256Buf), sha1: toHex(sha1Buf) })
+      setHash(toHex(buf))
     } catch {
       // crypto.subtle 仅在安全上下文(https / localhost)可用:失败要可见,不能静默空白
-      setHashes(null)
+      setHash(null)
       setError(L('cryptoUnavailable', '⚠️ Secure hashing (SubtleCrypto) is not available in this context — open this page over HTTPS or localhost'))
     }
     setLoading(false)
@@ -51,22 +53,36 @@ export function HashGeneratorClient() {
           className="w-full rounded-lg border border-slate-300 p-3 font-mono text-sm outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200"
         />
       </div>
+      <div>
+        <label htmlFor="hash-algo" className="mb-1.5 block text-sm font-medium text-slate-700">{L('algorithm', 'Algorithm')}</label>
+        <select
+          id="hash-algo"
+          value={algo}
+          onChange={(e) => {
+            setAlgo(e.target.value as HashAlgo)
+            // 切换算法后旧哈希不再对应所选算法,清空避免误导
+            setHash(null)
+          }}
+          className="rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm shadow-sm outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200"
+        >
+          {HASH_ALGOS.map((a) => (
+            <option key={a} value={a}>{a}</option>
+          ))}
+        </select>
+      </div>
       <button onClick={generate} disabled={loading || !input} className="btn btn-primary disabled:opacity-50">
         {loading ? L('hashing', 'Hashing…') : L('generateHashes', '# Generate Hashes')}
       </button>
       {error && <p className="text-sm text-red-600">{error}</p>}
-      {hashes && (
-        <div className="space-y-4">
-          <HashResult label="SHA-256" value={hashes.sha256} />
-          <HashResult
-            label="SHA-1"
-            value={hashes.sha1}
-            warning={L('sha1Warning', '⚠️ Collision-broken since 2017 — not safe for signatures/certificates; use for legacy checksums only')}
-          />
-        </div>
+      {hash && (
+        <HashResult
+          label={algo}
+          value={hash}
+          warning={algo === 'SHA-1' ? L('sha1Warning', '⚠️ Collision-broken since 2017 — not safe for signatures/certificates; use for legacy checksums only') : undefined}
+        />
       )}
       <CalculatorNote>
-        {L('note', '🔐 Uses SubtleCrypto API (true cryptographic hashing). SHA-1 is cryptographically broken — SHA-256 is recommended.')}
+        {L('note', '🔐 Uses SubtleCrypto API (true cryptographic hashing). Pick SHA-256 (default), SHA-384, or SHA-512 — SHA-1 is cryptographically broken and offered for legacy checksums only.')}
       </CalculatorNote>
     </div>
   )
@@ -85,6 +101,14 @@ function HashResult({ label, value, warning }: { label: string; value: string; w
   )
 }
 
+/** 词首大写辅助:撇号(' 与 ’ U+2019)不算词边界 —— "don't" 不会变成 "Don'T" */
+function titleCaseWords(t: string): string {
+  return t.replace(
+    /(^|[^\p{L}\p{N}_'\u2019])(\p{L})/gu,
+    (_m, p1: string, p2: string) => p1 + p2.toUpperCase(),
+  )
+}
+
 // ── Slug → Title(反转 slug generator)──
 export const SlugToTitleClient = makeTextTool({
   slug: 'slug-to-title',
@@ -92,12 +116,12 @@ export const SlugToTitleClient = makeTextTool({
   outputLabel: 'Title',
   defaultInput: 'how-to-make-pancakes',
   transform: (s) =>
-    s
-      .replace(/[-_]+/g, ' ')
-      .replace(/\s+/g, ' ')
-      .trim()
-      // Unicode 感知的词首大写(与 title-case-converter 同口径),避免 ñ/o 之间被误判为词首
-      .replace(/(^|[^\p{L}\p{N}_])(\p{L})/gu, (_m, p1: string, p2: string) => p1 + p2.toUpperCase()),
+    titleCaseWords(
+      s
+        .replace(/[-_]+/g, ' ')
+        .replace(/\s+/g, ' ')
+        .trim(),
+    ),
   note: '🔤 Reverses URL slugs back to readable titles. Replaces hyphens with spaces and capitalizes words.',
 })
 

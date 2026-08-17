@@ -1,12 +1,23 @@
 'use client'
 
+import { useState, useMemo } from 'react'
+import { CopyButton } from '@/components/CopyButton'
 import { makeTextTool } from '../tools/makeTextTool'
+import { useApp } from '@/components/providers/AppProviders'
 import { tui } from '@/lib/i18n/tool-l10n'
 import { hasCJK } from '@/lib/text-stats'
 
 /**
- * 批量文本工具 - 全部用 makeTextTool 工厂,每个仅需一个 transform 函数
+ * 批量文本工具 - 除 FindReplaceClient 外全部用 makeTextTool 工厂,每个仅需一个 transform 函数
  */
+
+/** 词首大写辅助:撇号(' 与 ’ U+2019)不算词边界 —— "don't" 不会变成 "Don'T" */
+function titleCaseWords(t: string): string {
+  return t.replace(
+    /(^|[^\p{L}\p{N}_'\u2019])(\p{L})/gu,
+    (_m, p1: string, p2: string) => p1 + p2.toUpperCase(),
+  )
+}
 
 export const UppercaseConverterClient = makeTextTool({
   slug: 'uppercase-converter',
@@ -34,11 +45,9 @@ export const TitleCaseConverterClient = makeTextTool({
   outputLabel: 'Title Case',
   defaultInput: 'the quick brown fox',
   transform: (t, locale) => {
-    // Unicode 感知的词首大写:\b\w 会把「ñ 后的 o」当词首(EspañOl),
-    // 改为「行首或非[字母数字_]字符后的字母」才大写,ASCII 行为与 \b\w 完全一致
-    const out = t
-      .toLowerCase()
-      .replace(/(^|[^\p{L}\p{N}_])(\p{L})/gu, (_m, p1: string, p2: string) => p1 + p2.toUpperCase())
+    // Unicode 感知的词首大写(titleCaseWords):\b\w 会把「ñ 后的 o」当词首(EspañOl),
+    // 且撇号不算词边界,"don't" 保持 "Don't" 而非 "Don'T"
+    const out = titleCaseWords(t.toLowerCase())
     // 纯中文无大小写概念:明确提示而非静默无效果
     if (out === t && hasCJK(t)) {
       return t + '\n\n' + tui('title-case-converter', locale, 'cjkNoEffectNote', 'ℹ️ Case conversion only affects Latin letters — Chinese characters are unchanged.')
@@ -99,16 +108,38 @@ export const RemoveDuplicatesClient = makeTextTool({
 export const SortLinesClient = makeTextTool({
   slug: 'sort-lines',
   inputLabel: 'List (one item per line)',
-  outputLabel: 'Sorted (A → Z)',
+  outputLabel: 'Sorted',
   defaultInput: 'cherry\napple\ndate\nbanana',
-  transform: (t) =>
-    t
+  transform: (t) => {
+    // 可选排序指令:列表末尾追加 " ||| numeric"(按数值自然排序)/ " ||| desc"(降序)
+    // / " ||| numeric,desc";尾段不是合法指令时整段按列表处理,无指令保持默认(字母升序)
+    let body = t
+    let numeric = false
+    let desc = false
+    const i = t.lastIndexOf('|||')
+    if (i !== -1) {
+      const words = t
+        .slice(i + 3)
+        .trim()
+        .toLowerCase()
+        .split(',')
+        .map((w) => w.trim())
+        .filter(Boolean)
+      if (words.length > 0 && words.every((w) => w === 'numeric' || w === 'desc')) {
+        body = t.slice(0, i)
+        numeric = words.includes('numeric')
+        desc = words.includes('desc')
+      }
+    }
+    const cmp = (a: string, b: string) => a.localeCompare(b, undefined, numeric ? { numeric: true } : undefined)
+    return body
       .split(/\r?\n/)
       .map((l) => l.trim())
       .filter(Boolean)
-      .sort((a, b) => a.localeCompare(b))
-      .join('\n'),
-  note: '🔤 Sorts lines alphabetically. Empty lines are removed.',
+      .sort((a, b) => (desc ? cmp(b, a) : cmp(a, b)))
+      .join('\n')
+  },
+  note: '🔤 Sorts lines alphabetically. Empty lines are removed. Optional instructions after " ||| ": numeric (natural number order, e.g. 9 before 10), desc (Z → A), or "numeric,desc".',
 })
 
 export const RemoveLineBreaksClient = makeTextTool({
@@ -120,36 +151,159 @@ export const RemoveLineBreaksClient = makeTextTool({
   note: '📝 Removes all line breaks and joins text into a single line.',
 })
 
-export const FindReplaceClient = makeTextTool({
-  slug: 'find-and-replace',
-  inputLabel: 'Format: text ||| find ||| replace\n(separate with " ||| ")',
-  outputLabel: 'Result',
-  defaultInput: 'I love cats and cats are great ||| cats ||| dogs',
-  transform: (t) => {
-    // 只在前两个分隔符处切开:正文自身含 ||| 时不能丢第 4 段起的内容
-    const i1 = t.indexOf('|||')
-    if (i1 === -1) return '⚠️ Use format: text ||| find ||| replace'
-    const rest = t.slice(i1 + 3)
-    const i2 = rest.indexOf('|||')
-    if (i2 === -1) return '⚠️ Use format: text ||| find ||| replace'
-    const text = t.slice(0, i1).replace(/\s+$/, '')
-    const find = rest.slice(0, i2).trim()
-    const replace = rest.slice(i2 + 3).replace(/^\s+/, '')
-    if (!find) return text
-    return text.split(find).join(replace)
-  },
-  note: '🔍 Separate your text, search term, and replacement with " ||| ". Example: hello world ||| world ||| there',
-})
+/**
+ * Find & Replace —— 自定义多控件组件(正文 + Find + Replace + Case sensitive/Regex)
+ * 交互与样式参照 TextCleanerClient;导出名保持不变,页面 import 不受影响。
+ */
+export function FindReplaceClient() {
+  const { locale } = useApp()
+  // 取本地化 UI 串;缺失回退英文(SSR 恒英文)
+  const L = (key: string, fb: string) => tui('find-and-replace', locale, key, fb)
+  const [text, setText] = useState('')
+  const [findStr, setFindStr] = useState('')
+  const [replaceStr, setReplaceStr] = useState('')
+  const [caseSensitive, setCaseSensitive] = useState(false)
+  const [useRegex, setUseRegex] = useState(false)
 
-export const WhitespaceRemoverClient = makeTextTool({
-  inputLabel: 'Your text',
-  outputLabel: 'Trimmed',
-  defaultInput: '   Hello    World   \n\n  extra   spaces  ',
-  transform: (t) =>
-    t
-      .split(/\r?\n/)
-      .map((l) => l.replace(/\s+/g, ' ').trim())
-      .filter(Boolean)
-      .join('\n'),
-  note: '🧹 Removes leading/trailing spaces and collapses multiple spaces into one.',
-})
+  const { output, regexError } = useMemo(() => {
+    if (!findStr) return { output: text, regexError: false }
+    const flags = caseSensitive ? 'g' : 'gi'
+    if (useRegex) {
+      try {
+        return { output: text.replace(new RegExp(findStr, flags), replaceStr), regexError: false }
+      } catch {
+        // 非法正则:友好报错而非抛出
+        return { output: '', regexError: true }
+      }
+    }
+    // 字面查找:查找词转义正则元字符;替换串的 $ 转成 $$ 保持字面语义($&/$1 不被解释)
+    const re = new RegExp(findStr.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), flags)
+    return { output: text.replace(re, replaceStr.replace(/\$/g, '$$$$')), regexError: false }
+  }, [text, findStr, replaceStr, caseSensitive, useRegex])
+
+  const inputStyle = {
+    borderColor: 'rgb(var(--border-strong))',
+    backgroundColor: 'rgb(var(--bg-card))',
+    color: 'rgb(var(--text))',
+  }
+
+  return (
+    <div className="space-y-5">
+      {/* 正文输入区 */}
+      <div>
+        <div className="mb-2 flex items-center justify-between">
+          <label htmlFor="fr-text" className="text-sm font-medium text-slate-700">
+            {L('inputLabel', 'Your text')}
+          </label>
+          {text && (
+            <button
+              type="button"
+              onClick={() => setText('')}
+              className="-my-1 rounded-md px-2 py-1 text-xs text-slate-400 hover:text-red-500 sm:text-sm"
+            >
+              {L('clear', 'Clear')}
+            </button>
+          )}
+        </div>
+        <textarea
+          id="fr-text"
+          value={text}
+          onChange={(e) => setText(e.target.value)}
+          placeholder={L('placeholder', 'Type or paste text...')}
+          rows={6}
+          className="w-full rounded-lg border p-4 font-mono text-sm shadow-sm outline-none transition focus:ring-2"
+          style={inputStyle}
+        />
+      </div>
+
+      {/* Find / Replace */}
+      <div className="grid gap-3 sm:grid-cols-2">
+        <div>
+          <label htmlFor="fr-find" className="mb-1.5 block text-sm font-medium text-slate-700">
+            {L('findLabel', 'Find')}
+          </label>
+          <input
+            id="fr-find"
+            type="text"
+            value={findStr}
+            onChange={(e) => setFindStr(e.target.value)}
+            spellCheck={false}
+            className="w-full rounded-lg border p-3 font-mono text-sm shadow-sm outline-none transition focus:ring-2"
+            style={inputStyle}
+          />
+        </div>
+        <div>
+          <label htmlFor="fr-replace" className="mb-1.5 block text-sm font-medium text-slate-700">
+            {L('replaceLabel', 'Replace with')}
+          </label>
+          <input
+            id="fr-replace"
+            type="text"
+            value={replaceStr}
+            onChange={(e) => setReplaceStr(e.target.value)}
+            spellCheck={false}
+            className="w-full rounded-lg border p-3 font-mono text-sm shadow-sm outline-none transition focus:ring-2"
+            style={inputStyle}
+          />
+        </div>
+      </div>
+
+      {/* 选项 */}
+      <div className="flex flex-wrap gap-x-6 gap-y-3">
+        <label className="flex cursor-pointer items-center gap-2 text-sm" style={{ color: 'rgb(var(--text-muted))' }}>
+          <input
+            type="checkbox"
+            checked={caseSensitive}
+            onChange={(e) => setCaseSensitive(e.target.checked)}
+            className="h-4 w-4 rounded"
+          />
+          {L('caseSensitive', 'Case sensitive')}
+        </label>
+        <label className="flex cursor-pointer items-center gap-2 text-sm" style={{ color: 'rgb(var(--text-muted))' }}>
+          <input
+            type="checkbox"
+            checked={useRegex}
+            onChange={(e) => setUseRegex(e.target.checked)}
+            className="h-4 w-4 rounded"
+          />
+          {L('regexLabel', 'Regex')}
+        </label>
+      </div>
+
+      {/* 输出区 */}
+      <div>
+        <div className="mb-2 flex items-center justify-between">
+          <label className="text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
+            {L('outputLabel', 'Result')}
+          </label>
+          <CopyButton value={output} disabled={!output} />
+        </div>
+        {regexError ? (
+          <p
+            className="rounded-lg border-2 p-4 font-mono text-sm"
+            style={{ borderColor: 'rgb(254 202 202)', backgroundColor: 'rgb(254 226 226 / 0.4)', color: 'rgb(var(--text))' }}
+          >
+            {L('invalidRegex', '⚠️ Invalid regular expression — check your pattern syntax')}
+          </p>
+        ) : (
+          <textarea
+            readOnly
+            value={output}
+            placeholder={L('resultPlaceholder', 'Result will appear here...')}
+            rows={6}
+            className="w-full rounded-lg border-2 p-4 font-mono text-sm outline-none"
+            style={{
+              borderColor: 'rgb(219 234 254)', // brand-100
+              backgroundColor: 'rgb(219 234 254 / 0.4)', // brand-50/40
+              color: 'rgb(var(--text))',
+            }}
+          />
+        )}
+      </div>
+
+      <p className="rounded-md p-3 text-xs" style={{ backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text-subtle))' }}>
+        {L('note', '🔍 Replaces every match. Toggle "Regex" for patterns (e.g. \\d+) — $1 backreferences work in the replacement. Matching is case-insensitive unless "Case sensitive" is checked.')}
+      </p>
+    </div>
+  )
+}

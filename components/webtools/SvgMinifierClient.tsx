@@ -16,12 +16,25 @@ interface MinifyOptions {
   removeDecl: boolean
   removeComments: boolean
   removeMeta: boolean
+  removeTitleDesc: boolean
   removeEditorData: boolean
   collapseWhitespace: boolean
   roundNumbers: boolean
   decimals: number
   removeDefaultAttrs: boolean
 }
+
+/**
+ * 可安全做数字取整的数值(几何/坐标)属性白名单。
+ * 只按属性名匹配,避免腐蚀非坐标类文本(data-name="Layer 1.234"、
+ * class、url(#id.5)、字体名等)。名称统一小写比较。
+ */
+const NUMERIC_ATTRS = new Set([
+  'd', 'points', 'transform', 'gradienttransform', 'patterntransform',
+  'x', 'y', 'dx', 'dy', 'x1', 'x2', 'y1', 'y2', 'cx', 'cy', 'fx', 'fy',
+  'r', 'rx', 'ry', 'width', 'height',
+  'stroke-width', 'stroke-dasharray', 'stroke-dashoffset',
+])
 
 /** UTF-8 字节数(Node/浏览器都有 TextEncoder,SSG 安全) */
 function byteSize(s: string): number {
@@ -48,6 +61,10 @@ function minifySvg(input: string, opts: MinifyOptions): string {
 
   if (opts.removeMeta) {
     out = out.replace(/<metadata[\s\S]*?(<\/metadata>|\/>)/gi, '')
+  }
+
+  // title/desc 服务于屏幕阅读器(无障碍),默认保留,仅显式开启时移除
+  if (opts.removeTitleDesc) {
     out = out.replace(/<title[\s\S]*?<\/title>/gi, '')
     out = out.replace(/<desc[\s\S]*?<\/desc>/gi, '')
   }
@@ -71,14 +88,15 @@ function minifySvg(input: string, opts: MinifyOptions): string {
 
   if (opts.roundNumbers) {
     const factor = Math.pow(10, opts.decimals)
-    // 只处理引号内(属性值/路径数据)的数字;整数与科学计数法不动
-    out = out.replace(/="([^"]*)"/g, (m, val: string) => {
+    // 只对白名单内的数值属性取整;整数与科学计数法不动
+    out = out.replace(/(\s)([a-zA-Z_:][a-zA-Z0-9_.:-]*)="([^"]*)"/g, (m, ws: string, name: string, val: string) => {
+      if (!NUMERIC_ATTRS.has(name.toLowerCase())) return m
       const rounded = val.replace(/-?\d*\.\d+(?:e[+-]?\d+)?/gi, (num) => {
         if (/e/i.test(num)) return num
         const n = Math.round(parseFloat(num) * factor) / factor
         return String(n)
       })
-      return rounded === val ? m : `="${rounded}"`
+      return rounded === val ? m : `${ws}${name}="${rounded}"`
     })
   }
 
@@ -102,7 +120,8 @@ export function SvgMinifierClient() {
   const TOGGLES: { key: keyof Omit<MinifyOptions, 'decimals'>; label: string; hint: string }[] = [
     { key: 'removeDecl', label: L('toggleRemoveDeclLabel', 'XML declaration & DOCTYPE'), hint: L('toggleRemoveDeclHint', '<?xml …?> and <!DOCTYPE …>') },
     { key: 'removeComments', label: L('toggleRemoveCommentsLabel', 'Comments'), hint: L('toggleRemoveCommentsHint', '<!-- … -->') },
-    { key: 'removeMeta', label: L('toggleRemoveMetaLabel', 'Metadata blocks'), hint: L('toggleRemoveMetaHint', '<metadata>, <title>, <desc>') },
+    { key: 'removeMeta', label: L('toggleRemoveMetaLabel', 'Metadata blocks'), hint: L('toggleRemoveMetaHint', '<metadata>') },
+    { key: 'removeTitleDesc', label: L('toggleRemoveTitleDescLabel', 'Title & description'), hint: L('toggleRemoveTitleDescHint', '<title>, <desc> (screen readers)') },
     { key: 'removeEditorData', label: L('toggleRemoveEditorDataLabel', 'Editor leftovers'), hint: L('toggleRemoveEditorDataHint', 'inkscape:, sodipodi:, Adobe namespaces, enable-background') },
     { key: 'collapseWhitespace', label: L('toggleCollapseWhitespaceLabel', 'Whitespace between tags'), hint: L('toggleCollapseWhitespaceHint', '> < collapses to ><') },
     { key: 'roundNumbers', label: L('toggleRoundNumbersLabel', 'Round numeric values'), hint: L('toggleRoundNumbersHint', 'Inside attribute values & path data') },
@@ -118,6 +137,7 @@ export function SvgMinifierClient() {
     removeDecl: true,
     removeComments: true,
     removeMeta: true,
+    removeTitleDesc: false,
     removeEditorData: true,
     collapseWhitespace: true,
     roundNumbers: true,

@@ -377,6 +377,8 @@ function beautifyJs(src: string, unit: string): string {
 
 const VOID_TAGS = new Set(['area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input', 'link', 'meta', 'param', 'source', 'track', 'wbr'])
 const INLINE_TAGS = new Set(['a', 'abbr', 'b', 'bdi', 'bdo', 'br', 'button', 'cite', 'code', 'data', 'dfn', 'em', 'i', 'img', 'input', 'kbd', 'label', 'mark', 'q', 'rp', 'rt', 'ruby', 's', 'samp', 'select', 'small', 'span', 'strong', 'sub', 'sup', 'textarea', 'time', 'u', 'var', 'wbr'])
+/** 子文本需原样保留(不折叠空白、不重排缩进)的标签 */
+const PRESERVE_TAGS = new Set(['pre', 'textarea'])
 
 const TOKEN_RE = /<!--[\s\S]*?-->|<!doctype[^>]*>|<script\b[\s\S]*?<\/script\s*>|<style\b[\s\S]*?<\/style\s*>|<\/?[a-zA-Z][^>]*>|[^<]+|</gi
 
@@ -385,6 +387,9 @@ function beautifyHtml(src: string, unit: string): string {
   const lines: string[] = []
   let level = 0
   let inlineBuf = ''
+  // pre/textarea 上下文栈:内部内容(含子标签)按源码原样输出
+  const preserveStack: string[] = []
+  let preserveAtSol = true
 
   const flushInline = () => {
     const t = inlineBuf.replace(/\s+/g, ' ').trim()
@@ -392,7 +397,40 @@ function beautifyHtml(src: string, unit: string): string {
     inlineBuf = ''
   }
 
+  // preserve 上下文的输出:换行完全跟随源码自身的换行,不折叠空白、不加缩进
+  const preservePush = (s: string) => {
+    if (s === '') return
+    if (preserveAtSol) lines.push(s)
+    else lines[lines.length - 1] = (lines[lines.length - 1] ?? '') + s
+  }
+
   for (const token of tokens) {
+    // pre/textarea 内容:原样保留(含子标签与空白)
+    if (preserveStack.length > 0) {
+      if (/^<\//.test(token)) {
+        const name = (token.match(/^<\/\s*([a-zA-Z0-9-]+)/)?.[1] ?? '').toLowerCase()
+        if (preserveStack[preserveStack.length - 1] === name) {
+          preserveStack.pop()
+          level = Math.max(0, level - 1)
+          preservePush(token)
+          preserveAtSol = true
+          continue
+        }
+        preservePush(token)
+        continue
+      }
+      if (!/^</.test(token)) {
+        // 文本:仅去掉紧邻开/闭标签的一个换行(格式化引入的边界),其余原样
+        const hadLeadingNl = /^\n/.test(token)
+        const hadTrailingNl = /\n$/.test(token)
+        if (hadLeadingNl) preserveAtSol = true
+        preservePush(token.replace(/^\n/, '').replace(/\n$/, ''))
+        preserveAtSol = hadTrailingNl
+        continue
+      }
+      preservePush(token)
+      continue
+    }
     // 注释
     if (/^<!--/.test(token)) {
       if (inlineBuf.trim()) {
@@ -442,6 +480,15 @@ function beautifyHtml(src: string, unit: string): string {
     if (/^<[a-zA-Z]/.test(token)) {
       const name = (token.match(/^<\s*([a-zA-Z0-9-]+)/)?.[1] ?? '').toLowerCase()
       const selfClose = /\/\s*>$/.test(token) || VOID_TAGS.has(name)
+      if (!selfClose && PRESERVE_TAGS.has(name)) {
+        // pre/textarea:开标签照常缩进,内容进入 preserve 模式
+        flushInline()
+        lines.push(unit.repeat(level) + token.trim())
+        preserveStack.push(name)
+        preserveAtSol = false
+        level++
+        continue
+      }
       if (INLINE_TAGS.has(name)) {
         inlineBuf += token
         continue

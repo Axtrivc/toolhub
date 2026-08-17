@@ -7,6 +7,7 @@ import type { ToolL10n } from '../tool-l10n'
 export const uuidGeneratorL10n: ToolL10n = {
   zh: {
     ui: {
+      'copyAll': '复制全部',
       'generate': '🎲 生成 UUID',
       'howMany': '生成个数',
       'note': '🆔 使用 Web Crypto API 生成 RFC 4122 v4 UUID。用于数据库、会话和分布式系统的唯一 ID。',
@@ -18,6 +19,7 @@ export const uuidGeneratorL10n: ToolL10n = {
   },
   es: {
     ui: {
+      'copyAll': 'Copiar todo',
       'generate': '🎲 Generar UUIDs',
       'howMany': 'Cuántos',
       'note': '🆔 Genera UUID v4 RFC 4122 con la Web Crypto API. Se usan como IDs únicos en bases de datos, sesiones y sistemas distribuidos.',
@@ -29,6 +31,7 @@ export const uuidGeneratorL10n: ToolL10n = {
   },
   de: {
     ui: {
+      'copyAll': 'Alle kopieren',
       'generate': '🎲 UUIDs erzeugen',
       'howMany': 'Wie viele',
       'note': '🆔 Erzeugt RFC-4122-v4-UUIDs mit der Web Crypto API. Dienen als eindeutige IDs in Datenbanken, Sessions und verteilten Systemen.',

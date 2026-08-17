@@ -19,6 +19,7 @@ interface OgInput {
   description: string
   url: string
   image: string
+  imageAlt: string
   siteName: string
   twitterCard: 'summary_large_image' | 'summary'
 }
@@ -28,6 +29,7 @@ const SAMPLE: OgInput = {
   description: '169 fast, privacy-friendly utilities for developers, students, and everyday tasks. No signup, no upload.',
   url: 'https://example.com/blog/free-tools',
   image: 'https://example.com/images/share-card.png',
+  imageAlt: 'A preview of the ToolHub homepage with its tool grid',
   siteName: 'Example',
   twitterCard: 'summary_large_image',
 }
@@ -75,6 +77,7 @@ export function OpenGraphGeneratorClient() {
     description: '',
     url: '',
     image: '',
+    imageAlt: '',
     siteName: '',
     twitterCard: 'summary_large_image',
   })
@@ -95,7 +98,10 @@ export function OpenGraphGeneratorClient() {
     if (v.title) lines.push(`<meta property="og:title" content="${escapeHtml(v.title)}">`)
     if (v.description) lines.push(`<meta property="og:description" content="${escapeHtml(v.description)}">`)
     if (v.url) lines.push(`<meta property="og:url" content="${escapeHtml(v.url)}">`)
-    if (v.image) lines.push(`<meta property="og:image" content="${escapeHtml(v.image)}">`)
+    if (v.image) {
+      lines.push(`<meta property="og:image" content="${escapeHtml(v.image)}">`)
+      if (v.imageAlt) lines.push(`<meta property="og:image:alt" content="${escapeHtml(v.imageAlt)}">`)
+    }
     if (v.siteName) lines.push(`<meta property="og:site_name" content="${escapeHtml(v.siteName)}">`)
     lines.push(`<meta property="og:type" content="website">`)
 
@@ -103,7 +109,10 @@ export function OpenGraphGeneratorClient() {
     lines.push(`<meta name="twitter:card" content="${v.twitterCard}">`)
     if (v.title) lines.push(`<meta name="twitter:title" content="${escapeHtml(v.title)}">`)
     if (v.description) lines.push(`<meta name="twitter:description" content="${escapeHtml(v.description)}">`)
-    if (v.image) lines.push(`<meta name="twitter:image" content="${escapeHtml(v.image)}">`)
+    if (v.image) {
+      lines.push(`<meta name="twitter:image" content="${escapeHtml(v.image)}">`)
+      if (v.imageAlt) lines.push(`<meta name="twitter:image:alt" content="${escapeHtml(v.imageAlt)}">`)
+    }
 
     return lines.join('\n')
   }, [v])
@@ -128,6 +137,14 @@ export function OpenGraphGeneratorClient() {
             className={inputCls}
             style={{ borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rgb(var(--bg-card))', color: 'rgb(var(--text))' }}
           />
+          {/* 实时字符计数:≤60 绿(推荐区间),超出红 */}
+          <div
+            className="mt-1 text-right font-mono text-[11px]"
+            aria-label={L('titleCountAria', 'Title character count (recommended 60 or fewer)')}
+            style={{ color: v.title.length <= 60 ? 'rgb(22 163 74)' : 'rgb(220 38 38)' }}
+          >
+            {v.title.length}/60
+          </div>
         </div>
         <div className="sm:col-span-2">
           <label htmlFor="og-desc" className="mb-1 block text-sm font-medium text-slate-700">
@@ -142,6 +159,14 @@ export function OpenGraphGeneratorClient() {
             className={inputCls}
             style={{ borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rgb(var(--bg-card))', color: 'rgb(var(--text))' }}
           />
+          {/* 实时字符计数:≤200 绿(推荐上限),超出红 */}
+          <div
+            className="mt-1 text-right font-mono text-[11px]"
+            aria-label={L('descCountAria', 'Description character count (recommended 200 or fewer)')}
+            style={{ color: v.description.length <= 200 ? 'rgb(22 163 74)' : 'rgb(220 38 38)' }}
+          >
+            {v.description.length}/200
+          </div>
         </div>
         <div>
           <label htmlFor="og-url" className="mb-1 block text-sm font-medium text-slate-700">
@@ -181,6 +206,20 @@ export function OpenGraphGeneratorClient() {
             value={v.image}
             onChange={(e) => set('image', e.target.value)}
             placeholder={L('imagePlaceholder', 'https://example.com/image.png  (recommended 1200×630)')}
+            className={inputCls}
+            style={{ borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rgb(var(--bg-card))', color: 'rgb(var(--text))' }}
+          />
+        </div>
+        <div className="sm:col-span-2">
+          <label htmlFor="og-image-alt" className="mb-1 block text-sm font-medium text-slate-700">
+            {L('imageAltLabel', 'Image alt text (optional)')}
+          </label>
+          <input
+            id="og-image-alt"
+            type="text"
+            value={v.imageAlt}
+            onChange={(e) => set('imageAlt', e.target.value)}
+            placeholder={L('imageAltPlaceholder', 'Describe the image for screen readers')}
             className={inputCls}
             style={{ borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rgb(var(--bg-card))', color: 'rgb(var(--text))' }}
           />

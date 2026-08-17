@@ -1,8 +1,15 @@
 /**
- * 纯 TS 5-field cron 引擎(零依赖)
+ * 纯 TS cron 引擎(零依赖)
  *
  * 字段顺序(标准 Vixie cron):
  *   minute(0-59) hour(0-23) day-of-month(1-31) month(1-12) day-of-week(0-6,0=Sun)
+ *
+ * 额外支持:
+ *  - @ 别名:@yearly/@annually/@monthly/@weekly/@daily/@midnight/@hourly 展开为
+ *    等价 5 字段表达式;@reboot 无周期(调度器启动时执行一次),用 isRebootAlias 判断。
+ *  - 6 字段(Quartz 风格):首字段为秒(0-59);
+ *  - 7 字段:秒 分 时 日 月 周 年 —— 年字段被忽略(每年都可能触发)。
+ *  - dom/dow 位置的 ?(Quartz「不指定」)按 * 处理。
  *
  * 支持语法:`*` / 字面量 / `,` 列表 / `-` 范围 / `/` 步长。
  * DOM 与 DOW 的 OR 语义:当两者都不是 `*` 时,任一满足即触发(标准行为)。
@@ -14,6 +21,8 @@ import { tui } from './i18n/tool-l10n'
 import type { Locale } from './i18n'
 
 export interface CronSchedule {
+  /** 秒(0-59),仅 6/7 字段表达式存在 */
+  second?: Set<number>
   minute: Set<number>
   hour: Set<number>
   dom: Set<number>
@@ -23,6 +32,32 @@ export interface CronSchedule {
   domStar: boolean
   /** dow 是否为 * 通配(决定 OR 语义) */
   dowStar: boolean
+}
+
+/** @ 别名 → 等价 5 字段表达式(@reboot 无周期,单独用 isRebootAlias 判断) */
+const ALIASES: Record<string, string> = {
+  '@yearly': '0 0 1 1 *',
+  '@annually': '0 0 1 1 *',
+  '@monthly': '0 0 1 * *',
+  '@weekly': '0 0 * * 0',
+  '@daily': '0 0 * * *',
+  '@midnight': '0 0 * * *',
+  '@hourly': '0 * * * *',
+}
+
+/** 是否为 @reboot(启动时执行一次,无重复周期,不存在"下次触发时间") */
+export function isRebootAlias(expr: string): boolean {
+  return expr.trim() === '@reboot'
+}
+
+/** @ 别名展开为等价 5 字段表达式;非别名原样返回;未知的 @xxx 抛错 */
+export function expandAlias(expr: string): string {
+  const t = expr.trim()
+  if (!t.startsWith('@')) return expr
+  if (t === '@reboot') return t
+  const expanded = ALIASES[t]
+  if (!expanded) throw new Error(`Unknown alias "${t}"`)
+  return expanded
 }
 
 /** 解析单个字段(支持 *, 列表, 范围, 步长)。返回允许值的集合;非法抛错。 */
@@ -85,21 +120,40 @@ function parseDowField(field: string): Set<number> {
   return result
 }
 
-/** 解析 5-field cron 字符串为 CronSchedule(正确标记 domStar/dowStar 用于 OR 语义判断)。 */
+/**
+ * 解析 cron 字符串为 CronSchedule(正确标记 domStar/dowStar 用于 OR 语义判断)。
+ * 5 字段:minute hour dom month dow;
+ * 6 字段:second minute hour dom month dow(首字段秒);
+ * 7 字段:second minute hour dom month dow year(年字段忽略);
+ * @ 别名先展开(@reboot 不在此处理,用 isRebootAlias)。
+ */
 export function parseCronSchedule(expr: string): CronSchedule {
-  const parts = expr.trim().split(/\s+/)
-  if (parts.length !== 5) {
-    throw new Error(`Expected 5 fields, got ${parts.length}. Use: minute hour day month weekday`)
+  const parts = expandAlias(expr).trim().split(/\s+/)
+  let secondField: string | undefined
+  let fields: string[]
+  if (parts.length === 6 || parts.length === 7) {
+    secondField = parts[0]
+    // 7 字段时丢弃末尾的年字段(parts.slice(1, 6) 恰取 分 时 日 月 周)
+    fields = parts.slice(1, 6)
+  } else {
+    fields = parts
   }
-  const [minute, hour, dom, month, dowRaw] = parts
+  if (fields.length !== 5) {
+    throw new Error(`Expected 5-7 fields, got ${parts.length}. Use: [second] minute hour day month weekday [year]`)
+  }
+  const [minute, hour, domRaw, month, dowRaw] = fields
+  // Quartz 的 ?(dom/dow 位置「不指定」)按 * 处理
+  const dom = domRaw === '?' ? '*' : domRaw
+  const dow = dowRaw === '?' ? '*' : dowRaw
   return {
+    ...(secondField !== undefined ? { second: parseField(secondField, 0, 59) } : {}),
     minute: parseField(minute, 0, 59),
     hour: parseField(hour, 0, 23),
     dom: parseField(dom, 1, 31),
     month: parseField(month, 1, 12, MONTH_NAMES),
-    dow: parseDowField(dowRaw),
+    dow: parseDowField(dow),
     domStar: dom === '*',
-    dowStar: dowRaw === '*',
+    dowStar: dow === '*',
   }
 }
 
@@ -125,14 +179,17 @@ function matches(date: Date, s: CronSchedule): boolean {
 }
 
 /**
- * 求从 from(含)之后下一次触发时间(秒/毫秒归零,按分钟粒度)。
+ * 求从 from(含)之后下一次触发时间(按分钟粒度扫描;有秒字段时分钟内选最小允许秒)。
  * 找不到(4 年内无解)返回 null,避免死循环。
  */
 export function nextFire(expr: string, from: Date = new Date()): Date | null {
   const s = parseCronSchedule(expr)
-  // 从下一分钟整点开始(丢弃当前分钟的秒)
-  const start = new Date(from.getTime() + 60000)
-  start.setSeconds(0, 0)
+  const allowedSecs = s.second ? Array.from(s.second).sort((a, b) => a - b) : [0]
+  const firstSec = allowedSecs[0]
+  // 无秒字段:从下一分钟整点开始(丢弃当前分钟的秒,与旧行为一致);
+  // 有秒字段:从 from+1s 开始,当前分钟内可能还有更晚的允许秒
+  const start = new Date(from.getTime() + (s.second ? 1000 : 60000))
+  start.setSeconds(s.second ? start.getSeconds() : 0, 0)
 
   const cursor = new Date(start)
   // 上限:扫描 4 年(1461 天,闰年周期含 1 个闰日),超过认为无解
@@ -144,8 +201,18 @@ export function nextFire(expr: string, from: Date = new Date()): Date | null {
       cursor.setHours(0, 0, 0, 0)
       if (cursor > limit) return null
     }
-    if (matches(cursor, s)) return cursor
+    if (matches(cursor, s)) {
+      // matches 只对到分钟:在该分钟内取 ≥ 当前秒的最小允许秒
+      const sec = allowedSecs.find((x) => x >= cursor.getSeconds())
+      if (sec !== undefined) {
+        const fire = new Date(cursor.getTime())
+        fire.setSeconds(sec, 0)
+        return fire
+      }
+    }
     cursor.setMinutes(cursor.getMinutes() + 1)
+    // 推进到下一分钟的第一个允许秒,后续候选分钟都能命中 firstSec
+    cursor.setSeconds(firstSec, 0)
   }
   return null
 }
@@ -166,10 +233,26 @@ export function nextFires(expr: string, n: number, from: Date = new Date()): Dat
   return result
 }
 
-/** 把 5-field cron 翻译成一句人类可读描述(locale 缺省英文;非英文经 cron-parser bundle 取模板)。 */
+/** 把 cron 表达式翻译成一句人类可读描述(locale 缺省英文;非英文经 cron-parser bundle 取模板)。 */
 export function describeCron(expr: string, locale: Locale = 'en'): string {
-  const [minF, hrF, domF, monF, dowF] = expr.trim().split(/\s+/)
   const L = (key: string, fb: string) => tui('cron-parser', locale, key, fb)
+  // @reboot:启动时执行一次,无周期语义,单独描述
+  if (isRebootAlias(expr)) {
+    return L('atReboot', 'At startup (@reboot) — runs once when the scheduler starts, no repeating schedule')
+  }
+  const parts = expandAlias(expr).trim().split(/\s+/)
+  let secF: string | undefined
+  let fields: string[]
+  if (parts.length === 6 || parts.length === 7) {
+    secF = parts[0]
+    fields = parts.slice(1, 6) // 7 字段时忽略末尾年字段
+  } else {
+    fields = parts
+  }
+  const [minF, hrF, domRaw, monF, dowRaw] = fields
+  // Quartz 的 ?(dom/dow「不指定」)按 * 处理
+  const domF = domRaw === '?' ? '*' : domRaw
+  const dowF = dowRaw === '?' ? '*' : dowRaw
   const dowNames = [
     L('dow0', 'Sunday'), L('dow1', 'Monday'), L('dow2', 'Tuesday'), L('dow3', 'Wednesday'),
     L('dow4', 'Thursday'), L('dow5', 'Friday'), L('dow6', 'Saturday'),
@@ -179,6 +262,12 @@ export function describeCron(expr: string, locale: Locale = 'en'): string {
     L('mon5', 'May'), L('mon6', 'June'), L('mon7', 'July'), L('mon8', 'August'),
     L('mon9', 'September'), L('mon10', 'October'), L('mon11', 'November'), L('mon12', 'December'),
   ]
+
+  // 秒部分:6/7 字段且秒字段被限定(非 *、非 0)时,前置"第 N 秒"说明
+  let secPart = ''
+  if (secF && secF !== '*' && secF !== '0') {
+    secPart = L('atSecond', 'at second {secs}, ').replace('{secs}', describeList(secF))
+  }
 
   // 时间部分
   let time: string
@@ -224,11 +313,11 @@ export function describeCron(expr: string, locale: Locale = 'en'): string {
   }
 
   // 简化常见情况
-  if (minF === '*' && hrF === '*' && domF === '*' && dowF === '*' && monF === '*') {
+  if (minF === '*' && hrF === '*' && domF === '*' && dowF === '*' && monF === '*' && !secPart) {
     return L('everyMinuteEveryDay', 'Every minute, every day')
   }
   return capitalize(L('finalTemplate', '{time}, {day}{month}')
-    .replace('{time}', time)
+    .replace('{time}', secPart + time)
     .replace('{day}', day)
     .replace('{month}', month))
 }

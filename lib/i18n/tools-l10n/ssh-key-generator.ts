@@ -30,6 +30,7 @@ export const sshKeyGeneratorL10n: ToolL10n = {
       'rsa': 'RSA',
       'rsa4096Wait': 'RSA-4096 可能需要几秒…',
       'rsaModulus': 'RSA 模数(位)',
+      'unencryptedBadge': '未加密——无口令',
     },
     useCases: [
       '在线生成 Ed25519 密钥对',
@@ -77,6 +78,7 @@ export const sshKeyGeneratorL10n: ToolL10n = {
       'rsa': 'RSA',
       'rsa4096Wait': 'RSA-4096 puede tardar unos segundos…',
       'rsaModulus': 'Módulo RSA (bits)',
+      'unencryptedBadge': 'Sin cifrar — sin frase de contraseña',
     },
     useCases: [
       'generar par de claves Ed25519 online',
@@ -124,6 +126,7 @@ export const sshKeyGeneratorL10n: ToolL10n = {
       'rsa': 'RSA',
       'rsa4096Wait': 'RSA-4096 kann einige Sekunden dauern…',
       'rsaModulus': 'RSA-Modulus (Bits)',
+      'unencryptedBadge': 'Unverschlüsselt — ohne Passphrase',
     },
     useCases: [
       'Ed25519-Schlüsselpaar online erzeugen',

@@ -81,7 +81,8 @@ export const EmailExtractorClient = makeTextTool({
   outputLabel: 'Extracted emails',
   defaultInput: 'Contact us at hello@example.com or support@test.org for help.',
   transform: (t, locale) => {
-    const matches = t.match(/[\w.+-]+@[\w-]+\.[\w.-]+/g) || []
+    // 句末邮箱常带尾句点("bob@example.com."):提取后剥掉尾部句点
+    const matches = (t.match(/[\w.+-]+@[\w-]+\.[\w.-]+/g) || []).map((m) => m.replace(/\.+$/, ''))
     const unique = [...new Set(matches)]
     return unique.length > 0
       ? unique.join('\n')
@@ -119,9 +120,10 @@ export const TextDiffClient = makeTextTool({
   outputLabel: 'Comparison',
   defaultInput: 'the quick brown fox ||| the slow brown fox',
   transform: (t, locale) => {
-    const parts = t.split(/\s*\|\|\|\s*/)
-    if (parts.length > 2) return '⚠️ Use exactly one " ||| " separator between the two texts'
-    const [a = '', b = ''] = parts
+    // 只在首个分隔符处切开:第二段文本自身含 ||| 时不再整单报错
+    const sepIdx = t.indexOf('|||')
+    const a = sepIdx === -1 ? t : t.slice(0, sepIdx).replace(/\s+$/, '')
+    const b = sepIdx === -1 ? '' : t.slice(sepIdx + 3).replace(/^\s+/, '')
     const aw = a.split(/\s+/).filter(Boolean)
     const bw = b.split(/\s+/).filter(Boolean)
     // LCS 是 O(n×m) 且每次击键都重算:超长输入直接友好提示,避免页面卡死
@@ -183,7 +185,7 @@ export const TextSizeEstimatorClient = makeTextTool({
     return [
       `Bytes (UTF-8):     ${bytes}`,
       `Kilobytes (KB):    ${(bytes / 1024).toFixed(3)}`,
-      `Characters:        ${t.length}`,
+      `Characters:        ${[...t].length}`,
       `Words:             ${countWords(t)}`,
       `Lines:             ${t ? t.split(/\r?\n/).length : 0}`,
       // Base64 把 3 字节编成 4 字符,不足 3 字节用 = 填充到 4 的倍数:

@@ -1,9 +1,15 @@
 'use client'
 
+import { useMemo, useState } from 'react'
 import { makeCalculatorClient } from '../calculator/makeCalculatorClient'
+import { CalculatorField, ResultCard, CalculatorNote } from '../calculator/CalculatorField'
+import { ResultActions } from '@/components/ResultActions'
+import { LoadSampleButton } from '@/components/LoadSampleButton'
+import { useApp } from '@/components/providers/AppProviders'
 import { fmtUSD, fmtNum, toNum } from '@/lib/format'
 import { calendarDaysBetween } from '@/lib/date-utils'
-import { tui } from '@/lib/i18n/tool-l10n'
+import { getCalculatorSample } from '@/lib/tool-samples'
+import { tui, tuiCalc } from '@/lib/i18n/tool-l10n'
 
 /** 第八批:金融 6 + 生活 4 + 几何 3 = 13 个计算器 */
 
@@ -52,18 +58,46 @@ export const CreditCardMinimumCalculatorClient = makeCalculatorClient({
     { key: 'minPayment', label: 'Minimum payment', highlight: true },
     { key: 'interest', label: 'Interest this month' },
     { key: 'principal', label: 'Goes to principal' },
+    { key: 'payoff', label: 'Payoff time (minimums only)' },
+    { key: 'totalInterest', label: 'Total interest (minimums only)' },
   ],
-  compute: (v) => {
+  compute: (v, locale) => {
+    const T = (key: string, fb: string) => tui('credit-card-minimum-payment-calculator', locale, key, fb)
     const bal = toNum(v.balance)
     const monthlyRate = toNum(v.apr) / 100 / 12
     const interest = bal * monthlyRate
     const minPct = toNum(v.minPct) / 100
-    // 余额为 0/负时最低还款为 0(无 $25 下限),否则环形图会把 $25 全画进本金
-    const minPayment = bal <= 0 ? 0 : Math.max(25, bal * minPct) // 多数银行最低 $25
+    // 余额为 0/负时最低还款为 0(无 $25 下限),否则环形图会把 $25 全画进本金;
+    // $25 下限同时封顶到余额:余额 $20 时最低还款就是 $20,不能要求还 $25
+    const minPayment = bal <= 0 ? 0 : Math.min(bal, Math.max(25, bal * minPct)) // 多数银行最低 $25
+
+    // 只还最低还款的摊销:月利率 = APR/12,月供 = max($25, 余额×最低%) 且不超过
+    // 当月余额+利息;月供 ≤ 利息时余额永远减不下去,600 个月上限防死循环
+    let months = 0
+    let totalInt = 0
+    let b = bal
+    let paidOff = bal <= 0
+    while (b > 0.005 && months < 600) {
+      const int = b * monthlyRate
+      const pay = Math.min(b + int, Math.max(25, b * minPct))
+      totalInt += int
+      b = b + int - pay
+      months++
+      if (b <= 0.005) {
+        paidOff = true
+        break
+      }
+    }
     return {
       minPayment: fmtUSD(minPayment),
       interest: fmtUSD(interest),
       principal: fmtUSD(Math.max(0, minPayment - interest)),
+      payoff: bal <= 0
+        ? T('monthsN', '{n} months').replace('{n}', '0')
+        : paidOff
+          ? T('monthsN', '{n} months').replace('{n}', String(months))
+          : T('payoffOverLimit', '> 600 months'),
+      totalInterest: paidOff ? fmtUSD(totalInt) : '—',
     }
   },
   note: '💳 Minimum payments barely cover interest — paying only the minimum means decades to pay off. Pay more whenever possible.',
@@ -118,8 +152,16 @@ export const DownPaymentCalculatorClient = makeCalculatorClient({
   compute: (v, locale) => {
     const price = toNum(v.price)
     const pct = toNum(v.down) / 100
-    const amount = price * pct
     const T = (key: string, fb: string) => tui('down-payment-calculator', locale, key, fb)
+    // 首付比例 > 100% 时贷款额为负,无意义 → 显式报错而非输出负数
+    if (pct > 1) {
+      return {
+        amount: '⚠️ Down payment cannot exceed 100%',
+        loan: '—',
+        pmi: '—',
+      }
+    }
+    const amount = price * pct
     return {
       amount: fmtUSD(amount),
       loan: fmtUSD(price - amount),
@@ -149,10 +191,12 @@ export const DTICalculatorClient = makeCalculatorClient({
       return { dti: '—', max: '—', verdict: `⚠️ ${T('errIncome', 'Enter your monthly income')}` }
     }
     const dti = (debts / inc) * 100
-    const max28 = inc * 0.28
+    // 28% 前端法则还要被 36% 后端约束:最大月供不能让总 DTI(含既有债务)超 36%,且不为负
+    const max28 = Math.max(0, Math.min(inc * 0.28, inc * 0.36 - debts))
     let verdict: string
     if (dti < 36) verdict = T('verdictHealthy', '✓ Healthy — most lenders approve')
-    else if (dti < 43) verdict = T('verdictTight', '⚠️ Tight — maximum most lenders allow')
+    // 43% 是多数贷款方的上限,恰为 43% 仍属「已达上限」而非「被拒」
+    else if (dti <= 43) verdict = T('verdictTight', '⚠️ Tight — maximum most lenders allow')
     else verdict = T('verdictHigh', '✗ High — likely to be denied')
     return {
       dti: `${fmtNum(dti, 1)}%`,
@@ -189,20 +233,27 @@ export const CommissionCalculatorClient = makeCalculatorClient({
 
 // ── 生活实用 ──
 
-export const AgeDifferenceCalculatorClient = makeCalculatorClient({
-  slug: 'age-difference-calculator',
-  inputs: [
-    { key: 'birth1', label: 'Person 1 birth date (YYYY-MM-DD)', default: '1990-06-15', type: 'text', placeholder: 'YYYY-MM-DD' },
-    { key: 'birth2', label: 'Person 2 birth date (YYYY-MM-DD)', default: '1995-03-20', type: 'text', placeholder: 'YYYY-MM-DD' },
-  ],
-  outputs: [
-    { key: 'diff', label: 'Age difference', highlight: true },
-    { key: 'days', label: 'Difference in days' },
-  ],
-  compute: (v, locale) => {
-    const T = (key: string, fb: string) => tui('age-difference-calculator', locale, key, fb)
-    const d1 = new Date(v.birth1)
-    const d2 = new Date(v.birth2)
+// 生日输入用原生 <input type="date">:makeCalculatorClient 工厂的输入类型只支持
+// number/text(改 config 的 type 无法产出日期选择器),因此这里用自定义 client
+// 手写同构 UI(Inputs + Load Sample + ResultCards + Copy Summary/CSV + Note)。
+export function AgeDifferenceCalculatorClient() {
+  const { locale } = useApp()
+  const T = (key: string, fb: string) => tui('age-difference-calculator', locale, key, fb)
+  const LC = (key: string, fb: string) => tuiCalc(key, locale, fb)
+
+  const [values, setValues] = useState<Record<string, string>>(() => {
+    // 示例注册表优先(与工厂 Load Sample 行为一致),否则用默认出生日期
+    const sample = getCalculatorSample('age-difference-calculator')
+    return {
+      birth1: sample?.birth1 ?? '1990-06-15',
+      birth2: sample?.birth2 ?? '1995-03-20',
+    }
+  })
+  const sample = useMemo(() => getCalculatorSample('age-difference-calculator'), [])
+
+  const results = useMemo(() => {
+    const d1 = new Date(values.birth1 ?? '')
+    const d2 = new Date(values.birth2 ?? '')
     if (isNaN(d1.getTime()) || isNaN(d2.getTime())) {
       return { diff: `⚠️ ${T('errInvalidDate', 'Invalid date (use YYYY-MM-DD)')}`, days: '—' }
     }
@@ -227,9 +278,88 @@ export const AgeDifferenceCalculatorClient = makeCalculatorClient({
         .replace('{d}', String(days)),
       days: T('daysN', '{n} days').replace('{n}', fmtNum(totalDays, 0)),
     }
-  },
-  note: '🎂 Calculates the gap between two birth dates, broken down into years, months, and days. Useful for relationships and family history.',
-})
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [values, locale])
+
+  // 与工厂一致的纯文本摘要 / CSV(输入 + 结果三列表格,UTF-8 BOM 供 Excel 识别)
+  const summary = useMemo(() => {
+    const inputLines = [
+      `  ${T('in.birth1', 'Person 1 birth date')}: ${values.birth1 ?? ''}`,
+      `  ${T('in.birth2', 'Person 2 birth date')}: ${values.birth2 ?? ''}`,
+    ]
+    const resultLines = [
+      `  ${T('out.diff', 'Age difference')}: ${results.diff}`,
+      `  ${T('out.days', 'Difference in days')}: ${results.days}`,
+    ]
+    return [
+      LC('summaryTitle', 'Calculation Summary'),
+      LC('inputsLabel', 'Inputs:'),
+      ...inputLines,
+      LC('resultsLabel', 'Results:'),
+      ...resultLines,
+    ].join('\n')
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [values, results, locale])
+
+  const csvContent = useMemo(() => {
+    const rows: string[][] = [
+      [LC('csvField', 'Field'), LC('csvType', 'Type'), LC('csvValue', 'Value')],
+      [T('in.birth1', 'Person 1 birth date'), LC('csvInput', 'Input'), values.birth1 ?? ''],
+      [T('in.birth2', 'Person 2 birth date'), LC('csvInput', 'Input'), values.birth2 ?? ''],
+      [T('out.diff', 'Age difference'), LC('csvResult', 'Result'), results.diff],
+      [T('out.days', 'Difference in days'), LC('csvResult', 'Result'), results.days],
+    ]
+    const esc = (s: string) => (/[",\n]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s)
+    return '\uFEFF' + rows.map((r) => r.map(esc).join(',')).join('\n')
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [values, results, locale])
+
+  return (
+    <div className="space-y-6">
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        <span className="text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>{LC('inputs', 'Inputs')}</span>
+        <LoadSampleButton
+          onLoad={() =>
+            setValues({
+              birth1: sample?.birth1 ?? '1990-06-15',
+              birth2: sample?.birth2 ?? '1995-03-20',
+            })
+          }
+        />
+      </div>
+      <div className="grid grid-cols-1 gap-4 rounded-lg p-4 sm:grid-cols-2" style={{ backgroundColor: 'rgb(var(--bg-subtle))' }}>
+        <CalculatorField
+          id="birth1"
+          label={T('in.birth1', 'Person 1 birth date')}
+          type="date"
+          value={values.birth1 ?? ''}
+          onChange={(v) => setValues((prev) => ({ ...prev, birth1: v }))}
+        />
+        <CalculatorField
+          id="birth2"
+          label={T('in.birth2', 'Person 2 birth date')}
+          type="date"
+          value={values.birth2 ?? ''}
+          onChange={(v) => setValues((prev) => ({ ...prev, birth2: v }))}
+        />
+      </div>
+      <div role="status" aria-live="polite" className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+        <ResultCard label={T('out.diff', 'Age difference')} value={results.diff} highlight />
+        <ResultCard label={T('out.days', 'Difference in days')} value={results.days} />
+      </div>
+      <ResultActions
+        summary={summary}
+        filename="age-difference-calculator-result.csv"
+        downloadContent={csvContent}
+        mime="text/csv;charset=utf-8;"
+        copyLabel={LC('copySummary', 'Copy Summary')}
+      />
+      <CalculatorNote>
+        {T('note', '🎂 Calculates the gap between two birth dates, broken down into years, months, and days. Useful for relationships and family history.')}
+      </CalculatorNote>
+    </div>
+  )
+}
 
 export const GradeCalculatorClient = makeCalculatorClient({
   slug: 'grade-calculator',
@@ -318,12 +448,13 @@ export const TrapezoidCalculatorClient = makeCalculatorClient({
     { key: 'b', label: 'Bottom side (b)', default: '10' },
     { key: 'h', label: 'Height (h)', default: '4' },
   ],
-  outputs: [{ key: 'area', label: 'Area', highlight: true }],
+  outputs: [{ key: 'area', label: 'Area', highlight: true, sublabel: '(a + b)/2 × h' }],
   compute: (v) => {
     const a = toNum(v.a)
     const b = toNum(v.b)
     const h = toNum(v.h)
-    return { area: `${fmtNum(((a + b) / 2) * h, 4)} ((a + b)/2 × h)` }
+    // 公式放 sublabel,值保持纯数字(避免污染 Copy Summary / CSV)
+    return { area: fmtNum(((a + b) / 2) * h, 4) }
   },
   note: '📐 Trapezoid area = average of parallel sides × height.',
 })
@@ -332,14 +463,15 @@ export const CubeCalculatorClient = makeCalculatorClient({
   slug: 'cube-calculator',
   inputs: [{ key: 'side', label: 'Side length', default: '5' }],
   outputs: [
-    { key: 'volume', label: 'Volume', highlight: true },
-    { key: 'surface', label: 'Surface area' },
+    { key: 'volume', label: 'Volume', highlight: true, sublabel: 'V = s³' },
+    { key: 'surface', label: 'Surface area', sublabel: 'SA = 6s²' },
   ],
   compute: (v) => {
     const s = toNum(v.side)
+    // 公式放 sublabel,值保持纯数字(避免污染 Copy Summary / CSV)
     return {
-      volume: `${fmtNum(s ** 3, 4)} (s³)`,
-      surface: `${fmtNum(6 * s * s, 4)} (6s²)`,
+      volume: fmtNum(s ** 3, 4),
+      surface: fmtNum(6 * s * s, 4),
     }
   },
   note: '🧊 Cube volume = side³. Surface area = 6 × side².',
@@ -349,14 +481,15 @@ export const SphereCalculatorClient = makeCalculatorClient({
   slug: 'sphere-calculator',
   inputs: [{ key: 'r', label: 'Radius', default: '5' }],
   outputs: [
-    { key: 'volume', label: 'Volume', highlight: true },
-    { key: 'surface', label: 'Surface area' },
+    { key: 'volume', label: 'Volume', highlight: true, sublabel: 'V = ⁴⁄₃ π r³' },
+    { key: 'surface', label: 'Surface area', sublabel: 'SA = 4 π r²' },
   ],
   compute: (v) => {
     const r = toNum(v.r)
+    // 公式放 sublabel,值保持纯数字(避免污染 Copy Summary / CSV)
     return {
-      volume: `${fmtNum((4 / 3) * Math.PI * r ** 3, 4)} (⁴⁄₃ π r³)`,
-      surface: `${fmtNum(4 * Math.PI * r * r, 4)} (4 π r²)`,
+      volume: fmtNum((4 / 3) * Math.PI * r ** 3, 4),
+      surface: fmtNum(4 * Math.PI * r * r, 4),
     }
   },
   note: '🔵 Sphere volume = ⁴⁄₃ π r³. Surface area = 4 π r².',
@@ -374,7 +507,9 @@ export const SalaryConverterClient = makeCalculatorClient({
       options: [
         { label: 'Annually', value: 'annual' },
         { label: 'Monthly', value: 'monthly' },
+        { label: 'Semi-monthly', value: 'semimonthly' },
         { label: 'Bi-weekly', value: 'biweekly' },
+        { label: 'Weekly', value: 'weekly' },
         { label: 'Hourly', value: 'hourly' },
       ],
     },
@@ -384,7 +519,9 @@ export const SalaryConverterClient = makeCalculatorClient({
   outputs: [
     { key: 'annual', label: 'Annual salary', highlight: true },
     { key: 'monthly', label: 'Monthly' },
+    { key: 'semimonthly', label: 'Semi-monthly' },
     { key: 'biweekly', label: 'Bi-weekly' },
+    { key: 'weekly', label: 'Weekly' },
     { key: 'hourly', label: 'Hourly' },
   ],
   compute: (v) => {
@@ -392,15 +529,21 @@ export const SalaryConverterClient = makeCalculatorClient({
     const rawHours = toNum(v.hours)
     // hours=0/负/非法时回退 40(年→小时换算的除数,防止 Infinity/负值)
     const hours = rawHours > 0 ? rawHours : 40
-    // 先把输入归一到年度总额,再派生其他三种
-    // 标准假设:每月 = 年/12,双周 = 年/26,小时 = 年/(52×每周工时)
+    // 先把输入归一到年度总额,再派生其他周期
+    // 标准假设:每年 = 年,每月 = 年/12,半月 = 年/24,双周 = 年/26,周 = 年/52,小时 = 年/(52×每周工时)
     let annual: number
     switch (v.unit) {
       case 'monthly':
         annual = amount * 12
         break
+      case 'semimonthly':
+        annual = amount * 24
+        break
       case 'biweekly':
         annual = amount * 26
+        break
+      case 'weekly':
+        annual = amount * 52
         break
       case 'hourly':
         annual = amount * hours * 52
@@ -412,9 +555,11 @@ export const SalaryConverterClient = makeCalculatorClient({
     return {
       annual: fmtUSD(annual, 0),
       monthly: fmtUSD(annual / 12, 0),
+      semimonthly: fmtUSD(annual / 24, 0),
       biweekly: fmtUSD(annual / 26, 0),
+      weekly: fmtUSD(annual / 52, 0),
       hourly: fmtUSD(annual / (52 * hours), 2),
     }
   },
-  note: '💵 Assumes 12 monthly pays, 26 bi-weekly pays, and 52 paid weeks/year. Overtime and bonuses are not included.',
+  note: '💵 Assumes 12 monthly pays, 24 semi-monthly pays, 26 bi-weekly pays, and 52 paid weeks/year. Overtime and bonuses are not included.',
 })

@@ -83,7 +83,7 @@ export const NetWorthCalculatorClient = makeCalculatorClient({
 export const AnnuityCalculatorClient = makeCalculatorClient({
   slug: 'annuity-calculator',
   inputs: [
-    { key: 'principal', label: ' Initial principal', suffix: '$', default: '100000' },
+    { key: 'principal', label: 'Initial principal', suffix: '$', default: '100000' },
     { key: 'rate', label: 'Annual return', suffix: '%', default: '5' },
     { key: 'years', label: 'Payout period', suffix: 'years', default: '20' },
   ],
@@ -130,30 +130,48 @@ export const CapitalGainsTaxEstimatorClient = makeCalculatorClient({
     const years = toNum(v.years)
     const income = toNum(v.taxableIncome)
     const married = v.filing === 'married'
-    // 长期持有(>1年)按 0/15/20% 优惠税率,阈值取决于应税收入(2026 年,IRS Rev. Proc. 2025-32)
+    const posGain = Math.max(0, gain)
+    // 长期持有(>1年)按 0/15/20% 优惠税率,判档基数 = 应税收入 + 收益本身
+    // (收益"堆叠"在普通收入之上;2026 年阈值,IRS Rev. Proc. 2025-32)
     const zeroMax = married ? 98900 : 49450
     const fifteenMax = married ? 613700 : 545500
-    // 短期(<1年)按普通收入边际档征税(2026)
+    // 短期(<1年)按普通收入边际档征税,落点同样按 收入+收益 计算(2026)
     const ordinaryBrackets = married
       ? [[0, 0.10], [24800, 0.12], [100800, 0.22], [211400, 0.24], [403550, 0.32], [512450, 0.35], [768700, 0.37]]
       : [[0, 0.10], [12400, 0.12], [50400, 0.22], [105700, 0.24], [201775, 0.32], [256225, 0.35], [640600, 0.37]]
-    let marginal = 0
-    for (const b of ordinaryBrackets) {
-      if (income >= (b[0] as number)) marginal = b[1] as number
-    }
     const isLong = years > 1
-    const rate = !isLong
-      ? marginal * 100
-      : income > fifteenMax ? 20
-      : income > zeroMax ? 15
-      : 0
+    const label = isLong
+      ? tui('capital-gains-tax-estimator', locale, 'longTerm', 'Long-term ')
+      : tui('capital-gains-tax-estimator', locale, 'shortTerm', 'Short-term ')
+    let tax = 0
+    let rateDetail: string
+    if (isLong) {
+      // 0% 档剩余额度 = 阈值 − 收入;超出部分依次进 15% / 20% 档
+      const zeroPortion = Math.min(posGain, Math.max(0, zeroMax - income))
+      const fifteenPortion = Math.min(posGain - zeroPortion, Math.max(0, fifteenMax - Math.max(income, zeroMax)))
+      const twentyPortion = posGain - zeroPortion - fifteenPortion
+      const parts: string[] = []
+      if (zeroPortion > 0) parts.push(`0% × ${fmtUSD(zeroPortion, 0)}`)
+      if (fifteenPortion > 0) parts.push(`15% × ${fmtUSD(fifteenPortion, 0)}`)
+      if (twentyPortion > 0) parts.push(`20% × ${fmtUSD(twentyPortion, 0)}`)
+      if (parts.length === 0) parts.push('0%')
+      tax = fifteenPortion * 0.15 + twentyPortion * 0.2
+      rateDetail = parts.join(' + ')
+    } else {
+      let marginal = 0
+      for (const b of ordinaryBrackets) {
+        if (income + posGain >= (b[0] as number)) marginal = b[1] as number
+      }
+      tax = posGain * marginal
+      rateDetail = `${fmtNum(marginal * 100, 0)}%`
+    }
     return {
       gain: fmtUSD(gain),
-      rate: `${isLong ? tui('capital-gains-tax-estimator', locale, 'longTerm', 'Long-term ') : tui('capital-gains-tax-estimator', locale, 'shortTerm', 'Short-term ')} ${rate}%`,
-      tax: fmtUSD(Math.max(0, gain) * rate / 100),
+      rate: `${label.trim()} ${rateDetail}`,
+      tax: fmtUSD(tax),
     }
   },
-  note: '📈 US capital gains: held 1+ year = long-term (0/15/20% by 2026 taxable income). Held <1 year = short-term (ordinary income rate). Simplified — excludes NIIT and state tax.',
+  note: '📈 US capital gains: held 1+ year = long-term (0/15/20% by 2026 taxable income). Held <1 year = short-term (ordinary income rate). Gains stack on top of ordinary income for bracket purposes (long-term brackets and the short-term marginal rate are based on income plus gain). Simplified — excludes NIIT and state tax.',
 })
 
 export const RentVsBuyCalculatorClient = makeCalculatorClient({
@@ -163,10 +181,11 @@ export const RentVsBuyCalculatorClient = makeCalculatorClient({
     { key: 'rent', label: 'Comparable rent', suffix: '$/mo', default: '2000' },
     { key: 'down', label: 'Down payment', suffix: '%', default: '20' },
     { key: 'rate', label: 'Mortgage rate', suffix: '%', default: '6.8' },
+    { key: 'term', label: 'Loan term', suffix: 'years', default: '30' },
     { key: 'years', label: 'Years in home', default: '7' },
   ],
   outputs: [
-    { key: 'buyTotal', label: 'Total cost to buy', sublabel: 'Mortgage + interest' },
+    { key: 'buyTotal', label: 'Net cost to buy', sublabel: 'Down + payments − sale equity' },
     { key: 'rentTotal', label: 'Total cost to rent', sublabel: 'Rent over the holding period' },
     { key: 'winner', label: 'Cheaper option', highlight: true },
   ],
@@ -175,27 +194,43 @@ export const RentVsBuyCalculatorClient = makeCalculatorClient({
     const home = toNum(v.home)
     const rent = toNum(v.rent)
     const downPct = toNum(v.down)
-    const loan = home * (1 - downPct / 100)
+    const down = (home * downPct) / 100
+    const loan = Math.max(0, home - down)
     const rate = toNum(v.rate) / 100 / 12
-    const months = toNum(v.years) * 12
-    if (months <= 0) return { buyTotal: `⚠️ ${T('errYears', 'Enter years greater than 0')}`, rentTotal: '—', winner: '—' }
+    const holdYears = toNum(v.years)
+    const termYears = toNum(v.term)
+    if (holdYears <= 0 || termYears <= 0) return { buyTotal: `⚠️ ${T('errYears', 'Enter years greater than 0')}`, rentTotal: '—', winner: '—' }
+    // 月供按整个贷款期限(如 30 年)摊销,而不是按持有年数
+    const loanMonths = Math.round(termYears * 12)
     let monthly: number
-    if (rate === 0) monthly = loan / months
+    if (rate === 0) monthly = loan / loanMonths
     else {
-      const f = Math.pow(1 + rate, months)
+      const f = Math.pow(1 + rate, loanMonths)
       monthly = (loan * rate * f) / (f - 1)
     }
-    const buyTotal = monthly * months + home * downPct / 100
+    // 持有期内逐月模拟;上限保护 60 年(720 个月)
+    const months = Math.min(Math.round(holdYears * 12), 720)
+    let balance = loan
+    let paid = 0
+    for (let i = 0; i < months && balance > 0; i++) {
+      balance += balance * rate
+      const pay = Math.min(monthly, balance)
+      balance -= pay
+      paid += pay
+    }
+    // 购房净成本 = 首付 + 持有期内已付月供(含利息) − 期末净值(期末房价 − 剩余本金)
+    const endingEquity = Math.max(0, home - balance)
+    const buyTotal = down + paid - endingEquity
     const rentTotal = rent * months
     return {
       buyTotal: fmtUSD(buyTotal, 0),
       rentTotal: fmtUSD(rentTotal, 0),
       winner: buyTotal < rentTotal
-        ? T('winnerBuying', 'Buying (~{amount} cheaper)').replace('{amount}', fmtUSD(buyTotal - rentTotal, 0))
-        : T('winnerRenting', 'Renting (~{amount} cheaper)').replace('{amount}', fmtUSD(rentTotal - buyTotal, 0)),
+        ? T('winnerBuying', 'Buying (~{amount} cheaper)').replace('{amount}', fmtUSD(rentTotal - buyTotal, 0))
+        : T('winnerRenting', 'Renting (~{amount} cheaper)').replace('{amount}', fmtUSD(buyTotal - rentTotal, 0)),
     }
   },
-  note: '🏠 Simplified — excludes taxes, maintenance, appreciation, and opportunity cost of investing. Use as a rough first-pass comparison.',
+  note: '🏠 Net cost to buy = down payment + mortgage payments made while living there − equity recovered at sale (home value − remaining loan balance). Simplified — excludes taxes, maintenance, appreciation, and opportunity cost of investing. Use as a rough first-pass comparison.',
 })
 
 // ── 健康类 ──
@@ -305,26 +340,26 @@ export const PregnancyDueDateCalculatorClient = makeCalculatorClient({
     { key: 'weeks', label: 'Current week', sublabel: 'Assumes today' },
   ],
   compute: (v) => {
-    const lmp = new Date(v.lmp)
-    if (isNaN(lmp.getTime())) return { due: '—', conceived: '—', weeks: '—' }
-    // Naegele 法则:LMP + 280 天(纯输入决定,不读当前时间)
-    const due = new Date(lmp)
-    due.setDate(due.getDate() + 280)
-    const conceived = new Date(lmp)
-    conceived.setDate(conceived.getDate() + 14)
+    // 纯 UTC 日历运算:避免本地时区 setDate 与 toISOString(UTC) 混用
+    // 导致的日期偏移(欧美时区结果早一天)与 hydration 不一致
+    const t = Date.parse(v.lmp + 'T00:00:00Z')
+    if (isNaN(t)) return { due: '—', conceived: '—', weeks: '—' }
+    const day = 86400000
+    const iso = (ms: number) => new Date(ms).toISOString().slice(0, 10)
+    // Naegele 法则:LMP + 280 天;受孕日 ≈ LMP + 14 天(孕期自受孕起 266 天)
     return {
-      due: due.toISOString().slice(0, 10),
-      conceived: conceived.toISOString().slice(0, 10),
+      due: iso(t + 280 * day),
+      conceived: iso(t + 14 * day),
       // 当前周依赖 now,SSR 期不计算(显示 '—'),挂载后由 deriveNow 补齐
       weeks: '—',
     }
   },
   // 挂载后基于当前时间派生 "Current week"(工厂只在客户端 effect 中调用)
   deriveNow: (v, locale) => {
-    const lmp = new Date(v.lmp)
-    if (isNaN(lmp.getTime())) return { weeks: '—' }
+    const t = Date.parse(v.lmp + 'T00:00:00Z')
+    if (isNaN(t)) return { weeks: '—' }
     const now = new Date()
-    const weeks = Math.floor((now.getTime() - lmp.getTime()) / (7 * 24 * 60 * 60 * 1000))
+    const weeks = Math.floor((now.getTime() - t) / (7 * 24 * 60 * 60 * 1000))
     const valid = weeks >= 0 && weeks <= 42
     return {
       weeks: valid

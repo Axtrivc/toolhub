@@ -1,6 +1,7 @@
 'use client'
 
-import { useState, useRef, useCallback, useEffect } from 'react'
+import { useState, useRef, useCallback, useEffect, useMemo } from 'react'
+import { CopyButton } from '@/components/CopyButton'
 import { useApp } from '@/components/providers/AppProviders'
 import { tui } from '@/lib/i18n/tool-l10n'
 
@@ -26,6 +27,9 @@ const SIZES: SizedIcon[] = [
   { size: 512, label: '512×512', desc: 'Splash screen & app stores (PWA)' },
 ]
 
+/** favicon.ico 内嵌的三档 PNG(Vista+ 支持 PNG-in-ICO,无需 BMP) */
+const ICO_SIZES = [16, 32, 48]
+
 /** 把图片画成正方形居中裁剪后的 canvas(源图 → cover 到 target×target) */
 function drawSquare(canvas: HTMLCanvasElement, img: HTMLImageElement, target: number) {
   canvas.width = target
@@ -43,6 +47,48 @@ function drawSquare(canvas: HTMLCanvasElement, img: HTMLImageElement, target: nu
   const sx = (srcW - side) / 2
   const sy = (srcH - side) / 2
   ctx.drawImage(img, sx, sy, side, side, 0, 0, target, target)
+}
+
+/** canvas.toBlob 的 Promise 包装 */
+function canvasToPngBlob(canvas: HTMLCanvasElement): Promise<Blob | null> {
+  return new Promise((resolve) => canvas.toBlob(resolve, 'image/png'))
+}
+
+/**
+ * 纯前端拼 ICO 容器(Vista+ 支持 PNG-in-ICO,无需 BMP 编码器):
+ *  - 6 字节头(小端):reserved u16=0 / type u16=1(icon)/ count u16=N
+ *  - 每张图 16 字节目录项:width、height(0 表示 256,此处 ≤48 直接写)、
+ *    colorCount=0、reserved=0、planes u16=1、bpp u16=32、
+ *    size u32(PNG 字节数)、offset u32(数据起点,逐项累加)
+ *  - 随后依次内嵌各 PNG 数据
+ */
+async function buildIco(pngs: { size: number; blob: Blob }[]): Promise<Blob> {
+  const buffers = await Promise.all(pngs.map(async (p) => new Uint8Array(await p.blob.arrayBuffer())))
+  const count = pngs.length
+  const dataStart = 6 + 16 * count
+  const total = dataStart + buffers.reduce((sum, b) => sum + b.length, 0)
+  const out = new Uint8Array(total)
+  const header = new DataView(out.buffer, 0, 6)
+  header.setUint16(0, 0, true) // reserved
+  header.setUint16(2, 1, true) // type: 1 = icon
+  header.setUint16(4, count, true)
+  let offset = 6
+  let dataOffset = dataStart
+  pngs.forEach((p, i) => {
+    const entry = new DataView(out.buffer, offset, 16)
+    entry.setUint8(0, p.size >= 256 ? 0 : p.size) // width
+    entry.setUint8(1, p.size >= 256 ? 0 : p.size) // height
+    entry.setUint8(2, 0) // color count(0 = 不指定)
+    entry.setUint8(3, 0) // reserved
+    entry.setUint16(4, 1, true) // color planes
+    entry.setUint16(6, 32, true) // bits per pixel
+    entry.setUint32(8, buffers[i].length, true) // PNG 数据字节数
+    entry.setUint32(12, dataOffset, true) // PNG 数据起始偏移
+    out.set(buffers[i], dataOffset)
+    dataOffset += buffers[i].length
+    offset += 16
+  })
+  return new Blob([out], { type: 'image/x-icon' })
 }
 
 export function FaviconGeneratorClient() {
@@ -162,6 +208,47 @@ export function FaviconGeneratorClient() {
       setTimeout(() => exportSize(s.size), i * 250)
     })
   }, [exportSize])
+
+  // 导出 favicon.ico:16/32/48 三档 PNG 打包进 ICO 容器
+  const exportIco = useCallback(async () => {
+    const img = imgRef.current
+    if (!img) return
+    setError('')
+    const canvas = document.createElement('canvas')
+    const pngs: { size: number; blob: Blob }[] = []
+    for (const size of ICO_SIZES) {
+      drawSquare(canvas, img, size)
+      const blob = await canvasToPngBlob(canvas)
+      if (!blob) {
+        setError(L('errIcoBuild', 'Could not build favicon.ico (PNG encoding failed).'))
+        return
+      }
+      pngs.push({ size, blob })
+    }
+    const ico = await buildIco(pngs)
+    const url = URL.createObjectURL(ico)
+    const a = document.createElement('a')
+    a.href = url
+    a.download = 'favicon.ico'
+    document.body.appendChild(a)
+    a.click()
+    document.body.removeChild(a)
+    URL.revokeObjectURL(url)
+  }, [locale])
+
+  // 可复制的 <head> 片段:favicon.ico + apple-touch-icon + 各档 PNG
+  const htmlSnippet = useMemo(() => {
+    if (!previews.length) return ''
+    return [
+      `<link rel="icon" href="/favicon.ico" sizes="any">`,
+      `<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">`,
+      `<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">`,
+      `<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">`,
+      `<link rel="icon" type="image/png" sizes="192x192" href="/favicon-192x192.png">`,
+      `<link rel="icon" type="image/png" sizes="512x512" href="/favicon-512x512.png">`,
+      `<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">`,
+    ].join('\n')
+  }, [previews])
 
   return (
     <div className="space-y-5">
@@ -287,12 +374,36 @@ export function FaviconGeneratorClient() {
             })}
           </div>
 
-          {/* 一键导出全部 */}
-          <div className="flex justify-center">
-            <button type="button" onClick={exportAll} className="btn btn-primary text-sm">
+          {/* favicon.ico + 一键导出全部 */}
+          <div className="flex flex-wrap justify-center gap-3">
+            <button type="button" onClick={exportIco} className="btn btn-primary text-sm">
+              {L('downloadIco', 'Download favicon.ico')}
+            </button>
+            <button type="button" onClick={exportAll} className="btn btn-secondary text-sm">
               {L('downloadAllSizes', 'Download All Sizes')}
             </button>
           </div>
+
+          {/* 可复制的 HTML 片段 */}
+          {htmlSnippet && (
+            <div>
+              <div className="mb-2 flex items-center justify-between">
+                <span className="text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>
+                  {L('htmlSnippetLabel', 'HTML snippet — paste into your <head>')}
+                </span>
+                <CopyButton value={htmlSnippet} label={L('copy', 'Copy')} />
+              </div>
+              <pre
+                className="overflow-x-auto rounded-lg border p-4 text-xs"
+                style={{ borderColor: 'rgb(var(--border))', backgroundColor: 'rgb(var(--bg-card))', color: 'rgb(var(--text))' }}
+              >
+                <code>{htmlSnippet}</code>
+              </pre>
+              <p className="mt-1.5 text-[11px]" style={{ color: 'rgb(var(--text-faint))' }}>
+                {L('htmlSnippetHint', 'Rename the downloaded files to match (or edit the paths) and place them in your site root.')}
+              </p>
+            </div>
+          )}
         </div>
       )}
 

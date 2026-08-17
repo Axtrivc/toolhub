@@ -36,6 +36,7 @@ export function UUIDGeneratorClient() {
           <input id="count" type="number" min="1" max="100" value={count} onChange={(e) => setCount(e.target.value)} className="w-28 rounded-lg border border-slate-300 p-3 outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200" />
         </div>
         <button onClick={generate} className="btn btn-primary">{L('generate', '🎲 Generate UUIDs')}</button>
+        {uuids.length > 0 && <CopyButton value={uuids.join('\n')} label={L('copyAll', 'Copy all')} />}
       </div>
       {uuids.length > 0 && (
         <div className="space-y-2">
@@ -58,51 +59,105 @@ export function UUIDGeneratorClient() {
 }
 
 function generateUUID(): string {
+  // 优先原生 randomUUID;不可用时用 getRandomValues 实现 RFC 4122 v4
+  // (16 字节,第 7 字节高 4 位置 0100、第 9 字节高 2 位置 10)——逻辑同
+  // SecretKeyGeneratorClient 的 uuidV4,不跨文件 import 私有函数
   if (typeof crypto !== 'undefined' && crypto.randomUUID) return crypto.randomUUID()
-  // 降级方案
-  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
-    const r = (Math.random() * 16) | 0
-    const v = c === 'x' ? r : (r & 0x3) | 0x8
-    return v.toString(16)
-  })
+  const b = new Uint8Array(16)
+  if (typeof crypto !== 'undefined' && crypto.getRandomValues) {
+    crypto.getRandomValues(b)
+  } else {
+    // 极端兜底:非安全上下文等无 crypto 的环境(仅影响随机性来源)
+    for (let i = 0; i < 16; i++) b[i] = Math.floor(Math.random() * 256)
+  }
+  b[6] = (b[6] & 0x0f) | 0x40
+  b[8] = (b[8] & 0x3f) | 0x80
+  const hex = [...b].map((x) => x.toString(16).padStart(2, '0')).join('')
+  return `${hex.slice(0, 8)}-${hex.slice(8, 12)}-${hex.slice(12, 16)}-${hex.slice(16, 20)}-${hex.slice(20)}`
 }
 
 // ── Lorem Ipsum 生成器 ──
 const LOREM_WORDS = 'lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua enim ad minim veniam quis nostrud exercitation ullamco laboris nisi aliquip ex ea commodo consequat duis aute irure in reprehenderit voluptate velit esse cillum eu fugiat nulla pariatur excepteur sint occaecat cupidatat non proident sunt culpa qui officia deserunt mollit anim id est laborum'.split(' ')
+
+type LoremUnit = 'paragraphs' | 'sentences' | 'words'
+// 各生成单位的数量上限
+const LOREM_UNIT_MAX: Record<LoremUnit, number> = { paragraphs: 20, sentences: 100, words: 200 }
+// 经典开头(start with lorem 勾选时用于第一段/第一句/开头几个词)
+const LOREM_CLASSIC_WORDS = 'lorem ipsum dolor sit amet'.split(' ')
+const LOREM_CLASSIC_SENTENCE = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
 
 export function LoremIpsumGeneratorClient() {
   const { locale } = useApp()
   // 取本地化 UI 串;缺失回退英文(SSR 恒英文)。
   const L = (key: string, fb: string) => tui('lorem-ipsum-generator', locale, key, fb)
 
-  const [paragraphs, setParagraphs] = useState('3')
+  const [unit, setUnit] = useState<LoremUnit>('paragraphs')
+  const [count, setCount] = useState('3')
+  const [startWithLorem, setStartWithLorem] = useState(true)
   const [output, setOutput] = useState('')
 
   const generate = () => {
-    const n = Math.min(Math.max(1, Number(paragraphs) || 1), 20)
-    const out: string[] = []
-    for (let p = 0; p < n; p++) {
-      const sentences = 4 + Math.floor(Math.random() * 4)
-      const parts: string[] = []
-      for (let s = 0; s < sentences; s++) {
-        const words = 8 + Math.floor(Math.random() * 12)
-        const ws: string[] = []
-        for (let w = 0; w < words; w++) ws.push(LOREM_WORDS[Math.floor(Math.random() * LOREM_WORDS.length)])
-        ws[0] = ws[0][0].toUpperCase() + ws[0].slice(1)
-        parts.push(ws.join(' ') + '.')
-      }
-      out.push(parts.join(' '))
+    const n = Math.min(Math.max(1, Number(count) || 1), LOREM_UNIT_MAX[unit])
+    const randWord = () => LOREM_WORDS[Math.floor(Math.random() * LOREM_WORDS.length)]
+    const randSentence = () => {
+      const words = 8 + Math.floor(Math.random() * 12)
+      const ws = Array.from({ length: words }, randWord)
+      ws[0] = ws[0][0].toUpperCase() + ws[0].slice(1)
+      return ws.join(' ') + '.'
     }
-    setOutput(out.join('\n\n'))
+    let out: string
+    if (unit === 'words') {
+      const ws = Array.from({ length: n }, randWord)
+      if (startWithLorem) {
+        for (let i = 0; i < Math.min(n, LOREM_CLASSIC_WORDS.length); i++) ws[i] = LOREM_CLASSIC_WORDS[i]
+      }
+      ws[0] = ws[0][0].toUpperCase() + ws[0].slice(1)
+      out = ws.join(' ')
+    } else if (unit === 'sentences') {
+      const parts = Array.from({ length: n }, randSentence)
+      if (startWithLorem) parts[0] = LOREM_CLASSIC_SENTENCE
+      out = parts.join(' ')
+    } else {
+      const paras = Array.from({ length: n }, () => {
+        const sentences = 4 + Math.floor(Math.random() * 4)
+        return Array.from({ length: sentences }, randSentence).join(' ')
+      })
+      if (startWithLorem) paras[0] = `${LOREM_CLASSIC_SENTENCE} ${paras[0]}`
+      out = paras.join('\n\n')
+    }
+    setOutput(out)
   }
 
   return (
     <div className="space-y-6">
       <div className="flex flex-wrap items-end gap-3">
         <div>
-          <label htmlFor="para" className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>{L('paragraphs', 'Paragraphs')}</label>
-          <input id="para" type="number" min="1" max="20" value={paragraphs} onChange={(e) => setParagraphs(e.target.value)} className="w-28 rounded-lg border border-slate-300 p-3 outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200" />
+          <label htmlFor="lorem-unit" className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>{L('unit', 'Unit')}</label>
+          <select
+            id="lorem-unit"
+            value={unit}
+            onChange={(e) => setUnit(e.target.value as LoremUnit)}
+            className="w-36 rounded-lg border border-slate-300 p-3 outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200"
+            style={{ backgroundColor: 'rgb(var(--bg-card))', color: 'rgb(var(--text))' }}
+          >
+            <option value="paragraphs">{L('unitParagraphs', 'Paragraphs')}</option>
+            <option value="sentences">{L('unitSentences', 'Sentences')}</option>
+            <option value="words">{L('unitWords', 'Words')}</option>
+          </select>
         </div>
+        <div>
+          <label htmlFor="lorem-count" className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>{L('count', 'Count')}</label>
+          <input id="lorem-count" type="number" min="1" max={LOREM_UNIT_MAX[unit]} value={count} onChange={(e) => setCount(e.target.value)} className="w-28 rounded-lg border border-slate-300 p-3 outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200" />
+        </div>
+        <label className="flex cursor-pointer items-center gap-2 pb-3 text-sm" style={{ color: 'rgb(var(--text-muted))' }}>
+          <input
+            type="checkbox"
+            checked={startWithLorem}
+            onChange={(e) => setStartWithLorem(e.target.checked)}
+            className="h-4 w-4 rounded border-slate-300 text-brand-600 focus:ring-brand-500"
+          />
+          {L('startWithLorem', 'Start with "Lorem ipsum"')}
+        </label>
         <button onClick={generate} className="btn btn-primary">{L('generate', '📝 Generate')}</button>
         {output && <CopyButton value={output} />}
       </div>
@@ -196,25 +251,30 @@ export const StandardDeviationCalculatorClient = makeCalculatorClient({
   inputs: [{ key: 'numbers', label: 'Numbers (comma-separated)', default: '4, 8, 15, 16, 23, 42' }],
   outputs: [
     { key: 'mean', label: 'Mean' },
-    { key: 'stddev', label: 'Standard deviation', highlight: true },
-    { key: 'variance', label: 'Variance' },
+    { key: 'stddev', label: 'Standard deviation (population)', highlight: true },
+    { key: 'sampleStddev', label: 'Standard deviation (sample, n−1)' },
+    { key: 'variance', label: 'Variance (population)' },
     { key: 'count', label: 'Count' },
   ],
   compute: (v) => {
     const nums = (v.numbers || '').split(/[\s,]+/).filter(Boolean).map(Number).filter((n) => isFinite(n))
-    if (nums.length === 0) return { mean: '—', stddev: '—', variance: '—', count: '0' }
+    if (nums.length === 0) return { mean: '—', stddev: '—', sampleStddev: '—', variance: '—', count: '0' }
     const n = nums.length
     const mean = nums.reduce((a, b) => a + b, 0) / n
-    const variance = nums.reduce((a, b) => a + (b - mean) ** 2, 0) / n // 总体方差
+    const ss = nums.reduce((a, b) => a + (b - mean) ** 2, 0) // 离差平方和
+    const variance = ss / n // 总体方差(÷N)
     const stddev = Math.sqrt(variance)
+    // 样本口径(÷(n−1),贝塞尔校正):n≥2 才有意义,单值无样本方差
+    const sampleVar = n >= 2 ? ss / (n - 1) : null
     return {
       mean: fmtNum(mean, 4),
       stddev: fmtNum(stddev, 4),
+      sampleStddev: sampleVar === null ? '—' : fmtNum(Math.sqrt(sampleVar), 4),
       variance: fmtNum(variance, 4),
       count: String(n),
     }
   },
-  note: '📊 Uses population standard deviation (÷N). For sample stddev, multiply by √(N/(N−1)).',
+  note: "📊 Population stddev divides by N; sample stddev (Bessel's correction) divides by N−1. Both are shown above.",
 })
 
 // ── 百分位数计算器 ──
@@ -236,7 +296,7 @@ export const PercentileCalculatorClient = makeCalculatorClient({
     const result = lo === hi ? nums[lo] : nums[lo] + (rank - lo) * (nums[hi] - nums[lo])
     return { result: fmtNum(result, 4) }
   },
-  note: '📈 90th percentile means 90% of values are below this number. Used in test scores and performance metrics.',
+  note: "📈 90th percentile means 90% of values are below this number. Uses linear interpolation (inclusive method, like Excel's PERCENTILE.INC). Common in test scores and performance metrics.",
 })
 
 // ── 通货膨胀计算器 ──
@@ -348,12 +408,16 @@ export const UnitPriceCalculatorClient = makeCalculatorClient({
     { key: 'unit1', label: 'Unit 1', default: 'g', options: [
       { label: 'grams (g)', value: 'g' }, { label: 'ml', value: 'ml' },
       { label: 'count (items)', value: 'ct' }, { label: 'kg', value: 'kg' },
+      { label: 'ounces (oz)', value: 'oz' }, { label: 'pounds (lb)', value: 'lb' },
+      { label: 'liters (l)', value: 'l' }, { label: 'milligrams (mg)', value: 'mg' },
     ]},
     { key: 'price2', label: 'Price 2', suffix: '$', default: '19.99' },
     { key: 'size2', label: 'Size 2', default: '750' },
     { key: 'unit2', label: 'Unit 2', default: 'g', options: [
       { label: 'grams (g)', value: 'g' }, { label: 'ml', value: 'ml' },
       { label: 'count (items)', value: 'ct' }, { label: 'kg', value: 'kg' },
+      { label: 'ounces (oz)', value: 'oz' }, { label: 'pounds (lb)', value: 'lb' },
+      { label: 'liters (l)', value: 'l' }, { label: 'milligrams (mg)', value: 'mg' },
     ]},
   ],
   outputs: [

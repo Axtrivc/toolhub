@@ -25,6 +25,34 @@ interface NginxOptions {
   maxBody: string
 }
 
+/** 域名校验:localhost、通配符 *.example.com、或多标签域名(TLD ≥ 2 字母) */
+const DOMAIN_RE = /^(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\.)+[a-zA-Z]{2,63}$/
+function isValidDomain(d: string): boolean {
+  const v = d.trim()
+  if (v === 'localhost') return true
+  return DOMAIN_RE.test(v.startsWith('*.') ? v.slice(2) : v)
+}
+
+/** proxy target 校验:必须是 http/https 绝对 URL */
+function isValidTarget(t: string): boolean {
+  try {
+    const u = new URL(t.trim())
+    return u.protocol === 'http:' || u.protocol === 'https:'
+  } catch {
+    return false
+  }
+}
+
+/** target 是否带路径(如 http://host:3000/app)——nginx 在正则 location 内不接受 proxy_pass 带 URI 部分 */
+function targetHasPath(t: string): boolean {
+  try {
+    const u = new URL(t.trim())
+    return u.pathname !== '/' && u.pathname !== ''
+  } catch {
+    return false
+  }
+}
+
 function buildNginxConfig(o: NginxOptions): string {
   const domain = o.domain.trim() || 'example.com'
   const target = o.target.trim() || 'http://127.0.0.1:3000'
@@ -173,6 +201,12 @@ export function NginxConfigGeneratorClient() {
 
   const fileDomain = domain.trim().replace(/[^a-zA-Z0-9.-]/g, '') || 'nginx'
 
+  // 输入校验(空值回退默认值,不算非法)
+  const domainInvalid = domain.trim() !== '' && !isValidDomain(domain)
+  const targetInvalid = target.trim() !== '' && !isValidTarget(target)
+  // target 带路径 → 正则 location 内 proxy_pass 带 URI,nginx -t 会报错
+  const warnPath = targetHasPath(target)
+
   const inputClass =
     'w-full rounded-lg border p-4 font-mono text-sm shadow-sm outline-none transition focus:ring-2'
   const inputStyle = {
@@ -197,8 +231,13 @@ export function NginxConfigGeneratorClient() {
             placeholder="example.com"
             spellCheck={false}
             className={inputClass}
-            style={inputStyle}
+            style={domainInvalid ? { ...inputStyle, borderColor: '#ef4444' } : inputStyle}
           />
+          {domainInvalid && (
+            <p className="mt-1.5 text-xs text-red-500">
+              {L('errDomainInvalid', 'Enter a valid domain (e.g. example.com or *.example.com).')}
+            </p>
+          )}
         </div>
         <div>
           <label htmlFor="nginx-target" className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
@@ -212,8 +251,13 @@ export function NginxConfigGeneratorClient() {
             placeholder="http://127.0.0.1:3000"
             spellCheck={false}
             className={inputClass}
-            style={inputStyle}
+            style={targetInvalid ? { ...inputStyle, borderColor: '#ef4444' } : inputStyle}
           />
+          {targetInvalid && (
+            <p className="mt-1.5 text-xs text-red-500">
+              {L('errTargetInvalid', 'Enter a valid http:// or https:// URL (e.g. http://127.0.0.1:3000).')}
+            </p>
+          )}
         </div>
         {!ssl && (
           <div>
@@ -267,6 +311,15 @@ export function NginxConfigGeneratorClient() {
           </span>
           <CopyButton value={config} label={L('copy', 'Copy')} />
         </div>
+        {warnPath && (
+          <div className="rounded-lg border border-amber-200 bg-amber-50 p-3 text-xs text-amber-700 dark:border-amber-800 dark:bg-amber-950/40 dark:text-amber-300">
+            ⚠️{' '}
+            {L(
+              'warnTargetPath',
+              'The proxy target contains a path ({path}). nginx does not accept a URI part in proxy_pass inside a regex location, so nginx -t will fail with "proxy_pass cannot have URI part". Remove the path (e.g. http://host:3000), or use an upstream block with rewrite.',
+            ).replace('{path}', target.trim())}
+          </div>
+        )}
         <pre
           className="w-full overflow-x-auto rounded-lg border p-4 font-mono text-sm shadow-sm"
           style={{

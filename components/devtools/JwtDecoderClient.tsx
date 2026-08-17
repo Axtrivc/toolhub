@@ -10,7 +10,7 @@ import { tui } from '@/lib/i18n/tool-l10n'
  * JWT Decoder —— 纯前端解析 JSON Web Token
  *
  * 安全:100% 本地 atob 解码,token 永不上传服务器(在 note 与文案中明确强调)。
- * 输出:Header / Payload(美化 JSON) / Signature(原样),并校验 exp 过期。
+ * 输出:Header / Payload(美化 JSON) / Signature(原样);iat/nbf/exp 统一转本地时间并附剩余时长。
  * 误输入优雅降级:非法 base64 / 非 3 段结构 → 友好错误,不抛异常。
  */
 
@@ -73,17 +73,48 @@ export function JwtDecoderClient() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token, locale])
 
-  // exp 过期检查(payload.exp 为秒级 Unix 时间戳)
-  const expiry = useMemo<{ label: string; expired: boolean } | null>(() => {
+  // exp 过期检查(payload.exp 为秒级 Unix 时间戳) → 扩展为 iat/nbf/exp 时间类 claim:
+  // 统一转本地时间 + 剩余/已过时长(如 "expired 3 days ago" / "valid for 2 hours")
+  const humanizeDuration = (totalSec: number): string => {
+    const fmt = (n: number, base: string, fbSingular: string, fbPlural: string) =>
+      `${n} ${L(n === 1 ? base : base + 'Plural', n === 1 ? fbSingular : fbPlural)}`
+    if (totalSec < 60) return fmt(totalSec, 'unitSecond', 'second', 'seconds')
+    const mins = Math.floor(totalSec / 60)
+    if (mins < 60) return fmt(mins, 'unitMinute', 'minute', 'minutes')
+    const hours = Math.floor(mins / 60)
+    if (hours < 24) return fmt(hours, 'unitHour', 'hour', 'hours')
+    const days = Math.floor(hours / 24)
+    if (days < 365) return fmt(days, 'unitDay', 'day', 'days')
+    return fmt(Math.floor(days / 365), 'unitYear', 'year', 'years')
+  }
+
+  const timeClaims = useMemo<{ claims: { key: string; label: string; text: string }[]; problem: boolean }>(() => {
     const p = result.decoded?.payload as Record<string, unknown> | undefined
-    if (!p || typeof p.exp !== 'number') return null
+    if (!p) return { claims: [], problem: false }
     const nowSec = Math.floor(Date.now() / 1000)
-    const expired = p.exp < nowSec
-    const date = new Date(p.exp * 1000)
-    return {
-      label: `${date.toLocaleString(locale)} (${expired ? L('statusExpired', 'expired') : L('statusValid', 'valid')})`,
-      expired,
+    const defs: [key: string, labelKey: string, labelFb: string][] = [
+      ['iat', 'issuedLabel', 'Issued (iat):'],
+      ['nbf', 'notBeforeLabel', 'Not before (nbf):'],
+      ['exp', 'expiryLabel', 'Expiry (exp):'],
+    ]
+    const claims: { key: string; label: string; text: string }[] = []
+    let problem = false
+    for (const [key, labelKey, labelFb] of defs) {
+      const ts = p[key]
+      if (typeof ts !== 'number') continue
+      const date = new Date(ts * 1000)
+      const dur = humanizeDuration(Math.abs(ts - nowSec))
+      let rel: string
+      if (ts < nowSec) {
+        rel = (key === 'exp' ? L('expiredAgo', 'expired {dur} ago') : L('timeAgo', '{dur} ago')).replace('{dur}', dur)
+        if (key === 'exp') problem = true
+      } else {
+        rel = (key === 'exp' ? L('validFor', 'valid for {dur}') : L('timeIn', 'in {dur}')).replace('{dur}', dur)
+        if (key === 'nbf') problem = true // nbf 在未来 → 令牌尚未生效
+      }
+      claims.push({ key, label: L(labelKey, labelFb), text: `${date.toLocaleString(locale)} (${rel})` })
     }
+    return { claims, problem }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [result, locale])
 
@@ -139,16 +170,20 @@ export function JwtDecoderClient() {
       {/* 解码结果:Header / Payload / Signature 三栏 */}
       {result.decoded && (
         <div className="space-y-4">
-          {/* 过期状态 */}
-          {expiry && (
+          {/* 时间类 claim:iat/nbf/exp → 本地时间 + 剩余/已过时长 */}
+          {timeClaims.claims.length > 0 && (
             <div
               className={`rounded-lg border p-3 text-sm ${
-                expiry.expired
+                timeClaims.problem
                   ? 'border-red-200 bg-red-50 text-red-700'
                   : 'border-green-200 bg-green-50 text-green-700'
               }`}
             >
-              <strong>{L('expiryLabel', 'Expiry (exp):')}</strong> {expiry.label}
+              {timeClaims.claims.map((c) => (
+                <div key={c.key}>
+                  <strong>{c.label}</strong> {c.text}
+                </div>
+              ))}
             </div>
           )}
 

@@ -21,7 +21,7 @@ export const capitalGainsTaxEstimatorL10n: ToolL10n = {
       'in.purchase': '买入价', 'in.sale': '卖出价', 'in.years': '持有年限', 'in.taxableIncome': '应税收入', 'in.filing': '申报身份',
       'opt.filing.single': '单身', 'opt.filing.married': '已婚,联合申报',
       'out.gain': '资本利得', 'out.rate': '税率', 'out.tax': '预估应缴税款',
-      note: '📈 美国资本利得:持有 1 年以上 = 长期(按 2026 应税收入分 0/15/20%)。持有不足 1 年 = 短期(按普通收入税率)。简化估算——未含 NIIT 和州税。',
+      note: '📈 美国资本利得:持有 1 年以上 = 长期(按 2026 应税收入分 0/15/20%)。持有不足 1 年 = 短期(按普通收入税率)。判档时收益堆叠在普通收入之上(长期档位与短期边际税率均按收入 + 收益计算)。简化估算——未含 NIIT 和州税。',
     },
   },
   es: {
@@ -40,7 +40,7 @@ export const capitalGainsTaxEstimatorL10n: ToolL10n = {
       'in.purchase': 'Precio de compra', 'in.sale': 'Precio de venta', 'in.years': 'Años mantenido', 'in.taxableIncome': 'Ingresos imponibles', 'in.filing': 'Estado civil',
       'opt.filing.single': 'Soltero', 'opt.filing.married': 'Casado, declaración conjunta',
       'out.gain': 'Plusvalía', 'out.rate': 'Tipo impositivo', 'out.tax': 'Impuesto estimado',
-      note: '📈 Plusvalías en EE. UU.: mantenido 1+ año = largo plazo (0/15/20 % según ingresos imponibles 2026). Mantenido <1 año = corto plazo (tipo de renta ordinaria). Estimación simplificada — excluye NIIT e impuesto estatal.',
+      note: '📈 Plusvalías en EE. UU.: mantenido 1+ año = largo plazo (0/15/20 % según ingresos imponibles 2026). Mantenido <1 año = corto plazo (tipo de renta ordinaria). Las ganancias se apilan sobre la renta ordinaria al fijar el tramo (los tramos de largo plazo y el tipo marginal de corto plazo se calculan sobre ingresos + ganancia). Estimación simplificada — excluye NIIT e impuesto estatal.',
     },
   },
   de: {
@@ -59,7 +59,7 @@ export const capitalGainsTaxEstimatorL10n: ToolL10n = {
       'in.purchase': 'Kaufpreis', 'in.sale': 'Verkaufspreis', 'in.years': 'Haltedauer (Jahre)', 'in.taxableIncome': 'Zu versteuerndes Einkommen', 'in.filing': 'Steuerklasse',
       'opt.filing.single': 'Allein', 'opt.filing.married': 'Verheiratet, gemeinsam',
       'out.gain': 'Kapitalgewinn', 'out.rate': 'Steuersatz', 'out.tax': 'Geschätzte Steuerschuld',
-      note: '📈 US-Kapitalgewinne: 1+ Jahr gehalten = langfristig (0/15/20 % nach zu versteuerndem Einkommen 2026). <1 Jahr gehalten = kurzfristig (Grenzsteuersatz). Vereinfachte Schätzung — ohne NIIT und Steuer des Bundesstaates.',
+      note: '📈 US-Kapitalgewinne: 1+ Jahr gehalten = langfristig (0/15/20 % nach zu versteuerndem Einkommen 2026). <1 Jahr gehalten = kurzfristig (Grenzsteuersatz). Zur Trimmermittlung wird der Gewinn auf das ordentliche Einkommen gestapelt (langfristige Tranchen und der kurzfristige Grenzsteuersatz beruhen auf Einkommen + Gewinn). Vereinfachte Schätzung — ohne NIIT und Steuer des Bundesstaates.',
     },
   },
 }

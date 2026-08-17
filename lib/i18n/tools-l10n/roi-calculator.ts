@@ -27,6 +27,7 @@ export const roiCalculatorL10n: ToolL10n = {
       },
     ],
     ui: {
+      errInitial: '初始投资必须大于 0',
       'in.initial': '初始投资',
       'in.final': '期末价值',
       'in.years': '持有年数',
@@ -56,6 +57,7 @@ export const roiCalculatorL10n: ToolL10n = {
       },
     ],
     ui: {
+      errInitial: 'La inversión inicial debe ser mayor que 0',
       'in.initial': 'Inversión inicial',
       'in.final': 'Valor final',
       'in.years': 'Años',
@@ -85,6 +87,7 @@ export const roiCalculatorL10n: ToolL10n = {
       },
     ],
     ui: {
+      errInitial: 'Die Erstinvestition muss größer als 0 sein',
       'in.initial': 'Erstinvestition',
       'in.final': 'Endwert',
       'in.years': 'Jahre',

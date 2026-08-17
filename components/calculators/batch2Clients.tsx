@@ -3,6 +3,7 @@
 import { makeUnitConverter } from './makeUnitConverter'
 import { makeCalculatorClient } from '../calculator/makeCalculatorClient'
 import { fmtNum, toNum } from '@/lib/format'
+import { tui } from '@/lib/i18n/tool-l10n'
 import { TemperatureConverterClient } from './TemperatureConverterClient'
 import { GPACalculatorClient } from './GPACalculatorClient'
 import { DateDifferenceClient } from './DateDifferenceClient'
@@ -113,21 +114,33 @@ export const AverageCalculatorClient = makeCalculatorClient({
     { key: 'sum', label: 'Sum' },
     { key: 'mean', label: 'Average (mean)', highlight: true },
     { key: 'median', label: 'Median' },
+    { key: 'mode', label: 'Mode' },
     { key: 'min', label: 'Minimum' },
     { key: 'max', label: 'Maximum' },
     { key: 'range', label: 'Range' },
+    { key: 'stdSample', label: 'Std deviation (sample)', sublabel: 'n − 1 denominator' },
+    { key: 'stdPop', label: 'Std deviation (population)', sublabel: 'n denominator' },
+    { key: 'ignored', label: 'Non-numeric entries' },
   ],
-  compute: (v) => {
-    const nums = (v.numbers || '')
+  compute: (v, locale) => {
+    const T = (key: string, fb: string) => tui('average-calculator', locale, key, fb)
+    const tokens = (v.numbers || '')
       .split(/[\s,]+/)
       .map((s) => s.trim())
       .filter(Boolean)
-      .map(Number)
-      .filter((n) => isFinite(n))
+    const nums = tokens.map(Number).filter((n) => isFinite(n))
+    // 非数字 token 不再静默丢弃:显式提示忽略了几个,避免 "12, abc, 15" 被当作只有 2 个数
+    const ignoredCount = tokens.length - nums.length
+    const ignored =
+      ignoredCount > 0
+        ? `⚠️ ${T('ignoredN', 'Ignored {n} non-numeric values').replace('{n}', String(ignoredCount))}`
+        : '0'
 
     if (nums.length === 0) {
       return {
-        count: '0', sum: '—', mean: '—', median: '—', min: '—', max: '—', range: '—',
+        count: '0', sum: '—', mean: '—', median: '—', mode: '—',
+        min: '—', max: '—', range: '—', stdSample: '—', stdPop: '—',
+        ignored,
       }
     }
 
@@ -143,14 +156,41 @@ export const AverageCalculatorClient = makeCalculatorClient({
     const max = sorted[count - 1]
     const range = max - min
 
+    // 众数:出现最频繁的值;并列时列出最小的前 3 个(更多则加省略号);全都不重复则无众数
+    const freq = new Map<number, number>()
+    for (const n of nums) freq.set(n, (freq.get(n) ?? 0) + 1)
+    let maxFreq = 0
+    for (const c of freq.values()) maxFreq = Math.max(maxFreq, c)
+    let mode: string
+    if (maxFreq <= 1) {
+      mode = T('noMode', 'None (all values unique)')
+    } else {
+      const modes = Array.from(freq.entries())
+        .filter(([, c]) => c === maxFreq)
+        .map(([x]) => x)
+        .sort((a, b) => a - b)
+      mode =
+        modes.slice(0, 3).map((x) => fmtNum(x)).join(', ') +
+        (modes.length > 3 ? ', …' : '')
+    }
+
+    // 标准差两种口径:样本(n−1,无偏)与总体(n);单值时样本口径无定义
+    const sqDiff = nums.reduce((a, x) => a + (x - mean) ** 2, 0)
+    const stdSample = count > 1 ? Math.sqrt(sqDiff / (count - 1)) : NaN
+    const stdPop = Math.sqrt(sqDiff / count)
+
     return {
       count: String(count),
       sum: fmtNum(sum),
       mean: fmtNum(mean),
       median: fmtNum(median),
+      mode,
       min: fmtNum(min),
       max: fmtNum(max),
       range: fmtNum(range),
+      stdSample: isFinite(stdSample) ? fmtNum(stdSample, 4) : '—',
+      stdPop: fmtNum(stdPop, 4),
+      ignored,
     }
   },
   note: '📊 Enter any list of numbers. Supports commas, spaces, or line breaks as separators.',

@@ -54,7 +54,8 @@ export function SaasLtvChurnCalculatorClient() {
 
     const lifetimeMonths = churnFrac > 0 ? 1 / churnFrac : Infinity
     const ltv = churnFrac > 0 ? grossProfitPerCustomer / churnFrac : Infinity
-    const ltvCac = cacN > 0 && isFinite(ltv) ? ltv / cacN : null
+    // churn = 0 且 CAC > 0 时 LTV 无界 → 比率记为 Infinity(显示 ∞);仅 CAC = 0 时为 null(未填)
+    const ltvCac = cacN > 0 ? (isFinite(ltv) ? ltv / cacN : Infinity) : null
     const health = ltvCac === null ? null : ltvCac < 1 ? L('healthUnsustainable', 'Unsustainable — you lose money per customer') : ltvCac <= 3 ? L('healthOk', 'OK — room to improve') : L('healthGreat', 'Great — efficient growth')
     const paybackMonths = cacN > 0 && grossProfitPerCustomer > 0 ? cacN / grossProfitPerCustomer : null
     const churnedCustomers = cust * churnFrac
@@ -75,7 +76,7 @@ export function SaasLtvChurnCalculatorClient() {
       L('sResults', 'Results:'),
       `  ${L('sExpectedLifetime', 'Expected customer lifetime: ')}${isFinite(parsed.lifetimeMonths) ? `${parsed.lifetimeMonths.toFixed(1)} ${L('months', 'months')}` : L('infinityMonths', '∞ (200+ months)')}`,
       `  ${L('sLtv', 'LTV: ')}${fmtMaybe(parsed.ltv)}`,
-      `  ${L('sLtvCac', 'LTV:CAC: ')}${parsed.ltvCac !== null ? parsed.ltvCac.toFixed(2) : L('na', 'n/a')} ${parsed.health ? `(${parsed.health})` : ''}`,
+      `  ${L('sLtvCac', 'LTV:CAC: ')}${parsed.ltvCac !== null ? (isFinite(parsed.ltvCac) ? parsed.ltvCac.toFixed(2) : '∞') : L('na', 'n/a')} ${parsed.health ? `(${parsed.health})` : ''}`,
       `  ${L('sCacPayback', 'CAC payback: ')}${parsed.paybackMonths !== null ? `${parsed.paybackMonths.toFixed(1)} ${L('months', 'months')}` : L('na', 'n/a')}`,
       `  ${L('sCustomersLost', 'Customers lost per month: ')}${parsed.churnedCustomers.toFixed(1)} (${fmtMoney(parsed.lostMrr)} MRR)`,
       `  ${L('sNrrHint', 'Net revenue retention hint: ')}${parsed.nrr.toFixed(0)}%`,
@@ -121,8 +122,20 @@ export function SaasLtvChurnCalculatorClient() {
           />
           <ResultCard
             label={L('ltvCacRatio', 'LTV : CAC ratio')}
-            value={parsed.ltvCac !== null ? parsed.ltvCac.toFixed(2) : '—'}
-            sublabel={parsed.health ?? L('enterCacAboveZero', 'Enter a CAC above $0')}
+            value={
+              parsed.ltvCac === null
+                ? '—'
+                : isFinite(parsed.ltvCac)
+                  ? parsed.ltvCac.toFixed(2)
+                  : '∞'
+            }
+            sublabel={
+              parsed.ltvCac === null
+                ? L('enterCacAboveZero', 'Enter a CAC above $0')
+                : isFinite(parsed.ltvCac)
+                  ? parsed.health ?? L('enterCacAboveZero', 'Enter a CAC above $0')
+                  : L('noChurnHint', 'No churn — 200+ months')
+            }
           />
           <ResultCard
             label={L('cacPaybackPeriod', 'CAC payback period')}

@@ -38,7 +38,10 @@ export function PercentageCalculatorClient() {
   const r2Whole = Number(p2Whole)
   const r2 = r2Whole === 0 ? NaN : (Number(p2Part) / r2Whole) * 100
   const r3From = Number(p3From)
-  const r3 = r3From === 0 ? NaN : ((Number(p3To) - r3From) / r3From) * 100
+  const r3To = Number(p3To)
+  // 跨零变化(起点与终点异号,如 -100 → +50)在数学上无定义,百分比只会误导 → 显示 —
+  const r3CrossesZero = isFinite(r3From) && isFinite(r3To) && r3From !== 0 && (r3From < 0) !== (r3To < 0)
+  const r3 = r3From === 0 || r3CrossesZero ? NaN : ((r3To - r3From) / r3From) * 100
   const r4 = Number(p4Value) * (1 + Number(p4Percent) / 100)
 
   return (
@@ -79,7 +82,7 @@ export function PercentageCalculatorClient() {
             label={L('change', 'Change')}
             value={isFinite(r3) ? `${r3 > 0 ? '+' : ''}${fmt(r3, 2)}%` : '—'}
             highlight
-            sublabel={isFinite(r3) ? (r3 > 0 ? L('increase', 'Increase') : r3 < 0 ? L('decrease', 'Decrease') : L('noChange', 'No change')) : undefined}
+            sublabel={isFinite(r3) ? (r3 > 0 ? L('increase', 'Increase') : r3 < 0 ? L('decrease', 'Decrease') : L('noChange', 'No change')) : r3CrossesZero ? L('crossesZero', 'Undefined — the change crosses zero') : undefined}
           />
         </div>
       </section>

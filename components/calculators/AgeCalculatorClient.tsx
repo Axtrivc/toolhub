@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { ResultCard, CalculatorNote } from '@/components/calculator/CalculatorField'
 import { useApp } from '@/components/providers/AppProviders'
 import { tui } from '@/lib/i18n/tool-l10n'
@@ -19,32 +19,39 @@ function parseLocalDate(s: string): Date {
   return new Date(y, m - 1, d)
 }
 
+/** 从 from 出发加 n 个月,日按「出生日」锚定,超出目标月天数则钳到月末(1-31 + 1 月 = 2-28/29) */
+function addMonthsClamped(from: Date, n: number): Date {
+  const m = from.getMonth() + n
+  const y = from.getFullYear() + Math.floor(m / 12)
+  const mo = ((m % 12) + 12) % 12
+  const lastDay = new Date(y, mo + 1, 0).getDate()
+  return new Date(y, mo, Math.min(from.getDate(), lastDay))
+}
+
 /** 计算两个日期之间的差,精确到年/月/日 */
 function calcAge(from: Date, to: Date) {
   // 清空日期输入后 parseLocalDate('') 会得到 Invalid Date,直接走空态而非渲染 NaN
   if (isNaN(from.getTime()) || isNaN(to.getTime())) return null
   if (from > to) return null
 
-  let years = to.getFullYear() - from.getFullYear()
-  let months = to.getMonth() - from.getMonth()
-  let days = to.getDate() - from.getDate()
-
-  if (days < 0) {
+  // 两步法:先按月数差锚定,再用日历日差算余数天数。
+  // 旧实现逐字段相减只借位一次,出生日 29-31 日 + 目标月 1-2 日时会得到负天数
+  // (2000-01-31 → 2024-03-01 曾显示 "24y 1m -1d",现在为 24y 1m 1d,天数恒非负)。
+  const rawMonths =
+    (to.getFullYear() - from.getFullYear()) * 12 + (to.getMonth() - from.getMonth())
+  let anchor = addMonthsClamped(from, rawMonths)
+  let months = rawMonths
+  if (anchor > to) {
     months--
-    // 上个月的天数
-    const prevMonth = new Date(to.getFullYear(), to.getMonth(), 0).getDate()
-    days += prevMonth
+    anchor = addMonthsClamped(from, months)
   }
-  if (months < 0) {
-    years--
-    months += 12
-  }
+  const years = Math.floor(months / 12)
+  const days = calendarDaysBetween(anchor, to)
 
   const totalMs = to.getTime() - from.getTime()
   // 日/周差用日历日(DST 安全),小时差保留真实流逝毫秒
   const totalDays = calendarDaysBetween(from, to)
   const totalWeeks = Math.floor(totalDays / 7)
-  const totalMonths = years * 12 + months
   const totalHours = Math.floor(totalMs / (1000 * 60 * 60))
 
   // 下一个生日
@@ -60,7 +67,7 @@ function calcAge(from: Date, to: Date) {
     days,
     totalDays,
     totalWeeks,
-    totalMonths,
+    totalMonths: months,
     totalHours,
     daysToBirthday,
   }
@@ -75,12 +82,24 @@ export function AgeCalculatorClient() {
   const [birth, setBirth] = useState('2000-01-01')
   const [target, setTarget] = useState('')
   const [todayStr, setTodayStr] = useState('')
-  const [, setTick] = useState(0)
+  // 供 interval 闭包读取"当前今天"而无需重建定时器
+  const todayRef = useRef('')
 
   useEffect(() => {
-    setTodayStr(toInputDate(new Date()))
-    setTarget((prev) => prev || toInputDate(new Date()))
-    const timer = setInterval(() => setTick((t) => t + 1), 60000)
+    const nowStr = toInputDate(new Date())
+    todayRef.current = nowStr
+    setTodayStr(nowStr)
+    setTarget((prev) => prev || nowStr)
+    const timer = setInterval(() => {
+      // 跨午夜同步 todayStr(以及仍等于旧"今天"的自动填充 target),
+      // 否则 60s tick 只重渲染、日期冻结在挂载日
+      const next = toInputDate(new Date())
+      const prevDay = todayRef.current
+      if (next === prevDay) return
+      todayRef.current = next
+      setTodayStr(next)
+      setTarget((t) => (t === prevDay ? next : t))
+    }, 60000)
     return () => clearInterval(timer)
   }, [])
 

@@ -154,7 +154,8 @@ export function DaysCountdownCalculatorClient() {
       setTimeStr('00:00')
     } else {
       const days = kind === 'plus30' ? 30 : 90
-      const t = new Date(n.getTime() + days * 86400000)
+      // 日历加法(DST 安全):毫秒加法在 DST 回拨日(23/25 小时日)会早/晚一天
+      const t = new Date(n.getFullYear(), n.getMonth(), n.getDate() + days)
       setDateStr(toDateStr(t))
       setTimeStr(`${pad(n.getHours())}:${pad(n.getMinutes())}`)
     }

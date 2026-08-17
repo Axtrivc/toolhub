@@ -7,6 +7,7 @@ import type { ToolL10n } from '../tool-l10n'
 export const slugGeneratorL10n: ToolL10n = {
   zh: {
     ui: {
+      'asciiOnly': '仅 ASCII',
       'clear': '清空',
       'copy': '复制',
       'enterTitle': '输入你的标题或文本',
@@ -37,6 +38,7 @@ export const slugGeneratorL10n: ToolL10n = {
   },
   es: {
     ui: {
+      'asciiOnly': 'Solo ASCII',
       'clear': 'Limpiar',
       'copy': 'Copiar',
       'enterTitle': 'Introduce tu título o texto',
@@ -67,6 +69,7 @@ export const slugGeneratorL10n: ToolL10n = {
   },
   de: {
     ui: {
+      'asciiOnly': 'Nur ASCII',
       'clear': 'Leeren',
       'copy': 'Kopieren',
       'enterTitle': 'Titel oder Text eingeben',

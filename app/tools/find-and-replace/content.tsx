@@ -10,19 +10,24 @@ const en: ReactNode = (
     <h2>What Is This Tool?</h2>
     <p>
       This tool finds every occurrence of a search term in your text and replaces it with
-      something else. Separate your text, search term, and replacement with{' '}
-      <code>&nbsp;|||&nbsp;</code> so the tool knows where each part begins.
+      something else. Paste your text in the main box, type the search term and the replacement
+      in their own fields, and the result updates as you type.
     </p>
     <div>
-      <h2>How to Format Your Input</h2>
+      <h2>How to Use It</h2>
       <p>
-        Use three parts separated by <code>&nbsp;|||&nbsp;</code>:
+        <strong>Case sensitive</strong> matches the exact letter case. Turn on{' '}
+        <strong>Regex</strong> to search with regular expressions (for example{' '}
+        <code>\d{4}</code> matches any four digits) and use capture groups like{' '}
+        <code>$1</code> in the replacement.
       </p>
     </div>
     <div>
       <h2>Example</h2>
       <p>
-        <code>I love cats and cats are great ||| cats ||| dogs</code>
+        Text: <code>I love cats and cats are great</code>
+        <br />
+        Find: <code>cats</code> → Replace: <code>dogs</code>
         <br />
         Result: <code>I love dogs and dogs are great</code>
       </p>
@@ -45,19 +50,22 @@ const zh: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>这是什么工具?</h2>
     <p>
-      本工具会查找文本中所有出现的搜索词,并将其替换为其他内容。请用{' '}
-      <code>&nbsp;|||&nbsp;</code> 分隔你的文本、搜索词和替换内容,以便工具识别各部分的边界。
+      本工具会查找文本中所有出现的搜索词,并将其替换为其他内容。把文本粘贴到主输入框,
+      在独立的「查找」「替换」框中输入内容,结果随输入实时更新。
     </p>
     <div>
-      <h2>如何格式化输入</h2>
+      <h2>如何使用</h2>
       <p>
-        用 <code>&nbsp;|||&nbsp;</code> 分隔为三部分:
+        勾选<strong>区分大小写</strong>可精确匹配字母大小写;开启<strong>正则模式</strong>后可用正则表达式查找
+        (例如 <code>\d{4}</code> 匹配任意四位数字),替换内容中支持 <code>$1</code> 等捕获组引用。
       </p>
     </div>
     <div>
       <h2>示例</h2>
       <p>
-        <code>I love cats and cats are great ||| cats ||| dogs</code>
+        文本:<code>I love cats and cats are great</code>
+        <br />
+        查找:<code>cats</code> → 替换:<code>dogs</code>
         <br />
         结果:<code>I love dogs and dogs are great</code>
       </p>
@@ -81,19 +89,24 @@ const es: ReactNode = (
     <h2>¿Qué es esta herramienta?</h2>
     <p>
       Esta herramienta encuentra cada aparición de un término de búsqueda en tu texto y lo
-      reemplaza por otra cosa. Separa tu texto, el término de búsqueda y el reemplazo con{' '}
-      <code>&nbsp;|||&nbsp;</code> para que la herramienta sepa dónde empieza cada parte.
+      reemplaza por otra cosa. Pega tu texto en el cuadro principal, escribe el término de
+      búsqueda y el reemplazo en sus propios campos, y el resultado se actualiza al escribir.
     </p>
     <div>
-      <h2>Cómo dar formato a la entrada</h2>
+      <h2>Cómo usarla</h2>
       <p>
-        Usa tres partes separadas por <code>&nbsp;|||&nbsp;</code>:
+        <strong>Sensible a mayúsculas</strong> distingue entre mayúsculas y minúsculas. Activa{' '}
+        <strong>Regex</strong> para buscar con expresiones regulares (por ejemplo,{' '}
+        <code>\d{4}</code> coincide con cuatro dígitos) y usa grupos de captura como{' '}
+        <code>$1</code> en el reemplazo.
       </p>
     </div>
     <div>
       <h2>Ejemplo</h2>
       <p>
-        <code>I love cats and cats are great ||| cats ||| dogs</code>
+        Texto: <code>I love cats and cats are great</code>
+        <br />
+        Buscar: <code>cats</code> → Reemplazar: <code>dogs</code>
         <br />
         Resultado: <code>I love dogs and dogs are great</code>
       </p>
@@ -117,19 +130,24 @@ const de: ReactNode = (
     <h2>Was ist dieses Werkzeug?</h2>
     <p>
       Dieses Werkzeug findet jedes Vorkommen eines Suchbegriffs in deinem Text und ersetzt ihn
-      durch etwas anderes. Trenne deinen Text, den Suchbegriff und den Ersatz mit{' '}
-      <code>&nbsp;|||&nbsp;</code>, damit das Werkzeug weiß, wo jeder Teil beginnt.
+      durch etwas anderes. Füge deinen Text in das Hauptfeld ein, trage Suchbegriff und Ersatz
+      in die eigenen Felder ein – das Ergebnis aktualisiert sich beim Tippen.
     </p>
     <div>
-      <h2>So formatierst du deine Eingabe</h2>
+      <h2>So verwendest du es</h2>
       <p>
-        Verwende drei durch <code>&nbsp;|||&nbsp;</code> getrennte Teile:
+        <strong>Groß-/Kleinschreibung beachten</strong> unterscheidet exakt die Schreibweise.
+        Aktiviere <strong>Regex</strong>, um mit regulären Ausdrücken zu suchen (z. B. trifft{' '}
+        <code>\d{4}</code> auf vier Ziffern zu), und verwende Erfassungsgruppen wie{' '}
+        <code>$1</code> im Ersatz.
       </p>
     </div>
     <div>
       <h2>Beispiel</h2>
       <p>
-        <code>I love cats and cats are great ||| cats ||| dogs</code>
+        Text: <code>I love cats and cats are great</code>
+        <br />
+        Suchen: <code>cats</code> → Ersetzen: <code>dogs</code>
         <br />
         Ergebnis: <code>I love dogs and dogs are great</code>
       </p>

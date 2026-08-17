@@ -29,6 +29,14 @@ export const TipCalculatorClient = makeCalculatorClient({
     const bill = toNum(v.bill)
     const tipPct = toNum(v.tipPct)
     const people = Math.round(toNum(v.people))
+    // 负账单会算出负小费,直接拦截(负人数已由下方 people >= 1 分支拦截)
+    if (bill < 0) {
+      return {
+        tip: '—',
+        total: `⚠️ ${tui('tip-calculator', locale, 'errNonNegativeBill', 'Bill amount cannot be negative')}`,
+        perPerson: '—',
+      }
+    }
     const tip = bill * (tipPct / 100)
     const total = bill + tip
     return {
@@ -61,9 +69,12 @@ export const DiscountCalculatorClient = makeCalculatorClient({
     const price = toNum(v.price)
     const discount = toNum(v.discount)
     const T = (key: string, fb: string) => tui('discount-calculator', locale, key, fb)
-    // 折扣超出 0–100% 会算出负价,直接拦截
+    // 折扣超出 0–100% 或原价为负会算出无意义结果,直接拦截
     if (discount < 0 || discount > 100) {
       return { savings: '—', final: `⚠️ ${T('errDiscountRange', 'Discount must be 0–100%')}`, paid: '—' }
+    }
+    if (price < 0) {
+      return { savings: '—', final: `⚠️ ${T('errNonNegativePrice', 'Original price cannot be negative')}`, paid: '—' }
     }
     const savings = price * (discount / 100)
     const final = price - savings
@@ -101,6 +112,10 @@ export const SalesTaxCalculatorClient = makeCalculatorClient({
   compute: (v, locale) => {
     const amount = toNum(v.amount)
     const rate = toNum(v.rate)
+    // 负金额无意义;add 模式下负税率会算出负税,直接拦截
+    if (amount < 0 || (v.mode !== 'remove' && rate < 0)) {
+      return { tax: '—', result: `⚠️ ${tui('sales-tax-calculator', locale, 'errNonNegative', 'Amount and tax rate cannot be negative')}` }
+    }
     // remove 模式下 1 + rate/100 作分母:rate ≤ -100% 时除零/负数无意义
     if (v.mode === 'remove' && rate <= -100) {
       return { tax: '—', result: `⚠️ ${tui('sales-tax-calculator', locale, 'errTaxRate', 'Tax rate must be above −100%')}` }
@@ -140,11 +155,19 @@ export const CompoundInterestCalculatorClient = makeCalculatorClient({
     { key: 'totalContributed', label: 'You contributed' },
     { key: 'interestEarned', label: 'Interest earned', sublabel: 'Compound growth' },
   ],
-  compute: (v) => {
+  compute: (v, locale) => {
     const principal = toNum(v.principal)
     const monthly = toNum(v.monthly)
     const annualRate = toNum(v.rate) / 100
     const years = toNum(v.years)
+    // 负利率/负年限会算出无意义结果,直接拦截
+    if (annualRate < 0 || years < 0) {
+      return {
+        futureValue: `⚠️ ${tui('compound-interest-calculator', locale, 'errNonNegative', 'Interest rate and years cannot be negative')}`,
+        totalContributed: '—',
+        interestEarned: '—',
+      }
+    }
     const months = years * 12
     const monthlyRate = annualRate / 12
 

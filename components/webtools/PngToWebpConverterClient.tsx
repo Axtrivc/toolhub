@@ -268,6 +268,26 @@ export function PngToWebpConverterClient() {
               className="space-y-4 rounded-lg border p-4"
               style={{ borderColor: 'rgb(var(--border))', backgroundColor: 'rgb(var(--bg-card))' }}
             >
+              {/* 输出预览:棋盘格底衬出 WebP 的 alpha 透明 */}
+              <div
+                className="flex items-center justify-center rounded-lg border p-4"
+                style={{
+                  borderColor: 'rgb(var(--border))',
+                  backgroundColor: 'rgb(var(--bg-subtle))',
+                  backgroundImage:
+                    'linear-gradient(45deg, rgb(var(--border) / 0.5) 25%, transparent 25%, transparent 75%, rgb(var(--border) / 0.5) 75%), linear-gradient(45deg, rgb(var(--border) / 0.5) 25%, transparent 25%, transparent 75%, rgb(var(--border) / 0.5) 75%)',
+                  backgroundSize: '16px 16px',
+                  backgroundPosition: '0 0, 8px 8px',
+                }}
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={output.url}
+                  alt={L('webpPreviewAlt', 'WebP output preview')}
+                  className="max-h-48 max-w-full object-contain"
+                />
+              </div>
+
               <div className="grid grid-cols-3 gap-4 text-center">
                 <div>
                   <div className="text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>

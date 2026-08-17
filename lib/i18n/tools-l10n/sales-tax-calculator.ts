@@ -18,6 +18,7 @@ export const salesTaxCalculatorL10n: ToolL10n = {
     ],
     ui: {
       errTaxRate: '税率必须高于 −100%',
+      errNonNegative: '金额和税率不能为负',
       'in.amount': '金额', 'inSuffix.amount': '$', 'in.rate': '税率', 'inSuffix.rate': '%', 'in.mode': '计算方式',
       'opt.mode.add': '加税(税前 → 含税)', 'opt.mode.remove': '去税(含税 → 税前)',
       'out.tax': '税额', 'out.result': '最终金额',
@@ -37,6 +38,7 @@ export const salesTaxCalculatorL10n: ToolL10n = {
     ],
     ui: {
       errTaxRate: 'La tasa de impuesto debe ser superior a −100 %',
+      errNonNegative: 'El importe y la tasa de impuesto no pueden ser negativos',
       'in.amount': 'Importe', 'inSuffix.amount': '$', 'in.rate': 'Tasa de impuesto', 'inSuffix.rate': '%', 'in.mode': 'Modo de cálculo',
       'opt.mode.add': 'Añadir impuesto (antes → con impuesto)', 'opt.mode.remove': 'Quitar impuesto (con impuesto → antes)',
       'out.tax': 'Importe del impuesto', 'out.result': 'Importe final',
@@ -56,6 +58,7 @@ export const salesTaxCalculatorL10n: ToolL10n = {
     ],
     ui: {
       errTaxRate: 'Der Steuersatz muss über −100 % liegen',
+      errNonNegative: 'Betrag und Steuersatz dürfen nicht negativ sein',
       'in.amount': 'Betrag', 'inSuffix.amount': '$', 'in.rate': 'Steuersatz', 'inSuffix.rate': '%', 'in.mode': 'Berechnungsmodus',
       'opt.mode.add': 'Steuer hinzufügen (netto → brutto)', 'opt.mode.remove': 'Steuer abziehen (brutto → netto)',
       'out.tax': 'Steuerbetrag', 'out.result': 'Endbetrag',

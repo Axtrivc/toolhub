@@ -90,6 +90,52 @@ function collectMatches(text: string, re: RegExp): { details: MatchDetail[]; tru
   return { details, truncated: false }
 }
 
+/**
+ * 从 pattern 源码提取命名捕获组(?<name>...)→ { 组号: 组名 }。
+ * 逐字符扫描:跳过 \( 转义与 [...] 字符类(其中括号是字面量);
+ * (?= (?! (?: (?<= (?<! 均不占组号,普通 ( 与 (?<name> 按开括号顺序编号(与 JS 引擎一致)。
+ */
+function extractGroupNames(pattern: string): Record<number, string> {
+  const names: Record<number, string> = {}
+  let group = 0
+  let i = 0
+  while (i < pattern.length) {
+    const c = pattern[i]
+    if (c === '\\') {
+      i += 2
+      continue
+    }
+    if (c === '[') {
+      i++
+      if (pattern[i] === '^') i++
+      if (pattern[i] === ']') i++
+      while (i < pattern.length && pattern[i] !== ']') i++
+      i++
+      continue
+    }
+    if (c === '(') {
+      const rest = pattern.slice(i)
+      if (rest.startsWith('(?<') && !rest.startsWith('(?<=') && !rest.startsWith('(?<!')) {
+        const m = rest.match(/^\(\?<([A-Za-z_$][\w$]*)>/)
+        if (m) {
+          group++
+          names[group] = m[1]
+          i += m[0].length
+          continue
+        }
+      }
+      if (/^\(\??[=!:]/.test(rest) || rest.startsWith('(?<')) {
+        // 非捕获/断言/后行断言组,不占组号
+        i++
+        continue
+      }
+      group++
+    }
+    i++
+  }
+  return names
+}
+
 const CHEAT_SHEET: { syntax: string; desc: string }[] = [
   { syntax: '.', desc: 'Any char (no newline, unless s flag)' },
   { syntax: '\\d \\D', desc: 'Digit / Non-digit' },
@@ -110,6 +156,16 @@ const CHEAT_SHEET: { syntax: string; desc: string }[] = [
 
 const inputCls =
   'w-full rounded-lg border p-4 font-mono text-xs shadow-sm outline-none transition focus:ring-2'
+
+// flags 可视切换 chips(与手输框双向同步),title 复用各 flag 的既有本地化文案
+const FLAG_CHIPS: { flag: string; key: string; fb: string }[] = [
+  { flag: 'g', key: 'flagGlobal', fb: 'global' },
+  { flag: 'i', key: 'flagIgnoreCase', fb: 'ignore case' },
+  { flag: 'm', key: 'flagMultiline', fb: 'multiline' },
+  { flag: 's', key: 'flagDotAll', fb: 'dotAll' },
+  { flag: 'u', key: 'flagUnicode', fb: 'unicode' },
+  { flag: 'y', key: 'flagSticky', fb: 'sticky' },
+]
 
 // 防止 ReDoS / 性能问题的输入上限
 const MAX_TEXT_LEN = 50000 // 测试文本长度上限(~50KB),超过截断,避免超长输入放大回溯
@@ -141,6 +197,19 @@ export function RegexTesterClient() {
     setFlags('g')
     setText(SAMPLE)
   }, [])
+
+  // 点击 flag chip 增删字符;重排为规范顺序(gimsuy)保持输入框稳定
+  const toggleFlag = useCallback((f: string) => {
+    setFlags((prev) => {
+      const set = new Set(prev.split(''))
+      if (set.has(f)) set.delete(f)
+      else set.add(f)
+      return ['g', 'i', 'm', 's', 'u', 'y'].filter((c) => set.has(c)).join('')
+    })
+  }, [])
+
+  // 命名分组(?<name>...)→ 组号 → 组名,供匹配详情 chip 附组名
+  const groupNames = useMemo(() => extractGroupNames(debouncedPattern), [debouncedPattern])
 
   // 实际参与编译/匹配的文本:截断到上限,防超长输入放大 ReDoS 回溯
   const safeText = debouncedText.length > MAX_TEXT_LEN ? debouncedText.slice(0, MAX_TEXT_LEN) : debouncedText
@@ -198,6 +267,28 @@ export function RegexTesterClient() {
             style={{ borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rgb(var(--bg-card))', color: 'rgb(var(--text))' }}
             title={L('flagsTitle', 'Flags: g (global), i (case-insensitive), m (multiline), s (dotAll), u (unicode), y (sticky)')}
           />
+        </div>
+        <div className="mt-1.5 flex flex-wrap gap-1.5">
+          {FLAG_CHIPS.map(({ flag, key, fb }) => {
+            const active = flags.includes(flag)
+            return (
+              <button
+                key={flag}
+                type="button"
+                aria-pressed={active}
+                title={L(key, fb)}
+                onClick={() => toggleFlag(flag)}
+                className={`rounded-md border px-2 py-0.5 font-mono text-[11px] transition ${
+                  active
+                    ? 'border-blue-200 bg-blue-50 text-blue-700 dark:border-blue-800 dark:bg-blue-950/50 dark:text-blue-300'
+                    : 'text-slate-400 hover:text-slate-600 dark:text-slate-500 dark:hover:text-slate-300'
+                }`}
+                style={{ borderColor: active ? undefined : 'rgb(var(--border))' }}
+              >
+                {flag}
+              </button>
+            )
+          })}
         </div>
         <p className="mt-1 text-[11px] text-slate-400">
           {L('flagsLabel', 'Flags:')} <code>g</code> {L('flagGlobal', 'global')} · <code>i</code> {L('flagIgnoreCase', 'ignore case')} · <code>m</code> {L('flagMultiline', 'multiline')} · <code>s</code> {L('flagDotAll', 'dotAll')} · <code>u</code> {L('flagUnicode', 'unicode')} · <code>y</code> {L('flagSticky', 'sticky')}
@@ -283,11 +374,14 @@ export function RegexTesterClient() {
                 </div>
                 {m.groups.length > 0 && (
                   <div className="mt-1 flex flex-wrap gap-1.5">
-                    {m.groups.map((g, gi) => (
-                      <span key={gi} className="rounded bg-blue-50 px-1.5 py-0.5 font-mono text-[11px] text-blue-700 dark:bg-blue-950/50 dark:text-blue-300">
-                        ${gi + 1}: {g ?? L('emptyGroup', '(empty)')}
-                      </span>
-                    ))}
+                    {m.groups.map((g, gi) => {
+                      const gname = groupNames[gi + 1]
+                      return (
+                        <span key={gi} className="rounded bg-blue-50 px-1.5 py-0.5 font-mono text-[11px] text-blue-700 dark:bg-blue-950/50 dark:text-blue-300">
+                          {gname ? `${gname} ($${gi + 1})` : `$${gi + 1}`}: {g ?? L('emptyGroup', '(empty)')}
+                        </span>
+                      )
+                    })}
                   </div>
                 )}
               </div>

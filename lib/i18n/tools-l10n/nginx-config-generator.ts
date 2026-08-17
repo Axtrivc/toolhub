@@ -9,6 +9,8 @@ export const nginxConfigGeneratorL10n: ToolL10n = {
     ui: {
       'copy': '复制',
       'enableSsl': '启用 SSL(HTTPS + HTTP 跳转)',
+      'errDomainInvalid': '请输入有效域名(如 example.com 或 *.example.com)。',
+      'errTargetInvalid': '请输入有效的 http:// 或 https:// 地址(如 http://127.0.0.1:3000)。',
       'generatedConfig': '生成的配置',
       'gzipCompression': 'Gzip 压缩',
       'listenPortLabel': '监听端口',
@@ -19,6 +21,7 @@ export const nginxConfigGeneratorL10n: ToolL10n = {
       'proxyTargetLabel': '代理目标',
       'serverNameLabel': '服务器名(域名)',
       'staticAssetsCaching': '静态资源缓存(30 天)',
+      'warnTargetPath': '代理目标含路径({path})——nginx 不接受正则 location 内 proxy_pass 带 URI 部分,nginx -t 会报 "proxy_pass cannot have URI part" 直接失败。建议去掉路径(如 http://host:3000),或改用 upstream + rewrite 方式。',
       'websocketSupport': 'WebSocket 支持',
     },
     useCases: [
@@ -46,6 +49,8 @@ export const nginxConfigGeneratorL10n: ToolL10n = {
     ui: {
       'copy': 'Copiar',
       'enableSsl': 'Activar SSL (HTTPS + redirección HTTP)',
+      'errDomainInvalid': 'Introduce un dominio válido (p. ej. example.com o *.example.com).',
+      'errTargetInvalid': 'Introduce una URL http:// o https:// válida (p. ej. http://127.0.0.1:3000).',
       'generatedConfig': 'Configuración generada',
       'gzipCompression': 'Compresión Gzip',
       'listenPortLabel': 'Puerto de escucha',
@@ -56,6 +61,7 @@ export const nginxConfigGeneratorL10n: ToolL10n = {
       'proxyTargetLabel': 'Destino del proxy',
       'serverNameLabel': 'Nombre del servidor (dominio)',
       'staticAssetsCaching': 'Caché de recursos estáticos (30 días)',
+      'warnTargetPath': 'El destino del proxy incluye una ruta ({path}): nginx no acepta una parte URI en proxy_pass dentro de una location con regex, así que nginx -t fallará con "proxy_pass cannot have URI part". Quita la ruta (p. ej. http://host:3000) o usa un bloque upstream con rewrite.',
       'websocketSupport': 'Soporte WebSocket',
     },
     useCases: [
@@ -83,6 +89,8 @@ export const nginxConfigGeneratorL10n: ToolL10n = {
     ui: {
       'copy': 'Kopieren',
       'enableSsl': 'SSL aktivieren (HTTPS + HTTP-Weiterleitung)',
+      'errDomainInvalid': 'Gib eine gültige Domain ein (z. B. example.com oder *.example.com).',
+      'errTargetInvalid': 'Gib eine gültige http://- oder https://-URL ein (z. B. http://127.0.0.1:3000).',
       'generatedConfig': 'Erzeugte Konfiguration',
       'gzipCompression': 'Gzip-Kompression',
       'listenPortLabel': 'Listen-Port',
@@ -93,6 +101,7 @@ export const nginxConfigGeneratorL10n: ToolL10n = {
       'proxyTargetLabel': 'Proxy-Ziel',
       'serverNameLabel': 'Servername (Domain)',
       'staticAssetsCaching': 'Statische Assets cachen (30 Tage)',
+      'warnTargetPath': 'Das Proxy-Ziel enthält einen Pfad ({path}) — nginx akzeptiert in einer Regex-location keinen URI-Teil im proxy_pass, daher schlägt nginx -t mit "proxy_pass cannot have URI part" fehl. Entferne den Pfad (z. B. http://host:3000) oder nutze einen upstream-Block mit rewrite.',
       'websocketSupport': 'WebSocket-Unterstützung',
     },
     useCases: [

@@ -25,8 +25,9 @@ Visit www.example.com or email <i>someone@example.com</i> for details ✉️`
 
 // Emoji:扩展象形文字 + 杂项符号(U+2600-27BF)+ 符号箭头(U+2B00-2BFF)
 // + 地区指示符/肤色(U+1F1E6-1F1FF, U+1F3FB-1F3FF)+ 变体选择符(U+FE00-FE0F)+ ZWJ
+// + 组合用键帽(U+20E3,"1️⃣" 类 keycap 序列的组成部分)
 const EMOJI_RE =
-  /[☀-➿⬀-⯿️‍\p{Extended_Pictographic}🇦-🇿🏻-🏿]/gu
+  /[☀-➿⬀-⯿\u20E3️‍\p{Extended_Pictographic}🇦-🇿🏻-🏿]/gu
 // www. 前必须是行首/空白/开括号(捕获组而非 lookbehind,兼容旧 Safari),
 // 否则会把「Awwww. cute」这类词中 www. 误当 URL
 const URL_RE = /(?:https?:\/\/|(^|[\s<(])www\.)[^\s<>"']+/gi

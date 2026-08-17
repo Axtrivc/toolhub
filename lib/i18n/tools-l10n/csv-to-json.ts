@@ -9,7 +9,7 @@ export const csvToJsonL10n: ToolL10n = {
     ui: {
       inputLabel: 'CSV(含表头行)',
       outputLabel: 'JSON 数组',
-      note: '🔄 把 CSV 转成 JSON 对象。每行用表头作为键组成一个对象。',
+      note: '🔄 把 CSV 转成 JSON 对象,每行用表头作为键组成一个对象。分隔符(逗号/分号/制表符)自动探测——在末尾追加 " ||| ;" 或 " ||| \\t" 可手动指定。引号内字段的空白原样保留。',
     },
     useCases: [
       '把电子表格数据导入应用程序',
@@ -25,7 +25,7 @@ export const csvToJsonL10n: ToolL10n = {
     ui: {
       inputLabel: 'CSV (con fila de encabezado)',
       outputLabel: 'Array JSON',
-      note: '🔄 Convierte CSV a objetos JSON. Cada fila pasa a ser un objeto usando la fila de encabezado como claves.',
+      note: '🔄 Convierte CSV a objetos JSON usando la fila de encabezado como claves. El delimitador (coma, punto y coma, tabulación) se detecta automáticamente — añade " ||| ;" o " ||| \\t" al final para forzarlo. Los campos entre comillas conservan sus espacios.',
     },
     useCases: [
       'importar datos de hojas de cálculo a aplicaciones',
@@ -41,7 +41,7 @@ export const csvToJsonL10n: ToolL10n = {
     ui: {
       inputLabel: 'CSV (mit Kopfzeile)',
       outputLabel: 'JSON-Array',
-      note: '🔄 Wandelt CSV in JSON-Objekte um. Jede Zeile wird mit der Kopfzeile als Schlüssel zu einem Objekt.',
+      note: '🔄 Wandelt CSV anhand der Kopfzeile als Schlüssel in JSON-Objekte um. Das Trennzeichen (Komma, Semikolon, Tab) wird automatisch erkannt — hänge " ||| ;" oder " ||| \\t" an, um es vorzugeben. Felder in Anführungszeichen behalten ihre Leerzeichen.',
     },
     useCases: [
       'Tabellendaten in Anwendungen importieren',

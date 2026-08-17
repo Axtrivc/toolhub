@@ -44,6 +44,7 @@ export const compoundInterestCalculatorL10n: ToolL10n = {
         '复利(终值)。P = 本金,r = 年利率,n = 每年复利次数,t = 年数。A 是期末总余额。',
     },
     ui: {
+      errNonNegative: '利率和年数不能为负',
       'in.principal': '初始投资',
       'in.monthly': '每月定投',
       'in.rate': '年利率',
@@ -92,6 +93,7 @@ export const compoundInterestCalculatorL10n: ToolL10n = {
         'Interés compuesto (valor futuro). P = capital, r = tasa anual, n = periodos de capitalización por año, t = años. A es el saldo total al final.',
     },
     ui: {
+      errNonNegative: 'La tasa de interés y los años no pueden ser negativos',
       'in.principal': 'Inversión inicial',
       'in.monthly': 'Aportación mensual',
       'in.rate': 'Tasa de interés anual',
@@ -140,6 +142,7 @@ export const compoundInterestCalculatorL10n: ToolL10n = {
         'Zinseszins (zukünftiger Wert). P = Einlage, r = Jahressatz, n = Zinsperioden pro Jahr, t = Jahre. A ist der Gesamtsaldo am Ende.',
     },
     ui: {
+      errNonNegative: 'Zinssatz und Jahre dürfen nicht negativ sein',
       'in.principal': 'Ersteinlage',
       'in.monthly': 'Monatliche Einzahlung',
       'in.rate': 'Jahreszinssatz',

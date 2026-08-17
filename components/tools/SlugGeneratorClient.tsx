@@ -51,6 +51,7 @@ export function SlugGeneratorClient() {
   const [separator, setSeparator] = useState<'-' | '_'>('-')
   const [lowercase, setLowercase] = useState(true)
   const [removeSpecialChars, setRemoveSpecialChars] = useState(true)
+  const [asciiOnly, setAsciiOnly] = useState(true)
   const [history, setHistory] = useState<HistoryItem[]>([])
 
   // 从 localStorage 恢复历史记录
@@ -62,9 +63,10 @@ export function SlugGeneratorClient() {
     separator,
     lowercase,
     removeSpecialChars,
+    asciiOnly,
   }
 
-  const slug = useMemo(() => generateSlug(input, options), [input, separator, lowercase, removeSpecialChars])
+  const slug = useMemo(() => generateSlug(input, options), [input, separator, lowercase, removeSpecialChars, asciiOnly])
 
   const handleSave = () => {
     if (!input.trim() || !slug) return
@@ -120,7 +122,7 @@ export function SlugGeneratorClient() {
       </div>
 
       {/* 选项区 */}
-      <div className="grid grid-cols-1 gap-4 rounded-lg p-4 sm:grid-cols-3" style={{ backgroundColor: 'rgb(var(--bg-subtle))' }}>
+      <div className="grid grid-cols-1 gap-4 rounded-lg p-4 sm:grid-cols-2 lg:grid-cols-4" style={{ backgroundColor: 'rgb(var(--bg-subtle))' }}>
         <div>
           <label htmlFor="separator" className="mb-1.5 block text-xs font-medium text-slate-600 dark:text-slate-400">
             {L('separator', 'Separator')}
@@ -154,6 +156,16 @@ export function SlugGeneratorClient() {
             className="h-4 w-4 rounded border-slate-300 text-brand-600 focus:ring-brand-500"
           />
           {L('stripSymbols', 'Strip symbols')}
+        </label>
+
+        <label className="flex items-end gap-2 pb-1.5 text-sm text-slate-700 dark:text-slate-300">
+          <input
+            type="checkbox"
+            checked={asciiOnly}
+            onChange={(e) => setAsciiOnly(e.target.checked)}
+            className="h-4 w-4 rounded border-slate-300 text-brand-600 focus:ring-brand-500"
+          />
+          {L('asciiOnly', 'ASCII only')}
         </label>
       </div>
 

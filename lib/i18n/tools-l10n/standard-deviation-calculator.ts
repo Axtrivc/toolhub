@@ -9,10 +9,11 @@ export const standardDeviationCalculatorL10n: ToolL10n = {
     ui: {
       'in.numbers': '数字(逗号分隔)',
       'out.mean': '平均值',
-      'out.stddev': '标准差',
-      'out.variance': '方差',
+      'out.stddev': '标准差(总体)',
+      'out.sampleStddev': '标准差(样本,n−1)',
+      'out.variance': '方差(总体)',
       'out.count': '个数',
-      note: '📊 使用总体标准差(÷N)。若要样本标准差,乘以 √(N/(N−1))。',
+      note: '📊 总体标准差除以 N;样本标准差(贝塞尔校正)除以 N−1。两种口径已在上方并列显示。',
     },
     useCases: [
       '分析考试成绩的离散程度',
@@ -28,10 +29,11 @@ export const standardDeviationCalculatorL10n: ToolL10n = {
     ui: {
       'in.numbers': 'Números (separados por comas)',
       'out.mean': 'Media',
-      'out.stddev': 'Desviación típica',
-      'out.variance': 'Varianza',
+      'out.stddev': 'Desviación típica (poblacional)',
+      'out.sampleStddev': 'Desviación típica (muestral, n−1)',
+      'out.variance': 'Varianza (poblacional)',
       'out.count': 'Cantidad',
-      note: '📊 Usa la desviación típica poblacional (÷N). Para la muestral, multiplica por √(N/(N−1)).',
+      note: '📊 La desviación poblacional divide entre N; la muestral (corrección de Bessel) divide entre N−1. Ambas se muestran arriba.',
     },
     useCases: [
       'analizar la dispersión de las notas de un examen',
@@ -47,10 +49,11 @@ export const standardDeviationCalculatorL10n: ToolL10n = {
     ui: {
       'in.numbers': 'Zahlen (kommagetrennt)',
       'out.mean': 'Mittelwert',
-      'out.stddev': 'Standardabweichung',
-      'out.variance': 'Varianz',
+      'out.stddev': 'Standardabweichung (Grundgesamtheit)',
+      'out.sampleStddev': 'Standardabweichung (Stichprobe, n−1)',
+      'out.variance': 'Varianz (Grundgesamtheit)',
       'out.count': 'Anzahl',
-      note: '📊 Verwendet die Standardabweichung der Grundgesamtheit (÷N). Für die Stichprobe multipliziere mit √(N/(N−1)).',
+      note: '📊 Die Standardabweichung der Grundgesamtheit teilt durch N; die der Stichprobe (Bessel-Korrektur) durch N−1. Beide werden oben angezeigt.',
     },
     useCases: [
       'Streuung von Prüfungsergebnissen analysieren',
