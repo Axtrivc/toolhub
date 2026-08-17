@@ -7,6 +7,7 @@ import type { ToolL10n } from '../tool-l10n'
 export const textToListL10n: ToolL10n = {
   zh: {
     ui: {
+      defaultInput: '苹果\n香蕉\n樱桃',
       inputLabel: '多行文本',
       outputLabel: '项目符号列表',
       note: '📝 给每行加上项目符号(默认 •)。在文本末尾追加 " ||| -"、" ||| *" 或 " ||| 1." 可改用连字符、星号或数字编号。',
@@ -23,6 +24,7 @@ export const textToListL10n: ToolL10n = {
   },
   es: {
     ui: {
+      defaultInput: 'Manzana\nPlátano\nCereza',
       inputLabel: 'Líneas de texto',
       outputLabel: 'Lista con viñetas',
       note: '📝 Añade una viñeta (•) a cada línea. Añade " ||| -", " ||| *" o " ||| 1." tras el texto para usar guiones, asteriscos o numeración.',
@@ -39,6 +41,7 @@ export const textToListL10n: ToolL10n = {
   },
   de: {
     ui: {
+      defaultInput: 'Apfel\nBanane\nKirsche',
       inputLabel: 'Textzeilen',
       outputLabel: 'Aufzählungsliste',
       note: '📝 Fügt jeder Zeile ein Aufzählungszeichen (•) hinzu. Hänge " ||| -", " ||| *" oder " ||| 1." an den Text an, um Bindestriche, Sterne oder Nummerierung zu verwenden.',

@@ -7,6 +7,7 @@ import type { ToolL10n } from '../tool-l10n'
 export const urlExtractorL10n: ToolL10n = {
   zh: {
     ui: {
+      defaultInput: '访问 https://example.com 或 http://test.org/page?q=1 了解更多！',
       'noUrlsFound': '未找到 URL',
       inputLabel: '含网址的文本',
       outputLabel: '提取出的网址',
@@ -24,6 +25,7 @@ export const urlExtractorL10n: ToolL10n = {
   },
   es: {
     ui: {
+      defaultInput: 'Visita https://example.com o http://test.org/page?q=1 hoy!',
       'noUrlsFound': 'No se encontraron URLs',
       inputLabel: 'Texto con URLs',
       outputLabel: 'URLs extraídas',
@@ -41,6 +43,7 @@ export const urlExtractorL10n: ToolL10n = {
   },
   de: {
     ui: {
+      defaultInput: 'Besuche https://example.com oder http://test.org/page?q=1 heute!',
       'noUrlsFound': 'Keine URLs gefunden',
       inputLabel: 'Text mit URLs',
       outputLabel: 'Extrahierte URLs',

@@ -7,6 +7,7 @@ import type { ToolL10n } from '../tool-l10n'
 export const textDiffL10n: ToolL10n = {
   zh: {
     ui: {
+      defaultInput: '敏捷的 棕色 狐狸 ||| 缓慢的 棕色 狐狸',
       inputLabel: '格式:文本1 ||| 文本2',
       outputLabel: '对比结果',
       note: '🔍 逐词对比两段文本。用 " ||| " 分隔。以 - 开头的行是原文,以 + 开头的是改动。',
@@ -23,6 +24,7 @@ export const textDiffL10n: ToolL10n = {
   },
   es: {
     ui: {
+      defaultInput: 'el rápido zorro marrón ||| el lento zorro marrón',
       inputLabel: 'Formato: texto1 ||| texto2',
       outputLabel: 'Comparación',
       note: '🔍 Compara dos textos palabra por palabra. Separa con " ||| ". Las líneas con - son originales, las con + son cambios.',
@@ -39,6 +41,7 @@ export const textDiffL10n: ToolL10n = {
   },
   de: {
     ui: {
+      defaultInput: 'der schnelle braune fuchs ||| der langsame braune fuchs',
       inputLabel: 'Format: Text1 ||| Text2',
       outputLabel: 'Vergleich',
       note: '🔍 Vergleicht zwei Texte Wort für Wort. Trenne mit " ||| ". Zeilen mit - sind Original, mit + sind Änderungen.',

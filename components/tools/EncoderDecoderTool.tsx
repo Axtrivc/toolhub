@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useMemo, useCallback } from 'react'
+import { useState, useEffect, useMemo, useCallback, useRef } from 'react'
 import { CopyButton } from '@/components/CopyButton'
 import { useApp } from '@/components/providers/AppProviders'
 import { tui } from '@/lib/i18n/tool-l10n'
@@ -43,6 +43,11 @@ interface EncoderDecoderToolProps {
  * 视觉外壳与 makeTextTool 一致(textarea + CopyButton + stats + note),
  * 以保持全站文本工具的统一观感。
  *
+ * 默认示例本地化(与 makeTextTool 同机制):encode/decode 两方向的默认示例
+ * 初值恒英文(SSR/hydration 首帧一致);挂载后及 locale 切换时,pristine 输入
+ * 替换为 bundle 的 ui.defaultInputEncode / ui.defaultInputDecode;用户编辑过
+ * (onChange 触发)后永不覆盖。
+ *
  * 用法见 components/devtools/encoderTools.tsx 的 Base64CodecTool / URLCodecTool / HTMLEscapeTool。
  */
 export function EncoderDecoderTool({ encode, decode, initialMode = 'encode', slug = '' }: EncoderDecoderToolProps) {
@@ -55,6 +60,26 @@ export function EncoderDecoderTool({ encode, decode, initialMode = 'encode', slu
   // 挂载前输出固定空串,挂载后再 transform,保证 SSR/CSR 首帧一致。
   const [mounted, setMounted] = useState(false)
   useEffect(() => setMounted(true), [])
+
+  // D5 默认示例本地化:按方向取 defaultInputEncode/defaultInputDecode,
+  // pristine 门控(用户首次 onChange 编辑即永久失效)。替换发生在 useEffect,
+  // SSR/hydration 首帧恒英文 config 默认示例;tui 缺译回退英文原值,同值
+  // setInput 不触发渲染。
+  const pristineRef = useRef(true)
+  useEffect(() => {
+    if (!mounted || !pristineRef.current) return
+    const fallback = mode === 'encode' ? encode.defaultInput : decode.defaultInput
+    setInput(tui(slug, locale, mode === 'encode' ? 'defaultInputEncode' : 'defaultInputDecode', fallback))
+  }, [mounted, mode, locale, slug, encode, decode])
+
+  // 某方向当前生效的默认示例(含本地化),供 switchMode 判断「输入未被改动」
+  const defaultFor = useCallback(
+    (m: 'encode' | 'decode') => {
+      const fallback = m === 'encode' ? encode.defaultInput : decode.defaultInput
+      return tui(slug, locale, m === 'encode' ? 'defaultInputEncode' : 'defaultInputDecode', fallback)
+    },
+    [slug, locale, encode, decode],
+  )
 
   const output = useMemo(() => {
     if (!mounted) return ''
@@ -73,11 +98,11 @@ export function EncoderDecoderTool({ encode, decode, initialMode = 'encode', slu
       setMode(next)
       // 切换方向时保留用户已粘贴/编辑的输入,避免输入丢失;仅当输入仍是
       // 当前方向的默认示例(未被改动)或恰为另一方向的默认示例时,才重置为
-      // 目标方向的默认示例
-      const untouchedSample = input === spec.defaultInput || input === nextSpec.defaultInput
-      if (untouchedSample) setInput(nextSpec.defaultInput)
+      // 目标方向的默认示例。本地化后默认示例 ≠ config 英文原值,两种口径都要比对
+      const untouchedSample = [spec.defaultInput, nextSpec.defaultInput, defaultFor(mode), defaultFor(next)].includes(input)
+      if (untouchedSample) setInput(defaultFor(next))
     },
-    [mode, encode, decode, input, spec],
+    [mode, encode, decode, input, spec, defaultFor],
   )
 
   const charCount = input.length
@@ -140,7 +165,10 @@ export function EncoderDecoderTool({ encode, decode, initialMode = 'encode', slu
         <textarea
           id="text-input"
           value={input}
-          onChange={(e) => setInput(e.target.value)}
+          onChange={(e) => {
+            pristineRef.current = false
+            setInput(e.target.value)
+          }}
           placeholder={L('placeholder', 'Type or paste here...')}
           rows={6}
           className="w-full rounded-lg border p-4 font-mono text-sm shadow-sm outline-none transition focus:ring-2"

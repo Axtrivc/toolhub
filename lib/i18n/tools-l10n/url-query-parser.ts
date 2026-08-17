@@ -7,6 +7,7 @@ import type { ToolL10n } from '../tool-l10n'
 export const urlQueryParserL10n: ToolL10n = {
   zh: {
     ui: {
+      defaultInput: 'https://example.com/search?q=你好&page=2&sort=desc',
       inputLabel: '带查询串的 URL',
       outputLabel: '解析后的查询参数',
       note: '🔗 把 URL 中的查询参数提取成干净的 JSON 对象。',
@@ -23,6 +24,7 @@ export const urlQueryParserL10n: ToolL10n = {
   },
   es: {
     ui: {
+      defaultInput: 'https://example.com/search?q=hola&page=2&sort=desc',
       inputLabel: 'URL con cadena de consulta',
       outputLabel: 'Parámetros analizados',
       note: '🔗 Extrae los parámetros de consulta de una URL en un objeto JSON limpio.',
@@ -39,6 +41,7 @@ export const urlQueryParserL10n: ToolL10n = {
   },
   de: {
     ui: {
+      defaultInput: 'https://example.com/search?q=hallo&page=2&sort=desc',
       inputLabel: 'URL mit Query-String',
       outputLabel: 'Analysierte Parameter',
       note: '🔗 Extrahiert Query-Parameter aus einer URL in ein sauberes JSON-Objekt.',

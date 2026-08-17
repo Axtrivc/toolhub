@@ -7,6 +7,7 @@ import type { ToolL10n } from '../tool-l10n'
 export const sentenceCaseConverterL10n: ToolL10n = {
   zh: {
     ui: {
+      defaultInput: 'hello. 我叫小明. nice to meet you.',
       inputLabel: '你的文本',
       outputLabel: '句首大写',
       note: '✍️ 把每个句子的首字母大写。专有名词最好手动保留。',
@@ -24,6 +25,7 @@ export const sentenceCaseConverterL10n: ToolL10n = {
   },
   es: {
     ui: {
+      defaultInput: 'hola. me llamo juan. mucho gusto.',
       inputLabel: 'Tu texto',
       outputLabel: 'Tipo oración',
       note: '✍️ Capitaliza la primera letra de cada oración. Los nombres propios conviene revisarlos a mano.',
@@ -41,6 +43,7 @@ export const sentenceCaseConverterL10n: ToolL10n = {
   },
   de: {
     ui: {
+      defaultInput: 'hallo. ich heiße max. wie geht es dir?',
       inputLabel: 'Dein Text',
       outputLabel: 'Satz-Schreibweise',
       note: '✍️ Schreibt den ersten Buchstaben jedes Satzes groß. Eigennamen am besten manuell prüfen.',

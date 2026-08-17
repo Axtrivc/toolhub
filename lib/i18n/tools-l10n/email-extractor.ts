@@ -7,6 +7,7 @@ import type { ToolL10n } from '../tool-l10n'
 export const emailExtractorL10n: ToolL10n = {
   zh: {
     ui: {
+      defaultInput: '联系我们：hello@example.com 或 support@test.org 获取帮助。',
       'noEmailsFound': '未找到邮箱',
       inputLabel: '含邮箱的文本',
       outputLabel: '提取出的邮箱',
@@ -24,6 +25,7 @@ export const emailExtractorL10n: ToolL10n = {
   },
   es: {
     ui: {
+      defaultInput: 'Contáctanos en hola@example.com o soporte@test.org para ayuda.',
       'noEmailsFound': 'No se encontraron correos',
       inputLabel: 'Texto con correos',
       outputLabel: 'Correos extraídos',
@@ -41,6 +43,7 @@ export const emailExtractorL10n: ToolL10n = {
   },
   de: {
     ui: {
+      defaultInput: 'Kontaktiere uns unter hallo@example.com oder support@test.org für Hilfe.',
       'noEmailsFound': 'Keine E-Mails gefunden',
       inputLabel: 'Text mit E-Mails',
       outputLabel: 'Extrahierte E-Mails',

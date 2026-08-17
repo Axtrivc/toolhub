@@ -7,6 +7,7 @@ import type { ToolL10n } from '../tool-l10n'
 export const lowercaseConverterL10n: ToolL10n = {
   zh: {
     ui: {
+      defaultInput: 'HELLO WORLD 你好世界',
       inputLabel: '你的文本',
       outputLabel: '小写',
       placeholder: '输入或粘贴文本…',
@@ -24,6 +25,7 @@ export const lowercaseConverterL10n: ToolL10n = {
   },
   es: {
     ui: {
+      defaultInput: 'HOLA MUNDO',
       inputLabel: 'Tu texto',
       outputLabel: 'minúsculas',
       placeholder: 'Escribe o pega texto…',
@@ -41,6 +43,7 @@ export const lowercaseConverterL10n: ToolL10n = {
   },
   de: {
     ui: {
+      defaultInput: 'HALLO WELT',
       inputLabel: 'Dein Text',
       outputLabel: 'kleinbuchstaben',
       placeholder: 'Text eingeben oder einfügen…',

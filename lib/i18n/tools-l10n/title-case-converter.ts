@@ -7,6 +7,7 @@ import type { ToolL10n } from '../tool-l10n'
 export const titleCaseConverterL10n: ToolL10n = {
   zh: {
     ui: {
+      defaultInput: 'the art of programming 编程之美',
       inputLabel: '你的文本',
       outputLabel: '标题大写',
       note: '📝 把每个单词的首字母大写。适合标题和表头。',
@@ -24,6 +25,7 @@ export const titleCaseConverterL10n: ToolL10n = {
   },
   es: {
     ui: {
+      defaultInput: 'el rápido zorro marrón',
       inputLabel: 'Tu texto',
       outputLabel: 'Tipo Título',
       note: '📝 Capitaliza la primera letra de cada palabra. Ideal para títulos y encabezados.',
@@ -41,6 +43,7 @@ export const titleCaseConverterL10n: ToolL10n = {
   },
   de: {
     ui: {
+      defaultInput: 'der schnelle braune fuchs',
       inputLabel: 'Dein Text',
       outputLabel: 'Titel-Schreibweise',
       note: '📝 Schreibt den ersten Buchstaben jedes Wortes groß. Ideal für Titel und Überschriften.',

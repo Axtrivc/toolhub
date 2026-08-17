@@ -7,6 +7,8 @@ import type { ToolL10n } from '../tool-l10n'
 export const htmlUnescapeL10n: ToolL10n = {
   zh: {
     ui: {
+      'defaultInputDecode': '&lt;a href=&quot;x&quot;&gt;汤姆 &amp; 杰瑞&lt;/a&gt;',
+      'defaultInputEncode': '<a href="x">汤姆 & 杰瑞</a>',
       'characters': '字符',
       'clear': '清空',
       'decode': '解码',
@@ -35,6 +37,8 @@ export const htmlUnescapeL10n: ToolL10n = {
   },
   es: {
     ui: {
+      'defaultInputDecode': '&lt;a href=&quot;x&quot;&gt;España &amp; café&lt;/a&gt;',
+      'defaultInputEncode': '<a href="x">España & café</a>',
       'characters': 'caracteres',
       'clear': 'Limpiar',
       'decode': 'Decodificar',
@@ -63,6 +67,8 @@ export const htmlUnescapeL10n: ToolL10n = {
   },
   de: {
     ui: {
+      'defaultInputDecode': '&lt;a href=&quot;x&quot;&gt;Grüße &amp; Käfer&lt;/a&gt;',
+      'defaultInputEncode': '<a href="x">Grüße & Käfer</a>',
       'characters': 'Zeichen',
       'clear': 'Leeren',
       'decode': 'Dekodieren',

@@ -7,6 +7,7 @@ import type { ToolL10n } from '../tool-l10n'
 export const htmlTagStripperL10n: ToolL10n = {
   zh: {
     ui: {
+      defaultInput: '<h1>标题</h1><p>这是<strong>加粗</strong>文本。</p>',
       inputLabel: 'HTML 源码',
       outputLabel: '纯文本(已移除标签)',
       note: '🌐 剥离所有 HTML 标签,留下可读文本。使用浏览器 DOM 解析器——仅在客户端运行。',
@@ -23,6 +24,7 @@ export const htmlTagStripperL10n: ToolL10n = {
   },
   es: {
     ui: {
+      defaultInput: '<h1>Título</h1><p>Este es texto <strong>en negrita</strong>.</p>',
       inputLabel: 'Código HTML',
       outputLabel: 'Texto plano (etiquetas quitadas)',
       note: '🌐 Elimina todas las etiquetas HTML y deja texto legible. Usa el analizador DOM del navegador — solo en el cliente.',
@@ -39,6 +41,7 @@ export const htmlTagStripperL10n: ToolL10n = {
   },
   de: {
     ui: {
+      defaultInput: '<h1>Überschrift</h1><p>Dies ist <strong>fetter</strong> Text.</p>',
       inputLabel: 'HTML-Quellcode',
       outputLabel: 'Klartext (Tags entfernt)',
       note: '🌐 Entfernt alle HTML-Tags und lässt lesbaren Text. Nutzt den DOM-Parser des Browsers — nur clientseitig.',

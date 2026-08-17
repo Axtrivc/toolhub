@@ -7,6 +7,7 @@ import type { ToolL10n } from '../tool-l10n'
 export const jsonToCsvL10n: ToolL10n = {
   zh: {
     ui: {
+      defaultInput: '[{"姓名":"张三","年龄":30},{"姓名":"李四","年龄":25}]',
       inputLabel: '对象 JSON 数组',
       outputLabel: 'CSV',
       note: '🔄 把对象的 JSON 数组转成 CSV。会对逗号和引号做正确转义,嵌套对象/数组会序列化为 JSON 字符串。',
@@ -23,6 +24,7 @@ export const jsonToCsvL10n: ToolL10n = {
   },
   es: {
     ui: {
+      defaultInput: '[{"nombre":"Juan","edad":30},{"nombre":"Ana","edad":25}]',
       inputLabel: 'Array JSON de objetos',
       outputLabel: 'CSV',
       note: '🔄 Convierte un array JSON de objetos a CSV. Gestiona comas y comillas con el escape correcto; los objetos y arrays anidados se emiten como cadenas JSON.',
@@ -39,6 +41,7 @@ export const jsonToCsvL10n: ToolL10n = {
   },
   de: {
     ui: {
+      defaultInput: '[{"name":"Max","alter":30},{"name":"Anna","alter":25}]',
       inputLabel: 'JSON-Array von Objekten',
       outputLabel: 'CSV',
       note: '🔄 Wandelt ein JSON-Array von Objekten in CSV um. Behandelt Kommas und Anführungszeichen mit korrektem Escaping; verschachtelte Objekte und Arrays werden als JSON-Zeichenketten ausgegeben.',

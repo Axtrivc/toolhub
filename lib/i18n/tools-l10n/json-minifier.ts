@@ -7,6 +7,7 @@ import type { ToolL10n } from '../tool-l10n'
 export const jsonMinifierL10n: ToolL10n = {
   zh: {
     ui: {
+      defaultInput: '{\n  "姓名": "张三",\n  "年龄": 30\n}',
       inputLabel: 'JSON(已格式化)',
       outputLabel: '压缩后的 JSON',
       note: '📦 移除所有空白以最小化 JSON 体积。用于 API 负载和存储。',
@@ -23,6 +24,7 @@ export const jsonMinifierL10n: ToolL10n = {
   },
   es: {
     ui: {
+      defaultInput: '{\n  "nombre": "Juan",\n  "edad": 30\n}',
       inputLabel: 'JSON (con formato)',
       outputLabel: 'JSON minificado',
       note: '📦 Elimina todos los espacios para minimizar el tamaño del JSON. Para payloads de API y almacenamiento.',
@@ -39,6 +41,7 @@ export const jsonMinifierL10n: ToolL10n = {
   },
   de: {
     ui: {
+      defaultInput: '{\n  "name": "Max",\n  "alter": 30\n}',
       inputLabel: 'JSON (formatiert)',
       outputLabel: 'Minimiertes JSON',
       note: '📦 Entfernt sämtliche Leerzeichen, um die JSON-Größe zu minimieren. Für API-Payloads und Speicherung.',

@@ -7,6 +7,7 @@ import type { ToolL10n } from '../tool-l10n'
 export const binaryToTextL10n: ToolL10n = {
   zh: {
     ui: {
+      defaultInput: '11100100 10111101 10100000 11100101 10100101 10111101',
       inputLabel: '二进制(字节间用空格分隔)',
       outputLabel: '解码后的文本',
       note: '💾 每 8 位为一组,代表一个 UTF-8 字节。支持 Unicode(中文、emoji)。',
@@ -23,6 +24,7 @@ export const binaryToTextL10n: ToolL10n = {
   },
   es: {
     ui: {
+      defaultInput: '01001000 01101111',
       inputLabel: 'Binario (bytes separados por espacios)',
       outputLabel: 'Texto decodificado',
       note: '💾 Cada grupo de 8 bits es un byte UTF-8. Admite Unicode (chino, emoji).',
@@ -39,6 +41,7 @@ export const binaryToTextL10n: ToolL10n = {
   },
   de: {
     ui: {
+      defaultInput: '01001000 01100001 01101100 01101100 01101111',
       inputLabel: 'Binär (leerzeichengetrennte Bytes)',
       outputLabel: 'Dekodierter Text',
       note: '💾 Jede 8-Bit-Gruppe ist ein UTF-8-Byte. Unterstützt Unicode (Chinesisch, Emoji).',

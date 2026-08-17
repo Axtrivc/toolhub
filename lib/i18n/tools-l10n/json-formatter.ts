@@ -7,6 +7,7 @@ import type { ToolL10n } from '../tool-l10n'
 export const jsonFormatterL10n: ToolL10n = {
   zh: {
     ui: {
+      defaultInput: '{"姓名":"张三","年龄":30,"城市":"北京","技能":["js","css"]}',
       inputLabel: 'JSON(原始或压缩)',
       outputLabel: '格式化后的 JSON',
       note: '🔧 用 2 空格缩进格式化并美化 JSON。会校验语法——出错时显示提示。',
@@ -18,6 +19,7 @@ export const jsonFormatterL10n: ToolL10n = {
   },
   es: {
     ui: {
+      defaultInput: '{"nombre":"Juan","edad":30,"ciudad":"Madrid","habilidades":["js","css"]}',
       inputLabel: 'JSON (crudo o minificado)',
       outputLabel: 'JSON con formato',
       note: '🔧 Formatea y embellece JSON con sangría de 2 espacios. Valida la sintaxis — los errores muestran un mensaje.',
@@ -29,6 +31,7 @@ export const jsonFormatterL10n: ToolL10n = {
   },
   de: {
     ui: {
+      defaultInput: '{"name":"Max","alter":30,"stadt":"Berlin","skills":["js","css"]}',
       inputLabel: 'JSON (roh oder minimiert)',
       outputLabel: 'Formatiertes JSON',
       note: '🔧 Formatiert JSON mit 2-Leerzeichen-Einrückung. Prüft die Syntax — bei Fehlern erscheint eine Meldung.',

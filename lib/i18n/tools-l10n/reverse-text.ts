@@ -7,6 +7,7 @@ import type { ToolL10n } from '../tool-l10n'
 export const reverseTextL10n: ToolL10n = {
   zh: {
     ui: {
+      defaultInput: 'Hello World 你好',
       inputLabel: '你的文本',
       outputLabel: '反转结果',
       note: '🔁 反转所有字符。ZWJ 组合 emoji(家庭、旗帜)与组合变音符可能被拆开。适合谜题和密码。',
@@ -23,6 +24,7 @@ export const reverseTextL10n: ToolL10n = {
   },
   es: {
     ui: {
+      defaultInput: 'hola mundo',
       inputLabel: 'Tu texto',
       outputLabel: 'Invertido',
       note: '🔁 Invierte todos los caracteres. Los emojis combinados (ZWJ, banderas) y los diacríticos combinantes pueden separarse. Útil para acertijos y cifrados.',
@@ -39,6 +41,7 @@ export const reverseTextL10n: ToolL10n = {
   },
   de: {
     ui: {
+      defaultInput: 'hallo welt',
       inputLabel: 'Dein Text',
       outputLabel: 'Umgekehrt',
       note: '🔁 Kehrt alle Zeichen um. Kombinierte Emojis (ZWJ, Flaggen) und kombinierende diakritische Zeichen können auseinanderfallen. Lustig für Rätsel und Chiffren.',

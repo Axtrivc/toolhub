@@ -7,6 +7,7 @@ import type { ToolL10n } from '../tool-l10n'
 export const textToBinaryL10n: ToolL10n = {
   zh: {
     ui: {
+      defaultInput: '你好',
       inputLabel: '文本',
       outputLabel: '二进制',
       note: '💾 把文本转成 UTF-8 二进制——每个字符变成一个或多个 8 位字节。',
@@ -23,6 +24,7 @@ export const textToBinaryL10n: ToolL10n = {
   },
   es: {
     ui: {
+      defaultInput: 'Ho',
       inputLabel: 'Texto',
       outputLabel: 'Binario',
       note: '💾 Convierte texto a binario UTF-8 — cada carácter pasa a ser uno o más bytes de 8 bits.',
@@ -39,6 +41,7 @@ export const textToBinaryL10n: ToolL10n = {
   },
   de: {
     ui: {
+      defaultInput: 'Hallo',
       inputLabel: 'Text',
       outputLabel: 'Binär',
       note: '💾 Wandelt Text in UTF-8-Binär um — jedes Zeichen wird zu einem oder mehreren 8-Bit-Bytes.',

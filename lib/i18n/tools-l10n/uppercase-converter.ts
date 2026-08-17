@@ -7,6 +7,7 @@ import type { ToolL10n } from '../tool-l10n'
 export const uppercaseConverterL10n: ToolL10n = {
   zh: {
     ui: {
+      defaultInput: 'hello world 你好世界',
       inputLabel: '你的文本',
       outputLabel: '大写',
       placeholder: '输入或粘贴文本…',
@@ -24,6 +25,7 @@ export const uppercaseConverterL10n: ToolL10n = {
   },
   es: {
     ui: {
+      defaultInput: 'hola mundo',
       inputLabel: 'Tu texto',
       outputLabel: 'MAYÚSCULAS',
       placeholder: 'Escribe o pega texto…',
@@ -41,6 +43,7 @@ export const uppercaseConverterL10n: ToolL10n = {
   },
   de: {
     ui: {
+      defaultInput: 'hallo welt',
       inputLabel: 'Dein Text',
       outputLabel: 'GROSSBUCHSTABEN',
       placeholder: 'Text eingeben oder einfügen…',

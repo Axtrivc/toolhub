@@ -7,6 +7,8 @@ import type { ToolL10n } from '../tool-l10n'
 export const urlDecoderL10n: ToolL10n = {
   zh: {
     ui: {
+      'defaultInputDecode': '%E4%BD%A0%E5%A5%BD%E4%B8%96%E7%95%8C',
+      'defaultInputEncode': '你好世界',
       'characters': '字符',
       'clear': '清空',
       'componentMode': '组件(encodeURIComponent)',
@@ -39,6 +41,8 @@ export const urlDecoderL10n: ToolL10n = {
   },
   es: {
     ui: {
+      'defaultInputDecode': 'hola%20mundo',
+      'defaultInputEncode': 'hola mundo',
       'characters': 'caracteres',
       'clear': 'Limpiar',
       'componentMode': 'Componente (encodeURIComponent)',
@@ -71,6 +75,8 @@ export const urlDecoderL10n: ToolL10n = {
   },
   de: {
     ui: {
+      'defaultInputDecode': 'hallo%20welt',
+      'defaultInputEncode': 'hallo welt',
       'characters': 'Zeichen',
       'clear': 'Leeren',
       'componentMode': 'Komponente (encodeURIComponent)',

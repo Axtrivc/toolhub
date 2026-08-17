@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useMemo, type ComponentType } from 'react'
+import { useState, useEffect, useMemo, useRef, type ComponentType } from 'react'
 import { CopyButton } from '@/components/CopyButton'
 import { PulseGlow } from '@/components/motion/PulseGlow'
 import { useApp } from '@/components/providers/AppProviders'
@@ -18,6 +18,9 @@ import { countWords } from '@/lib/text-stats'
  *  - 工厂 chrome(Clear / placeholder / 字符·词数)走 dict;
  *  - 每工具的 inputLabel/outputLabel/note/placeholder:config 提供英文原值,
  *    若 config.slug 存在则经 tui() 取本地化,缺失回退英文(SSR 恒英文)。
+ *  - defaultInput:初值恒英文(SSR/静态导出首帧一致,hydration 安全);挂载后及
+ *    locale 运行时切换时,若输入仍 pristine(用户从未 onChange 编辑),替换为
+ *    bundle 的 ui.defaultInput 本地化示例;用户编辑过则永不覆盖。
  *
  * 用法:
  *   export const UppercaseConverter = makeTextTool({
@@ -60,6 +63,17 @@ export function makeTextTool(config: TextToolConfig): ComponentType {
     // 挂载前输出固定空串,挂载后再 transform,保证 SSR/CSR 首帧一致。
     const [mounted, setMounted] = useState(false)
     useEffect(() => setMounted(true), [])
+
+    // D5 默认示例本地化:pristine 门控 —— 用户首次 onChange 编辑即永久失效。
+    // 替换发生在 useEffect(挂载后/切换 locale 后),SSR 与 hydration 首帧恒为
+    // 英文 config.defaultInput,无 mismatch;tui 缺译时返回英文原值,setInput
+    // 同值 React 直接 bail out,不产生多余渲染。
+    const pristineRef = useRef(true)
+    useEffect(() => {
+      if (!mounted || !config.slug || !config.defaultInput) return
+      if (!pristineRef.current) return
+      setInput(tui(config.slug, locale, 'defaultInput', config.defaultInput))
+    }, [mounted, locale, config])
 
     const output = useMemo(() => {
       if (!mounted) return ''
@@ -113,7 +127,10 @@ export function makeTextTool(config: TextToolConfig): ComponentType {
           <textarea
             id="text-input"
             value={input}
-            onChange={(e) => setInput(e.target.value)}
+            onChange={(e) => {
+              pristineRef.current = false
+              setInput(e.target.value)
+            }}
             placeholder={placeholder}
             rows={6}
             className="w-full rounded-lg border p-4 font-mono text-sm shadow-sm outline-none transition focus:ring-2"

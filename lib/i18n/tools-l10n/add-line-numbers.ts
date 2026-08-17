@@ -7,6 +7,7 @@ import type { ToolL10n } from '../tool-l10n'
 export const addLineNumbersL10n: ToolL10n = {
   zh: {
     ui: {
+      defaultInput: '第一行\n第二行\n第三行',
       inputLabel: '你的文本',
       outputLabel: '带行号结果',
       note: '🔢 给每一行加上行号。适合代码评审、文字记录和引用。',
@@ -23,6 +24,7 @@ export const addLineNumbersL10n: ToolL10n = {
   },
   es: {
     ui: {
+      defaultInput: 'Primera línea\nSegunda línea\nTercera línea',
       inputLabel: 'Tu texto',
       outputLabel: 'Con números de línea',
       note: '🔢 Añade números de línea a cada línea. Útil para revisión de código, transcripciones y referencias.',
@@ -39,6 +41,7 @@ export const addLineNumbersL10n: ToolL10n = {
   },
   de: {
     ui: {
+      defaultInput: 'Erste Zeile\nZweite Zeile\nDritte Zeile',
       inputLabel: 'Dein Text',
       outputLabel: 'Mit Zeilennummern',
       note: '🔢 Fügt jeder Zeile Zeilennummern hinzu. Nützlich für Code-Review, Transkripte und Referenzen.',

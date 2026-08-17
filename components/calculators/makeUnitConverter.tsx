@@ -15,6 +15,11 @@ import { tui, tuiUc } from '@/lib/i18n/tool-l10n'
  * 所有线性单位转换(长度、重量、速度、面积、体积等)共用同一套逻辑:
  * value × fromFactor = 基准单位 → 基准单位 ÷ toFactor = 目标值
  *
+ * 内置竞品标准形态(全部工厂生成的转换器自动获得):
+ *  - ⇄ 交换按钮(结果区上方):From/To 互换,输入数值保持不变;
+ *  - 「All units」同显面板:当前输入一次性换算出所有单位,
+ *    行点击可设为 To 单位。
+ *
  * 用法:
  *   export const WeightConverter = makeUnitConverter({
  *     baseUnit: 'kg',
@@ -38,6 +43,15 @@ export interface UnitDef {
    */
   fromBase?: (b: number) => number
 }
+
+/** 单位 → 基准单位。自定义 toBase 钩子优先(非线性:燃油经济性倒数、温度偏移等),
+ *  否则线性 val × factor。主结果与 All units 面板共用本函数,保证两条路径一致。 */
+const toBase = (def: UnitDef, val: number): number =>
+  def.toBase ? def.toBase(val) : val * def.factor
+
+/** 基准单位 → 单位。自定义 fromBase 钩子优先,否则线性 base ÷ factor。 */
+const fromBase = (def: UnitDef, base: number): number =>
+  def.fromBase ? def.fromBase(base) : base / def.factor
 
 export function makeUnitConverter(config: {
   units: Record<string, UnitDef>
@@ -70,17 +84,34 @@ export function makeUnitConverter(config: {
       const fromDef = config.units[from]
       const toDef = config.units[to]
       if (!fromDef || !toDef) return NaN
-      // 转到基准单位:value → base
-      // 有自定义 toBase(非线性,如燃油经济性倒数)则用之,否则线性 value × factor
-      const toBase = (def: UnitDef, val: number): number =>
-        def.toBase ? def.toBase(val) : val * def.factor
-      // 从基准单位转出:base → target
-      // 有自定义 fromBase 则用之;否则线性 base / factor
-      const fromBase = (def: UnitDef, base: number): number =>
-        def.fromBase ? def.fromBase(base) : base / def.factor
-      const baseVal = toBase(fromDef, v)
-      return fromBase(toDef, baseVal)
+      // 转到基准单位再转出;与 All units 面板共用同一对 toBase/fromBase,
+      // 非线性单位(燃油经济性倒数等自定义钩子)自动走对路径
+      return fromBase(toDef, toBase(fromDef, v))
     }, [value, from, to])
+
+    // 「All units」同显面板数据:当前输入一次性换算出所有单位。
+    // 纯派生(无随机/时间依赖),SSR 首帧与客户端一致。
+    const allRows = useMemo(() => {
+      const v = toNum(value)
+      const fromDef = config.units[from]
+      if (!fromDef) return []
+      const baseVal = toBase(fromDef, v)
+      return unitKeys.flatMap((k) => {
+        const def = config.units[k]
+        if (!def) return []
+        const converted = fromBase(def, baseVal)
+        return [
+          {
+            key: k,
+            label: L(`unit.${k}`, def.label),
+            // 非有限值(如燃油经济性输入 ≤0 时钩子返回 NaN)显示 —,与结果卡一致;
+            // 极小/极大值由 fmtNum 统一走科学计数法
+            value: isFinite(converted) ? fmtNum(converted, digits) : '—',
+          },
+        ]
+      })
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [value, from, digits, locale])
 
     const options = unitKeys.map((k) => ({ label: L(`unit.${k}`, config.units[k].label), value: k }))
 
@@ -93,6 +124,12 @@ export function makeUnitConverter(config: {
       setFrom(sample.from)
       setTo(sample.to)
     }, [sample])
+
+    // ⇄ 交换 From/To:输入数值保持不变,语义跟随单位互换
+    const handleSwap = useCallback(() => {
+      setFrom(to)
+      setTo(from)
+    }, [from, to])
 
     // 单位 label(回退到 key),供摘要/公式/结果卡显示,避免暴露 raw key 如 'gb'
     const fromLabel = L(`unit.${from}`, config.units[from]?.label ?? from)
@@ -175,6 +212,20 @@ export function makeUnitConverter(config: {
           </div>
         </div>
 
+        {/* ⇄ 交换按钮(结果区上方):From/To 互换,数值不动 */}
+        <div className="flex justify-end">
+          <button
+            type="button"
+            onClick={handleSwap}
+            className="btn btn-secondary"
+            title={LC('swapUnits', 'Swap From and To units')}
+            aria-label={LC('swapUnits', 'Swap From and To units')}
+          >
+            <span aria-hidden="true">⇄</span>
+            <span className="ml-1.5">{LC('swap', 'Swap')}</span>
+          </button>
+        </div>
+
         {/* 结果区(aria-live:换算结果变化时屏幕阅读器播报) */}
         <div role="status" aria-live="polite" className="grid grid-cols-1 gap-3 sm:grid-cols-2">
           <ResultCard
@@ -198,6 +249,58 @@ export function makeUnitConverter(config: {
           filename={downloadFilename}
           downloadContent={downloadContent}
         />
+
+        {/* 「All units」同显面板:一行一单位;行内按钮点击即设为 To 单位。
+            分隔线用行内 style 走 --border 变量,暗色主题安全(divide-* 默认色不适配暗色) */}
+        <section aria-label={LC('allUnits', 'All units')}>
+          <div className="mb-2 flex flex-wrap items-baseline justify-between gap-2">
+            <span className="text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>
+              {LC('allUnits', 'All units')}
+            </span>
+            <span className="text-xs" style={{ color: 'rgb(var(--text-faint))' }}>
+              {LC('allUnitsHint', 'Click a unit to set it as the target')}
+            </span>
+          </div>
+          <ul className="overflow-hidden rounded-lg border border-border bg-card">
+            {allRows.map((row, i) => {
+              const isTo = row.key === to
+              const isFrom = row.key === from
+              return (
+                <li
+                  key={row.key}
+                  style={i > 0 ? { borderTop: '1px solid rgb(var(--border))' } : undefined}
+                >
+                  <button
+                    type="button"
+                    onClick={() => setTo(row.key)}
+                    aria-current={isTo ? 'true' : undefined}
+                    className={`flex w-full cursor-pointer items-center justify-between gap-4 px-4 py-2.5 text-left text-sm transition-colors hover:bg-muted ${
+                      isTo ? 'bg-muted/60' : ''
+                    }`}
+                  >
+                    <span className="flex min-w-0 flex-1 items-baseline">
+                      <span className="truncate">{row.label}</span>
+                      {isFrom && (
+                        <span
+                          className="ml-2 shrink-0 text-xs font-normal"
+                          style={{ color: 'rgb(var(--text-faint))' }}
+                        >
+                          ({LC('sourceUnitTag', 'input')})
+                        </span>
+                      )}
+                    </span>
+                    <span
+                      className={`shrink-0 font-medium tabular-nums ${isTo ? 'text-primary' : ''}`}
+                      style={isTo ? undefined : { color: 'rgb(var(--text))' }}
+                    >
+                      {row.value}
+                    </span>
+                  </button>
+                </li>
+              )
+            })}
+          </ul>
+        </section>
 
         {config.note && <CalculatorNote>{L('note', config.note)}</CalculatorNote>}
       </div>

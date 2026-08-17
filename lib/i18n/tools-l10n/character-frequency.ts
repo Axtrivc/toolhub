@@ -7,6 +7,7 @@ import type { ToolL10n } from '../tool-l10n'
 export const characterFrequencyL10n: ToolL10n = {
   zh: {
     ui: {
+      defaultInput: '今天天气真好',
       inputLabel: '要分析的文本',
       outputLabel: '字符频率',
       note: '📊 统计每个字符的出现次数,按频率排序。适合密码分析和写作分析。',
@@ -23,6 +24,7 @@ export const characterFrequencyL10n: ToolL10n = {
   },
   es: {
     ui: {
+      defaultInput: 'hola mundo',
       inputLabel: 'Texto a analizar',
       outputLabel: 'Frecuencia de caracteres',
       note: '📊 Cuenta las apariciones de cada carácter, ordenadas por frecuencia. Útil para criptoanálisis y análisis de escritura.',
@@ -39,6 +41,7 @@ export const characterFrequencyL10n: ToolL10n = {
   },
   de: {
     ui: {
+      defaultInput: 'hallo welt',
       inputLabel: 'Zu analysierender Text',
       outputLabel: 'Zeichenhäufigkeit',
       note: '📊 Zählt das Vorkommen jedes Zeichens, sortiert nach Häufigkeit. Nützlich für Kryptoanalyse und Schreibanalyse.',

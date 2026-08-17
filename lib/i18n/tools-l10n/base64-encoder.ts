@@ -7,6 +7,8 @@ import type { ToolL10n } from '../tool-l10n'
 export const base64EncoderL10n: ToolL10n = {
   zh: {
     ui: {
+      'defaultInputDecode': '5L2g5aW9',
+      'defaultInputEncode': '你好',
       'characters': '字符',
       'clear': '清空',
       'decode': '解码',
@@ -30,6 +32,8 @@ export const base64EncoderL10n: ToolL10n = {
   },
   es: {
     ui: {
+      'defaultInputDecode': 'SG9sYSBNdW5kbw==',
+      'defaultInputEncode': 'Hola Mundo',
       'characters': 'caracteres',
       'clear': 'Limpiar',
       'decode': 'Decodificar',
@@ -53,6 +57,8 @@ export const base64EncoderL10n: ToolL10n = {
   },
   de: {
     ui: {
+      'defaultInputDecode': 'SGFsbG8gV2VsdA==',
+      'defaultInputEncode': 'Hallo Welt',
       'characters': 'Zeichen',
       'clear': 'Leeren',
       'decode': 'Dekodieren',

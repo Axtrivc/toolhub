@@ -7,6 +7,7 @@ import type { ToolL10n } from '../tool-l10n'
 export const removeLineBreaksL10n: ToolL10n = {
   zh: {
     ui: {
+      defaultInput: '这段文字\n跨越了多个\n行。',
       inputLabel: '你的文本',
       outputLabel: '单行结果',
       note: '📝 移除所有换行,把文本合并为一行。',
@@ -23,6 +24,7 @@ export const removeLineBreaksL10n: ToolL10n = {
   },
   es: {
     ui: {
+      defaultInput: 'Este texto\nabarca varias\nlíneas.',
       inputLabel: 'Tu texto',
       outputLabel: 'Una sola línea',
       note: '📝 Elimina todos los saltos de línea y une el texto en una sola línea.',
@@ -39,6 +41,7 @@ export const removeLineBreaksL10n: ToolL10n = {
   },
   de: {
     ui: {
+      defaultInput: 'Dieser Text\numfasst mehrere\nZeilen.',
       inputLabel: 'Dein Text',
       outputLabel: 'Eine Zeile',
       note: '📝 Entfernt alle Zeilenumbrüche und verbindet den Text zu einer Zeile.',

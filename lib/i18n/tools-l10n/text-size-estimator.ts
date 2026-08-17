@@ -7,6 +7,7 @@ import type { ToolL10n } from '../tool-l10n'
 export const textSizeEstimatorL10n: ToolL10n = {
   zh: {
     ui: {
+      defaultInput: '你好，这是一段用于测量大小的示例文本。',
       inputLabel: '你的文本',
       outputLabel: '大小估算',
       note: '📏 估算不同单位下的存储大小。适合在把文本存入数据库或 API 前预估。',
@@ -23,6 +24,7 @@ export const textSizeEstimatorL10n: ToolL10n = {
   },
   es: {
     ui: {
+      defaultInput: 'Hola, este es un texto de ejemplo para medir.',
       inputLabel: 'Tu texto',
       outputLabel: 'Estimaciones de tamaño',
       note: '📏 Estima el tamaño de almacenamiento en distintas unidades. Útil antes de guardar texto en bases de datos o APIs.',
@@ -39,6 +41,7 @@ export const textSizeEstimatorL10n: ToolL10n = {
   },
   de: {
     ui: {
+      defaultInput: 'Hallo, dies ist ein Beispieltext zum Messen.',
       inputLabel: 'Dein Text',
       outputLabel: 'Größen­schätzungen',
       note: '📏 Schätzt die Speichergröße in verschiedenen Einheiten. Nützlich vor dem Speichern von Text in Datenbanken oder APIs.',

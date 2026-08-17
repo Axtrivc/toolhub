@@ -7,6 +7,7 @@ import type { ToolL10n } from '../tool-l10n'
 export const sortLinesL10n: ToolL10n = {
   zh: {
     ui: {
+      defaultInput: '樱桃\n苹果\n大枣\n香蕉',
       inputLabel: '列表(每行一项)',
       outputLabel: '已排序',
       note: '🔤 按字母顺序排序各行。空行会被移除。可选指令:列表末尾加 " ||| numeric"(按数值自然排序)、" ||| desc"(降序)或 " ||| numeric,desc"。',
@@ -25,6 +26,7 @@ export const sortLinesL10n: ToolL10n = {
   },
   es: {
     ui: {
+      defaultInput: 'cereza\nmanzana\ndátil\nplátano',
       inputLabel: 'Lista (un elemento por línea)',
       outputLabel: 'Ordenado',
       note: '🔤 Ordena las líneas alfabéticamente. Se eliminan las líneas vacías. Instrucciones opcionales al final: " ||| numeric" (orden numérico natural), " ||| desc" (descendente) o " ||| numeric,desc".',
@@ -43,6 +45,7 @@ export const sortLinesL10n: ToolL10n = {
   },
   de: {
     ui: {
+      defaultInput: 'kirsche\napfel\ndattel\nbanane',
       inputLabel: 'Liste (ein Eintrag pro Zeile)',
       outputLabel: 'Sortiert',
       note: '🔤 Sortiert die Zeilen alphabetisch. Leere Zeilen werden entfernt. Optionale Anweisungen am Ende: " ||| numeric" (natürliche Zahlenordnung), " ||| desc" (absteigend) oder " ||| numeric,desc".',

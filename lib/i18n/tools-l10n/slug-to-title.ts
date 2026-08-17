@@ -7,6 +7,7 @@ import type { ToolL10n } from '../tool-l10n'
 export const slugToTitleL10n: ToolL10n = {
   zh: {
     ui: {
+      defaultInput: '如何-制作-煎饼',
       inputLabel: 'URL slug',
       outputLabel: '标题',
       note: '🔤 把 URL slug 还原成可读标题。把连字符换成空格并大写单词。',
@@ -22,6 +23,7 @@ export const slugToTitleL10n: ToolL10n = {
   },
   es: {
     ui: {
+      defaultInput: 'como-hacer-panqueques',
       inputLabel: 'Slug de URL',
       outputLabel: 'Título',
       note: '🔤 Convierte slugs de URL de vuelta a títulos legibles. Reemplaza guiones por espacios y capitaliza las palabras.',
@@ -37,6 +39,7 @@ export const slugToTitleL10n: ToolL10n = {
   },
   de: {
     ui: {
+      defaultInput: 'wie-man-pfannkuchen-macht',
       inputLabel: 'URL-Slug',
       outputLabel: 'Titel',
       note: '🔤 Wandelt URL-Slugs zurück in lesbare Titel. Ersetzt Bindestriche durch Leerzeichen und schreibt Wörter groß.',
