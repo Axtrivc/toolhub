@@ -6,6 +6,7 @@ import { useApp } from './providers/AppProviders'
 import { t, tc, getToolName } from '@/lib/i18n'
 import { SITE_NAME } from '@/lib/seo'
 import { getPublishedTools } from '@/lib/tools'
+import { SiteStats } from './SiteStats'
 
 export function Footer() {
   // hydration 安全:首帧用 null(SSR 与 CSR 首帧一致,渲染时不显示年份),
@@ -86,8 +87,15 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-6 border-t pt-6 text-sm" style={{ borderColor: 'rgb(var(--border))', color: 'rgb(var(--text-faint))' }}>
-          © {year ?? ''} {SITE_NAME}. {tools.length} {t(locale, 'footerRights')}
+        {/* 底栏:版权 + 站内访客计数(计数组件拿到数据前不渲染,本地 dev 自动隐藏) */}
+        <div
+          className="mt-6 flex flex-col gap-3 border-t pt-6 text-sm sm:flex-row sm:items-center sm:justify-between"
+          style={{ borderColor: 'rgb(var(--border))', color: 'rgb(var(--text-faint))' }}
+        >
+          <div>
+            © {year ?? ''} {SITE_NAME}. {tools.length} {t(locale, 'footerRights')}
+          </div>
+          <SiteStats />
         </div>
       </div>
     </footer>

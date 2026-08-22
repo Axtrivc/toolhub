@@ -100,6 +100,11 @@ export interface Dict {
   footerTagline: string
   footerRights: string // "tools and counting. All rights reserved."
   footerMore: string // "+N more" (分类下展示超出 6 个时的"更多"链接)
+  // Footer 访客计数器(SiteStats,数据来自 /api/stats 的 D1 统计)
+  statsTotalVisits: string // "Total visits"(累计 PV)
+  statsTodayVisits: string // "Today"(今日 PV)
+  statsTodayVisitors: string // "Visitors today"(今日 UV)
+  statsAriaLabel: string // 无障碍标签 "Site visitor statistics"
   // 工具页通用
   toolHome: string
   toolResult: string
@@ -309,6 +314,10 @@ const en: Dict = {
     'Free, fast, and privacy-friendly online tools. Everything runs in your browser — no data leaves your device.',
   footerRights: 'tools and counting. All rights reserved.',
   footerMore: '+{count} more',
+  statsTotalVisits: 'Total visits',
+  statsTodayVisits: 'Today',
+  statsTodayVisitors: 'Visitors today',
+  statsAriaLabel: 'Site visitor statistics',
   toolHome: 'Home',
   toolResult: 'Result',
   toolCopy: 'Copy',
@@ -498,6 +507,10 @@ const zh: Dict = {
     '免费、快速、注重隐私的在线工具。所有操作都在浏览器中完成 —— 数据不会离开你的设备。',
   footerRights: '个工具,持续增加中。保留所有权利。',
   footerMore: '还有 {count} 个',
+  statsTotalVisits: '总访问',
+  statsTodayVisits: '今日访问',
+  statsTodayVisitors: '今日访客',
+  statsAriaLabel: '站点访客统计',
   toolHome: '首页',
   toolResult: '结果',
   toolCopy: '复制',
@@ -685,6 +698,10 @@ const es: Dict = {
     'Herramientas online gratuitas, rápidas y respetuosas con la privacidad. Todo se ejecuta en tu navegador: ningún dato sale de tu dispositivo.',
   footerRights: 'herramientas y contando. Todos los derechos reservados.',
   footerMore: '+{count} más',
+  statsTotalVisits: 'Visitas totales',
+  statsTodayVisits: 'Hoy',
+  statsTodayVisitors: 'Visitantes hoy',
+  statsAriaLabel: 'Estadísticas de visitas del sitio',
   toolHome: 'Inicio',
   toolResult: 'Resultado',
   toolCopy: 'Copiar',
@@ -873,6 +890,10 @@ const de: Dict = {
     'Kostenlose, schnelle und datenschutzfreundliche Online-Werkzeuge. Alles läuft im Browser — keine Daten verlassen dein Gerät.',
   footerRights: 'Werkzeuge und es werden mehr. Alle Rechte vorbehalten.',
   footerMore: '+{count} weitere',
+  statsTotalVisits: 'Besuche insgesamt',
+  statsTodayVisits: 'Heute',
+  statsTodayVisitors: 'Besucher heute',
+  statsAriaLabel: 'Besucherstatistik der Website',
   toolHome: 'Start',
   toolResult: 'Ergebnis',
   toolCopy: 'Kopieren',

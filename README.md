@@ -79,13 +79,36 @@ npx wrangler pages deploy out --project-name=toolhub
 
 ## 接入 AdSense(账号审核通过后)
 
-1. 在 `.env.local` 加:
-   ```
-   NEXT_PUBLIC_ADSENSE_CLIENT=ca-pub-XXXXXXXXXXXXXXXX
-   ```
-2. 取消 `components/AdSlot.tsx` 里 `AdSenseScript` 的注释
-3. 在 `app/layout.tsx` 的 `<head>` 里调用 `<AdSenseScript />`
-4. 把 `AdSlot.tsx` 里 production 分支的 `return null` 替换为真实的 `<ins className="adsbygoogle">` 代码
+在 `.env.local` / Cloudflare Pages 环境变量加 `NEXT_PUBLIC_ADSENSE_CLIENT=ca-pub-XXXXXXXXXXXXXXXX`,重新部署即可——脚本注入、`google-adsense-account` 验证 meta、广告位渲染均已就绪(`components/AdSlot.tsx`)。投放受 Cookie 同意横幅门控:用户选择"接受全部"后才加载。
+
+## 访客统计
+
+分两层,相互独立:
+
+### A. 站内访客计数器(Footer 可见,Pages Functions + D1)
+
+代码已内置:Footer 底栏显示"总访问 / 今日访问 / 今日访客",整刷与站内路由切换各计一次 PV,按匿名访客 ID(每日轮换哈希,无 cookie)去重 UV。只差一步绑定 D1 数据库:
+
+1. Cloudflare Dashboard → **Storage & Databases → D1 → Create**,名字随意(如 `toolhub-stats`),区域默认
+2. Pages 项目 → **Settings → Functions → D1 database bindings** → 添加:Variable name 填 **`DB`**,选择刚建的库(Production + Preview 都加)
+3. Deployments → Retry deploy
+
+首次请求会自动建表(`functions/api/stats.ts` 里的幂等 DDL),无需手工执行 SQL。表结构:`counters`(累计 PV,只增不减)+ `visits`(180 天滚动的访问明细,支撑今日/按工具聚合)。想直接看 SQL:Dashboard → D1 → toolhub-stats → Console。
+
+未绑定 D1 时(本地 `next dev`、其它静态托管)接口 404/503,前台计数器自动隐藏,页面零残留。防刷:同一访客 2 秒内重复上报只记一次。
+
+### B. Cloudflare Web Analytics(面板分析,免费可选)
+
+Dashboard 里看 PV/UV、来源国家、热门路径(SPA 路由自动上报),与 A 互补:
+
+1. Cloudflare Dashboard → **Analytics & Logs → Web Analytics → Add a site**,填 `toolhub.axtrivc.com`
+2. 复制给出的 **JS beacon token**
+3. Pages → Settings → Environment variables 添加 `NEXT_PUBLIC_CF_ANALYTICS_TOKEN=你的token`
+4. Deployments → Retry deploy(静态导出时 `NEXT_PUBLIC_*` 在构建期内联进产物,改变量必须重新 build)
+
+无 cookie、无跨站追踪、不做个人识别,与隐私政策"privacy-friendly, aggregate analytics"承诺一致,不经同意横幅门控。
+
+可选:GA4(可与 AdSense 联动看收益归因)。加 `NEXT_PUBLIC_GA_ID=G-XXXXXXXXXX` 重新部署即可。GA4 依赖 cookie,合规起见仅在用户对横幅选择"接受全部"后才加载,SPA 路由切换也会补发 page_view。
 
 ## 技术栈
 

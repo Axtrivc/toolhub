@@ -24,7 +24,7 @@
  */
 
 // ===== 版本号:每次更新本文件递增此值,触发新 SW 接管 + 旧缓存清理 =====
-const VERSION = 'toolhub-sw-v1.0.1'
+const VERSION = 'toolhub-sw-v1.0.2'
 const STATIC_CACHE = `static-${VERSION}`
 const RUNTIME_CACHE = `runtime-${VERSION}`
 
@@ -76,6 +76,10 @@ self.addEventListener('fetch', (event) => {
 
   // 跨域请求不缓存(AdSense、分析脚本等第三方),直接放行给浏览器
   if (url.origin !== self.location.origin) return
+
+  // /api/*:站内访客统计等 Pages Functions 动态接口,必须实时,
+  // 不进任何缓存策略(SWR 会回陈旧计数),直接放行给浏览器
+  if (url.pathname.startsWith('/api/')) return
 
   // HTML 导航请求:network-first
   if (request.mode === 'navigate' || (request.headers.get('accept') || '').includes('text/html')) {
