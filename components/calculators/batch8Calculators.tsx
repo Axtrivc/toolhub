@@ -31,11 +31,20 @@ export const APYCalculatorClient = makeCalculatorClient({
     { key: 'final', label: 'Final balance' },
     { key: 'interest', label: 'Interest earned' },
   ],
-  compute: (v) => {
+  compute: (v, locale) => {
     const p = toNum(v.principal)
     const r = toNum(v.apr) / 100
     const n = Number(v.compound)
     const t = toNum(v.years)
+    // 负本金/负 APR/负年限会算出无意义结果(如 apr=-100 → apy=-100%),与同文件
+    // compound-interest 保持一致直接拦截
+    if (p < 0 || r < 0 || t < 0) {
+      return {
+        apy: `⚠️ ${tui('apy-calculator', locale, 'errNonNegative', 'Principal, rate, and years cannot be negative')}`,
+        final: '—',
+        interest: '—',
+      }
+    }
     const apy = Math.pow(1 + r / n, n) - 1
     const final = p * Math.pow(1 + r / n, n * t)
     return {
