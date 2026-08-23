@@ -66,9 +66,14 @@ export function AutoLoanCalculatorClient() {
     const tax = Number(taxPct)
     const rate = Number(apr)
     const n = Number(term)
-    const nums = [p, d, t, tax, rate]
+    const nums = [p, d, t, tax, rate, n]
     if (nums.some((v) => !isFinite(v)) || p <= 0 || d < 0 || t < 0 || tax < 0 || rate < 0) {
       return { error: L('errInvalidNumbers', 'Please enter valid non-negative numbers (vehicle price must be greater than 0).') }
+    }
+    // 期限必须 ≥ 1 个月:n=0 时年金公式分母 (1-(1+r)^-0) 为 0 → 月供 Infinity;
+    // 负数则直接算出负月供。期限虽是下拉框,仍防御性校验。
+    if (n < 1) {
+      return { error: L('errInvalidTerm', 'Loan term must be at least 1 month.') }
     }
     const taxable = Math.max(0, p - t)
     const taxAmount = taxable * (tax / 100)
