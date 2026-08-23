@@ -23,7 +23,10 @@ export function EmbedTool({ tool }: { tool: ToolMeta }) {
 
   const embedUrl = `${SITE_URL}/tools/${tool.slug}/`
   // snippet 是代码产物:title 用英文 tool.name,保证嵌入语义跨语言稳定。
-  const snippet = `<iframe src="${embedUrl}" title="${tool.name}" width="100%" height="600" style="border:0;border-radius:8px;max-width:760px" loading="lazy"></iframe>`
+  // name 经 HTML 属性转义后拼入,防止工具名含双引号时产出畸形 HTML 片段。
+  const escapeAttr = (s: string) =>
+    s.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+  const snippet = `<iframe src="${escapeAttr(embedUrl)}" title="${escapeAttr(tool.name)}" width="100%" height="600" style="border:0;border-radius:8px;max-width:760px" loading="lazy"></iframe>`
   const name = getToolName(locale, tool.slug, tool.name)
 
   return (
