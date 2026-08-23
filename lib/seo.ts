@@ -7,6 +7,16 @@ import { getToolFaqsL10n } from './i18n/tool-l10n'
 
 export const SITE_NAME = 'ToolHub'
 export const SITE_TAGLINE = 'Free Online Tools'
+
+/**
+ * JSON-LD 防注入序列化:把 "<" 转义为 "\u003c",防止任何 FAQ/HowTo 文案
+ * (含 169 份 lib/i18n/tools-l10n/ 译文)出现 "</script>" 子串提前闭合
+ * script 标签造成注入。输出仍是合法 JSON(JSON.parse 可正常解析),
+ * 对搜索引擎解析 schema 语义零影响。所有 JSON-LD 注入点统一走此函数。
+ */
+export function jsonLdStringify(value: unknown): string {
+  return JSON.stringify(value).replace(/</g, '\\u003c')
+}
 export const SITE_DESCRIPTION =
   'Collection of free, fast, and privacy-friendly online tools. No signup, no ads clutter, works right in your browser.'
 

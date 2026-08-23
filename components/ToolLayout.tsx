@@ -14,7 +14,7 @@ import { FavoriteButton } from './FavoriteButton'
 import { RecentlyUsedTracker } from './RecentlyUsedTracker'
 import { useApp } from './providers/AppProviders'
 import { t, getToolName, getToolShortIntro, tc } from '@/lib/i18n'
-import { buildFaqJsonLd, buildBreadcrumbJsonLd, buildHowToJsonLd } from '@/lib/seo'
+import { buildFaqJsonLd, buildBreadcrumbJsonLd, buildHowToJsonLd, jsonLdStringify } from '@/lib/seo'
 import { getToolIcon, type ToolMeta } from '@/lib/tools'
 import { SmartIcon } from '@/components/SmartIcon'
 
@@ -55,7 +55,7 @@ export function ToolLayout({ tool, children }: ToolLayoutProps) {
       {howToJsonLd && (
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(howToJsonLd) }}
+          dangerouslySetInnerHTML={{ __html: jsonLdStringify(howToJsonLd) }}
         />
       )}
 
@@ -63,7 +63,7 @@ export function ToolLayout({ tool, children }: ToolLayoutProps) {
       {faqJsonLd && (
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+          dangerouslySetInnerHTML={{ __html: jsonLdStringify(faqJsonLd) }}
         />
       )}
 
@@ -71,7 +71,7 @@ export function ToolLayout({ tool, children }: ToolLayoutProps) {
       {breadcrumbJsonLd && (
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+          dangerouslySetInnerHTML={{ __html: jsonLdStringify(breadcrumbJsonLd) }}
         />
       )}
 
