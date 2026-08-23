@@ -28,13 +28,19 @@ export const siteMetadata: Metadata = {
     template: `%s | ${SITE_NAME}`,
   },
   description: SITE_DESCRIPTION,
+  // 站点级 keywords 只保留核心词(Google 忽略该标签,堆砌全部工具词只增大
+  // HTML 体积);各工具页自身的 keywords 走 buildToolMetadata,不受影响。
   keywords: [
     'free online tools',
     'web tools',
     'developer tools',
     'text tools',
+    'online calculator',
+    'unit converter',
     'online utilities',
-    ...tools.flatMap((t) => t.keywords),
+    'no signup tools',
+    'privacy-friendly tools',
+    'free calculator online',
   ],
   authors: [{ name: SITE_NAME }],
   creator: SITE_NAME,
