@@ -5,6 +5,7 @@ import { CalculatorField, ResultCard, CalculatorNote } from '@/components/calcul
 import { ResultActions } from '@/components/ResultActions'
 import { useApp } from '@/components/providers/AppProviders'
 import { tui } from '@/lib/i18n/tool-l10n'
+import { toNumStrict } from '@/lib/format'
 
 const TERMS = ['24', '36', '48', '60', '72', '84']
 
@@ -60,12 +61,13 @@ export function AutoLoanCalculatorClient() {
   const [payoffDate, setPayoffDate] = useState<string | null>(null)
 
   const parsed = useMemo(() => {
-    const p = Number(price)
-    const d = Number(down)
-    const t = Number(tradeIn)
-    const tax = Number(taxPct)
-    const rate = Number(apr)
-    const n = Number(term)
+    // 严格解析:空串/非法输入返回 NaN,走统一错误提示,而不是被折叠成 0 静默出结果
+    const p = toNumStrict(price)
+    const d = toNumStrict(down)
+    const t = toNumStrict(tradeIn)
+    const tax = toNumStrict(taxPct)
+    const rate = toNumStrict(apr)
+    const n = toNumStrict(term)
     const nums = [p, d, t, tax, rate, n]
     if (nums.some((v) => !isFinite(v)) || p <= 0 || d < 0 || t < 0 || tax < 0 || rate < 0) {
       return { error: L('errInvalidNumbers', 'Please enter valid non-negative numbers (vehicle price must be greater than 0).') }

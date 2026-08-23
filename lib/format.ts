@@ -36,3 +36,13 @@ export function toNum(s: string): number {
   const n = Number(s)
   return isFinite(n) ? n : 0
 }
+
+/** 严格解析 number:空串/非数字/Infinity 一律返回 NaN,由调用方显式识别非法输入。
+ *  与 toNum 的区别:toNum 把非法输入静默折叠为 0(等于"本金 $0 的合法结果",
+ *  用户看不到任何输入有误的提示);本入口让非法输入显式可见,
+ *  新计算器及需要强校验的字段应优先使用。纯函数,可直接单元测试。 */
+export function toNumStrict(s: string): number {
+  if (s.trim() === '') return NaN
+  const n = Number(s)
+  return isFinite(n) ? n : NaN
+}

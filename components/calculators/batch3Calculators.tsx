@@ -5,7 +5,7 @@ import { CalculatorField, ResultCard, CalculatorNote } from '@/components/calcul
 import { LoadSampleButton } from '@/components/LoadSampleButton'
 import { ResultActions } from '@/components/ResultActions'
 import { makeCalculatorClient } from '../calculator/makeCalculatorClient'
-import { fmtUSD, fmtNum, toNum } from '@/lib/format'
+import { fmtUSD, fmtNum, toNum, toNumStrict } from '@/lib/format'
 import { useApp } from '@/components/providers/AppProviders'
 import { tui, tuiCalc } from '@/lib/i18n/tool-l10n'
 
@@ -911,8 +911,16 @@ export const MortgageCalculatorClient = makeCalculatorClient({
   ],
   compute: (v, locale) => {
     const T = (key: string, fb: string) => tui('mortgage-calculator', locale, key, fb)
-    const home = toNum(v.home)
-    const downPct = toNum(v.down)
+    // 严格解析核心金额字段:空串/非法输入返回 NaN 走错误提示,而非被折叠成 0 静默出结果
+    const home = toNumStrict(v.home)
+    const downPct = toNumStrict(v.down)
+    if (isNaN(home) || isNaN(downPct)) {
+      return {
+        piti: `⚠️ ${T('errInvalidInput', 'Enter valid numbers in all fields')}`,
+        monthly: '—', loan: '—', total: '—', taxM: '—', insM: '—',
+        pmiM: '—', hoaM: '—', payoff: '—', saved: '—', timeSaved: '—', principal: '—',
+      }
+    }
     const months = Math.round(toNum(v.years) * 12)
     if (months <= 0) {
       return {

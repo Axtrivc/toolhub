@@ -6,7 +6,7 @@ import { CalculatorField, ResultCard, CalculatorNote } from '../calculator/Calcu
 import { ResultActions } from '@/components/ResultActions'
 import { LoadSampleButton } from '@/components/LoadSampleButton'
 import { useApp } from '@/components/providers/AppProviders'
-import { fmtUSD, fmtNum, toNum } from '@/lib/format'
+import { fmtUSD, fmtNum, toNum, toNumStrict } from '@/lib/format'
 import { calendarDaysBetween } from '@/lib/date-utils'
 import { getCalculatorSample } from '@/lib/tool-samples'
 import { tui, tuiCalc } from '@/lib/i18n/tool-l10n'
@@ -32,10 +32,18 @@ export const APYCalculatorClient = makeCalculatorClient({
     { key: 'interest', label: 'Interest earned' },
   ],
   compute: (v, locale) => {
-    const p = toNum(v.principal)
-    const r = toNum(v.apr) / 100
+    // 严格解析:空串/非法输入返回 NaN,走错误提示而非被折叠成 0 静默出结果
+    const p = toNumStrict(v.principal)
+    const r = toNumStrict(v.apr) / 100
     const n = Number(v.compound)
-    const t = toNum(v.years)
+    const t = toNumStrict(v.years)
+    if (isNaN(p) || isNaN(r) || isNaN(t)) {
+      return {
+        apy: `⚠️ ${tui('apy-calculator', locale, 'errInvalidInput', 'Enter valid numbers in all fields')}`,
+        final: '—',
+        interest: '—',
+      }
+    }
     // 负本金/负 APR/负年限会算出无意义结果(如 apr=-100 → apy=-100%),与同文件
     // compound-interest 保持一致直接拦截
     if (p < 0 || r < 0 || t < 0) {
