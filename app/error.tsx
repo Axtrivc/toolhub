@@ -22,6 +22,12 @@ export default function Error({
     <div className="flex min-h-screen flex-col items-center justify-center px-6 text-center">
       <h1 className="text-2xl font-bold text-slate-800">{t(locale, 'errorTitle')}</h1>
       <p className="mt-3 max-w-md text-sm text-slate-600">{t(locale, 'errorBody')}</p>
+      {/* digest 是 Next.js 服务端日志关联码:展示出来让用户反馈时能精确定位到具体报错 */}
+      {error.digest && (
+        <p className="mt-3 max-w-md rounded-md bg-slate-100 p-2 font-mono text-xs break-all text-slate-500">
+          {t(locale, 'errorDigest').replace('{digest}', error.digest)}
+        </p>
+      )}
       <div className="mt-6 flex gap-3">
         <button
           type="button"
