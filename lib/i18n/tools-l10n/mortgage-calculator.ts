@@ -50,6 +50,8 @@ export const mortgageCalculatorL10n: ToolL10n = {
     ui: {
       errYears: '年限必须大于 0',
       errPayoffCap: '600 个月内未还清',
+      errHomePrice: '房屋价格必须大于 0',
+      errDownOver100: '首付款不能超过 100%',
       'in.home': '房屋价格',
       'in.down': '首付款',
       'in.rate': '利率',
@@ -123,6 +125,8 @@ export const mortgageCalculatorL10n: ToolL10n = {
     ui: {
       errYears: 'Los años deben ser mayores que 0',
       errPayoffCap: 'No se amortiza en 600 meses',
+      errHomePrice: 'El precio de la vivienda debe ser mayor que 0',
+      errDownOver100: 'El pago inicial no puede superar el 100 %',
       'in.home': 'Precio de la vivienda',
       'in.down': 'Pago inicial',
       'in.rate': 'Tasa de interés',
@@ -196,6 +200,8 @@ export const mortgageCalculatorL10n: ToolL10n = {
     ui: {
       errYears: 'Die Laufzeit muss größer als 0 sein',
       errPayoffCap: 'Innerhalb von 600 Monaten nicht getilgt',
+      errHomePrice: 'Der Hauspreis muss größer als 0 sein',
+      errDownOver100: 'Die Anzahlung darf 100 % nicht überschreiten',
       'in.home': 'Hauspreis',
       'in.down': 'Anzahlung',
       'in.rate': 'Zinssatz',

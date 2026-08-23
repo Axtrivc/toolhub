@@ -921,6 +921,14 @@ export const MortgageCalculatorClient = makeCalculatorClient({
         pmiM: '—', hoaM: '—', payoff: '—', saved: '—', timeSaved: '—', principal: '—',
       }
     }
+    // 房价必须 > 0、首付 ≤ 100%:否则 loan 为负,PITI/月供/摊销会整片输出负数而无提示
+    if (home <= 0 || downPct > 100) {
+      return {
+        piti: `⚠️ ${home <= 0 ? T('errHomePrice', 'Home price must be greater than 0') : T('errDownOver100', 'Down payment cannot exceed 100%')}`,
+        monthly: '—', loan: '—', total: '—', taxM: '—', insM: '—',
+        pmiM: '—', hoaM: '—', payoff: '—', saved: '—', timeSaved: '—', principal: '—',
+      }
+    }
     const loan = home * (1 - downPct / 100)
     const rate = toNum(v.rate) / 100 / 12
     // 标准摊销月供,与 LoanCalculatorClient 同式:M = P·r(1+r)^n / ((1+r)^n − 1)
