@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useMemo, useCallback } from 'react'
+import { useState, useMemo, useCallback, useEffect } from 'react'
 import { CopyButton } from '@/components/CopyButton'
 import { LoadSampleButton } from '@/components/LoadSampleButton'
 import { useApp } from '@/components/providers/AppProviders'
@@ -63,6 +63,14 @@ export function JwtDecoderClient() {
 
   const [token, setToken] = useState('')
 
+  // 当前秒级时间戳,每 30 秒刷新一次:页面长驻期间 exp 的 expired/valid 判定
+  // 才不会停留在首次渲染时的快照。卸载时 clearInterval 清理定时器。
+  const [nowSec, setNowSec] = useState(() => Math.floor(Date.now() / 1000))
+  useEffect(() => {
+    const id = setInterval(() => setNowSec(Math.floor(Date.now() / 1000)), 30_000)
+    return () => clearInterval(id)
+  }, [])
+
   const result = useMemo<{ decoded?: DecodedJwt; error?: string }>(() => {
     if (!token.trim()) return {}
     try {
@@ -91,7 +99,6 @@ export function JwtDecoderClient() {
   const timeClaims = useMemo<{ claims: { key: string; label: string; text: string }[]; problem: boolean }>(() => {
     const p = result.decoded?.payload as Record<string, unknown> | undefined
     if (!p) return { claims: [], problem: false }
-    const nowSec = Math.floor(Date.now() / 1000)
     const defs: [key: string, labelKey: string, labelFb: string][] = [
       ['iat', 'issuedLabel', 'Issued (iat):'],
       ['nbf', 'notBeforeLabel', 'Not before (nbf):'],
@@ -116,7 +123,7 @@ export function JwtDecoderClient() {
     }
     return { claims, problem }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [result, locale])
+  }, [result, locale, nowSec])
 
   const handleLoadSample = useCallback(() => setToken(SAMPLE_TOKEN), [])
 
