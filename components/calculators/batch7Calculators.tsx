@@ -144,14 +144,19 @@ export const CombinationCalculatorClient = makeCalculatorClient({
       return { result: `⚠️ ${T('errIntegers', 'Enter whole numbers for n and r')}`, formula: '—', odds: '—' }
     }
     if (r > n || n < 0 || r < 0) return { result: `⚠️ ${T('errRange', 'Need 0 ≤ r ≤ n')}`, formula: '—', odds: '—' }
-    // C(n,r) = n!/(r!(n-r)!),用迭代避免大数阶乘溢出
-    let result = 1
-    for (let i = 0; i < r; i++) result = (result * (n - i)) / (i + 1)
+    // C(n,r) = n!/(r!(n-r)!):BigInt 逐步乘除(中间值恒为整数),超过 2⁵³ 后
+    // 浮点连乘会静默丢失低位数字(C(58,29) 起即不精确),BigInt 保持结果精确
+    if (n > 10000) {
+      return { result: `⚠️ ${T('errTooBig', 'Enter n ≤ 10,000 (result too large to display)')}`, formula: '—', odds: '—' }
+    }
+    let result = 1n
+    for (let i = 0; i < r; i++) result = (result * BigInt(n - i)) / BigInt(i + 1)
+    const resultStr = result.toLocaleString('en-US')
     return {
-      result: fmtNum(result, 0),
+      result: resultStr,
       formula: `C(${n},${r}) = ${n}! / (${r}! × ${(n - r)}!)`,
       // 彩票式赔率:随机选一组恰好命中 = 1 / C(n,r)
-      odds: result > 0 ? T('oddsOneIn', '1 in {c}').replace('{c}', fmtNum(result, 0)) : '—',
+      odds: result > 0n ? T('oddsOneIn', '1 in {c}').replace('{c}', resultStr) : '—',
     }
   },
   note: '🃏 Combinations: choosing r items from n, order doesn\'t matter. Lottery odds use this.',
@@ -177,10 +182,14 @@ export const PermutationCalculatorClient = makeCalculatorClient({
       return { result: `⚠️ ${T('errIntegers', 'Enter whole numbers for n and r')}`, formula: '—' }
     }
     if (r > n || n < 0 || r < 0) return { result: `⚠️ ${T('errRange', 'Need 0 ≤ r ≤ n')}`, formula: '—' }
-    let result = 1
-    for (let i = 0; i < r; i++) result *= (n - i)
+    // BigInt 连乘:P(19,19) ≈ 1.2×10¹⁷ 起浮点已丢精度,更大溢出为 Infinity
+    if (n > 10000) {
+      return { result: `⚠️ ${T('errTooBig', 'Enter n ≤ 10,000 (result too large to display)')}`, formula: '—' }
+    }
+    let result = 1n
+    for (let i = 0; i < r; i++) result *= BigInt(n - i)
     return {
-      result: fmtNum(result, 0),
+      result: result.toLocaleString('en-US'),
       formula: `P(${n},${r}) = ${n}! / ${(n - r)}!`,
     }
   },

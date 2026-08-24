@@ -13,6 +13,7 @@ export const permutationCalculatorL10n: ToolL10n = {
     ui: {
       errRange: '需要 0 ≤ r ≤ n',
       errIntegers: '请为 n 和 r 输入整数',
+      errTooBig: 'n 不能超过 10,000(结果太大,无法显示)',
       'in.n': '总数 (n)',
       'in.r': '排列 (r)',
       'out.result': '排列数 P(n,r)',
@@ -37,6 +38,7 @@ export const permutationCalculatorL10n: ToolL10n = {
     ui: {
       errRange: 'Se necesita 0 ≤ r ≤ n',
       errIntegers: 'Introduce números enteros para n y r',
+      errTooBig: 'n no puede superar 10 000 (resultado demasiado grande para mostrar)',
       'in.n': 'Total de elementos (n)',
       'in.r': 'Ordenar (r)',
       'out.result': 'Permutaciones P(n,r)',
@@ -61,6 +63,7 @@ export const permutationCalculatorL10n: ToolL10n = {
     ui: {
       errRange: 'Es gilt 0 ≤ r ≤ n',
       errIntegers: 'Gib ganze Zahlen für n und r ein',
+      errTooBig: 'n darf 10.000 nicht überschreiten (Ergebnis zu groß zur Anzeige)',
       'in.n': 'Gesamtanzahl (n)',
       'in.r': 'Anordnen (r)',
       'out.result': 'Permutationen P(n,r)',

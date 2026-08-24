@@ -13,6 +13,7 @@ export const combinationCalculatorL10n: ToolL10n = {
     ui: {
       errRange: '需要 0 ≤ r ≤ n',
       errIntegers: '请为 n 和 r 输入整数',
+      errTooBig: 'n 不能超过 10,000(结果太大,无法显示)',
       'in.n': '总数 (n)',
       'in.r': '选取 (r)',
       'out.result': '组合数 C(n,r)',
@@ -40,6 +41,7 @@ export const combinationCalculatorL10n: ToolL10n = {
     ui: {
       errRange: 'Se necesita 0 ≤ r ≤ n',
       errIntegers: 'Introduce números enteros para n y r',
+      errTooBig: 'n no puede superar 10 000 (resultado demasiado grande para mostrar)',
       'in.n': 'Total de elementos (n)',
       'in.r': 'Elegir (r)',
       'out.result': 'Combinaciones C(n,r)',
@@ -67,6 +69,7 @@ export const combinationCalculatorL10n: ToolL10n = {
     ui: {
       errRange: 'Es gilt 0 ≤ r ≤ n',
       errIntegers: 'Gib ganze Zahlen für n und r ein',
+      errTooBig: 'n darf 10.000 nicht überschreiten (Ergebnis zu groß zur Anzeige)',
       'in.n': 'Gesamtanzahl (n)',
       'in.r': 'Auswählen (r)',
       'out.result': 'Kombinationen C(n,r)',
