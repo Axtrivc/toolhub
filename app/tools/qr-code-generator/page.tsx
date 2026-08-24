@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import dynamic from 'next/dynamic'
 import { getTool } from '@/lib/tools'
-import { buildToolMetadata, buildToolJsonLd } from '@/lib/seo'
+import { buildToolMetadata, buildToolJsonLd, jsonLdStringify } from '@/lib/seo'
 import { ToolLayout } from '@/components/ToolLayout'
 import { QRCodeGeneratorContent } from './content'
 
@@ -23,7 +23,7 @@ export default function QRCodeGeneratorPage() {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: jsonLdStringify(jsonLd) }}
       />
       <ToolLayout tool={tool}>
         <QRCodeGeneratorClient />

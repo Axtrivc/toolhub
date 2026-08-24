@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { PageShell } from '@/components/PageShell'
 import { BlogIndex, type BlogPostMeta } from '@/components/BlogIndex'
-import { SITE_NAME } from '@/lib/seo'
+import { SITE_NAME, jsonLdStringify } from '@/lib/seo'
 import { SITE_URL } from '@/lib/constants'
 
 /**
@@ -104,7 +104,7 @@ export default function BlogIndexPage() {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(blogJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: jsonLdStringify(blogJsonLd) }}
       />
       <PageShell
         title="The ToolHub Blog"

@@ -10,7 +10,7 @@ import { AdSenseScript } from '@/components/AdSlot'
 import { AnalyticsScript, PageViewTracker } from '@/components/Analytics'
 import { CookieConsent } from '@/components/CookieConsent'
 import { ServiceWorkerRegister } from '@/components/ServiceWorkerRegister'
-import { siteMetadata, websiteJsonLd } from '@/lib/seo'
+import { siteMetadata, websiteJsonLd, jsonLdStringify } from '@/lib/seo'
 
 export const metadata = siteMetadata
 
@@ -61,7 +61,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         {/* 站点级结构化数据 */}
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
+          dangerouslySetInnerHTML={{ __html: jsonLdStringify(websiteJsonLd) }}
         />
       </head>
       <body className="flex min-h-screen flex-col">

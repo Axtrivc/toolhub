@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { getTool } from '@/lib/tools'
-import { buildToolMetadata, buildToolJsonLd } from '@/lib/seo'
+import { buildToolMetadata, buildToolJsonLd, jsonLdStringify } from '@/lib/seo'
 import { ToolLayout } from '@/components/ToolLayout'
 import { NumeralSystemConverterClient } from '@/components/converters/batchConverters'
 import { NumeralSystemConverterContent } from './content'
@@ -14,7 +14,7 @@ export default function Page() {
   const jsonLd = buildToolJsonLd('numeral-system-converter')
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdStringify(jsonLd) }} />
       <ToolLayout tool={tool}>
         <NumeralSystemConverterClient />
         <NumeralSystemConverterContent />

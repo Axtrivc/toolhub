@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { getTool } from '@/lib/tools'
-import { buildToolMetadata, buildToolJsonLd } from '@/lib/seo'
+import { buildToolMetadata, buildToolJsonLd, jsonLdStringify } from '@/lib/seo'
 import { ToolLayout } from '@/components/ToolLayout'
 import { SlugGeneratorClient } from '@/components/tools/SlugGeneratorClient'
 import { SlugGeneratorContent } from './content'
@@ -17,7 +17,7 @@ export default function SlugGeneratorPage() {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: jsonLdStringify(jsonLd) }}
       />
       <ToolLayout tool={tool}>
         <SlugGeneratorClient />

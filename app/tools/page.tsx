@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { getToolsByCategory, getPublishedTools, getToolIcon } from '@/lib/tools'
 import { SmartIcon } from '@/components/SmartIcon'
-import { SITE_NAME } from '@/lib/seo'
+import { SITE_NAME, jsonLdStringify } from '@/lib/seo'
 import { buildItemListJsonLd } from '@/lib/seo'
 
 export const metadata: Metadata = {
@@ -42,7 +42,7 @@ export default function ToolsHubPage() {
       {/* ItemList 结构化数据 */}
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListLd) }}
+        dangerouslySetInnerHTML={{ __html: jsonLdStringify(itemListLd) }}
       />
 
       {/* Hero */}

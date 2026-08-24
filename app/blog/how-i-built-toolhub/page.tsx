@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { SITE_NAME } from '@/lib/seo'
+import { SITE_NAME, jsonLdStringify } from '@/lib/seo'
 import { SITE_URL } from '@/lib/constants'
 import { BlogToolsBanner } from '@/components/BlogToolsBanner'
 import { BlogArticleBody } from '@/components/BlogArticleBody'
@@ -89,7 +89,7 @@ export default function HowIBuiltToolHubPost() {
       {/* JSON-LD:与站点其它页面一致,通过 raw script 注入 */}
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: jsonLdStringify(articleJsonLd) }}
       />
 
       {/* 顶部:返回首页 Button(用户明确要求) */}
