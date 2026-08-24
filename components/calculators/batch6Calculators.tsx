@@ -264,12 +264,22 @@ export const CapitalGainsTaxEstimatorClient = makeCalculatorClient({
       tax = fifteenPortion * 0.15 + twentyPortion * 0.2
       rateDetail = parts.join(' + ')
     } else {
-      let marginal = 0
-      for (const b of ordinaryBrackets) {
-        if (income + posGain >= (b[0] as number)) marginal = b[1] as number
+      // 短期利得是普通收入,与工资一样逐档累进填充(从收入落点档开始),
+      // 不能整笔按最高触及档一刀切——大额收益会被显著高估税额
+      const parts: string[] = []
+      for (let i = 0; i < ordinaryBrackets.length; i++) {
+        const lo = ordinaryBrackets[i][0] as number
+        const rate = ordinaryBrackets[i][1] as number
+        const hi = i + 1 < ordinaryBrackets.length ? (ordinaryBrackets[i + 1][0] as number) : Infinity
+        // 该档内属于「收入+收益」堆叠后落在 [lo, hi) 的部分
+        const portion = Math.min(income + posGain, hi) - Math.max(income, lo)
+        if (portion > 0 && posGain > 0) {
+          tax += portion * rate
+          parts.push(`${fmtNum(rate * 100, 0)}% × ${fmtUSD(Math.min(portion, posGain), 0)}`)
+        }
       }
-      tax = posGain * marginal
-      rateDetail = `${fmtNum(marginal * 100, 0)}%`
+      if (parts.length === 0) parts.push('0%')
+      rateDetail = parts.join(' + ')
     }
     return {
       gain: fmtUSD(gain),
