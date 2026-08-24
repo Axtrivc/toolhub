@@ -80,8 +80,26 @@ function today(): string {
 function json(data: unknown, status = 200): Response {
   return new Response(JSON.stringify(data), {
     status,
-    headers: { 'content-type': 'application/json; charset=utf-8' },
+    headers: { 'content-type': 'application/json; charset=utf-8', 'cache-control': 'no-store' },
   })
+}
+
+/** 同源校验:浏览器跨站 POST 会带外站 Origin,直接 403;
+ *  curl/脚本可伪造此头,但配合 D1 写配额限制已足够抬高滥用成本 */
+function isSameOrigin(request: Request): boolean {
+  const origin = request.headers.get('origin')
+  if (!origin) return true // 非浏览器客户端(无 Origin)放行,靠速率兜底
+  try {
+    return new URL(origin).host === new URL(request.url).host
+  } catch {
+    return false
+  }
+}
+
+/** 内部错误统一日志 + 泛化响应:String(err) 可能含 SQL 片段/绑定名,不能回给公网 */
+function internalError(err: unknown): Response {
+  console.error('[api/stats]', err)
+  return json({ error: 'internal error' }, 500)
 }
 
 /** 读取累计 PV + 今日 PV/UV */
@@ -111,12 +129,14 @@ export const onRequestGet: StatsFunction = async ({ env }) => {
     await ensureSchema(env.DB)
     return json(await readCounts(env.DB))
   } catch (err) {
-    return json({ error: String(err) }, 500)
+    return internalError(err)
   }
 }
 
 export const onRequestPost: StatsFunction = async ({ request, env }) => {
   if (!env.DB) return json({ error: 'D1 binding "DB" not configured' }, 503)
+  // 跨站浏览器请求直接拒绝:第三方页面不能拿访客的浏览器当刷数跳板
+  if (!isSameOrigin(request)) return json({ error: 'forbidden' }, 403)
   const db = env.DB
   try {
     await ensureSchema(db)
@@ -168,6 +188,6 @@ export const onRequestPost: StatsFunction = async ({ request, env }) => {
 
     return json(await readCounts(db))
   } catch (err) {
-    return json({ error: String(err) }, 500)
+    return internalError(err)
   }
 }
