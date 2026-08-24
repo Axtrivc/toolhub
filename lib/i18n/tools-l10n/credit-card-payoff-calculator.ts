@@ -19,6 +19,7 @@ export const creditCardPayoffCalculatorL10n: ToolL10n = {
     ],
     ui: {
       errPaymentTooLow: '月供过低(必须覆盖利息)',
+      errNonNegative: '余额、年利率和月供不能为负',
       errNotPaidOff: '按此月供 100 年内无法还清',
       monthsOne: '1 个月',
       monthsN: '{m} 个月',
@@ -45,6 +46,7 @@ export const creditCardPayoffCalculatorL10n: ToolL10n = {
     ],
     ui: {
       errPaymentTooLow: 'El pago es demasiado bajo (debe cubrir los intereses)',
+      errNonNegative: 'El saldo, la tasa anual y el pago mensual no pueden ser negativos',
       errNotPaidOff: 'No se paga en 100 años con este pago',
       monthsOne: '1 mes',
       monthsN: '{m} meses',
@@ -71,6 +73,7 @@ export const creditCardPayoffCalculatorL10n: ToolL10n = {
     ],
     ui: {
       errPaymentTooLow: 'Die Rate ist zu niedrig (sie muss die Zinsen decken)',
+      errNonNegative: 'Saldo, Jahressatz und monatliche Rate dürfen nicht negativ sein',
       errNotPaidOff: 'Mit dieser Rate wird er in 100 Jahren nicht getilgt',
       monthsOne: '1 Monat',
       monthsN: '{m} Monate',

@@ -1098,8 +1098,19 @@ export const CreditCardPayoffCalculatorClient = makeCalculatorClient({
   compute: (v, locale) => {
     const T = (key: string, fb: string) => tui('credit-card-payoff-calculator', locale, key, fb)
     let balance = toNum(v.balance)
-    const monthlyRate = toNum(v.apr) / 100 / 12
+    const apr = toNum(v.apr)
+    const monthlyRate = apr / 100 / 12
     const payment = toNum(v.payment)
+    // 负余额/负 APR 会绕过「payment <= 利息」守卫并输出荒谬结果
+    // (balance<0 时循环不执行却显示 "总利息 $5,000"),与同批 auto-loan/APY 一致拦截
+    if (balance < 0 || apr < 0 || payment < 0) {
+      return {
+        months: `⚠️ ${T('errNonNegative', 'Balance, APR and monthly payment must be non-negative')}`,
+        total: '—',
+        interest: '—',
+        principal: '—',
+      }
+    }
     const minInterest = balance * monthlyRate
     if (payment <= minInterest) {
       return {
