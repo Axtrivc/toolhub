@@ -162,7 +162,7 @@ export function makeTextTool(config: TextToolConfig): ComponentType {
               className="w-full rounded-lg border-2 p-4 font-mono text-sm outline-none"
               style={{
                 borderColor: 'rgb(var(--border))',
-                backgroundColor: 'rgb(var(--bg-subtle))'
+                backgroundColor: 'rgb(var(--bg-subtle))',
                 color: 'rgb(var(--text))',
               }}
             />
