@@ -33,17 +33,19 @@ const ROOT = join(__dirname, '..')
 
 // ─────────── 配置 ───────────
 
-/** 站点根 URL:优先环境变量,其次尝试读 next.config 里的默认值,最后回退 localhost */
+/** 站点根 URL:优先环境变量,其次读 lib/constants.ts 里的默认值;解析不到则报错退出,
+ *  绝不静默回退 localhost——那会把 ~180 条本地 URL 提交进 IndexNow,浪费配额并损害密钥信任 */
 function resolveSiteUrl() {
   if (process.env.SITE_URL) return process.env.SITE_URL.replace(/\/$/, '')
   try {
-    const cfg = readFileSync(join(ROOT, 'next.config.ts'), 'utf8')
-    const m = cfg.match(/SITE_URL\s*=\s*process\.env\.NEXT_PUBLIC_SITE_URL\s*\|\|\s*['"]([^'"]+)['"]/)
+    const cfg = readFileSync(join(ROOT, 'lib', 'constants.ts'), 'utf8')
+    const m = cfg.match(/export const SITE_URL\s*=\s*process\.env\.NEXT_PUBLIC_SITE_URL\s*\|\|\s*['"]([^'"]+)['"]/)
     if (m) return m[1].replace(/\/$/, '')
   } catch {
     /* ignore */
   }
-  return 'http://localhost:3000'
+  console.error('✗ Cannot resolve site URL: set SITE_URL env var, or ensure lib/constants.ts defines SITE_URL.')
+  process.exit(1)
 }
 
 /**

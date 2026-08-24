@@ -90,11 +90,17 @@ export function SiteStats() {
           headers: { 'content-type': 'application/json' },
           body: JSON.stringify({ path: pathname, vid: await dailyVid() }),
         })
-        if (!res.ok) throw new Error(`stats api ${res.status}`)
+        // 端点确定不存在(本地 dev/未绑 D1/被托管方移除)才永久放弃;
+        // 瞬时网络故障(离线、弱网、拦截器抖动)只跳过本次,下次路由切换重试
+        if (res.status === 404 || res.status === 501 || res.status === 503) {
+          dead.current = true
+          return
+        }
+        if (!res.ok) return
         const data = (await res.json()) as Stats
         if (!cancelled) setStats(data)
       } catch {
-        dead.current = true
+        // fetch TypeError(网络层失败):可恢复,不置 dead
       }
     })()
     return () => {
