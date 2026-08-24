@@ -165,20 +165,25 @@ export function FindReplaceClient() {
   const [caseSensitive, setCaseSensitive] = useState(false)
   const [useRegex, setUseRegex] = useState(false)
 
-  const { output, regexError } = useMemo(() => {
-    if (!findStr) return { output: text, regexError: false }
+  const { output, regexError, tooLong } = useMemo(() => {
+    if (!findStr) return { output: text, regexError: false, tooLong: false }
+    // 正则路径防灾难性回溯:嵌套量词 + 大文本会冻死标签页
+    // (字面路径已转义元字符,线性安全;与 TextDiff 的输入上限同思路)
+    if (useRegex && text.length > 100_000) {
+      return { output: '', regexError: false, tooLong: true }
+    }
     const flags = caseSensitive ? 'g' : 'gi'
     if (useRegex) {
       try {
-        return { output: text.replace(new RegExp(findStr, flags), replaceStr), regexError: false }
+        return { output: text.replace(new RegExp(findStr, flags), replaceStr), regexError: false, tooLong: false }
       } catch {
         // 非法正则:友好报错而非抛出
-        return { output: '', regexError: true }
+        return { output: '', regexError: true, tooLong: false }
       }
     }
     // 字面查找:查找词转义正则元字符;替换串的 $ 转成 $$ 保持字面语义($&/$1 不被解释)
     const re = new RegExp(findStr.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), flags)
-    return { output: text.replace(re, replaceStr.replace(/\$/g, '$$$$')), regexError: false }
+    return { output: text.replace(re, replaceStr.replace(/\$/g, '$$$$')), regexError: false, tooLong: false }
   }, [text, findStr, replaceStr, caseSensitive, useRegex])
 
   const inputStyle = {
@@ -284,6 +289,13 @@ export function FindReplaceClient() {
             style={{ borderColor: 'rgb(254 202 202)', backgroundColor: 'rgb(254 226 226 / 0.4)', color: 'rgb(var(--text))' }}
           >
             {L('invalidRegex', '⚠️ Invalid regular expression — check your pattern syntax')}
+          </p>
+        ) : tooLong ? (
+          <p
+            className="rounded-lg border-2 p-4 font-mono text-sm"
+            style={{ borderColor: 'rgb(253 230 138)', backgroundColor: 'rgb(254 249 195 / 0.4)', color: 'rgb(var(--text))' }}
+          >
+            {L('textTooLong', '⚠️ Text exceeds 100,000 characters — regex mode is disabled for very large text to keep the page responsive. Use literal (non-regex) mode instead.')}
           </p>
         ) : (
           <textarea

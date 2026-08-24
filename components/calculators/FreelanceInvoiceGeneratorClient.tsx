@@ -68,6 +68,8 @@ export function FreelanceInvoiceGeneratorClient() {
   const [taxPct, setTaxPct] = useState('')
   const [notes, setNotes] = useState('')
   const [items, setItems] = useState<LineItem[]>([{ id: 1, description: '', qty: '1', rate: '0' }])
+  // 打印窗口被弹窗拦截器吃掉时给用户可见反馈(而非静默无反应),并提示下载兜底
+  const [popupBlocked, setPopupBlocked] = useState(false)
   const nextId = useRef(2)
 
   // 日期默认值依赖"今天",挂载后在 useEffect 中设置,避免 SSG 输出与水合不一致
@@ -190,8 +192,10 @@ ${itemRows}
     const win = window.open(url, '_blank')
     if (!win) {
       URL.revokeObjectURL(url)
+      setPopupBlocked(true)
       return
     }
+    setPopupBlocked(false)
     // 文档解析完成后即可回收 URL;revoke 不影响已加载文档
     win.addEventListener('load', () => URL.revokeObjectURL(url), { once: true })
   }
@@ -327,6 +331,15 @@ ${itemRows}
               {L('downloadHtml', 'Download HTML')}
             </button>
           </div>
+          {popupBlocked && (
+            <p
+              role="alert"
+              className="mt-3 rounded-lg border-2 p-3 text-sm"
+              style={{ borderColor: 'rgb(253 230 138)', backgroundColor: 'rgb(254 249 195 / 0.4)', color: 'rgb(var(--text))' }}
+            >
+              {L('popupBlocked', '⚠️ Print window was blocked by your browser. Use "Download HTML" instead, then open the file and print it.')}
+            </p>
+          )}
         </div>
 
         {/* 右侧实时预览(纸质发票风格) */}

@@ -520,6 +520,10 @@ export const CubeCalculatorClient = makeCalculatorClient({
   ],
   compute: (v) => {
     const s = toNum(v.side)
+    // 负边长无几何意义:奇次幂会输出负体积,偶次幂则把错误伪装成正值
+    if (s < 0) {
+      return { volume: '⚠️ Side length cannot be negative', surface: '—' }
+    }
     // 公式放 sublabel,值保持纯数字(避免污染 Copy Summary / CSV)
     return {
       volume: fmtNum(s ** 3, 4),
@@ -538,6 +542,9 @@ export const SphereCalculatorClient = makeCalculatorClient({
   ],
   compute: (v) => {
     const r = toNum(v.r)
+    if (r < 0) {
+      return { volume: '⚠️ Radius cannot be negative', surface: '—' }
+    }
     // 公式放 sublabel,值保持纯数字(避免污染 Copy Summary / CSV)
     return {
       volume: fmtNum((4 / 3) * Math.PI * r ** 3, 4),

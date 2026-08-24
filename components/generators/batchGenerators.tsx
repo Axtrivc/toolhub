@@ -187,6 +187,10 @@ export const CircleCalculatorClient = makeCalculatorClient({
   ],
   compute: (v) => {
     const r = toNum(v.r)
+    // 负半径无几何意义:r² 会把输入错误伪装成看似正常的正面积
+    if (r < 0) {
+      return { area: '⚠️ Radius cannot be negative', circumference: '—', diameter: '—' }
+    }
     return {
       area: `${fmtNum(Math.PI * r * r, 4)} (π r²)`,
       circumference: `${fmtNum(2 * Math.PI * r, 4)} (2π r)`,

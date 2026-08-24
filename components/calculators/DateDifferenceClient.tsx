@@ -68,11 +68,12 @@ export function DateDifferenceClient() {
     const totalMonths = years * 12 + months
     const totalHours = Math.floor(totalMs / (1000 * 60 * 60))
 
-    // 计算工作日(排除周六日,含首尾两天)——算术法:整周 ×5 + 剩余 ≤6 天逐个核对
-    // (旧实现逐日循环、MAX_SCAN_DAYS 封顶,超长区间会静默截断)
+    // 计算工作日(排除周六日,(start, end] 半开区间)——与 DaysCountdownCalculatorClient
+    // 的 businessDaysBetween 同口径,同一组日期两个工具给出相同答案
+    // (旧实现含首尾两天,周一→下周一会显示 6 而倒计时工具显示 5)
     const dowStart = s.getDay()
     let businessDays = totalWeeks * 5
-    for (let k = totalWeeks * 7; k <= totalDays; k++) {
+    for (let k = totalWeeks * 7 + 1; k <= totalDays; k++) {
       const dow = (dowStart + k) % 7
       if (dow !== 0 && dow !== 6) businessDays++
     }

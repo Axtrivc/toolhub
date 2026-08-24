@@ -19,10 +19,10 @@ export interface TextStats {
 function analyzeText(text: string): TextStats {
   const trimmed = text.trim()
 
-  // 字符数(含空格)
-  const characters = text.length
+  // 字符数(含空格):按 Unicode 码点计,与 makeTextTool 全站口径一致(emoji 记 1 不记 2)
+  const characters = [...text].length
   // 字符数(不含空格)
-  const charactersNoSpaces = text.replace(/\s/g, '').length
+  const charactersNoSpaces = [...text.replace(/\s/g, '')].length
 
   // 单词数:统一走 lib/text-stats 的混合口径(CJK 按字计、西文按空白分词)
   const words = countWords(trimmed)
