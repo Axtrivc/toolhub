@@ -77,7 +77,7 @@ export const calculatorSamples: Record<string, Record<string, string>> = {
   'trapezoid-calculator': { a: '6', b: '10', h: '4' },
   'cube-calculator': { side: '5' },
   'sphere-calculator': { r: '7' },
-  'fraction-calculator': { num1: '1', den1: '2', op: '+', num2: '1', den2: '3' },
+  'fraction-calculator': { num1: '1', den1: '2', op: 'add', num2: '1', den2: '3' },
   'ratio-calculator': { a: '3', b: '4', c: '9' },
   'lcm-gcd-calculator': { numbers: '12, 18, 24' },
   'combination-calculator': { n: '10', r: '3' },
