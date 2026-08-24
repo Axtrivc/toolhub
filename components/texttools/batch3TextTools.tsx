@@ -176,8 +176,12 @@ export const AddLineNumbersClient = makeTextTool({
   inputLabel: 'Your text',
   outputLabel: 'With line numbers',
   defaultInput: 'First line\nSecond line\nThird line',
-  transform: (t) =>
-    t.split(/\r?\n/).map((line, i) => `${String(i + 1).padStart(4, ' ')}.  ${line}`).join('\n'),
+  transform: (t) => {
+    // 末尾换行是「行结束符」而非新行的开始:先剥掉一个,避免给空尾巴多编一个号
+    const body = t.replace(/\r?\n$/, '')
+    if (body === '') return ''
+    return body.split(/\r?\n/).map((line, i) => `${String(i + 1).padStart(4, ' ')}.  ${line}`).join('\n')
+  },
   note: '🔢 Adds line numbers to each line. Useful for code review, transcripts, and references.',
 })
 
