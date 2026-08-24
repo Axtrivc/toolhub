@@ -929,16 +929,25 @@ export const MortgageCalculatorClient = makeCalculatorClient({
         pmiM: '—', hoaM: '—', payoff: '—', saved: '—', timeSaved: '—', principal: '—',
       }
     }
-    // 房价必须 > 0、首付 ≤ 100%:否则 loan 为负,PITI/月供/摊销会整片输出负数而无提示
-    if (home <= 0 || downPct > 100) {
+    // 房价必须 > 0、首付在 0-100%:负首付会算出"贷款比房价还高还收 PMI"的荒谬结果,
+    // 负利率同样直接流入摊销
+    if (home <= 0 || downPct < 0 || downPct > 100) {
       return {
-        piti: `⚠️ ${home <= 0 ? T('errHomePrice', 'Home price must be greater than 0') : T('errDownOver100', 'Down payment cannot exceed 100%')}`,
+        piti: `⚠️ ${home <= 0 ? T('errHomePrice', 'Home price must be greater than 0') : downPct < 0 ? T('errNonNegative', 'Values cannot be negative') : T('errDownOver100', 'Down payment cannot exceed 100%')}`,
+        monthly: '—', loan: '—', total: '—', taxM: '—', insM: '—',
+        pmiM: '—', hoaM: '—', payoff: '—', saved: '—', timeSaved: '—', principal: '—',
+      }
+    }
+    const rateInput = toNumStrict(v.rate)
+    if (isNaN(rateInput) || rateInput < 0 || toNum(v.tax) < 0 || toNum(v.insurance) < 0 || toNum(v.hoa) < 0 || toNum(v.pmiRate) < 0 || toNum(v.extra) < 0) {
+      return {
+        piti: `⚠️ ${isNaN(rateInput) ? T('errInvalidInput', 'Enter valid numbers in all fields') : T('errNonNegative', 'Values cannot be negative')}`,
         monthly: '—', loan: '—', total: '—', taxM: '—', insM: '—',
         pmiM: '—', hoaM: '—', payoff: '—', saved: '—', timeSaved: '—', principal: '—',
       }
     }
     const loan = home * (1 - downPct / 100)
-    const rate = toNum(v.rate) / 100 / 12
+    const rate = rateInput / 100 / 12
     // 标准摊销月供,与 LoanCalculatorClient 同式:M = P·r(1+r)^n / ((1+r)^n − 1)
     let pi: number
     if (rate === 0) pi = loan / months

@@ -84,6 +84,16 @@ export const CreditCardMinimumCalculatorClient = makeCalculatorClient({
     const monthlyRate = toNum(v.apr) / 100 / 12
     const interest = bal * monthlyRate
     const minPct = toNum(v.minPct) / 100
+    // 负余额/负 APR/负比例会输出负利息等垃圾结果,统一拦截
+    if (bal < 0 || toNum(v.apr) < 0 || minPct < 0) {
+      return {
+        minPayment: `⚠️ ${T('errNonNegative', 'Balance, APR and minimum % cannot be negative')}`,
+        interest: '—',
+        principal: '—',
+        payoff: '—',
+        totalInterest: '—',
+      }
+    }
     // 余额为 0/负时最低还款为 0(无 $25 下限),否则环形图会把 $25 全画进本金;
     // $25 下限同时封顶到余额:余额 $20 时最低还款就是 $20,不能要求还 $25
     const minPayment = bal <= 0 ? 0 : Math.min(bal, Math.max(25, bal * minPct)) // 多数银行最低 $25
@@ -144,6 +154,9 @@ export const CashBackCalculatorClient = makeCalculatorClient({
     const spend = toNum(v.spend)
     const rate = toNum(v.rate) / 100
     const fee = toNum(v.fee)
+    if (spend < 0 || rate < 0 || fee < 0) {
+      return { monthly: '⚠️ Values cannot be negative', annual: '—', net: '—' }
+    }
     const monthly = spend * rate
     const annual = monthly * 12
     return {
@@ -170,10 +183,17 @@ export const DownPaymentCalculatorClient = makeCalculatorClient({
     const price = toNum(v.price)
     const pct = toNum(v.down) / 100
     const T = (key: string, fb: string) => tui('down-payment-calculator', locale, key, fb)
-    // 首付比例 > 100% 时贷款额为负,无意义 → 显式报错而非输出负数
+    // 首付比例须在 0-100%、房价非负:负值会输出负首付额/负贷款
     if (pct > 1) {
       return {
         amount: '⚠️ Down payment cannot exceed 100%',
+        loan: '—',
+        pmi: '—',
+      }
+    }
+    if (price < 0 || pct < 0) {
+      return {
+        amount: `⚠️ ${T('errNonNegative', 'Values cannot be negative')}`,
         loan: '—',
         pmi: '—',
       }
@@ -207,6 +227,10 @@ export const DTICalculatorClient = makeCalculatorClient({
     if (inc <= 0) {
       return { dti: '—', max: '—', verdict: `⚠️ ${T('errIncome', 'Enter your monthly income')}` }
     }
+    // 负债务会显示「−25% ✓ Healthy」的荒谬结论
+    if (debts < 0) {
+      return { dti: '—', max: '—', verdict: `⚠️ ${T('errNonNegative', 'Values cannot be negative')}` }
+    }
     const dti = (debts / inc) * 100
     // 28% 前端法则还要被 36% 后端约束:最大月供不能让总 DTI(含既有债务)超 36%,且不为负
     const max28 = Math.max(0, Math.min(inc * 0.28, inc * 0.36 - debts))
@@ -239,6 +263,9 @@ export const CommissionCalculatorClient = makeCalculatorClient({
     const sales = toNum(v.sales)
     const rate = toNum(v.rate) / 100
     const base = toNum(v.base)
+    if (sales < 0 || rate < 0 || base < 0) {
+      return { commission: '⚠️ Values cannot be negative', total: '—' }
+    }
     const commission = sales * rate
     return {
       commission: fmtUSD(commission),

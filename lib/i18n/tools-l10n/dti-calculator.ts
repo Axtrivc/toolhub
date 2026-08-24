@@ -16,6 +16,7 @@ export const dtiCalculatorL10n: ToolL10n = {
     ],
     ui: {
       errIncome: '请输入您的月收入',
+      errNonNegative: '数值不能为负',
       verdictHealthy: '✓ 健康 — 多数贷款机构会批准',
       verdictTight: '⚠️ 偏高 — 已达多数贷款机构上限',
       verdictHigh: '✗ 过高 — 很可能被拒',
@@ -35,6 +36,7 @@ export const dtiCalculatorL10n: ToolL10n = {
     ],
     ui: {
       errIncome: 'Introduce tus ingresos mensuales',
+      errNonNegative: 'Los valores no pueden ser negativos',
       verdictHealthy: '✓ Saludable — la mayoría de prestamistas lo aprueba',
       verdictTight: '⚠️ Justo — el máximo que permiten la mayoría de prestamistas',
       verdictHigh: '✗ Alto — probablemente será denegado',
@@ -54,6 +56,7 @@ export const dtiCalculatorL10n: ToolL10n = {
     ],
     ui: {
       errIncome: 'Gib dein Monatseinkommen ein',
+      errNonNegative: 'Werte dürfen nicht negativ sein',
       verdictHealthy: '✓ Gesund — die meisten Kreditgeber stimmen zu',
       verdictTight: '⚠️ Knapp — das Maximum der meisten Kreditgeber',
       verdictHigh: '✗ Hoch — Ablehnung wahrscheinlich',

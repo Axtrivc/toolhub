@@ -39,6 +39,7 @@ export const creditCardMinimumPaymentCalculatorL10n: ToolL10n = {
       },
     ],
     ui: {
+      errNonNegative: '余额、APR 和最低还款比例不能为负',
       'in.balance': '当前余额',
       'in.apr': 'APR',
       'in.minPct': '最低还款比例',
@@ -84,6 +85,7 @@ export const creditCardMinimumPaymentCalculatorL10n: ToolL10n = {
       },
     ],
     ui: {
+      errNonNegative: 'El saldo, la APR y el % de pago mínimo no pueden ser negativos',
       'in.balance': 'Saldo actual',
       'in.apr': 'APR',
       'in.minPct': '% de pago mínimo',
@@ -129,6 +131,7 @@ export const creditCardMinimumPaymentCalculatorL10n: ToolL10n = {
       },
     ],
     ui: {
+      errNonNegative: 'Saldo, APR und Mindestzahlung % dürfen nicht negativ sein',
       'in.balance': 'Aktueller Saldo',
       'in.apr': 'APR',
       'in.minPct': 'Mindestzahlung %',

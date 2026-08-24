@@ -16,6 +16,7 @@ export const downPaymentCalculatorL10n: ToolL10n = {
     ],
     ui: {
       pmiNo: '否(首付 ≥ 20%)', pmiYes: '是(首付不足 20%)',
+      errNonNegative: '房价和首付比例不能为负',
       'in.price': '房价', 'in.down': '首付',
       'out.amount': '首付金额', 'out.loan': '贷款金额', 'out.pmi': '需要 PMI?',
       note: '🏠 首付低于 20% 通常需要 PMI（$50–300/月）。20% 以上可完全避免这笔费用。',
@@ -32,6 +33,7 @@ export const downPaymentCalculatorL10n: ToolL10n = {
     ],
     ui: {
       pmiNo: 'No (20 % o más de entrada)', pmiYes: 'Sí (menos del 20 % de entrada)',
+      errNonNegative: 'El precio y el porcentaje de entrada no pueden ser negativos',
       'in.price': 'Precio de la vivienda', 'in.down': 'Pago inicial',
       'out.amount': 'Importe del pago inicial', 'out.loan': 'Importe del préstamo', 'out.pmi': '¿Requiere PMI?',
       note: '🏠 Un pago inicial inferior al 20 % suele requerir PMI (50–300 $/mes). Con el 20 % o más se evita este coste.',
@@ -48,6 +50,7 @@ export const downPaymentCalculatorL10n: ToolL10n = {
     ],
     ui: {
       pmiNo: 'Nein (20 %+ Anzahlung)', pmiYes: 'Ja (unter 20 % Anzahlung)',
+      errNonNegative: 'Preis und Anzahlungsprozent dürfen nicht negativ sein',
       'in.price': 'Hauspreis', 'in.down': 'Anzahlung',
       'out.amount': 'Anzahlungsbetrag', 'out.loan': 'Kreditbetrag', 'out.pmi': 'PMI erforderlich?',
       note: '🏠 Unter 20 % Anzahlung ist meist PMI nötig (50–300 $/Monat). Ab 20 % entfällt diese Kosten.',

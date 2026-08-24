@@ -203,6 +203,8 @@ export const AnnuityCalculatorClient = makeCalculatorClient({
     const r = toNum(v.rate) / 100
     const n = toNum(v.years)
     if (n <= 0) return { annual: `⚠️ ${tui('annuity-calculator', locale, 'errYears', 'Enter years greater than 0')}`, monthly: '—', total: '—' }
+    // 负利率会让分母 1−(1+r)^−n 变负,输出看似正常的荒谬年金;本金/利率必须非负
+    if (p < 0 || r < 0) return { annual: `⚠️ ${tui('annuity-calculator', locale, 'errNonNegative', 'Principal and rate cannot be negative')}`, monthly: '—', total: '—' }
     // 年金现值公式反推每年支付
     const annual = r === 0 ? p / n : (p * r) / (1 - Math.pow(1 + r, -n))
     return {

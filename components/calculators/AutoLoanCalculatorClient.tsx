@@ -95,7 +95,13 @@ export function AutoLoanCalculatorClient() {
       return
     }
     const d = new Date()
+    // 月末锚定加月:1月31日 + 12 个月若直接 setMonth 会滚到 3 月(Feb 31 不存在),
+    // 钳到目标月最后一天,与 AgeCalculatorClient 的 addMonthsClamped 同法
+    const day = d.getDate()
+    d.setDate(1)
     d.setMonth(d.getMonth() + parsed.months)
+    const lastDay = new Date(d.getFullYear(), d.getMonth() + 1, 0).getDate()
+    d.setDate(Math.min(day, lastDay))
     // 结清月份名同样走应用 locale(effect 内执行,不影响 SSR 首帧)
     setPayoffDate(d.toLocaleDateString(localeTag, { month: 'long', year: 'numeric' }))
   }, [parsed, localeTag])
