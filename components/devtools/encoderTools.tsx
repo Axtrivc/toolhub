@@ -103,12 +103,12 @@ export function URLCodecTool({ initialMode = 'encode', slug = 'url-encoder' }: {
           ))}
         </div>
         {/* + → 空格(仅解码生效):处理 application/x-www-form-urlencoded 的 query */}
-        <label className="ml-1 flex items-center gap-2 text-sm text-slate-700">
+        <label className="ml-1 flex items-center gap-2 text-sm text-slate-700 dark:text-slate-300">
           <input
             type="checkbox"
             checked={plusToSpace}
             onChange={(e) => setPlusToSpace(e.target.checked)}
-            className="h-4 w-4 rounded border-slate-300 text-brand-600"
+            className="h-4 w-4 rounded border-slate-300 text-brand-600 dark:border-slate-600"
           />
           {L('plusToSpace', 'Treat + as space when decoding')}
         </label>

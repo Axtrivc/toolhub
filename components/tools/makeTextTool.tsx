@@ -111,14 +111,14 @@ export function makeTextTool(config: TextToolConfig): ComponentType {
         {/* 输入区 */}
         <div>
           <div className="mb-2 flex items-center justify-between">
-            <label htmlFor="text-input" className="text-sm font-medium text-slate-700">
+            <label htmlFor="text-input" className="text-sm font-medium text-slate-700 dark:text-slate-300">
               {inputLabel}
             </label>
             {input && (
               <button
                 type="button"
                 onClick={() => setInput('')}
-                className="-my-1 rounded-md px-2 py-1 text-xs text-slate-400 hover:text-red-500 sm:text-sm"
+                className="-my-1 rounded-md px-2 py-1 text-xs text-slate-500 dark:text-slate-400 hover:text-red-500 sm:text-sm"
               >
                 {t(locale, 'textToolClear')}
               </button>
@@ -161,8 +161,8 @@ export function makeTextTool(config: TextToolConfig): ComponentType {
               rows={6}
               className="w-full rounded-lg border-2 p-4 font-mono text-sm outline-none"
               style={{
-                borderColor: 'rgb(219 234 254)', // brand-100
-                backgroundColor: 'rgb(219 234 254 / 0.4)', // brand-50/40
+                borderColor: 'rgb(var(--border))',
+                backgroundColor: 'rgb(var(--bg-subtle))'
                 color: 'rgb(var(--text))',
               }}
             />

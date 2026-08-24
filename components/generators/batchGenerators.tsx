@@ -33,7 +33,7 @@ export function UUIDGeneratorClient() {
       <div className="flex flex-wrap items-end gap-3">
         <div>
           <label htmlFor="count" className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>{L('howMany', 'How many')}</label>
-          <input id="count" type="number" min="1" max="100" value={count} onChange={(e) => setCount(e.target.value)} className="w-28 rounded-lg border border-slate-300 p-3 outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200" />
+          <input id="count" type="number" min="1" max="100" value={count} onChange={(e) => setCount(e.target.value)} "w-28 rounded-lg border border-slate-300 p-3 outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200 dark:border-slate-600 dark:bg-slate-800/50 dark:text-slate-100" />
         </div>
         <button onClick={generate} className="btn btn-primary">{L('generate', '🎲 Generate UUIDs')}</button>
         {uuids.length > 0 && <CopyButton value={uuids.join('\n')} label={L('copyAll', 'Copy all')} />}
@@ -41,7 +41,7 @@ export function UUIDGeneratorClient() {
       {uuids.length > 0 && (
         <div className="space-y-2">
           {uuids.map((u, i) => (
-            <div key={i} className="flex items-center justify-between gap-2 rounded-lg border border-slate-200 bg-white p-3">
+            <div key={i} className="flex items-center justify-between gap-2 rounded-lg border border-slate-200 bg-white p-3 dark:border-slate-700 dark:bg-slate-800">
               <code className="font-mono text-sm text-slate-900 break-all">{u}</code>
               <CopyButton value={u} label="" />
             </div>
@@ -137,7 +137,7 @@ export function LoremIpsumGeneratorClient() {
             id="lorem-unit"
             value={unit}
             onChange={(e) => setUnit(e.target.value as LoremUnit)}
-            className="w-36 rounded-lg border border-slate-300 p-3 outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200"
+            "w-36 rounded-lg border border-slate-300 p-3 outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200 dark:border-slate-600 dark:bg-slate-800/50 dark:text-slate-100"
             style={{ backgroundColor: 'rgb(var(--bg-card))', color: 'rgb(var(--text))' }}
           >
             <option value="paragraphs">{L('unitParagraphs', 'Paragraphs')}</option>
@@ -147,14 +147,14 @@ export function LoremIpsumGeneratorClient() {
         </div>
         <div>
           <label htmlFor="lorem-count" className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>{L('count', 'Count')}</label>
-          <input id="lorem-count" type="number" min="1" max={LOREM_UNIT_MAX[unit]} value={count} onChange={(e) => setCount(e.target.value)} className="w-28 rounded-lg border border-slate-300 p-3 outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200" />
+          <input id="lorem-count" type="number" min="1" max={LOREM_UNIT_MAX[unit]} value={count} onChange={(e) => setCount(e.target.value)} "w-28 rounded-lg border border-slate-300 p-3 outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200 dark:border-slate-600 dark:bg-slate-800/50 dark:text-slate-100" />
         </div>
         <label className="flex cursor-pointer items-center gap-2 pb-3 text-sm" style={{ color: 'rgb(var(--text-muted))' }}>
           <input
             type="checkbox"
             checked={startWithLorem}
             onChange={(e) => setStartWithLorem(e.target.checked)}
-            className="h-4 w-4 rounded border-slate-300 text-brand-600 focus:ring-brand-500"
+            className="h-4 w-4 rounded border-slate-300 text-brand-600 focus:ring-brand-500 dark:border-slate-600"
           />
           {L('startWithLorem', 'Start with "Lorem ipsum"')}
         </label>
@@ -162,7 +162,7 @@ export function LoremIpsumGeneratorClient() {
         {output && <CopyButton value={output} />}
       </div>
       {output && (
-        <div className="rounded-lg border border-slate-200 bg-white p-4 whitespace-pre-line text-sm text-slate-700 leading-relaxed">
+        <div className="rounded-lg border border-slate-200 bg-white p-4 whitespace-pre-line text-sm text-slate-700 leading-relaxed dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200">
           {output}
         </div>
       )}

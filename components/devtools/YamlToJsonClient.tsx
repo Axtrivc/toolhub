@@ -373,7 +373,7 @@ export function YamlToJsonClient() {
     <div className="space-y-5">
       <div>
         <div className="mb-2 flex items-center justify-between">
-          <label htmlFor="yaml-input" className="text-sm font-medium text-slate-700">
+          <label htmlFor="yaml-input" className="text-sm font-medium text-slate-700 dark:text-slate-300">
             {L('inputLabel', 'Paste your YAML')}
           </label>
           <div className="flex items-center gap-2">

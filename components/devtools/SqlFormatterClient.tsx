@@ -250,7 +250,7 @@ export function SqlFormatterClient() {
     <div className="space-y-5">
       <div>
         <div className="mb-2 flex items-center justify-between">
-          <label htmlFor="sql-input" className="text-sm font-medium text-slate-700">
+          <label htmlFor="sql-input" className="text-sm font-medium text-slate-700 dark:text-slate-300">
             {L('inputLabel', 'Paste your SQL')}
           </label>
           <div className="flex items-center gap-2">

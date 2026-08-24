@@ -461,7 +461,7 @@ export function CurlConverterClient() {
       {/* 输入区 */}
       <div>
         <div className="mb-2 flex items-center justify-between">
-          <label htmlFor="curl-input" className="text-sm font-medium text-slate-700">
+          <label htmlFor="curl-input" className="text-sm font-medium text-slate-700 dark:text-slate-300">
             {L('pasteCurl', 'Paste your curl command')}
           </label>
           <div className="flex items-center gap-2">

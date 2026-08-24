@@ -95,19 +95,19 @@ export function RandomNumberGeneratorClient() {
       <div className="grid grid-cols-1 gap-4 rounded-lg p-4 sm:grid-cols-3" style={{ backgroundColor: 'rgb(var(--bg-subtle))' }}>
         <div>
           <label className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>{L('min', 'Min')}</label>
-          <input type="number" value={min} onChange={(e) => setMin(e.target.value)} className="w-full rounded-lg border border-slate-300 p-3 outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200" />
+          <input type="number" value={min} onChange={(e) => setMin(e.target.value)} className="w-full rounded-lg border border-slate-300 p-3 outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200 dark:border-slate-600 dark:bg-slate-800/50 dark:text-slate-100" />
         </div>
         <div>
           <label className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>{L('max', 'Max')}</label>
-          <input type="number" value={max} onChange={(e) => setMax(e.target.value)} className="w-full rounded-lg border border-slate-300 p-3 outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200" />
+          <input type="number" value={max} onChange={(e) => setMax(e.target.value)} className="w-full rounded-lg border border-slate-300 p-3 outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200 dark:border-slate-600 dark:bg-slate-800/50 dark:text-slate-100" />
         </div>
         <div>
           <label className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>{L('howMany', 'How many')}</label>
-          <input type="number" value={count} onChange={(e) => setCount(e.target.value)} min="1" className="w-full rounded-lg border border-slate-300 p-3 outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200" />
+          <input type="number" value={count} onChange={(e) => setCount(e.target.value)} min="1" className="w-full rounded-lg border border-slate-300 p-3 outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200 dark:border-slate-600 dark:bg-slate-800/50 dark:text-slate-100" />
         </div>
       </div>
-      <label className="flex items-center gap-2 text-sm text-slate-700">
-        <input type="checkbox" checked={unique} onChange={(e) => setUnique(e.target.checked)} className="h-4 w-4 rounded border-slate-300 text-brand-600" />
+      <label className="flex items-center gap-2 text-sm text-slate-700 dark:text-slate-300">
+        <input type="checkbox" checked={unique} onChange={(e) => setUnique(e.target.checked)} className="h-4 w-4 rounded border-slate-300 text-brand-600 dark:border-slate-600" />
         {L('noRepeats', 'No repeats (unique numbers)')}
       </label>
       <div className="flex gap-3">
@@ -131,7 +131,7 @@ export function PasswordStrengthCheckerClient() {
   return (
     <div className="space-y-6">
       <div>
-        <label className="mb-2 block text-sm font-medium text-slate-700">{L('enterPasswordLabel', 'Enter a password to test')}</label>
+        <label className="mb-2 block text-sm font-medium text-slate-700 dark:text-slate-300">{L('enterPasswordLabel', 'Enter a password to test')}</label>
         <input
           type="text"
           value={pw}
@@ -162,14 +162,14 @@ export function PasswordStrengthCheckerClient() {
               )}
             </div>
           )}
-          <div className="rounded-lg border border-slate-200 p-4">
+          <div className="rounded-lg border border-slate-200 p-4 dark:border-slate-700">
             <h3 className="mb-2 text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>{L('checklist', 'Checklist')}</h3>
             <ul className="space-y-1 text-sm">
-              <li className={analysis.hasUpper ? 'text-green-600' : 'text-slate-400'}>{analysis.hasUpper ? '✓' : '✗'} {L('uppercaseLetters', 'Uppercase letters')}</li>
-              <li className={analysis.hasLower ? 'text-green-600' : 'text-slate-400'}>{analysis.hasLower ? '✓' : '✗'} {L('lowercaseLetters', 'Lowercase letters')}</li>
-              <li className={analysis.hasNum ? 'text-green-600' : 'text-slate-400'}>{analysis.hasNum ? '✓' : '✗'} {L('numbers', 'Numbers')}</li>
-              <li className={analysis.hasSym ? 'text-green-600' : 'text-slate-400'}>{analysis.hasSym ? '✓' : '✗'} {L('symbols', 'Symbols')}</li>
-              <li className={pw.length >= 12 ? 'text-green-600' : 'text-slate-400'}>{pw.length >= 12 ? '✓' : '✗'} {L('atLeast12Chars', 'At least 12 characters')}</li>
+              <li className={analysis.hasUpper ? 'text-green-600 dark:text-green-400' : 'text-slate-400 dark:text-slate-600'}>{analysis.hasUpper ? '✓' : '✗'} {L('uppercaseLetters', 'Uppercase letters')}</li>
+              <li className={analysis.hasLower ? 'text-green-600 dark:text-green-400' : 'text-slate-400 dark:text-slate-600'}>{analysis.hasLower ? '✓' : '✗'} {L('lowercaseLetters', 'Lowercase letters')}</li>
+              <li className={analysis.hasNum ? 'text-green-600 dark:text-green-400' : 'text-slate-400 dark:text-slate-600'}>{analysis.hasNum ? '✓' : '✗'} {L('numbers', 'Numbers')}</li>
+              <li className={analysis.hasSym ? 'text-green-600 dark:text-green-400' : 'text-slate-400 dark:text-slate-600'}>{analysis.hasSym ? '✓' : '✗'} {L('symbols', 'Symbols')}</li>
+              <li className={pw.length >= 12 ? 'text-green-600 dark:text-green-400' : 'text-slate-400 dark:text-slate-600'}>{pw.length >= 12 ? '✓' : '✗'} {L('atLeast12Chars', 'At least 12 characters')}</li>
             </ul>
           </div>
         </div>

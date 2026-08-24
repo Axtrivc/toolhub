@@ -44,17 +44,17 @@ export function HashGeneratorClient() {
   return (
     <div className="space-y-6">
       <div>
-        <label htmlFor="hash-input" className="mb-2 block text-sm font-medium text-slate-700">{L('textToHash', 'Text to hash')}</label>
+        <label htmlFor="hash-input" className="mb-2 block text-sm font-medium text-slate-700 dark:text-slate-300">{L('textToHash', 'Text to hash')}</label>
         <textarea
           id="hash-input"
           value={input}
           onChange={(e) => setInput(e.target.value)}
           rows={4}
-          className="w-full rounded-lg border border-slate-300 p-3 font-mono text-sm outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200"
+          className="w-full rounded-lg border border-slate-300 p-3 font-mono text-sm outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200 dark:border-slate-600 dark:bg-slate-800/50 dark:text-slate-100"
         />
       </div>
       <div>
-        <label htmlFor="hash-algo" className="mb-1.5 block text-sm font-medium text-slate-700">{L('algorithm', 'Algorithm')}</label>
+        <label htmlFor="hash-algo" className="mb-1.5 block text-sm font-medium text-slate-700 dark:text-slate-300">{L('algorithm', 'Algorithm')}</label>
         <select
           id="hash-algo"
           value={algo}
@@ -63,7 +63,7 @@ export function HashGeneratorClient() {
             // 切换算法后旧哈希不再对应所选算法,清空避免误导
             setHash(null)
           }}
-          className="rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm shadow-sm outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200"
+          className="rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm shadow-sm outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-100"
         >
           {HASH_ALGOS.map((a) => (
             <option key={a} value={a}>{a}</option>
@@ -90,9 +90,9 @@ export function HashGeneratorClient() {
 
 function HashResult({ label, value, warning }: { label: string; value: string; warning?: string }) {
   return (
-    <div className="rounded-lg border border-slate-200 bg-white p-4">
+    <div className="rounded-lg border border-slate-200 bg-white p-4 dark:border-slate-700 dark:bg-slate-800">
       <div className="mb-1 flex items-center justify-between">
-        <span className="text-xs font-medium uppercase text-slate-500">{label}</span>
+        <span className="text-xs font-medium uppercase text-slate-500 dark:text-slate-400">{label}</span>
         <CopyButton value={value} label="" />
       </div>
       {warning && <p className="mb-1 text-xs text-amber-600">{warning}</p>}

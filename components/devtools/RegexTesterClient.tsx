@@ -233,7 +233,7 @@ export function RegexTesterClient() {
       {/* 正则输入 + flags */}
       <div>
         <div className="mb-2 flex items-center justify-between">
-          <label htmlFor="regex-pattern" className="text-sm font-medium text-slate-700">
+          <label htmlFor="regex-pattern" className="text-sm font-medium text-slate-700 dark:text-slate-300">
             {L('patternLabel', 'Regular Expression')}
           </label>
           <div className="flex items-center gap-2">
@@ -312,7 +312,7 @@ export function RegexTesterClient() {
       {/* 测试文本 */}
       <div>
         <div className="mb-2 flex items-center justify-between">
-          <label htmlFor="regex-text" className="text-sm font-medium text-slate-700">
+          <label htmlFor="regex-text" className="text-sm font-medium text-slate-700 dark:text-slate-300">
             {L('testTextLabel', 'Test Text')}
           </label>
           {matches.length > 0 && (

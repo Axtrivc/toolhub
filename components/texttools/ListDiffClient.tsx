@@ -112,7 +112,7 @@ export function ListDiffClient() {
     { label: L('onlyInA', 'Only in A'), items: result.onlyA, color: 'text-blue-600' },
     { label: L('onlyInB', 'Only in B'), items: result.onlyB, color: 'text-orange-600' },
     { label: L('inBoth', 'In Both (Intersection)'), items: result.both, color: 'text-green-600' },
-    { label: L('union', 'Union (All Unique)'), items: result.union, color: 'text-slate-600' },
+    { label: L('union', 'Union (All Unique)'), items: result.union, color: 'text-slate-600 dark:text-slate-300' },
   ]
 
   return (
@@ -121,7 +121,7 @@ export function ListDiffClient() {
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <div>
           <div className="mb-2 flex items-center justify-between">
-            <label htmlFor="list-a" className="text-sm font-medium text-slate-700">
+            <label htmlFor="list-a" className="text-sm font-medium text-slate-700 dark:text-slate-300">
               {L('listA', 'List A')}
             </label>
           </div>
@@ -138,7 +138,7 @@ export function ListDiffClient() {
         </div>
         <div>
           <div className="mb-2 flex items-center justify-between">
-            <label htmlFor="list-b" className="text-sm font-medium text-slate-700">
+            <label htmlFor="list-b" className="text-sm font-medium text-slate-700 dark:text-slate-300">
               {L('listB', 'List B')}
             </label>
           </div>
@@ -194,7 +194,7 @@ export function ListDiffClient() {
                   <CopyButton value={sec.items.join('\n')} label={L('copy', 'Copy')} />
                 </>
               ) : (
-                <p className="text-xs text-slate-400">{L('noItems', 'No items.')}</p>
+                <p className="text-xs text-slate-400 dark:text-slate-500">{L('noItems', 'No items.')}</p>
               )}
             </div>
           ))}
