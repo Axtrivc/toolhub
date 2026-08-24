@@ -276,18 +276,26 @@ export function AgeDifferenceCalculatorClient() {
     }
     const [a, b] = d1 <= d2 ? [d1, d2] : [d2, d1]
     const totalDays = calendarDaysBetween(a, b)
-    // 按日历分解年/月/日(同年不同月也能得出非 0 的精确差)
-    let years = b.getFullYear() - a.getFullYear()
-    let months = b.getMonth() - a.getMonth()
-    let days = b.getDate() - a.getDate()
-    if (days < 0) {
+    // 两步法:先按月数差锚定(日钳到月末),再用日历日差算余数天数。
+    // 旧实现逐字段相减只借位一次,跨双月末边界会得到负天数
+    // (2000-01-31 → 2024-03-01 曾显示 "-1 days"),与 AgeCalculatorClient 同源修复。
+    const addMonthsClamped = (from: Date, n: number): Date => {
+      const m = from.getMonth() + n
+      const y = from.getFullYear() + Math.floor(m / 12)
+      const mo = ((m % 12) + 12) % 12
+      const lastDay = new Date(y, mo + 1, 0).getDate()
+      return new Date(y, mo, Math.min(from.getDate(), lastDay))
+    }
+    const rawMonths =
+      (b.getFullYear() - a.getFullYear()) * 12 + (b.getMonth() - a.getMonth())
+    let anchor = addMonthsClamped(a, rawMonths)
+    let months = rawMonths
+    if (anchor > b) {
       months--
-      days += new Date(b.getFullYear(), b.getMonth(), 0).getDate()
+      anchor = addMonthsClamped(a, months)
     }
-    if (months < 0) {
-      years--
-      months += 12
-    }
+    const years = Math.floor(months / 12)
+    const days = calendarDaysBetween(anchor, b)
     return {
       diff: T('ymdFormat', '{y} years, {m} months, {d} days')
         .replace('{y}', String(years))
