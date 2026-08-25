@@ -15,6 +15,13 @@ No sign-up · No uploads · Nothing you type ever leaves your device
 
 [🌐 **Live Site**](https://toolhub.axtrivc.com) &nbsp;·&nbsp; [🧭 **Browse All Tools**](https://toolhub.axtrivc.com/tools)
 
+<br/>
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/hero-dark.png">
+  <img src="docs/assets/hero-light.png" alt="ToolHub homepage — 160+ free online tools that just work" width="100%">
+</picture>
+
 </div>
 
 ---
@@ -24,13 +31,40 @@ No sign-up · No uploads · Nothing you type ever leaves your device
 > Every tool is a single static page — fast to load, free to use, and **all computation happens locally in your browser**. No accounts, no server-side processing, no data collection of what you type.
 
 | | |
-|---|---|
+|:---|:---|
 | 🔒 **Privacy-first** | Inputs never leave your device — calculations run client-side, period |
 | 🌍 **Four languages** | English, 中文, Español, Deutsch — switchable from any page |
 | ⌨️ **Command palette** | Press <kbd>Ctrl</kbd>/<kbd>Cmd</kbd> + <kbd>K</kbd> to fuzzy-search all 169 tools |
 | 📱 **Installable PWA** | Service-worker caching keeps repeat visits fast, even offline |
 | 🌗 **Dark & light themes** | Plus keyboard-friendly dialogs, skip links & reduced-motion support |
 | 🍪 **Consent-gated extras** | Ads and GA4 load only after opt-in; built-in analytics are cookie-free |
+
+---
+
+## 🎬 See It In Action
+
+<table>
+<tr>
+<td width="50%" valign="top">
+
+**⌨️ Command palette** — fuzzy-search all 169 tools from anywhere
+
+<br/>
+
+<img src="docs/assets/search-palette.png" alt="Ctrl+K command palette searching for loan tools" width="100%">
+
+</td>
+<td width="50%" valign="top">
+
+**🧮 Live calculators** — results & charts update as you type
+
+<br/>
+
+<img src="docs/assets/tool-page.png" alt="Mortgage calculator with live results and principal vs interest donut chart" width="100%">
+
+</td>
+</tr>
+</table>
 
 ---
 
@@ -113,6 +147,7 @@ components/    # Shared UI — Header, Footer, SearchPalette, AdSlot, calculator
 lib/           # Tool registry & metadata, i18n dictionaries, SEO / JSON-LD helpers
 functions/     # Cloudflare Pages Functions (visitor-stats API backed by D1)
 public/        # Static assets + service worker
+docs/assets/   # README screenshots
 ```
 
 ---
