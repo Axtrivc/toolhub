@@ -125,6 +125,11 @@ export const calculatorSamples: Record<string, Record<string, string>> = {
   'steps-to-calories-calculator': { steps: '10000', weight: '70', height: '175', pace: 'moderate' },
   'paint-calculator': { perimeter: '14', wallHeight: '2.4', doors: '2', windows: '2', coats: '2', unit: 'liter' },
   'dog-age-calculator': { dogAge: '5', size: 'medium' },
+  // ── 2025-08 第三批 ──
+  'reading-level-checker': {
+    text: 'The committee convened to deliberate the ramifications of the proposed infrastructural amendments. Subsequent deliberations illuminated several previously unconsidered contingencies, necessitating further analysis.',
+  },
+  'hmac-generator': { message: '{"amount":"12.00","currency":"usd"}', secret: 'whsec_test_5f1a2b3c4d' },
 }
 
 // ─────────────────────────── 单位转换器示例 ───────────────────────────
