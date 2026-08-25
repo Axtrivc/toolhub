@@ -198,8 +198,9 @@ export function ScreenTimeCalculatorClient() {
     if (!Number.isFinite(h) || h <= 0 || h > 24 || !Number.isFinite(a) || a <= 0 || a > 120) return null
     const perYearDays = (h * 365) / 24
     const toLife = 80 - Math.min(a, 79)
-    const yearsAwake = (h * 365 * toLife) / 24
-    const reclaimOne = (1 * 365 * toLife) / 24
+    // 清醒年:每天 h 小时占 16 小时清醒时间的 h/16,乘剩余年数
+    const yearsAwake = (h / 16) * toLife
+    const reclaimOne = (1 / 16) * toLife
     return { perYearDays, yearsAwake, reclaimOne, toLife, dailyPct: (h / 16) * 100 }
   }, [hours, age])
 

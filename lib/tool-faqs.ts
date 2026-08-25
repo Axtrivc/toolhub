@@ -2116,6 +2116,157 @@ export const toolFaqs: Record<string, FaqPair[]> = {
       a: 'Roughly when the human-equivalent age passes the mid-50s — around 8-9 calendar years for large breeds, 10-12 for small ones, which the life-stage output reflects. Veterinarians recommend senior screenings from those ages even for healthy-looking dogs.',
     },
   ],
+  // ══════════ _2025-08 扩张批3(9 个)══════════
+  'keycode-info': [
+    {
+      q: 'Which property should I match on?',
+      a: 'event.key in modern code — it holds the printed character ("a", "Enter") adjusted for keyboard layout and Shift. event.code names the physical key regardless of layout (KeyA stays KeyA on AZERTY); keyCode is deprecated legacy kept only for old-browser compatibility.',
+    },
+    {
+      q: 'Why does keyCode show 0 or odd values?',
+      a: 'keyCode was never standardized; modern engines ship only an approximation of old IE behavior, so some keys report 0 and the same key can differ across browsers. Copy it when reproducing a legacy bug — write new code against key or code.',
+    },
+    {
+      q: 'How do I inspect shortcut combinations?',
+      a: 'Press the combo and read the modifiers row: Ctrl, Meta/Cmd, Shift, and Alt are listed joined with +. The repeat flag shows whether OS key-repeat fired, which is how you tell a held key from fresh presses.',
+    },
+    {
+      q: 'Do Tab and arrow keys work here?',
+      a: 'Yes — the tool intercepts Tab, arrows, and space so pressing them for inspection does not scroll the page or move focus away. Their key, code, and keyCode values display like any other key, and recent presses stay in a history list.',
+    },
+  ],
+  'mime-type-lookup': [
+    {
+      q: 'What is a MIME type used for?',
+      a: 'Browsers and servers use it to decide how to treat a file: text/html renders, application/json parses, application/octet-stream forces a download. Serving the wrong type breaks rendering or triggers downloads — this table is the quick reference for getting it right.',
+    },
+    {
+      q: 'Is .js application/javascript?',
+      a: 'Not anymore — the current standard says text/javascript, and browsers treat both as equivalent. The old application/ prefix survives in legacy configs; either works, but text/javascript is what modern code should send.',
+    },
+    {
+      q: 'How do I find a type fast?',
+      a: 'Type the extension (.svg) or part of the MIME string (image/) and the table filters live, with a copy button on every row. Searching "zip" instantly shows .zip → application/zip alongside 7z, gzip, and rar.',
+    },
+    {
+      q: 'What about fonts and modern formats?',
+      a: 'Font files moved to the top-level font/ type in 2017 — font/woff2 rather than application/font-woff — and WebP is image/webp. Old server defaults still ship the obsolete forms, which is one of the most common misconfigurations this table helps you catch.',
+    },
+  ],
+  'xml-formatter': [
+    {
+      q: 'Does it validate my XML?',
+      a: "Yes — parsing goes through your browser's own DOMParser, and malformed input surfaces the exact parsererror message. Nothing is formatted until the document parses cleanly, so the output is always well-formed XML.",
+    },
+    {
+      q: 'What happens to whitespace between tags?',
+      a: 'On beautify, whitespace-only text nodes between elements are discarded and the tree is re-indented from scratch — the pretty output does not depend on how the input was spaced. Text content inside elements is preserved as-is.',
+    },
+    {
+      q: 'Can it minify as well?',
+      a: 'Yes — Minify serializes the parsed DOM back out without added whitespace. Because it round-trips through the real parser, the result is canonical XML, not merely your input with line breaks stripped.',
+    },
+    {
+      q: 'Does it handle namespaces?',
+      a: 'Yes, because the browser XML engine is namespace-aware: xmlns declarations and prefixed elements parse like any spec-compliant processor handles them, and errors are reported exactly as the spec says — no regex-based shortcuts involved.',
+    },
+  ],
+  'markdown-toc-generator': [
+    {
+      q: 'Why does the TOC start at H2?',
+      a: 'A document has one H1 — the page title — so a table of contents of its sections starts at H2. The depth selector (H2-H6) controls how deep the list nests; headings beyond the chosen level are skipped.',
+    },
+    {
+      q: 'Do the anchors match GitHub exactly?',
+      a: 'Yes — slugs follow GitHub\u2019s algorithm: lowercase, spaces to dashes, punctuation stripped, and duplicate headings suffixed -1, -2. Links built this way land on the right heading on GitHub and on most static-site generators that copy its behavior.',
+    },
+    {
+      q: 'Are headings inside code blocks ignored?',
+      a: 'Yes — headings inside triple-backtick fences are skipped because rendered pages show them as code samples, not real headings. The extractor tracks fence state line by line across your whole document.',
+    },
+    {
+      q: 'What about headings with links or bold text?',
+      a: 'Inline markdown is stripped before slugging: [text](url) contributes just its text, and bold/italic markers are removed. The TOC therefore shows the plain heading text, matching how the rendered anchor appears.',
+    },
+  ],
+  'log-filter-tool': [
+    {
+      q: 'Is it safe to paste production logs?',
+      a: 'Yes — filtering runs entirely client-side; nothing is uploaded or stored anywhere. Do scrub tokens and personal data before sharing the filtered output, though, since matching lines still contain whatever was in them.',
+    },
+    {
+      q: 'How does level filtering work?',
+      a: 'Levels match on word boundaries: choosing WARN matches WARN but not WARNING, and ERROR keeps only error lines wherever the token appears. Combine with include/exclude terms to narrow further, like ERROR lines containing timeout.',
+    },
+    {
+      q: 'Can I use regular expressions?',
+      a: 'Yes — enable the regex toggle and both include and exclude become case-insensitive regexes, so timeout|refused matches either word. Invalid patterns are flagged in red rather than silently matching nothing.',
+    },
+  ],
+  'ascii-table': [
+    {
+      q: 'What range does the table cover?',
+      a: 'Codes 0-127, the true ASCII set. Control characters (0-31) are unprintable and shown by name (NUL, LF, ESC…), 32-126 are printable, and 127 is DEL. Anything above 127 is extended encoding or Unicode — a different story.',
+    },
+    {
+      q: 'How do I search it?',
+      a: 'Type a character ("A"), a decimal (65), hex (41), or binary and the table filters live on any column. Searching ESC, for example, jumps straight to the escape character at code 27.',
+    },
+    {
+      q: 'Why is line feed a control character?',
+      a: 'LF (10) was ASCII\u2019s line separator from teleprinter days; Windows later paired it with CR (13) as CRLF. Both are control codes — that heritage is why line endings still differ between Windows and Unix systems.',
+    },
+  ],
+  'screen-time-calculator': [
+    {
+      q: 'How are the full days computed?',
+      a: 'Hours × 365 ÷ 24 — four daily hours is about 61 full 24-hour days per year. The waking-hours share divides by an assumed 16 awake hours instead, which is the more honest denominator for a daily percentage.',
+    },
+    {
+      q: 'What does the lifetime number assume?',
+      a: 'It projects from your current age to 80 and counts waking-time spent on screens: 4 hours a day from age 30 is roughly 12.5 waking years. The figure is deliberately sobering rather than precise — life expectancy varies.',
+    },
+    {
+      q: 'Where does reclaiming 1 hour come from?',
+      a: 'The same projection applied to a single hour: one hour a day reclaimed from 30 to 80 returns about 3 waking years — time for hundreds of books. It scales linearly, so two hours doubles it.',
+    },
+    {
+      q: 'How much screen time is normal?',
+      a: 'US adults average 4.5-5 hours on mobile alone, and adding TV pushes total screen time past 7 hours. Under 2 hours of recreational screen time is a common healthy baseline; the calculator shows what your number means at any level.',
+    },
+  ],
+  'reading-level-checker': [
+    {
+      q: 'Which formulas does it use?',
+      a: 'Flesch Reading Ease (206.835 − 1.015 × words/sentence − 84.6 × syllables/word) and Flesch-Kincaid Grade Level — the same pair word processors use. Everything computes locally from your text; nothing is uploaded.',
+    },
+    {
+      q: 'What score should I aim for?',
+      a: 'General web copy targets 60-70 reading ease, roughly 8th-9th grade. Legal and academic prose legitimately scores 30-50. When your longest sentence runs past 25 words, the tool nudges you to split it — sentence length is the easiest lever.',
+    },
+    {
+      q: 'How are syllables counted?',
+      a: 'By the standard English vowel-group heuristic: short words count as one syllable; longer ones by vowel clusters after stripping silent endings like -e and -ed. It is accurate for most words and off by one on irregulars — whole-passage scores absorb that noise.',
+    },
+  ],
+  'hmac-generator': [
+    {
+      q: 'How is HMAC different from hashing?',
+      a: 'A plain SHA-256 hash depends only on the message, so anyone can compute it. HMAC mixes in a secret key, so the digest proves possession of that key and cannot be forged — which is why APIs use HMACs to authenticate webhooks and signed requests.',
+    },
+    {
+      q: 'Which algorithm should I pick?',
+      a: 'SHA-256 is the default everywhere — webhook verifiers, JWT HS256, AWS-style signatures. SHA-384 and SHA-512 exist for systems standardized on them. All three run via WebCrypto here, using your browser\u2019s cryptographic primitives rather than a JS reimplementation.',
+    },
+    {
+      q: 'Does my secret leave the page?',
+      a: 'No. Signing happens in your browser; the secret and message are never sent anywhere or stored. WebCrypto does require HTTPS (or localhost) — the tool tells you if the context is insecure.',
+    },
+    {
+      q: 'Why hex and base64 outputs?',
+      a: 'Systems expect different encodings: webhook docs usually show hex digests, JWT segments use base64url, some APIs want base64. Both outputs here are the same digest bytes, so copy whichever form your verifier expects.',
+    },
+  ],
 }
 export function getToolFaqs(slug: string): FaqPair[] {
   return toolFaqs[slug] ?? []
