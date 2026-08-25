@@ -130,6 +130,11 @@ export const calculatorSamples: Record<string, Record<string, string>> = {
     text: 'The committee convened to deliberate the ramifications of the proposed infrastructural amendments. Subsequent deliberations illuminated several previously unconsidered contingencies, necessitating further analysis.',
   },
   'hmac-generator': { message: '{"amount":"12.00","currency":"usd"}', secret: 'whsec_test_5f1a2b3c4d' },
+  // ── 2025-08 第四批 ──
+  'base-converter': { value: '255.5', base: '10' },
+  'toml-to-json': {
+    toml: '[package]\nname = "my-app"\nversion = "1.2.0"\nedition = "2021"\n\n[dependencies]\nserde = { version = "1", features = ["derive"] }\ntokio = "1"\n\n[[bin]]\nname = "server"\npath = "src/main.rs"',
+  },
 }
 
 // ─────────────────────────── 单位转换器示例 ───────────────────────────
