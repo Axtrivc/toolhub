@@ -70,7 +70,7 @@ function getCategory(bmi: number): { key: string; label: string; color: string; 
   return {
     key: 'obeseIII',
     label: 'Obese (Class III)',
-    color: 'text-red-700',
+    color: 'text-red-700 dark:text-red-400',
     advice: 'Severely above range. Please consult a healthcare provider.',
   }
 }

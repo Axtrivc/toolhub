@@ -271,7 +271,7 @@ export function TdeeCalculatorClient() {
                 </thead>
                 <tbody className="divide-y divide-slate-100 dark:divide-slate-700">
                   {([
-                    ['Aggressive cut (−20%)', goals.cut, 'text-red-600'],
+                    ['Aggressive cut (−20%)', goals.cut, 'text-red-600 dark:text-red-400'],
                     ['Mild cut (−10%)', goals.mildCut, 'text-orange-600'],
                     ['Maintain', goals.maintain, 'text-brand-600'],
                     ['Lean bulk (+10%)', goals.bulk, 'text-green-600'],
