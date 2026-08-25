@@ -135,6 +135,9 @@ export const calculatorSamples: Record<string, Record<string, string>> = {
   'toml-to-json': {
     toml: '[package]\nname = "my-app"\nversion = "1.2.0"\nedition = "2021"\n\n[dependencies]\nserde = { version = "1", features = ["derive"] }\ntokio = "1"\n\n[[bin]]\nname = "server"\npath = "src/main.rs"',
   },
+  // ── 2025-08 第五批(趣味)──
+  'wheel-spinner': { items: 'Pizza\nSushi\nTacos\nBurgers\nPasta\nSalad' },
+  'morse-code-translator': { text: 'SOS we are here' },
 }
 
 // ─────────────────────────── 单位转换器示例 ───────────────────────────
