@@ -218,44 +218,7 @@ export const WeddingBudgetCalculatorClient = makeCalculatorClient({
 })
 
 // ── 摊销明细表生成器(工厂输出 + 客户端表格)──
-export const AmortizationTableGeneratorClient = makeCalculatorClient({
-  slug: 'amortization-table-generator',
-  urlState: true,
-  inputs: [
-    { key: 'principal', label: 'Loan amount', suffix: '$', default: '320000' },
-    { key: 'rate', label: 'Annual rate', suffix: '%', default: '6.5' },
-    { key: 'years', label: 'Term', suffix: 'years', default: '30' },
-  ],
-  outputs: [
-    { key: 'monthly', label: 'Monthly payment', highlight: true },
-    { key: 'totalInterest', label: 'Total interest' },
-    { key: 'totalPaid', label: 'Total paid' },
-    { key: 'interestShare', label: 'Interest share of payments' },
-  ],
-  compute: (v) => {
-    const principal = toNumStrict(v.principal)
-    const rate = toNum(v.rate) / 100 / 12
-    const months = Math.round(toNum(v.years) * 12)
-    if (isNaN(principal) || principal <= 0 || rate < 0 || months <= 0 || months > 1200) {
-      return { monthly: `⚠️ ${tui('amortization-table-generator', 'en', 'errInvalidLoan', 'Enter a valid loan amount, rate, and term')}`, totalInterest: '—', totalPaid: '—', interestShare: '—' }
-    }
-    let monthly: number
-    if (rate === 0) monthly = principal / months
-    else {
-      const f = Math.pow(1 + rate, months)
-      monthly = (principal * rate * f) / (f - 1)
-    }
-    const totalPaid = monthly * months
-    const totalInterest = totalPaid - principal
-    return {
-      monthly: fmtUSD(monthly),
-      totalInterest: fmtUSD(totalInterest),
-      totalPaid: fmtUSD(totalPaid),
-      interestShare: `${fmtNum((totalInterest / totalPaid) * 100, 1)}%`,
-    }
-  },
-  note: '📋 Download the full payment-by-payment schedule as CSV above — each row splits the fixed payment into interest (balance × monthly rate) and principal, with the running balance. Early years are interest-heavy.',
-})
+
 
 // ── 心率区间(Karvonen)──
 export const HeartRateZoneCalculatorClient = makeCalculatorClient({

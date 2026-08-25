@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation'
 import { getTool } from '@/lib/tools'
 import { buildToolMetadata, buildToolJsonLd, jsonLdStringify } from '@/lib/seo'
 import { ToolLayout } from '@/components/ToolLayout'
-import { AmortizationTableGeneratorClient } from '@/components/calculators/batch11Calculators'
+import { AmortizationTableGeneratorClient } from '@/components/calculators/AmortizationTableClient'
 import { AmortizationTableGeneratorContent } from './content'
 
 export const metadata: Metadata = buildToolMetadata('amortization-table-generator')

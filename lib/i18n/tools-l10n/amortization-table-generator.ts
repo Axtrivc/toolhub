@@ -7,6 +7,14 @@ import type { ToolL10n } from '../tool-l10n'
 export const AmortizationTableGeneratorL10n: ToolL10n = {
   zh: {
     ui: {
+      'scheduleLabel': '逐期还款明细',
+      'thNum': '期数',
+      'thPayment': '月供',
+      'thPrincipal': '本金',
+      'thInterest': '利息',
+      'thBalance': '余额',
+      'expand': '展开全部 {n} 行',
+      'collapse': '只看前 12 行',
       'in.interestShare': '利息占还款比例',
       'in.monthly': '月供',
       'in.principal': '贷款金额',
@@ -27,6 +35,14 @@ export const AmortizationTableGeneratorL10n: ToolL10n = {
   },
   es: {
     ui: {
+      'scheduleLabel': 'Tabla de amortización',
+      'thNum': 'N.º',
+      'thPayment': 'Pago',
+      'thPrincipal': 'Capital',
+      'thInterest': 'Interés',
+      'thBalance': 'Saldo',
+      'expand': 'Ver las {n} filas',
+      'collapse': 'Ver 12 primeras',
       'in.interestShare': 'Proporción de intereses',
       'in.monthly': 'Pago mensual',
       'in.principal': 'Importe del préstamo',
@@ -47,6 +63,14 @@ export const AmortizationTableGeneratorL10n: ToolL10n = {
   },
   de: {
     ui: {
+      'scheduleLabel': 'Tilgungsplan',
+      'thNum': 'Nr.',
+      'thPayment': 'Rate',
+      'thPrincipal': 'Tilgung',
+      'thInterest': 'Zins',
+      'thBalance': 'Restschuld',
+      'expand': 'Alle {n} Zeilen',
+      'collapse': 'Erste 12 Zeilen',
       'in.interestShare': 'Zinsanteil der Zahlungen',
       'in.monthly': 'Monatsrate',
       'in.principal': 'Darlehensbetrag',

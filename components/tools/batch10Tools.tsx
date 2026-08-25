@@ -541,7 +541,7 @@ export function SleepCalculatorClient() {
       </div>
 
       <CalculatorNote>
-        {L('note', '😴 A sleep cycle runs about 90 minutes. Waking at cycle boundaries feels far easier than mid-deep-sleep. Estimates assume ~15 minutes to fall asleep — adjust if you typically drift off faster or slower.').replace('{now}', nowBase)}
+        {L('note', '😴 A sleep cycle runs about 90 minutes. Waking at cycle boundaries feels far easier than mid-deep-sleep. Estimates assume ~15 minutes to fall asleep — adjust if you typically drift off faster or slower.')}
       </CalculatorNote>
     </div>
   )
