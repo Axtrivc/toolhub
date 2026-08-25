@@ -64,7 +64,7 @@ function getCategory(bmi: number): { key: string; label: string; color: string; 
     return {
       key: 'obeseII',
       label: 'Obese (Class II)',
-      color: 'text-red-600',
+      color: 'text-red-600 dark:text-red-400',
       advice: 'Significantly above range. Medical consultation recommended.',
     }
   return {
