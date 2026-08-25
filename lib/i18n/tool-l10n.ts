@@ -205,6 +205,50 @@ import { readingSpeakingTimeL10n } from './tools-l10n/reading-speaking-time'
 import { randomChoicePickerL10n } from './tools-l10n/random-choice-picker'
 import { wordleSolverL10n } from './tools-l10n/wordle-solver'
 import { ipCheckerL10n } from './tools-l10n/ip-checker'
+import { AmortizationTableGeneratorL10n } from './tools-l10n/amortization-table-generator'
+import { AsciiTableL10n } from './tools-l10n/ascii-table'
+import { BaseConverterL10n } from './tools-l10n/base-converter'
+import { CaffeineCalculatorL10n } from './tools-l10n/caffeine-calculator'
+import { CoinFlipL10n } from './tools-l10n/coin-flip'
+import { CookingConverterL10n } from './tools-l10n/cooking-converter'
+import { CronExpressionGeneratorL10n } from './tools-l10n/cron-expression-generator'
+import { DiceRollerL10n } from './tools-l10n/dice-roller'
+import { DogAgeCalculatorL10n } from './tools-l10n/dog-age-calculator'
+import { ElectricityCostCalculatorL10n } from './tools-l10n/electricity-cost-calculator'
+import { EpochConverterL10n } from './tools-l10n/epoch-converter'
+import { FuelCostCalculatorL10n } from './tools-l10n/fuel-cost-calculator'
+import { HashComparatorL10n } from './tools-l10n/hash-comparator'
+import { HeartRateZoneCalculatorL10n } from './tools-l10n/heart-rate-zone-calculator'
+import { HmacGeneratorL10n } from './tools-l10n/hmac-generator'
+import { HtaccessRedirectGeneratorL10n } from './tools-l10n/htaccess-redirect-generator'
+import { JsonDiffL10n } from './tools-l10n/json-diff'
+import { JwtGeneratorL10n } from './tools-l10n/jwt-generator'
+import { KeycodeInfoL10n } from './tools-l10n/keycode-info'
+import { LineDiffCheckerL10n } from './tools-l10n/line-diff-checker'
+import { LogFilterToolL10n } from './tools-l10n/log-filter-tool'
+import { MarkdownTocGeneratorL10n } from './tools-l10n/markdown-toc-generator'
+import { MimeTypeLookupL10n } from './tools-l10n/mime-type-lookup'
+import { MorseCodeTranslatorL10n } from './tools-l10n/morse-code-translator'
+import { OvertimeCalculatorL10n } from './tools-l10n/overtime-calculator'
+import { PaceCalculatorL10n } from './tools-l10n/pace-calculator'
+import { PaintCalculatorL10n } from './tools-l10n/paint-calculator'
+import { PasswordEntropyCheckerL10n } from './tools-l10n/password-entropy-checker'
+import { ProteinIntakeCalculatorL10n } from './tools-l10n/protein-intake-calculator'
+import { RandomTeamGeneratorL10n } from './tools-l10n/random-team-generator'
+import { ReadingLevelCheckerL10n } from './tools-l10n/reading-level-checker'
+import { RobotsTxtGeneratorL10n } from './tools-l10n/robots-txt-generator'
+import { RomanNumeralConverterL10n } from './tools-l10n/roman-numeral-converter'
+import { ScreenTimeCalculatorL10n } from './tools-l10n/screen-time-calculator'
+import { SleepCalculatorL10n } from './tools-l10n/sleep-calculator'
+import { StepsToCaloriesCalculatorL10n } from './tools-l10n/steps-to-calories-calculator'
+import { SubscriptionCostCalculatorL10n } from './tools-l10n/subscription-cost-calculator'
+import { TakeHomePayCalculatorL10n } from './tools-l10n/take-home-pay-calculator'
+import { TomlToJsonL10n } from './tools-l10n/toml-to-json'
+import { TypingSpeedTestL10n } from './tools-l10n/typing-speed-test'
+import { UnicodeCharacterLookupL10n } from './tools-l10n/unicode-character-lookup'
+import { WeddingBudgetCalculatorL10n } from './tools-l10n/wedding-budget-calculator'
+import { WheelSpinnerL10n } from './tools-l10n/wheel-spinner'
+import { XmlFormatterL10n } from './tools-l10n/xml-formatter'
 
 const registry: Record<string, ToolL10n> = {
   'loan-calculator': loanCalculatorL10n,
@@ -376,6 +420,50 @@ const registry: Record<string, ToolL10n> = {
   'random-choice-picker': randomChoicePickerL10n,
   'wordle-solver': wordleSolverL10n,
   'ip-checker': ipCheckerL10n,
+  'amortization-table-generator': AmortizationTableGeneratorL10n,
+  'ascii-table': AsciiTableL10n,
+  'base-converter': BaseConverterL10n,
+  'caffeine-calculator': CaffeineCalculatorL10n,
+  'coin-flip': CoinFlipL10n,
+  'cooking-converter': CookingConverterL10n,
+  'cron-expression-generator': CronExpressionGeneratorL10n,
+  'dice-roller': DiceRollerL10n,
+  'dog-age-calculator': DogAgeCalculatorL10n,
+  'electricity-cost-calculator': ElectricityCostCalculatorL10n,
+  'epoch-converter': EpochConverterL10n,
+  'fuel-cost-calculator': FuelCostCalculatorL10n,
+  'hash-comparator': HashComparatorL10n,
+  'heart-rate-zone-calculator': HeartRateZoneCalculatorL10n,
+  'hmac-generator': HmacGeneratorL10n,
+  'htaccess-redirect-generator': HtaccessRedirectGeneratorL10n,
+  'json-diff': JsonDiffL10n,
+  'jwt-generator': JwtGeneratorL10n,
+  'keycode-info': KeycodeInfoL10n,
+  'line-diff-checker': LineDiffCheckerL10n,
+  'log-filter-tool': LogFilterToolL10n,
+  'markdown-toc-generator': MarkdownTocGeneratorL10n,
+  'mime-type-lookup': MimeTypeLookupL10n,
+  'morse-code-translator': MorseCodeTranslatorL10n,
+  'overtime-calculator': OvertimeCalculatorL10n,
+  'pace-calculator': PaceCalculatorL10n,
+  'paint-calculator': PaintCalculatorL10n,
+  'password-entropy-checker': PasswordEntropyCheckerL10n,
+  'protein-intake-calculator': ProteinIntakeCalculatorL10n,
+  'random-team-generator': RandomTeamGeneratorL10n,
+  'reading-level-checker': ReadingLevelCheckerL10n,
+  'robots-txt-generator': RobotsTxtGeneratorL10n,
+  'roman-numeral-converter': RomanNumeralConverterL10n,
+  'screen-time-calculator': ScreenTimeCalculatorL10n,
+  'sleep-calculator': SleepCalculatorL10n,
+  'steps-to-calories-calculator': StepsToCaloriesCalculatorL10n,
+  'subscription-cost-calculator': SubscriptionCostCalculatorL10n,
+  'take-home-pay-calculator': TakeHomePayCalculatorL10n,
+  'toml-to-json': TomlToJsonL10n,
+  'typing-speed-test': TypingSpeedTestL10n,
+  'unicode-character-lookup': UnicodeCharacterLookupL10n,
+  'wedding-budget-calculator': WeddingBudgetCalculatorL10n,
+  'wheel-spinner': WheelSpinnerL10n,
+  'xml-formatter': XmlFormatterL10n,
 }
 
 /**

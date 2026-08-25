@@ -1,0 +1,77 @@
+/**
+ * wedding-budget-calculator 本地化 bundle —— zh / es / de(2025-08 扩张批次)
+ * 覆盖: ui。useCases/formula/faqs 缺失自动回退英文。
+ */
+import type { ToolL10n } from '../tool-l10n'
+
+export const WeddingBudgetCalculatorL10n: ToolL10n = {
+  zh: {
+    ui: {
+      'in.attire': '礼服与造型 (10%)',
+      'in.catering': '餐饮与酒水 (30%)',
+      'in.guests': '宾客人数',
+      'in.misc': '纸品/回礼与备用金 (10%)',
+      'in.music': '音乐/花艺 (10%)',
+      'in.perGuest': '每宾客人均',
+      'in.photo': '摄影摄像 (15%)',
+      'in.total': '总预算',
+      'in.venue': '场地与租赁 (25%)',
+      'note': '💍 百分比反映美国常见规划指引;场地+餐饮通常吃掉一半以上。每宾客成本是撬动全局的杠杆——减 10 位宾客比省掉回礼更有效。',
+      'out.attire': '礼服与造型 (10%)',
+      'out.catering': '餐饮与酒水 (30%)',
+      'out.guests': '宾客人数',
+      'out.misc': '纸品/回礼与备用金 (10%)',
+      'out.music': '音乐/花艺 (10%)',
+      'out.perGuest': '每宾客人均',
+      'out.photo': '摄影摄像 (15%)',
+      'out.total': '总预算',
+      'out.venue': '场地与租赁 (25%)',
+    },
+  },
+  es: {
+    ui: {
+      'in.attire': 'Vestuario y belleza (10 %)',
+      'in.catering': 'Catering y bar (30 %)',
+      'in.guests': 'Número de invitados',
+      'in.misc': 'Papelería, detalles y colchón (10 %)',
+      'in.music': 'Música/DJ y flores (10 %)',
+      'in.perGuest': 'Coste por invitado',
+      'in.photo': 'Foto y vídeo (15 %)',
+      'in.total': 'Presupuesto total',
+      'in.venue': 'Recinto y alquiler (25 %)',
+      'note': '💍 Los porcentajes reflejan la guía habitual en EE. UU.; recinto y catering absorben más de la mitad. El coste por invitado es la palanca que mueve todo lo demás.',
+      'out.attire': 'Vestuario y belleza (10 %)',
+      'out.catering': 'Catering y bar (30 %)',
+      'out.guests': 'Número de invitados',
+      'out.misc': 'Papelería, detalles y colchón (10 %)',
+      'out.music': 'Música/DJ y flores (10 %)',
+      'out.perGuest': 'Coste por invitado',
+      'out.photo': 'Foto y vídeo (15 %)',
+      'out.total': 'Presupuesto total',
+      'out.venue': 'Recinto y alquiler (25 %)',
+    },
+  },
+  de: {
+    ui: {
+      'in.attire': 'Outfit & Beauty (10 %)',
+      'in.catering': 'Catering & Bar (30 %)',
+      'in.guests': 'Gästezahl',
+      'in.misc': 'Papeterie, Gastgeschenke & Puffer (10 %)',
+      'in.music': 'Musik/DJ & Blumen (10 %)',
+      'in.perGuest': 'Kosten pro Gast',
+      'in.photo': 'Foto & Video (15 %)',
+      'in.total': 'Gesamtbudget',
+      'in.venue': 'Location & Miete (25 %)',
+      'note': '💍 Die Prozentsätze folgen üblichen US-Planungswerten; Location+Catering nehmen über die Hälfte. Der Kosten-pro-Gast-Hebel bewegt alles andere — 10 Gäste weniger wirkt mehr als Gastgeschenke streichen.',
+      'out.attire': 'Outfit & Beauty (10 %)',
+      'out.catering': 'Catering & Bar (30 %)',
+      'out.guests': 'Gästezahl',
+      'out.misc': 'Papeterie, Gastgeschenke & Puffer (10 %)',
+      'out.music': 'Musik/DJ & Blumen (10 %)',
+      'out.perGuest': 'Kosten pro Gast',
+      'out.photo': 'Foto & Video (15 %)',
+      'out.total': 'Gesamtbudget',
+      'out.venue': 'Location & Miete (25 %)',
+    },
+  },
+}

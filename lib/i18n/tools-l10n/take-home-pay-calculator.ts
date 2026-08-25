@@ -1,0 +1,77 @@
+/**
+ * take-home-pay-calculator 本地化 bundle —— zh / es / de(2025-08 扩张批次)
+ * 覆盖: ui。useCases/formula/faqs 缺失自动回退英文。
+ */
+import type { ToolL10n } from '../tool-l10n'
+
+export const TakeHomePayCalculatorL10n: ToolL10n = {
+  zh: {
+    ui: {
+      'in.annualNet': '预计年度税后',
+      'in.fedTax': '联邦所得税估算',
+      'in.fica': 'FICA(社保+医保)',
+      'in.filing': '申报身份',
+      'in.gross': '年度税前工资',
+      'in.perPaycheck': '每两周薪资金额',
+      'in.preTaxPct': '401(k)/税前比例',
+      'in.premiums': '年度医保保费',
+      'note': '🇺🇸 简化估算:仅标准扣除,不含州税、抵免或补充预扣——实际工资单会有出入。FICA 按法定税率(社保 6.2% 至工资基数上限,医保 1.45%)。',
+      'opt.filing.married': '已婚合并申报',
+      'opt.filing.single': '单身申报',
+      'out.annualNet': '预计年度税后',
+      'out.fedTax': '联邦所得税估算',
+      'out.fica': 'FICA(社保+医保)',
+      'out.filing': '申报身份',
+      'out.gross': '年度税前工资',
+      'out.perPaycheck': '每两周薪资金额',
+      'out.preTaxPct': '401(k)/税前比例',
+      'out.premiums': '年度医保保费',
+    },
+  },
+  es: {
+    ui: {
+      'in.annualNet': 'Neto anual estimado',
+      'in.fedTax': 'Impuesto federal est.',
+      'in.fica': 'FICA (SS + Medicare)',
+      'in.filing': 'Estado civil',
+      'in.gross': 'Salario bruto anual',
+      'in.perPaycheck': 'Por nómina quincenal',
+      'in.preTaxPct': '401(k)/% pre-impuestos',
+      'in.premiums': 'Primas médicas/año',
+      'note': '🇺🇸 Estimación simplificada: solo deducción estándar, sin impuesto estatal ni créditos; la nómina real varía. FICA con tasas legales exactas (6,2 % SS hasta la base, 1,45 % Medicare).',
+      'opt.filing.married': 'Matrimonio conjunto',
+      'opt.filing.single': 'Soltero',
+      'out.annualNet': 'Neto anual estimado',
+      'out.fedTax': 'Impuesto federal est.',
+      'out.fica': 'FICA (SS + Medicare)',
+      'out.filing': 'Estado civil',
+      'out.gross': 'Salario bruto anual',
+      'out.perPaycheck': 'Por nómina quincenal',
+      'out.preTaxPct': '401(k)/% pre-impuestos',
+      'out.premiums': 'Primas médicas/año',
+    },
+  },
+  de: {
+    ui: {
+      'in.annualNet': 'Geschätztes Jahres-Netto',
+      'in.fedTax': 'Bundessteuer (geschätzt)',
+      'in.fica': 'FICA (SS + Medicare)',
+      'in.filing': 'Steuerklasse',
+      'in.gross': 'Jahresbruttogehalt',
+      'in.perPaycheck': 'Pro 14-Tage-Lohn',
+      'in.preTaxPct': '401(k)/vor Steuern %',
+      'in.premiums': 'Krankenversicherung/Jahr',
+      'note': '🇺🇸 Vereinfachte Schätzung: nur Standardabzug, ohne Steuern der Bundesstaaten — die echte Lohnabrechnung weicht ab. FICA mit exakten Sätzen (6,2 % SS bis zur Bemessungsgrenze, 1,45 % Medicare).',
+      'opt.filing.married': 'Zusammen veranlagt',
+      'opt.filing.single': 'Einzel',
+      'out.annualNet': 'Geschätztes Jahres-Netto',
+      'out.fedTax': 'Bundessteuer (geschätzt)',
+      'out.fica': 'FICA (SS + Medicare)',
+      'out.filing': 'Steuerklasse',
+      'out.gross': 'Jahresbruttogehalt',
+      'out.perPaycheck': 'Pro 14-Tage-Lohn',
+      'out.preTaxPct': '401(k)/vor Steuern %',
+      'out.premiums': 'Krankenversicherung/Jahr',
+    },
+  },
+}
