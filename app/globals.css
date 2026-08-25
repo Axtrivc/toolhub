@@ -134,6 +134,14 @@
   html.dark .prose-content a {
     color: rgb(96 165 250);
   }
+
+  /* 全局键盘焦点指示:任何获得焦点的可交互元素都有统一主色描边。
+     :focus-visible 只在键盘导航时出现,鼠标点击不触发;
+     outline-none 的组件(输入框走 box-shadow 环)不受影响。 */
+  :focus-visible {
+    outline: 2px solid rgb(var(--primary) / 0.7);
+    outline-offset: 2px;
+  }
 }
 
 @layer components {

@@ -210,6 +210,7 @@ export interface Dict {
   errorBody: string // 说明 + 引导
   errorRetry: string // "Try again"
   errorHome: string // "Back to home"
+  skipToContent: string // "Skip to content"
   errorDigest: string // 引导用户反馈时附带 digest 错误代码(含 {digest} 占位)
   loading: string // "Loading…"
   // Cookie 同意横幅
@@ -408,6 +409,7 @@ const en: Dict = {
   errorBody: 'An unexpected error occurred. Please try again, or return to the homepage.',
   errorRetry: 'Try again',
   errorHome: 'Back to home',
+  skipToContent: 'Skip to content',
   errorDigest: 'Error code: {digest} — include this code if you report the issue.',
   loading: 'Loading…',
   heroMultilingualBadge: '🌐 Available in 4 Languages: EN | 中文 | Español | Deutsch',
@@ -601,6 +603,7 @@ const zh: Dict = {
   errorBody: '发生了意外错误。请重试,或返回首页。',
   errorRetry: '重试',
   errorHome: '返回首页',
+  skipToContent: '跳到主要内容',
   errorDigest: '错误代码:{digest}——反馈问题时请附上此代码。',
   loading: '加载中…',
   heroMultilingualBadge: '🌐 已支持 4 种语言:EN | 中文 | Español | Deutsch',
@@ -794,6 +797,7 @@ const es: Dict = {
   errorBody: 'Ha ocurrido un error inesperado. Inténtalo de nuevo o vuelve al inicio.',
   errorRetry: 'Reintentar',
   errorHome: 'Volver al inicio',
+  skipToContent: 'Saltar al contenido',
   errorDigest: 'Código de error: {digest}; inclúyelo si informas del problema.',
   loading: 'Cargando…',
   heroMultilingualBadge: '🌐 Disponible en 4 idiomas: EN | 中文 | Español | Deutsch',
@@ -987,6 +991,7 @@ const de: Dict = {
   errorBody: 'Ein unerwarteter Fehler ist aufgetreten. Bitte versuche es erneut oder kehre zur Startseite zurück.',
   errorRetry: 'Erneut versuchen',
   errorHome: 'Zurück zur Startseite',
+  skipToContent: 'Zum Inhalt springen',
   errorDigest: 'Fehlercode: {digest} — gib diesen Code an, wenn du das Problem meldest.',
   loading: 'Wird geladen…',
   heroMultilingualBadge: '🌐 In 4 Sprachen verfügbar: EN | 中文 | Español | Deutsch',

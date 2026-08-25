@@ -42,7 +42,9 @@ export function Header() {
 
   const openSearch = () => setSearchOpen(true)
 
-  // 打开/关闭时同步 body 滚动锁,并支持 ESC 关闭;关闭时把焦点归还给汉堡按钮
+  // 打开/关闭时同步 body 滚动锁,并支持 ESC 关闭;关闭时把焦点归还给汉堡按钮。
+  // Tab 焦点陷阱:aria-modal 弹层内 Tab 循环,防止焦点漏进遮罩后的页面。
+  const drawerPanelRef = useRef<HTMLDivElement | null>(null)
   const drawerFocusRef = useRef<HTMLElement | null>(null)
   useEffect(() => {
     if (!menuOpen) return
@@ -51,7 +53,27 @@ export function Header() {
     const prevOverflow = document.body.style.overflow
     document.body.style.overflow = 'hidden'
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') setMenuOpen(false)
+      if (e.key === 'Escape') {
+        setMenuOpen(false)
+        return
+      }
+      if (e.key !== 'Tab' || !drawerPanelRef.current) return
+      const focusables = drawerPanelRef.current.querySelectorAll<HTMLElement>(
+        'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])',
+      )
+      if (focusables.length === 0) return
+      const first = focusables[0]
+      const last = focusables[focusables.length - 1]
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault()
+        last.focus()
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault()
+        first.focus()
+      } else if (!drawerPanelRef.current.contains(document.activeElement)) {
+        e.preventDefault()
+        first.focus()
+      }
     }
     window.addEventListener('keydown', onKey)
     return () => {
@@ -185,6 +207,7 @@ export function Header() {
           {/* 抽屉面板:从顶部滑入,贴在 header 下方 */}
           <div
             id={panelId}
+            ref={drawerPanelRef}
             role="dialog"
             aria-modal="true"
             aria-label={t(locale, 'menuLabel')}

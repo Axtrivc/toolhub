@@ -45,6 +45,7 @@ export function SearchPalette({ tools, locale, open, onClose }: SearchPalettePro
   const [mounted, setMounted] = useState(false) // SSR 安全:仅在 client 渲染 portal
   const inputRef = useRef<HTMLInputElement>(null)
   const listRef = useRef<HTMLUListElement>(null)
+  const panelRef = useRef<HTMLDivElement>(null)
   // 打开前的焦点元素:所有关闭路径(ESC / Enter 跳转 / 点击遮罩)统一经 open=false
   // 触发下方 effect cleanup,把焦点归还给它(键盘用户不掉焦点)。
   const restoreFocusRef = useRef<HTMLElement | null>(null)
@@ -98,13 +99,31 @@ export function SearchPalette({ tools, locale, open, onClose }: SearchPalettePro
     }
   }, [open])
 
-  // ESC 关闭
+  // ESC 关闭;Tab 焦点陷阱:aria-modal 弹层内 Tab 循环,焦点不漏到页面背后
   useEffect(() => {
     if (!open) return
     const onKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
         e.preventDefault()
         onClose()
+        return
+      }
+      if (e.key !== 'Tab' || !panelRef.current) return
+      const focusables = panelRef.current.querySelectorAll<HTMLElement>(
+        'a[href], button:not([disabled]), input, [tabindex]:not([tabindex="-1"])',
+      )
+      if (focusables.length === 0) return
+      const first = focusables[0]
+      const last = focusables[focusables.length - 1]
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault()
+        last.focus()
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault()
+        first.focus()
+      } else if (!panelRef.current.contains(document.activeElement)) {
+        e.preventDefault()
+        first.focus()
       }
     }
     window.addEventListener('keydown', onKey)
@@ -203,6 +222,7 @@ export function SearchPalette({ tools, locale, open, onClose }: SearchPalettePro
           {/* 面板:圆角 + 描边 + 大阴影,质感升级;transformOrigin 顶中,
               像从 Header 搜索栏"展开"下来。 */}
           <motion.div
+            ref={panelRef}
             {...panelMotion}
             onClick={(e) => e.stopPropagation()}
             className="relative flex max-h-[70vh] w-full max-w-xl flex-col overflow-hidden rounded-2xl border border-gray-100 shadow-2xl ring-1 ring-black/5 dark:border-gray-800 dark:ring-white/5"

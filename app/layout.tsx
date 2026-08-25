@@ -10,6 +10,7 @@ import { AdSenseScript } from '@/components/AdSlot'
 import { AnalyticsScript, PageViewTracker } from '@/components/Analytics'
 import { CookieConsent } from '@/components/CookieConsent'
 import { ServiceWorkerRegister } from '@/components/ServiceWorkerRegister'
+import { SkipToContent } from '@/components/SkipToContent'
 import { siteMetadata, websiteJsonLd, jsonLdStringify } from '@/lib/seo'
 
 export const metadata = siteMetadata
@@ -66,8 +67,11 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       </head>
       <body className="flex min-h-screen flex-col">
         <AppProviders>
+          <SkipToContent />
           <Header />
-          <main className="flex-1">{children}</main>
+          <main id="main-content" tabIndex={-1} className="flex-1 outline-none">
+            {children}
+          </main>
           <Footer />
           {/* Cookie 同意横幅 - 合规(AdSense/GDPR/CCPA),延迟挂载不影响首屏。
               必须在 AppProviders 内:它消费 useApp() 读取 locale 做 4 语本地化。 */}
