@@ -132,7 +132,7 @@ export function ImageToBase64Client() {
       )}
 
       {error && (
-        <div className="rounded-lg border border-red-200 bg-red-50 p-4 text-sm text-red-700">⚠️ {error}</div>
+        <div className="rounded-lg border border-red-200 dark:border-red-800/60 bg-red-50 dark:bg-red-950/30 p-4 text-sm text-red-700">⚠️ {error}</div>
       )}
 
       {/* 已上传 */}
@@ -172,7 +172,7 @@ export function ImageToBase64Client() {
                 <CopyButton value={img.dataUrl} label={L('copy', 'Copy')} />
               </div>
               <pre
-                className="overflow-x-auto rounded-lg border bg-slate-50 p-3 text-xs"
+                className="overflow-x-auto rounded-lg border bg-slate-50 p-3 text-xs dark:bg-slate-800/60"
                 style={{ borderColor: 'rgb(var(--border))' }}
               >
                 <code className="break-all">{img.dataUrl.slice(0, 200)}{img.dataUrl.length > 200 ? '…' : ''}</code>
@@ -186,7 +186,7 @@ export function ImageToBase64Client() {
                 <CopyButton value={imgTag} label={L('copy', 'Copy')} />
               </div>
               <pre
-                className="overflow-x-auto rounded-lg border bg-slate-50 p-3 text-xs"
+                className="overflow-x-auto rounded-lg border bg-slate-50 p-3 text-xs dark:bg-slate-800/60"
                 style={{ borderColor: 'rgb(var(--border))' }}
               >
                 <code className="break-all">{imgTag.slice(0, 200)}{imgTag.length > 200 ? '…' : ''}</code>
@@ -200,7 +200,7 @@ export function ImageToBase64Client() {
                 <CopyButton value={cssBg} label={L('copy', 'Copy')} />
               </div>
               <pre
-                className="overflow-x-auto rounded-lg border bg-slate-50 p-3 text-xs"
+                className="overflow-x-auto rounded-lg border bg-slate-50 p-3 text-xs dark:bg-slate-800/60"
                 style={{ borderColor: 'rgb(var(--border))' }}
               >
                 <code className="break-all">{cssBg.slice(0, 200)}{cssBg.length > 200 ? '…' : ''}</code>

@@ -150,11 +150,11 @@ export function AgeCalculatorClient() {
             value={
               <span>
                 {result.years}
-                <span className="text-base font-normal text-slate-500">{L('yrsAbbr', ' yrs ')}</span>
+                <span className="text-base font-normal text-slate-500 dark:text-slate-400">{L('yrsAbbr', ' yrs ')}</span>
                 {result.months}
-                <span className="text-base font-normal text-slate-500">{L('moAbbr', ' mo ')}</span>
+                <span className="text-base font-normal text-slate-500 dark:text-slate-400">{L('moAbbr', ' mo ')}</span>
                 {result.days}
-                <span className="text-base font-normal text-slate-500">{L('daysAbbr', ' days')}</span>
+                <span className="text-base font-normal text-slate-500 dark:text-slate-400">{L('daysAbbr', ' days')}</span>
               </span>
             }
             highlight
@@ -170,7 +170,7 @@ export function AgeCalculatorClient() {
           </div>
 
           {/* 下一个生日 */}
-          <div className="rounded-lg border border-brand-200 bg-brand-50 p-5 text-center">
+          <div className="rounded-lg border border-brand-200 bg-brand-50 p-5 text-center dark:border-brand-800/60 dark:bg-brand-950/30">
             <div className="text-sm font-medium text-brand-600">
               {result.daysToBirthday === 0
                 ? L('birthdayToday', '🎂 Happy birthday — today is the day!')

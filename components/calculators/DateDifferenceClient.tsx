@@ -114,7 +114,7 @@ export function DateDifferenceClient() {
           {L('emptyState', 'Pick two dates to see the duration between them.')}
         </div>
       ) : 'error' in result ? (
-        <div className="rounded-lg border border-red-200 bg-red-50 p-4 text-sm text-red-700">
+        <div className="rounded-lg border border-red-200 dark:border-red-800/60 bg-red-50 dark:bg-red-950/30 p-4 text-sm text-red-700">
           ⚠️ {result.error}
         </div>
       ) : (

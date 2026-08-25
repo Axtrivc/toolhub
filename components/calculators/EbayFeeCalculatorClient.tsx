@@ -218,7 +218,7 @@ export function EbayFeeCalculatorClient() {
       </div>
 
       {'error' in parsed ? (
-        <div className="rounded-lg border border-red-200 bg-red-50 p-4 text-sm text-red-700">{L('errorWarn', '⚠️ ')}{parsed.error}</div>
+        <div className="rounded-lg border border-red-200 dark:border-red-800/60 bg-red-50 dark:bg-red-950/30 p-4 text-sm text-red-700">{L('errorWarn', '⚠️ ')}{parsed.error}</div>
       ) : (
         <>
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">

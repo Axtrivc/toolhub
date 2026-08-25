@@ -256,7 +256,7 @@ export function CssShadowGeneratorClient() {
           <CopyButton value={cssCode} label={L('copy', 'Copy')} />
         </div>
         <pre
-          className="overflow-x-auto rounded-lg border bg-slate-50 p-4 text-xs"
+          className="overflow-x-auto rounded-lg border bg-slate-50 p-4 text-xs dark:bg-slate-800/60"
           style={{ borderColor: 'rgb(var(--border))' }}
         >
           <code>{cssCode}</code>

@@ -196,7 +196,7 @@ export function TdeeCalculatorClient() {
             type="button"
             onClick={() => switchUnit(u)}
             className={`rounded-lg px-4 py-2 text-sm font-medium transition ${
-              unit === u ? 'bg-brand-600 text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+              unit === u ? 'bg-brand-600 text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200 dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-slate-700'
             }`}
           >
             {u === 'metric' ? L('metric', 'Metric (cm / kg)') : L('imperial', 'Imperial (ft/in / lb)')}
@@ -269,7 +269,7 @@ export function TdeeCalculatorClient() {
                     <th className="px-3 py-2 text-right">{L('thFat', 'Fat')}</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-100">
+                <tbody className="divide-y divide-slate-100 dark:divide-slate-700">
                   {([
                     ['Aggressive cut (−20%)', goals.cut, 'text-red-600'],
                     ['Mild cut (−10%)', goals.mildCut, 'text-orange-600'],

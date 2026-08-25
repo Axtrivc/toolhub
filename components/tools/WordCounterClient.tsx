@@ -140,7 +140,7 @@ export function WordCounterClient() {
         />
       </div>
 
-      <p className="rounded-md bg-slate-50 p-3 text-xs text-slate-500">
+      <p className="rounded-md bg-slate-50 p-3 text-xs text-slate-500 dark:bg-slate-800/60">
         {L('privacyNote', '🔒 Your text is analyzed locally in your browser and never uploaded anywhere.')}
       </p>
     </div>

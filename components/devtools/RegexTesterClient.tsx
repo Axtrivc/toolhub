@@ -297,7 +297,7 @@ export function RegexTesterClient() {
 
       {/* 错误提示 */}
       {compiled.error && (
-        <div className="rounded-lg border border-red-200 bg-red-50 p-4 text-sm text-red-700">
+        <div className="rounded-lg border border-red-200 dark:border-red-800/60 bg-red-50 dark:bg-red-950/30 p-4 text-sm text-red-700">
           ⚠️ {compiled.error}
         </div>
       )}
@@ -342,7 +342,7 @@ export function RegexTesterClient() {
             <CopyButton value={matches.map((m) => m.match).join('\n')} label={L('copyMatches', 'Copy Matches')} disabled={matches.length === 0} />
           </div>
           <pre
-            className="whitespace-pre-wrap break-words rounded-lg border bg-slate-50 p-4 text-xs leading-relaxed"
+            className="whitespace-pre-wrap break-words rounded-lg border bg-slate-50 p-4 text-xs leading-relaxed dark:bg-slate-800/60"
             style={{ borderColor: 'rgb(var(--border))' }}
           >
             <code>

@@ -163,7 +163,7 @@ export function RandomChoicePickerClient() {
       </div>
 
       {tooFew && (
-        <div className="rounded-lg border border-red-200 bg-red-50 p-4 text-sm text-red-700">
+        <div className="rounded-lg border border-red-200 dark:border-red-800/60 bg-red-50 dark:bg-red-950/30 p-4 text-sm text-red-700">
           {L('tooFewError', '⚠️ Add at least 2 options (one per line) to pick from.')}
         </div>
       )}

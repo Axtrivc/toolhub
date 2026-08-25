@@ -222,7 +222,7 @@ export function ChmodCalculatorClient() {
           }}
         />
         {textError && (
-          <p className="mt-1.5 text-xs text-red-600">
+          <p className="mt-1.5 text-xs text-red-600 dark:text-red-300">
             {L('errInvalidPrefix', 'Invalid format — use 3–4 octal digits (0–7, e.g. ')}
             <code>644</code>
             {L('errInvalidMid', ') or 9 symbolic chars (e.g. ')}

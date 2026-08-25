@@ -169,7 +169,7 @@ export function JwtDecoderClient() {
 
       {/* 错误提示 */}
       {result.error && (
-        <div className="rounded-lg border border-red-200 bg-red-50 p-4 text-sm text-red-700">
+        <div className="rounded-lg border border-red-200 dark:border-red-800/60 bg-red-50 dark:bg-red-950/30 p-4 text-sm text-red-700">
           ⚠️ {result.error}
         </div>
       )}
@@ -182,7 +182,7 @@ export function JwtDecoderClient() {
             <div
               className={`rounded-lg border p-3 text-sm ${
                 timeClaims.problem
-                  ? 'border-red-200 bg-red-50 text-red-700'
+                  ? 'border-red-200 bg-red-50 text-red-700 dark:border-red-800/60 dark:bg-red-950/30 dark:text-red-300'
                   : 'border-green-200 bg-green-50 text-green-700'
               }`}
             >

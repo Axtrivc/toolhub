@@ -45,7 +45,7 @@ export function PxToRemClient() {
     <div className="space-y-5">
       {/* 根字号 */}
       <div className="flex items-center gap-3">
-        <label htmlFor="root-size" className="text-sm font-medium text-slate-700">
+        <label htmlFor="root-size" className="text-sm font-medium text-slate-700 dark:text-slate-300">
           {L('rootFontSize', 'Root font size')}
         </label>
         <input

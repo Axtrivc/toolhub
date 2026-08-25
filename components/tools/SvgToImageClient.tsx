@@ -246,7 +246,7 @@ export function SvgToImageClient() {
       {/* 输入区:粘贴 / 上传 */}
       <div>
         <div className="mb-2 flex items-center justify-between">
-          <label htmlFor="svg-input" className="text-sm font-medium text-slate-700">
+          <label htmlFor="svg-input" className="text-sm font-medium text-slate-700 dark:text-slate-300">
             {L('pasteSvgCode', 'Paste SVG code')}
           </label>
           <div className="flex items-center gap-2">
@@ -291,7 +291,7 @@ export function SvgToImageClient() {
             value={format}
             onChange={(e) => setFormat(e.target.value as Fmt)}
             aria-label={L('format', 'Format:')}
-            className="rounded border bg-white px-2 py-1 text-xs"
+            className="rounded border bg-white px-2 py-1 text-xs dark:bg-slate-800 dark:text-slate-100"
             style={{ borderColor: 'rgb(var(--border-strong))', color: 'rgb(var(--text))' }}
           >
             <option value="image/png">PNG</option>
@@ -304,7 +304,7 @@ export function SvgToImageClient() {
             value={scale}
             onChange={(e) => setScale(Number(e.target.value))}
             aria-label={L('scale', 'Scale:')}
-            className="rounded border bg-white px-2 py-1 text-xs"
+            className="rounded border bg-white px-2 py-1 text-xs dark:bg-slate-800 dark:text-slate-100"
             style={{ borderColor: 'rgb(var(--border-strong))', color: 'rgb(var(--text))' }}
           >
             <option value={1}>1x</option>
@@ -318,7 +318,7 @@ export function SvgToImageClient() {
       </div>
 
       {/* 错误 */}
-      {error && <div className="rounded-lg border border-red-200 bg-red-50 p-4 text-sm text-red-700">⚠️ {error}</div>}
+      {error && <div className="rounded-lg border border-red-200 dark:border-red-800/60 bg-red-50 dark:bg-red-950/30 p-4 text-sm text-red-700">⚠️ {error}</div>}
 
       {/* 结果:预览 + 下载 */}
       {downloadUrl && previewUrl && (

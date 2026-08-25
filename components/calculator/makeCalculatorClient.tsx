@@ -119,12 +119,14 @@ export function makeCalculatorClient(config: CalculatorConfig): ComponentType {
       setValues((prev) => ({ ...prev, [key]: v }))
     }
 
-    // 一键重置回出厂默认值(全站此前无任何清空入口,只能逐字段手删)
+    // 一键重置回出厂默认值(全站此前无任何清空入口,只能逐字段手删);
+    // 同时解除 Load Sample 的覆盖确认态,避免残留的红色"覆盖?"按钮
     const handleReset = useCallback(() => {
       const init: Record<string, string> = {}
       for (const f of config.inputs) init[f.key] = f.default
       setValues(init)
       setDirty(false)
+      setSampleArmed(false)
     }, [config.inputs])
 
     const results = useMemo(() => {
@@ -162,12 +164,14 @@ export function makeCalculatorClient(config: CalculatorConfig): ComponentType {
 
     // Load Sample:用户已有输入时第一次点击只提示(不覆盖),再点一次才确认覆盖;
     // pristine 状态直接填充。避免误触毁掉用户手填的真实数据。
+    // 返回 false = 本次点击只是 arm(按钮据此跳过"✓ loaded"成功反馈);
+    // 填充走 markDirty(等价手输):示例值也算"非默认输入",Reset 按钮随之出现。
     const [sampleArmed, setSampleArmed] = useState(false)
-    const handleLoadSample = useCallback(() => {
+    const handleLoadSample = useCallback((): void | false => {
       if (!sample) return
       if (dirty && !sampleArmed) {
         setSampleArmed(true)
-        return
+        return false
       }
       // 只填充示例中提供的 key,其余保留当前值,避免覆盖未声明的字段。
       setValues((prev) => {
@@ -177,6 +181,7 @@ export function makeCalculatorClient(config: CalculatorConfig): ComponentType {
         }
         return next
       })
+      setDirty(true)
       setSampleArmed(false)
     }, [sample, config.inputs, dirty, sampleArmed])
 

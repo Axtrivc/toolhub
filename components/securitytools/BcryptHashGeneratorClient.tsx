@@ -241,7 +241,7 @@ export function BcryptHashGeneratorClient() {
         )}
       </div>
 
-      {error && <div className="rounded-lg border border-red-200 bg-red-50 p-4 text-sm text-red-700">⚠️ {error}</div>}
+      {error && <div className="rounded-lg border border-red-200 dark:border-red-800/60 bg-red-50 dark:bg-red-950/30 p-4 text-sm text-red-700">⚠️ {error}</div>}
 
       {/* 哈希输出 */}
       {hash && (
@@ -318,7 +318,7 @@ export function BcryptHashGeneratorClient() {
                   {L('matchCorrect', '✓ Match — password is correct')}
                 </span>
               ) : (
-                <span className="rounded-full border border-red-200 bg-red-50 px-3 py-1 text-xs font-semibold text-red-700">
+                <span className="rounded-full border border-red-200 dark:border-red-800/60 bg-red-50 dark:bg-red-950/30 px-3 py-1 text-xs font-semibold text-red-700">
                   {L('noMatch', '✗ No match — wrong password or hash')}
                 </span>
               ))}

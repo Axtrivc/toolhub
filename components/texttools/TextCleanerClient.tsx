@@ -103,7 +103,7 @@ export function TextCleanerClient({ slug = 'whitespace-remover' }: { slug?: stri
           <select
             value={opts.joinMode}
             onChange={(e) => setOpt('joinMode', e.target.value as Options['joinMode'])}
-            className="rounded border bg-white px-2 py-1 text-xs"
+            className="rounded border bg-white px-2 py-1 text-xs dark:bg-slate-800 dark:text-slate-100"
             style={{ borderColor: 'rgb(var(--border-strong))', color: 'rgb(var(--text))' }}
           >
             <option value="newline">{L('joinNewline', 'Newlines (multi-line)')}</option>
@@ -116,7 +116,7 @@ export function TextCleanerClient({ slug = 'whitespace-remover' }: { slug?: stri
       {/* 输入区 */}
       <div>
         <div className="mb-2 flex items-center justify-between">
-          <label htmlFor="text-input" className="text-sm font-medium text-slate-700">
+          <label htmlFor="text-input" className="text-sm font-medium text-slate-700 dark:text-slate-300">
             {L('yourText', 'Your text')}
           </label>
           <div className="flex items-center gap-2">

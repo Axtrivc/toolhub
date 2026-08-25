@@ -197,7 +197,7 @@ export function FindReplaceClient() {
       {/* 正文输入区 */}
       <div>
         <div className="mb-2 flex items-center justify-between">
-          <label htmlFor="fr-text" className="text-sm font-medium text-slate-700">
+          <label htmlFor="fr-text" className="text-sm font-medium text-slate-700 dark:text-slate-300">
             {L('inputLabel', 'Your text')}
           </label>
           {text && (
@@ -224,7 +224,7 @@ export function FindReplaceClient() {
       {/* Find / Replace */}
       <div className="grid gap-3 sm:grid-cols-2">
         <div>
-          <label htmlFor="fr-find" className="mb-1.5 block text-sm font-medium text-slate-700">
+          <label htmlFor="fr-find" className="mb-1.5 block text-sm font-medium text-slate-700 dark:text-slate-300">
             {L('findLabel', 'Find')}
           </label>
           <input
@@ -238,7 +238,7 @@ export function FindReplaceClient() {
           />
         </div>
         <div>
-          <label htmlFor="fr-replace" className="mb-1.5 block text-sm font-medium text-slate-700">
+          <label htmlFor="fr-replace" className="mb-1.5 block text-sm font-medium text-slate-700 dark:text-slate-300">
             {L('replaceLabel', 'Replace with')}
           </label>
           <input

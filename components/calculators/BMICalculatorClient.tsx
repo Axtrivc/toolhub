@@ -242,8 +242,8 @@ export function BMICalculatorClient() {
             <tr><td className="px-4 py-2 font-mono">18.5 – 24.9</td><td className="px-4 py-2 text-green-600">{L('catLabel_healthyWeight', 'Healthy weight')}</td></tr>
             <tr><td className="px-4 py-2 font-mono">25.0 – 29.9</td><td className="px-4 py-2 text-yellow-600">{L('catLabel_overweight', 'Overweight')}</td></tr>
             <tr><td className="px-4 py-2 font-mono">30.0 – 34.9</td><td className="px-4 py-2 text-orange-600">{L('catLabel_obeseI', 'Obese (Class I)')}</td></tr>
-            <tr><td className="px-4 py-2 font-mono">35.0 – 39.9</td><td className="px-4 py-2 text-red-600">{L('catLabel_obeseII', 'Obese (Class II)')}</td></tr>
-            <tr><td className="px-4 py-2 font-mono">{L('range40Above', '40.0 and above')}</td><td className="px-4 py-2 text-red-700">{L('catLabel_obeseIII', 'Obese (Class III)')}</td></tr>
+            <tr><td className="px-4 py-2 font-mono">35.0 – 39.9</td><td className="px-4 py-2 text-red-600 dark:text-red-300">{L('catLabel_obeseII', 'Obese (Class II)')}</td></tr>
+            <tr><td className="px-4 py-2 font-mono">{L('range40Above', '40.0 and above')}</td><td className="px-4 py-2 text-red-700 dark:text-red-300">{L('catLabel_obeseIII', 'Obese (Class III)')}</td></tr>
           </tbody>
         </table>
       </div>

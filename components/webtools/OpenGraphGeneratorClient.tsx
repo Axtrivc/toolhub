@@ -125,7 +125,7 @@ export function OpenGraphGeneratorClient() {
       {/* 输入区 */}
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <div className="sm:col-span-2">
-          <label htmlFor="og-title" className="mb-1 block text-sm font-medium text-slate-700">
+          <label htmlFor="og-title" className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-300">
             {L('titleLabel', 'Title')}
           </label>
           <input
@@ -147,7 +147,7 @@ export function OpenGraphGeneratorClient() {
           </div>
         </div>
         <div className="sm:col-span-2">
-          <label htmlFor="og-desc" className="mb-1 block text-sm font-medium text-slate-700">
+          <label htmlFor="og-desc" className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-300">
             {L('descriptionLabel', 'Description')}
           </label>
           <textarea
@@ -169,7 +169,7 @@ export function OpenGraphGeneratorClient() {
           </div>
         </div>
         <div>
-          <label htmlFor="og-url" className="mb-1 block text-sm font-medium text-slate-700">
+          <label htmlFor="og-url" className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-300">
             {L('pageUrlLabel', 'Page URL')}
           </label>
           <input
@@ -183,7 +183,7 @@ export function OpenGraphGeneratorClient() {
           />
         </div>
         <div>
-          <label htmlFor="og-site" className="mb-1 block text-sm font-medium text-slate-700">
+          <label htmlFor="og-site" className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-300">
             {L('siteNameLabel', 'Site Name (optional)')}
           </label>
           <input
@@ -197,7 +197,7 @@ export function OpenGraphGeneratorClient() {
           />
         </div>
         <div className="sm:col-span-2">
-          <label htmlFor="og-image" className="mb-1 block text-sm font-medium text-slate-700">
+          <label htmlFor="og-image" className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-300">
             {L('imageUrlLabel', 'Image URL')}
           </label>
           <input
@@ -211,7 +211,7 @@ export function OpenGraphGeneratorClient() {
           />
         </div>
         <div className="sm:col-span-2">
-          <label htmlFor="og-image-alt" className="mb-1 block text-sm font-medium text-slate-700">
+          <label htmlFor="og-image-alt" className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-300">
             {L('imageAltLabel', 'Image alt text (optional)')}
           </label>
           <input
@@ -225,7 +225,7 @@ export function OpenGraphGeneratorClient() {
           />
         </div>
         <div className="sm:col-span-2">
-          <label htmlFor="og-card" className="mb-1 block text-sm font-medium text-slate-700">
+          <label htmlFor="og-card" className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-300">
             {L('twitterCardTypeLabel', 'Twitter Card Type')}
           </label>
           <select
@@ -340,7 +340,7 @@ export function OpenGraphGeneratorClient() {
             <CopyButton value={metaTags} label={L('copy', 'Copy')} />
           </div>
           <pre
-            className="overflow-x-auto rounded-lg border bg-slate-50 p-4 text-xs"
+            className="overflow-x-auto rounded-lg border bg-slate-50 p-4 text-xs dark:bg-slate-800/60"
             style={{ borderColor: 'rgb(var(--border))' }}
           >
             <code>{metaTags}</code>

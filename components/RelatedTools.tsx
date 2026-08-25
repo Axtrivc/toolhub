@@ -72,7 +72,7 @@ export function RelatedTools({ slug, limit = 4 }: RelatedToolsProps) {
               <div className="flex items-start justify-between">
                 {/* 工具图标(与首页 ToolCard 同款);Hover 弹簧缩放 1.08 */}
                 <span
-                  className="flex h-11 w-11 items-center justify-center rounded-lg bg-slate-100 p-2 text-slate-600 transition-transform duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:scale-[1.08] dark:border dark:border-blue-800/40 dark:bg-blue-950/30"
+                  className="flex h-11 w-11 items-center justify-center rounded-lg bg-slate-100 p-2 text-slate-600 transition-transform dark:text-slate-300 duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:scale-[1.08] dark:border dark:border-blue-800/40 dark:bg-blue-950/30"
                   aria-hidden="true"
                 >
                   <SmartIcon icon={getToolIcon(tool)} className="h-5 w-5" />

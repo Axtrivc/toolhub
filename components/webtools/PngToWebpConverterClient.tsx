@@ -199,14 +199,14 @@ export function PngToWebpConverterClient() {
 
       {/* 错误提示 */}
       {error && (
-        <div className="rounded-lg border border-red-200 bg-red-50 p-4 text-sm text-red-700">
+        <div className="rounded-lg border border-red-200 dark:border-red-800/60 bg-red-50 dark:bg-red-950/30 p-4 text-sm text-red-700">
           ⚠️ {error}
         </div>
       )}
 
       {/* 浏览器不支持 WebP 编码 */}
       {unsupported && (
-        <div className="rounded-lg border border-red-200 bg-red-50 p-4 text-sm text-red-700">
+        <div className="rounded-lg border border-red-200 dark:border-red-800/60 bg-red-50 dark:bg-red-950/30 p-4 text-sm text-red-700">
           ⚠️ {L('errUnsupportedWebp', 'Your browser cannot encode WebP (canvas.toBlob fell back to PNG). This affects older versions of Safari — please use a current Chrome, Edge, Firefox, or Safari 14+ to convert.')}
         </div>
       )}

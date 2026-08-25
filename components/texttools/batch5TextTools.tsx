@@ -73,7 +73,7 @@ export function HashGeneratorClient() {
       <button onClick={generate} disabled={loading || !input} className="btn btn-primary disabled:opacity-50">
         {loading ? L('hashing', 'Hashing…') : L('generateHashes', '# Generate Hashes')}
       </button>
-      {error && <p className="text-sm text-red-600">{error}</p>}
+      {error && <p className="text-sm text-red-600 dark:text-red-300">{error}</p>}
       {hash && (
         <HashResult
           label={algo}

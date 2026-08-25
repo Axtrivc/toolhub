@@ -68,7 +68,7 @@ export function AspectRatioClient() {
     <div className="space-y-5">
       {/* 比例输入 + 预设 */}
       <div>
-        <label htmlFor="ar-ratio-w" className="mb-2 block text-sm font-medium text-slate-700">{L('aspectRatio', 'Aspect Ratio')}</label>
+        <label htmlFor="ar-ratio-w" className="mb-2 block text-sm font-medium text-slate-700 dark:text-slate-300">{L('aspectRatio', 'Aspect Ratio')}</label>
         <div className="flex items-center gap-2">
           <input
             id="ar-ratio-w"

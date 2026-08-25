@@ -5,8 +5,9 @@ import { useApp } from './providers/AppProviders'
 import { t } from '@/lib/i18n'
 
 interface LoadSampleButtonProps {
-  /** 点击后回调,由父组件负责把示例数据写回各 input state */
-  onLoad: () => void
+  /** 点击后回调,由父组件负责把示例数据写回各 input state。
+   *  返回 false 表示本次点击只是 arm 覆盖确认(未真正填充),按钮不闪成功反馈 */
+  onLoad: () => void | false
   /** 无示例数据时父组件应直接不渲染本按钮(这里 disabled 作兜底) */
   disabled?: boolean
   /** 按钮尺寸变体 */
@@ -48,15 +49,15 @@ export function LoadSampleButton({
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   const handleClick = useCallback(() => {
-    onLoad()
-    // 确认覆盖态的第一次点击只是 arm(父组件 return,未真正填充),
-    // 不闪"✓ loaded"成功反馈;真正执行 onLoad 的那次(非确认态)才展示
-    if (!confirmOverwrite) {
+    const applied = onLoad()
+    // onLoad 返回 false = 这次点击只是 arm 覆盖确认(未真正填充),不闪成功反馈;
+    // 返回 true/undefined(旧消费者无返回值,恒为填充语义)才展示"✓ loaded"
+    if (applied !== false) {
       setLoaded(true)
       if (timerRef.current) clearTimeout(timerRef.current)
       timerRef.current = setTimeout(() => setLoaded(false), 1500)
     }
-  }, [onLoad, confirmOverwrite])
+  }, [onLoad])
 
   useEffect(
     () => () => {

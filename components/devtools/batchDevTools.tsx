@@ -153,7 +153,7 @@ export function PasswordStrengthCheckerClient() {
             <ResultCard label={L('entropy', 'Entropy')} value={`${analysis.entropy} ${L('bits', 'bits')}`} />
           </div>
           {(analysis.isCommon || analysis.hasSequence) && (
-            <div className="space-y-1 rounded-lg border border-red-200 bg-red-50 p-4 text-sm text-red-700">
+            <div className="space-y-1 rounded-lg border border-red-200 dark:border-red-800/60 bg-red-50 dark:bg-red-950/30 p-4 text-sm text-red-700">
               {analysis.isCommon && (
                 <p>⚠️ {L('commonPasswordWarning', 'This is one of the most commonly used passwords — it can be cracked almost instantly.')}</p>
               )}
