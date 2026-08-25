@@ -144,6 +144,7 @@ export const SalesTaxCalculatorClient = makeCalculatorClient({
 // ───────────────────────────────────────────
 export const CompoundInterestCalculatorClient = makeCalculatorClient({
   slug: 'compound-interest-calculator',
+  urlState: true,
   inputs: [
     { key: 'principal', label: 'Initial investment', suffix: '$', default: '10000' },
     { key: 'monthly', label: 'Monthly contribution', suffix: '$', default: '200' },

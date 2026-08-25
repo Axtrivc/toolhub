@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useMemo, useCallback, useEffect, type ComponentType } from 'react'
+import { useState, useMemo, useCallback, useEffect, useRef, type ComponentType } from 'react'
 import { CalculatorField, ResultCard, CalculatorNote } from './CalculatorField'
 import { BreakdownChart } from './BreakdownChart'
 import { ResultActions } from '../ResultActions'
@@ -68,12 +68,49 @@ export function makeCalculatorClient(config: CalculatorConfig): ComponentType {
     const outLabel = (key: string, fb: string) => L(`out.${key}`, fb)
     const outSub = (key: string, fb: string) => L(`outSub.${key}`, fb)
 
-    // 初始化输入为各字段的默认值
+    // 初始化输入为各字段的默认值;开启 urlState 的工具挂载后由 syncUrl 读回真实值
     const [values, setValues] = useState<Record<string, string>>(() => {
       const init: Record<string, string> = {}
       for (const f of config.inputs) init[f.key] = f.default
       return init
     })
+
+    // URL 状态同步(config.urlState):挂载时从 ?key=value 恢复输入;
+    // 之后每次变化 replaceState 写回(默认值的字段从 URL 移除,保持链接干净)。
+    // 与 useUrlState 相同的 hydration 策略:首帧恒为 default,不产生 mismatch。
+    const urlHydrated = useRef(false)
+    useEffect(() => {
+      if (!config.urlState || typeof window === 'undefined') return
+      if (!urlHydrated.current) {
+        urlHydrated.current = true
+        const params = new URLSearchParams(window.location.search)
+        setValues((prev) => {
+          const next = { ...prev }
+          let touched = false
+          for (const f of config.inputs) {
+            const fromUrl = params.get(f.key)
+            if (fromUrl != null) {
+              next[f.key] = fromUrl
+              touched = true
+            }
+          }
+          return touched ? next : prev
+        })
+        return
+      }
+      const url = new URL(window.location.href)
+      for (const f of config.inputs) {
+        const v = valuesRef.current[f.key] ?? ''
+        if (v === '' || v === f.default) url.searchParams.delete(f.key)
+        else url.searchParams.set(f.key, v)
+      }
+      window.history.replaceState({}, '', url.toString())
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [values, config.urlState])
+
+    // values 的镜像 ref:urlState effect 依赖 values 但读取镜像,避免闭包过期
+    const valuesRef = useRef(values)
+    valuesRef.current = values
 
     // 用户是否编辑过任何字段(pristine 门控):决定 Load Sample 的行为与 Reset 是否显示
     const [dirty, setDirty] = useState(false)

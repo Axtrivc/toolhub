@@ -885,6 +885,7 @@ export const MarkupCalculatorClient = makeCalculatorClient({
 
 export const MortgageCalculatorClient = makeCalculatorClient({
   slug: 'mortgage-calculator',
+  urlState: true,
   inputs: [
     { key: 'home', label: 'Home price', suffix: '$', default: '400000' },
     { key: 'down', label: 'Down payment', suffix: '%', default: '20' },

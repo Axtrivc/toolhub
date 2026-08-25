@@ -82,6 +82,14 @@ export interface CalculatorConfig {
    * 未声明的计算器不受影响。
    */
   chart?: ChartConfig
+  /**
+   * URL 状态同步(可选,默认关闭)。
+   * 开启后每个输入字段以 ?<key>=<value> 形式同步进 URL(replaceState):
+   * 刷新/分享链接都能恢复输入。只建议给输入少、复访率高的工具开启
+   * (如 mortgage/loan);长表单或含敏感字段的工具不要开(URL 会留在
+   * 浏览器历史里)。
+   */
+  urlState?: boolean
 }
 
 /**
