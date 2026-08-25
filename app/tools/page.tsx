@@ -1,9 +1,13 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { getToolsByCategory, getPublishedTools, getToolIcon } from '@/lib/tools'
-import { SmartIcon } from '@/components/SmartIcon'
+import { getToolsByCategory, getPublishedTools } from '@/lib/tools'
 import { SITE_NAME, jsonLdStringify } from '@/lib/seo'
 import { buildItemListJsonLd } from '@/lib/seo'
+import {
+  ToolDirectoryCard,
+  ToolDirectoryHeading,
+  ToolDirectoryHeroBody,
+} from '@/components/ToolDirectoryCards'
 
 export const metadata: Metadata = {
   title: 'All Tools',
@@ -45,15 +49,12 @@ export default function ToolsHubPage() {
         dangerouslySetInnerHTML={{ __html: jsonLdStringify(itemListLd) }}
       />
 
-      {/* Hero */}
+      {/* Hero(标题复用 navAllTools;说明/链接经客户端组件取当前语言) */}
       <section className="mx-auto mb-12 max-w-3xl text-center">
         <h1 className="text-4xl font-bold sm:text-5xl" style={{ color: 'rgb(var(--text))' }}>
           All Tools
         </h1>
-        <p className="mt-5 text-lg" style={{ color: 'rgb(var(--text-muted))' }}>
-          {all.length}+ free online tools across finance, math, health, unit conversion, text, and
-          developer utilities. Pick a category below or <Link href="/" className="text-brand-600 underline">search from the home page</Link>.
-        </p>
+        <ToolDirectoryHeroBody count={all.length} />
       </section>
 
       {/* 分类目录快速跳转 —— 统一回首页并选中分类(与首页交互一致),
@@ -75,55 +76,19 @@ export default function ToolsHubPage() {
         ))}
       </nav>
 
-      {/* 分类分组展示全量工具 */}
+      {/* 分类分组展示全量工具(卡片/标题由客户端组件本地化) */}
       {categories.map(([category, categoryTools]) => (
         <section key={category} id={category} className="mb-12 scroll-mt-20">
-          <h2 className="mb-5 text-2xl font-bold" style={{ color: 'rgb(var(--text))' }}>
-            {category}
-            <span className="ml-2 text-base font-normal" style={{ color: 'rgb(var(--text-faint))' }}>
-              {categoryTools.length}
-            </span>
-          </h2>
+          <ToolDirectoryHeading category={category} count={categoryTools.length} />
           <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {categoryTools.map((tool) => (
-              <Link
-                key={tool.slug}
-                href={`/tools/${tool.slug}/`}
-                className="group rounded-xl border p-6 shadow-sm transition-all hover:-translate-y-0.5 hover:border-brand-300 hover:shadow-md"
-                style={{
-                  borderColor: 'rgb(var(--border))',
-                  backgroundColor: 'rgb(var(--bg-card))',
-                }}
-              >
-                <div className="flex items-start justify-between">
-                  {/* 工具图标:全站统一的 getToolIcon(slug 优先 / category 兜底),
-                      不再使用默认播放按钮 ▶ 图标。 */}
-                  <span
-                    className="flex h-11 w-11 items-center justify-center rounded-xl transition-transform group-hover:scale-110"
-                    style={{ backgroundColor: 'rgb(var(--bg-subtle))' }}
-                    aria-hidden="true"
-                  >
-                    <SmartIcon icon={getToolIcon(tool)} className="h-5 w-5" />
-                  </span>
-                  {/* 右上角显示分类(替代原 PRO/FREE 徽章 —— 工具全免费,
-                      PRO 字样会误导用户)。 */}
-                  <span className="text-xs font-medium uppercase tracking-wide" style={{ color: 'rgb(var(--text-faint))' }}>
-                    {tool.category}
-                  </span>
-                </div>
-                <h3 className="mt-4 text-lg font-semibold group-hover:text-brand-600" style={{ color: 'rgb(var(--text))' }}>
-                  {tool.name}
-                </h3>
-                <p className="mt-2 text-sm" style={{ color: 'rgb(var(--text-subtle))' }}>
-                  {tool.shortIntro}
-                </p>
-              </Link>
+              <ToolDirectoryCard key={tool.slug} tool={tool} />
             ))}
           </div>
         </section>
       ))}
 
-      {/* SEO 文案区 */}
+      {/* SEO 文案区(静态导出 SSR 恒英文;SEO 文案不跟随语言切换,保持抓取稳定) */}
       <section className="prose-content mt-16 max-w-3xl">
         <h2>One Toolbox for Everyday Tasks</h2>
         <p>

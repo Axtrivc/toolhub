@@ -65,6 +65,11 @@ export function isLocale(v: unknown): v is Locale {
 export interface Dict {
   // Header 导航
   navAllTools: string
+  toolsDirHeroBody: string // /tools 目录页 hero 说明(含 {count})
+  toolsDirCta: string // "search from the home page" 链接文案
+  toolsDirSeoTitle: string // 目录页底部 SEO 标题
+  toolsDirSeoP1: string
+  toolsDirSeoP2: string
   navAbout: string
   navBlog: string
   navContact: string
@@ -287,6 +292,11 @@ export interface Dict {
 
 const en: Dict = {
   navAllTools: 'All Tools',
+  toolsDirHeroBody: "{count}+ free online tools across finance, math, health, unit conversion, text, and developer utilities. Pick a category below or search from the home page.",
+  toolsDirCta: "search from the home page",
+  toolsDirSeoTitle: "One Toolbox for Everyday Tasks",
+  toolsDirSeoP1: "Instead of hunting down a different website for every small job, ToolHub puts the utilities you reach for most in one place. Need to convert kilograms to pounds, calculate a mortgage payment, format a JSON payload, or generate a strong password? It is all here, and it all runs locally in your browser.",
+  toolsDirSeoP2: "Every tool on this page is free with no signup and no upload. That means nothing you type ever leaves your device, which matters for sensitive inputs like salary figures, health numbers, or code snippets. Bookmark this page — we add new tools regularly based on what readers actually search for.",
   navAbout: 'About',
   navBlog: 'Blog',
   navContact: 'Contact',
@@ -484,6 +494,11 @@ const en: Dict = {
 
 const zh: Dict = {
   navAllTools: '全部工具',
+  toolsDirHeroBody: "{count}+ 个免费在线工具,覆盖金融、数学、健康、单位换算、文本和开发者实用程序。在下方选择分类,或从首页搜索。",
+  toolsDirCta: "从首页搜索",
+  toolsDirSeoTitle: "一个工具箱,搞定日常所有任务",
+  toolsDirSeoP1: "不必再为每个小任务翻找不同的网站——ToolHub 把你最常用的实用工具集中在一处。公斤换算磅、计算房贷月供、格式化 JSON、生成强密码?全都在这里,而且全部在你的浏览器本地运行。",
+  toolsDirSeoP2: "本页所有工具免费、无需注册、不上传任何数据。你输入的内容(薪资、健康数据、代码片段等敏感信息)永远不会离开你的设备。收藏本页——我们会根据读者的真实搜索持续新增工具。",
   navAbout: '关于',
   navBlog: '博客',
   navContact: '联系',
@@ -679,6 +694,11 @@ const zh: Dict = {
 
 const es: Dict = {
   navAllTools: 'Todas las herramientas',
+  toolsDirHeroBody: "{count}+ herramientas online gratuitas de finanzas, matemáticas, salud, conversión de unidades, texto y utilidades para desarrolladores. Elige una categoría abajo o busca desde la página principal.",
+  toolsDirCta: "buscar desde la página principal",
+  toolsDirSeoTitle: "Una caja de herramientas para el día a día",
+  toolsDirSeoP1: "En lugar de buscar una web distinta para cada tarea pequeña, ToolHub reúne en un solo lugar las utilidades que más usas. ¿Convertir kilos a libras, calcular una hipoteca, formatear JSON o generar una contraseña fuerte? Está todo aquí y funciona localmente en tu navegador.",
+  toolsDirSeoP2: "Todas las herramientas son gratuitas, sin registro y sin subidas: lo que escribas nunca sale de tu dispositivo, importante con datos sensibles como salarios, cifras de salud o código. Guarda esta página — añadimos herramientas nuevas según lo que la gente busca de verdad.",
   navAbout: 'Acerca de',
   navBlog: 'Blog',
   navContact: 'Contacto',
@@ -875,6 +895,11 @@ const es: Dict = {
 
 const de: Dict = {
   navAllTools: 'Alle Werkzeuge',
+  toolsDirHeroBody: "{count}+ kostenlose Online-Tools aus Finanzen, Mathematik, Gesundheit, Einheitenumrechnung, Text und Entwicklerwerkzeugen. Wähle unten eine Kategorie oder suche von der Startseite.",
+  toolsDirCta: "von der Startseite suchen",
+  toolsDirSeoTitle: "Ein Werkzeugkasten für alltägliche Aufgaben",
+  toolsDirSeoP1: "Statt für jede kleine Aufgabe eine andere Website zu suchen, findest du in ToolHub die meistgenutzten Helfer an einem Ort. Kilogramm in Pfund umrechnen, eine Hypothek berechnen, JSON formatieren oder ein starkes Passwort erzeugen? Alles hier – und alles läuft lokal in deinem Browser.",
+  toolsDirSeoP2: "Alle Tools sind kostenlos, ohne Anmeldung und ohne Upload. Was du eingibst, verlässt dein Gerät nie – wichtig bei sensiblen Angaben wie Gehaltszahlen, Gesundheitswerten oder Code. Speichere diese Seite – neue Tools kommen regelmäßig dazu.",
   navAbout: 'Über',
   navBlog: 'Blog',
   navContact: 'Kontakt',
