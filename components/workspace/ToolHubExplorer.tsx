@@ -57,20 +57,49 @@ export function ToolHubExplorer({ tools, query, onQueryChange }: ToolHubExplorer
   const [activeHubId, setActiveHubId] = useState<string | null>(null)
 
   // 首次挂载读 URL:?hub=<id> 直接选中;?category=<真实分类> 映射所属主题。
-  // 只读一次,不覆盖后续手动切换。
+  // 之后监听 popstate + 同路由导航:footer 的 /?category=… 深链在已处于首页时
+  // 是 same-route navigation,URL 变了但组件不会重挂载,需手动重新同步。
   useEffect(() => {
-    if (typeof window === 'undefined') return
-    const params = new URLSearchParams(window.location.search)
-    const hubId = params.get('hub')
-    if (hubId && findHubById(hubId)) {
-      setActiveHubId(hubId)
-      return
+    const syncFromUrl = () => {
+      const params = new URLSearchParams(window.location.search)
+      const hubId = params.get('hub')
+      if (hubId && findHubById(hubId)) {
+        setActiveHubId(hubId)
+        return
+      }
+      setActiveHubId(null)
+      const cat = params.get('category')
+      if (cat) {
+        const hub = findHubByCategory(cat)
+        if (hub) setActiveHubId(hub.id)
+      }
     }
-    const cat = params.get('category')
-    if (cat) {
-      const hub = findHubByCategory(cat)
-      if (hub) setActiveHubId(hub.id)
-    }
+    syncFromUrl()
+    window.addEventListener('popstate', syncFromUrl)
+    return () => window.removeEventListener('popstate', syncFromUrl)
+  }, [])
+
+  // Next.js 客户端路由的 ?category= 变更不触发 popstate,轮询比对兜底(轻量:仅字符串比较)
+  useEffect(() => {
+    let last = typeof window !== 'undefined' ? window.location.search : ''
+    const id = window.setInterval(() => {
+      if (window.location.search !== last) {
+        last = window.location.search
+        const params = new URLSearchParams(last)
+        const hubId = params.get('hub')
+        if (hubId && findHubById(hubId)) {
+          setActiveHubId(hubId)
+          return
+        }
+        setActiveHubId(null)
+        const cat = params.get('category')
+        if (cat) {
+          const hub = findHubByCategory(cat)
+          if (hub) setActiveHubId(hub.id)
+        }
+      }
+    }, 300)
+    return () => window.clearInterval(id)
   }, [])
 
   const selectHub = (id: string) => {

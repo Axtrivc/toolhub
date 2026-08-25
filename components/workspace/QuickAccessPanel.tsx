@@ -39,7 +39,7 @@ function formatRecentTime(at: number): string {
 
 export function QuickAccessPanel() {
   const { locale } = useApp()
-  const { pinned, recent, pinnedReady, recentReady } = useWorkspace()
+  const { pinned, recent, pinnedReady, recentReady, clearRecent } = useWorkspace()
 
   const bySlug = useMemo(() => {
     const map = new Map<string, ToolMeta>()
@@ -142,6 +142,16 @@ export function QuickAccessPanel() {
         <h3 className="mb-2.5 flex items-center gap-1.5 font-mono text-[11px] font-medium uppercase tracking-wider text-slate-400 dark:text-slate-500">
           <Clock className="h-3 w-3" aria-hidden="true" />
           {t(locale, 'workspaceRecentTitle')}
+          {recentEntries.length > 0 && (
+            <button
+              type="button"
+              onClick={clearRecent}
+              className="ml-auto rounded px-1.5 py-0.5 text-[10px] normal-case tracking-normal transition-colors hover:bg-slate-100 hover:text-red-500 dark:hover:bg-slate-800"
+              title={t(locale, 'workspaceRecentClear')}
+            >
+              {t(locale, 'workspaceRecentClear')}
+            </button>
+          )}
         </h3>
         {recentEntries.length === 0 ? (
           <p className="rounded-lg border border-dashed border-slate-300 px-3 py-4 text-center text-xs text-slate-400 dark:border-slate-700 dark:text-slate-500">

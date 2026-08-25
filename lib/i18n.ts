@@ -135,6 +135,7 @@ export interface Dict {
   workspacePinnedTitle: string // "Pinned Tools"
   workspacePinnedEmpty: string // 空态引导文案
   workspaceRecentTitle: string // "Recent"
+  workspaceRecentClear: string // "Clear recent"
   workspacePin: string // 图钉 aria:"Pin to workspace"
   workspaceUnpin: string // "Unpin"
   // 首页 Scratchpad 随手记
@@ -346,6 +347,7 @@ const en: Dict = {
   workspacePinnedTitle: 'Pinned Tools',
   workspacePinnedEmpty: 'Nothing pinned yet — hit the pin on any tool card to dock it here.',
   workspaceRecentTitle: 'Recent Tools',
+  workspaceRecentClear: 'Clear',
   workspacePin: 'Pin to workspace',
   workspaceUnpin: 'Unpin',
   scratchpadTitle: 'Scratchpad & Quick Utility',
@@ -542,6 +544,7 @@ const zh: Dict = {
   workspacePinnedTitle: '已固定工具',
   workspacePinnedEmpty: '还没有固定工具 —— 点击任意工具卡片上的图钉,把它固定到这里。',
   workspaceRecentTitle: '最近使用',
+  workspaceRecentClear: '清空',
   workspacePin: '固定到工作台',
   workspaceUnpin: '取消固定',
   scratchpadTitle: '随手记与快捷工具',
@@ -736,6 +739,7 @@ const es: Dict = {
   workspacePinnedTitle: 'Herramientas fijadas',
   workspacePinnedEmpty: 'Nada fijado aún — toca el pin en cualquier tarjeta para anclarla aquí.',
   workspaceRecentTitle: 'Herramientas recientes',
+  workspaceRecentClear: 'Borrar',
   workspacePin: 'Fijar al workspace',
   workspaceUnpin: 'Quitar fijación',
   scratchpadTitle: 'Bloc y utilidades rápidas',
@@ -931,6 +935,7 @@ const de: Dict = {
   workspacePinnedTitle: 'Angepinnte Tools',
   workspacePinnedEmpty: 'Noch nichts angepinnt — tippe auf die Pinnadel einer Tool-Karte, um sie hier abzulegen.',
   workspaceRecentTitle: 'Zuletzt genutzt',
+  workspaceRecentClear: 'Leeren',
   workspacePin: 'An Workspace pinnen',
   workspaceUnpin: 'Pin entfernen',
   scratchpadTitle: 'Notizblock & Quick-Tools',

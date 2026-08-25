@@ -42,6 +42,8 @@ export interface WorkspaceState {
   /** 最近使用条目(最新在前,最多 5 条;每条带 at 时间戳) */
   recent: RecentEntry[]
   recentReady: boolean
+  /** 清空最近使用记录 */
+  clearRecent: () => void
 
   /* ── Scratchpad ── */
   /** 随手记内容(挂载前为空串) */
@@ -63,7 +65,7 @@ function readScratchpad(): string {
 
 export function useWorkspace(): WorkspaceState {
   const { favorites, isFavorite, toggleFavorite, favoritesReady } = useFavorites()
-  const { recentlyUsed, recentlyReady } = useRecentlyUsed()
+  const { recentlyUsed, recentlyReady, clearRecentlyUsed } = useRecentlyUsed()
 
   const [scratchpad, setScratchpadState] = useState('')
   const [scratchpadReady, setScratchpadReady] = useState(false)
@@ -105,6 +107,7 @@ export function useWorkspace(): WorkspaceState {
     pinnedReady: favoritesReady,
     recent: recentlyUsed,
     recentReady: recentlyReady,
+    clearRecent: clearRecentlyUsed,
     scratchpad,
     setScratchpad,
     clearScratchpad,

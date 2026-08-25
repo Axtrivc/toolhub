@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { getPublishedTools } from '@/lib/tools'
+import { getFeaturedTools } from '@/lib/tools'
 import { t, getToolName, getToolShortIntro } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
@@ -12,8 +12,8 @@ import { useApp } from '@/components/providers/AppProviders'
  */
 export default function NotFound() {
   const { locale } = useApp()
-  const tools = getPublishedTools()
-  const popular = tools.slice(0, 6)
+  // 文案承诺 "popular tools",渲染 curated featured 集而非注册表顺序前 6 个
+  const popular = getFeaturedTools().slice(0, 6)
 
   return (
     <div className="container-page flex min-h-[60vh] flex-col items-center justify-center py-20 text-center">
