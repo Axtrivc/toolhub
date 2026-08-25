@@ -254,6 +254,10 @@ import { CarCostCalculatorL10n } from './tools-l10n/car-cost-calculator'
 import { ContextWindowCheckerL10n } from './tools-l10n/context-window-checker'
 import { JsonToZodL10n } from './tools-l10n/json-to-zod'
 import { LlmCostCalculatorL10n } from './tools-l10n/llm-cost-calculator'
+import { JsonRepairL10n } from './tools-l10n/json-repair'
+import { MarkdownFenceExtractorL10n } from './tools-l10n/markdown-fence-extractor'
+import { OpenaiToolsBuilderL10n } from './tools-l10n/openai-tools-builder'
+import { PromptTemplateFillerL10n } from './tools-l10n/prompt-template-filler'
 
 const registry: Record<string, ToolL10n> = {
   'loan-calculator': loanCalculatorL10n,
@@ -474,6 +478,10 @@ const registry: Record<string, ToolL10n> = {
   'context-window-checker': ContextWindowCheckerL10n,
   'json-to-zod': JsonToZodL10n,
   'llm-cost-calculator': LlmCostCalculatorL10n,
+  'json-repair': JsonRepairL10n,
+  'markdown-fence-extractor': MarkdownFenceExtractorL10n,
+  'openai-tools-builder': OpenaiToolsBuilderL10n,
+  'prompt-template-filler': PromptTemplateFillerL10n,
 }
 
 /**

@@ -143,6 +143,17 @@ export const calculatorSamples: Record<string, Record<string, string>> = {
     json: '{\n  "name": "Ada Lovelace",\n  "born": 1815,\n  "verified": true,\n  "tags": ["math", "pioneer"],\n  "profile": { "era": "victorian", "fields": ["analytical engine"] }\n}',
   },
   'car-cost-calculator': { carPrice: '25000', ownYears: '5', kmPerYear: '15000', fuelPrice: '1.6', consumption: '7.5', insurance: '1200', maintenance: '800', resale: '12000' },
+  // ── 2025-08 batch7(AI workflow)
+  'json-repair': {
+    input: 'Here is the data you asked for:\n```json\n{"user": "Ada", age: 36, "tags": [\'math\', \'pioneer\'],}\n```',
+  },
+  'markdown-fence-extractor': {
+    md: 'Solution overview here.\n```python\ndef greet(name):\n    return f"hello {name}"\n```\nRun tests:\n```bash\npytest -q\n```',
+  },
+  'prompt-template-filler': {
+    template: 'You are a {role}. Explain {{topic}} to {{audience}} in {words} words.',
+    vars: '{\n  "role": "senior dev",\n  "topic": "closures",\n  "audience": "beginners",\n  "words": 100\n}',
+  },
 }
 
 // ─────────────────────────── 单位转换器示例 ───────────────────────────
