@@ -138,6 +138,11 @@ export const calculatorSamples: Record<string, Record<string, string>> = {
   // ── 2025-08 第五批(趣味)──
   'wheel-spinner': { items: 'Pizza\nSushi\nTacos\nBurgers\nPasta\nSalad' },
   'morse-code-translator': { text: 'SOS we are here' },
+  // ── 2025-08 第六批(AI+安全+养车)──
+  'json-to-zod': {
+    json: '{\n  "name": "Ada Lovelace",\n  "born": 1815,\n  "verified": true,\n  "tags": ["math", "pioneer"],\n  "profile": { "era": "victorian", "fields": ["analytical engine"] }\n}',
+  },
+  'car-cost-calculator': { carPrice: '25000', ownYears: '5', kmPerYear: '15000', fuelPrice: '1.6', consumption: '7.5', insurance: '1200', maintenance: '800', resale: '12000' },
 }
 
 // ─────────────────────────── 单位转换器示例 ───────────────────────────

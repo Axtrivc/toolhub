@@ -1,7 +1,7 @@
 'use client'
 
 import { makeCalculatorClient } from '../calculator/makeCalculatorClient'
-import { fmtNum, toNum, toNumStrict } from '@/lib/format'
+import { fmtNum, fmtUSD, toNum, toNumStrict } from '@/lib/format'
 import { tui } from '@/lib/i18n/tool-l10n'
 
 /**
@@ -237,4 +237,59 @@ export const ElectricityCostCalculatorClient = makeCalculatorClient({
     }
   },
   note: '⚡ Find the wattage on the appliance label or its spec sheet. Heaters and dryers (1500-5000 W) dwarf laptops (≈50 W); the yearly line is where surprises live.',
+})
+
+// ── 养车总成本计算器 ──
+export const CarCostCalculatorClient = makeCalculatorClient({
+  slug: 'car-cost-calculator',
+  urlState: true,
+  inputs: [
+    { key: 'carPrice', label: 'Car purchase price', suffix: '$', default: '25000' },
+    { key: 'ownYears', label: 'Years of ownership', suffix: 'yrs', default: '5' },
+    { key: 'kmPerYear', label: 'Distance driven per year', suffix: 'km', default: '15000' },
+    { key: 'fuelPrice', label: 'Fuel price', suffix: '$/L', default: '1.6' },
+    { key: 'consumption', label: 'Consumption', suffix: 'L/100km', default: '7.5' },
+    { key: 'insurance', label: 'Insurance per year', suffix: '$', default: '1200' },
+    { key: 'maintenance', label: 'Maintenance + tires per year', suffix: '$', default: '800' },
+    { key: 'resale', label: 'Estimated resale value after', suffix: '$', default: '12000' },
+  ],
+  outputs: [
+    { key: 'monthly', label: 'True monthly cost', highlight: true, sublabel: 'All costs ÷ months' },
+    { key: 'yearly', label: 'Cost per year' },
+    { key: 'perKm', label: 'Cost per km' },
+    { key: 'depreciation', label: 'Depreciation total' },
+    { key: 'fuel', label: 'Fuel total' },
+    { key: 'other', label: 'Insurance + maintenance' },
+  ],
+  compute: (v) => {
+    const price = toNumStrict(v.carPrice)
+    const years = toNum(v.ownYears)
+    const kmY = toNum(v.kmPerYear)
+    const fuelP = toNum(v.fuelPrice)
+    const cons = toNum(v.consumption)
+    const ins = toNum(v.insurance)
+    const maint = toNum(v.maintenance)
+    const resale = toNum(v.resale)
+    if (isNaN(price) || price <= 0 || years <= 0 || kmY < 0 || fuelP < 0 || cons < 0 || ins < 0 || maint < 0 || resale < 0 || resale > price) {
+      return {
+        monthly: `⚠️ ${tui('car-cost-calculator', 'en', 'errInvalid', 'Enter valid values (resale must not exceed the purchase price)')}`,
+        yearly: '—', perKm: '—', depreciation: '—', fuel: '—', other: '—',
+      }
+    }
+    const dep = price - resale
+    const fuelTotal = (kmY * cons) / 100 * fuelP * years
+    const otherTotal = (ins + maint) * years
+    const total = dep + fuelTotal + otherTotal
+    const months = years * 12
+    const km = kmY * years
+    return {
+      monthly: fmtUSD(total / months),
+      yearly: fmtUSD(total / years),
+      perKm: km > 0 ? `$${fmtNum(total / km, 3)}` : '—',
+      depreciation: fmtUSD(dep),
+      fuel: fmtUSD(fuelTotal),
+      other: fmtUSD(otherTotal),
+    }
+  },
+  note: '🚗 Depreciation (purchase − resale) is usually the single biggest cost — new cars lose 20-30% in year one. Financing interest, parking, tolls and registration are not included; add them to insurance if significant.',
 })

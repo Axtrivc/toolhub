@@ -249,6 +249,11 @@ import { UnicodeCharacterLookupL10n } from './tools-l10n/unicode-character-looku
 import { WeddingBudgetCalculatorL10n } from './tools-l10n/wedding-budget-calculator'
 import { WheelSpinnerL10n } from './tools-l10n/wheel-spinner'
 import { XmlFormatterL10n } from './tools-l10n/xml-formatter'
+import { AesEncryptDecryptL10n } from './tools-l10n/aes-encrypt-decrypt'
+import { CarCostCalculatorL10n } from './tools-l10n/car-cost-calculator'
+import { ContextWindowCheckerL10n } from './tools-l10n/context-window-checker'
+import { JsonToZodL10n } from './tools-l10n/json-to-zod'
+import { LlmCostCalculatorL10n } from './tools-l10n/llm-cost-calculator'
 
 const registry: Record<string, ToolL10n> = {
   'loan-calculator': loanCalculatorL10n,
@@ -464,6 +469,11 @@ const registry: Record<string, ToolL10n> = {
   'wedding-budget-calculator': WeddingBudgetCalculatorL10n,
   'wheel-spinner': WheelSpinnerL10n,
   'xml-formatter': XmlFormatterL10n,
+  'aes-encrypt-decrypt': AesEncryptDecryptL10n,
+  'car-cost-calculator': CarCostCalculatorL10n,
+  'context-window-checker': ContextWindowCheckerL10n,
+  'json-to-zod': JsonToZodL10n,
+  'llm-cost-calculator': LlmCostCalculatorL10n,
 }
 
 /**

@@ -1115,6 +1115,10 @@ export type CategoryKey =
   | 'Web Design Tools'
   | 'Business Tools'
   | 'Security Tools'
+  | 'AI Tools'
+  | 'Game Tools'
+  | 'Pet Tools'
+  | 'Home Calculators'
 
 const categoryDicts: Record<Locale, Partial<Record<CategoryKey, string>>> = {
   en: {},
@@ -1130,6 +1134,10 @@ const categoryDicts: Record<Locale, Partial<Record<CategoryKey, string>>> = {
     'Web Design Tools': '网页设计工具',
     'Business Tools': '商业工具',
     'Security Tools': '安全工具',
+    'AI Tools': 'AI 工具',
+    'Game Tools': '游戏工具',
+    'Pet Tools': '宠物工具',
+    'Home Calculators': '家居计算器',
   },
   es: {
     'Finance Calculators': 'Calculadoras financieras',
@@ -1143,6 +1151,10 @@ const categoryDicts: Record<Locale, Partial<Record<CategoryKey, string>>> = {
     'Web Design Tools': 'Herramientas de diseño web',
     'Business Tools': 'Herramientas de negocios',
     'Security Tools': 'Herramientas de seguridad',
+    'AI Tools': 'Herramientas de IA',
+    'Game Tools': 'Juegos',
+    'Pet Tools': 'Mascotas',
+    'Home Calculators': 'Calculadoras del hogar',
   },
   de: {
     'Finance Calculators': 'Finanzrechner',
@@ -1156,6 +1168,10 @@ const categoryDicts: Record<Locale, Partial<Record<CategoryKey, string>>> = {
     'Web Design Tools': 'Webdesign-Werkzeuge',
     'Business Tools': 'Business-Werkzeuge',
     'Security Tools': 'Sicherheits-Werkzeuge',
+    'AI Tools': 'KI-Tools',
+    'Game Tools': 'Spiele',
+    'Pet Tools': 'Haustiere',
+    'Home Calculators': 'Haushaltsrechner',
   },
 }
 

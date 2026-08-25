@@ -49,7 +49,7 @@ export const HUB_THEMES: readonly HubTheme[] = [
   {
     id: 'developer',
     icon: Code2,
-    categories: ['Developer Tools', 'Security Tools'],
+    categories: ['Developer Tools', 'Security Tools', 'AI Tools'],
     featuredToolIds: ['json-formatter', 'jwt-decoder', 'gpt-token-counter', 'regex-tester'],
     titleKey: 'hubTitleDeveloper',
     taglineKey: 'hubTaglineDeveloper',
@@ -124,7 +124,7 @@ export const HUB_THEMES: readonly HubTheme[] = [
   {
     id: 'utilities',
     icon: Zap,
-    categories: ['Math Calculators', 'Health Calculators', 'Time Calculators', 'Education Calculators'],
+    categories: ['Math Calculators', 'Health Calculators', 'Time Calculators', 'Education Calculators', 'Game Tools', 'Pet Tools', 'Home Calculators'],
     featuredToolIds: ['reading-speaking-time', 'days-countdown-calculator', 'water-intake-calculator', 'bmi-calculator'],
     titleKey: 'hubTitleUtilities',
     taglineKey: 'hubTaglineUtilities',
