@@ -98,6 +98,21 @@ export const calculatorSamples: Record<string, Record<string, string>> = {
 
   // ── 其它 ──
   'scientific-notation-converter': { number: '12345.678' },
+  // ── 2025-08 新增批次 ──
+  'roman-numeral-converter': { num: '2024', roman: '' },
+  'pace-calculator': { distance: '10', time: '50:00', unit: 'km' },
+  'protein-intake-calculator': { weight: '70', activity: 'moderate', goal: 'gain' },
+  'electricity-cost-calculator': { watts: '1500', hours: '4', rate: '0.15' },
+  // 自定义 client 的示例(json-diff/line-diff/cooking 经 getCalculatorSample 取)
+  'json-diff': {
+    left: '{\n  "version": "1.2.0",\n  "deps": { "react": "^18" },\n  "private": true\n}',
+    right: '{\n  "version": "1.3.0",\n  "deps": { "react": "^19", "vite": "^5" },\n  "private": false\n}',
+  },
+  'line-diff-checker': {
+    left: 'const retries = 3;\nasync function fetchUser(id) {\n  const res = await api.get(`/users/${id}`);\n  return res.data;\n}',
+    right: 'const retries = 5;\nasync function fetchUser(id) {\n  const res = await api.get(`/users/${id}`);\n  if (!res.ok) throw new Error("not found");\n  return res.data;\n}',
+  },
+  'cooking-converter': { amount: '3', from: 'cup', ingredient: 'flour' },
 }
 
 // ─────────────────────────── 单位转换器示例 ───────────────────────────

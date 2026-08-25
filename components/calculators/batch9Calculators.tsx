@@ -1,0 +1,240 @@
+'use client'
+
+import { makeCalculatorClient } from '../calculator/makeCalculatorClient'
+import { fmtNum, toNum, toNumStrict } from '@/lib/format'
+import { tui } from '@/lib/i18n/tool-l10n'
+
+/**
+ * 第九批:2025-08 新增工具(工厂配置驱动)
+ * Roman / Pace / Protein / Electricity
+ */
+
+// ── 罗马数字转换 ──
+// 双向转换不适合工厂的"多输入→多输出"形态?其实很适合:
+// 输入 number 或 roman 其一,另一个字段留空,compute 检测哪边有值。
+const ROMAN_PAIRS: [number, string][] = [
+  [1000, 'M'], [900, 'CM'], [500, 'D'], [400, 'CD'],
+  [100, 'C'], [90, 'XC'], [50, 'L'], [40, 'XL'],
+  [10, 'X'], [9, 'IX'], [5, 'V'], [4, 'IV'], [1, 'I'],
+]
+
+export const RomanNumeralConverterClient = makeCalculatorClient({
+  slug: 'roman-numeral-converter',
+  inputs: [
+    { key: 'num', label: 'Number (1-3999)', default: '2024' },
+    { key: 'roman', label: 'Or Roman numeral', type: 'text', default: '', placeholder: 'MMXXIV' },
+  ],
+  outputs: [
+    { key: 'result', label: 'Converted value', highlight: true },
+    { key: 'breakdown', label: 'Breakdown' },
+  ],
+  compute: (v) => {
+    const numRaw = v.num.trim()
+    const romRaw = v.roman.trim().toUpperCase()
+    // 两边都填 → 要求用户只填一边,避免歧义
+    if (numRaw && romRaw) {
+      return { result: '⚠️ Fill in only one field', breakdown: '—' }
+    }
+    // 数字 → 罗马
+    if (numRaw) {
+      const n = Number(numRaw)
+      if (!Number.isInteger(n) || n < 1 || n > 3999) {
+        return { result: '⚠️ Enter a whole number from 1 to 3999', breakdown: '—' }
+      }
+      let rest = n
+      let roman = ''
+      const parts: string[] = []
+      for (const [val, sym] of ROMAN_PAIRS) {
+        while (rest >= val) {
+          roman += sym
+          rest -= val
+          parts.push(sym)
+        }
+      }
+      return { result: roman, breakdown: parts.join(' + ') }
+    }
+    // 罗马 → 数字
+    if (romRaw) {
+      if (!/^[MDCLXVI]+$/.test(romRaw)) {
+        return { result: '⚠️ Invalid Roman numeral (use I V X L C D M)', breakdown: '—' }
+      }
+      const values: Record<string, number> = { I: 1, V: 5, X: 10, L: 50, C: 100, D: 500, M: 1000 }
+      let total = 0
+      for (let i = 0; i < romRaw.length; i++) {
+        const cur = values[romRaw[i]]
+        const next = i + 1 < romRaw.length ? values[romRaw[i + 1]] : 0
+        total += cur < next ? -cur : cur
+      }
+      // 反向校验:规范形式必须能还原出相同字符串(拦截 IIII / VX 等非法组合)
+      let check = total
+      let canonical = ''
+      for (const [val, sym] of ROMAN_PAIRS) {
+        while (check >= val) {
+          canonical += sym
+          check -= val
+        }
+      }
+      if (canonical !== romRaw || total < 1 || total > 3999) {
+        return { result: `⚠️ Not a valid standard-form numeral${total >= 1 && total <= 3999 ? ` (did you mean ${canonical}?)` : ''}`, breakdown: '—' }
+      }
+      return { result: String(total), breakdown: `${romRaw} → ${total}` }
+    }
+    return { result: '—', breakdown: '—' }
+  },
+  note: '🏛️ Standard Roman numerals use subtraction pairs (IV=4, IX=9). The range is 1-3999 — classical notation has no zero and no way to write larger numbers.',
+})
+
+// ── 跑步配速计算器 ──
+/** 'h:mm:ss' | 'mm:ss' | 'ss' → 总秒数;非法返回 NaN */
+function parseDuration(s: string): number {
+  const parts = s.trim().split(':').map(Number)
+  if (parts.some((n) => !Number.isFinite(n))) return NaN
+  if (parts.length === 3) return parts[0] * 3600 + parts[1] * 60 + parts[2]
+  if (parts.length === 2) return parts[0] * 60 + parts[1]
+  if (parts.length === 1) return parts[0]
+  return NaN
+}
+
+/** 秒 → 'h:mm:ss'(≥1h)或 'mm:ss' */
+function formatDuration(totalSec: number): string {
+  const sec = Math.round(totalSec)
+  const h = Math.floor(sec / 3600)
+  const m = Math.floor((sec % 3600) / 60)
+  const s = sec % 60
+  const pad = (x: number) => String(x).padStart(2, '0')
+  return h > 0 ? `${h}:${pad(m)}:${pad(s)}` : `${m}:${pad(s)}`
+}
+
+const RACE_DISTANCES_KM: [string, number][] = [
+  ['5K', 5],
+  ['10K', 10],
+  ['Half marathon', 21.0975],
+  ['Marathon', 42.195],
+]
+
+export const PaceCalculatorClient = makeCalculatorClient({
+  slug: 'pace-calculator',
+  inputs: [
+    { key: 'distance', label: 'Distance', suffix: 'km', default: '10' },
+    { key: 'time', label: 'Finish time', default: '50:00', placeholder: 'h:mm:ss or mm:ss' },
+    { key: 'unit', label: 'Pace unit', default: 'km', options: [
+      { label: 'Per kilometer', value: 'km' },
+      { label: 'Per mile', value: 'mile' },
+    ]},
+  ],
+  outputs: [
+    { key: 'pace', label: 'Pace', highlight: true },
+    { key: 'speed', label: 'Speed' },
+    { key: 'races', label: 'Equivalent race predictions' },
+  ],
+  compute: (v) => {
+    const distance = toNumStrict(v.distance)
+    const timeSec = parseDuration(v.time)
+    if (isNaN(distance) || distance <= 0 || isNaN(timeSec) || timeSec <= 0) {
+      return { pace: '—', speed: '—', races: 'Enter a positive distance and a time like 45:30' }
+    }
+    const perUnitKm = v.unit === 'mile' ? 1.609344 : 1
+    const paceSec = (timeSec / distance) * perUnitKm
+    const speedKmh = (distance / timeSec) * 3600
+    const speed = v.unit === 'mile'
+      ? `${fmtNum(speedKmh / 1.609344, 2)} mph`
+      : `${fmtNum(speedKmh, 2)} km/h`
+    // 等效成绩预测(同配速外推;不做 Riegel 减速修正,保持可解释性)
+    const lines = RACE_DISTANCES_KM.map(([name, km]) => {
+      const t = (timeSec / distance) * km
+      return `${name}: ${formatDuration(t)}`
+    })
+    return {
+      pace: `${formatDuration(paceSec)} /${v.unit}`,
+      speed,
+      races: lines.join('\n'),
+    }
+  },
+  note: '🏃 Race predictions assume you hold the same pace — most runners slow slightly over longer distances, so treat longer predictions as optimistic targets.',
+})
+
+// ── 蛋白质摄入计算器 ──
+export const ProteinIntakeCalculatorClient = makeCalculatorClient({
+  slug: 'protein-intake-calculator',
+  inputs: [
+    { key: 'weight', label: 'Weight', suffix: 'kg', default: '70' },
+    { key: 'activity', label: 'Activity level', default: 'moderate', options: [
+      { label: 'Sedentary (little exercise)', value: 'sedentary' },
+      { label: 'Lightly active', value: 'light' },
+      { label: 'Moderately active', value: 'moderate' },
+      { label: 'Very active / strength training', value: 'athlete' },
+    ]},
+    { key: 'goal', label: 'Goal', default: 'maintain', options: [
+      { label: 'Maintain weight', value: 'maintain' },
+      { label: 'Build muscle', value: 'gain' },
+      { label: 'Lose fat', value: 'lose' },
+    ]},
+  ],
+  outputs: [
+    { key: 'range', label: 'Daily protein target', highlight: true },
+    { key: 'perMeal', label: 'Per meal (4 meals)' },
+    { key: 'basis', label: 'Basis' },
+  ],
+  compute: (v) => {
+    const weight = toNumStrict(v.weight)
+    if (isNaN(weight) || weight <= 0 || weight > 500) {
+      return { range: '⚠️ Enter a valid weight in kg', perMeal: '—', basis: '—' }
+    }
+    // g/kg 区间:sports-nutrition 共识(ACSM/ISSN):久坐 0.8,轻 1.0-1.2,
+    // 中等 1.2-1.6,力量/耐力训练 1.6-2.2;增肌取上限侧,减脂保氮取 1.8-2.7(高蛋白饮食)
+    const base: Record<string, [number, number]> = {
+      sedentary: [0.8, 1.2],
+      light: [1.0, 1.4],
+      moderate: [1.2, 1.6],
+      athlete: [1.6, 2.2],
+    }
+    let [lo, hi] = base[v.activity] ?? base['moderate']
+    if (v.goal === 'gain') hi = Math.max(hi, 2.0)
+    if (v.goal === 'lose') {
+      lo = Math.max(lo, 1.6)
+      hi = Math.min(Math.max(hi, 2.2), 2.7)
+    }
+    const loG = Math.round(weight * lo)
+    const hiG = Math.round(weight * hi)
+    return {
+      range: `${loG}–${hiG} g per day`,
+      perMeal: `${Math.round(loG / 4)}–${Math.round(hiG / 4)} g`,
+      basis: `${fmtNum(lo, 1)}–${fmtNum(hi, 1)} g × ${Math.round(weight)} kg (${v.activity}/${v.goal})`,
+    }
+  },
+  note: '🥩 Ranges follow ISSN & ACSM position stands: 0.8 g/kg is the RDA floor for sedentary adults; training and caloric deficits raise needs. Spread intake across 3-5 meals.',
+})
+
+// ── 电费计算器 ──
+export const ElectricityCostCalculatorClient = makeCalculatorClient({
+  slug: 'electricity-cost-calculator',
+  urlState: true,
+  inputs: [
+    { key: 'watts', label: 'Power rating', suffix: 'W', default: '1500' },
+    { key: 'hours', label: 'Hours used per day', suffix: 'h', default: '4' },
+    { key: 'rate', label: 'Electricity rate', suffix: '$/kWh', default: '0.15' },
+  ],
+  outputs: [
+    { key: 'daily', label: 'Cost per day', highlight: true },
+    { key: 'monthly', label: 'Cost per month' },
+    { key: 'yearly', label: 'Cost per year' },
+    { key: 'kwh', label: 'Energy per day' },
+  ],
+  compute: (v) => {
+    const watts = toNum(v.watts)
+    const hours = toNum(v.hours)
+    const rate = toNum(v.rate)
+    if (watts < 0 || hours < 0 || rate < 0 || hours > 24) {
+      return { daily: `⚠️ ${tui('electricity-cost-calculator', 'en', 'errInvalid', 'Values must be non-negative and hours ≤ 24')}`, monthly: '—', yearly: '—', kwh: '—' }
+    }
+    const kwhDay = (watts * hours) / 1000
+    const daily = kwhDay * rate
+    return {
+      daily: `$${fmtNum(daily, 2)}`,
+      monthly: `$${fmtNum(daily * 30.44, 2)}`,
+      yearly: `$${fmtNum(daily * 365, 2)}`,
+      kwh: `${fmtNum(kwhDay, 2)} kWh`,
+    }
+  },
+  note: '⚡ Find the wattage on the appliance label or its spec sheet. Heaters and dryers (1500-5000 W) dwarf laptops (≈50 W); the yearly line is where surprises live.',
+})
