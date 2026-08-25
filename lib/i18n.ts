@@ -166,12 +166,14 @@ export interface Dict {
   workspaceTabConverters: string
   workspaceTabUtilities: string
   // 首页主题 Hub(6 大主题卡:标题 / 副标语 / CTA)
+  hubTitleAI: string
   hubTitleDeveloper: string
   hubTitleDesign: string
   hubTitleText: string
   hubTitleFinance: string
   hubTitleConverters: string
   hubTitleUtilities: string
+  hubTaglineAI: string
   hubTaglineDeveloper: string
   hubTaglineDesign: string
   hubTaglineText: string
@@ -379,12 +381,14 @@ const en: Dict = {
   workspaceTabText: 'Text & Writing',
   workspaceTabConverters: 'Converters',
   workspaceTabUtilities: 'Utilities',
+  hubTitleAI: 'AI & LLM Toolkit',
   hubTitleDeveloper: 'Developer & Code',
   hubTitleDesign: 'Design & CSS Utilities',
   hubTitleText: 'Text & Content Creation',
   hubTitleFinance: 'Finance & SaaS Calculators',
   hubTitleConverters: 'Converters & Formats',
   hubTitleUtilities: 'Utilities & Math',
+  hubTaglineAI: 'Estimate token costs, repair JSON output, and build function calls.',
   hubTaglineDeveloper: 'Essential tools for modern devs & API tasks',
   hubTaglineDesign: 'Color, gradients & layout utilities for pixel-perfect UI',
   hubTaglineText: 'Write, count, convert & polish words at speed',
@@ -581,12 +585,14 @@ const zh: Dict = {
   workspaceTabText: '文本与写作',
   workspaceTabConverters: '转换器',
   workspaceTabUtilities: '实用工具',
+  hubTitleAI: 'AI 与大模型工具',
   hubTitleDeveloper: '开发与代码',
   hubTitleDesign: '设计与 CSS 工具',
   hubTitleText: '文本与内容创作',
   hubTitleFinance: '金融与 SaaS 计算器',
   hubTitleConverters: '转换器与格式',
   hubTitleUtilities: '实用工具与数学',
+  hubTaglineAI: '估算 token 成本、修复 JSON 输出、构造函数调用——服务 AI 开发工作流。',
   hubTaglineDeveloper: '现代开发与 API 任务的必备工具',
   hubTaglineDesign: '颜色、渐变与布局工具,打造像素级 UI',
   hubTaglineText: '快速写作、统计、转换与润色文本',
@@ -781,12 +787,14 @@ const es: Dict = {
   workspaceTabText: 'Texto y escritura',
   workspaceTabConverters: 'Conversores',
   workspaceTabUtilities: 'Utilidades',
+  hubTitleAI: 'Herramientas de IA y LLM',
   hubTitleDeveloper: 'Desarrollo y código',
   hubTitleDesign: 'Diseño y utilidades CSS',
   hubTitleText: 'Texto y creación de contenido',
   hubTitleFinance: 'Calculadoras financieras y SaaS',
   hubTitleConverters: 'Conversores y formatos',
   hubTitleUtilities: 'Utilidades y matemáticas',
+  hubTaglineAI: 'Estima costes de tokens, repara JSON y construye llamadas a funciones.',
   hubTaglineDeveloper: 'Herramientas esenciales para desarrollo moderno y tareas de API',
   hubTaglineDesign: 'Color, gradientes y layout para una UI perfecta al píxel',
   hubTaglineText: 'Escribe, cuenta, convierte y pule textos a toda velocidad',
@@ -982,12 +990,14 @@ const de: Dict = {
   workspaceTabText: 'Text & Schreiben',
   workspaceTabConverters: 'Konverter',
   workspaceTabUtilities: 'Werkzeuge',
+  hubTitleAI: 'KI- & LLM-Werkzeuge',
   hubTitleDeveloper: 'Entwickler & Code',
   hubTitleDesign: 'Design & CSS-Tools',
   hubTitleText: 'Text & Content-Erstellung',
   hubTitleFinance: 'Finanz- & SaaS-Rechner',
   hubTitleConverters: 'Konverter & Formate',
   hubTitleUtilities: 'Werkzeuge & Mathe',
+  hubTaglineAI: 'Token-Kosten schätzen, JSON reparieren, Function Calls bauen.',
   hubTaglineDeveloper: 'Essenzielle Tools für moderne Devs & API-Aufgaben',
   hubTaglineDesign: 'Farben, Verläufe & Layout-Tools für pixelgenaue UI',
   hubTaglineText: 'Texte schreiben, zählen, umwandeln & polieren – blitzschnell',

@@ -17,13 +17,13 @@
  */
 
 import type { LucideIcon } from 'lucide-react'
-import { ArrowLeftRight, Code2, Palette, PenLine, Wallet, Zap } from 'lucide-react'
+import { ArrowLeftRight, Brain, Code2, Palette, PenLine, Wallet, Zap } from 'lucide-react'
 import type { ToolMeta } from '@/lib/tools'
 import type { Dict } from '@/lib/i18n'
 
 export interface HubTheme {
   /** 稳定 id,用于 ?hub= URL 参数与组件 state */
-  id: 'developer' | 'design' | 'text' | 'finance' | 'converters' | 'utilities'
+  id: 'ai' | 'developer' | 'design' | 'text' | 'finance' | 'converters' | 'utilities'
   icon: LucideIcon
   /** 覆盖的真实 category 键(tools.ts 的 category 字段,英文不随语言变) */
   categories: readonly string[]
@@ -47,9 +47,24 @@ export interface HubTheme {
 
 export const HUB_THEMES: readonly HubTheme[] = [
   {
+    id: 'ai',
+    icon: Brain,
+    categories: ['AI Tools'],
+    featuredToolIds: ['llm-cost-calculator', 'json-repair', 'json-to-zod', 'gpt-token-counter'],
+    titleKey: 'hubTitleAI',
+    taglineKey: 'hubTaglineAI',
+    badgeClass: 'from-fuchsia-500 to-purple-600 shadow-md shadow-fuchsia-500/25',
+    pillClass:
+      'border-fuchsia-200/70 bg-fuchsia-50 text-fuchsia-600 dark:border-fuchsia-800/50 dark:bg-fuchsia-950/50 dark:text-fuchsia-400',
+    cardHoverClass: 'hover:border-fuchsia-400/60 dark:hover:border-fuchsia-500/40',
+    glowClass: 'hover:shadow-fuchsia-500/10',
+    accentTextClass: 'text-fuchsia-600 dark:text-fuchsia-400',
+    dotClass: 'bg-fuchsia-500',
+  },
+  {
     id: 'developer',
     icon: Code2,
-    categories: ['Developer Tools', 'Security Tools', 'AI Tools'],
+    categories: ['Developer Tools', 'Security Tools'],
     featuredToolIds: ['json-formatter', 'jwt-decoder', 'gpt-token-counter', 'regex-tester'],
     titleKey: 'hubTitleDeveloper',
     taglineKey: 'hubTaglineDeveloper',

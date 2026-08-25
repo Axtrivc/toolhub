@@ -154,6 +154,13 @@ export const calculatorSamples: Record<string, Record<string, string>> = {
     template: 'You are a {role}. Explain {{topic}} to {{audience}} in {words} words.',
     vars: '{\n  "role": "senior dev",\n  "topic": "closures",\n  "audience": "beginners",\n  "words": 100\n}',
   },
+  // ── 2025-08 batch8(AI data)──
+  'csv-to-finetune-jsonl': {
+    csv: 'system,prompt,completion\n"You are a terse assistant.","Explain closures in one sentence.","Closures capture variables so inner functions keep access after the outer call returns."\n,"Translate: hello","Bonjour"',
+  },
+  'token-visualizer': {
+    text: 'The unbelievable truth about tokenization: quick brown foxes do not really jump over lazy dogs, but URLs like https://example.com/a/very/long/path certainly add up.',
+  },
 }
 
 // ─────────────────────────── 单位转换器示例 ───────────────────────────

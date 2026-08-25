@@ -258,6 +258,9 @@ import { JsonRepairL10n } from './tools-l10n/json-repair'
 import { MarkdownFenceExtractorL10n } from './tools-l10n/markdown-fence-extractor'
 import { OpenaiToolsBuilderL10n } from './tools-l10n/openai-tools-builder'
 import { PromptTemplateFillerL10n } from './tools-l10n/prompt-template-filler'
+import { CsvToFinetuneJsonlL10n } from './tools-l10n/csv-to-finetune-jsonl'
+import { EmbeddingPriceCalculatorL10n } from './tools-l10n/embedding-price-calculator'
+import { TokenVisualizerL10n } from './tools-l10n/token-visualizer'
 
 const registry: Record<string, ToolL10n> = {
   'loan-calculator': loanCalculatorL10n,
@@ -482,6 +485,9 @@ const registry: Record<string, ToolL10n> = {
   'markdown-fence-extractor': MarkdownFenceExtractorL10n,
   'openai-tools-builder': OpenaiToolsBuilderL10n,
   'prompt-template-filler': PromptTemplateFillerL10n,
+  'csv-to-finetune-jsonl': CsvToFinetuneJsonlL10n,
+  'embedding-price-calculator': EmbeddingPriceCalculatorL10n,
+  'token-visualizer': TokenVisualizerL10n,
 }
 
 /**
