@@ -425,6 +425,7 @@ export const COMMON_CALC_UI: Record<Exclude<Locale, 'en'>, Record<string, string
     csvInput: '输入',
     csvResult: '结果',
     inputs: '输入',
+    reset: '重置',
   },
   es: {
     summaryTitle: 'Resumen del cálculo',
@@ -437,6 +438,7 @@ export const COMMON_CALC_UI: Record<Exclude<Locale, 'en'>, Record<string, string
     csvInput: 'Entrada',
     csvResult: 'Resultado',
     inputs: 'Entradas',
+    reset: 'Restablecer',
   },
   de: {
     summaryTitle: 'Zusammenfassung der Berechnung',
@@ -449,6 +451,7 @@ export const COMMON_CALC_UI: Record<Exclude<Locale, 'en'>, Record<string, string
     csvInput: 'Eingabe',
     csvResult: 'Ergebnis',
     inputs: 'Eingaben',
+    reset: 'Zurücksetzen',
   },
 }
 

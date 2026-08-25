@@ -75,6 +75,21 @@ export function makeCalculatorClient(config: CalculatorConfig): ComponentType {
       return init
     })
 
+    // 用户是否编辑过任何字段(pristine 门控):决定 Load Sample 的行为与 Reset 是否显示
+    const [dirty, setDirty] = useState(false)
+    const setValue = (key: string, v: string) => {
+      setDirty(true)
+      setValues((prev) => ({ ...prev, [key]: v }))
+    }
+
+    // 一键重置回出厂默认值(全站此前无任何清空入口,只能逐字段手删)
+    const handleReset = useCallback(() => {
+      const init: Record<string, string> = {}
+      for (const f of config.inputs) init[f.key] = f.default
+      setValues(init)
+      setDirty(false)
+    }, [config.inputs])
+
     const results = useMemo(() => {
       try {
         return config.compute(values, locale)
@@ -102,18 +117,22 @@ export function makeCalculatorClient(config: CalculatorConfig): ComponentType {
       [results, nowDerived],
     )
 
-    const setValue = (key: string, v: string) =>
-      setValues((prev) => ({ ...prev, [key]: v }))
-
     // 示例数据:优先 lib/tool-samples.ts 注册表(按 slug),否则用 config.sample 内嵌。
     const sample = useMemo(() => {
       const regSample = config.slug ? getCalculatorSample(config.slug) : undefined
       return regSample ?? config.sample
     }, [])
 
+    // Load Sample:用户已有输入时第一次点击只提示(不覆盖),再点一次才确认覆盖;
+    // pristine 状态直接填充。避免误触毁掉用户手填的真实数据。
+    const [sampleArmed, setSampleArmed] = useState(false)
     const handleLoadSample = useCallback(() => {
       if (!sample) return
-      // 只填充示例中提供的 key,其余保留默认值,避免覆盖未声明的字段。
+      if (dirty && !sampleArmed) {
+        setSampleArmed(true)
+        return
+      }
+      // 只填充示例中提供的 key,其余保留当前值,避免覆盖未声明的字段。
       setValues((prev) => {
         const next = { ...prev }
         for (const f of config.inputs) {
@@ -121,7 +140,8 @@ export function makeCalculatorClient(config: CalculatorConfig): ComponentType {
         }
         return next
       })
-    }, [sample, config.inputs])
+      setSampleArmed(false)
+    }, [sample, config.inputs, dirty, sampleArmed])
 
     // 结果摘要(纯文本) - 供 Copy Summary 用。只在有结果且非错误占位时生成。
     const summary = useMemo(() => {
@@ -168,10 +188,28 @@ export function makeCalculatorClient(config: CalculatorConfig): ComponentType {
 
     return (
       <div className="space-y-6">
-        {/* 输入区 + 右上角 Load Sample 按钮 */}
+        {/* 输入区 + 右上角 Load Sample / Reset 按钮 */}
         <div className="flex flex-wrap items-center justify-between gap-3">
           <span className="text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>{L('inputs', 'Inputs')}</span>
-          {sample && <LoadSampleButton onLoad={handleLoadSample} />}
+          <div className="flex items-center gap-2">
+            {dirty && (
+              <button
+                type="button"
+                onClick={handleReset}
+                className="rounded-lg border px-3 py-1.5 text-sm transition-colors hover:bg-slate-100 dark:border-slate-600 dark:hover:bg-slate-800"
+                style={{ borderColor: 'rgb(var(--border-strong))', color: 'rgb(var(--text-muted))' }}
+              >
+                {L('reset', 'Reset')}
+              </button>
+            )}
+            {sample && (
+              <LoadSampleButton
+                onLoad={handleLoadSample}
+                confirmOverwrite={sampleArmed}
+                onDisarm={() => setSampleArmed(false)}
+              />
+            )}
+          </div>
         </div>
         <div className="grid grid-cols-1 gap-4 rounded-lg p-4 sm:grid-cols-2" style={{ backgroundColor: 'rgb(var(--bg-subtle))' }}>
           {config.inputs.map((f) => {

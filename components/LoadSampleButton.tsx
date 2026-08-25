@@ -11,6 +11,13 @@ interface LoadSampleButtonProps {
   disabled?: boolean
   /** 按钮尺寸变体 */
   variant?: 'default' | 'compact'
+  /**
+   * 覆盖确认态(由父组件控制):用户已有输入时,第一次点击进入确认,
+   * 按钮文案变为「Overwrite?」;再次点击才真正执行 onLoad。
+   */
+  confirmOverwrite?: boolean
+  /** 用户点了别处/再次交互时父组件解除确认态(回到普通文案) */
+  onDisarm?: () => void
 }
 
 /**
@@ -28,7 +35,13 @@ interface LoadSampleButtonProps {
  * 父组件负责:从 lib/tool-samples.ts 取示例、判断是否有示例、写回 input state。
  * 本组件只负责按钮外观 + 点击反馈 + i18n。
  */
-export function LoadSampleButton({ onLoad, disabled, variant = 'default' }: LoadSampleButtonProps) {
+export function LoadSampleButton({
+  onLoad,
+  disabled,
+  variant = 'default',
+  confirmOverwrite = false,
+  onDisarm,
+}: LoadSampleButtonProps) {
   const { locale } = useApp()
   const [loaded, setLoaded] = useState(false)
   // "✓ Sample loaded" 回退计时器:重复点击时重置;卸载时清理,避免对已卸载组件 setState
@@ -48,18 +61,28 @@ export function LoadSampleButton({ onLoad, disabled, variant = 'default' }: Load
     [],
   )
 
+  // 确认覆盖态下失焦自动解除(用户改变主意点别处,不希望按钮一直挂着"覆盖?")
+  const handleBlur = useCallback(() => {
+    if (confirmOverwrite) onDisarm?.()
+  }, [confirmOverwrite, onDisarm])
+
   return (
     <button
       type="button"
       onClick={handleClick}
+      onBlur={handleBlur}
       disabled={disabled}
       aria-live="polite"
-      className={`btn ${loaded ? 'btn-primary' : 'btn-secondary'} ${
+      className={`btn ${confirmOverwrite ? 'bg-red-600 text-white hover:bg-red-700' : loaded ? 'btn-primary' : 'btn-secondary'} ${
         variant === 'compact' ? 'px-3 py-1.5 text-xs' : ''
       } disabled:cursor-not-allowed disabled:opacity-50`}
       title={t(locale, 'toolLoadSampleTitle')}
     >
-      {loaded ? t(locale, 'toolSampleLoaded') : t(locale, 'toolLoadSample')}
+      {confirmOverwrite
+        ? t(locale, 'toolSampleOverwrite')
+        : loaded
+          ? t(locale, 'toolSampleLoaded')
+          : t(locale, 'toolLoadSample')}
     </button>
   )
 }

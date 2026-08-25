@@ -112,6 +112,7 @@ export interface Dict {
   toolCopied: string
   // 工具页:加载示例 / 导出结果
   toolLoadSample: string
+  toolSampleOverwrite: string // "Overwrite inputs?" confirm state
   toolSampleLoaded: string
   toolLoadSampleTitle: string // "Auto-fill a realistic example"(按钮 title 提示)
   toolCopySummary: string
@@ -325,6 +326,7 @@ const en: Dict = {
   toolCopy: 'Copy',
   toolCopied: '✓ Copied',
   toolLoadSample: 'Load Sample',
+  toolSampleOverwrite: 'Overwrite inputs?',
   toolSampleLoaded: '✓ Sample loaded',
   toolLoadSampleTitle: 'Auto-fill a realistic example',
   toolCopySummary: 'Copy Summary',
@@ -520,6 +522,7 @@ const zh: Dict = {
   toolCopy: '复制',
   toolCopied: '✓ 已复制',
   toolLoadSample: '加载示例',
+  toolSampleOverwrite: '覆盖当前输入?',
   toolSampleLoaded: '✓ 已加载示例',
   toolLoadSampleTitle: '自动填充一个真实示例',
   toolCopySummary: '复制摘要',
@@ -713,6 +716,7 @@ const es: Dict = {
   toolCopy: 'Copiar',
   toolCopied: '✓ Copiado',
   toolLoadSample: 'Cargar ejemplo',
+  toolSampleOverwrite: '¿Sobrescribir los valores?',
   toolSampleLoaded: '✓ Ejemplo cargado',
   toolLoadSampleTitle: 'Rellenar automáticamente un ejemplo realista',
   toolCopySummary: 'Copiar resumen',
@@ -907,6 +911,7 @@ const de: Dict = {
   toolCopy: 'Kopieren',
   toolCopied: '✓ Kopiert',
   toolLoadSample: 'Beispiel laden',
+  toolSampleOverwrite: 'Eingaben überschreiben?',
   toolSampleLoaded: '✓ Beispiel geladen',
   toolLoadSampleTitle: 'Automatisch mit einem realistischen Beispiel füllen',
   toolCopySummary: 'Zusammenfassung kopieren',

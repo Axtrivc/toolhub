@@ -38,6 +38,7 @@ export function CalculatorField({
           onChange={(e) => onChange(e.target.value)}
           placeholder={placeholder}
           step={step}
+          autoComplete="off"
           className={`w-full rounded-lg border p-3 shadow-sm outline-none transition focus:ring-2 ${suffix ? 'pr-16' : ''}`}
           style={{
             borderColor: 'rgb(var(--border-strong))',
