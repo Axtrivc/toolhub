@@ -1933,6 +1933,189 @@ export const toolFaqs: Record<string, FaqPair[]> = {
       a: 'Yes. Pick grams (or ounces) as the input unit, enter the weight, and you get cups, tablespoons, and teaspoons back for the selected ingredient — the usual fix for European recipes written purely by weight.',
     },
   ],
+  // ══════════ _2025-08 扩张批2(11 个)══════════
+  'fuel-cost-calculator': [
+    {
+      q: 'How is the fuel cost calculated?',
+      a: 'Distance × consumption ÷ 100 gives liters needed; liters × price gives the total. A round trip simply doubles the distance before anything else, and the per-person figure divides the total by your passenger count.',
+    },
+    {
+      q: "How do I find my car's real consumption?",
+      a: "Your trip computer's long-term average is the best source — official WLTP/EPA figures run 10-20% optimistic. Highway driving typically beats city consumption by 20-30%, so enter the mix you will actually drive.",
+    },
+    {
+      q: 'I think in MPG — can this help?',
+      a: 'The fields are metric (km, L/100km, price per liter), so convert once: divide 235.215 by your US MPG to get L/100km, and divide your per-gallon price by 3.785 for a per-liter price. After that everything flows through unchanged.',
+    },
+    {
+      q: 'What is cost per 100 km good for?',
+      a: 'It equals consumption × price, making it the cleanest comparison metric — between cars, fuel grades, or stations — because it strips out distance. The tool shows it alongside your trip total for exactly that purpose.',
+    },
+  ],
+  'subscription-cost-calculator': [
+    {
+      q: 'How does the math work?',
+      a: 'Yearly subscriptions are divided by 12 and quarterly by 3, then added to your monthly total — that is the true monthly cost. Yearly multiplies by 12 and the 5-year figure by 60, all in consistent monthly-equivalent terms.',
+    },
+    {
+      q: 'What is the work-hours figure?',
+      a: 'It divides your yearly total by 25 — roughly an average after-tax hourly wage — to show how many work hours your subscriptions consume per year. Seeing "42 hours of my life" often motivates a cleanup faster than any dollar figure.',
+    },
+    {
+      q: 'Which charges should I include?',
+      a: 'Every recurring one: streaming, cloud storage, apps, gym, domains, news, and the small in-app subscriptions too. Scan a card statement for charges you do not recognize — the average household carries several forgotten ghost subscriptions.',
+    },
+    {
+      q: 'Why show five years?',
+      a: 'Long horizons reveal the real price of "it is only $9.99 a month" — one service at that rate is about $600 over five years. It is the same framing lenders use for interest: the total matters more than the bite-sized payment.',
+    },
+  ],
+  'overtime-calculator': [
+    {
+      q: 'When is overtime legally required?',
+      a: 'US federal law (FLSA) requires 1.5× pay past 40 hours per week for non-exempt employees. Some states add daily overtime (California after 8 h/day) or double time on holidays — pick the multiplier your jurisdiction or contract specifies.',
+    },
+    {
+      q: 'How is my pay computed?',
+      a: 'Regular pay is rate × regular hours; overtime pay is rate × multiplier × overtime hours. The custom multiplier accepts anything — 1.25, 2.5 — so union contracts, shift differentials, and holiday rates all fit the same math.',
+    },
+    {
+      q: 'I am salaried — does this apply to me?',
+      a: 'Only if you are non-exempt. Derive your regular hourly rate as weekly salary ÷ 40, enter it with your overtime hours, and the multiplier applies from there. Truly exempt employees receive no overtime regardless of hours worked.',
+    },
+  ],
+  'take-home-pay-calculator': [
+    {
+      q: 'How accurate is this estimate?',
+      a: 'It applies the real 2025 federal brackets and standard deduction ($15,000 single, $30,000 married filing jointly), plus exact FICA rates: 6.2% Social Security up to the $176,100 wage base and 1.45% Medicare with no cap. State tax, credits, and supplemental withholding are not modeled — treat it as a baseline, not a payroll system.',
+    },
+    {
+      q: 'Why does 401(k) cut income tax but not FICA?',
+      a: 'Traditional 401(k) contributions leave taxable income, so the calculator subtracts them before applying brackets. FICA taxes that money anyway, so FICA is computed on gross salary — matching how real paychecks behave.',
+    },
+    {
+      q: 'Is the biweekly number my actual paycheck?',
+      a: 'Close, but it is annual net ÷ 26 with no smoothing, and any benefits you did not enter (HSA, dental, life insurance) will shift it. Use it to sanity-check an offer or a raise, not to reconcile with payroll to the cent.',
+    },
+    {
+      q: 'Does it handle state taxes?',
+      a: 'No — state income tax runs from zero (Texas, Florida) to over 10% at the top (California, Hawaii), so one national model would mislead almost everyone. Estimate your state burden separately and subtract it from the annual net shown here.',
+    },
+  ],
+  'wedding-budget-calculator': [
+    {
+      q: 'Are the percentages reliable?',
+      a: 'They reflect common US planning guidance — venue and catering together absorb 55%, which matches where real budgets land. City weddings skew toward venue, destination weddings toward travel; treat the split as a sensible first draft to adjust, not gospel.',
+    },
+    {
+      q: 'Why does guest count matter so much?',
+      a: 'Catering scales per head and venues charge per-person minimums, so guests move multiple lines at once. The per-guest figure makes the lever visible: at $150 a head, cutting 10 guests frees $1,500 — usually more than skipping favors or décor upgrades entirely.',
+    },
+    {
+      q: 'What does the buffer line cover?',
+      a: 'Stationery, favors, and the inevitable surprises: cake-cutting fees, vendor tips, overtime charges, last-minute plus-ones. Planners budget 10-15% contingency for good reason — and if it goes unspent, it becomes your honeymoon upgrade.',
+    },
+  ],
+  'amortization-table-generator': [
+    {
+      q: 'What exactly does the table show?',
+      a: 'Every payment in order: number, amount, the principal/interest split, and the remaining balance. Early rows are interest-heavy — a 30-year loan often puts two-thirds of payment one toward interest — and you can watch the crossover where principal takes over.',
+    },
+    {
+      q: 'How is the monthly payment computed?',
+      a: 'The standard amortization formula P × r(1+r)^n ÷ ((1+r)^n − 1), with r as the monthly rate and n the payment count. Each row then applies interest = balance × r, principal = payment − interest, exactly simulating how a lender services the loan.',
+    },
+    {
+      q: 'Can I export the full schedule?',
+      a: 'Yes — the download is a complete CSV (with a UTF-8 BOM so Excel opens it cleanly), one row per payment for the whole term. The page previews the first 12 payments with an expand button, but the exported file is always the entire schedule.',
+    },
+    {
+      q: 'Would extra payments change this table?',
+      a: 'Not in this tool — it shows the contractual schedule. But the table explains why prepaying works: every extra dollar hits principal directly, so all later interest is charged on a smaller balance. That is how modest extra payments cut years off a 30-year loan.',
+    },
+  ],
+  'heart-rate-zone-calculator': [
+    {
+      q: 'Why Karvonen instead of percent of max?',
+      a: 'Karvonen zones use heart-rate reserve — max minus resting heart rate — then add resting back per zone. Two runners with the same max but different resting rates get genuinely different training bands, which raw percent-of-max math cannot do.',
+    },
+    {
+      q: 'How do I measure resting heart rate?',
+      a: 'Right after waking, before getting up, count your pulse for a full 60 seconds and average two or three mornings. Caffeine, stress, and poor sleep all inflate it, so a morning average beats any single reading — enter that average here.',
+    },
+    {
+      q: 'Is 220 minus age accurate?',
+      a: 'It is a population average; individual max heart rates scatter roughly ±12 bpm around it. For casual zone training it is fine, but if exact thresholds matter (racing, cardiac rehab), a lab test or supervised field test gives your personal max.',
+    },
+    {
+      q: 'Which zone should I train in?',
+      a: 'Most weekly volume belongs in Zone 2 (60-70% of reserve) — conversational-effort base work. Zones 4-5 are sharp sessions done sparingly. The classic error is living in Zone 3: too hard to recover from, too easy to drive adaptation.',
+    },
+  ],
+  'caffeine-calculator': [
+    {
+      q: 'How does the half-life math work?',
+      a: 'Caffeine roughly halves every 5 hours: 50% remains after one half-life, 25% after two. The tool applies mg × 0.5^(hours ÷ 5) to show what is left now and — the number that matters — what will still be circulating at your bedtime.',
+    },
+    {
+      q: 'How much caffeine is OK at bedtime?',
+      a: 'By this tool\'s thresholds: under ~50 mg at bedtime is fine for most people, 50-100 mg is borderline for sensitive sleepers, and above 100 mg likely disturbs sleep. Research generally suggests stopping caffeine 6-8 hours before bed.',
+    },
+    {
+      q: 'What counts toward my daily total?',
+      a: 'Everything: brewed coffee ≈ 95 mg per cup, espresso ≈ 63 per shot, black tea ≈ 47, cola ≈ 34, energy drinks 80-300, and dark chocolate contributes a few mg per square. Sum your actual sources before entering the dose.',
+    },
+    {
+      q: 'Why does coffee hit me harder than my friends?',
+      a: 'The CYP1A2 gene controls caffeine metabolism — slow metabolizers feel effects for hours longer and lose more sleep; fast metabolizers clear it comfortably. Smoking roughly doubles clearance speed, while oral contraceptives slow it.',
+    },
+  ],
+  'steps-to-calories-calculator': [
+    {
+      q: 'How are the calories estimated?',
+      a: 'Distance is steps × stride length, with stride ≈ height × 0.414. Calories use the MET method from the 2011 Compendium: MET value (2.8 slow, 3.5 moderate, 5.0 brisk) × body weight × hours walked — the standard exercise-science approximation.',
+    },
+    {
+      q: 'Why does my fitness tracker show more?',
+      a: 'Trackers often credit all movement, including calories your body burns at rest anyway (BMR overlap), and their step-counting algorithms vary. This tool counts only the walking increment, which is why its number is lower — and usually closer to the true extra energy spent.',
+    },
+    {
+      q: 'How far is 10,000 steps?',
+      a: 'About 7-8 km (4.5-5 miles) for average adults. The tool computes your exact distance from your height, because stride length drives it — taller walkers cover more ground per step, shorter walkers travel farther for the same count.',
+    },
+  ],
+  'paint-calculator': [
+    {
+      q: 'How much paint will I need?',
+      a: 'Wall area is perimeter × height, minus 1.85 m² per door and 1.4 m² per window. Multiply by coats, divide by coverage (10 m²/L on smooth primed walls), and the built-in 10% margin is added before rounding up to whole 2.5 L buckets or gallon cans.',
+    },
+    {
+      q: 'When would I need more than shown?',
+      a: 'Textured surfaces, bare drywall, or dramatic color changes eat 20-40% more than the standard coverage rate — fresh drywall is the thirstiest. The tool\'s note flags this; for those cases buy one extra can beyond the calculated number.',
+    },
+    {
+      q: 'Should doors and windows really be subtracted?',
+      a: 'Yes — you paint around them, so their area is mostly not painted, and subtracting keeps you from overbuying. If you plan to paint the frames and trim too, note that trim product needs its own smaller calculation anyway.',
+    },
+    {
+      q: 'Why buy all cans at once?',
+      a: 'Tint varies slightly between production batches — invisible in the can, visible on the wall. Calculate the total first and buy it in one shopping trip; if you must top up later, box the new can together with leftovers to blend any difference.',
+    },
+  ],
+  'dog-age-calculator': [
+    {
+      q: 'Why not just multiply by 7?',
+      a: 'The ×7 rule fails at both ends: a one-year-old dog is already mature and teenage (≈15 human years), and dogs sprint through their first two years. This tool uses the AVMA consensus curve — 15 at year one, 24 at year two, then 4-6.5 human years per dog year by breed size.',
+    },
+    {
+      q: 'How does breed size change the math?',
+      a: 'After year two, small dogs (<9 kg) add about 4 human years per dog year, medium 5, large 6.5. That is why a 13-year-old Chihuahua maps to a sprightly ~77 while a 13-year-old Great Dane maps to ~104 — big breeds mature at the same pace but age faster afterward.',
+    },
+    {
+      q: 'When is a dog a senior?',
+      a: 'Roughly when the human-equivalent age passes the mid-50s — around 8-9 calendar years for large breeds, 10-12 for small ones, which the life-stage output reflects. Veterinarians recommend senior screenings from those ages even for healthy-looking dogs.',
+    },
+  ],
 }
 export function getToolFaqs(slug: string): FaqPair[] {
   return toolFaqs[slug] ?? []

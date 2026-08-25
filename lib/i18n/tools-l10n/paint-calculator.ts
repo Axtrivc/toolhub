@@ -6,6 +6,13 @@ import type { ToolL10n } from '../tool-l10n'
 
 export const PaintCalculatorL10n: ToolL10n = {
   zh: {
+    useCases: ['算刷一面墙/一个房间要买几桶漆', '按门窗数量扣减涂刷面积', '估算多遍面漆的总用量', '按升或加仑规划采购量'],
+    faqs: [
+      { q: '到底需要多少漆?', a: '墙面面积 = 周长 × 层高,再减去每扇门 1.85 m²、每扇窗 1.4 m²。乘以遍数、除以涂布率(光滑底漆墙面 10 m²/L),最后自动加 10% 余量并向上取整到整桶 2.5 L 或加仑。' },
+      { q: '什么情况下要比显示的买更多?', a: '纹理墙面、裸石膏板或大幅改色(深盖浅或反向)会比标准涂布率多耗 20-40%——新石膏板最能"喝"漆。工具的提示里写了这一点;这类情况在计算结果之外再多买一桶。' },
+      { q: '门窗面积真的该减掉吗?', a: '该减——刷墙时是绕着它们刷的,开口面积基本不会被涂到,不减就会买多。但如果门框和线条也要刷,记得那部分通常要用另一种漆、单独按小面积计算。' },
+      { q: '为什么漆要一次买齐?', a: '不同生产批次的调色会略有差异——桶里看不出来,上墙就看得见。先算好总量、一次买齐;实在要补货,把新桶和旧桶剩漆混在一起("兑桶")抹平色差。' },
+    ],
     ui: {
       'in.assumption': '涂布率假设',
       'in.cans': '标准罐/桶数',
@@ -33,6 +40,13 @@ export const PaintCalculatorL10n: ToolL10n = {
     },
   },
   es: {
+    useCases: ['calcular cuántos botes de pintura comprar', 'descontar puertas y ventanas del área', 'estimar el total para varias manos', 'planificar la compra en litros o galones'],
+    faqs: [
+      { q: '¿Cuánta pintura necesito?', a: 'El área es perímetro × altura, menos 1,85 m² por puerta y 1,4 m² por ventana. Se multiplica por las manos, se divide entre el rendimiento (10 m²/L sobre pared lisa imprimada) y se añade el 10 % de margen antes de redondear a botes de 2,5 L o galones.' },
+      { q: '¿Cuándo necesitaré más de lo mostrado?', a: 'Las superficies texturadas, el pladur sin tratar o los cambios de color intensos consumen un 20-40 % más que el rendimiento estándar — el pladur nuevo es el que más bebe. La nota de la herramienta lo avisa: en esos casos compra un bote extra además del cálculo.' },
+      { q: '¿De verdad se restan puertas y ventanas?', a: 'Sí: se pinta a su alrededor, así que su superficie apenas recibe pintura, y descontarla evita comprar de más. Si vas a pintar también marcos y molduras, ten en cuenta que suelen llevar otro producto y se calculan aparte.' },
+      { q: '¿Por qué comprar todos los botes a la vez?', a: 'El tinte varía ligeramente entre lotes de producción: imperceptible en el bote, visible en la pared. Calcula el total primero y cómpralo de una vez; si debes ampliar después, mezcla el bote nuevo con el sobrante del viejo para igualar el tono.' },
+    ],
     ui: {
       'in.assumption': 'Supuesto de cobertura',
       'in.cans': 'Botes/cubos estándar',
@@ -60,6 +74,13 @@ export const PaintCalculatorL10n: ToolL10n = {
     },
   },
   de: {
+    useCases: ['ausrechnen, wie viele Farbeimer du brauchst', 'Türen und Fenster von der Fläche abziehen', 'den Gesamtbedarf für mehrere Anstriche schätzen', 'den Einkauf in Litern oder Gallonen planen'],
+    faqs: [
+      { q: 'Wie viel Farbe brauche ich?', a: 'Fläche = Umfang × Höhe, minus 1,85 m² pro Tür und 1,4 m² pro Fenster. Multipliziert mit den Anstrichen, geteilt durch die Ergiebigkeit (10 m²/L auf glattem grundiertem Wand) — dann kommen die eingebauten 10 % Reserve dazu, aufgerundet auf ganze 2,5-L-Eimer oder Gallonen.' },
+      { q: 'Wann brauche ich mehr als angezeigt?', a: 'Strukturierte Flächen, rohe Rigipsplatten oder krasse Farbwechsel (dunkel über hell und umgekehrt) schlucken 20-40 % mehr als die Standard-Ergiebigkeit — frischer Rigips ist der durstigste. Der Hinweis des Tools flaggt das; in diesen Fällen nimm einen Eimer extra obendrauf.' },
+      { q: 'Werden Türen und Fenster wirklich abgezogen?', a: 'Ja — gestrichen wird um sie herum, ihre Fläche bekommt kaum Farbe, und der Abzug verhindert Überkauf. Wenn du auch Zargen und Leisten streichen willst: Dafür braucht es meist ein anderes Produkt und eine eigene kleine Kalkulation.' },
+      { q: 'Warum alle Eimer auf einmal kaufen?', a: 'Die Abtönung variiert leicht zwischen Produktionschargen — im Eimer unsichtbar, an der Wand sichtbar. Erst den Gesamtbedarf rechnen und in einem Einkauf kaufen; falls du später nachkaufen musst, mische den neuen Eimer mit dem Rest des alten („boxen“), um den Ton anzugleichen.' },
+    ],
     ui: {
       'in.assumption': 'Deckungsannahme',
       'in.cans': 'Standard-Dosen/Eimer',

@@ -6,6 +6,13 @@ import type { ToolL10n } from '../tool-l10n'
 
 export const FuelCostCalculatorL10n: ToolL10n = {
   zh: {
+    useCases: ['算一趟自驾游的油费', '多人拼车时平摊油费', '对比往返与单程的用油成本', '算每 100 公里的油耗成本'],
+    faqs: [
+      { q: '油费是怎么算的?', a: '距离 × 油耗 ÷ 100 得出所需升数,再乘油价就是总费用。选往返会先把距离翻倍再计算,人均费用则是总额除以同行人数。' },
+      { q: '真实油耗哪里找?', a: '行车电脑的长期平均值最可靠——官方 WLTP/EPA 标称普遍乐观 10-20%。高速通常比市区省 20-30%,所以按你实际会跑的路况组合来填。' },
+      { q: '我用 MPG 计量,能用吗?', a: '可以,先换算一次:用 235.215 除以你的 US MPG 得 L/100km,每加仑油价除以 3.785 得每升价格。之后所有计算照常进行。' },
+      { q: '每 100 公里成本有什么用?', a: '它等于油耗 × 油价,剥离了距离因素,是对比不同车、不同油品或不同加油站最干净的指标。工具在行程总额旁边同时给出这个数。' },
+    ],
     ui: {
       'in.consumption': '油耗',
       'in.distance': '距离',
@@ -31,6 +38,13 @@ export const FuelCostCalculatorL10n: ToolL10n = {
     },
   },
   es: {
+    useCases: ['calcular el combustible de un viaje por carretera', 'repartir la gasolina entre ocupantes', 'comparar el coste de ida y vuelta frente a solo ida', 'saber cuánto cuesta cada 100 km'],
+    faqs: [
+      { q: '¿Cómo se calcula el coste?', a: 'Distancia × consumo ÷ 100 da los litros necesarios; litros × precio da el total. El viaje de ida y vuelta simplemente duplica la distancia antes de todo lo demás, y la cifra por persona divide el total entre los ocupantes.' },
+      { q: '¿Dónde encuentro mi consumo real?', a: 'La media a largo plazo del ordenador de a bordo es la mejor fuente: las cifras oficiales WLTP/EPA suelen ser un 10-20 % optimistas. La carretera normalmente gasta 20-30 % menos que la ciudad, así que introduce la mezcla que realmente vas a conducir.' },
+      { q: 'Yo pienso en MPG, ¿sirve igual?', a: 'Sí, convierte una vez: divide 235,215 entre tus MPG estadounidenses para obtener L/100km, y el precio por galón entre 3,785 para el precio por litro. A partir de ahí todo fluye igual.' },
+      { q: '¿Para qué sirve el coste por 100 km?', a: 'Equivale a consumo × precio, así que es la métrica más limpia para comparar coches, combustibles o gasolineras, porque elimina la distancia. La herramienta lo muestra junto al total del viaje justo para eso.' },
+    ],
     ui: {
       'in.consumption': 'Consumo',
       'in.distance': 'Distancia',
@@ -56,6 +70,13 @@ export const FuelCostCalculatorL10n: ToolL10n = {
     },
   },
   de: {
+    useCases: ['die Spritkosten einer Rundreise berechnen', 'Benzinkosten unter Mitfahrern aufteilen', 'Hin- und Rückreise gegen nur Hinfahrt vergleichen', 'ausrechnen, was 100 km Kraftstoff kosten'],
+    faqs: [
+      { q: 'Wie werden die Kraftstoffkosten berechnet?', a: 'Strecke × Verbrauch ÷ 100 ergibt die benötigten Liter; Liter × Preis den Gesamtbetrag. Bei Hin- und Rückfahrt wird die Strecke vorab verdoppelt, und der Pro-Kopf-Wert teilt die Summe durch die Zahl der Mitfahrer.' },
+      { q: 'Wo finde ich meinen realen Verbrauch?', a: 'Der Langzeitdurchschnitt des Bordcomputers ist die beste Quelle — offizielle WLTP-/EPA-Angaben sind meist 10-20 % zu optimistisch. Autobahn schlägt Stadtverkehr typischerweise um 20-30 %, gib also die Mix ein, den du wirklich fährst.' },
+      { q: 'Ich rechne in MPG — geht das auch?', a: 'Ja, einmal umrechnen: 235,215 durch deine US-MPG teilen ergibt L/100 km, und den Gallonenpreis durch 3,785 teilen ergibt den Literpreis. Danach läuft alles unverändert durch.' },
+      { q: 'Wozu dient die Kosten je 100 km?', a: 'Sie entspricht Verbrauch × Preis und ist damit die sauberste Vergleichsgröße — zwischen Autos, Kraftstoffsorten oder Tankstellen —, weil die Strecke herausgerechnet ist. Das Tool zeigt sie deshalb neben der Reisessumme an.' },
+    ],
     ui: {
       'in.consumption': 'Verbrauch',
       'in.distance': 'Entfernung',

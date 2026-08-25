@@ -6,6 +6,13 @@ import type { ToolL10n } from '../tool-l10n'
 
 export const TakeHomePayCalculatorL10n: ToolL10n = {
   zh: {
+    useCases: ['估算新 offer 的税后到手', '算加薪实际多拿多少', '比较单身与联合报税的差额', '规划 401(k) 缴存比例'],
+    faqs: [
+      { q: '这个估算有多准?', a: '它采用真实的 2025 联邦税档与标准扣除(单身 $15,000、夫妻联合申报 $30,000),FICA 也用精确税率:社保 6.2%(上限 $176,100 工资基数)、医保 1.45%(无上限)。州税、税收抵免和补充预扣未建模——把它当基线,别当工资系统。' },
+      { q: '为什么 401(k) 降个税却不降 FICA?', a: '传统 401(k) 缴存不计入应税收入,计算器在套用税档前先扣掉它。但 FICA 对这部分照常征税,所以工具按总收入算 FICA——与真实工资单的行为一致。' },
+      { q: '双周数字就是我到手的工资吗?', a: '接近,但它是年度净额 ÷ 26,没有平滑处理;你未录入的福利(HSA、牙科、寿险)也会让实际数字偏移。用它校验 offer 或涨薪是否合理,别拿它跟工资单逐分对账。' },
+      { q: '算州税吗?', a: '不算——州所得税从零(德州、佛州)到最高档超 10%(加州、夏威夷)都有,单一全国模型几乎会误导所有人。请单独估算州税,再从这里的年度净额中减去。' },
+    ],
     ui: {
       'in.annualNet': '预计年度税后',
       'in.fedTax': '联邦所得税估算',
@@ -29,6 +36,13 @@ export const TakeHomePayCalculatorL10n: ToolL10n = {
     },
   },
   es: {
+    useCases: ['estimar el neto de una nueva oferta de trabajo', 'ver cuánto mejora real una subida', 'comparar declarar solo contra en pareja', 'planificar el porcentaje de 401(k)'],
+    faqs: [
+      { q: '¿Cómo de precisa es la estimación?', a: 'Aplica los tramos federales reales de 2025 y la deducción estándar (15 000 $ individual, 30 000 $ matrimonio conjunto), más las tasas exactas de FICA: 6,2 % de Seguro Social hasta la base salarial de 176 100 $ y 1,45 % de Medicare sin tope. No modela impuesto estatal, créditos ni retenciones extra: tómala como línea base, no como nómina.' },
+      { q: '¿Por qué el 401(k) baja el impuesto pero no FICA?', a: 'Las aportaciones al 401(k) tradicional salen de la renta imponible, así que la calculadora las resta antes de aplicar tramos. FICA sí grava ese dinero, por eso se calcula sobre el salario bruto — igual que en una nómina real.' },
+      { q: '¿La cifra quincenal es mi paga real?', a: 'Se acerca, pero es el neto anual ÷ 26 sin suavizado, y los beneficios que no introduzcas (HSA, dental, seguro de vida) la desplazarán. Úsala para valorar ofertas o subidas, no para cuadrar céntimo a céntimo con payroll.' },
+      { q: '¿Incluye impuestos estatales?', a: 'No: el impuesto estatal va del 0 % (Texas, Florida) a más del 10 % en el tramo alto (California, Hawái), y un único modelo nacional confundiría a casi todos. Estima tu carga estatal aparte y réstala del neto anual mostrado aquí.' },
+    ],
     ui: {
       'in.annualNet': 'Neto anual estimado',
       'in.fedTax': 'Impuesto federal est.',
@@ -52,6 +66,13 @@ export const TakeHomePayCalculatorL10n: ToolL10n = {
     },
   },
   de: {
+    useCases: ['das Netto eines neuen Angebots schätzen', 'ausrechnen, was eine Gehaltserhöhung real bringt', 'Einzel- mit Zusammenveranlagung vergleichen', 'den 401(k)-Anteil planen'],
+    faqs: [
+      { q: 'Wie genau ist diese Schätzung?', a: 'Sie nutzt die echten Bundessteuertarife 2025 und den Standardabzug (15 000 $ Single, 30 000 $ zusammen), plus exakte FICA-Sätze: 6,2 % Social Security bis zur Bemessungsgrenze von 176 100 $ und 1,45 % Medicare ohne Obergrenze. Steuer der Bundesstaaten, Credits und Zusatzabzüge sind nicht modelliert — als Baseline sehen, nicht als Lohnbuchhaltung.' },
+      { q: 'Warum senkt 401(k) die Einkommensteuer, aber nicht FICA?', a: 'Traditionelle 401(k)-Beiträge verlassen das steuerbare Einkommen, deshalb zieht der Rechner sie vor den Tarifen ab. FICA besteuert dieses Geld trotzdem, also wird FICA auf das Bruttogehalt gerechnet — exakt wie in einer echten Abrechnung.' },
+      { q: 'Ist die 14-Tage-Zahl mein echter Lohnzettel?', a: 'Fast — sie ist Jahresnetto ÷ 26 ohne Glättung, und nicht erfasste Benefits (HSA, Zahnversicherung, Lebensversicherung) verschieben sie. Nutze sie, um Angebote oder Erhöhungen einzuschätzen, nicht zum Cent-Abgleich mit der Lohnbuchhaltung.' },
+      { q: 'Werden Staatssteuern berücksichtigt?', a: 'Nein — die Einkommensteuer der Bundesstaaten reicht von null (Texas, Florida) bis über 10 % im Spitzensatz (Kalifornien, Hawaii); ein einheitliches nationales Modell würde fast alle in die Irre führen. Schätze deine Staatssteuer separat und ziehe sie vom hier gezeigten Jahresnetto ab.' },
+    ],
     ui: {
       'in.annualNet': 'Geschätztes Jahres-Netto',
       'in.fedTax': 'Bundessteuer (geschätzt)',

@@ -6,6 +6,13 @@ import type { ToolL10n } from '../tool-l10n'
 
 export const HeartRateZoneCalculatorL10n: ToolL10n = {
   zh: {
+    useCases: ['按 Karvonen 法算五大心率区间', '规划 Zone 2 有氧基础训练', '给跑步训练定强度门槛', '用晨起静息心率个性化配速'],
+    faqs: [
+      { q: '为什么用 Karvonen 而不是最大心率百分比?', a: 'Karvonen 法使用心率储备——最大心率减静息心率——再按区间比例加回静息值。两个最大心率相同但静息心率不同的跑者会得到真正不同的训练区间,这是裸的"最大心率百分比"做不到的。' },
+      { q: '静息心率怎么量?', a: '早晨醒来、下床之前,完整数 60 秒脉搏,连续两三个早晨取平均。咖啡因、压力和睡眠不足都会抬高数值,所以晨起平均远比单次读数可靠——把这个平均值填进来。' },
+      { q: '220 减年龄准吗?', a: '它是人群平均值;个体最大心率会在其上下约 ±12 bpm 范围散布。一般区间训练用它没问题,但若精确阈值很关键(竞速、心脏康复),实验室测试或有监督的场地测试才能得到你个人的最大心率。' },
+      { q: '训练应该落在哪个区间?', a: '每周跑量的大头应放在 Zone 2(储备的 60-70%)——能正常聊天的有氧基础。Zone 4-5 是少量安排的高强度课。最常见的错误是长期泡在 Zone 3:恢复不过来,又不足以刺激适应。' },
+    ],
     ui: {
       'in.age': '年龄',
       'in.max': '估计最大心率',
@@ -27,6 +34,13 @@ export const HeartRateZoneCalculatorL10n: ToolL10n = {
     },
   },
   es: {
+    useCases: ['calcular las cinco zonas con el método Karvonen', 'planificar el trabajo de base en Zona 2', 'fijar umbrales de intensidad para correr', 'personalizar el entrenamiento con tu pulso en reposo'],
+    faqs: [
+      { q: '¿Por qué Karvonen y no el porcentaje del máximo?', a: 'Las zonas Karvonen usan la reserva de frecuencia cardíaca —máximo menos pulso en reposo— y devuelven el reposo proporcionalmente por zona. Dos corredores con el mismo máximo pero distinto reposo obtienen bandas de entrenamiento genuinamente distintas, algo que el porcentaje del máximo no logra.' },
+      { q: '¿Cómo mido mi pulso en reposo?', a: 'Al despertar, antes de levantarte, cuenta el pulso 60 segundos completos y promedia dos o tres mañanas. La cafeína, el estrés y dormir mal lo inflan, así que la media matutina supera cualquier lectura única: introduce esa media aquí.' },
+      { q: '¿Es fiable el 220 menos la edad?', a: 'Es una media poblacional; los máximos individuales se dispersan unos ±12 lpm a su alrededor. Para entrenar por zonas generales sirve, pero si los umbrales exactos importan (competición, rehabilitación cardíaca), una prueba de laboratorio o de campo supervisada da tu máximo personal.' },
+      { q: '¿En qué zona debo entrenar?', a: 'La mayor parte del volumen semanal pertenece a la Zona 2 (60-70 % de la reserva): base aeróbica a ritmo conversacional. Las zonas 4-5 son sesiones punta poco frecuentes. El error clásico es vivir en la Zona 3: demasiado para recuperar, demasiado poco para adaptarse.' },
+    ],
     ui: {
       'in.age': 'Edad',
       'in.max': 'FC máxima estimada',
@@ -48,6 +62,13 @@ export const HeartRateZoneCalculatorL10n: ToolL10n = {
     },
   },
   de: {
+    useCases: ['die fünf Herzfrequenz-Zonen nach Karvonen berechnen', 'das Grundlagentraining in Zone 2 planen', 'Intensitätsschwellen fürs Lauftraining setzen', 'das Training mit der Ruhepuls personalisieren'],
+    faqs: [
+      { q: 'Warum Karvonen statt Prozent der Maximalpuls?', a: 'Karvonen-Zonen nutzen die Herzfrequenzreserve — Maximalpuls minus Ruhepuls — und geben den Ruhepuls anteilig je Zone zurück. Zwei Läufer mit gleichem Maximal-, aber unterschiedlichem Ruhepuls bekommen wirklich unterschiedliche Trainingsbereiche; nackte Maximalpuls-Prozente können das nicht.' },
+      { q: 'Wie messe ich den Ruhepuls?', a: 'Direkt nach dem Aufwachen, vor dem Aufstehen, 60 volle Sekunden Puls zählen und über zwei, drei Morgen mitteln. Koffein, Stress und Schlafmangel pushen den Wert, deshalb schlägt der Morgenschnitt jede Einzelmessung — trage diesen Durchschnitt ein.' },
+      { q: 'Ist 220 minus Alter genau?', a: 'Es ist ein Populationsmittel; individuelle Maximalpulse streuen etwa ±12 Schläge darum. Für lockeres Zonentraining reicht es, aber wenn exakte Schwellen zählen (Wettkampf, kardiale Reha), liefert nur ein Labor- oder supervidierter Feldtest deinen persönlichen Maximalpuls.' },
+      { q: 'In welcher Zone soll ich trainieren?', a: 'Der Großteil des Wochenumfangs gehört in Zone 2 (60-70 % der Reserve) — Grundlagenarbeit im Gesprächstempo. Zone 4-5 sind scharfe, seltene Einheiten. Der klassische Fehler ist das Dauercamp in Zone 3: zu hart zur Erholung, zu leicht für Anpassung.' },
+    ],
     ui: {
       'in.age': 'Alter',
       'in.max': 'Geschätzte Maximalpuls',

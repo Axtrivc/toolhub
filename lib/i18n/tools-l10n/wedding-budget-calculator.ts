@@ -6,6 +6,12 @@ import type { ToolL10n } from '../tool-l10n'
 
 export const WeddingBudgetCalculatorL10n: ToolL10n = {
   zh: {
+    useCases: ['把婚礼总预算拆到各项目', '看每位宾客的真实成本', '决定请多少人最划算', '给各供应商定支出上限'],
+    faqs: [
+      { q: '这些百分比靠谱吗?', a: '它们来自美国常见的婚礼规划指引——场地加餐饮共占 55%,与真实预算的落点一致。城市婚礼偏场地、目的地婚礼偏行程,各不相同;把这套比例当作合理的初稿再按需调整,而不是圣旨。' },
+      { q: '为什么宾客数影响这么大?', a: '餐饮按人头计价,场地也有人均最低消费,宾客数会同时撬动多个条目。人均成本把这根杠杆摆上台面:按每位 150 美元算,少请 10 位宾客就省 1,500 美元——通常比砍掉伴手礼或升级布景省得多。' },
+      { q: '备用金那 10% 覆盖什么?', a: '文具、伴手礼,以及免不了的意外:切蛋糕费、供应商小费、超时费、临时加座。策划师建议 10-15% 的应急金不是没有道理——真没花掉,就当蜜月升级。' },
+    ],
     ui: {
       'in.attire': '礼服与造型 (10%)',
       'in.catering': '餐饮与酒水 (30%)',
@@ -29,6 +35,12 @@ export const WeddingBudgetCalculatorL10n: ToolL10n = {
     },
   },
   es: {
+    useCases: ['repartir el presupuesto total de la boda', 'ver el coste real por invitado', 'decidir cuántos invitados te convienen', 'fijar topes de gasto por proveedor'],
+    faqs: [
+      { q: '¿Son fiables los porcentajes?', a: 'Reflejan la guía habitual de bodas en EE. UU.: venue y catering juntos absorben el 55 %, que coincide con dónde acaban cayendo los presupuestos reales. Las bodas de ciudad se inclinan al venue y las de destino al viaje; usa el reparto como primer borrador sensato, no como evangelio.' },
+      { q: '¿Por qué importa tanto el número de invitados?', a: 'El catering escala por comensal y los venues cobran mínimos por persona, así que los invitados mueven varias partidas a la vez. La cifra por invitado deja visible la palanca: a 150 $ por cabeza, quitar 10 invitados libera 1 500 $ — normalmente más que renunciar a detalles o decoración.' },
+      { q: '¿Qué cubre la línea del 10 % extra?', a: 'Papelería, detalles y las sorpresas inevitables: tarifa de corte de tarta, propinas a proveedores, horas extra, acompañantes de última hora. Los wedding planners presupuestan un 10-15 % de contingencia por algo — y si no se gasta, se convierte en mejora de luna de miel.' },
+    ],
     ui: {
       'in.attire': 'Vestuario y belleza (10 %)',
       'in.catering': 'Catering y bar (30 %)',
@@ -52,6 +64,12 @@ export const WeddingBudgetCalculatorL10n: ToolL10n = {
     },
   },
   de: {
+    useCases: ['das Hochzeitsbudget auf Posten verteilen', 'die echten Kosten pro Gast sehen', 'entscheiden, wie viele Gäste passen', 'Ausgabenobergrenzen pro Dienstleister setzen'],
+    faqs: [
+      { q: 'Sind die Prozente verlässlich?', a: 'Sie spiegeln die übliche US-Planungslehre — Location und Catering zusammen schlucken 55 %, was mit realen Budgets übereinstimmt. Stadthochzeiten kippen Richtung Location, Reisehochzeiten Richtung Logistik; nimm die Aufteilung als sinnvollen ersten Entwurf, nicht als Evangelium.' },
+      { q: 'Warum spielt die Gästeszahl so eine Rolle?', a: 'Catering rechnet pro Kopf und Locations haben Mindestumsätze pro Person — Gäste bewegen also mehrere Posten gleichzeitig. Der Pro-Gast-Wert macht den Hebel sichtbar: bei 150 $ pro Kopf setzen 10 Gäste weniger 1 500 $ frei — meist mehr, als auf Give-aways oder Deko-Upgrades zu verzichten.' },
+      { q: 'Wofür ist die 10-%-Pufferposition?', a: 'Papeterie, Gastgeschenke und die unvermeidlichen Überraschungen: Tortenschnittgebühr, Trinkgelder, Überstunden, Last-Minut-Begleiter. Planner kalkulieren 10-15 % contingency aus gutem Grund — unangetastet wird sie zum Honigmon-Upgrade.' },
+    ],
     ui: {
       'in.attire': 'Outfit & Beauty (10 %)',
       'in.catering': 'Catering & Bar (30 %)',
