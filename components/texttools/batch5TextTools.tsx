@@ -96,7 +96,7 @@ function HashResult({ label, value, warning }: { label: string; value: string; w
         <CopyButton value={value} label="" />
       </div>
       {warning && <p className="mb-1 text-xs text-amber-600">{warning}</p>}
-      <code className="block break-all font-mono text-xs text-slate-900">{value}</code>
+      <code className="block break-all font-mono text-xs text-slate-900 dark:text-slate-100">{value}</code>
     </div>
   )
 }

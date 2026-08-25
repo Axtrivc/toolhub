@@ -42,7 +42,7 @@ export function UUIDGeneratorClient() {
         <div className="space-y-2">
           {uuids.map((u, i) => (
             <div key={i} className="flex items-center justify-between gap-2 rounded-lg border border-slate-200 bg-white p-3 dark:border-slate-700 dark:bg-slate-800">
-              <code className="font-mono text-sm text-slate-900 break-all">{u}</code>
+              <code className="font-mono text-sm text-slate-900 break-all dark:text-slate-100">{u}</code>
               <CopyButton value={u} label="" />
             </div>
           ))}

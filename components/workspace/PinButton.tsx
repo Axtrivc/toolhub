@@ -51,7 +51,9 @@ export function PinButton({ slug, name, className = '' }: PinButtonProps) {
       className={`inline-flex h-7 w-7 items-center justify-center rounded-lg border transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/60 ${
         pinned
           ? 'border-blue-200 bg-blue-50 text-blue-600 opacity-100 dark:border-blue-800/60 dark:bg-blue-950/50 dark:text-blue-400'
-          : 'border-slate-200/80 bg-white/80 text-slate-400 opacity-0 backdrop-blur-sm hover:border-slate-300 hover:text-slate-600 group-hover:opacity-100 dark:border-slate-700 dark:bg-slate-900/80 dark:text-slate-500 dark:hover:border-slate-600 dark:hover:text-slate-300'
+          : // 触屏无 hover:未固定钉在粗指针设备上常驻半透明,可看见也可点中;
+            // 键盘 focus-visible 时同样浮现。桌面鼠标仍保持 hover 浮现的克制感
+            'border-slate-200/80 bg-white/80 text-slate-400 opacity-40 backdrop-blur-sm hover:border-slate-300 hover:text-slate-600 hover:opacity-100 group-hover:opacity-100 focus-visible:opacity-100 [@media(pointer:fine)]:opacity-0 dark:border-slate-700 dark:bg-slate-900/80 dark:text-slate-500 dark:hover:border-slate-600 dark:hover:text-slate-300'
       } ${className}`}
     >
       <Pin

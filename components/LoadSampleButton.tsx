@@ -49,10 +49,14 @@ export function LoadSampleButton({
 
   const handleClick = useCallback(() => {
     onLoad()
-    setLoaded(true)
-    if (timerRef.current) clearTimeout(timerRef.current)
-    timerRef.current = setTimeout(() => setLoaded(false), 1500)
-  }, [onLoad])
+    // 确认覆盖态的第一次点击只是 arm(父组件 return,未真正填充),
+    // 不闪"✓ loaded"成功反馈;真正执行 onLoad 的那次(非确认态)才展示
+    if (!confirmOverwrite) {
+      setLoaded(true)
+      if (timerRef.current) clearTimeout(timerRef.current)
+      timerRef.current = setTimeout(() => setLoaded(false), 1500)
+    }
+  }, [onLoad, confirmOverwrite])
 
   useEffect(
     () => () => {
