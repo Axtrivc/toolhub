@@ -6,6 +6,13 @@ import type { ToolL10n } from '../tool-l10n'
 
 export const PaceCalculatorL10n: ToolL10n = {
   zh: {
+    useCases: ['由完赛成绩反推跑步配速', '预测 5K 到全马的等效成绩', '在公里与英里配速间换算', '按目标时间规划训练节奏'],
+    faqs: [
+      { q: '成绩时间怎么输入?', a: 'h:mm:ss、mm:ss 或纯秒数都能解析:50:00 是五十分钟,1:45:30 是一小时四十五分半。配上任意距离,即可按你选的单位得到每公里或每英里配速,以及对应单位的速度。' },
+      { q: '比赛成绩预测靠谱吗?', a: '预测假设你在所有距离上都保持完全相同的配速——这是乐观上限。真实跑者随距离增加会减速,所以全程马拉松的预测要当作最好情况;用 Riegel 疲劳模型的预测器会给出更慢、更可及的目标。' },
+      { q: '初学者跑多快算正常?', a: '多数新跑者落在每公里 7:00-8:30(约每英里 11:00-13:30)。低于 6:00/km 已是不错的业余水平。第一年里,稳定的周跑量比刻意追速度更能提升你。' },
+      { q: '配速和速度,该看哪个?', a: '配速(每公里/英里的用时)是训练计划、比赛和运动手表的语言;速度(km/h 或 mph)是跑步机显示的。本工具两者都给,换算采用精确的 1 英里 = 1.609344 公里。' },
+    ],
     ui: {
       'in.distance': '距离',
       'in.pace': '配速',
@@ -25,6 +32,13 @@ export const PaceCalculatorL10n: ToolL10n = {
     },
   },
   es: {
+    useCases: ['deducir tu ritmo a partir de un tiempo de meta', 'predecir marcas equivalentes del 5K al maratón', 'convertir entre ritmo por km y por milla', 'planificar el ritmo de entrenamiento por objetivo'],
+    faqs: [
+      { q: '¿Cómo introduzco el tiempo?', a: 'Se aceptan h:mm:ss, mm:ss o segundos sueltos: 50:00 son cincuenta minutos, 1:45:30 una hora y cuarenta y cinco. Con cualquier distancia obtienes el ritmo por kilómetro o por milla, según elijas, más la velocidad en las mismas unidades.' },
+      { q: '¿Son fiables las predicciones de carrera?', a: 'Asumen que mantienes exactamente el mismo ritmo en todas las distancias: un techo optimista. Los corredores reales se frenan al alargar distancia, así que toma la proyección de maratón como mejor caso; los predictores con el modelo de fatiga de Riegel dan objetivos más lentos y alcanzables.' },
+      { q: '¿Qué ritmo es decente para un principiante?', a: 'La mayoría arranca entre 7:00 y 8:30 por kilómetro (unos 11:00-13:30 por milla). Bajar de 6:00/km ya es un buen nivel popular. En el primer año, el volumen semanal constante te mejora mucho más que perseguir velocidad.' },
+      { q: '¿Ritmo o velocidad, cuál necesito?', a: 'El ritmo (tiempo por km o milla) es el idioma de los planes de entrenamiento, carreras y relojes; la velocidad (km/h o mph) es lo que muestran las cintas. Aquí obtienes ambos, con el factor exacto de 1 milla = 1,609344 km.' },
+    ],
     ui: {
       'in.distance': 'Distancia',
       'in.pace': 'Ritmo',
@@ -44,6 +58,13 @@ export const PaceCalculatorL10n: ToolL10n = {
     },
   },
   de: {
+    useCases: ['aus einer Zielzeit das Lauftempo herleiten', 'äquivalente Zeiten von 5K bis Marathon vorhersagen', 'zwischen km- und Meilen-Tempo umrechnen', 'das Trainingstempo auf ein Ziel hin planen'],
+    faqs: [
+      { q: 'Wie gebe ich die Zeit ein?', a: 'h:mm:ss, mm:ss oder reine Sekunden werden alle erkannt: 50:00 sind fünfzig Minuten, 1:45:30 eine Stunde fünfundvierzig. Mit einer beliebigen Distanz bekommst du das Pace pro Kilometer oder Meile — je nach Auswahl — plus die Geschwindigkeit in passenden Einheiten.' },
+      { q: 'Sind die Wettlaufprognosen realistisch?', a: 'Sie nehmen an, dass du auf jeder Distanz exakt dasselbe Tempo hältst — eine optimistische Obergrenze. Real verlangsamen sich Läufer mit der Distanz, daher gilt die Marathon-Projektion als Bestfall; Prognosegeräte mit dem Riegel-Ermüdungsmodell liefern langsamere, erreichbare Ziele.' },
+      { q: 'Welches Tempo ist für Anfänger ordentlich?', a: 'Die meisten Einsteiger liegen zwischen 7:00 und 8:30 pro Kilometer (etwa 11:00-13:30 pro Meile). Unter 6:00/km ist ein solides Freizeitniveau. Im ersten Jahr bringt dich konstantes Wochenpensum viel weiter als Tempo-Jagd.' },
+      { q: 'Pace oder Geschwindigkeit — was brauche ich?', a: 'Pace (Zeit pro km oder Meile) sprechen Trainingspläne, Rennen und Uhren; Geschwindigkeit (km/h bzw. mph) zeigt das Laufband. Du bekommst beides, umgerechnet mit dem exakten Faktor 1 Meile = 1,609344 km.' },
+    ],
     ui: {
       'in.distance': 'Entfernung',
       'in.pace': 'Tempo',

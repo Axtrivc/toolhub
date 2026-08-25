@@ -6,6 +6,13 @@ import type { ToolL10n } from '../tool-l10n'
 
 export const ProteinIntakeCalculatorL10n: ToolL10n = {
   zh: {
+    useCases: ['按体重算每日蛋白质需求', '规划增肌期的蛋白质摄入', '设定减脂保肌的高蛋白目标', '把蛋白质目标分摊到每餐'],
+    faqs: [
+      { q: '我到底需要多少蛋白质?', a: '取决于体重和训练量。久坐成年人约 0.8 g/kg 是 RDA 下限,中等运动量适合 1.2-1.6 g/kg,认真的力量或耐力训练会推到 1.6-2.2 g/kg——这里的区间遵循 ISSN 与 ACSM 的立场声明。' },
+      { q: '减脂期要吃更多蛋白质吗?', a: '要。热量缺口下,1.6-2.7 g/kg 有助于保住肌肉并延长饱腹感。选择减脂目标后,计算器会自动把你的个人区间上调到这一档。' },
+      { q: '高蛋白摄入有危险吗?', a: '对健康成人,试验显示每天约 2.2 g/kg 以内的摄入没有危害——肾脏完全能处理。已有肾病的人应先咨询医生;该提醒针对的是他们,不适用于一般人群。' },
+      { q: '一天内怎么分配重要吗?', a: '有一定影响。肌肉蛋白质合成对一天 3-5 次、每次约 0.4 g/kg 以上的摄入反应更好,远胜一次吃一大顿——所以结果里附带了按四餐计算的每餐目标。' },
+    ],
     ui: {
       'in.activity': '活动水平',
       'in.basis': '计算依据',
@@ -30,6 +37,13 @@ export const ProteinIntakeCalculatorL10n: ToolL10n = {
     },
   },
   es: {
+    useCases: ['calcular tu proteína diaria según el peso', 'planificar la ingesta en fase de volumen', 'fijar un objetivo alto en proteína al definir', 'repartir el objetivo de proteína entre comidas'],
+    faqs: [
+      { q: '¿Cuánta proteína necesito?', a: 'Escala con el peso corporal y el entrenamiento. Unos 0,8 g/kg es el mínimo (RDA) para adultos sedentarios; con ejercicio moderado funcionan bien 1,2-1,6 g/kg, y el entrenamiento serio de fuerza o resistencia sube la necesidad a 1,6-2,2 g/kg. Los rangos siguen las posiciones oficiales de ISSN y ACSM.' },
+      { q: '¿Debo comer más proteína al definir?', a: 'Sí. En déficit calórico, 1,6-2,7 g/kg ayuda a conservar músculo y mantiene la saciedad. Elige la meta de perder grasa y la calculadora sube automáticamente tu rango personal a esa banda.' },
+      { q: '¿Es peligrosa una ingesta alta en proteína?', a: 'Para adultos sanos, los ensayos no muestran daños hasta unos 2,2 g/kg al día: los riñones manejan la carga sin problema. Quien ya tenga enfermedad renal debe consultar al médico; esa precaución no aplica a la población general.' },
+      { q: '¿Importa el reparto a lo largo del día?', a: 'Bastante. La síntesis proteica muscular responde mejor a 3-5 tomas de al menos ~0,4 g/kg cada una que a una única dosis gigante; por eso el resultado incluye el objetivo por comida asumiendo cuatro comidas.' },
+    ],
     ui: {
       'in.activity': 'Nivel de actividad',
       'in.basis': 'Base',
@@ -54,6 +68,13 @@ export const ProteinIntakeCalculatorL10n: ToolL10n = {
     },
   },
   de: {
+    useCases: ['den täglichen Eiweißbedarf nach Körpergewicht berechnen', 'die Eiweißzufuhr im Aufbau planen', 'ein hohes Eiweißziel für die Definitionsphase setzen', 'das Eiweißziel auf die Mahlzeiten verteilen'],
+    faqs: [
+      { q: 'Wie viel Eiweiß brauche ich?', a: 'Es skaliert mit Körpergewicht und Training. Etwa 0,8 g/kg ist die RDA-Untergrenze für Sitzende; bei moderatem Training passen 1,2-1,6 g/kg, ernsthaftes Kraft- oder Ausdauertraining hebt den Bedarf auf 1,6-2.2 g/kg — die Bereiche folgen den Positionspapieren von ISSN und ACSM.' },
+      { q: 'Sollte ich in der Diät mehr Eiweiß essen?', a: 'Ja. Im Kaloriendefizit hilft 1,6-2,7 g/kg, Muskeln zu halten und sättigt länger. Wähle das Ziel „Fett abnehmen“ und der Rechner verschiebt deinen persönlichen Bereich automatisch nach oben.' },
+      { q: 'Ist hohe Eiweißzufuhr gefährlich?', a: 'Für gesunde Erwachsene zeigen Studien bis rund 2,2 g/kg pro Tag keinen Schaden — die Nieren verkraften das problemlos. Wer bereits nierenkrank ist, sollte ärztlichen Rat einholen; diese Vorsicht gilt nicht der Allgemeinbevölkerung.' },
+      { q: 'Spielt die Verteilung über den Tag eine Rolle?', a: 'Ziemlich. Die Muskeleiweißsynthese reagiert besser auf 3-5 Mahlzeiten mit jeweils mindestens ~0,4 g/kg als auf eine einzige Riesenration — deshalb enthält das Ergebnis ein Ziel pro Mahlzeit bei vier Mahlzeiten.' },
+    ],
     ui: {
       'in.activity': 'Aktivitätsniveau',
       'in.basis': 'Grundlage',

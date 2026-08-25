@@ -1760,6 +1760,179 @@ export const toolFaqs: Record<string, FaqPair[]> = {
       a: 'Yes. Beyond the standard hint filters it can match anagram patterns and known letter positions, which helps when you have scrambled letters or partial information and want every dictionary word that fits.',
     },
   ],
+  // ══════════ _2025-08 扩张批1(10 个)══════════
+  'epoch-converter': [
+    {
+      q: 'Seconds or milliseconds — which do I have?',
+      a: 'Count the digits: 10 digits is seconds, 13 digits is milliseconds (the JavaScript convention). The converter auto-detects both and flags anything from 9 to 14 digits with a best-guess warning, so odd values do not silently misparse.',
+    },
+    {
+      q: 'Does it handle dates before 1970?',
+      a: 'Yes. Unix time counts from 1970-01-01 00:00 UTC, and negative timestamps represent earlier dates. Paste a negative number and you get the matching pre-1970 moment in both ISO 8601 UTC and your local time.',
+    },
+    {
+      q: 'Why do 13-digit timestamps exist?',
+      a: "JavaScript's Date object works in milliseconds, so JS-heavy systems — browser logs, MongoDB, many APIs — store 13-digit values. Unix tools and databases like MySQL default to 10-digit seconds. Both conventions are everywhere, which is why auto-detection matters.",
+    },
+    {
+      q: 'Are leap seconds included?',
+      a: 'No. Unix time defines every day as exactly 86,400 seconds and ignores leap seconds entirely. That keeps timestamp math linear; the tiny drift against real UTC is corrected by time servers, not inside the timestamp itself.',
+    },
+  ],
+  'json-diff': [
+    {
+      q: 'Does key order matter?',
+      a: 'No. The comparison is structural: two objects match when their keys and values match, regardless of the order keys appear in. Array order does matter — [1,2] versus [2,1] is reported as changed, matching how JSON treats lists.',
+    },
+    {
+      q: 'How are nested differences reported?',
+      a: 'Every difference gets a dot-notation path such as user.address.city, the change type (added, removed, or changed), and the old and new values side by side. You can pinpoint where two API responses diverge without eyeballing the raw files.',
+    },
+    {
+      q: 'What happens with invalid JSON?',
+      a: "The parser error from your browser's JSON engine is shown in red — no guessing, no partial results. Fix the syntax error on the flagged side and the diff re-runs instantly as you type.",
+    },
+    {
+      q: 'Can I export the diff?',
+      a: 'Yes. Copy Summary produces one line per difference, prefixed + / − / ~, plus the total count — ready to paste into a pull request, ticket, or chat. There is also a plain-text download of the same data.',
+    },
+  ],
+  'line-diff-checker': [
+    {
+      q: 'What algorithm does it use?',
+      a: 'Longest common subsequence (LCS) — the same family of algorithm behind git diff. It computes the smallest set of added and removed lines that turns the original text into the changed one, then displays them with + and − markers.',
+    },
+    {
+      q: 'How big can the inputs be?',
+      a: 'Up to 100,000 characters or 2,000 lines per side. Beyond that the O(n²) LCS table would strain a browser tab, so the tool asks you to trim instead of freezing. That ceiling comfortably covers emails, contracts, and config files.',
+    },
+    {
+      q: 'Do blank lines count as differences?',
+      a: 'Yes. Empty lines participate in the comparison exactly the way version control treats them, so a deleted blank line shows as a removal. If you only care about content, strip blank lines on both sides first.',
+    },
+    {
+      q: 'Can I copy the result?',
+      a: 'The Copy button exports the full annotated output — every line prefixed "+ ", "− ", or two spaces — with added/removed counts shown above. A ready-made diff for email, docs, or a bug report.',
+    },
+  ],
+  'robots-txt-generator': [
+    {
+      q: 'Where do I put robots.txt?',
+      a: 'In your domain root, served as plain text at example.com/robots.txt — crawlers only look there. A missing file means everything is allowed; syntax errors can make well-meaning rules fail silently, so keep one rule set per user-agent block.',
+    },
+    {
+      q: 'Does the block-AI preset really work?',
+      a: 'It emits explicit disallow rules for GPTBot, ClaudeBot, and CCBot — the crawlers behind OpenAI, Anthropic, and Common Crawl training sets. Those operators currently honor robots.txt, so it works as long as they keep doing so; treat it as a respected request, not a technical wall.',
+    },
+    {
+      q: 'Why is my crawl-delay ignored?',
+      a: 'Google has never supported Crawl-delay and skips the line entirely; Bing and Yandex honor it. The generator includes the field for those engines — for Googlebot load problems, use Search Console crawl-rate settings instead.',
+    },
+    {
+      q: 'If Allow and Disallow both match, which wins?',
+      a: "In Google's implementation the more specific (longest) matching path wins. The presets emit conventional, unambiguous combinations — block-everything is a bare Disallow: / with no competing Allow — so you don't have to reason about precedence.",
+    },
+  ],
+  'roman-numeral-converter': [
+    {
+      q: 'What is the supported range?',
+      a: '1 to 3999. Classical notation has no zero and no standard way to write 4000+ without overline marks that keyboards and most fonts cannot express. For years, chapter numbers, and copyright lines, 3999 covers essentially every real use.',
+    },
+    {
+      q: 'Why is 4 written IV, not IIII?',
+      a: 'Standard form uses subtractive pairs — IV = 4, IX = 9, XL = 40, XC = 90, CD = 400, CM = 900. Clock faces show IIII by tradition, but this converter enforces standard form: it rejects IIII or VX and suggests the canonical spelling instead.',
+    },
+    {
+      q: 'Does it show the breakdown?',
+      a: 'Yes. Number-to-numeral lists the symbols in order (2024 becomes MM + XX + IV), and numeral-to-number validates the input against canonical form before trusting it — invalid combinations are refused rather than misread.',
+    },
+  ],
+  'pace-calculator': [
+    {
+      q: 'How do I enter my time?',
+      a: 'h:mm:ss, mm:ss, or plain seconds all parse: 50:00 is fifty minutes, 1:45:30 is one hour forty-five. Enter any distance with it and you get pace per kilometer or per mile, whichever you select, plus speed in matching units.',
+    },
+    {
+      q: 'Are the race predictions realistic?',
+      a: 'They assume you hold the exact same pace at every distance — an optimistic ceiling. Real runners slow as distance grows, so treat the marathon projection as a best case; predictors using the Riegel fatigue model give slower, more achievable targets.',
+    },
+    {
+      q: 'What is a decent pace for a beginner?',
+      a: 'Most new runners land between 7:00 and 8:30 per kilometer (about 11:00-13:30 per mile). Below 6:00/km is a solid recreational level. In your first year, consistent weekly mileage improves you far more than chasing speed.',
+    },
+    {
+      q: 'Pace or speed — which do I need?',
+      a: 'Pace (time per km or mile) is what training plans, races, and running watches use; speed (km/h or mph) is what treadmills display. You get both, converted with the exact 1.609344 km-per-mile factor.',
+    },
+  ],
+  'protein-intake-calculator': [
+    {
+      q: 'How much protein do I need?',
+      a: 'It scales with body weight and training. About 0.8 g per kg is the RDA floor for sedentary adults, moderate exercisers do well on 1.2-1.6 g/kg, and serious strength or endurance training pushes needs to 1.6-2.2 g/kg — the ranges here follow ISSN and ACSM position stands.',
+    },
+    {
+      q: 'Should I eat more protein while cutting?',
+      a: 'Yes. In a calorie deficit, 1.6-2.7 g/kg helps preserve muscle and keeps you fuller for longer. Choose the lose-fat goal and the calculator automatically shifts your personal range into that higher band.',
+    },
+    {
+      q: 'Is a high protein intake dangerous?',
+      a: 'For healthy adults, trials show no harm at intakes up to roughly 2.2 g/kg per day — kidneys handle the load fine. People with existing kidney disease should consult a doctor first; that caution does not apply to the general population.',
+    },
+    {
+      q: 'Does timing across the day matter?',
+      a: 'Somewhat. Muscle protein synthesis responds better to 3-5 feedings of at least about 0.4 g/kg each than to one giant dose, which is why the result includes a per-meal target assuming four meals.',
+    },
+  ],
+  'electricity-cost-calculator': [
+    {
+      q: 'How is the cost calculated?',
+      a: 'Watts × hours ÷ 1000 gives kWh per day; multiplying by your rate gives the daily cost. Monthly uses 30.44 days (the true annual average) and yearly uses 365 — so the annual line is the honest number for always-on devices.',
+    },
+    {
+      q: "Where do I find an appliance's wattage?",
+      a: 'On the nameplate, the power brick, or the spec sheet, usually marked W or input. The spread is huge: a 1500 W space heater costs roughly 30× more per hour than a 50 W laptop — exactly the comparison this tool makes easy.',
+    },
+    {
+      q: 'What rate should I enter?',
+      a: 'Your marginal rate from a recent bill, including per-kWh delivery charges when they are billed that way. The US residential average sits around $0.16-0.17 per kWh, but rates vary widely by state, plan, and time of use.',
+    },
+  ],
+  'sleep-calculator': [
+    {
+      q: 'What is the 90-minute rule?',
+      a: 'A full sleep cycle — light sleep, deep sleep, and REM — averages about 90 minutes. Waking between cycles feels dramatically easier than being pulled out of deep sleep, so the tool times bedtimes and wake-ups to land on cycle boundaries.',
+    },
+    {
+      q: 'Why does it subtract 15 minutes?',
+      a: 'That is the assumed time to fall asleep — healthy sleep latency averages 10-20 minutes and 15 is the standard midpoint. Every suggested time already includes it; if you drop off much faster or slower, adjust by that difference.',
+    },
+    {
+      q: 'How many cycles should I get?',
+      a: 'Five to six cycles (7.5-9 hours) suits most adults, and those options are marked recommended. Four cycles is survivable occasionally, but regularly sleeping under 7 hours carries health costs no clever timing can erase.',
+    },
+    {
+      q: 'I must wake at 6 AM — when should I sleep?',
+      a: 'Switch to the wake-up mode, enter 06:00, and you get a ladder of bedtimes counting back in 90-minute steps: 22:45 for five cycles, 21:15 for six. Pick the one you can actually keep consistently.',
+    },
+  ],
+  'cooking-converter': [
+    {
+      q: 'Why is a cup of flour not a cup of sugar?',
+      a: 'Cups measure volume, but ingredients differ in density: a US cup of all-purpose flour is about 120 g while a cup of granulated sugar is 200 g. This converter uses a per-ingredient density table (USDA-based) instead of one blanket factor.',
+    },
+    {
+      q: 'How accurate is it?',
+      a: 'Good enough for everyday baking — values are standard spoon-and-level averages. How you fill the cup shifts results by up to ~20% (sifted versus scooped flour), so a kitchen scale still wins for delicate recipes like macarons or sourdough.',
+    },
+    {
+      q: 'Which ingredients are supported?',
+      a: 'Twenty common ones: all-purpose, bread, cake, whole-wheat, and almond flour; granulated, brown, and powdered sugar; butter, oil, milk, water, honey, cooked and uncooked rice, rolled oats, cocoa, chocolate chips, yogurt, and peanut butter.',
+    },
+    {
+      q: 'Can I go from grams to cups?',
+      a: 'Yes. Pick grams (or ounces) as the input unit, enter the weight, and you get cups, tablespoons, and teaspoons back for the selected ingredient — the usual fix for European recipes written purely by weight.',
+    },
+  ],
 }
 export function getToolFaqs(slug: string): FaqPair[] {
   return toolFaqs[slug] ?? []
