@@ -113,6 +113,18 @@ export const calculatorSamples: Record<string, Record<string, string>> = {
     right: 'const retries = 5;\nasync function fetchUser(id) {\n  const res = await api.get(`/users/${id}`);\n  if (!res.ok) throw new Error("not found");\n  return res.data;\n}',
   },
   'cooking-converter': { amount: '3', from: 'cup', ingredient: 'flour' },
+  // ── 2025-08 第二批 ──
+  'fuel-cost-calculator': { distance: '450', consumption: '7.5', price: '1.65', people: '3', roundTrip: 'round' },
+  'subscription-cost-calculator': { monthlySubs: '45', yearlySubs: '120', quarterlySubs: '30' },
+  'overtime-calculator': { base: '25', regularHours: '40', otMultiplier: '1.5', otHours: '8' },
+  'take-home-pay-calculator': { gross: '75000', filing: 'single', preTaxPct: '6', premiums: '2000' },
+  'wedding-budget-calculator': { total: '25000', guests: '80' },
+  'amortization-table-generator': { principal: '320000', rate: '6.5', years: '30' },
+  'heart-rate-zone-calculator': { age: '30', resting: '60' },
+  'caffeine-calculator': { mg: '200', hoursAgo: '3', bedtimeIn: '8' },
+  'steps-to-calories-calculator': { steps: '10000', weight: '70', height: '175', pace: 'moderate' },
+  'paint-calculator': { perimeter: '14', wallHeight: '2.4', doors: '2', windows: '2', coats: '2', unit: 'liter' },
+  'dog-age-calculator': { dogAge: '5', size: 'medium' },
 }
 
 // ─────────────────────────── 单位转换器示例 ───────────────────────────
