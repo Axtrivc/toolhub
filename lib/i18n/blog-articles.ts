@@ -30,12 +30,13 @@ import type { Locale } from '@/lib/i18n'
 /** 内联 markdown 段落文本(支持 **bold** / *italic* / `code`) */
 // string 形态自带,这里只为类型可读性留注释。
 
-/** 单个正文块:段落 / 列表 / 子标题 / 代码块 */
+/** 单个正文块:段落 / 列表 / 子标题 / 代码块 / 工具内链卡(SEO 内链) */
 export type ArticleBlock =
   | string
   | { list: string[] }
   | { heading: string }
   | { code: string }
+  | { card: { title: string; href: string; desc: string } }
 
 /** 一个章节:H2 小标题 + 若干块 */
 export interface ArticleSection {

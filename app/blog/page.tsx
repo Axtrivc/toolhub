@@ -22,6 +22,33 @@ import { SITE_URL } from '@/lib/constants'
 /** 博客文章注册表(单一数据源)。按日期倒序排列。 */
 const posts: BlogPostMeta[] = [
   {
+    slug: 'mortgage-loan-calculators',
+    title: 'Mortgage & Loan Calculators: The Honest Guide (PITI, PMI, Payoff Curves)',
+    description:
+      'Lenders quote P&I and skip taxes, insurance, and PMI. The real numbers — full PITI, the five-figure lever of extra payments, the rent-vs-buy crossover year, and the minimum-payment trap — with free in-browser calculators.',
+    date: '2026-08-26',
+    readTime: '7 min',
+    tags: ['mortgage', 'loans', 'personal-finance', 'calculators'],
+    published: true,
+    i18n: {
+      zh: {
+        title: '房贷与贷款计算器诚实指南(PITI、PMI、还款曲线)',
+        description:
+          '银行只报本息、跳过税费保险与 PMI。真实数字——PITI 全口径、提前还款的五位数杠杆、租买交叉年与最低还款陷阱,配套全程浏览器本地运行的免费计算器。',
+      },
+      es: {
+        title: 'Calculadoras hipotecarias y de préstamos: la guía honesta (PITI, PMI, curvas de amortización)',
+        description:
+          'Los bancos citan capital e intereses y omiten impuestos, seguro y PMI. Los números reales — PITI completo, la palanca de cinco cifras de los pagos extra, el cruce alquilar/comprar y la trampa del mínimo — con calculadoras gratuitas en el navegador.',
+      },
+      de: {
+        title: 'Hypotheken- und Kreditrechner: der ehrliche Leitfaden (PITI, PMI, Tilgungskurven)',
+        description:
+          'Banken nennen Tilgung und Zins und lassen Steuern, Versicherung und PMI weg. Die echten Zahlen — volle PITI, der fünfstellige Hebel der Sondertilgung, das Mieten-Kaufen-Schnittpunkt-Jahr und die Mindestzahlungs-Falle — mit kostenlosen Rechnern im Browser.',
+      },
+    },
+  },
+  {
     slug: 'how-i-built-toolhub',
     title: 'How I Built ToolHub: A 169-Tool Static PWA That Stays Sub-Second',
     description:

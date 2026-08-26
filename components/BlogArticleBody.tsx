@@ -1,5 +1,6 @@
 'use client'
 
+import Link from 'next/link'
 import type { ReactNode } from 'react'
 import { useApp } from './providers/AppProviders'
 import {
@@ -8,6 +9,7 @@ import {
   type ArticleSection,
   type ArticleBlock,
 } from '@/lib/i18n/blog-articles'
+import { mortgageLoanCalculatorsArticle } from '@/lib/i18n/blog-article-finance'
 import type { Locale } from '@/lib/i18n'
 
 /**
@@ -28,6 +30,7 @@ import type { Locale } from '@/lib/i18n'
 
 const ARTICLES: Record<string, Record<Locale, ArticleContent>> = {
   'how-i-built-toolhub': howIBuiltToolHubArticle,
+  'mortgage-loan-calculators': mortgageLoanCalculatorsArticle,
 }
 
 /**
@@ -85,6 +88,29 @@ function renderBlock(block: ArticleBlock, key: string): ReactNode {
   }
   if ('heading' in block) {
     return <h3 key={key}>{block.heading}</h3>
+  }
+  if ('card' in block) {
+    const { title, href, desc } = block.card
+    return (
+      <Link
+        key={key}
+        href={href}
+        className="group my-5 flex items-center gap-4 rounded-xl border p-4 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md"
+        style={{ borderColor: 'rgb(var(--border))', backgroundColor: 'rgb(var(--bg-card))' }}
+      >
+        <span className="min-w-0 flex-1">
+          <span className="block text-sm font-bold" style={{ color: 'rgb(var(--text))' }}>
+            {title}
+          </span>
+          <span className="mt-0.5 block text-sm" style={{ color: 'rgb(var(--text-muted))' }}>
+            {desc}
+          </span>
+        </span>
+        <span className="shrink-0 font-mono text-sm font-semibold text-brand-600 transition-transform group-hover:translate-x-0.5 dark:text-brand-400">
+          →
+        </span>
+      </Link>
+    )
   }
   // list
   return (
