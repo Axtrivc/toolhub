@@ -2,6 +2,7 @@
 
 import { useEffect, useId, useMemo, useRef, useState } from 'react'
 import { tryInlineAnswer } from '@/lib/inline-answer'
+import { searchTools, highlightSegments } from '@/lib/tool-search'
 import { createPortal } from 'react-dom'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
@@ -55,25 +56,11 @@ export function SearchPalette({ tools, locale, open, onClose }: SearchPalettePro
   const reduceMotion = useReducedMotion()
   const router = useRouter()
 
-  // ── 过滤:匹配 name / 介绍 / 关键词 / 长尾词 / 分类 / slug ──
+  // ── 过滤:统一搜索引擎 lib/tool-search(分词 AND + 加权评分,含长尾词/分类/slug)──
   const results = useMemo(() => {
-    const q = query.trim().toLowerCase()
+    const q = query.trim()
     if (!q) return tools.slice(0, MAX_RESULTS)
-    const matched = tools.filter((tl) => {
-      const haystack = [
-        tl.name,
-        tl.h1,
-        tl.shortIntro,
-        tl.category,
-        tl.slug,
-        ...tl.keywords,
-        ...(tl.longTailKeywords ?? []),
-      ]
-        .join(' ')
-        .toLowerCase()
-      return haystack.includes(q)
-    })
-    return matched.slice(0, MAX_RESULTS)
+    return searchTools(tools, q, MAX_RESULTS) ?? []
   }, [tools, query])
 
   // ── 内联答案:算式 / 百分比 / 单位换算(输入即答,置于工具列表之上) ──
@@ -381,7 +368,17 @@ export function SearchPalette({ tools, locale, open, onClose }: SearchPalettePro
                         <SmartIcon icon={icon} className="h-4 w-4" />
                       </span>
                       <span className="min-w-0 flex-1">
-                        <span className="block truncate font-medium">{getToolName(locale, tool.slug, tool.name)}</span>
+                        <span className="block truncate font-medium">
+                          {highlightSegments(getToolName(locale, tool.slug, tool.name), query).map((seg, si) =>
+                            seg.hit ? (
+                              <mark key={si} className="rounded-sm bg-brand-100 px-0.5 text-inherit dark:bg-brand-900/70">
+                                {seg.text}
+                              </mark>
+                            ) : (
+                              <span key={si}>{seg.text}</span>
+                            ),
+                          )}
+                        </span>
                         <span
                           className="block truncate text-xs"
                           style={{ color: 'rgb(var(--text-subtle))' }}

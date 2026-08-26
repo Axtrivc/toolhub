@@ -30,6 +30,7 @@ import { ArrowLeft, ArrowRight } from 'lucide-react'
 import { toolCardEnterVariants } from '@/components/motion/MotionPrimitives'
 import type { ToolMeta } from '@/lib/tools'
 import { getToolIcon } from '@/lib/tools'
+import { searchTools } from '@/lib/tool-search'
 import { SmartIcon } from '@/components/SmartIcon'
 import { useApp } from '@/components/providers/AppProviders'
 import { t, tc, getToolName, getToolShortIntro } from '@/lib/i18n'
@@ -121,18 +122,15 @@ export function ToolHubExplorer({ tools, query, onQueryChange }: ToolHubExplorer
     return counts
   }, [tools])
 
-  // 过滤:搜索词(名称/简介/关键词/H1)+ 可选主题桶。
+  // 过滤:统一搜索引擎 lib/tool-search(分词 AND + 长尾词/分类/slug 全字段加权,
+  // 旧实现漏 longTailKeywords 且要求连续子串)+ 可选主题桶。
   // 主题桶复用 hubTools 同一谓词(含兜底主题归属),保证与 hubCounts 计数徽章一致。
-  const q = query.trim().toLowerCase()
+  const q = query.trim()
   const filtered = useMemo(() => {
     if (!q) return activeHub ? hubTools(tools, activeHub) : tools
-    return tools.filter(
-      (tl) =>
-        tl.name.toLowerCase().includes(q) ||
-        tl.shortIntro.toLowerCase().includes(q) ||
-        tl.keywords.some((k) => k.toLowerCase().includes(q)) ||
-        tl.h1.toLowerCase().includes(q),
-    )
+    const base = activeHub ? hubTools(tools, activeHub) : tools
+    return searchTools(base, q, base.length) ?? []
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [tools, q, activeHub])
 
   const enterVariants = reduceMotion
