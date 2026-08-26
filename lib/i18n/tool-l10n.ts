@@ -528,6 +528,7 @@ export function tui(slug: string, locale: Locale, key: string, fallback: string)
 export const COMMON_CALC_UI: Record<Exclude<Locale, 'en'>, Record<string, string>> = {
   zh: {
     summaryTitle: '计算摘要',
+    chartEmpty: '输入数值后即可看到图表。',
     inputsLabel: '输入:',
     resultsLabel: '结果:',
     copySummary: '复制摘要',
@@ -541,6 +542,7 @@ export const COMMON_CALC_UI: Record<Exclude<Locale, 'en'>, Record<string, string
   },
   es: {
     summaryTitle: 'Resumen del cálculo',
+    chartEmpty: 'Introduce valores para ver el gráfico.',
     inputsLabel: 'Entradas:',
     resultsLabel: 'Resultados:',
     copySummary: 'Copiar resumen',
@@ -554,6 +556,7 @@ export const COMMON_CALC_UI: Record<Exclude<Locale, 'en'>, Record<string, string
   },
   de: {
     summaryTitle: 'Zusammenfassung der Berechnung',
+    chartEmpty: 'Werte eingeben, um das Diagramm zu sehen.',
     inputsLabel: 'Eingaben:',
     resultsLabel: 'Ergebnis:',
     copySummary: 'Zusammenfassung kopieren',

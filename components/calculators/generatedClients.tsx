@@ -18,7 +18,7 @@ export const TipCalculatorClient = makeCalculatorClient({
   inputs: [
     { key: 'bill', label: 'Bill amount', suffix: '$', default: '50', placeholder: '50.00' },
     { key: 'tipPct', label: 'Tip percentage', suffix: '%', default: '18', slider: { min: 0, max: 40, step: 1 } },
-    { key: 'people', label: 'Number of people', default: '2' },
+    { key: 'people', label: 'Number of people', default: '2', slider: { min: 1, max: 20, step: 1 } },
   ],
   outputs: [
     { key: 'tip', label: 'Tip amount', highlight: false },

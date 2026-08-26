@@ -36,13 +36,15 @@ interface BreakdownChartProps {
   centerValue?: string
   /** 标题,显示在图表上方 */
   title?: string
+  /** 无有效数据时的占位文案(调用方传入已本地化文本) */
+  emptyLabel?: string
 }
 
 /**
  * 把 0~1 的弧度转成 SVG 圆周上的 dasharray 段。
  * 用 stroke-dasharray + stroke-dashoffset 实现多段拼接。
  */
-export function BreakdownChart({ slices, centerLabel, centerValue, title }: BreakdownChartProps) {
+export function BreakdownChart({ slices, centerLabel, centerValue, title, emptyLabel = 'Enter your values to see the breakdown.' }: BreakdownChartProps) {
   // 过滤掉负值/NaN,避免几何错乱
   const valid = slices.filter((s) => Number.isFinite(s.value) && s.value > 0)
   const total = valid.reduce((sum, s) => sum + s.value, 0)
@@ -142,7 +144,7 @@ export function BreakdownChart({ slices, centerLabel, centerValue, title }: Brea
         <div className="flex-1 space-y-2">
           {valid.length === 0 ? (
             <p className="text-sm" style={{ color: 'rgb(var(--text-subtle))' }}>
-              Enter your values to see the breakdown.
+              {emptyLabel}
             </p>
           ) : (
             valid.map((s, i) => {

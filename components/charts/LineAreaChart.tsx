@@ -14,7 +14,7 @@
  * 动画仅在挂载后由 framer-motion 驱动。
  */
 
-import { useId, useRef, useState } from 'react'
+import { useId, useMemo, useRef, useState } from 'react'
 import { motion, useReducedMotion } from '../motion/MotionPrimitives'
 import { ChartCard, LegendDot, fmtCompact, niceScale } from './chartKit'
 
@@ -42,6 +42,8 @@ export interface LineAreaChartProps {
   highlightBetween?: { a: string; b: string; label?: string }
   /** y 轴数值格式化(默认紧凑缩写);tooltip 也用它 */
   formatY?: (n: number) => string
+  /** 数据不足时的占位文案(调用方传入已本地化文本) */
+  emptyLabel?: string
 }
 
 const W = 640
@@ -50,7 +52,7 @@ const PAD = { top: 14, right: 14, bottom: 26, left: 52 }
 const IW = W - PAD.left - PAD.right
 const IH = H - PAD.top - PAD.bottom
 
-export function LineAreaChart({ title, xLabels, lines, highlightBetween, formatY = fmtCompact }: LineAreaChartProps) {
+export function LineAreaChart({ title, xLabels, lines, highlightBetween, formatY = fmtCompact, emptyLabel = 'Enter your values to see the chart.' }: LineAreaChartProps) {
   const reduceMotion = useReducedMotion()
   const gid = useId().replace(/[:]/g, '')
   const [hover, setHover] = useState<number | null>(null)
@@ -58,19 +60,11 @@ export function LineAreaChart({ title, xLabels, lines, highlightBetween, formatY
 
   const valid = lines.filter((l) => Array.isArray(l.points) && l.points.length > 0)
   const n = xLabels.length
-  if (valid.length === 0 || n < 2 || valid.some((l) => l.points.length !== n)) {
-    return title ? (
-      <ChartCard title={title}>
-        <p className="text-sm" style={{ color: 'rgb(var(--text-subtle))' }}>
-          Enter your values to see the chart.
-        </p>
-      </ChartCard>
-    ) : null
-  }
+  const invalid = valid.length === 0 || n < 2 || valid.some((l) => l.points.length !== n)
 
   const allVals = valid.flatMap((l) => l.points).filter((v) => Number.isFinite(v))
   const dataMax = allVals.length ? Math.max(...allVals) : 0
-  const dataMin = Math.min(0, ...allVals)
+  const dataMin = allVals.length ? Math.min(0, ...allVals) : 0
   // 允许小幅负值(健康场景少见,金融余额递减不会为负):上下各取 nice 上界
   const { top } = niceScale(dataMax)
   const bottom = dataMin < 0 ? -niceScale(-dataMin).top : 0
@@ -79,37 +73,52 @@ export function LineAreaChart({ title, xLabels, lines, highlightBetween, formatY
   const x = (i: number) => PAD.left + (n === 1 ? IW / 2 : (i / (n - 1)) * IW)
   const y = (v: number) => PAD.top + IH - ((v - bottom) / span) * IH
 
-  const linePath = (pts: number[]) =>
-    pts.map((v, i) => `${i === 0 ? 'M' : 'L'}${x(i).toFixed(1)},${y(Number.isFinite(v) ? v : bottom).toFixed(1)}`).join(' ')
+  // 几何 memo:hover 时(hover 状态变化)不重建几百个点的路径字符串,
+  // 只重渲染 crosshair/tooltip 两个轻量子树。
+  // 注意:useMemo 必须先于 invalid 早退执行(Hooks 不能条件调用),
+  // invalid 数据走无害的空几何。
+  const geom = useMemo(() => {
+    const linePath = (pts: number[]) =>
+      pts.map((v, i) => `${i === 0 ? 'M' : 'L'}${x(i).toFixed(1)},${y(Number.isFinite(v) ? v : bottom).toFixed(1)}`).join(' ')
 
-  const areaPath = (pts: number[]) =>
-    `${linePath(pts)} L${x(n - 1).toFixed(1)},${y(bottom).toFixed(1)} L${x(0).toFixed(1)},${y(bottom).toFixed(1)} Z`
+    const areaPath = (pts: number[]) =>
+      `${linePath(pts)} L${x(n - 1).toFixed(1)},${y(bottom).toFixed(1)} L${x(0).toFixed(1)},${y(bottom).toFixed(1)} Z`
 
-  // 两条曲线之间的高亮区域(省息带)
-  const hlA = valid.find((l) => l.key === highlightBetween?.a)
-  const hlB = valid.find((l) => l.key === highlightBetween?.b)
-  const bandPath =
-    hlA && hlB
-      ? `${linePath(hlA.points)} ${hlB.points
-          .slice()
-          .reverse()
-          .map((v, ri) => {
-            const i = n - 1 - ri
-            return `L${x(i).toFixed(1)},${y(Number.isFinite(v) ? v : bottom).toFixed(1)}`
-          })
-          .join(' ')} Z`
-      : null
+    const hlA = valid.find((l) => l.key === highlightBetween?.a)
+    const hlB = valid.find((l) => l.key === highlightBetween?.b)
+    const bandPath =
+      hlA && hlB
+        ? `${linePath(hlA.points)} ${hlB.points
+            .slice()
+            .reverse()
+            .map((v, ri) => {
+              const i = n - 1 - ri
+              return `L${x(i).toFixed(1)},${y(Number.isFinite(v) ? v : bottom).toFixed(1)}`
+            })
+            .join(' ')} Z`
+        : null
 
-  // y 轴刻度(0..top 共 4-5 段)
-  const ticks: number[] = []
-  const tickCount = 4
-  for (let i = 0; i <= tickCount; i++) ticks.push(bottom + (span * i) / tickCount)
+    const ticks: number[] = []
+    for (let i = 0; i <= 4; i++) ticks.push(bottom + (span * i) / 4)
 
-  // x 轴标签抽稀:目标 ≤ 7 个
-  const labelEvery = Math.max(1, Math.ceil(n / 7))
-  const xTickIdx: number[] = []
-  for (let i = 0; i < n; i += labelEvery) xTickIdx.push(i)
-  if (xTickIdx[xTickIdx.length - 1] !== n - 1) xTickIdx.push(n - 1)
+    const labelEvery = Math.max(1, Math.ceil(n / 7))
+    const xTickIdx: number[] = []
+    for (let i = 0; i < n; i += labelEvery) xTickIdx.push(i)
+    if (xTickIdx[xTickIdx.length - 1] !== n - 1) xTickIdx.push(n - 1)
+
+    return { linePath, areaPath, bandPath, ticks, xTickIdx }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [lines, xLabels, highlightBetween, bottom, span])
+
+  if (invalid) {
+    return title ? (
+      <ChartCard title={title}>
+        <p className="text-sm" style={{ color: 'rgb(var(--text-subtle))' }}>
+          {emptyLabel}
+        </p>
+      </ChartCard>
+    ) : null
+  }
 
   const onMove = (clientX: number) => {
     const svg = svgRef.current
@@ -150,7 +159,7 @@ export function LineAreaChart({ title, xLabels, lines, highlightBetween, formatY
           </defs>
 
           {/* 网格线 + y 刻度 */}
-          {ticks.map((t, i) => (
+          {geom.ticks.map((t, i) => (
             <g key={i}>
               <line
                 x1={PAD.left}
@@ -174,7 +183,7 @@ export function LineAreaChart({ title, xLabels, lines, highlightBetween, formatY
           ))}
 
           {/* x 轴标签(抽稀) */}
-          {xTickIdx.map((i) => (
+          {geom.xTickIdx.map((i) => (
             <text
               key={i}
               x={x(i)}
@@ -188,9 +197,9 @@ export function LineAreaChart({ title, xLabels, lines, highlightBetween, formatY
           ))}
 
           {/* 曲线间高亮带(省息区) */}
-          {bandPath && (
+          {geom.bandPath && (
             <motion.path
-              d={bandPath}
+              d={geom.bandPath}
               fill="#22c55e"
               fillOpacity={0.14}
               initial={reduceMotion ? false : { opacity: 0 }}
@@ -204,7 +213,7 @@ export function LineAreaChart({ title, xLabels, lines, highlightBetween, formatY
             l.area ? (
               <motion.path
                 key={`${l.key}-area`}
-                d={areaPath(l.points)}
+                d={geom.areaPath(l.points)}
                 fill={`url(#${gid}-grad-${l.key})`}
                 stroke="none"
                 initial={reduceMotion ? false : { opacity: 0 }}
@@ -216,7 +225,7 @@ export function LineAreaChart({ title, xLabels, lines, highlightBetween, formatY
           {valid.map((l) => (
             <motion.path
               key={`${l.key}-line`}
-              d={linePath(l.points)}
+              d={geom.linePath(l.points)}
               fill="none"
               stroke={l.color}
               strokeWidth={2.2}

@@ -22,7 +22,7 @@ import { tui, tuiCalc } from '@/lib/i18n/tool-l10n'
  */
 const COMMON_CALC_KEYS = new Set([
   'summaryTitle', 'inputsLabel', 'resultsLabel', 'copySummary',
-  'csvField', 'csvType', 'csvValue', 'csvInput', 'csvResult', 'inputs',
+  'csvField', 'csvType', 'csvValue', 'csvInput', 'csvResult', 'inputs', 'chartEmpty',
 ])
 
 /**
@@ -474,6 +474,7 @@ export function makeCalculatorClient(config: CalculatorConfig): ComponentType {
                             : undefined
                         }
                         formatY={data.formatY}
+                        emptyLabel={L('chartEmpty', 'Enter your values to see the chart.')}
                       />
                     )
                   } catch {
@@ -495,6 +496,7 @@ export function makeCalculatorClient(config: CalculatorConfig): ComponentType {
                     title={chart.title ? L(tKey, chart.title) : undefined}
                     centerLabel={chart.centerLabel ? L('chartCenter', chart.centerLabel) : undefined}
                     slices={slices}
+                    emptyLabel={L('chartEmpty', 'Enter your values to see the chart.')}
                   />
                 )
               })}
