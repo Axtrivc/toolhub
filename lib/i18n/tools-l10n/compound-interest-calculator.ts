@@ -66,6 +66,7 @@ export const compoundInterestCalculatorL10n: ToolL10n = {
       'line.contributed': '你投入的',
       'line.balance': '总余额',
       'band.contributed-balance': '赚到的利息',
+      'line.balanceLate': '晚 10 年才开始',
     },
   },
 
@@ -123,6 +124,7 @@ export const compoundInterestCalculatorL10n: ToolL10n = {
       'line.contributed': 'Tu aportación',
       'line.balance': 'Saldo total',
       'band.contributed-balance': 'Interés generado',
+      'line.balanceLate': 'Empezar 10 años después',
     },
   },
 
@@ -180,6 +182,7 @@ export const compoundInterestCalculatorL10n: ToolL10n = {
       'line.contributed': 'Eigene Einzahlung',
       'line.balance': 'Gesamtsaldo',
       'band.contributed-balance': 'Erzielte Zinsen',
+      'line.balanceLate': '10 Jahre später anfangen',
     },
   },
 }

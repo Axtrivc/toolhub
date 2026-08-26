@@ -17,7 +17,7 @@ export const TipCalculatorClient = makeCalculatorClient({
   slug: 'tip-calculator',
   inputs: [
     { key: 'bill', label: 'Bill amount', suffix: '$', default: '50', placeholder: '50.00' },
-    { key: 'tipPct', label: 'Tip percentage', suffix: '%', default: '18' },
+    { key: 'tipPct', label: 'Tip percentage', suffix: '%', default: '18', slider: { min: 0, max: 40, step: 1 } },
     { key: 'people', label: 'Number of people', default: '2' },
   ],
   outputs: [
@@ -58,7 +58,7 @@ export const DiscountCalculatorClient = makeCalculatorClient({
   slug: 'discount-calculator',
   inputs: [
     { key: 'price', label: 'Original price', suffix: '$', default: '80' },
-    { key: 'discount', label: 'Discount', suffix: '%', default: '25' },
+    { key: 'discount', label: 'Discount', suffix: '%', default: '25', slider: { min: 0, max: 100, step: 1 } },
   ],
   outputs: [
     { key: 'savings', label: 'You save', highlight: false },
@@ -94,7 +94,7 @@ export const SalesTaxCalculatorClient = makeCalculatorClient({
   slug: 'sales-tax-calculator',
   inputs: [
     { key: 'amount', label: 'Amount', suffix: '$', default: '100' },
-    { key: 'rate', label: 'Tax rate', suffix: '%', default: '8.25' },
+    { key: 'rate', label: 'Tax rate', suffix: '%', default: '8.25', slider: { min: 0, max: 20, step: 0.25 } },
     {
       key: 'mode',
       label: 'Calculation mode',
@@ -235,11 +235,26 @@ export const CompoundInterestCalculatorClient = makeCalculatorClient({
       contributed.push(principal + monthly * 12 * y)
       xLabels.push(`Y${y}`)
     }
+    // 对比线:同样本金+月供,晚 10 年才开始(Y10 前为 0;不足 10 年期限则不出)
+    let late: number[] | null = null
+    if (years > 10) {
+      late = []
+      let bl = 0
+      for (let y = 0; y <= years; y++) {
+        if (y > 10) {
+          for (let m = 0; m < 12; m++) bl = bl * (1 + monthlyRate) + monthly
+        } else if (y === 10) {
+          bl = principal
+        }
+        late.push(y < 10 ? 0 : Math.max(0, bl))
+      }
+    }
     return {
       xLabels,
       lines: [
         { key: 'contributed', label: 'You put in', color: '#3b82f6', points: contributed, area: true },
         { key: 'balance', label: 'Total balance', color: '#22c55e', points: balance, area: true },
+        ...(late ? [{ key: 'balanceLate', label: 'Start 10 years later', color: '#ef4444', points: late, dashed: true }] : []),
       ],
       highlightBetween: { a: 'contributed', b: 'balance', label: 'Interest earned' },
       formatY: (n) => fmtUSD(n, 0),
