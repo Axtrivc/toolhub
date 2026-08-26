@@ -241,7 +241,7 @@ export function BcryptHashGeneratorClient() {
         )}
       </div>
 
-      {error && <div className="rounded-lg border border-red-200 dark:border-red-800/60 bg-red-50 dark:bg-red-950/30 p-4 text-sm text-red-700">⚠️ {error}</div>}
+      {error && <div className="rounded-lg border border-red-200 dark:border-red-800/60 bg-red-50 dark:bg-red-950/30 p-4 text-sm text-red-700 dark:text-red-300">⚠️ {error}</div>}
 
       {/* 哈希输出 */}
       {hash && (

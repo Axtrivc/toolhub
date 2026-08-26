@@ -293,6 +293,20 @@ export function CalorieCalculatorClient() {
             <ResultCard label={L('outLose500', 'Weight loss')} value={`${fmtNum(result.tdee - 500, 0)} ${L('calPerDay', 'cal/day')}`} sublabel={subLose500} />
             <ResultCard label={L('outGain500', 'Weight gain')} value={`${fmtNum(result.tdee + 500, 0)} ${L('calPerDay', 'cal/day')}`} sublabel={subGain500} />
           </div>
+          {/* TDEE 仪表:落在「减脂→增肌」刻度带上的直观位置(600..4000 cal/day) */}
+          <GaugeChart
+            title={L('gaugeTitle', 'Maintenance vs Calorie Spectrum')}
+            value={result.tdee}
+            min={600}
+            max={4000}
+            zones={[
+              { upTo: 1400, color: '#3b82f6', label: L('zoneLow', 'Deficit / low activity') },
+              { upTo: 2200, color: '#22c55e', label: L('zoneTypical', 'Typical maintenance') },
+              { upTo: 3000, color: '#eab308', label: L('zoneActive', 'Active lifestyle') },
+              { upTo: 4000, color: '#f97316', label: L('zoneAthlete', 'Athlete / heavy labor') },
+            ]}
+            formatValue={(n) => `${fmtNum(n, 0)} ${L('calPerDay', 'cal/day')}`}
+          />
           <ResultActions
             summary={summary}
             filename="calorie-calculator-result.csv"
@@ -432,6 +446,22 @@ export function BMRCalculatorClient() {
             <ResultCard label={L('outBmr', 'Your BMR')} value={`${fmtNum(result.bmr, 0)} ${L('caloriesPerDay', 'calories/day')}`} highlight sublabel={L('subMifflin', 'Mifflin-St Jeor')} />
             <ResultCard label={L('outBmi', 'Your BMI')} value={fmtNum(result.bmi, 1)} />
           </div>
+          {/* BMI 分类仪表(与 BMICalculatorClient 同族 6 档) */}
+          <GaugeChart
+            title={L('gaugeTitle', 'BMI Category')}
+            value={result.bmi}
+            min={12}
+            max={42}
+            zones={[
+              { upTo: 18.5, color: '#3b82f6', label: L('zoneUnder', 'Underweight') },
+              { upTo: 25, color: '#22c55e', label: L('zoneHealthy', 'Healthy') },
+              { upTo: 30, color: '#eab308', label: L('zoneOver', 'Overweight') },
+              { upTo: 35, color: '#f97316', label: L('zoneObese1', 'Obese I') },
+              { upTo: 40, color: '#ef4444', label: L('zoneObese2', 'Obese II') },
+              { upTo: 42, color: '#b91c1c', label: L('zoneObese3', 'Obese III') },
+            ]}
+            formatValue={(n) => fmtNum(n, 1)}
+          />
           <ResultActions
             summary={summary}
             filename="bmr-calculator-result.csv"

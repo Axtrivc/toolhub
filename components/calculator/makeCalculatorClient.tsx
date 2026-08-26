@@ -279,11 +279,14 @@ export function makeCalculatorClient(config: CalculatorConfig): ComponentType {
     }, [])
     const highlightOut = config.outputs.find((o) => o.highlight)
     const highlightValue = highlightOut ? mergedResults[highlightOut.key] : undefined
+    // 主结果是否错误态:compute 用 "⚠️ 文案" 表达校验失败。
+    // 此前错误被渲染成主色渐变大字卡,视觉上像正确答案;现降级为红色错误卡。
+    const highlightIsError = !!highlightValue && highlightValue.startsWith('⚠️')
     const stickyVisible =
       resultsOffscreen &&
       !!highlightValue &&
       highlightValue !== '—' &&
-      !highlightValue.startsWith('⚠️')
+      !highlightIsError
 
     return (
       <div className="space-y-6">
@@ -401,17 +404,40 @@ export function makeCalculatorClient(config: CalculatorConfig): ComponentType {
           })}
         </div>
 
-        {/* 结果区(aria-live:输入变化时屏幕阅读器播报结果更新) */}
-        <div ref={resultsRef} role="status" aria-live="polite" className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-          {config.outputs.map((o) => (
+        {/* 结果区(aria-live:输入变化时屏幕阅读器播报结果更新)。
+            列数随输出数量自适应:≤4 个恒 2 列;5~8 个桌面 3 列;>8 个 4 列,
+            避免 Mortgage/Average 这类 11 项工具桌面只剩 2 列变长清单。
+            错误态(⚠️ 主结果)单独以红色卡片呈现,不用主色渐变,不做数字动画。 */}
+        {highlightIsError && highlightOut && (
+          <div ref={resultsRef} role="status" aria-live="polite">
             <ResultCard
-              key={o.key}
-              label={outLabel(o.key, o.label)}
-              value={mergedResults[o.key] ?? '—'}
-              highlight={o.highlight}
-              sublabel={o.sublabel ? outSub(o.key, o.sublabel) : undefined}
+              label={outLabel(highlightOut.key, highlightOut.label)}
+              value={highlightValue}
+              error
             />
-          ))}
+          </div>
+        )}
+        <div
+          ref={highlightIsError ? undefined : resultsRef}
+          role="status"
+          aria-live="polite"
+          className={`grid grid-cols-1 gap-3 sm:grid-cols-2 ${
+            config.outputs.length > 8 ? 'lg:grid-cols-4' : config.outputs.length > 4 ? 'lg:grid-cols-3' : ''
+          }`}
+        >
+          {config.outputs.map((o) => {
+            // 错误态时跳过主结果(已在上方红卡单独渲染)
+            if (highlightIsError && o === highlightOut) return null
+            return (
+              <ResultCard
+                key={o.key}
+                label={outLabel(o.key, o.label)}
+                value={mergedResults[o.key] ?? '—'}
+                highlight={o.highlight}
+                sublabel={o.sublabel ? outSub(o.key, o.sublabel) : undefined}
+              />
+            )
+          })}
         </div>
 
         {/* 结果操作行 - Copy Summary 复制纯文本摘要,Download 导出 CSV,分享卡导出 PNG */}

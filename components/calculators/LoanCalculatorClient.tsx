@@ -211,7 +211,7 @@ export function LoanCalculatorClient() {
 
       {/* 结果区 */}
       {result && 'error' in result ? (
-        <div className="rounded-lg border border-red-200 dark:border-red-800/60 bg-red-50 dark:bg-red-950/30 p-4 text-sm text-red-700">⚠️ {result.error}</div>
+        <div className="rounded-lg border border-red-200 dark:border-red-800/60 bg-red-50 dark:bg-red-950/30 p-4 text-sm text-red-700 dark:text-red-300">⚠️ {result.error}</div>
       ) : result ? (
         <>
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
@@ -277,7 +277,7 @@ export function LoanCalculatorClient() {
                     <th className="px-3 py-2 text-right">{L('thBalance', 'Balance')}</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-100">
+                <tbody className="divide-y divide-slate-100 dark:divide-slate-700">
                   {displaySchedule.map((row) => (
                     <tr key={row.month}>
                       <td className="px-3 py-2 font-mono" style={{ color: 'rgb(var(--text-faint))' }}>{row.month}</td>

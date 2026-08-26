@@ -98,7 +98,7 @@ export function CssClampCalculatorClient() {
       }
       results={
         error ? (
-          <div className="rounded-lg border border-red-200 dark:border-red-800/60 bg-red-50 dark:bg-red-950/30 p-4 text-sm text-red-700">
+          <div className="rounded-lg border border-red-200 dark:border-red-800/60 bg-red-50 dark:bg-red-950/30 p-4 text-sm text-red-700 dark:text-red-300">
             ⚠️ {error}
           </div>
         ) : (
@@ -123,7 +123,7 @@ export function CssClampCalculatorClient() {
     >
       {/* 测试视口超出范围提示 */}
       {tvClamped && c && output && (
-        <div className="rounded-lg border border-red-200 dark:border-red-800/60 bg-red-50 dark:bg-red-950/30 p-4 text-sm text-red-700">
+        <div className="rounded-lg border border-red-200 dark:border-red-800/60 bg-red-50 dark:bg-red-950/30 p-4 text-sm text-red-700 dark:text-red-300">
           ⚠️ {fmt(output.tv)}{L('clampedPxOutside', 'px is outside your ')}{fmt(c.minV)}–{fmt(c.maxV)}{L('clampedRange', 'px viewport range, so the font size is clamped at ')}{output.tv < c.minV ? L('clampedTheMinimum', 'the minimum') : L('clampedTheMaximum', 'the maximum')} ({fmt(tvFluid ?? 0)}{L('clampedEnd', 'px) rather than scaling further.')})
         </div>
       )}

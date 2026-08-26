@@ -1,21 +1,15 @@
 /**
  * length-converter 本地化 bundle —— zh / es / de
- * 覆盖:faqs + ui + useCases(client = LengthConverterClient = makeCalculatorClient,slug 已存在)
+ * 覆盖:faqs + ui + useCases(client = LengthConverterClient = makeUnitConverter;
+ * 键用工厂 unit.* 口径——unit.<key> 同时喂 From/To 下拉、结果卡单位、All units 面板)
  */
 import type { ToolL10n } from '../tool-l10n'
 
 export const lengthConverterL10n: ToolL10n = {
   zh: {
     ui: {
-      'in.value': '要换算的数值',
-      'in.from': '原单位',
-      'in.to': '目标单位',
-      'opt.from.mm': '毫米 (mm)', 'opt.from.cm': '厘米 (cm)', 'opt.from.m': '米 (m)', 'opt.from.km': '公里 (km)',
-      'opt.from.in': '英寸 (in)', 'opt.from.ft': '英尺 (ft)', 'opt.from.yd': '码 (yd)', 'opt.from.mi': '英里 (mi)',
-      'opt.to.mm': '毫米 (mm)', 'opt.to.cm': '厘米 (cm)', 'opt.to.m': '米 (m)', 'opt.to.km': '公里 (km)',
-      'opt.to.in': '英寸 (in)', 'opt.to.ft': '英尺 (ft)', 'opt.to.yd': '码 (yd)', 'opt.to.mi': '英里 (mi)',
-      'out.result': '换算结果',
-      'out.formula': '换算公式',
+      'unit.mm': '毫米 (mm)', 'unit.cm': '厘米 (cm)', 'unit.m': '米 (m)', 'unit.km': '公里 (km)',
+      'unit.in': '英寸 (in)', 'unit.ft': '英尺 (ft)', 'unit.yd': '码 (yd)', 'unit.mi': '英里 (mi)',
       note: '📏 支持公制(mm、cm、m、km)和英制(in、ft、yd、mi)单位。',
     },
     useCases: [
@@ -31,15 +25,8 @@ export const lengthConverterL10n: ToolL10n = {
   },
   es: {
     ui: {
-      'in.value': 'Valor a convertir',
-      'in.from': 'De unidad',
-      'in.to': 'A unidad',
-      'opt.from.mm': 'Milímetros (mm)', 'opt.from.cm': 'Centímetros (cm)', 'opt.from.m': 'Metros (m)', 'opt.from.km': 'Kilómetros (km)',
-      'opt.from.in': 'Pulgadas (in)', 'opt.from.ft': 'Pies (ft)', 'opt.from.yd': 'Yardas (yd)', 'opt.from.mi': 'Millas (mi)',
-      'opt.to.mm': 'Milímetros (mm)', 'opt.to.cm': 'Centímetros (cm)', 'opt.to.m': 'Metros (m)', 'opt.to.km': 'Kilómetros (km)',
-      'opt.to.in': 'Pulgadas (in)', 'opt.to.ft': 'Pies (ft)', 'opt.to.yd': 'Yardas (yd)', 'opt.to.mi': 'Millas (mi)',
-      'out.result': 'Valor convertido',
-      'out.formula': 'Conversión',
+      'unit.mm': 'Milímetros (mm)', 'unit.cm': 'Centímetros (cm)', 'unit.m': 'Metros (m)', 'unit.km': 'Kilómetros (km)',
+      'unit.in': 'Pulgadas (in)', 'unit.ft': 'Pies (ft)', 'unit.yd': 'Yardas (yd)', 'unit.mi': 'Millas (mi)',
       note: '📏 Admite unidades métricas (mm, cm, m, km) e imperiales (in, ft, yd, mi).',
     },
     useCases: [
@@ -55,15 +42,8 @@ export const lengthConverterL10n: ToolL10n = {
   },
   de: {
     ui: {
-      'in.value': 'Umzurechnender Wert',
-      'in.from': 'Von Einheit',
-      'in.to': 'Nach Einheit',
-      'opt.from.mm': 'Millimeter (mm)', 'opt.from.cm': 'Zentimeter (cm)', 'opt.from.m': 'Meter (m)', 'opt.from.km': 'Kilometer (km)',
-      'opt.from.in': 'Zoll (in)', 'opt.from.ft': 'Fuß (ft)', 'opt.from.yd': 'Yard (yd)', 'opt.from.mi': 'Meilen (mi)',
-      'opt.to.mm': 'Millimeter (mm)', 'opt.to.cm': 'Zentimeter (cm)', 'opt.to.m': 'Meter (m)', 'opt.to.km': 'Kilometer (km)',
-      'opt.to.in': 'Zoll (in)', 'opt.to.ft': 'Fuß (ft)', 'opt.to.yd': 'Yard (yd)', 'opt.to.mi': 'Meilen (mi)',
-      'out.result': 'Umgerechneter Wert',
-      'out.formula': 'Umrechnung',
+      'unit.mm': 'Millimeter (mm)', 'unit.cm': 'Zentimeter (cm)', 'unit.m': 'Meter (m)', 'unit.km': 'Kilometer (km)',
+      'unit.in': 'Zoll (in)', 'unit.ft': 'Fuß (ft)', 'unit.yd': 'Yard (yd)', 'unit.mi': 'Meilen (mi)',
       note: '📏 Unterstützt metrische (mm, cm, m, km) und imperiale (in, ft, yd, mi) Einheiten.',
     },
     useCases: [

@@ -119,7 +119,7 @@ export function GPACalculatorClient() {
               onClick={() => removeCourse(c.id)}
               disabled={courses.length <= 1}
               aria-label={`${L('remove', 'Remove')} ${L('courseName', 'Course name')} ${c.id}`}
-              className="col-span-12 rounded-md bg-red-50 px-3 py-2.5 text-sm text-red-600 hover:bg-red-100 disabled:cursor-not-allowed disabled:opacity-40 sm:col-span-2 sm:px-2 sm:py-1.5 sm:text-xs dark:text-red-300"
+              className="col-span-12 rounded-md bg-red-50 px-3 py-2.5 text-sm text-red-600 hover:bg-red-100 disabled:cursor-not-allowed disabled:opacity-40 sm:col-span-2 sm:px-2 sm:py-1.5 sm:text-xs dark:bg-red-950/40 dark:text-red-300 dark:hover:bg-red-900/50"
             >
               {L('remove', 'Remove')}
             </button>

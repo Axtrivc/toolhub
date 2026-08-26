@@ -246,7 +246,7 @@ export function SrtSubtitleShiftClient() {
 
       {/* 无效 offset 提示 */}
       {offsetSeconds === null && (
-        <div className="rounded-lg border border-red-200 dark:border-red-800/60 bg-red-50 dark:bg-red-950/30 p-4 text-sm text-red-700">
+        <div className="rounded-lg border border-red-200 dark:border-red-800/60 bg-red-50 dark:bg-red-950/30 p-4 text-sm text-red-700 dark:text-red-300">
           {L('invalidOffsetPrefix', '⚠️ Please enter a valid number of seconds, e.g. ')}
           <code>-2.5</code>
           {L('invalidOffsetOr', ' or ')}
@@ -266,7 +266,7 @@ export function SrtSubtitleShiftClient() {
             <CopyButton value={result.output} label={L('copy', 'Copy')} />
           </div>
           {result.errorBlocks > 0 && (
-            <div className="rounded-lg border border-red-200 dark:border-red-800/60 bg-red-50 dark:bg-red-950/30 p-4 text-sm text-red-700">
+            <div className="rounded-lg border border-red-200 dark:border-red-800/60 bg-red-50 dark:bg-red-950/30 p-4 text-sm text-red-700 dark:text-red-300">
               ⚠️ {result.errorBlocks} {result.errorBlocks === 1 ? L('blockSingular', 'block') : L('blockPlural', 'blocks')}{' '}
               {L('parseCouldNotBeParsed', 'could not be parsed (no valid timestamp line) and')}{' '}
               {result.errorBlocks === 1 ? L('parseWas', 'was') : L('parseWere', 'were')} {L('parseSkipped', 'skipped.')}

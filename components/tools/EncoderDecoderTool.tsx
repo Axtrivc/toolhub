@@ -195,8 +195,10 @@ export function EncoderDecoderTool({ encode, decode, initialMode = 'encode', slu
           rows={6}
           className="w-full rounded-lg border-2 p-4 font-mono text-sm outline-none"
           style={{
-            borderColor: 'rgb(219 234 254)', // brand-100
-            backgroundColor: 'rgb(219 234 254 / 0.4)', // brand-50/40
+            // 与 makeTextTool 输出框同一套令牌(--border / --bg-subtle),暗色自动适配,
+            // 不再用硬编码 brand-100 浅蓝(暗色主题下是刺眼浅蓝块)
+            borderColor: 'rgb(var(--border))',
+            backgroundColor: 'rgb(var(--bg-subtle))',
             color: 'rgb(var(--text))',
           }}
         />

@@ -198,34 +198,39 @@ export function ResultCard({
   value,
   sublabel,
   highlight = false,
+  error = false,
 }: {
   label: string
   value: ReactNode
   sublabel?: string
   highlight?: boolean
+  /** 错误态(⚠️):红色卡片,不用主色渐变,且不做数字滚动动画 */
+  error?: boolean
 }) {
   return (
     // 高亮态:主色梯度淡底(from-primary/5 → to-primary/10)+ 主色细描边 +
     // 渐变大字号数字(text-primary,暗色主题自动切换为 blue-400);
-    // 令牌化后暗色模式不再出现旧版硬编码浅蓝底的违和感。
+    // 错误态:红色淡底 + 红色文字(走 CSS 变量,暗色自动适配)。
     // role=status + aria-live:数值变化时屏幕阅读器播报(仅结果容器,输入不加)。
     <div
       role="status"
       aria-live="polite"
       className={`rounded-xl border p-5 text-center shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md ${
-        highlight
-          ? 'border-primary/20 bg-gradient-to-br from-primary/5 to-primary/10 backdrop-blur-md'
-          : 'border-border/60 bg-card/80 backdrop-blur-md'
+        error
+          ? 'border-red-300/50 bg-red-50/70 dark:border-red-800/40 dark:bg-red-950/30'
+          : highlight
+            ? 'border-primary/20 bg-gradient-to-br from-primary/5 to-primary/10 backdrop-blur-md'
+            : 'border-border/60 bg-card/80 backdrop-blur-md'
       }`}
     >
-      <div className="text-xs font-medium uppercase tracking-wide" style={{ color: 'rgb(var(--text-subtle))' }}>
+      <div className="text-xs font-medium uppercase tracking-wide" style={{ color: error ? 'rgb(var(--text-faint))' : 'rgb(var(--text-subtle))' }}>
         {label}
       </div>
       <div
-        className={`mt-1.5 text-2xl font-bold sm:text-3xl ${highlight ? 'text-primary' : ''}`}
-        style={highlight ? undefined : { color: 'rgb(var(--text))' }}
+        className={`mt-1.5 ${error ? 'text-base font-semibold sm:text-lg' : 'text-2xl font-bold sm:text-3xl'} ${highlight ? 'text-primary' : ''}`}
+        style={error ? { color: 'rgb(220 38 38)' } : highlight ? undefined : { color: 'rgb(var(--text))' }}
       >
-        {highlight ? <AnimatedNumber value={value} /> : value}
+        {highlight && !error ? <AnimatedNumber value={value} /> : value}
       </div>
       {sublabel && <div className="mt-1 text-xs" style={{ color: 'rgb(var(--text-faint))' }}>{sublabel}</div>}
     </div>

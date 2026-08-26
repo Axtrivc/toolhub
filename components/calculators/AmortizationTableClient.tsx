@@ -4,6 +4,7 @@ import { useMemo, useState } from 'react'
 import { CalculatorField, ResultCard, CalculatorNote } from '../calculator/CalculatorField'
 import { ResultActions } from '../ResultActions'
 import { LoadSampleButton } from '../LoadSampleButton'
+import { LineAreaChart } from '../charts/LineAreaChart'
 import { fmtUSD, toNum, toNumStrict } from '@/lib/format'
 import { useApp } from '@/components/providers/AppProviders'
 import { tui } from '@/lib/i18n/tool-l10n'
@@ -120,13 +121,29 @@ export function AmortizationTableGeneratorClient() {
       </div>
 
       <div role="status" aria-live="polite" className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-        <ResultCard label={T('out.monthly', 'Monthly payment')} highlight value={r ? fmtUSD(r.monthly) : `⚠️ ${result.error}`} />
+        <ResultCard label={T('out.monthly', 'Monthly payment')} highlight={!result.error} error={!!result.error} value={r ? fmtUSD(r.monthly) : `⚠️ ${result.error}`} />
         <ResultCard label={T('out.totalInterest', 'Total interest')} value={r ? fmtUSD(r.totalInterest) : '—'} />
         <ResultCard label={T('out.totalPaid', 'Total paid')} value={r ? fmtUSD(r.totalPaid) : '—'} />
         <ResultCard label={T('out.interestShare', 'Interest share of payments')} value={r ? `${r.interestShare}%` : '—'} />
       </div>
 
       <ResultActions summary={summary} filename="amortization-schedule.csv" downloadContent={csvContent} mime="text/csv;charset=utf-8;" copyLabel={T('copySummary', 'Copy Summary')} />
+
+      {/* 余额递减曲线(年度采样):与 Loan/AutoLoan 同形态,补齐此前缺图的口径 */}
+      {r && (
+        <LineAreaChart
+          title={T('chartTitle', 'Balance over time')}
+          xLabels={r.rows.filter((_, i) => i % 12 === 11 || i === r.rows.length - 1).map((row, yi) => `Y${yi + 1}`)}
+          lines={[{
+            key: 'balance',
+            label: T('chartBalance', 'Remaining balance'),
+            color: 'rgb(var(--primary))',
+            area: true,
+            points: r.rows.filter((_, i) => i % 12 === 11 || i === r.rows.length - 1).map((row) => row[4]),
+          }]}
+          formatY={(n) => fmtUSD(n, 0)}
+        />
+      )}
 
       {r && (
         <div>

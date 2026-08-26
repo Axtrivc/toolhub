@@ -199,7 +199,7 @@ export function AutoLoanCalculatorClient() {
       </div>
 
       {'error' in parsed ? (
-        <div className="rounded-lg border border-red-200 dark:border-red-800/60 bg-red-50 dark:bg-red-950/30 p-4 text-sm text-red-700">⚠️ {parsed.error}</div>
+        <div className="rounded-lg border border-red-200 dark:border-red-800/60 bg-red-50 dark:bg-red-950/30 p-4 text-sm text-red-700 dark:text-red-300">⚠️ {parsed.error}</div>
       ) : (
         <>
           {/* 结果卡片 */}

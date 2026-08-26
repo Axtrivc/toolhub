@@ -70,7 +70,7 @@ export function CronParserClient() {
   return (
     <div className="space-y-5">
       {/* 输入区 */}
-      <div>
+      <div className="rounded-lg p-4" style={{ backgroundColor: 'rgb(var(--bg-subtle))' }}>
         <label htmlFor="cron-input" className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
           {L('cronExpressionLabel', 'Cron expression (5 fields: minute hour day-of-month month day-of-week)')}
         </label>
@@ -129,17 +129,17 @@ export function CronParserClient() {
 
       {/* 错误提示 */}
       {'error' in result ? (
-        <div className="rounded-lg border border-red-200 dark:border-red-800/60 bg-red-50 dark:bg-red-950/30 p-4 text-sm text-red-700">
+        <div className="rounded-lg border border-red-200 dark:border-red-800/60 bg-red-50 dark:bg-red-950/30 p-4 text-sm text-red-700 dark:text-red-300">
           ⚠️ {result.error}
         </div>
       ) : (
         <>
-          {/* 人类可读说明 */}
-          <div className="rounded-lg border p-5" style={{ borderColor: 'rgb(147 197 253)', backgroundColor: 'rgb(219 234 254 / 0.4)' }}>
+          {/* 人类可读说明(主题变量取色:不再硬编码亮蓝底,暗色模式违和) */}
+          <div className="rounded-lg border p-5" style={{ borderColor: 'rgb(var(--primary) / 0.3)', backgroundColor: 'rgb(var(--primary) / 0.06)' }}>
             <div className="text-xs font-medium uppercase tracking-wide" style={{ color: 'rgb(var(--text-subtle))' }}>
               {L('humanReadable', 'Human-readable')}
             </div>
-            <div className="mt-1.5 text-lg font-semibold" style={{ color: 'rgb(37 99 235)' }}>
+            <div className="mt-1.5 text-lg font-semibold" style={{ color: 'rgb(var(--primary))' }}>
               {result.description}
             </div>
           </div>

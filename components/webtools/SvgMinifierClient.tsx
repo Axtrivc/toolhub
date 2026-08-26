@@ -268,14 +268,14 @@ export function SvgMinifierClient() {
 
       {/* 错误提示 */}
       {error && (
-        <div className="rounded-lg border border-red-200 dark:border-red-800/60 bg-red-50 dark:bg-red-950/30 p-4 text-sm text-red-700">
+        <div className="rounded-lg border border-red-200 dark:border-red-800/60 bg-red-50 dark:bg-red-950/30 p-4 text-sm text-red-700 dark:text-red-300">
           ⚠️ {error}
         </div>
       )}
 
       {/* 输入不是 SVG */}
       {trimmed && !looksLikeSvg && (
-        <div className="rounded-lg border border-red-200 dark:border-red-800/60 bg-red-50 dark:bg-red-950/30 p-4 text-sm text-red-700">
+        <div className="rounded-lg border border-red-200 dark:border-red-800/60 bg-red-50 dark:bg-red-950/30 p-4 text-sm text-red-700 dark:text-red-300">
           ⚠️ {L('errNotSvgPrefix', 'This does not look like SVG — no')} <code>&lt;svg&gt;</code>{L('errNotSvgSuffix', ' element found. Check for a truncated paste.')}
         </div>
       )}

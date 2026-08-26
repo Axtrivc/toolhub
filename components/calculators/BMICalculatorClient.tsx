@@ -258,7 +258,7 @@ export function BMICalculatorClient() {
               <th className="px-4 py-2">{L('thCategory', 'Category')}</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-slate-100">
+          <tbody className="divide-y divide-slate-100 dark:divide-slate-700">
             <tr><td className="px-4 py-2 font-mono">{L('rangeBelow', 'Below 18.5')}</td><td className="px-4 py-2 text-blue-600">{L('catLabel_underweight', 'Underweight')}</td></tr>
             <tr><td className="px-4 py-2 font-mono">18.5 – 24.9</td><td className="px-4 py-2 text-green-600">{L('catLabel_healthyWeight', 'Healthy weight')}</td></tr>
             <tr><td className="px-4 py-2 font-mono">25.0 – 29.9</td><td className="px-4 py-2 text-yellow-600">{L('catLabel_overweight', 'Overweight')}</td></tr>

@@ -114,8 +114,8 @@ export function RandomNumberGeneratorClient() {
         <button onClick={generate} className="btn btn-primary">{L('generate', '🎲 Generate')}</button>
         <CopyButton value={result} disabled={!result} />
       </div>
-      <div className="rounded-lg border-2 border-brand-100 bg-brand-50/40 p-4">
-        <code className="font-mono text-lg text-brand-700">{result || L('clickGenerateHint', 'Click Generate to roll')}</code>
+      <div className="rounded-lg border-2 p-4" style={{ borderColor: 'rgb(var(--primary) / 0.3)', backgroundColor: 'rgb(var(--primary) / 0.06)' }}>
+        <code className="font-mono text-lg" style={{ color: 'rgb(var(--primary))' }}>{result || L('clickGenerateHint', 'Click Generate to roll')}</code>
       </div>
     </div>
   )
@@ -137,14 +137,14 @@ export function PasswordStrengthCheckerClient() {
           value={pw}
           onChange={(e) => setPw(e.target.value)}
           placeholder={L('passwordPlaceholder', 'Type your password...')}
-          className="w-full rounded-lg border border-slate-300 p-3 font-mono outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200"
+          className="w-full rounded-lg border border-slate-300 p-3 font-mono outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200 dark:border-slate-600 dark:bg-slate-800/50 dark:text-slate-100"
         />
       </div>
       {pw && (
         <div className="space-y-4">
           <div className="flex h-3 gap-1">
             {[1, 2, 3, 4].map((i) => (
-              <div key={i} className={`flex-1 rounded-full ${analysis.score >= i ? analysis.color : 'bg-slate-200'}`} />
+              <div key={i} className={`flex-1 rounded-full ${analysis.score >= i ? analysis.color : 'bg-slate-200 dark:bg-slate-700'}`} />
             ))}
           </div>
           <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
@@ -153,7 +153,7 @@ export function PasswordStrengthCheckerClient() {
             <ResultCard label={L('entropy', 'Entropy')} value={`${analysis.entropy} ${L('bits', 'bits')}`} />
           </div>
           {(analysis.isCommon || analysis.hasSequence) && (
-            <div className="space-y-1 rounded-lg border border-red-200 dark:border-red-800/60 bg-red-50 dark:bg-red-950/30 p-4 text-sm text-red-700">
+            <div className="space-y-1 rounded-lg border border-red-200 dark:border-red-800/60 bg-red-50 dark:bg-red-950/30 p-4 text-sm text-red-700 dark:text-red-300">
               {analysis.isCommon && (
                 <p>⚠️ {L('commonPasswordWarning', 'This is one of the most commonly used passwords — it can be cracked almost instantly.')}</p>
               )}

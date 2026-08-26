@@ -215,9 +215,19 @@ export function WheelSpinnerClient() {
             </button>
           </div>
           {winner && !spinning && (
-            <p role="status" aria-live="polite" className="mt-4 text-center text-xl font-bold text-brand-600 dark:text-blue-400">
-              🎉 {winner}
-            </p>
+            <div
+              role="status"
+              aria-live="polite"
+              className="mt-4 rounded-xl border px-6 py-4 text-center"
+              style={{ borderColor: 'rgb(var(--primary) / 0.3)', backgroundColor: 'rgb(var(--primary) / 0.06)' }}
+            >
+              <div className="text-[10px] font-medium uppercase tracking-widest" style={{ color: 'rgb(var(--text-faint))' }}>
+                {L('winnerLabel', 'Winner')}
+              </div>
+              <div className="mt-1 text-2xl font-bold" style={{ color: 'rgb(var(--primary))' }}>
+                🎉 {winner}
+              </div>
+            </div>
           )}
         </div>
 

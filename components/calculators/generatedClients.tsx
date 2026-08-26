@@ -1,6 +1,7 @@
 'use client'
 
 import { makeCalculatorClient } from '@/components/calculator/makeCalculatorClient'
+import { makeUnitConverter } from '@/components/calculators/makeUnitConverter'
 import { fmtUSD, fmtNum, toNum } from '@/lib/format'
 import { tui } from '@/lib/i18n/tool-l10n'
 
@@ -377,50 +378,25 @@ export const CompoundInterestCalculatorClient = makeCalculatorClient({
 
 // ───────────────────────────────────────────
 // Length Converter(长度转换器)
+// 迁移自 makeCalculatorClient → makeUnitConverter:获得 MagnitudeRuler
+// 对数量级标尺、All-units 同显面板、⇄ 交换、Quick values,
+// 与其余 13 个换算器形态统一。l10n 键由 in.* / opt.* 改为 unit.*(见 bundle)。
 // ───────────────────────────────────────────
-const LENGTH_UNITS: Record<string, { label: string; toMeters: number }> = {
-  mm: { label: 'Millimeters (mm)', toMeters: 0.001 },
-  cm: { label: 'Centimeters (cm)', toMeters: 0.01 },
-  m: { label: 'Meters (m)', toMeters: 1 },
-  km: { label: 'Kilometers (km)', toMeters: 1000 },
-  in: { label: 'Inches (in)', toMeters: 0.0254 },
-  ft: { label: 'Feet (ft)', toMeters: 0.3048 },
-  yd: { label: 'Yards (yd)', toMeters: 0.9144 },
-  mi: { label: 'Miles (mi)', toMeters: 1609.344 },
-}
-
-export const LengthConverterClient = makeCalculatorClient({
+export const LengthConverterClient = makeUnitConverter({
   slug: 'length-converter',
-  inputs: [
-    { key: 'value', label: 'Value to convert', default: '1', placeholder: '1', slider: { min: 0, max: 1000, step: 1 } },
-    {
-      key: 'from',
-      label: 'From unit',
-      default: 'm',
-      options: Object.entries(LENGTH_UNITS).map(([k, u]) => ({ label: u.label, value: k })),
-    },
-    {
-      key: 'to',
-      label: 'To unit',
-      default: 'ft',
-      options: Object.entries(LENGTH_UNITS).map(([k, u]) => ({ label: u.label, value: k })),
-    },
-  ],
-  outputs: [
-    { key: 'result', label: 'Converted value', highlight: true },
-    { key: 'formula', label: 'Conversion' },
-  ],
-  compute: (v) => {
-    const value = toNum(v.value)
-    const from = LENGTH_UNITS[v.from]
-    const to = LENGTH_UNITS[v.to]
-    if (!from || !to) return { result: '—', formula: '' }
-    const meters = value * from.toMeters
-    const result = meters / to.toMeters
-    return {
-      result: `${fmtNum(result, 6)} ${v.to}`,
-      formula: `${fmtNum(value)} ${v.from} = ${fmtNum(result, 6)} ${v.to}`,
-    }
+  defaultValue: '1',
+  defaultFrom: 'm',
+  defaultTo: 'ft',
+  digits: 6,
+  units: {
+    mm: { label: 'Millimeters (mm)', factor: 0.001 },
+    cm: { label: 'Centimeters (cm)', factor: 0.01 },
+    m: { label: 'Meters (m)', factor: 1 },
+    km: { label: 'Kilometers (km)', factor: 1000 },
+    in: { label: 'Inches (in)', factor: 0.0254 },
+    ft: { label: 'Feet (ft)', factor: 0.3048 },
+    yd: { label: 'Yards (yd)', factor: 0.9144 },
+    mi: { label: 'Miles (mi)', factor: 1609.344 },
   },
   note: '📏 Supports metric (mm, cm, m, km) and imperial (in, ft, yd, mi) units.',
 })

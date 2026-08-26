@@ -139,7 +139,7 @@ export function ColorContrastClient() {
 
       {/* 错误 */}
       {error && (
-        <div className="rounded-lg border border-red-200 dark:border-red-800/60 bg-red-50 dark:bg-red-950/30 p-4 text-sm text-red-700">⚠️ {L('errorInvalidHex', error)}</div>
+        <div className="rounded-lg border border-red-200 dark:border-red-800/60 bg-red-50 dark:bg-red-950/30 p-4 text-sm text-red-700 dark:text-red-300">⚠️ {L('errorInvalidHex', error)}</div>
       )}
 
       {/* 预览 */}

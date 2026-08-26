@@ -162,8 +162,8 @@ export function TextCleanerClient({ slug = 'whitespace-remover' }: { slug?: stri
           rows={6}
           className="w-full rounded-lg border-2 p-4 font-mono text-sm outline-none"
           style={{
-            borderColor: 'rgb(219 234 254)',
-            backgroundColor: 'rgb(219 234 254 / 0.4)',
+            borderColor: 'rgb(var(--border))', // 与 makeTextTool 输出框同令牌,暗色适配
+            backgroundColor: 'rgb(var(--bg-subtle))',
             color: 'rgb(var(--text))',
           }}
         />
