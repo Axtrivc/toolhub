@@ -399,22 +399,30 @@ export function makeCalculatorClient(config: CalculatorConfig): ComponentType {
                 const tKey = chart.titleKey ?? 'chartTitle'
                 if (chart.kind === 'gauge') {
                   const value = parseNumeric(mergedResults[chart.valueKey])
-                  return (
-                    <GaugeChart
-                      key={ci}
-                      title={chart.title ? L(tKey, chart.title) : undefined}
-                      value={value}
-                      min={chart.min}
-                      max={chart.max}
-                      zones={chart.zones.map((z, i) => ({
-                        upTo: z.upTo,
-                        color: z.color,
-                        label: L(`zone.${i}`, z.label),
-                      }))}
-                      formatValue={chart.formatValue}
-                      caption={chart.caption ? L('chartCaption', chart.caption) : undefined}
-                    />
-                  )
+                  // max/zones 支持函数形式(阈值随输入);解析失败静默不出图
+                  try {
+                    const maxVal = typeof chart.max === 'function' ? chart.max(values) : chart.max
+                    const zones = typeof chart.zones === 'function' ? chart.zones(values) : chart.zones
+                    if (!Number.isFinite(maxVal) || maxVal <= chart.min || !Array.isArray(zones) || zones.length === 0) return null
+                    return (
+                      <GaugeChart
+                        key={ci}
+                        title={chart.title ? L(tKey, chart.title) : undefined}
+                        value={value}
+                        min={chart.min}
+                        max={maxVal}
+                        zones={zones.map((z, i) => ({
+                          upTo: z.upTo,
+                          color: z.color,
+                          label: L(`zone.${i}`, z.label),
+                        }))}
+                        formatValue={chart.formatValue}
+                        caption={chart.caption ? L('chartCaption', chart.caption) : undefined}
+                      />
+                    )
+                  } catch {
+                    return null
+                  }
                 }
                 if (chart.kind === 'compare') {
                   if (!config.compare) return null

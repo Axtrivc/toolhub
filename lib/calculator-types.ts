@@ -144,9 +144,15 @@ export interface GaugeChartConfig {
   titleKey?: string
   valueKey: string
   min: number
-  max: number
-  /** 区间带(按 upTo 升序;最后一段自动延伸到 max) */
-  zones: { upTo: number; color: string; label: string }[]
+  /** 量程上界;可为函数(阈值随输入变化的工具,如蛋白克数 = g/kg × 体重) */
+  max: number | ((values: Record<string, string>) => number)
+  /**
+   * 区间带(按 upTo 升序;最后一段自动延伸到 max);可为函数 ——
+   * 需要按当前输入计算阈值的场景(protein/ideal-weight 等)。
+   */
+  zones:
+    | { upTo: number; color: string; label: string }[]
+    | ((values: Record<string, string>) => { upTo: number; color: string; label: string }[])
   /** 中央大字格式化(缺省保留 1 位小数;如 (n)=>`${n.toFixed(1)}%`) */
   formatValue?: (n: number) => string
   /** 中央大字格式化缺省值之外的说明(指针下方),如当前区间名 */

@@ -203,6 +203,38 @@ export const ProteinIntakeCalculatorClient = makeCalculatorClient({
     }
   },
   note: '🥩 Ranges follow ISSN & ACSM position stands: 0.8 g/kg is the RDA floor for sedentary adults; training and caloric deficits raise needs. Spread intake across 3-5 meals.',
+  chart: {
+    kind: 'gauge',
+    title: 'Your Range on the g/kg Scale',
+    valueKey: 'range',
+    min: 0,
+    // 量程 = 3 g/kg × 体重(覆盖减脂上限 2.7 g/kg 仍有余量)
+    max: (v) => Math.max(60, Math.round(toNum(v.weight) * 3)),
+    // 区间阈值随输入(与 compute 同口径的 g/kg 区间表);个人区间带绿色
+    zones: (v) => {
+      const weight = toNum(v.weight)
+      if (!(weight > 0) || weight > 500) return []
+      const base: Record<string, [number, number]> = {
+        sedentary: [0.8, 1.2],
+        light: [1.0, 1.4],
+        moderate: [1.2, 1.6],
+        athlete: [1.6, 2.2],
+      }
+      let [lo, hi] = base[v.activity] ?? base['moderate']
+      if (v.goal === 'gain') hi = Math.max(hi, 2.0)
+      if (v.goal === 'lose') {
+        lo = Math.max(lo, 1.6)
+        hi = Math.min(Math.max(hi, 2.2), 2.7)
+      }
+      const cap = Math.max(60, Math.round(weight * 3))
+      return [
+        { upTo: Math.round(weight * lo), color: '#3b82f6', label: 'Below your range' },
+        { upTo: Math.round(weight * hi), color: '#22c55e', label: 'Your target range' },
+        { upTo: cap, color: '#eab308', label: 'Above range' },
+      ]
+    },
+    formatValue: (n) => `${Math.round(n)} g`,
+  },
 })
 
 // ── 电费计算器 ──
