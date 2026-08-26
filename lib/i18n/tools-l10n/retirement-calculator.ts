@@ -16,7 +16,9 @@ export const retirementCalculatorL10n: ToolL10n = {
     ],
     ui: {
       'in.current': '当前储蓄', 'in.monthly': '每月供款', 'in.rate': '年回报率', 'in.years': '距退休年数',
-      'out.total': '退休储蓄总额', 'out.contributed': '你的累计投入', 'out.growth': '投资增长',
+      'out.total': '退休储蓄总额', 'out.monthlyIncome': '月收入(4% 法则)', 'out.contributed': '你的累计投入', 'out.growth': '投资增长',
+      chartTitle: '通往退休之路', 'line.contributed': '你投入的', 'line.balance': '退休储蓄', 'band.contributed-balance': '投资增长',
+      'preset.0': '保守 4%', 'preset.1': '均衡 6%', 'preset.2': '进取 8%',
       note: '👵 把当前储蓄的复利增长与定期供款结合。尽早开始——时间比金额更重要。',
     },
   },
@@ -31,7 +33,9 @@ export const retirementCalculatorL10n: ToolL10n = {
     ],
     ui: {
       'in.current': 'Ahorros actuales', 'in.monthly': 'Aportación mensual', 'in.rate': 'Retorno anual', 'in.years': 'Años hasta la jubilación',
-      'out.total': 'Ahorro para la jubilación', 'out.contributed': 'Tus aportaciones', 'out.growth': 'Crecimiento de la inversión',
+      'out.total': 'Ahorro para la jubilación', 'out.monthlyIncome': 'Ingreso mensual (regla del 4%)', 'out.contributed': 'Tus aportaciones', 'out.growth': 'Crecimiento de la inversión',
+      chartTitle: 'Camino a la jubilación', 'line.contributed': 'Tu aportación', 'line.balance': 'Fondo de jubilación', 'band.contributed-balance': 'Crecimiento',
+      'preset.0': 'Conservador 4%', 'preset.1': 'Equilibrado 6%', 'preset.2': 'Agresivo 8%',
       note: '👩‍🦳 Combina el crecimiento compuesto de los ahorros actuales con aportaciones regulares. Empieza pronto — el tiempo importa más que la cantidad.',
     },
   },
@@ -46,7 +50,9 @@ export const retirementCalculatorL10n: ToolL10n = {
     ],
     ui: {
       'in.current': 'Aktuelle Ersparnisse', 'in.monthly': 'Monatlicher Beitrag', 'in.rate': 'Jahresrendite', 'in.years': 'Jahre bis zur Rente',
-      'out.total': 'Rentenersparnisse', 'out.contributed': 'Deine Einzahlungen', 'out.growth': 'Investment-Wachstum',
+      'out.total': 'Rentenersparnisse', 'out.monthlyIncome': 'Monatseinkommen (4%-Regel)', 'out.contributed': 'Deine Einzahlungen', 'out.growth': 'Investment-Wachstum',
+      chartTitle: 'Weg in die Rente', 'line.contributed': 'Eigene Einzahlung', 'line.balance': 'Renten Topf', 'band.contributed-balance': 'Wachstum',
+      'preset.0': 'Konservativ 4%', 'preset.1': 'Ausgewogen 6%', 'preset.2': 'Aggressiv 8%',
       note: '👵 Kombiniert Zinseszins auf aktuelle Ersparnisse mit regelmäßigen Beiträgen. Fang früh an — Zeit zählt mehr als Betrag.',
     },
   },

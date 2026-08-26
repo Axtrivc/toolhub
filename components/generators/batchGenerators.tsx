@@ -335,14 +335,21 @@ function fmtUSDValue(n: number): string {
 // ── 退休计算器 ──
 export const RetirementCalculatorClient = makeCalculatorClient({
   slug: 'retirement-calculator',
+  urlState: true,
+  presets: [
+    { label: 'Conservative 4%', values: { rate: '4' } },
+    { label: 'Balanced 6%', values: { rate: '6' } },
+    { label: 'Aggressive 8%', values: { rate: '8' } },
+  ],
   inputs: [
     { key: 'current', label: 'Current savings', suffix: '$', default: '25000' },
-    { key: 'monthly', label: 'Monthly contribution', suffix: '$', default: '500' },
-    { key: 'rate', label: 'Annual return', suffix: '%', default: '7' },
-    { key: 'years', label: 'Years to retirement', default: '30' },
+    { key: 'monthly', label: 'Monthly contribution', suffix: '$', default: '500', slider: { min: 0, max: 5000, step: 50 } },
+    { key: 'rate', label: 'Annual return', suffix: '%', default: '7', slider: { min: 0, max: 12, step: 0.1 } },
+    { key: 'years', label: 'Years to retirement', default: '30', slider: { min: 1, max: 50, step: 1 } },
   ],
   outputs: [
     { key: 'total', label: 'Retirement savings', highlight: true },
+    { key: 'monthlyIncome', label: 'Monthly income (4% rule)' },
     { key: 'contributed', label: 'You contributed' },
     { key: 'growth', label: 'Investment growth' },
   ],
@@ -360,11 +367,43 @@ export const RetirementCalculatorClient = makeCalculatorClient({
     const contributed = principal + monthly * months
     return {
       total: fmtUSDValue(future),
+      monthlyIncome: fmtUSDValue((future * 0.04) / 12),
       contributed: fmtUSDValue(contributed),
       growth: fmtUSDValue(future - contributed),
     }
   },
-  note: '👵 Combines compound growth on current savings with regular contributions. Start early — time matters more than amount.',
+  note: '👵 Combines compound growth on current savings with regular contributions. Start early — time matters more than amount. The 4% rule: withdrawing 4% of your nest egg per year is historically sustainable across ~30-year retirements.',
+  chart: { kind: 'series', title: 'Path to Retirement' },
+  // 增长路径:逐年采样,累计投入(面积)vs 总储蓄(面积),中间 = 投资增长
+  series: (v) => {
+    const principal = toNum(v.current)
+    const monthly = toNum(v.monthly)
+    const annualRate = toNum(v.rate) / 100
+    const years = Math.round(toNum(v.years))
+    if (principal < 0 || monthly < 0 || annualRate < 0 || years <= 0 || years > 60) return null
+    const monthlyRate = annualRate / 12
+    const balance: number[] = []
+    const contributed: number[] = []
+    const xLabels: string[] = []
+    let bal = principal
+    for (let y = 0; y <= years; y++) {
+      if (y > 0) {
+        for (let m = 0; m < 12; m++) bal = bal * (1 + monthlyRate) + monthly
+      }
+      balance.push(Math.max(0, bal))
+      contributed.push(principal + monthly * 12 * y)
+      xLabels.push(`Y${y}`)
+    }
+    return {
+      xLabels,
+      lines: [
+        { key: 'contributed', label: 'You put in', color: '#3b82f6', points: contributed, area: true },
+        { key: 'balance', label: 'Nest egg', color: '#22c55e', points: balance, area: true },
+      ],
+      highlightBetween: { a: 'contributed', b: 'balance', label: 'Investment growth' },
+      formatY: (n) => fmtUSDValue(n),
+    }
+  },
 })
 
 // ── 单利计算器 ──
