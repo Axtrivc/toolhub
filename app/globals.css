@@ -437,3 +437,64 @@ input.calc-slider:focus-visible {
     transition: none;
   }
 }
+
+/* ════════════════════════════════════════════════════════════
+ * Apple 风格动态细节(2026-08 R17)——全部挂在 .tool-shell 上,
+ * 225 个工具页共享,零组件改动、零水合风险(纯 CSS/装饰性)。
+ * ════════════════════════════════════════════════════════════ */
+
+/* iOS 按压反馈:按下轻微缩小(0.97),松开经 easeOutQuart 快速回弹;
+   滑杆拇指由自身 :active 规则接管(transform 冲突) */
+.tool-shell button:not(input.calc-slider) {
+  transition:
+    transform 0.18s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.18s ease,
+    background-color 0.18s ease,
+    border-color 0.18s ease,
+    opacity 0.18s ease;
+  will-change: transform;
+}
+.tool-shell button:active:not(:disabled) {
+  transform: scale(0.97);
+}
+
+/* 内容入场:iOS 列表呈现感——直接子块淡入上浮,交错 40ms;首帧即开始
+   (纯 CSS 时间轴,SSR/水合零差异;animation-fill-mode both 兜底终态) */
+@keyframes ios-rise {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.tool-shell > * {
+  animation: ios-rise 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.tool-shell > *:nth-child(2) { animation-delay: 0.04s; }
+.tool-shell > *:nth-child(3) { animation-delay: 0.08s; }
+.tool-shell > *:nth-child(4) { animation-delay: 0.12s; }
+.tool-shell > *:nth-child(5) { animation-delay: 0.16s; }
+.tool-shell > *:nth-child(6) { animation-delay: 0.2s; }
+.tool-shell > *:nth-child(n + 7) { animation-delay: 0.24s; }
+
+/* 滑杆拇指:按压放大(iOS scrubber 手感) */
+input.calc-slider:active::-webkit-slider-thumb {
+  transform: scale(1.18);
+}
+
+/* 减少动态:入场直出终态、按压/缩放全部关闭 */
+@media (prefers-reduced-motion: reduce) {
+  .tool-shell > * {
+    animation: none;
+  }
+  .tool-shell button:active:not(:disabled),
+  input.calc-slider:active::-webkit-slider-thumb {
+    transform: none;
+  }
+  .tool-shell button:not(input.calc-slider) {
+    transition: none;
+  }
+}

@@ -186,10 +186,10 @@ export function ResultCard({
     <div
       role="status"
       aria-live="polite"
-      className={`rounded-xl border p-5 text-center shadow-sm transition-shadow hover:shadow-md ${
+      className={`rounded-xl border p-5 text-center shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md ${
         highlight
-          ? 'border-primary/20 bg-gradient-to-br from-primary/5 to-primary/10'
-          : 'border-border bg-card'
+          ? 'border-primary/20 bg-gradient-to-br from-primary/5 to-primary/10 backdrop-blur-md'
+          : 'border-border/60 bg-card/80 backdrop-blur-md'
       }`}
     >
       <div className="text-xs font-medium uppercase tracking-wide" style={{ color: 'rgb(var(--text-subtle))' }}>
