@@ -305,7 +305,7 @@ export function RegexTesterClient() {
       {/* 文本超长截断提示(防 ReDoS / 性能退化) */}
       {textTruncated && (
         <div className="rounded-lg border border-amber-200 bg-amber-50 p-3 text-xs text-amber-700 dark:bg-amber-950/40 dark:text-amber-300">
-          ⚠️ {L('textExceeds', 'Text exceeds')} {MAX_TEXT_LEN.toLocaleString()} {L('truncatedForSafety', 'characters — truncated for matching to protect against slow/ReDoS patterns.')}
+          ⚠️ {L('textExceeds', 'Text exceeds')} {MAX_TEXT_LEN.toLocaleString('en-US')} {L('truncatedForSafety', 'characters — truncated for matching to protect against slow/ReDoS patterns.')}
         </div>
       )}
 

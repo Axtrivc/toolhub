@@ -140,7 +140,7 @@ export function ContextWindowCheckerClient() {
           className="w-full rounded-lg border p-4 font-mono text-sm outline-none transition focus:ring-2"
           style={selVars} />
         <p className="mt-1 text-xs" style={{ color: 'rgb(var(--text-faint))' }}>
-          {L('estimate', '≈ {n} tokens · {c} characters').replace('{n}', tokens.toLocaleString()).replace('{c}', [...text].length.toLocaleString())}
+          {L('estimate', '≈ {n} tokens · {c} characters').replace('{n}', tokens.toLocaleString('en-US')).replace('{c}', [...text].length.toLocaleString('en-US'))}
         </p>
       </div>
 
@@ -153,7 +153,7 @@ export function ContextWindowCheckerClient() {
               <div className="mb-1.5 flex items-baseline justify-between gap-2 text-sm">
                 <span style={{ color: 'rgb(var(--text))' }}>{label}</span>
                 <span className="font-mono text-xs" style={{ color: fit ? 'rgb(var(--text-faint))' : '#dc2626' }}>
-                  {fit ? `${fmtNum(pct, 1)}% ${L('ofWindow', 'of window')}` : L('exceeds', `exceeds by ${'{}'}`).replace('{}', (tokens - ctx).toLocaleString())}
+                  {fit ? `${fmtNum(pct, 1)}% ${L('ofWindow', 'of window')}` : L('exceeds', `exceeds by ${'{}'}`).replace('{}', (tokens - ctx).toLocaleString('en-US'))}
                 </span>
               </div>
               <div className="h-2 overflow-hidden rounded-full" style={{ backgroundColor: 'rgb(var(--bg-subtle))' }} role="img" aria-label={`${label}: ${fmtNum(pct, 0)}%`}>
@@ -163,7 +163,7 @@ export function ContextWindowCheckerClient() {
                 />
               </div>
               <div className="mt-1 font-mono text-[10px]" style={{ color: 'rgb(var(--text-faint))' }}>
-                {tokens.toLocaleString()} / {ctx.toLocaleString()} · {L('headroom', 'headroom')} {(Math.max(0, ctx - tokens)).toLocaleString()}
+                {tokens.toLocaleString('en-US')} / {ctx.toLocaleString('en-US')} · {L('headroom', 'headroom')} {(Math.max(0, ctx - tokens)).toLocaleString('en-US')}
               </div>
             </div>
           )

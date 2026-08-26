@@ -275,8 +275,8 @@ export function EmbeddingPriceClient() {
                     {m.label}
                     {i === 0 && <span className="ml-2 text-xs text-green-600 dark:text-green-400">{L('cheapest', 'cheapest')}</span>}
                   </td>
-                  <td className="px-3 py-2 font-mono text-xs" style={{ color: 'rgb(var(--text-faint))' }}>{m.dims.toLocaleString()}</td>
-                  <td className="px-3 py-2 font-mono text-xs" style={{ color: 'rgb(var(--text-faint))' }}>{m.ctx.toLocaleString()}</td>
+                  <td className="px-3 py-2 font-mono text-xs" style={{ color: 'rgb(var(--text-faint))' }}>{m.dims.toLocaleString('en-US')}</td>
+                  <td className="px-3 py-2 font-mono text-xs" style={{ color: 'rgb(var(--text-faint))' }}>{m.ctx.toLocaleString('en-US')}</td>
                   <td className="px-3 py-2 font-mono text-xs" style={{ color: 'rgb(var(--text-faint))' }}>${m.pricePer1M === 0 ? '0' : fmtNum(m.pricePer1M, 3)}</td>
                   <td className="px-3 py-2 font-mono" style={{ color: 'rgb(var(--text))' }}>${perRun < 0.01 ? perRun.toExponential(1) : fmtNum(perRun, 4)}</td>
                   <td className="px-3 py-2 font-mono font-semibold" style={{ color: 'rgb(var(--text))' }}>${fmtNum(monthly, 2)}</td>

@@ -110,7 +110,7 @@ export function AgeCalculatorClient() {
   const targetDate = target ? parseLocalDate(target) : today
   const result = targetDate ? calcAge(birthDate, targetDate) : null
 
-  const fmt = (n: number) => n.toLocaleString()
+  const fmt = (n: number) => n.toLocaleString('en-US')
 
   return (
     <div className="space-y-6">

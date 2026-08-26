@@ -177,7 +177,7 @@ export function BcryptHashGeneratorClient() {
       {algorithm === 'bcrypt' && (
         <div>
           <label htmlFor="bh-cost" className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
-            {L('costFactor', 'Cost factor:')} <span className="font-mono">{cost}</span> ({(2 ** cost).toLocaleString()} {L('iterations', 'iterations')})
+            {L('costFactor', 'Cost factor:')} <span className="font-mono">{cost}</span> ({(2 ** cost).toLocaleString('en-US')} {L('iterations', 'iterations')})
           </label>
           <input
             id="bh-cost"

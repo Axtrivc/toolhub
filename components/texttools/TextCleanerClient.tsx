@@ -171,8 +171,8 @@ export function TextCleanerClient({ slug = 'whitespace-remover' }: { slug?: stri
 
       {/* 统计 */}
       <div className="flex gap-4 text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>
-        <span>{charCount.toLocaleString()} {L('characters', 'characters')}</span>
-        <span>{wordCount.toLocaleString()} {L('words', 'words')}</span>
+        <span>{charCount.toLocaleString('en-US')} {L('characters', 'characters')}</span>
+        <span>{wordCount.toLocaleString('en-US')} {L('words', 'words')}</span>
       </div>
 
       <p className="rounded-md p-3 text-xs" style={{ backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text-subtle))' }}>

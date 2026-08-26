@@ -194,8 +194,8 @@ export function ReadingSpeakingTimeClient() {
           精确 mm:ss 仍保留下方原有输出卡。 */}
       <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
         {[
-          { label: L('statWords', 'Words'), display: words.toLocaleString(), sub: '' },
-          { label: L('statChars', 'Characters'), display: chars.toLocaleString(), sub: '' },
+          { label: L('statWords', 'Words'), display: words.toLocaleString('en-US'), sub: '' },
+          { label: L('statChars', 'Characters'), display: chars.toLocaleString('en-US'), sub: '' },
           { label: L('statReading', 'Reading time'), display: (words / readWpm).toFixed(1), sub: `${L('statMinUnit', 'min')} @ ${readWpm} ${speedUnit}` },
           { label: L('statSpeaking', 'Speaking time'), display: (words / speakWpm).toFixed(1), sub: `${L('statMinUnit', 'min')} @ ${speakWpm} ${speedUnit}` },
         ].map((cell) => (

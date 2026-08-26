@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useId, useRef, useState } from 'react'
+import dynamic from 'next/dynamic'
 import Link from 'next/link'
 import { useApp } from './providers/AppProviders'
 import { t } from '@/lib/i18n'
@@ -8,12 +9,23 @@ import { getPublishedTools } from '@/lib/tools'
 import { SITE_NAME } from '@/lib/seo'
 import { ThemeToggle } from './ThemeToggle'
 import { LanguageToggle } from './LanguageToggle'
-import { SearchPalette } from './SearchPalette'
+
+// 搜索面板懒加载:关闭态不渲染任何内容,首次 ⌘K 之前不载入
+// framer-motion / 搜索索引 chunk,把动画库移出所有页面首屏。
+// 首开后常驻挂载(paletteMounted 门控),保留 AnimatePresence 退场动画。
+const SearchPalette = dynamic(() => import('./SearchPalette').then((m) => m.SearchPalette), {
+  ssr: false,
+})
 
 export function Header() {
   const { locale } = useApp()
   const [menuOpen, setMenuOpen] = useState(false)
   const [searchOpen, setSearchOpen] = useState(false)
+  // 首次打开后置 true 并常驻:让懒加载的 SearchPalette 保留退场动画
+  const [paletteMounted, setPaletteMounted] = useState(false)
+  useEffect(() => {
+    if (searchOpen) setPaletteMounted(true)
+  }, [searchOpen])
   const panelId = useId()
 
   // 平台检测:决定搜索按钮上 kbd 提示显示 ⌘K(Mac)还是 Ctrl K(Win/Linux)。
@@ -273,13 +285,15 @@ export function Header() {
         </div>
       )}
 
-      {/* 全局搜索弹窗(Cmd/Ctrl+K) */}
-      <SearchPalette
-        tools={tools}
-        locale={locale}
-        open={searchOpen}
-        onClose={() => setSearchOpen(false)}
-      />
+      {/* 全局搜索弹窗(Cmd/Ctrl+K):懒加载,首开后常驻 */}
+      {paletteMounted && (
+        <SearchPalette
+          tools={tools}
+          locale={locale}
+          open={searchOpen}
+          onClose={() => setSearchOpen(false)}
+        />
+      )}
     </header>
   )
 }

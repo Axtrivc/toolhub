@@ -82,7 +82,7 @@ export function DateDifferenceClient() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [start, end, locale])
 
-  const fmt = (n: number) => n.toLocaleString()
+  const fmt = (n: number) => n.toLocaleString('en-US')
 
   return (
     <div className="space-y-6">

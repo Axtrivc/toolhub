@@ -82,14 +82,14 @@ export function GptTokenCounterClient() {
     () =>
       [
         L('summaryTitle', 'Token Count Summary (estimate)'),
-        `${L('sEstimatedTokens', 'Estimated tokens:')} ~${stats.tokens.toLocaleString()} ${L('sHeuristic', '(heuristic, ~cl100k_base)')}`,
-        `${L('sCharacters', 'Characters:')} ${stats.chars.toLocaleString()}`,
-        `${L('sCharactersNoSpaces', 'Characters (no spaces):')} ${stats.charsNoSpaces.toLocaleString()}`,
-        `${L('sWords', 'Words:')} ${stats.words.toLocaleString()}`,
-        `${L('sSentences', 'Sentences:')} ${stats.sentences.toLocaleString()}`,
+        `${L('sEstimatedTokens', 'Estimated tokens:')} ~${stats.tokens.toLocaleString('en-US')} ${L('sHeuristic', '(heuristic, ~cl100k_base)')}`,
+        `${L('sCharacters', 'Characters:')} ${stats.chars.toLocaleString('en-US')}`,
+        `${L('sCharactersNoSpaces', 'Characters (no spaces):')} ${stats.charsNoSpaces.toLocaleString('en-US')}`,
+        `${L('sWords', 'Words:')} ${stats.words.toLocaleString('en-US')}`,
+        `${L('sSentences', 'Sentences:')} ${stats.sentences.toLocaleString('en-US')}`,
         `${L('sModel', 'Model:')} ${model.label} ($${model.inputPer1M}/1M ${L('input', 'input')}, $${model.outputPer1M}/1M ${L('output', 'output')})`,
         `${L('sEstimatedInputCost', 'Estimated input cost:')} ${formatUsd(inputCost)}`,
-        `${L('sEstimatedOutputCost', 'Estimated output cost:')} ${formatUsd(outputCost)} (${outputTok.toLocaleString()} ${L('tokens', 'tokens')})`,
+        `${L('sEstimatedOutputCost', 'Estimated output cost:')} ${formatUsd(outputCost)} (${outputTok.toLocaleString('en-US')} ${L('tokens', 'tokens')})`,
         `${L('sEstimatedTotalCost', 'Estimated total cost:')} ${formatUsd(totalCost)}`,
       ].join('\n'),
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -121,11 +121,11 @@ export function GptTokenCounterClient() {
 
       {/* 统计卡片 */}
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
-        <ResultCard label={L('estTokens', 'Est. tokens')} value={`~${stats.tokens.toLocaleString()}`} sublabel={L('heuristicEstimate', 'heuristic estimate')} highlight />
-        <ResultCard label={L('characters', 'Characters')} value={stats.chars.toLocaleString()} />
-        <ResultCard label={L('noSpaces', 'No spaces')} value={stats.charsNoSpaces.toLocaleString()} sublabel={L('charactersSub', 'characters')} />
-        <ResultCard label={L('words', 'Words')} value={stats.words.toLocaleString()} />
-        <ResultCard label={L('sentences', 'Sentences')} value={stats.sentences.toLocaleString()} />
+        <ResultCard label={L('estTokens', 'Est. tokens')} value={`~${stats.tokens.toLocaleString('en-US')}`} sublabel={L('heuristicEstimate', 'heuristic estimate')} highlight />
+        <ResultCard label={L('characters', 'Characters')} value={stats.chars.toLocaleString('en-US')} />
+        <ResultCard label={L('noSpaces', 'No spaces')} value={stats.charsNoSpaces.toLocaleString('en-US')} sublabel={L('charactersSub', 'characters')} />
+        <ResultCard label={L('words', 'Words')} value={stats.words.toLocaleString('en-US')} />
+        <ResultCard label={L('sentences', 'Sentences')} value={stats.sentences.toLocaleString('en-US')} />
       </div>
 
       {/* 模型定价 + 成本 */}
@@ -184,10 +184,10 @@ export function GptTokenCounterClient() {
             </div>
             <div className="mt-1 font-mono text-2xl font-bold text-primary sm:text-3xl">{formatUsd(totalCost)}</div>
             <div className="mt-1 text-xs" style={{ color: 'rgb(var(--text-faint))' }}>
-              {L('inputCostLine', 'Input:')} {formatUsd(inputCost)} · ~{stats.tokens.toLocaleString()} {L('inputTokens', 'input tokens')}
+              {L('inputCostLine', 'Input:')} {formatUsd(inputCost)} · ~{stats.tokens.toLocaleString('en-US')} {L('inputTokens', 'input tokens')}
             </div>
             <div className="text-xs" style={{ color: 'rgb(var(--text-faint))' }}>
-              {L('outputCostLine', 'Output:')} {formatUsd(outputCost)} · {outputTok.toLocaleString()} {L('outputTokens', 'output tokens')}
+              {L('outputCostLine', 'Output:')} {formatUsd(outputCost)} · {outputTok.toLocaleString('en-US')} {L('outputTokens', 'output tokens')}
             </div>
           </div>
         </div>

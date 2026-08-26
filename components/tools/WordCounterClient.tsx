@@ -80,11 +80,11 @@ export function WordCounterClient() {
   const stats = useMemo(() => analyzeText(text), [text])
 
   const metricCards = [
-    { label: L('words', 'Words'), value: stats.words.toLocaleString(), highlight: true },
-    { label: L('characters', 'Characters'), value: stats.characters.toLocaleString() },
-    { label: L('charactersNoSpaces', 'Characters (no spaces)'), value: stats.charactersNoSpaces.toLocaleString() },
-    { label: L('sentences', 'Sentences'), value: stats.sentences.toLocaleString() },
-    { label: L('paragraphs', 'Paragraphs'), value: stats.paragraphs.toLocaleString() },
+    { label: L('words', 'Words'), value: stats.words.toLocaleString('en-US'), highlight: true },
+    { label: L('characters', 'Characters'), value: stats.characters.toLocaleString('en-US') },
+    { label: L('charactersNoSpaces', 'Characters (no spaces)'), value: stats.charactersNoSpaces.toLocaleString('en-US') },
+    { label: L('sentences', 'Sentences'), value: stats.sentences.toLocaleString('en-US') },
+    { label: L('paragraphs', 'Paragraphs'), value: stats.paragraphs.toLocaleString('en-US') },
     { label: L('readingTime', 'Reading Time'), value: formatTime(stats.readingTime, L) },
     { label: L('speakingTime', 'Speaking Time'), value: formatTime(stats.speakingTime, L) },
   ]
