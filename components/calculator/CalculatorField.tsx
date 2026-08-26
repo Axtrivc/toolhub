@@ -124,7 +124,9 @@ export function CalculatorField({
  * 数值字段 + 滑杆双向绑定(工厂 FieldDef.slider 声明后渲染)。
  * - 拖杆 → 数字框同步为步进值(按 step 小数位取整,避免 0.05 步进的浮点尾差);
  * - 数字框输入超出范围 → 滑杆仅 clamp 显示位置,不回写不阻止;
- * - 空/非数字输入 → 滑杆回到 min 位置显示。
+ * - 空/非数字输入 → 滑杆回到 min 位置显示;
+ * - iOS 风格值气泡:滑杆聚焦/拖动期间,thumb 上方浮出当前值胶囊
+ *   (pointerdown/focus 显示、pointerup/blur 隐藏;SSR 首帧不显示,水合安全)。
  */
 export function CalculatorSliderField({
   min,
@@ -146,9 +148,14 @@ export function CalculatorSliderField({
   const safe = Number.isFinite(parsed) ? Math.min(max, Math.max(min, parsed)) : min
   const pct = max > min ? ((safe - min) / (max - min)) * 100 : 0
   const decimals = (String(step).split('.')[1] ?? '').length
+  const [bubble, setBubble] = useState(false)
+
+  // 气泡水平定位:精确对齐 thumb 中心 —— pct% 轨道位置再补偿
+  // thumb 半宽随首尾两端向内收的偏移(16px thumb → ±8px 线性插值)。
+  const bubbleLeft = `calc(${pct}% + ${(0.5 - pct / 100) * 16}px)`
 
   return (
-    <div>
+    <div className="relative">
       <CalculatorField {...field} type="number" />
       <input
         type="range"
@@ -159,10 +166,29 @@ export function CalculatorSliderField({
         value={safe}
         aria-label={field.label}
         onChange={(e) => field.onChange(String(Number((Number(e.target.value)).toFixed(decimals))))}
+        onPointerDown={() => setBubble(true)}
+        onPointerUp={() => setBubble(false)}
+        onPointerCancel={() => setBubble(false)}
+        onFocus={() => setBubble(true)}
+        onBlur={() => setBubble(false)}
         style={{
           background: `linear-gradient(to right, rgb(var(--primary)) ${pct}%, rgb(var(--bg-subtle)) ${pct}%)`,
         }}
       />
+      {bubble && (
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute bottom-4 z-10 -translate-x-1/2 whitespace-nowrap rounded-md px-2 py-1 text-xs font-semibold shadow-md"
+          style={{
+            left: bubbleLeft,
+            backgroundColor: 'rgb(var(--primary))',
+            color: '#fff',
+          }}
+        >
+          {safe.toFixed(decimals)}
+          {field.suffix ? ` ${field.suffix}` : ''}
+        </div>
+      )}
     </div>
   )
 }

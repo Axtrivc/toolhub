@@ -2,6 +2,7 @@
 
 import { useState, useMemo, useCallback, useEffect, useRef, type ComponentType } from 'react'
 import { CalculatorField, CalculatorSliderField, ResultCard, CalculatorNote } from './CalculatorField'
+import { SegmentedControl } from './SegmentedControl'
 import { BreakdownChart } from './BreakdownChart'
 import { GaugeChart } from '../charts/GaugeChart'
 import { LineAreaChart } from '../charts/LineAreaChart'
@@ -299,8 +300,29 @@ export function makeCalculatorClient(config: CalculatorConfig): ComponentType {
 
         <div className="grid grid-cols-1 gap-4 rounded-lg p-4 sm:grid-cols-2" style={{ backgroundColor: 'rgb(var(--bg-subtle))' }}>
           {config.inputs.map((f) => {
-            // select 类型用下拉
+            // select 类型用下拉;选项 ≤4 个时升级为 iOS 风格分段控件
+            // (滑块指示器只动 transform,与 macOS System Settings 同族手感)
             if (f.options && f.options.length > 0) {
+              const segOptions = f.options.map((opt) => ({
+                label: L(`opt.${f.key}.${opt.value}`, opt.label),
+                value: opt.value,
+              }))
+              if (f.options.length <= 4) {
+                return (
+                  <div key={f.key} className="sm:col-span-2">
+                    <span id={`${f.key}-label`} className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
+                      {inLabel(f.key, f.label)}
+                    </span>
+                    <SegmentedControl
+                      options={segOptions}
+                      value={values[f.key] ?? f.options[0].value}
+                      onChange={(v) => setValue(f.key, v)}
+                      ariaLabel={inLabel(f.key, f.label)}
+                      id={f.key}
+                    />
+                  </div>
+                )
+              }
               return (
                 <div key={f.key}>
                   <label htmlFor={f.key} className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
@@ -312,9 +334,9 @@ export function makeCalculatorClient(config: CalculatorConfig): ComponentType {
                     onChange={(e) => setValue(f.key, e.target.value)}
                     className="w-full rounded-lg border p-3 shadow-sm outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200" style={{ borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rgb(var(--bg-card))', color: 'rgb(var(--text))' }}
                   >
-                    {f.options.map((opt) => (
+                    {segOptions.map((opt) => (
                       <option key={opt.value} value={opt.value}>
-                        {L(`opt.${f.key}.${opt.value}`, opt.label)}
+                        {opt.label}
                       </option>
                     ))}
                   </select>
