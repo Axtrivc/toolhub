@@ -1,7 +1,8 @@
 'use client'
 
 import { useState, useMemo, useCallback } from 'react'
-import { CalculatorField, ResultCard, CalculatorNote } from '../calculator/CalculatorField'
+import { CalculatorField, CalculatorSliderField, ResultCard, CalculatorNote } from '../calculator/CalculatorField'
+import { MagnitudeRuler } from '../charts/MagnitudeRuler'
 import { ResultActions } from '../ResultActions'
 import { LoadSampleButton } from '../LoadSampleButton'
 import { fmtNum, toNum } from '@/lib/format'
@@ -131,6 +132,9 @@ export function makeUnitConverter(config: {
       setTo(from)
     }, [from, to])
 
+    // 快捷数值 chips:一键填入常用量级,再配合滑杆微调(覆盖绝大多数换算场景)
+    const QUICK_VALUES = [1, 5, 10, 25, 50, 100, 500, 1000]
+
     // 单位 label(回退到 key),供摘要/公式/结果卡显示,避免暴露 raw key 如 'gb'
     const fromLabel = L(`unit.${from}`, config.units[from]?.label ?? from)
     const toLabel = L(`unit.${to}`, config.units[to]?.label ?? to)
@@ -169,12 +173,15 @@ export function makeUnitConverter(config: {
           {sample && <LoadSampleButton onLoad={handleLoadSample} />}
         </div>
         <div className="grid grid-cols-1 gap-4 rounded-lg p-4 sm:grid-cols-3" style={{ backgroundColor: 'rgb(var(--bg-subtle))' }}>
-          <CalculatorField
+          <CalculatorSliderField
             id="value"
             label={LC('value', 'Value')}
             value={value}
             onChange={setValue}
             placeholder="1"
+            min={0}
+            max={1000}
+            step={1}
           />
           <div>
             <label htmlFor="from" className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
@@ -212,8 +219,33 @@ export function makeUnitConverter(config: {
           </div>
         </div>
 
-        {/* ⇄ 交换按钮(结果区上方):From/To 互换,数值不动 */}
-        <div className="flex justify-end">
+        {/* ⇄ 交换 From/To:输入数值保持不变,语义跟随单位互换 */}
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <div className="flex flex-wrap items-center gap-1.5">
+            <span className="mr-1 text-xs" style={{ color: 'rgb(var(--text-faint))' }}>
+              {LC('quickValues', 'Quick values')}
+            </span>
+            {QUICK_VALUES.map((qv) => (
+              <button
+                key={qv}
+                type="button"
+                onClick={() => setValue(String(qv))}
+                aria-pressed={toNum(value) === qv}
+                className="rounded-full px-2.5 py-1 text-xs font-medium tabular-nums transition-all duration-200 hover:-translate-y-px"
+                style={
+                  toNum(value) === qv
+                    ? { backgroundColor: 'rgb(var(--primary))', color: '#fff' }
+                    : {
+                        backgroundColor: 'rgb(var(--bg-card))',
+                        color: 'rgb(var(--text-subtle))',
+                        border: '1px solid rgb(var(--border))',
+                      }
+                }
+              >
+                {qv}
+              </button>
+            ))}
+          </div>
           <button
             type="button"
             onClick={handleSwap}
@@ -248,6 +280,16 @@ export function makeUnitConverter(config: {
           summary={summary}
           filename={downloadFilename}
           downloadContent={downloadContent}
+        />
+
+        {/* 量级标尺:输入值与换算结果放到同一条对数刻度轴上,
+            拖滑杆/换单位时两个圆点实时滑动,直观建立「差几个数量级」的尺度感。
+            值 ≤0 或非法(温度零下等)时组件自行不渲染 */}
+        <MagnitudeRuler
+          title={LC('scaleTitle', 'Scale')}
+          from={{ display: `${fmtNum(toNum(value), digits)} ${fromLabel}`, value: Math.abs(toNum(value)) }}
+          to={{ display: `${fmtNum(result, digits)} ${toLabel}`, value: Math.abs(result) }}
+          digits={digits}
         />
 
         {/* 「All units」同显面板:一行一单位;行内按钮点击即设为 To 单位。

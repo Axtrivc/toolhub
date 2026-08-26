@@ -596,6 +596,8 @@ export const COMMON_UC_UI: Record<Exclude<Locale, 'en'>, Record<string, string>>
     summaryFormula: '公式:',
     conversionNone: '换算: —',
     conversionTitle: '{from} 转换为 {to}',
+    quickValues: '快捷数值',
+    scaleTitle: '量级对比',
     generatedBy: '由 ToolHub 生成',
   },
   es: {
@@ -611,6 +613,8 @@ export const COMMON_UC_UI: Record<Exclude<Locale, 'en'>, Record<string, string>>
     summaryFormula: 'Fórmula:',
     conversionNone: 'Conversión: —',
     conversionTitle: 'Conversión de {from} a {to}',
+    quickValues: 'Valores rápidos',
+    scaleTitle: 'Escala de magnitud',
     generatedBy: 'Generado por ToolHub',
   },
   de: {
@@ -626,6 +630,8 @@ export const COMMON_UC_UI: Record<Exclude<Locale, 'en'>, Record<string, string>>
     summaryFormula: 'Formel:',
     conversionNone: 'Umrechnung: —',
     conversionTitle: '{from} nach {to} Umrechnung',
+    quickValues: 'Schnellwerte',
+    scaleTitle: 'Größenordnung',
     generatedBy: 'Erstellt von ToolHub',
   },
 }
