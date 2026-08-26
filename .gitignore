@@ -66,3 +66,9 @@ nul
 
 # 根目录的诊断/预览截图(只匹配项目根的 png,不影响 public/ 子目录里的资源)
 /*.png
+
+# 会话临时产物(驱动上传缓存、Python 缓存、报告快照)
+/.tmp.driveupload/
+/__pycache__/
+/project-review-report.html
+/submit-urls.txt

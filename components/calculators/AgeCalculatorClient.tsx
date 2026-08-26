@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react'
 import { ResultCard, CalculatorNote } from '@/components/calculator/CalculatorField'
+import { LifeInWeeksChart } from '@/components/charts/LifeInWeeksChart'
 import { useApp } from '@/components/providers/AppProviders'
 import { tui } from '@/lib/i18n/tool-l10n'
 import { calendarDaysBetween } from '@/lib/date-utils'
@@ -168,6 +169,19 @@ export function AgeCalculatorClient() {
             <ResultCard label={L('totalDays', 'Total days')} value={fmt(result.totalDays)} />
             <ResultCard label={L('totalHours', 'Total hours')} value={fmt(result.totalHours)} />
           </div>
+
+          {/* 人生周格:90 年 × 52 周点阵(数据由生日派生,挂载后才渲染) */}
+          {targetDate && (
+            <LifeInWeeksChart
+              birth={birthDate}
+              today={targetDate}
+              title={L('lifeWeeksTitle', 'Your Life in Weeks')}
+              legendLived={L('legendLived', 'Weeks already lived')}
+              legendRemaining={L('legendRemaining', 'Weeks remaining (to age 90)')}
+              legendCurrent={L('legendCurrent', 'Current week')}
+              summaryTemplate={L('lifeSummary', '{x} weeks lived · {y} to go · {p}% of the grid')}
+            />
+          )}
 
           {/* 下一个生日 */}
           <div className="rounded-lg border border-brand-200 bg-brand-50 p-5 text-center dark:border-brand-800/60 dark:bg-brand-950/30">

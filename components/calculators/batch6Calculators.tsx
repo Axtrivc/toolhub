@@ -2,6 +2,7 @@
 
 import { useState, useMemo, useCallback } from 'react'
 import { CalculatorField, CalculatorSliderField, ResultCard, CalculatorNote } from '@/components/calculator/CalculatorField'
+import { GaugeChart } from '@/components/charts/GaugeChart'
 import { LoadSampleButton } from '@/components/LoadSampleButton'
 import { ResultActions } from '@/components/ResultActions'
 import { makeCalculatorClient } from '../calculator/makeCalculatorClient'
@@ -568,6 +569,36 @@ export function BodyFatCalculatorClient() {
             />
             <ResultCard label={L('outCategory', 'Category')} value={'error' in result ? '—' : result.cat} />
           </div>
+          {/* 仪表盘:体脂率落点(区带随性别切换,与上方 Category 同阈值) */}
+          {result && !('error' in result) && (
+            <GaugeChart
+              title={L('gaugeTitle', 'Where You Fall')}
+              value={result.bf}
+              min={0}
+              max={gender === 'male' ? 45 : 50}
+              zones={(gender === 'male'
+                ? [
+                    { upTo: 6, label: L('catEssential', 'Essential fat') },
+                    { upTo: 14, label: L('catAthlete', 'Athlete') },
+                    { upTo: 18, label: L('catFitness', 'Fitness') },
+                    { upTo: 25, label: L('catAverage', 'Average') },
+                    { upTo: 45, label: L('catHigh', 'High') },
+                  ]
+                : [
+                    { upTo: 14, label: L('catEssential', 'Essential fat') },
+                    { upTo: 21, label: L('catAthlete', 'Athlete') },
+                    { upTo: 25, label: L('catFitness', 'Fitness') },
+                    { upTo: 32, label: L('catAverage', 'Average') },
+                    { upTo: 50, label: L('catHigh', 'High') },
+                  ]
+              ).map((z, i) => ({
+                ...z,
+                color: ['#3b82f6', '#22c55e', '#a3e635', '#eab308', '#ef4444'][i],
+              }))}
+              formatValue={(n) => `${fmtNum(n, 1)}%`}
+              caption={result.cat}
+            />
+          )}
           <ResultActions
             summary={summary}
             filename="body-fat-calculator-result.csv"

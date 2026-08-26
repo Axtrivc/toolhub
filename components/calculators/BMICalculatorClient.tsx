@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { CalculatorField, ResultCard, CalculatorNote } from '@/components/calculator/CalculatorField'
+import { GaugeChart } from '@/components/charts/GaugeChart'
 import { useApp } from '@/components/providers/AppProviders'
 import { tui } from '@/lib/i18n/tool-l10n'
 
@@ -226,6 +227,26 @@ export function BMICalculatorClient() {
         <div className="rounded-lg border-2 border-dashed p-6 text-center text-sm" style={{ borderColor: 'rgb(var(--border-strong))', color: 'rgb(var(--text-faint))' }}>
           {L('emptyState', 'Enter your height and weight to calculate your BMI')}
         </div>
+      )}
+
+      {/* 仪表盘:当前 BMI 在色区上的落点(指针 spring 滑动) */}
+      {valid && (
+        <GaugeChart
+          title={L('gaugeTitle', 'Where You Fall')}
+          value={bmi}
+          min={12}
+          max={45}
+          zones={[
+            { upTo: 18.5, color: '#3b82f6', label: L('catLabel_underweight', 'Underweight') },
+            { upTo: 25, color: '#22c55e', label: L('catLabel_healthyWeight', 'Healthy weight') },
+            { upTo: 30, color: '#eab308', label: L('catLabel_overweight', 'Overweight') },
+            { upTo: 35, color: '#f97316', label: L('catLabel_obeseI', 'Obese (Class I)') },
+            { upTo: 40, color: '#ef4444', label: L('catLabel_obeseII', 'Obese (Class II)') },
+            { upTo: 45, color: '#dc2626', label: L('catLabel_obeseIII', 'Obese (Class III)') },
+          ]}
+          formatValue={(n) => n.toFixed(1)}
+          caption={category ? L('catLabel_' + category.key, category.label) : undefined}
+        />
       )}
 
       {/* BMI 范围参考表 */}
