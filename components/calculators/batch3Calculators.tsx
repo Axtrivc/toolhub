@@ -881,7 +881,7 @@ export const MarkupCalculatorClient = makeCalculatorClient({
   slug: 'markup-calculator',
   inputs: [
     { key: 'cost', label: 'Cost', suffix: '$', default: '50' },
-    { key: 'markup', label: 'Markup', suffix: '%', default: '40' },
+    { key: 'markup', label: 'Markup', suffix: '%', default: '40', slider: { min: 0, max: 300, step: 5 } },
   ],
   outputs: [
     { key: 'profit', label: 'Profit per unit' },
@@ -1144,7 +1144,7 @@ export const ROIcalculatorClient = makeCalculatorClient({
   inputs: [
     { key: 'initial', label: 'Initial investment', suffix: '$', default: '10000' },
     { key: 'final', label: 'Final value', suffix: '$', default: '13500' },
-    { key: 'years', label: 'Years held', default: '3' },
+    { key: 'years', label: 'Years held', default: '3', slider: { min: 1, max: 30, step: 1 } },
   ],
   outputs: [
     { key: 'roi', label: 'Total ROI', highlight: true },
