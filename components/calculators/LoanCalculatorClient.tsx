@@ -3,6 +3,7 @@
 import { useState, useMemo, useCallback } from 'react'
 import { CalculatorField, CalculatorSliderField, ResultCard, CalculatorNote } from '@/components/calculator/CalculatorField'
 import { LineAreaChart } from '@/components/charts/LineAreaChart'
+import { PresetChips } from '@/components/calculator/PresetChips'
 import { yearlyBalanceSeries } from '@/components/charts/chartKit'
 import { LoadSampleButton } from '@/components/LoadSampleButton'
 import { ResultActions } from '@/components/ResultActions'
@@ -63,6 +64,13 @@ export function LoanCalculatorClient() {
       ? n.toLocaleString(localeTag, { style: 'currency', currency: 'USD', maximumFractionDigits: 2 })
       : '—'
 
+  // 典型场景:车贷 5 年 / 房贷 30 年 / 大额改善贷 10 年 / 短期小额 3 年
+  const LOAN_PRESETS = [
+    { label: 'Car loan $25k', values: { amount: '25000', rate: '7.5', years: '5' } },
+    { label: 'Mortgage $320k', values: { amount: '320000', rate: '6.8', years: '30' } },
+    { label: 'Home improve $50k', values: { amount: '50000', rate: '8.5', years: '10' } },
+    { label: 'Small $10k', values: { amount: '10000', rate: '9.9', years: '3' } },
+  ]
   const [amount, setAmount] = useState('20000')
   const [rate, setRate] = useState('7.5')
   const [years, setYears] = useState('5')
@@ -152,6 +160,17 @@ export function LoanCalculatorClient() {
 
   return (
     <div className="space-y-6">
+      {/* 场景预设 chips:一键填充典型贷款场景 */}
+      <PresetChips
+        presets={LOAN_PRESETS}
+        labelOf={(fb, i) => L(`preset.${i}`, fb)}
+        onApply={(values) => {
+          if (values.amount !== undefined) setAmount(values.amount)
+          if (values.rate !== undefined) setRate(values.rate)
+          if (values.years !== undefined) setYears(values.years)
+        }}
+      />
+
       {/* 输入区 + 右上角 Load Sample 按钮 */}
       <div className="flex flex-wrap items-center justify-between gap-3">
         <span className="text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>{L('inputs', 'Inputs')}</span>

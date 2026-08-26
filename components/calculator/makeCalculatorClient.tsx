@@ -9,6 +9,7 @@ import { StackedCompareChart } from '../charts/StackedCompareChart'
 import { ResultActions } from '../ResultActions'
 import { LoadSampleButton } from '../LoadSampleButton'
 import { ShareResultButton } from '../calculator/ShareResultButton'
+import { PresetChips } from '../calculator/PresetChips'
 import type { CalculatorConfig } from '@/lib/calculator-types'
 import { getCalculatorSample } from '@/lib/tool-samples'
 import { getTool } from '@/lib/tools'
@@ -282,23 +283,15 @@ export function makeCalculatorClient(config: CalculatorConfig): ComponentType {
         </div>
         {/* 场景预设 chips(可选):一键填充多字段,再配合滑杆微调 */}
         {config.presets && config.presets.length > 0 && (
-          <div className="flex flex-wrap items-center gap-2">
-            {config.presets.map((p, i) => (
-              <button
-                key={i}
-                type="button"
-                onClick={() => {
-                  setValues((prev) => ({ ...prev, ...p.values }))
-                  setDirty(true)
-                  setSampleArmed(false)
-                }}
-                className="rounded-full border px-3 py-1 text-xs font-medium transition-colors hover:bg-slate-100 dark:border-slate-600 dark:hover:bg-slate-800"
-                style={{ borderColor: 'rgb(var(--border-strong))', color: 'rgb(var(--text-muted))' }}
-              >
-                {L(`preset.${i}`, p.label)}
-              </button>
-            ))}
-          </div>
+          <PresetChips
+            presets={config.presets}
+            labelOf={(fb, i) => L(`preset.${i}`, fb)}
+            onApply={(values) => {
+              setValues((prev) => ({ ...prev, ...values }))
+              setDirty(true)
+              setSampleArmed(false)
+            }}
+          />
         )}
 
         <div className="grid grid-cols-1 gap-4 rounded-lg p-4 sm:grid-cols-2" style={{ backgroundColor: 'rgb(var(--bg-subtle))' }}>

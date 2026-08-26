@@ -19,7 +19,7 @@ export const retirementCalculatorL10n: ToolL10n = {
       'out.total': '退休储蓄总额', 'out.monthlyIncome': '月收入(4% 法则)', 'out.contributed': '你的累计投入', 'out.growth': '投资增长',
       chartTitle: '通往退休之路', 'line.contributed': '你投入的', 'line.balance': '退休储蓄', 'band.contributed-balance': '投资增长',
       'preset.0': '保守 4%', 'preset.1': '均衡 6%', 'preset.2': '进取 8%',
-      note: '👵 把当前储蓄的复利增长与定期供款结合。尽早开始——时间比金额更重要。',
+      note: '👵 复利增长 + 定期供款。尽早开始——时间比金额更重要。4% 法则:每年提取储蓄总额的 4%,按历史数据约可支撑 30 年退休生活。',
     },
   },
   es: {
@@ -36,7 +36,7 @@ export const retirementCalculatorL10n: ToolL10n = {
       'out.total': 'Ahorro para la jubilación', 'out.monthlyIncome': 'Ingreso mensual (regla del 4%)', 'out.contributed': 'Tus aportaciones', 'out.growth': 'Crecimiento de la inversión',
       chartTitle: 'Camino a la jubilación', 'line.contributed': 'Tu aportación', 'line.balance': 'Fondo de jubilación', 'band.contributed-balance': 'Crecimiento',
       'preset.0': 'Conservador 4%', 'preset.1': 'Equilibrado 6%', 'preset.2': 'Agresivo 8%',
-      note: '👩‍🦳 Combina el crecimiento compuesto de los ahorros actuales con aportaciones regulares. Empieza pronto — el tiempo importa más que la cantidad.',
+      note: '👩‍🦳 Crecimiento compuesto más aportaciones regulares. Empieza pronto: el tiempo importa más que la cantidad. Regla del 4%: retirar el 4% anual suele sostener ~30 años de jubilación.',
     },
   },
   de: {
@@ -53,7 +53,7 @@ export const retirementCalculatorL10n: ToolL10n = {
       'out.total': 'Rentenersparnisse', 'out.monthlyIncome': 'Monatseinkommen (4%-Regel)', 'out.contributed': 'Deine Einzahlungen', 'out.growth': 'Investment-Wachstum',
       chartTitle: 'Weg in die Rente', 'line.contributed': 'Eigene Einzahlung', 'line.balance': 'Renten Topf', 'band.contributed-balance': 'Wachstum',
       'preset.0': 'Konservativ 4%', 'preset.1': 'Ausgewogen 6%', 'preset.2': 'Aggressiv 8%',
-      note: '👵 Kombiniert Zinseszins auf aktuelle Ersparnisse mit regelmäßigen Beiträgen. Fang früh an — Zeit zählt mehr als Betrag.',
+      note: '👵 Zinseszins plus regelmäßige Einzahlungen. Früh anfangen — Zeit zählt mehr als die Summe. 4%-Regel: 4% jährliche Entnahme tragen historisch ~30 Rentenjahre.',
     },
   },
 }

@@ -3,6 +3,7 @@
 import { useState, useMemo, useEffect } from 'react'
 import { CalculatorField, CalculatorSliderField, ResultCard, CalculatorNote } from '@/components/calculator/CalculatorField'
 import { LineAreaChart } from '@/components/charts/LineAreaChart'
+import { PresetChips } from '@/components/calculator/PresetChips'
 import { yearlyBalanceSeries } from '@/components/charts/chartKit'
 import { ResultActions } from '@/components/ResultActions'
 import { useApp } from '@/components/providers/AppProviders'
@@ -52,6 +53,13 @@ export function AutoLoanCalculatorClient() {
       ? n.toLocaleString(localeTag, { style: 'currency', currency: 'USD', maximumFractionDigits: 2 })
       : '—'
 
+  // 典型场景:新车 60 期 / 新车 36 期快还 / 二手车 / 大额皮卡
+  const AUTO_PRESETS = [
+    { label: 'New car · 60 mo', values: { price: '35000', down: '5000', apr: '7.5', term: '60' } },
+    { label: 'New car · 36 mo', values: { price: '35000', down: '7000', apr: '6.9', term: '36' } },
+    { label: 'Used car · 48 mo', values: { price: '18000', down: '2000', apr: '10.5', term: '48' } },
+    { label: 'Truck · 72 mo', values: { price: '55000', down: '8000', apr: '8.2', term: '72' } },
+  ]
   const [price, setPrice] = useState('35000')
   const [down, setDown] = useState('5000')
   const [tradeIn, setTradeIn] = useState('0')
@@ -147,6 +155,18 @@ export function AutoLoanCalculatorClient() {
 
   return (
     <div className="space-y-6">
+      {/* 场景预设 chips:一键填充典型购车场景 */}
+      <PresetChips
+        presets={AUTO_PRESETS}
+        labelOf={(fb, i) => L(`preset.${i}`, fb)}
+        onApply={(values) => {
+          if (values.price !== undefined) setPrice(values.price)
+          if (values.down !== undefined) setDown(values.down)
+          if (values.apr !== undefined) setApr(values.apr)
+          if (values.term !== undefined) setTerm(values.term)
+        }}
+      />
+
       {/* 输入区 */}
       <div className="grid grid-cols-1 gap-4 rounded-lg p-4 sm:grid-cols-2 lg:grid-cols-3" style={{ backgroundColor: 'rgb(var(--bg-subtle))' }}>
         <CalculatorSliderField id="vehicle-price" label={L('vehiclePrice', 'Vehicle price')} value={price} onChange={setPrice} suffix="$" placeholder="35000" min={1000} max={100000} step={500} />
