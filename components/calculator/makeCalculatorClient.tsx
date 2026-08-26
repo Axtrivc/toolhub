@@ -3,6 +3,8 @@
 import { useState, useMemo, useCallback, useEffect, useRef, type ComponentType } from 'react'
 import { CalculatorField, ResultCard, CalculatorNote } from './CalculatorField'
 import { BreakdownChart } from './BreakdownChart'
+import { GaugeChart } from '../charts/GaugeChart'
+import { LineAreaChart } from '../charts/LineAreaChart'
 import { ResultActions } from '../ResultActions'
 import { LoadSampleButton } from '../LoadSampleButton'
 import type { CalculatorConfig } from '@/lib/calculator-types'
@@ -315,9 +317,63 @@ export function makeCalculatorClient(config: CalculatorConfig): ComponentType {
           copyLabel={L('copySummary', 'Copy Summary')}
         />
 
-        {/* 比例分解图(可选) - 只在 config.chart 声明时渲染,把输出字段画成环形图 */}
+        {/* 结果可视化(可选)- 按 chart.kind 分发:环形(默认)/仪表盘/曲线 */}
         {config.chart && (() => {
-          const slices = config.chart.slices
+          const chart = config.chart
+          if (chart.kind === 'gauge') {
+            const value = parseNumeric(mergedResults[chart.valueKey])
+            return (
+              <GaugeChart
+                title={chart.title ? L('chartTitle', chart.title) : undefined}
+                value={value}
+                min={chart.min}
+                max={chart.max}
+                zones={chart.zones.map((z, i) => ({
+                  upTo: z.upTo,
+                  color: z.color,
+                  label: L(`zone.${i}`, z.label),
+                }))}
+                caption={chart.caption ? L('chartCaption', chart.caption) : undefined}
+              />
+            )
+          }
+          if (chart.kind === 'series') {
+            if (!config.series) return null
+            try {
+              const data = config.series(values, locale)
+              return (
+                <LineAreaChart
+                  title={chart.title ? L('chartTitle', chart.title) : undefined}
+                  xLabels={data.xLabels}
+                  lines={data.lines.map((ln) => ({
+                    key: ln.key,
+                    label: L(`line.${ln.key}`, ln.label),
+                    color: ln.color,
+                    points: ln.points,
+                    area: ln.area,
+                    dashed: ln.dashed,
+                  }))}
+                  highlightBetween={
+                    data.highlightBetween
+                      ? {
+                          a: data.highlightBetween.a,
+                          b: data.highlightBetween.b,
+                          label: data.highlightBetween.label
+                            ? L(`band.${data.highlightBetween.a}-${data.highlightBetween.b}`, data.highlightBetween.label)
+                            : undefined,
+                        }
+                      : undefined
+                  }
+                  formatY={data.formatY}
+                />
+              )
+            } catch {
+              return null
+            }
+          }
+          // 默认:donut(既有配置不写 kind 也走这里,行为不变)
+          const donut = chart as { title?: string; centerLabel?: string; slices: { valueKey: string; label: string; color: string }[] }
+          const slices = donut.slices
             .map((s) => ({
               label: L(`slice.${s.valueKey}`, s.label),
               value: parseNumeric(mergedResults[s.valueKey]),
@@ -327,8 +383,8 @@ export function makeCalculatorClient(config: CalculatorConfig): ComponentType {
           if (slices.length === 0) return null
           return (
             <BreakdownChart
-              title={config.chart.title ? L('chartTitle', config.chart.title) : undefined}
-              centerLabel={config.chart.centerLabel ? L('chartCenter', config.chart.centerLabel) : undefined}
+              title={donut.title ? L('chartTitle', donut.title) : undefined}
+              centerLabel={donut.centerLabel ? L('chartCenter', donut.centerLabel) : undefined}
               slices={slices}
             />
           )

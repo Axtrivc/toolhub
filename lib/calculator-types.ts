@@ -83,6 +83,12 @@ export interface CalculatorConfig {
    */
   chart?: ChartConfig
   /**
+   * 曲线数据钩子(可选)。chart 为 { kind: 'series' } 时,工厂用该钩子
+   * 取原始数值序列渲染 LineAreaChart。与 compute 同签名(纯函数,收
+   * string 输入),返回 SeriesData。异常/缺省时图表静默不渲染。
+   */
+  series?: (values: Record<string, string>, locale: Locale) => SeriesData
+  /**
    * URL 状态同步(可选,默认关闭)。
    * 开启后每个输入字段以 ?<key>=<value> 形式同步进 URL(replaceState):
    * 刷新/分享链接都能恢复输入。只建议给输入少、复访率高的工具开启
@@ -93,16 +99,59 @@ export interface CalculatorConfig {
 }
 
 /**
- * 比例分解图配置 - 把计算器输出的若干字段画成环形图。
+ * 比例分解图配置(默认 kind) - 把计算器输出的若干字段画成环形图。
  * valueKey 指向 compute 返回的某个 key;但 compute 返回的是格式化字符串
  * (如 "$83.29"),chart 需要原始数值,因此另提供一个 parseValue 把字符串转回数字。
  * 默认实现会剥离 $ , % 和千分位逗号。
  */
-export interface ChartConfig {
+export interface DonutChartConfig {
+  /** 图表类型标识;缺省即环形比例图(向后兼容既有配置) */
+  kind?: 'donut'
   /** 图表标题(如 "Where Your Payment Goes") */
   title?: string
   /** 中央大字(如总还款额,通常等于某个输出值) */
   centerLabel?: string
   /** 构成分量的输出字段。valueKey 对应 compute 返回的 key */
   slices: { valueKey: string; label: string; color: string }[]
+}
+
+/**
+ * 仪表盘配置 - 半环色区 + 指针,把"落在哪个区间"一眼可见(如 BMI)。
+ * valueKey 指向 compute 返回的 key(经数字解析后驱动指针)。
+ */
+export interface GaugeChartConfig {
+  kind: 'gauge'
+  title?: string
+  valueKey: string
+  min: number
+  max: number
+  /** 区间带(按 upTo 升序;最后一段自动延伸到 max) */
+  zones: { upTo: number; color: string; label: string }[]
+  /** 中央大字格式化缺省值之外的说明(指针下方),如当前区间名 */
+  caption?: string
+}
+
+/**
+ * 曲线图配置 - 由 config.series 钩子提供原始数值序列,
+ * 渲染 LineAreaChart(余额递减/复利增长/对比曲线)。
+ */
+export interface SeriesChartConfig {
+  kind: 'series'
+  title?: string
+}
+
+export type ChartConfig = DonutChartConfig | GaugeChartConfig | SeriesChartConfig
+
+/**
+ * 曲线数据(series 钩子的返回类型)。
+ * xLabels 与每条线 points 等长;line key 在 lines 内唯一。
+ */
+export interface SeriesData {
+  /** 每个采样点的 x 轴标签(如 ['Y0','Y5','Y10']) */
+  xLabels: string[]
+  lines: { key: string; label: string; color: string; points: number[]; area?: boolean; dashed?: boolean }[]
+  /** 两条线(key)之间的区域高亮(如提前还款省息区) */
+  highlightBetween?: { a: string; b: string; label?: string }
+  /** y 轴/tooltip 数值格式化(缺省紧凑缩写 1.2k/3.4M) */
+  formatY?: (n: number) => string
 }
