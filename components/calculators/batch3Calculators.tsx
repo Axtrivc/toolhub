@@ -715,6 +715,20 @@ export function IdealWeightCalculatorClient() {
             <ResultCard label={L('outHamwi', 'Hamwi formula')} value={`${fmtNum(w(result.hamwi), 1)} ${wUnit}`} />
             <ResultCard label={L('outBmi', 'Healthy BMI range (18.5-24.9)')} value={`${fmtNum(w(result.low), 1)} – ${fmtNum(w(result.high), 1)} ${wUnit}`} />
           </div>
+          {/* 仪表盘:Devine 理想体重指针 vs 随身高的 BMI 健康区间(显示单位跟随公英制) */}
+          <GaugeChart
+            title={L('gaugeTitle', 'Devine vs Healthy BMI Range')}
+            value={w(result.devine)}
+            min={0}
+            max={w(result.high * 1.35)}
+            zones={[
+              { upTo: w(result.low), color: '#3b82f6', label: L('zoneUnder', 'Below healthy BMI') },
+              { upTo: w(result.high), color: '#22c55e', label: L('zoneHealthy', 'Healthy BMI range') },
+              { upTo: w(result.high * 1.2), color: '#eab308', label: L('zoneOver', 'Overweight BMI') },
+              { upTo: w(result.high * 1.35), color: '#ef4444', label: L('zoneObese', 'Obese BMI') },
+            ]}
+            formatValue={(n) => `${fmtNum(n, 1)} ${wUnit}`}
+          />
           <ResultActions
             summary={summary}
             filename="ideal-weight-calculator-result.csv"
