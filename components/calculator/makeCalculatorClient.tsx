@@ -32,8 +32,11 @@ const COMMON_CALC_KEYS = new Set([
  */
 function parseNumeric(formatted: string | undefined): number {
   if (!formatted) return 0
-  const cleaned = formatted.replace(/[$,%\s]/g, '')
-  const n = parseFloat(cleaned)
+  // 提取首个数字 token(容忍 "⚠️ 135.0% — impossible" 这类带前后缀的串,
+  // 比 parseFloat(整体清洗)更稳:前缀非数字字符不再导致 NaN→0)
+  const m = formatted.match(/-?\d[\d,]*(?:\.\d+)?/)
+  if (!m) return 0
+  const n = parseFloat(m[0].replace(/,/g, ''))
   return Number.isFinite(n) ? n : 0
 }
 

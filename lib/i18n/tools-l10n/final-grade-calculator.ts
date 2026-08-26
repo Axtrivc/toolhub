@@ -19,6 +19,10 @@ export const finalGradeCalculatorL10n: ToolL10n = {
       'in.finalWeight': '期末考权重',
       'out.needed': '期末考所需分数',
       note: '🎓 求解达到目标成绩所需的期末考分数。若超过 100%,则目标无法实现。',
+      chartTitle: '目标有多稳?',
+      'zone.0': '轻松',
+      'zone.1': '紧但可行',
+      'zone.2': '需要超过 100%',
     },
     useCases: [
       '期末考试成绩计算器',
@@ -44,6 +48,10 @@ export const finalGradeCalculatorL10n: ToolL10n = {
       'in.finalWeight': 'Peso del examen final',
       'out.needed': 'Nota necesaria en el final',
       note: '🎓 Calcula la nota necesaria en el examen final para alcanzar tu nota objetivo. Si supera el 100 %, el objetivo es inalcanzable.',
+      chartTitle: '¿Cómo de alcanzable?',
+      'zone.0': 'Con margen',
+      'zone.1': 'Justo pero posible',
+      'zone.2': 'Necesita más del 100%',
     },
     useCases: [
       'calculadora de nota del examen final',
@@ -69,6 +77,10 @@ export const finalGradeCalculatorL10n: ToolL10n = {
       'in.finalWeight': 'Gewicht der Abschlussprüfung',
       'out.needed': 'Benötigte Punktzahl im Abschluss',
       note: '🎓 Berechnet die im Abschluss benötigte Punktzahl, um die Zielnote zu erreichen. Über 100 % ist das Ziel unerreichbar.',
+      chartTitle: 'Wie erreichbar?',
+      'zone.0': 'Bequem',
+      'zone.1': 'Knapp, aber machbar',
+      'zone.2': 'Braucht über 100%',
     },
     useCases: [
       'Rechner für die Abschlussprüfungsnote',

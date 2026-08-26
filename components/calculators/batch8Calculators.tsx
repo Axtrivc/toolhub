@@ -572,6 +572,19 @@ export const FinalGradeCalculatorClient = makeCalculatorClient({
     }
   },
   note: '🎓 Solves for the final exam score needed to reach your target grade. If over 100%, the goal is unreachable.',
+  chart: {
+    kind: 'gauge',
+    title: 'How Reachable Is Your Goal?',
+    valueKey: 'needed',
+    min: 0,
+    max: 150,
+    formatValue: (n) => `${n.toFixed(1)}%`,
+    zones: [
+      { upTo: 70, color: '#22c55e', label: 'Comfortable' },
+      { upTo: 100, color: '#eab308', label: 'Tight but doable' },
+      { upTo: 150, color: '#ef4444', label: 'Needs over 100%' },
+    ],
+  },
 })
 
 export const BillSplitCalculatorClient = makeCalculatorClient({
