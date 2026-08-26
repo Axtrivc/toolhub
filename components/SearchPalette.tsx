@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useId, useMemo, useRef, useState } from 'react'
+import { tryInlineAnswer } from '@/lib/inline-answer'
 import { createPortal } from 'react-dom'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
@@ -75,6 +76,10 @@ export function SearchPalette({ tools, locale, open, onClose }: SearchPalettePro
     return matched.slice(0, MAX_RESULTS)
   }, [tools, query])
 
+  // ── 内联答案:算式 / 百分比 / 单位换算(输入即答,置于工具列表之上) ──
+  const inline = useMemo(() => tryInlineAnswer(query), [query])
+  const total = results.length + (inline ? 1 : 0)
+
   // 仅在客户端标记已挂载(createPortal 需要 DOM)
   useEffect(() => setMounted(true), [])
 
@@ -130,10 +135,10 @@ export function SearchPalette({ tools, locale, open, onClose }: SearchPalettePro
     return () => window.removeEventListener('keydown', onKey)
   }, [open, onClose])
 
-  // 结果变化时把高亮项钳制到合法范围
+  // 结果变化时把高亮项钳制到合法范围(含内联答案行)
   useEffect(() => {
-    if (activeIndex >= results.length) setActiveIndex(0)
-  }, [results.length, activeIndex])
+    if (activeIndex >= total) setActiveIndex(0)
+  }, [total, activeIndex])
 
   // 高亮项变化时自动滚动进可视区
   useEffect(() => {
@@ -148,17 +153,25 @@ export function SearchPalette({ tools, locale, open, onClose }: SearchPalettePro
   const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'ArrowDown') {
       e.preventDefault()
-      if (results.length === 0) return
-      setActiveIndex((i) => Math.min(i + 1, results.length - 1))
+      if (total === 0) return
+      setActiveIndex((i) => Math.min(i + 1, total - 1))
     } else if (e.key === 'ArrowUp') {
       e.preventDefault()
       setActiveIndex((i) => Math.max(i - 1, 0))
     } else if (e.key === 'Enter') {
-      if (results[activeIndex]) {
+      // 内联答案行占据第 0 位:回车跳对应完整工具
+      if (inline && activeIndex === 0) {
+        e.preventDefault()
+        onClose()
+        router.push(`/tools/${inline.toolSlug}/`)
+        return
+      }
+      const toolIdx = inline ? activeIndex - 1 : activeIndex
+      if (results[toolIdx]) {
         e.preventDefault()
         // 用编程式导航;Link 的 onClick 在 Enter 路径上不会触发
         onClose()
-        router.push(`/tools/${results[activeIndex].slug}/`)
+        router.push(`/tools/${results[toolIdx].slug}/`)
       }
     }
   }
@@ -277,7 +290,7 @@ export function SearchPalette({ tools, locale, open, onClose }: SearchPalettePro
           </div>
 
           {/* 结果列表(隐藏原生滚动条,见 .scrollbar-none) */}
-          {results.length === 0 ? (
+          {results.length === 0 && !inline ? (
             <div
               className="px-4 py-12 text-center text-sm"
               style={{ color: 'rgb(var(--text-muted))' }}
@@ -286,21 +299,68 @@ export function SearchPalette({ tools, locale, open, onClose }: SearchPalettePro
             </div>
           ) : (
             <ul ref={listRef} id={listId} role="listbox" className="scrollbar-none flex-1 overflow-y-auto p-2">
+              {inline && (
+                <li data-idx={0} id={`${listId}-opt-0`} role="option" aria-selected={activeIndex === 0}>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      onClose()
+                      router.push(`/tools/${inline.toolSlug}/`)
+                    }}
+                    onMouseEnter={() => setActiveIndex(0)}
+                    className={
+                      'flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-sm transition-colors duration-150 ' +
+                      (activeIndex === 0
+                        ? 'bg-blue-50/80 dark:bg-gray-800/80'
+                        : 'hover:bg-blue-50/60 dark:hover:bg-gray-800/60')
+                    }
+                  >
+                    <span
+                      className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md text-base"
+                      style={{ backgroundColor: 'rgb(var(--bg-subtle))' }}
+                      aria-hidden="true"
+                    >
+                      =
+                    </span>
+                    <span className="min-w-0 flex-1">
+                      <span className="block truncate font-medium">
+                        {inline.expression} <span className="opacity-60">=</span>{' '}
+                        <span className="font-bold text-primary">{inline.result}</span>
+                      </span>
+                      <span className="block truncate text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>
+                        {t(locale, 'searchQuickAnswer')}
+                      </span>
+                    </span>
+                    <svg
+                      className="h-4 w-4 shrink-0 transition-opacity duration-150"
+                      style={{ color: 'rgb(var(--text-subtle))', opacity: activeIndex === 0 ? 1 : 0 }}
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      strokeWidth={2}
+                      aria-hidden="true"
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                    </svg>
+                  </button>
+                </li>
+              )}
               {results.map((tool, idx) => {
-                const isActive = idx === activeIndex
+                const viewIdx = inline ? idx + 1 : idx
+                const isActive = viewIdx === activeIndex
                 const icon = getToolIcon(tool)
                 return (
                   <li
                     key={tool.slug}
-                    data-idx={idx}
-                    id={`${listId}-opt-${idx}`}
+                    data-idx={viewIdx}
+                    id={`${listId}-opt-${viewIdx}`}
                     role="option"
                     aria-selected={isActive}
                   >
                     <Link
                       href={`/tools/${tool.slug}/`}
                       onClick={onClose}
-                      onMouseEnter={() => setActiveIndex(idx)}
+                      onMouseEnter={() => setActiveIndex(viewIdx)}
                       className={
                         'flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm transition-colors duration-150 ' +
                         (isActive

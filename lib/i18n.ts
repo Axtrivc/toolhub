@@ -281,6 +281,7 @@ export interface Dict {
   bentoTodayWeekN: string // "Week {n}"
   bentoTodayDaysLeft: string // "{n} days left in {y}"
   bentoOpenTool: string
+  searchQuickAnswer: string
   // ── 工具页共享组件本地化(FavoriteButton / VisibleFaqs / EmbedTool /
   //    Disclaimer / FormulaSection / makeTextTool 等共享 chrome) ──
   // FavoriteButton
@@ -507,6 +508,7 @@ const en: Dict = {
   bentoTodayWeekN: 'Week {n} of the year',
   bentoTodayDaysLeft: '{n} days left in {y}',
   bentoOpenTool: 'Open the full tool →',
+  searchQuickAnswer: 'Quick answer — press Enter for the full tool',
   // ── 工具页共享组件 chrome ──
   favSave: 'Save',
   favSaved: 'Saved',
@@ -728,6 +730,7 @@ const zh: Dict = {
   bentoTodayWeekN: '一年中的第 {n} 周',
   bentoTodayDaysLeft: '距 {y} 年结束还有 {n} 天',
   bentoOpenTool: '打开完整工具 →',
+  searchQuickAnswer: '快速答案——回车打开完整工具',
   // ── 工具页共享组件 chrome ──
   favSave: '收藏',
   favSaved: '已收藏',
@@ -949,6 +952,7 @@ const es: Dict = {
   bentoTodayWeekN: 'Semana {n} del año',
   bentoTodayDaysLeft: 'quedan {n} días de {y}',
   bentoOpenTool: 'Abrir la herramienta →',
+  searchQuickAnswer: 'Respuesta rápida — Enter abre la herramienta',
   // ── 工具页共享组件 chrome ──
   favSave: 'Guardar',
   favSaved: 'Guardado',
@@ -1170,6 +1174,7 @@ const de: Dict = {
   bentoTodayWeekN: 'Woche {n} des Jahres',
   bentoTodayDaysLeft: 'noch {n} Tage in {y}',
   bentoOpenTool: 'Vollständiges Tool öffnen →',
+  searchQuickAnswer: 'Schnellantwort — Enter öffnet das Tool',
   // ── 工具页共享组件 chrome ──
   favSave: 'Merken',
   favSaved: 'Gemerkt',
