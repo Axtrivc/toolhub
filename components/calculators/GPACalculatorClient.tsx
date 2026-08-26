@@ -76,7 +76,7 @@ export function GPACalculatorClient() {
       {/* 课程列表 */}
       <div className="space-y-3">
         {/* 表头 */}
-        <div className="hidden grid-cols-12 gap-2 px-2 text-xs font-medium uppercase tracking-wide text-slate-500 sm:grid">
+        <div className="hidden grid-cols-12 gap-2 px-2 text-xs font-medium uppercase tracking-wide sm:grid" style={{ color: 'rgb(var(--text-faint))' }}>
           <div className="col-span-5">{L('thCourseName', 'Course name')}</div>
           <div className="col-span-2">{L('thCredits', 'Credits')}</div>
           <div className="col-span-3">{L('thGrade', 'Grade')}</div>

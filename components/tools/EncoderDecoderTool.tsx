@@ -156,7 +156,7 @@ export function EncoderDecoderTool({ encode, decode, initialMode = 'encode', slu
             <button
               type="button"
               onClick={() => setInput('')}
-              className="-my-1 rounded-md px-2 py-1 text-xs text-slate-400 hover:text-red-500 sm:text-sm"
+              className="-my-1 rounded-md px-2 py-1 text-xs text-slate-500 hover:text-red-500 dark:text-slate-400 sm:text-sm"
             >
               {L('clear', 'Clear')}
             </button>
@@ -204,8 +204,8 @@ export function EncoderDecoderTool({ encode, decode, initialMode = 'encode', slu
 
       {/* 统计 */}
       <div className="flex gap-4 text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>
-        <span>{charCount.toLocaleString()} {L('characters', 'characters')}</span>
-        <span>{wordCount.toLocaleString()} {L('words', 'words')}</span>
+        <span>{charCount.toLocaleString('en-US')} {L('characters', 'characters')}</span>
+        <span>{wordCount.toLocaleString('en-US')} {L('words', 'words')}</span>
       </div>
 
       {/* 说明 */}

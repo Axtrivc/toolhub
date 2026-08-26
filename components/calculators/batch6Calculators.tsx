@@ -81,7 +81,7 @@ function UnitToggle({ unit, onSwitch, L }: {
           type="button"
           onClick={() => onSwitch(u)}
           className={`rounded-lg px-4 py-2 text-sm font-medium transition ${
-            unit === u ? 'bg-brand-600 text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+            unit === u ? 'bg-brand-600 text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200 dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-slate-700'
           }`}
         >
           {u === 'metric' ? L('metric', 'Metric (cm / kg)') : L('imperial', 'Imperial (ft/in / lb)')}
@@ -654,7 +654,7 @@ export function BodyFatCalculatorClient() {
               type="button"
               onClick={() => setMethod(m)}
               className={`rounded-lg px-4 py-2 text-sm font-medium transition ${
-                method === m ? 'bg-brand-600 text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                method === m ? 'bg-brand-600 text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200 dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-slate-700'
               }`}
             >
               {m === 'navy' ? L('methodNavy', 'Navy (tape measure)') : L('methodBmi', 'BMI (Deurenberg)')}

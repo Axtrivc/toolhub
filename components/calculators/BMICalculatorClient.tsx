@@ -37,28 +37,28 @@ function getCategory(bmi: number): { key: string; label: string; color: string; 
     return {
       key: 'underweight',
       label: 'Underweight',
-      color: 'text-blue-600',
+      color: 'text-blue-600 dark:text-blue-400',
       advice: 'Below the healthy range. Consider consulting a nutritionist.',
     }
   if (bmi < 25)
     return {
       key: 'healthyWeight',
       label: 'Healthy weight',
-      color: 'text-green-600',
+      color: 'text-green-600 dark:text-green-400',
       advice: 'In the healthy range. Keep up your current habits.',
     }
   if (bmi < 30)
     return {
       key: 'overweight',
       label: 'Overweight',
-      color: 'text-yellow-600',
+      color: 'text-yellow-600 dark:text-yellow-400',
       advice: 'Slightly above the healthy range. Diet and exercise can help.',
     }
   if (bmi < 35)
     return {
       key: 'obeseI',
       label: 'Obese (Class I)',
-      color: 'text-orange-600',
+      color: 'text-orange-600 dark:text-orange-400',
       advice: 'Above the healthy range. Consider medical guidance.',
     }
   if (bmi < 40)
@@ -148,7 +148,7 @@ export function BMICalculatorClient() {
             type="button"
             onClick={() => switchUnit(u)}
             className={`rounded-lg px-4 py-2 text-sm font-medium capitalize transition ${
-              unit === u ? 'bg-brand-600 text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+              unit === u ? 'bg-brand-600 text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200 dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-slate-700'
             }`}
           >
             {u === 'metric' ? L('metric', 'Metric (cm / kg)') : L('imperial', 'Imperial (ft/in / lb)')}
@@ -205,15 +205,15 @@ export function BMICalculatorClient() {
             sublabel={L('bodyMassIndex', 'Body Mass Index')}
           />
           <div className="rounded-lg border p-5 text-center" style={{ borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rgb(var(--bg-card))' }}>
-            <div className="text-xs font-medium uppercase tracking-wide text-slate-500">{L('category', 'Category')}</div>
+            <div className="text-xs font-medium uppercase tracking-wide" style={{ color: 'rgb(var(--text-subtle))' }}>{L('category', 'Category')}</div>
             <div className={`mt-1.5 text-2xl font-bold sm:text-3xl ${category?.color}`}>
               {category ? L('catLabel_' + category.key, category.label) : null}
             </div>
-            <div className="mt-1 text-xs text-slate-400">{category ? L('catAdvice_' + category.key, category.advice) : null}</div>
+            <div className="mt-1 text-xs" style={{ color: 'rgb(var(--text-faint))' }}>{category ? L('catAdvice_' + category.key, category.advice) : null}</div>
           </div>
           {healthyLow && healthyHigh && (
             <div className="rounded-lg border p-5 text-center sm:col-span-2" style={{ borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rgb(var(--bg-card))' }}>
-              <div className="text-xs font-medium uppercase tracking-wide text-slate-500">
+              <div className="text-xs font-medium uppercase tracking-wide" style={{ color: 'rgb(var(--text-subtle))' }}>
                 {L('healthyWeightRange', 'Healthy weight range for your height')}
               </div>
               <div className="mt-1.5 text-xl font-semibold" style={{ color: 'rgb(var(--text))' }}>

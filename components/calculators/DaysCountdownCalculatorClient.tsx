@@ -313,7 +313,7 @@ export function DaysCountdownCalculatorClient() {
                     <div className="flex flex-col items-center gap-6 sm:flex-row sm:items-center">
                       {/* SVG 圆环 r=40,viewBox 100×100 */}
                       <div className="relative h-40 w-40 shrink-0">
-                        <svg viewBox="0 0 100 100" className="h-full w-full">
+                        <svg viewBox="0 0 100 100" className="h-full w-full" role="img" aria-label={L('chartTitle', 'Countdown progress')}>
                           <g transform="rotate(-90 50 50)">
                             <circle cx="50" cy="50" r="40" fill="none" stroke="rgb(var(--bg-subtle))" strokeWidth="12" />
                             {progress > 0.001 && (

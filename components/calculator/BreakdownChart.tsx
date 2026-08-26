@@ -86,7 +86,12 @@ export function BreakdownChart({ slices, centerLabel, centerValue, title, emptyL
       <div className="flex flex-col items-center gap-6 sm:flex-row sm:items-center">
         {/* SVG 环形图 */}
         <div className="relative h-40 w-40 shrink-0">
-          <svg viewBox="0 0 100 100" className="h-full w-full -rotate-90">
+          <svg
+            viewBox="0 0 100 100"
+            className="h-full w-full -rotate-90"
+            role="img"
+            aria-label={valid.map((s) => `${s.label} ${Math.round((s.value / total) * 100)}%`).join(', ')}
+          >
             {/* 底环(轨道) */}
             <circle
               cx="50"

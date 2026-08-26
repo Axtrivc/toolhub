@@ -280,7 +280,7 @@ export function LoanCalculatorClient() {
                 <tbody className="divide-y divide-slate-100">
                   {displaySchedule.map((row) => (
                     <tr key={row.month}>
-                      <td className="px-3 py-2 font-mono text-slate-500">{row.month}</td>
+                      <td className="px-3 py-2 font-mono" style={{ color: 'rgb(var(--text-faint))' }}>{row.month}</td>
                       <td className="px-3 py-2 text-right font-mono">{fmtMoney(row.payment)}</td>
                       <td className="px-3 py-2 text-right font-mono text-green-600">
                         {fmtMoney(row.principal)}

@@ -49,7 +49,6 @@ export interface LineAreaChartProps {
 const W = 640
 const H = 240
 const PAD = { top: 14, right: 14, bottom: 26, left: 52 }
-const IW = W - PAD.left - PAD.right
 const IH = H - PAD.top - PAD.bottom
 
 export function LineAreaChart({ title, xLabels, lines, highlightBetween, formatY = fmtCompact, emptyLabel = 'Enter your values to see the chart.' }: LineAreaChartProps) {
@@ -70,7 +69,15 @@ export function LineAreaChart({ title, xLabels, lines, highlightBetween, formatY
   const bottom = dataMin < 0 ? -niceScale(-dataMin).top : 0
   const span = top - bottom || 1
 
-  const x = (i: number) => PAD.left + (n === 1 ? IW / 2 : (i / (n - 1)) * IW)
+  const ticks: number[] = []
+  for (let i = 0; i <= 4; i++) ticks.push(bottom + (span * i) / 4)
+  // y 轴标签随 formatY 宽度自适应:fmtUSD 完整货币("$2,000,000"/zh "US$2,000,000.00")
+  // 在 52px 左边距下会被 viewBox 裁剪;按最宽刻度文本放宽,上限防止绘图区过窄
+  const maxTickChars = Math.max(...ticks.map((t) => formatY(t).length))
+  const padLeft = Math.max(PAD.left, Math.min(104, maxTickChars * 5.9 + 14))
+  const iw = W - padLeft - PAD.right
+
+  const x = (i: number) => padLeft + (n === 1 ? iw / 2 : (i / (n - 1)) * iw)
   const y = (v: number) => PAD.top + IH - ((v - bottom) / span) * IH
 
   // 几何 memo:hover 时(hover 状态变化)不重建几百个点的路径字符串,
@@ -98,17 +105,14 @@ export function LineAreaChart({ title, xLabels, lines, highlightBetween, formatY
             .join(' ')} Z`
         : null
 
-    const ticks: number[] = []
-    for (let i = 0; i <= 4; i++) ticks.push(bottom + (span * i) / 4)
-
     const labelEvery = Math.max(1, Math.ceil(n / 7))
     const xTickIdx: number[] = []
     for (let i = 0; i < n; i += labelEvery) xTickIdx.push(i)
     if (xTickIdx[xTickIdx.length - 1] !== n - 1) xTickIdx.push(n - 1)
 
-    return { linePath, areaPath, bandPath, ticks, xTickIdx }
+    return { linePath, areaPath, bandPath, xTickIdx }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [lines, xLabels, highlightBetween, bottom, span])
+  }, [lines, xLabels, highlightBetween, bottom, span, padLeft])
 
   if (invalid) {
     return title ? (
@@ -126,11 +130,11 @@ export function LineAreaChart({ title, xLabels, lines, highlightBetween, formatY
     const rect = svg.getBoundingClientRect()
     const relX = clientX - rect.left
     const frac = (relX / rect.width) * W // viewBox 坐标
-    if (frac < PAD.left - 4 || frac > W - PAD.right + 4) {
+    if (frac < padLeft - 4 || frac > W - PAD.right + 4) {
       setHover(null)
       return
     }
-    const idx = Math.round(((frac - PAD.left) / IW) * (n - 1))
+    const idx = Math.round(((frac - padLeft) / iw) * (n - 1))
     setHover(Math.max(0, Math.min(n - 1, idx)))
   }
 
@@ -159,10 +163,10 @@ export function LineAreaChart({ title, xLabels, lines, highlightBetween, formatY
           </defs>
 
           {/* 网格线 + y 刻度 */}
-          {geom.ticks.map((t, i) => (
+          {ticks.map((t, i) => (
             <g key={i}>
               <line
-                x1={PAD.left}
+                x1={padLeft}
                 x2={W - PAD.right}
                 y1={y(t)}
                 y2={y(t)}
@@ -171,7 +175,7 @@ export function LineAreaChart({ title, xLabels, lines, highlightBetween, formatY
                 strokeDasharray={i === 0 ? undefined : '3 4'}
               />
               <text
-                x={PAD.left - 6}
+                x={padLeft - 6}
                 y={y(t) + 3.5}
                 textAnchor="end"
                 fontSize={10}

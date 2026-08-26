@@ -8,6 +8,7 @@
  * 唯一的动画是当前周单个 rect 的 opacity 脉冲(reduced-motion 静止)。
  */
 
+import { useMemo } from 'react'
 import { motion, useReducedMotion } from '../motion/MotionPrimitives'
 import { ChartCard } from './chartKit'
 
@@ -53,6 +54,57 @@ export function LifeInWeeksChart({
   const W = PAD_L + WEEKS_PER_YEAR * STEP + GAP
   const H = PAD_T + YEARS * STEP + GAP
 
+  // 4680 格点阵 memo:周粒度的派生值(weeksLived/currentWeekIdx)不变时引用稳定,
+  // React 直接跳过整棵点阵的 reconciliation —— 生日逐键输入时大多数按键只改天数
+  // 不跨周边界,重渲染从 ~4700 个 rect 降到 0
+  const dots = useMemo(
+    () =>
+      Array.from({ length: YEARS }, (_, row) => {
+        const ageRowStart = row * WEEKS_PER_YEAR
+        return (
+          <g key={row}>
+            {Array.from({ length: WEEKS_PER_YEAR }, (_, col) => {
+              const idx = ageRowStart + col
+              const x = PAD_L + col * STEP
+              const y = PAD_T + row * STEP
+              if (idx === currentWeekIdx) {
+                // 当前周:脉冲高亮(唯一动效;reduced-motion 静止)
+                return reduceMotion ? (
+                  <rect key={col} x={x} y={y} width={CELL} height={CELL} rx={1.4} fill="#f59e0b" />
+                ) : (
+                  <motion.rect
+                    key={col}
+                    x={x}
+                    y={y}
+                    width={CELL}
+                    height={CELL}
+                    rx={1.4}
+                    fill="#f59e0b"
+                    animate={{ opacity: [1, 0.35, 1] }}
+                    transition={{ duration: 1.6, repeat: Infinity, ease: 'easeInOut' }}
+                  />
+                )
+              }
+              const lived = idx < weeksLived
+              return (
+                <rect
+                  key={col}
+                  x={x}
+                  y={y}
+                  width={CELL}
+                  height={CELL}
+                  rx={1.4}
+                  fill={lived ? 'rgb(var(--primary))' : 'rgb(var(--border))'}
+                  opacity={lived ? 0.85 : 1}
+                />
+              )
+            })}
+          </g>
+        )
+      }),
+    [weeksLived, currentWeekIdx, reduceMotion],
+  )
+
   return (
     <ChartCard title={title}>
       <div className="flex flex-col items-center gap-4 sm:flex-row sm:items-start">
@@ -75,50 +127,8 @@ export function LifeInWeeksChart({
               {age}
             </text>
           ))}
-          {/* 4680 周点阵:一年一行,行内 52 列 */}
-          {Array.from({ length: YEARS }, (_, row) => {
-            const ageRowStart = row * WEEKS_PER_YEAR
-            return (
-              <g key={row}>
-                {Array.from({ length: WEEKS_PER_YEAR }, (_, col) => {
-                  const idx = ageRowStart + col
-                  const x = PAD_L + col * STEP
-                  const y = PAD_T + row * STEP
-                  if (idx === currentWeekIdx) {
-                    // 当前周:脉冲高亮(唯一动效;reduced-motion 静止)
-                    return reduceMotion ? (
-                      <rect key={col} x={x} y={y} width={CELL} height={CELL} rx={1.4} fill="#f59e0b" />
-                    ) : (
-                      <motion.rect
-                        key={col}
-                        x={x}
-                        y={y}
-                        width={CELL}
-                        height={CELL}
-                        rx={1.4}
-                        fill="#f59e0b"
-                        animate={{ opacity: [1, 0.35, 1] }}
-                        transition={{ duration: 1.6, repeat: Infinity, ease: 'easeInOut' }}
-                      />
-                    )
-                  }
-                  const lived = idx < weeksLived
-                  return (
-                    <rect
-                      key={col}
-                      x={x}
-                      y={y}
-                      width={CELL}
-                      height={CELL}
-                      rx={1.4}
-                      fill={lived ? 'rgb(var(--primary))' : 'rgb(var(--border))'}
-                      opacity={lived ? 0.85 : 1}
-                    />
-                  )
-                })}
-              </g>
-            )
-          })}
+          {/* 4680 周点阵:一年一行,行内 52 列(memo 见上) */}
+          {dots}
         </svg>
 
         {/* 图例 + 汇总 */}

@@ -188,7 +188,11 @@ function MortgageDemoCell() {
   const [typed, setTyped] = useState('')
 
   useEffect(() => {
-    if (reduceMotion) return
+    // reduced-motion:跳过打字动画,挂载后直接呈现终帧(6.8% → 完整月供)
+    if (reduceMotion) {
+      setTyped(DEMO_RATE)
+      return
+    }
     let step = 0
     let timer: ReturnType<typeof setTimeout>
     const tick = () => {
@@ -282,7 +286,7 @@ function VisitorsCell() {
     return () => window.removeEventListener('toolhub-stats', handler)
   }, [])
 
-  // 无数据(本地 dev/未绑 D1):整格静默消失,网格自动重排
+  // 无数据(本地 dev/未绑 D1):整格静默消失;TodayCell 用响应式 col-span 兜底占满行
   if (!stats) return null
 
   return (
@@ -336,7 +340,7 @@ function TodayCell() {
     : null
 
   return (
-    <BentoCell title={t(locale, 'bentoTodayTitle')} href="/tools/age-calculator">
+    <BentoCell title={t(locale, 'bentoTodayTitle')} href="/tools/age-calculator" className="col-span-2 md:col-span-1">
       <div className="text-2xl font-bold" style={{ color: 'rgb(var(--text))' }}>
         {now ? now.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) : '—'}
       </div>
