@@ -30,13 +30,13 @@ export const FuelCostCalculatorClient = makeCalculatorClient({
     { key: 'liters', label: 'Fuel needed' },
     { key: 'per100', label: 'Cost per 100 km' },
   ],
-  compute: (v) => {
+  compute: (v, locale) => {
     const distance = toNum(v.distance)
     const consumption = toNum(v.consumption)
     const price = toNum(v.price)
     const people = Math.max(1, Math.round(toNum(v.people)))
     if (distance < 0 || consumption < 0 || price < 0) {
-      return { totalCost: `⚠️ ${tui('fuel-cost-calculator', 'en', 'errNonNegative', 'Values cannot be negative')}`, perPerson: '—', liters: '—', per100: '—' }
+      return { totalCost: `⚠️ ${tui('fuel-cost-calculator', locale, 'errNonNegative', 'Values cannot be negative')}`, perPerson: '—', liters: '—', per100: '—' }
     }
     const dist = v.roundTrip === 'round' ? distance * 2 : distance
     const liters = (dist * consumption) / 100
@@ -84,12 +84,12 @@ export const SubscriptionCostCalculatorClient = makeCalculatorClient({
     { key: 'fiveYear', label: 'Over 5 years' },
     { key: 'workHours', label: 'Work-hours per year', sublabel: 'At $25/h after tax' },
   ],
-  compute: (v) => {
+  compute: (v, locale) => {
     const monthly = toNum(v.monthlySubs)
     const yearly = toNum(v.yearlySubs)
     const quarterly = toNum(v.quarterlySubs)
     if (monthly < 0 || yearly < 0 || quarterly < 0) {
-      return { monthly: `⚠️ ${tui('subscription-cost-calculator', 'en', 'errNonNegative', 'Values cannot be negative')}`, yearly: '—', fiveYear: '—', workHours: '—' }
+      return { monthly: `⚠️ ${tui('subscription-cost-calculator', locale, 'errNonNegative', 'Values cannot be negative')}`, yearly: '—', fiveYear: '—', workHours: '—' }
     }
     const perMonth = monthly + yearly / 12 + quarterly / 3
     const perYear = perMonth * 12
@@ -133,13 +133,13 @@ export const OvertimeCalculatorClient = makeCalculatorClient({
     { key: 'totalWeekly', label: 'Total weekly pay', highlight: true },
     { key: 'otRate', label: 'Effective OT rate' },
   ],
-  compute: (v) => {
+  compute: (v, locale) => {
     const rate = toNumStrict(v.base)
     const regH = toNum(v.regularHours)
     const otH = toNum(v.otHours)
     const mult = v.otMultiplier === 'custom' ? NaN : toNum(v.otMultiplier)
     if (isNaN(rate) || rate < 0) {
-      return { regularPay: `⚠️ ${tui('overtime-calculator', 'en', 'errInvalidRate', 'Enter a valid hourly rate')}`, otPay: '—', totalWeekly: '—', otRate: '—' }
+      return { regularPay: `⚠️ ${tui('overtime-calculator', locale, 'errInvalidRate', 'Enter a valid hourly rate')}`, otPay: '—', totalWeekly: '—', otRate: '—' }
     }
     const effMult = isNaN(mult) ? 1.5 : mult
     const regPay = rate * regH
@@ -184,7 +184,7 @@ export const TakeHomePayCalculatorClient = makeCalculatorClient({
   compute: (v, locale) => {
     const gross = toNumStrict(v.gross)
     if (isNaN(gross) || gross < 0) {
-      return { annualNet: `⚠️ ${tui('take-home-pay-calculator', 'en', 'errInvalidSalary', 'Enter a valid salary')}`, perPaycheck: '—', fica: '—', fedTax: '—' }
+      return { annualNet: `⚠️ ${tui('take-home-pay-calculator', locale, 'errInvalidSalary', 'Enter a valid salary')}`, perPaycheck: '—', fica: '—', fedTax: '—' }
     }
     // 简化模型(2025 口径):standard deduction → brackets;FICA 固定税率
     const stdDeduction = v.filing === 'married' ? 30000 : 15000
@@ -207,7 +207,6 @@ export const TakeHomePayCalculatorClient = makeCalculatorClient({
     const ssWages = Math.min(gross, 176100)
     const fica = ssWages * 0.062 + gross * 0.0145
     const net = gross - preTax401k - premiums - fed - fica
-    void locale
     return {
       annualNet: fmtUSD(net),
       perPaycheck: fmtUSD(net / 26),
@@ -243,11 +242,11 @@ export const WeddingBudgetCalculatorClient = makeCalculatorClient({
     { key: 'misc', label: 'Stationery, favors & buffer (10%)' },
     { key: 'perGuest', label: 'Cost per guest', highlight: true },
   ],
-  compute: (v) => {
+  compute: (v, locale) => {
     const total = toNumStrict(v.total)
     const guests = Math.max(1, Math.round(toNum(v.guests)))
     if (isNaN(total) || total <= 0) {
-      return { venue: `⚠️ ${tui('wedding-budget-calculator', 'en', 'errInvalidBudget', 'Enter a valid budget')}`, catering: '—', photo: '—', attire: '—', music: '—', misc: '—', perGuest: '—' }
+      return { venue: `⚠️ ${tui('wedding-budget-calculator', locale, 'errInvalidBudget', 'Enter a valid budget')}`, catering: '—', photo: '—', attire: '—', music: '—', misc: '—', perGuest: '—' }
     }
     const pct = (p: number) => fmtUSD((total * p) / 100)
     return {
@@ -293,7 +292,7 @@ export const HeartRateZoneCalculatorClient = makeCalculatorClient({
     { key: 'z4', label: 'Zone 4 · Threshold', sublabel: '80-90% HRR' },
     { key: 'z5', label: 'Zone 5 · VO2 max', sublabel: '90-100% HRR' },
   ],
-  compute: (v) => {
+  compute: (v, locale) => {
     const age = toNum(v.age)
     const resting = toNum(v.resting)
     if (!Number.isInteger(age) || age < 10 || age > 100 || resting < 30 || resting > 120) {
@@ -344,12 +343,12 @@ export const CaffeineCalculatorClient = makeCalculatorClient({
     { key: 'halfLifeLeft', label: 'Half-lives elapsed' },
     { key: 'advice', label: 'Sleep impact' },
   ],
-  compute: (v) => {
+  compute: (v, locale) => {
     const mg = toNumStrict(v.mg)
     const hoursAgo = toNum(v.hoursAgo)
     const bedIn = toNum(v.bedtimeIn)
     if (isNaN(mg) || mg < 0 || hoursAgo < 0 || bedIn < 0) {
-      return { now: `⚠️ ${tui('caffeine-calculator', 'en', 'errNonNegative', 'Values cannot be negative')}`, atBed: '—', halfLifeLeft: '—', advice: '—' }
+      return { now: `⚠️ ${tui('caffeine-calculator', locale, 'errNonNegative', 'Values cannot be negative')}`, atBed: '—', halfLifeLeft: '—', advice: '—' }
     }
     // 平均半衰期 ~5 小时(个体 3-7h)
     const nowMg = mg * Math.pow(0.5, hoursAgo / 5)
@@ -402,12 +401,12 @@ export const StepsToCaloriesCalculatorClient = makeCalculatorClient({
     { key: 'distanceMi', label: 'Distance (miles)' },
     { key: 'minutes', label: 'Active minutes' },
   ],
-  compute: (v) => {
+  compute: (v, locale) => {
     const steps = toNum(v.steps)
     const weight = toNum(v.weight)
     const height = toNum(v.height)
     if (steps < 0 || weight <= 0 || height <= 0) {
-      return { calories: `⚠️ ${tui('steps-to-calories-calculator', 'en', 'errInvalid', 'Enter positive values')}`, distanceKm: '—', distanceMi: '—', minutes: '—' }
+      return { calories: `⚠️ ${tui('steps-to-calories-calculator', locale, 'errInvalid', 'Enter positive values')}`, distanceKm: '—', distanceMi: '—', minutes: '—' }
     }
     // 步长 ≈ 身高 × 0.414(步行);速度→MET:slow 2.8 / moderate 3.5 / brisk 5.0
     const strideM = (height / 100) * 0.414
@@ -463,14 +462,14 @@ export const PaintCalculatorClient = makeCalculatorClient({
     { key: 'cans', label: 'Standard cans/buckets' },
     { key: 'assumption', label: 'Coverage assumption' },
   ],
-  compute: (v) => {
+  compute: (v, locale) => {
     const perimeter = toNum(v.perimeter)
     const height = toNum(v.wallHeight)
     const doors = Math.max(0, toNum(v.doors))
     const windows = Math.max(0, toNum(v.windows))
     const coats = Math.min(Math.max(1, Math.round(toNum(v.coats))), 4)
     if (perimeter <= 0 || height <= 0) {
-      return { paintNeeded: `⚠️ ${tui('paint-calculator', 'en', 'errInvalidDims', 'Enter valid room dimensions')}`, wallArea: '—', cans: '—', assumption: '—' }
+      return { paintNeeded: `⚠️ ${tui('paint-calculator', locale, 'errInvalidDims', 'Enter valid room dimensions')}`, wallArea: '—', cans: '—', assumption: '—' }
     }
     // 开口扣除:门 1.85 m²、窗 1.4 m²;涂布率 10 m²/L(≈400 sq ft/gal 一遍)
     const grossArea = perimeter * height
@@ -522,10 +521,10 @@ export const DogAgeCalculatorClient = makeCalculatorClient({
     { key: 'lifeStage', label: 'Life stage' },
     { key: 'mythNote', label: 'About the ×7 rule' },
   ],
-  compute: (v) => {
+  compute: (v, locale) => {
     const dogAge = toNum(v.dogAge)
     if (dogAge < 0 || dogAge > 30) {
-      return { humanAge: `⚠️ ${tui('dog-age-calculator', 'en', 'errInvalidAge', 'Enter an age between 0 and 30 years')}`, lifeStage: '—', mythNote: '—' }
+      return { humanAge: `⚠️ ${tui('dog-age-calculator', locale, 'errInvalidAge', 'Enter an age between 0 and 30 years')}`, lifeStage: '—', mythNote: '—' }
     }
     // AVMA 共识曲线:第一年 ≈ 15 人岁,第二年 +9,之后小型每年 +4,中型 +5,大型 +6-7
     let human: number

@@ -65,7 +65,8 @@ export function ShapeFigure({
   shape: 'circle' | 'triangle' | 'rectangle' | 'trapezoid' | 'cube' | 'sphere'
   dims: Dim[]
 }) {
-  if (dims.some((d) => !Number.isFinite(d.value) || d.value < 0)) return null
+  // 0 尺寸会让缩放系数 k = max/0 → Infinity → 图形坐标 NaN(属性被浏览器丢弃,卡片空白)
+  if (dims.some((d) => !Number.isFinite(d.value) || d.value <= 0)) return null
 
   const fill = 'rgb(var(--primary) / 0.10)'
   const stroke = 'rgb(var(--primary))'

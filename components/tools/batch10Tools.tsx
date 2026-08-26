@@ -1,6 +1,6 @@
 'use client'
 
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { CalculatorField, ResultCard, CalculatorNote } from '../calculator/CalculatorField'
 import { ResultActions } from '../ResultActions'
 import { LoadSampleButton } from '../LoadSampleButton'
@@ -24,7 +24,9 @@ export function EpochConverterClient() {
   const [ts, setTs] = useState('')
   const [dateInput, setDateInput] = useState('')
   const [nowSec, setNowSec] = useState<number | null>(null)
-  useMemo(() => {
+  // 挂载后填充(useMemo 里 setState 是 render 期副作用,SSR 输出 disabled
+  // 而客户端立即可用,会造成 hydration 属性不匹配)
+  useEffect(() => {
     setNowSec(Math.floor(Date.now() / 1000))
   }, [])
 
@@ -85,7 +87,7 @@ export function EpochConverterClient() {
         <ResultCard label={L('isoOut', 'ISO 8601 (UTC)')} highlight
           value={date && !isNaN(date.getTime()) ? date.toISOString() : '—'} />
         <ResultCard label={L('localOut', 'Your local time')}
-          value={date && !isNaN(date.getTime()) ? date.toLocaleString() : '—'} />
+          value={date && !isNaN(date.getTime()) ? date.toLocaleString('en-US') : '—'} />
         <ResultCard label={L('secOut', 'Seconds')}
           value={dateToTs !== null ? String(dateToTs) : date && !isNaN(date.getTime()) ? String(Math.floor(date.getTime() / 1000)) : '—'} />
         <ResultCard label={L('msOut', 'Milliseconds')}

@@ -54,6 +54,7 @@ function tokenize(s: string): Tok[] | null {
       continue
     }
     if ('+-*/^()'.includes(ch)) { toks.push({ t: 'op', v: ch }); i++; continue }
+    if (ch === '%') { toks.push({ t: 'op', v: '%' }); i++; continue }
     if (ch === '×' || ch === 'x' || ch === 'X') { toks.push({ t: 'op', v: '*' }); i++; continue }
     if (ch === '÷') { toks.push({ t: 'op', v: '/' }); i++; continue }
     return null // 任何其他字符(字母等)→ 不是纯算式

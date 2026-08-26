@@ -77,16 +77,21 @@ export const PrimeNumberCheckerClient = makeCalculatorClient({
       for (let i = 3; i * i <= x; i += 2) if (x % i === 0) return false
       return true
     }
+    // 大数处素数间隙可达数百上千,逐候选试除最坏 ~1e9 次迭代会冻结页面;
+    // 距离上限 ±1000(1e12 处平均间隙仅 ~27)内找不到就显示 —
+    const GAP_LIMIT = 1000
     let next = n + 1
-    while (next < PRIME_MAX && !check(next)) next++
+    while (next - n <= GAP_LIMIT && next < PRIME_MAX && !check(next)) next++
+    const hasNext = next - n <= GAP_LIMIT && next < PRIME_MAX
     let prev = n - 1
-    while (prev >= 2 && !check(prev)) prev--
+    while (n - prev <= GAP_LIMIT && prev >= 2 && !check(prev)) prev--
+    const hasPrev = n - prev <= GAP_LIMIT && prev >= 2
     return {
       isPrime: check(n)
         ? T('yesPrime', 'Yes — {n} is prime').replace('{n}', String(n))
         : T('noNotPrime', 'No — {n} is not prime').replace('{n}', String(n)),
-      next: next < PRIME_MAX ? String(next) : T('tooLarge', 'Too large'),
-      prev: prev >= 2 ? String(prev) : T('none', 'None'),
+      next: hasNext ? String(next) : '—',
+      prev: hasPrev ? String(prev) : T('none', 'None'),
     }
   },
   note: '🔢 A prime is divisible only by 1 and itself. Primes are the building blocks of cryptography (RSA).',

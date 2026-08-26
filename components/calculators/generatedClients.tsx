@@ -237,10 +237,10 @@ export const CompoundInterestCalculatorClient = makeCalculatorClient({
     const monthly = toNum(v.monthly)
     const annualRate = toNum(v.rate) / 100
     const years = toNum(v.years)
-    // 负利率/负年限会算出无意义结果,直接拦截
-    if (annualRate < 0 || years < 0) {
+    // 负利率/负年限/负本金会算出无意义结果,直接拦截(与 series/compare 图表口径一致)
+    if (annualRate < 0 || years < 0 || principal < 0 || monthly < 0) {
       return {
-        futureValue: `⚠️ ${tui('compound-interest-calculator', locale, 'errNonNegative', 'Interest rate and years cannot be negative')}`,
+        futureValue: `⚠️ ${tui('compound-interest-calculator', locale, 'errNonNegative', 'Values cannot be negative')}`,
         totalContributed: '—',
         interestEarned: '—',
       }

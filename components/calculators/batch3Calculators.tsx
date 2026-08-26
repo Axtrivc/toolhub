@@ -96,7 +96,7 @@ function UnitToggle({ unit, onSwitch, L }: {
           type="button"
           onClick={() => onSwitch(u)}
           className={`rounded-lg px-4 py-2 text-sm font-medium transition ${
-            unit === u ? 'bg-brand-600 text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+            unit === u ? 'bg-brand-600 text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200 dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-slate-700'
           }`}
         >
           {u === 'metric' ? L('metric', 'Metric (cm / kg)') : L('imperial', 'Imperial (ft/in / lb)')}
@@ -791,7 +791,8 @@ export const FractionCalculatorClient = makeCalculatorClient({
       default: num = 0; den = 1
     }
     const g = gcd(Math.abs(num), Math.abs(den))
-    const sign = (num < 0) !== (den < 0) ? '-' : ''
+    // num===0 时结果恒为 0,不得继承异号负号(否则显示 "-0")
+    const sign = num !== 0 && (num < 0) !== (den < 0) ? '-' : ''
     num = Math.abs(num)
     den = Math.abs(den)
     const whole = Math.floor(num / den)
@@ -1016,9 +1017,11 @@ export const MortgageCalculatorClient = makeCalculatorClient({
       }
     }
     const rateInput = toNumStrict(v.rate)
-    if (isNaN(rateInput) || rateInput < 0 || toNum(v.tax) < 0 || toNum(v.insurance) < 0 || toNum(v.hoa) < 0 || toNum(v.pmiRate) < 0 || toNum(v.extra) < 0) {
+    // 年利率上限 100%:滑杆范围外的手输大值会让 (1+r)^n 溢出为 Infinity,
+    // pi = Inf/Inf = NaN 且提前还款循环首轮即跳出,payoff 错显 "1 month"
+    if (isNaN(rateInput) || rateInput < 0 || rateInput > 100 || toNum(v.tax) < 0 || toNum(v.insurance) < 0 || toNum(v.hoa) < 0 || toNum(v.pmiRate) < 0 || toNum(v.extra) < 0) {
       return {
-        piti: `⚠️ ${isNaN(rateInput) ? T('errInvalidInput', 'Enter valid numbers in all fields') : T('errNonNegative', 'Values cannot be negative')}`,
+        piti: `⚠️ ${isNaN(rateInput) ? T('errInvalidInput', 'Enter valid numbers in all fields') : rateInput < 0 ? T('errNonNegative', 'Values cannot be negative') : rateInput > 100 ? T('errRateMax', 'Interest rate must be 100% or less') : T('errNonNegative', 'Values cannot be negative')}`,
         monthly: '—', loan: '—', total: '—', taxM: '—', insM: '—',
         pmiM: '—', hoaM: '—', payoff: '—', saved: '—', timeSaved: '—', principal: '—',
       }

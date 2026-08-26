@@ -34,9 +34,12 @@ const COMMON_CALC_KEYS = new Set([
  */
 function parseNumeric(formatted: string | undefined): number {
   if (!formatted) return 0
-  // 提取首个数字 token(容忍 "⚠️ 135.0% — impossible" 这类带前后缀的串,
+  // 先剥离货币/百分号/空白(含 zh 的 "US$1,280,000" 前缀),否则 "-$20.00"
+  // 的负号因 $ 阻隔匹配不到数字,负值会被当正值画进图表
+  const cleaned = formatted.replace(/[$€£¥%\s]/g, '')
+  // 提取首个数字 token(容忍 "⚠️ 135.0 — impossible" 这类带前后缀的串,
   // 比 parseFloat(整体清洗)更稳:前缀非数字字符不再导致 NaN→0)
-  const m = formatted.match(/-?\d[\d,]*(?:\.\d+)?/)
+  const m = cleaned.match(/-?\d[\d,]*(?:\.\d+)?/)
   if (!m) return 0
   const n = parseFloat(m[0].replace(/,/g, ''))
   return Number.isFinite(n) ? n : 0
@@ -166,6 +169,27 @@ export function makeCalculatorClient(config: CalculatorConfig): ComponentType {
       () => ({ ...results, ...nowDerived }),
       [results, nowDerived],
     )
+
+    // series/compare 派生数据 memo:值/语言未变时不重跑(如 360 期摊销全表),
+    // 且引用稳定让 LineAreaChart/StackedCompareChart 内部的 path useMemo 真正命中
+    const seriesData = useMemo(() => {
+      if (!config.series) return null
+      try {
+        return config.series(values, locale)
+      } catch {
+        return null
+      }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [values, locale])
+    const compareData = useMemo(() => {
+      if (!config.compare) return null
+      try {
+        return config.compare(values, locale)
+      } catch {
+        return null
+      }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [values, locale])
 
     // 示例数据:优先 lib/tool-samples.ts 注册表(按 slug),否则用 config.sample 内嵌。
     const sample = useMemo(() => {
@@ -450,7 +474,7 @@ export function makeCalculatorClient(config: CalculatorConfig): ComponentType {
                 if (chart.kind === 'compare') {
                   if (!config.compare) return null
                   try {
-                    const data = config.compare(values, locale)
+                    const data = compareData
                     if (!data || data.rows.length === 0) return null
                     return (
                       <StackedCompareChart
@@ -474,7 +498,7 @@ export function makeCalculatorClient(config: CalculatorConfig): ComponentType {
                 if (chart.kind === 'series') {
                   if (!config.series) return null
                   try {
-                    const data = config.series(values, locale)
+                    const data = seriesData
                     if (!data || !data.xLabels?.length) return null
                     return (
                       <LineAreaChart
