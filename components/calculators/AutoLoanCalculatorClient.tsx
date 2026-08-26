@@ -2,6 +2,8 @@
 
 import { useState, useMemo, useEffect } from 'react'
 import { CalculatorField, ResultCard, CalculatorNote } from '@/components/calculator/CalculatorField'
+import { LineAreaChart } from '@/components/charts/LineAreaChart'
+import { yearlyBalanceSeries } from '@/components/charts/chartKit'
 import { ResultActions } from '@/components/ResultActions'
 import { useApp } from '@/components/providers/AppProviders'
 import { tui } from '@/lib/i18n/tool-l10n'
@@ -204,6 +206,22 @@ export function AutoLoanCalculatorClient() {
               sublabel={L('downTradeInPayments', 'Down + trade-in + all payments')}
             />
           </div>
+
+          {/* 余额递减曲线(年度采样,与下方摊销表同数据源) */}
+          <LineAreaChart
+            title={L('chartTitleBalance', 'Loan Balance Over Time')}
+            xLabels={yearlyBalanceSeries(parsed.schedule).xLabels}
+            lines={[
+              {
+                key: 'balance',
+                label: L('lineBalance', 'Remaining balance'),
+                color: '#ef4444',
+                points: yearlyBalanceSeries(parsed.schedule).points,
+                area: true,
+              },
+            ]}
+            formatY={fmtMoney}
+          />
 
           {/* 还款明细表(前 12 期,可展开全部) */}
           <div>

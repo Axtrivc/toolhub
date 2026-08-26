@@ -62,6 +62,30 @@ export const APYCalculatorClient = makeCalculatorClient({
     }
   },
   note: '🏦 APY (Annual Percentage Yield) accounts for compounding. APY > APR when compounding more than once a year.',
+  chart: { kind: 'series', title: 'Growth Over Time' },
+  // 增长曲线:封闭式 FV = P(1+r/n)^(nt) 逐年采样;principal 恒定线 + 余额曲线
+  series: (v) => {
+    const p = toNumStrict(v.principal)
+    const r = toNumStrict(v.apr) / 100
+    const n = Number(v.compound)
+    const t = Math.round(toNumStrict(v.years))
+    if (isNaN(p) || isNaN(r) || isNaN(t) || p <= 0 || r < 0 || t <= 0 || t > 100 || !(n > 0)) return null
+    const balance: number[] = []
+    const xLabels: string[] = []
+    for (let y = 0; y <= t; y++) {
+      balance.push(p * Math.pow(1 + r / n, n * y))
+      xLabels.push(`Y${y}`)
+    }
+    return {
+      xLabels,
+      lines: [
+        { key: 'principal', label: 'Principal', color: '#3b82f6', points: xLabels.map(() => p) },
+        { key: 'balance', label: 'Balance', color: '#22c55e', points: balance, area: true },
+      ],
+      highlightBetween: { a: 'principal', b: 'balance', label: 'Interest earned' },
+      formatY: (n2) => fmtUSD(n2, 0),
+    }
+  },
 })
 
 export const CreditCardMinimumCalculatorClient = makeCalculatorClient({

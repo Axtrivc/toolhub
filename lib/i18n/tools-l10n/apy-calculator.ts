@@ -42,6 +42,10 @@ export const apyCalculatorL10n: ToolL10n = {
       errNonNegative: '本金、利率和年数不能为负',
       errInvalidInput: '请在所有字段中输入有效数字',
       note: '🏦 APY(年化收益率)考虑了复利。一年内复利超过一次时,APY > APR。',
+      chartTitle: '随时间的增长',
+      'line.principal': '本金',
+      'line.balance': '余额',
+      'band.principal-balance': '赚到的利息',
     },
   },
 
@@ -79,6 +83,10 @@ export const apyCalculatorL10n: ToolL10n = {
       errNonNegative: 'El capital, la tasa y los años no pueden ser negativos',
       errInvalidInput: 'Introduce números válidos en todos los campos',
       note: '🏦 El APY (rendimiento porcentual anual) tiene en cuenta la capitalización. APY > APR cuando se capitaliza más de una vez al año.',
+      chartTitle: 'Crecimiento en el tiempo',
+      'line.principal': 'Capital',
+      'line.balance': 'Saldo',
+      'band.principal-balance': 'Interés generado',
     },
   },
 
@@ -116,6 +124,10 @@ export const apyCalculatorL10n: ToolL10n = {
       errNonNegative: 'Einlage, Satz und Jahre dürfen nicht negativ sein',
       errInvalidInput: 'Bitte in allen Feldern gültige Zahlen eingeben',
       note: '🏦 Der APY (effektive Jahresrendite) berücksichtigt die Verzinsung. APY > APR, wenn öfter als einmal pro Jahr verrechnet wird.',
+      chartTitle: 'Wachstum über die Zeit',
+      'line.principal': 'Einlage',
+      'line.balance': 'Saldo',
+      'band.principal-balance': 'Erzielte Zinsen',
     },
   },
 }

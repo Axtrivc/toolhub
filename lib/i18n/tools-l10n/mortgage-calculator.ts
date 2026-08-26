@@ -86,6 +86,10 @@ export const mortgageCalculatorL10n: ToolL10n = {
       chartCenter: '总计',
       'slice.principal': '本金(贷款金额)',
       'slice.total': '利息(借款成本)',
+      chartTitleBalance: '贷款余额随时间变化',
+      'line.base': '标准月供',
+      'line.extra': '含提前还款',
+      'band.base-extra': '提前还款缩小的差距',
     },
   },
 
@@ -163,6 +167,10 @@ export const mortgageCalculatorL10n: ToolL10n = {
       chartCenter: 'Total',
       'slice.principal': 'Capital (importe del préstamo)',
       'slice.total': 'Interés (coste del préstamo)',
+      chartTitleBalance: 'Saldo del préstamo en el tiempo',
+      'line.base': 'Pagos estándar',
+      'line.extra': 'Con pagos extra',
+      'band.base-extra': 'Brecha cerrada por pagos extra',
     },
   },
 
@@ -240,6 +248,10 @@ export const mortgageCalculatorL10n: ToolL10n = {
       chartCenter: 'Gesamt',
       'slice.principal': 'Kredit (Kreditbetrag)',
       'slice.total': 'Zins (Kosten des Kredits)',
+      chartTitleBalance: 'Kreditsaldo über die Zeit',
+      'line.base': 'Standard-Raten',
+      'line.extra': 'Mit Sondertilgung',
+      'band.base-extra': 'Vorsprung durch Sondertilgung',
     },
   },
 }

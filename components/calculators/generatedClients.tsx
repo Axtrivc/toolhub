@@ -192,13 +192,52 @@ export const CompoundInterestCalculatorClient = makeCalculatorClient({
     }
   },
   note: '📈 Compound interest is "interest on interest" — the longer your time horizon, the more dramatic the growth. Starting early matters more than starting big.',
-  chart: {
-    title: 'Your Contributions vs. Compound Growth',
-    centerLabel: 'Future Value',
-    slices: [
-      { valueKey: 'totalContributed', label: 'Money you put in', color: '#3b82f6' },
-      { valueKey: 'interestEarned', label: 'Interest earned (free money)', color: '#22c55e' },
-    ],
+  chart: [
+    {
+      title: 'Your Contributions vs. Compound Growth',
+      centerLabel: 'Future Value',
+      slices: [
+        { valueKey: 'totalContributed', label: 'Money you put in', color: '#3b82f6' },
+        { valueKey: 'interestEarned', label: 'Interest earned (free money)', color: '#22c55e' },
+      ],
+    },
+    {
+      kind: 'series',
+      title: 'Growth Over Time',
+      titleKey: 'chartTitleGrowth',
+    },
+  ],
+  // 增长曲线:逐年采样,总余额(面积)vs 累计投入(面积),中间 = 利息
+  series: (v) => {
+    const principal = toNum(v.principal)
+    const monthly = toNum(v.monthly)
+    const annualRate = toNum(v.rate) / 100
+    const years = Math.round(toNum(v.years))
+    if (principal < 0 || monthly < 0 || annualRate < 0 || years <= 0 || years > 100) return null
+    const monthlyRate = annualRate / 12
+    const balance: number[] = []
+    const contributed: number[] = []
+    const xLabels: string[] = []
+    let bal = principal
+    for (let y = 0; y <= years; y++) {
+      if (y > 0) {
+        for (let m = 0; m < 12; m++) {
+          bal = bal * (1 + monthlyRate) + monthly
+        }
+      }
+      balance.push(Math.max(0, bal))
+      contributed.push(principal + monthly * 12 * y)
+      xLabels.push(`Y${y}`)
+    }
+    return {
+      xLabels,
+      lines: [
+        { key: 'contributed', label: 'You put in', color: '#3b82f6', points: contributed, area: true },
+        { key: 'balance', label: 'Total balance', color: '#22c55e', points: balance, area: true },
+      ],
+      highlightBetween: { a: 'contributed', b: 'balance', label: 'Interest earned' },
+      formatY: (n) => fmtUSD(n, 0),
+    }
   },
 })
 

@@ -78,3 +78,26 @@ export function fmtCompact(n: number): string {
 function trimZero(n: number): string {
   return Number(n.toFixed(1)).toString()
 }
+
+/**
+ * 从逐月摊销表派生年度采样的余额序列(供 LineAreaChart)。
+ * points[0] = 期初本金(由首月 余额+当月本金 倒推),之后每年取年末余额;
+ * 不足整年的尾期补一个 M{n} 采样点,保证曲线落到 0。
+ */
+export function yearlyBalanceSeries(
+  schedule: { month: number; balance: number; principal: number }[],
+): { xLabels: string[]; points: number[] } {
+  if (schedule.length === 0) return { xLabels: [], points: [] }
+  const principal0 = schedule[0].balance + schedule[0].principal
+  const points = [principal0]
+  const xLabels = ['M0']
+  for (let i = 12; i <= schedule.length; i += 12) {
+    points.push(schedule[i - 1].balance)
+    xLabels.push(`Y${i / 12}`)
+  }
+  if (schedule.length % 12 !== 0) {
+    points.push(schedule[schedule.length - 1].balance)
+    xLabels.push(`M${schedule.length}`)
+  }
+  return { xLabels, points }
+}

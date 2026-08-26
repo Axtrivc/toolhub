@@ -334,76 +334,87 @@ export function makeCalculatorClient(config: CalculatorConfig): ComponentType {
           copyLabel={L('copySummary', 'Copy Summary')}
         />
 
-        {/* 结果可视化(可选)- 按 chart.kind 分发:环形(默认)/仪表盘/曲线 */}
+        {/* 结果可视化(可选)- chart 支持单图或数组(多图并存),
+            按 kind 分发:环形(默认)/仪表盘/曲线;key 用于多图列表项 */}
         {config.chart && (() => {
-          const chart = config.chart
-          if (chart.kind === 'gauge') {
-            const value = parseNumeric(mergedResults[chart.valueKey])
-            return (
-              <GaugeChart
-                title={chart.title ? L('chartTitle', chart.title) : undefined}
-                value={value}
-                min={chart.min}
-                max={chart.max}
-                zones={chart.zones.map((z, i) => ({
-                  upTo: z.upTo,
-                  color: z.color,
-                  label: L(`zone.${i}`, z.label),
-                }))}
-                caption={chart.caption ? L('chartCaption', chart.caption) : undefined}
-              />
-            )
-          }
-          if (chart.kind === 'series') {
-            if (!config.series) return null
-            try {
-              const data = config.series(values, locale)
-              return (
-                <LineAreaChart
-                  title={chart.title ? L('chartTitle', chart.title) : undefined}
-                  xLabels={data.xLabels}
-                  lines={data.lines.map((ln) => ({
-                    key: ln.key,
-                    label: L(`line.${ln.key}`, ln.label),
-                    color: ln.color,
-                    points: ln.points,
-                    area: ln.area,
-                    dashed: ln.dashed,
-                  }))}
-                  highlightBetween={
-                    data.highlightBetween
-                      ? {
-                          a: data.highlightBetween.a,
-                          b: data.highlightBetween.b,
-                          label: data.highlightBetween.label
-                            ? L(`band.${data.highlightBetween.a}-${data.highlightBetween.b}`, data.highlightBetween.label)
-                            : undefined,
-                        }
-                      : undefined
-                  }
-                  formatY={data.formatY}
-                />
-              )
-            } catch {
-              return null
-            }
-          }
-          // 默认:donut(既有配置不写 kind 也走这里,行为不变)
-          const donut = chart as { title?: string; centerLabel?: string; slices: { valueKey: string; label: string; color: string }[] }
-          const slices = donut.slices
-            .map((s) => ({
-              label: L(`slice.${s.valueKey}`, s.label),
-              value: parseNumeric(mergedResults[s.valueKey]),
-              color: s.color,
-            }))
-            .filter((s) => s.value > 0)
-          if (slices.length === 0) return null
+          const charts = Array.isArray(config.chart) ? config.chart : [config.chart]
           return (
-            <BreakdownChart
-              title={donut.title ? L('chartTitle', donut.title) : undefined}
-              centerLabel={donut.centerLabel ? L('chartCenter', donut.centerLabel) : undefined}
-              slices={slices}
-            />
+            <>
+              {charts.map((chart, ci) => {
+                const tKey = chart.titleKey ?? 'chartTitle'
+                if (chart.kind === 'gauge') {
+                  const value = parseNumeric(mergedResults[chart.valueKey])
+                  return (
+                    <GaugeChart
+                      key={ci}
+                      title={chart.title ? L(tKey, chart.title) : undefined}
+                      value={value}
+                      min={chart.min}
+                      max={chart.max}
+                      zones={chart.zones.map((z, i) => ({
+                        upTo: z.upTo,
+                        color: z.color,
+                        label: L(`zone.${i}`, z.label),
+                      }))}
+                      caption={chart.caption ? L('chartCaption', chart.caption) : undefined}
+                    />
+                  )
+                }
+                if (chart.kind === 'series') {
+                  if (!config.series) return null
+                  try {
+                    const data = config.series(values, locale)
+                    if (!data || !data.xLabels?.length) return null
+                    return (
+                      <LineAreaChart
+                        key={ci}
+                        title={chart.title ? L(tKey, chart.title) : undefined}
+                        xLabels={data.xLabels}
+                        lines={data.lines.map((ln) => ({
+                          key: ln.key,
+                          label: L(`line.${ln.key}`, ln.label),
+                          color: ln.color,
+                          points: ln.points,
+                          area: ln.area,
+                          dashed: ln.dashed,
+                        }))}
+                        highlightBetween={
+                          data.highlightBetween
+                            ? {
+                                a: data.highlightBetween.a,
+                                b: data.highlightBetween.b,
+                                label: data.highlightBetween.label
+                                  ? L(`band.${data.highlightBetween.a}-${data.highlightBetween.b}`, data.highlightBetween.label)
+                                  : undefined,
+                              }
+                            : undefined
+                        }
+                        formatY={data.formatY}
+                      />
+                    )
+                  } catch {
+                    return null
+                  }
+                }
+                // 默认:donut(既有配置不写 kind 也走这里,行为不变)
+                const slices = chart.slices
+                  .map((s) => ({
+                    label: L(`slice.${s.valueKey}`, s.label),
+                    value: parseNumeric(mergedResults[s.valueKey]),
+                    color: s.color,
+                  }))
+                  .filter((s) => s.value > 0)
+                if (slices.length === 0) return null
+                return (
+                  <BreakdownChart
+                    key={ci}
+                    title={chart.title ? L(tKey, chart.title) : undefined}
+                    centerLabel={chart.centerLabel ? L('chartCenter', chart.centerLabel) : undefined}
+                    slices={slices}
+                  />
+                )
+              })}
+            </>
           )
         })()}
 

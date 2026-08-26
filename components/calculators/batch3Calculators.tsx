@@ -1018,13 +1018,62 @@ export const MortgageCalculatorClient = makeCalculatorClient({
     }
   },
   note: '🏠 PMI is added automatically only when your down payment is under 20% (LTV above 80%) — at 20%+ down it is $0. Tax & insurance are yearly amounts ÷ 12; HOA is monthly. Extra payments go straight to principal.',
-  chart: {
-    title: 'Total Paid: Principal vs Interest',
-    centerLabel: 'Total',
-    slices: [
-      { valueKey: 'principal', label: 'Principal (loan amount)', color: '#22c55e' },
-      { valueKey: 'total', label: 'Interest (cost of borrowing)', color: '#ef4444' },
-    ],
+  chart: [
+    {
+      title: 'Total Paid: Principal vs Interest',
+      centerLabel: 'Total',
+      slices: [
+        { valueKey: 'principal', label: 'Principal (loan amount)', color: '#22c55e' },
+        { valueKey: 'total', label: 'Interest (cost of borrowing)', color: '#ef4444' },
+      ],
+    },
+    {
+      kind: 'series',
+      title: 'Loan Balance Over Time',
+      titleKey: 'chartTitleBalance',
+    },
+  ],
+  // 余额双曲线:逐月摊销模拟(与 compute 同式),年度采样;
+  // 有/无 extra 两条余额曲线,中间绿色区域 = 提前还款差距(extra > 0 才有意义)
+  series: (v) => {
+    const home = toNumStrict(v.home)
+    const downPct = toNumStrict(v.down)
+    const rateInput = toNumStrict(v.rate)
+    if (isNaN(home) || isNaN(downPct) || isNaN(rateInput) || home <= 0 || downPct < 0 || downPct > 100 || rateInput < 0) return null
+    const months = Math.round(toNum(v.years) * 12)
+    if (months <= 0) return null
+    const loan = home * (1 - downPct / 100)
+    if (loan <= 0) return null
+    const rate = rateInput / 100 / 12
+    const extra = Math.max(0, toNum(v.extra))
+    let pi: number
+    if (rate === 0) pi = loan / months
+    else {
+      const f = Math.pow(1 + rate, months)
+      pi = (loan * rate * f) / (f - 1)
+    }
+    // 逐月走两条曲线,年度(12 步)采样;600 月上限与 compute 一致
+    const base: number[] = [loan]
+    const withExtra: number[] = [loan]
+    let balB = loan
+    let balE = loan
+    for (let m = 1; m <= Math.min(months, 600); m++) {
+      balB = Math.max(0, balB + balB * rate - pi)
+      if (balE > 0) balE = Math.max(0, balE + balE * rate - Math.min(pi + extra, balE * (1 + rate)))
+      if (m % 12 === 0 || m === months) {
+        base.push(balB)
+        withExtra.push(balE)
+      }
+    }
+    return {
+      xLabels: base.map((_, i) => `Y${i}`),
+      lines: [
+        { key: 'base', label: 'Standard payments', color: '#ef4444', points: base, area: true },
+        { key: 'extra', label: 'With extra payment', color: '#22c55e', points: withExtra },
+      ],
+      highlightBetween: extra > 0 ? { a: 'base', b: 'extra', label: 'Gap closed by extra payments' } : undefined,
+      formatY: (n) => fmtUSD(n, 0),
+    }
   },
 })
 
@@ -1171,13 +1220,44 @@ export const CreditCardPayoffCalculatorClient = makeCalculatorClient({
     }
   },
   note: '💳 Minimum payments can take decades. Paying more than the minimum saves dramatically on interest.',
-  chart: {
-    title: 'Total Paid: Principal vs Interest',
-    centerLabel: 'Total',
-    slices: [
-      { valueKey: 'principal', label: 'Principal (what you borrowed)', color: '#22c55e' },
-      { valueKey: 'interest', label: 'Interest (cost of borrowing)', color: '#ef4444' },
-    ],
+  chart: [
+    {
+      title: 'Total Paid: Principal vs Interest',
+      centerLabel: 'Total',
+      slices: [
+        { valueKey: 'principal', label: 'Principal (what you borrowed)', color: '#22c55e' },
+        { valueKey: 'interest', label: 'Interest (cost of borrowing)', color: '#ef4444' },
+      ],
+    },
+    {
+      kind: 'series',
+      title: 'Balance as You Pay It Off',
+      titleKey: 'chartTitleBalance',
+    },
+  ],
+  // 余额递减曲线:逐月模拟(与 compute 同式),月度采样点过多时图内自动抽稀
+  series: (v) => {
+    let balance = toNum(v.balance)
+    const apr = toNum(v.apr)
+    const monthlyRate = apr / 100 / 12
+    const payment = toNum(v.payment)
+    if (!(balance > 0) || apr < 0 || payment <= 0 || payment <= balance * monthlyRate) return null
+    const points: number[] = [balance]
+    const xLabels: string[] = ['M0']
+    let m = 0
+    while (balance > 0 && m < 1200) {
+      balance += balance * monthlyRate
+      balance -= Math.min(payment, balance)
+      m++
+      points.push(Math.max(0, balance))
+      xLabels.push(`M${m}`)
+    }
+    if (balance > 0) return null
+    return {
+      xLabels,
+      lines: [{ key: 'balance', label: 'Remaining balance', color: '#ef4444', points, area: true }],
+      formatY: (n) => fmtUSD(n, 0),
+    }
   },
 })
 

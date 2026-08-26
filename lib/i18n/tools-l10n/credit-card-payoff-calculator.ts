@@ -30,6 +30,8 @@ export const creditCardPayoffCalculatorL10n: ToolL10n = {
       'out.months': '还清时间', 'out.total': '总还款额', 'out.interest': '总利息',
       note: '💳 只还最低还款可能要几十年。多还会大幅节省利息。',
       chartTitle: '总还款:本金 vs 利息', chartCenter: '总计', 'slice.principal': '本金(你借的)', 'slice.interest': '利息(借钱成本)',
+      chartTitleBalance: '逐月还款的余额下降',
+      'line.balance': '剩余欠款',
     },
   },
   es: {
@@ -57,6 +59,8 @@ export const creditCardPayoffCalculatorL10n: ToolL10n = {
       'out.months': 'Tiempo hasta saldar', 'out.total': 'Total pagado', 'out.interest': 'Interés total',
       note: '💳 Los pagos mínimos pueden tardar décadas. Pagar más del mínimo ahorra muchísimo interés.',
       chartTitle: 'Total pagado: principal vs interés', chartCenter: 'Total', 'slice.principal': 'Principal (lo que pediste prestado)', 'slice.interest': 'Interés (coste de la deuda)',
+      chartTitleBalance: 'Saldo mientras lo amortizas',
+      'line.balance': 'Saldo pendiente',
     },
   },
   de: {
@@ -84,6 +88,8 @@ export const creditCardPayoffCalculatorL10n: ToolL10n = {
       'out.months': 'Zeit bis tilgung', 'out.total': 'Insgesamt gezahlt', 'out.interest': 'Zinsen gesamt',
       note: '💳 Mindestraten können Jahrzehnte dauern. Mehr als das Minimum zu zahlen, spart dramatisch Zinsen.',
       chartTitle: 'Gesamt gezahlt: Tilgung vs. Zinsen', chartCenter: 'Gesamt', 'slice.principal': 'Tilgung (was du geliehen hast)', 'slice.interest': 'Zinsen (Kosten des Kredits)',
+      chartTitleBalance: 'Restschuld beim Tilgen',
+      'line.balance': 'Verbleibende Schuld',
     },
   },
 }

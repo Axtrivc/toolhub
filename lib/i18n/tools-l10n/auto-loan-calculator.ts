@@ -8,6 +8,8 @@ export const autoLoanCalculatorL10n: ToolL10n = {
   zh: {
     ui: {
       'amortTitle': '还款明细 ',
+      'chartTitleBalance': '贷款余额随时间变化',
+      'lineBalance': '剩余欠款',
       'copySummary': '复制摘要',
       'downPayment': '首付',
       'downTradeInPayments': '首付 + 以旧换新 + 全部还款',
@@ -85,6 +87,8 @@ export const autoLoanCalculatorL10n: ToolL10n = {
   es: {
     ui: {
       'amortTitle': 'Cuadro de amortización ',
+      'chartTitleBalance': 'Saldo del préstamo en el tiempo',
+      'lineBalance': 'Saldo pendiente',
       'copySummary': 'Copiar resumen',
       'downPayment': 'Entrada',
       'downTradeInPayments': 'Entrada + entrega + todos los pagos',
@@ -162,6 +166,8 @@ export const autoLoanCalculatorL10n: ToolL10n = {
   de: {
     ui: {
       'amortTitle': 'Tilgungsplan ',
+      'chartTitleBalance': 'Kreditsaldo über die Zeit',
+      'lineBalance': 'Restschuld',
       'copySummary': 'Zusammenfassung kopieren',
       'downPayment': 'Anzahlung',
       'downTradeInPayments': 'Anzahlung + Inzahlungnahme + alle Raten',

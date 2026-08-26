@@ -83,17 +83,16 @@ export interface CalculatorConfig {
    */
   sample?: Record<string, string>
   /**
-   * 结果可视化(可选)。声明后,结果区下方渲染一个比例分解环形图,
-   * 把若干个输出字段按值画成饼图(如"利息 vs 本金")。
-   * 未声明的计算器不受影响。
+   * 结果可视化(可选)。单图直接给一个 ChartConfig;多图并存
+   * (如 donut + series)给数组,自上而下依次渲染。
    */
-  chart?: ChartConfig
+  chart?: ChartConfig | ChartConfig[]
   /**
    * 曲线数据钩子(可选)。chart 为 { kind: 'series' } 时,工厂用该钩子
    * 取原始数值序列渲染 LineAreaChart。与 compute 同签名(纯函数,收
-   * string 输入),返回 SeriesData。异常/缺省时图表静默不渲染。
+   * string 输入),返回 SeriesData;输入非法时返回 null(图表静默不渲染)。
    */
-  series?: (values: Record<string, string>, locale: Locale) => SeriesData
+  series?: (values: Record<string, string>, locale: Locale) => SeriesData | null
   /**
    * URL 状态同步(可选,默认关闭)。
    * 开启后每个输入字段以 ?<key>=<value> 形式同步进 URL(replaceState):
@@ -115,6 +114,8 @@ export interface DonutChartConfig {
   kind?: 'donut'
   /** 图表标题(如 "Where Your Payment Goes") */
   title?: string
+  /** 标题的 l10n key(缺省 'chartTitle';多图并存时用不同 key 避免撞车) */
+  titleKey?: string
   /** 中央大字(如总还款额,通常等于某个输出值) */
   centerLabel?: string
   /** 构成分量的输出字段。valueKey 对应 compute 返回的 key */
@@ -128,6 +129,8 @@ export interface DonutChartConfig {
 export interface GaugeChartConfig {
   kind: 'gauge'
   title?: string
+  /** 标题的 l10n key(缺省 'chartTitle') */
+  titleKey?: string
   valueKey: string
   min: number
   max: number
@@ -144,6 +147,8 @@ export interface GaugeChartConfig {
 export interface SeriesChartConfig {
   kind: 'series'
   title?: string
+  /** 标题的 l10n key(缺省 'chartTitle') */
+  titleKey?: string
 }
 
 export type ChartConfig = DonutChartConfig | GaugeChartConfig | SeriesChartConfig

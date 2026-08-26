@@ -58,6 +58,10 @@ export const compoundInterestCalculatorL10n: ToolL10n = {
       chartCenter: '未来价值',
       'slice.totalContributed': '你投入的钱',
       'slice.interestEarned': '利息(白赚的钱)',
+      chartTitleGrowth: '随时间的增长',
+      'line.contributed': '你投入的',
+      'line.balance': '总余额',
+      'band.contributed-balance': '赚到的利息',
     },
   },
 
@@ -107,6 +111,10 @@ export const compoundInterestCalculatorL10n: ToolL10n = {
       chartCenter: 'Valor futuro',
       'slice.totalContributed': 'Dinero que invertiste',
       'slice.interestEarned': 'Interés generado (dinero gratis)',
+      chartTitleGrowth: 'Crecimiento en el tiempo',
+      'line.contributed': 'Tu aportación',
+      'line.balance': 'Saldo total',
+      'band.contributed-balance': 'Interés generado',
     },
   },
 
@@ -156,6 +164,10 @@ export const compoundInterestCalculatorL10n: ToolL10n = {
       chartCenter: 'Zukünftiger Wert',
       'slice.totalContributed': 'Von dir eingezahlt',
       'slice.interestEarned': 'Zins (gratis Geld)',
+      chartTitleGrowth: 'Wachstum über die Zeit',
+      'line.contributed': 'Eigene Einzahlung',
+      'line.balance': 'Gesamtsaldo',
+      'band.contributed-balance': 'Erzielte Zinsen',
     },
   },
 }

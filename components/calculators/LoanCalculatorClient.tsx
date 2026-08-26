@@ -2,6 +2,8 @@
 
 import { useState, useMemo, useCallback } from 'react'
 import { CalculatorField, ResultCard, CalculatorNote } from '@/components/calculator/CalculatorField'
+import { LineAreaChart } from '@/components/charts/LineAreaChart'
+import { yearlyBalanceSeries } from '@/components/charts/chartKit'
 import { LoadSampleButton } from '@/components/LoadSampleButton'
 import { ResultActions } from '@/components/ResultActions'
 import { getCalculatorSample } from '@/lib/tool-samples'
@@ -204,6 +206,22 @@ export function LoanCalculatorClient() {
               sublabel={L('principalPlusInterest', 'Principal + interest')}
             />
           </div>
+
+          {/* 余额递减曲线(年度采样,与下方摊销表同数据源) */}
+          <LineAreaChart
+            title={L('chartTitleBalance', 'Loan Balance Over Time')}
+            xLabels={yearlyBalanceSeries(result.schedule).xLabels}
+            lines={[
+              {
+                key: 'balance',
+                label: L('lineBalance', 'Remaining balance'),
+                color: '#ef4444',
+                points: yearlyBalanceSeries(result.schedule).points,
+                area: true,
+              },
+            ]}
+            formatY={fmtMoney}
+          />
 
           {/* 还款明细表(默认前 12 期,可展开全部) */}
           <div>
