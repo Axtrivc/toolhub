@@ -193,6 +193,22 @@ export const AverageCalculatorClient = makeCalculatorClient({
       ignored,
     }
   },
+  chart: { kind: 'series', title: 'Your numbers' },
+  series: (v) => {
+    const nums = (v.numbers || '').split(/[\s,]+/).map((t) => t.trim()).filter(Boolean)
+      .map(Number).filter((n) => isFinite(n))
+    if (nums.length < 2) return null
+    const mean = nums.reduce((a, b) => a + b, 0) / nums.length
+    const step = Math.max(1, Math.ceil(nums.length / 12))
+    const xLabels = nums.map((_, i) => (i % step === 0 || i === nums.length - 1 ? `#${i + 1}` : ''))
+    return {
+      xLabels,
+      lines: [
+        { key: 'value', label: 'Value', color: '#3b82f6', points: nums },
+        { key: 'mean', label: 'Mean', color: '#f59e0b', points: nums.map(() => mean), dashed: true },
+      ],
+    }
+  },
   note: '📊 Enter any list of numbers. Supports commas, spaces, or line breaks as separators.',
 })
 

@@ -16,7 +16,7 @@ import { tui } from '@/lib/i18n/tool-l10n'
 export const TipCalculatorClient = makeCalculatorClient({
   slug: 'tip-calculator',
   inputs: [
-    { key: 'bill', label: 'Bill amount', suffix: '$', default: '50', placeholder: '50.00' },
+    { key: 'bill', label: 'Bill amount', suffix: '$', default: '50', placeholder: '50.00', slider: { min: 0, max: 500, step: 5 } },
     { key: 'tipPct', label: 'Tip percentage', suffix: '%', default: '18', slider: { min: 0, max: 40, step: 1 } },
     { key: 'people', label: 'Number of people', default: '2', slider: { min: 1, max: 20, step: 1 } },
   ],
@@ -48,6 +48,27 @@ export const TipCalculatorClient = makeCalculatorClient({
           : `⚠️ ${tui('tip-calculator', locale, 'errMinOnePerson', 'Enter at least 1 person')}`,
     }
   },
+  presets: [
+    { label: '15% adequate', values: { tipPct: '15' } },
+    { label: '18% good', values: { tipPct: '18' } },
+    { label: '20% excellent', values: { tipPct: '20' } },
+    { label: '25% outstanding', values: { tipPct: '25' } },
+  ],
+  chart: { kind: 'compare', title: 'Bill vs tip' },
+  compare: (v) => {
+    const bill = toNum(v.bill), pct = toNum(v.tipPct)
+    if (!(bill >= 0) || !(pct >= 0)) return null
+    const tip = bill * (pct / 100)
+    return {
+      rows: [
+        { label: 'Total bill', segments: [
+          { label: 'Bill', value: bill, color: '#3b82f6' },
+          { label: 'Tip', value: tip, color: '#22c55e' },
+        ] },
+      ],
+      formatTotal: (n) => fmtUSD(n),
+    }
+  },
   note: '💡 Common tip rates: 15% for adequate service, 18% for good service, 20%+ for excellent service.',
 })
 
@@ -57,7 +78,7 @@ export const TipCalculatorClient = makeCalculatorClient({
 export const DiscountCalculatorClient = makeCalculatorClient({
   slug: 'discount-calculator',
   inputs: [
-    { key: 'price', label: 'Original price', suffix: '$', default: '80' },
+    { key: 'price', label: 'Original price', suffix: '$', default: '80', slider: { min: 0, max: 2000, step: 10 } },
     { key: 'discount', label: 'Discount', suffix: '%', default: '25', slider: { min: 0, max: 100, step: 1 } },
   ],
   outputs: [
@@ -84,6 +105,27 @@ export const DiscountCalculatorClient = makeCalculatorClient({
       paid: `${fmtNum((1 - discount / 100) * 100, 0)}% ${T('ofOriginal', 'of original')}`,
     }
   },
+  presets: [
+    { label: '10% off', values: { discount: '10' } },
+    { label: '25% off', values: { discount: '25' } },
+    { label: '50% off', values: { discount: '50' } },
+    { label: '70% off', values: { discount: '70' } },
+  ],
+  chart: { kind: 'compare', title: 'You pay vs you save' },
+  compare: (v) => {
+    const price = toNum(v.price), d = toNum(v.discount)
+    if (!(price >= 0) || !(d >= 0) || d > 100) return null
+    const save = price * (d / 100)
+    return {
+      rows: [
+        { label: 'Original price', segments: [
+          { label: 'You pay', value: price - save, color: '#3b82f6' },
+          { label: 'You save', value: save, color: '#22c55e' },
+        ] },
+      ],
+      formatTotal: (n) => fmtUSD(n),
+    }
+  },
   note: '🛍️ To stack two discounts, calculate the first discount, then use the result as the new original price.',
 })
 
@@ -93,7 +135,7 @@ export const DiscountCalculatorClient = makeCalculatorClient({
 export const SalesTaxCalculatorClient = makeCalculatorClient({
   slug: 'sales-tax-calculator',
   inputs: [
-    { key: 'amount', label: 'Amount', suffix: '$', default: '100' },
+    { key: 'amount', label: 'Amount', suffix: '$', default: '100', slider: { min: 0, max: 2000, step: 10 } },
     { key: 'rate', label: 'Tax rate', suffix: '%', default: '8.25', slider: { min: 0, max: 20, step: 0.25 } },
     {
       key: 'mode',
@@ -134,6 +176,34 @@ export const SalesTaxCalculatorClient = makeCalculatorClient({
     return {
       tax: fmtUSD(tax),
       result: fmtUSD(amount + tax),
+    }
+  },
+  chart: { kind: 'compare', title: 'Net vs tax' },
+  compare: (v) => {
+    const amount = toNum(v.amount), rate = toNum(v.rate)
+    if (!(amount >= 0) || v.mode !== 'remove' && !(rate >= 0)) return null
+    if (v.mode === 'remove') {
+      if (rate <= -100) return null
+      const net = amount / (1 + rate / 100)
+      return {
+        rows: [
+          { label: 'Final amount', segments: [
+            { label: 'Net amount', value: net, color: '#3b82f6' },
+            { label: 'Tax', value: amount - net, color: '#f59e0b' },
+          ] },
+        ],
+        formatTotal: (n) => fmtUSD(n),
+      }
+    }
+    const tax = amount * (rate / 100)
+    return {
+      rows: [
+        { label: 'Final amount', segments: [
+          { label: 'Net amount', value: amount, color: '#3b82f6' },
+          { label: 'Tax', value: tax, color: '#f59e0b' },
+        ] },
+      ],
+      formatTotal: (n) => fmtUSD(n),
     }
   },
   note: '💰 Use "Remove tax" to find the pre-tax amount when you only have the final total — common for VAT and GST.',
@@ -322,7 +392,7 @@ const LENGTH_UNITS: Record<string, { label: string; toMeters: number }> = {
 export const LengthConverterClient = makeCalculatorClient({
   slug: 'length-converter',
   inputs: [
-    { key: 'value', label: 'Value to convert', default: '1', placeholder: '1' },
+    { key: 'value', label: 'Value to convert', default: '1', placeholder: '1', slider: { min: 0, max: 1000, step: 1 } },
     {
       key: 'from',
       label: 'From unit',

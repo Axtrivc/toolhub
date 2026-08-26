@@ -9,6 +9,9 @@ const FORMULA = 'mean = ( Σ xᵢ ) / n'
 export const averageCalculatorL10n: ToolL10n = {
   zh: {
     ui: {
+      'chartTitle': '你的数据',
+      'line.value': '数值',
+      'line.mean': '平均值',
       'in.numbers': '数字(用逗号、空格或换行分隔)',
       'out.count': '个数',
       'out.sum': '总和',
@@ -37,6 +40,9 @@ export const averageCalculatorL10n: ToolL10n = {
   },
   es: {
     ui: {
+      'chartTitle': 'Tus números',
+      'line.value': 'Valor',
+      'line.mean': 'Media',
       'in.numbers': 'Números (sepáralos con comas, espacios o saltos de línea)',
       'out.count': 'Cantidad',
       'out.sum': 'Suma',
@@ -65,6 +71,9 @@ export const averageCalculatorL10n: ToolL10n = {
   },
   de: {
     ui: {
+      'chartTitle': 'Deine Zahlen',
+      'line.value': 'Wert',
+      'line.mean': 'Mittelwert',
       'in.numbers': 'Zahlen (trenne mit Kommas, Leerzeichen oder Zeilenumbrüchen)',
       'out.count': 'Anzahl',
       'out.sum': 'Summe',
