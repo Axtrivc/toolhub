@@ -4,6 +4,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react'
 import { RefreshCw } from 'lucide-react'
 import { CopyButton } from '@/components/CopyButton'
 import { ResultActions } from '@/components/ResultActions'
+import { GaugeChart } from '@/components/charts/GaugeChart'
 import { useApp } from '@/components/providers/AppProviders'
 import { tui } from '@/lib/i18n/tool-l10n'
 
@@ -257,6 +258,21 @@ export function SecretKeyGeneratorClient() {
           {L(strength.key, strength.label)}
         </span>
       </div>
+
+      {/* 熵值仪表盘:长度/格式变化时指针 spring 滑动,「够不够强」一眼可见 */}
+      <GaugeChart
+        title={L('entropyGauge', 'Entropy strength')}
+        value={bits}
+        min={0}
+        max={512}
+        zones={[
+          { upTo: 80, color: '#ef4444', label: L('strengthWeak', 'Weak') },
+          { upTo: 128, color: '#f59e0b', label: L('strengthGood', 'Good') },
+          { upTo: 256, color: '#22c55e', label: L('strengthStrong', 'Strong') },
+          { upTo: 512, color: '#3b82f6', label: L('strengthExcellent', 'Excellent') },
+        ]}
+        formatValue={(n) => `${Math.round(n)} bits`}
+      />
 
       {/* 生成数量 */}
       <div className="flex flex-wrap items-center gap-3">

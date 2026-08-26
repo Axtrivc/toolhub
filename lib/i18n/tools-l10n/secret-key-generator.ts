@@ -7,6 +7,8 @@ import type { ToolL10n } from '../tool-l10n'
 export const secretKeyGeneratorL10n: ToolL10n = {
   zh: {
     ui: {
+      'entropyGauge': '熵值强度',
+      'strengthExcellent': '极佳',
       'bits': '比特',
       'bytes': '字节',
       'chars': '字符',
@@ -57,6 +59,8 @@ export const secretKeyGeneratorL10n: ToolL10n = {
   },
   es: {
     ui: {
+      'entropyGauge': 'Fuerza de entropía',
+      'strengthExcellent': 'Excelente',
       'bits': 'bits',
       'bytes': 'bytes',
       'chars': 'caracteres',
@@ -107,6 +111,8 @@ export const secretKeyGeneratorL10n: ToolL10n = {
   },
   de: {
     ui: {
+      'entropyGauge': 'Entropie-Stärke',
+      'strengthExcellent': 'Ausgezeichnet',
       'bits': 'Bits',
       'bytes': 'Bytes',
       'chars': 'Zeichen',
