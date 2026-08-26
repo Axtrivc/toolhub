@@ -14,6 +14,10 @@ export const PaintCalculatorL10n: ToolL10n = {
       { q: '为什么漆要一次买齐?', a: '不同生产批次的调色会略有差异——桶里看不出来,上墙就看得见。先算好总量、一次买齐;实在要补货,把新桶和旧桶剩漆混在一起("兑桶")抹平色差。' },
     ],
     ui: {
+      'chartTitle': '实际用量 vs 购买量',
+      'cmp.0': '实际用量',
+      'cmp.1': '购买量(含余量)',
+      'cmpseg.0': '升',
       'in.assumption': '涂布率假设',
       'in.cans': '标准罐/桶数',
       'in.coats': '涂刷遍数',
@@ -48,6 +52,10 @@ export const PaintCalculatorL10n: ToolL10n = {
       { q: '¿Por qué comprar todos los botes a la vez?', a: 'El tinte varía ligeramente entre lotes de producción: imperceptible en el bote, visible en la pared. Calcula el total primero y cómpralo de una vez; si debes ampliar después, mezcla el bote nuevo con el sobrante del viejo para igualar el tono.' },
     ],
     ui: {
+      'chartTitle': 'Necesidad real vs compra',
+      'cmp.0': 'Necesidad exacta',
+      'cmp.1': 'Comprar (con margen)',
+      'cmpseg.0': 'Litros',
       'in.assumption': 'Supuesto de cobertura',
       'in.cans': 'Botes/cubos estándar',
       'in.coats': 'Manos',
@@ -82,6 +90,10 @@ export const PaintCalculatorL10n: ToolL10n = {
       { q: 'Warum alle Eimer auf einmal kaufen?', a: 'Die Abtönung variiert leicht zwischen Produktionschargen — im Eimer unsichtbar, an der Wand sichtbar. Erst den Gesamtbedarf rechnen und in einem Einkauf kaufen; falls du später nachkaufen musst, mische den neuen Eimer mit dem Rest des alten („boxen“), um den Ton anzugleichen.' },
     ],
     ui: {
+      'chartTitle': 'Bedarf vs. Kaufmenge',
+      'cmp.0': 'Genauer Bedarf',
+      'cmp.1': 'Kauf (mit Zuschlag)',
+      'cmpseg.0': 'Liter',
       'in.assumption': 'Deckungsannahme',
       'in.cans': 'Standard-Dosen/Eimer',
       'in.coats': 'Anstriche',

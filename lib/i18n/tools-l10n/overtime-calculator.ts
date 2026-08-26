@@ -13,6 +13,10 @@ export const OvertimeCalculatorL10n: ToolL10n = {
       { q: '我是拿月薪的,适用吗?', a: '仅当你属于"非豁免"员工时适用。用周薪 ÷ 40 得出常规时薪,连同加班时数一起填入,倍数即从这里套用。真正豁免的员工无论工作多少小时都没有加班费。' },
     ],
     ui: {
+      'chartTitle': '周薪构成',
+      'slice.regularPay': '常规工资',
+      'slice.otPay': '加班费',
+      'chartCenter': '周薪合计',
       'in.base': '时薪',
       'in.otHours': '每周加班工时',
       'in.otMultiplier': '加班倍率',
@@ -43,6 +47,10 @@ export const OvertimeCalculatorL10n: ToolL10n = {
       { q: 'Cobro salario fijo, ¿me aplica?', a: 'Solo si eres no exento. Calcula tu tarifa horaria como salario semanal ÷ 40, introdúcela con tus horas extra y el multiplicador se aplica desde ahí. Los empleados exentos no reciben horas extra por muchas que trabajen.' },
     ],
     ui: {
+      'chartTitle': 'Desglose del salario semanal',
+      'slice.regularPay': 'Paga regular',
+      'slice.otPay': 'Paga de horas extra',
+      'chartCenter': 'Total semanal',
       'in.base': 'Salario por hora',
       'in.otHours': 'Horas extra/semana',
       'in.otMultiplier': 'Multiplicador de horas extra',
@@ -73,6 +81,10 @@ export const OvertimeCalculatorL10n: ToolL10n = {
       { q: 'Ich bin Festangestellt — gilt das für mich?', a: 'Nur wenn du non-exempt bist. Leite deinen Regel-Stundenlohn her (Wochengehalt ÷ 40), gib ihn mit deinen Überstunden ein, und der Multiplikator greift von dort. Wirklich Exempt- Beschäftigte erhalten unabhängig von den Stunden keine Überstunden.' },
     ],
     ui: {
+      'chartTitle': 'Wochenlohn-Aufschlüsselung',
+      'slice.regularPay': 'Regelarbeitslohn',
+      'slice.otPay': 'Überstundenlohn',
+      'chartCenter': 'Wochensumme',
       'in.base': 'Stundenlohn',
       'in.otHours': 'Überstunden/Woche',
       'in.otMultiplier': 'Überstunden-Faktor',

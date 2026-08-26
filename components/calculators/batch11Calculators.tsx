@@ -15,10 +15,10 @@ export const FuelCostCalculatorClient = makeCalculatorClient({
   slug: 'fuel-cost-calculator',
   urlState: true,
   inputs: [
-    { key: 'distance', label: 'Distance', suffix: 'km', default: '450' },
-    { key: 'consumption', label: 'Consumption', suffix: 'L/100km', default: '7.5' },
-    { key: 'price', label: 'Fuel price', suffix: '$/L', default: '1.65' },
-    { key: 'people', label: 'Split between people', default: '1' },
+    { key: 'distance', label: 'Distance', suffix: 'km', default: '450', slider: { min: 1, max: 3000, step: 10 } },
+    { key: 'consumption', label: 'Consumption', suffix: 'L/100km', default: '7.5', slider: { min: 3, max: 20, step: 0.1 } },
+    { key: 'price', label: 'Fuel price', suffix: '$/L', default: '1.65', slider: { min: 0.5, max: 3, step: 0.01 } },
+    { key: 'people', label: 'Split between people', default: '1', slider: { min: 1, max: 10, step: 1 } },
     { key: 'roundTrip', label: 'Trip type', default: 'one', options: [
       { label: 'One way', value: 'one' },
       { label: 'Round trip (×2)', value: 'round' },
@@ -48,6 +48,24 @@ export const FuelCostCalculatorClient = makeCalculatorClient({
       per100: fmtUSD(consumption * price),
     }
   },
+  presets: [
+    { label: 'Weekend getaway', values: { distance: '180', consumption: '7.5', price: '1.65', people: '2', roundTrip: 'round' } },
+    { label: 'Weekly commute', values: { distance: '40', consumption: '9', price: '1.8', people: '1', roundTrip: 'round' } },
+    { label: '1000 km road trip', values: { distance: '1000', consumption: '6.5', price: '1.7', people: '3', roundTrip: 'one' } },
+  ],
+  chart: { kind: 'compare', title: 'One way vs round trip' },
+  compare: (v) => {
+    const d = toNum(v.distance), c = toNum(v.consumption), p = toNum(v.price)
+    if (!(d >= 0) || !(c >= 0) || !(p >= 0)) return null
+    const cost = (dist: number) => (dist * c / 100) * p
+    return {
+      rows: [
+        { label: 'One way', segments: [{ label: 'Fuel cost', value: cost(d), color: '#3b82f6' }] },
+        { label: 'Round trip', segments: [{ label: 'Fuel cost', value: cost(d * 2), color: '#22c55e' }] },
+      ],
+      formatTotal: (n) => fmtUSD(n),
+    }
+  },
   note: '⛽ Highway driving typically beats city consumption by 20-30%; use your real-world average from the trip computer for accuracy. Metric and imperial users: enter km/L/price-per-liter or convert once.',
 })
 
@@ -56,9 +74,9 @@ export const SubscriptionCostCalculatorClient = makeCalculatorClient({
   slug: 'subscription-cost-calculator',
   urlState: true,
   inputs: [
-    { key: 'monthlySubs', label: 'Monthly subscriptions total', suffix: '$', default: '45' },
-    { key: 'yearlySubs', label: 'Yearly subscriptions total', suffix: '$', default: '120' },
-    { key: 'quarterlySubs', label: 'Quarterly subscriptions total', suffix: '$', default: '0' },
+    { key: 'monthlySubs', label: 'Monthly subscriptions total', suffix: '$', default: '45', slider: { min: 0, max: 500, step: 5 } },
+    { key: 'yearlySubs', label: 'Yearly subscriptions total', suffix: '$', default: '120', slider: { min: 0, max: 2000, step: 10 } },
+    { key: 'quarterlySubs', label: 'Quarterly subscriptions total', suffix: '$', default: '0', slider: { min: 0, max: 600, step: 5 } },
   ],
   outputs: [
     { key: 'monthly', label: 'True monthly cost', highlight: true },
@@ -82,6 +100,17 @@ export const SubscriptionCostCalculatorClient = makeCalculatorClient({
       workHours: `${fmtNum(perYear / 25, 0)} h`,
     }
   },
+  chart: { kind: 'series', title: 'Total paid over time' },
+  series: (v) => {
+    const perMonth = toNum(v.monthlySubs) + toNum(v.yearlySubs) / 12 + toNum(v.quarterlySubs) / 3
+    if (!(perMonth >= 0)) return null
+    const marks = [0, 12, 24, 36, 48, 60]
+    return {
+      xLabels: ['Now', 'Y1', 'Y2', 'Y3', 'Y4', 'Y5'],
+      lines: [{ key: 'total', label: 'Total paid', color: '#3b82f6', points: marks.map((m) => perMonth * m), area: true }],
+      formatY: (n) => fmtUSD(n),
+    }
+  },
   note: '💡 List every recurring charge: streaming, cloud storage, apps, gym, domains, news. The 5-year column is the honest price of "it is only $9.99 a month".',
 })
 
@@ -89,14 +118,14 @@ export const SubscriptionCostCalculatorClient = makeCalculatorClient({
 export const OvertimeCalculatorClient = makeCalculatorClient({
   slug: 'overtime-calculator',
   inputs: [
-    { key: 'base', label: 'Hourly rate', suffix: '$', default: '25' },
-    { key: 'regularHours', label: 'Regular hours/week', suffix: 'h', default: '40' },
+    { key: 'base', label: 'Hourly rate', suffix: '$', default: '25', slider: { min: 5, max: 150, step: 0.5 } },
+    { key: 'regularHours', label: 'Regular hours/week', suffix: 'h', default: '40', slider: { min: 0, max: 60, step: 1 } },
     { key: 'otMultiplier', label: 'OT multiplier', default: '1.5', options: [
       { label: 'Time-and-a-half (×1.5)', value: '1.5' },
       { label: 'Double time (×2)', value: '2' },
       { label: 'Custom below', value: 'custom' },
     ]},
-    { key: 'otHours', label: 'Overtime hours/week', suffix: 'h', default: '8' },
+    { key: 'otHours', label: 'Overtime hours/week', suffix: 'h', default: '8', slider: { min: 0, max: 40, step: 0.5 } },
   ],
   outputs: [
     { key: 'regularPay', label: 'Regular pay' },
@@ -122,6 +151,14 @@ export const OvertimeCalculatorClient = makeCalculatorClient({
       otRate: `${fmtUSD(otRateV)} (×${effMult})`,
     }
   },
+  chart: {
+    title: 'Weekly pay breakdown',
+    slices: [
+      { valueKey: 'regularPay', label: 'Regular pay', color: '#3b82f6' },
+      { valueKey: 'otPay', label: 'Overtime pay', color: '#22c55e' },
+    ],
+    centerLabel: 'Total weekly',
+  },
   note: '💼 US federal law (FLSA) requires ×1.5 past 40 h/week for non-exempt employees; some states mandate daily overtime and ×2 for holidays. Salaried non-exempt workers use regular rate ÷ 40.',
 })
 
@@ -130,13 +167,13 @@ export const TakeHomePayCalculatorClient = makeCalculatorClient({
   slug: 'take-home-pay-calculator',
   urlState: true,
   inputs: [
-    { key: 'gross', label: 'Annual gross salary', suffix: '$', default: '75000' },
+    { key: 'gross', label: 'Annual gross salary', suffix: '$', default: '75000', slider: { min: 10000, max: 500000, step: 5000 } },
     { key: 'filing', label: 'Filing status', default: 'single', options: [
       { label: 'Single', value: 'single' },
       { label: 'Married filing jointly', value: 'married' },
     ]},
-    { key: 'preTaxPct', label: '401(k)/pre-tax %', suffix: '%', default: '6' },
-    { key: 'premiums', label: 'Health premiums/year', suffix: '$', default: '2000' },
+    { key: 'preTaxPct', label: '401(k)/pre-tax %', suffix: '%', default: '6', slider: { min: 0, max: 30, step: 1 } },
+    { key: 'premiums', label: 'Health premiums/year', suffix: '$', default: '2000', slider: { min: 0, max: 15000, step: 250 } },
   ],
   outputs: [
     { key: 'annualNet', label: 'Estimated annual net', highlight: true },
@@ -178,6 +215,15 @@ export const TakeHomePayCalculatorClient = makeCalculatorClient({
       fedTax: fmtUSD(fed),
     }
   },
+  chart: {
+    title: 'Where your salary goes',
+    slices: [
+      { valueKey: 'annualNet', label: 'Take-home pay', color: '#22c55e' },
+      { valueKey: 'fedTax', label: 'Federal income tax', color: '#ef4444' },
+      { valueKey: 'fica', label: 'FICA (SS + Medicare)', color: '#f59e0b' },
+    ],
+    centerLabel: 'Gross',
+  },
   note: '🇺🇸 Simplified estimate: standard deduction only, no state tax, credits, or supplemental withholding — actual paychecks vary. FICA uses exact statutory rates (6.2% SS up to the wage base, 1.45% Medicare).',
 })
 
@@ -185,8 +231,8 @@ export const TakeHomePayCalculatorClient = makeCalculatorClient({
 export const WeddingBudgetCalculatorClient = makeCalculatorClient({
   slug: 'wedding-budget-calculator',
   inputs: [
-    { key: 'total', label: 'Total budget', suffix: '$', default: '25000' },
-    { key: 'guests', label: 'Guest count', default: '80' },
+    { key: 'total', label: 'Total budget', suffix: '$', default: '25000', slider: { min: 1000, max: 150000, step: 500 } },
+    { key: 'guests', label: 'Guest count', default: '80', slider: { min: 10, max: 400, step: 5 } },
   ],
   outputs: [
     { key: 'venue', label: 'Venue & rentals (25%)' },
@@ -214,6 +260,18 @@ export const WeddingBudgetCalculatorClient = makeCalculatorClient({
       perGuest: fmtUSD(total / guests),
     }
   },
+  chart: {
+    title: 'Budget breakdown',
+    slices: [
+      { valueKey: 'venue', label: 'Venue & rentals', color: '#3b82f6' },
+      { valueKey: 'catering', label: 'Catering & bar', color: '#22c55e' },
+      { valueKey: 'photo', label: 'Photo & video', color: '#a855f7' },
+      { valueKey: 'attire', label: 'Attire & beauty', color: '#ec4899' },
+      { valueKey: 'music', label: 'Music & flowers', color: '#f59e0b' },
+      { valueKey: 'misc', label: 'Stationery & buffer', color: '#64748b' },
+    ],
+    centerLabel: 'Total',
+  },
   note: '💍 Percentages reflect common US planning guidance; venue+catering typically absorb over half. Per-guest cost is the lever that moves everything else — trimming 10 guests frees more than skipping favors.',
 })
 
@@ -224,8 +282,8 @@ export const WeddingBudgetCalculatorClient = makeCalculatorClient({
 export const HeartRateZoneCalculatorClient = makeCalculatorClient({
   slug: 'heart-rate-zone-calculator',
   inputs: [
-    { key: 'age', label: 'Age', default: '30' },
-    { key: 'resting', label: 'Resting heart rate', suffix: 'bpm', default: '60' },
+    { key: 'age', label: 'Age', default: '30', slider: { min: 10, max: 100, step: 1 } },
+    { key: 'resting', label: 'Resting heart rate', suffix: 'bpm', default: '60', slider: { min: 40, max: 100, step: 1 } },
   ],
   outputs: [
     { key: 'max', label: 'Est. max heart rate' },
@@ -253,6 +311,22 @@ export const HeartRateZoneCalculatorClient = makeCalculatorClient({
       z5: `${Math.round(resting + (max - resting) * 0.9)}–${max} bpm`,
     }
   },
+  chart: { kind: 'series', title: 'Training zone ladder' },
+  series: (v) => {
+    const age = toNum(v.age), resting = toNum(v.resting)
+    if (!Number.isInteger(age) || age < 10 || age > 100 || resting < 30 || resting > 120) return null
+    const max = 220 - age
+    const at = (p: number) => Math.round(resting + (max - resting) * p)
+    const edges = [0.5, 0.6, 0.7, 0.8, 0.9, 1]
+    return {
+      xLabels: ['Z1', 'Z2', 'Z3', 'Z4', 'Z5'],
+      lines: [
+        { key: 'lower', label: 'Zone lower bound', color: '#3b82f6', points: edges.slice(0, 5).map((e) => at(e)) },
+        { key: 'upper', label: 'Zone upper bound', color: '#22c55e', points: edges.slice(1).map((e) => at(e)), area: true },
+      ],
+      formatY: (n) => `${Math.round(n)} bpm`,
+    }
+  },
   note: '❤️ Karvonen zones use heart-rate reserve (max − resting), which personalizes intensity far better than raw % of max. Measure resting HR right after waking. Zone 2 builds aerobic base — most training time belongs there.',
 })
 
@@ -260,9 +334,9 @@ export const HeartRateZoneCalculatorClient = makeCalculatorClient({
 export const CaffeineCalculatorClient = makeCalculatorClient({
   slug: 'caffeine-calculator',
   inputs: [
-    { key: 'mg', label: 'Caffeine consumed', suffix: 'mg', default: '200' },
-    { key: 'hoursAgo', label: 'Hours since drinking it', suffix: 'h', default: '3' },
-    { key: 'bedtimeIn', label: 'Hours until bed', suffix: 'h', default: '8' },
+    { key: 'mg', label: 'Caffeine consumed', suffix: 'mg', default: '200', slider: { min: 25, max: 600, step: 25 } },
+    { key: 'hoursAgo', label: 'Hours since drinking it', suffix: 'h', default: '3', slider: { min: 0, max: 12, step: 0.5 } },
+    { key: 'bedtimeIn', label: 'Hours until bed', suffix: 'h', default: '8', slider: { min: 0, max: 16, step: 0.5 } },
   ],
   outputs: [
     { key: 'now', label: 'In your system now', highlight: true },
@@ -291,6 +365,20 @@ export const CaffeineCalculatorClient = makeCalculatorClient({
       advice,
     }
   },
+  chart: {
+    kind: 'gauge',
+    title: 'Caffeine in your system now',
+    valueKey: 'now',
+    min: 0,
+    max: 600,
+    zones: [
+      { upTo: 100, color: '#22c55e', label: 'Light' },
+      { upTo: 200, color: '#eab308', label: 'Moderate' },
+      { upTo: 400, color: '#f97316', label: 'High' },
+      { upTo: 600, color: '#ef4444', label: 'Very high' },
+    ],
+    formatValue: (n) => `${Math.round(n)} mg`,
+  },
   note: '☕ Half-life averages ~5 hours but ranges 3-7 (smokers clear faster, oral contraceptives slower). Coffee ≈95 mg/cup, tea ≈47, cola ≈34, energy drinks ≈80-300. Sensitivity varies widely by genetics (CYP1A2).',
 })
 
@@ -299,9 +387,9 @@ export const StepsToCaloriesCalculatorClient = makeCalculatorClient({
   slug: 'steps-to-calories-calculator',
   urlState: true,
   inputs: [
-    { key: 'steps', label: 'Daily steps', default: '10000' },
-    { key: 'weight', label: 'Weight', suffix: 'kg', default: '70' },
-    { key: 'height', label: 'Height', suffix: 'cm', default: '175' },
+    { key: 'steps', label: 'Daily steps', default: '10000', slider: { min: 0, max: 30000, step: 500 } },
+    { key: 'weight', label: 'Weight', suffix: 'kg', default: '70', slider: { min: 30, max: 200, step: 1 } },
+    { key: 'height', label: 'Height', suffix: 'cm', default: '175', slider: { min: 120, max: 220, step: 1 } },
     { key: 'pace', label: 'Walking pace', default: 'moderate', options: [
       { label: 'Slow stroll (≈3 km/h)', value: 'slow' },
       { label: 'Moderate walk (≈5 km/h)', value: 'moderate' },
@@ -335,6 +423,22 @@ export const StepsToCaloriesCalculatorClient = makeCalculatorClient({
       minutes: `${Math.round(hours * 60)} min`,
     }
   },
+  chart: { kind: 'compare', title: 'Steps vs daily goal' },
+  compare: (v) => {
+    const steps = toNum(v.steps)
+    if (!(steps >= 0)) return null
+    const done = Math.min(steps, 10000)
+    return {
+      rows: [
+        { label: 'Your day', segments: [
+          { label: 'Steps done', value: done, color: '#22c55e' },
+          { label: 'To goal', value: Math.max(0, 10000 - done), color: '#cbd5e1' },
+        ] },
+        { label: 'Daily goal', segments: [{ label: 'Goal', value: 10000, color: '#3b82f6' }] },
+      ],
+      formatTotal: (n) => `${Math.round(n).toLocaleString('en-US')}`,
+    }
+  },
   note: '👟 Estimates via MET method (2011 Compendium). Fitness trackers often read high because they credit all movement including BMR overlap. 10,000 steps ≈ 7-8 km for average adults.',
 })
 
@@ -343,11 +447,11 @@ export const PaintCalculatorClient = makeCalculatorClient({
   slug: 'paint-calculator',
   urlState: true,
   inputs: [
-    { key: 'perimeter', label: 'Room perimeter', suffix: 'm', default: '14' },
-    { key: 'wallHeight', label: 'Wall height', suffix: 'm', default: '2.4' },
-    { key: 'doors', label: 'Doors', default: '2' },
-    { key: 'windows', label: 'Windows', default: '2' },
-    { key: 'coats', label: 'Coats', default: '2' },
+    { key: 'perimeter', label: 'Room perimeter', suffix: 'm', default: '14', slider: { min: 4, max: 60, step: 0.5 } },
+    { key: 'wallHeight', label: 'Wall height', suffix: 'm', default: '2.4', slider: { min: 2, max: 4.5, step: 0.1 } },
+    { key: 'doors', label: 'Doors', default: '2', slider: { min: 0, max: 8, step: 1 } },
+    { key: 'windows', label: 'Windows', default: '2', slider: { min: 0, max: 10, step: 1 } },
+    { key: 'coats', label: 'Coats', default: '2', slider: { min: 1, max: 4, step: 1 } },
     { key: 'unit', label: 'Paint sold in', default: 'liter', options: [
       { label: 'Liters', value: 'liter' },
       { label: 'US gallons', value: 'gallon' },
@@ -382,6 +486,23 @@ export const PaintCalculatorClient = makeCalculatorClient({
       assumption: '10 m²/L (400 ft²/gal), +10% margin',
     }
   },
+  chart: { kind: 'compare', title: 'Exact need vs what to buy' },
+  compare: (v) => {
+    const per = toNum(v.perimeter), h = toNum(v.wallHeight)
+    const doors = Math.max(0, toNum(v.doors)), windows = Math.max(0, toNum(v.windows))
+    const coats = Math.min(Math.max(1, Math.round(toNum(v.coats))), 4)
+    if (!(per > 0) || !(h > 0)) return null
+    const net = Math.max(0, per * h - doors * 1.85 - windows * 1.4)
+    const exact = (net * coats) / 10
+    const buy = Math.ceil(exact * 1.1)
+    return {
+      rows: [
+        { label: 'Exact need', segments: [{ label: 'Liters', value: exact, color: '#3b82f6' }] },
+        { label: 'Buy (with margin)', segments: [{ label: 'Liters', value: buy, color: '#f59e0b' }] },
+      ],
+      formatTotal: (n) => `${n.toFixed(1)} L`,
+    }
+  },
   note: '🎨 Coverage assumes smooth primed walls at the typical 10 m²/L. Textured surfaces, bare drywall, or dramatic color changes eat 20-40% more. Buy one can from the same batch — batch tinting varies.',
 })
 
@@ -389,7 +510,7 @@ export const PaintCalculatorClient = makeCalculatorClient({
 export const DogAgeCalculatorClient = makeCalculatorClient({
   slug: 'dog-age-calculator',
   inputs: [
-    { key: 'dogAge', label: 'Dog\'s age', suffix: 'years', default: '5' },
+    { key: 'dogAge', label: 'Dog\'s age', suffix: 'years', default: '5', slider: { min: 0, max: 20, step: 0.5 } },
     { key: 'size', label: 'Breed size', default: 'medium', options: [
       { label: 'Small (< 9 kg / 20 lb)', value: 'small' },
       { label: 'Medium (9-23 kg)', value: 'medium' },
@@ -424,6 +545,21 @@ export const DogAgeCalculatorClient = makeCalculatorClient({
       lifeStage: stage,
       mythNote: 'The ×7 rule ignores maturation pace',
     }
+  },
+  chart: {
+    kind: 'gauge',
+    title: 'Life stage',
+    valueKey: 'humanAge',
+    min: 0,
+    max: 80,
+    zones: [
+      { upTo: 15, color: '#f97316', label: 'Puppy' },
+      { upTo: 24, color: '#f59e0b', label: 'Junior' },
+      { upTo: 40, color: '#22c55e', label: 'Adult (prime)' },
+      { upTo: 56, color: '#3b82f6', label: 'Mature' },
+      { upTo: 80, color: '#a855f7', label: 'Senior' },
+    ],
+    formatValue: (n) => `${Math.round(n)} yr`,
   },
   note: '🐶 First-year dogs hit teenager-level maturity (~15 human years) and are adult by two — impossible under ×7. Large breeds age faster after that and reach senior status years earlier than toys.',
 })

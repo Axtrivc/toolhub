@@ -14,6 +14,8 @@ export const SubscriptionCostCalculatorL10n: ToolL10n = {
       { q: '为什么要看五年?', a: '长周期会揭示"每月才 9.99"的真实价格——按这个费率一项服务五年约 600 美元。这和贷款看利息总支出是同一个道理:总价比每月零头更能说明问题。' },
     ],
     ui: {
+      'chartTitle': '累计支出',
+      'line.total': '累计已付',
       'in.fiveYear': '五年累计',
       'in.monthly': '真实月支出',
       'in.monthlySubs': '月付订阅合计',
@@ -40,6 +42,8 @@ export const SubscriptionCostCalculatorL10n: ToolL10n = {
       { q: '¿Por qué mostrar cinco años?', a: 'Los plazos largos revelan el precio real de «solo 9,99 al mes»: un servicio a esa tasa son unos 600 $ en cinco años. Es el mismo encuadre que usan los prestamistas con los intereses: el total importa más que el pago diminuto.' },
     ],
     ui: {
+      'chartTitle': 'Total pagado con el tiempo',
+      'line.total': 'Total pagado',
       'in.fiveYear': 'En 5 años',
       'in.monthly': 'Coste mensual real',
       'in.monthlySubs': 'Total de suscripciones mensuales',
@@ -66,6 +70,8 @@ export const SubscriptionCostCalculatorL10n: ToolL10n = {
       { q: 'Warum fünf Jahre zeigen?', a: 'Lange Zeiträume enthüllen den echten Preis von „das sind nur 9,99 im Monat“ — ein Dienst in dieser Höhe sind rund 600 $ über fünf Jahre. Derselbe Rahmen wie bei Kreditzinsen: Die Gesamtsumme zählt mehr als die winzige Rate.' },
     ],
     ui: {
+      'chartTitle': 'Insgesamt bezahlt',
+      'line.total': 'Gesamt bezahlt',
       'in.fiveYear': 'Über 5 Jahre',
       'in.monthly': 'Wahre Monatskosten',
       'in.monthlySubs': 'Monatliche Abos gesamt',

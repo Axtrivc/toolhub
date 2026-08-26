@@ -14,6 +14,9 @@ export const HeartRateZoneCalculatorL10n: ToolL10n = {
       { q: '训练应该落在哪个区间?', a: '每周跑量的大头应放在 Zone 2(储备的 60-70%)——能正常聊天的有氧基础。Zone 4-5 是少量安排的高强度课。最常见的错误是长期泡在 Zone 3:恢复不过来,又不足以刺激适应。' },
     ],
     ui: {
+      'chartTitle': '训练区间阶梯',
+      'line.lower': '区间下限',
+      'line.upper': '区间上限',
       'in.age': '年龄',
       'in.max': '估计最大心率',
       'in.resting': '静息心率',
@@ -42,6 +45,9 @@ export const HeartRateZoneCalculatorL10n: ToolL10n = {
       { q: '¿En qué zona debo entrenar?', a: 'La mayor parte del volumen semanal pertenece a la Zona 2 (60-70 % de la reserva): base aeróbica a ritmo conversacional. Las zonas 4-5 son sesiones punta poco frecuentes. El error clásico es vivir en la Zona 3: demasiado para recuperar, demasiado poco para adaptarse.' },
     ],
     ui: {
+      'chartTitle': 'Escalera de zonas de entrenamiento',
+      'line.lower': 'Límite inferior de zona',
+      'line.upper': 'Límite superior de zona',
       'in.age': 'Edad',
       'in.max': 'FC máxima estimada',
       'in.resting': 'Frecuencia cardíaca en reposo',
@@ -70,6 +76,9 @@ export const HeartRateZoneCalculatorL10n: ToolL10n = {
       { q: 'In welcher Zone soll ich trainieren?', a: 'Der Großteil des Wochenumfangs gehört in Zone 2 (60-70 % der Reserve) — Grundlagenarbeit im Gesprächstempo. Zone 4-5 sind scharfe, seltene Einheiten. Der klassische Fehler ist das Dauercamp in Zone 3: zu hart zur Erholung, zu leicht für Anpassung.' },
     ],
     ui: {
+      'chartTitle': 'Trainingszonen-Leiter',
+      'line.lower': 'Untere Zonengrenze',
+      'line.upper': 'Obere Zonengrenze',
       'in.age': 'Alter',
       'in.max': 'Geschätzte Maximalpuls',
       'in.resting': 'Ruhepuls',
