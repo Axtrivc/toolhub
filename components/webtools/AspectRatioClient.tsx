@@ -64,6 +64,15 @@ export function AspectRatioClient() {
     setRatioH(h)
   }
 
+  // 形状预览:按当前比例等比缩放到预览框内,尺寸标注随比例实时变形
+  const preview = useMemo(() => {
+    if (ratioW <= 0 || ratioH <= 0) return null
+    const boxW = 300
+    const boxH = 170
+    const k = Math.min(boxW / ratioW, boxH / ratioH)
+    return { w: Math.max(24, ratioW * k), h: Math.max(24, ratioH * k) }
+  }, [ratioW, ratioH])
+
   return (
     <div className="space-y-5">
       {/* 比例输入 + 预设 */}
@@ -113,6 +122,31 @@ export function AspectRatioClient() {
           </div>
         )}
       </div>
+
+      {/* 形状预览:当前比例的等比矩形,宽度/高度标注,换比例/预设时平滑变形 */}
+      {preview && (
+        <div
+          className="flex items-center justify-center rounded-xl border p-4"
+          style={{ borderColor: 'rgb(var(--border))', backgroundColor: 'rgb(var(--bg-card))' }}
+        >
+          <div className="relative" style={{ width: preview.w, height: preview.h }}>
+            <div
+              className="h-full w-full rounded-md transition-all duration-300"
+              style={{
+                backgroundColor: 'rgb(var(--primary) / 0.10)',
+                border: '1.5px solid rgb(var(--primary))',
+                transitionTimingFunction: 'cubic-bezier(0.22,1,0.36,1)',
+              }}
+            />
+            <span
+              className="absolute inset-0 flex items-center justify-center font-mono text-sm font-semibold"
+              style={{ color: 'rgb(var(--text-muted))' }}
+            >
+              {ratioW}:{ratioH}
+            </span>
+          </div>
+        </div>
+      )}
 
       {/* 已知宽 / 高 */}
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">

@@ -1,7 +1,8 @@
 'use client'
 
 import { useState, useMemo } from 'react'
-import { CalculatorField, ResultCard, CalculatorShell, CalculatorNote } from '@/components/calculator/CalculatorField'
+import { CalculatorField, CalculatorSliderField, ResultCard, CalculatorShell, CalculatorNote } from '@/components/calculator/CalculatorField'
+import { LineAreaChart } from '@/components/charts/LineAreaChart'
 import { CopyButton } from '@/components/CopyButton'
 import { useApp } from '@/components/providers/AppProviders'
 import { tui } from '@/lib/i18n/tool-l10n'
@@ -87,12 +88,12 @@ export function CssClampCalculatorClient() {
     <CalculatorShell
       inputs={
         <>
-          <CalculatorField id="clamp-min-fs" label={L('minFontSize', 'Min font size')} suffix="px" value={minFs} onChange={setMinFs} />
-          <CalculatorField id="clamp-max-fs" label={L('maxFontSize', 'Max font size')} suffix="px" value={maxFs} onChange={setMaxFs} />
-          <CalculatorField id="clamp-min-vp" label={L('minViewport', 'Min viewport')} suffix="px" value={minVp} onChange={setMinVp} />
-          <CalculatorField id="clamp-max-vp" label={L('maxViewport', 'Max viewport')} suffix="px" value={maxVp} onChange={setMaxVp} />
-          <CalculatorField id="clamp-root" label={L('rootFontSize', 'Root font size (for rem)')} suffix="px" value={root} onChange={setRoot} />
-          <CalculatorField id="clamp-test-vp" label={L('testAtViewport', 'Test at viewport')} suffix="px" value={testVp} onChange={setTestVp} />
+          <CalculatorSliderField id="clamp-min-fs" label={L('minFontSize', 'Min font size')} suffix="px" value={minFs} onChange={setMinFs} min={8} max={48} step={0.5} />
+          <CalculatorSliderField id="clamp-max-fs" label={L('maxFontSize', 'Max font size')} suffix="px" value={maxFs} onChange={setMaxFs} min={8} max={72} step={0.5} />
+          <CalculatorSliderField id="clamp-min-vp" label={L('minViewport', 'Min viewport')} suffix="px" value={minVp} onChange={setMinVp} min={240} max={768} step={10} />
+          <CalculatorSliderField id="clamp-max-vp" label={L('maxViewport', 'Max viewport')} suffix="px" value={maxVp} onChange={setMaxVp} min={768} max={2560} step={10} />
+          <CalculatorSliderField id="clamp-root" label={L('rootFontSize', 'Root font size (for rem)')} suffix="px" value={root} onChange={setRoot} min={10} max={24} step={1} />
+          <CalculatorSliderField id="clamp-test-vp" label={L('testAtViewport', 'Test at viewport')} suffix="px" value={testVp} onChange={setTestVp} min={240} max={2560} step={10} />
         </>
       }
       results={
@@ -147,6 +148,20 @@ export function CssClampCalculatorClient() {
             {output.css}
           </pre>
         </div>
+      )}
+
+      {/* 流式字号曲线:clamp 斜坡 + min/max 两条夹紧虚线,拖滑杆实时变形 */}
+      {c && fluidPx && (
+        <LineAreaChart
+          title={L('fluidCurveTitle', 'Fluid size curve')}
+          xLabels={[320, 480, 640, 768, 1024, 1280, 1440, 1920, 2560].map((v) => `${v}px`)}
+          lines={[
+            { key: 'min', label: L('lineMin', 'Min clamp'), color: '#94a3b8', points: Array.from({ length: 9 }, () => c.minF), dashed: true },
+            { key: 'fluid', label: L('lineFluid', 'Fluid size'), color: '#3b82f6', points: [320, 480, 640, 768, 1024, 1280, 1440, 1920, 2560].map((v) => fluidPx(v)), area: true },
+            { key: 'max', label: L('lineMax', 'Max clamp'), color: '#f59e0b', points: Array.from({ length: 9 }, () => c.maxF), dashed: true },
+          ]}
+          formatY={(n) => `${Math.round(n)}px`}
+        />
       )}
 
       {/* 常见视口字号表 */}

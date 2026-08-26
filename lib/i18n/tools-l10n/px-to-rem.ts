@@ -7,6 +7,8 @@ import type { ToolL10n } from '../tool-l10n'
 export const pxToRemL10n: ToolL10n = {
   zh: {
     ui: {
+      'livePreview': '实时字号预览',
+      'sizeBarHeader': '尺寸',
       'commonSizesPrefix': '常用尺寸(root =',
       'emParentRoot': 'em(父级 = 根字号)',
       'emParentRootHeader': 'EM(父级 = 根字号)',
@@ -35,6 +37,8 @@ export const pxToRemL10n: ToolL10n = {
   },
   es: {
     ui: {
+      'livePreview': 'Vista previa de tamaño',
+      'sizeBarHeader': 'Tamaño',
       'commonSizesPrefix': 'Tamaños comunes (root =',
       'emParentRoot': 'em (padre = raíz)',
       'emParentRootHeader': 'EM (padre = raíz)',
@@ -63,6 +67,8 @@ export const pxToRemL10n: ToolL10n = {
   },
   de: {
     ui: {
+      'livePreview': 'Live-Größenvorschau',
+      'sizeBarHeader': 'Größe',
       'commonSizesPrefix': 'Gängige Größen (root =',
       'emParentRoot': 'em (parent = Root)',
       'emParentRootHeader': 'EM (parent = Root)',

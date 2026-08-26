@@ -7,6 +7,10 @@ import type { ToolL10n } from '../tool-l10n'
 export const cssClampCalculatorL10n: ToolL10n = {
   zh: {
     ui: {
+      'fluidCurveTitle': '流式字号曲线',
+      'lineMin': '下限夹紧',
+      'lineFluid': '流式字号',
+      'lineMax': '上限夹紧',
       'clampedEnd': 'px),而不再继续缩放。',
       'clampedPxOutside': 'px 的宽度超出你的 ',
       'clampedRange': 'px 视口范围,所以字号被钳制在 ',
@@ -68,6 +72,10 @@ export const cssClampCalculatorL10n: ToolL10n = {
   },
   es: {
     ui: {
+      'fluidCurveTitle': 'Curva de tamaño fluido',
+      'lineMin': 'Límite inferior',
+      'lineFluid': 'Tamaño fluido',
+      'lineMax': 'Límite superior',
       'clampedEnd': 'px) en lugar de seguir escalando.',
       'clampedPxOutside': 'px está fuera de tu rango de ',
       'clampedRange': 'px de viewport, así que la fuente se limita a ',
@@ -129,6 +137,10 @@ export const cssClampCalculatorL10n: ToolL10n = {
   },
   de: {
     ui: {
+      'fluidCurveTitle': 'Fluide Größenkurve',
+      'lineMin': 'Min-Grenze',
+      'lineFluid': 'Fluide Größe',
+      'lineMax': 'Max-Grenze',
       'clampedEnd': 'px) begrenzt statt weiter zu skalieren.',
       'clampedPxOutside': 'px liegt außerhalb deines ',
       'clampedRange': 'px Viewport-Bereichs, daher ist die Schriftgröße auf ',

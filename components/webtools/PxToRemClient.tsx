@@ -2,6 +2,7 @@
 
 import { useState, useMemo } from 'react'
 import { CopyButton } from '@/components/CopyButton'
+import { CalculatorSliderField } from '@/components/calculator/CalculatorField'
 import { useApp } from '@/components/providers/AppProviders'
 import { tui } from '@/lib/i18n/tool-l10n'
 
@@ -41,23 +42,51 @@ export function PxToRemClient() {
   const cellCls =
     'w-full rounded-lg border p-3 text-sm shadow-sm outline-none transition focus:ring-2 font-mono'
 
+  const pxNum = parseFloat(px)
+  const pxPreview = Number.isFinite(pxNum) && pxNum > 0 ? Math.min(pxNum, 120) : null
+
   return (
     <div className="space-y-5">
-      {/* 根字号 */}
-      <div className="flex items-center gap-3">
-        <label htmlFor="root-size" className="text-sm font-medium text-slate-700 dark:text-slate-300">
-          {L('rootFontSize', 'Root font size')}
-        </label>
-        <input
-          id="root-size"
-          type="number"
-          min={1}
-          value={rootSize}
-          onChange={(e) => setRootSize(Math.max(1, Number(e.target.value) || 16))}
-          className={`${cellCls} w-24`}
-          style={{ borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rgb(var(--bg-card))', color: 'rgb(var(--text))' }}
-        />
-        <span className="text-sm text-slate-400">px</span>
+      {/* 根字号(滑杆) */}
+      <CalculatorSliderField
+        id="root-size"
+        label={L('rootFontSize', 'Root font size')}
+        value={String(rootSize)}
+        onChange={(v) => setRootSize(Math.max(1, Number(v) || 16))}
+        suffix="px"
+        min={10}
+        max={28}
+        step={1}
+      />
+
+      {/* 实时字号预览:输入的 px 直接渲染成大字 + 比例条,「这个尺寸有多大」一眼可见 */}
+      <div
+        className="rounded-xl border p-4"
+        style={{ borderColor: 'rgb(var(--border))', backgroundColor: 'rgb(var(--bg-card))' }}
+      >
+        <div className="mb-2 text-xs font-medium uppercase tracking-wide" style={{ color: 'rgb(var(--text-faint))' }}>
+          {L('livePreview', 'Live size preview')}
+        </div>
+        <div className="flex min-h-16 items-end gap-4">
+          <span
+            className="leading-none transition-all duration-200"
+            style={{ fontSize: pxPreview ? `${pxPreview}px` : '16px', color: 'rgb(var(--text))' }}
+          >
+            Aa
+          </span>
+          <div className="h-2 flex-1 overflow-hidden rounded-full self-center" style={{ backgroundColor: 'rgb(var(--bg-subtle))' }}>
+            <div
+              className="h-full rounded-full transition-all duration-200"
+              style={{
+                width: `${pxPreview ? Math.min(100, (pxPreview / 80) * 100) : 20}%`,
+                backgroundColor: 'rgb(var(--primary))',
+              }}
+            />
+          </div>
+          <span className="self-center font-mono text-xs tabular-nums" style={{ color: 'rgb(var(--text-muted))' }}>
+            {px || '—'}
+          </span>
+        </div>
       </div>
 
       {/* 双向换算 */}
@@ -124,6 +153,7 @@ export function PxToRemClient() {
                 <th className="px-3 py-2 font-semibold text-slate-600 dark:text-slate-300">PX</th>
                 <th className="px-3 py-2 font-semibold text-slate-600 dark:text-slate-300">REM</th>
                 <th className="px-3 py-2 font-semibold text-slate-600 dark:text-slate-300">{L('emParentRootHeader', 'EM (parent = root)')}</th>
+                <th className="px-3 py-2 font-semibold text-slate-600 dark:text-slate-300">{L('sizeBarHeader', 'Size')}</th>
               </tr>
             </thead>
             <tbody>
@@ -134,6 +164,14 @@ export function PxToRemClient() {
                     <td className="px-3 py-1.5 font-mono">{p}</td>
                     <td className="px-3 py-1.5 font-mono">{r}</td>
                     <td className="px-3 py-1.5 font-mono">{r}</td>
+                    <td className="w-1/3 px-3 py-1.5">
+                      <div className="h-1.5 overflow-hidden rounded-full" style={{ backgroundColor: 'rgb(var(--bg-subtle))' }}>
+                        <div
+                          className="h-full rounded-full transition-all duration-200"
+                          style={{ width: `${(p / 80) * 100}%`, backgroundColor: p === rootSize ? '#22c55e' : 'rgb(var(--primary))' }}
+                        />
+                      </div>
+                    </td>
                   </tr>
                 )
               })}
