@@ -7,6 +7,8 @@ import type { ToolL10n } from '../tool-l10n'
 export const LlmCostCalculatorL10n: ToolL10n = {
   zh: {
     ui: {
+      'chartTitle': '各模型月成本',
+      'costLabel': '每月',
       'cheapest': '最便宜',
       'copySummary': '复制摘要',
       'inLabel': '每次请求输入 token',
@@ -24,6 +26,8 @@ export const LlmCostCalculatorL10n: ToolL10n = {
   },
   es: {
     ui: {
+      'chartTitle': 'Coste mensual por modelo',
+      'costLabel': 'al mes',
       'cheapest': 'más barato',
       'copySummary': 'Copiar resumen',
       'inLabel': 'Tokens de entrada / petición',
@@ -41,6 +45,8 @@ export const LlmCostCalculatorL10n: ToolL10n = {
   },
   de: {
     ui: {
+      'chartTitle': 'Monatskosten je Modell',
+      'costLabel': 'pro Monat',
       'cheapest': 'günstigste',
       'copySummary': 'Zusammenfassung kopieren',
       'inLabel': 'Input-Tokens / Anfrage',

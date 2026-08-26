@@ -7,6 +7,9 @@ import type { ToolL10n } from '../tool-l10n'
 export const EmbeddingPriceCalculatorL10n: ToolL10n = {
   zh: {
     ui: {
+      'chartTitle': '各模型月成本',
+      'costLabel': '每月',
+      'cheapestLabel': '最便宜',
       'note': '价格核对于 2026-08;嵌入便宜到多数负载只需几美分——RAG 真实账单大头是存储与检索。维度对向量库存储的影响大于 API 成本。Gemini text-embedding-004 在配额内免费。',
       'cheapest': '最便宜',
       'copySummary': '复制摘要',
@@ -24,6 +27,9 @@ export const EmbeddingPriceCalculatorL10n: ToolL10n = {
   },
   es: {
     ui: {
+      'chartTitle': 'Coste mensual por modelo',
+      'costLabel': 'al mes',
+      'cheapestLabel': 'más barato',
       'note': 'Precios verificados 08-2026; incrustar es tan barato que la mayoría de cargas cuestan centavos — el almacenamiento y la recuperación dominan la factura RAG real.',
       'cheapest': 'más barato',
       'copySummary': 'Copiar resumen',
@@ -41,6 +47,9 @@ export const EmbeddingPriceCalculatorL10n: ToolL10n = {
   },
   de: {
     ui: {
+      'chartTitle': 'Monatskosten je Modell',
+      'costLabel': 'pro Monat',
+      'cheapestLabel': 'am günstigsten',
       'note': 'Preise geprüft 08-2026; Embedding ist so günstig, dass meisten Workloads Cents kosten — Speicherung und Retrieval dominieren echte RAG-Rechnungen.',
       'cheapest': 'günstigste',
       'copySummary': 'Zusammenfassung kopieren',

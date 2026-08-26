@@ -1,7 +1,8 @@
 'use client'
 
 import { useMemo, useState } from 'react'
-import { CalculatorField, CalculatorNote, ResultCard } from '../calculator/CalculatorField'
+import { CalculatorField, CalculatorNote, CalculatorSliderField, ResultCard } from '../calculator/CalculatorField'
+import { StackedCompareChart } from '@/components/charts/StackedCompareChart'
 import { ResultActions } from '../ResultActions'
 import { CopyButton } from '@/components/CopyButton'
 import { fmtNum } from '@/lib/format'
@@ -242,11 +243,21 @@ export function EmbeddingPriceClient() {
   return (
     <div className="space-y-5">
       <div className="grid grid-cols-1 gap-4 rounded-lg p-4 sm:grid-cols-3" style={{ backgroundColor: 'rgb(var(--bg-subtle))' }}>
-        <CalculatorField id="ep-docs" type="text" label={L('docsLabel', 'Documents to embed')} value={docs} onChange={setDocs} placeholder="1000" />
-        <CalculatorField id="ep-tokens" type="text" label={L('tokensLabel', 'Avg tokens per document')} value={avgTokens} onChange={setAvgTokens} placeholder="500" />
-        <CalculatorField id="ep-runs" type="text" label={L('runsLabel', 'Re-embed runs per month')} value={runsPerMonth} onChange={setRunsPerMonth} placeholder="1" />
+        <CalculatorSliderField id="ep-docs" label={L('docsLabel', 'Documents to embed')} value={docs} onChange={setDocs} placeholder="1000" min={0} max={100000} step={100} />
+        <CalculatorSliderField id="ep-tokens" label={L('tokensLabel', 'Avg tokens per document')} value={avgTokens} onChange={setAvgTokens} placeholder="500" min={0} max={32000} step={100} />
+        <CalculatorSliderField id="ep-runs" label={L('runsLabel', 'Re-embed runs per month')} value={runsPerMonth} onChange={setRunsPerMonth} placeholder="1" min={0} max={100} step={1} />
       </div>
 
+      {stats && (
+        <StackedCompareChart
+          title={L('chartTitle', 'Monthly cost by model')}
+          rows={stats.filter(({ monthly }) => monthly > 0).map(({ m, monthly }, i) => ({
+            label: m.label,
+            segments: [{ label: i === 0 ? L('cheapestLabel', 'cheapest') : L('costLabel', 'per month'), value: monthly, color: i === 0 ? '#22c55e' : '#3b82f6' }],
+          }))}
+          formatTotal={(n) => `$${n < 0.01 ? n.toExponential(1) : fmtNum(n, 2)}`}
+        />
+      )}
       {stats ? (
         <div className="overflow-hidden rounded-lg border border-border bg-card">
           <table className="w-full text-right text-sm">

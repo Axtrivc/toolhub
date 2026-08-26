@@ -1,7 +1,8 @@
 'use client'
 
 import { useEffect, useMemo, useState } from 'react'
-import { CalculatorField, CalculatorNote, ResultCard } from '../calculator/CalculatorField'
+import { CalculatorField, CalculatorNote, CalculatorSliderField, ResultCard } from '../calculator/CalculatorField'
+import { StackedCompareChart } from '@/components/charts/StackedCompareChart'
 import { ResultActions } from '../ResultActions'
 import { CopyButton } from '@/components/CopyButton'
 import { fmtNum, fmtUSD } from '@/lib/format'
@@ -41,11 +42,21 @@ export function LlmCostCalculatorClient() {
   return (
     <div className="space-y-5">
       <div className="grid grid-cols-1 gap-4 rounded-lg p-4 sm:grid-cols-3" style={{ backgroundColor: 'rgb(var(--bg-subtle))' }}>
-        <CalculatorField id="lc-in" type="text" label={L('inLabel', 'Input tokens / request')} value={inputTokens} onChange={setInputTokens} placeholder="2000" />
-        <CalculatorField id="lc-out" type="text" label={L('outLabel', 'Output tokens / request')} value={outputTokens} onChange={setOutputTokens} placeholder="800" />
-        <CalculatorField id="lc-rpd" type="text" label={L('rpdLabel', 'Requests per day')} value={requestsPerDay} onChange={setRequestsPerDay} placeholder="100" />
+        <CalculatorSliderField id="lc-in" label={L('inLabel', 'Input tokens / request')} value={inputTokens} onChange={setInputTokens} placeholder="2000" min={0} max={100000} step={500} />
+        <CalculatorSliderField id="lc-out" label={L('outLabel', 'Output tokens / request')} value={outputTokens} onChange={setOutputTokens} placeholder="800" min={0} max={32000} step={100} />
+        <CalculatorSliderField id="lc-rpd" label={L('rpdLabel', 'Requests per day')} value={requestsPerDay} onChange={setRequestsPerDay} placeholder="100" min={0} max={10000} step={10} />
       </div>
 
+      {stats && (
+        <StackedCompareChart
+          title={L('chartTitle', 'Monthly cost by model')}
+          rows={stats.rows.map(({ m, perMonth }, i) => ({
+            label: m.label,
+            segments: [{ label: i === 0 ? L('cheapest', 'cheapest') : L('costLabel', 'per month'), value: perMonth, color: i === 0 ? '#22c55e' : '#3b82f6' }],
+          }))}
+          formatTotal={(n) => `$${n < 0.01 ? n.toExponential(1) : fmtNum(n, 2)}`}
+        />
+      )}
       {stats ? (
         <div className="overflow-hidden rounded-lg border border-border bg-card">
           <table className="w-full text-right text-sm">
