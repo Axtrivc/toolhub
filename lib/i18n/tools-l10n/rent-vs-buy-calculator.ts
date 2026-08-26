@@ -19,6 +19,9 @@ export const rentVsBuyCalculatorL10n: ToolL10n = {
       'in.home': '房价', 'in.rent': '可比月租金', 'in.down': '首付比例', 'in.rate': '房贷利率', 'in.term': '贷款期限', 'inSuffix.term': '年', 'in.years': '居住年限',
       'out.buyTotal': '买房净成本', 'outSub.buyTotal': '首付 + 已付月供 − 期末净值', 'out.rentTotal': '租房总成本', 'outSub.rentTotal': '持有期内的租金', 'out.winner': '更省的选项',
       note: '🏠 买房净成本 = 首付 + 居住期内已付月供 − 卖出时收回的净值(期末房价 − 剩余贷款本金)。简化估算——不含税费、维护费、升值以及投资的机会成本。作为初步粗略对比使用。',
+      chartTitle: '累计成本:租房 vs 买房',
+      'line.rent': '租房(累计)',
+      'line.buy': '买房(净成本)',
     },
   },
   es: {
@@ -35,6 +38,9 @@ export const rentVsBuyCalculatorL10n: ToolL10n = {
       'in.home': 'Precio de la vivienda', 'in.rent': 'Alquiler comparable', 'in.down': 'Entrada', 'in.rate': 'Tipo de la hipoteca', 'in.term': 'Plazo del préstamo', 'inSuffix.term': 'años', 'in.years': 'Años en la vivienda',
       'out.buyTotal': 'Coste neto de comprar', 'outSub.buyTotal': 'Entrada + pagos − patrimonio final', 'out.rentTotal': 'Coste total de alquilar', 'outSub.rentTotal': 'Alquiler durante el periodo', 'out.winner': 'Opción más barata',
       note: '🏠 Coste neto de comprar = entrada + pagos de hipoteca durante el periodo − patrimonio recuperado en la venta (valor de la vivienda − capital pendiente). Simplificado — sin impuestos, mantenimiento, revalorización ni coste de oportunidad de invertir. Úsalo como comparación aproximada inicial.',
+      chartTitle: 'Coste acumulado: alquilar vs comprar',
+      'line.rent': 'Alquilar (acumulado)',
+      'line.buy': 'Comprar (coste neto)',
     },
   },
   de: {
@@ -51,6 +57,9 @@ export const rentVsBuyCalculatorL10n: ToolL10n = {
       'in.home': 'Hauspreis', 'in.rent': 'Vergleichsmiete', 'in.down': 'Anzahlung', 'in.rate': 'Hypothekenzins', 'in.term': 'Kreditlaufzeit', 'inSuffix.term': 'Jahre', 'in.years': 'Wohnjahre',
       'out.buyTotal': 'Nettokosten Kauf', 'outSub.buyTotal': 'Anzahlung + Zahlungen − Eigenkapital beim Verkauf', 'out.rentTotal': 'Gesamtkosten Miete', 'outSub.rentTotal': 'Miete über den Zeitraum', 'out.winner': 'Günstigere Option',
       note: '🏠 Nettokosten Kauf = Anzahlung + Hypothekenzahlungen während der Wohnzeit − beim Verkauf zurückgewonnenes Eigenkapital (Hauswert − Restschuld). Vereinfacht — ohne Steuern, Instandhaltung, Wertsteigerung und Opportunitätskosten der Investition. Als groben Erstrieg-Vergleich nutzen.',
+      chartTitle: 'Kumulierte Kosten: Mieten vs Kaufen',
+      'line.rent': 'Mieten (kumuliert)',
+      'line.buy': 'Kaufen (Nettokosten)',
     },
   },
 }

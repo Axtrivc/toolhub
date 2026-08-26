@@ -151,6 +151,37 @@ export const SavingsGoalCalculatorClient = makeCalculatorClient({
     }
   },
   note: '🎯 Finds the monthly amount needed to hit any savings goal, accounting for investment growth on what you already have.',
+  chart: { kind: 'series', title: 'Path to Your Goal' },
+  // 存款路径曲线:按 compute 反推的月存款逐年复利到目标;goal 恒定虚线参照
+  series: (v) => {
+    const goal = toNum(v.goal)
+    const current = toNum(v.current)
+    const years = Math.round(toNum(v.years))
+    if (!(goal > 0) || current < 0 || years <= 0 || years > 60) return null
+    const rate = toNum(v.rate) / 100 / 12
+    const months = years * 12
+    const futureCurrent = rate === 0 ? current : current * Math.pow(1 + rate, months)
+    const gap = Math.max(0, goal - futureCurrent)
+    const monthly = gap > 0 ? (rate === 0 ? gap / months : (gap * rate) / (Math.pow(1 + rate, months) - 1)) : 0
+    const balance: number[] = []
+    const xLabels: string[] = []
+    let bal = current
+    for (let y = 0; y <= years; y++) {
+      if (y > 0) {
+        for (let m = 0; m < 12; m++) bal = bal * (1 + rate) + monthly
+      }
+      balance.push(Math.max(0, bal))
+      xLabels.push(`Y${y}`)
+    }
+    return {
+      xLabels,
+      lines: [
+        { key: 'savings', label: 'Your savings', color: '#22c55e', points: balance, area: true },
+        { key: 'goal', label: 'Goal', color: '#3b82f6', points: xLabels.map(() => goal), dashed: true },
+      ],
+      formatY: (n) => fmtUSD(n, 0),
+    }
+  },
 })
 
 export const NetWorthCalculatorClient = makeCalculatorClient({
@@ -215,6 +246,28 @@ export const AnnuityCalculatorClient = makeCalculatorClient({
     }
   },
   note: '🏦 Annuity: how much you can withdraw yearly so the money lasts exactly N years. Common for retirement planning.',
+  chart: { kind: 'series', title: 'Balance While Withdrawing' },
+  // 支取期余额曲线:按年金公式逐年取款,余额应恰好在期末归零
+  series: (v) => {
+    const p = toNum(v.principal)
+    const r = toNum(v.rate) / 100
+    const n = Math.round(toNum(v.years))
+    if (!(p > 0) || r < 0 || n <= 0 || n > 60) return null
+    const annual = r === 0 ? p / n : (p * r) / (1 - Math.pow(1 + r, -n))
+    const balance: number[] = []
+    const xLabels: string[] = []
+    let bal = p
+    for (let y = 0; y <= n; y++) {
+      if (y > 0) bal = bal * (1 + r) - annual
+      balance.push(Math.max(0, bal))
+      xLabels.push(`Y${y}`)
+    }
+    return {
+      xLabels,
+      lines: [{ key: 'balance', label: 'Remaining balance', color: '#3b82f6', points: balance, area: true }],
+      formatY: (n2) => fmtUSD(n2, 0),
+    }
+  },
 })
 
 export const CapitalGainsTaxEstimatorClient = makeCalculatorClient({
@@ -350,6 +403,54 @@ export const RentVsBuyCalculatorClient = makeCalculatorClient({
     }
   },
   note: '🏠 Net cost to buy = down payment + mortgage payments made while living there − equity recovered at sale (home value − remaining loan balance). Simplified — excludes taxes, maintenance, appreciation, and opportunity cost of investing. Use as a rough first-pass comparison.',
+  chart: { kind: 'series', title: 'Cumulative Cost: Rent vs Buy' },
+  // 累计成本交叉曲线:逐年采样,买入累计净成本(首付+已付月供−当年净值)
+  // vs 租房累计租金;两条线的交点即"住满 N 年后买房更划算"的临界年。
+  series: (v) => {
+    const home = toNum(v.home)
+    const rent = toNum(v.rent)
+    const downPct = toNum(v.down)
+    const down = (home * downPct) / 100
+    const loan = Math.max(0, home - down)
+    const rate = toNum(v.rate) / 100 / 12
+    const holdYears = toNum(v.years)
+    const termYears = toNum(v.term)
+    if (!(home > 0) || !(rent > 0) || !(holdYears > 0) || !(termYears > 0) || downPct < 0 || downPct > 100) return null
+    const loanMonths = Math.round(termYears * 12)
+    let monthly: number
+    if (rate === 0) monthly = loan / loanMonths
+    else {
+      const f = Math.pow(1 + rate, loanMonths)
+      monthly = (loan * rate * f) / (f - 1)
+    }
+    const years = Math.min(Math.ceil(holdYears), 60)
+    const buyPts: number[] = []
+    const rentPts: number[] = []
+    const xLabels: string[] = []
+    let balance = loan
+    let paid = 0
+    for (let y = 0; y <= years; y++) {
+      if (y > 0) {
+        for (let m = 0; m < 12 && balance > 0; m++) {
+          balance += balance * rate
+          const pay = Math.min(monthly, balance)
+          balance -= pay
+          paid += pay
+        }
+      }
+      buyPts.push(Math.max(0, down + paid - Math.max(0, home - balance)))
+      rentPts.push(rent * 12 * y)
+      xLabels.push(`Y${y}`)
+    }
+    return {
+      xLabels,
+      lines: [
+        { key: 'rent', label: 'Renting (cumulative)', color: '#3b82f6', points: rentPts },
+        { key: 'buy', label: 'Buying (net cost)', color: '#22c55e', points: buyPts },
+      ],
+      formatY: (n) => fmtUSD(n, 0),
+    }
+  },
 })
 
 // ── 健康类 ──

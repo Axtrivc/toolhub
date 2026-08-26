@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useMemo, useCallback } from 'react'
-import { CalculatorField, ResultCard, CalculatorNote } from '@/components/calculator/CalculatorField'
+import { CalculatorField, CalculatorSliderField, ResultCard, CalculatorNote } from '@/components/calculator/CalculatorField'
 import { LineAreaChart } from '@/components/charts/LineAreaChart'
 import { yearlyBalanceSeries } from '@/components/charts/chartKit'
 import { LoadSampleButton } from '@/components/LoadSampleButton'
@@ -166,21 +166,27 @@ export function LoanCalculatorClient() {
           suffix="$"
           placeholder="20000"
         />
-        <CalculatorField
+        <CalculatorSliderField
           id="rate"
           label={L('annualRate', 'Annual interest rate')}
           value={rate}
           onChange={setRate}
           suffix="%"
           placeholder="7.5"
+          min={0}
+          max={15}
+          step={0.05}
         />
-        <CalculatorField
+        <CalculatorSliderField
           id="years"
           label={L('loanTerm', 'Loan term')}
           value={years}
           onChange={setYears}
           suffix={L('yearsSuffix', 'years')}
           placeholder="5"
+          min={1}
+          max={50}
+          step={1}
         />
       </div>
 

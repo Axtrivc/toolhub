@@ -21,6 +21,9 @@ export const savingsGoalCalculatorL10n: ToolL10n = {
       'in.goal': '储蓄目标', 'in.current': '已存金额', 'in.rate': '年回报率', 'in.years': '目标年限',
       'out.monthly': '每月需存金额', 'out.gap': '还需存入', 'out.growth': '投资增长',
       note: '🎯 算出达到任何储蓄目标所需的每月金额，同时考虑已有存款的投资增长。',
+      chartTitle: '通往目标的路径',
+      'line.savings': '你的存款',
+      'line.goal': '目标',
     },
   },
   es: {
@@ -39,6 +42,9 @@ export const savingsGoalCalculatorL10n: ToolL10n = {
       'in.goal': 'Objetivo de ahorro', 'in.current': 'Ahorrado actualmente', 'in.rate': 'Retorno anual', 'in.years': 'Años hasta la meta',
       'out.monthly': 'Aportación mensual necesaria', 'out.gap': 'Importe a ahorrar', 'out.growth': 'Crecimiento de la inversión',
       note: '🎯 Calcula el importe mensual necesario para alcanzar cualquier meta de ahorro, considerando el crecimiento de lo que ya tienes ahorrado.',
+      chartTitle: 'Camino a tu meta',
+      'line.savings': 'Tus ahorros',
+      'line.goal': 'Meta',
     },
   },
   de: {
@@ -57,6 +63,9 @@ export const savingsGoalCalculatorL10n: ToolL10n = {
       'in.goal': 'Sparziel', 'in.current': 'Bereits gespart', 'in.rate': 'Jahresrendite', 'in.years': 'Jahre bis Ziel',
       'out.monthly': 'Nötiger monatlicher Beitrag', 'out.gap': 'Noch zu sparen', 'out.growth': 'Investment-Wachstum',
       note: '🎯 Berechnet den monatlichen Betrag, der nötig ist, um jedes Sparziel zu erreichen — inklusive Wachstum auf das bereits Ersparte.',
+      chartTitle: 'Weg zum Ziel',
+      'line.savings': 'Deine Ersparnisse',
+      'line.goal': 'Ziel',
     },
   },
 }

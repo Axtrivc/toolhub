@@ -152,13 +152,41 @@ export const CreditCardMinimumCalculatorClient = makeCalculatorClient({
     }
   },
   note: '💳 Minimum payments barely cover interest — paying only the minimum means decades to pay off. Pay more whenever possible.',
-  chart: {
-    title: 'Where Your Minimum Payment Goes',
-    centerLabel: 'Payment',
-    slices: [
-      { valueKey: 'interest', label: 'Interest', color: '#ef4444' },
-      { valueKey: 'principal', label: 'Principal', color: '#22c55e' },
-    ],
+  chart: [
+    {
+      title: 'Where Your Minimum Payment Goes',
+      centerLabel: 'Payment',
+      slices: [
+        { valueKey: 'interest', label: 'Interest', color: '#ef4444' },
+        { valueKey: 'principal', label: 'Principal', color: '#22c55e' },
+      ],
+    },
+    { kind: 'series', title: 'Balance on Minimums Only', titleKey: 'chartTitleBalance' },
+  ],
+  // 只还最低还款的余额拖尾曲线(与 compute 同式:$25 下限、≤当月本息、600 月上限)
+  series: (v) => {
+    const start = toNum(v.balance)
+    const monthlyRate = toNum(v.apr) / 100 / 12
+    const minPct = toNum(v.minPct) / 100
+    if (!(start > 0) || monthlyRate < 0 || minPct <= 0) return null
+    const points: number[] = [start]
+    const xLabels: string[] = ['M0']
+    let b = start
+    let m = 0
+    while (b > 0.005 && m < 600) {
+      const int = b * monthlyRate
+      const pay = Math.min(b + int, Math.max(25, b * minPct))
+      b = b + int - pay
+      m++
+      points.push(Math.max(0, b))
+      xLabels.push(`M${m}`)
+    }
+    if (b > 0.005) return null // 600 月都还不完(月供≤利息):不出图
+    return {
+      xLabels,
+      lines: [{ key: 'balance', label: 'Remaining balance', color: '#ef4444', points, area: true }],
+      formatY: (n) => fmtUSD(n, 0),
+    }
   },
 })
 

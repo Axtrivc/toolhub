@@ -22,6 +22,8 @@ export const annuityCalculatorL10n: ToolL10n = {
       'in.principal': '初始本金', 'in.rate': '年回报率', 'in.years': '取款年限', 'inSuffix.years': '年',
       'out.annual': '年支付额', 'out.monthly': '月支付额', 'out.total': '总支付额',
       note: '🏦 年金:每年能取多少钱,让本金刚好撑满 N 年。常用于退休规划。',
+      chartTitle: '支取期间的余额',
+      'line.balance': '剩余本金',
     },
   },
   es: {
@@ -41,6 +43,8 @@ export const annuityCalculatorL10n: ToolL10n = {
       'in.principal': 'Capital inicial', 'in.rate': 'Retorno anual', 'in.years': 'Periodo de pago', 'inSuffix.years': 'años',
       'out.annual': 'Pago anual', 'out.monthly': 'Pago mensual', 'out.total': 'Pagos totales',
       note: '🏦 Anualidad: cuánto puedes retirar al año para que el dinero dure exactamente N años. Habitual en la planificación de la jubilación.',
+      chartTitle: 'Saldo durante los retiros',
+      'line.balance': 'Capital restante',
     },
   },
   de: {
@@ -60,6 +64,8 @@ export const annuityCalculatorL10n: ToolL10n = {
       'in.principal': 'Anfangskapital', 'in.rate': 'Jahresrendite', 'in.years': 'Auszahlungszeitraum', 'inSuffix.years': 'Jahre',
       'out.annual': 'Jährliche Auszahlung', 'out.monthly': 'Monatliche Auszahlung', 'out.total': 'Gesamtauszahlungen',
       note: '🏦 Rente: wie viel du jährlich entnehmen kannst, damit das Geld genau N Jahre reicht. Typisch für die Rentenplanung.',
+      chartTitle: 'Saldo während der Entnahmen',
+      'line.balance': 'Verbleibendes Kapital',
     },
   },
 }

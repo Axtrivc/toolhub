@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useMemo, useEffect } from 'react'
-import { CalculatorField, ResultCard, CalculatorNote } from '@/components/calculator/CalculatorField'
+import { CalculatorField, CalculatorSliderField, ResultCard, CalculatorNote } from '@/components/calculator/CalculatorField'
 import { LineAreaChart } from '@/components/charts/LineAreaChart'
 import { yearlyBalanceSeries } from '@/components/charts/chartKit'
 import { ResultActions } from '@/components/ResultActions'
@@ -149,11 +149,11 @@ export function AutoLoanCalculatorClient() {
     <div className="space-y-6">
       {/* 输入区 */}
       <div className="grid grid-cols-1 gap-4 rounded-lg p-4 sm:grid-cols-2 lg:grid-cols-3" style={{ backgroundColor: 'rgb(var(--bg-subtle))' }}>
-        <CalculatorField id="vehicle-price" label={L('vehiclePrice', 'Vehicle price')} value={price} onChange={setPrice} suffix="$" placeholder="35000" />
-        <CalculatorField id="down-payment" label={L('downPayment', 'Down payment')} value={down} onChange={setDown} suffix="$" placeholder="5000" />
+        <CalculatorSliderField id="vehicle-price" label={L('vehiclePrice', 'Vehicle price')} value={price} onChange={setPrice} suffix="$" placeholder="35000" min={1000} max={100000} step={500} />
+        <CalculatorSliderField id="down-payment" label={L('downPayment', 'Down payment')} value={down} onChange={setDown} suffix="$" placeholder="5000" min={0} max={50000} step={250} />
         <CalculatorField id="trade-in" label={L('tradeInValue', 'Trade-in value')} value={tradeIn} onChange={setTradeIn} suffix="$" placeholder="0" />
         <CalculatorField id="sales-tax" label={L('salesTax', 'Sales tax')} value={taxPct} onChange={setTaxPct} suffix="%" placeholder="6" />
-        <CalculatorField id="apr" label={L('interestRateApr', 'Interest rate (APR)')} value={apr} onChange={setApr} suffix="%" placeholder="7.5" />
+        <CalculatorSliderField id="apr" label={L('interestRateApr', 'Interest rate (APR)')} value={apr} onChange={setApr} suffix="%" placeholder="7.5" min={0} max={20} step={0.1} />
         <div>
           <label htmlFor="term" className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
             {L('loanTerm', 'Loan term')}
