@@ -211,8 +211,8 @@ export const ElectricityCostCalculatorClient = makeCalculatorClient({
   urlState: true,
   inputs: [
     { key: 'watts', label: 'Power rating', suffix: 'W', default: '1500' },
-    { key: 'hours', label: 'Hours used per day', suffix: 'h', default: '4' },
-    { key: 'rate', label: 'Electricity rate', suffix: '$/kWh', default: '0.15' },
+    { key: 'hours', label: 'Hours used per day', suffix: 'h', default: '4', slider: { min: 0, max: 24, step: 0.5 } },
+    { key: 'rate', label: 'Electricity rate', suffix: '$/kWh', default: '0.15', slider: { min: 0, max: 1, step: 0.01 } },
   ],
   outputs: [
     { key: 'daily', label: 'Cost per day', highlight: true },
@@ -247,7 +247,7 @@ export const CarCostCalculatorClient = makeCalculatorClient({
     { key: 'carPrice', label: 'Car purchase price', suffix: '$', default: '25000' },
     { key: 'ownYears', label: 'Years of ownership', suffix: 'yrs', default: '5', slider: { min: 1, max: 20, step: 1 } },
     { key: 'kmPerYear', label: 'Distance driven per year', suffix: 'km', default: '15000' },
-    { key: 'fuelPrice', label: 'Fuel price', suffix: '$/L', default: '1.6' },
+    { key: 'fuelPrice', label: 'Fuel price', suffix: '$/L', default: '1.6', slider: { min: 0.5, max: 3, step: 0.05 } },
     { key: 'consumption', label: 'Consumption', suffix: 'L/100km', default: '7.5', slider: { min: 3, max: 25, step: 0.5 } },
     { key: 'insurance', label: 'Insurance per year', suffix: '$', default: '1200' },
     { key: 'maintenance', label: 'Maintenance + tires per year', suffix: '$', default: '800' },

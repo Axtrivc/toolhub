@@ -94,6 +94,12 @@ export interface CalculatorConfig {
    */
   series?: (values: Record<string, string>, locale: Locale) => SeriesData | null
   /**
+   * 堆叠对比数据钩子(可选)。chart 为 { kind: 'compare' } 时,工厂用该
+   * 钩子取行/分段数据渲染 StackedCompareChart。行/分段 label 会经
+   * cmp.<i> / cmpseg.<j> 键本地化;返回 null 时图表静默不渲染。
+   */
+  compare?: (values: Record<string, string>, locale: Locale) => CompareData | null
+  /**
    * URL 状态同步(可选,默认关闭)。
    * 开启后每个输入字段以 ?<key>=<value> 形式同步进 URL(replaceState):
    * 刷新/分享链接都能恢复输入。只建议给输入少、复访率高的工具开启
@@ -141,6 +147,8 @@ export interface GaugeChartConfig {
   max: number
   /** 区间带(按 upTo 升序;最后一段自动延伸到 max) */
   zones: { upTo: number; color: string; label: string }[]
+  /** 中央大字格式化(缺省保留 1 位小数;如 (n)=>`${n.toFixed(1)}%`) */
+  formatValue?: (n: number) => string
   /** 中央大字格式化缺省值之外的说明(指针下方),如当前区间名 */
   caption?: string
 }
@@ -156,7 +164,17 @@ export interface SeriesChartConfig {
   titleKey?: string
 }
 
-export type ChartConfig = DonutChartConfig | GaugeChartConfig | SeriesChartConfig
+/**
+ * 堆叠对比条配置 - 由 config.compare 钩子提供行/分段数据,
+ * 渲染 StackedCompareChart(方案 A vs B 的构成对比,共享比例尺)。
+ */
+export interface CompareChartConfig {
+  kind: 'compare'
+  title?: string
+  titleKey?: string
+}
+
+export type ChartConfig = DonutChartConfig | GaugeChartConfig | SeriesChartConfig | CompareChartConfig
 
 /**
  * 曲线数据(series 钩子的返回类型)。
@@ -170,4 +188,11 @@ export interface SeriesData {
   highlightBetween?: { a: string; b: string; label?: string }
   /** y 轴/tooltip 数值格式化(缺省紧凑缩写 1.2k/3.4M) */
   formatY?: (n: number) => string
+}
+
+/** 堆叠对比数据(compare 钩子的返回类型)。所有行共用同一比例尺。 */
+export interface CompareData {
+  rows: { label: string; segments: { label: string; value: number; color: string }[] }[]
+  /** 行尾总值格式化(缺省紧凑缩写) */
+  formatTotal?: (n: number) => string
 }

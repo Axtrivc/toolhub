@@ -5,6 +5,7 @@ import { CalculatorField, CalculatorSliderField, ResultCard, CalculatorNote } fr
 import { BreakdownChart } from './BreakdownChart'
 import { GaugeChart } from '../charts/GaugeChart'
 import { LineAreaChart } from '../charts/LineAreaChart'
+import { StackedCompareChart } from '../charts/StackedCompareChart'
 import { ResultActions } from '../ResultActions'
 import { LoadSampleButton } from '../LoadSampleButton'
 import { ShareResultButton } from '../calculator/ShareResultButton'
@@ -414,9 +415,34 @@ export function makeCalculatorClient(config: CalculatorConfig): ComponentType {
                         color: z.color,
                         label: L(`zone.${i}`, z.label),
                       }))}
+                      formatValue={chart.formatValue}
                       caption={chart.caption ? L('chartCaption', chart.caption) : undefined}
                     />
                   )
+                }
+                if (chart.kind === 'compare') {
+                  if (!config.compare) return null
+                  try {
+                    const data = config.compare(values, locale)
+                    if (!data || data.rows.length === 0) return null
+                    return (
+                      <StackedCompareChart
+                        key={ci}
+                        title={chart.title ? L(tKey, chart.title) : undefined}
+                        rows={data.rows.map((r, ri) => ({
+                          label: L(`cmp.${ri}`, r.label),
+                          segments: r.segments.map((s, si) => ({
+                            label: L(`cmpseg.${si}`, s.label),
+                            value: s.value,
+                            color: s.color,
+                          })),
+                        }))}
+                        formatTotal={data.formatTotal}
+                      />
+                    )
+                  } catch {
+                    return null
+                  }
                 }
                 if (chart.kind === 'series') {
                   if (!config.series) return null

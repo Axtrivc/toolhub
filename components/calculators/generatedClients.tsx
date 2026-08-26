@@ -212,7 +212,50 @@ export const CompoundInterestCalculatorClient = makeCalculatorClient({
       title: 'Growth Over Time',
       titleKey: 'chartTitleGrowth',
     },
+    {
+      kind: 'compare',
+      title: 'Start Now vs Wait 10 Years',
+      titleKey: 'chartTitleCompare',
+    },
   ],
+  // 堆叠对比:现在开始 vs 晚 10 年(同样本金+月供)的 投入/利息 构成对比
+  compare: (v) => {
+    const principal = toNum(v.principal)
+    const monthly = toNum(v.monthly)
+    const annualRate = toNum(v.rate) / 100
+    const years = Math.round(toNum(v.years))
+    if (principal < 0 || monthly < 0 || annualRate < 0 || years <= 10 || years > 100) return null
+    const monthlyRate = annualRate / 12
+    const grow = (months: number) => {
+      let bal = principal
+      for (let m = 0; m < months; m++) bal = bal * (1 + monthlyRate) + monthly
+      return bal
+    }
+    const months = years * 12
+    const finalNow = monthlyRate === 0 ? principal + monthly * months : grow(months)
+    const contributedNow = principal + monthly * months
+    const finalLate = monthlyRate === 0 ? principal + monthly * (months - 120) : grow(months - 120)
+    const contributedLate = principal + monthly * (months - 120)
+    return {
+      rows: [
+        {
+          label: 'Start now',
+          segments: [
+            { label: 'You put in', value: contributedNow, color: '#3b82f6' },
+            { label: 'Interest earned', value: Math.max(0, finalNow - contributedNow), color: '#22c55e' },
+          ],
+        },
+        {
+          label: 'Wait 10 years',
+          segments: [
+            { label: 'You put in', value: contributedLate, color: '#3b82f6' },
+            { label: 'Interest earned', value: Math.max(0, finalLate - contributedLate), color: '#22c55e' },
+          ],
+        },
+      ],
+      formatTotal: (n) => fmtUSD(n, 0),
+    }
+  },
   // 增长曲线:逐年采样,总余额(面积)vs 累计投入(面积),中间 = 利息
   series: (v) => {
     const principal = toNum(v.principal)

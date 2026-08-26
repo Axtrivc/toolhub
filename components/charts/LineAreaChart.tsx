@@ -222,9 +222,11 @@ export function LineAreaChart({ title, xLabels, lines, highlightBetween, formatY
               strokeWidth={2.2}
               strokeLinecap="round"
               strokeLinejoin="round"
+              // 虚线不走 pathLength 描线动画:framer-motion 的 pathLength
+              // 会用 dasharray 实现描线,覆写我们自己的虚线样式
               strokeDasharray={l.dashed ? '6 5' : undefined}
               initial={reduceMotion || l.dashed ? false : { pathLength: 0 }}
-              animate={{ pathLength: 1 }}
+              animate={l.dashed ? undefined : { pathLength: 1 }}
               transition={{ duration: 0.9, ease: 'easeOut' }}
             />
           ))}

@@ -16,6 +16,7 @@ export const gradeCalculatorL10n: ToolL10n = {
       'out.pct': '百分比',
       'out.grade': '字母等级',
       note: '📚 美国标准字母等级制。部分学校使用 +/-(B+、B、B-);本工具使用基础 A-F 等级。',
+      chartTitle: '你的落点',
     },
     useCases: [
       '按得分点数计算成绩',
@@ -38,6 +39,7 @@ export const gradeCalculatorL10n: ToolL10n = {
       'out.pct': 'Porcentaje',
       'out.grade': 'Nota con letra',
       note: '📚 Escala de notas con letras estándar de EE. UU. Algunas escuelas usan +/- (B+, B, B-); esta usa la escala básica A-F.',
+      chartTitle: 'Dónde estás',
     },
     useCases: [
       'calcular la nota por puntos obtenidos',
@@ -60,6 +62,7 @@ export const gradeCalculatorL10n: ToolL10n = {
       'out.pct': 'Prozentsatz',
       'out.grade': 'Buchstabennote',
       note: '📚 Standard-US-Notenskala mit Buchstaben. Manche Schulen nutzen +/– (B+, B, B-); dieses Tool verwendet die einfache A-F-Skala.',
+      chartTitle: 'Wo du liegst',
     },
     useCases: [
       'die Note aus erreichten Punkten berechnen',

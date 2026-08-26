@@ -489,6 +489,21 @@ export const GradeCalculatorClient = makeCalculatorClient({
     return { pct: `${fmtNum(pct, 1)}%`, grade }
   },
   note: '📚 Standard US letter grade scale. Some schools use +/- (B+, B, B-); this uses the basic A-F.',
+  chart: {
+    kind: 'gauge',
+    title: 'Where You Land',
+    valueKey: 'pct',
+    min: 0,
+    max: 100,
+    formatValue: (n) => `${n.toFixed(1)}%`,
+    zones: [
+      { upTo: 60, color: '#ef4444', label: 'F' },
+      { upTo: 70, color: '#f97316', label: 'D' },
+      { upTo: 80, color: '#eab308', label: 'C' },
+      { upTo: 90, color: '#3b82f6', label: 'B' },
+      { upTo: 100, color: '#22c55e', label: 'A' },
+    ],
+  },
 })
 
 export const FinalGradeCalculatorClient = makeCalculatorClient({
