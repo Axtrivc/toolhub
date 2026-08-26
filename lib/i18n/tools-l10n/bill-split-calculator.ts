@@ -11,6 +11,10 @@ export const billSplitCalculatorL10n: ToolL10n = {
       { q: '有人没喝酒怎么办?', a: '把酒水部分单算。从总额中减去酒水费用，由喝酒的人分摊，食物则所有人均摊。' },
     ],
     ui: {
+      'chartTitle': '账单 + 小费',
+      'cmp.0': '总计',
+      'cmpseg.0': '账单',
+      'cmpseg.1': '小费',
       errMinOnePerson: '请至少输入 1 人',
       'in.total': '账单总额', 'in.tip': '小费', 'in.people': '人数',
       'out.perPerson': '每人应付', 'out.tipAmount': '小费总额', 'out.grandTotal': '总计',
@@ -23,6 +27,10 @@ export const billSplitCalculatorL10n: ToolL10n = {
       { q: '¿Qué hacemos si alguien no bebió?', a: 'Detalla esa parte por separado. Resta el coste del alcohol del total, repártelo entre los que bebieron y divide la comida a partes iguales.' },
     ],
     ui: {
+      'chartTitle': 'Cuenta + propina',
+      'cmp.0': 'Total',
+      'cmpseg.0': 'Cuenta',
+      'cmpseg.1': 'Propina',
       errMinOnePerson: 'Introduce al menos 1 persona',
       'in.total': 'Total de la cuenta', 'in.tip': 'Propina', 'in.people': 'Número de personas',
       'out.perPerson': 'Cada persona paga', 'out.tipAmount': 'Propina total', 'out.grandTotal': 'Total general',
@@ -35,6 +43,10 @@ export const billSplitCalculatorL10n: ToolL10n = {
       { q: 'Was tun, wenn jemand nichts getrunken hat?', a: 'Diesen Teil separat abrechnen. Ziehe die Getränkekosten vom Gesamtbetrag ab, teile sie unter den Trinkenden auf und teile das Essen zu gleichen Teilen.' },
     ],
     ui: {
+      'chartTitle': 'Rechnung + Trinkgeld',
+      'cmp.0': 'Gesamtsumme',
+      'cmpseg.0': 'Rechnung',
+      'cmpseg.1': 'Trinkgeld',
       errMinOnePerson: 'Gib mindestens 1 Person an',
       'in.total': 'Rechnungsbetrag', 'in.tip': 'Trinkgeld', 'in.people': 'Anzahl Personen',
       'out.perPerson': 'Jeder zahlt', 'out.tipAmount': 'Trinkgeld gesamt', 'out.grandTotal': 'Gesamtbetrag',

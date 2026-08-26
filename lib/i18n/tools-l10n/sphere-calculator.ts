@@ -11,6 +11,7 @@ export const sphereCalculatorL10n: ToolL10n = {
       explain: '球体体积 V 和表面积 SA,r 为半径。',
     },
     ui: {
+      'chartTitle': '图形预览',
       'in.r': '半径',
       'out.volume': '体积',
       'out.surface': '表面积',
@@ -31,6 +32,7 @@ export const sphereCalculatorL10n: ToolL10n = {
       explain: 'Volumen V y área superficial SA de una esfera, donde r es el radio.',
     },
     ui: {
+      'chartTitle': 'Vista previa',
       'in.r': 'Radio',
       'out.volume': 'Volumen',
       'out.surface': 'Área de superficie',
@@ -51,6 +53,7 @@ export const sphereCalculatorL10n: ToolL10n = {
       explain: 'Kugelvolumen V und Oberfläche SA, wobei r der Radius ist.',
     },
     ui: {
+      'chartTitle': 'Formvorschau',
       'in.r': 'Radius',
       'out.volume': 'Volumen',
       'out.surface': 'Oberfläche',

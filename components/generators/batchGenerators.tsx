@@ -179,7 +179,7 @@ export function LoremIpsumGeneratorClient() {
 // ── 几何计算器(圆)──
 export const CircleCalculatorClient = makeCalculatorClient({
   slug: 'circle-calculator',
-  inputs: [{ key: 'r', label: 'Radius', suffix: 'r', default: '5' }],
+  inputs: [{ key: 'r', label: 'Radius', suffix: 'r', default: '5', slider: { min: 1, max: 50, step: 0.5 } }],
   outputs: [
     { key: 'area', label: 'Area', highlight: true },
     { key: 'circumference', label: 'Circumference' },
@@ -197,6 +197,7 @@ export const CircleCalculatorClient = makeCalculatorClient({
       diameter: `${fmtNum(2 * r, 4)}`,
     }
   },
+  chart: { kind: 'shape', shape: 'circle', dimKeys: ['r'], title: 'Shape preview' },
   note: '⭕ Area = π r². Circumference = 2 π r. Diameter = 2 r.',
 })
 
@@ -204,8 +205,8 @@ export const CircleCalculatorClient = makeCalculatorClient({
 export const TriangleCalculatorClient = makeCalculatorClient({
   slug: 'triangle-calculator',
   inputs: [
-    { key: 'a', label: 'Side a', default: '3' },
-    { key: 'b', label: 'Side b', default: '4' },
+    { key: 'a', label: 'Side a', default: '3', slider: { min: 1, max: 50, step: 0.5 } },
+    { key: 'b', label: 'Side b', default: '4', slider: { min: 1, max: 50, step: 0.5 } },
   ],
   outputs: [
     { key: 'c', label: 'Hypotenuse (c)', highlight: true },
@@ -222,6 +223,7 @@ export const TriangleCalculatorClient = makeCalculatorClient({
       perimeter: `${fmtNum(a + b + c, 4)}`,
     }
   },
+  chart: { kind: 'shape', shape: 'triangle', dimKeys: ['a', 'b'], title: 'Shape preview' },
   note: '📐 Pythagorean theorem: a² + b² = c². For right triangles only.',
 })
 
@@ -229,8 +231,8 @@ export const TriangleCalculatorClient = makeCalculatorClient({
 export const RectangleCalculatorClient = makeCalculatorClient({
   slug: 'rectangle-calculator',
   inputs: [
-    { key: 'w', label: 'Width', default: '8' },
-    { key: 'h', label: 'Height', default: '5' },
+    { key: 'w', label: 'Width', default: '8', slider: { min: 1, max: 50, step: 0.5 } },
+    { key: 'h', label: 'Height', default: '5', slider: { min: 1, max: 50, step: 0.5 } },
   ],
   outputs: [
     { key: 'area', label: 'Area', highlight: true },
@@ -246,6 +248,7 @@ export const RectangleCalculatorClient = makeCalculatorClient({
       diagonal: `${fmtNum(Math.sqrt(w * w + h * h), 4)} (√(w² + h²))`,
     }
   },
+  chart: { kind: 'shape', shape: 'rectangle', dimKeys: ['w', 'h'], title: 'Shape preview' },
   note: '▭ Area = width × height. Diagonal uses the Pythagorean theorem.',
 })
 

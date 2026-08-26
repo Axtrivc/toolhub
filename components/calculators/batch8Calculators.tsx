@@ -236,9 +236,9 @@ export const CreditCardMinimumCalculatorClient = makeCalculatorClient({
 export const CashBackCalculatorClient = makeCalculatorClient({
   slug: 'cash-back-calculator',
   inputs: [
-    { key: 'spend', label: 'Monthly spending', suffix: '$', default: '2000' },
-    { key: 'rate', label: 'Cash back rate', suffix: '%', default: '2' },
-    { key: 'fee', label: 'Annual card fee', suffix: '$', default: '0' },
+    { key: 'spend', label: 'Monthly spending', suffix: '$', default: '2000', slider: { min: 0, max: 10000, step: 100 } },
+    { key: 'rate', label: 'Cash back rate', suffix: '%', default: '2', slider: { min: 0, max: 10, step: 0.25 } },
+    { key: 'fee', label: 'Annual card fee', suffix: '$', default: '0', slider: { min: 0, max: 1000, step: 25 } },
   ],
   outputs: [
     { key: 'monthly', label: 'Monthly cash back' },
@@ -260,14 +260,27 @@ export const CashBackCalculatorClient = makeCalculatorClient({
       net: fmtUSD(annual - fee),
     }
   },
+  chart: { kind: 'compare', title: 'Rewards vs annual fee' },
+  compare: (v) => {
+    const annual = toNum(v.spend) * (toNum(v.rate) / 100) * 12
+    const fee = toNum(v.fee)
+    if (!(annual >= 0) || !(fee >= 0)) return null
+    return {
+      rows: [
+        { label: 'Cash back / year', segments: [{ label: 'Rewards', value: annual, color: '#22c55e' }] },
+        { label: 'Annual fee', segments: [{ label: 'Fee', value: fee, color: '#ef4444' }] },
+      ],
+      formatTotal: (n) => fmtUSD(n, 0),
+    }
+  },
   note: '💳 Compare rewards cards honestly. A $95 fee is worth it only if you earn more than $95 extra in rewards.',
 })
 
 export const DownPaymentCalculatorClient = makeCalculatorClient({
   slug: 'down-payment-calculator',
   inputs: [
-    { key: 'price', label: 'Home price', suffix: '$', default: '400000' },
-    { key: 'down', label: 'Down payment', suffix: '%', default: '20' },
+    { key: 'price', label: 'Home price', suffix: '$', default: '400000', slider: { min: 10000, max: 2000000, step: 10000 } },
+    { key: 'down', label: 'Down payment', suffix: '%', default: '20', slider: { min: 0, max: 50, step: 1 } },
   ],
   outputs: [
     { key: 'amount', label: 'Down payment amount', highlight: true },
@@ -300,14 +313,34 @@ export const DownPaymentCalculatorClient = makeCalculatorClient({
       pmi: pct >= 0.2 ? T('pmiNo', 'No (20%+ down)') : T('pmiYes', 'Yes (under 20%)'),
     }
   },
+  presets: [
+    { label: 'FHA 3.5%', values: { down: '3.5' } },
+    { label: 'Conventional 10%', values: { down: '10' } },
+    { label: '20% (no PMI)', values: { down: '20' } },
+  ],
+  chart: { kind: 'compare', title: 'Home price split' },
+  compare: (v) => {
+    const price = toNum(v.price), pct = toNum(v.down) / 100
+    if (!(price >= 0) || !(pct >= 0) || pct > 1) return null
+    const downAmt = price * pct
+    return {
+      rows: [
+        { label: 'Home price', segments: [
+          { label: 'Down payment', value: downAmt, color: '#3b82f6' },
+          { label: 'Loan amount', value: price - downAmt, color: '#94a3b8' },
+        ] },
+      ],
+      formatTotal: (n) => fmtUSD(n, 0),
+    }
+  },
   note: '🏠 Under 20% down usually requires PMI ($50-300/month). 20%+ avoids this cost entirely.',
 })
 
 export const DTICalculatorClient = makeCalculatorClient({
   slug: 'dti-calculator',
   inputs: [
-    { key: 'income', label: 'Monthly gross income', suffix: '$', default: '6000' },
-    { key: 'debts', label: 'Monthly debt payments', suffix: '$', default: '1500' },
+    { key: 'income', label: 'Monthly gross income', suffix: '$', default: '6000', slider: { min: 500, max: 20000, step: 100 } },
+    { key: 'debts', label: 'Monthly debt payments', suffix: '$', default: '1500', slider: { min: 0, max: 10000, step: 50 } },
   ],
   outputs: [
     { key: 'dti', label: 'Debt-to-income ratio', highlight: true },
@@ -340,15 +373,29 @@ export const DTICalculatorClient = makeCalculatorClient({
       verdict,
     }
   },
+  chart: {
+    kind: 'gauge',
+    title: 'Debt-to-income health',
+    valueKey: 'dti',
+    min: 0,
+    max: 60,
+    zones: [
+      { upTo: 36, color: '#22c55e', label: 'Healthy' },
+      { upTo: 43, color: '#eab308', label: 'Tight' },
+      { upTo: 50, color: '#f97316', label: 'High' },
+      { upTo: 60, color: '#ef4444', label: 'Likely denied' },
+    ],
+    formatValue: (n) => `${n.toFixed(1)}%`,
+  },
   note: '🏦 DTI is what lenders use to evaluate loan eligibility. Below 36% is healthy, 43% is typically the max for mortgages.',
 })
 
 export const CommissionCalculatorClient = makeCalculatorClient({
   slug: 'commission-calculator',
   inputs: [
-    { key: 'sales', label: 'Total sales', suffix: '$', default: '50000' },
-    { key: 'rate', label: 'Commission rate', suffix: '%', default: '5' },
-    { key: 'base', label: 'Base salary', suffix: '$', default: '3000' },
+    { key: 'sales', label: 'Total sales', suffix: '$', default: '50000', slider: { min: 0, max: 500000, step: 5000 } },
+    { key: 'rate', label: 'Commission rate', suffix: '%', default: '5', slider: { min: 0, max: 20, step: 0.5 } },
+    { key: 'base', label: 'Base salary', suffix: '$', default: '3000', slider: { min: 0, max: 20000, step: 250 } },
   ],
   outputs: [
     { key: 'commission', label: 'Commission earned' },
@@ -365,6 +412,20 @@ export const CommissionCalculatorClient = makeCalculatorClient({
     return {
       commission: fmtUSD(commission),
       total: fmtUSD(base + commission),
+    }
+  },
+  chart: { kind: 'compare', title: 'Total earnings mix' },
+  compare: (v) => {
+    const base = toNum(v.base), comm = toNum(v.sales) * (toNum(v.rate) / 100)
+    if (!(base >= 0) || !(comm >= 0)) return null
+    return {
+      rows: [
+        { label: 'Total pay', segments: [
+          { label: 'Base salary', value: base, color: '#3b82f6' },
+          { label: 'Commission', value: comm, color: '#22c55e' },
+        ] },
+      ],
+      formatTotal: (n) => fmtUSD(n, 0),
     }
   },
   note: '💼 Common for sales reps and real estate agents. Real estate agents typically earn 2.5-3% per side.',
@@ -590,9 +651,9 @@ export const FinalGradeCalculatorClient = makeCalculatorClient({
 export const BillSplitCalculatorClient = makeCalculatorClient({
   slug: 'bill-split-calculator',
   inputs: [
-    { key: 'total', label: 'Bill total', suffix: '$', default: '120' },
-    { key: 'tip', label: 'Tip', suffix: '%', default: '18' },
-    { key: 'people', label: 'Number of people', default: '4' },
+    { key: 'total', label: 'Bill total', suffix: '$', default: '120', slider: { min: 0, max: 1000, step: 5 } },
+    { key: 'tip', label: 'Tip', suffix: '%', default: '18', slider: { min: 0, max: 30, step: 1 } },
+    { key: 'people', label: 'Number of people', default: '4', slider: { min: 1, max: 30, step: 1 } },
   ],
   outputs: [
     { key: 'perPerson', label: 'Each person pays', highlight: true },
@@ -611,6 +672,20 @@ export const BillSplitCalculatorClient = makeCalculatorClient({
       grandTotal: fmtUSD(grand),
     }
   },
+  chart: { kind: 'compare', title: 'Bill + tip' },
+  compare: (v) => {
+    const total = toNum(v.total), tip = total * (toNum(v.tip) / 100)
+    if (!(total >= 0) || !(tip >= 0)) return null
+    return {
+      rows: [
+        { label: 'Grand total', segments: [
+          { label: 'Bill', value: total, color: '#3b82f6' },
+          { label: 'Tip', value: tip, color: '#22c55e' },
+        ] },
+      ],
+      formatTotal: (n) => fmtUSD(n),
+    }
+  },
   note: '🍽️ Splits a bill evenly including tip. For itemized splitting, calculate per-person items separately.',
 })
 
@@ -619,9 +694,9 @@ export const BillSplitCalculatorClient = makeCalculatorClient({
 export const TrapezoidCalculatorClient = makeCalculatorClient({
   slug: 'trapezoid-calculator',
   inputs: [
-    { key: 'a', label: 'Top side (a)', default: '5' },
-    { key: 'b', label: 'Bottom side (b)', default: '10' },
-    { key: 'h', label: 'Height (h)', default: '4' },
+    { key: 'a', label: 'Top side (a)', default: '5', slider: { min: 1, max: 50, step: 0.5 } },
+    { key: 'b', label: 'Bottom side (b)', default: '10', slider: { min: 1, max: 50, step: 0.5 } },
+    { key: 'h', label: 'Height (h)', default: '4', slider: { min: 1, max: 50, step: 0.5 } },
   ],
   outputs: [{ key: 'area', label: 'Area', highlight: true, sublabel: '(a + b)/2 × h' }],
   compute: (v) => {
@@ -631,12 +706,13 @@ export const TrapezoidCalculatorClient = makeCalculatorClient({
     // 公式放 sublabel,值保持纯数字(避免污染 Copy Summary / CSV)
     return { area: fmtNum(((a + b) / 2) * h, 4) }
   },
+  chart: { kind: 'shape', shape: 'trapezoid', dimKeys: ['a', 'b', 'h'], title: 'Shape preview' },
   note: '📐 Trapezoid area = average of parallel sides × height.',
 })
 
 export const CubeCalculatorClient = makeCalculatorClient({
   slug: 'cube-calculator',
-  inputs: [{ key: 'side', label: 'Side length', default: '5' }],
+  inputs: [{ key: 'side', label: 'Side length', default: '5', slider: { min: 1, max: 50, step: 0.5 } }],
   outputs: [
     { key: 'volume', label: 'Volume', highlight: true, sublabel: 'V = s³' },
     { key: 'surface', label: 'Surface area', sublabel: 'SA = 6s²' },
@@ -653,12 +729,13 @@ export const CubeCalculatorClient = makeCalculatorClient({
       surface: fmtNum(6 * s * s, 4),
     }
   },
+  chart: { kind: 'shape', shape: 'cube', dimKeys: ['side'], title: 'Shape preview' },
   note: '🧊 Cube volume = side³. Surface area = 6 × side².',
 })
 
 export const SphereCalculatorClient = makeCalculatorClient({
   slug: 'sphere-calculator',
-  inputs: [{ key: 'r', label: 'Radius', default: '5' }],
+  inputs: [{ key: 'r', label: 'Radius', default: '5', slider: { min: 1, max: 50, step: 0.5 } }],
   outputs: [
     { key: 'volume', label: 'Volume', highlight: true, sublabel: 'V = ⁴⁄₃ π r³' },
     { key: 'surface', label: 'Surface area', sublabel: 'SA = 4 π r²' },
@@ -674,6 +751,7 @@ export const SphereCalculatorClient = makeCalculatorClient({
       surface: fmtNum(4 * Math.PI * r * r, 4),
     }
   },
+  chart: { kind: 'shape', shape: 'sphere', dimKeys: ['r'], title: 'Shape preview' },
   note: '🔵 Sphere volume = ⁴⁄₃ π r³. Surface area = 4 π r².',
 })
 
@@ -695,8 +773,8 @@ export const SalaryConverterClient = makeCalculatorClient({
         { label: 'Hourly', value: 'hourly' },
       ],
     },
-    { key: 'amount', label: 'Amount', suffix: '$', default: '60000' },
-    { key: 'hours', label: 'Hours per week', default: '40' },
+    { key: 'amount', label: 'Amount', suffix: '$', default: '60000', slider: { min: 0, max: 500000, step: 1000 } },
+    { key: 'hours', label: 'Hours per week', default: '40', slider: { min: 1, max: 80, step: 1 } },
   ],
   outputs: [
     { key: 'annual', label: 'Annual salary', highlight: true },
@@ -741,6 +819,24 @@ export const SalaryConverterClient = makeCalculatorClient({
       biweekly: fmtUSD(annual / 26, 0),
       weekly: fmtUSD(annual / 52, 0),
       hourly: fmtUSD(annual / (52 * hours), 2),
+    }
+  },
+  chart: { kind: 'compare', title: 'Pay period ladder' },
+  compare: (v) => {
+    const amount = toNum(v.amount)
+    const hours = toNum(v.hours) || 40
+    if (!(amount > 0)) return null
+    const perYear: Record<string, number> = { annual: 1, monthly: 12, semimonthly: 24, biweekly: 26, weekly: 52, hourly: 52 * hours }
+    const annualized = amount * perYear[v.unit ?? 'annual']
+    const rowsDef: [string, number][] = [
+      ['Monthly', 12], ['Bi-weekly', 26], ['Weekly', 52], ['Hourly', 52 * hours],
+    ]
+    return {
+      rows: rowsDef.map(([label, n]) => ({
+        label,
+        segments: [{ label: 'Per period', value: annualized / n, color: label === 'Hourly' ? '#22c55e' : '#3b82f6' }],
+      })),
+      formatTotal: (n) => fmtUSD(n, 0),
     }
   },
   note: '💵 Assumes 12 monthly pays, 24 semi-monthly pays, 26 bi-weekly pays, and 52 paid weeks/year. Overtime and bonuses are not included.',

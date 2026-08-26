@@ -7,6 +7,7 @@ import type { ToolL10n } from '../tool-l10n'
 export const rectangleCalculatorL10n: ToolL10n = {
   zh: {
     ui: {
+      'chartTitle': '图形预览',
       'in.w': '宽',
       'in.h': '高',
       'out.area': '面积',
@@ -26,6 +27,7 @@ export const rectangleCalculatorL10n: ToolL10n = {
   },
   es: {
     ui: {
+      'chartTitle': 'Vista previa',
       'in.w': 'Ancho',
       'in.h': 'Alto',
       'out.area': 'Área',
@@ -45,6 +47,7 @@ export const rectangleCalculatorL10n: ToolL10n = {
   },
   de: {
     ui: {
+      'chartTitle': 'Formvorschau',
       'in.w': 'Breite',
       'in.h': 'Höhe',
       'out.area': 'Fläche',

@@ -7,6 +7,7 @@ import type { ToolL10n } from '../tool-l10n'
 export const circleCalculatorL10n: ToolL10n = {
   zh: {
     ui: {
+      'chartTitle': '图形预览',
       'in.r': '半径',
       'out.area': '面积',
       'out.circumference': '周长',
@@ -25,6 +26,7 @@ export const circleCalculatorL10n: ToolL10n = {
   },
   es: {
     ui: {
+      'chartTitle': 'Vista previa',
       'in.r': 'Radio',
       'out.area': 'Área',
       'out.circumference': 'Circunferencia',
@@ -43,6 +45,7 @@ export const circleCalculatorL10n: ToolL10n = {
   },
   de: {
     ui: {
+      'chartTitle': 'Formvorschau',
       'in.r': 'Radius',
       'out.area': 'Fläche',
       'out.circumference': 'Umfang',

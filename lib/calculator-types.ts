@@ -180,7 +180,20 @@ export interface CompareChartConfig {
   titleKey?: string
 }
 
-export type ChartConfig = DonutChartConfig | GaugeChartConfig | SeriesChartConfig | CompareChartConfig
+/**
+ * 参数化几何图形配置 - 按 dimKeys 指向的输入字段实时绘制
+ * 圆/直角三角形/矩形/梯形/立方体/球,并标注尺寸线。
+ */
+export interface ShapeChartConfig {
+  kind: 'shape'
+  title?: string
+  titleKey?: string
+  shape: 'circle' | 'triangle' | 'rectangle' | 'trapezoid' | 'cube' | 'sphere'
+  /** 参与绘图的输入字段 key(顺序即尺寸标注顺序,如梯形 ['a','b','h']) */
+  dimKeys: string[]
+}
+
+export type ChartConfig = DonutChartConfig | GaugeChartConfig | SeriesChartConfig | CompareChartConfig | ShapeChartConfig
 
 /**
  * 曲线数据(series 钩子的返回类型)。

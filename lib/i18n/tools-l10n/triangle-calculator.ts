@@ -7,6 +7,7 @@ import type { ToolL10n } from '../tool-l10n'
 export const triangleCalculatorL10n: ToolL10n = {
   zh: {
     ui: {
+      'chartTitle': '图形预览',
       'in.a': '边 a',
       'in.b': '边 b',
       'out.c': '斜边 (c)',
@@ -26,6 +27,7 @@ export const triangleCalculatorL10n: ToolL10n = {
   },
   es: {
     ui: {
+      'chartTitle': 'Vista previa',
       'in.a': 'Lado a',
       'in.b': 'Lado b',
       'out.c': 'Hipotenusa (c)',
@@ -45,6 +47,7 @@ export const triangleCalculatorL10n: ToolL10n = {
   },
   de: {
     ui: {
+      'chartTitle': 'Formvorschau',
       'in.a': 'Seite a',
       'in.b': 'Seite b',
       'out.c': 'Hypotenuse (c)',

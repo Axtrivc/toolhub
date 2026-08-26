@@ -7,6 +7,7 @@ import { BreakdownChart } from './BreakdownChart'
 import { GaugeChart } from '../charts/GaugeChart'
 import { LineAreaChart } from '../charts/LineAreaChart'
 import { StackedCompareChart } from '../charts/StackedCompareChart'
+import { ShapeFigure } from '../charts/ShapeFigure'
 import { ResultActions } from '../ResultActions'
 import { LoadSampleButton } from '../LoadSampleButton'
 import { ShareResultButton } from '../calculator/ShareResultButton'
@@ -506,6 +507,28 @@ export function makeCalculatorClient(config: CalculatorConfig): ComponentType {
                   } catch {
                     return null
                   }
+                }
+                if (chart.kind === 'shape') {
+                  const dims = chart.dimKeys
+                    .map((k) => {
+                      const f = config.inputs.find((inp) => inp.key === k)
+                      const num = parseFloat(values[k] ?? '')
+                      // 标注名优先取括号里的短名(如 'Top side (a)' → 'a'),无括号取末词
+                      const m = f ? f.label.match(/\(([a-zA-Z]+)\)/) : null
+                      return {
+                        label: m ? m[1] : (f ? f.label.split(' ').slice(-1)[0] : k),
+                        value: num,
+                        unit: f?.suffix ? inSuffix(k, f.suffix) : undefined,
+                      }
+                    })
+                  return (
+                    <ShapeFigure
+                      key={ci}
+                      title={chart.title ? L(tKey, chart.title) : undefined}
+                      shape={chart.shape}
+                      dims={dims}
+                    />
+                  )
                 }
                 // 默认:donut(既有配置不写 kind 也走这里,行为不变)
                 const slices = chart.slices

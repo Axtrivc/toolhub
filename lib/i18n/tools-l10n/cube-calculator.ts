@@ -7,6 +7,7 @@ import type { ToolL10n } from '../tool-l10n'
 export const cubeCalculatorL10n: ToolL10n = {
   zh: {
     ui: {
+      'chartTitle': '图形预览',
       'in.side': '边长',
       'out.volume': '体积',
       'out.surface': '表面积',
@@ -23,6 +24,7 @@ export const cubeCalculatorL10n: ToolL10n = {
   },
   es: {
     ui: {
+      'chartTitle': 'Vista previa',
       'in.side': 'Longitud de la arista',
       'out.volume': 'Volumen',
       'out.surface': 'Área de superficie',
@@ -39,6 +41,7 @@ export const cubeCalculatorL10n: ToolL10n = {
   },
   de: {
     ui: {
+      'chartTitle': 'Formvorschau',
       'in.side': 'Kantenlänge',
       'out.volume': 'Volumen',
       'out.surface': 'Oberfläche',

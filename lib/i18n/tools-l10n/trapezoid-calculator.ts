@@ -11,6 +11,7 @@ export const trapezoidCalculatorL10n: ToolL10n = {
       explain: '梯形面积。a、b 是两条平行边(底),h 是它们之间的垂直高。',
     },
     ui: {
+      'chartTitle': '图形预览',
       'in.a': '上底 (a)',
       'in.b': '下底 (b)',
       'in.h': '高 (h)',
@@ -32,6 +33,7 @@ export const trapezoidCalculatorL10n: ToolL10n = {
       explain: 'Área de un trapecio. a y b son los dos lados paralelos (bases), h es la altura perpendicular entre ellos.',
     },
     ui: {
+      'chartTitle': 'Vista previa',
       'in.a': 'Lado superior (a)',
       'in.b': 'Lado inferior (b)',
       'in.h': 'Altura (h)',
@@ -53,6 +55,7 @@ export const trapezoidCalculatorL10n: ToolL10n = {
       explain: 'Trapezfläche. a und b sind die beiden parallelen Seiten (Grundseiten), h ist der senkrechte Abstand zwischen ihnen.',
     },
     ui: {
+      'chartTitle': 'Formvorschau',
       'in.a': 'Obere Seite (a)',
       'in.b': 'Untere Seite (b)',
       'in.h': 'Höhe (h)',
