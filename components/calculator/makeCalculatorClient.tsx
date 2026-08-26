@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useMemo, useCallback, useEffect, useRef, type ComponentType } from 'react'
-import { CalculatorField, ResultCard, CalculatorNote } from './CalculatorField'
+import { CalculatorField, CalculatorSliderField, ResultCard, CalculatorNote } from './CalculatorField'
 import { BreakdownChart } from './BreakdownChart'
 import { GaugeChart } from '../charts/GaugeChart'
 import { LineAreaChart } from '../charts/LineAreaChart'
@@ -280,6 +280,23 @@ export function makeCalculatorClient(config: CalculatorConfig): ComponentType {
               )
             }
             // 默认 number/text:由 f.type 决定输入框 type(默认 number,select 在上方分支已处理)
+            // 声明 slider 的 number 字段 → 数字框 + 滑杆双向绑定
+            if (f.slider && f.type !== 'text') {
+              return (
+                <CalculatorSliderField
+                  key={f.key}
+                  id={f.key}
+                  label={inLabel(f.key, f.label)}
+                  value={values[f.key] ?? ''}
+                  onChange={(v) => setValue(f.key, v)}
+                  suffix={f.suffix ? inSuffix(f.key, f.suffix) : undefined}
+                  placeholder={f.placeholder}
+                  min={f.slider.min}
+                  max={f.slider.max}
+                  step={f.slider.step}
+                />
+              )
+            }
             return (
               <CalculatorField
                 key={f.key}

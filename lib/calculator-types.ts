@@ -31,6 +31,12 @@ export interface FieldDef {
   placeholder?: string
   /** select 类型的选项 */
   options?: { label: string; value: string }[]
+  /**
+   * 数值滑杆(可选,仅 number 字段生效):声明后输入框下方追加
+   * range 滑杆,与数字框双向绑定,拖动实时驱动计算/图表。
+   * 范围之外的数字框输入仍被允许(滑杆仅 clamp 显示,不回写)。
+   */
+  slider?: { min: number; max: number; step: number }
 }
 
 export interface OutputDef {

@@ -19,12 +19,12 @@ export const APYCalculatorClient = makeCalculatorClient({
   slug: 'apy-calculator',
   inputs: [
     { key: 'principal', label: 'Principal', suffix: '$', default: '10000' },
-    { key: 'apr', label: 'Annual rate (APR)', suffix: '%', default: '5' },
+    { key: 'apr', label: 'Annual rate (APR)', suffix: '%', default: '5', slider: { min: 0, max: 15, step: 0.05 } },
     { key: 'compound', label: 'Compounding', default: 'monthly', options: [
       { label: 'Annually', value: '1' }, { label: 'Quarterly', value: '4' },
       { label: 'Monthly', value: '12' }, { label: 'Daily', value: '365' },
     ]},
-    { key: 'years', label: 'Years', default: '1' },
+    { key: 'years', label: 'Years', default: '1', slider: { min: 1, max: 40, step: 1 } },
   ],
   outputs: [
     { key: 'apy', label: 'APY (effective rate)', highlight: true },
@@ -68,8 +68,8 @@ export const CreditCardMinimumCalculatorClient = makeCalculatorClient({
   slug: 'credit-card-minimum-payment-calculator',
   inputs: [
     { key: 'balance', label: 'Current balance', suffix: '$', default: '5000' },
-    { key: 'apr', label: 'APR', suffix: '%', default: '19.99' },
-    { key: 'minPct', label: 'Minimum payment %', suffix: '%', default: '2' },
+    { key: 'apr', label: 'APR', suffix: '%', default: '19.99', slider: { min: 0, max: 36, step: 0.1 } },
+    { key: 'minPct', label: 'Minimum payment %', suffix: '%', default: '2', slider: { min: 1, max: 5, step: 0.1 } },
   ],
   outputs: [
     { key: 'minPayment', label: 'Minimum payment', highlight: true },

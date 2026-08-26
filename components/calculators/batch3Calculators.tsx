@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useMemo, useCallback } from 'react'
-import { CalculatorField, ResultCard, CalculatorNote } from '@/components/calculator/CalculatorField'
+import { CalculatorField, CalculatorSliderField, ResultCard, CalculatorNote } from '@/components/calculator/CalculatorField'
 import { LoadSampleButton } from '@/components/LoadSampleButton'
 import { ResultActions } from '@/components/ResultActions'
 import { makeCalculatorClient } from '../calculator/makeCalculatorClient'
@@ -263,7 +263,7 @@ export function CalorieCalculatorClient() {
             { label: L('optFemale', 'Female'), value: 'female' },
           ]}
         />
-        <CalculatorField id="age" label={L('age', 'Age')} value={age} onChange={setAge} suffix={L('yrsSuffix', 'years')} placeholder="30" />
+        <CalculatorSliderField id="age" label={L('age', 'Age')} value={age} onChange={setAge} suffix={L('yrsSuffix', 'years')} placeholder="30" min={18} max={80} step={1} />
         <CalculatorField id="weight" label={L('weight', 'Weight')} value={weight} onChange={setWeight} suffix={unit === 'metric' ? 'kg' : 'lb'} placeholder={unit === 'metric' ? '70' : '155'} />
         {unit === 'metric' ? (
           <CalculatorField id="height" label={L('height', 'Height')} value={height} onChange={setHeight} suffix="cm" placeholder="175" />
@@ -413,7 +413,7 @@ export function BMRCalculatorClient() {
             { label: L('optFemale', 'Female'), value: 'female' },
           ]}
         />
-        <CalculatorField id="age" label={L('age', 'Age')} value={age} onChange={setAge} suffix={L('yrsSuffix', 'years')} placeholder="30" />
+        <CalculatorSliderField id="age" label={L('age', 'Age')} value={age} onChange={setAge} suffix={L('yrsSuffix', 'years')} placeholder="30" min={18} max={80} step={1} />
         <CalculatorField id="weight" label={L('weight', 'Weight')} value={weight} onChange={setWeight} suffix={unit === 'metric' ? 'kg' : 'lb'} placeholder={unit === 'metric' ? '70' : '155'} />
         {unit === 'metric' ? (
           <CalculatorField id="height" label={L('height', 'Height')} value={height} onChange={setHeight} suffix="cm" placeholder="175" />
@@ -888,14 +888,14 @@ export const MortgageCalculatorClient = makeCalculatorClient({
   urlState: true,
   inputs: [
     { key: 'home', label: 'Home price', suffix: '$', default: '400000' },
-    { key: 'down', label: 'Down payment', suffix: '%', default: '20' },
-    { key: 'rate', label: 'Interest rate', suffix: '%', default: '6.8' },
-    { key: 'years', label: 'Loan term', suffix: 'years', default: '30' },
+    { key: 'down', label: 'Down payment', suffix: '%', default: '20', slider: { min: 0, max: 100, step: 1 } },
+    { key: 'rate', label: 'Interest rate', suffix: '%', default: '6.8', slider: { min: 0, max: 15, step: 0.05 } },
+    { key: 'years', label: 'Loan term', suffix: 'years', default: '30', slider: { min: 1, max: 40, step: 1 } },
     { key: 'tax', label: 'Property tax (per year)', suffix: '$', default: '3600' },
     { key: 'insurance', label: 'Home insurance (per year)', suffix: '$', default: '1500' },
     { key: 'hoa', label: 'HOA fees (per month)', suffix: '$', default: '0' },
     { key: 'pmiRate', label: 'PMI rate (yearly)', suffix: '%', default: '0.5' },
-    { key: 'extra', label: 'Extra monthly payment', suffix: '$', default: '0' },
+    { key: 'extra', label: 'Extra monthly payment', suffix: '$', default: '0', slider: { min: 0, max: 2000, step: 25 } },
   ],
   outputs: [
     { key: 'piti', label: 'Total monthly payment (PITI)', highlight: true },
@@ -1097,8 +1097,8 @@ export const CreditCardPayoffCalculatorClient = makeCalculatorClient({
   slug: 'credit-card-payoff-calculator',
   inputs: [
     { key: 'balance', label: 'Current balance', suffix: '$', default: '5000' },
-    { key: 'apr', label: 'Annual rate (APR)', suffix: '%', default: '19.99' },
-    { key: 'payment', label: 'Monthly payment', suffix: '$', default: '200' },
+    { key: 'apr', label: 'Annual rate (APR)', suffix: '%', default: '19.99', slider: { min: 0, max: 36, step: 0.1 } },
+    { key: 'payment', label: 'Monthly payment', suffix: '$', default: '200', slider: { min: 25, max: 1000, step: 25 } },
   ],
   outputs: [
     { key: 'months', label: 'Time to pay off', highlight: true },

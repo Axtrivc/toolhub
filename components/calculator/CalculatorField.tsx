@@ -56,6 +56,53 @@ export function CalculatorField({
   )
 }
 
+/**
+ * 数值字段 + 滑杆双向绑定(工厂 FieldDef.slider 声明后渲染)。
+ * - 拖杆 → 数字框同步为步进值(按 step 小数位取整,避免 0.05 步进的浮点尾差);
+ * - 数字框输入超出范围 → 滑杆仅 clamp 显示位置,不回写不阻止;
+ * - 空/非数字输入 → 滑杆回到 min 位置显示。
+ */
+export function CalculatorSliderField({
+  min,
+  max,
+  step,
+  ...field
+}: {
+  min: number
+  max: number
+  step: number
+  label: string
+  value: string
+  onChange: (v: string) => void
+  placeholder?: string
+  suffix?: string
+  id: string
+}) {
+  const parsed = parseFloat(field.value)
+  const safe = Number.isFinite(parsed) ? Math.min(max, Math.max(min, parsed)) : min
+  const pct = max > min ? ((safe - min) / (max - min)) * 100 : 0
+  const decimals = (String(step).split('.')[1] ?? '').length
+
+  return (
+    <div>
+      <CalculatorField {...field} type="number" />
+      <input
+        type="range"
+        className="calc-slider"
+        min={min}
+        max={max}
+        step={step}
+        value={safe}
+        aria-label={field.label}
+        onChange={(e) => field.onChange(String(Number((Number(e.target.value)).toFixed(decimals))))}
+        style={{
+          background: `linear-gradient(to right, rgb(var(--primary)) ${pct}%, rgb(var(--bg-subtle)) ${pct}%)`,
+        }}
+      />
+    </div>
+  )
+}
+
 export function ResultCard({
   label,
   value,

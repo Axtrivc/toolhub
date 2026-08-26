@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useMemo, useCallback } from 'react'
-import { CalculatorField, ResultCard, CalculatorNote } from '@/components/calculator/CalculatorField'
+import { CalculatorField, CalculatorSliderField, ResultCard, CalculatorNote } from '@/components/calculator/CalculatorField'
 import { LoadSampleButton } from '@/components/LoadSampleButton'
 import { ResultActions } from '@/components/ResultActions'
 import { makeCalculatorClient } from '../calculator/makeCalculatorClient'
@@ -122,8 +122,8 @@ export const SavingsGoalCalculatorClient = makeCalculatorClient({
   inputs: [
     { key: 'goal', label: 'Savings goal', suffix: '$', default: '50000' },
     { key: 'current', label: 'Currently saved', suffix: '$', default: '5000' },
-    { key: 'rate', label: 'Annual return', suffix: '%', default: '4' },
-    { key: 'years', label: 'Years to goal', default: '5' },
+    { key: 'rate', label: 'Annual return', suffix: '%', default: '4', slider: { min: 0, max: 12, step: 0.1 } },
+    { key: 'years', label: 'Years to goal', default: '5', slider: { min: 1, max: 40, step: 1 } },
   ],
   outputs: [
     { key: 'monthly', label: 'Monthly contribution needed', highlight: true },
@@ -190,8 +190,8 @@ export const AnnuityCalculatorClient = makeCalculatorClient({
   slug: 'annuity-calculator',
   inputs: [
     { key: 'principal', label: 'Initial principal', suffix: '$', default: '100000' },
-    { key: 'rate', label: 'Annual return', suffix: '%', default: '5' },
-    { key: 'years', label: 'Payout period', suffix: 'years', default: '20' },
+    { key: 'rate', label: 'Annual return', suffix: '%', default: '5', slider: { min: 0, max: 12, step: 0.1 } },
+    { key: 'years', label: 'Payout period', suffix: 'years', default: '20', slider: { min: 1, max: 40, step: 1 } },
   ],
   outputs: [
     { key: 'annual', label: 'Annual payout', highlight: true },
@@ -297,9 +297,9 @@ export const RentVsBuyCalculatorClient = makeCalculatorClient({
   inputs: [
     { key: 'home', label: 'Home price', suffix: '$', default: '400000' },
     { key: 'rent', label: 'Comparable rent', suffix: '$/mo', default: '2000' },
-    { key: 'down', label: 'Down payment', suffix: '%', default: '20' },
-    { key: 'rate', label: 'Mortgage rate', suffix: '%', default: '6.8' },
-    { key: 'term', label: 'Loan term', suffix: 'years', default: '30' },
+    { key: 'down', label: 'Down payment', suffix: '%', default: '20', slider: { min: 0, max: 100, step: 1 } },
+    { key: 'rate', label: 'Mortgage rate', suffix: '%', default: '6.8', slider: { min: 0, max: 15, step: 0.05 } },
+    { key: 'term', label: 'Loan term', suffix: 'years', default: '30', slider: { min: 5, max: 40, step: 5 } },
     { key: 'years', label: 'Years in home', default: '7' },
   ],
   outputs: [
@@ -552,7 +552,7 @@ export function BodyFatCalculatorClient() {
         ) : (
           <>
             <CalculatorField id="weight" label={L('weight', 'Weight')} value={weight} onChange={setWeight} suffix={wUnit} placeholder={unit === 'metric' ? '70' : '155'} />
-            <CalculatorField id="age" label={L('age', 'Age')} value={age} onChange={setAge} suffix={L('yrsSuffix', 'years')} placeholder="30" />
+            <CalculatorSliderField id="age" label={L('age', 'Age')} value={age} onChange={setAge} suffix={L('yrsSuffix', 'years')} placeholder="30" min={18} max={80} step={1} />
           </>
         )}
       </div>

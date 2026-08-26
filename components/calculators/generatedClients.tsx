@@ -147,9 +147,9 @@ export const CompoundInterestCalculatorClient = makeCalculatorClient({
   urlState: true,
   inputs: [
     { key: 'principal', label: 'Initial investment', suffix: '$', default: '10000' },
-    { key: 'monthly', label: 'Monthly contribution', suffix: '$', default: '200' },
-    { key: 'rate', label: 'Annual interest rate', suffix: '%', default: '7' },
-    { key: 'years', label: 'Years', default: '20' },
+    { key: 'monthly', label: 'Monthly contribution', suffix: '$', default: '200', slider: { min: 0, max: 2000, step: 50 } },
+    { key: 'rate', label: 'Annual interest rate', suffix: '%', default: '7', slider: { min: 0, max: 15, step: 0.1 } },
+    { key: 'years', label: 'Years', default: '20', slider: { min: 1, max: 50, step: 1 } },
   ],
   outputs: [
     { key: 'futureValue', label: 'Future value', highlight: true },
