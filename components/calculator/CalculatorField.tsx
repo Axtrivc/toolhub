@@ -1,6 +1,70 @@
 'use client'
 
-import type { ReactNode } from 'react'
+import { useEffect, useRef, useState, type ReactNode } from 'react'
+import { useReducedMotion } from '../motion/MotionPrimitives'
+
+/**
+ * 结果数字 tween:值变化时旧值→新值平滑滚动(约 400ms easeOut)。
+ * - 只在「数值型字符串」上启用($/%/千分位自动拆解保留);文本/错误串直出;
+ * - SSR/首帧直接渲染终值(不做 0→N 开场动画,水合安全);
+ * - reduced-motion 直接切换,无动画。
+ */
+export function AnimatedNumber({ value }: { value: ReactNode }) {
+  const reduceMotion = useReducedMotion()
+  const [display, setDisplay] = useState<string | null>(null)
+  const prevNumRef = useRef<number | null>(null)
+
+  const text = typeof value === 'string' ? value : null
+  // 拆解 "$1,234.56%" → prefix=$ num=1234.56 suffix=% decimals=2
+  const parsed =
+    text !== null
+      ? (() => {
+          const m = text.match(/^([^\d+.\-]*)([+-]?[\d,]*\.?\d+)(.*)$/)
+          if (!m) return null
+          const num = parseFloat(m[2].replace(/,/g, ''))
+          if (!Number.isFinite(num)) return null
+          const decMatch = m[2].split('.')[1]
+          return { prefix: m[1], num, suffix: m[3], decimals: decMatch ? decMatch.length : 0 }
+        })()
+      : null
+
+  useEffect(() => {
+    if (!parsed || reduceMotion) {
+      prevNumRef.current = parsed?.num ?? null
+      setDisplay(null)
+      return
+    }
+    const from = prevNumRef.current
+    prevNumRef.current = parsed.num
+    if (from === null || from === parsed.num) {
+      setDisplay(null)
+      return
+    }
+    const start = performance.now()
+    const dur = 400
+    let raf = 0
+    const step = (now: number) => {
+      const k = Math.min(1, (now - start) / dur)
+      const eased = 1 - Math.pow(1 - k, 3)
+      const cur = from + (parsed.num - from) * eased
+      setDisplay(
+        `${parsed.prefix}${cur.toLocaleString('en-US', {
+          minimumFractionDigits: parsed.decimals,
+          maximumFractionDigits: parsed.decimals,
+        })}${parsed.suffix}`,
+      )
+      if (k < 1) raf = requestAnimationFrame(step)
+      else setDisplay(null) // 终帧回到原串(与 compute 输出完全一致)
+    }
+    raf = requestAnimationFrame(step)
+    return () => cancelAnimationFrame(raf)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [text, reduceMotion])
+
+  if (text === null) return <>{value}</>
+  if (display !== null) return <span className="tabular-nums">{display}</span>
+  return <span className="tabular-nums">{text}</span>
+}
 
 /**
  * 计算器通用 UI 组件库 - 主题感知(用 CSS 变量)
@@ -135,7 +199,7 @@ export function ResultCard({
         className={`mt-1.5 text-2xl font-bold sm:text-3xl ${highlight ? 'text-primary' : ''}`}
         style={highlight ? undefined : { color: 'rgb(var(--text))' }}
       >
-        {value}
+        {highlight ? <AnimatedNumber value={value} /> : value}
       </div>
       {sublabel && <div className="mt-1 text-xs" style={{ color: 'rgb(var(--text-faint))' }}>{sublabel}</div>}
     </div>

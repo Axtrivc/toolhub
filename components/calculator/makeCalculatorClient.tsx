@@ -230,6 +230,28 @@ export function makeCalculatorClient(config: CalculatorConfig): ComponentType {
       ? `${config.slug}-result.csv`
       : 'calculation-result.csv'
 
+    // 移动端 sticky 结果条:滚动越过结果区后,底部悬浮显示主结果(highlight),
+    // 调表单时结果永远可见。仅 <sm 视口;IntersectionObserver 不可用时降级为不显示。
+    const resultsRef = useRef<HTMLDivElement>(null)
+    const [resultsOffscreen, setResultsOffscreen] = useState(false)
+    useEffect(() => {
+      const el = resultsRef.current
+      if (!el || typeof IntersectionObserver === 'undefined') return
+      const io = new IntersectionObserver(
+        ([entry]) => setResultsOffscreen(!entry.isIntersecting && entry.boundingClientRect.top < 0),
+        { threshold: 0 },
+      )
+      io.observe(el)
+      return () => io.disconnect()
+    }, [])
+    const highlightOut = config.outputs.find((o) => o.highlight)
+    const highlightValue = highlightOut ? mergedResults[highlightOut.key] : undefined
+    const stickyVisible =
+      resultsOffscreen &&
+      !!highlightValue &&
+      highlightValue !== '—' &&
+      !highlightValue.startsWith('⚠️')
+
     return (
       <div className="space-y-6">
         {/* 输入区 + 右上角 Load Sample / Reset 按钮 */}
@@ -313,7 +335,7 @@ export function makeCalculatorClient(config: CalculatorConfig): ComponentType {
         </div>
 
         {/* 结果区(aria-live:输入变化时屏幕阅读器播报结果更新) */}
-        <div role="status" aria-live="polite" className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+        <div ref={resultsRef} role="status" aria-live="polite" className="grid grid-cols-1 gap-3 sm:grid-cols-2">
           {config.outputs.map((o) => (
             <ResultCard
               key={o.key}
@@ -419,6 +441,21 @@ export function makeCalculatorClient(config: CalculatorConfig): ComponentType {
         })()}
 
         {config.note && <CalculatorNote>{L('note', config.note)}</CalculatorNote>}
+
+        {/* 移动端 sticky 结果条(越过结果区后出现;含安全区 padding) */}
+        {stickyVisible && highlightOut && (
+          <div
+            className="fixed inset-x-0 bottom-0 z-40 border-t px-4 pb-[calc(0.75rem+env(safe-area-inset-bottom))] pt-3 backdrop-blur-md sm:hidden"
+            style={{ borderColor: 'rgb(var(--border))', backgroundColor: 'rgb(var(--bg-card) / 0.92)' }}
+          >
+            <div className="mx-auto flex max-w-lg items-baseline justify-between gap-4">
+              <span className="truncate text-xs font-medium uppercase tracking-wide" style={{ color: 'rgb(var(--text-subtle))' }}>
+                {outLabel(highlightOut.key, highlightOut.label)}
+              </span>
+              <span className="shrink-0 text-lg font-bold text-primary tabular-nums">{highlightValue}</span>
+            </div>
+          </div>
+        )}
       </div>
     )
   }
