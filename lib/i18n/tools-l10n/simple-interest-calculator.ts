@@ -14,6 +14,10 @@ export const simpleInterestCalculatorL10n: ToolL10n = {
     ],
     formula: { formula: FORMULA, explain: '单利。P = 本金,r = 年利率(小数形式),t = 年数。I 是这段时间内累计的利息。' },
     ui: {
+      'chartTitle': '本金 + 利息',
+      'cmp.0': '总额',
+      'cmpseg.0': '本金',
+      'cmpseg.1': '利息',
       'in.principal': '本金', 'in.rate': '年利率', 'in.years': '年数',
       'out.interest': '利息', 'out.total': '总金额',
       note: '💵 单利:I = P × r × t。与复利不同,你不会对已累计的利息再赚利息。',
@@ -26,6 +30,10 @@ export const simpleInterestCalculatorL10n: ToolL10n = {
     ],
     formula: { formula: FORMULA, explain: 'Interés simple. P = principal, r = tasa anual (en decimal), t = años. I es el interés acumulado durante el periodo.' },
     ui: {
+      'chartTitle': 'Capital + interés',
+      'cmp.0': 'Importe total',
+      'cmpseg.0': 'Capital',
+      'cmpseg.1': 'Interés',
       'in.principal': 'Principal', 'in.rate': 'Tasa anual', 'in.years': 'Años',
       'out.interest': 'Interés generado', 'out.total': 'Cantidad total',
       note: '💵 Interés simple: I = P × r × t. A diferencia del interés compuesto, no ganas interés sobre el interés acumulado.',
@@ -38,6 +46,10 @@ export const simpleInterestCalculatorL10n: ToolL10n = {
     ],
     formula: { formula: FORMULA, explain: 'Einfacher Zins. P = Kapital, r = Jahressatz (als Dezimalzahl), t = Jahre. I ist der über den Zeitraum angefallene Zins.' },
     ui: {
+      'chartTitle': 'Kapital + Zinsen',
+      'cmp.0': 'Gesamtbetrag',
+      'cmpseg.0': 'Kapital',
+      'cmpseg.1': 'Zinsen',
       'in.principal': 'Kapital', 'in.rate': 'Jahressatz', 'in.years': 'Jahre',
       'out.interest': 'Zinsen', 'out.total': 'Gesamtbetrag',
       note: '💵 Einfacher Zins: I = P × r × t. Anders als beim Zinseszins erhältst du keine Zinsen auf bereits angefallene Zinsen.',

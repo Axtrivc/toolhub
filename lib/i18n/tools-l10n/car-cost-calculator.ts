@@ -7,6 +7,11 @@ import type { ToolL10n } from '../tool-l10n'
 export const CarCostCalculatorL10n: ToolL10n = {
   zh: {
     ui: {
+      'chartTitle': '钱花在哪了',
+      'slice.depreciation': '折旧',
+      'slice.fuel': '油费',
+      'slice.other': '保险 + 保养',
+      'chartCenter': '总计',
       'errInvalid': '请输入有效数值(残值不能超过购车价)',
       'in.carPrice': '购车价',
       'in.consumption': '油耗',
@@ -41,6 +46,11 @@ export const CarCostCalculatorL10n: ToolL10n = {
   },
   es: {
     ui: {
+      'chartTitle': 'A dónde va el dinero',
+      'slice.depreciation': 'Depreciación',
+      'slice.fuel': 'Combustible',
+      'slice.other': 'Seguro + mantenimiento',
+      'chartCenter': 'Total',
       'errInvalid': 'Introduce valores válidos (la reventa no puede superar el precio)',
       'in.carPrice': 'Precio del coche',
       'in.consumption': 'Consumo',
@@ -75,6 +85,11 @@ export const CarCostCalculatorL10n: ToolL10n = {
   },
   de: {
     ui: {
+      'chartTitle': 'Wohin das Geld geht',
+      'slice.depreciation': 'Wertverlust',
+      'slice.fuel': 'Kraftstoff',
+      'slice.other': 'Versicherung + Wartung',
+      'chartCenter': 'Gesamt',
       'errInvalid': 'Gültige Werte eingeben (Restwert nicht über Kaufpreis)',
       'in.carPrice': 'Kaufpreis',
       'in.consumption': 'Verbrauch',

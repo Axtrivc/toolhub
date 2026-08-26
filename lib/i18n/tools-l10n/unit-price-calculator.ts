@@ -15,6 +15,9 @@ export const unitPriceCalculatorL10n: ToolL10n = {
       { q: '这个工具能用在非食品上吗?', a: '能。卫生纸、纸尿裤、电池等按件数出售的,单位选「件」。液体用 ml,固体用 g。计算方法一样。' },
     ],
     ui: {
+      'chartTitle': '单价对决',
+      'cmp.0': '选项 1',
+      'cmp.1': '选项 2',
       'in.price1': '价格 1', 'in.size1': '规格 1', 'in.unit1': '单位 1', 'in.price2': '价格 2', 'in.size2': '规格 2', 'in.unit2': '单位 2',
       'opt.unit1.g': '克 (g)', 'opt.unit1.ml': '毫升 (ml)', 'opt.unit1.ct': '件 (ct)', 'opt.unit1.kg': '千克 (kg)',
       'opt.unit1.oz': '盎司 (oz)', 'opt.unit1.lb': '磅 (lb)', 'opt.unit1.l': '升 (l)', 'opt.unit1.mg': '毫克 (mg)',
@@ -34,6 +37,9 @@ export const unitPriceCalculatorL10n: ToolL10n = {
       { q: '¿Sirve para productos que no son alimentos?', a: 'Sí. Usa «unidad» para papel higiénico, pañales, pilas o cualquier producto vendido por cantidad. Usa ml para líquidos y g para sólidos. La matemática es la misma.' },
     ],
     ui: {
+      'chartTitle': 'Duelo de precio unitario',
+      'cmp.0': 'Opción 1',
+      'cmp.1': 'Opción 2',
       'in.price1': 'Precio 1', 'in.size1': 'Tamaño 1', 'in.unit1': 'Unidad 1', 'in.price2': 'Precio 2', 'in.size2': 'Tamaño 2', 'in.unit2': 'Unidad 2',
       'opt.unit1.g': 'gramos (g)', 'opt.unit1.ml': 'mililitros (ml)', 'opt.unit1.ct': 'unidades (ct)', 'opt.unit1.kg': 'kilogramos (kg)',
       'opt.unit1.oz': 'onzas (oz)', 'opt.unit1.lb': 'libras (lb)', 'opt.unit1.l': 'litros (l)', 'opt.unit1.mg': 'miligramos (mg)',
@@ -53,6 +59,9 @@ export const unitPriceCalculatorL10n: ToolL10n = {
       { q: 'Funktioniert das für Nicht-Lebensmittel?', a: 'Ja. Verwende „Stück" als Einheit für Toilettenpapier, Windeln, Batterien oder alles, was pro Stück verkauft wird. Für Flüssigkeiten ml, für Feststoffe g. Die Rechnung ist dieselbe.' },
     ],
     ui: {
+      'chartTitle': 'Preisvergleich',
+      'cmp.0': 'Option 1',
+      'cmp.1': 'Option 2',
       'in.price1': 'Preis 1', 'in.size1': 'Größe 1', 'in.unit1': 'Einheit 1', 'in.price2': 'Preis 2', 'in.size2': 'Größe 2', 'in.unit2': 'Einheit 2',
       'opt.unit1.g': 'Gramm (g)', 'opt.unit1.ml': 'Milliliter (ml)', 'opt.unit1.ct': 'Stück (ct)', 'opt.unit1.kg': 'Kilogramm (kg)',
       'opt.unit1.oz': 'Unzen (oz)', 'opt.unit1.lb': 'Pfund (lb)', 'opt.unit1.l': 'Liter (l)', 'opt.unit1.mg': 'Milligramm (mg)',

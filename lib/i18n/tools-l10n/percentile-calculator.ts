@@ -11,6 +11,8 @@ export const percentileCalculatorL10n: ToolL10n = {
       explain: 'P 百分位在已排序的 n 个值中的位置。当 rank 不是整数时,在相邻排名之间插值。',
     },
     ui: {
+      'chartTitle': '分布',
+      'line.sorted': '排序后数值',
       'in.numbers': '数字(逗号分隔)',
       'in.p': '百分位数',
       'inSuffix.p': '%',
@@ -33,6 +35,8 @@ export const percentileCalculatorL10n: ToolL10n = {
       explain: 'Posición del percentil P-ésimo en una lista ordenada de n valores. Cuando el rango no es entero, se interpola entre los vecinos.',
     },
     ui: {
+      'chartTitle': 'Distribución',
+      'line.sorted': 'Valores ordenados',
       'in.numbers': 'Números (separados por comas)',
       'in.p': 'Percentil',
       'inSuffix.p': '%',
@@ -55,6 +59,8 @@ export const percentileCalculatorL10n: ToolL10n = {
       explain: 'Position des P-ten Perzentils in einer sortierten Liste von n Werten. Ist der Rang nicht ganzzahlig, wird zwischen Nachbar­rängen interpoliert.',
     },
     ui: {
+      'chartTitle': 'Verteilung',
+      'line.sorted': 'Sortierte Werte',
       'in.numbers': 'Zahlen (kommagetrennt)',
       'in.p': 'Perzentil',
       'inSuffix.p': '%',

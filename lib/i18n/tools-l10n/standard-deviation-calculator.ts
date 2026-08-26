@@ -7,6 +7,9 @@ import type { ToolL10n } from '../tool-l10n'
 export const standardDeviationCalculatorL10n: ToolL10n = {
   zh: {
     ui: {
+      'chartTitle': '数据 vs 平均值',
+      'line.value': '数值',
+      'line.mean': '平均值',
       'in.numbers': '数字(逗号分隔)',
       'out.mean': '平均值',
       'out.stddev': '标准差(总体)',
@@ -27,6 +30,9 @@ export const standardDeviationCalculatorL10n: ToolL10n = {
   },
   es: {
     ui: {
+      'chartTitle': 'Tus números vs la media',
+      'line.value': 'Valor',
+      'line.mean': 'Media',
       'in.numbers': 'Números (separados por comas)',
       'out.mean': 'Media',
       'out.stddev': 'Desviación típica (poblacional)',
@@ -47,6 +53,9 @@ export const standardDeviationCalculatorL10n: ToolL10n = {
   },
   de: {
     ui: {
+      'chartTitle': 'Deine Zahlen vs. Mittelwert',
+      'line.value': 'Wert',
+      'line.mean': 'Mittelwert',
       'in.numbers': 'Zahlen (kommagetrennt)',
       'out.mean': 'Mittelwert',
       'out.stddev': 'Standardabweichung (Grundgesamtheit)',

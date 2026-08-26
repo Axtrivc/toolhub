@@ -127,8 +127,8 @@ export const PrimeFactorizationCalculatorClient = makeCalculatorClient({
 export const CombinationCalculatorClient = makeCalculatorClient({
   slug: 'combination-calculator',
   inputs: [
-    { key: 'n', label: 'Total items (n)', default: '10' },
-    { key: 'r', label: 'Choose (r)', default: '3' },
+    { key: 'n', label: 'Total items (n)', default: '10', slider: { min: 1, max: 25, step: 1 } },
+    { key: 'r', label: 'Choose (r)', default: '3', slider: { min: 1, max: 25, step: 1 } },
   ],
   outputs: [
     { key: 'result', label: 'Combinations C(n,r)', highlight: true },
@@ -166,8 +166,8 @@ export const CombinationCalculatorClient = makeCalculatorClient({
 export const PermutationCalculatorClient = makeCalculatorClient({
   slug: 'permutation-calculator',
   inputs: [
-    { key: 'n', label: 'Total items (n)', default: '5' },
-    { key: 'r', label: 'Arrange (r)', default: '3' },
+    { key: 'n', label: 'Total items (n)', default: '5', slider: { min: 1, max: 25, step: 1 } },
+    { key: 'r', label: 'Arrange (r)', default: '3', slider: { min: 1, max: 25, step: 1 } },
   ],
   outputs: [
     { key: 'result', label: 'Permutations P(n,r)', highlight: true },

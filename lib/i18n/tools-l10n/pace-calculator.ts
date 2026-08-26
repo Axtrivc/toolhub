@@ -14,6 +14,8 @@ export const PaceCalculatorL10n: ToolL10n = {
       { q: '配速和速度,该看哪个?', a: '配速(每公里/英里的用时)是训练计划、比赛和运动手表的语言;速度(km/h 或 mph)是跑步机显示的。本工具两者都给,换算采用精确的 1 英里 = 1.609344 公里。' },
     ],
     ui: {
+      'chartTitle': '各距离完赛时间',
+      'line.finish': '预测完赛时间',
       'in.distance': '距离',
       'in.pace': '配速',
       'in.races': '等效赛事成绩预测',
@@ -40,6 +42,8 @@ export const PaceCalculatorL10n: ToolL10n = {
       { q: '¿Ritmo o velocidad, cuál necesito?', a: 'El ritmo (tiempo por km o milla) es el idioma de los planes de entrenamiento, carreras y relojes; la velocidad (km/h o mph) es lo que muestran las cintas. Aquí obtienes ambos, con el factor exacto de 1 milla = 1,609344 km.' },
     ],
     ui: {
+      'chartTitle': 'Tiempos por distancia',
+      'line.finish': 'Tiempo previsto',
       'in.distance': 'Distancia',
       'in.pace': 'Ritmo',
       'in.races': 'Predicciones de carrera',
@@ -66,6 +70,8 @@ export const PaceCalculatorL10n: ToolL10n = {
       { q: 'Pace oder Geschwindigkeit — was brauche ich?', a: 'Pace (Zeit pro km oder Meile) sprechen Trainingspläne, Rennen und Uhren; Geschwindigkeit (km/h bzw. mph) zeigt das Laufband. Du bekommst beides, umgerechnet mit dem exakten Faktor 1 Meile = 1,609344 km.' },
     ],
     ui: {
+      'chartTitle': 'Zielzeiten nach Distanz',
+      'line.finish': 'Voraussichtliche Zielzeit',
       'in.distance': 'Entfernung',
       'in.pace': 'Tempo',
       'in.races': 'Äquivalente Wettkampfprognosen',

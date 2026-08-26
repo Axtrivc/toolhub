@@ -21,7 +21,7 @@ const ROMAN_PAIRS: [number, string][] = [
 export const RomanNumeralConverterClient = makeCalculatorClient({
   slug: 'roman-numeral-converter',
   inputs: [
-    { key: 'num', label: 'Number (1-3999)', default: '2024' },
+    { key: 'num', label: 'Number (1-3999)', default: '2024', slider: { min: 1, max: 3999, step: 1 } },
     { key: 'roman', label: 'Or Roman numeral', type: 'text', default: '', placeholder: 'MMXXIV' },
   ],
   outputs: [
@@ -115,7 +115,7 @@ const RACE_DISTANCES_KM: [string, number][] = [
 export const PaceCalculatorClient = makeCalculatorClient({
   slug: 'pace-calculator',
   inputs: [
-    { key: 'distance', label: 'Distance', suffix: 'km', default: '10' },
+    { key: 'distance', label: 'Distance', suffix: 'km', default: '10', slider: { min: 0.5, max: 50, step: 0.5 } },
     { key: 'time', label: 'Finish time', default: '50:00', placeholder: 'h:mm:ss or mm:ss' },
     { key: 'unit', label: 'Pace unit', default: 'km', options: [
       { label: 'Per kilometer', value: 'km' },
@@ -148,6 +148,20 @@ export const PaceCalculatorClient = makeCalculatorClient({
       pace: `${formatDuration(paceSec)} /${v.unit}`,
       speed,
       races: lines.join('\n'),
+    }
+  },
+  chart: { kind: 'series', title: 'Finish times by distance' },
+  series: (v) => {
+    const distance = Number(v.distance)
+    const parts = v.time.trim().split(':').map(Number)
+    if (parts.some((n) => !Number.isFinite(n))) return null
+    const timeSec = parts.length === 3 ? parts[0] * 3600 + parts[1] * 60 + parts[2] : parts.length === 2 ? parts[0] * 60 + parts[1] : parts[0]
+    if (!(distance > 0) || !(timeSec > 0)) return null
+    const races: [string, number][] = [['5K', 5], ['10K', 10], ['Half', 21.0975], ['Marathon', 42.195]]
+    return {
+      xLabels: races.map(([n]) => n),
+      lines: [{ key: 'finish', label: 'Predicted finish time', color: '#3b82f6', points: races.map(([, km]) => (timeSec / distance) * km / 60), area: true }],
+      formatY: (n) => formatDuration(n * 60),
     }
   },
   note: '🏃 Race predictions assume you hold the same pace — most runners slow slightly over longer distances, so treat longer predictions as optimistic targets.',
@@ -242,7 +256,7 @@ export const ElectricityCostCalculatorClient = makeCalculatorClient({
   slug: 'electricity-cost-calculator',
   urlState: true,
   inputs: [
-    { key: 'watts', label: 'Power rating', suffix: 'W', default: '1500' },
+    { key: 'watts', label: 'Power rating', suffix: 'W', default: '1500', slider: { min: 10, max: 5000, step: 10 } },
     { key: 'hours', label: 'Hours used per day', suffix: 'h', default: '4', slider: { min: 0, max: 24, step: 0.5 } },
     { key: 'rate', label: 'Electricity rate', suffix: '$/kWh', default: '0.15', slider: { min: 0, max: 1, step: 0.01 } },
   ],
@@ -268,6 +282,19 @@ export const ElectricityCostCalculatorClient = makeCalculatorClient({
       kwh: `${fmtNum(kwhDay, 2)} kWh`,
     }
   },
+  chart: { kind: 'compare', title: 'Cost ladder' },
+  compare: (v) => {
+    const daily = (toNum(v.watts) * toNum(v.hours)) / 1000 * toNum(v.rate)
+    if (!(daily >= 0)) return null
+    return {
+      rows: [
+        { label: 'Per day', segments: [{ label: 'Cost', value: daily, color: '#3b82f6' }] },
+        { label: 'Per month', segments: [{ label: 'Cost', value: daily * 30.44, color: '#3b82f6' }] },
+        { label: 'Per year', segments: [{ label: 'Cost', value: daily * 365, color: '#22c55e' }] },
+      ],
+      formatTotal: (n) => `$${fmtNum(n, 2)}`,
+    }
+  },
   note: '⚡ Find the wattage on the appliance label or its spec sheet. Heaters and dryers (1500-5000 W) dwarf laptops (≈50 W); the yearly line is where surprises live.',
 })
 
@@ -276,14 +303,14 @@ export const CarCostCalculatorClient = makeCalculatorClient({
   slug: 'car-cost-calculator',
   urlState: true,
   inputs: [
-    { key: 'carPrice', label: 'Car purchase price', suffix: '$', default: '25000' },
+    { key: 'carPrice', label: 'Car purchase price', suffix: '$', default: '25000', slider: { min: 1000, max: 150000, step: 1000 } },
     { key: 'ownYears', label: 'Years of ownership', suffix: 'yrs', default: '5', slider: { min: 1, max: 20, step: 1 } },
-    { key: 'kmPerYear', label: 'Distance driven per year', suffix: 'km', default: '15000' },
+    { key: 'kmPerYear', label: 'Distance driven per year', suffix: 'km', default: '15000', slider: { min: 1000, max: 50000, step: 1000 } },
     { key: 'fuelPrice', label: 'Fuel price', suffix: '$/L', default: '1.6', slider: { min: 0.5, max: 3, step: 0.05 } },
     { key: 'consumption', label: 'Consumption', suffix: 'L/100km', default: '7.5', slider: { min: 3, max: 25, step: 0.5 } },
-    { key: 'insurance', label: 'Insurance per year', suffix: '$', default: '1200' },
-    { key: 'maintenance', label: 'Maintenance + tires per year', suffix: '$', default: '800' },
-    { key: 'resale', label: 'Estimated resale value after', suffix: '$', default: '12000' },
+    { key: 'insurance', label: 'Insurance per year', suffix: '$', default: '1200', slider: { min: 0, max: 10000, step: 100 } },
+    { key: 'maintenance', label: 'Maintenance + tires per year', suffix: '$', default: '800', slider: { min: 0, max: 10000, step: 100 } },
+    { key: 'resale', label: 'Estimated resale value after', suffix: '$', default: '12000', slider: { min: 0, max: 100000, step: 500 } },
   ],
   outputs: [
     { key: 'monthly', label: 'True monthly cost', highlight: true, sublabel: 'All costs ÷ months' },
@@ -322,6 +349,15 @@ export const CarCostCalculatorClient = makeCalculatorClient({
       fuel: fmtUSD(fuelTotal),
       other: fmtUSD(otherTotal),
     }
+  },
+  chart: {
+    title: 'Where the money goes',
+    slices: [
+      { valueKey: 'depreciation', label: 'Depreciation', color: '#3b82f6' },
+      { valueKey: 'fuel', label: 'Fuel', color: '#f59e0b' },
+      { valueKey: 'other', label: 'Insurance + maintenance', color: '#a855f7' },
+    ],
+    centerLabel: 'Total',
   },
   note: '🚗 Depreciation (purchase − resale) is usually the single biggest cost — new cars lose 20-30% in year one. Financing interest, parking, tolls and registration are not included; add them to insurance if significant.',
 })

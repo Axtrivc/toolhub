@@ -281,6 +281,20 @@ export const StandardDeviationCalculatorClient = makeCalculatorClient({
       count: String(n),
     }
   },
+  chart: { kind: 'series', title: 'Your numbers vs mean' },
+  series: (v) => {
+    const nums = (v.numbers || '').split(/[\s,]+/).filter(Boolean).map(Number).filter((n) => isFinite(n))
+    if (nums.length < 2) return null
+    const mean = nums.reduce((a, b) => a + b, 0) / nums.length
+    const step = Math.max(1, Math.ceil(nums.length / 12))
+    return {
+      xLabels: nums.map((_, i) => (i % step === 0 || i === nums.length - 1 ? `#${i + 1}` : '')),
+      lines: [
+        { key: 'value', label: 'Value', color: '#3b82f6', points: nums },
+        { key: 'mean', label: 'Mean', color: '#f59e0b', points: nums.map(() => mean), dashed: true },
+      ],
+    }
+  },
   note: "📊 Population stddev divides by N; sample stddev (Bessel's correction) divides by N−1. Both are shown above.",
 })
 
@@ -289,7 +303,7 @@ export const PercentileCalculatorClient = makeCalculatorClient({
   slug: 'percentile-calculator',
   inputs: [
     { key: 'numbers', label: 'Numbers (comma-separated)', default: '15, 20, 35, 40, 50' },
-    { key: 'p', label: 'Percentile', suffix: '%', default: '90' },
+    { key: 'p', label: 'Percentile', suffix: '%', default: '90', slider: { min: 0, max: 100, step: 1 } },
   ],
   outputs: [{ key: 'result', label: 'Percentile value', highlight: true }],
   compute: (v) => {
@@ -303,6 +317,22 @@ export const PercentileCalculatorClient = makeCalculatorClient({
     const result = lo === hi ? nums[lo] : nums[lo] + (rank - lo) * (nums[hi] - nums[lo])
     return { result: fmtNum(result, 4) }
   },
+  chart: { kind: 'series', title: 'Distribution' },
+  series: (v) => {
+    const nums = (v.numbers || '').split(/[\s,]+/).filter(Boolean).map(Number).filter((n) => isFinite(n)).sort((a, b) => a - b)
+    if (nums.length < 2) return null
+    const p = Math.min(100, Math.max(0, toNum(v.p)))
+    const rank = (p / 100) * (nums.length - 1)
+    const lo = Math.floor(rank), hi = Math.ceil(rank)
+    const result = lo === hi ? nums[lo] : nums[lo] + (rank - lo) * (nums[hi] - nums[lo])
+    return {
+      xLabels: nums.map((_, i) => `#${i + 1}`),
+      lines: [
+        { key: 'sorted', label: 'Sorted values', color: '#3b82f6', points: nums },
+        { key: 'pct', label: `P${Math.round(p)}`, color: '#22c55e', points: nums.map(() => result), dashed: true },
+      ],
+    }
+  },
   note: "📈 90th percentile means 90% of values are below this number. Uses linear interpolation (inclusive method, like Excel's PERCENTILE.INC). Common in test scores and performance metrics.",
 })
 
@@ -310,9 +340,9 @@ export const PercentileCalculatorClient = makeCalculatorClient({
 export const InflationCalculatorClient = makeCalculatorClient({
   slug: 'inflation-calculator',
   inputs: [
-    { key: 'amount', label: 'Amount', suffix: '$', default: '1000' },
-    { key: 'rate', label: 'Annual inflation', suffix: '%', default: '3' },
-    { key: 'years', label: 'Years', default: '10' },
+    { key: 'amount', label: 'Amount', suffix: '$', default: '1000', slider: { min: 10, max: 100000, step: 10 } },
+    { key: 'rate', label: 'Annual inflation', suffix: '%', default: '3', slider: { min: 0, max: 15, step: 0.25 } },
+    { key: 'years', label: 'Years', default: '10', slider: { min: 1, max: 40, step: 1 } },
   ],
   outputs: [
     { key: 'future', label: 'Equivalent cost in future', highlight: true },
@@ -326,6 +356,28 @@ export const InflationCalculatorClient = makeCalculatorClient({
     return {
       future: fmtUSDValue(future),
       lost: `${fmtNum(((future - amount) / future) * 100, 1)}%`,
+    }
+  },
+  chart: { kind: 'series', title: 'Cost of the same basket' },
+  series: (v) => {
+    const amount = toNum(v.amount), rate = toNum(v.rate) / 100, years = Math.round(toNum(v.years))
+    if (!(amount > 0) || !(rate >= 0) || !(years > 0) || years > 50) return null
+    const xLabels: string[] = []
+    const cost: number[] = []
+    const today: number[] = []
+    for (let y = 0; y <= years; y++) {
+      xLabels.push(`Y${y}`)
+      cost.push(amount * Math.pow(1 + rate, y))
+      today.push(amount)
+    }
+    return {
+      xLabels,
+      lines: [
+        { key: 'today', label: 'Costs today', color: '#94a3b8', points: today, dashed: true },
+        { key: 'future', label: 'Costs then', color: '#ef4444', points: cost, area: true },
+      ],
+      highlightBetween: { a: 'today', b: 'future', label: 'Inflation' },
+      formatY: (n) => fmtUSDValue(n),
     }
   },
   note: '💸 $1000 today at 3% inflation is worth less each year. In 10 years you\'d need $1,344 to buy what $1,000 buys now.',
@@ -413,9 +465,9 @@ export const RetirementCalculatorClient = makeCalculatorClient({
 export const SimpleInterestCalculatorClient = makeCalculatorClient({
   slug: 'simple-interest-calculator',
   inputs: [
-    { key: 'principal', label: 'Principal', suffix: '$', default: '10000' },
-    { key: 'rate', label: 'Annual rate', suffix: '%', default: '5' },
-    { key: 'years', label: 'Years', default: '3' },
+    { key: 'principal', label: 'Principal', suffix: '$', default: '10000', slider: { min: 100, max: 1000000, step: 100 } },
+    { key: 'rate', label: 'Annual rate', suffix: '%', default: '5', slider: { min: 0, max: 20, step: 0.25 } },
+    { key: 'years', label: 'Years', default: '3', slider: { min: 1, max: 30, step: 1 } },
   ],
   outputs: [
     { key: 'interest', label: 'Interest earned', highlight: true },
@@ -429,6 +481,21 @@ export const SimpleInterestCalculatorClient = makeCalculatorClient({
     return {
       interest: fmtUSDValue(interest),
       total: fmtUSDValue(p + interest),
+    }
+  },
+  chart: { kind: 'compare', title: 'Principal + interest' },
+  compare: (v) => {
+    const p = toNum(v.principal)
+    const interest = p * (toNum(v.rate) / 100) * toNum(v.years)
+    if (!(p >= 0) || !(interest >= 0)) return null
+    return {
+      rows: [
+        { label: 'Total amount', segments: [
+          { label: 'Principal', value: p, color: '#3b82f6' },
+          { label: 'Interest', value: interest, color: '#22c55e' },
+        ] },
+      ],
+      formatTotal: (n) => fmtUSDValue(n),
     }
   },
   note: '💵 Simple interest: I = P × r × t. Unlike compound interest, you earn nothing on accumulated interest.',
@@ -449,16 +516,16 @@ const UNIT_TO_BASE: Record<string, number> = {
 export const UnitPriceCalculatorClient = makeCalculatorClient({
   slug: 'unit-price-calculator',
   inputs: [
-    { key: 'price1', label: 'Price 1', suffix: '$', default: '12.99' },
-    { key: 'size1', label: 'Size 1', default: '500' },
+    { key: 'price1', label: 'Price 1', suffix: '$', default: '12.99', slider: { min: 0.5, max: 200, step: 0.5 } },
+    { key: 'size1', label: 'Size 1', default: '500', slider: { min: 1, max: 5000, step: 5 } },
     { key: 'unit1', label: 'Unit 1', default: 'g', options: [
       { label: 'grams (g)', value: 'g' }, { label: 'ml', value: 'ml' },
       { label: 'count (items)', value: 'ct' }, { label: 'kg', value: 'kg' },
       { label: 'ounces (oz)', value: 'oz' }, { label: 'pounds (lb)', value: 'lb' },
       { label: 'liters (l)', value: 'l' }, { label: 'milligrams (mg)', value: 'mg' },
     ]},
-    { key: 'price2', label: 'Price 2', suffix: '$', default: '19.99' },
-    { key: 'size2', label: 'Size 2', default: '750' },
+    { key: 'price2', label: 'Price 2', suffix: '$', default: '19.99', slider: { min: 0.5, max: 200, step: 0.5 } },
+    { key: 'size2', label: 'Size 2', default: '750', slider: { min: 1, max: 5000, step: 5 } },
     { key: 'unit2', label: 'Unit 2', default: 'g', options: [
       { label: 'grams (g)', value: 'g' }, { label: 'ml', value: 'ml' },
       { label: 'count (items)', value: 'ct' }, { label: 'kg', value: 'kg' },
@@ -489,6 +556,25 @@ export const UnitPriceCalculatorClient = makeCalculatorClient({
       unit1price: `${fmtUSDValue(u1)} / ${v.unit1}`,
       unit2price: `${fmtUSDValue(u2)} / ${v.unit2}`,
       winner,
+    }
+  },
+  chart: { kind: 'compare', title: 'Unit price showdown' },
+  compare: (v) => {
+    const p1 = toNum(v.price1), s1 = toNum(v.size1), p2 = toNum(v.price2), s2 = toNum(v.size2)
+    if (!(p1 >= 0) || !(s1 > 0) || !(p2 >= 0) || !(s2 > 0)) return null
+    // 同量纲家族才可比(与 compute 判定一致);折算到基准单位后比单价
+    const fam1 = UNIT_FAMILY[v.unit1] ?? v.unit1
+    const fam2 = UNIT_FAMILY[v.unit2] ?? v.unit2
+    if (fam1 !== fam2) return null
+    const u1 = (p1 / s1) / (UNIT_TO_BASE[v.unit1] ?? 1)
+    const u2 = (p2 / s2) / (UNIT_TO_BASE[v.unit2] ?? 1)
+    const baseUnit = fam1 === 'weight' ? 'g' : fam1 === 'volume' ? 'ml' : 'ct'
+    return {
+      rows: [
+        { label: 'Option 1', segments: [{ label: 'Per ' + baseUnit, value: u1, color: u1 <= u2 ? '#22c55e' : '#3b82f6' }] },
+        { label: 'Option 2', segments: [{ label: 'Per ' + baseUnit, value: u2, color: u2 < u1 ? '#22c55e' : '#3b82f6' }] },
+      ],
+      formatTotal: (n) => `$${n.toFixed(4)}`,
     }
   },
   note: '🛒 Compare real value across package sizes. The bigger box isn\'t always cheaper per unit.',
