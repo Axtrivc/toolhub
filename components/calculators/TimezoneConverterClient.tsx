@@ -336,8 +336,8 @@ export function TimezoneConverterClient() {
         </div>
       </div>
 
-      {/* 目标时区选择行(最多 6) */}
-      <div>
+      {/* 目标时区选择行(最多 6):面板底色与源时区输入一致,避免裸行 */}
+      <div className="rounded-lg p-4" style={{ backgroundColor: 'rgb(var(--bg-subtle))' }}>
         <div className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
           {L('targetTimezones', 'Target timezones (up to 6)')}
         </div>
@@ -371,7 +371,7 @@ export function TimezoneConverterClient() {
           ))}
         </div>
         {targets.length < 6 && (
-          <button type="button" onClick={addTarget} className="btn btn-secondary mt-2">
+          <button type="button" onClick={addTarget} className="btn btn-secondary mt-3">
             {L('addTimezone', '+ Add timezone')}
           </button>
         )}
