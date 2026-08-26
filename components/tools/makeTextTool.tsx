@@ -3,6 +3,7 @@
 import { useState, useEffect, useMemo, useRef, type ComponentType } from 'react'
 import { CopyButton } from '@/components/CopyButton'
 import { PulseGlow } from '@/components/motion/PulseGlow'
+import { AnimatedNumber } from '@/components/calculator/CalculatorField'
 import { useApp } from '@/components/providers/AppProviders'
 import { t, type Locale } from '@/lib/i18n'
 import { tui } from '@/lib/i18n/tool-l10n'
@@ -89,8 +90,20 @@ export function makeTextTool(config: TextToolConfig): ComponentType {
     const charCount = [...input].length
     // 词数走中英混合口径:纯中文不再恒为 1 词
     const wordCount = countWords(input)
+    // 行数与阅读时长(200 wpm 口径;纯中文按 300 字/分钟计,与 WordCounter 同族)
+    const lineCount = input === '' ? 0 : input.split('\n').length
+    const readingSec = Math.round(
+      (locale === 'zh' ? charCount / 5 : wordCount / 200) * 60,
+    )
+    const readingLabel =
+      readingSec < 60 ? `${Math.max(readingSec, input ? 1 : 0)}s` : `${Math.floor(readingSec / 60)}m ${readingSec % 60}s`
     // 数字格式跟随应用语言(en 固定 en-US,保证 SSR 首屏与英文输出不变)
     const numberLocale = locale === 'en' ? 'en-US' : locale
+    const fmtC = charCount.toLocaleString(numberLocale)
+    const fmtW = wordCount.toLocaleString(numberLocale)
+    const fmtL = lineCount.toLocaleString(numberLocale)
+    // 输出长度(码点口径,与输入一致)——驱动长度对比条
+    const outChars = [...output].length
 
     // 每工具可本地化字符串:有 slug → tui 取本地化;无 → config 英文原值。
     const inputLabel = config.slug && config.inputLabel
@@ -169,11 +182,61 @@ export function makeTextTool(config: TextToolConfig): ComponentType {
           </PulseGlow>
         </div>
 
-        {/* 统计 */}
+        {/* 统计仪表条:iOS 风格四格统计(字符/词/行/阅读时长,数字滚动)+
+            输入↔输出长度对比条(压缩/展开工具一眼看出变换幅度,宽度过渡动画) */}
         {showStats && (
-          <div className="flex gap-4 text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>
-            <span>{t(locale, 'textToolChars', { count: charCount.toLocaleString(numberLocale) })}</span>
-            <span>{t(locale, 'textToolWords', { count: wordCount.toLocaleString(numberLocale) })}</span>
+          <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
+            {[
+              { label: t(locale, 'textToolCharsLabel'), value: charCount, display: fmtC },
+              { label: t(locale, 'textToolWordsLabel'), value: wordCount, display: fmtW },
+              { label: t(locale, 'textToolLinesLabel'), value: lineCount, display: fmtL },
+              { label: t(locale, 'textToolReadingLabel'), value: readingSec, display: readingLabel },
+            ].map((cell) => (
+              <div
+                key={cell.label}
+                className="rounded-xl border border-border/60 bg-card/80 p-3 text-center shadow-sm backdrop-blur-md transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md"
+              >
+                <div className="text-xl font-bold tabular-nums sm:text-2xl" style={{ color: 'rgb(var(--text))' }}>
+                  <AnimatedNumber value={cell.display} />
+                </div>
+                <div className="mt-0.5 text-[11px] font-medium uppercase tracking-wide" style={{ color: 'rgb(var(--text-faint))' }}>
+                  {cell.label}
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+        {showStats && (
+          <div
+            className="rounded-xl border p-4"
+            style={{ borderColor: 'rgb(var(--border))', backgroundColor: 'rgb(var(--bg-card))' }}
+          >
+            {[
+              { label: t(locale, 'textToolInputLen'), count: charCount, color: 'rgb(var(--primary))' },
+              { label: t(locale, 'textToolOutputLen'), count: outChars, color: '#22c55e' },
+            ].map((row) => {
+              const max = Math.max(charCount, outChars, 1)
+              return (
+                <div key={row.label} className="flex items-center gap-3">
+                  <span className="w-20 shrink-0 truncate text-xs font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
+                    {row.label}
+                  </span>
+                  <div className="h-2.5 flex-1 overflow-hidden rounded-full" style={{ backgroundColor: 'rgb(var(--bg-subtle))' }}>
+                    <div
+                      className="h-full rounded-full transition-all duration-300"
+                      style={{
+                        width: `${Math.min(100, (row.count / max) * 100)}%`,
+                        backgroundColor: row.color,
+                        transitionTimingFunction: 'cubic-bezier(0.22,1,0.36,1)',
+                      }}
+                    />
+                  </div>
+                  <span className="w-14 shrink-0 text-right text-xs font-semibold tabular-nums" style={{ color: 'rgb(var(--text-muted))' }}>
+                    {row.count.toLocaleString(numberLocale)}
+                  </span>
+                </div>
+              )
+            })}
           </div>
         )}
 

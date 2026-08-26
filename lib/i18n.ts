@@ -313,6 +313,14 @@ export interface Dict {
   textToolResultPlaceholder: string // "Result will appear here..."
   textToolChars: string // "{count} characters"
   textToolWords: string // "{count} words"
+  textToolLines: string // "{count} lines"
+  textToolReading: string // "{time} read"
+  textToolCharsLabel: string // "characters"
+  textToolWordsLabel: string // "words"
+  textToolLinesLabel: string // "lines"
+  textToolReadingLabel: string // "read time"
+  textToolInputLen: string // "Input length"
+  textToolOutputLen: string // "Output length"
 }
 
 const en: Dict = {
@@ -539,6 +547,14 @@ const en: Dict = {
   textToolResultPlaceholder: 'Result will appear here...',
   textToolChars: '{count} characters',
   textToolWords: '{count} words',
+  textToolLines: '{count} lines',
+  textToolReading: '{time} read',
+  textToolCharsLabel: 'characters',
+  textToolWordsLabel: 'words',
+  textToolLinesLabel: 'lines',
+  textToolReadingLabel: 'read time',
+  textToolInputLen: 'Input length',
+  textToolOutputLen: 'Output length',
 }
 
 const zh: Dict = {
@@ -763,6 +779,14 @@ const zh: Dict = {
   textToolResultPlaceholder: '结果将显示在这里…',
   textToolChars: '{count} 字符',
   textToolWords: '{count} 词',
+  textToolLines: '{count} 行',
+  textToolReading: '阅读 {time}',
+  textToolCharsLabel: '字符',
+  textToolWordsLabel: '词',
+  textToolLinesLabel: '行',
+  textToolReadingLabel: '阅读时长',
+  textToolInputLen: '输入长度',
+  textToolOutputLen: '输出长度',
 }
 
 const es: Dict = {
@@ -988,6 +1012,14 @@ const es: Dict = {
   textToolResultPlaceholder: 'El resultado aparecerá aquí…',
   textToolChars: '{count} caracteres',
   textToolWords: '{count} palabras',
+  textToolLines: '{count} líneas',
+  textToolReading: '{time} de lectura',
+  textToolCharsLabel: 'caracteres',
+  textToolWordsLabel: 'palabras',
+  textToolLinesLabel: 'líneas',
+  textToolReadingLabel: 'lectura',
+  textToolInputLen: 'Longitud de entrada',
+  textToolOutputLen: 'Longitud de salida',
 }
 
 const de: Dict = {
@@ -1213,6 +1245,14 @@ const de: Dict = {
   textToolResultPlaceholder: 'Das Ergebnis erscheint hier…',
   textToolChars: '{count} Zeichen',
   textToolWords: '{count} Wörter',
+  textToolLines: '{count} Zeilen',
+  textToolReading: '{time} Lesezeit',
+  textToolCharsLabel: 'Zeichen',
+  textToolWordsLabel: 'Wörter',
+  textToolLinesLabel: 'Zeilen',
+  textToolReadingLabel: 'Lesezeit',
+  textToolInputLen: 'Eingabelänge',
+  textToolOutputLen: 'Ausgabelänge',
 }
 
 export const dicts: Record<Locale, Dict> = { en, zh, es, de }
