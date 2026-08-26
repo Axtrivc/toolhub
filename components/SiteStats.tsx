@@ -27,6 +27,13 @@ interface Stats {
   visitors: number
 }
 
+/**
+ * 最新统计快照(同页消费者共享,如首页 Bento 的实时访客格):
+ * Footer 的 SiteStats 拿到数据后写入这里并派发 window 'toolhub-stats'
+ * 事件;消费者先读缓存、再听事件,无需自己再 POST(避免重复计数)。
+ */
+export const statsCache: { value: Stats | null } = { value: null }
+
 /** 访客随机 ID 的 localStorage key(仅本机可见,永不上传原文) */
 const VID_KEY = 'toolhub-vid'
 
@@ -98,7 +105,11 @@ export function SiteStats() {
         }
         if (!res.ok) return
         const data = (await res.json()) as Stats
-        if (!cancelled) setStats(data)
+        if (!cancelled) {
+          setStats(data)
+          statsCache.value = data
+          window.dispatchEvent(new CustomEvent('toolhub-stats'))
+        }
       } catch {
         // fetch TypeError(网络层失败):可恢复,不置 dead
       }

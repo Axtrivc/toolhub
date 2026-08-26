@@ -262,6 +262,25 @@ export interface Dict {
   whatifTitle: string
   whatifBody: string
   whatifCta: string
+  // ── 首页 Bento 活工具矩阵(LiveBento)──
+  bentoTitle: string
+  bentoSubtitle: string
+  bentoPercentTitle: string
+  bentoPercentOf: string // "What is"
+  bentoPercentIs: string // "{a}% of {b} is"
+  bentoPercentResultLabel: string
+  bentoConverterTitle: string
+  bentoConverterSwap: string
+  bentoMortgageTitle: string
+  bentoMortgageMonthly: string
+  bentoMortgageDemo: string
+  bentoVisitorsTitle: string
+  bentoVisitorsToday: string
+  bentoVisitorsTotal: string
+  bentoTodayTitle: string
+  bentoTodayWeekN: string // "Week {n}"
+  bentoTodayDaysLeft: string // "{n} days left in {y}"
+  bentoOpenTool: string
   // ── 工具页共享组件本地化(FavoriteButton / VisibleFaqs / EmbedTool /
   //    Disclaimer / FormulaSection / makeTextTool 等共享 chrome) ──
   // FavoriteButton
@@ -470,6 +489,24 @@ const en: Dict = {
   whatifTitle: 'WhatIf — Investment Replay',
   whatifBody: 'What if you had bought Microsoft in 1996, or Bitcoin in 2013? Pick a stock, a year and an amount, then watch compound growth replay day by day.',
   whatifCta: 'Try the replay →',
+  bentoTitle: 'Try a tool right now',
+  bentoSubtitle: 'No signup, nothing to install — every tool runs in your browser.',
+  bentoPercentTitle: 'Quick percentage',
+  bentoPercentOf: 'What is',
+  bentoPercentIs: '% of',
+  bentoPercentResultLabel: 'Answer',
+  bentoConverterTitle: 'cm ↔ in',
+  bentoConverterSwap: 'Swap units',
+  bentoMortgageTitle: 'Mortgage payment',
+  bentoMortgageMonthly: 'per month',
+  bentoMortgageDemo: 'watching a live example',
+  bentoVisitorsTitle: 'Live visitors',
+  bentoVisitorsToday: 'today',
+  bentoVisitorsTotal: 'all-time visits',
+  bentoTodayTitle: 'Today',
+  bentoTodayWeekN: 'Week {n} of the year',
+  bentoTodayDaysLeft: '{n} days left in {y}',
+  bentoOpenTool: 'Open the full tool →',
   // ── 工具页共享组件 chrome ──
   favSave: 'Save',
   favSaved: 'Saved',
@@ -673,6 +710,24 @@ const zh: Dict = {
   whatifTitle: '假如当时买了 · WhatIf',
   whatifBody: '假如 1996 年买入微软、2013 年买入比特币,今天值多少钱?选一只股票、一个年份、一笔本金,看复利逐日回放的动画。',
   whatifCta: '去看回放 →',
+  bentoTitle: '现在就上手试一个',
+  bentoSubtitle: '无需注册、无需安装——所有工具都在浏览器里运行。',
+  bentoPercentTitle: '快速算百分比',
+  bentoPercentOf: '多少是',
+  bentoPercentIs: '% 的',
+  bentoPercentResultLabel: '答案',
+  bentoConverterTitle: '厘米 ↔ 英寸',
+  bentoConverterSwap: '交换单位',
+  bentoMortgageTitle: '房贷月供',
+  bentoMortgageMonthly: '每月',
+  bentoMortgageDemo: '正在演示实时示例',
+  bentoVisitorsTitle: '实时访客',
+  bentoVisitorsToday: '今日',
+  bentoVisitorsTotal: '累计访问',
+  bentoTodayTitle: '今天',
+  bentoTodayWeekN: '一年中的第 {n} 周',
+  bentoTodayDaysLeft: '距 {y} 年结束还有 {n} 天',
+  bentoOpenTool: '打开完整工具 →',
   // ── 工具页共享组件 chrome ──
   favSave: '收藏',
   favSaved: '已收藏',
@@ -876,6 +931,24 @@ const es: Dict = {
   whatifTitle: 'WhatIf — Replay de inversión',
   whatifBody: '¿Y si hubieras comprado Microsoft en 1996 o Bitcoin en 2013? Elige una acción, un año y un capital, y mira el interés compuesto día a día.',
   whatifCta: 'Ver la simulación →',
+  bentoTitle: 'Prueba una herramienta ahora',
+  bentoSubtitle: 'Sin registro ni instalación: todo corre en tu navegador.',
+  bentoPercentTitle: 'Porcentaje rápido',
+  bentoPercentOf: 'Cuánto es el',
+  bentoPercentIs: '% de',
+  bentoPercentResultLabel: 'Resultado',
+  bentoConverterTitle: 'cm ↔ in',
+  bentoConverterSwap: 'Intercambiar unidades',
+  bentoMortgageTitle: 'Cuota hipotecaria',
+  bentoMortgageMonthly: 'al mes',
+  bentoMortgageDemo: 'ejemplo en vivo',
+  bentoVisitorsTitle: 'Visitas en vivo',
+  bentoVisitorsToday: 'hoy',
+  bentoVisitorsTotal: 'visitas en total',
+  bentoTodayTitle: 'Hoy',
+  bentoTodayWeekN: 'Semana {n} del año',
+  bentoTodayDaysLeft: 'quedan {n} días de {y}',
+  bentoOpenTool: 'Abrir la herramienta →',
   // ── 工具页共享组件 chrome ──
   favSave: 'Guardar',
   favSaved: 'Guardado',
@@ -1079,6 +1152,24 @@ const de: Dict = {
   whatifTitle: 'WhatIf — Investment-Replay',
   whatifBody: 'Was wäre, wenn Sie 1996 Microsoft oder 2013 Bitcoin gekauft hätten? Wählen Sie Aktie, Jahr und Betrag und sehen Sie den Zinseszinseffekt Tag für Tag.',
   whatifCta: 'Replay ansehen →',
+  bentoTitle: 'Probiere jetzt ein Tool',
+  bentoSubtitle: 'Keine Anmeldung, keine Installation — alles läuft im Browser.',
+  bentoPercentTitle: 'Schnell-Prozent',
+  bentoPercentOf: 'Wie viel sind',
+  bentoPercentIs: '% von',
+  bentoPercentResultLabel: 'Ergebnis',
+  bentoConverterTitle: 'cm ↔ in',
+  bentoConverterSwap: 'Einheiten tauschen',
+  bentoMortgageTitle: 'Monatsrate',
+  bentoMortgageMonthly: 'pro Monat',
+  bentoMortgageDemo: 'Live-Beispiel läuft',
+  bentoVisitorsTitle: 'Live-Besucher',
+  bentoVisitorsToday: 'heute',
+  bentoVisitorsTotal: 'Besuche insgesamt',
+  bentoTodayTitle: 'Heute',
+  bentoTodayWeekN: 'Woche {n} des Jahres',
+  bentoTodayDaysLeft: 'noch {n} Tage in {y}',
+  bentoOpenTool: 'Vollständiges Tool öffnen →',
   // ── 工具页共享组件 chrome ──
   favSave: 'Merken',
   favSaved: 'Gemerkt',

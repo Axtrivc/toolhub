@@ -7,6 +7,7 @@ import { Boxes, Search, ShieldCheck, Terminal, TrendingUp, Zap } from 'lucide-re
 import { getPublishedTools } from '@/lib/tools'
 import { AdSlot } from '@/components/AdSlot'
 import { ToolHubExplorer } from '@/components/workspace/ToolHubExplorer'
+import { LiveBento } from '@/components/home/LiveBento'
 import { HomeSitemap } from '@/components/HomeSitemap'
 import {
   HeroGlow,
@@ -185,6 +186,9 @@ export default function HomePage() {
         <div className="mb-12">
           <WorkspaceDashboard />
         </div>
+
+        {/* ════════ ②′ Bento 活工具矩阵:首屏即可用的迷你工具 ════════ */}
+        <LiveBento />
 
         {/* ════════ ③ ToolHubExplorer 主题 Hub 探索器 ════════
             id="all-tools" 是既有内链的锚点目标;scroll-mt-24 给 sticky header 留偏移。 */}
