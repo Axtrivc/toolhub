@@ -137,6 +137,7 @@ function buildUrlList(siteUrl) {
     siteUrl + '/terms/',
     siteUrl + '/blog/',
     siteUrl + '/blog/how-i-built-toolhub/',
+    siteUrl + '/blog/mortgage-loan-calculators/',
   ]
   for (const slug of slugs) {
     urls.push(`${siteUrl}/tools/${slug}/`)
