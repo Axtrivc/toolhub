@@ -3,6 +3,7 @@
 import { useState, useMemo } from 'react'
 import { CopyButton } from '@/components/CopyButton'
 import { ResultCard } from '@/components/calculator/CalculatorField'
+import { BreakdownChart } from '@/components/calculator/BreakdownChart'
 import { useApp } from '@/components/providers/AppProviders'
 import { tui } from '@/lib/i18n/tool-l10n'
 import { MODEL_GROUPS, MODEL_PRICES, type ModelPrice } from '@/lib/model-pricing'
@@ -191,6 +192,19 @@ export function GptTokenCounterClient() {
           </div>
         </div>
       </div>
+
+      {/* 成本构成环形图:输入/输出各占多少,换模型/改输出 token 实时变形 */}
+      {totalCost > 0 && (
+        <BreakdownChart
+          title={L('chartTitle', 'Where the cost goes')}
+          centerLabel={L('chartCenter', 'Total')}
+          centerValue={formatUsd(totalCost)}
+          slices={[
+            { label: L('sliceInput', `Input (${model.label})`), value: inputCost, color: '#3b82f6' },
+            { label: L('sliceOutput', 'Output'), value: outputCost, color: '#f59e0b' },
+          ]}
+        />
+      )}
 
       {/* 复制摘要 */}
       <div className="flex flex-wrap items-center gap-3">

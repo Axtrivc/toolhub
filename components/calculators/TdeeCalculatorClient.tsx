@@ -2,6 +2,8 @@
 
 import { useState, useMemo, useCallback } from 'react'
 import { CalculatorField, CalculatorSliderField, ResultCard, CalculatorNote } from '@/components/calculator/CalculatorField'
+import { BreakdownChart } from '@/components/calculator/BreakdownChart'
+import { StackedCompareChart } from '@/components/charts/StackedCompareChart'
 import { LoadSampleButton } from '@/components/LoadSampleButton'
 import { ResultActions } from '@/components/ResultActions'
 import { useApp } from '@/components/providers/AppProviders'
@@ -255,6 +257,17 @@ export function TdeeCalculatorClient() {
             <ResultCard label={L('tdeeMaintenance', 'TDEE (maintenance)')} value={`${round(result.tdee)} kcal`} highlight sublabel={L('bmrTimesActivity', 'BMR × activity factor')} />
           </div>
 
+          {/* TDEE 构成:BMR vs 活动消耗(TDEE − BMR) */}
+          <BreakdownChart
+            title={L('donutTitle', 'TDEE breakdown')}
+            slices={[
+              { label: L('bmrAtRest', 'BMR (at rest)'), value: result.bmr, color: '#3b82f6' },
+              { label: L('sliceActivity', 'Activity burn'), value: result.tdee - result.bmr, color: '#22c55e' },
+            ]}
+            centerValue={`${round(result.tdee)} kcal`}
+            centerLabel={L('centerTdee', 'TDEE')}
+          />
+
           {/* 四档热量目标 + 宏量 */}
           <div>
             <h3 className="mb-2 text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>{L('dailyTargetsTitle', 'Daily calorie targets & macros')}</h3>
@@ -302,6 +315,17 @@ export function TdeeCalculatorClient() {
               </table>
             </div>
           </div>
+
+          {/* 三档每日热量对比:减脂 −500 / 维持 / 增肌 +500(共用比例尺) */}
+          <StackedCompareChart
+            title={L('cmpTitle', 'Daily calories by goal')}
+            rows={[
+              { label: L('goalCut', 'Cut (−500)'), segments: [{ label: L('goalCut', 'Cut (−500)'), value: result.tdee - 500, color: '#22c55e' }] },
+              { label: L('goalMaintain', 'Maintain'), segments: [{ label: L('goalMaintain', 'Maintain'), value: result.tdee, color: '#3b82f6' }] },
+              { label: L('goalBulk', 'Bulk (+500)'), segments: [{ label: L('goalBulk', 'Bulk (+500)'), value: result.tdee + 500, color: '#f59e0b' }] },
+            ]}
+            formatTotal={(n) => `${round(n)} kcal`}
+          />
 
           <ResultActions
             summary={summary}

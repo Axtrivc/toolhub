@@ -9,6 +9,10 @@ const FORMULA = 'part = ( percent / 100 ) × whole'
 export const percentageCalculatorL10n: ToolL10n = {
   zh: {
     ui: {
+      'chartTitle': '部分与整体',
+      'cmpWhole': '整体',
+      'cmpPart': '部分',
+      'cmpRemainder': '剩余',
       'change': '变化',
       'crossesZero': '无定义——变化跨越了零点',
       'decrease': '减少',
@@ -47,6 +51,10 @@ export const percentageCalculatorL10n: ToolL10n = {
   },
   es: {
     ui: {
+      'chartTitle': 'Parte frente a total',
+      'cmpWhole': 'Total',
+      'cmpPart': 'Parte',
+      'cmpRemainder': 'Restante',
       'change': 'Cambio',
       'crossesZero': 'Indefinido: el cambio cruza el cero',
       'decrease': 'Disminución',
@@ -85,6 +93,10 @@ export const percentageCalculatorL10n: ToolL10n = {
   },
   de: {
     ui: {
+      'chartTitle': 'Teil vs. Ganzes',
+      'cmpWhole': 'Ganzes',
+      'cmpPart': 'Teil',
+      'cmpRemainder': 'Rest',
       'change': 'Änderung',
       'crossesZero': 'Undefiniert – die Änderung überschreitet die Null',
       'decrease': 'Senkung',

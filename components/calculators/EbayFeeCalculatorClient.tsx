@@ -2,6 +2,7 @@
 
 import { useState, useMemo } from 'react'
 import { CalculatorField, ResultCard, CalculatorNote } from '@/components/calculator/CalculatorField'
+import { StackedCompareChart } from '@/components/charts/StackedCompareChart'
 import { ResultActions } from '@/components/ResultActions'
 import { useApp } from '@/components/providers/AppProviders'
 import { tui } from '@/lib/i18n/tool-l10n'
@@ -79,7 +80,8 @@ export function EbayFeeCalculatorClient() {
       const margin = (profit / T) * 100
       const breakEvenT = (ic + shc + fixed) / (1 - varRate)
       const breakEvenPrice = breakEvenT - sc
-      return { platform, T, pct, totalFees, payout, profit, margin, breakEvenPrice }
+      // 图表拆段:固定费(每单)vs 变动费(随成交额抽成)
+      return { platform, T, pct, totalFees, payout, profit, margin, breakEvenPrice, fixedFees: fixed, varFees: fvf + adFee }
     }
 
     // Etsy
@@ -101,7 +103,8 @@ export function EbayFeeCalculatorClient() {
     const margin = (profit / T) * 100
     const breakEvenT = (ic + shc + listing + pf) / (1 - varRate)
     const breakEvenPrice = breakEvenT - sc
-    return { platform, T, pct: txPct + pp, totalFees, payout, profit, margin, breakEvenPrice }
+    // 图表拆段:固定费(listing + 处理固定费)vs 变动费(交易抽成 + 处理百分比)
+    return { platform, T, pct: txPct + pp, totalFees, payout, profit, margin, breakEvenPrice, fixedFees: listing + pf, varFees: transaction + T * (pp / 100) }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [platform, price, shipCharged, itemCost, shipCost, ebayPreset, ebayFixed, adRate, etsyProcPct, etsyProcFixed, advanced, overridePct, locale])
 
@@ -236,6 +239,22 @@ export function EbayFeeCalculatorClient() {
               sublabel={L('minPriceNoLoss', 'Minimum price to not lose money')}
             />
           </div>
+
+          {/* 售出货款去向:净得 / 固定费 / 变动费 堆叠条(值非正的分段自动隐藏) */}
+          <StackedCompareChart
+            title={L('chartTitle', 'Where the sale money goes')}
+            rows={[
+              {
+                label: L('cmpSale', 'Sale price (item + shipping)'),
+                segments: [
+                  { label: L('segKeep', 'You keep'), value: parsed.payout, color: '#22c55e' },
+                  { label: L('segFixedFees', 'Fixed fees'), value: parsed.fixedFees, color: '#f59e0b' },
+                  { label: L('segVarFees', 'Variable fees'), value: parsed.varFees, color: '#ef4444' },
+                ],
+              },
+            ]}
+            formatTotal={fmtMoney}
+          />
 
           <ResultActions
             summary={summary}

@@ -2,6 +2,7 @@
 
 import { useState, useMemo, useRef } from 'react'
 import { ResultCard, CalculatorNote } from '../calculator/CalculatorField'
+import { GaugeChart } from '@/components/charts/GaugeChart'
 import { fmtNum } from '@/lib/format'
 import { useApp } from '@/components/providers/AppProviders'
 import { tui } from '@/lib/i18n/tool-l10n'
@@ -136,6 +137,24 @@ export function GPACalculatorClient() {
         <ResultCard label={L('totalCredits', 'Total credits')} value={fmtNum(result.totalCredits, 1)} />
         <ResultCard label={L('gradePoints', 'Grade points')} value={fmtNum(result.totalPoints, 1)} />
       </div>
+
+      {/* 可视化:GPA 在 4.0 量表色区上的落点(非法输入/零学分不出图) */}
+      {result.totalCredits > 0 && (
+        <GaugeChart
+          title={L('chartTitle', 'Where your GPA falls')}
+          value={result.gpa}
+          min={0}
+          max={4}
+          zones={[
+            { upTo: 2, color: '#ef4444', label: L('zoneFailing', 'Failing') },
+            { upTo: 2.5, color: '#f97316', label: L('zoneBelowAvg', 'Below average') },
+            { upTo: 3, color: '#f59e0b', label: L('zoneAvg', 'Average') },
+            { upTo: 3.5, color: '#3b82f6', label: L('zoneGood', 'Good') },
+            { upTo: 4, color: '#22c55e', label: L('zoneExcellent', 'Excellent') },
+          ]}
+          formatValue={(n) => n.toFixed(2)}
+        />
+      )}
 
       <CalculatorNote>
         {L('note', "📚 Uses the standard 4.0 GPA scale. Honors/AP classes may weight differently at your school — adjust the grade to match your institution's system.")}

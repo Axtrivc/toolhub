@@ -7,6 +7,8 @@ import type { ToolL10n } from '../tool-l10n'
 export const freelanceInvoiceGeneratorL10n: ToolL10n = {
   zh: {
     ui: {
+      'chartTitle': '发票构成',
+      'chartEmpty': '添加行项目后即可查看发票构成。',
       'addItem': '+ 添加项目',
       'amount': '金额',
       'billTo': '账单送达',
@@ -70,6 +72,8 @@ export const freelanceInvoiceGeneratorL10n: ToolL10n = {
   },
   es: {
     ui: {
+      'chartTitle': 'Desglose de la factura',
+      'chartEmpty': 'Añade partidas para ver el desglose de la factura.',
       'addItem': '+ Añadir línea',
       'amount': 'Importe',
       'billTo': 'Facturar a',
@@ -133,6 +137,8 @@ export const freelanceInvoiceGeneratorL10n: ToolL10n = {
   },
   de: {
     ui: {
+      'chartTitle': 'Rechnungsaufschlüsselung',
+      'chartEmpty': 'Füge Positionen hinzu, um die Aufschlüsselung der Rechnung zu sehen.',
       'addItem': '+ Position hinzufügen',
       'amount': 'Betrag',
       'billTo': 'Rechnung an',

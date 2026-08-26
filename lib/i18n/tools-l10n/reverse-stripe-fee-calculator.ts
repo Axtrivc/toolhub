@@ -7,6 +7,10 @@ import type { ToolL10n } from '../tool-l10n'
 export const reverseStripeFeeCalculatorL10n: ToolL10n = {
   zh: {
     ui: {
+      'chartTitle': '收款金额的去向',
+      'cmpCharge': '收款金额',
+      'segKeep': '你净得',
+      'segFees': '手续费',
       'afterFees': '扣费后',
       'amountYouCharge': '你收取的金额',
       'amountYouNeedToNet': '你需要净得的金额',
@@ -71,6 +75,10 @@ export const reverseStripeFeeCalculatorL10n: ToolL10n = {
   },
   es: {
     ui: {
+      'chartTitle': 'A dónde va el importe cobrado',
+      'cmpCharge': 'Importe cobrado',
+      'segKeep': 'Te queda',
+      'segFees': 'Comisiones',
       'afterFees': 'Tras comisiones',
       'amountYouCharge': 'Importe que cobras',
       'amountYouNeedToNet': 'Importe que necesitas netear',
@@ -135,6 +143,10 @@ export const reverseStripeFeeCalculatorL10n: ToolL10n = {
   },
   de: {
     ui: {
+      'chartTitle': 'Wohin der Zahlbetrag fließt',
+      'cmpCharge': 'Berechneter Betrag',
+      'segKeep': 'Du behältst',
+      'segFees': 'Gebühren',
       'afterFees': 'Nach Gebühren',
       'amountYouCharge': 'Von dir berechneter Betrag',
       'amountYouNeedToNet': 'Zu nettoender Betrag',

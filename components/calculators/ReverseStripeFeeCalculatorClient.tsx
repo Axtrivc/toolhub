@@ -2,6 +2,7 @@
 
 import { useState, useMemo } from 'react'
 import { CalculatorField, ResultCard, CalculatorShell, CalculatorNote } from '@/components/calculator/CalculatorField'
+import { StackedCompareChart } from '@/components/charts/StackedCompareChart'
 import { CopyButton } from '@/components/CopyButton'
 import { useApp } from '@/components/providers/AppProviders'
 import { tui } from '@/lib/i18n/tool-l10n'
@@ -182,21 +183,38 @@ export function ReverseStripeFeeCalculatorClient() {
         <CalculatorShell
           inputs={inputs}
           results={
-            <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
-              {parsed.mode === 'forward' ? (
-                <>
-                  <ResultCard label={L('processingFee', 'Processing fee')} value={fmtMoney(parsed.fee)} sublabel={`${fees.pct}% + ${fmtMoney(fees.fixed)}`} />
-                  <ResultCard label={L('youReceive', 'You receive')} value={fmtMoney(parsed.net)} sublabel={L('afterFees', 'After fees')} highlight />
-                  <ResultCard label={L('effectiveFeeRate', 'Effective fee rate')} value={`${parsed.effective.toFixed(2)}%`} sublabel={L('feeDividedByCharge', 'Fee ÷ charge amount')} />
-                </>
-              ) : (
-                <>
-                  <ResultCard label={L('youMustCharge', 'You must charge')} value={fmtMoney(parsed.charge)} sublabel={L('toNetYourTarget', 'To net your target amount')} highlight />
-                  <ResultCard label={L('processingFee', 'Processing fee')} value={fmtMoney(parsed.fee)} sublabel={`${fees.pct}% + ${fmtMoney(fees.fixed)}`} />
-                  <ResultCard label={L('netCheck', 'Net check')} value={fmtMoney(parsed.net)} sublabel={L('chargeMinusFeeNote', 'Charge − fee (should match target)')} />
-                </>
-              )}
-            </div>
+            <>
+              <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
+                {parsed.mode === 'forward' ? (
+                  <>
+                    <ResultCard label={L('processingFee', 'Processing fee')} value={fmtMoney(parsed.fee)} sublabel={`${fees.pct}% + ${fmtMoney(fees.fixed)}`} />
+                    <ResultCard label={L('youReceive', 'You receive')} value={fmtMoney(parsed.net)} sublabel={L('afterFees', 'After fees')} highlight />
+                    <ResultCard label={L('effectiveFeeRate', 'Effective fee rate')} value={`${parsed.effective.toFixed(2)}%`} sublabel={L('feeDividedByCharge', 'Fee ÷ charge amount')} />
+                  </>
+                ) : (
+                  <>
+                    <ResultCard label={L('youMustCharge', 'You must charge')} value={fmtMoney(parsed.charge)} sublabel={L('toNetYourTarget', 'To net your target amount')} highlight />
+                    <ResultCard label={L('processingFee', 'Processing fee')} value={fmtMoney(parsed.fee)} sublabel={`${fees.pct}% + ${fmtMoney(fees.fixed)}`} />
+                    <ResultCard label={L('netCheck', 'Net check')} value={fmtMoney(parsed.net)} sublabel={L('chargeMinusFeeNote', 'Charge − fee (should match target)')} />
+                  </>
+                )}
+              </div>
+
+              {/* 收款金额去向:净得 vs 手续费 堆叠条(值非正的分段自动隐藏) */}
+              <StackedCompareChart
+                title={L('chartTitle', 'Where the charge goes')}
+                rows={[
+                  {
+                    label: L('cmpCharge', 'Charge amount'),
+                    segments: [
+                      { label: L('segKeep', 'You keep'), value: parsed.net, color: '#22c55e' },
+                      { label: L('segFees', 'Fees'), value: parsed.fee, color: '#ef4444' },
+                    ],
+                  },
+                ]}
+                formatTotal={fmtMoney}
+              />
+            </>
           }
         >
           <div className="flex flex-wrap items-center gap-3">

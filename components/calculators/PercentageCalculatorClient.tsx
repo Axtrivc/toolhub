@@ -1,6 +1,7 @@
 'use client'
 
 import { CalculatorField, CalculatorSliderField, ResultCard, CalculatorNote } from '@/components/calculator/CalculatorField'
+import { StackedCompareChart } from '@/components/charts/StackedCompareChart'
 import { useUrlState } from '@/lib/useUrlState'
 import { useApp } from '@/components/providers/AppProviders'
 import { tui } from '@/lib/i18n/tool-l10n'
@@ -56,6 +57,24 @@ export function PercentageCalculatorClient() {
         <div className="mt-3">
           <ResultCard label={L('result', 'Result')} value={fmt(r1, 2)} highlight />
         </div>
+        {/* 部分占整体:蓝 = 算得的部分,灰 = 剩余(值非法/为 0 不出图) */}
+        {isFinite(r1) && r1 > 0 && Number(p1Value) > 0 && (
+          <div className="mt-3">
+            <StackedCompareChart
+              title={L('chartTitle', 'Part vs whole')}
+              rows={[
+                {
+                  label: L('cmpWhole', 'Whole'),
+                  segments: [
+                    { label: L('cmpPart', 'Part'), value: r1, color: '#3b82f6' },
+                    { label: L('cmpRemainder', 'Remainder'), value: Number(p1Value) - r1, color: '#cbd5e1' },
+                  ],
+                },
+              ]}
+              formatTotal={(n) => fmt(n, 2)}
+            />
+          </div>
+        )}
       </section>
 
       {/* 模式2 */}
@@ -68,6 +87,24 @@ export function PercentageCalculatorClient() {
         <div className="mt-3">
           <ResultCard label={L('result', 'Result')} value={isFinite(r2) ? `${fmt(r2, 2)}%` : '—'} highlight />
         </div>
+        {/* 部分占整体:蓝 = Part,灰 = 剩余(值非法/为 0 不出图) */}
+        {isFinite(r2) && r2Whole > 0 && Number(p2Part) > 0 && (
+          <div className="mt-3">
+            <StackedCompareChart
+              title={L('chartTitle', 'Part vs whole')}
+              rows={[
+                {
+                  label: L('cmpWhole', 'Whole'),
+                  segments: [
+                    { label: L('cmpPart', 'Part'), value: Number(p2Part), color: '#3b82f6' },
+                    { label: L('cmpRemainder', 'Remainder'), value: r2Whole - Number(p2Part), color: '#cbd5e1' },
+                  ],
+                },
+              ]}
+              formatTotal={(n) => fmt(n, 2)}
+            />
+          </div>
+        )}
       </section>
 
       {/* 模式3 */}

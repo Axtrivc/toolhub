@@ -7,6 +7,10 @@ import type { ToolL10n } from '../tool-l10n'
 export const gptTokenCounterL10n: ToolL10n = {
   zh: {
     ui: {
+      'chartTitle': '成本去向',
+      'chartCenter': '总计',
+      'sliceInput': '输入',
+      'sliceOutput': '输出',
       'expectedOutputTokens': '预期输出 token 数',
       'estimatedTotalCost': '估算总费用',
       'inputCostLine': '输入:',
@@ -75,6 +79,10 @@ export const gptTokenCounterL10n: ToolL10n = {
   },
   es: {
     ui: {
+      'chartTitle': 'A dónde va el coste',
+      'chartCenter': 'Total',
+      'sliceInput': 'Entrada',
+      'sliceOutput': 'Salida',
       'expectedOutputTokens': 'Tokens de salida previstos',
       'estimatedTotalCost': 'Coste total estimado',
       'inputCostLine': 'Entrada:',
@@ -143,6 +151,10 @@ export const gptTokenCounterL10n: ToolL10n = {
   },
   de: {
     ui: {
+      'chartTitle': 'Wohin die Kosten gehen',
+      'chartCenter': 'Gesamt',
+      'sliceInput': 'Eingabe',
+      'sliceOutput': 'Ausgabe',
       'expectedOutputTokens': 'Erwartete Ausgabe-Tokens',
       'estimatedTotalCost': 'Geschätzte Gesamtkosten',
       'inputCostLine': 'Eingabe:',

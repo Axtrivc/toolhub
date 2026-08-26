@@ -7,6 +7,11 @@ import type { ToolL10n } from '../tool-l10n'
 export const ebayFeeCalculatorL10n: ToolL10n = {
   zh: {
     ui: {
+      'chartTitle': '售出货款的去向',
+      'cmpSale': '售出价(商品 + 运费)',
+      'segKeep': '你留下',
+      'segFixedFees': '固定费用',
+      'segVarFees': '变动费用',
       'advancedPrefix': '高级:覆盖 ',
       'afterItemShipping': '扣除商品 + 运费成本后',
       'breakEvenSalePrice': '盈亏平衡售价',
@@ -93,6 +98,11 @@ export const ebayFeeCalculatorL10n: ToolL10n = {
   },
   es: {
     ui: {
+      'chartTitle': 'A dónde va el dinero de la venta',
+      'cmpSale': 'Precio de venta (artículo + envío)',
+      'segKeep': 'Te queda',
+      'segFixedFees': 'Comisiones fijas',
+      'segVarFees': 'Comisiones variables',
       'advancedPrefix': 'Avanzado: sobrescribe el ',
       'afterItemShipping': 'Tras costes de artículo + envío',
       'breakEvenSalePrice': 'Precio de venta de equilibrio',
@@ -178,6 +188,11 @@ export const ebayFeeCalculatorL10n: ToolL10n = {
   },
   de: {
     ui: {
+      'chartTitle': 'Wohin das Geld der Verkaufssumme fließt',
+      'cmpSale': 'Verkaufspreis (Artikel + Versand)',
+      'segKeep': 'Du behältst',
+      'segFixedFees': 'Feste Gebühren',
+      'segVarFees': 'Variable Gebühren',
       'advancedPrefix': 'Erweitert: ',
       'afterItemShipping': 'Nach Artikel- + Versandkosten',
       'breakEvenPrice': 'Break-even-Verkaufspreis',

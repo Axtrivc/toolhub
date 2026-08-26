@@ -2,6 +2,8 @@
 
 import { useState, useMemo } from 'react'
 import { CalculatorField, ResultCard, CalculatorShell, CalculatorNote } from '@/components/calculator/CalculatorField'
+import { LineAreaChart } from '@/components/charts/LineAreaChart'
+import { fmtCompact } from '@/components/charts/chartKit'
 import { ResultActions } from '@/components/ResultActions'
 import { useApp } from '@/components/providers/AppProviders'
 import { tui } from '@/lib/i18n/tool-l10n'
@@ -25,6 +27,8 @@ export function SaasLtvChurnCalculatorClient() {
     isFinite(n)
       ? n.toLocaleString(localeTag, { style: 'currency', currency: 'USD', maximumFractionDigits: 2 })
       : '—'
+  // 图表 Y 轴/tooltip 用的紧凑货币(en-US,确定性输出,SSR 首帧一致)
+  const fmtCompactMoney = (n: number) => (isFinite(n) ? `$${fmtCompact(n)}` : '—')
 
   const [arpu, setArpu] = useState('50')
   const [margin, setMargin] = useState('80')
@@ -62,7 +66,12 @@ export function SaasLtvChurnCalculatorClient() {
     const lostMrr = churnedCustomers * a
     const nrr = (1 + g / 100 - churnFrac) * 100
 
-    return { lifetimeMonths, ltv, ltvCac, health, paybackMonths, churnedCustomers, lostMrr, nrr, grossProfitPerCustomer }
+    // 存活 MRR 曲线:MRR × (1 − churn)^month(流失 >100% 时钳到 0,曲线归零)
+    const mrr = a * cust
+    const survFactor = Math.max(0, 1 - churnFrac)
+    const survMrr = [0, 3, 6, 12, 18, 24].map((m) => mrr * Math.pow(survFactor, m))
+
+    return { lifetimeMonths, ltv, ltvCac, health, paybackMonths, churnedCustomers, lostMrr, nrr, grossProfitPerCustomer, survMrr }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [arpu, margin, churn, cac, growth, customers, locale])
 
@@ -108,6 +117,7 @@ export function SaasLtvChurnCalculatorClient() {
     <CalculatorShell
       inputs={inputs}
       results={
+        <>
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
           <ResultCard
             label={L('customerLifetimeValue', 'Customer lifetime value (LTV)')}
@@ -153,6 +163,23 @@ export function SaasLtvChurnCalculatorClient() {
             sublabel={L('nrrFormula', '1 + growth − churn (simplified)')}
           />
         </div>
+
+        {/* 存活 MRR 衰减曲线:当前客户群在纯流失(无新增/扩展)假设下的 MRR 走势 */}
+        <LineAreaChart
+          title={L('chartTitle', 'Surviving MRR over time')}
+          xLabels={['M0', 'M3', 'M6', 'M12', 'M18', 'M24']}
+          lines={[
+            {
+              key: 'survive',
+              label: L('lineSurvive', 'Surviving MRR'),
+              color: '#22c55e',
+              points: parsed.survMrr,
+              area: true,
+            },
+          ]}
+          formatY={fmtCompactMoney}
+        />
+      </>
       }
     >
       <ResultActions summary={summary} filename="saas-metrics.txt" downloadContent={summary} copyLabel={L('copySummary', 'Copy Summary')} />

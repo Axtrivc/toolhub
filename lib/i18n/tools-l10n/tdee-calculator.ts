@@ -7,6 +7,12 @@ import type { ToolL10n } from '../tool-l10n'
 export const tdeeCalculatorL10n: ToolL10n = {
   zh: {
     ui: {
+      'donutTitle': 'TDEE 构成',
+      'sliceActivity': '活动消耗',
+      'centerTdee': 'TDEE',
+      'cmpTitle': '各目标每日热量',
+      'goalCut': '减脂 (−500)',
+      'goalBulk': '增肌 (+500)',
       'activityExtra': '极度活动(体力工作 / 一天两次)',
       'activityLevel': '活动水平',
       'activityLight': '轻度活动(每周 1–3 天)',
@@ -96,6 +102,12 @@ export const tdeeCalculatorL10n: ToolL10n = {
   },
   es: {
     ui: {
+      'donutTitle': 'Desglose del TDEE',
+      'sliceActivity': 'Quemado por actividad',
+      'centerTdee': 'TDEE',
+      'cmpTitle': 'Calorías diarias por objetivo',
+      'goalCut': 'Definición (−500)',
+      'goalBulk': 'Volumen (+500)',
       'activityExtra': 'Extra activo (trabajo físico / 2x día)',
       'activityLevel': 'Nivel de actividad',
       'activityLight': 'Ligeramente activo (1-3 días/semana)',
@@ -185,6 +197,12 @@ export const tdeeCalculatorL10n: ToolL10n = {
   },
   de: {
     ui: {
+      'donutTitle': 'TDEE-Aufschlüsselung',
+      'sliceActivity': 'Aktivitätsverbrauch',
+      'centerTdee': 'TDEE',
+      'cmpTitle': 'Tägliche Kalorien nach Ziel',
+      'goalCut': 'Definition (−500)',
+      'goalBulk': 'Masseaufbau (+500)',
       'activityExtra': 'Extrem aktiv (körperlicher Beruf / 2x täglich)',
       'activityLevel': 'Aktivitätsniveau',
       'activityLight': 'Leicht aktiv (1-3 Tage/Woche)',

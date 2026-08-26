@@ -2,6 +2,7 @@
 
 import { useState, useMemo, useEffect, useRef } from 'react'
 import { CalculatorField } from '@/components/calculator/CalculatorField'
+import { BreakdownChart } from '@/components/calculator/BreakdownChart'
 import { useApp } from '@/components/providers/AppProviders'
 import { tui } from '@/lib/i18n/tool-l10n'
 
@@ -420,6 +421,18 @@ ${itemRows}
           )}
         </div>
       </div>
+
+      {/* 发票构成:小计 / 税额 环形图(0 值分段自动隐藏;全 0 显示空环占位) */}
+      <BreakdownChart
+        title={L('chartTitle', 'Invoice breakdown')}
+        slices={[
+          { label: L('subtotal', 'Subtotal'), value: subtotal, color: '#3b82f6' },
+          { label: L('tax', 'Tax'), value: taxAmount, color: '#f59e0b' },
+        ]}
+        centerLabel={L('total', 'Total')}
+        centerValue={fmt(total)}
+        emptyLabel={L('chartEmpty', 'Add line items to see the invoice breakdown.')}
+      />
 
       <p className="rounded-md p-3 text-xs" style={{ backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text-subtle))' }}>
         {L('noteP1', '🔒 Everything stays in your browser — no data is uploaded or saved anywhere. That also means')}{' '}

@@ -7,6 +7,12 @@ import type { ToolL10n } from '../tool-l10n'
 export const gpaCalculatorL10n: ToolL10n = {
   zh: {
     ui: {
+      'chartTitle': '你的 GPA 所处区间',
+      'zoneFailing': '不及格',
+      'zoneBelowAvg': '低于平均',
+      'zoneAvg': '平均',
+      'zoneGood': '良好',
+      'zoneExcellent': '优秀',
       'addCourse': '+ 添加课程',
       'courseName': '课程名',
       'credits': '学分',
@@ -39,6 +45,12 @@ export const gpaCalculatorL10n: ToolL10n = {
   },
   es: {
     ui: {
+      'chartTitle': 'Tu GPA en la escala',
+      'zoneFailing': 'Reprobado',
+      'zoneBelowAvg': 'Bajo el promedio',
+      'zoneAvg': 'Promedio',
+      'zoneGood': 'Bien',
+      'zoneExcellent': 'Excelente',
       'addCourse': '+ Añadir curso',
       'courseName': 'Nombre del curso',
       'credits': 'Créditos',
@@ -71,6 +83,12 @@ export const gpaCalculatorL10n: ToolL10n = {
   },
   de: {
     ui: {
+      'chartTitle': 'Dein GPA auf der Skala',
+      'zoneFailing': 'Nicht bestanden',
+      'zoneBelowAvg': 'Unter dem Durchschnitt',
+      'zoneAvg': 'Durchschnitt',
+      'zoneGood': 'Gut',
+      'zoneExcellent': 'Ausgezeichnet',
       'addCourse': '+ Kurs hinzufügen',
       'courseName': 'Kursname',
       'credits': 'Credits',

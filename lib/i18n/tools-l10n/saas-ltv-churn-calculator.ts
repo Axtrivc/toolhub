@@ -7,6 +7,8 @@ import type { ToolL10n } from '../tool-l10n'
 export const saasLtvChurnCalculatorL10n: ToolL10n = {
   zh: {
     ui: {
+      'chartTitle': '存留 MRR 走势',
+      'lineSurvive': '存留 MRR',
       'cacOptional': 'CAC(可选)',
       'cacPaybackPeriod': 'CAC 回本周期',
       'copySummary': '复制摘要',
@@ -82,6 +84,8 @@ export const saasLtvChurnCalculatorL10n: ToolL10n = {
   },
   es: {
     ui: {
+      'chartTitle': 'MRR superviviente en el tiempo',
+      'lineSurvive': 'MRR superviviente',
       'cacOptional': 'CAC (opcional)',
       'cacPaybackPeriod': 'Periodo de payback del CAC',
       'copySummary': 'Copiar resumen',
@@ -157,6 +161,8 @@ export const saasLtvChurnCalculatorL10n: ToolL10n = {
   },
   de: {
     ui: {
+      'chartTitle': 'Verbleibender MRR im Zeitverlauf',
+      'lineSurvive': 'Verbleibender MRR',
       'cacOptional': 'CAC (optional)',
       'cacPaybackPeriod': 'CAC-Payback-Periode',
       'copySummary': 'Zusammenfassung kopieren',
