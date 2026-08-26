@@ -7,8 +7,10 @@ import { GaugeChart } from '../charts/GaugeChart'
 import { LineAreaChart } from '../charts/LineAreaChart'
 import { ResultActions } from '../ResultActions'
 import { LoadSampleButton } from '../LoadSampleButton'
+import { ShareResultButton } from '../calculator/ShareResultButton'
 import type { CalculatorConfig } from '@/lib/calculator-types'
 import { getCalculatorSample } from '@/lib/tool-samples'
+import { getTool } from '@/lib/tools'
 import { useApp } from '@/components/providers/AppProviders'
 import { tui, tuiCalc } from '@/lib/i18n/tool-l10n'
 
@@ -277,6 +279,27 @@ export function makeCalculatorClient(config: CalculatorConfig): ComponentType {
             )}
           </div>
         </div>
+        {/* 场景预设 chips(可选):一键填充多字段,再配合滑杆微调 */}
+        {config.presets && config.presets.length > 0 && (
+          <div className="flex flex-wrap items-center gap-2">
+            {config.presets.map((p, i) => (
+              <button
+                key={i}
+                type="button"
+                onClick={() => {
+                  setValues((prev) => ({ ...prev, ...p.values }))
+                  setDirty(true)
+                  setSampleArmed(false)
+                }}
+                className="rounded-full border px-3 py-1 text-xs font-medium transition-colors hover:bg-slate-100 dark:border-slate-600 dark:hover:bg-slate-800"
+                style={{ borderColor: 'rgb(var(--border-strong))', color: 'rgb(var(--text-muted))' }}
+              >
+                {L(`preset.${i}`, p.label)}
+              </button>
+            ))}
+          </div>
+        )}
+
         <div className="grid grid-cols-1 gap-4 rounded-lg p-4 sm:grid-cols-2" style={{ backgroundColor: 'rgb(var(--bg-subtle))' }}>
           {config.inputs.map((f) => {
             // select 类型用下拉
@@ -347,14 +370,27 @@ export function makeCalculatorClient(config: CalculatorConfig): ComponentType {
           ))}
         </div>
 
-        {/* 结果操作行 - Copy Summary 复制纯文本摘要,Download 导出 CSV */}
-        <ResultActions
-          summary={summary}
-          filename={downloadFilename}
-          downloadContent={csvContent}
-          mime="text/csv;charset=utf-8;"
-          copyLabel={L('copySummary', 'Copy Summary')}
-        />
+        {/* 结果操作行 - Copy Summary 复制纯文本摘要,Download 导出 CSV,分享卡导出 PNG */}
+        <div className="flex flex-wrap items-center gap-2">
+          <ResultActions
+            summary={summary}
+            filename={downloadFilename}
+            downloadContent={csvContent}
+            mime="text/csv;charset=utf-8;"
+            copyLabel={L('copySummary', 'Copy Summary')}
+          />
+          {highlightOut && highlightValue && highlightValue !== '—' && !highlightValue.startsWith('⚠️') && (
+            <ShareResultButton
+              toolName={config.slug ? (getTool(config.slug)?.name ?? config.slug) : 'Result'}
+              headline={{ label: outLabel(highlightOut.key, highlightOut.label), value: highlightValue }}
+              lines={config.inputs.slice(0, 5).map((f) => ({
+                label: inLabel(f.key, f.label),
+                value: `${values[f.key] ?? ''}${f.suffix ? inSuffix(f.key, f.suffix) : ''}`,
+              }))}
+              filename={config.slug ? `${config.slug}-result.png` : 'result.png'}
+            />
+          )}
+        </div>
 
         {/* 结果可视化(可选)- chart 支持单图或数组(多图并存),
             按 kind 分发:环形(默认)/仪表盘/曲线;key 用于多图列表项 */}

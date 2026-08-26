@@ -101,6 +101,11 @@ export interface CalculatorConfig {
    * 浏览器历史里)。
    */
   urlState?: boolean
+  /**
+   * 场景预设(可选):输入区上方一排 chips,一键填充多字段后配合滑杆微调。
+   * values 只需包含要改的 key(未列出的字段保持当前值)。
+   */
+  presets?: { label: string; values: Record<string, string> }[]
 }
 
 /**

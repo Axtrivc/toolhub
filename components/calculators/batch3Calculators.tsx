@@ -886,6 +886,12 @@ export const MarkupCalculatorClient = makeCalculatorClient({
 export const MortgageCalculatorClient = makeCalculatorClient({
   slug: 'mortgage-calculator',
   urlState: true,
+  presets: [
+    { label: '30-yr fixed', values: { rate: '6.8', years: '30', down: '20' } },
+    { label: '15-yr fixed', values: { rate: '6.2', years: '15', down: '20' } },
+    { label: '10% down FHA', values: { down: '10', pmiRate: '0.55' } },
+    { label: 'Aggressive payoff', values: { extra: '500' } },
+  ],
   inputs: [
     { key: 'home', label: 'Home price', suffix: '$', default: '400000' },
     { key: 'down', label: 'Down payment', suffix: '%', default: '20', slider: { min: 0, max: 100, step: 1 } },

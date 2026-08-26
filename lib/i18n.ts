@@ -282,6 +282,8 @@ export interface Dict {
   bentoTodayDaysLeft: string // "{n} days left in {y}"
   bentoOpenTool: string
   searchQuickAnswer: string
+  shareResult: string
+  shareCopied: string
   // ── 工具页共享组件本地化(FavoriteButton / VisibleFaqs / EmbedTool /
   //    Disclaimer / FormulaSection / makeTextTool 等共享 chrome) ──
   // FavoriteButton
@@ -509,6 +511,8 @@ const en: Dict = {
   bentoTodayDaysLeft: '{n} days left in {y}',
   bentoOpenTool: 'Open the full tool →',
   searchQuickAnswer: 'Quick answer — press Enter for the full tool',
+  shareResult: 'Copy as image',
+  shareCopied: 'Copied!',
   // ── 工具页共享组件 chrome ──
   favSave: 'Save',
   favSaved: 'Saved',
@@ -731,6 +735,8 @@ const zh: Dict = {
   bentoTodayDaysLeft: '距 {y} 年结束还有 {n} 天',
   bentoOpenTool: '打开完整工具 →',
   searchQuickAnswer: '快速答案——回车打开完整工具',
+  shareResult: '复制为图片',
+  shareCopied: '已复制!',
   // ── 工具页共享组件 chrome ──
   favSave: '收藏',
   favSaved: '已收藏',
@@ -953,6 +959,8 @@ const es: Dict = {
   bentoTodayDaysLeft: 'quedan {n} días de {y}',
   bentoOpenTool: 'Abrir la herramienta →',
   searchQuickAnswer: 'Respuesta rápida — Enter abre la herramienta',
+  shareResult: 'Copiar como imagen',
+  shareCopied: '¡Copiado!',
   // ── 工具页共享组件 chrome ──
   favSave: 'Guardar',
   favSaved: 'Guardado',
@@ -1175,6 +1183,8 @@ const de: Dict = {
   bentoTodayDaysLeft: 'noch {n} Tage in {y}',
   bentoOpenTool: 'Vollständiges Tool öffnen →',
   searchQuickAnswer: 'Schnellantwort — Enter öffnet das Tool',
+  shareResult: 'Als Bild kopieren',
+  shareCopied: 'Kopiert!',
   // ── 工具页共享组件 chrome ──
   favSave: 'Merken',
   favSaved: 'Gemerkt',
