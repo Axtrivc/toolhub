@@ -115,7 +115,7 @@ export function HashComparatorClient() {
 
   return (
     <div className="space-y-5">
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+      <div className="grid grid-cols-1 gap-4 rounded-lg p-4 md:grid-cols-2" style={{ backgroundColor: 'rgb(var(--bg-subtle))' }}>
         <CalculatorField id="hc-exp" type="text" label={L('expectedLabel', 'Expected hash (from publisher)')} value={expected} onChange={setExpected} placeholder="e3b0c442…" />
         <CalculatorField id="hc-act" type="text" label={L('actualLabel', 'Actual hash (you computed)')} value={actual} onChange={setActual} placeholder="e3b0c442…" />
       </div>
