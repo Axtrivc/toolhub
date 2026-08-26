@@ -112,7 +112,7 @@ function PercentCell() {
         <span className="pb-2.5 text-sm" style={{ color: 'rgb(var(--text-muted))' }}>
           {t(locale, 'bentoPercentIs')}
         </span>
-        <div className="w-24 flex-1">
+        <div className="w-full flex-1">
           <MiniInput value={val} onChange={setVal} ariaLabel="value" />
         </div>
       </div>

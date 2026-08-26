@@ -1,6 +1,6 @@
 'use client'
 
-import { CalculatorField, ResultCard, CalculatorNote } from '@/components/calculator/CalculatorField'
+import { CalculatorField, CalculatorSliderField, ResultCard, CalculatorNote } from '@/components/calculator/CalculatorField'
 import { useUrlState } from '@/lib/useUrlState'
 import { useApp } from '@/components/providers/AppProviders'
 import { tui } from '@/lib/i18n/tool-l10n'
@@ -50,7 +50,7 @@ export function PercentageCalculatorClient() {
       <section>
         <h2 className="mb-3 text-lg font-semibold" style={{ color: 'rgb(var(--text))' }}>{L('mode1Title', 'What is X% of Y?')}</h2>
         <div className="grid grid-cols-1 gap-4 rounded-lg p-4 sm:grid-cols-2" style={{ backgroundColor: 'rgb(var(--bg-subtle))' }}>
-          <CalculatorField id="p1p" label={L('percentage', 'Percentage (%)')} value={p1Percent} onChange={setP1Percent} suffix="%" />
+          <CalculatorSliderField id="p1p" label={L('percentage', 'Percentage (%)')} value={p1Percent} onChange={setP1Percent} suffix="%" min={0} max={100} step={1} />
           <CalculatorField id="p1v" label={L('ofValue', 'Of value')} value={p1Value} onChange={setP1Value} />
         </div>
         <div className="mt-3">
@@ -92,7 +92,7 @@ export function PercentageCalculatorClient() {
         <h2 className="mb-3 text-lg font-semibold" style={{ color: 'rgb(var(--text))' }}>{L('mode4Title', 'Add or subtract X%')}</h2>
         <div className="grid grid-cols-1 gap-4 rounded-lg p-4 sm:grid-cols-2" style={{ backgroundColor: 'rgb(var(--bg-subtle))' }}>
           <CalculatorField id="p4v" label={L('value', 'Value')} value={p4Value} onChange={setP4Value} />
-          <CalculatorField id="p4p" label={L('percentageToAdd', 'Percentage to add')} value={p4Percent} onChange={setP4Percent} suffix="%" />
+          <CalculatorSliderField id="p4p" label={L('percentageToAdd', 'Percentage to add')} value={p4Percent} onChange={setP4Percent} suffix="%" min={0} max={100} step={1} />
         </div>
         <div className="mt-3 grid grid-cols-2 gap-3">
           <ResultCard label={`${L('value', 'Value')} + ${p4Percent || 0}%`} value={fmt(r4, 2)} />
