@@ -273,10 +273,10 @@ export const AnnuityCalculatorClient = makeCalculatorClient({
 export const CapitalGainsTaxEstimatorClient = makeCalculatorClient({
   slug: 'capital-gains-tax-estimator',
   inputs: [
-    { key: 'purchase', label: 'Purchase price', suffix: '$', default: '10000' },
-    { key: 'sale', label: 'Sale price', suffix: '$', default: '15000' },
-    { key: 'years', label: 'Years held', default: '2' },
-    { key: 'taxableIncome', label: 'Taxable income', suffix: '$', default: '80000' },
+    { key: 'purchase', label: 'Purchase price', suffix: '$', default: '10000', slider: { min: 0, max: 100000, step: 1000 } },
+    { key: 'sale', label: 'Sale price', suffix: '$', default: '15000', slider: { min: 0, max: 200000, step: 1000 } },
+    { key: 'years', label: 'Years held', default: '2', slider: { min: 0, max: 30, step: 1 } },
+    { key: 'taxableIncome', label: 'Taxable income', suffix: '$', default: '80000', slider: { min: 0, max: 500000, step: 5000 } },
     { key: 'filing', label: 'Filing status', default: 'single', options: [
       { label: 'Single', value: 'single' },
       { label: 'Married, filing jointly', value: 'married' },
@@ -341,6 +341,47 @@ export const CapitalGainsTaxEstimatorClient = makeCalculatorClient({
       gain: fmtUSD(gain),
       rate: `${label.trim()} ${rateDetail}`,
       tax: fmtUSD(tax),
+    }
+  },
+  chart: { kind: 'compare', title: 'Where the sale money goes' },
+  compare: (v) => {
+    const purchase = toNum(v.purchase), sale = toNum(v.sale)
+    const gain = Math.max(0, sale - purchase)
+    if (!(purchase >= 0) || !(sale >= 0) || sale < purchase) return null
+    // 与 compute 相同口径的税额估算(长期逐档/短期堆叠)
+    const income = toNum(v.taxableIncome)
+    const married = v.filing === 'married'
+    const isLong = toNum(v.years) > 1
+    let tax = 0
+    if (isLong) {
+      const zeroMax = married ? 98900 : 49450
+      const fifteenMax = married ? 613700 : 545500
+      const zeroPortion = Math.min(gain, Math.max(0, zeroMax - income))
+      const fifteenPortion = Math.min(gain - zeroPortion, Math.max(0, fifteenMax - Math.max(income, zeroMax)))
+      const twentyPortion = gain - zeroPortion - fifteenPortion
+      tax = fifteenPortion * 0.15 + twentyPortion * 0.2
+    } else {
+      const brackets = married
+        ? [[0, 0.10], [24800, 0.12], [100800, 0.22], [211400, 0.24], [403550, 0.32], [512450, 0.35], [768700, 0.37]]
+        : [[0, 0.10], [12400, 0.12], [50400, 0.22], [105700, 0.24], [201775, 0.32], [256225, 0.35], [640600, 0.37]]
+      for (let i = 0; i < brackets.length; i++) {
+        const lo = brackets[i][0] as number
+        const rate = brackets[i][1] as number
+        const hi = i + 1 < brackets.length ? (brackets[i + 1][0] as number) : Infinity
+        const portion = Math.min(income + gain, hi) - Math.max(income, lo)
+        if (portion > 0 && gain > 0) tax += portion * rate
+      }
+    }
+    tax = Math.min(Math.max(0, tax), gain)
+    return {
+      rows: [
+        { label: 'Sale proceeds', segments: [
+          { label: 'Purchase price back', value: purchase, color: '#3b82f6' },
+          { label: 'Net gain after tax', value: gain - tax, color: '#22c55e' },
+          { label: 'Tax owed', value: tax, color: '#ef4444' },
+        ] },
+      ],
+      formatTotal: (n) => fmtUSD(n, 0),
     }
   },
   note: '📈 US capital gains: held 1+ year = long-term (0/15/20% by 2026 taxable income). Held <1 year = short-term (ordinary income rate). Gains stack on top of ordinary income for bracket purposes (long-term brackets and the short-term marginal rate are based on income plus gain). Simplified — excludes NIIT and state tax.',

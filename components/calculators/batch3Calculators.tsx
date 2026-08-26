@@ -755,16 +755,16 @@ export function IdealWeightCalculatorClient() {
 export const FractionCalculatorClient = makeCalculatorClient({
   slug: 'fraction-calculator',
   inputs: [
-    { key: 'num1', label: 'Numerator 1', default: '1' },
-    { key: 'den1', label: 'Denominator 1', default: '2' },
+    { key: 'num1', label: 'Numerator 1', default: '1', slider: { min: -20, max: 20, step: 1 } },
+    { key: 'den1', label: 'Denominator 1', default: '2', slider: { min: 1, max: 20, step: 1 } },
     { key: 'op', label: 'Operation', default: 'add', options: [
       { label: '+ (Add)', value: 'add' },
       { label: '− (Subtract)', value: 'sub' },
       { label: '× (Multiply)', value: 'mul' },
       { label: '÷ (Divide)', value: 'div' },
     ]},
-    { key: 'num2', label: 'Numerator 2', default: '1' },
-    { key: 'den2', label: 'Denominator 2', default: '3' },
+    { key: 'num2', label: 'Numerator 2', default: '1', slider: { min: -20, max: 20, step: 1 } },
+    { key: 'den2', label: 'Denominator 2', default: '3', slider: { min: 1, max: 20, step: 1 } },
   ],
   outputs: [
     { key: 'result', label: 'Result (fraction)', highlight: true },
@@ -803,15 +803,37 @@ export const FractionCalculatorClient = makeCalculatorClient({
     const decimal = ((num / den) * (sign ? -1 : 1)).toFixed(4)
     return { result, decimal }
   },
+  chart: { kind: 'compare', title: 'Fraction sizes' },
+  compare: (v) => {
+    const val = (n: string, d: string) => toNum(d) === 0 ? NaN : toNum(n) / toNum(d)
+    const f1 = val(v.num1, v.den1), f2 = val(v.num2, v.den2)
+    let result: number
+    switch (v.op) {
+      case 'add': result = f1 + f2; break
+      case 'sub': result = f1 - f2; break
+      case 'mul': result = f1 * f2; break
+      case 'div': result = f2 === 0 ? NaN : f1 / f2; break
+      default: return null
+    }
+    if (![f1, f2, result].every((n) => isFinite(n) && n >= 0)) return null
+    return {
+      rows: [
+        { label: 'Fraction 1', segments: [{ label: 'Value', value: f1, color: '#3b82f6' }] },
+        { label: 'Fraction 2', segments: [{ label: 'Value', value: f2, color: '#a855f7' }] },
+        { label: 'Result', segments: [{ label: 'Value', value: result, color: '#22c55e' }] },
+      ],
+      formatTotal: (n) => fmtNum(n, 3),
+    }
+  },
   note: '➗ Simplifies results to lowest terms. Uses exact fraction arithmetic, not decimals.',
 })
 
 export const RatioCalculatorClient = makeCalculatorClient({
   slug: 'ratio-calculator',
   inputs: [
-    { key: 'a', label: 'A', default: '3' },
-    { key: 'b', label: 'B', default: '4' },
-    { key: 'c', label: 'C (or leave blank to solve)', default: '9' },
+    { key: 'a', label: 'A', default: '3', slider: { min: 1, max: 100, step: 1 } },
+    { key: 'b', label: 'B', default: '4', slider: { min: 1, max: 100, step: 1 } },
+    { key: 'c', label: 'C (or leave blank to solve)', default: '9', slider: { min: 1, max: 100, step: 1 } },
   ],
   outputs: [
     { key: 'ratio', label: 'A : B = C : D', highlight: true },
@@ -828,6 +850,25 @@ export const RatioCalculatorClient = makeCalculatorClient({
     return {
       ratio: `${fmtNum(a / g, 0)} : ${fmtNum(b / g, 0)} = ${fmtNum(c, 0)} : ${fmtNum(d, 2)}`,
       d: fmtNum(d, 2),
+    }
+  },
+  chart: { kind: 'compare', title: 'A : B vs C : D' },
+  compare: (v) => {
+    const a = toNum(v.a), b = toNum(v.b), c = toNum(v.c)
+    if (!(a > 0) || !(b > 0) || !(c >= 0)) return null
+    const d = (b * c) / a
+    return {
+      rows: [
+        { label: 'A : B', segments: [
+          { label: 'A', value: a, color: '#3b82f6' },
+          { label: 'B', value: b, color: '#cbd5e1' },
+        ] },
+        { label: 'C : D', segments: [
+          { label: 'C', value: c, color: '#22c55e' },
+          { label: 'D', value: d, color: '#cbd5e1' },
+        ] },
+      ],
+      formatTotal: (n) => fmtNum(n, 1),
     }
   },
   note: '⚖️ Solves proportions. Example: 3/4 = 9/D → D = 12. Useful for recipes, scaling, and maps.',
@@ -1115,8 +1156,8 @@ export const MortgageCalculatorClient = makeCalculatorClient({
 export const HourlyToSalaryCalculatorClient = makeCalculatorClient({
   slug: 'hourly-to-salary-calculator',
   inputs: [
-    { key: 'hourly', label: 'Hourly wage', suffix: '$/hr', default: '25' },
-    { key: 'hours', label: 'Hours per week', default: '40' },
+    { key: 'hourly', label: 'Hourly wage', suffix: '$/hr', default: '25', slider: { min: 5, max: 200, step: 0.5 } },
+    { key: 'hours', label: 'Hours per week', default: '40', slider: { min: 1, max: 80, step: 1 } },
   ],
   outputs: [
     { key: 'annual', label: 'Annual salary', highlight: true },
@@ -1136,14 +1177,33 @@ export const HourlyToSalaryCalculatorClient = makeCalculatorClient({
       daily: fmtUSD(hourly * 8),
     }
   },
+  presets: [
+    { label: 'Part-time 20 h', values: { hours: '20' } },
+    { label: 'Full-time 40 h', values: { hours: '40' } },
+    { label: 'Busy season 55 h', values: { hours: '55' } },
+  ],
+  chart: { kind: 'compare', title: 'Your week (168 h)' },
+  compare: (v) => {
+    const h = toNum(v.hours)
+    if (!(h >= 0) || h > 168) return null
+    return {
+      rows: [
+        { label: 'One week', segments: [
+          { label: 'At work', value: h, color: '#3b82f6' },
+          { label: 'Everything else', value: 168 - h, color: '#cbd5e1' },
+        ] },
+      ],
+      formatTotal: (n) => `${Math.round(n)} h`,
+    }
+  },
   note: '💵 Assumes 52 paid weeks/year. Adjust hours for part-time or overtime.',
 })
 
 export const ROIcalculatorClient = makeCalculatorClient({
   slug: 'roi-calculator',
   inputs: [
-    { key: 'initial', label: 'Initial investment', suffix: '$', default: '10000' },
-    { key: 'final', label: 'Final value', suffix: '$', default: '13500' },
+    { key: 'initial', label: 'Initial investment', suffix: '$', default: '10000', slider: { min: 0, max: 100000, step: 500 } },
+    { key: 'final', label: 'Final value', suffix: '$', default: '13500', slider: { min: 0, max: 200000, step: 500 } },
     { key: 'years', label: 'Years held', default: '3', slider: { min: 1, max: 30, step: 1 } },
   ],
   outputs: [
@@ -1172,6 +1232,30 @@ export const ROIcalculatorClient = makeCalculatorClient({
       roi: `${fmtNum(roi, 2)}%`,
       annualized: `${fmtNum(annualized, 2)}%`,
       profit: fmtUSD(profit, 0),
+    }
+  },
+  chart: { kind: 'compare', title: 'Initial vs final value' },
+  compare: (v) => {
+    const initial = toNum(v.initial), final = toNum(v.final)
+    if (!(initial >= 0) || !(final >= 0)) return null
+    const profit = final - initial
+    if (profit >= 0) {
+      return {
+        rows: [
+          { label: 'Final value', segments: [
+            { label: 'Initial investment', value: initial, color: '#3b82f6' },
+            { label: 'Profit', value: profit, color: '#22c55e' },
+          ] },
+        ],
+        formatTotal: (n) => fmtUSD(n, 0),
+      }
+    }
+    return {
+      rows: [
+        { label: 'Final value', segments: [{ label: 'Final value', value: final, color: '#ef4444' }] },
+        { label: 'Loss', segments: [{ label: 'Loss', value: -profit, color: '#f59e0b' }] },
+      ],
+      formatTotal: (n) => fmtUSD(n, 0),
     }
   },
   note: '📈 ROI = total return. Annualized = yearly average (CAGR). For stocks & real estate.',
