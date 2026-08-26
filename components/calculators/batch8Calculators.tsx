@@ -162,7 +162,50 @@ export const CreditCardMinimumCalculatorClient = makeCalculatorClient({
       ],
     },
     { kind: 'series', title: 'Balance on Minimums Only', titleKey: 'chartTitleBalance' },
+    { kind: 'compare', title: 'Minimums vs +$50 a Month', titleKey: 'chartTitleCompare' },
   ],
+  // 堆叠对比:只还最低 vs 每月多还 $50 的 本金/利息 构成(与 compute 同式模拟)
+  compare: (v) => {
+    const bal = toNum(v.balance)
+    const monthlyRate = toNum(v.apr) / 100 / 12
+    const minPct = toNum(v.minPct) / 100
+    if (!(bal > 0) || monthlyRate < 0 || minPct <= 0) return null
+    const simulate = (extra: number) => {
+      let b = bal
+      let totalInt = 0
+      let m = 0
+      while (b > 0.005 && m < 600) {
+        const int = b * monthlyRate
+        const pay = Math.min(b + int, Math.max(25, b * minPct) + extra)
+        totalInt += int
+        b = b + int - pay
+        m++
+      }
+      return { paidOff: b <= 0.005, totalInt }
+    }
+    const minOnly = simulate(0)
+    const plus50 = simulate(50)
+    if (!minOnly.paidOff || !plus50.paidOff) return null
+    return {
+      rows: [
+        {
+          label: 'Minimums only',
+          segments: [
+            { label: 'Principal', value: bal, color: '#3b82f6' },
+            { label: 'Interest', value: minOnly.totalInt, color: '#ef4444' },
+          ],
+        },
+        {
+          label: 'Pay $50 more',
+          segments: [
+            { label: 'Principal', value: bal, color: '#3b82f6' },
+            { label: 'Interest', value: plus50.totalInt, color: '#ef4444' },
+          ],
+        },
+      ],
+      formatTotal: (n) => fmtUSD(n, 0),
+    }
+  },
   // 只还最低还款的余额拖尾曲线(与 compute 同式:$25 下限、≤当月本息、600 月上限)
   series: (v) => {
     const start = toNum(v.balance)

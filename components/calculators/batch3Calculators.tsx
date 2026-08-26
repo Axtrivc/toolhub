@@ -2,6 +2,7 @@
 
 import { useState, useMemo, useCallback } from 'react'
 import { CalculatorField, CalculatorSliderField, ResultCard, CalculatorNote } from '@/components/calculator/CalculatorField'
+import { GaugeChart } from '@/components/charts/GaugeChart'
 import { LoadSampleButton } from '@/components/LoadSampleButton'
 import { ResultActions } from '@/components/ResultActions'
 import { makeCalculatorClient } from '../calculator/makeCalculatorClient'
@@ -557,6 +558,20 @@ export function WaterIntakeCalculatorClient() {
             <ResultCard label={L('outCups', 'In cups (250ml)')} value={`${fmtNum((result.ml / 1000) * 4, 1)} ${L('cupsUnit', 'cups')}`} />
             <ResultCard label={L('outOz', 'In ounces (US)')} value={`${fmtNum(result.ml * 0.0338140227, 1)} ${L('ozUnit', 'oz')}`} />
           </div>
+          {/* 仪表盘:你的每日目标 vs 常规饮水指导区间 */}
+          <GaugeChart
+            title={L('gaugeTitle', 'Your Target vs Guidance')}
+            value={result.ml / 1000}
+            min={0}
+            max={5}
+            zones={[
+              { upTo: 1.5, color: '#3b82f6', label: L('zoneLow', 'Below guidance') },
+              { upTo: 2.6, color: '#22c55e', label: L('zoneTypical', 'Typical adequate') },
+              { upTo: 3.7, color: '#eab308', label: L('zoneActive', 'Active lifestyle') },
+              { upTo: 5, color: '#f97316', label: L('zoneHigh', 'Above typical') },
+            ]}
+            formatValue={(n) => `${fmtNum(n, 2)} L`}
+          />
           <ResultActions
             summary={summary}
             filename="water-intake-calculator-result.csv"
