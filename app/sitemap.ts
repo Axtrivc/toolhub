@@ -1,6 +1,7 @@
 import type { MetadataRoute } from 'next'
 import { SITE_URL } from '@/lib/constants'
 import { getPublishedTools } from '@/lib/tools'
+import { publishedBlogPosts } from '@/lib/blog-posts'
 
 /**
  * 自动生成的 sitemap.xml
@@ -21,9 +22,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${SITE_URL}/contact/`, changeFrequency: 'yearly', priority: 0.3 },
     { url: `${SITE_URL}/privacy/`, changeFrequency: 'yearly', priority: 0.3 },
     { url: `${SITE_URL}/terms/`, changeFrequency: 'yearly', priority: 0.3 },
-    // 技术博客(英文长文,面向 HN/极客社区 + SEO 拓展)
+    // 博客(注册表驱动:新文章登记进 lib/blog-posts.ts 后自动收录)
     { url: `${SITE_URL}/blog/`, changeFrequency: 'weekly', priority: 0.7 },
-    { url: `${SITE_URL}/blog/how-i-built-toolhub/`, changeFrequency: 'weekly', priority: 0.7 },
+    ...publishedBlogPosts.map((p) => ({
+      url: `${SITE_URL}/blog/${p.slug}/`,
+      changeFrequency: 'monthly' as const,
+      priority: 0.7,
+    })),
   ]
 
   const toolPages: MetadataRoute.Sitemap = getPublishedTools().map((tool) => ({
