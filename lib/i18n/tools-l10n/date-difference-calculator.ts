@@ -7,6 +7,16 @@ import type { ToolL10n } from '../tool-l10n'
 export const dateDifferenceCalculatorL10n: ToolL10n = {
   zh: {
     ui: {
+      'barTitle': '时长构成',
+      'segYears': '年',
+      'segMonths': '月',
+      'segWeeks': '周',
+      'segDays': '天',
+      'chipsTitle': '里程碑',
+      'msYear': '年',
+      'msYears': '年',
+      'msDaysAgo': '天前',
+      'msDaysAway': '天后',
       'businessDays': '营业日',
       'daysWord': ' 天',
       'duration': '时长',
@@ -40,6 +50,16 @@ export const dateDifferenceCalculatorL10n: ToolL10n = {
   },
   es: {
     ui: {
+      'barTitle': 'Desglose de la duración',
+      'segYears': 'Años',
+      'segMonths': 'Meses',
+      'segWeeks': 'Semanas',
+      'segDays': 'Días',
+      'chipsTitle': 'Hitos',
+      'msYear': 'año',
+      'msYears': 'años',
+      'msDaysAgo': 'días atrás',
+      'msDaysAway': 'días restantes',
       'businessDays': 'Días laborables',
       'daysWord': ' días',
       'duration': 'Duración',
@@ -73,6 +93,16 @@ export const dateDifferenceCalculatorL10n: ToolL10n = {
   },
   de: {
     ui: {
+      'barTitle': 'Aufschlüsselung der Dauer',
+      'segYears': 'Jahre',
+      'segMonths': 'Monate',
+      'segWeeks': 'Wochen',
+      'segDays': 'Tage',
+      'chipsTitle': 'Meilensteine',
+      'msYear': 'Jahr',
+      'msYears': 'Jahre',
+      'msDaysAgo': 'Tage her',
+      'msDaysAway': 'Tage entfernt',
       'businessDays': 'Werktage',
       'daysWord': ' Tage',
       'duration': 'Dauer',

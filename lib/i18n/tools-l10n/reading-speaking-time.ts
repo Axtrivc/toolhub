@@ -7,6 +7,11 @@ import type { ToolL10n } from '../tool-l10n'
 export const readingSpeakingTimeL10n: ToolL10n = {
   zh: {
     ui: {
+      'statWords': '词数',
+      'statChars': '字符数',
+      'statReading': '阅读时长',
+      'statSpeaking': '演讲时长',
+      'statMinUnit': '分钟',
       'at250WordsPerPage': '按每页 250 词',
       'characters': '字符',
       'copySummary': '复制摘要',
@@ -63,6 +68,11 @@ export const readingSpeakingTimeL10n: ToolL10n = {
   },
   es: {
     ui: {
+      'statWords': 'Palabras',
+      'statChars': 'Caracteres',
+      'statReading': 'Tiempo de lectura',
+      'statSpeaking': 'Tiempo de habla',
+      'statMinUnit': 'min',
       'at250WordsPerPage': 'a 250 palabras por página',
       'characters': 'Caracteres',
       'copySummary': 'Copiar resumen',
@@ -119,6 +129,11 @@ export const readingSpeakingTimeL10n: ToolL10n = {
   },
   de: {
     ui: {
+      'statWords': 'Wörter',
+      'statChars': 'Zeichen',
+      'statReading': 'Lesezeit',
+      'statSpeaking': 'Sprechzeit',
+      'statMinUnit': 'Min.',
       'at250WordsPerPage': 'bei 250 Wörtern pro Seite',
       'characters': 'Zeichen',
       'copySummary': 'Zusammenfassung kopieren',

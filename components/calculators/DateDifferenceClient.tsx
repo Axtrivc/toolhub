@@ -137,6 +137,109 @@ export function DateDifferenceClient() {
             <ResultCard label={L('totalHours', 'Total hours')} value={fmt(result.totalHours)} />
             <ResultCard label={L('businessDays', 'Business days')} value={fmt(result.businessDays)} sublabel={L('monFri', 'Mon–Fri')} />
           </div>
+
+          {/* 时长构成条:年/月/周/日 四段水平堆叠(纯 CSS,flex 宽度按时长占比,
+              蓝/绿/琥珀/紫渐次),下方图例 + 就近里程碑 chips。
+              分段宽度按各段折算的真实时长(年 365.25 / 月 30.4375 / 周 7 天),
+              与上方「2 yr 3 mo 12 days」的日历拆解一致;全零(同日)不出图。 */}
+          {(() => {
+            const remWeeks = Math.floor(result.days / 7)
+            const remDays = result.days % 7
+            const segs = [
+              { key: 'y', days: result.years * 365.25, count: result.years, color: '#3b82f6', label: L('segYears', 'Years') },
+              { key: 'm', days: result.months * 30.4375, count: result.months, color: '#22c55e', label: L('segMonths', 'Months') },
+              { key: 'w', days: remWeeks * 7, count: remWeeks, color: '#f59e0b', label: L('segWeeks', 'Weeks') },
+              { key: 'd', days: remDays, count: remDays, color: '#a855f7', label: L('segDays', 'Days') },
+            ]
+            const total = segs.reduce((s, x) => s + x.days, 0)
+            if (total <= 0) return null
+            const milestones = [
+              { days: 100, label: `100 ${L('daysWord', ' days').trim()}` },
+              { days: 365, label: `1 ${L('msYear', 'year')}` },
+              { days: 500, label: `500 ${L('daysWord', ' days').trim()}` },
+              { days: 1000, label: `1000 ${L('daysWord', ' days').trim()}` },
+              { days: 1826, label: `5 ${L('msYears', 'years')}` },
+              { days: 3652, label: `10 ${L('msYears', 'years')}` },
+              { days: 5000, label: `5000 ${L('daysWord', ' days').trim()}` },
+              { days: 10000, label: `10000 ${L('daysWord', ' days').trim()}` },
+            ]
+            const prev = milestones.filter((m) => m.days <= result.totalDays).pop()
+            const next = milestones.find((m) => m.days > result.totalDays)
+            return (
+              <div
+                className="rounded-lg border p-5"
+                style={{ borderColor: 'rgb(var(--border))', backgroundColor: 'rgb(var(--bg-card))' }}
+              >
+                <div className="mb-3 text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>
+                  {L('barTitle', 'Duration breakdown')}
+                </div>
+                {/* 堆叠条 */}
+                <div
+                  className="flex h-3 w-full overflow-hidden rounded-full"
+                  role="img"
+                  aria-label={L('barTitle', 'Duration breakdown')}
+                >
+                  {segs
+                    .filter((s) => s.days > 0)
+                    .map((s) => (
+                      <div
+                        key={s.key}
+                        style={{
+                          width: `${(s.days / total) * 100}%`,
+                          backgroundColor: s.color,
+                          transition: 'width 300ms cubic-bezier(0.22,1,0.36,1)',
+                        }}
+                      />
+                    ))}
+                </div>
+                {/* 图例 */}
+                <div className="mt-3 flex flex-wrap gap-x-4 gap-y-1.5">
+                  {segs.map((s) => (
+                    <span key={s.key} className="inline-flex items-center gap-1.5">
+                      <span
+                        className="inline-block h-2.5 w-2.5 rounded-sm"
+                        style={{ backgroundColor: s.color }}
+                        aria-hidden="true"
+                      />
+                      <span className="text-xs" style={{ color: 'rgb(var(--text-muted))' }}>
+                        {s.label}:{' '}
+                        <span className="font-semibold tabular-nums" style={{ color: 'rgb(var(--text))' }}>
+                          {s.count}
+                        </span>{' '}
+                        <span className="tabular-nums" style={{ color: 'rgb(var(--text-faint))' }}>
+                          ({((s.days / total) * 100).toFixed(0)}%)
+                        </span>
+                      </span>
+                    </span>
+                  ))}
+                </div>
+                {/* 就近里程碑 */}
+                {(prev || next) && (
+                  <div className="mt-4 flex flex-wrap items-center gap-2">
+                    <span className="text-xs font-medium" style={{ color: 'rgb(var(--text-faint))' }}>
+                      {L('chipsTitle', 'Milestones')}
+                    </span>
+                    {prev && (
+                      <span
+                        className="rounded-full border px-3 py-1 text-xs"
+                        style={{ borderColor: 'rgb(var(--border))', color: 'rgb(var(--text-muted))' }}
+                      >
+                        ✓ {prev.label} · {fmt(result.totalDays - prev.days)} {L('msDaysAgo', 'days ago')}
+                      </span>
+                    )}
+                    {next && (
+                      <span
+                        className="rounded-full border px-3 py-1 text-xs"
+                        style={{ borderColor: 'rgb(var(--border))', color: 'rgb(var(--text-muted))' }}
+                      >
+                        → {next.label} · {fmt(next.days - result.totalDays)} {L('msDaysAway', 'days away')}
+                      </span>
+                    )}
+                  </div>
+                )}
+              </div>
+            )
+          })()}
         </>
       )}
 

@@ -7,6 +7,11 @@ import type { ToolL10n } from '../tool-l10n'
 export const daysCountdownCalculatorL10n: ToolL10n = {
   zh: {
     ui: {
+      'chartTitle': '倒计时进度',
+      'todayLabel': '今天',
+      'ringDaysElapsed': '天已过去',
+      'ringFinalYear': '最后 365 天内',
+      'ringFarTarget': '目标在一年之后——进度环将在最后一年内填充',
       'approxMonths': '≈ 月数',
       'basedOn3044': '按 30.44 天/月',
       'businessDays': '营业日',
@@ -76,6 +81,11 @@ export const daysCountdownCalculatorL10n: ToolL10n = {
   },
   es: {
     ui: {
+      'chartTitle': 'Progreso de la cuenta atrás',
+      'todayLabel': 'Hoy',
+      'ringDaysElapsed': 'días transcurridos',
+      'ringFinalYear': 'en los últimos 365 días',
+      'ringFarTarget': 'el objetivo está a más de un año — el anillo se llena en el último año',
       'approxMonths': '≈ Meses',
       'basedOn3044': 'según meses de 30,44 días',
       'businessDays': 'Días laborables',
@@ -145,6 +155,11 @@ export const daysCountdownCalculatorL10n: ToolL10n = {
   },
   de: {
     ui: {
+      'chartTitle': 'Countdown-Fortschritt',
+      'todayLabel': 'Heute',
+      'ringDaysElapsed': 'Tage vergangen',
+      'ringFinalYear': 'in den letzten 365 Tagen',
+      'ringFarTarget': 'Ziel liegt über ein Jahr entfernt — der Ring füllt sich im letzten Jahr',
       'approxMonths': '≈ Monate',
       'basedOn3044': 'basierend auf 30,44-Tage-Monaten',
       'businessDays': 'Werktage',

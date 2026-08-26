@@ -283,6 +283,93 @@ export function DaysCountdownCalculatorClient() {
                   sublabel={L('monFriWeekendsSkipped', 'Mon–Fri, weekends skipped')}
                 />
               </div>
+
+              {/* 倒计时进度环:以目标日为终点的「最后 365 天」窗口,
+                  进度 = 已过天数 / 总天数(365)。环的起止日完全由输入的目标日期
+                  派生(确定性),而已过天数依赖 now —— now 由挂载后的 useEffect 提供
+                  (SSR 首帧 countdown 为 null,整块不出图,水合安全)。
+                  「今天」指针(蓝点)落在进度弧的前沿上。环形手法同 BreakdownChart。 */}
+              {(() => {
+                if (!target || !now) return null
+                const WINDOW = 365
+                const anchor = new Date(
+                  target.getFullYear(), target.getMonth(), target.getDate() - WINDOW,
+                  target.getHours(), target.getMinutes(), 0,
+                )
+                const elapsedDays = (now.getTime() - anchor.getTime()) / 86400000
+                const progress = Math.min(1, Math.max(0, elapsedDays / WINDOW))
+                const C = 2 * Math.PI * 40
+                const theta = progress * 2 * Math.PI - Math.PI / 2
+                const dotX = 50 + 40 * Math.cos(theta)
+                const dotY = 50 + 40 * Math.sin(theta)
+                return (
+                  <div
+                    className="rounded-lg border p-5"
+                    style={{ borderColor: 'rgb(var(--border))', backgroundColor: 'rgb(var(--bg-card))' }}
+                  >
+                    <div className="mb-3 text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>
+                      {L('chartTitle', 'Countdown progress')}
+                    </div>
+                    <div className="flex flex-col items-center gap-6 sm:flex-row sm:items-center">
+                      {/* SVG 圆环 r=40,viewBox 100×100 */}
+                      <div className="relative h-40 w-40 shrink-0">
+                        <svg viewBox="0 0 100 100" className="h-full w-full">
+                          <g transform="rotate(-90 50 50)">
+                            <circle cx="50" cy="50" r="40" fill="none" stroke="rgb(var(--bg-subtle))" strokeWidth="12" />
+                            {progress > 0.001 && (
+                              <circle
+                                cx="50"
+                                cy="50"
+                                r="40"
+                                fill="none"
+                                stroke="rgb(var(--primary))"
+                                strokeWidth="12"
+                                strokeLinecap="round"
+                                strokeDasharray={`${C * progress} ${C}`}
+                              />
+                            )}
+                          </g>
+                          {/* 今天指针(蓝点),在未旋转坐标系里按角度定位 */}
+                          <circle cx={dotX} cy={dotY} r="4.5" fill="#3b82f6" stroke="rgb(var(--bg-card))" strokeWidth="2" />
+                        </svg>
+                        <div className="absolute inset-0 flex flex-col items-center justify-center">
+                          <span className="text-3xl font-bold tabular-nums text-primary">{countdown.clock.days}</span>
+                          <span className="text-[10px] uppercase tracking-wide" style={{ color: 'rgb(var(--text-faint))' }}>
+                            {countdown.future ? L('daysLeft', 'Days left') : L('daysAgo', 'Days ago')}
+                          </span>
+                        </div>
+                      </div>
+                      {/* 图例 */}
+                      <div className="flex-1 space-y-2">
+                        <div className="flex items-center gap-2">
+                          <span className="inline-block h-2.5 w-2.5 rounded-full" style={{ backgroundColor: '#3b82f6' }} aria-hidden="true" />
+                          <span className="text-sm" style={{ color: 'rgb(var(--text-muted))' }}>
+                            {L('todayLabel', 'Today')}
+                          </span>
+                        </div>
+                        {elapsedDays >= 0 ? (
+                          <div className="flex items-center gap-2">
+                            <span className="inline-block h-2.5 w-2.5 rounded-sm" style={{ backgroundColor: 'rgb(var(--primary))' }} aria-hidden="true" />
+                            <span className="text-sm" style={{ color: 'rgb(var(--text-muted))' }}>
+                              {Math.floor(elapsedDays)} {L('ringDaysElapsed', 'days elapsed')} · {L('ringFinalYear', 'in the final 365 days')}
+                            </span>
+                          </div>
+                        ) : (
+                          <div className="flex items-center gap-2">
+                            <span className="inline-block h-2.5 w-2.5 rounded-sm" style={{ backgroundColor: 'rgb(var(--bg-subtle))', boxShadow: 'inset 0 0 0 1px rgb(var(--border-strong))' }} aria-hidden="true" />
+                            <span className="text-sm" style={{ color: 'rgb(var(--text-muted))' }}>
+                              {L('ringFarTarget', 'target is over a year away — the ring fills in the final year')}
+                            </span>
+                          </div>
+                        )}
+                        <div className="text-sm font-semibold tabular-nums" style={{ color: 'rgb(var(--text))' }}>
+                          {(progress * 100).toFixed(1)}%
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )
+              })()}
             </>
           )}
         </>

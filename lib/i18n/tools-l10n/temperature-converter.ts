@@ -7,6 +7,10 @@ import type { ToolL10n } from '../tool-l10n'
 export const temperatureConverterL10n: ToolL10n = {
   zh: {
     ui: {
+      'chartTitle': '温度标尺(°C)',
+      'ptFreezing': '冰点',
+      'ptBody': '体温',
+      'ptBoiling': '沸点',
       'summaryTitle': '温度换算',
       'sInput': '输入: ',
       'sResult': '结果: ',
@@ -35,6 +39,10 @@ export const temperatureConverterL10n: ToolL10n = {
   },
   es: {
     ui: {
+      'chartTitle': 'Escala de temperatura (°C)',
+      'ptFreezing': 'Congelación',
+      'ptBody': 'Cuerpo',
+      'ptBoiling': 'Ebullición',
       'summaryTitle': 'Conversión de temperatura',
       'sInput': 'Entrada: ',
       'sResult': 'Resultado: ',
@@ -63,6 +71,10 @@ export const temperatureConverterL10n: ToolL10n = {
   },
   de: {
     ui: {
+      'chartTitle': 'Temperaturskala (°C)',
+      'ptFreezing': 'Gefrierpunkt',
+      'ptBody': 'Körpertemp.',
+      'ptBoiling': 'Siedepunkt',
       'summaryTitle': 'Temperaturumrechnung',
       'sInput': 'Eingabe: ',
       'sResult': 'Ergebnis: ',

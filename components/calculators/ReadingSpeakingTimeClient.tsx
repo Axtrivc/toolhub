@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from 'react'
 import { CopyButton } from '@/components/CopyButton'
-import { ResultCard, CalculatorNote } from '@/components/calculator/CalculatorField'
+import { AnimatedNumber, ResultCard, CalculatorNote } from '@/components/calculator/CalculatorField'
 import { useApp } from '@/components/providers/AppProviders'
 import { tui } from '@/lib/i18n/tool-l10n'
 import { countWords, countSentences, hasCJK } from '@/lib/text-stats'
@@ -188,12 +188,38 @@ export function ReadingSpeakingTimeClient() {
         />
       </div>
 
-      {/* 基础统计 */}
-      <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
-        <ResultCard label={L('words', 'Words')} value={words} />
-        <ResultCard label={L('characters', 'Characters')} value={chars} />
-        <ResultCard label={L('sentences', 'Sentences')} value={sentences} />
-        <ResultCard label={L('pages', 'Pages')} value={words === 0 ? '0' : pages.toFixed(1)} sublabel={L('at250WordsPerPage', 'at 250 words per page')} />
+      {/* 统计仪表条:iOS 风格四格统计(词数/字符/阅读/演讲,数字滚动),
+          手法同 makeTextTool 的 stats strip;句数/页数降为下方一行小字。
+          时间格用「分钟(一位小数)」——纯数值串才能被 AnimatedNumber 正确 tween,
+          精确 mm:ss 仍保留下方原有输出卡。 */}
+      <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
+        {[
+          { label: L('statWords', 'Words'), display: words.toLocaleString(), sub: '' },
+          { label: L('statChars', 'Characters'), display: chars.toLocaleString(), sub: '' },
+          { label: L('statReading', 'Reading time'), display: (words / readWpm).toFixed(1), sub: `${L('statMinUnit', 'min')} @ ${readWpm} ${speedUnit}` },
+          { label: L('statSpeaking', 'Speaking time'), display: (words / speakWpm).toFixed(1), sub: `${L('statMinUnit', 'min')} @ ${speakWpm} ${speedUnit}` },
+        ].map((cell) => (
+          <div
+            key={cell.label}
+            className="rounded-xl border border-border/60 bg-card/80 p-3 text-center shadow-sm backdrop-blur-md transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md"
+          >
+            <div className="text-xl font-bold tabular-nums sm:text-2xl" style={{ color: 'rgb(var(--text))' }}>
+              <AnimatedNumber value={cell.display} />
+            </div>
+            <div className="mt-0.5 text-[11px] font-medium uppercase tracking-wide" style={{ color: 'rgb(var(--text-faint))' }}>
+              {cell.label}
+            </div>
+            {cell.sub && (
+              <div className="mt-0.5 text-[10px] tabular-nums" style={{ color: 'rgb(var(--text-faint))' }}>
+                {cell.sub}
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+      <div className="flex flex-wrap justify-center gap-x-4 gap-y-1 text-xs" style={{ color: 'rgb(var(--text-faint))' }}>
+        <span className="tabular-nums">{sentences} {L('sentences', 'Sentences')}</span>
+        <span className="tabular-nums">{words === 0 ? '0' : pages.toFixed(1)} {L('pages', 'Pages')} · {L('at250WordsPerPage', 'at 250 words per page')}</span>
       </div>
 
       {/* 朗读时间 */}
