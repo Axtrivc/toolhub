@@ -2267,6 +2267,117 @@ export const toolFaqs: Record<string, FaqPair[]> = {
       a: 'Systems expect different encodings: webhook docs usually show hex digests, JWT segments use base64url, some APIs want base64. Both outputs here are the same digest bytes, so copy whichever form your verifier expects.',
     },
   ],
+  // ══════════ _2025-08 扩张批4(7 个)══════════
+  'jwt-generator': [
+    {
+      q: 'Which algorithms are supported?',
+      a: 'HS256, HS384, and HS512 — the HMAC family, signed in your browser with WebCrypto. RS256/ES256 require a private key that must never live in front-end code, so asymmetric signing belongs on a server or CLI.',
+    },
+    {
+      q: 'Can I generate a token without a secret?',
+      a: 'Yes — leave the secret empty and you get the unsigned preview: base64url(header).base64url(payload) with a trailing dot. Useful for seeing exactly what a verifier receives, but no auth system will accept it.',
+    },
+    {
+      q: 'Is signing tokens in the browser safe?',
+      a: 'For testing and learning only. A secret held in a browser page is visible to anyone with devtools and would ship inside production bundles. Prototype payloads and debug verifiers here; keep production signing server-side.',
+    },
+    {
+      q: 'Does it add anything to my header?',
+      a: 'No — the header is exactly the JSON you provide; the default includes typ and alg, but nothing is injected. Some verifiers are strict about alg matching the key, so keep it consistent with what will verify the token.',
+    },
+  ],
+  'hash-comparator': [
+    {
+      q: 'Is the comparison timing-safe?',
+      a: 'Yes — it accumulates an XOR across every character and checks the total only at the end, never returning early at the first mismatch. Timing attacks that try to read where two hashes diverge get nothing to observe.',
+    },
+    {
+      q: 'Are case and spacing normalized?',
+      a: 'Yes — both inputs are lowercased and stripped of all whitespace before comparing, so an uppercase published hash that line-wraps still matches. The hex digits themselves are compared strictly, character by character.',
+    },
+    {
+      q: 'What does a mismatch actually mean?',
+      a: 'For file downloads: corruption or tampering — re-download from the official source and compare again before running anything. For verifying a value you computed: at least one character differs from the published digest.',
+    },
+  ],
+  'base-converter': [
+    {
+      q: 'Which bases are supported?',
+      a: 'Every integer base from 2 to 36, with digits above 9 written as letters a-z (base 36 is 0-9 then a-z). The result panel shows binary, octal, decimal, hex, base32, and base36 simultaneously, each with its own copy button.',
+    },
+    {
+      q: 'Can it convert fractional numbers?',
+      a: 'Yes — enter 255.5 and the fractional part converts positionally, rounded at roughly 10 digits. Be aware many decimal fractions (0.1 included) repeat forever in binary; the tool truncates instead of implying false exactness.',
+    },
+    {
+      q: 'Why might it differ from my calculator?',
+      a: 'Floating point: values pass through JavaScript numbers, so integers beyond 2^53 (about 9 quadrillion) lose precision. For everyday ranges — colors, permission masks, memory sizes — the conversion is exact.',
+    },
+  ],
+  'cron-expression-generator': [
+    {
+      q: 'What syntax does it generate?',
+      a: 'Standard five-field Vixie cron: minute, hour, day-of-month, month, day-of-week. That covers crontab, GitHub Actions schedules, Kubernetes CronJobs, and most cloud schedulers. Quartz users must prepend a seconds field.',
+    },
+    {
+      q: 'What does */15 * * * * mean?',
+      a: 'Every 15 minutes — the */n step fires at n-minute intervals within each hour (00:00, 00:15, 00:30…). Note that steps on hours restart at midnight: */6 runs at 0, 6, 12, and 18.',
+    },
+    {
+      q: 'How do I run something weekdays at 9?',
+      a: 'Pick the Weekdays preset and set 9:00 — it emits 0 9 * * 1-5. Day-of-week runs 0-7 where both 0 and 7 mean Sunday, so 1-5 is Monday through Friday.',
+    },
+    {
+      q: 'Does it explain the expression?',
+      a: "Yes — every generated expression is rendered into plain language by the same engine behind this site's cron parser, so you can confirm the schedule reads back the way you intended before deploying it.",
+    },
+  ],
+  'htaccess-redirect-generator': [
+    {
+      q: 'Where does the .htaccess file go?',
+      a: "In your document root — the same folder as your homepage. Rules apply to that directory and everything beneath it. Apache with mod_rewrite is required, which is near-universal on shared hosting; managed platforms like Vercel or Netlify don't use .htaccess at all.",
+    },
+    {
+      q: '301 or 302 while testing?',
+      a: 'Test with 302. Browsers and search engines cache 301s aggressively and for a very long time, so a wrong permanent redirect keeps haunting you. The generator emits 301s — change R=301 to R=302 while testing, then flip back.',
+    },
+    {
+      q: 'How do I move my whole domain?',
+      a: 'Fill in old and new domain and the generator emits a host RewriteRule that forwards every path one-to-one (old.com/page → new.com/page). Keep it live for at least a year so search indexes and saved bookmarks fully migrate.',
+    },
+    {
+      q: 'Are special characters escaped?',
+      a: 'Yes — source paths are regex-escaped automatically, so dots and question marks match literally, and the pattern accepts both /old-url and /old-url/ forms. Destinations are not escaped, so query strings can be included where needed.',
+    },
+  ],
+  'unicode-character-lookup': [
+    {
+      q: 'How many characters are included?',
+      a: 'A curated few hundred people actually search for: arrows, math symbols, Greek letters, typographic dashes, quotes and ellipses, currency signs, checks and stars, box-drawing, and Mac keys like ⌘. Full Unicode has 150,000+ characters — emoji pickers cover that territory.',
+    },
+    {
+      q: 'How do I find a character?',
+      a: 'Search by name — "arrow", "star", "quote" — or paste the character itself to identify it. Each result shows its code point (U+2192 for →) with a copy button for the character itself.',
+    },
+    {
+      q: 'Why show the code point?',
+      a: 'Code points are how characters are referenced everywhere: CSS \\2192 escapes, HTML entities, and rendering bug reports. They also disambiguate lookalikes, such as the degree sign versus a superscript zero.',
+    },
+  ],
+  'toml-to-json': [
+    {
+      q: 'Which TOML features are supported?',
+      a: 'The TOML 1.0 core: named tables, arrays of tables, inline tables, dotted keys, every numeric format (0x/0o/0b, inf, nan), booleans, and datetimes — which become strings, since JSON has no date type. Multi-line strings are rejected with their line number rather than mis-parsed.',
+    },
+    {
+      q: 'Why do dates become strings?',
+      a: 'JSON has no native date type — RFC 8259 defines only strings, numbers, booleans, arrays, objects, and null. The converter keeps datetime text exactly as written, which matches what most JSON APIs do with ISO 8601 strings.',
+    },
+    {
+      q: 'How are errors reported?',
+      a: 'Parse failures surface with the offending line number and a short reason, so a missing quote or malformed key is quick to locate. Nothing is output until the whole document parses — no half-converted results.',
+    },
+  ],
 }
 export function getToolFaqs(slug: string): FaqPair[] {
   return toolFaqs[slug] ?? []
