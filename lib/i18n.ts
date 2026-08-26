@@ -284,6 +284,7 @@ export interface Dict {
   searchQuickAnswer: string
   shareResult: string
   shareCopied: string
+  searchMatchesCount: string
   // ── 工具页共享组件本地化(FavoriteButton / VisibleFaqs / EmbedTool /
   //    Disclaimer / FormulaSection / makeTextTool 等共享 chrome) ──
   // FavoriteButton
@@ -513,6 +514,7 @@ const en: Dict = {
   searchQuickAnswer: 'Quick answer — press Enter for the full tool',
   shareResult: 'Copy as image',
   shareCopied: 'Copied!',
+  searchMatchesCount: '{count} matches',
   // ── 工具页共享组件 chrome ──
   favSave: 'Save',
   favSaved: 'Saved',
@@ -737,6 +739,7 @@ const zh: Dict = {
   searchQuickAnswer: '快速答案——回车打开完整工具',
   shareResult: '复制为图片',
   shareCopied: '已复制!',
+  searchMatchesCount: '{count} 条结果',
   // ── 工具页共享组件 chrome ──
   favSave: '收藏',
   favSaved: '已收藏',
@@ -961,6 +964,7 @@ const es: Dict = {
   searchQuickAnswer: 'Respuesta rápida — Enter abre la herramienta',
   shareResult: 'Copiar como imagen',
   shareCopied: '¡Copiado!',
+  searchMatchesCount: '{count} coincidencias',
   // ── 工具页共享组件 chrome ──
   favSave: 'Guardar',
   favSaved: 'Guardado',
@@ -1185,6 +1189,7 @@ const de: Dict = {
   searchQuickAnswer: 'Schnellantwort — Enter öffnet das Tool',
   shareResult: 'Als Bild kopieren',
   shareCopied: 'Kopiert!',
+  searchMatchesCount: '{count} Treffer',
   // ── 工具页共享组件 chrome ──
   favSave: 'Merken',
   favSaved: 'Gemerkt',

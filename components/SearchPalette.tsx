@@ -433,7 +433,9 @@ export function SearchPalette({ tools, locale, open, onClose }: SearchPalettePro
               </span>
             </div>
             <span style={{ color: 'rgb(var(--text-faint))' }}>
-              {t(locale, 'searchPaletteHint', { count: tools.length })}
+              {query.trim()
+                ? t(locale, 'searchMatchesCount', { count: total })
+                : t(locale, 'searchPaletteHint', { count: tools.length })}
             </span>
           </div>
           </motion.div>
