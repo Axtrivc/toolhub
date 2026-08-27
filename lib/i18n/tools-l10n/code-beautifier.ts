@@ -16,6 +16,7 @@ export const codeBeautifierL10n: ToolL10n = {
       'pasteYour': '粘贴你的',
       'twoSpaces': '2 空格',
       'unableToFormat': '无法格式化输入',
+      'tooLong': '⚠️ 输入超过支持的大小(100,000 字符)。请缩减输入后再格式化。',
     },
     useCases: [
       '在线美化压缩的 JavaScript',
@@ -49,6 +50,7 @@ export const codeBeautifierL10n: ToolL10n = {
       'pasteYour': 'Pega tu',
       'twoSpaces': '2 espacios',
       'unableToFormat': 'No se pudo formatear la entrada',
+      'tooLong': '⚠️ La entrada supera el tamaño admitido (100.000 caracteres). Redúcela para poder formatearla.',
     },
     useCases: [
       'embellecer JavaScript minificado online',
@@ -82,6 +84,7 @@ export const codeBeautifierL10n: ToolL10n = {
       'pasteYour': 'Füge deinen',
       'twoSpaces': '2 Leerzeichen',
       'unableToFormat': 'Eingabe konnte nicht formatiert werden',
+      'tooLong': '⚠️ Die Eingabe überschreitet die unterstützte Größe (100.000 Zeichen). Kürze die Eingabe, um sie zu formatieren.',
     },
     useCases: [
       'minimiertes JavaScript online verschönern',

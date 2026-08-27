@@ -11,6 +11,7 @@ export const textToBinaryL10n: ToolL10n = {
       inputLabel: '文本',
       outputLabel: '二进制',
       note: '💾 把文本转成 UTF-8 二进制——每个字符变成一个或多个 8 位字节。',
+      inputTooLarge: '⚠️ 输入过大——支持规模最多 20 万字符。请裁剪输入后再转换。',
     },
     useCases: [
       '计算机科学作业',
@@ -28,6 +29,7 @@ export const textToBinaryL10n: ToolL10n = {
       inputLabel: 'Texto',
       outputLabel: 'Binario',
       note: '💾 Convierte texto a binario UTF-8 — cada carácter pasa a ser uno o más bytes de 8 bits.',
+      inputTooLarge: '⚠️ Entrada demasiado grande: el tamaño admitido es de hasta 200 000 caracteres. Recorta la entrada para convertir.',
     },
     useCases: [
       'tareas de informática',
@@ -45,6 +47,7 @@ export const textToBinaryL10n: ToolL10n = {
       inputLabel: 'Text',
       outputLabel: 'Binär',
       note: '💾 Wandelt Text in UTF-8-Binär um — jedes Zeichen wird zu einem oder mehreren 8-Bit-Bytes.',
+      inputTooLarge: '⚠️ Eingabe zu groß – die unterstützte Größe beträgt maximal 200.000 Zeichen. Kürze die Eingabe zum Umwandeln.',
     },
     useCases: [
       'Informatik-Hausaufgaben',

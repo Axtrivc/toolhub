@@ -12,6 +12,7 @@ export const JsonToZodL10n: ToolL10n = {
       'loadSample': '加载示例',
       'note': '🧬 整数生成 z.number().int();混合数组生成最多 3 种样本形状的 z.union;空数组回退 z.unknown。观察到 null 的键保持"必填但可空"——API 会省略字段处请手动加 .optional()。',
       'rootObj': '根节点必须是 JSON 对象({ … })',
+      'tooLong': 'JSON 超过 {n} 字符上限——仅为开头部分生成 schema。',
     },
   },
   es: {
@@ -21,6 +22,7 @@ export const JsonToZodL10n: ToolL10n = {
       'loadSample': 'Cargar ejemplo',
       'note': '🧬 Los enteros generan z.number().int(); los arrays mixtos generan z.union con hasta 3 formas; los arrays vacíos usan z.unknown. Ajusta .optional() a mano donde la API omita campos.',
       'rootObj': 'La raíz debe ser un objeto JSON',
+      'tooLong': 'El JSON supera el límite de {n} caracteres: el esquema se genera solo a partir del principio.',
     },
   },
   de: {
@@ -30,6 +32,7 @@ export const JsonToZodL10n: ToolL10n = {
       'loadSample': 'Beispiel laden',
       'note': '🧬 Ganzzahlen ergeben z.number().int(); gemischte Arrays ergeben z.union mit bis zu 3 Formen; leere Arrays werden z.unknown. Setze .optional() manuell, wo APIs Felder weglassen.',
       'rootObj': 'Die Wurzel muss ein JSON-Objekt sein',
+      'tooLong': 'Das JSON überschreitet das Limit von {n} Zeichen — das Schema wird nur aus dem Anfang erzeugt.',
     },
   },
 }

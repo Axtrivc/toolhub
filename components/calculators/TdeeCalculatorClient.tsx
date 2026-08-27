@@ -280,11 +280,11 @@ export function TdeeCalculatorClient() {
               <table className="w-full text-left text-sm">
                 <thead className="text-xs uppercase" style={{ backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text-subtle))' }}>
                   <tr>
-                    <th className="px-3 py-2">{L('thGoal', 'Goal')}</th>
-                    <th className="px-3 py-2 text-right">{L('thCalories', 'Calories')}</th>
-                    <th className="px-3 py-2 text-right">{L('thProtein', 'Protein')}</th>
-                    <th className="px-3 py-2 text-right">{L('thCarbs', 'Carbs')}</th>
-                    <th className="px-3 py-2 text-right">{L('thFat', 'Fat')}</th>
+                    <th scope="col" className="px-3 py-2">{L('thGoal', 'Goal')}</th>
+                    <th scope="col" className="px-3 py-2 text-right">{L('thCalories', 'Calories')}</th>
+                    <th scope="col" className="px-3 py-2 text-right">{L('thProtein', 'Protein')}</th>
+                    <th scope="col" className="px-3 py-2 text-right">{L('thCarbs', 'Carbs')}</th>
+                    <th scope="col" className="px-3 py-2 text-right">{L('thFat', 'Fat')}</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-100 dark:divide-slate-700">

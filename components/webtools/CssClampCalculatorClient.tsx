@@ -98,7 +98,7 @@ export function CssClampCalculatorClient() {
       }
       results={
         error ? (
-          <div className="rounded-lg border border-red-200 dark:border-red-800/60 bg-red-50 dark:bg-red-950/30 p-4 text-sm text-red-700 dark:text-red-300">
+          <div role="status" className="rounded-lg border border-red-200 dark:border-red-800/60 bg-red-50 dark:bg-red-950/30 p-4 text-sm text-red-700 dark:text-red-300">
             ⚠️ {error}
           </div>
         ) : (
@@ -121,9 +121,9 @@ export function CssClampCalculatorClient() {
         )
       }
     >
-      {/* 测试视口超出范围提示 */}
+      {/* 测试视口超出范围提示(信息性,礼貌播报) */}
       {tvClamped && c && output && (
-        <div className="rounded-lg border border-red-200 dark:border-red-800/60 bg-red-50 dark:bg-red-950/30 p-4 text-sm text-red-700 dark:text-red-300">
+        <div role="status" className="rounded-lg border border-red-200 dark:border-red-800/60 bg-red-50 dark:bg-red-950/30 p-4 text-sm text-red-700 dark:text-red-300">
           ⚠️ {fmt(output.tv)}{L('clampedPxOutside', 'px is outside your ')}{fmt(c.minV)}–{fmt(c.maxV)}{L('clampedRange', 'px viewport range, so the font size is clamped at ')}{output.tv < c.minV ? L('clampedTheMinimum', 'the minimum') : L('clampedTheMaximum', 'the maximum')} ({fmt(tvFluid ?? 0)}{L('clampedEnd', 'px) rather than scaling further.')})
         </div>
       )}
@@ -177,16 +177,16 @@ export function CssClampCalculatorClient() {
             <table className="w-full text-sm">
               <thead>
                 <tr style={{ backgroundColor: 'rgb(var(--bg-subtle))' }}>
-                  <th className="px-4 py-2.5 text-left font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
+                  <th scope="col" className="px-4 py-2.5 text-left font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
                     {L('thViewport', 'Viewport')}
                   </th>
-                  <th className="px-4 py-2.5 text-left font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
+                  <th scope="col" className="px-4 py-2.5 text-left font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
                     {L('thFluidSize', 'Fluid size')}
                   </th>
-                  <th className="px-4 py-2.5 text-left font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
+                  <th scope="col" className="px-4 py-2.5 text-left font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
                     rem
                   </th>
-                  <th className="px-4 py-2.5 text-left font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
+                  <th scope="col" className="px-4 py-2.5 text-left font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
                     {L('thState', 'State')}
                   </th>
                 </tr>

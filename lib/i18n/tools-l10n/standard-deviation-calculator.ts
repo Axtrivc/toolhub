@@ -16,6 +16,7 @@ export const standardDeviationCalculatorL10n: ToolL10n = {
       'out.sampleStddev': '标准差(样本,n−1)',
       'out.variance': '方差(总体)',
       'out.count': '个数',
+      'datasetTruncated': '仅统计前 10,000 个数字',
       note: '📊 总体标准差除以 N;样本标准差(贝塞尔校正)除以 N−1。两种口径已在上方并列显示。',
     },
     useCases: [
@@ -39,6 +40,7 @@ export const standardDeviationCalculatorL10n: ToolL10n = {
       'out.sampleStddev': 'Desviación típica (muestral, n−1)',
       'out.variance': 'Varianza (poblacional)',
       'out.count': 'Cantidad',
+      'datasetTruncated': 'solo se cuentan los primeros 10.000 números',
       note: '📊 La desviación poblacional divide entre N; la muestral (corrección de Bessel) divide entre N−1. Ambas se muestran arriba.',
     },
     useCases: [
@@ -62,6 +64,7 @@ export const standardDeviationCalculatorL10n: ToolL10n = {
       'out.sampleStddev': 'Standardabweichung (Stichprobe, n−1)',
       'out.variance': 'Varianz (Grundgesamtheit)',
       'out.count': 'Anzahl',
+      'datasetTruncated': 'nur die ersten 10.000 Zahlen werden gezählt',
       note: '📊 Die Standardabweichung der Grundgesamtheit teilt durch N; die der Stichprobe (Bessel-Korrektur) durch N−1. Beide werden oben angezeigt.',
     },
     useCases: [

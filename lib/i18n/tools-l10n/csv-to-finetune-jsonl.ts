@@ -19,6 +19,7 @@ export const CsvToFinetuneJsonlL10n: ToolL10n = {
       'rowNoAssistant': '第 {n} 行:assistant 内容为空',
       'sysColLabel': 'system 列(可选)',
       'userColLabel': 'user 列',
+      'inputTooLarge': '输入超过 {n} 字符——为保证输入流畅已跳过转换。请精简或拆分 CSV 后再试。',
     },
   },
   es: {
@@ -35,6 +36,7 @@ export const CsvToFinetuneJsonlL10n: ToolL10n = {
       'rowNoAssistant': 'Fila {n}: contenido assistant vacío',
       'sysColLabel': 'Columna system (opcional)',
       'userColLabel': 'Columna user',
+      'inputTooLarge': 'La entrada supera los {n} caracteres — la conversión se omite para mantener la escritura fluida. Recorta o divide el CSV.',
     },
   },
   de: {
@@ -51,6 +53,7 @@ export const CsvToFinetuneJsonlL10n: ToolL10n = {
       'rowNoAssistant': 'Zeile {n}: leerer Assistant-Inhalt',
       'sysColLabel': 'System-Spalte (optional)',
       'userColLabel': 'User-Spalte',
+      'inputTooLarge': 'Die Eingabe überschreitet {n} Zeichen — die Konvertierung wird übersprungen, damit die Eingabe reaktionsfähig bleibt. CSV kürzen oder teilen.',
     },
   },
 }

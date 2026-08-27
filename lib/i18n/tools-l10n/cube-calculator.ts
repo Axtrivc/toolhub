@@ -11,6 +11,7 @@ export const cubeCalculatorL10n: ToolL10n = {
       'in.side': '边长',
       'out.volume': '体积',
       'out.surface': '表面积',
+      errNonNegative: '边长不能为负',
       note: '🧊 正方体体积 = 边³。表面积 = 6 × 边²。',
     },
     useCases: [
@@ -28,6 +29,7 @@ export const cubeCalculatorL10n: ToolL10n = {
       'in.side': 'Longitud de la arista',
       'out.volume': 'Volumen',
       'out.surface': 'Área de superficie',
+      errNonNegative: 'La arista no puede ser negativa',
       note: '🧊 Volumen del cubo = arista³. Área de superficie = 6 × arista².',
     },
     useCases: [
@@ -45,6 +47,7 @@ export const cubeCalculatorL10n: ToolL10n = {
       'in.side': 'Kantenlänge',
       'out.volume': 'Volumen',
       'out.surface': 'Oberfläche',
+      errNonNegative: 'Die Kantenlänge darf nicht negativ sein',
       note: '🧊 Würfelvolumen = Kante³. Oberfläche = 6 × Kante².',
     },
     useCases: [

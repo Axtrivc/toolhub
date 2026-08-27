@@ -7,6 +7,7 @@ import type { ToolL10n } from '../tool-l10n'
 export const base64EncoderL10n: ToolL10n = {
   zh: {
     ui: {
+      'inputTooLarge': '⚠️ 输入过大——支持规模最多 10 万字符。请裁剪输入后再转换。',
       'defaultInputDecode': '5L2g5aW9',
       'defaultInputEncode': '你好',
       'characters': '字符',
@@ -35,6 +36,7 @@ export const base64EncoderL10n: ToolL10n = {
   },
   es: {
     ui: {
+      'inputTooLarge': '⚠️ Entrada demasiado grande: el tamaño admitido es de hasta 100 000 caracteres. Recorta la entrada para convertir.',
       'defaultInputDecode': 'SG9sYSBNdW5kbw==',
       'defaultInputEncode': 'Hola Mundo',
       'characters': 'caracteres',
@@ -63,6 +65,7 @@ export const base64EncoderL10n: ToolL10n = {
   },
   de: {
     ui: {
+      'inputTooLarge': '⚠️ Eingabe zu groß – die unterstützte Größe beträgt maximal 100.000 Zeichen. Kürze die Eingabe.',
       'defaultInputDecode': 'SGFsbG8gV2VsdA==',
       'defaultInputEncode': 'Hallo Welt',
       'characters': 'Zeichen',

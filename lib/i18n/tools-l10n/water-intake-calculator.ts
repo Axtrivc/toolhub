@@ -79,7 +79,7 @@ export const waterIntakeCalculatorL10n: ToolL10n = {
     faqs: [
       { q: '¿Cuentan el café y el té?', a: 'Sí. Aunque son diuréticos suaves, las bebidas con cafeína siguen aportando un balance hídrico neto positivo. La vieja idea de que el café «no cuenta» está desmentida.' },
       { q: '¿Cuánta agua debo beber al día?', a: 'Una base común es 30–35 ml por kg de peso corporal — aproximadamente la mitad de tu peso en libras, en onzas. Un adulto de 70 kg llega a unos 2,45 L diarios antes de ajustar por ejercicio, calor o embarazo, que esta calculadora suma después.' },
-      { q: '¿Se puede beber demasiada agua?', a: 'Sí. La sobrehidratación (hiponatremia) diluye el sodio de la sangre y puede ser peligrosa, sobre todo en pruebas de resistencia. Los riñones sanos eliminan unos 0,8–1,0 L por hora, reparte la ingesta a lo largo del día en lugar de beber mucho de golpe.' },
+      { q: '¿Se puede beber demasiada agua?', a: 'Sí. La sobrehidratación (hiponatremia) diluye el sodio de la sangre y puede ser peligrosa, sobre todo en pruebas de resistencia. Los riñones sanos eliminan unos 0,8–1,0 L por hora, así que reparte la ingesta a lo largo del día en lugar de beber mucho de golpe.' },
     ],
   },
   de: {

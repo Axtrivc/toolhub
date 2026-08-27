@@ -246,9 +246,9 @@ export function AutoLoanCalculatorClient() {
           {/* 还款明细表(前 12 期,可展开全部) */}
           <div>
             <div className="mb-2 flex items-center justify-between">
-              <h3 className="text-sm font-semibold" style={{ color: 'rgb(var(--text))' }}>
+              <h2 className="text-sm font-semibold" style={{ color: 'rgb(var(--text))' }}>
                 {L('amortTitle', 'Amortization schedule ')}{showAll ? `(${L('optAll', 'all ')}${parsed.months} ${L('months', 'months')})` : `(${L('first12Months', 'first 12 months')})`}
-              </h3>
+              </h2>
               {parsed.schedule.length > 12 && (
                 <button
                   type="button"
@@ -264,11 +264,11 @@ export function AutoLoanCalculatorClient() {
               <table className="w-full text-left text-sm">
                 <thead className="text-xs uppercase" style={{ backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text-subtle))' }}>
                   <tr>
-                    <th className="px-3 py-2">{L('thMonth', 'Month')}</th>
-                    <th className="px-3 py-2 text-right">{L('thPayment', 'Payment')}</th>
-                    <th className="px-3 py-2 text-right">{L('thPrincipal', 'Principal')}</th>
-                    <th className="px-3 py-2 text-right">{L('thInterest', 'Interest')}</th>
-                    <th className="px-3 py-2 text-right">{L('thBalance', 'Balance')}</th>
+                    <th scope="col" className="px-3 py-2">{L('thMonth', 'Month')}</th>
+                    <th scope="col" className="px-3 py-2 text-right">{L('thPayment', 'Payment')}</th>
+                    <th scope="col" className="px-3 py-2 text-right">{L('thPrincipal', 'Principal')}</th>
+                    <th scope="col" className="px-3 py-2 text-right">{L('thInterest', 'Interest')}</th>
+                    <th scope="col" className="px-3 py-2 text-right">{L('thBalance', 'Balance')}</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-[rgb(var(--border))]">

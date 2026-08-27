@@ -34,6 +34,10 @@ const MODELS: ModelPrice[] = MODEL_PRICES
 
 const CJK_RE = /[\u3040-\u30ff\u3400-\u4dbf\u4e00-\u9fff\uf900-\ufaff\uac00-\ud7af]/g
 
+// 大文本防线:token/词统计要在每次输入上做多趟正则扫描并分配大量子串,
+// 超 100k 字符后截断统计(计数器对前缀仍有代表性),给出明确提示。
+const MAX_INPUT_LEN = 100_000
+
 /** 启发式 token 估算:拉丁 chars/4 + 词/标点细化取平均;CJK 字符单独按 ≈0.75 token/字 */
 function estimateTokens(text: string): number {
   if (!text.trim()) return 0
@@ -62,15 +66,19 @@ export function GptTokenCounterClient() {
   const [modelId, setModelId] = useState(MODELS[0].id)
   const [outputTokens, setOutputTokens] = useState('0')
 
+  // 超长输入截断:只统计前 MAX_INPUT_LEN 字符(计数器对前缀有代表性)
+  const inputTruncated = text.length > MAX_INPUT_LEN
+  const safeText = inputTruncated ? text.slice(0, MAX_INPUT_LEN) : text
+
   const stats = useMemo(() => {
-    const chars = text.length
-    const charsNoSpaces = text.replace(/\s/g, '').length
+    const chars = safeText.length
+    const charsNoSpaces = safeText.replace(/\s/g, '').length
     // 词/句统计走中英混合口径:纯中文不再恒为 1 词/1 句
-    const words = countWords(text)
-    const sentences = countSentences(text)
-    const tokens = estimateTokens(text)
+    const words = countWords(safeText)
+    const sentences = countSentences(safeText)
+    const tokens = estimateTokens(safeText)
     return { chars, charsNoSpaces, words, sentences, tokens }
-  }, [text])
+  }, [safeText])
 
   const model = MODELS.find((m) => m.id === modelId) ?? MODELS[0]
   const inputCost = (stats.tokens / 1_000_000) * model.inputPer1M
@@ -118,6 +126,13 @@ export function GptTokenCounterClient() {
           }}
         />
       </div>
+
+      {/* 超长输入提示:统计继续但只覆盖前 100k 字符(与 regex-tester 截断口径一致) */}
+      {inputTruncated && (
+        <p role="status" className="rounded-lg border-2 p-4 text-sm" style={{ borderColor: 'rgb(253 230 138)', backgroundColor: 'rgb(254 249 195 / 0.4)', color: 'rgb(var(--text))' }}>
+          {L('tooLong', '⚠️ Input exceeds 100,000 characters — only the first 100,000 characters are counted.')}
+        </p>
+      )}
 
       {/* 统计卡片 */}
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">

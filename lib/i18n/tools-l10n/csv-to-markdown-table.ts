@@ -35,6 +35,7 @@ export const csvToMarkdownTableL10n: ToolL10n = {
       'resultTitle': 'Markdown 表格',
       'rowPlural': '行',
       'rowSingular': '行',
+      'tooLong': '⚠️ 输入超过支持的大小(100,000 字符)。请缩减输入后再转换。',
     },
     useCases: [
       '在线 CSV 转 Markdown 表格',
@@ -87,6 +88,7 @@ export const csvToMarkdownTableL10n: ToolL10n = {
       'resultTitle': 'Tabla Markdown',
       'rowPlural': 'filas',
       'rowSingular': 'fila',
+      'tooLong': '⚠️ La entrada supera el tamaño admitido (100.000 caracteres). Redúcela para poder convertirla.',
     },
     useCases: [
       'CSV a tabla Markdown online',
@@ -139,6 +141,7 @@ export const csvToMarkdownTableL10n: ToolL10n = {
       'resultTitle': 'Markdown-Tabelle',
       'rowPlural': 'Zeilen',
       'rowSingular': 'Zeile',
+      'tooLong': '⚠️ Die Eingabe überschreitet die unterstützte Größe (100.000 Zeichen). Kürze die Eingabe, um sie zu konvertieren.',
     },
     useCases: [
       'CSV online in Markdown-Tabelle umwandeln',

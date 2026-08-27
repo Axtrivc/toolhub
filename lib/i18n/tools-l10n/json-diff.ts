@@ -14,6 +14,9 @@ export const JsonDiffL10n: ToolL10n = {
       { q: '能把差异导出吗?', a: '可以。「复制摘要」会按每行一条输出差异,前缀 + / − / ~,并附总数——可直接粘贴到 PR、工单或聊天里。同份数据也支持纯文本下载。' },
     ],
     ui: {
+      'exportFull': '「复制摘要」/下载始终包含全部差异。',
+      'moreDifferences': '+{n} 条差异未显示——请裁剪输入或缩小改动范围以查看其余部分。',
+      'tooLong': '⚠️ 输入超出支持规模(每侧 10 万字符)。请裁剪两侧文档后再比较。',
       'compared': '对比 JSON',
       'copySummary': '复制摘要',
       'identical': '✓ 两份文档结构完全一致',
@@ -32,6 +35,9 @@ export const JsonDiffL10n: ToolL10n = {
       { q: '¿Puedo exportar las diferencias?', a: 'Sí. «Copiar resumen» produce una línea por diferencia con prefijo + / − / ~ más el total, lista para pegar en un pull request o ticket. También hay descarga en texto plano de los mismos datos.' },
     ],
     ui: {
+      'exportFull': '«Copiar resumen» / descargar incluye siempre todas las diferencias.',
+      'moreDifferences': '+{n} diferencias más no mostradas: recorta la entrada o reduce el conjunto de cambios para ver el resto.',
+      'tooLong': '⚠️ La entrada supera el tamaño admitido (100 000 caracteres por lado). Recorta ambos documentos para comparar.',
       'compared': 'JSON comparado',
       'copySummary': 'Copiar resumen',
       'identical': '✓ Los dos documentos son idénticos',
@@ -50,6 +56,9 @@ export const JsonDiffL10n: ToolL10n = {
       { q: 'Kann ich das Diff exportieren?', a: 'Ja. „Zusammenfassung kopieren“ liefert eine Zeile pro Unterschied mit den Präfixen + / − / ~ plus Gesamtzahl — fertig zum Einfügen in Pull Request oder Ticket. Dieselben Daten gibt es auch als Text-Download.' },
     ],
     ui: {
+      'exportFull': '„Zusammenfassung kopieren“ / Herunterladen enthält immer alle Unterschiede.',
+      'moreDifferences': '+{n} weitere Unterschiede werden nicht angezeigt – kürze die Eingabe oder verkleinere die Änderungsmenge, um den Rest zu sehen.',
+      'tooLong': '⚠️ Die Eingabe überschreitet die unterstützte Größe (100.000 Zeichen pro Seite). Kürze beide Dokumente zum Vergleichen.',
       'compared': 'Vergleichs-JSON',
       'copySummary': 'Zusammenfassung kopieren',
       'identical': '✓ Beide Dokumente sind identisch',

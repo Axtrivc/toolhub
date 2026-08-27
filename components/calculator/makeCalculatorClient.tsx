@@ -404,12 +404,14 @@ export function makeCalculatorClient(config: CalculatorConfig): ComponentType {
           })}
         </div>
 
-        {/* 结果区(aria-live:输入变化时屏幕阅读器播报结果更新)。
+        {/* 结果区:每张 ResultCard 自带 role="status",值变化时逐卡播报。
+            容器级再包一层 aria-live 会与卡片形成嵌套双报(R6 三组独立确认),
+            故这里刻意不设 live region,只保留滚动锚点与布局职责。
             列数随输出数量自适应:≤4 个恒 2 列;5~8 个桌面 3 列;>8 个 4 列,
             避免 Mortgage/Average 这类 11 项工具桌面只剩 2 列变长清单。
             错误态(⚠️ 主结果)单独以红色卡片呈现,不用主色渐变,不做数字动画。 */}
         {highlightIsError && highlightOut && (
-          <div ref={resultsRef} role="status" aria-live="polite">
+          <div ref={resultsRef}>
             <ResultCard
               label={outLabel(highlightOut.key, highlightOut.label)}
               value={highlightValue}
@@ -419,8 +421,6 @@ export function makeCalculatorClient(config: CalculatorConfig): ComponentType {
         )}
         <div
           ref={highlightIsError ? undefined : resultsRef}
-          role="status"
-          aria-live="polite"
           className={`grid grid-cols-1 gap-3 sm:grid-cols-2 ${
             config.outputs.length > 8 ? 'lg:grid-cols-4' : config.outputs.length > 4 ? 'lg:grid-cols-3' : ''
           }`}

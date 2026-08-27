@@ -102,16 +102,16 @@ export function RandomNumberGeneratorClient() {
     >
       <div className="grid grid-cols-1 gap-4 rounded-lg p-4 sm:grid-cols-3" style={{ backgroundColor: 'rgb(var(--bg-subtle))' }}>
         <div>
-          <label className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>{L('min', 'Min')}</label>
-          <input type="number" value={min} onChange={(e) => setMin(e.target.value)} className="w-full rounded-lg border border-slate-300 p-3 outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200 dark:border-slate-600 dark:bg-slate-800/50 dark:text-slate-100" />
+          <label htmlFor="rng-min" className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>{L('min', 'Min')}</label>
+          <input id="rng-min" type="number" value={min} onChange={(e) => setMin(e.target.value)} className="w-full rounded-lg border border-slate-300 p-3 outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200 dark:border-slate-600 dark:bg-slate-800/50 dark:text-slate-100" />
         </div>
         <div>
-          <label className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>{L('max', 'Max')}</label>
-          <input type="number" value={max} onChange={(e) => setMax(e.target.value)} className="w-full rounded-lg border border-slate-300 p-3 outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200 dark:border-slate-600 dark:bg-slate-800/50 dark:text-slate-100" />
+          <label htmlFor="rng-max" className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>{L('max', 'Max')}</label>
+          <input id="rng-max" type="number" value={max} onChange={(e) => setMax(e.target.value)} className="w-full rounded-lg border border-slate-300 p-3 outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200 dark:border-slate-600 dark:bg-slate-800/50 dark:text-slate-100" />
         </div>
         <div>
-          <label className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>{L('howMany', 'How many')}</label>
-          <input type="number" value={count} onChange={(e) => setCount(e.target.value)} min="1" className="w-full rounded-lg border border-slate-300 p-3 outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200 dark:border-slate-600 dark:bg-slate-800/50 dark:text-slate-100" />
+          <label htmlFor="rng-count" className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>{L('howMany', 'How many')}</label>
+          <input id="rng-count" type="number" value={count} onChange={(e) => setCount(e.target.value)} min="1" className="w-full rounded-lg border border-slate-300 p-3 outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200 dark:border-slate-600 dark:bg-slate-800/50 dark:text-slate-100" />
         </div>
       </div>
       <label className="flex items-center gap-2 text-sm text-slate-700 dark:text-slate-300">
@@ -139,8 +139,9 @@ export function PasswordStrengthCheckerClient() {
   return (
     <div className="space-y-6">
       <div>
-        <label className="mb-2 block text-sm font-medium text-slate-700 dark:text-slate-300">{L('enterPasswordLabel', 'Enter a password to test')}</label>
+        <label htmlFor="pw-check-input" className="mb-2 block text-sm font-medium text-slate-700 dark:text-slate-300">{L('enterPasswordLabel', 'Enter a password to test')}</label>
         <input
+          id="pw-check-input"
           type="text"
           value={pw}
           onChange={(e) => setPw(e.target.value)}
@@ -171,7 +172,8 @@ export function PasswordStrengthCheckerClient() {
             </div>
           )}
           <div className="rounded-lg border border-slate-200 p-4 dark:border-slate-700">
-            <h3 className="mb-2 text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>{L('checklist', 'Checklist')}</h3>
+            {/* A-2:组件内标题从 h2 起(ToolLayout 提供 h1),避免 h1→h3 跳级;样式由类名控制,改标签不改观感 */}
+            <h2 className="mb-2 text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>{L('checklist', 'Checklist')}</h2>
             <ul className="space-y-1 text-sm">
               <li className={analysis.hasUpper ? 'text-green-600 dark:text-green-400' : 'text-slate-400 dark:text-slate-600'}>{analysis.hasUpper ? '✓' : '✗'} {L('uppercaseLetters', 'Uppercase letters')}</li>
               <li className={analysis.hasLower ? 'text-green-600 dark:text-green-400' : 'text-slate-400 dark:text-slate-600'}>{analysis.hasLower ? '✓' : '✗'} {L('lowercaseLetters', 'Lowercase letters')}</li>

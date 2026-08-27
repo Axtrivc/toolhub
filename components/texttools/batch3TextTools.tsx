@@ -13,6 +13,8 @@ export const JSONFormatterClient = makeTextTool({
   inputLabel: 'JSON (raw or minified)',
   outputLabel: 'Formatted JSON',
   defaultInput: '{"name":"John","age":30,"city":"NYC","skills":["js","css"]}',
+  // P-1 大输入防线:>200k 字符跳过同步 parse/stringify(会冻结 UI),走 ⚠️ 提示
+  maxInputChars: 200_000,
   transform: (t) => {
     try {
       return JSON.stringify(JSON.parse(t), null, 2)
@@ -29,6 +31,7 @@ export const JSONMinifierClient = makeTextTool({
   inputLabel: 'JSON (formatted)',
   outputLabel: 'Minified JSON',
   defaultInput: '{\n  "name": "John",\n  "age": 30\n}',
+  maxInputChars: 200_000,
   transform: (t) => {
     try {
       return JSON.stringify(JSON.parse(t))
@@ -105,6 +108,8 @@ export const CSVtoJSONClient = makeTextTool({
   inputLabel: 'CSV (with header row)',
   outputLabel: 'JSON array',
   defaultInput: 'name,age,city\nJohn,30,NYC\nJane,25,LA',
+  // 字符级状态机 + 逐字段拼接,大输入下明显变慢:>200k 走门控提示
+  maxInputChars: 200_000,
   transform: (t) => {
     // 可选分隔符覆盖:CSV 末尾追加 " ||| ,"/" ||| ;"/" ||| \t"(或字面 "tab"/真实制表符);
     // 尾段不是合法分隔符指令时整段按 CSV 处理,正文含 ||| 不受影响
@@ -139,6 +144,7 @@ export const JSONtoCSVClient = makeTextTool({
   inputLabel: 'JSON array of objects',
   outputLabel: 'CSV',
   defaultInput: '[{"name":"John","age":30},{"name":"Jane","age":25}]',
+  maxInputChars: 200_000,
   transform: (t) => {
     try {
       const data = JSON.parse(t)

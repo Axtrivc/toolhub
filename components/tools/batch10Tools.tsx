@@ -113,6 +113,11 @@ export function EpochConverterClient() {
 // ── JSON Diff ──
 type JsonValue = unknown
 
+/** P-1 大输入防线(与 line-diff 的 100k 先例对齐):每侧超限不同步 parse/diff */
+const JSON_DIFF_INPUT_LIMIT = 100_000
+/** P-2 渲染上限:差异行数无上限时表格会拖垮 DOM,仅截断展示(导出仍取全量) */
+const JSON_DIFF_ROWS_SHOWN = 1_000
+
 /** 结构化 diff:返回 [path, kind, oldVal?, newVal?] 列表;kind: added|removed|changed */
 function diffJson(a: JsonValue, b: JsonValue, path: string, out: [string, string, string, string][]): void {
   const show = (x: JsonValue) => (typeof x === 'string' ? `"${x}"` : JSON.stringify(x) ?? String(x))
@@ -141,15 +146,18 @@ export function JsonDiffClient() {
   const [left, setLeft] = useState(sample?.left ?? '{\n  "name": "Ada",\n  "age": 36,\n  "langs": ["en", "de"]\n}')
   const [right, setRight] = useState(sample?.right ?? '{\n  "name": "Ada",\n  "age": 37,\n  "langs": ["en", "fr"],\n  "admin": true\n}')
 
-  const { rows, error } = useMemo(() => {
+  const { rows, error, tooLong } = useMemo(() => {
+    if (left.length > JSON_DIFF_INPUT_LIMIT || right.length > JSON_DIFF_INPUT_LIMIT) {
+      return { rows: [] as [string, string, string, string][], error: '', tooLong: true }
+    }
     try {
       const a = JSON.parse(left) as JsonValue
       const b = JSON.parse(right) as JsonValue
       const out: [string, string, string, string][] = []
       diffJson(a, b, '', out)
-      return { rows: out, error: '' }
+      return { rows: out, error: '', tooLong: false }
     } catch (e) {
-      return { rows: [], error: (e as Error).message }
+      return { rows: [], error: (e as Error).message, tooLong: false }
     }
   }, [left, right])
 
@@ -190,7 +198,13 @@ export function JsonDiffClient() {
           ⚠️ {shownError}
         </p>
       )}
-      {!error && (
+      {tooLong && (
+        <p role="alert" className="rounded-lg border-2 p-4 text-sm"
+          style={{ borderColor: 'rgb(253 230 138)', backgroundColor: 'rgb(254 249 195 / 0.4)', color: 'rgb(var(--text))' }}>
+          {L('tooLong', '⚠️ Input exceeds the supported size (100,000 characters per side). Trim both documents to compare.')}
+        </p>
+      )}
+      {!error && !tooLong && (
         <>
           {rows.length === 0 ? (
             <p role="status" aria-live="polite" className="rounded-lg border-2 border-green-200 bg-green-50 p-4 text-sm text-green-700 dark:border-green-800/60 dark:bg-green-950/30 dark:text-green-300">
@@ -201,12 +215,12 @@ export function JsonDiffClient() {
               <table className="w-full text-left text-sm">
                 <thead>
                   <tr className="border-b" style={{ borderColor: 'rgb(var(--border))', backgroundColor: 'rgb(var(--bg-subtle))' }}>
-                    <th className="px-4 py-2 font-medium" style={{ color: 'rgb(var(--text-muted))' }}>{L('thPath', 'Path')}</th>
-                    <th className="px-4 py-2 font-medium" style={{ color: 'rgb(var(--text-muted))' }}>{L('thChange', 'Change')}</th>
+                    <th scope="col" className="px-4 py-2 font-medium" style={{ color: 'rgb(var(--text-muted))' }}>{L('thPath', 'Path')}</th>
+                    <th scope="col" className="px-4 py-2 font-medium" style={{ color: 'rgb(var(--text-muted))' }}>{L('thChange', 'Change')}</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {rows.map(([path, kind, oldV, newV], i) => (
+                  {rows.slice(0, JSON_DIFF_ROWS_SHOWN).map(([path, kind, oldV, newV], i) => (
                     <tr key={`${path}-${i}`} className="border-b last:border-b-0" style={{ borderColor: 'rgb(var(--border))' }}>
                       <td className="px-4 py-2 font-mono text-xs break-all" style={{ color: 'rgb(var(--text))' }}>{path}</td>
                       <td className="px-4 py-2 font-mono text-xs break-all">
@@ -222,6 +236,14 @@ export function JsonDiffClient() {
                   ))}
                 </tbody>
               </table>
+              {rows.length > JSON_DIFF_ROWS_SHOWN && (
+                <p className="px-4 py-3 text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>
+                  {L('moreDifferences', '+{n} more differences not shown — trim the input or narrow the change set to see the rest.')
+                    .replace('{n}', (rows.length - JSON_DIFF_ROWS_SHOWN).toLocaleString('en-US'))}
+                  {' '}
+                  {L('exportFull', 'Copy Summary / download always include every difference.')}
+                </p>
+              )}
             </div>
           )}
         </>
@@ -440,7 +462,7 @@ export function RobotsTxtGeneratorClient() {
       <div className="space-y-3">
         {rules.map((r) => (
           <div key={r.id} className="grid grid-cols-1 gap-3 rounded-lg border p-3 sm:grid-cols-[1fr_1fr_1fr_auto]" style={{ borderColor: 'rgb(var(--border))' }}>
-            <input aria-label={L('agentLabel', 'User-agent')} value={r.agent}
+            <input id={`rt-agent-${r.id}`} aria-label={L('agentLabel', 'User-agent')} value={r.agent}
               onChange={(e) => setRules(rules.map((x) => (x.id === r.id ? { ...x, agent: e.target.value } : x)))}
               placeholder="User-agent (*)" className={inpCls}
               style={{ borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rgb(var(--bg-card))', color: 'rgb(var(--text))' }} />
@@ -452,7 +474,14 @@ export function RobotsTxtGeneratorClient() {
               onChange={(e) => setRules(rules.map((x) => (x.id === r.id ? { ...x, allow: e.target.value } : x)))}
               placeholder="/" className={inpCls}
               style={{ borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rgb(var(--bg-card))', color: 'rgb(var(--text))' }} />
-            <button type="button" onClick={() => setRules(rules.filter((x) => x.id !== r.id))}
+            <button type="button"
+              onClick={() => {
+                // A-5 焦点流:删除规则后焦点落到相邻规则的首个输入框,避免丢到 body
+                const idx = rules.findIndex((x) => x.id === r.id)
+                const neighbor = rules[idx + 1] ?? rules[idx - 1]
+                setRules(rules.filter((x) => x.id !== r.id))
+                if (neighbor) requestAnimationFrame(() => document.getElementById(`rt-agent-${neighbor.id}`)?.focus())
+              }}
               aria-label={L('removeRule', 'Remove rule')}
               className="rounded-lg px-3 text-sm text-slate-400 hover:text-red-500 dark:text-slate-500" disabled={rules.length <= 1}>
               ✕
@@ -468,7 +497,8 @@ export function RobotsTxtGeneratorClient() {
       {/* 输出预览 */}
       <div>
         <div className="mb-2 flex items-center justify-between">
-          <label className="text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>{L('outputLabel', 'robots.txt')}</label>
+          {/* 只读预览标题(非表单控件标签):不能用 <label>,它没有可关联的控件 */}
+          <span className="text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>{L('outputLabel', 'robots.txt')}</span>
           <CopyButton value={output} />
         </div>
         <pre className="overflow-x-auto rounded-lg border p-4 font-mono text-sm whitespace-pre-wrap" style={{ borderColor: 'rgb(var(--border))', backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text))' }}>{output}</pre>

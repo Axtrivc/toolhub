@@ -303,7 +303,8 @@ export function CronGeneratorClient() {
     ['weekdays', L('pWeekdays', 'Weekdays at time')],
     ['weekly', L('pWeekly', 'Weekly on day')],
   ]
-  const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+  // 星期下拉的可见文案走 tui 本地化(0=周日),表达式本身仍用数字字段
+  const dayNames = Array.from({ length: 7 }, (_, i) => L(`day${i}`, ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][i]))
 
   return (
     <div className="space-y-5">
@@ -421,11 +422,19 @@ export function HtaccessRedirectGeneratorClient() {
         <span className="block text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>{L('pairsLabel', 'Individual page redirects')}</span>
         {pairs.map((p) => (
           <div key={p.id} className="grid grid-cols-[1fr_1fr_auto] gap-3">
-            <input aria-label={L('fromLabel', 'From path')} value={p.from} placeholder="/old-url"
+            <input id={`ht-from-${p.id}`} aria-label={L('fromLabel', 'From path')} value={p.from} placeholder="/old-url"
               onChange={(e) => setPairs(pairs.map((x) => (x.id === p.id ? { ...x, from: e.target.value } : x)))} className={inpCls} style={selVars} />
             <input aria-label={L('toLabel', 'To path')} value={p.to} placeholder="/new-url"
               onChange={(e) => setPairs(pairs.map((x) => (x.id === p.id ? { ...x, to: e.target.value } : x)))} className={inpCls} style={selVars} />
-            <button type="button" onClick={() => setPairs(pairs.filter((x) => x.id !== p.id))} disabled={pairs.length <= 1}
+            <button type="button"
+              onClick={() => {
+                // A-5 焦点流:删除行后焦点落到相邻行的首个输入框,避免丢到 body
+                const idx = pairs.findIndex((x) => x.id === p.id)
+                const neighbor = pairs[idx + 1] ?? pairs[idx - 1]
+                setPairs(pairs.filter((x) => x.id !== p.id))
+                if (neighbor) requestAnimationFrame(() => document.getElementById(`ht-from-${neighbor.id}`)?.focus())
+              }}
+              disabled={pairs.length <= 1}
               aria-label={L('removeRedirect', 'Remove redirect')}
               className="rounded-lg px-3 text-sm text-slate-400 hover:text-red-500 dark:text-slate-500">✕</button>
           </div>

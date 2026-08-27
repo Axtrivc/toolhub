@@ -176,9 +176,9 @@ export const toolFormulas: Record<string, ToolFormula> = {
       'Fixed payment (PMT) that pays off a present value P over n periods at rate r — the same amortization formula as a loan, used here for annuity payout planning.',
   },
   'capital-gains-tax-estimator': {
-    formula: 'Gain = sale − basis\nTax = gain × rate\nNet = gain − tax',
+    formula: 'Gain = sale − basis\nTax = Σ (bracket share of gain × bracket rate)\nNet = gain − tax',
     explain:
-      'Basis is usually the purchase price plus costs. The gain is taxed at the short-term (income) or long-term (preferential) rate depending on how long you held the asset.',
+      'Basis is usually the purchase price plus costs. Long-term gains (held more than 1 year) stack on top of your ordinary income and each 0%/15%/20% bracket is applied to the slice of the gain falling inside it, so the rate shown is a blended effective rate; short-term gains are added to ordinary income and taxed at those brackets.',
   },
   'inflation-calculator': {
     formula: 'Future value = present × (1 + i)^n',

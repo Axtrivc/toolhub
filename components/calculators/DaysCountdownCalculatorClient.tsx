@@ -265,7 +265,7 @@ export function DaysCountdownCalculatorClient() {
           </div>
 
           {dateStr && !target && (
-            <div className="rounded-lg border border-red-200 dark:border-red-800/60 bg-red-50 dark:bg-red-950/30 p-4 text-sm text-red-700 dark:text-red-300">
+            <div role="status" className="rounded-lg border border-red-200 dark:border-red-800/60 bg-red-50 dark:bg-red-950/30 p-4 text-sm text-red-700 dark:text-red-300">
               {L('invalidDateWarn', "⚠️ That doesn't look like a valid date — pick one with the date input above.")}
             </div>
           )}
@@ -422,7 +422,7 @@ export function DaysCountdownCalculatorClient() {
               {L('pickTwoDates', 'Pick two dates to see the gap between them.')}
             </div>
           ) : 'error' in between ? (
-            <div className="rounded-lg border border-red-200 dark:border-red-800/60 bg-red-50 dark:bg-red-950/30 p-4 text-sm text-red-700 dark:text-red-300">{L('errorWarn', '⚠️ ')}{between.error}</div>
+            <div role="status" className="rounded-lg border border-red-200 dark:border-red-800/60 bg-red-50 dark:bg-red-950/30 p-4 text-sm text-red-700 dark:text-red-300">{L('errorWarn', '⚠️ ')}{between.error}</div>
           ) : (
             <>
               <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">

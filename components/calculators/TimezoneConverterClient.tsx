@@ -395,6 +395,7 @@ export function TimezoneConverterClient() {
                   {['Zone', 'Local time', 'UTC offset', 'Day shift'].map((h) => (
                     <th
                       key={h}
+                      scope="col"
                       className="px-4 py-2.5 text-left text-xs font-medium uppercase tracking-wide"
                       style={{ color: 'rgb(var(--text-subtle))' }}
                     >

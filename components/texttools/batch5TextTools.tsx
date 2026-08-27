@@ -147,6 +147,8 @@ export const BinaryToTextClient = makeTextTool({
   inputLabel: 'Binary (space-separated bytes)',
   outputLabel: 'Decoded text',
   defaultInput: '01001000 01101001',
+  // P-1 大输入防线(与 EncoderDecoder/text 工具家族同款 20 万字符阈值)
+  maxInputChars: 200_000,
   transform: (s) => {
     const bytes = s.trim().split(/\s+/).filter(Boolean)
     try {
@@ -167,6 +169,8 @@ export const TextToBinaryClient = makeTextTool({
   inputLabel: 'Text',
   outputLabel: 'Binary',
   defaultInput: 'Hi',
+  // P-1 大输入防线:输出体积是输入的 ~9 倍,大文本下同步展开会明显卡顿
+  maxInputChars: 200_000,
   transform: (s) => {
     // 按 UTF-8 字节编码(而非 UTF-16 码元),与 BinaryToText 互逆,支持中文/emoji
     const bytes = new TextEncoder().encode(s)

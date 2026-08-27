@@ -144,6 +144,10 @@ interface MdResult {
   html: string
 }
 
+// 大文档防线:转换 + DOMPurify 消毒同步跑在每次输入上,超长文档会明显卡顿,
+// 预览端还会把全部 HTML 挂进 DOM。100k 上限与 line-diff 等工具口径一致。
+const MAX_INPUT_LEN = 100_000
+
 /** 把 markdown 文本转成 HTML(逐行状态机) */
 function markdownToHtml(md: string): string {
   const lines = md.replace(/\r\n/g, '\n').split('\n')
@@ -314,7 +318,8 @@ export function MarkdownToHtmlClient() {
 
   const [input, setInput] = useState('')
 
-  const result = useMemo<{ output?: string; error?: string }>(() => {
+  const result = useMemo<{ output?: string; error?: string; truncated?: boolean }>(() => {
+    if (input.length > MAX_INPUT_LEN) return { truncated: true }
     if (!input.trim()) return {}
     try {
       // 生成器本身已做转义 + URL 协议白名单,这里再过一道 DOMPurify 白名单消毒,
@@ -364,8 +369,14 @@ export function MarkdownToHtmlClient() {
         />
       </div>
 
+      {result.truncated && (
+        <p role="alert" className="rounded-lg border-2 p-4 text-sm" style={{ borderColor: 'rgb(253 230 138)', backgroundColor: 'rgb(254 249 195 / 0.4)', color: 'rgb(var(--text))' }}>
+          {L('tooLong', '⚠️ Input exceeds the supported size (100,000 characters). Trim the input to convert it.')}
+        </p>
+      )}
+
       {result.error && (
-        <div className="rounded-lg border border-red-200 dark:border-red-800/60 bg-red-50 dark:bg-red-950/30 p-4 text-sm text-red-700 dark:text-red-300">⚠️ {result.error}</div>
+        <div role="status" className="rounded-lg border border-red-200 dark:border-red-800/60 bg-red-50 dark:bg-red-950/30 p-4 text-sm text-red-700 dark:text-red-300">⚠️ {result.error}</div>
       )}
 
       {/* 双栏:HTML + 渲染预览 */}

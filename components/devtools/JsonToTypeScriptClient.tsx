@@ -180,9 +180,9 @@ export function JsonToTypeScriptClient() {
         />
       </div>
 
-      {/* 错误提示 */}
+      {/* 错误提示(随输入逐键重算,礼貌播报) */}
       {result.error && (
-        <div className="rounded-lg border border-red-200 dark:border-red-800/60 bg-red-50 dark:bg-red-950/30 p-4 text-sm text-red-700 dark:text-red-300">
+        <div role="status" className="rounded-lg border border-red-200 dark:border-red-800/60 bg-red-50 dark:bg-red-950/30 p-4 text-sm text-red-700 dark:text-red-300">
           ⚠️ {result.error}
         </div>
       )}

@@ -166,7 +166,7 @@ export function AmortizationTableGeneratorClient() {
               <thead className="sticky top-0">
                 <tr style={{ backgroundColor: 'rgb(var(--bg-subtle))' }}>
                   {[T('thNum', '#'), T('thPayment', 'Payment'), T('thPrincipal', 'Principal'), T('thInterest', 'Interest'), T('thBalance', 'Balance')].map((h) => (
-                    <th key={h} className="border-b px-3 py-2 font-medium" style={{ borderColor: 'rgb(var(--border))', color: 'rgb(var(--text-muted))' }}>{h}</th>
+                    <th key={h} scope="col" className="border-b px-3 py-2 font-medium" style={{ borderColor: 'rgb(var(--border))', color: 'rgb(var(--text-muted))' }}>{h}</th>
                   ))}
                 </tr>
               </thead>

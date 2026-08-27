@@ -56,7 +56,7 @@ export const rentVsBuyCalculatorL10n: ToolL10n = {
       winnerRenting: 'Mieten (~{amount} günstiger)',
       'in.home': 'Hauspreis', 'in.rent': 'Vergleichsmiete', 'in.down': 'Anzahlung', 'in.rate': 'Hypothekenzins', 'in.term': 'Kreditlaufzeit', 'inSuffix.term': 'Jahre', 'in.years': 'Wohnjahre',
       'out.buyTotal': 'Nettokosten Kauf', 'outSub.buyTotal': 'Anzahlung + Zahlungen − Eigenkapital beim Verkauf', 'out.rentTotal': 'Gesamtkosten Miete', 'outSub.rentTotal': 'Miete über den Zeitraum', 'out.winner': 'Günstigere Option',
-      note: '🏠 Nettokosten Kauf = Anzahlung + Hypothekenzahlungen während der Wohnzeit − beim Verkauf zurückgewonnenes Eigenkapital (Hauswert − Restschuld). Vereinfacht — ohne Steuern, Instandhaltung, Wertsteigerung und Opportunitätskosten der Investition. Als groben Erstrieg-Vergleich nutzen.',
+      note: '🏠 Nettokosten Kauf = Anzahlung + Hypothekenzahlungen während der Wohnzeit − beim Verkauf zurückgewonnenes Eigenkapital (Hauswert − Restschuld). Vereinfacht — ohne Steuern, Instandhaltung, Wertsteigerung und Opportunitätskosten der Investition. Als groben Erstvergleich nutzen.',
       chartTitle: 'Kumulierte Kosten: Mieten vs Kaufen',
       'line.rent': 'Mieten (kumuliert)',
       'line.buy': 'Kaufen (Nettokosten)',

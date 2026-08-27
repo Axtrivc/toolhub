@@ -42,6 +42,10 @@ function extOf(mime: string): string {
 
 const SCALE_PRESETS = [25, 50, 75, 100]
 
+// 与 image-to-base64 / favicon-generator 同口径:readAsDataURL 会把整文件 base64 化
+// (~33% 膨胀)常驻内存,超大文件会冻结标签页;20MB 先拦截再解码。
+const MAX_BYTES = 20 * 1024 * 1024
+
 /**
  * 画布安全上限:单边 ≤ 8192px 且总像素 ≤ 40MP。
  * 超限时部分浏览器会把 canvas 静默渲染成空白图 / toBlob 返回 null,
@@ -75,6 +79,16 @@ export function ImageResizerClient() {
     setError('')
     if (!file.type.startsWith('image/')) {
       setError(L('errUploadImage', 'Please upload an image file (PNG, JPG, GIF, or WebP).'))
+      return
+    }
+    if (file.size > MAX_BYTES) {
+      // 注意与目标尺寸超限(errTooLarge)区分:这是文件本身超过 20MB 的上传拦截
+      setError(
+        L('errFileTooLarge', 'File is too large ({size}). Maximum size is 20 MB.').replace(
+          '{size}',
+          formatBytes(file.size),
+        ),
+      )
       return
     }
     const reader = new FileReader()
@@ -299,9 +313,9 @@ export function ImageResizerClient() {
         </label>
       )}
 
-      {/* 错误提示 */}
+      {/* 错误提示(上传/解码/编码失败等事件型错误) */}
       {error && (
-        <div className="rounded-lg border border-red-200 dark:border-red-800/60 bg-red-50 dark:bg-red-950/30 p-4 text-sm text-red-700 dark:text-red-300">
+        <div role="alert" className="rounded-lg border border-red-200 dark:border-red-800/60 bg-red-50 dark:bg-red-950/30 p-4 text-sm text-red-700 dark:text-red-300">
           ⚠️ {error}
         </div>
       )}
@@ -450,9 +464,9 @@ export function ImageResizerClient() {
             )}
           </div>
 
-          {/* 尺寸校验 */}
+          {/* 尺寸校验(随输入逐键变化,礼貌播报) */}
           {!dimsValid && (
-            <div className="rounded-lg border border-red-200 dark:border-red-800/60 bg-red-50 dark:bg-red-950/30 p-4 text-sm text-red-700 dark:text-red-300">
+            <div role="status" className="rounded-lg border border-red-200 dark:border-red-800/60 bg-red-50 dark:bg-red-950/30 p-4 text-sm text-red-700 dark:text-red-300">
               ⚠️ {L('errDimsValid', 'Width and height must be whole numbers of at least 1 px.')}
             </div>
           )}

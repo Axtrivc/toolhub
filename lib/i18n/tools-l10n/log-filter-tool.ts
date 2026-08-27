@@ -23,6 +23,7 @@ export const LogFilterToolL10n: ToolL10n = {
       'noLines': '没有符合当前过滤条件的行。',
       'note': '🔒 过滤完全在客户端运行——放心粘贴生产日志。级别匹配按词边界精确匹配(WARN 匹配 WARN,不匹配 WARNING)。',
       'regexToggle': '按正则表达式处理',
+      'truncateNotice': '日志超过 {n} 字符上限——仅过滤开头部分。',
     },
   },
   es: {
@@ -43,6 +44,7 @@ export const LogFilterToolL10n: ToolL10n = {
       'noLines': 'Ninguna línea coincide con los filtros.',
       'note': '🔒 El filtrado es 100 % en el cliente — pega logs de producción sin miedo. El nivel coincide por límite de palabra exacto.',
       'regexToggle': 'Tratar patrones como regex',
+      'truncateNotice': 'El registro supera el límite de {n} caracteres: solo se filtra el principio.',
     },
   },
   de: {
@@ -63,6 +65,7 @@ export const LogFilterToolL10n: ToolL10n = {
       'noLines': 'Keine Zeilen entsprechen den Filtern.',
       'note': '🔒 Das Filtern läuft komplett im Browser — Produktivlogs bedenkenlos einfügen. Level-Match ist wortgrenzengenau.',
       'regexToggle': 'Muster als Regex behandeln',
+      'truncateNotice': 'Das Protokoll überschreitet das Limit von {n} Zeichen — gefiltert wird nur der Anfang.',
     },
   },
 }

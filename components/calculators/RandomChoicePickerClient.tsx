@@ -37,6 +37,9 @@ interface HistoryEntry {
   time: string
 }
 
+// P-2 渲染上限:历史每抽一次增一项,长期玩会无限增长 → 只保留最近 20 条
+const MAX_HISTORY = 20
+
 const inputStyle = {
   borderColor: 'rgb(var(--border-strong))',
   backgroundColor: 'rgb(var(--bg-card))',
@@ -127,7 +130,7 @@ export function RandomChoicePickerClient() {
     setHistory((h) => [
       { id: historyIdRef.current, winners: picked, time: new Date().toLocaleTimeString() },
       ...h,
-    ])
+    ].slice(0, MAX_HISTORY))
     if (removeAfter) {
       const remaining = [...options]
       for (const w of picked) {

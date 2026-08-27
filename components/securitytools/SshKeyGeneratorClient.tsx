@@ -227,7 +227,7 @@ export function SshKeyGeneratorClient() {
         )}
       </div>
 
-      {error && <div className="rounded-lg border border-red-200 dark:border-red-800/60 bg-red-50 dark:bg-red-950/30 p-4 text-sm text-red-700 dark:text-red-300">⚠️ {error}</div>}
+      {error && <div role="alert" className="rounded-lg border border-red-200 dark:border-red-800/60 bg-red-50 dark:bg-red-950/30 p-4 text-sm text-red-700 dark:text-red-300">⚠️ {error}</div>}
 
       {keys && (
         <>
@@ -268,7 +268,13 @@ export function SshKeyGeneratorClient() {
               <span className="text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
                 {L('privateKeyPem', 'Private key (PKCS#8 PEM)')}
               </span>
-              <button type="button" onClick={() => setRevealed((r) => !r)} className="btn btn-secondary">
+              <button
+                type="button"
+                onClick={() => setRevealed((r) => !r)}
+                aria-pressed={revealed}
+                aria-label={revealed ? L('hidePrivateKeyAria', 'Hide private key') : L('revealPrivateKeyAria', 'Reveal private key')}
+                className="btn btn-secondary"
+              >
                 {revealed ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                 {revealed ? L('hide', 'Hide') : L('reveal', 'Reveal')}
               </button>
@@ -281,7 +287,7 @@ export function SshKeyGeneratorClient() {
               readOnly
               rows={revealed ? 12 : 3}
               value={revealed ? keys.privatePem : `${MASK}\n${MASK}\n${MASK}`}
-              aria-label={L('privateKeyMasked', 'Private key (masked)')}
+              aria-label={revealed ? L('privateKeyPem', 'Private key (PKCS#8 PEM)') : L('privateKeyMasked', 'Private key (masked)')}
               className="w-full rounded-lg border p-4 font-mono text-sm shadow-sm outline-none"
               style={{ borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rgb(var(--bg-card))', color: 'rgb(var(--text))' }}
             />

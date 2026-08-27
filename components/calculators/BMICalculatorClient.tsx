@@ -254,8 +254,8 @@ export function BMICalculatorClient() {
         <table className="w-full text-left text-sm">
           <thead className="text-xs uppercase" style={{ backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text-subtle))' }}>
             <tr>
-              <th className="px-4 py-2">{L('thBmiRange', 'BMI Range')}</th>
-              <th className="px-4 py-2">{L('thCategory', 'Category')}</th>
+              <th scope="col" className="px-4 py-2">{L('thBmiRange', 'BMI Range')}</th>
+              <th scope="col" className="px-4 py-2">{L('thCategory', 'Category')}</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-slate-100 dark:divide-slate-700">

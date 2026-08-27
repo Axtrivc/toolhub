@@ -32,7 +32,7 @@ export const lcmGcdCalculatorL10n: ToolL10n = {
   es: {
     formula: {
       formula: 'GCD via Euclid\nLCM(a, b) = (a × b) / GCD(a, b)',
-      explain: 'El GCD se halla por restas sucesivas (Euclides). El LCM sigue de la identidad que los une — multiplica y divide entre el GCD.',
+      explain: 'El MCD se halla por divisiones sucesivas con resto (algoritmo de Euclides). El MCM se deduce de la identidad que los une — multiplica ambos números y divide entre el MCD.',
     },
     ui: {
       errNoValid: 'Introduce números enteros distintos de 0 (p. ej. 12, 18, 24)',

@@ -274,7 +274,7 @@ export function describeCron(expr: string, locale: Locale = 'en'): string {
   if (minF === '*' && hrF === '*') {
     time = L('everyMinute', 'every minute')
   } else if (minF === '*' ) {
-    time = L('everyMinuteDuring', 'every minute during the {hours}').replace('{hours}', describeHourList(hrF))
+    time = L('everyMinuteDuring', 'every minute past hour(s) {hours}').replace('{hours}', describeHourList(hrF))
   } else if (hrF === '*') {
     time = L('atMinuteOfEveryHour', 'at minute {mins} of every hour').replace('{mins}', describeList(minF))
   } else {

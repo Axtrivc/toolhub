@@ -127,7 +127,7 @@ export function TemperatureConverterClient() {
       </div>
 
       {result.belowAbsZero && (
-        <div className="rounded-lg border border-amber-200 bg-amber-50 p-4 text-sm text-amber-700 dark:border-amber-800/60 dark:bg-amber-950/30 dark:text-amber-300">
+        <div role="alert" className="rounded-lg border border-amber-200 bg-amber-50 p-4 text-sm text-amber-700 dark:border-amber-800/60 dark:bg-amber-950/30 dark:text-amber-300">
           {L('belowAbsZero', '⚠️ Temperature is below absolute zero (−273.15°C / 0K) — physically impossible.')}
         </div>
       )}

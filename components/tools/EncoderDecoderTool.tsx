@@ -34,6 +34,14 @@ interface EncoderDecoderToolProps {
 }
 
 /**
+ * P-1 大输入防线(R6):本组件服务 Base64/URL/HTML 六件套,transform 虽多为线性,
+ * 但 TextEncoder→btoa/atob→解码产物→只读 textarea 渲染整条链路同步执行,
+ * 数 MB 粘贴会冻结 UI。超过阈值跳过 transform,输出走既有 ⚠️ 通道提示。
+ * 阈值与 line-diff 的 100k 先例对齐;仅影响本组六个编解码工具。
+ */
+const MAX_INPUT_CHARS = 100_000
+
+/**
  * 编码/解码双向工具 —— 内置【Mode Toggle (Encode ↔ Decode)】
  *
  * 设计动机:Base64/URL/HTML 等都是对立性工具,用户从 encode 入口进来
@@ -83,6 +91,15 @@ export function EncoderDecoderTool({ encode, decode, initialMode = 'encode', slu
 
   const output = useMemo(() => {
     if (!mounted) return ''
+    // P-1 大输入防线:超阈值不同步执行 transform,直接给 ⚠️ 提示(与 line-diff 同款思路)
+    if (input.length > MAX_INPUT_CHARS) {
+      return tui(
+        slug,
+        locale,
+        'inputTooLarge',
+        `⚠️ Input is too large — the supported size is up to ${MAX_INPUT_CHARS.toLocaleString('en-US')} characters. Trim the input to convert.`,
+      )
+    }
     try {
       return spec.transform(input)
     } catch {

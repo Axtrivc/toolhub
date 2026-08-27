@@ -1,14 +1,14 @@
 'use client'
 
 import { useEffect, useMemo, useState } from 'react'
-import { CalculatorField, CalculatorNote, CalculatorSliderField, ResultCard } from '../calculator/CalculatorField'
+import { CalculatorField, CalculatorNote, CalculatorSliderField } from '../calculator/CalculatorField'
 import { StackedCompareChart } from '@/components/charts/StackedCompareChart'
 import { ResultActions } from '../ResultActions'
 import { CopyButton } from '@/components/CopyButton'
-import { fmtNum, fmtUSD, toNumStrict } from '@/lib/format'
+import { fmtNum, toNumStrict } from '@/lib/format'
 import { useApp } from '@/components/providers/AppProviders'
 import { tui } from '@/lib/i18n/tool-l10n'
-import { MODEL_GROUPS, MODEL_PRICES, type ModelPrice } from '@/lib/model-pricing'
+import { MODEL_PRICES } from '@/lib/model-pricing'
 import { getCalculatorSample } from '@/lib/tool-samples'
 
 /**
@@ -65,7 +65,7 @@ export function LlmCostCalculatorClient() {
             <thead>
               <tr className="border-b" style={{ borderColor: 'rgb(var(--border))', backgroundColor: 'rgb(var(--bg-subtle))' }}>
                 {[L('thModel', 'Model'), L('thIn', 'In $/1M'), L('thOut', 'Out $/1M'), L('thPerReq', 'Per request'), L('thPerDay', 'Per day'), L('thPerMonth', 'Per month')].map((h, i) => (
-                  <th key={h} className={`border-b px-3 py-2 font-medium ${i === 0 ? 'text-left' : ''}`} style={{ borderColor: 'rgb(var(--border))', color: 'rgb(var(--text-muted))' }}>{h}</th>
+                  <th key={h} scope="col" className={`border-b px-3 py-2 font-medium ${i === 0 ? 'text-left' : ''}`} style={{ borderColor: 'rgb(var(--border))', color: 'rgb(var(--text-muted))' }}>{h}</th>
                 ))}
               </tr>
             </thead>
@@ -233,10 +233,21 @@ export function JsonToZodClient() {
   const sample = getCalculatorSample('json-to-zod')
   const [json, setJson] = useState(sample?.json ?? '')
 
+  // P-1 大 JSON 粘贴防线:每击键全量 JSON.parse + schema 字符串拼装,
+  // 超大输入会逐键卡顿。200ms 防抖(regex-tester 同款)+ 100k 字符截断
+  // (code-beautifier 同款上限);原始文本保留在输入框,可删字恢复。
+  const MAX_JSON_CHARS = 100_000
+  const [debouncedJson, setDebouncedJson] = useState(json)
+  useEffect(() => {
+    const id = setTimeout(() => setDebouncedJson(json), 200)
+    return () => clearTimeout(id)
+  }, [json])
+  const safeJson = debouncedJson.length > MAX_JSON_CHARS ? debouncedJson.slice(0, MAX_JSON_CHARS) : debouncedJson
+
   const { code, error } = useMemo(() => {
-    if (!json.trim()) return { code: '', error: '' }
+    if (!safeJson.trim()) return { code: '', error: '' }
     try {
-      const parsed = JSON.parse(json) as Record<string, Json>
+      const parsed = JSON.parse(safeJson) as Record<string, Json>
       if (typeof parsed !== 'object' || parsed === null || Array.isArray(parsed)) {
         return { code: '', error: L('rootObj', 'Root must be a JSON object ({ … })') }
       }
@@ -246,7 +257,7 @@ export function JsonToZodClient() {
       return { code: '', error: (e as Error).message }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [json, locale])
+  }, [safeJson, locale])
 
   return (
     <div className="space-y-5">
@@ -269,6 +280,11 @@ export function JsonToZodClient() {
         </div>
       </div>
 
+      {json.length > MAX_JSON_CHARS && (
+        <p className="rounded-lg border border-amber-200 bg-amber-50 p-3 text-xs text-amber-700 dark:bg-amber-950/40 dark:text-amber-300">
+          ⚠️ {L('tooLong', 'JSON exceeds the {n}-character limit — the schema is generated from the beginning only.').replace('{n}', MAX_JSON_CHARS.toLocaleString('en-US'))}
+        </p>
+      )}
       {error && (
         <p role="alert" className="rounded-lg border-2 border-red-200 bg-red-50 p-3 font-mono text-sm text-red-700 dark:border-red-800/60 dark:bg-red-950/30 dark:text-red-300">⚠️ {error}</p>
       )}
@@ -311,25 +327,41 @@ export function AesEncryptDecryptClient() {
   const [output, setOutput] = useState('')
   const [error, setError] = useState('')
 
+  // 防抖:text/password 每次击键都会触发 PBKDF2(150k 迭代)派生 + 全文加解密,
+  // 打字期间反复派生纯烧 CPU 且大文本明显延迟。200ms 停顿后才真正计算
+  // (regex-tester 同款惯例);mode 切换本身会清空文本,不额外处理。
+  const [debouncedText, setDebouncedText] = useState(text)
+  const [debouncedPassword, setDebouncedPassword] = useState(password)
   useEffect(() => {
+    const id = setTimeout(() => setDebouncedText(text), 200)
+    return () => clearTimeout(id)
+  }, [text])
+  useEffect(() => {
+    const id = setTimeout(() => setDebouncedPassword(password), 200)
+    return () => clearTimeout(id)
+  }, [password])
+
+  useEffect(() => {
+    // 输入仍在防抖窗口内(含 mode 切换清空的瞬间):跳过,避免拿旧值做无用计算/闪报错
+    if (text !== debouncedText || password !== debouncedPassword) return
     let cancelled = false
     void (async () => {
-      if (!text || !password) { setOutput(''); setError(''); return }
+      if (!debouncedText || !debouncedPassword) { setOutput(''); setError(''); return }
       if (!crypto?.subtle) { setError(L('insecure', 'WebCrypto requires HTTPS or localhost')); return }
       try {
         const enc = new TextEncoder()
         if (mode === 'encrypt') {
           const salt = crypto.getRandomValues(new Uint8Array(16) as Uint8Array<ArrayBuffer>)
           const iv = crypto.getRandomValues(new Uint8Array(12) as Uint8Array<ArrayBuffer>)
-          const key = await deriveKey(password, salt)
-          const ct = await crypto.subtle.encrypt({ name: 'AES-GCM', iv }, key, enc.encode(text))
+          const key = await deriveKey(debouncedPassword, salt)
+          const ct = await crypto.subtle.encrypt({ name: 'AES-GCM', iv }, key, enc.encode(debouncedText))
           // 输出格式:salt:iv:ciphertext(均 base64),自包含可移植
           const portable = `AES-v1:${b64(salt)}:${b64(iv)}:${b64(new Uint8Array(ct))}`
           if (!cancelled) { setOutput(portable); setError('') }
         } else {
-          const parts = text.trim().split(':')
+          const parts = debouncedText.trim().split(':')
           if (parts.length !== 4 || parts[0] !== 'AES-v1') throw new Error(L('badFormat', 'Not an AES-v1 payload (expected salt:iv:ciphertext)'))
-          const key = await deriveKey(password, unb64(parts[1]))
+          const key = await deriveKey(debouncedPassword, unb64(parts[1]))
           const pt = await crypto.subtle.decrypt({ name: 'AES-GCM', iv: unb64(parts[2]) }, key, unb64(parts[3]))
           if (!cancelled) { setOutput(new TextDecoder().decode(pt)); setError('') }
         }
@@ -342,7 +374,7 @@ export function AesEncryptDecryptClient() {
     })()
     return () => { cancelled = true }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [text, password, mode])
+  }, [debouncedText, debouncedPassword, text, password, mode])
 
   return (
     <div className="space-y-5">
@@ -360,7 +392,26 @@ export function AesEncryptDecryptClient() {
 
       <div className="space-y-4 rounded-lg p-4" style={{ backgroundColor: 'rgb(var(--bg-subtle))' }}>
         <CalculatorField id="ae-text" type="text" label={mode === 'encrypt' ? L('plainLabel', 'Text to encrypt') : L('payloadLabel', 'Encrypted payload (AES-v1:…)')} value={text} onChange={setText} placeholder={mode === 'encrypt' ? 'secret message' : 'AES-v1:…:…:…'} />
-        <CalculatorField id="ae-pass" type="text" label={L('passLabel', 'Password')} value={password} onChange={setPassword} placeholder="strong passphrase" />
+        {/* 密码用手写掩码输入框(CalculatorField 暂不支持 type=password,共享件本轮只读):
+            防肩窥 + new-password 避免 WebView 凭据自动填充;label 与 htmlFor 配对 */}
+        <div>
+          <label htmlFor="ae-pass" className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>{L('passLabel', 'Password')}</label>
+          <input
+            id="ae-pass"
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="strong passphrase"
+            autoComplete="new-password"
+            spellCheck={false}
+            className="w-full rounded-lg border p-3 shadow-sm outline-none transition focus:ring-2"
+            style={{
+              borderColor: 'rgb(var(--border-strong))',
+              backgroundColor: 'rgb(var(--bg-card))',
+              color: 'rgb(var(--text))',
+            }}
+          />
+        </div>
       </div>
 
       {error && (

@@ -310,8 +310,12 @@ export function FindReplaceClient() {
         </label>
       </div>
 
-      {/* 输出区(aria-live:替换结果更新时屏幕阅读器播报,口径同 makeTextTool 家族) */}
-      <div role="status" aria-live="polite">
+      {/* 输出区(aria-live:替换结果更新时屏幕阅读器播报,口径同 makeTextTool 家族;
+          非法正则/超长降级是打断式报错 → 升为 alert/assertive,其余保持礼貌 status) */}
+      <div
+        role={regexError || tooLong ? 'alert' : 'status'}
+        aria-live={regexError || tooLong ? 'assertive' : 'polite'}
+      >
         <div className="mb-2 flex items-center justify-between">
           <label className="text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
             {L('outputLabel', 'Result')}

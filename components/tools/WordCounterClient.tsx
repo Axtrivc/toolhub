@@ -81,6 +81,10 @@ const SAMPLE = `ToolHub runs entirely in your browser — fast, private, and fre
 Paste any article, essay, or script here to see live statistics.
 这一段是中文示例:统计口径对汉字按字计数,对英文按词计数。`
 
+// P-1 大输入防线:统计在每次输入时同步跑多趟线性扫描(码点展开/分词/断句/分段),
+// 超大粘贴会冻结 UI。超过 200k 字符只统计前 200k 并给出截断提示(阈值与 makeTextTool 底座一致)。
+const MAX_ANALYZE_CHARS = 200_000
+
 export function WordCounterClient() {
   const { locale } = useApp()
   const L = (key: string, fb: string) => tui('word-counter', locale, key, fb)
@@ -89,7 +93,10 @@ export function WordCounterClient() {
 
   const handleLoadSample = useCallback(() => setText(SAMPLE), [])
 
-  const stats = useMemo(() => analyzeText(text), [text])
+  // P-1 门控:仅对前 MAX_ANALYZE_CHARS 字符做统计,超出部分跳过(下方横幅提示)
+  const safeText = text.length > MAX_ANALYZE_CHARS ? text.slice(0, MAX_ANALYZE_CHARS) : text
+  const truncated = text.length > MAX_ANALYZE_CHARS
+  const stats = useMemo(() => analyzeText(safeText), [safeText])
 
   const metricCards = [
     { label: L('words', 'Words'), value: stats.words.toLocaleString('en-US'), highlight: true },
@@ -106,6 +113,13 @@ export function WordCounterClient() {
 
   return (
     <div className="space-y-6">
+      {/* 截断提示(P-1) */}
+      {truncated && (
+        <div role="status" className="rounded-lg border border-amber-200 bg-amber-50 p-3 text-xs text-amber-700 dark:border-amber-800/60 dark:bg-amber-950/40 dark:text-amber-300">
+          ⚠️ {L('textExceeds', 'Text exceeds')} {MAX_ANALYZE_CHARS.toLocaleString('en-US')} {L('truncatedForSafety', 'characters — only the first part is counted to keep the page responsive.')}
+        </div>
+      )}
+
       {/* 指标卡片网格 */}
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
         {metricCards.map((m) => (

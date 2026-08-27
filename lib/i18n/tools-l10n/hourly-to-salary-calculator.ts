@@ -68,7 +68,7 @@ export const hourlyToSalaryCalculatorL10n: ToolL10n = {
       'preset.2': 'Hochsaison 55 Std.',
       'in.hourly': 'Stundenlohn', 'in.hours': 'Stunden pro Woche',
       'out.annual': 'Jahresgehalt', 'out.monthly': 'Monatlich', 'out.weekly': 'Wöchentlich', 'out.daily': 'Täglich (8 Std.)',
-      note: '💵 Geht von 52 bezahlten Wochen/Jahr aus. Passe die Stunden für Teilzeit oder Überstunden.',
+      note: '💵 Geht von 52 bezahlten Wochen/Jahr aus. Passe die Stunden für Teilzeit oder Überstunden an.',
     },
   },
 }

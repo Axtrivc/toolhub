@@ -58,7 +58,7 @@ export const dtiCalculatorL10n: ToolL10n = {
   de: {
     formula: {
       formula: 'DTI = ( total monthly debt / gross monthly income ) × 100%',
-      explain: 'Schulden-Einkommens-Verhältnis. Umfasse Wohnen, Auto, Studium, minimale Kartenraten plus den neuen Kredit, geteilt durch das brutto Monats­einkommen. Geldgeber wollen meist < 36–43%.',
+      explain: 'Schulden-Einkommens-Verhältnis. Summe aus Wohnen, Auto, Studium, minimalen Kartenraten und dem neuen Kredit, geteilt durch das brutto Monatseinkommen. Geldgeber wollen meist < 36–43%.',
     },
     useCases: ['die DTI für Hypothekengenehmigung berechnen', 'die Schulden-Einkommens-Quote berechnen', 'die 43 %-DTI-Regel prüfen', 'Front-End-/Back-End-DTI berechnen'],
     faqs: [

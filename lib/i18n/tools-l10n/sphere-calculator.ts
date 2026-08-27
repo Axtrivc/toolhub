@@ -15,6 +15,7 @@ export const sphereCalculatorL10n: ToolL10n = {
       'in.r': '半径',
       'out.volume': '体积',
       'out.surface': '表面积',
+      errNonNegative: '半径不能为负',
       note: '🔵 球体体积 = ⁴⁄₃ π r³。表面积 = 4 π r²。',
     },
     useCases: [
@@ -36,6 +37,7 @@ export const sphereCalculatorL10n: ToolL10n = {
       'in.r': 'Radio',
       'out.volume': 'Volumen',
       'out.surface': 'Área de superficie',
+      errNonNegative: 'El radio no puede ser negativo',
       note: '🔵 Volumen de la esfera = ⁴⁄₃ π r³. Área de superficie = 4 π r².',
     },
     useCases: [
@@ -57,6 +59,7 @@ export const sphereCalculatorL10n: ToolL10n = {
       'in.r': 'Radius',
       'out.volume': 'Volumen',
       'out.surface': 'Oberfläche',
+      errNonNegative: 'Der Radius darf nicht negativ sein',
       note: '🔵 Kugelvolumen = ⁴⁄₃ π r³. Oberfläche = 4 π r².',
     },
     useCases: [

@@ -34,6 +34,10 @@ interface DiffResult {
   union: string[]
 }
 
+// 大输入防线(口径同 line-diff):超长列表会放大 split/join 与结果渲染成本,
+// 超限后停止比较并提示缩减输入。
+const MAX_LIST_CHARS = 100_000
+
 function computeDiff(a: string, b: string, opts: { trim: boolean; caseSensitive: boolean; dedupe: boolean }): DiffResult {
   const split = (s: string) => {
     let arr = s.replace(/\r\n/g, '\n').split('\n')
@@ -93,12 +97,14 @@ export function ListDiffClient() {
   const [caseSensitive, setCaseSensitive] = useState(false)
 
   const opts = { trim, caseSensitive, dedupe: true }
+  const tooLong = a.length > MAX_LIST_CHARS || b.length > MAX_LIST_CHARS
 
   const result = useMemo<DiffResult>(() => {
+    if (tooLong) return { onlyA: [], onlyB: [], both: [], union: [] }
     if (!a.trim() && !b.trim()) return { onlyA: [], onlyB: [], both: [], union: [] }
     return computeDiff(a, b, opts)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [a, b, trim, caseSensitive])
+  }, [a, b, trim, caseSensitive, tooLong])
 
   const handleLoadSample = useCallback(() => {
     setA(SAMPLE_A)
@@ -175,8 +181,13 @@ export function ListDiffClient() {
         <LoadSampleButton onLoad={handleLoadSample} variant="compact" />
       </div>
 
-      {/* 结果 */}
-      {(a.trim() || b.trim()) && (
+      {/* 超长输入防线:不比较,给出明确提示(样式同 line-diff) */}
+      {tooLong ? (
+        <p role="alert" className="rounded-lg border-2 p-4 text-sm" style={{ borderColor: 'rgb(253 230 138)', backgroundColor: 'rgb(254 249 195 / 0.4)', color: 'rgb(var(--text))' }}>
+          {L('tooLong', '⚠️ Input exceeds the supported size (100,000 characters per list). Trim both lists to compare.')}
+        </p>
+      ) : (
+        (a.trim() || b.trim()) && (
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           {sections.map((sec) => (
             <div key={sec.label} className="rounded-lg border p-4" style={{ borderColor: 'rgb(var(--border))', backgroundColor: 'rgb(var(--bg-card))' }}>
@@ -199,6 +210,7 @@ export function ListDiffClient() {
             </div>
           ))}
         </div>
+        )
       )}
 
       <p className="rounded-md p-3 text-xs" style={{ backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text-subtle))' }}>

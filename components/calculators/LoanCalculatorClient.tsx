@@ -222,7 +222,7 @@ export function LoanCalculatorClient() {
 
       {/* 结果区 */}
       {result && 'error' in result ? (
-        <div className="rounded-lg border border-red-200 dark:border-red-800/60 bg-red-50 dark:bg-red-950/30 p-4 text-sm text-red-700 dark:text-red-300">⚠️ {result.error}</div>
+        <div role="status" className="rounded-lg border border-red-200 dark:border-red-800/60 bg-red-50 dark:bg-red-950/30 p-4 text-sm text-red-700 dark:text-red-300">⚠️ {result.error}</div>
       ) : result ? (
         <>
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
@@ -281,11 +281,11 @@ export function LoanCalculatorClient() {
               <table className="w-full text-left text-sm">
                 <thead className="text-xs uppercase" style={{ backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text-subtle))' }}>
                   <tr>
-                    <th className="px-3 py-2">{L('thMonth', 'Month')}</th>
-                    <th className="px-3 py-2 text-right">{L('thPayment', 'Payment')}</th>
-                    <th className="px-3 py-2 text-right">{L('thPrincipal', 'Principal')}</th>
-                    <th className="px-3 py-2 text-right">{L('thInterest', 'Interest')}</th>
-                    <th className="px-3 py-2 text-right">{L('thBalance', 'Balance')}</th>
+                    <th scope="col" className="px-3 py-2">{L('thMonth', 'Month')}</th>
+                    <th scope="col" className="px-3 py-2 text-right">{L('thPayment', 'Payment')}</th>
+                    <th scope="col" className="px-3 py-2 text-right">{L('thPrincipal', 'Principal')}</th>
+                    <th scope="col" className="px-3 py-2 text-right">{L('thInterest', 'Interest')}</th>
+                    <th scope="col" className="px-3 py-2 text-right">{L('thBalance', 'Balance')}</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-100 dark:divide-slate-700">

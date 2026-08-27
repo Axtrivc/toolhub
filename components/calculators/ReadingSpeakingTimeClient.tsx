@@ -59,6 +59,10 @@ const inputStyle = {
   color: 'rgb(var(--text))',
 }
 
+// P-1 大输入防线:词数/句数统计在每次输入时同步全量扫描,
+// 超大粘贴会冻结 UI。超过 200k 字符只统计前 200k 并给出截断提示(阈值与 makeTextTool 底座一致)。
+const MAX_ANALYZE_CHARS = 200_000
+
 export function ReadingSpeakingTimeClient() {
   const { locale } = useApp()
   // 取本地化 UI 串;缺失回退英文(SSR 恒英文)。
@@ -80,7 +84,10 @@ export function ReadingSpeakingTimeClient() {
   // 否则英文 150/130 wpm)——英文界面贴中文不再按 150 wpm 高估一倍;空文本回退按 locale。
   const [readWpmRaw, setReadWpm] = useState<number | null>(null)
   const [speakWpmRaw, setSpeakWpm] = useState<number | null>(null)
-  const textIsZh = text.trim() ? hasCJK(text) : locale === 'zh'
+  // P-1 门控:仅对前 MAX_ANALYZE_CHARS 字符做统计,超出部分跳过(下方横幅提示)
+  const safeText = text.length > MAX_ANALYZE_CHARS ? text.slice(0, MAX_ANALYZE_CHARS) : text
+  const truncated = text.length > MAX_ANALYZE_CHARS
+  const textIsZh = safeText.trim() ? hasCJK(safeText) : locale === 'zh'
   const readWpm = readWpmRaw ?? (textIsZh ? 300 : 150)
   const speakWpm = speakWpmRaw ?? (textIsZh ? 200 : 130)
   const READING = textIsZh ? READING_PRESETS_ZH : READING_PRESETS
@@ -88,11 +95,11 @@ export function ReadingSpeakingTimeClient() {
   const speedUnit = L('wpmUnit', 'wpm')
 
   const stats = useMemo(() => {
-    const trimmed = text.trim()
+    const trimmed = safeText.trim()
     const words = countWords(trimmed)
     const sentences = countSentences(trimmed)
-    return { words, chars: text.length, sentences }
-  }, [text])
+    return { words, chars: safeText.length, sentences }
+  }, [safeText])
 
   const { words, chars, sentences } = stats
   const pages = words / 250
@@ -172,6 +179,13 @@ export function ReadingSpeakingTimeClient() {
 
   return (
     <div className="space-y-5">
+      {/* 截断提示(P-1) */}
+      {truncated && (
+        <div role="status" className="rounded-lg border border-amber-200 bg-amber-50 p-3 text-xs text-amber-700 dark:border-amber-800/60 dark:bg-amber-950/40 dark:text-amber-300">
+          ⚠️ {L('textExceeds', 'Text exceeds')} {MAX_ANALYZE_CHARS.toLocaleString('en-US')} {L('truncatedForSafety', 'characters — only the first part is counted to keep the page responsive.')}
+        </div>
+      )}
+
       {/* 文本输入 */}
       <div>
         <label htmlFor="rst-text" className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>

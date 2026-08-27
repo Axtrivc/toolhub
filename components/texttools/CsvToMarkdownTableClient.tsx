@@ -205,6 +205,10 @@ const inputStyle = {
   color: 'rgb(var(--text))',
 }
 
+// 大输入防线(解析类工具同款口径):超长 CSV 会放大逐字符状态机与表格重建成本,
+// 超限后停止转换并提示缩减输入。
+const MAX_INPUT_LEN = 100_000
+
 export function CsvToMarkdownTableClient() {
   const { locale } = useApp()
   // 取本地化 UI 串;缺失回退英文(SSR 恒英文)。
@@ -216,9 +220,11 @@ export function CsvToMarkdownTableClient() {
   const [align, setAlign] = useState<Alignment>('default')
   const [pretty, setPretty] = useState(false)
 
+  const tooLong = input.length > MAX_INPUT_LEN
+
   const result = useMemo(
-    () => buildMarkdown(input, delimiter, hasHeader, align, pretty),
-    [input, delimiter, hasHeader, align, pretty],
+    () => (tooLong ? null : buildMarkdown(input, delimiter, hasHeader, align, pretty)),
+    [input, delimiter, hasHeader, align, pretty, tooLong],
   )
 
   const handleLoadSample = useCallback(() => setInput(SAMPLE_CSV), [])
@@ -302,6 +308,13 @@ export function CsvToMarkdownTableClient() {
           {L('prettyPad', 'Pretty pad columns')}
         </label>
       </div>
+
+      {/* 超长输入防线 */}
+      {tooLong && (
+        <p role="alert" className="rounded-lg border-2 p-4 text-sm" style={{ borderColor: 'rgb(253 230 138)', backgroundColor: 'rgb(254 249 195 / 0.4)', color: 'rgb(var(--text))' }}>
+          {L('tooLong', '⚠️ Input exceeds the supported size (100,000 characters). Trim the input to convert it.')}
+        </p>
+      )}
 
       {/* 输出区 */}
       {result && (

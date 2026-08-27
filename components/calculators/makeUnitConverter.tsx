@@ -1,11 +1,11 @@
 'use client'
 
-import { useState, useMemo, useCallback } from 'react'
+import { useState, useMemo, useCallback, useEffect, useRef } from 'react'
 import { CalculatorField, CalculatorSliderField, ResultCard, CalculatorNote } from '../calculator/CalculatorField'
 import { MagnitudeRuler } from '../charts/MagnitudeRuler'
 import { ResultActions } from '../ResultActions'
 import { LoadSampleButton } from '../LoadSampleButton'
-import { fmtNum, toNum } from '@/lib/format'
+import { fmtNum, toNum, toNumStrict } from '@/lib/format'
 import { getConverterSample, type ConverterSample } from '@/lib/tool-samples'
 import { useApp } from '@/components/providers/AppProviders'
 import { tui, tuiUc } from '@/lib/i18n/tool-l10n'
@@ -45,6 +45,9 @@ export interface UnitDef {
   fromBase?: (b: number) => number
 }
 
+/** URL 参数最大长度:超过则忽略该参数(超长防御,避免异常分享链接注入超宽输入) */
+const MAX_URL_PARAM_LEN = 40
+
 /** 单位 → 基准单位。自定义 toBase 钩子优先(非线性:燃油经济性倒数、温度偏移等),
  *  否则线性 val × factor。主结果与 All units 面板共用本函数,保证两条路径一致。 */
 const toBase = (def: UnitDef, val: number): number =>
@@ -70,15 +73,61 @@ export function makeUnitConverter(config: {
   const unitKeys = Object.keys(config.units)
   const digits = config.digits ?? 6
 
+  // 出厂默认值(工厂闭包内求一次,SSR/客户端恒同源)。
+  // 既是 useState 初值,也是 URL 写回时"等于默认 → 删除参数"的判定基准,
+  // 保证链接里永远不会出现可省略的默认参数(如 ?value=1&from=m&to=ft)。
+  const DEFAULT_VALUE = config.defaultValue ?? '1'
+  const DEFAULT_FROM = config.defaultFrom ?? unitKeys[0]
+  const DEFAULT_TO = config.defaultTo ?? unitKeys[1] ?? unitKeys[0]
+
   return function UnitConverter() {
     const { locale } = useApp()
     // slug 未设 → tui 返回 fallback(英文原值),行为与改造前一致。
     const slug = config.slug ?? ''
     const L = (key: string, fb: string) => tui(slug, locale, key, fb)
     const LC = (key: string, fb: string) => tuiUc(key, locale, fb)
-    const [value, setValue] = useState(config.defaultValue ?? '1')
-    const [from, setFrom] = useState(config.defaultFrom ?? unitKeys[0])
-    const [to, setTo] = useState(config.defaultTo ?? unitKeys[1] ?? unitKeys[0])
+    const [value, setValue] = useState(DEFAULT_VALUE)
+    const [from, setFrom] = useState(DEFAULT_FROM)
+    const [to, setTo] = useState(DEFAULT_TO)
+
+    // URL 状态同步(value/from/to 三参数,全站换算器一页一工具互不冲突):
+    // 挂载前 state 恒为出厂默认 → SSR 首帧与客户端首渲染完全一致,零水合差异;
+    // 挂载后首次 effect 从 ?value=&from=&to= 读回(URL 为真实来源,只读不写,
+    // 不覆盖分享链接);之后任何变更(swap/快捷值/Load Sample/All units 行点击
+    // 均走同一 setState 流,无旁路)replaceState 写回,等于默认值的字段删除参数。
+    // 策略与 makeCalculatorClient 的 config.urlState 相同;这里额外做了校验:
+    // value 经 toNumStrict 宽容解析(非法/缺失跳过该字段),from/to 必须是
+    // units 表合法 key 才应用;所有参数 >40 字符一律忽略(超长防御)。
+    const urlHydrated = useRef(false)
+    useEffect(() => {
+      if (typeof window === 'undefined') return
+      if (!urlHydrated.current) {
+        urlHydrated.current = true
+        const params = new URLSearchParams(window.location.search)
+        const rawValue = params.get('value')
+        if (rawValue != null && rawValue.length <= MAX_URL_PARAM_LEN) {
+          const v = toNumStrict(rawValue)
+          if (isFinite(v)) setValue(String(v)) // 规范化写回(String(toNumStrict))
+        }
+        const rawFrom = params.get('from')
+        if (rawFrom != null && rawFrom.length <= MAX_URL_PARAM_LEN && config.units[rawFrom]) {
+          setFrom(rawFrom)
+        }
+        const rawTo = params.get('to')
+        if (rawTo != null && rawTo.length <= MAX_URL_PARAM_LEN && config.units[rawTo]) {
+          setTo(rawTo)
+        }
+        return // 首次只读不写:URL 已是真实来源
+      }
+      const url = new URL(window.location.href)
+      if (value === '' || value === DEFAULT_VALUE) url.searchParams.delete('value')
+      else url.searchParams.set('value', value)
+      if (from === DEFAULT_FROM) url.searchParams.delete('from')
+      else url.searchParams.set('from', from)
+      if (to === DEFAULT_TO) url.searchParams.delete('to')
+      else url.searchParams.set('to', to)
+      window.history.replaceState({}, '', url.toString())
+    }, [value, from, to])
 
     const result = useMemo(() => {
       const v = toNum(value)

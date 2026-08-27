@@ -18,6 +18,10 @@ const selVars = { borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rg
 // ── 日志过滤 ──
 const LOG_LEVELS = ['ERROR', 'WARN', 'INFO', 'DEBUG', 'TRACE'] as const
 
+// P-1 大日志粘贴防线:超长输入截断后再过滤(regex-tester 50k / line-diff 100k 同族惯例),
+// 防止超大粘贴把每击键的逐行正则扫描放大成卡顿;原始文本保留,可继续删字恢复。
+const MAX_LOG_CHARS = 100_000
+
 export function LogFilterClient() {
   const { locale } = useApp()
   const L = (key: string, fb: string) => tui('log-filter-tool', locale, key, fb)
@@ -26,12 +30,14 @@ export function LogFilterClient() {
   const [exclude, setExclude] = useState('')
   const [level, setLevel] = useState<string>('')
   const [useRegex, setUseRegex] = useState(false)
+  // 实际参与过滤的文本:截断到上限(regex-tester 的 safeText 同款模式)
+  const safeLogs = logs.length > MAX_LOG_CHARS ? logs.slice(0, MAX_LOG_CHARS) : logs
   // 正则合法性作为派生值随 memo 返回,不再用 setState 写回
   // (渲染期 setState 属反模式;且原先清空全部过滤条件后 ⚠️ 会残留不消失)
   const result = useMemo(() => {
-    const lines = logs.split(/\r?\n/)
+    const lines = safeLogs.split(/\r?\n/)
     if (!include.trim() && !exclude.trim() && !level) {
-      return { out: logs, matched: lines.filter((l) => l.trim()).length, total: lines.filter((l) => l.trim()).length, invalid: false }
+      return { out: safeLogs, matched: lines.filter((l) => l.trim()).length, total: lines.filter((l) => l.trim()).length, invalid: false }
     }
     let re: RegExp | null = null
     let reEx: RegExp | null = null
@@ -56,7 +62,7 @@ export function LogFilterClient() {
       return true
     })
     return { out: filtered.join('\n'), matched: filtered.length, total: lines.filter((l) => l.trim()).length, invalid: false }
-  }, [logs, include, exclude, level, useRegex])
+  }, [safeLogs, include, exclude, level, useRegex])
 
   return (
     <div className="space-y-5">
@@ -89,6 +95,11 @@ export function LogFilterClient() {
       {result.invalid && (
         <p role="alert" className="rounded-lg border-2 border-red-200 bg-red-50 p-3 text-sm text-red-700 dark:border-red-800/60 dark:bg-red-950/30 dark:text-red-300">
           ⚠️ {L('invalidRegex', 'Invalid regular expression')}
+        </p>
+      )}
+      {logs.length > MAX_LOG_CHARS && (
+        <p className="rounded-lg border border-amber-200 bg-amber-50 p-3 text-xs text-amber-700 dark:bg-amber-950/40 dark:text-amber-300">
+          ⚠️ {L('truncateNotice', 'Log exceeds the {n}-character limit — only the beginning is filtered.').replace('{n}', MAX_LOG_CHARS.toLocaleString('en-US'))}
         </p>
       )}
       {logs && result.matched === 0 && !result.invalid && (
@@ -163,7 +174,7 @@ export function AsciiTableClient() {
           <thead className="sticky top-0">
             <tr style={{ backgroundColor: 'rgb(var(--bg-subtle))' }}>
               {['Dec', 'Hex', 'Oct', 'Bin', 'Char'].map((h) => (
-                <th key={h} className="border-b px-3 py-2 font-medium" style={{ borderColor: 'rgb(var(--border))', color: 'rgb(var(--text-muted))' }}>{h}</th>
+                <th key={h} scope="col" className="border-b px-3 py-2 font-medium" style={{ borderColor: 'rgb(var(--border))', color: 'rgb(var(--text-muted))' }}>{h}</th>
               ))}
             </tr>
           </thead>
@@ -213,7 +224,8 @@ export function ScreenTimeCalculatorClient() {
       </div>
 
       {stats ? (
-        <div role="status" aria-live="polite" className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+        // ResultCard 自带 role=status(逐卡播报);外层再挂 live 会嵌套双报,这里只做布局
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
           <ResultCard label={L('perYear', 'Per year that is…')} highlight value={`${fmtNum(stats.perYearDays, 0)} ${L('fullDays', 'full days')}`} />
           <ResultCard label={L('dailyShare', 'Share of waking hours')} value={`${fmtNum(stats.dailyPct, 0)}%`} />
           <ResultCard
@@ -299,7 +311,8 @@ export function ReadingLevelCheckerClient() {
 
       {stats && (
         <>
-          <div role="status" aria-live="polite" className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+          {/* ResultCard 自带 role=status(逐卡播报);外层不再包 live,避免嵌套双报 */}
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
             <ResultCard label={L('fleschEase', 'Flesch reading ease')} highlight value={`${stats.ease} · ${easeLabel}`} />
             <ResultCard label={L('fkGrade', 'Flesch-Kincaid grade level')} value={`${stats.grade}`} />
             <ResultCard label={L('wordsSentences', 'Words / sentences')} value={`${stats.words} / ${stats.sentences}`} />
@@ -378,7 +391,8 @@ export function HmacGeneratorClient() {
         <p role="alert" className="rounded-lg border-2 border-red-200 bg-red-50 p-3 text-sm text-red-700 dark:border-red-800/60 dark:bg-red-950/30 dark:text-red-300">⚠️ {error}</p>
       )}
       {hex && (
-        <div role="status" aria-live="polite" className="space-y-3">
+        // ResultCard 自带 role=status(逐卡播报);外层不再包 live,避免嵌套双报
+        <div className="space-y-3">
           {/* 长 token(hex/base64):break-all + 缩小字号防撑破宽度;
               传 ReactNode 绕开 AnimatedNumber(哈希串做数字滚动无意义) */}
           <ResultCard

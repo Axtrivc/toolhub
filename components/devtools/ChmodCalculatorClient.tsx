@@ -130,12 +130,12 @@ export function ChmodCalculatorClient() {
     <div className="space-y-5">
       {/* 权限矩阵 */}
       <div className="overflow-x-auto rounded-lg border p-4" style={{ borderColor: 'rgb(var(--border))', backgroundColor: 'rgb(var(--bg-card))' }}>
-        <table className="w-full min-w-[320px] text-sm">
+        <table className="w-full min-w-[320px] text-sm" aria-label={L('permission', 'Permission')}>
           <thead>
             <tr style={{ color: 'rgb(var(--text-subtle))' }}>
-              <th className="pb-2 text-left font-medium">{L('permission', 'Permission')}</th>
+              <th scope="col" className="pb-2 text-left font-medium">{L('permission', 'Permission')}</th>
               {permL10n.map((h) => (
-                <th key={h} className="pb-2 text-center font-medium">
+                <th key={h} scope="col" className="pb-2 text-center font-medium">
                   {h}
                 </th>
               ))}
@@ -222,7 +222,7 @@ export function ChmodCalculatorClient() {
           }}
         />
         {textError && (
-          <p className="mt-1.5 text-xs text-red-600 dark:text-red-300">
+          <p role="status" className="mt-1.5 text-xs text-red-600 dark:text-red-300">
             {L('errInvalidPrefix', 'Invalid format — use 3–4 octal digits (0–7, e.g. ')}
             <code>644</code>
             {L('errInvalidMid', ') or 9 symbolic chars (e.g. ')}

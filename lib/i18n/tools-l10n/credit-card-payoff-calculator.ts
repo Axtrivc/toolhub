@@ -8,7 +8,7 @@ export const creditCardPayoffCalculatorL10n: ToolL10n = {
   zh: {
     formula: {
       formula: 'months = − ln( 1 + r·B / PMT ) / ln(1 + r)',
-      explain: '以固定月供 PMT、月利率 r 还清余额 B 所需的月数。还款越大,每月 accruing 的利息越少,时间显著缩短。',
+      explain: '以固定月供 PMT、月利率 r 还清余额 B 所需的月数。还款越大,每月累积的利息越少,时间显著缩短。',
     },
     useCases: ['看还清信用卡要多久', '算还清过程中要付多少利息', '比较不同月供的还款时间', '决定用雪崩法还是滚雪球法还债'],
     faqs: [
@@ -85,7 +85,7 @@ export const creditCardPayoffCalculatorL10n: ToolL10n = {
       yrsN: '{y} Jahre',
       monthsYrs: '{m} Monate ({y})',
       'in.balance': 'Aktueller Saldo', 'in.apr': 'Jahressatz (APR)', 'in.payment': 'Monatliche Rate',
-      'out.months': 'Zeit bis tilgung', 'out.total': 'Insgesamt gezahlt', 'out.interest': 'Zinsen gesamt',
+      'out.months': 'Zeit bis zur Tilgung', 'out.total': 'Insgesamt gezahlt', 'out.interest': 'Zinsen gesamt',
       note: '💳 Mindestraten können Jahrzehnte dauern. Mehr als das Minimum zu zahlen, spart dramatisch Zinsen.',
       chartTitle: 'Gesamt gezahlt: Tilgung vs. Zinsen', chartCenter: 'Gesamt', 'slice.principal': 'Tilgung (was du geliehen hast)', 'slice.interest': 'Zinsen (Kosten des Kredits)',
       chartTitleBalance: 'Restschuld beim Tilgen',

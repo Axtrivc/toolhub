@@ -17,6 +17,10 @@ import { getCalculatorSample } from '@/lib/tool-samples'
 
 const selVars = { borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rgb(var(--bg-card))', color: 'rgb(var(--text))' }
 
+// P-1 大输入防线(csv-to-finetune):逐字符 CSV 状态机 + 每行 JSON.stringify,
+// 每次按键全量重算;超过 20 万字符(与文本工具家族同款阈值)直接跳过解析
+const CF_MAX_INPUT_CHARS = 200_000
+
 // ── CSV → 微调 JSONL ──
 function parseCsvSimple(text: string, delim: string): string[][] {
   const rows: string[][] = []
@@ -49,8 +53,12 @@ export function CsvToFinetuneClient() {
   const [userCol, setUserCol] = useState('prompt')
   const [assistantCol, setAssistantCol] = useState('completion')
 
+  // P-1 大输入防线:超过阈值跳过解析,走告警通道(数字跟随应用语言)
+  const numberLocale = locale === 'en' ? 'en-US' : locale
+  const tooLarge = csv.length > CF_MAX_INPUT_CHARS
+
   const result = useMemo(() => {
-    if (!csv.trim()) return { jsonl: '', headers: [] as string[], errors: [] as string[], count: 0 }
+    if (!csv.trim() || tooLarge) return { jsonl: '', headers: [] as string[], errors: [] as string[], count: 0 }
     const rows = parseCsvSimple(csv, ',')
     if (rows.length < 2) return { jsonl: '', headers: [], errors: ['Need a header row plus at least one data row'], count: 0 }
     const headers = rows[0].map((h) => h.trim())
@@ -75,7 +83,7 @@ export function CsvToFinetuneClient() {
     return { jsonl: lines.join('\n'), headers, errors, count: lines.length }
     // locale 进依赖:i18n 错误文案在切换语言后立即跟随(纯重算,无行为风险)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [csv, sysCol, userCol, assistantCol, locale])
+  }, [csv, sysCol, userCol, assistantCol, locale, tooLarge])
 
   return (
     <div className="space-y-5">
@@ -88,6 +96,13 @@ export function CsvToFinetuneClient() {
           placeholder={'prompt,completion\n"Explain closures","They capture..."'}
           className="w-full rounded-lg border p-4 font-mono text-xs outline-none transition focus:ring-2" style={selVars} />
       </div>
+
+      {tooLarge && (
+        <p role="alert" className="rounded-lg border-2 border-amber-200 bg-amber-50 p-3 text-sm text-amber-700 dark:border-amber-800/60 dark:bg-amber-950/30 dark:text-amber-300">
+          ⚠️ {L('inputTooLarge', 'Input exceeds {n} characters — conversion is skipped to keep typing responsive. Trim or split the CSV.')
+            .replace('{n}', CF_MAX_INPUT_CHARS.toLocaleString(numberLocale))}
+        </p>
+      )}
 
       <div className="grid grid-cols-1 gap-4 rounded-lg p-4 sm:grid-cols-3" style={{ backgroundColor: 'rgb(var(--bg-subtle))' }}>
         <CalculatorField id="cf-sys" type="text" label={L('sysColLabel', 'System column (optional)')} value={sysCol} onChange={setSysCol} placeholder="system" />
@@ -129,6 +144,12 @@ const TOKEN_COLORS = [
   'bg-cyan-100 text-cyan-800 dark:bg-cyan-950/60 dark:text-cyan-200',
   'bg-rose-100 text-rose-800 dark:bg-rose-950/60 dark:text-rose-200',
 ]
+
+// P-1 大输入防线:逐字符分词是每次按键全量重算的解析路径,超阈值直接跳过
+const TV_MAX_INPUT_CHARS = 100_000
+// P-2 渲染上限:上万 token 块的 DOM 会卡死移动端——只渲染前 800 块,
+// 总数卡片与 Copy/Download(Copy tokens)仍基于完整 chunks,数据不丢
+const TV_MAX_RENDERED_CHUNKS = 800
 
 /** 近似分词:优先整词切分,长词按 4 字符/块,空格并入后续块(贴近 BPE 直觉) */
 function chunkText(text: string): string[] {
@@ -174,7 +195,18 @@ export function TokenVisualizerClient() {
   const sample = getCalculatorSample('token-visualizer')
   const [text, setText] = useState(sample?.text ?? '')
 
-  const chunks = useMemo(() => (text ? chunkText(text) : []), [text])
+  // P-1:超阈值跳过分词(同步重算),走告警通道;数字跟随应用语言
+  const numberLocale = locale === 'en' ? 'en-US' : locale
+  const tooLarge = text.length > TV_MAX_INPUT_CHARS
+  const chunks = useMemo(() => (text && !tooLarge ? chunkText(text) : []), [text, tooLarge])
+  const capped = chunks.length > TV_MAX_RENDERED_CHUNKS
+  const visibleChunks = capped ? chunks.slice(0, TV_MAX_RENDERED_CHUNKS) : chunks
+  // 全量导出(Copy tokens / Download 基于完整 chunks,而非可见的 800 块):
+  // 一行一块「序号→内容」,块内空白以符号显示,保证逐行格式不被原文换行打乱
+  const tokenDump = useMemo(
+    () => chunks.map((c, i) => `${i + 1}\t${c.replace(/ /g, '␣').replace(/\t/g, '→').replace(/\n/g, '↵')}`).join('\n'),
+    [chunks],
+  )
 
   return (
     <div className="space-y-5">
@@ -185,17 +217,24 @@ export function TokenVisualizerClient() {
           className="w-full rounded-lg border p-4 text-sm outline-none transition focus:ring-2" style={selVars} />
       </div>
 
-      {chunks.length > 0 && (
+      {tooLarge && (
+        <p role="alert" className="rounded-lg border-2 border-amber-200 bg-amber-50 p-3 text-sm text-amber-700 dark:border-amber-800/60 dark:bg-amber-950/30 dark:text-amber-300">
+          ⚠️ {L('inputTooLarge', 'Input exceeds {n} characters — visualization is skipped to keep typing responsive. Trim or clear the text to tokenize.')
+            .replace('{n}', TV_MAX_INPUT_CHARS.toLocaleString(numberLocale))}
+        </p>
+      )}
+
+      {!tooLarge && chunks.length > 0 && (
         <div role="status" aria-live="polite" className="space-y-3">
           {/* E1:光秃的 token 数字难自评,补字符数 sublabel 给出"每 token 约几字符"的参照 */}
           <ResultCard
             label={L('approxTokens', 'Approximate tokens')}
             highlight
             value={String(chunks.length)}
-            sublabel={`${[...text].length.toLocaleString(locale === 'en' ? 'en-US' : locale)} ${L('charactersLabel', 'characters')}`}
+            sublabel={`${[...text].length.toLocaleString(numberLocale)} ${L('charactersLabel', 'characters')}`}
           />
           <div className="flex flex-wrap gap-1 rounded-lg border p-4 font-mono text-sm" style={{ borderColor: 'rgb(var(--border))', backgroundColor: 'rgb(var(--bg-subtle))' }}>
-            {chunks.map((c, i) => (
+            {visibleChunks.map((c, i) => (
               <span
                 key={i}
                 className={`rounded px-1.5 py-0.5 ${TOKEN_COLORS[i % TOKEN_COLORS.length]}`}
@@ -205,9 +244,17 @@ export function TokenVisualizerClient() {
               </span>
             ))}
           </div>
+          {capped && (
+            <p role="status" className="text-xs font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
+              {L('renderCapped', 'Showing the first {shown} of {total} blocks so rendering stays fast — Copy tokens / Download below keeps all {total}.')
+                .replace('{shown}', TV_MAX_RENDERED_CHUNKS.toLocaleString(numberLocale))
+                .replace(/\{total\}/g, chunks.length.toLocaleString(numberLocale))}
+            </p>
+          )}
           <p className="text-xs" style={{ color: 'rgb(var(--text-faint))' }}>
             {L('hint', 'Each colored block ≈ one token. Whitespace shown as ␣ merges into the following token — roughly how BPE tokenizers behave.')}
           </p>
+          <ResultActions summary={tokenDump} filename="tokens.txt" downloadContent={tokenDump} mime="text/plain;charset=utf-8;" copyLabel={L('copyTokens', 'Copy tokens')} />
         </div>
       )}
       <CalculatorNote>{L('note', '🎨 This is a close visual approximation (words ≤5 chars = one token, longer words split at 4 characters, CJK ≈ 1 token/char), not the exact tokenizer of any specific model — use the GPT Token Counter for cost math. Great for building intuition about why some phrases cost more.')}</CalculatorNote>
@@ -271,7 +318,7 @@ export function EmbeddingPriceClient() {
             <thead>
               <tr style={{ backgroundColor: 'rgb(var(--bg-subtle))' }}>
                 {[L('thModel', 'Model'), L('thDims', 'Dims'), L('thCtx', 'Context'), L('thPer1M', '$/1M tokens'), L('thPerRun', 'Per run'), L('thMonthly', 'Per month')].map((h, i) => (
-                  <th key={h} className={`border-b px-3 py-2 font-medium ${i === 0 ? 'text-left' : ''}`} style={{ borderColor: 'rgb(var(--border))', color: 'rgb(var(--text-muted))' }}>{h}</th>
+                  <th key={h} scope="col" className={`border-b px-3 py-2 font-medium ${i === 0 ? 'text-left' : ''}`} style={{ borderColor: 'rgb(var(--border))', color: 'rgb(var(--text-muted))' }}>{h}</th>
                 ))}
               </tr>
             </thead>

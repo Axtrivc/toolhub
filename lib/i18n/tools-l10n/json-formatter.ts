@@ -7,6 +7,7 @@ import type { ToolL10n } from '../tool-l10n'
 export const jsonFormatterL10n: ToolL10n = {
   zh: {
     ui: {
+      inputTooLarge: '⚠️ 输入过大——支持规模最多 20 万字符。请裁剪输入后再计算。',
       defaultInput: '{"姓名":"张三","年龄":30,"城市":"北京","技能":["js","css"]}',
       inputLabel: 'JSON(原始或压缩)',
       outputLabel: '格式化后的 JSON',
@@ -19,6 +20,7 @@ export const jsonFormatterL10n: ToolL10n = {
   },
   es: {
     ui: {
+      inputTooLarge: '⚠️ Entrada demasiado grande: el tamaño admitido es de hasta 200 000 caracteres. Recorta la entrada para calcular.',
       defaultInput: '{"nombre":"Juan","edad":30,"ciudad":"Madrid","habilidades":["js","css"]}',
       inputLabel: 'JSON (crudo o minificado)',
       outputLabel: 'JSON con formato',
@@ -31,6 +33,7 @@ export const jsonFormatterL10n: ToolL10n = {
   },
   de: {
     ui: {
+      inputTooLarge: '⚠️ Eingabe zu groß – die unterstützte Größe beträgt maximal 200.000 Zeichen. Kürze die Eingabe.',
       defaultInput: '{"name":"Max","alter":30,"stadt":"Berlin","skills":["js","css"]}',
       inputLabel: 'JSON (roh oder minimiert)',
       outputLabel: 'Formatiertes JSON',

@@ -13,6 +13,9 @@ export const TokenVisualizerL10n: ToolL10n = {
       'chunkTitle': '块 {n}',
       'hint': '每个色块 ≈ 一个 token。空格显示为 ␣ 并并入后续 token——大致符合 BPE 分词器行为。',
       'inputLabel': '你的文本',
+      'inputTooLarge': '输入超过 {n} 字符——为保证输入流畅已跳过可视化。请精简或清空文本后再分词。',
+      'renderCapped': '仅渲染前 {shown} 块(共 {total} 块)以保证渲染流畅——下方「复制 tokens / 下载」包含全部 {total} 块。',
+      'copyTokens': '复制 tokens',
     },
   },
   es: {
@@ -23,6 +26,9 @@ export const TokenVisualizerL10n: ToolL10n = {
       'chunkTitle': 'fragmento {n}',
       'hint': 'Cada bloque de color ≈ un token. El espacio (␣) se fusiona con el siguiente token, como hacen los tokenizadores BPE.',
       'inputLabel': 'Tu texto',
+      'inputTooLarge': 'La entrada supera los {n} caracteres — la visualización se omite para mantener la escritura fluida. Recorta o vacía el texto para tokenizar.',
+      'renderCapped': 'Se muestran los primeros {shown} de {total} bloques para que el renderizado sea rápido — «Copiar tokens / Descargar» abajo incluye los {total} completos.',
+      'copyTokens': 'Copiar tokens',
     },
   },
   de: {
@@ -33,6 +39,9 @@ export const TokenVisualizerL10n: ToolL10n = {
       'chunkTitle': 'Chunk {n}',
       'hint': 'Jeder Farbblock ≈ ein Token. Leerzeichen (␣) verschmilzt mit dem nächsten Token — ungefähr wie bei BPE.',
       'inputLabel': 'Dein Text',
+      'inputTooLarge': 'Die Eingabe überschreitet {n} Zeichen — die Visualisierung wird übersprungen, damit die Eingabe reaktionsfähig bleibt. Text kürzen oder leeren, um zu tokenisieren.',
+      'renderCapped': 'Nur die ersten {shown} von {total} Blöcken werden gerendert, damit es schnell bleibt — „Tokens kopieren / Herunterladen“ unten enthält alle {total}.',
+      'copyTokens': 'Tokens kopieren',
     },
   },
 }

@@ -7,6 +7,7 @@ import type { ToolL10n } from '../tool-l10n'
 export const jsonMinifierL10n: ToolL10n = {
   zh: {
     ui: {
+      inputTooLarge: '⚠️ 输入过大——支持规模最多 20 万字符。请裁剪输入后再计算。',
       defaultInput: '{\n  "姓名": "张三",\n  "年龄": 30\n}',
       inputLabel: 'JSON(已格式化)',
       outputLabel: '压缩后的 JSON',
@@ -24,6 +25,7 @@ export const jsonMinifierL10n: ToolL10n = {
   },
   es: {
     ui: {
+      inputTooLarge: '⚠️ Entrada demasiado grande: el tamaño admitido es de hasta 200 000 caracteres. Recorta la entrada para calcular.',
       defaultInput: '{\n  "nombre": "Juan",\n  "edad": 30\n}',
       inputLabel: 'JSON (con formato)',
       outputLabel: 'JSON minificado',
@@ -41,6 +43,7 @@ export const jsonMinifierL10n: ToolL10n = {
   },
   de: {
     ui: {
+      inputTooLarge: '⚠️ Eingabe zu groß – die unterstützte Größe beträgt maximal 200.000 Zeichen. Kürze die Eingabe.',
       defaultInput: '{\n  "name": "Max",\n  "alter": 30\n}',
       inputLabel: 'JSON (formatiert)',
       outputLabel: 'Minimiertes JSON',

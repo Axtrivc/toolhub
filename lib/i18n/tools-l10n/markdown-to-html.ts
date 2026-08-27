@@ -14,6 +14,7 @@ export const markdownToHtmlL10n: ToolL10n = {
       'note': '🔒 100% 在客户端——支持标题、列表、代码、表格、链接、加粗、斜体。',
       'placeholder': '# 标题\n\n一些 **加粗** 文本。',
       'preview': '预览',
+      'tooLong': '⚠️ 输入超过支持的大小(100,000 字符)。请缩减输入后再转换。',
     },
     useCases: ['把 Markdown 转成干净的 HTML 并实时预览', '为博客或文档准备可发布的 HTML', '确认读者最终看到的渲染效果', '查看 GitHub 风格 Markdown(表格、任务列表)的 HTML 输出'],
     faqs: [
@@ -31,6 +32,7 @@ export const markdownToHtmlL10n: ToolL10n = {
       'note': '🔒 100% en el cliente — admite títulos, listas, código, tablas, enlaces, negrita, cursiva.',
       'placeholder': '# Título\n\nAlgo de texto **negrita**.',
       'preview': 'Vista previa',
+      'tooLong': '⚠️ La entrada supera el tamaño admitido (100.000 caracteres). Redúcela para poder convertirla.',
     },
     useCases: ['convertir Markdown a HTML limpio con vista previa en vivo', 'preparar HTML publicable para un blog o documentación', 'confirmar el renderizado final que verán los lectores', 'ver la salida HTML del Markdown estilo GitHub (tablas, listas de tareas)'],
     faqs: [
@@ -48,6 +50,7 @@ export const markdownToHtmlL10n: ToolL10n = {
       'note': '🔒 100% clientseitig — unterstützt Überschriften, Listen, Code, Tabellen, Links, Fett, Kursiv.',
       'placeholder': '# Überschrift\n\nEtwas **fetter** Text.',
       'preview': 'Vorschau',
+      'tooLong': '⚠️ Die Eingabe überschreitet die unterstützte Größe (100.000 Zeichen). Kürze die Eingabe, um sie zu konvertieren.',
     },
     useCases: ['Markdown in sauberes HTML umwandeln mit Live-Vorschau', 'veröffentlichungs­fertiges HTML für Blog oder Doku vorbereiten', 'sicherstellen, was die Leser am Ende gerendert sehen', 'die HTML-Ausgabe von GitHub-Flavored-Markdown ansehen (Tabellen, Task-Listen)'],
     faqs: [

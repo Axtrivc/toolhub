@@ -179,7 +179,8 @@ export function LoremIpsumGeneratorClient() {
         {output && <CopyButton value={output} />}
       </div>
       {output && (
-        <div role="status" aria-live="polite" className="whitespace-pre-line rounded-xl border border-[rgb(var(--border))] bg-[rgb(var(--bg-card))] p-4 text-sm leading-relaxed text-[rgb(var(--text-muted))] shadow-sm">
+        // 20 段上限约两千词,不约束高度时换一批按钮会被推出视口;内部滚动解决
+        <div role="status" aria-live="polite" className="max-h-[480px] overflow-y-auto whitespace-pre-line rounded-xl border border-[rgb(var(--border))] bg-[rgb(var(--bg-card))] p-4 text-sm leading-relaxed text-[rgb(var(--text-muted))] shadow-sm">
           {output}
         </div>
       )}
@@ -290,6 +291,29 @@ export const RectangleCalculatorClient = makeCalculatorClient({
   note: '▭ Area = width × height. Diagonal uses the Pythagorean theorem.',
 })
 
+// ── 统计数据集解析(标准差 / 百分位共用)──
+// P-1 大输入防线:数字串粘贴无上限时,逐键 O(n)/O(n log n) 解析加图表全量
+// 重绘在十万级输入下会明显掉帧;超上限只统计前 1 万个,并在结果卡上以警告
+// 后缀提示(与 lcm-gcd 的「ignored: …」结果内联警告同一惯例)
+const DATASET_NUMS_MAX = 10000
+
+function parseDataset(
+  raw: string,
+  T?: (key: string, fb: string) => string,
+): { nums: number[]; notice: string } {
+  // 先做字符级粗切再 tokenize:1 万个数字平均长度远小于 24 字符,
+  // 巨型粘贴(MB 级)不再整体 split 出百万级 token 数组
+  const scanCharsMax = DATASET_NUMS_MAX * 24
+  const src = raw.length > scanCharsMax ? raw.slice(0, scanCharsMax) : raw
+  const tokens = src.split(/[\s,]+/).filter(Boolean)
+  const nums = tokens.slice(0, DATASET_NUMS_MAX).map(Number).filter((n) => isFinite(n))
+  const notice =
+    tokens.length > DATASET_NUMS_MAX && T
+      ? ` ⚠️ ${T('datasetTruncated', 'only the first 10,000 numbers are counted')}`
+      : ''
+  return { nums, notice }
+}
+
 // ── 标准差计算器 ──
 export const StandardDeviationCalculatorClient = makeCalculatorClient({
   slug: 'standard-deviation-calculator',
@@ -303,8 +327,9 @@ export const StandardDeviationCalculatorClient = makeCalculatorClient({
     { key: 'variance', label: 'Variance (population)' },
     { key: 'count', label: 'Count' },
   ],
-  compute: (v) => {
-    const nums = (v.numbers || '').split(/[\s,]+/).filter(Boolean).map(Number).filter((n) => isFinite(n))
+  compute: (v, locale) => {
+    const T = (key: string, fb: string) => tui('standard-deviation-calculator', locale, key, fb)
+    const { nums, notice } = parseDataset(v.numbers, T)
     if (nums.length === 0) return { mean: '—', stddev: '—', sampleStddev: '—', variance: '—', count: '0' }
     const n = nums.length
     const mean = nums.reduce((a, b) => a + b, 0) / n
@@ -318,12 +343,13 @@ export const StandardDeviationCalculatorClient = makeCalculatorClient({
       stddev: fmtNum(stddev, 4),
       sampleStddev: sampleVar === null ? '—' : fmtNum(Math.sqrt(sampleVar), 4),
       variance: fmtNum(variance, 4),
-      count: String(n),
+      // 截断提示挂在 Count 卡:主数字卡保持干净,又解释了为什么 count 有上限
+      count: String(n) + notice,
     }
   },
   chart: { kind: 'series', title: 'Your numbers vs mean' },
   series: (v) => {
-    const nums = (v.numbers || '').split(/[\s,]+/).filter(Boolean).map(Number).filter((n) => isFinite(n))
+    const { nums } = parseDataset(v.numbers)
     if (nums.length < 2) return null
     const mean = nums.reduce((a, b) => a + b, 0) / nums.length
     const step = Math.max(1, Math.ceil(nums.length / 12))
@@ -347,21 +373,26 @@ export const PercentileCalculatorClient = makeCalculatorClient({
     { key: 'p', label: 'Percentile', suffix: '%', default: '90', slider: { min: 0, max: 100, step: 1 } },
   ],
   outputs: [{ key: 'result', label: 'Percentile value', highlight: true }],
-  compute: (v) => {
-    const nums = (v.numbers || '').split(/[\s,]+/).filter(Boolean).map(Number).filter((n) => isFinite(n)).sort((a, b) => a - b)
-    if (nums.length === 0) return { result: '—' }
+  compute: (v, locale) => {
+    const T = (key: string, fb: string) => tui('percentile-calculator', locale, key, fb)
+    const { nums: unsorted, notice } = parseDataset(v.numbers, T)
+    if (unsorted.length === 0) return { result: '—' }
+    // 线性插值按位次取数,必须升序(与原实现一致)
+    const nums = unsorted.slice().sort((a, b) => a - b)
     const p = Math.min(100, Math.max(0, toNum(v.p)))
     // 线性插值法
     const rank = (p / 100) * (nums.length - 1)
     const lo = Math.floor(rank)
     const hi = Math.ceil(rank)
     const result = lo === hi ? nums[lo] : nums[lo] + (rank - lo) * (nums[hi] - nums[lo])
-    return { result: fmtNum(result, 4) }
+    // 唯一输出即主卡,截断提示随结果内联(lcm-gcd 同款警告后缀惯例)
+    return { result: fmtNum(result, 4) + notice }
   },
   chart: { kind: 'series', title: 'Distribution' },
   series: (v) => {
-    const nums = (v.numbers || '').split(/[\s,]+/).filter(Boolean).map(Number).filter((n) => isFinite(n)).sort((a, b) => a - b)
-    if (nums.length < 2) return null
+    const { nums: unsorted } = parseDataset(v.numbers)
+    if (unsorted.length < 2) return null
+    const nums = unsorted.slice().sort((a, b) => a - b)
     const p = Math.min(100, Math.max(0, toNum(v.p)))
     const rank = (p / 100) * (nums.length - 1)
     const lo = Math.floor(rank), hi = Math.ceil(rank)

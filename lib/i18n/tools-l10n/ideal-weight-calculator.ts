@@ -61,7 +61,7 @@ export const idealWeightCalculatorL10n: ToolL10n = {
       outHamwi: 'Fórmula de Hamwi',
       outBmi: 'Rango de IMC saludable (18.5-24.9)',
       emptyState: 'Introduce sexo y altura para ver tus estimaciones de peso ideal',
-      note: '⚖️ El peso ideal es una estimación aproximada. La masa muscular, el complexión y la salud importan más que un solo número.',
+      note: '⚖️ El peso ideal es una estimación aproximada. La masa muscular, la complexión y la salud importan más que un solo número.',
       gaugeTitle: 'Devine vs rango de IMC saludable',
       zoneUnder: 'Bajo el IMC saludable',
       zoneHealthy: 'Rango de IMC saludable',

@@ -157,8 +157,8 @@ export function MimeTypeLookupClient() {
         <table className="w-full text-left text-sm">
           <thead>
             <tr className="border-b" style={{ borderColor: 'rgb(var(--border))', backgroundColor: 'rgb(var(--bg-subtle))' }}>
-              <th className="px-4 py-2 font-medium" style={{ color: 'rgb(var(--text-muted))' }}>{L('thExt', 'Extension')}</th>
-              <th className="px-4 py-2 font-medium" style={{ color: 'rgb(var(--text-muted))' }}>{L('thMime', 'MIME type')}</th>
+              <th scope="col" className="px-4 py-2 font-medium" style={{ color: 'rgb(var(--text-muted))' }}>{L('thExt', 'Extension')}</th>
+              <th scope="col" className="px-4 py-2 font-medium" style={{ color: 'rgb(var(--text-muted))' }}>{L('thMime', 'MIME type')}</th>
               <th aria-hidden="true" className="w-16 px-4 py-2" />
             </tr>
           </thead>

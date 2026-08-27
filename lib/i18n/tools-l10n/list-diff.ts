@@ -18,6 +18,7 @@ export const listDiffL10n: ToolL10n = {
       'placeholder': '每行一项…',
       'privacyNote': '🔒 100% 在客户端——列表在本地比较。默认会折叠每个列表内的重复项。',
       'trimWhitespace': '修剪空白',
+      'tooLong': '⚠️ 输入超过支持的大小(每个列表 100,000 字符)。请缩减两份列表后再比较。',
       'union': '并集(全部唯一)',
     },
     useCases: [
@@ -45,6 +46,7 @@ export const listDiffL10n: ToolL10n = {
       'placeholder': 'Un elemento por línea…',
       'privacyNote': '🔒 100% en el cliente — las listas se comparan localmente. Los duplicados dentro de cada lista se colapsan por defecto.',
       'trimWhitespace': 'Recortar espacios',
+      'tooLong': '⚠️ La entrada supera el tamaño admitido (100.000 caracteres por lista). Recorta ambas listas para compararlas.',
       'union': 'Unión (todos únicos)',
     },
     useCases: [
@@ -72,6 +74,7 @@ export const listDiffL10n: ToolL10n = {
       'placeholder': 'Ein Eintrag pro Zeile…',
       'privacyNote': '🔒 100% clientseitig — Listen werden lokal verglichen. Duplikate innerhalb jeder Liste werden standardmäßig zusammengefasst.',
       'trimWhitespace': 'Leerzeichen trimmen',
+      'tooLong': '⚠️ Die Eingabe überschreitet die unterstützte Größe (100.000 Zeichen pro Liste). Kürze beide Listen, um sie zu vergleichen.',
       'union': 'Vereinigung (alle eindeutig)',
     },
     useCases: [

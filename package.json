@@ -8,7 +8,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "tsc --noEmit",
-    "submit-urls": "node scripts/submit-urls.mjs"
+    "submit-urls": "node scripts/submit-urls.mjs",
+    "smoke": "node scripts/tool-smoke.mjs"
   },
   "dependencies": {
     "@types/qrcode": "^1.5.6",

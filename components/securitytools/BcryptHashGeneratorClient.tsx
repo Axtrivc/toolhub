@@ -275,9 +275,10 @@ export function BcryptHashGeneratorClient() {
 
       {/* 校验区 */}
       <div className="rounded-lg border p-4" style={{ borderColor: 'rgb(var(--border))' }}>
-        <h3 className="mb-3 text-sm font-semibold" style={{ color: 'rgb(var(--text))' }}>
+        {/* A-2:组件内标题从 h2 起(ToolLayout 提供 h1);样式由类名控制,改标签不改观感 */}
+        <h2 className="mb-3 text-sm font-semibold" style={{ color: 'rgb(var(--text))' }}>
           {L('verifyHeading', 'Verify a password against a hash')}
-        </h3>
+        </h2>
         <div className="space-y-3">
           <div>
             <label htmlFor="bh-verify-hash" className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>

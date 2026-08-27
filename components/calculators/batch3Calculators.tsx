@@ -326,7 +326,7 @@ export function CalorieCalculatorClient() {
           />
         </>
       ) : (
-        <div className="rounded-lg border-2 border-dashed p-6 text-center text-sm" style={{ borderColor: 'rgb(var(--border-strong))', color: 'rgb(var(--text-faint))' }}>
+        <div role="status" aria-live="polite" className="rounded-lg border-2 border-dashed p-6 text-center text-sm" style={{ borderColor: 'rgb(var(--border-strong))', color: 'rgb(var(--text-faint))' }}>
           {L('emptyState', 'Enter your weight, height, age, and activity level to see your calorie targets')}
         </div>
       )}
@@ -482,7 +482,7 @@ export function BMRCalculatorClient() {
           />
         </>
       ) : (
-        <div className="rounded-lg border-2 border-dashed p-6 text-center text-sm" style={{ borderColor: 'rgb(var(--border-strong))', color: 'rgb(var(--text-faint))' }}>
+        <div role="status" aria-live="polite" className="rounded-lg border-2 border-dashed p-6 text-center text-sm" style={{ borderColor: 'rgb(var(--border-strong))', color: 'rgb(var(--text-faint))' }}>
           {L('emptyState', 'Enter your gender, age, weight, and height to calculate your BMR')}
         </div>
       )}
@@ -623,7 +623,7 @@ export function WaterIntakeCalculatorClient() {
           />
         </>
       ) : (
-        <div className="rounded-lg border-2 border-dashed p-6 text-center text-sm" style={{ borderColor: 'rgb(var(--border-strong))', color: 'rgb(var(--text-faint))' }}>
+        <div role="status" aria-live="polite" className="rounded-lg border-2 border-dashed p-6 text-center text-sm" style={{ borderColor: 'rgb(var(--border-strong))', color: 'rgb(var(--text-faint))' }}>
           {L('emptyState', 'Enter your weight, exercise, and climate to estimate your daily water needs')}
         </div>
       )}
@@ -781,7 +781,7 @@ export function IdealWeightCalculatorClient() {
           />
         </>
       ) : (
-        <div className="rounded-lg border-2 border-dashed p-6 text-center text-sm" style={{ borderColor: 'rgb(var(--border-strong))', color: 'rgb(var(--text-faint))' }}>
+        <div role="status" aria-live="polite" className="rounded-lg border-2 border-dashed p-6 text-center text-sm" style={{ borderColor: 'rgb(var(--border-strong))', color: 'rgb(var(--text-faint))' }}>
           {L('emptyState', 'Enter your gender and height to see your ideal weight estimates')}
         </div>
       )}

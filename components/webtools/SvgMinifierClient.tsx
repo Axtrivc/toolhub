@@ -41,6 +41,9 @@ function byteSize(s: string): number {
   return new TextEncoder().encode(s).length
 }
 
+/** 上传文件上限(与上传类工具的 20MB 门一致):超大 SVG 会放大逐条正则管线的内存/耗时 */
+const MAX_FILE_BYTES = 20 * 1024 * 1024
+
 function formatBytes(bytes: number): string {
   if (bytes < 1024) return `${bytes} B`
   return `${(bytes / 1024).toFixed(1)} KB`
@@ -153,6 +156,10 @@ export function SvgMinifierClient() {
     const looksSvg = file.type === 'image/svg+xml' || /\.svg$/i.test(file.name)
     if (!looksSvg) {
       setError(L('errUploadSvg', 'Please upload an .svg file (or paste SVG markup into the textarea).'))
+      return
+    }
+    if (file.size > MAX_FILE_BYTES) {
+      setError(L('errFileTooLarge', 'File is too large — SVG files up to 20 MB are supported.'))
       return
     }
     readerRef.current?.abort()
@@ -272,7 +279,7 @@ export function SvgMinifierClient() {
 
       {/* 错误提示 */}
       {error && (
-        <div className="rounded-lg border border-red-200 dark:border-red-800/60 bg-red-50 dark:bg-red-950/30 p-4 text-sm text-red-700 dark:text-red-300">
+        <div role="alert" className="rounded-lg border border-red-200 dark:border-red-800/60 bg-red-50 dark:bg-red-950/30 p-4 text-sm text-red-700 dark:text-red-300">
           ⚠️ {error}
         </div>
       )}

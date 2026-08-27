@@ -134,23 +134,27 @@ export function NumeralSystemConverterClient() {
         </div>
       </div>
 
-      {results ? (
-        <div role="status" aria-live="polite" className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-          {(Object.keys(results) as Base[]).map((b) => (
-            <ResultCard
-              key={b}
-              label={BASE_NAMES[b]}
-              value={<span className="tabular-nums">{formatForDisplay(b, results[b])}</span>}
-              highlight={b === '10'}
-              sublabel={baseLabel(b)}
-            />
-          ))}
-        </div>
-      ) : (
-        <div className="rounded-lg border-2 border-dashed p-6 text-center text-sm" style={{ borderColor: 'rgb(var(--border-strong))', color: 'rgb(var(--text-faint))' }}>
-          {L('emptyState', 'Enter a valid number for the selected base')}
-        </div>
-      )}
+      {/* A-3:结果与「非法输入」空态放同一 live region —— 之前只有结果分支自带
+          role=status,清空/输错时切换出的空态文本不播报;外包一层统一播报 */}
+      <div role="status" aria-live="polite">
+        {results ? (
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+            {(Object.keys(results) as Base[]).map((b) => (
+              <ResultCard
+                key={b}
+                label={BASE_NAMES[b]}
+                value={<span className="tabular-nums">{formatForDisplay(b, results[b])}</span>}
+                highlight={b === '10'}
+                sublabel={baseLabel(b)}
+              />
+            ))}
+          </div>
+        ) : (
+          <div className="rounded-lg border-2 border-dashed p-6 text-center text-sm" style={{ borderColor: 'rgb(var(--border-strong))', color: 'rgb(var(--text-faint))' }}>
+            {L('emptyState', 'Enter a valid number for the selected base')}
+          </div>
+        )}
+      </div>
 
       {/* 结果操作行 - Copy 复制四进制结果(原始值),Download 下载结果 */}
       <ResultActions

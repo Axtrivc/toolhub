@@ -30,6 +30,16 @@ function formatBytes(bytes: number): string {
   return `${(bytes / (1024 * 1024)).toFixed(2)} MB`
 }
 
+/**
+ * 画布安全上限(与 image-resizer 同款):单边 ≤ 8192px 且总像素 ≤ 40MP。
+ * 超大图(如 10000×10000 的 PNG)画进 canvas 占数百 MB RGBA,部分浏览器
+ * 直接返回空白/null 或整页 OOM —— 解码后、绘制前拦截并明确报错。
+ */
+const MAX_SIDE = 8192
+const MAX_PIXELS = 40 * 1000 * 1000
+/** 上传文件上限(与上传类工具的 20MB 门一致) */
+const MAX_FILE_BYTES = 20 * 1024 * 1024
+
 export function PngToWebpConverterClient() {
   const { locale } = useApp()
   const L = (key: string, fb: string) => tui('png-to-webp-converter', locale, key, fb)
@@ -53,6 +63,10 @@ export function PngToWebpConverterClient() {
     setUnsupported(false)
     if (file.type !== 'image/png' && file.type !== 'image/jpeg') {
       setError(L('errUploadPngJpg', 'Please upload a PNG or JPG image file.'))
+      return
+    }
+    if (file.size > MAX_FILE_BYTES) {
+      setError(L('errFileTooLarge', 'File is too large — images up to 20 MB are supported.'))
       return
     }
     readerRef.current?.abort()
@@ -119,6 +133,11 @@ export function PngToWebpConverterClient() {
   useEffect(() => {
     const img = imgRef.current
     if (!img || !source || source.width === 0) return
+    // 画布上限校验(P-3):超大图绘制前拦截,避免静默空白/OOM
+    if (img.naturalWidth > MAX_SIDE || img.naturalHeight > MAX_SIDE || img.naturalWidth * img.naturalHeight > MAX_PIXELS) {
+      setError(L('errImageTooLarge', 'This image is too large to convert — keep each side at 8192 px or below and the total under 40 megapixels.'))
+      return
+    }
     let cancelled = false
     const canvas = document.createElement('canvas')
     canvas.width = img.naturalWidth
@@ -203,7 +222,7 @@ export function PngToWebpConverterClient() {
 
       {/* 错误提示 */}
       {error && (
-        <div className="rounded-lg border border-red-200 dark:border-red-800/60 bg-red-50 dark:bg-red-950/30 p-4 text-sm text-red-700 dark:text-red-300">
+        <div role="alert" className="rounded-lg border border-red-200 dark:border-red-800/60 bg-red-50 dark:bg-red-950/30 p-4 text-sm text-red-700 dark:text-red-300">
           ⚠️ {error}
         </div>
       )}

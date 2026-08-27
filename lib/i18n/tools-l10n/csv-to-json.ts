@@ -7,6 +7,7 @@ import type { ToolL10n } from '../tool-l10n'
 export const csvToJsonL10n: ToolL10n = {
   zh: {
     ui: {
+      inputTooLarge: '⚠️ 输入过大——支持规模最多 20 万字符。请裁剪输入后再计算。',
       defaultInput: '姓名,年龄,城市\n张三,30,北京\n李四,25,上海',
       inputLabel: 'CSV(含表头行)',
       outputLabel: 'JSON 数组',
@@ -24,6 +25,7 @@ export const csvToJsonL10n: ToolL10n = {
   },
   es: {
     ui: {
+      inputTooLarge: '⚠️ Entrada demasiado grande: el tamaño admitido es de hasta 200 000 caracteres. Recorta la entrada para calcular.',
       defaultInput: 'nombre,edad,ciudad\nJuan,30,Madrid\nAna,25,Barcelona',
       inputLabel: 'CSV (con fila de encabezado)',
       outputLabel: 'Array JSON',
@@ -41,6 +43,7 @@ export const csvToJsonL10n: ToolL10n = {
   },
   de: {
     ui: {
+      inputTooLarge: '⚠️ Eingabe zu groß – die unterstützte Größe beträgt maximal 200.000 Zeichen. Kürze die Eingabe.',
       defaultInput: 'name,alter,stadt\nMax,30,Berlin\nAnna,25,Hamburg',
       inputLabel: 'CSV (mit Kopfzeile)',
       outputLabel: 'JSON-Array',

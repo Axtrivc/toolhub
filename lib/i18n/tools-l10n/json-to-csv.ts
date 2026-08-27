@@ -7,6 +7,7 @@ import type { ToolL10n } from '../tool-l10n'
 export const jsonToCsvL10n: ToolL10n = {
   zh: {
     ui: {
+      inputTooLarge: '⚠️ 输入过大——支持规模最多 20 万字符。请裁剪输入后再计算。',
       defaultInput: '[{"姓名":"张三","年龄":30},{"姓名":"李四","年龄":25}]',
       inputLabel: '对象 JSON 数组',
       outputLabel: 'CSV',
@@ -24,6 +25,7 @@ export const jsonToCsvL10n: ToolL10n = {
   },
   es: {
     ui: {
+      inputTooLarge: '⚠️ Entrada demasiado grande: el tamaño admitido es de hasta 200 000 caracteres. Recorta la entrada para calcular.',
       defaultInput: '[{"nombre":"Juan","edad":30},{"nombre":"Ana","edad":25}]',
       inputLabel: 'Array JSON de objetos',
       outputLabel: 'CSV',
@@ -41,6 +43,7 @@ export const jsonToCsvL10n: ToolL10n = {
   },
   de: {
     ui: {
+      inputTooLarge: '⚠️ Eingabe zu groß – die unterstützte Größe beträgt maximal 200.000 Zeichen. Kürze die Eingabe.',
       defaultInput: '[{"name":"Max","alter":30},{"name":"Anna","alter":25}]',
       inputLabel: 'JSON-Array von Objekten',
       outputLabel: 'CSV',

@@ -17,6 +17,7 @@ export const percentileCalculatorL10n: ToolL10n = {
       'in.p': '百分位数',
       'inSuffix.p': '%',
       'out.result': '百分位值',
+      'datasetTruncated': '仅统计前 10,000 个数字',
       note: '📈 第 90 百分位表示 90% 的数值低于此数。采用线性插值(inclusive 口径,同 Excel 的 PERCENTILE.INC)。常用于考试成绩和性能指标。',
     },
     useCases: [
@@ -41,6 +42,7 @@ export const percentileCalculatorL10n: ToolL10n = {
       'in.p': 'Percentil',
       'inSuffix.p': '%',
       'out.result': 'Valor del percentil',
+      'datasetTruncated': 'solo se cuentan los primeros 10.000 números',
       note: '📈 El percentil 90 significa que el 90 % de los valores están por debajo de este número. Usa interpolación lineal (método inclusivo, igual que PERCENTILE.INC de Excel). Común en notas de exámenes y métricas de rendimiento.',
     },
     useCases: [
@@ -65,6 +67,7 @@ export const percentileCalculatorL10n: ToolL10n = {
       'in.p': 'Perzentil',
       'inSuffix.p': '%',
       'out.result': 'Perzentilwert',
+      'datasetTruncated': 'nur die ersten 10.000 Zahlen werden gezählt',
       note: '📈 Das 90. Perzentil bedeutet, dass 90 % der Werte unter dieser Zahl liegen. Verwendet lineare Interpolation (inklusive Methode, wie Excel PERCENTILE.INC). Häufig bei Prüfungsergebnissen und Leistungskennzahlen.',
     },
     useCases: [

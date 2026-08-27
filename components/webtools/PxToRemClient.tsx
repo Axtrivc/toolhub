@@ -178,10 +178,10 @@ export function PxToRemClient() {
           <table className="w-full text-left text-xs">
             <thead style={{ backgroundColor: 'rgb(var(--bg-subtle))' }}>
               <tr>
-                <th className="px-3 py-2 text-right font-semibold text-slate-600 dark:text-slate-300">PX</th>
-                <th className="px-3 py-2 text-right font-semibold text-slate-600 dark:text-slate-300">REM</th>
-                <th className="px-3 py-2 text-right font-semibold text-slate-600 dark:text-slate-300">{L('emParentRootHeader', 'EM (parent = root)')}</th>
-                <th className="px-3 py-2 font-semibold text-slate-600 dark:text-slate-300">{L('sizeBarHeader', 'Size')}</th>
+                <th scope="col" className="px-3 py-2 text-right font-semibold text-slate-600 dark:text-slate-300">PX</th>
+                <th scope="col" className="px-3 py-2 text-right font-semibold text-slate-600 dark:text-slate-300">REM</th>
+                <th scope="col" className="px-3 py-2 text-right font-semibold text-slate-600 dark:text-slate-300">{L('emParentRootHeader', 'EM (parent = root)')}</th>
+                <th scope="col" className="px-3 py-2 font-semibold text-slate-600 dark:text-slate-300">{L('sizeBarHeader', 'Size')}</th>
               </tr>
             </thead>
             <tbody>

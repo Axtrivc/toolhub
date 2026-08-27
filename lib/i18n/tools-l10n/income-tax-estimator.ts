@@ -46,7 +46,7 @@ export const incomeTaxEstimatorL10n: ToolL10n = {
     },
     useCases: ['die Einkommensteuer mit den US-Bundestranchen 2026 schätzen', 'das Nettoeinkommen berechnen (effektiver + Grenzsteuersatz)', 'die Steuer zwischen Alleinveranlagung und Zusammenveranlagung vergleichen', 'sehen, in welcher Steuertranche du bist'],
     faqs: [
-      { q: 'Warum zeigt meine Lohnabrechnung mehr einbehaltene Steuer?', a: 'Argeber behalten nach deiner voraussichtlichen Jahressteuer plus einer Sicherheitsmarge ein. Die Einbehalte sind Schätzungen; deine tatsächliche Steuer wird bei der Steuererklärung verrechnet. Zu viel gezahlt führt zu einer Rückerstattung.' },
+      { q: 'Warum zeigt meine Lohnabrechnung mehr einbehaltene Steuer?', a: 'Arbeitgeber behalten nach deiner voraussichtlichen Jahressteuer plus einer Sicherheitsmarge ein. Die Einbehalte sind Schätzungen; deine tatsächliche Steuer wird bei der Steuererklärung verrechnet. Zu viel gezahlt führt zu einer Rückerstattung.' },
     ],
     ui: {
       'in.income': 'Jahreseinkommen', 'in.filing': 'Steuerklasse',

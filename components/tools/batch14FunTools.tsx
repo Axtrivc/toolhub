@@ -73,7 +73,7 @@ export function DiceRollerClient() {
 
       <button type="button" onClick={roll}
         className="btn btn-primary w-full rounded-xl py-4 text-lg font-bold">
-        🎲 {L('rollBtn', `Roll ${nDice}× d${sides}`)}
+        🎲 {L('rollBtn', 'Roll {n}× d{s}').replace('{n}', String(nDice)).replace('{s}', String(sides))}
       </button>
 
       {rolls.length > 0 && (
@@ -228,7 +228,7 @@ export function WheelSpinnerClient() {
               type="button" onClick={spin} disabled={items.length < 2 || spinning}
               className="absolute left-1/2 top-1/2 z-10 h-16 w-16 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white text-sm font-bold text-slate-800 shadow-lg transition hover:scale-110 disabled:cursor-not-allowed disabled:opacity-60 dark:bg-slate-800 dark:text-slate-100"
             >
-              SPIN
+              {L('spin', 'Spin')}
             </button>
           </div>
           {winner && !spinning && (
@@ -304,12 +304,18 @@ export function MorseCodeTranslatorClient() {
   // 复用同一个 AudioContext:浏览器每页只允许创建约 6 个,每次播放新建
   // 会在第 7 次左右耗尽配额且被 catch 静默吞掉,Play 按钮永久失效
   const audioRef = useRef<AudioContext | null>(null)
+  // 播放中状态:Web Audio 是提前调度、同步返回,没有天然"播完"回调 ——
+  // 取最后一个音符的 stop 时间算出总时长,期间禁用按钮并换文案
+  // (快速连点不再叠着把整段声音再排一遍),unmount 时清掉句柄
+  const [playing, setPlaying] = useState(false)
+  const playTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
+  useEffect(() => () => { if (playTimer.current !== null) clearTimeout(playTimer.current) }, [])
 
   const output = useMemo(() => (mode === 'encode' ? encodeMorse(input) : decodeMorse(input)), [mode, input])
 
   // 音频播放:标准点=1 单位 @ 600Hz,划=3,符号间 1,字符间 3,词间 7
   const play = useCallback(() => {
-    if (!output || mode !== 'encode') return
+    if (!output || mode !== 'encode' || playing) return
     try {
       const Ctx = window.AudioContext ?? (window as unknown as { webkitAudioContext?: typeof AudioContext }).webkitAudioContext
       if (!Ctx) return
@@ -322,6 +328,7 @@ export function MorseCodeTranslatorClient() {
       if (ctx.state === 'suspended') void ctx.resume()
       const unit = 0.09
       let t = ctx.currentTime + 0.1
+      let lastStop = t
       for (const tok of output.split(' ')) {
         if (tok === '/') { t += unit * 4; continue }
         for (const sym of tok) {
@@ -335,12 +342,19 @@ export function MorseCodeTranslatorClient() {
           gain.gain.setValueAtTime(0, t + dur)
           osc.start(t)
           osc.stop(t + dur)
+          lastStop = t + dur
           t += dur + unit
         }
         t += unit * 2
       }
+      if (playTimer.current !== null) clearTimeout(playTimer.current)
+      setPlaying(true)
+      playTimer.current = setTimeout(
+        () => setPlaying(false),
+        Math.max(0, (lastStop - ctx.currentTime) * 1000),
+      )
     } catch { /* audio unavailable */ }
-  }, [output, mode])
+  }, [output, mode, playing])
 
   return (
     <div className="space-y-5">
@@ -373,7 +387,10 @@ export function MorseCodeTranslatorClient() {
             <span className="text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>{L('resultLabel', 'Result')}</span>
             <div className="flex gap-2">
               {mode === 'encode' && (
-                <button type="button" onClick={play} className="btn btn-secondary">▶ {L('play', 'Play audio')}</button>
+                <button type="button" onClick={play} disabled={playing}
+                  className="btn btn-secondary disabled:cursor-not-allowed disabled:opacity-60">
+                  {playing ? `♪ ${L('playPlaying', 'Playing…')}` : `▶ ${L('play', 'Play audio')}`}
+                </button>
               )}
               <CopyButton value={output} />
             </div>
@@ -447,7 +464,11 @@ export function TypingSpeedTestClient() {
 
   return (
     <div className="space-y-5">
-      <div className="rounded-lg border p-4 font-mono text-base leading-relaxed" style={{ borderColor: 'rgb(var(--border))', backgroundColor: 'rgb(var(--bg-subtle))' }}>
+      {/* 每字符一个 span 的逐字高亮会被屏读软件按字母逐个朗读成噪音(A-4):
+          渲染细节容器 aria-hidden,另用 sr-only 段落给出原始句子,
+          屏读用户仍能拿到需要抄写的文本 */}
+      <p className="sr-only">{prompt}</p>
+      <div aria-hidden="true" className="rounded-lg border p-4 font-mono text-base leading-relaxed" style={{ borderColor: 'rgb(var(--border))', backgroundColor: 'rgb(var(--bg-subtle))' }}>
         {[...prompt].map((ch, i) => {
           const state = i < typed.length ? (typed[i] === ch ? 'ok' : 'bad') : 'pending'
           return (
@@ -554,9 +575,10 @@ export function RandomTeamGeneratorClient() {
           {/* 队数 > 人数时轮流分配会产生空队:渲染前滤掉并连续编号,避免出现空白卡片 */}
           {teams.filter((team) => team.length > 0).map((team, i) => (
             <div key={i} className="rounded-xl border p-4" style={{ borderColor: 'rgb(var(--border))', backgroundColor: 'rgb(var(--bg-card))' }}>
-              <h3 className="mb-2 text-sm font-bold uppercase tracking-wide" style={{ color: 'rgb(var(--text-muted))' }}>
+              {/* A-2:ToolLayout 只提供 h1,组件内首个标题层级应为 h2 */}
+              <h2 className="mb-2 text-sm font-bold uppercase tracking-wide" style={{ color: 'rgb(var(--text-muted))' }}>
                 {L('teamN', 'Team {n}').replace('{n}', String(i + 1))}
-              </h3>
+              </h2>
               <ul className="space-y-1 text-sm" style={{ color: 'rgb(var(--text))' }}>
                 {team.map((n, idx) => <li key={`${idx}-${n}`}>• {n}</li>)}
               </ul>

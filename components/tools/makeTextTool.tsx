@@ -53,6 +53,12 @@ export interface TextToolConfig {
   note?: string
   /** 是否显示字符/单词统计(默认 true) */
   showStats?: boolean
+  /**
+   * 输入长度门控(字符数,R6 授权增强):粘贴超大文本时同步 transform 会冻结 UI,
+   * 超过阈值则跳过 transform,输出走既有 ⚠️ 通道提示裁剪。
+   * 可选字段:不填 = 完全向后兼容(不限长)。
+   */
+  maxInputChars?: number
 }
 
 export function makeTextTool(config: TextToolConfig): ComponentType {
@@ -79,6 +85,16 @@ export function makeTextTool(config: TextToolConfig): ComponentType {
     const output = useMemo(() => {
       if (!mounted) return ''
       try {
+        // P-1 大输入防线:超过门控阈值直接走 ⚠️ 通道,不同步执行 transform
+        if (config.maxInputChars !== undefined && input.length > config.maxInputChars) {
+          const n = config.maxInputChars.toLocaleString('en-US')
+          return tui(
+            config.slug ?? '',
+            locale,
+            'inputTooLarge',
+            `⚠️ Input is too large — the supported size is up to ${n} characters. Trim the input to compute.`,
+          )
+        }
         return config.transform(input, locale)
       } catch {
         return ''

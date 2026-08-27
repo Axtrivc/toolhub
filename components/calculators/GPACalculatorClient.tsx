@@ -51,11 +51,19 @@ export function GPACalculatorClient() {
   const addCourse = () =>
     setCourses([...courses, { id: nextId.current++, name: '', credits: '3', grade: 'A' }])
 
-  const removeCourse = (id: number) =>
-    setCourses(courses.length > 1 ? courses.filter((c) => c.id !== id) : courses)
-
   const updateCourse = (id: number, patch: Partial<Course>) =>
     setCourses(courses.map((c) => (c.id === id ? { ...c, ...patch } : c)))
+
+  // A-5 焦点流:删除行后按钮随行卸载,焦点会丢到 body —— 显式把焦点移到
+  // 相邻(优先下一行,末行则上一行)课程行的第一个输入框上
+  const removeCourse = (id: number, currentRow: HTMLElement | null) => {
+    if (courses.length <= 1) return
+    const nextRow =
+      (currentRow?.nextElementSibling as HTMLElement | null) ??
+      (currentRow?.previousElementSibling as HTMLElement | null)
+    setCourses(courses.filter((c) => c.id !== id))
+    requestAnimationFrame(() => nextRow?.querySelector<HTMLElement>('input')?.focus())
+  }
 
   const result = useMemo(() => {
     let totalCredits = 0
@@ -92,7 +100,7 @@ export function GPACalculatorClient() {
         </div>
 
         {courses.map((c) => (
-          <div key={c.id} className="grid grid-cols-12 gap-2 rounded-lg border p-2" style={{ borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rgb(var(--bg-card))' }}>
+          <div key={c.id} data-course-row className="grid grid-cols-12 gap-2 rounded-lg border p-2" style={{ borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rgb(var(--bg-card))' }}>
             <input
               type="text"
               value={c.name}
@@ -107,13 +115,15 @@ export function GPACalculatorClient() {
               onChange={(e) => updateCourse(c.id, { credits: e.target.value })}
               min="0"
               step="0.5"
-              aria-label={L('credits', 'Credits')}
+              // 动态行 A-1:credits/grade 同名控件逐行重复,带上行 id 与课程名的
+              // aria-label 口径一致,屏幕阅读器可区分「第几行的学分/成绩」
+              aria-label={`${L('credits', 'Credits')} ${c.id}`}
               className="col-span-5 rounded-md border px-3 py-2.5 text-sm tabular-nums outline-none focus:border-brand-500 sm:col-span-2 sm:px-2 sm:py-1.5" style={{ borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rgb(var(--bg-card))', color: 'rgb(var(--text))' }}
             />
             <select
               value={c.grade}
               onChange={(e) => updateCourse(c.id, { grade: e.target.value })}
-              aria-label={L('grade', 'Grade')}
+              aria-label={`${L('grade', 'Grade')} ${c.id}`}
               className="col-span-7 rounded-md border px-3 py-2.5 text-sm outline-none focus:border-brand-500 sm:col-span-3 sm:px-2 sm:py-1.5" style={{ borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rgb(var(--bg-card))', color: 'rgb(var(--text))' }}
             >
               {Object.keys(GRADE_POINTS).map((g) => (
@@ -124,7 +134,9 @@ export function GPACalculatorClient() {
             </select>
             <button
               type="button"
-              onClick={() => removeCourse(c.id)}
+              onClick={(e) =>
+                removeCourse(c.id, e.currentTarget.closest('[data-course-row]'))
+              }
               disabled={courses.length <= 1}
               aria-label={`${L('remove', 'Remove')} ${L('courseName', 'Course name')} ${c.id}`}
               className="col-span-12 rounded-md bg-red-50 px-3 py-2.5 text-sm text-red-600 hover:bg-red-100 disabled:cursor-not-allowed disabled:opacity-40 sm:col-span-2 sm:px-2 sm:py-1.5 sm:text-xs dark:bg-red-950/40 dark:text-red-300 dark:hover:bg-red-900/50"

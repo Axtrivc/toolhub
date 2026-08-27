@@ -185,6 +185,7 @@ export function CssShadowGeneratorClient() {
                     type="color"
                     value={shadow.color}
                     onChange={(e) => updateShadow('color', e.target.value)}
+                    aria-label={L('shadowColorAria', 'Shadow color')}
                     className="h-8 w-12 cursor-pointer rounded border-0 bg-transparent p-0"
                   />
                 </div>
@@ -225,6 +226,7 @@ export function CssShadowGeneratorClient() {
                     type="color"
                     value={glass.borderColor}
                     onChange={(e) => updateGlass('borderColor', e.target.value)}
+                    aria-label={L('glassBorderColorAria', 'Glass border color')}
                     className="h-8 w-12 cursor-pointer rounded border-0 bg-transparent p-0"
                   />
                 </div>

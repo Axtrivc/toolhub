@@ -25,6 +25,8 @@ export const cssShadowGeneratorL10n: ToolL10n = {
       'opacity': '不透明度',
       'previewLabel': '预览',
       'spread': '扩展',
+      'shadowColorAria': '阴影颜色',
+      'glassBorderColorAria': '玻璃边框颜色',
     },
     useCases: [
       '用滑块调出理想的 box-shadow',
@@ -58,6 +60,8 @@ export const cssShadowGeneratorL10n: ToolL10n = {
       'opacity': 'Opacidad',
       'previewLabel': 'Vista previa',
       'spread': 'Extensión',
+      'shadowColorAria': 'Color de la sombra',
+      'glassBorderColorAria': 'Color del borde del cristal',
     },
     useCases: [
       'crear el box-shadow ideal con controles deslizantes',
@@ -91,6 +95,8 @@ export const cssShadowGeneratorL10n: ToolL10n = {
       'opacity': 'Deckkraft',
       'previewLabel': 'Vorschau',
       'spread': 'Ausbreitung',
+      'shadowColorAria': 'Schattenfarbe',
+      'glassBorderColorAria': 'Glas-Rahmenfarbe',
     },
     useCases: [
       'den idealen box-shadow mit Schiebereglern erstellen',

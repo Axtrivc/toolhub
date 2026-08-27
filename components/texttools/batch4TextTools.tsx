@@ -45,7 +45,17 @@ export const HTMLTagStripperClient = makeTextTool({
   inputLabel: 'HTML source',
   outputLabel: 'Plain text (tags removed)',
   defaultInput: '<h1>Title</h1><p>This is <strong>bold</strong> text.</p>',
-  transform: (t) => {
+  transform: (t, locale) => {
+    // DOMParser 全文档解析的耗时随输入线性增长,粘贴多 MB HTML 后每次击键
+    // 都会全量重解析(工厂无防抖):超长输入直接友好拦截(text-diff 同款横幅式提示)
+    if (t.length > 100_000) {
+      return tui(
+        'html-tag-stripper',
+        locale,
+        'tooLongNote',
+        '⚠️ Input is too large to process here — keep it under about 100,000 characters.',
+      )
+    }
     // 用 DOMParser 解析(浏览器内运行,纯客户端):
     // 1) 先移除 script/style/noscript —— textContent 会原样带上其内部代码;
     // 2) 块级元素结尾补换行 —— 否则 <p>a</p><p>b</p> 粘连成一行。

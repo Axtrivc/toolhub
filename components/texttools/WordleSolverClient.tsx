@@ -10,12 +10,91 @@ import { tui } from '@/lib/i18n/tool-l10n'
  *
  * 两个模式:
  *  - Solver:5 个绿格定位字母 + 必含字母(黄)+ 排除字母(灰)实时过滤词典;
- *    灰色字母若同时出现在绿/黄中,则仅限制其不得出现在非绿格位置(重复字母场景)。
+ *    黄色按重数下限强制(黄了两次就必须含两次);灰色字母若同时出现在绿/黄中,
+ *    则仅限制其总出现次数不得超过已确认次数(重复字母场景的下限+上限并存)。
+ *    结果按常见度分档排序:高频词置顶,档内保持字母序。
  *  - Anagram:输入 3-10 个字母,找词典中可由其拼出(多重集子集)的词,按长度降序。
  * 支持粘贴补充词表并入本会话词典。100% 本地,无网络请求。
  */
 
 const MAX_SHOWN = 200
+
+// ──────── 常见词频次档(仅供展示排序,不影响过滤结果)────────
+// ~200 个公认高频的 Wordle 开局/答案词(adieu 类经典开局 + 常见答案),
+// 硬编码即够,不引外部数据。整理池做过等距抽稀以控制档体积——抽稀只影响
+// 常见度标注的覆盖广度,不影响任何过滤正确性。纯字母序会让最优猜测沉底,
+// common 档置顶、同档内保持字母序。
+const COMMON_WORD_SOURCE = `
+about acute agent album along angle apply armor asset audio aware badge
+beach begin bench blame blend blink bloom blush boost brake break bride
+broke brush cabin candy cease cheap chess child clear cliff cloth coast
+count crack crate crazy crisp crown crust death diary draft dress drink
+early eight elite entry error exact extra favor ferry fight flame flick
+flour forty fresh funny glass glory grade graph grave grief group guess
+habit heavy hobby hotel humor index irate jewel judge knock labor learn
+legal limit logic loyal magic marry mayor mercy metal money motel movie
+naval niece noise ocean olive other owner panic patch peach phone piece
+pixel plain plate poker press prime probe prove pupil queen quick quota
+raise range reach regal relic reset rhyme rifle rinse roast rogue round
+salsa sauce scary score sense shade share sheet shine shoot shove silly
+skirt sleek small smell snake solar sorry space spear spike split spray
+stack stake stand steak steel stick stock storm strap stump suite swear
+sweet syrup talon tempo tenth these thigh three tight today tonic total
+towel trade trait tribe troll trust twice under until usher valid venue
+vigil virus vivid weary weigh wheel white witch women worst write yeast
+youth
+`
+const COMMON_WORD_SET: Set<string> = new Set(
+  COMMON_WORD_SOURCE.split(/\s+/).filter(Boolean),
+)
+
+/**
+ * Solver 过滤核心(纯函数,不碰组件状态,便于独立验证)。
+ * 三类约束并存:
+ * - greens 定位:w[i] 必须等于该位绿字母;
+ * - yellows 重数下限:每字母按黄格出现次数计数 mustCount,候选词内出现次数必须 ≥ 该数
+ *   (参考 Anagram 模式的 need-map 多重集写法;"含一次"是最 n=1 的退化情形);
+ * - greys 计数上限:灰字母若同时是已确认(绿/黄)字母,总出现次数不得超过已确认次数
+ *   (真实反馈语义:多余的重复字母才会被标灰),纯灰字母则一次都不许有(cap=0 自然覆盖)。
+ * 下限与上限对同一字母同时生效时给出"恰好 k 次"的精确窗口。
+ * 排序:common 档置顶,档内字母序。
+ */
+function solverFilter(
+  dictionary: string[],
+  greens: string[],
+  yellows: string,
+  greys: string,
+): string[] {
+  const g = greens.map((x) => x.trim().toLowerCase())
+  const mustCount = new Map<string, number>()
+  for (const ch of yellows.toLowerCase().replace(/[^a-z]/g, '')) {
+    mustCount.set(ch, (mustCount.get(ch) ?? 0) + 1)
+  }
+  const greySet = new Set(greys.toLowerCase().replace(/[^a-z]/g, '').split(''))
+  return dictionary
+    .filter((w) => {
+      if (w.length !== 5) return false
+      for (let i = 0; i < 5; i++) if (g[i] && w[i] !== g[i]) return false
+      // 与 Anagram 的 need-map 同款多重集计数
+      const counts = new Map<string, number>()
+      for (const x of w) counts.set(x, (counts.get(x) ?? 0) + 1)
+      // 重数下限:黄几次就必须含几次
+      for (const [ch, n] of mustCount) {
+        if ((counts.get(ch) ?? 0) < n) return false
+      }
+      // 计数上限:已标灰的字母不得超出已确认的份数
+      for (const ch of greySet) {
+        const known = g.filter((x) => x === ch).length + (mustCount.get(ch) ?? 0)
+        if ((counts.get(ch) ?? 0) > known) return false
+      }
+      return true
+    })
+    .sort((a, b) => {
+      const ra = COMMON_WORD_SET.has(a) ? 0 : 1
+      const rb = COMMON_WORD_SET.has(b) ? 0 : 1
+      return ra - rb || (a < b ? -1 : a > b ? 1 : 0)
+    })
+}
 
 const inputStyle = {
   borderColor: 'rgb(var(--border-strong))',
@@ -55,30 +134,10 @@ export function WordleSolverClient() {
 
   const hasSolverInput = greens.some((g) => g !== '') || yellows.trim() !== '' || greys.trim() !== ''
 
-  const solverResults = useMemo(() => {
-    if (!hasSolverInput) return []
-    const g = greens.map((x) => x.trim().toLowerCase())
-    // 黄色按输入次数计数:重复字母在真实反馈里可能同时出现黄/灰(如猜 eerie 而
-    // 答案含 3 个 e 时会有两个黄 e),用 Set 会把重数折叠成 1 导致误排候选
-    const mustLetters = yellows.toLowerCase().replace(/[^a-z]/g, '').split('')
-    const must = new Set(mustLetters)
-    const greySet = new Set(greys.toLowerCase().replace(/[^a-z]/g, '').split(''))
-    return dictionary
-      .filter((w) => {
-        if (w.length !== 5) return false
-        for (let i = 0; i < 5; i++) if (g[i] && w[i] !== g[i]) return false
-        for (const ch of must) if (!w.includes(ch)) return false
-        for (const ch of greySet) {
-          // 灰色字母若同时是已知(绿/黄)字母:出现次数不得超过已确认数
-          // (真实 Wordle 语义:多余重复字母才会被标灰)
-          const known = g.filter((x) => x === ch).length + mustLetters.filter((x) => x === ch).length
-          const count = w.split('').filter((x) => x === ch).length
-          if (count > known) return false
-        }
-        return true
-      })
-      .sort()
-  }, [dictionary, greens, yellows, greys, hasSolverInput])
+  const solverResults = useMemo(
+    () => (hasSolverInput ? solverFilter(dictionary, greens, yellows, greys) : []),
+    [dictionary, greens, yellows, greys, hasSolverInput],
+  )
 
   const anagramResults = useMemo(() => {
     const letters = anagramLetters.toLowerCase().replace(/[^a-z]/g, '')
@@ -101,6 +160,28 @@ export function WordleSolverClient() {
   const results = mode === 'solver' ? solverResults : anagramResults
   const shown = results.slice(0, MAX_SHOWN)
   const remaining = results.length - shown.length
+
+  // 约束摘要:把当前三项约束即时"翻译"成一行人话,批量敲字母时误敲的
+  // 重复字母(惩罚严重)一眼可见。段模板用 | 分隔在同一个 key 里,
+  // 取用时按段拆出、缺失的约束整段跳过。
+  const constraintSummary = useMemo(() => {
+    const seg = L('summaryConstraints', 'must contain {m}|exclude {x}|green {g}').split('|')
+    const mustSeen = new Map<string, number>()
+    for (const ch of yellows.toLowerCase().replace(/[^a-z]/g, '')) {
+      mustSeen.set(ch, (mustSeen.get(ch) ?? 0) + 1)
+    }
+    const mParts = Array.from(mustSeen, ([ch, n]) => (n > 1 ? `${ch}×${n}` : ch))
+    const xParts = Array.from(new Set(greys.toLowerCase().replace(/[^a-z]/g, '').split('')))
+    const gParts = greens
+      .map((v, i) => ({ v: v.trim().toLowerCase(), i }))
+      .filter(({ v }) => v !== '')
+      .map(({ v, i }) => `${i + 1}=${v}`)
+    const parts: string[] = []
+    if (mParts.length > 0) parts.push((seg[0] ?? '').replace('{m}', mParts.join(',')))
+    if (xParts.length > 0) parts.push((seg[1] ?? '').replace('{x}', xParts.join(',')))
+    if (gParts.length > 0) parts.push((seg[2] ?? '').replace('{g}', gParts.join(',')))
+    return parts.join(' · ')
+  }, [locale, greens, yellows, greys])
 
   const setGreen = useCallback((i: number, v: string) => {
     const letter = v.replace(/[^a-zA-Z]/g, '').slice(-1).toLowerCase()
@@ -140,8 +221,16 @@ export function WordleSolverClient() {
     setAnagramLetters('')
   }, [])
 
+  // Solver 结果里若含高频档词(排序后必然是列表前缀),给出分区标题提示置顶
+  const showCommonHeader = mode === 'solver' && shown.some((w) => COMMON_WORD_SET.has(w))
+
   const resultList = (
     <>
+      {showCommonHeader && (
+        <p className="text-xs font-semibold uppercase tracking-wider" style={{ color: 'rgb(var(--text-faint))' }}>
+          {L('commonFirst', 'Most common first')}
+        </p>
+      )}
       {results.length > 0 && (
         <div className="flex flex-wrap gap-2">
           {shown.map((w) => (
@@ -269,6 +358,17 @@ export function WordleSolverClient() {
             </div>
           </div>
 
+          {/* 约束摘要回显:输入变化即时更新,误敲的重复字母一眼可见 */}
+          {hasSolverInput && constraintSummary !== '' && (
+            <p
+              className="text-xs leading-relaxed"
+              aria-live="polite"
+              style={{ color: 'rgb(var(--text-faint))' }}
+            >
+              {constraintSummary}
+            </p>
+          )}
+
           {/* 结果区 */}
           {!hasSolverInput ? (
             <p className="rounded-md p-3 text-sm" style={{ backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text-subtle))' }}>
@@ -289,7 +389,10 @@ export function WordleSolverClient() {
               <span className="text-sm font-semibold tabular-nums" style={{ color: 'rgb(var(--text-muted))' }}>
                 {results.length}{' '}
                 {results.length === 1 ? L('matchingWordSingular', 'matching word') : L('matchingWordPlural', 'matching words')}{' '}
-                — {L('clickAnyWordToCopy', 'click any word to copy it')}
+                — {L('clickAnyWordToCopy', 'click any word to copy it')}{' '}
+                <span className="font-normal" style={{ color: 'rgb(var(--text-faint))' }}>
+                  · {L('inDictionary', '{n} words in dictionary').replace('{n}', dictionary.length.toLocaleString('en-US'))}
+                </span>
               </span>
               {resultList}
             </div>

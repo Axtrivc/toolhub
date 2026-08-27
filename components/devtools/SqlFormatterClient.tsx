@@ -132,6 +132,16 @@ function mergeMultiword(tokens: string[]): string[] {
   return out
 }
 
+// 普通 token 大写白名单(真正的 SQL 关键字才转大写)。放在模块作用域:
+// 之前在循环体内每 token new Set(...),大脚本(数十万 token)会产生同等数量的
+// Set 分配,是纯浪费(P-5:>1KB 输入的重计算路径不动微优化,但这是明摆着的分配放大)
+const SQL_KEYWORDS = new Set([
+  'AND','OR','NOT','IN','AS','IS','NULL','LIKE','ASC','DESC','DISTINCT',
+  'CASE','WHEN','THEN','ELSE','END','BETWEEN','EXISTS','ALL','ANY','SOME',
+  'COUNT','SUM','AVG','MIN','MAX','PRIMARY','KEY','FOREIGN','REFERENCES',
+  'TABLE','INDEX','VIEW','UNIQUE','DEFAULT','CONSTRAINT',
+])
+
 /** 格式化 SQL:按 TOP_KEYWORDS 换行 + 括号内缩进 + 逗号后换行 */
 function formatSql(sql: string): string {
   const raw = tokenize(sql)
@@ -194,12 +204,6 @@ function formatSql(sql: string): string {
     }
 
     // 普通标识符:仅真正的 SQL 关键字大写，其余标识符(表名/列名)保留原大小写
-    const SQL_KEYWORDS = new Set([
-      'AND','OR','NOT','IN','AS','IS','NULL','LIKE','ASC','DESC','DISTINCT',
-      'CASE','WHEN','THEN','ELSE','END','BETWEEN','EXISTS','ALL','ANY','SOME',
-      'COUNT','SUM','AVG','MIN','MAX','PRIMARY','KEY','FOREIGN','REFERENCES',
-      'TABLE','INDEX','VIEW','UNIQUE','DEFAULT','CONSTRAINT',
-    ])
     const isKeyword = SQL_KEYWORDS.has(tok.toUpperCase())
     currentLine += (isKeyword ? tok.toUpperCase() : tok) + ' '
   }

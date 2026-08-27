@@ -15,6 +15,7 @@ export const JsonRepairL10n: ToolL10n = {
       'repairsApplied': '已应用的修复',
       'stillBroken': '修复后仍无法解析——下方错误指出位置：',
       'validJson': '有效的 JSON',
+      'inputTooLarge': '输入超过 {n} 字符——为保证输入流畅已跳过修复。请精简或拆分后再试。',
     },
   },
   es: {
@@ -27,6 +28,7 @@ export const JsonRepairL10n: ToolL10n = {
       'repairsApplied': 'Reparaciones aplicadas',
       'stillBroken': 'Sigue sin poder analizarse; el error indica dónde:',
       'validJson': 'JSON válido',
+      'inputTooLarge': 'La entrada supera los {n} caracteres — la reparación se omite para mantener la escritura fluida. Recorta o divide la entrada.',
     },
   },
   de: {
@@ -39,6 +41,7 @@ export const JsonRepairL10n: ToolL10n = {
       'repairsApplied': 'Angewandte Reparaturen',
       'stillBroken': 'Auch nach Reparaturen unlesbar — der Fehler zeigt die Stelle:',
       'validJson': 'Gültiges JSON',
+      'inputTooLarge': 'Die Eingabe überschreitet {n} Zeichen — die Reparatur wird übersprungen, damit die Eingabe reaktionsfähig bleibt. Eingabe kürzen oder teilen.',
     },
   },
 }

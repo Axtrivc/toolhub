@@ -29,6 +29,10 @@ const LANGS: { key: Lang; label: string }[] = [
 
 const EXT: Record<Lang, string> = { html: 'html', css: 'css', js: 'js', json: 'json' }
 
+// 输入长度上限:手写 tokenizer 是逐字符状态机,内部的 trim/freshLine 帮助函数
+// 会反复扫描累计输出串(准 O(n²));100k 上限保证最坏情况仍在百毫秒级。
+const MAX_INPUT_LEN = 100_000
+
 const PLACEHOLDER: Record<Lang, string> = {
   html: '<div class="card"><h1>Hello</h1><p>Some <strong>bold</strong> text</p></div>',
   css: '.card{color:#333;background:#fff}.card h1{font-size:2rem;margin:0}',
@@ -521,7 +525,8 @@ export function CodeBeautifierClient() {
   const [indent, setIndent] = useState<'2' | '4'>('2')
   const [input, setInput] = useState('')
 
-  const result = useMemo<{ output?: string; error?: string }>(() => {
+  const result = useMemo<{ output?: string; error?: string; truncated?: boolean }>(() => {
+    if (input.length > MAX_INPUT_LEN) return { truncated: true }
     if (!input.trim()) return {}
     const unit = ' '.repeat(Number(indent))
     try {
@@ -605,9 +610,16 @@ export function CodeBeautifierClient() {
         />
       </div>
 
-      {/* 错误提示(主要是 JSON 解析错误) */}
+      {/* 超长输入防线:不再格式化,给出明确提示 */}
+      {result.truncated && (
+        <p role="alert" className="rounded-lg border-2 p-4 text-sm" style={{ borderColor: 'rgb(253 230 138)', backgroundColor: 'rgb(254 249 195 / 0.4)', color: 'rgb(var(--text))' }}>
+          {L('tooLong', '⚠️ Input exceeds the supported size (100,000 characters). Trim the input to format it.')}
+        </p>
+      )}
+
+      {/* 错误提示(主要是 JSON 解析错误;随每次按键重算,礼貌播报) */}
       {result.error && (
-        <div className="rounded-lg border border-red-200 dark:border-red-800/60 bg-red-50 dark:bg-red-950/30 p-4 text-sm text-red-700 dark:text-red-300">
+        <div role="status" className="rounded-lg border border-red-200 dark:border-red-800/60 bg-red-50 dark:bg-red-950/30 p-4 text-sm text-red-700 dark:text-red-300">
           ⚠️ {result.error}
         </div>
       )}

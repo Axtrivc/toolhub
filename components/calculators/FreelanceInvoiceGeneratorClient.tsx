@@ -375,10 +375,10 @@ ${itemRows}
           <table className="mt-6 w-full text-sm">
             <thead>
               <tr className="bg-slate-100 text-[10px] uppercase tracking-wider text-slate-500">
-                <th className="rounded-l-md px-3 py-2 text-left font-medium">{L('description', 'Description')}</th>
-                <th className="px-3 py-2 text-right font-medium">{L('qty', 'Qty')}</th>
-                <th className="px-3 py-2 text-right font-medium">{L('rate', 'Rate')}</th>
-                <th className="rounded-r-md px-3 py-2 text-right font-medium">{L('amount', 'Amount')}</th>
+                <th scope="col" className="rounded-l-md px-3 py-2 text-left font-medium">{L('description', 'Description')}</th>
+                <th scope="col" className="px-3 py-2 text-right font-medium">{L('qty', 'Qty')}</th>
+                <th scope="col" className="px-3 py-2 text-right font-medium">{L('rate', 'Rate')}</th>
+                <th scope="col" className="rounded-r-md px-3 py-2 text-right font-medium">{L('amount', 'Amount')}</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-100">

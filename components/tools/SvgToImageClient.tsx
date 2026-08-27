@@ -98,6 +98,16 @@ function injectSvgSize(svg: string, vb: { w: number; h: number }): string {
 
 type Fmt = 'image/png' | 'image/webp'
 
+/**
+ * 画布安全上限(与 image-resizer 同款):单边 ≤ 8192px 且总像素 ≤ 40MP。
+ * 超大 viewBox × 高倍缩放(如 10000×10000 × 3x)会把 canvas 推到数百 MP,
+ * 部分浏览器静默渲染空白 / toBlob 返回 null,甚至整页 OOM —— 必须在绘制前拦截。
+ */
+const MAX_SIDE = 8192
+const MAX_PIXELS = 40 * 1000 * 1000
+/** 上传 .svg 文本上限:超大 SVG 会放大 DOMParser/序列化/canvas 各阶段内存 */
+const MAX_FILE_BYTES = 20 * 1024 * 1024
+
 export function SvgToImageClient() {
   const { locale } = useApp()
   const L = (key: string, fb: string) => tui('svg-to-image', locale, key, fb)
@@ -133,9 +143,13 @@ export function SvgToImageClient() {
 
   const handleLoadSample = useCallback(() => setSvgText(SAMPLE_SVG), [])
 
-  // 读取上传文件
+  // 读取上传文件(>20MB 拒绝,与上传类工具的 20MB 门一致)
   const handleFile = useCallback((file: File) => {
     const seq = ++readSeqRef.current
+    if (file.size > MAX_FILE_BYTES) {
+      setError(L('errorFileTooLarge', 'File is too large — SVG files up to 20 MB are supported.'))
+      return
+    }
     file
       .text()
       .then((text) => {
@@ -204,6 +218,12 @@ export function SvgToImageClient() {
         const baseH = img.naturalHeight || viewBox?.h || 150
         const w = Math.max(1, Math.round(baseW * scale))
         const h = Math.max(1, Math.round(baseH * scale))
+
+        // 画布上限校验(P-3):超大 SVG × 高倍缩放在绘制前拦截,避免静默空白/OOM
+        if (w > MAX_SIDE || h > MAX_SIDE || w * h > MAX_PIXELS) {
+          setError(L('errorTooLarge', 'Output is too large — keep each side at 8192 px or below and the total under 40 megapixels. Try a smaller viewBox or a lower scale.'))
+          return
+        }
 
         const canvas = document.createElement('canvas')
         canvas.width = w
@@ -324,7 +344,7 @@ export function SvgToImageClient() {
       </div>
 
       {/* 错误 */}
-      {error && <div className="rounded-lg border border-red-200 dark:border-red-800/60 bg-red-50 dark:bg-red-950/30 p-4 text-sm text-red-700 dark:text-red-300">⚠️ {error}</div>}
+      {error && <div role="alert" className="rounded-lg border border-red-200 dark:border-red-800/60 bg-red-50 dark:bg-red-950/30 p-4 text-sm text-red-700 dark:text-red-300">⚠️ {error}</div>}
 
       {/* 结果:预览 + 下载(转换完成后出现,role=status 让屏幕阅读器播报) */}
       {downloadUrl && previewUrl && (

@@ -248,12 +248,12 @@ export const CashBackCalculatorClient = makeCalculatorClient({
     { key: 'annual', label: 'Annual cash back (before fee)', highlight: true },
     { key: 'net', label: 'Net value (after fee)' },
   ],
-  compute: (v) => {
+  compute: (v, locale) => {
     const spend = toNum(v.spend)
     const rate = toNum(v.rate) / 100
     const fee = toNum(v.fee)
     if (spend < 0 || rate < 0 || fee < 0) {
-      return { monthly: '⚠️ Values cannot be negative', annual: '—', net: '—' }
+      return { monthly: `⚠️ ${tui('cash-back-calculator', locale, 'errNonNegative', 'Values cannot be negative')}`, annual: '—', net: '—' }
     }
     const monthly = spend * rate
     const annual = monthly * 12
@@ -298,7 +298,7 @@ export const DownPaymentCalculatorClient = makeCalculatorClient({
     // 首付比例须在 0-100%、房价非负:负值会输出负首付额/负贷款
     if (pct > 1) {
       return {
-        amount: '⚠️ Down payment cannot exceed 100%',
+        amount: `⚠️ ${T('errDownOver100', 'Down payment cannot exceed 100%')}`,
         loan: '—',
         pmi: '—',
       }
@@ -407,12 +407,12 @@ export const CommissionCalculatorClient = makeCalculatorClient({
     { key: 'commission', label: 'Commission earned' },
     { key: 'total', label: 'Total earnings', highlight: true },
   ],
-  compute: (v) => {
+  compute: (v, locale) => {
     const sales = toNum(v.sales)
     const rate = toNum(v.rate) / 100
     const base = toNum(v.base)
     if (sales < 0 || rate < 0 || base < 0) {
-      return { commission: '⚠️ Values cannot be negative', total: '—' }
+      return { commission: `⚠️ ${tui('commission-calculator', locale, 'errNonNegative', 'Values cannot be negative')}`, total: '—' }
     }
     const commission = sales * rate
     return {
@@ -748,11 +748,11 @@ export const CubeCalculatorClient = makeCalculatorClient({
     { key: 'volume', label: 'Volume', highlight: true, sublabel: 'V = s³' },
     { key: 'surface', label: 'Surface area', sublabel: 'SA = 6s²' },
   ],
-  compute: (v) => {
+  compute: (v, locale) => {
     const s = toNum(v.side)
     // 负边长无几何意义:奇次幂会输出负体积,偶次幂则把错误伪装成正值
     if (s < 0) {
-      return { volume: '⚠️ Side length cannot be negative', surface: '—' }
+      return { volume: `⚠️ ${tui('cube-calculator', locale, 'errNonNegative', 'Side length cannot be negative')}`, surface: '—' }
     }
     // 公式放 sublabel,值保持纯数字(避免污染 Copy Summary / CSV)
     return {
@@ -772,10 +772,10 @@ export const SphereCalculatorClient = makeCalculatorClient({
     { key: 'volume', label: 'Volume', highlight: true, sublabel: 'V = ⁴⁄₃ π r³' },
     { key: 'surface', label: 'Surface area', sublabel: 'SA = 4 π r²' },
   ],
-  compute: (v) => {
+  compute: (v, locale) => {
     const r = toNum(v.r)
     if (r < 0) {
-      return { volume: '⚠️ Radius cannot be negative', surface: '—' }
+      return { volume: `⚠️ ${tui('sphere-calculator', locale, 'errNonNegative', 'Radius cannot be negative')}`, surface: '—' }
     }
     // 公式放 sublabel,值保持纯数字(避免污染 Copy Summary / CSV)
     return {

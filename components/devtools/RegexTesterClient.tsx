@@ -12,6 +12,8 @@ import { tui } from '@/lib/i18n/tool-l10n'
  * 输入:pattern / flags / 测试文本。实时:
  *  - 高亮所有匹配(把文本拆成 matched/unmatched 段,渲染带底色的 <mark>)
  *  - 列出每次匹配 + 各 capture group 的值
+ *  - 替换预览:替换模板输入($1 / $& / $<name> 等),结果分段高亮,
+ *    语义与 native String.replace 逐一对齐(尊重用户 flags,无 g 只替第一处)
  *  - 附常用语法速查表(cheat sheet)
  * 100% 本地,用浏览器原生 RegExp 引擎。
  */
@@ -23,6 +25,12 @@ Contact: support@example.com or call +1-800-555-0199.`
 interface HighlightSegment {
   text: string
   matched: boolean
+}
+
+/** 替换预览分段:replaced=true 为模板展开产生的新片段,false 为未变文本 */
+interface ReplaceSegment {
+  text: string
+  replaced: boolean
 }
 
 interface MatchDetail {
@@ -88,6 +96,141 @@ function collectMatches(text: string, re: RegExp): { details: MatchDetail[]; tru
     if (++safety >= 5000) return { details, truncated: true }
   }
   return { details, truncated: false }
+}
+
+/**
+ * 按 native GetSubstitution 语义展开替换模板(逐字符扫描)。
+ * 已用 3000+ 用例对照 V8 原生 String.replace 校验一致:
+ *  - $$ → $、$& → 整个匹配、$` / $' → 匹配前缀/后缀;
+ *  - $n、$nn:两位数字 ≤ 组数时按两位解析,否则回退一位;越界(如 $0/$4)→ 字面保留;
+ *  - $<name>:命中命名组 → 该捕获值(未参与捕获为空串);模式已有命名组但名字未命中
+ *    → 空字符串(D2,与原生一致);模式没有任何命名组或 $< 未闭合 → 字面保留。
+ */
+function expandTemplate(
+  tpl: string,
+  matched: string,
+  index: number,
+  text: string,
+  caps: (string | undefined)[],
+  namesByNum: Record<number, string>,
+): string {
+  let out = ''
+  let i = 0
+  while (i < tpl.length) {
+    const c = tpl[i]
+    if (c !== '$') {
+      out += c
+      i++
+      continue
+    }
+    const nxt = tpl[i + 1]
+    if (nxt === '$') {
+      out += '$'
+      i += 2
+      continue
+    }
+    if (nxt === '&') {
+      out += matched
+      i += 2
+      continue
+    }
+    if (nxt === '`') {
+      out += text.slice(0, index)
+      i += 2
+      continue
+    }
+    if (nxt === "'") {
+      out += text.slice(index + matched.length)
+      i += 2
+      continue
+    }
+    if (nxt >= '0' && nxt <= '9') {
+      // 两位优先:nn ≤ 组数时整体消耗;否则回退一位;都不合法 → 字面 $
+      const d2 = tpl[i + 2]
+      const two = d2 !== undefined && /[0-9]/.test(d2) ? Number(nxt + d2) : NaN
+      let num: number
+      let used: number
+      if (!Number.isNaN(two) && two <= caps.length) {
+        num = two
+        used = 3
+      } else {
+        num = Number(nxt)
+        used = 2
+      }
+      if (num >= 1 && num <= caps.length) {
+        out += caps[num - 1] ?? ''
+        i += used
+        continue
+      }
+      out += '$'
+      i++
+      continue
+    }
+    if (nxt === '<') {
+      const close = tpl.indexOf('>', i + 2)
+      if (close !== -1 && Object.keys(namesByNum).length > 0) {
+        const name = tpl.slice(i + 2, close)
+        const gi = Object.keys(namesByNum).find((k) => namesByNum[Number(k)] === name)
+        if (gi !== undefined) {
+          out += caps[Number(gi) - 1] ?? ''
+          i = close + 1
+          continue
+        }
+        // 模式有命名组但名字未命中 → 空串(native 行为)
+        i = close + 1
+        continue
+      }
+      out += '$'
+      i++
+      continue
+    }
+    // 孤立 $(模板结尾等)→ 字面保留
+    out += '$'
+    i++
+  }
+  return out
+}
+
+/**
+ * 在 text 上执行替换并收集「新片段 / 未变文本」分段供高亮渲染,结果拼接与
+ * native String.replace 完全一致。尊重用户 flags:无 g 时只替换第一处(y 为首个粘性位)。
+ * 安全性:safety 上限与组件其它扫描一致(5000 次),输入由调用方传入已截断的 safeText。
+ */
+function buildReplaceSegments(
+  text: string,
+  re: RegExp,
+  tpl: string,
+  namesByNum: Record<number, string>,
+): { segments: ReplaceSegment[]; total: number } {
+  // 独立实例,避免污染 compiled.lastIndex 影响高亮/详情
+  const rx = new RegExp(re.source, re.flags)
+  const segments: ReplaceSegment[] = []
+  let last = 0
+  let safety = 0
+  let m: RegExpExecArray | null
+  while ((m = rx.exec(text)) !== null) {
+    if (++safety > 5000) break
+    if (m[0].length === 0) {
+      // 零宽匹配:插入展开结果但不消费原位置字符(last 不动),
+      // 仅让引擎 lastIndex 前进一位 —— 与 native 的推进方式一致
+      segments.push({ text: text.slice(last, m.index), replaced: false })
+      segments.push({ text: expandTemplate(tpl, '', m.index, text, m.slice(1), namesByNum), replaced: true })
+      rx.lastIndex = m.index + 1
+      last = m.index
+      if (!rx.global || rx.lastIndex > text.length) break
+      continue
+    }
+    segments.push({ text: text.slice(last, m.index), replaced: false })
+    segments.push({ text: expandTemplate(tpl, m[0], m.index, text, m.slice(1), namesByNum), replaced: true })
+    last = m.index + m[0].length
+    if (!rx.global) break
+  }
+  if (last < text.length) {
+    segments.push({ text: text.slice(last), replaced: false })
+  }
+  let total = 0
+  for (const s of segments) total += s.text.length
+  return { segments, total }
 }
 
 /**
@@ -169,6 +312,7 @@ const FLAG_CHIPS: { flag: string; key: string; fb: string }[] = [
 
 // 防止 ReDoS / 性能问题的输入上限
 const MAX_TEXT_LEN = 50000 // 测试文本长度上限(~50KB),超过截断,避免超长输入放大回溯
+const MAX_PREVIEW_RENDER_LEN = 20000 // 替换结果渲染上限:超过则整体 plain 渲染(数千 spans 会卡),复制仍输出完整结果
 
 export function RegexTesterClient() {
   const { locale } = useApp()
@@ -178,6 +322,7 @@ export function RegexTesterClient() {
   const [pattern, setPattern] = useState('')
   const [flags, setFlags] = useState('g')
   const [text, setText] = useState('')
+  const [replacement, setReplacement] = useState('')
 
   // 防抖:用户每按键都重新编译+全文扫描,对病态正则会反复触发回溯,
   // 且大文本全量扫描造成卡顿。加 200ms 防抖,只在输入停顿后执行一次。
@@ -227,6 +372,18 @@ export function RegexTesterClient() {
     return collectMatches(safeText, compiled.re)
   }, [compiled, safeText])
   const matches = matchResult.details
+
+  // 替换预览:在已截断的 safeText 上执行(复用 50k 门控),尊重用户 flags ——
+  // 无 g 时只替换第一处并在下方 note 注明语义;pattern 为空/非法时整个区块不渲染。
+  const replaceOut = useMemo(() => {
+    if (!compiled.re || !safeText || matches.length === 0) return null
+    return buildReplaceSegments(safeText, compiled.re, replacement, groupNames)
+  }, [compiled, safeText, matches.length, replacement, groupNames])
+  // 拼接后的完整结果(CopyButton 始终复制完整文本,与渲染上限无关)
+  const replaceResultText = useMemo(
+    () => (replaceOut ? replaceOut.segments.map((s) => s.text).join('') : ''),
+    [replaceOut],
+  )
 
   return (
     <div className="space-y-5">
@@ -398,6 +555,55 @@ export function RegexTesterClient() {
               </p>
             )}
           </div>
+        </div>
+      )}
+
+      {/* 替换预览(pattern 非法/为空时随主结果区隐藏) */}
+      {compiled.re && safeText && (
+        <div>
+          <label htmlFor="regex-replace" className="mb-2 block text-sm font-medium text-slate-700 dark:text-slate-300">
+            {L('replaceLabel', 'Replace Preview')}
+          </label>
+          <textarea
+            id="regex-replace"
+            value={replacement}
+            onChange={(e) => setReplacement(e.target.value)}
+            rows={2}
+            spellCheck={false}
+            placeholder={L('replacePlaceholder', 'Replacement template — $1 references a capture group, $& the whole match')}
+            className={inputCls}
+            style={{ borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rgb(var(--bg-card))', color: 'rgb(var(--text))' }}
+          />
+          {replaceOut && (
+            <div className="mt-3">
+              <div className="mb-2 flex items-center justify-between">
+                <span className="text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>{L('replaceResult', 'Replaced Result')}</span>
+                <CopyButton value={replaceResultText} label={L('copyReplace', 'Copy Result')} disabled={!replaceResultText} />
+              </div>
+              <pre
+                className="max-h-72 overflow-auto whitespace-pre-wrap break-all rounded-lg border bg-slate-50 p-4 font-mono text-xs leading-relaxed dark:bg-slate-800/60"
+                style={{ borderColor: 'rgb(var(--border))' }}
+                aria-live="polite"
+              >
+                <code>
+                  {replaceOut.total > MAX_PREVIEW_RENDER_LEN
+                    ? replaceResultText
+                    : replaceOut.segments.map((seg, i) =>
+                        seg.replaced ? (
+                          <mark key={i} className="rounded bg-green-200 px-0.5 text-green-950 dark:bg-green-500/40 dark:text-green-50">
+                            {seg.text}
+                          </mark>
+                        ) : (
+                          <span key={i}>{seg.text}</span>
+                        ),
+                      )}
+                </code>
+              </pre>
+              <p className="mt-1 text-[11px] text-slate-400 dark:text-slate-500">
+                {L('replaceNote', 'References to missing capture groups become an empty string (native String.replace semantics); without the g flag only the first occurrence is replaced.')}
+              </p>
+            </div>
+          )}
         </div>
       )}
 

@@ -475,9 +475,9 @@ function StarRow({ stars }: { stars: number }) {
   const { locale } = useApp()
   const L = (key: string, fb: string) => tui('ip-checker', locale, key, fb)
   return (
-    <span className="text-lg tracking-wide" style={{ color: '#f59e0b' }} aria-label={`${stars} ${L('outOf5Stars', 'out of 5 stars')}`}>
+    <span className="text-lg tracking-wide" style={{ color: '#f59e0b' }} role="img" aria-label={`${stars} ${L('outOf5Stars', 'out of 5 stars')}`}>
       {'★'.repeat(stars)}
-      <span style={{ color: 'rgb(var(--text-faint))' }}>{'★'.repeat(5 - stars)}</span>
+      <span aria-hidden="true" style={{ color: 'rgb(var(--text-faint))' }}>{'★'.repeat(5 - stars)}</span>
     </span>
   )
 }
@@ -661,7 +661,7 @@ export function IpCheckerClient() {
             {loading ? d.analyzing : d.analyze}
           </button>
         </div>
-        {queryErrorKey && <p className="mt-2 text-sm text-red-600 dark:text-red-400">{d[queryErrorKey]}</p>}
+        {queryErrorKey && <p role="alert" className="mt-2 text-sm text-red-600 dark:text-red-400">{d[queryErrorKey]}</p>}
         {errorKey && (
           <p className="mt-3 rounded-md p-3 text-sm text-red-700 dark:text-red-300" style={{ backgroundColor: 'rgba(239,68,68,0.1)' }}>
             {d[errorKey]}
@@ -886,10 +886,10 @@ export function IpCheckerClient() {
           <table className="w-full min-w-[520px] text-sm">
             <thead>
               <tr className="border-b text-left text-xs uppercase tracking-wider" style={{ borderColor: 'rgb(var(--border))', color: 'rgb(var(--text-subtle))' }}>
-                <th className="pb-2 pr-4 font-medium">{d.thRegion}</th>
-                <th className="pb-2 pr-4 font-medium">{d.thEndpoint}</th>
-                <th className="pb-2 pr-4 font-medium">{d.thLatency}</th>
-                <th className="pb-2 font-medium">{d.thStatus}</th>
+                <th scope="col" className="pb-2 pr-4 font-medium">{d.thRegion}</th>
+                <th scope="col" className="pb-2 pr-4 font-medium">{d.thEndpoint}</th>
+                <th scope="col" className="pb-2 pr-4 font-medium">{d.thLatency}</th>
+                <th scope="col" className="pb-2 font-medium">{d.thStatus}</th>
               </tr>
             </thead>
             <tbody>

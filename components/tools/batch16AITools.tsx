@@ -17,6 +17,10 @@ const selVars = { borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rg
 
 // ══════════════ JSON Repair ══════════════
 
+/** P-1 大输入防线:修复管线含十余次全文正则扫描 + 栈式补全 + 双重 JSON.parse,
+ *  每次按键全量同步重算;超过 20 万字符(与文本工具家族同款阈值)直接跳过。 */
+const JR_MAX_INPUT_CHARS = 200_000
+
 /** 修复启发式管线:每步记录日志;先纯字符级,再截断补全,最后 parse 验证 */
 export function repairJson(input: string): { output: string; log: string[]; ok: boolean } {
   const log: string[] = []
@@ -139,7 +143,10 @@ export function JsonRepairClient() {
   const sample = getCalculatorSample('json-repair')
   const [input, setInput] = useState(sample?.input ?? '')
 
-  const result = useMemo(() => (input.trim() ? repairJson(input) : null), [input])
+  // P-1:超阈值跳过修复重算,走告警通道(数字跟随应用语言)
+  const numberLocale = locale === 'en' ? 'en-US' : locale
+  const tooLarge = input.length > JR_MAX_INPUT_CHARS
+  const result = useMemo(() => (!input.trim() || tooLarge ? null : repairJson(input)), [input, tooLarge])
 
   return (
     <div className="space-y-5">
@@ -153,7 +160,14 @@ export function JsonRepairClient() {
           className="w-full rounded-lg border p-4 font-mono text-xs outline-none transition focus:ring-2" style={selVars} />
       </div>
 
-      {result && (result.ok ? (
+      {tooLarge && (
+        <p role="alert" className="rounded-lg border-2 border-amber-200 bg-amber-50 p-3 text-sm text-amber-700 dark:border-amber-800/60 dark:bg-amber-950/30 dark:text-amber-300">
+          ⚠️ {L('inputTooLarge', 'Input exceeds {n} characters — repair is skipped to keep typing responsive. Trim or split the input.')
+            .replace('{n}', JR_MAX_INPUT_CHARS.toLocaleString(numberLocale))}
+        </p>
+      )}
+
+      {!tooLarge && result && (result.ok ? (
         <div role="status" aria-live="polite" className="space-y-3">
           {result.log.length > 0 && (
             <div className="rounded-lg border p-3" style={{ borderColor: 'rgb(var(--border))', backgroundColor: 'rgb(var(--bg-subtle))' }}>
