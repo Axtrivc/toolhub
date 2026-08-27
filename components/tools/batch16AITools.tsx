@@ -57,7 +57,7 @@ export function repairJson(input: string): { output: string; log: string[]; ok: 
   }
 
   // 6) 单引号字符串 → 双引号
-  const singleRe = /'(?:[^'\\n]|\.)*'/
+  const singleRe = /'(?:[^'\n]|\\.)*'/
   if (singleRe.test(s)) {
     s = s.replace(new RegExp(singleRe.source, 'g'), (m) => '"' + m.slice(1, -1).replace(/"/g, '\"') + '"')
     log.push("Converted single-quoted strings to double quotes")
@@ -183,10 +183,10 @@ interface FenceBlock { lang: string; code: string }
 function extractFences(md: string): FenceBlock[] {
   const blocks: FenceBlock[] = []
   // ```lang ... ``` (允许内部缩进 fence 用 ~~~ 的场景不展开,常规即可)
-  const re = /```([A-Za-z0-9_+-]*)[ \\t]*\\n([\\s\\S]*?)```/g
+  const re = /```([A-Za-z0-9_+-]*)[ \t]*\n([\s\S]*?)```/g
   let m: RegExpExecArray | null
   while ((m = re.exec(md)) !== null) {
-    blocks.push({ lang: (m[1] || 'text').toLowerCase(), code: m[2].replace(/\\n$/, '') })
+    blocks.push({ lang: (m[1] || 'text').toLowerCase(), code: m[2].replace(/\n$/, '') })
   }
   return blocks
 }
@@ -210,7 +210,7 @@ export function FenceExtractorClient() {
       <div>
         <label htmlFor="fx-in" className="mb-2 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>{L('inputLabel', 'Markdown / AI answer')}</label>
         <textarea id="fx-in" value={md} onChange={(e) => setMd(e.target.value)} rows={8} spellCheck={false}
-          placeholder={'Here is the solution:\\n```python\\nprint("hello")\\n```\\nAnd a test:\\n```bash\\npnpm test\\n```'}
+          placeholder={'Here is the solution:\n```python\nprint("hello")\n```\nAnd a test:\n```bash\npnpm test\n```'}
           className="w-full rounded-lg border p-4 font-mono text-xs outline-none transition focus:ring-2" style={selVars} />
       </div>
 
@@ -234,16 +234,16 @@ export function FenceExtractorClient() {
           {shown.map((b, i) => (
             <div key={i}>
               <div className="mb-1.5 flex items-center justify-between">
-                <span className="font-mono text-xs font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>{b.lang} · {b.code.split('\\n').length} {L('lines', 'lines')}</span>
+                <span className="font-mono text-xs font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>{b.lang} · {b.code.split('\n').length} {L('lines', 'lines')}</span>
                 <CopyButton value={b.code} />
               </div>
               <pre className="overflow-x-auto rounded-lg border p-4 font-mono text-xs whitespace-pre" style={{ borderColor: 'rgb(var(--border))', backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text))' }}>{b.code}</pre>
             </div>
           ))}
           <ResultActions
-            summary={shown.map((b) => `### ${b.lang}\\n${b.code}`).join('\\n\\n')}
+            summary={shown.map((b) => `### ${b.lang}\n${b.code}`).join('\n\n')}
             filename="code-blocks.txt"
-            downloadContent={shown.map((b) => b.code).join('\\n\\n')}
+            downloadContent={shown.map((b) => b.code).join('\n\n')}
             copyLabel={L('copyAll', 'Copy all')}
           />
         </div>
@@ -276,13 +276,13 @@ export function PromptTemplateFillerClient() {
     }
     // 收集模板变量 {{var}} 与 {var}(避开 {{{ }});缺失集合
     const used = new Set<string>()
-    for (const m of template.matchAll(/\\{\\{\\s*([\\w.-]+)\\s*\\}\\}/g)) used.add(m[1])
-    for (const m of template.matchAll(/(?<!\\{)\\{\\s*([\\w.-]+)\\s*\\}(?!\\})/g)) used.add(m[1])
+    for (const m of template.matchAll(/\{\{\s*([\w.-]+)\s*\}\}/g)) used.add(m[1])
+    for (const m of template.matchAll(/(?<!\{)\{\s*([\w.-]+)\s*\}(?!\})/g)) used.add(m[1])
     const missing = [...used].filter((k) => !(k in vars))
     // 渲染:双花括号优先(必须完全匹配才替换),单花括号其次
     let out = template
-      .replace(/\\{\\{\\s*([\\w.-]+)\\s*\\}\\}/g, (full, k: string) => (k in vars ? vars[k] : full))
-    out = out.replace(/(?<!\\{)\\{\\s*([\\w.-]+)\\s*\\}(?!\\})/g, (full, k: string) => (k in vars ? vars[k] : full))
+      .replace(/\{\{\s*([\w.-]+)\s*\}\}/g, (full, k: string) => (k in vars ? vars[k] : full))
+    out = out.replace(/(?<!\{)\{\s*([\w.-]+)\s*\}(?!\})/g, (full, k: string) => (k in vars ? vars[k] : full))
     return { out, missing, varError }
   }, [template, varsJson])
 
@@ -298,7 +298,7 @@ export function PromptTemplateFillerClient() {
         <div>
           <label htmlFor="pt-vars" className="mb-2 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>{L('varsLabel', 'Variables (JSON object)')}</label>
           <textarea id="pt-vars" value={varsJson} onChange={(e) => setVarsJson(e.target.value)} rows={9} spellCheck={false}
-            placeholder={'{\\n  "role": "senior dev",\\n  "topic": "closures",\\n  "audience": "beginners",\\n  "words": 100\\n}'}
+            placeholder={'{\n  "role": "senior dev",\n  "topic": "closures",\n  "audience": "beginners",\n  "words": 100\n}'}
             className="w-full rounded-lg border p-4 font-mono text-xs outline-none transition focus:ring-2" style={selVars} />
         </div>
       </div>
@@ -400,7 +400,8 @@ export function ToolsBuilderClient() {
               {L('required', 'req')}
             </label>
             <button type="button" onClick={() => setParams(params.filter((_, j) => j !== i))} disabled={params.length <= 1}
-              className="px-2 text-sm text-slate-400 hover:text-red-500 dark:text-slate-500">✕</button>
+              aria-label={L('removeParam', 'Remove parameter')}
+              className="rounded-lg px-2 text-sm text-slate-400 hover:text-red-500 dark:text-slate-500">✕</button>
           </div>
         ))}
         <button type="button" onClick={() => setParams([...params, { name: '', type: 'string', description: '', required: false, enumValues: '' }])}
