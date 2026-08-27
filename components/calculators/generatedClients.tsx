@@ -30,11 +30,11 @@ export const TipCalculatorClient = makeCalculatorClient({
     const bill = toNum(v.bill)
     const tipPct = toNum(v.tipPct)
     const people = Math.round(toNum(v.people))
-    // 负账单会算出负小费,直接拦截(负人数已由下方 people >= 1 分支拦截)
-    if (bill < 0) {
+    // 负账单会算出负小费,负税率会算出负小费/负总额——均直接拦截(折扣/销售税同口径)
+    if (bill < 0 || tipPct < 0) {
       return {
         tip: '—',
-        total: `⚠️ ${tui('tip-calculator', locale, 'errNonNegativeBill', 'Bill amount cannot be negative')}`,
+        total: `⚠️ ${tui('tip-calculator', locale, bill < 0 ? 'errNonNegativeBill' : 'errNonNegativeTip', bill < 0 ? 'Bill amount cannot be negative' : 'Tip percentage cannot be negative')}`,
         perPerson: '—',
       }
     }

@@ -2,10 +2,12 @@
 
 import { useState, useMemo } from 'react'
 import { CopyButton } from '@/components/CopyButton'
+import { AnimatedNumber } from '@/components/calculator/CalculatorField'
 import { makeTextTool } from '../tools/makeTextTool'
 import { useApp } from '@/components/providers/AppProviders'
+import { t } from '@/lib/i18n'
 import { tui } from '@/lib/i18n/tool-l10n'
-import { hasCJK } from '@/lib/text-stats'
+import { countWords, hasCJK } from '@/lib/text-stats'
 
 /**
  * 批量文本工具 - 除 FindReplaceClient 外全部用 makeTextTool 工厂,每个仅需一个 transform 函数
@@ -192,6 +194,24 @@ export function FindReplaceClient() {
     color: 'rgb(var(--text))',
   }
 
+  // 统计口径与 makeTextTool 家族一致(V1):字符按 Unicode 码点计、词数走中英混合
+  // 口径、行数、阅读时长(en 200 wpm / zh 每分钟 300 字),数字格式跟随应用语言。
+  const charCount = [...text].length
+  const wordCount = countWords(text)
+  const lineCount = text === '' ? 0 : text.split('\n').length
+  const readingSec = Math.round(
+    (locale === 'zh' ? charCount / 5 : wordCount / 200) * 60,
+  )
+  const readingLabel =
+    readingSec < 60 ? `${Math.max(readingSec, text ? 1 : 0)}s` : `${Math.floor(readingSec / 60)}m ${readingSec % 60}s`
+  const numberLocale = locale === 'en' ? 'en-US' : locale
+  const fmtC = charCount.toLocaleString(numberLocale)
+  const fmtW = wordCount.toLocaleString(numberLocale)
+  const fmtL = lineCount.toLocaleString(numberLocale)
+  // 输出长度(码点口径)——驱动输入↔输出长度对比条(正则/替换前后文本量变化一眼可见;
+  // 非法正则/超长降级时输出为空,输出条归零属预期)
+  const outChars = regexError || tooLong ? 0 : [...output].length
+
   return (
     <div className="space-y-5">
       {/* 正文输入区 */}
@@ -275,8 +295,8 @@ export function FindReplaceClient() {
         </label>
       </div>
 
-      {/* 输出区 */}
-      <div>
+      {/* 输出区(aria-live:替换结果更新时屏幕阅读器播报,口径同 makeTextTool 家族) */}
+      <div role="status" aria-live="polite">
         <div className="mb-2 flex items-center justify-between">
           <label className="text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
             {L('outputLabel', 'Result')}
@@ -309,6 +329,60 @@ export function FindReplaceClient() {
             }}
           />
         )}
+      </div>
+
+      {/* 统计仪表条(V1,对齐 makeTextTool 家族):字符/词/行/阅读时长四格 +
+          输入↔输出长度对比条 —— 替换前后文本量变化一眼可见 */}
+      <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
+        {[
+          { label: t(locale, 'textToolCharsLabel'), value: charCount, display: fmtC },
+          { label: t(locale, 'textToolWordsLabel'), value: wordCount, display: fmtW },
+          { label: t(locale, 'textToolLinesLabel'), value: lineCount, display: fmtL },
+          { label: t(locale, 'textToolReadingLabel'), value: readingSec, display: readingLabel },
+        ].map((cell) => (
+          <div
+            key={cell.label}
+            className="rounded-xl border border-border/60 bg-card/80 p-3 text-center shadow-sm backdrop-blur-md transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md"
+          >
+            <div className="text-xl font-bold tabular-nums sm:text-2xl" style={{ color: 'rgb(var(--text))' }}>
+              <AnimatedNumber value={cell.display} />
+            </div>
+            <div className="mt-0.5 text-[11px] font-medium uppercase tracking-wide" style={{ color: 'rgb(var(--text-faint))' }}>
+              {cell.label}
+            </div>
+          </div>
+        ))}
+      </div>
+      <div
+        className="rounded-xl border p-4"
+        style={{ borderColor: 'rgb(var(--border))', backgroundColor: 'rgb(var(--bg-card))' }}
+      >
+        {[
+          { label: t(locale, 'textToolInputLen'), count: charCount, color: 'rgb(var(--primary))' },
+          { label: t(locale, 'textToolOutputLen'), count: outChars, color: '#22c55e' },
+        ].map((row) => {
+          const max = Math.max(charCount, outChars, 1)
+          return (
+            <div key={row.label} className="flex items-center gap-3">
+              <span className="w-20 shrink-0 truncate text-xs font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
+                {row.label}
+              </span>
+              <div className="h-2.5 flex-1 overflow-hidden rounded-full" style={{ backgroundColor: 'rgb(var(--bg-subtle))' }}>
+                <div
+                  className="h-full rounded-full transition-all duration-300"
+                  style={{
+                    width: `${Math.min(100, (row.count / max) * 100)}%`,
+                    backgroundColor: row.color,
+                    transitionTimingFunction: 'cubic-bezier(0.22,1,0.36,1)',
+                  }}
+                />
+              </div>
+              <span className="w-14 shrink-0 text-right text-xs font-semibold tabular-nums" style={{ color: 'rgb(var(--text-muted))' }}>
+                {row.count.toLocaleString(numberLocale)}
+              </span>
+            </div>
+          )
+        })}
       </div>
 
       <p className="rounded-md p-3 text-xs" style={{ backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text-subtle))' }}>

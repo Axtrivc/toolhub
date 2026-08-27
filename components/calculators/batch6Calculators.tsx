@@ -707,6 +707,7 @@ export function BodyFatCalculatorClient() {
               label={L('outBodyfat', 'Body fat percentage')}
               value={'error' in result ? `⚠️ ${result.error}` : `${fmtNum(result.bf, 1)}%`}
               highlight
+              error={'error' in result}
               sublabel={'error' in result ? undefined : result.sublabel}
             />
             <ResultCard label={L('outCategory', 'Category')} value={'error' in result ? '—' : result.cat} />
@@ -778,8 +779,17 @@ export const MacroCalculatorClient = makeCalculatorClient({
     { key: 'fat', label: 'Fat', sublabel: '9 cal/g' },
     { key: 'total', label: 'Total calories', highlight: true },
   ],
-  compute: (v) => {
+  compute: (v, locale): Record<string, string> => {
     const cal = toNum(v.calories)
+    // 非法热量(负数/0/Infinity)会把负克数或 "—" 直接当营养建议渲染 → 源头拦截给友好错误
+    if (!(cal > 0)) {
+      return {
+        protein: '—',
+        carbs: '—',
+        fat: '—',
+        total: `⚠️ ${tui('macro-calculator', locale, 'errCalories', 'Enter a daily calorie target greater than 0')}`,
+      }
+    }
     let pPct: number, cPct: number, fPct: number
     if (v.goal === 'lose') { pPct = 0.40; cPct = 0.30; fPct = 0.30 }
     else if (v.goal === 'gain') { pPct = 0.35; cPct = 0.45; fPct = 0.20 }

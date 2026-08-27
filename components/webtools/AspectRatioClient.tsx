@@ -184,7 +184,7 @@ export function AspectRatioClient() {
 
       {/* 结果 */}
       {(computed.width || computed.height) && (
-        <div className="rounded-lg border border-blue-100 bg-gradient-to-b from-blue-50/40 to-transparent p-4 dark:border-blue-900/40">
+        <div role="status" aria-live="polite" className="rounded-lg border border-blue-100 bg-gradient-to-b from-blue-50/40 to-transparent p-4 dark:border-blue-900/40">
           <div className="grid grid-cols-2 gap-4 text-center">
             <div>
               <div className="text-xs uppercase text-slate-400">{L('width', 'Width')}</div>

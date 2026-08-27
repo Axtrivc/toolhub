@@ -123,7 +123,7 @@ export const OvertimeCalculatorClient = makeCalculatorClient({
     { key: 'otMultiplier', label: 'OT multiplier', default: '1.5', options: [
       { label: 'Time-and-a-half (×1.5)', value: '1.5' },
       { label: 'Double time (×2)', value: '2' },
-      { label: 'Custom below', value: 'custom' },
+      // 不设 "custom" 档:下方并无自定义倍率输入框,选了只会静默落回 ×1.5
     ]},
     { key: 'otHours', label: 'Overtime hours/week', suffix: 'h', default: '8', slider: { min: 0, max: 40, step: 0.5 } },
   ],
@@ -137,18 +137,21 @@ export const OvertimeCalculatorClient = makeCalculatorClient({
     const rate = toNumStrict(v.base)
     const regH = toNum(v.regularHours)
     const otH = toNum(v.otHours)
-    const mult = v.otMultiplier === 'custom' ? NaN : toNum(v.otMultiplier)
+    const mult = toNum(v.otMultiplier)
+    // 错误串落在 highlight 输出(totalWeekly)上,工厂才会渲染红卡错误态
     if (isNaN(rate) || rate < 0) {
-      return { regularPay: `⚠️ ${tui('overtime-calculator', locale, 'errInvalidRate', 'Enter a valid hourly rate')}`, otPay: '—', totalWeekly: '—', otRate: '—' }
+      return { regularPay: '—', otPay: '—', totalWeekly: `⚠️ ${tui('overtime-calculator', locale, 'errInvalidRate', 'Enter a valid hourly rate')}`, otRate: '—' }
     }
-    const effMult = isNaN(mult) ? 1.5 : mult
+    if (regH < 0 || otH < 0) {
+      return { regularPay: '—', otPay: '—', totalWeekly: `⚠️ ${tui('overtime-calculator', locale, 'errNonNegative', 'Values cannot be negative')}`, otRate: '—' }
+    }
     const regPay = rate * regH
-    const otRateV = rate * effMult
+    const otRateV = rate * mult
     return {
       regularPay: fmtUSD(regPay),
       otPay: fmtUSD(otRateV * otH),
       totalWeekly: fmtUSD(regPay + otRateV * otH),
-      otRate: `${fmtUSD(otRateV)} (×${effMult})`,
+      otRate: `${fmtUSD(otRateV)} (×${mult})`,
     }
   },
   chart: {
@@ -246,7 +249,8 @@ export const WeddingBudgetCalculatorClient = makeCalculatorClient({
     const total = toNumStrict(v.total)
     const guests = Math.max(1, Math.round(toNum(v.guests)))
     if (isNaN(total) || total <= 0) {
-      return { venue: `⚠️ ${tui('wedding-budget-calculator', locale, 'errInvalidBudget', 'Enter a valid budget')}`, catering: '—', photo: '—', attire: '—', music: '—', misc: '—', perGuest: '—' }
+      // 错误串须落在 highlight 输出(perGuest)上,工厂才会渲染红卡错误态
+      return { venue: '—', catering: '—', photo: '—', attire: '—', music: '—', misc: '—', perGuest: `⚠️ ${tui('wedding-budget-calculator', locale, 'errInvalidBudget', 'Enter a valid budget')}` }
     }
     const pct = (p: number) => fmtUSD((total * p) / 100)
     return {
@@ -296,7 +300,8 @@ export const HeartRateZoneCalculatorClient = makeCalculatorClient({
     const age = toNum(v.age)
     const resting = toNum(v.resting)
     if (!Number.isInteger(age) || age < 10 || age > 100 || resting < 30 || resting > 120) {
-      return { max: '⚠️ Enter a valid age (10-100) and resting HR (30-120)', z1: '—', z2: '—', z3: '—', z4: '—', z5: '—' }
+      // 错误串须落在 highlight 输出(z2)上,工厂才会渲染红卡错误态
+      return { max: '—', z1: '—', z2: '⚠️ Enter a valid age (10-100) and resting HR (30-120)', z3: '—', z4: '—', z5: '—' }
     }
     const max = 220 - age
     const zone = (lo: number, hi: number) =>

@@ -128,7 +128,12 @@ export const AverageCalculatorClient = makeCalculatorClient({
       .split(/[\s,]+/)
       .map((s) => s.trim())
       .filter(Boolean)
-    const nums = tokens.map(Number).filter((n) => isFinite(n))
+    const nums = tokens
+      .map(Number)
+      .filter((n) => isFinite(n))
+      // 负零归一化:"-0" token 不再让 Minimum/Median 等显示成 "-0",
+      // 也让 -0 与 0 在众数统计(Map key)里合并为同一个值
+      .map((n) => (n === 0 ? 0 : n))
     // 非数字 token 不再静默丢弃:显式提示忽略了几个,避免 "12, abc, 15" 被当作只有 2 个数
     const ignoredCount = tokens.length - nums.length
     const ignored =

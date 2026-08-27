@@ -37,8 +37,17 @@ function parseToml(src: string): ParseResult {
         const parent = descend(root, path.slice(0, -1))
         const key = path[path.length - 1]
         const existing = parent[key]
-        const arr = Array.isArray(existing) ? existing : (parent[key] = [])
-        if (!Array.isArray(arr)) throw new Error(`"${key}" is not an array table`)
+        // 已存在但不是数组表(如前面定义过 [table] 或标量)→ 明确报错,禁止静默覆盖丢数据
+        if (!Array.isArray(existing) && existing !== undefined) {
+          throw new Error(`"${key}" is not an array table`)
+        }
+        let arr: Json[]
+        if (Array.isArray(existing)) {
+          arr = existing
+        } else {
+          arr = []
+          parent[key] = arr
+        }
         cur = {}
         arr.push(cur)
       } else if (line.trim().startsWith('[')) {
@@ -158,6 +167,7 @@ function parseValue(s: string): Json {
   if (s === 'true') return true
   if (s === 'false') return false
   if (s.startsWith('[')) {
+    if (!s.endsWith(']')) throw new Error('Unterminated array (missing closing "]")')
     const inner = s.slice(1, s.lastIndexOf(']')).trim()
     if (!inner) return []
     // 按顶层逗号切分
@@ -177,6 +187,7 @@ function parseValue(s: string): Json {
   }
   if (s.startsWith('{')) {
     // 内联表 { k = v, k2 = v2 }
+    if (!s.endsWith('}')) throw new Error('Unterminated inline table (missing closing "}")')
     const inner = s.slice(1, -1).trim()
     if (!inner) return {}
     const obj: Record<string, Json> = {}

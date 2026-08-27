@@ -10,8 +10,10 @@ import { tui } from '@/lib/i18n/tool-l10n'
  * YAML to JSON Converter —— 手写 YAML 子集解析器
  *
  * 支持:mapping/sequence/嵌套、inline flow ([], {})、单/双引号字符串、
- * plain scalar、数字/布尔/null、block scalar (| 与 >)、# 注释。
- * 不支持:多文档流(---)、锚点(& *)、复杂类型(!!set)。
+ * plain scalar、数字/布尔/null(含 YAML 1.1 遗留布尔 yes/no/on/off)、
+ * block scalar (| 与 >)、# 注释。
+ * 锚点/别名(& *)与复杂类型(!!set)不支持且会显式报错;
+ * 多文档流(---)只转换第一个文档并提示。
  * 100% 本地。
  */
 
@@ -65,11 +67,18 @@ function parseScalar(raw: string): unknown {
   if ((v.startsWith('"') && v.endsWith('"')) || (v.startsWith("'") && v.endsWith("'"))) {
     return v.slice(1, -1)
   }
-  // 特殊关键字
+  // 锚点(&)/别名(*):按 YAML 规则纯标量不能以指示符开头;手写解析器不解析
+  // 它们,与其静默输出 "&a xxx"/"*ref" 字符串(产出错误数据),不如明确报错
+  if (/^[&*]/.test(v)) {
+    throw new Error(
+      'YAML anchors (&) and aliases (*) are not supported. Wrap the value in quotes if it is meant to be a literal string.',
+    )
+  }
+  // 特殊关键字(yes/no/on/off 是 YAML 1.1 遗留布尔,与工具 FAQ 文档口径一致)
   const lower = v.toLowerCase()
   if (lower === 'null' || lower === '~' || lower === '') return null
-  if (lower === 'true') return true
-  if (lower === 'false') return false
+  if (lower === 'true' || lower === 'yes' || lower === 'on') return true
+  if (lower === 'false' || lower === 'no' || lower === 'off') return false
   // 数字
   if (/^-?\d+$/.test(v)) {
     // 超出安全整数范围的大整数(16 位订单 ID、毫秒时间戳)保留原始字符串,
@@ -77,7 +86,11 @@ function parseScalar(raw: string): unknown {
     const n = Number(v)
     return Number.isSafeInteger(n) ? n : v
   }
-  if (/^-?\d*\.\d+$/.test(v)) return parseFloat(v)
+  if (/^-?\d*\.\d+$/.test(v)) {
+    // 极长小数会被 parseFloat 溢出为 Infinity(JSON.stringify 输出 null)→ 回退字符串
+    const f = parseFloat(v)
+    return Number.isFinite(f) ? f : v
+  }
   // 其它当作字符串
   return v
 }
@@ -237,7 +250,12 @@ function parseBlock(ctx: ParseContext, baseIndent: number): unknown {
           const k = itemRaw.slice(0, ci).trim()
           const rest = itemRaw.slice(ci + 1).trim()
           if (rest) {
-            itemMap[k] = parseFlow(rest)
+            // "- key: |" 形式的块标量(与下方 mapping 分支同规则;
+            // GitHub Actions 的 run:| 等高频写法依赖这里)
+            const bsItem = /^([|>])([+-]?)$/.exec(rest)
+            itemMap[k] = bsItem
+              ? parseBlockScalar(ctx, ind + 2, bsItem[1] === '>', bsItem[2] ?? '')
+              : parseFlow(rest)
           } else {
             itemMap[k] = parseChild(ctx, ind + 2)
           }
@@ -257,8 +275,12 @@ function parseBlock(ctx: ParseContext, baseIndent: number): unknown {
             const nk = nc.slice(0, nci).trim()
             const nrest = nc.slice(nci + 1).trim()
             if (nrest) {
-              itemMap[nk] = parseFlow(nrest)
               ctx.index++
+              // 与首个 key 同规则:nrest 为 |/> 时是块标量(key 缩进口径同主 mapping 分支)
+              const bsNext = /^([|>])([+-]?)$/.exec(nrest)
+              itemMap[nk] = bsNext
+                ? parseBlockScalar(ctx, ni, bsNext[1] === '>', bsNext[2] ?? '')
+                : parseFlow(nrest)
             } else {
               ctx.index++
               itemMap[nk] = parseChild(ctx, ni + 2)
@@ -266,7 +288,11 @@ function parseBlock(ctx: ParseContext, baseIndent: number): unknown {
           }
           seq.push(itemMap)
         } else {
-          seq.push(parseFlow(itemRaw))
+          // "- |" 单独成项:序列元素本身是块标量(多行文本作列表项)
+          const bsMatch = /^([|>])([+-]?)$/.exec(itemRaw)
+          seq.push(
+            bsMatch ? parseBlockScalar(ctx, ind, bsMatch[1] === '>', bsMatch[2] ?? '') : parseFlow(itemRaw),
+          )
         }
       }
       continue
@@ -325,12 +351,26 @@ function parseChild(ctx: ParseContext, minIndent: number): unknown {
 
 function yamlToJson(yaml: string): { value: unknown; multiDoc: boolean } {
   const rawLines = yaml.replace(/\r\n/g, '\n').split('\n')
-  // 预处理:出现在任何实际内容之前的 --- 只是文档起始分隔符,跳过继续解析;
-  // 之后再遇到 --- 视为多文档流,不支持 → 只取第一个文档并提示。
+  // 预处理(与解析器口径一致):
+  //  1) 行首 tab 视为非法缩进;
+  //  2) 出现在任何实际内容之前的 --- 只是文档起始分隔符,跳过继续解析;
+  //     之后在块标量正文【之外】遇到的 --- 才视为多文档流 → 只取第一个文档并提示。
+  // 块标量(|/> 收集区)正文里的行可以合法含 tab 或 "---"(如内嵌 Markdown 的
+  // 分隔线、带缩进的代码片段):跳过这两类检查,否则单文档会被误判截断。
   const lines: string[] = []
   let seenContent = false
   let multiDoc = false
+  let blockKeyIndent = -1 // 当前块标量所属 key 的缩进;-1 表示不在块标量正文内
   for (const l of rawLines) {
+    const sl = stripComment(l)
+    if (blockKeyIndent >= 0) {
+      // 块标量体内:空行或更深的行属于正文;回到 key 层级及以下则块结束
+      if (sl.trim() === '' || indentOf(sl) > blockKeyIndent) {
+        lines.push(l)
+        continue
+      }
+      blockKeyIndent = -1
+    }
     if (/^---\s*$/.test(l)) {
       if (!seenContent) continue
       multiDoc = true
@@ -339,6 +379,13 @@ function yamlToJson(yaml: string): { value: unknown; multiDoc: boolean } {
     // tab 在缩进里是非法的
     if (/^\t/.test(l)) throw new Error('Tabs are not allowed for indentation in YAML (use spaces).')
     if (!(l.trim() === '' || l.trim().startsWith('#'))) seenContent = true
+    // 块标量起始:"key: |[->]" 或列表项 "- |"(判定条件与下方解析分支保持一致)
+    if (
+      /^[ \t]*(?:-[ \t]+)*[^:[ \t][^:]*:[ \t]*[|>][+-]?[ \t]*$/.test(sl) ||
+      /^[ \t]*-[ \t]+[|>][+-]?[ \t]*$/.test(sl)
+    ) {
+      blockKeyIndent = indentOf(sl)
+    }
     lines.push(l)
   }
   const ctx: ParseContext = { lines, index: 0 }

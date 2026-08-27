@@ -48,7 +48,12 @@ export function TemperatureConverterClient() {
     else if (to === 'f') result = (celsius * 9) / 5 + 32
     else result = celsius + 273.15
 
-    return { result, belowAbsZero, celsius }
+    // 负零归一化:"-0" 之类输入经浮点运算可产出 -0,fmtNum 会渲染成 "-0 °C" 怪串
+    return {
+      result: result === 0 ? 0 : result,
+      belowAbsZero,
+      celsius: celsius === 0 ? 0 : celsius,
+    }
   }, [value, from, to])
 
   const summary = [
@@ -89,7 +94,7 @@ export function TemperatureConverterClient() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+      <div role="status" aria-live="polite" className="grid grid-cols-1 gap-3 sm:grid-cols-2">
         <ResultCard
           label={L('convertedValue', 'Converted value')}
           value={isFinite(result.result) ? `${fmtNum(result.result, 2)} ${unit(to)}` : '—'}

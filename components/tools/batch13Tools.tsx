@@ -80,7 +80,7 @@ export function JwtGeneratorClient() {
         <p role="alert" className="rounded-lg border-2 border-red-200 bg-red-50 p-3 text-sm text-red-700 dark:border-red-800/60 dark:bg-red-950/30 dark:text-red-300">⚠️ {error}</p>
       )}
       {token && (
-        <div>
+        <div role="status" aria-live="polite">
           <div className="mb-2 flex items-center justify-between">
             <span className="text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>{L('tokenLabel', 'Signed token')}</span>
             <CopyButton value={token} />
@@ -362,7 +362,7 @@ export function HtaccessRedirectGeneratorClient() {
     }
     const singles = pairs.filter((p) => p.from.trim() && p.to.trim())
       .map((p) => {
-        const from = p.from.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').replace(/^\/+/, '/')
+        const from = p.from.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').replace(/^\/+/, '/').replace(/\/+$/, '')
         return `# ${p.from} → ${p.to}\nRewriteRule ^${from.slice(1)}/?$ ${p.to} [R=301,L]`
       })
       .join('\n\n')
@@ -413,7 +413,7 @@ export function HtaccessRedirectGeneratorClient() {
         </button>
       </div>
 
-      <div>
+      <div role="status" aria-live="polite">
         <div className="mb-2 flex items-center justify-between">
           <span className="text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>.htaccess</span>
           <CopyButton value={output} />
@@ -481,7 +481,14 @@ export function UnicodeLookupClient() {
             <CopyButton value={u.ch} />
           </div>
         ))}
-        {results.length === 0 && <p className="text-sm" style={{ color: 'rgb(var(--text-faint))' }}>{L('noMatch', 'No matches — try "arrow", "star", "quote"…')}</p>}
+        {results.length === 0 && (
+          <div
+            className="rounded-lg border-2 border-dashed p-6 text-center text-sm sm:col-span-2 lg:col-span-3"
+            style={{ borderColor: 'rgb(var(--border-strong))', color: 'rgb(var(--text-faint))' }}
+          >
+            {L('noMatch', 'No matches — try "arrow", "star", "quote"…')}
+          </div>
+        )}
       </div>
       <CalculatorNote>{L('note', '🔤 Curated set covering the characters people actually search for. Paste any character from it as the search term to identify its code point. Full Unicode has 150k+ characters — emoji pickers cover that space.')}</CalculatorNote>
     </div>

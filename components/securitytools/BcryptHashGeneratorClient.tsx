@@ -241,11 +241,11 @@ export function BcryptHashGeneratorClient() {
         )}
       </div>
 
-      {error && <div className="rounded-lg border border-red-200 dark:border-red-800/60 bg-red-50 dark:bg-red-950/30 p-4 text-sm text-red-700 dark:text-red-300">⚠️ {error}</div>}
+      {error && <div role="alert" className="rounded-lg border border-red-200 dark:border-red-800/60 bg-red-50 dark:bg-red-950/30 p-4 text-sm text-red-700 dark:text-red-300">⚠️ {error}</div>}
 
       {/* 哈希输出 */}
       {hash && (
-        <div>
+        <div role="status" aria-live="polite">
           <div className="mb-1.5 flex flex-wrap items-center justify-between gap-2">
             <span className="text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
               {L('hash', 'Hash')}
@@ -303,7 +303,7 @@ export function BcryptHashGeneratorClient() {
               style={{ borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rgb(var(--bg-card))', color: 'rgb(var(--text))' }}
             />
           </div>
-          <div className="flex flex-wrap items-center gap-3">
+          <div role="status" aria-live="polite" className="flex flex-wrap items-center gap-3">
             <button
               type="button"
               onClick={handleVerify}

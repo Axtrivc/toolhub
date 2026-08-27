@@ -54,9 +54,10 @@ function targetHasPath(t: string): boolean {
 }
 
 function buildNginxConfig(o: NginxOptions): string {
-  const domain = o.domain.trim() || 'example.com'
-  const target = o.target.trim() || 'http://127.0.0.1:3000'
-  const port = o.port.trim() || '80'
+  // 自由文本拼进多行产物前剥离换行(清洗输入防注入多余 directive 行)
+  const domain = o.domain.replace(/[\r\n]+/g, ' ').trim() || 'example.com'
+  const target = o.target.replace(/[\r\n]+/g, ' ').trim() || 'http://127.0.0.1:3000'
+  const port = o.port.replace(/[\r\n]+/g, ' ').trim() || '80'
   const lines: string[] = []
 
   lines.push(`# Nginx reverse proxy configuration for ${domain}`)

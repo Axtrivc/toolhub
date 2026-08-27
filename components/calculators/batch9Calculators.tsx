@@ -130,8 +130,14 @@ export const PaceCalculatorClient = makeCalculatorClient({
   compute: (v) => {
     const distance = toNumStrict(v.distance)
     const timeSec = parseDuration(v.time)
+    // 空输入保持 '—' 占位(出厂默认观感);非空但非法(负数/乱格式)时把提示放到
+    // highlight 键,走工厂 ⚠️ 红卡——原先引导语挂在 races 普通结果键上,
+    // 会被当作结果导出到 Copy Summary/CSV,且红卡永不触发(brief2 #1)
+    if (!v.distance.trim() || !v.time.trim()) {
+      return { pace: '—', speed: '—', races: '—' }
+    }
     if (isNaN(distance) || distance <= 0 || isNaN(timeSec) || timeSec <= 0) {
-      return { pace: '—', speed: '—', races: 'Enter a positive distance and a time like 45:30' }
+      return { pace: '⚠️ Enter a positive distance and a time like 45:30', speed: '—', races: '—' }
     }
     const perUnitKm = v.unit === 'mile' ? 1.609344 : 1
     const paceSec = (timeSec / distance) * perUnitKm
@@ -139,7 +145,8 @@ export const PaceCalculatorClient = makeCalculatorClient({
     const speed = v.unit === 'mile'
       ? `${fmtNum(speedKmh / 1.609344, 2)} mph`
       : `${fmtNum(speedKmh, 2)} km/h`
-    // 等效成绩预测(同配速外推;不做 Riegel 减速修正,保持可解释性)
+    // 等效成绩预测(同配速外推;不做 Riegel 减速修正,保持可解释性)。
+    // 用 ' · ' 分隔:ResultCard 无 whitespace-pre,'\n' 会被折叠成空格挤成一行
     const lines = RACE_DISTANCES_KM.map(([name, km]) => {
       const t = (timeSec / distance) * km
       return `${name}: ${formatDuration(t)}`
@@ -147,7 +154,7 @@ export const PaceCalculatorClient = makeCalculatorClient({
     return {
       pace: `${formatDuration(paceSec)} /${v.unit}`,
       speed,
-      races: lines.join('\n'),
+      races: lines.join(' · '),
     }
   },
   chart: { kind: 'series', title: 'Finish times by distance' },

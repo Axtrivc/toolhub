@@ -138,8 +138,8 @@ export function ImageToBase64Client() {
       {/* 已上传 */}
       {img && (
         <div className="space-y-5">
-          {/* 文件信息 */}
-          <div className="flex items-center gap-4">
+          {/* 文件信息(FileReader 完成后出现,role=status 播报给屏幕阅读器) */}
+          <div className="flex items-center gap-4" role="status" aria-live="polite">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={img.dataUrl}

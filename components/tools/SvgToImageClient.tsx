@@ -118,6 +118,8 @@ export function SvgToImageClient() {
   const downloadUrlRef = useRef<string | null>(null)
   // 转换序号:快速连点 Convert 时,只有最新一次的结果允许落盘(防旧回调覆盖新结果)
   const runIdRef = useRef(0)
+  // 文件读取序号:快速连续选择多个文件时,只让最后一次读取的结果生效(防旧 read 晚到回写)
+  const readSeqRef = useRef(0)
 
   // 卸载时回收所有仍在持有的 ObjectURL
   useEffect(
@@ -133,13 +135,17 @@ export function SvgToImageClient() {
 
   // 读取上传文件
   const handleFile = useCallback((file: File) => {
-    const reader = new FileReader()
-    reader.onload = () => {
-      setSvgText(String(reader.result || ''))
-      setDownloadName(file.name.replace(/\.svg$/i, '') || 'converted')
-    }
-    reader.onerror = () => setError(L('errorReadFile', 'Failed to read file.'))
-    reader.readAsText(file)
+    const seq = ++readSeqRef.current
+    file
+      .text()
+      .then((text) => {
+        if (seq !== readSeqRef.current) return
+        setSvgText(text)
+        setDownloadName(file.name.replace(/\.svg$/i, '') || 'converted')
+      })
+      .catch(() => {
+        if (seq === readSeqRef.current) setError(L('errorReadFile', 'Failed to read file.'))
+      })
   }, [locale])
 
   const onFileChange = useCallback(
@@ -320,9 +326,9 @@ export function SvgToImageClient() {
       {/* 错误 */}
       {error && <div className="rounded-lg border border-red-200 dark:border-red-800/60 bg-red-50 dark:bg-red-950/30 p-4 text-sm text-red-700 dark:text-red-300">⚠️ {error}</div>}
 
-      {/* 结果:预览 + 下载 */}
+      {/* 结果:预览 + 下载(转换完成后出现,role=status 让屏幕阅读器播报) */}
       {downloadUrl && previewUrl && (
-        <div className="space-y-3">
+        <div role="status" aria-live="polite" className="space-y-3">
           <div className="flex flex-wrap items-center justify-between gap-2">
             <span className="text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>
               {L('result', 'Result')} {dims && <span className="font-normal text-slate-500 dark:text-slate-400">({dims.w} × {dims.h}px)</span>}

@@ -73,13 +73,15 @@ export function HashGeneratorClient() {
       <button onClick={generate} disabled={loading || !input} className="btn btn-primary disabled:opacity-50">
         {loading ? L('hashing', 'Hashing…') : L('generateHashes', '# Generate Hashes')}
       </button>
-      {error && <p className="text-sm text-red-600 dark:text-red-300">{error}</p>}
+      {error && <p role="alert" className="text-sm text-red-600 dark:text-red-300">{error}</p>}
       {hash && (
-        <HashResult
-          label={algo}
-          value={hash}
-          warning={algo === 'SHA-1' ? L('sha1Warning', '⚠️ Collision-broken since 2017 — not safe for signatures/certificates; use for legacy checksums only') : undefined}
-        />
+        <div role="status" aria-live="polite">
+          <HashResult
+            label={algo}
+            value={hash}
+            warning={algo === 'SHA-1' ? L('sha1Warning', '⚠️ Collision-broken since 2017 — not safe for signatures/certificates; use for legacy checksums only') : undefined}
+          />
+        </div>
       )}
       <CalculatorNote>
         {L('note', '🔐 Uses SubtleCrypto API (true cryptographic hashing). Pick SHA-256 (default), SHA-384, or SHA-512 — SHA-1 is cryptographically broken and offered for legacy checksums only.')}

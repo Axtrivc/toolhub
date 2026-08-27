@@ -174,8 +174,8 @@ export function UserAgentParserClient() {
         </p>
       ) : (
         <>
-          {/* 概览卡片 */}
-          <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
+          {/* 概览卡片(解析在粘贴/点击后完成,role=status 让屏幕阅读器播报) */}
+          <div role="status" aria-live="polite" className="grid grid-cols-2 gap-3 lg:grid-cols-4">
             <ResultCard label={L('browserLabel', 'Browser')} value={parsed.browser} sublabel={parsed.browserVersion ? `v${parsed.browserVersion}` : L('versionUnknown', 'version unknown')} highlight />
             <ResultCard label={L('osLabel', 'Operating System')} value={parsed.os} sublabel={parsed.osVersion || L('versionUnknown', 'version unknown')} />
             <ResultCard

@@ -151,6 +151,9 @@ export function SrtSubtitleShiftClient() {
   const [renumber, setRenumber] = useState(true)
   const [strip, setStrip] = useState(false)
   const fileRef = useRef<HTMLInputElement>(null)
+  // 文件读取序号:快速连续选择多个文件时只认最后一次(防旧 read 晚到回写);读取失败给出可见反馈
+  const readSeqRef = useRef(0)
+  const [fileError, setFileError] = useState(false)
 
   const offsetSeconds = useMemo(() => {
     if (offsetStr.trim() === '') return 0
@@ -166,12 +169,23 @@ export function SrtSubtitleShiftClient() {
   const handleLoadSample = useCallback(() => {
     setInput(SAMPLE_SRT)
     setOffsetStr('-1.5')
+    setFileError(false)
   }, [])
 
   const handleFile = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
     if (!file) return
-    file.text().then((text) => setInput(text)).catch(() => {})
+    const seq = ++readSeqRef.current
+    setFileError(false)
+    file
+      .text()
+      .then((text) => {
+        if (seq !== readSeqRef.current) return
+        setInput(text)
+      })
+      .catch(() => {
+        if (seq === readSeqRef.current) setFileError(true)
+      })
     // 允许重复选择同一文件
     e.target.value = ''
   }, [])
@@ -193,7 +207,10 @@ export function SrtSubtitleShiftClient() {
             {input && (
               <button
                 type="button"
-                onClick={() => setInput('')}
+                onClick={() => {
+                  setInput('')
+                  setFileError(false)
+                }}
                 className="-my-1 rounded-md px-2 py-1 text-xs hover:text-red-500 sm:text-sm"
                 style={{ color: 'rgb(var(--text-faint))' }}
               >
@@ -205,7 +222,10 @@ export function SrtSubtitleShiftClient() {
         <textarea
           id="srt-input"
           value={input}
-          onChange={(e) => setInput(e.target.value)}
+          onChange={(e) => {
+            setInput(e.target.value)
+            setFileError(false)
+          }}
           placeholder={'1\n00:00:01,500 --> 00:00:04,000\nFirst subtitle line'}
           rows={10}
           spellCheck={false}
@@ -252,6 +272,13 @@ export function SrtSubtitleShiftClient() {
           {L('invalidOffsetOr', ' or ')}
           <code>1.75</code>
           {L('invalidOffsetSuffix', '.')}
+        </div>
+      )}
+
+      {/* 文件读取失败提示(输入修正后消失) */}
+      {fileError && (
+        <div className="rounded-lg border border-red-200 dark:border-red-800/60 bg-red-50 dark:bg-red-950/30 p-4 text-sm text-red-700 dark:text-red-300">
+          ⚠️ {L('errReadFile', 'Could not read the selected file. Try re-saving it as plain text (.srt).')}
         </div>
       )}
 

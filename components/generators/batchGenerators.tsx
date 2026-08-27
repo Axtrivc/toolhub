@@ -39,7 +39,7 @@ export function UUIDGeneratorClient() {
         {uuids.length > 0 && <CopyButton value={uuids.join('\n')} label={L('copyAll', 'Copy all')} />}
       </div>
       {uuids.length > 0 && (
-        <div className="space-y-2">
+        <div role="status" aria-live="polite" className="space-y-2">
           {uuids.map((u, i) => (
             <div key={i} className="flex items-center justify-between gap-2 rounded-xl border border-[rgb(var(--border))] bg-[rgb(var(--bg-card))] p-3 shadow-sm">
               <code className="break-all font-mono text-sm text-[rgb(var(--text))]">{u}</code>
@@ -161,7 +161,7 @@ export function LoremIpsumGeneratorClient() {
         {output && <CopyButton value={output} />}
       </div>
       {output && (
-        <div className="whitespace-pre-line rounded-xl border border-[rgb(var(--border))] bg-[rgb(var(--bg-card))] p-4 text-sm leading-relaxed text-[rgb(var(--text-muted))] shadow-sm">
+        <div role="status" aria-live="polite" className="whitespace-pre-line rounded-xl border border-[rgb(var(--border))] bg-[rgb(var(--bg-card))] p-4 text-sm leading-relaxed text-[rgb(var(--text-muted))] shadow-sm">
           {output}
         </div>
       )}
@@ -215,6 +215,10 @@ export const TriangleCalculatorClient = makeCalculatorClient({
   compute: (v) => {
     const a = toNum(v.a)
     const b = toNum(v.b)
+    // 负边长与圆的负半径同理:a²/b² 会把负号伪装掉,c 看似正常而面积变负
+    if (a < 0 || b < 0) {
+      return { c: '⚠️ Side lengths cannot be negative', area: '—', perimeter: '—' }
+    }
     const c = Math.sqrt(a * a + b * b)
     return {
       c: `${fmtNum(c, 4)} (√(a² + b²))`,
@@ -241,6 +245,10 @@ export const RectangleCalculatorClient = makeCalculatorClient({
   compute: (v) => {
     const w = toNum(v.w)
     const h = toNum(v.h)
+    // 负宽高:面积/周长直接变负,对角线却看着正常,需在源头拦截
+    if (w < 0 || h < 0) {
+      return { area: '⚠️ Width and height cannot be negative', perimeter: '—', diagonal: '—' }
+    }
     return {
       area: `${fmtNum(w * h, 4)} (w × h)`,
       perimeter: `${fmtNum(2 * (w + h), 4)} (2(w + h))`,
@@ -347,14 +355,21 @@ export const InflationCalculatorClient = makeCalculatorClient({
     { key: 'future', label: 'Equivalent cost in future', highlight: true },
     { key: 'lost', label: 'Purchasing power lost' },
   ],
-  compute: (v) => {
+  compute: (v, locale) => {
     const amount = toNum(v.amount)
     const rate = toNum(v.rate) / 100
     const years = toNum(v.years)
+    if (amount < 0 || rate < 0 || years < 0) {
+      return {
+        future: `⚠️ ${tui('inflation-calculator', locale, 'errNonNegative', 'Values cannot be negative')}`,
+        lost: '—',
+      }
+    }
     const future = amount * Math.pow(1 + rate, years)
     return {
       future: fmtUSDValue(future),
-      lost: `${fmtNum(((future - amount) / future) * 100, 1)}%`,
+      // future 为 0/Infinity 时除式变 NaN/±Inf,兜回 '—' 避免 "—%" 怪串
+      lost: future > 0 && isFinite(future) ? `${fmtNum(((future - amount) / future) * 100, 1)}%` : '—',
     }
   },
   chart: { kind: 'series', title: 'Cost of the same basket' },
@@ -383,6 +398,8 @@ export const InflationCalculatorClient = makeCalculatorClient({
 })
 
 function fmtUSDValue(n: number): string {
+  // 超大指数(如 years>24000)会把 pow 推到 Infinity,直出会渲染成 "$∞"
+  if (!isFinite(n)) return '—'
   return n.toLocaleString('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 2 })
 }
 
@@ -407,11 +424,19 @@ export const RetirementCalculatorClient = makeCalculatorClient({
     { key: 'contributed', label: 'You contributed' },
     { key: 'growth', label: 'Investment growth' },
   ],
-  compute: (v) => {
+  compute: (v, locale) => {
     const principal = toNum(v.current)
     const monthly = toNum(v.monthly)
-    const rate = toNum(v.rate) / 100 / 12
+    const rate = toNum(v.rate) / 100
     const months = toNum(v.years) * 12
+    if (principal < 0 || monthly < 0 || rate < 0 || months < 0) {
+      return {
+        total: `⚠️ ${tui('retirement-calculator', locale, 'errNonNegative', 'Values cannot be negative')}`,
+        monthlyIncome: '—',
+        contributed: '—',
+        growth: '—',
+      }
+    }
     let future = principal
     if (rate === 0) future = principal + monthly * months
     else {
@@ -472,10 +497,16 @@ export const SimpleInterestCalculatorClient = makeCalculatorClient({
     { key: 'interest', label: 'Interest earned', highlight: true },
     { key: 'total', label: 'Total amount' },
   ],
-  compute: (v) => {
+  compute: (v, locale) => {
     const p = toNum(v.principal)
     const r = toNum(v.rate) / 100
     const t = toNum(v.years)
+    if (p < 0 || r < 0 || t < 0) {
+      return {
+        interest: `⚠️ ${tui('simple-interest-calculator', locale, 'errNonNegative', 'Values cannot be negative')}`,
+        total: '—',
+      }
+    }
     const interest = p * r * t
     return {
       interest: fmtUSDValue(interest),
@@ -537,9 +568,12 @@ export const UnitPriceCalculatorClient = makeCalculatorClient({
     { key: 'unit2price', label: 'Option 2 unit price' },
     { key: 'winner', label: 'Better deal', highlight: true },
   ],
-  compute: (v) => {
+  compute: (v, locale) => {
     const p1 = toNum(v.price1), s1 = toNum(v.size1)
     const p2 = toNum(v.price2), s2 = toNum(v.size2)
+    if (p1 < 0 || p2 < 0) {
+      return { unit1price: `⚠️ ${tui('unit-price-calculator', locale, 'errNonNegative', 'Prices cannot be negative')}`, unit2price: '—', winner: '—' }
+    }
     if (s1 <= 0 || s2 <= 0) return { unit1price: '—', unit2price: '—', winner: '—' }
     const u1 = p1 / s1, u2 = p2 / s2
     // 同家族归一后比较(如 g vs kg 折到每克);跨家族(g vs ml/ct)只展示单价,不判定优劣

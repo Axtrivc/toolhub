@@ -5,7 +5,7 @@ import { CalculatorField, ResultCard, CalculatorNote } from '../calculator/Calcu
 import { ResultActions } from '../ResultActions'
 import { LoadSampleButton } from '../LoadSampleButton'
 import { CopyButton } from '@/components/CopyButton'
-import { fmtNum, toNum } from '@/lib/format'
+import { fmtNum, toNumStrict } from '@/lib/format'
 import { useApp } from '@/components/providers/AppProviders'
 import { tui } from '@/lib/i18n/tool-l10n'
 import { getCalculatorSample } from '@/lib/tool-samples'
@@ -94,9 +94,10 @@ export function EpochConverterClient() {
           value={dateToTs !== null ? `${dateToTs}000` : date && !isNaN(date.getTime()) ? String(date.getTime()) : '—'} />
       </div>
 
-      {!isNaN(parsed) && !secValid && !msValid && (
+      {/* 输入非空但解析不出可靠结果(含逗号分隔/非法字符、位数超界)时给出提示,不再静默显示 '—' */}
+      {ts.trim() !== '' && (isNaN(parsed) || (!secValid && !msValid)) && (
         <p className="rounded-lg border p-3 text-sm" style={{ borderColor: 'rgb(var(--border-strong))', color: 'rgb(var(--text-muted))' }}>
-          {L('digitHint', 'Timestamps are usually 10 digits (seconds) or 13 digits (milliseconds). You entered something else — showing best guess anyway.')}
+          {L('digitHint', 'Timestamps are usually 10 digits (seconds) or 13 digits (milliseconds). This input cannot be interpreted reliably, so nothing is shown rather than a wrong guess.')}
         </p>
       )}
       <ResultActions summary={`${L('summaryTitle', 'Epoch Conversion')}\n${date && !isNaN(date.getTime()) ? `${ts} → ${date.toISOString()}` : ''}`} filename="epoch-conversion.txt"
@@ -179,11 +180,11 @@ export function JsonDiffClient() {
       {!error && (
         <>
           {rows.length === 0 ? (
-            <p className="rounded-lg border-2 border-green-200 bg-green-50 p-4 text-sm text-green-700 dark:border-green-800/60 dark:bg-green-950/30 dark:text-green-300">
+            <p role="status" aria-live="polite" className="rounded-lg border-2 border-green-200 bg-green-50 p-4 text-sm text-green-700 dark:border-green-800/60 dark:bg-green-950/30 dark:text-green-300">
               {L('identical', '✓ The two documents are structurally identical')}
             </p>
           ) : (
-            <div className="overflow-x-auto rounded-lg border border-border bg-card">
+            <div role="status" aria-live="polite" className="overflow-x-auto rounded-lg border border-border bg-card">
               <table className="w-full text-left text-sm">
                 <thead>
                   <tr className="border-b" style={{ borderColor: 'rgb(var(--border))', backgroundColor: 'rgb(var(--bg-subtle))' }}>
@@ -308,7 +309,7 @@ export function LineDiffCheckerClient() {
             <span className="text-green-600 dark:text-green-400">+{result.added} {L('addedN', 'added')}</span>
             <span className="text-red-600 dark:text-red-400">−{result.removed} {L('removedN', 'removed')}</span>
           </div>
-          <div className="overflow-hidden rounded-lg border border-border bg-card">
+          <div role="status" aria-live="polite" className="overflow-hidden rounded-lg border border-border bg-card">
             {result.lines.map((ln, idx) => (
               <div key={idx} className={`flex gap-3 px-4 py-1 font-mono text-xs ${rowCls(ln.type)}`}>
                 <span aria-hidden="true" className="shrink-0 select-none whitespace-pre" style={{ color: 'rgb(var(--text-faint))' }}>{sign(ln.type)}</span>
@@ -358,18 +359,23 @@ export function RobotsTxtGeneratorClient() {
   }
 
   const output = useMemo(() => {
+    // 清洗换行:防止规则/URL 里混入的换行符把单条指令拆成多行,破坏 robots.txt 结构
+    const clean = (s: string) => s.replace(/[\r\n]+/g, ' ').trim()
     const blocks = rules
       .map((r) => {
-        const lines = [`User-agent: ${r.agent}`]
-        if (r.disallow.trim()) lines.push(`Disallow: ${r.disallow}`)
-        if (r.allow.trim() && r.allow !== '/') lines.push(`Allow: ${r.allow}`)
-        else if (r.allow.trim() === '/' && r.disallow.trim() === '/') lines.push('Allow: /')
+        const agent = clean(r.agent)
+        const disallow = clean(r.disallow)
+        const allow = clean(r.allow)
+        const lines = [`User-agent: ${agent}`]
+        if (disallow) lines.push(`Disallow: ${disallow}`)
+        if (allow && allow !== '/') lines.push(`Allow: ${allow}`)
+        else if (allow === '/' && disallow === '/') lines.push('Allow: /')
         return lines.join('\n')
       })
       .join('\n\n')
     const parts = [blocks]
-    if (crawlDelay.trim()) parts.push(`Crawl-delay: ${crawlDelay.trim()}`)
-    if (sitemapUrl.trim()) parts.push(`Sitemap: ${sitemapUrl.trim()}`)
+    if (clean(crawlDelay)) parts.push(`Crawl-delay: ${clean(crawlDelay)}`)
+    if (clean(sitemapUrl)) parts.push(`Sitemap: ${clean(sitemapUrl)}`)
     return parts.filter(Boolean).join('\n\n')
   }, [rules, crawlDelay, sitemapUrl])
 
@@ -475,7 +481,7 @@ export function SleepCalculatorClient() {
   const suggestions = useMemo(() => {
     if (!time) return []
     const [h, m] = time.split(':').map(Number)
-    if (!Number.isFinite(h) || !Number.isFinite(m) || h > 23 || m > 59) return []
+    if (!Number.isFinite(h) || !Number.isFinite(m) || h < 0 || h > 23 || m < 0 || m > 59) return []
     // 15 分钟入睡潜伏期 + 6 个周期候选(4-9 个,90 分钟/个)
     const base = new Date()
     base.setHours(h, m, 0, 0)
@@ -601,10 +607,12 @@ export function CookingConverterClient() {
   }
 
   const result = useMemo(() => {
-    const amt = toNum(amount)
+    // 严格解析:空串/非法输入显式判 NaN(结果显示 '—'),而不是被 toNum 折叠成 0
+    // 渲染出「0 g · 0 cups」;负数分量对烹饪无意义,同样按无效处理
+    const amt = toNumStrict(amount)
     const ing = INGREDIENT_DENSITY[ingredient]
     const from = VOLUME_TO_CUP[fromUnit]
-    if (!ing || !from || isNaN(amt)) return null
+    if (!ing || !from || isNaN(amt) || amt < 0) return null
     // 统一先转成克:体积单位 × 杯重;重量单位直读
     let grams: number
     if (from.cups === -1) grams = amt

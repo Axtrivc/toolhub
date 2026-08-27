@@ -119,18 +119,21 @@ export function DateDifferenceClient() {
         </div>
       ) : (
         <>
-          <ResultCard
-            label={L('duration', 'Duration')}
-            value={
-              <span className="tabular-nums">
-                {result.years > 0 && `${result.years}${L('yrAbbr', ' yr ')}`}
-                {result.months > 0 && `${result.months}${L('moAbbr', ' mo ')}`}
-                {result.days}{L('daysWord', ' days')}
-              </span>
-            }
-            highlight
-          />
-          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
+          {/* 结果区(aria-live:改日期时屏幕阅读器播报,口径同 makeCalculatorClient) */}
+          <div role="status" aria-live="polite">
+            <ResultCard
+              label={L('duration', 'Duration')}
+              value={
+                <span className="tabular-nums">
+                  {result.years > 0 && `${result.years}${L('yrAbbr', ' yr ')}`}
+                  {result.months > 0 && `${result.months}${L('moAbbr', ' mo ')}`}
+                  {result.days}{L('daysWord', ' days')}
+                </span>
+              }
+              highlight
+            />
+          </div>
+          <div role="status" aria-live="polite" className="grid grid-cols-2 gap-3 sm:grid-cols-3">
             <ResultCard label={L('totalDays', 'Total days')} value={fmt(result.totalDays)} />
             <ResultCard label={L('totalWeeks', 'Total weeks')} value={fmt(result.totalWeeks)} />
             <ResultCard label={L('totalMonths', 'Total months')} value={fmt(result.totalMonths)} />

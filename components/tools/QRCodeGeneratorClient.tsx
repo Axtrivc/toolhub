@@ -66,6 +66,12 @@ export function QRCodeGeneratorClient() {
       setError('')
       return
     }
+    // 前景 = 背景时会生成一张纯色图(肉眼空白、扫描器不可读):提前拦截并提示
+    if (fgColor.toLowerCase() === bgColor.toLowerCase()) {
+      setDataUrl('')
+      setError(L('errSameColor', 'Foreground and background colors cannot be the same.'))
+      return
+    }
     // 容量按 UTF-8 字节数判定(TextEncoder 编码后计数):M 级 byte 模式约 2331 字节,
     // CJK 每字 3 字节,按字符数判断会漏放行超限内容;超长提前拒绝,避免卡顿
     const byteLen = new TextEncoder().encode(content).length

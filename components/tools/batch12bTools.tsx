@@ -99,7 +99,8 @@ export function LogFilterClient() {
       {result.out && (
         <div>
           <div className="mb-2 flex items-center justify-between">
-            <span className="text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
+            {/* aria-live 只挂计数行:结果区随击键实时刷新,播报整段输出会逐键刷屏 */}
+            <span role="status" aria-live="polite" className="text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
               {L('matchedN', '{m} of {t} lines').replace('{m}', String(result.matched)).replace('{t}', String(result.total))}
             </span>
             <CopyButton value={result.out} />

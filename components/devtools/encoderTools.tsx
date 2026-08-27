@@ -29,7 +29,11 @@ export function Base64CodecTool({ initialMode = 'encode', slug = 'base64-encoder
           try {
             const bytes = new TextEncoder().encode(t)
             let s = ''
-            for (let i = 0; i < bytes.length; i++) s += String.fromCharCode(bytes[i])
+            // 超长输入性能防护:整段粘贴大文件时逐字节字符串拼接会明显卡顿,
+            // 按块(0x8000)批量 String.fromCharCode,保持线性耗时
+            for (let i = 0; i < bytes.length; i += 0x8000) {
+              s += String.fromCharCode.apply(null, Array.from(bytes.subarray(i, i + 0x8000)) as number[])
+            }
             return btoa(s)
           } catch {
             return '⚠️ Cannot encode'

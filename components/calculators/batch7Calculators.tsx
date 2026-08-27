@@ -18,6 +18,8 @@ export const ScientificNotationCalculatorClient = makeCalculatorClient({
     { key: 'engineering', label: 'Engineering notation' },
   ],
   compute: (v, locale) => {
+    // 空输入 → 占位(空串被 Number 折叠成 0 会渲染出 "0 × 10⁰" 假结果)
+    if (!v.number.trim()) return { sci: '—', e: '—', engineering: '—' }
     const n = Number(v.number)
     if (!isFinite(n)) return { sci: `⚠️ ${tui('scientific-notation-converter', locale, 'errInvalid', 'Invalid number')}`, e: '—', engineering: '—' }
     if (n === 0) return { sci: '0 × 10⁰', e: '0e0', engineering: '0 × 10⁰' }
@@ -60,12 +62,18 @@ export const PrimeNumberCheckerClient = makeCalculatorClient({
   ],
   compute: (v, locale) => {
     const T = (key: string, fb: string) => tui('prime-number-checker', locale, key, fb)
-    // 先看原始值:toNum 会把 Infinity("1e999")折叠成 0 绕过下面的守卫
+    // 先看原始值(Number 直析,不经 toNum:"1e999" 折叠成 0 会绕过大数守卫);
+    // 空输入 → 占位(否则空串折叠成 0,直接给出「不是质数/下一个质数是 2」的假答案)
+    if (!v.n.trim()) return { isPrime: '—', next: '—', prev: '—' }
     const raw = Number(v.n)
     if (!isFinite(raw)) {
       return { isPrime: `⚠️ ${T('errTooBig', 'Enter a number ≤ 1,000,000,000,000 (10¹²)')}`, next: '—', prev: '—' }
     }
-    const n = Math.floor(toNum(v.n))
+    // 与 combination/permutation 同口径:非整数直接提示,不再静默取整(97.9 被当成 97 回答)
+    if (!Number.isInteger(raw)) {
+      return { isPrime: `⚠️ ${T('errIntegers', 'Enter a whole number')}`, next: '—', prev: '—' }
+    }
+    const n = raw
     if (n < 2) return { isPrime: T('noUnder2', 'No (primes start at 2)'), next: '2', prev: '—' }
     if (n > PRIME_MAX) {
       return { isPrime: `⚠️ ${T('errTooBig', 'Enter a number ≤ 1,000,000,000,000 (10¹²)')}`, next: '—', prev: '—' }
@@ -103,13 +111,19 @@ export const PrimeFactorizationCalculatorClient = makeCalculatorClient({
   inputs: [{ key: 'n', label: 'Number to factor', default: '360' }],
   outputs: [{ key: 'factors', label: 'Prime factorization', highlight: true }],
   compute: (v, locale) => {
-    // 同 prime-checker 的守卫模式:先看原始值(toNum 会把 "1e999" 折叠成 0),
-    // 再拦 n > 1e12(试除 √1e12 = 1e6 次迭代以内,毫秒级;更大的输入会卡死页面)
+    // 同 prime-checker 的守卫模式:Number 直析(不经 toNum,"1e999" 折叠成 0 会绕过守卫),
+    // 再拦 n > 1e12(试除 √1e12 = 1e6 次迭代以内,毫秒级;更大的输入会卡死页面);
+    // 空输入 → 占位(否则空串折叠成 0,误触发「≥ 2」红卡)
+    if (!v.n.trim()) return { factors: '—' }
     const raw = Number(v.n)
-    if (!isFinite(raw) || Math.floor(toNum(v.n)) > PRIME_MAX) {
+    if (!isFinite(raw) || raw > PRIME_MAX) {
       return { factors: `⚠️ ${tui('prime-factorization-calculator', locale, 'errTooBig', 'Enter a number ≤ 1,000,000,000,000 (10¹²)')}` }
     }
-    let n = Math.floor(toNum(v.n))
+    // 与 combination/permutation 同口径:非整数直接提示,不再静默取整
+    if (!Number.isInteger(raw)) {
+      return { factors: `⚠️ ${tui('prime-factorization-calculator', locale, 'errIntegers', 'Enter a whole number')}` }
+    }
+    let n = raw
     if (n < 2) return { factors: `⚠️ ${tui('prime-factorization-calculator', locale, 'errMinTwo', 'Enter a number ≥ 2')}` }
     const factors: number[] = []
     let d = 2
@@ -142,6 +156,8 @@ export const CombinationCalculatorClient = makeCalculatorClient({
   ],
   compute: (v, locale) => {
     const T = (key: string, fb: string) => tui('combination-calculator', locale, key, fb)
+    // 空输入 → 占位(避免空串折叠成 0 后给出 C(0,0)=1 的假答案)
+    if (!v.n.trim() || !v.r.trim()) return { result: '—', formula: '—', odds: '—' }
     const n = toNum(v.n)
     const r = toNum(v.r)
     // 非整数直接提示,不再静默取整
@@ -180,6 +196,8 @@ export const PermutationCalculatorClient = makeCalculatorClient({
   ],
   compute: (v, locale) => {
     const T = (key: string, fb: string) => tui('permutation-calculator', locale, key, fb)
+    // 空输入 → 占位(避免空串折叠成 0 后给出 P(0,0)=1 的假答案)
+    if (!v.n.trim() || !v.r.trim()) return { result: '—', formula: '—' }
     const n = toNum(v.n)
     const r = toNum(v.r)
     // 非整数直接提示,不再静默取整

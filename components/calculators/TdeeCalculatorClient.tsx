@@ -115,6 +115,8 @@ export function TdeeCalculatorClient() {
     if (w <= 0 || h <= 0 || a <= 0 || !isFinite(w) || !isFinite(h) || !isFinite(a)) return null
     // Mifflin-St Jeor
     const bmr = 10 * w + 6.25 * h - 5 * a + (sex === 'male' ? 5 : -161)
+    // 生理学上不可能的输入(如极轻体重 + 高龄)会让 BMR 为负 → 回落空态而非渲染负卡路里
+    if (!isFinite(bmr) || bmr <= 0) return null
     const factor = Number(activity)
     const tdee = bmr * factor
     if (!isFinite(tdee)) return null
@@ -251,8 +253,8 @@ export function TdeeCalculatorClient() {
 
       {result && goals ? (
         <>
-          {/* 主结果:BMR + TDEE */}
-          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+          {/* 主结果:BMR + TDEE(role=status 遵循站内结果区播报惯例) */}
+          <div role="status" aria-live="polite" className="grid grid-cols-1 gap-3 sm:grid-cols-2">
             <ResultCard label={L('bmrAtRest', 'BMR (at rest)')} value={`${round(result.bmr)} kcal`} sublabel={L('mifflinStJeor', 'Mifflin-St Jeor formula')} />
             <ResultCard label={L('tdeeMaintenance', 'TDEE (maintenance)')} value={`${round(result.tdee)} kcal`} highlight sublabel={L('bmrTimesActivity', 'BMR × activity factor')} />
           </div>

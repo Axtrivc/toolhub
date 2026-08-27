@@ -820,6 +820,11 @@ export const FractionCalculatorClient = makeCalculatorClient({
       case 'div': num = a * d; den = b * c; break
       default: num = 0; den = 1
     }
+    // 超大手输(如分子 1e300 × 1e300)会让结果溢出为 Infinity,
+    // 后续 gcd/floor/mod 会拼出 "Infinity NaN/1" 级垃圾串,先拦截
+    if (!isFinite(num) || !isFinite(den)) {
+      return { result: `⚠️ ${T('errOverflow', 'Numbers too large — try smaller values')}`, decimal: '—' }
+    }
     const g = gcd(Math.abs(num), Math.abs(den))
     // num===0 时结果恒为 0,不得继承异号负号(否则显示 "-0")
     const sign = num !== 0 && (num < 0) !== (den < 0) ? '-' : ''
@@ -960,9 +965,18 @@ export const MarkupCalculatorClient = makeCalculatorClient({
     { key: 'price', label: 'Selling price', highlight: true },
     { key: 'margin', label: 'Profit margin' },
   ],
-  compute: (v) => {
+  compute: (v, locale) => {
     const cost = toNum(v.cost)
     const markup = toNum(v.markup)
+    // 负成本/负加价会输出负售价,且负/负相除伪装出「正毛利率」的荒谬结果
+    if (cost < 0 || markup < 0) {
+      return {
+        profit: '—',
+        price: `⚠️ ${tui('markup-calculator', locale, 'errNonNegative', 'Cost and markup cannot be negative')}`,
+        margin: '—',
+        cost: '—',
+      }
+    }
     const profit = cost * (markup / 100)
     const price = cost + profit
     const margin = price > 0 ? (profit / price) * 100 : 0
@@ -1198,9 +1212,18 @@ export const HourlyToSalaryCalculatorClient = makeCalculatorClient({
     { key: 'weekly', label: 'Weekly' },
     { key: 'daily', label: 'Daily (8hr)' },
   ],
-  compute: (v) => {
+  compute: (v, locale) => {
     const hourly = toNum(v.hourly)
     const hours = toNum(v.hours)
+    // 负时薪/负工时会输出负年薪、负周薪,与同文件 roi/cc-payoff 一致拦截
+    if (hourly < 0 || hours < 0) {
+      return {
+        annual: `⚠️ ${tui('hourly-to-salary-calculator', locale, 'errNonNegative', 'Values cannot be negative')}`,
+        monthly: '—',
+        weekly: '—',
+        daily: '—',
+      }
+    }
     const weekly = hourly * hours
     const annual = weekly * 52
     return {
@@ -1429,8 +1452,17 @@ export const IncomeTaxEstimatorClient = makeCalculatorClient({
     { key: 'fica', label: 'Estimated FICA', sublabel: 'Social Security + Medicare' },
     { key: 'takehome', label: 'Estimated take-home', sublabel: 'After federal tax + FICA' },
   ],
-  compute: (v) => {
+  compute: (v, locale) => {
     const income = toNum(v.income)
+    // 负收入:FICA 基数随收入取负会显示「负税」并虚增到手额,直接拦截
+    if (income < 0) {
+      return {
+        tax: `⚠️ ${tui('income-tax-estimator', locale, 'errNonNegative', 'Income cannot be negative')}`,
+        effective: '—',
+        fica: '—',
+        takehome: '—',
+      }
+    }
     // 2026 美国联邦税档次(单身/户主/已婚,IRS Rev. Proc. 2025-32)
     // 每档语义:[该档下限, 税率];最后一档无上限(适用于"下限"以上的全部收入)
     const brackets = v.filing === 'married'

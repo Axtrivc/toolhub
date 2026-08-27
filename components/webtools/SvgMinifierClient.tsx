@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useCallback, useMemo } from 'react'
+import { useState, useCallback, useMemo, useRef } from 'react'
 import { CopyButton } from '@/components/CopyButton'
 import { useApp } from '@/components/providers/AppProviders'
 import { tui } from '@/lib/i18n/tool-l10n'
@@ -133,6 +133,8 @@ export function SvgMinifierClient() {
   // 记录源文件名,下载时沿用(icon.svg → icon.min.svg)而非固定 minified.svg
   const [sourceName, setSourceName] = useState('')
   const [dragging, setDragging] = useState(false)
+  // 上一次 FileReader:快速换文件时 abort 掉未完成的旧读取,防止旧 onload 晚到覆盖新内容(A6 竞态)
+  const readerRef = useRef<FileReader | null>(null)
   const [opts, setOpts] = useState<MinifyOptions>({
     removeDecl: true,
     removeComments: true,
@@ -153,7 +155,9 @@ export function SvgMinifierClient() {
       setError(L('errUploadSvg', 'Please upload an .svg file (or paste SVG markup into the textarea).'))
       return
     }
+    readerRef.current?.abort()
     const reader = new FileReader()
+    readerRef.current = reader
     reader.onload = () => {
       setInput(String(reader.result || ''))
       setSourceName(file.name)
@@ -335,8 +339,10 @@ export function SvgMinifierClient() {
       {/* 结果区 */}
       {output && (
         <div className="space-y-5">
-          {/* 体积对比 */}
+          {/* 体积对比(精简随输入实时变化,role=status 只播报这组短统计而非整段 SVG 输出) */}
           <div
+            role="status"
+            aria-live="polite"
             className="grid grid-cols-3 gap-4 rounded-lg border p-4 text-center"
             style={{ borderColor: 'rgb(var(--border))', backgroundColor: 'rgb(var(--bg-card))' }}
           >

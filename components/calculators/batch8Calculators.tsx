@@ -705,10 +705,14 @@ export const TrapezoidCalculatorClient = makeCalculatorClient({
     { key: 'h', label: 'Height (h)', default: '4', slider: { min: 1, max: 50, step: 0.5 } },
   ],
   outputs: [{ key: 'area', label: 'Area', highlight: true, sublabel: '(a + b)/2 × h' }],
-  compute: (v) => {
+  compute: (v, locale) => {
     const a = toNum(v.a)
     const b = toNum(v.b)
     const h = toNum(v.h)
+    // 负边长/负高无几何意义(可能拼出看似合理的负面积),与 cube/sphere 一致拦截
+    if (a < 0 || b < 0 || h < 0) {
+      return { area: `⚠️ ${tui('trapezoid-calculator', locale, 'errNonNegative', 'Sides and height cannot be negative')}` }
+    }
     // 公式放 sublabel,值保持纯数字(避免污染 Copy Summary / CSV)
     return { area: fmtNum(((a + b) / 2) * h, 4) }
   },
@@ -790,8 +794,19 @@ export const SalaryConverterClient = makeCalculatorClient({
     { key: 'weekly', label: 'Weekly' },
     { key: 'hourly', label: 'Hourly' },
   ],
-  compute: (v) => {
+  compute: (v, locale) => {
     const amount = toNum(v.amount)
+    // 负金额会把所有周期都输出为负工资,与 hourly-to-salary 一致拦截
+    if (amount < 0) {
+      return {
+        annual: `⚠️ ${tui('salary-converter', locale, 'errNonNegative', 'Amount cannot be negative')}`,
+        monthly: '—',
+        semimonthly: '—',
+        biweekly: '—',
+        weekly: '—',
+        hourly: '—',
+      }
+    }
     const rawHours = toNum(v.hours)
     // hours=0/负/非法时回退 40(年→小时换算的除数,防止 Infinity/负值)
     const hours = rawHours > 0 ? rawHours : 40

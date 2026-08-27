@@ -36,17 +36,21 @@ function calcLoan(principal: number, annualRate: number, years: number) {
     monthlyPayment = (principal * monthlyRate * factor) / (factor - 1)
   }
 
-  // 生成还款明细
+  // 生成还款明细。末期按剩余本金结清:固定月供的舍入残差落在最后一期,
+  // 保证期末余额恰好为 0、总还款与明细逐行自洽(0% 利率同样适用)。
   const schedule: AmortRow[] = []
   let balance = principal
+  let totalPaid = 0
   for (let m = 1; m <= months; m++) {
     const interest = balance * monthlyRate
-    const principalPaid = monthlyPayment - interest
-    balance = Math.max(0, balance - principalPaid)
-    schedule.push({ month: m, payment: monthlyPayment, principal: principalPaid, interest, balance })
+    const isLast = m === months
+    const payment = isLast ? balance + interest : monthlyPayment
+    const principalPaid = payment - interest
+    balance = isLast ? 0 : Math.max(0, balance - principalPaid)
+    schedule.push({ month: m, payment, principal: principalPaid, interest, balance })
+    totalPaid += payment
   }
 
-  const totalPaid = monthlyPayment * months
   const totalInterest = totalPaid - principal
 
   return { monthlyPayment, totalPaid, totalInterest, schedule, months }

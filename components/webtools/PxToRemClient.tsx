@@ -103,7 +103,7 @@ export function PxToRemClient() {
             className={inputCls}
             style={{ borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rgb(var(--bg-card))', color: 'rgb(var(--text))' }}
           />
-          <div className="mt-2 space-y-1 text-sm">
+          <div role="status" aria-live="polite" className="mt-2 space-y-1 text-sm">
             <div className="flex items-center justify-between">
               <span className="text-slate-500 dark:text-slate-400">rem:</span>
               <code className="rounded bg-blue-50 px-2 py-0.5 text-blue-700 dark:bg-blue-950/50 dark:text-blue-300">
@@ -132,7 +132,7 @@ export function PxToRemClient() {
             className={inputCls}
             style={{ borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rgb(var(--bg-card))', color: 'rgb(var(--text))' }}
           />
-          <div className="mt-2 space-y-1 text-sm">
+          <div role="status" aria-live="polite" className="mt-2 space-y-1 text-sm">
             <div className="flex items-center justify-between">
               <span className="text-slate-500 dark:text-slate-400">px:</span>
               <code className="rounded bg-blue-50 px-2 py-0.5 text-blue-700 dark:bg-blue-950/50 dark:text-blue-300">

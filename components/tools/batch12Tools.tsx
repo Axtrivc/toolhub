@@ -187,6 +187,12 @@ function formatXmlNode(node: Node, depth: number, indent: number): string {
     const t = (node.textContent ?? '').trim()
     return t ? `\n${pad}${t}` : ''
   }
+  // CDATA 原样保留(不做空白裁剪):此前美化会把 CDATA 内容整个丢弃,
+  // 而 minify(XMLSerializer)却保留 —— 同一文档两种模式输出不一致且丢数据
+  if (node.nodeType === Node.CDATA_SECTION_NODE) {
+    const t = node.textContent ?? ''
+    return t ? `\n${pad}<![CDATA[${t}]]>` : ''
+  }
   if (node.nodeType !== Node.ELEMENT_NODE) return ''
   const el = node as Element
   const attrs = Array.from(el.attributes).map((a) => ` ${a.name}="${a.value.replace(/"/g, '&quot;')}"`).join('')
@@ -258,7 +264,7 @@ export function XmlFormatterClient() {
         <p role="alert" className="rounded-lg border-2 border-red-200 bg-red-50 p-4 font-mono text-sm text-red-700 dark:border-red-800/60 dark:bg-red-950/30 dark:text-red-300">⚠️ {error}</p>
       )}
       {output && (
-        <div>
+        <div role="status" aria-live="polite">
           <div className="mb-2 flex items-center justify-between">
             <span className="text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>{L('outputLabel', 'Result')}</span>
             <CopyButton value={output} />

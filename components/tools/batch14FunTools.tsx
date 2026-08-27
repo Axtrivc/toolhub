@@ -42,12 +42,14 @@ export function DiceRollerClient() {
   const [rolls, setRolls] = useState<number[]>([])
   const [history, setHistory] = useState<string[]>([])
 
+  // 骰子数量钳制在 1..20(防卡死);按钮文案与实际投掷数共用同一钳制值,
+  // 否则输入 25 时按钮显示 "Roll 25×" 而实际只掷 20 颗
+  const nDice = Math.min(Math.max(Math.round(Number(count) || 1), 1), 20)
   const roll = useCallback(() => {
-    const n = Math.min(Math.max(Math.round(Number(count) || 1), 1), 20)
-    const out = Array.from({ length: n }, () => randInt(sides) + 1)
+    const out = Array.from({ length: nDice }, () => randInt(sides) + 1)
     setRolls(out)
-    setHistory((h) => [`${n}d${sides}: ${out.join(' + ')} = ${out.reduce((a, b) => a + b, 0)}`, ...h].slice(0, 6))
-  }, [sides, count])
+    setHistory((h) => [`${nDice}d${sides}: ${out.join(' + ')} = ${out.reduce((a, b) => a + b, 0)}`, ...h].slice(0, 6))
+  }, [sides, nDice])
 
   return (
     <div className="space-y-5">
@@ -68,7 +70,7 @@ export function DiceRollerClient() {
 
       <button type="button" onClick={roll}
         className="btn btn-primary w-full rounded-xl py-4 text-lg font-bold">
-        🎲 {L('rollBtn', `Roll ${count || 1}× d${sides}`)}
+        🎲 {L('rollBtn', `Roll ${nDice}× d${sides}`)}
       </button>
 
       {rolls.length > 0 && (
@@ -110,16 +112,21 @@ export function CoinFlipClient() {
   const [result, setResult] = useState<'H' | 'T' | null>(null)
   const [tally, setTally] = useState({ H: 0, T: 0 })
   const [flipping, setFlipping] = useState(false)
+  // 动画期间的 setTimeout 句柄:flip 中防重入(快速连点不再排队多个回环),
+  // unmount 时清掉避免对已卸载组件 setState
+  const flipTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
+  useEffect(() => () => { if (flipTimer.current !== null) clearTimeout(flipTimer.current) }, [])
 
   const flip = useCallback(() => {
+    if (flipping) return
     setFlipping(true)
-    setTimeout(() => {
+    flipTimer.current = setTimeout(() => {
       const r = randInt(2) === 0 ? 'H' : 'T'
       setResult(r)
       setTally((t) => ({ ...t, [r]: t[r] + 1 }))
       setFlipping(false)
     }, 450)
-  }, [])
+  }, [flipping])
 
   const total = tally.H + tally.T
 
@@ -163,6 +170,9 @@ export function WheelSpinnerClient() {
   const [spinning, setSpinning] = useState(false)
   const [winner, setWinner] = useState('')
   const spinRef = useRef(0)
+  // 抽奖动画的 setTimeout 句柄:unmount 时清掉,避免对已卸载组件 setState
+  const spinTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
+  useEffect(() => () => { if (spinTimer.current !== null) clearTimeout(spinTimer.current) }, [])
 
   const items = useMemo(
     () => itemsText.split('\n').map((x) => x.trim()).filter(Boolean).slice(0, 12),
@@ -179,7 +189,8 @@ export function WheelSpinnerClient() {
     const target = 360 * 5 + (360 - (pick * seg + seg / 2))
     spinRef.current += target - (spinRef.current % 360) + 360
     setAngle(spinRef.current)
-    setTimeout(() => {
+    if (spinTimer.current !== null) clearTimeout(spinTimer.current)
+    spinTimer.current = setTimeout(() => {
       setWinner(items[pick])
       setSpinning(false)
     }, 4200)
@@ -263,7 +274,8 @@ const MORSE_MAP: Record<string, string> = {
 const REVERSE_MORSE: Record<string, string> = Object.fromEntries(Object.entries(MORSE_MAP).map(([k, v]) => [v, k]))
 
 function encodeMorse(text: string): string {
-  return text.toUpperCase().split('').map((ch) => (ch === ' ' ? '/' : MORSE_MAP[ch] ?? '')).filter(Boolean).join(' ')
+  // 一切空白(含多行粘贴的 \n \r)都映射为词分隔符 '/',而不是被静默丢弃
+  return text.toUpperCase().split('').map((ch) => (/\s/.test(ch) ? '/' : MORSE_MAP[ch] ?? '')).filter(Boolean).join(' ')
 }
 
 function decodeMorse(morse: string): string {
@@ -276,6 +288,9 @@ export function MorseCodeTranslatorClient() {
   const sample = getCalculatorSample('morse-code-translator')
   const [mode, setMode] = useState<'encode' | 'decode'>('encode')
   const [input, setInput] = useState(sample?.text ?? '')
+  // 复用同一个 AudioContext:浏览器每页只允许创建约 6 个,每次播放新建
+  // 会在第 7 次左右耗尽配额且被 catch 静默吞掉,Play 按钮永久失效
+  const audioRef = useRef<AudioContext | null>(null)
 
   const output = useMemo(() => (mode === 'encode' ? encodeMorse(input) : decodeMorse(input)), [mode, input])
 
@@ -285,7 +300,13 @@ export function MorseCodeTranslatorClient() {
     try {
       const Ctx = window.AudioContext ?? (window as unknown as { webkitAudioContext?: typeof AudioContext }).webkitAudioContext
       if (!Ctx) return
-      const ctx = new Ctx()
+      let ctx = audioRef.current
+      if (!ctx || ctx.state === 'closed') {
+        ctx = new Ctx()
+        audioRef.current = ctx
+      }
+      // 自动播放策略:浏览器挂起时先 resume,否则调度的音符不会发声
+      if (ctx.state === 'suspended') void ctx.resume()
       const unit = 0.09
       let t = ctx.currentTime + 0.1
       for (const tok of output.split(' ')) {
@@ -326,7 +347,7 @@ export function MorseCodeTranslatorClient() {
         <label htmlFor="mc-in" className="mb-2 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
           {mode === 'encode' ? L('inText', 'Your text') : L('inMorse', 'Morse code (. and -, space between letters, / between words)')}
         </label>
-        <textarea id="mc-in" value={input} onChange={(e) => setInput(mode === 'encode' ? e.target.value : e.target.value.replace(/[^.\-/ ]/g, ''))}
+        <textarea id="mc-in" value={input} onChange={(e) => setInput(mode === 'encode' ? e.target.value : e.target.value.replace(/[^.\-/ \n\r]/g, ''))}
           rows={4} spellCheck={false}
           placeholder={mode === 'encode' ? 'SOS we are sinking' : '... --- ...'}
           className="w-full rounded-lg border p-4 font-mono text-sm outline-none transition focus:ring-2"
@@ -492,19 +513,20 @@ export function RandomTeamGeneratorClient() {
           🎯 {L('generate', 'Generate teams')}
         </button>
         {teams.length > 0 && (
-          <button type="button" onClick={generate} className="btn btn-secondary">{L('reshuffle', 'Reshuffle')}</button>
+          <button type="button" onClick={generate} className="btn btn-secondary">🔁 {L('reshuffle', 'Reshuffle')}</button>
         )}
       </div>
 
       {teams.length > 0 && (
         <div role="status" aria-live="polite" className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {teams.map((team, i) => (
+          {/* 队数 > 人数时轮流分配会产生空队:渲染前滤掉并连续编号,避免出现空白卡片 */}
+          {teams.filter((team) => team.length > 0).map((team, i) => (
             <div key={i} className="rounded-xl border p-4" style={{ borderColor: 'rgb(var(--border))', backgroundColor: 'rgb(var(--bg-card))' }}>
               <h3 className="mb-2 text-sm font-bold uppercase tracking-wide" style={{ color: 'rgb(var(--text-muted))' }}>
                 {L('teamN', 'Team {n}').replace('{n}', String(i + 1))}
               </h3>
               <ul className="space-y-1 text-sm" style={{ color: 'rgb(var(--text))' }}>
-                {team.map((n) => <li key={n}>• {n}</li>)}
+                {team.map((n, idx) => <li key={`${idx}-${n}`}>• {n}</li>)}
               </ul>
             </div>
           ))}

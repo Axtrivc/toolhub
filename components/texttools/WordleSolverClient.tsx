@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useMemo, useCallback } from 'react'
+import { useState, useMemo, useCallback, useEffect, useRef } from 'react'
 import { FIVE_LETTER_WORDS } from '@/lib/wordle-words'
 import { useApp } from '@/components/providers/AppProviders'
 import { tui } from '@/lib/i18n/tool-l10n'
@@ -58,7 +58,10 @@ export function WordleSolverClient() {
   const solverResults = useMemo(() => {
     if (!hasSolverInput) return []
     const g = greens.map((x) => x.trim().toLowerCase())
-    const must = new Set(yellows.toLowerCase().replace(/[^a-z]/g, '').split(''))
+    // 黄色按输入次数计数:重复字母在真实反馈里可能同时出现黄/灰(如猜 eerie 而
+    // 答案含 3 个 e 时会有两个黄 e),用 Set 会把重数折叠成 1 导致误排候选
+    const mustLetters = yellows.toLowerCase().replace(/[^a-z]/g, '').split('')
+    const must = new Set(mustLetters)
     const greySet = new Set(greys.toLowerCase().replace(/[^a-z]/g, '').split(''))
     return dictionary
       .filter((w) => {
@@ -68,7 +71,7 @@ export function WordleSolverClient() {
         for (const ch of greySet) {
           // 灰色字母若同时是已知(绿/黄)字母:出现次数不得超过已确认数
           // (真实 Wordle 语义:多余重复字母才会被标灰)
-          const known = g.filter((x) => x === ch).length + (must.has(ch) ? 1 : 0)
+          const known = g.filter((x) => x === ch).length + mustLetters.filter((x) => x === ch).length
           const count = w.split('').filter((x) => x === ch).length
           if (count > known) return false
         }
@@ -108,14 +111,33 @@ export function WordleSolverClient() {
     })
   }, [])
 
+  // 连点不同候选词时,旧的 setTimeout 会提前清掉新词的高亮:ref 复用唯一
+  // timeout 并在卸载时清理(与 brief 定时器三件套要求一致)
+  const copyTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+
+  useEffect(() => {
+    return () => {
+      if (copyTimerRef.current) clearTimeout(copyTimerRef.current)
+    }
+  }, [])
+
   const copyWord = useCallback(async (word: string) => {
     try {
       await navigator.clipboard.writeText(word)
       setCopiedWord(word)
-      setTimeout(() => setCopiedWord(null), 1200)
+      if (copyTimerRef.current) clearTimeout(copyTimerRef.current)
+      copyTimerRef.current = setTimeout(() => setCopiedWord(null), 1200)
     } catch {
       // 剪贴板不可用时静默
     }
+  }, [])
+
+  // 一键清空两个模式的约束输入(保留本会话粘贴的补充词表)
+  const clearAll = useCallback(() => {
+    setGreens(['', '', '', '', ''])
+    setYellows('')
+    setGreys('')
+    setAnagramLetters('')
   }, [])
 
   const resultList = (
@@ -152,21 +174,30 @@ export function WordleSolverClient() {
 
   return (
     <div className="space-y-6">
-      {/* 模式切换 */}
-      <div className="flex gap-2">
+      {/* 模式切换 + 清空 */}
+      <div className="flex flex-wrap items-center justify-between gap-2">
+        <div className="flex gap-2">
+          <button
+            type="button"
+            onClick={() => setMode('solver')}
+            className={`btn ${mode === 'solver' ? 'btn-primary' : 'btn-secondary'}`}
+          >
+            {L('solverMode', 'Wordle solver')}
+          </button>
+          <button
+            type="button"
+            onClick={() => setMode('anagram')}
+            className={`btn ${mode === 'anagram' ? 'btn-primary' : 'btn-secondary'}`}
+          >
+            {L('anagramMode', 'Anagram mode')}
+          </button>
+        </div>
         <button
           type="button"
-          onClick={() => setMode('solver')}
-          className={`btn ${mode === 'solver' ? 'btn-primary' : 'btn-secondary'}`}
+          onClick={clearAll}
+          className="-my-1 rounded-md px-2 py-1 text-xs text-slate-400 hover:text-red-500 sm:text-sm"
         >
-          {L('solverMode', 'Wordle solver')}
-        </button>
-        <button
-          type="button"
-          onClick={() => setMode('anagram')}
-          className={`btn ${mode === 'anagram' ? 'btn-primary' : 'btn-secondary'}`}
-        >
-          {L('anagramMode', 'Anagram mode')}
+          {L('clear', 'Clear')}
         </button>
       </div>
 

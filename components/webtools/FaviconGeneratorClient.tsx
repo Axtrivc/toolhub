@@ -30,6 +30,10 @@ const SIZES: SizedIcon[] = [
 /** favicon.ico 内嵌的三档 PNG(Vista+ 支持 PNG-in-ICO,无需 BMP) */
 const ICO_SIZES = [16, 32, 48]
 
+// 与 image-to-base64 同口径:readAsDataURL 会把整文件 base64 化(~33% 膨胀)常驻内存,
+// 超大文件会冻结标签页;favicon 场景 20MB 绰绰有余,先拦截再解码。
+const MAX_BYTES = 20 * 1024 * 1024
+
 /** 把图片画成正方形居中裁剪后的 canvas(源图 → cover 到 target×target) */
 function drawSquare(canvas: HTMLCanvasElement, img: HTMLImageElement, target: number) {
   canvas.width = target
@@ -108,6 +112,15 @@ export function FaviconGeneratorClient() {
     setError('')
     if (!file.type.startsWith('image/')) {
       setError(L('errUploadImage', 'Please upload an image file (PNG, JPG, GIF, or WebP).'))
+      return
+    }
+    if (file.size > MAX_BYTES) {
+      setError(
+        L('errTooLarge', 'File is too large ({size}). Maximum size is 20 MB.').replace(
+          '{size}',
+          `${(file.size / (1024 * 1024)).toFixed(2)} MB`,
+        ),
+      )
       return
     }
     const reader = new FileReader()
@@ -297,8 +310,8 @@ export function FaviconGeneratorClient() {
       {/* 已上传:预览 + 导出 */}
       {imgSrc && (
         <div className="space-y-5">
-          {/* 源图 + 重选 */}
-          <div className="flex items-center gap-4">
+          {/* 源图 + 重选(解码完成后随预览一起出现,role=status 播报文件名) */}
+          <div className="flex items-center gap-4" role="status" aria-live="polite">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={imgSrc}

@@ -457,11 +457,13 @@ export function ImageResizerClient() {
             </div>
           )}
 
-          {/* 结果:预览 + 对比 + 下载 */}
+          {/* 结果:预览 + 对比 + 下载(防抖编码完成后出现,role=status 播报) */}
           {dimsValid && result && (
             <div
               className="flex flex-wrap items-center gap-4 rounded-lg border p-4"
               style={{ borderColor: 'rgb(var(--border))', backgroundColor: 'rgb(var(--bg-card))' }}
+              role="status"
+              aria-live="polite"
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img

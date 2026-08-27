@@ -619,7 +619,7 @@ export function IpCheckerClient() {
       {/* ───── 头部:当前 IP + 查询 ───── */}
       <div className="surface rounded-xl border p-5 shadow-sm">
         <div className="flex flex-wrap items-center gap-3">
-          <div className="min-w-0 flex-1">
+          <div className="min-w-0 flex-1" role="status" aria-live="polite">
             <p className="text-xs font-medium uppercase tracking-wider" style={{ color: 'rgb(var(--text-subtle))' }}>
               {d.yourCurrentIp}
             </p>
@@ -646,7 +646,11 @@ export function IpCheckerClient() {
           <input
             type="text"
             value={query}
-            onChange={(e) => setQuery(e.target.value)}
+            onChange={(e) => {
+              setQuery(e.target.value)
+              // 输入改动即清除旧的校验错误,避免改正后红字仍滞留(B2)
+              if (queryErrorKey) setQueryErrorKey('')
+            }}
             onKeyDown={(e) => e.key === 'Enter' && void handleQuery()}
             placeholder={d.queryPlaceholder}
             className="flex-1 rounded-lg border px-3 py-2 font-mono text-sm outline-none transition focus:ring-2"

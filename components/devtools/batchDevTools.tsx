@@ -45,11 +45,12 @@ export function RandomNumberGeneratorClient() {
   const [unique, setUnique] = useState(false)
 
   const generate = () => {
-    // 显式校验非法输入(Number() 对 'e'/'-'/空值得 NaN,守卫会漏),
+    // 显式校验非法输入(Number() 对 'e'/'-' 得 NaN,守卫会漏);
+    // 空串 Number('')===0 会被静默折叠成 0,同样显式判非法,
     // 避免在 unique 模式下进入 while 死循环导致标签页冻结。
-    const lo = Number(min)
-    const hi = Number(max)
-    const n = Number(count)
+    const lo = min.trim() === '' ? NaN : Number(min)
+    const hi = max.trim() === '' ? NaN : Number(max)
+    const n = count.trim() === '' ? NaN : Number(count)
     if (!Number.isFinite(lo) || !Number.isFinite(hi) || !Number.isFinite(n)) {
       setResult(L('invalidNumbersError', '⚠️ Please enter valid numbers for Min, Max, and Count'))
       return
@@ -114,7 +115,7 @@ export function RandomNumberGeneratorClient() {
         <button onClick={generate} className="btn btn-primary">{L('generate', '🎲 Generate')}</button>
         <CopyButton value={result} disabled={!result} />
       </div>
-      <div className="rounded-lg border-2 p-4" style={{ borderColor: 'rgb(var(--primary) / 0.3)', backgroundColor: 'rgb(var(--primary) / 0.06)' }}>
+      <div role="status" aria-live="polite" className="rounded-lg border-2 p-4" style={{ borderColor: 'rgb(var(--primary) / 0.3)', backgroundColor: 'rgb(var(--primary) / 0.06)' }}>
         <code className="font-mono text-lg" style={{ color: 'rgb(var(--primary))' }}>{result || L('clickGenerateHint', 'Click Generate to roll')}</code>
       </div>
     </div>

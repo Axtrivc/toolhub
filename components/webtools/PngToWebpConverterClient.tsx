@@ -44,6 +44,8 @@ export function PngToWebpConverterClient() {
   const [unsupported, setUnsupported] = useState(false)
   const imgRef = useRef<HTMLImageElement | null>(null)
   const outUrlRef = useRef<string>('')
+  // 上一次 FileReader:快速换文件时 abort 掉未完成的旧读取,防止旧 onload 晚到覆盖新图(A6 竞态)
+  const readerRef = useRef<FileReader | null>(null)
 
   // 处理文件上传(PNG / JPG)
   const handleFile = useCallback((file: File) => {
@@ -53,7 +55,9 @@ export function PngToWebpConverterClient() {
       setError(L('errUploadPngJpg', 'Please upload a PNG or JPG image file.'))
       return
     }
+    readerRef.current?.abort()
     const reader = new FileReader()
+    readerRef.current = reader
     reader.onload = () => {
       setImgSrc(reader.result as string)
       setImgName(file.name.replace(/\.[^.]+$/, '') || 'image')
@@ -263,8 +267,11 @@ export function PngToWebpConverterClient() {
           </div>
 
           {/* 体积对比 + 压缩率条 */}
+          {/* 输出结果(转换异步完成后出现,role=status 让屏幕阅读器播报体积/压缩率) */}
           {output && (
             <div
+              role="status"
+              aria-live="polite"
               className="space-y-4 rounded-lg border p-4"
               style={{ borderColor: 'rgb(var(--border))', backgroundColor: 'rgb(var(--bg-card))' }}
             >

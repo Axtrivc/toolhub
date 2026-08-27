@@ -233,9 +233,9 @@ export function RandomChoicePickerClient() {
         <CopyButton value={winners.join('\n')} label={L('copyWinners', 'Copy winners')} disabled={winners.length === 0} />
       </div>
 
-      {/* 获奖者卡片 */}
+      {/* 获奖者卡片(抽取动画结束后挂载,role=status 让屏幕阅读器播报结果) */}
       {winners.length > 0 && !spinning && (
-        <div className="flex flex-wrap gap-2">
+        <div role="status" aria-live="polite" className="flex flex-wrap gap-2">
           {winners.map((w, i) => (
             <div
               key={`${w}-${i}`}

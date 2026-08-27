@@ -378,7 +378,12 @@ export function RegexTesterClient() {
                       const gname = groupNames[gi + 1]
                       return (
                         <span key={gi} className="rounded bg-blue-50 px-1.5 py-0.5 font-mono text-[11px] text-blue-700 dark:bg-blue-950/50 dark:text-blue-300">
-                          {gname ? `${gname} ($${gi + 1})` : `$${gi + 1}`}: {g ?? L('emptyGroup', '(empty)')}
+                          {gname ? `${gname} ($${gi + 1})` : `$${gi + 1}`}:{' '}
+                          {g === undefined
+                            ? L('notParticipated', '(did not participate)')
+                            : g === ''
+                              ? L('emptyGroup', '(empty)')
+                              : g}
                         </span>
                       )
                     })}

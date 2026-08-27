@@ -32,9 +32,12 @@ export function AmortizationTableGeneratorClient() {
 
   const result = useMemo(() => {
     const principal = toNumStrict(values.principal)
-    const rate = toNum(values.rate) / 100 / 12
+    // 利率与本金同为强校验:空串/非法输入此前经 toNum 折叠为 0,
+    // 会静默按「0% 利息」生成整张表误导用户 → 统一走错误卡
+    const ratePct = toNumStrict(values.rate)
+    const rate = ratePct / 100 / 12
     const months = Math.round(toNum(values.years) * 12)
-    if (isNaN(principal) || principal <= 0 || rate < 0 || months <= 0 || months > 1200) {
+    if (isNaN(principal) || principal <= 0 || isNaN(ratePct) || ratePct < 0 || months <= 0 || months > 1200) {
       return {
         monthly: 0, totalInterest: 0, totalPaid: 0, interestShare: '0',
         rows: [] as Array<[number, number, number, number, number]>,

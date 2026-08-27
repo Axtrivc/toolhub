@@ -3,6 +3,7 @@
 /** 格式化为美元货币 */
 export function fmtUSD(n: number, digits = 2): string {
   if (!isFinite(n)) return '—'
+  if (Object.is(n, -0)) n = 0 // "-$0.00" 防呆:负零按正零渲染
   return n.toLocaleString('en-US', {
     style: 'currency',
     currency: 'USD',
@@ -16,6 +17,7 @@ export function fmtUSD(n: number, digits = 2): string {
  *  ≥1e15 的大数(如 1 kWh→eV)不再展示双精度尾数噪声。 */
 export function fmtNum(n: number, digits = 2, locale = 'en-US'): string {
   if (!isFinite(n)) return '—'
+  if (Object.is(n, -0)) n = 0
   const abs = Math.abs(n)
   if (n !== 0 && (abs < 10 ** -digits || abs >= 1e15)) {
     return n.toExponential(4)
@@ -28,6 +30,7 @@ export function fmtNum(n: number, digits = 2, locale = 'en-US'): string {
 /** 格式化为百分比 */
 export function fmtPct(n: number, digits = 2): string {
   if (!isFinite(n)) return '—'
+  if (Object.is(n, -0)) n = 0
   return `${Number(n.toFixed(digits))}%`
 }
 

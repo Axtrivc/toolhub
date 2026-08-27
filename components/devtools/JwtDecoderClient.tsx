@@ -108,11 +108,13 @@ export function JwtDecoderClient() {
     let problem = false
     for (const [key, labelKey, labelFb] of defs) {
       const ts = p[key]
-      if (typeof ts !== 'number') continue
-      const date = new Date(ts * 1000)
-      const dur = humanizeDuration(Math.abs(ts - nowSec))
+      // 非有限数一律跳过;部分签发方误用毫秒时间戳(>1e12 在秒级已属公元三万年后)→ 归一为秒
+      if (typeof ts !== 'number' || !Number.isFinite(ts)) continue
+      const secs = ts > 1e12 ? Math.floor(ts / 1000) : ts
+      const date = new Date(secs * 1000)
+      const dur = humanizeDuration(Math.abs(secs - nowSec))
       let rel: string
-      if (ts < nowSec) {
+      if (secs < nowSec) {
         rel = (key === 'exp' ? L('expiredAgo', 'expired {dur} ago') : L('timeAgo', '{dur} ago')).replace('{dur}', dur)
         if (key === 'exp') problem = true
       } else {
@@ -177,9 +179,21 @@ export function JwtDecoderClient() {
       {/* 解码结果:Header / Payload / Signature 三栏 */}
       {result.decoded && (
         <div className="space-y-4">
-          {/* 时间类 claim:iat/nbf/exp → 本地时间 + 剩余/已过时长 */}
+          {/* alg "none" = 未签名令牌:任何人可伪造/篡改,必须醒目提示 */}
+          {(result.decoded.header as { alg?: unknown })?.alg === 'none' && (
+            <div
+              role="alert"
+              className="rounded-lg border border-amber-200 bg-amber-50 p-3 text-sm text-amber-800 dark:border-amber-800 dark:bg-amber-950/30 dark:text-amber-200"
+            >
+              ⚠️ {L('algNoneWarn', 'This token is unsigned (alg "none") — anyone can forge or tamper with it. Never accept it without verifying through another channel.')}
+            </div>
+          )}
+
+          {/* 时间类 claim:iat/nbf/exp → 本地时间 + 剩余/已过时长(挂载后异步就绪,播报给屏幕阅读器) */}
           {timeClaims.claims.length > 0 && (
             <div
+              role="status"
+              aria-live="polite"
               className={`rounded-lg border p-3 text-sm ${
                 timeClaims.problem
                   ? 'border-red-200 bg-red-50 text-red-700 dark:border-red-800/60 dark:bg-red-950/30 dark:text-red-300'

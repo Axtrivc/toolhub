@@ -131,8 +131,8 @@ export function GPACalculatorClient() {
         {L('addCourse', '+ Add course')}
       </button>
 
-      {/* 结果 */}
-      <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
+      {/* 结果(aria-live:增删课程/改成绩时屏幕阅读器播报) */}
+      <div role="status" aria-live="polite" className="grid grid-cols-1 gap-3 sm:grid-cols-3">
         <ResultCard label={L('yourGpa', 'Your GPA')} value={fmtNum(result.gpa, 2)} highlight sublabel={L('on4Scale', 'On 4.0 scale')} />
         <ResultCard label={L('totalCredits', 'Total credits')} value={<span className="tabular-nums">{fmtNum(result.totalCredits, 1)}</span>} />
         <ResultCard label={L('gradePoints', 'Grade points')} value={<span className="tabular-nums">{fmtNum(result.totalPoints, 1)}</span>} />

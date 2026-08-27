@@ -231,8 +231,10 @@ export function SshKeyGeneratorClient() {
 
       {keys && (
         <>
-          {/* 指纹 */}
+          {/* 指纹(生成完成后出现,role=status 让屏幕阅读器播报) */}
           <div
+            role="status"
+            aria-live="polite"
             className="rounded-lg border p-5"
             style={{ borderColor: 'rgb(var(--primary) / 0.4)', backgroundColor: 'rgb(var(--primary) / 0.08)' }}
           >
