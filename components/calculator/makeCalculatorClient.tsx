@@ -14,7 +14,6 @@ import { ShareResultButton } from '../calculator/ShareResultButton'
 import { PresetChips } from '../calculator/PresetChips'
 import type { CalculatorConfig } from '@/lib/calculator-types'
 import { getCalculatorSample } from '@/lib/tool-samples'
-import { getTool } from '@/lib/tools'
 import { useApp } from '@/components/providers/AppProviders'
 import { tui, tuiCalc } from '@/lib/i18n/tool-l10n'
 
@@ -510,7 +509,7 @@ export function makeCalculatorClient(config: CalculatorConfig): ComponentType {
           />
           {highlightOut && highlightValue && highlightValue !== '—' && !highlightValue.startsWith('⚠️') && (
             <ShareResultButton
-              toolName={config.slug ? (getTool(config.slug)?.name ?? config.slug) : 'Result'}
+              toolSlug={config.slug || undefined}
               headline={{ label: outLabel(highlightOut.key, highlightOut.label), value: highlightValue }}
               lines={config.inputs.slice(0, 5).map((f) => ({
                 label: inLabel(f.key, f.label),

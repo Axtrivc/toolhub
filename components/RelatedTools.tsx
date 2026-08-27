@@ -1,7 +1,7 @@
 'use client'
 
 import { getRelatedTools } from '@/lib/tools'
-import { getToolIcon } from '@/lib/tools'
+import { getToolIcon } from '@/lib/tool-icons'
 import { SmartIcon } from '@/components/SmartIcon'
 import type { ToolMeta } from '@/lib/tools'
 import { useApp } from './providers/AppProviders'

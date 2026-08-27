@@ -4,51 +4,54 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { useApp } from './providers/AppProviders'
 import { t, tc, getToolName } from '@/lib/i18n'
-import { SITE_NAME } from '@/lib/seo'
-import { getPublishedTools } from '@/lib/tools'
+import { SITE_NAME } from '@/lib/constants'
 import { SiteStats } from './SiteStats'
 
-export function Footer() {
+/**
+ * Footer 分类导航数据(由 app/layout.tsx 服务端预计算传入)。
+ * Footer 只需 slug/name/category 三个轻字段;工具注册表(SEO 文案重数据)
+ * 留在服务端,不进客户端 bundle —— 这是全站每页共载 chunk 瘦身的关键一环。
+ */
+export interface FooterNavCategory {
+  category: string
+  /** 该分类已上线工具总数(「+N more」链接用) */
+  total: number
+  /** 该分类前 6 个工具(注册表声明顺序) */
+  tools: { slug: string; name: string }[]
+}
+
+export function Footer({ nav, totalCount }: { nav: FooterNavCategory[]; totalCount: number }) {
   // hydration 安全:首帧用 null(SSR 与 CSR 首帧一致,渲染时不显示年份),
   // 挂载后再读真实年份,避免 SSR(构建时年份)≠ CSR(运行时年份)的 mismatch。
   const [year, setYear] = useState<number | null>(null)
   useEffect(() => setYear(new Date().getFullYear()), [])
   const { locale } = useApp()
-  const tools = getPublishedTools()
-
-  // 按分类分组
-  const grouped: Record<string, typeof tools> = {}
-  for (const tl of tools) {
-    if (!grouped[tl.category]) grouped[tl.category] = []
-    grouped[tl.category].push(tl)
-  }
-  const categories = Object.entries(grouped).sort((a, b) => b[1].length - a[1].length)
 
   return (
     <footer data-embed-hide className="mt-16 border-t" style={{ borderColor: 'rgb(var(--border))', backgroundColor: 'rgb(var(--bg-card))' }}>
       <div className="container-page py-10">
         {/* 分类导航 - 大网格 */}
         <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 lg:grid-cols-4">
-          {categories.map(([category, categoryTools]) => (
+          {nav.map(({ category, total, tools }) => (
             <div key={category}>
               <h3 className="mb-3 text-sm font-semibold" style={{ color: 'rgb(var(--text))' }}>
                 {tc(locale, category)}
               </h3>
               <ul className="space-y-1.5 text-sm" style={{ color: 'rgb(var(--text-subtle))' }}>
-                {categoryTools.slice(0, 6).map((tool) => (
+                {tools.map((tool) => (
                   <li key={tool.slug}>
                     <Link href={`/tools/${tool.slug}/`} className="hover:text-brand-600">
                       {getToolName(locale, tool.slug, tool.name)}
                     </Link>
                   </li>
                 ))}
-                {categoryTools.length > 6 && (
+                {total > tools.length && (
                   <li>
                     <Link
                       href={`/?category=${encodeURIComponent(category)}`}
                       className="text-xs font-medium text-brand-600 hover:underline"
                     >
-                      {t(locale, 'footerMore', { count: categoryTools.length - 6 })}
+                      {t(locale, 'footerMore', { count: total - tools.length })}
                     </Link>
                   </li>
                 )}
@@ -93,7 +96,7 @@ export function Footer() {
           style={{ borderColor: 'rgb(var(--border))', color: 'rgb(var(--text-faint))' }}
         >
           <div>
-            © {year ?? ''} {SITE_NAME}. {tools.length} {t(locale, 'footerRights')}
+            © {year ?? ''} {SITE_NAME}. {totalCount} {t(locale, 'footerRights')}
           </div>
           <SiteStats />
         </div>

@@ -2,7 +2,7 @@ import type { ReactNode } from 'react'
 import type { Viewport } from 'next'
 import './globals.css'
 import { Header } from '@/components/Header'
-import { Footer } from '@/components/Footer'
+import { Footer, type FooterNavCategory } from '@/components/Footer'
 import { AppProviders } from '@/components/providers/AppProviders'
 import { ThemeInitScript } from '@/components/ThemeInitScript'
 import { EmbedDetectScript } from '@/components/EmbedDetectScript'
@@ -11,7 +11,26 @@ import { AnalyticsScript, PageViewTracker } from '@/components/Analytics'
 import { CookieConsent } from '@/components/CookieConsent'
 import { ServiceWorkerRegister } from '@/components/ServiceWorkerRegister'
 import { SkipToContent } from '@/components/SkipToContent'
+import { getPublishedTools } from '@/lib/tools'
 import { siteMetadata, websiteJsonLd, jsonLdStringify } from '@/lib/seo'
+
+/**
+ * Footer 分类导航(服务端模块级预计算,一次算好全站复用)。
+ * 只传 slug/name/total 轻字段进客户端;注册表本体(SEO 文案重数据)
+ * 留在服务端,不进任何客户端 chunk。
+ */
+const footerNav: FooterNavCategory[] = (() => {
+  const grouped = new Map<string, { slug: string; name: string }[]>()
+  for (const tool of getPublishedTools()) {
+    const list = grouped.get(tool.category) ?? []
+    list.push({ slug: tool.slug, name: tool.name })
+    grouped.set(tool.category, list)
+  }
+  return [...grouped.entries()]
+    .sort((a, b) => b[1].length - a[1].length)
+    .map(([category, tools]) => ({ category, total: tools.length, tools: tools.slice(0, 6) }))
+})()
+const footerTotalCount = getPublishedTools().length
 
 export const metadata = siteMetadata
 
@@ -72,7 +91,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           <main id="main-content" tabIndex={-1} className="flex-1 outline-none">
             {children}
           </main>
-          <Footer />
+          <Footer nav={footerNav} totalCount={footerTotalCount} />
           {/* Cookie 同意横幅 - 合规(AdSense/GDPR/CCPA),延迟挂载不影响首屏。
               必须在 AppProviders 内:它消费 useApp() 读取 locale 做 4 语本地化。 */}
           <CookieConsent />

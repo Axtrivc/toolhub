@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { SITE_NAME, jsonLdStringify } from '@/lib/seo'
 import { SITE_URL } from '@/lib/constants'
 import { BlogToolsBanner } from '@/components/BlogToolsBanner'
+import { getFeaturedTools, getPublishedTools } from '@/lib/tools'
 import { BlogArticleBody } from '@/components/BlogArticleBody'
 
 /**
@@ -83,6 +84,13 @@ const articleJsonLd = {
   ],
 }
 
+// 博客 Banner 数据(服务端预计算):featured 前 6 个的轻字段 + 已上线总数,
+// 注册表本体不进博客页客户端 chunk(见 BlogToolsBanner 注释)。
+const bannerTools = getFeaturedTools()
+  .slice(0, 6)
+  .map(({ slug, name, shortIntro, category, icon }) => ({ slug, name, shortIntro, category, icon }))
+const bannerCount = Math.floor(getPublishedTools().length / 10) * 10
+
 export default function HowIBuiltToolHubPost() {
   return (
     <div className="container-page py-10">
@@ -161,7 +169,7 @@ export default function HowIBuiltToolHubPost() {
       <BlogArticleBody articleKey="how-i-built-toolhub" />
 
       {/* 底部:ToolHub 工具箱推荐 Banner(用户明确要求) */}
-      <BlogToolsBanner />
+      <BlogToolsBanner tools={bannerTools} publishedCount={bannerCount} />
     </div>
   )
 }

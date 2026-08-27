@@ -5,8 +5,7 @@ import dynamic from 'next/dynamic'
 import Link from 'next/link'
 import { useApp } from './providers/AppProviders'
 import { t } from '@/lib/i18n'
-import { getPublishedTools } from '@/lib/tools'
-import { SITE_NAME } from '@/lib/seo'
+import { SITE_NAME } from '@/lib/constants'
 import { ThemeToggle } from './ThemeToggle'
 import { LanguageToggle } from './LanguageToggle'
 
@@ -35,8 +34,8 @@ export function Header() {
     setIsMac(typeof navigator !== 'undefined' && /Mac|iPhone|iPad|iPod/.test(navigator.platform || navigator.userAgent))
   }, [])
 
-  // 工具清单(全站搜索用)。lib/tools 是纯模块,与首页同一份口径。
-  const tools = useRef(getPublishedTools()).current
+  // 工具清单由 SearchPalette 自取(它本身是懒加载 chunk,注册表随之离开首屏);
+  // Header 不再持有 tools,避免把 228 个工具的 SEO 文案拖进全站共享 chunk。
 
   // 全局快捷键 Cmd+K(mac)/ Ctrl+K(Windows)切换搜索弹窗。
   // 关键:必须无条件 e.preventDefault(),否则 Chrome 会把 Ctrl+K 抢去聚焦地址栏,
@@ -288,7 +287,6 @@ export function Header() {
       {/* 全局搜索弹窗(Cmd/Ctrl+K):懒加载,首开后常驻 */}
       {paletteMounted && (
         <SearchPalette
-          tools={tools}
           locale={locale}
           open={searchOpen}
           onClose={() => setSearchOpen(false)}

@@ -1,10 +1,8 @@
 'use client'
 
 import Link from 'next/link'
-import { getFeaturedTools } from '@/lib/tools'
-import { getToolIcon } from '@/lib/tools'
+import { getToolIcon } from '@/lib/tool-icons'
 import { SmartIcon } from '@/components/SmartIcon'
-import { getPublishedTools } from '@/lib/tools'
 import { useApp } from './providers/AppProviders'
 import { t, tc, getToolName, getToolShortIntro } from '@/lib/i18n'
 import { AnimatedToolCard, StaggerGroup } from './motion/MotionPrimitives'
@@ -17,19 +15,35 @@ import { AnimatedToolCard, StaggerGroup } from './motion/MotionPrimitives'
  *  - 视觉与站内其它卡片(首页 ToolCard / RelatedTools)严格一致,
  *    复用 AnimatedToolCard + StaggerGroup(主题感知 + reduce-motion 降级)。
  *
- * 数据源:getFeaturedTools() —— 首页置顶的高价值/高流量工具(当前约 10 个),
- *  这里取前 6 个铺满响应式网格(1 / 2 / 3 列)。
+ * 数据源:props(博客 server page 传 featured 工具 + 已上线总数)——
+ *  工具注册表(SEO 文案重数据)留在服务端,不进博客页客户端 chunk。
  *
  * 客户端组件:AnimatedToolCard / StaggerGroup 依赖 framer-motion(useReducedMotion),
  *  必须在 'use client' 边界内。被博客 server page 直接 import 使用。
  */
-const BANNER_LIMIT = 6
 
-export function BlogToolsBanner() {
+/**
+ * 卡片所需的轻字段(服务端从注册表投影而来)。
+ * 结构与 ToolMeta 对 getToolIcon/getToolName/getToolShortIntro 的输入兼容。
+ */
+export interface BannerTool {
+  slug: string
+  name: string
+  shortIntro: string
+  category: string
+  icon?: string
+}
+
+export function BlogToolsBanner({
+  tools,
+  publishedCount,
+}: {
+  /** featured 工具(已 slice 到展示上限,默认前 6 个) */
+  tools: BannerTool[]
+  /** 已上线工具总数(向下取整到十位 —— 与首页 heroBadge 同一口径) */
+  publishedCount: number
+}) {
   const { locale } = useApp()
-  const tools = getFeaturedTools().slice(0, BANNER_LIMIT)
-  // 已发布工具总数(动态,向下取整到十位 —— 与首页 heroBadge 同一口径),替代原硬编码 "130+"
-  const publishedCount = Math.floor(getPublishedTools().length / 10) * 10
 
   if (tools.length === 0) return null
 

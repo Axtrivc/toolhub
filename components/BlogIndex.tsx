@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { useApp } from './providers/AppProviders'
 import { t, type Locale } from '@/lib/i18n'
-import { SITE_NAME } from '@/lib/seo'
+import { SITE_NAME } from '@/lib/constants'
 
 /**
  * 博客索引页的客户端渲染层(app/blog/page.tsx 是 server component,

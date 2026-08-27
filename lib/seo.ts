@@ -1,11 +1,11 @@
 import type { Metadata } from 'next'
-import { SITE_URL } from './constants'
+import { SITE_URL, SITE_NAME } from './constants'
 import { tools, getPublishedTools } from './tools'
-import { getToolFaqs } from './tool-faqs'
 import type { Locale } from './i18n'
-import { getToolFaqsL10n } from './i18n/tool-l10n'
 
-export const SITE_NAME = 'ToolHub'
+// 兼容 re-export:服务端消费方仍可从 '@/lib/seo' 取 SITE_NAME。
+// 客户端组件请直接 import '@/lib/constants'(本模块携带重数据,客户端禁入)。
+export { SITE_NAME }
 export const SITE_TAGLINE = 'Free Online Tools'
 
 /**
@@ -273,27 +273,13 @@ export function buildItemListJsonLd() {
  *
  * 返回 FAQPage schema;若该工具没有注册 FAQ,返回 null(ToolLayout 有守卫,不会渲染空脚本)。
  */
-export function buildFaqJsonLd(slug: string, locale: Locale = 'en'): {
-  '@context': string
-  '@type': 'FAQPage'
-  mainEntity: Array<{ '@type': 'Question'; name: string; acceptedAnswer: { '@type': 'Answer'; text: string } }>
-} | null {
-  const faqs = getToolFaqsL10n(slug, locale, getToolFaqs(slug))
-  if (faqs.length === 0) return null
-
-  return {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: faqs.map((f) => ({
-      '@type': 'Question',
-      name: f.q,
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: f.a,
-      },
-    })),
-  }
-}
+/**
+ * 生成工具页的 FAQ 结构化数据(JSON-LD)
+ *
+ * 实现已拆分至 lib/faq-jsonld.ts(客户端安全:不携带工具注册表);
+ * 此处 re-export 保持服务端消费方的既有导入路径不变。
+ */
+export { buildFaqJsonLd } from './faq-jsonld'
 
 /**
  * 生成工具页的 HowTo 结构化数据(JSON-LD)

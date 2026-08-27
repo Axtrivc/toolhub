@@ -7,15 +7,14 @@ import { createPortal } from 'react-dom'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import type { ToolMeta } from '@/lib/tools'
-import { getToolIcon } from '@/lib/tools'
+import { getPublishedTools } from '@/lib/tools'
+import { getToolIcon } from '@/lib/tool-icons'
 import { SmartIcon } from '@/components/SmartIcon'
 import type { Locale } from '@/lib/i18n'
 import { t, tc, getToolName } from '@/lib/i18n'
 import { motion, AnimatePresence, useReducedMotion } from './motion/MotionPrimitives'
 
 interface SearchPaletteProps {
-  /** 全部已上线工具(由 Server 传入) */
-  tools: ToolMeta[]
   locale: Locale
   /** 是否展开 */
   open: boolean
@@ -41,7 +40,7 @@ const MAX_RESULTS = 30
  * 解法:用 createPortal 把弹窗挂到 document.body,脱离 Header 的包含块,
  * `fixed inset-0` 才能真正铺满整个视口。
  */
-export function SearchPalette({ tools, locale, open, onClose }: SearchPaletteProps) {
+export function SearchPalette({ locale, open, onClose }: SearchPaletteProps) {
   const [query, setQuery] = useState('')
   const [activeIndex, setActiveIndex] = useState(0)
   const [mounted, setMounted] = useState(false) // SSR 安全:仅在 client 渲染 portal
@@ -55,6 +54,10 @@ export function SearchPalette({ tools, locale, open, onClose }: SearchPalettePro
   const listId = useId()
   const reduceMotion = useReducedMotion()
   const router = useRouter()
+
+  // 工具清单自取:本组件经 Header 的 dynamic() 懒加载,注册表随本 chunk
+  // 一起离开所有页面的首屏(首次 ⌘K 时才下载)。
+  const tools = useRef(getPublishedTools()).current
 
   // ── 过滤:统一搜索引擎 lib/tool-search(分词 AND + 加权评分,含长尾词/分类/slug)──
   const results = useMemo(() => {

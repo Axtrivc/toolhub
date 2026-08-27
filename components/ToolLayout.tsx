@@ -2,9 +2,16 @@
 
 import Link from 'next/link'
 import type { ReactNode } from 'react'
+import dynamic from 'next/dynamic'
 import { AdSlot } from './AdSlot'
 import { AdPlaceholder } from './AdPlaceholder'
-import { RelatedTools } from './RelatedTools'
+// 相关工具推荐懒加载(ssr:false):RelatedTools 依赖工具注册表(getRelatedTools
+// 需要全站清单),懒加载让它连同注册表一起移出所有工具页的首屏 chunk;
+// 区块位于页面底端(视口外),首屏可见性零损失。链接在 hydration 后进入 DOM,
+// Google 渲染 JS 可正常抓取;站点其余内链矩阵(Footer/首页/sitemap)不受影响。
+const RelatedTools = dynamic(() => import('./RelatedTools').then((m) => m.RelatedTools), {
+  ssr: false,
+})
 import { ToolInfoSection } from './ToolInfoSection'
 import { VisibleFaqs } from './VisibleFaqs'
 import { FormulaSection } from './FormulaSection'
@@ -14,13 +21,76 @@ import { FavoriteButton } from './FavoriteButton'
 import { RecentlyUsedTracker } from './RecentlyUsedTracker'
 import { useApp } from './providers/AppProviders'
 import { t, getToolName, getToolShortIntro, tc } from '@/lib/i18n'
-import { buildFaqJsonLd, buildBreadcrumbJsonLd, buildHowToJsonLd, jsonLdStringify } from '@/lib/seo'
-import { getToolIcon, type ToolMeta } from '@/lib/tools'
+import { buildFaqJsonLd } from '@/lib/faq-jsonld'
+import { SITE_URL, SITE_NAME } from '@/lib/constants'
+import { type ToolMeta } from '@/lib/tools'
+import { getToolIcon } from '@/lib/tool-icons'
 import { SmartIcon } from '@/components/SmartIcon'
 
 interface ToolLayoutProps {
   tool: ToolMeta
   children?: ReactNode
+}
+
+// ──────────── 轻量 JSON-LD 构建(内联,工具数据全部来自 tool prop) ────────────
+// 为什么不再 import '@/lib/seo':seo.ts 静态引入 228 工具注册表,而本组件
+// 'use client' 且被所有工具页共载,会把注册表拖进全站工具页 chunk。
+// breadcrumb/howto 只用 tool 自身字段,faq 走 lib/faq-jsonld 拆分模块
+// (与可见 FAQ 区块同源数据,零边际加载)。输出与原 lib/seo 构建器逐字段一致。
+
+/** JSON-LD 防注入序列化(与 lib/seo.ts 同实现):"<" 转义为 "\u003c" */
+function jsonLdStringify(value: unknown): string {
+  return JSON.stringify(value).replace(/</g, '\\u003c')
+}
+
+function buildBreadcrumbJsonLdFrom(tool: ToolMeta) {
+  const item = (name: string, url: string, position: number) => ({
+    '@type': 'ListItem',
+    position,
+    name,
+    item: url,
+  })
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      item('Home', `${SITE_URL}/`, 1),
+      item(tool.category, `${SITE_URL}/?category=${encodeURIComponent(tool.category)}#all-tools`, 2),
+      item(tool.name, `${SITE_URL}/tools/${tool.slug}/`, 3),
+    ],
+  }
+}
+
+function buildHowToJsonLdFrom(tool: ToolMeta) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'HowTo',
+    name: `How to use the ${tool.name}`,
+    description: tool.description,
+    totalTime: 'PT1M',
+    supply: [{ '@type': 'HowToSupply', name: 'Your input values or text' }],
+    tool: [{ '@type': 'HowToTool', name: `${SITE_NAME} ${tool.name} (free, in-browser)` }],
+    step: [
+      {
+        '@type': 'HowToStep',
+        position: 1,
+        name: 'Open the tool',
+        text: `Open the ${tool.name} page in your browser. The tool runs entirely client-side — no signup, no upload, no installation required.`,
+      },
+      {
+        '@type': 'HowToStep',
+        position: 2,
+        name: 'View the results',
+        text: 'The result updates instantly below the inputs as you type — no reload, no waiting. Adjust any field to compare scenarios.',
+      },
+      {
+        '@type': 'HowToStep',
+        position: 3,
+        name: 'Copy or export the result',
+        text: 'Use the "Copy" or "Download" button next to the result to save the output. Everything runs locally in your browser, so nothing is uploaded.',
+      },
+    ],
+  }
 }
 
 /**
@@ -43,8 +113,8 @@ export function ToolLayout({ tool, children }: ToolLayoutProps) {
   const visibleName = getToolName(locale, tool.slug, tool.name)
   const visibleCategory = tc(locale, tool.category)
   const faqJsonLd = buildFaqJsonLd(tool.slug, locale)
-  const breadcrumbJsonLd = buildBreadcrumbJsonLd(tool.slug)
-  const howToJsonLd = buildHowToJsonLd(tool.slug)
+  const breadcrumbJsonLd = buildBreadcrumbJsonLdFrom(tool)
+  const howToJsonLd = buildHowToJsonLdFrom(tool)
 
   return (
     <div className="container-page py-8">

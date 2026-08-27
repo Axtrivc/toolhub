@@ -19,13 +19,13 @@ interface ShareLine {
 }
 
 export function ShareResultButton({
-  toolName,
+  toolSlug,
   headline,
   lines,
   filename,
 }: {
-  /** 工具名(卡片标题) */
-  toolName: string
+  /** 工具 slug:点击分享时懒加载注册表取工具名(注册表不进首屏 chunk) */
+  toolSlug?: string
   /** 主结果:label + 大字 value */
   headline: { label: string; value: string }
   /** 输入/次要结果行(最多展示 5 行,超出截断) */
@@ -37,6 +37,11 @@ export function ShareResultButton({
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
   const handleClick = useCallback(async () => {
+    // 工具名在点击时才解析:注册表(228 工具 SEO 文案,~180KB)只在用户
+    // 真正点分享时按需加载,所有计算器页的首屏 chunk 因此不再携带它。
+    const toolName = toolSlug
+      ? (await import('@/lib/tools')).getTool(toolSlug)?.name ?? toolSlug
+      : 'Result'
     const canvas = canvasRef.current ?? document.createElement('canvas')
     canvas.width = 640
     canvas.height = 360
@@ -122,7 +127,7 @@ export function ShareResultButton({
     } catch {
       // 静默失败(权限拒绝等):不打断用户
     }
-  }, [toolName, headline, lines, filename])
+  }, [toolSlug, headline, lines, filename])
 
   return (
     <>

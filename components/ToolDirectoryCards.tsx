@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import type { ToolMeta } from '@/lib/tools'
-import { getToolIcon } from '@/lib/tools'
+import { getToolIcon } from '@/lib/tool-icons'
 import { SmartIcon } from '@/components/SmartIcon'
 import { useApp } from '@/components/providers/AppProviders'
 import { t, tc, getToolName, getToolShortIntro } from '@/lib/i18n'
