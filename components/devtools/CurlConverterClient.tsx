@@ -537,7 +537,7 @@ export function CurlConverterClient() {
                 <CopyButton value={tab.code} label={L('copy', 'Copy')} />
               </div>
               <pre
-                className="overflow-x-auto rounded-lg border bg-slate-50 p-4 text-xs dark:bg-slate-800/60"
+                className="max-h-96 overflow-auto rounded-lg border bg-slate-50 p-4 text-xs dark:bg-slate-800/60"
                 style={{ borderColor: 'rgb(var(--border))' }}
               >
                 <code>{tab.code}</code>

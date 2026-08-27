@@ -290,7 +290,7 @@ export function RegexTesterClient() {
             )
           })}
         </div>
-        <p className="mt-1 text-[11px] text-slate-400">
+        <p className="mt-1 text-[11px] text-slate-400 dark:text-slate-500">
           {L('flagsLabel', 'Flags:')} <code>g</code> {L('flagGlobal', 'global')} · <code>i</code> {L('flagIgnoreCase', 'ignore case')} · <code>m</code> {L('flagMultiline', 'multiline')} · <code>s</code> {L('flagDotAll', 'dotAll')} · <code>u</code> {L('flagUnicode', 'unicode')} · <code>y</code> {L('flagSticky', 'sticky')}
         </p>
       </div>
@@ -368,9 +368,9 @@ export function RegexTesterClient() {
             {matches.slice(0, 50).map((m, i) => (
               <div key={i} className="rounded-md border p-2 text-xs" style={{ borderColor: 'rgb(var(--border))', backgroundColor: 'rgb(var(--bg-card))' }}>
                 <div className="flex items-center gap-2">
-                  <span className="font-semibold text-slate-500">#{i + 1}</span>
+                  <span className="font-semibold text-slate-500 dark:text-slate-400">#{i + 1}</span>
                   <span className="font-mono text-slate-700 dark:text-slate-200">“{m.match}”</span>
-                  <span className="text-slate-400">{L('atIndex', '@ index')} {m.index}</span>
+                  <span className="text-slate-400 dark:text-slate-500">{L('atIndex', '@ index')} {m.index}</span>
                 </div>
                 {m.groups.length > 0 && (
                   <div className="mt-1 flex flex-wrap gap-1.5">

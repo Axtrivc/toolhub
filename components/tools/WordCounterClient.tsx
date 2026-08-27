@@ -103,7 +103,7 @@ export function WordCounterClient() {
             }`}
           >
             <div
-              className={`text-2xl font-bold ${
+              className={`text-2xl font-bold tabular-nums ${
                 m.highlight ? 'text-brand-600 dark:text-brand-400' : 'text-slate-900 dark:text-white'
               }`}
             >
@@ -140,7 +140,7 @@ export function WordCounterClient() {
         />
       </div>
 
-      <p className="rounded-md bg-slate-50 p-3 text-xs text-slate-500 dark:bg-slate-800/60">
+      <p className="rounded-md bg-slate-50 p-3 text-xs text-slate-500 dark:bg-slate-800/60 dark:text-slate-400">
         {L('privacyNote', '🔒 Your text is analyzed locally in your browser and never uploaded anywhere.')}
       </p>
     </div>

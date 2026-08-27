@@ -94,7 +94,7 @@ export function DateDifferenceClient() {
             type="date"
             value={start}
             onChange={(e) => setStart(e.target.value)}
-            className="w-full rounded-lg border p-3 shadow-sm outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200" style={{ borderColor: 'rgb(var(--border-strong))', color: 'rgb(var(--text))' }}
+            className="w-full rounded-lg border p-3 shadow-sm outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200" style={{ borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rgb(var(--bg-card))', color: 'rgb(var(--text))' }}
           />
         </div>
         <div>
@@ -104,7 +104,7 @@ export function DateDifferenceClient() {
             type="date"
             value={end}
             onChange={(e) => setEnd(e.target.value)}
-            className="w-full rounded-lg border p-3 shadow-sm outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200" style={{ borderColor: 'rgb(var(--border-strong))', color: 'rgb(var(--text))' }}
+            className="w-full rounded-lg border p-3 shadow-sm outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200" style={{ borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rgb(var(--bg-card))', color: 'rgb(var(--text))' }}
           />
         </div>
       </div>
@@ -122,7 +122,7 @@ export function DateDifferenceClient() {
           <ResultCard
             label={L('duration', 'Duration')}
             value={
-              <span>
+              <span className="tabular-nums">
                 {result.years > 0 && `${result.years}${L('yrAbbr', ' yr ')}`}
                 {result.months > 0 && `${result.months}${L('moAbbr', ' mo ')}`}
                 {result.days}{L('daysWord', ' days')}

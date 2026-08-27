@@ -377,7 +377,7 @@ export function MarkdownToHtmlClient() {
               <CopyButton value={result.output} label={L('copy', 'Copy')} />
             </div>
             <pre
-              className="overflow-x-auto rounded-lg border bg-slate-50 p-4 text-xs dark:bg-slate-800/60"
+              className="max-h-96 overflow-auto rounded-lg border bg-slate-50 p-4 text-xs dark:bg-slate-800/60"
               style={{ borderColor: 'rgb(var(--border))' }}
             >
               <code>{result.output}</code>
@@ -386,7 +386,7 @@ export function MarkdownToHtmlClient() {
           <div>
             <span className="mb-2 block text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>{L('preview', 'Preview')}</span>
             <div
-              className="prose-content rounded-lg border p-4 text-sm"
+              className="prose-content max-h-96 overflow-y-auto rounded-lg border p-4 text-sm"
               style={{ borderColor: 'rgb(var(--border))', backgroundColor: 'rgb(var(--bg-card))' }}
               dangerouslySetInnerHTML={{ __html: result.output }}
             />

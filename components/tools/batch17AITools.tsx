@@ -259,7 +259,7 @@ export function EmbeddingPriceClient() {
         />
       )}
       {stats ? (
-        <div className="overflow-hidden rounded-lg border border-border bg-card">
+        <div className="overflow-x-auto rounded-lg border border-border bg-card">
           <table className="w-full text-right text-sm">
             <thead>
               <tr style={{ backgroundColor: 'rgb(var(--bg-subtle))' }}>

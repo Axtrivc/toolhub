@@ -310,8 +310,7 @@ export function PngToWebpConverterClient() {
                     {L('savings', 'Savings')}
                   </div>
                   <div
-                    className="mt-1 font-mono text-sm font-semibold"
-                    style={{ color: savings >= 0 ? 'rgb(22 163 74)' : 'rgb(220 38 38)' }}
+                    className={`mt-1 font-mono text-sm font-semibold ${savings >= 0 ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'}`}
                   >
                     {savings >= 0 ? `−${savings}%` : `+${Math.abs(savings)}%`}
                   </div>

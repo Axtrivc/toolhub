@@ -370,7 +370,7 @@ export function YamlToJsonClient() {
     'w-full rounded-lg border p-4 font-mono text-xs shadow-sm outline-none transition focus:ring-2'
 
   return (
-    <div className="space-y-5">
+    <div className="space-y-6">
       <div>
         <div className="mb-2 flex items-center justify-between">
           <label htmlFor="yaml-input" className="text-sm font-medium text-slate-700 dark:text-slate-300">
@@ -418,8 +418,8 @@ export function YamlToJsonClient() {
             <CopyButton value={result.output} label={L('copy', 'Copy')} />
           </div>
           <pre
-            className="overflow-x-auto rounded-lg border bg-slate-50 p-4 text-xs dark:bg-slate-800/60"
-            style={{ borderColor: 'rgb(var(--border))' }}
+            className="max-h-96 overflow-auto rounded-lg border p-4 text-xs"
+            style={{ borderColor: 'rgb(var(--border))', backgroundColor: 'rgb(var(--bg-subtle))' }}
           >
             <code>{result.output}</code>
           </pre>

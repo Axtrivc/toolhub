@@ -277,11 +277,11 @@ export function SqlFormatterClient() {
             type="button"
             onClick={() => setMode(m)}
             className={`rounded-md px-3 py-1.5 text-sm font-medium capitalize transition ${
-              mode === m ? 'text-white' : 'border hover:bg-brand-50'
+              mode === m ? 'text-white' : 'border hover:bg-brand-50 dark:hover:bg-brand-950/40'
             }`}
             style={
               mode === m
-                ? { backgroundColor: 'rgb(37 99 235)' }
+                ? { backgroundColor: 'rgb(var(--primary))' }
                 : { borderColor: 'rgb(var(--border))', color: 'rgb(var(--text-muted))' }
             }
           >

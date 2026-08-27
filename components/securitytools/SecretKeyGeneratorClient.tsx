@@ -120,9 +120,15 @@ interface Strength {
 }
 
 function strengthOf(bits: number): Strength {
-  if (bits < 80) return { key: 'strengthWeak', label: 'Weak', color: 'rgb(220 38 38)' }
-  if (bits <= 128) return { key: 'strengthGood', label: 'Good', color: 'rgb(217 119 6)' }
-  return { key: 'strengthStrong', label: 'Strong', color: 'rgb(22 163 74)' }
+  if (bits < 80)
+    return { key: 'strengthWeak', label: 'Weak', color: 'border-red-300 text-red-700 dark:border-red-800/70 dark:text-red-400' }
+  if (bits <= 128)
+    return { key: 'strengthGood', label: 'Good', color: 'border-amber-300 text-amber-700 dark:border-amber-800/70 dark:text-amber-400' }
+  return {
+    key: 'strengthStrong',
+    label: 'Strong',
+    color: 'border-green-300 text-green-700 dark:border-green-800/70 dark:text-green-400',
+  }
 }
 
 export function SecretKeyGeneratorClient() {
@@ -254,7 +260,7 @@ export function SecretKeyGeneratorClient() {
         <span className="rounded-full border px-3 py-1 font-medium" style={{ borderColor: 'rgb(var(--border))', color: 'rgb(var(--text-muted))' }}>
           {L('entropy', 'Entropy:')} <span className="font-mono">{bits}</span> {L('bits', 'bits')}
         </span>
-        <span className="rounded-full border px-3 py-1 font-semibold" style={{ borderColor: strength.color, color: strength.color }}>
+        <span className={`rounded-full border px-3 py-1 font-semibold ${strength.color}`}>
           {L(strength.key, strength.label)}
         </span>
       </div>

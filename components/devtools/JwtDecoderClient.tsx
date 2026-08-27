@@ -183,7 +183,7 @@ export function JwtDecoderClient() {
               className={`rounded-lg border p-3 text-sm ${
                 timeClaims.problem
                   ? 'border-red-200 bg-red-50 text-red-700 dark:border-red-800/60 dark:bg-red-950/30 dark:text-red-300'
-                  : 'border-green-200 bg-green-50 text-green-700'
+                  : 'border-green-200 bg-green-50 text-green-700 dark:border-green-900/50 dark:bg-green-950/30 dark:text-green-300'
               }`}
             >
               {timeClaims.claims.map((c) => (
@@ -206,7 +206,7 @@ export function JwtDecoderClient() {
                 </span>
                 <CopyButton value={headerStr} label={L('copy', 'Copy')} />
               </div>
-              <pre className="overflow-x-auto rounded-lg border bg-slate-50 p-4 text-xs dark:bg-slate-800/60" style={{ borderColor: 'rgb(var(--border))' }}>
+              <pre className="max-h-96 overflow-auto rounded-lg border bg-slate-50 p-4 text-xs dark:bg-slate-800/60" style={{ borderColor: 'rgb(var(--border))' }}>
                 <code>{headerStr}</code>
               </pre>
             </div>
@@ -217,7 +217,7 @@ export function JwtDecoderClient() {
                 <span className="text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>{L('payload', 'Payload')}</span>
                 <CopyButton value={payloadStr} label={L('copy', 'Copy')} />
               </div>
-              <pre className="overflow-x-auto rounded-lg border bg-slate-50 p-4 text-xs dark:bg-slate-800/60" style={{ borderColor: 'rgb(var(--border))' }}>
+              <pre className="max-h-96 overflow-auto rounded-lg border bg-slate-50 p-4 text-xs dark:bg-slate-800/60" style={{ borderColor: 'rgb(var(--border))' }}>
                 <code>{payloadStr}</code>
               </pre>
             </div>
@@ -232,8 +232,8 @@ export function JwtDecoderClient() {
               </span>
               <CopyButton value={result.decoded.signature} label={L('copy', 'Copy')} />
             </div>
-            <pre className="overflow-x-auto rounded-lg border bg-slate-50 p-4 text-xs dark:bg-slate-800/60" style={{ borderColor: 'rgb(var(--border))' }}>
-              <code>{result.decoded.signature}</code>
+            <pre className="max-h-96 overflow-auto rounded-lg border bg-slate-50 p-4 text-xs dark:bg-slate-800/60" style={{ borderColor: 'rgb(var(--border))' }}>
+              <code className="whitespace-pre-wrap break-all">{result.decoded.signature}</code>
             </pre>
           </div>
         </div>

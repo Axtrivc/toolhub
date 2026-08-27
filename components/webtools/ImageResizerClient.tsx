@@ -441,7 +441,10 @@ export function ImageResizerClient() {
                   step={0.01}
                   value={quality}
                   onChange={(e) => setQuality(Number(e.target.value))}
-                  className="w-full accent-blue-600"
+                  className="calc-slider"
+                  style={{
+                    background: `linear-gradient(to right, rgb(var(--primary)) ${((quality - 0.05) / 0.95) * 100}%, rgb(var(--bg-subtle)) ${((quality - 0.05) / 0.95) * 100}%)`,
+                  }}
                 />
               </div>
             )}

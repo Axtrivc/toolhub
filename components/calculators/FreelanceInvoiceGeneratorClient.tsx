@@ -335,8 +335,7 @@ ${itemRows}
           {popupBlocked && (
             <p
               role="alert"
-              className="mt-3 rounded-lg border-2 p-3 text-sm"
-              style={{ borderColor: 'rgb(253 230 138)', backgroundColor: 'rgb(254 249 195 / 0.4)', color: 'rgb(var(--text))' }}
+              className="mt-3 rounded-lg border border-amber-200 bg-amber-50 p-3 text-sm text-amber-800 dark:border-amber-800/60 dark:bg-amber-950/30 dark:text-amber-200"
             >
               {L('popupBlocked', '⚠️ Print window was blocked by your browser. Use "Download HTML" instead, then open the file and print it.')}
             </p>

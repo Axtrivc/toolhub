@@ -227,7 +227,7 @@ export function DaysCountdownCalculatorClient() {
                 key={kind}
                 type="button"
                 onClick={() => applyPreset(kind)}
-                className="rounded-full border px-3 py-1 text-xs font-medium transition-colors hover:bg-brand-50"
+                className="rounded-full border px-3 py-1 text-xs font-medium transition-colors hover:bg-brand-50 dark:hover:bg-brand-900/40"
                 style={{ borderColor: 'rgb(var(--border))', color: 'rgb(var(--text-muted))' }}
               >
                 {L('preset_' + kind, label)}

@@ -239,7 +239,7 @@ export function ChmodCalculatorClient() {
             key={p}
             type="button"
             onClick={() => applyMode(parseInt(p, 8))}
-            className="rounded-full border px-3 py-1 font-mono text-xs font-medium transition-colors hover:bg-brand-50"
+            className="rounded-full border px-3 py-1 font-mono text-xs font-medium transition-colors hover:bg-brand-50 dark:hover:bg-brand-900/40"
             style={{ borderColor: 'rgb(var(--border))', color: 'rgb(var(--text-muted))' }}
           >
             {p}

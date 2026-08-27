@@ -187,7 +187,7 @@ export function BcryptHashGeneratorClient() {
             step={1}
             value={cost}
             onChange={(e) => setCost(Number(e.target.value))}
-            className="w-full accent-blue-600"
+            className="w-full calc-slider"
           />
           <div className="mt-1 flex justify-between text-xs" style={{ color: 'rgb(var(--text-faint))' }}>
             <span>{L('costFastWeak', '4 (fast, weak)')}</span>
@@ -195,7 +195,7 @@ export function BcryptHashGeneratorClient() {
             <span>{L('costSlowStrong', '15 (slow, strong)')}</span>
           </div>
           {cost > 12 && (
-            <div className="mt-2 rounded-lg border border-amber-200 bg-amber-50 p-3 text-xs text-amber-800">
+            <div className="mt-2 rounded-lg border border-amber-200 bg-amber-50 p-3 text-xs text-amber-800 dark:border-amber-800/60 dark:bg-amber-950/30 dark:text-amber-300">
               {L('costWarn', '⚠️ Cost above 12 is deliberately slow — each step doubles the work, so 15 can take several seconds in the browser.')}
             </div>
           )}
@@ -314,7 +314,7 @@ export function BcryptHashGeneratorClient() {
             </button>
             {verifyResult !== null &&
               (verifyResult ? (
-                <span className="rounded-full border border-green-200 bg-green-50 px-3 py-1 text-xs font-semibold text-green-700">
+                <span className="rounded-full border border-green-200 bg-green-50 px-3 py-1 text-xs font-semibold text-green-700 dark:border-green-800/60 dark:bg-green-950/30 dark:text-green-300">
                   {L('matchCorrect', '✓ Match — password is correct')}
                 </span>
               ) : (

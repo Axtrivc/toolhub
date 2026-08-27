@@ -21,6 +21,13 @@ const PRESET_URLS = ['https://example.com', 'mailto:hello@example.com', 'tel:+12
 // L≈2953、M≈2331、Q≈1663、H≈1273 字节,容量按 UTF-8 字节数计(汉字每字 3 字节)
 const ECL_BYTE_CAPACITY: Record<EclLevel, number> = { L: 2953, M: 2331, Q: 1663, H: 1273 }
 
+// 主题感知的控件配色(与全站 var 体系一致,避免亮色 slate 配对漂移)
+const inputStyle = {
+  borderColor: 'rgb(var(--border-strong))',
+  backgroundColor: 'rgb(var(--bg-card))',
+  color: 'rgb(var(--text))',
+}
+
 export function QRCodeGeneratorClient() {
   const { locale } = useApp()
   const L = (key: string, fb: string) => tui('qr-code-generator', locale, key, fb)
@@ -142,11 +149,7 @@ export function QRCodeGeneratorClient() {
             key={m}
             type="button"
             onClick={() => setMode(m)}
-            className={`rounded-lg px-4 py-2 text-sm font-medium capitalize transition ${
-              mode === m
-                ? 'bg-brand-600 text-white'
-                : 'bg-slate-100 text-slate-600 hover:bg-slate-200 dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-slate-700'
-            }`}
+            className={`btn text-sm capitalize ${mode === m ? 'btn-primary' : 'btn-secondary'}`}
           >
             {m === 'url' ? L('modeUrl', 'URL / Link') : m === 'wifi' ? L('modeWifi', 'WiFi') : L('modeText', 'Text')}
           </button>
@@ -156,7 +159,7 @@ export function QRCodeGeneratorClient() {
       {/* 输入区(根据模式) */}
       {mode === 'url' && (
         <div>
-          <label htmlFor="url-input" className="mb-2 block text-sm font-medium text-slate-700 dark:text-slate-300">
+          <label htmlFor="url-input" className="mb-1.5 block text-sm font-medium text-slate-700 dark:text-slate-300">
             {L('websiteUrl', 'Website URL')}
           </label>
           <input
@@ -165,7 +168,8 @@ export function QRCodeGeneratorClient() {
             value={urlInput}
             onChange={(e) => setUrlInput(e.target.value)}
             placeholder="https://your-website.com"
-            className="w-full rounded-lg border border-slate-300 p-3 shadow-sm outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200 dark:border-slate-700 dark:bg-slate-800/50 dark:text-slate-100 dark:focus:ring-brand-500/30"
+            className="w-full rounded-lg border p-3 shadow-sm outline-none"
+            style={inputStyle}
           />
           <div className="mt-2 flex flex-wrap gap-2">
             <span className="text-xs text-slate-400 dark:text-slate-500">{L('quick', 'Quick:')}</span>
@@ -185,7 +189,7 @@ export function QRCodeGeneratorClient() {
 
       {mode === 'text' && (
         <div>
-          <label htmlFor="text-input" className="mb-2 block text-sm font-medium text-slate-700 dark:text-slate-300">
+          <label htmlFor="text-input" className="mb-1.5 block text-sm font-medium text-slate-700 dark:text-slate-300">
             {L('textToEncode', 'Text to encode')}
           </label>
           <textarea
@@ -194,7 +198,8 @@ export function QRCodeGeneratorClient() {
             onChange={(e) => setText(e.target.value)}
             placeholder={L('anyTextPlaceholder', 'Any text...')}
             rows={3}
-            className="w-full rounded-lg border border-slate-300 p-3 shadow-sm outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200 dark:border-slate-700 dark:bg-slate-800/50 dark:text-slate-100 dark:focus:ring-brand-500/30"
+            className="w-full rounded-lg border p-3 shadow-sm outline-none"
+            style={inputStyle}
           />
         </div>
       )}
@@ -211,7 +216,8 @@ export function QRCodeGeneratorClient() {
               value={wifi.ssid}
               onChange={(e) => setWifi({ ...wifi, ssid: e.target.value })}
               placeholder="MyWiFi"
-              className="w-full rounded-lg border border-slate-300 p-3 shadow-sm outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200 dark:border-slate-700 dark:bg-slate-800/50 dark:text-slate-100 dark:focus:ring-brand-500/30"
+              className="w-full rounded-lg border p-3 shadow-sm outline-none"
+              style={inputStyle}
             />
           </div>
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
@@ -225,7 +231,8 @@ export function QRCodeGeneratorClient() {
                 value={wifi.password}
                 onChange={(e) => setWifi({ ...wifi, password: e.target.value })}
                 placeholder="••••••••"
-                className="w-full rounded-lg border border-slate-300 p-3 shadow-sm outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200 dark:border-slate-700 dark:bg-slate-800/50 dark:text-slate-100 dark:focus:ring-brand-500/30"
+                className="w-full rounded-lg border p-3 shadow-sm outline-none"
+                style={inputStyle}
               />
             </div>
             <div>
@@ -236,7 +243,8 @@ export function QRCodeGeneratorClient() {
                 id="enc"
                 value={wifi.encryption}
                 onChange={(e) => setWifi({ ...wifi, encryption: e.target.value as WifiCreds['encryption'] })}
-                className="w-full rounded-lg border border-slate-300 bg-white p-3 shadow-sm outline-none focus:border-brand-500 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100"
+                className="w-full rounded-lg border p-3 shadow-sm outline-none"
+                style={inputStyle}
               >
                 <option value="WPA">{L('encWpa', 'WPA / WPA2')}</option>
                 <option value="WEP">{L('encWep', 'WEP')}</option>
@@ -250,7 +258,8 @@ export function QRCodeGeneratorClient() {
               type="checkbox"
               checked={wifi.hidden}
               onChange={(e) => setWifi({ ...wifi, hidden: e.target.checked })}
-              className="h-4 w-4 rounded border-slate-300 text-brand-600 focus:ring-brand-500"
+              className="h-4 w-4 cursor-pointer shrink-0 rounded"
+              style={{ accentColor: 'rgb(var(--primary))' }}
             />
             {L('hiddenNetwork', 'Hidden network')}
           </label>
@@ -267,7 +276,8 @@ export function QRCodeGeneratorClient() {
             id="ecl"
             value={ecl}
             onChange={(e) => setEcl(e.target.value as EclLevel)}
-            className="w-full rounded-md border border-slate-300 bg-white px-3 py-2.5 text-sm outline-none focus:border-brand-500 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100 sm:px-2 sm:py-1.5"
+            className="w-full rounded-lg border px-3 py-2 text-sm shadow-sm outline-none"
+            style={inputStyle}
           >
             <option value="L">{L('eclL', 'L — low (~7%)')}</option>
             <option value="M">{L('eclM', 'M — medium (~15%)')}</option>
@@ -283,7 +293,8 @@ export function QRCodeGeneratorClient() {
             id="size"
             value={size}
             onChange={(e) => setSize(Number(e.target.value))}
-            className="w-full rounded-md border border-slate-300 bg-white px-3 py-2.5 text-sm outline-none focus:border-brand-500 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100 sm:px-2 sm:py-1.5"
+            className="w-full rounded-lg border px-3 py-2 text-sm shadow-sm outline-none"
+            style={inputStyle}
           >
             <option value={192}>{L('sizeSmall', 'Small (192px)')}</option>
             <option value={256}>{L('sizeMedium', 'Medium (256px)')}</option>
@@ -299,7 +310,8 @@ export function QRCodeGeneratorClient() {
             type="color"
             value={fgColor}
             onChange={(e) => setFgColor(e.target.value)}
-            className="h-9 w-full cursor-pointer rounded-md border border-slate-300 dark:border-slate-700"
+            className="h-10 w-full cursor-pointer rounded-lg border p-1"
+            style={inputStyle}
           />
         </div>
         <div>
@@ -311,15 +323,16 @@ export function QRCodeGeneratorClient() {
             type="color"
             value={bgColor}
             onChange={(e) => setBgColor(e.target.value)}
-            className="h-9 w-full cursor-pointer rounded-md border border-slate-300 dark:border-slate-700"
+            className="h-10 w-full cursor-pointer rounded-lg border p-1"
+            style={inputStyle}
           />
         </div>
       </div>
 
       {/* 预览 + 下载 */}
-      <div className="flex flex-col items-center gap-4 rounded-lg border-2 border-dashed border-slate-200 p-6 dark:border-slate-700">
+      <div className="flex min-h-40 flex-col items-center justify-center gap-4 rounded-lg border-2 border-dashed border-slate-200 p-6 dark:border-slate-700">
         {error ? (
-          <p className="text-sm text-red-500">{error}</p>
+          <p role="status" className="text-sm text-red-500 dark:text-red-400">{error}</p>
         ) : dataUrl ? (
           <>
             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -332,12 +345,15 @@ export function QRCodeGeneratorClient() {
             />
             <div className="flex flex-wrap items-center justify-center gap-3">
               <button type="button" onClick={handleDownload} className="btn btn-primary">
-                <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <svg aria-hidden="true" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                 </svg>
                 {L('downloadPng', 'Download PNG')}
               </button>
               <button type="button" onClick={handleDownloadSvg} className="btn btn-secondary">
+                <svg aria-hidden="true" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                </svg>
                 {L('downloadSvg', 'Download SVG')}
               </button>
             </div>
@@ -352,7 +368,10 @@ export function QRCodeGeneratorClient() {
       {/* 隐藏的高分辨率 canvas,用于下载 */}
       <canvas ref={canvasRef} className="hidden" />
 
-      <p className="rounded-md bg-slate-50 p-3 text-xs text-slate-500 dark:bg-slate-800 dark:text-slate-400">
+      <p
+        className="rounded-md p-3 text-xs"
+        style={{ backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text-subtle))' }}
+      >
         {L('privacyNote', '🔒 QR codes are generated locally in your browser. Your data is never uploaded to any server.')}
       </p>
     </div>

@@ -135,7 +135,7 @@ export function EbayFeeCalculatorClient() {
       key={p}
       type="button"
       onClick={() => setPlatform(p)}
-      className={`rounded-lg px-4 py-2 text-sm font-medium transition ${platform === p ? 'btn-primary' : 'border'}`}
+      className={`btn rounded-lg px-4 py-2 text-sm font-medium transition ${platform === p ? 'btn-primary' : 'border'}`}
       style={
         platform === p
           ? undefined

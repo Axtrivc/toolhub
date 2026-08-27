@@ -78,6 +78,8 @@ function Slider({
 }) {
   // useId 保证同页多个 Slider 的 label/input 正确配对(可访问性)
   const id = useId()
+  // 滑杆填充比例(0-100):换算到 min..max 区间,负值范围同样适用
+  const pct = max > min ? ((value - min) / (max - min)) * 100 : 0
   return (
     <div>
       <div className="mb-1 flex items-center justify-between">
@@ -95,7 +97,10 @@ function Slider({
         step={step}
         value={value}
         onChange={(e) => onChange(Number(e.target.value))}
-        className="w-full accent-blue-600"
+        className="calc-slider"
+        style={{
+          background: `linear-gradient(to right, rgb(var(--primary)) ${pct}%, rgb(var(--bg-subtle)) ${pct}%)`,
+        }}
       />
     </div>
   )

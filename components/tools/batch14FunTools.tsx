@@ -67,7 +67,7 @@ export function DiceRollerClient() {
       </div>
 
       <button type="button" onClick={roll}
-        className="w-full rounded-xl bg-brand-600 py-4 text-lg font-bold text-white transition hover:bg-brand-700 active:scale-[0.99]">
+        className="btn btn-primary w-full rounded-xl py-4 text-lg font-bold">
         🎲 {L('rollBtn', `Roll ${count || 1}× d${sides}`)}
       </button>
 
@@ -79,7 +79,7 @@ export function DiceRollerClient() {
               {r}
             </span>
           ))}
-          <span className="ml-2 text-xl font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>
+          <span className="ml-2 text-xl font-semibold tabular-nums" style={{ color: 'rgb(var(--text-muted))' }}>
             = {rolls.reduce((a, b) => a + b, 0)}
           </span>
         </div>
@@ -128,7 +128,7 @@ export function CoinFlipClient() {
       <div className="flex justify-center">
         <button type="button" onClick={flip}
           className={`flex h-44 w-44 items-center justify-center rounded-full border-8 text-6xl font-black shadow-lg transition-transform duration-300 ${
-            flipping ? 'scale-90 rotate-y-180' : 'hover:scale-105'
+            flipping ? '[transform:rotateY(180deg)_scale(0.9)]' : 'hover:scale-105'
           }`}
           style={{ borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rgb(var(--bg-card))', color: 'rgb(var(--text))' }}>
           {flipping ? '…' : result === null ? L('tapFlip', 'FLIP') : result === 'H' ? L('heads', 'HEADS') : L('tails', 'TAILS')}
@@ -187,7 +187,7 @@ export function WheelSpinnerClient() {
 
   const gradient = items.length > 0
     ? `conic-gradient(${items.map((it, i) => `${WHEEL_COLORS[i % WHEEL_COLORS.length]} ${(i * 360) / items.length}deg ${((i + 1) * 360) / items.length}deg`).join(', ')})`
-    : 'conic-gradient(#cbd5e1 0deg 360deg)'
+    : 'conic-gradient(rgb(var(--bg-subtle)) 0deg 360deg)'
 
   return (
     <div className="space-y-5">
@@ -199,7 +199,7 @@ export function WheelSpinnerClient() {
             <div
               role="img"
               aria-label={L('wheelAlt', 'Prize wheel')}
-              className="h-full w-full rounded-full border-8 shadow-lg transition-transform duration-[4000ms]"
+              className="h-full w-full rounded-full border-8 shadow-lg transition-transform duration-[4000ms] motion-reduce:transition-none"
               style={{
                 background: gradient,
                 borderColor: 'rgb(var(--bg-card))',
@@ -339,7 +339,7 @@ export function MorseCodeTranslatorClient() {
             <span className="text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>{L('resultLabel', 'Result')}</span>
             <div className="flex gap-2">
               {mode === 'encode' && (
-                <button type="button" onClick={play} className="btn btn-secondary px-3 py-1.5 text-xs">▶ {L('play', 'Play audio')}</button>
+                <button type="button" onClick={play} className="btn btn-secondary">▶ {L('play', 'Play audio')}</button>
               )}
               <CopyButton value={output} />
             </div>

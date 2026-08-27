@@ -105,7 +105,7 @@ export function AspectRatioClient() {
               key={p.label}
               type="button"
               onClick={() => applyPreset(p.w, p.h)}
-              className="rounded-full border px-2.5 py-1 text-xs font-medium transition hover:bg-brand-50"
+              className="rounded-full border px-2.5 py-1 text-xs font-medium transition hover:bg-brand-50 dark:hover:bg-brand-950/40"
               style={{ borderColor: 'rgb(var(--border))', color: 'rgb(var(--text-muted))' }}
             >
               {p.label}
@@ -131,7 +131,7 @@ export function AspectRatioClient() {
         >
           <div className="relative" style={{ width: preview.w, height: preview.h }}>
             <div
-              className="h-full w-full rounded-md transition-all duration-300"
+              className="h-full w-full rounded-md transition-all duration-300 motion-reduce:transition-none"
               style={{
                 backgroundColor: 'rgb(var(--primary) / 0.10)',
                 border: '1.5px solid rgb(var(--primary))',
@@ -188,14 +188,14 @@ export function AspectRatioClient() {
           <div className="grid grid-cols-2 gap-4 text-center">
             <div>
               <div className="text-xs uppercase text-slate-400">{L('width', 'Width')}</div>
-              <div className="mt-1 text-2xl font-bold" style={{ color: 'rgb(var(--text))' }}>
+              <div className="mt-1 text-2xl font-bold tabular-nums" style={{ color: 'rgb(var(--text))' }}>
                 {computed.width || '—'}
                 <span className="ml-1 text-sm font-normal text-slate-400">px</span>
               </div>
             </div>
             <div>
               <div className="text-xs uppercase text-slate-400">{L('height', 'Height')}</div>
-              <div className="mt-1 text-2xl font-bold" style={{ color: 'rgb(var(--text))' }}>
+              <div className="mt-1 text-2xl font-bold tabular-nums" style={{ color: 'rgb(var(--text))' }}>
                 {computed.height || '—'}
                 <span className="ml-1 text-sm font-normal text-slate-400">px</span>
               </div>

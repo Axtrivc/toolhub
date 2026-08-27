@@ -100,7 +100,7 @@ export function GPACalculatorClient() {
               min="0"
               step="0.5"
               aria-label={L('credits', 'Credits')}
-              className="col-span-5 rounded-md border px-3 py-2.5 text-sm outline-none focus:border-brand-500 sm:col-span-2 sm:px-2 sm:py-1.5" style={{ borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rgb(var(--bg-card))', color: 'rgb(var(--text))' }}
+              className="col-span-5 rounded-md border px-3 py-2.5 text-sm tabular-nums outline-none focus:border-brand-500 sm:col-span-2 sm:px-2 sm:py-1.5" style={{ borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rgb(var(--bg-card))', color: 'rgb(var(--text))' }}
             />
             <select
               value={c.grade}
@@ -134,8 +134,8 @@ export function GPACalculatorClient() {
       {/* 结果 */}
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
         <ResultCard label={L('yourGpa', 'Your GPA')} value={fmtNum(result.gpa, 2)} highlight sublabel={L('on4Scale', 'On 4.0 scale')} />
-        <ResultCard label={L('totalCredits', 'Total credits')} value={fmtNum(result.totalCredits, 1)} />
-        <ResultCard label={L('gradePoints', 'Grade points')} value={fmtNum(result.totalPoints, 1)} />
+        <ResultCard label={L('totalCredits', 'Total credits')} value={<span className="tabular-nums">{fmtNum(result.totalCredits, 1)}</span>} />
+        <ResultCard label={L('gradePoints', 'Grade points')} value={<span className="tabular-nums">{fmtNum(result.totalPoints, 1)}</span>} />
       </div>
 
       {/* 可视化:GPA 在 4.0 量表色区上的落点(非法输入/零学分不出图) */}

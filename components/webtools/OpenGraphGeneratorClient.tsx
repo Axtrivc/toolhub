@@ -139,9 +139,10 @@ export function OpenGraphGeneratorClient() {
           />
           {/* 实时字符计数:≤60 绿(推荐区间),超出红 */}
           <div
-            className="mt-1 text-right font-mono text-[11px]"
+            className={`mt-1 text-right font-mono text-[11px] ${
+              v.title.length <= 60 ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'
+            }`}
             aria-label={L('titleCountAria', 'Title character count (recommended 60 or fewer)')}
-            style={{ color: v.title.length <= 60 ? 'rgb(22 163 74)' : 'rgb(220 38 38)' }}
           >
             {v.title.length}/60
           </div>
@@ -161,9 +162,10 @@ export function OpenGraphGeneratorClient() {
           />
           {/* 实时字符计数:≤200 绿(推荐上限),超出红 */}
           <div
-            className="mt-1 text-right font-mono text-[11px]"
+            className={`mt-1 text-right font-mono text-[11px] ${
+              v.description.length <= 200 ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'
+            }`}
             aria-label={L('descCountAria', 'Description character count (recommended 200 or fewer)')}
-            style={{ color: v.description.length <= 200 ? 'rgb(22 163 74)' : 'rgb(220 38 38)' }}
           >
             {v.description.length}/200
           </div>

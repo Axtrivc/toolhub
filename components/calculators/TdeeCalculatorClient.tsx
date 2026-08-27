@@ -285,12 +285,12 @@ export function TdeeCalculatorClient() {
                 <tbody className="divide-y divide-slate-100 dark:divide-slate-700">
                   {([
                     ['Aggressive cut (−20%)', goals.cut, 'text-red-600 dark:text-red-400'],
-                    ['Mild cut (−10%)', goals.mildCut, 'text-orange-600'],
-                    ['Maintain', goals.maintain, 'text-brand-600'],
-                    ['Lean bulk (+10%)', goals.bulk, 'text-green-600'],
-                    ['Fast bulk (+20%)', goals.fastBulk, 'text-emerald-700'],
+                    ['Mild cut (−10%)', goals.mildCut, 'text-orange-600 dark:text-orange-400'],
+                    ['Maintain', goals.maintain, 'text-brand-600 dark:text-brand-400'],
+                    ['Lean bulk (+10%)', goals.bulk, 'text-green-600 dark:text-green-400'],
+                    ['Fast bulk (+20%)', goals.fastBulk, 'text-emerald-700 dark:text-emerald-400'],
                   ] as const).map(([label, g, color]) => (
-                    <tr key={label} className={label === 'Maintain' ? 'bg-brand-50/50' : ''}>
+                    <tr key={label} className={label === 'Maintain' ? 'bg-brand-50/50 dark:bg-brand-950/30' : ''}>
                       <td className={`px-3 py-2 font-medium ${color}`}>
                         {L(
                           label === 'Aggressive cut (−20%)'

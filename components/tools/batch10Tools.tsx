@@ -183,7 +183,7 @@ export function JsonDiffClient() {
               {L('identical', '✓ The two documents are structurally identical')}
             </p>
           ) : (
-            <div className="overflow-hidden rounded-lg border border-border bg-card">
+            <div className="overflow-x-auto rounded-lg border border-border bg-card">
               <table className="w-full text-left text-sm">
                 <thead>
                   <tr className="border-b" style={{ borderColor: 'rgb(var(--border))', backgroundColor: 'rgb(var(--bg-subtle))' }}>
@@ -430,6 +430,7 @@ export function RobotsTxtGeneratorClient() {
               placeholder="/" className={inpCls}
               style={{ borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rgb(var(--bg-card))', color: 'rgb(var(--text))' }} />
             <button type="button" onClick={() => setRules(rules.filter((_, j) => j !== i))}
+              aria-label={L('removeRule', 'Remove rule')}
               className="rounded-lg px-3 text-sm text-slate-400 hover:text-red-500 dark:text-slate-500" disabled={rules.length <= 1}>
               ✕
             </button>
@@ -528,7 +529,7 @@ export function SleepCalculatorClient() {
               <div className="text-sm" style={{ color: 'rgb(var(--text-muted))' }}>
                 {mode === 'wakeAt' ? L('fallAsleepBy', 'Fall asleep by') : L('wakeUpAt', 'Wake up at')}
               </div>
-              <div className="mt-1 text-3xl font-bold" style={{ color: 'rgb(var(--text))' }}>
+              <div className="mt-1 text-3xl font-bold tabular-nums" style={{ color: 'rgb(var(--text))' }}>
                 {clock} {tag && <span className="text-sm font-normal" style={{ color: 'rgb(var(--text-faint))' }}>{tag}</span>}
               </div>
               <div className="mt-1 text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>

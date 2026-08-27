@@ -234,7 +234,7 @@ export function NginxConfigGeneratorClient() {
             style={domainInvalid ? { ...inputStyle, borderColor: '#ef4444' } : inputStyle}
           />
           {domainInvalid && (
-            <p className="mt-1.5 text-xs text-red-500">
+            <p className="mt-1.5 text-xs text-red-500 dark:text-red-400">
               {L('errDomainInvalid', 'Enter a valid domain (e.g. example.com or *.example.com).')}
             </p>
           )}
@@ -254,7 +254,7 @@ export function NginxConfigGeneratorClient() {
             style={targetInvalid ? { ...inputStyle, borderColor: '#ef4444' } : inputStyle}
           />
           {targetInvalid && (
-            <p className="mt-1.5 text-xs text-red-500">
+            <p className="mt-1.5 text-xs text-red-500 dark:text-red-400">
               {L('errTargetInvalid', 'Enter a valid http:// or https:// URL (e.g. http://127.0.0.1:3000).')}
             </p>
           )}

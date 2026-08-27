@@ -128,7 +128,7 @@ export function WordleSolverClient() {
               type="button"
               onClick={() => copyWord(w)}
               title={L('clickToCopy', 'Click to copy')}
-              className={`rounded-md border px-3 py-1.5 font-mono text-sm uppercase tracking-wider transition hover:border-blue-400 ${
+              className={`rounded-lg border px-3 py-1.5 font-mono text-sm uppercase tracking-wider transition hover:border-blue-400 ${
                 copiedWord === w ? 'border-green-400' : ''
               }`}
               style={{
@@ -151,7 +151,7 @@ export function WordleSolverClient() {
   )
 
   return (
-    <div className="space-y-5">
+    <div className="space-y-6">
       {/* 模式切换 */}
       <div className="flex gap-2">
         <button
@@ -174,7 +174,8 @@ export function WordleSolverClient() {
         <>
           {/* 绿格:已知位置 */}
           <div>
-            <label className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
+            <label className="mb-1.5 flex items-center gap-1.5 text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
+              <span aria-hidden="true" className="inline-block h-2.5 w-2.5 shrink-0 rounded-full bg-emerald-500" />
               {L('knownPositions', 'Known positions (green)')}
             </label>
             <div className="flex gap-2">
@@ -187,8 +188,12 @@ export function WordleSolverClient() {
                   value={v}
                   onChange={(e) => setGreen(i, e.target.value)}
                   aria-label={L('letterPosition', 'Letter in position {n}').replace('{n}', String(i + 1))}
-                  className="h-12 w-12 rounded-lg border text-center font-mono text-lg uppercase shadow-sm outline-none transition focus:ring-2"
-                  style={inputStyle}
+                  className={`h-12 w-12 rounded-lg border text-center font-mono text-lg uppercase shadow-sm outline-none transition focus:ring-2 ${
+                    v
+                      ? 'border-emerald-500 bg-emerald-100 text-emerald-900 dark:border-emerald-500/70 dark:bg-emerald-950/60 dark:text-emerald-200'
+                      : ''
+                  }`}
+                  style={v ? undefined : inputStyle}
                 />
               ))}
             </div>
@@ -196,7 +201,8 @@ export function WordleSolverClient() {
 
           <div className="grid gap-4 sm:grid-cols-2">
             <div>
-              <label htmlFor="wordle-must" className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
+              <label htmlFor="wordle-must" className="mb-1.5 flex items-center gap-1.5 text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
+                <span aria-hidden="true" className="inline-block h-2.5 w-2.5 shrink-0 rounded-full bg-amber-400" />
                 {L('mustContain', 'Must contain (yellow)')}
               </label>
               <input
@@ -206,12 +212,15 @@ export function WordleSolverClient() {
                 onChange={(e) => setYellows(e.target.value)}
                 placeholder={L('mustPlaceholder', 'e.g. ar')}
                 spellCheck={false}
-                className="w-full rounded-lg border p-3 font-mono text-sm shadow-sm outline-none transition focus:ring-2"
-                style={inputStyle}
+                className={`w-full rounded-lg border p-3 font-mono text-sm shadow-sm outline-none transition focus:ring-2 ${
+                  yellows.trim() ? 'border-amber-500 dark:border-amber-500/70' : ''
+                }`}
+                style={yellows.trim() ? { ...inputStyle, borderColor: undefined } : inputStyle}
               />
             </div>
             <div>
-              <label htmlFor="wordle-not" className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
+              <label htmlFor="wordle-not" className="mb-1.5 flex items-center gap-1.5 text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
+                <span aria-hidden="true" className="inline-block h-2.5 w-2.5 shrink-0 rounded-full bg-slate-400" />
                 {L('mustNotContain', 'Must NOT contain (grey)')}
               </label>
               <input
@@ -221,8 +230,10 @@ export function WordleSolverClient() {
                 onChange={(e) => setGreys(e.target.value)}
                 placeholder={L('notPlaceholder', 'e.g. xyz')}
                 spellCheck={false}
-                className="w-full rounded-lg border p-3 font-mono text-sm shadow-sm outline-none transition focus:ring-2"
-                style={inputStyle}
+                className={`w-full rounded-lg border p-3 font-mono text-sm shadow-sm outline-none transition focus:ring-2 ${
+                  greys.trim() ? 'border-slate-400 dark:border-slate-500' : ''
+                }`}
+                style={greys.trim() ? { ...inputStyle, borderColor: undefined } : inputStyle}
               />
             </div>
           </div>
@@ -244,7 +255,7 @@ export function WordleSolverClient() {
             </p>
           ) : (
             <div className="space-y-3">
-              <span className="text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>
+              <span className="text-sm font-semibold tabular-nums" style={{ color: 'rgb(var(--text-muted))' }}>
                 {results.length}{' '}
                 {results.length === 1 ? L('matchingWordSingular', 'matching word') : L('matchingWordPlural', 'matching words')}{' '}
                 — {L('clickAnyWordToCopy', 'click any word to copy it')}
@@ -286,7 +297,7 @@ export function WordleSolverClient() {
             </p>
           ) : (
             <div className="space-y-3">
-              <span className="text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>
+              <span className="text-sm font-semibold tabular-nums" style={{ color: 'rgb(var(--text-muted))' }}>
                 {results.length} {results.length === 1 ? L('wordSingular', 'word') : L('wordPlural', 'words')}{' '}
                 {L('foundClickToCopy', 'found — click any word to copy it')}
               </span>

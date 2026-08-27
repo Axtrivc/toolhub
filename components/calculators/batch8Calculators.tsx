@@ -552,7 +552,13 @@ export function AgeDifferenceCalculatorClient() {
         />
       </div>
       <div role="status" aria-live="polite" className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-        <ResultCard label={T('out.diff', 'Age difference')} value={results.diff} highlight />
+        {/* 与工厂约定一致:"⚠️" 前缀 = 校验失败 → 错误态红色卡片(不用主色渐变、不做数字滚动) */}
+        <ResultCard
+          label={T('out.diff', 'Age difference')}
+          value={results.diff}
+          highlight={!results.diff.startsWith('⚠️')}
+          error={results.diff.startsWith('⚠️')}
+        />
         <ResultCard label={T('out.days', 'Difference in days')} value={results.days} />
       </div>
       <ResultActions

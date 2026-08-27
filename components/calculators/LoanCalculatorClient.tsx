@@ -282,10 +282,10 @@ export function LoanCalculatorClient() {
                     <tr key={row.month}>
                       <td className="px-3 py-2 font-mono" style={{ color: 'rgb(var(--text-faint))' }}>{row.month}</td>
                       <td className="px-3 py-2 text-right font-mono">{fmtMoney(row.payment)}</td>
-                      <td className="px-3 py-2 text-right font-mono text-green-600">
+                      <td className="px-3 py-2 text-right font-mono text-green-600 dark:text-green-400">
                         {fmtMoney(row.principal)}
                       </td>
-                      <td className="px-3 py-2 text-right font-mono text-orange-600">
+                      <td className="px-3 py-2 text-right font-mono text-orange-600 dark:text-orange-400">
                         {fmtMoney(row.interest)}
                       </td>
                       <td className="px-3 py-2 text-right font-mono">{fmtMoney(row.balance)}</td>

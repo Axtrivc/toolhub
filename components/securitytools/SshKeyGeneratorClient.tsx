@@ -234,12 +234,12 @@ export function SshKeyGeneratorClient() {
           {/* 指纹 */}
           <div
             className="rounded-lg border p-5"
-            style={{ borderColor: 'rgb(147 197 253)', backgroundColor: 'rgb(219 234 254 / 0.4)' }}
+            style={{ borderColor: 'rgb(var(--primary) / 0.4)', backgroundColor: 'rgb(var(--primary) / 0.08)' }}
           >
             <div className="text-xs font-medium uppercase tracking-wide" style={{ color: 'rgb(var(--text-subtle))' }}>
               {L('fingerprint', 'Fingerprint (SHA-256)')}
             </div>
-            <div className="mt-1.5 font-mono text-sm font-semibold" style={{ color: 'rgb(37 99 235)' }}>
+            <div className="mt-1.5 font-mono text-sm font-semibold" style={{ color: 'rgb(var(--primary))' }}>
               {keys.fingerprint}
             </div>
           </div>

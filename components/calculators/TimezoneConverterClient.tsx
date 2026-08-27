@@ -464,7 +464,7 @@ export function TimezoneConverterClient() {
                         style={{
                           backgroundColor:
                             hh === r.hour
-                              ? 'rgb(37 99 235)'
+                              ? 'rgb(var(--primary))'
                               : hh >= 9 && hh < 17
                                 ? 'rgb(74 222 128 / 0.45)'
                                 : 'rgb(var(--border))',
@@ -479,7 +479,7 @@ export function TimezoneConverterClient() {
               ))}
               <div className="flex flex-wrap gap-4 pt-1 text-xs" style={{ color: 'rgb(var(--text-faint))' }}>
                 <span className="flex items-center gap-1.5">
-                  <span className="inline-block h-3 w-3 rounded-[2px]" style={{ backgroundColor: 'rgb(37 99 235)' }} />
+                  <span className="inline-block h-3 w-3 rounded-[2px]" style={{ backgroundColor: 'rgb(var(--primary))' }} />
                   {L('selectedHour', 'Selected hour')}
                 </span>
                 <span className="flex items-center gap-1.5">

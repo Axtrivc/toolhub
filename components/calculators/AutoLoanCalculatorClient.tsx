@@ -271,7 +271,7 @@ export function AutoLoanCalculatorClient() {
                     <th className="px-3 py-2 text-right">{L('thBalance', 'Balance')}</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y" style={{ borderColor: 'rgb(var(--border))' }}>
+                <tbody className="divide-y divide-[rgb(var(--border))]">
                   {visibleRows.map((row) => (
                     <tr key={row.month}>
                       <td className="px-3 py-2 font-mono text-sm" style={{ color: 'rgb(var(--text-subtle))' }}>{row.month}</td>

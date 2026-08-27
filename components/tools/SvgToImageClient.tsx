@@ -340,10 +340,11 @@ export function SvgToImageClient() {
             className="flex min-h-[160px] items-center justify-center rounded-lg border p-4"
             style={{
               borderColor: 'rgb(var(--border))',
+              backgroundColor: 'rgb(var(--bg-subtle))',
               backgroundImage:
-                'linear-gradient(45deg, #eee 25%, transparent 25%), linear-gradient(-45deg, #eee 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #eee 75%), linear-gradient(-45deg, transparent 75%, #eee 75%)',
+                'linear-gradient(45deg, rgb(var(--border) / 0.5) 25%, transparent 25%, transparent 75%, rgb(var(--border) / 0.5) 75%), linear-gradient(45deg, rgb(var(--border) / 0.5) 25%, transparent 25%, transparent 75%, rgb(var(--border) / 0.5) 75%)',
               backgroundSize: '16px 16px',
-              backgroundPosition: '0 0, 0 8px, 8px -8px, -8px 0px',
+              backgroundPosition: '0 0, 8px 8px',
             }}
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}

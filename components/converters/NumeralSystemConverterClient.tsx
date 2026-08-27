@@ -110,7 +110,7 @@ export function NumeralSystemConverterClient() {
             value={value}
             onChange={(e) => setValue(e.target.value)}
             placeholder="255"
-            className="w-full rounded-lg border p-3 font-mono shadow-sm outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200" style={{ borderColor: 'rgb(var(--border-strong))', color: 'rgb(var(--text))' }}
+            className="w-full rounded-lg border p-3 font-mono shadow-sm outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200" style={{ borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rgb(var(--bg-card))', color: 'rgb(var(--text))' }}
           />
         </div>
         <div>
@@ -138,7 +138,7 @@ export function NumeralSystemConverterClient() {
             <ResultCard
               key={b}
               label={BASE_NAMES[b]}
-              value={formatForDisplay(b, results[b])}
+              value={<span className="tabular-nums">{formatForDisplay(b, results[b])}</span>}
               highlight={b === '10'}
               sublabel={baseLabel(b)}
             />

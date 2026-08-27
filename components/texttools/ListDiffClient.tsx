@@ -109,9 +109,9 @@ export function ListDiffClient() {
     'w-full rounded-lg border p-4 font-mono text-xs shadow-sm outline-none transition focus:ring-2'
 
   const sections: { label: string; items: string[]; color: string }[] = [
-    { label: L('onlyInA', 'Only in A'), items: result.onlyA, color: 'text-blue-600' },
-    { label: L('onlyInB', 'Only in B'), items: result.onlyB, color: 'text-orange-600' },
-    { label: L('inBoth', 'In Both (Intersection)'), items: result.both, color: 'text-green-600' },
+    { label: L('onlyInA', 'Only in A'), items: result.onlyA, color: 'text-blue-600 dark:text-blue-400' },
+    { label: L('onlyInB', 'Only in B'), items: result.onlyB, color: 'text-orange-600 dark:text-orange-400' },
+    { label: L('inBoth', 'In Both (Intersection)'), items: result.both, color: 'text-green-600 dark:text-green-400' },
     { label: L('union', 'Union (All Unique)'), items: result.union, color: 'text-slate-600 dark:text-slate-300' },
   ]
 

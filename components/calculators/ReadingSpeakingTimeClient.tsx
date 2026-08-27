@@ -158,7 +158,7 @@ export function ReadingSpeakingTimeClient() {
           key={p.label}
           type="button"
           onClick={() => set(p.wpm)}
-          className="rounded-full border px-3 py-1 text-xs font-medium transition-colors hover:bg-brand-50"
+          className="rounded-full border px-3 py-1 text-xs font-medium transition-colors hover:bg-brand-50 dark:hover:bg-brand-950/40"
           style={{
             borderColor: p.wpm === active ? 'rgb(var(--border-strong))' : 'rgb(var(--border))',
             color: p.wpm === active ? 'rgb(var(--text))' : 'rgb(var(--text-muted))',

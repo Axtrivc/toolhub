@@ -105,13 +105,13 @@ export function PxToRemClient() {
           />
           <div className="mt-2 space-y-1 text-sm">
             <div className="flex items-center justify-between">
-              <span className="text-slate-500">rem:</span>
+              <span className="text-slate-500 dark:text-slate-400">rem:</span>
               <code className="rounded bg-blue-50 px-2 py-0.5 text-blue-700 dark:bg-blue-950/50 dark:text-blue-300">
                 {fromPx.rem || '—'}
               </code>
             </div>
             <div className="flex items-center justify-between">
-              <span className="text-slate-500">{L('emParentRoot', 'em (parent = root)')}:</span>
+              <span className="text-slate-500 dark:text-slate-400">{L('emParentRoot', 'em (parent = root)')}:</span>
               <code className="rounded bg-blue-50 px-2 py-0.5 text-blue-700 dark:bg-blue-950/50 dark:text-blue-300">
                 {fromPx.em || '—'}
               </code>
@@ -134,7 +134,7 @@ export function PxToRemClient() {
           />
           <div className="mt-2 space-y-1 text-sm">
             <div className="flex items-center justify-between">
-              <span className="text-slate-500">px:</span>
+              <span className="text-slate-500 dark:text-slate-400">px:</span>
               <code className="rounded bg-blue-50 px-2 py-0.5 text-blue-700 dark:bg-blue-950/50 dark:text-blue-300">
                 {fromRem || '—'}
               </code>
@@ -150,9 +150,9 @@ export function PxToRemClient() {
           <table className="w-full text-left text-xs">
             <thead style={{ backgroundColor: 'rgb(var(--bg-subtle))' }}>
               <tr>
-                <th className="px-3 py-2 font-semibold text-slate-600 dark:text-slate-300">PX</th>
-                <th className="px-3 py-2 font-semibold text-slate-600 dark:text-slate-300">REM</th>
-                <th className="px-3 py-2 font-semibold text-slate-600 dark:text-slate-300">{L('emParentRootHeader', 'EM (parent = root)')}</th>
+                <th className="px-3 py-2 text-right font-semibold text-slate-600 dark:text-slate-300">PX</th>
+                <th className="px-3 py-2 text-right font-semibold text-slate-600 dark:text-slate-300">REM</th>
+                <th className="px-3 py-2 text-right font-semibold text-slate-600 dark:text-slate-300">{L('emParentRootHeader', 'EM (parent = root)')}</th>
                 <th className="px-3 py-2 font-semibold text-slate-600 dark:text-slate-300">{L('sizeBarHeader', 'Size')}</th>
               </tr>
             </thead>
@@ -161,9 +161,9 @@ export function PxToRemClient() {
                 const r = (p / rootSize).toFixed(4).replace(/\.?0+$/, '')
                 return (
                   <tr key={p} className="border-t" style={{ borderColor: 'rgb(var(--border))' }}>
-                    <td className="px-3 py-1.5 font-mono">{p}</td>
-                    <td className="px-3 py-1.5 font-mono">{r}</td>
-                    <td className="px-3 py-1.5 font-mono">{r}</td>
+                    <td className="px-3 py-1.5 text-right font-mono tabular-nums">{p}</td>
+                    <td className="px-3 py-1.5 text-right font-mono tabular-nums">{r}</td>
+                    <td className="px-3 py-1.5 text-right font-mono tabular-nums">{r}</td>
                     <td className="w-1/3 px-3 py-1.5">
                       <div className="h-1.5 overflow-hidden rounded-full" style={{ backgroundColor: 'rgb(var(--bg-subtle))' }}>
                         <div

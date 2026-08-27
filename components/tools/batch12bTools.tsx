@@ -378,8 +378,17 @@ export function HmacGeneratorClient() {
       )}
       {hex && (
         <div role="status" aria-live="polite" className="space-y-3">
-          <ResultCard label="HMAC (hex)" value={hex} highlight />
-          <ResultCard label="HMAC (base64)" value={b64} />
+          {/* 长 token(hex/base64):break-all + 缩小字号防撑破宽度;
+              传 ReactNode 绕开 AnimatedNumber(哈希串做数字滚动无意义) */}
+          <ResultCard
+            label="HMAC (hex)"
+            value={<span className="block break-all font-mono text-sm leading-relaxed sm:text-base">{hex}</span>}
+            highlight
+          />
+          <ResultCard
+            label="HMAC (base64)"
+            value={<span className="block break-all font-mono text-sm leading-relaxed sm:text-base">{b64}</span>}
+          />
         </div>
       )}
       {hex && (

@@ -228,9 +228,14 @@ export function ResultCard({
       </div>
       <div
         className={`mt-1.5 ${error ? 'text-base font-semibold sm:text-lg' : 'text-2xl font-bold sm:text-3xl'} ${highlight ? 'text-primary' : ''}`}
-        style={error ? { color: 'rgb(220 38 38)' } : highlight ? undefined : { color: 'rgb(var(--text))' }}
+        style={error ? undefined : highlight ? undefined : { color: 'rgb(var(--text))' }}
       >
-        {highlight && !error ? <AnimatedNumber value={value} /> : value}
+        {/* 全部分支等宽数字(值变化不抖动);error 文案串混排数字同样受益 */}
+        {highlight && !error ? (
+          <AnimatedNumber value={value} />
+        ) : (
+          <span className={`tabular-nums${error ? ' text-red-600 dark:text-red-400' : ''}`}>{value}</span>
+        )}
       </div>
       {sublabel && <div className="mt-1 text-xs" style={{ color: 'rgb(var(--text-faint))' }}>{sublabel}</div>}
     </div>

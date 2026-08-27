@@ -204,7 +204,7 @@ export function FindReplaceClient() {
             <button
               type="button"
               onClick={() => setText('')}
-              className="-my-1 rounded-md px-2 py-1 text-xs text-slate-400 hover:text-red-500 sm:text-sm"
+              className="-my-1 rounded-md px-2 py-1 text-xs text-slate-500 dark:text-slate-400 hover:text-red-500 sm:text-sm"
             >
               {L('clear', 'Clear')}
             </button>
@@ -285,15 +285,13 @@ export function FindReplaceClient() {
         </div>
         {regexError ? (
           <p
-            className="rounded-lg border-2 p-4 font-mono text-sm"
-            style={{ borderColor: 'rgb(254 202 202)', backgroundColor: 'rgb(254 226 226 / 0.4)', color: 'rgb(var(--text))' }}
+            className="rounded-lg border-2 border-red-300/60 bg-red-50/70 p-4 font-mono text-sm text-red-700 dark:border-red-800/50 dark:bg-red-950/30 dark:text-red-300"
           >
             {L('invalidRegex', '⚠️ Invalid regular expression — check your pattern syntax')}
           </p>
         ) : tooLong ? (
           <p
-            className="rounded-lg border-2 p-4 font-mono text-sm"
-            style={{ borderColor: 'rgb(253 230 138)', backgroundColor: 'rgb(254 249 195 / 0.4)', color: 'rgb(var(--text))' }}
+            className="rounded-lg border-2 border-amber-200 bg-amber-50 p-4 font-mono text-sm text-amber-700 dark:border-amber-800/60 dark:bg-amber-950/30 dark:text-amber-300"
           >
             {L('textTooLong', '⚠️ Text exceeds 100,000 characters — regex mode is disabled for very large text to keep the page responsive. Use literal (non-regex) mode instead.')}
           </p>

@@ -188,7 +188,7 @@ export function UserAgentParserClient() {
 
           {/* 爬虫提示 */}
           {parsed.isBot && (
-            <div className="rounded-lg border border-amber-200 bg-amber-50 p-4 text-sm text-amber-800">
+            <div className="rounded-lg border border-amber-200 bg-amber-50 p-4 text-sm text-amber-800 dark:border-amber-800/60 dark:bg-amber-950/40 dark:text-amber-300">
               ⚠️ {L('botLooksLike', 'This looks like an automated crawler (')}<strong>{parsed.botName}</strong>{L('botNotHuman', '), not a human visitor.')} {L('botFieldsUnreliable', 'Browser/OS fields in bot UAs often imitate real browsers and may be unreliable.')}
             </div>
           )}

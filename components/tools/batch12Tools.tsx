@@ -152,7 +152,7 @@ export function MimeTypeLookupClient() {
         className="w-full rounded-lg border p-3 shadow-sm outline-none transition focus:ring-2"
         style={{ borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rgb(var(--bg-card))', color: 'rgb(var(--text))' }}
       />
-      <div className="overflow-hidden rounded-lg border border-border bg-card">
+      <div className="overflow-x-auto rounded-lg border border-border bg-card">
         <table className="w-full text-left text-sm">
           <thead>
             <tr className="border-b" style={{ borderColor: 'rgb(var(--border))', backgroundColor: 'rgb(var(--bg-subtle))' }}>

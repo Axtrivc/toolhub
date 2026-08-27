@@ -85,7 +85,7 @@ export function JwtGeneratorClient() {
             <span className="text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>{L('tokenLabel', 'Signed token')}</span>
             <CopyButton value={token} />
           </div>
-          <pre className="overflow-x-auto rounded-lg border p-4 font-mono text-xs whitespace-pre-wrap break-all" style={{ borderColor: 'rgb(var(--border))', backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text))' }}>{token}</pre>
+          <pre className="max-h-72 overflow-x-auto overflow-y-auto rounded-lg border p-4 font-mono text-xs whitespace-pre-wrap break-all" style={{ borderColor: 'rgb(var(--border))', backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text))' }}>{token}</pre>
         </div>
       )}
       <ResultActions summary={token} filename="token.jwt" downloadContent={token} mime="text/plain;charset=utf-8;" copyLabel={L('copyToken', 'Copy Token')} />
@@ -124,6 +124,7 @@ export function HashComparatorClient() {
         <div role="status" aria-live="polite">
           <ResultCard label={L('verdict', 'Verdict')}
             highlight={result.match}
+            error={!result.match}
             value={result.match ? `✓ ${L('match', 'MATCH — digests are identical')}` : `✗ ${L('mismatch', 'MISMATCH — do not trust this file')}`}
           />
           {!result.match && !result.note && (
@@ -403,7 +404,8 @@ export function HtaccessRedirectGeneratorClient() {
             <input aria-label={L('toLabel', 'To path')} value={p.to} placeholder="/new-url"
               onChange={(e) => setPairs(pairs.map((x, j) => (j === i ? { ...x, to: e.target.value } : x)))} className={inpCls} style={selVars} />
             <button type="button" onClick={() => setPairs(pairs.filter((_, j) => j !== i))} disabled={pairs.length <= 1}
-              className="px-3 text-sm text-slate-400 hover:text-red-500 dark:text-slate-500">✕</button>
+              aria-label={L('removeRedirect', 'Remove redirect')}
+              className="rounded-lg px-3 text-sm text-slate-400 hover:text-red-500 dark:text-slate-500">✕</button>
           </div>
         ))}
         <button type="button" onClick={() => setPairs([...pairs, { from: '', to: '' }])} className="text-sm font-medium text-brand-600 hover:underline dark:text-blue-400">

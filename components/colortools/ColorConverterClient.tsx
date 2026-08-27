@@ -85,7 +85,7 @@ export function ColorConverterClient() {
             value={parsed?.hex || '#3b82f6'}
             onChange={(e) => setInput(e.target.value)}
             className="h-[50px] w-16 cursor-pointer rounded-lg border"
-            style={{ borderColor: 'rgb(var(--border-strong))' }}
+            style={{ borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rgb(var(--bg-card))' }}
             aria-label={L('colorPickerAria', 'Color picker')}
           />
         </div>
