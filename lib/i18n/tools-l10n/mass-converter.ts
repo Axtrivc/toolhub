@@ -7,18 +7,6 @@ import type { ToolL10n } from '../tool-l10n'
 export const massConverterL10n: ToolL10n = {
   zh: {
     ui: {
-      'note': '⚖️ 同时覆盖日常重量(千克、磅、盎司、英石)和精密质量单位(宝石用克拉,弹药/药品用格令)。质量与重量共用此转换器。',
-      'unit.carat': '克拉 (ct)',
-      'unit.cg': '厘克 (cg)',
-      'unit.dag': '十克 (dag)',
-      'unit.g': '克 (g)',
-      'unit.grain': '格令 (gr)',
-      'unit.kg': '千克 (kg)',
-      'unit.lb': '磅 (lb)',
-      'unit.mg': '毫克 (mg)',
-      'unit.oz': '盎司 (oz)',
-      'unit.st': '英石 (st)',
-      'unit.t': '公吨 (t)',
     },
     useCases: [
       '在克拉和克之间换算宝石重量',
@@ -31,18 +19,6 @@ export const massConverterL10n: ToolL10n = {
   },
   es: {
     ui: {
-      'note': '⚖️ Cubre peso cotidiano (kg, lb, oz, stones) y unidades de masa precisas (quilates para gemas, granos para munición/medicina). Masa y peso comparten este conversor.',
-      'unit.carat': 'Quilates (ct)',
-      'unit.cg': 'Centigramos (cg)',
-      'unit.dag': 'Decagramos (dag)',
-      'unit.g': 'Gramos (g)',
-      'unit.grain': 'Granos (gr)',
-      'unit.kg': 'Kilogramos (kg)',
-      'unit.lb': 'Libras (lb)',
-      'unit.mg': 'Miligramos (mg)',
-      'unit.oz': 'Onzas (oz)',
-      'unit.st': 'Stones (st)',
-      'unit.t': 'Toneladas métricas (t)',
     },
     useCases: [
       'convertir pesos de gemas entre quilates y gramos',
@@ -55,18 +31,6 @@ export const massConverterL10n: ToolL10n = {
   },
   de: {
     ui: {
-      'note': '⚖️ Deckt alltägliches Gewicht (kg, lb, oz, Stone) und genaue Masseeinheiten (Karat für Edelsteine, Gran für Munition/Medizin). Masse und Gewicht teilen sich diesen Umrechner.',
-      'unit.carat': 'Karat (ct)',
-      'unit.cg': 'Zentigramm (cg)',
-      'unit.dag': 'Dekagramm (dag)',
-      'unit.g': 'Gramm (g)',
-      'unit.grain': 'Gran (gr)',
-      'unit.kg': 'Kilogramm (kg)',
-      'unit.lb': 'Pfund (lb)',
-      'unit.mg': 'Milligramm (mg)',
-      'unit.oz': 'Unzen (oz)',
-      'unit.st': 'Stone (st)',
-      'unit.t': 'Metrische Tonnen (t)',
     },
     useCases: [
       'Edelsteingewichte zwischen Karat und Gramm umrechnen',

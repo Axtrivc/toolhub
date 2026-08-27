@@ -242,9 +242,15 @@ export function ScreenTimeCalculatorClient() {
       )}
 
       <ResultActions
-        summary={stats ? `${hours} h/day → ${fmtNum(stats.perYearDays, 0)} full days/year` : ''}
+        summary={stats ? L('summaryLine', '{hours} h/day → {days} full days/year').replace('{hours}', hours).replace('{days}', fmtNum(stats.perYearDays, 0)) : ''}
         filename="screen-time.txt"
-        downloadContent={stats ? `${hours} h/day → ${fmtNum(stats.perYearDays, 0)} full days/year; ~${fmtNum(stats.yearsAwake, 1)} waking years over the next ${stats.toLife} years` : ''}
+        downloadContent={stats
+          ? L('summaryFull', '{hours} h/day → {days} full days/year; ~{awake} waking years over the next {life} years')
+              .replace('{hours}', hours)
+              .replace('{days}', fmtNum(stats.perYearDays, 0))
+              .replace('{awake}', fmtNum(stats.yearsAwake, 1))
+              .replace('{life}', String(stats.toLife))
+          : ''}
         copyLabel={L('copySummary', 'Copy Summary')}
       />
       <CalculatorNote>{L('note', '📱 Averages assume 16 waking hours/day. US adults average about 4.5-5 hours on mobile alone; adding TV pushes total screen time past 7 hours.')}</CalculatorNote>
@@ -377,7 +383,7 @@ export function HmacGeneratorClient() {
     <div className="space-y-5">
       <div className="grid grid-cols-1 gap-4 rounded-lg p-4 sm:grid-cols-3" style={{ backgroundColor: 'rgb(var(--bg-subtle))' }}>
         <CalculatorField id="hm-msg" type="text" label={L('messageLabel', 'Message')} value={message} onChange={setMessage} placeholder="payload body…" />
-        <CalculatorField id="hm-secret" type="text" label={L('secretLabel', 'Secret key')} value={secret} onChange={setSecret} placeholder="whsec_…" />
+        <CalculatorField id="hm-secret" type="password" label={L('secretLabel', 'Secret key')} value={secret} onChange={setSecret} placeholder="whsec_…" />
         <div>
           <label htmlFor="hm-algo" className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>{L('algoLabel', 'Algorithm')}</label>
           <select id="hm-algo" value={algo} onChange={(e) => setAlgo(e.target.value as typeof algo)}

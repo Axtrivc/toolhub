@@ -14,6 +14,8 @@ export const ScreenTimeCalculatorL10n: ToolL10n = {
       { q: '屏幕时间多少算正常?', a: '美国成年人仅手机就日均 4.5-5 小时,加上电视后总屏幕时间超过 7 小时。娱乐性屏幕时间控制在 2 小时以内是常见的健康基线;计算器可以显示任何数值意味着什么。' },
     ],
     ui: {
+      summaryFull: '{hours} 小时/天 → 每年 {days} 个整天;未来 {life} 年约合 {awake} 个清醒年',
+      summaryLine: '{hours} 小时/天 → 每年 {days} 个整天',
       'ageLabel': '你的年龄',
       'copySummary': '复制摘要',
       'dailyShare': '占清醒时间比例',
@@ -37,6 +39,8 @@ export const ScreenTimeCalculatorL10n: ToolL10n = {
       { q: '¿Cuánto tiempo de pantalla es normal?', a: 'Los adultos de EE. UU. promedian 4,5-5 h solo en el móvil, y sumando la TV se superan las 7 h totales. Menos de 2 h de pantalla recreativa es una base saludable habitual; la calculadora muestra lo que significa tu cifra en cualquier nivel.' },
     ],
     ui: {
+      summaryFull: '{hours} h/día → {days} días completos al año; unos {awake} años despierto en los próximos {life} años',
+      summaryLine: '{hours} h/día → {days} días completos al año',
       'ageLabel': 'Tu edad',
       'copySummary': 'Copiar resumen',
       'dailyShare': 'Proporción de horas despierto',
@@ -60,6 +64,8 @@ export const ScreenTimeCalculatorL10n: ToolL10n = {
       { q: 'Wie viel Bildschirmzeit ist normal?', a: 'US-Erwachsene schaffen im Schnitt 4,5-5 h allein am Handy, mit TV steigt die Gesamtzeit über 7 h. Unter 2 h Freizeit-Bildschirm gilt als übliche gesunde Basis; der Rechner zeigt, was deine Zahl auf jedem Niveau bedeutet.' },
     ],
     ui: {
+      summaryFull: '{hours} Std./Tag → {days} ganze Tage pro Jahr; etwa {awake} Wachjahre in den nächsten {life} Jahren',
+      summaryLine: '{hours} Std./Tag → {days} ganze Tage pro Jahr',
       'ageLabel': 'Dein Alter',
       'copySummary': 'Zusammenfassung kopieren',
       'dailyShare': 'Anteil der Wachzeit',

@@ -52,6 +52,47 @@ function csvEscape(s: string): string {
 }
 
 /**
+ * 单条折线进入 LineAreaChart 的点数上限。640×240 的 viewBox 下肉眼分辨率
+ * 远低于此;average-calculator 这类把数千数字全量塞进 path 的工具只拖慢
+ * SVG 构建/描线动画而不增加信息量,超过即抽稀(见 thinSeriesIndices)。
+ */
+const SERIES_MAX_POINTS = 500
+
+/**
+ * series 点数抽稀(等距窗口 + 每窗取「绝对值最大点」= min-max 抽稀的简化版,
+ * 相比完整 LTTB 免去三角形面积计算且实现确定性):
+ * - 内部区间 [1, n-2] 均分成 SERIES_MAX_POINTS-1 个等宽窗口(下取整分段保证
+ *   n>上限时每窗必非空),每窗口产出 1 个代表点;
+ * - 代表点取「跨所有曲线」该窗口内绝对值最大的位置——尖峰不会被抹平;
+ *   同分取最靠前索引,输出确定性(SSR/客户端一致);
+ * - 首尾点强制保留 ⇒ 输出恒为 SERIES_MAX_POINTS+1 点(n>上限时)。
+ * 所有曲线与 xLabels 共用同一份索引集,tooltip/crosshair 对位不漂移。
+ * 返回 null 表示无需抽稀(n ≤ 上限,零改动路径)。
+ */
+function thinSeriesIndices(n: number, allPoints: number[][]): number[] | null {
+  if (!Number.isFinite(n) || n <= SERIES_MAX_POINTS || n < 3) return null
+  const buckets = SERIES_MAX_POINTS - 1
+  const interiorLen = n - 2
+  const idx: number[] = [0]
+  for (let b = 0; b < buckets && b < interiorLen; b++) {
+    const lo = 1 + Math.floor((b * interiorLen) / buckets)
+    const hi = 1 + Math.floor(((b + 1) * interiorLen) / buckets)
+    if (lo >= hi) continue // 空窗跳过(interiorLen < buckets 的兜底,常规路径不可达)
+    let best = lo
+    let bestAbs = -1
+    for (let j = lo; j < hi; j++) {
+      for (const arr of allPoints) {
+        const v = j < arr.length ? Math.abs(arr[j]) : -1
+        if (v > bestAbs) { bestAbs = v; best = j }
+      }
+    }
+    idx.push(best)
+  }
+  idx.push(n - 1)
+  return idx
+}
+
+/**
  * 计算器工厂:把一个 CalculatorConfig 渲染成可交互的 React 组件
  *
  * 用法:
@@ -175,7 +216,25 @@ export function makeCalculatorClient(config: CalculatorConfig): ComponentType {
     const seriesData = useMemo(() => {
       if (!config.series) return null
       try {
-        return config.series(values, locale)
+        const data = config.series(values, locale)
+        if (!data) return null
+        // 折线点数超过 SERIES_MAX_POINTS 时抽稀:所有曲线与 xLabels 共用
+        // 同一份等距索引(min-max 简化版,保留首尾与尖峰),tooltip 数据来自
+        // 同数组,天然随之一致。在 memo 内做保证引用稳定、SSR/客户端确定。
+        const indices = thinSeriesIndices(
+          data.xLabels.length,
+          data.lines.map((ln) => ln.points),
+        )
+        if (!indices) return data
+        // 越界索引跳过:契约上每条线与 xLabels 等长,万一不等长则保持
+        // 长度不一致的旧状(交给 LineAreaChart 的 invalid 分支显示占位)
+        const pickAt = <T,>(arr: T[]): T[] =>
+          indices.flatMap((i) => (i < arr.length ? [arr[i]] : []))
+        return {
+          ...data,
+          xLabels: pickAt(data.xLabels),
+          lines: data.lines.map((ln) => ({ ...ln, points: pickAt(ln.points) })),
+        }
       } catch {
         return null
       }

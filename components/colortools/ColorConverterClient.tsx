@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from 'react'
 import { rgbToHex, rgbToHsl, hslToRgb, parseRgb, parseHsl, type RGB } from '@/lib/color'
-import { ResultCard, CalculatorNote } from '../calculator/CalculatorField'
+import { CalculatorNote } from '../calculator/CalculatorField'
 import { CopyButton } from '../CopyButton'
 import { useApp } from '@/components/providers/AppProviders'
 import { tui } from '@/lib/i18n/tool-l10n'

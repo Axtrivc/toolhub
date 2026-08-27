@@ -19,6 +19,10 @@ type Json = string | number | boolean | null | Json[] | { [k: string]: Json }
 
 type ParseResult = { ok: true; value: Record<string, Json> } | { ok: false; error: string }
 
+// R7 大输入门控:与 json 文本工具族(batch3 maxInputChars 形态)一致的 200k 上限。
+// 解析是逐行同步 re-parse,超大输入会冻结输入框;超限跳过 parse,走琥珀横幅提示。
+const TJ_MAX_INPUT_CHARS = 200_000
+
 function parseToml(src: string): ParseResult {
   const root: Record<string, Json> = {}
   let cur: Record<string, Json> = root
@@ -211,10 +215,9 @@ function parseValue(s: string): Json {
   const numTok = s.replace(/_/g, '')
   let num: number
   if (/^[-+]?(0x[0-9A-Fa-f]+|0o[0-7]+|0b[01]+)$/.test(numTok)) {
-    num = Number(numTok.replace(/^([-+]?)0x/, '$10x').replace(/^([-+]?)0o/, (m, sg) => `${sg}0`).replace(/^([-+]?)0b/, (m) => m))
-    // 简化:直接用 parseInt 的 radix 形式
+    // 直接用 parseInt 的 radix 形式(token 形状已被上面的 regex 保证)
     const sign = numTok.startsWith('-') ? -1 : 1
-    const body = numTok.replace(/^[-+?]/, '')
+    const body = numTok.replace(/^[-+]/, '')
     if (body.startsWith('0x')) num = sign * parseInt(body.slice(2), 16)
     else if (body.startsWith('0o')) num = sign * parseInt(body.slice(2), 8)
     else num = sign * parseInt(body.slice(2), 2)
@@ -240,11 +243,19 @@ function assignInline(obj: Record<string, Json>, pair: string): void {
 export function TomlToJsonClient() {
   const { locale } = useApp()
   const L = (key: string, fb: string) => tui('toml-to-json', locale, key, fb)
+  // 数字分组跟随应用语言(英文固定 en-US,保证 SSR 首屏与英文输出不变)
+  const numberLocale = locale === 'en' ? 'en-US' : locale
   const sample = getCalculatorSample('toml-to-json')
   const [toml, setToml] = useState(sample?.toml ?? '')
 
-  const result = useMemo(() => parseToml(toml), [toml])
-  const jsonText = result.ok ? JSON.stringify(result.value, null, 2) : ''
+  // 门控在 useMemo 入口判定:超限返回 null 跳过 parse(toml 原文完整保留在输入框,
+  // 用户可随时裁剪回到正常路径),不产生任何部分转换结果
+  const tooLarge = toml.length > TJ_MAX_INPUT_CHARS
+  const result = useMemo(
+    () => (tooLarge ? null : parseToml(toml)),
+    [toml, tooLarge],
+  )
+  const jsonText = result?.ok ? JSON.stringify(result.value, null, 2) : ''
 
   return (
     <div className="space-y-5">
@@ -259,7 +270,13 @@ export function TomlToJsonClient() {
           style={{ borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rgb(var(--bg-card))', color: 'rgb(var(--text))' }} />
       </div>
 
-      {!result.ok && toml.trim() && (
+      {tooLarge && (
+        <p role="alert" className="rounded-lg border-2 border-amber-200 bg-amber-50 p-3 text-sm text-amber-700 dark:border-amber-800/60 dark:bg-amber-950/30 dark:text-amber-300">
+          ⚠️ {L('inputTooLarge', 'Input exceeds {n} characters — conversion is skipped to keep typing responsive. Trim or split the input.')
+            .replace('{n}', TJ_MAX_INPUT_CHARS.toLocaleString(numberLocale))}
+        </p>
+      )}
+      {!tooLarge && result && !result.ok && toml.trim() && (
         <p role="alert" className="rounded-lg border-2 border-red-200 bg-red-50 p-4 font-mono text-sm text-red-700 dark:border-red-800/60 dark:bg-red-950/30 dark:text-red-300">
           ⚠️ {result.error}
         </p>

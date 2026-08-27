@@ -2,7 +2,7 @@
 
 import { makeUnitConverter } from './makeUnitConverter'
 import { makeCalculatorClient } from '../calculator/makeCalculatorClient'
-import { fmtNum, toNum } from '@/lib/format'
+import { fmtNum } from '@/lib/format'
 import { tui } from '@/lib/i18n/tool-l10n'
 import { TemperatureConverterClient } from './TemperatureConverterClient'
 import { GPACalculatorClient } from './GPACalculatorClient'

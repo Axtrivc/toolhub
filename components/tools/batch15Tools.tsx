@@ -392,26 +392,9 @@ export function AesEncryptDecryptClient() {
 
       <div className="space-y-4 rounded-lg p-4" style={{ backgroundColor: 'rgb(var(--bg-subtle))' }}>
         <CalculatorField id="ae-text" type="text" label={mode === 'encrypt' ? L('plainLabel', 'Text to encrypt') : L('payloadLabel', 'Encrypted payload (AES-v1:…)')} value={text} onChange={setText} placeholder={mode === 'encrypt' ? 'secret message' : 'AES-v1:…:…:…'} />
-        {/* 密码用手写掩码输入框(CalculatorField 暂不支持 type=password,共享件本轮只读):
-            防肩窥 + new-password 避免 WebView 凭据自动填充;label 与 htmlFor 配对 */}
-        <div>
-          <label htmlFor="ae-pass" className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>{L('passLabel', 'Password')}</label>
-          <input
-            id="ae-pass"
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            placeholder="strong passphrase"
-            autoComplete="new-password"
-            spellCheck={false}
-            className="w-full rounded-lg border p-3 shadow-sm outline-none transition focus:ring-2"
-            style={{
-              borderColor: 'rgb(var(--border-strong))',
-              backgroundColor: 'rgb(var(--bg-card))',
-              color: 'rgb(var(--text))',
-            }}
-          />
-        </div>
+        {/* 密码字段:CalculatorField 已支持 type=password(掩码 + new-password
+            防 WebView 凭据自动填充 + spellCheck 关闭),替换此前手写的掩码输入 */}
+        <CalculatorField id="ae-pass" type="password" label={L('passLabel', 'Password')} value={password} onChange={setPassword} placeholder="strong passphrase" />
       </div>
 
       {error && (

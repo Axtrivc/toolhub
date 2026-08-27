@@ -1,7 +1,7 @@
 'use client'
 
 import { useMemo, useState } from 'react'
-import { CalculatorNote, ResultCard } from '../calculator/CalculatorField'
+import { CalculatorNote } from '../calculator/CalculatorField'
 import { ResultActions } from '../ResultActions'
 import { CopyButton } from '@/components/CopyButton'
 import { useApp } from '@/components/providers/AppProviders'

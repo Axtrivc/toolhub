@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { ResultCard, CalculatorNote } from '../calculator/CalculatorField'
+import { CalculatorNote } from '../calculator/CalculatorField'
 import { CopyButton } from '../CopyButton'
 import { makeCalculatorClient } from '../calculator/makeCalculatorClient'
 import { PresetChips } from '../calculator/PresetChips'

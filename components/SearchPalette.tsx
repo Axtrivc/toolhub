@@ -10,7 +10,7 @@ import type { ToolMeta } from '@/lib/tools'
 import { getToolIcon } from '@/lib/tools'
 import { SmartIcon } from '@/components/SmartIcon'
 import type { Locale } from '@/lib/i18n'
-import { t, tc, getToolName, getToolShortIntro } from '@/lib/i18n'
+import { t, tc, getToolName } from '@/lib/i18n'
 import { motion, AnimatePresence, useReducedMotion } from './motion/MotionPrimitives'
 
 interface SearchPaletteProps {

@@ -15,6 +15,7 @@ export const TomlToJsonL10n: ToolL10n = {
     ui: {
       'inputLabel': '你的 TOML',
       'loadSample': '加载示例',
+      'inputTooLarge': '输入超过 {n} 字符——为保证输入流畅已跳过转换。请精简或拆分 TOML 后再试。',
       'note': '📦 TOML 1.0 子集解析器——支持表格、数组表、内联表、点分键与全部数字格式。日期时间保留为字符串(JSON 无日期类型)。多行字符串会带行号拒绝而不是误解析。',
     },
   },
@@ -28,6 +29,7 @@ export const TomlToJsonL10n: ToolL10n = {
     ui: {
       'inputLabel': 'Tu TOML',
       'loadSample': 'Cargar ejemplo',
+      'inputTooLarge': 'La entrada supera los {n} caracteres — la conversión se omite para mantener la escritura fluida. Recorta o divide el TOML.',
       'note': '📦 Analizador de un subconjunto de TOML 1.0 — tablas, tablas de arrays, tablas inline, claves con puntos y todos los formatos numéricos. Las fechas quedan como strings.',
     },
   },
@@ -41,6 +43,7 @@ export const TomlToJsonL10n: ToolL10n = {
     ui: {
       'inputLabel': 'Dein TOML',
       'loadSample': 'Beispiel laden',
+      'inputTooLarge': 'Die Eingabe überschreitet {n} Zeichen — die Konvertierung wird übersprungen, damit die Eingabe reaktionsfähig bleibt. TOML kürzen oder teilen.',
       'note': '📦 TOML-1.0-Teilmenge — Tables, Array-Tables, Inline-Tables, gepunktete Keys, alle Zahlenformate. Datetimes bleiben Strings. Mehrzeilige Strings werden mit Zeilennummer abgelehnt.',
     },
   },

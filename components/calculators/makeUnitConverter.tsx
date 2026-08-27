@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useMemo, useCallback, useEffect, useRef } from 'react'
-import { CalculatorField, CalculatorSliderField, ResultCard, CalculatorNote } from '../calculator/CalculatorField'
+import { CalculatorSliderField, ResultCard, CalculatorNote } from '../calculator/CalculatorField'
 import { MagnitudeRuler } from '../charts/MagnitudeRuler'
 import { ResultActions } from '../ResultActions'
 import { LoadSampleButton } from '../LoadSampleButton'

@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useMemo } from 'react'
-import { CalculatorField, CalculatorSliderField, ResultCard, CalculatorShell, CalculatorNote } from '@/components/calculator/CalculatorField'
+import { CalculatorSliderField, ResultCard, CalculatorShell, CalculatorNote } from '@/components/calculator/CalculatorField'
 import { LineAreaChart } from '@/components/charts/LineAreaChart'
 import { CopyButton } from '@/components/CopyButton'
 import { useApp } from '@/components/providers/AppProviders'

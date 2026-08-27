@@ -84,7 +84,7 @@ export function CalculatorField({
   label: string
   value: string
   onChange: (v: string) => void
-  type?: 'number' | 'text' | 'date'
+  type?: 'number' | 'text' | 'date' | 'password'
   placeholder?: string
   suffix?: string
   id: string
@@ -107,7 +107,10 @@ export function CalculatorField({
           placeholder={placeholder}
           step={step}
           inputMode={inputMode}
-          autoComplete="off"
+          // password → 掩码显示 + 防 WebView 凭据自动填充/拼写纠错(防肩窥,
+          // 密钥类输入不加 spellCheck 红线);其余类型维持 autoComplete="off"
+          autoComplete={type === 'password' ? 'new-password' : 'off'}
+          spellCheck={type === 'password' ? false : undefined}
           className={`w-full rounded-lg border p-3 shadow-sm outline-none transition focus:ring-2 ${suffix ? 'pr-16' : ''}`}
           style={{
             borderColor: 'rgb(var(--border-strong))',
