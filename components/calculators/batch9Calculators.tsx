@@ -273,12 +273,12 @@ export const ElectricityCostCalculatorClient = makeCalculatorClient({
     { key: 'yearly', label: 'Cost per year' },
     { key: 'kwh', label: 'Energy per day' },
   ],
-  compute: (v) => {
+  compute: (v, locale) => {
     const watts = toNum(v.watts)
     const hours = toNum(v.hours)
     const rate = toNum(v.rate)
     if (watts < 0 || hours < 0 || rate < 0 || hours > 24) {
-      return { daily: `⚠️ ${tui('electricity-cost-calculator', 'en', 'errInvalid', 'Values must be non-negative and hours ≤ 24')}`, monthly: '—', yearly: '—', kwh: '—' }
+      return { daily: `⚠️ ${tui('electricity-cost-calculator', locale, 'errInvalid', 'Values must be non-negative and hours ≤ 24')}`, monthly: '—', yearly: '—', kwh: '—' }
     }
     const kwhDay = (watts * hours) / 1000
     const daily = kwhDay * rate
@@ -327,7 +327,7 @@ export const CarCostCalculatorClient = makeCalculatorClient({
     { key: 'fuel', label: 'Fuel total' },
     { key: 'other', label: 'Insurance + maintenance' },
   ],
-  compute: (v) => {
+  compute: (v, locale) => {
     const price = toNumStrict(v.carPrice)
     const years = toNum(v.ownYears)
     const kmY = toNum(v.kmPerYear)
@@ -338,7 +338,7 @@ export const CarCostCalculatorClient = makeCalculatorClient({
     const resale = toNum(v.resale)
     if (isNaN(price) || price <= 0 || years <= 0 || kmY < 0 || fuelP < 0 || cons < 0 || ins < 0 || maint < 0 || resale < 0 || resale > price) {
       return {
-        monthly: `⚠️ ${tui('car-cost-calculator', 'en', 'errInvalid', 'Enter valid values (resale must not exceed the purchase price)')}`,
+        monthly: `⚠️ ${tui('car-cost-calculator', locale, 'errInvalid', 'Enter valid values (resale must not exceed the purchase price)')}`,
         yearly: '—', perKm: '—', depreciation: '—', fuel: '—', other: '—',
       }
     }

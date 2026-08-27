@@ -76,7 +76,7 @@ export const autoLoanCalculatorL10n: ToolL10n = {
     faqs: [
       {
         q: '它包含销售税和各种费用吗?',
-        a: '它会把购车价的销售税算进去,也允许你添加费用和以旧换新的价值,所以贷款金额反映的是你实际要融的部分。登记费、经销商文件费和加装件没有逐项列出——需要的话把它们作为一笔总费用加上。',
+        a: '销售税按「车价减去以旧换新抵扣」后的金额计算,贷款金额反映的是你实际要融的部分。登记费、经销商文件费和加装件没有逐项列出——需要的话先把它们并入车价。',
       },
       {
         q: '首付怎么影响月供?',
@@ -159,7 +159,7 @@ export const autoLoanCalculatorL10n: ToolL10n = {
     faqs: [
       {
         q: '¿Incluye impuesto de ventas y tasas?',
-        a: 'Incorpora el impuesto sobre el precio de compra y te permite añadir tasas y el valor de entrega (trade-in), así que el importe del préstamo refleja lo que realmente financias. Matrícula, gastos documentales del concesionario y extras no se detallan — añádelos como una tarifa global si hace falta.',
+        a: 'Aplica el impuesto sobre el precio del vehículo tras restar el valor de entrega (trade-in), así que el importe del préstamo refleja lo que realmente financias. Matrícula, gastos documentales del concesionario y extras no se detallan — inclúyelos en el precio del vehículo si hace falta.',
       },
       {
         q: '¿Cómo afecta la entrada a la cuota mensual?',
@@ -242,7 +242,7 @@ export const autoLoanCalculatorL10n: ToolL10n = {
     faqs: [
       {
         q: 'Enthält er Mehrwertsteuer und Gebühren?',
-        a: 'Er rechnet die Steuer auf den Kaufpreis ein und lässt dich Gebühren sowie einen Inzahlungnahmewert hinzufügen, sodass der Kreditbetrag das widerspiegelt, was du wirklich finanzierst. Zulassung, Dokumentenpauschale des Händlers und Extras sind nicht aufgeschlüsselt — nimm sie bei Bedarf als Pauschalgebühr dazu.',
+        a: 'Er wendet die Steuer auf den Fahrzeugpreis nach Abzug des Inzahlungnahmewerts an, sodass der Kreditbetrag das widerspiegelt, was du wirklich finanzierst. Zulassung, Dokumentenpauschale des Händlers und Extras sind nicht aufgeschlüsselt — rechne sie bei Bedarf in den Fahrzeugpreis ein.',
       },
       {
         q: 'Wie wirkt die Anzahlung auf die Monatsrate?',

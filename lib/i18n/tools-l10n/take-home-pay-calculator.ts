@@ -38,7 +38,8 @@ export const TakeHomePayCalculatorL10n: ToolL10n = {
       'out.perPaycheck': '每两周薪资金额',
       'out.preTaxPct': '401(k)/税前比例',
       'out.premiums': '年度医保保费',
-    },
+          'errInvalidSalary': "请输入有效的工资",
+},
   },
   es: {
     useCases: ['estimar el neto de una nueva oferta de trabajo', 'ver cuánto mejora real una subida', 'comparar declarar solo contra en pareja', 'planificar el porcentaje de 401(k)'],
@@ -73,7 +74,8 @@ export const TakeHomePayCalculatorL10n: ToolL10n = {
       'out.perPaycheck': 'Por nómina quincenal',
       'out.preTaxPct': '401(k)/% pre-impuestos',
       'out.premiums': 'Primas médicas/año',
-    },
+          'errInvalidSalary': "Introduce un salario válido",
+},
   },
   de: {
     useCases: ['das Netto eines neuen Angebots schätzen', 'ausrechnen, was eine Gehaltserhöhung real bringt', 'Einzel- mit Zusammenveranlagung vergleichen', 'den 401(k)-Anteil planen'],
@@ -108,6 +110,7 @@ export const TakeHomePayCalculatorL10n: ToolL10n = {
       'out.perPaycheck': 'Pro 14-Tage-Lohn',
       'out.preTaxPct': '401(k)/vor Steuern %',
       'out.premiums': 'Krankenversicherung/Jahr',
-    },
+          'errInvalidSalary': "Gib ein gültiges Gehalt ein",
+},
   },
 }

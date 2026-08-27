@@ -26,22 +26,20 @@ export function LogFilterClient() {
   const [exclude, setExclude] = useState('')
   const [level, setLevel] = useState<string>('')
   const [useRegex, setUseRegex] = useState(false)
-  const [regexError, setRegexError] = useState(false)
-
+  // 正则合法性作为派生值随 memo 返回,不再用 setState 写回
+  // (渲染期 setState 属反模式;且原先清空全部过滤条件后 ⚠️ 会残留不消失)
   const result = useMemo(() => {
     const lines = logs.split(/\r?\n/)
     if (!include.trim() && !exclude.trim() && !level) {
-      return { out: logs, matched: lines.filter((l) => l.trim()).length, total: lines.filter((l) => l.trim()).length }
+      return { out: logs, matched: lines.filter((l) => l.trim()).length, total: lines.filter((l) => l.trim()).length, invalid: false }
     }
     let re: RegExp | null = null
     let reEx: RegExp | null = null
     try {
       if (useRegex && include.trim()) re = new RegExp(include, 'i')
       if (useRegex && exclude.trim()) reEx = new RegExp(exclude, 'i')
-      setRegexError(false)
     } catch {
-      setRegexError(true)
-      return { out: '', matched: 0, total: lines.length }
+      return { out: '', matched: 0, total: lines.length, invalid: true }
     }
     const inc = include.trim().toLowerCase()
     const exc = exclude.trim().toLowerCase()
@@ -57,7 +55,7 @@ export function LogFilterClient() {
       }
       return true
     })
-    return { out: filtered.join('\n'), matched: filtered.length, total: lines.filter((l) => l.trim()).length }
+    return { out: filtered.join('\n'), matched: filtered.length, total: lines.filter((l) => l.trim()).length, invalid: false }
   }, [logs, include, exclude, level, useRegex])
 
   return (
@@ -88,12 +86,12 @@ export function LogFilterClient() {
         </label>
       </div>
 
-      {regexError && (
+      {result.invalid && (
         <p role="alert" className="rounded-lg border-2 border-red-200 bg-red-50 p-3 text-sm text-red-700 dark:border-red-800/60 dark:bg-red-950/30 dark:text-red-300">
           ⚠️ {L('invalidRegex', 'Invalid regular expression')}
         </p>
       )}
-      {logs && result.matched === 0 && !regexError && (
+      {logs && result.matched === 0 && !result.invalid && (
         <p className="text-sm" style={{ color: 'rgb(var(--text-faint))' }}>{L('noLines', 'No lines match the current filters.')}</p>
       )}
       {result.out && (
@@ -126,8 +124,9 @@ function buildAsciiRows(): AsciiRow[] {
       hex: i.toString(16).toUpperCase().padStart(2, '0'),
       bin: i.toString(2).padStart(8, '0'),
       oct: i.toString(8).padStart(3, '0'),
-      ch: i === 32 ? '(space)' : i < 32 ? '' : String.fromCharCode(i),
-      name: i < 32 ? ctrlNames[i] : undefined,
+      // 127(DEL)与 0-31 同为不可打印控制符:空字符格 + 名称标注(note 中对 DEL 的承诺)
+      ch: i === 32 ? '(space)' : i < 32 || i === 127 ? '' : String.fromCharCode(i),
+      name: i < 32 ? ctrlNames[i] : i === 127 ? 'DEL' : undefined,
     })
   }
   return rows

@@ -15,6 +15,9 @@ export const URLQueryParserClient = makeTextTool({
   transform: (t) => {
     try {
       const qIndex = t.indexOf('?')
+      // 裸绝对 URL(scheme://host,无 ?)查询串为空:R3 记录的"整条 URL 当 key"
+      // 是误导性输出,直接返回空对象(原始 query 文本如 "?a=1" 或 "a=1&b=2" 不受影响)
+      if (qIndex === -1 && /^[a-zA-Z][a-zA-Z0-9+.-]*:\/\//.test(t.trim())) return JSON.stringify({}, null, 2)
       let query = qIndex >= 0 ? t.slice(qIndex + 1) : t
       // #fragment 不是查询串的一部分:剥掉 ? 之后出现的首个 # 及其后内容
       // (无 ? 的纯锚点 URL 同样只去掉锚点,不会把 fragment 混进参数)
@@ -100,9 +103,16 @@ export const URLExtractorClient = makeTextTool({
   transform: (t, locale) => {
     const matches =
       t.match(/https?:\/\/[^\s<>"']+/g)?.map((u) => {
-        // 剥掉被句子标点污染的尾部;右括号仅在 URL 里没有左括号时剥(维基百科链接含括号)
+        // 剥掉被句子标点污染的尾部;尾部右括号按计数剥到平衡为止——
+        // 既保住 Wikipedia 内嵌括号 URL,又能剥掉包住链接的那层句子右括号
+        // (旧版 includes('(') 一刀切会漏剥 "...(punctuation))" 结尾多余的 ')')
         let cleaned = u.replace(/[.,;:!?]+$/, '')
-        while (cleaned.endsWith(')') && !cleaned.includes('(')) cleaned = cleaned.slice(0, -1)
+        while (cleaned.endsWith(')')) {
+          const opens = (cleaned.match(/\(/g) || []).length
+          const closes = (cleaned.match(/\)/g) || []).length
+          if (closes > opens) cleaned = cleaned.slice(0, -1)
+          else break
+        }
         return cleaned
       }) ?? []
     const unique = [...new Set(matches)]

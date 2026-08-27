@@ -8,6 +8,7 @@ export const regexTesterL10n: ToolL10n = {
   zh: {
     ui: {
       'atIndex': '@ 索引',
+      'capReached': ' —— 已达匹配上限,列表已截断',
       'cheatSheetTitle': '正则速查表',
       'copyMatches': '复制匹配',
       'emptyGroup': '(空)',
@@ -23,7 +24,9 @@ export const regexTesterL10n: ToolL10n = {
       'matchDetails': '匹配详情与捕获组',
       'matchPluralSuffix': '',
       'matchWord': '个匹配',
+      'moreNotShown': '条未显示',
       'note': '🔒 100% 在客户端——使用你浏览器原生的 RegExp 引擎(JavaScript / ECMAScript 风格)。',
+      'notParticipated': '(未参与捕获)',
       'patternLabel': '正则表达式',
       'placeholder': '粘贴要测试的文本…',
       'testTextLabel': '测试文本',
@@ -40,6 +43,7 @@ export const regexTesterL10n: ToolL10n = {
   es: {
     ui: {
       'atIndex': '@ índice',
+      'capReached': ' — se alcanzó el límite de coincidencias, lista truncada',
       'cheatSheetTitle': 'Tabla rápida de regex',
       'copyMatches': 'Copiar coincidencias',
       'emptyGroup': '(vacío)',
@@ -55,7 +59,9 @@ export const regexTesterL10n: ToolL10n = {
       'matchDetails': 'Detalles de coincidencia y grupos de captura',
       'matchPluralSuffix': 's',
       'matchWord': 'coincidencia',
+      'moreNotShown': 'más sin mostrar',
       'note': '🔒 100% en el cliente — usa el motor RegExp nativo de tu navegador (sabor JavaScript / ECMAScript).',
+      'notParticipated': '(no participó)',
       'patternLabel': 'Expresión regular',
       'placeholder': 'Pega el texto contra el que quieres probar…',
       'testTextLabel': 'Texto de prueba',
@@ -72,6 +78,7 @@ export const regexTesterL10n: ToolL10n = {
   de: {
     ui: {
       'atIndex': '@ Index',
+      'capReached': ' — Treffer-Limit erreicht, Liste gekürzt',
       'cheatSheetTitle': 'Regex-Spickzettel',
       'copyMatches': 'Treffer kopieren',
       'emptyGroup': '(leer)',
@@ -87,7 +94,9 @@ export const regexTesterL10n: ToolL10n = {
       'matchDetails': 'Treffer-Details & Capture-Gruppen',
       'matchPluralSuffix': '',
       'matchWord': 'Treffer',
+      'moreNotShown': 'weitere nicht angezeigt',
       'note': '🔒 100% clientseitig — nutzt die native RegExp-Engine deines Browsers (JavaScript / ECMAScript-Flavor).',
+      'notParticipated': '(hat nicht teilgenommen)',
       'patternLabel': 'Regulärer Ausdruck',
       'placeholder': 'Füge den Text ein, gegen den du testen willst…',
       'testTextLabel': 'Testtext',

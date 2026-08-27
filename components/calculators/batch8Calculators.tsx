@@ -670,6 +670,11 @@ export const BillSplitCalculatorClient = makeCalculatorClient({
     const total = toNum(v.total)
     const tipPct = toNum(v.tip) / 100
     const people = Math.round(toNum(v.people))
+    // 负账单/负小费会输出负人均/负总额的看似合理结果,与同文件 commission/cash-back 一致拦截
+    if (total < 0 || tipPct < 0) {
+      const neg = `⚠️ ${tui('bill-split-calculator', locale, 'errNonNegative', 'Values cannot be negative')}`
+      return { perPerson: neg, tipAmount: '—', grandTotal: '—' }
+    }
     const tipAmount = total * tipPct
     const grand = total + tipAmount
     return {

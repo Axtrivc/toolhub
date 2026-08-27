@@ -40,7 +40,8 @@ export const WeddingBudgetCalculatorL10n: ToolL10n = {
       'out.photo': '摄影摄像 (15%)',
       'out.total': '总预算',
       'out.venue': '场地与租赁 (25%)',
-    },
+          'errInvalidBudget': "请输入有效的预算",
+},
   },
   es: {
     useCases: ['repartir el presupuesto total de la boda', 'ver el coste real por invitado', 'decidir cuántos invitados te convienen', 'fijar topes de gasto por proveedor'],
@@ -77,7 +78,8 @@ export const WeddingBudgetCalculatorL10n: ToolL10n = {
       'out.photo': 'Foto y vídeo (15 %)',
       'out.total': 'Presupuesto total',
       'out.venue': 'Recinto y alquiler (25 %)',
-    },
+          'errInvalidBudget': "Introduce un presupuesto válido",
+},
   },
   de: {
     useCases: ['das Hochzeitsbudget auf Posten verteilen', 'die echten Kosten pro Gast sehen', 'entscheiden, wie viele Gäste passen', 'Ausgabenobergrenzen pro Dienstleister setzen'],
@@ -114,6 +116,7 @@ export const WeddingBudgetCalculatorL10n: ToolL10n = {
       'out.photo': 'Foto & Video (15 %)',
       'out.total': 'Gesamtbudget',
       'out.venue': 'Location & Miete (25 %)',
-    },
+          'errInvalidBudget': "Gib ein gültiges Budget ein",
+},
   },
 }

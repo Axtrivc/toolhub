@@ -73,8 +73,9 @@ export function CsvToFinetuneClient() {
       if (!r[aIdx]?.trim()) errors.push(L('rowNoAssistant', 'Row {n}: empty assistant content').replace('{n}', String(i + 2)))
     })
     return { jsonl: lines.join('\n'), headers, errors, count: lines.length }
+    // locale 进依赖:i18n 错误文案在切换语言后立即跟随(纯重算,无行为风险)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [csv, sysCol, userCol, assistantCol])
+  }, [csv, sysCol, userCol, assistantCol, locale])
 
   return (
     <div className="space-y-5">

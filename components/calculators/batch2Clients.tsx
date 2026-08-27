@@ -26,10 +26,10 @@ export const WeightConverterClient = makeUnitConverter({
     dag: { label: 'Decagrams (dag)', factor: 0.01 },
     kg: { label: 'Kilograms (kg)', factor: 1 },
     t: { label: 'Metric tons (t)', factor: 1000 },
-    // imperial 重量
-    oz: { label: 'Ounces (oz)', factor: 0.0283495 },
-    lb: { label: 'Pounds (lb)', factor: 0.453592 },
-    st: { label: 'Stones (st)', factor: 6.35029 },
+    // imperial 重量(精确定义:1 lb = 453.59237 g,oz/st 为 lb 的整分)
+    oz: { label: 'Ounces (oz)', factor: 0.45359237 / 16 },
+    lb: { label: 'Pounds (lb)', factor: 0.45359237 },
+    st: { label: 'Stones (st)', factor: 0.45359237 * 14 },
     // 精密/专用质量(mass-converter 合并过来)
     carat: { label: 'Carats (ct)', factor: 0.0002 },
     grain: { label: 'Grains (gr)', factor: 0.00006479891 },
@@ -44,11 +44,12 @@ export const SpeedConverterClient = makeUnitConverter({
   defaultTo: 'mph',
   digits: 2,
   units: {
-    ms: { label: 'Meters/sec (m/s)', factor: 2.23694 },
-    kmh: { label: 'Kilometers/hour (km/h)', factor: 0.621371 },
+    // 精确因子:1 mph = 1609.344 m / 3600 s(国际英里精确定义),knot = 1852 m/h
+    ms: { label: 'Meters/sec (m/s)', factor: 3600 / 1609.344 },
+    kmh: { label: 'Kilometers/hour (km/h)', factor: 1000 / 1609.344 },
     mph: { label: 'Miles/hour (mph)', factor: 1 },
-    knot: { label: 'Knots (kn)', factor: 1.15078 },
-    fps: { label: 'Feet/sec (ft/s)', factor: 0.681818 },
+    knot: { label: 'Knots (kn)', factor: 1852 / 1609.344 },
+    fps: { label: 'Feet/sec (ft/s)', factor: 15 / 22 },
   },
   note: '🏃 Supports m/s, km/h, mph, knots, and ft/s. Common use: converting speed limits between countries.',
 })
@@ -65,10 +66,11 @@ export const AreaConverterClient = makeUnitConverter({
     sqm: { label: 'Square meters (m²)', factor: 1 },
     hectare: { label: 'Hectares (ha)', factor: 10000 },
     sqkm: { label: 'Square km (km²)', factor: 1000 * 1000 },
+    // 英制面积由精确英尺定义导出(1 ft = 0.3048 m,1 ac = 43560 ft²)
     sqin: { label: 'Square inches (in²)', factor: 0.00064516 },
-    sqft: { label: 'Square feet (ft²)', factor: 0.092903 },
-    sqyd: { label: 'Square yards (yd²)', factor: 0.836127 },
-    acre: { label: 'Acres (ac)', factor: 4046.86 },
+    sqft: { label: 'Square feet (ft²)', factor: 0.3048 * 0.3048 },
+    sqyd: { label: 'Square yards (yd²)', factor: 0.9144 * 0.9144 },
+    acre: { label: 'Acres (ac)', factor: 0.3048 * 0.3048 * 43560 },
   },
   note: '📐 For real estate, land, and construction. Includes acres and hectares.',
 })
@@ -83,13 +85,14 @@ export const VolumeConverterClient = makeUnitConverter({
     ml: { label: 'Milliliters (ml)', factor: 0.001 },
     l: { label: 'Liters (L)', factor: 1 },
     cbm: { label: 'Cubic meters (m³)', factor: 1000 },
-    tsp: { label: 'Teaspoons (US)', factor: 0.00492892 },
-    tbsp: { label: 'Tablespoons (US)', factor: 0.0147868 },
-    floz: { label: 'Fluid ounces (US)', factor: 0.0295735 },
-    cup: { label: 'Cups (US)', factor: 0.236588 },
-    pt: { label: 'Pints (US)', factor: 0.473176 },
-    qt: { label: 'Quarts (US)', factor: 0.946353 },
-    gal: { label: 'Gallons (US)', factor: 3.78541 },
+    // US customary 精确因子(1 gal-US = 3.785411784 L 按定义,大单位为其整分)
+    tsp: { label: 'Teaspoons (US)', factor: 0.00492892159375 },
+    tbsp: { label: 'Tablespoons (US)', factor: 0.01478676478125 },
+    floz: { label: 'Fluid ounces (US)', factor: 0.0295735295625 },
+    cup: { label: 'Cups (US)', factor: 0.2365882365 },
+    pt: { label: 'Pints (US)', factor: 0.473176473 },
+    qt: { label: 'Quarts (US)', factor: 0.946352946 },
+    gal: { label: 'Gallons (US)', factor: 3.785411784 },
   },
   note: '🥤 Includes metric (ml, L, m³) and US cooking units (tsp, tbsp, cup, gallon).',
 })

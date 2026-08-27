@@ -89,10 +89,11 @@ export const AngleConverterClient = makeUnitConverter({
 // L/100km 与 mpg 是倒数关系(L/100km = 235.215 ÷ mpg),
 // 不能用线性 factor,故对 l100km 单位配置自定义 toBase/fromBase 钩子。
 // km/L 与 mpg 同为「距离/体积」,是线性关系:1 km/L = 3.785411784/1.609344 ≈ 2.3521458 US mpg。
-// UK mpg → US mpg:1 UK gallon = 1.20095 US gallon,故 x mpg(UK) = x/1.20095 mpg(US) = x*0.83267。
+// UK mpg → US mpg:1 UK gallon = 1.20095 US gallon,故 x mpg(UK) = x*0.83267418 mpg(US)。
 // v ≤ 0(含空输入 toNum=0)无物理意义:倒数关系下 0 → Infinity、负数 → 负油耗。
 // 工厂不支持逐工具校验,故在每个 toBase 入口统一拦截为 NaN → 结果区显示「—」,note 提示需为正数。
 const KML_TO_MPG = 3.785411784 / 1.609344 // ≈ 2.3521458
+const UK_MPG_TO_US_MPG = 3.785411784 / 4.54609 // ≈ 0.8326742(gallon 比的倒数)
 // 输入须为正数,否则返回 NaN(工厂对非有限值显示「—」)
 const positiveOrNaN = (v: number): number => (v > 0 ? v : NaN)
 
@@ -106,8 +107,8 @@ export const FuelEconomyConverterClient = makeUnitConverter({
     'mpg-us': { label: 'Miles/Gallon US (mpg)', factor: 1, toBase: positiveOrNaN },
     'mpg-uk': {
       label: 'Miles/Gallon UK (mpg)',
-      factor: 0.83267,
-      toBase: (v) => positiveOrNaN(v) * 0.83267,
+      factor: UK_MPG_TO_US_MPG,
+      toBase: (v) => positiveOrNaN(v) * UK_MPG_TO_US_MPG,
     },
     kml: {
       label: 'Kilometers/Liter (km/L)',
@@ -121,7 +122,7 @@ export const FuelEconomyConverterClient = makeUnitConverter({
       fromBase: (b) => 235.215 / positiveOrNaN(b), // US mpg → L/100km
     },
   },
-  note: '⛽ L/100km is inverse to mpg (lower = better): L/100km = 235.215 ÷ US mpg. km/L is linear: 1 km/L ≈ 2.35215 US mpg. 1 UK mpg ≈ 1.20095 US mpg. Enter a value greater than 0 (0 or negative is undefined). Values are approximate.',
+  note: '⛽ L/100km is inverse to mpg (lower = better): L/100km = 235.215 ÷ US mpg. km/L is linear: 1 km/L ≈ 2.35215 US mpg. UK mpg × 0.83267 = US mpg (1 UK gallon = 1.20095 US gallons). Enter a value greater than 0 (0 or negative is undefined). Values are approximate.',
 })
 
 // ── 压力(Pascal/Bar/PSI/atm)──

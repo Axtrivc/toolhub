@@ -40,7 +40,10 @@ export function DiceRollerClient() {
   const [sides, setSides] = useState<number>(6)
   const [count, setCount] = useState('2')
   const [rolls, setRolls] = useState<number[]>([])
-  const [history, setHistory] = useState<string[]>([])
+  // 历史条目带自增 id:列表新纪录总是插到最前(index key 会随插入整体移位,
+  // 稳定 key 让 React 不必逐行复用错位节点);上限 6 条由 slice 截断
+  const [history, setHistory] = useState<{ id: number; text: string }[]>([])
+  const histSeq = useRef(0)
 
   // 骰子数量钳制在 1..20(防卡死);按钮文案与实际投掷数共用同一钳制值,
   // 否则输入 25 时按钮显示 "Roll 25×" 而实际只掷 20 颗
@@ -48,7 +51,7 @@ export function DiceRollerClient() {
   const roll = useCallback(() => {
     const out = Array.from({ length: nDice }, () => randInt(sides) + 1)
     setRolls(out)
-    setHistory((h) => [`${nDice}d${sides}: ${out.join(' + ')} = ${out.reduce((a, b) => a + b, 0)}`, ...h].slice(0, 6))
+    setHistory((h) => [{ id: ++histSeq.current, text: `${nDice}d${sides}: ${out.join(' + ')} = ${out.reduce((a, b) => a + b, 0)}` }, ...h].slice(0, 6))
   }, [sides, nDice])
 
   return (
@@ -94,8 +97,8 @@ export function DiceRollerClient() {
             <button type="button" onClick={() => setHistory([])} className="text-xs text-slate-400 hover:text-red-500 dark:text-slate-500">{L('clear', 'Clear')}</button>
           </div>
           <ul className="overflow-hidden rounded-lg border font-mono text-xs" style={{ borderColor: 'rgb(var(--border))' }}>
-            {history.map((h, i) => (
-              <li key={i} className="border-b px-3 py-1.5 last:border-b-0" style={{ borderColor: 'rgb(var(--border))', color: 'rgb(var(--text-subtle))' }}>{h}</li>
+            {history.map((entry) => (
+              <li key={entry.id} className="border-b px-3 py-1.5 last:border-b-0" style={{ borderColor: 'rgb(var(--border))', color: 'rgb(var(--text-subtle))' }}>{entry.text}</li>
             ))}
           </ul>
         </div>
@@ -274,8 +277,11 @@ const MORSE_MAP: Record<string, string> = {
 const REVERSE_MORSE: Record<string, string> = Object.fromEntries(Object.entries(MORSE_MAP).map(([k, v]) => [v, k]))
 
 function encodeMorse(text: string): string {
-  // 一切空白(含多行粘贴的 \n \r)都映射为词分隔符 '/',而不是被静默丢弃
-  return text.toUpperCase().split('').map((ch) => (/\s/.test(ch) ? '/' : MORSE_MAP[ch] ?? '')).filter(Boolean).join(' ')
+  // 首尾去掉、中间连续空白(含多行粘贴的 \n \r)折叠成单个空格后映射词分隔符
+  // '/',不静默丢弃也不重复——否则 "a \n b" 会产生 '////' 连串分隔符
+  // (音频里词间隔被放大数倍),首尾空白也会留下游离的 '/'
+  return text.toUpperCase().trim().replace(/\s+/g, ' ').split('')
+    .map((ch) => (ch === ' ' ? '/' : MORSE_MAP[ch] ?? '')).filter(Boolean).join(' ')
 }
 
 function decodeMorse(morse: string): string {
@@ -387,7 +393,10 @@ interface TypeStats { wpmGross: number; wpmNet: number; accuracy: number; elapse
 export function TypingSpeedTestClient() {
   const { locale } = useApp()
   const L = (key: string, fb: string) => tui('typing-speed-test', locale, key, fb)
-  const [promptIdx, setPromptIdx] = useState(() => randInt(PROMPTS.length))
+  // SSR 恒定首帧(promptIdx=0),挂载后再随机抽句:crypto 随机放进 useState
+  // 初始化器会在服务端/客户端各抽一次,抽中不同句子即 hydration mismatch
+  const [promptIdx, setPromptIdx] = useState(0)
+  useEffect(() => { setPromptIdx(randInt(PROMPTS.length)) }, [])
   const prompt = PROMPTS[promptIdx]
   const [typed, setTyped] = useState('')
   const [startedAt, setStartedAt] = useState<number | null>(null)

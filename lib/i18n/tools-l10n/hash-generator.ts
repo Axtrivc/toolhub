@@ -8,6 +8,7 @@ export const hashGeneratorL10n: ToolL10n = {
   zh: {
     ui: {
       'algorithm': '算法',
+      'cryptoUnavailable': '⚠️ 此环境无法使用安全哈希(SubtleCrypto)——请通过 HTTPS 或 localhost 打开本页',
       'generateHashes': '# 生成哈希',
       'hashing': '哈希计算中…',
       'note': '🔐 使用 SubtleCrypto API(真正的加密哈希)。可选 SHA-256(默认)/SHA-384/SHA-512;SHA-1 在安全上已被攻破,仅限遗留校验用途。',
@@ -27,6 +28,7 @@ export const hashGeneratorL10n: ToolL10n = {
   es: {
     ui: {
       'algorithm': 'Algoritmo',
+      'cryptoUnavailable': '⚠️ El hash seguro (SubtleCrypto) no está disponible en este contexto: abre esta página por HTTPS o en localhost',
       'generateHashes': '# Generar hashes',
       'hashing': 'Calculando hash…',
       'note': '🔐 Usa la API SubtleCrypto (hash criptográfico real). Elige SHA-256 (por defecto), SHA-384 o SHA-512; SHA-1 está roto para seguridad y se ofrece solo para checksums heredados.',
@@ -46,6 +48,7 @@ export const hashGeneratorL10n: ToolL10n = {
   de: {
     ui: {
       'algorithm': 'Algorithmus',
+      'cryptoUnavailable': '⚠️ Sicheres Hashing (SubtleCrypto) ist in diesem Kontext nicht verfügbar — öffne diese Seite über HTTPS oder localhost',
       'generateHashes': '# Hashes erzeugen',
       'hashing': 'Hash wird berechnet…',
       'note': '🔐 Nutzt die SubtleCrypto-API (echtes kryptografisches Hashing). Wähle SHA-256 (Standard), SHA-384 oder SHA-512; SHA-1 ist für Sicherheit gebrochen und nur für Legacy-Prüfsummen verfügbar.',

@@ -25,7 +25,8 @@ export const unitPriceCalculatorL10n: ToolL10n = {
       'opt.unit2.oz': '盎司 (oz)', 'opt.unit2.lb': '磅 (lb)', 'opt.unit2.l': '升 (l)', 'opt.unit2.mg': '毫克 (mg)',
       'out.unit1price': '选项 1 单价', 'out.unit2price': '选项 2 单价', 'out.winner': '更划算',
       note: '🛒 比较不同包装的真实性价比。大包装未必每单位更便宜。',
-    },
+          'errNonNegative': "价格不能为负",
+},
   },
   es: {
     formula: {
@@ -47,7 +48,8 @@ export const unitPriceCalculatorL10n: ToolL10n = {
       'opt.unit2.oz': 'onzas (oz)', 'opt.unit2.lb': 'libras (lb)', 'opt.unit2.l': 'litros (l)', 'opt.unit2.mg': 'miligramos (mg)',
       'out.unit1price': 'Precio unitario opción 1', 'out.unit2price': 'Precio unitario opción 2', 'out.winner': 'Mejor oferta',
       note: '🛒 Compara el valor real entre tamaños de envase. El bote grande no siempre es más barato por unidad.',
-    },
+          'errNonNegative': "Los precios no pueden ser negativos",
+},
   },
   de: {
     formula: {
@@ -69,6 +71,7 @@ export const unitPriceCalculatorL10n: ToolL10n = {
       'opt.unit2.oz': 'Unzen (oz)', 'opt.unit2.lb': 'Pfund (lb)', 'opt.unit2.l': 'Liter (l)', 'opt.unit2.mg': 'Milligramm (mg)',
       'out.unit1price': 'Stückpreis Option 1', 'out.unit2price': 'Stückpreis Option 2', 'out.winner': 'Besseres Angebot',
       note: '🛒 Vergleiche den wahren Wert über Verpackungsgrößen hinweg. Die große Box ist nicht immer pro Einheit günstiger.',
-    },
+          'errNonNegative': "Preise dürfen nicht negativ sein",
+},
   },
 }

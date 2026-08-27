@@ -94,24 +94,37 @@ export function repairJson(input: string): { output: string; log: string[]; ok: 
   }
 }
 
-/** 扫描字符串感知的括号栈,补齐截断尾部 */
+/** 扫描字符串感知的括号栈,补齐截断尾部。
+ *  对「错位闭合」做容忍:占位示例 `{ "name": "Ada", tags: ['math',}` 里 } 试图闭合 [
+ *  ——旧实现直接弹栈,末尾补全出一对错乱括号,连 UI 占位提示都修不好。
+ *  现改为按类型匹配才弹栈,错位闭合符丢弃,最后按剩余开括号逐层补全。 */
 function closeTruncated(s: string): string {
   const stack: string[] = []
+  let out = ''
   let inStr = false
   let esc = false
   for (let i = 0; i < s.length; i++) {
     const c = s[i]
     if (inStr) {
+      out += c
       if (esc) esc = false
       else if (c === '\\') esc = true
       else if (c === '"') inStr = false
       continue
     }
-    if (c === '"') { inStr = true; continue }
-    if (c === '{' || c === '[') stack.push(c)
-    else if (c === '}' || c === ']') stack.pop()
+    if (c === '"') { inStr = true; out += c; continue }
+    if (c === '{' || c === '[') { stack.push(c); out += c; continue }
+    if (c === '}' || c === ']') {
+      const want = stack[stack.length - 1]
+      if ((c === '}' && want === '{') || (c === ']' && want === '[')) {
+        stack.pop()
+        out += c
+        continue
+      }
+      continue // 错位闭合:结构上视为手误的闭合符,丢弃
+    }
+    out += c
   }
-  let out = s
   if (inStr) { out += '"' }
   out = out.replace(/[,:\s]+$/, '')
   while (stack.length) {
@@ -326,7 +339,10 @@ export function PromptTemplateFillerClient() {
 }
 
 // ══════════════ OpenAI Tools JSON Builder ══════════════
-interface ToolParam { name: string; type: string; description: string; required: boolean; enumValues: string }
+/** id 用于 <input> 行的稳定 key:参数行可中途删除,用索引当 key 会让受控输入
+ *  在删除中间行时错位(焦点/输入法组合态串行)。模块级自增即可,无需进入 state。 */
+let toolParamUid = 0
+interface ToolParam { id: number; name: string; type: string; description: string; required: boolean; enumValues: string }
 
 const TS_TYPES = ['string', 'number', 'boolean', 'object', 'array', 'integer']
 
@@ -336,8 +352,8 @@ export function ToolsBuilderClient() {
   const [fnName, setFnName] = useState('get_weather')
   const [fnDesc, setFnDesc] = useState('Get current weather for a city')
   const [params, setParams] = useState<ToolParam[]>([
-    { name: 'city', type: 'string', description: 'City name, e.g. "San Francisco"', required: true, enumValues: '' },
-    { name: 'unit', type: 'string', description: 'Temperature unit', required: false, enumValues: 'celsius, fahrenheit' },
+    { id: toolParamUid++, name: 'city', type: 'string', description: 'City name, e.g. "San Francisco"', required: true, enumValues: '' },
+    { id: toolParamUid++, name: 'unit', type: 'string', description: 'Temperature unit', required: false, enumValues: 'celsius, fahrenheit' },
   ])
 
   const toolsJson = useMemo(() => {
@@ -382,7 +398,7 @@ export function ToolsBuilderClient() {
       <div className="space-y-3">
         <span className="block text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>{L('paramsLabel', 'Parameters')}</span>
         {params.map((p, i) => (
-          <div key={i} className="grid grid-cols-1 gap-2 rounded-lg border p-3 md:grid-cols-[1fr_6rem_1fr_1fr_auto_auto]" style={{ borderColor: 'rgb(var(--border))' }}>
+          <div key={p.id} className="grid grid-cols-1 gap-2 rounded-lg border p-3 md:grid-cols-[1fr_6rem_1fr_1fr_auto_auto]" style={{ borderColor: 'rgb(var(--border))' }}>
             <input aria-label={L('pName', 'Param name')} value={p.name} placeholder="city" spellCheck={false}
               onChange={(e) => setParams(params.map((x, j) => (j === i ? { ...x, name: e.target.value } : x)))} className={inpCls} style={selVars} />
             <select aria-label={L('pType', 'Type')} value={p.type}
@@ -404,7 +420,7 @@ export function ToolsBuilderClient() {
               className="rounded-lg px-2 text-sm text-slate-400 hover:text-red-500 dark:text-slate-500">✕</button>
           </div>
         ))}
-        <button type="button" onClick={() => setParams([...params, { name: '', type: 'string', description: '', required: false, enumValues: '' }])}
+        <button type="button" onClick={() => setParams([...params, { id: toolParamUid++, name: '', type: 'string', description: '', required: false, enumValues: '' }])}
           className="text-sm font-medium text-brand-600 hover:underline dark:text-blue-400">+ {L('addParam', 'Add parameter')}</button>
       </div>
 

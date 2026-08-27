@@ -440,8 +440,12 @@ export const RetirementCalculatorClient = makeCalculatorClient({
     let future = principal
     if (rate === 0) future = principal + monthly * months
     else {
-      future = principal * Math.pow(1 + rate, months)
-      future += monthly * ((Math.pow(1 + rate, months) - 1) / rate)
+      // 年利率必须月化(r/12),否则 7%/30 年会以 1.07^360 复利,$10k 变千万亿级;
+      // 公式 P(1+i)^n + PMT·[((1+i)^n−1)/i],i=r/12、n=years×12 —— 与下方 series 同口径
+      const rM = rate / 12
+      const growth = Math.pow(1 + rM, months)
+      future = principal * growth
+      future += monthly * ((growth - 1) / rM)
     }
     const contributed = principal + monthly * months
     return {
@@ -585,9 +589,11 @@ export const UnitPriceCalculatorClient = makeCalculatorClient({
       const n2 = u2 / (UNIT_TO_BASE[v.unit2] ?? 1)
       winner = n1 <= n2 ? 'Option 1' : 'Option 2'
     }
+    // 单价不足 $0.05 时保留 4 位小数:两位都显示 "$0.03 / g" 时比较结论不可读
+    const fmtUnitPrice = (u: number) => (u > 0 && u < 0.05 ? `$${fmtNum(u, 4)}` : fmtUSDValue(u))
     return {
-      unit1price: `${fmtUSDValue(u1)} / ${v.unit1}`,
-      unit2price: `${fmtUSDValue(u2)} / ${v.unit2}`,
+      unit1price: `${fmtUnitPrice(u1)} / ${v.unit1}`,
+      unit2price: `${fmtUnitPrice(u2)} / ${v.unit2}`,
       winner,
     }
   },

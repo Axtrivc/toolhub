@@ -195,7 +195,7 @@ export const TakeHomePayCalculatorClient = makeCalculatorClient({
     const premiums = Math.max(toNum(v.premiums), 0)
     const preTax401k = gross * (preTaxPct / 100)
     const taxableIncome = Math.max(0, gross - stdDeduction - preTax401k - premiums)
-    const bracketsSingle: [number, number][] = [[11850, 0.1], [48475, 0.12], [103350, 0.22], [197300, 0.24], [250525, 0.32], [626350, 0.35], [Infinity, 0.37]]
+    const bracketsSingle: [number, number][] = [[11925, 0.1], [48475, 0.12], [103350, 0.22], [197300, 0.24], [250525, 0.32], [626350, 0.35], [Infinity, 0.37]]
     const bracketsMarried: [number, number][] = [[23850, 0.1], [96950, 0.12], [206700, 0.22], [394600, 0.24], [501050, 0.32], [751600, 0.35], [Infinity, 0.37]]
     const brackets = v.filing === 'married' ? bracketsMarried : bracketsSingle
     let fed = 0
@@ -357,11 +357,13 @@ export const CaffeineCalculatorClient = makeCalculatorClient({
     }
     // 平均半衰期 ~5 小时(个体 3-7h)
     const nowMg = mg * Math.pow(0.5, hoursAgo / 5)
-    const bedMg = mg * Math.pow(0.5, bedIn / 5)
+    // 睡前残留从"饮用时刻"起累计衰减 hoursAgo + bedIn 小时
+    // (曾漏掉 hoursAgo:bedtimeIn=0 时 atBed 会显示摄入量而非当前残留)
+    const bedMg = mg * Math.pow(0.5, (hoursAgo + bedIn) / 5)
     const advice =
-      bedMg >= 100 ? 'Likely to disturb sleep — consider cutting this dose next time'
-      : bedMg >= 50 ? 'Borderline: sensitive sleepers may feel it'
-      : 'Low enough for most people to sleep normally'
+      bedMg >= 100 ? tui('caffeine-calculator', locale, 'advice.high', 'Likely to disturb sleep — consider cutting this dose next time')
+      : bedMg >= 50 ? tui('caffeine-calculator', locale, 'advice.mid', 'Borderline: sensitive sleepers may feel it')
+      : tui('caffeine-calculator', locale, 'advice.low', 'Low enough for most people to sleep normally')
     return {
       now: `${fmtNum(nowMg, 0)} mg`,
       atBed: `${fmtNum(bedMg, 0)} mg`,
@@ -547,7 +549,7 @@ export const DogAgeCalculatorClient = makeCalculatorClient({
     return {
       humanAge: `${fmtNum(human, 0)} human years`,
       lifeStage: stage,
-      mythNote: 'The ×7 rule ignores maturation pace',
+      mythNote: tui('dog-age-calculator', locale, 'myth', 'The ×7 rule ignores maturation pace'),
     }
   },
   chart: {

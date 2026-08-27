@@ -39,7 +39,7 @@ export const mortgageCalculatorL10n: ToolL10n = {
       },
       {
         q: '多还有用吗?',
-        a: '非常有用。多还的钱直接冲本金(先确认贷款机构没有提前还款违约金)。在 $400k、30 年、6.8% 的贷款上,每月多还 $200 大约能缩短 7 年期限,省下约 $130,000 利息。哪怕一年只多还一次全额,差别也很可观。用上方「每月额外还款」字段在你自己的贷款上模拟,即可看到新的还清时间、节省的利息和缩短的月数。',
+        a: '非常有用。多还的钱直接冲本金(先确认贷款机构没有提前还款违约金)。在 $400k、30 年、6.8% 的贷款上,每月多还 $200 大约能缩短 7 年期限,省下约 $113,000 利息。哪怕一年只多还一次全额,差别也很可观。用上方「每月额外还款」字段在你自己的贷款上模拟,即可看到新的还清时间、节省的利息和缩短的月数。',
       },
     ],
     formula: {
@@ -125,7 +125,7 @@ export const mortgageCalculatorL10n: ToolL10n = {
       },
       {
         q: '¿Ayuda hacer pagos extra?',
-        a: 'Sí, y mucho. Los pagos extra van directos al capital (confirma con tu prestamista que no haya penalización por amortización anticipada). En un préstamo de 400 000 $ a 30 años y 6,8 %, pagar 200 $ extra al mes recorta unos 7 años de plazo y ahorra aproximadamente 130 000 $ en intereses. Incluso un pago completo adicional al año supone una diferencia notable. Usa el campo de pago extra mensual para simularlo en tu propio préstamo: verás la nueva fecha de amortización, los intereses ahorrados y los meses recortados.',
+        a: 'Sí, y mucho. Los pagos extra van directos al capital (confirma con tu prestamista que no haya penalización por amortización anticipada). En un préstamo de 400 000 $ a 30 años y 6,8 %, pagar 200 $ extra al mes recorta unos 7 años de plazo y ahorra aproximadamente 113 000 $ en intereses. Incluso un pago completo adicional al año supone una diferencia notable. Usa el campo de pago extra mensual para simularlo en tu propio préstamo: verás la nueva fecha de amortización, los intereses ahorrados y los meses recortados.',
       },
     ],
     formula: {
@@ -211,7 +211,7 @@ export const mortgageCalculatorL10n: ToolL10n = {
       },
       {
         q: 'Hilft Sondertilgung?',
-        a: 'Ja, erheblich. Zusätzliche Zahlungen gehen direkt auf den Kredit (kläre vorher mit dem Kreditgeber, dass keine Vorfälligkeitsentschädigung anfällt). Bei einem 400 000 $-Kredit über 30 Jahre und 6,8 % kürzt eine Sondertilgung von 200 $/Monat die Laufzeit um etwa 7 Jahre und spart rund 130 000 $ Zinsen. Schon eine zusätzliche Vollrate pro Jahr macht einen spürbaren Unterschied. Simuliere es mit dem Feld für die zusätzliche Monatsrate an deinem eigenen Kredit: du siehst das neue Tilgungsende, die gesparten Zinsen und die gekürzten Monate.',
+        a: 'Ja, erheblich. Zusätzliche Zahlungen gehen direkt auf den Kredit (kläre vorher mit dem Kreditgeber, dass keine Vorfälligkeitsentschädigung anfällt). Bei einem 400 000 $-Kredit über 30 Jahre und 6,8 % kürzt eine Sondertilgung von 200 $/Monat die Laufzeit um etwa 7 Jahre und spart rund 113 000 $ Zinsen. Schon eine zusätzliche Vollrate pro Jahr macht einen spürbaren Unterschied. Simuliere es mit dem Feld für die zusätzliche Monatsrate an deinem eigenen Kredit: du siehst das neue Tilgungsende, die gesparten Zinsen und die gekürzten Monate.',
       },
     ],
     formula: {

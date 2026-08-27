@@ -18,11 +18,12 @@ export const inflationCalculatorL10n: ToolL10n = {
       'chartTitle': '同一篮子的价格',
       'line.today': '今日价格',
       'line.future': '未来价格',
-      'band.0-1': '通胀',
+      'band.today-future': '通胀',
       'in.amount': '金额', 'in.rate': '年通胀率', 'in.years': '年数',
       'out.future': '未来等值成本', 'out.lost': '损失的购买力',
       note: '💸 今天 $1,000 在 3% 通胀下逐年贬值。10 年后你需要 $1,344 才能买到现在 $1,000 能买到的东西。',
-    },
+          'errNonNegative': "金额、通胀率与年数不能为负",
+},
   },
   es: {
     formula: {
@@ -37,11 +38,12 @@ export const inflationCalculatorL10n: ToolL10n = {
       'chartTitle': 'Coste de la misma cesta',
       'line.today': 'Cuesta hoy',
       'line.future': 'Costará entonces',
-      'band.0-1': 'Inflación',
+      'band.today-future': 'Inflación',
       'in.amount': 'Importe', 'in.rate': 'Inflación anual', 'in.years': 'Años',
       'out.future': 'Coste equivalente en el futuro', 'out.lost': 'Poder adquisitivo perdido',
       note: '💸 $1,000 hoy con una inflación del 3 % valen menos cada año. En 10 años necesitarías $1,344 para comprar lo que $1,000 compran ahora.',
-    },
+          'errNonNegative': "El importe, la inflación y los años no pueden ser negativos",
+},
   },
   de: {
     formula: {
@@ -56,10 +58,11 @@ export const inflationCalculatorL10n: ToolL10n = {
       'chartTitle': 'Preis desselben Warenkorbs',
       'line.today': 'Heutiger Preis',
       'line.future': 'Zukünftiger Preis',
-      'band.0-1': 'Inflation',
+      'band.today-future': 'Inflation',
       'in.amount': 'Betrag', 'in.rate': 'Jährliche Inflation', 'in.years': 'Jahre',
       'out.future': 'Entsprechende Zukunftskosten', 'out.lost': 'Verlorene Kaufkraft',
       note: '💸 $1,000 heute verlieren bei 3 % Inflation jährlich an Wert. In 10 Jahren brauchst du $1,344 für das, was $1,000 jetzt kaufen.',
-    },
+          'errNonNegative': "Betrag, Inflation und Jahre dürfen nicht negativ sein",
+},
   },
 }

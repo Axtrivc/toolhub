@@ -17,7 +17,7 @@ export const wordleSolverL10n: ToolL10n = {
       'clickAnyWordToCopy': '点击任意词即可复制',
       'clickToCopy': '点击复制',
       'extraWordsLabel': '额外词汇(可选——每行一个或用空格分隔,会并入本次会话的词典)',
-      'foundClickToCopy': '个——点击任意词即可复制',
+      'foundClickToCopy': '——点击任意词即可复制',
       'knownPositions': '已知位置(绿色)',
       'letterPosition': '第 {n} 位的字母',
       'matchingWordPlural': '个匹配词',

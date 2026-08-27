@@ -31,7 +31,9 @@ export const SubscriptionCostCalculatorL10n: ToolL10n = {
       'out.workHours': '每年工作小时',
       'out.yearly': '年度总额',
       'out.yearlySubs': '年付订阅合计',
-    },
+          'errNonNegative': "各订阅金额不能为负",
+      'outSub.workHours': "按税后 $25/小时折算",
+},
   },
   es: {
     useCases: ['sumar el coste mensual real de todas tus suscripciones', 'ver cuánto cuesta ese «solo 9,99» en cinco años', 'convertir tus suscripciones a horas de trabajo', 'decidir qué suscripciones cancelar'],
@@ -59,7 +61,9 @@ export const SubscriptionCostCalculatorL10n: ToolL10n = {
       'out.workHours': 'Horas de trabajo al año',
       'out.yearly': 'Total anual',
       'out.yearlySubs': 'Total de suscripciones anuales',
-    },
+          'errNonNegative': "Los importes de las suscripciones no pueden ser negativos",
+      'outSub.workHours': "A $25/h netos",
+},
   },
   de: {
     useCases: ['die wahren Monatskosten aller Abos zusammenrechnen', 'sehen, was das „nur 9,99“ über fünf Jahre kostet', 'Abos in Arbeitsstunden umrechnen', 'entscheiden, welche Abos gekündigt werden'],
@@ -87,6 +91,8 @@ export const SubscriptionCostCalculatorL10n: ToolL10n = {
       'out.workHours': 'Arbeitsstunden pro Jahr',
       'out.yearly': 'Jahressumme',
       'out.yearlySubs': 'Jährliche Abos gesamt',
-    },
+          'errNonNegative': "Die Abonnement-Beträge dürfen nicht negativ sein",
+      'outSub.workHours': "Bei 25 $/h netto",
+},
   },
 }

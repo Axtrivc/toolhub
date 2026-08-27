@@ -172,7 +172,15 @@ const SHORT_VALUELESS_CHARS = new Set(['4', '6', 'B', 'M', 'O', 'J', 'Z', 'a', '
 function parseCurl(input: string): ParsedCurl {
   const raw = tokenize(input)
   // 去掉开头的 "curl"(不区分大小写)
-  const tokens = raw[0]?.toLowerCase() === 'curl' ? raw.slice(1) : raw
+  const stripped = raw[0]?.toLowerCase() === 'curl' ? raw.slice(1) : raw
+
+  // 归一化合并短选项("-XPUT"、" -H"x: y"" 粘贴后无空格)→ 标准两段,
+  // 使其与分开写的 -X / -H 走同一条解析路径(否则 method/header 被静默丢弃)。
+  const tokens: string[] = stripped.flatMap((tk) =>
+    tk.length > 2 && tk[0] === '-' && !tk.startsWith('--') && SHORT_VALUED_CHARS.has(tk[1])
+      ? [`-${tk[1]}`, tk.slice(2)]
+      : [tk],
+  )
 
   const result: ParsedCurl = {
     url: '',
@@ -185,6 +193,7 @@ function parseCurl(input: string): ParsedCurl {
 
   let hasBody = false
   let methodFromFlag = false
+  let getMode = false
   // 多个 -d/--data* 按 curl 语义用 & 拼接
   const dataParts: string[] = []
   let i = 0
@@ -229,6 +238,10 @@ function parseCurl(input: string): ParsedCurl {
     else if (lower === '-k' || lower === '--insecure') {
       result.insecure = true
     }
+    // -G / --get:data 转成 URL 查询串,method 保持 GET(curl 语义)
+    else if (lower === '-g' || lower === '--get') {
+      getMode = true
+    }
     // -u / --user user:pass → 转成 Authorization: Basic 头输出
     else if (lower === '-u' || lower === '--user') {
       result.user = tokens[++i] || ''
@@ -271,8 +284,14 @@ function parseCurl(input: string): ParsedCurl {
 
   result.body = dataParts.join('&')
 
-  // 有 body 但未指定 -X → 默认 POST
-  if (hasBody && !methodFromFlag) {
+  // -G:data 并入 URL 查询串,清空 body
+  if (getMode && result.body) {
+    result.url += `${result.url.includes('?') ? '&' : '?'}${result.body}`
+    result.body = ''
+  }
+
+  // 有 body 但未指定 -X 且非 -G → 默认 POST(-G 下是 GET 查询,见上)
+  if (hasBody && !methodFromFlag && !getMode) {
     result.method = 'POST'
   }
 

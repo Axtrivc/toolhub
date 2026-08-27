@@ -7,6 +7,9 @@ import type { ToolL10n } from '../tool-l10n'
 export const faviconGeneratorL10n: ToolL10n = {
   zh: {
     ui: {
+      'errDecodeImage': '无法解码该图片文件。',
+      'errImageEmpty': '图片没有可用尺寸(文件为空或损坏)。',
+      'errTooLarge': '文件过大({size})。最大为 20 MB。',
       'change': '更换',
       'copy': '复制',
       'croppedNote': '图片先裁剪为居中正方形,再缩放到各尺寸。',
@@ -45,6 +48,9 @@ export const faviconGeneratorL10n: ToolL10n = {
   },
   es: {
     ui: {
+      'errDecodeImage': 'No se pudo decodificar el archivo de imagen.',
+      'errImageEmpty': 'La imagen no tiene dimensiones utilizables (archivo vacío o dañado).',
+      'errTooLarge': 'El archivo es demasiado grande ({size}). El tamaño máximo es 20 MB.',
       'change': 'Cambiar',
       'copy': 'Copiar',
       'croppedNote': 'La imagen se recorta a un cuadrado centrado y luego se escala a cada tamaño.',
@@ -83,6 +89,9 @@ export const faviconGeneratorL10n: ToolL10n = {
   },
   de: {
     ui: {
+      'errDecodeImage': 'Bilddatei konnte nicht dekodiert werden.',
+      'errImageEmpty': 'Das Bild hat keine nutzbaren Abmessungen (leere oder defekte Datei).',
+      'errTooLarge': 'Datei ist zu groß ({size}). Die maximale Größe beträgt 20 MB.',
       'change': 'Ändern',
       'copy': 'Kopieren',
       'croppedNote': 'Das Bild wird auf ein zentriertes Quadrat beschnitten und dann auf jede Größe skaliert.',

@@ -11,6 +11,7 @@ export const macroCalculatorL10n: ToolL10n = {
       explain: '把每日热量按百分比分成蛋白质、碳水、脂肪,再换算成克(蛋白质和碳水 4 kcal/g,脂肪 9 kcal/g)。',
     },
     ui: {
+      errCalories: '请输入大于 0 的每日热量目标',
       'in.calories': '每日热量目标',
       'in.goal': '目标',
       'opt.goal.lose': '减脂(低碳)',
@@ -43,6 +44,7 @@ export const macroCalculatorL10n: ToolL10n = {
       explain: 'Reparte las calorías diarias en proteína, carbohidratos y grasa por porcentaje y convierte cada uno a gramos (proteína y carbohidratos = 4 kcal/g, grasa = 9 kcal/g).',
     },
     ui: {
+      errCalories: 'Introduce un objetivo calórico diario mayor que 0',
       'in.calories': 'Objetivo calórico diario',
       'in.goal': 'Objetivo',
       'opt.goal.lose': 'Perder peso (bajo en carbohidratos)',
@@ -75,6 +77,7 @@ export const macroCalculatorL10n: ToolL10n = {
       explain: 'Teilt die Tageskalorien prozentual in Protein, Kohlenhydrate und Fett auf und rechnet jedes in Gramm um (Protein und Kohlenhydrate = 4 kcal/g, Fett = 9 kcal/g).',
     },
     ui: {
+      errCalories: 'Gib ein tägliches Kalorienziel größer als 0 ein',
       'in.calories': 'Tägliches Kalorienziel',
       'in.goal': 'Ziel',
       'opt.goal.lose': 'Abnehmen (low carb)',

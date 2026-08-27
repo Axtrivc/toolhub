@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { CalculatorField, CalculatorNote, ResultCard } from '../calculator/CalculatorField'
 import { ResultActions } from '../ResultActions'
 import { CopyButton } from '@/components/CopyButton'
@@ -28,13 +28,21 @@ function b64url(bytes: Uint8Array): string {
 export function JwtGeneratorClient() {
   const { locale } = useApp()
   const L = (key: string, fb: string) => tui('jwt-generator', locale, key, fb)
+  // 首帧恒为静态内容(不带 iat):Date.now() 放在 useState 初始化里会随构建/加载
+  // 时刻变化,静态导出的 SSR HTML 与客户端水合首帧不一致。挂载后且用户未编辑时,
+  // 再补一个当下的 iat(与 makeTextTool 的 pristine 门控同款机制)。
   const [header, setHeader] = useState('{\n  "alg": "HS256",\n  "typ": "JWT"\n}')
-  const [payload, setPayload] = useState(
-    '{\n  "sub": "user-123",\n  "name": "Ada",\n  "iat": ' + Math.floor(Date.now() / 1000) + '\n}',
-  )
+  const [payload, setPayload] = useState('{\n  "sub": "user-123",\n  "name": "Ada"\n}')
+  const payloadPristineRef = useRef(true)
   const [secret, setSecret] = useState('')
   const [token, setToken] = useState('')
   const [error, setError] = useState('')
+
+  useEffect(() => {
+    if (!payloadPristineRef.current) return
+    setPayload('{\n  "sub": "user-123",\n  "name": "Ada",\n  "iat": ' + Math.floor(Date.now() / 1000) + '\n}')
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   useEffect(() => {
     let cancelled = false
@@ -70,7 +78,8 @@ export function JwtGeneratorClient() {
         </div>
         <div>
           <label htmlFor="jw-p" className="mb-2 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>{L('payloadLabel', 'Payload (JSON)')}</label>
-          <textarea id="jw-p" value={payload} onChange={(e) => setPayload(e.target.value)} rows={5} spellCheck={false}
+          <textarea id="jw-p" value={payload}
+            onChange={(e) => { payloadPristineRef.current = false; setPayload(e.target.value) }} rows={5} spellCheck={false}
             className="w-full rounded-lg border p-3 font-mono text-xs outline-none transition focus:ring-2" style={taVars} />
         </div>
       </div>
@@ -335,12 +344,15 @@ export function CronGeneratorClient() {
 }
 
 // ── .htaccess 重定向生成 ──
-interface RedirectPair { from: string; to: string }
+// 行可中途删除,key 必须稳定唯一(index key 删行后受控输入焦点/内容错位)
+interface RedirectPair { id: number; from: string; to: string }
+let nextRedirectPairId = 1
+const mkPair = (from: string, to: string): RedirectPair => ({ id: nextRedirectPairId++, from, to })
 
 export function HtaccessRedirectGeneratorClient() {
   const { locale } = useApp()
   const L = (key: string, fb: string) => tui('htaccess-redirect-generator', locale, key, fb)
-  const [pairs, setPairs] = useState<RedirectPair[]>([{ from: '/old-page', to: '/new-page' }])
+  const [pairs, setPairs] = useState<RedirectPair[]>([mkPair('/old-page', '/new-page')])
   const [oldDomain, setOldDomain] = useState('https://old-example.com')
   const [newDomain, setNewDomain] = useState('https://new-example.com')
   const [forceHttps, setForceHttps] = useState(true)
@@ -358,7 +370,7 @@ export function HtaccessRedirectGeneratorClient() {
       blocks.push('\n# Canonical: remove www\nRewriteCond %{HTTP_HOST} ^www\\.(.+)$ [NC]\nRewriteRule ^(.*)$ https://%1/$1 [L,R=301]')
     }
     if (oldDomain.trim() && newDomain.trim()) {
-      blocks.push(`\n# Whole-domain migration\nRewriteCond %{HTTP_HOST} ^${oldDomain.replace(/^https?:\/\//, '').replace(/\./g, '\\\\.')} [NC]\nRewriteRule ^(.*)$ ${newDomain}/$1 [L,R=301]`)
+      blocks.push(`\n# Whole-domain migration\nRewriteCond %{HTTP_HOST} ^${oldDomain.replace(/^https?:\/\//, '').replace(/\./g, () => '\\.')} [NC]\nRewriteRule ^(.*)$ ${newDomain}/$1 [L,R=301]`)
     }
     const singles = pairs.filter((p) => p.from.trim() && p.to.trim())
       .map((p) => {
@@ -397,18 +409,18 @@ export function HtaccessRedirectGeneratorClient() {
 
       <div className="space-y-3">
         <span className="block text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>{L('pairsLabel', 'Individual page redirects')}</span>
-        {pairs.map((p, i) => (
-          <div key={i} className="grid grid-cols-[1fr_1fr_auto] gap-3">
+        {pairs.map((p) => (
+          <div key={p.id} className="grid grid-cols-[1fr_1fr_auto] gap-3">
             <input aria-label={L('fromLabel', 'From path')} value={p.from} placeholder="/old-url"
-              onChange={(e) => setPairs(pairs.map((x, j) => (j === i ? { ...x, from: e.target.value } : x)))} className={inpCls} style={selVars} />
+              onChange={(e) => setPairs(pairs.map((x) => (x.id === p.id ? { ...x, from: e.target.value } : x)))} className={inpCls} style={selVars} />
             <input aria-label={L('toLabel', 'To path')} value={p.to} placeholder="/new-url"
-              onChange={(e) => setPairs(pairs.map((x, j) => (j === i ? { ...x, to: e.target.value } : x)))} className={inpCls} style={selVars} />
-            <button type="button" onClick={() => setPairs(pairs.filter((_, j) => j !== i))} disabled={pairs.length <= 1}
+              onChange={(e) => setPairs(pairs.map((x) => (x.id === p.id ? { ...x, to: e.target.value } : x)))} className={inpCls} style={selVars} />
+            <button type="button" onClick={() => setPairs(pairs.filter((x) => x.id !== p.id))} disabled={pairs.length <= 1}
               aria-label={L('removeRedirect', 'Remove redirect')}
               className="rounded-lg px-3 text-sm text-slate-400 hover:text-red-500 dark:text-slate-500">✕</button>
           </div>
         ))}
-        <button type="button" onClick={() => setPairs([...pairs, { from: '', to: '' }])} className="text-sm font-medium text-brand-600 hover:underline dark:text-blue-400">
+        <button type="button" onClick={() => setPairs([...pairs, mkPair('', '')])} className="text-sm font-medium text-brand-600 hover:underline dark:text-blue-400">
           + {L('addPair', 'Add redirect')}
         </button>
       </div>

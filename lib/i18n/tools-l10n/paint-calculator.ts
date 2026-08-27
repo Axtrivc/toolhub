@@ -41,7 +41,8 @@ export const PaintCalculatorL10n: ToolL10n = {
       'out.wallArea': '可涂刷墙面积',
       'out.wallHeight': '墙面高度',
       'out.windows': '窗户',
-    },
+          'errInvalidDims': "请输入有效的房间尺寸",
+},
   },
   es: {
     useCases: ['calcular cuántos botes de pintura comprar', 'descontar puertas y ventanas del área', 'estimar el total para varias manos', 'planificar la compra en litros o galones'],
@@ -79,7 +80,8 @@ export const PaintCalculatorL10n: ToolL10n = {
       'out.wallArea': 'Área pintable',
       'out.wallHeight': 'Altura de pared',
       'out.windows': 'Ventanas',
-    },
+          'errInvalidDims': "Introduce dimensiones válidas de la habitación",
+},
   },
   de: {
     useCases: ['ausrechnen, wie viele Farbeimer du brauchst', 'Türen und Fenster von der Fläche abziehen', 'den Gesamtbedarf für mehrere Anstriche schätzen', 'den Einkauf in Litern oder Gallonen planen'],
@@ -117,6 +119,7 @@ export const PaintCalculatorL10n: ToolL10n = {
       'out.wallArea': 'Streichbare Wandfläche',
       'out.wallHeight': 'Wandhöhe',
       'out.windows': 'Fenster',
-    },
+          'errInvalidDims': "Gib gültige Raummaße ein",
+},
   },
 }

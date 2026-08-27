@@ -296,7 +296,7 @@ export const toolFaqs: Record<string, FaqPair[]> = {
   'html-tag-stripper': [
     {
       q: 'Does it preserve line breaks?',
-      a: 'It depends on the source HTML. Block-level tags like <p> and <div> are removed, but the text they contained gets concatenated. To preserve paragraph breaks, replace <p> with \\n<p> first.',
+      a: 'Yes. When block-level tags like <p> and <div> are stripped, a line break is added after them, so paragraphs stay separated even though the tags themselves are gone. Inline tags (<b>, <span>) simply disappear without affecting spacing.',
     },
   ],
   'character-frequency': [
@@ -524,7 +524,7 @@ export const toolFaqs: Record<string, FaqPair[]> = {
     },
     {
       q: 'Does making extra payments help?',
-      a: 'Yes, dramatically. Extra payments go straight to principal (confirm with your lender there\'s no prepayment penalty). On a $400k, 30-year, 6.8% loan, paying an extra $200/month shaves about 7 years off the term and saves roughly $130,000 in interest. Even one extra full payment per year makes a meaningful difference. Use the extra monthly payment field to simulate it on your own loan — you\'ll see the new payoff time, interest saved, and months cut.',
+      a: 'Yes, dramatically. Extra payments go straight to principal (confirm with your lender there\'s no prepayment penalty). On a $400k home with 20% down at 6.8% for 30 years, paying an extra $200/month shaves about 7 years off the term and saves roughly $113,000 in interest. Even one extra full payment per year makes a meaningful difference. Use the extra monthly payment field to simulate it on your own loan — you\'ll see the new payoff time, interest saved, and months cut.',
     },
   ],
   'markup-calculator': [
@@ -1623,7 +1623,7 @@ export const toolFaqs: Record<string, FaqPair[]> = {
   'auto-loan-calculator': [
     {
       q: 'Does it include sales tax and fees?',
-      a: 'It factors in sales tax on the purchase price and lets you add fees and a trade-in value, so the loan amount reflects what you actually finance. Registration, dealer doc fees, and add-on products are not itemized — add them as a lump fee if needed.',
+      a: 'It applies sales tax to the vehicle price after subtracting your trade-in value, so the loan amount reflects what you actually finance. Registration, dealer doc fees, and add-on products are not itemized — fold them into the vehicle price if needed.',
     },
     {
       q: 'How does the down payment affect my monthly payment?',

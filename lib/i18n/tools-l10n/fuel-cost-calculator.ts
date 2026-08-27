@@ -42,7 +42,8 @@ export const FuelCostCalculatorL10n: ToolL10n = {
       'out.price': '油价',
       'out.roundTrip': '行程类型',
       'out.totalCost': '总油费',
-    },
+          'errNonNegative': "距离、油耗与油价不能为负",
+},
   },
   es: {
     useCases: ['calcular el combustible de un viaje por carretera', 'repartir la gasolina entre ocupantes', 'comparar el coste de ida y vuelta frente a solo ida', 'saber cuánto cuesta cada 100 km'],
@@ -81,7 +82,8 @@ export const FuelCostCalculatorL10n: ToolL10n = {
       'out.price': 'Precio del combustible',
       'out.roundTrip': 'Tipo de trayecto',
       'out.totalCost': 'Coste total de combustible',
-    },
+          'errNonNegative': "La distancia, el consumo y el precio no pueden ser negativos",
+},
   },
   de: {
     useCases: ['die Spritkosten einer Rundreise berechnen', 'Benzinkosten unter Mitfahrern aufteilen', 'Hin- und Rückreise gegen nur Hinfahrt vergleichen', 'ausrechnen, was 100 km Kraftstoff kosten'],
@@ -120,6 +122,7 @@ export const FuelCostCalculatorL10n: ToolL10n = {
       'out.price': 'Kraftstoffpreis',
       'out.roundTrip': 'Streckentyp',
       'out.totalCost': 'Gesamte Kraftstoffkosten',
-    },
+          'errNonNegative': "Strecke, Verbrauch und Preis dürfen nicht negativ sein",
+},
   },
 }

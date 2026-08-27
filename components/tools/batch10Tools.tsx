@@ -332,7 +332,11 @@ export function LineDiffCheckerClient() {
 }
 
 // ── robots.txt 生成器 ──
-interface RobotRule { agent: string; allow: string; disallow: string }
+// 行会中途删除/重排,必须用稳定唯一 id 作 React key(纯 index key 删行后焦点/内容错位)
+interface RobotRule { id: number; agent: string; allow: string; disallow: string }
+let nextRobotRuleId = 1
+const mkRule = (agent: string, allow: string, disallow: string): RobotRule =>
+  ({ id: nextRobotRuleId++, agent, allow, disallow })
 
 export function RobotsTxtGeneratorClient() {
   const { locale } = useApp()
@@ -341,21 +345,21 @@ export function RobotsTxtGeneratorClient() {
   const [sitemapUrl, setSitemapUrl] = useState('https://example.com/sitemap.xml')
   const [crawlDelay, setCrawlDelay] = useState('')
   const [rules, setRules] = useState<RobotRule[]>([
-    { agent: '*', allow: '/', disallow: '/admin/' },
+    mkRule('*', '/', '/admin/'),
   ])
 
   const applyPreset = (p: string) => {
     setPreset(p)
-    if (p === 'allowAll') setRules([{ agent: '*', allow: '/', disallow: '' }])
-    else if (p === 'blockAll') setRules([{ agent: '*', allow: '', disallow: '/' }])
+    if (p === 'allowAll') setRules([mkRule('*', '/', '')])
+    else if (p === 'blockAll') setRules([mkRule('*', '', '/')])
     else if (p === 'blockAi') {
       setRules([
-        { agent: '*', allow: '/', disallow: '/admin/' },
-        { agent: 'GPTBot', allow: '', disallow: '/' },
-        { agent: 'ClaudeBot', allow: '', disallow: '/' },
-        { agent: 'CCBot', allow: '', disallow: '/' },
+        mkRule('*', '/', '/admin/'),
+        mkRule('GPTBot', '', '/'),
+        mkRule('ClaudeBot', '', '/'),
+        mkRule('CCBot', '', '/'),
       ])
-    } else setRules([{ agent: '*', allow: '/', disallow: '/admin/' }])
+    } else setRules([mkRule('*', '/', '/admin/')])
   }
 
   const output = useMemo(() => {
@@ -421,28 +425,28 @@ export function RobotsTxtGeneratorClient() {
 
       {/* 规则编辑 */}
       <div className="space-y-3">
-        {rules.map((r, i) => (
-          <div key={i} className="grid grid-cols-1 gap-3 rounded-lg border p-3 sm:grid-cols-[1fr_1fr_1fr_auto]" style={{ borderColor: 'rgb(var(--border))' }}>
+        {rules.map((r) => (
+          <div key={r.id} className="grid grid-cols-1 gap-3 rounded-lg border p-3 sm:grid-cols-[1fr_1fr_1fr_auto]" style={{ borderColor: 'rgb(var(--border))' }}>
             <input aria-label={L('agentLabel', 'User-agent')} value={r.agent}
-              onChange={(e) => setRules(rules.map((x, j) => (j === i ? { ...x, agent: e.target.value } : x)))}
+              onChange={(e) => setRules(rules.map((x) => (x.id === r.id ? { ...x, agent: e.target.value } : x)))}
               placeholder="User-agent (*)" className={inpCls}
               style={{ borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rgb(var(--bg-card))', color: 'rgb(var(--text))' }} />
             <input aria-label={L('disallowLabel', 'Disallow paths')} value={r.disallow}
-              onChange={(e) => setRules(rules.map((x, j) => (j === i ? { ...x, disallow: e.target.value } : x)))}
+              onChange={(e) => setRules(rules.map((x) => (x.id === r.id ? { ...x, disallow: e.target.value } : x)))}
               placeholder="/private/" className={inpCls}
               style={{ borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rgb(var(--bg-card))', color: 'rgb(var(--text))' }} />
             <input aria-label={L('allowLabel', 'Allow paths')} value={r.allow}
-              onChange={(e) => setRules(rules.map((x, j) => (j === i ? { ...x, allow: e.target.value } : x)))}
+              onChange={(e) => setRules(rules.map((x) => (x.id === r.id ? { ...x, allow: e.target.value } : x)))}
               placeholder="/" className={inpCls}
               style={{ borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rgb(var(--bg-card))', color: 'rgb(var(--text))' }} />
-            <button type="button" onClick={() => setRules(rules.filter((_, j) => j !== i))}
+            <button type="button" onClick={() => setRules(rules.filter((x) => x.id !== r.id))}
               aria-label={L('removeRule', 'Remove rule')}
               className="rounded-lg px-3 text-sm text-slate-400 hover:text-red-500 dark:text-slate-500" disabled={rules.length <= 1}>
               ✕
             </button>
           </div>
         ))}
-        <button type="button" onClick={() => setRules([...rules, { agent: '*', allow: '', disallow: '' }])}
+        <button type="button" onClick={() => setRules([...rules, mkRule('*', '', '')])}
           className="text-sm font-medium text-brand-600 hover:underline dark:text-blue-400">
           + {L('addRule', 'Add rule')}
         </button>
@@ -474,12 +478,13 @@ export function SleepCalculatorClient() {
   const [mode, setMode] = useState<'wakeAt' | 'sleepAt'>('wakeAt')
   const [time, setTime] = useState('07:00')
 
-  // 挂载后才用当前时间渲染 "now" 基准(SSR 首帧固定占位,避免水合不一致)
+  // 挂载后才计算建议:SSR/静态导出首帧不渲染任何依赖当下时间的内容(fmtClock 走
+  // toLocaleTimeString,构建机与用户设备 locale/TZ 不同会造成 hydration 不一致)
   const [mounted, setMounted] = useState(false)
-  useMemo(() => setMounted(true), [])
+  useEffect(() => setMounted(true), [])
 
   const suggestions = useMemo(() => {
-    if (!time) return []
+    if (!mounted || !time) return []
     const [h, m] = time.split(':').map(Number)
     if (!Number.isFinite(h) || !Number.isFinite(m) || h < 0 || h > 23 || m < 0 || m > 59) return []
     // 15 分钟入睡潜伏期 + 6 个周期候选(4-9 个,90 分钟/个)
@@ -499,9 +504,7 @@ export function SleepCalculatorClient() {
       const wrapped = d.getDate() !== base.getDate()
       return { cycles, clock: fmtClock(d), tag: wrapped ? L('nextDay', '(next day)') : '' }
     })
-  }, [time, mode, locale])
-
-  const nowBase = mounted ? fmtClock(new Date()) : '—'
+  }, [mounted, time, mode, locale])
 
   return (
     <div className="space-y-6">
@@ -544,7 +547,7 @@ export function SleepCalculatorClient() {
             </div>
           )
         })}
-        {suggestions.length === 0 && (
+        {mounted && suggestions.length === 0 && (
           <p className="text-sm" style={{ color: 'rgb(var(--text-faint))' }}>{L('invalidTime', 'Enter a valid time like 07:00')}</p>
         )}
       </div>
@@ -586,7 +589,7 @@ const VOLUME_TO_CUP: Record<string, { label: string; cups: number }> = {
   tbsp: { label: 'Tablespoons', cups: 1 / 16 },
   tsp: { label: 'Teaspoons', cups: 1 / 48 },
   'fluid-oz': { label: 'Fluid ounces', cups: 1 / 8 },
-  ml: { label: 'Milliliters', cups: 236.588 / 240 },
+  ml: { label: 'Milliliters', cups: 1 / 236.5882365 }, // 1 US cup = 236.5882365 ml（修复前写成 236.588/240，量纲反了）
   g: { label: 'Grams', cups: -1 }, // 走重量路径
   oz: { label: 'Ounces (weight)', cups: -2 },
 }

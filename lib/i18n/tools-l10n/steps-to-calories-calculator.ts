@@ -38,7 +38,8 @@ export const StepsToCaloriesCalculatorL10n: ToolL10n = {
       'out.pace': '步行速度',
       'out.steps': '每日步数',
       'out.weight': '体重',
-    },
+          'errInvalid': "请输入正数",
+},
   },
   es: {
     useCases: ['convertir tus pasos diarios en calorías', 'estimar cuánto caminan 10 000 pasos', 'calcular distancia real con tu altura', 'comparar el gasto a distinto ritmo'],
@@ -73,7 +74,8 @@ export const StepsToCaloriesCalculatorL10n: ToolL10n = {
       'out.pace': 'Ritmo de marcha',
       'out.steps': 'Pasos diarios',
       'out.weight': 'Peso',
-    },
+          'errInvalid': "Introduce valores positivos",
+},
   },
   de: {
     useCases: ['tägliche Schritte in Kalorien umrechnen', 'schätzen, wie weit 10 000 Schritte tragen', 'aus der Körpergröße Distanz exakt bestimmen', 'den Verbrauch bei unterschiedlichem Tempo vergleichen'],
@@ -108,6 +110,7 @@ export const StepsToCaloriesCalculatorL10n: ToolL10n = {
       'out.pace': 'Schritttempo',
       'out.steps': 'Tägliche Schritte',
       'out.weight': 'Gewicht',
-    },
+          'errInvalid': "Gib positive Werte ein",
+},
   },
 }

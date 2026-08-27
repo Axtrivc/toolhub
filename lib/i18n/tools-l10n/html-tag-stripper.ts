@@ -19,7 +19,7 @@ export const htmlTagStripperL10n: ToolL10n = {
       '粘贴进纯文本编辑器前先去掉格式',
     ],
     faqs: [
-      { q: '会保留换行吗?', a: '取决于源 HTML。像 <p> 和 <div> 这样的块级标签会被移除,但它们包含的文本会被拼接在一起。如果想保留段落分隔,可先把 <p> 替换成 \\n<p>。' },
+      { q: '会保留换行吗?', a: '会。<p>、<div> 等块级标签在移除时会在其后补一个换行,所以段落分隔得以保留;行内标签(<b>、<span>)直接消失,不影响间距。' },
     ],
   },
   es: {
@@ -36,7 +36,7 @@ export const htmlTagStripperL10n: ToolL10n = {
       'quitar el formato antes de pegar en un editor de texto plano',
     ],
     faqs: [
-      { q: '¿Conserva los saltos de línea?', a: 'Depende del HTML de origen. Las etiquetas de bloque como <p> y <div> se eliminan, pero el texto que contenían se concatena. Para conservar los saltos de párrafo, sustituye <p> por \\n<p> primero.' },
+      { q: '¿Conserva los saltos de línea?', a: 'Sí. Al quitar etiquetas de bloque como <p> y <div> se añade un salto de línea después de ellas, así que los párrafos quedan separados aunque desaparezcan las etiquetas. Las etiquetas en línea (<b>, <span>) simplemente desaparecen sin alterar el espaciado.' },
     ],
   },
   de: {
@@ -53,7 +53,7 @@ export const htmlTagStripperL10n: ToolL10n = {
       'Formatierung vor dem Einfügen in einen Klartext-Editor entfernen',
     ],
     faqs: [
-      { q: 'Bleiben die Zeilenumbrüche erhalten?', a: 'Das hängt vom Quell-HTML ab. Block-Elemente wie <p> und <div> werden entfernt, aber der darin enthaltene Text wird aneinandergereiht. Um Absatzumbrüche zu erhalten, ersetze <p> zuerst durch \\n<p>.' },
+      { q: 'Bleiben die Zeilenumbrüche erhalten?', a: 'Ja. Beim Entfernen von Block-Elementen wie <p> und <div> wird danach ein Zeilenumbruch eingefügt, sodass Absätze getrennt bleiben, obwohl die Tags selbst verschwinden. Inline-Tags (<b>, <span>) verschwinden einfach, ohne den Abstand zu verändern.' },
     ],
   },
 }

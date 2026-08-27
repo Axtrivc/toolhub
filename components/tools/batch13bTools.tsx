@@ -178,8 +178,10 @@ function parseValue(s: string): Json {
       if (inStr) { curStr += c; if (c === inStr && inner[i - 1] !== '\\') inStr = null; continue }
       if (c === '"') { inStr = '"'; curStr += c; continue }
       if (c === "'") { inStr = "'"; curStr += c; continue }
-      if (c === '[') depth++
-      if (c === ']') depth--
+      // 深度同时计入 [] 与 {}——数组元素可能是 inline table,
+      // 其中的顶层逗号不能被当成数组分隔符(修复 [{x=1,y=2}] 被拆坏)
+      if (c === '[' || c === '{') depth++
+      if (c === ']' || c === '}') depth--
       if (c === ',' && depth === 0) { items.push(parseValue(curStr)); curStr = '' } else curStr += c
     }
     if (curStr.trim()) items.push(parseValue(curStr))
@@ -196,8 +198,10 @@ function parseValue(s: string): Json {
       const c = inner[i]
       if (inStr) { curStr += c; if (c === inStr && inner[i - 1] !== '\\') inStr = null; continue }
       if (c === '"') { inStr = '"'; curStr += c; continue }
-      if (c === '{') depth++
-      if (c === '}') depth--
+      // 深度同时计入 {} 与 []——inline table 的值可以是数组,
+      // 其中的顶层逗号不能被当成键值对分隔符(修复 {v=["a","b"]} 被拆坏)
+      if (c === '[' || c === '{') depth++
+      if (c === ']' || c === '}') depth--
       if (c === ',' && depth === 0) { assignInline(obj, curStr); curStr = '' } else curStr += c
     }
     if (curStr.trim()) assignInline(obj, curStr)

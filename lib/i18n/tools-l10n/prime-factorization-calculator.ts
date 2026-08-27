@@ -12,6 +12,7 @@ export const primeFactorizationCalculatorL10n: ToolL10n = {
     },
     ui: {
       errMinTwo: '请输入 ≥ 2 的数',
+      errIntegers: '请输入整数',
       errTooBig: '请输入不超过 1,000,000,000,000(10¹²)的数',
       'in.n': '要分解的数',
       'out.factors': '质因数分解',
@@ -34,6 +35,7 @@ export const primeFactorizationCalculatorL10n: ToolL10n = {
     },
     ui: {
       errMinTwo: 'Introduce un número ≥ 2',
+      errIntegers: 'Introduce números enteros',
       errTooBig: 'Introduce un número ≤ 1 000 000 000 000 (10¹²)',
       'in.n': 'Número a factorizar',
       'out.factors': 'Factorización en primos',
@@ -56,6 +58,7 @@ export const primeFactorizationCalculatorL10n: ToolL10n = {
     },
     ui: {
       errMinTwo: 'Gib eine Zahl ≥ 2 ein',
+      errIntegers: 'Gib ganze Zahlen ein',
       errTooBig: 'Gib eine Zahl ≤ 1.000.000.000.000 (10¹²) ein',
       'in.n': 'Zu faktorisierende Zahl',
       'out.factors': 'Primfaktorzerlegung',

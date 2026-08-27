@@ -7,6 +7,7 @@ import type { ToolL10n } from '../tool-l10n'
 export const jwtDecoderL10n: ToolL10n = {
   zh: {
     ui: {
+      'algNoneWarn': '此令牌未签名(alg 为 "none")——任何人都能伪造或篡改。未经其他渠道核验,切勿采信。',
       'clear': '清空',
       'copy': '复制',
       'expiredAgo': '已过期 {dur}',
@@ -45,6 +46,7 @@ export const jwtDecoderL10n: ToolL10n = {
   },
   es: {
     ui: {
+      'algNoneWarn': 'Este token no está firmado (alg «none») — cualquiera puede falsificarlo o manipularlo. Nunca lo aceptes sin verificarlo por otro canal.',
       'clear': 'Limpiar',
       'copy': 'Copiar',
       'expiredAgo': 'expiró hace {dur}',
@@ -83,6 +85,7 @@ export const jwtDecoderL10n: ToolL10n = {
   },
   de: {
     ui: {
+      'algNoneWarn': 'Dieser Token ist unsigniert (alg „none“) — jeder kann ihn fälschen oder manipulieren. Niemals ohne Prüfung über einen anderen Kanal akzeptieren.',
       'clear': 'Leeren',
       'copy': 'Kopieren',
       'expiredAgo': 'vor {dur} abgelaufen',

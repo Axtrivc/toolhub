@@ -8,6 +8,7 @@ export const primeNumberCheckerL10n: ToolL10n = {
   zh: {
     ui: {
       noUnder2: '否(质数从 2 开始)',
+      errIntegers: '请输入整数',
       errTooBig: '请输入不超过 1,000,000,000,000(10¹²)的数',
       yesPrime: '是 — {n} 是质数',
       noNotPrime: '否 — {n} 不是质数',
@@ -33,6 +34,7 @@ export const primeNumberCheckerL10n: ToolL10n = {
   es: {
     ui: {
       noUnder2: 'No (los números primos empiezan en 2)',
+      errIntegers: 'Introduce un número entero',
       errTooBig: 'Introduce un número ≤ 1 000 000 000 000 (10¹²)',
       yesPrime: 'Sí — {n} es primo',
       noNotPrime: 'No — {n} no es primo',
@@ -58,6 +60,7 @@ export const primeNumberCheckerL10n: ToolL10n = {
   de: {
     ui: {
       noUnder2: 'Nein (Primzahlen beginnen bei 2)',
+      errIntegers: 'Gib eine ganze Zahl ein',
       errTooBig: 'Gib eine Zahl ≤ 1.000.000.000.000 (10¹²) ein',
       yesPrime: 'Ja — {n} ist eine Primzahl',
       noNotPrime: 'Nein — {n} ist keine Primzahl',

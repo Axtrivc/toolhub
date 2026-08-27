@@ -21,7 +21,8 @@ export const simpleInterestCalculatorL10n: ToolL10n = {
       'in.principal': '本金', 'in.rate': '年利率', 'in.years': '年数',
       'out.interest': '利息', 'out.total': '总金额',
       note: '💵 单利:I = P × r × t。与复利不同,你不会对已累计的利息再赚利息。',
-    },
+          'errNonNegative': "本金、利率与年数不能为负",
+},
   },
   es: {
     useCases: ['calcular interés simple con I = P × r × t', 'calcular el interés de préstamos o bonos a corto plazo', 'comparar la diferencia entre interés simple y compuesto', 'calcular el interés de un capital a una tasa dada'],
@@ -37,7 +38,8 @@ export const simpleInterestCalculatorL10n: ToolL10n = {
       'in.principal': 'Principal', 'in.rate': 'Tasa anual', 'in.years': 'Años',
       'out.interest': 'Interés generado', 'out.total': 'Cantidad total',
       note: '💵 Interés simple: I = P × r × t. A diferencia del interés compuesto, no ganas interés sobre el interés acumulado.',
-    },
+          'errNonNegative': "El capital, la tasa y los años no pueden ser negativos",
+},
   },
   de: {
     useCases: ['Einfachen Zins mit I = P × r × t berechnen', 'Zinsen für Kurzfristkredite oder Anleihen berechnen', 'den Unterschied zwischen einfachem Zins und Zinseszins vergleichen', 'die Zinsen auf ein Kapital zu einem gegebenen Satz berechnen'],
@@ -53,6 +55,7 @@ export const simpleInterestCalculatorL10n: ToolL10n = {
       'in.principal': 'Kapital', 'in.rate': 'Jahressatz', 'in.years': 'Jahre',
       'out.interest': 'Zinsen', 'out.total': 'Gesamtbetrag',
       note: '💵 Einfacher Zins: I = P × r × t. Anders als beim Zinseszins erhältst du keine Zinsen auf bereits angefallene Zinsen.',
-    },
+          'errNonNegative': "Kapital, Satz und Jahre dürfen nicht negativ sein",
+},
   },
 }

@@ -47,9 +47,9 @@ export const toolFormulas: Record<string, ToolFormula> = {
       'Simple interest. P = principal, r = annual rate (as a decimal), t = years. I is the interest accrued over the period.',
   },
   'compound-interest-calculator': {
-    formula: 'A = P × (1 + r/n)^(n·t)',
+    formula: 'A = P × (1 + r/n)^(n·t) + PMT × [((1 + r/n)^(n·t) − 1) / (r/n)]',
     explain:
-      'Compound interest (future value). P = principal, r = annual rate, n = compounding periods per year, t = years. A is the total balance at the end.',
+      'Compound interest (future value). P = initial principal, PMT = recurring periodic contribution, r = annual rate, n = compounding periods per year, t = years. A is the total balance at the end; the first term grows the principal and the second is the future value of the contributions.',
   },
   'apy-calculator': {
     formula: 'APY = (1 + r/n)^n − 1',
@@ -83,7 +83,7 @@ export const toolFormulas: Record<string, ToolFormula> = {
   'water-intake-calculator': {
     formula: 'Water (ml) ≈ 35 ml × weight (kg)   [ ≈ 0.5 oz × weight (lb) ]',
     explain:
-      'A common hydration baseline: about two-thirds of your body weight in pounds, in ounces per day — roughly 33 ml per kg. The calculator then adjusts this baseline upward for exercise, hot climate, and pregnancy.',
+      'A common hydration baseline: about half your body weight in pounds, taken as ounces per day — roughly 35 ml per kg. The calculator then adjusts this baseline upward for exercise, hot climate, and pregnancy.',
   },
 
   // ───────── 几何 ─────────

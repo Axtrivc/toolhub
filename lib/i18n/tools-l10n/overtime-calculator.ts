@@ -9,7 +9,7 @@ export const OvertimeCalculatorL10n: ToolL10n = {
     useCases: ['算本周加班费能拿多少', '核对工资条上的加班项', '比较 1.5 倍与 2 倍的加班方案', '评估接受加班班次是否划算'],
     faqs: [
       { q: '加班费什么时候是法定必须的?', a: '美国联邦法律(FLSA)要求非豁免员工每周超过 40 小时的部分按 1.5 倍支付。部分州还有每日加班(加州每日超 8 小时)或节假日双倍——按你所在辖区或合同规定的倍数选择即可。' },
-      { q: '工资是怎么算出来的?', a: '正常工资 = 时薪 × 正常工时;加班费 = 时薪 × 倍数 × 加班时数。自定义倍数栏可以填任何值——1.25、2.5——工会合同、班次津贴和节假日费率都适用同一套算法。' },
+      { q: '工资是怎么算出来的?', a: '正常工资 = 时薪 × 正常工时;加班费 = 时薪 × 倍数 × 加班时数。选一个与你合同或辖区一致的倍率即可——多数美国非豁免员工适用 ×1.5,部分州假日加班为 ×2。' },
       { q: '我是拿月薪的,适用吗?', a: '仅当你属于"非豁免"员工时适用。用周薪 ÷ 40 得出常规时薪,连同加班时数一起填入,倍数即从这里套用。真正豁免的员工无论工作多少小时都没有加班费。' },
     ],
     ui: {
@@ -28,7 +28,6 @@ export const OvertimeCalculatorL10n: ToolL10n = {
       'note': '💼 美国联邦法律(FLSA)要求非豁免员工每周超 40 小时按 ×1.5 计酬;部分州规定按日加班与假日 ×2。拿薪的非豁免员工用 常规时薪 = 周薪 ÷ 40。',
       'opt.otMultiplier.1.5': '1.5 倍加班费',
       'opt.otMultiplier.2': '双倍加班费 (×2)',
-      'opt.otMultiplier.custom': '下方自定义',
       'out.base': '时薪',
       'out.otHours': '每周加班工时',
       'out.otMultiplier': '加班倍率',
@@ -37,13 +36,15 @@ export const OvertimeCalculatorL10n: ToolL10n = {
       'out.regularHours': '每周常规工时',
       'out.regularPay': '常规工资',
       'out.totalWeekly': '周薪合计',
-    },
+          'errInvalidRate': "请输入有效的时薪",
+      'errNonNegative': "工时不能为负",
+},
   },
   es: {
     useCases: ['calcular cuánto pagarán tus horas extra', 'comprobar la partida de horas extra de tu nómina', 'comparar multiplicadores de 1,5× y 2×', 'decidir si merece la pena aceptar un turno extra'],
     faqs: [
       { q: '¿Cuándo son obligatorias las horas extra?', a: 'La ley federal estadounidense (FLSA) exige 1,5× pasado las 40 horas semanales para empleados no exentos. Algunos estados añaden horas extra diarias (California tras 8 h/día) o doble tiempo en festivos: elige el multiplicador de tu jurisdicción o contrato.' },
-      { q: '¿Cómo se calcula la paga?', a: 'La paga regular es tarifa × horas ordinarias; la extra es tarifa × multiplicador × horas extra. El multiplicador personalizado admite cualquier valor —1,25, 2,5—, así que convenios, pluses de turno y festivos encajan en la misma fórmula.' },
+      { q: '¿Cómo se calcula la paga?', a: 'La paga regular es tarifa × horas ordinarias; la extra es tarifa × multiplicador × horas extra. Elige el multiplicador que marque tu contrato o jurisdicción: para la mayoría de no exentos en EE. UU. es ×1,5, y algunos estados aplican ×2 en festivos.' },
       { q: 'Cobro salario fijo, ¿me aplica?', a: 'Solo si eres no exento. Calcula tu tarifa horaria como salario semanal ÷ 40, introdúcela con tus horas extra y el multiplicador se aplica desde ahí. Los empleados exentos no reciben horas extra por muchas que trabajen.' },
     ],
     ui: {
@@ -62,7 +63,6 @@ export const OvertimeCalculatorL10n: ToolL10n = {
       'note': '💼 La ley federal estadounidense (FLSA) exige ×1,5 pasadas las 40 h/semana para empleados no exentos; algunos estados exigen horas extra diarias y ×2 en festivos. Asalariados no exentos: tarifa regular ÷ 40.',
       'opt.otMultiplier.1.5': 'Hora y media (×1,5)',
       'opt.otMultiplier.2': 'Doble (×2)',
-      'opt.otMultiplier.custom': 'Personalizado abajo',
       'out.base': 'Salario por hora',
       'out.otHours': 'Horas extra/semana',
       'out.otMultiplier': 'Multiplicador de horas extra',
@@ -71,13 +71,15 @@ export const OvertimeCalculatorL10n: ToolL10n = {
       'out.regularHours': 'Horas normales/semana',
       'out.regularPay': 'Pago regular',
       'out.totalWeekly': 'Pago semanal total',
-    },
+          'errInvalidRate': "Introduce una tarifa horaria válida",
+      'errNonNegative': "Las horas no pueden ser negativas",
+},
   },
   de: {
     useCases: ['ausrechnen, was deine Überstunden bringen', 'den Überstundenposten auf der Abrechnung prüfen', '1,5×- mit 2×-Sätzen vergleichen', 'entscheiden, ob sich ein Zusatzdienst lohnt'],
     faqs: [
       { q: 'Wann sind Überstunden gesetzlich Pflicht?', a: 'Das US-Bundesrecht (FLSA) verlangt 1,5× über 40 Wochenstunden für non-exempt Beschäftigte. Manche Bundesstaaten ergänzen Tagesüberstunden (Kalifornien nach 8 h/Tag) oder Doppeltzeit an Feiertagen — wähle den Multiplikator deiner Rechtslage oder deines Vertrags.' },
-      { q: 'Wie wird die Bezahlung berechnet?', a: 'Regelbezug ist Stundenlohn × Regelstunden; Überstundenlohn ist Stundenlohn × Multiplikator × Überstunden. Das eigene Multiplikatorfeld nimmt jeden Wert — 1,25, 2,5 —, also passen Tarifverträge, Schichtzulagen und Feiertagssätze in dieselbe Formel.' },
+      { q: 'Wie wird die Bezahlung berechnet?', a: 'Regelbezug ist Stundenlohn × Regelstunden; Überstundenlohn ist Stundenlohn × Multiplikator × Überstunden. Wähle den Faktor laut Tarifvertrag oder Rechtslage: für die meisten non-exempt Beschäftigten in den USA 1,5×, manche Bundesstaaten verlangen 2× an Feiertagen.' },
       { q: 'Ich bin Festangestellt — gilt das für mich?', a: 'Nur wenn du non-exempt bist. Leite deinen Regel-Stundenlohn her (Wochengehalt ÷ 40), gib ihn mit deinen Überstunden ein, und der Multiplikator greift von dort. Wirklich Exempt- Beschäftigte erhalten unabhängig von den Stunden keine Überstunden.' },
     ],
     ui: {
@@ -96,7 +98,6 @@ export const OvertimeCalculatorL10n: ToolL10n = {
       'note': '💼 US-Bundesrecht (FLSA) verlangt ×1,5 über 40 h/Woche für nicht freigestellte Beschäftigte; manche Bundesstaaten verlangen tägliche Überstunden und ×2 an Feiertagen. Beschäftigte: Regelrate ÷ 40.',
       'opt.otMultiplier.1.5': 'Zeit und halbe (×1,5)',
       'opt.otMultiplier.2': 'Doppelte Zeit (×2)',
-      'opt.otMultiplier.custom': 'Unten anpassen',
       'out.base': 'Stundenlohn',
       'out.otHours': 'Überstunden/Woche',
       'out.otMultiplier': 'Überstunden-Faktor',
@@ -105,6 +106,8 @@ export const OvertimeCalculatorL10n: ToolL10n = {
       'out.regularHours': 'Regelstunden/Woche',
       'out.regularPay': 'Regelvergütung',
       'out.totalWeekly': 'Wochenlohn gesamt',
-    },
+          'errInvalidRate': "Gib einen gültigen Stundenlohn ein",
+      'errNonNegative': "Die Stunden dürfen nicht negativ sein",
+},
   },
 }

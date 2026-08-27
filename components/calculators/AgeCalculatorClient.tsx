@@ -152,7 +152,8 @@ export function AgeCalculatorClient() {
               <span>
                 {result.years}
                 <span className="text-base font-normal text-slate-500 dark:text-slate-400">{L('yrsAbbr', ' yrs ')}</span>
-                {result.months}
+                {/* months 是总月数(供 totalMonths 卡复用),此处展示取 12 的余数 */}
+                {result.months % 12}
                 <span className="text-base font-normal text-slate-500 dark:text-slate-400">{L('moAbbr', ' mo ')}</span>
                 {result.days}
                 <span className="text-base font-normal text-slate-500 dark:text-slate-400">{L('daysAbbr', ' days')}</span>

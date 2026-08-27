@@ -46,6 +46,9 @@ export const compoundInterestCalculatorL10n: ToolL10n = {
     ui: {
       errNonNegative: '利率和年数不能为负',
       'in.principal': '初始投资',
+      'inSuffix.monthly': '$',
+      'inSuffix.principal': '$',
+      'inSuffix.rate': '%',
       'in.monthly': '每月定投',
       'in.rate': '年利率',
       'in.years': '年数',
@@ -109,6 +112,9 @@ export const compoundInterestCalculatorL10n: ToolL10n = {
     ui: {
       errNonNegative: 'La tasa de interés y los años no pueden ser negativos',
       'in.principal': 'Inversión inicial',
+      'inSuffix.monthly': '$',
+      'inSuffix.principal': '$',
+      'inSuffix.rate': '%',
       'in.monthly': 'Aportación mensual',
       'in.rate': 'Tasa de interés anual',
       'in.years': 'Años',
@@ -172,6 +178,9 @@ export const compoundInterestCalculatorL10n: ToolL10n = {
     ui: {
       errNonNegative: 'Zinssatz und Jahre dürfen nicht negativ sein',
       'in.principal': 'Ersteinlage',
+      'inSuffix.monthly': '$',
+      'inSuffix.principal': '$',
+      'inSuffix.rate': '%',
       'in.monthly': 'Monatliche Einzahlung',
       'in.rate': 'Jahreszinssatz',
       'in.years': 'Jahre',

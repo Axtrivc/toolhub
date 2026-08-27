@@ -129,9 +129,50 @@ function indexFlowColon(s: string): number {
   return -1
 }
 
-/** 解析 inline flow 值:[a, b] / {k: v}。仅做扁平(不嵌套 flow) */
+/** 检查以 [ 或 { 开头的值括号配平且不含嵌套集合。
+ *  R4 之前:[[1,2],[3,4]] 这类嵌套会被逐层误切分后静默串化为垃圾数据;
+ *  与其产出错误 JSON,不如显式报错并给出改写指引。 */
+function assertFlatFlow(v: string): void {
+  const opener = v[0]
+  const closer = opener === '[' ? ']' : '}'
+  let depth = 0
+  let inS = false
+  let inD = false
+  for (let i = 0; i < v.length; i++) {
+    const c = v[i]
+    if (c === "'" && !inD) inS = !inS
+    else if (c === '"' && !inS) inD = !inD
+    else if (!inS && !inD) {
+      if (c === opener) {
+        depth++
+        if (depth > 1) {
+          throw new Error(
+            `Nested inline flow (${opener}${closer} inside ${opener}${closer}) is not supported. Put nested collections on their own indented lines (block style) instead.`,
+          )
+        }
+      } else if (c === closer) {
+        depth--
+        if (depth < 0) throw new Error(`Unexpected "${closer}" outside an inline flow in "${v}".`)
+      } else if (c === '[' || c === ']' || c === '{' || c === '}') {
+        throw new Error(
+          `Mixed/nested inline flow in "${v}" is not supported. Put nested collections on their own indented lines (block style) instead.`,
+        )
+      }
+    }
+  }
+  if (depth !== 0) throw new Error(`Unclosed inline flow "${v}" — missing a closing "${closer}".`)
+}
+
+/** 解析 inline flow 值:[a, b] / {k: v}。仅做扁平(不嵌套 flow),嵌套显式报错 */
 function parseFlow(raw: string): unknown {
   const v = raw.trim()
+  // 以指示符开头的值必须走 flow 分支且配平,否则报错而不是被静默当作普通字符串
+  if (/^[{[]/.test(v)) {
+    assertFlatFlow(v)
+    const closed =
+      (v.startsWith('[') && v.endsWith(']')) || (v.startsWith('{') && v.endsWith('}'))
+    if (!closed) throw new Error(`Malformed inline flow value "${v}" — check brackets and quoting.`)
+  }
   // 数组 [a, b, c]
   if (v.startsWith('[') && v.endsWith(']')) {
     const inner = v.slice(1, -1).trim()
@@ -388,6 +429,9 @@ function yamlToJson(yaml: string): { value: unknown; multiDoc: boolean } {
     }
     lines.push(l)
   }
+  // 文件末尾换行符 split 出的最后一个空元素是 EOF 残留而非正文行:弹出一个,
+  // 否则 |+(keep chomping)会把结尾换行数多算一行(与 PyYAML 行为对齐验证)
+  if (yaml.endsWith('\n') && lines[lines.length - 1] === '') lines.pop()
   const ctx: ParseContext = { lines, index: 0 }
   const result = parseBlock(ctx, 0)
   return { value: result, multiDoc }

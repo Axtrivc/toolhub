@@ -47,19 +47,26 @@ export function DateDifferenceClient() {
     if (isNaN(s.getTime()) || isNaN(e.getTime())) return { error: L('errInvalidDate', 'Enter both dates in YYYY-MM-DD format.') }
     if (s > e) return { error: L('errEndBeforeStart', 'End date is earlier than start date.') }
 
-    // 精确年月日
-    let years = e.getFullYear() - s.getFullYear()
-    let months = e.getMonth() - s.getMonth()
-    let days = e.getDate() - s.getDate()
-    if (days < 0) {
-      months--
-      const prevMonth = new Date(e.getFullYear(), e.getMonth(), 0).getDate()
-      days += prevMonth
+    // 精确年月日:「整月推进(日期钳制到月末)+ 剩余日历日」口径(与 date-fns
+    // differenceIn* 家族一致)。旧实现只在末月借位一次,起日晚于末月长度时
+    // 会产生负的 days(如 2025-01-31 → 2025-03-01 显示 "1 mo -2 days")。
+    // 月界比较必须按「本地日历日」而非毫秒:历史时区切换(如 1940 年上海 +0900)
+    // 会给组件构造的日期引入 ±1h 偏移,毫秒比较会把整月误判成非整月。
+    const cmpDay = (x: Date, y: Date): number =>
+      Date.UTC(x.getFullYear(), x.getMonth(), x.getDate()) -
+      Date.UTC(y.getFullYear(), y.getMonth(), y.getDate())
+    const addMonthsClamped = (n: number): Date => {
+      // 起点加 n 个月;目标月没有同一「日」时钳到月末(JS 默认会滚进下个月)
+      const t = new Date(s.getFullYear(), s.getMonth() + n, 1)
+      const dim = new Date(t.getFullYear(), t.getMonth() + 1, 0).getDate()
+      t.setDate(Math.min(s.getDate(), dim))
+      return t
     }
-    if (months < 0) {
-      years--
-      months += 12
-    }
+    let wholeMonths = Math.max(0, e.getFullYear() * 12 + e.getMonth() - (s.getFullYear() * 12 + s.getMonth()))
+    if (wholeMonths > 0 && cmpDay(addMonthsClamped(wholeMonths), e) > 0) wholeMonths--
+    const years = Math.floor(wholeMonths / 12)
+    const months = wholeMonths - years * 12
+    const days = calendarDaysBetween(addMonthsClamped(wholeMonths), e)
 
     const totalMs = e.getTime() - s.getTime()
     // 日/周差用日历日(DST 安全),小时差保留真实流逝毫秒

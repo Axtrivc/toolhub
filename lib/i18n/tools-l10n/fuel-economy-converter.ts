@@ -7,7 +7,7 @@ import type { ToolL10n } from '../tool-l10n'
 export const fuelEconomyConverterL10n: ToolL10n = {
   zh: {
     ui: {
-      'note': '⛽ L/100km 与 mpg 成反比(越低越好):L/100km = 235.215 ÷ 美制 mpg。km/L 为线性关系:1 km/L ≈ 2.35215 美制 mpg。1 英制 mpg ≈ 1.20095 美制 mpg。请输入大于 0 的数值(0 或负数无意义)。数值为近似值。',
+      'note': '⛽ L/100km 与 mpg 成反比(越低越好):L/100km = 235.215 ÷ 美制 mpg。km/L 为线性关系:1 km/L ≈ 2.35215 美制 mpg。英制 mpg × 0.83267 = 美制 mpg(1 英制加仑 = 1.20095 美制加仑)。请输入大于 0 的数值(0 或负数无意义)。数值为近似值。',
       'unit.kml': '公里/升 (km/L)',
       'unit.l100km': '升/百公里 (L/100km)',
       'unit.mpg-uk': '英里/加仑 英 (mpg)',
@@ -24,7 +24,7 @@ export const fuelEconomyConverterL10n: ToolL10n = {
   },
   es: {
     ui: {
-      'note': '⛽ Nota: L/100km es inverso a mpg (menor = mejor): L/100km = 235,215 ÷ mpg EE. UU. km/L es lineal: 1 km/L ≈ 2,35215 mpg EE. UU. 1 mpg UK ≈ 1,20095 mpg EE. UU. Introduce un valor mayor que 0. Valores aproximados.',
+      'note': '⛽ Nota: L/100km es inverso a mpg (menor = mejor): L/100km = 235,215 ÷ mpg EE. UU. km/L es lineal: 1 km/L ≈ 2,35215 mpg EE. UU. mpg UK × 0,83267 = mpg EE. UU. (1 galón UK = 1,20095 galones EE. UU.). Introduce un valor mayor que 0. Valores aproximados.',
       'unit.kml': 'Kilómetros/Litro (km/L)',
       'unit.l100km': 'Litros/100km (L/100km)',
       'unit.mpg-uk': 'Millas/Galón UK (mpg)',
@@ -41,7 +41,7 @@ export const fuelEconomyConverterL10n: ToolL10n = {
   },
   de: {
     ui: {
-      'note': '⛽ Hinweis: L/100km ist invers zu mpg (niedriger = besser): L/100km = 235,215 ÷ US-mpg. km/L ist linear: 1 km/L ≈ 2,35215 US-mpg. 1 UK-mpg ≈ 1,20095 US-mpg. Gib einen Wert größer als 0 ein. Werte sind gerundet.',
+      'note': '⛽ Hinweis: L/100km ist invers zu mpg (niedriger = besser): L/100km = 235,215 ÷ US-mpg. km/L ist linear: 1 km/L ≈ 2,35215 US-mpg. UK-mpg × 0,83267 = US-mpg (1 UK-Gallone = 1,20095 US-Gallonen). Gib einen Wert größer als 0 ein. Werte sind gerundet.',
       'unit.kml': 'Kilometer/Liter (km/L)',
       'unit.l100km': 'Liter/100km (L/100km)',
       'unit.mpg-uk': 'Meilen/Gallone UK (mpg)',

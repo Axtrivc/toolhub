@@ -10,7 +10,7 @@ export const urlQueryParserL10n: ToolL10n = {
       defaultInput: 'https://example.com/search?q=你好&page=2&sort=desc',
       inputLabel: '带查询串的 URL',
       outputLabel: '解析后的查询参数',
-      note: '🔗 把 URL 中的查询参数提取成干净的 JSON 对象。',
+      note: '🔗 把 URL 中的查询参数提取成干净的 JSON 对象。重复的键会收集为数组。',
     },
     useCases: [
       '调试 API 请求',
@@ -27,7 +27,7 @@ export const urlQueryParserL10n: ToolL10n = {
       defaultInput: 'https://example.com/search?q=hola&page=2&sort=desc',
       inputLabel: 'URL con cadena de consulta',
       outputLabel: 'Parámetros analizados',
-      note: '🔗 Extrae los parámetros de consulta de una URL en un objeto JSON limpio.',
+      note: '🔗 Extrae los parámetros de consulta de una URL en un objeto JSON limpio. Las claves repetidas se recogen en un array.',
     },
     useCases: [
       'depurar solicitudes de API',
@@ -44,7 +44,7 @@ export const urlQueryParserL10n: ToolL10n = {
       defaultInput: 'https://example.com/search?q=hallo&page=2&sort=desc',
       inputLabel: 'URL mit Query-String',
       outputLabel: 'Analysierte Parameter',
-      note: '🔗 Extrahiert Query-Parameter aus einer URL in ein sauberes JSON-Objekt.',
+      note: '🔗 Extrahiert Query-Parameter aus einer URL in ein sauberes JSON-Objekt. Doppelte Schlüssel werden als Array gesammelt.',
     },
     useCases: [
       'API-Anfragen debuggen',
