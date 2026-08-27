@@ -25,10 +25,11 @@ const LB_PER_KG = 0.45359237
 
 type Unit = 'metric' | 'imperial'
 
-/** 输入框字符串换算:空/非法/非正值保留空串,避免切换单位把 '' 变成 '0' */
+/** 输入框字符串换算:空/非法/非正值保留空串,避免切换单位把 '' 变成 '0'
+ *  (toNum 粘贴宽容:'38 cm'/'70kg' 这类带单位串也能解析,失败折叠 0 → 由调用方非正值守卫挡下) */
 function convertInput(s: string, factor: number): string {
   if (s.trim() === '') return ''
-  const n = Number(s)
+  const n = toNum(s)
   if (!isFinite(n) || n <= 0) return ''
   return String(Number((n * factor).toFixed(1)))
 }
@@ -52,11 +53,11 @@ function convertHeightFields(
   heightIn: string,
 ): { height: string; heightFt: string; heightIn: string } {
   if (u === 'imperial') {
-    const cm = Number(height)
+    const cm = toNum(height)
     const [ft, inch] = isFinite(cm) && cm > 0 ? splitInches(cm / CM_PER_IN) : ['', '']
     return { height, heightFt: ft, heightIn: inch }
   }
-  const totalIn = Number(heightFt) * 12 + Number(heightIn)
+  const totalIn = toNum(heightFt) * 12 + toNum(heightIn)
   const cm = isFinite(totalIn) && totalIn > 0 ? String(Number((totalIn * CM_PER_IN).toFixed(1))) : ''
   return { height: cm, heightFt, heightIn }
 }
@@ -120,6 +121,7 @@ function CalcSelect({ id, label, value, onChange, options }: {
 
 export const SavingsGoalCalculatorClient = makeCalculatorClient({
   slug: 'savings-goal-calculator',
+  urlState: true,
   inputs: [
     { key: 'goal', label: 'Savings goal', suffix: '$', default: '50000' },
     { key: 'current', label: 'Currently saved', suffix: '$', default: '5000' },
@@ -186,6 +188,7 @@ export const SavingsGoalCalculatorClient = makeCalculatorClient({
 
 export const NetWorthCalculatorClient = makeCalculatorClient({
   slug: 'net-worth-calculator',
+  urlState: true,
   inputs: [
     { key: 'assets', label: 'Total assets (cash, home, investments)', suffix: '$', default: '250000' },
     { key: 'liabilities', label: 'Total liabilities (mortgage, loans, debt)', suffix: '$', default: '150000' },
@@ -207,7 +210,7 @@ export const NetWorthCalculatorClient = makeCalculatorClient({
       liabilitiesOut: fmtUSD(l, 0),
     }
   },
-  note: '💎 Net worth = what you own minus what you owe. The median US net worth is ~$192,000; $1M+ puts you in the top 10%.',
+  note: '💎 Net worth = what you own minus what you owe. The median US net worth is ~$192,000; $1M+ puts a household in roughly the top 10-15%.',
   chart: {
     title: 'Assets vs Liabilities',
     centerLabel: 'Total',
@@ -220,6 +223,7 @@ export const NetWorthCalculatorClient = makeCalculatorClient({
 
 export const AnnuityCalculatorClient = makeCalculatorClient({
   slug: 'annuity-calculator',
+  urlState: true,
   inputs: [
     { key: 'principal', label: 'Initial principal', suffix: '$', default: '100000' },
     { key: 'rate', label: 'Annual return', suffix: '%', default: '5', slider: { min: 0, max: 12, step: 0.1 } },
@@ -272,6 +276,7 @@ export const AnnuityCalculatorClient = makeCalculatorClient({
 
 export const CapitalGainsTaxEstimatorClient = makeCalculatorClient({
   slug: 'capital-gains-tax-estimator',
+  urlState: true,
   inputs: [
     { key: 'purchase', label: 'Purchase price', suffix: '$', default: '10000', slider: { min: 0, max: 100000, step: 1000 } },
     { key: 'sale', label: 'Sale price', suffix: '$', default: '15000', slider: { min: 0, max: 200000, step: 1000 } },
@@ -284,7 +289,7 @@ export const CapitalGainsTaxEstimatorClient = makeCalculatorClient({
   ],
   outputs: [
     { key: 'gain', label: 'Capital gain' },
-    { key: 'rate', label: 'Tax rate' },
+    { key: 'rate', label: 'Tax rate', sublabel: 'Blended across bracket shares' },
     { key: 'tax', label: 'Estimated tax owed', highlight: true },
   ],
   compute: (v, locale) => {
@@ -384,18 +389,19 @@ export const CapitalGainsTaxEstimatorClient = makeCalculatorClient({
       formatTotal: (n) => fmtUSD(n, 0),
     }
   },
-  note: '📈 US capital gains: held 1+ year = long-term (0/15/20% by 2026 taxable income). Held <1 year = short-term (ordinary income rate). Gains stack on top of ordinary income for bracket purposes (long-term brackets and the short-term marginal rate are based on income plus gain). Simplified — excludes NIIT and state tax.',
+  note: '📈 US capital gains: held more than 1 year = long-term (0/15/20% by 2026 taxable income). Held 1 year or less = short-term (ordinary income rate). Gains stack on top of ordinary income for bracket purposes (long-term brackets and the short-term marginal rate are based on income plus gain). Simplified — excludes NIIT and state tax.',
 })
 
 export const RentVsBuyCalculatorClient = makeCalculatorClient({
   slug: 'rent-vs-buy-calculator',
+  urlState: true,
   inputs: [
     { key: 'home', label: 'Home price', suffix: '$', default: '400000' },
     { key: 'rent', label: 'Comparable rent', suffix: '$/mo', default: '2000' },
     { key: 'down', label: 'Down payment', suffix: '%', default: '20', slider: { min: 0, max: 100, step: 1 } },
     { key: 'rate', label: 'Mortgage rate', suffix: '%', default: '6.8', slider: { min: 0, max: 15, step: 0.05 } },
     { key: 'term', label: 'Loan term', suffix: 'years', default: '30', slider: { min: 5, max: 40, step: 5 } },
-    { key: 'years', label: 'Years in home', default: '7' },
+    { key: 'years', label: 'Years in home', default: '7', slider: { min: 1, max: 40, step: 1 } },
   ],
   outputs: [
     { key: 'buyTotal', label: 'Net cost to buy', sublabel: 'Down + payments − sale equity' },
@@ -544,16 +550,16 @@ export function BodyFatCalculatorClient() {
   }, [])
 
   const result = useMemo(() => {
-    const hCm = unit === 'metric' ? Number(height) : (Number(heightFt) * 12 + Number(heightIn)) * CM_PER_IN
+    const hCm = unit === 'metric' ? toNum(height) : (toNum(heightFt) * 12 + toNum(heightIn)) * CM_PER_IN
     if (!isFinite(hCm) || hCm <= 0) return null
-    // 围度输入换算成 cm(Navy 公式按 cm)
-    const cm = (s: string) => (unit === 'metric' ? Number(s) : Number(s) * CM_PER_IN)
+    // 围度输入换算成 cm(Navy 公式按 cm);toNum 粘贴宽容(见 convertInput 注)
+    const cm = (s: string) => (unit === 'metric' ? toNum(s) : toNum(s) * CM_PER_IN)
     let bf: number
     let sublabel: string
     if (method === 'bmi') {
       // Deurenberg 公式(sex:男=1,女=0)
-      const kg = unit === 'metric' ? Number(weight) : Number(weight) * LB_PER_KG
-      const a = Number(age)
+      const kg = unit === 'metric' ? toNum(weight) : toNum(weight) * LB_PER_KG
+      const a = toNum(age)
       if (!(kg > 0) || !(a > 0) || !isFinite(kg) || !isFinite(a)) return null
       const bmi = kg / Math.pow(hCm / 100, 2)
       bf = 1.2 * bmi + 0.23 * a - 10.8 * (gender === 'male' ? 1 : 0) - 5.4
@@ -765,6 +771,7 @@ export function BodyFatCalculatorClient() {
 
 export const MacroCalculatorClient = makeCalculatorClient({
   slug: 'macro-calculator',
+  urlState: true,
   inputs: [
     { key: 'calories', label: 'Daily calorie target', default: '2000' },
     { key: 'goal', label: 'Goal', default: 'maintain', options: [
@@ -777,7 +784,7 @@ export const MacroCalculatorClient = makeCalculatorClient({
     { key: 'protein', label: 'Protein', sublabel: '4 cal/g' },
     { key: 'carbs', label: 'Carbs', sublabel: '4 cal/g' },
     { key: 'fat', label: 'Fat', sublabel: '9 cal/g' },
-    { key: 'total', label: 'Total calories', highlight: true },
+    { key: 'total', label: 'Total calories', sublabel: 'kcal / day', highlight: true },
   ],
   compute: (v, locale): Record<string, string> => {
     const cal = toNum(v.calories)

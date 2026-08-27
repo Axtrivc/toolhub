@@ -10,7 +10,7 @@ export const sortLinesL10n: ToolL10n = {
       defaultInput: '樱桃\n苹果\n大枣\n香蕉',
       inputLabel: '列表(每行一项)',
       outputLabel: '已排序',
-      note: '🔤 按字母顺序排序各行。空行会被移除。可选指令:列表末尾加 " ||| numeric"(按数值自然排序)、" ||| desc"(降序)或 " ||| numeric,desc"。',
+      note: '🔤 按字母顺序排序各行。空行会被移除。相等的行保持原有相对顺序(稳定排序)。可选指令:列表末尾加 " ||| numeric"(按数值自然排序)、" ||| desc"(降序)或 " ||| numeric,desc"。',
     },
     useCases: [
       '整理头脑风暴产生的想法列表',
@@ -29,7 +29,7 @@ export const sortLinesL10n: ToolL10n = {
       defaultInput: 'cereza\nmanzana\ndátil\nplátano',
       inputLabel: 'Lista (un elemento por línea)',
       outputLabel: 'Ordenado',
-      note: '🔤 Ordena las líneas alfabéticamente. Se eliminan las líneas vacías. Instrucciones opcionales al final: " ||| numeric" (orden numérico natural), " ||| desc" (descendente) o " ||| numeric,desc".',
+      note: '🔤 Ordena las líneas alfabéticamente. Se eliminan las líneas vacías. Las líneas iguales conservan su orden relativo original (ordenación estable). Instrucciones opcionales al final: " ||| numeric" (orden numérico natural), " ||| desc" (descendente) o " ||| numeric,desc".',
     },
     useCases: [
       'organizar una lista de ideas de una lluvia de ideas',
@@ -48,7 +48,7 @@ export const sortLinesL10n: ToolL10n = {
       defaultInput: 'kirsche\napfel\ndattel\nbanane',
       inputLabel: 'Liste (ein Eintrag pro Zeile)',
       outputLabel: 'Sortiert',
-      note: '🔤 Sortiert die Zeilen alphabetisch. Leere Zeilen werden entfernt. Optionale Anweisungen am Ende: " ||| numeric" (natürliche Zahlenordnung), " ||| desc" (absteigend) oder " ||| numeric,desc".',
+      note: '🔤 Sortiert die Zeilen alphabetisch. Leere Zeilen werden entfernt. Gleiche Zeilen behalten ihre ursprüngliche Reihenfolge (stabile Sortierung). Optionale Anweisungen am Ende: " ||| numeric" (natürliche Zahlenordnung), " ||| desc" (absteigend) oder " ||| numeric,desc".',
     },
     useCases: [
       'eine Liste von Brainstorming-Ideen ordnen',

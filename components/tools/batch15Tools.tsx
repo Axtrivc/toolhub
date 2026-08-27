@@ -5,7 +5,7 @@ import { CalculatorField, CalculatorNote, CalculatorSliderField, ResultCard } fr
 import { StackedCompareChart } from '@/components/charts/StackedCompareChart'
 import { ResultActions } from '../ResultActions'
 import { CopyButton } from '@/components/CopyButton'
-import { fmtNum, fmtUSD } from '@/lib/format'
+import { fmtNum, fmtUSD, toNumStrict } from '@/lib/format'
 import { useApp } from '@/components/providers/AppProviders'
 import { tui } from '@/lib/i18n/tool-l10n'
 import { MODEL_GROUPS, MODEL_PRICES, type ModelPrice } from '@/lib/model-pricing'
@@ -28,9 +28,11 @@ export function LlmCostCalculatorClient() {
   const [requestsPerDay, setRequestsPerDay] = useState('100')
 
   const stats = useMemo(() => {
-    const it = Number(inputTokens)
-    const ot = Number(outputTokens)
-    const rpd = Number(requestsPerDay)
+    // B1 粘贴宽容:从文档复制的 "2,000" 一类数字直接可用(toNumStrict),
+    // 非法输入仍显式 NaN → 走下方的无效提示,不静默归零
+    const it = toNumStrict(inputTokens)
+    const ot = toNumStrict(outputTokens)
+    const rpd = toNumStrict(requestsPerDay)
     if (!Number.isFinite(it) || !Number.isFinite(ot) || !Number.isFinite(rpd) || it < 0 || ot < 0 || rpd < 0) return null
     const rows = MODEL_PRICES.map((m) => {
       const perReq = (it / 1e6) * m.inputPer1M + (ot / 1e6) * m.outputPer1M

@@ -302,7 +302,11 @@ export function TimezoneConverterClient() {
             <label htmlFor="tz-dt" className="block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
               {L('dateTimeLabel', 'Date & time (in source zone)')}
             </label>
-            <button type="button" onClick={handleNow} className="text-xs font-medium text-primary hover:underline">
+            <button
+              type="button"
+              onClick={handleNow}
+              className="-my-1 rounded-md px-2 py-1.5 text-xs font-medium text-primary hover:underline"
+            >
               {L('now', 'Now')}
             </button>
           </div>

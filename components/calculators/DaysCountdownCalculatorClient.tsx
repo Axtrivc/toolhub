@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from 'react'
 import { CalculatorField, ResultCard, CalculatorNote } from '@/components/calculator/CalculatorField'
+import { ResultActions } from '@/components/ResultActions'
 import { useApp } from '@/components/providers/AppProviders'
 import { tui } from '@/lib/i18n/tool-l10n'
 import { calendarDaysBetween } from '@/lib/date-utils'
@@ -142,6 +143,34 @@ export function DaysCountdownCalculatorClient() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [fromStr, toStr, locale])
 
+  // 结果摘要(纯文本):供 Copy/Download 使用。全部由既有已本地化 key 组合,
+  // 倒计时为快照语义(当前时刻的剩余量),与页面显示一致。
+  const summary = useMemo(() => {
+    if (tab === 'countdown') {
+      if (!countdown) return ''
+      const dir = countdown.future ? L('daysLeft', 'Days left') : L('daysAgo', 'Days ago')
+      return [
+        L('tab_countdown', 'Countdown'),
+        `${L('targetDate', 'Target date')}: ${dateStr} ${timeStr}`,
+        `${dir}: ${countdown.clock.days}${L('dAbbr', ' d')} ${pad(countdown.clock.hours)}:${pad(countdown.clock.mins)}:${pad(countdown.clock.secs)}`,
+        `${L('totalDays', 'Total days')}: ${countdown.totalDays.toFixed(1)}`,
+        `${countdown.future ? L('businessDaysLeft', 'Business days left') : L('businessDaysAgo', 'Business days ago')}: ${Math.abs(countdown.business)}`,
+      ].join('\n')
+    }
+    if (!between || 'error' in between) return ''
+    return [
+      L('tab_between', 'Days between'),
+      `${L('startDate', 'Start date')}: ${fromStr}`,
+      `${L('endDate', 'End date')}: ${toStr}`,
+      `${L('totalDays', 'Total days')}: ${between.days}`,
+      `${L('weeks', 'Weeks')}: ${between.weeks}${L('wkAbbr', ' wk ')}${between.weekDays}${L('dAbbr', ' d')}`,
+      `${L('approxMonths', '≈ Months')}: ${between.months}`,
+      `${L('businessDays', 'Business days')}: ${between.business}`,
+      `${L('weekendDays', 'Weekend days')}: ${between.weekend}`,
+    ].join('\n')
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [tab, countdown, between, dateStr, timeStr, fromStr, toStr, locale])
+
   const applyPreset = (kind: 'newyear' | 'christmas' | 'plus30' | 'plus90') => {
     const n = new Date()
     if (kind === 'newyear') {
@@ -227,7 +256,7 @@ export function DaysCountdownCalculatorClient() {
                 key={kind}
                 type="button"
                 onClick={() => applyPreset(kind)}
-                className="rounded-full border px-3 py-1 text-xs font-medium transition-colors hover:bg-brand-50 dark:hover:bg-brand-900/40"
+                className="rounded-full border px-3 py-1.5 text-xs font-medium transition-colors hover:bg-brand-50 dark:hover:bg-brand-900/40"
                 style={{ borderColor: 'rgb(var(--border))', color: 'rgb(var(--text-muted))' }}
               >
                 {L('preset_' + kind, label)}
@@ -414,6 +443,15 @@ export function DaysCountdownCalculatorClient() {
             </>
           )}
         </>
+      )}
+
+      {/* 结果操作行(口径同家族 DateDifferenceClient):Copy 复制摘要 / Download 下载 */}
+      {summary && (
+        <ResultActions
+          summary={summary}
+          filename="days-countdown-calculator.txt"
+          downloadContent={summary}
+        />
       )}
     </div>
   )

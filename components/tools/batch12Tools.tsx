@@ -84,7 +84,8 @@ export function KeycodeInfoClient() {
         <div>
           <div className="mb-2 flex items-center justify-between">
             <span className="text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>{L('recentKeys', 'Recent keys')}</span>
-            <button type="button" onClick={() => setHistory([])} className="text-xs text-slate-400 hover:text-red-500 dark:text-slate-500">
+            {/* A3:-my-1 抵消 padding 增量,触控高度补到 ~32px(与 makeTextTool 的 Clear 同款) */}
+            <button type="button" onClick={() => setHistory([])} className="-my-1 rounded-md px-2 py-1.5 text-xs text-slate-400 hover:text-red-500 dark:text-slate-500">
               {L('clearHistory', 'Clear')}
             </button>
           </div>
@@ -181,6 +182,17 @@ export function MimeTypeLookupClient() {
 }
 
 // ── XML 格式化/校验 ──
+/** B2 冷启动样例:tool-samples 未收录 xml-formatter(开局纯空白 + 无 Load Sample)。
+ *  组件内内置短示例,覆盖属性/嵌套/文本节点三类节点,点 Beautify 即有意义结果。 */
+const DEFAULT_XML = `<?xml version="1.0" encoding="UTF-8"?>
+<catalog>
+  <book id="bk101">
+    <author>Gambardella, Matthew</author>
+    <title>XML Developer's Guide</title>
+    <price currency="USD">44.95</price>
+  </book>
+</catalog>`
+
 function formatXmlNode(node: Node, depth: number, indent: number): string {
   const pad = ' '.repeat(depth * indent)
   if (node.nodeType === Node.TEXT_NODE) {
@@ -213,7 +225,7 @@ export function XmlFormatterClient() {
   const { locale } = useApp()
   const L = (key: string, fb: string) => tui('xml-formatter', locale, key, fb)
   const sample = getCalculatorSampleSafe('xml-formatter')
-  const [xml, setXml] = useState(sample?.xml ?? '')
+  const [xml, setXml] = useState(sample?.xml ?? DEFAULT_XML)
   const [indent, setIndent] = useState(2)
   const [output, setOutput] = useState('')
   const [error, setError] = useState('')
@@ -279,6 +291,9 @@ export function XmlFormatterClient() {
 }
 
 // ── Markdown TOC 生成器 ──
+/** B2 冷启动样例:tool-samples 未收录本工具,内置一份含 H2/H3 的短文档,开局即出 TOC */
+const DEFAULT_TOC_MD = '## Install\n\n## Usage\n\n### Command-line flags\n\n## FAQ'
+
 function githubSlug(text: string): string {
   return text
     .toLowerCase()
@@ -292,7 +307,7 @@ export function MarkdownTocGeneratorClient() {
   const { locale } = useApp()
   const L = (key: string, fb: string) => tui('markdown-toc-generator', locale, key, fb)
   const sample = getCalculatorSampleSafe('markdown-toc-generator')
-  const [md, setMd] = useState(sample?.md ?? '')
+  const [md, setMd] = useState(sample?.md ?? DEFAULT_TOC_MD)
   const [maxDepth, setMaxDepth] = useState(3)
 
   const { toc, count } = useMemo(() => {

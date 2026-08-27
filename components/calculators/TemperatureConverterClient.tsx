@@ -31,6 +31,12 @@ export function TemperatureConverterClient() {
 
   const unit = (u: 'c' | 'f' | 'k') => (u === 'k' ? 'K' : '°' + u.toUpperCase())
 
+  // ⇄ 交换 From/To 单位:输入数值保持不变(口径同 makeUnitConverter 的互换按钮)
+  const handleSwap = () => {
+    setFrom(to)
+    setTo(from)
+  }
+
   const result = useMemo(() => {
     const v = toNum(value)
     // 先转成 Celsius 作为中间值
@@ -92,6 +98,20 @@ export function TemperatureConverterClient() {
             <option value="k">{L('optKelvin', 'Kelvin (K)')}</option>
           </select>
         </div>
+      </div>
+
+      {/* ⇄ 交换 From/To 单位 */}
+      <div className="flex justify-end">
+        <button
+          type="button"
+          onClick={handleSwap}
+          className="btn btn-secondary"
+          title={L('swapUnits', 'Swap From and To units')}
+          aria-label={L('swapUnits', 'Swap From and To units')}
+        >
+          <span aria-hidden="true">⇄</span>
+          <span className="ml-1.5">{L('swap', 'Swap')}</span>
+        </button>
       </div>
 
       <div role="status" aria-live="polite" className="grid grid-cols-1 gap-3 sm:grid-cols-2">

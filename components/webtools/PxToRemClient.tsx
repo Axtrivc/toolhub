@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import { CopyButton } from '@/components/CopyButton'
 import { CalculatorSliderField } from '@/components/calculator/CalculatorField'
 import { useApp } from '@/components/providers/AppProviders'
@@ -15,13 +15,41 @@ import { tui } from '@/lib/i18n/tool-l10n'
 
 const COMMON_PX = [8, 10, 12, 14, 16, 18, 20, 24, 28, 32, 40, 48, 56, 64, 80]
 
+// 根字号自定义值记忆:前端开发者反复回访时不必每次把 16px 拨回自己项目的基准(如 10px)。
+// localStorage 只存一个数字;读取失败/隐私模式回退 16,与 slug-generator 历史同款容错。
+const ROOT_SIZE_KEY = 'pxtorem-root-size'
+
+function readStoredRootSize(): number {
+  try {
+    const raw = localStorage.getItem(ROOT_SIZE_KEY)
+    if (!raw) return 16
+    const n = Number(JSON.parse(raw))
+    return Number.isFinite(n) && n >= 10 && n <= 28 ? Math.round(n) : 16
+  } catch {
+    return 16
+  }
+}
+
 export function PxToRemClient() {
   const { locale } = useApp()
   const L = (key: string, fb: string) => tui('px-to-rem', locale, key, fb)
 
+  // 首帧恒 16(SSR/水合一致),挂载后从 localStorage 恢复上次自定义值
   const [rootSize, setRootSize] = useState(16)
   const [px, setPx] = useState('')
   const [rem, setRem] = useState('')
+
+  useEffect(() => {
+    setRootSize(readStoredRootSize())
+  }, [])
+
+  useEffect(() => {
+    try {
+      localStorage.setItem(ROOT_SIZE_KEY, JSON.stringify(rootSize))
+    } catch {
+      // 隐私模式 / 配额失败 → 忽略,记忆只是增强而非功能依赖
+    }
+  }, [rootSize])
 
   // px → rem/em(实时)
   const fromPx = useMemo(() => {

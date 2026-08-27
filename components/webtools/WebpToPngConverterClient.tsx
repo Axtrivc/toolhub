@@ -340,9 +340,11 @@ export function WebpToPngConverterClient() {
                 <span className="ml-2 font-mono text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>
                   {formatBytes(output.size)} · {source.width} × {source.height} px
                 </span>
-                {format === 'jpeg' && output.size > source.size && (
+                {output.size > source.size && (
                   <span className="ml-2 text-xs" style={{ color: 'rgb(var(--text-faint))' }}>
-                    {L('largerThanOriginal', '(larger than the original — try lowering quality)')}
+                    {format === 'jpeg'
+                      ? L('largerThanOriginal', '(larger than the original — try lowering quality)')
+                      : L('pngLargerNote', '(larger than the original — PNG is lossless, so converting lossy WebP usually grows the file; pick JPEG for a smaller output)')}
                   </span>
                 )}
               </div>

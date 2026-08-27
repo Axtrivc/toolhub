@@ -7,6 +7,7 @@ import { fmtCompact } from '@/components/charts/chartKit'
 import { ResultActions } from '@/components/ResultActions'
 import { useApp } from '@/components/providers/AppProviders'
 import { tui } from '@/lib/i18n/tool-l10n'
+import { toNumStrict } from '@/lib/format'
 
 /**
  * SaaS 指标计算:
@@ -38,12 +39,13 @@ export function SaasLtvChurnCalculatorClient() {
   const [customers, setCustomers] = useState('100')
 
   const parsed = useMemo(() => {
-    const a = Number(arpu)
-    const m = Number(margin)
-    const c = Number(churn)
-    const cacN = Number(cac)
-    const g = Number(growth)
-    const cust = Number(customers)
+    // toNumStrict:从报表/账单粘贴 "80%"/"$1,200" 直接可用;其余非法输入仍显式 NaN 走错误提示
+    const a = toNumStrict(arpu)
+    const m = toNumStrict(margin)
+    const c = toNumStrict(churn)
+    const cacN = toNumStrict(cac)
+    const g = toNumStrict(growth)
+    const cust = toNumStrict(customers)
     if ([a, m, c, cacN, g, cust].some((v) => !isFinite(v)) || a <= 0 || c < 0 || cacN < 0 || cust < 0 || m <= 0 || m > 100) {
       return {
         error: L(
@@ -80,8 +82,8 @@ export function SaasLtvChurnCalculatorClient() {
     const fmtMaybe = (n: number) => (isFinite(n) ? fmtMoney(n) : '∞')
     return [
       L('summaryTitle', 'SaaS Metrics Summary'),
-      `  ${L('sArpu', 'ARPU: ')}${fmtMoney(Number(arpu))}/mo  •  ${L('sGrossMargin', 'Gross margin: ')}${margin}%  •  ${L('sChurn', 'Churn: ')}${churn}%/mo`,
-      `  ${L('sCac', 'CAC: ')}${fmtMoney(Number(cac))}  •  ${L('sGrowth', 'Growth: ')}${growth}%/mo  •  ${L('sCustomers', 'Customers: ')}${customers}`,
+      `  ${L('sArpu', 'ARPU: ')}${fmtMoney(toNumStrict(arpu))}/mo  •  ${L('sGrossMargin', 'Gross margin: ')}${margin}%  •  ${L('sChurn', 'Churn: ')}${churn}%/mo`,
+      `  ${L('sCac', 'CAC: ')}${fmtMoney(toNumStrict(cac))}  •  ${L('sGrowth', 'Growth: ')}${growth}%/mo  •  ${L('sCustomers', 'Customers: ')}${customers}`,
       L('sResults', 'Results:'),
       `  ${L('sExpectedLifetime', 'Expected customer lifetime: ')}${isFinite(parsed.lifetimeMonths) ? `${parsed.lifetimeMonths.toFixed(1)} ${L('months', 'months')}` : L('infinityMonths', '∞ (200+ months)')}`,
       `  ${L('sLtv', 'LTV: ')}${fmtMaybe(parsed.ltv)}`,

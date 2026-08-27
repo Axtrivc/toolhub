@@ -54,6 +54,14 @@ async function saltedShaHash(kind: 'SHA-256' | 'SHA-512', saltHex: string, passw
 /** 让出一帧,确保 busy 状态先渲染(bcrypt cost≥12 会阻塞主线程) */
 const nextTick = () => new Promise<void>((r) => setTimeout(r, 30))
 
+/** E1 等待时长粗估(bcryptjs、主流桌面 CPU):cost 10 ≈ 0.1 s,每升一级翻倍。
+ *  数量级参考值而非精确基准——文案统一带 "≈/~"。 */
+function costTimeEstimate(cost: number): string {
+  const ms = 100 * Math.pow(2, cost - 10)
+  if (ms < 1000) return `~${Math.max(1, Math.round(ms))} ms`
+  return `~${(ms / 1000).toFixed(ms < 10000 ? 1 : 0)} s`
+}
+
 export function BcryptHashGeneratorClient() {
   const { locale } = useApp()
   const L = (key: string, fb: string) => tui('bcrypt-hash-generator', locale, key, fb)
@@ -194,6 +202,10 @@ export function BcryptHashGeneratorClient() {
             <span>{L('costTypical', '10–12 typical')}</span>
             <span>{L('costSlowStrong', '15 (slow, strong)')}</span>
           </div>
+          {/* E1:用户不知道拉到 cost 12/15 要等多久,给出数量级预估(比"能花几秒"更具体) */}
+          <p className="mt-1.5 text-xs" style={{ color: 'rgb(var(--text-faint))' }}>
+            {L('costTimeHint', '⏱️ ≈ {time} per hash on a typical desktop').replace('{time}', costTimeEstimate(cost))}
+          </p>
           {cost > 12 && (
             <div className="mt-2 rounded-lg border border-amber-200 bg-amber-50 p-3 text-xs text-amber-800 dark:border-amber-800/60 dark:bg-amber-950/30 dark:text-amber-300">
               {L('costWarn', '⚠️ Cost above 12 is deliberately slow — each step doubles the work, so 15 can take several seconds in the browser.')}

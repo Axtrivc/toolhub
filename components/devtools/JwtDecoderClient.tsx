@@ -146,7 +146,7 @@ export function JwtDecoderClient() {
               <button
                 type="button"
                 onClick={() => setToken('')}
-                className="-my-1 rounded-md px-2 py-1 text-xs text-slate-500 dark:text-slate-400 hover:text-red-500 sm:text-sm"
+                className="-my-1 rounded-md px-2 py-1.5 text-xs text-slate-500 dark:text-slate-400 hover:text-red-500 sm:text-sm"
               >
                 {L('clear', 'Clear')}
               </button>

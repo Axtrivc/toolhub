@@ -19,7 +19,7 @@ export const binaryToTextL10n: ToolL10n = {
       '调试底层数据格式',
     ],
     faqs: [
-      { q: '支持 UTF-8 / Unicode 吗?', a: '本工具将每个 8 位分组解码为单个字符(ASCII 范围 0–127)。多字节 UTF-8 字符(如 emoji)需要把每个字节分开并按序列解码——本工具暂不支持。' },
+      { q: '支持 UTF-8 / Unicode 吗?', a: '支持。空格分隔的所有字节会作为一个完整 UTF-8 序列解码:ASCII 字符每组 1 字节,中文、emoji 等多字节字符由相邻几组字节共同表示。试试默认示例——它会解码出中文"你好"。' },
     ],
   },
   es: {
@@ -36,7 +36,7 @@ export const binaryToTextL10n: ToolL10n = {
       'depurar formatos de datos de bajo nivel',
     ],
     faqs: [
-      { q: '¿Maneja UTF-8 / Unicode?', a: 'Esta herramienta decodifica cada grupo de 8 bits como un único carácter (rango ASCII 0-127). Los caracteres multibyte UTF-8 (como los emoji) requerirían separar cada byte y decodificarlos como secuencia; esta herramienta no lo hace.' },
+      { q: '¿Maneja UTF-8 / Unicode?', a: 'Sí. Todos los bytes separados por espacios se decodifican como una única secuencia UTF-8: los caracteres ASCII usan un grupo por carácter y los multibyte (chino, emoji) usan varios grupos consecutivos — p. ej., el chino «你好» son seis grupos.' },
     ],
   },
   de: {
@@ -53,7 +53,7 @@ export const binaryToTextL10n: ToolL10n = {
       'Datenformate auf niedriger Ebene debuggen',
     ],
     faqs: [
-      { q: 'Werden UTF-8 / Unicode unterstützt?', a: 'Dieses Werkzeug dekodiert jede 8-Bit-Gruppe als einzelnes Zeichen (ASCII-Bereich 0-127). Multibyte-UTF-8-Zeichen (wie Emoji) müssten byteweise getrennt und als Folge dekodiert werden — dieses Werkzeug unterstützt das nicht.' },
+      { q: 'Werden UTF-8 / Unicode unterstützt?', a: 'Ja. Alle leerzeichengetrennten Bytes werden als eine einzige UTF-8-Sequenz dekodiert: ASCII-Zeichen brauchen eine Gruppe pro Zeichen, Multibyte-Zeichen (Chinesisch, Emoji) mehrere aufeinanderfolgende Gruppen — das chinesische „你好“ sind z. B. sechs Gruppen.' },
     ],
   },
 }

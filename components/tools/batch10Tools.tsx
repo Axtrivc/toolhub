@@ -94,8 +94,11 @@ export function EpochConverterClient() {
           value={dateToTs !== null ? `${dateToTs}000` : date && !isNaN(date.getTime()) ? String(date.getTime()) : '—'} />
       </div>
 
-      {/* 输入非空但解析不出可靠结果(含逗号分隔/非法字符、位数超界)时给出提示,不再静默显示 '—' */}
-      {ts.trim() !== '' && (isNaN(parsed) || (!secValid && !msValid)) && (
+      {/* 输入非空但解析不出可靠结果时给出提示,不再静默显示 '—'。
+          D1 报错时机:纯数字且 ≤14 位可能是"还没输完"或短秒值(位数前缀),
+          不提示、静默等待;只有混入非数字字符或位数超出毫秒上限才提示,
+          避免手输 10 位时间戳在第 3~8 位时闪现警告打扰 */}
+      {ts.trim() !== '' && (isNaN(parsed) || digits > 14) && (
         <p className="rounded-lg border p-3 text-sm" style={{ borderColor: 'rgb(var(--border-strong))', color: 'rgb(var(--text-muted))' }}>
           {L('digitHint', 'Timestamps are usually 10 digits (seconds) or 13 digits (milliseconds). This input cannot be interpreted reliably, so nothing is shown rather than a wrong guess.')}
         </p>
@@ -150,6 +153,16 @@ export function JsonDiffClient() {
     }
   }, [left, right])
 
+  // D1 报错时机:JSON 粘贴/补写常分几步完成,输到一半就红字太吵。
+  // diff 本身保持即时(合法即出结果),仅错误横幅延迟 ~700ms 显示;
+  // 持续输入不断重置计时器,停顿才出现,恢复合法立即消失
+  const [shownError, setShownError] = useState('')
+  useEffect(() => {
+    if (!error) { setShownError(''); return }
+    const id = setTimeout(() => setShownError(error), 700)
+    return () => clearTimeout(id)
+  }, [error])
+
   const taCls =
     'w-full rounded-lg border p-4 font-mono text-sm outline-none transition focus:ring-2'
 
@@ -172,9 +185,9 @@ export function JsonDiffClient() {
         </div>
       </div>
 
-      {error && (
+      {shownError && (
         <p role="alert" className="rounded-lg border-2 border-red-200 bg-red-50 p-4 font-mono text-sm text-red-700 dark:border-red-800/60 dark:bg-red-950/30 dark:text-red-300">
-          ⚠️ {error}
+          ⚠️ {shownError}
         </p>
       )}
       {!error && (
@@ -658,6 +671,11 @@ export function CookingConverterClient() {
             className="w-full rounded-lg border p-3 shadow-sm outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200" style={selStyle}>
             {Object.entries(INGREDIENT_DENSITY).map(([k, v]) => <option key={k} value={k}>{v.label}</option>)}
           </select>
+          {/* B2/E1 引导:选中食材的克/杯密度直接亮出来——解释「为什么换食材结果会变」,
+              也让下拉本身可被信任(与 note 的 USDA 口径互相印证) */}
+          <span className="mt-1 block text-xs" style={{ color: 'rgb(var(--text-faint))' }}>
+            {INGREDIENT_DENSITY[ingredient].gPerCup.toLocaleString('en-US')} {L('gPerCup', 'g per US cup')}
+          </span>
         </div>
       </div>
 

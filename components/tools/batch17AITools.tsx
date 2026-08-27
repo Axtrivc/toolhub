@@ -187,7 +187,13 @@ export function TokenVisualizerClient() {
 
       {chunks.length > 0 && (
         <div role="status" aria-live="polite" className="space-y-3">
-          <ResultCard label={L('approxTokens', 'Approximate tokens')} highlight value={String(chunks.length)} />
+          {/* E1:光秃的 token 数字难自评,补字符数 sublabel 给出"每 token 约几字符"的参照 */}
+          <ResultCard
+            label={L('approxTokens', 'Approximate tokens')}
+            highlight
+            value={String(chunks.length)}
+            sublabel={`${[...text].length.toLocaleString(locale === 'en' ? 'en-US' : locale)} ${L('charactersLabel', 'characters')}`}
+          />
           <div className="flex flex-wrap gap-1 rounded-lg border p-4 font-mono text-sm" style={{ borderColor: 'rgb(var(--border))', backgroundColor: 'rgb(var(--bg-subtle))' }}>
             {chunks.map((c, i) => (
               <span

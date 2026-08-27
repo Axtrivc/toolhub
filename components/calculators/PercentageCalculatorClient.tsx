@@ -5,6 +5,7 @@ import { StackedCompareChart } from '@/components/charts/StackedCompareChart'
 import { useUrlState } from '@/lib/useUrlState'
 import { useApp } from '@/components/providers/AppProviders'
 import { tui } from '@/lib/i18n/tool-l10n'
+import { toNum } from '@/lib/format'
 
 export function PercentageCalculatorClient() {
   const { locale } = useApp()
@@ -35,15 +36,16 @@ export function PercentageCalculatorClient() {
   const [p4Value, setP4Value] = useUrlState('p4v', '80')
   const [p4Percent, setP4Percent] = useUrlState('p4p', '15')
 
-  const r1 = (Number(p1Percent) / 100) * Number(p1Value)
-  const r2Whole = Number(p2Whole)
-  const r2 = r2Whole === 0 ? NaN : (Number(p2Part) / r2Whole) * 100
-  const r3From = Number(p3From)
-  const r3To = Number(p3To)
+  // toNum:空串仍按 0(tip note 口径不变),粘贴 "18%"/"$1,200"/"1 200" 直接可用
+  const r1 = (toNum(p1Percent) / 100) * toNum(p1Value)
+  const r2Whole = toNum(p2Whole)
+  const r2 = r2Whole === 0 ? NaN : (toNum(p2Part) / r2Whole) * 100
+  const r3From = toNum(p3From)
+  const r3To = toNum(p3To)
   // 跨零变化(起点与终点异号,如 -100 → +50)在数学上无定义,百分比只会误导 → 显示 —
   const r3CrossesZero = isFinite(r3From) && isFinite(r3To) && r3From !== 0 && (r3From < 0) !== (r3To < 0)
   const r3 = r3From === 0 || r3CrossesZero ? NaN : ((r3To - r3From) / r3From) * 100
-  const r4 = Number(p4Value) * (1 + Number(p4Percent) / 100)
+  const r4 = toNum(p4Value) * (1 + toNum(p4Percent) / 100)
 
   return (
     <div className="space-y-8">
@@ -58,7 +60,7 @@ export function PercentageCalculatorClient() {
           <ResultCard label={L('result', 'Result')} value={fmt(r1, 2)} highlight />
         </div>
         {/* 部分占整体:蓝 = 算得的部分,灰 = 剩余(值非法/为 0 不出图) */}
-        {isFinite(r1) && r1 > 0 && Number(p1Value) > 0 && (
+        {isFinite(r1) && r1 > 0 && toNum(p1Value) > 0 && (
           <div className="mt-3">
             <StackedCompareChart
               title={L('chartTitle', 'Part vs whole')}
@@ -67,7 +69,7 @@ export function PercentageCalculatorClient() {
                   label: L('cmpWhole', 'Whole'),
                   segments: [
                     { label: L('cmpPart', 'Part'), value: r1, color: '#3b82f6' },
-                    { label: L('cmpRemainder', 'Remainder'), value: Number(p1Value) - r1, color: '#cbd5e1' },
+                    { label: L('cmpRemainder', 'Remainder'), value: toNum(p1Value) - r1, color: '#cbd5e1' },
                   ],
                 },
               ]}
@@ -88,7 +90,7 @@ export function PercentageCalculatorClient() {
           <ResultCard label={L('result', 'Result')} value={isFinite(r2) ? `${fmt(r2, 2)}%` : '—'} highlight />
         </div>
         {/* 部分占整体:蓝 = Part,灰 = 剩余(值非法/为 0 不出图) */}
-        {isFinite(r2) && r2Whole > 0 && Number(p2Part) > 0 && (
+        {isFinite(r2) && r2Whole > 0 && toNum(p2Part) > 0 && (
           <div className="mt-3">
             <StackedCompareChart
               title={L('chartTitle', 'Part vs whole')}
@@ -96,8 +98,8 @@ export function PercentageCalculatorClient() {
                 {
                   label: L('cmpWhole', 'Whole'),
                   segments: [
-                    { label: L('cmpPart', 'Part'), value: Number(p2Part), color: '#3b82f6' },
-                    { label: L('cmpRemainder', 'Remainder'), value: r2Whole - Number(p2Part), color: '#cbd5e1' },
+                    { label: L('cmpPart', 'Part'), value: toNum(p2Part), color: '#3b82f6' },
+                    { label: L('cmpRemainder', 'Remainder'), value: r2Whole - toNum(p2Part), color: '#cbd5e1' },
                   ],
                 },
               ]}
@@ -133,7 +135,7 @@ export function PercentageCalculatorClient() {
         </div>
         <div className="mt-3 grid grid-cols-2 gap-3">
           <ResultCard label={`${L('value', 'Value')} + ${p4Percent || 0}%`} value={fmt(r4, 2)} />
-          <ResultCard label={`${L('value', 'Value')} - ${p4Percent || 0}%`} value={fmt(Number(p4Value) * (1 - Number(p4Percent) / 100), 2)} />
+          <ResultCard label={`${L('value', 'Value')} - ${p4Percent || 0}%`} value={fmt(toNum(p4Value) * (1 - toNum(p4Percent) / 100), 2)} />
         </div>
       </section>
 

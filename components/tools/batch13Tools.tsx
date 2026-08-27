@@ -68,6 +68,16 @@ export function JwtGeneratorClient() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [header, payload, secret])
 
+  // D1 报错时机:JSON 输到一半(比如刚敲下 "{" 或删了半个字符串)不该立刻红字。
+  // 校验本身保持即时(token 照常刷新),仅错误横幅延迟 ~700ms 显示;
+  // 持续输入会不断重置计时器,停顿下来才出现,修正后或恢复合法立即消失。
+  const [shownError, setShownError] = useState('')
+  useEffect(() => {
+    if (!error) { setShownError(''); return }
+    const id = setTimeout(() => setShownError(error), 700)
+    return () => clearTimeout(id)
+  }, [error])
+
   return (
     <div className="space-y-5">
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
@@ -85,8 +95,8 @@ export function JwtGeneratorClient() {
       </div>
       <CalculatorField id="jw-secret" type="text" label={L('secretLabel', 'Signing secret (leave empty for unsigned preview)')} value={secret} onChange={setSecret} placeholder="your-256-bit-secret" />
 
-      {error && (
-        <p role="alert" className="rounded-lg border-2 border-red-200 bg-red-50 p-3 text-sm text-red-700 dark:border-red-800/60 dark:bg-red-950/30 dark:text-red-300">⚠️ {error}</p>
+      {shownError && (
+        <p role="alert" className="rounded-lg border-2 border-red-200 bg-red-50 p-3 text-sm text-red-700 dark:border-red-800/60 dark:bg-red-950/30 dark:text-red-300">⚠️ {shownError}</p>
       )}
       {token && (
         <div role="status" aria-live="polite">
@@ -432,7 +442,7 @@ export function HtaccessRedirectGeneratorClient() {
         </div>
         <pre className="overflow-x-auto rounded-lg border p-4 font-mono text-xs whitespace-pre-wrap" style={{ borderColor: 'rgb(var(--border))', backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text))' }}>{output}</pre>
       </div>
-      <CalculatorNote>{L('note', '🔧 Requires Apache with mod_rewrite enabled (near-universal on shared hosting). Place rules before any conflicting blocks; always test with R=301 temporary first? No — flip: test with R=302, switch to R=301 once verified so browsers don’t cache mistakes.')}</CalculatorNote>
+      <CalculatorNote>{L('note', '🔧 Requires Apache with mod_rewrite enabled (near-universal on shared hosting). Place your rules before any conflicting blocks. Test with R=302 first and switch to R=301 once verified, so browsers don’t cache a wrong permanent redirect.')}</CalculatorNote>
     </div>
   )
 }

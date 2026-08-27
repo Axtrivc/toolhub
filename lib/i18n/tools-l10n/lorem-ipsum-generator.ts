@@ -9,6 +9,7 @@ export const loremIpsumGeneratorL10n: ToolL10n = {
     ui: {
       'count': '数量',
       'generate': '📝 生成',
+      'regenerate': '换一批',
       'note': '📄 为模型、设计和布局生成占位文本。基于公元前 1 世纪西塞罗的一段文本。',
       'paragraphs': '段落数',
       'startWithLorem': '以 "Lorem ipsum" 开头',
@@ -31,6 +32,7 @@ export const loremIpsumGeneratorL10n: ToolL10n = {
     ui: {
       'count': 'Cantidad',
       'generate': '📝 Generar',
+      'regenerate': 'Regenerar',
       'note': '📄 Genera texto de marcador para maquetas, diseños y layouts. Basado en un texto de Cicerón del siglo I a. C.',
       'paragraphs': 'Párrafos',
       'startWithLorem': 'Empezar con "Lorem ipsum"',
@@ -53,6 +55,7 @@ export const loremIpsumGeneratorL10n: ToolL10n = {
     ui: {
       'count': 'Anzahl',
       'generate': '📝 Generieren',
+      'regenerate': 'Neu generieren',
       'note': '📄 Erzeugt Platzhaltertext für Mockups, Designs und Layouts. Basiert auf einem Text von Cicero aus dem 1. Jh. v. Chr.',
       'paragraphs': 'Absätze',
       'startWithLorem': 'Mit „Lorem ipsum" beginnen',

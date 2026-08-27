@@ -97,7 +97,7 @@ export function CronParserClient() {
             key={p.expr}
             type="button"
             onClick={() => handlePreset(p.expr)}
-            className="rounded-full border px-3 py-1 text-xs font-medium transition-colors hover:bg-brand-50 dark:hover:bg-brand-900/40"
+            className="rounded-full border px-3 py-1.5 text-xs font-medium transition-colors hover:bg-brand-50 dark:hover:bg-brand-900/40"
             style={{ borderColor: 'rgb(var(--border))', color: 'rgb(var(--text-muted))' }}
             title={p.expr}
           >

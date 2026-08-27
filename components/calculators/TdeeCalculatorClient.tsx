@@ -8,6 +8,7 @@ import { LoadSampleButton } from '@/components/LoadSampleButton'
 import { ResultActions } from '@/components/ResultActions'
 import { useApp } from '@/components/providers/AppProviders'
 import { tui } from '@/lib/i18n/tool-l10n'
+import { toNumStrict } from '@/lib/format'
 
 /**
  * TDEE Calculator —— 每日总能量消耗
@@ -83,7 +84,7 @@ export function TdeeCalculatorClient() {
   const switchUnit = (u: Unit) => {
     if (u === unit) return
     if (u === 'imperial') {
-      const cm = Number(height)
+      const cm = toNumStrict(height)
       if (isFinite(cm) && cm > 0) {
         const [ft, inch] = splitInches(cm / CM_PER_IN)
         setHeightFt(ft)
@@ -94,7 +95,7 @@ export function TdeeCalculatorClient() {
       }
       setWeight(convertInput(weight, 1 / LB_PER_KG))
     } else {
-      const totalIn = Number(heightFt) * 12 + Number(heightIn)
+      const totalIn = toNumStrict(heightFt) * 12 + toNumStrict(heightIn)
       if (isFinite(totalIn) && totalIn > 0) setHeight(String(Number((totalIn * CM_PER_IN).toFixed(1))))
       else setHeight('')
       setWeight(convertInput(weight, LB_PER_KG))
@@ -109,9 +110,11 @@ export function TdeeCalculatorClient() {
 
   const result = useMemo(() => {
     // 英制输入换算成 kg/cm 后走 Mifflin-St Jeor(公式不变)
-    const w = unit === 'metric' ? Number(weight) : Number(weight) * LB_PER_KG
-    const h = unit === 'metric' ? Number(height) : (Number(heightFt) * 12 + Number(heightIn)) * CM_PER_IN
-    const a = Number(age)
+    // toNumStrict:粘贴 "70 kg"/"5,9" 类容错留给 lenient 层;非法仍显式 null 走空态
+    const wRaw = toNumStrict(weight)
+    const w = unit === 'metric' ? wRaw : wRaw * LB_PER_KG
+    const h = unit === 'metric' ? toNumStrict(height) : (toNumStrict(heightFt) * 12 + toNumStrict(heightIn)) * CM_PER_IN
+    const a = toNumStrict(age)
     if (w <= 0 || h <= 0 || a <= 0 || !isFinite(w) || !isFinite(h) || !isFinite(a)) return null
     // Mifflin-St Jeor
     const bmr = 10 * w + 6.25 * h - 5 * a + (sex === 'male' ? 5 : -161)

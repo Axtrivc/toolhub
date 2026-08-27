@@ -202,9 +202,12 @@ export function NginxConfigGeneratorClient() {
 
   const fileDomain = domain.trim().replace(/[^a-zA-Z0-9.-]/g, '') || 'nginx'
 
-  // 输入校验(空值回退默认值,不算非法)
-  const domainInvalid = domain.trim() !== '' && !isValidDomain(domain)
-  const targetInvalid = target.trim() !== '' && !isValidTarget(target)
+  // 输入校验(空值回退默认值,不算非法)。
+  // 失焦后才显示错误(D1):域名/URL 逐字符输入时,打到一半("my-si"、"http://12")必然非法,
+  // 边敲边红字是纯噪音;离开字段或粘贴完整值后才校验,修正后立即恢复。
+  const [touched, setTouched] = useState<{ domain: boolean; target: boolean }>({ domain: false, target: false })
+  const domainInvalid = touched.domain && domain.trim() !== '' && !isValidDomain(domain)
+  const targetInvalid = touched.target && target.trim() !== '' && !isValidTarget(target)
   // target 带路径 → 正则 location 内 proxy_pass 带 URI,nginx -t 会报错
   const warnPath = targetHasPath(target)
 
@@ -229,6 +232,7 @@ export function NginxConfigGeneratorClient() {
             type="text"
             value={domain}
             onChange={(e) => setDomain(e.target.value)}
+            onBlur={() => setTouched((t) => ({ ...t, domain: true }))}
             placeholder="example.com"
             spellCheck={false}
             className={inputClass}
@@ -249,6 +253,7 @@ export function NginxConfigGeneratorClient() {
             type="text"
             value={target}
             onChange={(e) => setTarget(e.target.value)}
+            onBlur={() => setTouched((t) => ({ ...t, target: true }))}
             placeholder="http://127.0.0.1:3000"
             spellCheck={false}
             className={inputClass}
@@ -265,13 +270,14 @@ export function NginxConfigGeneratorClient() {
             <label htmlFor="nginx-port" className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
               {L('listenPortLabel', 'Listen port')}
             </label>
-            <input
-              id="nginx-port"
-              type="text"
-              value={port}
-              onChange={(e) => setPort(e.target.value)}
-              placeholder="80"
-              spellCheck={false}
+          <input
+            id="nginx-port"
+            type="text"
+            value={port}
+            onChange={(e) => setPort(e.target.value)}
+            placeholder="80"
+            inputMode="numeric"
+            spellCheck={false}
               className={inputClass}
               style={inputStyle}
             />

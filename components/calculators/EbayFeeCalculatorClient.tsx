@@ -4,6 +4,7 @@ import { useState, useMemo } from 'react'
 import { CalculatorField, ResultCard, CalculatorNote } from '@/components/calculator/CalculatorField'
 import { StackedCompareChart } from '@/components/charts/StackedCompareChart'
 import { ResultActions } from '@/components/ResultActions'
+import { toNumStrict } from '@/lib/format'
 import { useApp } from '@/components/providers/AppProviders'
 import { tui } from '@/lib/i18n/tool-l10n'
 
@@ -24,6 +25,16 @@ const EBAY_PRESETS: { label: string; pct: number }[] = [
  * Etsy:  listing $0.20 + 交易费(T×6.5%) + 支付处理费(T×pct + fixed)
  * 盈亏平衡价: 解 profit = 0 → T = (成本 + 运费 + 固定费) / (1 − 变动费率)
  */
+
+/** 粘贴宽容数值解析:空串 → 0(与旧 Number('') 语义一致,可选字段留空合法);
+ *  非空走 toNumStrict —— "$1,234.56"/"13.6%" 等从卖家后台复制的值直接可用,
+ *  其余非法输入返回 NaN 由下方 isFinite 校验显式报错。 */
+function numInput(s: string): number {
+  const t = s.trim()
+  if (t === '') return 0
+  return toNumStrict(t)
+}
+
 export function EbayFeeCalculatorClient() {
   const { locale } = useApp()
   const L = (key: string, fb: string) => tui('ebay-fee-calculator', locale, key, fb)
@@ -52,10 +63,11 @@ export function EbayFeeCalculatorClient() {
   const [overridePct, setOverridePct] = useState('')
 
   const parsed = useMemo(() => {
-    const p = Number(price)
-    const sc = Number(shipCharged)
-    const ic = Number(itemCost)
-    const shc = Number(shipCost)
+    // 统一 numInput 解析(粘贴宽容):数值供校验与展示共用,避免 summary 里 Number("$50") → NaN
+    const p = numInput(price)
+    const sc = numInput(shipCharged)
+    const ic = numInput(itemCost)
+    const shc = numInput(shipCost)
     if ([p, sc, ic, shc].some((v) => !isFinite(v) || v < 0) || p <= 0) {
       return { error: L('errInvalidNumbers', 'Please enter valid non-negative numbers (sold price must be greater than 0).') }
     }
@@ -63,9 +75,9 @@ export function EbayFeeCalculatorClient() {
 
     if (platform === 'ebay') {
       const preset = EBAY_PRESETS[Number(ebayPreset)] ?? EBAY_PRESETS[0]
-      const fixed = Number(ebayFixed)
-      const ad = Number(adRate)
-      const ov = overridePct.trim() === '' ? NaN : Number(overridePct)
+      const fixed = numInput(ebayFixed)
+      const ad = numInput(adRate)
+      const ov = overridePct.trim() === '' ? NaN : toNumStrict(overridePct)
       if (!isFinite(fixed) || fixed < 0 || !isFinite(ad) || ad < 0) {
         return { error: L('errInvalidFeeValues', 'Please enter valid fee values.') }
       }
@@ -85,9 +97,9 @@ export function EbayFeeCalculatorClient() {
     }
 
     // Etsy
-    const pp = Number(etsyProcPct)
-    const pf = Number(etsyProcFixed)
-    const ov = overridePct.trim() === '' ? NaN : Number(overridePct)
+    const pp = numInput(etsyProcPct)
+    const pf = numInput(etsyProcFixed)
+    const ov = overridePct.trim() === '' ? NaN : toNumStrict(overridePct)
     if (!isFinite(pp) || pp < 0 || !isFinite(pf) || pf < 0) {
       return { error: L('errInvalidProcessingValues', 'Please enter valid payment processing values.') }
     }
@@ -111,10 +123,11 @@ export function EbayFeeCalculatorClient() {
   const summary = useMemo(() => {
     if ('error' in parsed) return `${L('summaryErrorPrefix', 'Fee calculator: ')}${parsed.error}`
     const name = parsed.platform === 'ebay' ? 'eBay' : 'Etsy'
+    // 与 parsed 同口径的 numInput 解析:粘贴 "$1,234.56" 后摘要不再显示 "—" 或 NaN
     return [
       `${name} ${L('summaryTitle', 'Fee Calculation Summary')}`,
-      `  ${L('sSoldPrice', 'Sold price: ')}${fmtMoney(Number(price))} + ${fmtMoney(Number(shipCharged))} ${L('shippingCharged', 'shipping charged')}`,
-      `  ${L('sItemCost', 'Item cost: ')}${fmtMoney(Number(itemCost))}  •  ${L('sYourShippingCost', 'Your shipping cost: ')}${fmtMoney(Number(shipCost))}`,
+      `  ${L('sSoldPrice', 'Sold price: ')}${fmtMoney(numInput(price))} + ${fmtMoney(numInput(shipCharged))} ${L('shippingCharged', 'shipping charged')}`,
+      `  ${L('sItemCost', 'Item cost: ')}${fmtMoney(numInput(itemCost))}  •  ${L('sYourShippingCost', 'Your shipping cost: ')}${fmtMoney(numInput(shipCost))}`,
       L('results', 'Results:'),
       `  ${L('sTotalFees', 'Total fees: ')}${fmtMoney(parsed.totalFees)}`,
       `  ${L('sNetPayout', 'Net payout: ')}${fmtMoney(parsed.payout)}`,

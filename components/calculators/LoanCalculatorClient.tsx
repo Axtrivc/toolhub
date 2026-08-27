@@ -8,6 +8,7 @@ import { yearlyBalanceSeries } from '@/components/charts/chartKit'
 import { LoadSampleButton } from '@/components/LoadSampleButton'
 import { ResultActions } from '@/components/ResultActions'
 import { getCalculatorSample } from '@/lib/tool-samples'
+import { toNumStrict } from '@/lib/format'
 import { useApp } from '@/components/providers/AppProviders'
 import { tui } from '@/lib/i18n/tool-l10n'
 
@@ -81,10 +82,16 @@ export function LoanCalculatorClient() {
   // 展示区是否展开全部期数(默认只显示前 12 期)
   const [showAll, setShowAll] = useState(false)
 
+  // 数值解析统一走 toNumStrict(粘贴宽容:"$20,000"/"7.5%" 直接可用);
+  // 空串/非法 → NaN → result null 走空态提示,与旧 Number() 语义一致
+  const amountN = toNumStrict(amount)
+  const rateN = toNumStrict(rate)
+  const yearsN = toNumStrict(years)
+
   const result = useMemo(() => {
-    const p = Number(amount)
-    const r = Number(rate)
-    const y = Number(years)
+    const p = amountN
+    const r = rateN
+    const y = yearsN
     // 年限过短(y < 1/12 ⇒ months = Math.round(0.04×12) = 0)会导致除零 → Infinity/NaN。
     // 要求 months >= 1,即 years >= 1/12(约 0.0833 年),否则显示空结果提示。
     if (p <= 0 || y < 1 / 12 || !isFinite(p) || !isFinite(r) || !isFinite(y)) return null
@@ -93,7 +100,7 @@ export function LoanCalculatorClient() {
     if (y > 50) return { error: L('errTermTooLong', 'Loan term is too long — 50 years (600 months) maximum.') }
     return calcLoan(p, r, y)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [amount, rate, years, locale])
+  }, [amountN, rateN, yearsN, locale])
 
   // 一键加载示例(典型房贷:$400k / 6.8% / 30 年),数据来自 lib/tool-samples.ts
   const handleLoadSample = useCallback(() => {
@@ -114,7 +121,7 @@ export function LoanCalculatorClient() {
     }
     return [
       L('summaryTitle', 'Loan Calculation Summary'),
-      `  ${L('sLoanAmount', 'Loan amount:')} $${Number(amount).toLocaleString(localeTag)}`,
+      `  ${L('sLoanAmount', 'Loan amount:')} $${amountN.toLocaleString(localeTag)}`,
       `  ${L('sAnnualRate', 'Annual rate:')} ${rate}%`,
       `  ${L('sTerm', 'Term:')} ${years} ${L('yearsSuffix', 'years')} (${result.months} ${L('months', 'months')})`,
       L('sResults', 'Results:'),
@@ -123,14 +130,14 @@ export function LoanCalculatorClient() {
       `  ${L('sTotalPaid', 'Total paid:')} ${fmtMoney(result.totalPaid)}`,
     ].join('\n')
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [result, amount, rate, years, locale])
+  }, [result, amountN, rate, years, locale])
 
   // CSV 导出:输入 + 结果 + 完整还款明细(全部期数,与下方展示区的"显示全部"无关)
   const csvContent = useMemo(() => {
     if (!result || 'error' in result) return summary
     const rows: string[][] = [
       [L('csvField', 'Field'), L('csvValue', 'Value')],
-      [L('csvLoanAmount', 'Loan amount'), `$${Number(amount).toLocaleString(localeTag)}`],
+      [L('csvLoanAmount', 'Loan amount'), `$${amountN.toLocaleString(localeTag)}`],
       [L('csvAnnualRate', 'Annual rate'), `${rate}%`],
       [L('csvTermYears', 'Term (years)'), years],
       [L('sMonthlyPayment', 'Monthly payment'), fmtMoney(result.monthlyPayment)],
@@ -156,7 +163,7 @@ export function LoanCalculatorClient() {
       .map((r) => r.map((c) => (/[",\n]/.test(c) ? `"${c.replace(/"/g, '""')}"` : c)).join(','))
       .join('\n')
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [result, amount, rate, years, summary, locale])
+  }, [result, amountN, rate, years, summary, locale])
 
   // 展示区默认只显示前 12 期,可切换显示全部(完整表始终可经下方 Download 导出 CSV)
   const displaySchedule =

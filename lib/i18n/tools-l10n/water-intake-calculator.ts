@@ -97,7 +97,7 @@ export const waterIntakeCalculatorL10n: ToolL10n = {
       zoneLow: 'Unter der Empfehlung',
       zoneTypical: 'Üblich ausreichend',
       zoneActive: 'Aktiver Lebensstil',
-      zoneHigh: 'Überüblich',
+      zoneHigh: 'Über dem Üblichen',
       outCups: 'In Tassen (250 ml)',
       outOz: 'In Unzen (US)',
       emptyState: 'Gib Gewicht, Bewegung und Klima ein, um deinen täglichen Wasserbedarf zu schätzen',

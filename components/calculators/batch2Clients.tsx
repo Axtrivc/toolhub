@@ -103,6 +103,8 @@ export const VolumeConverterClient = makeUnitConverter({
 
 export const AverageCalculatorClient = makeCalculatorClient({
   slug: 'average-calculator',
+  // B3 URL 分享:数字列表无敏感信息,?numbers=12,15,18 可直接分享结果链接
+  urlState: true,
   inputs: [
     {
       key: 'numbers',

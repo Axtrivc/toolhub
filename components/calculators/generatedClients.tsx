@@ -16,6 +16,7 @@ import { tui } from '@/lib/i18n/tool-l10n'
 // ───────────────────────────────────────────
 export const TipCalculatorClient = makeCalculatorClient({
   slug: 'tip-calculator',
+  urlState: true,
   inputs: [
     { key: 'bill', label: 'Bill amount', suffix: '$', default: '50', placeholder: '50.00', slider: { min: 0, max: 500, step: 5 } },
     { key: 'tipPct', label: 'Tip percentage', suffix: '%', default: '18', slider: { min: 0, max: 40, step: 1 } },
@@ -78,6 +79,7 @@ export const TipCalculatorClient = makeCalculatorClient({
 // ───────────────────────────────────────────
 export const DiscountCalculatorClient = makeCalculatorClient({
   slug: 'discount-calculator',
+  urlState: true,
   inputs: [
     { key: 'price', label: 'Original price', suffix: '$', default: '80', slider: { min: 0, max: 2000, step: 10 } },
     { key: 'discount', label: 'Discount', suffix: '%', default: '25', slider: { min: 0, max: 100, step: 1 } },
@@ -135,6 +137,7 @@ export const DiscountCalculatorClient = makeCalculatorClient({
 // ───────────────────────────────────────────
 export const SalesTaxCalculatorClient = makeCalculatorClient({
   slug: 'sales-tax-calculator',
+  urlState: true,
   inputs: [
     { key: 'amount', label: 'Amount', suffix: '$', default: '100', slider: { min: 0, max: 2000, step: 10 } },
     { key: 'rate', label: 'Tax rate', suffix: '%', default: '8.25', slider: { min: 0, max: 20, step: 0.25 } },

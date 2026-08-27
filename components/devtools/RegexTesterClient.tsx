@@ -278,7 +278,7 @@ export function RegexTesterClient() {
                 aria-pressed={active}
                 title={L(key, fb)}
                 onClick={() => toggleFlag(flag)}
-                className={`rounded-md border px-2 py-0.5 font-mono text-[11px] transition ${
+                className={`rounded-md border px-2.5 py-1.5 font-mono text-[11px] transition ${
                   active
                     ? 'border-blue-200 bg-blue-50 text-blue-700 dark:border-blue-800 dark:bg-blue-950/50 dark:text-blue-300'
                     : 'text-slate-400 hover:text-slate-600 dark:text-slate-500 dark:hover:text-slate-300'

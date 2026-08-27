@@ -28,18 +28,19 @@ export const RomanNumeralConverterClient = makeCalculatorClient({
     { key: 'result', label: 'Converted value', highlight: true },
     { key: 'breakdown', label: 'Breakdown' },
   ],
-  compute: (v) => {
+  compute: (v, locale) => {
+    const T = (key: string, fb: string) => tui('roman-numeral-converter', locale, key, fb)
     const numRaw = v.num.trim()
     const romRaw = v.roman.trim().toUpperCase()
     // 两边都填 → 要求用户只填一边,避免歧义
     if (numRaw && romRaw) {
-      return { result: '⚠️ Fill in only one field', breakdown: '—' }
+      return { result: `⚠️ ${T('errBothFilled', 'Fill in only one field')}`, breakdown: '—' }
     }
     // 数字 → 罗马
     if (numRaw) {
       const n = Number(numRaw)
       if (!Number.isInteger(n) || n < 1 || n > 3999) {
-        return { result: '⚠️ Enter a whole number from 1 to 3999', breakdown: '—' }
+        return { result: `⚠️ ${T('errRange', 'Enter a whole number from 1 to 3999')}`, breakdown: '—' }
       }
       let rest = n
       let roman = ''
@@ -56,7 +57,7 @@ export const RomanNumeralConverterClient = makeCalculatorClient({
     // 罗马 → 数字
     if (romRaw) {
       if (!/^[MDCLXVI]+$/.test(romRaw)) {
-        return { result: '⚠️ Invalid Roman numeral (use I V X L C D M)', breakdown: '—' }
+        return { result: `⚠️ ${T('errChars', 'Invalid Roman numeral (use I V X L C D M)')}`, breakdown: '—' }
       }
       const values: Record<string, number> = { I: 1, V: 5, X: 10, L: 50, C: 100, D: 500, M: 1000 }
       let total = 0
@@ -75,7 +76,11 @@ export const RomanNumeralConverterClient = makeCalculatorClient({
         }
       }
       if (canonical !== romRaw || total < 1 || total > 3999) {
-        return { result: `⚠️ Not a valid standard-form numeral${total >= 1 && total <= 3999 ? ` (did you mean ${canonical}?)` : ''}`, breakdown: '—' }
+        const base = T('errNonCanonical', 'Not a valid standard-form numeral')
+        const hint = total >= 1 && total <= 3999
+          ? ` ${T('errDidYouMean', '(did you mean {c}?)').replace('{c}', canonical)}`
+          : ''
+        return { result: `⚠️ ${base}${hint}`, breakdown: '—' }
       }
       return { result: String(total), breakdown: `${romRaw} → ${total}` }
     }
@@ -114,9 +119,20 @@ const RACE_DISTANCES_KM: [string, number][] = [
 
 export const PaceCalculatorClient = makeCalculatorClient({
   slug: 'pace-calculator',
+  urlState: true,
+  // 常见比赛距离一键填充(E2/chips):全部按 6:00/km 的新手友好水平
+  // (半马 21.0975×360=7595s→2:06:35;全马 42.195×360=15190s→4:13:10)
+  presets: [
+    { label: '5K · 30:00', values: { distance: '5', time: '30:00' } },
+    { label: '10K · 1:00:00', values: { distance: '10', time: '1:00:00' } },
+    { label: 'Half marathon · 2:06:35', values: { distance: '21.0975', time: '2:06:35' } },
+    { label: 'Marathon · 4:13:10', values: { distance: '42.195', time: '4:13:10' } },
+  ],
   inputs: [
     { key: 'distance', label: 'Distance', suffix: 'km', default: '10', slider: { min: 0.5, max: 50, step: 0.5 } },
-    { key: 'time', label: 'Finish time', default: '50:00', placeholder: 'h:mm:ss or mm:ss' },
+    // type:'text' 必须显式声明:时长 "50:00" 不是数值,走默认 number 输入框会被
+    // 浏览器清洗成空串(出厂默认显示不出来、用户也输入不了带冒号的成绩)
+    { key: 'time', label: 'Finish time', type: 'text', default: '50:00', placeholder: 'h:mm:ss or mm:ss' },
     { key: 'unit', label: 'Pace unit', default: 'km', options: [
       { label: 'Per kilometer', value: 'km' },
       { label: 'Per mile', value: 'mile' },

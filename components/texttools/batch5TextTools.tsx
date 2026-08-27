@@ -42,13 +42,27 @@ export function HashGeneratorClient() {
   }
 
   return (
-    <div className="space-y-6">
+    // form 包裹:D3 单按钮工具 Enter 直接触发生成(移动端免点击)
+    <form
+      className="space-y-6"
+      onSubmit={(e) => {
+        e.preventDefault()
+        generate()
+      }}
+    >
       <div>
         <label htmlFor="hash-input" className="mb-2 block text-sm font-medium text-slate-700 dark:text-slate-300">{L('textToHash', 'Text to hash')}</label>
         <textarea
           id="hash-input"
           value={input}
           onChange={(e) => setInput(e.target.value)}
+          onKeyDown={(e) => {
+            // D3:textarea 里裸 Enter 是换行,Ctrl/Enter ⌘Enter 才提交(文本工具惯例)
+            if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+              e.preventDefault()
+              if (!loading && input) generate()
+            }
+          }}
           rows={4}
           className="w-full rounded-lg border border-slate-300 p-3 font-mono text-sm outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200 dark:border-slate-600 dark:bg-slate-800/50 dark:text-slate-100"
         />
@@ -70,7 +84,7 @@ export function HashGeneratorClient() {
           ))}
         </select>
       </div>
-      <button onClick={generate} disabled={loading || !input} className="btn btn-primary disabled:opacity-50">
+      <button type="submit" disabled={loading || !input} className="btn btn-primary disabled:opacity-50">
         {loading ? L('hashing', 'Hashing…') : L('generateHashes', '# Generate Hashes')}
       </button>
       {error && <p role="alert" className="text-sm text-red-600 dark:text-red-300">{error}</p>}
@@ -86,7 +100,7 @@ export function HashGeneratorClient() {
       <CalculatorNote>
         {L('note', '🔐 Uses SubtleCrypto API (true cryptographic hashing). Pick SHA-256 (default), SHA-384, or SHA-512 — SHA-1 is cryptographically broken and offered for legacy checksums only.')}
       </CalculatorNote>
-    </div>
+    </form>
   )
 }
 

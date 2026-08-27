@@ -79,6 +79,7 @@ export function CalculatorField({
   suffix,
   id,
   step = 'any',
+  inputMode,
 }: {
   label: string
   value: string
@@ -88,6 +89,9 @@ export function CalculatorField({
   suffix?: string
   id: string
   step?: string
+  /** 移动端键盘选择:type="text" 接纯数值时可传 "decimal"/"numeric";
+   *  列表/混合语境不传,保持全键盘。number/date 自带键盘无需设置。 */
+  inputMode?: 'decimal' | 'numeric' | 'text' | 'email' | 'tel' | 'url'
 }) {
   return (
     <div>
@@ -102,6 +106,7 @@ export function CalculatorField({
           onChange={(e) => onChange(e.target.value)}
           placeholder={placeholder}
           step={step}
+          inputMode={inputMode}
           autoComplete="off"
           className={`w-full rounded-lg border p-3 shadow-sm outline-none transition focus:ring-2 ${suffix ? 'pr-16' : ''}`}
           style={{

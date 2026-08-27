@@ -473,7 +473,7 @@ export function YamlToJsonClient() {
               <button
                 type="button"
                 onClick={() => setInput('')}
-                className="-my-1 rounded-md px-2 py-1 text-xs text-slate-400 hover:text-red-500 sm:text-sm"
+                className="-my-1 rounded-md px-2 py-1.5 text-xs text-slate-400 hover:text-red-500 sm:text-sm"
               >
                 {L('clear', 'Clear')}
               </button>
@@ -498,7 +498,7 @@ export function YamlToJsonClient() {
 
       {result.multiDoc && (
         <div className="rounded-lg border border-amber-200 bg-amber-50 p-4 text-sm text-amber-800 dark:border-amber-800 dark:bg-amber-950/50 dark:text-amber-300">
-          ⚠️ {L('multiDocWarning', 'Multiple YAML documents detected (---). Only the first document was converted.')}
+          ⚠️ {L('multiDocWarning', 'Multiple YAML documents detected (---). Only the first document was converted. Remove the extra "---" separators, or convert one document at a time.')}
         </div>
       )}
 

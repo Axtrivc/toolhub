@@ -1,8 +1,10 @@
 'use client'
 
 import { useState, useMemo } from 'react'
+import { CopyButton } from '@/components/CopyButton'
 import { useApp } from '@/components/providers/AppProviders'
 import { tui } from '@/lib/i18n/tool-l10n'
+import { toNum } from '@/lib/format'
 
 /**
  * Aspect Ratio Calculator
@@ -38,12 +40,13 @@ export function AspectRatioClient() {
   // 已知宽 → 高 / 已知高 → 宽
   const computed = useMemo(() => {
     if (ratioW <= 0 || ratioH <= 0) return { width: '', height: '' }
-    const w = parseFloat(width)
-    const h = parseFloat(height)
-    if (width && !isNaN(w) && w > 0) {
+    // B1:走 lib 的宽容解析,"1920 px"/"1,920" 这类粘贴值不再折叠失败
+    const w = toNum(width)
+    const h = toNum(height)
+    if (width && Number.isFinite(w) && w > 0) {
       return { width: String(w), height: String(Math.round((w * ratioH) / ratioW)) }
     }
-    if (height && !isNaN(h) && h > 0) {
+    if (height && Number.isFinite(h) && h > 0) {
       return { width: String(Math.round((h * ratioW) / ratioH)), height: String(h) }
     }
     return { width: '', height: '' }
@@ -105,7 +108,7 @@ export function AspectRatioClient() {
               key={p.label}
               type="button"
               onClick={() => applyPreset(p.w, p.h)}
-              className="rounded-full border px-2.5 py-1 text-xs font-medium transition hover:bg-brand-50 dark:hover:bg-brand-950/40"
+              className="rounded-full border px-2.5 py-1.5 text-xs font-medium transition hover:bg-brand-50 dark:hover:bg-brand-950/40"
               style={{ borderColor: 'rgb(var(--border))', color: 'rgb(var(--text-muted))' }}
             >
               {p.label}
@@ -182,9 +185,12 @@ export function AspectRatioClient() {
         </div>
       </div>
 
-      {/* 结果 */}
+      {/* 结果(C1:与同族工具一致,结果可一键复制 "宽 × 高") */}
       {(computed.width || computed.height) && (
         <div role="status" aria-live="polite" className="rounded-lg border border-blue-100 bg-gradient-to-b from-blue-50/40 to-transparent p-4 dark:border-blue-900/40">
+          <div className="mb-2 flex items-center justify-end">
+            <CopyButton value={`${computed.width} × ${computed.height}`} label={L('copyResult', 'Copy')} />
+          </div>
           <div className="grid grid-cols-2 gap-4 text-center">
             <div>
               <div className="text-xs uppercase text-slate-400">{L('width', 'Width')}</div>

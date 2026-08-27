@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { ResultCard, CalculatorNote } from '../calculator/CalculatorField'
 import { CopyButton } from '../CopyButton'
 import { makeCalculatorClient } from '../calculator/makeCalculatorClient'
+import { PresetChips } from '../calculator/PresetChips'
 import { fmtNum, toNum } from '@/lib/format'
 import { useApp } from '@/components/providers/AppProviders'
 import { tui } from '@/lib/i18n/tool-l10n'
@@ -21,8 +22,14 @@ export function UUIDGeneratorClient() {
   const [uuids, setUuids] = useState<string[]>([])
   const [count, setCount] = useState('5')
 
-  const generate = () => {
-    const n = Math.min(Math.max(1, Number(count) || 1), 100)
+  // 常用量批量档(10/50/100):生成随机串零成本、旧结果可整体丢弃,
+  // 所以点 chip 即按该数量直接重生成——省去"选中数字→重输→点生成"三步。
+  const COUNT_PRESETS = ['10', '50', '100']
+
+  // override 用于预设 chip 单击直出(此时 state 尚未更新,不能读 count);
+  // onClick 处必须 () => generate(),避免把 MouseEvent 当 override 传入
+  const generate = (override?: string) => {
+    const n = Math.min(Math.max(1, Number(override ?? count) || 1), 100)
     const out: string[] = []
     for (let i = 0; i < n; i++) out.push(generateUUID())
     setUuids(out)
@@ -33,9 +40,18 @@ export function UUIDGeneratorClient() {
       <div className="flex flex-wrap items-end gap-3">
         <div>
           <label htmlFor="count" className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>{L('howMany', 'How many')}</label>
-          <input id="count" type="number" min="1" max="100" value={count} onChange={(e) => setCount(e.target.value)} autoComplete="off" className="w-28 rounded-lg border border-[rgb(var(--border-strong))] bg-[rgb(var(--bg-card))] p-3 tabular-nums text-[rgb(var(--text))] shadow-sm outline-none transition focus:ring-2" />
+          <input id="count" type="number" min="1" max="100" value={count} onChange={(e) => setCount(e.target.value)} onKeyDown={(e) => { if (e.key === 'Enter') generate() }} autoComplete="off" className="w-28 rounded-lg border border-[rgb(var(--border-strong))] bg-[rgb(var(--bg-card))] p-3 tabular-nums text-[rgb(var(--text))] shadow-sm outline-none transition focus:ring-2" />
         </div>
-        <button onClick={generate} className="btn btn-primary">{L('generate', '🎲 Generate UUIDs')}</button>
+        <button onClick={() => generate()} className="btn btn-primary">{L('generate', '🎲 Generate UUIDs')}</button>
+        {/* 纯数字标签无需本地化 */}
+        <PresetChips
+          presets={COUNT_PRESETS.map((v) => ({ label: v, values: { count: v } }))}
+          labelOf={(fb) => fb}
+          onApply={(values) => {
+            setCount(values.count ?? count)
+            generate(values.count)
+          }}
+        />
         {uuids.length > 0 && <CopyButton value={uuids.join('\n')} label={L('copyAll', 'Copy all')} />}
       </div>
       {uuids.length > 0 && (
@@ -96,8 +112,10 @@ export function LoremIpsumGeneratorClient() {
   const [startWithLorem, setStartWithLorem] = useState(true)
   const [output, setOutput] = useState('')
 
-  const generate = () => {
-    const n = Math.min(Math.max(1, Number(count) || 1), LOREM_UNIT_MAX[unit])
+  // override 供「换一批」单击直出(此时不能依赖最新 state);onClick 处
+  // 必须 () => generate(),避免把 MouseEvent 当 override 传入
+  const generate = (override?: string) => {
+    const n = Math.min(Math.max(1, Number(override ?? count) || 1), LOREM_UNIT_MAX[unit])
     const randWord = () => LOREM_WORDS[Math.floor(Math.random() * LOREM_WORDS.length)]
     const randSentence = () => {
       const words = 8 + Math.floor(Math.random() * 12)
@@ -146,7 +164,7 @@ export function LoremIpsumGeneratorClient() {
         </div>
         <div>
           <label htmlFor="lorem-count" className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>{L('count', 'Count')}</label>
-          <input id="lorem-count" type="number" min="1" max={LOREM_UNIT_MAX[unit]} value={count} onChange={(e) => setCount(e.target.value)} autoComplete="off" className="w-28 rounded-lg border border-[rgb(var(--border-strong))] bg-[rgb(var(--bg-card))] p-3 tabular-nums text-[rgb(var(--text))] shadow-sm outline-none transition focus:ring-2" />
+          <input id="lorem-count" type="number" min="1" max={LOREM_UNIT_MAX[unit]} value={count} onChange={(e) => setCount(e.target.value)} onKeyDown={(e) => { if (e.key === 'Enter') generate() }} autoComplete="off" className="w-28 rounded-lg border border-[rgb(var(--border-strong))] bg-[rgb(var(--bg-card))] p-3 tabular-nums text-[rgb(var(--text))] shadow-sm outline-none transition focus:ring-2" />
         </div>
         <label className="flex cursor-pointer items-center gap-2 pb-3 text-sm" style={{ color: 'rgb(var(--text-muted))' }}>
           <input
@@ -157,12 +175,25 @@ export function LoremIpsumGeneratorClient() {
           />
           {L('startWithLorem', 'Start with "Lorem ipsum"')}
         </label>
-        <button onClick={generate} className="btn btn-primary">{L('generate', '📝 Generate')}</button>
+        <button onClick={() => generate()} className="btn btn-primary">{L('generate', '📝 Generate')}</button>
         {output && <CopyButton value={output} />}
       </div>
       {output && (
         <div role="status" aria-live="polite" className="whitespace-pre-line rounded-xl border border-[rgb(var(--border))] bg-[rgb(var(--bg-card))] p-4 text-sm leading-relaxed text-[rgb(var(--text-muted))] shadow-sm">
           {output}
+        </div>
+      )}
+      {/* 结果就地换一批:长输出时不必滚回顶部找 Generate(样式同工厂 Reset 按钮) */}
+      {output && (
+        <div>
+          <button
+            type="button"
+            onClick={() => generate()}
+            className="rounded-lg border px-3 py-1.5 text-sm transition-colors hover:bg-slate-100 dark:border-slate-600 dark:hover:bg-slate-800"
+            style={{ borderColor: 'rgb(var(--border-strong))', color: 'rgb(var(--text-muted))' }}
+          >
+            ♻️ {L('regenerate', 'Regenerate')}
+          </button>
         </div>
       )}
       <CalculatorNote>
@@ -262,7 +293,9 @@ export const RectangleCalculatorClient = makeCalculatorClient({
 // ── 标准差计算器 ──
 export const StandardDeviationCalculatorClient = makeCalculatorClient({
   slug: 'standard-deviation-calculator',
-  inputs: [{ key: 'numbers', label: 'Numbers (comma-separated)', default: '4, 8, 15, 16, 23, 42' }],
+  // type:'text' 必须显式声明:缺省渲染 <input type="number">,逗号串会被浏览器
+  // 消毒成空——输入框看着空白、结果却照算,"没算 vs 算了"无从分辨(B2/F3)
+  inputs: [{ key: 'numbers', label: 'Numbers (comma-separated)', default: '4, 8, 15, 16, 23, 42', type: 'text' }],
   outputs: [
     { key: 'mean', label: 'Mean' },
     { key: 'stddev', label: 'Standard deviation (population)', highlight: true },
@@ -309,7 +342,8 @@ export const StandardDeviationCalculatorClient = makeCalculatorClient({
 export const PercentileCalculatorClient = makeCalculatorClient({
   slug: 'percentile-calculator',
   inputs: [
-    { key: 'numbers', label: 'Numbers (comma-separated)', default: '15, 20, 35, 40, 50' },
+    // 同标准差:type:'text' 防 type="number" 把逗号列表消毒成空显示
+    { key: 'numbers', label: 'Numbers (comma-separated)', default: '15, 20, 35, 40, 50', type: 'text' },
     { key: 'p', label: 'Percentile', suffix: '%', default: '90', slider: { min: 0, max: 100, step: 1 } },
   ],
   outputs: [{ key: 'result', label: 'Percentile value', highlight: true }],
@@ -553,18 +587,20 @@ export const UnitPriceCalculatorClient = makeCalculatorClient({
     { key: 'price1', label: 'Price 1', suffix: '$', default: '12.99', slider: { min: 0.5, max: 200, step: 0.5 } },
     { key: 'size1', label: 'Size 1', default: '500', slider: { min: 1, max: 5000, step: 5 } },
     { key: 'unit1', label: 'Unit 1', default: 'g', options: [
-      { label: 'grams (g)', value: 'g' }, { label: 'ml', value: 'ml' },
-      { label: 'count (items)', value: 'ct' }, { label: 'kg', value: 'kg' },
-      { label: 'ounces (oz)', value: 'oz' }, { label: 'pounds (lb)', value: 'lb' },
-      { label: 'liters (l)', value: 'l' }, { label: 'milligrams (mg)', value: 'mg' },
+      // E2 语义排序:重量按量级 → 体积按量级 → 件数收尾,不再大小混排
+      { label: 'grams (g)', value: 'g' }, { label: 'milligrams (mg)', value: 'mg' },
+      { label: 'kilograms (kg)', value: 'kg' }, { label: 'ounces (oz)', value: 'oz' },
+      { label: 'pounds (lb)', value: 'lb' }, { label: 'ml', value: 'ml' },
+      { label: 'liters (l)', value: 'l' }, { label: 'count (items)', value: 'ct' },
     ]},
     { key: 'price2', label: 'Price 2', suffix: '$', default: '19.99', slider: { min: 0.5, max: 200, step: 0.5 } },
     { key: 'size2', label: 'Size 2', default: '750', slider: { min: 1, max: 5000, step: 5 } },
     { key: 'unit2', label: 'Unit 2', default: 'g', options: [
-      { label: 'grams (g)', value: 'g' }, { label: 'ml', value: 'ml' },
-      { label: 'count (items)', value: 'ct' }, { label: 'kg', value: 'kg' },
-      { label: 'ounces (oz)', value: 'oz' }, { label: 'pounds (lb)', value: 'lb' },
-      { label: 'liters (l)', value: 'l' }, { label: 'milligrams (mg)', value: 'mg' },
+      // E2 语义排序:重量按量级 → 体积按量级 → 件数收尾,不再大小混排
+      { label: 'grams (g)', value: 'g' }, { label: 'milligrams (mg)', value: 'mg' },
+      { label: 'kilograms (kg)', value: 'kg' }, { label: 'ounces (oz)', value: 'oz' },
+      { label: 'pounds (lb)', value: 'lb' }, { label: 'ml', value: 'ml' },
+      { label: 'liters (l)', value: 'l' }, { label: 'count (items)', value: 'ct' },
     ]},
   ],
   outputs: [
@@ -588,6 +624,9 @@ export const UnitPriceCalculatorClient = makeCalculatorClient({
       const n1 = u1 / (UNIT_TO_BASE[v.unit1] ?? 1)
       const n2 = u2 / (UNIT_TO_BASE[v.unit2] ?? 1)
       winner = n1 <= n2 ? 'Option 1' : 'Option 2'
+    } else {
+      // 跨家族不再留裸 '—'(D2):说明为何无判定(克和毫升没有公平比较)
+      winner = tui('unit-price-calculator', locale, 'winnerCrossFamily', 'Different units — cannot compare')
     }
     // 单价不足 $0.05 时保留 4 位小数:两位都显示 "$0.03 / g" 时比较结论不可读
     const fmtUnitPrice = (u: number) => (u > 0 && u < 0.05 ? `$${fmtNum(u, 4)}` : fmtUSDValue(u))

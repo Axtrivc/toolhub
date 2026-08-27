@@ -92,7 +92,14 @@ export function RandomNumberGeneratorClient() {
   }
 
   return (
-    <div className="space-y-6">
+    // form 包裹:D3 输入 Min/Max/Count 后按 Enter 直接触发生成(移动端免点击)
+    <form
+      className="space-y-6"
+      onSubmit={(e) => {
+        e.preventDefault()
+        generate()
+      }}
+    >
       <div className="grid grid-cols-1 gap-4 rounded-lg p-4 sm:grid-cols-3" style={{ backgroundColor: 'rgb(var(--bg-subtle))' }}>
         <div>
           <label className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>{L('min', 'Min')}</label>
@@ -112,13 +119,13 @@ export function RandomNumberGeneratorClient() {
         {L('noRepeats', 'No repeats (unique numbers)')}
       </label>
       <div className="flex gap-3">
-        <button onClick={generate} className="btn btn-primary">{L('generate', '🎲 Generate')}</button>
+        <button type="submit" className="btn btn-primary">{L('generate', '🎲 Generate')}</button>
         <CopyButton value={result} disabled={!result} />
       </div>
       <div role="status" aria-live="polite" className="rounded-lg border-2 p-4" style={{ borderColor: 'rgb(var(--primary) / 0.3)', backgroundColor: 'rgb(var(--primary) / 0.06)' }}>
         <code className="font-mono text-lg" style={{ color: 'rgb(var(--primary))' }}>{result || L('clickGenerateHint', 'Click Generate to roll')}</code>
       </div>
-    </div>
+    </form>
   )
 }
 

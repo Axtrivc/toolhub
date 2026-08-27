@@ -34,18 +34,41 @@ export function fmtPct(n: number, digits = 2): string {
   return `${Number(n.toFixed(digits))}%`
 }
 
-/** 安全转 number,空串/非法值返回 0 */
+/** 宽容清洗用户粘贴的数值文本:"$1,200" / "1 200 kg" / "18%" -> "1200"/"1200kg"->…仅剥离
+ *  货币符号、百分号与空白;千分位逗号只剥「恰好跟 3 位数字组」的(如 1,200),
+ *  避免 "1,2" 这类非千分位串被误拼成 12。返回 null 表示无需/无法增强,调用方回退原逻辑。 */
+export function lenientNumeric(s: string): string | null {
+  const cleaned = s.replace(/[$€£¥%\s]/g, '').replace(/(\d),(?=\d{3}(?:\D|$))/g, '$1')
+  return cleaned !== s && cleaned !== '' ? cleaned : null
+}
+
+/** 安全转 number,空串/非法值返回 0。
+ *  粘贴友好:含货币符号/百分号/千分位逗号的输入(lenientNumeric 能修复的)不再折叠为 0。 */
 export function toNum(s: string): number {
   const n = Number(s)
-  return isFinite(n) ? n : 0
+  if (isFinite(n)) return n
+  const fixed = lenientNumeric(s.trim())
+  if (fixed != null) {
+    const v = Number(fixed)
+    if (isFinite(v)) return v
+  }
+  return 0
 }
 
 /** 严格解析 number:空串/非数字/Infinity 一律返回 NaN,由调用方显式识别非法输入。
  *  与 toNum 的区别:toNum 把非法输入静默折叠为 0(等于"本金 $0 的合法结果",
  *  用户看不到任何输入有误的提示);本入口让非法输入显式可见,
- *  新计算器及需要强校验的字段应优先使用。纯函数,可直接单元测试。 */
+ *  新计算器及需要强校验的字段应优先使用。纯函数,可直接单元测试。
+ *  粘贴友好:同 toNum,货币符号/百分号/标准千分位逗号会被剥离后再解析,
+ *  用户从账单复制的 "$1,234.56" 直接可用;其余非法输入仍显式 NaN。 */
 export function toNumStrict(s: string): number {
   if (s.trim() === '') return NaN
   const n = Number(s)
-  return isFinite(n) ? n : NaN
+  if (isFinite(n)) return n
+  const fixed = lenientNumeric(s.trim())
+  if (fixed != null) {
+    const v = Number(fixed)
+    if (isFinite(v)) return v
+  }
+  return NaN
 }

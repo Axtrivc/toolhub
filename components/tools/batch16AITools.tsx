@@ -234,7 +234,7 @@ export function FenceExtractorClient() {
             className="w-24 rounded border px-2 py-1 text-xs" style={selVars} />
           {langs.map((l) => (
             <button key={l} type="button" onClick={() => setFilter(filter === l ? '' : l)} aria-pressed={filter === l}
-              className={`rounded-full border px-2.5 py-0.5 font-mono text-xs transition ${filter === l ? 'border-brand-500 bg-brand-50 text-brand-700 dark:border-brand-500 dark:bg-brand-950/40 dark:text-brand-300' : ''}`}
+              className={`rounded-full border px-2.5 py-1.5 font-mono text-xs transition ${filter === l ? 'border-brand-500 bg-brand-50 text-brand-700 dark:border-brand-500 dark:bg-brand-950/40 dark:text-brand-300' : ''}`}
               style={filter === l ? undefined : { borderColor: 'rgb(var(--border-strong))', color: 'rgb(var(--text-muted))' }}>
               {l}
             </button>

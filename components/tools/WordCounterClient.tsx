@@ -1,9 +1,11 @@
 'use client'
 
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useCallback } from 'react'
 import { useApp } from '@/components/providers/AppProviders'
 import { tui } from '@/lib/i18n/tool-l10n'
 import { countWords, hasCJK } from '@/lib/text-stats'
+import { LoadSampleButton } from '@/components/LoadSampleButton'
+import { CopyButton } from '@/components/CopyButton'
 
 export interface TextStats {
   characters: number
@@ -74,11 +76,18 @@ function formatTime(minutes: number, L: (key: string, fb: string) => string): st
   return `${m} ${L('tMin', 'min')} ${s} ${L('tSec', 'sec')}`
 }
 
+/** 快速示例:几行有代表性的中英混排文本(与 texttools 家族 LoadSample 惯例一致) */
+const SAMPLE = `ToolHub runs entirely in your browser — fast, private, and free.
+Paste any article, essay, or script here to see live statistics.
+这一段是中文示例:统计口径对汉字按字计数,对英文按词计数。`
+
 export function WordCounterClient() {
   const { locale } = useApp()
   const L = (key: string, fb: string) => tui('word-counter', locale, key, fb)
 
   const [text, setText] = useState('')
+
+  const handleLoadSample = useCallback(() => setText(SAMPLE), [])
 
   const stats = useMemo(() => analyzeText(text), [text])
 
@@ -91,6 +100,9 @@ export function WordCounterClient() {
     { label: L('readingTime', 'Reading Time'), value: formatTime(stats.readingTime, L) },
     { label: L('speakingTime', 'Speaking Time'), value: formatTime(stats.speakingTime, L) },
   ]
+
+  // 统计摘要纯文本(复用已本地化的标签,零新增 key):词数常被贴进简报/SEO 工单(C1)
+  const summary = metricCards.map((m) => `${m.label}: ${m.value}`).join('\n')
 
   return (
     <div className="space-y-6">
@@ -123,15 +135,19 @@ export function WordCounterClient() {
           <label htmlFor="text-input" className="text-sm font-medium text-slate-700 dark:text-slate-300">
             {L('yourText', 'Your text')}
           </label>
-          {text && (
-            <button
-              type="button"
-              onClick={() => setText('')}
-              className="-my-1 rounded-md px-2 py-1 text-xs text-slate-400 hover:text-red-500 dark:text-slate-500 dark:hover:text-red-400 sm:text-sm"
-            >
-              {L('clear', 'Clear')}
-            </button>
-          )}
+          <div className="flex items-center gap-2">
+            <LoadSampleButton onLoad={handleLoadSample} variant="compact" />
+            <CopyButton value={summary} disabled={!text} />
+            {text && (
+              <button
+                type="button"
+                onClick={() => setText('')}
+                className="-my-1 rounded-md px-2 py-1.5 text-xs text-slate-400 hover:text-red-500 dark:text-slate-500 dark:hover:text-red-400 sm:text-sm"
+              >
+                {L('clear', 'Clear')}
+              </button>
+            )}
+          </div>
         </div>
         <textarea
           id="text-input"

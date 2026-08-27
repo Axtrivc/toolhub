@@ -104,7 +104,7 @@ export const RemoveDuplicatesClient = makeTextTool({
     }
     return result.join('\n')
   },
-  note: '🗑️ Removes duplicate lines while preserving order. Great for cleaning up lists.',
+  note: '🗑️ Removes duplicate lines while preserving order. Lines are compared after trimming surrounding spaces; comparison is case-sensitive ("Apple" ≠ "apple"). Great for cleaning up lists.',
 })
 
 export const SortLinesClient = makeTextTool({
@@ -141,7 +141,7 @@ export const SortLinesClient = makeTextTool({
       .sort((a, b) => (desc ? cmp(b, a) : cmp(a, b)))
       .join('\n')
   },
-  note: '🔤 Sorts lines alphabetically. Empty lines are removed. Optional instructions after " ||| ": numeric (natural number order, e.g. 9 before 10), desc (Z → A), or "numeric,desc".',
+  note: '🔤 Sorts lines alphabetically. Empty lines are removed. Equal lines keep their original relative order (stable sort). Optional instructions after " ||| ": numeric (natural number order, e.g. 9 before 10), desc (Z → A), or "numeric,desc".',
 })
 
 export const RemoveLineBreaksClient = makeTextTool({
@@ -161,31 +161,46 @@ export function FindReplaceClient() {
   const { locale } = useApp()
   // 取本地化 UI 串;缺失回退英文(SSR 恒英文)
   const L = (key: string, fb: string) => tui('find-and-replace', locale, key, fb)
-  const [text, setText] = useState('')
-  const [findStr, setFindStr] = useState('')
-  const [replaceStr, setReplaceStr] = useState('')
+  // B2 冷启动示例:打开即见替换效果(find/replace 预填 fox→cat),开局非纯空白。
+  // 属示例数据(同计算器默认值惯例),不随语言切换;避免 zh 样例里查无 "fox" 反而像坏掉。
+  const [text, setText] = useState(
+    'The quick brown fox jumps over the lazy dog.\nThe dog chased the fox, but the fox was too fast.',
+  )
+  const [findStr, setFindStr] = useState('fox')
+  const [replaceStr, setReplaceStr] = useState('cat')
   const [caseSensitive, setCaseSensitive] = useState(false)
   const [useRegex, setUseRegex] = useState(false)
 
-  const { output, regexError, tooLong } = useMemo(() => {
-    if (!findStr) return { output: text, regexError: false, tooLong: false }
+  const { output, regexError, tooLong, matchCount } = useMemo(() => {
+    if (!findStr) return { output: text, regexError: false, tooLong: false, matchCount: 0 }
     // 正则路径防灾难性回溯:嵌套量词 + 大文本会冻死标签页
     // (字面路径已转义元字符,线性安全;与 TextDiff 的输入上限同思路)
     if (useRegex && text.length > 100_000) {
-      return { output: '', regexError: false, tooLong: true }
+      return { output: '', regexError: false, tooLong: true, matchCount: 0 }
     }
     const flags = caseSensitive ? 'g' : 'gi'
     if (useRegex) {
       try {
-        return { output: text.replace(new RegExp(findStr, flags), replaceStr), regexError: false, tooLong: false }
+        const re = new RegExp(findStr, flags)
+        return {
+          output: text.replace(re, replaceStr),
+          regexError: false,
+          tooLong: false,
+          matchCount: text.match(re)?.length ?? 0,
+        }
       } catch {
         // 非法正则:友好报错而非抛出
-        return { output: '', regexError: true, tooLong: false }
+        return { output: '', regexError: true, tooLong: false, matchCount: 0 }
       }
     }
     // 字面查找:查找词转义正则元字符;替换串的 $ 转成 $$ 保持字面语义($&/$1 不被解释)
     const re = new RegExp(findStr.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), flags)
-    return { output: text.replace(re, replaceStr.replace(/\$/g, '$$$$')), regexError: false, tooLong: false }
+    return {
+      output: text.replace(re, replaceStr.replace(/\$/g, '$$$$')),
+      regexError: false,
+      tooLong: false,
+      matchCount: text.match(re)?.length ?? 0,
+    }
   }, [text, findStr, replaceStr, caseSensitive, useRegex])
 
   const inputStyle = {
@@ -224,7 +239,7 @@ export function FindReplaceClient() {
             <button
               type="button"
               onClick={() => setText('')}
-              className="-my-1 rounded-md px-2 py-1 text-xs text-slate-500 dark:text-slate-400 hover:text-red-500 sm:text-sm"
+              className="-my-1 rounded-md px-2 py-1.5 text-xs text-slate-500 dark:text-slate-400 hover:text-red-500 sm:text-sm"
             >
               {L('clear', 'Clear')}
             </button>
@@ -301,7 +316,15 @@ export function FindReplaceClient() {
           <label className="text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
             {L('outputLabel', 'Result')}
           </label>
-          <CopyButton value={output} disabled={!output} />
+          <div className="flex items-center gap-3">
+            {/* 替换全部后的反馈计数:替换了几处一眼可见(0 处也明确提示) */}
+            {findStr && !regexError && !tooLong && (
+              <span className="text-xs font-medium tabular-nums" style={{ color: 'rgb(var(--text-faint))' }}>
+                {L('matchCount', 'Matches: {n}').replace('{n}', matchCount.toLocaleString(numberLocale))}
+              </span>
+            )}
+            <CopyButton value={output} disabled={!output} />
+          </div>
         </div>
         {regexError ? (
           <p

@@ -24,12 +24,21 @@ import { tui, tuiCalc } from '@/lib/i18n/tool-l10n'
 const CM_PER_IN = 2.54
 const LB_PER_KG = 0.45359237
 
+/** B1 粘贴宽容化解析:与旧 Number() 逐点同义(空串按 0、非法返回 NaN),
+ * 额外容忍从账单复制的带格式数字("$1,200"/"1 200"/"18%")。
+ * 英制 ft+in 组合字段的半填态(只填了英尺)因此保持可实时出结果。 */
+function parseField(s: string): number {
+  return s.trim() === '' ? 0 : toNumStrict(s)
+}
+
 type Unit = 'metric' | 'imperial'
 
 /** 输入框字符串换算:空/非法/非正值保留空串,避免切换单位把 '' 变成 '0' */
 function convertInput(s: string, factor: number): string {
   if (s.trim() === '') return ''
-  const n = Number(s)
+  // B1 粘贴宽容化:toNumStrict 与原 Number 同样对非法输入返回 NaN(拒绝语义不变),
+  // 但 "$1,200"/"1 200"/"18%" 这类带格式的复制数字可直接换算
+  const n = toNumStrict(s)
   if (!isFinite(n) || n <= 0) return ''
   return String(Number((n * factor).toFixed(1)))
 }
@@ -173,9 +182,10 @@ export function CalorieCalculatorClient() {
   }, [])
 
   const result = useMemo(() => {
-    const w = unit === 'metric' ? Number(weight) : Number(weight) * LB_PER_KG
-    const h = unit === 'metric' ? Number(height) : (Number(heightFt) * 12 + Number(heightIn)) * CM_PER_IN
-    const a = Number(age)
+    // B1:parseField 与旧 Number() 逐点同义(空串=0、非法=NaN),并额外容忍 "$1,200"/"1 200" 式粘贴
+    const w = unit === 'metric' ? parseField(weight) : parseField(weight) * LB_PER_KG
+    const h = unit === 'metric' ? parseField(height) : (parseField(heightFt) * 12 + parseField(heightIn)) * CM_PER_IN
+    const a = parseField(age)
     if (w <= 0 || h <= 0 || a <= 0 || !isFinite(w) || !isFinite(h) || !isFinite(a)) return null
     // Mifflin-St Jeor 公式
     const bmr = gender === 'male'
@@ -361,9 +371,10 @@ export function BMRCalculatorClient() {
   }, [])
 
   const result = useMemo(() => {
-    const w = unit === 'metric' ? Number(weight) : Number(weight) * LB_PER_KG
-    const h = unit === 'metric' ? Number(height) : (Number(heightFt) * 12 + Number(heightIn)) * CM_PER_IN
-    const a = Number(age)
+    // B1:parseField 与旧 Number() 逐点同义(空串=0、非法=NaN),并额外容忍 "$1,200"/"1 200" 式粘贴
+    const w = unit === 'metric' ? parseField(weight) : parseField(weight) * LB_PER_KG
+    const h = unit === 'metric' ? parseField(height) : (parseField(heightFt) * 12 + parseField(heightIn)) * CM_PER_IN
+    const a = parseField(age)
     if (w <= 0 || h <= 0 || a <= 0 || !isFinite(w) || !isFinite(h) || !isFinite(a)) return null
     // Mifflin-St Jeor 公式
     const bmr = gender === 'male'
@@ -510,8 +521,9 @@ export function WaterIntakeCalculatorClient() {
   }, [])
 
   const result = useMemo(() => {
-    const kg = unit === 'metric' ? Number(weight) : Number(weight) * LB_PER_KG
-    const exercise = Number(activity)
+    // B1:体重走 parseField(空串=0 被守卫拦截);运动量空串亦按 0 分钟计(旧语义)
+    const kg = unit === 'metric' ? parseField(weight) : parseField(weight) * LB_PER_KG
+    const exercise = parseField(activity)
     if (kg <= 0 || !isFinite(kg) || !isFinite(exercise) || exercise < 0) return null
     // 基础 35ml/kg + 运动 12ml/min×30min
     let ml = kg * 35 + exercise * 12
@@ -654,7 +666,8 @@ export function IdealWeightCalculatorClient() {
   }, [])
 
   const result = useMemo(() => {
-    const totalIn = unit === 'metric' ? Number(height) / CM_PER_IN : Number(heightFt) * 12 + Number(heightIn)
+    // B1:身高解析同 calorie/bmr —— parseField 与旧 Number() 同义且容忍带格式数字
+    const totalIn = unit === 'metric' ? parseField(height) / CM_PER_IN : parseField(heightFt) * 12 + parseField(heightIn)
     if (!isFinite(totalIn) || totalIn <= 0) return null
     // 身高换算成英寸、减去 5 英尺(60 英寸)。低于 5 英尺时为负值,直接代入公式
     // (Devine 1974 原式:50 + 2.3 × 每超 1 英寸;不足部分线性递减,不钳制为 0)
@@ -784,6 +797,7 @@ export function IdealWeightCalculatorClient() {
 
 export const FractionCalculatorClient = makeCalculatorClient({
   slug: 'fraction-calculator',
+  urlState: true,
   inputs: [
     { key: 'num1', label: 'Numerator 1', default: '1', slider: { min: -20, max: 20, step: 1 } },
     { key: 'den1', label: 'Denominator 1', default: '2', slider: { min: 1, max: 20, step: 1 } },
@@ -866,6 +880,7 @@ export const FractionCalculatorClient = makeCalculatorClient({
 
 export const RatioCalculatorClient = makeCalculatorClient({
   slug: 'ratio-calculator',
+  urlState: true,
   inputs: [
     { key: 'a', label: 'A', default: '3', slider: { min: 1, max: 100, step: 1 } },
     { key: 'b', label: 'B', default: '4', slider: { min: 1, max: 100, step: 1 } },
@@ -912,6 +927,7 @@ export const RatioCalculatorClient = makeCalculatorClient({
 
 export const LCMGcdCalculatorClient = makeCalculatorClient({
   slug: 'lcm-gcd-calculator',
+  urlState: true,
   inputs: [
     { key: 'numbers', label: 'Numbers (comma-separated)', default: '12, 18, 24', type: 'text' },
   ],
@@ -956,6 +972,7 @@ export const LCMGcdCalculatorClient = makeCalculatorClient({
 
 export const MarkupCalculatorClient = makeCalculatorClient({
   slug: 'markup-calculator',
+  urlState: true,
   inputs: [
     { key: 'cost', label: 'Cost', suffix: '$', default: '50' },
     { key: 'markup', label: 'Markup', suffix: '%', default: '40', slider: { min: 0, max: 300, step: 5 } },
@@ -1202,6 +1219,7 @@ export const MortgageCalculatorClient = makeCalculatorClient({
 
 export const HourlyToSalaryCalculatorClient = makeCalculatorClient({
   slug: 'hourly-to-salary-calculator',
+  urlState: true,
   inputs: [
     { key: 'hourly', label: 'Hourly wage', suffix: '$/hr', default: '25', slider: { min: 5, max: 200, step: 0.5 } },
     { key: 'hours', label: 'Hours per week', default: '40', slider: { min: 1, max: 80, step: 1 } },
@@ -1257,6 +1275,7 @@ export const HourlyToSalaryCalculatorClient = makeCalculatorClient({
 
 export const ROIcalculatorClient = makeCalculatorClient({
   slug: 'roi-calculator',
+  urlState: true,
   inputs: [
     { key: 'initial', label: 'Initial investment', suffix: '$', default: '10000', slider: { min: 0, max: 100000, step: 500 } },
     { key: 'final', label: 'Final value', suffix: '$', default: '13500', slider: { min: 0, max: 200000, step: 500 } },
@@ -1319,6 +1338,7 @@ export const ROIcalculatorClient = makeCalculatorClient({
 
 export const CreditCardPayoffCalculatorClient = makeCalculatorClient({
   slug: 'credit-card-payoff-calculator',
+  urlState: true,
   inputs: [
     { key: 'balance', label: 'Current balance', suffix: '$', default: '5000' },
     { key: 'apr', label: 'Annual rate (APR)', suffix: '%', default: '19.99', slider: { min: 0, max: 36, step: 0.1 } },
@@ -1438,6 +1458,7 @@ export const CreditCardPayoffCalculatorClient = makeCalculatorClient({
 
 export const IncomeTaxEstimatorClient = makeCalculatorClient({
   slug: 'income-tax-estimator',
+  urlState: true,
   inputs: [
     { key: 'income', label: 'Annual income', suffix: '$', default: '75000' },
     { key: 'filing', label: 'Filing status', default: 'single', options: [

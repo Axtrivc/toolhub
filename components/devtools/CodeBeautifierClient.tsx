@@ -1,8 +1,9 @@
 'use client'
 
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useCallback } from 'react'
 import { CopyButton } from '@/components/CopyButton'
 import { ResultActions } from '@/components/ResultActions'
+import { LoadSampleButton } from '@/components/LoadSampleButton'
 import { useApp } from '@/components/providers/AppProviders'
 import { tui } from '@/lib/i18n/tool-l10n'
 
@@ -540,6 +541,9 @@ export function CodeBeautifierClient() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [input, lang, indent, locale])
 
+  // 各语言的示例:直接复用 placeholder 单行片段(足够代表性,载入即出格式化结果)
+  const handleLoadSample = useCallback(() => setInput(PLACEHOLDER[lang]), [lang])
+
   return (
     <div className="space-y-5">
       {/* 语言与缩进选择 */}
@@ -577,11 +581,14 @@ export function CodeBeautifierClient() {
         </div>
       </div>
 
-      {/* 输入区 */}
+      {/* 输入区(与 curl/json-to-ts 同款:右上角 Load Sample,冷启动一键出结果) */}
       <div>
-        <label htmlFor="beautify-input" className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
-          {L('pasteYour', 'Paste your')} {LANGS.find((l) => l.key === lang)?.label} {L('code', 'code')}
-        </label>
+        <div className="mb-1.5 flex items-center justify-between">
+          <label htmlFor="beautify-input" className="block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
+            {L('pasteYour', 'Paste your')} {LANGS.find((l) => l.key === lang)?.label} {L('code', 'code')}
+          </label>
+          <LoadSampleButton onLoad={handleLoadSample} variant="compact" />
+        </div>
         <textarea
           id="beautify-input"
           value={input}

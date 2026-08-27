@@ -6,6 +6,7 @@ import { LoadSampleButton } from '@/components/LoadSampleButton'
 import { ResultActions } from '@/components/ResultActions'
 import { useApp } from '@/components/providers/AppProviders'
 import { tui } from '@/lib/i18n/tool-l10n'
+import { toNumStrict } from '@/lib/format'
 
 /**
  * SRT Subtitle Shifter —— 字幕时间轴平移/清洗
@@ -157,7 +158,8 @@ export function SrtSubtitleShiftClient() {
 
   const offsetSeconds = useMemo(() => {
     if (offsetStr.trim() === '') return 0
-    const n = parseFloat(offsetStr)
+    // toNumStrict:空串外仍需严格数字;非法 → null 触发下方显式错误(与旧 parseFloat+isFinite 语义一致)
+    const n = toNumStrict(offsetStr)
     return Number.isFinite(n) ? n : null
   }, [offsetStr])
 
@@ -211,7 +213,7 @@ export function SrtSubtitleShiftClient() {
                   setInput('')
                   setFileError(false)
                 }}
-                className="-my-1 rounded-md px-2 py-1 text-xs hover:text-red-500 sm:text-sm"
+                className="-my-1 rounded-md px-2 py-1.5 text-xs hover:text-red-500 sm:text-sm"
                 style={{ color: 'rgb(var(--text-faint))' }}
               >
                 {L('clear', 'Clear')}
@@ -249,6 +251,9 @@ export function SrtSubtitleShiftClient() {
             className="w-40 rounded-lg border p-3 font-mono text-sm shadow-sm outline-none transition focus:ring-2"
             style={inputStyle}
           />
+          <p className="mt-1 text-xs" style={{ color: 'rgb(var(--text-faint))' }}>
+            {L('offsetHint', 'Negative = subtitles appear earlier; positive = later.')}
+          </p>
         </div>
         <label className="flex cursor-pointer items-center gap-2 pb-2 text-sm" style={{ color: 'rgb(var(--text))' }}>
           <input type="checkbox" checked={clamp} onChange={(e) => setClamp(e.target.checked)} className="h-4 w-4 accent-blue-600" />

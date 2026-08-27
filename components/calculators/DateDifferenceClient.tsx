@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useMemo } from 'react'
 import { ResultCard, CalculatorNote } from '../calculator/CalculatorField'
+import { ResultActions } from '../ResultActions'
 import { useApp } from '@/components/providers/AppProviders'
 import { tui } from '@/lib/i18n/tool-l10n'
 import { calendarDaysBetween } from '@/lib/date-utils'
@@ -90,6 +91,17 @@ export function DateDifferenceClient() {
   }, [start, end, locale])
 
   const fmt = (n: number) => n.toLocaleString('en-US')
+
+  // 结果摘要(纯文本):仅在有有效结果时提供 Copy/Download 通道(口径同家族其余工具)
+  const summary =
+    result && !('error' in result)
+      ? [
+          `${L('startDate', 'Start date')}: ${start}`,
+          `${L('endDate', 'End date')}: ${end}`,
+          `${L('totalDays', 'Total days')}: ${fmt(result.totalDays)}`,
+          `${L('businessDays', 'Business days')} (${L('monFri', 'Mon–Fri')}): ${fmt(result.businessDays)}`,
+        ].join('\n')
+      : null
 
   return (
     <div className="space-y-6">
@@ -251,6 +263,15 @@ export function DateDifferenceClient() {
             )
           })()}
         </>
+      )}
+
+      {/* 结果操作行(Copy 复制摘要 / Download 下载),口径同家族其余工具 */}
+      {summary && (
+        <ResultActions
+          summary={summary}
+          filename="date-difference-calculator-result.txt"
+          downloadContent={summary}
+        />
       )}
 
       <CalculatorNote>

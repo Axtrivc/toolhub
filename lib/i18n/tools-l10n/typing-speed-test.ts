@@ -18,6 +18,7 @@ export const TypingSpeedTestL10n: ToolL10n = {
       'timeSec': '时间',
       'tryAgain': '换一句再测',
       'typeHere': '在此输入',
+      'wpmUnit': 'WPM',
     },
   },
   es: {
@@ -33,6 +34,7 @@ export const TypingSpeedTestL10n: ToolL10n = {
       'timeSec': 'Tiempo',
       'tryAgain': 'Probar otra frase',
       'typeHere': 'Escribe aquí',
+      'wpmUnit': 'PPM',
     },
   },
   de: {
@@ -48,6 +50,7 @@ export const TypingSpeedTestL10n: ToolL10n = {
       'timeSec': 'Zeit',
       'tryAgain': 'Anderen Satz testen',
       'typeHere': 'Hier tippen',
+      'wpmUnit': 'WPM',
     },
   },
 }

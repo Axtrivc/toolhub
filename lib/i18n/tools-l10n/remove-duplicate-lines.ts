@@ -10,7 +10,7 @@ export const removeDuplicateLinesL10n: ToolL10n = {
       defaultInput: '苹果\n香蕉\n苹果\n樱桃\n香蕉\n大枣',
       inputLabel: '列表(每行一项)',
       outputLabel: '去重后的项',
-      note: '🗑️ 移除重复行并保留原顺序。非常适合清理列表。',
+      note: '🗑️ 移除重复行并保留原顺序。比较前会去掉行首尾空格;区分大小写(「Apple」≠「apple」)。非常适合清理列表。',
     },
     useCases: [
       '清理邮箱订阅列表(去除重复订阅者)',
@@ -28,7 +28,7 @@ export const removeDuplicateLinesL10n: ToolL10n = {
       defaultInput: 'manzana\nplátano\nmanzana\ncereza\nplátano\ndátil',
       inputLabel: 'Lista (un elemento por línea)',
       outputLabel: 'Elementos únicos',
-      note: '🗑️ Elimina las líneas duplicadas conservando el orden. Ideal para limpiar listas.',
+      note: '🗑️ Elimina las líneas duplicadas conservando el orden. Las líneas se comparan tras recortar los espacios de los extremos; se distinguen mayúsculas y minúsculas («Apple» ≠ «apple»). Ideal para limpiar listas.',
     },
     useCases: [
       'limpiar listas de suscriptores de correo (quitar duplicados)',
@@ -46,7 +46,7 @@ export const removeDuplicateLinesL10n: ToolL10n = {
       defaultInput: 'apfel\nbanane\napfel\nkirsche\nbanane\ndattel',
       inputLabel: 'Liste (ein Eintrag pro Zeile)',
       outputLabel: 'Eindeutige Einträge',
-      note: '🗑️ Entfernt doppelte Zeilen und behält die Reihenfolge. Ideal zum Aufräumen von Listen.',
+      note: '🗑️ Entfernt doppelte Zeilen und behält die Reihenfolge. Zeilen werden nach dem Trimmen umgebender Leerzeichen verglichen; Groß-/Kleinschreibung wird beachtet („Apple" ≠ „apple"). Ideal zum Aufräumen von Listen.',
     },
     useCases: [
       'Newsletter-Abonnentenlisten bereinigen (Duplikate entfernen)',

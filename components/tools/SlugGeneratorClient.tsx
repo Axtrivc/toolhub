@@ -205,7 +205,7 @@ export function SlugGeneratorClient() {
             <button
               type="button"
               onClick={clearHistory}
-              className="-my-1 rounded-md px-2 py-1 text-xs text-slate-400 hover:text-red-500 dark:text-slate-500 dark:hover:text-red-400 sm:text-sm"
+              className="-my-1 rounded-md px-2 py-1.5 text-xs text-slate-400 hover:text-red-500 dark:text-slate-500 dark:hover:text-red-400 sm:text-sm"
             >
               {L('clear', 'Clear')}
             </button>

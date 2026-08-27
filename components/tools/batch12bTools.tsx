@@ -4,7 +4,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { CalculatorField, CalculatorNote, ResultCard } from '../calculator/CalculatorField'
 import { ResultActions } from '../ResultActions'
 import { CopyButton } from '@/components/CopyButton'
-import { fmtNum } from '@/lib/format'
+import { fmtNum, toNumStrict } from '@/lib/format'
 import { useApp } from '@/components/providers/AppProviders'
 import { tui } from '@/lib/i18n/tool-l10n'
 
@@ -193,8 +193,9 @@ export function ScreenTimeCalculatorClient() {
   const [age, setAge] = useState('30')
 
   const stats = useMemo(() => {
-    const h = Number(hours)
-    const a = Number(age)
+    // B1 粘贴宽容:toNumStrict 同口径;NaN 由下方 isFinite 守卫显式拦截
+    const h = toNumStrict(hours)
+    const a = toNumStrict(age)
     if (!Number.isFinite(h) || h <= 0 || h > 24 || !Number.isFinite(a) || a <= 0 || a > 120) return null
     const perYearDays = (h * 365) / 24
     const toLife = 80 - Math.min(a, 79)
@@ -393,8 +394,9 @@ export function HmacGeneratorClient() {
       )}
       {hex && (
         <div className="flex gap-3">
-          <CopyButton value={hex} disabled={!hex} />
-          <CopyButton value={b64} disabled={!b64} />
+          {/* 两个相邻复制按钮加 label 区分编码格式(否则读屏与视觉上都无法分辨) */}
+          <CopyButton value={hex} disabled={!hex} label={L('copyHex', 'Copy hex')} />
+          <CopyButton value={b64} disabled={!b64} label={L('copyB64', 'Copy base64')} />
         </div>
       )}
       <CalculatorNote>{L('note', '🔐 HMAC ≠ hashing: the signature depends on both message and secret, so an attacker cannot forge it without the key. Computed with native WebCrypto — the secret never leaves this page.')}</CalculatorNote>

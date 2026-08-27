@@ -6,6 +6,7 @@ import { StackedCompareChart } from '@/components/charts/StackedCompareChart'
 import { CopyButton } from '@/components/CopyButton'
 import { useApp } from '@/components/providers/AppProviders'
 import { tui } from '@/lib/i18n/tool-l10n'
+import { toNumStrict } from '@/lib/format'
 
 const PRESETS: { key: string; label: string; pct: number; fixed: number }[] = [
   { key: 'stripe-us', label: 'Stripe US online (2.9% + $0.30)', pct: 2.9, fixed: 0.3 },
@@ -50,8 +51,9 @@ export function ReverseStripeFeeCalculatorClient() {
 
   const fees = useMemo(() => {
     if (presetKey === 'custom') {
-      const p = Number(customPct)
-      const f = Number(customFixed)
+      // toNumStrict:粘贴 "$0.30"/"2.9%" 直接可用,其余非法输入仍显式 NaN 走错误提示
+      const p = toNumStrict(customPct)
+      const f = toNumStrict(customFixed)
       return { pct: isFinite(p) ? p : NaN, fixed: isFinite(f) ? f : NaN }
     }
     const preset = PRESETS.find((p) => p.key === presetKey) ?? PRESETS[0]
@@ -59,7 +61,7 @@ export function ReverseStripeFeeCalculatorClient() {
   }, [presetKey, customPct, customFixed])
 
   const parsed = useMemo(() => {
-    const a = Number(amount)
+    const a = toNumStrict(amount)
     const { pct, fixed } = fees
     if (!isFinite(a) || a < 0 || !isFinite(pct) || pct < 0 || !isFinite(fixed) || fixed < 0) {
       return { error: L('errInvalidNumbers', 'Please enter valid non-negative numbers.') }

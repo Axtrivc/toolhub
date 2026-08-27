@@ -94,7 +94,7 @@ export function DiceRollerClient() {
         <div>
           <div className="mb-1.5 flex items-center justify-between">
             <span className="text-xs font-medium uppercase tracking-wide" style={{ color: 'rgb(var(--text-faint))' }}>{L('history', 'Recent rolls')}</span>
-            <button type="button" onClick={() => setHistory([])} className="text-xs text-slate-400 hover:text-red-500 dark:text-slate-500">{L('clear', 'Clear')}</button>
+            <button type="button" onClick={() => setHistory([])} className="-my-1 rounded-md px-2 py-1.5 text-xs text-slate-400 hover:text-red-500 dark:text-slate-500">{L('clear', 'Clear')}</button>
           </div>
           <ul className="overflow-hidden rounded-lg border font-mono text-xs" style={{ borderColor: 'rgb(var(--border))' }}>
             {history.map((entry) => (
@@ -103,7 +103,7 @@ export function DiceRollerClient() {
           </ul>
         </div>
       )}
-      <CalculatorNote>{L('note', '🎲 Rolls come from crypto-grade randomness with rejection sampling — no modulo bias, no predictable sequences. Chipped physical dice cannot say the same.')}</CalculatorNote>
+      <CalculatorNote>{L('note', '🎲 Rolls come from crypto-grade randomness with rejection sampling — no modulo bias, no predictable sequences. Up to 20 dice per roll.')}</CalculatorNote>
     </div>
   )
 }
@@ -181,6 +181,9 @@ export function WheelSpinnerClient() {
     () => itemsText.split('\n').map((x) => x.trim()).filter(Boolean).slice(0, 12),
     [itemsText],
   )
+  // 超出上限的行数:输入不静默丢弃 —— 有多少被忽略直接告诉用户
+  const rawCount = useMemo(() => itemsText.split('\n').map((x) => x.trim()).filter(Boolean).length, [itemsText])
+  const overflowCount = Math.max(0, rawCount - items.length)
 
   const spin = useCallback(() => {
     if (items.length < 2 || spinning) return
@@ -251,7 +254,11 @@ export function WheelSpinnerClient() {
           <textarea id="ws-items" value={itemsText} onChange={(e) => setItemsText(e.target.value)} rows={10}
             placeholder={'Pizza\nSushi\nTacos\nBurgers'}
             className="w-full rounded-lg border p-4 text-sm outline-none transition focus:ring-2" style={{ borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rgb(var(--bg-card))', color: 'rgb(var(--text))' }} />
-          <p className="mt-1 text-xs" style={{ color: 'rgb(var(--text-faint))' }}>{L('itemsHint', '{n} options on the wheel').replace('{n}', String(items.length))}</p>
+          <p className="mt-1 text-xs" style={{ color: 'rgb(var(--text-faint))' }}>
+            {overflowCount > 0
+              ? L('itemsOverflow', '{extra} more ignored — the wheel holds max 12').replace('{extra}', String(overflowCount))
+              : L('itemsHint', '{n} options on the wheel').replace('{n}', String(items.length))}
+          </p>
         </div>
       </div>
       <CalculatorNote>{L('note', '🎡 The winning sector is drawn with crypto-grade randomness before the wheel animates to it — pretty motion on top of genuinely fair selection.')}</CalculatorNote>
@@ -430,6 +437,14 @@ export function TypingSpeedTestClient() {
     setTyped(v.slice(0, prompt.length))
   }
 
+  // 打字过程中的实时毛 WPM:每次击键触发重渲染自然刷新读数。
+  // 计时 ≥2s 且已输入 ≥5 字符后才显示,避免开头半秒出现荒谬的巨大值;SSR 期恒为 null
+  const elapsedMs = startedAt !== null ? Date.now() - startedAt : 0
+  const liveWpm =
+    !done && startedAt !== null && typed.length >= 5 && elapsedMs > 2000
+      ? Math.round(typed.length / 5 / (elapsedMs / 60000))
+      : null
+
   return (
     <div className="space-y-5">
       <div className="rounded-lg border p-4 font-mono text-base leading-relaxed" style={{ borderColor: 'rgb(var(--border))', backgroundColor: 'rgb(var(--bg-subtle))' }}>
@@ -462,8 +477,11 @@ export function TypingSpeedTestClient() {
         </div>
       ) : (
         <div className="flex items-center justify-between text-xs" style={{ color: 'rgb(var(--text-faint))' }}>
-          <span>{L('progress', '{n}/{m} characters').replace('{n}', String(typed.length)).replace('{m}', String(prompt.length))}</span>
-          <button type="button" onClick={reset} className="hover:text-red-500">{L('reset', 'Reset')}</button>
+          <span>
+            {L('progress', '{n}/{m} characters').replace('{n}', String(typed.length)).replace('{m}', String(prompt.length))}
+            {liveWpm !== null && ` · ${liveWpm} ${L('wpmUnit', 'WPM')}`}
+          </span>
+          <button type="button" onClick={reset} className="-my-1 rounded-md px-2 py-1 hover:text-red-500">{L('reset', 'Reset')}</button>
         </div>
       )}
       {done && (
@@ -487,7 +505,9 @@ function shuffled<T>(arr: T[]): T[] {
 export function RandomTeamGeneratorClient() {
   const { locale } = useApp()
   const L = (key: string, fb: string) => tui('random-team-generator', locale, key, fb)
-  const [namesText, setNamesText] = useState('')
+  // 冷启动示例(B2):与占位符同一组名字预填,首开点一次 Generate 即看到分组效果
+  const SAMPLE_NAMES = 'Ada\nGrace\nLinus\nMargaret\nKen\nBarbara'
+  const [namesText, setNamesText] = useState(SAMPLE_NAMES)
   const [teamCount, setTeamCount] = useState('2')
   const [teams, setTeams] = useState<string[][]>([])
 
@@ -504,27 +524,30 @@ export function RandomTeamGeneratorClient() {
 
   return (
     <div className="space-y-5">
-      <div>
-        <label htmlFor="rt-names" className="mb-2 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>{L('namesLabel', 'Names — one per line')}</label>
-        <textarea id="rt-names" value={namesText} onChange={(e) => setNamesText(e.target.value)} rows={8}
-          placeholder={'Ada\nGrace\nLinus\nMargaret\nKen\nBarbara'}
-          className="w-full rounded-lg border p-4 text-sm outline-none transition focus:ring-2"
-          style={{ borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rgb(var(--bg-card))', color: 'rgb(var(--text))' }} />
-        {names.length > 0 && <p className="mt-1 text-xs" style={{ color: 'rgb(var(--text-faint))' }}>{L('nNames', '{n} people entered').replace('{n}', String(names.length))}</p>}
-      </div>
-
-      <div className="flex flex-wrap items-end gap-3">
-        <div className="w-36">
-          <CalculatorField id="rt-count" label={L('teamsLabel', 'Number of teams')} value={teamCount} onChange={setTeamCount} placeholder="2" />
+      {/* D3 单按钮工具回车提交(Enter 在 textarea 内仍是换行,不会误触发) */}
+      <form className="space-y-5" onSubmit={(e) => { e.preventDefault(); generate() }}>
+        <div>
+          <label htmlFor="rt-names" className="mb-2 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>{L('namesLabel', 'Names — one per line')}</label>
+          <textarea id="rt-names" value={namesText} onChange={(e) => setNamesText(e.target.value)} rows={8}
+            placeholder={SAMPLE_NAMES}
+            className="w-full rounded-lg border p-4 text-sm outline-none transition focus:ring-2"
+            style={{ borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rgb(var(--bg-card))', color: 'rgb(var(--text))' }} />
+          {names.length > 0 && <p className="mt-1 text-xs" style={{ color: 'rgb(var(--text-faint))' }}>{L('nNames', '{n} people entered').replace('{n}', String(names.length))}</p>}
         </div>
-        <button type="button" onClick={generate} disabled={names.length < 2}
-          className="btn btn-primary disabled:cursor-not-allowed disabled:opacity-50">
-          🎯 {L('generate', 'Generate teams')}
-        </button>
-        {teams.length > 0 && (
-          <button type="button" onClick={generate} className="btn btn-secondary">🔁 {L('reshuffle', 'Reshuffle')}</button>
-        )}
-      </div>
+
+        <div className="flex flex-wrap items-end gap-3">
+          <div className="w-36">
+            <CalculatorField id="rt-count" label={L('teamsLabel', 'Number of teams')} value={teamCount} onChange={setTeamCount} placeholder="2" />
+          </div>
+          <button type="submit" disabled={names.length < 2}
+            className="btn btn-primary disabled:cursor-not-allowed disabled:opacity-50">
+            🎯 {L('generate', 'Generate teams')}
+          </button>
+          {teams.length > 0 && (
+            <button type="button" onClick={generate} className="btn btn-secondary">🔁 {L('reshuffle', 'Reshuffle')}</button>
+          )}
+        </div>
+      </form>
 
       {teams.length > 0 && (
         <div role="status" aria-live="polite" className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -547,10 +570,11 @@ export function RandomTeamGeneratorClient() {
 }
 
 // ── 密码熵检查 ──
-const COMMON_PATTERNS: [RegExp, string][] = [
-  [/^(?:password|passwort|contrasena|motdepasse)/i, 'starts with "password"'],
-  [/(?:123|abc|qwe|asd)/i, 'keyboard sequence'],
-  [/^(.{0,3})\1+\1+$/i, 'single repeated character run'],
+/** 常见弱口令模式:标签走 tui 三语(key, 英文 fallback),不再渲染硬编码英文 */
+const COMMON_PATTERNS: [RegExp, string, string][] = [
+  [/^(?:password|passwort|contrasena|motdepasse)/i, 'penDictStart', 'starts with "password"'],
+  [/(?:123|abc|qwe|asd)/i, 'penKeyboardSeq', 'keyboard sequence'],
+  [/^(.{0,3})\1+\1+$/i, 'penRepeatRun', 'single repeated character run'],
 ]
 
 export function PasswordEntropyCheckerClient() {
@@ -570,8 +594,8 @@ export function PasswordEntropyCheckerClient() {
     // 重复字符占比惩罚
     const uniqRatio = new Set(pw).size / pw.length
     if (uniqRatio < 0.6) { bits *= uniqRatio / 0.6 * 0.8; penalties.push(L('penRepeat', 'many repeated characters')) }
-    for (const [re, label] of COMMON_PATTERNS) {
-      if (re.test(pw)) { bits *= 0.5; penalties.push(label) }
+    for (const [re, key, fb] of COMMON_PATTERNS) {
+      if (re.test(pw)) { bits *= 0.5; penalties.push(L(key, fb)) }
     }
     // 熵→破解时间:离线攻击 1e11 guesses/s
     const seconds = Math.pow(2, bits) / 1e11 / 2
@@ -583,7 +607,8 @@ export function PasswordEntropyCheckerClient() {
       seconds < 86400 * 365 * 1e12 ? `${fmtNum(seconds / 86400 / 365 / 1e6, 0)} million years` :
       L('heatDeath', 'beyond cosmic timescales')
     return { bits: Math.round(bits), pool, crackTime, penalties }
-  }, [pw])
+    // penalties 走本地化:locale 切换时重算(否则旧语言标签残留)
+  }, [pw, locale])
 
   return (
     <div className="space-y-5">

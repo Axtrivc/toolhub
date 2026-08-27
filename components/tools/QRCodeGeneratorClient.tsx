@@ -306,6 +306,9 @@ export function QRCodeGeneratorClient() {
             <option value={256}>{L('sizeMedium', 'Medium (256px)')}</option>
             <option value={384}>{L('sizeLarge', 'Large (384px)')}</option>
           </select>
+          <p className="mt-1 text-xs text-slate-400 dark:text-slate-500">
+            {L('sizeHint', 'Downloads are always rendered in high resolution (at least 512 px); this option only scales the on-screen preview.')}
+          </p>
         </div>
         <div>
           <label htmlFor="fg" className="mb-1.5 block text-xs font-medium text-slate-600 dark:text-slate-400">

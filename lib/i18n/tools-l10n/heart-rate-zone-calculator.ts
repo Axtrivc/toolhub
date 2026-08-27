@@ -38,7 +38,8 @@ export const HeartRateZoneCalculatorL10n: ToolL10n = {
       'outSub.z2': "心率储备 60-70%",
       'outSub.z3': "心率储备 70-80%",
       'outSub.z4': "心率储备 80-90%",
-      'outSub.z5': "心率储备 90-100%",
+          'outSub.z5': "心率储备 90-100%",
+      'errInvalidInput': "请输入有效年龄(10-100)和静息心率(30-120)",
 },
   },
   es: {
@@ -74,7 +75,8 @@ export const HeartRateZoneCalculatorL10n: ToolL10n = {
       'outSub.z2': "60-70 % de la reserva",
       'outSub.z3': "70-80 % de la reserva",
       'outSub.z4': "80-90 % de la reserva",
-      'outSub.z5': "90-100 % de la reserva",
+          'outSub.z5': "90-100 % de la reserva",
+      'errInvalidInput': "Introduce una edad válida (10-100) y una FC en reposo (30-120)",
 },
   },
   de: {
@@ -110,7 +112,8 @@ export const HeartRateZoneCalculatorL10n: ToolL10n = {
       'outSub.z2': "60-70 % der Reserve",
       'outSub.z3': "70-80 % der Reserve",
       'outSub.z4': "80-90 % der Reserve",
-      'outSub.z5': "90-100 % der Reserve",
+          'outSub.z5': "90-100 % der Reserve",
+      'errInvalidInput': "Gib ein gültiges Alter (10-100) und einen Ruhepuls (30-120) ein",
 },
   },
 }

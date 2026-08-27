@@ -17,6 +17,7 @@ import { tui, tuiCalc } from '@/lib/i18n/tool-l10n'
 
 export const APYCalculatorClient = makeCalculatorClient({
   slug: 'apy-calculator',
+  urlState: true,
   inputs: [
     { key: 'principal', label: 'Principal', suffix: '$', default: '10000' },
     { key: 'apr', label: 'Annual rate (APR)', suffix: '%', default: '5', slider: { min: 0, max: 15, step: 0.05 } },
@@ -90,6 +91,7 @@ export const APYCalculatorClient = makeCalculatorClient({
 
 export const CreditCardMinimumCalculatorClient = makeCalculatorClient({
   slug: 'credit-card-minimum-payment-calculator',
+  urlState: true,
   inputs: [
     { key: 'balance', label: 'Current balance', suffix: '$', default: '5000' },
     { key: 'apr', label: 'APR', suffix: '%', default: '19.99', slider: { min: 0, max: 36, step: 0.1 } },
@@ -235,6 +237,7 @@ export const CreditCardMinimumCalculatorClient = makeCalculatorClient({
 
 export const CashBackCalculatorClient = makeCalculatorClient({
   slug: 'cash-back-calculator',
+  urlState: true,
   inputs: [
     { key: 'spend', label: 'Monthly spending', suffix: '$', default: '2000', slider: { min: 0, max: 10000, step: 100 } },
     { key: 'rate', label: 'Cash back rate', suffix: '%', default: '2', slider: { min: 0, max: 10, step: 0.25 } },
@@ -278,6 +281,7 @@ export const CashBackCalculatorClient = makeCalculatorClient({
 
 export const DownPaymentCalculatorClient = makeCalculatorClient({
   slug: 'down-payment-calculator',
+  urlState: true,
   inputs: [
     { key: 'price', label: 'Home price', suffix: '$', default: '400000', slider: { min: 10000, max: 2000000, step: 10000 } },
     { key: 'down', label: 'Down payment', suffix: '%', default: '20', slider: { min: 0, max: 50, step: 1 } },
@@ -338,6 +342,7 @@ export const DownPaymentCalculatorClient = makeCalculatorClient({
 
 export const DTICalculatorClient = makeCalculatorClient({
   slug: 'dti-calculator',
+  urlState: true,
   inputs: [
     { key: 'income', label: 'Monthly gross income', suffix: '$', default: '6000', slider: { min: 500, max: 20000, step: 100 } },
     { key: 'debts', label: 'Monthly debt payments', suffix: '$', default: '1500', slider: { min: 0, max: 10000, step: 50 } },
@@ -392,6 +397,7 @@ export const DTICalculatorClient = makeCalculatorClient({
 
 export const CommissionCalculatorClient = makeCalculatorClient({
   slug: 'commission-calculator',
+  urlState: true,
   inputs: [
     { key: 'sales', label: 'Total sales', suffix: '$', default: '50000', slider: { min: 0, max: 500000, step: 5000 } },
     { key: 'rate', label: 'Commission rate', suffix: '%', default: '5', slider: { min: 0, max: 20, step: 0.5 } },
@@ -452,6 +458,11 @@ export function AgeDifferenceCalculatorClient() {
   const sample = useMemo(() => getCalculatorSample('age-difference-calculator'), [])
 
   const results = useMemo(() => {
+    // D1:原生 date 控件在输入中途值恒为空串,刚清空也是 ''——空值不做红字校验,
+    // 给中性占位;只有非空值才解析计算,避免"选到一半就报错"
+    if (!values.birth1 || !values.birth2) {
+      return { diff: '—', days: '—' }
+    }
     const d1 = new Date(values.birth1 ?? '')
     const d2 = new Date(values.birth2 ?? '')
     if (isNaN(d1.getTime()) || isNaN(d2.getTime())) {
@@ -556,7 +567,7 @@ export function AgeDifferenceCalculatorClient() {
         <ResultCard
           label={T('out.diff', 'Age difference')}
           value={results.diff}
-          highlight={!results.diff.startsWith('⚠️')}
+          highlight={!results.diff.startsWith('⚠️') && results.diff !== '—'}
           error={results.diff.startsWith('⚠️')}
         />
         <ResultCard label={T('out.days', 'Difference in days')} value={results.days} />
@@ -577,6 +588,7 @@ export function AgeDifferenceCalculatorClient() {
 
 export const GradeCalculatorClient = makeCalculatorClient({
   slug: 'grade-calculator',
+  urlState: true,
   inputs: [
     { key: 'earned', label: 'Points earned', default: '85' },
     { key: 'possible', label: 'Points possible', default: '100' },
@@ -618,6 +630,7 @@ export const GradeCalculatorClient = makeCalculatorClient({
 
 export const FinalGradeCalculatorClient = makeCalculatorClient({
   slug: 'final-grade-calculator',
+  urlState: true,
   inputs: [
     { key: 'current', label: 'Current grade', suffix: '%', default: '85' },
     { key: 'goal', label: 'Target grade', suffix: '%', default: '90' },
@@ -656,6 +669,7 @@ export const FinalGradeCalculatorClient = makeCalculatorClient({
 
 export const BillSplitCalculatorClient = makeCalculatorClient({
   slug: 'bill-split-calculator',
+  urlState: true,
   inputs: [
     { key: 'total', label: 'Bill total', suffix: '$', default: '120', slider: { min: 0, max: 1000, step: 5 } },
     { key: 'tip', label: 'Tip', suffix: '%', default: '18', slider: { min: 0, max: 30, step: 1 } },
@@ -704,6 +718,7 @@ export const BillSplitCalculatorClient = makeCalculatorClient({
 
 export const TrapezoidCalculatorClient = makeCalculatorClient({
   slug: 'trapezoid-calculator',
+  urlState: true,
   inputs: [
     { key: 'a', label: 'Top side (a)', default: '5', slider: { min: 1, max: 50, step: 0.5 } },
     { key: 'b', label: 'Bottom side (b)', default: '10', slider: { min: 1, max: 50, step: 0.5 } },
@@ -727,6 +742,7 @@ export const TrapezoidCalculatorClient = makeCalculatorClient({
 
 export const CubeCalculatorClient = makeCalculatorClient({
   slug: 'cube-calculator',
+  urlState: true,
   inputs: [{ key: 'side', label: 'Side length', default: '5', slider: { min: 1, max: 50, step: 0.5 } }],
   outputs: [
     { key: 'volume', label: 'Volume', highlight: true, sublabel: 'V = s³' },
@@ -750,6 +766,7 @@ export const CubeCalculatorClient = makeCalculatorClient({
 
 export const SphereCalculatorClient = makeCalculatorClient({
   slug: 'sphere-calculator',
+  urlState: true,
   inputs: [{ key: 'r', label: 'Radius', default: '5', slider: { min: 1, max: 50, step: 0.5 } }],
   outputs: [
     { key: 'volume', label: 'Volume', highlight: true, sublabel: 'V = ⁴⁄₃ π r³' },
@@ -774,6 +791,7 @@ export const SphereCalculatorClient = makeCalculatorClient({
 
 export const SalaryConverterClient = makeCalculatorClient({
   slug: 'salary-converter',
+  urlState: true,
   inputs: [
     {
       key: 'unit',

@@ -599,6 +599,8 @@ export const COMMON_UC_UI: Record<Exclude<Locale, 'en'>, Record<string, string>>
     quickValues: '快捷数值',
     scaleTitle: '量级对比',
     generatedBy: '由 ToolHub 生成',
+    swapUnits: '交换单位',
+    swap: '互换',
   },
   es: {
     convert: 'Convertir',
@@ -616,6 +618,8 @@ export const COMMON_UC_UI: Record<Exclude<Locale, 'en'>, Record<string, string>>
     quickValues: 'Valores rápidos',
     scaleTitle: 'Escala de magnitud',
     generatedBy: 'Generado por ToolHub',
+    swapUnits: 'Intercambiar unidades',
+    swap: 'Intercambiar',
   },
   de: {
     convert: 'Umrechnen',
@@ -624,7 +628,7 @@ export const COMMON_UC_UI: Record<Exclude<Locale, 'en'>, Record<string, string>>
     to: 'Nach',
     convertedValue: 'Umgerechneter Wert',
     formula: 'Formel',
-    conversionSummary: 'Umrechnungs­zusammenfassung',
+    conversionSummary: 'Umrechnungszusammenfassung',
     summaryValue: 'Wert:',
     summaryResult: 'Ergebnis:',
     summaryFormula: 'Formel:',
@@ -633,6 +637,8 @@ export const COMMON_UC_UI: Record<Exclude<Locale, 'en'>, Record<string, string>>
     quickValues: 'Schnellwerte',
     scaleTitle: 'Größenordnung',
     generatedBy: 'Erstellt von ToolHub',
+    swapUnits: 'Einheiten tauschen',
+    swap: 'Tauschen',
   },
 }
 

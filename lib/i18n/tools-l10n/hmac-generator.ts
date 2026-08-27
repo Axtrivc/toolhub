@@ -15,6 +15,8 @@ export const HmacGeneratorL10n: ToolL10n = {
     ],
     ui: {
       'algoLabel': '算法',
+      'copyHex': '复制 hex',
+      'copyB64': '复制 base64',
       'insecureContext': 'WebCrypto 需要 HTTPS 或 localhost',
       'messageLabel': '消息',
       'note': '🔐 HMAC ≠ 哈希:签名同时依赖消息与密钥,攻击者没有密钥就无法伪造。用原生 WebCrypto 计算——密钥绝不离开本页。',
@@ -31,6 +33,8 @@ export const HmacGeneratorL10n: ToolL10n = {
     ],
     ui: {
       'algoLabel': 'Algoritmo',
+      'copyHex': 'Copiar hex',
+      'copyB64': 'Copiar base64',
       'insecureContext': 'WebCrypto requiere HTTPS o localhost',
       'messageLabel': 'Mensaje',
       'note': '🔐 HMAC ≠ hash: la firma depende del mensaje y del secreto; sin la clave no se puede falsificar. Con WebCrypto nativo — el secreto no sale de aquí.',
@@ -47,6 +51,8 @@ export const HmacGeneratorL10n: ToolL10n = {
     ],
     ui: {
       'algoLabel': 'Algorithmus',
+      'copyHex': 'Hex kopieren',
+      'copyB64': 'Base64 kopieren',
       'insecureContext': 'WebCrypto erfordert HTTPS oder localhost',
       'messageLabel': 'Nachricht',
       'note': '🔐 HMAC ≠ Hash: die Signatur hängt an Nachricht und Schlüssel; ohne Schlüssel nicht fälschbar. Native WebCrypto — der Schlüssel verlässt die Seite nie.',

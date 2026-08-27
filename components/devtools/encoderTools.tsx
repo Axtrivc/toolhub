@@ -17,6 +17,8 @@ import { EncoderDecoderTool } from '../tools/EncoderDecoderTool'
 
 // ── Base64 编解码 ──
 export function Base64CodecTool({ initialMode = 'encode', slug = 'base64-encoder' }: { initialMode?: 'encode' | 'decode'; slug?: string }) {
+  const { locale } = useApp()
+  const L = (key: string, fb: string) => tui(slug, locale, key, fb)
   return (
     <EncoderDecoderTool
       initialMode={initialMode}
@@ -36,7 +38,7 @@ export function Base64CodecTool({ initialMode = 'encode', slug = 'base64-encoder
             }
             return btoa(s)
           } catch {
-            return '⚠️ Cannot encode'
+            return L('encodeFailed', '⚠️ Cannot encode')
           }
         },
         note: '🔐 Base64 encodes binary data as text. Common in emails, data URIs, and APIs. Note: it is NOT encryption.',
@@ -46,16 +48,26 @@ export function Base64CodecTool({ initialMode = 'encode', slug = 'base64-encoder
         outputLabel: 'Decoded text',
         defaultInput: 'SGVsbG8gV29ybGQ=',
         transform: (t) => {
+          // D2 错误定位:先做字符集预检,指认第一个非法字符及其位置
+          //(atob 只抛不带位置的 SyntaxError;去空白后按清洗串计数)
+          const s = t.replace(/\s+/g, '')
+          const bad = /[^A-Za-z0-9+/\-_]/.exec(s)
+          if (bad) {
+            return L(
+              'b64UnexpectedChar',
+              '⚠️ Invalid Base64 — unexpected character "{c}" at position #{n}. Expected A–Z a–z 0–9 + / - _ (= padding is optional)',
+            ).replace('{c}', bad[0]).replace('{n}', String(bad.index + 1))
+          }
           try {
             // 兼容 base64url(-/_ 字符,如 JWT 段)与省略 padding 的输入
-            let s = t.replace(/\s+/g, '').replace(/-/g, '+').replace(/_/g, '/')
-            while (s.length % 4) s += '='
-            const bin = atob(s)
+            let x = s.replace(/-/g, '+').replace(/_/g, '/')
+            while (x.length % 4) x += '='
+            const bin = atob(x)
             const bytes = new Uint8Array(bin.length)
             for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i)
             return new TextDecoder().decode(bytes)
           } catch {
-            return '⚠️ Invalid Base64'
+            return L('b64GenericErr', '⚠️ Invalid Base64 — check that nothing was truncated or mangled when pasting')
           }
         },
         note: '🔓 Paste valid Base64 to decode. Handles UTF-8 properly.',
@@ -133,11 +145,21 @@ export function URLCodecTool({ initialMode = 'encode', slug = 'url-encoder' }: {
           outputLabel: 'Decoded',
           defaultInput: 'hello%20world%20%26%20friends%3F',
           transform: (t) => {
+            // D2 错误定位:% 后没跟两位十六进制(如孤立的 % 或 "%zz")时,
+            // decodeURIComponent 只抛 "URI malformed" 不带位置——先扫出第一个
+            // 孤立百分号并指明序号,让用户能定位粘贴串里的出错点
+            const stray = /%(?![0-9A-Fa-f]{2})/.exec(t)
+            if (stray) {
+              return L(
+                'strayPercent',
+                '⚠️ Stray "%" at position #{n} — percent-escapes need two hex digits, like %20 or %26',
+              ).replace('{n}', String(stray.index + 1))
+            }
             try {
               const s = plusToSpace ? t.replace(/\+/g, ' ') : t
               return fullUri ? decodeURI(s) : decodeURIComponent(s)
             } catch {
-              return '⚠️ Invalid'
+              return L('invalidEscape', '⚠️ Invalid percent-escape — escapes must look like %XX (two hex digits)')
             }
           },
           note: '🔗 Decodes %20 back to spaces, %26 back to &, etc.',

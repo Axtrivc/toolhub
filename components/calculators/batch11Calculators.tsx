@@ -232,6 +232,8 @@ export const TakeHomePayCalculatorClient = makeCalculatorClient({
 // ── 婚礼预算分配 ──
 export const WeddingBudgetCalculatorClient = makeCalculatorClient({
   slug: 'wedding-budget-calculator',
+  // 预算+人数均非个人敏感数据,伴侣间分享分配方案常用(B3)
+  urlState: true,
   inputs: [
     { key: 'total', label: 'Total budget', suffix: '$', default: '25000', slider: { min: 1000, max: 150000, step: 500 } },
     { key: 'guests', label: 'Guest count', default: '80', slider: { min: 10, max: 400, step: 5 } },
@@ -284,6 +286,8 @@ export const WeddingBudgetCalculatorClient = makeCalculatorClient({
 // ── 心率区间(Karvonen)──
 export const HeartRateZoneCalculatorClient = makeCalculatorClient({
   slug: 'heart-rate-zone-calculator',
+  // 2 个非敏感数值输入,训练区间场景可分享/复访(B3)
+  urlState: true,
   inputs: [
     { key: 'age', label: 'Age', default: '30', slider: { min: 10, max: 100, step: 1 } },
     { key: 'resting', label: 'Resting heart rate', suffix: 'bpm', default: '60', slider: { min: 40, max: 100, step: 1 } },
@@ -300,8 +304,8 @@ export const HeartRateZoneCalculatorClient = makeCalculatorClient({
     const age = toNum(v.age)
     const resting = toNum(v.resting)
     if (!Number.isInteger(age) || age < 10 || age > 100 || resting < 30 || resting > 120) {
-      // 错误串须落在 highlight 输出(z2)上,工厂才会渲染红卡错误态
-      return { max: '—', z1: '—', z2: '⚠️ Enter a valid age (10-100) and resting HR (30-120)', z3: '—', z4: '—', z5: '—' }
+      // 错误串须落在 highlight 输出(z2)上,工厂才会渲染红卡错误态;文案说明该填什么(D2)
+      return { max: '—', z1: '—', z2: `⚠️ ${tui('heart-rate-zone-calculator', locale, 'errInvalidInput', 'Enter a valid age (10-100) and resting HR (30-120)')}`, z3: '—', z4: '—', z5: '—' }
     }
     const max = 220 - age
     const zone = (lo: number, hi: number) =>
@@ -337,6 +341,8 @@ export const HeartRateZoneCalculatorClient = makeCalculatorClient({
 // ── 咖啡因体内残留 ──
 export const CaffeineCalculatorClient = makeCalculatorClient({
   slug: 'caffeine-calculator',
+  // 3 个非敏感数值输入,"这个时间喝咖啡还睡得着吗"场景适合分享(B3)
+  urlState: true,
   inputs: [
     { key: 'mg', label: 'Caffeine consumed', suffix: 'mg', default: '200', slider: { min: 25, max: 600, step: 25 } },
     { key: 'hoursAgo', label: 'Hours since drinking it', suffix: 'h', default: '3', slider: { min: 0, max: 12, step: 0.5 } },
@@ -513,8 +519,18 @@ export const PaintCalculatorClient = makeCalculatorClient({
 })
 
 // ── 狗龄换算(AVMA 尺寸分段曲线)──
+// 生命阶段 l10n 表:[tui key, 英文回退](key 与 dog-age bundle 的 stage.* 对应)
+const DOG_STAGE_L10N: [string, string][] = [
+  ['stage.puppy', 'Puppy'],
+  ['stage.junior', 'Junior'],
+  ['stage.adult', 'Adult (prime)'],
+  ['stage.mature', 'Mature'],
+  ['stage.senior', 'Senior'],
+]
 export const DogAgeCalculatorClient = makeCalculatorClient({
   slug: 'dog-age-calculator',
+  // 2 个输入、强分享属性(晒自家狗的换算结果),无隐私字段(B3)
+  urlState: true,
   inputs: [
     { key: 'dogAge', label: 'Dog\'s age', suffix: 'years', default: '5', slider: { min: 0, max: 20, step: 0.5 } },
     { key: 'size', label: 'Breed size', default: 'medium', options: [
@@ -541,11 +557,13 @@ export const DogAgeCalculatorClient = makeCalculatorClient({
       const perYear = v.size === 'small' ? 4 : v.size === 'large' ? 6.5 : 5
       human = 24 + (dogAge - 2) * perYear
     }
-    const stage =
-      dogAge < 1 ? 'Puppy' :
-      dogAge < 2 ? 'Junior' :
-      human < 40 ? 'Adult (prime)' :
-      human < 55 ? 'Mature' : 'Senior'
+    // 生命阶段按区间选 index;文案走 tui(英文回退 = 原直出串,SSR/en 恒英文)
+    const stageIdx =
+      dogAge < 1 ? 0 :
+      dogAge < 2 ? 1 :
+      human < 40 ? 2 :
+      human < 55 ? 3 : 4
+    const stage = tui('dog-age-calculator', locale, DOG_STAGE_L10N[stageIdx][0], DOG_STAGE_L10N[stageIdx][1])
     return {
       humanAge: `${fmtNum(human, 0)} human years`,
       lifeStage: stage,

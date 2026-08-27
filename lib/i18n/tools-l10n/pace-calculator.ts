@@ -32,6 +32,10 @@ export const PaceCalculatorL10n: ToolL10n = {
       'out.speed': '速度',
       'out.time': '完赛时间',
       'out.unit': '配速单位',
+      'preset.0': '5 公里 · 30:00',
+      'preset.1': '10 公里 · 1:00:00',
+      'preset.2': '半马 · 2:06:35',
+      'preset.3': '全马 · 4:13:10',
     },
   },
   es: {
@@ -61,6 +65,10 @@ export const PaceCalculatorL10n: ToolL10n = {
       'out.speed': 'Velocidad',
       'out.time': 'Tiempo de meta',
       'out.unit': 'Unidad de ritmo',
+      'preset.0': '5K · 30:00',
+      'preset.1': '10K · 1:00:00',
+      'preset.2': 'Media maratón · 2:06:35',
+      'preset.3': 'Maratón · 4:13:10',
     },
   },
   de: {
@@ -90,6 +98,10 @@ export const PaceCalculatorL10n: ToolL10n = {
       'out.speed': 'Geschwindigkeit',
       'out.time': 'Zielzeit',
       'out.unit': 'Tempo-Einheit',
+      'preset.0': '5 km · 30:00',
+      'preset.1': '10 km · 1:00:00',
+      'preset.2': 'Halbmarathon · 2:06:35',
+      'preset.3': 'Marathon · 4:13:10',
     },
   },
 }

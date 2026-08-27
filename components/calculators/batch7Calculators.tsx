@@ -21,7 +21,8 @@ export const ScientificNotationCalculatorClient = makeCalculatorClient({
     // 空输入 → 占位(空串被 Number 折叠成 0 会渲染出 "0 × 10⁰" 假结果)
     if (!v.number.trim()) return { sci: '—', e: '—', engineering: '—' }
     const n = Number(v.number)
-    if (!isFinite(n)) return { sci: `⚠️ ${tui('scientific-notation-converter', locale, 'errInvalid', 'Invalid number')}`, e: '—', engineering: '—' }
+    // D2:错误说明"该填什么",附可解析示例(1e 记数与普通小数都合法)
+    if (!isFinite(n)) return { sci: `⚠️ ${tui('scientific-notation-converter', locale, 'errInvalid', 'Enter a valid number, e.g. 123000 or 3.4e-11')}`, e: '—', engineering: '—' }
     if (n === 0) return { sci: '0 × 10⁰', e: '0e0', engineering: '0 × 10⁰' }
     let exp = Math.floor(Math.log10(Math.abs(n)))
     let mantissa = n / Math.pow(10, exp)

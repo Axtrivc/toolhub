@@ -107,6 +107,8 @@ export function NumeralSystemConverterClient() {
           <input
             id="value"
             type="text"
+            // A1 移动端数字键盘:十/二/八进制纯数字;十六进制含 a-f 字母,保持默认键盘
+            inputMode={from === '16' ? undefined : 'numeric'}
             value={value}
             onChange={(e) => setValue(e.target.value)}
             placeholder="255"

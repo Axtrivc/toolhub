@@ -201,7 +201,7 @@ export function JsonSchemaGeneratorClient() {
               <button
                 type="button"
                 onClick={() => setInput('')}
-                className="-my-1 rounded-md px-2 py-1 text-xs hover:text-red-500 sm:text-sm"
+                className="-my-1 rounded-md px-2 py-1.5 text-xs hover:text-red-500 sm:text-sm"
                 style={{ color: 'rgb(var(--text-faint))' }}
               >
                 {L('clear', 'Clear')}

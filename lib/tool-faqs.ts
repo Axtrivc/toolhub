@@ -444,7 +444,7 @@ export const toolFaqs: Record<string, FaqPair[]> = {
   'binary-to-text': [
     {
       q: 'Does this handle UTF-8 / Unicode?',
-      a: 'This tool decodes each 8-bit group as a single character (ASCII range 0-127). Multi-byte UTF-8 characters (like emoji) would need each byte separated and decoded as a sequence — this tool does not handle that.',
+      a: 'Yes — each space-separated group is one byte, and consecutive groups decode together as full UTF-8, so multi-byte characters (Chinese, emoji) work as long as their bytes are entered as consecutive groups. Example: 你好 is three bytes per character (E4 BD A0 E5 A5 BD), so six groups decode both characters at once.',
     },
   ],
   'text-to-binary': [
@@ -474,7 +474,7 @@ export const toolFaqs: Record<string, FaqPair[]> = {
     },
     {
       q: 'How much water should I drink a day?',
-      a: 'A common baseline is 30–35 ml per kg of body weight — about two-thirds of your weight in pounds, in ounces. A 70 kg adult lands near 2.3 L daily before adjusting for exercise, hot climate, or pregnancy, which this calculator adds on top.',
+      a: 'A common baseline is 30–35 ml per kg of body weight — about half your weight in pounds, in ounces. A 70 kg adult lands near 2.45 L daily before adjusting for exercise, hot climate, or pregnancy, which this calculator adds on top.',
     },
     {
       q: 'Can you drink too much water?',
@@ -1234,7 +1234,7 @@ export const toolFaqs: Record<string, FaqPair[]> = {
     },
     {
       q: 'What is the difference between fitting and filling a box?',
-      a: 'Fit (contain) scales the image so the whole thing is visible inside the box, which may leave empty space. Fill (cover) scales so the box is completely covered, which may crop the image. This tool shows both the fitted dimensions and the scaling factor so you can choose.',
+      a: 'Fit (contain) scales the image so the whole thing is visible inside the box, which may leave empty space. Fill (cover) scales so the box is completely covered, which may crop the image. When in doubt for photos, use cover; for logos and screenshots that must stay fully visible, use contain.',
     },
     {
       q: 'Which aspect ratios are most common?',
@@ -1977,7 +1977,7 @@ export const toolFaqs: Record<string, FaqPair[]> = {
     },
     {
       q: 'How is my pay computed?',
-      a: 'Regular pay is rate × regular hours; overtime pay is rate × multiplier × overtime hours. The custom multiplier accepts anything — 1.25, 2.5 — so union contracts, shift differentials, and holiday rates all fit the same math.',
+      a: 'Regular pay is rate × regular hours; overtime pay is rate × multiplier × overtime hours. The two multiplier tiers cover time-and-a-half and double time — union contracts, shift differentials, and holiday rates all fit the same math.',
     },
     {
       q: 'I am salaried — does this apply to me?',
@@ -2019,7 +2019,7 @@ export const toolFaqs: Record<string, FaqPair[]> = {
   'amortization-table-generator': [
     {
       q: 'What exactly does the table show?',
-      a: 'Every payment in order: number, amount, the principal/interest split, and the remaining balance. Early rows are interest-heavy — a 30-year loan often puts two-thirds of payment one toward interest — and you can watch the crossover where principal takes over.',
+      a: 'Every payment in order: number, amount, the principal/interest split, and the remaining balance. Early rows are interest-heavy — on typical rates most of the first payment goes to interest — and you can watch the crossover where principal takes over.',
     },
     {
       q: 'How is the monthly payment computed?',
@@ -2109,11 +2109,11 @@ export const toolFaqs: Record<string, FaqPair[]> = {
     },
     {
       q: 'How does breed size change the math?',
-      a: 'After year two, small dogs (<9 kg) add about 4 human years per dog year, medium 5, large 6.5. That is why a 13-year-old Chihuahua maps to a sprightly ~77 while a 13-year-old Great Dane maps to ~104 — big breeds mature at the same pace but age faster afterward.',
+      a: 'After year two, small dogs (<9 kg) add about 4 human years per dog year, medium 5, large 6.5. That is why a 13-year-old Chihuahua maps to a sprightly ~68 while a 13-year-old Great Dane maps to ~96 — big breeds mature at the same pace but age faster afterward.',
     },
     {
       q: 'When is a dog a senior?',
-      a: 'Roughly when the human-equivalent age passes the mid-50s — around 8-9 calendar years for large breeds, 10-12 for small ones, which the life-stage output reflects. Veterinarians recommend senior screenings from those ages even for healthy-looking dogs.',
+      a: 'Roughly when the human-equivalent age passes the mid-50s — around 7-9 calendar years for large breeds, 10-12 for small ones, which the life-stage output reflects. Veterinarians recommend senior screenings from those ages even for healthy-looking dogs.',
     },
   ],
   // ══════════ _2025-08 扩张批3(9 个)══════════

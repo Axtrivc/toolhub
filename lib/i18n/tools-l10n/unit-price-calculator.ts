@@ -26,6 +26,7 @@ export const unitPriceCalculatorL10n: ToolL10n = {
       'out.unit1price': '选项 1 单价', 'out.unit2price': '选项 2 单价', 'out.winner': '更划算',
       note: '🛒 比较不同包装的真实性价比。大包装未必每单位更便宜。',
           'errNonNegative': "价格不能为负",
+      'winnerCrossFamily': "单位类型不同,无法公平比较",
 },
   },
   es: {
@@ -49,6 +50,7 @@ export const unitPriceCalculatorL10n: ToolL10n = {
       'out.unit1price': 'Precio unitario opción 1', 'out.unit2price': 'Precio unitario opción 2', 'out.winner': 'Mejor oferta',
       note: '🛒 Compara el valor real entre tamaños de envase. El bote grande no siempre es más barato por unidad.',
           'errNonNegative': "Los precios no pueden ser negativos",
+      'winnerCrossFamily': "Unidades distintas: no se pueden comparar",
 },
   },
   de: {
@@ -72,6 +74,7 @@ export const unitPriceCalculatorL10n: ToolL10n = {
       'out.unit1price': 'Stückpreis Option 1', 'out.unit2price': 'Stückpreis Option 2', 'out.winner': 'Besseres Angebot',
       note: '🛒 Vergleiche den wahren Wert über Verpackungsgrößen hinweg. Die große Box ist nicht immer pro Einheit günstiger.',
           'errNonNegative': "Preise dürfen nicht negativ sein",
+      'winnerCrossFamily': "Unterschiedliche Einheiten — kein Vergleich möglich",
 },
   },
 }
