@@ -2,6 +2,12 @@ import type { Config } from 'tailwindcss'
 
 const config: Config = {
   darkMode: 'class',
+  // hover:* 变体仅在真正支持 hover 的设备(鼠标/触控板)生成
+  // @media (hover: hover) 规则:触屏手机上点击后不再残留"粘滞 hover 态"
+  // (卡片持续高亮、链接持续变色);桌面端行为完全不变。
+  future: {
+    hoverOnlyWhenSupported: true,
+  },
   content: [
     './app/**/*.{js,ts,jsx,tsx,mdx}',
     './components/**/*.{js,ts,jsx,tsx,mdx}',

@@ -104,6 +104,8 @@ export function Header() {
       style={{
         borderColor: 'rgb(var(--border))',
         backgroundColor: 'rgb(var(--bg-card) / 0.8)',
+        /* PWA standalone 模式下避开状态栏/刘海;浏览器内恒为 0,无影响 */
+        paddingTop: 'env(safe-area-inset-top)',
       }}
     >
       {/* Header 内层容器:全宽贴边流式布局(无 max-w 限制),
@@ -222,7 +224,7 @@ export function Header() {
             role="dialog"
             aria-modal="true"
             aria-label={t(locale, 'menuLabel')}
-            className="absolute inset-x-0 top-16 z-40 border-b shadow-lg"
+            className="absolute inset-x-0 top-full z-40 border-b shadow-lg"
             style={{
               borderColor: 'rgb(var(--border))',
               backgroundColor: 'rgb(var(--bg-card))',

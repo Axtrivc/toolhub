@@ -43,8 +43,11 @@
 
   html {
     scroll-behavior: smooth;
-    /* 兜底:防止任何子元素意外撑宽导致横向滚动条 */
-    overflow-x: hidden;
+    /* clip 不创建滚动容器(sticky 头部不受影响),且会把裁切传播给
+       视口 —— 防止装饰性超宽元素(HeroGlow w-[680px] 等)撑大移动端
+       布局视口(实测仅 body 上的 clip 不传播,innerWidth 会被撑到 869)。
+       hidden 会破坏 sticky,不能用。 */
+    overflow-x: clip;
   }
 
   body {
@@ -57,7 +60,17 @@
     transition: background-color 0.2s ease, color 0.2s ease;
     /* 移除移动端点击灰色高亮(配合按钮 active transition) */
     -webkit-tap-highlight-color: transparent;
-    overflow-x: hidden;
+    /* 防止任何子元素撑宽导致横向滚动;clip 与 hidden 等价且不创建
+       新滚动容器 —— 此前 overflow-x: hidden 会让 position: sticky
+       头部失效(实测顶部导航不吸顶) */
+    overflow-x: clip;
+    /* 移动端:允许平移/双指缩放、禁用双击缩放(iOS 快速连点不再触发
+       页面放大 + 消除 300ms 点击延迟);鼠标桌面端无任何影响 */
+    touch-action: manipulation;
+    /* 刘海屏横屏(viewport-fit=cover):内容避开左右刘海/圆角。
+       桌面与竖屏浏览器恒为 0,零影响 */
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
   }
 
   /* 移动端表单元素聚焦修复:iOS Safari 在 font-size < 16px 的
@@ -216,6 +229,8 @@
 .scrollbar-none {
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* IE10+ / legacy Edge */
+  /* 触屏滚动到列表头/尾时不再把滚动"穿透"到页面(弹层内列表用) */
+  overscroll-behavior: contain;
 }
 .scrollbar-none::-webkit-scrollbar {
   width: 0;
@@ -408,6 +423,9 @@ select option {
  * 计算器数值滑杆(工厂 FieldDef.slider 字段,.calc-slider)。
  * 轨道填充色由组件内联 linear-gradient 控制(比例随值变化),
  * 这里只负责外观重置与 thumb 形状(主题变量取色)。
+ * 触屏(pointer: coarse)优化:命中区扩到 32px 高、视觉轨道仍 6px
+ * (background-size 把渐变压成中央 6px 横带),thumb 放大到 24px ——
+ * 指针设备(桌面)保持原有 6px 轨道 + 18px thumb,零视觉变化。
  * ════════════════════════════════════════════════════════════ */
 input.calc-slider {
   -webkit-appearance: none;
@@ -416,10 +434,24 @@ input.calc-slider {
   width: 100%;
   height: 6px;
   border-radius: 999px;
-  background-color: rgb(var(--bg-subtle));
+  /* 轨道底色不在这里:填充比例渐变由组件内联 backgroundImage 提供,
+     且已含未填充段颜色(bg-subtle);触屏 28px 命中区下若保留底色
+     会整条露出,故置 transparent */
+  background-color: transparent;
+  background-repeat: no-repeat;
   outline: none;
   cursor: pointer;
   margin-top: 10px;
+}
+@media (pointer: coarse) {
+  input.calc-slider {
+    height: 32px;
+    margin-top: 0;
+    border-radius: 999px;
+    /* 内联渐变(轨道填充)压成垂直居中的 6px 横带 */
+    background-size: 100% 6px;
+    background-position: center;
+  }
 }
 input.calc-slider::-webkit-slider-thumb {
   -webkit-appearance: none;
@@ -432,6 +464,12 @@ input.calc-slider::-webkit-slider-thumb {
   box-shadow: 0 1px 3px rgb(0 0 0 / 0.25);
   transition: transform 0.15s ease;
 }
+@media (pointer: coarse) {
+  input.calc-slider::-webkit-slider-thumb {
+    width: 24px;
+    height: 24px;
+  }
+}
 input.calc-slider:active::-webkit-slider-thumb {
   transform: scale(1.18);
 }
@@ -443,6 +481,12 @@ input.calc-slider::-moz-range-thumb {
   border: 2px solid rgb(var(--bg-card));
   box-shadow: 0 1px 3px rgb(0 0 0 / 0.25);
 }
+@media (pointer: coarse) {
+  input.calc-slider::-moz-range-thumb {
+    width: 22px;
+    height: 22px;
+  }
+}
 input.calc-slider:focus-visible {
   box-shadow:
     0 0 0 2px rgb(var(--bg-card)),
@@ -451,6 +495,92 @@ input.calc-slider:focus-visible {
 @media (prefers-reduced-motion: reduce) {
   input.calc-slider::-webkit-slider-thumb {
     transition: none;
+  }
+}
+
+/* ════════════════════════════════════════════════════════════
+ * 移动端触控目标兜底(<640px,仅小屏生效、桌面零影响):
+ *  - 复选框/单选钮 16px → 20px(选择器特异性高于 Tailwind h-4/w-4);
+ *  - 行内代码/代码块 <pre> 换行代替横向滚动(长配置输出免来回滑动);
+ *  - 长单词/URL 强制断行,防单 token 撑破容器。
+ * ════════════════════════════════════════════════════════════ */
+@media (max-width: 640px) {
+  .tool-shell input[type='checkbox'],
+  .tool-shell input[type='radio'] {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+  /* 触控目标兜底:工具卡内所有按钮至少 36×36(工厂/批量组件里
+     大量 px-2/py-1.5 的 26~30px 小按钮,逐个改不现实;统一在此抬升。
+     桌面端不受影响) */
+  .tool-shell button {
+    min-height: 2.25rem;
+    min-width: 2.25rem;
+  }
+  .tool-shell pre,
+  .prose-content pre {
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+  .prose-content code {
+    word-break: break-word;
+  }
+  /* 10px 微标签(分类 Pill/徽章等 uppercase 小字)小屏提到 11px:
+     375px 下 10px 已低于可读下限。选择器特异性高于单个工具类,
+     桌面端不命中,零影响。 */
+  main [class*='text-[10px]'] {
+    font-size: 0.6875rem;
+  }
+  /* 兜底:任何 <9px 的可见文本(SVG 刻度、装饰性 micro 标签等)
+     提到 9px;旧 iOS 上 text-size-adjust 对 <9px 的文本还会再放大,
+     反而打乱布局。仅匹配显式 8px 类(项目内无 7px 工具类)。 */
+  main [class*='text-[8px]'],
+  footer [class*='text-[8px]'],
+  .tool-shell [class*='text-[8px]'] {
+    font-size: 9px;
+  }
+}
+
+/* ════════════════════════════════════════════════════════════
+ * 横向滚动容器边缘渐隐提示(触屏渐进增强):
+ * 表格/代码块包在 overflow-x-auto 容器里,移动端没有可见滚动条,
+ * 用户不知道能滑。用 CSS scroll-driven animation 让左右边缘浮现
+ * 卡片底色渐变,滑到头自动消失 —— 天然的"可滑动"视觉暗示。
+ * 浏览器不支持 animation-timeline(旧 iOS / 全部桌面场景不命中
+ * pointer:coarse)时整段 @supports 跳过,零影响。
+ * ════════════════════════════════════════════════════════════ */
+@supports (animation-timeline: scroll()) {
+  @media (pointer: coarse) {
+    .tool-shell div[class*='overflow-x-auto'],
+    .tool-shell div[class*='overflow-auto'],
+    .tool-shell pre[class*='overflow-x-auto'],
+    .prose-content pre[class*='overflow-x-auto'] {
+      /* 渐变浮层不挡点击、不参与滚动内容 */
+      position: relative;
+      scroll-timeline: --scrollx inline;
+    }
+    .tool-shell div[class*='overflow-x-auto']::after,
+    .tool-shell div[class*='overflow-auto']::after,
+    .tool-shell pre[class*='overflow-x-auto']::after,
+    .prose-content pre[class*='overflow-x-auto']::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      width: 2rem;
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0.85;
+      background: linear-gradient(to left, rgb(var(--bg-card)), transparent);
+      animation: scroll-hint-fade linear both;
+      animation-timeline: --scrollx;
+    }
+    @keyframes scroll-hint-fade {
+      to {
+        opacity: 0;
+      }
+    }
   }
 }
 

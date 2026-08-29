@@ -40,7 +40,8 @@ export function Footer({ nav, totalCount }: { nav: FooterNavCategory[]; totalCou
               <ul className="space-y-1.5 text-sm" style={{ color: 'rgb(var(--text-subtle))' }}>
                 {tools.map((tool) => (
                   <li key={tool.slug}>
-                    <Link href={`/tools/${tool.slug}/`} className="hover:text-brand-600">
+                    {/* 触屏(<640px)加纵向 padding 扩大命中区;桌面间距不变 */}
+                    <Link href={`/tools/${tool.slug}/`} className="hover:text-brand-600 max-sm:block max-sm:py-2">
                       {getToolName(locale, tool.slug, tool.name)}
                     </Link>
                   </li>
@@ -75,16 +76,16 @@ export function Footer({ nav, totalCount }: { nav: FooterNavCategory[]; totalCou
           </div>
 
           <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm sm:justify-end">
-            <Link href="/about/" className="hover:text-brand-600" style={{ color: 'rgb(var(--text-muted))' }}>
+            <Link href="/about/" className="hover:text-brand-600 max-sm:py-2" style={{ color: 'rgb(var(--text-muted))' }}>
               {t(locale, 'footerAbout')}
             </Link>
-            <Link href="/contact/" className="hover:text-brand-600" style={{ color: 'rgb(var(--text-muted))' }}>
+            <Link href="/contact/" className="hover:text-brand-600 max-sm:py-2" style={{ color: 'rgb(var(--text-muted))' }}>
               {t(locale, 'footerContact')}
             </Link>
-            <Link href="/privacy/" className="hover:text-brand-600" style={{ color: 'rgb(var(--text-muted))' }}>
+            <Link href="/privacy/" className="hover:text-brand-600 max-sm:py-2" style={{ color: 'rgb(var(--text-muted))' }}>
               {t(locale, 'footerPrivacy')}
             </Link>
-            <Link href="/terms/" className="hover:text-brand-600" style={{ color: 'rgb(var(--text-muted))' }}>
+            <Link href="/terms/" className="hover:text-brand-600 max-sm:py-2" style={{ color: 'rgb(var(--text-muted))' }}>
               {t(locale, 'footerTerms')}
             </Link>
           </div>

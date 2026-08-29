@@ -163,6 +163,7 @@ export default function HomePage() {
                   onChange={(e) => setQuery(e.target.value)}
                   placeholder={t(locale, 'searchPlaceholder', { count: tools.length })}
                   aria-label={t(locale, 'heroSearchLabel')}
+                  enterKeyHint="search"
                   className="w-full rounded-2xl border border-slate-200/80 bg-white/80 py-4 pl-12 pr-12 text-lg text-slate-900 shadow-[0_8px_30px_rgba(15,23,42,0.06)] outline-none backdrop-blur-xl transition-all duration-200 placeholder:text-slate-400 hover:border-slate-300 focus:border-blue-400/60 focus:ring-2 focus:ring-blue-500/20 dark:border-slate-800/80 dark:bg-slate-900/70 dark:text-white dark:shadow-none dark:placeholder:text-slate-500 dark:hover:border-slate-700 dark:focus:border-blue-500/50 dark:focus:ring-blue-500/20 sm:pr-24"
                 />
                 {/* kbd 徽章:提示 ⌘K 全局搜索;点击合成键盘事件复用 Header 监听。

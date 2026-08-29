@@ -48,7 +48,7 @@ function BentoCell({
       <div className="flex-1">{children}</div>
       <Link
         href={href}
-        className="mt-3 text-xs font-medium text-brand-600 opacity-70 transition group-hover:opacity-100 dark:text-brand-400"
+        className="mt-3 text-xs font-medium text-brand-600 opacity-70 transition group-hover:opacity-100 max-sm:inline-block max-sm:py-2 dark:text-brand-400"
       >
         {t(locale, 'bentoOpenTool')}
       </Link>
@@ -290,7 +290,7 @@ function VisitorsCell() {
   if (!stats) return null
 
   return (
-    <BentoCell title={t(locale, 'bentoVisitorsTitle')} href="/tools">
+    <BentoCell title={t(locale, 'bentoVisitorsTitle')} href="/tools" className="col-span-2 md:col-span-1">
       <div className="flex items-baseline justify-between">
         <div>
           <div className="text-2xl font-bold text-primary">

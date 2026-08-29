@@ -64,7 +64,7 @@ export function CookieConsent() {
     <div
       role="dialog"
       aria-label={t(locale, 'cookieAriaLabel')}
-      className="fixed inset-x-0 bottom-0 z-50 m-3 mx-auto max-w-2xl rounded-xl border p-4 shadow-lg sm:m-4"
+      className="fixed inset-x-0 bottom-0 z-50 mx-3 mb-[calc(0.75rem+env(safe-area-inset-bottom))] mt-3 max-w-2xl rounded-xl border p-4 shadow-lg sm:mx-4 sm:mb-[calc(1rem+env(safe-area-inset-bottom))]"
       style={{
         borderColor: 'rgb(var(--border))',
         backgroundColor: 'rgb(var(--bg-card))',

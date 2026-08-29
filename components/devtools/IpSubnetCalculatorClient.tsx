@@ -267,10 +267,12 @@ export function IpSubnetCalculatorClient() {
           >
             {rows.map(([label, value]) => (
               <div key={label} className="flex items-baseline justify-between gap-4 border-b pb-2" style={{ borderColor: 'rgb(var(--border))' }}>
-                <dt className="text-sm" style={{ color: 'rgb(var(--text-muted))' }}>
+                <dt className="shrink-0 text-sm" style={{ color: 'rgb(var(--text-muted))' }}>
                   {label}
                 </dt>
-                <dd className="font-mono text-sm font-semibold" style={{ color: 'rgb(var(--text))' }}>
+                {/* 值(如 32 位二进制掩码 "11111111....00000000")在窄屏可超长:
+                    min-w-0 + break-all 允许按位断行,不撑破容器 */}
+                <dd className="min-w-0 break-all text-right font-mono text-sm font-semibold" style={{ color: 'rgb(var(--text))' }}>
                   {value}
                 </dd>
               </div>

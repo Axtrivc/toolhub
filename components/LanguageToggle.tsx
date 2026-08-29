@@ -92,12 +92,14 @@ export function LanguageToggle() {
         </svg>
       </button>
 
-      {/* 展开菜单:毛玻璃浮层 + scale/opacity 淡入(纯 CSS keyframes) */}
+      {/* 展开菜单:毛玻璃浮层 + scale/opacity 淡入(纯 CSS keyframes)。
+          桌面 header 里按钮靠右 → 右锚;移动抽屉里按钮靠左,右锚会让
+          128px 菜单溢出左缘,故 <md 切换为左锚 */}
       {isOpen && (
         <div
           role="listbox"
           aria-label={t(locale, 'languageToggle')}
-          className="animate-lang-menu absolute right-0 z-50 mt-2 w-32 rounded-xl border border-border/80 bg-card/90 p-1.5 shadow-xl backdrop-blur-md"
+          className="animate-lang-menu absolute right-0 z-50 mt-2 w-32 rounded-xl border border-border/80 bg-card/90 p-1.5 shadow-xl backdrop-blur-md max-md:left-0 max-md:right-auto"
           style={{ transformOrigin: 'top right' }}
         >
           {SUPPORTED_LOCALES.map((l) => {

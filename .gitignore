@@ -72,3 +72,6 @@ nul
 /__pycache__/
 /project-review-report.html
 /submit-urls.txt
+
+# 移动端审计临时产物(scripts/mobile-audit.mjs 的输出)
+/.tmp.mobile-audit/

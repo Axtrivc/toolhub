@@ -110,7 +110,7 @@ export function LifeInWeeksChart({
       <div className="flex flex-col items-center gap-4 sm:flex-row sm:items-start">
         <svg
           viewBox={`0 0 ${W} ${H}`}
-          className="w-[210px] shrink-0 sm:w-[240px]"
+          className="w-[248px] max-w-full shrink-0 sm:w-[240px]"
           role="img"
           aria-label={summaryTemplate.replace('{x}', String(weeksLived)).replace('{y}', String(weeksLeft)).replace('{p}', String(pct))}
         >
@@ -118,10 +118,10 @@ export function LifeInWeeksChart({
           {Array.from({ length: Math.floor(YEARS / 10) + 1 }, (_, i) => i * 10).map((age) => (
             <text
               key={age}
-              x={PAD_L - 6}
+              x={PAD_L - 5}
               y={PAD_T + age * STEP + CELL - 1}
               textAnchor="end"
-              fontSize={7}
+              fontSize={9.5}
               fill="rgb(var(--text-faint))"
             >
               {age}

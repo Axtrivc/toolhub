@@ -666,7 +666,7 @@ export function makeCalculatorClient(config: CalculatorConfig): ComponentType {
         {/* 移动端 sticky 结果条(越过结果区后出现;含安全区 padding) */}
         {stickyVisible && highlightOut && (
           <div
-            className="fixed inset-x-0 bottom-0 z-40 border-t px-4 pb-[calc(0.75rem+env(safe-area-inset-bottom))] pt-3 backdrop-blur-md sm:hidden"
+            className="fixed inset-x-0 bottom-0 z-40 border-t pl-[max(1rem,env(safe-area-inset-left))] pr-[max(1rem,env(safe-area-inset-right))] pb-[calc(0.75rem+env(safe-area-inset-bottom))] pt-3 backdrop-blur-md sm:hidden"
             style={{ borderColor: 'rgb(var(--border))', backgroundColor: 'rgb(var(--bg-card) / 0.92)' }}
           >
             <div className="mx-auto flex max-w-lg items-baseline justify-between gap-4">

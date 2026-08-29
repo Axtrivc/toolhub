@@ -180,7 +180,9 @@ export function CalculatorSliderField({
         onFocus={() => setBubble(true)}
         onBlur={() => setBubble(false)}
         style={{
-          background: `linear-gradient(to right, rgb(var(--primary)) ${pct}%, rgb(var(--bg-subtle)) ${pct}%)`,
+          /* 只设 image 长hand:globals.css 触屏规则用 background-size/position
+             把这条渐变压成 32px 命中区中央的 6px 视觉轨道(简写会把它们重置掉) */
+          backgroundImage: `linear-gradient(to right, rgb(var(--primary)) ${pct}%, rgb(var(--bg-subtle)) ${pct}%)`,
         }}
       />
       {bubble && (

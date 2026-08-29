@@ -197,7 +197,7 @@ export function SearchPalette({ locale, open, onClose }: SearchPaletteProps) {
           aria-label={t(locale, 'searchClose')}
           tabIndex={-1}
           onClick={onClose}
-          className="fixed inset-0 z-50 h-screen w-screen bg-black/20 backdrop-blur-sm dark:bg-black/50"
+          className="fixed inset-0 z-50 h-screen w-screen bg-black/20 backdrop-blur-sm supports-[height:100dvh]:h-dvh dark:bg-black/50"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0, transition: { duration: 0.15 } }}
@@ -228,7 +228,7 @@ export function SearchPalette({ locale, open, onClose }: SearchPaletteProps) {
             ref={panelRef}
             {...panelMotion}
             onClick={(e) => e.stopPropagation()}
-            className="relative flex max-h-[70vh] w-full max-w-xl flex-col overflow-hidden rounded-2xl border border-gray-100 shadow-2xl ring-1 ring-black/5 dark:border-gray-800 dark:ring-white/5"
+            className="relative flex max-h-[70vh] w-full max-w-xl flex-col overflow-hidden rounded-2xl border border-gray-100 shadow-2xl ring-1 ring-black/5 supports-[height:100dvh]:max-h-[70dvh] dark:border-gray-800 dark:ring-white/5"
             style={{ transformOrigin: '50% 0%', backgroundColor: 'rgb(var(--bg-card))' }}
           >
           {/* 搜索输入 */}
@@ -257,6 +257,7 @@ export function SearchPalette({ locale, open, onClose }: SearchPaletteProps) {
               }}
               onKeyDown={onKeyDown}
               placeholder={t(locale, 'searchPalettePlaceholder')}
+              enterKeyHint="search"
               className="h-14 w-full bg-transparent text-base outline-none placeholder:opacity-60"
               style={{ color: 'rgb(var(--text))' }}
               autoFocus

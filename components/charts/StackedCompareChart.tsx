@@ -9,6 +9,7 @@
  * SSR 首帧渲染终态;入场动画仅动 opacity(reduced-motion 直显)。
  */
 
+import { useEffect, useRef, useState } from 'react'
 import { motion, useReducedMotion } from '../motion/MotionPrimitives'
 import { ChartCard, fmtCompact } from './chartKit'
 
@@ -25,13 +26,31 @@ export interface StackedCompareChartProps {
   formatTotal?: (n: number) => string
 }
 
-const W = 640
 const BAR_H = 26
 const ROW_GAP = 30
 const LABEL_H = 16
+/* viewBox 宽度自适应:桌面 ≥640 与旧版完全一致(W=640);移动端跟随
+   容器实宽(≥320),让 11~12px 行标签/总值 ~1:1 渲染 —— 固定 640 时
+   会被缩到 ~6px 完全不可读 */
+const W_MIN = 240
+const W_MAX = 640
 
 export function StackedCompareChart({ title, rows, formatTotal = fmtCompact }: StackedCompareChartProps) {
   const reduceMotion = useReducedMotion()
+  const svgRef = useRef<SVGSVGElement>(null)
+  // SSR 首帧用 W_MAX(与旧渲染一致);挂载后 ResizeObserver 校准到容器实宽
+  const [W, setW] = useState(W_MAX)
+  useEffect(() => {
+    const el = svgRef.current
+    if (!el || typeof ResizeObserver === 'undefined') return
+    const ro = new ResizeObserver(() => {
+      const cw = el.clientWidth
+      if (cw > 0) setW(Math.max(W_MIN, Math.min(W_MAX, Math.round(cw))))
+    })
+    ro.observe(el)
+    return () => ro.disconnect()
+  }, [])
+
   const validRows = rows
     .map((r) => ({ ...r, segments: r.segments.filter((s) => Number.isFinite(s.value) && s.value > 0) }))
     .filter((r) => r.segments.length > 0)
@@ -49,7 +68,7 @@ export function StackedCompareChart({ title, rows, formatTotal = fmtCompact }: S
 
   return (
     <ChartCard title={title}>
-      <svg viewBox={`0 0 ${W} ${H}`} className="w-full" role="img" aria-label={title ?? 'comparison'}>
+      <svg ref={svgRef} viewBox={`0 0 ${W} ${H}`} className="w-full" role="img" aria-label={title ?? 'comparison'}>
         {validRows.map((r, ri) => {
           const total = totals[ri]
           const y0 = ri * (LABEL_H + BAR_H + ROW_GAP)
