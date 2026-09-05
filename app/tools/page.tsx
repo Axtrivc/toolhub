@@ -1,12 +1,13 @@
 import type { Metadata } from 'next'
-import Link from 'next/link'
 import { getToolsByCategory, getPublishedTools } from '@/lib/tools'
 import { SITE_NAME, jsonLdStringify } from '@/lib/seo'
 import { buildItemListJsonLd } from '@/lib/seo'
 import {
+  ToolCategoryPills,
   ToolDirectoryCard,
   ToolDirectoryHeading,
   ToolDirectoryHeroBody,
+  ToolDirectoryTitle,
 } from '@/components/ToolDirectoryCards'
 
 export const metadata: Metadata = {
@@ -49,32 +50,18 @@ export default function ToolsHubPage() {
         dangerouslySetInnerHTML={{ __html: jsonLdStringify(itemListLd) }}
       />
 
-      {/* Hero(标题复用 navAllTools;说明/链接经客户端组件取当前语言) */}
+      {/* Hero(H1 与说明均经客户端组件取当前语言;SSR 恒英文,SEO 标题由 metadata 保证) */}
       <section className="mx-auto mb-12 max-w-3xl text-center">
-        <h1 className="text-4xl font-bold sm:text-5xl" style={{ color: 'rgb(var(--text))' }}>
-          All Tools
-        </h1>
+        <ToolDirectoryTitle />
         <ToolDirectoryHeroBody count={all.length} />
       </section>
 
       {/* 分类目录快速跳转 —— 统一回首页并选中分类(与首页交互一致),
-          不再使用页内 # 锚点,避免用户留在这个只读列表页。 */}
-      <nav className="mx-auto mb-10 flex max-w-4xl flex-wrap justify-center gap-2" aria-label="Tool categories">
-        {categories.map(([category, categoryTools]) => (
-          <Link
-            key={category}
-            href={`/?category=${encodeURIComponent(category)}#all-tools`}
-            className="rounded-full border px-4 py-1.5 text-sm font-medium transition hover:bg-brand-50"
-            style={{
-              borderColor: 'rgb(var(--border))',
-              backgroundColor: 'rgb(var(--bg-card))',
-              color: 'rgb(var(--text-muted))',
-            }}
-          >
-            {category} ({categoryTools.length})
-          </Link>
-        ))}
-      </nav>
+          不再使用页内 # 锚点,避免用户留在这个只读列表页。
+          胶囊文案经客户端组件 ToolCategoryPills 本地化(tc 分类名)。 */}
+      <ToolCategoryPills
+        categories={categories.map(([category, categoryTools]) => [category, categoryTools.length])}
+      />
 
       {/* 分类分组展示全量工具(卡片/标题由客户端组件本地化) */}
       {categories.map(([category, categoryTools]) => (

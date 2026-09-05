@@ -61,8 +61,8 @@ export default function HomePage() {
     window.dispatchEvent(new KeyboardEvent('keydown', { key: 'k', metaKey: true, cancelable: true }))
   }
 
-  // 营销展示用的取整数(向下取整到十位):169 → 160,显示为 "160+"。
-  // 规则:不精确到个位;140+ / 150+ 等按实际数量进位。当前 169 落在 160–169,故 160+。
+  // 营销展示用的取整数(向下取整到十位):225 → 220,显示为 "220+"。
+  // 规则:不精确到个位;200+ / 210+ 等按实际数量进位。当前 225 落在 220–229,故 220+。
   // 仅用于 Hero badge / SEO 文案等营销位置;搜索框、列表计数仍用精确的 tools.length。
   const roundedCount = Math.floor(tools.length / 10) * 10
 

@@ -25,6 +25,11 @@ interface SearchPaletteProps {
 /** 单页最多展示的结果数,避免超长滚动 */
 const MAX_RESULTS = 30
 
+// 工具清单:注册表只读且不可变,模块加载时求值一次即可(避免每次 render
+// 重复调用 getPublishedTools())。本组件经 Header 的 dynamic() 懒加载,
+// 注册表随本 chunk 一起离开所有页面的首屏(首次 ⌘K 时才下载)。
+const TOOLS = getPublishedTools()
+
 /**
  * 全局搜索弹窗(命令面板风格,参考 Raycast / macOS Spotlight)
  *
@@ -55,16 +60,13 @@ export function SearchPalette({ locale, open, onClose }: SearchPaletteProps) {
   const reduceMotion = useReducedMotion()
   const router = useRouter()
 
-  // 工具清单自取:本组件经 Header 的 dynamic() 懒加载,注册表随本 chunk
-  // 一起离开所有页面的首屏(首次 ⌘K 时才下载)。
-  const tools = useRef(getPublishedTools()).current
-
-  // ── 过滤:统一搜索引擎 lib/tool-search(分词 AND + 加权评分,含长尾词/分类/slug)──
+  // ── 过滤:统一搜索引擎 lib/tool-search(分词 AND + 加权评分,含长尾词/分类/slug,
+  // 并按当前语言附加本地化名称/简介/分类字段,支持中文等 CJK 子串命中)──
   const results = useMemo(() => {
     const q = query.trim()
-    if (!q) return tools.slice(0, MAX_RESULTS)
-    return searchTools(tools, q, MAX_RESULTS) ?? []
-  }, [tools, query])
+    if (!q) return TOOLS.slice(0, MAX_RESULTS)
+    return searchTools(TOOLS, q, MAX_RESULTS, locale) ?? []
+  }, [query, locale])
 
   // ── 内联答案:算式 / 百分比 / 单位换算(输入即答,置于工具列表之上) ──
   const inline = useMemo(() => tryInlineAnswer(query), [query])
@@ -439,7 +441,7 @@ export function SearchPalette({ locale, open, onClose }: SearchPaletteProps) {
             <span style={{ color: 'rgb(var(--text-faint))' }}>
               {query.trim()
                 ? t(locale, 'searchMatchesCount', { count: total })
-                : t(locale, 'searchPaletteHint', { count: tools.length })}
+                : t(locale, 'searchPaletteHint', { count: TOOLS.length })}
             </span>
           </div>
           </motion.div>

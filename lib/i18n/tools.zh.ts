@@ -2,7 +2,7 @@
  * 工具卡片文案 - 中文翻译(zh)
  *
  * 结构:Record<slug, { name, shortIntro }>
- * - slug 与 lib/tools.ts 的 slug 字段一一对应(共 169 个)
+ * - slug 与 lib/tools.ts 的 slug 字段一一对应(共 225 个)
  * - 缺失的 slug 自动回退到英文原值(见 lib/i18n.ts getToolName/getToolShortIntro)
  * - 此文件只翻译首页/卡片展示用的 name + shortIntro,
  *   不碰 SEO 字段(title/description/h1/keywords 等保持英文)
@@ -135,6 +135,38 @@ export const zhTools: Record<string, { name: string; shortIntro: string }> = {
   'reverse-stripe-fee-calculator': {
     name: 'Stripe 手续费反算器',
     shortIntro: '反推应收金额,让扣除手续费后的净收入正好是你要的数。',
+  },
+  'electricity-cost-calculator': {
+    name: '电费计算器',
+    shortIntro: '算出任何电器每天、每月、每年的真实电费。',
+  },
+  'fuel-cost-calculator': {
+    name: '油费计算器',
+    shortIntro: '算出任意行程的油钱——单程、往返、人均分摊。',
+  },
+  'subscription-cost-calculator': {
+    name: '订阅费用计算器',
+    shortIntro: '汇总所有订阅,看清一年要花多少钱。',
+  },
+  'overtime-calculator': {
+    name: '加班费计算器',
+    shortIntro: '按 1.5 倍、2 倍或自定义倍数计算周薪与加班费。',
+  },
+  'take-home-pay-calculator': {
+    name: '税后工资计算器',
+    shortIntro: '估算扣除联邦税、FICA 和税前抵扣后的净工资。',
+  },
+  'wedding-budget-calculator': {
+    name: '婚礼预算计算器',
+    shortIntro: '按典型占比把总预算拆分到各个类别。',
+  },
+  'amortization-table-generator': {
+    name: '摊还计划表生成器',
+    shortIntro: '逐期还款明细与余额变化,支持导出 CSV。',
+  },
+  'car-cost-calculator': {
+    name: '养车成本计算器',
+    shortIntro: '算出总持有成本:油费、保险、保养、折旧与贷款。',
   },
 
   // ─────────── ⚙️ 开发者工具 ───────────
@@ -286,6 +318,62 @@ export const zhTools: Record<string, { name: string; shortIntro: string }> = {
     name: 'User-Agent 解析器',
     shortIntro: '把 user-agent 字符串解析为浏览器、操作系统、引擎和设备。',
   },
+  'epoch-converter': {
+    name: '时间戳转换器',
+    shortIntro: 'Unix 时间戳与日期互转,支持 UTC 与本地时间。',
+  },
+  'json-diff': {
+    name: 'JSON 对比工具',
+    shortIntro: '逐字段对比两份 JSON,不敏感于键顺序。',
+  },
+  'robots-txt-generator': {
+    name: 'robots.txt 生成器',
+    shortIntro: '用预设模板生成正确的 robots.txt,实时预览。',
+  },
+  'keycode-info': {
+    name: '键盘按键信息查看器',
+    shortIntro: '按下任意键,实时查看 key、code、keyCode 与修饰键。',
+  },
+  'mime-type-lookup': {
+    name: 'MIME 类型查询',
+    shortIntro: '扩展名与 MIME 类型互查,适用于 HTTP 头与配置。',
+  },
+  'xml-formatter': {
+    name: 'XML 格式化校验器',
+    shortIntro: '格式化、压缩或精确校验 XML 文档。',
+  },
+  'log-filter-tool': {
+    name: '日志过滤工具',
+    shortIntro: 'grep 式日志过滤——按关键词、级别或正则。',
+  },
+  'ascii-table': {
+    name: 'ASCII 码表',
+    shortIntro: '全部 ASCII 字符的十/十六/八/二进制码,可搜索。',
+  },
+  'jwt-generator': {
+    name: 'JWT 生成器',
+    shortIntro: '在本地生成签名 JWT,配合解码器测试使用。',
+  },
+  'base-converter': {
+    name: '进制转换器(2-36)',
+    shortIntro: '任意 2–36 进制互转,支持小数,常用进制同时呈现。',
+  },
+  'cron-expression-generator': {
+    name: 'Cron 表达式生成器',
+    shortIntro: '点击式构建 cron 定时任务,实时预览通俗解释。',
+  },
+  'htaccess-redirect-generator': {
+    name: '.htaccess 重定向生成器',
+    shortIntro: '轻松生成 301、域名迁移、HTTPS 与规范化规则。',
+  },
+  'unicode-character-lookup': {
+    name: 'Unicode 字符查询',
+    shortIntro: '按名称查找或粘贴任意符号,显示码点与所属区块。',
+  },
+  'toml-to-json': {
+    name: 'TOML 转 JSON',
+    shortIntro: '在本地把 Cargo/pyproject 风格的 TOML 解析为整洁 JSON。',
+  },
 
   // ─────────── 🔤 文本工具 ───────────
   'word-counter': {
@@ -384,6 +472,26 @@ export const zhTools: Record<string, { name: string; shortIntro: string }> = {
     name: 'Wordle 求解器',
     shortIntro: '按已知、包含和排除的字母缩小 Wordle 答案范围。',
   },
+  'line-diff-checker': {
+    name: '文本行对比工具',
+    shortIntro: '逐行对比文本,统计新增、删除与变更行数。',
+  },
+  'markdown-toc-generator': {
+    name: 'Markdown 目录生成器',
+    shortIntro: '从标题生成带链接的目录,兼容 GitHub 锚点。',
+  },
+  'reading-level-checker': {
+    name: '文章可读性检测',
+    shortIntro: 'Flesch 分数与年级水平,附逐句分析。',
+  },
+  'morse-code-translator': {
+    name: '摩尔斯电码翻译器',
+    shortIntro: '双向摩尔斯电码翻译,可查看点划并可播放提示音。',
+  },
+  'typing-speed-test': {
+    name: '打字速度测试',
+    shortIntro: '一分钟测出 WPM 与准确率,干净无广告。',
+  },
 
   // ─────────── 📐 单位换算器 ───────────
   'mass-converter': {
@@ -457,6 +565,10 @@ export const zhTools: Record<string, { name: string; shortIntro: string }> = {
   'length-converter': {
     name: '长度换算器',
     shortIntro: '即时在公制与英制长度单位间换算。',
+  },
+  'cooking-converter': {
+    name: '烹饪计量换算器',
+    shortIntro: '杯 ↔ 克 ↔ 盎司互转,按食材密度校正。',
   },
 
   // ─────────── 🧮 数学计算器 ───────────
@@ -532,6 +644,10 @@ export const zhTools: Record<string, { name: string; shortIntro: string }> = {
     name: '百分比计算器',
     shortIntro: '即时计算百分比、增减与折扣。',
   },
+  'roman-numeral-converter': {
+    name: '罗马数字转换器',
+    shortIntro: '罗马数字双向转换,附速查表。',
+  },
 
   // ─────────── 💪 健康计算器 ───────────
   'bmi-calculator': {
@@ -569,6 +685,30 @@ export const zhTools: Record<string, { name: string; shortIntro: string }> = {
   'ideal-weight-calculator': {
     name: '理想体重计算器',
     shortIntro: '按身高和性别算出理想体重。',
+  },
+  'pace-calculator': {
+    name: '跑步配速计算器',
+    shortIntro: '配速、完赛时间预测与任意赛距的分段表。',
+  },
+  'protein-intake-calculator': {
+    name: '蛋白质摄入计算器',
+    shortIntro: '按体重与目标算出每日蛋白质需求(克)。',
+  },
+  'sleep-calculator': {
+    name: '睡眠周期计算器',
+    shortIntro: '按 90 分钟睡眠周期推算就寝时间,醒来更清爽。',
+  },
+  'heart-rate-zone-calculator': {
+    name: '心率区间计算器',
+    shortIntro: '结合静息心率,算出你的五个训练心率区间。',
+  },
+  'caffeine-calculator': {
+    name: '咖啡因计算器',
+    shortIntro: '估算此刻你体内还残留多少咖啡因。',
+  },
+  'steps-to-calories-calculator': {
+    name: '步数换算卡路里',
+    shortIntro: '步数 → 卡路里与距离,按你的身体数据校正。',
   },
 
   // ─────────── 🎓 教育计算器 ───────────
@@ -609,6 +749,10 @@ export const zhTools: Record<string, { name: string; shortIntro: string }> = {
   'timezone-converter': {
     name: '时区转换器',
     shortIntro: '跨时区换算时间,找出适合开会的时间段。',
+  },
+  'screen-time-calculator': {
+    name: '屏幕使用时间计算器',
+    shortIntro: '把每天刷屏的小时数,换算成人生的年数。',
   },
 
   // ─────────── 🎨 网页设计工具 ───────────
@@ -690,6 +834,22 @@ export const zhTools: Record<string, { name: string; shortIntro: string }> = {
     name: 'SSH 密钥生成器',
     shortIntro: '在浏览器中生成 RSA 或 Ed25519 SSH 密钥对。',
   },
+  'hmac-generator': {
+    name: 'HMAC 生成器',
+    shortIntro: '基于原生 WebCrypto 生成 HMAC-SHA256/384/512 签名。',
+  },
+  'hash-comparator': {
+    name: '哈希对比器',
+    shortIntro: '常数时间比较两个哈希值,杜绝时序泄露。',
+  },
+  'password-entropy-checker': {
+    name: '密码熵检查器',
+    shortIntro: '以比特为单位衡量密码强度——最诚实的指标。',
+  },
+  'aes-encrypt-decrypt': {
+    name: 'AES 加密解密',
+    shortIntro: '浏览器内 AES-256-GCM:带认证、PBKDF2 派生密钥、零上传。',
+  },
 
   // ─────────── 💼 商业工具 ───────────
   'qr-code-generator': {
@@ -710,4 +870,77 @@ export const zhTools: Record<string, { name: string; shortIntro: string }> = {
     name: 'Cron 表达式解析器',
     shortIntro: '把 cron 表达式转为通俗语言,并查看下次 5 次触发时间。',
   },
+
+  // ─────────── 🤖 AI 工具 ───────────
+  'llm-cost-calculator': {
+    name: 'LLM API 成本计算器',
+    shortIntro: '并排对比 17 个模型的单次请求与月度 API 成本。',
+  },
+  'context-window-checker': {
+    name: '上下文窗口检查器',
+    shortIntro: 'token 数对比各模型上下文上限,附余量百分比。',
+  },
+  'json-to-zod': {
+    name: 'JSON 转 Zod Schema',
+    shortIntro: '粘贴 JSON,生成带类型的 Zod schema,可直接校验 AI 输出。',
+  },
+  'json-repair': {
+    name: 'JSON 修复工具',
+    shortIntro: '抢救 LLM 输出的坏 JSON——截断、尾逗号、代码围栏。',
+  },
+  'markdown-fence-extractor': {
+    name: '代码块提取器',
+    shortIntro: '从 Markdown 或 AI 回答中提取全部 ``` 代码块。',
+  },
+  'prompt-template-filler': {
+    name: '提示词模板填充器',
+    shortIntro: '用 JSON 填充提示词模板中的 {{变量}},实时预览。',
+  },
+  'openai-tools-builder': {
+    name: 'OpenAI Tools JSON 构建器',
+    shortIntro: '表单式构建工具定义,输出干净的 tools JSON。',
+  },
+  'csv-to-finetune-jsonl': {
+    name: 'CSV 转微调 JSONL',
+    shortIntro: 'CSV 训练行 → OpenAI 对话格式 JSONL,字段映射并校验。',
+  },
+  'token-visualizer': {
+    name: 'Token 可视化',
+    shortIntro: '彩色标注 token 边界与数量,看清模型眼里的文本。',
+  },
+  'embedding-price-calculator': {
+    name: 'Embedding 价格计算器',
+    shortIntro: '对比各模型嵌入成本:维度、$/1M tokens 与批量总价。',
+  },
+
+  // ─────────── 🎲 游戏工具 ───────────
+  'dice-roller': {
+    name: '骰子模拟器',
+    shortIntro: '掷任意骰子——d4 到 d100,可多枚同掷,公平随机。',
+  },
+  'coin-flip': {
+    name: '抛硬币',
+    shortIntro: '即时抛出正反面,并记录累计统计。',
+  },
+  'wheel-spinner': {
+    name: '转盘决定器',
+    shortIntro: '转动转盘做决定:名字、家务、餐厅——公平选出。',
+  },
+  'random-team-generator': {
+    name: '随机分组器',
+    shortIntro: '把名单公平分成若干小组,不满意就重新洗牌。',
+  },
+
+  // ─────────── 🐶 宠物工具 ───────────
+  'dog-age-calculator': {
+    name: '狗狗年龄计算器',
+    shortIntro: '按犬种体型把狗龄换算为人类年龄——告别 ×7 神话。',
+  },
+
+  // ─────────── 🏠 家居计算器 ───────────
+  'paint-calculator': {
+    name: '油漆用量计算器',
+    shortIntro: '按房间面积、涂刷遍数与门窗扣减,算出油漆用量(加仑/升)。',
+  },
+
 }

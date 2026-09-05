@@ -2,7 +2,7 @@
 
 # 🧰 ToolHub
 
-### **169 free online tools — calculators, converters & developer utilities that run 100% in your browser.**
+### **225 free online tools — calculators, converters & developer utilities that run 100% in your browser.**
 
 No sign-up · No uploads · Nothing you type ever leaves your device
 
@@ -34,7 +34,7 @@ No sign-up · No uploads · Nothing you type ever leaves your device
 |:---|:---|
 | 🔒 **Privacy-first** | Inputs never leave your device — calculations run client-side, period |
 | 🌍 **Four languages** | English, 中文, Español, Deutsch — switchable from any page |
-| ⌨️ **Command palette** | Press <kbd>Ctrl</kbd>/<kbd>Cmd</kbd> + <kbd>K</kbd> to fuzzy-search all 169 tools |
+| ⌨️ **Command palette** | Press <kbd>Ctrl</kbd>/<kbd>Cmd</kbd> + <kbd>K</kbd> to fuzzy-search all 225 tools |
 | 📱 **Installable PWA** | Service-worker caching keeps repeat visits fast, even offline |
 | 🌗 **Dark & light themes** | Plus keyboard-friendly dialogs, skip links & reduced-motion support |
 | 🍪 **Consent-gated extras** | Ads and GA4 load only after opt-in; built-in analytics are cookie-free |
@@ -47,7 +47,7 @@ No sign-up · No uploads · Nothing you type ever leaves your device
 <tr>
 <td width="50%" valign="top">
 
-**⌨️ Command palette** — fuzzy-search all 169 tools from anywhere
+**⌨️ Command palette** — fuzzy-search all 225 tools from anywhere
 
 <br/>
 
@@ -68,14 +68,15 @@ No sign-up · No uploads · Nothing you type ever leaves your device
 
 ---
 
-## 🗂️ 169 Tools · 11 Categories
+## 🗂️ 225 Tools · 15 Categories
 
 | | | |
 |:---|:---|:---|
-| 🧑‍💻 **Developer Tools** — 37 | 💰 **Finance Calculators** — 31 | 📝 **Text Tools** — 24 |
-| 🔄 **Unit Converters** — 18 | 🧮 **Math Calculators** — 18 | 🎨 **Web Design Tools** — 14 |
-| 🩺 **Health Calculators** — 9 | ⏰ **Time Calculators** — 7 | 🔐 **Security Tools** — 5 |
-| 🎓 **Education Calculators** — 3 | 💼 **Business Tools** — 3 | |
+| 🧑‍💻 **Developer Tools** — 50 | 💰 **Finance Calculators** — 39 | 📝 **Text Tools** — 29 |
+| 🔄 **Unit Converters** — 19 | 🧮 **Math Calculators** — 19 | 🎨 **Web Design Tools** — 14 |
+| 🩺 **Health Calculators** — 15 | 🔐 **Security Tools** — 9 | ⏰ **Time Calculators** — 8 |
+| 🤖 **AI Tools** — 11 | 🎲 **Game Tools** — 4 | 🎓 **Education Calculators** — 3 |
+| 💼 **Business Tools** — 3 | 🐶 **Pet Tools** — 1 | 🏠 **Home Calculators** — 1 |
 
 👉 [Explore the full directory](https://toolhub.axtrivc.com/tools)
 
@@ -138,7 +139,7 @@ The `out/` directory is plain HTML/CSS/JS — deployable to any static host.
 
 ```
 app/           # App Router pages
-  tools/       #   169 tool pages (one <slug>/page.tsx each)
+  tools/       #   225 tool pages (one <slug>/page.tsx each)
   blog/        #   technical write-ups
   about/ contact/ privacy/ terms/   # compliance pages
   sitemap.ts   #   auto-generated sitemap.xml

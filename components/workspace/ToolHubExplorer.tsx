@@ -124,14 +124,15 @@ export function ToolHubExplorer({ tools, query, onQueryChange }: ToolHubExplorer
 
   // 过滤:统一搜索引擎 lib/tool-search(分词 AND + 长尾词/分类/slug 全字段加权,
   // 旧实现漏 longTailKeywords 且要求连续子串)+ 可选主题桶。
+  // 搜索附带 locale:中文等语言下用本地化名称/简介/分类匹配(CJK 子串直接命中)。
   // 主题桶复用 hubTools 同一谓词(含兜底主题归属),保证与 hubCounts 计数徽章一致。
   const q = query.trim()
   const filtered = useMemo(() => {
     if (!q) return activeHub ? hubTools(tools, activeHub) : tools
     const base = activeHub ? hubTools(tools, activeHub) : tools
-    return searchTools(base, q, base.length) ?? []
+    return searchTools(base, q, base.length, locale) ?? []
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [tools, q, activeHub])
+  }, [tools, q, activeHub, locale])
 
   const enterVariants = reduceMotion
     ? { hidden: { opacity: 0 }, show: { opacity: 1, transition: { duration: 0.2 } } }

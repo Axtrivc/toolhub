@@ -97,3 +97,42 @@ export function ToolDirectoryHeroBody({ count }: { count: number }) {
     </p>
   )
 }
+
+/** 目录页 H1(客户端取当前语言,复用 navAllTools;SSR 恒英文,SEO 标题由 metadata 保证) */
+export function ToolDirectoryTitle() {
+  const { locale } = useApp()
+  return (
+    <h1 className="text-4xl font-bold sm:text-5xl" style={{ color: 'rgb(var(--text))' }}>
+      {t(locale, 'navAllTools')}
+    </h1>
+  )
+}
+
+/**
+ * 分类胶囊导航:点击回首页并选中该分类(与首页交互一致)。
+ * 分类名经 tc() 本地化;数量为该分类工具数。
+ */
+export function ToolCategoryPills({ categories }: { categories: Array<[string, number]> }) {
+  const { locale } = useApp()
+  return (
+    <nav
+      className="mx-auto mb-10 flex max-w-4xl flex-wrap justify-center gap-2"
+      aria-label="Tool categories"
+    >
+      {categories.map(([category, count]) => (
+        <Link
+          key={category}
+          href={`/?category=${encodeURIComponent(category)}#all-tools`}
+          className="rounded-full border px-4 py-1.5 text-sm font-medium transition hover:bg-brand-50"
+          style={{
+            borderColor: 'rgb(var(--border))',
+            backgroundColor: 'rgb(var(--bg-card))',
+            color: 'rgb(var(--text-muted))',
+          }}
+        >
+          {tc(locale, category)} ({count})
+        </Link>
+      ))}
+    </nav>
+  )
+}

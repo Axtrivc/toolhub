@@ -2,7 +2,7 @@
  * Werkzeuge — deutsche Übersetzungen (de)
  *
  * Struktur: Record<slug, { name, shortIntro }>
- * - Die slugs entsprechen 1:1 lib/tools.ts (169 Werkzeuge).
+ * - Die slugs entsprechen 1:1 lib/tools.ts (225 Werkzeuge).
  * - Fehlt ein slug, wird auf den englischen Originalwert zurückgegriffen
  *   (siehe lib/i18n.ts getToolName/getToolShortIntro).
  * - Übersetzt werden nur name + shortIntro der Karten;
@@ -134,6 +134,38 @@ export const deTools: Record<string, { name: string; shortIntro: string }> = {
   'reverse-stripe-fee-calculator': {
     name: 'Stripe-Gebühren-Rückrechner',
     shortIntro: 'Berechne, wie viel du verlangen musst, um netto genau den Wunschbetrag zu erhalten.',
+  },
+  'electricity-cost-calculator': {
+    name: 'Stromkosten-Rechner',
+    shortIntro: 'Was jedes Gerät wirklich pro Tag, Monat und Jahr kostet.',
+  },
+  'fuel-cost-calculator': {
+    name: 'Spritkosten-Rechner',
+    shortIntro: 'Benzinkosten für jede Fahrt — hin, zurück und pro Person.',
+  },
+  'subscription-cost-calculator': {
+    name: 'Abo-Kosten-Rechner',
+    shortIntro: 'Alle Abos summieren und den jährlichen Schaden sehen.',
+  },
+  'overtime-calculator': {
+    name: 'Überstunden-Rechner',
+    shortIntro: 'Wochenlohn mit 1,5×, 2× oder eigenen Multiplikatoren.',
+  },
+  'take-home-pay-calculator': {
+    name: 'Netto-Gehaltsrechner',
+    shortIntro: 'Nettolohn nach Bundessteuer, FICA und Abzügen vor Steuern.',
+  },
+  'wedding-budget-calculator': {
+    name: 'Hochzeitsbudget-Rechner',
+    shortIntro: 'Gesamtbudget in Kategoriebeträge mit typischen Prozentsätzen.',
+  },
+  'amortization-table-generator': {
+    name: 'Tilgungsplan-Generator',
+    shortIntro: 'Kompletter Zahlungsplan mit laufendem Saldo und CSV-Export.',
+  },
+  'car-cost-calculator': {
+    name: 'Autokosten-Rechner',
+    shortIntro: 'Gesamte Haltungskosten: Sprit, Versicherung, Wartung, Wertverlust, Finanzierung.',
   },
 
   // ─────────── ⚙️ Entwickler-Werkzeuge ───────────
@@ -285,6 +317,62 @@ export const deTools: Record<string, { name: string; shortIntro: string }> = {
     name: 'User-Agent-Parser',
     shortIntro: 'User-Agent-Strings in Browser, OS, Engine und Gerät zerlegen.',
   },
+  'epoch-converter': {
+    name: 'Epoch-Konverter',
+    shortIntro: 'Unix-Timestamps in Datum und zurück, in UTC oder Ortszeit.',
+  },
+  'json-diff': {
+    name: 'JSON-Vergleich',
+    shortIntro: 'Zwei JSON-Payloads Feld für Feld vergleichen, reihenfolgeunabhängig.',
+  },
+  'robots-txt-generator': {
+    name: 'robots.txt-Generator',
+    shortIntro: 'Korrekte robots.txt mit Vorlagen und Live-Vorschau erstellen.',
+  },
+  'keycode-info': {
+    name: 'Tastatur-Event-Info (Keycode)',
+    shortIntro: 'Beliebige Taste drücken — key, code, keyCode und Modifikatoren live.',
+  },
+  'mime-type-lookup': {
+    name: 'MIME-Typ-Suche',
+    shortIntro: 'Erweiterung ↔ MIME-Typ für HTTP-Header und Konfigurationen.',
+  },
+  'xml-formatter': {
+    name: 'XML-Formatter & Validator',
+    shortIntro: 'XML schön drucken, minifizieren oder gezielt validieren.',
+  },
+  'log-filter-tool': {
+    name: 'Log-Filter & Grep',
+    shortIntro: 'Grep-artiges Filtern von Logs — Stichwort, Level oder Regex.',
+  },
+  'ascii-table': {
+    name: 'ASCII-Tabelle',
+    shortIntro: 'Jedes ASCII-Zeichen mit Dez/Hex/Okt/Bin-Code, durchsuchbar.',
+  },
+  'jwt-generator': {
+    name: 'JWT-Generator',
+    shortIntro: 'Signierte JWTs lokal erstellen — passt zu unserem Decoder zum Testen.',
+  },
+  'base-converter': {
+    name: 'Basen-Umrechner (2-36)',
+    shortIntro: 'Beliebige Basis 2–36, mit Brüchen, alle gängigen Basen auf einmal.',
+  },
+  'cron-expression-generator': {
+    name: 'Cron-Ausdrucks-Generator',
+    shortIntro: 'Cron-Zeitpläne per Klick bauen, mit Live-Preview in Klartext.',
+  },
+  'htaccess-redirect-generator': {
+    name: '.htaccess-Redirect-Generator',
+    shortIntro: '301s, Domain-Umzüge, HTTPS und Canonical-Regeln ohne Tränen.',
+  },
+  'unicode-character-lookup': {
+    name: 'Unicode-Zeichensuche',
+    shortIntro: 'Jedes Symbol per Name oder Einfügen finden — Codepoint und Block.',
+  },
+  'toml-to-json': {
+    name: 'TOML zu JSON',
+    shortIntro: 'Cargo-/pyproject-TOML lokal zu sauberem JSON parsen.',
+  },
 
   // ─────────── 🔤 Text-Werkzeuge ───────────
   'word-counter': {
@@ -383,6 +471,26 @@ export const deTools: Record<string, { name: string; shortIntro: string }> = {
     name: 'Wordle-Löser',
     shortIntro: 'Wordle-Antworten anhand bekannter, enthaltener und ausgeschlossener Buchstaben eingrenzen.',
   },
+  'line-diff-checker': {
+    name: 'Zeilen-Diff',
+    shortIntro: 'Diff Zeile für Zeile mit Anzahl von Ergänzungen, Löschungen und Änderungen.',
+  },
+  'markdown-toc-generator': {
+    name: 'Markdown-Inhaltsverzeichnis',
+    shortIntro: 'Verlinkte Gliederung aus deinen Überschriften, GitHub-Slug-kompatibel.',
+  },
+  'reading-level-checker': {
+    name: 'Lesbarkeits-Check',
+    shortIntro: 'Flesch-Scores und Klassenstufe mit Satz-für-Satz-Analyse.',
+  },
+  'morse-code-translator': {
+    name: 'Morse-Übersetzer',
+    shortIntro: 'Zweiseitige Morse-Übersetzung mit Punkt-Strich-Ansicht und Piepton.',
+  },
+  'typing-speed-test': {
+    name: 'Tippgeschwindigkeitstest',
+    shortIntro: 'Einminütiger WPM- und Genauigkeitstest — clean und werbefrei.',
+  },
 
   // ─────────── 📐 Einheiten-Umrechner ───────────
   'mass-converter': {
@@ -456,6 +564,10 @@ export const deTools: Record<string, { name: string; shortIntro: string }> = {
   'length-converter': {
     name: 'Längen-Umrechner',
     shortIntro: 'Rechnet sofort zwischen metrischen und imperialen Längen.',
+  },
+  'cooking-converter': {
+    name: 'Küchen-Maß-Umrechner',
+    shortIntro: 'Tassen ↔ Gramm ↔ Unzen, je nach Zutaten-Dichte angepasst.',
   },
 
   // ─────────── 🧮 Mathe-Rechner ───────────
@@ -531,6 +643,10 @@ export const deTools: Record<string, { name: string; shortIntro: string }> = {
     name: 'Prozentrechner',
     shortIntro: 'Berechnet sofort Prozente, Zu-/Abnahmen und Rabatte.',
   },
+  'roman-numeral-converter': {
+    name: 'Römische-Zahlen-Umrechner',
+    shortIntro: 'Zweiseitige römische Zahlen mit schneller Referenztabelle.',
+  },
 
   // ─────────── 💪 Gesundheitsrechner ───────────
   'bmi-calculator': {
@@ -568,6 +684,30 @@ export const deTools: Record<string, { name: string; shortIntro: string }> = {
   'ideal-weight-calculator': {
     name: 'Idealgewicht-Rechner',
     shortIntro: 'Findet dein Idealgewicht nach Größe und Geschlecht.',
+  },
+  'pace-calculator': {
+    name: 'Lauf-Pace-Rechner',
+    shortIntro: 'Pace, Zielzeit-Prognose und Zwischenzeiten für jede Distanz.',
+  },
+  'protein-intake-calculator': {
+    name: 'Eiweiß-Bedarfsrechner',
+    shortIntro: 'Tägliches Eiweißziel in Gramm, abgestimmt auf Gewicht und Ziel.',
+  },
+  'sleep-calculator': {
+    name: 'Schlafzyklus-Rechner',
+    shortIntro: 'Bedtimes nach 90-Minuten-Zyklen, damit du erholt aufwachst.',
+  },
+  'heart-rate-zone-calculator': {
+    name: 'Pulszonen-Rechner',
+    shortIntro: 'Deine fünf Trainingszonen, personalisiert mit Ruhepuls.',
+  },
+  'caffeine-calculator': {
+    name: 'Koffein-Rechner',
+    shortIntro: 'Schätze das Koffein, das gerade noch in deinem Körper ist.',
+  },
+  'steps-to-calories-calculator': {
+    name: 'Schritte-zu-Kalorien-Rechner',
+    shortIntro: 'Schritte → Kalorien und Distanz, an deinen Körper angepasst.',
   },
 
   // ─────────── 🎓 Bildungsrechner ───────────
@@ -608,6 +748,10 @@ export const deTools: Record<string, { name: string; shortIntro: string }> = {
   'timezone-converter': {
     name: 'Zeitzonen-Konverter',
     shortIntro: 'Zeiten zwischen Zonen umrechnen und meetingfreundliche Stunden finden.',
+  },
+  'screen-time-calculator': {
+    name: 'Bildschirmzeit-Rechner',
+    shortIntro: 'Tägliche Scroll-Stunden, übersetzt in Lebensjahre.',
   },
 
   // ─────────── 🎨 Webdesign-Werkzeuge ───────────
@@ -689,6 +833,22 @@ export const deTools: Record<string, { name: string; shortIntro: string }> = {
     name: 'SSH-Key-Generator',
     shortIntro: 'RSA- oder Ed25519-SSH-Schlüsselpaare im Browser erzeugen.',
   },
+  'hmac-generator': {
+    name: 'HMAC-Generator',
+    shortIntro: 'HMAC-SHA256/384/512-Signaturen über natives WebCrypto.',
+  },
+  'hash-comparator': {
+    name: 'Hash-Vergleicher',
+    shortIntro: 'Zeitkonstanter Vergleich zweier Hashes — ohne Timing-Lecks.',
+  },
+  'password-entropy-checker': {
+    name: 'Passwort-Entropie-Check',
+    shortIntro: 'Entropie in Bits — das ehrliche Maß für Passwortstärke.',
+  },
+  'aes-encrypt-decrypt': {
+    name: 'AES Ver- & Entschlüsseln',
+    shortIntro: 'AES-256-GCM im Browser: authentifiziert, PBKDF2-Schlüssel, null Upload.',
+  },
 
   // ─────────── 💼 Business-Werkzeuge ───────────
   'qr-code-generator': {
@@ -709,4 +869,77 @@ export const deTools: Record<string, { name: string; shortIntro: string }> = {
     name: 'Cron-Ausdrucks-Parser',
     shortIntro: 'Macht cron in Klartext und zeigt die nächsten 5 Zeitpunkte.',
   },
+
+  // ─────────── 🤖 KI-Tools ───────────
+  'llm-cost-calculator': {
+    name: 'LLM-API-Kostenrechner',
+    shortIntro: 'Kosten pro Request und monatlich über 17 Modelle, side by side.',
+  },
+  'context-window-checker': {
+    name: 'Context-Window-Check',
+    shortIntro: 'Token-Anzahl vs. Limit jedes Modells, mit Spielraum in Prozent.',
+  },
+  'json-to-zod': {
+    name: 'JSON zu Zod-Schema',
+    shortIntro: 'JSON einfügen, typisiertes Zod-Schema bekommen — bereit für KI-Validierung.',
+  },
+  'json-repair': {
+    name: 'JSON-Reparatur',
+    shortIntro: 'Kaputtes LLM-JSON retten — abgeschnitten, Kommas am Ende, Fences.',
+  },
+  'markdown-fence-extractor': {
+    name: 'Codeblock-Extractor',
+    shortIntro: 'Jeden ```-Codeblock aus Markdown oder KI-Antworten ziehen.',
+  },
+  'prompt-template-filler': {
+    name: 'Prompt-Template-Filler',
+    shortIntro: '{{Variablen}} in Prompt-Templates aus JSON füllen — Live-Preview.',
+  },
+  'openai-tools-builder': {
+    name: 'OpenAI-Tools-JSON-Builder',
+    shortIntro: 'Tool-Definitionen per Formular → sauberes tools-JSON für LLM-APIs.',
+  },
+  'csv-to-finetune-jsonl': {
+    name: 'CSV zu Fine-Tuning-JSONL',
+    shortIntro: 'CSV-Zeilen → OpenAI-Chat-JSONL, gemappt und validiert.',
+  },
+  'token-visualizer': {
+    name: 'Token-Visualizer',
+    shortIntro: 'Farbcodierte Token-Grenzen mit Zählern — sieh, was Modelle sehen.',
+  },
+  'embedding-price-calculator': {
+    name: 'Embedding-Preisrechner',
+    shortIntro: 'Embedding-Kosten pro Modell: Dimensionen, $/1M Tokens, Gesamtsummen.',
+  },
+
+  // ─────────── 🎲 Spiele ───────────
+  'dice-roller': {
+    name: 'Würfel-Tool',
+    shortIntro: 'Würfel jeder Art — d4 bis d100, mehrere gleichzeitig, faire Würfe.',
+  },
+  'coin-flip': {
+    name: 'Münzwurf',
+    shortIntro: 'Knackiges Kopf-oder-Zahl mit laufender Statistik.',
+  },
+  'wheel-spinner': {
+    name: 'Glücksrad',
+    shortIntro: 'Drehen und entscheiden: Namen, Aufgaben, Restaurants — fair gewählt.',
+  },
+  'random-team-generator': {
+    name: 'Zufalls-Team-Generator',
+    shortIntro: 'Jede Liste fair in Teams teilen — neu mischen, bis es passt.',
+  },
+
+  // ─────────── 🐶 Haustiere ───────────
+  'dog-age-calculator': {
+    name: 'Hundealter-Rechner',
+    shortIntro: 'Hundealter in Menschenjahre je nach Rassengröße — ohne ×7-Mythos.',
+  },
+
+  // ─────────── 🏠 Haushaltsrechner ───────────
+  'paint-calculator': {
+    name: 'Farbbedarfs-Rechner',
+    shortIntro: 'Gallonen oder Liter Farbe pro Raum, Anstriche und Öffnungen eingerechnet.',
+  },
+
 }
