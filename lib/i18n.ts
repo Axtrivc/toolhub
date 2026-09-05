@@ -130,6 +130,9 @@ export interface Dict {
   ratingRatings: string // "{count}+ ratings"
   toolDownload: string
   toolDownloaded: string
+  // 结果区「打印报告」按钮 + 打印抬头
+  toolPrintReport: string // "Print Report"
+  printReportGenerated: string // 抬头日期行前缀 "Generated"
   // 工具页相关工具内链
   relatedTitle: string
   relatedSubtitle: string
@@ -387,6 +390,8 @@ const en: Dict = {
   ratingRatings: '{count}+ ratings',
   toolDownload: 'Download',
   toolDownloaded: '✓ Downloaded',
+  toolPrintReport: 'Print Report',
+  printReportGenerated: 'Generated',
   relatedTitle: 'Related Tools',
   relatedSubtitle: 'More tools you might find useful',
   recentTitle: 'Recently Used & Favorites',
@@ -625,6 +630,8 @@ const zh: Dict = {
   ratingRatings: '{count}+ 条评价',
   toolDownload: '下载',
   toolDownloaded: '✓ 已下载',
+  toolPrintReport: '打印报告',
+  printReportGenerated: '生成时间',
   relatedTitle: '相关工具',
   relatedSubtitle: '你可能还会用到的工具',
   recentTitle: '最近使用与收藏',
@@ -861,6 +868,8 @@ const es: Dict = {
   ratingRatings: '{count}+ valoraciones',
   toolDownload: 'Descargar',
   toolDownloaded: '✓ Descargado',
+  toolPrintReport: 'Imprimir informe',
+  printReportGenerated: 'Generado',
   relatedTitle: 'Herramientas relacionadas',
   relatedSubtitle: 'Más herramientas que podrían ser útiles',
   recentTitle: 'Usadas recientemente y favoritos',
@@ -1098,6 +1107,8 @@ const de: Dict = {
   ratingRatings: '{count}+ Bewertungen',
   toolDownload: 'Herunterladen',
   toolDownloaded: '✓ Heruntergeladen',
+  toolPrintReport: 'Bericht drucken',
+  printReportGenerated: 'Erstellt',
   relatedTitle: 'Verwandte Werkzeuge',
   relatedSubtitle: 'Weitere Werkzeuge, die nützlich sein könnten',
   recentTitle: 'Zuletzt genutzt & Favoriten',

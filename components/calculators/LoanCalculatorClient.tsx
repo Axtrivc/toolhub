@@ -4,6 +4,7 @@ import { useState, useMemo, useCallback } from 'react'
 import { CalculatorField, CalculatorSliderField, ResultCard, CalculatorNote } from '@/components/calculator/CalculatorField'
 import { LineAreaChart } from '@/components/charts/LineAreaChart'
 import { PresetChips } from '@/components/calculator/PresetChips'
+import { ComparePanelBox, CompareToggleRow, ScenarioCompareResults } from '@/components/calculator/ScenarioCompare'
 import { yearlyBalanceSeries } from '@/components/charts/chartKit'
 import { LoadSampleButton } from '@/components/LoadSampleButton'
 import { ResultActions } from '@/components/ResultActions'
@@ -69,18 +70,23 @@ export function LoanCalculatorClient() {
       ? n.toLocaleString(localeTag, { style: 'currency', currency: 'USD', maximumFractionDigits: 2 })
       : '—'
 
-  // 典型场景:车贷 5 年 / 房贷 30 年 / 大额改善贷 10 年 / 短期小额 3 年
+  // 典型场景:个人贷 / 债务整合 / 车贷 / 房贷(高频真实借款用途)
   const LOAN_PRESETS = [
-    { label: 'Car loan $25k', values: { amount: '25000', rate: '7.5', years: '5' } },
-    { label: 'Mortgage $320k', values: { amount: '320000', rate: '6.8', years: '30' } },
-    { label: 'Home improve $50k', values: { amount: '50000', rate: '8.5', years: '10' } },
-    { label: 'Small $10k', values: { amount: '10000', rate: '9.9', years: '3' } },
+    { label: 'Personal Loan ($10k @ 9%)', values: { amount: '10000', rate: '9', years: '3' } },
+    { label: 'Debt Consolidation ($25k @ 7%)', values: { amount: '25000', rate: '7', years: '5' } },
+    { label: 'Car Loan ($25k @ 7.5%)', values: { amount: '25000', rate: '7.5', years: '5' } },
+    { label: 'Mortgage ($320k @ 6.8%)', values: { amount: '320000', rate: '6.8', years: '30' } },
   ]
   const [amount, setAmount] = useState('20000')
   const [rate, setRate] = useState('7.5')
   const [years, setYears] = useState('5')
   // 展示区是否展开全部期数(默认只显示前 12 期)
   const [showAll, setShowAll] = useState(false)
+  // ── 多方案对比:Scenario B 独立参数,激活时克隆 A ──
+  const [compareOn, setCompareOn] = useState(false)
+  const [bAmount, setBAmount] = useState('20000')
+  const [bRate, setBRate] = useState('6.5')
+  const [bYears, setBYears] = useState('5')
 
   // 数值解析统一走 toNumStrict(粘贴宽容:"$20,000"/"7.5%" 直接可用);
   // 空串/非法 → NaN → result null 走空态提示,与旧 Number() 语义一致
@@ -110,6 +116,18 @@ export function LoanCalculatorClient() {
     setRate(s.rate ?? rate)
     setYears(s.years ?? years)
   }, [amount, rate, years])
+
+  // Scenario B 独立计算(对比模式激活时);与 A 同一套 calcLoan 纯函数
+  const bResult = useMemo(() => {
+    if (!compareOn) return null
+    const p = toNumStrict(bAmount)
+    const r = toNumStrict(bRate)
+    const y = toNumStrict(bYears)
+    if (p <= 0 || y < 1 / 12 || !isFinite(p) || !isFinite(r) || !isFinite(y)) return null
+    if (r < 0 || y > 50) return null
+    return calcLoan(p, r, y)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [compareOn, bAmount, bRate, bYears])
 
   // 结果摘要(纯文本) - 供 Copy Summary 用
   const summary = useMemo(() => {
@@ -220,28 +238,65 @@ export function LoanCalculatorClient() {
         />
       </div>
 
+      {/* Scenario B 参数面板(对比模式):克隆 A 后微调 */}
+      {compareOn && (
+        <ComparePanelBox onCopyFromA={() => { setBAmount(amount); setBRate(rate); setBYears(years) }}>
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+            <CalculatorField id="cmp-amount" label={L('loanAmount', 'Loan amount')} value={bAmount} onChange={setBAmount} suffix="$" placeholder="20000" />
+            <CalculatorField id="cmp-rate" label={L('annualRate', 'Annual interest rate')} value={bRate} onChange={setBRate} suffix="%" placeholder="6.5" />
+            <CalculatorField id="cmp-years" label={L('loanTerm', 'Loan term')} value={bYears} onChange={setBYears} suffix={L('yearsSuffix', 'years')} placeholder="5" />
+          </div>
+        </ComparePanelBox>
+      )}
+
+      {/* 对比模式开关(结果区顶部) */}
+      <CompareToggleRow
+        on={compareOn}
+        onToggle={() => {
+          if (!compareOn) {
+            setBAmount(amount)
+            setBRate(rate)
+            setBYears(years)
+            setCompareOn(true)
+          } else {
+            setCompareOn(false)
+          }
+        }}
+      />
+
       {/* 结果区 */}
       {result && 'error' in result ? (
         <div role="status" className="rounded-lg border border-red-200 dark:border-red-800/60 bg-red-50 dark:bg-red-950/30 p-4 text-sm text-red-700 dark:text-red-300">⚠️ {result.error}</div>
       ) : result ? (
         <>
-          <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
-            <ResultCard
-              label={L('monthlyPayment', 'Monthly payment')}
-              value={fmtMoney(result.monthlyPayment)}
-              highlight
+          {/* 对比模式:A/B 并排 + Delta 徽章;普通模式:三张结果卡 */}
+          {compareOn && bResult ? (
+            <ScenarioCompareResults
+              rows={[
+                { label: L('monthlyPayment', 'Monthly payment'), a: fmtMoney(result.monthlyPayment), b: fmtMoney(bResult.monthlyPayment), headline: true },
+                { label: L('totalInterestPaid', 'Total interest paid'), a: fmtMoney(result.totalInterest), b: fmtMoney(bResult.totalInterest) },
+                { label: L('totalPaid', 'Total paid'), a: fmtMoney(result.totalPaid), b: fmtMoney(bResult.totalPaid) },
+              ]}
             />
-            <ResultCard
-              label={L('totalInterestPaid', 'Total interest paid')}
-              value={fmtMoney(result.totalInterest)}
-              sublabel={L('overMonths', 'Over {n} months').replace('{n}', String(result.months))}
-            />
-            <ResultCard
-              label={L('totalPaid', 'Total paid')}
-              value={fmtMoney(result.totalPaid)}
-              sublabel={L('principalPlusInterest', 'Principal + interest')}
-            />
-          </div>
+          ) : (
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
+              <ResultCard
+                label={L('monthlyPayment', 'Monthly payment')}
+                value={fmtMoney(result.monthlyPayment)}
+                highlight
+              />
+              <ResultCard
+                label={L('totalInterestPaid', 'Total interest paid')}
+                value={fmtMoney(result.totalInterest)}
+                sublabel={L('overMonths', 'Over {n} months').replace('{n}', String(result.months))}
+              />
+              <ResultCard
+                label={L('totalPaid', 'Total paid')}
+                value={fmtMoney(result.totalPaid)}
+                sublabel={L('principalPlusInterest', 'Principal + interest')}
+              />
+            </div>
+          )}
 
           {/* 余额递减曲线(年度采样,与下方摊销表同数据源) */}
           <LineAreaChart

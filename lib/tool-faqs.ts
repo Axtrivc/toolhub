@@ -2378,6 +2378,92 @@ export const toolFaqs: Record<string, FaqPair[]> = {
       a: 'Parse failures surface with the offending line number and a short reason, so a missing quote or malformed key is quick to locate. Nothing is output until the whole document parses — no half-converted results.',
     },
   ],
+
+  // ══════════ batch18 高商业意图工具(6 个,2026-09)══════════
+  'hysa-calculator': [
+    {
+      q: 'How is HYSA interest calculated?',
+      a: 'Most high-yield savings accounts compound daily and credit interest monthly: your balance grows by (1 + APY/365)^365 per year. This calculator converts that into an effective monthly rate and projects your balance with deposits included.',
+    },
+    {
+      q: 'Is HYSA interest taxable?',
+      a: 'Yes — savings interest is ordinary income reported on a 1099-INT (in the US) and taxed at your marginal rate, even if you leave it in the account. A 4.5% APY in a 22% bracket nets about 3.5% after tax.',
+    },
+    {
+      q: 'What if my bank changes the APY?',
+      a: 'HYSA rates are variable and follow the Fed. This projection assumes a constant rate, so treat long horizons as estimates and re-run the numbers whenever your bank reprices — the tool makes that a 10-second check.',
+    },
+  ],
+  'cd-calculator': [
+    {
+      q: 'How is CD interest compounded?',
+      a: 'Most CDs compound daily or monthly and pay the full amount at maturity. The maturity value follows A = P × (1 + r/n)^(n·t), with n the compounding frequency and t the term in years — this calculator exposes all three.',
+    },
+    {
+      q: 'What is a typical early-withdrawal penalty?',
+      a: 'US banks commonly charge 1 month of interest for CDs under a year, 3 months for 1-4 year terms, and 6-12 months for 5-year CDs. The penalty comes out of accrued interest, never principal — but exiting very early can wipe out everything you earned.',
+    },
+    {
+      q: 'What happens if I withdraw at exactly 50% of the term?',
+      a: 'Use the "Early exit at" slider: you accrue half the term\'s interest, then forfeit the penalty months. If the penalty exceeds accrued interest, you simply get your principal back — the tool never shows less than you deposited.',
+    },
+  ],
+  'break-even-calculator': [
+    {
+      q: 'What is the break-even formula?',
+      a: 'Break-even units = Fixed Costs ÷ (Price per Unit − Variable Cost per Unit). Each unit contributes its margin toward fixed costs; the moment contributions equal fixed costs, you break even.',
+    },
+    {
+      q: 'What is contribution margin ratio?',
+      a: 'It is (Price − Variable Cost) ÷ Price — the share of every revenue dollar left after variable costs. A 60% ratio means $0.60 of each sales dollar is available to cover fixed costs, and becomes profit after that.',
+    },
+    {
+      q: 'Does the calculator handle semi-variable costs?',
+      a: 'Split them: put the fixed monthly base (e.g., base salary) into fixed costs and the per-unit piece (e.g., hourly labor or packaging) into variable cost. The formula only understands those two buckets.',
+    },
+  ],
+  'profit-margin-calculator': [
+    {
+      q: 'What is the difference between margin and markup?',
+      a: 'Margin is profit divided by selling price; markup is profit divided by cost. A 100% markup (cost × 2) equals a 50% margin. Confusing them is the most common pricing error — this tool converts both ways instantly.',
+    },
+    {
+      q: 'How do I price for a target margin?',
+      a: 'Divide cost by (1 − target margin). For a 40% margin on a $40 cost: 40 ÷ 0.60 = $66.67. Pick "Profit margin" mode, enter 40, and the selling price, markup, and per-unit profit fill themselves in.',
+    },
+    {
+      q: 'Is this gross margin or net margin?',
+      a: 'Gross margin — it uses cost of goods only. Net margin also subtracts operating expenses, shipping, taxes, and fees. Marketplace sellers should add platform fees to cost before calculating to see a truer margin.',
+    },
+  ],
+  'intermittent-fasting-calculator': [
+    {
+      q: 'Which intermittent fasting schedule is best for beginners?',
+      a: 'Most people start with 16:8 (16 hours fasting, 8 hours eating) or the gentler 14:10. Consistency matters more than intensity — a moderate window you keep every day beats an aggressive one you abandon.',
+    },
+    {
+      q: 'When does fat burning and autophagy start?',
+      a: 'Fat burning (ketosis) typically becomes significant around 12+ hours after your last meal as liver glycogen depletes; cellular cleanup processes like autophagy ramp up around 16-24 hours. Timings vary by meal size, activity, and your body — the timeline marks them as estimates.',
+    },
+    {
+      q: 'Does coffee break a fast?',
+      a: 'Plain water, black coffee, and unsweetened tea are generally considered fast-safe. Anything with calories — cream, sugar, or a "small" latte — ends the fasted state and restarts the clock.',
+    },
+  ],
+  'llm-api-cost-calculator': [
+    {
+      q: 'How is my monthly LLM API bill calculated?',
+      a: 'Bill = (monthly input tokens ÷ 1M × input price) + (monthly output tokens ÷ 1M × output price), per model. Enter your volumes once and the table ranks every major model by projected monthly cost, cheapest first.',
+    },
+    {
+      q: 'Why are output tokens so expensive?',
+      a: 'Generation is compute-heavier than reading a prompt, so output tokens cost 3-15× input on nearly every model. An app that writes long answers can pay more for output than for a much larger prompt — trimming max_tokens is often the biggest lever.',
+    },
+    {
+      q: 'Are cached or batch prices included?',
+      a: 'The table shows uncached list prices — the worst case. Prompt caching cuts input costs 50-90% on OpenAI, Anthropic, and DeepSeek, and batch/async APIs roughly halve output costs, so real bills are usually lower than these projections.',
+    },
+  ],
 }
 export function getToolFaqs(slug: string): FaqPair[] {
   return toolFaqs[slug] ?? []

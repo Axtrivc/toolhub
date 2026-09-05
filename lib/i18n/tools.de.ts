@@ -942,4 +942,30 @@ export const deTools: Record<string, { name: string; shortIntro: string }> = {
     shortIntro: 'Gallonen oder Liter Farbe pro Raum, Anstriche und Öffnungen eingerechnet.',
   },
 
+  // ─────────── 🚀 Neue Werkzeuge (2026-09) ───────────
+  'hysa-calculator': {
+    name: 'Tagesgeld-Rechner',
+    shortIntro: 'Wachstum mit täglicher Verzinsung und monatlichen Einlagen.',
+  },
+  'cd-calculator': {
+    name: 'Festgeld-Rechner',
+    shortIntro: 'Endwert bei Fälligkeit inkl. Vorentnahme-Strafe-Simulation.',
+  },
+  'break-even-calculator': {
+    name: 'Break-Even-Rechner',
+    shortIntro: 'Deckungsbeitrag, Break-Even-Menge und -Umsatz auf einen Blick.',
+  },
+  'profit-margin-calculator': {
+    name: 'Gewinnmargen-Rechner',
+    shortIntro: 'Kosten plus ein Wert: Preis, Gewinn, Marge und Aufschlag sofort.',
+  },
+  'intermittent-fasting-calculator': {
+    name: 'Intervallfasten-Rechner',
+    shortIntro: '16:8 / 18:6 / 20:4 Pläne mit Countdown und Stoffwechsel-Zeitleiste.',
+  },
+  'llm-api-cost-calculator': {
+    name: 'LLM-API-Kostenvergleich',
+    shortIntro: 'Vergleicht die echte Monatsrechnung aller großen KI-Modelle.',
+  },
+
 }

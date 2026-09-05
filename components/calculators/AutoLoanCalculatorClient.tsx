@@ -4,6 +4,7 @@ import { useState, useMemo, useEffect } from 'react'
 import { CalculatorField, CalculatorSliderField, ResultCard, CalculatorNote } from '@/components/calculator/CalculatorField'
 import { LineAreaChart } from '@/components/charts/LineAreaChart'
 import { PresetChips } from '@/components/calculator/PresetChips'
+import { ComparePanelBox, CompareToggleRow, ScenarioCompareResults } from '@/components/calculator/ScenarioCompare'
 import { yearlyBalanceSeries } from '@/components/charts/chartKit'
 import { ResultActions } from '@/components/ResultActions'
 import { useApp } from '@/components/providers/AppProviders'
@@ -53,12 +54,12 @@ export function AutoLoanCalculatorClient() {
       ? n.toLocaleString(localeTag, { style: 'currency', currency: 'USD', maximumFractionDigits: 2 })
       : '—'
 
-  // 典型场景:新车 60 期 / 新车 36 期快还 / 二手车 / 大额皮卡
+  // 典型场景:新车 60/36 期、二手车、大额皮卡(贴合真实购车行情)
   const AUTO_PRESETS = [
-    { label: 'New car · 60 mo', values: { price: '35000', down: '5000', apr: '7.5', term: '60' } },
-    { label: 'New car · 36 mo', values: { price: '35000', down: '7000', apr: '6.9', term: '36' } },
-    { label: 'Used car · 48 mo', values: { price: '18000', down: '2000', apr: '10.5', term: '48' } },
-    { label: 'Truck · 72 mo', values: { price: '55000', down: '8000', apr: '8.2', term: '72' } },
+    { label: 'New Car (60 Mo @ 5.8%)', values: { price: '35000', down: '5000', apr: '5.8', term: '60' } },
+    { label: 'New Car (36 Mo @ 6.9%)', values: { price: '35000', down: '7000', apr: '6.9', term: '36' } },
+    { label: 'Used Car (48 Mo @ 7.5%)', values: { price: '18000', down: '2000', apr: '7.5', term: '48' } },
+    { label: 'Truck (72 Mo @ 8.2%)', values: { price: '55000', down: '8000', apr: '8.2', term: '72' } },
   ]
   const [price, setPrice] = useState('35000')
   const [down, setDown] = useState('5000')
@@ -67,6 +68,12 @@ export function AutoLoanCalculatorClient() {
   const [apr, setApr] = useState('7.5')
   const [term, setTerm] = useState('60')
   const [showAll, setShowAll] = useState(false)
+  // ── 多方案对比:Scenario B 独立参数(税/置换沿用 A,对比核心三要素) ──
+  const [compareOn, setCompareOn] = useState(false)
+  const [bPrice, setBPrice] = useState('35000')
+  const [bDown, setBDown] = useState('5000')
+  const [bApr, setBApr] = useState('6.5')
+  const [bTerm, setBTerm] = useState('60')
   // 结清日期依赖"今天",放 useEffect 计算以避免 SSG/水合不一致
   const [payoffDate, setPayoffDate] = useState<string | null>(null)
 
@@ -115,6 +122,25 @@ export function AutoLoanCalculatorClient() {
     // 结清月份名同样走应用 locale(effect 内执行,不影响 SSR 首帧)
     setPayoffDate(d.toLocaleDateString(localeTag, { month: 'long', year: 'numeric' }))
   }, [parsed, localeTag])
+
+  // Scenario B 独立计算(对比模式):税/置换沿用 A 的值,核心三要素独立
+  const bParsed = useMemo(() => {
+    if (!compareOn || 'error' in parsed) return null
+    const p = toNumStrict(bPrice)
+    const d = toNumStrict(bDown)
+    const rate = toNumStrict(bApr)
+    const n = toNumStrict(bTerm)
+    const tax = toNumStrict(taxPct)
+    const t = toNumStrict(tradeIn)
+    if ([p, d, rate, n, tax, t].some((v) => !isFinite(v)) || p <= 0 || d < 0 || t < 0 || tax < 0 || rate < 0 || n < 1) return null
+    const taxable = Math.max(0, p - t)
+    const taxAmount = taxable * (tax / 100)
+    const loanAmount = p - d - t + taxAmount
+    if (loanAmount <= 0) return null
+    const r = calcAutoLoan(loanAmount, rate, n)
+    return { loanAmount, months: n, ...r }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [compareOn, bPrice, bDown, bApr, bTerm, taxPct, tradeIn, parsed])
 
   const summary = useMemo(() => {
     if ('error' in parsed) return `${L('summaryErrorPrefix', 'Auto loan calculator: ')}${parsed.error}`
@@ -198,34 +224,94 @@ export function AutoLoanCalculatorClient() {
         </div>
       </div>
 
+      {/* Scenario B 参数面板(对比模式):克隆 A 后微调核心三要素 */}
+      {compareOn && (
+        <ComparePanelBox onCopyFromA={() => { setBPrice(price); setBDown(down); setBApr(apr); setBTerm(term) }}>
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            <CalculatorField id="cmp-price" label={L('vehiclePrice', 'Vehicle price')} value={bPrice} onChange={setBPrice} suffix="$" placeholder="35000" />
+            <CalculatorField id="cmp-down" label={L('downPayment', 'Down payment')} value={bDown} onChange={setBDown} suffix="$" placeholder="5000" />
+            <CalculatorField id="cmp-apr" label={L('interestRateApr', 'Interest rate (APR)')} value={bApr} onChange={setBApr} suffix="%" placeholder="6.5" />
+            <div>
+              <label htmlFor="cmp-term" className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
+                {L('loanTerm', 'Loan term')}
+              </label>
+              <select
+                id="cmp-term"
+                value={bTerm}
+                onChange={(e) => setBTerm(e.target.value)}
+                className="w-full rounded-lg border p-3 shadow-sm outline-none transition focus:ring-2"
+                style={{
+                  borderColor: 'rgb(var(--border-strong))',
+                  backgroundColor: 'rgb(var(--bg-card))',
+                  color: 'rgb(var(--text))',
+                }}
+              >
+                {TERMS.map((t) => (
+                  <option key={t} value={t}>
+                    {t} {L('optMonths', 'months')}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
+        </ComparePanelBox>
+      )}
+
+      {/* 对比模式开关(结果区顶部) */}
+      <CompareToggleRow
+        on={compareOn}
+        onToggle={() => {
+          if (!compareOn) {
+            setBPrice(price)
+            setBDown(down)
+            setBApr(apr)
+            setBTerm(term)
+            setCompareOn(true)
+          } else {
+            setCompareOn(false)
+          }
+        }}
+      />
+
       {'error' in parsed ? (
         <div className="rounded-lg border border-red-200 dark:border-red-800/60 bg-red-50 dark:bg-red-950/30 p-4 text-sm text-red-700 dark:text-red-300">⚠️ {parsed.error}</div>
       ) : (
         <>
-          {/* 结果卡片 */}
-          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
-            <ResultCard
-              label={L('monthlyPayment', 'Monthly payment')}
-              value={fmtMoney(parsed.monthlyPayment)}
-              sublabel={payoffDate ? `${L('paidOffBy', 'Paid off by ')}${payoffDate}` : `${parsed.months} ${L('monthlyPayments', 'monthly payments')}`}
-              highlight
+          {/* 结果卡片:对比模式 A/B 并排 + Delta 徽章;普通模式四张结果卡 */}
+          {compareOn && bParsed ? (
+            <ScenarioCompareResults
+              rows={[
+                { label: L('monthlyPayment', 'Monthly payment'), a: fmtMoney(parsed.monthlyPayment), b: fmtMoney(bParsed.monthlyPayment), headline: true },
+                { label: L('loanAmount', 'Loan amount'), a: fmtMoney(parsed.loanAmount), b: fmtMoney(bParsed.loanAmount) },
+                { label: L('totalInterest', 'Total interest'), a: fmtMoney(parsed.totalInterest), b: fmtMoney(bParsed.totalInterest) },
+                { label: L('totalCost', 'Total cost'), a: fmtMoney(parsed.totalPayments), b: fmtMoney(bParsed.totalPayments) },
+              ]}
             />
-            <ResultCard
-              label={L('loanAmount', 'Loan amount')}
-              value={fmtMoney(parsed.loanAmount)}
-              sublabel={`${L('includes', 'Includes ')}${fmtMoney(parsed.taxAmount)} ${L('salesTaxWord', 'sales tax')}`}
-            />
-            <ResultCard
-              label={L('totalInterest', 'Total interest')}
-              value={fmtMoney(parsed.totalInterest)}
-              sublabel={`${L('over', 'Over ')}${parsed.months} ${L('months', 'months')}`}
-            />
-            <ResultCard
-              label={L('totalCost', 'Total cost')}
-              value={fmtMoney(parsed.totalCost)}
-              sublabel={L('downTradeInPayments', 'Down + trade-in + all payments')}
-            />
-          </div>
+          ) : (
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
+              <ResultCard
+                label={L('monthlyPayment', 'Monthly payment')}
+                value={fmtMoney(parsed.monthlyPayment)}
+                sublabel={payoffDate ? `${L('paidOffBy', 'Paid off by ')}${payoffDate}` : `${parsed.months} ${L('monthlyPayments', 'monthly payments')}`}
+                highlight
+              />
+              <ResultCard
+                label={L('loanAmount', 'Loan amount')}
+                value={fmtMoney(parsed.loanAmount)}
+                sublabel={`${L('includes', 'Includes ')}${fmtMoney(parsed.taxAmount)} ${L('salesTaxWord', 'sales tax')}`}
+              />
+              <ResultCard
+                label={L('totalInterest', 'Total interest')}
+                value={fmtMoney(parsed.totalInterest)}
+                sublabel={`${L('over', 'Over ')}${parsed.months} ${L('months', 'months')}`}
+              />
+              <ResultCard
+                label={L('totalCost', 'Total cost')}
+                value={fmtMoney(parsed.totalCost)}
+                sublabel={L('downTradeInPayments', 'Down + trade-in + all payments')}
+              />
+            </div>
+          )}
 
           {/* 余额递减曲线(年度采样,与下方摊销表同数据源) */}
           <LineAreaChart

@@ -472,6 +472,7 @@ function fmtUSDValue(n: number): string {
 export const RetirementCalculatorClient = makeCalculatorClient({
   slug: 'retirement-calculator',
   urlState: true,
+  allowCompare: true,
   presets: [
     { label: 'Conservative 4%', values: { rate: '4' } },
     { label: 'Balanced 6%', values: { rate: '6' } },

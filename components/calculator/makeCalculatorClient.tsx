@@ -30,6 +30,8 @@ import { tui, tuiCalc } from '@/lib/i18n/tool-l10n'
 const COMMON_CALC_KEYS = new Set([
   'summaryTitle', 'inputsLabel', 'resultsLabel', 'copySummary',
   'csvField', 'csvType', 'csvValue', 'csvInput', 'csvResult', 'inputs', 'chartEmpty',
+  // Scenario A/B 对比模式(allowCompare)的共享 UI 串
+  'compareAdd', 'compareExit', 'compareSync', 'scenarioA', 'scenarioB', 'deltaCol',
 ])
 
 /**
@@ -217,6 +219,64 @@ export function makeCalculatorClient(config: CalculatorConfig): ComponentType {
     // values 的镜像 ref:urlState effect 依赖 values 但读取镜像,避免闭包过期
     const valuesRef = useRef(values)
     valuesRef.current = values
+
+    // ── 多方案同屏对比(config.allowCompare)──
+    // 激活时克隆当前输入为 Scenario B;两套输入各自独立计算,
+    // 结果区切换为 A/B 并排对比表 + 主结果 Delta 差额徽章。
+    const [compareOn, setCompareOn] = useState(false)
+    const [bValues, setBValues] = useState<Record<string, string>>({})
+    const setBValue = (key: string, v: string) =>
+      setBValues((prev) => ({ ...prev, [key]: v }))
+    // B 首次激活时置为 A 的克隆;再次激活(退出后又开)重新克隆当前 A
+    const activateCompare = () => {
+      setBValues({ ...values })
+      setCompareOn(true)
+    }
+    const bResults = useMemo(() => {
+      if (!compareOn) return null
+      try {
+        return config.compute(bValues, locale)
+      } catch {
+        return {}
+      }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [compareOn, bValues, locale])
+
+    /**
+     * A/B 两个已格式化结果串的差额:B − A。
+     * 复用 parseNumeric 剥离货币/千分位;无法解析(⚠️/—/空)返回 null。
+     * 返回 { text, better } —— text 带正负号与原串同款货币符号/百分号;
+     * better: 'b'(更低,绿色)/ 'a'(更高,红色)/ null(持平,不显示)。
+     */
+    const deltaOf = (aStr: string | undefined, bStr: string | undefined) => {
+      if (!aStr || !bStr) return null
+      if (aStr.startsWith('⚠️') || bStr.startsWith('⚠️')) return null
+      if (aStr === '—' || bStr === '—') return null
+      const a = parseNumeric(aStr)
+      const b = parseNumeric(bStr)
+      if (!Number.isFinite(a) || !Number.isFinite(b)) return null
+      const d = b - a
+      if (Math.abs(d) < 1e-9) return null
+      // 小数位:跟原串里最长的小数位走(金额 2 位、整数串 0 位)
+      const dec = Math.max(
+        ...[aStr, bStr].map((s) => {
+          const m = s.match(/(\d+(?:\.\d+)?)/g)
+          const frac = m ? Math.max(...m.map((t) => (t.split('.')[1] ?? '').length)) : 0
+          return frac
+        }),
+        0,
+      )
+      const money = aStr.includes('$') || bStr.includes('$')
+      const pct = aStr.includes('%') || bStr.includes('%')
+      const abs = Math.abs(d).toLocaleString('en-US', {
+        minimumFractionDigits: Math.min(dec, 2),
+        maximumFractionDigits: Math.min(dec, 2),
+      })
+      return {
+        text: `${d < 0 ? '−' : '+'}${money ? '$' : ''}${abs}${pct ? '%' : ''}`,
+        better: d < 0 ? 'b' : 'a',
+      }
+    }
 
     // 用户是否编辑过任何字段(pristine 门控):决定 Load Sample 的行为与 Reset 是否显示
     const [dirty, setDirty] = useState(false)
@@ -412,6 +472,92 @@ export function makeCalculatorClient(config: CalculatorConfig): ComponentType {
       return params
     }, [config.inputs, values])
 
+    /**
+     * 单个输入字段的渲染器:A 面板与 Scenario B 面板共用。
+     * idPrefix 隔离 DOM id(B 面板用 'cmp-'),避免 label/for 与 aria 撞车。
+     */
+    const renderInputField = (
+      f: (typeof config.inputs)[number],
+      vals: Record<string, string>,
+      setV: (key: string, v: string) => void,
+      idPrefix = '',
+    ) => {
+      const fieldId = `${idPrefix}${f.key}`
+      // select 类型用下拉;选项 ≤4 个时升级为 iOS 风格分段控件
+      // (滑块指示器只动 transform,与 macOS System Settings 同族手感)
+      if (f.options && f.options.length > 0) {
+        const segOptions = f.options.map((opt) => ({
+          label: L(`opt.${f.key}.${opt.value}`, opt.label),
+          value: opt.value,
+        }))
+        if (f.options.length <= 4) {
+          return (
+            <div key={fieldId} className="sm:col-span-2">
+              <span id={`${fieldId}-label`} className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
+                {inLabel(f.key, f.label)}
+              </span>
+              <SegmentedControl
+                options={segOptions}
+                value={vals[f.key] ?? f.options[0].value}
+                onChange={(v) => setV(f.key, v)}
+                ariaLabel={inLabel(f.key, f.label)}
+                id={fieldId}
+              />
+            </div>
+          )
+        }
+        return (
+          <div key={fieldId}>
+            <label htmlFor={fieldId} className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
+              {inLabel(f.key, f.label)}
+            </label>
+            <select
+              id={fieldId}
+              value={vals[f.key] ?? ''}
+              onChange={(e) => setV(f.key, e.target.value)}
+              className="w-full rounded-lg border p-3 shadow-sm outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200" style={{ borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rgb(var(--bg-card))', color: 'rgb(var(--text))' }}
+            >
+              {segOptions.map((opt) => (
+                <option key={opt.value} value={opt.value}>
+                  {opt.label}
+                </option>
+              ))}
+            </select>
+          </div>
+        )
+      }
+      // 默认 number/text:由 f.type 决定输入框 type(默认 number,select 在上方分支已处理)
+      // 声明 slider 的 number 字段 → 数字框 + 滑杆双向绑定
+      if (f.slider && f.type !== 'text') {
+        return (
+          <CalculatorSliderField
+            key={fieldId}
+            id={fieldId}
+            label={inLabel(f.key, f.label)}
+            value={vals[f.key] ?? ''}
+            onChange={(v) => setV(f.key, v)}
+            suffix={f.suffix ? inSuffix(f.key, f.suffix) : undefined}
+            placeholder={f.placeholder}
+            min={f.slider.min}
+            max={f.slider.max}
+            step={f.slider.step}
+          />
+        )
+      }
+      return (
+        <CalculatorField
+          key={fieldId}
+          id={fieldId}
+          label={inLabel(f.key, f.label)}
+          value={vals[f.key] ?? ''}
+          onChange={(v) => setV(f.key, v)}
+          suffix={f.suffix ? inSuffix(f.key, f.suffix) : undefined}
+          placeholder={f.placeholder}
+          type={f.type === 'text' ? 'text' : 'number'}
+        />
+      )
+    }
+
     return (
       <div className="space-y-6">
         {/* 输入区 + 右上角 Load Sample / Reset 按钮 */}
@@ -450,84 +596,144 @@ export function makeCalculatorClient(config: CalculatorConfig): ComponentType {
           />
         )}
 
+        {/* 输入网格(Scenario A):字段渲染器与 B 面板共用 */}
         <div className="grid grid-cols-1 gap-4 rounded-lg p-4 sm:grid-cols-2" style={{ backgroundColor: 'rgb(var(--bg-subtle))' }}>
-          {config.inputs.map((f) => {
-            // select 类型用下拉;选项 ≤4 个时升级为 iOS 风格分段控件
-            // (滑块指示器只动 transform,与 macOS System Settings 同族手感)
-            if (f.options && f.options.length > 0) {
-              const segOptions = f.options.map((opt) => ({
-                label: L(`opt.${f.key}.${opt.value}`, opt.label),
-                value: opt.value,
-              }))
-              if (f.options.length <= 4) {
-                return (
-                  <div key={f.key} className="sm:col-span-2">
-                    <span id={`${f.key}-label`} className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
-                      {inLabel(f.key, f.label)}
-                    </span>
-                    <SegmentedControl
-                      options={segOptions}
-                      value={values[f.key] ?? f.options[0].value}
-                      onChange={(v) => setValue(f.key, v)}
-                      ariaLabel={inLabel(f.key, f.label)}
-                      id={f.key}
-                    />
-                  </div>
-                )
-              }
-              return (
-                <div key={f.key}>
-                  <label htmlFor={f.key} className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
-                    {inLabel(f.key, f.label)}
-                  </label>
-                  <select
-                    id={f.key}
-                    value={values[f.key] ?? ''}
-                    onChange={(e) => setValue(f.key, e.target.value)}
-                    className="w-full rounded-lg border p-3 shadow-sm outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200" style={{ borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rgb(var(--bg-card))', color: 'rgb(var(--text))' }}
-                  >
-                    {segOptions.map((opt) => (
-                      <option key={opt.value} value={opt.value}>
-                        {opt.label}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-              )
-            }
-            // 默认 number/text:由 f.type 决定输入框 type(默认 number,select 在上方分支已处理)
-            // 声明 slider 的 number 字段 → 数字框 + 滑杆双向绑定
-            if (f.slider && f.type !== 'text') {
-              return (
-                <CalculatorSliderField
-                  key={f.key}
-                  id={f.key}
-                  label={inLabel(f.key, f.label)}
-                  value={values[f.key] ?? ''}
-                  onChange={(v) => setValue(f.key, v)}
-                  suffix={f.suffix ? inSuffix(f.key, f.suffix) : undefined}
-                  placeholder={f.placeholder}
-                  min={f.slider.min}
-                  max={f.slider.max}
-                  step={f.slider.step}
-                />
-              )
-            }
-            return (
-              <CalculatorField
-                key={f.key}
-                id={f.key}
-                label={inLabel(f.key, f.label)}
-                value={values[f.key] ?? ''}
-                onChange={(v) => setValue(f.key, v)}
-                suffix={f.suffix ? inSuffix(f.key, f.suffix) : undefined}
-                placeholder={f.placeholder}
-                type={f.type === 'text' ? 'text' : 'number'}
-              />
-            )
-          })}
+          {config.inputs.map((f) => renderInputField(f, values, setValue))}
         </div>
 
+        {/* ── Scenario B 面板(allowCompare 激活后)──
+            克隆 A 参数后独立微调;与 A 同款字段渲染器,仅 id 前缀不同 */}
+        {config.allowCompare && compareOn && (
+          <div
+            className="compare-panel rounded-xl border-2 border-dashed p-4"
+            style={{ borderColor: 'rgb(var(--primary) / 0.45)', backgroundColor: 'rgb(var(--primary) / 0.03)' }}
+          >
+            <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
+              <span className="inline-flex items-center gap-2 text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>
+                <span
+                  aria-hidden="true"
+                  className="inline-flex h-5 w-5 items-center justify-center rounded-md bg-brand-600 text-[11px] font-bold text-white"
+                >
+                  B
+                </span>
+                {L('scenarioB', 'Scenario B')}
+              </span>
+              <button
+                type="button"
+                onClick={() => setBValues({ ...values })}
+                className="rounded-lg border px-3 py-1.5 text-sm transition-colors hover:bg-slate-100 dark:border-slate-600 dark:hover:bg-slate-800"
+                style={{ borderColor: 'rgb(var(--border-strong))', color: 'rgb(var(--text-muted))' }}
+              >
+                {L('compareSync', '⟲ Copy A → B')}
+              </button>
+            </div>
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+              {config.inputs.map((f) => renderInputField(f, bValues, setBValue, 'cmp-'))}
+            </div>
+          </div>
+        )}
+
+        {/* ── 对比模式开关(allowCompare):结果区顶部切换 ── */}
+        {config.allowCompare && (
+          <div className="flex flex-wrap items-center justify-end gap-2">
+            <button
+              type="button"
+              onClick={() => (compareOn ? setCompareOn(false) : activateCompare())}
+              aria-pressed={compareOn}
+              className={`rounded-full border px-4 py-1.5 text-sm font-medium transition-colors ${
+                compareOn
+                  ? 'border-brand-600 bg-brand-600 text-white hover:bg-brand-700'
+                  : 'border-brand-300 bg-brand-50 text-brand-700 hover:bg-brand-100 dark:border-brand-500/50 dark:bg-brand-950/40 dark:text-brand-300 dark:hover:bg-brand-900/50'
+              }`}
+            >
+              {compareOn ? L('compareExit', '× Exit Compare') : L('compareAdd', '+ Compare Scenario')}
+            </button>
+          </div>
+        )}
+
+        {/* ── 对比视图:主结果 Delta 徽章 + A/B 逐项对比表 ──
+            激活后取代标准结果网格;图表/操作行保持基于 Scenario A */}
+        {config.allowCompare && compareOn && bResults ? (
+          <div className="space-y-3">
+            {highlightOut && !highlightIsError && (
+              <div className="relative overflow-hidden rounded-xl border p-4 sm:p-5" style={{ borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rgb(var(--bg-card))' }}>
+                <div className="flex flex-wrap items-center justify-between gap-3">
+                  <div className="min-w-0">
+                    <div className="text-xs font-semibold uppercase tracking-wide" style={{ color: 'rgb(var(--text-subtle))' }}>
+                      {outLabel(highlightOut.key, highlightOut.label)}
+                    </div>
+                    <div className="mt-1 flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                      <span className="text-xl font-bold tabular-nums sm:text-2xl" style={{ color: 'rgb(var(--text))' }}>
+                        {L('scenarioA', 'A')}: {highlightValue}
+                      </span>
+                      <span className="text-xl font-bold tabular-nums sm:text-2xl" style={{ color: 'rgb(var(--text-muted))' }}>
+                        {L('scenarioB', 'B')}: {bResults[highlightOut.key] ?? '—'}
+                      </span>
+                    </div>
+                  </div>
+                  {/* 主结果 Delta 差额徽章:B − A;更低=绿(B 省),更高=红 */}
+                  {(() => {
+                    const d = deltaOf(highlightValue, bResults[highlightOut.key])
+                    if (!d) return null
+                    const isBetter = d.better === 'b'
+                    return (
+                      <span
+                        className="delta-badge inline-flex shrink-0 items-center gap-1.5 rounded-full px-3.5 py-1.5 text-base font-bold tabular-nums shadow-sm"
+                        style={{
+                          backgroundColor: isBetter ? 'rgb(34 197 94 / 0.12)' : 'rgb(239 68 68 / 0.12)',
+                          color: isBetter ? '#16a34a' : '#dc2626',
+                          border: `1px solid ${isBetter ? 'rgb(34 197 94 / 0.4)' : 'rgb(239 68 68 / 0.4)'}`,
+                        }}
+                      >
+                        {d.text}
+                        <span className="text-[11px] font-semibold uppercase tracking-wide" style={{ color: isBetter ? '#16a34a' : '#dc2626', opacity: 0.75 }}>
+                          {L('deltaCol', 'B vs A')}
+                        </span>
+                      </span>
+                    )
+                  })()}
+                </div>
+              </div>
+            )}
+            {/* A/B 逐项对比表:每行一个输出字段 */}
+            <div className="overflow-x-auto rounded-xl border" style={{ borderColor: 'rgb(var(--border-strong))' }}>
+              <table className="w-full text-left text-sm">
+                <thead className="text-xs uppercase" style={{ backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text-subtle))' }}>
+                  <tr>
+                    <th scope="col" className="px-3 py-2">{L('resultsLabel', 'Results:').replace(/:$/, '')}</th>
+                    <th scope="col" className="px-3 py-2 text-right">{L('scenarioA', 'A')}</th>
+                    <th scope="col" className="px-3 py-2 text-right">{L('scenarioB', 'B')}</th>
+                    <th scope="col" className="px-3 py-2 text-right">{L('deltaCol', 'B vs A')}</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y" style={{ borderColor: 'rgb(var(--border))' }}>
+                  {config.outputs.map((o) => {
+                    const aV = mergedResults[o.key] ?? '—'
+                    const bV = bResults[o.key] ?? '—'
+                    const d = deltaOf(aV, bV)
+                    return (
+                      <tr key={o.key}>
+                        <td className="px-3 py-2 font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
+                          {outLabel(o.key, o.label)}
+                        </td>
+                        <td className="px-3 py-2 text-right font-mono tabular-nums" style={{ color: o.highlight ? 'rgb(var(--primary))' : 'rgb(var(--text))', fontWeight: o.highlight ? 700 : 400 }}>
+                          {aV}
+                        </td>
+                        <td className="px-3 py-2 text-right font-mono tabular-nums" style={{ color: 'rgb(var(--text))' }}>
+                          {bV}
+                        </td>
+                        <td className="px-3 py-2 text-right font-mono font-semibold tabular-nums" style={{ color: d ? (d.better === 'b' ? '#16a34a' : '#dc2626') : 'rgb(var(--text-faint))' }}>
+                          {d ? d.text : '—'}
+                        </td>
+                      </tr>
+                    )
+                  })}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        ) : (
+          <>
         {/* 结果区:每张 ResultCard 自带 role="status",值变化时逐卡播报。
             容器级再包一层 aria-live 会与卡片形成嵌套双报(R6 三组独立确认),
             故这里刻意不设 live region,只保留滚动锚点与布局职责。
@@ -563,6 +769,8 @@ export function makeCalculatorClient(config: CalculatorConfig): ComponentType {
             )
           })}
         </div>
+          </>
+        )}
 
         {/* 结果操作行 - Copy Summary 复制纯文本摘要,Download 导出 CSV,
             Share Link 复制带参深链(他人打开即还原完整场景),分享卡导出 PNG */}

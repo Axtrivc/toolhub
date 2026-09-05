@@ -539,6 +539,13 @@ export const COMMON_CALC_UI: Record<Exclude<Locale, 'en'>, Record<string, string
     csvResult: '结果',
     inputs: '输入',
     reset: '重置',
+    // Scenario A/B 对比模式(工厂 allowCompare)
+    compareAdd: '+ 对比方案',
+    compareExit: '× 退出对比',
+    compareSync: '⟲ A → B 同步',
+    scenarioA: '方案 A',
+    scenarioB: '方案 B',
+    deltaCol: 'B 相对 A',
   },
   es: {
     summaryTitle: 'Resumen del cálculo',
@@ -553,6 +560,13 @@ export const COMMON_CALC_UI: Record<Exclude<Locale, 'en'>, Record<string, string
     csvResult: 'Resultado',
     inputs: 'Entradas',
     reset: 'Restablecer',
+    // Modo comparación A/B (allowCompare)
+    compareAdd: '+ Comparar escenario',
+    compareExit: '× Salir de la comparación',
+    compareSync: '⟲ Copiar A → B',
+    scenarioA: 'Escenario A',
+    scenarioB: 'Escenario B',
+    deltaCol: 'B frente a A',
   },
   de: {
     summaryTitle: 'Zusammenfassung der Berechnung',
@@ -567,6 +581,13 @@ export const COMMON_CALC_UI: Record<Exclude<Locale, 'en'>, Record<string, string
     csvResult: 'Ergebnis',
     inputs: 'Eingaben',
     reset: 'Zurücksetzen',
+    // Szenario-A/B-Vergleich (allowCompare)
+    compareAdd: '+ Szenario vergleichen',
+    compareExit: '× Vergleich beenden',
+    compareSync: '⟲ A → B kopieren',
+    scenarioA: 'Szenario A',
+    scenarioB: 'Szenario B',
+    deltaCol: 'B gegenüber A',
   },
 }
 

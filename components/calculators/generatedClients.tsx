@@ -219,11 +219,11 @@ export const SalesTaxCalculatorClient = makeCalculatorClient({
 export const CompoundInterestCalculatorClient = makeCalculatorClient({
   slug: 'compound-interest-calculator',
   urlState: true,
+  allowCompare: true,
   presets: [
-    { label: 'Slow & steady', values: { rate: '4', years: '30', monthly: '200' } },
-    { label: 'Index fund core', values: { rate: '7', years: '25', monthly: '400' } },
-    { label: 'Aggressive growth', values: { rate: '10', years: '20', monthly: '800' } },
-    { label: 'Start late, catch up', values: { rate: '8', years: '15', monthly: '1200' } },
+    { label: 'S&P 500 Index (10%)', values: { rate: '10' } },
+    { label: 'High-Yield Savings (4.5%)', values: { rate: '4.5' } },
+    { label: 'Conservative Bond (4%)', values: { rate: '4' } },
   ],
   inputs: [
     { key: 'principal', label: 'Initial investment', suffix: '$', default: '10000' },

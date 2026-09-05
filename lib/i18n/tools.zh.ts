@@ -943,4 +943,30 @@ export const zhTools: Record<string, { name: string; shortIntro: string }> = {
     shortIntro: '按房间面积、涂刷遍数与门窗扣减,算出油漆用量(加仑/升)。',
   },
 
+  // ─────────── 🚀 高商业意图新工具(2026-09)───────────
+  'hysa-calculator': {
+    name: '高收益储蓄计算器',
+    shortIntro: '按日复利与月定投,推演高收益储蓄账户的增长轨迹。',
+  },
+  'cd-calculator': {
+    name: '定存单计算器',
+    shortIntro: '测算定存单到期本息,并模拟提前支取罚金后的实际到手。',
+  },
+  'break-even-calculator': {
+    name: '盈亏平衡计算器',
+    shortIntro: '一步算出保本销量、保本销售额与贡献毛益率。',
+  },
+  'profit-margin-calculator': {
+    name: '利润率计算器',
+    shortIntro: '成本加任意一项,秒推售价、利润、毛利率与加价率。',
+  },
+  'intermittent-fasting-calculator': {
+    name: '轻断食计算器',
+    shortIntro: '16:8 / 18:6 / 20:4 时间表,带断食倒计时与代谢阶段时间轴。',
+  },
+  'llm-api-cost-calculator': {
+    name: 'LLM API 成本对比',
+    shortIntro: '按月度 token 用量横向对比各大模型的真实账单。',
+  },
+
 }

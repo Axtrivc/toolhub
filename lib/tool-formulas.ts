@@ -401,6 +401,38 @@ export const toolFormulas: Record<string, ToolFormula> = {
     explain:
       'Every time zone is UTC plus a fixed offset (which may shift with daylight saving). Converting between zones goes through UTC: add one offset, subtract the other.',
   },
+
+  // ───────── batch18 高商业意图工具(2026-09)─────────
+  'hysa-calculator': {
+    formula: 'FV = P × (1 + r/n)^(n·t) + PMT × [((1 + r/n)^(n·t) − 1) / (r/n)]',
+    explain:
+      'High-yield savings growth. P = initial deposit, PMT = monthly deposit, r = APY (decimal), n = compounding periods per year (365 for daily), t = years. The first term compounds the principal; the second grows the deposit stream.',
+  },
+  'cd-calculator': {
+    formula: 'Maturity = P × (1 + r/n)^(n·t) · Penalty = P × (r/12) × penalty months',
+    explain:
+      'Certificate of Deposit value at maturity with r = annual rate, n = compounding frequency, t = term in years. An early exit keeps accrued interest minus the penalty, which banks quote as months of interest on principal — never touching principal itself.',
+  },
+  'break-even-calculator': {
+    formula: 'Break-even units = Fixed Costs ÷ (Price − Variable Cost)',
+    explain:
+      'Sales volume where total revenue equals total cost. Contribution margin per unit (Price − Variable Cost) chips away at fixed costs until the balance hits zero; multiplying by price gives break-even revenue.',
+  },
+  'profit-margin-calculator': {
+    formula: 'Margin = Profit ÷ Price · Markup = Profit ÷ Cost · Price = Cost ÷ (1 − Margin)',
+    explain:
+      'Margin and markup describe the same profit from two bases: margin divides by selling price, markup by cost. To hit a target margin m, price at Cost ÷ (1 − m); a 100% markup equals a 50% margin.',
+  },
+  'intermittent-fasting-calculator': {
+    formula: 'eating window = first meal → first meal + E · fasting = first meal + E → first meal + 24',
+    explain:
+      'Schedule derivation for a fasting ratio F:E: the eating window opens at your first meal and closes E hours later; the fasting window runs F hours until the next day\u2019s first meal. Metabolic phase markers (ketosis ≈ 12h+, autophagy ≈ 16-24h) are added on top as research-informed estimates.',
+  },
+  'llm-api-cost-calculator': {
+    formula: 'monthly cost = (input tokens ÷ 1M × price_in) + (output tokens ÷ 1M × price_out)',
+    explain:
+      'Per-model API bill from monthly token volumes. Prices are uncached list rates per million tokens; cached-input and batch discounts are not applied, so results are worst-case planning numbers.',
+  },
 }
 
 /** 读取某工具的公式;未注册返回 null(组件据此不渲染空区) */

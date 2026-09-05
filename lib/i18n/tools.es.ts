@@ -942,4 +942,30 @@ export const esTools: Record<string, { name: string; shortIntro: string }> = {
     shortIntro: 'Galones o litros de pintura por habitación, contando manos y aberturas.',
   },
 
+  // ─────────── 🚀 Nuevas herramientas (2026-09) ───────────
+  'hysa-calculator': {
+    name: 'Calculadora de Cuenta de Ahorro de Alto Rendimiento',
+    shortIntro: 'Proyecta tu ahorro con capitalización diaria y aportaciones mensuales.',
+  },
+  'cd-calculator': {
+    name: 'Calculadora de Depósito a Plazo',
+    shortIntro: 'Valor al vencimiento y simulación de penalización por retirada anticipada.',
+  },
+  'break-even-calculator': {
+    name: 'Calculadora de Punto de Equilibrio',
+    shortIntro: 'Unidades e ingresos de equilibrio y ratio de margen de contribución.',
+  },
+  'profit-margin-calculator': {
+    name: 'Calculadora de Margen de Beneficio',
+    shortIntro: 'Coste más un dato: precio, beneficio, margen y markup al instante.',
+  },
+  'intermittent-fasting-calculator': {
+    name: 'Calculadora de Ayuno Intermitente',
+    shortIntro: 'Horarios 16:8 / 18:6 / 20:4 con cuenta atrás y cronología metabólica.',
+  },
+  'llm-api-cost-calculator': {
+    name: 'Comparador de Costos de API LLM',
+    shortIntro: 'Compara la factura mensual real de cada gran modelo de IA.',
+  },
+
 }

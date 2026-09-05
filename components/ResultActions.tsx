@@ -1,6 +1,7 @@
 'use client'
 
 import { useCallback, useEffect, useRef, useState } from 'react'
+import { Printer } from 'lucide-react'
 import { useApp } from './providers/AppProviders'
 import { t } from '@/lib/i18n'
 import { CopyButton } from './CopyButton'
@@ -26,6 +27,48 @@ interface ResultActionsProps {
    * 他人点开链接即还原完整计算场景(带参反链,裂变流量入口)。
    */
   shareParams?: Record<string, string>
+  /**
+   * 「Print Report」按钮(默认 true):点击 window.print() 触发浏览器打印,
+   * 配合 globals.css 的 @media print 排版输出机构级 A4 报告
+   * (隐藏 Header/Footer/广告/FAQ 等,顶部注入报告抬头)。
+   * 纯展示型工具(无输入结果可打印)可显式传 false 关闭。
+   */
+  enablePrint?: boolean
+}
+
+/**
+ * 打印报告抬头 —— 屏显隐藏,仅 @media print 时可见(globals.css .print-only)。
+ * URL 与日期依赖 window/Date,挂载后才填充(SSR 渲染占位,保持水合一致)。
+ */
+function PrintReportHeader() {
+  const { locale } = useApp()
+  const [info, setInfo] = useState<{ url: string; date: string } | null>(null)
+  useEffect(() => {
+    setInfo({
+      url: window.location.href.split(/[?#]/)[0],
+      date: new Date().toLocaleDateString(locale === 'en' ? 'en-US' : locale, {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+      }),
+    })
+  }, [locale])
+  return (
+    <div className="print-only print-report-header">
+      <div className="print-report-brand">ToolHub Calculation Report</div>
+      <div className="print-report-meta">
+        <span>{info?.url ?? ''}</span>
+        {info && (
+          <>
+            <span aria-hidden="true"> · </span>
+            <span>
+              {t(locale, 'printReportGenerated')}: {info.date}
+            </span>
+          </>
+        )}
+      </div>
+    </div>
+  )
 }
 
 /**
@@ -49,6 +92,7 @@ export function ResultActions({
   disabled,
   copyLabel,
   shareParams,
+  enablePrint = true,
 }: ResultActionsProps) {
   const { locale } = useApp()
   const [downloaded, setDownloaded] = useState(false)
@@ -116,7 +160,11 @@ export function ResultActions({
   }, [shareParams])
 
   return (
-    <div className="flex flex-wrap items-center gap-3">
+    <>
+      {/* 打印抬头:屏显隐藏,进 @media print 后成为报告页眉
+          (放在 .no-print 操作行之外,避免被打印隐藏规则吞掉) */}
+      {enablePrint && <PrintReportHeader />}
+      <div className="flex flex-wrap items-center gap-3 no-print">
       <CopyButton value={summary} label={copyLabel || t(locale, 'toolCopySummary')} disabled={disabled} />
       <motion.button
         type="button"
@@ -142,6 +190,21 @@ export function ResultActions({
           {linkCopied ? `✓ ${t(locale, 'linkCopied')}` : t(locale, 'shareLink')}
         </motion.button>
       )}
-    </div>
+      {enablePrint && (
+        <motion.button
+          type="button"
+          onClick={() => window.print()}
+          disabled={disabled}
+          whileTap={reduceMotion ? undefined : { scale: 0.95 }}
+          transition={reduceMotion ? undefined : { type: 'spring', stiffness: 500, damping: 30 }}
+          className="btn btn-secondary disabled:cursor-not-allowed disabled:opacity-50"
+          title={t(locale, 'toolPrintReport')}
+        >
+          <Printer className="h-4 w-4" aria-hidden="true" />
+          {t(locale, 'toolPrintReport')}
+        </motion.button>
+      )}
+      </div>
+    </>
   )
 }

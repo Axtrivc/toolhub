@@ -112,6 +112,14 @@ export interface CalculatorConfig {
    * values 只需包含要改的 key(未列出的字段保持当前值)。
    */
   presets?: { label: string; values: Record<string, string> }[]
+  /**
+   * 多方案同屏对比(可选,默认关闭):结果区顶部出现「+ Compare Scenario」
+   * 开关。激活后克隆当前参数为 Scenario B,可在右侧/折叠面板微调;
+   * 结果卡并排展示 A/B,主结果卡右上方渲染 Delta 差额徽章
+   * (如 −$185.20/mo)。适合"参数敏感性"强的金融工具
+   * (mortgage / loan / compound-interest 等核心场景)。
+   */
+  allowCompare?: boolean
 }
 
 /**

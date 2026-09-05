@@ -2,6 +2,7 @@
 
 import { useState, useMemo, useCallback } from 'react'
 import { CalculatorField, CalculatorSliderField, ResultCard, CalculatorNote } from '@/components/calculator/CalculatorField'
+import { PresetChips } from '@/components/calculator/PresetChips'
 import { GaugeChart } from '@/components/charts/GaugeChart'
 import { LoadSampleButton } from '@/components/LoadSampleButton'
 import { ResultActions } from '@/components/ResultActions'
@@ -258,6 +259,32 @@ export function CalorieCalculatorClient() {
   return (
     <div className="space-y-6">
       <UnitToggle unit={unit} onSwitch={switchUnit} L={L} />
+
+      {/* 真实世界场景预设:减脂/增肌典型画像,按当前单位制取对应数值。
+          工具本身恒显示 ±250/±500 kcal 目标行,预设名与目标行呼应。 */}
+      <PresetChips
+        presets={
+          unit === 'imperial'
+            ? [
+                { label: 'Mild Weight Loss (−250 kcal)', values: { gender: 'female', age: '32', weight: '150', heightFt: '5', heightIn: '5', activity: '1.375' } },
+                { label: 'Active Muscle Gain (+350 kcal)', values: { gender: 'male', age: '28', weight: '172', heightFt: '5', heightIn: '10', activity: '1.725' } },
+              ]
+            : [
+                { label: 'Mild Weight Loss (−250 kcal)', values: { gender: 'female', age: '32', weight: '68', height: '165', activity: '1.375' } },
+                { label: 'Active Muscle Gain (+350 kcal)', values: { gender: 'male', age: '28', weight: '78', height: '178', activity: '1.725' } },
+              ]
+        }
+        labelOf={(fb, i) => L(`preset.${i}`, fb)}
+        onApply={(vals) => {
+          if (vals.gender !== undefined) setGender(vals.gender as 'male' | 'female')
+          if (vals.age !== undefined) setAge(vals.age)
+          if (vals.weight !== undefined) setWeight(vals.weight)
+          if (vals.height !== undefined) setHeight(vals.height)
+          if (vals.heightFt !== undefined) setHeightFt(vals.heightFt)
+          if (vals.heightIn !== undefined) setHeightIn(vals.heightIn)
+          if (vals.activity !== undefined) setActivity(vals.activity)
+        }}
+      />
 
       <div className="flex flex-wrap items-center justify-between gap-3">
         <span className="text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>{C('inputs', 'Inputs')}</span>
@@ -1018,11 +1045,12 @@ export const MarkupCalculatorClient = makeCalculatorClient({
 export const MortgageCalculatorClient = makeCalculatorClient({
   slug: 'mortgage-calculator',
   urlState: true,
+  allowCompare: true,
   presets: [
-    { label: '30-yr fixed', values: { rate: '6.8', years: '30', down: '20' } },
-    { label: '15-yr fixed', values: { rate: '6.2', years: '15', down: '20' } },
-    { label: '10% down FHA', values: { down: '10', pmiRate: '0.55' } },
-    { label: 'Aggressive payoff', values: { extra: '500' } },
+    { label: '30-Yr Fixed (6.8%)', values: { rate: '6.8', years: '30' } },
+    { label: '15-Yr Fixed (6.1%)', values: { rate: '6.1', years: '15' } },
+    { label: 'FHA Loan (3.5% Down)', values: { down: '3.5', pmiRate: '0.55' } },
+    { label: 'Jumbo Loan ($1M)', values: { home: '1000000', down: '20' } },
   ],
   inputs: [
     { key: 'home', label: 'Home price', suffix: '$', default: '400000' },

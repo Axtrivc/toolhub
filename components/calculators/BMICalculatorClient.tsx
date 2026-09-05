@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { CalculatorField, ResultCard, CalculatorNote } from '@/components/calculator/CalculatorField'
+import { PresetChips } from '@/components/calculator/PresetChips'
 import { GaugeChart } from '@/components/charts/GaugeChart'
 import { useApp } from '@/components/providers/AppProviders'
 import { tui } from '@/lib/i18n/tool-l10n'
@@ -155,6 +156,28 @@ export function BMICalculatorClient() {
           </button>
         ))}
       </div>
+
+      {/* 真实世界场景预设:典型成人身高体重,按当前单位制取对应数值 */}
+      <PresetChips
+        presets={
+          unit === 'imperial'
+            ? [
+                { label: "Adult Male (5'10, 170lb)", values: { heightFt: '5', heightIn: '10', weight: '170' } },
+                { label: "Adult Female (5'5, 135lb)", values: { heightFt: '5', heightIn: '5', weight: '135' } },
+              ]
+            : [
+                { label: "Adult Male (5'10, 170lb)", values: { height: '178', weight: '77' } },
+                { label: "Adult Female (5'5, 135lb)", values: { height: '165', weight: '61' } },
+              ]
+        }
+        labelOf={(fb, i) => L(`preset.${i}`, fb)}
+        onApply={(vals) => {
+          if (vals.height !== undefined) setHeight(vals.height)
+          if (vals.heightFt !== undefined) setHeightFt(vals.heightFt)
+          if (vals.heightIn !== undefined) setHeightIn(vals.heightIn)
+          if (vals.weight !== undefined) setWeight(vals.weight)
+        }}
+      />
 
       {/* 输入区 */}
       <div className="grid grid-cols-1 gap-4 rounded-lg p-4 sm:grid-cols-2" style={{ backgroundColor: 'rgb(var(--bg-subtle))' }}>

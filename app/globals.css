@@ -665,3 +665,206 @@ input.calc-slider:active::-webkit-slider-thumb {
   .animate-lang-menu,
   .animate-lang-pulse { animation: none; }
 }
+
+/* ════════════════════════════════════════════════════════════
+ * 打印级评估报告(Print Report)—— 全站计算器共享。
+ * ResultActions 的「Print Report」按钮触发 window.print(),本段
+ * @media print 排版把工具页变成干净的 A4 机构级报告:
+ *  - 隐藏全站干扰:Header / Footer / 面包屑 nav / 广告位 / 相关工具 /
+ *    可见 FAQ / 嵌入邀请 / 中部 SEO 长文 / 操作按钮行 / Range 滑杆 /
+ *    移动端 sticky 结果条(它们统一带 [data-embed-hide]、.no-print 或
+ *    元素级 header/footer/nav 标记);
+ *  - 顶部注入报告抬头(.print-only,.print-report-header):
+ *    「ToolHub Calculation Report」+ 页面 URL + 生成日期;
+ *  - 输入参数与计算结果区转为黑白双列数据表格:纯白底、黑字、
+ *    细灰框线、去阴影去渐变,浏览器「另存为 PDF」即为汇报级产物。
+ * ════════════════════════════════════════════════════════════ */
+
+/* 屏显时隐藏打印专用元素(报告抬头只在 @media print 可见) */
+.print-only {
+  display: none;
+}
+
+@media print {
+  @page {
+    margin: 14mm 12mm;
+  }
+
+  /* ── 基底:强制浅色纸张语义(暗色主题下打印仍为白纸黑字) ── */
+  html,
+  body {
+    background: #ffffff !important;
+    color: #0f172a !important;
+    overflow: visible !important;
+  }
+  html.dark body {
+    background: #ffffff !important;
+    color: #0f172a !important;
+  }
+  /* 页面级背景/边框统一洗白,卡片悬浮感在纸上无意义 */
+  .container-page {
+    max-width: none !important;
+    padding: 0 !important;
+  }
+
+  /* ── 1. 隐藏全站干扰元素 ──
+     [data-embed-hide] 覆盖:面包屑 nav、工具标题 header、顶部/中部/底部
+     广告位、ToolInfoSection、FormulaSection、VisibleFaqs、EmbedTool、
+     RelatedTools;另补站点 Header/Footer、正文长文、操作行、滑杆、
+     移动端 sticky 条、隐藏域工具的画布交互区。 */
+  header,
+  footer,
+  nav,
+  aside,
+  [data-embed-hide],
+  .no-print,
+  .prose-content,
+  .tool-shell button,
+  .tool-shell input[type='range'],
+  .calc-slider,
+  [class*='fixed inset-x-0'] {
+    display: none !important;
+  }
+
+  /* ── 2. 报告抬头(屏显由上方 .print-only 隐藏)──
+     绝对定位到工具卡片顶端,先于输入/结果表格出现 */
+  .print-only {
+    display: block !important;
+  }
+  .print-report-header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    border-bottom: 2px solid #0f172a;
+    padding-bottom: 8px;
+    margin-bottom: 16px;
+  }
+  .print-report-brand {
+    font-size: 18pt;
+    font-weight: 700;
+    color: #0f172a;
+    letter-spacing: 0.02em;
+  }
+  .print-report-meta {
+    margin-top: 4px;
+    font-size: 9pt;
+    color: #475569;
+  }
+
+  /* ── 3. 工具卡片:白底黑字、去阴影圆角,铺满纸宽 ──
+     报告抬头经 position:absolute 提到卡片最顶(ResultActions 在 DOM 中
+     位于输入区之后,源顺序无法调换),64px 内边距为其留位。
+     同时关掉入场动画:ios-rise 的终态 transform 会让直接子元素成为
+     绝对定位的包含块,把抬头拽离卡片顶端 */
+  .tool-shell {
+    background: #ffffff !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 64px 0 0 0 !important;
+    position: relative;
+  }
+  .tool-shell > * {
+    animation: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+  }
+
+  /* ── 4. 输入/结果双列数据表格化 ──
+     工厂的输入区与结果区都是 .grid 容器;统一压成 2 列、零间距、
+     外框 + 单元格细线,形成标准黑白数据表。 */
+  .tool-shell .grid {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 0 !important;
+    background: #ffffff !important;
+    border: 1px solid #64748b !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
+    break-inside: avoid;
+  }
+  .tool-shell .grid > * {
+    border-bottom: 1px solid #cbd5e1 !important;
+    background: #ffffff !important;
+    break-inside: avoid;
+  }
+  .tool-shell .grid > :nth-child(odd) {
+    border-right: 1px solid #cbd5e1 !important;
+  }
+  /* 末行 cells 去掉底边线,表格下缘干净收口 */
+  .tool-shell .grid > :last-child,
+  .tool-shell .grid > :nth-last-child(2):nth-child(odd) {
+    border-bottom: none !important;
+  }
+  /* 输入控件在纸上只保留值文本:去边框/阴影/主题底色 */
+  .tool-shell :where(input, select, textarea) {
+    border: none !important;
+    box-shadow: none !important;
+    background: transparent !important;
+    color: #0f172a !important;
+    padding-left: 0 !important;
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    height: auto !important;
+    min-height: 0 !important;
+  }
+  /* 字段标签统一深灰小字(输入框上方的 label 文本) */
+  .tool-shell label,
+  .tool-shell .text-sm.font-medium,
+  .tool-shell span[class*='font-medium'] {
+    color: #475569 !important;
+  }
+  /* 结果卡:白底黑字,主结果去渐变/主色,全黑加粗;错误卡去红底 */
+  .tool-shell [role='status'] {
+    background: #ffffff !important;
+    border: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    color: #0f172a !important;
+    text-align: left !important;
+    padding: 6px 10px !important;
+  }
+  .tool-shell [role='status'] * {
+    color: #0f172a !important;
+    background: transparent !important;
+  }
+  .tool-shell [role='status'] .text-2xl,
+  .tool-shell [role='status'] .text-3xl {
+    font-size: 12pt !important;
+    font-weight: 700 !important;
+  }
+  /* Scenario A/B 对比表与数据明细表沿用站点表格,仅洗为黑白 */
+  .tool-shell table {
+    break-inside: auto;
+  }
+  .tool-shell table th,
+  .tool-shell table td {
+    background: #ffffff !important;
+    color: #0f172a !important;
+    border-bottom: 1px solid #cbd5e1 !important;
+  }
+  /* 图表区:白底保留(SVG 曲线/环形图是报告的组成部分),避免跨页断裂 */
+  .tool-shell svg {
+    break-inside: avoid;
+  }
+  /* Scenario B 参数面板与 Delta 徽章:打印转黑白(细实线描边、白底黑字),
+     彩色虚线/红绿胶囊在纸上既费墨也不符合机构级报告观感 */
+  .tool-shell .compare-panel {
+    border: 1px solid #64748b !important;
+    background: #ffffff !important;
+  }
+  .tool-shell .delta-badge {
+    background: #ffffff !important;
+    color: #0f172a !important;
+    border: 1.5px solid #0f172a !important;
+    box-shadow: none !important;
+  }
+  .tool-shell .delta-badge * {
+    color: #0f172a !important;
+  }
+  /* 深色主题下 SVG 文本可能用浅色 fill,打印统一压深 */
+  html.dark .tool-shell svg text {
+    fill: #0f172a;
+  }
+}
