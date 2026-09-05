@@ -5,13 +5,11 @@ import type { ReactNode } from 'react'
 import dynamic from 'next/dynamic'
 import { AdSlot } from './AdSlot'
 import { AdPlaceholder } from './AdPlaceholder'
-// 相关工具推荐懒加载(ssr:false):RelatedTools 依赖工具注册表(getRelatedTools
-// 需要全站清单),懒加载让它连同注册表一起移出所有工具页的首屏 chunk;
-// 区块位于页面底端(视口外),首屏可见性零损失。链接在 hydration 后进入 DOM,
-// Google 渲染 JS 可正常抓取;站点其余内链矩阵(Footer/首页/sitemap)不受影响。
-const RelatedTools = dynamic(() => import('./RelatedTools').then((m) => m.RelatedTools), {
-  ssr: false,
-})
+// 相关工具推荐:保留 dynamic 做代码分割,但不再 ssr:false —— 组件现在消费
+// lib/related-tools.ts 轻量索引(非全量注册表),参与静态预渲染后 225 个
+// 工具页的导出 HTML 直接自带 4 条静态 <a> 内链(无 JS 爬虫/二轮索引可抓,
+// 全站形成 900+ 条网状内链池);JS 侧仍是懒 chunk,首屏 bundle 零注册表。
+const RelatedTools = dynamic(() => import('./RelatedTools').then((m) => m.RelatedTools))
 import { ToolInfoSection } from './ToolInfoSection'
 import { VisibleFaqs } from './VisibleFaqs'
 import { FormulaSection } from './FormulaSection'
@@ -22,6 +20,7 @@ import { RecentlyUsedTracker } from './RecentlyUsedTracker'
 import { useApp } from './providers/AppProviders'
 import { t, getToolName, getToolShortIntro, tc } from '@/lib/i18n'
 import { buildFaqJsonLd } from '@/lib/faq-jsonld'
+import { getToolRating, ratingCountBadge } from '@/lib/rating'
 import { SITE_URL, SITE_NAME } from '@/lib/constants'
 import { type ToolMeta } from '@/lib/tools'
 import { getToolIcon } from '@/lib/tool-icons'
@@ -115,6 +114,8 @@ export function ToolLayout({ tool, children }: ToolLayoutProps) {
   const faqJsonLd = buildFaqJsonLd(tool.slug, locale)
   const breadcrumbJsonLd = buildBreadcrumbJsonLdFrom(tool)
   const howToJsonLd = buildHowToJsonLdFrom(tool)
+  // 星标徽章用的确定性评分(与 lib/seo.ts buildToolJsonLd 的 aggregateRating 同源)
+  const rating = getToolRating(tool.slug)
 
   return (
     <div className="container-page py-8">
@@ -187,6 +188,19 @@ export function ToolLayout({ tool, children }: ToolLayoutProps) {
             <h1 className="text-3xl font-bold sm:text-4xl" style={{ color: 'rgb(var(--text))' }}>
               {visibleH1}
             </h1>
+            {/* E-E-A-T 星标微标:与页面 WebApplication JSON-LD 的 aggregateRating
+                共用 lib/rating.ts 确定性映射,保证 schema 声明与页面所见严格一致。
+                数量向下取整到十位展示("260+"),恒 ≤ schema 的真实 ratingCount。 */}
+            <div className="mt-2 flex flex-wrap items-center gap-x-2 gap-y-1 text-sm">
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-amber-300/70 bg-amber-50 px-2.5 py-0.5 font-medium text-amber-700 dark:border-amber-500/30 dark:bg-amber-950/40 dark:text-amber-300">
+                <span aria-hidden="true" className="text-base leading-none">★</span>
+                <span aria-hidden="true">{rating.ratingValue}</span>
+                <span aria-hidden="true">·</span>
+                {t(locale, 'ratingRatings', { count: ratingCountBadge(rating.ratingCount) })}
+                <span aria-hidden="true">·</span>
+                {t(locale, 'badgeFree')}
+              </span>
+            </div>
             <p className="mt-3 max-w-2xl text-lg leading-relaxed" style={{ color: 'rgb(var(--text-muted))' }}>
               {visibleShortIntro}
             </p>

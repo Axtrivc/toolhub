@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useMemo, useCallback, useEffect, useRef, type ComponentType } from 'react'
+import Link from 'next/link'
 import { CalculatorField, CalculatorSliderField, ResultCard, CalculatorNote } from './CalculatorField'
 import { SegmentedControl } from './SegmentedControl'
 import { BreakdownChart } from './BreakdownChart'
@@ -14,7 +15,11 @@ import { ShareResultButton } from '../calculator/ShareResultButton'
 import { PresetChips } from '../calculator/PresetChips'
 import type { CalculatorConfig } from '@/lib/calculator-types'
 import { getCalculatorSample } from '@/lib/tool-samples'
+import { getNextToolsLite } from '@/lib/related-tools'
+import { getToolIcon } from '@/lib/tool-icons'
+import { SmartIcon } from '@/components/SmartIcon'
 import { useApp } from '@/components/providers/AppProviders'
+import { t, getToolName } from '@/lib/i18n'
 import { tui, tuiCalc } from '@/lib/i18n/tool-l10n'
 
 /**
@@ -89,6 +94,53 @@ function thinSeriesIndices(n: number, allPoints: number[][]): number[] | null {
   }
   idx.push(n - 1)
   return idx
+}
+
+/**
+ * 结果区「下一步」胶囊条 —— 工作流连续推荐(单会话 PV 拉升)。
+ *
+ * 算完即走是工具站的核心流失点:结果出来后给 2 条强关联工具胶囊
+ * (如 算完房贷月供 → 摊销表生成器),把单点工具延伸为连贯工作流。
+ * 数据来自 lib/related-tools.ts 轻量索引(显式 nextTools 优先,
+ * 否则同分类前 2 款),与 RelatedTools 同源、零注册表开销。
+ */
+function NextStepsBar({ slug }: { slug: string }) {
+  const { locale } = useApp()
+  const next = getNextToolsLite(slug)
+  if (next.length === 0) return null
+  return (
+    <div
+      className="rounded-xl border p-4"
+      style={{ borderColor: 'rgb(var(--border))', backgroundColor: 'rgb(var(--bg-subtle))' }}
+    >
+      <div
+        className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wide"
+        style={{ color: 'rgb(var(--text-subtle))' }}
+      >
+        <span aria-hidden="true">→</span>
+        {t(locale, 'nextStepsTitle')}
+      </div>
+      <div className="mt-2.5 flex flex-wrap gap-2">
+        {next.map((nt) => (
+          <Link
+            key={nt.slug}
+            href={`/tools/${nt.slug}/`}
+            title={`${nt.name} — ${nt.shortIntro}`}
+            className="inline-flex items-center gap-2 rounded-full border px-3 py-1.5 text-sm font-medium transition-colors hover:border-brand-400 hover:bg-brand-50 dark:hover:bg-brand-950/40"
+            style={{
+              borderColor: 'rgb(var(--border))',
+              backgroundColor: 'rgb(var(--bg-card))',
+              color: 'rgb(var(--text-muted))',
+            }}
+          >
+            <SmartIcon icon={getToolIcon(nt)} className="h-4 w-4 shrink-0" />
+            <span className="truncate">{getToolName(locale, nt.slug, nt.name)}</span>
+            <span aria-hidden="true" style={{ color: 'rgb(var(--text-faint))' }}>→</span>
+          </Link>
+        ))}
+      </div>
+    </div>
+  )
 }
 
 /**
@@ -346,6 +398,20 @@ export function makeCalculatorClient(config: CalculatorConfig): ComponentType {
       highlightValue !== '—' &&
       !highlightIsError
 
+    // 是否已有有效结果(非占位/非错误):决定「下一步」工作流推荐是否出现
+    const hasResult = !!highlightValue && highlightValue !== '—' && !highlightIsError
+
+    // 深度分享参数:过滤空值与默认值(与 urlState 的链接清洁约定一致),
+    // 由 ResultActions 组装为 ?key=value 带参完整 URL 一键复制。
+    const shareParams = useMemo(() => {
+      const params: Record<string, string> = {}
+      for (const f of config.inputs) {
+        const v = values[f.key] ?? ''
+        if (v !== '' && v !== f.default) params[f.key] = v
+      }
+      return params
+    }, [config.inputs, values])
+
     return (
       <div className="space-y-6">
         {/* 输入区 + 右上角 Load Sample / Reset 按钮 */}
@@ -498,7 +564,8 @@ export function makeCalculatorClient(config: CalculatorConfig): ComponentType {
           })}
         </div>
 
-        {/* 结果操作行 - Copy Summary 复制纯文本摘要,Download 导出 CSV,分享卡导出 PNG */}
+        {/* 结果操作行 - Copy Summary 复制纯文本摘要,Download 导出 CSV,
+            Share Link 复制带参深链(他人打开即还原完整场景),分享卡导出 PNG */}
         <div className="flex flex-wrap items-center gap-2">
           <ResultActions
             summary={summary}
@@ -506,6 +573,7 @@ export function makeCalculatorClient(config: CalculatorConfig): ComponentType {
             downloadContent={csvContent}
             mime="text/csv;charset=utf-8;"
             copyLabel={L('copySummary', 'Copy Summary')}
+            shareParams={shareParams}
           />
           {highlightOut && highlightValue && highlightValue !== '—' && !highlightValue.startsWith('⚠️') && (
             <ShareResultButton
@@ -519,6 +587,9 @@ export function makeCalculatorClient(config: CalculatorConfig): ComponentType {
             />
           )}
         </div>
+
+        {/* 下一步工作流推荐 - 出结果后引导连续使用(单会话 PV),见 NextStepsBar */}
+        {hasResult && slug && <NextStepsBar slug={slug} />}
 
         {/* 结果可视化(可选)- chart 支持单图或数组(多图并存),
             按 kind 分发:环形(默认)/仪表盘/曲线;key 用于多图列表项 */}

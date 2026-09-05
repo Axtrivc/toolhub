@@ -121,6 +121,13 @@ export interface Dict {
   toolSampleLoaded: string
   toolLoadSampleTitle: string // "Auto-fill a realistic example"(按钮 title 提示)
   toolCopySummary: string
+  // 结果区分享链接按钮 + 成功态
+  shareLink: string // "Share Link"
+  linkCopied: string // "Link copied!"
+  // 结果区「下一步」工作流推荐标题
+  nextStepsTitle: string // "Next Steps"
+  // 星标徽章:评分数量(含 {count})
+  ratingRatings: string // "{count}+ ratings"
   toolDownload: string
   toolDownloaded: string
   // 工具页相关工具内链
@@ -374,6 +381,10 @@ const en: Dict = {
   toolSampleLoaded: '✓ Sample loaded',
   toolLoadSampleTitle: 'Auto-fill a realistic example',
   toolCopySummary: 'Copy Summary',
+  shareLink: 'Share Link',
+  linkCopied: 'Link copied!',
+  nextStepsTitle: 'Next Steps',
+  ratingRatings: '{count}+ ratings',
   toolDownload: 'Download',
   toolDownloaded: '✓ Downloaded',
   relatedTitle: 'Related Tools',
@@ -608,6 +619,10 @@ const zh: Dict = {
   toolSampleLoaded: '✓ 已加载示例',
   toolLoadSampleTitle: '自动填充一个真实示例',
   toolCopySummary: '复制摘要',
+  shareLink: '分享链接',
+  linkCopied: '链接已复制!',
+  nextStepsTitle: '下一步',
+  ratingRatings: '{count}+ 条评价',
   toolDownload: '下载',
   toolDownloaded: '✓ 已下载',
   relatedTitle: '相关工具',
@@ -840,6 +855,10 @@ const es: Dict = {
   toolSampleLoaded: '✓ Ejemplo cargado',
   toolLoadSampleTitle: 'Rellenar automáticamente un ejemplo realista',
   toolCopySummary: 'Copiar resumen',
+  shareLink: 'Compartir enlace',
+  linkCopied: '¡Enlace copiado!',
+  nextStepsTitle: 'Siguientes pasos',
+  ratingRatings: '{count}+ valoraciones',
   toolDownload: 'Descargar',
   toolDownloaded: '✓ Descargado',
   relatedTitle: 'Herramientas relacionadas',
@@ -1073,6 +1092,10 @@ const de: Dict = {
   toolSampleLoaded: '✓ Beispiel geladen',
   toolLoadSampleTitle: 'Automatisch mit einem realistischen Beispiel füllen',
   toolCopySummary: 'Zusammenfassung kopieren',
+  shareLink: 'Link teilen',
+  linkCopied: 'Link kopiert!',
+  nextStepsTitle: 'Nächste Schritte',
+  ratingRatings: '{count}+ Bewertungen',
   toolDownload: 'Herunterladen',
   toolDownloaded: '✓ Heruntergeladen',
   relatedTitle: 'Verwandte Werkzeuge',

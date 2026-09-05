@@ -1,9 +1,8 @@
 'use client'
 
-import { getRelatedTools } from '@/lib/tools'
+import { getRelatedToolsLite, type ToolLiteMeta } from '@/lib/related-tools'
 import { getToolIcon } from '@/lib/tool-icons'
 import { SmartIcon } from '@/components/SmartIcon'
-import type { ToolMeta } from '@/lib/tools'
 import { useApp } from './providers/AppProviders'
 import { t, tc, getToolName, getToolShortIntro } from '@/lib/i18n'
 import { AnimatedToolCard, StaggerGroup } from './motion/MotionPrimitives'
@@ -20,11 +19,14 @@ interface RelatedToolsProps {
  *
  * 作用(pSEO 流量收割与内链自动化):
  *  - SEO:建立站内强内链网格,把权重传递给相邻 / 热门工具,
- *    帮助 Google 发现、抓取、排名更多长尾页。
+ *    帮助 Google 发现、抓取、排名更多长尾页。本组件参与静态预渲染,
+ *    225 个工具页的导出 HTML 直接自带 4 条 <a> 内链(无 JS 爬虫可抓)。
  *  - UX:降低跳出率,引导用户在站内流转。
  *
- * 匹配逻辑(见 lib/tools.ts#getRelatedTools):
- *  ① 同分类优先(featured 置顶),不足 4 个时用全站热门工具补齐。
+ * 数据源:lib/related-tools.ts 轻量索引(由 scripts/gen-related-index.mjs
+ * 从注册表生成,排序逻辑同 lib/tools.ts#getRelatedTools —— 同分类优先
+ * featured 置顶,不足时全站热门补齐)。不 import lib/tools.ts 本体,
+ * 避免全量 SEO 注册表(~180KB min)进入客户端 chunk。
  *
  * 卡片视觉与首页 ToolCard(ToolHubExplorer)严格一致:
  *  - Clean Outlined Dark Theme(solid bg + crisp border)
@@ -35,7 +37,7 @@ interface RelatedToolsProps {
  */
 export function RelatedTools({ slug, limit = 4 }: RelatedToolsProps) {
   const { locale } = useApp()
-  const related: ToolMeta[] = getRelatedTools(slug, limit)
+  const related: ToolLiteMeta[] = getRelatedToolsLite(slug, limit)
 
   if (related.length === 0) return null
 

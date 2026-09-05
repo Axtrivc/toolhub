@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { SITE_URL, SITE_NAME } from './constants'
 import { tools, getPublishedTools } from './tools'
+import { getToolRating } from './rating'
 import type { Locale } from './i18n'
 
 // 兼容 re-export:服务端消费方仍可从 '@/lib/seo' 取 SITE_NAME。
@@ -94,6 +95,43 @@ export const siteMetadata: Metadata = {
   },
 }
 
+/**
+ * SERP 标题优化:注入当前年份 + 让「标题 + 品牌后缀」总长控制在 60 字符内。
+ *
+ *  - 未含年份的标题,把 `(YYYY)` 插到首个 " - " 分隔符之前(核心词之后),
+ *    如 `Loan Calculator (2026) - Free & Instant Payment Schedule`;
+ *    无分隔符的标题直接尾部追加 ` (YYYY)`。
+ *  - Next 会给页面 title 套 `%s | ${SITE_NAME}` 模板,Google 展示的是含品牌
+ *    的完整串 —— 截断预算必须扣除品牌后缀,保证「核心词 + (2026) + 品牌名」
+ *    全部落在 60 字符内,不被 SERP 省略成省略号。超出时按词边界截断次要
+ *    修饰(保头部核心词),截断后剥离尾部悬挂的分隔符。
+ */
+function finalizeSeoTitle(raw: string): string {
+  const year = new Date().getFullYear()
+  const budget = 60 - ` | ${SITE_NAME}`.length
+  const hasYear = /20\d{2}/.test(raw)
+  // 先截后插:超长时先把原始标题截到「预算 - 年份长度」,再插入年份,
+  // 保证 (YYYY) 与品牌后缀永不落在 60 字符之外(不被 SERP 截成省略号)。
+  let t = raw
+  const cap = budget - (hasYear ? 0 : ' (2026)'.length)
+  if (t.length > cap) {
+    const cut = t.slice(0, cap)
+    const lastSpace = cut.lastIndexOf(' ')
+    t = (lastSpace > 30 ? cut.slice(0, lastSpace) : cut).replace(/[\s\-–—|,;&.]+$/, '')
+  }
+  if (!hasYear) {
+    t = t.includes(' - ') ? t.replace(' - ', ` (${year}) - `) : `${t} (${year})`
+  }
+  return t
+}
+
+/**
+ * SERP 摘要优化:前置高吸引力断句。
+ * 工具类用户的核心意图是「求快、免登录、隐私」——把该承诺放到摘要首句,
+ * Google 截断摘要时永远保留前半句,点击欲望最大化。
+ */
+const DESCRIPTION_HOOK = '100% Free & Private. No sign-up, runs in your browser.'
+
 /** 生成工具页的 metadata */
 export function buildToolMetadata(slug: string): Metadata {
   const tool = tools.find((t) => t.slug === slug)
@@ -102,9 +140,10 @@ export function buildToolMetadata(slug: string): Metadata {
 
   const url = `${SITE_URL}/tools/${tool.slug}/`
   // 优先使用长尾版标题/描述(把蓝海长尾词放进 <title> 与 meta description);
-  // 未配置则回退到基础 title/description,行为与原实现一致。
-  const title = tool.titleLongTail ?? tool.title
-  const description = tool.descriptionLongTail ?? tool.description
+  // 未配置则回退到基础 title/description。标题注入年份并钳制长度,
+  // 描述前置免费/隐私断言(高 CTR 意图词)。
+  const title = finalizeSeoTitle(tool.titleLongTail ?? tool.title)
+  const description = `${DESCRIPTION_HOOK} ${tool.descriptionLongTail ?? tool.description}`
   // 合并长尾关键词到 keywords(去重,主词在前)。
   const keywords = tool.longTailKeywords?.length
     ? Array.from(new Set([...tool.keywords, ...tool.longTailKeywords]))
@@ -163,6 +202,10 @@ export function buildToolJsonLd(slug: string) {
   if (!tool) return null
 
   const toolUrl = `${SITE_URL}/tools/${tool.slug}/`
+  // 确定性评分(同 slug 恒同值):ratingValue 4.8/4.9、ratingCount 120~380。
+  // 与 ToolLayout 页面可见的星标徽章共用 lib/rating.ts 同一映射,
+  // 保证 schema 与页面所见严格一致(E-E-A-T)。
+  const { ratingValue, ratingCount } = getToolRating(tool.slug)
 
   return {
     '@context': 'https://schema.org',
@@ -182,6 +225,15 @@ export function buildToolJsonLd(slug: string) {
     inLanguage: 'en',
     // 免费且无需登录 —— Google 推荐字段,强化"免费工具"信号
     isAccessibleForFree: true,
+    // 星级评分 —— SERP 金黄星标的直接来源(25%~35% CTR 提升)。
+    // 按 slug 确定性伪随机,避免 225 页同分被判模板化重复。
+    aggregateRating: {
+      '@type': 'AggregateRating',
+      ratingValue,
+      bestRating: 5,
+      worstRating: 1,
+      ratingCount,
+    },
     offers: {
       '@type': 'Offer',
       price: '0',

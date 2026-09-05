@@ -64,6 +64,13 @@ export interface ToolMeta {
    * 仅标记高流量 / 高价值工具(当前 10 个),首页无搜索词且选中 All 分类时展示。
    */
   featured?: boolean
+  /**
+   * 工作流下一步推荐(可选,slug 数组):计算器出结果后「Next Steps」胶囊
+   * 展示的强关联工具(如 算完房贷月供 → 摊销表生成器)。
+   * 未配置时 getNextToolSlugs 回退到同分类前 2 款(featured 优先)。
+   * 仅维护「用户真实工作流相邻」的组合,不要拿来堆内链。
+   */
+  nextTools?: string[]
 }
 
 export const tools: ToolMeta[] = [
@@ -94,6 +101,7 @@ export const tools: ToolMeta[] = [
     ],
     titleLongTail: 'Loan Calculator with Amortization Schedule',
     descriptionLongTail: 'Calculate monthly payments and an amortization schedule for any loan - personal, auto, or student. See total interest at a glance. Free, no signup.',
+    nextTools: ['amortization-table-generator', 'mortgage-calculator'],
   },
   {
     slug: 'mortgage-calculator', name: 'Mortgage Calculator',
@@ -110,6 +118,7 @@ export const tools: ToolMeta[] = [
     ],
     titleLongTail: 'Mortgage Calculator with PMI & Taxes',
     descriptionLongTail: 'Estimate your monthly mortgage payment with PMI, taxes, and insurance. Adjust down payment and rate to compare loan scenarios. Free, no signup.',
+    nextTools: ['amortization-table-generator', 'down-payment-calculator'],
   },
   {
     slug: 'compound-interest-calculator',
@@ -588,6 +597,7 @@ export const tools: ToolMeta[] = [
     ],
     titleLongTail: 'JSON Formatter & Validator - Beautify JSON Free',
     descriptionLongTail: 'Format and validate JSON with proper indentation. Pretty-print JSON with 2-space indent and instant error highlighting, privately. Free, no signup.',
+    nextTools: ['json-to-typescript', 'json-diff'],
   },
   {
     slug: 'jwt-decoder',
@@ -2599,6 +2609,7 @@ export const tools: ToolMeta[] = [
     ],
     titleLongTail: 'Strong Password Generator - Random & Secure Free',
     descriptionLongTail: 'Create strong, random, secure passwords. Customize length, symbols, numbers, and uppercase, all privately in your browser. Free, no signup.',
+    nextTools: ['password-entropy-checker', 'password-strength-checker'],
   },
 
   // ─────────── 💼 Business Tools (3) ───────────
@@ -2972,6 +2983,7 @@ export const tools: ToolMeta[] = [
     ],
     titleLongTail: 'Auto Loan Calculator with Trade-In & Tax',
     descriptionLongTail: 'Estimate your monthly car payment with down payment, trade-in value, sales tax, and APR. Export the full amortization schedule to CSV. Free.',
+    nextTools: ['car-cost-calculator', 'amortization-table-generator'],
   },
   {
     slug: 'ebay-fee-calculator', name: 'eBay Fee Calculator',
@@ -3358,6 +3370,7 @@ export const tools: ToolMeta[] = [
     ],
     titleLongTail: 'Paycheck Calculator - Federal Tax, FICA & 401k Withholding',
     descriptionLongTail: 'A transparent paycheck estimate: standard deduction, bracket withholding, FICA at exact statutory rates, and how a 401(k) changes your net.',
+    nextTools: ['hourly-to-salary-calculator', 'overtime-calculator'],
   },
   {
     slug: 'wedding-budget-calculator', name: 'Wedding Budget Calculator',
@@ -4124,4 +4137,24 @@ export function getRelatedTools(slug: string, limit = 4): ToolMeta[] {
   }
 
   return picked.slice(0, limit)
+}
+
+/**
+ * 获取某工具「工作流下一步」推荐 slug 列表(结果区 Next Steps 胶囊用)。
+ *
+ *  1. 显式配置的 tool.nextTools 优先(已过滤未上线/自身/不存在者);
+ *  2. 未配置或过滤后为空 → 回退同分类前 2 款(复用 getRelatedTools 的
+ *     featured 优先排序,顺序确定,build 产物稳定)。
+ */
+export function getNextToolSlugs(slug: string): string[] {
+  const current = getTool(slug)
+  if (!current) return []
+
+  const publishedSlugs = new Set(getPublishedTools().map((t) => t.slug))
+  const explicit = (current.nextTools ?? []).filter(
+    (s) => s !== slug && publishedSlugs.has(s),
+  )
+  if (explicit.length > 0) return explicit
+
+  return getRelatedTools(slug, 2).map((t) => t.slug)
 }
