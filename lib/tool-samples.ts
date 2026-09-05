@@ -165,6 +165,13 @@ export const calculatorSamples: Record<string, Record<string, string>> = {
   'token-visualizer': {
     text: 'The unbelievable truth about tokenization: quick brown foxes do not really jump over lazy dogs, but URLs like https://example.com/a/very/long/path certainly add up.',
   },
+
+  // ── 2026-09 batch19(变现漏斗修复轮 v4)──
+  'roth-ira-calculator': { age: '30', retireAge: '65', contribution: '7000', currentTax: '24', retireTax: '12', returnRate: '7' },
+  'fire-calculator': { annualSpending: '40000', currentSavings: '100000', annualSavings: '30000', realReturn: '5', swr: '4' },
+  'cac-ltv-calculator': { marketingSpend: '50000', newCustomers: '200', arpu: '50', grossMargin: '80', churn: '5' },
+  'flooring-calculator': { length: '15', width: '12', unit: 'ft', type: 'hardwood', waste: '10', boxPrice: '62' },
+  'dog-food-calculator': { weight: '20', activity: '1.6', basis: 'cup', density: '375', gramsPerCup: '110' },
 }
 
 // ─────────────────────────── 单位转换器示例 ───────────────────────────

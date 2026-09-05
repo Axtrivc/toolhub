@@ -433,6 +433,33 @@ export const toolFormulas: Record<string, ToolFormula> = {
     explain:
       'Per-model API bill from monthly token volumes. Prices are uncached list rates per million tokens; cached-input and batch discounts are not applied, so results are worst-case planning numbers.',
   },
+
+  // ───────── batch19 变现漏斗修复轮工具(2026-09 v4)─────────
+  'roth-ira-calculator': {
+    formula: 'FV = C × ((1+r)ⁿ − 1)/r · Roth net = FV × (1 − t_now) · Trad net = FV × (1 − t_retire)',
+    explain:
+      'Identical annual contributions C compound at return r for n years (future value of an annuity). Roth pays tax up front (smaller balance, tax-free out); Traditional deducts now (full balance, taxed at the retirement rate t_retire on withdrawal). The after-tax winner is decided purely by t_now vs t_retire.',
+  },
+  'fire-calculator': {
+    formula: 'FIRE number = annual spending ÷ SWR · balance(t) = P(1+r)ᵗ + S × ((1+r)ᵗ − 1)/r',
+    explain:
+      'The safe withdrawal rate (classic 4%) inverts into a target of 25× annual spending. The portfolio reaches it after t years of compounding current savings P at real return r with annual contributions S; the tool solves for the crossing year and re-solves at savings rate +10 points to show the compression effect.',
+  },
+  'cac-ltv-calculator': {
+    formula: 'CAC = spend ÷ customers · LTV = ARPU × margin ÷ churn · health ≈ 3:1',
+    explain:
+      'Unit-economics core: acquisition cost divides total spend by customers won; lifetime value multiplies monthly margin (ARPU × gross margin) by the average lifetime in months (1 ÷ monthly churn). The LTV:CAC ratio is judged against the 3:1 golden rule, with payback = CAC ÷ monthly margin.',
+  },
+  'flooring-calculator': {
+    formula: 'boxes = ⌈L × W × (1 + waste%) ÷ box coverage⌉ · cost = boxes × box price',
+    explain:
+      'Room area (length × width, ft or m) grows by the waste factor for cuts and defects, then divides by the per-box coverage of the chosen material and always rounds up — you cannot buy a fraction of a box, and dye lots make "buy more later" a gamble.',
+  },
+  'dog-food-calculator': {
+    formula: 'RER = 70 × kg^0.75 · MER = RER × factor · cups = MER ÷ kcal/cup',
+    explain:
+      'Veterinary energy math (AAHA): resting energy scales with metabolic weight (kg to the 3/4 power), and the life-stage factor — 1.2 weight loss to 3.0 young puppy — converts it into daily needs. The food label\'s kcal-per-cup (or kcal-per-100g) density then turns calories into cups and grams.',
+  },
 }
 
 /** 读取某工具的公式;未注册返回 null(组件据此不渲染空区) */

@@ -968,4 +968,26 @@ export const deTools: Record<string, { name: string; shortIntro: string }> = {
     shortIntro: 'Vergleicht die echte Monatsrechnung aller großen KI-Modelle.',
   },
 
+  // ─────────── 🚀 Neue Werkzeuge (2026-09 v4) ───────────
+  'roth-ira-calculator': {
+    name: 'Roth-vs-Traditionell-IRA-Rechner',
+    shortIntro: 'Roth gegen traditionelle IRA im Direktvergleich — gleiche Dollars, andere Steuer.',
+  },
+  'fire-calculator': {
+    name: 'FIRE-Rechner',
+    shortIntro: 'Deine FIRE-Zahl, Ziel-Ruhestandsjahr und die Sparquote-Effekte.',
+  },
+  'cac-ltv-calculator': {
+    name: 'CAC- & LTV-Rechner',
+    shortIntro: 'CAC, LTV, Amortisationsmonate und der LTV:CAC-Gesundheitsindikator.',
+  },
+  'flooring-calculator': {
+    name: 'Bodenbelags-Rechner',
+    shortIntro: 'Raummaß + Verschnitt → nötige Kartons und Materialbudget (ft²/m²).',
+  },
+  'dog-food-calculator': {
+    name: 'Hundefutter-Rechner',
+    shortIntro: 'Gewicht + Lebensphase → Tageskalorien, Tassen und Gramm laut Futteretikett.',
+  },
+
 }

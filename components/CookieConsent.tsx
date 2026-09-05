@@ -18,7 +18,9 @@ import { t } from '@/lib/i18n'
  *
  * 与 AdSense 的关系:AdSense 的个性化广告默认依赖用户同意(EU/UK)。
  * 本组件写入的同意状态同时是广告投放开关 —— AdSlot / AdSenseScript 读取
- * 同一 CONSENT_STORAGE_KEY,仅当值为 'all' 时才注入/渲染广告单元。
+ * 同一 CONSENT_STORAGE_KEY,采用 Opt-out 门控:仅当值为 'necessary'
+ * (用户显式拒绝)时不注入/渲染广告,未选择与 'all' 全量放行。未做选择
+ * 的自然流量(约 90%)不再因未点横幅而丢广告展示。
  * 写入后派发 CONSENT_CHANGED_EVENT,让同页签的 AdSlot 即时响应(跨页签走原生 storage 事件)。
  */
 /** 同意状态 localStorage key(AdSlot 读取同一 key 做广告门控) */

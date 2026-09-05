@@ -4,7 +4,6 @@ import Link from 'next/link'
 import type { ReactNode } from 'react'
 import dynamic from 'next/dynamic'
 import { AdSlot } from './AdSlot'
-import { AdPlaceholder } from './AdPlaceholder'
 // 相关工具推荐:保留 dynamic 做代码分割,但不再 ssr:false —— 组件现在消费
 // lib/related-tools.ts 轻量索引(非全量注册表),参与静态预渲染后 225 个
 // 工具页的导出 HTML 直接自带 4 条静态 <a> 内链(无 JS 爬虫/二轮索引可抓,
@@ -223,9 +222,10 @@ export function ToolLayout({ tool, children }: ToolLayoutProps) {
         {children}
       </div>
 
-      {/* 防CLS 广告位 ① - 工具操作面板正下方(锁死 250px,避免广告加载抖动) */}
+      {/* 黄金广告位 ① - 工具操作面板正下方:真实 <ins> + push,容器按
+          rectangle 规格锁死 min-h(250/280px),广告异步加载零 CLS */}
       <div data-embed-hide>
-        <AdPlaceholder slot={`${tool.slug}-in-content`} />
+        <AdSlot slot={`${tool.slug}-in-content`} format="rectangle" />
       </div>
 
       {/* YMYL 免责声明 - 金融/健康类工具渲染,降低 Google YMYL 算法降权风险。
@@ -240,8 +240,9 @@ export function ToolLayout({ tool, children }: ToolLayoutProps) {
         {/* 公式区 - 闭式公式工具渲染,无注册的工具返回 null 不渲染 */}
         <FormulaSection slug={tool.slug} tool={tool} />
 
-        {/* 防CLS 广告位 ② - 文章内容区(content)与 FAQ 模块之间(锁死空间防抖动) */}
-        <AdPlaceholder slot={`${tool.slug}-mid`} />
+        {/* 黄金广告位 ② - 文章内容区(content)与 FAQ 模块之间:真实 <ins>,
+            horizontal 规格锁死 min-h(90/100px)防抖动 */}
+        <AdSlot slot={`${tool.slug}-mid`} format="horizontal" fullWidth />
 
         {/* 可见 FAQ 手风琴 - 与 FAQPage JSON-LD schema 同源(lib/tool-faqs.ts) */}
         <VisibleFaqs slug={tool.slug} />

@@ -1,7 +1,7 @@
 'use client'
 
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { Printer } from 'lucide-react'
+import { Printer, History as HistoryIcon } from 'lucide-react'
 import { useApp } from './providers/AppProviders'
 import { t } from '@/lib/i18n'
 import { CopyButton } from './CopyButton'
@@ -34,6 +34,16 @@ interface ResultActionsProps {
    * 纯展示型工具(无输入结果可打印)可显式传 false 关闭。
    */
   enablePrint?: boolean
+  /**
+   * 本地计算历史(可选):传入即渲染「History (N)」图标按钮 —— N 为当前
+   * 工具的本地历史条数(localStorage 微标),点击回调打开历史抽屉。
+   * 目前由 makeCalculatorClient 工厂统一传入(抽屉本体也在工厂渲染);
+   * 其他工具需要时同样可用。
+   */
+  history?: {
+    count: number
+    onOpen: () => void
+  }
 }
 
 /**
@@ -93,6 +103,7 @@ export function ResultActions({
   copyLabel,
   shareParams,
   enablePrint = true,
+  history,
 }: ResultActionsProps) {
   const { locale } = useApp()
   const [downloaded, setDownloaded] = useState(false)
@@ -188,6 +199,24 @@ export function ResultActions({
           aria-live="polite"
         >
           {linkCopied ? `✓ ${t(locale, 'linkCopied')}` : t(locale, 'shareLink')}
+        </motion.button>
+      )}
+      {history && (
+        <motion.button
+          type="button"
+          onClick={history.onOpen}
+          disabled={disabled}
+          whileTap={reduceMotion ? undefined : { scale: 0.95 }}
+          transition={reduceMotion ? undefined : { type: 'spring', stiffness: 500, damping: 30 }}
+          className="btn btn-secondary disabled:cursor-not-allowed disabled:opacity-50"
+          aria-label={`${t(locale, 'historyButton')} (${history.count})`}
+        >
+          <HistoryIcon className="h-4 w-4" aria-hidden="true" />
+          {t(locale, 'historyButton')}
+          {/* 最近计算条数微标,如 History (3) */}
+          {history.count > 0 && (
+            <span className="tabular-nums opacity-80">({history.count})</span>
+          )}
         </motion.button>
       )}
       {enablePrint && (

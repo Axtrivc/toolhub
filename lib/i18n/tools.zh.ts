@@ -969,4 +969,26 @@ export const zhTools: Record<string, { name: string; shortIntro: string }> = {
     shortIntro: '按月度 token 用量横向对比各大模型的真实账单。',
   },
 
+  // ─────────── 🚀 变现漏斗修复轮新工具(2026-09 v4)───────────
+  'roth-ira-calculator': {
+    name: 'Roth IRA 计算器',
+    shortIntro: 'Roth 与 Traditional IRA 同屏对比——同样本金,不同税务路径谁更划算。',
+  },
+  'fire-calculator': {
+    name: 'FIRE 财务自由计算器',
+    shortIntro: '算出你的 FIRE 目标金额、预计退休年份与储蓄率压缩效应。',
+  },
+  'cac-ltv-calculator': {
+    name: 'CAC 与 LTV 计算器',
+    shortIntro: '获客成本、客户终身价值、回收月数与 LTV:CAC 健康度一览。',
+  },
+  'flooring-calculator': {
+    name: '地板用量计算器',
+    shortIntro: '房间尺寸 + 损耗率 → 瓷砖/地板所需箱数与材料预算(英尺/米)。',
+  },
+  'dog-food-calculator': {
+    name: '狗粮喂食计算器',
+    shortIntro: '体重 + 生命阶段 → 每日热量需求,按包装标注折算杯数与克数。',
+  },
+
 }

@@ -1,0 +1,24 @@
+import type { Metadata } from 'next'
+import { notFound } from 'next/navigation'
+import { getTool } from '@/lib/tools'
+import { buildToolMetadata, buildToolJsonLd, jsonLdStringify } from '@/lib/seo'
+import { ToolLayout } from '@/components/ToolLayout'
+import { FireCalculatorClient } from '@/components/calculators/batch19Calculators'
+import { FireCalculatorContent } from './content'
+
+export const metadata: Metadata = buildToolMetadata('fire-calculator')
+
+export default function Page() {
+  const tool = getTool('fire-calculator')
+  if (!tool) notFound()
+  const jsonLd = buildToolJsonLd('fire-calculator')
+  return (
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdStringify(jsonLd) }} />
+      <ToolLayout tool={tool}>
+        <FireCalculatorClient />
+        <FireCalculatorContent />
+      </ToolLayout>
+    </>
+  )
+}

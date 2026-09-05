@@ -661,9 +661,24 @@ input.calc-slider:active::-webkit-slider-thumb {
 }
 .animate-lang-pulse { animation: lang-pulse 0.35s ease-out; }
 
+/* 计算历史抽屉(HistoryDrawer):移动端底部上滑,桌面(sm+)右侧滑入 */
+@keyframes drawer-slide-up {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes drawer-slide-right {
+  from { opacity: 0; transform: translateX(32px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+.history-drawer-panel { animation: drawer-slide-up 0.25s ease-out; }
+@media (min-width: 640px) {
+  .history-drawer-panel { animation: drawer-slide-right 0.25s ease-out; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .animate-lang-menu,
   .animate-lang-pulse { animation: none; }
+  .history-drawer-panel { animation: none; }
 }
 
 /* ════════════════════════════════════════════════════════════

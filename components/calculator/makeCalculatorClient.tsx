@@ -13,6 +13,7 @@ import { ResultActions } from '../ResultActions'
 import { LoadSampleButton } from '../LoadSampleButton'
 import { ShareResultButton } from '../calculator/ShareResultButton'
 import { PresetChips } from '../calculator/PresetChips'
+import { HistoryDrawer, useCalcHistory } from './HistoryDrawer'
 import type { CalculatorConfig } from '@/lib/calculator-types'
 import { getCalculatorSample } from '@/lib/tool-samples'
 import { getNextToolsLite } from '@/lib/related-tools'
@@ -206,6 +207,11 @@ export function makeCalculatorClient(config: CalculatorConfig): ComponentType {
         })
         return
       }
+      // 草稿回填的那一次变化不写回 URL(skipUrlSyncRef 由草稿恢复 effect 置位)
+      if (skipUrlSyncRef.current) {
+        skipUrlSyncRef.current = false
+        return
+      }
       const url = new URL(window.location.href)
       for (const f of config.inputs) {
         const v = valuesRef.current[f.key] ?? ''
@@ -219,6 +225,10 @@ export function makeCalculatorClient(config: CalculatorConfig): ComponentType {
     // values 的镜像 ref:urlState effect 依赖 values 但读取镜像,避免闭包过期
     const valuesRef = useRef(values)
     valuesRef.current = values
+
+    // 草稿回填引起的那一次 values 变化不让 urlState 写回 URL
+    // (回访者未带参数的链接保持干净,URL 只反映用户主动输入)
+    const skipUrlSyncRef = useRef(false)
 
     // ── 多方案同屏对比(config.allowCompare)──
     // 激活时克隆当前输入为 Scenario B;两套输入各自独立计算,
@@ -280,20 +290,86 @@ export function makeCalculatorClient(config: CalculatorConfig): ComponentType {
 
     // 用户是否编辑过任何字段(pristine 门控):决定 Load Sample 的行为与 Reset 是否显示
     const [dirty, setDirty] = useState(false)
+    // ── 草稿防丢(Draft Auto-Save & Restore)──
+    // 用户改动任意输入后 500ms 防抖暂存 localStorage['toolhub-draft-<slug>'];
+    // 回访时若草稿与默认值不同则自动回填,并在输入区右上角提示
+    // 「Draft restored · [Reset]」——Reset 一键清空草稿并恢复出厂默认。
+    // 未注册 slug 的工厂工具不启用。
+    const draftKey = slug ? `toolhub-draft-${slug}` : ''
+    const [draftRestored, setDraftRestored] = useState(false)
+    const draftHydrated = useRef(false)
     const setValue = (key: string, v: string) => {
       setDirty(true)
+      setDraftRestored(false)
       setValues((prev) => ({ ...prev, [key]: v }))
     }
 
     // 一键重置回出厂默认值(全站此前无任何清空入口,只能逐字段手删);
-    // 同时解除 Load Sample 的覆盖确认态,避免残留的红色"覆盖?"按钮
+    // 同时解除 Load Sample 的覆盖确认态,并清掉本地草稿(回到"无草稿"原点)
     const handleReset = useCallback(() => {
       const init: Record<string, string> = {}
       for (const f of config.inputs) init[f.key] = f.default
       setValues(init)
       setDirty(false)
       setSampleArmed(false)
-    }, [config.inputs])
+      setDraftRestored(false)
+      if (draftKey) {
+        try {
+          localStorage.removeItem(draftKey)
+        } catch {
+          // 隐私模式不可写:忽略
+        }
+      }
+    }, [config.inputs, draftKey])
+
+    // 草稿回填:挂载后读取一次;urlState 工具在 URL 带参时跳过
+    // (显式分享链接权威,草稿让位)。仅回填声明过的字段;与默认值
+    // 完全一致视为无草稿。回填触发的 values 变化不写回 URL。
+    useEffect(() => {
+      if (!draftKey || draftHydrated.current) return
+      draftHydrated.current = true
+      try {
+        if (config.urlState) {
+          const params = new URLSearchParams(window.location.search)
+          if (config.inputs.some((f) => params.get(f.key) != null)) return
+        }
+        const raw = localStorage.getItem(draftKey)
+        if (!raw) return
+        const draft: unknown = JSON.parse(raw)
+        if (!draft || typeof draft !== 'object') return
+        const next: Record<string, string> = {}
+        let differs = false
+        for (const f of config.inputs) {
+          const dv = typeof (draft as Record<string, unknown>)[f.key] === 'string'
+            ? ((draft as Record<string, unknown>)[f.key] as string)
+            : f.default
+          next[f.key] = dv
+          if (dv !== f.default) differs = true
+        }
+        if (!differs) return
+        skipUrlSyncRef.current = true
+        setValues(next)
+        setDraftRestored(true)
+      } catch {
+        // 隐私模式 / 草稿损坏:静默跳过,按默认值起步
+      }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [draftKey])
+
+    // 草稿暂存:用户编辑过(dirty)后每次输入变化 500ms 防抖写入
+    useEffect(() => {
+      if (!draftKey || !dirty) return
+      const timer = setTimeout(() => {
+        try {
+          const toSave: Record<string, string> = {}
+          for (const f of config.inputs) toSave[f.key] = valuesRef.current[f.key] ?? ''
+          localStorage.setItem(draftKey, JSON.stringify(toSave))
+        } catch {
+          // ignore
+        }
+      }, 500)
+      return () => clearTimeout(timer)
+    }, [values, dirty, draftKey, config.inputs])
 
     const results = useMemo(() => {
       try {
@@ -387,6 +463,7 @@ export function makeCalculatorClient(config: CalculatorConfig): ComponentType {
         return next
       })
       setDirty(true)
+      setDraftRestored(false)
       setSampleArmed(false)
     }, [sample, config.inputs, dirty, sampleArmed])
 
@@ -460,6 +537,52 @@ export function makeCalculatorClient(config: CalculatorConfig): ComponentType {
 
     // 是否已有有效结果(非占位/非错误):决定「下一步」工作流推荐是否出现
     const hasResult = !!highlightValue && highlightValue !== '—' && !highlightIsError
+
+    // ── 本地计算历史(History Drawer)──
+    // 有效计算完成后(输入稳定 2s)把「时间戳 + 输入快照 + 主结果」写入
+    // localStorage['toolhub-history-<slug>'](每工具最近 10 条,相同输入
+    // 只刷新时间戳)。ResultActions 的 History 按钮带条数微标,点击滑出
+    // 抽屉:回看历史、一键载入方案、清空、导出 CSV —— 全部本地,零上报。
+    const calcHistory = useCalcHistory(slug)
+    const { add: addHistory } = calcHistory
+    const [historyOpen, setHistoryOpen] = useState(false)
+    useEffect(() => {
+      if (!slug || !hasResult || !highlightValue) return
+      // 只记录用户真实操作过的方案:默认值静默计算不算一次"计算"
+      // (否则每次到访都会把出厂示例写进历史,抽屉全是噪声)。
+      // dirty = 手输/示例/预设/历史载入;草稿回填则表现为"与默认值不同"。
+      const touched =
+        dirty ||
+        config.inputs.some((f) => (valuesRef.current[f.key] ?? '') !== f.default)
+      if (!touched) return
+      const timer = setTimeout(() => {
+        addHistory({
+          ts: Date.now(),
+          inputs: { ...valuesRef.current },
+          main: highlightValue,
+        })
+      }, 2000)
+      return () => clearTimeout(timer)
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [values, hasResult, dirty, slug, addHistory])
+
+    // 一键载入历史方案:回填声明过的字段,等价手输(dirty → Reset/草稿生效)
+    const handleLoadHistory = useCallback(
+      (inputs: Record<string, string>) => {
+        setValues((prev) => {
+          const next = { ...prev }
+          for (const f of config.inputs) {
+            if (typeof inputs[f.key] === 'string') next[f.key] = inputs[f.key]
+          }
+          return next
+        })
+        setDirty(true)
+        setSampleArmed(false)
+        setDraftRestored(false)
+        setHistoryOpen(false)
+      },
+      [config.inputs],
+    )
 
     // 深度分享参数:过滤空值与默认值(与 urlState 的链接清洁约定一致),
     // 由 ResultActions 组装为 ?key=value 带参完整 URL 一键复制。
@@ -564,6 +687,21 @@ export function makeCalculatorClient(config: CalculatorConfig): ComponentType {
         <div className="flex flex-wrap items-center justify-between gap-3">
           <span className="text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>{L('inputs', 'Inputs')}</span>
           <div className="flex items-center gap-2">
+            {draftRestored && (
+              // 草稿回填提示:上次未完成的输入已自动恢复,Reset 一键清空草稿
+              // 并恢复出厂默认值;任何后续输入都会让它安静消失
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-amber-300/70 bg-amber-50 px-3 py-1.5 text-xs font-medium text-amber-700 dark:border-amber-500/30 dark:bg-amber-950/40 dark:text-amber-300">
+                {t(locale, 'draftRestored')}
+                <span aria-hidden="true">·</span>
+                <button
+                  type="button"
+                  onClick={handleReset}
+                  className="font-semibold underline underline-offset-2 hover:opacity-80"
+                >
+                  {L('reset', 'Reset')}
+                </button>
+              </span>
+            )}
             {dirty && (
               <button
                 type="button"
@@ -591,6 +729,7 @@ export function makeCalculatorClient(config: CalculatorConfig): ComponentType {
             onApply={(values) => {
               setValues((prev) => ({ ...prev, ...values }))
               setDirty(true)
+              setDraftRestored(false)
               setSampleArmed(false)
             }}
           />
@@ -782,7 +921,31 @@ export function makeCalculatorClient(config: CalculatorConfig): ComponentType {
             mime="text/csv;charset=utf-8;"
             copyLabel={L('copySummary', 'Copy Summary')}
             shareParams={shareParams}
+            history={slug ? { count: calcHistory.count, onOpen: () => setHistoryOpen(true) } : undefined}
           />
+          {/* 本地历史抽屉:点 History 按钮滑出,详见 HistoryDrawer */}
+          {slug && (
+            <HistoryDrawer
+              open={historyOpen}
+              onClose={() => setHistoryOpen(false)}
+              entries={calcHistory.entries}
+              mainLabel={highlightOut ? outLabel(highlightOut.key, highlightOut.label) : ''}
+              summarize={(inputs) =>
+                config.inputs
+                  .slice(0, 4)
+                  .map(
+                    (f) =>
+                      `${inLabel(f.key, f.label)}: ${inputs[f.key] ?? ''}${
+                        f.suffix ? inSuffix(f.key, f.suffix) : ''
+                      }`,
+                  )
+                  .join(' · ')
+              }
+              onLoad={handleLoadHistory}
+              onClear={calcHistory.clear}
+              filename={`${slug}-history.csv`}
+            />
+          )}
           {highlightOut && highlightValue && highlightValue !== '—' && !highlightValue.startsWith('⚠️') && (
             <ShareResultButton
               toolSlug={config.slug || undefined}

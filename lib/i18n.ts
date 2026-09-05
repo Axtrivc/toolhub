@@ -133,6 +133,15 @@ export interface Dict {
   // 结果区「打印报告」按钮 + 打印抬头
   toolPrintReport: string // "Print Report"
   printReportGenerated: string // 抬头日期行前缀 "Generated"
+  // 计算历史抽屉 + 草稿恢复(本地留存引擎)
+  historyButton: string // "History" 操作栏按钮
+  historyTitle: string // 抽屉标题 "Calculation History"
+  historyEmpty: string // 无记录时的空态文案
+  historyClear: string // "Clear history"
+  historyExportCsv: string // "Export CSV"
+  historyPrivate: string // 隐私承诺声明
+  historyLoadHint: string // "Click a record to reload its inputs"
+  draftRestored: string // "Draft restored" 草稿回填提示
   // 工具页相关工具内链
   relatedTitle: string
   relatedSubtitle: string
@@ -392,6 +401,14 @@ const en: Dict = {
   toolDownloaded: '✓ Downloaded',
   toolPrintReport: 'Print Report',
   printReportGenerated: 'Generated',
+  historyButton: 'History',
+  historyTitle: 'Calculation History',
+  historyEmpty: 'No calculations yet — complete a calculation and it will appear here automatically.',
+  historyClear: 'Clear history',
+  historyExportCsv: 'Export CSV',
+  historyPrivate: '🔒 100% Private — Stored locally on your device only',
+  historyLoadHint: 'Click a record to reload its inputs',
+  draftRestored: 'Draft restored',
   relatedTitle: 'Related Tools',
   relatedSubtitle: 'More tools you might find useful',
   recentTitle: 'Recently Used & Favorites',
@@ -632,6 +649,14 @@ const zh: Dict = {
   toolDownloaded: '✓ 已下载',
   toolPrintReport: '打印报告',
   printReportGenerated: '生成时间',
+  historyButton: '历史',
+  historyTitle: '计算历史',
+  historyEmpty: '暂无记录 —— 完成一次计算后会自动出现在这里。',
+  historyClear: '清空记录',
+  historyExportCsv: '导出 CSV',
+  historyPrivate: '🔒 100% 私密 —— 仅存储在你的设备本地',
+  historyLoadHint: '点击任意记录即可一键载入该方案',
+  draftRestored: '草稿已恢复',
   relatedTitle: '相关工具',
   relatedSubtitle: '你可能还会用到的工具',
   recentTitle: '最近使用与收藏',
@@ -870,6 +895,14 @@ const es: Dict = {
   toolDownloaded: '✓ Descargado',
   toolPrintReport: 'Imprimir informe',
   printReportGenerated: 'Generado',
+  historyButton: 'Historial',
+  historyTitle: 'Historial de cálculos',
+  historyEmpty: 'Aún no hay cálculos: completa uno y aparecerá aquí automáticamente.',
+  historyClear: 'Borrar historial',
+  historyExportCsv: 'Exportar CSV',
+  historyPrivate: '🔒 100 % privado: se guarda solo en tu dispositivo',
+  historyLoadHint: 'Haz clic en un registro para recargar sus valores',
+  draftRestored: 'Borrador restaurado',
   relatedTitle: 'Herramientas relacionadas',
   relatedSubtitle: 'Más herramientas que podrían ser útiles',
   recentTitle: 'Usadas recientemente y favoritos',
@@ -1109,6 +1142,14 @@ const de: Dict = {
   toolDownloaded: '✓ Heruntergeladen',
   toolPrintReport: 'Bericht drucken',
   printReportGenerated: 'Erstellt',
+  historyButton: 'Verlauf',
+  historyTitle: 'Rechenverlauf',
+  historyEmpty: 'Noch keine Berechnungen — sobald du eine abschließt, erscheint sie hier automatisch.',
+  historyClear: 'Verlauf löschen',
+  historyExportCsv: 'CSV exportieren',
+  historyPrivate: '🔒 100 % privat — nur lokal auf deinem Gerät gespeichert',
+  historyLoadHint: 'Klicke auf einen Eintrag, um seine Werte zu laden',
+  draftRestored: 'Entwurf wiederhergestellt',
   relatedTitle: 'Verwandte Werkzeuge',
   relatedSubtitle: 'Weitere Werkzeuge, die nützlich sein könnten',
   recentTitle: 'Zuletzt genutzt & Favoriten',

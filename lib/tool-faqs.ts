@@ -2464,6 +2464,78 @@ export const toolFaqs: Record<string, FaqPair[]> = {
       a: 'The table shows uncached list prices — the worst case. Prompt caching cuts input costs 50-90% on OpenAI, Anthropic, and DeepSeek, and batch/async APIs roughly halve output costs, so real bills are usually lower than these projections.',
     },
   ],
+
+  // ══════════ batch19 变现漏斗修复轮工具(5 个,2026-09 v4)══════════
+  'roth-ira-calculator': [
+    {
+      q: 'When is a Roth IRA better than a Traditional IRA?',
+      a: 'Roth wins when your marginal tax rate today is lower than the effective rate you expect in retirement — early career, low-income years, or if you predict tax rates will rise. Traditional wins when today\'s bracket is higher, which is typical in peak earning years: deduct at 24-32% now, withdraw at 10-12% later.',
+    },
+    {
+      q: 'What is the IRA contribution limit?',
+      a: '$7,000 per year in 2025, plus a $1,000 catch-up (total $8,000) if you are 50 or older. The limit is shared between Roth and Traditional — contributing to both doesn\'t double it. Your employer 401(k) limit is separate and much higher.',
+    },
+    {
+      q: 'Does the calculator account for income phase-outs?',
+      a: 'No — it isolates the tax-timing decision by growing identical contributions in both accounts. Roth contributions phase out above ~$150k single / $236k married (2025), and Traditional deductibility phases out if you have a workplace plan. Check IRS Publication 590-A for your situation.',
+    },
+  ],
+  'fire-calculator': [
+    {
+      q: 'What is my FIRE number?',
+      a: 'Annual spending divided by your safe withdrawal rate. At the classic 4% SWR that equals 25× spending: $40,000/year needs $1,000,000. Lean FIRE ($28k/yr) targets ~$700k, while a $100k lifestyle needs $2.5M.',
+    },
+    {
+      q: 'What withdrawal rate should I use?',
+      a: '4% is the Trinity-study classic, designed for 30-year retirements. Retiring in your 30s or 40s means a 40-50 year horizon, so many FIRE planners use 3.25-3.5% (roughly 29-31× spending) for extra safety against sequence-of-returns risk.',
+    },
+    {
+      q: 'Why does savings rate matter more than returns?',
+      a: 'Saving more attacks the problem from both ends: the portfolio grows faster while the required FIRE number shrinks. Going from 10% to 50% savings rate cuts a ~50-year journey to roughly 15-17 years — no return assumption change can match that lever.',
+    },
+  ],
+  'cac-ltv-calculator': [
+    {
+      q: 'What is a good LTV:CAC ratio?',
+      a: 'About 3:1 — enough gross profit per customer to cover overhead and errors while staying efficient. Below 1:1 you lose money on every customer; 1-3:1 leaves little margin for mistakes; above 5:1 is efficient but often signals you are underinvesting in growth.',
+    },
+    {
+      q: 'How do you calculate LTV from churn?',
+      a: 'LTV = ARPU × gross margin ÷ monthly churn. A 5% monthly churn means an average lifetime of 20 months (1 ÷ 0.05); a $50 ARPU at 80% margin yields $800. Always use gross margin, not revenue — only retained margin can repay acquisition cost.',
+    },
+    {
+      q: 'What is CAC payback period?',
+      a: 'The months of gross margin needed to recover acquisition cost: CAC ÷ (ARPU × margin). A $250 CAC on $40/month margin takes 6.3 months. SaaS investors typically want payback under 12 months so growth funds itself rather than eating cash.',
+    },
+  ],
+  'flooring-calculator': [
+    {
+      q: 'How much waste should I add for flooring?',
+      a: '5-10% for straight-lay plank and standard tile in simple rooms; 10-15% for diagonal or herringbone patterns, large-format tile, or spaces with many jogs and closets. The waste covers cuts, staggered seams, and the ripped last row — it is not optional.',
+    },
+    {
+      q: 'How do I calculate how many boxes I need?',
+      a: 'Multiply length × width, apply the waste factor, divide by the coverage printed on the box, and round up: boxes = ⌈area × (1 + waste) ÷ box coverage⌉. This tool does it automatically for tile, hardwood, vinyl, and marble in ft² or m².',
+    },
+    {
+      q: 'How many square feet are in a box of flooring?',
+      a: 'Typically 15-30 ft²: ceramic tile ~15.5 ft², marble ~16 ft², engineered hardwood ~24 ft², vinyl plank ~28 ft². Formats vary by manufacturer — always verify the label and keep one spare box for future repairs, since dye lots are discontinued.',
+    },
+  ],
+  'dog-food-calculator': [
+    {
+      q: 'How is a dog\'s daily calorie need calculated?',
+      a: 'Two steps: RER (resting energy requirement) = 70 × body weight in kg raised to the 0.75 power, then MER = RER × a life-stage factor — 1.2 for weight loss/seniors, 1.6 for neutered adults, 1.8 for intact adults, 2-3 for puppies and working dogs (AAHA guidelines).',
+    },
+    {
+      q: 'Which MER factor should I pick?',
+      a: 'Most pet dogs today are neutered adults → ×1.6. Use ×1.2 for weight loss or obesity-prone seniors, ×1.8 for intact dogs, ×2 for puppies 4-12 months, ×3 under 4 months, and ×2.5+ for active working or sporting breeds.',
+    },
+    {
+      q: 'How do I convert kcal per cup into grams per day?',
+      a: 'Find the kcal-per-cup and grams-per-cup figures on the bag label. Daily grams = daily kcal ÷ kcal-per-cup × grams-per-cup. This calculator handles both label styles (kcal/cup or kcal/100g) and outputs cups and grams together — grams are more accurate because scoops vary by ±20%.',
+    },
+  ],
 }
 export function getToolFaqs(slug: string): FaqPair[] {
   return toolFaqs[slug] ?? []

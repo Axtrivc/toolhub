@@ -968,4 +968,26 @@ export const esTools: Record<string, { name: string; shortIntro: string }> = {
     shortIntro: 'Compara la factura mensual real de cada gran modelo de IA.',
   },
 
+  // ─────────── 🚀 Nuevas herramientas (2026-09 v4) ───────────
+  'roth-ira-calculator': {
+    name: 'Calculadora Roth vs Tradicional (IRA)',
+    shortIntro: 'Roth vs IRA Tradicional lado a lado: mismos dólares, distinto camino fiscal.',
+  },
+  'fire-calculator': {
+    name: 'Calculadora FIRE',
+    shortIntro: 'Tu número FIRE, año de jubilación objetivo y el efecto de la tasa de ahorro.',
+  },
+  'cac-ltv-calculator': {
+    name: 'Calculadora CAC y LTV',
+    shortIntro: 'CAC, LTV, meses de recuperación y el indicador LTV:CAC en una pantalla.',
+  },
+  'flooring-calculator': {
+    name: 'Calculadora de Suelos y Azulejos',
+    shortIntro: 'Medidas de la habitación + desperdicio → cajas necesarias y presupuesto (ft²/m²).',
+  },
+  'dog-food-calculator': {
+    name: 'Calculadora de Comida para Perros',
+    shortIntro: 'Peso + etapa de vida → kcal diarias, tazas y gramos según la etiqueta.',
+  },
+
 }
