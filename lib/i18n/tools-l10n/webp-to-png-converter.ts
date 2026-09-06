@@ -54,6 +54,10 @@ export const webpToPngConverterL10n: ToolL10n = {
         q: '我的图片会被上传到服务器吗?',
         a: '不会。转换完全在你的浏览器里完成,图片从不离开你的设备。这让私密素材保持私密,也让这个工具可以离线使用。',
       },
+      {
+        q: '为什么转出来的 PNG 反而比原 WebP 大?',
+        a: 'WebP 原文件通常是有损压缩,而 PNG 无损——把已压缩的像素重新无损保存通常变大(常见 2–5 倍)。想要更小的输出,选 JPEG 并把质量调到 80–85,或保留原 WebP。',
+      },
     ],
   },
   es: {
@@ -105,6 +109,10 @@ export const webpToPngConverterL10n: ToolL10n = {
         q: '¿Mi imagen se sube a un servidor?',
         a: 'No. La conversión ocurre totalmente en tu navegador, así que la imagen nunca sale de tu dispositivo. Eso mantiene los recursos privados y permite que la herramienta funcione sin conexión.',
       },
+      {
+        q: '¿Por qué el PNG resultante pesa más que el WebP original?',
+        a: 'El WebP de partida suele ser con pérdida y el PNG es sin pérdida: al guardar de nuevo sin pérdida, el archivo crece (a menudo 2–5 veces). Para una salida menor, elige JPEG con calidad 80–85 o conserva el WebP original.',
+      },
     ],
   },
   de: {
@@ -155,6 +163,10 @@ export const webpToPngConverterL10n: ToolL10n = {
       {
         q: 'Wird mein Bild auf einen Server hochgeladen?',
         a: 'Nein. Die Umwandlung läuft vollständig in deinem Browser, das Bild verlässt nie dein Gerät. Das hält private Inhalte privat und lässt das Werkzeug offline funktionieren.',
+      },
+      {
+        q: 'Warum ist das PNG größer als das WebP-Original?',
+        a: 'WebP ist meist verlustbehaftet, PNG verlustfrei — das verlustfreie Neuspeichern bereits komprimierter Pixel macht die Datei oft 2–5× größer. Für kleinere Ausgabe JPEG mit Qualität 80–85 wählen oder das WebP behalten.',
       },
     ],
   },

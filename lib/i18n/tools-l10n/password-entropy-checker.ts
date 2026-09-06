@@ -1,11 +1,23 @@
 /**
  * password-entropy-checker 本地化 bundle —— zh / es / de(2025-08 扩张批次)
- * 覆盖: ui。useCases/formula/faqs 缺失自动回退英文。
+ * 覆盖: ui + useCases + faqs。formula 不适用(熵公式已并入 faqs 说明)。
  */
 import type { ToolL10n } from '../tool-l10n'
 
 export const PasswordEntropyCheckerL10n: ToolL10n = {
   zh: {
+    useCases: [
+      '换密码前量化强度:先测熵值达标(75+ 位)再存进密码管理器',
+      '直观对比两种策略:"P@ssw0rd!" 这类复杂短密码 vs "correct horse battery staple" 长口令短语',
+      '审计团队共享账号密码:对照安全团队的 75 位阈值逐条过一遍',
+      '教学演示:让学生看到词典词、键盘序列如何把 60 位理论熵打到 30 位',
+    ],
+    faqs: [
+      { q: '熵是怎么计算的?', a: '基线公式:熵(位)= 长度 × log2(字符集大小)。纯小写字母每字符约 4.7 位,加数字 5.2 位,再加符号约 6.6 位。在此基础上应用真实破解器的行为惩罚——词典词、键盘序列、重复串都会显著扣减,因为破解器远在穷举之前就先试这些模式。' },
+      { q: '75 位阈值是什么含义?', a: '这是安全团队对高价值账户(主邮箱、银行、密码管理器主密码)的通行推荐:在每秒 1000 亿次猜测的离线攻击下,75 位熵需要数百万年才能穷尽。普通账户 60 位以上通常足够,低于 40 位等于没设防。' },
+      { q: '破解时间的假设靠谱吗?', a: '按每秒 1000 亿次(10¹¹)尝试估算,对应离线场景:攻击者拿到哈希库、用多卡 GPU 集群跑 hashcat。在线撞库受限于网络与验证码,实际速率低几个数量级——但离线泄露才是该担心的场景,这正是估算按最坏情况给出的原因。' },
+      { q: '我输入的密码会被上传吗?', a: '不会。分析 100% 在浏览器本地完成,零网络请求——可在 DevTools 网络面板验证。这正是它敢拿来测真实密码的原因;任何要求联网的密码强度工具都不该信任。' },
+    ],
     ui: {
       'crackAssume': '按每秒 1000 亿次尝试',
       'crackEstimate': '离线破解估算',
@@ -24,6 +36,18 @@ export const PasswordEntropyCheckerL10n: ToolL10n = {
     },
   },
   es: {
+    useCases: [
+      'Medir la fuerza antes de cambiar una contraseña: superar los 75 bits antes de guardarla en el gestor',
+      'Comparar estrategias cara a cara: «P@ssw0rd!» (corta y compleja) frente a «correct horse battery staple» (frase larga)',
+      'Auditar las contraseñas compartidas del equipo contra el umbral de 75 bits que recomienda seguridad',
+      'Demo didáctica: mostrar cómo palabras de diccionario y secuencias de teclado desploman 60 bits teóricos a 30',
+    ],
+    faqs: [
+      { q: '¿Cómo se calcula la entropía?', a: 'Fórmula base: entropía (bits) = longitud × log2(tamaño del conjunto). Minúsculas ≈ 4,7 bits por carácter, con dígitos 5,2, con símbolos ≈ 6,6. Encima se aplican penalizaciones que imitan a los crackers reales — palabras de diccionario, secuencias de teclado y repeticiones restan mucho, porque se prueban mucho antes que la fuerza bruta.' },
+      { q: '¿Qué significa el umbral de 75 bits?', a: 'Es la recomendación habitual para cuentas de alto valor (correo principal, banca, contraseña maestra del gestor): a 100 000 millones de intentos por segundo en ataque offline, 75 bits tardan millones de años en agotarse. Para cuentas normales bastan 60+ bits; por debajo de 40 es como no tener contraseña.' },
+      { q: '¿Es realista la estimación de crackeo?', a: 'Asume 100 000 millones (10¹¹) de intentos/s: el escenario offline, con el atacante poseyendo los hashes y un clúster de GPUs corriendo hashcat. El credential stuffing online es órdenes de magnitud más lento por red y captchas — pero la filtración offline es el escenario que importa, y por eso se estima el peor caso.' },
+      { q: '¿Mi contraseña sale de esta página?', a: 'No. El análisis es 100 % local en el navegador, sin una sola petición — verificable en la pestaña de red de DevTools. Precisamente por eso es seguro probar contraseñas reales; desconfía de cualquier medidor de fuerza que requiera conexión.' },
+    ],
     ui: {
       'crackAssume': 'a 100 mil millones de intentos/s',
       'crackEstimate': 'Estimación de crackeo offline',
@@ -42,6 +66,18 @@ export const PasswordEntropyCheckerL10n: ToolL10n = {
     },
   },
   de: {
+    useCases: [
+      'Vor dem Passwortwechsel die Stärke beziffern: erst bei 75+ Bits im Passwort-Manager speichern',
+      'Zwei Strategien direkt vergleichen: „P@ssw0rd!" (kurz und komplex) gegen „correct horse battery staple" (lange Phrase)',
+      'Geteilte Team-Passwörter gegen die 75-Bit-Empfehlung der Security-Teams auditieren',
+      'Lehr-Demo: Wie Wörterbuchwörter und Tastaturfolgen 60 theoretische Bits auf 30 einbrechen lassen',
+    ],
+    faqs: [
+      { q: 'Wie wird die Entropie berechnet?', a: 'Grundformel: Entropie (Bits) = Länge × log2(Zeichenvorrat). Kleinbuchstaben ≈ 4,7 Bits pro Zeichen, mit Ziffern 5,2, mit Sonderzeichen ≈ 6,6. Darauf kommen Abzüge, die echte Cracker nachahmen — Wörterbuchwörter, Tastaturfolgen und Wiederholungen kosten viel, weil sie lange vor Brute-Force getestet werden.' },
+      { q: 'Was bedeutet die 75-Bit-Schwelle?', a: 'Die gängige Empfehlung für hochwertige Konten (Haupt-Mail, Banking, Master-Passwort des Managers): Bei 100 Mrd. Versuchen pro Sekunde im Offline-Angriff dauern 75 Bits Millionen Jahre. Für normale Konten reichen 60+ Bits; unter 40 ist praktisch schutzlos.' },
+      { q: 'Ist die Knack-Zeit realistisch?', a: 'Angesetzt sind 100 Mrd. (10¹¹) Versuche/s — das Offline-Szenario: Der Angreifer hat die Hashes und lässt hashcat auf einem GPU-Cluster laufen. Online-Credential-Stuffing ist um Größenordnungen langsamer (Netzwerk, Captchas), aber der Offline-Leak ist der relevante Fall — darum wird der Worst Case gerechnet.' },
+      { q: 'Verlässt mein Passwort diese Seite?', a: 'Nein. Die Analyse läuft zu 100 % lokal im Browser, null Anfragen — im Netzwerk-Tab der DevTools nachprüfbar. Genau darum darf man hier echte Passwörter testen; jedem Stärke-Messer, der online geht, sollte man misstrauen.' },
+    ],
     ui: {
       'crackAssume': 'bei 100 Mrd. Versuchen/s',
       'crackEstimate': 'Offline-Knack-Schätzung',

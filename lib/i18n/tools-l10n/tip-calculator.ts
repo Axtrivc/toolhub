@@ -15,6 +15,7 @@ export const tipCalculatorL10n: ToolL10n = {
       { q: '小费该给多少?', a: '在美国,堂食服务一般给 15-20%,18% 是常见默认值。15% 表示服务尚可,20% 以上表示很满意。很多其他国家不期望小费或已含服务费——出国时请留意当地习惯。' },
       { q: '该按税前还是税后金额给小费?', a: '传统上按税前小计给小费,但按含税总额给也越来越常见,差别通常很小。两种都可以;本工具按你输入的账单金额计算。' },
       { q: '多人怎么分摊小费?', a: '先把小费加到总账单上,再除以人数即可均摊。如果各人消费差距大,可先算每人应付的餐费,再分别乘以相同的小费比例后求和。' },
+      { q: '在中国需要给小费吗?', a: '中国大陆餐厅一般不收小费,账单常已含服务费;港澳和东南亚部分场所会加收 10% 服务费。只有在美式消费场景(境外旅行、涉外酒店)才需要按 15-20% 计算。' },
     ],
     ui: {
       'chartTitle': '账单 vs 小费',
@@ -42,6 +43,7 @@ export const tipCalculatorL10n: ToolL10n = {
       { q: '¿Cuánta propina debo dejar?', a: 'En EE. UU., el 15-20 % es lo habitual para servicio en mesa, con un 18 % como default común. El 15 % indica servicio adecuado; el 20 %+, servicio excelente. En muchos otros países no se espera propina o ya se incluye como cargo por servicio — revisa las costumbres locales al viajar.' },
       { q: '¿Debo propinar sobre el importe antes o después de impuestos?', a: 'La regla tradicional es propinar sobre el subtotal sin impuestos, pero propinar sobre el total (incluidos los impuestos) es cada vez más común y solo añade una pequeña cantidad. Ambas opciones son aceptables; la calculadora usa el importe que ingreses.' },
       { q: '¿Cómo reparto la propina en un grupo?', a: 'Primero suma la propina a la cuenta total, luego divide entre el número de personas para un reparto igualitario. Si los pedidos varían mucho, calcula la parte de cada persona, aplica el mismo porcentaje de propina a cada una y suma.' },
+      { q: '¿Se deja propina en España y Latinoamérica?', a: 'En España no es obligatoria: se suele redondear o dejar un 5-10 % si el servicio fue bueno. En México y gran parte de Latinoamérica es habitual un 10-15 % que se añade a la cuenta; en Argentina el servicio ya suele venir incluido.' },
     ],
     ui: {
       'chartTitle': 'Cuenta vs propina',
@@ -69,6 +71,7 @@ export const tipCalculatorL10n: ToolL10n = {
       { q: 'Wie viel Trinkgeld sollte ich geben?', a: 'In den USA sind 15-20 % für Bedienung üblich, 18 % ein häufiger Standard. 15 % stehen für ordentlichen Service, 20 %+ für ausgezeichneten. In vielen anderen Ländern wird kein Trinkgeld erwartet oder es ist als Servicegebühr enthalten — beim Reisen sieh dich nach den lokalen Gepflogenheiten um.' },
       { q: 'Soll ich vor oder nach Steuer Trinkgeld geben?', a: 'Traditionell gibt man Trinkgeld auf den Steuer-Zwischensumme, aber Trinkgeld auf das Gesamt (inklusive Steuer) wird immer üblicher und macht nur einen kleinen Unterschied. Beides ist akzeptabel; der Rechner nimmt den Betrag, den du eingibst.' },
       { q: 'Wie teile ich das Trinkgeld in einer Gruppe?', a: 'Addiere zuerst das Trinkgeld zur Gesamtrechnung und teile dann durch die Personenanzahl für eine gleiche Aufteilung. Wenn die Bestellungen stark abweichen, berechne den Anteil jeder Person, wende denselben Trinkgeld-Prozentsatz auf jeden an und summiere.' },
+      { q: 'Gibt man in Deutschland Trinkgeld?', a: 'Ja, aber bescheidener als in den USA: 5-10 % oder aufs runde Aufrunden sind im Restaurant und beim Lieferdienst üblich, meist bar oder über die Trinkgeld-Taste am Kartenterminal. Anders als in den USA ist es freiwillig — die Bedienung ist über den Mindestlohn abgesichert.' },
     ],
     ui: {
       'chartTitle': 'Rechnung vs. Trinkgeld',

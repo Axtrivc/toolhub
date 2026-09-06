@@ -11,6 +11,7 @@ export const ElectricityCostCalculatorL10n: ToolL10n = {
       { q: '电费是怎么算的?', a: '功率(W)× 小时 ÷ 1000 得出每天 kWh,再乘电价就是日成本。月度按 30.44 天(真实的年均天数)计算,年度按 365 天——对常年开着的设备,年度那行才是诚实的数字。' },
       { q: '哪里查电器的功率?', a: '看铭牌、电源适配器或规格表,通常标 W 或 input。差距非常大:1500 W 的取暖器每小时电费约是 50 W 笔记本的 30 倍——这正是本工具帮你轻松完成的比较。' },
       { q: '电价应该填多少?', a: '填最近账单上的边际电价;若按 kWh 单独计费,输配费用也要算进去。美国住宅均价约 $0.16-0.17/kWh,但各州、各套餐、各时段差异很大。' },
+      { q: '待机功耗要算吗?', a: '要。机顶盒、路由器、老电视的待机常年 5-15 W:一台 10 W 设备全天待机一年约 88 kWh,按 ¥0.55/kWh 就是 48 元。把每日使用小时填 24,就能算出"全天开机"设备的真实成本。' },
     ],
     ui: {
       'chartTitle': '费用阶梯',
@@ -45,6 +46,7 @@ export const ElectricityCostCalculatorL10n: ToolL10n = {
       { q: '¿Cómo se calcula el coste?', a: 'Vatios × horas ÷ 1000 da los kWh diarios; multiplicando por tu tarifa obtienes el coste diario. El mes usa 30,44 días (la media anual real) y el año 365: para aparatos siempre encendidos, la línea anual es el número honesto.' },
       { q: '¿Dónde encuentro el vatiaje?', a: 'En la placa del aparato, el adaptador de corriente o la ficha técnica, normalmente marcado como W o entrada. La horquilla es enorme: una estufa de 1500 W cuesta por hora unas 30 veces más que un portátil de 50 W — justo la comparación que esta herramienta hace fácil.' },
       { q: '¿Qué tarifa debo introducir?', a: 'Tu tarifa marginal de una factura reciente, incluyendo el coste de distribución si se factura por kWh. La media residencial en EE. UU. ronda los 0,16-0,17 $/kWh, pero varía mucho según estado, plan y franja horaria.' },
+      { q: '¿Cuenta el consumo en reposo?', a: 'Sí. Decodificadores, routers y televisores antiguos consumen 5-15 W sin parar: 10 W las 24 horas son unos 88 kWh al año, entre 22 y 31 € con una tarifa de 0,25-0,35 €/kWh. Pon 24 horas de uso para calcular el coste de un aparato siempre encendido.' },
     ],
     ui: {
       'chartTitle': 'Escalera de costes',
@@ -79,6 +81,7 @@ export const ElectricityCostCalculatorL10n: ToolL10n = {
       { q: 'Wie wird der Strompreis berechnet?', a: 'Watt × Stunden ÷ 1000 ergibt kWh pro Tag; multipliziert mit deinem Tarif ergibt das die Tageskosten. Der Monat rechnet mit 30,44 Tagen (der wahre Jahresschnitt), das Jahr mit 365 — bei Dauingeräten ist die Jahreszeile die ehrliche Zahl.' },
       { q: 'Wo finde ich die Wattzahl eines Geräts?', a: 'Auf dem Typenschild, dem Netzteil oder im Datenblatt, meist als W oder Input gekennzeichnet. Die Spanne ist riesig: Ein 1500-W-Heizlüfter kostet pro Stunde rund 30-mal so viel wie ein 50-W-Laptop — genau dieser Vergleich fällt hier leicht.' },
       { q: 'Welchen Tarif soll ich eingeben?', a: 'Deinen Grenztarif aus einer aktuellen Rechnung, inklusive der Netzentgelte, wenn sie pro kWh abgerechnet werden. Der deutsche Haushaltsdurchschnitt liegt bei etwa 0,30-0,40 €/kWh, je nach Region und Tarif teils deutlich anders.' },
+      { q: 'Zählt der Standby-Verbrauch?', a: 'Ja. Receiver, Router und ältere Fernseher ziehen im Standby dauerhaft 5-15 W: 10 W rund um die Uhr sind etwa 88 kWh pro Jahr, bei 0,35 €/kWh rund 31 €. Ein 20 Jahre alter Kühlschrank (≈400 kWh/Jahr) gegen ein neues Gerät (≈120 kWh) getauscht spart bei diesem Preis fast 100 € im Jahr.' },
     ],
     ui: {
       'chartTitle': 'Kostenleiter',

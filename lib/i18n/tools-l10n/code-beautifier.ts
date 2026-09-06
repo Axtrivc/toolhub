@@ -37,6 +37,10 @@ export const codeBeautifierL10n: ToolL10n = {
         q: '该用 2 空格还是 4 空格?',
         a: '与你项目现有风格保持一致。HTML、CSS、JSON 常用 2 空格;JavaScript 有时用 4 空格。代码库内部的一致性比具体数字更重要,所以选符合你团队约定的那个。',
       },
+      {
+        q: '代码会被上传到服务器吗?',
+        a: '不会。格式化完全在你的浏览器里进行,输入不离开设备,所以私有代码和内部配置也能放心粘贴。超过 100,000 字符的输入会被拒绝,以保证页面不卡顿。',
+      },
     ],
   },
   es: {
@@ -71,6 +75,10 @@ export const codeBeautifierL10n: ToolL10n = {
         q: '¿Debo usar 2 o 4 espacios?',
         a: 'Sigue el estilo existente de tu proyecto. Dos espacios es común en HTML, CSS y JSON; cuatro se usa a menudo en JavaScript. La coherencia dentro del código importa más que el número concreto, así que elige lo que coincida con la convención de tu equipo.',
       },
+      {
+        q: '¿Mi código se sube a algún servidor?',
+        a: 'No. El formateo ocurre por completo en tu navegador y la entrada nunca sale de tu dispositivo, así que puedes pegar código privado o configuración interna sin riesgo. Las entradas de más de 100.000 caracteres se rechazan para mantener la página fluida.',
+      },
     ],
   },
   de: {
@@ -104,6 +112,10 @@ export const codeBeautifierL10n: ToolL10n = {
       {
         q: 'Soll ich 2 oder 4 Leerzeichen nehmen?',
         a: 'Halte dich an den bestehenden Stil deines Projekts. Zwei Leerzeichen sind bei HTML, CSS und JSON üblich; vier oft bei JavaScript. Konsistenz innerhalb der Codebase ist wichtiger als die konkrete Zahl, also wähle die Option, die zur Teamkonvention passt.',
+      },
+      {
+        q: 'Wird mein Code zu einem Server hochgeladen?',
+        a: 'Nein. Das Formatieren läuft vollständig in deinem Browser, die Eingabe verlässt dein Gerät nie — privater Code und interne Konfigurationen sind also unkritisch. Eingaben über 100.000 Zeichen werden abgelehnt, damit die Seite flüssig bleibt.',
       },
     ],
   },

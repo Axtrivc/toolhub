@@ -326,6 +326,8 @@ export interface Dict {
   // FormulaSection
   formulaTitle: string // "Formula & How It Works"
   formulaIntro: string // "The {name} is based on the following formula:"
+  formulaVariables: string // "Variables" label for the symbol table
+  formulaExample: string // "Worked example" label for the step-by-step calc
   // makeTextTool 工厂 chrome(覆盖 ~28 个文本工具)
   textToolClear: string // "Clear"
   textToolInputPlaceholder: string // "Type or paste your text here..."
@@ -575,6 +577,8 @@ const en: Dict = {
     'Disclaimer: This tool is for educational purposes only and is not a substitute for professional medical advice, diagnosis, or treatment. Results are estimates and should be discussed with a qualified healthcare provider before making health-related decisions.',
   formulaTitle: 'Formula & How It Works',
   formulaIntro: 'The {name} is based on the following formula:',
+  formulaVariables: 'Variables',
+  formulaExample: 'Worked example',
   textToolClear: 'Clear',
   textToolInputPlaceholder: 'Type or paste your text here...',
   textToolResultPlaceholder: 'Result will appear here...',
@@ -821,6 +825,8 @@ const zh: Dict = {
     '免责声明:本工具仅供教育用途,不能替代专业的医疗建议、诊断或治疗。结果仅为估算值,做出与健康相关的决定前请与合格的医疗服务提供者商讨。',
   formulaTitle: '公式与原理',
   formulaIntro: '{name} 基于以下公式:',
+  formulaVariables: '变量说明',
+  formulaExample: '算例演示',
   textToolClear: '清空',
   textToolInputPlaceholder: '在此输入或粘贴文本…',
   textToolResultPlaceholder: '结果将显示在这里…',
@@ -1068,6 +1074,8 @@ const es: Dict = {
     'Aviso legal: Esta herramienta es solo para fines educativos y no sustituye el consejo, diagnóstico ni tratamiento médico profesional. Los resultados son estimaciones y deben comentarse con un profesional sanitario cualificado antes de tomar decisiones relacionadas con la salud.',
   formulaTitle: 'Fórmula y cómo funciona',
   formulaIntro: '{name} se basa en la siguiente fórmula:',
+  formulaVariables: 'Variables',
+  formulaExample: 'Ejemplo resuelto',
   textToolClear: 'Limpiar',
   textToolInputPlaceholder: 'Escribe o pega tu texto aquí…',
   textToolResultPlaceholder: 'El resultado aparecerá aquí…',
@@ -1315,6 +1323,8 @@ const de: Dict = {
     'Hinweis: Dieses Werkzeug dient nur Bildungszwecken und ersetzt keine professionelle medizinische Beratung, Diagnose oder Behandlung. Die Ergebnisse sind Schätzwerte und sollten mit einer qualifizierten Fachkraft besprochen werden, bevor gesundheitsbezogene Entscheidungen getroffen werden.',
   formulaTitle: 'Formel & Funktionsweise',
   formulaIntro: '{name} beruht auf der folgenden Formel:',
+  formulaVariables: 'Variablen',
+  formulaExample: 'Rechenbeispiel',
   textToolClear: 'Leeren',
   textToolInputPlaceholder: 'Text hier eingeben oder einfügen…',
   textToolResultPlaceholder: 'Das Ergebnis erscheint hier…',

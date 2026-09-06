@@ -1,0 +1,109 @@
+/**
+ * intermittent-fasting-calculator 本地化 bundle —— zh / es / de
+ *
+ * en 不在此(回退英文原值:lib/tool-faqs.ts、lib/tool-formulas.ts)。
+ *
+ * 覆盖:faqs(可见)+ useCases(Common uses)+ formula(公式区)。b00 新建,无 ui 块。
+ */
+
+import type { ToolL10n } from '../tool-l10n'
+
+const FORMULA = 'eating window = first meal → first meal + E · fasting = first meal + E → first meal + 24'
+
+export const intermittentFastingCalculatorL10n: ToolL10n = {
+  // ──────────────────────────── 中文 ────────────────────────────
+  zh: {
+    useCases: [
+      '定 16:8 作息:首餐 12:00,进食到 20:00,倒计时显示离生酮标记(约 12 小时)还有多久',
+      '从 14:10 渐进到 16:8:每周缩 30 分钟窗口,看自噬标记(16-24 小时)何时出现在时间线上',
+      '倒班适配:按实际首餐时间推算,自动生成 18:6 的禁食窗口直到次日首餐',
+      '排查隐形破戒:加奶拿铁约 60 千卡即破戒并重置计时;黑咖啡、无糖茶不算',
+    ],
+    faqs: [
+      {
+        q: '新手选哪个方案?',
+        a: '多数人从 16:8(禁食 16 小时、进食 8 小时)或更温和的 14:10 起步。坚持比强度重要——每天都能守住的适度窗口,胜过三天就放弃的激进方案。',
+      },
+      {
+        q: '脂肪供能和细胞自噬什么时候开始?',
+        a: '最后一餐约 12 小时后,肝糖原耗尽,生酮(脂肪供能)开始明显;自噬等细胞清理过程约在 16-24 小时加速。具体时点受餐量、活动和个体差异影响——时间线把它们标为估计值。',
+      },
+      {
+        q: '喝咖啡会破禁食吗?',
+        a: '白水、黑咖啡和无糖茶一般视为「禁食安全」。任何含热量的东西——奶油、糖,乃至一杯「小」拿铁——都会结束禁食状态并让计时归零。',
+      },
+      {
+        q: '进食窗口内要注意什么?',
+        a: '窗口只规定「什么时候吃」,不等于「随便吃」。蛋白质吃够(每公斤体重 1.2-1.6 克)、总热量不超,否则容易掉肌肉;窗口内暴食会抵消大部分获益。',
+      },
+    ],
+    formula: {
+      formula: FORMULA,
+      explain: 'F:E 节律的窗口推导:进食窗口从当天首餐开始、持续 E 小时;禁食窗口从首餐 + E 起到次日首餐(F = 24 − E 小时)。代谢标记(生酮约 12 小时起、自噬约 16-24 小时)是研究性估计,叠加在时间线上。',
+    },
+  },
+
+  // ──────────────────────────── Español ────────────────────────────
+  es: {
+    useCases: [
+      'montar un 16:8: primera comida a las 12:00, ventana hasta las 20:00, cuenta atrás hasta el marcador de cetosis (12 h aprox.)',
+      'pasar de 14:10 a 16:8: recortar 30 minutos por semana y ver cuándo entra en la línea temporal el marcador de autofagia (16-24 h)',
+      'adaptarlo a turnos de noche: con la hora real de la primera comida, el 18:6 se recalcula hasta la primera comida del día siguiente',
+      'cazar calorías invisibles: un latte con leche (60 kcal aprox.) reinicia el reloj; el café solo y el té sin azúcar no',
+    ],
+    faqs: [
+      {
+        q: '¿Qué horario es mejor para empezar?',
+        a: 'La mayoría arranca con 16:8 (16 horas de ayuno, 8 de comida) o con el más suave 14:10. La constancia pesa más que la intensidad: una ventana moderada que mantienes a diario vale más que una agresiva que abandonas.',
+      },
+      {
+        q: '¿Cuándo empiezan la cetosis y la autofagia?',
+        a: 'La quema de grasa (cetosis) se vuelve significativa hacia las 12+ horas tras la última comida, cuando se agota el glucógeno hepático; procesos de limpieza celular como la autofagia aceleran entre las 16 y 24 horas. Varía con el tamaño de la comida, la actividad y tu cuerpo — la línea temporal los marca como estimaciones.',
+      },
+      {
+        q: '¿El café rompe el ayuno?',
+        a: 'Agua, café solo y té sin azúcar se consideran compatibles con el ayuno. Cualquier cosa con calorías — nata, azúcar o un latte «pequeño» — termina el estado de ayuno y reinicia el reloj.',
+      },
+      {
+        q: '¿Puedo entrenar en ayunas?',
+        a: 'Sí para sesiones suaves o moderadas; para series intensas conviene algo de hidratos. La línea metabólica sigue corriendo: el entrenamiento no la reinicia, pero un café con leche (unas 60 kcal) sí — por eso cuenta como primera comida si mides el ayuno estricto.',
+      },
+    ],
+    formula: {
+      formula: FORMULA,
+      explain: 'Derivación del horario F:E: la ventana de comida abre con la primera comida y cierra E horas después; el ayuno corre F horas hasta la primera comida del día siguiente (F = 24 − E). Los marcadores metabólicos (cetosis ≈ 12 h+, autofagia ≈ 16-24 h) son estimaciones añadidas a la línea temporal.',
+    },
+  },
+
+  // ──────────────────────────── Deutsch ────────────────────────────
+  de: {
+    useCases: [
+      '16:8 einrichten: erste Mahlzeit 12:00, Fenster bis 20:00, Countdown bis zum Ketose-Marker (ca. 12 h)',
+      'von 14:10 zu 16:8 steigern: wöchentlich 30 Minuten kürzen und beobachten, wann der Autophagie-Marker (16-24 h) auftaucht',
+      'an Schichtdienst anpassen: mit der echten ersten Mahlzeit rechnet der 18:6-Plan bis zur ersten Mahlzeit des Folgetags',
+      'versteckten Fastenbruch finden: Milchkaffee (ca. 60 kcal) setzt die Uhr zurück — schwarzer Kaffee und ungesüßter Tee nicht',
+    ],
+    faqs: [
+      {
+        q: 'Welcher Plan eignet sich für Anfänger?',
+        a: 'Die meisten starten mit 16:8 (16 Stunden fasten, 8 essen) oder dem sanfteren 14:10. Beständigkeit schlägt Intensität — ein moderates Fenster, das du täglich hältst, schlägt ein aggressives, das du nach drei Tagen aufgibst.',
+      },
+      {
+        q: 'Wann starten Fettketose und Autophagie?',
+        a: 'Die Fettverbrennung (Ketose) wird etwa 12+ Stunden nach der letzten Mahlzeit deutlich, wenn das Leberglykogen zur Neige geht; zelluläre Aufräumprozesse wie Autophagie ziehen zwischen 16 und 24 Stunden an. Die Zeiten hängen von Mahlzeit, Aktivität und Körper ab — die Zeitachse markiert sie als Schätzungen.',
+      },
+      {
+        q: 'Bricht Kaffee das Fasten?',
+        a: 'Wasser, schwarzer Kaffee und ungesüßter Tee gelten als fastenkompatibel. Alles mit Kalorien — Sahne, Zucker oder ein „kleiner" Latte — beendet den Nüchternzustand und stellt die Uhr zurück.',
+      },
+      {
+        q: 'Worauf achten im Essensfenster?',
+        a: 'Auf Eiweiß (1,2-1,6 g pro kg Körpergewicht) und Gesamtkalorien: 16:8 regelt nur das Wann, nicht das Was. Wer im 8-Stunden-Fenster überisst, hebt den größten Teil des Effekts auf; die Zeitachse misst Stunden, keine Essensqualität.',
+      },
+    ],
+    formula: {
+      formula: FORMULA,
+      explain: 'Ableitung des F:E-Plans: Das Essensfenster öffnet mit der ersten Mahlzeit und schließt E Stunden später; das Fasten läuft F Stunden bis zur ersten Mahlzeit des Folgetags (F = 24 − E). Stoffwechselmarker (Ketose ≈ 12 h+, Autophagie ≈ 16-24 h) sind forschungsbasierte Schätzungen auf der Zeitachse.',
+    },
+  },
+}

@@ -25,6 +25,9 @@ export const sphereCalculatorL10n: ToolL10n = {
     ],
     faqs: [
       { q: '为什么行星和恒星是球形的?', a: '引力在各个方向上均匀拉扯,所以物质会稳定在势能最低的形状——球体。大型的卫星和行星是圆的;小行星不是,因为它们的引力太弱,无法克服材料的强度。' },
+      { q: '篮球的数字具体是多少?', a: '半径约 12 cm:体积约 7 238 cm³(7.2 升),表面积约 1 810 cm²。把半径输进去,两个结果同时读出。' },
+      { q: '体积和表面积哪个增长更快?', a: '体积——它按 r³ 走,表面积按 r²:半径翻倍,表面积 ×4,体积 ×8。这就是球形储罐划算的原因:同样材料面积装下更多容积。' },
+      { q: '用地球验证一下?', a: '取半径 6 371 km:体积约 1.08×10¹² km³,表面积约 5.1×10⁸ km²,其中 71% 被海洋覆盖。用科学计数法输入即可复现。' },
     ],
   },
   es: {
@@ -47,6 +50,9 @@ export const sphereCalculatorL10n: ToolL10n = {
     ],
     faqs: [
       { q: '¿Por qué los planetas y las estrellas son esféricos?', a: 'La gravedad tira por igual en todas las direcciones, así que el material se asienta en la forma con la energía potencial más baja — una esfera. Las lunas y planetas grandes son redondos; los asteroides pequeños no, porque su gravedad es demasiado débil para vencer la resistencia del material.' },
+      { q: '¿Qué cifras tiene un balón de baloncesto?', a: 'Con un radio de unos 12 cm: volumen ≈ 7.238 cm³ (7,2 litros) y superficie ≈ 1.810 cm². Introduce el radio y los dos resultados aparecen juntos.' },
+      { q: '¿Qué crece más rápido, el volumen o la superficie?', a: 'El volumen, porque va con r³ mientras la superficie va con r²: al duplicar el radio, la superficie ×4 y el volumen ×8. Por eso los tanques esféricos rinden: más litros por metro cuadrado de material.' },
+      { q: '¿Y con la Tierra?', a: 'Toma r = 6.371 km: volumen ≈ 1,08 × 10¹² km³ y superficie ≈ 5,1 × 10⁸ km², un 71 % cubierto de océano. Escríbelo en notación científica y lo reproducirás.' },
     ],
   },
   de: {
@@ -69,6 +75,9 @@ export const sphereCalculatorL10n: ToolL10n = {
     ],
     faqs: [
       { q: 'Warum sind Planeten und Sterne kugelförmig?', a: 'Die Schwerkraft zieht in alle Richtungen gleichmäßig, sodass sich Material in der Form mit der geringsten potentiellen Energie anordnet — einer Kugel. Große Monde und Planeten sind rund; kleine Asteroiden nicht, weil ihre Schwerkraft zu schwach ist, um die Materialfestigkeit zu überwinden.' },
+      { q: 'Welche Zahlen hat ein Basketball?', a: 'Bei rund 12 cm Radius: Volumen ≈ 7.238 cm³ (7,2 Liter) und Oberfläche ≈ 1.810 cm². Radius eingeben, beide Werte erscheinen sofort.' },
+      { q: 'Was wächst schneller: Volumen oder Oberfläche?', a: 'Das Volumen — es läuft mit r³, die Oberfläche mit r²: doppelter Radius bedeutet ×4 Fläche, aber ×8 Volumen. Deshalb lohnen sich kugelförmige Tanks: mehr Liter pro Quadratmeter Material.' },
+      { q: 'Und mit der Erde?', a: 'Nimm r = 6.371 km: Volumen ≈ 1,08 × 10¹² km³, Oberfläche ≈ 5,1 × 10⁸ km², davon 71 % Ozean. In wissenschaftlicher Notation eingeben und nachprüfen.' },
     ],
   },
 }

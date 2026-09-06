@@ -38,6 +38,9 @@ export const fractionCalculatorL10n: ToolL10n = {
     ],
     faqs: [
       { q: '能处理 2 1/2 这样的带分数吗?', a: '输入 5/2(假分数形式)。如果结果大于 1,会显示为「2 1/2」。' },
+      { q: '结果是怎么约分的?', a: '每次运算后分子分母同除以最大公约数:3/12 → 1/4,同时给出小数值便于和计算器核对。内部全程整数精确运算,不会有 0.1 + 0.2 那类浮点误差。' },
+      { q: '分母可以是负数吗?', a: '可以,负号会统一移到分子:1/-2 按 -1/2 处理,结果照常化简。分母为 0 直接报错——除以零没有定义。' },
+      { q: '多步运算怎么做?', a: '工具一次算一步:先算 1/2 + 1/3,再把结果 5/6 代入下一步。长链条计算建议每步都保留分数形式继续算,中途转小数会引入舍入误差。' },
     ],
   },
   es: {
@@ -73,6 +76,9 @@ export const fractionCalculatorL10n: ToolL10n = {
     ],
     faqs: [
       { q: '¿Puede manejar números mixtos como 2 1/2?', a: 'Introduce 5/2 (la forma impropia). El resultado se mostrará como «2 1/2» si es mayor que 1.' },
+      { q: '¿Cómo se simplifica el resultado?', a: 'Tras cada operación, numerador y denominador se dividen por su máximo común divisor: 3/12 → 1/4, y además se muestra el valor decimal para comprobar. Todo se calcula con aritmética exacta de enteros, sin los errores de coma flotante tipo 0,1 + 0,2.' },
+      { q: '¿Puede ser negativo el denominador?', a: 'Sí; el signo se mueve al numerador: 1/-2 se trata como -1/2 y el resultado se simplifica igual. Un denominador 0 da error directamente: dividir entre cero no está definido.' },
+      { q: '¿Cómo hago operaciones en cadena?', a: 'La herramienta calcula un paso por vez: primero 1/2 + 1/3 y el resultado 5/6 entra en el siguiente paso. En cálculos largos, conserva la forma de fracción en cada paso; pasar a decimal a mitad de camino introduce errores de redondeo.' },
     ],
   },
   de: {
@@ -108,6 +114,9 @@ export const fractionCalculatorL10n: ToolL10n = {
     ],
     faqs: [
       { q: 'Kann es gemischte Zahlen wie 2 1/2 verarbeiten?', a: 'Gib 5/2 (die unechte Form) ein. Das Ergebnis wird als „2 1/2" angezeigt, wenn es größer als 1 ist.' },
+      { q: 'Wie wird das Ergebnis gekürzt?', a: 'Nach jeder Operation werden Zähler und Nenner durch den größten gemeinsamen Teiler geteilt: 3/12 → 1/4; zusätzlich erscheint der Dezimalwert zum Abgleich. Gerechnet wird durchweg mit exakter Ganzzahlarithmetik — keine Rundungsfehler wie bei 0,1 + 0,2.' },
+      { q: 'Darf der Nenner negativ sein?', a: 'Ja, das Vorzeichen wandert in den Zähler: 1/-2 wird als -1/2 behandelt und genauso gekürzt. Ein Nenner von 0 liefert direkt eine Fehlermeldung — Division durch null ist undefiniert.' },
+      { q: 'Wie rechne ich in mehreren Schritten?', a: 'Das Tool rechnet einen Schritt pro Eingabe: erst 1/2 + 1/3, dann geht das Ergebnis 5/6 in den nächsten Schritt ein. Bei langen Ketten das Zwischenergebnis als Bruch weiterverwenden — eine Dezimalumwandlung zwischendrin schleift Rundungsfehler ein.' },
     ],
   },
 }

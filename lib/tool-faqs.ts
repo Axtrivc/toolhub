@@ -2536,6 +2536,350 @@ export const toolFaqs: Record<string, FaqPair[]> = {
       a: 'Find the kcal-per-cup and grams-per-cup figures on the bag label. Daily grams = daily kcal ÷ kcal-per-cup × grams-per-cup. This calculator handles both label styles (kcal/cup or kcal/100g) and outputs cups and grams together — grams are more accurate because scoops vary by ±20%.',
     },
   ],
+
+  // ══════════ _batch9-contents(19 个)══════════
+  'dice-roller': [
+    {
+      q: 'Are the dice rolls actually random?',
+      a: "Yes — the tool uses the browser's crypto.getRandomValues(), the same cryptographic randomness used for secure keys, not the older Math.random(). Each die is rolled independently, so a d20 has an exactly even 5% chance per face.",
+    },
+    {
+      q: 'Can I roll multiple dice at once, like 3d6+2?',
+      a: 'Yes. Pick the die type (d4, d6, d8, d10, d12, d20, or d100), set how many dice to roll, and add a flat modifier if your game uses one. You see each individual die result plus the total, so a DM or player can verify every roll.',
+    },
+    {
+      q: 'Does it work for tabletop RPGs like D&D?',
+      a: "That's the main use case: d20 attack and saving throws, 4d6 drop-low ability score rolling, percentile d100 checks, and everything in between. Nothing is stored or sent anywhere — it is a pure in-browser roller, so it also works offline.",
+    },
+    {
+      q: 'Why do I get the same numbers often — is it rigged?',
+      a: 'Randomness is clumpy: in 20 rolls of a d6, seeing a 4 three times is statistically normal. Over hundreds of rolls the counts converge toward even. The tally mode lets you verify this yourself across a session.',
+    },
+  ],
+  'coin-flip': [
+    {
+      q: 'Is the coin actually fair?',
+      a: "It uses crypto-grade randomness (crypto.getRandomValues), which is unbiased and unpredictable — arguably fairer than a physical coin, which can be slightly biased by weight distribution or the flipper's technique. Heads and tails each come up exactly 50% of the time.",
+    },
+    {
+      q: 'Can I flip the coin multiple times at once?',
+      a: 'Yes, batch mode lets you flip many times in one go and shows the running heads/tails tally. This is handy for statistics demonstrations, settling multiple ties at once, or verifying fairness empirically.',
+    },
+    {
+      q: 'Does flipping work offline?',
+      a: "Yes. The randomness comes from your own device's Web Crypto API — no server round-trip, no stored results. Once the page is loaded it keeps working with no connection.",
+    },
+    {
+      q: 'What else can I use instead of a coin for decisions?',
+      a: 'For more than two options, a dice roller handles 2-100 faces, and a wheel spinner lets you pick visually from custom entries. For a plain binary tie-break, a coin flip remains the cleanest mental model.',
+    },
+  ],
+  'wheel-spinner': [
+    {
+      q: 'How random is the wheel?',
+      a: 'The winning entry is drawn with crypto-grade randomness before the animation plays — the spin animation is a visual reveal, not the decision itself. Every entry has an equal chance regardless of its position on the wheel.',
+    },
+    {
+      q: 'Can I remove a name after it wins?',
+      a: "Yes — after each spin you can delete the winner and spin again with the remaining entries, which is exactly the flow for giveaways and \"who's next\" queues. You can also duplicate entries to weight someone's odds higher.",
+    },
+    {
+      q: "What's the maximum number of entries?",
+      a: 'The wheel stays readable up to a few dozen entries; beyond ~50 the labels shrink and the wheel becomes hard to follow visually, though the draw itself stays fair. For large groups, consider splitting into rounds or using the random team generator instead.',
+    },
+    {
+      q: 'Is my list of names saved anywhere?',
+      a: 'No. Everything runs in your browser with no account and no server storage — close the tab and the entries are gone. This makes it classroom-safe and suitable for confidential picks like employee giveaways.',
+    },
+  ],
+  'morse-code-translator': [
+    {
+      q: 'Which Morse code standard does this use?',
+      a: 'International Morse Code (ITU standard), the one used worldwide for amateur radio and emergency signaling. It covers A-Z, 0-9, common punctuation, and procedural signs like SOS. Non-Latin alphabets have their own standards not covered here.',
+    },
+    {
+      q: 'How does the audio playback work?',
+      a: 'The tool synthesizes the standard timing: a dot is one unit, a dash three units, with one-unit gaps inside a letter, three between letters, and seven between words — usually at a 600 Hz tone. You can follow along visually with the dot-dash pattern at the same time.',
+    },
+    {
+      q: "Why won't my Morse decode correctly?",
+      a: 'Spacing is everything when decoding: use a single space between letters and a slash or multiple spaces between words. If you paste dots and dashes with no letter gaps, the decoder cannot know where one letter ends and the next begins.',
+    },
+    {
+      q: 'Is Morse code still used today?',
+      a: "Yes — ham radio operators keep it alive because it cuts through poor conditions with minimal power, and it remains an official distress signal (SOS). It's also popular in puzzles, escape rooms, and as an accessibility channel.",
+    },
+  ],
+  'typing-speed-test': [
+    {
+      q: 'What is a good typing speed?',
+      a: 'The average adult types 35-40 WPM; 60+ WPM puts you in the top quartile of office workers; professional typists sit around 75-95 WPM. Accuracy matters as much as speed — 55 WPM at 98% accuracy beats 70 WPM at 90% in real work.',
+    },
+    {
+      q: 'How is WPM calculated here?',
+      a: 'Standard formula: every 5 typed characters (including spaces) counts as one "word", divided by the elapsed minutes, then corrected for errors. The test runs for one minute with real sentences, so the score reflects genuine typing, not repeated short words.',
+    },
+    {
+      q: 'Why is my WPM lower than in games like TypeRacer?',
+      a: 'Different tests count errors differently. This test emphasizes accuracy against natural full sentences — typos cost you directly. Scores are also consistently lower on the first run of a session while your hands warm up; take two or three tests and compare the later ones.',
+    },
+    {
+      q: 'Does the test work on mobile?',
+      a: 'You can take it on a phone, but expect 25-40 WPM with thumbs versus 40-70 on a physical keyboard. For a fair baseline, use a keyboard — and sit with your wrists floating rather than resting for the best numbers.',
+    },
+  ],
+  'random-team-generator': [
+    {
+      q: 'How are the teams made fair?',
+      a: 'Names are shuffled with crypto-grade randomness, then dealt round-robin like cards — so if your list has 13 people and 4 teams, teams get 4/3/3/3 members with the spots decided purely by shuffle order. Re-shuffling re-rolls everything with a new seed.',
+    },
+    {
+      q: 'Can I choose team count or team size?',
+      a: 'Both. Set a number of teams and the generator balances sizes automatically, or set a fixed size per team and it computes how many teams you need. Leftover people are distributed one per team rather than dumped into the last group.',
+    },
+    {
+      q: 'Can I keep some people together on the same team?',
+      a: 'The simplest trick: put the people who must stay together on consecutive lines — the round-robin deal keeps near-adjacent entries in the same team for most list sizes. For strict pairing constraints, generate, then manually swap two names; the shuffle gives you a fair baseline to start from.',
+    },
+    {
+      q: 'Does anything get saved or shared?',
+      a: 'No. Pasting names only fills a local text box — nothing leaves the page. Refresh or navigate away and the roster is gone, which makes it safe for HR sessions and classrooms.',
+    },
+  ],
+  'password-entropy-checker': [
+    {
+      q: 'What exactly is password entropy?',
+      a: 'Entropy measures unpredictability in bits: entropy ≈ length × log₂(charset size). A 12-character random password over 94 printable characters carries ~78.7 bits — each extra bit doubles the guesses an attacker needs. Length contributes more than exotic characters because it multiplies directly.',
+    },
+    {
+      q: "Why does my password score low even though it's long?",
+      a: 'Patterns get penalized. "Password12345678" is long but low-entropy: dictionary words, leetspeak substitutions, and repeated sequences are what cracking tools try first. Entropy is about genuine unpredictability, not character count alone.',
+    },
+    {
+      q: 'Is my password sent anywhere?',
+      a: 'No. The check runs entirely offline in your browser using the same math security auditors use — nothing is typed into a network request, logged, or stored. That matters: online "password strength testers" that phone home are themselves a leak risk.',
+    },
+    {
+      q: 'How much entropy is enough?',
+      a: 'Rough guide for 2026 hardware: under 40 bits is trivially crackable, 60+ bits resists casual attacks, 80+ bits resists well-funded ones, and 100+ bits is beyond any realistic brute force. Random 16+ characters over the full printable set (~104 bits) or a 4-5 word diceware passphrase gets you there.',
+    },
+  ],
+  'llm-cost-calculator': [
+    {
+      q: 'How is the monthly API cost calculated?',
+      a: 'Monthly cost = requests/day × days × (input tokens × input price + output tokens × output price), scaled per million tokens. The tool breaks the number into per-request, per-day, and per-month views and compares models side by side at your actual traffic, not marketing assumptions.',
+    },
+    {
+      q: 'What are cached-input tokens and how much do they save?',
+      a: 'Providers like Anthropic and OpenAI discount tokens that repeat across requests — a fixed system prompt, retrieved documents, few-shot examples — by 50-90%. If your requests share a stable prefix, enabling prompt caching routinely cuts input spend by more than half. The calculator includes that saving as a separate line.',
+    },
+    {
+      q: 'Why do my real invoices differ from the estimate?',
+      a: 'Three usual reasons: output tokens run longer than you assumed (streaming models rarely stop where you predict), cache misses when your prompt prefix shifts, and provider price changes. Treat the estimate as a budgeting baseline and re-check monthly.',
+    },
+    {
+      q: 'Which models are included in the price table?',
+      a: "GPT, Claude, Gemini, DeepSeek, Kimi, Qwen, and GLM families with their standard per-million-token rates. Prices are a snapshot — frontier model pricing moves quarterly — so always confirm against the provider's current page before signing a contract.",
+    },
+  ],
+  'context-window-checker': [
+    {
+      q: 'How are tokens estimated?',
+      a: 'The tool applies per-language heuristics calibrated against modern tokenizers: English averages ~4 characters per token, code and non-Latin scripts differ. Expect ±10% versus an exact tokenizer count — good enough for capacity planning, not for billing reconciliation.',
+    },
+    {
+      q: "What happens when text exceeds a model's context window?",
+      a: 'Requests either fail outright or, on APIs that support it, the oldest context gets silently truncated — which is how users lose earlier instructions mid-conversation. The remaining-room percentage tells you how close you are to that cliff before it bites.',
+    },
+    {
+      q: 'Do I have less room than the advertised window?',
+      a: 'Yes, in practice: the advertised count covers prompt + generated output + provider-internal overhead. Reserve 10-20% headroom, and remember that a 200k-token window is not an invitation to stuff 199k tokens in — attention quality degrades in very long contexts.',
+    },
+    {
+      q: 'Does pasting code or secrets expose them?',
+      a: "No. Counting happens locally in your browser; nothing is uploaded to any API. It's safe to paste proprietary code or sample data to size it — the tool never calls a model.",
+    },
+  ],
+  'json-to-zod': [
+    {
+      q: 'How are types inferred from my JSON?',
+      a: 'Each value maps by its JavaScript type: strings → z.string(), numbers → z.number(), booleans → z.boolean(), null → z.null(), arrays → z.array() of the element type, nested objects → nested z.object(). Optional keys (missing in some array elements) are marked .optional() so real-world data validates.',
+    },
+    {
+      q: 'Does it handle mixed arrays and nested objects?',
+      a: "Yes. Arrays with mixed element types produce a union schema (z.union), and arbitrarily deep nesting is preserved in the output. Empty arrays can't infer an element type, so they come out as z.array(z.unknown()) — tighten those by hand.",
+    },
+    {
+      q: 'Where is this most useful?',
+      a: 'Three spots: validating API responses at runtime with parse(), constraining AI structured output (many providers accept Zod directly for function/tool schemas), and generating form validation from sample payloads. Paste a realistic response — not a toy example — to get an accurate schema.',
+    },
+    {
+      q: 'Is my JSON uploaded anywhere?',
+      a: 'No. Conversion runs entirely in your browser — nothing is sent to a server or stored. Safe for customer data, internal API payloads, and other confidential samples.',
+    },
+  ],
+  'aes-encrypt-decrypt': [
+    {
+      q: 'Which encryption is used here?',
+      a: 'AES-256-GCM via your browser\'s native WebCrypto — the same authenticated-encryption standard used by TLS 1.3 and government systems. GCM adds an authentication tag, so tampered or wrongly-decrypted ciphertext fails loudly instead of returning garbage.',
+    },
+    {
+      q: 'How is my password turned into a key?',
+      a: 'PBKDF2 (PBKDF2-HMAC-SHA256) stretches your password with a random salt and many iterations into a 256-bit key. Salting guarantees that identical passwords produce different ciphertexts and defeats rainbow-table attacks.',
+    },
+    {
+      q: 'Can my data be recovered if I forget the password?',
+      a: 'No — and that is by design, not a bug. AES-256 has no practical brute-force path; there is no backdoor and the tool never sees your password. Encrypting is safe; treat the password as unrecoverable.',
+    },
+    {
+      q: 'Why is browser encryption trustworthy — where does my text go?',
+      a: "Nowhere. All crypto runs locally through the Web Crypto API; the plaintext, password, and ciphertext never leave your machine and nothing is logged. You can verify with DevTools' network tab: zero requests during encrypt or decrypt.",
+    },
+  ],
+  'car-cost-calculator': [
+    {
+      q: 'What does "true cost of ownership" include?',
+      a: 'Five lines beyond the loan payment: fuel (from your actual mileage and local price), insurance, maintenance and repairs, registration/fees, and depreciation — the biggest and most ignored cost, often 30-40% of total ownership on newer cars. The result is a monthly figure plus a cost-per-km.',
+    },
+    {
+      q: 'How is depreciation estimated?',
+      a: 'From vehicle age and value using typical market curves: cars lose roughly 15-25% of value in year one and 10-15% annually after. Enter what the car would sell for today versus what you paid for the most accurate picture.',
+    },
+    {
+      q: 'Should I include financing in the comparison?',
+      a: 'Yes if you borrowed — interest is part of the cost of driving. Enter your monthly payment (or use the linked auto loan calculator) and the tool adds financing to the other five lines. Cash buyers can leave it at zero and compare pure operating cost.',
+    },
+    {
+      q: 'Why does my cost per km look so high?',
+      a: "Because fixed costs don't shrink with low mileage: insurance, depreciation, and registration hit just as hard at 5,000 km/year as at 20,000. Drivers with low annual mileage routinely see the highest per-km costs — which is why car-sharing or occasional rentals sometimes wins.",
+    },
+  ],
+  'json-repair': [
+    {
+      q: 'What kinds of broken JSON can it fix?',
+      a: 'The classic LLM failures: truncated output (unterminated objects/arrays/strings), trailing commas, single-quoted or unquoted keys, Markdown code fences around the payload, smart quotes, NaN/Infinity literals, and raw control characters. It reports each fix so you can audit the repair.',
+    },
+    {
+      q: 'Can repair produce wrong data?',
+      a: 'Possibly — repair is best-effort inference, not magic. A truncated string might be closed at a guess boundary, and an unquoted key is taken literally. Always review the fix log and validate semantically before feeding the output to production code.',
+    },
+    {
+      q: 'Why do LLMs emit invalid JSON at all?',
+      a: 'Sampling: models generate text token by token and can stop at max tokens mid-object, or drift from a JSON instruction without structured-output mode. The durable fixes are structured output / JSON mode where the provider supports it, plus exactly this kind of repair pass as a safety net.',
+    },
+    {
+      q: 'Is there a size limit or privacy concern?',
+      a: 'Repair runs locally in your browser — nothing is uploaded, so confidential payloads stay on your machine. Practical limits are browser memory: payloads in the low tens of megabytes process fine.',
+    },
+  ],
+  'markdown-fence-extractor': [
+    {
+      q: 'What counts as a fenced code block?',
+      a: 'Anything between triple backticks (```lang ... ```) in Markdown — including blocks with a language tag, plain fences, and nested fences opened with four or more backticks (the standard way LLMs embed code samples that themselves contain triple-backtick blocks).',
+    },
+    {
+      q: 'Can I filter blocks by language?',
+      a: 'Yes — filter to just python, javascript, json, sql, bash, and so on. This is the main workflow: paste a long LLM response, pull only the code blocks, and copy or download them individually without scraping the prose by hand.',
+    },
+    {
+      q: 'Why do indented code blocks sometimes get missed?',
+      a: "Markdown has two code syntaxes: fenced (backticks) and indented (4 spaces). The extractor targets fences — indented blocks are ambiguous inside lists and quotes, so they're skipped to avoid false positives. Re-fence indented code first if you need it captured.",
+    },
+    {
+      q: 'Does downloading work for many blocks at once?',
+      a: 'Yes — copy each block individually or download all extracted blocks. Files get sensible names from the block language and index, so a response containing an HTML, CSS, and JS block downloads as three ready-to-use files.',
+    },
+  ],
+  'prompt-template-filler': [
+    {
+      q: 'What placeholder syntax does it support?',
+      a: 'Double-brace variables: {{variable_name}}. Undeclared variables in the template are detected and listed, unfilled variables are flagged with warnings, and you can escape literal braces when a template legitimately needs to output {{...}} text.',
+    },
+    {
+      q: 'How do I fill variables — form or JSON?',
+      a: 'Both. The form gives you one input per detected variable with live preview; JSON mode accepts an object like {"audience": "CTOs", "tone": "direct"} for batch or scripted filling. JSON values can be strings, numbers, or booleans and are stringified into the template.',
+    },
+    {
+      q: 'Can I use this for few-shot prompt batching?',
+      a: "That's a core use case: define a template with slots like {{product}} and {{tone}}, fill it from a JSON object, copy the result, then refill for the next row. It turns a prompt into a repeatable, version-controlled asset instead of a hand-edited blob.",
+    },
+    {
+      q: 'Does my template or data leave the browser?',
+      a: 'No. Filling runs entirely client-side — templates, values, and outputs never touch a server. Safe for internal prompts and customer data.',
+    },
+  ],
+  'openai-tools-builder': [
+    {
+      q: 'What schema does this generate?',
+      a: 'A function definition for the OpenAI-style tools API parameter: a name, a natural-language description, and a JSON Schema parameters object with typed properties (string, number, boolean, array, object), enum constraints, and a required list — all built through a form instead of hand-writing JSON Schema.',
+    },
+    {
+      q: 'What makes a good function name and description?',
+      a: 'Names should be snake_case verbs like get_weather or search_orders — the model picks tools primarily from name + description, so describe when and why to call it, not just what it does. "Returns current weather for a city when the user asks about weather today" beats "Weather API".',
+    },
+    {
+      q: 'How do enums and required fields affect the model?',
+      a: 'Enums constrain the model to listed values (great for categories, currencies, units), and marking parameters required prevents the model from guessing omissions. Fewer, well-constrained parameters reliably beat sprawling schemas — the model has fewer ways to go wrong.',
+    },
+    {
+      q: 'Is the output compatible with other LLM providers?',
+      a: "The tools parameter shape shown here (OpenAI function calling) has become the de-facto pattern adopted by most compatible APIs, so output generally ports with minor field renames. Always check the target provider's current function-calling docs.",
+    },
+  ],
+  'csv-to-finetune-jsonl': [
+    {
+      q: 'What format does fine-tuning require?',
+      a: 'One JSON object per line (JSONL), each shaped as a chat conversation: {"messages": [{"role": "system", ...}, {"role": "user", ...}, {"role": "assistant", ...}]}. Your CSV columns map onto those roles — typically a prompt column to user, a completion column to assistant, and an optional shared system prompt.',
+    },
+    {
+      q: 'What are the most common validation errors?',
+      a: 'Trailing blank lines, a BOM on the first line, unescaped newlines inside cells, missing the assistant message, and role typos. The tool validates every line and points at the offending row — fixing the CSV once beats a failed upload cycle.',
+    },
+    {
+      q: 'How much training data do I need?',
+      a: 'Providers generally suggest 50-100 examples as a useful floor and 500-1,000+ for consistent style transfer. Quality beats quantity: 200 clean, diverse, consistently formatted pairs outperform 2,000 noisy ones scraped from a chat log.',
+    },
+    {
+      q: 'Is my training data uploaded anywhere here?',
+      a: 'No — conversion and validation run entirely in your browser. Your dataset only goes to the provider when you upload the finished JSONL to their fine-tuning endpoint yourself.',
+    },
+  ],
+  'token-visualizer': [
+    {
+      q: 'How accurate is the tokenization?',
+      a: "It's a high-fidelity approximation of modern BPE tokenizers (GPT/Claude/Gemini class), accurate within a few percent for English prose. Exact counts vary because each provider's tokenizer differs — for billing, always use the provider's own reported usage numbers.",
+    },
+    {
+      q: 'Why do some words cost multiple tokens?',
+      a: 'BPE splits words into learned subword units: common short words ("the", "and") are single tokens; rare words split ("tokenization" → several); a leading space attaches to the following word; numbers often split digit-by-digit after the first 1-3 digits. Non-English scripts typically cost 2-4× more tokens per word.',
+    },
+    {
+      q: 'What is this actually useful for?',
+      a: 'Building intuition for cost and context budgets: seeing that your 2,000-word blog post is ~2,700 tokens, that a system prompt repeated across 10,000 requests is the real line item, and why trimming filler text saves API spend proportionally.',
+    },
+    {
+      q: 'Can I paste code and JSON?',
+      a: "Yes — code tokenizes visibly differently from prose (indentation, symbols, and long identifiers each consume tokens). It's a quick way to see why a 50 KB config file can eat a meaningful slice of a context window.",
+    },
+  ],
+  'embedding-price-calculator': [
+    {
+      q: 'How is the embedding cost computed?',
+      a: 'Cost = tokens processed × price per million tokens, with dimensions and model chosen from each provider\'s current rate card. For recurring workloads the tool projects daily and monthly spend from your documents-per-day and average tokens-per-document figures.',
+    },
+    {
+      q: 'Do dimensions affect the price?',
+      a: "It depends on the provider: some price uniformly regardless of dimension count, while others (notably OpenAI's embeddings) offer cheaper tiers for shortened vectors via a dimensions parameter — reducing from 1536 to 256 dimensions can cut cost dramatically with modest retrieval-quality loss. Test on your own retrieval evals before downscaling.",
+    },
+    {
+      q: 'How do open-source models change the math?',
+      a: 'Self-hosted models (BGE, E5, GTE class) shift cost from per-token API spend to GPU time and infrastructure. Above roughly 50-100 million tokens per month, hosting usually wins; below that, API pricing is cheaper than keeping hardware warm. The comparison lines make the crossover visible.',
+    },
+    {
+      q: "What's a realistic token count per document?",
+      a: 'A typical web page runs 500-1,500 tokens; a PDF report 3,000-15,000; a support ticket 100-400. Chunk before embedding — most retrieval systems embed 300-800 token chunks rather than whole documents, so multiply your document count by chunks-per-document for the honest estimate.',
+    },
+  ],
 }
 export function getToolFaqs(slug: string): FaqPair[] {
   return toolFaqs[slug] ?? []

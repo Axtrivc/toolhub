@@ -34,6 +34,9 @@ export const htmlUnescapeL10n: ToolL10n = {
     ],
     faqs: [
       { q: '反转义安全吗?', a: '本工具使用一个独立的 textarea 元素,解码实体时不会执行任何 HTML。输出是纯文本,因此不会触发脚本。' },
+      { q: '&amp; 和 &amp;amp; 有什么区别?', a: '&amp; 是「&」被转义一次的结果;&amp;amp; 被转义了两次。解码一次后前者得到 &,后者还剩 &amp;,需要再解一次——嵌套模板里最容易踩的坑。' },
+      { q: '什么时候该用「编码」方向?', a: '把用户输入写进 HTML 前先转义 & < > " \',防止 XSS——这正是编码模式做的事。反转义则用于把抓取内容、数据库字段里的转义文本还原成可读字符。' },
+      { q: '数字实体如 &#169; 能解吗?', a: '能。十进制实体(&#169;)和十六进制实体(&#xA9;)都由 textarea 解码机制处理,©、™ 以及中文字符的数字引用都能正确还原。' },
     ],
   },
   es: {
@@ -65,6 +68,9 @@ export const htmlUnescapeL10n: ToolL10n = {
     ],
     faqs: [
       { q: '¿Es seguro desescapar?', a: 'Esta herramienta usa un elemento textarea separado, que decodifica entidades sin ejecutar ningún HTML. La salida es texto plano, por lo que no puede activar scripts.' },
+      { q: '¿Qué diferencia hay entre &amp; y &amp;amp;?', a: '&amp; es el carácter «&» escapado una vez; &amp;amp; está doblemente escapado. Tras una pasada, el primero da «&» y el segundo deja &amp;: hace falta decodificar de nuevo. Es el fallo clásico de las plantillas anidadas.' },
+      { q: '¿Cuándo uso el modo codificar?', a: 'Para escapar & < > " y \' antes de insertar entrada de usuario en HTML y prevenir XSS. Desescapar es el camino inverso: convertir entidades de vuelta a caracteres legibles en texto extraído o campos de base de datos.' },
+      { q: '¿Decodifica entidades numéricas como &#169;?', a: 'Sí. Tanto las decimales (&#169;) como las hexadecimales (&#xA9;) se resuelven con el mecanismo del textarea: ©, ™ y las referencias numéricas de caracteres se restauran correctamente.' },
     ],
   },
   de: {
@@ -96,6 +102,9 @@ export const htmlUnescapeL10n: ToolL10n = {
     ],
     faqs: [
       { q: 'Ist das Unescapen sicher?', a: 'Dieses Werkzeug nutzt ein separates Textarea-Element, das Entities dekodiert, ohne HTML auszuführen. Die Ausgabe ist Klartext und kann daher keine Skripte auslösen.' },
+      { q: 'Was ist der Unterschied zwischen &amp; und &amp;amp;?', a: '&amp; ist das einmal escapte «&», &amp;amp; doppelt escapet. Nach einem Durchlauf wird aus &amp; ein «&», aus &amp;amp; bleibt &amp; — dann ist ein zweiter nötig. Der klassische Fehler bei verschachtelten Templates.' },
+      { q: 'Wofür ist der Kodieren-Modus da?', a: 'Um & < > " und \' zu escapen, bevor Nutzereingaben in HTML landen — so wird XSS verhindert. Unescapen ist der umgekehrte Weg: Entities aus kopierten Inhalten oder Datenbankfeldern zurück in lesbare Zeichen.' },
+      { q: 'Werden numerische Entities wie &#169; dekodiert?', a: 'Ja. Dezimale (&#169;) und hexadezimale (&#xA9;) Entities löst der Textarea-Mechanismus korrekt auf: ©, ™ und numerische Zeichenreferenzen kommen sauber zurück.' },
     ],
   },
 }

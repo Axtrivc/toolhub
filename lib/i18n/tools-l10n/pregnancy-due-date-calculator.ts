@@ -27,6 +27,9 @@ export const pregnancyDueDateCalculatorL10n: ToolL10n = {
     ],
     faqs: [
       { q: '月经周期不规律怎么办?', a: 'Naegele 法则假设周期为 28 天、第 14 天排卵。如果你的周期更长或更短,早期(12 周前)的 B 超能给出更准确的预产期。' },
+      { q: '孕周从哪天开始算?', a: '从末次月经首日算起,不是从受孕日——受孕大约发生在第 14 天。预产期 40 周 = 280 天;当前孕周 = 今天距末次月经的天数 ÷ 7,本工具已自动算好。' },
+      { q: '三个孕期怎么划分?', a: '第一孕期 1–13 周(器官形成期,对致畸物最敏感);第二孕期 14–27 周(大排畸约 20–24 周,糖筛 24–28 周);第三孕期 28–40 周(孕晚期每两周产检一次,37 周后即算足月)。' },
+      { q: '试管婴儿(IVF)怎么算预产期?', a: '移植日期比末次月经更准:第 3 天卵裂期胚胎用移植日 + 263 天,第 5 天囊胚 + 261 天。若按 Naegele 反推,LMP ≈ 移植日 − 14 天(囊胚 − 19 天)。' },
     ],
   },
   es: {
@@ -51,6 +54,9 @@ export const pregnancyDueDateCalculatorL10n: ToolL10n = {
     ],
     faqs: [
       { q: '¿Qué pasa si mis ciclos son irregulares?', a: 'La regla de Naegele asume un ciclo de 28 días con ovulación en el día 14. Si tus ciclos son más largos o cortos, una ecografía temprana (antes de las 12 semanas) ofrece una fecha probable más precisa.' },
+      { q: '¿Desde qué día se cuentan las semanas de gestación?', a: 'Desde el primer día de la última menstruación, no desde la concepción (que ocurre unas 2 semanas después). 40 semanas = 280 días; la semana actual es los días transcurridos ÷ 7, y la herramienta ya lo calcula.' },
+      { q: '¿Cómo se dividen los trimestres?', a: 'Primero: semanas 1–13 (organogénesis, la fase más sensible). Segundo: 14–27 (ecografía morfológica hacia las 20 semanas, test de tolerancia a la glucosa entre las 24–28). Tercero: 28–40; a partir de la semana 37 el parto se considera a término.' },
+      { q: '¿Y si fue una FIV?', a: 'La fecha de transferencia es más precisa que la FUM: embriones de día 3, +263 días; blastocistos de día 5, +261 días. En términos de Naegele: FUM ≈ transferencia − 14 días (blastocisto − 19).' },
     ],
   },
   de: {
@@ -75,6 +81,9 @@ export const pregnancyDueDateCalculatorL10n: ToolL10n = {
     ],
     faqs: [
       { q: 'Was, wenn meine Zyklen unregelmäßig sind?', a: 'Die Naegele-Regel geht von einem 28-Tage-Zyklus mit Eisprung am 14. Tag aus. Sind deine Zyklen länger oder kürzer, liefert eine frühe Ultraschalluntersuchung (vor der 12. Woche) einen genaueren Geburtstermin.' },
+      { q: 'Ab welchem Tag zählen Schwangerschaftswochen?', a: 'Ab dem ersten Tag der letzten Periode, nicht ab der Befruchtung (die etwa 2 Wochen später liegt). 40 Wochen = 280 Tage; die aktuelle Woche ist vergangene Tage ÷ 7 — das Tool rechnet das automatisch.' },
+      { q: 'Wie sind die drei Trimester aufgeteilt?', a: 'Erstes: Woche 1–13 (Organogenese, die empfindlichste Phase). Zweites: 14–27 (Feindiagnostik um die 20. Woche, Zuckerbelastungstest 24–28). Drittes: 28–40; ab Woche 37 gilt die Geburt als termingerecht.' },
+      { q: 'Und bei künstlicher Befruchtung (IVF)?', a: 'Der Transfertag ist genauer als die letzte Periode: Tag-3-Embryonen + 263 Tage, Blastozysten (Tag 5) + 261 Tage. Umgerechnet auf Naegele: LMP ≈ Transfer − 14 Tage (Blastozyste − 19).' },
     ],
   },
 }

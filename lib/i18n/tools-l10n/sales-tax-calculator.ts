@@ -15,6 +15,8 @@ export const salesTaxCalculatorL10n: ToolL10n = {
       { q: '食品杂货要交税吗?', a: '在美国很多州,食品杂货免税或适用更低税率。食品和药品等必需品通常有特殊规定,但各地差异很大。' },
       { q: '销售税和 VAT 一样吗?', a: '两者都是消费税,但运作方式不同。销售税只在最终卖给消费者时征收一次。VAT 在每个生产环节都征收但会抵扣回去,最终仍由消费者承担。对最终买家来说,计算方式相似。' },
       { q: '为什么美国标价不含税?', a: '因为美国有成千上万个地方税区,零售商显示税前价格以便做全国统一广告。税款在结账时根据购买地加上。' },
+      { q: '拿到含税价怎么反推税前金额?', a: '用「去税」模式:税前 = 含税 ÷ (1 + 税率)。含税 10,800 元、税率 8%,税前为 10,800 ÷ 1.08 = 10,000 元,税额 800 元。不要直接用 10,800 × 8% = 864——那是把税基搞错的最常见错误。' },
+      { q: '中国的增值税算这类税吗?', a: '算。中国增值税普遍税率 13%,部分商品 9% 或 6%,是价内税——标价已含税;美国式的"结账另加"销售税则是价外税。用「去税」模式可以把含税价拆回净额与税额。' },
     ],
     ui: {
       'chartTitle': '净额 vs 税额',
@@ -39,6 +41,8 @@ export const salesTaxCalculatorL10n: ToolL10n = {
       { q: '¿Los alimentos básicos tributan?', a: 'En muchos estados de EE. UU., los alimentos básicos están exentos o se gravan a una tasa menor. Los productos esenciales como comida y medicinas suelen tener un trato especial, pero las reglas varían mucho según la jurisdicción.' },
       { q: '¿El impuesto sobre ventas es igual al IVA?', a: 'Ambos son impuestos al consumo pero funcionan distinto. El impuesto sobre ventas se añade una sola vez en la venta final al consumidor. El IVA se cobra en cada etapa de producción pero se acredita, de modo que al final lo paga el consumidor. La matemática para el comprador final es parecida.' },
       { q: '¿Por qué los precios en EE. UU. no incluyen impuestos?', a: 'Como EE. UU. tiene miles de jurisdicciones fiscales locales, los minoristas muestran precios sin impuesto para poder publicar precios nacionales consistentes. El impuesto se añade en caja según el lugar de compra.' },
+      { q: '¿Cómo quito el impuesto de un precio final?', a: 'Con el modo «Quitar impuesto»: base = total ÷ (1 + tasa). Un ticket de 121 € con IVA del 21 % vuelve a 100 € netos con 21 € de impuesto. El error habitual es restar el 21 % del total, lo que daría unos 95,59 € — incorrecto.' },
+      { q: '¿Qué tipos se usan en España y Latinoamérica?', a: 'España: IVA del 21 % general, con tipos reducidos del 10 % y el 4 %. México: IVA del 16 % en todo el país (8 % solo en la franja fronteriza norte). Argentina y Colombia usan IVA del 21 % y 19 %; ajusta la tasa antes de calcular.' },
     ],
     ui: {
       'chartTitle': 'Neto vs impuesto',
@@ -63,6 +67,8 @@ export const salesTaxCalculatorL10n: ToolL10n = {
       { q: 'Werden Lebensmittel besteuert?', a: 'In vielen US-Bundesstaaten sind Lebensmittel befreit oder werden niedriger besteuert. Grundnahrungsmittel und Medikamente erhalten oft eine Sonderbehandlung, aber die Regeln unterscheiden sich je nach Gebiet stark.' },
       { q: 'Ist Sales Tax dasselbe wie die Mehrwertsteuer?', a: 'Beides sind Verbrauchsteuern, aber sie funktionieren unterschiedlich. Sales Tax wird einmalig beim Endverkauf an den Verbraucher erhoben. Die Mehrwertsteuer wird auf jeder Produktionsstufe erhoben, aber erstattet, sodass sie am Ende der Verbraucher trägt. Die Rechnung für den Endkäufer ist ähnlich.' },
       { q: 'Warum enthalten US-Preise keine Steuer?', a: 'Da die USA Tausende lokale Steuergebiete haben, zeigen Händler Nettopreise, um einheitliche nationale Werbung zu schalten. Die Steuer wird an der Kasse basierend auf dem Kaufort hinzugefügt.' },
+      { q: 'Wie rechne ich die Mehrwertsteuer aus einem Bruttopreis heraus?', a: 'Mit „Steuer abziehen": Brutto ÷ (1 + Satz). 119 € brutto bei 19 % ergeben 100 € netto und 19 € USt. Nicht einfach 19 % vom Brutto abziehen — das ergäbe falsche 96,39 €.' },
+      { q: 'Welche Sätze gelten im DACH-Raum?', a: 'Deutschland: 19 % Regelsatz, 7 % ermäßigt für Lebensmittel und Bücher. Österreich: 20 % bzw. 10 %; die Schweiz: 8,1 % Normalsatz seit 2024. Setze den passenden Satz ein, dann stimmen Netto und Brutto exakt.' },
     ],
     ui: {
       'chartTitle': 'Netto vs. Steuer',

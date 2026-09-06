@@ -64,6 +64,14 @@ export const readingSpeakingTimeL10n: ToolL10n = {
         q: '能设置自己的每分钟字数吗?',
         a: '能。自定义速度滑块会覆盖预设,所以你可以精确匹配已知的旁白语速、幻灯片时间预算或播客脚本时长,而不必依赖平均值。',
       },
+      {
+        q: '中文演讲语速大概是多少?',
+        a: '中文习惯用「字/分」衡量:新闻播报约 250–300 字/分,从容的授课或讲座约 180–220 字/分,对应约 130–160 个英文词当量。在自定义语速里直接填自己的目标值最准。',
+      },
+      {
+        q: '页数是怎么折算的?',
+        a: '按每页 250 词、与标准稿件排版一致:3000 词约 12 页,适合给打印稿或剧本估篇幅。网页文章不用管页数,直接看阅读时长即可。',
+      },
     ],
   },
   es: {
@@ -125,6 +133,14 @@ export const readingSpeakingTimeL10n: ToolL10n = {
         q: '¿Puedo fijar mi propia velocidad de palabras por minuto?',
         a: 'Sí. El deslizador de velocidad personalizada anula los preajustes, así puedes ajustar un ritmo de narración conocido, un presupuesto de tiempo para diapositivas o la duración de un guion de podcast con precisión en lugar de basarte en los valores medios.',
       },
+      {
+        q: '¿Qué ritmo tiene la locución en español?',
+        a: 'Doblaje y locución profesional rondan las 150-160 palabras por minuto; las charlas con diapositivas quedan mejor a 120-130. Pon tu objetivo en el deslizador personalizado y los tiempos se recalculan al instante.',
+      },
+      {
+        q: '¿Cómo se cuentan las páginas?',
+        a: 'A 250 palabras por página, la medida estándar de un manuscrito: 3.000 palabras son unas 12 páginas, útil para presupuestar un guion impreso. En un artículo web lo práctico es mirar directamente el tiempo de lectura.',
+      },
     ],
   },
   de: {
@@ -185,6 +201,14 @@ export const readingSpeakingTimeL10n: ToolL10n = {
       {
         q: 'Kann ich mein eigenes Wörter-pro-Minute-Tempo einstellen?',
         a: 'Ja. Der Geschwindigkeitsregler überschreibt die Vorgaben, sodass du ein bekanntes Sprechtempo, ein Zeitbudget für Folien oder die Länge eines Podcast-Skripts präzise treffen kannst, statt dich auf Durchschnittswerte zu verlassen.',
+      },
+      {
+        q: 'Welches Tempo hat eine Hörbuch- oder Vortragsstimme?',
+        a: 'Hörbücher liegen bei rund 150-160 WpM, Vorträge mit Folien bei 120-130. Trage dein Ziel in den eigenen Geschwindigkeitsregler ein — die Zeiten rechnen sich sofort neu.',
+      },
+      {
+        q: 'Wie entstehen die Seitenzahlen?',
+        a: 'Mit 250 Wörtern pro Seite, dem üblichen Manuskriptmaß: 3.000 Wörter ergeben rund 12 Seiten — praktisch zum Kalkulieren eines gedruckten Skripts. Bei Webtexten ist die Lesezeit der nützlichere Wert.',
       },
     ],
   },

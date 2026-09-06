@@ -29,7 +29,7 @@ export interface ToolL10nEntry {
   /** ToolInfoSection "Common uses" 列表(替代英文 formatUseCases) */
   useCases?: string[]
   /** FormulaSection 公式与解释(覆盖 lib/tool-formulas.ts) */
-  formula?: { formula: string; explain?: string }
+  formula?: { formula: string; variables?: string; explain?: string; example?: string }
 }
 
 /** 非英文语种 → 条目。en 不出现,保证英文走原值。 */
@@ -261,6 +261,17 @@ import { PromptTemplateFillerL10n } from './tools-l10n/prompt-template-filler'
 import { CsvToFinetuneJsonlL10n } from './tools-l10n/csv-to-finetune-jsonl'
 import { EmbeddingPriceCalculatorL10n } from './tools-l10n/embedding-price-calculator'
 import { TokenVisualizerL10n } from './tools-l10n/token-visualizer'
+import { hysaCalculatorL10n } from './tools-l10n/hysa-calculator'
+import { cdCalculatorL10n } from './tools-l10n/cd-calculator'
+import { rothIraCalculatorL10n } from './tools-l10n/roth-ira-calculator'
+import { fireCalculatorL10n } from './tools-l10n/fire-calculator'
+import { breakEvenCalculatorL10n } from './tools-l10n/break-even-calculator'
+import { profitMarginCalculatorL10n } from './tools-l10n/profit-margin-calculator'
+import { cacLtvCalculatorL10n } from './tools-l10n/cac-ltv-calculator'
+import { intermittentFastingCalculatorL10n } from './tools-l10n/intermittent-fasting-calculator'
+import { flooringCalculatorL10n } from './tools-l10n/flooring-calculator'
+import { dogFoodCalculatorL10n } from './tools-l10n/dog-food-calculator'
+import { llmApiCostCalculatorL10n } from './tools-l10n/llm-api-cost-calculator'
 
 const registry: Record<string, ToolL10n> = {
   'loan-calculator': loanCalculatorL10n,
@@ -488,6 +499,17 @@ const registry: Record<string, ToolL10n> = {
   'csv-to-finetune-jsonl': CsvToFinetuneJsonlL10n,
   'embedding-price-calculator': EmbeddingPriceCalculatorL10n,
   'token-visualizer': TokenVisualizerL10n,
+  'hysa-calculator': hysaCalculatorL10n,
+  'cd-calculator': cdCalculatorL10n,
+  'roth-ira-calculator': rothIraCalculatorL10n,
+  'fire-calculator': fireCalculatorL10n,
+  'break-even-calculator': breakEvenCalculatorL10n,
+  'profit-margin-calculator': profitMarginCalculatorL10n,
+  'cac-ltv-calculator': cacLtvCalculatorL10n,
+  'intermittent-fasting-calculator': intermittentFastingCalculatorL10n,
+  'flooring-calculator': flooringCalculatorL10n,
+  'dog-food-calculator': dogFoodCalculatorL10n,
+  'llm-api-cost-calculator': llmApiCostCalculatorL10n,
 }
 
 /**

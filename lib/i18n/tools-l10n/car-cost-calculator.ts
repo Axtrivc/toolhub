@@ -1,11 +1,35 @@
 /**
  * car-cost-calculator 本地化 bundle —— zh / es / de(2025-08 扩张批次)
- * 覆盖: ui。useCases/formula/faqs 缺失自动回退英文。
+ * 覆盖: ui + useCases + faqs。formula 缺失自动回退英文。
  */
 import type { ToolL10n } from '../tool-l10n'
 
 export const CarCostCalculatorL10n: ToolL10n = {
   zh: {
+    useCases: [
+      '买二手前算总账:8 万元的车五年后残值 3.5 万,折旧摊下来每月近 750 元,往往超过油费',
+      '对比养车 vs 打车:年跑 8,000 km、每公里 1.1 元,一年 8,800 元,拿去和打车软件全年开销比',
+      '提新车前预估预算:购车价、保险、保养、残值一填,得出真实月成本再决定敢不敢买',
+      '家里两辆车各算每公里成本,决定日常通勤开省的那辆、长途再开舒适的那辆',
+    ],
+    faqs: [
+      {
+        q: '"真实拥有成本"包括哪些?',
+        a: '贷款月供之外的五大项:油费(按实际里程和当地油价)、保险、保养维修、登记/规费,以及折旧——最容易被忽略的大头,新车总成本里常占 30-40%。结果给出月成本和每公里成本两个数。',
+      },
+      {
+        q: '折旧是怎么估算的?',
+        a: '按车龄和价值套用典型市场曲线:第一年贬值约 15-25%,之后每年 10-15%。把"今天能卖多少钱"和"当时买入价"分别填进去,估算最准。',
+      },
+      {
+        q: '为什么我的每公里成本这么高?',
+        a: '因为固定成本不随里程摊薄:保险、折旧、规费一年跑 5,000 km 和 20,000 km 花得一样多。低年里程用户的每公里成本普遍最高——这正是租车或偶尔打车有时更划算的原因。',
+      },
+      {
+        q: '贷款买车要把利息算进去吗?',
+        a: '要——利息是开车成本的一部分。本工具的月成本不含贷款利息,你可以用配套的车贷计算器算出月供和总利息,再按页面提示并入保险项对比;全款购车则无需此项。',
+      },
+    ],
     ui: {
       'chartTitle': '钱花在哪了',
       'slice.depreciation': '折旧',
@@ -54,6 +78,30 @@ export const CarCostCalculatorL10n: ToolL10n = {
     },
   },
   es: {
+    useCases: [
+      'Calcular el coste total antes de comprar un coche usado: uno de 15 000 € que vale 7 000 € cinco años después se deprecia unos 130 € al mes',
+      'Comparar coche propio frente a taxi o carsharing: 10 000 km al año a 0,35 €/km son 3 500 €, la cifra contra la que medir el abono de transporte',
+      'Presupuestar un coche nuevo antes de firmar: precio, seguro, mantenimiento y reventa entran y sale el coste mensual real',
+      'Decidir cuál de los dos coches de la familia usar a diario comparando su coste por kilómetro',
+    ],
+    faqs: [
+      {
+        q: '¿Qué incluye el "coste real de propiedad"?',
+        a: 'Cinco partidas además de la financiación: combustible (según tu kilometraje y precio local), seguro, mantenimiento y reparaciones, impuestos/tasas y depreciación — la mayor y más ignorada, a menudo el 30-40 % del coste total en coches nuevos. El resultado se muestra como coste mensual y coste por kilómetro.',
+      },
+      {
+        q: '¿Cómo se estima la depreciación?',
+        a: 'A partir de la antigüedad y el valor del vehículo con curvas de mercado típicas: un coche pierde en torno al 15-25 % el primer año y un 10-15 % anual después. Introduce lo que valdría hoy frente a lo que pagaste para el cálculo más preciso.',
+      },
+      {
+        q: '¿Por qué mi coste por kilómetro es tan alto?',
+        a: 'Porque los costes fijos no bajan con poco uso: el seguro, la depreciación y las tasas pesan igual a 5 000 km/año que a 20 000. Quien conduce poco suele tener el coste por km más alto — por eso el carsharing o el alquiler puntual a veces gana.',
+      },
+      {
+        q: '¿Hay que incluir la financiación?',
+        a: 'Sí si pediste un préstamo: los intereses son parte del coste de conducir. Esta herramienta no los suma por sí sola; calcula la cuota en el simulador de préstamo de coche y añádela a la partida de seguro para comparar. Si compraste al contado, déjalo en cero.',
+      },
+    ],
     ui: {
       'chartTitle': 'A dónde va el dinero',
       'slice.depreciation': 'Depreciación',
@@ -102,6 +150,30 @@ export const CarCostCalculatorL10n: ToolL10n = {
     },
   },
   de: {
+    useCases: [
+      'Vor dem Gebrauchtwagenkauf die Gesamtkosten rechnen: 20 000 € Kaufpreis, 9 000 € Restwert nach fünf Jahren — gut 180 € Wertverlust pro Monat',
+      'Eigenes Auto gegen Carsharing oder Taxi stellen: 10 000 km/Jahr bei 0,35 €/km sind 3 500 € — die Vergleichszahl fürs Jahresticket',
+      'Vor der Neuanschaffung budgetieren: Kaufpreis, Versicherung, Wartung und Restwert eingeben, wahre Monatskosten ablesen',
+      'Bei zwei Autos in der Familie die Kosten pro km vergleichen und entscheiden, welches für den Pendelweg bleibt',
+    ],
+    faqs: [
+      {
+        q: 'Was gehört zu den "wahren Kosten der Fahrzeughaltung"?',
+        a: 'Fünf Posten jenseits der Finanzierung: Kraftstoff (nach deiner Fahrleistung und deinem lokalen Preis), Versicherung, Wartung und Reparaturen, Zulassung/Gebühren sowie Wertverlust — der größte und meist ignorierte Posten, bei neueren Autos oft 30-40 % der Gesamtkosten. Das Ergebnis: ein Monatswert plus Kosten pro Kilometer.',
+      },
+      {
+        q: 'Wie wird der Wertverlust geschätzt?',
+        a: 'Aus Fahrzeugalter und Wert über typische Marktkurven: Autos verlieren im ersten Jahr rund 15-25 %, danach 10-15 % pro Jahr. Trage den heutigen Wiederverkaufswert gegenüber dem Kaufpreis ein — so wird die Schätzung am genauesten.',
+      },
+      {
+        q: 'Warum sind meine Kosten pro Kilometer so hoch?',
+        a: 'Weil Fixkosten nicht mit niedriger Fahrleistung schrumpfen: Versicherung, Wertverlust und Zulassung treffen dich bei 5 000 km/Jahr genauso wie bei 20 000. Wenigfahrer haben regelmäßig die höchsten Kilometerkosten — deshalb gewinnt Carsharing manchmal.',
+      },
+      {
+        q: 'Muss ich die Finanzierung einrechnen?',
+        a: 'Ja, wenn du einen Kredit hast — Zinsen sind Teil der Fahrkosten. Dieser Rechner enthält sie nicht; berechne die Rate im Autokredit-Rechner und rechne sie wie auf der Seite angemerkt zur Versicherung dazu. Barzahler lassen den Posten einfach weg.',
+      },
+    ],
     ui: {
       'chartTitle': 'Wohin das Geld geht',
       'slice.depreciation': 'Wertverlust',

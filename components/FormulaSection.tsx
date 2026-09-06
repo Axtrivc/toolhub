@@ -20,9 +20,10 @@ export function FormulaSection({ slug, tool }: { slug: string; tool: ToolMeta })
   const enFormula = getToolFormula(slug)
   if (!enFormula) return null
 
-  // 本地化覆盖(无则回退英文原值)
+  // 本地化覆盖(逐字段合并:缺译字段回退英文原值,variables/example 不因局部覆盖而丢失)
   const l10n = getToolL10n(slug, locale)
-  const formula = l10n?.formula ?? enFormula
+  const formula =
+    enFormula && l10n?.formula ? { ...enFormula, ...l10n.formula } : enFormula
   const name = getToolName(locale, tool.slug, tool.name)
 
   return (
@@ -39,7 +40,17 @@ export function FormulaSection({ slug, tool }: { slug: string; tool: ToolMeta })
           ))}
       </p>
       <pre className="overflow-x-auto">{formula.formula}</pre>
+      {formula.variables && (
+        <p>
+          <strong>{t(locale, 'formulaVariables')}:</strong> {formula.variables}
+        </p>
+      )}
       {formula.explain && <p>{formula.explain}</p>}
+      {formula.example && (
+        <p className="rounded-lg p-4 text-sm" style={{ backgroundColor: 'rgb(var(--bg-subtle))' }}>
+          <strong>{t(locale, 'formulaExample')}:</strong> {formula.example}
+        </p>
+      )}
     </section>
   )
 }

@@ -10,6 +10,16 @@ import {
   type ArticleBlock,
 } from '@/lib/i18n/blog-articles'
 import { mortgageLoanCalculatorsArticle } from '@/lib/i18n/blog-article-finance'
+import { mortgagePitiGuideArticle } from '@/lib/i18n/blog-article-mortgage-piti'
+import { cashAllocationGuideArticle } from '@/lib/i18n/blog-article-cash-allocation'
+import { firePlaybookArticle } from '@/lib/i18n/blog-article-fire-playbook'
+import { saasEconomicsArticle } from '@/lib/i18n/blog-article-saas-economics'
+import { webCryptoGuideArticle } from '@/lib/i18n/blog-article-web-crypto'
+import { metabolismGuideArticle } from '@/lib/i18n/blog-article-metabolism'
+import { llmPricingGuideArticle } from '@/lib/i18n/blog-article-llm-pricing'
+import { pricingMathArticle } from '@/lib/i18n/blog-article-pricing-math'
+import { canineNutritionArticle } from '@/lib/i18n/blog-article-canine-nutrition'
+import { renovationMathArticle } from '@/lib/i18n/blog-article-renovation-math'
 import type { Locale } from '@/lib/i18n'
 
 /**
@@ -31,6 +41,17 @@ import type { Locale } from '@/lib/i18n'
 const ARTICLES: Record<string, Record<Locale, ArticleContent>> = {
   'how-i-built-toolhub': howIBuiltToolHubArticle,
   'mortgage-loan-calculators': mortgageLoanCalculatorsArticle,
+  // ── Pillar 集群(2026-09-05 批次)──
+  'mortgage-piti-and-amortization-guide': mortgagePitiGuideArticle,
+  'hysa-vs-cd-wealth-building-guide': cashAllocationGuideArticle,
+  'fire-movement-retire-early-playbook': firePlaybookArticle,
+  'saas-unit-economics-cac-ltv-churn': saasEconomicsArticle,
+  'client-side-cryptography-web-crypto-guide': webCryptoGuideArticle,
+  'metabolism-fasting-and-calorie-deficit': metabolismGuideArticle,
+  'llm-api-pricing-and-tokenomics': llmPricingGuideArticle,
+  'pricing-strategies-margin-vs-markup': pricingMathArticle,
+  'canine-nutrition-and-calorie-guide': canineNutritionArticle,
+  'home-flooring-and-renovation-math': renovationMathArticle,
 }
 
 /**

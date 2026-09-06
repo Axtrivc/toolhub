@@ -15,6 +15,8 @@ export const discountCalculatorL10n: ToolL10n = {
       { q: '怎么算 5 折(50% off)?', a: '直接把价格减半。50% off 意味着你付一半——这是最简单的折扣计算。' },
       { q: '两个折扣怎么叠加?', a: '不能直接相加。先用第一个折扣算出新价,再用第二个折扣对新价打折。两个 30% off 叠加是总共 51% off,不是 60%。' },
       { q: '「几折/percent off」是什么意思?', a: '指原价被减去的百分比。30% off 表示你付原价的 70%。' },
+      { q: '满减和折扣能直接比吗?', a: '不能。满 300 减 50 在恰好 300 元时相当于约 83 折,买 250 元反而一分不省;折扣对任何金额都成立。把满减折算成等效折扣率再比才公平。' },
+      { q: '怎么识破「先涨价再打折」?', a: '查 30 天内最低价记录或比价工具。若原价是活动前临时抬上去的,标 7 折可能比平日原价还贵;真实折扣只看到手价和历史最低价的差距。' },
     ],
     ui: {
       'chartTitle': '实付 vs 省下',
@@ -43,6 +45,8 @@ export const discountCalculatorL10n: ToolL10n = {
       { q: '¿Cómo calculo el 50 % de descuento?', a: 'Simplemente divide el precio entre dos. 50 % off significa que pagas la mitad — el descuento más fácil de calcular.' },
       { q: '¿Cómo sumo dos descuentos?', a: 'No se suman directamente. Aplica el primer descuento para obtener el nuevo precio, luego aplica el segundo sobre ese nuevo precio. Dos descuentos del 30 % dan un 51 % total, no un 60 %.' },
       { q: '¿Qué significa «porcentaje de descuento»?', a: 'Es el porcentaje en que se reduce el precio original. 30 % off significa que pagas el 70 % del precio original.' },
+      { q: '¿Cómo comparo un descuento con un 2×1?', a: 'Reduce ambos a precio por unidad: un 2×1 equivale a un 50 % de descuento solo si el total pagado es el mismo. Un «segundo al 70 %» sale un 35 % de descuento sobre el conjunto, no un 70 %.' },
+      { q: '¿Mejor un 30 % o 30 € fijos?', a: 'A 100 € son lo mismo; en otros importes no: el porcentaje escala con el precio (gana en compras caras) y el importe fijo favorece a las baratas. Calcula las dos variantes y quédate con el precio final menor.' },
     ],
     ui: {
       'chartTitle': 'Pagas vs ahorras',
@@ -71,6 +75,8 @@ export const discountCalculatorL10n: ToolL10n = {
       { q: 'Wie berechne ich 50 % Rabatt?', a: 'Teile den Preis einfach durch zwei. 50 % off bedeutet, du zahlst die Hälfte — der einfachste Rabatt.' },
       { q: 'Wie addiere ich zwei Rabatte?', a: 'Du addierst sie nicht direkt. Wende den ersten Rabatt an, um den neuen Preis zu erhalten, dann den zweiten auf diesen neuen Preis. Zwei 30 %-Rabatte ergeben zusammen 51 %, nicht 60 %.' },
       { q: 'Was bedeutet „Prozent Rabatt»?', a: 'Es ist der Prozentsatz, um den der Originalpreis gesenkt wird. 30 % off bedeutet, du zahlst 70 % des Originalpreises.' },
+      { q: 'Wie vergleiche ich Rabatt und «3 für 2»?', a: 'Rechne alles auf den Stückpreis um: «3 für 2» entspricht 33 % Rabatt. Ein «20 % auf alles» schlägt eine Staffel («10 % ab 50 €, 20 % ab 100 €») erst, wenn der Warenkorb die Schwelle klar überschreitet.' },
+      { q: 'Ist 30 % von 100 € dasselbe wie 30 € Nachlass?', a: 'Bei 100 € ja, sonst nicht: Prozent skaliert mit dem Preis (lohnt bei teurer Ware), feste Beträge bei günstigen. Im Zweifel beide Varianten durchrechnen und den niedrigeren Endpreis nehmen.' },
     ],
     ui: {
       'chartTitle': 'Du zahlst vs. sparst',

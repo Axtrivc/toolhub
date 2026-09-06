@@ -38,6 +38,7 @@ export const cssShadowGeneratorL10n: ToolL10n = {
       { q: 'box-shadow 的模糊(blur)和扩展(spread)有什么区别？', a: '模糊半径会柔化阴影边缘——数值越大,阴影越柔和、越分散。扩展半径会让阴影本身变大或缩小——正值让它比元素更大,负值让它更小。0 模糊加正扩展会产生一个硬边的副本。' },
       { q: '怎么做毛玻璃效果？', a: '毛玻璃需要三部分:半透明背景(低 alpha 的 rgba)、元素上的 backdrop-filter: blur(...) 以及一条细边框。本工具同时提供这三项,方便你实时调整。注意 backdrop-filter 要求元素背后有内容才能产生模糊。' },
       { q: 'backdrop-filter 所有浏览器都支持吗？', a: '所有现代 Chrome、Edge、Safari(需 -webkit- 前缀)和 Firefox 103+ 都支持。旧浏览器会忽略它,元素则显示为纯色背景。生成的 CSS 已包含 -webkit-backdrop-filter 前缀以兼容 Safari。' },
+      { q: '多层阴影怎么写？', a: 'box-shadow 支持逗号分隔的多层:第一层做近距离接触阴影(0 2px 4px),第二层做扩散的环境阴影(0 8px 24px rgba(0,0,0,0.12))。两三层叠加比单层更接近真实光照,Material Design 的 elevation 就是这个思路。' },
     ],
   },
   es: {
@@ -73,6 +74,7 @@ export const cssShadowGeneratorL10n: ToolL10n = {
       { q: '¿Cuál es la diferencia entre blur y spread de box-shadow?', a: 'El radio de desenfoque (blur) suaviza los bordes de la sombra: valores más altos dan una sombra más suave y difusa. El radio de propagación (spread) agranda o reduce la sombra misma: positivo la hace más grande que el elemento, negativo más pequeña. Un blur de 0 con propagación positiva crea un duplicado de bordes duros.' },
       { q: '¿Cómo hago un efecto glassmorphism?', a: 'El glassmorphism necesita tres partes: un fondo semitransparente (rgba con poco alfa), un backdrop-filter: blur(...) en el elemento y un borde sutil. Esta herramienta expone los tres para que los ajustes en vivo. Ten en cuenta que backdrop-filter requiere que el elemento tenga algo detrás que difuminar.' },
       { q: '¿Funciona backdrop-filter en todos los navegadores?', a: 'Funciona en todos los Chrome, Edge y Safari modernos (con el prefijo -webkit-) y en Firefox 103+. Los navegadores antiguos lo ignoran y el elemento muestra el fondo sólido en su lugar. El CSS generado incluye el prefijo -webkit-backdrop-filter para compatibilidad con Safari.' },
+      { q: '¿Cómo escribo sombras en varias capas?', a: 'box-shadow admite capas separadas por comas: una de contacto cercana (0 2px 4px) y otra ambiental más difusa (0 8px 24px rgba(0,0,0,0.12)). Dos o tres capas se ven más realistas que una sola; es la idea detrás de la elevación de Material Design.' },
     ],
   },
   de: {
@@ -108,6 +110,7 @@ export const cssShadowGeneratorL10n: ToolL10n = {
       { q: 'Was ist der Unterschied zwischen Blur und Spread bei box-shadow?', a: 'Der Blur-Radius weicht die Schattenkanten auf — höhere Werte ergeben einen weicheren, diffuseren Schatten. Der Spread-Radius vergrößert oder verkleinert den Schatten selbst — positiv macht ihn größer als das Element, negativ kleiner. Ein Blur von 0 mit positivem Spread erzeugt eine harte Kante eines Duplikats.' },
       { q: 'Wie erstelle ich einen Glassmorphismus-Effekt?', a: 'Glassmorphismus braucht drei Teile: einen halbtransparenten Hintergrund (rgba mit niedrigem Alpha), ein backdrop-filter: blur(...) auf dem Element und einen dezenten Rand. Dieses Werkzeug bietet alle drei, sodass du sie live einstellen kannst. Beachte, dass backdrop-filter voraussetzt, dass sich etwas hinter dem Element befindet, das verschwommen werden kann.' },
       { q: 'Funktioniert backdrop-filter in allen Browsern?', a: 'Es funktioniert in allen modernen Chrome-, Edge- und Safari-Versionen (mit -webkit-Präfix) sowie in Firefox 103+. Ältere Browser ignorieren es und das Element zeigt stattdessen den deckenden Hintergrund. Das generierte CSS enthält das Präfix -webkit-backdrop-filter für Safari-Kompatibilität.' },
+      { q: 'Wie schreibe ich Schatten in mehreren Ebenen?', a: 'box-shadow akzeptiert kommagetrennte Ebenen: eine nahe Kontaktschicht (0 2px 4px) und eine diffusere Umgebungsschicht (0 8px 24px rgba(0,0,0,0.12)). Zwei bis drei Ebenen wirken realistischer als eine einzige — genau das Prinzip hinter der Elevation von Material Design.' },
     ],
   },
 }

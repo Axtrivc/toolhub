@@ -28,6 +28,9 @@ export const percentileCalculatorL10n: ToolL10n = {
     ],
     faqs: [
       { q: '百分位多少算「好」?', a: '要看场景。标准化考试中,第 90 百分位以上算优秀。健康指标方面,落在第 5–95 百分位之间通常都算正常。收入方面,百分位越高表示相对同侪收入越高。' },
+      { q: '监控里的 p95 延迟是什么?', a: '把请求响应时间排序后取第 95 百分位:95% 的请求比它快。平均值会掩盖长尾——均值 80 ms 时可能仍有一半请求超过 200 ms,p95/p99 才暴露这类尖刺。' },
+      { q: '和 Excel 的 PERCENTILE.INC 一致吗?', a: '一致。工具用 inclusive 线性插值,与 Excel 的 PERCENTILE.INC 和 numpy 默认的 linear 方法相同;PERCENTILE.EXC 与 SPSS 用排他口径,数值会略有出入。' },
+      { q: '孩子的身高在第几百分位算正常?', a: '生长曲线第 3–97 百分位之间都属正常;关键是轨迹稳定——沿自己的百分位线走就没问题,短期内跨越两条线以上才需要就医评估。' },
     ],
   },
   es: {
@@ -53,6 +56,9 @@ export const percentileCalculatorL10n: ToolL10n = {
     ],
     faqs: [
       { q: '¿Qué percentil se considera "bueno"?', a: 'Depende del contexto. En los exámenes estandarizados, el percentil 90 o superior es excelente. En las métricas de salud, cualquier valor entre los percentiles 5 y 95 suele ser normal. En los ingresos, un percentil más alto significa más ingresos en relación con tus iguales.' },
+      { q: '¿Qué es la latencia p95 de la monitorización?', a: 'Ordena los tiempos de respuesta y toma el percentil 95: el 95 % de las peticiones son más rápidas. La media engaña — con una media de 80 ms puede haber la mitad de las peticiones por encima de 200 ms; p95 y p99 revelan esos picos.' },
+      { q: '¿Coincide con el PERCENTILE.INC de Excel?', a: 'Sí: interpolación lineal inclusiva, igual que PERCENTILE.INC de Excel y el método linear por defecto de numpy. Otras convenciones (PERCENTILE.EXC, SPSS) excluyen extremos y dan valores ligeramente distintos.' },
+      { q: '¿Qué percentil de talla es normal en niños?', a: 'Entre los percentiles 3 y 97 (curvas de la OMS) se considera normal; lo importante es la trayectoria: si el niño sigue su propia curva, va bien. Cruzar dos líneas percentiles de repente es lo que motiva una consulta.' },
     ],
   },
   de: {
@@ -78,6 +84,9 @@ export const percentileCalculatorL10n: ToolL10n = {
     ],
     faqs: [
       { q: 'Was ist ein „guter" Perzentilwert?', a: 'Es hängt vom Kontext ab. Bei standardisierten Tests ist das 90. Perzentil oder höher ausgezeichnet. Bei Gesundheitskennwerten ist alles zwischen dem 5. und 95. Perzentil meist normal. Beim Einkommen bedeuten höhere Perzentile mehr Einkommen im Vergleich zu den Gleichaltrigen.' },
+      { q: 'Was ist die p95-Latenz im Monitoring?', a: 'Sortiere die Antwortzeiten und nimm den 95. Wert: 95 % der Anfragen sind schneller. Der Mittelwert verschleiert den langen Schwanz — bei 80 ms Schnitt können trotzdem die Hälfte der Anfragen über 200 ms liegen; p95 und p99 zeigen diese Spitzen.' },
+      { q: 'Entspricht das Excel PERCENTILE.INC?', a: 'Ja: lineare Interpolation, inklusive Methode — wie Excel PERCENTILE.INC und der numpy-Standard linear. Andere Konventionen (PERCENTILE.EXC, SPSS) schließen die Ränder aus und liefern leicht andere Werte.' },
+      { q: 'Welches Perzentil ist bei Kindern normal?', a: 'Zwischen dem 3. und 97. Perzentil (WHO-Kurven) gilt die Größe als normal; entscheidend ist der Verlauf: Bleibt das Kind auf seiner Kurve, ist alles in Ordnung. Ein plötzlicher Sprung um zwei Perzentillinien ist der Anlass für den Kinderarzt.' },
     ],
   },
 }

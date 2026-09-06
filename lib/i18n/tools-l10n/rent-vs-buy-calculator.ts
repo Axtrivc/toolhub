@@ -11,6 +11,8 @@ export const rentVsBuyCalculatorL10n: ToolL10n = {
       { q: '这个计算器考虑房价上涨吗?', a: '不考虑——这个简化版本忽略了升值,而那是买房的一大好处。但它也忽略了把首付款投入股市的机会成本。完整的租买模型会同时纳入两者。从历史看,美国房价每年升值约 3-4%,大致跟通胀持平。' },
       { q: '怎么判断自己会住得够久?', a: '工作稳定性、感情状况和学区是常见的信号。一个好的经验法则:有把握至少住 5 年,理想是 7-10 年。你每多住一年,成交成本就被摊得更薄,数学上更有利于买房。' },
       { q: '房贷利息的税前扣除怎么算?', a: '自 2017 年美国税改后,更高的标准扣除额(2024 年单身 $14,600 / 已婚 $29,200)意味着大多数房主不再逐项列报,所以房贷利息扣除帮到的人比以前少。只有当你的逐项扣除总额明显超过标准扣除额时,才指望得上。' },
+      { q: '买房还有哪些成本没被算进来?', a: '契税(1%–3%)、中介费(约 1%–2%)、贷款评估与抵押登记费,以及持有期的物业费和维修,粗略合计房价的 3%–6%。持有年限越短,这些成本越摊不薄,对比结果就越不利于买房。' },
+      { q: '利率对结论的影响有多大?', a: '很大:100 万元贷款 30 年,利率从 4.2% 降到 3.5%,月供约少 390 元,30 年总利息省约 14 万。先按最新 LPR 和你实际能拿到的利率重算一遍,再下结论。' },
     ],
     ui: {
       errYears: '请输入大于 0 的年数',
@@ -30,6 +32,8 @@ export const rentVsBuyCalculatorL10n: ToolL10n = {
       { q: '¿Considera la subida del valor de la vivienda?', a: 'No — esta versión simplificada ignora la revalorización, que es un gran beneficio de comprar. Pero también ignora el coste de oportunidad de invertir tu entrada en bolsa. Los modelos completos de alquilar vs. comprar incluyen ambos. Históricamente, las viviendas en EE. UU. se revalorizan un 3-4 % anual, más o menos como la inflación.' },
       { q: '¿Cómo sé si me quedaré el tiempo suficiente?', a: 'La estabilidad laboral, la situación sentimental y los distritos escolares son las señales habituales. Una buena regla: ten confianza en quedarte al menos 5 años, idealmente 7-10. Cada año extra diluye más los gastos de cierre y inclina la balanza hacia comprar.' },
       { q: '¿Y la deducción fiscal por intereses de la hipoteca?', a: 'Desde el cambio fiscal de 2017 en EE. UU., el mayor mínimo deducible ($14,600 soltero / $29,200 matrimonio en 2024) hace que la mayoría de propietarios ya no detallen, así que la deducción por intereses beneficia a menos gente que antes. Cuenta con ella solo si tus deducciones detalladas superan claramente el mínimo.' },
+      { q: '¿Qué gastos de compra quedan fuera del cálculo?', a: 'Impuestos de compraventa (ITP o IVA), notaría y registro, comisión inmobiliaria, reforma y mantenimiento anual; en España suman en torno al 8-12 % del precio. Cuanto más corto el periodo, más pesan estos costes contra la compra.' },
+      { q: '¿Cuánto cambia el resultado con el tipo de interés?', a: 'Mucho: una hipoteca de 200 000 € a 30 años pasa de unos 843 €/mes al 3 % a unos 1.013 € al 4,5 % — 170 € más al mes y más de 60 000 € de intereses en total. Recalcula con el tipo real que te ofrezcan antes de decidir.' },
     ],
     ui: {
       errYears: 'Introduce un número de años mayor que 0',
@@ -49,6 +53,8 @@ export const rentVsBuyCalculatorL10n: ToolL10n = {
       { q: 'Berücksichtigt das eine Wertsteigerung der Immobilie?', a: 'Nein — diese vereinfachte Version ignoriert die Wertsteigerung, die ein großer Vorteil des Kaufens ist. Sie ignoriert aber auch die Opportunitätskosten, dein Eigenkapital in Aktien zu investieren. Vollwertige Miet-Kauf-Modelle beides ein. Historisch steigen US-Immobilien um 3-4 % pro Jahr, grob wie die Inflation.' },
       { q: 'Wie weiß ich, ob ich lange genug bleibe?', a: 'Jobsicherheit, Beziehungsstatus und Schulbezirke sind die üblichen Signale. Eine gute Faustregel: sei dir sicher, mindestens 5 Jahre zu bleiben, idealerweise 7-10. Jedes weitere Jahr verteilt die Abschlusskosten dünner und kippt die Rechnung weiter Richtung Kauf.' },
       { q: 'Was ist mit dem Steuerabzug für Hypothekenzinsen?', a: 'Seit der US-Steuerreform 2017 bedeutet der höhere Pauschbetrag ($14,600 Single / $29,200 Verheiratet 2024), dass die meisten Eigentümer nicht mehr itemisieren, also hilft der Hypothekenzinsabzug weniger Leuten als früher. Rechne nur damit, wenn deine itemisierten Abzüge den Pauschbetrag deutlich übersteigen.' },
+      { q: 'Welche Kaufnebenkosten fehlen in dieser Rechnung?', a: 'Grunderwerbsteuer (3,5-6,5 % je nach Bundesland), Notar und Grundbuch (~2 %), ggf. Maklerprovision (bis 7,14 %) plus Instandhaltung von rund 1 % des Kaufpreises pro Jahr. In vielen Städten kommen so über 10 % zusammen — bei kurzer Wohnzeit kippt das die Rechnung Richtung Mieten.' },
+      { q: 'Warum die Zinsbindung mitdenken?', a: 'Mit 10 Jahren Zinsbindung ist die Rate planbar, aber die Anschlussfinanzierung kann teurer werden. Rechne konservativ mit 0,5-1 Prozentpunkt mehr bei der Folgefinanzierung, sonst schönt der Vergleich das Kaufen.' },
     ],
     ui: {
       errYears: 'Gib eine Anzahl von Jahren größer als 0 ein',

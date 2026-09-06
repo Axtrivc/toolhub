@@ -57,6 +57,10 @@ export const wordleSolverL10n: ToolL10n = {
         q: '支持易位构词和模式解算吗?',
         a: '支持。除了标准的提示过滤,它还能匹配易位构词模式和已知字母位置,当你有打乱的字母或部分信息、想找出所有符合条件的词典单词时很有帮助。',
       },
+      {
+        q: '为什么不建议直接抄第一个候选词?',
+        a: '列表默认按词典词频排序,但 Wordle 的博弈价值不完全等于词频:候选剩好几个时,先试一个含未测高频字母的词(哪怕不是候选)常常更快锁定答案。把解算器当过滤引擎,而不是答案生成器。',
+      },
     ],
   },
   es: {
@@ -111,6 +115,10 @@ export const wordleSolverL10n: ToolL10n = {
         q: '¿Admite anagramas y resolución por patrón?',
         a: 'Sí. Además de los filtros estándar de pistas, puede casar patrones de anagrama y posiciones de letra conocidas, lo que ayuda cuando tienes letras revueltas o información parcial y quieres todas las palabras del diccionario que encajan.',
       },
+      {
+        q: '¿Por qué no conviene probar el primer candidato tal cual?',
+        a: 'La lista sale ordenada por frecuencia de diccionario, pero el valor de una jugada no es solo la frecuencia: cuando quedan varios candidatos, una palabra de sondeo con letras aún sin probar (aunque no sea candidata) suele acotar antes. Usa el solucionador como filtro, no como generador de respuestas.',
+      },
     ],
   },
   de: {
@@ -164,6 +172,10 @@ export const wordleSolverL10n: ToolL10n = {
       {
         q: 'Werden Anagramm- und Musterlösen unterstützt?',
         a: 'Ja. Neben den Standard-Hinweisfiltern kann es Anagramm-Muster und bekannte Buchstabenpositionen matchen, was hilft, wenn du vertauschte Buchstaben oder Teilinformationen hast und jedes passende Wort aus dem Wörterbuch finden willst.',
+      },
+      {
+        q: 'Warum einfach den ersten Kandidaten raten?',
+        a: 'Die Liste ist standardmäßig nach Worthäufigkeit sortiert, aber der Spielwert eines Wortes ist mehr als Frequenz: Bleiben mehrere Kandidaten, grenzt ein Sondierungswort mit ungetesteten Buchstaben (auch wenn es kein Kandidat ist) oft schneller ein. Nutze den Löser als Filter, nicht als Antwortgenerator.',
       },
     ],
   },

@@ -55,6 +55,10 @@ export const secretKeyGeneratorL10n: ToolL10n = {
         q: '十六进制和 Base64 输出有什么区别?',
         a: '在随机量相同的情况下,十六进制只用 0-9 和 a-f(字符串更长),Base64 用更大的字符表(字符串更短)。在相同位数下两者同样安全——选你下游系统期望的那种即可。',
       },
+      {
+        q: 'UUID v4 能当密钥用吗?',
+        a: '有折中:UUID v4 只含 122 位随机量,低于 128 位的 hex 串,连字符还让它更占位。当 request ID 或数据库主键很合适;API 密钥这类安全凭据建议用 256 位 hex 或 Base64。',
+      },
     ],
   },
   es: {
@@ -107,6 +111,10 @@ export const secretKeyGeneratorL10n: ToolL10n = {
         q: '¿Cuál es la diferencia entre salida hexadecimal y Base64?',
         a: 'Para la misma cantidad de aleatoriedad, hex usa solo 0-9 y a-f (cadena más larga), mientras que Base64 usa un alfabeto mayor (cadena más corta). Ambos son igual de seguros a igual longitud de bits; elige el que espere tu sistema consumidor.',
       },
+      {
+        q: '¿Sirve un UUID v4 como secreto?',
+        a: 'Con matices: un UUID v4 lleva 122 bits aleatorios, menos que 128 bits en hex, y los guiones lo alargan. Como identificador (request ID, clave primaria) es perfecto; para secretos de API prefiere 256 bits en hex o Base64.',
+      },
     ],
   },
   de: {
@@ -158,6 +166,10 @@ export const secretKeyGeneratorL10n: ToolL10n = {
       {
         q: 'Was ist der Unterschied zwischen Hex- und Base64-Ausgabe?',
         a: 'Bei gleicher Zufälligkeit verwendet Hex nur 0-9 und a-f (längerer String), Base64 ein größeres Alphabet (kürzerer String). Beide sind bei gleicher Bitlänge gleich sicher — wähle, was dein verarbeitendes System erwartet.',
+      },
+      {
+        q: 'Taugt ein UUID v4 als Secret?',
+        a: 'Mit Einschränkung: Ein UUID v4 enthält nur 122 Zufallsbits, weniger als 128 Bit in Hex, und die Bindestriche verlängern den String. Als ID (Request-ID, Primärschlüssel) ideal; für API-Secrets besser 256 Bit als Hex oder Base64.',
       },
     ],
   },

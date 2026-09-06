@@ -49,6 +49,9 @@ export const bodyFatCalculatorL10n: ToolL10n = {
     ],
     faqs: [
       { q: '美国海军法准吗?', a: '与 DEXA 扫描相比,误差约为 ±3–4 %。对接近平均体型的人最准。对非常精瘦或肌肉发达的人,皮褶钳、DEXA、水下称重等方法更准确。' },
+      { q: '男女的健康体脂范围各是多少?', a: 'ACE 参考:必需脂肪男性 2–5 %、女性 10–13 %;运动员 6–13 % 与 14–20 %;健康体型 14–17 % 与 21–24 %。女性必需脂肪天然更高,拿男性标准套自己是错的。' },
+      { q: '怎么测量误差最小?', a: '固定条件:早晨起床、排空膀胱、未训练时量。皮尺贴皮肤不勒紧,颈围在喉结下方,腰围在肚脐水平(女性另加最大臀围);同一部位量三次取中位数。' },
+      { q: '和健身房的 InBody 比哪个准?', a: '生物电阻抗(InBody 等)误差同样在 ±3–4 %,且对饮水、进食敏感。皮尺法的优势是可复现:同样手法每天量,趋势一致——减脂看趋势,别纠结单次绝对值。' },
     ],
   },
   es: {
@@ -93,6 +96,9 @@ export const bodyFatCalculatorL10n: ToolL10n = {
     ],
     faqs: [
       { q: '¿Es preciso el método de la Marina?', a: 'Tiene un margen de error de unos ±3–4 % frente a un escáner DEXA. Funciona mejor en personas cercanas a la composición corporal promedio. Para personas muy magras o muy musculosas, otros métodos (plicómetro, DEXA, pesaje bajo el agua) son más precisos.' },
+      { q: '¿Qué rangos de grasa son saludables?', a: 'Referencias ACE: grasa esencial, 2-5 % en hombres y 10-13 % en mujeres; atletas, 6-13 % y 14-20 %; en forma, 14-17 % y 21-24 %. La grasa esencial femenina es mayor: no apliques criterios masculinos a tu resultado.' },
+      { q: '¿Cómo mido para equivocarme lo mínimo?', a: 'Siempre en las mismas condiciones: por la mañana, en ayunas y sin entrenar antes. Cinta apoyada sin apretar; cuello bajo la laringe, cintura a la altura del ombligo (mujeres, además, la cadera en su punto más ancho). Mide tres veces y toma la mediana.' },
+      { q: '¿Y frente a la báscula de bioimpedancia del gimnasio?', a: 'La bioimpedancia (InBody y similares) falla también ±3–4 % y es sensible a la hidratación y a la última comida. La cinta gana en reproducibilidad: misma técnica cada día; en una dieta importa la tendencia, no el número suelto.' },
     ],
   },
   de: {
@@ -137,6 +143,9 @@ export const bodyFatCalculatorL10n: ToolL10n = {
     ],
     faqs: [
       { q: 'Wie genau ist die Navy-Methode?', a: 'Sie hat eine Abweichung von etwa ±3–4 % gegenüber DEXA-Scans. Am besten funktioniert sie bei Menschen mit durchschnittlicher Körperzusammensetzung. Für sehr schlanke oder sehr muskulöse Personen sind andere Methoden (Caliper, DEXA, Unterwassergewicht) genauer.' },
+      { q: 'Welche Fettwerte sind gesund?', a: 'ACE-Referenz: essentiell 2-5 % (Männer) bzw. 10-13 % (Frauen); Sportler 6-13 % und 14-20 %; fit 14-17 % und 21-24 %. Frauen brauchen naturgemäß mehr Fett — männliche Tabellen auf Frauen anzuwenden ist falsch.' },
+      { q: 'Wie messe ich mit minimalem Fehler?', a: 'Immer gleiche Bedingungen: morgens, nüchtern, ohne vorheriges Training. Maßband anlegen, ohne zu drücken; Hals unter dem Kehlkopf, Taille auf Nabelhöhe (Frauen zusätzlich die Hüfte an der breitesten Stelle). Dreimal messen, Median nehmen.' },
+      { q: 'Und verglichen mit der BIA-Waage im Studio?', a: 'Bioimpedanz (InBody & Co.) liegt ebenfalls bei ±3–4 % Abweichung und reagiert stark auf Trinkmenge und letzte Mahlzeit. Das Maßband punktet mit Reproduzierbarkeit: gleiche Technik täglich — bei einer Diät zählt der Trend, nicht der Einzelwert.' },
     ],
   },
 }

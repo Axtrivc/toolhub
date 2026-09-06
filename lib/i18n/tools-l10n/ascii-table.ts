@@ -11,6 +11,8 @@ export const AsciiTableL10n: ToolL10n = {
       { q: '表格覆盖哪些码位?', a: '0-127,即真正的 ASCII 集。控制字符(0-31)不可打印、按名称显示(NUL、LF、ESC……),32-126 可打印,127 是 DEL。128 以上属于扩展编码或 Unicode,是另一回事。' },
       { q: '怎么查最快?', a: '直接输入字符("A")、十进制(65)、十六进制(41)或二进制,表格对任意列实时过滤。比如搜 ESC 立刻定位到 27 号的转义字符。' },
       { q: '换行为什么是控制字符?', a: 'LF(10)是电传打字机时代 ASCII 的换行符;Windows 后来把它和 CR(13)组合成 CRLF。两者都是控制码——这段历史正是 Windows 与 Unix 系统换行符至今不同的原因。' },
+      { q: 'ASCII 和 Unicode 是什么关系?', a: 'ASCII 是 1963 年定稿的 7 位编码;Unicode 把它原样收进最前面的 0-127 码位,UTF-8 中这些字符仍只占 1 字节。所以 ASCII 是 UTF-8 的基础子集,记住它不亏。' },
+      { q: '哪些码位最值得背下来?', a: '高频组:字符 0 是 48(到 9 是 57),A 是 65(到 Z 是 90),a 是 97(到 z 是 122)。判断"是否数字"、大小写转换(相差 32)、手写进制转换全靠这几组。' },
     ],
     ui: {
       'note': '🔢 ASCII 覆盖 0-127。控制字符(0-31)有名字但不可打印;127 是 DEL。再往上属于扩展编码或 Unicode。',
@@ -23,6 +25,8 @@ export const AsciiTableL10n: ToolL10n = {
       { q: '¿Qué rango cubre la tabla?', a: 'Los códigos 0-127, el conjunto ASCII genuino. Los caracteres de control (0-31) no son imprimibles y se muestran por nombre (NUL, LF, ESC…), del 32 al 126 son imprimibles y el 127 es DEL. Por encima de 127 empiezan las codificaciones extendidas y Unicode: otra historia.' },
       { q: '¿Cómo busco rápido?', a: 'Escribe un carácter («A»), un decimal (65), un hexadecimal (41) o binario y la tabla filtra en vivo por cualquier columna. Buscar ESC salta directo al carácter de escape, código 27.' },
       { q: '¿Por qué el salto de línea es un carácter de control?', a: 'LF (10) era el separador de líneas del ASCII de las teleimpresoras; Windows luego lo emparejó con CR (13) para formar CRLF. Ambos son códigos de control — ese legado explica que los finales de línea sigan distintos entre Windows y Unix.' },
+      { q: '¿Qué relación hay entre ASCII y Unicode?', a: 'ASCII se fijó en 1963 como código de 7 bits; Unicode lo adopta tal cual en sus primeras 127 posiciones y en UTF-8 esos caracteres siguen ocupando 1 byte. ASCII es el subconjunto base de UTF-8: aprendérselo sigue rindiendo.' },
+      { q: '¿Qué códigos conviene memorizar?', a: 'Los grupos altos: «0» es 48 (hasta 9 = 57), «A» es 65 (Z = 90), «a» es 97 (z = 122). Con eso validas dígitos, conviertes mayúsculas/minúsculas (difieren en 32) y haces conversiones de base a mano.' },
     ],
     ui: {
       'note': '🔢 ASCII cubre 0-127. Los caracteres de control (0-31) tienen nombre pero no se imprimen; 127 es DEL. Más allá es extendido o Unicode.',
@@ -35,6 +39,8 @@ export const AsciiTableL10n: ToolL10n = {
       { q: 'Welchen Bereich deckt die Tabelle ab?', a: 'Die Codes 0-127, das echte ASCII-Set. Steuerzeichen (0-31) sind nicht druckbar und werden namentlich gezeigt (NUL, LF, ESC…), 32-126 sind druckbar, 127 ist DEL. Alles darüber ist Extended-Encoding oder Unicode — ein anderes Kapitel.' },
       { q: 'Wie suche ich am schnellsten?', a: 'Tippe ein Zeichen („A“), ein Dezimal (65), ein Hex (41) oder Binär — die Tabelle filtert live über alle Spalten. Die Suche ESC springt direkt zum Escape-Zeichen auf Code 27.' },
       { q: 'Warum ist der Zeilenumbruch ein Steuerzeichen?', a: 'LF (10) war ASCIIs Zeilentrenner aus Fernschreiber-Tagen; Windows koppelte ihn später mit CR (13) zum CRLF. Beides sind Steuercodes — genau dieses Erbe erklärt, warum Windows und Unix bis heute unterschiedliche Zeilenenden haben.' },
+      { q: 'Wie hängen ASCII und Unicode zusammen?', a: 'ASCII wurde 1963 als 7-Bit-Code festgelegt; Unicode übernimmt es unverändert in den ersten 127 Positionen, und in UTF-8 belegen diese Zeichen weiterhin 1 Byte. ASCII ist die Basis-Teilmenge von UTF-8 — auswendig kennen lohnt sich.' },
+      { q: 'Welche Codes sollte man kennen?', a: 'Die Kerngruppen: „0" ist 48 (bis 9 = 57), „A" ist 65 (Z = 90), „a" ist 97 (z = 122). Damit prüfst du Ziffern, wandelst Groß-/Kleinschreibung (Differenz 32) um und rechnest Zahlenbasen von Hand.' },
     ],
     ui: {
       'note': '🔢 ASCII deckt 0-127 ab. Steuerzeichen (0-31) sind benannt, aber nicht druckbar; 127 ist DEL. Darüber hinaus: Erweiterungen oder Unicode.',

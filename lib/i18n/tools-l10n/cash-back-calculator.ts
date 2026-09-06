@@ -13,6 +13,7 @@ export const cashBackCalculatorL10n: ToolL10n = {
       { q: '积分还是返现?', a: '返现更简单、价值确定。积分如果兑换旅行（尤其商务/头等舱）可能更值，但更费力且价值波动。' },
       { q: '什么时候有年费的卡才划算?', a: '当你每年的奖励超过年费时。用年费除以返现比例就能找到盈亏平衡消费额——$95 年费、3% 餐饮返现的卡，盈亏平衡点大约是每年 $3,167 餐饮消费。低于这个数，免年费卡更划算。' },
       { q: '返现奖励会过期吗?', a: '账户正常使用期间通常不会过期，但关卡或长期不活跃时发卡机构可能没收奖励。积分项目可能随时间贬值，而返现以对账单抵扣的形式保持固定美元价值。' },
+      { q: '多张卡搭配返现有意义吗?', a: '有——用 5% 类别卡（餐饮、加油、超市）叠加 2% 全能卡，消费重的家庭一年能多拿 $300-500。注意各卡需要激活的季度类别和奖励上限，没激活就拿不到高比例。' },
     ],
     formula: { formula: FORMULA, explain: '将每个类别的消费乘以其返现比例，跨类别求和，再减去卡年费。额外比例仅在其季度或年度消费上限内适用。' },
     ui: {
@@ -33,6 +34,7 @@ export const cashBackCalculatorL10n: ToolL10n = {
       { q: '¿Puntos o reembolso en efectivo?', a: 'El reembolso es más sencillo y de valor garantizado. Los puntos pueden valer más si se canjean por viajes (especialmente negocios/primera clase), pero requieren más esfuerzo y su valor varía.' },
       { q: '¿Cuándo compensa una tarjeta con anualidad?', a: 'Cuando tus recompensas anuales superan la cuota. Divide la anualidad entre la tasa de reembolso para hallar el gasto de equilibrio — una cuota de 95 $ en una tarjeta con 3 % en restaurantes se equilibra con unos 3 167 $ de gasto anual en restaurantes. Por debajo de eso, la tarjeta sin cuota es mejor.' },
       { q: '¿Caducan las recompensas de reembolso?', a: 'Normalmente no mientras la cuenta permanezca abierta y al corriente, pero los emisores pueden incautarlas al cierre o tras una inactividad prolongada. Los programas de puntos pueden devaluarse con el tiempo, mientras que el reembolso acreditado en el estado de cuenta mantiene un valor fijo en dólares.' },
+      { q: '¿Hay que declarar el cashback?', a: 'El reembolso ligado a tu gasto cuenta como descuento del precio, no como ingreso, así que en España no tributa en el IRPF. Las primas de bienvenida sin consumo asociado son otra historia: en EE. UU. el banco puede emitir un 1099 a partir de 600 $ al año.' },
     ],
     formula: { formula: FORMULA, explain: 'Multiplica el gasto de cada categoría por su tasa de recompensa, suma todas las categorías y resta la cuota anual de la tarjeta. Las tasas bonus solo se aplican hasta sus límites trimestrales o anuales.' },
     ui: {
@@ -53,6 +55,7 @@ export const cashBackCalculatorL10n: ToolL10n = {
       { q: 'Punkte oder Cashback?', a: 'Cashback ist einfacher und garantiert wertbeständig. Punkte können beim Einlösen für Reisen (besonders Business/First Class) mehr wert sein, erfordern aber mehr Aufwand und schwanken im Wert.' },
       { q: 'Wann lohnt sich eine Karte mit Jahresgebühr?', a: 'Wenn deine jährlichen Prämien die Gebühr übersteigen. Teile die Jahresgebühr durch die Bonusrate, um die Break-even-Ausgaben zu finden — eine 95 $-Gebühr bei 3 % Restaurant-Cashback rechnet sich bei etwa 3 167 $ Restaurantausgaben pro Jahr. Darunter ist die gebührenfreie Karte besser.' },
       { q: 'Verfallen Cashback-Prämien?', a: 'In der Regel nicht, solange das Konto offen und in gutem Stand ist, aber Aussteller können Prämien bei Schließung oder langer Inaktivität einbehalten. Punkteprogramme können mit der Zeit abgewertet werden, während Cashback als Gutschrift einen festen Dollarwert behält.' },
+      { q: 'Warum ist Cashback in Deutschland niedriger als in den USA?', a: 'Weil der EU-Interchange-Deckel Kartenunternehmen nur 0,3 % (Kredit) bzw. 0,2 % (Debit) lässt — üblich sind hier 0,5-1 % oder Punkte statt 2-5 %. Die Break-even-Rechnung gegen die Jahresgebühr funktioniert trotzdem genauso.' },
     ],
     formula: { formula: FORMULA, explain: 'Multipliziere die Ausgaben jeder Kategorie mit ihrer Bonusrate, summiere über alle Kategorien und ziehe die Jahresgebühr der Karte ab. Bonusraten gelten nur bis zu ihren quartals- oder jahresweisen Obergrenzen.' },
     ui: {

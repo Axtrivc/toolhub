@@ -48,6 +48,10 @@ export const randomChoicePickerL10n: ToolL10n = {
         q: '会保留历史抽取记录吗?',
         a: '会,最近的结果会保留在历史列表里,方便你回顾多轮抽取中都抽到了什么。这在跑好几轮、需要确认没人被漏掉或重复抽取时很有帮助。',
       },
+      {
+        q: '「不重复中奖」和「抽中后移除」有什么区别?',
+        a: '不重复中奖限制单次抽取:同一轮里每个选项最多中一次(不放回采样);抽中后移除则把该选项从列表里删掉,影响之后所有轮次。一次发完若干奖品用前者,逐步划掉名单上的人用后者。',
+      },
     ],
   },
   es: {
@@ -93,6 +97,10 @@ export const randomChoicePickerL10n: ToolL10n = {
         q: '¿Mantiene un historial de selecciones pasadas?',
         a: 'Sí, los resultados recientes se guardan en un historial para que revises lo elegido en varias extracciones. Útil al hacer varias rondas y necesitar confirmar que nadie se saltó ni se eligió dos veces.',
       },
+      {
+        q: '¿En qué se diferencian «sin repetir ganadores» y «quitar ganador tras elegir»?',
+        a: 'La primera limita una sola extracción: dentro de la misma ronda cada opción gana como mucho una vez (muestreo sin reemplazo). La segunda elimina la opción de la lista y afecta a todas las rondas siguientes. Para repartir varios premios de una vez usa la primera; para tachar nombres ronda a ronda, la segunda.',
+      },
     ],
   },
   de: {
@@ -137,6 +145,10 @@ export const randomChoicePickerL10n: ToolL10n = {
       {
         q: 'Wird ein Verlauf vergangener Ziehungen behalten?',
         a: 'Ja, letzte Ergebnisse bleiben in einer Verlaufsliste, sodass du überprüfen kannst, was über mehrere Ziehungen hinweg gewählt wurde. Hilfreich, wenn du mehrere Runden durchführst und sicherstellen willst, dass niemand übersprungen oder doppelt gezogen wurde.',
+      },
+      {
+        q: 'Worin unterscheiden sich „keine wiederholten Gewinner“ und „Gewinner nach dem Ziehen entfernen“?',
+        a: 'Ersteres begrenzt eine einzige Ziehung: innerhalb derselben Runde gewinnt jede Option höchstens einmal (Ziehen ohne Zurücklegen). Letzteres streicht die Option dauerhaft aus der Liste und wirkt auf alle künftigen Runden. Für mehrere Preise auf einmal Ersteres, um Namen Runde für Runde abzuhaken, Letzteres.',
       },
     ],
   },

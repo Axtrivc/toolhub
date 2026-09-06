@@ -55,6 +55,14 @@ export const srtSubtitleShiftL10n: ToolL10n = {
         q: '能剥离 HTML 和 ASS 格式标签吗?',
         a: '能。剥离标签选项会移除行内 HTML(<i>、<b>)和 ASS 样式覆盖标签,留下干净的纯文本字幕。当播放器把标签当成可见乱码而非样式来渲染时,这个功能很有用。',
       },
+      {
+        q: '需要的偏移量怎么估?',
+        a: '挑一句台词:看播放器里角色开口的时间,减去字幕出现的时间,差值就是要填的偏移,精确到 0.5 秒通常足够。全片延迟一致时一次搞定;如果偏差随播放进度变大,那是帧率(FPS)错配,偏移修不了。',
+      },
+      {
+        q: '处理后的文件能直接用吗?',
+        a: '能,输出是重新编号的标准 SRT,PotPlayer、VLC、IINA 等直接加载。整个处理在浏览器本地完成,字幕文件不上传;源文件若带 ASS 块或 ♪ 符号,勾选「剥离格式」后导入播放器更干净。',
+      },
     ],
   },
   es: {
@@ -107,6 +115,14 @@ export const srtSubtitleShiftL10n: ToolL10n = {
         q: '¿Puede eliminar etiquetas de formato HTML y ASS?',
         a: 'Sí. La opción de quitar etiquetas elimina el HTML en línea (<i>, <b>) y las etiquetas de anulación de estilo ASS, dejando subtítulos limpios en texto plano. Es útil cuando un reproductor muestra las etiquetas como galimatías visible en vez de aplicar estilo.',
       },
+      {
+        q: '¿Cómo calculo el desfase necesario?',
+        a: 'Apunta a una frase concreta: mira en qué tiempo la voz dice la línea (el reproductor lo muestra) y cuándo aparece el subtítulo; la diferencia es el desfase, con 0,5 segundos de precisión basta. Si el retraso crece a lo largo del vídeo, no es un desfase: es un mismatch de FPS y el offset no lo corrige.',
+      },
+      {
+        q: '¿El archivo resultante sirve tal cual?',
+        a: 'Sí, la salida es SRT estándar con índices renumerados; VLC, MPC-HC o IINA la cargan sin tocar nada. Todo se procesa en el navegador y el archivo no se sube; si el original trae bloques ASS o símbolos ♪, marca «Quitar formato» para dejarlo limpio.',
+      },
     ],
   },
   de: {
@@ -158,6 +174,14 @@ export const srtSubtitleShiftL10n: ToolL10n = {
       {
         q: 'Können HTML- und ASS-Format-Tags entfernt werden?',
         a: 'Ja. Die Option zum Tag-Entfernen löscht Inline-HTML (<i>, <b>) und ASS-Stil-Override-Tags und lässt saubere Klartext-Untertitel zurück. Das hilft, wenn ein Player die Tags als sichtbaren Zeichensalat statt als Formatierung rendert.',
+      },
+      {
+        q: 'Wie ermittle ich die nötige Verschiebung?',
+        a: 'Nimm einen konkreten Satz: Wann sagt die Stimme den Text (der Player zeigt es) und wann erscheint der Untertitel? Die Differenz ist der Offset, 0,5 Sekunden Genauigkeit genügt. Wächst der Versatz im Lauf des Films, ist es kein Offset-Problem, sondern ein FPS-Mismatch — den korrigiert kein Offset.',
+      },
+      {
+        q: 'Lädt VLC oder PotPlayer das Ergebnis direkt?',
+        a: 'Ja, die Ausgabe ist Standard-SRT mit neu nummerierten Indizes; VLC, MPC-HC oder IINA laden sie ohne Anpassung. Alles bleibt im Browser, nichts wird hochgeladen; bei ASS-Blöcken oder ♪-Symbolen im Original vorab „Format entfernen" aktivieren.',
       },
     ],
   },

@@ -1,11 +1,23 @@
 /**
  * embedding-price-calculator 本地化 bundle —— zh / es / de(2025-08 扩张批次)
- * 覆盖: ui。useCases/formula/faqs 缺失自动回退英文。
+ * 覆盖: ui + useCases + faqs。formula 不适用(价格为表驱动,见 note)。
  */
 import type { ToolL10n } from '../tool-l10n'
 
 export const EmbeddingPriceCalculatorL10n: ToolL10n = {
   zh: {
+    useCases: [
+      'RAG 上线前算总账:全量语料 5 万篇 × 平均 800 token,横向对比 OpenAI / Gemini / Cohere 的首次嵌入成本',
+      '估算经常性支出:语料每月更新 10%,把"每月重嵌次数"设进去看增量账单',
+      '向决策层证明嵌入只是零头——多数负载月成本几美元,真正的开销在向量存储与检索',
+      '选型时对照维度与上下文长度:同价位下 1536 维与 3072 维模型对向量库存储的影响差一倍',
+    ],
+    faqs: [
+      { q: '成本是怎么算的?', a: '文档数 × 每篇平均 token 数 × 每月重嵌次数,得出总 token 量后按各模型的每百万 token 单价折算。首次全量嵌入一次性发生,之后只为变更部分付费——所以"每月重嵌次数"是长期成本的关键变量。' },
+      { q: '为什么说嵌入是 RAG 里最便宜的一环?', a: '主流嵌入模型单价在 $0.02-$0.13 / 百万 token,一部 10 亿 token 的语料全量嵌入也就几十美元。真正的成本大头是向量数据库的存储(维度越高越贵)和在线检索的计算开销。' },
+      { q: '维度对成本有什么影响?', a: '对 API 费用没有影响(按 token 计价),但对存储影响巨大:3072 维 float32 向量每条约 12 KB,是 1536 维的两倍。百万级文档规模下,维度选型直接决定向量库的月租。' },
+      { q: '有免费额度吗?', a: '有。Google 的 text-embedding-004 在免费配额内可零成本嵌入;OpenAI 与 Cohere 按量计费无免费层。价格核对于 2026-08,厂商调价频繁,正式预算前请以官网价目为准。' },
+    ],
     ui: {
       'chartTitle': '各模型月成本',
       'costLabel': '每月',
@@ -26,6 +38,18 @@ export const EmbeddingPriceCalculatorL10n: ToolL10n = {
     },
   },
   es: {
+    useCases: [
+      'Estimar el coste inicial antes de lanzar RAG: 50 000 documentos × 800 tokens medios, comparando OpenAI / Gemini / Cohere',
+      'Proyectar el gasto recurrente: si el corpus cambia un 10 % al mes, ajusta los re-embeddings mensuales y mira la factura incremental',
+      'Demostrar a dirección que el embedding es calderilla — el gasto real vive en el almacenamiento vectorial y la recuperación',
+      'Comparar dimensiones y contexto al elegir modelo: a igual precio, 3072 dims duplica el almacenamiento frente a 1536',
+    ],
+    faqs: [
+      { q: '¿Cómo se calcula el coste?', a: 'Documentos × tokens medios por documento × re-embeddings al mes = tokens totales, multiplicado por la tarifa de cada modelo por millón de tokens. La primera pasada ocurre una vez; después solo pagas lo que cambia — por eso los re-embeddings mensuales dominan el coste a largo plazo.' },
+      { q: '¿Por qué se dice que embedir es lo barato del RAG?', a: 'Los modelos de embedding cuestan $0,02-$0,13 por millón de tokens: un corpus de mil millones de tokens cuesta decenas de dólares. La factura real la marcan el almacenamiento del vector store (más caro cuantas más dimensiones) y el cómputo de la recuperación online.' },
+      { q: '¿Cómo afectan las dimensiones al coste?', a: 'Al precio de API, en nada (se cobra por token); al almacenamiento, mucho: un vector float32 de 3072 dims ocupa ~12 KB, el doble que uno de 1536. Con millones de documentos, la elección de dims define el alquiler mensual del vector store.' },
+      { q: '¿Hay nivel gratuito?', a: 'Sí: text-embedding-004 de Google permite embedir sin coste dentro de su cuota; OpenAI y Cohere son de pago por uso. Precios verificados en 08-2026 — confirma la tarifa oficial antes de cerrar un presupuesto.' },
+    ],
     ui: {
       'chartTitle': 'Coste mensual por modelo',
       'costLabel': 'al mes',
@@ -46,6 +70,18 @@ export const EmbeddingPriceCalculatorL10n: ToolL10n = {
     },
   },
   de: {
+    useCases: [
+      'Gesamtrechnung vor dem RAG-Launch: 50 000 Dokumente × 800 Tokens im Schnitt — Erst-Embedding bei OpenAI / Gemini / Cohere vergleichen',
+      'Laufende Kosten projizieren: Bei 10 % Corpus-Änderung pro Monat die Re-Embeds setzen und die Zusatzrechnung ablesen',
+      'Dem Management zeigen, dass Embedding Kleingeld ist — die echten Kosten stecken in Vektorspeicher und Retrieval',
+      'Bei der Modellwahl Dimensionen und Kontext vergleichen: 3072 Dims verdoppeln den Speicherbedarf gegenüber 1536',
+    ],
+    faqs: [
+      { q: 'Wie wird der Preis berechnet?', a: 'Dokumente × Ø Tokens pro Dokument × Re-Embeds pro Monat = Gesamt-Tokens, multipliziert mit dem Modelltarif pro Million Tokens. Der erste Durchlauf passiert einmal, danach zahlst du nur Änderungen — darum dominieren die monatlichen Re-Embeds die Langzeitkosten.' },
+      { q: 'Warum gilt Embedding als der billigste Teil von RAG?', a: 'Embedding-Modelle kosten $0,02-$0,13 pro Million Tokens — ein Corpus mit einer Milliarde Tokens kostet im zweistelligen Dollar-Bereich. Die eigentliche Rechnung treiben Vektorspeicher (teurer mit jeder Dimension) und das Online-Retrieval.' },
+      { q: 'Welchen Einfluss haben die Dimensionen?', a: 'Auf den API-Preis keinen (Abrechnung pro Token), auf den Speicher umso mehr: Ein float32-Vektor mit 3072 Dims belegt ~12 KB, doppelt so viel wie 1536. Bei Millionen Dokumenten entscheidet die Dim-Wahl über die monatliche Vektor-DB-Miete.' },
+      { q: 'Gibt es Gratis-Kontingente?', a: 'Ja: Googles text-embedding-004 erlaubt kostenloses Embedding innerhalb der Quote; OpenAI und Cohere sind reine Pay-per-use-Modelle. Preise geprüft 08-2026 — vor dem finalen Budget die offiziellen Preislisten prüfen.' },
+    ],
     ui: {
       'chartTitle': 'Monatskosten je Modell',
       'costLabel': 'pro Monat',

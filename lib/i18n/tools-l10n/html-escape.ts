@@ -34,6 +34,9 @@ export const htmlEscapeL10n: ToolL10n = {
     ],
     faqs: [
       { q: '这样就能防止所有 XSS 吗?', a: 'HTML 正文转义覆盖了最常见的情况,但 XSS 有多种变体(基于属性、脚本、URL)。对不受信任的 HTML,请使用 DOMPurify 等可靠库。' },
+      { q: '具体转义了哪些字符?', a: '五个核心字符:& 转成 &amp;、< 转成 &lt;、> 转成 &gt;、" 转成 &quot;、\' 转成 &#39;(或 &#x27;)。这是 OWASP 推荐的 HTML 实体转义集合,覆盖标签注入和属性逃逸两条常规路径。' },
+      { q: '转义(escape)和净化(sanitize)有什么区别?', a: '转义把特殊字符变成实体,让浏览器原样显示文本而不解析标签;净化则过滤或删除危险标签和属性,保留一部分 HTML。展示用户输入用转义;确实要允许富文本(如评论加粗)时才需要净化。' },
+      { q: '转义后文本变长,有影响吗?', a: '有一定膨胀:&amp; 是原字符的 5 倍长,长文本转义后可能增大 10-20%,要注意数据库字段或输入框的长度上限。展示时浏览器会还原回原字符,读者看到的长度不变。' },
     ],
   },
   es: {
@@ -65,6 +68,9 @@ export const htmlEscapeL10n: ToolL10n = {
     ],
     faqs: [
       { q: '¿Es suficiente para prevenir todo XSS?', a: 'El escapado del cuerpo HTML cubre el caso más común, pero el XSS tiene muchas variantes (por atributo, por script, por URL). Usa una librería de confianza como DOMPurify para HTML no confiable.' },
+      { q: '¿Qué caracteres se escapan exactamente?', a: 'Cinco: & por &amp;, < por &lt;, > por &gt;, " por &quot; y \' por &#39; (o &#x27;). Es el conjunto de entidades HTML que recomienda OWASP y cubre tanto la inyección de etiquetas como la fuga de atributos.' },
+      { q: '¿Diferencia entre escapar y sanitizar?', a: 'Escapar convierte los caracteres especiales en entidades para que el navegador muestre texto sin interpretar etiquetas; sanitizar filtra o elimina etiquetas y atributos peligrosos conservando parte del HTML. Escapa toda entrada de usuario; sanitiza solo si realmente permites HTML enriquecido (p. ej. negritas en comentarios).' },
+      { q: 'El texto escapado se alarga, ¿importa?', a: 'Sí crece: &amp; ocupa 5 veces el carácter original y un texto largo puede engordar un 10-20 %, con riesgo de topar con límites de campos de base de datos o textareas. Al mostrarse, el navegador lo revierte: el lector ve exactamente el texto original.' },
     ],
   },
   de: {
@@ -82,8 +88,8 @@ export const htmlEscapeL10n: ToolL10n = {
       'encodeInputLabel': 'Text oder HTML',
       'encodeNote': '🌐 Escapt & < > " und \'. Verwenden vor dem Einfügen von Nutzereingaben in HTML, um XSS zu verhindern.',
       'encodeOutputLabel': 'Escaptes HTML',
-      'mode': 'Modus',
-      'modeAria': 'Modus Kodieren/Dekodieren',
+      'mode': 'Modo',
+      'modeAria': 'Modo Kodieren/Dekodieren',
       'placeholder': 'Hier eingeben oder einfügen…',
       'resultPlaceholder': 'Das Ergebnis erscheint hier…',
       'words': 'Wörter',
@@ -96,6 +102,9 @@ export const htmlEscapeL10n: ToolL10n = {
     ],
     faqs: [
       { q: 'Reicht das, um alle XSS zu verhindern?', a: 'HTML-Body-Escaping deckt den häufigsten Fall ab, aber XSS hat viele Varianten (attribut-, skript- oder url-basiert). Nutze für nicht vertrauenswürdiges HTML eine seriöse Bibliothek wie DOMPurify.' },
+      { q: 'Welche Zeichen werden genau escapet?', a: 'Fünf: & zu &amp;, < zu &lt;, > zu &gt;, " zu &quot; und \' zu &#39; (oder &#x27;). Genau dieses Entity-Set empfiehlt OWASP; es deckt Tag-Injection ebenso ab wie das Ausbrechen aus Attributen.' },
+      { q: 'Escapen vs. Sanitisieren — was ist der Unterschied?', a: 'Escapen verwandelt Sonderzeichen in Entities, damit der Browser Text anzeigt statt Tags zu parsen; Sanitisieren entfernt oder entschärft gefährliche Tags und Attribute und behält etwas HTML bei. Escapen für jede Nutzereingabe; Sanitisieren nur, wenn du wirklich Rich-Text erlaubst (z. B. Fett in Kommentaren).' },
+      { q: 'Escapter Text wird länger — stört das?', a: 'Ja, er wächst: &amp; ist fünf Zeichen statt einem, langer Text kann 10-20 % zunehmen und Feldgrenzen in Datenbank oder Textarea sprengen. Beim Anzeigen macht der Browser alles rückgängig — Leser sehen exakt den Originaltext.' },
     ],
   },
 }

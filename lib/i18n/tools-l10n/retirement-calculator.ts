@@ -13,6 +13,9 @@ export const retirementCalculatorL10n: ToolL10n = {
     useCases: ['按当前储蓄和供款预测退休金', '看自己是否走在退休目标的正轨上', '比较不同回报率下的退休积累', '算还要存多少年才能退休'],
     faqs: [
       { q: '我需要多少钱才能退休?', a: '一个常见法则是年支出的 25 倍(4% 法则的倒数)。年支出 $40,000 的话,目标约 $1 百万。鉴于寿命延长,许多理财顾问现在建议 30 倍更稳妥。' },
+      { q: '4% 法则在国内适用吗?', a: '它基于美股历史数据,照搬有风险。国内养老常按三支柱规划:基本养老金、企业/职业年金、个人养老金(每年 12,000 元税前额度)。把收益率调保守(3%–4%)更贴近国内固收类资产。' },
+      { q: '收益率该填多少?', a: '参考区间:美股宽基指数长期约 7%–10%(名义),全球均衡组合 5%–7%,国内偏债组合 3%–5%。要么全程用名义值,要么全程用扣除通胀后的实际值,别混用。' },
+      { q: '每月该存多少?', a: '常见起点是收入的 15%–20%(含单位匹配)。想提前到 50 岁退休,储蓄率往往要拉到 40% 以上——把工具里的「距退休年数」调小,差距一目了然。' },
     ],
     ui: {
       'in.current': '当前储蓄', 'in.monthly': '每月供款', 'in.rate': '年回报率', 'in.years': '距退休年数',
@@ -31,6 +34,9 @@ export const retirementCalculatorL10n: ToolL10n = {
     useCases: ['proyectar el ahorro para la jubilación con el capital y las aportaciones actuales', 'ver si vas camino de tu meta de jubilación', 'comparar la acumulación con distintas rentabilidades', 'calcular cuántos años más debes ahorrar'],
     faqs: [
       { q: '¿Cuánto necesito para jubilarme?', a: 'Una regla común es 25× tus gastos anuales (el inverso de la regla del 4 %). Con $40,000 de gastos anuales, apunta a $1 millón. Muchos asesores sugieren ahora 30× para ir sobre seguro dada la mayor esperanza de vida.' },
+      { q: '¿Sirve la regla del 4 % fuera de EE. UU.?', a: 'Se calibró con datos bursátiles estadounidenses; para carteras europeas o latinoamericanas conviene ser más prudente (3 %–3,5 % de retirada). Ajusta por la inflación local y la fiscalidad de tu país antes de fijar la meta.' },
+      { q: '¿Qué rentabilidad introduzco?', a: 'Rango habitual: 5 %–7 % para una cartera global diversificada a 30 años y 3 %–4 % para perfiles conservadores o plazos cortos. Usa valores reales (descontada la inflación) o nominales, pero de forma consistente en todos los campos.' },
+      { q: '¿Cómo encaja con mi plan de pensiones?', a: 'Suma al «ahorro actual» tu plan de empleo (en España, el plan de pensiones de empleo) y las aportaciones mensuales de planes privados; el plan individual admite 1.500 €/año (más si aporta la empresa) con ventajas fiscales. Todo cuenta como parte de tu aportación mensual.' },
     ],
     ui: {
       'in.current': 'Ahorros actuales', 'in.monthly': 'Aportación mensual', 'in.rate': 'Retorno anual', 'in.years': 'Años hasta la jubilación',
@@ -49,6 +55,9 @@ export const retirementCalculatorL10n: ToolL10n = {
     useCases: ['das Rentenkapital mit aktuellem Sparstand und Beiträgen hochrechnen', 'sehen, ob du auf Kurs für dein Rentenziel bist', 'die Ansparung bei verschiedenen Renditen vergleichen', 'berechnen, wie viele Jahre du noch sparen musst'],
     faqs: [
       { q: 'Wie viel brauche ich für die Rente?', a: 'Eine gängige Regel ist das 25-Fache deiner Jahresausgaben (der Kehrwert der 4 %-Regel). Bei $40,000 Jahresausgaben peile $1 Million an. Viele Berater empfehlen inzwischen das 30-Fache, um wegen längerer Lebenserwartung auf der sicheren Seite zu sein.' },
+      { q: 'Gilt die 4-%-Regel auch in Deutschland?', a: 'Sie basiert auf US-Marktdaten; für sicherheitsorientierte deutsche Depots wird oft nur 3 %–3,5 % Entnahme empfohlen. Riester-, Rürup- und Betriebsrente (bAV) einrechnen — sie decken einen Teil des Bedarfs separat ab.' },
+      { q: 'Welche Rendite soll ich einsetzen?', a: 'Realistisch: 5 %–7 % für ein breit gestreutes ETF-Depot über 30 Jahre, 3 %–4 % für konservative Mischfonds. Nutze durchgehend reale (inflationsbereinigte) oder nominale Werte, nicht beides gemischt.' },
+      { q: 'Wie viel sollte ich monatlich sparen?', a: 'Faustregel: 15 %–20 % des Bruttos inklusive Arbeitgeberanteil. Wer mit 55–60 aufhören will, braucht oft über 40 % Sparquote — im Rechner einfach die Jahre reduzieren und die Lücke ansehen.' },
     ],
     ui: {
       'in.current': 'Aktuelle Ersparnisse', 'in.monthly': 'Monatlicher Beitrag', 'in.rate': 'Jahresrendite', 'in.years': 'Jahre bis zur Rente',

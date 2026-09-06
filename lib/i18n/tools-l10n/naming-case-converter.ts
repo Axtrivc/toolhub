@@ -35,6 +35,14 @@ export const namingCaseConverterL10n: ToolL10n = {
         q: '批量模式会保持「每行一个」吗?',
         a: '会。粘贴一整列(每行一个标识符),每行会被独立转换,并保持原有行序。空行仍然是空行,所以输出与你的输入一一对应。',
       },
+      {
+        q: 'CONSTANT_CASE 是什么时候用的?',
+        a: '全大写加下划线,专用于常量:MAX_RETRY_COUNT = 5。配套惯例还有 Python 的 PEP 8(类名 PascalCase、模块名 snake_case)和 Java 的 UPPER_SNAKE 常量——统一团队风格时按语言约定选。',
+      },
+      {
+        q: '遇到 iOS、XMLHttp 这类缩写怎么办?',
+        a: '连续大写会被当作一个词:HTMLParser 拆成 HTML 和 Parser,与 html_parser 同源,来回转换保持一致。像 iOS 这种大小写交错的非常规缩写,拆分可能有歧义,转换后抽查一眼再替换。',
+      },
     ],
   },
   es: {
@@ -67,6 +75,14 @@ export const namingCaseConverterL10n: ToolL10n = {
         q: '¿El modo por lotes mantiene un nombre convertido por línea?',
         a: 'Sí. Pega una lista completa (un identificador por línea) y cada línea se convierte de forma independiente, conservando el orden. Las líneas en blanco siguen en blanco, así la salida se alinea uno a uno con tu entrada.',
       },
+      {
+        q: '¿Cuándo se usa CONSTANT_CASE?',
+        a: 'Mayúsculas con guiones bajos, reservado a constantes: MAX_RETRY_COUNT = 5. Las convenciones complementarias: PEP 8 de Python (clases en PascalCase, módulos en snake_case) y constantes UPPER_SNAKE en Java — elige según el lenguaje del equipo.',
+      },
+      {
+        q: '¿Qué pasa con siglas como iOS o XMLHttp?',
+        a: 'Las mayúsculas consecutivas cuentan como una palabra: HTMLParser se separa en HTML y Parser, igual que html_parser, y las conversiones de ida y vuelta coinciden. En siglas no convencionales como iOS el desglose puede ser ambiguo; revisa la salida antes de reemplazar en masa.',
+      },
     ],
   },
   de: {
@@ -98,6 +114,14 @@ export const namingCaseConverterL10n: ToolL10n = {
       {
         q: 'Behält der Stapelmodus einen konvertierten Namen pro Zeile?',
         a: 'Ja. Füge eine ganze Liste ein (ein Bezeichner pro Zeile) und jede Zeile wird unabhängig umgewandelt, die Reihenfolge bleibt erhalten. Leerzeilen bleiben leer, sodass die Ausgabe eins zu eins mit der Eingabe übereinstimmt.',
+      },
+      {
+        q: 'Wann verwendet man CONSTANT_CASE?',
+        a: 'Durchgehend Großbuchstaben mit Unterstrichen, reserviert für Konstanten: MAX_RETRY_COUNT = 5. Passende Konventionen dazu: PEP 8 (Klassen in PascalCase, Module in snake_case) in Python und UPPER_SNAKE-Konstanten in Java — je nach Sprachstil des Teams wählen.',
+      },
+      {
+        q: 'Was passiert mit Akronymen wie iOS oder XMLHttp?',
+        a: 'Folgen von Großbuchstaben gelten als ein Wort: HTMLParser zerfällt in HTML und Parser, ebenso wie html_parser, und Hin-und-zurück-Konvertierungen stimmen überein. Bei unkonventionellen Akronymen wie iOS kann die Zerlegung mehrdeutig sein — vor dem Massenersatz die Ausgabe kurz prüfen.',
       },
     ],
   },
