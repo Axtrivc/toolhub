@@ -2880,6 +2880,60 @@ export const toolFaqs: Record<string, FaqPair[]> = {
       a: 'A typical web page runs 500-1,500 tokens; a PDF report 3,000-15,000; a support ticket 100-400. Chunk before embedding — most retrieval systems embed 300-800 token chunks rather than whole documents, so multiply your document count by chunks-per-document for the honest estimate.',
     },
   ],
+  'runway-calculator': [
+    {
+      q: 'What is the difference between gross burn and net burn?',
+      a: 'Gross burn is the total money your company spends each month on payroll, servers, rent, and software. Net burn is gross burn minus incoming customer revenue. If you spend $30,000 and earn $10,000, gross burn is $30,000 and net burn is $20,000.',
+    },
+    {
+      q: 'How many months of runway should a startup have?',
+      a: 'Most venture-backed founders and bootstrappers aim for 18 to 24 months. 12 months is the minimum safety buffer: it gives you 6 months to build and grow, and 6 months to raise your next round or reach breakeven before running out of cash.',
+    },
+    {
+      q: 'What does "default alive" mean?',
+      a: 'A startup is default alive if its current cash plus projected revenue growth will carry it to cash-flow breakeven before running out of money, without needing additional external funding.',
+    },
+    {
+      q: 'How does revenue growth impact my runway?',
+      a: 'Static runway assumes net burn never changes. With compound revenue growth, each month brings in more cash, steadily shrinking your net burn and extending your runway by several additional months.',
+    },
+  ],
+  'freelance-rate-calculator': [
+    {
+      q: "Why can't I just divide my old full-time salary by 2,080 hours?",
+      a: 'A standard employee gets paid for 40 hours a week, including vacations, sick days, and company-paid benefits. Freelancers only bill 20 to 25 hours per week because non-billable client pitches, invoicing, and admin work take up the rest.',
+    },
+    {
+      q: 'What expenses should freelancers include?',
+      a: 'Include health insurance, software subscriptions, laptop and hardware amortization, legal/accounting fees, and self-employment taxes (which in the US includes both halves of FICA: 15.3%).',
+    },
+    {
+      q: 'Why add a profit margin to freelance rates?',
+      a: 'A 10% to 20% profit margin acts as your safety buffer for client payment delays, unpaid bench time between projects, and savings for emergency equipment replacements.',
+    },
+    {
+      q: 'Should I quote hourly or daily rates to clients?',
+      a: 'For short projects (under 20 hours), hourly pricing is standard. For multi-week contracts or enterprise consulting, quoting daily rates (8× your hourly rate) minimizes micro-scrutiny over individual hours.',
+    },
+  ],
+  'docker-run-to-compose': [
+    {
+      q: 'Why convert docker run commands to docker-compose.yml?',
+      a: 'A long docker run command is fragile, easy to lose, and hard to version-control. Docker Compose lets you commit your entire container setup to Git, document ports and volume paths, and restart everything with a single docker compose up -d command.',
+    },
+    {
+      q: 'How does this tool handle named volumes vs host bind mounts?',
+      a: 'If a volume starts with a relative path (./), absolute path (/), or Windows drive (C:), it is formatted as a host bind mount. If it starts with a bare name like pgdata:/var/lib/postgresql, the tool automatically declares it under the root volumes: section.',
+    },
+    {
+      q: 'Does this converter run securely in the browser?',
+      a: 'Yes — the command parser runs 100% locally in your browser with zero server calls. Your environment variables, passwords, and server tokens never leave your computer.',
+    },
+    {
+      q: 'What version of Docker Compose is generated?',
+      a: 'By default, it outputs modern Compose Specification YAML (compatible with docker compose v2). You can also toggle on the legacy version: "3.8" header if your deployment pipeline requires it.',
+    },
+  ],
 }
 export function getToolFaqs(slug: string): FaqPair[] {
   return toolFaqs[slug] ?? []

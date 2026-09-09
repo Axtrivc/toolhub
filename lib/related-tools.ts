@@ -254,6 +254,9 @@ export const toolLiteMeta: Record<string, ToolLiteMeta> = {
   'csv-to-finetune-jsonl': { slug: 'csv-to-finetune-jsonl', name: 'CSV to Fine-tuning JSONL', shortIntro: 'CSV training rows → OpenAI chat-format JSONL, mapped and validated.', category: 'AI Tools' },
   'token-visualizer': { slug: 'token-visualizer', name: 'Token Visualizer', shortIntro: 'Color-coded token boundaries with counts — see what models see.', category: 'AI Tools' },
   'embedding-price-calculator': { slug: 'embedding-price-calculator', name: 'Embedding Price Calculator', shortIntro: 'Embedding costs across models: dimensions, $/1M tokens, workload totals.', category: 'AI Tools' },
+  'runway-calculator': { slug: 'runway-calculator', name: 'Runway Calculator', shortIntro: 'Calculate startup runway months, zero cash date, and net burn rate.', category: 'Business Tools' },
+  'freelance-rate-calculator': { slug: 'freelance-rate-calculator', name: 'Freelance Rate Calculator', shortIntro: 'Calculate hourly and daily rates factoring in taxes, expenses, and profit.', category: 'Business Tools' },
+  'docker-run-to-compose': { slug: 'docker-run-to-compose', name: 'Docker Run to Compose', shortIntro: 'Convert docker run commands into clean docker-compose.yml files.', category: 'Developer Tools' },
 }
 
 /** slug → Related Tools 推荐(4 款,排序与 lib/tools.ts#getRelatedTools 一致) */
@@ -395,7 +398,7 @@ export const relatedIndex: Record<string, string[]> = {
   'gpa-calculator': ['final-grade-calculator', 'grade-calculator', 'loan-calculator', 'compound-interest-calculator'],
   'password-strength-checker': ['aes-encrypt-decrypt', 'bcrypt-hash-generator', 'hash-comparator', 'hmac-generator'],
   'password-generator': ['aes-encrypt-decrypt', 'bcrypt-hash-generator', 'hash-comparator', 'hmac-generator'],
-  'qr-code-generator': ['break-even-calculator', 'cac-ltv-calculator', 'freelance-invoice-generator', 'profit-margin-calculator'],
+  'qr-code-generator': ['break-even-calculator', 'cac-ltv-calculator', 'freelance-invoice-generator', 'freelance-rate-calculator'],
   'gpt-token-counter': ['context-window-checker', 'csv-to-finetune-jsonl', 'embedding-price-calculator', 'json-repair'],
   'ip-subnet-calculator': ['json-formatter', 'jwt-decoder', 'ascii-table', 'base-converter'],
   'chmod-calculator': ['json-formatter', 'jwt-decoder', 'ascii-table', 'base-converter'],
@@ -419,15 +422,15 @@ export const relatedIndex: Record<string, string[]> = {
   'auto-loan-calculator': ['compound-interest-calculator', 'loan-calculator', 'amortization-table-generator', 'annuity-calculator'],
   'ebay-fee-calculator': ['compound-interest-calculator', 'loan-calculator', 'amortization-table-generator', 'annuity-calculator'],
   'saas-ltv-churn-calculator': ['qr-code-generator', 'break-even-calculator', 'cac-ltv-calculator', 'freelance-invoice-generator'],
-  'freelance-invoice-generator': ['qr-code-generator', 'break-even-calculator', 'cac-ltv-calculator', 'profit-margin-calculator'],
+  'freelance-invoice-generator': ['qr-code-generator', 'break-even-calculator', 'cac-ltv-calculator', 'freelance-rate-calculator'],
   'reverse-stripe-fee-calculator': ['compound-interest-calculator', 'loan-calculator', 'amortization-table-generator', 'annuity-calculator'],
   'hysa-calculator': ['compound-interest-calculator', 'loan-calculator', 'amortization-table-generator', 'annuity-calculator'],
   'cd-calculator': ['compound-interest-calculator', 'loan-calculator', 'amortization-table-generator', 'annuity-calculator'],
   'roth-ira-calculator': ['compound-interest-calculator', 'loan-calculator', 'amortization-table-generator', 'annuity-calculator'],
   'fire-calculator': ['compound-interest-calculator', 'loan-calculator', 'amortization-table-generator', 'annuity-calculator'],
-  'break-even-calculator': ['qr-code-generator', 'cac-ltv-calculator', 'freelance-invoice-generator', 'profit-margin-calculator'],
+  'break-even-calculator': ['qr-code-generator', 'cac-ltv-calculator', 'freelance-invoice-generator', 'freelance-rate-calculator'],
   'profit-margin-calculator': ['qr-code-generator', 'break-even-calculator', 'cac-ltv-calculator', 'freelance-invoice-generator'],
-  'cac-ltv-calculator': ['qr-code-generator', 'break-even-calculator', 'freelance-invoice-generator', 'profit-margin-calculator'],
+  'cac-ltv-calculator': ['qr-code-generator', 'break-even-calculator', 'freelance-invoice-generator', 'freelance-rate-calculator'],
   'timezone-converter': ['cron-parser', 'age-calculator', 'age-difference-calculator', 'date-difference-calculator'],
   'days-countdown-calculator': ['cron-parser', 'age-calculator', 'age-difference-calculator', 'date-difference-calculator'],
   'reading-speaking-time': ['cron-parser', 'age-calculator', 'age-difference-calculator', 'date-difference-calculator'],
@@ -494,6 +497,9 @@ export const relatedIndex: Record<string, string[]> = {
   'csv-to-finetune-jsonl': ['context-window-checker', 'embedding-price-calculator', 'gpt-token-counter', 'json-repair'],
   'token-visualizer': ['context-window-checker', 'csv-to-finetune-jsonl', 'embedding-price-calculator', 'gpt-token-counter'],
   'embedding-price-calculator': ['context-window-checker', 'csv-to-finetune-jsonl', 'gpt-token-counter', 'json-repair'],
+  'runway-calculator': ['qr-code-generator', 'break-even-calculator', 'cac-ltv-calculator', 'freelance-invoice-generator'],
+  'freelance-rate-calculator': ['qr-code-generator', 'break-even-calculator', 'cac-ltv-calculator', 'freelance-invoice-generator'],
+  'docker-run-to-compose': ['json-formatter', 'jwt-decoder', 'ascii-table', 'base-converter'],
 }
 
 /** slug → 工作流下一步推荐(显式 nextTools 优先,否则同分类前 2 款) */
@@ -734,6 +740,9 @@ export const nextIndex: Record<string, string[]> = {
   'csv-to-finetune-jsonl': ['context-window-checker', 'embedding-price-calculator'],
   'token-visualizer': ['context-window-checker', 'csv-to-finetune-jsonl'],
   'embedding-price-calculator': ['context-window-checker', 'csv-to-finetune-jsonl'],
+  'runway-calculator': ['freelance-rate-calculator', 'cac-ltv-calculator'],
+  'freelance-rate-calculator': ['freelance-invoice-generator', 'runway-calculator'],
+  'docker-run-to-compose': ['nginx-config-generator', 'curl-converter'],
 }
 
 /** 取某工具的相关工具轻量数据(缺失/未知 slug 一律安全回退空数组) */

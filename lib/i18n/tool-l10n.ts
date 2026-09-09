@@ -272,6 +272,9 @@ import { intermittentFastingCalculatorL10n } from './tools-l10n/intermittent-fas
 import { flooringCalculatorL10n } from './tools-l10n/flooring-calculator'
 import { dogFoodCalculatorL10n } from './tools-l10n/dog-food-calculator'
 import { llmApiCostCalculatorL10n } from './tools-l10n/llm-api-cost-calculator'
+import { runwayCalculatorL10n } from './tools-l10n/runway-calculator'
+import { freelanceRateCalculatorL10n } from './tools-l10n/freelance-rate-calculator'
+import { dockerRunToComposeL10n } from './tools-l10n/docker-run-to-compose'
 
 const registry: Record<string, ToolL10n> = {
   'loan-calculator': loanCalculatorL10n,
@@ -510,6 +513,9 @@ const registry: Record<string, ToolL10n> = {
   'flooring-calculator': flooringCalculatorL10n,
   'dog-food-calculator': dogFoodCalculatorL10n,
   'llm-api-cost-calculator': llmApiCostCalculatorL10n,
+  'runway-calculator': runwayCalculatorL10n,
+  'freelance-rate-calculator': freelanceRateCalculatorL10n,
+  'docker-run-to-compose': dockerRunToComposeL10n,
 }
 
 /**

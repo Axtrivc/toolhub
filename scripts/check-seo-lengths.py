@@ -56,3 +56,8 @@ if over_title:
     print('\n### 超长 title（最终生效）清单（slug | 长度 | 内容）###')
     for s, eff, ln in sorted(over_title, key=lambda x: -x[2]):
         print(f'{ln:3d} | {s} | {eff}')
+
+if over_desc:
+    print('\n### 超长 description（最终生效）清单（slug | 长度 | 内容）###')
+    for s, eff, ln in sorted(over_desc, key=lambda x: -x[2]):
+        print(f'{ln:3d} | {s} | {eff}')

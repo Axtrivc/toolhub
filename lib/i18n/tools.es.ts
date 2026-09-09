@@ -989,5 +989,17 @@ export const esTools: Record<string, { name: string; shortIntro: string }> = {
     name: 'Calculadora de Comida para Perros',
     shortIntro: 'Peso + etapa de vida → kcal diarias, tazas y gramos según la etiqueta.',
   },
+  'runway-calculator': {
+    name: 'Calculadora de Runway para Startups',
+    shortIntro: 'Meses de caja restante, fecha de agotamiento y tasa de quema neta mensual.',
+  },
+  'freelance-rate-calculator': {
+    name: 'Calculadora de Tarifas Freelance',
+    shortIntro: 'Calcula tu tarifa por hora y por día considerando impuestos, gastos y margen.',
+  },
+  'docker-run-to-compose': {
+    name: 'Conversor de Docker Run a Compose',
+    shortIntro: 'Convierte comandos docker run en archivos docker-compose.yml limpios.',
+  },
 
 }

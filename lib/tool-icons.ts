@@ -216,6 +216,9 @@ const STAR_ICONS: Record<string, string> = {
   'random-choice-picker': 'dices',
   'wordle-solver': 'puzzle',
   'ip-checker': 'shield-check',
+  'runway-calculator': 'flame',
+  'freelance-rate-calculator': 'coins',
+  'docker-run-to-compose': 'box',
 }
 
 /** 默认兜底图标键(理论上用不到,所有 category 都已映射) */

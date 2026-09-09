@@ -172,6 +172,8 @@ export const calculatorSamples: Record<string, Record<string, string>> = {
   'cac-ltv-calculator': { marketingSpend: '50000', newCustomers: '200', arpu: '50', grossMargin: '80', churn: '5' },
   'flooring-calculator': { length: '15', width: '12', unit: 'ft', type: 'hardwood', waste: '10', boxPrice: '62' },
   'dog-food-calculator': { weight: '20', activity: '1.6', basis: 'cup', density: '375', gramsPerCup: '110' },
+  'runway-calculator': { cash: '250000', monthlyBurn: '30000', monthlyRevenue: '10000', revenueGrowth: '5' },
+  'freelance-rate-calculator': { targetIncome: '85000', billableHours: '25', weeksPerYear: '46', businessExpenses: '8000', taxRate: '28', profitMargin: '15' },
 }
 
 // ─────────────────────────── 单位转换器示例 ───────────────────────────

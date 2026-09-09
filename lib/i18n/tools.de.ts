@@ -989,5 +989,17 @@ export const deTools: Record<string, { name: string; shortIntro: string }> = {
     name: 'Hundefutter-Rechner',
     shortIntro: 'Gewicht + Lebensphase → Tageskalorien, Tassen und Gramm laut Futteretikett.',
   },
+  'runway-calculator': {
+    name: 'Startup-Runway-Rechner',
+    shortIntro: 'Cash-Runway in Monaten, Zero-Cash-Datum und monatliche Netto-Burn-Rate.',
+  },
+  'freelance-rate-calculator': {
+    name: 'Freelance-Stundensatz-Rechner',
+    shortIntro: 'Zielgehalt rückwärts zu Stunden- und Tagessatz inklusive Steuern und Marge.',
+  },
+  'docker-run-to-compose': {
+    name: 'Docker Run zu Compose Konverter',
+    shortIntro: 'Wandelt docker run Befehle direkt in saubere docker-compose.yml Dateien um.',
+  },
 
 }
