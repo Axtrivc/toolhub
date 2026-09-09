@@ -89,24 +89,42 @@ export function EncoderDecoderTool({ encode, decode, initialMode = 'encode', slu
     [slug, locale, encode, decode],
   )
 
-  const output = useMemo(() => {
-    if (!mounted) return ''
+  const output = useMemo<{ value: string; isError: boolean }>(() => {
+    if (!mounted) return { value: '', isError: false }
     // P-1 大输入防线:超阈值不同步执行 transform,直接给 ⚠️ 提示(与 line-diff 同款思路)
     if (input.length > MAX_INPUT_CHARS) {
-      return tui(
-        slug,
-        locale,
-        'inputTooLarge',
-        `⚠️ Input is too large — the supported size is up to ${MAX_INPUT_CHARS.toLocaleString('en-US')} characters. Trim the input to convert.`,
-      )
+      return {
+        value: tui(
+          slug,
+          locale,
+          'inputTooLarge',
+          `⚠️ Input is too large — the supported size is up to ${MAX_INPUT_CHARS.toLocaleString('en-US')} characters. Trim the input to convert.`,
+        ),
+        isError: true,
+      }
     }
     try {
-      return spec.transform(input)
+      // 部分 transform 不抛异常而是返回 ⚠️ 开头的错误文案(Base64/URL 解码的
+      // 定位提示):按前缀一并归入 isError,对调按钮/复制按钮据此禁用
+      const value = spec.transform(input)
+      return { value, isError: value.startsWith('⚠️') }
     } catch {
       // 解码输入非法时给出可见提示,而不是静默输出空串
-      return tui(slug, locale, 'invalidInput', '⚠️ Invalid input for this direction')
+      return { value: tui(slug, locale, 'invalidInput', '⚠️ Invalid input for this direction'), isError: true }
     }
   }, [input, spec, mounted, slug, locale])
+
+  /**
+   * ⇄ 对调闭环:当前输出整体填充为新输入,方向自动翻转
+   * (encode 的产物 → decode 的输入,反之亦然),编码→解码→再编码一路通。
+   * isError 门控:错误提示文案不是有效数据,不参与对调。
+   */
+  const swapDirection = useCallback(() => {
+    if (!output.value || output.isError) return
+    pristineRef.current = false // 对调填入的是真实数据,默认示例的 pristine 替换机制永久失效
+    setInput(output.value)
+    setMode(mode === 'encode' ? 'decode' : 'encode')
+  }, [output, mode])
 
   const switchMode = useCallback(
     (next: 'encode' | 'decode') => {
@@ -197,17 +215,31 @@ export function EncoderDecoderTool({ encode, decode, initialMode = 'encode', slu
         />
       </div>
 
+      {/* ⇄ 对调按钮(输入区与输出区之间):当前输出 → 新输入,方向自动翻转,
+          打通「编码 → 解码 → 再编码」的往返闭环 */}
+      <div className="flex justify-center">
+        <button
+          type="button"
+          onClick={swapDirection}
+          disabled={!output.value || output.isError}
+          className="rounded-full border border-brand-500 bg-brand-50 px-5 py-2 text-sm font-semibold text-brand-700 shadow-sm transition hover:bg-brand-100 disabled:cursor-not-allowed disabled:opacity-50 dark:border-brand-500 dark:bg-brand-950/40 dark:text-brand-300 dark:hover:bg-brand-950/70"
+          aria-label={mode === 'encode' ? L('swapToDecode', '⇄ Swap to Decode') : L('swapToEncode', '⇄ Swap to Encode')}
+        >
+          {mode === 'encode' ? L('swapToDecode', '⇄ Swap to Decode') : L('swapToEncode', '⇄ Swap to Encode')}
+        </button>
+      </div>
+
       {/* 输出区 */}
       <div>
         <div className="mb-2 flex items-center justify-between">
           <label className="text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
             {L(mode === 'encode' ? 'encodeOutputLabel' : 'decodeOutputLabel', spec.outputLabel)}
           </label>
-          <CopyButton value={output} disabled={!output} />
+          <CopyButton value={output.value} disabled={!output.value || output.isError} />
         </div>
         <textarea
           readOnly
-          value={output}
+          value={output.value}
           placeholder={L('resultPlaceholder', 'Result will appear here...')}
           rows={6}
           className="w-full rounded-lg border-2 p-4 font-mono text-sm outline-none"

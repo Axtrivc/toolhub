@@ -9,6 +9,7 @@ export const gptTokenCounterL10n: ToolL10n = {
     ui: {
       'chartTitle': '成本去向',
       'chartCenter': '总计',
+      'cachedShort': '缓存',
       'sliceInput': '输入',
       'sliceOutput': '输出',
       'expectedOutputTokens': '预期输出 token 数',
@@ -79,6 +80,7 @@ export const gptTokenCounterL10n: ToolL10n = {
     ui: {
       'chartTitle': 'A dónde va el coste',
       'chartCenter': 'Total',
+      'cachedShort': 'en caché',
       'sliceInput': 'Entrada',
       'sliceOutput': 'Salida',
       'expectedOutputTokens': 'Tokens de salida previstos',
@@ -149,6 +151,7 @@ export const gptTokenCounterL10n: ToolL10n = {
     ui: {
       'chartTitle': 'Wohin die Kosten gehen',
       'chartCenter': 'Gesamt',
+      'cachedShort': 'gespeichert',
       'sliceInput': 'Eingabe',
       'sliceOutput': 'Ausgabe',
       'expectedOutputTokens': 'Erwartete Ausgabe-Tokens',

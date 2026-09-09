@@ -13,6 +13,23 @@ const FORMULA = 'Break-even units = Fixed Costs ÷ (Price − Variable Cost)'
 export const breakEvenCalculatorL10n: ToolL10n = {
   // ──────────────────────────── 中文 ────────────────────────────
   zh: {
+    ui: {
+      'in.fixed': '月固定成本',
+      'in.price': '单价',
+      'in.variable': '单位变动成本',
+      'out.beUnits': '保本销量',
+      'outSub.beUnits': '覆盖固定成本所需销量',
+      'out.beRevenue': '保本销售额',
+      'out.contribution': '单位边际贡献',
+      'out.cmRatio': '边际贡献率',
+      'preset.0': '手工艺品',
+      'preset.1': 'SaaS 初创',
+      'preset.2': '咖啡馆',
+      'errInvalid': '请输入有效的非负成本',
+      'errMargin': '单价必须大于单位变动成本',
+      'chartTitle': '每笔销售的成本与毛利构成',
+      'note': '📊 保本销量 = 固定成本 ÷ (单价 − 单位变动成本)。盈亏平衡点之前的每一笔销售都在弥补固定成本；之后的每一笔销售都会产生纯利润。边际贡献率表示每 1 美元收入中用于覆盖固定成本的比例。',
+    },
     useCases: [
       '咖啡店定价:月固定成本 3.5 万(房租+人工),拿铁 28 元/杯、变动成本 9 元,月销约 1842 杯保本',
       '评估降价:单价 45 降到 39,边际贡献 27→21,保本量从 315 单涨到 405 单,先看销量补不补得回来',
@@ -45,6 +62,23 @@ export const breakEvenCalculatorL10n: ToolL10n = {
 
   // ──────────────────────────── Español ────────────────────────────
   es: {
+    ui: {
+      'in.fixed': 'Costes fijos (mensuales)',
+      'in.price': 'Precio por unidad',
+      'in.variable': 'Coste variable por unidad',
+      'out.beUnits': 'Unidades de equilibrio',
+      'outSub.beUnits': 'Unidades para cubrir costes fijos',
+      'out.beRevenue': 'Ingresos de equilibrio',
+      'out.contribution': 'Margen de contribución / unidad',
+      'out.cmRatio': 'Ratio de margen de contribución',
+      'preset.0': 'Producto artesanal',
+      'preset.1': 'Startup SaaS',
+      'preset.2': 'Cafetería',
+      'errInvalid': 'Introduce costes no negativos válidos',
+      'errMargin': 'El precio debe ser superior al coste variable por unidad',
+      'chartTitle': 'Desglose de cada venta',
+      'note': '📊 Punto de equilibrio = Costes fijos ÷ (Precio − Coste variable). Cada venta antes del equilibrio cubre costes fijos; después aporta margen neto. El ratio de contribución indica qué porcentaje de cada venta cubre costes fijos.',
+    },
     useCases: [
       'poner precio a una cafetería: 3.500 € fijos al mes, latte a 2,80 € con 0,90 € de coste variable, unas 1.842 tazas para cuadrar',
       'evaluar una rebaja: el precio baja de 45 a 39, el margen cae de 27 a 21 y el equilibrio salta de 315 a 405 unidades',
@@ -77,6 +111,23 @@ export const breakEvenCalculatorL10n: ToolL10n = {
 
   // ──────────────────────────── Deutsch ────────────────────────────
   de: {
+    ui: {
+      'in.fixed': 'Fixkosten (monatlich)',
+      'in.price': 'Preis pro Einheit',
+      'in.variable': 'Variable Kosten pro Einheit',
+      'out.beUnits': 'Gewinnschwelle (Einheiten)',
+      'outSub.beUnits': 'Einheiten zur Deckung der Fixkosten',
+      'out.beRevenue': 'Break-even-Umsatz',
+      'out.contribution': 'Deckungsbeitrag / Einheit',
+      'out.cmRatio': 'Deckungsbeitragsquote',
+      'preset.0': 'Handgefertigtes Produkt',
+      'preset.1': 'SaaS-Startup',
+      'preset.2': 'Café',
+      'errInvalid': 'Gültige nicht-negative Kosten eingeben',
+      'errMargin': 'Preis muss höher als variable Stückkosten sein',
+      'chartTitle': 'Aufteilung jedes Verkaufs',
+      'note': '📊 Break-even = Fixkosten ÷ (Preis − variable Kosten). Jeder Verkauf vor der Gewinnschwelle deckt Fixkosten; danach entsteht reiner Gewinn. Die Deckungsbeitragsquote zeigt den Anteil jedes Umsatz-Euros zur Fixkostendeckung.',
+    },
     useCases: [
       'Preise für ein Café kalkulieren: 3.500 € Fixkosten im Monat, Latte für 2,80 € bei 0,90 € variabel — rund 1.842 Tassen zum Break-even',
       'Preissenkung prüfen: Preis von 45 auf 39, Deckungsbeitrag 27 → 21, Break-even-Menge von 315 auf 405 Stück',

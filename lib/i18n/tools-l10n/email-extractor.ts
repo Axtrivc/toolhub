@@ -1,6 +1,6 @@
 /**
  * email-extractor 本地化 bundle —— zh / es / de
- * 覆盖:faqs + useCases(交互客户端为 batch 文本工具,UI 本地化留待后续)
+ * 覆盖:ui + faqs + useCases(2026-09 业务级增强:导出格式/公共邮箱过滤/域名归类/CSV)
  */
 import type { ToolL10n } from '../tool-l10n'
 
@@ -9,9 +9,20 @@ export const emailExtractorL10n: ToolL10n = {
     ui: {
       defaultInput: '联系我们：hello@example.com 或 support@test.org 获取帮助。',
       'noEmailsFound': '未找到邮箱',
-      inputLabel: '含邮箱的文本',
-      outputLabel: '提取出的邮箱',
-      note: '📧 从任意文本中提取所有邮箱地址。自动去重。',
+      'clear': '清空',
+      'placeholder': '粘贴包含邮箱地址的文本…',
+      'resultPlaceholder': '结果将显示在这里…',
+      'inputLabel': '含邮箱的文本',
+      'outputLabel': '提取出的邮箱',
+      'formatLabel': '导出格式',
+      'fmtNewline': '换行',
+      'fmtComma': '逗号分隔(抄送用)',
+      'filterPublic': '过滤公共邮箱(Gmail、QQ、Yahoo 等)',
+      'foundN': '{n} 个唯一邮箱',
+      'filteredN': '已滤除 {n} 个公共邮箱',
+      'domainTitle': '按域名归类',
+      'exportCsv': '导出 CSV',
+      'note': '📧 从任意文本中提取所有邮箱地址,自动去重。逗号格式可直接粘贴进邮件抄送栏;域名过滤器剔除 Gmail、QQ、Yahoo 等公共邮箱,让企业专有域名一目了然。',
     },
     useCases: [
       '从文档中提取联系方式',
@@ -30,9 +41,20 @@ export const emailExtractorL10n: ToolL10n = {
     ui: {
       defaultInput: 'Contáctanos en hola@example.com o soporte@test.org para ayuda.',
       'noEmailsFound': 'No se encontraron correos',
-      inputLabel: 'Texto con correos',
-      outputLabel: 'Correos extraídos',
-      note: '📧 Extrae todas las direcciones de correo de cualquier texto. Elimina duplicados automáticamente.',
+      'clear': 'Limpiar',
+      'placeholder': 'Pega texto con direcciones de correo…',
+      'resultPlaceholder': 'El resultado aparecerá aquí…',
+      'inputLabel': 'Texto con correos',
+      'outputLabel': 'Correos extraídos',
+      'formatLabel': 'Formato de exportación',
+      'fmtNewline': 'Saltos de línea',
+      'fmtComma': 'Separado por comas (para CC)',
+      'filterPublic': 'Filtrar correos públicos (Gmail, Yahoo…)',
+      'foundN': '{n} únicos',
+      'filteredN': '{n} públicos eliminados',
+      'domainTitle': 'Agrupados por dominio',
+      'exportCsv': 'Exportar a CSV',
+      'note': '📧 Extrae todas las direcciones de correo de cualquier texto. Elimina duplicados automáticamente. El formato con comas va directo al campo CC; el filtro de dominios quita Gmail, Yahoo y similares para que destaquen los dominios corporativos.',
     },
     useCases: [
       'extraer información de contacto de documentos',
@@ -51,9 +73,20 @@ export const emailExtractorL10n: ToolL10n = {
     ui: {
       defaultInput: 'Kontaktiere uns unter hallo@example.com oder support@test.org für Hilfe.',
       'noEmailsFound': 'Keine E-Mails gefunden',
-      inputLabel: 'Text mit E-Mails',
-      outputLabel: 'Extrahierte E-Mails',
-      note: '📧 Extrahiert alle E-Mail-Adressen aus beliebigem Text. Entfernt automatisch Duplikate.',
+      'clear': 'Leeren',
+      'placeholder': 'Text mit E-Mail-Adressen einfügen…',
+      'resultPlaceholder': 'Ergebnis erscheint hier…',
+      'inputLabel': 'Text mit E-Mails',
+      'outputLabel': 'Extrahierte E-Mails',
+      'formatLabel': 'Exportformat',
+      'fmtNewline': 'Zeilenumbrüche',
+      'fmtComma': 'Komma-getrennt (für CC)',
+      'filterPublic': 'Öffentliche Postfächer ausfiltern (Gmail, Yahoo…)',
+      'foundN': '{n} eindeutige',
+      'filteredN': '{n} öffentliche entfernt',
+      'domainTitle': 'Nach Domain gruppiert',
+      'exportCsv': 'Als CSV exportieren',
+      'note': '📧 Extrahiert alle E-Mail-Adressen aus beliebigem Text. Entfernt automatisch Duplikate. Das Kommaformat passt direkt ins CC-Feld; der Domainfilter entfernt Gmail, Yahoo & Co., damit Firmendomains hervorstechen.',
     },
     useCases: [
       'Kontaktinformationen aus Dokumenten extrahieren',

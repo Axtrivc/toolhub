@@ -13,6 +13,28 @@ const FORMULA = 'FIRE number = annual spending ÷ SWR · balance(t) = P(1+r)ᵗ 
 export const fireCalculatorL10n: ToolL10n = {
   // ──────────────────────────── 中文 ────────────────────────────
   zh: {
+    ui: {
+      'in.annualSpending': '退休后每年支出',
+      'in.currentSavings': '当前净资产储蓄',
+      'in.annualSavings': '每年新增储蓄投资',
+      'in.realReturn': '实际投资年化收益率 (扣除通胀)',
+      'in.swr': '安全提取率 (SWR)',
+      'out.fireNumber': '你的 FIRE 目标自由金额',
+      'outSub.fireNumber': '年度支出 ÷ 安全提取率',
+      'out.years': '实现财务自由所需年数',
+      'out.retireYear': '预计财务自由年份',
+      'out.savingsRate': '当前的储蓄率',
+      'outSub.savingsRate': '储蓄 ÷ (储蓄 + 支出)',
+      'out.boost10': '储蓄率提升 10% 可提早实现',
+      'preset.0': '极简 FIRE (年支出 $28k)',
+      'preset.1': '常规 FIRE (年支出 $50k)',
+      'preset.2': '激进型 60% 储蓄率',
+      'errInvalid': '请输入正的支出金额与大于 0% 的提取率',
+      'errUnreachable': '80 年内无法达成——请提高储蓄或缩减支出',
+      'yearsWord': '年',
+      'chartTitle': '投资组合增长与 FIRE 目标线',
+      'note': '💡 经典的 4% 法则对应 25 倍年支出的 FIRE 目标金额。此处填写的均为扣除通胀后的实际收益率，所有金额均为今日购买力——无需额外折算通胀。',
+    },
     useCases: [
       '算 FIRE 数字:年支出 40 万按 4% 提取率需 1000 万;改按 3.5% 变成约 1143 万,保守的代价立现',
       '测储蓄率杠杆:从 15% 提到 40%,达标时间常从 40 多年压到 20 年以内,比换任何回报假设都有效',
@@ -45,6 +67,28 @@ export const fireCalculatorL10n: ToolL10n = {
 
   // ──────────────────────────── Español ────────────────────────────
   es: {
+    ui: {
+      'in.annualSpending': 'Gasto anual en la jubilación',
+      'in.currentSavings': 'Patrimonio / ahorro actual',
+      'in.annualSavings': 'Ahorro anual añadido',
+      'in.realReturn': 'Rendimiento real (tras inflación)',
+      'in.swr': 'Tasa segura de retirada (SWR)',
+      'out.fireNumber': 'Tu cifra FIRE objetivo',
+      'outSub.fireNumber': 'Gasto anual ÷ SWR',
+      'out.years': 'Años para la independencia financiera',
+      'out.retireYear': 'Año estimado de jubilación',
+      'out.savingsRate': 'Tasa de ahorro actual',
+      'outSub.savingsRate': 'Ahorro ÷ (ahorro + gasto)',
+      'out.boost10': 'Subir un 10% el ahorro adelanta el retiro en',
+      'preset.0': 'Lean FIRE (28k $/año)',
+      'preset.1': 'FIRE estándar (50k $/año)',
+      'preset.2': 'Plan agresivo (tasa 60%)',
+      'errInvalid': 'Introduce gastos positivos y una tasa de retirada superior al 0%',
+      'errUnreachable': 'Inalcanzable en 80 años: ahorra más o gasta menos',
+      'yearsWord': 'años',
+      'chartTitle': 'Crecimiento patrimonial vs Objetivo FIRE',
+      'note': '💡 La regla del 4% fija la meta FIRE en 25 veces el gasto anual. Los rendimientos son reales (descontando la inflación).',
+    },
     useCases: [
       'calcular el número FIRE: 40.000 € de gasto anual al 4 % exigen un millón; al 3,5 % suben a unos 1.143.000 €',
       'medir la palanca del ahorro: subir del 15 % al 40 % de tasa suele comprimir 40+ años de viaje a menos de 20',
@@ -77,6 +121,28 @@ export const fireCalculatorL10n: ToolL10n = {
 
   // ──────────────────────────── Deutsch ────────────────────────────
   de: {
+    ui: {
+      'in.annualSpending': 'Jährliche Ausgaben im Ruhestand',
+      'in.currentSavings': 'Aktuelles Vermögen (Ersparnisse)',
+      'in.annualSavings': 'Jährliche Sparrate',
+      'in.realReturn': 'Reale Rendite (nach Inflation)',
+      'in.swr': 'Sichere Entnahmerate (SWR)',
+      'out.fireNumber': 'Deine FIRE-Zielsumme',
+      'outSub.fireNumber': 'Jährliche Ausgaben ÷ SWR',
+      'out.years': 'Jahre bis zur finanziellen Freiheit',
+      'out.retireYear': 'Voraussichtliches Ruhestandsjahr',
+      'out.savingsRate': 'Aktuelle Sparquote',
+      'outSub.savingsRate': 'Ersparnis ÷ (Ersparnis + Ausgaben)',
+      'out.boost10': '+10% Sparquote verkürzt die Zeit um',
+      'preset.0': 'Lean FIRE (28.000 $/Jahr)',
+      'preset.1': 'Klassisches FIRE (50.000 $/Jahr)',
+      'preset.2': 'Offensiv (60% Sparquote)',
+      'errInvalid': 'Positive Ausgaben und Entnahmerate über 0% eingeben',
+      'errUnreachable': 'Innerhalb von 80 Jahren nicht erreichbar',
+      'yearsWord': 'Jahre',
+      'chartTitle': 'Vermögenswachstum vs. FIRE-Ziel',
+      'note': '💡 Die klassische 4%-Regel impliziert eine FIRE-Zielsumme von 25 Jahresausgaben. Die Renditen sind inflationsbereinigt.',
+    },
     useCases: [
       'die FIRE-Zahl ermitteln: 40.000 € Jahresbedarf bei 4 % Entnahme erfordern eine Million; bei 3,5 % rund 1.143.000 €',
       'die Sparquote als Hebel testen: von 15 % auf 40 % staucht die Reise von 40+ Jahren meist auf unter 20',

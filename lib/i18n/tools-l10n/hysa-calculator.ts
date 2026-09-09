@@ -13,6 +13,27 @@ const FORMULA = 'FV = P × (1 + r/n)^(n·t) + PMT × [((1 + r/n)^(n·t) − 1) /
 export const hysaCalculatorL10n: ToolL10n = {
   // ──────────────────────────── 中文 ────────────────────────────
   zh: {
+    ui: {
+      'in.initial': '初始存入金额',
+      'in.monthly': '每月定投金额',
+      'in.apy': '年化收益率 (APY)',
+      'in.years': '投资/储蓄年限',
+      'in.compound': '复利方式',
+      'opt.compound.daily': '按日复利 (常见 HYSA 规则)',
+      'opt.compound.monthly': '按月复利',
+      'out.finalBalance': '期末账户总额',
+      'out.totalInterest': '获得总利息收益',
+      'outSub.totalInterest': '纯高息账户利息',
+      'out.totalDeposited': '累计本金存入',
+      'outSub.totalDeposited': '初始本金 + 每月定投',
+      'out.avgMonthlyInterest': '月均利息收入',
+      'preset.0': '应急备用金 (4.5% APY / 2 年)',
+      'preset.1': '积极攒钱 (5.0% APY / 5 年)',
+      'preset.2': '闲钱理财 (3.5% APY / 1 年)',
+      'errInvalid': '请输入有效的非负数',
+      'errYears': '存续年限必须大于 0',
+      'note': '🏦 大多数高收益储蓄账户（HYSA / 境外数字银行）按日计算复利、按月派息入账。利率为浮动利率——本测算假设 APY 在周期内保持恒定，仅供财务规划参考，不作为收益保证。',
+    },
     useCases: [
       '对比 4.25% 与 3.8% APY 的两种高息储蓄:10 万本金加每月 3000 定存,两年利息差在千元级',
       '算应急基金的机会成本:6 个月生活费约 4.5 万,按 4% APY 存三年多出约 5600 元利息',
@@ -45,6 +66,27 @@ export const hysaCalculatorL10n: ToolL10n = {
 
   // ──────────────────────────── Español ────────────────────────────
   es: {
+    ui: {
+      'in.initial': 'Depósito inicial',
+      'in.monthly': 'Aportación mensual',
+      'in.apy': 'APY (rendimiento anual)',
+      'in.years': 'Plazo en años',
+      'in.compound': 'Capitalización',
+      'opt.compound.daily': 'Diaria (habitual en cuentas remuneradas)',
+      'opt.compound.monthly': 'Mensual',
+      'out.finalBalance': 'Saldo final acumulado',
+      'out.totalInterest': 'Intereses ganados',
+      'outSub.totalInterest': 'Rendimiento puro de la cuenta',
+      'out.totalDeposited': 'Total aportado',
+      'outSub.totalDeposited': 'Depósito inicial + aportaciones',
+      'out.avgMonthlyInterest': 'Interés medio mensual',
+      'preset.0': 'Fondo de emergencia (4,5% APY)',
+      'preset.1': 'Ahorrador agresivo (5% APY)',
+      'preset.2': 'Liquidez a corto plazo (3,5% APY)',
+      'errInvalid': 'Introduce importes positivos válidos',
+      'errYears': 'Los años deben ser mayores que 0',
+      'note': '🏦 La mayoría de cuentas de ahorro de alto rendimiento capitalizan intereses a diario y los abonan mensualmente. Las tasas son variables.',
+    },
     useCases: [
       'comparar dos cuentas al 4,25 % y 3,8 % de TAE: 10.000 € más 300 € al mes, unos 110 € extra de intereses en dos años',
       'ver qué rinde el colchón de emergencia: 6 meses de gastos (5.000 €) al 4 % durante tres años generan unos 620 €',
@@ -77,6 +119,27 @@ export const hysaCalculatorL10n: ToolL10n = {
 
   // ──────────────────────────── Deutsch ────────────────────────────
   de: {
+    ui: {
+      'in.initial': 'Ersteinzahlung',
+      'in.monthly': 'Monatliche Sparrate',
+      'in.apy': 'APY (Jahresrendite)',
+      'in.years': 'Anlagehorizont (Jahre)',
+      'in.compound': 'Zinseszinseffekt',
+      'opt.compound.daily': 'Täglich (typisch für Tagesgeld)',
+      'opt.compound.monthly': 'Monatlich',
+      'out.finalBalance': 'Endsaldo',
+      'out.totalInterest': 'Erzielte Zinsen',
+      'outSub.totalInterest': 'Reine Zinserträge',
+      'out.totalDeposited': 'Eingezahltes Kapital',
+      'outSub.totalDeposited': 'Ersteinzahlung + monatliche Raten',
+      'out.avgMonthlyInterest': 'Durchschnittlicher Zins / Monat',
+      'preset.0': 'Notgroschen (4,5% APY)',
+      'preset.1': 'Offensives Sparen (5% APY)',
+      'preset.2': 'Parkgeld (3,5% APY)',
+      'errInvalid': 'Gültige positive Zahlen eingeben',
+      'errYears': 'Jahre müssen größer als 0 sein',
+      'note': '🏦 Die meisten Tagesgeldkonten verzinsen das Guthaben täglich und schreiben die Zinsen monatlich gut. Die Zinssätze sind variabel.',
+    },
     useCases: [
       'zwei Tagesgeldkonten mit 4,25 % und 3,8 % APY vergleichen: 10.000 € plus 300 € monatlich, rund 110 € Zinsunterschied in zwei Jahren',
       'den Notgroschen verzinst planen: sechs Monatsausgaben (5.000 €) zu 4 % über drei Jahre bringen rund 620 € Zinsen',

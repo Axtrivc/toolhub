@@ -95,7 +95,7 @@ export function GptTokenCounterClient() {
         `${L('sCharactersNoSpaces', 'Characters (no spaces):')} ${stats.charsNoSpaces.toLocaleString('en-US')}`,
         `${L('sWords', 'Words:')} ${stats.words.toLocaleString('en-US')}`,
         `${L('sSentences', 'Sentences:')} ${stats.sentences.toLocaleString('en-US')}`,
-        `${L('sModel', 'Model:')} ${model.label} ($${model.inputPer1M}/1M ${L('input', 'input')}, $${model.outputPer1M}/1M ${L('output', 'output')})`,
+        `${L('sModel', 'Model:')} ${model.label} ($${model.inputPer1M}/1M ${L('input', 'input')}${model.cacheInputPer1M !== undefined ? `, $${model.cacheInputPer1M}/1M ${L('cachedShort', 'cached')}` : ''}, $${model.outputPer1M}/1M ${L('output', 'output')})`,
         `${L('sEstimatedInputCost', 'Estimated input cost:')} ${formatUsd(inputCost)}`,
         `${L('sEstimatedOutputCost', 'Estimated output cost:')} ${formatUsd(outputCost)} (${outputTok.toLocaleString('en-US')} ${L('tokens', 'tokens')})`,
         `${L('sEstimatedTotalCost', 'Estimated total cost:')} ${formatUsd(totalCost)}`,
@@ -164,7 +164,9 @@ export function GptTokenCounterClient() {
               <optgroup key={g.provider} label={g.provider}>
                 {g.models.map((m) => (
                   <option key={m.id} value={m.id}>
-                    {m.label} — ${m.inputPer1M}/1M {L('inShort', 'in')} · ${m.outputPer1M}/1M {L('outShort', 'out')}
+                    {m.label} — ${m.inputPer1M}/1M {L('inShort', 'in')}
+                    {m.cacheInputPer1M !== undefined && ` · $${m.cacheInputPer1M}/1M ${L('cachedShort', 'cached')}`}
+                    {' · '}${m.outputPer1M}/1M {L('outShort', 'out')}
                   </option>
                 ))}
               </optgroup>

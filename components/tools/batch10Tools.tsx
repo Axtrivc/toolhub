@@ -373,6 +373,13 @@ let nextRobotRuleId = 1
 const mkRule = (agent: string, allow: string, disallow: string): RobotRule =>
   ({ id: nextRobotRuleId++, agent, allow, disallow })
 
+/**
+ * 2026 主流 AI 训练爬虫清单(GPTBot/ClaudeBot/PerplexityBot/Bytespider/
+ * Google-Extended/Applebot-Extended/Cohere-ai/Amazonbot):两个 AI 相关预设共用,
+ * 新爬虫上榜时只改这一处。
+ */
+const AI_CRAWLER_BOTS = ['GPTBot', 'ClaudeBot', 'PerplexityBot', 'Bytespider', 'Google-Extended', 'Applebot-Extended', 'Cohere-ai', 'Amazonbot']
+
 export function RobotsTxtGeneratorClient() {
   const { locale } = useApp()
   const L = (key: string, fb: string) => tui('robots-txt-generator', locale, key, fb)
@@ -388,11 +395,17 @@ export function RobotsTxtGeneratorClient() {
     if (p === 'allowAll') setRules([mkRule('*', '/', '')])
     else if (p === 'blockAll') setRules([mkRule('*', '', '/')])
     else if (p === 'blockAi') {
+      // 全站常规抓取 + 逐一封禁 AI 训练爬虫(训练数据采集,不影响搜索)
       setRules([
         mkRule('*', '/', '/admin/'),
-        mkRule('GPTBot', '', '/'),
-        mkRule('ClaudeBot', '', '/'),
-        mkRule('CCBot', '', '/'),
+        ...AI_CRAWLER_BOTS.map((b) => mkRule(b, '', '/')),
+      ])
+    } else if (p === 'searchNotAi') {
+      // 「允许搜索索引,屏蔽 AI 训练」:Googlebot/Bing 等正常收录,
+      // Google-Extended 只挡 Gemini 训练不挡搜索,其余 AI 爬虫全封
+      setRules([
+        mkRule('*', '/', ''),
+        ...AI_CRAWLER_BOTS.map((b) => mkRule(b, '', '/')),
       ])
     } else setRules([mkRule('*', '/', '/admin/')])
   }
@@ -429,6 +442,7 @@ export function RobotsTxtGeneratorClient() {
           ['allowAll', L('presetAllowAll', 'Allow everything')],
           ['blockAll', L('presetBlockAll', 'Block everything')],
           ['blockAi', L('presetBlockAi', 'Block AI crawlers')],
+          ['searchNotAi', L('presetSearchNotAi', 'Allow search, block AI training')],
         ] as const).map(([key, label]) => (
           <button
             key={key} type="button" onClick={() => applyPreset(key)}
@@ -504,7 +518,7 @@ export function RobotsTxtGeneratorClient() {
         <pre className="overflow-x-auto rounded-lg border p-4 font-mono text-sm whitespace-pre-wrap" style={{ borderColor: 'rgb(var(--border))', backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text))' }}>{output}</pre>
       </div>
       <ResultActions summary={output} filename="robots.txt" downloadContent={output} mime="text/plain;charset=utf-8;" />
-      <CalculatorNote>{L('note', '🤖 Place this file at your domain root (example.com/robots.txt). Google ignores Crawl-delay; Bing and Yandex honor it. Blocking AI crawlers (GPTBot, ClaudeBot, CCBot) is honored by their operators.')}</CalculatorNote>
+      <CalculatorNote>{L('note', '🤖 Place this file at your domain root (example.com/robots.txt). Google ignores Crawl-delay; Bing and Yandex honor it. The AI presets block the 2026 training crawlers (GPTBot, ClaudeBot, PerplexityBot, Bytespider, Google-Extended, Applebot-Extended, Cohere-ai, Amazonbot) — operators currently honor robots.txt. Google-Extended blocks Gemini training without affecting Google Search.')}</CalculatorNote>
     </div>
   )
 }

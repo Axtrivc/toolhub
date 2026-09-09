@@ -13,6 +13,30 @@ const FORMULA = 'Margin = Profit ÷ Price · Markup = Profit ÷ Cost · Price = 
 export const profitMarginCalculatorL10n: ToolL10n = {
   // ──────────────────────────── 中文 ────────────────────────────
   zh: {
+    ui: {
+      'in.cost': '单位成本',
+      'in.mode': '已知第二项参数',
+      'in.value': '已知数值',
+      'opt.mode.price': '售价',
+      'opt.mode.margin': '利润率 (占售价 %)',
+      'opt.mode.markup': '加价率 (占成本 %)',
+      'out.price': '建议售价',
+      'out.profit': '单位利润',
+      'out.margin': '利润率 (Margin)',
+      'outSub.margin': '利润 ÷ 售价',
+      'out.markup': '加价率 (Markup)',
+      'outSub.markup': '利润 ÷ 成本',
+      'out.multiplier': '成本倍数',
+      'preset.0': '倍数定价 (100% 加价率)',
+      'preset.1': '50% 利润率目标',
+      'preset.2': '零售法则 (30% 利润率)',
+      'errInvalid': '成本必须大于 0',
+      'errBelowCost': '售价低于成本，无法盈利',
+      'errMarginRange': '利润率必须在 0% 到 100% 之间',
+      'errNonNegative': '加价率不能为负',
+      'chartTitle': '售价构成：成本与利润',
+      'note': '💡 利润率 (Margin) 与加价率 (Markup) 绝不是一回事：100% 的加价率（成本翻倍）对应的只是 50% 的利润率。利润率是利润除以售价，而加价率是利润除以成本。混淆这两者是电商中最常见的定价失误。',
+    },
     useCases: [
       '纠正常见报价错误:成本 60 元想留 40% 毛利,60×1.4=84 是错的,正确售价是 60÷0.6=100 元',
       '电商算价:进货 45 + 快递 6 + 平台佣金约 5,变动成本 56 元,按 35% 毛利定价约 86.2 元',
@@ -45,6 +69,30 @@ export const profitMarginCalculatorL10n: ToolL10n = {
 
   // ──────────────────────────── Español ────────────────────────────
   es: {
+    ui: {
+      'in.cost': 'Coste unitario',
+      'in.mode': 'Segundo dato conocido',
+      'in.value': 'Valor conocido',
+      'opt.mode.price': 'Precio de venta',
+      'opt.mode.margin': 'Margen de beneficio (% del precio)',
+      'opt.mode.markup': 'Margen de recargo (% del coste)',
+      'out.price': 'Precio de venta',
+      'out.profit': 'Beneficio por unidad',
+      'out.margin': 'Margen de beneficio',
+      'outSub.margin': 'Beneficio ÷ precio',
+      'out.markup': 'Recargo (Markup)',
+      'outSub.markup': 'Beneficio ÷ coste',
+      'out.multiplier': 'Multiplicador de coste',
+      'preset.0': 'Margen doble / Keystone (100%)',
+      'preset.1': 'Objetivo de margen del 50%',
+      'preset.2': 'Regla minorista (30% margen)',
+      'errInvalid': 'El coste debe ser mayor que 0',
+      'errBelowCost': 'El precio de venta está por debajo del coste',
+      'errMarginRange': 'El margen debe estar entre 0% y 100%',
+      'errNonNegative': 'El recargo no puede ser negativo',
+      'chartTitle': 'Precio de venta: Coste vs Beneficio',
+      'note': '💡 Margen (Margin) y recargo (Markup) NO son lo mismo: un recargo del 100% solo supone un margen del 50%. El margen divide el beneficio entre el PRECIO; el recargo divide entre el COSTE.',
+    },
     useCases: [
       'corregir el error clásico: coste 60 € y quieres 40 % de margen — 60×1,4=84 está mal; el precio correcto es 60÷0,6=100 €',
       'fijar precio online: 45 € de compra + 6 € de envío + 5 € de comisión, coste 56 €; con 35 % de margen salen 86,15 €',
@@ -77,6 +125,30 @@ export const profitMarginCalculatorL10n: ToolL10n = {
 
   // ──────────────────────────── Deutsch ────────────────────────────
   de: {
+    ui: {
+      'in.cost': 'Stückkosten',
+      'in.mode': 'Zweiter bekannter Wert',
+      'in.value': 'Bekannter Wert',
+      'opt.mode.price': 'Verkaufspreis',
+      'opt.mode.margin': 'Gewinnmarge (% des Preises)',
+      'opt.mode.markup': 'Aufschlag (% der Kosten)',
+      'out.price': 'Verkaufspreis',
+      'out.profit': 'Gewinn pro Einheit',
+      'out.margin': 'Gewinnmarge',
+      'outSub.margin': 'Gewinn ÷ Preis',
+      'out.markup': 'Aufschlag (Markup)',
+      'outSub.markup': 'Gewinn ÷ Kosten',
+      'out.multiplier': 'Kostenmultiplikator',
+      'preset.0': 'Keystone-Aufschlag (100%)',
+      'preset.1': '50% Margenziel',
+      'preset.2': 'Einzelhandelsregel (30% Marge)',
+      'errInvalid': 'Kosten müssen größer als 0 sein',
+      'errBelowCost': 'Verkaufspreis liegt unter den Kosten',
+      'errMarginRange': 'Marge muss zwischen 0% und 100% liegen',
+      'errNonNegative': 'Aufschlag darf nicht negativ sein',
+      'chartTitle': 'Verkaufspreis: Kosten vs. Gewinn',
+      'note': '💡 Marge und Aufschlag sind NICHT dasselbe: Ein Aufschlag von 100% (Verdopplung der Kosten) entspricht lediglich einer Marge von 50%. Die Marge teilt den Gewinn durch den PREIS; der Aufschlag durch die KOSTEN.',
+    },
     useCases: [
       'den klassischen Kalkulationsfehler korrigieren: Kosten 60 €, Ziel 40 % Marge — 60×1,4=84 ist falsch, richtig: 60÷0,6=100 €',
       'Online-Preise kalkulieren: 45 € Einkauf + 6 € Versand + 5 € Provision = 56 € Kosten; bei 35 % Marge: 86,15 €',

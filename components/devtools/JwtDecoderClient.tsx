@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useMemo, useCallback, useEffect } from 'react'
+import Link from 'next/link'
 import { CopyButton } from '@/components/CopyButton'
 import { LoadSampleButton } from '@/components/LoadSampleButton'
 import { useApp } from '@/components/providers/AppProviders'
@@ -234,6 +235,19 @@ export function JwtDecoderClient() {
               <pre className="max-h-96 overflow-auto rounded-lg border bg-slate-50 p-4 text-xs dark:bg-slate-800/60" style={{ borderColor: 'rgb(var(--border))' }}>
                 <code>{payloadStr}</code>
               </pre>
+              {/* 解码 → 生成闭环:一键复制 payload + 直达 JWT Generator 继续编辑重签 */}
+              <div className="mt-2 flex flex-wrap items-center gap-2 rounded-lg border border-brand-200 bg-brand-50/70 p-2.5 dark:border-blue-800/60 dark:bg-blue-950/30">
+                <Link
+                  href="/tools/jwt-generator/"
+                  className="btn btn-primary px-3 py-1.5 text-xs font-semibold"
+                >
+                  🛠 {L('editResign', 'Edit & Re-sign in JWT Generator →')}
+                </Link>
+                <CopyButton value={payloadStr} label={L('copyPayload', 'Copy payload')} />
+                <span className="text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>
+                  {L('resignHint', 'Copy the payload, paste it into the generator, and re-sign with your secret.')}
+                </span>
+              </div>
             </div>
           </div>
 

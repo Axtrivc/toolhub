@@ -27,7 +27,7 @@
 export const calculatorSamples: Record<string, Record<string, string>> = {
   // ── 金融 / 生活计算器 ──
   'loan-calculator': { amount: '400000', rate: '6.8', years: '30' },
-  'mortgage-calculator': { home: '400000', down: '20', rate: '6.8', years: '30' },
+  'mortgage-calculator': { home: '400000', down: '20', rate: '6.8', years: '30', tax: '3600', insurance: '1500', hoa: '0', pmiRate: '0.5', extra: '0' },
   'compound-interest-calculator': { principal: '10000', rate: '7', years: '20', monthly: '200' },
   'simple-interest-calculator': { principal: '5000', rate: '5', years: '3' },
   'savings-goal-calculator': { goal: '50000', years: '5', rate: '4', current: '5000' },
@@ -52,7 +52,7 @@ export const calculatorSamples: Record<string, Record<string, string>> = {
   'dti-calculator': { income: '6000', debts: '1500' },
   'income-tax-estimator': { income: '75000', filing: 'single' },
   'capital-gains-tax-estimator': { purchase: '10000', sale: '16000', years: '2', taxableIncome: '80000', filing: 'single' },
-  'rent-vs-buy-calculator': { home: '400000', rent: '1800', down: '20', rate: '6.8', years: '7' },
+  'rent-vs-buy-calculator': { home: '400000', rent: '1800', down: '20', rate: '6.8', term: '30', years: '7' },
   'hourly-to-salary-calculator': { hourly: '28', hours: '40' },
   'salary-converter': { unit: 'annual', amount: '65000', hours: '40' },
   'retirement-calculator': { current: '120000', monthly: '800', rate: '6', years: '30' },
@@ -76,7 +76,7 @@ export const calculatorSamples: Record<string, Record<string, string>> = {
 
   // ── 数学 / 几何 ──
   'circle-calculator': { r: '8' },
-  'triangle-calculator': { a: '3', b: '4', c: '5' },
+  'triangle-calculator': { a: '3', b: '4' },
   'rectangle-calculator': { w: '12', h: '8' },
   'trapezoid-calculator': { a: '6', b: '10', h: '4' },
   'cube-calculator': { side: '5' },

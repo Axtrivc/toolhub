@@ -1,6 +1,6 @@
 /**
  * url-extractor 本地化 bundle —— zh / es / de
- * 覆盖:faqs + useCases(交互客户端为 batch 文本工具,UI 本地化留待后续)
+ * 覆盖:ui + faqs + useCases(2026-09 业务级增强:静态资源过滤/唯一主域名聚合)
  */
 import type { ToolL10n } from '../tool-l10n'
 
@@ -9,9 +9,19 @@ export const urlExtractorL10n: ToolL10n = {
     ui: {
       defaultInput: '访问 https://example.com 或 http://test.org/page?q=1 了解更多！',
       'noUrlsFound': '未找到 URL',
-      inputLabel: '含网址的文本',
-      outputLabel: '提取出的网址',
-      note: '🔗 从任意文本中提取所有网址。自动去重。',
+      'clear': '清空',
+      'placeholder': '粘贴包含网址的文本…',
+      'resultPlaceholder': '结果将显示在这里…',
+      'inputLabel': '含网址的文本',
+      'outputLabel': '提取出的网址',
+      'viewLabel': '展示模式',
+      'viewUrls': '完整 URL',
+      'viewDomains': '唯一主域名',
+      'filterAssets': '过滤静态资源(图片/CSS/JS/字体)',
+      'foundN': '{n} 个唯一',
+      'domainsN': '{n} 个唯一域名',
+      'assetsN': '已隐藏 {n} 个静态资源',
+      'note': '🔗 从任意文本中提取所有网址。自动去重、剥离句尾标点;可隐藏图片/CSS/JS/字体等静态资源,也可按唯一主域名聚合展示。',
     },
     useCases: [
       '从文章或邮件中抓取全部链接',
@@ -30,9 +40,19 @@ export const urlExtractorL10n: ToolL10n = {
     ui: {
       defaultInput: 'Visita https://example.com o http://test.org/page?q=1 hoy!',
       'noUrlsFound': 'No se encontraron URLs',
-      inputLabel: 'Texto con URLs',
-      outputLabel: 'URLs extraídas',
-      note: '🔗 Extrae todas las URLs de cualquier texto. Elimina duplicados.',
+      'clear': 'Limpiar',
+      'placeholder': 'Pega texto con URLs…',
+      'resultPlaceholder': 'El resultado aparecerá aquí…',
+      'inputLabel': 'Texto con URLs',
+      'outputLabel': 'URLs extraídas',
+      'viewLabel': 'Modo de vista',
+      'viewUrls': 'URLs completas',
+      'viewDomains': 'Dominios únicos',
+      'filterAssets': 'Filtrar recursos estáticos (imágenes/CSS/JS/fuentes)',
+      'foundN': '{n} únicas',
+      'domainsN': '{n} dominios únicos',
+      'assetsN': '{n} recursos ocultos',
+      'note': '🔗 Extrae todas las URLs de cualquier texto. Deduplica, limpia la puntuación final, puede ocultar recursos estáticos (imágenes/CSS/JS/fuentes) y agrupar los resultados por dominio único.',
     },
     useCases: [
       'extraer todos los enlaces de un artículo o correo',
@@ -51,9 +71,19 @@ export const urlExtractorL10n: ToolL10n = {
     ui: {
       defaultInput: 'Besuche https://example.com oder http://test.org/page?q=1 heute!',
       'noUrlsFound': 'Keine URLs gefunden',
-      inputLabel: 'Text mit URLs',
-      outputLabel: 'Extrahierte URLs',
-      note: '🔗 Extrahiert alle URLs aus beliebigem Text. Entfernt Duplikate.',
+      'clear': 'Leeren',
+      'placeholder': 'Text mit URLs einfügen…',
+      'resultPlaceholder': 'Ergebnis erscheint hier…',
+      'inputLabel': 'Text mit URLs',
+      'outputLabel': 'Extrahierte URLs',
+      'viewLabel': 'Ansicht',
+      'viewUrls': 'Vollständige URLs',
+      'viewDomains': 'Eindeutige Domains',
+      'filterAssets': 'Statische Ressourcen ausblenden (Bilder/CSS/JS/Schriften)',
+      'foundN': '{n} eindeutige',
+      'domainsN': '{n} eindeutige Domains',
+      'assetsN': '{n} Ressourcen ausgeblendet',
+      'note': '🔗 Extrahiert alle URLs aus beliebigem Text. Dedupliziert, entfernt anhängende Satzzeichen, kann statische Ressourcen (Bilder/CSS/JS/Schriften) ausblenden und Treffer nach eindeutiger Hauptdomain gruppieren.',
     },
     useCases: [
       'alle Links aus einem Artikel oder einer E-Mail ziehen',

@@ -265,15 +265,24 @@ export function TokenVisualizerClient() {
 // ── Embedding 价格计算 ──
 interface EmbedModel { id: string; label: string; dims: number; ctx: number; pricePer1M: number }
 
+// 已淘汰 text-embedding-ada-002(OpenAI 逐步下线,不再列入比价);
+// 现役矩阵:OpenAI v3 两档 + Cohere v4 + Voyage-3 + Gemini 004(配额内免费)
 const EMBED_MODELS: EmbedModel[] = [
   { id: 'openai-3-small', label: 'OpenAI text-embedding-3-small', dims: 1536, ctx: 8191, pricePer1M: 0.02 },
   { id: 'openai-3-large', label: 'OpenAI text-embedding-3-large', dims: 3072, ctx: 8191, pricePer1M: 0.13 },
-  { id: 'openai-ada-002', label: 'OpenAI text-embedding-ada-002', dims: 1536, ctx: 8191, pricePer1M: 0.10 },
   { id: 'cohere-embed-v4', label: 'Cohere embed-v4', dims: 1536, ctx: 128000, pricePer1M: 0.11 },
   { id: 'cohere-embed-light', label: 'Cohere embed-v4 (int8)', dims: 1024, ctx: 128000, pricePer1M: 0.035 },
   { id: 'voyage-3', label: 'Voyage voyage-3', dims: 1024, ctx: 32000, pricePer1M: 0.06 },
   { id: 'gemini-emb', label: 'Gemini text-embedding-004', dims: 768, ctx: 2048, pricePer1M: 0.0 },
 ]
+
+/** 向量库内存占用(float32 口径):dims × 4 bytes × 条数,自动换单位 */
+function formatVectorStorage(docs: number, dims: number): string {
+  const bytes = docs * dims * 4
+  if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`
+  if (bytes < 1024 ** 3) return `${(bytes / 1024 ** 2).toFixed(1)} MB`
+  return `${(bytes / 1024 ** 3).toFixed(2)} GB`
+}
 
 export function EmbeddingPriceClient() {
   const { locale } = useApp()
@@ -288,10 +297,11 @@ export function EmbeddingPriceClient() {
     const r = Number(runsPerMonth)
     if (!Number.isFinite(d) || !Number.isFinite(t) || !Number.isFinite(r) || d < 0 || t < 0 || r < 0) return null
     const totalTokens = d * t
-    return EMBED_MODELS.map((m) => {
+    const rows = EMBED_MODELS.map((m) => {
       const perRun = (totalTokens / 1e6) * m.pricePer1M
-      return { m, perRun, monthly: perRun * r }
+      return { m, perRun, monthly: perRun * r, storage: formatVectorStorage(d, m.dims) }
     }).sort((a, b) => a.monthly - b.monthly)
+    return { rows }
   }, [docs, avgTokens, runsPerMonth])
 
   return (
@@ -305,7 +315,7 @@ export function EmbeddingPriceClient() {
       {stats && (
         <StackedCompareChart
           title={L('chartTitle', 'Monthly cost by model')}
-          rows={stats.filter(({ monthly }) => monthly > 0).map(({ m, monthly }, i) => ({
+          rows={stats.rows.filter(({ monthly }) => monthly > 0).map(({ m, monthly }, i) => ({
             label: m.label,
             segments: [{ label: i === 0 ? L('cheapestLabel', 'cheapest') : L('costLabel', 'per month'), value: monthly, color: i === 0 ? '#22c55e' : '#3b82f6' }],
           }))}
@@ -317,13 +327,13 @@ export function EmbeddingPriceClient() {
           <table className="w-full text-right text-sm">
             <thead>
               <tr style={{ backgroundColor: 'rgb(var(--bg-subtle))' }}>
-                {[L('thModel', 'Model'), L('thDims', 'Dims'), L('thCtx', 'Context'), L('thPer1M', '$/1M tokens'), L('thPerRun', 'Per run'), L('thMonthly', 'Per month')].map((h, i) => (
+                {[L('thModel', 'Model'), L('thDims', 'Dims'), L('thCtx', 'Context'), L('thPer1M', '$/1M tokens'), L('thPerRun', 'Per run'), L('thMonthly', 'Per month'), L('thStorage', 'Vector storage (float32)')].map((h, i) => (
                   <th key={h} scope="col" className={`border-b px-3 py-2 font-medium ${i === 0 ? 'text-left' : ''}`} style={{ borderColor: 'rgb(var(--border))', color: 'rgb(var(--text-muted))' }}>{h}</th>
                 ))}
               </tr>
             </thead>
             <tbody>
-              {stats.map(({ m, perRun, monthly }, i) => (
+              {stats.rows.map(({ m, perRun, monthly, storage }, i) => (
                 <tr key={m.id} className={`border-b last:border-b-0 ${i === 0 ? 'bg-green-50/60 dark:bg-green-950/20' : ''}`} style={{ borderColor: 'rgb(var(--border))' }}>
                   <td className="px-3 py-2 text-left font-medium" style={{ color: 'rgb(var(--text))' }}>
                     {m.label}
@@ -334,6 +344,7 @@ export function EmbeddingPriceClient() {
                   <td className="px-3 py-2 font-mono text-xs" style={{ color: 'rgb(var(--text-faint))' }}>${m.pricePer1M === 0 ? '0' : fmtNum(m.pricePer1M, 3)}</td>
                   <td className="px-3 py-2 font-mono" style={{ color: 'rgb(var(--text))' }}>${perRun < 0.01 ? perRun.toExponential(1) : fmtNum(perRun, 4)}</td>
                   <td className="px-3 py-2 font-mono font-semibold" style={{ color: 'rgb(var(--text))' }}>${fmtNum(monthly, 2)}</td>
+                  <td className="px-3 py-2 font-mono text-xs whitespace-nowrap" style={{ color: 'rgb(var(--text-faint))' }}>{storage}</td>
                 </tr>
               ))}
             </tbody>
@@ -343,13 +354,13 @@ export function EmbeddingPriceClient() {
         <p className="text-sm" style={{ color: 'rgb(var(--text-faint))' }}>{L('invalid', 'Enter non-negative numbers')}</p>
       )}
       <ResultActions
-        summary={stats ? stats.map(({ m, monthly }) => `${m.label}: $${fmtNum(monthly, 2)}/mo`).join('\n') : ''}
+        summary={stats ? stats.rows.map(({ m, monthly }) => `${m.label}: $${fmtNum(monthly, 2)}/mo`).join('\n') : ''}
         filename="embedding-costs.csv"
-        downloadContent={stats ? 'Model,Dims,Context,$/1M,Per run,Per month\n' + stats.map(({ m, perRun, monthly }) => `${m.label},${m.dims},${m.ctx},${m.pricePer1M},${perRun.toFixed(6)},${monthly.toFixed(2)}`).join('\n') : ''}
+        downloadContent={stats ? 'Model,Dims,Context,$/1M,Per run,Per month,Vector storage (float32)\n' + stats.rows.map(({ m, perRun, monthly, storage }) => `${m.label},${m.dims},${m.ctx},${m.pricePer1M},${perRun.toFixed(6)},${monthly.toFixed(2)},${storage}`).join('\n') : ''}
         mime="text/csv;charset=utf-8;"
         copyLabel={L('copySummary', 'Copy Summary')}
       />
-      <CalculatorNote>{L('note', '🧮 Prices checked 2026-08; embedding input is cheap enough that most workloads cost cents — storage and retrieval usually dominate real RAG bills. Dimensions affect vector-DB storage more than API cost. Gemini text-embedding-004 is free-tier within quotas.')}</CalculatorNote>
+      <CalculatorNote>{L('note', '🧮 Prices checked 2026-08 (deprecated ada-002 removed); embedding input is cheap enough that most workloads cost cents — storage and retrieval usually dominate real RAG bills. The storage column estimates raw vector memory at float32 precision: dims × 4 bytes × documents (3072-dim vectors cost 4× the memory of 768-dim). Gemini text-embedding-004 is free-tier within quotas.')}</CalculatorNote>
     </div>
   )
 }

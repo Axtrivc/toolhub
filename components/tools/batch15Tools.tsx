@@ -8,7 +8,7 @@ import { CopyButton } from '@/components/CopyButton'
 import { fmtNum, toNumStrict } from '@/lib/format'
 import { useApp } from '@/components/providers/AppProviders'
 import { tui } from '@/lib/i18n/tool-l10n'
-import { MODEL_PRICES } from '@/lib/model-pricing'
+import { CONTEXT_MODELS, MODEL_PRICES } from '@/lib/model-pricing'
 import { getCalculatorSample } from '@/lib/tool-samples'
 
 /**
@@ -26,6 +26,9 @@ export function LlmCostCalculatorClient() {
   const [inputTokens, setInputTokens] = useState('2000')
   const [outputTokens, setOutputTokens] = useState('800')
   const [requestsPerDay, setRequestsPerDay] = useState('100')
+  // Prompt Cache Hit Rate(0-100):Agent 高频场景下系统提示反复命中缓存,
+  // 有效输入单价 = 输入价 × (1 - 缓存率) + 缓存价 × 缓存率
+  const [cacheRate, setCacheRate] = useState('0')
 
   const stats = useMemo(() => {
     // B1 粘贴宽容:从文档复制的 "2,000" 一类数字直接可用(toNumStrict),
@@ -33,20 +36,26 @@ export function LlmCostCalculatorClient() {
     const it = toNumStrict(inputTokens)
     const ot = toNumStrict(outputTokens)
     const rpd = toNumStrict(requestsPerDay)
+    const cr = toNumStrict(cacheRate) / 100
     if (!Number.isFinite(it) || !Number.isFinite(ot) || !Number.isFinite(rpd) || it < 0 || ot < 0 || rpd < 0) return null
+    const rate = Number.isFinite(cr) ? Math.min(Math.max(cr, 0), 1) : 0
     const rows = MODEL_PRICES.map((m) => {
-      const perReq = (it / 1e6) * m.inputPer1M + (ot / 1e6) * m.outputPer1M
-      return { m, perReq, perDay: perReq * rpd, perMonth: perReq * rpd * 30.44 }
+      // 缓存价缺失的模型按无折扣(原输入价)参与混合
+      const cachePrice = m.cacheInputPer1M ?? m.inputPer1M
+      const effIn = m.inputPer1M * (1 - rate) + cachePrice * rate
+      const perReq = (it / 1e6) * effIn + (ot / 1e6) * m.outputPer1M
+      return { m, effIn, perReq, perDay: perReq * rpd, perMonth: perReq * rpd * 30.44 }
     }).sort((a, b) => a.perMonth - b.perMonth)
-    return { rows }
-  }, [inputTokens, outputTokens, requestsPerDay])
+    return { rows, rate }
+  }, [inputTokens, outputTokens, requestsPerDay, cacheRate])
 
   return (
     <div className="space-y-5">
-      <div className="grid grid-cols-1 gap-4 rounded-lg p-4 sm:grid-cols-3" style={{ backgroundColor: 'rgb(var(--bg-subtle))' }}>
+      <div className="grid grid-cols-1 gap-4 rounded-lg p-4 sm:grid-cols-2 lg:grid-cols-4" style={{ backgroundColor: 'rgb(var(--bg-subtle))' }}>
         <CalculatorSliderField id="lc-in" label={L('inLabel', 'Input tokens / request')} value={inputTokens} onChange={setInputTokens} placeholder="2000" min={0} max={100000} step={500} />
         <CalculatorSliderField id="lc-out" label={L('outLabel', 'Output tokens / request')} value={outputTokens} onChange={setOutputTokens} placeholder="800" min={0} max={32000} step={100} />
         <CalculatorSliderField id="lc-rpd" label={L('rpdLabel', 'Requests per day')} value={requestsPerDay} onChange={setRequestsPerDay} placeholder="100" min={0} max={10000} step={10} />
+        <CalculatorSliderField id="lc-cache" label={L('cacheLabel', 'Prompt cache hit rate')} value={cacheRate} onChange={setCacheRate} placeholder="0" min={0} max={100} step={5} suffix="%" />
       </div>
 
       {stats && (
@@ -70,13 +79,19 @@ export function LlmCostCalculatorClient() {
               </tr>
             </thead>
             <tbody>
-              {stats.rows.map(({ m, perReq, perDay, perMonth }, i) => (
+              {stats.rows.map(({ m, effIn, perReq, perDay, perMonth }, i) => (
                 <tr key={m.id} className={`border-b last:border-b-0 ${i === 0 ? 'bg-green-50/60 dark:bg-green-950/20' : ''}`} style={{ borderColor: 'rgb(var(--border))' }}>
                   <td className="px-3 py-2 text-left font-medium" style={{ color: 'rgb(var(--text))' }}>
                     {m.label}
                     {i === 0 && <span className="ml-2 text-xs text-green-600 dark:text-green-400">{L('cheapest', 'cheapest')}</span>}
                   </td>
-                  <td className="px-3 py-2 font-mono text-xs" style={{ color: 'rgb(var(--text-faint))' }}>${fmtNum(m.inputPer1M, 2)}</td>
+                  <td className="px-3 py-2 font-mono text-xs" style={{ color: 'rgb(var(--text-faint))' }}>
+                    ${fmtNum(m.inputPer1M, 2)}
+                    {/* 缓存率 > 0 时追加混合后有效输入价,绿色箭头直观显示降幅 */}
+                    {stats.rate > 0 && effIn < m.inputPer1M && (
+                      <span className="ml-1 whitespace-nowrap text-green-600 dark:text-green-400">→ ${fmtNum(effIn, 2)}</span>
+                    )}
+                  </td>
                   <td className="px-3 py-2 font-mono text-xs" style={{ color: 'rgb(var(--text-faint))' }}>${fmtNum(m.outputPer1M, 2)}</td>
                   <td className="px-3 py-2 font-mono" style={{ color: 'rgb(var(--text))' }}>${perReq < 0.01 ? perReq.toExponential(1) : fmtNum(perReq, 4)}</td>
                   <td className="px-3 py-2 font-mono" style={{ color: 'rgb(var(--text))' }}>${fmtNum(perDay, 2)}</td>
@@ -93,26 +108,18 @@ export function LlmCostCalculatorClient() {
       <ResultActions
         summary={stats ? stats.rows.map(({ m, perMonth }) => `${m.label}: $${fmtNum(perMonth, 2)}/mo`).join('\n') : ''}
         filename="llm-costs.csv"
-        downloadContent={stats ? 'Model,In $/1M,Out $/1M,Per request,Per day,Per month\n' + stats.rows.map(({ m, perReq, perDay, perMonth }) => `${m.label},${m.inputPer1M},${m.outputPer1M},${perReq.toFixed(6)},${perDay.toFixed(2)},${perMonth.toFixed(2)}`).join('\n') : ''}
+        downloadContent={stats ? `Model,In $/1M,Eff In $/1M @ ${Math.round(stats.rate * 100)}% cache,Out $/1M,Per request,Per day,Per month\n` + stats.rows.map(({ m, effIn, perReq, perDay, perMonth }) => `${m.label},${m.inputPer1M},${effIn.toFixed(4)},${m.outputPer1M},${perReq.toFixed(6)},${perDay.toFixed(2)},${perMonth.toFixed(2)}`).join('\n') : ''}
         mime="text/csv;charset=utf-8;"
         copyLabel={L('copySummary', 'Copy Summary')}
       />
-      <CalculatorNote>{L('note', '💰 Prices are uncached-input rates per 1M tokens (tokencost.app, checked 2026-08). Cached prompts run 50-90% cheaper on input; batch/async APIs roughly halve output costs. Monthly assumes 30.44 days.')}</CalculatorNote>
+      <CalculatorNote>{L('note', '💰 Prices are uncached-input rates per 1M tokens (tokencost.app, checked 2026-08). The cache slider blends input price with each provider\'s cached-input rate — effective input = input × (1 − hit rate) + cache price × hit rate, the realistic bill for agent workloads with repeated system prompts. Batch/async APIs roughly halve output costs. Monthly assumes 30.44 days.')}</CalculatorNote>
     </div>
   )
 }
 
 // ── 上下文窗口检查器 ──
-const CONTEXT_LIMITS: Array<{ id: string; label: string; ctx: number }> = [
-  { id: 'gpt-5.6', label: 'GPT-5.6 class', ctx: 400_000 },
-  { id: 'claude-fable', label: 'Claude Fable 5', ctx: 500_000 },
-  { id: 'claude-sonnet', label: 'Claude Sonnet 5', ctx: 200_000 },
-  { id: 'gemini-3-pro', label: 'Gemini 3.1 Pro', ctx: 2_000_000 },
-  { id: 'gemini-flash', label: 'Gemini 3.6 Flash', ctx: 1_000_000 },
-  { id: 'deepseek-v4', label: 'DeepSeek V4', ctx: 128_000 },
-  { id: 'llama-4', label: 'Llama 4 class', ctx: 128_000 },
-  { id: 'legacy-8k', label: 'Legacy 8K', ctx: 8_192 },
-]
+// 模型窗口表不再硬编码:直接派生自 lib/model-pricing.ts 的 CONTEXT_MODELS
+// (峰/谷价条目已归并,按窗口降序),与成本计算器共用同一数据源。
 
 /** 粗估 token 数:英文 ≈ chars/4;含 CJK 时每个 CJK 字符按 ~1 token */
 function estimateTokens(text: string): number {
@@ -147,7 +154,7 @@ export function ContextWindowCheckerClient() {
       </div>
 
       <div role="status" aria-live="polite" className="space-y-3">
-        {CONTEXT_LIMITS.map(({ id, label, ctx }) => {
+        {CONTEXT_MODELS.map(({ id, label, ctx }) => {
           const pct = Math.min((tokens / ctx) * 100, 100)
           const fit = tokens <= ctx
           return (

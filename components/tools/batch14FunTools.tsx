@@ -404,45 +404,122 @@ export function MorseCodeTranslatorClient() {
 }
 
 // ── 打字速度测试 ──
-const PROMPTS = [
+/** 模式一:English Quotes —— 经典金句(扩充题库) */
+const QUOTE_PROMPTS = [
   'The quick brown fox jumps over the lazy dog while the cat watches from the warm windowsill without much interest at all.',
   'Programming is the art of telling another human what one wants the computer to do before translating it into symbols it obeys.',
   'She sold seashells by the seashore, but the shells she sold were surely not the same as the shells others sought that day.',
   'A journey of a thousand miles begins with a single step, and so does every essay, program, and half-finished side project.',
   'Coffee tastes best in the quiet hour before the city wakes, when the machines hum softly and nobody expects a reply yet.',
+  'Simplicity is the ultimate sophistication: the best code reads like prose and hides the hard decisions it took to get there.',
+  'The best time to plant a tree was twenty years ago; the second best time is today, and the same goes for learning to type.',
+  'Details are not details; they make the design, and every keystroke you practice is one of those small, decisive details.',
 ]
 
+/** 模式二:Code Snippets —— 程序员高频代码语法 */
+const CODE_PROMPTS = [
+  'const total = items.reduce((acc, item) => acc + item.price * item.qty, 0);',
+  "if (user?.profile?.email) { sendWelcome(user.profile.email); }",
+  'SELECT id, name, created_at FROM users WHERE status = 1 ORDER BY created_at DESC;',
+  '<button type="button" className="btn-primary" onClick={() => setOpen(true)}>Save</button>',
+  'def greet(name: str) -> str:\n    return f"Hello, {name}!"',
+  'docker run -d --name db -p 5432:5432 -e POSTGRES_PASSWORD=secret postgres:17',
+  'git switch -c feature/typing-test && npm install --save-dev typescript',
+  'try { const res = await fetch(url, { method: "POST", body: JSON.stringify(data) }); }',
+]
+
+/** 模式三:Multilingual —— 依当前 locale 匹配的谚语/金句(en 回退英语格言) */
+const MULTI_PROMPTS: Record<string, string[]> = {
+  zh: [
+    '工欲善其事,必先利其器;程序员的第一件事,是把手放在正确的键位上。',
+    '不积跬步,无以至千里;不积小流,无以成江海。',
+    '路漫漫其修远兮,吾将上下而求索;键盘上的每一次敲击,都是求索的脚印。',
+    '温故而知新,可以为师矣;常练而熟指,可以快写代码矣。',
+    '世上无难事,只怕有心人;代码无难事,只怕手生人。',
+  ],
+  es: [
+    'El que madruga, Dios lo ayuda; pero el que practica mecanografía, el teclado lo premia.',
+    'Más vale pájaro en mano que cien volando, y más vale precisión que cien palabras por minuto.',
+    'Poco a poco se anda lejos, y tecla a tecla se escribe un libro entero.',
+    'La práctica hace al maestro, y la constancia hace al gran mecanógrafo.',
+    'No dejes para mañana lo que puedes teclear hoy mismo.',
+  ],
+  de: [
+    'Übung macht den Meister, und regelmäßiges Tippen macht den Tasten-Virtuosen.',
+    'Aller Anfang ist schwer, doch jede Zeile Code beginnt mit dem ersten Anschlag.',
+    'Wer rastet, der rostet; wer tippt, der bleibt flink auf den Tasten.',
+    'Morgen, morgen, nur nicht heute — sagen alle faulen Leute; tippe lieber heute.',
+    'Viele Hände machen leicht ein Ende, aber nur deine Hände schreiben deinen Code.',
+  ],
+  en: [
+    'Practice does not make perfect; only perfect practice makes perfect, so aim every keystroke.',
+    'Slow is smooth, and smooth is fast — accuracy first, speed follows on its own.',
+    'The early bird catches the worm, and the accurate typist catches the deadline.',
+  ],
+}
+
+type TypingMode = 'quotes' | 'code' | 'multi'
+
 interface TypeStats { wpmGross: number; wpmNet: number; accuracy: number; elapsed: number }
+
+/** 结算:5 字符 = 1 词的标准口径(对 CJK 句子同样适用,统一可比) */
+function computeTypeStats(prompt: string, typed: string, startedAt: number): TypeStats {
+  const elapsedMin = (Date.now() - startedAt) / 60000
+  const words = prompt.length / 5
+  const errors = [...typed].filter((c, i) => c !== prompt[i]).length
+  return {
+    wpmGross: Math.round(words / elapsedMin),
+    wpmNet: Math.max(0, Math.round((words - errors) / elapsedMin)),
+    accuracy: Math.round(((prompt.length - errors) / prompt.length) * 100),
+    elapsed: Math.round((Date.now() - startedAt) / 1000),
+  }
+}
 
 export function TypingSpeedTestClient() {
   const { locale } = useApp()
   const L = (key: string, fb: string) => tui('typing-speed-test', locale, key, fb)
-  // SSR 恒定首帧(promptIdx=0),挂载后再随机抽句:crypto 随机放进 useState
-  // 初始化器会在服务端/客户端各抽一次,抽中不同句子即 hydration mismatch
+  const [mode, setMode] = useState<TypingMode>('quotes')
+  // SSR 恒定首帧(mode 默认 + idx=0),挂载后/切模式/切语言再随机抽句:
+  // crypto 随机放进 useState 初始化器会在服务端/客户端各抽一次,
+  // 抽中不同句子即 hydration mismatch
+  const pool = useMemo(() => {
+    if (mode === 'code') return CODE_PROMPTS
+    if (mode === 'multi') return MULTI_PROMPTS[locale] ?? MULTI_PROMPTS.en
+    return QUOTE_PROMPTS
+  }, [mode, locale])
   const [promptIdx, setPromptIdx] = useState(0)
-  useEffect(() => { setPromptIdx(randInt(PROMPTS.length)) }, [])
-  const prompt = PROMPTS[promptIdx]
   const [typed, setTyped] = useState('')
   const [startedAt, setStartedAt] = useState<number | null>(null)
   const [done, setDone] = useState<TypeStats | null>(null)
 
+  // 换模式 / 换语言(题库随之切换)→ 重抽题目并清空进度(挂载时也跑一次 = 首次随机)
+  useEffect(() => {
+    setPromptIdx(randInt(pool.length))
+    setTyped('')
+    setStartedAt(null)
+    setDone(null)
+  }, [pool])
+
+  const prompt = pool[promptIdx % pool.length]
+  // 输满但仍有错:可继续退格修改,或回车/按钮手动结算
+  const fullLength = typed.length >= prompt.length
+  const hasError = fullLength && typed !== prompt
+
+  // 打满且完全正确 → 自动结算;有错则等待用户退格修复或手动结算
   useEffect(() => {
     if (startedAt === null || done) return
-    if (typed.length >= prompt.length) {
-      const elapsedMin = ((Date.now() - startedAt) / 60000)
-      const words = prompt.length / 5 // 标准换算:5 字符 = 1 词
-      const errors = [...typed].filter((c, i) => c !== prompt[i]).length
-      setDone({
-        wpmGross: Math.round(words / elapsedMin),
-        wpmNet: Math.max(0, Math.round((words - errors) / elapsedMin)),
-        accuracy: Math.round(((prompt.length - errors) / prompt.length) * 100),
-        elapsed: Math.round((Date.now() - startedAt) / 1000),
-      })
+    if (typed.length >= prompt.length && typed === prompt) {
+      setDone(computeTypeStats(prompt, typed, startedAt))
     }
   }, [typed, startedAt, prompt, done])
 
+  const finishManually = () => {
+    if (done || startedAt === null || !fullLength) return
+    setDone(computeTypeStats(prompt, typed, startedAt))
+  }
+
   const reset = () => {
-    setPromptIdx(randInt(PROMPTS.length))
+    setPromptIdx(randInt(pool.length))
     setTyped('')
     setStartedAt(null)
     setDone(null)
@@ -464,6 +541,19 @@ export function TypingSpeedTestClient() {
 
   return (
     <div className="space-y-5">
+      {/* 模式切换:English Quotes / Code Snippets / Multilingual(依 locale) */}
+      <div className="flex flex-wrap gap-2">
+        {([['quotes', L('modeQuotes', 'English Quotes')], ['code', L('modeCode', 'Code Snippets')], ['multi', L('modeMulti', 'Multilingual')]] as const).map(([m, label]) => (
+          <button key={m} type="button" onClick={() => setMode(m)} aria-pressed={mode === m}
+            className={`rounded-full border px-4 py-1.5 text-sm font-medium transition ${
+              mode === m ? 'border-brand-500 bg-brand-50 text-brand-700 dark:border-brand-500 dark:bg-brand-950/40 dark:text-brand-300' : ''
+            }`}
+            style={mode === m ? undefined : { borderColor: 'rgb(var(--border-strong))', color: 'rgb(var(--text-muted))' }}>
+            {label}
+          </button>
+        ))}
+      </div>
+
       {/* 每字符一个 span 的逐字高亮会被屏读软件按字母逐个朗读成噪音(A-4):
           渲染细节容器 aria-hidden,另用 sr-only 段落给出原始句子,
           屏读用户仍能拿到需要抄写的文本 */}
@@ -483,6 +573,13 @@ export function TypingSpeedTestClient() {
       <div>
         <label htmlFor="ts-in" className="sr-only">{L('typeHere', 'Type here')}</label>
         <textarea id="ts-in" value={typed} onChange={(e) => onChange(e.target.value)} rows={3}
+          onKeyDown={(e) => {
+            // 回车手动结算:仅在输满(可能有错)时生效——正确输满已自动结算
+            if (e.key === 'Enter' && !e.shiftKey && fullLength && !done) {
+              e.preventDefault()
+              finishManually()
+            }
+          }}
           placeholder={L('startTyping', 'Start typing here — the clock starts on your first keystroke')}
           autoFocus
           className="w-full rounded-lg border p-4 font-mono text-sm outline-none transition focus:ring-2"
@@ -497,18 +594,31 @@ export function TypingSpeedTestClient() {
           <ResultCard label={L('timeSec', 'Time')} value={`${done.elapsed}s`} />
         </div>
       ) : (
-        <div className="flex items-center justify-between text-xs" style={{ color: 'rgb(var(--text-faint))' }}>
+        <div className="flex flex-wrap items-center justify-between gap-2 text-xs" style={{ color: 'rgb(var(--text-faint))' }}>
           <span>
             {L('progress', '{n}/{m} characters').replace('{n}', String(typed.length)).replace('{m}', String(prompt.length))}
             {liveWpm !== null && ` · ${liveWpm} ${L('wpmUnit', 'WPM')}`}
           </span>
-          <button type="button" onClick={reset} className="-my-1 rounded-md px-2 py-1 hover:text-red-500">{L('reset', 'Reset')}</button>
+          <span className="flex items-center gap-2">
+            {/* 打满但有错:提示可退格修复,或手动结算(打字手感闭环) */}
+            {hasError && (
+              <>
+                <span role="status">{L('fixHint', 'Backspace to fix, or finish as-is')}</span>
+                <button type="button" onClick={finishManually}
+                  className="rounded-md border px-2.5 py-1 font-medium"
+                  style={{ borderColor: 'rgb(var(--border-strong))', color: 'rgb(var(--text-muted))' }}>
+                  {L('finishBtn', 'Finish ⏎')}
+                </button>
+              </>
+            )}
+            <button type="button" onClick={reset} className="-my-1 rounded-md px-2 py-1 hover:text-red-500">{L('reset', 'Reset')}</button>
+          </span>
         </div>
       )}
       {done && (
         <button type="button" onClick={reset} className="btn btn-primary">{L('tryAgain', 'Try another sentence')}</button>
       )}
-      <CalculatorNote>{L('note', '⌨️ Net WPM follows the standard formula: characters ÷ 5 per minute minus errors. Average adults type 38-42 net; professional transcriptionists exceed 80.')}</CalculatorNote>
+      <CalculatorNote>{L('note', '⌨️ Net WPM follows the standard formula: characters ÷ 5 per minute minus errors. Three modes: classic quotes, programmer code snippets, and multilingual proverbs matched to your language. Made a typo at the end? Backspace to fix it before finishing. Average adults type 38-42 net; professional transcriptionists exceed 80.')}</CalculatorNote>
     </div>
   )
 }
@@ -599,10 +709,26 @@ const COMMON_PATTERNS: [RegExp, string, string][] = [
   [/^(.{0,3})\1+\1+$/i, 'penRepeatRun', 'single repeated character run'],
 ]
 
+/**
+ * 128-bit 强密码生成:字符池大小 × 长度按 log2 精确反推(长度 = ceil(128 / log2(pool))),
+ * 保证熵 ≥ 128 位;每个字符用文件内现成的 crypto randInt(拒绝采样)抽取。
+ * 仅在用户点击「生成」时调用 —— 无渲染期随机,SSR/水合确定性不受影响。
+ */
+const GEN_POOL = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*-_=+?'
+const GEN_LENGTH = Math.ceil(128 / Math.log2(GEN_POOL.length))
+
+function generateStrongPassword(): string {
+  let out = ''
+  for (let i = 0; i < GEN_LENGTH; i++) out += GEN_POOL[randInt(GEN_POOL.length)]
+  return out
+}
+
 export function PasswordEntropyCheckerClient() {
   const { locale } = useApp()
   const L = (key: string, fb: string) => tui('password-entropy-checker', locale, key, fb)
   const [pw, setPw] = useState('')
+  // 弱密码救济:点击生成后才渲染(用户触发的随机,不参与 SSR 首帧)
+  const [strongPw, setStrongPw] = useState('')
 
   const stats = useMemo(() => {
     if (!pw) return null
@@ -646,6 +772,40 @@ export function PasswordEntropyCheckerClient() {
             <p className="rounded-lg border border-amber-200 bg-amber-50 p-3 text-sm text-amber-700 dark:border-amber-800/60 dark:bg-amber-950/30 dark:text-amber-300">
               ⚠️ {L('penalties', 'Penalties applied: {list}').replace('{list}', stats.penalties.join(', '))}
             </p>
+          )}
+          {/* 弱密码救济闭环:< 60 bits 或命中弱口令规则 → 一键生成 128-bit 强密码,
+              可复制、可重新生成、可回填到上方分析框验证 */}
+          {(stats.bits < 60 || stats.penalties.length > 0) && (
+            <div className="rounded-lg border border-brand-200 bg-brand-50/70 p-3 dark:border-blue-800/60 dark:bg-blue-950/30">
+              <button type="button" onClick={() => setStrongPw(generateStrongPassword())}
+                className="btn btn-primary px-4 py-2 text-sm font-semibold">
+                ⚡ {L('genStrong', 'Generate 128-bit Strong Password Now')}
+              </button>
+              {strongPw && (
+                <div className="mt-3 space-y-2">
+                  <div className="flex items-center gap-2">
+                    <code className="flex-1 overflow-x-auto rounded-md border px-3 py-2 font-mono text-sm whitespace-nowrap"
+                      style={{ borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rgb(var(--bg-card))', color: 'rgb(var(--text))' }}>
+                      {strongPw}
+                    </code>
+                    <CopyButton value={strongPw} />
+                  </div>
+                  <div className="flex flex-wrap items-center gap-3 text-xs">
+                    <button type="button" onClick={() => setStrongPw(generateStrongPassword())}
+                      className="font-medium text-brand-600 hover:underline dark:text-blue-400">
+                      ↻ {L('regenStrong', 'Regenerate')}
+                    </button>
+                    <button type="button" onClick={() => setPw(strongPw)}
+                      className="font-medium text-brand-600 hover:underline dark:text-blue-400">
+                      ↑ {L('analyzeIt', 'Analyze it')}
+                    </button>
+                    <span style={{ color: 'rgb(var(--text-faint))' }}>
+                      {L('genStrongHint', '{n} chars · crypto-random · ≥128 bits of entropy').replace('{n}', String(GEN_LENGTH))}
+                    </span>
+                  </div>
+                </div>
+              )}
+            </div>
           )}
           {stats.bits >= 75 && (
             <p className="rounded-lg border-2 border-green-200 bg-green-50 p-3 text-sm text-green-700 dark:border-green-800/60 dark:bg-green-950/30 dark:text-green-300">

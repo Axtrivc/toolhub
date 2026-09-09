@@ -13,6 +13,28 @@ const FORMULA = 'monthly cost = (input tokens ÷ 1M × price_in) + (output token
 export const llmApiCostCalculatorL10n: ToolL10n = {
   // ──────────────────────────── 中文 ────────────────────────────
   zh: {
+    ui: {
+      'inLabel': '每月提示词输入 Token 总量',
+      'outLabel': '每月补全输出 Token 总量',
+      'preset.0': '业余小项目 (5M 输入 / 1M 输出)',
+      'preset.1': '客服聊天 SaaS (20M / 5M)',
+      'preset.2': 'Agent 高频工作流 (100M / 30M)',
+      'chartTitle': '各模型月度账单对比',
+      'cheapest': '最经济',
+      'costLabel': '每月费用',
+      'thModel': '模型名称',
+      'thIn': '输入 $/1M',
+      'thOut': '输出 $/1M',
+      'thMonthly': '预计月度总账单',
+      'thVsCheapest': '相比最低价',
+      'thSavings': '相比顶配模型省下',
+      'invalid': '请输入非负的 Token 调用量',
+      'summaryTitle': 'LLM API 月度成本对比摘要',
+      'sIn': '月度输入 Tokens',
+      'sOut': '月度输出 Tokens',
+      'copySummary': '复制成本对比摘要',
+      'note': '💸 月账单以百万 Token 未缓存基准单价测算（tokencost.app，2026-08 核对）。开启提示词缓存（Prompt Caching）可降低 50%-90% 输入成本，异步 Batch API 约可节省一半输出开销——实际账单通常低于此处的全量峰值预算。',
+    },
     useCases: [
       '给模型账单排序:月 2000 万输入 + 400 万输出 token,按各家牌价算出月费,最便宜的排最前',
       '诊断输出占比:长回答应用输出 token 常吃掉账单一半,把 max_tokens 从 4096 收到 1024 立省一大截',
@@ -45,6 +67,28 @@ export const llmApiCostCalculatorL10n: ToolL10n = {
 
   // ──────────────────────────── Español ────────────────────────────
   es: {
+    ui: {
+      'inLabel': 'Tokens de entrada mensuales (prompt)',
+      'outLabel': 'Tokens de salida mensuales (completion)',
+      'preset.0': 'App modesta (5M in / 1M out)',
+      'preset.1': 'SaaS de chatbot (20M / 5M)',
+      'preset.2': 'Pipeline de agentes (100M / 30M)',
+      'chartTitle': 'Factura mensual por modelo',
+      'cheapest': 'más económico',
+      'costLabel': 'al mes',
+      'thModel': 'Modelo',
+      'thIn': 'Entrada $/1M',
+      'thOut': 'Salida $/1M',
+      'thMonthly': 'Factura mensual',
+      'thVsCheapest': 'vs más barato',
+      'thSavings': 'Ahorro vs más caro',
+      'invalid': 'Introduce volúmenes de tokens no negativos',
+      'summaryTitle': 'Comparación de costes mensuales de API LLM',
+      'sIn': 'Tokens mensuales de entrada',
+      'sOut': 'Tokens mensuales de salida',
+      'copySummary': 'Copiar resumen',
+      'note': '💸 Las tarifas mensuales se basan en precios por 1M de tokens sin caché. Con prompt caching o APIs por lotes el coste real suele ser menor.',
+    },
     useCases: [
       'ordenar la factura por modelo: 20 M de tokens de entrada y 4 M de salida al mes, a precios de lista, del más barato en adelante',
       'diagnosticar el peso de la salida: en apps que redactan mucho, los tokens de salida superan la mitad; bajar max_tokens de 4096 a 1024 recorta mucho',
@@ -77,6 +121,28 @@ export const llmApiCostCalculatorL10n: ToolL10n = {
 
   // ──────────────────────────── Deutsch ────────────────────────────
   de: {
+    ui: {
+      'inLabel': 'Monatliche Eingabe-Tokens (Prompt)',
+      'outLabel': 'Monatliche Ausgabe-Tokens (Completion)',
+      'preset.0': 'Hobby-App (5 Mio. In / 1 Mio. Out)',
+      'preset.1': 'Chatbot-SaaS (20 Mio. / 5 Mio.)',
+      'preset.2': 'Agenten-Pipeline (100 Mio. / 30 Mio.)',
+      'chartTitle': 'Monatliche Kosten nach Modell',
+      'cheapest': 'Günstigste',
+      'costLabel': 'pro Monat',
+      'thModel': 'Modell',
+      'thIn': 'In $/1 Mio.',
+      'thOut': 'Out $/1 Mio.',
+      'thMonthly': 'Monatliche Rechnung',
+      'thVsCheapest': 'ggü. günstigstem',
+      'thSavings': 'Ersparnis ggü. teuerstem',
+      'invalid': 'Gültige Token-Mengen eingeben',
+      'summaryTitle': 'LLM-API-Monatskosten-Vergleich',
+      'sIn': 'Monatliche Eingabe-Tokens',
+      'sOut': 'Monatliche Ausgabe-Tokens',
+      'copySummary': 'Zusammenfassung kopieren',
+      'note': '💸 Die Kosten basieren auf Preisen pro 1 Mio. Tokens ohne Caching. Mit Prompt-Caching und Batch-APIs fallen die tatsächlichen Rechnungen meist niedriger aus.',
+    },
     useCases: [
       'Rechnungen pro Modell sortieren: 20 M Input- und 4 M Output-Tokens im Monat zu Listenpreisen, günstigste zuerst',
       'Output-Anteil diagnostizieren: bei antwortlastigen Apps machen Output-Tokens die Hälfte aus; max_tokens von 4096 auf 1024 senken spart deutlich',
