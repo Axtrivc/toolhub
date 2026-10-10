@@ -241,7 +241,7 @@ export const autoLoanCalculatorL10n: ToolL10n = {
     ],
     faqs: [
       {
-        q: 'Enthält er Mehrwertsteuer und Gebühren?',
+        q: 'Enthält er Verkaufssteuer und Gebühren?',
         a: 'Er wendet die Steuer auf den Fahrzeugpreis nach Abzug des Inzahlungnahmewerts an, sodass der Kreditbetrag das widerspiegelt, was du wirklich finanzierst. Zulassung, Dokumentenpauschale des Händlers und Extras sind nicht aufgeschlüsselt — rechne sie bei Bedarf in den Fahrzeugpreis ein.',
       },
       {

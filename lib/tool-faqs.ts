@@ -208,7 +208,7 @@ export const toolFaqs: Record<string, FaqPair[]> = {
   'json-to-csv': [
     {
       q: 'What if my objects have different keys?',
-      a: 'The tool uses keys from the first object. Objects with extra keys will have those keys dropped; objects missing keys will have empty values. Normalize your data structure first for best results.',
+      a: 'Headers are built from the union of every object\'s keys in first-seen order, so extra keys in later objects are kept, and objects missing a key get an empty value. Normalizing your data structure first still gives the cleanest output.',
     },
   ],
   'add-line-numbers': [
@@ -220,7 +220,7 @@ export const toolFaqs: Record<string, FaqPair[]> = {
   'text-to-list': [
     {
       q: 'Can I use different bullet styles?',
-      a: 'This tool uses • (bullet). For numbered lists, use the Add Line Numbers tool. For other styles (–, *, 1.), a future update may add options.',
+      a: 'The default bullet is •. Append " ||| -", " ||| *", or " ||| 1." at the end of your text to switch to hyphens, asterisks, or numbered items instead.',
     },
   ],
 
@@ -758,7 +758,7 @@ export const toolFaqs: Record<string, FaqPair[]> = {
   'url-decoder': [
     {
       q: 'What about + for spaces?',
-      a: 'In query strings, + often represents a space (form encoding). This tool uses standard percent decoding, which leaves + as +. Convert + to spaces manually if needed.',
+      a: 'In query strings, + often represents a space (form encoding). This tool uses standard percent decoding, but the "Treat + as space when decoding" toggle converts + to spaces automatically.',
     },
   ],
 
@@ -1036,7 +1036,7 @@ export const toolFaqs: Record<string, FaqPair[]> = {
     },
     {
       q: 'How fast is Mach 1?',
-      a: 'Mach 1 is the speed of sound, about 1,235 km/h (767 mph) at sea level and 15°C. It changes with altitude and temperature because the speed of sound depends on air density. "Mach" is a ratio of local speed to local speed of sound, not a fixed number.',
+      a: 'Mach 1 is the speed of sound, about 1,225 km/h (761 mph) at sea level and 15°C. It changes with altitude and temperature because the speed of sound depends on air density. "Mach" is a ratio of local speed to local speed of sound, not a fixed number.',
     },
   ],
   'tip-calculator': [
@@ -1876,7 +1876,7 @@ export const toolFaqs: Record<string, FaqPair[]> = {
     },
     {
       q: 'Is a high protein intake dangerous?',
-      a: 'For healthy adults, trials show no harm at intakes up to roughly 2.2 g/kg per day — kidneys handle the load fine. People with existing kidney disease should consult a doctor first; that caution does not apply to the general population.',
+      a: 'For healthy adults, trials show no harm at intakes up to roughly 2.8 g/kg per day — kidneys handle the load fine. People with existing kidney disease should consult a doctor first; that caution does not apply to the general population.',
     },
     {
       q: 'Does timing across the day matter?',
@@ -1991,7 +1991,7 @@ export const toolFaqs: Record<string, FaqPair[]> = {
     },
     {
       q: 'Why does 401(k) cut income tax but not FICA?',
-      a: 'Traditional 401(k) contributions leave taxable income, so the calculator subtracts them before applying brackets. FICA taxes that money anyway, so FICA is computed on gross salary — matching how real paychecks behave.',
+      a: 'Traditional 401(k) contributions leave taxable income, so the calculator subtracts them before applying brackets. FICA taxes that money anyway — it only excludes pre-tax health premiums — matching how real paychecks behave.',
     },
     {
       q: 'Is the biweekly number my actual paycheck?',
@@ -2545,7 +2545,7 @@ export const toolFaqs: Record<string, FaqPair[]> = {
     },
     {
       q: 'Can I roll multiple dice at once, like 3d6+2?',
-      a: 'Yes. Pick the die type (d4, d6, d8, d10, d12, d20, or d100), set how many dice to roll, and add a flat modifier if your game uses one. You see each individual die result plus the total, so a DM or player can verify every roll.',
+      a: 'Yes. Pick the die type (d4, d6, d8, d10, d12, d20, or d100) and set how many dice to roll. You see each individual die result plus the total, so a DM or player can verify every roll.',
     },
     {
       q: 'Does it work for tabletop RPGs like D&D?',
@@ -2553,7 +2553,7 @@ export const toolFaqs: Record<string, FaqPair[]> = {
     },
     {
       q: 'Why do I get the same numbers often — is it rigged?',
-      a: 'Randomness is clumpy: in 20 rolls of a d6, seeing a 4 three times is statistically normal. Over hundreds of rolls the counts converge toward even. The tally mode lets you verify this yourself across a session.',
+      a: 'Randomness is clumpy: in 20 rolls of a d6, seeing a 4 three times is statistically normal. Over hundreds of rolls the counts converge toward even. The roll history lets you verify this yourself across a session.',
     },
   ],
   'coin-flip': [
@@ -2562,8 +2562,8 @@ export const toolFaqs: Record<string, FaqPair[]> = {
       a: "It uses crypto-grade randomness (crypto.getRandomValues), which is unbiased and unpredictable — arguably fairer than a physical coin, which can be slightly biased by weight distribution or the flipper's technique. Heads and tails each come up exactly 50% of the time.",
     },
     {
-      q: 'Can I flip the coin multiple times at once?',
-      a: 'Yes, batch mode lets you flip many times in one go and shows the running heads/tails tally. This is handy for statistics demonstrations, settling multiple ties at once, or verifying fairness empirically.',
+      q: 'Can I flip the coin multiple times?',
+      a: 'Yes — flip repeatedly and the running heads/tails tally keeps count for you. This is handy for statistics demonstrations, settling multiple ties at once, or verifying fairness empirically.',
     },
     {
       q: 'Does flipping work offline?',
@@ -2585,7 +2585,7 @@ export const toolFaqs: Record<string, FaqPair[]> = {
     },
     {
       q: "What's the maximum number of entries?",
-      a: 'The wheel stays readable up to a few dozen entries; beyond ~50 the labels shrink and the wheel becomes hard to follow visually, though the draw itself stays fair. For large groups, consider splitting into rounds or using the random team generator instead.',
+      a: 'The wheel holds at most 12 options — enter more and the extra lines are ignored with a notice. For large groups, consider splitting into rounds or using the random team generator instead.',
     },
     {
       q: 'Is my list of names saved anywhere?',
@@ -2617,7 +2617,7 @@ export const toolFaqs: Record<string, FaqPair[]> = {
     },
     {
       q: 'How is WPM calculated here?',
-      a: 'Standard formula: every 5 typed characters (including spaces) counts as one "word", divided by the elapsed minutes, then corrected for errors. The test runs for one minute with real sentences, so the score reflects genuine typing, not repeated short words.',
+      a: 'Standard formula: every 5 typed characters (including spaces) counts as one "word", divided by the elapsed minutes, then corrected for errors. The test runs on one full real sentence — the clock starts on your first keystroke and stops when you finish it — so the score reflects genuine typing, not repeated short words.',
     },
     {
       q: 'Why is my WPM lower than in games like TypeRacer?',
@@ -2634,12 +2634,12 @@ export const toolFaqs: Record<string, FaqPair[]> = {
       a: 'Names are shuffled with crypto-grade randomness, then dealt round-robin like cards — so if your list has 13 people and 4 teams, teams get 4/3/3/3 members with the spots decided purely by shuffle order. Re-shuffling re-rolls everything with a new seed.',
     },
     {
-      q: 'Can I choose team count or team size?',
-      a: 'Both. Set a number of teams and the generator balances sizes automatically, or set a fixed size per team and it computes how many teams you need. Leftover people are distributed one per team rather than dumped into the last group.',
+      q: 'Can I choose the number of teams?',
+      a: 'Yes. Set a number of teams (2-10) and the generator balances sizes automatically. Leftover people are distributed one per team rather than dumped into the last group.',
     },
     {
       q: 'Can I keep some people together on the same team?',
-      a: 'The simplest trick: put the people who must stay together on consecutive lines — the round-robin deal keeps near-adjacent entries in the same team for most list sizes. For strict pairing constraints, generate, then manually swap two names; the shuffle gives you a fair baseline to start from.',
+      a: 'The simplest trick: put the people who must stay together on a single line (e.g. "Alex & Sam") so they enter the draw as one entry — dealing adjacent lines to different teams is exactly what the round-robin does. For strict pairing constraints, generate, then manually swap two names; the shuffle gives you a fair baseline to start from.',
     },
     {
       q: 'Does anything get saved or shared?',
@@ -2747,7 +2747,7 @@ export const toolFaqs: Record<string, FaqPair[]> = {
     },
     {
       q: 'Should I include financing in the comparison?',
-      a: 'Yes if you borrowed — interest is part of the cost of driving. Enter your monthly payment (or use the linked auto loan calculator) and the tool adds financing to the other five lines. Cash buyers can leave it at zero and compare pure operating cost.',
+      a: 'Yes if you borrowed — interest is part of the cost of driving. The tool takes no loan input: figure the payment with the auto loan calculator, then fold the interest into the insurance line if significant. Cash buyers can compare pure operating cost as-is.',
     },
     {
       q: 'Why does my cost per km look so high?',

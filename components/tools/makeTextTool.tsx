@@ -174,7 +174,7 @@ export function makeTextTool(config: TextToolConfig): ComponentType {
         {/* 输出区 */}
         <div>
           <div className="mb-2 flex items-center justify-between">
-            <label className="text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
+            <label htmlFor="text-output" className="text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
               {outputLabel}
             </label>
             <CopyButton value={output} disabled={!output} />
@@ -185,6 +185,7 @@ export function makeTextTool(config: TextToolConfig): ComponentType {
           <PulseGlow trigger={output}>
             <textarea
               readOnly
+              id="text-output"
               value={output}
               placeholder={t(locale, 'textToolResultPlaceholder')}
               rows={6}

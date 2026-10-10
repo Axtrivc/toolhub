@@ -41,7 +41,7 @@ export const urlDecoderL10n: ToolL10n = {
       '调试代码中的 URL 处理逻辑',
     ],
     faqs: [
-      { q: '+ 表示空格怎么办?', a: '在查询字符串中,+ 常用来表示空格(表单编码)。本工具使用标准百分号解码,会把 + 原样保留。如需转换,请手动把 + 换成空格。' },
+      { q: '+ 表示空格怎么办?', a: '在查询字符串中,+ 常用来表示空格(表单编码)。本工具使用标准百分号解码,但「解码时把 + 当作空格」开关会自动把 + 转换为空格。' },
     ],
   },
   es: {
@@ -80,7 +80,7 @@ export const urlDecoderL10n: ToolL10n = {
       'depurar el manejo de URLs en código',
     ],
     faqs: [
-      { q: '¿Qué pasa con + para los espacios?', a: 'En las cadenas de consulta, + suele representar un espacio (codificación de formulario). Esta herramienta usa decodificación porcentual estándar, que deja + como +. Convierte + en espacios manualmente si lo necesitas.' },
+      { q: '¿Qué pasa con + para los espacios?', a: 'En las cadenas de consulta, + suele representar un espacio (codificación de formulario). Esta herramienta usa decodificación porcentual estándar, pero el interruptor «Tratar + como espacio al decodificar» convierte + en espacios automáticamente.' },
     ],
   },
   de: {
@@ -119,7 +119,7 @@ export const urlDecoderL10n: ToolL10n = {
       'URL-Verarbeitung im Code debuggen',
     ],
     faqs: [
-      { q: 'Was ist mit + für Leerzeichen?', a: 'In Query-Strings steht + oft für ein Leerzeichen (Form-Kodierung). Dieses Werkzeug nutzt Standard-Prozentdekodierung und lässt + als + stehen. Wandle + bei Bedarf manuell in Leerzeichen um.' },
+      { q: 'Was ist mit + für Leerzeichen?', a: 'In Query-Strings steht + oft für ein Leerzeichen (Form-Kodierung). Dieses Werkzeug nutzt Standard-Prozentdekodierung, aber der Schalter „+ beim Dekodieren als Leerzeichen behandeln“ wandelt + automatisch in Leerzeichen um.' },
     ],
   },
 }

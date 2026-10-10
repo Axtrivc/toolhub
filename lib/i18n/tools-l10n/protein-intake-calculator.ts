@@ -14,6 +14,7 @@ export const ProteinIntakeCalculatorL10n: ToolL10n = {
       { q: '一天内怎么分配重要吗?', a: '有一定影响。肌肉蛋白质合成对一天 3-5 次、每次约 0.4 g/kg 以上的摄入反应更好,远胜一次吃一大顿——所以结果里附带了按四餐计算的每餐目标。' },
     ],
     ui: {
+      'errInvalid': '请输入有效的体重(kg)',
       'in.activity': '活动水平',
       'in.basis': '计算依据',
       'in.goal': '目标',
@@ -50,6 +51,7 @@ export const ProteinIntakeCalculatorL10n: ToolL10n = {
       { q: '¿Importa el reparto a lo largo del día?', a: 'Bastante. La síntesis proteica muscular responde mejor a 3-5 tomas de al menos ~0,4 g/kg cada una que a una única dosis gigante; por eso el resultado incluye el objetivo por comida asumiendo cuatro comidas.' },
     ],
     ui: {
+      'errInvalid': 'Introduce un peso válido en kg',
       'in.activity': 'Nivel de actividad',
       'in.basis': 'Base',
       'in.goal': 'Objetivo',
@@ -86,6 +88,7 @@ export const ProteinIntakeCalculatorL10n: ToolL10n = {
       { q: 'Spielt die Verteilung über den Tag eine Rolle?', a: 'Ziemlich. Die Muskeleiweißsynthese reagiert besser auf 3-5 Mahlzeiten mit jeweils mindestens ~0,4 g/kg als auf eine einzige Riesenration — deshalb enthält das Ergebnis ein Ziel pro Mahlzeit bei vier Mahlzeiten.' },
     ],
     ui: {
+      'errInvalid': 'Gib ein gültiges Gewicht in kg ein',
       'in.activity': 'Aktivitätsniveau',
       'in.basis': 'Grundlage',
       'in.goal': 'Ziel',

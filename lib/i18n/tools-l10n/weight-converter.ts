@@ -77,13 +77,13 @@ export const weightConverterL10n: ToolL10n = {
     useCases: [
       'Körpergewicht zwischen Kilogramm und Pfund umrechnen',
       'Unzen und Pfund aus US-Rezepten in Gramm umrechnen',
-      'Gewichtseinheiten für internationale Versand umrechnen',
+      'Gewichtseinheiten für den internationalen Versand umrechnen',
     ],
     faqs: [
       { q: 'Wie viele Pfund sind ein Kilogramm?', a: '1 Kilogramm = 2,20462 Pfund. Um kg in lb umzurechnen, multipliziere mit 2,205. Um lb in kg umzurechnen, multipliziere mit 0,4536 (oder teile durch 2,205). Also: 70 kg ≈ 154 lb und 180 lb ≈ 81,6 kg.' },
       { q: 'Was ist der Unterschied zwischen Masse und Gewicht?', a: 'Masse (kg) ist die Materiemenge eines Objekts und bleibt überall gleich. Gewicht (Newton, also die Kraft der Schwerkraft) ändert sich mit der Gravitation — auf dem Mond wiegst du weniger. Im Alltag werden „Gewicht" in Pfund oder kg als austauschbar behandelt, was auf der Erde problemlos funktioniert.' },
       { q: 'Wie viele Unzen sind in einem Pfund?', a: '1 Pfund (lb) = 16 Unzen (oz). Also: 8 oz = 0,5 lb und 24 oz = 1,5 lb. Dies ist das Avoirdupois-Gewicht (Alltagsgegenstände); Edelmetalle verwenden Troy-Gewicht, wo 1 Troy-Pfund = 12 Troy-Unzen.' },
-      { q: 'Was ist ein Stone und wie passt das deutsche Pfund dazu?', a: '1 Stone = 14 lb ≈ 6,35 kg — im UK üblich fürs Körpergewicht («11 st 4 lb» = 158 lb ≈ 71,7 kg). Das deutsche Pfund sind genau 500 g, das US-Pfund (lb) 453,6 g; der metrische Zentner entspricht 50 kg, der Doppelzentner 100 kg.' },
+      { q: 'Was ist ein Stone und wie passt das deutsche Pfund dazu?', a: '1 Stone = 14 lb ≈ 6,35 kg — im UK üblich fürs Körpergewicht («11 st 4 lb» = 158 lb ≈ 71,7 kg). Das deutsche Pfund ist genau 500 g, das US-Pfund (lb) 453,6 g; der metrische Zentner entspricht 50 kg, der Doppelzentner 100 kg.' },
     ],
   },
 }

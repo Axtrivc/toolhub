@@ -813,7 +813,7 @@ export const tools: ToolMeta[] = [
       'text size for database column',
     ],
     titleLongTail: 'Text Size Estimator - Bytes & KB of Text Free',
-    descriptionLongTail: 'Estimate byte size of your text in UTF-8, UTF-16, and Base64. Plan database columns and API payloads by exact byte length, instantly. Free, no signup.',
+    descriptionLongTail: 'Estimate byte size of your text in UTF-8 and Base64. Plan database columns and API payloads by exact byte length, instantly. Free, no signup.',
   },
   {
     slug: 'json-minifier', name: 'JSON Minifier',
@@ -1411,7 +1411,7 @@ export const tools: ToolMeta[] = [
   // ─────────── 📐 Unit Converters (18) ───────────
   {
     slug: 'mass-converter', name: 'Mass Converter',
-    title: 'Free Mass Converter - mg, g, kg, Carats, Grains Online',
+    title: 'Free Mass Converter - kg, Carats & Grains',
     description: 'Convert between mass units: mg, g, kg, metric tons, carats, and grains. Free and accurate. No signup.',
     keywords: ['mass converter', 'grams to milligrams', 'carat to gram', 'grain converter'],
     intent: 'informational', category: 'Unit Converters', h1: 'Mass Converter',
@@ -1604,7 +1604,7 @@ export const tools: ToolMeta[] = [
   {
     slug: 'weight-converter',
     name: 'Weight Converter',
-    title: 'KG to LBS and Ounces Converter (Fast & Instant)',
+    title: 'KG to LBS & Ounces Converter - Instant',
     description:
       'Convert kilograms (kg) to pounds (lbs) and ounces (oz) instantly in your browser. Free online weight converter with zero data tracking.',
     keywords: [
@@ -1625,7 +1625,7 @@ export const tools: ToolMeta[] = [
       'convert kilograms to pounds',
       'kg lbs oz grams converter',
     ],
-    titleLongTail: 'KG to LBS and Ounces Converter (Fast & Instant)',
+    titleLongTail: 'KG to LBS & Ounces Converter - Instant',
     descriptionLongTail: 'Convert kilograms (kg) to pounds (lbs) and ounces (oz) instantly in your browser. Free online weight converter with zero data tracking.',
   },
   {
@@ -1652,7 +1652,7 @@ export const tools: ToolMeta[] = [
       'how to convert c to f',
       'fahrenheit to celsius formula',
     ],
-    titleLongTail: 'Temperature Converter - Celsius & Fahrenheit',
+    titleLongTail: 'Temperature Converter - °C to °F',
     descriptionLongTail: 'Convert Celsius to Fahrenheit with our instant tool. Also handles Fahrenheit to Celsius and Kelvin for science and cooking. Free, no signup.',
   },
   {
@@ -1685,7 +1685,7 @@ export const tools: ToolMeta[] = [
   {
     slug: 'area-converter',
     name: 'Area Converter',
-    title: 'Free Area Converter - m², ft², Acres, Hectares & More',
+    title: 'Free Area Converter - m², Acres & Hectares',
     description:
       'Free area converter. Convert between square meters, square feet, acres, hectares, and more. For real estate, land, and construction. No signup.',
     keywords: [
@@ -2080,7 +2080,7 @@ export const tools: ToolMeta[] = [
   {
     slug: 'bmi-calculator',
     name: 'BMI Calculator',
-    title: 'Free BMI Calculator - Calculate Body Mass Index (Metric & Imperial)',
+    title: 'Free BMI Calculator - Body Mass Index (Metric & Imperial)',
     description:
       'Free BMI calculator. Calculate your Body Mass Index with metric or imperial units. See your BMI category and healthy weight range. No signup.',
     keywords: [
@@ -2203,7 +2203,7 @@ export const tools: ToolMeta[] = [
       'naegele rule due date',
       'conception date from lmp',
     ],
-    titleLongTail: 'Pregnancy Due Date Calculator from Last Period',
+    titleLongTail: 'Pregnancy Due Date Calculator - from LMP',
     descriptionLongTail: 'Estimate your due date from your last menstrual period using the Naegele rule. See your pregnancy week by week and conception date. Free, no signup.',
   },
   {
@@ -2304,7 +2304,7 @@ export const tools: ToolMeta[] = [
     ],
     titleLongTail: 'Aspect Ratio Calculator - Resize Image & Video',
     descriptionLongTail:
-      'Enter an aspect ratio and one dimension to get the other, or fit a ratio into a bounding box. Works for 16:9, 4:3, 21:9 and more. Free, no signup.',
+      'Enter an aspect ratio and one dimension to get the other instantly. Works for 16:9, 4:3, 21:9 and more. Free, no signup.',
   },
   {
     slug: 'color-contrast-checker',
@@ -2485,7 +2485,7 @@ export const tools: ToolMeta[] = [
       'date duration in weeks and months',
       'working days calculator',
     ],
-    titleLongTail: 'Date Difference Calculator - Days & Business Days',
+    titleLongTail: 'Date Difference Calculator - Business Days',
     descriptionLongTail: 'Find days between two dates, plus business days excluding weekends. Perfect for project deadlines, contracts, and lease duration. Free, no signup.',
   },
   {
@@ -2562,7 +2562,7 @@ export const tools: ToolMeta[] = [
       'high school gpa calculator',
       'cumulative gpa by course credits',
     ],
-    titleLongTail: 'GPA Calculator - Weighted & 4.0 Scale by Credits',
+    titleLongTail: 'GPA Calculator - Weighted 4.0 by Credits',
     descriptionLongTail: 'Calculate GPA on a 4.0 scale, weighted by credits. Add courses and letter grades to see cumulative GPA for college or high school. Free, no signup.',
   },
 
@@ -3343,7 +3343,7 @@ export const tools: ToolMeta[] = [
       'year 2024 in roman numerals',
       'roman numerals 1 to 100',
     ],
-    titleLongTail: 'Roman Numeral Date Converter - Years & Numbers',
+    titleLongTail: 'Roman Numeral Converter - Years & Numbers',
     descriptionLongTail: 'Type a number like 2024 to get MMXXIV, or paste a numeral like MCMXCIV to get 1994. Includes the full value chart (I, V, X, L, C, D, M) below.',
   },
   {
@@ -3359,7 +3359,7 @@ export const tools: ToolMeta[] = [
       'marathon finish time predictor',
       'running split times calculator',
     ],
-    titleLongTail: 'Race Pace Predictor - 5K, 10K, Half & Marathon',
+    titleLongTail: 'Race Pace Predictor - 5K to Marathon',
     descriptionLongTail: 'Enter a recent race time to see your pace per km/mile, equivalent finish predictions across popular distances, and a lap-by-lap split table.',
   },
   {
@@ -3391,7 +3391,7 @@ export const tools: ToolMeta[] = [
       'air conditioner electricity cost calculator',
       'kwh price running cost estimator',
     ],
-    titleLongTail: 'Electricity Cost - Watts, Hours & Electric Rate',
+    titleLongTail: 'Electricity Cost - Watts, Hours & Rate',
     descriptionLongTail: 'Enter watts, daily usage hours, and your price per kWh to see exactly what a device adds to your bill — daily, monthly, and yearly totals.',
   },
   {
@@ -3456,12 +3456,12 @@ export const tools: ToolMeta[] = [
       'cancel unused subscriptions savings',
     ],
     titleLongTail: 'Monthly Subscription Spending - Yearly Total View',
-    descriptionLongTail: 'List each service with its billing cycle and the calculator converts everything to monthly and yearly totals. The yearly number is usually the eye-opener.',
+    descriptionLongTail: 'Add up monthly, yearly and quarterly totals and the calculator converts everything to true monthly and yearly spend. The yearly number is usually the eye-opener.',
   },
   {
     slug: 'overtime-calculator', name: 'Overtime Pay Calculator',
     title: 'Overtime Pay Calculator - Time-and-a-Half & Double Time',
-    description: 'Calculate overtime pay at 1.5x, 2x, or a custom multiplier. Enter your hourly rate or salary and regular plus OT hours to see total weekly pay.',
+    description: 'Calculate overtime pay at 1.5x or 2x. Enter your hourly rate and regular plus OT hours to see total weekly pay.',
     keywords: ['overtime calculator', 'overtime pay calculator', 'time and a half calculator', 'double time pay', 'ot rate calculator'],
     intent: 'informational', category: 'Finance Calculators', h1: 'Overtime Pay Calculator',
     shortIntro: 'Weekly pay with time-and-a-half, double time, or custom multipliers.', published: true,
@@ -3472,7 +3472,7 @@ export const tools: ToolMeta[] = [
       'blended overtime rate calculator',
     ],
     titleLongTail: 'Time and a Half Calculator - Overtime Pay Rate',
-    descriptionLongTail: 'Works from hourly wage or annual salary, applies your OT multiplier to extra hours, and shows regular vs overtime pay side by side for the week.',
+    descriptionLongTail: 'Enter your hourly rate (salaried? divide weekly pay by 40), pick your OT multiplier, and see regular vs overtime pay side by side for the week.',
   },
   {
     slug: 'take-home-pay-calculator', name: 'Take-Home Pay Calculator',
@@ -3505,7 +3505,7 @@ export const tools: ToolMeta[] = [
       'wedding budget planner by category',
     ],
     titleLongTail: 'Wedding Budget Breakdown - Costs by Category',
-    descriptionLongTail: 'Enter your total budget and guest count; get a realistic allocation across the eight biggest categories, with editable weights for what matters most to you.',
+    descriptionLongTail: 'Enter your total budget and guest count; get a realistic allocation across the six main categories plus cost per guest.',
   },
   {
     slug: 'amortization-table-generator', name: 'Amortization Table Generator',
@@ -3585,7 +3585,7 @@ export const tools: ToolMeta[] = [
       '8000 steps calories burned weight loss',
       'walking 5km is how many steps',
     ],
-    titleLongTail: 'How Many Calories Do 10,000 Steps Burn? By Weight',
+    titleLongTail: 'Calories in 10,000 Steps by Weight',
     descriptionLongTail: 'Enter steps, height, weight, and pace: get distance in km/miles and a defensible calorie estimate instead of fitness-band guesses.',
   },
   {
@@ -3721,7 +3721,7 @@ export const tools: ToolMeta[] = [
   {
     slug: 'log-filter-tool', name: 'Log Filter & Grep Tool',
     title: 'Log Filter - Grep-style Search Through Log Files Online',
-    description: 'Paste logs and filter by keyword, regex, log level, or time range. Highlight matches, exclude noise, and copy just what matters. Private — nothing uploads.',
+    description: 'Paste logs and filter by keyword, regex, or log level. Exclude noise and copy just what matters. Private — nothing uploads.',
     keywords: ['log filter', 'grep online', 'log file analyzer', 'filter log viewer', 'regex log search'],
     intent: 'informational', category: 'Developer Tools', h1: 'Log Filter & Grep Tool',
     shortIntro: 'Grep-style filtering for logs — keyword, level, or regex.', published: true,
@@ -3737,7 +3737,7 @@ export const tools: ToolMeta[] = [
   {
     slug: 'ascii-table', name: 'ASCII Table',
     title: 'ASCII Table - Character Codes Reference with Search',
-    description: 'Complete ASCII table: decimal, hex, binary, octal codes for every character, searchable and click-to-copy. Control chars included with names.',
+    description: 'Complete ASCII table: decimal, hex, binary, octal codes for every character, searchable. Control chars included with names.',
     keywords: ['ascii table', 'ascii character codes', 'hex to ascii chart', 'decimal char codes', 'binary ascii'],
     intent: 'informational', category: 'Developer Tools', h1: 'ASCII Table & Character Codes',
     shortIntro: 'Every ASCII character with dec/hex/oct/bin codes, searchable.', published: true,
@@ -3748,7 +3748,7 @@ export const tools: ToolMeta[] = [
       'printable ascii characters range',
     ],
     titleLongTail: 'ASCII Chart - Decimal, Hexadecimal, Binary Values',
-    descriptionLongTail: 'Search by character or code in any base; every cell copies on click. Includes named control characters (NUL, CR, LF) and extended notes.',
+    descriptionLongTail: 'Search by character or code in any base. Includes named control characters (NUL, CR, LF) and extended notes.',
   },
   {
     slug: 'screen-time-calculator', name: 'Screen Time Calculator',
@@ -3929,7 +3929,7 @@ export const tools: ToolMeta[] = [
   {
     slug: 'coin-flip', name: 'Coin Flip',
     title: 'Coin Flip Online - Heads or Tails Decider',
-    description: 'Flip a virtual coin with crypto-grade randomness. Flip once or in batches, keep a running tally of heads and tails. The fastest fair decider online.',
+    description: 'Flip a virtual coin with crypto-grade randomness. Flip repeatedly and keep a running tally of heads and tails. The fastest fair decider online.',
     keywords: ['coin flip', 'flip a coin', 'heads or tails', 'coin toss online', 'random decider'],
     intent: 'informational', category: 'Game Tools', h1: 'Coin Flip',
     shortIntro: 'A crisp instant heads-or-tails with a running tally.', published: true,
@@ -4085,7 +4085,7 @@ export const tools: ToolMeta[] = [
       'zod object from json typescript',
     ],
     titleLongTail: 'JSON to Zod Schema - Types & Nested Objects',
-    descriptionLongTail: 'Generates clean zod code with z.object, z.array, unions for mixed types, and .nullable() where null appears — copy straight into a TypeScript project.',
+    descriptionLongTail: 'Generates clean zod code with z.object, z.array, unions for mixed types, and z.null() where null appears — copy straight into a TypeScript project.',
   },
   {
     slug: 'aes-encrypt-decrypt', name: 'AES Encrypt & Decrypt',

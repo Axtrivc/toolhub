@@ -12,6 +12,8 @@ export const binaryToTextL10n: ToolL10n = {
       outputLabel: '解码后的文本',
       note: '💾 每 8 位为一组,代表一个 UTF-8 字节。支持 Unicode(中文、emoji)。',
       inputTooLarge: '⚠️ 输入过大——支持规模最多 20 万字符。请裁剪输入后再计算。',
+      invalidBinary: '⚠️ 无效的二进制——每组须为 0/1 且不超过 8 位',
+      couldNotDecode: '⚠️ 无法解码',
     },
     useCases: [
       '把二进制(0 和 1)解码回可读文本',
@@ -33,6 +35,8 @@ export const binaryToTextL10n: ToolL10n = {
       outputLabel: 'Texto decodificado',
       note: '💾 Cada grupo de 8 bits es un byte UTF-8. Admite Unicode (chino, emoji).',
       inputTooLarge: '⚠️ Entrada demasiado grande: el tamaño admitido es de hasta 200 000 caracteres. Recorta la entrada para calcular.',
+      invalidBinary: '⚠️ Binario no válido: usa grupos de 0s y 1s, hasta 8 bits cada uno',
+      couldNotDecode: '⚠️ No se pudo decodificar',
     },
     useCases: [
       'decodificar binario (0 y 1) a texto legible',
@@ -54,6 +58,8 @@ export const binaryToTextL10n: ToolL10n = {
       outputLabel: 'Dekodierter Text',
       note: '💾 Jede 8-Bit-Gruppe ist ein UTF-8-Byte. Unterstützt Unicode (Chinesisch, Emoji).',
       inputTooLarge: '⚠️ Eingabe zu groß – die unterstützte Größe beträgt maximal 200.000 Zeichen. Kürze die Eingabe.',
+      invalidBinary: '⚠️ Ungültige Binärdaten — verwende Gruppen aus 0en und 1en, jeweils bis 8 Bits',
+      couldNotDecode: '⚠️ Dekodieren nicht möglich',
     },
     useCases: [
       'Binär (0 und 1) in lesbaren Text dekodieren',

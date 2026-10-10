@@ -37,7 +37,7 @@ export const capitalGainsTaxEstimatorL10n: ToolL10n = {
     },
     useCases: ['estimar el impuesto sobre plusvalías de acciones o cripto', 'comparar tipos de corto vs largo plazo', 'calcular lo que debes según el periodo de tenencia', 'decidir si vender ahora o seguir manteniendo'],
     faqs: [
-      { q: '¿Cómo calculo mi impuesto sobre plusvalías?', a: 'Lleva el precio de compra y venta de cada lote. Ganancia = venta − compra − comisiones. Las plusvalías a largo plazo tributan al 0/15/20 % según tu renta total taxable (incluida la propia ganancia); las de corto plazo usan tu tramo de renta ordinaria.' },
+      { q: '¿Cómo calculo mi impuesto sobre plusvalías?', a: 'Lleva el precio de compra y venta de cada lote. Ganancia = venta − compra − comisiones. Las plusvalías a largo plazo tributan al 0/15/20 % según tu renta total imponible (incluida la propia ganancia); las de corto plazo usan tu tramo de renta ordinaria.' },
       { q: '¿Qué es la cosecha de pérdidas fiscales?', a: 'Vender inversiones con pérdida para compensar ganancias realizadas y bajar la factura fiscal. Las pérdidas compensan ganancias uno a uno; si las pérdidas superan las ganancias, hasta $3,000 por año pueden compensar renta ordinaria y el resto se difiere. Cuidado con la regla de venta lavada: no puedes recomprar el mismo valor en 30 días.' },
       { q: '¿Pago impuestos si reinvierto lo obtenido?', a: 'Sí. Vender dispara un evento imponible aunque reinviertas — Hacienda grava la ganancia realizada. Solo mantener dentro de cuentas con ventajas fiscales (IRA, 401k) lo difiere, y solo estructuras específicas lo evitan por completo.' },
     ],

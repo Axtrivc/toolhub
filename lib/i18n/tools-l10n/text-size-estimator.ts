@@ -43,7 +43,7 @@ export const textSizeEstimatorL10n: ToolL10n = {
     ui: {
       defaultInput: 'Hallo, dies ist ein Beispieltext zum Messen.',
       inputLabel: 'Dein Text',
-      outputLabel: 'Größen­schätzungen',
+      outputLabel: 'Größenschätzungen',
       note: '📏 Schätzt die Speichergröße in verschiedenen Einheiten. Nützlich vor dem Speichern von Text in Datenbanken oder APIs.',
     },
     useCases: [

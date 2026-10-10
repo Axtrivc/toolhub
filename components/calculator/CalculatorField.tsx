@@ -19,12 +19,26 @@ export function AnimatedNumber({ value }: { value: ReactNode }) {
   const parsed =
     text !== null
       ? (() => {
-          const m = text.match(/^([^\d+.\-]*)([+-]?[\d,]*\.?\d+)(.*)$/)
+          const m = text.match(/^([^\d+.\-]*)([+-]?[\d,]*\.?\d+(?:,\d{1,2})?)(.*)$/)
           if (!m) return null
-          const num = parseFloat(m[2].replace(/,/g, ''))
+          const body = m[2]
+          const dot = body.lastIndexOf('.')
+          const comma = body.lastIndexOf(',')
+          let num: number
+          let decimals: number
+          if (comma !== -1 && (dot === -1 ? body.length - comma - 1 !== 3 : comma > dot)) {
+            // 小数逗号格式(de/es,如 "643,22 $"、"1.234,56"):点当千分位剔除、
+            // 逗号作小数点,避免 tween 起点被放大三个数量级再跳回;
+            // 无点且逗号后恰 3 位(如 "$1,200")仍是 en-US 千分位,走原逻辑
+            num = parseFloat(body.replace(/\./g, '').replace(/,/g, '.'))
+            decimals = body.length - comma - 1
+          } else {
+            num = parseFloat(body.replace(/,/g, ''))
+            const decMatch = body.split('.')[1]
+            decimals = decMatch ? decMatch.length : 0
+          }
           if (!Number.isFinite(num)) return null
-          const decMatch = m[2].split('.')[1]
-          return { prefix: m[1], num, suffix: m[3], decimals: decMatch ? decMatch.length : 0 }
+          return { prefix: m[1], num, suffix: m[3], decimals }
         })()
       : null
 

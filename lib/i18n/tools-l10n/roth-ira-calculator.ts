@@ -39,6 +39,8 @@ export const rothIraCalculatorL10n: ToolL10n = {
       'tradWins': 'Traditional IRA 预计让你税后多拿',
       'more': '',
       'chartTitle': 'Roth 与 Traditional 资产增长对比',
+      'line.trad': 'Traditional 余额（税前）',
+      'line.roth': 'Roth 余额（税后投入）',
       'note': '💡 2025 年 IRA 限额为 7,000 美元（50 岁及以上为 8,000 美元）。Roth 与 Traditional 的本质区别仅在于纳税时间点：相同投资额、相同复合增长——胜负取决于你今天的税率与退休时的税率对比。',
     },
     useCases: [
@@ -99,6 +101,8 @@ export const rothIraCalculatorL10n: ToolL10n = {
       'tradWins': 'Se estima que el Trad. IRA te dejará',
       'more': 'más tras impuestos',
       'chartTitle': 'Crecimiento de saldo: Roth vs Traditional',
+      'line.trad': 'Saldo Traditional (bruto)',
+      'line.roth': 'Saldo Roth (aportación neta)',
       'note': '💡 El límite IRA para 2025 es de 7.000 $ (8.000 $ para mayores de 50 años). La diferencia clave radica en cuándo se pagan los impuestos.',
     },
     useCases: [
@@ -159,6 +163,8 @@ export const rothIraCalculatorL10n: ToolL10n = {
       'tradWins': 'Mit dem Trad. IRA erzielst du voraussichtlich',
       'more': 'mehr nach Steuern',
       'chartTitle': 'Vermögenswachstum: Roth vs. Traditional',
+      'line.trad': 'Traditional-Guthaben (brutto)',
+      'line.roth': 'Roth-Guthaben (nach Steuern eingezahlt)',
       'note': '💡 Das IRA-Beitragslimit für 2025 beträgt 7.000 $ (8.000 $ ab 50 Jahren). Der Unterschied liegt rein im Besteuerungszeitpunkt.',
     },
     useCases: [

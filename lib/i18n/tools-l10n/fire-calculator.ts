@@ -33,6 +33,8 @@ export const fireCalculatorL10n: ToolL10n = {
       'errUnreachable': '80 年内无法达成——请提高储蓄或缩减支出',
       'yearsWord': '年',
       'chartTitle': '投资组合增长与 FIRE 目标线',
+      'line.portfolio': '投资组合价值',
+      'line.target': 'FIRE 目标线',
       'note': '💡 经典的 4% 法则对应 25 倍年支出的 FIRE 目标金额。此处填写的均为扣除通胀后的实际收益率，所有金额均为今日购买力——无需额外折算通胀。',
     },
     useCases: [
@@ -87,6 +89,8 @@ export const fireCalculatorL10n: ToolL10n = {
       'errUnreachable': 'Inalcanzable en 80 años: ahorra más o gasta menos',
       'yearsWord': 'años',
       'chartTitle': 'Crecimiento patrimonial vs Objetivo FIRE',
+      'line.portfolio': 'Valor de la cartera',
+      'line.target': 'Objetivo FIRE',
       'note': '💡 La regla del 4% fija la meta FIRE en 25 veces el gasto anual. Los rendimientos son reales (descontando la inflación).',
     },
     useCases: [
@@ -141,6 +145,8 @@ export const fireCalculatorL10n: ToolL10n = {
       'errUnreachable': 'Innerhalb von 80 Jahren nicht erreichbar',
       'yearsWord': 'Jahre',
       'chartTitle': 'Vermögenswachstum vs. FIRE-Ziel',
+      'line.portfolio': 'Portfolio-Wert',
+      'line.target': 'FIRE-Ziel',
       'note': '💡 Die klassische 4%-Regel impliziert eine FIRE-Zielsumme von 25 Jahresausgaben. Die Renditen sind inflationsbereinigt.',
     },
     useCases: [

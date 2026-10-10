@@ -31,6 +31,7 @@ import { tui, tuiCalc } from '@/lib/i18n/tool-l10n'
 const COMMON_CALC_KEYS = new Set([
   'summaryTitle', 'inputsLabel', 'resultsLabel', 'copySummary',
   'csvField', 'csvType', 'csvValue', 'csvInput', 'csvResult', 'inputs', 'chartEmpty',
+  'reset',
   // Scenario A/B 对比模式(allowCompare)的共享 UI 串
   'compareAdd', 'compareExit', 'compareSync', 'scenarioA', 'scenarioB', 'deltaCol',
 ])

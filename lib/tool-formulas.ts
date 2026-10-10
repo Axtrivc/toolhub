@@ -73,7 +73,7 @@ export const toolFormulas: Record<string, ToolFormula> = {
   "rent-vs-buy-calculator": {
     formula: "Renting cost = Monthly rent × 12 × Years\nBuying cost = Down payment + Closing costs + ( Mortgage payment + Taxes + Insurance + Maintenance ) × 12 × Years − Appreciation + Selling costs",
     variables: "Monthly rent = Rent per month ($)\nYears = Comparison period (years)\nDown payment = Cash paid upfront at purchase ($)\nClosing costs = Purchase fees, typically 2-5% of the price ($)\nMortgage payment = Monthly principal and interest ($)\nTaxes, Insurance, Maintenance = Annual ownership costs ($)\nAppreciation = Increase in home value over the period ($)\nSelling costs = Agent commission and closing fees when selling, about 6-8% of the sale price ($)",
-    explain: "Renting costs are simply rent paid over the period. Buying stacks upfront cash and monthly ownership costs, then credits back the home's value gain net of selling fees, so the breakeven usually arrives after several years.",
+    explain: "Renting costs are simply rent paid over the period. Buying stacks upfront cash and monthly ownership costs, then credits back the home's value gain net of selling fees, so the breakeven usually arrives after several years. Note: the on-page calculator implements a simplified version — down payment + mortgage payments made − ending home equity — and excludes taxes, insurance, maintenance, appreciation, and transaction costs; the full model above shows everything a complete comparison adds.",
     example: "Step 1: Rent $1,800 per month for 5 years: 1,800 × 12 × 5 = $108,000.\nStep 2: Buy a $350,000 home with 20% down: down payment $70,000 plus closing costs of 3% = $10,500. A $280,000 loan at 6.5% for 30 years costs about $1,770 per month, and taxes, insurance, and maintenance add about $700, so 60 months of ownership costs about $2,470 × 60 = $148,200.\nStep 3: The home appreciates 3% per year: 350,000 × 1.03^5 = 350,000 × 1.159274 ≈ $405,746, a gain of $55,746; selling costs of 6% are $24,345, so the net credit is 55,746 − 24,345 = $31,401.\nStep 4: Buying total = 70,000 + 10,500 + 148,200 − 31,401 = $197,299.\nResult: renting costs about $108,000 versus about $197,300 to buy over 5 years; the gap narrows as equity and appreciation accumulate over longer horizons.",
   },
   "down-payment-calculator": {
@@ -90,9 +90,9 @@ export const toolFormulas: Record<string, ToolFormula> = {
   },
   "take-home-pay-calculator": {
     formula: "Pre-tax wages = Gross − 401(k) − Health premium\nFICA = ( Gross − Health premium ) × 7.65%\nFederal income tax = IRS brackets applied to ( annual Pre-tax wages − standard deduction )\nTake-home pay = Gross − Federal income tax − FICA − 401(k) − Health premium",
-    variables: "Gross = Total pay before deductions, per pay period ($)\n401(k) = Pre-tax retirement contribution ($)\nHealth premium = Pre-tax health insurance cost ($)\nFICA = Social Security 6.2% (up to the yearly wage base) plus Medicare 1.45% ($)\nFederal income tax = Withholding per IRS brackets and your W-4 ($)\nTake-home pay = Net pay actually deposited ($)",
+    variables: "Gross = Annual gross salary before deductions ($)\n401(k) = Pre-tax retirement contribution ($ per year)\nHealth premium = Pre-tax health insurance cost ($ per year)\nFICA = Social Security 6.2% (up to the yearly wage base) plus Medicare 1.45% ($)\nFederal income tax = Withholding per IRS brackets and your W-4 ($)\nTake-home pay = Net pay actually deposited ($)",
     explain: "Start from gross pay and subtract pre-tax deductions, FICA, and federal withholding. Note the quirk that 401(k) contributions escape income tax but still owe FICA, while health premiums escape both.",
-    example: "Step 1: Gross $5,000 per month; 401(k) at 5% = $250; health premium $150; income-tax wages = 5,000 − 250 − 150 = $4,600.\nStep 2: FICA = (5,000 − 150) × 7.65% = 4,850 × 0.0765 = $371.03.\nStep 3: Annual income-tax wages 4,600 × 12 = $55,200; minus the $15,000 standard deduction = $40,200 taxable; 2025 single brackets give 11,925 × 10% + 28,275 × 12% = 1,192.50 + 3,393 = $4,585.50 per year = $382.13 per month.\nStep 4: Take-home = 5,000 − 382.13 − 371.03 − 250 − 150 = $3,846.84.\nResult: about $3,847 lands in the bank each month from $5,000 gross (roughly 77%).",
+    example: "Step 1: Gross $60,000 per year; 401(k) at 5% = $3,000; health premium $1,800; income-tax wages = 60,000 − 3,000 − 1,800 = $55,200.\nStep 2: FICA = (60,000 − 1,800) × 7.65% = 58,200 × 0.0765 = $4,452.30.\nStep 3: Income-tax wages $55,200 minus the $15,000 standard deduction = $40,200 taxable; 2025 single brackets give 11,925 × 10% + 28,275 × 12% = 1,192.50 + 3,393 = $4,585.50 per year.\nStep 4: Take-home = 60,000 − 4,585.50 − 4,452.30 − 3,000 − 1,800 = $46,162.20.\nResult: about $46,162 per year — roughly $3,847 per month — lands in the bank from $60,000 gross (about 77%).",
   },
   "overtime-calculator": {
     formula: "Regular pay = Hourly rate × Regular hours\nOvertime pay = Hourly rate × Multiplier × OT hours\nTotal weekly pay = Regular pay + Overtime pay\nHourly rate from salary = Annual salary ÷ 2,080",
@@ -154,7 +154,7 @@ export const toolFormulas: Record<string, ToolFormula> = {
     formula: "PMT = P × [ r(1+r)^n / ((1+r)^n − 1) ]",
     variables: "PMT = Fixed payment per period ($)\nP = Present value, the balance being paid out ($)\nr = Interest rate per period (as a decimal)\nn = Number of periods",
     explain: "Fixed payment (PMT) that pays off a present value P over n periods at rate r — the same amortization formula as a loan, used here for annuity payout planning.",
-    example: "Step 1: P = $500,000, annual rate 5% → r = 0.05 / 12 = 0.0041667, n = 20 × 12 = 240 monthly payments.\nStep 2: (1.0041667)^240 ≈ 2.71264.\nStep 3: numerator = 0.0041667 × 2.71264 ≈ 0.0113027; denominator = 2.71264 − 1 = 1.71264.\nStep 4: payment factor = 0.0113027 / 1.71264 ≈ 0.0065996.\nResult: PMT = 500,000 × 0.0065996 ≈ $3,300 per month for 20 years (about $792,000 paid out in total).",
+    example: "Step 1: P = $500,000, annual rate 5% → r = 0.05, n = 20 annual payouts (the tool works in yearly periods and divides by 12 for the monthly figure).\nStep 2: (1.05)^20 ≈ 2.65330, so (1 + r)^−n = 1 ÷ 2.65330 ≈ 0.37689.\nStep 3: PMT = 500,000 × 0.05 ÷ (1 − 0.37689) = 25,000 ÷ 0.62311.\nResult: PMT ≈ $40,121 per year — about $3,343 per month, roughly $802,426 paid out in total over 20 years.",
   },
   "retirement-calculator": {
     formula: "Balance = P(1+r)^n + PMT × [ ((1+r)^n − 1) / r ]\nSafe withdrawal ≈ Balance × 4%",
@@ -202,7 +202,7 @@ export const toolFormulas: Record<string, ToolFormula> = {
     formula: "Gain = sale − basis\nTax = Σ (bracket share of gain × bracket rate)\nNet = gain − tax",
     variables: "Gain = Capital gain ($)\nsale = Sale price ($)\nbasis = Purchase price plus buying and selling costs ($)\nbracket share = Slice of the gain falling inside each long-term bracket ($)\nbracket rate = Rate for that slice (0%, 15%, or 20% for long-term gains)\nNet = After-tax gain ($)",
     explain: "Basis is usually the purchase price plus costs. Long-term gains (held more than 1 year) stack on top of your ordinary income and each 0%/15%/20% bracket is applied to the slice of the gain falling inside it, so the rate shown is a blended effective rate; short-term gains are added to ordinary income and taxed at those brackets.",
-    example: "Step 1: basis = $50,000, sale = $70,000 → gain = $20,000, held more than 1 year so it is long-term.\nStep 2: single filer with $40,000 of taxable ordinary income; the 0% bracket reaches $47,025, leaving $7,025 of headroom.\nStep 3: first $7,025 of the gain is taxed at 0% → $0 tax.\nStep 4: remaining $12,975 of the gain is taxed at 15% → 12,975 × 0.15 = $1,946.\nResult: tax is about $1,946 (a blended effective rate of about 9.7%), leaving a net gain of about $18,054.",
+    example: "Step 1: basis = $50,000, sale = $70,000 → gain = $20,000, held more than 1 year so it is long-term.\nStep 2: single filer with $40,000 of taxable ordinary income; the 0% bracket reaches $49,450 (2026 thresholds), leaving $9,450 of headroom.\nStep 3: first $9,450 of the gain is taxed at 0% → $0 tax.\nStep 4: remaining $10,550 of the gain is taxed at 15% → 10,550 × 0.15 = $1,582.50.\nResult: tax is about $1,583 (a blended effective rate of about 7.9%), leaving a net gain of about $18,417.",
   },
 
   // ───────── 商业 / 定价 / 平台与 AI 费用 ─────────
@@ -261,16 +261,16 @@ export const toolFormulas: Record<string, ToolFormula> = {
     example: "Step 1: Line items: 12 hours of design at $75 = $900; 6 hours of revisions at $60 = $360.\nStep 2: Subtotal = 900 + 360 = $1,260.00.\nStep 3: Tax at 8% = 1,260 × 0.08 = $100.80, so the invoice total = 1,260 + 100.80 = $1,360.80, due Net 30.\nStep 4: The client pays 15 days late, so one month of the 1.5% penalty applies: 1,360.80 × 0.015 = $20.41.\nResult: the invoice is $1,360.80 on time, or $1,381.21 with the late fee.",
   },
   "subscription-cost-calculator": {
-    formula: "Monthly total = Sum of every subscription's monthly price\nYearly total = Monthly total × 12\nAnnual-plan saving = Monthly price × 12 − Annual price",
-    variables: "Monthly total = Combined cost of all subscriptions ($ per month)\nYearly total = Combined cost over a year ($ per year)\nMonthly price = A service billed monthly ($)\nAnnual price = The same service billed yearly ($)\nAnnual-plan saving = Money saved by prepaying yearly ($ per year)",
-    explain: "Small monthly charges add up fast: multiplying the monthly total by 12 exposes the true yearly spend, and comparing monthly versus annual pricing shows where prepaying saves money.",
-    example: "Step 1: Streaming $15.99 + music $11.99 + cloud storage $9.99 + fitness app $12.99 = $50.96 per month.\nStep 2: Yearly spend = 50.96 × 12 = $611.52.\nStep 3: The streaming service offers an annual plan at $159.99; paying monthly costs 15.99 × 12 = $191.88.\nStep 4: Saving = 191.88 − 159.99 = $31.89 per year.\nResult: subscriptions total $50.96 per month ($611.52 per year), and switching the streamer to its annual plan saves $31.89.",
+    formula: "True monthly cost = Monthly subtotal + Yearly subtotal ÷ 12 + Quarterly subtotal ÷ 3\nYearly cost = True monthly cost × 12\n5-year cost = Yearly cost × 5\nWork-hours per year = Yearly cost ÷ hourly wage",
+    variables: "Monthly subtotal = Total of services billed monthly ($ per month)\nYearly subtotal = Total of services billed yearly ($ per year)\nQuarterly subtotal = Total of services billed quarterly ($ per quarter)\nTrue monthly cost = Everything converted to one monthly figure ($)\nWork-hours per year = Yearly cost ÷ after-tax hourly wage (the tool assumes $25/h)",
+    explain: "Small monthly charges add up fast: each billing cycle is normalized to monthly (yearly ÷ 12, quarterly ÷ 3), and the sum scales up to the true yearly and 5-year spend — the numbers that make \"it is only $9.99 a month\" honest.",
+    example: "Step 1: monthly services $15.99 + $11.99 = $27.98; yearly services $120; quarterly services $60.\nStep 2: true monthly = 27.98 + 120 ÷ 12 + 60 ÷ 3 = 27.98 + 10 + 20 = $57.98.\nStep 3: yearly = 57.98 × 12 = $695.76; 5-year = 695.76 × 5 = $3,478.80.\nStep 4: work-hours = 695.76 ÷ 25 ≈ 27.8 h.\nResult: subscriptions really cost $57.98 per month — about $695.76 a year, or roughly 28 after-tax work hours.",
   },
   "wedding-budget-calculator": {
-    formula: "Category budget = Total budget × Category %\nStandard split: Catering and bar 30%, Venue 25%, Photography and video 12%, Music and entertainment 10%, Attire 8%, Flowers and decor 8%, Cake 3%, Stationery 2%, Hair and makeup 2%",
-    variables: "Total budget = Overall wedding spending cap ($)\nCategory % = Industry-standard share for that category\nCategory budget = Dollar amount allocated to that category ($)",
-    explain: "Wedding budgets follow predictable proportions, with venue and catering dominating the total. Applying standard percentages to your budget turns one big number into a realistic line item for every vendor.",
-    example: "Step 1: Total budget $30,000.\nStep 2: Catering and bar = 30,000 × 0.30 = $9,000; venue = 30,000 × 0.25 = $7,500.\nStep 3: Photography = 30,000 × 0.12 = $3,600; music = 30,000 × 0.10 = $3,000; attire = 30,000 × 0.08 = $2,400; flowers and decor = 30,000 × 0.08 = $2,400.\nStep 4: Cake = 30,000 × 0.03 = $900; stationery = 30,000 × 0.02 = $600; hair and makeup = 30,000 × 0.02 = $600.\nResult: every category is funded and the allocations add up to exactly $30,000.",
+    formula: "Category budget = Total budget × Category %\nStandard split: Catering and bar 30%, Venue and rentals 25%, Photo and video 15%, Attire and beauty 10%, Music/DJ and flowers 10%, Stationery, favors and buffer 10%\nCost per guest = Total budget ÷ Guest count",
+    variables: "Total budget = Overall wedding spending cap ($)\nCategory % = Industry-standard share for that category\nCategory budget = Dollar amount allocated to that category ($)\nCost per guest = Total budget divided by guest count ($)",
+    explain: "Wedding budgets follow predictable proportions, with venue and catering dominating the total. Applying standard percentages to your budget turns one big number into a realistic line item for every vendor; the per-guest figure is the lever that moves everything else.",
+    example: "Step 1: Total budget $30,000.\nStep 2: Catering and bar = 30,000 × 0.30 = $9,000; venue and rentals = 30,000 × 0.25 = $7,500.\nStep 3: Photo and video = 30,000 × 0.15 = $4,500; attire and beauty = 30,000 × 0.10 = $3,000; music/DJ and flowers = 30,000 × 0.10 = $3,000; stationery, favors and buffer = 30,000 × 0.10 = $3,000.\nStep 4: cost per guest with 100 guests = 30,000 ÷ 100 = $300.\nResult: the six categories sum to exactly 100% of the $30,000 budget, and each guest costs $300.",
   },
   "bill-split-calculator": {
     formula: "Tip = Subtotal × Tip%\nPer person = ( Subtotal + Tip + Fixed fees ) ÷ Number of diners",
@@ -318,7 +318,7 @@ export const toolFormulas: Record<string, ToolFormula> = {
     formula: "monthly cost = (input tokens ÷ 1M × price_in) + (output tokens ÷ 1M × price_out)",
     variables: "price_in = Input price per 1M tokens ($)\nprice_out = Output price per 1M tokens ($)\ninput tokens = Monthly prompt (input) token volume\noutput tokens = Monthly completion (output) token volume",
     explain: "Per-model API bill from monthly token volumes. Prices are uncached list rates per million tokens; cached-input and batch discounts are not applied, so results are worst-case planning numbers.",
-    example: "Step 1: workload = 20M input tokens and 4M output tokens per month; model priced at  per 1M input and 5 per 1M output.\nStep 2: input cost = 20 ×  = 0.\nStep 3: output cost = 4 × 5 = 0.\nResult: about 20 per month at list rates — prompt caching on the input side could cut the input half substantially.",
+    example: "Step 1: workload = 20M input tokens and 4M output tokens per month; model priced at $2 per 1M input and $10 per 1M output (Claude Sonnet 5 list rates).\nStep 2: input cost = 20 × $2 = $40.\nStep 3: output cost = 4 × $10 = $40.\nResult: about $80 per month at list rates — prompt caching could cut the input side substantially.",
   },
   "embedding-price-calculator": {
     formula: "Indexing cost = documents × tokens/doc ÷ 1,000,000 × P\nMonthly query cost = queries/day × tokens/query × 30 ÷ 1,000,000 × P\nTotal first month = Indexing cost + Monthly query cost",
@@ -341,10 +341,10 @@ export const toolFormulas: Record<string, ToolFormula> = {
 
   // ───────── 车辆 / 出行 / 居家 ─────────
   "car-cost-calculator": {
-    formula: "Monthly cost = Loan payment + Insurance + Fuel + Maintenance + Depreciation + Fees\nFuel = ( Miles per month ÷ MPG ) × Price per gallon\nDepreciation = ( Purchase price − Resale value ) ÷ Months owned\nPer-mile cost = Monthly cost × 12 ÷ Annual miles (divide miles by 1.609 for per-km)",
-    variables: "Loan payment = Monthly financing cost ($)\nInsurance = Monthly premium ($)\nFuel = Monthly fuel spend ($)\nMaintenance = Oil changes, tires, and repairs averaged per month ($)\nDepreciation = Value the car loses per month ($)\nFees = Registration and taxes averaged per month ($)\nMonthly cost = True cost of ownership ($ per month)\nPer-mile cost = Monthly cost × 12 ÷ annual miles ($ per mile)",
-    explain: "The loan payment is only part of what a car really costs. Adding fuel, insurance, upkeep, fees, and depreciation gives the true monthly figure, which divides into an honest per-mile or per-km rate.",
-    example: "Step 1: Payment $420, insurance $140, fees $15, maintenance $60, depreciation = (30,000 − 18,000) ÷ 60 months = $200.\nStep 2: Fuel: 1,000 miles per month ÷ 28 MPG = 35.71 gallons × $3.40 = $121.43.\nStep 3: Monthly cost = 420 + 140 + 15 + 60 + 200 + 121.43 = $956.43.\nStep 4: Per-mile = 956.43 × 12 ÷ 12,000 annual miles = $0.96.\nResult: the car truly costs about $956.43 per month, or $0.96 per mile.",
+    formula: "Total = Depreciation + Fuel total + ( Insurance + Maintenance ) × Years\nMonthly cost = Total ÷ ( Years × 12 )\nFuel per year = km per year ÷ 100 × L/100km × Price per litre\nCost per km = Total ÷ ( km per year × Years )",
+    variables: "Purchase price = What you paid for the car ($)\nResale = Estimated value at the end of ownership ($)\nDepreciation = Purchase price − resale ($)\nYears = Ownership period (years)\nkm per year = Distance driven annually (km)\nL/100km = Fuel consumption (litres per 100 km)\nPrice per litre = Local fuel price ($/L)\nInsurance, Maintenance = Annual costs ($ per year)\nMonthly cost = True cost of ownership ($ per month)\nCost per km = Total ÷ lifetime kilometres ($ per km)",
+    explain: "Depreciation is usually the single biggest cost of owning a car. Summing it with fuel, insurance, and maintenance over the ownership period gives the true total, which normalizes into an honest monthly and per-km figure. Financing interest, parking, tolls, and registration are not included.",
+    example: "Step 1: Purchase $25,000, resale $12,000, 5 years → depreciation = 25,000 − 12,000 = $13,000.\nStep 2: Fuel: 15,000 km/yr ÷ 100 × 7.5 L/100km × $1.60/L = $1,800 per year → × 5 = $9,000.\nStep 3: Insurance + maintenance = (1,200 + 800) × 5 = $10,000; total = 13,000 + 9,000 + 10,000 = $32,000.\nStep 4: Monthly = 32,000 ÷ 60 ≈ $533.33; per km = 32,000 ÷ 75,000 ≈ $0.43.\nResult: the car truly costs about $533 per month, or about $0.43 per kilometre.",
   },
   "fuel-cost-calculator": {
     formula: "Fuel used = Distance ÷ MPG\nTrip cost = Fuel used × Price per gallon\nCost per person = Trip cost ÷ Passengers\nMetric: Liters = Distance km ÷ 100 × L per 100 km",
@@ -353,16 +353,16 @@ export const toolFormulas: Record<string, ToolFormula> = {
     example: "Step 1: A 480-mile trip in a car averaging 28 MPG with gas at $3.40 per gallon.\nStep 2: Fuel used = 480 ÷ 28 = 17.143 gallons.\nStep 3: Trip cost = 17.143 × 3.40 ≈ $58.29.\nStep 4: Three people split it: 58.29 ÷ 3 ≈ $19.43 per person.\nResult: the trip costs about $58.29 in fuel, or $19.43 each for 3 passengers.",
   },
   "electricity-cost-calculator": {
-    formula: "kWh = Watts ÷ 1000 × Hours\nCost = kWh × Rate per kWh\nMonthly cost = Watts ÷ 1000 × Hours per day × 30 × Rate per kWh\nYearly cost = Monthly cost × 12",
+    formula: "kWh = Watts ÷ 1000 × Hours\nCost = kWh × Rate per kWh\nMonthly cost = Watts ÷ 1000 × Hours per day × 30.44 × Rate per kWh\nYearly cost = Watts ÷ 1000 × Hours per day × 365 × Rate per kWh",
     variables: "Watts = Appliance power draw (W)\nHours = Hours used per day\nkWh = Energy consumed (kilowatt-hours)\nRate per kWh = Electricity price ($ per kWh; US average about $0.17)\nCost per day, month, year = Running cost over each period ($)",
     explain: "A watt is a rate of energy use, so cost is power times hours, converted to kilowatt-hours and priced at your utility rate. The same three inputs scale the estimate to any day, month, or year.",
-    example: "Step 1: A 1,500 W space heater runs 5 hours per day at $0.17 per kWh.\nStep 2: Energy = 1,500 ÷ 1000 × 5 = 7.5 kWh per day.\nStep 3: Daily cost = 7.5 × 0.17 = $1.275 ≈ $1.28.\nStep 4: Monthly = 1.275 × 30 = $38.25; yearly = 38.25 × 12 = $459.00.\nResult: the heater costs about $1.28 per day, $38.25 per month, and $459 per year to run.",
+    example: "Step 1: A 1,500 W space heater runs 5 hours per day at $0.17 per kWh.\nStep 2: Energy = 1,500 ÷ 1000 × 5 = 7.5 kWh per day.\nStep 3: Daily cost = 7.5 × 0.17 = $1.275 ≈ $1.28.\nStep 4: Monthly = 1.275 × 30.44 = $38.81; yearly = 1.275 × 365 = $465.38.\nResult: the heater costs about $1.28 per day, $38.81 per month, and $465.38 per year to run.",
   },
   "paint-calculator": {
-    formula: "wall area = 2 × (L + W) × H\nnet area = wall area − (doors × 21 + windows × 15)\ngallons = net area × coats ÷ 350\n(1 US gallon covers ≈ 350-400 ft² per coat; door ≈ 21 ft², window ≈ 15 ft²)",
-    variables: "L, W = Room length and width (ft)\nH = Wall height (ft)\nwall area = Total wall surface (ft²)\nnet area = Wall area after subtracting doors and windows (ft²)\ncoats = Number of coats of paint\ngallons = Paint to buy (US gallons)\n350 = Coverage of one gallon per coat, typical range 350-400 ft²",
-    explain: "Paint volume is just the paintable surface area times the number of coats, divided by the coverage of one gallon (about 350-400 ft²). Doors and windows are subtracted first, and rounding up adds the waste margin for spills, touch-ups, and porous walls.",
-    example: "Step 1: Room 14 ft × 12 ft with 8 ft ceilings: wall area = 2 × (14 + 12) × 8 = 416 ft².\nStep 2: One door (21 ft²) and two windows (2 × 15 = 30 ft²): net area = 416 − 51 = 365 ft².\nStep 3: Two coats: 365 × 2 = 730 ft² of coverage needed.\nStep 4: gallons = 730 ÷ 350 ≈ 2.1.\nResult: about 2.1 gallons for two coats — buy 3 gallons for a safe margin (2 may just cover if your paint reaches 400 ft²/gallon).",
+    formula: "wall area = Room perimeter × Wall height\nnet area = wall area − (doors × 1.85 + windows × 1.4)\nliters = net area × coats ÷ 10, then × 1.1 margin, rounded up\n(1 L covers ≈ 10 m² per coat ≈ 400 ft² per US gallon; door ≈ 1.85 m², window ≈ 1.4 m²)",
+    variables: "Room perimeter = Total length of all walls (m)\nWall height = Floor-to-ceiling height (m)\nwall area = Total wall surface (m²)\nnet area = Wall area after subtracting doors and windows (m²)\ncoats = Number of coats of paint\n10 m²/L = Coverage of one litre per coat (≈ 400 ft² per US gallon)\n1.1 = 10% waste margin for spills, touch-ups, and porous walls",
+    explain: "Paint volume is the paintable surface times the number of coats, divided by the coverage of one litre (about 10 m²/L). Doors (1.85 m² each) and windows (1.4 m² each) are subtracted first, a 10% margin covers spills and porous walls, and the result rounds up to whole 2.5 L buckets or gallon cans.",
+    example: "Step 1: Room perimeter 14 m with 2.4 m walls: wall area = 14 × 2.4 = 33.6 m².\nStep 2: Two doors (2 × 1.85 = 3.7 m²) and two windows (2 × 1.4 = 2.8 m²): net area = 33.6 − 6.5 = 27.1 m².\nStep 3: Two coats: 27.1 × 2 ÷ 10 = 5.42 L exactly.\nStep 4: buy = ⌈5.42 × 1.1⌉ = ⌈5.96⌉ = 6 L → three 2.5 L buckets (7.5 L).\nResult: buy 6 L — three standard 2.5 L buckets — for two coats with the 10% margin.",
   },
   "flooring-calculator": {
     formula: "boxes = ⌈L × W × (1 + waste%) ÷ box coverage⌉ · cost = boxes × box price",
@@ -445,10 +445,10 @@ export const toolFormulas: Record<string, ToolFormula> = {
     example: "Step 1: 16:8 schedule → E = 8, F = 16.\nStep 2: first meal at 12:00 PM → eating window = 12:00 PM to 8:00 PM.\nStep 3: fasting window = 8:00 PM today to 12:00 PM tomorrow (16 hours).\nStep 4: markers: ketosis ≈ 12 h into the fast (about 8:00 AM), autophagy ≈ 16 h (near the window's close).\nResult: finish eating by 8:00 PM and break the fast at noon the next day.",
   },
   "caffeine-calculator": {
-    formula: "C(t) = C₀ × 0.5^(t / H)\ntime to cutoff: t = H × log₂(C₀ / Ccutoff)\nH ≈ 5-6 hours (population average ≈ 5.7 h)",
-    variables: "C(t) = Caffeine left in the body t hours after a dose (mg)\nC₀ = Size of the dose consumed (mg)\nt = Hours since the dose (hours)\nH = Half-life, about 5-6 hours (average 5.7 h)\nCcutoff = Personal cutoff level, e.g. 50-100 mg (mg)\nlog₂ = Base-2 logarithm",
+    formula: "C(t) = C₀ × 0.5^(t / H)\ntime to cutoff: t = H × log₂(C₀ / Ccutoff)\nH = 5 hours in this tool (population average ≈ 5.7 h)",
+    variables: "C(t) = Caffeine left in the body t hours after a dose (mg)\nC₀ = Size of the dose consumed (mg)\nt = Hours since the dose (hours)\nH = Half-life, fixed at 5 hours in this tool (population average ≈ 5.7 h)\nCcutoff = Personal cutoff level, e.g. 50-100 mg (mg)\nlog₂ = Base-2 logarithm",
     explain: "Caffeine is eliminated exponentially: each half-life cuts what remains in half, so it never drops to zero abruptly. Every logged drink decays on its own clock, and your current level is the sum of what is left of each one.",
-    example: "Step 1: A large coffee = 95 mg at 8:00 am.\nStep 2: At 2:00 pm (t = 6 h): C = 95 × 0.5^(6/5.7) ≈ 95 × 0.483 ≈ 46 mg.\nStep 3: At 8:00 pm (t = 12 h): C = 95 × 0.5^(12/5.7) ≈ 95 × 0.232 ≈ 22 mg.\nStep 4: Time to fall below 50 mg: t = 5.7 × log₂(95/50) ≈ 5.7 × 0.926 ≈ 5.3 h → about 1:17 pm.\nResult: about 46 mg remains by 2:00 pm and 22 mg by 8:00 pm; you drop under 50 mg around 1:15 pm.",
+    example: "Step 1: A large coffee = 95 mg at 8:00 am.\nStep 2: At 2:00 pm (t = 6 h): C = 95 × 0.5^(6/5) ≈ 95 × 0.435 ≈ 41 mg.\nStep 3: At 8:00 pm (t = 12 h): C = 95 × 0.5^(12/5) ≈ 95 × 0.189 ≈ 18 mg.\nStep 4: Time to fall below 50 mg: t = 5 × log₂(95/50) ≈ 5 × 0.926 ≈ 4.6 h → about 12:38 pm.\nResult: about 41 mg remains by 2:00 pm and 18 mg by 8:00 pm; you drop under 50 mg around 12:40 pm.",
   },
   "sleep-calculator": {
     formula: "wake time = bedtime + 15 min + n × 90 min\nbedtime = wake time − 15 min − n × 90 min\nn = 5-6 cycles (adults)",
@@ -481,10 +481,10 @@ export const toolFormulas: Record<string, ToolFormula> = {
     example: "Step 1: 5 hours of screen time a day.\nStep 2: weekly = 5 × 7 = 35 hours; against 17 waking hours/day, share = 35 ÷ (17 × 7) = 35 ÷ 119 ≈ 29% of your waking week.\nStep 3: Over 60 adult years: 5 × 60 ÷ 24 = 12.5 years of round-the-clock time.\nStep 4: Cutting to 4 hours saves 1 h/day × 365 = 365 hours ≈ 15 full days a year.\nResult: 5 h/day ≈ 35 h/week ≈ 29% of waking time ≈ 12.5 years across 60 years.",
   },
   "dog-age-calculator": {
-    formula: "human age (dog ≤ 2 years) = 15 × year 1 + 9 × remaining fraction of year 2\nhuman age (dog > 2 years) = 24 + (dog age − 2) × k\nk ≈ 4 for small breeds, ≈ 5 for large breeds",
-    variables: "human age = Equivalent human age (years)\ndog age = Actual age of the dog (years)\n15 = Human-year equivalent of the first year\n9 = Extra human years credited during the second year\nk = Human years per dog year after age 2 (about 4 for small, 5 for large breeds)",
-    explain: "Dogs mature extremely fast early: the first year is worth about 15 human years and the second adds about 9, reaching a 24-year-old equivalent at age 2. After that, aging settles to roughly 4-5 human years per dog year, with larger breeds on the higher end.",
-    example: "Step 1: A 5-year-old large dog.\nStep 2: First two years: 15 + 9 = 24 human years.\nStep 3: Remaining: 5 − 2 = 3 dog years × k = 5 = 15 human years.\nStep 4: human age = 24 + 15 = 39.\nResult: about 39 human years for a large dog (a small dog with k = 4 gives 24 + 12 = 36).",
+    formula: "human age (dog ≤ 2 years) = 15 × year 1 + 9 × remaining fraction of year 2\nhuman age (dog > 2 years) = 24 + (dog age − 2) × k\nk = 4 for small breeds, 5 for medium, 6.5 for large",
+    variables: "human age = Equivalent human age (years)\ndog age = Actual age of the dog (years)\n15 = Human-year equivalent of the first year\n9 = Extra human years credited during the second year\nk = Human years per dog year after age 2 (4 for small, 5 for medium, 6.5 for large breeds)",
+    explain: "Dogs mature extremely fast early: the first year is worth about 15 human years and the second adds about 9, reaching a 24-year-old equivalent at age 2. After that, aging settles to roughly 4-6.5 human years per dog year, with larger breeds on the higher end.",
+    example: "Step 1: A 5-year-old large dog.\nStep 2: First two years: 15 + 9 = 24 human years.\nStep 3: Remaining: 5 − 2 = 3 dog years × k = 6.5 = 19.5 human years.\nStep 4: human age = 24 + 19.5 = 43.5.\nResult: about 43.5 human years (shown as 44) for a large dog; a small dog with k = 4 gives 24 + 12 = 36 and a medium dog with k = 5 gives 39.",
   },
   "pace-calculator": {
     formula: "pace = time ÷ distance (min per km or per mile)\nspeed = distance ÷ time (km/h or mph)\nfinish time = pace × distance",
@@ -677,13 +677,13 @@ export const toolFormulas: Record<string, ToolFormula> = {
     example: "Convert 32 psi (typical tire pressure) to metric units:\nPa = 32 × 6894.76 = 220,632 Pa = 220.6 kPa ≈ 2.21 bar\nReverse: 220 kPa ÷ 6894.76 ≈ 31.9 psi",
   },
   "energy-converter": {
-    formula: "1 cal = 4.184 J\n1 kcal = 1 food Calorie = 4184 J\n1 kWh = 3,600,000 J = 3.6 MJ\n1 BTU = 1055.06 J\n1 eV = 1.602176634 × 10⁻¹⁹ J",
+    formula: "1 cal = 4.184 J\n1 kcal = 1 food Calorie = 4184 J\n1 kWh = 3,600,000 J = 3.6 MJ\n1 BTU = 1055.05585262 J\n1 eV = 1.602176634 × 10⁻¹⁹ J",
     variables: "J = joule, the SI unit (1 watt acting for 1 second)\ncal = small calorie\nkcal = kilocalorie, the food Calorie with capital C\nkWh = kilowatt-hour\nBTU = British thermal unit\neV = electronvolt",
     explain: "The joule is one watt-second. The calorie was defined as the energy to warm 1 g of water by 1 °C and is now fixed at exactly 4.184 J; food Calories are kilocalories, 1000 times larger. A kWh is what a 1000 W appliance uses in one hour, exactly 3.6 MJ.",
     example: "A 2000 kcal daily diet in SI units:\nJ = 2000 × 4184 = 8,368,000 J = 8.37 MJ\nA 2 kW heater running for 3 h:\n2 × 3 = 6 kWh = 6 × 3.6 = 21.6 MJ",
   },
   "power-converter": {
-    formula: "1 hp = 745.699872 W\n1 PS = 735.49875 W\n1 kW = 1000 W\n1 BTU/s = 1055.06 W",
+    formula: "1 hp = 745.699872 W\n1 PS = 735.49875 W\n1 kW = 1000 W\n1 BTU/s = 1055.05585262 W",
     variables: "W = watts, the SI unit of power (1 W = 1 J/s)\nkW = kilowatts\nhp = mechanical horsepower (550 ft·lb/s)\nPS = metric horsepower, used in Europe (75 kgf·m/s)\nBTU/s = British thermal units per second",
     explain: "Power is energy per second, so 1 W = 1 J/s. Mechanical horsepower is defined as 550 foot-pounds per second = 745.699872 W, while metric horsepower (PS) is 75 kilogram-force meters per second = 735.49875 W, about 1.4% smaller, which is why European and American engine ratings differ slightly.",
     example: "Convert a 150 kW motor to horsepower:\nW = 150 × 1000 = 150,000 W\nhp = 150,000 ÷ 745.699872 ≈ 201.2 hp\nPS = 150,000 ÷ 735.49875 ≈ 203.9 PS\nReverse: 201.2 hp × 745.699872 ≈ 150,047 W ≈ 150 kW",

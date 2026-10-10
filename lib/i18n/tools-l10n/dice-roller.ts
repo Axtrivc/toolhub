@@ -8,8 +8,8 @@ export const DiceRollerL10n: ToolL10n = {
   zh: {
     useCases: [
       'D&D 团里掷 d20 攻击与豁免判定,再用 4d6 弃最低生成六维角色属性',
-      '桌面 RPG 缺实体骰时补位:一次掷 3d6+2,每颗点数与总和都可见,DM 可当场核验',
-      '用计数模式连掷 200 次 d6 验证骰子是否均匀——各面频数应趋近 1/6',
+      '桌面 RPG 缺实体骰时补位:一次掷 3d6,每颗点数与总和都可见,DM 可当场核验',
+      '连点掷骰 200 次 d6 验证骰子是否均匀——各面频数应趋近 1/6',
       '概率课上对比 2d6 与 1d12 的点数分布,直观展示多个骰子求和后的中心化效应',
     ],
     faqs: [
@@ -19,11 +19,11 @@ export const DiceRollerL10n: ToolL10n = {
       },
       {
         q: '能一次掷多个骰子吗,比如 3d6+2?',
-        a: '可以。选骰型(d4、d6、d8、d10、d12、d20、d100),设定数量,再按你的规则加固定修正值。结果同时列出每颗骰子的点数和总和,玩家和 DM 都能逐个核对。',
+        a: '可以。选骰型(d4、d6、d8、d10、d12、d20、d100),设定数量。结果同时列出每颗骰子的点数和总和,玩家和 DM 都能逐个核对。',
       },
       {
         q: '为什么同一个数总反复出现,是不是有猫腻?',
-        a: '随机本来就"扎堆":掷 20 次 d6,某个数出现 3 次在统计上完全正常。掷到几百次后各面频数会趋向均等,用计数模式即可自行验证。',
+        a: '随机本来就"扎堆":掷 20 次 d6,某个数出现 3 次在统计上完全正常。掷到几百次后各面频数会趋向均等,从最近掷骰记录即可自行验证。',
       },
       {
         q: '掷骰记录会上传或保存吗?',
@@ -41,8 +41,8 @@ export const DiceRollerL10n: ToolL10n = {
   es: {
     useCases: [
       'Tirar ataques y salvaciones con d20 en partidas de D&D y generar atributos con 4d6 descartando el menor',
-      'Sustituir los dados olvidados de la mesa: un 3d6+2 de una vez, con cada dado y el total a la vista para verificarlos',
-      'Comprobar si un dado está viciado con el modo recuento: 200 tiradas de d6 y frecuencias que deben rondar 1/6',
+      'Sustituir los dados olvidados de la mesa: un 3d6 de una vez, con cada dado y el total a la vista para verificarlos',
+      'Comprobar si un dado está viciado repitiendo: 200 tiradas de d6 y frecuencias que deben rondar 1/6',
       'En clase de probabilidad, comparar la distribución de 2d6 frente a 1d12 y ver el efecto de sumar dados',
     ],
     faqs: [
@@ -52,11 +52,11 @@ export const DiceRollerL10n: ToolL10n = {
       },
       {
         q: '¿Puedo tirar varios dados a la vez, como 3d6+2?',
-        a: 'Sí. Elige el tipo (d4, d6, d8, d10, d12, d20 o d100), indica cuántos dados y añade un modificador fijo si tu juego lo usa. Ves el resultado individual de cada dado más el total, así el DJ o los jugadores pueden verificar cada tirada.',
+        a: 'Sí. Elige el tipo (d4, d6, d8, d10, d12, d20 o d100) e indica cuántos dados. Ves el resultado individual de cada dado más el total, así el DJ o los jugadores pueden verificar cada tirada.',
       },
       {
         q: '¿Por qué repiten tanto los mismos números, está trucado?',
-        a: 'El azar se agrupa: en 20 tiradas de un d6 es estadísticamente normal que un 4 salga tres veces. A partir de cientos de tiradas las frecuencias convergen; compruébalo con el modo recuento durante la sesión.',
+        a: 'El azar se agrupa: en 20 tiradas de un d6 es estadísticamente normal que un 4 salga tres veces. A partir de cientos de tiradas las frecuencias convergen; compruébalo con las tiradas recientes durante la sesión.',
       },
       {
         q: '¿Funciona sin conexión y se guardan mis tiradas?',
@@ -74,8 +74,8 @@ export const DiceRollerL10n: ToolL10n = {
   de: {
     useCases: [
       'Angriffs- und Rettungswürfe mit dem W20 bei D&D leiten, Attributswerte per 4W6 mit Streichen des Niedrigsten auswürfeln',
-      'Vergessene Würfel am Tisch ersetzen: 3W6+2 auf einen Schlag, jedes Einzelergebnis und die Summe sichtbar für alle',
-      'Die Fairness eines Würfels prüfen: 200 Würfe mit dem W6 im Zählmodus, die Häufigkeiten sollten sich 1/6 nähern',
+      'Vergessene Würfel am Tisch ersetzen: 3W6 auf einen Schlag, jedes Einzelergebnis und die Summe sichtbar für alle',
+      'Die Fairness eines Würfels prüfen: 200 Würfe mit dem W6 in Folge, die Häufigkeiten sollten sich 1/6 nähern',
       'Im Matheunterricht die Verteilung von 2W6 gegen 1W12 vergleichen und den Zentralen Grenzwertsatz zeigen',
     ],
     faqs: [
@@ -85,11 +85,11 @@ export const DiceRollerL10n: ToolL10n = {
       },
       {
         q: 'Kann ich mehrere Würfel gleichzeitig werfen, etwa 3W6+2?',
-        a: 'Ja. Würfelart (W4, W6, W8, W10, W12, W20 oder W100) wählen, Anzahl einstellen und bei Bedarf einen festen Modifikator ergänzen. Du siehst jedes Einzelergebnis plus Summe, damit SL und Spieler jeden Wurf nachprüfen können.',
+        a: 'Ja. Würfelart (W4, W6, W8, W10, W12, W20 oder W100) wählen und Anzahl einstellen. Du siehst jedes Einzelergebnis plus Summe, damit SL und Spieler jeden Wurf nachprüfen können.',
       },
       {
         q: 'Warum kommen manche Zahlen so oft — ist der Würfel gezinkt?',
-        a: 'Zufall klumpt: Bei 20 Würfen mit einem W6 ist es statistisch völlig normal, wenn dieselbe Zahl dreimal erscheint. Erst über Hunderte Würfe gleichen sich die Häufigkeiten an — im Zählmodus selbst überprüfbar.',
+        a: 'Zufall klumpt: Bei 20 Würfen mit einem W6 ist es statistisch völlig normal, wenn dieselbe Zahl dreimal erscheint. Erst über Hunderte Würfe gleichen sich die Häufigkeiten an — anhand der letzten Würfe selbst überprüfbar.',
       },
       {
         q: 'Brauche ich Internet, und wo landen die Ergebnisse?',

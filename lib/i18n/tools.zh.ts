@@ -2,7 +2,7 @@
  * 工具卡片文案 - 中文翻译(zh)
  *
  * 结构:Record<slug, { name, shortIntro }>
- * - slug 与 lib/tools.ts 的 slug 字段一一对应(共 225 个)
+ * - slug 与 lib/tools.ts 的 slug 字段一一对应(共 239 个)
  * - 缺失的 slug 自动回退到英文原值(见 lib/i18n.ts getToolName/getToolShortIntro)
  * - 此文件只翻译首页/卡片展示用的 name + shortIntro,
  *   不碰 SEO 字段(title/description/h1/keywords 等保持英文)
@@ -18,7 +18,7 @@ export const zhTools: Record<string, { name: string; shortIntro: string }> = {
   },
   'mortgage-calculator': {
     name: '房贷计算器',
-    shortIntro: '计算月供房贷和总利息。',
+    shortIntro: '计算房贷月供和总利息。',
   },
   'compound-interest-calculator': {
     name: '复利计算器',
@@ -42,11 +42,11 @@ export const zhTools: Record<string, { name: string; shortIntro: string }> = {
   },
   'down-payment-calculator': {
     name: '首付计算器',
-    shortIntro: '查询你的首付金额和是否需要 PMI。',
+    shortIntro: '算出首付金额,并判断是否需要 PMI。',
   },
   'dti-calculator': {
     name: '债务收入比计算器',
-    shortIntro: '计算 DTI 比率,查看放款方是否会批准你。',
+    shortIntro: '计算 DTI 比率,判断贷款机构是否批贷。',
   },
   'commission-calculator': {
     name: '佣金计算器',
@@ -166,7 +166,7 @@ export const zhTools: Record<string, { name: string; shortIntro: string }> = {
   },
   'car-cost-calculator': {
     name: '养车成本计算器',
-    shortIntro: '算出总持有成本:油费、保险、保养、折旧与贷款。',
+    shortIntro: '算出总持有成本:油费、保险、保养与折旧。',
   },
 
   // ─────────── ⚙️ 开发者工具 ───────────
@@ -976,7 +976,7 @@ export const zhTools: Record<string, { name: string; shortIntro: string }> = {
   },
   'fire-calculator': {
     name: 'FIRE 财务自由计算器',
-    shortIntro: '算出你的 FIRE 目标金额、预计退休年份与储蓄率压缩效应。',
+    shortIntro: '一屏算出你的 FIRE 目标金额、目标退休年份与储蓄率推演。',
   },
   'cac-ltv-calculator': {
     name: 'CAC 与 LTV 计算器',
@@ -989,6 +989,18 @@ export const zhTools: Record<string, { name: string; shortIntro: string }> = {
   'dog-food-calculator': {
     name: '狗粮喂食计算器',
     shortIntro: '体重 + 生命阶段 → 每日热量需求,按包装标注折算杯数与克数。',
+  },
+  'runway-calculator': {
+    name: '现金跑道计算器',
+    shortIntro: '算出创业现金跑道月数、现金归零日期与净烧钱率。',
+  },
+  'freelance-rate-calculator': {
+    name: '自由职业报价计算器',
+    shortIntro: '综合税费、开销与利润,算出时薪与日薪报价。',
+  },
+  'docker-run-to-compose': {
+    name: 'Docker Run 转 Compose',
+    shortIntro: '把 docker run 命令转成干净的 docker-compose.yml 文件。',
   },
 
 }

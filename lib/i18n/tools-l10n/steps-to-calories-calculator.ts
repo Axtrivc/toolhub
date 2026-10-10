@@ -100,7 +100,7 @@ export const StepsToCaloriesCalculatorL10n: ToolL10n = {
       'in.weight': 'Gewicht',
       'note': '👟 Schätzung per MET-Methode (Compendium 2011). Fitness-Tracker messen oft zu hoch, da sie Grundumsatzanteile mitzählen. 10.000 Schritte ≈ 7-8 km.',
       'opt.pace.brisk': 'Zügiges Gehen (≈6,5 km/h)',
-      'opt.pace.moderate': 'Zügiges Gehen (≈5 km/h)',
+      'opt.pace.moderate': 'Moderates Gehen (≈5 km/h)',
       'opt.pace.slow': 'Langsamer Spaziergang (≈3 km/h)',
       'out.calories': 'Verbrannte Kalorien',
       'out.distanceKm': 'Entfernung',

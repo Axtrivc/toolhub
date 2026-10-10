@@ -2,7 +2,7 @@
  * Werkzeuge — deutsche Übersetzungen (de)
  *
  * Struktur: Record<slug, { name, shortIntro }>
- * - Die slugs entsprechen 1:1 lib/tools.ts (225 Werkzeuge).
+ * - Die slugs entsprechen 1:1 lib/tools.ts (239 Werkzeuge).
  * - Fehlt ein slug, wird auf den englischen Originalwert zurückgegriffen
  *   (siehe lib/i18n.ts getToolName/getToolShortIntro).
  * - Übersetzt werden nur name + shortIntro der Karten;
@@ -45,7 +45,7 @@ export const deTools: Record<string, { name: string; shortIntro: string }> = {
   },
   'dti-calculator': {
     name: 'Schulden-Einkommens-Rechner',
-    shortIntro: 'Berechne die DTI-Quote und ob Kreditgeber zustimmen.',
+    shortIntro: 'Berechne die DTI-Quote und sieh, ob Kreditgeber zustimmen.',
   },
   'commission-calculator': {
     name: 'Provisionsrechner',
@@ -77,7 +77,7 @@ export const deTools: Record<string, { name: string; shortIntro: string }> = {
   },
   'inflation-calculator': {
     name: 'Inflationsrechner',
-    shortIntro: 'Sieh, wie Inflation den Geldwert über Zeit verringert.',
+    shortIntro: 'Sieh, wie Inflation den Geldwert mit der Zeit verringert.',
   },
   'retirement-calculator': {
     name: 'Rentenrechner',
@@ -101,7 +101,7 @@ export const deTools: Record<string, { name: string; shortIntro: string }> = {
   },
   'credit-card-payoff-calculator': {
     name: 'Kreditkarten-Tilgungsrechner',
-    shortIntro: 'Sieh, wie lange die Kartenschuld braucht.',
+    shortIntro: 'Sieh, wie lange die Tilgung deiner Kreditkarte braucht.',
   },
   'income-tax-estimator': {
     name: 'Einkommensteuer-Schätzer',
@@ -109,7 +109,7 @@ export const deTools: Record<string, { name: string; shortIntro: string }> = {
   },
   'salary-converter': {
     name: 'Gehaltsrechner',
-    shortIntro: 'Rechne Gehalt zwischen jährlich, monatlich, 14-tägig und Stunden.',
+    shortIntro: 'Rechne Gehalt zwischen jährlich, monatlich, 14-tägig und stündlich um.',
   },
   'sales-tax-calculator': {
     name: 'Mehrwertsteuerrechner',
@@ -141,7 +141,7 @@ export const deTools: Record<string, { name: string; shortIntro: string }> = {
   },
   'fuel-cost-calculator': {
     name: 'Spritkosten-Rechner',
-    shortIntro: 'Benzinkosten für jede Fahrt — hin, zurück und pro Person.',
+    shortIntro: 'Spritkosten für jede Fahrt — einfach, hin und zurück oder pro Person aufgeteilt.',
   },
   'subscription-cost-calculator': {
     name: 'Abo-Kosten-Rechner',
@@ -165,7 +165,7 @@ export const deTools: Record<string, { name: string; shortIntro: string }> = {
   },
   'car-cost-calculator': {
     name: 'Autokosten-Rechner',
-    shortIntro: 'Gesamte Haltungskosten: Sprit, Versicherung, Wartung, Wertverlust, Finanzierung.',
+    shortIntro: 'Gesamte Haltungskosten: Sprit, Versicherung, Wartung und Wertverlust — pro Monat und pro km.',
   },
 
   // ─────────── ⚙️ Entwickler-Werkzeuge ───────────
@@ -397,7 +397,7 @@ export const deTools: Record<string, { name: string; shortIntro: string }> = {
   },
   'lowercase-converter': {
     name: 'In Kleinbuchstaben',
-    shortIntro: 'Wandelt jeden Text sofort in kleinbuchstaben um.',
+    shortIntro: 'Wandelt jeden Text sofort in Kleinbuchstaben um.',
   },
   'title-case-converter': {
     name: 'Title-Case-Konverter',
@@ -473,7 +473,7 @@ export const deTools: Record<string, { name: string; shortIntro: string }> = {
   },
   'line-diff-checker': {
     name: 'Zeilen-Diff',
-    shortIntro: 'Diff Zeile für Zeile mit Anzahl von Ergänzungen, Löschungen und Änderungen.',
+    shortIntro: 'Zeilenweiser Diff mit Anzahl von Ergänzungen, Löschungen und Änderungen.',
   },
   'markdown-toc-generator': {
     name: 'Markdown-Inhaltsverzeichnis',
@@ -695,7 +695,7 @@ export const deTools: Record<string, { name: string; shortIntro: string }> = {
   },
   'sleep-calculator': {
     name: 'Schlafzyklus-Rechner',
-    shortIntro: 'Bedtimes nach 90-Minuten-Zyklen, damit du erholt aufwachst.',
+    shortIntro: 'Schlafenszeiten nach 90-Minuten-Zyklen, damit du erholt aufwachst.',
   },
   'heart-rate-zone-calculator': {
     name: 'Pulszonen-Rechner',
@@ -703,7 +703,7 @@ export const deTools: Record<string, { name: string; shortIntro: string }> = {
   },
   'caffeine-calculator': {
     name: 'Koffein-Rechner',
-    shortIntro: 'Schätze das Koffein, das gerade noch in deinem Körper ist.',
+    shortIntro: 'Schätze, wie viel Koffein noch in deinem Körper ist.',
   },
   'steps-to-calories-calculator': {
     name: 'Schritte-zu-Kalorien-Rechner',
@@ -747,11 +747,11 @@ export const deTools: Record<string, { name: string; shortIntro: string }> = {
   },
   'timezone-converter': {
     name: 'Zeitzonen-Konverter',
-    shortIntro: 'Zeiten zwischen Zonen umrechnen und meetingfreundliche Stunden finden.',
+    shortIntro: 'Zeiten zwischen Zonen umrechnen und gemeinsame Meeting-Stunden finden.',
   },
   'screen-time-calculator': {
     name: 'Bildschirmzeit-Rechner',
-    shortIntro: 'Tägliche Scroll-Stunden, übersetzt in Lebensjahre.',
+    shortIntro: 'Tägliche Scroll-Stunden, umgerechnet in Lebensjahre.',
   },
 
   // ─────────── 🎨 Webdesign-Werkzeuge ───────────
@@ -847,7 +847,7 @@ export const deTools: Record<string, { name: string; shortIntro: string }> = {
   },
   'aes-encrypt-decrypt': {
     name: 'AES Ver- & Entschlüsseln',
-    shortIntro: 'AES-256-GCM im Browser: authentifiziert, PBKDF2-Schlüssel, null Upload.',
+    shortIntro: 'AES-256-GCM im Browser: authentifiziert, PBKDF2-Schlüssel, kein Upload.',
   },
 
   // ─────────── 💼 Business-Werkzeuge ───────────
@@ -873,7 +873,7 @@ export const deTools: Record<string, { name: string; shortIntro: string }> = {
   // ─────────── 🤖 KI-Tools ───────────
   'llm-cost-calculator': {
     name: 'LLM-API-Kostenrechner',
-    shortIntro: 'Kosten pro Request und monatlich über 17 Modelle, side by side.',
+    shortIntro: 'Kosten pro Request und monatlich über 17 Modelle im direkten Vergleich.',
   },
   'context-window-checker': {
     name: 'Context-Window-Check',
@@ -939,7 +939,7 @@ export const deTools: Record<string, { name: string; shortIntro: string }> = {
   // ─────────── 🏠 Haushaltsrechner ───────────
   'paint-calculator': {
     name: 'Farbbedarfs-Rechner',
-    shortIntro: 'Gallonen oder Liter Farbe pro Raum, Anstriche und Öffnungen eingerechnet.',
+    shortIntro: 'Gallonen oder Liter Farbe pro Raum — Anstriche, Türen und Fenster eingerechnet.',
   },
 
   // ─────────── 🚀 Neue Werkzeuge (2026-09) ───────────
@@ -957,7 +957,7 @@ export const deTools: Record<string, { name: string; shortIntro: string }> = {
   },
   'profit-margin-calculator': {
     name: 'Gewinnmargen-Rechner',
-    shortIntro: 'Kosten plus ein Wert: Preis, Gewinn, Marge und Aufschlag sofort.',
+    shortIntro: 'Kosten plus ein Wert → Preis, Gewinn, Marge und Aufschlag sofort.',
   },
   'intermittent-fasting-calculator': {
     name: 'Intervallfasten-Rechner',
@@ -975,7 +975,7 @@ export const deTools: Record<string, { name: string; shortIntro: string }> = {
   },
   'fire-calculator': {
     name: 'FIRE-Rechner',
-    shortIntro: 'Deine FIRE-Zahl, Ziel-Ruhestandsjahr und die Sparquote-Effekte.',
+    shortIntro: 'Deine FIRE-Zahl, Ziel-Ruhestandsjahr und Sparquote-Mathematik auf einen Blick.',
   },
   'cac-ltv-calculator': {
     name: 'CAC- & LTV-Rechner',
@@ -999,7 +999,7 @@ export const deTools: Record<string, { name: string; shortIntro: string }> = {
   },
   'docker-run-to-compose': {
     name: 'Docker Run zu Compose Konverter',
-    shortIntro: 'Wandelt docker run Befehle direkt in saubere docker-compose.yml Dateien um.',
+    shortIntro: 'Wandelt docker run Befehle direkt in saubere docker-compose.yml-Dateien um.',
   },
 
 }

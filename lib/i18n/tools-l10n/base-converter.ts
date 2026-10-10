@@ -14,6 +14,9 @@ export const BaseConverterL10n: ToolL10n = {
     ],
     ui: {
       'binary': '二进制 (2)',
+      'decimal': '十进制 (10)',
+      'hexadecimal': '十六进制 (16)',
+      'octal': '八进制 (8)',
       'common': '常用',
       'inBase': '输入进制',
       'invalidDigit': '不是该进制下的有效数字',
@@ -30,6 +33,9 @@ export const BaseConverterL10n: ToolL10n = {
     ],
     ui: {
       'binary': 'Binario (2)',
+      'decimal': 'Decimal (10)',
+      'hexadecimal': 'Hexadecimal (16)',
+      'octal': 'Octal (8)',
       'common': 'común',
       'inBase': 'Base de entrada',
       'invalidDigit': 'no es un número válido en base',
@@ -46,6 +52,9 @@ export const BaseConverterL10n: ToolL10n = {
     ],
     ui: {
       'binary': 'Binär (2)',
+      'decimal': 'Dezimal (10)',
+      'hexadecimal': 'Hexadezimal (16)',
+      'octal': 'Oktal (8)',
       'common': 'üblich',
       'inBase': 'Eingabe-Basis',
       'invalidDigit': 'ist keine gültige Zahl in Basis',

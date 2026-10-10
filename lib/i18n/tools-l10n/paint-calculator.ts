@@ -106,7 +106,7 @@ export const PaintCalculatorL10n: ToolL10n = {
       'in.wallArea': 'Streichbare Wandfläche',
       'in.wallHeight': 'Wandhöhe',
       'in.windows': 'Fenster',
-      'note': '🎨 Deckung assumes glatte, grundierte Wände bei 10 m²/L. Strukturierte Flächen oder kräftige Farbwechsel brauchen 20-40 % mehr. Kaufe eine Charge — Ansätze variieren.',
+      'note': '🎨 Deckung setzt glatte, grundierte Wände bei 10 m²/L voraus. Strukturierte Flächen oder kräftige Farbwechsel brauchen 20-40 % mehr. Kaufe eine Charge — Ansätze variieren.',
       'opt.unit.gallon': 'US-Gallonen',
       'opt.unit.liter': 'Liter',
       'out.assumption': 'Deckungsannahme',

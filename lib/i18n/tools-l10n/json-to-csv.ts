@@ -20,7 +20,7 @@ export const jsonToCsvL10n: ToolL10n = {
       '导入 Tableau、Power BI 等 BI 工具',
     ],
     faqs: [
-      { q: '如果对象键不一样怎么办?', a: '本工具以第一个对象的键为准。多余键会被丢弃,缺失键则为空值。建议先统一数据结构,效果最好。' },
+      { q: '如果对象键不一样怎么办?', a: '表头取所有对象的键按首次出现顺序合并而成:后续对象多出的键会保留,缺失的键则为空值。先统一数据结构仍能得到最干净的输出。' },
     ],
   },
   es: {
@@ -38,7 +38,7 @@ export const jsonToCsvL10n: ToolL10n = {
       'alimentar herramientas de BI como Tableau o Power BI',
     ],
     faqs: [
-      { q: '¿Qué pasa si mis objetos tienen claves distintas?', a: 'La herramienta usa las claves del primer objeto. Los objetos con claves adicionales las verán omitidas; los que falten claves tendrán valores vacíos. Normaliza tu estructura de datos primero para mejores resultados.' },
+      { q: '¿Qué pasa si mis objetos tienen claves distintas?', a: 'Los encabezados se construyen con la unión de las claves de todos los objetos en orden de primera aparición: las claves extra de objetos posteriores se conservan y las claves que falten dan valores vacíos. Normalizar tu estructura de datos primero sigue dando el resultado más limpio.' },
     ],
   },
   de: {
@@ -56,7 +56,7 @@ export const jsonToCsvL10n: ToolL10n = {
       'Daten in BI-Tools wie Tableau oder Power BI einspeisen',
     ],
     faqs: [
-      { q: 'Was, wenn meine Objekte unterschiedliche Schlüssel haben?', a: 'Das Werkzeug nutzt die Schlüssel des ersten Objekts. Objekte mit zusätzlichen Schlüsseln lassen diese weg; fehlende Schlüssel ergeben leere Werte. Normalisiere deine Datenstruktur vorher für das beste Ergebnis.' },
+      { q: 'Was, wenn meine Objekte unterschiedliche Schlüssel haben?', a: 'Die Kopfzeilen werden aus der Vereinigung aller Objektschlüssel in Reihenfolge des ersten Auftretens gebildet: Zusätzliche Schlüssel späterer Objekte bleiben erhalten, fehlende Schlüssel ergeben leere Werte. Eine normalisierte Datenstruktur liefert weiterhin das sauberste Ergebnis.' },
     ],
   },
 }

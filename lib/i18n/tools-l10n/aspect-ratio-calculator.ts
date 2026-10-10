@@ -26,7 +26,7 @@ export const aspectRatioCalculatorL10n: ToolL10n = {
       '缩放图片而不失真变形',
       '把视频嵌入固定容器并保持比例',
       '计算社交媒体所需的画幅尺寸',
-      '把指定比例适配到边界框内',
+      '计算保持比例的响应式尺寸',
     ],
     faqs: [
       { q: '缺失的尺寸怎么算？', a: '根据比例 W:H 计算。已知宽度时,高度 = 宽度 × (H ÷ W);已知高度时,宽度 = 高度 × (W ÷ H)。以 16:9、宽度 1920 为例,高度 = 1920 × (9 ÷ 16) = 1080。' },
@@ -55,7 +55,7 @@ export const aspectRatioCalculatorL10n: ToolL10n = {
       'escalar imágenes sin distorsión',
       'incrustar vídeos en un contenedor fijo manteniendo la proporción',
       'calcular las dimensiones de publicación en redes sociales',
-      'ajustar una proporción dentro de un recuadro delimitador',
+      'calcular dimensiones proporcionales para diseño responsive',
     ],
     faqs: [
       { q: '¿Cómo se calcula la dimensión que falta?', a: 'A partir de la proporción W:H. Si conoces el ancho, la altura = ancho × (H ÷ W). Si conoces la altura, el ancho = altura × (W ÷ H). Para 16:9 con un ancho de 1920, la altura es 1920 × (9 ÷ 16) = 1080.' },
@@ -84,7 +84,7 @@ export const aspectRatioCalculatorL10n: ToolL10n = {
       'Bilder ohne Verzerrung skalieren',
       'Videos in einen festen Container im richtigen Verhältnis einbetten',
       'Abmessungen für Social-Media-Beiträge berechnen',
-      'ein Seitenverhältnis in einen Begrenzungsrahmen einpassen',
+      'proportionale Abmessungen für responsives Design berechnen',
     ],
     faqs: [
       { q: 'Wie wird die fehlende Dimension berechnet?', a: 'Aus dem Verhältnis W:H. Bei bekannter Breite gilt: Höhe = Breite × (H ÷ W). Bei bekannter Höhe: Breite = Höhe × (W ÷ H). Bei 16:9 mit einer Breite von 1920 ist die Höhe 1920 × (9 ÷ 16) = 1080.' },

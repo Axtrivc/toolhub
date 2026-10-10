@@ -39,6 +39,8 @@ export const dogFoodCalculatorL10n: ToolL10n = {
       'errInvalid': '请输入 0.5–120 kg 的体重及正的热量参数',
       'cupsWord': '杯/天',
       'chartTitle': '每日热量消耗构成',
+      'slice.rer': '静息需求 (RER)',
+      'slice.activityExtra': '活动系数部分',
       'note': '💡 建议将全天口粮分为早晚 2 餐（幼犬建议 3 餐）。用电子秤按克称重最为精确——量杯误差可达 ±20%。更换狗粮品牌时应在 7–10 天内逐步过渡换粮；减肥计划建议咨询执业兽医。',
     },
     useCases: [
@@ -99,6 +101,8 @@ export const dogFoodCalculatorL10n: ToolL10n = {
       'errInvalid': 'Introduce un peso de 0,5–120 kg y valores calóricos válidos',
       'cupsWord': 'tazas/día',
       'chartTitle': 'Origen de las calorías diarias',
+      'slice.rer': 'Necesidad en reposo (RER)',
+      'slice.activityExtra': 'Multiplicador de actividad',
       'note': '💡 Divide la ración diaria en 2 tomas (3 para cachorros). Pesar la comida con báscula es más preciso que las tazas medidoras. Cambia de pienso progresivamente en 7-10 días.',
     },
     useCases: [
@@ -159,6 +163,8 @@ export const dogFoodCalculatorL10n: ToolL10n = {
       'errInvalid': 'Gewicht von 0,5–120 kg und gültige Nährwertangaben eingeben',
       'cupsWord': 'Becher/Tag',
       'chartTitle': 'Zusammensetzung des täglichen Kalorienbedarfs',
+      'slice.rer': 'Ruhebedarf (RER)',
+      'slice.activityExtra': 'Aktivitätsfaktor',
       'note': '💡 Teile die Tagesration auf 2 Mahlzeiten auf (3 bei Welpen). Das Abwiegen in Gramm ist genauer als Messbecher. Futterwechsel über 7–10 Tage einschleichen.',
     },
     useCases: [

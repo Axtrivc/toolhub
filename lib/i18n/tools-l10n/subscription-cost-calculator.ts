@@ -83,7 +83,7 @@ export const SubscriptionCostCalculatorL10n: ToolL10n = {
       'in.workHours': 'Arbeitsstunden pro Jahr',
       'in.yearly': 'Jahressumme',
       'in.yearlySubs': 'Jährliche Abos gesamt',
-      'note': '💡 Liste jede wiederkehrende Gebühr: Streaming, Cloud, Apps, Fitness, Domains, News. Die 5-Jahres-Spalte ist der ehrliche Preis von „nur 9,99 $ im Monat".',
+      'note': '💡 Liste jede wiederkehrende Gebühr: Streaming, Cloud, Apps, Fitness, Domains, News. Die 5-Jahres-Spalte ist der ehrliche Preis von „nur 9,99 $ im Monat“.',
       'out.fiveYear': 'Über 5 Jahre',
       'out.monthly': 'Wahre Monatskosten',
       'out.monthlySubs': 'Monatliche Abos gesamt',

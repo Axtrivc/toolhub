@@ -8,7 +8,7 @@ export const CoinFlipL10n: ToolL10n = {
   zh: {
     useCases: [
       '买单或开局起争执时抛一次硬币当场定夺,把"谁先谁后"的拉扯压缩到一秒钟',
-      '课堂上演示大数定律:批量连抛 200 次,让学生看着正面比例从随机波动收敛到 50%',
+      '课堂上演示大数定律:连抛 200 次,让学生看着正面比例从随机波动收敛到 50%',
       '球赛、辩论赛或桌游选边:当场抛掷、累计记录留在屏幕上,事后无人能翻供',
       '露营或飞行模式下的公平决策:随机数来自本机 Web Crypto,断网照常可用,结果不留存',
     ],
@@ -19,7 +19,7 @@ export const CoinFlipL10n: ToolL10n = {
       },
       {
         q: '能一次抛很多次吗?',
-        a: '可以。批量模式一次连抛多次并显示正反面累计计数,适合统计演示、一次性了结多个平局,或实证检验公平性。',
+        a: '可以——连续抛即可,屏幕上的正反面累计计数会替你记录,适合统计演示、一次性了结多个平局,或实证检验公平性。',
       },
       {
         q: '断网还能用吗?',
@@ -44,7 +44,7 @@ export const CoinFlipL10n: ToolL10n = {
   es: {
     useCases: [
       'Resolver en un segundo quién paga la cuenta o quién empieza, sin piedra-papel-tijera ni discusiones',
-      'Demostrar la ley de los grandes números en clase: 200 lanzamientos por lotes y el porcentaje de caras converge al 50 %',
+      'Demostrar la ley de los grandes números en clase: 200 lanzamientos seguidos y el porcentaje de caras converge al 50 %',
       'Sortear el campo o el saque antes de un partido, con el historial acumulado a la vista para que nadie lo discuta después',
       'Decidir en modo avión o de excursión: la aleatoriedad sale del Web Crypto del dispositivo y funciona sin conexión',
     ],
@@ -55,7 +55,7 @@ export const CoinFlipL10n: ToolL10n = {
       },
       {
         q: '¿Puedo lanzar muchas veces de una?',
-        a: 'Sí. El modo por lotes lanza varias veces seguidas y muestra el recuento acumulado de caras y cruces: útil para demostraciones de estadística, resolver varios empates de golpe o comprobar la equidad empíricamente.',
+        a: 'Sí — lanza repetidamente y el recuento acumulado de caras y cruces va llevando la cuenta: útil para demostraciones de estadística, resolver varios empates de golpe o comprobar la equidad empíricamente.',
       },
       {
         q: '¿Funciona sin conexión?',
@@ -80,7 +80,7 @@ export const CoinFlipL10n: ToolL10n = {
   de: {
     useCases: [
       'Streit um die Rechnung oder den Anwurf mit einem Wurf beenden — statt Schere-Stein-Papier und Diskussionen',
-      'Im Unterricht das Gesetz der großen Zahlen zeigen: 200 Würfe im Stapelmodus, der Kopf-Anteil konvergiert gegen 50 %',
+      'Im Unterricht das Gesetz der großen Zahlen zeigen: 200 Würfe hintereinander, der Kopf-Anteil konvergiert gegen 50 %',
       'Seitenwahl oder Anstoß vor dem Spiel auslosen, mit laufender Statistik auf dem Bildschirm — niemand kann es nachträglich anfechten',
       'Entscheidungen ohne Netz: Die Entropie kommt aus der Web-Crypto-API des Geräts, beim Camping genauso nutzbar',
     ],
@@ -91,7 +91,7 @@ export const CoinFlipL10n: ToolL10n = {
       },
       {
         q: 'Kann ich viele Würfe auf einmal machen?',
-        a: 'Ja. Der Stapelmodus wirft viele Male in einem Zug und zeigt die laufende Kopf-/Zahl-Bilanz — praktisch für Statistik-Demonstrationen, mehrere Gleichstände auf einmal oder einen empirischen Fairness-Test.',
+        a: 'Ja — wirf einfach wiederholt, die laufende Kopf-/Zahl-Bilanz zählt mit: praktisch für Statistik-Demonstrationen, mehrere Gleichstände auf einmal oder einen empirischen Fairness-Test.',
       },
       {
         q: 'Funktioniert das offline?',

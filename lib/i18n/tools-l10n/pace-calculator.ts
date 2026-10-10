@@ -15,6 +15,7 @@ export const PaceCalculatorL10n: ToolL10n = {
     ],
     ui: {
       'chartTitle': '各距离完赛时间',
+      'errInvalid': '请输入正数距离和形如 45:30 的时间',
       'line.finish': '预测完赛时间',
       'in.distance': '距离',
       'inSuffix.distance': 'km',
@@ -48,6 +49,7 @@ export const PaceCalculatorL10n: ToolL10n = {
     ],
     ui: {
       'chartTitle': 'Tiempos por distancia',
+      'errInvalid': 'Introduce una distancia positiva y un tiempo como 45:30',
       'line.finish': 'Tiempo previsto',
       'in.distance': 'Distancia',
       'inSuffix.distance': 'km',
@@ -81,6 +83,7 @@ export const PaceCalculatorL10n: ToolL10n = {
     ],
     ui: {
       'chartTitle': 'Zielzeiten nach Distanz',
+      'errInvalid': 'Gib eine positive Strecke und eine Zeit wie 45:30 ein',
       'line.finish': 'Voraussichtliche Zielzeit',
       'in.distance': 'Entfernung',
       'inSuffix.distance': 'km',

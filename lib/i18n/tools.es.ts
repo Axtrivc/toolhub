@@ -2,7 +2,7 @@
  * Herramientas — traducciones al español (es)
  *
  * Estructura: Record<slug, { name, shortIntro }>
- * - Los slug coinciden 1:1 con lib/tools.ts (225 herramientas).
+ * - Los slug coinciden 1:1 con lib/tools.ts (239 herramientas).
  * - Cualquier slug ausente revierte al valor inglés original
  *   (ver lib/i18n.ts getToolName/getToolShortIntro).
  * - Solo se traducen el name + shortIntro de las tarjetas;
@@ -69,7 +69,7 @@ export const esTools: Record<string, { name: string; shortIntro: string }> = {
   },
   'capital-gains-tax-estimator': {
     name: 'Estimador de impuesto sobre plusvalías',
-    shortIntro: 'Estima el impuesto (tipos corto vs largo plazo).',
+    shortIntro: 'Estima el impuesto (tipos a corto vs largo plazo).',
   },
   'rent-vs-buy-calculator': {
     name: 'Calculadora alquilar vs comprar',
@@ -141,7 +141,7 @@ export const esTools: Record<string, { name: string; shortIntro: string }> = {
   },
   'fuel-cost-calculator': {
     name: 'Calculadora de Costo de Combustible',
-    shortIntro: 'Dinero de gasolina para cualquier viaje: ida, vuelta y prorrateo por persona.',
+    shortIntro: 'Calcula lo que cuesta la gasolina de cualquier viaje: ida, vuelta y reparto por persona.',
   },
   'subscription-cost-calculator': {
     name: 'Calculadora de Suscripciones',
@@ -153,7 +153,7 @@ export const esTools: Record<string, { name: string; shortIntro: string }> = {
   },
   'take-home-pay-calculator': {
     name: 'Calculadora de Salario Neto',
-    shortIntro: 'Estima el neto tras impuesto federal, FICA y deducciones pre-impuesto.',
+    shortIntro: 'Estima el neto tras impuesto federal, FICA y deducciones antes de impuestos.',
   },
   'wedding-budget-calculator': {
     name: 'Calculadora de Presupuesto de Boda',
@@ -161,11 +161,11 @@ export const esTools: Record<string, { name: string; shortIntro: string }> = {
   },
   'amortization-table-generator': {
     name: 'Generador de Tabla de Amortización',
-    shortIntro: 'Calendario pago por pago con saldo corrido y exportación a CSV.',
+    shortIntro: 'Calendario pago por pago con saldo acumulado y exportación a CSV.',
   },
   'car-cost-calculator': {
     name: 'Calculadora de Costo de Auto',
-    shortIntro: 'Costo total de propiedad: combustible, seguro, mantenimiento, depreciación y financiamiento.',
+    shortIntro: 'Costo total de propiedad: combustible, seguro, mantenimiento y depreciación.',
   },
 
   // ─────────── ⚙️ Herramientas para desarrolladores ───────────
@@ -351,7 +351,7 @@ export const esTools: Record<string, { name: string; shortIntro: string }> = {
   },
   'jwt-generator': {
     name: 'Generador de JWT',
-    shortIntro: 'Crea JWT firmados localmente — combina con nuestro decoder para pruebas.',
+    shortIntro: 'Crea JWT firmados localmente — combínalo con nuestro decodificador para pruebas.',
   },
   'base-converter': {
     name: 'Convertidor de Bases (2-36)',
@@ -363,7 +363,7 @@ export const esTools: Record<string, { name: string; shortIntro: string }> = {
   },
   'htaccess-redirect-generator': {
     name: 'Generador de Redirecciones .htaccess',
-    shortIntro: '301, cambios de dominio, HTTPS y reglas canónicas sin lágrimas.',
+    shortIntro: '301, cambios de dominio, HTTPS y reglas canónicas sin dolores de cabeza.',
   },
   'unicode-character-lookup': {
     name: 'Buscador de Caracteres Unicode',
@@ -461,7 +461,7 @@ export const esTools: Record<string, { name: string; shortIntro: string }> = {
   },
   'srt-subtitle-shift': {
     name: 'Desplazador de subtítulos SRT',
-    shortIntro: 'Desplaza los tiempos de los subtítulos en cualquier cantidad y elimina el formato.',
+    shortIntro: 'Desplaza los tiempos de los subtítulos la cantidad que necesites y elimina el formato.',
   },
   'text-cleaner': {
     name: 'Limpiador de texto',
@@ -659,7 +659,7 @@ export const esTools: Record<string, { name: string; shortIntro: string }> = {
   },
   'tdee-calculator': {
     name: 'Calculadora de TDEE',
-    shortIntro: 'Calcula tus calorías diarias (TDEE) para definir, mantener o volumen.',
+    shortIntro: 'Calcula tus calorías diarias (TDEE) para definir, mantener o ganar volumen.',
   },
   'bmr-calculator': {
     name: 'Calculadora de TMB',
@@ -695,7 +695,7 @@ export const esTools: Record<string, { name: string; shortIntro: string }> = {
   },
   'sleep-calculator': {
     name: 'Calculadora de Ciclos de Sueño',
-    shortIntro: 'Horas de dormir basadas en ciclos de 90 minutos para despertar fresco.',
+    shortIntro: 'Horas de dormir basadas en ciclos de 90 minutos para despertar descansado.',
   },
   'heart-rate-zone-calculator': {
     name: 'Calculadora de Zonas de Pulso',
@@ -823,7 +823,7 @@ export const esTools: Record<string, { name: string; shortIntro: string }> = {
   },
   'bcrypt-hash-generator': {
     name: 'Generador de hash Bcrypt',
-    shortIntro: 'Genera y verifica contraseñas con bcrypt o SHA con sal en el navegador.',
+    shortIntro: 'Calcula el hash y verifica contraseñas con bcrypt o SHA con sal en el navegador.',
   },
   'secret-key-generator': {
     name: 'Generador de claves secretas',
@@ -915,7 +915,7 @@ export const esTools: Record<string, { name: string; shortIntro: string }> = {
   // ─────────── 🎲 Juegos ───────────
   'dice-roller': {
     name: 'Lanzador de Dados',
-    shortIntro: 'Lanza cualquier dado — d4 a d100, varios a la vez, tiros justos.',
+    shortIntro: 'Lanza cualquier dado — d4 a d100, varios a la vez, tiradas justas.',
   },
   'coin-flip': {
     name: 'Lanzar Moneda',
@@ -927,7 +927,7 @@ export const esTools: Record<string, { name: string; shortIntro: string }> = {
   },
   'random-team-generator': {
     name: 'Generador de Equipos Aleatorios',
-    shortIntro: 'Divide cualquier lista en equipos justos — rebaraja hasta que convenza.',
+    shortIntro: 'Divide cualquier lista en equipos justos — rebaraja hasta que te convenza.',
   },
 
   // ─────────── 🐶 Mascotas ───────────
@@ -965,7 +965,7 @@ export const esTools: Record<string, { name: string; shortIntro: string }> = {
   },
   'llm-api-cost-calculator': {
     name: 'Comparador de Costos de API LLM',
-    shortIntro: 'Compara la factura mensual real de cada gran modelo de IA.',
+    shortIntro: 'Compara la factura mensual real de los grandes modelos de IA.',
   },
 
   // ─────────── 🚀 Nuevas herramientas (2026-09 v4) ───────────
