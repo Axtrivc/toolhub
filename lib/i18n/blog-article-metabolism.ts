@@ -1,7 +1,7 @@
 /**
  * 《The Science of Human Metabolism: Calculating BMR, TDEE, Caloric Deficits, and 16:8 Fasting》
  * Pillar 集群 #6(代谢健康,2026-09-05)。
- * 内链:intermittent-fasting-calculator / tdee-calculator / bmr-calculator / calorie-calculator。
+ * 内链:intermittent-fasting-calculator / tdee-calculator / bmr-calculator / calorie-calculator / macro-calculator。
  */
 
 import type { LocalizedArticle } from './blog-articles'
@@ -56,6 +56,13 @@ export const metabolismGuideArticle: LocalizedArticle = {
           'Two guardrails keep the ledger healthy. Do not crash below BMR intake for extended periods — adherence collapses and lean mass follows. And protect muscle with **1.6–2.2 g of protein per kg of body weight** plus resistance training; weight lost without them is part fat, part engine.',
           {
             card: {
+              title: 'Macro Calculator',
+              href: '/tools/macro-calculator/',
+              desc: 'Turn your daily calorie target into a protein, carb, and fat split — so the 1.6–2.2 g/kg guardrail becomes an actual meal number.',
+            },
+          },
+          {
+            card: {
               title: 'Calorie Calculator',
               href: '/tools/calorie-calculator/',
               desc: 'Daily calorie targets for loss, maintenance, or gain from your TDEE — with the weekly rate the deficit implies.',
@@ -85,7 +92,7 @@ export const metabolismGuideArticle: LocalizedArticle = {
         ],
       },
       {
-        heading: 'The First Week, Hour by Hour',
+        heading: 'The First Week, Day by Day',
         blocks: [
           { list: [
             'Day 1: compute **BMR** and honest **TDEE** — write both down.',
@@ -134,7 +141,14 @@ export const metabolismGuideArticle: LocalizedArticle = {
         heading: '3. 缺口账簿:每公斤脂肪 7,700 kcal',
         blocks: [
           '体脂大约每公斤储存 7,700 kcal,所以 **500 kcal/天的缺口,预计每周减脂约 0.45 kg**。预测会诚实地衰减:体重下降后 BMR 跟着降(要供养的身体变小了),同样的缺口逐渐缩小——平台期是算术,不是失败。',
-          '两条护栏保护账本健康:不要长期把摄入压到 BMR 以下——依从性会崩,瘦体重跟着走。用**每公斤体重 1.6–2.2 g 蛋白质**加抗阻训练保住肌肉;没有它们,减掉的重量一半是脂肪,一半是发动机。',
+          '两条护栏保护账本健康:不要长期把摄入压到 BMR 以下——依从性会崩,瘦体重跟着走。用**每公斤体重 1.6–2.2 g 蛋白质**加抗阻训练保住肌肉;没有它们,减掉的重量一部分是脂肪,一部分是发动机。',
+          {
+            card: {
+              title: '宏量营养素计算器',
+              href: '/tools/macro-calculator/',
+              desc: '把每日热量目标拆成蛋白、碳水、脂肪——让 1.6–2.2 g/kg 的蛋白质护栏落到具体克数。',
+            },
+          },
           {
             card: {
               title: '热量计算器',
@@ -166,7 +180,7 @@ export const metabolismGuideArticle: LocalizedArticle = {
         ],
       },
       {
-        heading: '第一周,逐小时执行',
+        heading: '第一周,逐日执行',
         blocks: [
           { list: [
             '第 1 天:算 **BMR** 与诚实的 **TDEE**——都写下来。',
@@ -218,6 +232,13 @@ export const metabolismGuideArticle: LocalizedArticle = {
           'Dos barandillas mantienen sano el libro: no caigas por debajo del BMR durante periodos largos — la adherencia colapsa y la masa magra la sigue. Y protege el músculo con **1,6–2,2 g de proteína por kg** más entrenamiento de fuerza; el peso perdido sin ellos es parte grasa, parte motor.',
           {
             card: {
+              title: 'Calculadora de macronutrientes',
+              href: '/tools/macro-calculator/',
+              desc: 'Convierte tu objetivo calórico diario en un reparto de proteína, carbohidratos y grasas — para que el margen de 1,6–2,2 g/kg baje a gramos reales.',
+            },
+          },
+          {
+            card: {
               title: 'Calculadora de calorías',
               href: '/tools/calorie-calculator/',
               desc: 'Objetivos diarios para perder, mantener o ganar desde tu TDEE — con el ritmo semanal que implica el déficit.',
@@ -247,7 +268,7 @@ export const metabolismGuideArticle: LocalizedArticle = {
         ],
       },
       {
-        heading: 'La primera semana, hora a hora',
+        heading: 'La primera semana, día a día',
         blocks: [
           { list: [
             'Día 1: calcula tu **BMR** y tu **TDEE** honesto — anótalos.',
@@ -296,7 +317,14 @@ export const metabolismGuideArticle: LocalizedArticle = {
         heading: '3. Das Defizit-Konto: 7 700 kcal pro Kilogramm',
         blocks: [
           'Körperfett speichert grob 7 700 kcal pro Kilogramm — ein **Defizit von 500 kcal/Tag prognostiziert etwa 0,45 kg Fettverlust pro Woche**. Die Prognose altert ehrlich: Mit sinkendem Gewicht sinkt der BMR (weniger Körper zu versorgen) und dasselbe Defizit schrumpft — Plateaus sind Arithmetik, kein Versagen.',
-          'Zwei Leitplanken halten das Konto gesund: Nicht dauerhaft unter BMR-Zufuhr fallen — die Adhärenz kollabiert und die Magermasse folgt. Und Muskeln schützen mit **1,6–2,2 g Protein pro kg Körpergewicht** plus Krafttraining; ohne sie ist verlorenes Gewicht zur Hälfte Fett, zur Hälfte Motor.',
+          'Zwei Leitplanken halten das Konto gesund: Nicht dauerhaft unter BMR-Zufuhr fallen — die Adhärenz kollabiert und die Magermasse folgt. Und Muskeln schützen mit **1,6–2,2 g Protein pro kg Körpergewicht** plus Krafttraining; ohne sie ist verlorenes Gewicht teils Fett, teils Motor.',
+          {
+            card: {
+              title: 'Makro-Rechner',
+              href: '/tools/macro-calculator/',
+              desc: 'Macht aus deinem Tageskalorienziel eine Protein-, Kohlenhydrat- und Fettverteilung — damit die 1,6–2,2-g/kg-Leitplanke zu echten Gramm wird.',
+            },
+          },
           {
             card: {
               title: 'Kalorienrechner',
@@ -328,7 +356,7 @@ export const metabolismGuideArticle: LocalizedArticle = {
         ],
       },
       {
-        heading: 'Die erste Woche, Stunde für Stunde',
+        heading: 'Die erste Woche, Tag für Tag',
         blocks: [
           { list: [
             'Tag 1: **BMR** und ehrlichen **TDEE** berechnen — beides notieren.',

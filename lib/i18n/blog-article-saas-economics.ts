@@ -2,7 +2,8 @@
  * 《Mastering SaaS Unit Economics: The Mathematical Relationship Between CAC, LTV, and Churn》
  * Pillar 集群 #4(商业分析,2026-09-05)。
  * 内链:cac-ltv-calculator / saas-ltv-churn-calculator /
- * break-even-calculator / profit-margin-calculator。
+ * roi-calculator / break-even-calculator /
+ * profit-margin-calculator / runway-calculator。
  */
 
 import type { LocalizedArticle } from './blog-articles'
@@ -55,12 +56,19 @@ export const saasEconomicsArticle: LocalizedArticle = {
         blocks: [
           'The venture-grade heuristics exist for a reason. **LTV/CAC below 1** means you burn money on every customer — growth accelerates the bleeding. **Between 1 and 3** the model works but is fragile: any churn spike or CAC inflation erases the margin of safety. **Above 3** with a payback under 12 months, growth spend is a machine: put a dollar in, get three out within the customer\u2019s lifetime, with the first one back inside a year.',
           'Above 5 is not "great" — it usually means you are *under-investing* in growth and leaving the market to competitors. The ratio is a steering wheel, not a trophy.',
+          {
+            card: {
+              title: 'ROI Calculator',
+              href: '/tools/roi-calculator/',
+              desc: 'LTV/CAC is the ROI of your acquisition spend — run the same spend-vs-return math on any other bet.',
+            },
+          },
         ],
       },
       {
         heading: '4. Churn Compounds: The Monthly-to-Annual Trap',
         blocks: [
-          'Monthly churn is quoted small because it sounds small. **3% monthly churn is 31% annual** (1 − 0.97¹²); 5% monthly is 46% annual — you replace nearly half your customer base every year just to stand still. At 8% monthly, the base fully turns over annually and the business is a treadmill, not a flywheel.',
+          'Monthly churn is quoted small because it sounds small. **3% monthly churn is 31% annual** (1 − 0.97¹²); 5% monthly is 46% annual — you replace nearly half your customer base every year just to stand still. At 8% monthly, the average lifetime is just 12.5 months — the business is a treadmill, not a flywheel.',
           'The operational threshold: consumer subscriptions live with 5–7% monthly; SMB SaaS must stay under 3%; enterprise with annual contracts needs logo churn in single digits *per year*. If your monthly churn is above 4%, stop buying growth and fix the leak — every acquired dollar is pouring into a bucket with a hole.',
         ],
       },
@@ -80,6 +88,13 @@ export const saasEconomicsArticle: LocalizedArticle = {
               title: 'Profit Margin Calculator',
               href: '/tools/profit-margin-calculator/',
               desc: 'Gross, operating, and net margin from any cost/price pair — the m in the LTV formula, verified.',
+            },
+          },
+          {
+            card: {
+              title: 'Runway Calculator',
+              href: '/tools/runway-calculator/',
+              desc: 'Months of cash left at your current burn — the bridge between unit economics and the bank balance.',
             },
           },
         ],
@@ -135,12 +150,19 @@ export const saasEconomicsArticle: LocalizedArticle = {
         blocks: [
           '风投级的经验阈值自有其道理。**LTV/CAC < 1** 意味着每个客户都在烧钱——增长只是加速失血。**1 到 3 之间**模式成立但脆弱:任何流失尖峰或 CAC 通胀都会抹掉安全边际。**3 以上且回本在 12 个月内**,增长支出就是一台机器:投入 $1,客户生命周期内拿回 $3,第一年内先回 $1。',
           '超过 5 不是"优秀"——通常说明增长*投入不足*,把市场让给了竞争对手。这个比值是方向盘,不是奖杯。',
+          {
+            card: {
+              title: '投资回报率计算器',
+              href: '/tools/roi-calculator/',
+              desc: 'LTV/CAC 本质就是获客支出的 ROI——同一套投入产出数学,去算任何其他赌注。',
+            },
+          },
         ],
       },
       {
         heading: '4. 流失会复利:月度到年度的换算陷阱',
         blocks: [
-          '月流失率报出来小,因为听起来小。**3% 月流失 = 31% 年流失**(1 − 0.97¹²);5% 月流失 = 46% 年流失——原地不动也要每年换掉近一半客户。8% 月流失意味着客户基盘每年整体换血,这门生意是跑步机,不是飞轮。',
+          '月流失率报出来小,因为听起来小。**3% 月流失 = 31% 年流失**(1 − 0.97¹²);5% 月流失 = 46% 年流失——原地不动也要每年换掉近一半客户。8% 月流失意味着平均寿命只有 12.5 个月,这门生意是跑步机,不是飞轮。',
           '操作阈值:消费订阅可以忍 5–7% 月流失;SMB SaaS 必须压在 3% 以下;年合同的企业级,年度 logo 流失要个位数。月流失超过 4% 时,停止购买增长,先补漏——每一块钱获客预算都在往破桶里倒。',
         ],
       },
@@ -160,6 +182,13 @@ export const saasEconomicsArticle: LocalizedArticle = {
               title: '利润率计算器',
               href: '/tools/profit-margin-calculator/',
               desc: '任意成本/售价组合的毛利、经营与净利率——LTV 公式里那个 m,验证一下。',
+            },
+          },
+          {
+            card: {
+              title: '现金跑道计算器',
+              href: '/tools/runway-calculator/',
+              desc: '按当前烧钱速度还剩几个月现金——单位经济与银行余额之间的那座桥。',
             },
           },
         ],
@@ -215,12 +244,19 @@ export const saasEconomicsArticle: LocalizedArticle = {
         blocks: [
           'Las heurísticas de capital riesgo existen por algo. **LTV/CAC por debajo de 1** significa quemar dinero en cada cliente — crecer acelera la hemorragia. **Entre 1 y 3** el modelo funciona pero es frágil: cualquier pico de churn o inflación de CAC borra el margen de seguridad. **Por encima de 3** con recuperación bajo 12 meses, el gasto en crecimiento es una máquina: entra un dólar, salen tres en la vida del cliente, y el primero vuelve dentro del año.',
           'Por encima de 5 no es «genial» — suele significar que *inviertes de menos* en crecimiento y dejas el mercado a la competencia. La ratio es un volante, no un trofeo.',
+          {
+            card: {
+              title: 'Calculadora de ROI',
+              href: '/tools/roi-calculator/',
+              desc: 'El LTV/CAC es el ROI de tu gasto en adquisición — la misma matemática de inversión y retorno para cualquier otra apuesta.',
+            },
+          },
         ],
       },
       {
         heading: '4. El churn capitaliza: la trampa mensual-anual',
         blocks: [
-          'El churn mensual se cita pequeño porque suena pequeño. **Un 3 % mensual es un 31 % anual** (1 − 0,97¹²); un 5 % mensual es un 46 % anual — repones casi la mitad de tu base cada año solo para no retroceder. Con un 8 % mensual, la base rota entera cada año: el negocio es una cinta de correr, no un volante.',
+          'El churn mensual se cita pequeño porque suena pequeño. **Un 3 % mensual es un 31 % anual** (1 − 0,97¹²); un 5 % mensual es un 46 % anual — repones casi la mitad de tu base cada año solo para no retroceder. Con un 8 % mensual, la vida media cae a 12,5 meses: el negocio es una cinta de correr, no un volante de inercia.',
           'El umbral operativo: las suscripciones de consumo viven con 5–7 % mensual; la SaaS para pymes debe quedar bajo el 3 %; la enterprise con contratos anuales necesita churn de logos de un dígito *al año*. Si tu churn mensual supera el 4 %, deja de comprar crecimiento y tapona la fuga — cada dólar de adquisición cae en un cubo agujereado.',
         ],
       },
@@ -240,6 +276,13 @@ export const saasEconomicsArticle: LocalizedArticle = {
               title: 'Calculadora de margen de beneficio',
               href: '/tools/profit-margin-calculator/',
               desc: 'Margen bruto, operativo y neto desde cualquier par coste/precio — la m de la fórmula LTV, verificada.',
+            },
+          },
+          {
+            card: {
+              title: 'Calculadora de Runway para Startups',
+              href: '/tools/runway-calculator/',
+              desc: 'Meses de caja al ritmo actual de burn — el puente entre la economía unitaria y el saldo bancario.',
             },
           },
         ],
@@ -295,12 +338,19 @@ export const saasEconomicsArticle: LocalizedArticle = {
         blocks: [
           'Die VC-Heuristiken existieren aus gutem Grund. **LTV/CAC unter 1** heißt: Jeder Kunde verbrennt Geld — Wachstum beschleunigt die Blutung. **Zwischen 1 und 3** funktioniert das Modell, bleibt aber fragil: Jeder Churn-Spike oder CAC-Anstieg wischt die Sicherheitsmarge weg. **Über 3** mit Payback unter 12 Monaten ist Wachstumsausgabe eine Maschine: Ein Dollar rein, drei raus über die Kundenlebensdauer, der erste zurück innerhalb eines Jahres.',
           'Über 5 ist nicht „großartig" — meist heißt es, du *unterinvestierst* in Wachstum und überlässt den Markt der Konkurrenz. Das Verhältnis ist ein Lenkrad, keine Trophäe.',
+          {
+            card: {
+              title: 'ROI-Rechner',
+              href: '/tools/roi-calculator/',
+              desc: 'LTV/CAC ist der ROI deiner Akquise-Ausgaben — dieselbe Investitions- und Ertragsrechnung für jede andere Wette.',
+            },
+          },
         ],
       },
       {
         heading: '4. Churn verzinst sich: Die Monat-zu-Jahr-Falle',
         blocks: [
-          'Monats-Churn wird klein zitiert, weil es klein klingt. **3 % monatlich sind 31 % jährlich** (1 − 0,97¹²); 5 % monatlich sind 46 % jährlich — du ersetzt fast die halbe Kundenbasis pro Jahr, nur um stillzustehen. Bei 8 % monatlich rotiert die Basis komplett pro Jahr: Das Geschäft ist ein Laufband, kein Schwungrad.',
+          'Monats-Churn wird klein zitiert, weil es klein klingt. **3 % monatlich sind 31 % jährlich** (1 − 0,97¹²); 5 % monatlich sind 46 % jährlich — du ersetzt fast die halbe Kundenbasis pro Jahr, nur um stillzustehen. Bei 8 % monatlich sinkt die mittlere Lebensdauer auf 12,5 Monate: Das Geschäft ist ein Laufband, kein Schwungrad.',
           'Die operative Schwelle: Consumer-Abo lebt mit 5–7 % monatlich; SMB-SaaS muss unter 3 % bleiben; Enterprise mit Jahresverträgen braucht Logo-Churn im einstelligen Bereich *pro Jahr*. Liegt dein Monats-Churn über 4 %, hör auf, Wachstum zu kaufen, und dichte das Leck — jeder Akquise-Dollar fließt in einen Eimer mit Loch.',
         ],
       },
@@ -320,6 +370,13 @@ export const saasEconomicsArticle: LocalizedArticle = {
               title: 'Gewinnmargen-Rechner',
               href: '/tools/profit-margin-calculator/',
               desc: 'Brutto-, Betriebs- und Nettomarge aus jedem Kosten-/Preispaar — das m in der LTV-Formel, verifiziert.',
+            },
+          },
+          {
+            card: {
+              title: 'Startup-Runway-Rechner',
+              href: '/tools/runway-calculator/',
+              desc: 'Monate bis zum leeren Konto bei aktueller Burn-Rate — die Brücke zwischen Unit Economics und Kontostand.',
             },
           },
         ],

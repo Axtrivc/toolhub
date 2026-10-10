@@ -38,7 +38,7 @@ export const canineNutritionArticle: LocalizedArticle = {
             card: {
               title: 'Dog Food Calculator',
               href: '/tools/dog-food-calculator/',
-              desc: 'RER → MER with the correct life-stage factor, converted to grams of your specific food from its kcal/kg label.',
+              desc: 'RER → MER with the correct life-stage factor, converted to grams of your specific food from its per-cup or per-100 g calorie label.',
             },
           },
         ],
@@ -60,7 +60,7 @@ export const canineNutritionArticle: LocalizedArticle = {
       {
         heading: '5. Age Is a Feeding Variable: The Human-Years Myth',
         blocks: [
-          'The "multiply by 7" rule fails because dogs mature fast early and slow later: a 1-year-old dog is roughly 15 in human years; year 2 adds about 9; each year after adds 4–5. What matters for feeding is the *life stage* that mapping exposes — the puppy multiplier (3.0×) ends around 12 months (18–24 for giant breeds), and the senior factor kicks in around 7+ as activity and lean mass decline.',
+          'The "multiply by 7" rule fails because dogs mature fast early and slow later: a 1-year-old dog is roughly 15 in human years; year 2 adds about 9; each year after adds 4–5. What matters for feeding is the *life stage* that mapping exposes — the puppy multiplier (3.0×) ends around 12 months (18–24 for giant breeds), and the senior factor kicks in around 7+ (as early as 5–6 for giant breeds), as activity and lean mass decline.',
           'Feeding the same cup from age 2 to age 12 is why middle-aged dogs drift overweight: the factor moved and the bowl didn\u2019t.',
           {
             card: {
@@ -106,7 +106,7 @@ export const canineNutritionArticle: LocalizedArticle = {
             card: {
               title: '狗粮计算器',
               href: '/tools/dog-food-calculator/',
-              desc: '用正确的生命阶段系数算 RER → MER,并按你家粮包装上的 kcal/kg 折算成每天该喂多少克。',
+              desc: '用正确的生命阶段系数算 RER → MER,并按你家粮包装上的每杯或每 100 g 热量标注折算成每天该喂多少克。',
             },
           },
         ],
@@ -128,7 +128,7 @@ export const canineNutritionArticle: LocalizedArticle = {
       {
         heading: '5. 年龄是喂食变量:破除"乘 7"神话',
         blocks: [
-          '"狗龄乘 7"失效的原因:狗早年成熟快、晚年放缓——1 岁狗约相当于人类 15 岁;第 2 年再加约 9;之后每年加 4–5。对喂食重要的是这种映射暴露的*生命阶段*:幼犬系数(3.0×)约 12 月龄结束(巨型犬 18–24 月),老年系数在 7 岁左右随活动量和瘦体重下降而启用。',
+          '"狗龄乘 7"失效的原因:狗早年成熟快、晚年放缓——1 岁狗约相当于人类 15 岁;第 2 年再加约 9;之后每年加 4–5。对喂食重要的是这种映射暴露的*生命阶段*:幼犬系数(3.0×)约 12 月龄结束(巨型犬 18–24 月),老年系数在 7 岁左右(巨型犬早至 5–6 岁)随活动量和瘦体重下降而启用。',
           '从 2 岁到 12 岁喂同一杯,正是中年犬悄悄发胖的原因:系数动了,碗没动。',
           {
             card: {
@@ -174,7 +174,7 @@ export const canineNutritionArticle: LocalizedArticle = {
             card: {
               title: 'Calculadora de comida para perros',
               href: '/tools/dog-food-calculator/',
-              desc: 'RER → MER con el factor de etapa correcto, convertido a gramos de tu pienso según los kcal/kg de la etiqueta.',
+              desc: 'RER → MER con el factor de etapa correcto, convertido a gramos de tu pienso según la etiqueta (por taza o por 100 g).',
             },
           },
         ],
@@ -196,7 +196,7 @@ export const canineNutritionArticle: LocalizedArticle = {
       {
         heading: '5. La edad es una variable de alimentación: el mito de los años humanos',
         blocks: [
-          'La regla del «multiplica por 7» falla porque los perros maduran rápido al principio y se frenan después: un perro de 1 año equivale a unos 15 humanos; el año 2 suma ~9; cada año posterior suma 4–5. Lo que importa para alimentar es la *etapa vital* que revela ese mapeo — el factor de cachorro (3,0×) termina hacia los 12 meses (18–24 en razas gigantes) y el factor senior entra hacia los 7+, cuando bajan actividad y masa magra.',
+          'La regla del «multiplica por 7» falla porque los perros maduran rápido al principio y se frenan después: un perro de 1 año equivale a unos 15 humanos; el año 2 suma ~9; cada año posterior suma 4–5. Lo que importa para alimentar es la *etapa vital* que revela ese mapeo — el factor de cachorro (3,0×) termina hacia los 12 meses (18–24 en razas gigantes) y el factor senior entra hacia los 7+ (desde los 5–6 en razas gigantes), cuando bajan actividad y masa magra.',
           'Dar el mismo cacito de los 2 a los 12 años es por lo que los perros de mediana edad engordan sin ruido: el factor se movió y el cuenco no.',
           {
             card: {
@@ -242,7 +242,7 @@ export const canineNutritionArticle: LocalizedArticle = {
             card: {
               title: 'Hundefutter-Rechner',
               href: '/tools/dog-food-calculator/',
-              desc: 'RER → MER mit dem korrekten Lebensstufen-Faktor, umgerechnet in Gramm deines konkreten Futters anhand seiner kcal/kg-Angabe.',
+              desc: 'RER → MER mit dem korrekten Lebensstufen-Faktor, umgerechnet in Gramm deines konkreten Futters anhand der Angabe pro Tasse oder pro 100 g.',
             },
           },
         ],
@@ -264,7 +264,7 @@ export const canineNutritionArticle: LocalizedArticle = {
       {
         heading: '5. Alter ist eine Fütterungsvariable: Der Menschenjahre-Mythos',
         blocks: [
-          'Die „mal 7"-Regel scheitert, weil Hunde früh schnell reifen und später abbremsen: Ein 1-jähriger Hund entspricht grob 15 Menschenjahren; Jahr 2 addiert ~9; jedes weitere Jahr 4–5. Fütterungsrelevant ist die *Lebensstufe*, die diese Abbildung freilegt — der Welpenfaktor (3,0×) endet um 12 Monate (18–24 bei Riesenrassen), der Senior-Faktor greift ab ~7, wenn Aktivität und Magermasse sinken.',
+          'Die „mal 7"-Regel scheitert, weil Hunde früh schnell reifen und später abbremsen: Ein 1-jähriger Hund entspricht grob 15 Menschenjahren; Jahr 2 addiert ~9; jedes weitere Jahr 4–5. Fütterungsrelevant ist die *Lebensstufe*, die diese Abbildung freilegt — der Welpenfaktor (3,0×) endet um 12 Monate (18–24 bei Riesenrassen), der Senior-Faktor greift ab ~7 (bei Riesenrassen schon ab 5–6), wenn Aktivität und Magermasse sinken.',
           'Von 2 bis 12 denselben Becher zu füttern ist der Grund, warum Hunde mittleren Alters lautlos zunehmen: Der Faktor hat sich bewegt, der Napf nicht.',
           {
             card: {

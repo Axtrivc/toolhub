@@ -1,7 +1,7 @@
 /**
  * 《Demystifying In-Browser AES-256-GCM and PBKDF2: A Developer\u2019s Practical Guide》
  * Pillar 集群 #5(安全隐私,2026-09-05)。
- * 内链:aes-encrypt-decrypt / secret-key-generator / password-generator / jwt-decoder。
+ * 内链:aes-encrypt-decrypt / hmac-generator / secret-key-generator / password-generator / jwt-decoder。
  */
 
 import type { LocalizedArticle } from './blog-articles'
@@ -52,6 +52,13 @@ export const webCryptoGuideArticle: LocalizedArticle = {
           'Passwords are terrible keys: low entropy, reused, guessable. **PBKDF2-HMAC-SHA256** stretches them — hash the password together with a random 16-byte salt, then repeat 150,000+ times. The salt kills rainbow tables (identical passwords produce different keys); the iteration count taxes every guess an attacker makes.',
           'What PBKDF2 cannot fix is a weak password: 150k iterations raise the cost of each guess by roughly 2¹⁷, which converts a 40-bit password into something like 57 bits of effective work — still crackable. Key stretching buys a multiplier, not a miracle; the password itself must carry most of the entropy.',
           { code: CODE_WEBCRYPTO },
+          {
+            card: {
+              title: 'HMAC Generator',
+              href: '/tools/hmac-generator/',
+              desc: 'PBKDF2 is HMAC-SHA256 iterated 150,000 times — run the underlying primitive yourself with any key and message, output in hex or base64.',
+            },
+          },
         ],
       },
       {
@@ -137,6 +144,13 @@ export const webCryptoGuideArticle: LocalizedArticle = {
           '密码是糟糕的密钥:熵低、复用、可猜。**PBKDF2-HMAC-SHA256** 负责拉伸——把密码与随机 16 字节盐一起哈希,再重复 15 万次以上。盐让彩虹表失效(相同密码产出不同密钥),迭代次数给攻击者的每次猜测征税。',
           'PBKDF2 救不了弱密码:15 万次迭代把单次猜测成本抬高约 2¹⁷ 倍,40 位的密码等效约 57 位工作量——依然可破。密钥拉伸买的是乘数,不是奇迹;密码本身必须扛起大部分熵。',
           { code: CODE_WEBCRYPTO },
+          {
+            card: {
+              title: 'HMAC 生成器',
+              href: '/tools/hmac-generator/',
+              desc: 'PBKDF2 本质是迭代 15 万次的 HMAC-SHA256——亲手跑一遍这个底层原语:任意密钥与消息,输出 hex 或 base64。',
+            },
+          },
         ],
       },
       {
@@ -198,7 +212,7 @@ export const webCryptoGuideArticle: LocalizedArticle = {
       {
         heading: '1. ¿Por qué cifrar en el cliente? El argumento de conocimiento cero',
         blocks: [
-          'Todo esquema de cifrado en servidor pide al usuario confiar en una promesa. El cifrado en cliente convierte la promesa en una *propiedad*: el texto en claro y las contraseñas nunca salen del dispositivo, así que una brecha en el servidor solo produce cifrado. Para notas, copias de seguridad, borradores de contrato y registros personales, es la diferencia entre «prometemos que no podemos leerlo» y «no hay nada que leer».',
+          'Todo esquema de cifrado en servidor pide al usuario confiar en una promesa. El cifrado en cliente convierte la promesa en una *propiedad*: el texto en claro y las contraseñas nunca salen del dispositivo, así que una brecha en el servidor solo deja texto cifrado. Para notas, copias de seguridad, borradores de contrato y registros personales, es la diferencia entre «prometemos que no podemos leerlo» y «no hay nada que leer».',
           'La trampa: el navegador debe hacer criptografía real, no un XOR con una clave en hex. Para eso existe la Web Crypto API (`crypto.subtle`): una implementación nativa, de tiempo constante y con respaldo hardware que ninguna biblioteca en JS puro iguala en seguridad.',
         ],
       },
@@ -222,6 +236,13 @@ export const webCryptoGuideArticle: LocalizedArticle = {
           'Las contraseñas son claves terribles: poca entropía, reutilizadas, adivinables. **PBKDF2-HMAC-SHA256** las estira: hashea la contraseña con una sal aleatoria de 16 bytes y repite más de 150 000 veces. La sal anula las tablas rainbow (contraseñas idénticas producen claves distintas); las iteraciones gravan cada intento del atacante.',
           'Lo que PBKDF2 no puede arreglar es una contraseña débil: 150k iteraciones elevan el coste por intento ~2¹⁷ veces, convirtiendo una contraseña de 40 bits en ~57 bits de trabajo efectivo — aún crackeable. El estiramiento compra un multiplicador, no un milagro: la contraseña debe aportar la mayor parte de la entropía.',
           { code: CODE_WEBCRYPTO },
+          {
+            card: {
+              title: 'Generador de HMAC',
+              href: '/tools/hmac-generator/',
+              desc: 'PBKDF2 es HMAC-SHA256 iterado 150 000 veces — ejecuta tú mismo la primitiva subyacente con cualquier clave y mensaje, salida en hex o base64.',
+            },
+          },
         ],
       },
       {
@@ -307,6 +328,13 @@ export const webCryptoGuideArticle: LocalizedArticle = {
           'Passwörter sind miserable Schlüssel: wenig Entropie, wiederverwendet, erratbar. **PBKDF2-HMAC-SHA256** streckt sie — Passwort plus zufälliges 16-Byte-Salt hashen und über 150 000-mal wiederholen. Das Salt killt Rainbow Tables (gleiche Passwörter ergeben unterschiedliche Schlüssel); die Iterationen besteuern jeden Rateversuch des Angreifers.',
           'Was PBKDF2 nicht retten kann: ein schwaches Passwort. 150k Iterationen verteuern jeden Versuch um etwa 2¹⁷ — ein 40-Bit-Passwort wird zu ~57 Bit effektiver Arbeit, immer noch knackbar. Stretching kauft einen Multiplikator, kein Wunder; das Passwort selbst muss den Großteil der Entropie tragen.',
           { code: CODE_WEBCRYPTO },
+          {
+            card: {
+              title: 'HMAC-Generator',
+              href: '/tools/hmac-generator/',
+              desc: 'PBKDF2 ist 150 000-mal iteriertes HMAC-SHA256 — führe das zugrunde liegende Primitiv selbst aus, mit beliebigem Schlüssel und Message, Ausgabe in Hex oder Base64.',
+            },
+          },
         ],
       },
       {

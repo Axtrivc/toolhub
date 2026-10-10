@@ -12,7 +12,7 @@ APY = (1 + r/n)^n - 1
 // r = nominal annual rate (APR), n = compounding periods/year
 //
 // 4.40% APR daily:   (1 + 0.044/365)^365 - 1 = 4.498% APY
-// 4.40% APR monthly: (1 + 0.044/12)^12  - 1 = 4.489% APY`
+// 4.40% APR monthly: (1 + 0.044/12)^12  - 1 = 4.490% APY`
 
 export const cashAllocationGuideArticle: LocalizedArticle = {
   en: {
@@ -38,6 +38,13 @@ export const cashAllocationGuideArticle: LocalizedArticle = {
           'Two accounts quoting 4.4% are not equal if one compounds daily and the other monthly. Always convert to APY before comparing, and always compare APY to APY.',
           {
             card: {
+              title: 'APY Calculator',
+              href: '/tools/apy-calculator/',
+              desc: 'Convert APR to APY at any compounding frequency — run this section\u2019s exact conversion on the rate your bank quotes.',
+            },
+          },
+          {
+            card: {
               title: 'Compound Interest Calculator',
               href: '/tools/compound-interest-calculator/',
               desc: 'See compounding frequency change the outcome on your actual balance — contributions vs growth, year by year.',
@@ -55,6 +62,13 @@ export const cashAllocationGuideArticle: LocalizedArticle = {
               title: 'HYSA Calculator',
               href: '/tools/hysa-calculator/',
               desc: 'Project your savings with monthly deposits at any APY — and see what a rate cut actually costs you.',
+            },
+          },
+          {
+            card: {
+              title: 'Savings Goal Calculator',
+              href: '/tools/savings-goal-calculator/',
+              desc: 'Still building the fund? Find the monthly deposit that hits your target by a fixed date.',
             },
           },
         ],
@@ -126,6 +140,13 @@ export const cashAllocationGuideArticle: LocalizedArticle = {
           '两个都标 4.4% 的账户,一个日复利一个月复利,实际并不相等。比较之前一律换算成 APY,且只拿 APY 比 APY。',
           {
             card: {
+              title: 'APY 计算器',
+              href: '/tools/apy-calculator/',
+              desc: '任意计息频率下把 APR 换算成 APY——用你银行报的利率跑一遍本节这步换算。',
+            },
+          },
+          {
+            card: {
               title: '复利计算器',
               href: '/tools/compound-interest-calculator/',
               desc: '用你的真实余额看复利频率如何改变结局——本金投入与利息增长逐年对照。',
@@ -145,14 +166,21 @@ export const cashAllocationGuideArticle: LocalizedArticle = {
               desc: '任意 APY + 每月定存的储蓄推演——并看看降息一次实际让你少赚多少。',
             },
           },
+          {
+            card: {
+              title: '储蓄目标计算器',
+              href: '/tools/savings-goal-calculator/',
+              desc: '应急金还没攒够?算出按固定日期达标所需的每月存款。',
+            },
+          },
         ],
       },
       {
         heading: '4. CD 层:卖出你用不到的流动性',
         blocks: [
-          'CD 是一份合同:银行付你固定利率,你交出访问权。它因此天然适合*日期确定*的钱——18 个月后的首付、3 年后的学费。你不是"把钱锁死",而是在卖出一个你本就行使不到的期权。',
+          'CD 是一份合同:银行付你固定利率,你交出访问权。它因此天然适合*日期确定*的钱——18 个月后的首付、3 年后的学费。你不是"把钱锁死",而是在卖出一个你本来就不会行使的期权。',
           '专业结构是 **CD 阶梯**:4 万美元拆成 4 笔 1 万,分别存 1、2、3、4 年期。每年有一档到期——要么用掉,要么滚成新的 4 年期放在顶端。首轮之后,你手里全是长期利率,但每 12 个月都有四分之一解禁。阶梯把流动性罚金变成了一张时间表。',
-          '进场前先看清退出价:提前支取罚金为 3–12 个月利息。2 年期 CD 第 6 个月违约,6 个月罚金可能吃掉全部已赚利息。日期不确定的钱,永远不要进阶梯。',
+          '进场前先看清退出价:提前支取罚金为 3–12 个月利息。2 年期 CD 存到第 6 个月提前支取,6 个月罚金可能吃掉全部已赚利息。日期不确定的钱,永远不要进阶梯。',
           {
             card: {
               title: 'CD 存单计算器',
@@ -214,6 +242,13 @@ export const cashAllocationGuideArticle: LocalizedArticle = {
           'Dos cuentas al 4,4 % no son iguales si una capitaliza a diario y otra al mes. Convierte siempre a APY antes de comparar, y compara APY con APY.',
           {
             card: {
+              title: 'Calculadora de APY',
+              href: '/tools/apy-calculator/',
+              desc: 'Convierte APR a APY con cualquier frecuencia de capitalización — aplica la conversión de esta sección al tipo que te cotiza tu banco.',
+            },
+          },
+          {
+            card: {
               title: 'Calculadora de interés compuesto',
               href: '/tools/compound-interest-calculator/',
               desc: 'Mira cómo la frecuencia de capitalización cambia el resultado sobre tu saldo real — aportaciones vs crecimiento, año a año.',
@@ -224,7 +259,7 @@ export const cashAllocationGuideArticle: LocalizedArticle = {
       {
         heading: '3. La capa HYSA: dinero de emergencia que trabaja',
         blocks: [
-          'Tu fondo de emergencia tiene un solo trabajo: estar íntegro esta semana. Eso descalifica acciones, bloqueos y penalizaciones — exactamente lo que ofrece un HYSA, más un 4 %+ de APY mientras espera. Un fondo de $30 000 al 4,4 % gana **$1 320/año**; al 0,01 % de un banco tradicional, **$3**. El cambio lleva una tarde.',
+          'Tu fondo de emergencia tiene un solo trabajo: estar íntegro esta semana. Eso descalifica acciones, bloqueos y penalizaciones — exactamente lo que ofrece un HYSA, con un APY de más del 4 % mientras espera. Un fondo de $30 000 al 4,4 % gana **$1 320/año**; al 0,01 % de un banco tradicional, **$3**. El cambio lleva una tarde.',
           'La trampa: el tipo del HYSA es *variable* — si la Fed recorta, tu APY la sigue en semanas. Trata cualquier proyección como una foto, recalcula tras cada reunión de la Fed y nunca construyas un plan plurianual sobre el tipo de hoy.',
           {
             card: {
@@ -233,12 +268,19 @@ export const cashAllocationGuideArticle: LocalizedArticle = {
               desc: 'Proyecta tu ahorro con depósitos mensuales a cualquier APY — y mira lo que de verdad cuesta una bajada de tipos.',
             },
           },
+          {
+            card: {
+              title: 'Calculadora de meta de ahorro',
+              href: '/tools/savings-goal-calculator/',
+              desc: '¿Aún construyendo el fondo? Calcula el depósito mensual que alcanza tu meta en una fecha fija.',
+            },
+          },
         ],
       },
       {
         heading: '4. La capa CD: vende liquidez que no necesitas',
         blocks: [
-          'Un CD es un contrato: el banco te paga un tipo fijo por renunciar al acceso. Por eso encaja con dinero de *fecha conocida* — la entrada de una casa en 18 meses, la universidad en 3 años. No «encarcelas dinero»: vendes una opción que nunca ibas a ejercer.',
+          'Un CD es un contrato: el banco te paga un tipo fijo por renunciar al acceso. Por eso encaja con dinero de *fecha conocida* — la entrada de una casa en 18 meses, la universidad en 3 años. No estás «encarcelando» el dinero: vendes una opción que nunca ibas a ejercer.',
           'La estructura profesional es la **escalera de CDs**: divide $40 000 en cuatro CDs de $10 000 a 1, 2, 3 y 4 años. Cada año vence un peldaño — lo gastas o lo renuevas a 4 años en la cima. Tras el primer ciclo todo tu dinero gana tipos de largo plazo, y un cuarto se libera cada 12 meses. La escalera convierte la penalización de liquidez en un calendario.',
           'Conoce el precio de salida antes de entrar: las penalizaciones van de 3 a 12 meses de intereses. Romper un CD a 2 años en el mes 6 con penalización de 6 meses puede comerse todo lo ganado. Nunca metas en la escalera dinero cuya fecha sea una suposición.',
           {
@@ -302,6 +344,13 @@ export const cashAllocationGuideArticle: LocalizedArticle = {
           'Zwei Konten mit 4,4 % sind nicht gleich, wenn eines täglich und eines monatlich verzinst. Vor jedem Vergleich in APY umrechnen — und nur APY mit APY vergleichen.',
           {
             card: {
+              title: 'APY-Rechner',
+              href: '/tools/apy-calculator/',
+              desc: 'Rechne APR bei jeder Zinsperiode in APY um — führe die Umrechnung aus dieser Sektion mit dem Satz deiner Bank durch.',
+            },
+          },
+          {
+            card: {
               title: 'Zinseszins-Rechner',
               href: '/tools/compound-interest-calculator/',
               desc: 'Sieh, wie die Verzinsungsfrequenz das Ergebnis auf deinem echten Saldo verändert — Einzahlungen vs. Wachstum, Jahr für Jahr.',
@@ -321,14 +370,21 @@ export const cashAllocationGuideArticle: LocalizedArticle = {
               desc: 'Projiziere dein Sparguthaben mit Monatsraten bei beliebigem APY — und sieh, was eine Zinssenkung wirklich kostet.',
             },
           },
+          {
+            card: {
+              title: 'Sparziel-Rechner',
+              href: '/tools/savings-goal-calculator/',
+              desc: 'Notfallfonds noch im Aufbau? Finde die Monatsrate, die dein Ziel zum Stichtag erreicht.',
+            },
+          },
         ],
       },
       {
         heading: '4. Die CD-Schicht: Verkaufe Liquidität, die du nicht brauchst',
         blocks: [
-          'Ein CD ist ein Vertrag: Die Bank zahlt einen Festzins dafür, dass du auf Zugriff verzichtest. Damit passt er zu Geld mit *bekanntem Datum* — Eigenkapital in 18 Monaten, Studiengebühr in 3 Jahren. Du „sperrst" kein Geld weg; du verkaufst eine Option, die du nie gezogen hättest.',
+          'Ein CD ist ein Vertrag: Die Bank zahlt einen Festzins dafür, dass du auf Zugriff verzichtest. Damit passt er zu Geld mit *bekanntem Datum* — Anzahlung in 18 Monaten, Studiengebühr in 3 Jahren. Du „sperrst" kein Geld weg; du verkaufst eine Option, die du nie gezogen hättest.',
           'Die Profi-Struktur ist die **CD-Leiter**: $40 000 in vier $10 000-CDs mit 1, 2, 3 und 4 Jahren aufteilen. Jedes Jahr läuft eine Sprosse aus — ausgeben oder als neue 4-Jahres-Sprosse oben anlegen. Nach dem ersten Zyklus hältst du nur Langfrist-Zinsen, und doch wird jährlich ein Viertel frei. Die Leiter verwandelt die Liquiditätsstrafe in einen Kalender.',
-          'Kenne den Ausstiegspreis vor dem Einstieg: Vorfälligkeitsstrafen liegen bei 3–12 Monatszinsen. Ein 2-Jahres-CD, in Monat 6 gebrochen, kann mit 6 Monaten Strafe den gesamten Ertrag verlieren. Geld mit geratenem Datum gehört nie in die Leiter.',
+          'Kenne den Ausstiegspreis vor dem Einstieg: Vorfälligkeitsstrafen liegen bei 3–12 Monatszinsen. Ein 2-Jahres-CD, der in Monat 6 vorzeitig aufgelöst wird, kann mit einer Strafe von 6 Monatszinsen den gesamten Ertrag verlieren. Geld mit geratenem Datum gehört nie in die Leiter.',
           {
             card: {
               title: 'Festgeld-Rechner',
@@ -358,7 +414,7 @@ export const cashAllocationGuideArticle: LocalizedArticle = {
           { list: [
             '**Girokonto-Puffer** — ein Monat Ausgaben; Ertrag egal, Reibung null.',
             '**HYSA** — 3–6 Monatsausgaben (Notfallfonds) plus alles, was in ~12 Monaten fällig wird.',
-            '**CD-Leiter** — terminierte Ziele in 1–5 Jahren: Eigenkapital, Studium, Sabbatical.',
+            '**CD-Leiter** — terminierte Ziele in 1–5 Jahren: Anzahlung, Studium, Sabbatical.',
             '**Geldmarktfonds** — der Parkplatz zwischen Entscheidungen: Ertrag vor Garantie.',
             '**Alles andere** — ohne Datum und ohne Notfallzweck: Warum ist es überhaupt Cash?',
           ] },

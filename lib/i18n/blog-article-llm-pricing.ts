@@ -1,7 +1,7 @@
 /**
  * 《The 2026 LLM Pricing Handbook: Measuring Token Density, Context Caching, and Monthly API Budgets》
  * Pillar 集群 #7(AI 开发,2026-09-05)。
- * 内链:llm-api-cost-calculator / gpt-token-counter / embedding-price-calculator。
+ * 内链:llm-api-cost-calculator / llm-cost-calculator / gpt-token-counter / embedding-price-calculator。
  */
 
 import type { LocalizedArticle } from './blog-articles'
@@ -47,6 +47,13 @@ export const llmPricingGuideArticle: LocalizedArticle = {
         blocks: [
           'If your prompts share a stable prefix — system prompt, few-shot examples, tool definitions — **prompt caching** reuses the provider\u2019s processed state. Cached input tokens are billed at **10–50% of list price**, and time-to-first-token drops as a bonus. For an agent with an 8,000-token system prompt called 50,000 times a day, caching converts the dominant line item into a rounding error.',
           'Design for the cache: put stable content first, volatile content last; keep the prefix byte-identical (whitespace changes bust the cache); and route long-document Q&A through cache-friendly prompt layouts instead of re-sending the document per turn.',
+          {
+            card: {
+              title: 'LLM API Cost Calculator',
+              href: '/tools/llm-cost-calculator/',
+              desc: 'Per-request and monthly costs across 17 models — cached-input savings included, so the 50–90% discount shows up in the projection.',
+            },
+          },
         ],
       },
       {
@@ -56,7 +63,7 @@ export const llmPricingGuideArticle: LocalizedArticle = {
           'Then route by difficulty: classify or extract with the small model, reserve the flagship for genuinely hard reasoning. A router that sends 80% of traffic to a model 10× cheaper cuts the blended bill by more than any prompt optimization ever will.',
           {
             card: {
-              title: 'LLM API Cost Calculator',
+              title: 'LLM API Cost Comparison',
               href: '/tools/llm-api-cost-calculator/',
               desc: 'Monthly cost across models from your tokens-per-request and requests-per-day — compare the routing scenarios side by side.',
             },
@@ -66,7 +73,7 @@ export const llmPricingGuideArticle: LocalizedArticle = {
       {
         heading: '5. Embeddings: The Line Item You Can Stop Worrying About',
         blocks: [
-          'Embedding models price at **$0.02–$0.13 per million tokens** — a billion-token corpus costs tens of dollars to embed once. For most RAG systems the embedding API is the smallest line on the invoice; the real costs live in vector storage (proportional to dimensions) and retrieval compute. Budget embeddings once, then stop optimizing the wrong line.',
+          'Embedding models price at **$0.02–$0.13 per million tokens** — a billion-token corpus costs $20–$130 to embed once. For most RAG systems the embedding API is the smallest line on the invoice; the real costs live in vector storage (proportional to dimensions) and retrieval compute. Budget embeddings once, then stop optimizing the wrong line.',
           {
             card: {
               title: 'Embedding Price Calculator',
@@ -119,6 +126,13 @@ export const llmPricingGuideArticle: LocalizedArticle = {
         blocks: [
           '如果你的 prompt 共享稳定前缀——系统提示、few-shot 示例、工具定义——**prompt 缓存**能复用厂商侧的处理结果。被缓存的输入 token 按标价的 **10–50%** 计费,首 token 延迟还顺带下降。对一个带 8,000 token 系统提示、日调 5 万次的 Agent,缓存把最大成本项变成零头。',
           '为缓存而设计:稳定内容放前面、易变内容放最后;保持前缀逐字节一致(空格变动都会击穿缓存);长文档问答走缓存友好的布局,而不是每轮重发整个文档。',
+          {
+            card: {
+              title: 'LLM API 成本计算器',
+              href: '/tools/llm-cost-calculator/',
+              desc: '17 个模型的单次请求与月度成本——含缓存输入节省,50–90% 折扣直接进测算。',
+            },
+          },
         ],
       },
       {
@@ -128,7 +142,7 @@ export const llmPricingGuideArticle: LocalizedArticle = {
           '然后按难度路由:分类、抽取用小模型,旗舰模型只留给真正的硬推理。一个把 80% 流量路由到便宜 10 倍模型的路由器,省下的钱超过任何 prompt 优化。',
           {
             card: {
-              title: 'LLM API 成本计算器',
+              title: 'LLM API 成本对比',
               href: '/tools/llm-api-cost-calculator/',
               desc: '按每次请求 token 数与每日请求数给出各模型月成本——并排对比路由方案。',
             },
@@ -138,7 +152,7 @@ export const llmPricingGuideArticle: LocalizedArticle = {
       {
         heading: '5. 嵌入:可以停止焦虑的那一栏',
         blocks: [
-          '嵌入模型定价在**每百万 token $0.02–$0.13**——十亿 token 的语料全量嵌入一次也就几十美元。多数 RAG 系统里,嵌入 API 是账单上最小的一栏;真正的成本在向量存储(与维度成正比)与检索计算。嵌入预算做一次,然后把优化精力放对地方。',
+          '嵌入模型定价在**每百万 token $0.02–$0.13**——十亿 token 的语料全量嵌入一次约 $20–$130。多数 RAG 系统里,嵌入 API 是账单上最小的一栏;真正的成本在向量存储(与维度成正比)与检索计算。嵌入预算做一次,然后把优化精力放对地方。',
           {
             card: {
               title: '嵌入价格计算器',
@@ -191,6 +205,13 @@ export const llmPricingGuideArticle: LocalizedArticle = {
         blocks: [
           'Si tus prompts comparten un prefijo estable — system prompt, ejemplos few-shot, definiciones de herramientas — la **caché de prompts** reutiliza el estado procesado del proveedor. Los tokens de entrada cacheados se facturan al **10–50 % del precio de lista**, y el tiempo hasta el primer token baja de regalo. Para un agente con system prompt de 8 000 tokens llamado 50 000 veces al día, la caché convierte la línea dominante en calderilla.',
           'Diseña para la caché: contenido estable primero, volátil al final; mantén el prefijo idéntico byte a byte (un cambio de espacios la revienta); y enruta el Q&A sobre documentos largos por layouts amigables con caché en lugar de reenviar el documento en cada turno.',
+          {
+            card: {
+              title: 'Calculadora de Costos de API LLM',
+              href: '/tools/llm-cost-calculator/',
+              desc: 'Coste por petición y mensual de 17 modelos — con el ahorro de entrada cacheada, para que el descuento del 50–90 % entre en la proyección.',
+            },
+          },
         ],
       },
       {
@@ -200,7 +221,7 @@ export const llmPricingGuideArticle: LocalizedArticle = {
           'Después enruta por dificultad: clasifica y extrae con el modelo pequeño, reserva el buque insignia para razonamiento duro de verdad. Un router que manda el 80 % del tráfico a un modelo 10× más barato recorta la factura combinada más que cualquier optimización de prompts.',
           {
             card: {
-              title: 'Calculadora de coste de API LLM',
+              title: 'Comparador de Costos de API LLM',
               href: '/tools/llm-api-cost-calculator/',
               desc: 'Coste mensual por modelo según tus tokens/petición y peticiones/día — compara los escenarios de enrutado lado a lado.',
             },
@@ -210,7 +231,7 @@ export const llmPricingGuideArticle: LocalizedArticle = {
       {
         heading: '5. Embeddings: la línea de la que puedes dejar de preocuparte',
         blocks: [
-          'Los modelos de embedding cuestan **$0,02–$0,13 por millón de tokens** — un corpus de mil millones de tokens cuesta decenas de dólares, una vez. En la mayoría de sistemas RAG, la API de embeddings es la línea más pequeña de la factura; los costes reales viven en el almacenamiento vectorial (proporcional a las dimensiones) y en el cómputo de recuperación. Presupuesta embeddings una vez y deja de optimizar la línea equivocada.',
+          'Los modelos de embedding cuestan **$0,02–$0,13 por millón de tokens** — un corpus de mil millones de tokens cuesta entre $20 y $130, una vez. En la mayoría de sistemas RAG, la API de embeddings es la línea más pequeña de la factura; los costes reales viven en el almacenamiento vectorial (proporcional a las dimensiones) y en el cómputo de recuperación. Presupuesta embeddings una vez y deja de optimizar la línea equivocada.',
           {
             card: {
               title: 'Calculadora de precio de embeddings',
@@ -263,6 +284,13 @@ export const llmPricingGuideArticle: LocalizedArticle = {
         blocks: [
           'Teilen deine Prompts ein stabiles Präfix — System-Prompt, Few-Shots, Tool-Definitionen — nutzt **Prompt-Caching** den verarbeiteten Zustand des Anbieters wieder. Gecachte Input-Tokens werden mit **10–50 % des Listenpreises** abgerechnet, und die Time-to-first-Token sinkt obendrein. Bei einem Agenten mit 8 000-Token-System-Prompt und 50 000 Aufrufen pro Tag macht der Cache aus dem dominanten Posten eine Rundungsdifferenz.',
           'Design für den Cache: stabile Inhalte zuerst, volatile zuletzt; das Präfix byte-identisch halten (Whitespace-Änderungen sprengen den Cache); und Long-Document-Q&A über cache-freundliche Layouts routen, statt das Dokument pro Turn erneut zu senden.',
+          {
+            card: {
+              title: 'LLM-API-Kostenrechner',
+              href: '/tools/llm-cost-calculator/',
+              desc: 'Kosten pro Request und monatlich über 17 Modelle — inklusive Cached-Input-Ersparnis, damit der 50–90-%-Rabatt in der Rechnung auftaucht.',
+            },
+          },
         ],
       },
       {
@@ -272,7 +300,7 @@ export const llmPricingGuideArticle: LocalizedArticle = {
           'Dann nach Schwierigkeit routen: Klassifizieren und Extrahieren mit dem kleinen Modell, das Flaggschiff für echt hartes Reasoning reservieren. Ein Router, der 80 % des Verkehrs zu einem 10× billigeren Modell schickt, senkt die Mischrechnung mehr als jede Prompt-Optimierung.',
           {
             card: {
-              title: 'LLM-API-Kostenrechner',
+              title: 'LLM-API-Kostenvergleich',
               href: '/tools/llm-api-cost-calculator/',
               desc: 'Monatskosten je Modell aus Tokens-pro-Anfrage und Anfragen-pro-Tag — die Routing-Szenarien Seite an Seite.',
             },
@@ -282,7 +310,7 @@ export const llmPricingGuideArticle: LocalizedArticle = {
       {
         heading: '5. Embeddings: Der Posten, über den du aufhören kannst zu grübeln',
         blocks: [
-          'Embedding-Modelle kosten **$0,02–$0,13 pro Million Tokens** — ein Korpus von einer Milliarde Tokens kostet einmalig zweistellige Dollar-Beträge. In den meisten RAG-Systemen ist die Embedding-API die kleinste Rechnungszeile; die echten Kosten liegen im Vektorspeicher (proportional zu den Dimensionen) und im Retrieval-Compute. Einmal budgetieren, dann die richtige Zeile optimieren.',
+          'Embedding-Modelle kosten **$0,02–$0,13 pro Million Tokens** — ein Korpus von einer Milliarde Tokens kostet einmalig $20–$130. In den meisten RAG-Systemen ist die Embedding-API die kleinste Rechnungszeile; die echten Kosten liegen im Vektorspeicher (proportional zu den Dimensionen) und im Retrieval-Compute. Einmal budgetieren, dann die richtige Zeile optimieren.',
           {
             card: {
               title: 'Embedding-Preisrechner',

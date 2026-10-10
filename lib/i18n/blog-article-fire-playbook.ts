@@ -1,7 +1,7 @@
 /**
  * 《The 2026 FIRE Playbook: Safe Withdrawal Rates, Coast FIRE, and Tax-Advantaged Stacking》
  * Pillar 集群 #3(财务自由,2026-09-05)。
- * 内链:fire-calculator / roth-ira-calculator / retirement-calculator / roi-calculator。
+ * 内链:fire-calculator / roth-ira-calculator / retirement-calculator / roi-calculator / compound-interest-calculator。
  */
 
 import type { LocalizedArticle } from './blog-articles'
@@ -39,6 +39,13 @@ export const firePlaybookArticle: LocalizedArticle = {
           'Full FIRE means your portfolio funds you forever starting tomorrow. **Coast FIRE** is weaker and more useful: your invested assets, with *zero further contributions*, grow to your full FIRE number by traditional retirement age. Once you hit Coast, you only need to cover current expenses — you can downshift careers, take the interesting lower-paying job, and let compounding finish the job.',
           { code: CODE_FIRE },
           'At a 5% real return with 30 years of runway, every $1 invested today is $4.32 at retirement — which is why Coast FIRE typically lands at **20–30% of the full number**. It is the highest-leverage checkpoint in the entire FIRE journey.',
+          {
+            card: {
+              title: 'Compound Interest Calculator',
+              href: '/tools/compound-interest-calculator/',
+              desc: 'Future value with regular contributions at any return rate — the compounding curve that carries a Coast-FIRE portfolio the rest of the way.',
+            },
+          },
         ],
       },
       {
@@ -125,12 +132,19 @@ export const firePlaybookArticle: LocalizedArticle = {
           '完全 FIRE 意味着组合从明天起永远养你。**Coast FIRE** 更弱也更有用:已投资的资产在*零追加*的情况下,到传统退休年龄能自己滚到完整 FIRE 数字。到达 Coast 之后,你只需覆盖当下开销——可以降速换道、接那份有趣但低薪的工作,让复利替你跑完剩下的路。',
           { code: CODE_FIRE },
           '5% 实际回报、30 年跑道下,今天每投 $1,退休时就是 $4.32——这就是为什么 Coast FIRE 通常只有完整数字的 **20–30%**,是整个 FIRE 旅程中杠杆最高的检查点。',
+          {
+            card: {
+              title: '复利计算器',
+              href: '/tools/compound-interest-calculator/',
+              desc: '任意回报率下含定投的终值推演——把 Coast 组合送完剩下那段路的复利曲线。',
+            },
+          },
         ],
       },
       {
         heading: '3. 储蓄率是唯一重要的旋钮',
         blocks: [
-          'FIRE 数学有个残酷的对称性:提高储蓄率同时从两侧攻城——你投得更多,*而且*目标变小,因为开销定义了 FIRE 数字。10% 储蓄率对应约 50 年工龄;25% 约 32 年;50% 约 **17 年**;65% 不到 11 年。',
+          'FIRE 数学有个残酷的不对称性:提高储蓄率同时从两侧进攻——你投得更多,*而且*目标变小,因为开销定义了 FIRE 数字。10% 储蓄率对应约 50 年工龄;25% 约 32 年;50% 约 **17 年**;65% 不到 11 年。',
           '这就是为什么这个运动紧盯住房、交通、食物三大件,而不是拿铁。每月砍掉 $1,000 经常性开销,既一年多投 $12,000,又让所需组合直接减少 **$300,000**。',
         ],
       },
@@ -189,7 +203,7 @@ export const firePlaybookArticle: LocalizedArticle = {
     ],
   },
   es: {
-    lead: 'FIRE no es un sueño de vibras — es una ecuación de solvencia con tres variables: tus gastos, tu cartera y el tiempo. Este playbook cubre el origen real de la regla del 4 %, el atajo de Coast FIRE y el orden de cuentas que decide cuánto de tu número se llevan los impuestos.',
+    lead: 'FIRE no es una vibra — es una ecuación de solvencia con tres variables: tus gastos, tu cartera y el tiempo. Este playbook cubre el origen real de la regla del 4 %, el atajo de Coast FIRE y el orden de cuentas que decide cuánto de tu número se llevan los impuestos.',
     sections: [
       {
         heading: '1. La regla del 4 %: lo que dijo de verdad el Trinity Study',
@@ -208,9 +222,16 @@ export const firePlaybookArticle: LocalizedArticle = {
       {
         heading: '2. Coast FIRE: el hito que lo cambia todo antes',
         blocks: [
-          'El FIRE completo significa que tu cartera te financia para siempre desde mañana. **Coast FIRE** es más débil y más útil: tus activos invertidos, con *cero aportaciones adicionales*, crecen hasta tu número FIRE completo a la edad de jubilación tradicional. Al llegar a Coast solo necesitas cubrir los gastos corrientes — puedes bajar de marcha, aceptar ese trabajo interesante peor pagado y dejar que el compuesto termine el trabajo.',
+          'El FIRE completo significa que tu cartera te financia para siempre desde mañana. **Coast FIRE** es más débil y más útil: tus activos invertidos, con *cero aportaciones adicionales*, crecen hasta tu número FIRE completo a la edad de jubilación tradicional. Al llegar a Coast solo necesitas cubrir los gastos corrientes — puedes bajar de marcha, aceptar ese trabajo interesante peor pagado y dejar que el interés compuesto termine el trabajo.',
           { code: CODE_FIRE },
           'Con un 5 % real y 30 años de pista, cada $1 invertido hoy son $4,32 en la jubilación — por eso Coast FIRE suele caer en el **20–30 % del número completo**. Es el punto de control de mayor apalancamiento de todo el viaje FIRE.',
+          {
+            card: {
+              title: 'Calculadora de interés compuesto',
+              href: '/tools/compound-interest-calculator/',
+              desc: 'Valor futuro con aportaciones a cualquier rentabilidad — la curva de interés compuesto que lleva una cartera Coast el resto del camino.',
+            },
+          },
         ],
       },
       {
@@ -227,7 +248,7 @@ export const firePlaybookArticle: LocalizedArticle = {
           { list: [
             '**401(k) hasta el match del empleador** — un retorno instantáneo del 100 %; nada más compite.',
             '**HSA** — triple ventaja fiscal (deducible al entrar, crece libre, sale libre para gasto médico); tras los 65 funciona como una IRA tradicional.',
-            '**Roth IRA** — pagas ahora, nunca más; décadas de compuesto llegan libres de impuestos, y las aportaciones (no las ganancias) se pueden retirar en cualquier momento — un puente sigiloso hacia el retiro temprano.',
+            '**Roth IRA** — pagas ahora, nunca más; décadas de interés compuesto llegan libres de impuestos, y las aportaciones (no las ganancias) se pueden retirar en cualquier momento — un puente sigiloso hacia el retiro temprano.',
             '**401(k) hasta el máximo** — y la cuenta de bróker gravada, la última.',
           ] },
           '¿Roth o tradicional? Se reduce a una comparación: tu tipo marginal hoy contra tu tipo esperado en el retiro. ¿Ingresos altos en año pico? Tradicional. ¿Carrera temprana o planeando conversiones Roth en años FIRE de bajos ingresos? Roth.',
@@ -243,7 +264,7 @@ export const firePlaybookArticle: LocalizedArticle = {
       {
         heading: '5. Riesgo de secuencia y barandillas: retirarse en pleno crash',
         blocks: [
-          'Dos jubilados con la misma rentabilidad media pueden acabar en lugares opuestos: el que sufrió el crash en los años 1–3 se queda sin nada; el que lo sufrió en el año 25 apenas lo nota. Mitigaciones con historial real: mantén **1–2 años de gastos en efectivo** para no vender nunca en el fondo; usa una **regla de retirada flexible** (salta la subida por inflación tras años malos); y considera una anualidad parcial o una «tienda de bonos» para la frágil primera década.',
+          'Dos jubilados con la misma rentabilidad media pueden acabar en lugares opuestos: el que sufrió el crash en los años 1–3 se queda sin nada; el que lo sufrió en el año 25 apenas lo nota. Mitigaciones con historial real: mantén **1–2 años de gastos en efectivo** para no vender nunca en el fondo; usa una **regla de retirada flexible** (salta la subida por inflación tras años malos); y considera una anualidad parcial o un «bond tent» para la frágil primera década.',
           {
             card: {
               title: 'Calculadora de jubilación',
@@ -297,6 +318,13 @@ export const firePlaybookArticle: LocalizedArticle = {
           'Volles FIRE heißt: Dein Portfolio finanziert dich ab morgen für immer. **Coast FIRE** ist schwächer und nützlicher: Deine angelegten Vermögenswerte wachsen *ohne weitere Einzahlungen* bis zum traditionellen Rentenalter zur vollen FIRE-Zahl. Nach Coast musst du nur die laufenden Ausgaben decken — du kannst runterschalten, den interessanteren, schlechter bezahlten Job nehmen und den Zinseszins den Rest erledigen lassen.',
           { code: CODE_FIRE },
           'Bei 5 % real und 30 Jahren Laufstrecke wird jeder heute investierte $1 zu $4,32 im Ruhestand — darum liegt Coast FIRE typisch bei **20–30 % der vollen Zahl**. Es ist der Checkpoint mit der größten Hebelwirkung der gesamten FIRE-Reise.',
+          {
+            card: {
+              title: 'Zinseszinsrechner',
+              href: '/tools/compound-interest-calculator/',
+              desc: 'Endwert mit laufenden Einzahlungen bei jeder Rendite — die Zinseszins-Kurve, die ein Coast-Portfolio den Rest des Wegs trägt.',
+            },
+          },
         ],
       },
       {

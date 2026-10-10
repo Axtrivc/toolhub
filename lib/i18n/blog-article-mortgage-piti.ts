@@ -26,7 +26,7 @@ export const mortgagePitiGuideArticle: LocalizedArticle = {
         blocks: [
           'A fixed-rate mortgage holds the monthly payment constant for 30 years, but the *composition* of that payment changes every single month. Interest is always charged on the outstanding balance, so the early payments are almost all interest and the late ones almost all principal.',
           { code: CODE_AMORTIZATION },
-          'On a **$360,000 loan at 6.8% for 30 years**, the payment is **$2,347**. Month one splits it into **$2,040 interest and $307 principal** — 87% of your money services debt, 13% builds equity. The principal share does not cross 50% until around **payment 234 (year 19.5)**. That is not a bank conspiracy; it is what "constant payment on a shrinking balance" mathematically requires.',
+          'On a **$360,000 loan at 6.8% for 30 years**, the payment is **$2,347**. Month one splits it into **$2,040 interest and $307 principal** — 87% of your money services debt, 13% builds equity. The principal share does not cross 50% until around **payment 239 (year 19.9)**. That is not a bank conspiracy; it is what "constant payment on a shrinking balance" mathematically requires.',
           {
             card: {
               title: 'Amortization Table Generator',
@@ -59,9 +59,16 @@ export const mortgagePitiGuideArticle: LocalizedArticle = {
       {
         heading: '3. Prepayment: The Five-Figure Lever Hiding in the Schedule',
         blocks: [
-          'Every extra dollar you pay goes **directly to principal**, and every future interest charge is computed on the now-smaller balance. The effect compounds forward: on that $360,000 loan at 6.8%, adding **$200/month** cuts the term by roughly **6 years** and saves about **$92,000 in interest**. A single $10,000 lump sum in year 2 still saves around $28,000.',
+          'Every extra dollar you pay goes **directly to principal**, and every future interest charge is computed on the now-smaller balance. The effect compounds forward: on that $360,000 loan at 6.8%, adding **$200/month** cuts the term by roughly **6 years** and saves about **$117,000 in interest**. A single $10,000 lump sum in year 2 still saves around $52,000.',
           'Two disciplines matter more than the amount. First, **earlier beats bigger**: an extra payment in year 2 saves far more than the same payment in year 20, because it kills decades of future interest. Second, **designate the payment**: write "apply to principal" on the memo line or the servicer may credit it as next month\u2019s payment — same cash, no interest benefit.',
           'The biweekly trick works on the same principle: 26 half-payments equal 13 monthly payments per year, so one full extra payment sneaks in annually without any budgeting pain.',
+          {
+            card: {
+              title: 'Mortgage Calculator (Extra Payments)',
+              href: '/tools/mortgage-calculator/',
+              desc: 'Dial in an extra monthly amount and watch the payoff curve and interest savings move — the $200/month scenario above, run on your numbers.',
+            },
+          },
         ],
       },
       {
@@ -114,7 +121,7 @@ export const mortgagePitiGuideArticle: LocalizedArticle = {
         blocks: [
           '固定利率房贷 30 年月供恒定,但这笔钱的*内部结构*每月都在移动。利息永远按剩余本金计提,所以早期还款几乎全是利息,后期几乎全是本金。',
           { code: CODE_AMORTIZATION },
-          '以 **36 万美元、6.8%、30 年**为例:月供 **$2,347**,第一个月拆成 **$2,040 利息 + $307 本金**——87% 在养债,13% 在积累净资产。本金占比要到**第 234 期(约第 19.5 年)**才过半。这不是银行阴谋,而是"恒定月供 × 递减余额"的数学必然。',
+          '以 **36 万美元、6.8%、30 年**为例:月供 **$2,347**,第一个月拆成 **$2,040 利息 + $307 本金**——87% 在养债,13% 在积累净资产。本金占比要到**第 239 期(约第 19.9 年)**才过半。这不是银行阴谋,而是"恒定月供 × 递减余额"的数学必然。',
           {
             card: {
               title: '摊销表生成器',
@@ -147,9 +154,16 @@ export const mortgagePitiGuideArticle: LocalizedArticle = {
       {
         heading: '3. 提前还款:藏在摊销表里的五位数杠杆',
         blocks: [
-          '每一笔多还的钱都**直接冲减本金**,此后所有利息都按更小的余额计提,效果向前复利:36 万、6.8% 的贷款,每月多还 **$200**,期限缩短约 **6 年**,省下约 **$92,000** 利息;哪怕第 2 年一次性多还 $10,000,也能省约 $28,000。',
+          '每一笔多还的钱都**直接冲减本金**,此后所有利息都按更小的余额计提,效果向前复利:36 万、6.8% 的贷款,每月多还 **$200**,期限缩短约 **6 年**,省下约 **$117,000** 利息;哪怕第 2 年一次性多还 $10,000,也能省约 $52,000。',
           '两条纪律比金额更重要。其一,**越早越值钱**:第 2 年的一笔多还款,消灭的是未来几十年的利息,同样金额在第 20 年还效果差一个数量级。其二,**明确标注用途**:备注"apply to principal",否则服务商可能记成"预缴下月"——钱一样出,省息效果为零。',
           '双周还款法利用同一原理:26 次半月供 = 13 个月供,每年悄悄多还一整期,且毫无预算痛感。',
+          {
+            card: {
+              title: '房贷计算器(提前还款)',
+              href: '/tools/mortgage-calculator/',
+              desc: '填入每月额外还款额,实时查看还清曲线与省息变化——用你的数字重算上面每月多还 $200 的场景。',
+            },
+          },
         ],
       },
       {
@@ -202,7 +216,7 @@ export const mortgagePitiGuideArticle: LocalizedArticle = {
         blocks: [
           'Una hipoteca fija mantiene la cuota constante 30 años, pero la *composición* de esa cuota cambia cada mes. El interés siempre se cobra sobre el saldo vivo, así que las primeras cuotas son casi todo interés y las últimas casi todo capital.',
           { code: CODE_AMORTIZATION },
-          'Con un **préstamo de $360 000 al 6,8 % a 30 años**, la cuota es **$2 347**. El primer mes se divide en **$2 040 de intereses y $307 de capital**: el 87 % alimenta la deuda y el 13 % construye patrimonio. La parte de capital no supera el 50 % hasta el **pago 234 (año 19,5)**. No es una conspiración bancaria: es lo que exige matemáticamente una cuota constante sobre un saldo decreciente.',
+          'Con un **préstamo de $360 000 al 6,8 % a 30 años**, la cuota es **$2 347**. El primer mes se divide en **$2 040 de intereses y $307 de capital**: el 87 % alimenta la deuda y el 13 % construye patrimonio. La parte de capital no supera el 50 % hasta el **pago 239 (año 19,9)**. No es una conspiración bancaria: es lo que exige matemáticamente una cuota constante sobre un saldo decreciente.',
           {
             card: {
               title: 'Generador de tabla de amortización',
@@ -235,9 +249,16 @@ export const mortgagePitiGuideArticle: LocalizedArticle = {
       {
         heading: '3. Amortización anticipada: la palanca de cinco cifras escondida en la tabla',
         blocks: [
-          'Cada dólar extra va **directo a capital**, y todos los intereses futuros se calculan sobre un saldo menor. El efecto se compone hacia adelante: en ese préstamo de $360 000 al 6,8 %, añadir **$200/mes** recorta el plazo unos **6 años** y ahorra unos **$92 000 en intereses**. Un solo pago único de $10 000 en el año 2 aún ahorra alrededor de $28 000.',
+          'Cada dólar extra va **directo a capital**, y todos los intereses futuros se calculan sobre un saldo menor. El efecto se compone hacia adelante: en ese préstamo de $360 000 al 6,8 %, añadir **$200/mes** recorta el plazo unos **6 años** y ahorra unos **$117 000 en intereses**. Un solo pago único de $10 000 en el año 2 aún ahorra alrededor de $52 000.',
           'Dos disciplinas importan más que la cantidad. Primero, **antes gana a más**: un pago extra en el año 2 ahorra mucho más que el mismo pago en el año 20, porque mata décadas de intereses futuros. Segundo, **designa el pago**: escribe «apply to principal» o el administrador puede imputarlo como la cuota del mes siguiente — mismo dinero, cero beneficio de intereses.',
           'El truco quincenal funciona igual: 26 medias cuotas equivalen a 13 mensualidades al año, así que una cuota extra completa se cuela anualmente sin dolor presupuestario.',
+          {
+            card: {
+              title: 'Calculadora de hipoteca (pagos extra)',
+              href: '/tools/mortgage-calculator/',
+              desc: 'Ajusta el pago extra mensual y mira cómo se mueven la curva de amortización y el ahorro — el escenario de $200/mes, con tus números.',
+            },
+          },
         ],
       },
       {
@@ -290,7 +311,7 @@ export const mortgagePitiGuideArticle: LocalizedArticle = {
         blocks: [
           'Eine Festzins-Hypothek hält die Monatsrate 30 Jahre konstant, aber die *Zusammensetzung* dieser Rate ändert sich jeden Monat. Zinsen fallen immer auf den Restsaldo an — frühe Raten sind fast reine Zinsen, späte fast reine Tilgung.',
           { code: CODE_AMORTIZATION },
-          'Bei einem **$360 000-Darlehen zu 6,8 % auf 30 Jahre** liegt die Rate bei **$2 347**. Monat eins teilt sie in **$2 040 Zinsen und $307 Tilgung** — 87 % bedienen die Schuld, 13 % bauen Vermögen auf. Die Tilgung übersteigt 50 % erst um **Rate 234 (Jahr 19,5)**. Das ist keine Banken-Verschwörung, sondern mathematische Folge einer konstanten Rate auf sinkendem Saldo.',
+          'Bei einem **$360 000-Darlehen zu 6,8 % auf 30 Jahre** liegt die Rate bei **$2 347**. Monat eins teilt sie in **$2 040 Zinsen und $307 Tilgung** — 87 % bedienen die Schuld, 13 % bauen Vermögen auf. Die Tilgung übersteigt 50 % erst um **Rate 239 (Jahr 19,9)**. Das ist keine Banken-Verschwörung, sondern mathematische Folge einer konstanten Rate auf sinkendem Saldo.',
           {
             card: {
               title: 'Tilgungsplan-Generator',
@@ -323,9 +344,16 @@ export const mortgagePitiGuideArticle: LocalizedArticle = {
       {
         heading: '3. Sondertilgung: der fünfstellige Hebel im Tilgungsplan',
         blocks: [
-          'Jeder zusätzliche Dollar fließt **direkt in die Tilgung**, und alle künftigen Zinsen berechnen sich auf den kleineren Saldo. Der Effekt zinst sich nach vorn: Bei jenem $360 000-Darlehen zu 6,8 % kürzen **$200/Monat extra** die Laufzeit um rund **6 Jahre** und sparen etwa **$92 000 Zinsen**. Selbst eine einmalige $10 000-Sondertilgung in Jahr 2 spart noch ~$28 000.',
+          'Jeder zusätzliche Dollar fließt **direkt in die Tilgung**, und alle künftigen Zinsen berechnen sich auf den kleineren Saldo. Der Effekt zinst sich nach vorn: Bei jenem $360 000-Darlehen zu 6,8 % kürzen **$200/Monat extra** die Laufzeit um rund **6 Jahre** und sparen etwa **$117 000 Zinsen**. Selbst eine einmalige $10 000-Sondertilgung in Jahr 2 spart noch ~$52 000.',
           'Zwei Disziplinen schlagen den Betrag. Erstens: **Früh schlägt groß** — eine Sondertilgung in Jahr 2 spart um Größenordnungen mehr als dieselbe in Jahr 20, weil sie Jahrzehnte künftiger Zinsen killt. Zweitens: **Zweckbindung angeben** — „apply to principal" auf die Überweisung schreiben, sonst bucht der Servicer sie als nächste Monatsrate: gleiches Geld, null Zinsvorteil.',
           'Der Zwei-Wochen-Trick nutzt dasselbe Prinzip: 26 Halbraten ergeben 13 Monatsraten pro Jahr — eine volle Extrarate schleicht sich jährlich ein, ganz ohne Budget-Schmerz.',
+          {
+            card: {
+              title: 'Hypothekenrechner (Sondertilgung)',
+              href: '/tools/mortgage-calculator/',
+              desc: 'Stelle die monatliche Sondertilgung ein und sieh Tilgungskurve und Zinsersparnis wandern — das $200/Monat-Szenario oben mit deinen Zahlen.',
+            },
+          },
         ],
       },
       {
@@ -335,7 +363,7 @@ export const mortgagePitiGuideArticle: LocalizedArticle = {
           'PMI kostet typisch **0,5–1 % des Darlehens pro Jahr** ($150–$300/Monat bei $360 000) und — der übersehene Teil — endet automatisch bei 78 % LTV im ursprünglichen Plan und kann ab 80 % beantragt werden. Vier Jahre PMI gegen vier Jahre Miete zu tauschen ist häufig das bessere Geschäft.',
           {
             card: {
-              title: 'Eigenkapital-Rechner',
+              title: 'Eigenkapitalrechner',
               href: '/tools/down-payment-calculator/',
               desc: 'Vergleicht Eigenkapital-Stufen gegen PMI-Kosten und Monatsrate — finde die Stufe, an der der Tausch kippt.',
             },

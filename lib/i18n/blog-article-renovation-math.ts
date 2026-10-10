@@ -1,7 +1,7 @@
 /**
  * 《The Contractor\u2019s Guide to Material Estimating: Calculating Tile, Flooring, and Paint Waste Factors》
  * Pillar 集群 #10(家居施工,2026-09-05)。
- * 内链:flooring-calculator / paint-calculator / area-converter。
+ * 内链:flooring-calculator / paint-calculator / area-converter / rectangle-calculator。
  */
 
 import type { LocalizedArticle } from './blog-articles'
@@ -26,6 +26,13 @@ export const renovationMathArticle: LocalizedArticle = {
         blocks: [
           'Every estimate starts with measured area — and rooms are never the rectangles on the floor plan. Measure wall to wall, then subtract what doesn\u2019t get the material (hearths, cabinets, stair openings) and add what does (closets, alcoves). For L-shaped rooms, split into rectangles and sum.',
           'Unit discipline is where estimates die quietly. US stores sell flooring by the square foot and paint by the gallon; many imported tiles are spec\u2019d in centimeters. Convert **once, at the start**: 1 m² = 10.764 ft², 1 ft² = 0.0929 m².',
+          {
+            card: {
+              title: 'Rectangle Calculator',
+              href: '/tools/rectangle-calculator/',
+              desc: 'Length × width for each piece, then sum — the net-area arithmetic for L-shapes and alcoves.',
+            },
+          },
           {
             card: {
               title: 'Area Converter',
@@ -102,6 +109,13 @@ export const renovationMathArticle: LocalizedArticle = {
           '单位纪律是估算悄悄死掉的地方:美国建材按平方英尺卖地板、按加仑卖漆;很多进口瓷砖按厘米标注。**开工前一次性换算**:1 m² = 10.764 ft²,1 ft² = 0.0929 m²。',
           {
             card: {
+              title: '矩形计算器',
+              href: '/tools/rectangle-calculator/',
+              desc: '每段长 × 宽再逐块求和——L 形与凹室的净面积算术。',
+            },
+          },
+          {
+            card: {
               title: '面积换算器',
               href: '/tools/area-converter/',
               desc: 'ft² ↔ m² ↔ yd² 精确系数——下单前换算,别在收银台换算。',
@@ -173,7 +187,14 @@ export const renovationMathArticle: LocalizedArticle = {
         heading: '1. Mide como un contratista: área neta, no la etiqueta del plano',
         blocks: [
           'Todo presupuesto empieza con el área medida — y las habitaciones nunca son los rectángulos del plano. Mide de pared a pared, resta lo que no lleva material (chimeneas, armarios, huecos de escalera) y suma lo que sí (armarios empotrados, rincones). Para habitaciones en L, divide en rectángulos y suma.',
-          'La disciplina de unidades es donde los presupuestos mueren en silencio: las tiendas venden suelos por pie cuadrado y pintura por galón; muchas baldosas importadas vienen en centímetros. Convierte **una vez, al principio**: 1 m² = 10,764 ft², 1 ft² = 0,0929 m².',
+          'La disciplina de unidades es donde los presupuestos mueren en silencio: las tiendas de EE. UU. venden suelos por pie cuadrado y pintura por galón; muchas baldosas importadas vienen en centímetros. Convierte **una vez, al principio**: 1 m² = 10,764 ft², 1 ft² = 0,0929 m².',
+          {
+            card: {
+              title: 'Calculadora de rectángulo',
+              href: '/tools/rectangle-calculator/',
+              desc: 'Largo × ancho de cada pieza y suma — la aritmética de área neta para formas en L y rincones.',
+            },
+          },
           {
             card: {
               title: 'Conversor de área',
@@ -188,7 +209,7 @@ export const renovationMathArticle: LocalizedArticle = {
         blocks: [
           'El defecto para instalación recta es **10 % de desperdicio**: cortes en paredes, el patrón escalonado y las tablas que vas a cortar mal. Los esquemas en diagonal, espiga y chevrón empujan el desperdicio al **15–20 %** — cada pieza perimetral es un corte en ángulo.',
           { code: CODE_MATERIALS },
-          'Dos hábitos profesionales que robar. Primero, **compra todas las cajas del mismo lote** — la misma referencia de distintas tiradas puede variar de tono a simple vista. Segundo, guarda 1–2 cajas de repuesto tras la instalación: dentro de cinco años, una tabla dañada solo se repara si el mismo producto sigue existiendo en tu desván.',
+          'Dos hábitos profesionales que conviene robar. Primero, **compra todas las cajas del mismo lote** — la misma referencia de distintas tiradas puede variar de tono a simple vista. Segundo, guarda 1–2 cajas de repuesto tras la instalación: dentro de cinco años, una tabla dañada solo se repara si el mismo producto sigue existiendo en tu desván.',
           {
             card: {
               title: 'Calculadora de suelos',
@@ -209,7 +230,7 @@ export const renovationMathArticle: LocalizedArticle = {
         heading: '4. Pintura: matemática de cobertura, manos y la cuestión de la imprimación',
         blocks: [
           'El área de pared es perímetro × altura menos huecos (una puerta ≈ 21 ft², una ventana ≈ 15 ft²). Un galón cubre **350–400 ft² por mano** sobre yeso liso — texturas, mampostería en crudo y cambios de oscuro a claro consumen más. La mayoría de repintados necesitan **dos manos**; los cambios dramáticos de color, imprimación más dos.',
-          'Calcula los galones con desperdicio: (área de pared × manos × 1,1) ÷ 350. Una habitación de 12×15 ft con techos de 8 ft da ~400 ft² de pared tras descontar huecos — dos manos con desperdicio son ~2,5 galones: compra 3 y conserva la sin abrir devolubles.',
+          'Calcula los galones con desperdicio: (área de pared × manos × 1,1) ÷ 350. Una habitación de 12×15 ft con techos de 8 ft da ~400 ft² de pared tras descontar huecos — dos manos con desperdicio son ~2,5 galones: compra 3 y guarda el bote sin abrir por si lo tienes que devolver.',
           {
             card: {
               title: 'Calculadora de pintura',
@@ -250,6 +271,13 @@ export const renovationMathArticle: LocalizedArticle = {
           'Einheitendisziplin ist, wo Kalkulationen leise sterben: US-Läden verkaufen Boden pro Quadratfuß und Farbe pro Gallone; viele importierte Fliesen sind in Zentimetern spezifiziert. **Einmal umrechnen, ganz am Anfang**: 1 m² = 10,764 ft², 1 ft² = 0,0929 m².',
           {
             card: {
+              title: 'Rechteck-Rechner',
+              href: '/tools/rectangle-calculator/',
+              desc: 'Länge × Breite je Stück, dann summieren — die Nettoflächen-Arithmetik für L-Formen und Nischen.',
+            },
+          },
+          {
+            card: {
               title: 'Flächen-Umrechner',
               href: '/tools/area-converter/',
               desc: 'ft² ↔ m² ↔ yd² mit exakten Faktoren — vor der Bestellung umrechnen, nicht an der Kasse.',
@@ -283,7 +311,7 @@ export const renovationMathArticle: LocalizedArticle = {
         heading: '4. Farbe: Deckungs-Mathematik, Anstriche und die Grundierungsfrage',
         blocks: [
           'Wandfläche ist Umfang × Höhe minus Öffnungen (Tür ≈ 21 ft², Fenster ≈ 15 ft²). Eine Gallone deckt **350–400 ft² pro Anstrich** auf glattem Trockenbau — Strukturputz, rohes Mauerwerk und Dunkel-auf-Hell-Wechsel verbrauchen mehr. Die meisten Neuanstriche brauchen **zwei Anstriche**; dramatische Farbwechsel Grundierung plus zwei.',
-          'Rechne Gallonen mit Verschnitt: (Wandfläche × Anstriche × 1,1) ÷ 350. Ein 12×15-ft-Raum mit 8-ft-Decken ergibt nach Öffnungen ~400 ft² Wand — zwei Anstriche mit Verschnitt sind ~2,5 Gallonen, also 3 kaufen und die ungeöffnete rückgabefähig halten.',
+          'Rechne Gallonen mit Verschnitt: (Wandfläche × Anstriche × 1,1) ÷ 350. Ein 12×15-ft-Raum mit 8-ft-Decken ergibt nach Öffnungen ~400 ft² Wand — zwei Anstriche mit Verschnitt sind ~2,5 Gallonen, also 3 kaufen und die ungeöffnete noch zurückgeben können.',
           {
             card: {
               title: 'Farbverbrauchs-Rechner',

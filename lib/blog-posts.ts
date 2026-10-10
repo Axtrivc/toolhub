@@ -39,7 +39,7 @@ export const posts: BlogPostMeta[] = [
     description:
       'One dollar, three prices. The 2026 cash stack — emergency fund in HYSA, dated goals in a CD ladder, the real-yield math after inflation, and the APY-vs-APR conversion banks hope you skip.',
     date: '2026-09-05',
-    readTime: '10 min',
+    readTime: '5 min',
     tags: ['hysa', 'cd-ladder', 'cash-management', 'apy', 'inflation'],
     published: true,
     i18n: {

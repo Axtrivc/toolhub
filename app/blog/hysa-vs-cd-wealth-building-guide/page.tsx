@@ -14,7 +14,7 @@ import { BlogArticleBody } from '@/components/BlogArticleBody'
 
 const SLUG = '/blog/hysa-vs-cd-wealth-building-guide/'
 const PUBLISH_DATE = '2026-09-05'
-const READ_TIME = '10 min read'
+const READ_TIME = '5 min read'
 const TITLE = 'HYSA vs. CD vs. Money Market: The Optimal Cash Allocation Strategy for 2026'
 const DESC = 'One dollar, three prices. The 2026 cash stack — emergency fund in HYSA, dated goals in a CD ladder, the real-yield math after inflation, and the APY-vs-APR conversion banks hope you skip.'
 

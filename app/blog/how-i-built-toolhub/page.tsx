@@ -16,6 +16,9 @@ import { BlogArticleBody } from '@/components/BlogArticleBody'
 
 const SLUG = '/blog/how-i-built-toolhub/'
 const PUBLISH_DATE = '2026-08-04'
+// 正文最后一次实质修订(公开指标定格 169 个工具的那次,git acb12ef6)——
+// 与发布日不同,JSON-LD dateModified 单独取该日期。
+const DATE_MODIFIED = '2026-08-13'
 const READ_TIME = '9 min read'
 
 export const metadata: Metadata = {
@@ -69,7 +72,7 @@ const articleJsonLd = {
   description:
     'A no-bullshit architecture retrospective on building ToolHub — Next.js static export, lazy SW caching, pSEO, and zero-CLS AdSense.',
   datePublished: PUBLISH_DATE,
-  dateModified: PUBLISH_DATE,
+  dateModified: DATE_MODIFIED,
   author: { '@type': 'Organization', name: SITE_NAME, url: SITE_URL },
   publisher: { '@type': 'Organization', name: SITE_NAME, url: SITE_URL },
   mainEntityOfPage: `${SITE_URL}${SLUG}`,

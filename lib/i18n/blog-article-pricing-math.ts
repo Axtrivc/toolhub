@@ -2,7 +2,9 @@
  * 《Markup vs. Margin: The Math of Profitable E-commerce and Retail Pricing》
  * Pillar 集群 #8(电商定价,2026-09-05)。
  * 内链:profit-margin-calculator / markup-calculator /
- * freelance-invoice-generator / reverse-stripe-fee-calculator。
+ * reverse-stripe-fee-calculator / ebay-fee-calculator /
+ * freelance-rate-calculator / freelance-invoice-generator /
+ * discount-calculator。
  */
 
 import type { LocalizedArticle } from './blog-articles'
@@ -63,13 +65,27 @@ export const pricingMathArticle: LocalizedArticle = {
               desc: 'Enter what you want to receive — get the exact amount to charge after percentage + flat fees.',
             },
           },
+          {
+            card: {
+              title: 'eBay Fee Calculator',
+              href: '/tools/ebay-fee-calculator/',
+              desc: 'Final value fee, payment processing, and promoted listings — the true net on every eBay or Etsy sale.',
+            },
+          },
         ],
       },
       {
         heading: '4. Freelance Pricing: The Same Math, Dressed as an Invoice',
         blocks: [
-          'Freelancers who price "hours × rate" are doing cost-plus with their own time as the cost. The margin lens still applies: your rate must cover non-billable hours, taxes, software, insurance, and unpaid admin — typically **30–50% of working time is non-billable**. A $60/hour employee equivalent needs $90–120/hour as a freelancer to break even on the same life.',
+          'Freelancers who price "hours × rate" are doing cost-plus with their own time as the cost. The margin lens still applies: your rate must cover non-billable hours, taxes, software, insurance, and unpaid admin — typically **a third to half of working time is non-billable**. A $60/hour employee equivalent needs $90–120/hour as a freelancer to break even on the same life.',
           'Then protect the invoice itself: late fees stated upfront, net-15 not net-60, and a deposit on any engagement over a week. The invoice is a pricing instrument, not paperwork.',
+          {
+            card: {
+              title: 'Freelance Rate Calculator',
+              href: '/tools/freelance-rate-calculator/',
+              desc: 'The $90–120 answer for your own numbers — hourly and daily rates from income, billable share, and expenses.',
+            },
+          },
           {
             card: {
               title: 'Freelance Invoice Generator',
@@ -84,6 +100,13 @@ export const pricingMathArticle: LocalizedArticle = {
         blocks: [
           'Discounts are charged on price but paid from margin. At a 40% margin, a **10% discount cuts profit by 25%** — to earn the same profit, unit volume must rise 33%. At a 25% margin, that same 10% discount needs a 67% volume lift. Most discount campaigns never come close; the spreadsheet knew in advance.',
           'The discipline: before any promotion, compute the volume required to hold profit constant. If the campaign cannot plausibly reach it, the promotion is a donation, not marketing.',
+          {
+            card: {
+              title: 'Discount Calculator',
+              href: '/tools/discount-calculator/',
+              desc: 'Sale price and stacked discounts in one pass — pair it with the margin math before the next promotion goes live.',
+            },
+          },
         ],
       },
       {
@@ -121,7 +144,7 @@ export const pricingMathArticle: LocalizedArticle = {
       {
         heading: '2. 从目标利润率反推定价(而不是凭习惯)',
         blocks: [
-          '成本加成习惯产出"翻倍卖"这种定价——keystone 定价(100% markup)其实只是 50% margin,在你的品类里可能错得离谱。杂货净利 1–3%,服装毛利 50–60%,软件毛利 80%+。定价要从"你的品类活下去需要的利润率"出发,覆盖退货、费率与营销。',
+          '成本加成的习惯只会给出"翻倍卖"这类定价——keystone 定价(100% markup)其实只是 50% margin,在你的品类里可能错得离谱。杂货净利 1–3%,服装毛利 50–60%,软件毛利 80%+。定价要从"你的品类活下去需要的利润率"出发,覆盖退货、费率与营销。',
           '工作公式:**price = cost ÷ (1 − 目标 margin)**。$25 的货要 40% margin?售价 = 25 ÷ 0.6 = **$41.67**——而不是"加 40%"习惯算出的 $35。差出来的 $6.67 乘以销量,就是这门生意本身。',
           {
             card: {
@@ -135,7 +158,7 @@ export const pricingMathArticle: LocalizedArticle = {
       {
         heading: '3. 费用栈:平台实际拿走多少',
         blocks: [
-          '挂牌费率永远不是真实费率。平台与支付层层叠加:eBay 成交费 + 支付处理费;Stripe 2.9% + $0.30;PayPal 类似;再加上运费补贴与退货准备金。$30 的订单上,**2.9% + $0.30 实际是 3.9%**——固定那 $0.30 对小客单惩罚最狠。',
+          '名义费率永远不是真实费率。平台与支付层层叠加:eBay 成交费 + 支付处理费;Stripe 2.9% + $0.30;PayPal 类似;再加上运费补贴与退货准备金。$30 的订单上,**2.9% + $0.30 实际是 3.9%**——固定那 $0.30 对小客单惩罚最狠。',
           '如果你要的是扣费后*净到手*某个数,反解是另一笔账:2.9% + $0.30 的费率下要净收 $100,得开价 **$103.30** 而不是 $102.90——因为费用对"含费总额"计提。',
           {
             card: {
@@ -144,13 +167,27 @@ export const pricingMathArticle: LocalizedArticle = {
               desc: '输入你想净到手的金额——得出百分比 + 固定费之后应该开价多少。',
             },
           },
+          {
+            card: {
+              title: 'eBay 费用计算器',
+              href: '/tools/ebay-fee-calculator/',
+              desc: '成交费、支付处理与推广费逐项算清——每笔 eBay(或 Etsy)订单的真实净到手。',
+            },
+          },
         ],
       },
       {
         heading: '4. 自由职业定价:同一套数学,穿成发票的样子',
         blocks: [
-          '按"时薪 × 小时数"报价的自由职业者,本质是在用自己的时间做成本加成。利润率视角同样适用:你的费率必须覆盖不可计费时间、税负、软件、保险与无偿行政——典型有 **30–50% 的工作时间不可计费**。相当于 $60/小时的雇员,自由职业要报 $90–120/小时 才能维持同等生活。',
+          '按"时薪 × 小时数"报价的自由职业者,本质是在用自己的时间做成本加成。利润率视角同样适用:你的费率必须覆盖不可计费时间、税负、软件、保险与无偿行政——典型有**三分之一到一半的工作时间不可计费**。相当于 $60/小时的雇员,自由职业要报 $90–120/小时才能维持同等生活。',
           '然后保护发票本身:逾期费事先写明、账期 net-15 而非 net-60、超过一周的合作先收定金。发票是定价工具,不是文书工作。',
+          {
+            card: {
+              title: '自由职业报价计算器',
+              href: '/tools/freelance-rate-calculator/',
+              desc: '把 $90–120 的换算换成你自己的数字——由收入、可计费比例与开销推出时薪与日报价。',
+            },
+          },
           {
             card: {
               title: '自由职业发票生成器',
@@ -165,6 +202,13 @@ export const pricingMathArticle: LocalizedArticle = {
         blocks: [
           '折扣按售价让、从利润里扣。40% margin 时,**9 折会砍掉 25% 利润**——要赚回同样利润,销量必须涨 33%。25% margin 时同样 9 折,需要销量涨 67%。多数促销根本达不到;电子表格事前就知道。',
           '纪律只有一条:任何促销前,先算"保持利润不变需要的销量"。活动方案若不可能达到,那不是营销,是捐赠。',
+          {
+            card: {
+              title: '折扣计算器',
+              href: '/tools/discount-calculator/',
+              desc: '促销价与叠加折扣一步算清——下一次活动上线前,先配上这套利润率数学。',
+            },
+          },
         ],
       },
       {
@@ -202,13 +246,13 @@ export const pricingMathArticle: LocalizedArticle = {
       {
         heading: '2. Fijar precio desde un margen objetivo (no desde la costumbre)',
         blocks: [
-          'Los hábitos de coste-plus producen precios tipo «el doble» — el keystone pricing (markup del 100 %) es en realidad un margen del 50 %, que puede estar salvajemente mal en tu categoría. El grocery corre con 1–3 % neto, la moda con 50–60 % bruto, el software con 80 %+ bruto. Precia desde el margen que tu categoría necesita para sobrevivir a devoluciones, comisiones y marketing.',
+          'Los hábitos de coste-plus producen precios tipo «el doble» — el keystone pricing (markup del 100 %) es en realidad un margen del 50 %, que puede estar salvajemente mal en tu categoría. Los supermercados corren con 1–3 % neto, la moda con 50–60 % bruto, el software con 80 %+ bruto. Pon el precio desde el margen que tu categoría necesita para sobrevivir a devoluciones, comisiones y marketing.',
           'La fórmula de trabajo: **precio = coste ÷ (1 − margen objetivo)**. ¿Necesitas 40 % de margen sobre un artículo de $25? Precio = 25 ÷ 0,6 = **$41,67** — no los $35 que produce la costumbre del «40 % de markup». La diferencia de $6,67, multiplicada por volumen, es el negocio.',
           {
             card: {
               title: 'Calculadora de markup',
               href: '/tools/markup-calculator/',
-              desc: 'Convierte cualquier markup en su margen real (y viceversa) — precia desde objetivos, no desde hábitos.',
+              desc: 'Convierte cualquier markup en su margen real (y viceversa) — fija precios desde objetivos, no desde hábitos.',
             },
           },
         ],
@@ -225,13 +269,27 @@ export const pricingMathArticle: LocalizedArticle = {
               desc: 'Introduce lo que quieres recibir — obtén la cantidad exacta a cobrar tras porcentaje + fijo.',
             },
           },
+          {
+            card: {
+              title: 'Calculadora de comisiones de eBay',
+              href: '/tools/ebay-fee-calculator/',
+              desc: 'Comisión de venta, procesamiento y promoción — la ganancia neta real de cada venta en eBay o Etsy.',
+            },
+          },
         ],
       },
       {
         heading: '4. Precios freelance: la misma matemática, vestida de factura',
         blocks: [
-          'El freelance que cobra «horas × tarifa» hace coste-plus con su propio tiempo como coste. La lente del margen sigue aplicando: tu tarifa debe cubrir horas no facturables, impuestos, software, seguros y administración no pagada — típicamente **el 30–50 % del tiempo de trabajo no es facturable**. Un equivalente a empleado de $60/hora necesita $90–120/hora como freelance para empatar la misma vida.',
+          'El freelance que cobra «horas × tarifa» hace coste-plus con su propio tiempo como coste. La lente del margen sigue aplicándose: tu tarifa debe cubrir horas no facturables, impuestos, software, seguros y administración no pagada — típicamente **entre un tercio y la mitad del tiempo de trabajo no es facturable**. Un equivalente a empleado de $60/hora necesita $90–120/hora como freelance para mantener el mismo nivel de vida.',
           'Luego protege la factura misma: recargos por mora declarados por adelantado, net-15 en lugar de net-60, y un depósito en cualquier encargo de más de una semana. La factura es un instrumento de pricing, no papeleo.',
+          {
+            card: {
+              title: 'Calculadora de Tarifas Freelance',
+              href: '/tools/freelance-rate-calculator/',
+              desc: 'La respuesta de los $90–120 con tus propios números — tarifas por hora y por día desde salario, parte facturable y gastos.',
+            },
+          },
           {
             card: {
               title: 'Generador de facturas freelance',
@@ -246,6 +304,13 @@ export const pricingMathArticle: LocalizedArticle = {
         blocks: [
           'Los descuentos se aplican sobre el precio pero se pagan desde el margen. Con un 40 % de margen, un **10 % de descuento recorta el beneficio un 25 %** — para ganar lo mismo, el volumen debe subir un 33 %. Con un 25 % de margen, ese mismo 10 % exige un 67 % más de volumen. La mayoría de campañas ni se acercan; la hoja de cálculo lo sabía de antemano.',
           'La disciplina: antes de cualquier promoción, calcula el volumen necesario para mantener el beneficio. Si la campaña no puede alcanzarlo de forma plausible, la promoción es una donación, no marketing.',
+          {
+            card: {
+              title: 'Calculadora de descuentos',
+              href: '/tools/discount-calculator/',
+              desc: 'Precio de oferta y descuentos apilados de una vez — combínala con la matemática del margen antes de lanzar la próxima promo.',
+            },
+          },
         ],
       },
       {
@@ -297,7 +362,7 @@ export const pricingMathArticle: LocalizedArticle = {
       {
         heading: '3. Der Gebührenstapel: Was die Plattform wirklich nimmt',
         blocks: [
-          'Die ausgewiesene Gebühr ist nie die echte. Marktplätze und Prozessoren stapeln: eBays Verkaufsprovision plus Zahlungsabwicklung; Stripes 2,9 % + $0,30; PayPal ähnlich; dazu Versandzuschüsse und Retouren-Rückstellungen. Bei einer $30-Bestellung sind **2,9 % + $0,30 real 3,9 %** — die flat $0,30 straft kleine Tickets am härtesten.',
+          'Die ausgewiesene Gebühr ist nie die echte. Marktplätze und Prozessoren stapeln: eBays Verkaufsprovision plus Zahlungsabwicklung; Stripes 2,9 % + $0,30; PayPal ähnlich; dazu Versandzuschüsse und Retouren-Rückstellungen. Bei einer $30-Bestellung sind **2,9 % + $0,30 real 3,9 %** — die fixen $0,30 treffen kleine Tickets am härtesten.',
           'Musst du nach Gebühren einen bestimmten Betrag *netto* erhalten, ist das Rückwärtsrechnen eine eigene Rechnung: Um nach 2,9 % + $0,30 genau $100 zu behalten, musst du **$103,30** berechnen, nicht $102,90 — die Gebühr gilt auf das Brutto inklusive der Gebühr selbst.',
           {
             card: {
@@ -306,13 +371,27 @@ export const pricingMathArticle: LocalizedArticle = {
               desc: 'Gib ein, was du erhalten willst — erhalte den exakten Betrag, den du nach Prozentsatz + Fixgebühr berechnen musst.',
             },
           },
+          {
+            card: {
+              title: 'eBay-Gebührenrechner',
+              href: '/tools/ebay-fee-calculator/',
+              desc: 'Verkaufsprovision, Zahlungsabwicklung und Promoted Listings — der wahre Nettoerlös pro eBay- oder Etsy-Verkauf.',
+            },
+          },
         ],
       },
       {
         heading: '4. Freelance-Preise: Dieselbe Mathematik als Rechnung verkleidet',
         blocks: [
-          'Freelancer, die „Stunden × Satz" berechnen, betreiben Cost-plus mit der eigenen Zeit als Kostenbasis. Die Margen-Brille gilt trotzdem: Dein Satz muss nicht fakturierbare Stunden, Steuern, Software, Versicherung und unbezahlte Verwaltung decken — typischerweise **sind 30–50 % der Arbeitszeit nicht fakturierbar**. Ein $60/Stunde-Angestellten-Äquivalent braucht als Freelancer $90–120/Stunde, um dasselbe Leben zu finanzieren.',
+          'Freelancer, die „Stunden × Satz" berechnen, betreiben Cost-plus mit der eigenen Zeit als Kostenbasis. Die Margen-Brille gilt trotzdem: Dein Satz muss nicht fakturierbare Stunden, Steuern, Software, Versicherung und unbezahlte Verwaltung decken — typischerweise **ist ein Drittel bis die Hälfte der Arbeitszeit nicht fakturierbar**. Ein $60/Stunde-Angestellten-Äquivalent braucht als Freelancer $90–120/Stunde, um dasselbe Leben zu finanzieren.',
           'Dann schütze die Rechnung selbst: Verzugszinsen vorab genannt, net-15 statt net-60, und eine Anzahlung bei jedem Auftrag über einer Woche. Die Rechnung ist ein Preis-Instrument, kein Papierkram.',
+          {
+            card: {
+              title: 'Freelance-Stundensatz-Rechner',
+              href: '/tools/freelance-rate-calculator/',
+              desc: 'Die $90–120-Antwort mit deinen eigenen Zahlen — Stunden- und Tagessätze aus Gehalt, fakturierbarem Anteil und Ausgaben.',
+            },
+          },
           {
             card: {
               title: 'Freelance-Rechnungsgenerator',
@@ -327,6 +406,13 @@ export const pricingMathArticle: LocalizedArticle = {
         blocks: [
           'Rabatte werden auf den Preis gewährt, aber aus der Marge bezahlt. Bei 40 % Marge kostet ein **10-%-Rabatt 25 % des Gewinns** — für denselben Gewinn muss das Volumen um 33 % steigen. Bei 25 % Marge braucht derselbe 10-%-Rabatt 67 % mehr Volumen. Die meisten Aktionen kommen nicht annähernd hin; die Tabelle wusste es vorher.',
           'Die Disziplin: Vor jeder Promotion das Volumen berechnen, das den Gewinn konstant hält. Kann die Kampagne das nicht plausibel erreichen, ist die Aktion eine Spende, kein Marketing.',
+          {
+            card: {
+              title: 'Rabattrechner',
+              href: '/tools/discount-calculator/',
+              desc: 'Aktionspreis und gestapelte Rabatte in einem Durchgang — vor der nächsten Aktion mit der Margenmathematik kombinieren.',
+            },
+          },
         ],
       },
       {

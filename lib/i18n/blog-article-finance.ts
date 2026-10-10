@@ -28,7 +28,7 @@ export const mortgageLoanCalculatorsArticle: LocalizedArticle = {
       {
         heading: '2. Extra Payments: the Five-Figure Lever',
         blocks: [
-          'Adding $100–$500 to your monthly payment goes straight to principal, and the effect is non-linear: on a 30-year loan at 6.8%, $200 extra per month typically cuts 6–8 years off the term and saves five figures of interest. You cannot feel that from a single number — you need to see the two balance curves diverge.',
+          'Adding $100–$500 to your monthly payment goes straight to principal, and the effect is non-linear: on a 30-year loan at 6.8%, $200 extra per month typically cuts around 6 years off the term and saves over $100,000 in interest. You cannot feel that from a single number — you need to see the two balance curves diverge.',
           'The mortgage calculator above plots exactly that: your balance with and without the extra payment, with the gap between the curves shaded. The shaded area is the interest you never pay.',
         ],
       },
@@ -133,7 +133,7 @@ export const mortgageLoanCalculatorsArticle: LocalizedArticle = {
       {
         heading: '2. 提前还款:五位数级别的杠杆',
         blocks: [
-          '每月多还 $100–$500 直接冲本金,且效果是非线性的:6.8% 的 30 年贷款每月多还 $200,通常缩短 6–8 年期限、省下五位数利息。单看一个数字感受不到——你需要看到两条余额曲线分开的过程。',
+          '每月多还 $100–$500 直接冲本金,且效果是非线性的:6.8% 的 30 年贷款每月多还 $200,通常缩短约 6 年期限、省下超过 $100,000 的利息。单看一个数字感受不到——你需要看到两条余额曲线分开的过程。',
           '上面的房贷计算器画的就是它:有/无提前还款的余额双曲线,中间阴影区就是你永远不会付的利息。',
         ],
       },
@@ -219,17 +219,17 @@ export const mortgageLoanCalculatorsArticle: LocalizedArticle = {
     ],
   },
   es: {
-    lead: 'El banco te cotiza una cuota que excluye silenciosamente impuestos, seguro y PMI. Aquí está el cálculo que omiten — PITI completo, pagos extra y el año de cruce entre alquilar y comprar — con calculadoras que corren 100% en tu navegador.',
+    lead: 'El banco te cotiza una cuota que excluye silenciosamente impuestos, seguro y PMI. Aquí está el cálculo que omiten — PITI completo, pagos extra y el año de cruce entre alquilar y comprar — con calculadoras que corren 100 % en tu navegador.',
     sections: [
       {
         heading: '1. Tu cuota real es PITI, no solo capital e intereses',
         blocks: [
-          'La cifra que anuncia un banco es solo capital e intereses. El coste mensual real suma impuesto predial, seguro, HOA y — con menos del 20% de entrada — el PMI. En una vivienda de $400,000 con 10% de entrada, solo el PMI añade unos $150/mes que la tasa del anuncio nunca mencionó.',
+          'La cifra que anuncia un banco es solo capital e intereses. El coste mensual real suma impuesto predial, seguro, HOA y — con menos del 20 % de entrada — el PMI. En una vivienda de $400 000 con 10 % de entrada, solo el PMI añade unos $150/mes que la tasa del anuncio nunca mencionó.',
           {
             card: {
               title: 'Calculadora Hipotecaria con PMI e Impuestos',
               href: '/tools/mortgage-calculator/',
-              desc: 'Desglose PITI completo, PMI automático bajo 20% de entrada y comparación de amortización anticipada.',
+              desc: 'Desglose PITI completo, PMI automático bajo 20 % de entrada y comparación de amortización anticipada.',
             },
           },
         ],
@@ -237,7 +237,7 @@ export const mortgageLoanCalculatorsArticle: LocalizedArticle = {
       {
         heading: '2. Pagos extra: la palanca de cinco cifras',
         blocks: [
-          'Añadir $100–$500 mensuales va directo al capital y el efecto no es lineal: en un préstamo a 30 años al 6,8%, $200 extra suelen recortar 6–8 años y ahorrar cinco cifras en intereses. Solo se ve cuando las dos curvas de saldo se separan.',
+          'Añadir $100–$500 mensuales va directo al capital y el efecto no es lineal: en un préstamo a 30 años al 6,8 %, $200 extra suelen recortar unos 6 años y ahorrar más de $100 000 en intereses. Solo se ve cuando las dos curvas de saldo se separan.',
         ],
       },
       {
@@ -276,7 +276,7 @@ export const mortgageLoanCalculatorsArticle: LocalizedArticle = {
       {
         heading: '5. La trampa del pago mínimo',
         blocks: [
-          'Los mínimos de las tarjetas están diseñados para estirar la deuda décadas: $5,000 al 20% TAE pagando solo el mínimo puede tardar más de 15 años y duplicar el coste real. $50 más al mes colapsan ese horizonte.',
+          'Los mínimos de las tarjetas están diseñados para estirar la deuda décadas: $5 000 al 20 % TAE pagando solo el mínimo puede tardar más de 15 años y duplicar el coste real. $50 más al mes colapsan ese horizonte.',
           {
             card: {
               title: 'Calculadora de Pago Mínimo de Tarjeta',
@@ -316,7 +316,7 @@ export const mortgageLoanCalculatorsArticle: LocalizedArticle = {
       {
         heading: 'Por qué estas calculadoras son tan rápidas',
         blocks: [
-          'Cada calculadora es una página estática que corre 100% en tu navegador. Tu salario, saldo y fecha de nacimiento nunca salen del dispositivo — no hay servidor al que enviarlos. Por eso los resultados se actualizan al instante al mover un deslizador.',
+          'Cada calculadora es una página estática que corre 100 % en tu navegador. Tu salario, saldo y fecha de nacimiento nunca salen del dispositivo — no hay servidor al que enviarlos. Por eso los resultados se actualizan al instante al mover un deslizador.',
         ],
       },
     ],
@@ -327,12 +327,12 @@ export const mortgageLoanCalculatorsArticle: LocalizedArticle = {
       {
         heading: '1. Deine echte Rate ist PITI, nicht nur Tilgung und Zins',
         blocks: [
-          'Die beworbene Zahl enthält nur Tilgung und Zins. Die echten Monatskosten addieren Grundsteuer, Versicherung, Hausgeld und — bei unter 20 % Eigenleistung — PMI. Bei einem 400.000-$-Haus mit 10 % Anzahlung bringt allein der PMI rund 150 $/Monat, die der beworbene Satz nie erwähnt.',
+          'Die beworbene Zahl enthält nur Tilgung und Zins. Die echten Monatskosten addieren Grundsteuer, Versicherung, Hausgeld und — bei unter 20 % Eigenleistung — PMI. Bei einem $400 000-Haus mit 10 % Anzahlung bringt allein der PMI rund $150/Monat, die der beworbene Satz nie erwähnt.',
           {
             card: {
               title: 'Hypothekenrechner mit PMI & Steuern',
               href: '/tools/mortgage-calculator/',
-              desc: 'Voller PITI-Breakdown, automatischer PMI unter 20 % Anzahlung und Sondertilgungs-Vergleich.',
+              desc: 'Voller PITI-Breakdown, automatische PMI-Berechnung unter 20 % Anzahlung und Sondertilgungs-Vergleich.',
             },
           },
         ],
@@ -340,7 +340,7 @@ export const mortgageLoanCalculatorsArticle: LocalizedArticle = {
       {
         heading: '2. Sondertilgung: der fünfstellige Hebel',
         blocks: [
-          '100–500 $ extra im Monat gehen direkt auf die Restschuld — und nichtlinear: Bei 30 Jahren und 6,8 % kürzen 200 $ extra meist 6–8 Jahre und sparen fünfstellige Zinsen. Sichtbar wird es erst, wenn die beiden Restschuld-Kurven auseinanderlaufen.',
+          '$100–$500 extra im Monat gehen direkt auf die Restschuld — und nichtlinear: Bei 30 Jahren und 6,8 % kürzen $200 extra meist rund 6 Jahre und sparen über $100 000 Zinsen. Sichtbar wird es erst, wenn die beiden Restschuld-Kurven auseinanderlaufen.',
         ],
       },
       {
@@ -379,12 +379,12 @@ export const mortgageLoanCalculatorsArticle: LocalizedArticle = {
       {
         heading: '5. Die Mindestzahlungs-Falle',
         blocks: [
-          'Karten-Mindestbeträge sind darauf ausgelegt, die Tilgung über Jahrzehnte zu strecken: 5.000 $ bei 20 % APR nur mit Minimum kann über 15 Jahre dauern und die Kosten verdoppeln. 50 $ mehr im Monat kollabieren diesen Horizont.',
+          'Karten-Mindestbeträge sind darauf ausgelegt, die Tilgung über Jahrzehnte zu strecken: $5 000 bei 20 % APR nur mit Minimum kann über 15 Jahre dauern und die Kosten verdoppeln. $50 mehr im Monat kollabieren diesen Horizont.',
           {
             card: {
               title: 'Kreditkarten-Mindestzahlungs-Rechner',
               href: '/tools/credit-card-minimum-payment-calculator/',
-              desc: 'Wie wenig deines Minimums in die Tilgung geht — und die Kurve Minimum vs +50 $/Monat.',
+              desc: 'Wie wenig deines Minimums in die Tilgung geht — und die Kurve Minimum vs +$50/Monat.',
             },
           },
           {

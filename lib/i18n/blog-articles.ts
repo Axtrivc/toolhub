@@ -81,9 +81,9 @@ async function staleWhileRevalidate(request) {
   return cached || networkPromise
 }`
 
-const CODE_AD = `// components/AdPlaceholder.tsx(简化版)
+const CODE_AD = `// components/AdSlot.tsx(简化版)
 <div
-  data-ad-placeholder={slot}
+  data-ad-slot={slot}
   className="min-h-[250px] w-full rounded-xl
              border border-dashed
              bg-slate-100/50 dark:bg-slate-900/30"
@@ -116,9 +116,9 @@ async function staleWhileRevalidate(request) {
   return cached || networkPromise
 }`
 
-const CODE_AD_EN = `// components/AdPlaceholder.tsx (simplified)
+const CODE_AD_EN = `// components/AdSlot.tsx (simplified)
 <div
-  data-ad-placeholder={slot}
+  data-ad-slot={slot}
   className="min-h-[250px] w-full rounded-xl
              border border-dashed
              bg-slate-100/50 dark:bg-slate-900/30"
@@ -146,6 +146,20 @@ export const howIBuiltToolHubArticle: LocalizedArticle = {
             ],
           },
           'None of this is necessary. A *unit converter* does not need a database. A *JSON formatter* does not need a backend. The honest version of these tools is: one HTML file, one small script, runs in your tab, forgets everything when you close it. ToolHub is my attempt to build the honest version, at scale, across **169 tools**.',
+          {
+            card: {
+              title: 'JSON Formatter',
+              href: '/tools/json-formatter/',
+              desc: 'Beautify and validate JSON entirely in your tab — no backend, no tracking, nothing leaves your device.',
+            },
+          },
+          {
+            card: {
+              title: 'Slug Generator',
+              href: '/tools/slug-generator/',
+              desc: 'Clean, SEO-friendly URL slugs from any title — the honest version of "all to compute a slug".',
+            },
+          },
         ],
       },
       {
@@ -188,7 +202,7 @@ export const howIBuiltToolHubArticle: LocalizedArticle = {
         heading: '4. AdSense & Performance: Zero-CLS Placeholders, Sub-Second Loads',
         blocks: [
           'The single biggest performance killer on ad-supported utility sites is **Cumulative Layout Shift** from late-loading ads. The fix is dumb and absolute: *reserve the space before the ad exists*.',
-          'ToolHub renders an `AdPlaceholder` component on every tool page that always occupies a fixed `min-height: 250px` box, whether or not AdSense has filled it yet:',
+          'ToolHub renders an `AdSlot` component on every tool page that always occupies a fixed `min-height: 250px` box, whether or not AdSense has filled it yet:',
           { code: CODE_AD_EN },
           'When AdSense injects a creative, it renders *inside* the already-sized box. The page never moves. CLS from ads is effectively zero. This also happens to be what AdSense reviewers want to see, and it\'s a direct Core Web Vitals ranking signal — so a decision made for UX doubles as an SEO decision.',
           'Combine that with the static-export + SWR story from section 2 and the load math gets boring in the best way:',
@@ -276,6 +290,20 @@ export const howIBuiltToolHubArticle: LocalizedArticle = {
             ],
           },
           '这些都没必要。一个*单位换算器*不需要数据库。一个 *JSON 格式化器*不需要后端。这些工具诚实的样子是:一个 HTML 文件、一小段脚本、在你的标签页里跑、关掉就忘掉一切。ToolHub 是我尝试在 **169 个工具**的规模上,把这种诚实版本做出来。',
+          {
+            card: {
+              title: 'JSON 格式化器',
+              href: '/tools/json-formatter/',
+              desc: '格式化与校验全部在标签页内完成——无后端、无追踪,数据不出设备。',
+            },
+          },
+          {
+            card: {
+              title: 'Slug 生成器',
+              href: '/tools/slug-generator/',
+              desc: '任意标题一键转成干净的 URL slug——"就为了算一个 slug"的诚实版本。',
+            },
+          },
         ],
       },
       {
@@ -318,7 +346,7 @@ export const howIBuiltToolHubArticle: LocalizedArticle = {
         heading: '4. AdSense 与性能:零 CLS 占位、亚秒级加载',
         blocks: [
           '靠广告变现的工具站上,最大的性能杀手是迟加载广告带来的**累计布局偏移(CLS)**。修复办法笨且绝对:*在广告出现之前就把空间留出来*。',
-          'ToolHub 在每个工具页渲染一个 `AdPlaceholder` 组件,永远占一个固定 `min-height: 250px` 的盒子,不管 AdSense 填没填:',
+          'ToolHub 在每个工具页渲染一个 `AdSlot` 组件,永远占一个固定 `min-height: 250px` 的盒子,不管 AdSense 填没填:',
           { code: CODE_AD },
           'AdSense 注入素材时,它渲染在*已经预留好尺寸的盒子*里。页面永远不动。广告带来的 CLS 实际为零。这也正是 AdSense 审核员想看到的样子,而且是直接的 Core Web Vitals 排名信号 —— 所以一个为 UX 做的决定,同时也是个 SEO 决定。',
           '把这个和第 2 节的静态导出 + SWR 故事结合起来,加载的数学会无聊到恰到好处:',
@@ -406,6 +434,20 @@ export const howIBuiltToolHubArticle: LocalizedArticle = {
             ],
           },
           'Nada de esto es necesario. Un *conversor de unidades* no necesita base de datos. Un *formateador JSON* no necesita backend. La versión honrada de estas herramientas es: un archivo HTML, un script pequeño, se ejecuta en tu pestaña y lo olvida todo al cerrarla. ToolHub es mi intento de construir la versión honrada, a escala, en **169 herramientas**.',
+          {
+            card: {
+              title: 'Formateador JSON',
+              href: '/tools/json-formatter/',
+              desc: 'Embellece y valida JSON por completo en tu pestaña — sin backend, sin rastreo, nada sale de tu dispositivo.',
+            },
+          },
+          {
+            card: {
+              title: 'Generador de Slugs',
+              href: '/tools/slug-generator/',
+              desc: 'Slugs de URL limpios a partir de cualquier título — la versión honrada de "todo para calcular un slug".',
+            },
+          },
         ],
       },
       {
@@ -448,7 +490,7 @@ export const howIBuiltToolHubArticle: LocalizedArticle = {
         heading: '4. AdSense y rendimiento: placeholders sin CLS, cargas sub-segundo',
         blocks: [
           'El mayor asesino del rendimiento en sitios de utilidades mantenidos con anuncios es el **Cumulative Layout Shift** por anuncios que cargan tarde. La solución es tonta y absoluta: *reserva el espacio antes de que el anuncio exista*.',
-          'ToolHub renderiza un componente `AdPlaceholder` en cada página de herramienta que siempre ocupa una caja fija de `min-height: 250px`, lo haya llenado AdSense o no:',
+          'ToolHub renderiza un componente `AdSlot` en cada página de herramienta que siempre ocupa una caja fija de `min-height: 250px`, lo haya llenado AdSense o no:',
           { code: CODE_AD_EN },
           'Cuando AdSense inyecta una creatividad, se renderiza *dentro* de la caja ya dimensionada. La página nunca se mueve. El CLS por anuncios es prácticamente cero. Además es justo lo que los revisores de AdSense quieren ver, y es una señal de ranking directa de Core Web Vitals — así que una decisión tomada por UX también es una decisión SEO.',
           'Combina eso con la historia de exportación estática + SWR de la sección 2 y la matemática de carga se vuelve aburrida en el mejor sentido:',
@@ -536,6 +578,20 @@ export const howIBuiltToolHubArticle: LocalizedArticle = {
             ],
           },
           'Nichts davon ist nötig. Ein *Einheiten-Umrechner* braucht keine Datenbank. Ein *JSON-Formatter* braucht kein Backend. Die ehrliche Version dieser Werkzeuge ist: eine HTML-Datei, ein kleines Script, läuft in deinem Tab, vergisst alles beim Schließen. ToolHub ist mein Versuch, die ehrliche Version zu bauen — skaliert, über **169 Werkzeuge**.',
+          {
+            card: {
+              title: 'JSON-Formatter',
+              href: '/tools/json-formatter/',
+              desc: 'JSON vollständig im Tab formatieren und validieren — kein Backend, kein Tracking, nichts verlässt dein Gerät.',
+            },
+          },
+          {
+            card: {
+              title: 'Slug-Generator',
+              href: '/tools/slug-generator/',
+              desc: 'Saubere URL-Slugs aus jedem Titel — die ehrliche Version von „alles, um einen Slug zu berechnen".',
+            },
+          },
         ],
       },
       {
@@ -578,7 +634,7 @@ export const howIBuiltToolHubArticle: LocalizedArticle = {
         heading: '4. AdSense & Performance: Zero-CLS-Platzhalter, Sub-Sekunden-Loads',
         blocks: [
           'Der größte Performance-Killer auf werbefinanzierten Utility-Sites ist der **Cumulative Layout Shift** durch spät ladende Werbung. Der Fix ist dumm und absolut: *reserviere den Raum, bevor die Werbung existiert*.',
-          'ToolHub rendert auf jeder Werkzeugseite eine `AdPlaceholder`-Komponente, die immer eine fixe `min-height: 250px`-Box belegt, unabhängig davon, ob AdSense sie schon gefüllt hat:',
+          'ToolHub rendert auf jeder Werkzeugseite eine `AdSlot`-Komponente, die immer eine fixe `min-height: 250px`-Box belegt, unabhängig davon, ob AdSense sie schon gefüllt hat:',
           { code: CODE_AD_EN },
           'Wenn AdSense eine Creative injiziert, wird sie *innerhalb* der bereits bemessenen Box gerendert. Die Seite bewegt sich nie. CLS durch Werbung ist praktisch null. Das ist auch genau das, was AdSense-Reviewer sehen wollen, und es ist ein direktes Core-Web-Vitals-Ranking-Signal — eine Entscheidung für UX ist also zugleich eine für SEO.',
           'Kombiniere das mit der statischen-Export-+-SWR-Geschichte aus Abschnitt 2, und die Last-Mathematik wird auf die beste Art langweilig:',
