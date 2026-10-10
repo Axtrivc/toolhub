@@ -1,6 +1,6 @@
 /**
  * ip-subnet-calculator 本地化 bundle —— zh / es / de
- * 覆盖:useCases + faqs(client = IpSubnetCalculatorClient = 自定义 devtool client)
+ * 覆盖:ui + formula + useCases + faqs(client = IpSubnetCalculatorClient = 自定义 devtool client)
  */
 import type { ToolL10n } from '../tool-l10n'
 
@@ -11,6 +11,8 @@ export const ipSubnetCalculatorL10n: ToolL10n = {
       'binaryMask': '二进制掩码',
       'broadcastAddress': '广播地址',
       'copySummary': '复制摘要',
+      'clsD': 'D(多播)',
+      'clsE': 'E(实验/保留)',
       'errEnterIp': '请输入带前缀的 IPv4 地址,例如 192.168.1.10/24',
       'errInvalidIp': '无效的 IPv4 地址 "{ip}" —— 应为 4 个 0–255 的八位组',
       'errInvalidMask': '无效的子网掩码 "{mask}"',
@@ -35,6 +37,11 @@ export const ipSubnetCalculatorL10n: ToolL10n = {
       'subnetMask': '子网掩码',
       'summaryTitle': 'IP 子网摘要',
       'totalAddresses': '地址总数',
+      'typeLinkLocal': '链路本地(169.254.0.0/16)',
+      'typeLoopback': '环回(127.0.0.0/8)',
+      'typePrivate': '私有(RFC 1918)',
+      'typePublic': '公网',
+      'typeReserved': '保留',
       'usableHosts': '可用主机数',
       'wildcardMask': '通配符掩码',
     },
@@ -69,6 +76,8 @@ export const ipSubnetCalculatorL10n: ToolL10n = {
       'binaryMask': 'Máscara binaria',
       'broadcastAddress': 'Dirección de broadcast',
       'copySummary': 'Copiar resumen',
+      'clsD': 'D (multidifusión)',
+      'clsE': 'E (experimental)',
       'errEnterIp': 'Introduce una dirección IPv4 con prefijo, p. ej. 192.168.1.10/24',
       'errInvalidIp': 'Dirección IPv4 no válida "{ip}" — se esperan cuatro octetos de 0–255',
       'errInvalidMask': 'Máscara de subred no válida "{mask}"',
@@ -93,6 +102,11 @@ export const ipSubnetCalculatorL10n: ToolL10n = {
       'subnetMask': 'Máscara de subred',
       'summaryTitle': 'Resumen de subred IP',
       'totalAddresses': 'Direcciones totales',
+      'typeLinkLocal': 'Enlace local (169.254.0.0/16)',
+      'typeLoopback': 'Loopback (127.0.0.0/8)',
+      'typePrivate': 'Privada (RFC 1918)',
+      'typePublic': 'Pública',
+      'typeReserved': 'Reservada',
       'usableHosts': 'Hosts utilizables',
       'wildcardMask': 'Máscara comodín',
     },
@@ -127,6 +141,8 @@ export const ipSubnetCalculatorL10n: ToolL10n = {
       'binaryMask': 'Binäre Maske',
       'broadcastAddress': 'Broadcast-Adresse',
       'copySummary': 'Zusammenfassung kopieren',
+      'clsD': 'D (Multicast)',
+      'clsE': 'E (experimentell)',
       'errEnterIp': 'Gib eine IPv4-Adresse mit Präfix ein, z. B. 192.168.1.10/24',
       'errInvalidIp': 'Ungültige IPv4-Adresse "{ip}" — erwartet werden vier Oktette von 0–255',
       'errInvalidMask': 'Ungültige Subnetzmaske "{mask}"',
@@ -151,6 +167,11 @@ export const ipSubnetCalculatorL10n: ToolL10n = {
       'subnetMask': 'Subnetzmaske',
       'summaryTitle': 'IP-Subnetz Zusammenfassung',
       'totalAddresses': 'Adressen gesamt',
+      'typeLinkLocal': 'Link-lokal (169.254.0.0/16)',
+      'typeLoopback': 'Loopback (127.0.0.0/8)',
+      'typePrivate': 'Privat (RFC 1918)',
+      'typePublic': 'Öffentlich',
+      'typeReserved': 'Reserviert',
       'usableHosts': 'Nutzbare Hosts',
       'wildcardMask': 'Wildcard-Maske',
     },

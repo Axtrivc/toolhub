@@ -28,8 +28,8 @@ interface SubnetResult {
   lastUsable: string
   usableHosts: number
   totalAddresses: number
-  ipClass: string
-  addressType: string
+  ipClass: SubnetLabel
+  addressType: SubnetLabel
   binaryMask: string
 }
 
@@ -68,21 +68,27 @@ function prefixToMaskNum(prefix: number): number {
   return prefix === 0 ? 0 : (0xffffffff << (32 - prefix)) >>> 0
 }
 
-function classifyIp(a: number): string {
-  if (a <= 127) return 'A'
-  if (a <= 191) return 'B'
-  if (a <= 223) return 'C'
-  if (a <= 239) return 'D (multicast)'
-  return 'E (experimental)'
+/** 可本地化标签值:key 用于 tui 查询,fb 为英文原值(与 SubnetError 同构) */
+interface SubnetLabel {
+  key: string
+  fb: string
 }
 
-function addressType(octets: number[]): string {
+function classifyIp(a: number): SubnetLabel {
+  if (a <= 127) return { key: 'clsA', fb: 'A' }
+  if (a <= 191) return { key: 'clsB', fb: 'B' }
+  if (a <= 223) return { key: 'clsC', fb: 'C' }
+  if (a <= 239) return { key: 'clsD', fb: 'D (multicast)' }
+  return { key: 'clsE', fb: 'E (experimental)' }
+}
+
+function addressType(octets: number[]): SubnetLabel {
   const [a, b] = octets
-  if (a === 10 || (a === 172 && b >= 16 && b <= 31) || (a === 192 && b === 168)) return 'Private (RFC 1918)'
-  if (a === 127) return 'Loopback (127.0.0.0/8)'
-  if (a === 169 && b === 254) return 'Link-local (169.254.0.0/16)'
-  if (a >= 224) return 'Reserved'
-  return 'Public'
+  if (a === 10 || (a === 172 && b >= 16 && b <= 31) || (a === 192 && b === 168)) return { key: 'typePrivate', fb: 'Private (RFC 1918)' }
+  if (a === 127) return { key: 'typeLoopback', fb: 'Loopback (127.0.0.0/8)' }
+  if (a === 169 && b === 254) return { key: 'typeLinkLocal', fb: 'Link-local (169.254.0.0/16)' }
+  if (a >= 224) return { key: 'typeReserved', fb: 'Reserved' }
+  return { key: 'typePublic', fb: 'Public' }
 }
 
 /** 校验错误:key 用于 tui 查询,fb 为英文原值,vars 填充 {name} 占位符 */
@@ -220,8 +226,8 @@ export function IpSubnetCalculatorClient() {
       [L('lastUsableHost', 'Last Usable Host'), result.lastUsable],
       [L('usableHosts', 'Usable Hosts'), result.usableHosts.toLocaleString('en-US')],
       [L('totalAddresses', 'Total Addresses'), result.totalAddresses.toLocaleString('en-US')],
-      [L('ipClass', 'IP Class'), result.ipClass],
-      [L('addressType', 'Address Type'), result.addressType],
+      [L('ipClass', 'IP Class'), L(result.ipClass.key, result.ipClass.fb)],
+      [L('addressType', 'Address Type'), L(result.addressType.key, result.addressType.fb)],
       [L('binaryMask', 'Binary Mask'), result.binaryMask],
     ]
     // eslint-disable-next-line react-hooks/exhaustive-deps

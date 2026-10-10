@@ -36,8 +36,10 @@ interface DockerRunOptions {
   warnings: string[]
 }
 
-const SAMPLES: Array<{ name: string; cmd: string }> = [
+// nameKey 供 T() 取本地化按钮名,name 为英文兜底(SSR 恒英文)
+const SAMPLES: Array<{ nameKey: string; name: string; cmd: string }> = [
   {
+    nameKey: 'sample.postgres',
     name: 'PostgreSQL Database',
     cmd: `docker run -d \\
   --name my-postgres \\
@@ -50,6 +52,7 @@ const SAMPLES: Array<{ name: string; cmd: string }> = [
   postgres:16-alpine`,
   },
   {
+    nameKey: 'sample.nginx',
     name: 'Nginx Web Server',
     cmd: `docker run -d \\
   --name web-nginx \\
@@ -61,6 +64,7 @@ const SAMPLES: Array<{ name: string; cmd: string }> = [
   nginx:alpine`,
   },
   {
+    nameKey: 'sample.redis',
     name: 'Redis with Custom Command',
     cmd: `docker run -d \\
   --name redis-cache \\
@@ -70,6 +74,7 @@ const SAMPLES: Array<{ name: string; cmd: string }> = [
   redis:7-alpine redis-server --appendonly yes --requirepass mysecret`,
   },
   {
+    nameKey: 'sample.node',
     name: 'Node.js Development',
     cmd: `docker run -it --rm \\
   --name dev-node \\
@@ -664,12 +669,12 @@ export function DockerRunToComposeClient() {
         </span>
         {SAMPLES.map((s) => (
           <button
-            key={s.name}
+            key={s.nameKey}
             type="button"
             onClick={() => setInputCmd(s.cmd)}
             className="px-2.5 py-1 text-xs rounded-md bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 transition-colors"
           >
-            {s.name}
+            {T(s.nameKey, s.name)}
           </button>
         ))}
       </div>

@@ -84,13 +84,13 @@ const PROXY_KEYWORDS = [
 /** ChatGPT/Claude 等 AI 服务不可用的国家/地区(近似清单) */
 const AI_BLOCKED_COUNTRIES = ['CN', 'RU', 'BY', 'IR', 'KP', 'CU', 'SY', 'AF', 'VE', 'HK', 'MO']
 
-/** 全球边缘延迟探测端点(no-cors 计时,只测 RTT 不读内容) */
-const EDGE_ENDPOINTS: { id: string; flag: string; label: string; url: string }[] = [
-  { id: 'us-west', flag: '🇺🇸', label: 'US West (AWS Oregon)', url: 'https://s3.us-west-2.amazonaws.com/?ipq-ping' },
-  { id: 'us-east', flag: '🇺🇸', label: 'US East (AWS N. Virginia)', url: 'https://s3.us-east-1.amazonaws.com/?ipq-ping' },
-  { id: 'tokyo', flag: '🇯🇵', label: 'Tokyo (AWS ap-northeast-1)', url: 'https://s3.ap-northeast-1.amazonaws.com/?ipq-ping' },
-  { id: 'singapore', flag: '🇸🇬', label: 'Singapore (AWS ap-southeast-1)', url: 'https://s3.ap-southeast-1.amazonaws.com/?ipq-ping' },
-  { id: 'frankfurt', flag: '🇩🇪', label: 'Frankfurt (AWS eu-central-1)', url: 'https://s3.eu-central-1.amazonaws.com/?ipq-ping' },
+/** 全球边缘延迟探测端点(no-cors 计时,只测 RTT 不读内容);label 走 tui 按 locale 本地化 */
+const EDGE_ENDPOINTS: { id: string; flag: string; key: string; label: string; url: string }[] = [
+  { id: 'us-west', flag: '🇺🇸', key: 'edgeUsWest', label: 'US West (AWS Oregon)', url: 'https://s3.us-west-2.amazonaws.com/?ipq-ping' },
+  { id: 'us-east', flag: '🇺🇸', key: 'edgeUsEast', label: 'US East (AWS N. Virginia)', url: 'https://s3.us-east-1.amazonaws.com/?ipq-ping' },
+  { id: 'tokyo', flag: '🇯🇵', key: 'edgeTokyo', label: 'Tokyo (AWS ap-northeast-1)', url: 'https://s3.ap-northeast-1.amazonaws.com/?ipq-ping' },
+  { id: 'singapore', flag: '🇸🇬', key: 'edgeSingapore', label: 'Singapore (AWS ap-southeast-1)', url: 'https://s3.ap-southeast-1.amazonaws.com/?ipq-ping' },
+  { id: 'frankfurt', flag: '🇩🇪', key: 'edgeFrankfurt', label: 'Frankfurt (AWS eu-central-1)', url: 'https://s3.eu-central-1.amazonaws.com/?ipq-ping' },
 ]
 
 // ─────────────────────────── 校验 ───────────────────────────
@@ -910,7 +910,7 @@ export function IpCheckerClient() {
                 const p: PingResult = pings[ep.id] ?? { status: 'idle', ms: null }
                 return (
                   <tr key={ep.id} className="border-b last:border-0" style={{ borderColor: 'rgb(var(--border))' }}>
-                    <td className="py-2.5 pr-4 whitespace-nowrap">{ep.flag} {ep.label}</td>
+                    <td className="py-2.5 pr-4 whitespace-nowrap">{ep.flag} {L(ep.key, ep.label)}</td>
                     <td className="py-2.5 pr-4 font-mono text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>
                       {ep.url.replace('https://', '').replace('/?ipq-ping', '')}
                     </td>

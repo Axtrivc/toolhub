@@ -1,6 +1,6 @@
 /**
  * ip-checker 本地化 bundle —— zh / es / de
- * 覆盖:useCases + faqs
+ * 覆盖:ui + useCases + faqs
  */
 import type { ToolL10n } from '../tool-l10n'
 
@@ -10,6 +10,11 @@ export const ipCheckerL10n: ToolL10n = {
       'asn': 'ASN',
       'cfColo': 'CF 节点',
       'customQueryAria': '自定义 IP 或域名查询',
+      'edgeFrankfurt': '法兰克福(AWS eu-central-1)',
+      'edgeSingapore': '新加坡(AWS ap-southeast-1)',
+      'edgeTokyo': '东京(AWS ap-northeast-1)',
+      'edgeUsEast': '美东(AWS 北弗吉尼亚)',
+      'edgeUsWest': '美西(AWS 俄勒冈)',
       'mapTitle': 'IP 位置地图 (OpenStreetMap)',
       'of100': '/ 100',
       'outOf5Stars': '/ 5 星',
@@ -43,6 +48,11 @@ export const ipCheckerL10n: ToolL10n = {
       'asn': 'ASN',
       'cfColo': 'Colo CF',
       'customQueryAria': 'Consulta personalizada de IP o dominio',
+      'edgeFrankfurt': 'Fráncfort (AWS eu-central-1)',
+      'edgeSingapore': 'Singapur (AWS ap-southeast-1)',
+      'edgeTokyo': 'Tokio (AWS ap-northeast-1)',
+      'edgeUsEast': 'Este de EE. UU. (AWS Norte de Virginia)',
+      'edgeUsWest': 'Oeste de EE. UU. (AWS Oregón)',
       'mapTitle': 'Mapa de ubicación IP (OpenStreetMap)',
       'of100': 'de 100',
       'outOf5Stars': 'de 5 estrellas',
@@ -76,6 +86,11 @@ export const ipCheckerL10n: ToolL10n = {
       'asn': 'ASN',
       'cfColo': 'CF-Colo',
       'customQueryAria': 'Eigene IP- oder Domain-Abfrage',
+      'edgeFrankfurt': 'Frankfurt (AWS eu-central-1)',
+      'edgeSingapore': 'Singapur (AWS ap-southeast-1)',
+      'edgeTokyo': 'Tokio (AWS ap-northeast-1)',
+      'edgeUsEast': 'US-Osten (AWS N. Virginia)',
+      'edgeUsWest': 'US-Westen (AWS Oregon)',
       'mapTitle': 'IP-Standortkarte (OpenStreetMap)',
       'of100': 'von 100',
       'outOf5Stars': 'von 5 Sternen',

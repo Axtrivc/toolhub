@@ -72,17 +72,23 @@ export function AmortizationTableGeneratorClient() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [values, locale])
 
-  // 完整逐期 CSV(UTF-8 BOM 供 Excel 识别)
+  // 完整逐期 CSV(UTF-8 BOM 供 Excel 识别);表头走 T 与屏显表格同机制本地化
   const csvContent = useMemo(() => {
     if (result.error) return result.error
     const r = result
-    const header = 'Payment #,Payment,Principal,Interest,Remaining Balance'
+    const header = [
+      T('csvNum', 'Payment #'),
+      T('csvPayment', 'Payment'),
+      T('csvPrincipal', 'Principal'),
+      T('csvInterest', 'Interest'),
+      T('csvBalance', 'Remaining Balance'),
+    ].join(',')
     const body = r.rows
       .map((row) => row.map((x) => (Number.isFinite(x) ? x.toFixed(2) : '')).join(','))
       .join('\n')
     return '\uFEFF' + header + '\n' + body
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [result])
+  }, [result, locale])
 
   const summary = useMemo(() => {
     if (result.error) return result.error

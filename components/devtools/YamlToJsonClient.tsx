@@ -36,6 +36,16 @@ database:
     password: "s3cret"
 `
 
+/** 可本地化解析错误:key 供 tui 查询,fb 为英文原值,vars 填充 {x} 占位符;
+ *  message 仍存英文原文,en / SSR 行为不变(渲染端见下方 catch) */
+class L10nError extends Error {
+  constructor(
+    readonly value: { key: string; fb: string; vars?: Record<string, string> },
+  ) {
+    super(value.fb)
+  }
+}
+
 /** 缩进空格数(行首空格数,tab 视为非法) */
 function indentOf(line: string): number {
   let i = 0
@@ -120,9 +130,10 @@ function parseScalar(raw: string): unknown {
   // 锚点(&)/别名(*):按 YAML 规则纯标量不能以指示符开头;手写解析器不解析
   // 它们,与其静默输出 "&a xxx"/"*ref" 字符串(产出错误数据),不如明确报错
   if (/^[&*]/.test(v)) {
-    throw new Error(
-      'YAML anchors (&) and aliases (*) are not supported. Wrap the value in quotes if it is meant to be a literal string.',
-    )
+    throw new L10nError({
+      key: 'errAnchors',
+      fb: 'YAML anchors (&) and aliases (*) are not supported. Wrap the value in quotes if it is meant to be a literal string.',
+    })
   }
   // 特殊关键字(yes/no/on/off 是 YAML 1.1 遗留布尔,与工具 FAQ 文档口径一致)
   const lower = v.toLowerCase()
@@ -196,21 +207,37 @@ function assertFlatFlow(v: string): void {
       if (c === opener) {
         depth++
         if (depth > 1) {
-          throw new Error(
-            `Nested inline flow (${opener}${closer} inside ${opener}${closer}) is not supported. Put nested collections on their own indented lines (block style) instead.`,
-          )
+          throw new L10nError({
+            key: 'errNestedFlow',
+            fb: `Nested inline flow (${opener}${closer} inside ${opener}${closer}) is not supported. Put nested collections on their own indented lines (block style) instead.`,
+            vars: { pair: `${opener}${closer}` },
+          })
         }
       } else if (c === closer) {
         depth--
-        if (depth < 0) throw new Error(`Unexpected "${closer}" outside an inline flow in "${v}".`)
+        if (depth < 0) {
+          throw new L10nError({
+            key: 'errUnexpectedCloser',
+            fb: `Unexpected "${closer}" outside an inline flow in "${v}".`,
+            vars: { closer, value: v },
+          })
+        }
       } else if (c === '[' || c === ']' || c === '{' || c === '}') {
-        throw new Error(
-          `Mixed/nested inline flow in "${v}" is not supported. Put nested collections on their own indented lines (block style) instead.`,
-        )
+        throw new L10nError({
+          key: 'errMixedFlow',
+          fb: `Mixed/nested inline flow in "${v}" is not supported. Put nested collections on their own indented lines (block style) instead.`,
+          vars: { value: v },
+        })
       }
     }
   }
-  if (depth !== 0) throw new Error(`Unclosed inline flow "${v}" — missing a closing "${closer}".`)
+  if (depth !== 0) {
+    throw new L10nError({
+      key: 'errUnclosedFlow',
+      fb: `Unclosed inline flow "${v}" — missing a closing "${closer}".`,
+      vars: { value: v, closer },
+    })
+  }
 }
 
 /** 解析 inline flow 值:[a, b] / {k: v}。仅做扁平(不嵌套 flow),嵌套显式报错 */
@@ -221,7 +248,13 @@ function parseFlow(raw: string): unknown {
     assertFlatFlow(v)
     const closed =
       (v.startsWith('[') && v.endsWith(']')) || (v.startsWith('{') && v.endsWith('}'))
-    if (!closed) throw new Error(`Malformed inline flow value "${v}" — check brackets and quoting.`)
+    if (!closed) {
+      throw new L10nError({
+        key: 'errMalformedFlow',
+        fb: `Malformed inline flow value "${v}" — check brackets and quoting.`,
+        vars: { value: v },
+      })
+    }
   }
   // 数组 [a, b, c]
   if (v.startsWith('[') && v.endsWith(']')) {
@@ -328,7 +361,11 @@ function parseBlock(ctx: ParseContext, baseIndent: number): unknown {
     if (ind < baseIndent) break
     // 缩进大于 baseIndent → 逻辑错误(应由父级递归处理)
     if (ind > baseIndent) {
-      throw new Error(`Unexpected indentation at line ${ctx.index + 1}`)
+      throw new L10nError({
+        key: 'errIndent',
+        fb: `Unexpected indentation at line ${ctx.index + 1}`,
+        vars: { line: String(ctx.index + 1) },
+      })
     }
     const content = stripped.slice(ind)
 
@@ -407,7 +444,11 @@ function parseBlock(ctx: ParseContext, baseIndent: number): unknown {
       isMap = true
       const key = content.slice(0, ci).trim().replace(/^["']|["']$/g, '')
       if (seenKeys.has(key)) {
-        throw new Error(`Duplicate key "${key}" at line ${ctx.index + 1}`)
+        throw new L10nError({
+          key: 'errDuplicateKey',
+          fb: `Duplicate key "${key}" at line ${ctx.index + 1}`,
+          vars: { key, line: String(ctx.index + 1) },
+        })
       }
       seenKeys.add(key)
       const rest = content.slice(ci + 1).trim()
@@ -426,11 +467,18 @@ function parseBlock(ctx: ParseContext, baseIndent: number): unknown {
       continue
     }
 
-    throw new Error(`Could not parse line ${ctx.index + 1}: "${content}"`)
+    throw new L10nError({
+      key: 'errParseLine',
+      fb: `Could not parse line ${ctx.index + 1}: "${content}"`,
+      vars: { line: String(ctx.index + 1), content },
+    })
   }
 
   if (isSeq && isMap) {
-    throw new Error('Mixed mapping and sequence at the same level is invalid YAML.')
+    throw new L10nError({
+      key: 'errMixedMapSeq',
+      fb: 'Mixed mapping and sequence at the same level is invalid YAML.',
+    })
   }
   result = isSeq ? seq : isMap ? map : null
   return result
@@ -480,7 +528,12 @@ function yamlToJson(yaml: string): { value: unknown; multiDoc: boolean } {
       break
     }
     // tab 在缩进里是非法的
-    if (/^\t/.test(l)) throw new Error('Tabs are not allowed for indentation in YAML (use spaces).')
+    if (/^\t/.test(l)) {
+      throw new L10nError({
+        key: 'errTabs',
+        fb: 'Tabs are not allowed for indentation in YAML (use spaces).',
+      })
+    }
     if (!(l.trim() === '' || l.trim().startsWith('#'))) seenContent = true
     // 块标量起始:"key: |[->]" 或列表项 "- |"(判定条件与下方解析分支保持一致)
     if (
@@ -512,6 +565,15 @@ export function YamlToJsonClient() {
       const parsed = yamlToJson(input)
       return { output: JSON.stringify(parsed.value, null, 2), multiDoc: parsed.multiDoc }
     } catch (e) {
+      // 解析器抛出的可本地化错误:key → tui 查询,{x} 占位符替换(split/join 全量替换,
+      // 同一变量出现多次也能展开);其余异常维持 e.message 原样直出
+      if (e instanceof L10nError) {
+        let s = L(e.value.key, e.value.fb)
+        if (e.value.vars) {
+          for (const [k, val] of Object.entries(e.value.vars)) s = s.split(`{${k}}`).join(val)
+        }
+        return { error: s }
+      }
       return { error: e instanceof Error ? e.message : L('invalidYaml', 'Invalid YAML') }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

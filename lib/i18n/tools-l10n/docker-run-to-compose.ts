@@ -8,6 +8,10 @@ export const dockerRunToComposeL10n: ToolL10n = {
   zh: {
     ui: {
       samplesLabel: '快捷加载示例:',
+      'sample.postgres': 'PostgreSQL 数据库',
+      'sample.nginx': 'Nginx Web 服务器',
+      'sample.redis': 'Redis 自定义命令',
+      'sample.node': 'Node.js 开发环境',
       inputTitle: 'Docker Run 命令输入',
       clearBtn: '清空',
       inputHint: '支持多行反斜杠续行、各种单双引号、端口映射、数据卷、环境变量及常见 docker run 参数。',
@@ -46,6 +50,10 @@ export const dockerRunToComposeL10n: ToolL10n = {
   es: {
     ui: {
       samplesLabel: 'Cargar ejemplo:',
+      'sample.postgres': 'Base de datos PostgreSQL',
+      'sample.nginx': 'Servidor web Nginx',
+      'sample.redis': 'Redis con comando personalizado',
+      'sample.node': 'Desarrollo Node.js',
       inputTitle: 'Comando Docker Run',
       clearBtn: 'Limpiar',
       inputHint: 'Pega cualquier comando docker run o docker create con barras invertidas, puertos, volúmenes y variables de entorno.',
@@ -84,6 +92,10 @@ export const dockerRunToComposeL10n: ToolL10n = {
   de: {
     ui: {
       samplesLabel: 'Beispiel laden:',
+      'sample.postgres': 'PostgreSQL-Datenbank',
+      'sample.nginx': 'Nginx-Webserver',
+      'sample.redis': 'Redis mit eigenem Befehl',
+      'sample.node': 'Node.js-Entwicklung',
       inputTitle: 'Docker Run Befehl',
       clearBtn: 'Leeren',
       inputHint: 'Füge beliebige docker run Befehle mit Backslashes, Ports, Volumes und Umgebungsvariablen ein.',

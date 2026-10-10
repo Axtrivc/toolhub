@@ -133,6 +133,14 @@ export function UserAgentParserClient() {
   // 取本地化 UI 串;缺失回退英文(SSR 恒英文)。
   const L = (key: string, fb: string) => tui('user-agent-parser', locale, key, fb)
 
+  // 解析器的 'Unknown' 是数据层兜底:仅展示层换成本地化,JSON 输出保持英文原值
+  const displayVal = (v: string) => (v === 'Unknown' ? L('unknown', 'Unknown') : v)
+  const deviceTypeLabels: Record<UaResult['deviceType'], string> = {
+    desktop: L('deviceDesktop', 'Desktop'),
+    mobile: L('deviceMobile', 'Mobile'),
+    tablet: L('deviceTablet', 'Tablet'),
+  }
+
   const [text, setText] = useState('')
 
   // 挂载后自动填入当前浏览器 UA(仅 useEffect,避免 hydration 不一致)
@@ -180,14 +188,14 @@ export function UserAgentParserClient() {
         <>
           {/* 概览卡片(解析在粘贴/点击后完成,role=status 让屏幕阅读器播报) */}
           <div role="status" aria-live="polite" className="grid grid-cols-2 gap-3 lg:grid-cols-4">
-            <ResultCard label={L('browserLabel', 'Browser')} value={parsed.browser} sublabel={parsed.browserVersion ? `v${parsed.browserVersion}` : L('versionUnknown', 'version unknown')} highlight />
-            <ResultCard label={L('osLabel', 'Operating System')} value={parsed.os} sublabel={parsed.osVersion || L('versionUnknown', 'version unknown')} />
+            <ResultCard label={L('browserLabel', 'Browser')} value={displayVal(parsed.browser)} sublabel={parsed.browserVersion ? `v${parsed.browserVersion}` : L('versionUnknown', 'version unknown')} highlight />
+            <ResultCard label={L('osLabel', 'Operating System')} value={displayVal(parsed.os)} sublabel={parsed.osVersion || L('versionUnknown', 'version unknown')} />
             <ResultCard
               label={L('deviceTypeLabel', 'Device Type')}
-              value={parsed.deviceType[0].toUpperCase() + parsed.deviceType.slice(1)}
+              value={deviceTypeLabels[parsed.deviceType]}
               sublabel={parsed.isBot ? `${L('botPrefix', 'Bot:')} ${parsed.botName}` : L('notABot', 'not a known bot')}
             />
-            <ResultCard label={L('engineLabel', 'Engine')} value={parsed.engine} />
+            <ResultCard label={L('engineLabel', 'Engine')} value={displayVal(parsed.engine)} />
           </div>
 
           {/* 爬虫提示 */}

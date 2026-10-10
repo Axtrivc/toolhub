@@ -277,22 +277,23 @@ function extractGroupNames(pattern: string): Record<number, string> {
   return names
 }
 
-const CHEAT_SHEET: { syntax: string; desc: string }[] = [
-  { syntax: '.', desc: 'Any char (no newline, unless s flag)' },
-  { syntax: '\\d \\D', desc: 'Digit / Non-digit' },
-  { syntax: '\\w \\W', desc: 'Word char [A-Za-z0-9_] / Non-word' },
-  { syntax: '\\s \\S', desc: 'Whitespace / Non-whitespace' },
-  { syntax: '^ $', desc: 'Start / End of line (with m flag)' },
-  { syntax: '\\b \\B', desc: 'Word boundary / Non-boundary' },
-  { syntax: '[abc]', desc: 'Character set (any of)' },
-  { syntax: '[^abc]', desc: 'Negated character set' },
-  { syntax: 'a|b', desc: 'OR' },
-  { syntax: '(...)', desc: 'Capture group' },
-  { syntax: '(?:...)', desc: 'Non-capturing group' },
-  { syntax: '(?<name>...)', desc: 'Named capture group' },
-  { syntax: '* + ?', desc: '0+ / 1+ / 0 or 1' },
-  { syntax: '{n} {n,m}', desc: 'Exactly n / n to m times' },
-  { syntax: '(?=...) (?!...)', desc: 'Positive / Negative lookahead' },
+// 速查表条目:key 供 tui 查询,fb 为英文原值(与 FLAG_CHIPS 同款路由)
+const CHEAT_SHEET: { syntax: string; key: string; fb: string }[] = [
+  { syntax: '.', key: 'csAny', fb: 'Any char (no newline, unless s flag)' },
+  { syntax: '\\d \\D', key: 'csDigit', fb: 'Digit / Non-digit' },
+  { syntax: '\\w \\W', key: 'csWord', fb: 'Word char [A-Za-z0-9_] / Non-word' },
+  { syntax: '\\s \\S', key: 'csSpace', fb: 'Whitespace / Non-whitespace' },
+  { syntax: '^ $', key: 'csAnchors', fb: 'Start / End of line (with m flag)' },
+  { syntax: '\\b \\B', key: 'csBoundary', fb: 'Word boundary / Non-boundary' },
+  { syntax: '[abc]', key: 'csCharSet', fb: 'Character set (any of)' },
+  { syntax: '[^abc]', key: 'csNegSet', fb: 'Negated character set' },
+  { syntax: 'a|b', key: 'csOr', fb: 'OR' },
+  { syntax: '(...)', key: 'csCapture', fb: 'Capture group' },
+  { syntax: '(?:...)', key: 'csNonCapture', fb: 'Non-capturing group' },
+  { syntax: '(?<name>...)', key: 'csNamedCapture', fb: 'Named capture group' },
+  { syntax: '* + ?', key: 'csQuant', fb: '0+ / 1+ / 0 or 1' },
+  { syntax: '{n} {n,m}', key: 'csRepeat', fb: 'Exactly n / n to m times' },
+  { syntax: '(?=...) (?!...)', key: 'csLookahead', fb: 'Positive / Negative lookahead' },
 ]
 
 const inputCls =
@@ -614,7 +615,7 @@ export function RegexTesterClient() {
           {CHEAT_SHEET.map((c) => (
             <div key={c.syntax} className="rounded-md border p-2 text-xs" style={{ borderColor: 'rgb(var(--border))', backgroundColor: 'rgb(var(--bg-card))' }}>
               <code className="font-semibold text-blue-600 dark:text-blue-400">{c.syntax}</code>
-              <span className="ml-2" style={{ color: 'rgb(var(--text-subtle))' }}>{c.desc}</span>
+              <span className="ml-2" style={{ color: 'rgb(var(--text-subtle))' }}>{L(c.key, c.fb)}</span>
             </div>
           ))}
         </div>

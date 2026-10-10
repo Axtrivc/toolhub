@@ -1,6 +1,6 @@
 /**
  * yaml-to-json 本地化 bundle —— zh / es / de
- * 覆盖:faqs + useCases(交互客户端为自定义组件,UI 本地化留待后续)
+ * 覆盖:ui + useCases + faqs
  */
 import type { ToolL10n } from '../tool-l10n'
 
@@ -9,6 +9,17 @@ export const yamlToJsonL10n: ToolL10n = {
     ui: {
       'clear': '清空',
       'copy': '复制',
+      'errAnchors': '不支持 YAML 锚点(&)和别名(*)。如果值本应是字面字符串,请给它加上引号。',
+      'errDuplicateKey': '第 {line} 行存在重复键 "{key}"',
+      'errIndent': '第 {line} 行出现意外缩进',
+      'errMalformedFlow': '内联流值 "{value}" 格式有误——请检查括号与引号。',
+      'errMixedFlow': '不支持 "{value}" 中的混合/嵌套内联流。请把嵌套集合改写成各自缩进的行(块样式)。',
+      'errMixedMapSeq': '同一层级混用映射与序列不是合法的 YAML。',
+      'errNestedFlow': '不支持嵌套的内联流({pair} 中又出现 {pair})。请把嵌套集合改写成各自缩进的行(块样式)。',
+      'errParseLine': '无法解析第 {line} 行:"{content}"',
+      'errTabs': 'YAML 不允许用 Tab 缩进(请使用空格)。',
+      'errUnclosedFlow': '内联流 "{value}" 未闭合——缺少右括号 "{closer}"。',
+      'errUnexpectedCloser': '在 "{value}" 中发现了内联流之外的 "{closer}"。',
       'inputLabel': '粘贴你的 YAML',
       'invalidYaml': '无效 YAML',
       'multiDocWarning': '检测到多个 YAML 文档(---)。仅转换第一个文档——请删除多余的 --- 分隔符,或分段逐个转换。',
@@ -31,6 +42,17 @@ export const yamlToJsonL10n: ToolL10n = {
     ui: {
       'clear': 'Limpiar',
       'copy': 'Copiar',
+      'errAnchors': 'No se admiten anclas (&) ni alias (*) de YAML. Si el valor debe ser una cadena literal, ponlo entre comillas.',
+      'errDuplicateKey': 'Clave duplicada "{key}" en la línea {line}',
+      'errIndent': 'Sangría inesperada en la línea {line}',
+      'errMalformedFlow': 'Valor de flujo en línea "{value}" mal formado — revisa los corchetes y las comillas.',
+      'errMixedFlow': 'No se admite el flujo en línea mixto/anidado en "{value}". Escribe las colecciones anidadas en sus propias líneas con sangría (estilo de bloque).',
+      'errMixedMapSeq': 'Mezclar mapeo y secuencia en el mismo nivel no es YAML válido.',
+      'errNestedFlow': 'No se admite el flujo en línea anidado ({pair} dentro de {pair}). Escribe las colecciones anidadas en sus propias líneas con sangría (estilo de bloque).',
+      'errParseLine': 'No se pudo analizar la línea {line}: "{content}"',
+      'errTabs': 'No se permiten tabuladores para la indentación en YAML (usa espacios).',
+      'errUnclosedFlow': 'Flujo en línea "{value}" sin cerrar — falta el "{closer}" de cierre.',
+      'errUnexpectedCloser': '"{closer}" inesperado fuera de un flujo en línea en "{value}".',
       'inputLabel': 'Pega tu YAML',
       'invalidYaml': 'YAML inválido',
       'multiDocWarning': 'Se detectaron varios documentos YAML (---). Solo se convirtió el primero. Elimina los separadores "---" sobrantes o convierte los documentos de uno en uno.',
@@ -53,6 +75,17 @@ export const yamlToJsonL10n: ToolL10n = {
     ui: {
       'clear': 'Leeren',
       'copy': 'Kopieren',
+      'errAnchors': 'YAML-Anker (&) und Aliase (*) werden nicht unterstützt. Setze den Wert in Anführungszeichen, wenn es ein literaler String sein soll.',
+      'errDuplicateKey': 'Doppelter Schlüssel "{key}" in Zeile {line}',
+      'errIndent': 'Unerwartete Einrückung in Zeile {line}',
+      'errMalformedFlow': 'Fehlerhafter Inline-Flow-Wert "{value}" — prüfe Klammern und Anführungszeichen.',
+      'errMixedFlow': 'Gemischter/verschachtelter Inline-Flow in "{value}" wird nicht unterstützt. Schreibe verschachtelte Collections in eigene eingerückte Zeilen (Block-Stil).',
+      'errMixedMapSeq': 'Mapping und Sequenz auf derselben Ebene zu mischen ist kein gültiges YAML.',
+      'errNestedFlow': 'Verschachtelter Inline-Flow wird nicht unterstützt ({pair} innerhalb von {pair}). Schreibe verschachtelte Collections in eigene eingerückte Zeilen (Block-Stil).',
+      'errParseLine': 'Zeile {line} konnte nicht geparst werden: "{content}"',
+      'errTabs': 'Tabulatoren sind für Einrückungen in YAML nicht erlaubt (verwende Leerzeichen).',
+      'errUnclosedFlow': 'Unverschlossener Inline-Flow "{value}" — es fehlt ein schließendes "{closer}".',
+      'errUnexpectedCloser': 'Unerwartetes "{closer}" außerhalb eines Inline-Flows in "{value}".',
       'inputLabel': 'Füge dein YAML ein',
       'invalidYaml': 'Ungültiges YAML',
       'multiDocWarning': 'Mehrere YAML-Dokumente erkannt (---). Nur das erste Dokument wurde konvertiert. Entferne überzählige "---"-Trenner oder wandle die Dokumente einzeln um.',

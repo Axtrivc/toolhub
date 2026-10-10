@@ -20,6 +20,14 @@ import { tui } from '@/lib/i18n/tool-l10n'
 const SAMPLE_TOKEN =
   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkphbmUgRG9lIiwiaWF0IjoxNTE2MjM5MDIyLCJleHAiOjQxMDI0NDQ4MDB9.sflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c'
 
+/** 可本地化解析错误:key 供 tui 查询,fb 为英文原值;
+ *  message 仍存英文原文,en / SSR 行为不变(渲染端见下方 catch) */
+class L10nParseError extends Error {
+  constructor(readonly value: { key: string; fb: string }) {
+    super(value.fb)
+  }
+}
+
 /** base64url → base64,补齐 padding,UTF-8 安全解码 */
 function b64urlDecode(str: string): string {
   let s = str.replace(/-/g, '+').replace(/_/g, '/')
@@ -31,7 +39,7 @@ function b64urlDecode(str: string): string {
     const bytes = Uint8Array.from(binary, (c) => c.charCodeAt(0))
     return new TextDecoder('utf-8').decode(bytes)
   } catch {
-    throw new Error('Invalid Base64URL')
+    throw new L10nParseError({ key: 'errBase64', fb: 'Invalid Base64URL' })
   }
 }
 
@@ -43,7 +51,9 @@ interface DecodedJwt {
 
 function decodeJwt(token: string): DecodedJwt {
   const parts = token.trim().split('.')
-  if (parts.length !== 3) throw new Error('A JWT must have exactly 3 parts separated by dots.')
+  if (parts.length !== 3) {
+    throw new L10nParseError({ key: 'errThreeParts', fb: 'A JWT must have exactly 3 parts separated by dots.' })
+  }
   const header = JSON.parse(b64urlDecode(parts[0]))
   const payload = JSON.parse(b64urlDecode(parts[1]))
   return { header, payload, signature: parts[2] }
@@ -77,6 +87,8 @@ export function JwtDecoderClient() {
     try {
       return { decoded: decodeJwt(token) }
     } catch (e) {
+      // 本工具已知错误走 tui 查询;其余异常(如 JSON.parse 的 SyntaxError)维持 e.message 原样直出
+      if (e instanceof L10nParseError) return { error: L(e.value.key, e.value.fb) }
       return { error: e instanceof Error ? e.message : L('invalidJwt', 'Invalid JWT') }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

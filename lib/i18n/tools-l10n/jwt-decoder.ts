@@ -1,6 +1,6 @@
 /**
  * jwt-decoder 本地化 bundle —— zh / es / de
- * 覆盖:faqs + useCases
+ * 覆盖:ui + useCases + faqs
  */
 import type { ToolL10n } from '../tool-l10n'
 
@@ -12,6 +12,8 @@ export const jwtDecoderL10n: ToolL10n = {
       'copy': '复制',
       'copyPayload': '复制 Payload',
       'editResign': '🛠 去 JWT 生成器编辑并重新签名 →',
+      'errBase64': '无效的 Base64URL',
+      'errThreeParts': 'JWT 必须是由点号分隔的 3 个部分。',
       'expiredAgo': '已过期 {dur}',
       'expiryLabel': '过期时间 (exp):',
       'header': '头部',
@@ -52,6 +54,8 @@ export const jwtDecoderL10n: ToolL10n = {
       'copy': 'Copiar',
       'copyPayload': 'Copiar payload',
       'editResign': '🛠 Editar y refirmar en el Generador JWT →',
+      'errBase64': 'Base64URL no válido',
+      'errThreeParts': 'Un JWT debe tener exactamente 3 partes separadas por puntos.',
       'expiredAgo': 'expiró hace {dur}',
       'expiryLabel': 'Caducidad (exp):',
       'header': 'Cabecera',
@@ -92,6 +96,8 @@ export const jwtDecoderL10n: ToolL10n = {
       'copy': 'Kopieren',
       'copyPayload': 'Payload kopieren',
       'editResign': '🛠 Im JWT-Generator bearbeiten & neu signieren →',
+      'errBase64': 'Ungültiges Base64URL',
+      'errThreeParts': 'Ein JWT muss aus genau 3 durch Punkte getrennten Teilen bestehen.',
       'expiredAgo': 'vor {dur} abgelaufen',
       'expiryLabel': 'Ablauf (exp):',
       'header': 'Header',
