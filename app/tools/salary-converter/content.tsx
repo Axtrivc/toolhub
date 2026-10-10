@@ -111,7 +111,7 @@ const es: ReactNode = (
         quincenales y 52 semanas pagadas. Dado un importe anual <code>A</code>:
         <code>monthly = A ÷ 12</code>, <code>bi-weekly = A ÷ 26</code>, y{' '}
         <code>hourly = A ÷ (52 × hours/week)</code>. La semana laboral por defecto es de 40 horas
-        (2.080 horas/año); ajústala para puestos a tiempo parcial o por contrato.
+        (2,080 horas/año); ajústala para puestos a tiempo parcial o por contrato.
       </p>
     </div>
     <div>
@@ -155,7 +155,7 @@ const de: ReactNode = (
         Zahlungszeiträume und 52 bezahlte Wochen. Bei einem Jahresbetrag <code>A</code>:
         <code>monthly = A ÷ 12</code>, <code>bi-weekly = A ÷ 26</code>, und{' '}
         <code>hourly = A ÷ (52 × hours/week)</code>. Die Standardarbeitswoche beträgt 40 Stunden
-        (2.080 Stunden/Jahr); passe sie für Teilzeit- oder Vertragsstellen an.
+        (2,080 Stunden/Jahr); passe sie für Teilzeit- oder Vertragsstellen an.
       </p>
     </div>
     <div>

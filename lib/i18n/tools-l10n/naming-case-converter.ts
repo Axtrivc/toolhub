@@ -69,7 +69,7 @@ export const namingCaseConverterL10n: ToolL10n = {
       },
       {
         q: '¿Cómo detecta los límites de palabra en un nombre?',
-        a: 'El convertidor separa por guiones, guiones bajos, espacios y cambios de mayúsculas, así que HTMLParser, html_parser y html_parser pasan a la misma lista de palabras antes de reformatear. Eso permite convertir entre todos los estilos en ambos sentidos.',
+        a: 'El convertidor separa por guiones, guiones bajos, espacios y cambios de mayúsculas, así que HTMLParser, html_parser y html-parser pasan a la misma lista de palabras antes de reformatear. Eso permite convertir entre todos los estilos en ambos sentidos.',
       },
       {
         q: '¿El modo por lotes mantiene un nombre convertido por línea?',

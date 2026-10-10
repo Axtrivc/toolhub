@@ -102,7 +102,7 @@ export const cssShadowGeneratorL10n: ToolL10n = {
     },
     useCases: [
       'den idealen box-shadow mit Schiebereglern erstellen',
-      'einen Glassmorphismus-Effekt (Frosglas) erzeugen',
+      'einen Glassmorphismus-Effekt (Frostglas) erzeugen',
       'live vorschauen und CSS mit einem Klick kopieren',
       'Schatten für Neumorphismus-Komponenten generieren',
     ],

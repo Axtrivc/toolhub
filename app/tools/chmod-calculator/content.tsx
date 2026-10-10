@@ -19,7 +19,7 @@ const en: ReactNode = (
       change them. This calculator turns the abstract octal and symbolic notations into a clickable grid: tick the
       boxes and instantly see the octal value (<code>755</code>), the symbolic form (<code>rwxr-xr-x</code>), and a
       ready-to-paste <code>chmod</code> command. It also works in reverse — paste <code>644</code> or{' '}
-      <code>rwxr--r--</code> and the grid updates. Everything runs locally in your browser.
+      <code>rw-r--r--</code> and the grid updates. Everything runs locally in your browser.
     </p>
 
     <div>
@@ -65,7 +65,7 @@ const zh: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>这个工具是什么?</h2>
     <p>
-      Linux 文件权限决定了谁能读取、写入或执行每一个文件,而 <code>chmod</code> 就是用来修改它的命令。本计算器把抽象的八进制与符号表示法变成一个可点击的网格:勾选复选框,即可立即看到八进制值(<code>755</code>)、符号形式(<code>rwxr-xr-x</code>)以及一条可直接粘贴的 <code>chmod</code> 命令。它也支持反向操作——粘贴 <code>644</code> 或 <code>rwxr--r--</code>,网格会自动更新。所有运算都在你的浏览器本地完成。
+      Linux 文件权限决定了谁能读取、写入或执行每一个文件,而 <code>chmod</code> 就是用来修改它的命令。本计算器把抽象的八进制与符号表示法变成一个可点击的网格:勾选复选框,即可立即看到八进制值(<code>755</code>)、符号形式(<code>rwxr-xr-x</code>)以及一条可直接粘贴的 <code>chmod</code> 命令。它也支持反向操作——粘贴 <code>644</code> 或 <code>rw-r--r--</code>,网格会自动更新。所有运算都在你的浏览器本地完成。
     </p>
 
     <div>
@@ -96,7 +96,7 @@ const es: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>¿Qué es esta herramienta?</h2>
     <p>
-      Los permisos de archivo de Linux deciden quién puede leer, escribir o ejecutar cada archivo, y <code>chmod</code> es la forma de cambiarlos. Esta calculadora convierte las abstractas notaciones octal y simbólica en una cuadrícula clicable: marca las casillas y verás al instante el valor octal (<code>755</code>), la forma simbólica (<code>rwxr-xr-x</code>) y un comando <code>chmod</code> listo para pegar. También funciona a la inversa — pega <code>644</code> o <code>rwxr--r--</code> y la cuadrícula se actualiza. Todo se ejecuta localmente en tu navegador.
+      Los permisos de archivo de Linux deciden quién puede leer, escribir o ejecutar cada archivo, y <code>chmod</code> es la forma de cambiarlos. Esta calculadora convierte las abstractas notaciones octal y simbólica en una cuadrícula clicable: marca las casillas y verás al instante el valor octal (<code>755</code>), la forma simbólica (<code>rwxr-xr-x</code>) y un comando <code>chmod</code> listo para pegar. También funciona a la inversa — pega <code>644</code> o <code>rw-r--r--</code> y la cuadrícula se actualiza. Todo se ejecuta localmente en tu navegador.
     </p>
 
     <div>
@@ -127,7 +127,7 @@ const de: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>Was ist dieses Tool?</h2>
     <p>
-      Linux-Dateirechte legen fest, wer jede Datei lesen, beschreiben oder ausführen darf, und <code>chmod</code> ist der Befehl, um sie zu ändern. Dieser Rechner verwandelt die abstrakte Oktal- und Symbolnotation in ein klickbares Raster: Setze die Häkchen und sieh sofort den Oktalwert (<code>755</code>), die Symbolform (<code>rwxr-xr-x</code>) und einen fertigen <code>chmod</code>-Befehl zum Einfügen. Es funktioniert auch umgekehrt — füge <code>644</code> oder <code>rwxr--r--</code> ein und das Raster aktualisiert sich. Alles läuft lokal in deinem Browser.
+      Linux-Dateirechte legen fest, wer jede Datei lesen, beschreiben oder ausführen darf, und <code>chmod</code> ist der Befehl, um sie zu ändern. Dieser Rechner verwandelt die abstrakte Oktal- und Symbolnotation in ein klickbares Raster: Setze die Häkchen und sieh sofort den Oktalwert (<code>755</code>), die Symbolform (<code>rwxr-xr-x</code>) und einen fertigen <code>chmod</code>-Befehl zum Einfügen. Es funktioniert auch umgekehrt — füge <code>644</code> oder <code>rw-r--r--</code> ein und das Raster aktualisiert sich. Alles läuft lokal in deinem Browser.
     </p>
 
     <div>

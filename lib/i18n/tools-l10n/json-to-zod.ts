@@ -35,7 +35,7 @@ export const JsonToZodL10n: ToolL10n = {
       'Fijar la forma de un archivo de configuración JSON en un esquema, para que un cambio rompa en la capa de validación',
     ],
     faqs: [
-      { q: '¿Cómo trata los campos null?', a: 'Genera z.null() — solo acepta null — porque así aparece en la muestra. Si el campo puede contener valores reales, ándalo a mano; muchas APIs omiten el campo cuando está vacío: añade .optional() en esos casos, ya que una sola muestra no revela el comportamiento de omisión.' },
+      { q: '¿Cómo trata los campos null?', a: 'Genera z.null() — solo acepta null — porque así aparece en la muestra. Si el campo puede contener valores reales, amplíalo a mano; muchas APIs omiten el campo cuando está vacío: añade .optional() en esos casos, ya que una sola muestra no revela el comportamiento de omisión.' },
       { q: '¿Distingue enteros de decimales?', a: 'Sí: los valores enteros producen z.number().int() y los decimales z.number(). Si tu API puede devolver 19 o 19.99 en el mismo campo (precios, por ejemplo), quita el .int() manualmente.' },
       { q: '¿Y si los objetos del array no coinciden?', a: 'La herramienta muestrea los elementos, infiere hasta 3 formas y genera z.union([...]); un array vacío no aporta forma y cae a z.unknown(). Con más de 3 formas extremas, usa z.unknown() y refina a mano.' },
       { q: '¿En qué se diferencia de json-to-typescript?', a: 'Los tipos TS solo existen en compilación: un JSON sucio rompe en runtime igualmente. Un esquema zod valida campo a campo en ejecución y .parse() devuelve datos fuertemente tipados. Lo habitual es usar ambos: tipos TS para escribir código, zod para vigilar la frontera.' },

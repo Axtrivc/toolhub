@@ -59,7 +59,7 @@ export const textCleanerL10n: ToolL10n = {
   },
   es: {
     ui: {
-      'chars': 'caracts',
+      'chars': 'caracteres',
       'cleanedText': 'Texto limpio',
       'clear': 'Limpiar',
       'copy': 'Copiar',

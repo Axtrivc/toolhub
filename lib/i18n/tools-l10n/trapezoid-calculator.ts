@@ -16,6 +16,7 @@ export const trapezoidCalculatorL10n: ToolL10n = {
       'in.b': '下底 (b)',
       'in.h': '高 (h)',
       'out.area': '面积',
+      errNonNegative: '边长和高不能为负',
       note: '📐 梯形面积 = 平行边平均值 × 高。',
     },
     useCases: [
@@ -38,6 +39,7 @@ export const trapezoidCalculatorL10n: ToolL10n = {
       'in.b': 'Lado inferior (b)',
       'in.h': 'Altura (h)',
       'out.area': 'Área',
+      errNonNegative: 'Los lados y la altura no pueden ser negativos',
       note: '📐 El área del trapecio = promedio de los lados paralelos × altura.',
     },
     useCases: [
@@ -60,6 +62,7 @@ export const trapezoidCalculatorL10n: ToolL10n = {
       'in.b': 'Untere Seite (b)',
       'in.h': 'Höhe (h)',
       'out.area': 'Fläche',
+      errNonNegative: 'Seiten und Höhe dürfen nicht negativ sein',
       note: '📐 Trapezfläche = Durchschnitt der parallelen Seiten × Höhe.',
     },
     useCases: [

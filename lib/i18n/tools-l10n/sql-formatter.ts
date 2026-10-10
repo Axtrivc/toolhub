@@ -60,7 +60,7 @@ export const sqlFormatterL10n: ToolL10n = {
       'minifiedSql': 'Minifiziertes SQL',
       'modeFormat': 'formatieren',
       'modeMinify': 'minifizieren',
-      'note': '🔒 100% clientseitig — ein generischer ANSI-SQL-Formatter. Schlüsselwörter werden großgeschrieben; die Einrückung folgt der Klausel­hierarchie.',
+      'note': '🔒 100% clientseitig — ein generischer ANSI-SQL-Formatter. Schlüsselwörter werden großgeschrieben; die Einrückung folgt der Klauselhierarchie.',
     },
     useCases: [
       'minimiertes SQL aus Logs formatieren',
@@ -71,7 +71,7 @@ export const sqlFormatterL10n: ToolL10n = {
     faqs: [
       { q: 'Welchen SQL-Dialekt formatiert das Werkzeug?', a: 'Es wendet generische ANSI-SQL-Formatierung an, die für MySQL, PostgreSQL, SQLite, SQL Server und Oracle funktioniert. Die wichtigsten Schlüsselwörter (SELECT, FROM, WHERE, JOIN, GROUP BY, ORDER BY, INSERT, UPDATE, DELETE) werden erkannt und großgeschrieben. Dialektspezifische Syntax (PL/pgSQL-Blöcke, T-SQL-Variablen) wird eventuell nicht perfekt eingerückt.' },
       { q: 'Validiert oder führt es meine Abfrage aus?', a: 'Nein. Es ist ein reiner Formatter — er rückt neu ein und schreibt Schlüsselwörter groß, prüft aber nicht, ob die Abfrage gültiges SQL ist, und führt sie nicht gegen eine Datenbank aus. Das heißt, er formatiert fröhlich eine Abfrage mit Syntaxfehler; er macht den Text nur besser lesbar.' },
-      { q: 'Kann es SQL auch minimieren statt nur verschönern?', a: 'Ja. Nutze die Option „Minify", um die Abfrage mit normalisierten Leerzeichen in eine Zeile zu falten — praktisch, um Queries kompakt zu speichern oder zu versenden. Schalte zurück auf „Format", um sie wieder zu erweitern und zu bearbeiten.' },
+      { q: 'Kann es SQL auch minimieren statt nur verschönern?', a: 'Ja. Nutze die Option „Minify“, um die Abfrage mit normalisierten Leerzeichen in eine Zeile zu falten — praktisch, um Queries kompakt zu speichern oder zu versenden. Schalte zurück auf „Format“, um sie wieder zu erweitern und zu bearbeiten.' },
     ],
   },
 }

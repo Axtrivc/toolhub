@@ -493,7 +493,8 @@ export function AgeDifferenceCalculatorClient() {
     return {
       diff: T('ymdFormat', '{y} years, {m} months, {d} days')
         .replace('{y}', String(years))
-        .replace('{m}', String(months))
+        // months 是锚定后的总月数,展示须取 12 的余数(与 AgeCalculatorClient 展示一致)
+        .replace('{m}', String(months % 12))
         .replace('{d}', String(days)),
       days: T('daysN', '{n} days').replace('{n}', fmtNum(totalDays, 0)),
     }

@@ -115,6 +115,12 @@ function renderInline(text: string): string {
   // URL 内含未闭合 '(' 时保留尾部 ')'(wiki 风格括号)。
   s = s.replace(/\bhttps?:\/\/[^\s<]+/g, (m) => {
     let url = m
+    // 行尾硬换行标记 \uE004 非 \s,会被本正则吞进 URL:先剥出、</a> 之后回填,防泄入 href/链接文本
+    let hardBreak = ''
+    if (url.endsWith('\uE004')) {
+      hardBreak = '\uE004'
+      url = url.slice(0, -1)
+    }
     let trailing = ''
     const t = url.match(/[.,;:!?)\]]+$/)
     if (t) {
@@ -127,7 +133,7 @@ function renderInline(text: string): string {
         open--
       }
     }
-    return `<a href="${url}">${url}</a>${trailing}`
+    return `<a href="${url}">${url}</a>${trailing}${hardBreak}`
   })
   // 删除线 ~~text~~
   s = s.replace(/~~([^~]+)~~/g, '<del>$1</del>')

@@ -11,7 +11,7 @@ import { tui } from '@/lib/i18n/tool-l10n'
  * 单一数据源:mode(0–0o7777 的数字)。勾选矩阵 / 特殊位 / 文本输入(八进制或符号)
  * 都只是 mode 的不同读写视图,双向同步:
  *  - 点 checkbox → 重算八进制/符号串并回填文本框;
- *  - 文本框输入 644 或 rwxr--r-- → 解析成功即更新 checkbox,失败显示轻量错误。
+ *  - 文本框输入 644 或 rw-r--r-- → 解析成功即更新 checkbox,失败显示轻量错误。
  */
 
 // 位布局:user/group/other 各占 3 位;setuid/setgid/sticky 在高三位
@@ -213,7 +213,7 @@ export function ChmodCalculatorClient() {
           value={textValue}
           onChange={(e) => handleTextChange(e.target.value)}
           spellCheck={false}
-          placeholder={L('inputPlaceholder', '644 or rwxr--r--')}
+          placeholder={L('inputPlaceholder', '644 or rw-r--r--')}
           className="w-full rounded-lg border p-4 font-mono text-sm shadow-sm outline-none transition focus:ring-2"
           style={{
             borderColor: textError ? 'rgb(239 68 68)' : 'rgb(var(--border-strong))',

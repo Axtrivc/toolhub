@@ -650,6 +650,10 @@ export const COMMON_UC_UI: Record<Exclude<Locale, 'en'>, Record<string, string>>
     generatedBy: '由 ToolHub 生成',
     swapUnits: '交换单位',
     swap: '互换',
+    // All-units 同显面板(makeUnitConverter)
+    allUnits: '所有单位',
+    allUnitsHint: '点击任一单位将其设为换算目标',
+    sourceUnitTag: '输入',
   },
   es: {
     convert: 'Convertir',
@@ -669,6 +673,10 @@ export const COMMON_UC_UI: Record<Exclude<Locale, 'en'>, Record<string, string>>
     generatedBy: 'Generado por ToolHub',
     swapUnits: 'Intercambiar unidades',
     swap: 'Intercambiar',
+    // Panel «todas las unidades» (makeUnitConverter)
+    allUnits: 'Todas las unidades',
+    allUnitsHint: 'Haz clic en una unidad para fijarla como destino',
+    sourceUnitTag: 'entrada',
   },
   de: {
     convert: 'Umrechnen',
@@ -688,6 +696,10 @@ export const COMMON_UC_UI: Record<Exclude<Locale, 'en'>, Record<string, string>>
     generatedBy: 'Erstellt von ToolHub',
     swapUnits: 'Einheiten tauschen',
     swap: 'Tauschen',
+    // Alle-Einheiten-Panel (makeUnitConverter)
+    allUnits: 'Alle Einheiten',
+    allUnitsHint: 'Klicke auf eine Einheit, um sie als Ziel festzulegen',
+    sourceUnitTag: 'Eingabe',
   },
 }
 

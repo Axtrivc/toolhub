@@ -15,6 +15,7 @@ export const incomeTaxEstimatorL10n: ToolL10n = {
       { q: '为什么工资条上预扣的税更多?', a: '雇主按你预计的年度税款加上一个安全余量来预扣。预扣是估算;你的实际税款在报税时结算。多预了就会退税。' },
     ],
     ui: {
+      errNonNegative: '收入不能为负',
       'in.income': '年收入', 'in.filing': '申报身份',
       'opt.filing.single': '单身', 'opt.filing.hoh': '户主', 'opt.filing.married': '已婚,联合申报',
       'out.tax': '预估联邦税', 'out.effective': '实际税率', 'out.fica': '预估 FICA', 'outSub.fica': '社保 + 医保', 'out.takehome': '预估到手收入', 'outSub.takehome': '扣除联邦税 + FICA 后',
@@ -32,6 +33,7 @@ export const incomeTaxEstimatorL10n: ToolL10n = {
       { q: '¿Por qué mi nómina muestra más impuesto retenido?', a: 'Los empleadores retienen según tu impuesto anual previsto más un margen de seguridad. Las retenciones son estimaciones; tu impuesto real se ajusta al declarar. Si pagaste de más, recibes un reembolso.' },
     ],
     ui: {
+      errNonNegative: 'Los ingresos no pueden ser negativos',
       'in.income': 'Ingresos anuales', 'in.filing': 'Estado civil',
       'opt.filing.single': 'Soltero', 'opt.filing.hoh': 'Cabeza de familia', 'opt.filing.married': 'Casado, declaración conjunta',
       'out.tax': 'Impuesto federal estimado', 'out.effective': 'Tipo efectivo', 'out.fica': 'FICA estimado', 'outSub.fica': 'Seguridad Social + Medicare', 'out.takehome': 'Renta neta estimada', 'outSub.takehome': 'Tras impuesto federal + FICA',
@@ -49,6 +51,7 @@ export const incomeTaxEstimatorL10n: ToolL10n = {
       { q: 'Warum zeigt meine Lohnabrechnung mehr einbehaltene Steuer?', a: 'Arbeitgeber behalten nach deiner voraussichtlichen Jahressteuer plus einer Sicherheitsmarge ein. Die Einbehalte sind Schätzungen; deine tatsächliche Steuer wird bei der Steuererklärung verrechnet. Zu viel gezahlt führt zu einer Rückerstattung.' },
     ],
     ui: {
+      errNonNegative: 'Das Einkommen darf nicht negativ sein',
       'in.income': 'Jahreseinkommen', 'in.filing': 'Steuerklasse',
       'opt.filing.single': 'Allein', 'opt.filing.hoh': 'Haushaltsvorstand', 'opt.filing.married': 'Verheiratet, gemeinsam',
       'out.tax': 'Geschätzte Bundessteuer', 'out.effective': 'Effektivsteuersatz', 'out.fica': 'Geschätzte FICA', 'outSub.fica': 'Social Security + Medicare', 'out.takehome': 'Geschätztes Netto', 'outSub.takehome': 'Nach Bundessteuer + FICA',

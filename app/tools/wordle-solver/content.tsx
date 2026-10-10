@@ -145,8 +145,8 @@ const de: ReactNode = (
       Ein <strong>Wordle-Solver und Wort-Finder</strong>, der ein eingebautes Wörterbuch häufiger englischer
       Fünfbuchstabenwörter auf die eingrenzt, die zu dem passen, was du schon weißt: feste grüne Positionen,
       Buchstaben, die das Wort enthalten muss, und Buchstaben, die es nicht enthalten darf. Ein Anagramm-Modus
-      findet jedes Wort, das du aus einem Buchstabenpool bilden kannst, und du kannst eigene Zusatzwörter
-      einfügen. Alles läuft zu 100 % in deinem Browser — keine Lookups, kein Netzwerk.
+      findet jedes Wort, das du aus einem Buchstabenpool bilden kannst, und du kannst eigene zusätzliche
+      Wörter einfügen. Alles läuft zu 100 % in deinem Browser — keine Lookups, kein Netzwerk.
     </p>
 
     <div>

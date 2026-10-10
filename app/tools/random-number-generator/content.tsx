@@ -159,7 +159,7 @@ const de: ReactNode = (
       <h2>Häufige Einsatzzwecke</h2>
       <ul>
         <li>Gerecht einen Gewinn für Wettbewerb oder Verlosung ziehen</li>
-        <li>Loteriezahlen-Kombinationen erzeugen</li>
+        <li>Lotteriezahlen-Kombinationen erzeugen</li>
         <li>Schüler- oder Teamauswahl randomisieren</li>
         <li>Monte-Carlo-Simulationen durchführen</li>
         <li>Code mit zufälligen Eingaben testen</li>

@@ -44,7 +44,9 @@ export function repairJson(input: string): { output: string; log: string[]; ok: 
   const firstObj = s.search(/[{[]/)
   const lastObj = Math.max(s.lastIndexOf('}'), s.lastIndexOf(']'))
   if (firstObj > 0 || (lastObj >= 0 && lastObj < s.length - 1)) {
-    s = s.slice(firstObj, lastObj + 1)
+    // 全文无任何闭合括号:带前导文本的截断输出,slice 到 -1+1=0 会把内容
+    // 清空。保留到末尾,交给第 9 步栈式补全收尾。
+    s = lastObj === -1 ? s.slice(firstObj) : s.slice(firstObj, lastObj + 1)
     log.push('Trimmed text outside the outermost { } or [ ]')
   }
 
