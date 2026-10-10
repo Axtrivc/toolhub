@@ -8,7 +8,7 @@ export function RandomTeamGeneratorContent() {
       <h2>Why shuffle-then-deal</h2>
       <p>Fisher-Yates shuffling gives every permutation identical probability, then round-robin dealing keeps sizes within one player across teams. Naive approaches (picking random names per slot) subtly favor earlier slots.</p>
       <h2>Keeping rival pairs apart</h2>
-      <p>Paste names with temporary prefixes to force outcomes: put two must-not-team members into the same numbered line position logic by splitting lists manually, then reshuffle the rest. Simple beats configurable for one-off splits.</p>
+      <p>Input order cannot force outcomes — the shuffle erases it before dealing. To keep two people together, put them on one line ("Alex &amp; Sam") so they are dealt as a single unit; to keep two apart, generate and hit Reshuffle if they land together. Simple beats configurable for one-off splits.</p>
       <h2>Beyond sports teams</h2>
       <p>Code review pair rotations, presentation orders, room assignments at events, dinner groups at conferences — anywhere a visible-fair split defuses "you always pick favorites".</p>
     </section>

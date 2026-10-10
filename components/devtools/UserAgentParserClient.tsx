@@ -13,6 +13,7 @@ import { tui } from '@/lib/i18n/tool-l10n'
  * (初始 text 为空串,预渲染输出与客户端首帧一致)。
  * 解析顺序敏感:Edge/Opera/Samsung/Yandex 的 UA 都含 "Chrome",必须先于 Chrome 匹配;
  * Firefox iOS 的 UA 只含 "FxiOS/" 不含 "Firefox/",需独立分支先于 Firefox 匹配;
+ * Chrome iOS 同理只含 "CriOS/" 不含 "Chrome/",独立分支兜住(与 FxiOS 相邻);
  * Android/iOS UA 含 "Linux"/"Mac OS X" 字样,必须先于桌面 OS 匹配。
  */
 
@@ -57,6 +58,9 @@ function parseUserAgent(ua: string): UaResult {
   } else if ((m = ua.match(/FxiOS\/([\d.]+)/))) {
     browser = 'Firefox iOS'
     browserVersion = m[1]
+  } else if ((m = ua.match(/CriOS\/([\d.]+)/))) {
+    browser = 'Google Chrome iOS'
+    browserVersion = m[1]
   } else if ((m = ua.match(/Firefox\/([\d.]+)/))) {
     browser = 'Mozilla Firefox'
     browserVersion = m[1]
@@ -99,7 +103,7 @@ function parseUserAgent(ua: string): UaResult {
   } else if ((m = ua.match(/Android[\s/]([\d.]+)/))) {
     os = 'Android'
     osVersion = m[1]
-  } else if ((m = ua.match(/Mac OS X ([\d_]+)/))) {
+  } else if ((m = ua.match(/Mac OS X ([\d_.]+)/))) {
     os = 'macOS'
     osVersion = m[1].replace(/_/g, '.')
   } else if (/Linux/.test(ua)) {

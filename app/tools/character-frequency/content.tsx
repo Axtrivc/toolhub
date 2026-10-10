@@ -11,7 +11,7 @@ const en: ReactNode = (
     <p>This tool counts how often each character appears in your text, sorted by frequency. Useful for writing analysis, cryptanalysis, and understanding text patterns.</p>
     <div>
       <h2>Letter Frequency in English</h2>
-      <p>In typical English text, the most common letters are E, T, A, O, I, N &mdash; accounting for about 45% of all letters. This pattern is exploited in simple substitution ciphers (like in Sherlock Holmes&apos; &quot;Dancing Men&quot;).</p>
+      <p>In typical English text, the most common letters are E, T, A, O, I, N &mdash; accounting for about half of all letters. This pattern is exploited in simple substitution ciphers (like in Sherlock Holmes&apos; &quot;Dancing Men&quot;).</p>
     </div>
     <div>
       <h2>Uses</h2>
@@ -32,7 +32,7 @@ const zh: ReactNode = (
     <p>本工具可以统计文本中每个字符出现的次数,并按频率排序。适用于写作分析、密码分析以及理解文本规律。</p>
     <div>
       <h2>英文字母频率</h2>
-      <p>在典型的英文文本中,最常见的字母是 E、T、A、O、I、N —— 约占所有字母的 45%。这一规律常被用于简单的替换密码(例如夏洛克·福尔摩斯的《跳舞的小人》)。</p>
+      <p>在典型的英文文本中,最常见的字母是 E、T、A、O、I、N —— 约占所有字母的一半。这一规律常被用于简单的替换密码(例如夏洛克·福尔摩斯的《跳舞的小人》)。</p>
     </div>
     <div>
       <h2>用途</h2>
@@ -53,7 +53,7 @@ const es: ReactNode = (
     <p>Esta herramienta cuenta con qué frecuencia aparece cada carácter en tu texto, ordenado por frecuencia. Útil para el análisis de escritura, el criptoanálisis y la comprensión de patrones de texto.</p>
     <div>
       <h2>Frecuencia de letras en inglés</h2>
-      <p>En un texto inglés típico, las letras más comunes son E, T, A, O, I, N — representan alrededor del 45 % de todas las letras. Este patrón se aprovecha en cifrados de sustitución simples (como en «Los bailarines» de Sherlock Holmes).</p>
+      <p>En un texto inglés típico, las letras más comunes son E, T, A, O, I, N — representan alrededor de la mitad de todas las letras. Este patrón se aprovecha en cifrados de sustitución simples (como en «Los bailarines» de Sherlock Holmes).</p>
     </div>
     <div>
       <h2>Usos</h2>
@@ -74,7 +74,7 @@ const de: ReactNode = (
     <p>Dieses Werkzeug zählt, wie oft jedes Zeichen in deinem Text vorkommt, sortiert nach Häufigkeit. Nützlich für Schreibanalyse, Kryptoanalyse und das Verstehen von Textmustern.</p>
     <div>
       <h2>Buchstabenhäufigkeit im Englischen</h2>
-      <p>In einem typischen englischen Text sind die häufigsten Buchstaben E, T, A, O, I, N — sie machen etwa 45 % aller Buchstaben aus. Dieses Muster wird bei einfachen Substitutionschiffren ausgenutzt (wie in Sherlock Holmes’ „Die tanzenden Männchen“).</p>
+      <p>In einem typischen englischen Text sind die häufigsten Buchstaben E, T, A, O, I, N — sie machen etwa die Hälfte aller Buchstaben aus. Dieses Muster wird bei einfachen Substitutionschiffren ausgenutzt (wie in Sherlock Holmes’ „Die tanzenden Männchen“).</p>
     </div>
     <div>
       <h2>Verwendungszwecke</h2>

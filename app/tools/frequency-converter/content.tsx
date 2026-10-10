@@ -8,7 +8,7 @@ import { useApp } from '@/components/providers/AppProviders'
 const en: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>What Is This Tool?</h2>
-    <p>This tool converts between frequency units: <strong>hertz</strong>, kilohertz, megahertz, gigahertz, and rotations per minute (RPM). Frequency measures how often something repeats per second.</p>
+    <p>This tool converts between frequency units: <strong>hertz</strong>, kilohertz, megahertz, gigahertz, rotations per minute (RPM), and angular units (degrees and radians per second). Frequency measures how often something repeats per second.</p>
     <div>
       <h2>Key Conversions</h2>
       <ul>
@@ -16,6 +16,7 @@ const en: ReactNode = (
         <li>1 megahertz (MHz) = 1,000,000 Hz</li>
         <li>1 gigahertz (GHz) = 1,000 MHz = 1 billion Hz</li>
         <li>1 RPM = 1/60 Hz ≈ 0.0167 Hz</li>
+        <li>1 radian/second (rad/s) = 1/(2π) Hz ≈ 0.159 Hz</li>
       </ul>
     </div>
     <div>
@@ -40,7 +41,7 @@ const en: ReactNode = (
 const zh: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>这是什么工具?</h2>
-    <p>本工具用于在频率单位之间换算:<strong>赫兹</strong>、千赫、兆赫、吉赫和每分钟转数 (RPM)。频率衡量某事物每秒重复多少次。</p>
+    <p>本工具用于在频率单位之间换算:<strong>赫兹</strong>、千赫、兆赫、吉赫、每分钟转数 (RPM) 以及角速度单位(度/秒、弧度/秒)。频率衡量某事物每秒重复多少次。</p>
     <div>
       <h2>关键换算</h2>
       <ul>
@@ -48,6 +49,7 @@ const zh: ReactNode = (
         <li>1 兆赫 (MHz) = 1,000,000 Hz</li>
         <li>1 吉赫 (GHz) = 1,000 MHz = 10 亿 Hz</li>
         <li>1 RPM = 1/60 Hz ≈ 0.0167 Hz</li>
+        <li>1 弧度/秒 (rad/s) = 1/(2π) Hz ≈ 0.159 Hz</li>
       </ul>
     </div>
     <div>
@@ -72,7 +74,7 @@ const zh: ReactNode = (
 const es: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>¿Qué es esta herramienta?</h2>
-    <p>Esta herramienta convierte entre unidades de frecuencia: <strong>hercios</strong>, kilohercios, megahercios, gigahercios y revoluciones por minuto (RPM). La frecuencia mide con qué frecuencia se repite algo por segundo.</p>
+    <p>Esta herramienta convierte entre unidades de frecuencia: <strong>hercios</strong>, kilohercios, megahercios, gigahercios, revoluciones por minuto (RPM) y unidades angulares (grados y radianes por segundo). La frecuencia mide con qué frecuencia se repite algo por segundo.</p>
     <div>
       <h2>Conversiones clave</h2>
       <ul>
@@ -80,6 +82,7 @@ const es: ReactNode = (
         <li>1 megahercio (MHz) = 1,000,000 Hz</li>
         <li>1 gigahercio (GHz) = 1,000 MHz = 1,000 millones de Hz</li>
         <li>1 RPM = 1/60 Hz ≈ 0.0167 Hz</li>
+        <li>1 radián/segundo (rad/s) = 1/(2π) Hz ≈ 0.159 Hz</li>
       </ul>
     </div>
     <div>
@@ -104,7 +107,7 @@ const es: ReactNode = (
 const de: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>Was ist dieses Werkzeug?</h2>
-    <p>Dieses Werkzeug rechnet zwischen Frequenzeinheiten um: <strong>Hertz</strong>, Kilohertz, Megahertz, Gigahertz und Umdrehungen pro Minute (RPM). Frequenz misst, wie oft sich etwas pro Sekunde wiederholt.</p>
+    <p>Dieses Werkzeug rechnet zwischen Frequenzeinheiten um: <strong>Hertz</strong>, Kilohertz, Megahertz, Gigahertz, Umdrehungen pro Minute (RPM) und Winkeleinheiten (Grad und Radiant pro Sekunde). Frequenz misst, wie oft sich etwas pro Sekunde wiederholt.</p>
     <div>
       <h2>Wichtige Umrechnungen</h2>
       <ul>
@@ -112,6 +115,7 @@ const de: ReactNode = (
         <li>1 Megahertz (MHz) = 1,000,000 Hz</li>
         <li>1 Gigahertz (GHz) = 1,000 MHz = 1 Milliarde Hz</li>
         <li>1 RPM = 1/60 Hz ≈ 0.0167 Hz</li>
+        <li>1 Radiant/Sekunde (rad/s) = 1/(2π) Hz ≈ 0.159 Hz</li>
       </ul>
     </div>
     <div>

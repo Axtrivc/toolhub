@@ -10,7 +10,7 @@ export function ProteinIntakeCalculatorContent() {
       <h2>Timing matters less than totals</h2>
       <p>Daily total drives results. Spreading intake across 3–5 meals with 20–40 g each slightly improves muscle protein synthesis versus one huge meal, but totals come first.</p>
       <h2>Good sources ranked</h2>
-      <p>Chicken breast (31 g/100 g), Greek yogurt (10 g/100 g), eggs (6 g each), lentils (9 g/cup cooked), whey protein (~25 g/scoop). Mixing plant and animal sources covers amino-acid needs comfortably.</p>
+      <p>Chicken breast (31 g/100 g), Greek yogurt (10 g/100 g), eggs (6 g each), lentils (9 g/100 g cooked), whey protein (~25 g/scoop). Mixing plant and animal sources covers amino-acid needs comfortably.</p>
       <h2>Kidney concerns</h2>
       <p>In people with healthy kidneys, controlled studies at up to 2.8 g/kg show no harm. Those with existing chronic kidney disease should follow their nephrologist’s guidance rather than general sports advice.</p>
     </section>

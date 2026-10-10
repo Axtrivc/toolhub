@@ -45,7 +45,7 @@ function tokenize(input: string): string[] {
     if (i >= n) break
 
     let token = ''
-    // 处理行尾续行(\ 后换行)→ 当作空格
+    // 引号外的字符累积成一个 token(行尾续行见下方反斜杠分支)
     while (i < n && !/\s/.test(input[i])) {
       const c = input[i]
 
@@ -110,14 +110,15 @@ function tokenize(input: string): string[] {
       // 反斜杠转义(含行尾续行)
       if (c === '\\') {
         if (i + 1 < n) {
-          // 行尾续行:支持 \ + \n 与 \ + \r\n(Windows CRLF 粘贴)
+          // 行尾续行:支持 \ + \n 与 \ + \r\n(Windows CRLF 粘贴)。
+          // 与 shell 一致:消除换行、token 跨行续接(下一行以空白开头时当前 token 才结束)
           if (input[i + 1] === '\n') {
             i += 2
-            break
+            continue
           }
           if (input[i + 1] === '\r' && i + 2 < n && input[i + 2] === '\n') {
             i += 3
-            break
+            continue
           }
           token += input[i + 1]
           i += 2
@@ -201,13 +202,13 @@ function parseCurl(input: string): ParsedCurl {
     const tok = tokens[i]
     const lower = tok.toLowerCase()
 
-    // -X / --request METHOD
-    if (lower === '-x' || lower === '--request') {
+    // -X / --request METHOD(短 flag 区分大小写:-x 是 --proxy,不能当 method)
+    if (tok === '-X' || lower === '--request') {
       result.method = (tokens[++i] || 'GET').toUpperCase()
       methodFromFlag = true
     }
-    // -H / --header "Key: Value"
-    else if (lower === '-h' || lower === '--header') {
+    // -H / --header "Key: Value"(小写 -h 是 --help)
+    else if (tok === '-H' || lower === '--header') {
       const header = tokens[++i] || ''
       const sep = header.indexOf(':')
       if (sep > -1) {
@@ -218,7 +219,7 @@ function parseCurl(input: string): ParsedCurl {
     }
     // -d / --data / --data-raw / --data-binary BODY(多次出现用 & 拼接)
     else if (
-      lower === '-d' ||
+      tok === '-d' ||
       lower === '--data' ||
       lower === '--data-raw' ||
       lower === '--data-binary' ||
@@ -235,22 +236,37 @@ function parseCurl(input: string): ParsedCurl {
       hasBody = true
     }
     // -k / --insecure
-    else if (lower === '-k' || lower === '--insecure') {
+    else if (tok === '-k' || lower === '--insecure') {
       result.insecure = true
     }
-    // -G / --get:data 转成 URL 查询串,method 保持 GET(curl 语义)
-    else if (lower === '-g' || lower === '--get') {
+    // -G / --get:data 转成 URL 查询串,method 保持 GET(curl 语义;小写 -g 是 globoff)
+    else if (tok === '-G' || lower === '--get') {
       getMode = true
     }
-    // -u / --user user:pass → 转成 Authorization: Basic 头输出
-    else if (lower === '-u' || lower === '--user') {
+    // -u / --user user:pass → 转成 Authorization: Basic 头输出(大写 -U 是 --proxy-user)
+    else if (tok === '-u' || lower === '--user') {
       result.user = tokens[++i] || ''
     }
-    // 其余 flag:按 arity 表消费,未支持的记入 ignoredFlags 在概要区提示
+    // -I / --head:HEAD 方法(-X 已显式指定 method 时以 -X 为准)
+    else if (tok === '-I' || lower === '--head') {
+      if (!methodFromFlag) {
+        result.method = 'HEAD'
+        methodFromFlag = true
+      }
+    }
+    // --url <url>:curl 里就是 URL 本体
+    else if (lower === '--url') {
+      const u = tokens[++i] || ''
+      if (u && !result.url) result.url = u
+    }
+    // 其余 flag:按 arity 表消费,未支持的记入 ignoredFlags 在概要区提示。
+    // 短 flag 区分大小写(-A=UA vs -a=append、-O=remote-name vs -o=output),
+    // 否则大写旗标的值会泄漏成 URL;长 flag 保持小写匹配。
     else if (tok.startsWith('-') && tok.length > 1) {
-      if (VALUELESS_FLAGS.has(lower)) {
+      const flagKey = tok.startsWith('--') ? lower : tok
+      if (VALUELESS_FLAGS.has(flagKey)) {
         // 已知无值开关(-s/-v/-L 等):安全忽略
-      } else if (VALUED_FLAGS.has(lower)) {
+      } else if (VALUED_FLAGS.has(flagKey)) {
         i++ // 连值一起消费
         result.ignoredFlags.push(tok)
       } else if (tok.startsWith('--')) {

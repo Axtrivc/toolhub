@@ -117,13 +117,13 @@ const zh: ReactNode = (
     <h3>4. 加上或减去一个百分比</h3>
     <p>
       乘以 <code>(1 + percentage/100)</code> 来增加，或乘以 <code>(1 − percentage/100)</code>{' '}
-      来减少。例如，给 $80 加上 15% 的税： <code>80 × 1.15 = $92</code>。用于加上销售税、增值税或折扣。
+      来减少。例如，给 $80 加上 15% 的税： <code>80 × 1.15 = $92</code>。用于计算销售税、增值税或折扣。
     </p>
 
     <h2>实际用途</h2>
     <ul>
       <li>
-        <strong>购物折扣。</strong>一件 $60 的衬衫打 30% 折。X% 的 Y 是多少会告诉你折扣额（$18）；减去后得到售价（$42）。
+        <strong>购物折扣。</strong>一件 $60 的衬衫降价 30%。X% 的 Y 是多少会告诉你折扣额（$18）；减去后得到售价（$42）。
       </li>
       <li>
         <strong>餐厅小费。</strong>立即算出账单的 15%、18% 或 20%。
@@ -160,7 +160,7 @@ const es: ReactNode = (
     <h2>Cómo calcular porcentajes</h2>
     <p>
       Un porcentaje expresa un número como una fracción de 100. La palabra significa literalmente
-      «per hundred» — así que 25% significa 25 de cada 100, o sea, una cuarta parte. Esta
+      «por ciento» — así que 25% significa 25 de cada 100, o sea, una cuarta parte. Esta
       calculadora maneja los cuatro cálculos de porcentaje más comunes en un solo lugar, para que
       no tengas que recordar las fórmulas.
     </p>
@@ -244,8 +244,8 @@ const de: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>Wie man Prozente berechnet</h2>
     <p>
-      Ein Prozent stellt eine Zahl als Bruchteil von 100 dar. Das Wort bedeutet wörtlich „per
-      hundred" — also bedeutet 25% eben 25 von jeweils 100, also ein Viertel. Dieser Rechner
+      Ein Prozent stellt eine Zahl als Bruchteil von 100 dar. Das Wort bedeutet wörtlich „pro
+      Hundert“ — 25% bedeutet also 25 von jeweils 100, das heißt, ein Viertel. Dieser Rechner
       erledigt die vier häufigsten Prozentrechnungen an einem Ort, sodass du dir die Formeln nicht
       merken musst.
     </p>
@@ -255,13 +255,13 @@ const de: ReactNode = (
     <h3>1. Wie viel sind X% von Y?</h3>
     <p>
       Multipliziere das Ganze mit dem Prozentwert als Dezimalzahl. Um beispielsweise 15% von 200 zu
-      finden: <code>200 × 0.15 = 30</code>. Verwende dies für Trinkgelder, Rabatte und
+      berechnen: <code>200 × 0.15 = 30</code>. Verwende dies für Trinkgelder, Rabatte und
       Steuerberechnungen.
     </p>
 
     <h3>2. X ist wie viel Prozent von Y?</h3>
     <p>
-      Teile den Teil durch das Ganze und multipliziere mit 100. Um beispielsweise zu finden, wie
+      Teile den Teil durch das Ganze und multipliziere mit 100. Um beispielsweise zu berechnen, wie
       viel Prozent 30 von 200 sind: <code>(30 ÷ 200) × 100 = 15%</code>. Verwende dies für
       Testergebnisse, Marktanteile oder Abschlussraten.
     </p>
@@ -270,7 +270,7 @@ const de: ReactNode = (
     <p>
       Subtrahiere den Ursprungswert vom neuen, teile durch den Ursprungswert und multipliziere mit
       100. Bei einer Preisänderung von $100 auf $125 beispielsweise:{' '}
-      <code>((125 − 100) ÷ 100) × 100 = 25%</code> Zunahme. Verwende dies, um Wachstum, Inflation
+      <code>((125 − 100) ÷ 100) × 100 = 25%</code> Anstieg. Verwende dies, um Wachstum, Inflation
       oder Gehaltsänderungen zu messen.
     </p>
 
@@ -285,16 +285,16 @@ const de: ReactNode = (
     <h2>Praktische Anwendungen</h2>
     <ul>
       <li>
-        <strong>Einkaufsrabatte.</strong> Ein $60 Hemd ist 30% reduziert. „Wie viel sind X% von
-        Y?" verrät dir den Rabatt ($18); ziehst du ihn ab, erhältst du den Verkaufspreis ($42).
+        <strong>Einkaufsrabatte.</strong> Ein $60-Hemd ist um 30% reduziert. „Wie viel sind X% von
+        Y?“ verrät dir den Rabatt ($18); ziehst du ihn ab, erhältst du den Verkaufspreis ($42).
       </li>
       <li>
         <strong>Trinkgelder im Restaurant.</strong> Berechne 15%, 18% oder 20% der Rechnung
         sofort.
       </li>
       <li>
-        <strong>Noten und Testergebnisse.</strong> Du hast 42 von 50 Fragen richtig — wie viel
-        Prozent sind das?
+        <strong>Noten und Testergebnisse.</strong> Du hast 42 von 50 Fragen richtig beantwortet —
+        wie viel Prozent sind das?
       </li>
       <li>
         <strong>Geschäftskennzahlen.</strong> Umsatzwachstum, Gewinnmargen, Konversionsraten und
@@ -309,8 +309,8 @@ const de: ReactNode = (
     <h2>Häufige Prozentfehler, die du vermeiden solltest</h2>
     <ul>
       <li>
-        <strong>Prozente direkt addieren.</strong> Ein 10% Rabatt plus ein weiterer 10% Rabatt ist
-        kein 20% Rabatt — es ist ein 19% Rabatt, weil die zweiten 10% auf den bereits reduzierten
+        <strong>Prozente direkt addieren.</strong> Ein 10%-Rabatt plus ein weiterer 10%-Rabatt ist
+        kein 20%-Rabatt — es ist ein 19%-Rabatt, weil die zweiten 10% auf den bereits reduzierten
         Preis angewendet werden.
       </li>
       <li>
@@ -319,7 +319,7 @@ const de: ReactNode = (
         von 40%.
       </li>
       <li>
-        <strong>Die Basis vergessen.</strong> „200% von" ist nicht dasselbe wie „200% mehr als".
+        <strong>Die Basis vergessen.</strong> „200% von“ ist nicht dasselbe wie „200% mehr als“.
         200% von 50 ist 100; 200% mehr als 50 ist 150.
       </li>
     </ul>

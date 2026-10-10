@@ -12,7 +12,7 @@ const en: ReactNode = (
       An <strong>aspect ratio</strong> is the proportional relationship between width and height
       (expressed as <code>W:H</code>, like 16:9). When you resize an image, video, or container, keeping
       the ratio constant prevents stretching and distortion. This calculator takes any ratio plus one
-      dimension and computes the other — or fits a ratio into a bounding box.
+      dimension and computes the other, with a live preview of the resulting shape.
     </p>
     <div>
       <h2>The math behind it</h2>
@@ -65,7 +65,7 @@ const zh: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>这是什么工具?</h2>
     <p>
-      <strong>宽高比</strong>是宽度与高度之间的比例关系(表示为 <code>W:H</code>,如 16:9)。当你调整图片、视频或容器的尺寸时,保持比例不变可以避免拉伸和变形。本计算器接收任意比例加其中一个维度,算出另一个 —— 也可把某个比例嵌入到一个边界框中。
+      <strong>宽高比</strong>是宽度与高度之间的比例关系(表示为 <code>W:H</code>,如 16:9)。当你调整图片、视频或容器的尺寸时,保持比例不变可以避免拉伸和变形。本计算器接收任意比例加其中一个维度,算出另一个,并实时预览该比例的形状。
     </p>
     <div>
       <h2>背后的数学原理</h2>
@@ -111,7 +111,7 @@ const es: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>¿Qué es esta herramienta?</h2>
     <p>
-      Una <strong>proporción de aspecto</strong> es la relación proporcional entre el ancho y el alto (expresada como <code>W:H</code>, por ejemplo 16:9). Al redimensionar una imagen, un vídeo o un contenedor, mantener la proporción constante evita estiramientos y distorsiones. Esta calculadora toma cualquier proporción más una dimensión y calcula la otra — o ajusta una proporción dentro de un recuadro delimitador.
+      Una <strong>proporción de aspecto</strong> es la relación proporcional entre el ancho y el alto (expresada como <code>W:H</code>, por ejemplo 16:9). Al redimensionar una imagen, un vídeo o un contenedor, mantener la proporción constante evita estiramientos y distorsiones. Esta calculadora toma cualquier proporción más una dimensión y calcula la otra, con una vista previa en vivo de la forma resultante.
     </p>
     <div>
       <h2>Las matemáticas detrás</h2>
@@ -157,7 +157,7 @@ const de: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>Was ist dieses Werkzeug?</h2>
     <p>
-      Ein <strong>Seitenverhältnis</strong> ist die proportionale Beziehung zwischen Breite und Höhe (ausgedrückt als <code>W:H</code>, z. B. 16:9). Wenn du ein Bild, ein Video oder einen Container in der Größe änderst, verhindert ein konstantes Verhältnis Stauchung und Verzerrung. Dieser Rechner nimmt ein beliebiges Verhältnis plus eine Dimension und berechnet die andere — oder passt ein Verhältnis in einen Begrenzungsrahmen ein.
+      Ein <strong>Seitenverhältnis</strong> ist die proportionale Beziehung zwischen Breite und Höhe (ausgedrückt als <code>W:H</code>, z. B. 16:9). Wenn du ein Bild, ein Video oder einen Container in der Größe änderst, verhindert ein konstantes Verhältnis Stauchung und Verzerrung. Dieser Rechner nimmt ein beliebiges Verhältnis plus eine Dimension und berechnet die andere, mit einer Live-Vorschau der resultierenden Form.
     </p>
     <div>
       <h2>Die Mathematik dahinter</h2>
@@ -184,14 +184,14 @@ const de: ReactNode = (
           <strong>21:9</strong> — Ultrawide-Monitore, Kinofilm.
         </li>
         <li>
-          <strong>3:2</strong> — die meisten DSLR- und spiegellose Kameras.
+          <strong>3:2</strong> — die meisten DSLR- und spiegellosen Kameras.
         </li>
       </ul>
     </div>
     <div>
       <h2>Einpassen (contain) vs. füllen (cover)</h2>
       <p>
-        Beim Einpassen eines Verhältnisses in einen festen Rahmen skaliert <strong>contain</strong> das Bild so, dass es vollständig sichtbar ist, wobei eventuell Letterbox-Balken entstehen. <strong>Cover</strong> skaliert so, dass der Rahmen komplett gefüllt ist und der Überfluss abgeschnitten wird. Die CSS-Eigenschaften <code>object-fit</code> und{' '}
+        Beim Einpassen eines Verhältnisses in einen festen Rahmen skaliert <strong>contain</strong> das Bild so, dass es vollständig sichtbar ist, wobei eventuell Letterbox-Balken entstehen. <strong>Cover</strong> skaliert so, dass der Rahmen komplett gefüllt ist und das Überstehende abgeschnitten wird. Die CSS-Eigenschaften <code>object-fit</code> und{' '}
         <code>background-size</code> verwenden dieselben Begriffe. Wähle contain, wenn das gesamte Bild sichtbar sein muss; wähle cover, wenn der Rahmen voll bleiben muss (z. B. Hero-Hintergründe).
       </p>
     </div>

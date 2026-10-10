@@ -31,7 +31,8 @@ const en: ReactNode = (
           /<code>false</code>), and <code>null</code> (also <code>~</code>).
         </li>
         <li>
-          <strong>Comments</strong> — anything after <code>#</code> (outside quotes) is ignored.
+          <strong>Comments</strong> — a <code>#</code> preceded by a space (outside quotes)
+          starts a comment; the rest of the line is ignored.
         </li>
         <li>
           <strong>Block scalars</strong> — <code>|</code> (literal) and <code>&gt;</code> (folded).
@@ -83,7 +84,7 @@ const zh: ReactNode = (
           <strong>标量</strong> —— 字符串(带引号和纯文本)、数字、布尔值(<code>true</code> /<code>false</code>),以及 <code>null</code>(也可以是 <code>~</code>)。
         </li>
         <li>
-          <strong>注释</strong> —— <code>#</code> 之后的内容(引号外的)会被忽略。
+          <strong>注释</strong> —— 空格后的 <code>#</code>(引号外)开始一段注释,该行其余内容会被忽略。
         </li>
         <li>
           <strong>块标量</strong> —— <code>|</code>(字面量)和 <code>&gt;</code>(折叠)。
@@ -128,7 +129,8 @@ const es: ReactNode = (
           <strong>Escalares</strong> — cadenas (entre comillas y simples), números, booleanos (<code>true</code> /<code>false</code>) y <code>null</code> (también <code>~</code>).
         </li>
         <li>
-          <strong>Comentarios</strong> — todo lo que sigue a <code>#</code> (fuera de comillas) se ignora.
+          <strong>Comentarios</strong> — un <code>#</code> precedido de un espacio (fuera de
+          comillas) inicia un comentario; el resto de la línea se ignora.
         </li>
         <li>
           <strong>Escalares en bloque</strong> — <code>|</code> (literal) y <code>&gt;</code> (plegado).
@@ -173,7 +175,8 @@ const de: ReactNode = (
           <strong>Skalare</strong> — Strings (in Anführungszeichen und einfach), Zahlen, Booleans (<code>true</code> /<code>false</code>) und <code>null</code> (auch <code>~</code>).
         </li>
         <li>
-          <strong>Kommentare</strong> — alles nach <code>#</code> (außerhalb von Anführungszeichen) wird ignoriert.
+          <strong>Kommentare</strong> — ein <code>#</code> nach einem Leerzeichen (außerhalb von
+          Anführungszeichen) beginnt einen Kommentar; der Rest der Zeile wird ignoriert.
         </li>
         <li>
           <strong>Block-Skalare</strong> — <code>|</code> (literal) und <code>&gt;</code> (gefaltet).

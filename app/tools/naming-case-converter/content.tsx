@@ -18,7 +18,7 @@ const en: ReactNode = (
       Every language and framework has its own naming convention — JavaScript favors <strong>camelCase</strong>,
       Python <strong>snake_case</strong>, CSS classes <strong>kebab-case</strong>, and constants are usually{' '}
       <strong>CONSTANT_CASE</strong>. This converter takes any phrase — or a whole list of phrases in bulk mode —
-      and instantly renders it in eight common code naming cases. It runs entirely in your browser, and every row
+      and instantly renders it in ten common naming cases. It runs entirely in your browser, and every row
       has its own copy button so you can grab exactly the variant you need.
     </p>
 
@@ -63,7 +63,7 @@ const zh: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>这是什么工具?</h2>
     <p>
-      每种语言和框架都有自己的命名约定 —— JavaScript 偏好 <strong>camelCase</strong>,Python 用 <strong>snake_case</strong>,CSS 类名用 <strong>kebab-case</strong>,而常量通常用 <strong>CONSTANT_CASE</strong>。本转换器接受任意短语 —— 或在 bulk 模式下接受一整列短语 —— 并即时渲染成八种常见的代码命名格式。
+      每种语言和框架都有自己的命名约定 —— JavaScript 偏好 <strong>camelCase</strong>,Python 用 <strong>snake_case</strong>,CSS 类名用 <strong>kebab-case</strong>,而常量通常用 <strong>CONSTANT_CASE</strong>。本转换器接受任意短语 —— 或在 bulk 模式下接受一整列短语 —— 并即时渲染成十种常见的命名格式。
       它完全在浏览器中运行,每行都有独立的复制按钮,让你精确取用所需的那个变体。
     </p>
 
@@ -98,7 +98,7 @@ const es: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>¿Qué es esta herramienta?</h2>
     <p>
-      Cada lenguaje y framework tiene su propia convención de nombres — JavaScript prefiere <strong>camelCase</strong>, Python <strong>snake_case</strong>, las clases CSS <strong>kebab-case</strong>, y las constantes suelen usar <strong>CONSTANT_CASE</strong>. Este conversor toma cualquier frase — o una lista entera de frases en modo bulk — y la renderiza al instante en ocho casos de nombres comunes.
+      Cada lenguaje y framework tiene su propia convención de nombres — JavaScript prefiere <strong>camelCase</strong>, Python <strong>snake_case</strong>, las clases CSS <strong>kebab-case</strong>, y las constantes suelen usar <strong>CONSTANT_CASE</strong>. Este conversor toma cualquier frase — o una lista entera de frases en modo bulk — y la renderiza al instante en diez casos de nombres comunes.
       Funciona por completo en tu navegador, y cada fila tiene su propio botón de copiar para que te lleves exactamente la variante que necesitas.
     </p>
 
@@ -133,7 +133,7 @@ const de: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>Was ist dieses Werkzeug?</h2>
     <p>
-      Jede Sprache und jedes Framework hat seine eigene Namenskonvention — JavaScript bevorzugt <strong>camelCase</strong>, Python <strong>snake_case</strong>, CSS-Klassen <strong>kebab-case</strong>, und Konstanten verwenden meist <strong>CONSTANT_CASE</strong>. Dieser Konverter nimmt einen beliebigen Ausdruck — oder im Bulk-Modus eine ganze Liste von Ausdrücken — und rendert ihn sofort in acht gängige Code-Namensfälle.
+      Jede Sprache und jedes Framework hat seine eigene Namenskonvention — JavaScript bevorzugt <strong>camelCase</strong>, Python <strong>snake_case</strong>, CSS-Klassen <strong>kebab-case</strong>, und Konstanten verwenden meist <strong>CONSTANT_CASE</strong>. Dieser Konverter nimmt einen beliebigen Ausdruck — oder im Bulk-Modus eine ganze Liste von Ausdrücken — und rendert ihn sofort in zehn gängige Namensfälle.
       Er läuft vollständig in deinem Browser, und jede Zeile hat einen eigenen Kopier-Button, damit du genau die Variante bekommst, die du brauchst.
     </p>
 

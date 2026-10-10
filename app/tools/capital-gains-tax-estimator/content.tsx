@@ -20,13 +20,13 @@ const en: ReactNode = (
     <div>
       <h2>Short vs. Long Term</h2>
       <ul>
-        <li><strong>Short-term (&lt;1 year):</strong> Taxed as ordinary income (your marginal rate, 10-37%)</li>
-        <li><strong>Long-term (1+ years):</strong> Preferential rates of 0%, 15%, or 20% depending on income</li>
+        <li><strong>Short-term (1 year or less):</strong> Taxed as ordinary income (your marginal rate, 10-37%)</li>
+        <li><strong>Long-term (over 1 year):</strong> Preferential rates of 0%, 15%, or 20% depending on income</li>
       </ul>
     </div>
     <div>
       <h2>Why Holding Period Matters</h2>
-      <p>The difference is huge. A $10,000 gain in the 24% bracket: short-term costs $2,400 in tax; long-term costs $1,500 (a 37% tax saving). For high earners near the top bracket, holding 1+ years can save thousands.</p>
+      <p>The difference is huge. A $10,000 gain in the 24% bracket: short-term costs $2,400 in tax; long-term costs $1,500 (a 37.5% tax saving). For high earners near the top bracket, holding over 1 year can save thousands.</p>
     </div>
     <div>
       <h2>Worked Example</h2>
@@ -52,13 +52,13 @@ const zh: ReactNode = (
     <div>
       <h2>短期 vs. 长期</h2>
       <ul>
-        <li><strong>短期(&lt;1 年):</strong>按普通收入征税(你的边际税率,10-37%)</li>
-        <li><strong>长期(1 年以上):</strong>享有 0%、15% 或 20% 的优惠税率,取决于收入水平</li>
+        <li><strong>短期(1 年及以内):</strong>按普通收入征税(你的边际税率,10-37%)</li>
+        <li><strong>长期(超过 1 年):</strong>享有 0%、15% 或 20% 的优惠税率,取决于收入水平</li>
       </ul>
     </div>
     <div>
       <h2>持有期为何重要</h2>
-      <p>差别巨大。在 24% 税级中,一笔 $10,000 的利得:短期需缴税 $2,400;长期只需 $1,500(节省 37% 的税)。对于接近最高税级的高收入者,持有 1 年以上可以省下数千美元。</p>
+      <p>差别巨大。在 24% 税级中,一笔 $10,000 的利得:短期需缴税 $2,400;长期只需 $1,500(节省 37.5% 的税)。对于接近最高税级的高收入者,持有超过 1 年可以省下数千美元。</p>
     </div>
     <div>
       <h2>计算示例</h2>
@@ -84,13 +84,13 @@ const es: ReactNode = (
     <div>
       <h2>Corto versus largo plazo</h2>
       <ul>
-        <li><strong>Corto plazo (&lt;1 año):</strong> Se grava como ingreso ordinario (tu tasa marginal, 10-37 %)</li>
-        <li><strong>Largo plazo (1+ años):</strong> Tasas preferenciales del 0 %, 15 % o 20 % según los ingresos</li>
+        <li><strong>Corto plazo (1 año o menos):</strong> Se grava como ingreso ordinario (tu tasa marginal, 10-37 %)</li>
+        <li><strong>Largo plazo (más de 1 año):</strong> Tasas preferenciales del 0 %, 15 % o 20 % según los ingresos</li>
       </ul>
     </div>
     <div>
       <h2>Por qué importa el periodo de tenencia</h2>
-      <p>La diferencia es enorme. Una ganancia de $10,000 en el tramo del 24 %: a corto plazo cuesta $2,400 en impuestos; a largo plazo cuesta $1,500 (un ahorro fiscal del 37 %). Para altos ingresos cerca del tramo máximo, mantener 1+ años puede ahorrar miles.</p>
+      <p>La diferencia es enorme. Una ganancia de $10,000 en el tramo del 24 %: a corto plazo cuesta $2,400 en impuestos; a largo plazo cuesta $1,500 (un ahorro fiscal del 37.5 %). Para altos ingresos cerca del tramo máximo, mantener más de 1 año puede ahorrar miles.</p>
     </div>
     <div>
       <h2>Ejemplo resuelto</h2>
@@ -116,13 +116,13 @@ const de: ReactNode = (
     <div>
       <h2>Kurzfristig versus langfristig</h2>
       <ul>
-        <li><strong>Kurzfristig (&lt;1 Jahr):</strong> Wird als ordentliches Einkommen besteuert (dein Grenzsteuersatz, 10-37 %)</li>
-        <li><strong>Langfristig (1+ Jahre):</strong> Vorzugssätze von 0 %, 15 % oder 20 % je nach Einkommen</li>
+        <li><strong>Kurzfristig (1 Jahr oder weniger):</strong> Wird als ordentliches Einkommen besteuert (dein Grenzsteuersatz, 10-37 %)</li>
+        <li><strong>Langfristig (mehr als 1 Jahr):</strong> Vorzugssätze von 0 %, 15 % oder 20 % je nach Einkommen</li>
       </ul>
     </div>
     <div>
       <h2>Warum die Haltedauer zählt</h2>
-      <p>Der Unterschied ist enorm. Ein $10,000-Gewinn im 24 %-Steuersatz: kurzfristig kostet er $2,400 an Steuern; langfristig kostet er $1,500 (eine Steuerersparnis von 37 %). Für Spitzenverdiener nahe dem Höchststeuersatz kann das Halten von 1+ Jahren Tausende sparen.</p>
+      <p>Der Unterschied ist enorm. Ein $10,000-Gewinn im 24 %-Steuersatz: kurzfristig kostet er $2,400 an Steuern; langfristig kostet er $1,500 (eine Steuerersparnis von 37.5 %). Für Spitzenverdiener nahe dem Höchststeuersatz kann das Halten von mehr als 1 Jahr Tausende sparen.</p>
     </div>
     <div>
       <h2>Durchgerechnetes Beispiel</h2>

@@ -46,11 +46,11 @@ const en: ReactNode = (
     <div>
       <h2>A note on browser support</h2>
       <p>
-        Every current browser both <em>displays</em> and <em>encodes</em> WebP, but Safari before version 14
-        cannot encode it — its <code>canvas.toBlob</code> silently falls back to PNG. This tool detects that
-        fallback by checking the output MIME type and warns you instead of handing you a fake{' '}
-        <code>.webp</code> file that is really a PNG inside. If you see the warning, switch to a current browser
-        and the conversion will work.
+        Every current browser <em>displays</em> WebP, and Chrome, Edge, and Firefox also <em>encode</em> it.
+        Safari is the exception: no version of Safari can encode WebP through <code>canvas.toBlob</code> — it
+        silently falls back to PNG. This tool detects that fallback by checking the output MIME type and warns
+        you instead of handing you a fake <code>.webp</code> file that is really a PNG inside. If you see the
+        warning, switch to Chrome, Edge, or Firefox and the conversion will work.
       </p>
     </div>
   </section>
@@ -81,7 +81,7 @@ const zh: ReactNode = (
     <div>
       <h2>关于浏览器支持的说明</h2>
       <p>
-        所有现代浏览器都能 <em>显示</em> 并 <em>编码</em> WebP，但 Safari 14 之前的版本无法编码 —— 它的 <code>canvas.toBlob</code> 会静默回退到 PNG。本工具会通过检查输出 MIME 类型来检测这种回退并提醒你，而不是交给你一个实为 PNG 的假 <code>.webp</code> 文件。如果看到这个提醒，请切换到现代浏览器，转换即可正常完成。
+        所有现代浏览器都能 <em>显示</em> WebP，Chrome、Edge 和 Firefox 也都能 <em>编码</em> 它。Safari 是例外 —— 任何版本的 Safari 都无法通过 <code>canvas.toBlob</code> 编码 WebP，它会静默回退到 PNG。本工具会通过检查输出 MIME 类型来检测这种回退并提醒你，而不是交给你一个实为 PNG 的假 <code>.webp</code> 文件。如果看到这个提醒，请切换到 Chrome、Edge 或 Firefox，转换即可正常完成。
       </p>
     </div>
   </section>
@@ -112,7 +112,7 @@ const es: ReactNode = (
     <div>
       <h2>Una nota sobre la compatibilidad de los navegadores</h2>
       <p>
-        Todos los navegadores actuales <em>muestran</em> y <em>codifican</em> WebP, pero Safari anterior a la versión 14 no puede codificarlo — su <code>canvas.toBlob</code> recurre silenciosamente a PNG. Esta herramienta detecta ese retroceso comprobando el tipo MIME de salida y te avisa en lugar de entregarte un falso archivo <code>.webp</code> que en realidad es un PNG. Si ves el aviso, cambia a un navegador actual y la conversión funcionará.
+        Todos los navegadores actuales <em>muestran</em> WebP, y Chrome, Edge y Firefox también lo <em>codifican</em>. Safari es la excepción: ninguna versión de Safari puede codificar WebP mediante <code>canvas.toBlob</code> — recurre silenciosamente a PNG. Esta herramienta detecta ese retroceso comprobando el tipo MIME de salida y te avisa en lugar de entregarte un falso archivo <code>.webp</code> que en realidad es un PNG. Si ves el aviso, cambia a Chrome, Edge o Firefox y la conversión funcionará.
       </p>
     </div>
   </section>
@@ -143,7 +143,7 @@ const de: ReactNode = (
     <div>
       <h2>Ein Hinweis zur Browser-Unterstützung</h2>
       <p>
-        Jeder aktuelle Browser <em>zeigt</em> und <em>kodiert</em> WebP, aber Safari vor Version 14 kann es nicht kodieren — sein <code>canvas.toBlob</code> fällt lautlos auf PNG zurück. Dieses Werkzeug erkennt diesen Fallback durch Prüfen des Ausgabe-MIME-Typs und warnt dich, statt dir eine falsche <code>.webp</code>-Datei zu geben, die in Wirklichkeit ein PNG ist. Siehst du die Warnung, wechsle zu einem aktuellen Browser und die Umwandlung funktioniert.
+        Jeder aktuelle Browser <em>zeigt</em> WebP, und Chrome, Edge und Firefox <em>kodieren</em> es auch. Safari ist die Ausnahme: Keine Safari-Version kann WebP über <code>canvas.toBlob</code> kodieren — es fällt lautlos auf PNG zurück. Dieses Werkzeug erkennt diesen Fallback durch Prüfen des Ausgabe-MIME-Typs und warnt dich, statt dir eine falsche <code>.webp</code>-Datei zu geben, die in Wirklichkeit ein PNG ist. Siehst du die Warnung, wechsle zu Chrome, Edge oder Firefox und die Umwandlung funktioniert.
       </p>
     </div>
   </section>

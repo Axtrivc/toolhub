@@ -82,7 +82,7 @@ const es: ReactNode = (
       <p>
         El JSON minimizado suele ser entre un 20-50 % más pequeño que el JSON con formato legible. Para
         payloads grandes servidos por la red, esto se acumula — especialmente en conexiones móviles o
-        medidas.
+        de pago por consumo.
       </p>
     </div>
     <div>

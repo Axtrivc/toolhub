@@ -74,7 +74,7 @@ const zh: ReactNode = (
       <p>
         卡路里决定你的体重是升还是降；<strong>宏量营养素</strong>（蛋白质、碳水、脂肪）决定这些体重由什么构成。保持高蛋白摄入（每公斤体重 1.6–2.2 g）以保留或增长肌肉。此处显示的分配（30/40/30）是一个均衡的默认值——参见我们的{' '}
         <a href="/tools/macro-calculator/" className="text-brand-600 underline">「宏量营养素计算器」</a>了解针对特定目标的比例，或{' '}
-        <a href="/tools/calorie-calculator/" className="text-brand-600 underline">「卡路里计算器」</a>获取备餐视角。
+        <a href="/tools/calorie-calculator/" className="text-brand-600 underline">「卡路里计算器」</a>获取膳食规划视角。
       </p>
     </div>
   </section>

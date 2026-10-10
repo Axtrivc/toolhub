@@ -307,7 +307,9 @@ export const CacLtvCalculatorClient = makeCalculatorClient({
     const monthlyMargin = arpu * (margin / 100)
     const payback = monthlyMargin > 0 ? cac / monthlyMargin : Number.POSITIVE_INFINITY
     const ratio = cac > 0 ? ltv / cac : Number.POSITIVE_INFINITY
-    const ratioStr = `${fmtNum(ratio, 1)} : 1`
+    // spend=0 → CAC=0 → 比率无穷大;fmtNum(Infinity) 会折叠成 '—' 占位,
+    // 高亮结果会显示成 "— : 1" 且与 verdict 矛盾,这里显式展示 ∞
+    const ratioStr = Number.isFinite(ratio) ? `${fmtNum(ratio, 1)} : 1` : '∞ : 1'
     let verdict: string
     if (ratio < 1) verdict = `🔴 ${T('vDanger', 'Losing money on every customer — fix retention or CAC before scaling')}`
     else if (ratio < 3) verdict = `🟡 ${T('vBelow', 'Below the 3:1 golden rule — improve retention or lower acquisition cost')}`

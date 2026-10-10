@@ -38,7 +38,7 @@ const en: ReactNode = (
         <strong>Monthly payment</strong> is the fixed amount due each month, with an estimated payoff date based
         on starting today. <strong>Total interest</strong> is what the loan costs you on top of the principal.{' '}
         <strong>Total cost</strong> adds your down payment and trade-in to all monthly payments, so it represents
-        the full out-of-value cost of the car (excluding insurance, fees, and maintenance). The amortization table
+        the full out-of-pocket cost of the car (excluding insurance, fees, and maintenance). The amortization table
         shows how each payment splits between <em>principal</em> and <em>interest</em> — early payments are
         mostly interest, and the balance falls slowly at first.
       </p>
@@ -150,7 +150,7 @@ const de: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>Was ist dieses Werkzeug?</h2>
     <p>
-      Dieser <strong>Autokredit-Rechner</strong> schätzt deine monatliche Autorate aus Fahrzeugpreis, Anzahlung, Trade-in-Wert, Mehrwertsteuer, APR und Kreditlaufzeit — und erstellt danach einen vollständigen Tilgungsplan, den du
+      Dieser <strong>Autokredit-Rechner</strong> schätzt deine monatliche Autorate aus Fahrzeugpreis, Anzahlung, Trade-in-Wert, Verkaufssteuer, APR und Kreditlaufzeit — und erstellt danach einen vollständigen Tilgungsplan, den du
       als CSV exportieren kannst. Er läuft zu 100 % in deinem Browser, sodass die Zahlen, die du eingibst, dein Gerät nie verlassen.
     </p>
 
@@ -159,8 +159,8 @@ const de: ReactNode = (
       <p>
         Der Betrag, den du tatsächlich finanzierst, ist <code>price − down payment − trade-in + sales tax</code>. Die Steuer wird
         auf <strong>(price − trade-in)</strong> erhoben, was die meisten US-Bundesstaaten beim Trade-in-Kredit so handhaben — aber
-        einige wenige Staaten besteuern den vollen Preis, betrachte die Zahl also als Schätzung. Die monatliche Rate verwendet die Standard
-        tilgungsformel <code>M = P × r / (1 − (1 + r)^−n)</code>, wobei <code>r</code> der monatliche Zinssatz
+        einige wenige Staaten besteuern den vollen Preis, betrachte die Zahl also als Schätzung. Die monatliche Rate verwendet die
+        Standard-Tilgungsformel <code>M = P × r / (1 − (1 + r)^−n)</code>, wobei <code>r</code> der monatliche Zinssatz
         (APR ÷ 12) und <code>n</code> die Anzahl der Monate ist. Ein Kredit mit 0 % APR teilt den Tilgungsbetrag einfach durch die
         Laufzeit.
       </p>

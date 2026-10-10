@@ -206,9 +206,12 @@ export const TakeHomePayCalculatorClient = makeCalculatorClient({
         prev = cap
       } else break
     }
-    // FICA:SS 上限 176,100(2025),Medicare 无上限
-    const ssWages = Math.min(gross, 176100)
-    const fica = ssWages * 0.062 + gross * 0.0145
+    // FICA:SS 上限 176,100(2025),Medicare 无上限。
+    // 税前健康保费(Section 125)依法不计入 FICA 工资,401(k) 则照计
+    // (与页面公式区一致;曾按全额 gross 计 FICA,多算 7.65% × 保费)
+    const ficaWages = Math.max(0, gross - premiums)
+    const ssWages = Math.min(ficaWages, 176100)
+    const fica = ssWages * 0.062 + ficaWages * 0.0145
     const net = gross - preTax401k - premiums - fed - fica
     return {
       annualNet: fmtUSD(net),
@@ -580,7 +583,9 @@ export const DogAgeCalculatorClient = makeCalculatorClient({
       { upTo: 15, color: '#f97316', label: 'Puppy' },
       { upTo: 24, color: '#f59e0b', label: 'Junior' },
       { upTo: 40, color: '#22c55e', label: 'Adult (prime)' },
-      { upTo: 56, color: '#3b82f6', label: 'Mature' },
+      // 55 与 compute 的 stageIdx 阈值(human >= 55 → Senior)对齐;
+      // 曾为 56:human=55 时文字标 Senior 而表盘仍落在 Mature 区
+      { upTo: 55, color: '#3b82f6', label: 'Mature' },
       { upTo: 80, color: '#a855f7', label: 'Senior' },
     ],
     formatValue: (n) => `${Math.round(n)} yr`,

@@ -47,11 +47,11 @@ const en: ReactNode = (
     <div>
       <h2>Anagram mode and custom dictionaries</h2>
       <p>
-        Switch to <strong>Anagram mode</strong> and enter 3–10 letters to find every dictionary word — up to five
-        letters long, sorted longest first — that can be spelled without reusing a letter more times than you
-        have it. Great for Scrabble-style puzzles. If a valid word is missing from the bundled list, paste your
-        own words (one per line or space-separated) into <em>extra words</em> and they join the dictionary for
-        the session, in both modes.
+        Switch to <strong>Anagram mode</strong> and enter 3–10 letters to find every dictionary word — up to as
+        many letters as you entered, sorted longest first — that can be spelled without reusing a letter more
+        times than you have it. Great for Scrabble-style puzzles. If a valid word is missing from the bundled
+        list, paste your own words (one per line or space-separated) into <em>extra words</em> and they join the
+        dictionary for the session, in both modes.
       </p>
     </div>
   </section>
@@ -62,13 +62,13 @@ const zh: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>这是什么工具?</h2>
     <p>
-      一个 <strong>Wordle 求解器和找词工具</strong>,从一个内置的常用英语五字母词库中筛选出符合你已知条件的词:已确定位置的绿色字母、单词必须包含的字母,以及必须排除的字母。变位词模式可以找出从一个字母池中能拼出的所有单词,你还可以合并自己的额外词汇。一切 100% 在你的浏览器中运行 —— 无查询、无网络。
+      一个 <strong>Wordle 求解器和找词工具</strong>,从一个内置的常用英语五字母词库中筛选出符合你已知条件的词:已确定位置的绿色字母、单词必须包含的字母,以及必须排除的字母。易位构词模式可以找出从一个字母池中能拼出的所有单词,你还可以合并自己的额外词汇。一切 100% 在你的浏览器中运行 —— 无查询、无网络。
     </p>
 
     <div>
       <h2>把你的猜测映射到筛选条件</h2>
       <p>
-        每次 Wordle 猜测后,把已确认的字母输入五个<strong>绿色</strong>方框(放在确切位置),把在单词中但位置错误的字母放入<em>必须包含</em>(黄色),把排除的字母列入<em>必须不包含</em>(灰色)。列表会随每次按键更新,最多显示 200 个匹配项及其精确数量。点击任意词条即可把它直接复制到下一次猜测中。
+        每次 Wordle 猜测后,把已确认的字母输入五个<strong>绿色</strong>方框(放在确切位置),把在单词中但位置错误的字母放入<em>必须包含</em>(黄色),把排除的字母列入<em>不能包含</em>(灰色)。列表会随每次按键更新,最多显示 200 个匹配项及其精确数量。点击任意词条即可把它直接复制到下一次猜测中。
       </p>
     </div>
 
@@ -80,9 +80,9 @@ const zh: ReactNode = (
     </div>
 
     <div>
-      <h2>变位词模式与自定义词典</h2>
+      <h2>易位构词模式与自定义词典</h2>
       <p>
-        切换到<strong>变位词模式</strong>,输入 3–10 个字母,即可找出词典中所有 —— 最长五个字母、按长度从长到短排序 —— 可以在不重复使用超过你持有次数的字母的前提下拼出的单词。非常适合 Scrabble 类谜题。如果某个有效词不在内置列表中,把你的词(每行一个或用空格分隔)粘贴到<em>额外词</em>中,它们就会在本次会话中(两种模式下)加入词典。
+        切换到<strong>易位构词模式</strong>,输入 3–10 个字母,即可找出词典中所有能由这些字母拼出的单词:长度不超过输入的字母数,按长度从长到短排序,且同一字母的使用次数不会超过你输入的份数。非常适合 Scrabble 类谜题。如果某个有效词不在内置列表中,把你的词(每行一个或用空格分隔)粘贴到<em>额外词汇</em>中,它们就会在本次会话中(两种模式下)加入词典。
       </p>
     </div>
   </section>
@@ -127,9 +127,10 @@ const es: ReactNode = (
       <h2>Modo anagrama y diccionarios personalizados</h2>
       <p>
         Cambia al <strong>modo anagrama</strong> e introduce 3–10 letras para encontrar cada palabra del
-        diccionario — de hasta cinco letras, ordenadas de más larga a más corta — que pueda escribirse sin
-        reutilizar una letra más veces de las que tienes. Estupendo para puzzles tipo Scrabble. Si falta una
-        palabra válida de la lista incluida, pega tus propias palabras (una por línea o separadas por espacios) en{' '}
+        diccionario — de hasta el número de letras que escribas, ordenadas de más larga a más corta — que pueda
+        escribirse sin reutilizar una letra más veces de las que tienes. Estupendo para puzzles tipo Scrabble.
+        Si falta una palabra válida de la lista incluida, pega tus propias palabras (una por línea o separadas
+        por espacios) en{' '}
         <em>palabras extra</em> y se unirán al diccionario durante la sesión, en ambos modos.
       </p>
     </div>
@@ -175,10 +176,11 @@ const de: ReactNode = (
       <h2>Anagramm-Modus und eigene Wörterbücher</h2>
       <p>
         Wechsle in den <strong>Anagramm-Modus</strong> und gib 3–10 Buchstaben ein, um jedes Wörterbuchwort zu
-        finden — bis zu fünf Buchstaben lang, nach Länge absteigend sortiert — das sich bilden lässt, ohne einen
-        Buchstaben häufiger zu verwenden, als du ihn hast. Toll für Scrabble-artige Rätsel. Fehlt ein gültiges Wort
+        finden — mit höchstens so vielen Buchstaben, wie du eingegeben hast, nach Länge absteigend sortiert —
+        das sich bilden lässt, ohne einen Buchstaben häufiger zu verwenden, als du ihn hast. Toll für
+        Scrabble-artige Rätsel. Fehlt ein gültiges Wort
         in der mitgelieferten Liste, füge deine eigenen Wörter (eines pro Zeile oder leerzeichengetrennt) unter{' '}
-        <em>Zusatzwörter</em> ein und sie kommen für die Sitzung zum Wörterbuch hinzu, in beiden Modi.
+        <em>zusätzliche Wörter</em> ein und sie kommen für die Sitzung zum Wörterbuch hinzu, in beiden Modi.
       </p>
     </div>
   </section>

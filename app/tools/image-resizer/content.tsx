@@ -48,7 +48,7 @@ const en: ReactNode = (
         Canvas resampling is excellent at making images <em>smaller</em>, but enlarging beyond the original
         dimensions just invents pixels — expect softness. For crisp results, start from the largest source you
         have and scale down. Also note that transparency is preserved in PNG and WebP output, while JPEG flattens
-        it to black; pick PNG or WebP for logos and cut-out artwork.
+        it onto a white background; pick PNG or WebP for logos and cut-out artwork.
       </p>
     </div>
   </section>
@@ -79,7 +79,7 @@ const zh: ReactNode = (
     <div>
       <h2>缩小，别放大</h2>
       <p>
-        画布重采样非常擅长把图像变 <em>更小</em>，但放大到超过原始尺寸只是在凭空生成像素 —— 画面会变软。想要锐利的效果，请从你能拿到的最大源文件开始向下缩放。另外请注意：PNG 和 WebP 输出会保留透明度，而 JPEG 会把透明区域压平成黑色；标志和抠图素材请选择 PNG 或 WebP。
+        画布重采样非常擅长把图像变 <em>更小</em>，但放大到超过原始尺寸只是在凭空生成像素 —— 画面会变软。想要锐利的效果，请从你能拿到的最大源文件开始向下缩放。另外请注意：PNG 和 WebP 输出会保留透明度，而 JPEG 会把透明区域压平到白色背景上；标志和抠图素材请选择 PNG 或 WebP。
       </p>
     </div>
   </section>
@@ -110,7 +110,7 @@ const es: ReactNode = (
     <div>
       <h2>Reduce, no amplíes</h2>
       <p>
-        El remuestreo del lienzo es excelente para hacer imágenes <em>más pequeñas</em>, pero ampliar más allá de las dimensiones originales solo inventa píxeles — espera cierta suavidad. Para resultados nítidos, parte de la fuente más grande que tengas y escala hacia abajo. Ten en cuenta también que la transparencia se conserva en la salida PNG y WebP, mientras que JPEG la aplana a negro; elige PNG o WebP para logos e ilustraciones recortadas.
+        El remuestreo del lienzo es excelente para hacer imágenes <em>más pequeñas</em>, pero ampliar más allá de las dimensiones originales solo inventa píxeles — espera cierta suavidad. Para resultados nítidos, parte de la fuente más grande que tengas y escala hacia abajo. Ten en cuenta también que la transparencia se conserva en la salida PNG y WebP, mientras que JPEG la aplana sobre un fondo blanco; elige PNG o WebP para logos e ilustraciones recortadas.
       </p>
     </div>
   </section>
@@ -141,7 +141,7 @@ const de: ReactNode = (
     <div>
       <h2>Verkleinern, nicht vergrößern</h2>
       <p>
-        Canvas-Resampling ist hervorragend darin, Bilder <em>kleiner</em> zu machen, aber eine Vergrößerung über die Originalmaße hinaus erfindet nur Pixel — rechne mit weicher Zeichnung. Für knackscharfe Ergebnisse geh von der größten Vorlage aus, die du hast, und skaliere nach unten. Beachte außerdem: Transparenz bleibt in PNG- und WebP-Ausgabe erhalten, während JPEG sie zu Schwarz einebnet; wähle für Logos und Freisteller also PNG oder WebP.
+        Canvas-Resampling ist hervorragend darin, Bilder <em>kleiner</em> zu machen, aber eine Vergrößerung über die Originalmaße hinaus erfindet nur Pixel — rechne mit weicher Zeichnung. Für knackscharfe Ergebnisse geh von der größten Vorlage aus, die du hast, und skaliere nach unten. Beachte außerdem: Transparenz bleibt in PNG- und WebP-Ausgabe erhalten, während JPEG sie auf einen weißen Hintergrund einebnet; wähle für Logos und Freisteller also PNG oder WebP.
       </p>
     </div>
   </section>

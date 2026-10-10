@@ -8,7 +8,7 @@ import { useApp } from '@/components/providers/AppProviders'
 const en: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>What Is This Tool?</h2>
-    <p>A <strong>hash function</strong> turns any input into a fixed-length fingerprint. The same input always produces the same hash; even tiny input changes produce totally different hashes. This tool generates SHA-256 and SHA-1 using your browser&apos;s SubtleCrypto API.</p>
+    <p>A <strong>hash function</strong> turns any input into a fixed-length fingerprint. The same input always produces the same hash; even tiny input changes produce totally different hashes. This tool generates SHA-256, SHA-384, SHA-512 and SHA-1 using your browser&apos;s SubtleCrypto API.</p>
     <div>
       <h2>What Hashes Are Used For</h2>
       <ul>
@@ -34,7 +34,7 @@ const en: ReactNode = (
 const zh: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>这是什么工具?</h2>
-    <p>哈希函数会将任意输入转换为固定长度的指纹。相同的输入始终产生相同的哈希;哪怕输入只改动一点点,也会得到完全不同的哈希。本工具使用你浏览器的 SubtleCrypto API 生成 SHA-256 和 SHA-1。</p>
+    <p>哈希函数会将任意输入转换为固定长度的指纹。相同的输入始终产生相同的哈希;哪怕输入只改动一点点,也会得到完全不同的哈希。本工具使用你浏览器的 SubtleCrypto API 生成 SHA-256、SHA-384、SHA-512 和 SHA-1。</p>
     <div>
       <h2>哈希的用途</h2>
       <ul>
@@ -60,7 +60,7 @@ const zh: ReactNode = (
 const es: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>¿Qué es esta herramienta?</h2>
-    <p>Una <strong>función hash</strong> convierte cualquier entrada en una huella digital de longitud fija. La misma entrada siempre produce el mismo hash; incluso cambios diminutos en la entrada producen hashes totalmente distintos. Esta herramienta genera SHA-256 y SHA-1 usando la API SubtleCrypto de tu navegador.</p>
+    <p>Una <strong>función hash</strong> convierte cualquier entrada en una huella digital de longitud fija. La misma entrada siempre produce el mismo hash; incluso cambios diminutos en la entrada producen hashes totalmente distintos. Esta herramienta genera SHA-256, SHA-384, SHA-512 y SHA-1 usando la API SubtleCrypto de tu navegador.</p>
     <div>
       <h2>Para qué se usan los hashes</h2>
       <ul>
@@ -86,7 +86,7 @@ const es: ReactNode = (
 const de: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>Was ist dieses Werkzeug?</h2>
-    <p>Eine <strong>Hashfunktion</strong> wandelt jede Eingabe in einen Fingerabdruck fester Länge um. Dieselbe Eingabe erzeugt immer denselben Hash; schon winzige Eingabeänderungen ergeben völlig andere Hashes. Dieses Werkzeug erzeugt SHA-256 und SHA-1 über die SubtleCrypto-API deines Browsers.</p>
+    <p>Eine <strong>Hashfunktion</strong> wandelt jede Eingabe in einen Fingerabdruck fester Länge um. Dieselbe Eingabe erzeugt immer denselben Hash; schon winzige Eingabeänderungen ergeben völlig andere Hashes. Dieses Werkzeug erzeugt SHA-256, SHA-384, SHA-512 und SHA-1 über die SubtleCrypto-API deines Browsers.</p>
     <div>
       <h2>Wofür Hashes verwendet werden</h2>
       <ul>

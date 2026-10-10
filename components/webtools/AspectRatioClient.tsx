@@ -9,8 +9,8 @@ import { toNum } from '@/lib/format'
 /**
  * Aspect Ratio Calculator
  *
- * 给定比例 W:H + 任一已知宽/高 → 算出另一边;或把比例"塞进"一个边界框(fit)。
- * 支持预设(16:9, 4:3, 21:9, 1:1, 9:16, 3:2)。100% 本地。
+ * 给定比例 W:H + 任一已知宽/高 → 算出另一边,并附等比形状预览。
+ * 支持预设(16:9, 4:3, 21:9, 1:1, 9:16, 3:2, 5:4)。100% 本地。
  */
 
 const PRESETS: { label: string; w: number; h: number }[] = [
@@ -40,7 +40,7 @@ export function AspectRatioClient() {
   // 已知宽 → 高 / 已知高 → 宽
   const computed = useMemo(() => {
     if (ratioW <= 0 || ratioH <= 0) return { width: '', height: '' }
-    // B1:走 lib 的宽容解析,"1920 px"/"1,920" 这类粘贴值不再折叠失败
+    // B1:走 lib 的宽容解析,"1,920"/"$1,920" 这类粘贴值不再折叠失败
     const w = toNum(width)
     const h = toNum(height)
     if (width && Number.isFinite(w) && w > 0) {
@@ -86,6 +86,7 @@ export function AspectRatioClient() {
             id="ar-ratio-w"
             type="number"
             min={1}
+            aria-label={L('width', 'Width')}
             value={ratioW}
             onChange={(e) => setRatioW(Math.max(1, Number(e.target.value) || 1))}
             className={`${inputCls} w-24`}
@@ -96,6 +97,7 @@ export function AspectRatioClient() {
             id="ar-ratio-h"
             type="number"
             min={1}
+            aria-label={L('height', 'Height')}
             value={ratioH}
             onChange={(e) => setRatioH(Math.max(1, Number(e.target.value) || 1))}
             className={`${inputCls} w-24`}

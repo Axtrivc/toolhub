@@ -81,11 +81,15 @@ export const RunwayCalculatorClient = makeCalculatorClient({
       dateStr = T('never', 'Never (Cash-flow positive)')
       profitStr = `✅ ${T('alreadyProfitable', 'Already profitable')}`
     } else if (reachedProfit && balance > 0) {
-      runwayStr = `∞ (${T('defaultAlive', 'Default Alive')})`
+      // zh/es/de 的 defaultAlive 文案含 {month} 占位符,英文 fallback 无 → replace 无害
+      runwayStr = `∞ (${T('defaultAlive', 'Default Alive').replace('{month}', String(breakevenMonth))})`
       dateStr = T('neverBreakeven', 'Never (Reaches breakeven first)')
       profitStr = `✅ ${T('breakevenIn', 'Breakeven in {n} months').replace('{n}', String(breakevenMonth))}`
     } else {
-      const fractionalMonth = month + (balance < 0 && month > 0 ? (balance + (burn - currentRev / (1 + growth / 100))) / (burn - currentRev / (1 + growth / 100)) : 0)
+      // 耗尽当月的净烧:break 时 currentRev 尚未乘 (1+g) 推进,burn − currentRev 恰为当月值;
+      // (balance + 当月净烧) ÷ 当月净烧 = 当月已消耗比例(balance<0 时 <1,balance=0 时恰为整月 1.0)
+      const breakNet = burn - currentRev
+      const fractionalMonth = cash > 0 && balance <= 0 ? month + (balance + breakNet) / breakNet : month
       const finalMonths = Math.max(0, fractionalMonth)
       runwayStr = `${fmtNum(finalMonths, 1)} ${T('monthsWord', 'months')}`
 
@@ -117,7 +121,7 @@ export const RunwayCalculatorClient = makeCalculatorClient({
     const burn = toNumStrict(v.monthlyBurn)
     const rev = toNumStrict(v.monthlyRevenue)
     const growth = toNumStrict(v.revenueGrowth)
-    if ([cash, burn, rev, growth].some((n) => Number.isNaN(n)) || cash < 0 || !(burn > 0) || rev < 0) return null
+    if ([cash, burn, rev, growth].some((n) => Number.isNaN(n)) || cash < 0 || !(burn > 0) || rev < 0 || growth < 0) return null
 
     const xLabels: string[] = ['M0']
     const balances: number[] = [cash]

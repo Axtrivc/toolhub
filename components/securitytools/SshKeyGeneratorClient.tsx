@@ -220,7 +220,7 @@ export function SshKeyGeneratorClient() {
         <button type="button" onClick={generate} disabled={busy} className="btn btn-primary disabled:cursor-not-allowed disabled:opacity-50">
           {busy ? L('generating', 'Generating…') : L('generateKeyPair', 'Generate key pair')}
         </button>
-        {busy && (
+        {busy && keyType === 'rsa' && (
           <span className="text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>
             {L('rsa4096Wait', 'RSA-4096 can take a few seconds…')}
           </span>

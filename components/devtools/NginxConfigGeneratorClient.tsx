@@ -9,8 +9,9 @@ import { tui } from '@/lib/i18n/tool-l10n'
 /**
  * Nginx Config Generator —— 反向代理配置生成器
  *
- * 表单驱动实时生成完整 nginx server block:SSL(Let's Encrypt 证书路径 + HTTP→HTTPS 跳转)、
- * WebSocket upgrade map、gzip、静态资源缓存、client_max_body_size。
+ * 表单驱动实时生成完整 nginx server block:SSL(Let's Encrypt 证书路径 + HTTP→HTTPS 跳转 +
+ * TLS 1.2/1.3 现代协议/密码套件)、WebSocket upgrade map + 长连接超时、gzip、静态资源缓存、
+ * client_max_body_size。
  * 始终带上 Host/X-Real-IP/X-Forwarded-For/X-Forwarded-Proto 与 proxy_http_version 1.1。
  */
 
@@ -58,6 +59,10 @@ function buildNginxConfig(o: NginxOptions): string {
   const domain = o.domain.replace(/[\r\n]+/g, ' ').trim() || 'example.com'
   const target = o.target.replace(/[\r\n]+/g, ' ').trim() || 'http://127.0.0.1:3000'
   const port = o.port.replace(/[\r\n]+/g, ' ').trim() || '80'
+  // 端口守卫:仅接受 1-65535 的整数(粘贴残留如 "8080x" 宽容取 8080),其余回退 80 ——
+  // 否则 listen abc; 之类会让 nginx -t 直接失败
+  const portNum = Number.parseInt(port, 10)
+  const safePort = portNum >= 1 && portNum <= 65535 ? String(portNum) : '80'
   const lines: string[] = []
 
   lines.push(`# Nginx reverse proxy configuration for ${domain}`)
@@ -91,7 +96,7 @@ function buildNginxConfig(o: NginxOptions): string {
     lines.push('    listen 443 ssl;')
     lines.push('    http2 on;')
   } else {
-    lines.push(`    listen ${port};`)
+    lines.push(`    listen ${safePort};`)
   }
   lines.push(`    server_name ${domain};`)
   lines.push('')
@@ -100,6 +105,12 @@ function buildNginxConfig(o: NginxOptions): string {
     lines.push("    # Let's Encrypt certificate (certbot)")
     lines.push(`    ssl_certificate     /etc/letsencrypt/live/${domain}/fullchain.pem;`)
     lines.push(`    ssl_certificate_key /etc/letsencrypt/live/${domain}/privkey.pem;`)
+    lines.push('    # Modern TLS: 1.2/1.3 only, Mozilla intermediate cipher list')
+    lines.push('    ssl_protocols TLSv1.2 TLSv1.3;')
+    lines.push(
+      '    ssl_ciphers ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:DHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-GCM-SHA384;',
+    )
+    lines.push('    ssl_prefer_server_ciphers off;')
     lines.push('')
   }
 
@@ -148,6 +159,10 @@ function buildNginxConfig(o: NginxOptions): string {
     lines.push('        # WebSocket support')
     lines.push('        proxy_set_header Upgrade $http_upgrade;')
     lines.push('        proxy_set_header Connection $connection_upgrade;')
+    // 长连接保活:默认 60s 空闲读超时会掐断 WebSocket,放宽到 300s
+    lines.push('        # Keep idle WebSocket connections open (default 60s would drop them)')
+    lines.push('        proxy_read_timeout 300s;')
+    lines.push('        proxy_send_timeout 300s;')
   }
 
   lines.push('    }')

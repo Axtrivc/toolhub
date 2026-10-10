@@ -15,9 +15,9 @@ export const DensityConverterClient = makeUnitConverter({
     'gcm3': { label: 'g/cm³', factor: 1000 },
     'gl': { label: 'g/L', factor: 1 },
     'gml': { label: 'g/mL', factor: 1000 },
-    'lbft3': { label: 'lb/ft³', factor: 16.0185 },
+    'lbft3': { label: 'lb/ft³', factor: 16.01846337396014 }, // 0.45359237 kg ÷ 0.028316846592 m³
     'lbgal': { label: 'lb/US gal', factor: 119.82642731697485 }, // 0.45359237 kg ÷ 0.003785411784 m³
-    'lbin3': { label: 'lb/in³', factor: 27679.9 },
+    'lbin3': { label: 'lb/in³', factor: 27679.904710203125 }, // 0.45359237 kg ÷ 0.000016387064 m³
   },
   note: '🧪 Density = mass ÷ volume. Water = 1000 kg/m³ = 1 g/cm³. Gold = 19,320 kg/m³.',
 })
@@ -34,9 +34,9 @@ export const PowerConverterClient = makeUnitConverter({
     kw: { label: 'Kilowatts (kW)', factor: 1000 },
     mw: { label: 'Megawatts (MW)', factor: 1000000 },
     gigawatt: { label: 'Gigawatts (GW)', factor: 1000000000 },
-    hp: { label: 'Horsepower (hp)', factor: 745.7 },
-    'hp-metric': { label: 'Metric horsepower (PS)', factor: 735.499 },
-    'bs': { label: 'BTU/sec', factor: 1055.06 },
+    hp: { label: 'Horsepower (hp)', factor: 745.699872 }, // 550 ft·lbf/s,同公式区数值
+    'hp-metric': { label: 'Metric horsepower (PS)', factor: 735.49875 }, // 75 kgf·m/s,精确值
+    'bs': { label: 'BTU/sec', factor: 1055.05585262 }, // IT 定义,同 energy-converter
     // 小写 c = gram-calorie(大写 Calorie 惯指千卡,易误导)
     'cal-s': { label: 'calories/sec (cal/s)', factor: 4.184 },
   },

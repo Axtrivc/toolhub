@@ -29,7 +29,9 @@ const en: ReactNode = (
         wpm), the <strong>adult average</strong> (~150 wpm), <strong>fast reading</strong> (200 wpm), and{' '}
         <strong>skimming</strong> (300 wpm), plus a custom slider from 50–400 wpm. Speaking presets reflect real
         delivery: a measured <strong>presentation</strong> (~100 wpm), normal <strong>conversation</strong> (~130
-        wpm), and a <strong>fast speaker</strong> (~160 wpm).
+        wpm), and a <strong>fast speaker</strong> (~160 wpm). For Chinese, Japanese, or Korean text, every
+        character counts as one word and the presets switch to characters-per-minute (reading 200/300/400/600,
+        speaking 150/200/250) with the slider reaching 800.
       </p>
     </div>
 
@@ -66,16 +68,16 @@ const zh: ReactNode = (
     </p>
 
     <div>
-      <h2>估算方式是如何计算的</h2>
+      <h2>估算是如何计算的</h2>
       <p>
-        词数通过将去除首尾空白的文本按空白拆分来统计,时间就是 <code>words ÷ words-per-minute</code>。预设覆盖了常见语速:<strong>慢速阅读</strong>(100 wpm)、<strong>成年人平均</strong>(~150 wpm)、<strong>快速阅读</strong>(200 wpm)和<strong>略读</strong>(300 wpm),另有 50–400 wpm 的自定义滑块。口语预设反映真实表达:从容的<strong>演讲</strong>(~100 wpm)、正常<strong>对话</strong>(~130 wpm)和<strong>快语速</strong>(~160 wpm)。
+        词数通过将去除首尾空白的文本按空白拆分来统计,时间就是 <code>words ÷ words-per-minute</code>。预设覆盖了常见语速:<strong>慢速阅读</strong>(100 wpm)、<strong>成年人平均</strong>(~150 wpm)、<strong>快速阅读</strong>(200 wpm)和<strong>略读</strong>(300 wpm),另有 50–400 wpm 的自定义滑块。口语预设反映真实表达:从容的<strong>演讲</strong>(~100 wpm)、正常<strong>对话</strong>(~130 wpm)和<strong>快语速</strong>(~160 wpm)。粘贴中文(或日文/韩文)文本时,每个字符计为 1 词,预设会自动切换成字/分口径:阅读 200/300/400/600、演讲 150/200/250,自定义滑块上限也随之放宽到 800。
       </p>
     </div>
 
     <div>
       <h2>你该用哪个数字?</h2>
       <p>
-        做<strong>博客阅读时长徽章</strong>时,一些 CMS 插件假设 150–200 wpm;而 Medium,例如,假设约 265 wpm。做<strong>演讲或配音</strong>时,请使用口语数据 —— 并记住它们假定不间断地表达。幻灯片、演示、等笑声的停顿以及 Q&A 很容易额外增加 10–20%,所以如果工具显示 9:30,请预留 10–11 分钟的档期。<em>页数</em>估算(250 词/页)在需求写「约四页」时很有用。
+        做<strong>博客阅读时长徽章</strong>时,一些 CMS 插件假设 150–200 wpm,而 Medium 假设约 265 wpm。做<strong>演讲或配音</strong>时,请使用口语数据 —— 并记住它们假定不间断地表达。幻灯片、演示、等笑声的停顿以及 Q&A 很容易额外增加 10–20%,所以如果工具显示 9:30,请预留 10–11 分钟的档期。<em>页数</em>估算(250 词/页)在需求写「约四页」时很有用。
       </p>
     </div>
 
@@ -109,7 +111,9 @@ const es: ReactNode = (
         <strong>lectura rápida</strong> (200 wpm) y <strong>lectura diagonal</strong> (300 wpm), además de un
         deslizador personalizado de 50–400 wpm. Los preajustes de habla reflejan una entrega real: una{' '}
         <strong>presentación</strong> mesurada (~100 wpm), una <strong>conversación</strong> normal (~130 wpm) y un{' '}
-        <strong>hablante rápido</strong> (~160 wpm).
+        <strong>hablante rápido</strong> (~160 wpm). Con texto chino, japonés o coreano, cada carácter cuenta
+        como una palabra y los preajustes cambian automáticamente a caracteres por minuto (lectura
+        200/300/400/600, habla 150/200/250), con el deslizador hasta 800.
       </p>
     </div>
 
@@ -159,7 +163,9 @@ const de: ReactNode = (
         <strong>schnelles Lesen</strong> (200 wpm) und <strong>überfliegendes Lesen</strong> (300 wpm), plus ein
         Schieberegler von 50–400 wpm. Sprech-Voreinstellungen spiegeln reales Sprechen: eine gemessene{' '}
         <strong>Präsentation</strong> (~100 wpm), ein normales <strong>Gespräch</strong> (~130 wpm) und ein{' '}
-        <strong>schneller Sprecher</strong> (~160 wpm).
+        <strong>schneller Sprecher</strong> (~160 wpm). Bei chinesischem, japanischem oder koreanischem Text
+        zählt jedes Zeichen als Wort, und die Voreinstellungen wechseln automatisch auf Zeichen pro Minute
+        (Lesen 200/300/400/600, Sprechen 150/200/250); der Regler reicht dann bis 800.
       </p>
     </div>
 

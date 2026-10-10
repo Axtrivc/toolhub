@@ -113,7 +113,7 @@ export function CssClampCalculatorClient() {
               <ResultCard
                 label={output && output.tvValid ? `${L('sizeAt', 'Size at ')}${fmt(output.tv)}px` : L('testViewport', 'Test viewport')}
                 value={tvFluid !== null ? `${fmt(tvFluid)}px` : '—'}
-                sublabel={tvFluid !== null && c ? `${fmt(tvFluid / c.rootF)}rem` : L('enterWidthAbove', 'enter a width above')}
+                sublabel={tvFluid !== null && c ? `${fmt(tvFluid / c.rootF)}rem` : L('enterWidthAbove', 'enter a valid viewport width')}
                 highlight
               />
             </div>

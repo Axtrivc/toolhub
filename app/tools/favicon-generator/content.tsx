@@ -36,9 +36,9 @@ const en: ReactNode = (
       <p>
         After downloading, place the files in your site root and add these tags to your{' '}
         <code>&lt;head&gt;</code>:{' '}
-        <code>&lt;link rel=&quot;icon&quot; type=&quot;image/png&quot; sizes=&quot;32×32&quot; href=&quot;/favicon-32x32.png&quot;&gt;</code>,{' '}
-        <code>&lt;link rel=&quot;icon&quot; type=&quot;image/png&quot; sizes=&quot;16×16&quot; href=&quot;/favicon-16x16.png&quot;&gt;</code>, and{' '}
-        <code>&lt;link rel=&quot;apple-touch-icon&quot; sizes=&quot;180×180&quot; href=&quot;/apple-touch-icon.png&quot;&gt;</code>.
+        <code>&lt;link rel=&quot;icon&quot; type=&quot;image/png&quot; sizes=&quot;32x32&quot; href=&quot;/favicon-32x32.png&quot;&gt;</code>,{' '}
+        <code>&lt;link rel=&quot;icon&quot; type=&quot;image/png&quot; sizes=&quot;16x16&quot; href=&quot;/favicon-16x16.png&quot;&gt;</code>, and{' '}
+        <code>&lt;link rel=&quot;apple-touch-icon&quot; sizes=&quot;180x180&quot; href=&quot;/apple-touch-icon.png&quot;&gt;</code>.
         Browsers pick the best match automatically.
       </p>
     </div>
@@ -81,9 +81,9 @@ const zh: ReactNode = (
       <p>
         下载后,将文件放到网站根目录,并在你的{' '}
         <code>&lt;head&gt;</code> 中添加以下标签:{' '}
-        <code>&lt;link rel=&quot;icon&quot; type=&quot;image/png&quot; sizes=&quot;32×32&quot; href=&quot;/favicon-32x32.png&quot;&gt;</code>、{' '}
-        <code>&lt;link rel=&quot;icon&quot; type=&quot;image/png&quot; sizes=&quot;16×16&quot; href=&quot;/favicon-16x16.png&quot;&gt;</code> 以及{' '}
-        <code>&lt;link rel=&quot;apple-touch-icon&quot; sizes=&quot;180×180&quot; href=&quot;/apple-touch-icon.png&quot;&gt;</code>。浏览器会自动选择最匹配的图标。
+        <code>&lt;link rel=&quot;icon&quot; type=&quot;image/png&quot; sizes=&quot;32x32&quot; href=&quot;/favicon-32x32.png&quot;&gt;</code>、{' '}
+        <code>&lt;link rel=&quot;icon&quot; type=&quot;image/png&quot; sizes=&quot;16x16&quot; href=&quot;/favicon-16x16.png&quot;&gt;</code> 以及{' '}
+        <code>&lt;link rel=&quot;apple-touch-icon&quot; sizes=&quot;180x180&quot; href=&quot;/apple-touch-icon.png&quot;&gt;</code>。浏览器会自动选择最匹配的图标。
       </p>
     </div>
     <div>
@@ -130,9 +130,9 @@ const es: ReactNode = (
       <p>
         Tras descargarlos, coloca los archivos en la raíz de tu sitio y añade estas etiquetas a tu{' '}
         <code>&lt;head&gt;</code>:{' '}
-        <code>&lt;link rel=&quot;icon&quot; type=&quot;image/png&quot; sizes=&quot;32×32&quot; href=&quot;/favicon-32x32.png&quot;&gt;</code>,{' '}
-        <code>&lt;link rel=&quot;icon&quot; type=&quot;image/png&quot; sizes=&quot;16×16&quot; href=&quot;/favicon-16x16.png&quot;&gt;</code> y{' '}
-        <code>&lt;link rel=&quot;apple-touch-icon&quot; sizes=&quot;180×180&quot; href=&quot;/apple-touch-icon.png&quot;&gt;</code>.
+        <code>&lt;link rel=&quot;icon&quot; type=&quot;image/png&quot; sizes=&quot;32x32&quot; href=&quot;/favicon-32x32.png&quot;&gt;</code>,{' '}
+        <code>&lt;link rel=&quot;icon&quot; type=&quot;image/png&quot; sizes=&quot;16x16&quot; href=&quot;/favicon-16x16.png&quot;&gt;</code> y{' '}
+        <code>&lt;link rel=&quot;apple-touch-icon&quot; sizes=&quot;180x180&quot; href=&quot;/apple-touch-icon.png&quot;&gt;</code>.
         Los navegadores eligen la mejor coincidencia automáticamente.
       </p>
     </div>
@@ -183,9 +183,9 @@ const de: ReactNode = (
       <p>
         Platziere nach dem Download die Dateien im Wurzelverzeichnis deiner Seite und füge deinem{' '}
         <code>&lt;head&gt;</code> diese Tags hinzu:{' '}
-        <code>&lt;link rel=&quot;icon&quot; type=&quot;image/png&quot; sizes=&quot;32×32&quot; href=&quot;/favicon-32x32.png&quot;&gt;</code>,{' '}
-        <code>&lt;link rel=&quot;icon&quot; type=&quot;image/png&quot; sizes=&quot;16×16&quot; href=&quot;/favicon-16x16.png&quot;&gt;</code> und{' '}
-        <code>&lt;link rel=&quot;apple-touch-icon&quot; sizes=&quot;180×180&quot; href=&quot;/apple-touch-icon.png&quot;&gt;</code>.
+        <code>&lt;link rel=&quot;icon&quot; type=&quot;image/png&quot; sizes=&quot;32x32&quot; href=&quot;/favicon-32x32.png&quot;&gt;</code>,{' '}
+        <code>&lt;link rel=&quot;icon&quot; type=&quot;image/png&quot; sizes=&quot;16x16&quot; href=&quot;/favicon-16x16.png&quot;&gt;</code> und{' '}
+        <code>&lt;link rel=&quot;apple-touch-icon&quot; sizes=&quot;180x180&quot; href=&quot;/apple-touch-icon.png&quot;&gt;</code>.
         Der Browser wählt automatisch die beste Passung.
       </p>
     </div>

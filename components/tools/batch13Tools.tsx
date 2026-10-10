@@ -221,11 +221,11 @@ export function BaseConverterClient() {
   const parsed = useMemo(() => parseInBase(value, base), [value, base])
   const bases: Array<[number, string]> = [
     [2, L('binary', 'Binary (2)')],
-    [8, 'Octal (8)'],
-    [10, 'Decimal (10)'],
-    [16, 'Hexadecimal (16)'],
-    [32, 'Base32'],
-    [36, 'Base36'],
+    [8, L('octal', 'Octal (8)')],
+    [10, L('decimal', 'Decimal (10)')],
+    [16, L('hexadecimal', 'Hexadecimal (16)')],
+    [32, L('base32', 'Base32')],
+    [36, L('base36', 'Base36')],
   ]
 
   return (
@@ -323,9 +323,12 @@ export function CronGeneratorClient() {
         {preset === 'everyNMin' && (
           <CalculatorField id="cg-min" label={L('everyNLabel', 'Run every N minutes')} value={String(minutes)} onChange={(v) => setMinutes(Math.min(59, Math.max(1, Number(v) || 1)))} placeholder="15" />
         )}
-        {(preset === 'daily' || preset === 'weekdays' || preset === 'weekly') && (
+        {(preset === 'hourly' || preset === 'daily' || preset === 'weekdays' || preset === 'weekly') && (
           <>
-            <CalculatorField id="cg-hour" label={L('hourLabel', 'Hour (0-23)')} value={String(hour)} onChange={(v) => setHour(Math.min(23, Math.max(0, Number(v) || 0)))} placeholder="3" />
+            {preset !== 'hourly' && (
+              <CalculatorField id="cg-hour" label={L('hourLabel', 'Hour (0-23)')} value={String(hour)} onChange={(v) => setHour(Math.min(23, Math.max(0, Number(v) || 0)))} placeholder="3" />
+            )}
+            {/* hourly 也需要 :MM 分钟位(正文承诺 "hourly at :MM"),此前无输入只能用残留值 */}
             <CalculatorField id="cg-mof" label={L('minuteLabel', 'Minute (0-59)')} value={String(minuteOfHour)} onChange={(v) => setMinuteOfHour(Math.min(59, Math.max(0, Number(v) || 0)))} placeholder="0" />
           </>
         )}
@@ -384,8 +387,14 @@ export function HtaccessRedirectGeneratorClient() {
     }
     const singles = pairs.filter((p) => p.from.trim() && p.to.trim())
       .map((p) => {
-        const from = p.from.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').replace(/^\/+/, '/').replace(/\/+$/, '')
-        return `# ${p.from} → ${p.to}\nRewriteRule ^${from.slice(1)}/?$ ${p.to} [R=301,L]`
+        // 粘贴宽容:先归一前后/重复斜杠再转义。旧写法 slice(1) 会把无前导斜杠的
+        // "old-page" 吞掉首字母(生成 ^ld-page/?$),匹配到错误路径;目标缺前导
+        // 斜杠(且非完整 URL)时 Apache 会按相对路径解析,同样需要补上
+        const from = p.from.trim().replace(/^\/+|\/+$/g, '').replace(/\/{2,}/g, '/')
+          .replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+        const toRaw = p.to.trim()
+        const to = /^https?:\/\//i.test(toRaw) || toRaw.startsWith('/') ? toRaw : '/' + toRaw
+        return `# ${p.from} → ${p.to}\nRewriteRule ^${from}/?$ ${to} [R=301,L]`
       })
       .join('\n\n')
     if (singles) blocks.push(`\n# Individual redirects\n${singles}`)

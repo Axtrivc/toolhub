@@ -99,7 +99,7 @@ const es: ReactNode = (
     <div>
       <h2>Los SVG autocontenidos se convierten mejor</h2>
       <p>
-        Si tu SVG hace referencia a imágenes externas (<code>&lt;image href=&quot;https://...&quot;&gt;</code>) o fuentes web, las reglas de seguridad del navegador pueden bloquear la exportación del canvas (un «canvas contaminado»). Incrusta las imágenes como data URIs y convierte el texto a trazos para una conversión más fiable. Todo lo que pegues o subas se queda en tu dispositivo.
+        Si tu SVG hace referencia a imágenes externas (<code>&lt;image href=&quot;https://...&quot;&gt;</code>) o fuentes web, las reglas de seguridad del navegador pueden bloquear la exportación del canvas (un «canvas contaminado»). Incrusta las imágenes como data URIs y convierte el texto a trazados para una conversión más fiable. Todo lo que pegues o subas se queda en tu dispositivo.
       </p>
     </div>
   </section>
@@ -117,7 +117,7 @@ const de: ReactNode = (
       <ul>
         <li>Du brauchst ein Thumbnail, Favicon oder Open-Graph-Bild in einem universell unterstützten Format.</li>
         <li>Eine Plattform (einige E-Mail-Clients, ältere CMS) rendert kein Inline-SVG.</li>
-        <li>Du möchtest einen Raster-Export fester Größe für den Druck oder einen Design-Mockup mit 2x/3x-Dichte.</li>
+        <li>Du möchtest einen Raster-Export fester Größe für den Druck oder ein Design-Mockup mit 2x/3x-Dichte.</li>
       </ul>
     </div>
     <div>
@@ -130,7 +130,7 @@ const de: ReactNode = (
     <div>
       <h2>Eigenständige SVGs konvertieren am besten</h2>
       <p>
-        Wenn dein SVG auf externe Bilder verweist (<code>&lt;image href=&quot;https://...&quot;&gt;</code>) oder Web-Schrifarten nutzt, können die Sicherheitsregeln des Browsers den Canvas-Export blockieren (ein „verunreinigter Canvas"). Bette Bilder als Data-URIs ein und wandle Text in Pfade um, um die zuverlässigste Konvertierung zu erhalten. Alles, was du einfügst oder hochlädst, bleibt auf deinem Gerät.
+        Wenn dein SVG auf externe Bilder verweist (<code>&lt;image href=&quot;https://...&quot;&gt;</code>) oder Web-Schriftarten nutzt, können die Sicherheitsregeln des Browsers den Canvas-Export blockieren (ein „verunreinigter Canvas“). Bette Bilder als Data-URIs ein und wandle Text in Pfade um, um die zuverlässigste Konvertierung zu erhalten. Alles, was du einfügst oder hochlädst, bleibt auf deinem Gerät.
       </p>
     </div>
   </section>

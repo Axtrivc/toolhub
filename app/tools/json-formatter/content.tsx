@@ -45,7 +45,7 @@ const zh: ReactNode = (
       <ul>
         <li>调试 API 响应</li>
         <li>阅读配置文件</li>
-        <li>开发期间审查大型 payload</li>
+        <li>开发期间审查大型数据载荷</li>
         <li>部署前捕捉语法错误</li>
       </ul>
     </div>
@@ -96,7 +96,7 @@ const de: ReactNode = (
     <h2>Was ist dieses Werkzeug?</h2>
     <p>
       Dieses Werkzeug formatiert und validiert JSON. Füge minimiertes oder unordentliches JSON ein
-      und erhältst richtig eingerückten, lesbaren Output. Syntaxfehler werden mit einer Meldung
+      und du erhältst richtig eingerückten, lesbaren Output. Syntaxfehler werden mit einer Meldung
       angezeigt.
     </p>
     <div>

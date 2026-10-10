@@ -11,8 +11,8 @@ const en: ReactNode = (
     <p>
       Modern CSS uses <code>rem</code> and <code>em</code> instead of pixels so layouts scale with the
       user&apos;s font-size preference. But converting <code>px</code> to <code>rem</code> in your head is
-      error-prone — you have to divide by the root font size, which is rarely exactly 16px. This tool
-      does the math instantly and shows a live table for the sizes you use every day.
+      error-prone — you have to divide by the root font size, which isn&apos;t always exactly 16px. This
+      tool does the math instantly and shows a live table for the sizes you use every day.
     </p>
     <div>
       <h2>rem vs em — when to use which</h2>
@@ -40,7 +40,7 @@ const en: ReactNode = (
       <p>
         Some contexts (design specs, Figma exports, browser DevTools) speak in pixels. Converting
         those <code>px</code> values to <code>rem</code> keeps your stylesheet scalable while matching
-        the designer&apos;s intent. This tool&apos;s table covers the common breakpoints (8, 12, 16,
+        the designer&apos;s intent. This tool&apos;s table covers the common sizes (8, 12, 16,
         20, 24, 32, 40, 48…) so you can copy the right value without reaching for a calculator.
       </p>
     </div>
@@ -52,7 +52,7 @@ const zh: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>这是什么工具?</h2>
     <p>
-      现代 CSS 使用 <code>rem</code> 和 <code>em</code> 而非像素,使布局能随用户的字号偏好缩放。但心算把 <code>px</code> 换算成 <code>rem</code> 很容易出错 —— 你得除以根字号,而它很少恰好是 16px。本工具可即时完成换算,并为日常使用的尺寸提供一张实时表格。
+      现代 CSS 使用 <code>rem</code> 和 <code>em</code> 而非像素,使布局能随用户的字号偏好缩放。但心算把 <code>px</code> 换算成 <code>rem</code> 很容易出错 —— 你得除以根字号,而它不一定恰好是 16px。本工具可即时完成换算,并为日常使用的尺寸提供一张实时表格。
     </p>
     <div>
       <h2>rem 与 em —— 该用哪一个</h2>
@@ -70,7 +70,7 @@ const zh: ReactNode = (
     <div>
       <h2>为什么仍然会出现像素值</h2>
       <p>
-        某些场景(设计规范、Figma 导出、浏览器 DevTools)以像素为单位。把这些 <code>px</code> 值换算为 <code>rem</code>,既保持样式表的可缩放性,又符合设计师的意图。本工具的表格覆盖常见断点(8、12、16、20、24、32、40、48……),让你无需计算器就能复制到合适的值。
+        某些场景(设计规范、Figma 导出、浏览器 DevTools)以像素为单位。把这些 <code>px</code> 值换算为 <code>rem</code>,既保持样式表的可缩放性,又符合设计师的意图。本工具的表格覆盖常用尺寸(8、12、16、20、24、32、40、48……),让你无需计算器就能复制到合适的值。
       </p>
     </div>
   </section>
@@ -81,7 +81,7 @@ const es: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>¿Qué es esta herramienta?</h2>
     <p>
-      El CSS moderno usa <code>rem</code> y <code>em</code> en lugar de píxeles para que los diseños escalen con la preferencia de tamaño de fuente del usuario. Pero convertir <code>px</code> a <code>rem</code> mentalmente es propenso a errores — tienes que dividir por el tamaño de fuente raíz, que rara vez es exactamente 16px. Esta herramienta hace los cálculos al instante y muestra una tabla en vivo con los tamaños que usas a diario.
+      El CSS moderno usa <code>rem</code> y <code>em</code> en lugar de píxeles para que los diseños escalen con la preferencia de tamaño de fuente del usuario. Pero convertir <code>px</code> a <code>rem</code> mentalmente es propenso a errores — tienes que dividir por el tamaño de fuente raíz, que no siempre es exactamente 16px. Esta herramienta hace los cálculos al instante y muestra una tabla en vivo con los tamaños que usas a diario.
     </p>
     <div>
       <h2>rem vs em — cuándo usar cuál</h2>
@@ -100,7 +100,7 @@ const es: ReactNode = (
     <div>
       <h2>Por qué siguen apareciendo valores en píxeles</h2>
       <p>
-        Algunos contextos (especificaciones de diseño, exportaciones de Figma, DevTools del navegador) hablan en píxeles. Convertir esos valores en <code>px</code> a <code>rem</code> mantiene tu hoja de estilos escalable y respeta la intención del diseñador. La tabla de esta herramienta cubre los puntos de ruptura habituales (8, 12, 16, 20, 24, 32, 40, 48…) para que copies el valor correcto sin necesidad de una calculadora.
+        Algunos contextos (especificaciones de diseño, exportaciones de Figma, DevTools del navegador) hablan en píxeles. Convertir esos valores en <code>px</code> a <code>rem</code> mantiene tu hoja de estilos escalable y respeta la intención del diseñador. La tabla de esta herramienta cubre los tamaños habituales (8, 12, 16, 20, 24, 32, 40, 48…) para que copies el valor correcto sin necesidad de una calculadora.
       </p>
     </div>
   </section>
@@ -111,7 +111,7 @@ const de: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>Was ist dieses Werkzeug?</h2>
     <p>
-      Modernes CSS verwendet <code>rem</code> und <code>em</code> statt Pixel, damit Layouts mit der Schriftgrößen-Einstellung des Nutzers skalieren. Aber <code>px</code> zu <code>rem</code> im Kopf umzurechnen ist fehleranfällig — du musst durch die Wurzel-Schriftgröße teilen, die selten exakt 16px ist. Dieses Werkzeug nimmt dir die Rechnung sofort ab und zeigt eine Live-Tabelle mit den Größen, die du täglich brauchst.
+      Modernes CSS verwendet <code>rem</code> und <code>em</code> statt Pixel, damit Layouts mit der Schriftgrößen-Einstellung des Nutzers skalieren. Aber <code>px</code> zu <code>rem</code> im Kopf umzurechnen ist fehleranfällig — du musst durch die Wurzel-Schriftgröße teilen, die nicht immer exakt 16px ist. Dieses Werkzeug nimmt dir die Rechnung sofort ab und zeigt eine Live-Tabelle mit den Größen, die du täglich brauchst.
     </p>
     <div>
       <h2>rem vs em — wann du was verwendest</h2>
@@ -130,7 +130,7 @@ const de: ReactNode = (
     <div>
       <h2>Warum Pixelwerte weiterhin auftauchen</h2>
       <p>
-        Manche Kontexte (Design-Spezifikationen, Figma-Exporte, Browser-DevTools) sprechen in Pixeln. Diese <code>px</code>-Werte in <code>rem</code> umzuwandeln hält dein Stylesheet skalierbar und bleibt dabei nah an der Absicht des Designers. Die Tabelle dieses Werkzeugs deckt die gängigen Breakpoints ab (8, 12, 16, 20, 24, 32, 40, 48…), damit du den richtigen Wert kopieren kannst, ohne nach einem Taschenrechner zu greifen.
+        Manche Kontexte (Design-Spezifikationen, Figma-Exporte, Browser-DevTools) sprechen in Pixeln. Diese <code>px</code>-Werte in <code>rem</code> umzuwandeln hält dein Stylesheet skalierbar und bleibt dabei nah an der Absicht des Designers. Die Tabelle dieses Werkzeugs deckt die gängigen Größen ab (8, 12, 16, 20, 24, 32, 40, 48…), damit du den richtigen Wert kopieren kannst, ohne nach einem Taschenrechner zu greifen.
       </p>
     </div>
   </section>

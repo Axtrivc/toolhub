@@ -60,7 +60,7 @@ export function CsvToFinetuneClient() {
   const result = useMemo(() => {
     if (!csv.trim() || tooLarge) return { jsonl: '', headers: [] as string[], errors: [] as string[], count: 0 }
     const rows = parseCsvSimple(csv, ',')
-    if (rows.length < 2) return { jsonl: '', headers: [], errors: ['Need a header row plus at least one data row'], count: 0 }
+    if (rows.length < 2) return { jsonl: '', headers: [], errors: [L('needHeaderRow', 'Need a header row plus at least one data row')], count: 0 }
     const headers = rows[0].map((h) => h.trim())
     const uIdx = headers.indexOf(userCol.trim())
     const aIdx = headers.indexOf(assistantCol.trim())
@@ -154,6 +154,11 @@ const TV_MAX_RENDERED_CHUNKS = 800
 /** 近似分词:优先整词切分,长词按 4 字符/块,空格并入后续块(贴近 BPE 直觉) */
 function chunkText(text: string): string[] {
   const chunks: string[] = []
+  // 拉丁段:短词整块,长词 4 字符切(纯拉丁词与 CJK 词内夹杂的拉丁段同口径)
+  const pushLatin = (s: string) => {
+    if (s.length <= 5) chunks.push(s)
+    else for (let i = 0; i < s.length; i += 4) chunks.push(s.slice(i, i + 4))
+  }
   const words = text.split(/(\s+)/)
   for (const w of words) {
     if (!w) continue
@@ -167,25 +172,25 @@ function chunkText(text: string): string[] {
       let buf = ''
       for (const ch of w) {
         if (/[\u2e80-\u9fff\uf900-\ufaff\uff00-\uffef]/.test(ch)) {
-          if (buf) { chunks.push(buf); buf = '' }
+          if (buf) { pushLatin(buf); buf = '' }
           chunks.push(ch)
         } else buf += ch
       }
-      if (buf) chunks.push(buf)
+      if (buf) pushLatin(buf)
       continue
     }
-    // 拉丁词:短词整块,长词 4 字符切
-    if (w.length <= 5) chunks.push(w)
-    else {
-      for (let i = 0; i < w.length; i += 4) chunks.push(w.slice(i, i + 4))
-    }
+    pushLatin(w)
   }
-  // 把孤立空白块合并进前块
+  // 空白并入后续块(贴近 BPE:词首空格与后词同 token,如 " hello");
+  // 结尾空白没有后块,保留为独立块(真实分词器里尾随空格也常是独立 token)
   const merged: string[] = []
+  let pending = ''
   for (const c of chunks) {
-    if (c.trim() === '' && merged.length) merged[merged.length - 1] += c
-    else merged.push(c)
+    if (c.trim() === '') { pending += c; continue }
+    merged.push(pending + c)
+    pending = ''
   }
+  if (pending) merged.push(pending)
   return merged
 }
 
@@ -266,12 +271,13 @@ export function TokenVisualizerClient() {
 interface EmbedModel { id: string; label: string; dims: number; ctx: number; pricePer1M: number }
 
 // 已淘汰 text-embedding-ada-002(OpenAI 逐步下线,不再列入比价);
-// 现役矩阵:OpenAI v3 两档 + Cohere v4 + Voyage-3 + Gemini 004(配额内免费)
+// 现役矩阵:OpenAI v3 两档 + Cohere v4(默认 1536 维与 Matryoshka 截断的
+// 1024 维两档,token 同价,int8 只是压缩格式不改价/维度)+ Voyage-3 + Gemini 004(配额内免费)
 const EMBED_MODELS: EmbedModel[] = [
   { id: 'openai-3-small', label: 'OpenAI text-embedding-3-small', dims: 1536, ctx: 8191, pricePer1M: 0.02 },
   { id: 'openai-3-large', label: 'OpenAI text-embedding-3-large', dims: 3072, ctx: 8191, pricePer1M: 0.13 },
   { id: 'cohere-embed-v4', label: 'Cohere embed-v4', dims: 1536, ctx: 128000, pricePer1M: 0.11 },
-  { id: 'cohere-embed-light', label: 'Cohere embed-v4 (int8)', dims: 1024, ctx: 128000, pricePer1M: 0.035 },
+  { id: 'cohere-embed-1024', label: 'Cohere embed-v4 (1024-dim)', dims: 1024, ctx: 128000, pricePer1M: 0.11 },
   { id: 'voyage-3', label: 'Voyage voyage-3', dims: 1024, ctx: 32000, pricePer1M: 0.06 },
   { id: 'gemini-emb', label: 'Gemini text-embedding-004', dims: 768, ctx: 2048, pricePer1M: 0.0 },
 ]

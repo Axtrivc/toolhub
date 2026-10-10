@@ -8,7 +8,7 @@ import { tui } from '@/lib/i18n/tool-l10n'
  * PNG / JPG to WebP Converter —— 纯前端 canvas 转码为 WebP
  *
  * 上传 PNG/JPG → 画进 canvas → toBlob('image/webp', quality) 导出。
- * 展示原始 vs WebP 体积 + 压缩率进度条;检测老 Safari 不支持 WebP 编码的情况。
+ * 展示原始 vs WebP 体积 + 压缩率进度条;检测 Safari 不支持 WebP 编码的情况。
  */
 
 interface SourceMeta {
@@ -152,7 +152,7 @@ export function PngToWebpConverterClient() {
           setError(L('errConversionFailed', 'Conversion failed in canvas.'))
           return
         }
-        // 老 Safari 的 toBlob 不认识 image/webp,会静默回退为 PNG
+        // Safari(任何版本)的 toBlob 不认识 image/webp,会静默回退为 PNG
         if (blob.type !== 'image/webp') {
           setUnsupported(true)
           setOutput(null)
@@ -230,7 +230,7 @@ export function PngToWebpConverterClient() {
       {/* 浏览器不支持 WebP 编码 */}
       {unsupported && (
         <div className="rounded-lg border border-red-200 dark:border-red-800/60 bg-red-50 dark:bg-red-950/30 p-4 text-sm text-red-700 dark:text-red-300">
-          ⚠️ {L('errUnsupportedWebp', 'Your browser cannot encode WebP (canvas.toBlob fell back to PNG). This affects older versions of Safari — please use a current Chrome, Edge, Firefox, or Safari 14+ to convert.')}
+          ⚠️ {L('errUnsupportedWebp', 'Your browser cannot encode WebP (canvas.toBlob fell back to PNG). Safari cannot encode WebP in any version — please use Chrome, Edge, or Firefox to convert.')}
         </div>
       )}
 

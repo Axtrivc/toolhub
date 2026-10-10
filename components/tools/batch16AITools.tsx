@@ -17,7 +17,7 @@ const selVars = { borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rg
 
 // ══════════════ JSON Repair ══════════════
 
-/** P-1 大输入防线:修复管线含十余次全文正则扫描 + 栈式补全 + 双重 JSON.parse,
+/** P-1 大输入防线:修复管线含十余次全文正则扫描 + 栈式补全 + 多次 JSON.parse,
  *  每次按键全量同步重算;超过 20 万字符(与文本工具家族同款阈值)直接跳过。 */
 const JR_MAX_INPUT_CHARS = 200_000
 
@@ -25,6 +25,13 @@ const JR_MAX_INPUT_CHARS = 200_000
 export function repairJson(input: string): { output: string; log: string[]; ok: boolean } {
   const log: string[] = []
   let s = input
+
+  // 0) 已是合法 JSON:直接格式化返回,不再过启发式。否则两处误伤:
+  //    字符串值里的单词 undefined 被静默改写成 null(数据损坏);两个
+  //    撇号被单引号转换吞掉,合法负载反而报「无法解析」。合法输入必须原样通过。
+  try {
+    return { output: JSON.stringify(JSON.parse(s), null, 2), log, ok: true }
+  } catch { /* 继续修复管线 */ }
 
   // 1) 剥离 markdown 围栏(```json ... ``` 或 ``` ... ```)
   const fence = /^\s*```[a-zA-Z]*\s*\n([\s\S]*?)\n?```\s*$/g.exec(s)
@@ -210,7 +217,9 @@ interface FenceBlock { lang: string; code: string }
 function extractFences(md: string): FenceBlock[] {
   const blocks: FenceBlock[] = []
   // ```lang ... ``` (允许内部缩进 fence 用 ~~~ 的场景不展开,常规即可)
-  const re = /```([A-Za-z0-9_+-]*)[ \t]*\n([\s\S]*?)```/g
+  // 语言标签字符集含 # 与 .:LLM 常输出 ```c# / ```vb.net / ```node.js,
+  // 旧集合漏掉后整个代码块被静默丢弃
+  const re = /```([A-Za-z0-9_+#.-]*)[ \t]*\n([\s\S]*?)```/g
   let m: RegExpExecArray | null
   while ((m = re.exec(md)) !== null) {
     blocks.push({ lang: (m[1] || 'text').toLowerCase(), code: m[2].replace(/\n$/, '') })
@@ -440,7 +449,7 @@ export function ToolsBuilderClient() {
 
       <div>
         <div className="mb-2 flex items-center justify-between">
-          <span className="text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>tools JSON</span>
+          <span className="text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>{L('jsonLabel', 'tools JSON')}</span>
           <CopyButton value={toolsJson} />
         </div>
         <pre className="overflow-x-auto rounded-lg border p-4 font-mono text-xs whitespace-pre" style={{ borderColor: 'rgb(var(--border))', backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text))' }}>{toolsJson}</pre>

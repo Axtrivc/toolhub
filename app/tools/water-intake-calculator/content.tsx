@@ -21,13 +21,13 @@ const en: ReactNode = (
           <strong>Sedentary adults:</strong> ~35 ml per kg body weight
         </li>
         <li>
-          <strong>Add 350-500 ml</strong> per hour of exercise
+          <strong>Add ~360 ml</strong> per 30 minutes of exercise
         </li>
         <li>
           <strong>Hot/humid climates:</strong> add 10-20%
         </li>
         <li>
-          <strong>Pregnancy or breastfeeding:</strong> add 500-700 ml
+          <strong>Pregnancy or breastfeeding:</strong> add 300-700 ml
         </li>
         <li>Coffee, tea, and food all count toward your total water intake</li>
       </ul>
@@ -68,13 +68,13 @@ const zh: ReactNode = (
           <strong>久坐成年人:</strong> 每公斤体重约 35 ml
         </li>
         <li>
-          每运动一小时<strong>增加 350-500 ml</strong>
+          每运动 30 分钟<strong>增加约 360 ml</strong>
         </li>
         <li>
           <strong>炎热/潮湿气候:</strong> 增加 10-20%
         </li>
         <li>
-          <strong>孕期或哺乳期:</strong> 增加 500-700 ml
+          <strong>孕期或哺乳期:</strong> 增加 300-700 ml
         </li>
         <li>咖啡、茶和食物都计入你的总饮水量</li>
       </ul>
@@ -113,13 +113,13 @@ const es: ReactNode = (
           <strong>Adultos sedentarios:</strong> ~35 ml por kg de peso corporal
         </li>
         <li>
-          <strong>Añade 350-500 ml</strong> por hora de ejercicio
+          <strong>Añade ~360 ml</strong> por cada 30 minutos de ejercicio
         </li>
         <li>
           <strong>Climas calurosos/húmedos:</strong> añade un 10-20 %
         </li>
         <li>
-          <strong>Embarazo o lactancia:</strong> añade 500-700 ml
+          <strong>Embarazo o lactancia:</strong> añade 300-700 ml
         </li>
         <li>El café, el té y la comida cuentan para tu ingesta total de agua</li>
       </ul>
@@ -163,13 +163,13 @@ const de: ReactNode = (
           <strong>Sitzende Erwachsene:</strong> ~35 ml pro kg Körpergewicht
         </li>
         <li>
-          <strong>Plus 350-500 ml</strong> pro Stunde Bewegung
+          <strong>Plus ~360 ml</strong> pro 30 Minuten Bewegung
         </li>
         <li>
           <strong>Heiße/feuchte Klimate:</strong> plus 10-20 %
         </li>
         <li>
-          <strong>Schwangerschaft oder Stillzeit:</strong> plus 500-700 ml
+          <strong>Schwangerschaft oder Stillzeit:</strong> plus 300-700 ml
         </li>
         <li>Kaffee, Tee und Essen zählen alle zur gesamten Wasseraufnahme</li>
       </ul>

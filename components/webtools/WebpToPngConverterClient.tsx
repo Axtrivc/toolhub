@@ -46,6 +46,9 @@ export function WebpToPngConverterClient() {
   const L = (key: string, fb: string) => tui('webp-to-png-converter', locale, key, fb)
 
   const [imgSrc, setImgSrc] = useState<string>('')
+  // 上传序号:重选「同一个文件」时 imgSrc 字符串不变、解码 effect 不重跑,
+  // 尺寸会永远卡在「读取中…」;递增序号强制作废旧解码,驱动 effect 重新执行
+  const [imgSeq, setImgSeq] = useState(0)
   const [imgName, setImgName] = useState<string>('image')
   const [source, setSource] = useState<SourceMeta | null>(null)
   const [error, setError] = useState<string>('')
@@ -74,9 +77,16 @@ export function WebpToPngConverterClient() {
     const reader = new FileReader()
     readerRef.current = reader
     reader.onload = () => {
+      // 换图立即作废旧输出:新图解码失败/超限被拦时,不能还挂着上一张图的可下载结果
+      if (outUrlRef.current) {
+        URL.revokeObjectURL(outUrlRef.current)
+        outUrlRef.current = ''
+      }
+      setOutput(null)
       setImgSrc(reader.result as string)
       setImgName(file.name.replace(/\.[^.]+$/, '') || 'image')
       setSource({ width: 0, height: 0, size: file.size })
+      setImgSeq((n) => n + 1)
     }
     reader.onerror = () => setError(L('errReadFile', 'Could not read the file.'))
     reader.readAsDataURL(file)
@@ -122,7 +132,7 @@ export function WebpToPngConverterClient() {
     return () => {
       cancelled = true
     }
-  }, [imgSrc, locale])
+  }, [imgSrc, imgSeq, locale])
 
   // 实时转换:图片或选项变化时重新渲染 canvas 并生成输出 blob
   // (cancelled 防旧 toBlob 乱序覆盖:拖动质量滑杆会并发多次编码,只认最新一次)

@@ -10,8 +10,9 @@ const en: ReactNode = (
     <h2>What Is This Tool?</h2>
     <p>
       This tool converts between fuel economy units: <strong>MPG</strong> (miles per gallon, US
-      and UK) and <strong>L/100km</strong> (liters per 100 km). These are the two main systems
-      for measuring vehicle fuel efficiency.
+      and UK), <strong>L/100km</strong> (liters per 100 km), and <strong>km/L</strong>
+      (kilometers per liter) — the two main systems for measuring vehicle fuel efficiency:
+      distance per volume and volume per distance.
     </p>
     <div>
       <h2>The Inverse Relationship</h2>
@@ -29,6 +30,7 @@ const en: ReactNode = (
         <li>50 MPG (US) ≈ 4.7 L/100km</li>
         <li>10 L/100km ≈ 23.5 MPG (US)</li>
         <li>6 L/100km ≈ 39 MPG (US)</li>
+        <li>30 MPG (US) ≈ 12.8 km/L</li>
       </ul>
     </div>
     <div>
@@ -47,7 +49,7 @@ const zh: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>这是什么工具?</h2>
     <p>
-      本工具在油耗单位之间换算:<strong>MPG</strong>(英里/加仑,含美制和英制)和 <strong>L/100km</strong>(升/百公里)。这是衡量车辆燃油效率的两大主流系统。
+      本工具在油耗单位之间换算:<strong>MPG</strong>(英里/加仑,含美制和英制)、<strong>L/100km</strong>(升/百公里)和 <strong>km/L</strong>(公里/升)——即「距离/体积」与「体积/距离」这两大衡量车辆燃油效率的主流口径。
     </p>
     <div>
       <h2>反向关系</h2>
@@ -63,6 +65,7 @@ const zh: ReactNode = (
         <li>50 MPG(US)≈ 4.7 L/100km</li>
         <li>10 L/100km ≈ 23.5 MPG(US)</li>
         <li>6 L/100km ≈ 39 MPG(US)</li>
+        <li>30 MPG(US)≈ 12.8 km/L</li>
       </ul>
     </div>
     <div>
@@ -80,9 +83,9 @@ const es: ReactNode = (
     <h2>¿Qué es esta herramienta?</h2>
     <p>
       Esta herramienta convierte entre unidades de consumo de combustible: <strong>MPG</strong>{' '}
-      (millas por galón, EE. UU. y Reino Unido) y <strong>L/100km</strong> (litros por 100 km).
-      Estos son los dos sistemas principales para medir la eficiencia de combustible de los
-      vehículos.
+      (millas por galón, EE. UU. y Reino Unido), <strong>L/100km</strong> (litros por 100 km) y{' '}
+      <strong>km/L</strong> (kilómetros por litro) — los dos sistemas principales para medir la
+      eficiencia de combustible de los vehículos: distancia por volumen y volumen por distancia.
     </p>
     <div>
       <h2>La relación inversa</h2>
@@ -100,6 +103,7 @@ const es: ReactNode = (
         <li>50 MPG (EE. UU.) ≈ 4,7 L/100km</li>
         <li>10 L/100km ≈ 23,5 MPG (EE. UU.)</li>
         <li>6 L/100km ≈ 39 MPG (EE. UU.)</li>
+        <li>30 MPG (EE. UU.) ≈ 12,8 km/L</li>
       </ul>
     </div>
     <div>
@@ -120,8 +124,9 @@ const de: ReactNode = (
     <h2>Was ist dieses Werkzeug?</h2>
     <p>
       Dieses Werkzeug rechnet zwischen Verbrauchseinheiten um: <strong>MPG</strong> (Meilen pro
-      Gallone, US und UK) und <strong>L/100km</strong> (Liter pro 100 km). Das sind die beiden
-      wichtigsten Systeme zur Messung der Kraftstoffeffizienz von Fahrzeugen.
+      Gallone, US und UK), <strong>L/100km</strong> (Liter pro 100 km) und <strong>km/L</strong>{' '}
+      (Kilometer pro Liter) — die beiden wichtigsten Systeme zur Messung der
+      Kraftstoffeffizienz von Fahrzeugen: Strecke pro Volumen und Volumen pro Strecke.
     </p>
     <div>
       <h2>Die umgekehrte Beziehung</h2>
@@ -140,6 +145,7 @@ const de: ReactNode = (
         <li>50 MPG (US) ≈ 4,7 L/100km</li>
         <li>10 L/100km ≈ 23,5 MPG (US)</li>
         <li>6 L/100km ≈ 39 MPG (US)</li>
+        <li>30 MPG (US) ≈ 12,8 km/L</li>
       </ul>
     </div>
     <div>

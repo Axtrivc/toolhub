@@ -50,7 +50,7 @@ const zh: ReactNode = (
       <ul>
         <li><strong>浮或沉:</strong>密度小于流体的物体会浮起</li>
         <li><strong>材料鉴别:</strong>密度有助于鉴别未知材料</li>
-        <li><strong>工程:</strong>强度与重量的计算</li>
+        <li><strong>工程:</strong>强度重量比的计算</li>
       </ul>
     </div>
   </section>
@@ -76,7 +76,7 @@ const es: ReactNode = (
       <ul>
         <li><strong>Flotar o hundirse:</strong> Los objetos menos densos que el fluido flotan</li>
         <li><strong>Identificación de materiales:</strong> La densidad ayuda a identificar materiales desconocidos</li>
-        <li><strong>Ingeniería:</strong> Cálculos de resistencia respecto al peso</li>
+        <li><strong>Ingeniería:</strong> Cálculos de relación resistencia-peso</li>
       </ul>
     </div>
   </section>

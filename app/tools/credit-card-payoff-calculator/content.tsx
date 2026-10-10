@@ -55,31 +55,32 @@ const en: ReactNode = (
         A <strong>$5,000 balance at 22% APR</strong> paid off at a fixed $110/month still takes{' '}
         <strong>over 8 years</strong> to clear and costs roughly <strong>$5,850 in interest</strong>{' '}
         &mdash; more than the original debt. You end up paying for whatever you bought more than
-        twice over, and a declining minimum payment (starting near that same $110) stretches out
-        even longer.
+        twice over, and a declining minimum payment (2% of the balance, starting at just $100)
+        never clears it within 600 months.
       </p>
     </div>
     <div>
       <h2>The Power of Paying More</h2>
-      <p>The single most effective move is paying more than the minimum. Same $5,000 at 22% APR:</p>
+      <p>The single most effective move is paying more than the minimum. Same $5,000 at 22% APR (savings vs. the $110/month track):</p>
       <ul>
         <li>
-          <strong>Minimum (~$110/month):</strong> ~27 years, ~$8,000 interest
+          <strong>Minimum (2% of balance, ~$100 to start):</strong> never paid off within 600
+          months
         </li>
         <li>
-          <strong>$200/month:</strong> ~2.8 years, ~$1,650 interest <em>(saves ~$6,350)</em>
+          <strong>$200/month:</strong> ~2.8 years, ~$1,750 interest <em>(saves ~$4,100)</em>
         </li>
         <li>
-          <strong>$300/month:</strong> ~1.8 years, ~$1,050 interest <em>(saves ~$6,950)</em>
+          <strong>$300/month:</strong> ~1.8 years, ~$1,020 interest <em>(saves ~$4,830)</em>
         </li>
         <li>
-          <strong>$500/month:</strong> ~1 year, ~$610 interest <em>(saves ~$7,390)</em>
+          <strong>$500/month:</strong> ~1 year, ~$575 interest <em>(saves ~$5,275)</em>
         </li>
       </ul>
       <p>
-        Going from the minimum to just $200/month cuts the payoff time by 90% and saves
-        thousands. Every extra dollar above the minimum goes straight to principal, which is
-        why the effect is so dramatic.
+        Going from the minimum to just $200/month turns a balance that never clears into an
+        under-3-year payoff and saves thousands. Every extra dollar above the minimum goes straight
+        to principal, which is why the effect is so dramatic.
       </p>
     </div>
     <div>
@@ -170,28 +171,28 @@ const zh: ReactNode = (
         最低还款额被刻意设得很低——通常是余额的 1% 到 3% 加上当月利息。从银行的角度看,低最低还款能让你尽可能长久地还下去。从你的角度看,这是个陷阱。
       </p>
       <p>
-        一笔 <strong>22% APR 的 $5,000 余额</strong>,即使按固定 $110/月偿还,也需要 <strong>超过 8 年</strong>才能还清,利息大约 <strong>$5,850</strong>——比原来的债务还多。你最终为你买的东西付了两倍多的价钱;而按逐月递减的最低还款(起点同样约为 $110)则会拖得更久。
+        一笔 <strong>22% APR 的 $5,000 余额</strong>,即使按固定 $110/月偿还,也需要 <strong>超过 8 年</strong>才能还清,利息大约 <strong>$5,850</strong>——比原来的债务还多。你最终为你买的东西付了两倍多的价钱;而按逐月递减的最低还款(余额的 2%,起始仅 $100)600 个月内根本还不完。
       </p>
     </div>
     <div>
       <h2>多还款的威力</h2>
-      <p>最有效的办法就是多还最低还款额以上。同样 22% APR 的 $5,000:</p>
+      <p>最有效的办法就是多还最低还款额以上。同样 22% APR 的 $5,000(相对 $110/月方案计算节省额):</p>
       <ul>
         <li>
-          <strong>最低还款(约 $110/月):</strong>约 27 年,利息约 $8,000
+          <strong>最低还款(余额的 2%,起始约 $100):</strong>600 个月内还不完
         </li>
         <li>
-          <strong>$200/月:</strong>约 2.8 年,利息约 $1,650 <em>(省下约 $6,350)</em>
+          <strong>$200/月:</strong>约 2.8 年,利息约 $1,750 <em>(省下约 $4,100)</em>
         </li>
         <li>
-          <strong>$300/月:</strong>约 1.8 年,利息约 $1,050 <em>(省下约 $6,950)</em>
+          <strong>$300/月:</strong>约 1.8 年,利息约 $1,020 <em>(省下约 $4,830)</em>
         </li>
         <li>
-          <strong>$500/月:</strong>约 1 年,利息约 $610 <em>(省下约 $7,390)</em>
+          <strong>$500/月:</strong>约 1 年,利息约 $575 <em>(省下约 $5,275)</em>
         </li>
       </ul>
       <p>
-        从最低还款提高到每月只需 $200,就能把还款时间缩短 90%,并省下数千元。超出最低还款的每一块钱都直接冲抵本金,这就是效果如此显著的原因。
+        从最低还款提高到每月 $200,就能把一笔永远还不完的余额变成不到 3 年还清,省下数千元。超出最低还款的每一块钱都直接冲抵本金,这就是效果如此显著的原因。
       </p>
     </div>
     <div>
@@ -281,29 +282,30 @@ const es: ReactNode = (
         Un <strong>saldo de $5,000 al 22 % de APR</strong> pagado con $110 fijos al mes tarda{' '}
         <strong>más de 8 años</strong> en liquidarse y cuesta aproximadamente{' '}
         <strong>$5,850 en intereses</strong> — más que la deuda original. Acabas pagando por lo que
-        compraste más del doble, y un pago mínimo decreciente (que empieza en esos mismos $110) se
-        alarga todavía más.
+        compraste más del doble, y un pago mínimo decreciente (el 2 % del saldo, empezando en
+        apenas $100) no liquida la deuda en 600 meses.
       </p>
     </div>
     <div>
       <h2>El poder de pagar más</h2>
-      <p>El movimiento más eficaz es pagar más del mínimo. El mismo $5,000 al 22 % de APR:</p>
+      <p>El movimiento más eficaz es pagar más del mínimo. El mismo $5,000 al 22 % de APR (ahorro frente a la pauta de $110/mes):</p>
       <ul>
         <li>
-          <strong>Mínimo (~$110/mes):</strong> ~27 años, ~$8,000 de intereses
+          <strong>Mínimo (2 % del saldo, ~$100 al inicio):</strong> no se liquida en 600 meses
         </li>
         <li>
-          <strong>$200/mes:</strong> ~2,8 años, ~$1,650 de intereses <em>(ahorra ~$6,350)</em>
+          <strong>$200/mes:</strong> ~2,8 años, ~$1,750 de intereses <em>(ahorra ~$4,100)</em>
         </li>
         <li>
-          <strong>$300/mes:</strong> ~1,8 años, ~$1,050 de intereses <em>(ahorra ~$6,950)</em>
+          <strong>$300/mes:</strong> ~1,8 años, ~$1,020 de intereses <em>(ahorra ~$4,830)</em>
         </li>
         <li>
-          <strong>$500/mes:</strong> ~1 año, ~$610 de intereses <em>(ahorra ~$7,390)</em>
+          <strong>$500/mes:</strong> ~1 año, ~$575 de intereses <em>(ahorra ~$5,275)</em>
         </li>
       </ul>
       <p>
-        Pasar del mínimo a solo $200/mes reduce el tiempo de pago en un 90 % y ahorra miles. Cada
+        Pasar del mínimo a solo $200/mes convierte un saldo que nunca se liquida en un pago de
+        menos de 3 años y ahorra miles. Cada
         dólar extra por encima del mínimo va directamente al principal, por eso el efecto es tan
         dramático.
       </p>
@@ -416,29 +418,30 @@ const de: ReactNode = (
         Ein <strong>Saldo von $5,000 bei 22 % APR</strong>, der mit einer festen Zahlung von
         $110/Monat getilgt wird, braucht <strong>über 8 Jahre</strong> bis zur Tilgung und kostet
         rund <strong>$5,850 an Zinsen</strong> — mehr als die ursprüngliche Schuld. Du zahlst für
-        das, was du gekauft hast, am Ende mehr als doppelt — und eine sinkende Mindestzahlung (die
-        bei etwa denselben $110 beginnt) zieht sich noch viel länger hin.
+        das, was du gekauft hast, am Ende mehr als doppelt — und eine sinkende Mindestzahlung (2 %
+        des Saldos, beginnend bei nur $100) tilgt die Schuld in 600 Monaten nicht.
       </p>
     </div>
     <div>
       <h2>Die Macht höherer Zahlungen</h2>
-      <p>Der wirksamste Schritt ist, mehr als das Minimum zu zahlen. Dieselben $5,000 bei 22 % APR:</p>
+      <p>Der wirksamste Schritt ist, mehr als das Minimum zu zahlen. Dieselben $5,000 bei 22 % APR (Ersparnis gegenüber $110/Monat):</p>
       <ul>
         <li>
-          <strong>Minimum (~$110/Monat):</strong> ~27 Jahre, ~$8,000 Zinsen
+          <strong>Minimum (2 % des Saldos, ~$100 am Anfang):</strong> in 600 Monaten nicht getilgt
         </li>
         <li>
-          <strong>$200/Monat:</strong> ~2,8 Jahre, ~$1,650 Zinsen <em>(spart ~$6,350)</em>
+          <strong>$200/Monat:</strong> ~2,8 Jahre, ~$1,750 Zinsen <em>(spart ~$4,100)</em>
         </li>
         <li>
-          <strong>$300/Monat:</strong> ~1,8 Jahre, ~$1,050 Zinsen <em>(spart ~$6,950)</em>
+          <strong>$300/Monat:</strong> ~1,8 Jahre, ~$1,020 Zinsen <em>(spart ~$4,830)</em>
         </li>
         <li>
-          <strong>$500/Monat:</strong> ~1 Jahr, ~$610 Zinsen <em>(spart ~$7,390)</em>
+          <strong>$500/Monat:</strong> ~1 Jahr, ~$575 Zinsen <em>(spart ~$5,275)</em>
         </li>
       </ul>
       <p>
-        Vom Minimum auf nur $200/Monat zu wechseln, verkürzt die Tilgungszeit um 90 % und spart
+        Vom Minimum auf nur $200/Monat zu wechseln, macht aus einem nie getilgten Saldo eine
+        Tilgung in unter 3 Jahren und spart
         Tausende. Jeder zusätzliche Dollar über dem Minimum fließt direkt in die Tilgung, deshalb
         ist die Wirkung so dramatisch.
       </p>

@@ -55,10 +55,13 @@ function calcAge(from: Date, to: Date) {
   const totalWeeks = Math.floor(totalDays / 7)
   const totalHours = Math.floor(totalMs / (1000 * 60 * 60))
 
-  // 下一个生日
-  let nextBirthday = new Date(to.getFullYear(), from.getMonth(), from.getDate())
+  // 下一个生日:出生日锚定,日按月末钳制(与 addMonthsClamped 同法),
+  // 否则 2-29 出生在平年会溢出到 3-1 —— 年龄 2-28 已长一岁、横幅却指向 3-1
+  const birthdayInYear = (y: number) =>
+    new Date(y, from.getMonth(), Math.min(from.getDate(), new Date(y, from.getMonth() + 1, 0).getDate()))
+  let nextBirthday = birthdayInYear(to.getFullYear())
   if (nextBirthday < to) {
-    nextBirthday = new Date(to.getFullYear() + 1, from.getMonth(), from.getDate())
+    nextBirthday = birthdayInYear(to.getFullYear() + 1)
   }
   const daysToBirthday = calendarDaysBetween(to, nextBirthday)
 

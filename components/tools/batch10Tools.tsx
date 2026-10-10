@@ -31,10 +31,12 @@ export function EpochConverterClient() {
   }, [])
 
   const digits = ts.replace(/[^\d]/g, '').length
-  // ≥1e12 视为毫秒;否则秒。负值(1970 前)也支持
+  // ≥1e12 视为毫秒;否则秒。负值(1970 前)也支持:digits 按绝对值计,
+  // 负数没有「正数还没输完」的静默等待歧义,短秒值(如 -86400 → 1969-12-31)
+  // 直接按秒转;正数仍保持 ≥9 位才认(输入中途不打扰)
   const parsed = /^-?\d+$/.test(ts.trim()) ? Number(ts.trim()) : NaN
   const msValid = !isNaN(parsed) && digits >= 11 && digits <= 14
-  const secValid = !isNaN(parsed) && digits >= 9 && digits <= 11
+  const secValid = !isNaN(parsed) && digits <= 11 && (parsed < 0 || digits >= 9)
   const date = !isNaN(parsed) ? new Date(msValid ? parsed : secValid ? parsed * 1000 : NaN) : null
 
   const dateToTs = useMemo(() => {
@@ -426,7 +428,10 @@ export function RobotsTxtGeneratorClient() {
       })
       .join('\n\n')
     const parts = [blocks]
-    if (clean(crawlDelay)) parts.push(`Crawl-delay: ${clean(crawlDelay)}`)
+    // Crawl-delay 只接受非负整秒:乱码/负数/纯 0 不写进产物(静默丢弃该行,
+    // 预览即时可见),避免生成带非法指令的 robots.txt
+    const delay = Math.floor(Number(clean(crawlDelay)))
+    if (Number.isFinite(delay) && delay > 0) parts.push(`Crawl-delay: ${delay}`)
     if (clean(sitemapUrl)) parts.push(`Sitemap: ${clean(sitemapUrl)}`)
     return parts.filter(Boolean).join('\n\n')
   }, [rules, crawlDelay, sitemapUrl])
@@ -701,19 +706,20 @@ export function CookingConverterClient() {
         {sample && <LoadSampleButton onLoad={loadSample} />}
       </div>
       <div className="grid grid-cols-1 gap-4 rounded-lg p-4 sm:grid-cols-3" style={{ backgroundColor: 'rgb(var(--bg-subtle))' }}>
-        <CalculatorField id="cook-amount" type="text" label={L('amount', 'Amount')} value={amount} onChange={setAmount} placeholder="2" />
+        <CalculatorField id="cook-amount" type="text" inputMode="decimal" label={L('amount', 'Amount')} value={amount} onChange={setAmount} placeholder="2" />
         <div>
           <label htmlFor="cook-from" className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>{L('unit', 'Unit')}</label>
           <select id="cook-from" value={fromUnit} onChange={(e) => setFromUnit(e.target.value)}
             className="w-full rounded-lg border p-3 shadow-sm outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200" style={selStyle}>
-            {Object.entries(VOLUME_TO_CUP).map(([k, v]) => <option key={k} value={k}>{v.label}</option>)}
+            {/* unit.<key> / ing.<key> 缺 l10n 时回退英文 label(键名与 volume-converter 的 unit.* 先例一致) */}
+            {Object.entries(VOLUME_TO_CUP).map(([k, v]) => <option key={k} value={k}>{L(`unit.${k}`, v.label)}</option>)}
           </select>
         </div>
         <div>
           <label htmlFor="cook-ing" className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>{L('ingredient', 'Ingredient')}</label>
           <select id="cook-ing" value={ingredient} onChange={(e) => setIngredient(e.target.value)}
             className="w-full rounded-lg border p-3 shadow-sm outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200" style={selStyle}>
-            {Object.entries(INGREDIENT_DENSITY).map(([k, v]) => <option key={k} value={k}>{v.label}</option>)}
+            {Object.entries(INGREDIENT_DENSITY).map(([k, v]) => <option key={k} value={k}>{L(`ing.${k}`, v.label)}</option>)}
           </select>
           {/* B2/E1 引导:选中食材的克/杯密度直接亮出来——解释「为什么换食材结果会变」,
               也让下拉本身可被信任(与 note 的 USDA 口径互相印证) */}

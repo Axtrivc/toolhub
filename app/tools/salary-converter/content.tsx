@@ -117,11 +117,11 @@ const es: ReactNode = (
     <div>
       <h2>Equivalencias salariales habituales (40 h/semana)</h2>
       <ul>
-        <li>$40.000/año ≈ $3.333/mes ≈ $1.538 quincenal ≈ $19,23/h</li>
-        <li>$60.000/año ≈ $5.000/mes ≈ $2.308 quincenal ≈ $28,85/h</li>
-        <li>$75.000/año ≈ $6.250/mes ≈ $2.885 quincenal ≈ $36,06/h</li>
-        <li>$100.000/año ≈ $8.333/mes ≈ $3.846 quincenal ≈ $48,08/h</li>
-        <li>$150.000/año ≈ $12.500/mes ≈ $5.769 quincenal ≈ $72,12/h</li>
+        <li>$40,000/año ≈ $3,333/mes ≈ $1,538 quincenal ≈ $19.23/h</li>
+        <li>$60,000/año ≈ $5,000/mes ≈ $2,308 quincenal ≈ $28.85/h</li>
+        <li>$75,000/año ≈ $6,250/mes ≈ $2,885 quincenal ≈ $36.06/h</li>
+        <li>$100,000/año ≈ $8,333/mes ≈ $3,846 quincenal ≈ $48.08/h</li>
+        <li>$150,000/año ≈ $12,500/mes ≈ $5,769 quincenal ≈ $72.12/h</li>
       </ul>
     </div>
     <div>
@@ -129,8 +129,8 @@ const es: ReactNode = (
       <p>
         La paga quincenal (cada dos semanas) da <strong>26</strong> cheques al año — lo que significa
         que durante dos meses cobras tres cheques en vez de dos. La paga semimensual (dos veces al mes)
-        da exactamente <strong>24</strong> cheques. A lo largo del año, un salario de $60.000 supone
-        $2.308 por cheque quincenal, pero $2.500 por cheque semimensual. Esta herramienta usa la
+        da exactamente <strong>24</strong> cheques. A lo largo del año, un salario de $60,000 supone
+        $2,308 por cheque quincenal, pero $2,500 por cheque semimensual. Esta herramienta usa la
         convención quincenal estándar (26 periodos).
       </p>
     </div>
@@ -161,11 +161,11 @@ const de: ReactNode = (
     <div>
       <h2>Übliche Gehaltsäquivalente (40 Std/Woche)</h2>
       <ul>
-        <li>$40.000/Jahr ≈ $3.333/Monat ≈ $1.538 vierzehntägig ≈ $19,23/Std</li>
-        <li>$60.000/Jahr ≈ $5.000/Monat ≈ $2.308 vierzehntägig ≈ $28,85/Std</li>
-        <li>$75.000/Jahr ≈ $6.250/Monat ≈ $2.885 vierzehntägig ≈ $36,06/Std</li>
-        <li>$100.000/Jahr ≈ $8.333/Monat ≈ $3.846 vierzehntägig ≈ $48,08/Std</li>
-        <li>$150.000/Jahr ≈ $12.500/Monat ≈ $5.769 vierzehntägig ≈ $72,12/Std</li>
+        <li>$40,000/Jahr ≈ $3,333/Monat ≈ $1,538 vierzehntägig ≈ $19.23/Std</li>
+        <li>$60,000/Jahr ≈ $5,000/Monat ≈ $2,308 vierzehntägig ≈ $28.85/Std</li>
+        <li>$75,000/Jahr ≈ $6,250/Monat ≈ $2,885 vierzehntägig ≈ $36.06/Std</li>
+        <li>$100,000/Jahr ≈ $8,333/Monat ≈ $3,846 vierzehntägig ≈ $48.08/Std</li>
+        <li>$150,000/Jahr ≈ $12,500/Monat ≈ $5,769 vierzehntägig ≈ $72.12/Std</li>
       </ul>
     </div>
     <div>
@@ -174,8 +174,8 @@ const de: ReactNode = (
         Die vierzehntägige Zahlung (alle zwei Wochen) ergibt <strong>26</strong> Schecks im Jahr — das
         heißt, in zwei Monaten bekommst du drei Schecks statt zwei. Die halbmonatliche Zahlung (zweimal
         im Monat) ergibt genau <strong>24</strong> Schecks. Über ein Jahr gerechnet entspricht ein
-        Gehalt von $60.000 einem vierzehntägigen Scheck von $2.308, aber einem halbmonatlichen Scheck
-        von $2.500. Dieses Werkzeug verwendet die übliche vierzehntägige Konvention (26 Perioden).
+        Gehalt von $60,000 einem vierzehntägigen Scheck von $2,308, aber einem halbmonatlichen Scheck
+        von $2,500. Dieses Werkzeug verwendet die übliche vierzehntägige Konvention (26 Perioden).
       </p>
     </div>
   </section>

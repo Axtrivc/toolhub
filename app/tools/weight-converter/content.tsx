@@ -107,11 +107,11 @@ const es: ReactNode = (
 
     <h2>Factores de conversión clave</h2>
     <ul>
-      <li><strong>1 kilogramo</strong> = 2.20462 libras</li>
-      <li><strong>1 libra</strong> = 0.453592 kilogramos = 16 onzas</li>
-      <li><strong>1 onza</strong> = 28.3495 gramos</li>
-      <li><strong>1 stone</strong> = 14 libras = 6.35029 kilogramos</li>
-      <li><strong>1 tonelada métrica</strong> = 1000 kilogramos = 2204.62 libras</li>
+      <li><strong>1 kilogramo</strong> = 2,20462 libras</li>
+      <li><strong>1 libra</strong> = 0,453592 kilogramos = 16 onzas</li>
+      <li><strong>1 onza</strong> = 28,3495 gramos</li>
+      <li><strong>1 stone</strong> = 14 libras = 6,35029 kilogramos</li>
+      <li><strong>1 tonelada métrica</strong> = 1000 kilogramos = 2204,62 libras</li>
     </ul>
 
     <h2>Usos comunes</h2>
@@ -125,8 +125,8 @@ const es: ReactNode = (
 
     <h2>Conversiones mentales rápidas</h2>
     <ul>
-      <li><strong>de kg a lb:</strong> multiplicar por 2.2 (o duplicar y sumar 10 %)</li>
-      <li><strong>de lb a kg:</strong> dividir por 2.2 (o reducir a la mitad y restar 10 %)</li>
+      <li><strong>de kg a lb:</strong> multiplicar por 2,2 (o duplicar y sumar 10 %)</li>
+      <li><strong>de lb a kg:</strong> dividir por 2,2 (o reducir a la mitad y restar 10 %)</li>
       <li><strong>de oz a g:</strong> multiplicar por 28</li>
       <li>80 kg ≈ 176 lb, 150 lb ≈ 68 kg</li>
     </ul>
@@ -155,11 +155,11 @@ const de: ReactNode = (
 
     <h2>Wichtige Umrechnungsfaktoren</h2>
     <ul>
-      <li><strong>1 Kilogramm</strong> = 2.20462 Pfund</li>
-      <li><strong>1 Pfund</strong> = 0.453592 Kilogramm = 16 Unzen</li>
-      <li><strong>1 Unze</strong> = 28.3495 Gramm</li>
-      <li><strong>1 Stone</strong> = 14 Pfund = 6.35029 Kilogramm</li>
-      <li><strong>1 metrische Tonne</strong> = 1000 Kilogramm = 2204.62 Pfund</li>
+      <li><strong>1 Kilogramm</strong> = 2,20462 Pfund</li>
+      <li><strong>1 Pfund</strong> = 0,453592 Kilogramm = 16 Unzen</li>
+      <li><strong>1 Unze</strong> = 28,3495 Gramm</li>
+      <li><strong>1 Stone</strong> = 14 Pfund = 6,35029 Kilogramm</li>
+      <li><strong>1 metrische Tonne</strong> = 1000 Kilogramm = 2204,62 Pfund</li>
     </ul>
 
     <h2>Häufige Anwendungen</h2>
@@ -173,8 +173,8 @@ const de: ReactNode = (
 
     <h2>Schnelle Umrechnungen im Kopf</h2>
     <ul>
-      <li><strong>kg zu lb:</strong> mit 2.2 multiplizieren (oder verdoppeln und 10 % addieren)</li>
-      <li><strong>lb zu kg:</strong> durch 2.2 teilen (oder halbieren und 10 % abziehen)</li>
+      <li><strong>kg zu lb:</strong> mit 2,2 multiplizieren (oder verdoppeln und 10 % addieren)</li>
+      <li><strong>lb zu kg:</strong> durch 2,2 teilen (oder halbieren und 10 % abziehen)</li>
       <li><strong>oz zu g:</strong> mit 28 multiplizieren</li>
       <li>80 kg ≈ 176 lb, 150 lb ≈ 68 kg</li>
     </ul>

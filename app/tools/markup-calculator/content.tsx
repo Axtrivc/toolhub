@@ -56,26 +56,26 @@ const zh: ReactNode = (
       这个计算器根据你的成本和加价百分比,算出售价和利润率。对零售商、餐厅以及任何需要给产品定价的生意都必不可少。
     </p>
     <div>
-      <h2>加价率与利润率: 关键区别</h2>
+      <h2>加价率与利润率:关键区别</h2>
       <p>
-        这两个词经常被混淆, 但含义截然不同:
+        这两个词经常被混淆,但含义截然不同:
       </p>
     </div>
     <div>
       <h2>各行业的典型加价率</h2>
       <ul>
-        <li><strong>食品杂货:</strong>加价率 10-15%, 利润率约 10%</li>
-        <li><strong>餐厅:</strong>毛利率 60-70% (食材成本约占菜单售价的 30-40%)</li>
-        <li><strong>服装:</strong>加价率 100-300% (keystone = 100% = 50% 利润率)</li>
-        <li><strong>电子产品:</strong>加价率 20-40%, 利润率薄</li>
+        <li><strong>食品杂货:</strong>加价率 10-15%,利润率约 10%</li>
+        <li><strong>餐厅:</strong>毛利率 60-70%(食材成本约占菜单售价的 30-40%)</li>
+        <li><strong>服装:</strong>加价率 100-300%(keystone = 100% = 50% 利润率)</li>
+        <li><strong>电子产品:</strong>加价率 20-40%,利润率薄</li>
         <li><strong>珠宝:</strong>加价率 200-400%</li>
       </ul>
     </div>
     <div>
       <h2>为什么重要</h2>
       <p>
-        混淆加价率和利润率会导致定价过低。如果你想要 30% 的利润率, 成本是 $100, 不能直接加 30%——那样得到 $130 的售价, 利润率只有
-        23% ($30 ÷ $130)。你需要用除法: <code>$100 &divide; (1 &minus; 0.30) = $142.86</code>。
+        混淆加价率和利润率会导致定价过低。如果你想要 30% 的利润率,成本是 $100,不能直接加 30%——那样得到 $130 的售价,利润率只有
+        23%($30 ÷ $130)。你需要用除法:<code>$100 &divide; (1 &minus; 0.30) = $142.86</code>。
       </p>
     </div>
   </section>
@@ -87,29 +87,29 @@ const es: ReactNode = (
     <h2>¿Qué es esta herramienta?</h2>
     <p>
       Esta calculadora obtiene tu precio de venta y margen de beneficio a partir de tu coste y
-      porcentaje de marcado. Es esencial para minoristas, restaurantes y cualquier negocio que fije
+      porcentaje de markup. Es esencial para minoristas, restaurantes y cualquier negocio que fije
       precios de productos.
     </p>
     <div>
-      <h2>Marcado frente a margen: la diferencia clave</h2>
+      <h2>Markup frente a margen: la diferencia clave</h2>
       <p>
         Estos dos términos se confunden constantemente, pero significan cosas muy distintas:
       </p>
     </div>
     <div>
-      <h2>Marcados típicos por sector</h2>
+      <h2>Markups típicos por sector</h2>
       <ul>
-        <li><strong>Alimentación:</strong> marcado del 10-15 %, margen ~10 %</li>
+        <li><strong>Alimentación:</strong> markup del 10-15 %, margen ~10 %</li>
         <li><strong>Restaurantes:</strong> margen bruto del 60-70 % (coste de comida ~30-40 % del precio del menú)</li>
-        <li><strong>Moda:</strong> marcado del 100-300 % (keystone = 100 % = 50 % de margen)</li>
-        <li><strong>Electrónica:</strong> marcado del 20-40 %, márgenes estrechos</li>
-        <li><strong>Joyería:</strong> marcado del 200-400 %</li>
+        <li><strong>Moda:</strong> markup del 100-300 % (keystone = 100 % = 50 % de margen)</li>
+        <li><strong>Electrónica:</strong> markup del 20-40 %, márgenes estrechos</li>
+        <li><strong>Joyería:</strong> markup del 200-400 %</li>
       </ul>
     </div>
     <div>
       <h2>Por qué importa</h2>
       <p>
-        Confundir marcado y margen lleva a poner precios demasiado bajos. Si quieres un margen de
+        Confundir markup y margen lleva a poner precios demasiado bajos. Si quieres un margen de
         beneficio del 30 % y tu coste es $100, no puedes simplemente sumar el 30 % — eso da un precio
         de $130 con solo un margen del 23 % ($30 ÷ $130). Tienes que dividir: <code>$100 &divide; (1 &minus; 0.30) = $142.86</code>.
       </p>

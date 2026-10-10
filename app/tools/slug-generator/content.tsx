@@ -237,7 +237,7 @@ const es: ReactNode = (
     <h2>Cómo funciona este generador de slugs</h2>
     <p>
       Esta herramienta se ejecuta completamente en tu navegador — no se envían datos a ningún
-      servidor. Cuando escribes un título, aplica la siguiente canalización en tiempo real:
+      servidor. Cuando escribes un título, aplica el siguiente flujo de procesamiento en tiempo real:
     </p>
     <ol>
       <li>Normaliza Unicode (así <code>café</code> pasa a <code>cafe</code>).</li>
@@ -318,7 +318,7 @@ const de: ReactNode = (
         <code>how-to-brew</code> gegenüber <code>how_to_brew</code>.
       </li>
       <li>
-        <strong>Streiche Füllwörter.</strong> Artikel und Präpositionen wie „the", „a", „of", „for"
+        <strong>Streiche Füllwörter.</strong> Artikel und Präpositionen wie „the“, „a“, „of“, „for“
         verlängern ohne Mehrwert. <code>best-coffee-grinders</code> ist besser als{' '}
         <code>the-best-coffee-grinders-for-you</code>.
       </li>

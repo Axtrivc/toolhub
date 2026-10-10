@@ -44,8 +44,9 @@ function sanitizeSvg(raw: string): string {
   for (const tag of stripTags) {
     svg.querySelectorAll(tag).forEach((el) => el.remove())
   }
-  // 移除所有事件属性 + 外部引用属性
-  svg.querySelectorAll('*').forEach((el) => {
+  // 移除所有事件属性 + 外部引用属性(querySelectorAll('*') 只选后代,根 <svg> 自身需并入,
+  // 否则根标签上的 onload 等事件属性漏网)
+  ;[svg, ...svg.querySelectorAll('*')].forEach((el) => {
     for (const attr of Array.from(el.attributes)) {
       const name = attr.name.toLowerCase()
       const val = (attr.value || '').trim()
@@ -191,12 +192,14 @@ export function SvgToImageClient() {
       return
     }
 
-    // 净化 SVG:移除 script/foreignObject/事件属性/外部引用(XSS/SSRF 防护)
+    // 净化 SVG:移除 script/foreignObject/事件属性/外部引用(XSS/SSRF 防护)。
+    // sanitizeSvg 仅在「找不到 <svg> 根」时抛错(粘贴的不是 SVG 或 XML 语法错误),
+    // 统一走 errorInvalidSvg,避免英文硬编码错误文案泄漏到非英文界面
     let safeSvg: string
     try {
       safeSvg = sanitizeSvg(trimmed)
-    } catch (e) {
-      setError(e instanceof Error ? e.message : L('errorInvalidSvg', 'Invalid SVG markup.'))
+    } catch {
+      setError(L('errorInvalidSvg', 'Invalid SVG markup.'))
       return
     }
 
@@ -251,9 +254,9 @@ export function SvgToImageClient() {
           format,
           0.92,
         )
-      } catch (e) {
+      } catch {
         if (runId !== runIdRef.current) return
-        setError(e instanceof Error ? e.message : L('errorConvertFailed', 'Conversion failed.'))
+        setError(L('errorConvertFailed', 'Conversion failed.'))
       }
     }
     img.onerror = () => {

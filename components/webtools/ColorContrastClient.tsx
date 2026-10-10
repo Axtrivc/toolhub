@@ -113,6 +113,7 @@ export function ColorContrastClient() {
               id="contrast-fg"
               type="text"
               value={fg}
+              spellCheck={false}
               onChange={(e) => setFg(e.target.value)}
               className="w-full rounded-lg border p-2.5 font-mono text-sm outline-none focus:ring-2"
               style={{ borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rgb(var(--bg-card))', color: 'rgb(var(--text))' }}
@@ -129,6 +130,7 @@ export function ColorContrastClient() {
               id="contrast-bg"
               type="text"
               value={bg}
+              spellCheck={false}
               onChange={(e) => setBg(e.target.value)}
               className="w-full rounded-lg border p-2.5 font-mono text-sm outline-none focus:ring-2"
               style={{ borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rgb(var(--bg-card))', color: 'rgb(var(--text))' }}

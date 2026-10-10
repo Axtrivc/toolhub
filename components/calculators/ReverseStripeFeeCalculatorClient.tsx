@@ -113,6 +113,7 @@ export function ReverseStripeFeeCalculatorClient() {
     <button
       key={m}
       type="button"
+      aria-pressed={mode === m}
       onClick={() => setMode(m)}
       className={`rounded-lg px-4 py-2 text-sm font-medium transition ${mode === m ? 'btn-primary' : 'border'}`}
       style={
@@ -179,7 +180,7 @@ export function ReverseStripeFeeCalculatorClient() {
           inputs={inputs}
           results={null}
         >
-          <div className="rounded-lg border border-red-200 dark:border-red-800/60 bg-red-50 dark:bg-red-950/30 p-4 text-sm text-red-700 dark:text-red-300">⚠️ {parsed.error}</div>
+          <div role="status" className="rounded-lg border border-red-200 dark:border-red-800/60 bg-red-50 dark:bg-red-950/30 p-4 text-sm text-red-700 dark:text-red-300">⚠️ {parsed.error}</div>
         </CalculatorShell>
       ) : (
         <CalculatorShell

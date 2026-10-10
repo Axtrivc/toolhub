@@ -24,20 +24,26 @@ export const ScientificNotationCalculatorClient = makeCalculatorClient({
     // D2:错误说明"该填什么",附可解析示例(1e 记数与普通小数都合法)
     if (!isFinite(n)) return { sci: `⚠️ ${tui('scientific-notation-converter', locale, 'errInvalid', 'Enter a valid number, e.g. 123000 or 3.4e-11')}`, e: '—', engineering: '—' }
     if (n === 0) return { sci: '0 × 10⁰', e: '0e0', engineering: '0 × 10⁰' }
-    let exp = Math.floor(Math.log10(Math.abs(n)))
-    let mantissa = n / Math.pow(10, exp)
-    // 工程计数法:指数是 3 的倍数
+    // 指数从 toExponential 解析:次正规数(如 1e-320)上 Math.log10 会偏差 1,
+    // 而 toExponential 的指数恒为该 double 的真实十进制指数
+    const [mStr, eStr] = n.toExponential().split('e')
+    let exp = Number(eStr)
+    // 尾数:常规区间用除法(与显示精度一致的浮点语义);exp ≤ −308 时
+    // Math.pow(10,exp) 退化为次正规甚至下溢为 0,除法失真(尾数可偏
+    // ~0.2%),改用 toExponential 最短数字解析(与 JS 规范输出一致)
+    let mantissa = exp >= -307 ? n / Math.pow(10, exp) : Number(mStr)
+    // 工程计数法:指数是 3 的倍数;尾数只乘 10^(0..2),与科学计数法输出同源一致
     let engExp = Math.floor(exp / 3) * 3
-    let engMantissa = n / Math.pow(10, engExp)
+    let engMantissa = mantissa * Math.pow(10, exp - engExp)
     // 浮点误差边界:尾数按显示精度(6 位)四舍五入后可能到 ±10(如 1e23 → 9.99…×10²²
-    // 显示为 10 × 10²²,负数则是 −10),此时进位:指数 +1、尾数重算,保证显示恒为 1 ≤ |m| < 10。
+    // 显示为 10 × 10²²,负数则是 −10),此时进位:指数 +1、尾数 ÷10,保证显示恒为 1 ≤ |m| < 10。
     if (Math.abs(Number(mantissa.toFixed(6))) >= 10) {
       exp += 1
-      mantissa = n / Math.pow(10, exp)
+      mantissa /= 10
     }
     if (Math.abs(Number(engMantissa.toFixed(6))) >= 1000) {
       engExp += 3
-      engMantissa = n / Math.pow(10, engExp)
+      engMantissa /= 1000
     }
     const sup = (e: number) => e.toString().split('').map((d) => d === '-' ? '⁻' : ('⁰¹²³⁴⁵⁶⁷⁸⁹'[Number(d)] || d)).join('')
     return {

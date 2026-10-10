@@ -103,7 +103,7 @@ const es: ReactNode = (
     </p>
 
     <div>
-      <h2>Cómo funciona la matemática CIDR</h2>
+      <h2>Cómo funciona el cálculo CIDR</h2>
       <p>
         Una dirección IPv4 es un número de 32 bits, y la longitud del prefijo (<code>/24</code>) indica cuántos bits
         iniciales identifican la red. La <strong>máscara de subred</strong> son esos bits puestos a 1; la{' '}
@@ -131,7 +131,7 @@ const es: ReactNode = (
         Las etiquetas de clase sobreviven sobre todo en la documentación: clase A (<code>1–126</code>), B (<code>128–191</code>),
         C (<code>192–223</code>), D (multidifusión) y E (experimental). Lo que importa operativamente es la{' '}
         <strong>RFC 1918</strong>: <code>10.0.0.0/8</code>, <code>172.16.0.0/12</code> y{' '}
-        <code>192.168.0.0/16</code> son privadas y no enrutable en internet público, así que solaparlas entre sitios
+        <code>192.168.0.0/16</code> son privadas y no enrutables en internet público, así que solaparlas entre sitios
         rompe las VPN. Al planificar, deja margen de crecimiento — dividir un <code>/24</code> en dos{' '}
         <code>/25</code> más tarde es mucho más fácil que reenumerar toda una red.
       </p>
@@ -166,7 +166,7 @@ const de: ReactNode = (
     <div>
       <h2>Die Sonderfälle /31 und /32</h2>
       <p>
-        Zwei Präfixe durchbrechen die „minus zwei"-Regel. <code>/31</code>-Verbindungen (RFC 3021) sind
+        Zwei Präfixe durchbrechen die „minus zwei“-Regel. <code>/31</code>-Verbindungen (RFC 3021) sind
         Punkt-zu-Punkt-WAN-Verbindungen ganz ohne Netzwerk- oder Broadcast-Adresse — <strong>beide</strong> Adressen
         sind nutzbar, was Adressverschwendung bei Router-zu-Router-Verbindungen halbiert. <code>/32</code> identifiziert
         genau einen Host und ist typisch für Loopback-Interfaces und Firewall-Regeln. Dieses Werkzeug behandelt beide

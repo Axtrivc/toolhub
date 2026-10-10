@@ -140,14 +140,14 @@ const de: ReactNode = (
     <div>
       <h2>Die Spezialbits: setuid, setgid, sticky</h2>
       <p>
-        Eine vierte, führende Oktalziffer codiert drei spezielle Flags. <strong>setuid</strong> (4) lässt ein Programm mit den Rechten des Dateieigentümers laufen — so bearbeitet <code>passwd</code> die Datei <code>/etc/shadow</code>. <strong>setgid</strong> (2) macht das Gleiche für die Gruppe und erzwingt bei einem Verzeichnis, dass neue Dateien die Gruppe des Verzeichnisses erben. Das <strong>Sticky-Bit</strong> (1) auf einem Verzeichnis erlaubt nur dem Eigentümer einer Datei, diese zu löschen — unerlässlich für gemeinsame Ordner wie <code>/tmp</code> (<code>1777</code>). In der Symbolausgabe überlagern sie das Ausführungs-Slot als <code>s</code>/<code>S</code> und <code>t</code>/<code>T</code>.
+        Eine vierte, führende Oktalziffer codiert drei spezielle Flags. <strong>setuid</strong> (4) lässt ein Programm mit den Rechten des Dateieigentümers laufen — so bearbeitet <code>passwd</code> die Datei <code>/etc/shadow</code>. <strong>setgid</strong> (2) macht das Gleiche für die Gruppe und erzwingt bei einem Verzeichnis, dass neue Dateien die Gruppe des Verzeichnisses erben. Das <strong>Sticky-Bit</strong> (1) auf einem Verzeichnis erlaubt nur dem Eigentümer einer Datei, diese zu löschen — unerlässlich für gemeinsame Ordner wie <code>/tmp</code> (<code>1777</code>). In der Symbolausgabe überlagern sie den Ausführungs-Slot als <code>s</code>/<code>S</code> und <code>t</code>/<code>T</code>.
       </p>
     </div>
 
     <div>
       <h2>Häufige Fallstricke, die du vermeiden solltest</h2>
       <p>
-        Widerstehe <code>chmod 777</code>: weltweit beschreibbare Dateien sind ein klassisches Sicherheitsloch, und die echte Lösung besteht meist darin, den Eigentümer mit <code>chown</code> zu korrigieren. Denk daran, dass <strong>Verzeichnisse das Ausführungsbit brauchen</strong> — ohne ihn kannst du zwar Namen auflisten (<code>r</code>), aber nicht eintreten oder auf den Inhalt zugreifen. Beachte außerdem, dass <code>chmod</code> nur mit <code>-R</code> rekursiv ist, und ein rekursiver Modus für den gesamten Baum Dateien und Ordner vermischt — verwende stattdessen <code>find . -type d -exec chmod 755 {} +</code> und einen passenden <code>-type f</code>-Durchlauf.
+        Widerstehe <code>chmod 777</code>: weltweit beschreibbare Dateien sind ein klassisches Sicherheitsloch, und die echte Lösung besteht meist darin, den Eigentümer mit <code>chown</code> zu korrigieren. Denk daran, dass <strong>Verzeichnisse das Ausführungsbit brauchen</strong> — ohne es kannst du zwar Namen auflisten (<code>r</code>), aber nicht eintreten oder auf den Inhalt zugreifen. Beachte außerdem, dass <code>chmod</code> nur mit <code>-R</code> rekursiv ist, und ein rekursiver Modus für den gesamten Baum Dateien und Ordner vermischt — verwende stattdessen <code>find . -type d -exec chmod 755 {} +</code> und einen passenden <code>-type f</code>-Durchlauf.
       </p>
     </div>
   </section>

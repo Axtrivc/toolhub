@@ -15,7 +15,7 @@ const en: ReactNode = (
     <div>
       <h2>When to Use Lowercase</h2>
       <ul>
-        <li><strong>Email addresses</strong> — officially case-insensitive, but lowercase avoids confusion</li>
+        <li><strong>Email addresses</strong> — treated as case-insensitive in practice, but lowercase avoids confusion</li>
         <li><strong>URLs and slugs</strong> — convention is lowercase to avoid duplicate-content issues</li>
         <li><strong>Programming variables</strong> — most languages use camelCase or snake_case</li>
         <li><strong>Hashtags</strong> — #lowercase reads cleaner and avoids accessibility issues</li>
@@ -43,7 +43,7 @@ const zh: ReactNode = (
     <div>
       <h2>何时使用小写</h2>
       <ul>
-        <li><strong>电子邮件地址</strong> —— 官方上不区分大小写,但使用小写可避免混淆</li>
+        <li><strong>电子邮件地址</strong> —— 实践中通常按不区分大小写处理,但使用小写可避免混淆</li>
         <li><strong>URL 和 slug</strong> —— 惯例是使用小写,以避免重复内容问题</li>
         <li><strong>编程变量</strong> —— 大多数语言使用 camelCase 或 snake_case</li>
         <li><strong>话题标签</strong> —— #lowercase 更清晰易读,并能避免无障碍问题</li>
@@ -71,7 +71,7 @@ const es: ReactNode = (
     <div>
       <h2>Cuándo usar minúsculas</h2>
       <ul>
-        <li><strong>Direcciones de correo electrónico</strong> — oficialmente no distinguen mayúsculas, pero las minúsculas evitan confusiones</li>
+        <li><strong>Direcciones de correo electrónico</strong> — en la práctica se tratan sin distinguir mayúsculas, pero las minúsculas evitan confusiones</li>
         <li><strong>URL y slugs</strong> — la convención es usar minúsculas para evitar problemas de contenido duplicado</li>
         <li><strong>Variables de programación</strong> — la mayoría de los lenguajes usan camelCase o snake_case</li>
         <li><strong>Hashtags</strong> — #lowercase se lee más limpio y evita problemas de accesibilidad</li>
@@ -101,7 +101,7 @@ const de: ReactNode = (
     <div>
       <h2>Wann du Kleinbuchstaben einsetzt</h2>
       <ul>
-        <li><strong>E-Mail-Adressen</strong> — offiziell unabhängig von Groß-/Kleinschreibung, aber Kleinbuchstaben vermeiden Verwirrung</li>
+        <li><strong>E-Mail-Adressen</strong> — in der Praxis unabhängig von der Groß-/Kleinschreibung, aber Kleinbuchstaben vermeiden Verwirrung</li>
         <li><strong>URLs und Slugs</strong> — die Konvention sind Kleinbuchstaben, um Probleme mit doppeltem Content zu vermeiden</li>
         <li><strong>Variablen beim Programmieren</strong> — die meisten Sprachen verwenden camelCase oder snake_case</li>
         <li><strong>Hashtags</strong> — #lowercase liest sich sauberer und vermeidet Barrierefreiheitsprobleme</li>

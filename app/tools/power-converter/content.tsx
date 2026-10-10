@@ -25,7 +25,7 @@ const en: ReactNode = (
         <li>Microwave: 1000 W (1 kW)</li>
         <li>Typical car engine: 100-200 hp (75-150 kW)</li>
         <li>Home electric usage: ~1-2 kW average, ~10-30 kW peak</li>
-        <li>Small nuclear reactor: ~1 GW (1,000,000 kW)</li>
+        <li>Nuclear power plant reactor: ~1 GW (1,000,000 kW)</li>
       </ul>
     </div>
   </section>
@@ -52,7 +52,7 @@ const zh: ReactNode = (
         <li>微波炉:1000 W(1 kW)</li>
         <li>普通汽车发动机:100-200 hp(75-150 kW)</li>
         <li>家庭用电:平均 ~1-2 kW,峰值 ~10-30 kW</li>
-        <li>小型核反应堆:~1 GW(1,000,000 kW)</li>
+        <li>核电站反应堆:~1 GW(1,000,000 kW)</li>
       </ul>
     </div>
   </section>
@@ -79,7 +79,7 @@ const es: ReactNode = (
         <li>Microondas: 1000 W (1 kW)</li>
         <li>Motor de coche típico: 100-200 hp (75-150 kW)</li>
         <li>Consumo eléctrico doméstico: ~1-2 kW de media, ~10-30 kW de pico</li>
-        <li>Reactor nuclear pequeño: ~1 GW (1,000,000 kW)</li>
+        <li>Reactor de central nuclear: ~1 GW (1,000,000 kW)</li>
       </ul>
     </div>
   </section>
@@ -106,7 +106,7 @@ const de: ReactNode = (
         <li>Mikrowelle: 1000 W (1 kW)</li>
         <li>Typischer Automotor: 100-200 hp (75-150 kW)</li>
         <li>Stromverbrauch zu Hause: ~1-2 kW Durchschnitt, ~10-30 kW Spitze</li>
-        <li>Kleiner Kernreaktor: ~1 GW (1,000,000 kW)</li>
+        <li>Reaktor eines Kernkraftwerks: ~1 GW (1,000,000 kW)</li>
       </ul>
     </div>
   </section>

@@ -142,7 +142,7 @@ const de: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>Was ist dieses Werkzeug?</h2>
     <p>
-      Eine <strong>Data URI</strong> bettet den Inhalt einer Datei direkt in einen URL-String ein, mit dem Präfix <code>data:image/png;base64,…</code>. Eine Bild als Data URI einzubetten bedeutet, dass der Browser keine separate HTTP-Anfrage stellt, um es abzurufen — nützlich für kleine Icons, E-Mail-Assets und in sich geschlossene HTML/CSS-Demos. Dieses Werkzeug wandelt jedes Bild, das du hochlädst, in eine Base64-Data-URI um, die direkt in HTML, CSS oder JSON eingefügt werden kann.
+      Eine <strong>Data URI</strong> bettet den Inhalt einer Datei direkt in einen URL-String ein, mit dem Präfix <code>data:image/png;base64,…</code>. Ein Bild als Data URI einzubetten bedeutet, dass der Browser keine separate HTTP-Anfrage stellt, um es abzurufen — nützlich für kleine Icons, E-Mail-Assets und in sich geschlossene HTML/CSS-Demos. Dieses Werkzeug wandelt jedes Bild, das du hochlädst, in eine Base64-Data-URI um, die direkt in HTML, CSS oder JSON eingefügt werden kann.
     </p>
     <div>
       <h2>Wann du eine Data URI verwenden solltest</h2>

@@ -172,9 +172,10 @@ export function SlugGeneratorClient() {
       {/* 输出区 */}
       <div>
         <div className="mb-2 flex items-center justify-between">
-          <label htmlFor="slug-output" className="text-sm font-medium text-slate-700 dark:text-slate-300">
+          {/* 只读输出标题(非表单控件标签):不能用 <label>,它没有可关联的控件 */}
+          <span className="text-sm font-medium text-slate-700 dark:text-slate-300">
             {L('result', 'Result')}
-          </label>
+          </span>
           <div className="flex gap-2">
             <button
               type="button"

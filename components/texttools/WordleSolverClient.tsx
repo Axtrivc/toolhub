@@ -405,13 +405,14 @@ export function WordleSolverClient() {
             <label htmlFor="wordle-anagram" className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
               {L('anagramLabel', 'Available letters (3–10)')}
             </label>
+            {/* 粘贴宽容:与绿格 setGreen 同款规则,剥离非字母并截到 10 个字母;
+                原生 maxLength 按原始字符计数,带分隔符的粘贴会在 10 字符处被硬截断丢字母 */}
             <input
               id="wordle-anagram"
               type="text"
               value={anagramLetters}
-              onChange={(e) => setAnagramLetters(e.target.value)}
+              onChange={(e) => setAnagramLetters(e.target.value.replace(/[^a-zA-Z]/g, '').slice(0, 10))}
               placeholder={L('anagramPlaceholder', 'e.g. rates')}
-              maxLength={10}
               spellCheck={false}
               className="w-full max-w-md rounded-lg border p-3 font-mono text-sm shadow-sm outline-none transition focus:ring-2"
               style={inputStyle}

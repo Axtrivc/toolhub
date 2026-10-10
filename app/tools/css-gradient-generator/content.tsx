@@ -37,9 +37,9 @@ const en: ReactNode = (
       <h2>Color stops that look intentional</h2>
       <p>
         Two stops is a fade; three or more is a design. Keep adjacent stops in the same hue family for smooth
-        blends — jumping straight from, say, blue to red passes through muddy gray in RGB interpolation. The{' '}
+        blends — jumping straight from, say, blue to yellow passes through muddy gray in RGB interpolation. The{' '}
         <strong>Random palette</strong> button only picks pastel pairs and triples that blend cleanly, which is a
-        good starting point. Drag a stop&apos;s position toward its neighbor for a harder edge: two stops at the
+        good starting point. Move a stop&apos;s position toward its neighbor for a harder edge: two stops at the
         same percentage create a crisp stripe with zero blending.
       </p>
     </div>
@@ -75,7 +75,7 @@ const zh: ReactNode = (
     <div>
       <h2>让色标看起来有意图</h2>
       <p>
-        两个色标只是过渡；三个或更多才是设计。让相邻色标保持在同一色系内以获得平滑过渡 —— 比如直接从蓝色跳到红色，在 RGB 插值下会经过浑浊的灰色。<strong>Random palette</strong> 按钮只会挑选能干净融合的柔和成对或三色组合，是个不错的起点。把某个色标的位置向相邻色标拖近以获得更硬的边缘：两个位于相同百分比的色标会形成一条没有过渡的清晰条纹。
+        两个色标只是过渡；三个或更多才是设计。让相邻色标保持在同一色系内以获得平滑过渡 —— 比如直接从蓝色跳到黄色，在 RGB 插值下会经过浑浊的灰色。<strong>Random palette</strong> 按钮只会挑选能干净融合的柔和成对或三色组合，是个不错的起点。把某个色标的位置向相邻色标移近以获得更硬的边缘：两个位于相同百分比的色标会形成一条没有过渡的清晰条纹。
       </p>
     </div>
 
@@ -106,7 +106,7 @@ const es: ReactNode = (
     <div>
       <h2>Color stops con aspecto intencional</h2>
       <p>
-        Dos stops son un degradado; tres o más son diseño. Mantén los stops adyacentes en la misma familia de tonos para transiciones suaves — saltar directamente de, por ejemplo, azul a rojo pasa por un gris turbio en la interpolación RGB. El botón <strong>Random palette</strong> solo elige pares y tríos pastel que combinan limpiamente, un buen punto de partida. Arrastra la posición de un stop hacia su vecino para un borde más duro: dos stops en el mismo porcentaje crean una franja nítida sin interpolación.
+        Dos stops son un degradado; tres o más son diseño. Mantén los stops adyacentes en la misma familia de tonos para transiciones suaves — saltar directamente de, por ejemplo, azul a amarillo pasa por un gris turbio en la interpolación RGB. El botón <strong>Random palette</strong> solo elige pares y tríos pastel que combinan limpiamente, un buen punto de partida. Mueve la posición de un stop hacia su vecino para un borde más duro: dos stops en el mismo porcentaje crean una franja nítida sin interpolación.
       </p>
     </div>
 
@@ -137,14 +137,14 @@ const de: ReactNode = (
     <div>
       <h2>Color Stops, die absichtlich wirken</h2>
       <p>
-        Zwei Stops sind ein Verlauf; drei oder mehr sind Design. Halte benachbarte Stops in derselben Farbfamilie für saubere Übergänge — ein direkter Sprung von beispielsweise Blau nach Rot läuft durch den trüben Graubereich der RGB-Interpolation. Der Button <strong>Random palette</strong> wählt nur Pastell-Paare und -Tripel, die sauber verschmelzen — ein guter Startpunkt. Ziehe die Position eines Stops Richtung Nachbar für eine härtere Kante: zwei Stops auf demselben Prozentwert erzeugen einen scharfen Streifen ohne Verschmelzung.
+        Zwei Stops sind ein Verlauf; drei oder mehr sind Design. Halte benachbarte Stops in derselben Farbfamilie für saubere Übergänge — ein direkter Sprung von beispielsweise Blau nach Gelb läuft durch den trüben Graubereich der RGB-Interpolation. Der Button <strong>Random palette</strong> wählt nur Pastell-Paare und -Tripel, die sauber verschmelzen — ein guter Startpunkt. Verschiebe die Position eines Stops Richtung Nachbar für eine härtere Kante: zwei Stops auf demselben Prozentwert erzeugen einen scharfen Streifen ohne Verschmelzung.
       </p>
     </div>
 
     <div>
       <h2>Praktische Tipps für den Live-Betrieb</h2>
       <p>
-        Gradienten sind billig zu rendern, aber riesige animierte Gradienten können schwache GPUs belasten — bevorzuge statische Hintergründe auf Full-Screen-Abschnitten. Für Text über einem Mesh- oder Radial-Glow füge ein dezentes Overlay hinzu oder prüfe den Kontrast, da die Leuchtkraft über den Gradienten variiert. Und wenn ein Design ein Hintergrundbild plus Tönung verlangt, denke daran, dass du einen <code>linear-gradient</code> über <code>url(...)</code> im selben <code>background</code>-Kurzzeichen stapeln kannst, statt das Bild selbst zu bearbeiten.
+        Gradienten sind billig zu rendern, aber riesige animierte Gradienten können schwache GPUs belasten — bevorzuge statische Hintergründe auf Full-Screen-Abschnitten. Für Text über einem Mesh- oder Radial-Glow füge ein dezentes Overlay hinzu oder prüfe den Kontrast, da die Leuchtkraft über den Gradienten variiert. Und wenn ein Design ein Hintergrundbild plus Tönung verlangt, denke daran, dass du einen <code>linear-gradient</code> über <code>url(...)</code> in derselben <code>background</code>-Kurzschreibweise stapeln kannst, statt das Bild selbst zu bearbeiten.
       </p>
     </div>
   </section>

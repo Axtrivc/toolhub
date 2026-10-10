@@ -125,7 +125,7 @@ const de: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>Was ist dieses Werkzeug?</h2>
     <p>
-      Aus Figma, Illustrator oder Inkscape exportierte SVGs sind voller Ballast: XML-Deklarationen, Kommentare, Editor-Namespaces, Metadaten-Blöcke und Pfadkoordinaten mit acht Nachkommastellen. Dieser Minifier entfernt diesen Totballast und spart typischerweise <strong>30–60 %</strong> der Dateigröße — ideal, bevor du Icons in HTML inlineest oder ein Sprite-Sheet auslieferst. Alles läuft lokal in deinem Browser; es wird keine Datei hochgeladen.
+      Aus Figma, Illustrator oder Inkscape exportierte SVGs sind voller Ballast: XML-Deklarationen, Kommentare, Editor-Namespaces, Metadaten-Blöcke und Pfadkoordinaten mit acht Nachkommastellen. Dieser Minifier entfernt diesen Totballast und spart typischerweise <strong>30–60 %</strong> der Dateigröße — ideal, bevor du Icons in HTML einbindest oder ein Sprite-Sheet auslieferst. Alles läuft lokal in deinem Browser; es wird keine Datei hochgeladen.
     </p>
 
     <div>
@@ -145,7 +145,7 @@ const de: ReactNode = (
     <div>
       <h2>Zwei Dinge, die du vor dem Ausliefern prüfen solltest</h2>
       <p>
-        Erstens: Wenn du <strong>SVG per CSS-Selektoren stylst</strong>, die auf <code>title</code> zielen oder auf <code>inkscape:</code>-Attribute angewiesen sind, lass diese Schalter aus. Zweitens, Barrierefreiheit: Das Entfernen von <code>&lt;title&gt;</code> entfernt den zugänglichen Namen eines dekorativen Inline-Icons — das ist in Ordnung, wenn das Icon dekorativ ist, aber behalte bei aussagekräftigen Grafiken einen Titel (oder füge <code>aria-label</code> am Elternteil hinzu). Nutze die Live-Vorschau, um zu bestätigen, dass die minifizierte Ausgabe vor dem Download noch identisch rendert.
+        Erstens: Wenn du <strong>SVG per CSS-Selektoren stylst</strong>, die auf <code>title</code> zielen oder auf <code>inkscape:</code>-Attribute angewiesen sind, lass diese Schalter aus. Zweitens, Barrierefreiheit: Das Entfernen von <code>&lt;title&gt;</code> entfernt den zugänglichen Namen eines dekorativen Inline-Icons — das ist in Ordnung, wenn das Icon dekorativ ist, aber behalte bei aussagekräftigen Grafiken einen Titel (oder füge <code>aria-label</code> am übergeordneten Element hinzu). Nutze die Live-Vorschau, um zu bestätigen, dass die minifizierte Ausgabe vor dem Download noch identisch rendert.
       </p>
     </div>
   </section>

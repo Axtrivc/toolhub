@@ -133,7 +133,7 @@ const es: ReactNode = (
       <p>
         El recargo está <em>regulado</em>: algunos estados de EE. UU. y otros países lo restringen o prohíben, y las redes de tarjetas
         imponen topes y normas de divulgación. Una alternativa habitual es subir el precio base y ofrecer en su lugar un
-        descuento por pago en efectivo/ACH. Las tarifas que se muestran aquí son aproximaciones a 2026 — confírmalas frente a tu acuerdo real
+        descuento por pago en efectivo/ACH. Las tarifas que se muestran aquí son aproximaciones a fecha de 2026 — confírmalas frente a tu acuerdo real
         de Stripe o PayPal, ya que los precios cambian y las tarifas negociadas son frecuentes.
       </p>
     </div>

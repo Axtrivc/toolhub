@@ -25,8 +25,9 @@ const en: ReactNode = (
       <p>
         Enter your name or company, your client, an invoice number, and the issue and due dates. Add as many
         line items as you need — each with a <strong>description, quantity, and unit rate</strong> — and an
-        optional tax percentage. The preview computes the subtotal, tax, and total automatically in USD, EUR,
-        GBP, or JPY. <strong>Print / Save as PDF</strong> opens a self-contained invoice page and triggers the
+        optional tax percentage. The preview computes the subtotal, tax, and total automatically in one of 10
+        currencies — USD, EUR, GBP, JPY, CNY, CAD, AUD, CHF, INR, or KRW. <strong>Print / Save as PDF</strong> opens a
+        self-contained invoice page and triggers the
         browser&apos;s print dialog (choose &quot;Save as PDF&quot; as the destination), while{' '}
         <strong>Download HTML</strong> saves the same invoice as a standalone file you can email or archive.
       </p>
@@ -70,7 +71,7 @@ const zh: ReactNode = (
       <p>
         填写你的姓名或公司、客户、发票编号，以及开票日期和到期日期。按需添加任意数量的明细项 —— 每项包含<strong>描述、数量和单价</strong> —— 再加上
         可选的税率。预览会自动计算出小计、税额和总计，支持 USD、EUR、
-        GBP 或 JPY 货币。<strong>打印 / 另存为 PDF</strong> 会打开一个独立的发票页面并触发
+        GBP、JPY、CNY、CAD、AUD、CHF、INR、KRW 十种货币。<strong>打印 / 另存为 PDF</strong> 会打开一个独立的发票页面并触发
         浏览器的打印对话框（在目标中选择「另存为 PDF」），而{' '}
         <strong>下载 HTML</strong> 会把同一份发票保存为独立文件，方便你邮件发送或归档。
       </p>
@@ -114,8 +115,9 @@ const es: ReactNode = (
       <p>
         Introduce tu nombre o empresa, tu cliente, un número de factura y las fechas de emisión y de vencimiento. Añade todas
         las líneas de concepto que necesites — cada una con una <strong>descripción, cantidad y tarifa unitaria</strong> — y un
-        porcentaje de impuestos opcional. La vista previa calcula el subtotal, los impuestos y el total automáticamente en USD, EUR,
-        GBP o JPY. <strong>Imprimir / Guardar como PDF</strong> abre una página de factura independiente y abre el
+        porcentaje de impuestos opcional. La vista previa calcula el subtotal, los impuestos y el total automáticamente en una de
+        10 monedas: USD, EUR, GBP, JPY, CNY, CAD, AUD, CHF, INR o KRW. <strong>Imprimir / Guardar como PDF</strong> abre una página
+        de factura independiente y abre el
         diálogo de impresión del navegador (elige «Guardar como PDF» como destino), mientras que{' '}
         <strong>Descargar HTML</strong> guarda la misma factura como un archivo independiente que puedes enviar por correo o archivar.
       </p>
@@ -160,8 +162,9 @@ const de: ReactNode = (
       <p>
         Gib deinen Namen oder dein Unternehmen, deinen Kunden, eine Rechnungsnummer sowie das Rechnungs- und Fälligkeitsdatum ein. Füge so viele
         Positionen hinzu, wie du brauchst — jede mit einer <strong>Beschreibung, Menge und Einheitspreis</strong> — und einem
-        optionalen Steuersatz. Die Vorschau berechnet Zwischensumme, Steuer und Gesamtbetrag automatisch in USD, EUR,
-        GBP oder JPY. <strong>Drucken / Als PDF speichern</strong> öffnet eine in sich geschlossene Rechnungsseite und löst den
+        optionalen Steuersatz. Die Vorschau berechnet Zwischensumme, Steuer und Gesamtbetrag automatisch in einer von
+        10 Währungen: USD, EUR, GBP, JPY, CNY, CAD, AUD, CHF, INR oder KRW. <strong>Drucken / Als PDF speichern</strong> öffnet eine in
+        sich geschlossene Rechnungsseite und löst den
         Druckdialog des Browsers aus (wähle „Als PDF speichern" als Ziel), während{' '}
         <strong>HTML herunterladen</strong> dieselbe Rechnung als eigenständige Datei speichert, die du per E-Mail verschicken oder archivieren kannst.
       </p>

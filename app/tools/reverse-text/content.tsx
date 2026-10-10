@@ -10,8 +10,8 @@ const en: ReactNode = (
     <h2>What Is This Tool?</h2>
     <p>
       This tool reverses any text — the last character becomes the first, the first becomes the
-      last. It handles Unicode correctly, so emojis and accented letters reverse cleanly as single
-      characters.
+      last. Text is reversed by Unicode code point, so most emoji and accented letters stay intact;
+      multi-codepoint emoji (ZWJ sequences, flags) and combining marks can split apart.
     </p>
     <div>
       <h2>Fun and Practical Uses</h2>
@@ -39,7 +39,7 @@ const zh: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>这是什么工具?</h2>
     <p>
-      本工具可反转任意文本 —— 最后一个字符变成第一个,第一个变成最后一个。它能正确处理 Unicode,因此表情符号和带重音的字母都能作为单个字符干净地反转。
+      本工具可反转任意文本 —— 最后一个字符变成第一个,第一个变成最后一个。文本按 Unicode 码位反转,多数表情符号和带重音的字母能保持完整;由多个码位组成的 emoji(ZWJ 序列、旗帜)和组合变音符则可能被拆开。
     </p>
     <div>
       <h2>有趣与实用的用途</h2>
@@ -66,8 +66,9 @@ const es: ReactNode = (
     <h2>¿Qué es esta herramienta?</h2>
     <p>
       Esta herramienta invierte cualquier texto — el último carácter se convierte en el primero, y
-      el primero en el último. Maneja Unicode correctamente, así que los emojis y las letras
-      acentuadas se invierten limpiamente como caracteres individuales.
+      el primero en el último. El texto se invierte por puntos de código Unicode, así que la
+      mayoría de los emojis y las letras acentuadas se mantienen intactos; los emojis de varios
+      puntos de código (secuencias ZWJ, banderas) y los diacríticos combinantes pueden separarse.
     </p>
     <div>
       <h2>Usos divertidos y prácticos</h2>
@@ -97,8 +98,9 @@ const de: ReactNode = (
     <h2>Was ist dieses Werkzeug?</h2>
     <p>
       Dieses Werkzeug kehrt jeden Text um — das letzte Zeichen wird zum ersten, das erste zum
-      letzten. Es behandelt Unicode korrekt, sodass Emojis und Buchstaben mit Akzenten sauber als
-      einzelne Zeichen umgekehrt werden.
+      letzten. Der Text wird nach Unicode-Codepunkten umgekehrt, sodass die meisten Emojis und
+      akzentuierten Buchstaben intakt bleiben; Emojis aus mehreren Codepunkten (ZWJ-Folgen,
+      Flaggen) und kombinierende diakritische Zeichen können auseinanderfallen.
     </p>
     <div>
       <h2>Lustige und praktische Verwendungszwecke</h2>

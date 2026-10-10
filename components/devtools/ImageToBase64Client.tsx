@@ -154,7 +154,7 @@ export function ImageToBase64Client() {
                 {img.name}
               </div>
               <div className="text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>
-                {mime} · {formatBytes(img.size)} · Base64 size ≈ {formatBytes(Math.ceil((base64Payload(img.dataUrl).length * 3) / 4))}
+                {mime} · {formatBytes(img.size)} · {L('base64Size', 'Base64 size ≈ ')}{formatBytes(base64Payload(img.dataUrl).length)}
               </div>
             </div>
             <label htmlFor="img-reupload" className="btn btn-secondary cursor-pointer text-xs">

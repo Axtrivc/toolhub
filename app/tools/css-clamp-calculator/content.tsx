@@ -174,7 +174,7 @@ const de: ReactNode = (
     <div>
       <h2>Sinnvolle Bereiche wählen</h2>
       <p>
-        Ein gängiger Startpunkt für Fließtext ist „16 px bei einem 375-px-Handy bis 18–20 px bei einem 1440-px-Desktop"; Überschriften vertragen deutlich weitere Bereiche, etwa 28 px → 48 px. Vermeide eine so steile Steigung, dass der Text auf Tablets anschwillt — prüfe die berechnete Größe bei{' '}
+        Ein gängiger Startpunkt für Fließtext ist „16 px bei einem 375-px-Handy bis 18–20 px bei einem 1440-px-Desktop“; Überschriften vertragen deutlich weitere Bereiche, etwa 28 px → 48 px. Vermeide eine so steile Steigung, dass der Text auf Tablets anschwillt — prüfe die berechnete Größe bei{' '}
         <code>768px</code> in der Tabelle. Und denk daran: Der Bereich ist ein <em>Viewport</em>-Bereich, kein Gerätebereich — wer ein Desktop-Fenster in der Größe verändert, durchläuft die gesamte Skalierung, also halte das fluide Verhalten bei jeder Breite dazwischen angenehm.
       </p>
     </div>

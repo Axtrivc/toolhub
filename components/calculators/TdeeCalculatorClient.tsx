@@ -29,7 +29,9 @@ const LB_PER_KG = 0.45359237
 /** 输入框字符串换算:空/非法/非正值保留空串,避免切换单位把 '' 变成 '0' */
 function convertInput(s: string, factor: number): string {
   if (s.trim() === '') return ''
-  const n = Number(s)
+  // 粘贴宽容化:toNumStrict 与原 Number 同样对非法输入返回 NaN(拒绝语义不变),
+  // 但 "$1,200"/"1 200"/"18%" 这类带格式的复制数字可直接换算(与下方身高换算一致)
+  const n = toNumStrict(s)
   if (!isFinite(n) || n <= 0) return ''
   return String(Number((n * factor).toFixed(1)))
 }
@@ -202,6 +204,7 @@ export function TdeeCalculatorClient() {
             key={u}
             type="button"
             onClick={() => switchUnit(u)}
+            aria-pressed={unit === u}
             className={`rounded-lg px-4 py-2 text-sm font-medium transition ${
               unit === u ? 'bg-brand-600 text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200 dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-slate-700'
             }`}

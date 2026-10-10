@@ -10,7 +10,8 @@ import { tui } from '@/lib/i18n/tool-l10n'
  * Regex Tester & Explainer
  *
  * 输入:pattern / flags / 测试文本。实时:
- *  - 高亮所有匹配(把文本拆成 matched/unmatched 段,渲染带底色的 <mark>)
+ *  - 高亮匹配(把文本拆成 matched/unmatched 段,渲染带底色的 <mark>;遵循 flags,
+ *    无 g 只取首个,零宽匹配照 native 语义计入)
  *  - 列出每次匹配 + 各 capture group 的值
  *  - 替换预览:替换模板输入($1 / $& / $<name> 等),结果分段高亮,
  *    语义与 native String.replace 逐一对齐(尊重用户 flags,无 g 只替第一处)
@@ -51,25 +52,24 @@ function safeCompile(pattern: string, flags: string): { re?: RegExp; error?: str
   }
 }
 
-/** 把测试文本按匹配切成段,用于高亮渲染 */
+/** 把测试文本按匹配切成段,用于高亮渲染(与 collectMatches 一样遵循用户 flags) */
 function buildSegments(text: string, re: RegExp): HighlightSegment[] {
-  const globalRe = new RegExp(re.source, re.flags.includes('g') ? re.flags : re.flags + 'g')
+  const rx = new RegExp(re.source, re.flags)
   const segments: HighlightSegment[] = []
   let last = 0
   let m: RegExpExecArray | null
   let safety = 0
-  while ((m = globalRe.exec(text)) !== null) {
-    // 防止零宽匹配死循环(exec 不前进)
-    if (m.index === last && m[0].length === 0) {
-      globalRe.lastIndex++
-      continue
-    }
+  while ((m = rx.exec(text)) !== null) {
+    if (++safety > 5000) break
     if (m.index > last) {
       segments.push({ text: text.slice(last, m.index), matched: false })
     }
     segments.push({ text: m[0], matched: true })
     last = m.index + m[0].length
-    if (++safety > 5000) break
+    // 零宽匹配:推进一位避免原地反复命中(与 native String.match 的推进一致)
+    if (m[0].length === 0) rx.lastIndex = m.index + 1
+    // 无 g 时只取首个匹配(native 语义,与替换预览一致)
+    if (!rx.global) break
   }
   if (last < text.length) {
     segments.push({ text: text.slice(last), matched: false })
@@ -77,23 +77,26 @@ function buildSegments(text: string, re: RegExp): HighlightSegment[] {
   return segments
 }
 
-/** 收集所有匹配的详情(含 capture groups);上限与高亮一致,触及上限时 truncated=true */
+/**
+ * 收集匹配详情(含 capture groups),与 native String.match 语义对齐:
+ * 零宽匹配(如 (?=…)、a*、^ 配 m)照实计入并推进一位;无 g 时仅首个。
+ * 上限与高亮一致,触及上限时 truncated=true。
+ */
 function collectMatches(text: string, re: RegExp): { details: MatchDetail[]; truncated: boolean } {
-  const globalRe = new RegExp(re.source, re.flags.includes('g') ? re.flags : re.flags + 'g')
+  const rx = new RegExp(re.source, re.flags)
   const details: MatchDetail[] = []
   let m: RegExpExecArray | null
   let safety = 0
-  while ((m = globalRe.exec(text)) !== null) {
-    if (m.index === globalRe.lastIndex && m[0].length === 0) {
-      globalRe.lastIndex++
-      continue
-    }
+  while ((m = rx.exec(text)) !== null) {
     details.push({
       index: m.index,
       match: m[0],
       groups: m.slice(1),
     })
+    // 零宽匹配后移一位,避免 exec 不前进导致死循环(native match 同款推进)
+    if (m[0].length === 0) rx.lastIndex = m.index + 1
     if (++safety >= 5000) return { details, truncated: true }
+    if (!rx.global) break
   }
   return { details, truncated: false }
 }
@@ -103,8 +106,9 @@ function collectMatches(text: string, re: RegExp): { details: MatchDetail[]; tru
  * 已用 3000+ 用例对照 V8 原生 String.replace 校验一致:
  *  - $$ → $、$& → 整个匹配、$` / $' → 匹配前缀/后缀;
  *  - $n、$nn:两位数字 ≤ 组数时按两位解析,否则回退一位;越界(如 $0/$4)→ 字面保留;
- *  - $<name>:命中命名组 → 该捕获值(未参与捕获为空串);模式已有命名组但名字未命中
- *    → 空字符串(D2,与原生一致);模式没有任何命名组或 $< 未闭合 → 字面保留。
+ *  - $<name>:取值直接查引擎 exec 返回的 groups 对象(重名组如 (?<a>x)|(?<a>b)
+ *    按原生规则取实际参与的组);名字未命中或未参与捕获均为空串(D2,与原生一致);
+ *    模式没有任何命名组或 $< 未闭合 → 字面保留。
  */
 function expandTemplate(
   tpl: string,
@@ -112,7 +116,7 @@ function expandTemplate(
   index: number,
   text: string,
   caps: (string | undefined)[],
-  namesByNum: Record<number, string>,
+  namedGroups: Record<string, string> | undefined,
 ): string {
   let out = ''
   let i = 0
@@ -168,15 +172,10 @@ function expandTemplate(
     }
     if (nxt === '<') {
       const close = tpl.indexOf('>', i + 2)
-      if (close !== -1 && Object.keys(namesByNum).length > 0) {
-        const name = tpl.slice(i + 2, close)
-        const gi = Object.keys(namesByNum).find((k) => namesByNum[Number(k)] === name)
-        if (gi !== undefined) {
-          out += caps[Number(gi) - 1] ?? ''
-          i = close + 1
-          continue
-        }
-        // 模式有命名组但名字未命中 → 空串(native 行为)
+      if (close !== -1 && namedGroups) {
+        // 取值交给引擎的 groups 对象:重名组按原生规则取实际参与的组;
+        // 名字未命中 / 未参与捕获(undefined)→ 空串(native 行为)
+        out += namedGroups[tpl.slice(i + 2, close)] ?? ''
         i = close + 1
         continue
       }
@@ -200,7 +199,6 @@ function buildReplaceSegments(
   text: string,
   re: RegExp,
   tpl: string,
-  namesByNum: Record<number, string>,
 ): { segments: ReplaceSegment[]; total: number } {
   // 独立实例,避免污染 compiled.lastIndex 影响高亮/详情
   const rx = new RegExp(re.source, re.flags)
@@ -214,14 +212,14 @@ function buildReplaceSegments(
       // 零宽匹配:插入展开结果但不消费原位置字符(last 不动),
       // 仅让引擎 lastIndex 前进一位 —— 与 native 的推进方式一致
       segments.push({ text: text.slice(last, m.index), replaced: false })
-      segments.push({ text: expandTemplate(tpl, '', m.index, text, m.slice(1), namesByNum), replaced: true })
+      segments.push({ text: expandTemplate(tpl, '', m.index, text, m.slice(1), m.groups), replaced: true })
       rx.lastIndex = m.index + 1
       last = m.index
       if (!rx.global || rx.lastIndex > text.length) break
       continue
     }
     segments.push({ text: text.slice(last, m.index), replaced: false })
-    segments.push({ text: expandTemplate(tpl, m[0], m.index, text, m.slice(1), namesByNum), replaced: true })
+    segments.push({ text: expandTemplate(tpl, m[0], m.index, text, m.slice(1), m.groups), replaced: true })
     last = m.index + m[0].length
     if (!rx.global) break
   }
@@ -375,10 +373,11 @@ export function RegexTesterClient() {
 
   // 替换预览:在已截断的 safeText 上执行(复用 50k 门控),尊重用户 flags ——
   // 无 g 时只替换第一处并在下方 note 注明语义;pattern 为空/非法时整个区块不渲染。
+  // 门控用 matches(含零宽匹配,与 native replace 语义一致),无任何匹配时不渲染。
   const replaceOut = useMemo(() => {
     if (!compiled.re || !safeText || matches.length === 0) return null
-    return buildReplaceSegments(safeText, compiled.re, replacement, groupNames)
-  }, [compiled, safeText, matches.length, replacement, groupNames])
+    return buildReplaceSegments(safeText, compiled.re, replacement)
+  }, [compiled, safeText, matches.length, replacement])
   // 拼接后的完整结果(CopyButton 始终复制完整文本,与渲染上限无关)
   const replaceResultText = useMemo(
     () => (replaceOut ? replaceOut.segments.map((s) => s.text).join('') : ''),
@@ -419,6 +418,7 @@ export function RegexTesterClient() {
             value={flags}
             onChange={(e) => setFlags(e.target.value.replace(/[^gimsuy]/g, ''))}
             placeholder="gim"
+            aria-label={L('flagsLabel', 'Flags:')}
             spellCheck={false}
             className={`${inputCls} w-20 text-center`}
             style={{ borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rgb(var(--bg-card))', color: 'rgb(var(--text))' }}
@@ -491,8 +491,8 @@ export function RegexTesterClient() {
         />
       </div>
 
-      {/* 高亮结果 */}
-      {segments.length > 0 && (
+      {/* 高亮结果(与匹配详情同一语义:无任何匹配时不渲染,避免空区块+禁用复制按钮) */}
+      {segments.length > 0 && matches.length > 0 && (
         <div>
           <div className="mb-2 flex items-center justify-between">
             <span className="text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>{L('highlightedMatches', 'Highlighted Matches')}</span>

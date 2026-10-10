@@ -33,8 +33,8 @@ export function ProfitMarginCalculatorContent() {
       <h2>Pricing guardrails</h2>
       <p>
         Margin tells you if a product is worth selling; markup multipliers keep quotes fast. Keep both in view when
-        costs rise: a supplier increase of 10% on an item you mark up 50% only needs a ~7% price bump to hold margin —
-        most sellers round up and quietly pocket the difference.
+        costs rise: a supplier increase of 10% on an item you mark up 50% only needs a ~7% price bump to keep the same
+        profit per unit — most sellers round up to the full 10% and quietly pocket the difference.
       </p>
     </section>
   )

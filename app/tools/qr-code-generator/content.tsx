@@ -167,7 +167,7 @@ const zh: ReactNode = (
         <strong>自定义外观。</strong>调整预览尺寸,选择前景色和背景色以匹配你的品牌。保持高对比度,这样扫描器才能可靠读取。
       </li>
       <li>
-        <strong>下载。</strong>点击「Download PNG」,保存一张适用于印刷或网页的高分辨率图片。
+        <strong>下载。</strong>点击「下载 PNG」,保存一张适用于印刷或网页的高分辨率图片。
       </li>
     </ol>
 
@@ -261,7 +261,7 @@ const es: ReactNode = (
         fondo para tu marca. Mantén un contraste alto para que los escáneres lean el código de forma fiable.
       </li>
       <li>
-        <strong>Descarga.</strong> Haz clic en «Download PNG» para guardar una imagen de alta resolución lista para
+        <strong>Descarga.</strong> Haz clic en «Descargar PNG» para guardar una imagen de alta resolución lista para
         impresión o web.
       </li>
     </ol>
@@ -365,7 +365,7 @@ const de: ReactNode = (
         passend zu deiner Marke. Halte den Kontrast hoch, damit Scanner den Code zuverlässig lesen.
       </li>
       <li>
-        <strong>Herunterladen.</strong> Klicke auf „Download PNG", um ein hochauflösendes Bild für Druck oder Web zu speichern.
+        <strong>Herunterladen.</strong> Klicke auf „PNG herunterladen", um ein hochauflösendes Bild für Druck oder Web zu speichern.
       </li>
     </ol>
 

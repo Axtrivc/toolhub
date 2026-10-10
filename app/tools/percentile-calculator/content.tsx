@@ -38,7 +38,7 @@ const zh: ReactNode = (
       <h2>百分位数的常见用途</h2>
       <ul>
         <li><strong>考试成绩:</strong>SAT、GRE ——「第 95 百分位数」表示你的得分高于 95% 的考生</li>
-        <li><strong>薪资:</strong>收入百分位数显示你在同龄人中所处的位置</li>
+        <li><strong>薪资:</strong>收入百分位数显示你在同侪中所处的位置</li>
         <li><strong>健康:</strong>儿童身高/体重百分位数,用于追踪生长发育</li>
         <li><strong>性能:</strong>API 响应时间 ——「p95 延迟」表示 95% 的请求比它更快</li>
       </ul>

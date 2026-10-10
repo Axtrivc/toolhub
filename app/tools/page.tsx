@@ -63,9 +63,10 @@ export default function ToolsHubPage() {
         categories={categories.map(([category, categoryTools]) => [category, categoryTools.length])}
       />
 
-      {/* 分类分组展示全量工具(卡片/标题由客户端组件本地化) */}
+      {/* 分类分组展示全量工具(卡片/标题由客户端组件本地化)。
+          不设 id 锚点:分类名含空格不是合法 id,且分类跳转已统一走首页 ?category= 深链。 */}
       {categories.map(([category, categoryTools]) => (
-        <section key={category} id={category} className="mb-12 scroll-mt-20">
+        <section key={category} className="mb-12">
           <ToolDirectoryHeading category={category} count={categoryTools.length} />
           <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {categoryTools.map((tool) => (

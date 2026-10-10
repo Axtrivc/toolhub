@@ -482,8 +482,10 @@ export function IntermittentFastingClient() {
       ((t - lo + 1440) % 1440) < ((hi - lo + 1440) % 1440 || 1440)
     const eating = inWindow(nowMin, eatStart, eatEnd)
     const target = eating ? eatEnd : fastEnd
-    let diff = Math.round(target - nowMin)
-    while (diff <= 0) diff += 1440
+    // 环绕到「下一个」目标时刻:首餐前的凌晨(如 11:00 → 12:00 开窗)若只向
+    // 次日加 1440 会虚报 25h;按 1440 取模恒指向最近一次开窗/关窗
+    let diff = Math.round((((target - nowMin) % 1440) + 1440) % 1440)
+    if (diff === 0) diff = 1440
     const h = Math.floor(diff / 60)
     const m = diff % 60
     return { eating, h, m }
@@ -511,8 +513,8 @@ export function IntermittentFastingClient() {
         leftPct: (segStart / 24) * 100,
         widthPct: (w / 24) * 100,
         color: p.color,
-        label: p.label,
-        title: `${p.label} · ${p.desc} (+${p.from}h fasted)`,
+        label: L(`phase${p.from}`, p.label),
+        title: `${L(`phase${p.from}`, p.label)} · ${L(`phaseDesc${p.from}`, p.desc)} (+${p.from}h fasted)`,
       })
     }
     return segs
@@ -545,8 +547,9 @@ export function IntermittentFastingClient() {
         [L('sFirstMeal', 'First meal'), fmtTime(eatStart)],
         [L('sEatingWindow', 'Eating window'), `${fmtTime(eatStart)} - ${fmtTime(eatEnd)}`],
         [L('sFastingWindow', 'Fasting window'), `${fmtTime(eatEnd)} - ${fmtTime(fastEnd)}`],
-        ...IF_PHASES.map((p) => [
-          `${p.label} (+${p.from}h fasted)`,
+        // 与页面明细表同口径:超出断食时长的阶段不导出(否则出现倒挂区间)
+        ...IF_PHASES.filter((p) => p.from < md.fast).map((p) => [
+          `${L(`phase${p.from}`, p.label)} (+${p.from}h fasted)`,
           `${fmtTime(eatEnd + p.from * 60)} – ${fmtTime(eatEnd + Math.min(p.to, md.fast) * 60)}`,
         ]),
       ]
@@ -705,13 +708,13 @@ export function IntermittentFastingClient() {
                 <tr key={p.label}>
                   <td className="px-3 py-2 font-medium">
                     <span aria-hidden="true" className="mr-2 inline-block h-2.5 w-2.5 rounded-full align-middle" style={{ backgroundColor: p.color }} />
-                    <span style={{ color: 'rgb(var(--text))' }}>{p.label}</span>
+                    <span style={{ color: 'rgb(var(--text))' }}>{L(`phase${p.from}`, p.label)}</span>
                   </td>
                   <td className="px-3 py-2 font-mono text-xs" style={{ color: 'rgb(var(--text-muted))' }}>+{p.from}h – +{clipped}h</td>
                   <td className="px-3 py-2 font-mono text-xs" style={{ color: 'rgb(var(--text-muted))' }}>
                     {fmtTime(eatEnd + p.from * 60)} – {fmtTime(eatEnd + clipped * 60)}
                   </td>
-                  <td className="px-3 py-2 text-xs" style={{ color: 'rgb(var(--text-muted))' }}>{p.desc}</td>
+                  <td className="px-3 py-2 text-xs" style={{ color: 'rgb(var(--text-muted))' }}>{L(`phaseDesc${p.from}`, p.desc)}</td>
                 </tr>
               )
             })}

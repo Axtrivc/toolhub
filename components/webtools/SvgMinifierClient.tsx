@@ -63,7 +63,9 @@ function minifySvg(input: string, opts: MinifyOptions): string {
   }
 
   if (opts.removeMeta) {
-    out = out.replace(/<metadata[\s\S]*?(<\/metadata>|\/>)/gi, '')
+    // 自闭合形态与成对形态分开匹配:惰性交替会在块内首个 "/>"(如 rdf:about="")
+    // 处提前截断,留下孤儿 </metadata> 使输出非良构
+    out = out.replace(/<metadata[^>]*\/>|<metadata[\s\S]*?<\/metadata>/gi, '')
   }
 
   // title/desc 服务于屏幕阅读器(无障碍),默认保留,仅显式开启时移除
@@ -73,8 +75,15 @@ function minifySvg(input: string, opts: MinifyOptions): string {
   }
 
   if (opts.removeEditorData) {
-    // sodipodi:namedview 整块(Inkscape 视口状态)
-    out = out.replace(/<sodipodi:namedview[\s\S]*?(<\/sodipodi:namedview>|\/>)/gi, '')
+    // sodipodi:namedview 整块(Inkscape 视口状态);同样区分自闭合/成对形态,
+    // 避免在块内 <inkscape:grid/> 的 "/>" 处提前截断
+    out = out.replace(/<sodipodi:namedview[^>]*\/>|<sodipodi:namedview[\s\S]*?<\/sodipodi:namedview>/gi, '')
+    // 其余编辑器前缀元素(inkscape:path-effect 等)一并整块移除:
+    // xmlns 声明即将被删,残留前缀元素会让输出非良构(未声明前缀)。
+    // 先删自闭合形态再做配对匹配,否则成对正则会把自闭合标签当开标签,
+    // 连带吞掉它与后方同名闭标签之间的正常内容
+    out = out.replace(/<(?:inkscape|sodipodi):[a-zA-Z-]+[^>]*\/>/gi, '')
+    out = out.replace(/<((?:inkscape|sodipodi):[a-zA-Z-]+)[^>]*>[\s\S]*?<\/\1>/gi, '')
     // inkscape:/sodipodi: 前缀属性(双/单引号)
     out = out.replace(/\s+(?:inkscape|sodipodi):[a-zA-Z-]+="[^"]*"/g, '')
     out = out.replace(/\s+(?:inkscape|sodipodi):[a-zA-Z-]+='[^']*'/g, '')

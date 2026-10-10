@@ -10,7 +10,7 @@ import { tui } from '@/lib/i18n/tool-l10n'
  * JSON to TypeScript —— 纯前端推导嵌套 Interface
  *
  * 递归推断每个值的类型;对象生成 interface,数组取元素类型并去重,
- * null → null(可选),混合数组 → 联合类型。interface 名按出现顺序 Root / Sub / Sub2...
+ * null → null(可选),混合数组 → 联合类型,空对象 → Record<string, unknown>。interface 名按出现顺序 Root / Sub / Sub2...
  * 100% 本地运行,不上传。
  */
 
@@ -67,8 +67,12 @@ function inferType(value: unknown, nameBase: string, interfaces: string[], reg: 
   if (t === 'number') return 'number'
   if (t === 'boolean') return 'boolean'
   if (t === 'object' && value !== null) {
+    // 空对象:直接内联 Record<string, unknown>(FAQ 四语承诺的形态;
+    // 空 interface 既不能后续加键,也会触发 no-empty-interface)
+    const obj = value as Record<string, unknown>
+    if (Object.keys(obj).length === 0) return 'Record<string, unknown>'
     const name = reg.next(toPascalCase(nameBase) || 'Sub')
-    const body = buildInterface(value as Record<string, unknown>, name, interfaces, reg)
+    const body = buildInterface(obj, name, interfaces, reg)
     interfaces.push(body)
     return name
   }
@@ -118,6 +122,10 @@ function generateInterfaces(jsonStr: string): string {
   }
 
   // 对象根
+  // 空对象根:与嵌套空对象一致,内联 Record<string, unknown>(见 inferType)
+  if (Object.keys(parsed).length === 0) {
+    return `type ${rootName} = Record<string, unknown>;`
+  }
   const body = buildInterface(parsed as Record<string, unknown>, rootName, interfaces, reg)
   // body 是第一个 interface(根),其它嵌套 interface 已被 push 进 interfaces
   // 顺序:根在前,其余按发现顺序
@@ -136,7 +144,9 @@ export function JsonToTypeScriptClient() {
     try {
       return { output: generateInterfaces(input) }
     } catch (e) {
-      return { error: e instanceof Error ? e.message : L('invalidJson', 'Invalid JSON') }
+      // 本地化标签 + 原始诊断(JSON.parse 的报错带行列位置,保留方便定位)
+      const detail = e instanceof Error ? e.message : String(e)
+      return { error: `${L('invalidJson', 'Invalid JSON')}: ${detail}` }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [input, locale])

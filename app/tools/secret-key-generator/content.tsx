@@ -79,8 +79,7 @@ const zh: ReactNode = (
       <p>
         熵衡量的是攻击者平均需要多少次猜测才能找到你的密钥。经验法则：<strong>低于 80 位算弱</strong>（适合短时效的验证码，不适合做密钥），{' '}
         <strong>80–128 位算良好</strong>（适用于大多数令牌），而<strong>高于 128 位算强</strong>——
-        这正是签名密钥和长期 API 密钥应处的区间。工具会把每个结果标注为 Weak /{' '}
-        Good / Strong，方便你一眼核对。对于按字节计算的格式，数学很简单：{' '}
+        这正是签名密钥和长期 API 密钥应处的区间。工具会把每个结果标注为 弱 / 一般 / 强，方便你一眼核对。对于按字节计算的格式，数学很简单：{' '}
         <code>bytes × 8</code> 位，所以 32 个随机字节正好给出完整的 256 位。字母数字字符串每个字符大约承载{' '}
         <code>5.95</code> 位（62 个符号的 log₂），因此你需要约 22 个字符才能超过 128 位。
       </p>
@@ -90,7 +89,7 @@ const zh: ReactNode = (
       <h2>选择合适的格式</h2>
       <p>
         <strong>Hex</strong> 是 HMAC 密钥以及任何要复制进配置文件内容的经典选择；{' '}
-        <strong>Base64URL</strong> 把同样的熵塞进更少的字符里，并且在 URL 和 HTTP 头中无需转义就能幸存，这也是 JWT 密钥和 OAuth 令牌常常使用它的原因。{' '}
+        <strong>Base64URL</strong> 把同样的熵塞进更少的字符里，并且在 URL 和 HTTP 头中无需转义即可原样使用，这也是 JWT 密钥和 OAuth 令牌常常使用它的原因。{' '}
         <strong>字母数字</strong>完全避开了标点符号——在挑剔的系统拒绝符号时很方便。
         <strong>API key 风格</strong>会加上一个人类可读的前缀，例如 <code>sk_live_</code>，让密钥在控制台和泄露扫描器中更容易被识别（前缀本身不增加熵——熵全部来自
         随机后缀）。<strong>UUID v4</strong> 用于必须唯一且不透明的标识符，而不是密钥：在
@@ -126,8 +125,8 @@ const es: ReactNode = (
         La entropía mide cuántos intentos necesitaría un atacante, como media, para encontrar tu secreto. Como regla
         general: <strong>menos de 80 bits es débil</strong> (válido para códigos de corta duración, no para claves),{' '}
         <strong>80–128 bits es bueno</strong> para la mayoría de tokens, y <strong>más de 128 bits es fuerte</strong> —
-        el terreno adecuado para claves de firma y secretos de API de larga duración. La herramienta etiqueta cada resultado Weak /
-        Good / Strong para que puedas comprobarlo de un vistazo. Para los formatos basados en bytes la matemática es sencilla:{' '}
+        el terreno adecuado para claves de firma y secretos de API de larga duración. La herramienta etiqueta cada resultado como Débil /
+        Aceptable / Fuerte para que puedas comprobarlo de un vistazo. Para los formatos basados en bytes la matemática es sencilla:{' '}
         <code>bytes × 8</code> bits, por lo que 32 bytes aleatorios dan 256 bits completos. Las cadenas alfanuméricas transportan unos{' '}
         <code>5.95</code> bits por carácter (log₂ de 62 símbolos), así que necesitas ~22 caracteres para superar 128 bits.
       </p>
@@ -167,7 +166,7 @@ const de: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>Was ist dieses Werkzeug?</h2>
     <p>
-      Dieses Tool erzeugt <strong>hochentropische Secrets</strong> — API-Schlüssel, Access-Tokens, Webhook-Secrets, Signier
+      Dieses Tool erzeugt <strong>Secrets mit hoher Entropie</strong> — API-Schlüssel, Access-Tokens, Webhook-Secrets, Signier
       schlüssel oder einmalige Einrichtungspasswörter — mit <code>crypto.getRandomValues</code>, dem kryptografisch
       sicheren Zufallszahlengenerator deines Browsers. Wähl ein Format (hex, Base64, Base64URL, alphanumerisch, einen
       API-Key-artigen String mit eigenem Präfix oder UUID v4), leg die Länge fest und erzeug ein Secret oder einen Satz
@@ -180,8 +179,8 @@ const de: ReactNode = (
         Entropie misst, wie viele Versuche ein Angreifer im Durchschnitt bräuchte, um dein Secret zu finden. Als Faust
         regel: <strong>unter 80 Bit ist schwach</strong> (in Ordnung für kurzlebige Codes, nicht für Schlüssel),{' '}
         <strong>80–128 Bit ist gut</strong> für die meisten Tokens, und <strong>über 128 Bit ist stark</strong> —
-        das richtige Terrain für Signierschlüssel und langlebige API-Secrets. Das Tool labelt jedes Ergebnis Weak /
-        Good / Strong, damit du es auf einen Blick prüfen kannst. Bei bytebasierten Formaten ist die Mathe einfach:{' '}
+        das richtige Terrain für Signierschlüssel und langlebige API-Secrets. Das Tool stuft jedes Ergebnis als Schwach /
+        Gut / Stark ein, damit du es auf einen Blick prüfen kannst. Bei bytebasierten Formaten ist die Mathe einfach:{' '}
         <code>bytes × 8</code> Bit, also liefern 32 zufällige Bytes volle 256 Bit. Alphanumerische Strings tragen etwa{' '}
         <code>5.95</code> Bit pro Zeichen (log₂ von 62 Symbolen), du brauchst also ~22 Zeichen, um 128 Bit zu übertreffen.
       </p>

@@ -81,7 +81,7 @@ const es: ReactNode = (
 const de: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>Was ist dieses Werkzeug?</h2>
-    <p>Dieses Werkzeug rechnet zwischen präzisen Masseneinheiten um — einschließlich Karat (für Edelsteine und Schmuck) und Grain (für Munition und historische Medizindosen). Anders als das Gewicht, das technisch gesehen eine Kraft ist.</p>
+    <p>Dieses Werkzeug rechnet zwischen präzisen Masseneinheiten um — einschließlich Karat (für Edelsteine und Schmuck) und Grain (für Munition und historische Medizin-Dosierungen). Anders als das Gewicht, das technisch gesehen eine Kraft ist.</p>
     <p>
       <strong>Hinweis:</strong> Masse und Gewicht teilen sich denselben Umrechner unten — jede Einheit (metrisch, imperial, Karat, Grain) ist an einem Ort verfügbar. Für alltägliche Körpergewichtsumrechnungen (kg ↔ lb) zeigt unser{' '}
       <a href="/tools/weight-converter/" className="text-brand-600 underline">Gewichtsumrechner</a>{' '}
@@ -91,7 +91,7 @@ const de: ReactNode = (
       <h2>Wichtige Umrechnungen</h2>
       <ul>
         <li>1 carat = 200 mg = 0.2 g (Standard für Diamanten und Edelsteine)</li>
-        <li>1 grain = 64.7989 mg (verwendet bei Kugeln und alten Apothekerdosen)</li>
+        <li>1 grain = 64.7989 mg (verwendet bei Kugeln und alten Apotheker-Dosierungen)</li>
         <li>1 gram = 5 carats = 15.4324 grains</li>
       </ul>
     </div>

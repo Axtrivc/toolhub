@@ -28,7 +28,8 @@ const en: ReactNode = (
       <ul>
         <li>
           <strong>URL &amp; method</strong> &mdash; the target URL and the HTTP verb (<code>-X</code> /{' '}
-          <code>--request</code>). If you send a body with <code>-d</code> but omit{' '}
+          <code>--request</code>); <code>-I</code> / <code>--head</code> maps to a <code>HEAD</code>{' '}
+          request. If you send a body with <code>-d</code> but omit{' '}
           <code>-X</code>, the method automatically becomes <code>POST</code>.
         </li>
         <li>
@@ -60,11 +61,12 @@ const en: ReactNode = (
     <div>
       <h2>What is not converted</h2>
       <p>
-        Multipart form uploads (<code>-F</code> / <code>--form</code>), cookie jars (<code>-b</code>{' '}
-        / <code>-c</code>), and authentication via <code>-u user:pass</code> are not expanded into
-        language-specific multipart or auth code &mdash; they are noisy to generate correctly and vary by
-        library. For those, use your HTTP client&apos;s dedicated multipart/auth helpers with the
-        parsed URL and headers as a starting point.
+        Multipart form uploads (<code>-F</code> / <code>--form</code>) and cookie jars (<code>-b</code>{' '}
+        / <code>-c</code>) are not expanded into language-specific multipart code &mdash; they are noisy
+        to generate correctly and vary by library. Basic auth (<code>-u user:pass</code>), on the other
+        hand, <em>is</em> converted into an <code>Authorization: Basic</code> header automatically. For
+        the rest, use your HTTP client&apos;s dedicated multipart helpers with the parsed URL and
+        headers as a starting point.
       </p>
     </div>
   </section>
@@ -82,7 +84,8 @@ const zh: ReactNode = (
       <ul>
         <li>
           <strong>URL 与方法</strong> —— 目标 URL 和 HTTP 动词(<code>-X</code> /{' '}
-          <code>--request</code>)。如果你用 <code>-d</code> 发送了请求体却省略了{' '}
+          <code>--request</code>);<code>-I</code> / <code>--head</code> 会映射为{' '}
+          <code>HEAD</code> 请求。如果你用 <code>-d</code> 发送了请求体却省略了{' '}
           <code>-X</code>,方法会自动变为 <code>POST</code>。
         </li>
         <li>
@@ -111,8 +114,8 @@ const zh: ReactNode = (
     <div>
       <h2>哪些内容不会被转换</h2>
       <p>
-        Multipart 表单上传(<code>-F</code> / <code>--form</code>)、cookie jars(<code>-b</code>{' '}
-        / <code>-c</code>),以及通过 <code>-u user:pass</code> 的认证,不会被展开为特定语言的多部分或认证代码——正确生成这些内容会很繁琐,而且各库实现各异。对于这些情况,请使用你的 HTTP 客户端提供的专用 multipart/认证辅助函数,并以解析出的 URL 和请求头作为起点。
+        Multipart 表单上传(<code>-F</code> / <code>--form</code>)和 cookie jars(<code>-b</code>{' '}
+        / <code>-c</code>)不会被展开为特定语言的多部分代码——正确生成这些内容会很繁琐,而且各库实现各异。而 <code>-u user:pass</code> 基本认证则会自动转换成 <code>Authorization: Basic</code> 请求头。其余情况请使用你的 HTTP 客户端提供的专用 multipart 辅助函数,并以解析出的 URL 和请求头作为起点。
       </p>
     </div>
   </section>
@@ -134,7 +137,8 @@ const es: ReactNode = (
       <ul>
         <li>
           <strong>URL y método</strong> — la URL de destino y el verbo HTTP (<code>-X</code> /{' '}
-          <code>--request</code>). Si envías un cuerpo con <code>-d</code> pero omites{' '}
+          <code>--request</code>); <code>-I</code> / <code>--head</code> se traduce en una petición{' '}
+          <code>HEAD</code>. Si envías un cuerpo con <code>-d</code> pero omites{' '}
           <code>-X</code>, el método pasa automáticamente a <code>POST</code>.
         </li>
         <li>
@@ -166,11 +170,12 @@ const es: ReactNode = (
     <div>
       <h2>Lo que no se convierte</h2>
       <p>
-        Las subidas de formularios multipart (<code>-F</code> / <code>--form</code>), las cookie jars (<code>-b</code>{' '}
-        / <code>-c</code>) y la autenticación mediante <code>-u user:pass</code> no se expanden a código
-        multipart o de autenticación específico del lenguaje — son propensas a errores al generarlas y varían
-        según la biblioteca. Para esos casos, usa las utilidades dedicadas multipart/auth de tu cliente HTTP
-        partiendo de la URL y las cabeceras ya analizadas.
+        Las subidas de formularios multipart (<code>-F</code> / <code>--form</code>) y las cookie jars (<code>-b</code>{' '}
+        / <code>-c</code>) no se expanden a código multipart específico del lenguaje — son propensas a
+        errores al generarlas y varían según la biblioteca. La autenticación básica (<code>-u user:pass</code>),
+        en cambio, sí se convierte automáticamente en una cabecera <code>Authorization: Basic</code>. Para el
+        resto, usa las utilidades multipart dedicadas de tu cliente HTTP partiendo de la URL y las cabeceras
+        ya analizadas.
       </p>
     </div>
   </section>
@@ -192,7 +197,8 @@ const de: ReactNode = (
       <ul>
         <li>
           <strong>URL &amp; Methode</strong> — die Ziel-URL und das HTTP-Verb (<code>-X</code> /{' '}
-          <code>--request</code>). Wenn du einen Body mit <code>-d</code> sendest, aber{' '}
+          <code>--request</code>); <code>-I</code> / <code>--head</code> wird zu einer{' '}
+          <code>HEAD</code>-Anfrage. Wenn du einen Body mit <code>-d</code> sendest, aber{' '}
           <code>-X</code> weglässt, wird die Methode automatisch zu <code>POST</code>.
         </li>
         <li>
@@ -225,11 +231,12 @@ const de: ReactNode = (
     <div>
       <h2>Was nicht konvertiert wird</h2>
       <p>
-        Multipart-Formular-Uploads (<code>-F</code> / <code>--form</code>), Cookie-Jars (<code>-b</code>{' '}
-        / <code>-c</code>) und die Authentifizierung per <code>-u user:pass</code> werden nicht zu
-        sprachspezifischem Multipart- oder Auth-Code expandiert — sie korrekt zu erzeugen ist fehleranfällig
-        und variiert je nach Bibliothek. Greif dafür auf die dedizierten Multipart/Auth-Helfer deines
-        HTTP-Clients zurück und nutze die ausgewertete URL und Header als Ausgangspunkt.
+        Multipart-Formular-Uploads (<code>-F</code> / <code>--form</code>) und Cookie-Jars (<code>-b</code>{' '}
+        / <code>-c</code>) werden nicht zu sprachspezifischem Multipart-Code expandiert — sie korrekt zu
+        erzeugen ist fehleranfällig und variiert je nach Bibliothek. Basic-Auth per <code>-u user:pass</code>{' '}
+        hingegen wird automatisch in einen <code>Authorization: Basic</code>-Header umgesetzt. Für den Rest
+        greif auf die dedizierten Multipart-Helfer deines HTTP-Clients zurück und nutze die ausgewertete
+        URL und Header als Ausgangspunkt.
       </p>
     </div>
   </section>

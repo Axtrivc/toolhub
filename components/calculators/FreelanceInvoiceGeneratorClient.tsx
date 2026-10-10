@@ -132,7 +132,7 @@ export function FreelanceInvoiceGeneratorClient() {
 </div>`
       : ''
     return `<!DOCTYPE html>
-<html lang="en">
+<html lang="${locale}">
 <head>
 <meta charset="utf-8">
 <title>${L('invoiceTitle', 'Invoice')} ${e(invoiceNumber)}</title>
@@ -226,7 +226,7 @@ ${itemRows}
         {/* 左侧表单 */}
         <div className="space-y-4">
           <CalculatorField id="your-name" label={L('yourNameCompany', 'Your name / company')} value={yourName} onChange={setYourName} type="text" placeholder="Acme Design Studio" />
-          <CalculatorField id="your-email" label={L('yourEmail', 'Your email')} value={yourEmail} onChange={setYourEmail} type="text" placeholder="you@example.com" />
+          <CalculatorField id="your-email" label={L('yourEmail', 'Your email')} value={yourEmail} onChange={setYourEmail} type="text" inputMode="email" placeholder="you@example.com" />
           <CalculatorField id="client-name" label={L('clientName', 'Client name')} value={clientName} onChange={setClientName} type="text" placeholder="Client Inc." />
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
             <CalculatorField id="invoice-number" label={L('invoiceNumber', 'Invoice number')} value={invoiceNumber} onChange={setInvoiceNumber} type="text" placeholder="INV-0001" />

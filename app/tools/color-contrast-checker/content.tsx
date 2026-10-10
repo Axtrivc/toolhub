@@ -188,7 +188,7 @@ const de: ReactNode = (
     <div>
       <h2>Eine fehlschlagende Kombination reparieren</h2>
       <p>
-        Wenn eine Kombination durchfällt, verdunkle den Text oder helle den Hintergrund auf — kleine Änderungen der Leuchtdichte bewegen das Verhältnis stark. Verlasse dich nicht allein auf den Farbton: Rot auf Grün kann „anders" wirken, aber eine fast identische Leuchtdichte haben (ein Problem für farbenblinde Nutzer). Bei großem Text hast du mehr Freiheit, beim Fließtext solltest du aber deutlich über 4,5:1 liegen, damit Nutzer auf dunklen oder verschmutzten Bildschirmen noch bequem lesen können.
+        Wenn eine Kombination durchfällt, verdunkle den Text oder helle den Hintergrund auf — kleine Änderungen der Leuchtdichte bewegen das Verhältnis stark. Verlasse dich nicht allein auf den Farbton: Rot auf Grün kann „anders“ wirken, aber eine fast identische Leuchtdichte haben (ein Problem für farbenblinde Nutzer). Bei großem Text hast du mehr Freiheit, beim Fließtext solltest du aber deutlich über 4,5:1 liegen, damit Nutzer auf dunklen oder verschmutzten Bildschirmen noch bequem lesen können.
       </p>
     </div>
   </section>

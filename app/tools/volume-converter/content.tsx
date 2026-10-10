@@ -123,7 +123,7 @@ const zh: ReactNode = (
 
     <h2>大体积用立方米</h2>
     <p>
-      在工业、建筑和航运领域,立方米(m³)是标准。 <code>1 m³ = 1,000 liters</code>。集装箱、游泳池或混凝土浇筑都以这种方式计量。对于较小规模的工作,升和毫升更实用。
+      在工业、建筑和航运领域,立方米(m³)是标准。 <code>1 m³ = 1,000 升</code>。集装箱、游泳池或混凝土浇筑都以这种方式计量。对于较小规模的工作,升和毫升更实用。
     </p>
   </section>
 )
@@ -190,7 +190,7 @@ const es: ReactNode = (
     <h2>Metros cúbicos para grandes volúmenes</h2>
     <p>
       Para contextos industriales, de construcción y de transporte, los metros cúbicos (m³) son el
-      estándar. <code>1 m³ = 1,000 liters</code>. Un contenedor de carga, una piscina o un vertido
+      estándar. <code>1 m³ = 1.000 litros</code>. Un contenedor de carga, una piscina o un vertido
       de hormigón se miden así. Para trabajos a menor escala, los litros y los mililitros son más
       prácticos.
     </p>
@@ -204,7 +204,7 @@ const de: ReactNode = (
     <p>
       Bei der Volumenmessung wird das Kochen kompliziert. Das <strong>metrische System</strong>{' '}
       (Milliliter, Liter, Kubikmeter) ist einfach und konsistent. Das{' '}
-      <strong>US-übliche System</strong> (Teelöffel, Esslöffel, Tassen, Flüssigunzen, Pinten,
+      <strong>US-amerikanische System</strong> (Teelöffel, Esslöffel, Tassen, Flüssigunzen, Pinten,
       Quarts, Gallonen) verwendet unregelmäßige Beziehungen, die man auswendig lernen muss.
     </p>
 
@@ -233,7 +233,7 @@ const de: ReactNode = (
       US- und britische Volumeneinheiten <strong>sind nicht gleich</strong>. Eine britische Pinte
       hat 568 ml; eine US-Pinte hat 473 ml — ein Unterschied von 20 %. Britische Gallonen, Quarts
       und Flüssigunzen sind ebenfalls größer. Das ist wichtig, wenn du Rezepte befolgst oder in
-      einem anderen Land tankst. Dieser Umrechner verwendet <strong>US-übliche Einheiten</strong>.
+      einem anderen Land tankst. Dieser Umrechner verwendet <strong>US-amerikanische Einheiten</strong>.
     </p>
 
     <h2>Häufige Anwendungen</h2>
@@ -241,7 +241,7 @@ const de: ReactNode = (
       <li><strong>Kochen &amp; Backen:</strong> Zwischen Tassen/Löffeln und ml umrechnen</li>
       <li><strong>Getränke:</strong> Limonade und Wein in ml/L, Bier in Pinten, Milch in Gallonen</li>
       <li><strong>Kraftstoff:</strong> Benzin je nach Land in Litern oder Gallonen verkauft</li>
-      <li><strong>Medizin:</strong> Flüssige Dosen in ml</li>
+      <li><strong>Medizin:</strong> Flüssige Dosierungen in ml</li>
       <li><strong>Ingenieurwesen:</strong> Hubraum, Tankkapazitäten in m³</li>
     </ul>
 
@@ -257,7 +257,7 @@ const de: ReactNode = (
     <h2>Kubikmeter für große Volumina</h2>
     <p>
       Für industrielle, bauliche und logistische Kontexte sind Kubikmeter (m³) der Standard.{' '}
-      <code>1 m³ = 1,000 liters</code>. Ein Schiffscontainer, ein Schwimmbecken oder eine
+      <code>1 m³ = 1.000 Liter</code>. Ein Schiffscontainer, ein Schwimmbecken oder eine
       Betonschüttung wird so gemessen. Für kleinere Arbeiten sind Liter und Milliliter praktischer.
     </p>
   </section>

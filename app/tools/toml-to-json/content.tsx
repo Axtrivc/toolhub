@@ -10,7 +10,7 @@ export function TomlToJsonContent() {
       <h2>What converts cleanly</h2>
       <p>Tables become objects, array tables become arrays of objects, dotted keys nest, integers (including hex/octal/binary and underscore separators) become JSON numbers, booleans map directly. Datetimes stay as ISO strings since JSON lacks a date type.</p>
       <h2>Deliberate limitations</h2>
-      <p>Multi-line strings and datetime objects are rejected loudly with line numbers rather than silently mangled — a converter that guesses wrong on config files costs hours. Fix the syntax or strip those values first.</p>
+      <p>Multi-line strings are rejected loudly with line numbers rather than silently mangled — a converter that guesses wrong on config files costs hours. Fix the syntax or collapse those values to a single line first.</p>
     </section>
   )
 }

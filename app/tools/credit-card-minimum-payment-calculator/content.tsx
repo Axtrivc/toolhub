@@ -142,10 +142,10 @@ const en: ReactNode = (
           <strong>$5,000 @ 19.99%, minimum (~$100):</strong> ~44 years, ~$20,150 interest
         </li>
         <li>
-          <strong>Same balance, $200/month:</strong> ~2.8 years, ~$1,650 interest
+          <strong>Same balance, $200/month:</strong> ~2.8 years, ~$1,520 interest
         </li>
         <li>
-          <strong>Same balance, $500/month:</strong> ~1 year, ~$610 interest
+          <strong>Same balance, $500/month:</strong> ~1 year, ~$515 interest
         </li>
       </ul>
       <p>
@@ -234,8 +234,8 @@ const zh: ReactNode = (
       </p>
       <ul>
         <li><strong>$5,000 @ 19.99%,最低还款(约 $100):</strong>约 44 年,利息约 $20,150</li>
-        <li><strong>同样余额,$200/月:</strong>约 2.8 年,利息约 $1,650</li>
-        <li><strong>同样余额,$500/月:</strong>约 1 年,利息约 $610</li>
+        <li><strong>同样余额,$200/月:</strong>约 2.8 年,利息约 $1,520</li>
+        <li><strong>同样余额,$500/月:</strong>约 1 年,利息约 $515</li>
       </ul>
       <p>
         关于完整策略(雪崩法、雪球法、余额转移),请看我们的<em>信用卡还清计算器</em>——本页专注于理解最低还款本身。
@@ -352,8 +352,8 @@ const es: ReactNode = (
       </p>
       <ul>
         <li><strong>5 000 $ al 19,99 %, mínimo (~100 $):</strong> ~44 años, ~20 150 $ en intereses</li>
-        <li><strong>Mismo saldo, 200 $/mes:</strong> ~2,8 años, ~1 650 $ en intereses</li>
-        <li><strong>Mismo saldo, 500 $/mes:</strong> ~1 año, ~610 $ en intereses</li>
+        <li><strong>Mismo saldo, 200 $/mes:</strong> ~2,8 años, ~1 520 $ en intereses</li>
+        <li><strong>Mismo saldo, 500 $/mes:</strong> ~1 año, ~515 $ en intereses</li>
       </ul>
       <p>
         Consulta nuestra <em>Calculadora de pago de tarjeta de crédito</em> para la estrategia
@@ -473,8 +473,8 @@ const de: ReactNode = (
       </p>
       <ul>
         <li><strong>5 000 $ bei 19,99 %, Minimum (~100 $):</strong> ~44 Jahre, ~20 150 $ Zinsen</li>
-        <li><strong>Gleicher Saldo, 200 $/Monat:</strong> ~2,8 Jahre, ~1 650 $ Zinsen</li>
-        <li><strong>Gleicher Saldo, 500 $/Monat:</strong> ~1 Jahr, ~610 $ Zinsen</li>
+        <li><strong>Gleicher Saldo, 200 $/Monat:</strong> ~2,8 Jahre, ~1 520 $ Zinsen</li>
+        <li><strong>Gleicher Saldo, 500 $/Monat:</strong> ~1 Jahr, ~515 $ Zinsen</li>
       </ul>
       <p>
         Siehe unseren verwandten <em>Kreditkarten-Abbezahlrechner</em> für die volle Strategie

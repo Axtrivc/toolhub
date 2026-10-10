@@ -37,18 +37,16 @@ export function AmortizationTableGeneratorClient() {
     const ratePct = toNumStrict(values.rate)
     const rate = ratePct / 100 / 12
     const months = Math.round(toNum(values.years) * 12)
-    if (isNaN(principal) || principal <= 0 || isNaN(ratePct) || ratePct < 0 || months <= 0 || months > 1200) {
+    // 极端利率 × 长年限会让 (1+r)^n 溢出 Infinity,月供折算成 NaN
+    // → 表格渲染 "NaN%"/空行,因此 monthly 预先算好并纳入强校验
+    const f = rate === 0 ? 1 : Math.pow(1 + rate, months)
+    const monthly = rate === 0 ? principal / months : (principal * rate * f) / (f - 1)
+    if (isNaN(principal) || principal <= 0 || isNaN(ratePct) || ratePct < 0 || months <= 0 || months > 1200 || !isFinite(monthly)) {
       return {
         monthly: 0, totalInterest: 0, totalPaid: 0, interestShare: '0',
         rows: [] as Array<[number, number, number, number, number]>,
         error: T('errInvalidLoan', 'Enter a valid loan amount, rate, and term'),
       }
-    }
-    let monthly: number
-    if (rate === 0) monthly = principal / months
-    else {
-      const f = Math.pow(1 + rate, months)
-      monthly = (principal * rate * f) / (f - 1)
     }
     // 逐期模拟:利息 = 余额 × 月利率;本金 = 月供 − 利息;末月补差防浮点残差
     const rows: Array<[number, number, number, number, number]> = []
@@ -157,7 +155,7 @@ export function AmortizationTableGeneratorClient() {
             </span>
             {r.rows.length > 12 && (
               <button type="button" onClick={() => setShowAll((v) => !v)} className="text-xs font-medium text-brand-600 hover:underline dark:text-blue-400">
-                {showAll ? T('collapse', 'Show first 12 rows') : T('expand', `Show all ${r.rows.length} rows`)}
+                {showAll ? T('collapse', 'Show first 12 rows') : T('expand', 'Show all {n} rows').replace('{n}', String(r.rows.length))}
               </button>
             )}
           </div>

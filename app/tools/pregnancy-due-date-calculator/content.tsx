@@ -56,7 +56,7 @@ const zh: ReactNode = (
 const es: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>¿Qué es esta herramienta?</h2>
-    <p>Esta calculadora estima tu fecha probable de parto usando <strong>Naegele's rule</strong>: suma 280 días (40 semanas) al primer día de tu última menstruación. También muestra la fecha probable de concepción y la semana actual.</p>
+    <p>Esta calculadora estima tu fecha probable de parto usando la <strong>regla de Naegele</strong>: suma 280 días (40 semanas) al primer día de tu última menstruación. También muestra la fecha probable de concepción y la semana actual.</p>
     <div>
       <h2>El marco de 40 semanas</h2>
       <p>El embarazo se cuenta en semanas desde la última menstruación, no desde la concepción. Las «40 semanas» incluyen ~2 semanas antes de la concepción real. A término completo va desde 37 hasta 42 semanas.</p>
@@ -80,7 +80,7 @@ const es: ReactNode = (
 const de: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>Was ist dieses Tool?</h2>
-    <p>Dieser Rechner schätzt deinen Geburtstermin mit der <strong>Naegele's rule</strong>: Addiere 280 Tage (40 Wochen) zum ersten Tag deiner letzten Periode. Er zeigt auch den wahrscheinlichen Empfängniszeitpunkt und die aktuelle Woche.</p>
+    <p>Dieser Rechner schätzt deinen Geburtstermin mit der <strong>Naegele-Regel</strong>: Addiere 280 Tage (40 Wochen) zum ersten Tag deiner letzten Periode. Er zeigt auch den wahrscheinlichen Empfängniszeitpunkt und die aktuelle Woche.</p>
     <div>
       <h2>Das 40-Wochen-Modell</h2>
       <p>Die Schwangerschaft wird ab der letzten Periode in Wochen gezählt, nicht ab der Empfängnis. Die „40 Wochen" enthalten ~2 Wochen, bevor du tatsächlich empfangen hast. Voll ausgetragen ist alles von 37 bis 42 Wochen.</p>

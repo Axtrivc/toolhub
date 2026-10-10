@@ -9,7 +9,7 @@ interface DockerRunOptions {
   serviceName: string
   containerName?: string
   image: string
-  command?: string
+  commandArgs: string[]
   entrypoint?: string
   restart?: string
   ports: string[]
@@ -132,9 +132,11 @@ function tokenizeShell(cmd: string): string[] {
       } else if (c === '"') {
         i++
         while (i < n && cmd[i] !== '"') {
-          if (cmd[i] === '\\' && i + 1 < n) {
-            token += cmd[i + 1]
-            i += 2
+          // POSIX: inside double quotes a backslash only escapes $ ` " \ and newline
+          if (cmd[i] === '\\' && i + 1 < n && '$`"\\\n\r'.includes(cmd[i + 1])) {
+            // \<newline> is a line continuation — dropped, not embedded
+            if (cmd[i + 1] !== '\n' && cmd[i + 1] !== '\r') token += cmd[i + 1]
+            i += cmd[i + 1] === '\r' && i + 2 < n && cmd[i + 2] === '\n' ? 3 : 2
           } else {
             token += cmd[i]
             i++
@@ -166,6 +168,11 @@ function toServiceName(raw: string): string {
   return clean || 'app'
 }
 
+/** Compose never runs shell substitution — map $(pwd)/$PWD style hosts to "." */
+function normalizeVolumeHost(vol: string): string {
+  return vol.replace(/^(\$\((pwd|PWD)\)|\$\{PWD\}|\$PWD)/, '.')
+}
+
 /** Extract base name from docker image (e.g. "ghcr.io/org/my-app:v1.2" -> "my-app") */
 function extractImageBase(img: string): string {
   const noTag = img.split(':')[0].split('@')[0]
@@ -178,6 +185,7 @@ function parseDockerRun(tokens: string[]): DockerRunOptions {
   const res: DockerRunOptions = {
     serviceName: 'app',
     image: '',
+    commandArgs: [],
     ports: [],
     volumes: [],
     environment: [],
@@ -251,7 +259,7 @@ function parseDockerRun(tokens: string[]): DockerRunOptions {
         case '--volume':
           {
             const v = getVal()
-            if (v) res.volumes.push(v)
+            if (v) res.volumes.push(normalizeVolumeHost(v))
           }
           break
         case '-e':
@@ -394,7 +402,7 @@ function parseDockerRun(tokens: string[]): DockerRunOptions {
   }
 
   if (commandArgs.length > 0) {
-    res.command = commandArgs.join(' ')
+    res.commandArgs = commandArgs
   }
 
   if (!res.image) {
@@ -406,19 +414,41 @@ function parseDockerRun(tokens: string[]): DockerRunOptions {
 
 /** Check if volume is a named volume (not host path) */
 function isNamedVolume(vol: string): boolean {
+  // Windows drive colon comes first — check the full string before splitting on ':'
+  if (/^[a-zA-Z]:[\\/]/.test(vol)) return false
   const hostPart = vol.split(':')[0]
   if (!hostPart) return false
   if (
+    hostPart === '.' ||
     hostPart.startsWith('/') ||
     hostPart.startsWith('./') ||
     hostPart.startsWith('../') ||
     hostPart.startsWith('~') ||
-    hostPart.startsWith('$') ||
-    /^[a-zA-Z]:[\\/]/.test(hostPart)
+    hostPart.startsWith('$')
   ) {
     return false
   }
   return true
+}
+
+/** Escape a value for use inside a YAML double-quoted scalar */
+function yamlEscape(s: string): string {
+  return s.replace(/\\/g, '\\\\').replace(/"/g, '\\"')
+}
+
+/** True when a bare YAML plain scalar would be invalid or lose data ("x #c", "a: b", leading indicators) */
+function yamlNeedsQuote(s: string): boolean {
+  if (s === '' || s !== s.trim()) return true
+  if (/^[!&*[\]{}>,?@`"'#|%]/.test(s)) return true
+  if (/^(-|\?|:)(\s|$)/.test(s)) return true
+  return s.includes(': ') || s.includes(' #')
+}
+
+/** Emit a command/entrypoint style scalar: plain when every arg is safe, list form otherwise */
+function yamlArgsLines(header: string, args: string[], indent: string): string[] {
+  const plainSafe = args.length > 0 && args.every((a) => !yamlNeedsQuote(a) && !/\s/.test(a))
+  if (plainSafe) return [`${indent}${header}: ${args.join(' ')}`]
+  return [`${indent}${header}:`, ...args.map((a) => `${indent}  - "${yamlEscape(a)}"`)]
 }
 
 /** Generate Compose YAML */
@@ -448,14 +478,14 @@ function generateComposeYaml(
   if (opts.ports.length > 0) {
     lines.push('    ports:')
     for (const p of opts.ports) {
-      lines.push(`      - "${p}"`)
+      lines.push(`      - "${yamlEscape(p)}"`)
     }
   }
 
   if (opts.volumes.length > 0) {
     lines.push('    volumes:')
     for (const v of opts.volumes) {
-      lines.push(`      - "${v}"`)
+      lines.push(`      - "${yamlEscape(v)}"`)
     }
   }
 
@@ -467,14 +497,14 @@ function generateComposeYaml(
         if (eq !== -1) {
           const k = e.slice(0, eq)
           const v = e.slice(eq + 1)
-          lines.push(`      ${k}: "${v}"`)
+          lines.push(`      ${k}: "${yamlEscape(v)}"`)
         } else {
           lines.push(`      ${e}: ""`)
         }
       }
     } else {
       for (const e of opts.environment) {
-        lines.push(`      - ${e}`)
+        lines.push(`      - ${yamlNeedsQuote(e) ? `"${yamlEscape(e)}"` : e}`)
       }
     }
   }
@@ -482,16 +512,16 @@ function generateComposeYaml(
   if (opts.envFiles.length > 0) {
     lines.push('    env_file:')
     for (const ef of opts.envFiles) {
-      lines.push(`      - ${ef}`)
+      lines.push(`      - ${yamlNeedsQuote(ef) ? `"${yamlEscape(ef)}"` : ef}`)
     }
   }
 
-  if (opts.command) {
-    lines.push(`    command: ${opts.command}`)
+  if (opts.commandArgs.length > 0) {
+    lines.push(...yamlArgsLines('command', opts.commandArgs, '    '))
   }
 
   if (opts.entrypoint) {
-    lines.push(`    entrypoint: ${opts.entrypoint}`)
+    lines.push(...yamlArgsLines('entrypoint', [opts.entrypoint], '    '))
   }
 
   if (opts.workdir) {
@@ -499,7 +529,7 @@ function generateComposeYaml(
   }
 
   if (opts.user) {
-    lines.push(`    user: "${opts.user}"`)
+    lines.push(`    user: "${yamlEscape(opts.user)}"`)
   }
 
   if (opts.hostname) {
@@ -526,9 +556,21 @@ function generateComposeYaml(
     lines.push('    tty: true')
   }
 
-  if (opts.networks.length > 0) {
+  // host/bridge/none/container: are network modes, not networks — `networks: [host]` is invalid compose
+  const isBuiltinNet = (n: string) =>
+    n === 'host' || n === 'bridge' || n === 'none' || n.startsWith('container:')
+  const networkMode = opts.networks.find(isBuiltinNet)
+  const customNets = opts.networks.filter((n) => !isBuiltinNet(n))
+  if (networkMode) {
+    lines.push(
+      networkMode.startsWith('container:')
+        ? `    network_mode: "${networkMode}"`
+        : `    network_mode: ${networkMode}`,
+    )
+  }
+  if (customNets.length > 0) {
     lines.push('    networks:')
-    for (const n of opts.networks) {
+    for (const n of customNets) {
       lines.push(`      - ${n}`)
     }
   }
@@ -558,12 +600,12 @@ function generateComposeYaml(
 
   if (opts.extraHosts.length > 0) {
     lines.push('    extra_hosts:')
-    for (const h of opts.extraHosts) lines.push(`      - "${h}"`)
+    for (const h of opts.extraHosts) lines.push(`      - "${yamlEscape(h)}"`)
   }
 
   if (opts.expose.length > 0) {
     lines.push('    expose:')
-    for (const ep of opts.expose) lines.push(`      - "${ep}"`)
+    for (const ep of opts.expose) lines.push(`      - "${yamlEscape(ep)}"`)
   }
 
   // Top-level named volumes
@@ -581,7 +623,6 @@ function generateComposeYaml(
   }
 
   // Top-level networks
-  const customNets = opts.networks.filter((n) => !['host', 'bridge', 'none'].includes(n))
   if (customNets.length > 0) {
     lines.push('')
     lines.push('networks:')
@@ -638,7 +679,7 @@ export function DockerRunToComposeClient() {
         {/* Left: Input Docker Command */}
         <div className="flex flex-col space-y-2">
           <div className="flex items-center justify-between">
-            <label className="text-sm font-semibold text-slate-800 dark:text-slate-200">
+            <label htmlFor="drtc-input" className="text-sm font-semibold text-slate-800 dark:text-slate-200">
               {T('inputTitle', 'Docker Run Command')}
             </label>
             <button
@@ -650,6 +691,7 @@ export function DockerRunToComposeClient() {
             </button>
           </div>
           <textarea
+            id="drtc-input"
             value={inputCmd}
             onChange={(e) => setInputCmd(e.target.value)}
             placeholder="docker run -d --name my-app -p 8080:80 nginx:alpine"
@@ -676,7 +718,10 @@ export function DockerRunToComposeClient() {
             </div>
           </div>
           <div className="relative">
-            <pre className="w-full font-mono text-xs sm:text-sm p-3.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-950 text-slate-100 overflow-x-auto min-h-[300px] max-h-[460px]">
+            <pre
+              aria-label={T('outputTitle', 'docker-compose.yml')}
+              className="w-full font-mono text-xs sm:text-sm p-3.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-950 text-slate-100 overflow-x-auto min-h-[300px] max-h-[460px]"
+            >
               <code>{yamlOutput}</code>
             </pre>
           </div>
@@ -728,28 +773,28 @@ export function DockerRunToComposeClient() {
         </h4>
         <div className="flex flex-wrap gap-2 text-xs">
           <span className="px-2.5 py-1 rounded bg-blue-50 dark:bg-blue-950/60 border border-blue-200 dark:border-blue-800 text-blue-700 dark:text-blue-300">
-            <strong>Service:</strong> {parsed.serviceName}
+            <strong>{T('badgeService', 'Service:')}</strong> {parsed.serviceName}
           </span>
           <span className="px-2.5 py-1 rounded bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-800 text-emerald-700 dark:text-emerald-300">
-            <strong>Image:</strong> {parsed.image || '—'}
+            <strong>{T('badgeImage', 'Image:')}</strong> {parsed.image || '—'}
           </span>
           <span className="px-2.5 py-1 rounded bg-purple-50 dark:bg-purple-950/60 border border-purple-200 dark:border-purple-800 text-purple-700 dark:text-purple-300">
-            <strong>Ports:</strong> {parsed.ports.length}
+            <strong>{T('badgePorts', 'Ports:')}</strong> {parsed.ports.length}
           </span>
           <span className="px-2.5 py-1 rounded bg-amber-50 dark:bg-amber-950/60 border border-amber-200 dark:border-amber-800 text-amber-700 dark:text-amber-300">
-            <strong>Volumes:</strong> {parsed.volumes.length}
+            <strong>{T('badgeVolumes', 'Volumes:')}</strong> {parsed.volumes.length}
           </span>
           <span className="px-2.5 py-1 rounded bg-indigo-50 dark:bg-indigo-950/60 border border-indigo-200 dark:border-indigo-800 text-indigo-700 dark:text-indigo-300">
-            <strong>Env Vars:</strong> {parsed.environment.length}
+            <strong>{T('badgeEnvVars', 'Env Vars:')}</strong> {parsed.environment.length}
           </span>
           {parsed.restart && (
             <span className="px-2.5 py-1 rounded bg-rose-50 dark:bg-rose-950/60 border border-rose-200 dark:border-rose-800 text-rose-700 dark:text-rose-300">
-              <strong>Restart:</strong> {parsed.restart}
+              <strong>{T('badgeRestart', 'Restart:')}</strong> {parsed.restart}
             </span>
           )}
           {parsed.networks.length > 0 && (
             <span className="px-2.5 py-1 rounded bg-teal-50 dark:bg-teal-950/60 border border-teal-200 dark:border-teal-800 text-teal-700 dark:text-teal-300">
-              <strong>Networks:</strong> {parsed.networks.join(', ')}
+              <strong>{T('badgeNetworks', 'Networks:')}</strong> {parsed.networks.join(', ')}
             </span>
           )}
         </div>

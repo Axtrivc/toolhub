@@ -143,6 +143,9 @@ export function PasswordStrengthCheckerClient() {
         <input
           id="pw-check-input"
           type="text"
+          // 关闭自动补全:用户在此明文输入真实密码,不该被浏览器记录/联想
+          // (与 securitytools/BcryptHashGeneratorClient 同款防护)
+          autoComplete="off"
           value={pw}
           onChange={(e) => setPw(e.target.value)}
           placeholder={L('passwordPlaceholder', 'Type your password...')}

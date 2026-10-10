@@ -177,6 +177,7 @@ export function CssGradientGeneratorClient() {
 
       {/* 大预览 */}
       <div
+        role="img"
         className="min-h-[220px] rounded-xl border transition-all"
         style={{ ...previewStyle, borderColor: 'rgb(var(--border))' }}
         aria-label={L('gradientPreviewAria', 'Gradient live preview')}

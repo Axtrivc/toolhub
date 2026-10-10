@@ -156,7 +156,7 @@ const de: ReactNode = (
     <div>
       <h2>Was dieser Rechner nicht erfasst</h2>
       <ul>
-        <li><strong>Überstunden</strong> (Überstundenbezahlung über 40 Stunden in den USA)</li>
+        <li><strong>Überstunden</strong> (in den USA über 40 Wochenstunden 1,5-facher Lohn)</li>
         <li><strong>Unbezahlter Urlaub</strong> — viele Stundenlohnbeschäftigte bekommen keinen bezahlten Urlaub</li>
         <li><strong>Steuern</strong> — das Nettoeinkommen liegt bei etwa 65-75 % des Bruttos</li>
         <li><strong>Leistungen</strong> — Krankenversicherung und Arbeitgeberzuschüsse zur Rente können über $10,000/Jahr wert sein</li>

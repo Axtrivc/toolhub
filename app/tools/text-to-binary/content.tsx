@@ -8,7 +8,7 @@ import { useApp } from '@/components/providers/AppProviders'
 const en: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>What Is This Tool?</h2>
-    <p>This tool encodes text as binary — each character becomes 8 bits (1s and 0s). Useful for learning how computers represent text, or for low-level data inspection.</p>
+    <p>This tool encodes text as binary — each character becomes one or more 8-bit bytes (1s and 0s). Useful for learning how computers represent text, or for low-level data inspection.</p>
     <div>
       <h2>ASCII Reference</h2>
       <ul>
@@ -34,7 +34,7 @@ const en: ReactNode = (
 const zh: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>这是什么工具?</h2>
-    <p>本工具将文本编码为二进制 — 每个字符变为 8 位(1 和 0)。适合用来学习计算机如何表示文本,或用于底层数据检查。</p>
+    <p>本工具将文本编码为二进制 — 每个字符变为一个或多个 8 位字节(1 和 0)。适合用来学习计算机如何表示文本,或用于底层数据检查。</p>
     <div>
       <h2>ASCII 参考表</h2>
       <ul>
@@ -60,7 +60,7 @@ const zh: ReactNode = (
 const es: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>¿Qué es esta herramienta?</h2>
-    <p>Esta herramienta codifica texto como binario — cada carácter se convierte en 8 bits (unos y ceros). Útil para aprender cómo las computadoras representan texto o para la inspección de datos de bajo nivel.</p>
+    <p>Esta herramienta codifica texto como binario — cada carácter pasa a ser uno o más bytes de 8 bits (unos y ceros). Útil para aprender cómo las computadoras representan texto o para la inspección de datos de bajo nivel.</p>
     <div>
       <h2>Referencia ASCII</h2>
       <ul>
@@ -86,7 +86,7 @@ const es: ReactNode = (
 const de: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>Was ist dieses Werkzeug?</h2>
-    <p>Dieses Werkzeug codiert Text als Binärdaten — jedes Zeichen wird zu 8 Bits (Einsen und Nullen). Nützlich, um zu lernen, wie Computer Text darstellen, oder für die Inspektion von Daten auf niedriger Ebene.</p>
+    <p>Dieses Werkzeug codiert Text als Binärdaten — jedes Zeichen wird zu einem oder mehreren 8-Bit-Bytes (Einsen und Nullen). Nützlich, um zu lernen, wie Computer Text darstellen, oder für die Inspektion von Daten auf niedriger Ebene.</p>
     <div>
       <h2>ASCII-Referenz</h2>
       <ul>

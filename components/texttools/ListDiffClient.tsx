@@ -11,7 +11,7 @@ import { tui } from '@/lib/i18n/tool-l10n'
  *
  * 比较两个列表(每行一项),输出 4 个集合:
  *   只在 A / 只在 B / 交集(both)/ 并集(union)。
- * 选项:trim、case-sensitive、去重。100% 本地。
+ * 选项:trim、case-sensitive(列表内重复项恒按集合语义折叠,dedupe 固定 true)。100% 本地。
  */
 
 const SAMPLE_A = `apple

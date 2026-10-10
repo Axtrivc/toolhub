@@ -149,16 +149,17 @@ export const BinaryToTextClient = makeTextTool({
   defaultInput: '01001000 01101001',
   // P-1 大输入防线(与 EncoderDecoder/text 工具家族同款 20 万字符阈值)
   maxInputChars: 200_000,
-  transform: (s) => {
+  transform: (s, locale) => {
     const bytes = s.trim().split(/\s+/).filter(Boolean)
     try {
       // 每组必须是纯 0/1 且 ≤8 位:parseInt('102', 2) 会宽松解析成 2,必须显式拦截
-      if (bytes.some((b) => !/^[01]{1,8}$/.test(b))) return '⚠️ Invalid binary (use groups of 0s and 1s, up to 8 bits each)'
+      if (bytes.some((b) => !/^[01]{1,8}$/.test(b)))
+        return tui('binary-to-text', locale, 'invalidBinary', '⚠️ Invalid binary (use groups of 0s and 1s, up to 8 bits each)')
       const codes = bytes.map((b) => parseInt(b, 2))
       // 用 TextDecoder 按 UTF-8 解码,与 TextToBinary 的 UTF-8 编码互逆
       return new TextDecoder('utf-8').decode(new Uint8Array(codes))
     } catch {
-      return '⚠️ Could not decode'
+      return tui('binary-to-text', locale, 'couldNotDecode', '⚠️ Could not decode')
     }
   },
   note: '💾 Each group of 8 bits is one UTF-8 byte. Supports Unicode (Chinese, emoji).',

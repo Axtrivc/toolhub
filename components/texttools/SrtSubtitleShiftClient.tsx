@@ -271,7 +271,7 @@ export function SrtSubtitleShiftClient() {
 
       {/* 无效 offset 提示 */}
       {offsetSeconds === null && (
-        <div className="rounded-lg border border-red-200 dark:border-red-800/60 bg-red-50 dark:bg-red-950/30 p-4 text-sm text-red-700 dark:text-red-300">
+        <div role="alert" className="rounded-lg border border-red-200 dark:border-red-800/60 bg-red-50 dark:bg-red-950/30 p-4 text-sm text-red-700 dark:text-red-300">
           {L('invalidOffsetPrefix', '⚠️ Please enter a valid number of seconds, e.g. ')}
           <code>-2.5</code>
           {L('invalidOffsetOr', ' or ')}
@@ -282,7 +282,7 @@ export function SrtSubtitleShiftClient() {
 
       {/* 文件读取失败提示(输入修正后消失) */}
       {fileError && (
-        <div className="rounded-lg border border-red-200 dark:border-red-800/60 bg-red-50 dark:bg-red-950/30 p-4 text-sm text-red-700 dark:text-red-300">
+        <div role="alert" className="rounded-lg border border-red-200 dark:border-red-800/60 bg-red-50 dark:bg-red-950/30 p-4 text-sm text-red-700 dark:text-red-300">
           ⚠️ {L('errReadFile', 'Could not read the selected file. Try re-saving it as plain text (.srt).')}
         </div>
       )}
@@ -291,21 +291,22 @@ export function SrtSubtitleShiftClient() {
       {result && (
         <div className="space-y-3">
           <div className="flex flex-wrap items-center justify-between gap-2">
-            <span className="text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>
+            {/* role=status:cue 计数变化时屏幕阅读器礼貌播报(口径同 batch4 域统计/batch5 哈希结果的 status 区),但不包 <pre> 免得整文件被朗读 */}
+            <span role="status" className="text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>
               {L('resultTitle', 'Shifted SRT')} — {result.cueCount}{' '}
               {result.cueCount === 1 ? L('cueSingular', 'cue') : L('cuePlural', 'cues')}
             </span>
             <CopyButton value={result.output} label={L('copy', 'Copy')} />
           </div>
           {result.errorBlocks > 0 && (
-            <div className="rounded-lg border border-red-200 dark:border-red-800/60 bg-red-50 dark:bg-red-950/30 p-4 text-sm text-red-700 dark:text-red-300">
+            <div role="alert" className="rounded-lg border border-red-200 dark:border-red-800/60 bg-red-50 dark:bg-red-950/30 p-4 text-sm text-red-700 dark:text-red-300">
               ⚠️ {result.errorBlocks} {result.errorBlocks === 1 ? L('blockSingular', 'block') : L('blockPlural', 'blocks')}{' '}
               {L('parseCouldNotBeParsed', 'could not be parsed (no valid timestamp line) and')}{' '}
               {result.errorBlocks === 1 ? L('parseWas', 'was') : L('parseWere', 'were')} {L('parseSkipped', 'skipped.')}
             </div>
           )}
           {result.clampedCues > 0 && clamp && (
-            <p className="rounded-md p-3 text-xs" style={{ backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text-subtle))' }}>
+            <p role="status" className="rounded-md p-3 text-xs" style={{ backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text-subtle))' }}>
               ⚠️ {result.clampedCues} {result.clampedCues === 1 ? L('cueSingular', 'cue') : L('cuePlural', 'cues')}{' '}
               {L('clampWentBelowZero', 'went below zero after shifting and')}{' '}
               {result.clampedCues === 1 ? L('clampWas', 'was') : L('clampWere', 'were')}{' '}

@@ -96,6 +96,22 @@ function tokenize(sql: string): string[] {
       i = j + 1
       continue
     }
+    // 行注释 -- 到行尾(整段一个 token,防止后续子句被 minify 折进行注释里)
+    if (c === '-' && sql[i + 1] === '-') {
+      let j = i
+      while (j < n && sql[j] !== '\n') j++
+      tokens.push(sql.slice(i, j))
+      i = j
+      continue
+    }
+    // 块注释 /* ... */
+    if (c === '/' && sql[i + 1] === '*') {
+      const end = sql.indexOf('*/', i + 2)
+      const j = end === -1 ? n : end + 2
+      tokens.push(sql.slice(i, j))
+      i = j
+      continue
+    }
     // 括号、逗号、分号
     if (c === '(' || c === ')' || c === ',' || c === ';') {
       tokens.push(c)
@@ -148,6 +164,8 @@ function formatSql(sql: string): string {
   const tokens = mergeMultiword(raw)
   const lines: string[] = []
   let indent = 0
+  // 当前括号深度:子查询里的主子句也要跟着往里缩,而不是顶到第 0 列
+  let parenDepth = 0
   let currentLine = ''
 
   const pushLine = () => {
@@ -163,42 +181,45 @@ function formatSql(sql: string): string {
 
     if (TOP_KEYWORDS.has(upper)) {
       pushLine()
-      // JOIN 系列保持在 FROM 下层;主子句顶头
+      // JOIN 系列保持在 FROM 下层;主子句顶头(子查询内随括号深度缩进)
+      const base = parenDepth
       if (upper === 'ON') {
-        indent = 2
+        indent = base + 2
         currentLine = upper + ' '
       } else if (upper.includes('JOIN')) {
-        indent = 1
+        indent = base + 1
         currentLine = upper + ' '
       } else if (upper === 'VALUES' || upper === 'SET') {
-        indent = 1
+        indent = base + 1
         currentLine = upper + ' '
       } else {
-        indent = 0
+        indent = base
         currentLine = upper + ' '
       }
       continue
     }
 
     if (tok === '(') {
-      currentLine += ' ('
-      indent++
+      currentLine = currentLine.trimEnd() + ' ('
       pushLine()
+      indent++
+      parenDepth++
       continue
     }
     if (tok === ')') {
       pushLine()
       indent = Math.max(0, indent - 1)
+      parenDepth = Math.max(0, parenDepth - 1)
       currentLine = ') '
       continue
     }
     if (tok === ',') {
-      currentLine += ','
+      currentLine = currentLine.trimEnd() + ','
       pushLine()
       continue
     }
     if (tok === ';') {
-      currentLine += ';'
+      currentLine = currentLine.trimEnd() + ';'
       pushLine()
       continue
     }
@@ -206,6 +227,8 @@ function formatSql(sql: string): string {
     // 普通标识符:仅真正的 SQL 关键字大写，其余标识符(表名/列名)保留原大小写
     const isKeyword = SQL_KEYWORDS.has(tok.toUpperCase())
     currentLine += (isKeyword ? tok.toUpperCase() : tok) + ' '
+    // 行注释必须独占行尾,否则同行后续 token 会被并进注释里
+    if (tok.startsWith('--')) pushLine()
   }
   pushLine()
   return lines.join('\n').trim()
@@ -214,17 +237,25 @@ function formatSql(sql: string): string {
 /** 压缩 SQL:按 token 拼接,字符串字面量内的空白/逗号/括号原样保留 */
 function minifySql(sql: string): string {
   const tokens = tokenize(sql)
-  let out = ''
+  // 注意:不要对不断增长的输出串做 /\s$/.test(out) —— 无前导锚点的正则
+  // 在长串上是 O(n) 单次、O(n²) 累计(292KB 输入实测 5s+);只测前一个
+  // token 的末字符,语义等价(每轮迭代结束时输出总以最后 token 结尾)。
+  const parts: string[] = []
   for (let i = 0; i < tokens.length; i++) {
     const t = tokens[i]
     if (i > 0) {
-      // 逗号/右括号紧跟前 token;左括号后不加空格
-      const tight = t === ',' || t === ')' || tokens[i - 1] === '('
-      if (!tight && !/\s$/.test(out)) out += ' '
+      if (tokens[i - 1].startsWith('--')) {
+        // 行注释后必须换行,否则后续子句会被注释吞掉
+        parts.push('\n')
+      } else {
+        // 逗号/分号/右括号紧跟前 token;左括号前后均不加空格
+        const tight = t === ',' || t === ')' || t === ';' || t === '(' || tokens[i - 1] === '('
+        if (!tight && !/\s$/.test(tokens[i - 1])) parts.push(' ')
+      }
     }
-    out += t
+    parts.push(t)
   }
-  return out
+  return parts.join('')
 }
 
 export function SqlFormatterClient() {
@@ -279,6 +310,7 @@ export function SqlFormatterClient() {
           <button
             key={m}
             type="button"
+            aria-pressed={mode === m}
             onClick={() => setMode(m)}
             className={`rounded-md px-3 py-1.5 text-sm font-medium capitalize transition ${
               mode === m ? 'text-white' : 'border hover:bg-brand-50 dark:hover:bg-brand-950/40'

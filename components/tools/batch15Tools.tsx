@@ -218,6 +218,9 @@ function typeSig(v: Json): Json {
   if (v === null) return 'null'
   if (Array.isArray(v)) return v.length ? ['arr', typeSig(v[0])] : ['arr', 'empty']
   if (typeof v === 'object') return ['obj']
+  // 整数/浮点分开标记:混合数值数组(如 [19, 19.99])才能触发 union,
+  // 否则会错生成 z.array(z.number().int()) 而拒收样本自身的浮点元素
+  if (typeof v === 'number') return Number.isInteger(v) ? 'int' : 'float'
   return typeof v
 }
 
@@ -296,7 +299,7 @@ export function JsonToZodClient() {
         <p role="alert" className="rounded-lg border-2 border-red-200 bg-red-50 p-3 font-mono text-sm text-red-700 dark:border-red-800/60 dark:bg-red-950/30 dark:text-red-300">⚠️ {error}</p>
       )}
       {code && <ResultActions summary={code} filename="schema.ts" downloadContent={code} mime="text/plain;charset=utf-8;" copyLabel={L('copySchema', 'Copy Schema')} />}
-      <CalculatorNote>{L('note', '🧬 Integers become z.number().int(); mixed arrays emit z.union with up to 3 sample shapes; empty arrays fall back to z.unknown. Keys observed as null stay required-but-nullable — tighten .optional() by hand where APIs omit fields.')}</CalculatorNote>
+      <CalculatorNote>{L('note', '🧬 Integers become z.number().int(); mixed arrays emit z.union with up to 3 sample shapes; empty arrays fall back to z.unknown. Keys observed as null emit z.null() — widen those by hand if real values can appear, and add .optional() where APIs omit fields.')}</CalculatorNote>
     </div>
   )
 }

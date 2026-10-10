@@ -116,7 +116,7 @@ const de: ReactNode = (
     <div>
       <h2>Wie das Formatieren funktioniert</h2>
       <p>
-        Der Formatter tokenisiert die Abfrage (unter Wahrung der String-Literale, sodass <code>'WHERE'</code> innerhalb eines Strings nicht für ein Schlüsselwort gehalten wird) und gibt sie dann Klausel für Klausel neu aus. Schlüsselwörter der obersten Ebene wie <code>SELECT</code>, <code>FROM</code>, <code>WHERE</code>, <code>GROUP BY</code>, <code>ORDER BY</code>, <code>LIMIT</code>, <code>JOIN</code> und <code>ON</code> beginnen jeweils eine neue Zeile; Spalten nach <code>SELECT</code> und Bedingungen nach <code>WHERE</code> werden umgebrochen, wobei Kommas auf einer eigenen Zeile stehen. Das Ergebnis ist das kanonische „vertical SQL"-Layout, das die meisten Teams in Code-Reviews verwenden.
+        Der Formatter tokenisiert die Abfrage (unter Wahrung der String-Literale, sodass <code>'WHERE'</code> innerhalb eines Strings nicht für ein Schlüsselwort gehalten wird) und gibt sie dann Klausel für Klausel neu aus. Schlüsselwörter der obersten Ebene wie <code>SELECT</code>, <code>FROM</code>, <code>WHERE</code>, <code>GROUP BY</code>, <code>ORDER BY</code>, <code>LIMIT</code>, <code>JOIN</code> und <code>ON</code> beginnen jeweils eine neue Zeile; Spalten nach <code>SELECT</code> und Bedingungen nach <code>WHERE</code> werden umgebrochen, wobei Kommas auf einer eigenen Zeile stehen. Das Ergebnis ist das kanonische „vertical SQL“-Layout, das die meisten Teams in Code-Reviews verwenden.
       </p>
     </div>
     <div>

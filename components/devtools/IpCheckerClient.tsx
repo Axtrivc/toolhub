@@ -75,10 +75,10 @@ const DATACENTER_KEYWORDS = [
   'scaleway', 'equinix', 'cogent', 'gtt', 'zayo', 'layer3', 'backbone',
 ]
 
-/** 代理 / VPN 品牌关键词(近似黑名单信号) */
+/** 代理 / VPN 品牌关键词(近似黑名单信号);'tor' 单列词边界匹配,见 analyze */
 const PROXY_KEYWORDS = [
   'vpn', 'proxy', 'nordvpn', 'expressvpn', 'surfshark', 'mullvad', 'proton',
-  'tor', 'exit node', 'anonymous', 'm247', 'datacamp', 'packet exchange',
+  'exit node', 'anonymous', 'm247', 'datacamp', 'packet exchange',
 ]
 
 /** ChatGPT/Claude 等 AI 服务不可用的国家/地区(近似清单) */
@@ -104,18 +104,29 @@ function isValidIPv4(s: string): boolean {
 
 function isValidIPv6(s: string): boolean {
   if (!s.includes(':')) return false
-  const doubleColons = (s.match(/::/g) ?? []).length
+  // ':::' 及以上连续冒号恒非法(/::/g 非重叠计数会把 ':::' 误当 1 次压缩)
+  if (/:{3,}/.test(s)) return false
+  // 尾部嵌入式 IPv4(::ffff:192.0.2.128 / 64:ff9b::…):按 IPv4 规则校验,折算成 2 组
+  const embeddedV4 = /((?:\d{1,3}\.){3}\d{1,3})$/.exec(s)
+  let body = s
+  let v4Groups = 0
+  if (embeddedV4) {
+    if (!isValidIPv4(embeddedV4[1])) return false
+    body = s.slice(0, s.length - embeddedV4[1].length)
+    v4Groups = 2
+  }
+  const doubleColons = (body.match(/::/g) ?? []).length
   if (doubleColons > 1) return false
-  if (!/^[0-9a-fA-F:]+$/.test(s)) return false
-  // 边界裸单冒号(:x 或 x:)非法;边界 :: 压缩(::1 / fe80::)合法
-  if (s.startsWith(':') && !s.startsWith('::')) return false
-  if (s.endsWith(':') && !s.endsWith('::')) return false
-  const groups = s.split(':')
+  if (!/^[0-9a-fA-F:]+$/.test(body)) return false
+  // 边界裸单冒号(:x 或 x:)非法;边界 :: 压缩(::1 / fe80::)合法;
+  // 有嵌入式 IPv4 时 body 必以单冒号结尾(如 '::ffff:'),该冒号不算非法裸单冒号
+  if (body.startsWith(':') && !body.startsWith('::')) return false
+  if (embeddedV4 ? !body.endsWith(':') : body.endsWith(':') && !body.endsWith('::')) return false
+  const groups = body.split(':')
   if (!groups.every((h) => h.length <= 4)) return false
-  // 组数校验:无 :: 压缩时必须恰好 8 组;有 :: 时非空组 ≤ 7(:: 展开补零)
-  const nonEmpty = groups.filter((h) => h !== '').length
-  if (doubleColons === 0) return groups.length === 8
-  return nonEmpty <= 7
+  // 组数校验:无 :: 压缩时必须恰好 8 组(嵌入式 IPv4 记 2 组);有 :: 时非空组 ≤ 7(:: 展开补零)
+  const nonEmpty = groups.filter((h) => h !== '').length + v4Groups
+  return doubleColons === 0 ? nonEmpty === 8 : nonEmpty <= 7
 }
 
 function classifyTarget(raw: string): 'ipv4' | 'ipv6' | 'domain' | null {
@@ -366,7 +377,9 @@ async function detectWebRtcIps(timeoutMs = 3000): Promise<string[]> {
 function analyze(geo: GeoData, ptr: string | null, isSelf: boolean): IpAnalysis {
   const haystack = `${geo.asnOrg} ${geo.isp}`.toLowerCase()
   const isDatacenter = DATACENTER_KEYWORDS.some((k) => haystack.includes(k))
-  const proxyKeyword = PROXY_KEYWORDS.some((k) => haystack.includes(k))
+  // 'tor' 是高频词素(vector / victoria / monitor / motorola…),子串匹配会给正常
+  // ISP 误判代理并虚加 22 分;Tor 出口在 ASN 归属里通常写作独立单词,故用词边界。
+  const proxyKeyword = PROXY_KEYWORDS.some((k) => haystack.includes(k)) || /\btor\b/.test(haystack)
   // 机房 IP 且无 PTR:身份未经验证的 hosting 节点(城市级 Geo 精度往往也差)。
   // 免费数据源无法精确判定广播/未注册段,这里只如实标注「机房 + 无 rDNS」。
   const isUnverifiedHosting = isDatacenter && !ptr
@@ -663,14 +676,14 @@ export function IpCheckerClient() {
         </div>
         {queryErrorKey && <p role="alert" className="mt-2 text-sm text-red-600 dark:text-red-400">{d[queryErrorKey]}</p>}
         {errorKey && (
-          <p className="mt-3 rounded-md p-3 text-sm text-red-700 dark:text-red-300" style={{ backgroundColor: 'rgba(239,68,68,0.1)' }}>
+          <p role="alert" className="mt-3 rounded-md p-3 text-sm text-red-700 dark:text-red-300" style={{ backgroundColor: 'rgba(239,68,68,0.1)' }}>
             {d[errorKey]}
           </p>
         )}
       </div>
 
       {loading && !analysis && (
-        <div className="surface rounded-xl border p-8 text-center text-sm shadow-sm" style={{ color: 'rgb(var(--text-subtle))' }}>
+        <div role="status" className="surface rounded-xl border p-8 text-center text-sm shadow-sm" style={{ color: 'rgb(var(--text-subtle))' }}>
           {d.loadingHint}
         </div>
       )}

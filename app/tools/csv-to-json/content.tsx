@@ -16,15 +16,17 @@ const en: ReactNode = (
     <div>
       <h2>How It Works</h2>
       <p>
-        The tool splits each line by commas, treats the first row as headers, and maps each data row
-        into an object using those headers as keys. All values are strings — convert to numbers or
-        booleans in your code if needed.
+        The tool parses rows with full CSV quoting — quoted fields may contain commas, line breaks,
+        and escaped quotes. The delimiter (comma, semicolon, or tab) is auto-detected from the first
+        line; append &quot; ||| ;&quot; or &quot; ||| \t&quot; to the input to force one. The first
+        row becomes the headers, and each data row is mapped into an object using those headers as
+        keys. All values are strings — convert to numbers or booleans in your code if needed.
       </p>
     </div>
     <div>
       <h2>Limitations</h2>
       <ul>
-        <li>Does not handle quoted fields containing commas (advanced CSV parsing)</li>
+        <li>Quoted fields keep their spacing; unquoted fields are trimmed</li>
         <li>All values are strings, not auto-typed</li>
         <li>Assumes the first row is the header</li>
       </ul>
@@ -42,13 +44,13 @@ const zh: ReactNode = (
     <div>
       <h2>工作原理</h2>
       <p>
-        工具按逗号拆分每一行,将第一行视为表头,并使用这些表头作为键,把每一行数据映射为一个对象。所有值都是字符串——如果需要,请在代码中自行转换为数字或布尔值。
+        工具按完整的 CSV 引号规则解析——引号字段内可以包含逗号、换行和转义引号。分隔符(逗号/分号/制表符)根据首行自动探测,在输入末尾追加 &quot; ||| ;&quot; 或 &quot; ||| \t&quot; 可手动指定。第一行视为表头,每一行数据用这些表头作为键映射为一个对象。所有值都是字符串——如果需要,请在代码中自行转换为数字或布尔值。
       </p>
     </div>
     <div>
       <h2>局限性</h2>
       <ul>
-        <li>无法处理包含逗号的引号字段(高级 CSV 解析)</li>
+        <li>引号内的字段保留原始空白;未加引号的字段会去掉首尾空白</li>
         <li>所有值都是字符串,不会自动推断类型</li>
         <li>假定第一行是表头</li>
       </ul>
@@ -68,15 +70,18 @@ const es: ReactNode = (
     <div>
       <h2>Cómo funciona</h2>
       <p>
-        La herramienta divide cada línea por comas, trata la primera fila como encabezados y mapea cada
-        fila de datos a un objeto usando esos encabezados como claves. Todos los valores son cadenas —
-        conviértelos a números o booleanos en tu código si es necesario.
+        La herramienta analiza las filas con soporte completo de comillas — los campos entre comillas
+        pueden contener comas, saltos de línea y comillas escapadas. El delimitador (coma, punto y
+        coma o tabulación) se detecta automáticamente desde la primera línea; añade &quot; ||| ;&quot;
+        o &quot; ||| \t&quot; al final para forzarlo. La primera fila se trata como encabezados y cada
+        fila de datos se mapea a un objeto usando esos encabezados como claves. Todos los valores son
+        cadenas — conviértelos a números o booleanos en tu código si es necesario.
       </p>
     </div>
     <div>
       <h2>Limitaciones</h2>
       <ul>
-        <li>No maneja campos entre comillas que contienen comas (análisis CSV avanzado)</li>
+        <li>Los campos entre comillas conservan sus espacios; los campos sin comillas se recortan</li>
         <li>Todos los valores son cadenas, sin tipado automático</li>
         <li>Asume que la primera fila es el encabezado</li>
       </ul>
@@ -96,15 +101,19 @@ const de: ReactNode = (
     <div>
       <h2>Wie es funktioniert</h2>
       <p>
-        Das Werkzeug teilt jede Zeile an Kommas, behandelt die erste Zeile als Kopfzeile und bildet
-        jede Datenzeile auf ein Objekt ab, das diese Kopfzeilen als Schlüssel verwendet. Alle Werte
-        sind Strings — wandle sie in deinem Code bei Bedarf in Zahlen oder Booleans um.
+        Das Werkzeug parst die Zeilen mit vollständiger Anführungszeichen-Unterstützung — Felder in
+        Anführungszeichen dürfen Kommas, Zeilenumbrüche und maskierte Anführungszeichen enthalten. Das
+        Trennzeichen (Komma, Semikolon oder Tab) wird anhand der ersten Zeile automatisch erkannt;
+        hänge &quot; ||| ;&quot; oder &quot; ||| \t&quot; an, um es vorzugeben. Die erste Zeile wird
+        als Kopfzeile behandelt und jede Datenzeile wird auf ein Objekt abgebildet, das diese
+        Kopfzeilen als Schlüssel verwendet. Alle Werte sind Strings — wandle sie in deinem Code bei
+        Bedarf in Zahlen oder Booleans um.
       </p>
     </div>
     <div>
       <h2>Einschränkungen</h2>
       <ul>
-        <li>Behandelt keine in Anführungszeichen gesetzten Felder mit Kommas (fortgeschrittenes CSV-Parsing)</li>
+        <li>Felder in Anführungszeichen behalten ihre Leerzeichen; Felder ohne Anführungszeichen werden getrimmt</li>
         <li>Alle Werte sind Strings, ohne automatische Typisierung</li>
         <li>Geht davon aus, dass die erste Zeile die Kopfzeile ist</li>
       </ul>

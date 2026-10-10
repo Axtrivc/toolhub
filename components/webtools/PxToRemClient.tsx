@@ -66,8 +66,6 @@ export function PxToRemClient() {
 
   const inputCls =
     'w-full rounded-lg border p-3 text-sm shadow-sm outline-none transition focus:ring-2 font-mono'
-  const cellCls =
-    'w-full rounded-lg border p-3 text-sm shadow-sm outline-none transition focus:ring-2 font-mono'
 
   const pxNum = parseFloat(px)
   const pxPreview = Number.isFinite(pxNum) && pxNum > 0 ? Math.min(pxNum, 120) : null

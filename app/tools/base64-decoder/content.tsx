@@ -25,8 +25,10 @@ const en: ReactNode = (
     <div>
       <h2>When Decoding Fails</h2>
       <p>
-        If you see an error, the input is likely not valid Base64. Common causes: missing padding (=), stray
-        whitespace, or characters outside the Base64 alphabet (A-Z, a-z, 0-9, +, /).
+        If you see an error, the input is likely not valid Base64. Common causes: characters outside the Base64
+        alphabet (A-Z, a-z, 0-9, +, / &mdash; the URL-safe <code>-</code> and <code>_</code> variants are also
+        accepted), or a string truncated when copying so its length no longer fits Base64&apos;s 4-character groups.
+        Missing <code>=</code> padding and stray whitespace are handled automatically.
       </p>
     </div>
   </section>
@@ -52,7 +54,7 @@ const zh: ReactNode = (
     <div>
       <h2>解码失败时</h2>
       <p>
-        如果出现错误,输入很可能不是合法的 Base64。常见原因:缺少填充 (=)、多余的空白,或不在 Base64 字母表 (A-Z, a-z, 0-9, +, /) 之内的字符。
+        如果出现错误,输入很可能不是合法的 Base64。常见原因:出现了不在 Base64 字母表 (A-Z, a-z, 0-9, +, /,也兼容 URL 安全变体 <code>-</code> 和 <code>_</code>) 之内的字符,或复制时被截断、长度不再符合 Base64 的 4 字符分组。缺少 <code>=</code> 填充和多余空白会自动处理。
       </p>
     </div>
   </section>
@@ -79,8 +81,10 @@ const es: ReactNode = (
     <div>
       <h2>Cuando la descodificación falla</h2>
       <p>
-        Si ves un error, la entrada probablemente no es Base64 válido. Causas comunes: falta de relleno (=), espacios
-        en blanco sobrantes o caracteres fuera del alfabeto Base64 (A-Z, a-z, 0-9, +, /).
+        Si ves un error, la entrada probablemente no es Base64 válido. Causas comunes: caracteres fuera del alfabeto
+        Base64 (A-Z, a-z, 0-9, +, / — también se aceptan las variantes seguras para URL <code>-</code> y{' '}
+        <code>_</code>) o una cadena truncada al copiar cuya longitud ya no encaja en los grupos de 4 caracteres del
+        Base64. El relleno <code>=</code> ausente y los espacios sobrantes se gestionan automáticamente.
       </p>
     </div>
   </section>
@@ -107,8 +111,11 @@ const de: ReactNode = (
     <div>
       <h2>Wenn die Dekodierung fehlschlägt</h2>
       <p>
-        Wenn ein Fehler auftritt, ist die Eingabe wahrscheinlich kein gültiges Base64. Häufige Ursachen: fehlendes
-        Padding (=), versehentliche Leerzeichen oder Zeichen außerhalb des Base64-Alphabets (A-Z, a-z, 0-9, +, /).
+        Wenn ein Fehler auftritt, ist die Eingabe wahrscheinlich kein gültiges Base64. Häufige Ursachen: Zeichen
+        außerhalb des Base64-Alphabets (A-Z, a-z, 0-9, +, / — die URL-sicheren Varianten <code>-</code> und{' '}
+        <code>_</code> sind ebenfalls erlaubt) oder ein beim Kopieren abgeschnittener String, dessen Länge nicht mehr
+        in Base64-4er-Gruppen passt. Fehlendes <code>=</code>-Padding und überflüssige Leerzeichen werden automatisch
+        behandelt.
       </p>
     </div>
   </section>

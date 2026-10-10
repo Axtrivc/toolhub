@@ -59,13 +59,63 @@ function stripComment(line: string): string {
   return line
 }
 
+/** 找“键结束冒号”的位置:块上下文里键后的冒号必须后跟空白或行尾(YAML 规则),
+ *  因此优先返回第一个「冒号+空白/行尾」;strict(序列条目判定)找不到即返回 -1,
+ *  让 nginx:1.25、http://x 这类含冒号的纯标量留在标量分支,而不是被误切成映射。
+ *  非 strict 时回退第一个冒号:key=value 无冒号会报错,而 key:value(缺空格)
+ *  这类粘贴保持宽容——与主映射分支原有行为一致。 */
+function findKeyColon(s: string, strict = false): number {
+  for (let i = 0; i < s.length; i++) {
+    if (s[i] !== ':') continue
+    if (i + 1 === s.length || /\s/.test(s[i + 1])) return i
+  }
+  return strict ? -1 : s.indexOf(':')
+}
+
+/** 双引号常见转义(\n \t \" \xHH \uHHHH 等);未知转义保留原样(宽松,不报错) */
+function unescapeDouble(s: string): string {
+  const simple: Record<string, string> = {
+    n: '\n', t: '\t', r: '\r', '0': '\0', b: '\b', f: '\f',
+    '"': '"', "'": "'", '\\': '\\', '/': '/', ' ': ' ',
+  }
+  let out = ''
+  for (let i = 0; i < s.length; i++) {
+    const c = s[i]
+    if (c === '\\' && i + 1 < s.length) {
+      const n = s[i + 1]
+      if (simple[n] !== undefined) {
+        out += simple[n]
+        i++
+        continue
+      }
+      if (n === 'x' && /^[0-9a-fA-F]{2}/.test(s.slice(i + 2))) {
+        out += String.fromCharCode(parseInt(s.slice(i + 2, i + 4), 16))
+        i += 3
+        continue
+      }
+      if (n === 'u' && /^[0-9a-fA-F]{4}/.test(s.slice(i + 2))) {
+        out += String.fromCharCode(parseInt(s.slice(i + 2, i + 6), 16))
+        i += 5
+        continue
+      }
+    }
+    out += c
+  }
+  return out
+}
+
 /** 把 plain scalar 解析成合适的 JS 类型 */
 function parseScalar(raw: string): unknown {
   const v = raw.trim()
   if (v === '') return null
-  // 引号字符串
-  if ((v.startsWith('"') && v.endsWith('"')) || (v.startsWith("'") && v.endsWith("'"))) {
-    return v.slice(1, -1)
+  // 引号字符串(至少一对引号才算闭合;''/"" 为合法空串):
+  // 单引号按 YAML 规则把 '' 转义为 ',双引号处理常见反斜杠转义
+  if (
+    v.length >= 2 &&
+    ((v.startsWith('"') && v.endsWith('"')) || (v.startsWith("'") && v.endsWith("'")))
+  ) {
+    const inner = v.slice(1, -1)
+    return v[0] === "'" ? inner.replace(/''/g, "'") : unescapeDouble(inner)
   }
   // 锚点(&)/别名(*):按 YAML 规则纯标量不能以指示符开头;手写解析器不解析
   // 它们,与其静默输出 "&a xxx"/"*ref" 字符串(产出错误数据),不如明确报错
@@ -79,14 +129,14 @@ function parseScalar(raw: string): unknown {
   if (lower === 'null' || lower === '~' || lower === '') return null
   if (lower === 'true' || lower === 'yes' || lower === 'on') return true
   if (lower === 'false' || lower === 'no' || lower === 'off') return false
-  // 数字
-  if (/^-?\d+$/.test(v)) {
+  // 数字(YAML 1.1/1.2 均允许 + 号;与 -7 对称)
+  if (/^[+-]?\d+$/.test(v)) {
     // 超出安全整数范围的大整数(16 位订单 ID、毫秒时间戳)保留原始字符串,
     // 避免 parseInt 静默丢精度(JSON 输出带引号但值不变)
     const n = Number(v)
     return Number.isSafeInteger(n) ? n : v
   }
-  if (/^-?\d*\.\d+$/.test(v)) {
+  if (/^[+-]?\d*\.\d+$/.test(v)) {
     // 极长小数会被 parseFloat 溢出为 Infinity(JSON.stringify 输出 null)→ 回退字符串
     const f = parseFloat(v)
     return Number.isFinite(f) ? f : v
@@ -199,11 +249,15 @@ function parseFlow(raw: string): unknown {
 interface ParseContext {
   lines: string[]
   index: number
+  /** 输入末尾没有换行符:最后一行视为“未终止”,块标量 chomp 不再补 \n */
+  unterminatedEof: boolean
 }
 
 /**
  * 块标量(| 字面 与 > 折叠):收集比 key 缩进更深的连续行。
  * chomp 修饰:省略 = clip(末尾恰一个换行)、- = strip(无换行)、+ = keep(保留全部空行)。
+ * 末尾换行只对“确实存在换行”的行补上:输入末尾无换行符(YAML 不以 \n 结尾)时,
+ * 最后一行没有可保留的行终止符,clip/keep 不追加(PyYAML 同口径)。
  */
 function parseBlockScalar(ctx: ParseContext, keyIndent: number, folded: boolean, chomp: string): string {
   const raw: string[] = []
@@ -229,6 +283,10 @@ function parseBlockScalar(ctx: ParseContext, keyIndent: number, folded: boolean,
   while (end > 0 && raw[end - 1] === '') end--
   const body = raw.slice(0, end)
   const trailing = raw.length - end
+  // 正文一直收集到输入末尾、末尾无换行符、且最后没有空行(空行前的正文行仍是被
+  // 换行终止的)→ 最后一行正文没有终止符,clip/keep 的“补一个 \n”要抑制掉
+  const unterminated =
+    trailing === 0 && ctx.index >= ctx.lines.length && ctx.unterminatedEof && body.length > 0
 
   let text: string
   if (folded) {
@@ -243,8 +301,8 @@ function parseBlockScalar(ctx: ParseContext, keyIndent: number, folded: boolean,
   }
 
   if (chomp === '-') return text
-  if (chomp === '+') return text + '\n'.repeat(trailing + 1)
-  return text === '' ? '' : text + '\n'
+  if (chomp === '+') return text + '\n'.repeat(trailing + (unterminated ? 0 : 1))
+  return text === '' ? '' : text + (unterminated ? '' : '\n')
 }
 
 /** 解析一个 block(从 baseIndent 起),返回 [value, 结束行号] */
@@ -284,9 +342,11 @@ function parseBlock(ctx: ParseContext, baseIndent: number): unknown {
         const child = parseChild(ctx, ind)
         seq.push(child)
       } else {
-        // 可能是 "- key: value"(inline map item)
-        const ci = itemRaw.indexOf(':')
-        if (ci > -1 && /^\s*[\w-]+\s*:/.test(itemRaw)) {
+        // 可能是 "- key: value"(inline map item)。键冒号必须后跟空白/行尾:
+        // "- nginx:1.25"、"- http://x" 这类含冒号纯标量不是映射(strict,不回退)。
+        // 键本身允许含 : . -(YAML 纯标量键规则,如 "- a.b: v" / "- a:b: c")
+        const ci = findKeyColon(itemRaw, true)
+        if (ci > -1 && /^\s*[\w:.-]+\s*$/.test(itemRaw.slice(0, ci))) {
           const itemMap: Record<string, unknown> = {}
           const k = itemRaw.slice(0, ci).trim()
           const rest = itemRaw.slice(ci + 1).trim()
@@ -311,7 +371,7 @@ function parseBlock(ctx: ParseContext, baseIndent: number): unknown {
             const ni = indentOf(ns)
             if (ni <= ind) break
             const nc = ns.slice(ni)
-            const nci = nc.indexOf(':')
+            const nci = findKeyColon(nc)
             if (nci === -1) break
             const nk = nc.slice(0, nci).trim()
             const nrest = nc.slice(nci + 1).trim()
@@ -339,8 +399,10 @@ function parseBlock(ctx: ParseContext, baseIndent: number): unknown {
       continue
     }
 
-    // mapping: key: value
-    const ci = content.indexOf(':')
+    // mapping: key: value。优先取「冒号+空白/行尾」作为键结束,让 a:b: c 解析出
+    // 键 "a:b"(与 YAML 规范一致);无「冒号+空格」时回退第一个冒号以保持
+    // key:value 这类缺空格粘贴的宽容行为
+    const ci = findKeyColon(content)
     if (ci > -1) {
       isMap = true
       const key = content.slice(0, ci).trim().replace(/^["']|["']$/g, '')
@@ -432,7 +494,7 @@ function yamlToJson(yaml: string): { value: unknown; multiDoc: boolean } {
   // 文件末尾换行符 split 出的最后一个空元素是 EOF 残留而非正文行:弹出一个,
   // 否则 |+(keep chomping)会把结尾换行数多算一行(与 PyYAML 行为对齐验证)
   if (yaml.endsWith('\n') && lines[lines.length - 1] === '') lines.pop()
-  const ctx: ParseContext = { lines, index: 0 }
+  const ctx: ParseContext = { lines, index: 0, unterminatedEof: !yaml.endsWith('\n') }
   const result = parseBlock(ctx, 0)
   return { value: result, multiDoc }
 }

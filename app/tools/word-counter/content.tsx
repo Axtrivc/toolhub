@@ -58,6 +58,10 @@ const en: ReactNode = (
         <strong>Speaking time:</strong> ~130 words per minute (the average pace for a clear
         presentation or podcast).
       </li>
+      <li>
+        <strong>Chinese, Japanese, and Korean text:</strong> each character counts as one word, and
+        the speeds switch to ~350 characters per minute reading and ~220 speaking.
+      </li>
     </ul>
     <p>
       These are averages — your actual speed depends on content density, technical jargon, and
@@ -123,7 +127,7 @@ const zh: ReactNode = (
       </li>
     </ul>
 
-    <h2>阅读时间与讲述时间</h2>
+    <h2>阅读时间与演讲时间</h2>
     <p>
       本工具基于你的字数,使用标准阅读速度估算两种时长:
     </p>
@@ -132,7 +136,10 @@ const zh: ReactNode = (
         <strong>阅读时间:</strong>每分钟约 200 词(约为成年人阅读小说的平均速度;保守估计会用 150——参见我们的阅读时长工具)。
       </li>
       <li>
-        <strong>讲述时间:</strong>每分钟约 130 词(清晰演示或播客的平均语速)。
+        <strong>演讲时间:</strong>每分钟约 130 词(清晰演示或播客的平均语速)。
+      </li>
+      <li>
+        <strong>中日韩(CJK)文本:</strong>每个字符计为一个词,阅读速度按每分钟约 350 字、演讲速度按每分钟约 220 字计算。
       </li>
     </ul>
     <p>
@@ -207,7 +214,7 @@ const es: ReactNode = (
       </li>
     </ul>
 
-    <h2>Tiempo de lectura frente a tiempo de exposición</h2>
+    <h2>Tiempo de lectura frente a tiempo de habla</h2>
     <p>
       La herramienta estima dos duraciones a partir de tu recuento de palabras, usando velocidades de
       lectura estándar:
@@ -219,8 +226,12 @@ const es: ReactNode = (
         herramienta de tiempo de lectura).
       </li>
       <li>
-        <strong>Tiempo de exposición:</strong> ~130 palabras por minuto (el ritmo medio de una
+        <strong>Tiempo de habla:</strong> ~130 palabras por minuto (el ritmo medio de una
         presentación clara o un pódcast).
+      </li>
+      <li>
+        <strong>Texto en chino, japonés o coreano:</strong> cada carácter cuenta como una palabra, y
+        las velocidades pasan a ~350 caracteres por minuto de lectura y ~220 de habla.
       </li>
     </ul>
     <p>
@@ -312,6 +323,10 @@ const de: ReactNode = (
       <li>
         <strong>Sprechzeit:</strong> ~130 Wörter pro Minute (das durchschnittliche Tempo einer
         klaren Präsentation oder eines Podcasts).
+      </li>
+      <li>
+        <strong>Chinesischer, japanischer und koreanischer Text:</strong> Jedes Zeichen zählt als
+        Wort, und die Tempi wechseln zu ~350 Zeichen pro Minute beim Lesen und ~220 beim Sprechen.
       </li>
     </ul>
     <p>

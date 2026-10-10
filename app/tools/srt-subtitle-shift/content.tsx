@@ -69,7 +69,7 @@ const zh: ReactNode = (
     <div>
       <h2>平移是如何工作的</h2>
       <p>
-        每条字幕的时间戳（<code>HH:MM:SS,mmm --&gt; HH:MM:SS,mmm</code>）会被换算成整数毫秒，加上偏移量后再用零填充格式化回去——没有浮点漂移，没有舍入意外。正偏移会让字幕延后（文字出现太早时使用）；像 <code>-1.75</code> 这样的负值会让字幕提前。当平移把某条字幕推到零以下时，<strong>clamp</strong> 选项会把它钉在 <code>00:00:00,000</code>，而不是写出无效的负时间戳，并且工具会告诉你有多少条字幕被 clamp。
+        每条字幕的时间戳（<code>HH:MM:SS,mmm --&gt; HH:MM:SS,mmm</code>）会被换算成整数毫秒，加上偏移量后再用零填充格式化回去——没有浮点漂移，没有舍入意外。正偏移会让字幕延后（文字出现太早时使用）；像 <code>-1.75</code> 这样的负值会让字幕提前。当平移把某条字幕推到零以下时，<strong>钳制</strong>（clamp）选项会把它钉在 <code>00:00:00,000</code>，而不是写出无效的负时间戳，并且工具会告诉你有多少条字幕被钳制。
       </p>
     </div>
 
@@ -107,14 +107,14 @@ const es: ReactNode = (
     <div>
       <h2>Análisis tolerante, renumeración segura</h2>
       <p>
-        Los archivos SRT reales son desordenados: finales de línea <code>CRLF</code> de Windows, números de índice ausentes o duplicados, líneas en blanco sueltas. El analizador gestiona todo eso — los índices de bloque son opcionales y cualquier bloque sin una línea de marca de tiempo válida se omite y se reporta como error de análisis, nunca se altera silenciosamente. Activa <strong>Renumerar bloques</strong> (por defecto) para escribir índices secuenciales limpios, que algunos reproductores estrictos exigen.
+        Los archivos SRT reales son desordenados: finales de línea <code>CRLF</code> de Windows, números de índice ausentes o duplicados, líneas en blanco sueltas. El analizador gestiona todo eso — los índices de bloque son opcionales y cualquier bloque sin una línea de marca de tiempo válida se omite y se reporta como error de análisis, nunca se altera silenciosamente. Activa la <strong>renumeración de bloques</strong> (por defecto) para escribir índices secuenciales limpios, que algunos reproductores estrictos exigen.
       </p>
     </div>
 
     <div>
       <h2>Eliminar formato y símbolos musicales</h2>
       <p>
-        Los archivos de subtítulos suelen llevar estilos que tu reproductor no puede usar: etiquetas HTML <code>&lt;i&gt;</code>, <code>&lt;b&gt;</code> y <code>&lt;font&gt;</code>, bloques de anulación ASS como <code>{'{\\an8}'}</code>, y marcas ♪ alrededor de los bloques musicales. La opción <strong>eliminar formato</strong> quita todo eso y ordena los espacios en blanco sobrantes, dándote una pista de texto plano limpia. Un consejo: desplaza primero, verifica la sincronización con una o dos líneas de diálogo y luego descarga — desplazar el archivo entero mejora a editar bloque a bloque.
+        Los archivos de subtítulos suelen llevar estilos que tu reproductor no puede usar: etiquetas HTML <code>&lt;i&gt;</code>, <code>&lt;b&gt;</code> y <code>&lt;font&gt;</code>, bloques de anulación ASS como <code>{'{\\an8}'}</code>, y marcas ♪ alrededor de los bloques musicales. La opción <strong>eliminar formato</strong> quita todo eso y ordena los espacios en blanco sobrantes, dándote una pista de texto plano limpia. Un consejo: desplaza primero, verifica la sincronización con una o dos líneas de diálogo y luego descarga — desplazar el archivo entero es mejor que editar bloque a bloque.
       </p>
     </div>
   </section>
@@ -138,7 +138,7 @@ const de: ReactNode = (
     <div>
       <h2>Tolerantes Parsing, sichere Neunummerierung</h2>
       <p>
-        Echte SRT-Dateien sind unordentlich: Windows-<code>CRLF</code>-Zeilenenden, fehlende oder doppelte Indexnummern, verstreute Leerzeilen. Der Parser handhabt all das — Cue-Indizes sind optional, und jeder Block ohne gültige Zeitstempelzeile wird übersprungen und als Parse-Fehler gemeldet, niemals still verstümmelt. Aktiviere <strong>Cues neu nummerieren</strong> (Standard), um saubere fortlaufende Indizes zu schreiben, die einige strenge Player verlangen.
+        Echte SRT-Dateien sind unordentlich: Windows-<code>CRLF</code>-Zeilenenden, fehlende oder doppelte Indexnummern, verstreute Leerzeilen. Der Parser handhabt all das — Cue-Indizes sind optional, und jeder Block ohne gültige Zeitstempelzeile wird übersprungen und als Parse-Fehler gemeldet, niemals still verstümmelt. Aktiviere <strong>Einträge neu nummerieren</strong> (Standard), um saubere fortlaufende Indizes zu schreiben, die einige strenge Player verlangen.
       </p>
     </div>
 

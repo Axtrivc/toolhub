@@ -265,7 +265,9 @@ export function SecretKeyGeneratorClient() {
         </span>
       </div>
 
-      {/* 熵值仪表盘:长度/格式变化时指针 spring 滑动,「够不够强」一眼可见 */}
+      {/* 熵值仪表盘:长度/格式变化时指针 spring 滑动,「够不够强」一眼可见。
+          Good 区上界取 129:活动档判定是严格 <(GaugeChart),这样 128 bit 落在 Good,
+          与徽标(≤128 为 Good)及正文「80–128 位算良好」一致。 */}
       <GaugeChart
         title={L('entropyGauge', 'Entropy strength')}
         value={bits}
@@ -273,7 +275,7 @@ export function SecretKeyGeneratorClient() {
         max={512}
         zones={[
           { upTo: 80, color: '#ef4444', label: L('strengthWeak', 'Weak') },
-          { upTo: 128, color: '#f59e0b', label: L('strengthGood', 'Good') },
+          { upTo: 129, color: '#f59e0b', label: L('strengthGood', 'Good') },
           { upTo: 256, color: '#22c55e', label: L('strengthStrong', 'Strong') },
           { upTo: 512, color: '#3b82f6', label: L('strengthExcellent', 'Excellent') },
         ]}
@@ -321,7 +323,7 @@ export function SecretKeyGeneratorClient() {
         className="rounded-md p-3 text-xs"
         style={{ backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text-subtle))' }}
       >
-        {L('noteIntro', '🔒 Generated with ')}<code>crypto.getRandomValues</code>{L('noteMid1', ' — your browser&apos;s CSPRNG — entirely on this device; nothing is uploaded. Alphanumeric output uses ')}<strong>{L('noteRejectionSampling', 'rejection sampling')}</strong>{L('noteOutro', ' so every character is uniformly distributed (no modulo bias). Store generated secrets in a password manager or your platform&apos;s secrets store, and rotate any key that ever appears in logs, tickets, or screenshots.')}
+        {L('noteIntro', '🔒 Generated with ')}<code>crypto.getRandomValues</code>{L('noteMid1', ' — your browser\'s CSPRNG — entirely on this device; nothing is uploaded. Alphanumeric output uses ')}<strong>{L('noteRejectionSampling', 'rejection sampling')}</strong>{L('noteOutro', ' so every character is uniformly distributed (no modulo bias). Store generated secrets in a password manager or your platform\'s secrets store, and rotate any key that ever appears in logs, tickets, or screenshots.')}
       </p>
     </div>
   )

@@ -159,8 +159,8 @@ const es: ReactNode = (
       <p>
         TikTok, Amazon, Meta y proveedores de IA como OpenAI puntúan las IP entrantes. Las direcciones de{' '}
         <strong>ISP residencial</strong> se asignan a hogares reales y superan la mayoría de las comprobaciones, mientras
-        que los rangos de <strong>centro de datos</strong> se venden al por mayor y se abusan mucho para automatización —
-        por eso las cuentas en IP de IDC son limitadas, desafiadas o baneadas. La matriz de calificación de casos de uso
+        que los rangos de <strong>centro de datos</strong> se venden al por mayor y se usan de forma masiva y abusiva para
+        automatización — por eso las cuentas en IP de IDC sufren limitaciones, comprobaciones de seguridad o baneos. La matriz de calificación de casos de uso
         de la herramienta traduce el resultado de la inspección en valoraciones por estrellas para cada plataforma, de
         modo que veas de un vistazo si un nodo de salida es adecuado para outreach en vídeo, comercio electrónico
         transfronterizo, operaciones en redes sociales o servicios de IA.
@@ -218,8 +218,8 @@ const de: ReactNode = (
       <p>
         TikTok, Amazon, Meta und KI-Anbieter wie OpenAI bewerten alle eingehenden IPs. <strong>Residential-ISP</strong>-
         Adressen lassen sich echten Haushalten zuordnen und bestehen die meisten Prüfungen, während{' '}
-        <strong>Datacenter</strong>-Ranges in bulk verkauft und stark für Automatisierung missbraucht werden — deshalb
-        werden Konten auf IDC-IPs gedrosselt, herausgefordert oder gesperrt. Die Use-Case-Bewertungsmatrix im Tool
+        <strong>Datacenter</strong>-Ranges massenhaft verkauft und stark für Automatisierung missbraucht werden — deshalb
+        werden Konten auf IDC-IPs gedrosselt, mit Verifizierungsabfragen herausgefordert oder gesperrt. Die Use-Case-Bewertungsmatrix im Tool
         übersetzt das Inspektionsergebnis in plattformspezifische Sternebewertungen, damit du auf einen Blick siehst, ob
         ein Exit-Knoten für Video-Outreach, grenzüberschreitenden E-Commerce, Social-Media-Betrieb oder KI-Dienste
         geeignet ist.

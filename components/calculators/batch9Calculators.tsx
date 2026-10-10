@@ -143,7 +143,7 @@ export const PaceCalculatorClient = makeCalculatorClient({
     { key: 'speed', label: 'Speed' },
     { key: 'races', label: 'Equivalent race predictions' },
   ],
-  compute: (v) => {
+  compute: (v, locale) => {
     const distance = toNumStrict(v.distance)
     const timeSec = parseDuration(v.time)
     // 空输入保持 '—' 占位(出厂默认观感);非空但非法(负数/乱格式)时把提示放到
@@ -153,7 +153,7 @@ export const PaceCalculatorClient = makeCalculatorClient({
       return { pace: '—', speed: '—', races: '—' }
     }
     if (isNaN(distance) || distance <= 0 || isNaN(timeSec) || timeSec <= 0) {
-      return { pace: '⚠️ Enter a positive distance and a time like 45:30', speed: '—', races: '—' }
+      return { pace: `⚠️ ${tui('pace-calculator', locale, 'errInvalid', 'Enter a positive distance and a time like 45:30')}`, speed: '—', races: '—' }
     }
     const perUnitKm = v.unit === 'mile' ? 1.609344 : 1
     const paceSec = (timeSec / distance) * perUnitKm
@@ -212,10 +212,11 @@ export const ProteinIntakeCalculatorClient = makeCalculatorClient({
     { key: 'perMeal', label: 'Per meal (4 meals)' },
     { key: 'basis', label: 'Basis' },
   ],
-  compute: (v) => {
+  compute: (v, locale) => {
+    const T = (key: string, fb: string) => tui('protein-intake-calculator', locale, key, fb)
     const weight = toNumStrict(v.weight)
     if (isNaN(weight) || weight <= 0 || weight > 500) {
-      return { range: '⚠️ Enter a valid weight in kg', perMeal: '—', basis: '—' }
+      return { range: `⚠️ ${T('errInvalid', 'Enter a valid weight in kg')}`, perMeal: '—', basis: '—' }
     }
     // g/kg 区间:sports-nutrition 共识(ACSM/ISSN):久坐 0.8,轻 1.0-1.2,
     // 中等 1.2-1.6,力量/耐力训练 1.6-2.2;增肌取上限侧,减脂保氮取 1.8-2.7(高蛋白饮食)
@@ -233,10 +234,13 @@ export const ProteinIntakeCalculatorClient = makeCalculatorClient({
     }
     const loG = Math.round(weight * lo)
     const hiG = Math.round(weight * hi)
+    // basis 里的活动/目标复用选项的 opt.* 本地化 key(en 回退即原值)
+    const actLabel = T(`opt.activity.${v.activity}`, v.activity)
+    const goalLabel = T(`opt.goal.${v.goal}`, v.goal)
     return {
       range: `${loG}–${hiG} g per day`,
       perMeal: `${Math.round(loG / 4)}–${Math.round(hiG / 4)} g`,
-      basis: `${fmtNum(lo, 1)}–${fmtNum(hi, 1)} g × ${Math.round(weight)} kg (${v.activity}/${v.goal})`,
+      basis: `${fmtNum(lo, 1)}–${fmtNum(hi, 1)} g × ${Math.round(weight)} kg (${actLabel}/${goalLabel})`,
     }
   },
   note: '🥩 Ranges follow ISSN & ACSM position stands: 0.8 g/kg is the RDA floor for sedentary adults; training and caloric deficits raise needs. Spread intake across 3-5 meals.',
@@ -299,9 +303,10 @@ export const ElectricityCostCalculatorClient = makeCalculatorClient({
     const kwhDay = (watts * hours) / 1000
     const daily = kwhDay * rate
     return {
-      daily: `$${fmtNum(daily, 2)}`,
-      monthly: `$${fmtNum(daily * 30.44, 2)}`,
-      yearly: `$${fmtNum(daily * 365, 2)}`,
+      // 金额走 fmtUSD(恒两位小数):fmtNum 会吞尾零,"$0.90" 变 "$0.9"
+      daily: fmtUSD(daily),
+      monthly: fmtUSD(daily * 30.44),
+      yearly: fmtUSD(daily * 365),
       kwh: `${fmtNum(kwhDay, 2)} kWh`,
     }
   },
@@ -315,7 +320,7 @@ export const ElectricityCostCalculatorClient = makeCalculatorClient({
         { label: 'Per month', segments: [{ label: 'Cost', value: daily * 30.44, color: '#3b82f6' }] },
         { label: 'Per year', segments: [{ label: 'Cost', value: daily * 365, color: '#22c55e' }] },
       ],
-      formatTotal: (n) => `$${fmtNum(n, 2)}`,
+      formatTotal: (n) => fmtUSD(n),
     }
   },
   note: '⚡ Find the wattage on the appliance label or its spec sheet. Heaters and dryers (1500-5000 W) dwarf laptops (≈50 W); the yearly line is where surprises live.',
@@ -333,7 +338,7 @@ export const CarCostCalculatorClient = makeCalculatorClient({
     { key: 'consumption', label: 'Consumption', suffix: 'L/100km', default: '7.5', slider: { min: 3, max: 25, step: 0.5 } },
     { key: 'insurance', label: 'Insurance per year', suffix: '$', default: '1200', slider: { min: 0, max: 10000, step: 100 } },
     { key: 'maintenance', label: 'Maintenance + tires per year', suffix: '$', default: '800', slider: { min: 0, max: 10000, step: 100 } },
-    { key: 'resale', label: 'Estimated resale value after', suffix: '$', default: '12000', slider: { min: 0, max: 100000, step: 500 } },
+    { key: 'resale', label: 'Estimated resale value', suffix: '$', default: '12000', slider: { min: 0, max: 100000, step: 500 } },
   ],
   outputs: [
     { key: 'monthly', label: 'True monthly cost', highlight: true, sublabel: 'All costs ÷ months' },

@@ -9,7 +9,7 @@ const en: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>What Is This Tool?</h2>
     <p>
-      This tool converts between time units — from milliseconds to years. It uses precise
+      This tool converts between time units — from nanoseconds to years. It uses precise
       factors for small units (seconds, minutes, hours, days) and averages for months and years,
       since those vary in length.
     </p>
@@ -49,7 +49,7 @@ const zh: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>这是什么工具?</h2>
     <p>
-      本工具在时间单位之间换算——从毫秒到年。对于较小单位(秒、分、时、天)使用精确换算系数,月和年因长度不固定而采用平均值。
+      本工具在时间单位之间换算——从纳秒到年。对于较小单位(秒、分、时、天)使用精确换算系数,月和年因长度不固定而采用平均值。
     </p>
     <div>
       <h2>标准换算</h2>
@@ -85,7 +85,7 @@ const es: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>¿Qué es esta herramienta?</h2>
     <p>
-      Esta herramienta convierte entre unidades de tiempo — desde milisegundos hasta años. Usa
+      Esta herramienta convierte entre unidades de tiempo — desde nanosegundos hasta años. Usa
       factores precisos para las unidades pequeñas (segundos, minutos, horas, días) y promedios
       para meses y años, ya que su duración varía.
     </p>
@@ -125,7 +125,7 @@ const de: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>Was ist dieses Werkzeug?</h2>
     <p>
-      Dieses Werkzeug rechnet zwischen Zeiteinheiten um — von Millisekunden bis Jahren. Für
+      Dieses Werkzeug rechnet zwischen Zeiteinheiten um — von Nanosekunden bis Jahren. Für
       kleine Einheiten (Sekunden, Minuten, Stunden, Tage) verwendet es genaue Faktoren und für
       Monate sowie Jahre Durchschnittswerte, da deren Länge schwankt.
     </p>

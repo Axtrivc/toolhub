@@ -75,14 +75,14 @@ const zh: ReactNode = (
     <div>
       <h2>分隔符检测与参差不齐的行</h2>
       <p>
-        把分隔符保持为 <strong>自动检测</strong>，工具会扫描第一行中的制表符、逗号和分号——出现最多的胜出。你也可以随时手动覆盖。单元少于最宽行的行会被 <em>用空单元格补齐</em>（工具会告诉你补了多少个），这样缺失的末尾值就不会破坏表格。如果你的数据没有表头行，取消勾选 <strong>第一行是表头</strong>，即可生成通用的 <code>Column 1…N</code> 列名。
+        把分隔符保持为 <strong>自动检测</strong>，工具会扫描第一行中的制表符、逗号和分号——出现最多的胜出。你也可以随时手动覆盖。单元少于最宽行的行会被 <em>用空单元格补齐</em>（工具会告诉你补了多少个），这样缺失的末尾值就不会破坏表格。如果你的数据没有表头行，取消勾选 <strong>首行为表头</strong>，即可生成通用的 <code>Column 1…N</code> 列名。
       </p>
     </div>
 
     <div>
       <h2>对齐与美化填充</h2>
       <p>
-        Markdown 表格通过分隔行支持按列对齐：<code>:---</code> 左对齐，<code>:---:</code> 居中，<code>---:</code> 右对齐。你选定的对齐方式会应用到每一列。开启 <strong>美化填充列</strong>，每个单元格会用空格填充，使原始 Markdown 源码在纯文本编辑器中整齐对齐——这纯粹是视觉上的，但能让 diff 和手工编辑轻松得多。两种方式的渲染结果完全相同。
+        Markdown 表格通过分隔行支持按列对齐：<code>:---</code> 左对齐，<code>:---:</code> 居中，<code>---:</code> 右对齐。你选定的对齐方式会应用到每一列。开启 <strong>整齐填充列</strong>，每个单元格会用空格填充，使原始 Markdown 源码在纯文本编辑器中整齐对齐——这纯粹是视觉上的，但能让 diff 和手工编辑轻松得多。两种方式的渲染结果完全相同。
       </p>
     </div>
   </section>
@@ -93,7 +93,7 @@ const es: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>¿Qué es esta herramienta?</h2>
     <p>
-      Un <strong>convertidor de CSV a tabla Markdown</strong> transforma datos separados por comas o tabulaciones en una tabla Markdown con sabor de GitHub que puedes pegar directamente en un README, pull request, wiki o issue. Está pensado para desarrolladores y escritores que mantienen notas, documentación o contenido de sitios estáticos en Markdown. Todo se ejecuta 100 % en tu navegador — no se sube nada a ningún sitio.
+      Un <strong>convertidor de CSV a tabla Markdown</strong> transforma datos separados por comas o tabulaciones en una tabla Markdown con estilo de GitHub que puedes pegar directamente en un README, pull request, wiki o issue. Está pensado para desarrolladores y escritores que mantienen notas, documentación o contenido de sitios estáticos en Markdown. Todo se ejecuta 100 % en tu navegador — no se sube nada a ningún sitio.
     </p>
 
     <div>
@@ -106,14 +106,14 @@ const es: ReactNode = (
     <div>
       <h2>Detección del delimitador y filas desiguales</h2>
       <p>
-        Deja el delimitador en <strong>Auto-detectar</strong> y la primera línea se escanea en busca de tabuladores, comas y puntos y comas — gana el más frecuente. Siempre puedes anularlo manualmente. Las filas con menos celdas que la fila más ancha se <em>rellenan con celdas vacías</em> (la herramienta te dice cuántas se corrigieron), así un valor final que falte nunca corrompe tu tabla. Si tus datos no tienen fila de cabecera, desmarca <strong>La primera fila es cabecera</strong> y se generan cabeceras genéricas <code>Column 1…N</code>.
+        Deja el delimitador en <strong>Detectar auto</strong> y la primera línea se escanea en busca de tabuladores, comas y puntos y comas — gana el más frecuente. Siempre puedes anularlo manualmente. Las filas con menos celdas que la fila más ancha se <em>rellenan con celdas vacías</em> (la herramienta te dice cuántas se corrigieron), así un valor final que falte nunca corrompe tu tabla. Si tus datos no tienen fila de encabezado, desmarca <strong>La primera fila es encabezado</strong> y se generan encabezados genéricos <code>Column 1…N</code>.
       </p>
     </div>
 
     <div>
       <h2>Alineación y padding elegante</h2>
       <p>
-        Las tablas Markdown soportan alineación por columna mediante la fila separadora: <code>:---</code> para la izquierda, <code>:---:</code> para el centro y <code>---:</code> para la derecha. La alineación que elijas se aplica a cada columna. Activa <strong>Embellecer el relleno de columnas</strong> y cada celda se rellena con espacios para que el código fuente Markdown quede alineado en un editor de texto plano — solo es cosmético, pero facilita mucho los diffs y la edición manual. El renderizado es idéntico en cualquier caso.
+        Las tablas Markdown soportan alineación por columna mediante la fila separadora: <code>:---</code> para la izquierda, <code>:---:</code> para el centro y <code>---:</code> para la derecha. La alineación que elijas se aplica a cada columna. Activa <strong>Rellenar columnas</strong> y cada celda se rellena con espacios para que el código fuente Markdown quede alineado en un editor de texto plano — solo es cosmético, pero facilita mucho los diffs y la edición manual. El renderizado es idéntico en cualquier caso.
       </p>
     </div>
   </section>
@@ -137,14 +137,14 @@ const de: ReactNode = (
     <div>
       <h2>Trennzeichenerkennung und ungleiche Zeilen</h2>
       <p>
-        Lass das Trennzeichen auf <strong>Auto-Erkennung</strong> stehen und die erste Zeile wird auf Tabulatoren, Kommas und Semikolons gescannt — das häufigste gewinnt. Du kannst es jederzeit manuell überschreiben. Zeilen mit weniger Zellen als die breiteste Zeile werden <em>mit leeren Zellen aufgefüllt</em> (das Tool sagt dir, wie viele korrigiert wurden), sodass ein fehlender Endwert nie deine Tabelle beschädigt. Wenn deine Daten keine Kopfzeile haben, deaktiviere <strong>Erste Zeile ist Kopfzeile</strong> und es werden generische <code>Column 1…N</code>-Überschriften erzeugt.
+        Lass das Trennzeichen auf <strong>Automatisch erkennen</strong> stehen und die erste Zeile wird auf Tabulatoren, Kommas und Semikolons gescannt — das häufigste gewinnt. Du kannst es jederzeit manuell überschreiben. Zeilen mit weniger Zellen als die breiteste Zeile werden <em>mit leeren Zellen aufgefüllt</em> (das Tool sagt dir, wie viele korrigiert wurden), sodass ein fehlender Endwert nie deine Tabelle beschädigt. Wenn deine Daten keine Kopfzeile haben, deaktiviere <strong>Erste Zeile ist Kopfzeile</strong> und es werden generische <code>Column 1…N</code>-Überschriften erzeugt.
       </p>
     </div>
 
     <div>
       <h2>Ausrichtung und hübsches Padding</h2>
       <p>
-        Markdown-Tabellen unterstützen Spaltenausrichtung über die Trennzeile: <code>:---</code> für links, <code>:---:</code> für zentriert und <code>---:</code> für rechts. Die von dir gewählte Ausrichtung wird auf jede Spalte angewendet. Aktiviere <strong>Spalten hübsch auffüllen</strong> und jede Zelle wird mit Leerzeichen aufgefüllt, sodass die rohe Markdown-Quelle in einem Texteditor bündig ausgerichtet ist — rein kosmetisch, aber es erleichtert Diffs und manuelle Bearbeitung enorm. Das Rendering ist in beiden Fällen identisch.
+        Markdown-Tabellen unterstützen Spaltenausrichtung über die Trennzeile: <code>:---</code> für links, <code>:---:</code> für zentriert und <code>---:</code> für rechts. Die von dir gewählte Ausrichtung wird auf jede Spalte angewendet. Aktiviere <strong>Spalten auffüllen</strong> und jede Zelle wird mit Leerzeichen aufgefüllt, sodass die rohe Markdown-Quelle in einem Texteditor bündig ausgerichtet ist — rein kosmetisch, aber es erleichtert Diffs und manuelle Bearbeitung enorm. Das Rendering ist in beiden Fällen identisch.
       </p>
     </div>
   </section>

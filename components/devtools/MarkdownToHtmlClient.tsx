@@ -11,7 +11,8 @@ import { tui } from '@/lib/i18n/tool-l10n'
  * Markdown to HTML Converter —— 手写 CommonMark 子集 + GFM 表格
  *
  * 支持:标题 H1-H6、粗体/斜体/删除线、行内代码、代码块(```lang)、
- * 引用、有序/无序列表、链接(含 [t](url "title") 与 GFM 裸链接自动链接)、图片、水平线、GFM 表格。
+ * 引用、有序/无序列表、链接(含 [t](url "title") 与 GFM 裸链接自动链接)、图片、水平线、
+ * GFM 表格(单元格内 \| 转义竖线)、CommonMark 硬换行(非末行行尾 ≥2 空格 → <br />)。
  * 不支持:原始 HTML 直通(转义)、脚注、任务列表(简化支持)。
  * 输出经 DOMPurify 白名单消毒后才进 dangerouslySetInnerHTML。
  * 100% 本地。
@@ -135,7 +136,8 @@ function renderInline(text: string): string {
   // 斜体 *text*
   s = s.replace(/(^|[^*])\*([^*]+)\*/g, '$1<em>$2</em>')
   // 还原行内代码与暂存标签占位符
-  s = s.replace(/\uE000(\d+)\uE001/g, (_m, idx) => `<code>${codes[Number(idx)] ?? ''}</code>`)
+  // (代码内容里的 \uE004 硬换行标记回退为空格:CommonMark 行尾在 code span 内为空格,而非 <br />)
+  s = s.replace(/\uE000(\d+)\uE001/g, (_m, idx) => `<code>${(codes[Number(idx)] ?? '').replace(/\uE004 ?/g, ' ')}</code>`)
   s = s.replace(/\uE002(\d+)\uE003/g, (_m, idx) => tags[Number(idx)] ?? '')
   return s
 }
@@ -147,6 +149,16 @@ interface MdResult {
 // 大文档防线:转换 + DOMPurify 消毒同步跑在每次输入上,超长文档会明显卡顿,
 // 预览端还会把全部 HTML 挂进 DOM。100k 上限与 line-diff 等工具口径一致。
 const MAX_INPUT_LEN = 100_000
+
+/**
+ * 段落/引用多行合并:CommonMark 硬换行 —— 非末行行尾 ≥2 空格 → <br />(末行尾随空格不产生换行)。
+ * 占位符与行内代码(\uE000)同思路,避免 <br /> 被 renderInline 转义。
+ */
+function renderSoftLines(ls: string[]): string {
+  const HARD_BREAK = '\uE004'
+  const marked = ls.map((l, idx) => (idx === ls.length - 1 ? l : l.replace(/ {2,}$/, HARD_BREAK)))
+  return renderInline(marked.join(' ')).replace(/\uE004 ?/g, '<br />')
+}
 
 /** 把 markdown 文本转成 HTML(逐行状态机) */
 function markdownToHtml(md: string): string {
@@ -176,6 +188,33 @@ function markdownToHtml(md: string): string {
       out.push(`</${listStack.pop()!.type}>`)
     }
   }
+
+  // GFM 表格行拆分:\| 为单元格内转义竖线,不作为列分隔符
+  const splitRow = (r: string) => {
+    const stripped = r.replace(/^\s*\|/, '').replace(/\|\s*$/, '')
+    const cells: string[] = []
+    let cur = ''
+    for (let k = 0; k < stripped.length; k++) {
+      if (stripped[k] === '\\' && stripped[k + 1] === '|') {
+        cur += '|'
+        k++
+      } else if (stripped[k] === '|') {
+        cells.push(cur.trim())
+        cur = ''
+      } else {
+        cur += stripped[k]
+      }
+    }
+    cells.push(cur.trim())
+    return cells
+  }
+  // GFM:分隔行(---)必须与表头行单元格数一致,否则不构成表格(防「段落含 | + --- 水平线」误判)
+  const isTableStart = (idx: number): boolean =>
+    lines[idx].includes('|') &&
+    idx + 1 < n &&
+    /^\s*\|?[\s:|-]+\|?\s*$/.test(lines[idx + 1]) &&
+    lines[idx + 1].includes('-') &&
+    splitRow(lines[idx]).length === splitRow(lines[idx + 1]).length
 
   while (i < n) {
     let line = lines[i]
@@ -230,15 +269,13 @@ function markdownToHtml(md: string): string {
         quoteLines.push(lines[i].replace(/^>\s?/, ''))
         i++
       }
-      out.push(`<blockquote>${renderInline(quoteLines.join(' '))}</blockquote>`)
+      out.push(`<blockquote>${renderSoftLines(quoteLines)}</blockquote>`)
       continue
     }
 
-    // GFM 表格(检测 | 与下一行分隔符)
-    if (line.includes('|') && i + 1 < n && /^\s*\|?[\s:|-]+\|?\s*$/.test(lines[i + 1]) && lines[i + 1].includes('-')) {
+    // GFM 表格(检测 | 与下一行分隔符,列数须与表头一致)
+    if (isTableStart(i)) {
       closeList()
-      const splitRow = (r: string) =>
-        r.replace(/^\s*\|/, '').replace(/\|\s*$/, '').split('|').map((c) => c.trim())
       const header = splitRow(line)
       i += 2 // 跳过分隔行
       const rows: string[][] = []
@@ -299,12 +336,12 @@ function markdownToHtml(md: string): string {
       i < n &&
       lines[i].trim() !== '' &&
       !/^(#{1,6}\s|>\s?|[-*+]\s|\d+\.\s|```|\*\*\*|---|___)/.test(lines[i]) &&
-      !(lines[i].includes('|') && i + 1 < n && /^\s*\|?[\s:|-]+\|?\s*$/.test(lines[i + 1]) && lines[i + 1].includes('-'))
+      !isTableStart(i)
     ) {
       paraLines.push(lines[i])
       i++
     }
-    out.push(`<p>${renderInline(paraLines.join(' '))}</p>`)
+    out.push(`<p>${renderSoftLines(paraLines)}</p>`)
   }
   closeList()
   const res: MdResult = { html: out.join('\n') }

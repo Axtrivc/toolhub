@@ -79,7 +79,7 @@ const es: ReactNode = (
 // ──────────────────────────── Deutsch ────────────────────────────
 const de: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
-    <h2>Was ist dieses Tool?</h2>
+    <h2>Was ist dieses Werkzeug?</h2>
     <p>Dieser Rechner zeigt dein <strong>Idealgewicht</strong> mit drei klassischen medizinischen Formeln (Devine, Robinson, Hamwi) sowie dem BMI-basierten gesunden Bereich. Jede Formel wurde für unterschiedliche Bevölkerungsgruppen entwickelt und liefert leicht abweichende Ergebnisse.</p>
     <div>
       <h2>Die drei Formeln</h2>

@@ -27,7 +27,7 @@ Paste any text here — a chat prompt, a document, a chunk of code — and this 
 
 For example, "Hello, world!" is roughly 4 tokens. Longer English prose averages about 0.75 words per token. Code and non-English text usually tokenize less efficiently.
 
-Remember: real billing uses the provider's exact tokenizer (cl100k_base for GPT-4o), so treat every number here as an estimate.`
+Remember: real billing uses the provider's exact tokenizer (o200k_base for GPT-4o), so treat every number here as an estimate.`
 
 // 模型价格集中管理在 lib/model-pricing.ts（数据源 tokencost.app，最后核对 2026-08-14）
 const MODELS: ModelPrice[] = MODEL_PRICES
@@ -232,7 +232,7 @@ export function GptTokenCounterClient() {
         {L('noteF1', '⚠️ This is an ')}
         <strong>{L('estimateWord', 'estimate')}</strong>
         {L('noteF2', ", not an exact count. Real billing uses each provider's tokenizer (GPT-4o uses ")}
-        <code>cl100k_base</code>
+        <code>o200k_base</code>
         {L('noteF3', "); this heuristic averages the 4-chars-per-token rule of thumb (≈0.75 tokens per CJK character) with a word/punctuation split. Prices are listed as of 2026-08 and change often — always confirm on the provider's pricing page.")}
       </p>
     </div>

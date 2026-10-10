@@ -192,11 +192,20 @@ const DEFAULT_XML = `<?xml version="1.0" encoding="UTF-8"?>
   </book>
 </catalog>`
 
+/** 序列化时重转义:DOMParser 解码了实体,直接拼回会产出无法再解析的 XML(&、<) */
+function escapeXmlText(s: string): string {
+  return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+}
+
+function escapeXmlAttr(s: string): string {
+  return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;')
+}
+
 function formatXmlNode(node: Node, depth: number, indent: number): string {
   const pad = ' '.repeat(depth * indent)
   if (node.nodeType === Node.TEXT_NODE) {
     const t = (node.textContent ?? '').trim()
-    return t ? `\n${pad}${t}` : ''
+    return t ? `\n${pad}${escapeXmlText(t)}` : ''
   }
   // CDATA 原样保留(不做空白裁剪):此前美化会把 CDATA 内容整个丢弃,
   // 而 minify(XMLSerializer)却保留 —— 同一文档两种模式输出不一致且丢数据
@@ -204,20 +213,50 @@ function formatXmlNode(node: Node, depth: number, indent: number): string {
     const t = node.textContent ?? ''
     return t ? `\n${pad}<![CDATA[${t}]]>` : ''
   }
+  // 注释与处理指令同样保留:丢弃即数据丢失,且 minify 模式(XMLSerializer)也保留它们
+  if (node.nodeType === Node.COMMENT_NODE) {
+    return `\n${pad}<!--${node.textContent ?? ''}-->`
+  }
+  if (node.nodeType === Node.PROCESSING_INSTRUCTION_NODE) {
+    const pi = node as ProcessingInstruction
+    return `\n${pad}<?${pi.target}${pi.data ? ` ${pi.data}` : ''}?>`
+  }
   if (node.nodeType !== Node.ELEMENT_NODE) return ''
   const el = node as Element
-  const attrs = Array.from(el.attributes).map((a) => ` ${a.name}="${a.value.replace(/"/g, '&quot;')}"`).join('')
+  const attrs = Array.from(el.attributes).map((a) => ` ${a.name}="${escapeXmlAttr(a.value)}"`).join('')
   const children = Array.from(el.childNodes)
   const hasElementChild = children.some((c) => c.nodeType === Node.ELEMENT_NODE)
   if (children.length === 0 || (children.length === 1 && children[0].nodeType === Node.TEXT_NODE && !(children[0].textContent ?? '').trim())) {
     return `\n${pad}<${el.tagName}${attrs} />`
   }
-  const inner = children.map((c) => formatXmlNode(c, hasElementChild ? depth + 1 : 0, indent)).join('')
   if (!hasElementChild) {
-    // 纯文本子节点保持一行
-    return `\n${pad}<${el.tagName}${attrs}>${inner}\n${pad}</${el.tagName}>`
+    // 纯文本/CDATA/注释子节点保持一行
+    const inline = children.map((c) => {
+      if (c.nodeType === Node.CDATA_SECTION_NODE) return `<![CDATA[${c.textContent ?? ''}]]>`
+      if (c.nodeType === Node.COMMENT_NODE) return `<!--${c.textContent ?? ''}-->`
+      if (c.nodeType === Node.PROCESSING_INSTRUCTION_NODE) {
+        const pi = c as ProcessingInstruction
+        return `<?${pi.target}${pi.data ? ` ${pi.data}` : ''}?>`
+      }
+      return escapeXmlText((c.textContent ?? '').trim())
+    }).join('')
+    return `\n${pad}<${el.tagName}${attrs}>${inline}</${el.tagName}>`
   }
+  const inner = children.map((c) => formatXmlNode(c, depth + 1, indent)).join('')
   return `\n${pad}<${el.tagName}${attrs}>${inner}\n${pad}</${el.tagName}>`
+}
+
+/** minify 用:删除「元素内容里仅含空白」的文本节点(父节点无任何非空白文本时才删,
+ *  混排内容原样保留)——XMLSerializer 只重序列化不删空白,不预处理等于没压缩 */
+function stripInsignificantWhitespace(doc: Document) {
+  doc.querySelectorAll('*').forEach((el) => {
+    const kids = Array.from(el.childNodes)
+    if (!kids.some((k) => k.nodeType === Node.ELEMENT_NODE)) return
+    if (kids.some((k) => k.nodeType === Node.TEXT_NODE && (k.textContent ?? '').trim())) return
+    kids.forEach((k) => {
+      if (k.nodeType === Node.TEXT_NODE && !(k.textContent ?? '').trim()) el.removeChild(k)
+    })
+  })
 }
 
 export function XmlFormatterClient() {
@@ -234,11 +273,22 @@ export function XmlFormatterClient() {
     try {
       const doc = new DOMParser().parseFromString(xml, 'application/xml')
       const errEl = doc.querySelector('parsererror')
-      if (errEl) throw new Error(errEl.textContent?.split('\n')[0] || 'Invalid XML')
+      if (errEl) {
+        // Chrome 的 parsererror 文案前缀是通用样板,抽出 "error on line N ..." 真正报错行
+        const raw = errEl.textContent ?? ''
+        throw new Error(raw.match(/error on line \d+ at column \d+: [^\n]*/)?.[0] || raw.split('\n')[0] || 'Invalid XML')
+      }
       if (mode === 'minify') {
+        stripInsignificantWhitespace(doc)
         setOutput(new XMLSerializer().serializeToString(doc))
       } else {
-        setOutput(formatXmlNode(doc.documentElement, 0, indent).trimStart())
+        // 从 Document 层格式化,顶层注释/处理指令一并保留;<?xml?> 声明会被
+        // DOMParser 吞掉不成节点(minify 走 XMLSerializer 会重新合成),
+        // 这里直接回填输入里的原始声明,保证两种模式都不丢 encoding 信息。
+        // \s 必须有:合法声明的 xml 后必有空白,否则会把 <?xml-stylesheet…?> 误判成声明导致重复
+        const decl = xml.match(/^\s*<\?xml\s[^?]*\?>\s*/)?.[0]?.trim()
+        const parts = Array.from(doc.childNodes).map((n) => formatXmlNode(n, 0, indent)).join('')
+        setOutput((decl ? `${decl}\n` : '') + parts.trimStart())
       }
     } catch (e) {
       setError((e as Error).message)
@@ -283,7 +333,7 @@ export function XmlFormatterClient() {
           <pre className="overflow-x-auto rounded-lg border p-4 font-mono text-xs whitespace-pre-wrap" style={{ borderColor: 'rgb(var(--border))', backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text))' }}>{output}</pre>
         </div>
       )}
-      <ResultActions summary={output} filename="formatted.xml" downloadContent={output} mime="application/xml;charset=utf-8;" />
+      <ResultActions summary={output} filename="formatted.xml" downloadContent={output} mime="application/xml;charset=utf-8;" disabled={!output} />
       <CalculatorNote>{L('note', '📄 Parsing uses your browser’s own XML engine — namespace-aware and spec-compliant. Whitespace-only text between elements is discarded when beautifying.')}</CalculatorNote>
     </div>
   )

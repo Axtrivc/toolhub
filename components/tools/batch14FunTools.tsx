@@ -292,7 +292,11 @@ function encodeMorse(text: string): string {
 }
 
 function decodeMorse(morse: string): string {
-  return morse.trim().split(/\s+/).map((tok) => (tok === '/' ? ' ' : REVERSE_MORSE[tok] ?? '?')).join('')
+  // 词分隔两种写法都收:'/';或 2 个及以上连续空格(FAQ 教的就是这两种)。
+  // 若只按 /\s+/ 整体切词,双空格分词会被坍缩成连写("SOS  SOS" → "SOSSOS")
+  return morse.trim().split(/\s*\/\s*|\s{2,}/).filter(Boolean).map((word) =>
+    word.split(/\s+/).map((tok) => REVERSE_MORSE[tok] ?? '?').join(''),
+  ).join(' ')
 }
 
 export function MorseCodeTranslatorClient() {
@@ -464,14 +468,17 @@ interface TypeStats { wpmGross: number; wpmNet: number; accuracy: number; elapse
 
 /** 结算:5 字符 = 1 词的标准口径(对 CJK 句子同样适用,统一可比) */
 function computeTypeStats(prompt: string, typed: string, startedAt: number): TypeStats {
-  const elapsedMin = (Date.now() - startedAt) / 60000
+  // 整段粘贴会在同一毫秒内触发结算:耗时 0 → 除以 0 → WPM 显示 Infinity。
+  // 耗时下限钳到 1 秒(正常手打远超 1s,读数不受影响)
+  const elapsedMs = Math.max(Date.now() - startedAt, 1000)
+  const elapsedMin = elapsedMs / 60000
   const words = prompt.length / 5
   const errors = [...typed].filter((c, i) => c !== prompt[i]).length
   return {
     wpmGross: Math.round(words / elapsedMin),
     wpmNet: Math.max(0, Math.round((words - errors) / elapsedMin)),
     accuracy: Math.round(((prompt.length - errors) / prompt.length) * 100),
-    elapsed: Math.round((Date.now() - startedAt) / 1000),
+    elapsed: Math.round(elapsedMs / 1000),
   }
 }
 
@@ -558,7 +565,9 @@ export function TypingSpeedTestClient() {
           渲染细节容器 aria-hidden,另用 sr-only 段落给出原始句子,
           屏读用户仍能拿到需要抄写的文本 */}
       <p className="sr-only">{prompt}</p>
-      <div aria-hidden="true" className="rounded-lg border p-4 font-mono text-base leading-relaxed" style={{ borderColor: 'rgb(var(--border))', backgroundColor: 'rgb(var(--bg-subtle))' }}>
+      {/* whitespace-pre-wrap:代码题库含真实的换行与缩进,默认空白折叠会把它们
+          显示成单个空格,打字者"看到的"与"要输入的"不一致 */}
+      <div aria-hidden="true" className="whitespace-pre-wrap rounded-lg border p-4 font-mono text-base leading-relaxed" style={{ borderColor: 'rgb(var(--border))', backgroundColor: 'rgb(var(--bg-subtle))' }}>
         {[...prompt].map((ch, i) => {
           const state = i < typed.length ? (typed[i] === ch ? 'ok' : 'bad') : 'pending'
           return (
@@ -702,9 +711,17 @@ export function RandomTeamGeneratorClient() {
 }
 
 // ── 密码熵检查 ──
+/** 词典起始词(原样匹配或 leet 还原后匹配) */
+const DICT_START = /^(?:password|passwort|contrasena|motdepasse)/i
+
+/** Leet 还原(@→a、4→a、0→o、1→l、3→e、$→s、5→s、7→t):
+ *  真实破解器试 "password" 的同时也先试 "P@ssw0rd",FAQ 明言 leet 替换会被识别 —— 在此落地 */
+function deLeet(s: string): string {
+  return s.toLowerCase().replace(/[@4]/g, 'a').replace(/0/g, 'o').replace(/1/g, 'l').replace(/3/g, 'e').replace(/[$5]/g, 's').replace(/7/g, 't')
+}
+
 /** 常见弱口令模式:标签走 tui 三语(key, 英文 fallback),不再渲染硬编码英文 */
 const COMMON_PATTERNS: [RegExp, string, string][] = [
-  [/^(?:password|passwort|contrasena|motdepasse)/i, 'penDictStart', 'starts with "password"'],
   [/(?:123|abc|qwe|asd)/i, 'penKeyboardSeq', 'keyboard sequence'],
   [/^(.{0,3})\1+\1+$/i, 'penRepeatRun', 'single repeated character run'],
 ]
@@ -742,6 +759,8 @@ export function PasswordEntropyCheckerClient() {
     // 重复字符占比惩罚
     const uniqRatio = new Set(pw).size / pw.length
     if (uniqRatio < 0.6) { bits *= uniqRatio / 0.6 * 0.8; penalties.push(L('penRepeat', 'many repeated characters')) }
+    // 词典起始词:原文或 leet 还原后命中都算("P@ssw0rd!" 与 "password123" 同罪)
+    if (DICT_START.test(pw) || DICT_START.test(deLeet(pw))) { bits *= 0.5; penalties.push(L('penDictStart', 'starts with "password"')) }
     for (const [re, key, fb] of COMMON_PATTERNS) {
       if (re.test(pw)) { bits *= 0.5; penalties.push(L(key, fb)) }
     }

@@ -15,9 +15,9 @@ const en: ReactNode = (
     <div>
       <h2>How It Works</h2>
       <p>
-        The tool reads the keys of the first object as CSV headers, then writes each object as a row.
-        Fields containing commas, quotes, or newlines are automatically wrapped in quotes and escaped
-        properly.
+        The tool builds the CSV headers from the keys of every object (in order of first appearance),
+        then writes each object as a row. Fields containing commas, quotes, or newlines are
+        automatically wrapped in quotes and escaped properly.
       </p>
     </div>
     <div>
@@ -42,7 +42,7 @@ const zh: ReactNode = (
     <div>
       <h2>工作原理</h2>
       <p>
-        工具读取第一个对象的键作为 CSV 表头,然后将每个对象写为一行。包含逗号、引号或换行符的字段会自动用引号包裹并正确转义。
+        工具会收集所有对象的键作为 CSV 表头(按首次出现的顺序),然后将每个对象写为一行。包含逗号、引号或换行符的字段会自动用引号包裹并正确转义。
       </p>
     </div>
     <div>
@@ -68,9 +68,10 @@ const es: ReactNode = (
     <div>
       <h2>Cómo funciona</h2>
       <p>
-        La herramienta lee las claves del primer objeto como encabezados CSV y luego escribe cada
-        objeto como una fila. Los campos que contienen comas, comillas o saltos de línea se envuelven
-        automáticamente entre comillas y se escapan correctamente.
+        La herramienta construye los encabezados CSV con las claves de todos los objetos (en orden de
+        primera aparición) y luego escribe cada objeto como una fila. Los campos que contienen comas,
+        comillas o saltos de línea se envuelven automáticamente entre comillas y se escapan
+        correctamente.
       </p>
     </div>
     <div>
@@ -96,9 +97,10 @@ const de: ReactNode = (
     <div>
       <h2>Wie es funktioniert</h2>
       <p>
-        Das Werkzeug liest die Schlüssel des ersten Objekts als CSV-Kopfzeilen und schreibt dann jedes
-        Objekt als Zeile. Felder mit Kommas, Anführungszeichen oder Zeilenumbrüchen werden automatisch
-        in Anführungszeichen gesetzt und korrekt maskiert.
+        Das Werkzeug baut die CSV-Kopfzeilen aus den Schlüsseln aller Objekte auf (in der Reihenfolge
+        ihres ersten Auftretens) und schreibt dann jedes Objekt als Zeile. Felder mit Kommas,
+        Anführungszeichen oder Zeilenumbrüchen werden automatisch in Anführungszeichen gesetzt und
+        korrekt maskiert.
       </p>
     </div>
     <div>

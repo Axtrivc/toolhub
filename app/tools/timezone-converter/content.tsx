@@ -83,8 +83,8 @@ const zh: ReactNode = (
       <h2>如何阅读这张表</h2>
       <p>
         被标为<strong>绿色</strong>的行落在当地营业时段（9:00–17:00）内 —— 尽量挑选
-        每一行都变绿的时段。当换算后的时间落在与源时区不同的日历日期时，会出现一个<strong>跨日徽标</strong>（+1 day / -1 day）；这正是与亚太地区队友协作时「等等，是你那里的
-        周二还是我这边的周二？」这种困惑的经典来源。表格下方的时分条会为每个时区展示一条
+        每一行都变绿的时段。当换算后的时间落在与源时区不同的日历日期时，会出现一个<strong>跨日徽标</strong>（+1 天 / -1 天）；这正是与亚太地区队友协作时「等等，是你那里的
+        周二还是我这边的周二？」这种困惑的经典来源。表格下方的小时条会为每个时区展示一条
         可视化的 0–23 小时条带，所选小时以蓝色标出。
       </p>
     </div>
@@ -129,7 +129,7 @@ const es: ReactNode = (
       <h2>Cómo leer la tabla</h2>
       <p>
         Las filas teñidas de <strong>verde</strong> caen dentro del horario laboral local (9:00–17:00) — busca franjas en las que
-        todas las filas estén verdes. Una <strong>insignia de cambio de día</strong> (+1 day / -1 day) aparece cuando la hora convertida
+        todas las filas estén verdes. Una <strong>insignia de cambio de día</strong> (+1 día / -1 día) aparece cuando la hora convertida
         cae en una fecha de calendario distinta a la de origen; esta es la fuente clásica de la confusión de «espera, ¿tu
         martes o mi martes?» con los compañeros de Asia-Pacífico. Las barras de hora bajo la tabla ofrecen una
         franja visual de 0–23 horas por zona, con la hora seleccionada marcada en azul.
@@ -137,7 +137,7 @@ const es: ReactNode = (
     </div>
 
     <div>
-      <h2>Consejos y trampas</h2>
+      <h2>Consejos y errores comunes</h2>
       <p>
         <em>«Mi zona local»</em> se detecta a partir de los ajustes de tu dispositivo, así que compruébala si viajas
         o usas un reloj de sistema ajustado por VPN. Recuerda que la entrada siempre se lee en la zona <em>de origen</em> —
@@ -177,9 +177,9 @@ const de: ReactNode = (
       <h2>Die Tabelle lesen</h2>
       <p>
         Die <strong>grün</strong> eingefärbten Zeilen fallen in die lokalen Geschäftszeiten (9:00–17:00) — strebe Fenster an, in denen
-        jede Zeile grün ist. Ein <strong>Tageswechsel-Abzeichen</strong> (+1 day / -1 day) erscheint, wenn die umgerechnete Zeit
+        jede Zeile grün ist. Ein <strong>Tageswechsel-Abzeichen</strong> (+1 Tag / -1 Tag) erscheint, wenn die umgerechnete Zeit
         auf ein anderes Kalenderdatum als die Quelle fällt; das ist die klassische Quelle für die Verwirrung „warte, dein
-        Dienstag oder mein Dienstag?" mit Teamkollegen im Asia-Pazifik-Raum. Die Stundenbalken unter der Tabelle bieten einen
+        Dienstag oder mein Dienstag?“ mit Teamkollegen im Asia-Pazifik-Raum. Die Stundenbalken unter der Tabelle bieten einen
         visuellen 0–23-Stunden-Streifen pro Zone, mit der gewählten Stunde in Blau markiert.
       </p>
     </div>
@@ -187,7 +187,7 @@ const de: ReactNode = (
     <div>
       <h2>Tipps und Fallstricke</h2>
       <p>
-        <em>„Meine lokale Zone"</em> wird aus deinen Geräteeinstellungen erkannt, also prüfe sie nach, wenn du reist
+        <em>„Meine lokale Zone“</em> wird aus deinen Geräteeinstellungen erkannt, also prüfe sie nach, wenn du reist
         oder eine per VPN verstellte Systemuhr verwendest. Denk daran, dass die Eingabe immer in der <em>Quell-</em>zone gelesen wird —
         ein Druck auf <strong>Now</strong> füllt die aktuelle Zeit, wie sie in dieser Zone gesehen wird, ein, was von deiner
         eigenen Uhr abweichen kann. An den Wochenenden der Sommerzeit-Umstellung kann eine bestimmte Uhrzeit in der

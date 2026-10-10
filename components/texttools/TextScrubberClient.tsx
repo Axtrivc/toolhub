@@ -226,6 +226,7 @@ export function TextScrubberClient({ slug = 'text-cleaner' }: { slug?: string })
           </div>
           <textarea
             readOnly
+            aria-label={L('cleanedText', 'Cleaned text')}
             value={output}
             rows={8}
             spellCheck={false}

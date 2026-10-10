@@ -82,8 +82,8 @@ export function SaasLtvChurnCalculatorClient() {
     const fmtMaybe = (n: number) => (isFinite(n) ? fmtMoney(n) : '∞')
     return [
       L('summaryTitle', 'SaaS Metrics Summary'),
-      `  ${L('sArpu', 'ARPU: ')}${fmtMoney(toNumStrict(arpu))}/mo  •  ${L('sGrossMargin', 'Gross margin: ')}${margin}%  •  ${L('sChurn', 'Churn: ')}${churn}%/mo`,
-      `  ${L('sCac', 'CAC: ')}${fmtMoney(toNumStrict(cac))}  •  ${L('sGrowth', 'Growth: ')}${growth}%/mo  •  ${L('sCustomers', 'Customers: ')}${customers}`,
+      `  ${L('sArpu', 'ARPU: ')}${fmtMoney(toNumStrict(arpu))}/mo  •  ${L('sGrossMargin', 'Gross margin: ')}${toNumStrict(margin)}%  •  ${L('sChurn', 'Churn: ')}${toNumStrict(churn)}%/mo`,
+      `  ${L('sCac', 'CAC: ')}${fmtMoney(toNumStrict(cac))}  •  ${L('sGrowth', 'Growth: ')}${toNumStrict(growth)}%/mo  •  ${L('sCustomers', 'Customers: ')}${toNumStrict(customers)}`,
       L('sResults', 'Results:'),
       `  ${L('sExpectedLifetime', 'Expected customer lifetime: ')}${isFinite(parsed.lifetimeMonths) ? `${parsed.lifetimeMonths.toFixed(1)} ${L('months', 'months')}` : L('infinityMonths', '∞ (200+ months)')}`,
       `  ${L('sLtv', 'LTV: ')}${fmtMaybe(parsed.ltv)}`,

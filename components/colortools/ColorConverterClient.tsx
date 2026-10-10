@@ -41,12 +41,13 @@ export function ColorConverterClient() {
     if (!rgb) return null
     const hex = rgbToHex(rgb)
     const hsl = rgbToHsl(rgb)
-    // 有 alpha 时:HEX 输出 8 位(#rrggbbaa),RGB 输出 rgba(…, a)
+    // 有 alpha 时:HEX 输出 8 位(#rrggbbaa),RGB 输出 rgba(…, a),HSL 输出 hsla(…, a)
     const alphaHex = alpha != null ? Math.round(alpha * 255).toString(16).padStart(2, '0') : ''
     return {
       rgb,
       hex, // 6 位实色,取色器与预览底色用
       hsl,
+      alpha, // null = 无 alpha;有则 HSL 卡片输出 hsla(…, a),与 FAQ 口径一致
       hexOut: `${hex}${alphaHex}`.toUpperCase(),
       rgbOut:
         alpha != null
@@ -104,7 +105,14 @@ export function ColorConverterClient() {
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
             <ColorResultCard label="HEX" value={parsed.hexOut} />
             <ColorResultCard label="RGB" value={parsed.rgbOut} />
-            <ColorResultCard label="HSL" value={`hsl(${parsed.hsl.h}, ${parsed.hsl.s}%, ${parsed.hsl.l}%)`} />
+            <ColorResultCard
+              label="HSL"
+              value={
+                parsed.alpha != null
+                  ? `hsla(${parsed.hsl.h}, ${parsed.hsl.s}%, ${parsed.hsl.l}%, ${parsed.alpha.toFixed(2)})`
+                  : `hsl(${parsed.hsl.h}, ${parsed.hsl.s}%, ${parsed.hsl.l}%)`
+              }
+            />
           </div>
         </>
       ) : (

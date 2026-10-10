@@ -8,6 +8,7 @@ export const imageToBase64L10n: ToolL10n = {
   zh: {
     ui: {
       'base64DataUri': 'Base64 Data URI',
+      'base64Size': 'Base64 大小 ≈ ',
       'change': '更换',
       'copy': '复制',
       'cssBg': 'CSS background-image',
@@ -35,6 +36,7 @@ export const imageToBase64L10n: ToolL10n = {
   es: {
     ui: {
       'base64DataUri': 'Data URI en Base64',
+      'base64Size': 'Tamaño en Base64 ≈ ',
       'change': 'Cambiar',
       'copy': 'Copiar',
       'cssBg': 'CSS background-image',
@@ -62,6 +64,7 @@ export const imageToBase64L10n: ToolL10n = {
   de: {
     ui: {
       'base64DataUri': 'Base64-Data-URI',
+      'base64Size': 'Base64-Größe ≈ ',
       'change': 'Ändern',
       'copy': 'Kopieren',
       'cssBg': 'CSS background-image',

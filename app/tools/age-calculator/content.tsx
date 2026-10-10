@@ -83,8 +83,8 @@ const en: ReactNode = (
     <p>
       People born on February 29 only have a true birthday every four years. By convention, in
       non-leap years their birthday is celebrated on February 28 or March 1, depending on the
-      country and context. This calculator handles February 29 births by treating March 1 as the
-      age-increment day in non-leap years.
+      country and context. This calculator anchors the anniversary to the last day of the month,
+      so a February 29 birth turns a year older on February 28 in non-leap years.
     </p>
   </section>
 )
@@ -146,7 +146,7 @@ const zh: ReactNode = (
 
     <h2>闰年带来的麻烦</h2>
     <p>
-      2 月 29 日出生的人每四年才有一次真正的生日。按照惯例,在非闰年,他们的生日会在 2 月 28 日或 3 月 1 日庆祝,具体取决于国家和场景。本计算器在非闰年中将 3 月 1 日作为年龄增长日来处理 2 月 29 日的出生。
+      2 月 29 日出生的人每四年才有一次真正的生日。按照惯例,在非闰年,他们的生日会在 2 月 28 日或 3 月 1 日庆祝,具体取决于国家和场景。本计算器把周年锚定到当月最后一天,因此 2 月 29 日出生的人在非闰年中于 2 月 28 日长一岁。
     </p>
   </section>
 )
@@ -208,7 +208,7 @@ const es: ReactNode = (
 
     <h2>La complicación de los años bisiestos</h2>
     <p>
-      Las personas nacidas el 29 de febrero solo tienen un verdadero cumpleaños cada cuatro años. Por convención, en los años no bisiestos su cumpleaños se celebra el 28 de febrero o el 1 de marzo, según el país y el contexto. Esta calculadora trata los nacimientos del 29 de febrero considerando el 1 de marzo como el día de incremento de edad en los años no bisiestos.
+      Las personas nacidas el 29 de febrero solo tienen un verdadero cumpleaños cada cuatro años. Por convención, en los años no bisiestos su cumpleaños se celebra el 28 de febrero o el 1 de marzo, según el país y el contexto. Esta calculadora ancla el aniversario al último día del mes, de modo que una persona nacida el 29 de febrero cumple años el 28 de febrero en los años no bisiestos.
     </p>
   </section>
 )
@@ -270,7 +270,7 @@ const de: ReactNode = (
 
     <h2>Die Schaltjahr-Komplikation</h2>
     <p>
-      Personen, die am 29. Februar geboren sind, haben nur alle vier Jahre einen echten Geburtstag. Konventionell wird ihr Geburtstag in Nicht-Schaltjahren am 28. Februar oder 1. März gefeiert, je nach Land und Kontext. Dieser Rechner behandelt Geburten am 29. Februar, indem er in Nicht-Schaltjahren den 1. März als den Tag der Alterserhöhung betrachtet.
+      Personen, die am 29. Februar geboren sind, haben nur alle vier Jahre einen echten Geburtstag. Konventionell wird ihr Geburtstag in Nicht-Schaltjahren am 28. Februar oder 1. März gefeiert, je nach Land und Kontext. Dieser Rechner verankert den Jahrestag am letzten Tag des Monats, sodass eine am 29. Februar geborene Person in Nicht-Schaltjahren am 28. Februar ein Jahr älter wird.
     </p>
   </section>
 )

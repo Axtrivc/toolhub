@@ -27,6 +27,12 @@ function randomHex(n: number): string {
   return [...b].map((x) => x.toString(16).padStart(2, '0')).join('')
 }
 
+/** 盐输入是否合法(与 hexToBytes 同规则:非空、偶数长度、纯 hex)。
+ *  提前校验让报错文案走 tui(i18n),而不是透出 hexToBytes 的英文硬编码异常。 */
+function isValidSaltHex(s: string): boolean {
+  return /^[0-9a-fA-F]+$/.test(s) && s.length % 2 === 0
+}
+
 /** hex 字符串 → 字节(校验格式,非法抛错) */
 function hexToBytes(hex: string): Uint8Array {
   if (hex.length === 0 || hex.length % 2 !== 0 || !/^[0-9a-fA-F]+$/.test(hex)) {
@@ -101,6 +107,9 @@ export function BcryptHashGeneratorClient() {
       if (algorithm === 'bcrypt') {
         out = hashSync(password, genSaltSync(cost))
       } else {
+        if (!isValidSaltHex(saltHex)) {
+          throw new Error(L('errorInvalidSalt', 'The salt must be a non-empty, even-length hex string (0-9, a-f).'))
+        }
         out = await saltedShaHash(algorithm === 'sha256' ? 'SHA-256' : 'SHA-512', saltHex, password)
       }
       setHash(out)
@@ -131,6 +140,9 @@ export function BcryptHashGeneratorClient() {
         setVerifyResult(compareSync(verifyPassword, h))
       } else if (h.startsWith('sha256$') || h.startsWith('sha512$')) {
         const [tag, salt] = h.split('$')
+        if (!isValidSaltHex(salt)) {
+          throw new Error(L('errorInvalidSalt', 'The salt must be a non-empty, even-length hex string (0-9, a-f).'))
+        }
         const recomputed = await saltedShaHash(tag === 'sha256' ? 'SHA-256' : 'SHA-512', salt, verifyPassword)
         setVerifyResult(recomputed === h)
       } else {

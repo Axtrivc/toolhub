@@ -153,7 +153,7 @@ const de: ReactNode = (
       <p>
         Wähle ein Zieldatum (und optional eine Uhrzeit) und die Anzeige tickt live und zeigt die verbleibenden{' '}
         <strong>Tage, Stunden, Minuten und Sekunden</strong>. Ist der Zeitpunkt bereits vergangen, wechseln dieselben
-        Karten zu verstrichener Zeit — „vor X Tagen". Die Aufschlüsselungskarten ergänzen die <strong>Gesamttage</strong>{' '}
+        Karten zu verstrichener Zeit — „vor X Tagen“. Die Aufschlüsselungskarten ergänzen die <strong>Gesamttage</strong>{' '}
         (inklusive des anteiligen Tages), die Spanne als <strong>Wochen + Tage</strong> sowie die Anzahl an{' '}
         <strong>Werktagen</strong> ohne Samstag und Sonntag. Die Vorlagen springen zu Neujahr, Weihnachten oder 30/90
         Tage ab jetzt.
@@ -176,9 +176,9 @@ const de: ReactNode = (
       <h2>Wissenswertes</h2>
       <p>
         Die gesamte Arithmetik verwendet <strong>die lokale Zeitzone deines Geräts</strong>, deshalb bedeutet ein
-        Countdown bis „Mitternacht Neujahr" die Mitternacht dort, wo du bist. Tageszählungen sind ganze Kalendertage
+        Countdown bis „Mitternacht Neujahr“ die Mitternacht dort, wo du bist. Tageszählungen sind ganze Kalendertage
         — die anteiligen Stunden des aktuellen Tages erscheinen nur in der tickenden Uhr und der Dezimalzahl der
-        „Gesamttage". Die Zahl der <em>Werktage</em> ignoriert gesetzliche Feiertage (diese unterscheiden sich je
+        „Gesamttage“. Die Zahl der <em>Werktage</em> ignoriert gesetzliche Feiertage (diese unterscheiden sich je
         nach Land und Unternehmen), betrachte sie also als eine Schätzung der Arbeitstage und nicht als einen
         offiziellen Zeitplan.
       </p>

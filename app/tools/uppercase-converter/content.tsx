@@ -107,7 +107,7 @@ const de: ReactNode = (
       <h2>Wann du Großschreibung einsetzt</h2>
       <ul>
         <li><strong>Überschriften und Titel</strong> zur Hervorhebung in Print und Design</li>
-        <li><strong>Akronyme</strong> wie NASA, HTML, CEO — hier ist alles groß Konvention</li>
+        <li><strong>Akronyme</strong> wie NASA, HTML, CEO — die Konvention ist alles in Großbuchstaben</li>
         <li><strong>Warnschilder</strong> und Beschilderung, wo Sichtbarkeit zählt</li>
         <li><strong>Tastaturkürzel und Code</strong> — viele Tools zeigen Tasten in Großbuchstaben</li>
         <li><strong>Produktcodes und Seriennummern</strong> zur Vermeidung von Mehrdeutigkeit</li>
@@ -116,10 +116,10 @@ const de: ReactNode = (
     <div>
       <h2>Typografie-Tipp</h2>
       <p>
-        reiner Großbuchstabentext ist in längeren Passagen schwerer zu lesen, weil die Buchstaben
+        Reiner Großbuchstabentext ist in längeren Passagen schwerer zu lesen, weil die Buchstaben
         ihre charakteristischen Formen (Wortumrisse) verlieren. Setze ihn für kurze Beschriftungen
         und Überschriften ein, nicht für Absätze. Für Fließtext liest sich Satz- oder
-        Titelmajuskelschreibung deutlich schneller.
+        Titelschreibweise deutlich schneller.
       </p>
     </div>
   </section>

@@ -88,11 +88,19 @@ export function ReadingSpeakingTimeClient() {
   const safeText = text.length > MAX_ANALYZE_CHARS ? text.slice(0, MAX_ANALYZE_CHARS) : text
   const truncated = text.length > MAX_ANALYZE_CHARS
   const textIsZh = safeText.trim() ? hasCJK(safeText) : locale === 'zh'
-  const readWpm = readWpmRaw ?? (textIsZh ? 300 : 150)
+  // 滑块量程随语种切换(中文 50–800、西文 50–400):切换后把旧自定义值钳回
+  // 当前量程,否则原生 range 会把指针钳在 max、而标签与计算仍用越界原值。
+  const readMin = 50
+  const readMax = textIsZh ? 800 : 400
+  const readWpm = Math.min(Math.max(readWpmRaw ?? (textIsZh ? 300 : 150), readMin), readMax)
   const speakWpm = speakWpmRaw ?? (textIsZh ? 200 : 130)
   const READING = textIsZh ? READING_PRESETS_ZH : READING_PRESETS
   const SPEAKING = textIsZh ? SPEAKING_PRESETS_ZH : SPEAKING_PRESETS
-  const speedUnit = L('wpmUnit', 'wpm')
+  // 语速单位随统计口径走:含 CJK 时数字是「字/分」而非词/分,读 cpmUnit
+  // 词条;缺译时 zh 回退「字/分」,es/de/en 回退 chars/min。
+  const speedUnit = textIsZh
+    ? L('cpmUnit', locale === 'zh' ? '字/分' : 'chars/min')
+    : L('wpmUnit', 'wpm')
 
   const stats = useMemo(() => {
     const trimmed = safeText.trim()
@@ -116,7 +124,7 @@ export function ReadingSpeakingTimeClient() {
         `${L('sSpeakingTime', 'Speaking time @ ')}${speakWpm} ${speedUnit}: ${mmss((words / speakWpm) * 60)}`,
       ].join('\n'),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [words, chars, sentences, pages, readWpm, speakWpm, locale],
+    [words, chars, sentences, pages, readWpm, speakWpm, speedUnit, locale],
   )
 
   const presetTable = (
@@ -249,8 +257,8 @@ export function ReadingSpeakingTimeClient() {
           <input
             id="rst-read-wpm"
             type="range"
-            min={50}
-            max={textIsZh ? 800 : 400}
+            min={readMin}
+            max={readMax}
             step={5}
             value={readWpm}
             onChange={(e) => setReadWpm(+e.target.value)}

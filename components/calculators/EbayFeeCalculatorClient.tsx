@@ -78,7 +78,8 @@ export function EbayFeeCalculatorClient() {
       const fixed = numInput(ebayFixed)
       const ad = numInput(adRate)
       const ov = overridePct.trim() === '' ? NaN : toNumStrict(overridePct)
-      if (!isFinite(fixed) || fixed < 0 || !isFinite(ad) || ad < 0) {
+      // 高级覆盖非空时必须是合法非负数;空串 = 保持预设费率(与提示文案一致)
+      if (!isFinite(fixed) || fixed < 0 || !isFinite(ad) || ad < 0 || (advanced && overridePct.trim() !== '' && (!isFinite(ov) || ov < 0))) {
         return { error: L('errInvalidFeeValues', 'Please enter valid fee values.') }
       }
       const pct = advanced && isFinite(ov) ? ov : preset.pct
@@ -102,6 +103,10 @@ export function EbayFeeCalculatorClient() {
     const ov = overridePct.trim() === '' ? NaN : toNumStrict(overridePct)
     if (!isFinite(pp) || pp < 0 || !isFinite(pf) || pf < 0) {
       return { error: L('errInvalidProcessingValues', 'Please enter valid payment processing values.') }
+    }
+    // 高级覆盖非空时必须是合法非负数;空串 = 保持预设费率(与 ebay 分支同规则)
+    if (advanced && overridePct.trim() !== '' && (!isFinite(ov) || ov < 0)) {
+      return { error: L('errInvalidFeeValues', 'Please enter valid fee values.') }
     }
     const txPct = advanced && isFinite(ov) ? ov : 6.5
     const varRate = (txPct + pp) / 100
@@ -147,6 +152,7 @@ export function EbayFeeCalculatorClient() {
     <button
       key={p}
       type="button"
+      aria-pressed={platform === p}
       onClick={() => setPlatform(p)}
       className={`btn rounded-lg px-4 py-2 text-sm font-medium transition ${platform === p ? 'btn-primary' : 'border'}`}
       style={

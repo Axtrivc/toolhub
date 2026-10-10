@@ -50,8 +50,10 @@ export function Base64CodecTool({ initialMode = 'encode', slug = 'base64-encoder
         transform: (t) => {
           // D2 错误定位:先做字符集预检,指认第一个非法字符及其位置
           //(atob 只抛不带位置的 SyntaxError;去空白后按清洗串计数)
+          // '=' 须放行:标准带 padding 的输入(含本工具编码输出)都含 '=',
+          // 位置是否合法交给下方 atob 判定(如 "SGV=sbG8=" 走 generic 报错)
           const s = t.replace(/\s+/g, '')
-          const bad = /[^A-Za-z0-9+/\-_]/.exec(s)
+          const bad = /[^A-Za-z0-9+/\-_=]/.exec(s)
           if (bad) {
             return L(
               'b64UnexpectedChar',

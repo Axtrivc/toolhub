@@ -137,7 +137,7 @@ const de: ReactNode = (
     <div>
       <h2>Wie das OpenSSH-Public-Key-Format funktioniert</h2>
       <p>
-        Eine OpenSSH-Public-Key-Zeile ist einfach <strong>Base64 eines kleinen Binär-Blobs</strong> plus einem optionalen Kommentar. Der Blob ist eine Folge von längenpräfixierten Feldern: Bei Ed25519 ist es die Zeichenkette <code>ssh-ed25519</code> gefolgt vom rohen 32-Byte-öffentlichen Schlüssel; bei RSA ist es <code>ssh-rsa</code> gefolgt vom Exponenten <code>e</code> und dem Modul <code>n</code>, jeweils als <em>mpint</em> codiert (eine Big-Endien-Ganzzahl, die mit einem <code>0x00</code>-Byte aufgefüllt wird, wenn ihr oberstes Bit sonst negativ erschiene). Der nach der Erzeugung angezeigte <strong>SHA256-Fingerabdruck</strong> ist derselbe, den <code>ssh-keygen -l</code> ausgeben würde, damit du den Schlüssel später auf einem Server abgleichen kannst.
+        Eine OpenSSH-Public-Key-Zeile ist einfach <strong>Base64 eines kleinen Binär-Blobs</strong> plus einem optionalen Kommentar. Der Blob ist eine Folge von längenpräfixierten Feldern: Bei Ed25519 ist es die Zeichenkette <code>ssh-ed25519</code> gefolgt vom rohen 32-Byte-öffentlichen Schlüssel; bei RSA ist es <code>ssh-rsa</code> gefolgt vom Exponenten <code>e</code> und dem Modul <code>n</code>, jeweils als <em>mpint</em> codiert (eine Big-Endian-Ganzzahl, die mit einem <code>0x00</code>-Byte aufgefüllt wird, wenn ihr oberstes Bit sonst negativ erschiene). Der nach der Erzeugung angezeigte <strong>SHA256-Fingerabdruck</strong> ist derselbe, den <code>ssh-keygen -l</code> ausgeben würde, damit du den Schlüssel später auf einem Server abgleichen kannst.
       </p>
     </div>
 

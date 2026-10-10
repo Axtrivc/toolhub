@@ -58,7 +58,7 @@ function parseToml(src: string): ParseResult {
         // [table]
         const m = /^\s*\[\s*([A-Za-z0-9_.-]+)\s*\]\s*$/.exec(line)
         if (!m) throw new Error('Malformed table header')
-        cur = descend(root, m[1].split('.'))
+        cur = descend(root, m[1].split('.'), true)
       } else {
         // key = value
         const eq = findTopLevelEquals(line)
@@ -81,13 +81,25 @@ function parseToml(src: string): ParseResult {
   return { ok: true, value: root }
 }
 
+/**
+ * s[i] 处的引号是否是"未被转义"的引号。
+ * 基本字符串:前面连串反斜杠为偶数才算未转义(修复 "C:\\path\\" 以转义反斜杠
+ * 紧贴收尾引号时被误判为仍处于字符串内);字面字符串无转义语义,单引号永远关闭。
+ */
+function closesQuote(s: string, i: number): boolean {
+  if (s[i] === "'") return true
+  let backslashes = 0
+  for (let j = i - 1; j >= 0 && s[j] === '\\'; j--) backslashes++
+  return backslashes % 2 === 0
+}
+
 /** 去掉 # 注释(尊重引号内的 #) */
 function stripComment(line: string): string {
   let inBasic = false
   let inLiteral = false
   for (let i = 0; i < line.length; i++) {
     const c = line[i]
-    if (c === '"' && !inLiteral && line[i - 1] !== '\\') inBasic = !inBasic
+    if (c === '"' && !inLiteral && closesQuote(line, i)) inBasic = !inBasic
     else if (c === "'" && !inBasic) inLiteral = !inLiteral
     else if (c === '#' && !inBasic && !inLiteral) return line.slice(0, i)
   }
@@ -100,7 +112,7 @@ function findTopLevelEquals(line: string): number {
   let inLiteral = false
   for (let i = 0; i < line.length; i++) {
     const c = line[i]
-    if (c === '"' && !inLiteral && line[i - 1] !== '\\') inBasic = !inBasic
+    if (c === '"' && !inLiteral && closesQuote(line, i)) inBasic = !inBasic
     else if (c === "'" && !inBasic) inLiteral = !inLiteral
     else if (c === '=' && !inBasic && !inLiteral) return i
   }
@@ -112,14 +124,20 @@ function parseKey(s: string): string[] {
   const parts: string[] = []
   let cur = ''
   let inQuote: string | null = null
+  // 刚闭合一个引号段:"a".b 合法;a..b / .a / "a". 尾点这类空键段报错而非静默吞掉
+  let closedQuote = false
   for (let i = 0; i <= s.length; i++) {
     const c = s[i] ?? ''
     if (inQuote) {
-      if (c === inQuote) { parts.push(cur); cur = ''; inQuote = null }
+      if (c === inQuote) { parts.push(cur); cur = ''; inQuote = null; closedQuote = true }
       else cur += c
-    } else if (c === '"' || c === "'") inQuote = c
-    else if (c === '.') { if (cur.trim()) { parts.push(cur.trim()); cur = '' } }
-    else cur += c
+    } else if (c === '"' || c === "'") { if (!cur.trim()) cur = ''; inQuote = c; closedQuote = false }
+    else if (c === '.') {
+      if (i === s.length - 1 || (!cur.trim() && !closedQuote)) throw new Error('Empty key segment')
+      if (cur.trim()) { parts.push(cur.trim()); cur = '' }
+      closedQuote = false
+    }
+    else { if (c.trim()) closedQuote = false; cur += c }
   }
   if (cur.trim()) parts.push(cur.trim())
   if (parts.some((p) => !p)) throw new Error('Empty key segment')
@@ -131,23 +149,35 @@ function openBrackets(s: string): number {
   let inStr: string | null = null
   for (let i = 0; i < s.length; i++) {
     const c = s[i]
-    if (inStr) { if (c === inStr && s[i - 1] !== '\\') inStr = null; continue }
+    if (inStr) { if (c === inStr && closesQuote(s, i)) inStr = null; continue }
     if (c === '"') inStr = '"'
+    if (c === "'") inStr = "'"
     if (c === '[') depth++
     if (c === ']') depth--
   }
   return depth
 }
 
-function descend(obj: Record<string, Json>, path: string[]): Record<string, Json> {
+function descend(obj: Record<string, Json>, path: string[], strictTail = false): Record<string, Json> {
   let cur = obj
-  for (const seg of path) {
+  for (let i = 0; i < path.length; i++) {
+    const seg = path[i]
     const next = cur[seg]
     if (next === undefined) {
       const fresh: Record<string, Json> = {}
       cur[seg] = fresh
       cur = fresh
-    } else if (typeof next === 'object' && next !== null && !Array.isArray(next)) {
+    } else if (Array.isArray(next)) {
+      // TOML 1.0 数组表语义:[[fruit]] 之后的 [fruit.physical] / [[fruit.variety]]
+      // 应挂到数组最后一个元素上,而不是把 fruit 当非法路径报错;
+      // 但表头本身落在数组表名上([fruit] 紧跟 [[fruit]])仍是冲突,strictTail 时报错
+      if (strictTail && i === path.length - 1) throw new Error(`"${seg}" is not a table`)
+      const last = next[next.length - 1]
+      if (next.length === 0 || typeof last !== 'object' || last === null || Array.isArray(last)) {
+        throw new Error(`"${seg}" is not a table`)
+      }
+      cur = last as Record<string, Json>
+    } else if (typeof next === 'object' && next !== null) {
       cur = next as Record<string, Json>
     } else throw new Error(`"${seg}" is not a table`)
   }
@@ -179,7 +209,7 @@ function parseValue(s: string): Json {
     let depth = 0, curStr = '', inStr: string | null = null
     for (let i = 0; i < inner.length; i++) {
       const c = inner[i]
-      if (inStr) { curStr += c; if (c === inStr && inner[i - 1] !== '\\') inStr = null; continue }
+      if (inStr) { curStr += c; if (c === inStr && closesQuote(inner, i)) inStr = null; continue }
       if (c === '"') { inStr = '"'; curStr += c; continue }
       if (c === "'") { inStr = "'"; curStr += c; continue }
       // 深度同时计入 [] 与 {}——数组元素可能是 inline table,
@@ -200,8 +230,9 @@ function parseValue(s: string): Json {
     let depth = 0, curStr = '', inStr: string | null = null
     for (let i = 0; i < inner.length; i++) {
       const c = inner[i]
-      if (inStr) { curStr += c; if (c === inStr && inner[i - 1] !== '\\') inStr = null; continue }
+      if (inStr) { curStr += c; if (c === inStr && closesQuote(inner, i)) inStr = null; continue }
       if (c === '"') { inStr = '"'; curStr += c; continue }
+      if (c === "'") { inStr = "'"; curStr += c; continue }
       // 深度同时计入 {} 与 []——inline table 的值可以是数组,
       // 其中的顶层逗号不能被当成键值对分隔符(修复 {v=["a","b"]} 被拆坏)
       if (c === '[' || c === '{') depth++
@@ -236,8 +267,10 @@ function parseValue(s: string): Json {
 function assignInline(obj: Record<string, Json>, pair: string): void {
   const eq = findTopLevelEquals(pair)
   if (eq < 0) throw new Error(`Malformed inline table entry "${pair}"`)
-  const k = parseKey(pair.slice(0, eq).trim())[0]
-  obj[k] = parseValue(pair.slice(eq + 1))
+  // 点分 key({ a.b = 1 })按 TOML 1.0 嵌套为 {"a":{"b":1}},而不是丢掉 .b
+  const keyPath = parseKey(pair.slice(0, eq).trim())
+  const target = keyPath.length > 1 ? descend(obj, keyPath.slice(0, -1)) : obj
+  target[keyPath[keyPath.length - 1]] = parseValue(pair.slice(eq + 1))
 }
 
 export function TomlToJsonClient() {

@@ -10,7 +10,7 @@ export function KeycodeInfoContent() {
       <h2>Why modifier combos matter</h2>
       <p>Shortcut handlers should check modifier flags (ctrlKey, metaKey, shiftKey) alongside event.key. Remember Mac users press Meta/Cmd where Windows users press Ctrl — most apps accept both.</p>
       <h2>Keys that need preventDefault</h2>
-      <p>Space scrolls the page, arrow keys navigate, Tab moves focus. The tester blocks those defaults inside its capture zone so you can observe them without the page jumping.</p>
+      <p>Space scrolls the page, arrow keys navigate, Tab moves focus. The tester blocks those defaults on this page so you can observe them without the page jumping or focus escaping.</p>
     </section>
   )
 }

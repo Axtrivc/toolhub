@@ -77,7 +77,7 @@ const zh: ReactNode = (
         平台会激进地缓存预览,有时长达数天。部署标签后,使用{' '}
         <strong>Facebook Sharing Debugger</strong>、{' '}
         <strong>Twitter Card Validator</strong> 或{' '}
-        <strong>LinkedIn Post Inspector</strong> 强制重新抓取。关键的是,这些标签必须存在于服务器原始 HTML(SSR 或静态)中——不执行 JavaScript 的爬虫无法看到由客户端框架在运行时注入的标签。
+        <strong>LinkedIn Post Inspector</strong> 强制重新抓取。关键在于,这些标签必须存在于服务器原始 HTML(SSR 或静态)中——不执行 JavaScript 的爬虫无法看到由客户端框架在运行时注入的标签。
       </p>
     </div>
   </section>
@@ -165,7 +165,7 @@ const de: ReactNode = (
       </p>
     </div>
     <div>
-      <h2>Warum deine Live-Vorschau immer noch falsch aussieht</h2>
+      <h2>Warum deine Vorschau nach dem Deploy immer noch falsch aussieht</h2>
       <p>
         Plattformen cachen Vorschauen aggressiv, manchmal tagelang. Erzwinge nach dem Deployment
         deiner Tags einen neuen Abruf mit dem <strong>Facebook Sharing Debugger</strong>, dem{' '}

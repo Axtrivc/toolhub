@@ -12,7 +12,7 @@ import { tui } from '@/lib/i18n/tool-l10n'
  *
  * 手写 tokenizer,字符串/注释感知:
  *  - JSON:JSON.parse + stringify(解析错误直接提示)
- *  - CSS:{ 后换行缩进,} 前后换行,; 后换行(括号/字符串内除外)
+ *  - CSS:{ 后换行缩进,} 前后换行,; 后换行(括号/字符串内除外),括号内逗号不加空格(url() data URI 安全)
  *  - JS:同 CSS 的花括号/分号规则,跳过模板串、// 与 注释、正则(启发式),括号内不断行
  *  - HTML:正则走标签,块级缩进,行内元素保持一行,void 元素与注释正确处理
  * 目标「够用就好」的健壮性,不追求完美。
@@ -29,8 +29,8 @@ const LANGS: { key: Lang; label: string }[] = [
 
 const EXT: Record<Lang, string> = { html: 'html', css: 'css', js: 'js', json: 'json' }
 
-// 输入长度上限:手写 tokenizer 是逐字符状态机,内部的 trim/freshLine 帮助函数
-// 会反复扫描累计输出串(准 O(n²));100k 上限保证最坏情况仍在百毫秒级。
+// 输入长度上限:CSS/JS tokenizer 已是 O(n)(parts+pend 累积),HTML 为正则分词;
+// 100k 上限仍保留,防止百万级粘贴拖垮内存与一次性 join。
 const MAX_INPUT_LEN = 100_000
 
 const PLACEHOLDER: Record<Lang, string> = {
@@ -43,7 +43,11 @@ const PLACEHOLDER: Record<Lang, string> = {
 /* ---------------- CSS ---------------- */
 
 function beautifyCss(src: string, unit: string): string {
-  let out = ''
+  // 输出用「内容片段数组 + 待定尾部空白(pend)」累积:缩进/空格先挂起,下一个内容字符到达才落盘。
+  // 这样尾部空白判定只看 pend / parts 尾段,不必在累计输出串上反复正则扫描(旧实现准 O(n²),
+  // 100k 输入要跑数十秒);join 一次性收尾,整体 O(n)。
+  const parts: string[] = []
+  let pend = ''
   let level = 0
   let i = 0
   let inStr: string | null = null
@@ -52,122 +56,173 @@ function beautifyCss(src: string, unit: string): string {
   // 栈:当前 {} 是声明块(true,冒号后补空格)还是 at-rule 块(false)
   const ctx: boolean[] = []
 
-  const trimSpaces = () => {
-    out = out.replace(/[ \t]+$/, '')
+  const emit = (s: string) => {
+    if (s === '') return
+    if (pend !== '') {
+      parts.push(pend)
+      pend = ''
+    }
+    parts.push(s)
   }
-  const freshLine = () => /(^|\n)[ \t]*$/.test(out)
+  // 等价旧实现的 out.replace(/\s+$/,''):剥掉 parts 尾段与 pend 的全部尾部空白(含换行)
+  const trimAll = () => {
+    while (parts.length > 0) {
+      const t = parts[parts.length - 1]
+      const trimmed = t.replace(/\s+$/, '')
+      if (trimmed === t) break
+      if (trimmed !== '') {
+        parts[parts.length - 1] = trimmed
+        break
+      }
+      parts.pop()
+    }
+    pend = ''
+  }
+  const trimSpaces = () => {
+    pend = pend.replace(/[ \t]+$/, '')
+  }
+  // 等价旧 freshLine:/(^|\n)[ \t]*$/.test(out)
+  const freshLine = () => (pend !== '' ? /(^|\n)[ \t]*$/.test(pend) : parts.length === 0)
+  // 等价旧实现「取最后一行,首非空白字符是否 '@」:从尾段回扫到上一个换行即止(各行互不重叠,总计 O(n))
+  const lineStartsWithAt = () => {
+    let ls = ''
+    for (let p = parts.length - 1; p >= 0; p--) {
+      const s = parts[p]
+      const nlAt = s.lastIndexOf('\n')
+      if (nlAt !== -1) {
+        ls = s.slice(nlAt + 1) + ls
+        break
+      }
+      ls = s + ls
+    }
+    const first = (ls + pend).match(/\S/)
+    return first !== null && first[0] === '@'
+  }
+  // 流内最后一个原始字符(pend 优先;parts 尾段可能以注释尾空格收尾)
+  const lastRawChar = () => {
+    if (pend !== '') return pend[pend.length - 1]
+    for (let p = parts.length - 1; p >= 0; p--) {
+      const s = parts[p]
+      if (s !== '') return s[s.length - 1]
+    }
+    return ''
+  }
 
   while (i < src.length) {
     const c = src[i]
 
     if (inComment) {
       if (c === '*' && src[i + 1] === '/') {
-        out += '*/'
+        emit('*/')
         inComment = false
         i += 2
-        out = out.replace(/\s+$/, '')
-        out += '\n' + unit.repeat(level)
+        trimAll()
+        pend = '\n' + unit.repeat(level)
         continue
       }
-      out += c
+      emit(c)
       i++
       continue
     }
 
     if (inStr) {
-      out += c
       if (c === '\\' && i + 1 < src.length) {
-        out += src[i + 1]
+        emit(c + src[i + 1])
         i += 2
         continue
       }
+      emit(c)
       if (c === inStr) inStr = null
       i++
       continue
     }
 
     if (c === '/' && src[i + 1] === '*') {
-      out += '/*'
+      emit('/*')
       inComment = true
       i += 2
       continue
     }
     if (c === '"' || c === "'") {
-      out += c
+      emit(c)
       inStr = c
       i++
       continue
     }
     if (c === '(') {
       paren++
-      out += c
+      emit(c)
       i++
       continue
     }
     if (c === ')') {
       paren = Math.max(0, paren - 1)
       trimSpaces()
-      out += c
+      emit(c)
       i++
       continue
     }
     if (c === '{') {
       if (!freshLine()) {
         trimSpaces()
-        out += ' '
+        pend = ' '
       }
-      out += '{'
+      emit('{')
       // 行首是 @ → at-rule 块(内部还是选择器语境),否则是声明块
-      const line = out.slice(out.lastIndexOf('\n') + 1)
-      ctx.push(!line.trimStart().startsWith('@'))
+      ctx.push(!lineStartsWithAt())
       level++
-      out += '\n' + unit.repeat(level)
+      pend = '\n' + unit.repeat(level)
       i++
       continue
     }
     if (c === '}') {
       level = Math.max(0, level - 1)
       ctx.pop()
-      out = out.replace(/\s+$/, '')
-      if (out.endsWith('{')) {
-        out += '}'
+      trimAll()
+      if (parts.length > 0 && parts[parts.length - 1].endsWith('{')) {
+        emit('}')
       } else {
-        out += '\n' + unit.repeat(level) + '}'
+        parts.push('\n' + unit.repeat(level) + '}')
       }
-      out += '\n' + unit.repeat(level)
+      pend = '\n' + unit.repeat(level)
       i++
       continue
     }
     if (c === ';') {
       trimSpaces()
-      out += ';'
-      if (paren === 0) out += '\n' + unit.repeat(level)
+      emit(';')
+      if (paren === 0) pend = '\n' + unit.repeat(level)
       i++
       continue
     }
     if (c === ':') {
       trimSpaces()
-      out += ':'
+      emit(':')
       // 声明块内(且不在括号里)的冒号后补空格:color: red;选择器 a:hover 不受影响
-      if (paren === 0 && ctx[ctx.length - 1]) out += ' '
+      if (paren === 0 && ctx[ctx.length - 1]) pend = ' '
       i++
       continue
     }
     if (c === ',') {
       trimSpaces()
-      out += ', '
+      emit(',')
+      // 括号内不加空格:未加引号的 url()(如 data URI)内部一出现空白即成 bad-url,浏览器会整条丢弃
+      if (paren === 0) pend = ' '
       i++
       continue
     }
     if (/\s/.test(c)) {
-      if (out !== '' && !/[\s(]$/.test(out)) out += ' '
+      if (parts.length !== 0 || pend !== '') {
+        const lc = lastRawChar()
+        if (lc !== '' && !/\s/.test(lc) && lc !== '(') pend += ' '
+      }
       i++
       continue
     }
-    out += c
+    emit(c)
     i++
   }
-  return out.trim()
+  return (parts.join('') + pend).trim()
 }
 
 /* ---------------- JavaScript ---------------- */
@@ -177,39 +232,85 @@ const REGEX_CHARS = new Set(['', '(', ',', '=', ':', '[', '!', '&', '|', '?', '{
 const REGEX_WORDS = new Set(['return', 'typeof', 'case', 'in', 'of', 'delete', 'void', 'instanceof', 'new', 'throw', 'else', 'do', 'yield', 'await'])
 
 function beautifyJs(src: string, unit: string): string {
-  let out = ''
+  // 同 beautifyCss:parts + pend 累积,尾部字符/单词查询只扫尾段,O(n) 总复杂度
+  const parts: string[] = []
+  let pend = ''
   let level = 0
   let paren = 0
   let i = 0
   let str: string | null = null
 
+  const emit = (s: string) => {
+    if (s === '') return
+    if (pend !== '') {
+      parts.push(pend)
+      pend = ''
+    }
+    parts.push(s)
+  }
   const trimSpaces = () => {
-    out = out.replace(/[ \t]+$/, '')
+    pend = pend.replace(/[ \t]+$/, '')
   }
-  const freshLine = () => /(^|\n)[ \t]*$/.test(out)
-  const lastChar = () => {
-    const t = out.replace(/\s+$/, '')
-    return t.length ? t[t.length - 1] : ''
-  }
-  const lastWord = () => {
-    const m = out.replace(/\s+$/, '').match(/([A-Za-z_$][A-Za-z0-9_$]*)$/)
-    return m ? m[1] : ''
+  // 剥掉 parts 尾段的全部尾部空白(行注释可能以空格收尾),等价 out.replace(/\s+$/,'')
+  const stripTailWs = () => {
+    while (parts.length > 0) {
+      const t = parts[parts.length - 1]
+      const trimmed = t.replace(/\s+$/, '')
+      if (trimmed === t) break
+      if (trimmed !== '') {
+        parts[parts.length - 1] = trimmed
+        break
+      }
+      parts.pop()
+    }
   }
   const nl = () => {
-    out = out.replace(/\s+$/, '')
-    out += '\n' + unit.repeat(level)
+    stripTailWs()
+    pend = '\n' + unit.repeat(level)
+  }
+  const lastChar = () => {
+    for (let p = parts.length - 1; p >= 0; p--) {
+      const s = parts[p]
+      for (let k = s.length - 1; k >= 0; k--) {
+        if (!/\s/.test(s[k])) return s[k]
+      }
+    }
+    return ''
+  }
+  const lastWord = () => {
+    let w = ''
+    for (let p = parts.length - 1; p >= 0; p--) {
+      const s = parts[p]
+      for (let k = s.length - 1; k >= 0; k--) {
+        const ch = s[k]
+        if (/[A-Za-z0-9_$]/.test(ch)) w = ch + w
+        else if (/\s/.test(ch)) {
+          if (w !== '') return w
+        } else return w
+      }
+    }
+    return w
+  }
+  const freshLine = () => (pend !== '' ? /(^|\n)[ \t]*$/.test(pend) : parts.length === 0)
+  const lastRawChar = () => {
+    if (pend !== '') return pend[pend.length - 1]
+    for (let p = parts.length - 1; p >= 0; p--) {
+      const s = parts[p]
+      if (s !== '') return s[s.length - 1]
+    }
+    return ''
   }
 
   while (i < src.length) {
     const c = src[i]
 
     if (str) {
-      out += c
       if (c === '\\' && i + 1 < src.length) {
-        out += src[i + 1]
+        emit(c + src[i + 1])
         i += 2
         continue
       }
+      emit(c)
       if (c === str) str = null
       i++
       continue
@@ -217,10 +318,9 @@ function beautifyJs(src: string, unit: string): string {
 
     // 行注释
     if (c === '/' && src[i + 1] === '/') {
-      while (i < src.length && src[i] !== '\n') {
-        out += src[i]
-        i++
-      }
+      const start = i
+      while (i < src.length && src[i] !== '\n') i++
+      emit(src.slice(start, i))
       nl()
       continue
     }
@@ -228,7 +328,7 @@ function beautifyJs(src: string, unit: string): string {
     if (c === '/' && src[i + 1] === '*') {
       const end = src.indexOf('*/', i + 2)
       const comment = end === -1 ? src.slice(i) : src.slice(i, end + 2)
-      out += comment
+      emit(comment)
       i = end === -1 ? src.length : end + 2
       if (comment.includes('\n')) nl()
       continue
@@ -236,25 +336,25 @@ function beautifyJs(src: string, unit: string): string {
     // 字符串 / 模板串(模板串整体跳过,内部 ${} 不格式化)
     if (c === '"' || c === "'" || c === '`') {
       str = c
-      out += c
+      emit(c)
       i++
       continue
     }
     // 正则字面量(启发式)
     if (c === '/' && (REGEX_CHARS.has(lastChar()) || REGEX_WORDS.has(lastWord()))) {
-      out += '/'
+      emit('/')
       i++
       let inClass = false
       let closed = false
       while (i < src.length) {
         const r = src[i]
         if (r === '\n') break
-        out += r
         if (r === '\\' && i + 1 < src.length) {
-          out += src[i + 1]
+          emit(r + src[i + 1])
           i += 2
           continue
         }
+        emit(r)
         if (r === '[') inClass = true
         else if (r === ']') inClass = false
         else if (r === '/' && !inClass) {
@@ -265,24 +365,23 @@ function beautifyJs(src: string, unit: string): string {
         i++
       }
       if (closed) {
-        while (i < src.length && /[a-z]/i.test(src[i])) {
-          out += src[i]
-          i++
-        }
+        const start = i
+        while (i < src.length && /[a-z]/i.test(src[i])) i++
+        emit(src.slice(start, i))
       }
       continue
     }
 
     if (c === '(' || c === '[') {
       paren++
-      out += c
+      emit(c)
       i++
       continue
     }
     if (c === ')' || c === ']') {
       paren = Math.max(0, paren - 1)
       trimSpaces()
-      out += c
+      emit(c)
       i++
       continue
     }
@@ -293,10 +392,10 @@ function beautifyJs(src: string, unit: string): string {
         const lc = lastChar()
         if (lc !== '' && lc !== '(' && lc !== '[') {
           trimSpaces()
-          out += ' '
+          pend = ' '
         }
       }
-      out += '{'
+      emit('{')
       level++
       nl()
       i++
@@ -304,11 +403,12 @@ function beautifyJs(src: string, unit: string): string {
     }
     if (c === '}') {
       level = Math.max(0, level - 1)
-      out = out.replace(/\s+$/, '')
-      if (out.endsWith('{')) {
-        out += '}'
+      stripTailWs()
+      pend = ''
+      if (parts.length > 0 && parts[parts.length - 1].endsWith('{')) {
+        emit('}')
       } else {
-        out += '\n' + unit.repeat(level) + '}'
+        parts.push('\n' + unit.repeat(level) + '}')
       }
       // 看下一个有效字符:; , ) ] . : 紧跟;else/catch/while 等同行空一格;其余换行
       let j = i + 1
@@ -317,25 +417,26 @@ function beautifyJs(src: string, unit: string): string {
       if (next === ';' || next === ',' || next === ')' || next === ']' || next === '.' || next === ':') {
         // 紧跟,交给后续规则
       } else if (/[A-Za-z_$]/.test(next)) {
-        out += ' '
+        pend = ' '
       } else {
-        out += '\n' + unit.repeat(level)
+        nl()
       }
       i++
       continue
     }
     if (c === ';') {
       trimSpaces()
-      out += ';'
+      emit(';')
       if (paren === 0) nl()
-      else out += ' '
+      else pend = ' '
       i++
       continue
     }
     if (c === ':') {
       // 对象字面量/三元冒号后补空格:{a: 1}
       trimSpaces()
-      out += ': '
+      emit(':')
+      pend = ' '
       i++
       continue
     }
@@ -345,37 +446,45 @@ function beautifyJs(src: string, unit: string): string {
       while (nx < src.length && /\s/.test(src[nx])) nx++
       if (nx < src.length && src[nx] === '>') {
         trimSpaces()
-        out += ' => '
+        pend += ' '
+        emit('=>')
+        pend = ' '
         i = nx + 1
         continue
       }
       const prev = lastChar()
       const nextCh = nx < src.length ? src[nx] : ''
       if ('=<>!+-*/%&|^?'.includes(prev) || nextCh === '=') {
-        out += '='
+        emit('=')
         i++
         continue
       }
       trimSpaces()
-      out += ' = '
+      pend += ' '
+      emit('=')
+      pend = ' '
       i++
       continue
     }
     if (c === ',') {
       trimSpaces()
-      out += ', '
+      emit(',')
+      pend = ' '
       i++
       continue
     }
     if (/\s/.test(c)) {
-      if (out !== '' && !/[\s([{]$/.test(out)) out += ' '
+      if (parts.length !== 0 || pend !== '') {
+        const lc = lastRawChar()
+        if (lc !== '' && !/\s/.test(lc) && lc !== '(' && lc !== '[' && lc !== '{') pend += ' '
+      }
       i++
       continue
     }
-    out += c
+    emit(c)
     i++
   }
-  return out.trim()
+  return (parts.join('') + pend).trim()
 }
 
 /* ---------------- HTML ---------------- */
@@ -559,6 +668,7 @@ export function CodeBeautifierClient() {
               key={l.key}
               type="button"
               onClick={() => setLang(l.key)}
+              aria-pressed={lang === l.key}
               className={`btn ${lang === l.key ? 'btn-primary' : 'btn-secondary'}`}
             >
               {l.label}
@@ -590,7 +700,9 @@ export function CodeBeautifierClient() {
       <div>
         <div className="mb-1.5 flex items-center justify-between">
           <label htmlFor="beautify-input" className="block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
-            {L('pasteYour', 'Paste your')} {LANGS.find((l) => l.key === lang)?.label} {L('code', 'code')}
+            {/* 整句模板(各语种语序不同,如西语 "Pega tu código JavaScript");key 缺失时回退三段拼接 */}
+            {L('pasteYourCode', '').replace('{lang}', LANGS.find((l) => l.key === lang)?.label ?? '') ||
+              `${L('pasteYour', 'Paste your')} ${LANGS.find((l) => l.key === lang)?.label ?? ''} ${L('code', 'code')}`}
           </label>
           <LoadSampleButton onLoad={handleLoadSample} variant="compact" />
         </div>

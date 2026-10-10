@@ -63,21 +63,16 @@ const zh: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>这是什么工具？</h2>
     <p>
-      这个<strong>卖家手续费计算器</strong>展示 eBay 或 Etsy 实际从一笔销售中抽走多少——以及你
-      留下多少。输入你的成交价、运费和成本，即可看到总手续费、净到账、净利润、利润
-      率，以及盈亏平衡价。所有计算都在你的浏览器本地完成；任何销售数据都不会被上传。
+      这个<strong>卖家手续费计算器</strong>展示 eBay 或 Etsy 实际从一笔销售中抽走多少——以及你留下多少。输入你的成交价、运费和成本，即可看到总手续费、净到账、净利润、利润率，以及盈亏平衡价。所有计算都在你的浏览器本地完成；任何销售数据都不会被上传。
     </p>
 
     <div>
       <h2>手续费是如何计算的</h2>
       <p>
         两个平台都按<strong>销售总额</strong>收取它们的百分比——即商品价格{' '}
-        <em>加上</em>向买家收取的运费。对 eBay 而言，这意味着最终价值费
-        （<code>13.6%</code>，适用于大多数类目），加上每笔订单 <code>$0.40</code> 的费用（$10 及以下的订单为{' '}
-        <code>$0.30</code>），以及如果你投放广告时可选的
-        Promoted Listings 广告费率。对 Etsy 而言，则是一笔 <code>$0.20</code> 的上架费、一笔{' '}
-        <code>6.5%</code> 的交易费，以及支付处理费（美国预设：<code>3% + $0.25</code>）。这个
-        高级开关允许你在类目或地区不同时覆盖这个百分比。
+        <em>加上</em>向买家收取的运费。对 eBay 而言，这意味着最终价值费（<code>13.6%</code>，适用于大多数类目），加上每笔订单 <code>$0.40</code> 的费用（$10 及以下的订单为{' '}
+        <code>$0.30</code>），以及如果你投放广告时可选的 Promoted Listings 广告费率。对 Etsy 而言，则是一笔 <code>$0.20</code> 的上架费、一笔{' '}
+        <code>6.5%</code> 的交易费，以及支付处理费（美国预设：<code>3% + $0.25</code>）。这个高级开关允许你在类目或地区不同时覆盖这个百分比。
       </p>
     </div>
 
@@ -85,20 +80,14 @@ const zh: ReactNode = (
       <h2>理解各项输出</h2>
       <p>
         <strong>净到账</strong>是销售总额减去平台手续费——真正进入你账户的钱。{' '}
-        <strong>净利润</strong>从到账额里再扣掉你的商品成本和真实运费；如果它
-        变成负数，说明你在倒贴钱卖东西。<strong>盈亏平衡价</strong>反向求解手续费公式，找到能覆盖所有成本的最低价格——在决定是否
-        接受报价或搞折扣时，把它当作底线。
+        <strong>净利润</strong>从到账额里再扣掉你的商品成本和真实运费；如果它变成负数，说明你在倒贴钱卖东西。<strong>盈亏平衡价</strong>反向求解手续费公式，找到能覆盖所有成本的最低价格——在决定是否接受报价或搞折扣时，把它当作底线。
       </p>
     </div>
 
     <div>
       <h2>给卖家的定价建议</h2>
       <p>
-        「包邮」从来都不是免费的：因为手续费会作用在你收取的运费上，把运费并入商品
-        价格在手续费上没有任何变化，但可能改善搜索排名。留意广告费率——一场 10% 的 Promoted
-        Listings 推广可能悄悄让你的实际手续费翻倍。另外请记住，这些都是
-        2026 年时的近似值：店铺订阅、顶尖卖家折扣、国际销售以及类目专属费率都会
-        改变计算结果，因此在敲定价格前，请对照平台当前的费率表核实。
+        「包邮」从来都不是免费的：因为手续费会作用在你收取的运费上，把运费并入商品价格在手续费上没有任何变化，但可能改善搜索排名。留意广告费率——一场 10% 的 Promoted Listings 推广可能悄悄让你的实际手续费翻倍。另外请记住，这些都是 2026 年时的近似值：店铺订阅、顶尖卖家折扣、国际销售以及类目专属费率都会改变计算结果，因此在敲定价格前，请对照平台当前的费率表核实。
       </p>
     </div>
   </section>
@@ -158,8 +147,8 @@ const de: ReactNode = (
     <h2>Was ist dieses Werkzeug?</h2>
     <p>
       Dieser <strong>Verkäufergebühren-Rechner</strong> zeigt, was eBay oder Etsy tatsächlich von einem Verkauf einbehalten — und was
-      du behältst. Gib deinen Verkaufspreis, Versand und Kosten ein, um Gesamtgebühren, Netto-Auszahlung, Nettogewinn, Gewinn
-      marge und den Break-Even-Preis zu sehen. Alles läuft lokal in deinem Browser; es werden nie Verkaufsdaten hochgeladen.
+      du behältst. Gib deinen Verkaufspreis, Versand und Kosten ein, um Gesamtgebühren, Netto-Auszahlung,
+      Nettogewinn, Gewinnmarge und den Break-Even-Preis zu sehen. Alles läuft lokal in deinem Browser; es werden nie Verkaufsdaten hochgeladen.
     </p>
 
     <div>
@@ -189,8 +178,8 @@ const de: ReactNode = (
     <div>
       <h2>Preis-Tipps für Verkäufer</h2>
       <p>
-        Gratisversand ist nie gratis: Da Gebühren auf den Versand anfallen, den du berechnest, ändert das Einrollen des Versands in den Artikel
-        preis nichts an den Gebühren, kann aber die Suchplatzierung verbessern. Behalte die Anzeigenrate im Blick — eine{' '}
+        Gratisversand ist nie gratis: Da Gebühren auf den Versand anfallen, den du berechnest, ändert das Einrollen des Versands in den
+        Artikelpreis nichts an den Gebühren, kann aber die Suchplatzierung verbessern. Behalte die Anzeigenrate im Blick — eine{' '}
         10-%-Promoted-Listings-Kampagne kann deine effektive Gebühr leise verdoppeln. Und denk daran, dass dies Näherungen Stand
         2026 sind: Shop-Abos, Top-Rated-Rabatte, internationale Verkäufe und kategoriespezifische Sätze
         ändern die Rechnung alle, also gleiche gegen die aktuelle Gebührentabelle der Plattform ab, bevor du dich auf einen

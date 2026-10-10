@@ -16,7 +16,7 @@ import { tui } from '@/lib/i18n/tool-l10n'
  */
 
 // 一个示例 HS256 JWT(payload 含 sub/exp/iat),仅本地演示,无任何真实凭证。
-// exp 设为 2099-12-31 以保证示例长期"未过期"。
+// exp 设为 2100-01-01(UTC,即 4102444800)以保证示例长期"未过期"。
 const SAMPLE_TOKEN =
   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkphbmUgRG9lIiwiaWF0IjoxNTE2MjM5MDIyLCJleHAiOjQxMDI0NDQ4MDB9.sflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c'
 

@@ -138,7 +138,9 @@ export function AutoLoanCalculatorClient() {
     const loanAmount = p - d - t + taxAmount
     if (loanAmount <= 0) return null
     const r = calcAutoLoan(loanAmount, rate, n)
-    return { loanAmount, months: n, ...r }
+    // 总成本与 A 同口径:首付 + 置换 + 全部月供(对比行的 "Total cost" 用它,而非仅月供合计)
+    const totalCost = d + t + r.totalPayments
+    return { loanAmount, months: n, ...r, totalCost }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [compareOn, bPrice, bDown, bApr, bTerm, taxPct, tradeIn, parsed])
 
@@ -284,7 +286,7 @@ export function AutoLoanCalculatorClient() {
                 { label: L('monthlyPayment', 'Monthly payment'), a: fmtMoney(parsed.monthlyPayment), b: fmtMoney(bParsed.monthlyPayment), headline: true },
                 { label: L('loanAmount', 'Loan amount'), a: fmtMoney(parsed.loanAmount), b: fmtMoney(bParsed.loanAmount) },
                 { label: L('totalInterest', 'Total interest'), a: fmtMoney(parsed.totalInterest), b: fmtMoney(bParsed.totalInterest) },
-                { label: L('totalCost', 'Total cost'), a: fmtMoney(parsed.totalPayments), b: fmtMoney(bParsed.totalPayments) },
+                { label: L('totalCost', 'Total cost'), a: fmtMoney(parsed.totalCost), b: fmtMoney(bParsed.totalCost) },
               ]}
             />
           ) : (

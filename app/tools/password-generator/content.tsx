@@ -73,15 +73,15 @@ const en: ReactNode = (
         anything important.
       </li>
       <li>
-        <strong>Weak (40–60 bits):</strong> Crackable in hours to days with consumer hardware.
+        <strong>Weak (40–59 bits):</strong> Crackable in hours to days with consumer hardware.
         Upgrade your length.
       </li>
       <li>
-        <strong>Strong (60–80 bits):</strong> Would take years to crack. Suitable for most
+        <strong>Strong (60–79 bits):</strong> Would take years to crack. Suitable for most
         personal accounts.
       </li>
       <li>
-        <strong>Very Strong (&gt;80 bits):</strong> Effectively uncrackable. Use for email,
+        <strong>Very Strong (≥80 bits):</strong> Effectively uncrackable. Use for email,
         banking, and password manager master passwords.
       </li>
     </ul>
@@ -141,13 +141,13 @@ const zh: ReactNode = (
         <strong>极弱(&lt;40 位):</strong>几秒到几分钟即可破解。切勿用于任何重要账户。
       </li>
       <li>
-        <strong>较弱(40–60 位):</strong>用消费级硬件数小时到数天可破解。请增加长度。
+        <strong>较弱(40–59 位):</strong>用消费级硬件数小时到数天可破解。请增加长度。
       </li>
       <li>
-        <strong>较强(60–80 位):</strong>需要数年才能破解。适合大多数个人账户。
+        <strong>较强(60–79 位):</strong>需要数年才能破解。适合大多数个人账户。
       </li>
       <li>
-        <strong>极强(&gt;80 位):</strong>实际上无法破解。用于邮箱、银行和密码管理器主密码。
+        <strong>极强(≥80 位):</strong>实际上无法破解。用于邮箱、银行和密码管理器主密码。
       </li>
     </ul>
 
@@ -174,7 +174,7 @@ const es: ReactNode = (
     <ol>
       <li>
         <strong>Hazla larga.</strong> La longitud vence a la complejidad. Una contraseña de 20 caracteres con palabras
-        aleatorias es más fuerte que una corta y embrollada. Apunta a al menos 12 caracteres; 16+ es ideal.
+        aleatorias es más fuerte que una corta y enrevesada. Apunta a al menos 12 caracteres; 16+ es ideal.
       </li>
       <li>
         <strong>Mezcla tipos de caracteres.</strong> Combina mayúsculas, minúsculas, números y símbolos. Mezclando
@@ -217,13 +217,13 @@ const es: ReactNode = (
         <strong>Muy débil (&lt;40 bits):</strong> se rompe en segundos o minutos. Nunca la uses para algo importante.
       </li>
       <li>
-        <strong>Débil (40–60 bits):</strong> se rompe en horas o días con hardware de consumo. Aumenta la longitud.
+        <strong>Débil (40–59 bits):</strong> se rompe en horas o días con hardware de consumo. Aumenta la longitud.
       </li>
       <li>
-        <strong>Fuerte (60–80 bits):</strong> tardaría años en romperse. Adecuada para la mayoría de cuentas personales.
+        <strong>Fuerte (60–79 bits):</strong> tardaría años en romperse. Adecuada para la mayoría de cuentas personales.
       </li>
       <li>
-        <strong>Muy fuerte (&gt;80 bits):</strong> prácticamente irrompible. Úsala para correo, banca y la contraseña
+        <strong>Muy fuerte (≥80 bits):</strong> prácticamente irrompible. Úsala para correo, banca y la contraseña
         maestra del gestor.
       </li>
     </ul>
@@ -297,13 +297,13 @@ const de: ReactNode = (
         <strong>Sehr schwach (&lt;40 Bit):</strong> in Sekunden bis Minuten knackbar. Niemals für etwas Wichtiges verwenden.
       </li>
       <li>
-        <strong>Schwach (40–60 Bit):</strong> in Stunden bis Tagen mit Consumer-Hardware knackbar. Erhöhe die Länge.
+        <strong>Schwach (40–59 Bit):</strong> in Stunden bis Tagen mit Consumer-Hardware knackbar. Erhöhe die Länge.
       </li>
       <li>
-        <strong>Stark (60–80 Bit):</strong> würde Jahre zum Knacken brauchen. Geeignet für die meisten persönlichen Konten.
+        <strong>Stark (60–79 Bit):</strong> würde Jahre zum Knacken brauchen. Geeignet für die meisten persönlichen Konten.
       </li>
       <li>
-        <strong>Sehr stark (&gt;80 Bit):</strong> praktisch unknackbar. Für E-Mail, Banking und das Master-Passwort des Passwortmanagers.
+        <strong>Sehr stark (≥80 Bit):</strong> praktisch unknackbar. Für E-Mail, Banking und das Master-Passwort des Passwortmanagers.
       </li>
     </ul>
 
