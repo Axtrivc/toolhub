@@ -20,7 +20,7 @@
 
 import Link from 'next/link'
 import { Flame } from 'lucide-react'
-import type { ToolMeta } from '@/lib/tools'
+import type { ToolLiteMeta } from '@/lib/related-tools'
 import { useApp } from './providers/AppProviders'
 import { t, tc, getToolName } from '@/lib/i18n'
 import { HUB_THEMES } from './workspace/hubThemes'
@@ -46,7 +46,7 @@ const UNDERLINE_CLASS =
   'absolute -bottom-0.5 left-0 h-px w-0 bg-current transition-all duration-200 group-hover:w-full'
 
 interface HomeSitemapProps {
-  tools: ToolMeta[]
+  tools: ToolLiteMeta[]
 }
 
 export function HomeSitemap({ tools }: HomeSitemapProps) {

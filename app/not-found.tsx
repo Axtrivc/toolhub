@@ -1,7 +1,9 @@
 'use client'
 
 import Link from 'next/link'
-import { getFeaturedTools } from '@/lib/tools'
+// featured 轻量投影(lib/related-tools.ts 生成物):根 not-found 边界会打进
+// 全站每个路由的客户端 chunk,从这里取数避免把全量 SEO 注册表拖进首屏。
+import { featuredLite } from '@/lib/related-tools'
 import { t, getToolName, getToolShortIntro } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
@@ -13,7 +15,8 @@ import { useApp } from '@/components/providers/AppProviders'
 export default function NotFound() {
   const { locale } = useApp()
   // 文案承诺 "popular tools",渲染 curated featured 集而非注册表顺序前 6 个
-  const popular = getFeaturedTools().slice(0, 6)
+  // (featuredLite 与 lib/tools.ts#getFeaturedTools 同源同序,由生成脚本保证)
+  const popular = featuredLite.slice(0, 6)
 
   return (
     <div className="container-page flex min-h-[60vh] flex-col items-center justify-center py-20 text-center">

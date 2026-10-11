@@ -18,7 +18,9 @@
 
 import type { LucideIcon } from 'lucide-react'
 import { ArrowLeftRight, Brain, Code2, Palette, PenLine, Wallet, Zap } from 'lucide-react'
-import type { ToolMeta } from '@/lib/tools'
+// 轻量投影(lib/related-tools.ts):hub 过滤/精选只用 slug/category/featured
+// 三字段,不引入全量 SEO 注册表,保证首页客户端 bundle 不含 tools.ts 本体。
+import type { ToolLiteMeta } from '@/lib/related-tools'
 import type { Dict } from '@/lib/i18n'
 
 export interface HubTheme {
@@ -160,7 +162,7 @@ const FALLBACK_HUB_ID = 'utilities'
  * 该主题下的全部工具(保持 tools.ts 声明顺序)。
  * 未知/缺失 category 的工具兜底归入 Utilities & Math,保证每个工具都有归属。
  */
-export function hubTools(tools: ToolMeta[], hub: HubTheme): ToolMeta[] {
+export function hubTools(tools: ToolLiteMeta[], hub: HubTheme): ToolLiteMeta[] {
   return tools.filter(
     (tool) =>
       hub.categories.includes(tool.category) ||
@@ -173,9 +175,9 @@ export function hubTools(tools: ToolMeta[], hub: HubTheme): ToolMeta[] {
  * 缺失或不足的部分按 featured 标记 + 声明顺序从本主题内补齐。
  * 确定性输出(SSG/CSR 一致),不依赖任何运行时状态。
  */
-export function hubTopPicks(tools: ToolMeta[], hub: HubTheme, count = 4): ToolMeta[] {
+export function hubTopPicks(tools: ToolLiteMeta[], hub: HubTheme, count = 4): ToolLiteMeta[] {
   const bySlug = new Map(tools.map((tool) => [tool.slug, tool]))
-  const picked: ToolMeta[] = []
+  const picked: ToolLiteMeta[] = []
   const seen = new Set<string>()
   for (const slug of hub.featuredToolIds) {
     const tool = bySlug.get(slug)

@@ -28,7 +28,7 @@ import Link from 'next/link'
 import { motion, useReducedMotion } from 'framer-motion'
 import { ArrowLeft, ArrowRight } from 'lucide-react'
 import { toolCardEnterVariants } from '@/components/motion/MotionPrimitives'
-import type { ToolMeta } from '@/lib/tools'
+import type { ToolLiteMeta } from '@/lib/related-tools'
 import { getToolIcon } from '@/lib/tool-icons'
 import { searchTools } from '@/lib/tool-search'
 import { SmartIcon } from '@/components/SmartIcon'
@@ -45,7 +45,7 @@ import {
 } from './hubThemes'
 
 interface ToolHubExplorerProps {
-  tools: ToolMeta[]
+  tools: ToolLiteMeta[]
   /** Hero 搜索框的实时搜索词(父组件持有 state,保证跨区块联动) */
   query: string
   /** 清空搜索词(无结果态的 reset 按钮用) */
@@ -139,7 +139,7 @@ export function ToolHubExplorer({ tools, query, onQueryChange }: ToolHubExplorer
     : toolCardEnterVariants
 
   /** 通用工具卡(视图 ②③):规格化 hover + 右上角主题 Pill/图钉 flex 行 */
-  const renderToolCard = (tool: ToolMeta, index: number) => {
+  const renderToolCard = (tool: ToolLiteMeta, index: number) => {
     const localizedName = getToolName(locale, tool.slug, tool.name)
     const localizedIntro = getToolShortIntro(locale, tool.slug, tool.shortIntro)
     const titleAttr = `${localizedName} — ${localizedIntro}`

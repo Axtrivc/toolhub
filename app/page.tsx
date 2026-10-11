@@ -4,7 +4,9 @@ import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import dynamic from 'next/dynamic'
 import { Boxes, Search, ShieldCheck, Terminal, TrendingUp, Zap } from 'lucide-react'
-import { getPublishedTools } from '@/lib/tools'
+// 工具清单走轻量投影(lib/related-tools.ts,与注册表同序、展示/搜索字段齐全):
+// 首页是 'use client',直接 import lib/tools 会把全量 SEO 注册表拖进首屏 bundle。
+import { toolLiteMeta } from '@/lib/related-tools'
 import { AdSlot } from '@/components/AdSlot'
 import { ToolHubExplorer } from '@/components/workspace/ToolHubExplorer'
 import { LiveBento } from '@/components/home/LiveBento'
@@ -39,7 +41,8 @@ const WorkspaceDashboard = dynamic(
  *     换成 HomeSitemap 玻璃目录,内链数量不减)。
  */
 export default function HomePage() {
-  const tools = getPublishedTools()
+  // 与 getPublishedTools() 同源同序(生成脚本保证),length/卡片/搜索结果完全一致
+  const tools = Object.values(toolLiteMeta)
   const { locale } = useApp()
   const reduceMotion = useReducedMotion()
 

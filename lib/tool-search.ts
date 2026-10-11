@@ -14,12 +14,32 @@
  *    无空格的 CJK 查询额外生成 2~4 字滑窗切片,整词与切片都参与 AND/OR 评分。
  */
 
-import type { ToolMeta } from './tools'
 import type { Locale } from './i18n'
 import { getToolName, getToolShortIntro, tc } from './i18n'
 
+/**
+ * 搜索所需的最小字段集(结构化类型):
+ * ToolMeta(全量注册表,⌘K SearchPalette 用)与 ToolLiteMeta
+ * (lib/related-tools.ts 轻量投影,首页 ToolHubExplorer 用)均满足,
+ * 引擎不感知数据来源,字段值一致则结果逐位一致。
+ */
+export interface ToolSearchable {
+  slug: string
+  name: string
+  /** 工具页 H1 */
+  h1: string
+  /** 目标关键词 */
+  keywords: string[]
+  /** 长尾关键词(可选,缺失回退 keywords) */
+  longTailKeywords?: string[]
+  /** 简短介绍 */
+  shortIntro: string
+  /** 分类 */
+  category: string
+}
+
 /** 字段 → 权重(命中该字段的词得分基数) */
-const FIELD_WEIGHTS: Array<{ get: (t: ToolMeta) => string[]; weight: number }> = [
+const FIELD_WEIGHTS: Array<{ get: (t: ToolSearchable) => string[]; weight: number }> = [
   { get: (t) => [t.name], weight: 6 },
   { get: (t) => [t.h1], weight: 6 },
   { get: (t) => t.longTailKeywords ?? [], weight: 5 },
@@ -30,7 +50,7 @@ const FIELD_WEIGHTS: Array<{ get: (t: ToolMeta) => string[]; weight: number }> =
 ]
 
 /** locale ≠ en 时追加的本地化字段:名称 ×6 > 简介 ×4 > 分类 ×3 */
-function localizedFields(tool: ToolMeta, locale: Locale): Array<{ texts: string[]; weight: number }> {
+function localizedFields(tool: ToolSearchable, locale: Locale): Array<{ texts: string[]; weight: number }> {
   if (locale === 'en') return []
   return [
     { texts: [getToolName(locale, tool.slug, tool.name)], weight: 6 },
@@ -95,7 +115,7 @@ function escapeRe(s: string): string {
 
 /** 单工具对 token 组的 (AND 是否全命中, 总分);fields 为该工具展开后的字段文本 */
 function scoreTool(
-  tool: ToolMeta,
+  tool: ToolSearchable,
   tokens: string[],
   fields: Array<{ texts: string[]; weight: number }>,
 ): { and: boolean; score: number } {
@@ -118,11 +138,11 @@ function scoreTool(
  * locale ≠ en 时附加本地化字段参与评分(默认 'en' 仅匹配注册表英文原文)。
  */
 export function searchTools(
-  allTools: ToolMeta[],
+  allTools: readonly ToolSearchable[],
   query: string,
   limit = 12,
   locale: Locale = 'en',
-): ToolMeta[] | null {
+): ToolSearchable[] | null {
   const tokens = tokenizeQuery(query)
   if (tokens.length === 0) return null
   const scored = allTools
