@@ -5,7 +5,7 @@ import { CalculatorNote } from '../calculator/CalculatorField'
 import { ResultActions } from '../ResultActions'
 import { CopyButton } from '@/components/CopyButton'
 import { useApp } from '@/components/providers/AppProviders'
-import { tui } from '@/lib/i18n/tool-l10n'
+import { tui } from '@/lib/i18n/tool-l10n-accessors/tools/batch13bTools'
 import { getCalculatorSample } from '@/lib/tool-samples'
 
 /**

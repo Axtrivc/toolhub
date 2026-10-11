@@ -6,7 +6,7 @@ import { PulseGlow } from '@/components/motion/PulseGlow'
 import { AnimatedNumber } from '@/components/calculator/CalculatorField'
 import { useApp } from '@/components/providers/AppProviders'
 import { t, type Locale } from '@/lib/i18n'
-import { tui } from '@/lib/i18n/tool-l10n'
+import { tuiFromEntry, type ToolL10n } from '@/lib/i18n/tool-l10n-core'
 import { countWords } from '@/lib/text-stats'
 
 /**
@@ -35,6 +35,12 @@ import { countWords } from '@/lib/text-stats'
 export interface TextToolConfig {
   /** 工具 slug(可选,提供后启用 per-tool 文案本地化) */
   slug?: string
+  /**
+   * 本工具的本地化词典(可选,与 slug 同源:lib/i18n/tools-l10n/<slug>.ts
+   * 的导出值)。可见串经 tuiFromEntry(l10n, ...) 取本地化;未传或缺译回退
+   * 英文原值。按需随 config 传入,整表注册表不进首载 chunk。
+   */
+  l10n?: ToolL10n
   /** 输入框标签 */
   inputLabel?: string
   /** 输出框标签 */
@@ -79,7 +85,7 @@ export function makeTextTool(config: TextToolConfig): ComponentType {
     useEffect(() => {
       if (!mounted || !config.slug || !config.defaultInput) return
       if (!pristineRef.current) return
-      setInput(tui(config.slug, locale, 'defaultInput', config.defaultInput))
+      setInput(tuiFromEntry(config.l10n, locale, 'defaultInput', config.defaultInput))
     }, [mounted, locale, config])
 
     const output = useMemo(() => {
@@ -88,8 +94,7 @@ export function makeTextTool(config: TextToolConfig): ComponentType {
         // P-1 大输入防线:超过门控阈值直接走 ⚠️ 通道,不同步执行 transform
         if (config.maxInputChars !== undefined && input.length > config.maxInputChars) {
           const n = config.maxInputChars.toLocaleString('en-US')
-          return tui(
-            config.slug ?? '',
+          return tuiFromEntry(config.l10n,
             locale,
             'inputTooLarge',
             `⚠️ Input is too large — the supported size is up to ${n} characters. Trim the input to compute.`,
@@ -121,16 +126,16 @@ export function makeTextTool(config: TextToolConfig): ComponentType {
 
     // 每工具可本地化字符串:有 slug → tui 取本地化;无 → config 英文原值。
     const inputLabel = config.slug && config.inputLabel
-      ? tui(config.slug, locale, 'inputLabel', config.inputLabel)
+      ? tuiFromEntry(config.l10n, locale, 'inputLabel', config.inputLabel)
       : (config.inputLabel ?? 'Input')
     const outputLabel = config.slug && config.outputLabel
-      ? tui(config.slug, locale, 'outputLabel', config.outputLabel)
+      ? tuiFromEntry(config.l10n, locale, 'outputLabel', config.outputLabel)
       : (config.outputLabel ?? 'Result')
     const placeholder = config.slug && config.placeholder
-      ? tui(config.slug, locale, 'placeholder', config.placeholder)
+      ? tuiFromEntry(config.l10n, locale, 'placeholder', config.placeholder)
       : (config.placeholder ?? t(locale, 'textToolInputPlaceholder'))
     const note = config.slug && config.note
-      ? tui(config.slug, locale, 'note', config.note)
+      ? tuiFromEntry(config.l10n, locale, 'note', config.note)
       : config.note
 
     return (

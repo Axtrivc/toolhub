@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from 'react'
 import QRCode from 'qrcode'
 import { useApp } from '@/components/providers/AppProviders'
-import { tui } from '@/lib/i18n/tool-l10n'
+import { tui } from '@/lib/i18n/tool-l10n-accessors/tools/QRCodeGeneratorClient'
 
 type QRMode = 'text' | 'url' | 'wifi'
 type EclLevel = 'L' | 'M' | 'Q' | 'H'

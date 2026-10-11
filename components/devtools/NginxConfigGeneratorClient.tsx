@@ -4,7 +4,7 @@ import { useState, useMemo } from 'react'
 import { CopyButton } from '@/components/CopyButton'
 import { ResultActions } from '@/components/ResultActions'
 import { useApp } from '@/components/providers/AppProviders'
-import { tui } from '@/lib/i18n/tool-l10n'
+import { tui } from '@/lib/i18n/tool-l10n-accessors/devtools/NginxConfigGeneratorClient'
 
 /**
  * Nginx Config Generator —— 反向代理配置生成器

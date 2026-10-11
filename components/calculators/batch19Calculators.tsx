@@ -10,13 +10,19 @@
 
 import { makeCalculatorClient } from '../calculator/makeCalculatorClient'
 import { fmtUSD, fmtNum, fmtPct, toNum, toNumStrict } from '@/lib/format'
-import { tui } from '@/lib/i18n/tool-l10n'
+import { tui } from '@/lib/i18n/tool-l10n-accessors/calculators/batch19Calculators'
+import { rothIraCalculatorL10n } from '@/lib/i18n/tools-l10n/roth-ira-calculator'
+import { fireCalculatorL10n } from '@/lib/i18n/tools-l10n/fire-calculator'
+import { cacLtvCalculatorL10n } from '@/lib/i18n/tools-l10n/cac-ltv-calculator'
+import { flooringCalculatorL10n } from '@/lib/i18n/tools-l10n/flooring-calculator'
+import { dogFoodCalculatorL10n } from '@/lib/i18n/tools-l10n/dog-food-calculator'
 
 // ───────────────────────────────────────────
 // Roth vs. Traditional IRA Calculator(Roth IRA 计算器)
 // ───────────────────────────────────────────
 export const RothIraCalculatorClient = makeCalculatorClient({
   slug: 'roth-ira-calculator',
+  l10n: rothIraCalculatorL10n,
   urlState: true,
   allowCompare: true,
   presets: [
@@ -157,6 +163,7 @@ function fireYearsTo(target: number, principal: number, annual: number, r: numbe
 
 export const FireCalculatorClient = makeCalculatorClient({
   slug: 'fire-calculator',
+  l10n: fireCalculatorL10n,
   urlState: true,
   presets: [
     { label: 'Lean FIRE ($28k/yr)', values: { annualSpending: '28000', annualSavings: '45000' } },
@@ -266,6 +273,7 @@ export const FireCalculatorClient = makeCalculatorClient({
 // ───────────────────────────────────────────
 export const CacLtvCalculatorClient = makeCalculatorClient({
   slug: 'cac-ltv-calculator',
+  l10n: cacLtvCalculatorL10n,
   urlState: true,
   presets: [
     { label: 'Healthy SaaS (3.2:1)', values: { marketingSpend: '50000', newCustomers: '200', arpu: '50', grossMargin: '80', churn: '5' } },
@@ -368,6 +376,7 @@ const M2_TO_FT2 = 10.7639
 
 export const FlooringCalculatorClient = makeCalculatorClient({
   slug: 'flooring-calculator',
+  l10n: flooringCalculatorL10n,
   urlState: true,
   presets: [
     { label: 'Living room 15×12 ft', values: { length: '15', width: '12', unit: 'ft', type: 'hardwood', boxPrice: '62' } },
@@ -446,6 +455,7 @@ export const FlooringCalculatorClient = makeCalculatorClient({
 // ───────────────────────────────────────────
 export const DogFoodCalculatorClient = makeCalculatorClient({
   slug: 'dog-food-calculator',
+  l10n: dogFoodCalculatorL10n,
   urlState: true,
   presets: [
     { label: 'Medium neutered dog', values: { weight: '20', activity: '1.6', basis: 'cup', density: '375', gramsPerCup: '110' } },

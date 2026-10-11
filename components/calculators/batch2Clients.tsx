@@ -3,10 +3,15 @@
 import { makeUnitConverter } from './makeUnitConverter'
 import { makeCalculatorClient } from '../calculator/makeCalculatorClient'
 import { fmtNum } from '@/lib/format'
-import { tui } from '@/lib/i18n/tool-l10n'
+import { tui } from '@/lib/i18n/tool-l10n-accessors/calculators/batch2Clients'
 import { TemperatureConverterClient } from './TemperatureConverterClient'
 import { GPACalculatorClient } from './GPACalculatorClient'
 import { DateDifferenceClient } from './DateDifferenceClient'
+import { weightConverterL10n } from '@/lib/i18n/tools-l10n/weight-converter'
+import { speedConverterL10n } from '@/lib/i18n/tools-l10n/speed-converter'
+import { areaConverterL10n } from '@/lib/i18n/tools-l10n/area-converter'
+import { volumeConverterL10n } from '@/lib/i18n/tools-l10n/volume-converter'
+import { averageCalculatorL10n } from '@/lib/i18n/tools-l10n/average-calculator'
 
 // ════════════════════════════════════════════
 // 4 个线性单位转换器(用通用转换工厂,每个仅几行配置)
@@ -14,6 +19,7 @@ import { DateDifferenceClient } from './DateDifferenceClient'
 
 export const WeightConverterClient = makeUnitConverter({
   slug: 'weight-converter',
+  l10n: weightConverterL10n,
   defaultValue: '1',
   defaultFrom: 'kg',
   defaultTo: 'lb',
@@ -39,6 +45,7 @@ export const WeightConverterClient = makeUnitConverter({
 
 export const SpeedConverterClient = makeUnitConverter({
   slug: 'speed-converter',
+  l10n: speedConverterL10n,
   defaultValue: '100',
   defaultFrom: 'kmh',
   defaultTo: 'mph',
@@ -56,6 +63,7 @@ export const SpeedConverterClient = makeUnitConverter({
 
 export const AreaConverterClient = makeUnitConverter({
   slug: 'area-converter',
+  l10n: areaConverterL10n,
   defaultValue: '1',
   defaultFrom: 'sqm',
   defaultTo: 'sqft',
@@ -77,6 +85,7 @@ export const AreaConverterClient = makeUnitConverter({
 
 export const VolumeConverterClient = makeUnitConverter({
   slug: 'volume-converter',
+  l10n: volumeConverterL10n,
   defaultValue: '1',
   defaultFrom: 'l',
   defaultTo: 'gal',
@@ -103,6 +112,7 @@ export const VolumeConverterClient = makeUnitConverter({
 
 export const AverageCalculatorClient = makeCalculatorClient({
   slug: 'average-calculator',
+  l10n: averageCalculatorL10n,
   // B3 URL 分享:数字列表无敏感信息,?numbers=12,15,18 可直接分享结果链接
   urlState: true,
   inputs: [

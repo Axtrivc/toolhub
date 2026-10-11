@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation'
 import { getTool } from '@/lib/tools'
 import { buildToolMetadata, buildToolJsonLd, jsonLdStringify } from '@/lib/seo'
 import { ToolLayout } from '@/components/ToolLayout'
+import { getToolL10nRecord } from '@/lib/i18n/tool-l10n'
 import { Base64CodecTool } from '@/components/devtools/encoderTools'
 import { Base64EncoderContent } from './content'
 
@@ -15,8 +16,8 @@ export default function Page() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdStringify(jsonLd) }} />
-      <ToolLayout tool={tool}>
-        <Base64CodecTool initialMode="encode" slug="base64-encoder" />
+      <ToolLayout tool={tool} l10n={getToolL10nRecord('base64-encoder')}>
+        <Base64CodecTool initialMode="encode" slug="base64-encoder" l10n={getToolL10nRecord('base64-encoder')} />
         <Base64EncoderContent />
       </ToolLayout>
     </>

@@ -5,7 +5,7 @@ import { CalculatorField, ResultCard, CalculatorNote } from '@/components/calcul
 import { PresetChips } from '@/components/calculator/PresetChips'
 import { GaugeChart } from '@/components/charts/GaugeChart'
 import { useApp } from '@/components/providers/AppProviders'
-import { tui } from '@/lib/i18n/tool-l10n'
+import { tui } from '@/lib/i18n/tool-l10n-accessors/calculators/BMICalculatorClient'
 
 type Unit = 'metric' | 'imperial'
 

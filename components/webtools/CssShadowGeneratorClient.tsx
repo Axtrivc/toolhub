@@ -4,7 +4,7 @@ import { useState, useMemo, useCallback, useId } from 'react'
 import { CopyButton } from '@/components/CopyButton'
 import { LoadSampleButton } from '@/components/LoadSampleButton'
 import { useApp } from '@/components/providers/AppProviders'
-import { tui } from '@/lib/i18n/tool-l10n'
+import { tui } from '@/lib/i18n/tool-l10n-accessors/webtools/CssShadowGeneratorClient'
 
 /**
  * CSS Box Shadow & Glassmorphism Generator

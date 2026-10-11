@@ -4,7 +4,7 @@ import { useState, useMemo } from 'react'
 import { ResultCard, CalculatorNote } from '../calculator/CalculatorField'
 import { ResultActions } from '../ResultActions'
 import { useApp } from '@/components/providers/AppProviders'
-import { tui, tuiUc } from '@/lib/i18n/tool-l10n'
+import { tui, tuiUc } from '@/lib/i18n/tool-l10n-accessors/converters/NumeralSystemConverterClient'
 
 type Base = '2' | '8' | '10' | '16'
 

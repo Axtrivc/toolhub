@@ -1,11 +1,15 @@
 'use client'
 
 import { makeUnitConverter } from '../calculators/makeUnitConverter'
+import { densityConverterL10n } from '@/lib/i18n/tools-l10n/density-converter'
+import { powerConverterL10n } from '@/lib/i18n/tools-l10n/power-converter'
+import { flowRateConverterL10n } from '@/lib/i18n/tools-l10n/flow-rate-converter'
 
 /** 第七批:线性单位转换器(mass-converter 已合并进 WeightConverterClient,见 batch2Clients.tsx) */
 
 export const DensityConverterClient = makeUnitConverter({
   slug: 'density-converter',
+  l10n: densityConverterL10n,
   defaultValue: '1',
   defaultFrom: 'kgm3',
   defaultTo: 'gl',
@@ -24,6 +28,7 @@ export const DensityConverterClient = makeUnitConverter({
 
 export const PowerConverterClient = makeUnitConverter({
   slug: 'power-converter',
+  l10n: powerConverterL10n,
   defaultValue: '1',
   defaultFrom: 'kw',
   defaultTo: 'hp',
@@ -45,6 +50,7 @@ export const PowerConverterClient = makeUnitConverter({
 
 export const FlowRateConverterClient = makeUnitConverter({
   slug: 'flow-rate-converter',
+  l10n: flowRateConverterL10n,
   defaultValue: '1',
   defaultFrom: 'lmin',
   defaultTo: 'gpm',

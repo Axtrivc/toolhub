@@ -8,6 +8,7 @@
  */
 
 import type { Locale } from './i18n'
+import type { ToolL10n } from './i18n/tool-l10n-core'
 
 export type FieldType = 'number' | 'select' | 'text'
 
@@ -76,6 +77,13 @@ export interface CalculatorConfig {
    * 取示例;同时作为导出文件名的一部分。未填时回退为静态文件名。
    */
   slug?: string
+  /**
+   * 本工具的本地化词典(可选,与 slug 同源:lib/i18n/tools-l10n/<slug>.ts
+   * 的导出值)。可见串经 tuiFromEntry(l10n, ...) 取本地化;未传或缺译回退
+   * 英文原值。类型零依赖(tool-l10n-core 不携带注册表),数据按需 import,
+   * 整表词典不进首载 chunk。
+   */
+  l10n?: ToolL10n
   /**
    * 内嵌示例数据(可选)。key 对应 inputs[].key。
    * 设置后渲染「Load Sample」按钮,点击一键填充这些值。

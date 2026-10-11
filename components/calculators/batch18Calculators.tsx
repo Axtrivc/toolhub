@@ -16,14 +16,19 @@ import { ResultActions } from '@/components/ResultActions'
 import { makeCalculatorClient } from '../calculator/makeCalculatorClient'
 import { fmtUSD, fmtNum, toNum, toNumStrict } from '@/lib/format'
 import { useApp } from '@/components/providers/AppProviders'
-import { tui } from '@/lib/i18n/tool-l10n'
+import { tui } from '@/lib/i18n/tool-l10n-accessors/calculators/batch18Calculators'
 import { MODEL_PRICES } from '@/lib/model-pricing'
+import { hysaCalculatorL10n } from '@/lib/i18n/tools-l10n/hysa-calculator'
+import { cdCalculatorL10n } from '@/lib/i18n/tools-l10n/cd-calculator'
+import { breakEvenCalculatorL10n } from '@/lib/i18n/tools-l10n/break-even-calculator'
+import { profitMarginCalculatorL10n } from '@/lib/i18n/tools-l10n/profit-margin-calculator'
 
 // ───────────────────────────────────────────
 // HYSA Calculator(高收益储蓄账户计算器)
 // ───────────────────────────────────────────
 export const HysaCalculatorClient = makeCalculatorClient({
   slug: 'hysa-calculator',
+  l10n: hysaCalculatorL10n,
   urlState: true,
   presets: [
     { label: 'Emergency Fund (4.5% APY)', values: { initial: '5000', monthly: '200', apy: '4.5', years: '2' } },
@@ -126,6 +131,7 @@ export const HysaCalculatorClient = makeCalculatorClient({
 // ───────────────────────────────────────────
 export const CdCalculatorClient = makeCalculatorClient({
   slug: 'cd-calculator',
+  l10n: cdCalculatorL10n,
   urlState: true,
   presets: [
     { label: '1-Year CD (4.0% APY)', values: { deposit: '10000', apy: '4', term: '12' } },
@@ -250,6 +256,7 @@ export const CdCalculatorClient = makeCalculatorClient({
 // ───────────────────────────────────────────
 export const BreakEvenCalculatorClient = makeCalculatorClient({
   slug: 'break-even-calculator',
+  l10n: breakEvenCalculatorL10n,
   urlState: true,
   presets: [
     { label: 'Handmade Product', values: { fixed: '2000', price: '35', variable: '12' } },
@@ -319,6 +326,7 @@ export const BreakEvenCalculatorClient = makeCalculatorClient({
 // ───────────────────────────────────────────
 export const ProfitMarginCalculatorClient = makeCalculatorClient({
   slug: 'profit-margin-calculator',
+  l10n: profitMarginCalculatorL10n,
   urlState: true,
   presets: [
     { label: 'Keystone Markup (100%)', values: { mode: 'markup', value: '100' } },

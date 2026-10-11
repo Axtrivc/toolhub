@@ -5,7 +5,7 @@ import DOMPurify from 'dompurify'
 import { CopyButton } from '@/components/CopyButton'
 import { LoadSampleButton } from '@/components/LoadSampleButton'
 import { useApp } from '@/components/providers/AppProviders'
-import { tui } from '@/lib/i18n/tool-l10n'
+import { tui } from '@/lib/i18n/tool-l10n-accessors/devtools/MarkdownToHtmlClient'
 
 /**
  * Markdown to HTML Converter —— 手写 CommonMark 子集 + GFM 表格

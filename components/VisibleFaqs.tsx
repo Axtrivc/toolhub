@@ -4,8 +4,9 @@
  * 工具页可见 FAQ 区块 —— 手风琴样式
  *
  * 数据源不变:lib/tool-faqs.ts → getToolFaqs(slug),与 FAQPage JSON-LD
- * (lib/seo.ts 的 buildFaqJsonLd)共用同一份本地化数据(均经 getToolFaqsL10n),
- * 保证各 locale 下页面所见与结构化数据声明完全一致(避免 Google 失配降权)。
+ * (ToolLayout 的 buildFaqJsonLd)共用同一份本地化数据(均经 l10n prop,
+ * 由工具页 RSC 传入),保证各 locale 下页面所见与结构化数据声明完全一致
+ * (避免 Google 失配降权)。
  *
  * 交互:每个 Q 为可展开/收起的 <details>(原生,无 JS 依赖,SSR 友好,
  * 键盘可达,默认第一个展开便于首屏可读)。首个 FAQ 用 open 属性默认展开。
@@ -14,14 +15,15 @@
  */
 
 import { getToolFaqs } from '@/lib/tool-faqs'
-import { getToolFaqsL10n } from '@/lib/i18n/tool-l10n'
+import { l10nEntryFor, type ToolL10n } from '@/lib/i18n/tool-l10n-core'
 import { useApp } from './providers/AppProviders'
 import { t } from '@/lib/i18n'
 
-export function VisibleFaqs({ slug }: { slug: string }) {
+export function VisibleFaqs({ slug, l10n }: { slug: string; l10n?: ToolL10n }) {
   const { locale } = useApp()
   // 本地化 Q&A 优先;无本地化 → 回退英文 getToolFaqs(SSR 恒英文)。
-  const faqs = getToolFaqsL10n(slug, locale, getToolFaqs(slug))
+  // l10nEntryFor(record, locale) 与原 getToolFaqsL10n 内部取值同表达式(en → null)。
+  const faqs = l10nEntryFor(l10n, locale)?.faqs ?? getToolFaqs(slug)
   if (faqs.length === 0) return null
 
   return (

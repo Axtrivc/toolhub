@@ -1,6 +1,12 @@
 'use client'
 
 import { makeTextTool } from '../tools/makeTextTool'
+import { jsonFormatterL10n } from '@/lib/i18n/tools-l10n/json-formatter'
+import { jsonMinifierL10n } from '@/lib/i18n/tools-l10n/json-minifier'
+import { csvToJsonL10n } from '@/lib/i18n/tools-l10n/csv-to-json'
+import { jsonToCsvL10n } from '@/lib/i18n/tools-l10n/json-to-csv'
+import { addLineNumbersL10n } from '@/lib/i18n/tools-l10n/add-line-numbers'
+import { textToListL10n } from '@/lib/i18n/tools-l10n/text-to-list'
 
 /**
  * 第六批:数据格式转换工具
@@ -10,6 +16,7 @@ import { makeTextTool } from '../tools/makeTextTool'
 // ── JSON 格式化(美化/压缩)──
 export const JSONFormatterClient = makeTextTool({
   slug: 'json-formatter',
+  l10n: jsonFormatterL10n,
   inputLabel: 'JSON (raw or minified)',
   outputLabel: 'Formatted JSON',
   defaultInput: '{"name":"John","age":30,"city":"NYC","skills":["js","css"]}',
@@ -28,6 +35,7 @@ export const JSONFormatterClient = makeTextTool({
 // ── JSON 压缩(minify)──
 export const JSONMinifierClient = makeTextTool({
   slug: 'json-minifier',
+  l10n: jsonMinifierL10n,
   inputLabel: 'JSON (formatted)',
   outputLabel: 'Minified JSON',
   defaultInput: '{\n  "name": "John",\n  "age": 30\n}',
@@ -105,6 +113,7 @@ function detectDelimiter(text: string): string {
 // ── CSV 转 JSON ──
 export const CSVtoJSONClient = makeTextTool({
   slug: 'csv-to-json',
+  l10n: csvToJsonL10n,
   inputLabel: 'CSV (with header row)',
   outputLabel: 'JSON array',
   defaultInput: 'name,age,city\nJohn,30,NYC\nJane,25,LA',
@@ -141,6 +150,7 @@ export const CSVtoJSONClient = makeTextTool({
 // ── JSON 转 CSV ──
 export const JSONtoCSVClient = makeTextTool({
   slug: 'json-to-csv',
+  l10n: jsonToCsvL10n,
   inputLabel: 'JSON array of objects',
   outputLabel: 'CSV',
   defaultInput: '[{"name":"John","age":30},{"name":"Jane","age":25}]',
@@ -179,6 +189,7 @@ export const JSONtoCSVClient = makeTextTool({
 // ── 添加行号 ──
 export const AddLineNumbersClient = makeTextTool({
   slug: 'add-line-numbers',
+  l10n: addLineNumbersL10n,
   inputLabel: 'Your text',
   outputLabel: 'With line numbers',
   defaultInput: 'First line\nSecond line\nThird line',
@@ -194,6 +205,7 @@ export const AddLineNumbersClient = makeTextTool({
 // ── 文本转列表(每行加项目符号)──
 export const TextToListClient = makeTextTool({
   slug: 'text-to-list',
+  l10n: textToListL10n,
   inputLabel: 'Lines of text',
   outputLabel: 'Bulleted list',
   defaultInput: 'Apple\nBanana\nCherry',

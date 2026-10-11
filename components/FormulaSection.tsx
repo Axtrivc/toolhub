@@ -4,7 +4,7 @@ import { getToolFormula } from '@/lib/tool-formulas'
 import type { ToolMeta } from '@/lib/tools'
 import { useApp } from './providers/AppProviders'
 import { t, getToolName } from '@/lib/i18n'
-import { getToolL10n } from '@/lib/i18n/tool-l10n'
+import { l10nEntryFor, type ToolL10n } from '@/lib/i18n/tool-l10n-core'
 
 /**
  * 公式区 —— 中部 SEO 长文本里的"原理公式"区块
@@ -15,15 +15,16 @@ import { getToolL10n } from '@/lib/i18n/tool-l10n'
  * 本地化:标题/引导走 dict;formula/explain 优先取 lib/i18n/tools-l10n/<slug>.ts
  * 的本地化,缺失回退 lib/tool-formulas.ts 英文(SSR 恒英文)。
  */
-export function FormulaSection({ slug, tool }: { slug: string; tool: ToolMeta }) {
+export function FormulaSection({ slug, tool, l10n }: { slug: string; tool: ToolMeta; l10n?: ToolL10n }) {
   const { locale } = useApp()
   const enFormula = getToolFormula(slug)
   if (!enFormula) return null
 
   // 本地化覆盖(逐字段合并:缺译字段回退英文原值,variables/example 不因局部覆盖而丢失)
-  const l10n = getToolL10n(slug, locale)
+  // l10nEntryFor(record, locale) 与原 getToolL10n(slug, locale) 同表达式(en → null 回退英文)
+  const entry = l10nEntryFor(l10n, locale)
   const formula =
-    enFormula && l10n?.formula ? { ...enFormula, ...l10n.formula } : enFormula
+    enFormula && entry?.formula ? { ...enFormula, ...entry.formula } : enFormula
   const name = getToolName(locale, tool.slug, tool.name)
 
   return (

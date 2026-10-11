@@ -2,7 +2,12 @@
 
 import { makeCalculatorClient } from '../calculator/makeCalculatorClient'
 import { fmtNum, fmtUSD, toNum, toNumStrict } from '@/lib/format'
-import { tui } from '@/lib/i18n/tool-l10n'
+import { tui } from '@/lib/i18n/tool-l10n-accessors/calculators/batch9Calculators'
+import { RomanNumeralConverterL10n } from '@/lib/i18n/tools-l10n/roman-numeral-converter'
+import { PaceCalculatorL10n } from '@/lib/i18n/tools-l10n/pace-calculator'
+import { ProteinIntakeCalculatorL10n } from '@/lib/i18n/tools-l10n/protein-intake-calculator'
+import { ElectricityCostCalculatorL10n } from '@/lib/i18n/tools-l10n/electricity-cost-calculator'
+import { CarCostCalculatorL10n } from '@/lib/i18n/tools-l10n/car-cost-calculator'
 
 /**
  * 第九批:2025-08 新增工具(工厂配置驱动)
@@ -20,6 +25,7 @@ const ROMAN_PAIRS: [number, string][] = [
 
 export const RomanNumeralConverterClient = makeCalculatorClient({
   slug: 'roman-numeral-converter',
+  l10n: RomanNumeralConverterL10n,
   inputs: [
     { key: 'num', label: 'Number (1-3999)', default: '2024', slider: { min: 1, max: 3999, step: 1 } },
     { key: 'roman', label: 'Or Roman numeral', type: 'text', default: '', placeholder: 'MMXXIV' },
@@ -119,6 +125,7 @@ const RACE_DISTANCES_KM: [string, number][] = [
 
 export const PaceCalculatorClient = makeCalculatorClient({
   slug: 'pace-calculator',
+  l10n: PaceCalculatorL10n,
   urlState: true,
   // 常见比赛距离一键填充(E2/chips):全部按 6:00/km 的新手友好水平
   // (半马 21.0975×360=7595s→2:06:35;全马 42.195×360=15190s→4:13:10)
@@ -195,6 +202,7 @@ export const PaceCalculatorClient = makeCalculatorClient({
 // ── 蛋白质摄入计算器 ──
 export const ProteinIntakeCalculatorClient = makeCalculatorClient({
   slug: 'protein-intake-calculator',
+  l10n: ProteinIntakeCalculatorL10n,
   inputs: [
     { key: 'weight', label: 'Weight', suffix: 'kg', default: '70' },
     { key: 'activity', label: 'Activity level', default: 'moderate', options: [
@@ -283,6 +291,7 @@ export const ProteinIntakeCalculatorClient = makeCalculatorClient({
 // ── 电费计算器 ──
 export const ElectricityCostCalculatorClient = makeCalculatorClient({
   slug: 'electricity-cost-calculator',
+  l10n: ElectricityCostCalculatorL10n,
   urlState: true,
   inputs: [
     { key: 'watts', label: 'Power rating', suffix: 'W', default: '1500', slider: { min: 10, max: 5000, step: 10 } },
@@ -331,6 +340,7 @@ export const ElectricityCostCalculatorClient = makeCalculatorClient({
 // ── 养车总成本计算器 ──
 export const CarCostCalculatorClient = makeCalculatorClient({
   slug: 'car-cost-calculator',
+  l10n: CarCostCalculatorL10n,
   urlState: true,
   inputs: [
     { key: 'carPrice', label: 'Car purchase price', suffix: '$', default: '25000', slider: { min: 1000, max: 150000, step: 1000 } },

@@ -8,7 +8,7 @@ import { ComparePanelBox, CompareToggleRow, ScenarioCompareResults } from '@/com
 import { yearlyBalanceSeries } from '@/components/charts/chartKit'
 import { ResultActions } from '@/components/ResultActions'
 import { useApp } from '@/components/providers/AppProviders'
-import { tui } from '@/lib/i18n/tool-l10n'
+import { tui } from '@/lib/i18n/tool-l10n-accessors/calculators/AutoLoanCalculatorClient'
 import { toNumStrict } from '@/lib/format'
 
 const TERMS = ['24', '36', '48', '60', '72', '84']

@@ -1,6 +1,13 @@
 'use client'
 
 import { makeUnitConverter } from '../calculators/makeUnitConverter'
+import { dataStorageConverterL10n } from '@/lib/i18n/tools-l10n/data-storage-converter'
+import { timeConverterL10n } from '@/lib/i18n/tools-l10n/time-converter'
+import { angleConverterL10n } from '@/lib/i18n/tools-l10n/angle-converter'
+import { fuelEconomyConverterL10n } from '@/lib/i18n/tools-l10n/fuel-economy-converter'
+import { pressureConverterL10n } from '@/lib/i18n/tools-l10n/pressure-converter'
+import { energyConverterL10n } from '@/lib/i18n/tools-l10n/energy-converter'
+import { frequencyConverterL10n } from '@/lib/i18n/tools-l10n/frequency-converter'
 
 /**
  * 批量单位转换器 - 全部用通用转换工厂,每个仅需几行配置
@@ -12,6 +19,7 @@ import { makeUnitConverter } from '../calculators/makeUnitConverter'
 // 比特系按电信惯例 1000 基(1 Mbit = 125000 bytes),网速 "100 Mb" → 12.5 MB/s。
 export const DataStorageConverterClient = makeUnitConverter({
   slug: 'data-storage-converter',
+  l10n: dataStorageConverterL10n,
   defaultValue: '1',
   defaultFrom: 'gb',
   defaultTo: 'mb',
@@ -42,6 +50,7 @@ export const DataStorageConverterClient = makeUnitConverter({
 // ── 时间(Time 转 ms/s/min/h/day)──
 export const TimeConverterClient = makeUnitConverter({
   slug: 'time-converter',
+  l10n: timeConverterL10n,
   defaultValue: '1',
   defaultFrom: 'h',
   defaultTo: 'min',
@@ -68,6 +77,7 @@ export { NumeralSystemConverterClient } from './NumeralSystemConverterClient'
 // ── 角度(Degree/Radian/Gradian)──
 export const AngleConverterClient = makeUnitConverter({
   slug: 'angle-converter',
+  l10n: angleConverterL10n,
   defaultValue: '90',
   defaultFrom: 'deg',
   defaultTo: 'rad',
@@ -99,6 +109,7 @@ const positiveOrNaN = (v: number): number => (v > 0 ? v : NaN)
 
 export const FuelEconomyConverterClient = makeUnitConverter({
   slug: 'fuel-economy-converter',
+  l10n: fuelEconomyConverterL10n,
   defaultValue: '30',
   defaultFrom: 'mpg-us',
   defaultTo: 'l100km',
@@ -128,6 +139,7 @@ export const FuelEconomyConverterClient = makeUnitConverter({
 // ── 压力(Pascal/Bar/PSI/atm)──
 export const PressureConverterClient = makeUnitConverter({
   slug: 'pressure-converter',
+  l10n: pressureConverterL10n,
   defaultValue: '1',
   defaultFrom: 'bar',
   defaultTo: 'psi',
@@ -150,6 +162,7 @@ export const PressureConverterClient = makeUnitConverter({
 // ── 能量(Joule/Calorie/kWh/BTU)──
 export const EnergyConverterClient = makeUnitConverter({
   slug: 'energy-converter',
+  l10n: energyConverterL10n,
   defaultValue: '1',
   defaultFrom: 'kcal',
   defaultTo: 'kj',
@@ -172,6 +185,7 @@ export const EnergyConverterClient = makeUnitConverter({
 // ── 频率(Hz/kHz/MHz/GHz/RPM)──
 export const FrequencyConverterClient = makeUnitConverter({
   slug: 'frequency-converter',
+  l10n: frequencyConverterL10n,
   defaultValue: '1',
   defaultFrom: 'mhz',
   defaultTo: 'hz',

@@ -4,7 +4,7 @@ import { CalculatorField, CalculatorSliderField, ResultCard, CalculatorNote } fr
 import { StackedCompareChart } from '@/components/charts/StackedCompareChart'
 import { useUrlState } from '@/lib/useUrlState'
 import { useApp } from '@/components/providers/AppProviders'
-import { tui } from '@/lib/i18n/tool-l10n'
+import { tui } from '@/lib/i18n/tool-l10n-accessors/calculators/PercentageCalculatorClient'
 import { toNum } from '@/lib/format'
 
 export function PercentageCalculatorClient() {

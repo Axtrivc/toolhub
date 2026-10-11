@@ -3,7 +3,7 @@
 import { useState, useMemo } from 'react'
 import { CopyButton } from '@/components/CopyButton'
 import { useApp } from '@/components/providers/AppProviders'
-import { tui } from '@/lib/i18n/tool-l10n'
+import { tui } from '@/lib/i18n/tool-l10n-accessors/devtools/IpSubnetCalculatorClient'
 
 /**
  * IP Subnet Calculator —— IPv4 CIDR 全量计算(32 位无符号位运算)

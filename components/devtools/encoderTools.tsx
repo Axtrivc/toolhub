@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { useApp } from '@/components/providers/AppProviders'
-import { tui } from '@/lib/i18n/tool-l10n'
+import { tuiFromEntry, type ToolL10n } from '@/lib/i18n/tool-l10n-core'
 import { EncoderDecoderTool } from '../tools/EncoderDecoderTool'
 
 /**
@@ -16,13 +16,15 @@ import { EncoderDecoderTool } from '../tools/EncoderDecoderTool'
  */
 
 // ── Base64 编解码 ──
-export function Base64CodecTool({ initialMode = 'encode', slug = 'base64-encoder' }: { initialMode?: 'encode' | 'decode'; slug?: string }) {
+export function Base64CodecTool({ initialMode = 'encode', slug = 'base64-encoder', l10n }: { initialMode?: 'encode' | 'decode'; slug?: string; l10n?: ToolL10n }) {
   const { locale } = useApp()
-  const L = (key: string, fb: string) => tui(slug, locale, key, fb)
+  // l10n 未传 → tuiFromEntry 返回 fallback(英文原值),行为与改造前一致。
+  const L = (key: string, fb: string) => tuiFromEntry(l10n, locale, key, fb)
   return (
     <EncoderDecoderTool
       initialMode={initialMode}
       slug={slug}
+      l10n={l10n}
       encode={{
         inputLabel: 'Text to encode',
         outputLabel: 'Base64',
@@ -79,9 +81,10 @@ export function Base64CodecTool({ initialMode = 'encode', slug = 'base64-encoder
 }
 
 // ── URL 编解码 ──
-export function URLCodecTool({ initialMode = 'encode', slug = 'url-encoder' }: { initialMode?: 'encode' | 'decode'; slug?: string }) {
+export function URLCodecTool({ initialMode = 'encode', slug = 'url-encoder', l10n }: { initialMode?: 'encode' | 'decode'; slug?: string; l10n?: ToolL10n }) {
   const { locale } = useApp()
-  const L = (key: string, fb: string) => tui(slug, locale, key, fb)
+  // l10n 未传 → tuiFromEntry 返回 fallback(英文原值),行为与改造前一致。
+  const L = (key: string, fb: string) => tuiFromEntry(l10n, locale, key, fb)
   // 编码口径:Component (encodeURIComponent) ↔ Full URI (encodeURI);
   // 解码另提供可选的 + → 空格开关(表单提交的 query string 里 + 表示空格)。
   const [fullUri, setFullUri] = useState(false)
@@ -135,6 +138,7 @@ export function URLCodecTool({ initialMode = 'encode', slug = 'url-encoder' }: {
       <EncoderDecoderTool
         initialMode={initialMode}
         slug={slug}
+        l10n={l10n}
         encode={{
           inputLabel: 'Text to encode',
           outputLabel: 'URL-encoded',
@@ -172,11 +176,12 @@ export function URLCodecTool({ initialMode = 'encode', slug = 'url-encoder' }: {
 }
 
 // ── HTML 转义/反转义 ──
-export function HTMLEscapeTool({ initialMode = 'encode', slug = 'html-escape' }: { initialMode?: 'encode' | 'decode'; slug?: string }) {
+export function HTMLEscapeTool({ initialMode = 'encode', slug = 'html-escape', l10n }: { initialMode?: 'encode' | 'decode'; slug?: string; l10n?: ToolL10n }) {
   return (
     <EncoderDecoderTool
       initialMode={initialMode}
       slug={slug}
+      l10n={l10n}
       encode={{
         inputLabel: 'Text or HTML',
         outputLabel: 'Escaped HTML',

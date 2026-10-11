@@ -17,7 +17,7 @@
  * 用法:见 components/calculators/CronParserClient.tsx
  */
 
-import { tui } from './i18n/tool-l10n'
+import { tui } from './i18n/tool-l10n-accessors/lib/cron'
 import type { Locale } from './i18n'
 
 export interface CronSchedule {

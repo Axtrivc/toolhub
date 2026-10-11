@@ -7,7 +7,7 @@ import { StackedCompareChart } from '@/components/charts/StackedCompareChart'
 import { LoadSampleButton } from '@/components/LoadSampleButton'
 import { ResultActions } from '@/components/ResultActions'
 import { useApp } from '@/components/providers/AppProviders'
-import { tui } from '@/lib/i18n/tool-l10n'
+import { tui } from '@/lib/i18n/tool-l10n-accessors/calculators/TdeeCalculatorClient'
 import { toNumStrict } from '@/lib/format'
 
 /**

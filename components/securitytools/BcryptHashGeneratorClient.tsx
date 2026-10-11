@@ -5,7 +5,7 @@ import { RefreshCw } from 'lucide-react'
 import { CopyButton } from '@/components/CopyButton'
 import { compareSync, genSaltSync, hashSync } from '@/lib/bcrypt'
 import { useApp } from '@/components/providers/AppProviders'
-import { tui } from '@/lib/i18n/tool-l10n'
+import { tui } from '@/lib/i18n/tool-l10n-accessors/securitytools/BcryptHashGeneratorClient'
 
 /**
  * Bcrypt Hash Generator —— 纯客户端密码哈希/校验

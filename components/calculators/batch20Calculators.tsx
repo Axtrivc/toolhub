@@ -9,13 +9,16 @@
 
 import { makeCalculatorClient } from '../calculator/makeCalculatorClient'
 import { fmtUSD, fmtNum, toNumStrict } from '@/lib/format'
-import { tui } from '@/lib/i18n/tool-l10n'
+import { tui } from '@/lib/i18n/tool-l10n-accessors/calculators/batch20Calculators'
+import { runwayCalculatorL10n } from '@/lib/i18n/tools-l10n/runway-calculator'
+import { freelanceRateCalculatorL10n } from '@/lib/i18n/tools-l10n/freelance-rate-calculator'
 
 // ───────────────────────────────────────────
 // Runway Calculator (初创与独立开发者跑道计算器)
 // ───────────────────────────────────────────
 export const RunwayCalculatorClient = makeCalculatorClient({
   slug: 'runway-calculator',
+  l10n: runwayCalculatorL10n,
   urlState: true,
   allowCompare: true,
   presets: [
@@ -155,6 +158,7 @@ export const RunwayCalculatorClient = makeCalculatorClient({
 // ───────────────────────────────────────────
 export const FreelanceRateCalculatorClient = makeCalculatorClient({
   slug: 'freelance-rate-calculator',
+  l10n: freelanceRateCalculatorL10n,
   urlState: true,
   allowCompare: true,
   presets: [

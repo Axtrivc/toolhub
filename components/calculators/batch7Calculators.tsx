@@ -2,7 +2,12 @@
 
 import { makeCalculatorClient } from '../calculator/makeCalculatorClient'
 import { fmtNum, toNum } from '@/lib/format'
-import { tui } from '@/lib/i18n/tool-l10n'
+import { tui } from '@/lib/i18n/tool-l10n-accessors/calculators/batch7Calculators'
+import { scientificNotationConverterL10n } from '@/lib/i18n/tools-l10n/scientific-notation-converter'
+import { primeNumberCheckerL10n } from '@/lib/i18n/tools-l10n/prime-number-checker'
+import { primeFactorizationCalculatorL10n } from '@/lib/i18n/tools-l10n/prime-factorization-calculator'
+import { combinationCalculatorL10n } from '@/lib/i18n/tools-l10n/combination-calculator'
+import { permutationCalculatorL10n } from '@/lib/i18n/tools-l10n/permutation-calculator'
 
 /**
  * 第七批:数学工具 5 个
@@ -11,6 +16,7 @@ import { tui } from '@/lib/i18n/tool-l10n'
 // 科学计数法转换器
 export const ScientificNotationCalculatorClient = makeCalculatorClient({
   slug: 'scientific-notation-converter',
+  l10n: scientificNotationConverterL10n,
   inputs: [{ key: 'number', label: 'Number', default: '123456789' }],
   outputs: [
     { key: 'sci', label: 'Scientific notation', highlight: true },
@@ -61,6 +67,7 @@ const PRIME_MAX = 1e12
 // 质数检查器
 export const PrimeNumberCheckerClient = makeCalculatorClient({
   slug: 'prime-number-checker',
+  l10n: primeNumberCheckerL10n,
   inputs: [{ key: 'n', label: 'Number to check', default: '97' }],
   outputs: [
     { key: 'isPrime', label: 'Is prime?', highlight: true },
@@ -115,6 +122,7 @@ export const PrimeNumberCheckerClient = makeCalculatorClient({
 // 质因数分解
 export const PrimeFactorizationCalculatorClient = makeCalculatorClient({
   slug: 'prime-factorization-calculator',
+  l10n: primeFactorizationCalculatorL10n,
   inputs: [{ key: 'n', label: 'Number to factor', default: '360' }],
   outputs: [{ key: 'factors', label: 'Prime factorization', highlight: true }],
   compute: (v, locale) => {
@@ -152,6 +160,7 @@ export const PrimeFactorizationCalculatorClient = makeCalculatorClient({
 // 组合数计算器(C(n,r))
 export const CombinationCalculatorClient = makeCalculatorClient({
   slug: 'combination-calculator',
+  l10n: combinationCalculatorL10n,
   inputs: [
     { key: 'n', label: 'Total items (n)', default: '10', slider: { min: 1, max: 25, step: 1 } },
     { key: 'r', label: 'Choose (r)', default: '3', slider: { min: 1, max: 25, step: 1 } },
@@ -193,6 +202,7 @@ export const CombinationCalculatorClient = makeCalculatorClient({
 // 排列数计算器(P(n,r))
 export const PermutationCalculatorClient = makeCalculatorClient({
   slug: 'permutation-calculator',
+  l10n: permutationCalculatorL10n,
   inputs: [
     { key: 'n', label: 'Total items (n)', default: '5', slider: { min: 1, max: 25, step: 1 } },
     { key: 'r', label: 'Arrange (r)', default: '3', slider: { min: 1, max: 25, step: 1 } },

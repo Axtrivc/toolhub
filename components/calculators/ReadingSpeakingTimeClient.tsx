@@ -4,7 +4,7 @@ import { useMemo, useState } from 'react'
 import { CopyButton } from '@/components/CopyButton'
 import { AnimatedNumber, ResultCard, CalculatorNote } from '@/components/calculator/CalculatorField'
 import { useApp } from '@/components/providers/AppProviders'
-import { tui } from '@/lib/i18n/tool-l10n'
+import { tui } from '@/lib/i18n/tool-l10n-accessors/calculators/ReadingSpeakingTimeClient'
 import { countWords, countSentences, hasCJK } from '@/lib/text-stats'
 
 /**

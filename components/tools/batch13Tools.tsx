@@ -5,7 +5,7 @@ import { CalculatorField, CalculatorNote, ResultCard } from '../calculator/Calcu
 import { ResultActions } from '../ResultActions'
 import { CopyButton } from '@/components/CopyButton'
 import { useApp } from '@/components/providers/AppProviders'
-import { tui } from '@/lib/i18n/tool-l10n'
+import { tui } from '@/lib/i18n/tool-l10n-accessors/tools/batch13Tools'
 import { describeCron } from '@/lib/cron'
 
 /**

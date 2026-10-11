@@ -4,7 +4,7 @@ import { useState, useEffect, useMemo } from 'react'
 import { CopyButton } from '@/components/CopyButton'
 import { ResultCard } from '@/components/calculator/CalculatorField'
 import { useApp } from '@/components/providers/AppProviders'
-import { tui } from '@/lib/i18n/tool-l10n'
+import { tui } from '@/lib/i18n/tool-l10n-accessors/devtools/UserAgentParserClient'
 
 /**
  * User-Agent Parser —— 纯正则 UA 解析(浏览器/引擎/OS/设备/Bot)

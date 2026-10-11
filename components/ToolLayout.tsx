@@ -22,11 +22,19 @@ import { buildFaqJsonLd } from '@/lib/faq-jsonld'
 import { getToolRating, ratingCountBadge } from '@/lib/rating'
 import { SITE_URL, SITE_NAME } from '@/lib/constants'
 import { type ToolMeta } from '@/lib/tools'
+import { type ToolL10n } from '@/lib/i18n/tool-l10n-core'
 import { getToolIcon } from '@/lib/tool-icons'
 import { SmartIcon } from '@/components/SmartIcon'
 
 interface ToolLayoutProps {
   tool: ToolMeta
+  /**
+   * 本工具的多语本地化记录(lib/i18n/tools-l10n/<slug>.ts,由工具页 RSC 经
+   * getToolL10nRecord(slug) 传入)。下发给 ToolInfoSection / FormulaSection /
+   * VisibleFaqs 与 FAQ JSON-LD —— client 侧按运行时 locale 解析(en 恒英文),
+   * 语义与原 getToolL10n 一致,而整表注册表不进客户端 chunk。未传 → 恒英文回退。
+   */
+  l10n?: ToolL10n
   children?: ReactNode
 }
 
@@ -102,7 +110,7 @@ function buildHowToJsonLdFrom(tool: ToolMeta) {
  * 被 iframe 嵌入时(embed 模式)隐藏所有 [data-embed-hide] 元素,
  * 只保留工具本体 + YMYL 免责声明。
  */
-export function ToolLayout({ tool, children }: ToolLayoutProps) {
+export function ToolLayout({ tool, l10n, children }: ToolLayoutProps) {
   const { locale } = useApp()
   // 可见标题/简介/面包屑本地化(en 回退 tool.h1/shortIntro/name 原值,SSR 恒英文)。
   // 注意:SEO <title>/meta/JSON-LD 仍走英文(见 buildToolMetadata/build*JsonLd),不受影响。
@@ -110,7 +118,7 @@ export function ToolLayout({ tool, children }: ToolLayoutProps) {
   const visibleShortIntro = getToolShortIntro(locale, tool.slug, tool.shortIntro)
   const visibleName = getToolName(locale, tool.slug, tool.name)
   const visibleCategory = tc(locale, tool.category)
-  const faqJsonLd = buildFaqJsonLd(tool.slug, locale)
+  const faqJsonLd = buildFaqJsonLd(tool.slug, locale, l10n)
   const breadcrumbJsonLd = buildBreadcrumbJsonLdFrom(tool)
   const howToJsonLd = buildHowToJsonLdFrom(tool)
   // 星标徽章用的确定性评分(与 lib/seo.ts buildToolJsonLd 的 aggregateRating 同源)
@@ -235,17 +243,17 @@ export function ToolLayout({ tool, children }: ToolLayoutProps) {
       {/* ─────────── ② 中部 SEO 长文本区 ─────────── */}
       <div data-embed-hide>
         {/* 通用信息区 - About / How to Use / Why(按工具类型生成,增厚内容) */}
-        <ToolInfoSection tool={tool} />
+        <ToolInfoSection tool={tool} l10n={l10n} />
 
         {/* 公式区 - 闭式公式工具渲染,无注册的工具返回 null 不渲染 */}
-        <FormulaSection slug={tool.slug} tool={tool} />
+        <FormulaSection slug={tool.slug} tool={tool} l10n={l10n} />
 
         {/* 黄金广告位 ② - 文章内容区(content)与 FAQ 模块之间:真实 <ins>,
             horizontal 规格锁死 min-h(90/100px)防抖动 */}
         <AdSlot slot={`${tool.slug}-mid`} format="horizontal" fullWidth />
 
         {/* 可见 FAQ 手风琴 - 与 FAQPage JSON-LD schema 同源(lib/tool-faqs.ts) */}
-        <VisibleFaqs slug={tool.slug} />
+        <VisibleFaqs slug={tool.slug} l10n={l10n} />
 
         {/* 嵌入工具区块 - 让博主复制 iframe 代码获取站外反向链接 */}
         <EmbedTool tool={tool} />

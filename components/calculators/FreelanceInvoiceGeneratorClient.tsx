@@ -4,7 +4,7 @@ import { useState, useMemo, useEffect, useRef } from 'react'
 import { CalculatorField } from '@/components/calculator/CalculatorField'
 import { BreakdownChart } from '@/components/calculator/BreakdownChart'
 import { useApp } from '@/components/providers/AppProviders'
-import { tui } from '@/lib/i18n/tool-l10n'
+import { tui } from '@/lib/i18n/tool-l10n-accessors/calculators/FreelanceInvoiceGeneratorClient'
 
 const CURRENCIES: { code: string; symbol: string; decimals: number }[] = [
   { code: 'USD', symbol: '$', decimals: 2 },

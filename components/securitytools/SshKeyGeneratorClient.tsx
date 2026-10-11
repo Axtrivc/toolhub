@@ -4,7 +4,7 @@ import { useCallback, useState } from 'react'
 import { Download, Eye, EyeOff } from 'lucide-react'
 import { CopyButton } from '@/components/CopyButton'
 import { useApp } from '@/components/providers/AppProviders'
-import { tui } from '@/lib/i18n/tool-l10n'
+import { tui } from '@/lib/i18n/tool-l10n-accessors/securitytools/SshKeyGeneratorClient'
 
 /**
  * SSH Key Generator —— 纯 Web Crypto 客户端生成 SSH 密钥对

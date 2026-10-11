@@ -3,7 +3,7 @@
 import { useState, useEffect, useMemo, useCallback, useRef } from 'react'
 import { CopyButton } from '@/components/CopyButton'
 import { useApp } from '@/components/providers/AppProviders'
-import { tui } from '@/lib/i18n/tool-l10n'
+import { tuiFromEntry, type ToolL10n } from '@/lib/i18n/tool-l10n-core'
 import { countWords } from '@/lib/text-stats'
 
 /**
@@ -31,6 +31,8 @@ interface EncoderDecoderToolProps {
   initialMode?: 'encode' | 'decode'
   /** 工具 slug(用于交互界面本地化;未传 → 回退英文原值) */
   slug?: string
+  /** 与 slug 同源的本地化词典(lib/i18n/tools-l10n/<slug>.ts 导出值;未传 → 回退英文) */
+  l10n?: ToolL10n
 }
 
 /**
@@ -58,9 +60,10 @@ const MAX_INPUT_CHARS = 100_000
  *
  * 用法见 components/devtools/encoderTools.tsx 的 Base64CodecTool / URLCodecTool / HTMLEscapeTool。
  */
-export function EncoderDecoderTool({ encode, decode, initialMode = 'encode', slug = '' }: EncoderDecoderToolProps) {
+export function EncoderDecoderTool({ encode, decode, initialMode = 'encode', slug = '', l10n }: EncoderDecoderToolProps) {
   const { locale } = useApp()
-  const L = (key: string, fb: string) => tui(slug, locale, key, fb)
+  // l10n 未传 → tuiFromEntry 返回 fallback(英文原值),行为与改造前一致。
+  const L = (key: string, fb: string) => tuiFromEntry(l10n, locale, key, fb)
   const [mode, setMode] = useState<'encode' | 'decode'>(initialMode)
   const spec = mode === 'encode' ? encode : decode
   const [input, setInput] = useState(spec.defaultInput)
@@ -77,14 +80,14 @@ export function EncoderDecoderTool({ encode, decode, initialMode = 'encode', slu
   useEffect(() => {
     if (!mounted || !pristineRef.current) return
     const fallback = mode === 'encode' ? encode.defaultInput : decode.defaultInput
-    setInput(tui(slug, locale, mode === 'encode' ? 'defaultInputEncode' : 'defaultInputDecode', fallback))
+    setInput(tuiFromEntry(l10n, locale, mode === 'encode' ? 'defaultInputEncode' : 'defaultInputDecode', fallback))
   }, [mounted, mode, locale, slug, encode, decode])
 
   // 某方向当前生效的默认示例(含本地化),供 switchMode 判断「输入未被改动」
   const defaultFor = useCallback(
     (m: 'encode' | 'decode') => {
       const fallback = m === 'encode' ? encode.defaultInput : decode.defaultInput
-      return tui(slug, locale, m === 'encode' ? 'defaultInputEncode' : 'defaultInputDecode', fallback)
+      return tuiFromEntry(l10n, locale, m === 'encode' ? 'defaultInputEncode' : 'defaultInputDecode', fallback)
     },
     [slug, locale, encode, decode],
   )
@@ -94,8 +97,7 @@ export function EncoderDecoderTool({ encode, decode, initialMode = 'encode', slu
     // P-1 大输入防线:超阈值不同步执行 transform,直接给 ⚠️ 提示(与 line-diff 同款思路)
     if (input.length > MAX_INPUT_CHARS) {
       return {
-        value: tui(
-          slug,
+        value: tuiFromEntry(l10n,
           locale,
           'inputTooLarge',
           `⚠️ Input is too large — the supported size is up to ${MAX_INPUT_CHARS.toLocaleString('en-US')} characters. Trim the input to convert.`,
@@ -110,7 +112,7 @@ export function EncoderDecoderTool({ encode, decode, initialMode = 'encode', slu
       return { value, isError: value.startsWith('⚠️') }
     } catch {
       // 解码输入非法时给出可见提示,而不是静默输出空串
-      return { value: tui(slug, locale, 'invalidInput', '⚠️ Invalid input for this direction'), isError: true }
+      return { value: tuiFromEntry(l10n, locale, 'invalidInput', '⚠️ Invalid input for this direction'), isError: true }
     }
   }, [input, spec, mounted, slug, locale])
 

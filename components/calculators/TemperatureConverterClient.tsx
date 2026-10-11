@@ -5,7 +5,7 @@ import { CalculatorField, ResultCard, CalculatorNote } from '../calculator/Calcu
 import { ResultActions } from '../ResultActions'
 import { fmtNum, toNum } from '@/lib/format'
 import { useApp } from '@/components/providers/AppProviders'
-import { tui } from '@/lib/i18n/tool-l10n'
+import { tui } from '@/lib/i18n/tool-l10n-accessors/calculators/TemperatureConverterClient'
 
 /** 为线性温度轴取「好看的」刻度步长(≤5 档),手法同 chartKit.niceScale */
 function niceStepFor(span: number): number {

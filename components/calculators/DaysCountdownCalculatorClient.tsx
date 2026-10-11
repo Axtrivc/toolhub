@@ -4,7 +4,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { CalculatorField, ResultCard, CalculatorNote } from '@/components/calculator/CalculatorField'
 import { ResultActions } from '@/components/ResultActions'
 import { useApp } from '@/components/providers/AppProviders'
-import { tui } from '@/lib/i18n/tool-l10n'
+import { tui } from '@/lib/i18n/tool-l10n-accessors/calculators/DaysCountdownCalculatorClient'
 import { calendarDaysBetween } from '@/lib/date-utils'
 
 /**

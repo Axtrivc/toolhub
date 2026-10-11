@@ -3,7 +3,7 @@
 import { useState, useMemo, useEffect } from 'react'
 import { CalculatorSliderField } from '@/components/calculator/CalculatorField'
 import { useApp } from '@/components/providers/AppProviders'
-import { tui } from '@/lib/i18n/tool-l10n'
+import { tui } from '@/lib/i18n/tool-l10n-accessors/webtools/PxToRemClient'
 
 /**
  * PX to REM / EM Converter

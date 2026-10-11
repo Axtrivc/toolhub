@@ -4,7 +4,8 @@ import { useState, useMemo, useCallback } from 'react'
 import { CopyButton } from '@/components/CopyButton'
 import { LoadSampleButton } from '@/components/LoadSampleButton'
 import { useApp } from '@/components/providers/AppProviders'
-import { tui } from '@/lib/i18n/tool-l10n'
+import { tuiFromEntry, type ToolL10n } from '@/lib/i18n/tool-l10n-core'
+import { whitespaceRemoverL10n } from '@/lib/i18n/tools-l10n/whitespace-remover'
 import { countWords } from '@/lib/text-stats'
 
 /**
@@ -38,9 +39,16 @@ const DEFAULTS: Options = {
   sortAZ: false,
 }
 
-export function TextCleanerClient({ slug = 'whitespace-remover' }: { slug?: string }) {
+export function TextCleanerClient({
+  slug = 'whitespace-remover',
+  // slug 未注册/未传 → 回退英文原值(与全量表未注册行为一致)
+  l10n = whitespaceRemoverL10n,
+}: {
+  slug?: string
+  l10n?: ToolL10n
+}) {
   const { locale } = useApp()
-  const L = (key: string, fb: string) => tui(slug, locale, key, fb)
+  const L = (key: string, fb: string) => tuiFromEntry(l10n, locale, key, fb)
   const [input, setInput] = useState('')
   const [opts, setOpts] = useState<Options>(DEFAULTS)
 

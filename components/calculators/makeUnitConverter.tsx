@@ -8,7 +8,7 @@ import { LoadSampleButton } from '../LoadSampleButton'
 import { fmtNum, toNum, toNumStrict } from '@/lib/format'
 import { getConverterSample, type ConverterSample } from '@/lib/tool-samples'
 import { useApp } from '@/components/providers/AppProviders'
-import { tui, tuiUc } from '@/lib/i18n/tool-l10n'
+import { tuiFromEntry, tuiUc, type ToolL10n } from '@/lib/i18n/tool-l10n-core'
 
 /**
  * 通用单位转换器工厂
@@ -67,6 +67,12 @@ export function makeUnitConverter(config: {
   digits?: number
   /** 工具 slug(可选)。用于「Load Sample」时自动从 lib/tool-samples.ts 取示例 */
   slug?: string
+  /**
+   * 本工具的本地化词典(可选,与 slug 同源:lib/i18n/tools-l10n/<slug>.ts
+   * 的导出值)。可见串经 tuiFromEntry(l10n, ...) 取本地化;未传或缺译回退
+   * 英文原值。按需随 config 传入,整表注册表不进首载 chunk。
+   */
+  l10n?: ToolL10n
   /** 内嵌示例数据(可选);slug 注册表优先,本字段作回退 */
   sample?: ConverterSample
 }) {
@@ -82,9 +88,8 @@ export function makeUnitConverter(config: {
 
   return function UnitConverter() {
     const { locale } = useApp()
-    // slug 未设 → tui 返回 fallback(英文原值),行为与改造前一致。
-    const slug = config.slug ?? ''
-    const L = (key: string, fb: string) => tui(slug, locale, key, fb)
+    // l10n 未传 → tuiFromEntry 返回 fallback(英文原值),行为与改造前一致。
+    const L = (key: string, fb: string) => tuiFromEntry(config.l10n, locale, key, fb)
     const LC = (key: string, fb: string) => tuiUc(key, locale, fb)
     const [value, setValue] = useState(DEFAULT_VALUE)
     const [from, setFrom] = useState(DEFAULT_FROM)

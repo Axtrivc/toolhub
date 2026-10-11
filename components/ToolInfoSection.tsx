@@ -4,7 +4,7 @@ import { Fragment, type ReactNode } from 'react'
 import type { ToolMeta } from '@/lib/tools'
 import { useApp } from './providers/AppProviders'
 import { getToolName } from '@/lib/i18n'
-import { getToolL10n } from '@/lib/i18n/tool-l10n'
+import { l10nEntryFor, type ToolL10n } from '@/lib/i18n/tool-l10n-core'
 import {
   toolInfoTemplates,
   joinUseCases,
@@ -62,10 +62,10 @@ function renderInlineBold(s: string, name: string): ReactNode {
  *  - locale === 'en' → 走下方 EnglishToolInfo 的原 JSX(字节不变,Google 索引不变)
  *  - 非 en → 走 lib/i18n/tool-info-templates.ts 的模板 + 该工具的 useCases 本地化
  */
-export function ToolInfoSection({ tool }: { tool: ToolMeta }): ReactNode {
+export function ToolInfoSection({ tool, l10n }: { tool: ToolMeta; l10n?: ToolL10n }): ReactNode {
   const { locale } = useApp()
   if (locale === 'en') return <EnglishToolInfo tool={tool} />
-  return <LocalizedToolInfo tool={tool} />
+  return <LocalizedToolInfo tool={tool} l10n={l10n} />
 }
 
 // ──────────────────────────── en 原路径(保持不变) ────────────────────────────
@@ -233,7 +233,7 @@ function EnglishToolInfo({ tool }: { tool: ToolMeta }): ReactNode {
 
 // ──────────────────────────── 非英文模板路径 ────────────────────────────
 
-function LocalizedToolInfo({ tool }: { tool: ToolMeta }): ReactNode {
+function LocalizedToolInfo({ tool, l10n }: { tool: ToolMeta; l10n?: ToolL10n }): ReactNode {
   const { locale } = useApp()
   const tpl = toolInfoTemplates[locale]
   // 无模板(理论上不会发生,zh/es/de 都有)→ 回退英文路径,保证不破图。
@@ -241,8 +241,9 @@ function LocalizedToolInfo({ tool }: { tool: ToolMeta }): ReactNode {
 
   const type = detectType(tool.name)
   const name = getToolName(locale, tool.slug, tool.name)
-  const l10n = getToolL10n(tool.slug, locale)
-  const useCases = l10n?.useCases
+  // l10nEntryFor(record, locale) 与原 getToolL10n(slug, locale) 同表达式(en → null 回退英文)
+  const entry = l10nEntryFor(l10n, locale)
+  const useCases = entry?.useCases
 
   return (
     <section className="prose-content mt-10 max-w-3xl">

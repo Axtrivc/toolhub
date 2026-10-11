@@ -4,7 +4,7 @@ import { useState, useEffect, useCallback, useRef } from 'react'
 import { CopyButton } from '@/components/CopyButton'
 import { useApp } from '@/components/providers/AppProviders'
 import { ipCheckerDicts, type IpCheckerDict, type UseCaseKey } from '@/lib/i18n/ip-checker'
-import { tui } from '@/lib/i18n/tool-l10n'
+import { tui } from '@/lib/i18n/tool-l10n-accessors/devtools/IpCheckerClient'
 
 /**
  * IP Quality & Fraud Score Inspector —— 纯客户端多源探测仪表盘

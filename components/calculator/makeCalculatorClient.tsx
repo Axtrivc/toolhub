@@ -21,12 +21,13 @@ import { getToolIcon } from '@/lib/tool-icons'
 import { SmartIcon } from '@/components/SmartIcon'
 import { useApp } from '@/components/providers/AppProviders'
 import { t, getToolName } from '@/lib/i18n'
-import { tui, tuiCalc } from '@/lib/i18n/tool-l10n'
+import { tuiCalc, tuiFromEntry } from '@/lib/i18n/tool-l10n-core'
 
 /**
  * makeCalculatorClient 通用 UI key(跨工具共享,译一次在 COMMON_CALC_UI)。
  * 命中 → 走 tuiCalc(共享表);其余特有 key(in / out / opt / note / chart /
- * slice 等)走 tui(slug, ...)(每工具 bundle 自带)。
+ * slice 等)走 tuiFromEntry(config.l10n, ...)(按需随 config 传入的
+ * tools-l10n/<slug> 词典,整表注册表不进首载 chunk)。
  */
 const COMMON_CALC_KEYS = new Set([
   'summaryTitle', 'inputsLabel', 'resultsLabel', 'copySummary',
@@ -167,10 +168,10 @@ function NextStepsBar({ slug }: { slug: string }) {
 export function makeCalculatorClient(config: CalculatorConfig): ComponentType {
   function GeneratedCalculator() {
     const { locale } = useApp()
-    // slug 未设 → tui 返回 fallback(英文原值),行为与改造前一致。
+    // slug 未设 → tuiFromEntry 走 fallback(英文原值),行为与改造前一致。
     const slug = config.slug ?? ''
     const L = (key: string, fb: string) =>
-      COMMON_CALC_KEYS.has(key) ? tuiCalc(key, locale, fb) : tui(slug, locale, key, fb)
+      COMMON_CALC_KEYS.has(key) ? tuiCalc(key, locale, fb) : tuiFromEntry(config.l10n, locale, key, fb)
 
     // 输入/输出标签的本地化解析器
     const inLabel = (key: string, fb: string) => L(`in.${key}`, fb)

@@ -5,7 +5,7 @@ import { CalculatorField, ResultCard, CalculatorShell, CalculatorNote } from '@/
 import { StackedCompareChart } from '@/components/charts/StackedCompareChart'
 import { CopyButton } from '@/components/CopyButton'
 import { useApp } from '@/components/providers/AppProviders'
-import { tui } from '@/lib/i18n/tool-l10n'
+import { tui } from '@/lib/i18n/tool-l10n-accessors/calculators/ReverseStripeFeeCalculatorClient'
 import { toNumStrict } from '@/lib/format'
 
 const PRESETS: { key: string; label: string; pct: number; fixed: number }[] = [

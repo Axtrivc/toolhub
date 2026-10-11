@@ -6,7 +6,7 @@ import { ResultActions } from '../ResultActions'
 import { CopyButton } from '@/components/CopyButton'
 import { fmtNum, toNumStrict } from '@/lib/format'
 import { useApp } from '@/components/providers/AppProviders'
-import { tui } from '@/lib/i18n/tool-l10n'
+import { tui } from '@/lib/i18n/tool-l10n-accessors/tools/batch12bTools'
 
 /**
  * 第十二批续:LogFilter / AsciiTable / ScreenTime / ReadingLevel / HMAC

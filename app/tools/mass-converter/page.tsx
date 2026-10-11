@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation'
 import { getTool } from '@/lib/tools'
 import { buildToolMetadata, buildToolJsonLd, jsonLdStringify } from '@/lib/seo'
 import { ToolLayout } from '@/components/ToolLayout'
+import { getToolL10nRecord } from '@/lib/i18n/tool-l10n'
 import { WeightConverterClient } from '@/components/calculators/batch2Clients'
 import { MassConverterContent } from './content'
 
@@ -15,7 +16,7 @@ export default function Page() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdStringify(jsonLd) }} />
-      <ToolLayout tool={tool}>
+      <ToolLayout tool={tool} l10n={getToolL10nRecord('mass-converter')}>
         {/* mass-converter 复用 weight-converter 的统一组件:
             两个工具共享同一套单位(mg~t、oz/lb/st、carat、grain),
             仅 SEO 文案/关键词各自独立,避免重复代码。 */}

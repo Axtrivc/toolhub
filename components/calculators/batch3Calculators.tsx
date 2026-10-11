@@ -9,7 +9,16 @@ import { ResultActions } from '@/components/ResultActions'
 import { makeCalculatorClient } from '../calculator/makeCalculatorClient'
 import { fmtUSD, fmtNum, toNum, toNumStrict } from '@/lib/format'
 import { useApp } from '@/components/providers/AppProviders'
-import { tui, tuiCalc } from '@/lib/i18n/tool-l10n'
+import { tui, tuiCalc } from '@/lib/i18n/tool-l10n-accessors/calculators/batch3Calculators'
+import { fractionCalculatorL10n } from '@/lib/i18n/tools-l10n/fraction-calculator'
+import { ratioCalculatorL10n } from '@/lib/i18n/tools-l10n/ratio-calculator'
+import { lcmGcdCalculatorL10n } from '@/lib/i18n/tools-l10n/lcm-gcd-calculator'
+import { markupCalculatorL10n } from '@/lib/i18n/tools-l10n/markup-calculator'
+import { mortgageCalculatorL10n } from '@/lib/i18n/tools-l10n/mortgage-calculator'
+import { hourlyToSalaryCalculatorL10n } from '@/lib/i18n/tools-l10n/hourly-to-salary-calculator'
+import { roiCalculatorL10n } from '@/lib/i18n/tools-l10n/roi-calculator'
+import { creditCardPayoffCalculatorL10n } from '@/lib/i18n/tools-l10n/credit-card-payoff-calculator'
+import { incomeTaxEstimatorL10n } from '@/lib/i18n/tools-l10n/income-tax-estimator'
 
 /**
  * 第三批计算器 - 健康类 + 数学类 + 金融类
@@ -824,6 +833,7 @@ export function IdealWeightCalculatorClient() {
 
 export const FractionCalculatorClient = makeCalculatorClient({
   slug: 'fraction-calculator',
+  l10n: fractionCalculatorL10n,
   urlState: true,
   inputs: [
     { key: 'num1', label: 'Numerator 1', default: '1', slider: { min: -20, max: 20, step: 1 } },
@@ -907,6 +917,7 @@ export const FractionCalculatorClient = makeCalculatorClient({
 
 export const RatioCalculatorClient = makeCalculatorClient({
   slug: 'ratio-calculator',
+  l10n: ratioCalculatorL10n,
   urlState: true,
   inputs: [
     { key: 'a', label: 'A', default: '3', slider: { min: 1, max: 100, step: 1 } },
@@ -954,6 +965,7 @@ export const RatioCalculatorClient = makeCalculatorClient({
 
 export const LCMGcdCalculatorClient = makeCalculatorClient({
   slug: 'lcm-gcd-calculator',
+  l10n: lcmGcdCalculatorL10n,
   urlState: true,
   inputs: [
     { key: 'numbers', label: 'Numbers (comma-separated)', default: '12, 18, 24', type: 'text' },
@@ -999,6 +1011,7 @@ export const LCMGcdCalculatorClient = makeCalculatorClient({
 
 export const MarkupCalculatorClient = makeCalculatorClient({
   slug: 'markup-calculator',
+  l10n: markupCalculatorL10n,
   urlState: true,
   inputs: [
     { key: 'cost', label: 'Cost', suffix: '$', default: '50' },
@@ -1044,6 +1057,7 @@ export const MarkupCalculatorClient = makeCalculatorClient({
 
 export const MortgageCalculatorClient = makeCalculatorClient({
   slug: 'mortgage-calculator',
+  l10n: mortgageCalculatorL10n,
   urlState: true,
   allowCompare: true,
   presets: [
@@ -1247,6 +1261,7 @@ export const MortgageCalculatorClient = makeCalculatorClient({
 
 export const HourlyToSalaryCalculatorClient = makeCalculatorClient({
   slug: 'hourly-to-salary-calculator',
+  l10n: hourlyToSalaryCalculatorL10n,
   urlState: true,
   inputs: [
     { key: 'hourly', label: 'Hourly wage', suffix: '$/hr', default: '25', slider: { min: 5, max: 200, step: 0.5 } },
@@ -1303,6 +1318,7 @@ export const HourlyToSalaryCalculatorClient = makeCalculatorClient({
 
 export const ROIcalculatorClient = makeCalculatorClient({
   slug: 'roi-calculator',
+  l10n: roiCalculatorL10n,
   urlState: true,
   inputs: [
     { key: 'initial', label: 'Initial investment', suffix: '$', default: '10000', slider: { min: 0, max: 100000, step: 500 } },
@@ -1366,6 +1382,7 @@ export const ROIcalculatorClient = makeCalculatorClient({
 
 export const CreditCardPayoffCalculatorClient = makeCalculatorClient({
   slug: 'credit-card-payoff-calculator',
+  l10n: creditCardPayoffCalculatorL10n,
   urlState: true,
   inputs: [
     { key: 'balance', label: 'Current balance', suffix: '$', default: '5000' },
@@ -1486,6 +1503,7 @@ export const CreditCardPayoffCalculatorClient = makeCalculatorClient({
 
 export const IncomeTaxEstimatorClient = makeCalculatorClient({
   slug: 'income-tax-estimator',
+  l10n: incomeTaxEstimatorL10n,
   urlState: true,
   inputs: [
     { key: 'income', label: 'Annual income', suffix: '$', default: '75000' },

@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation'
 import { getTool } from '@/lib/tools'
 import { buildToolMetadata, buildToolJsonLd, jsonLdStringify } from '@/lib/seo'
 import { ToolLayout } from '@/components/ToolLayout'
+import { getToolL10nRecord } from '@/lib/i18n/tool-l10n'
 import { CdCalculatorClient } from '@/components/calculators/batch18Calculators'
 import { CdCalculatorContent } from './content'
 
@@ -15,7 +16,7 @@ export default function Page() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdStringify(jsonLd) }} />
-      <ToolLayout tool={tool}>
+      <ToolLayout tool={tool} l10n={getToolL10nRecord('cd-calculator')}>
         <CdCalculatorClient />
         <CdCalculatorContent />
       </ToolLayout>

@@ -4,7 +4,7 @@ import { useState, useMemo, useCallback, type ReactNode } from 'react'
 import { CopyButton } from '@/components/CopyButton'
 import { LoadSampleButton } from '@/components/LoadSampleButton'
 import { useApp } from '@/components/providers/AppProviders'
-import { tui } from '@/lib/i18n/tool-l10n'
+import { tui } from '@/lib/i18n/tool-l10n-accessors/webtools/OpenGraphGeneratorClient'
 
 /**
  * Open Graph & Meta Tag Generator —— 输入标题/描述/图片,实时预览社交分享卡 + 生成 meta 标签

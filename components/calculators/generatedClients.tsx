@@ -3,7 +3,12 @@
 import { makeCalculatorClient } from '@/components/calculator/makeCalculatorClient'
 import { makeUnitConverter } from '@/components/calculators/makeUnitConverter'
 import { fmtUSD, fmtNum, toNum } from '@/lib/format'
-import { tui } from '@/lib/i18n/tool-l10n'
+import { tui } from '@/lib/i18n/tool-l10n-accessors/calculators/generatedClients'
+import { tipCalculatorL10n } from '@/lib/i18n/tools-l10n/tip-calculator'
+import { discountCalculatorL10n } from '@/lib/i18n/tools-l10n/discount-calculator'
+import { salesTaxCalculatorL10n } from '@/lib/i18n/tools-l10n/sales-tax-calculator'
+import { compoundInterestCalculatorL10n } from '@/lib/i18n/tools-l10n/compound-interest-calculator'
+import { lengthConverterL10n } from '@/lib/i18n/tools-l10n/length-converter'
 
 /**
  * 批量生成的计算器客户端组件
@@ -16,6 +21,7 @@ import { tui } from '@/lib/i18n/tool-l10n'
 // ───────────────────────────────────────────
 export const TipCalculatorClient = makeCalculatorClient({
   slug: 'tip-calculator',
+  l10n: tipCalculatorL10n,
   urlState: true,
   inputs: [
     { key: 'bill', label: 'Bill amount', suffix: '$', default: '50', placeholder: '50.00', slider: { min: 0, max: 500, step: 5 } },
@@ -79,6 +85,7 @@ export const TipCalculatorClient = makeCalculatorClient({
 // ───────────────────────────────────────────
 export const DiscountCalculatorClient = makeCalculatorClient({
   slug: 'discount-calculator',
+  l10n: discountCalculatorL10n,
   urlState: true,
   inputs: [
     { key: 'price', label: 'Original price', suffix: '$', default: '80', slider: { min: 0, max: 2000, step: 10 } },
@@ -137,6 +144,7 @@ export const DiscountCalculatorClient = makeCalculatorClient({
 // ───────────────────────────────────────────
 export const SalesTaxCalculatorClient = makeCalculatorClient({
   slug: 'sales-tax-calculator',
+  l10n: salesTaxCalculatorL10n,
   urlState: true,
   inputs: [
     { key: 'amount', label: 'Amount', suffix: '$', default: '100', slider: { min: 0, max: 2000, step: 10 } },
@@ -218,6 +226,7 @@ export const SalesTaxCalculatorClient = makeCalculatorClient({
 // ───────────────────────────────────────────
 export const CompoundInterestCalculatorClient = makeCalculatorClient({
   slug: 'compound-interest-calculator',
+  l10n: compoundInterestCalculatorL10n,
   urlState: true,
   allowCompare: true,
   presets: [
@@ -387,6 +396,7 @@ export const CompoundInterestCalculatorClient = makeCalculatorClient({
 // ───────────────────────────────────────────
 export const LengthConverterClient = makeUnitConverter({
   slug: 'length-converter',
+  l10n: lengthConverterL10n,
   defaultValue: '1',
   defaultFrom: 'm',
   defaultTo: 'ft',

@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from 'react'
 import { ResultCard, CalculatorNote } from '@/components/calculator/CalculatorField'
 import { LifeInWeeksChart } from '@/components/charts/LifeInWeeksChart'
 import { useApp } from '@/components/providers/AppProviders'
-import { tui } from '@/lib/i18n/tool-l10n'
+import { tui } from '@/lib/i18n/tool-l10n-accessors/calculators/AgeCalculatorClient'
 import { calendarDaysBetween } from '@/lib/date-utils'
 
 function toInputDate(d: Date): string {

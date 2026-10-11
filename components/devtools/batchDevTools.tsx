@@ -4,7 +4,7 @@ import { useState, useMemo } from 'react'
 import { ResultCard, CalculatorNote } from '../calculator/CalculatorField'
 import { CopyButton } from '../CopyButton'
 import { useApp } from '@/components/providers/AppProviders'
-import { tui } from '@/lib/i18n/tool-l10n'
+import { tui } from '@/lib/i18n/tool-l10n-accessors/devtools/batchDevTools'
 // 编码/解码双向工具(Base64 / URL / HTML)已迁移到 ./encoderTools.tsx
 // (内置 Mode Toggle,各 encode/decode 路由复用同一组件)。
 

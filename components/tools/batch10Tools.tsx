@@ -7,7 +7,7 @@ import { LoadSampleButton } from '../LoadSampleButton'
 import { CopyButton } from '@/components/CopyButton'
 import { fmtNum, toNumStrict } from '@/lib/format'
 import { useApp } from '@/components/providers/AppProviders'
-import { tui } from '@/lib/i18n/tool-l10n'
+import { tui } from '@/lib/i18n/tool-l10n-accessors/tools/batch10Tools'
 import { getCalculatorSample } from '@/lib/tool-samples'
 
 /**

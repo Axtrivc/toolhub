@@ -2,7 +2,17 @@
 
 import { makeCalculatorClient } from '../calculator/makeCalculatorClient'
 import { fmtNum, fmtUSD, toNum, toNumStrict } from '@/lib/format'
-import { tui } from '@/lib/i18n/tool-l10n'
+import { tui } from '@/lib/i18n/tool-l10n-accessors/calculators/batch11Calculators'
+import { FuelCostCalculatorL10n } from '@/lib/i18n/tools-l10n/fuel-cost-calculator'
+import { SubscriptionCostCalculatorL10n } from '@/lib/i18n/tools-l10n/subscription-cost-calculator'
+import { OvertimeCalculatorL10n } from '@/lib/i18n/tools-l10n/overtime-calculator'
+import { TakeHomePayCalculatorL10n } from '@/lib/i18n/tools-l10n/take-home-pay-calculator'
+import { WeddingBudgetCalculatorL10n } from '@/lib/i18n/tools-l10n/wedding-budget-calculator'
+import { HeartRateZoneCalculatorL10n } from '@/lib/i18n/tools-l10n/heart-rate-zone-calculator'
+import { CaffeineCalculatorL10n } from '@/lib/i18n/tools-l10n/caffeine-calculator'
+import { StepsToCaloriesCalculatorL10n } from '@/lib/i18n/tools-l10n/steps-to-calories-calculator'
+import { PaintCalculatorL10n } from '@/lib/i18n/tools-l10n/paint-calculator'
+import { DogAgeCalculatorL10n } from '@/lib/i18n/tools-l10n/dog-age-calculator'
 
 /**
  * 第十一批:2025-08 新增第二批(工厂配置驱动)
@@ -13,6 +23,7 @@ import { tui } from '@/lib/i18n/tool-l10n'
 // ── 油费计算器 ──
 export const FuelCostCalculatorClient = makeCalculatorClient({
   slug: 'fuel-cost-calculator',
+  l10n: FuelCostCalculatorL10n,
   urlState: true,
   inputs: [
     { key: 'distance', label: 'Distance', suffix: 'km', default: '450', slider: { min: 1, max: 3000, step: 10 } },
@@ -72,6 +83,7 @@ export const FuelCostCalculatorClient = makeCalculatorClient({
 // ── 订阅支出计算器 ──
 export const SubscriptionCostCalculatorClient = makeCalculatorClient({
   slug: 'subscription-cost-calculator',
+  l10n: SubscriptionCostCalculatorL10n,
   urlState: true,
   inputs: [
     { key: 'monthlySubs', label: 'Monthly subscriptions total', suffix: '$', default: '45', slider: { min: 0, max: 500, step: 5 } },
@@ -117,6 +129,7 @@ export const SubscriptionCostCalculatorClient = makeCalculatorClient({
 // ── 加班费计算器 ──
 export const OvertimeCalculatorClient = makeCalculatorClient({
   slug: 'overtime-calculator',
+  l10n: OvertimeCalculatorL10n,
   inputs: [
     { key: 'base', label: 'Hourly rate', suffix: '$', default: '25', slider: { min: 5, max: 150, step: 0.5 } },
     { key: 'regularHours', label: 'Regular hours/week', suffix: 'h', default: '40', slider: { min: 0, max: 60, step: 1 } },
@@ -168,6 +181,7 @@ export const OvertimeCalculatorClient = makeCalculatorClient({
 // ── 税后到手工资估算 ──
 export const TakeHomePayCalculatorClient = makeCalculatorClient({
   slug: 'take-home-pay-calculator',
+  l10n: TakeHomePayCalculatorL10n,
   urlState: true,
   inputs: [
     { key: 'gross', label: 'Annual gross salary', suffix: '$', default: '75000', slider: { min: 10000, max: 500000, step: 5000 } },
@@ -235,6 +249,7 @@ export const TakeHomePayCalculatorClient = makeCalculatorClient({
 // ── 婚礼预算分配 ──
 export const WeddingBudgetCalculatorClient = makeCalculatorClient({
   slug: 'wedding-budget-calculator',
+  l10n: WeddingBudgetCalculatorL10n,
   // 预算+人数均非个人敏感数据,伴侣间分享分配方案常用(B3)
   urlState: true,
   inputs: [
@@ -289,6 +304,7 @@ export const WeddingBudgetCalculatorClient = makeCalculatorClient({
 // ── 心率区间(Karvonen)──
 export const HeartRateZoneCalculatorClient = makeCalculatorClient({
   slug: 'heart-rate-zone-calculator',
+  l10n: HeartRateZoneCalculatorL10n,
   // 2 个非敏感数值输入,训练区间场景可分享/复访(B3)
   urlState: true,
   inputs: [
@@ -344,6 +360,7 @@ export const HeartRateZoneCalculatorClient = makeCalculatorClient({
 // ── 咖啡因体内残留 ──
 export const CaffeineCalculatorClient = makeCalculatorClient({
   slug: 'caffeine-calculator',
+  l10n: CaffeineCalculatorL10n,
   // 3 个非敏感数值输入,"这个时间喝咖啡还睡得着吗"场景适合分享(B3)
   urlState: true,
   inputs: [
@@ -400,6 +417,7 @@ export const CaffeineCalculatorClient = makeCalculatorClient({
 // ── 步数换卡路里 ──
 export const StepsToCaloriesCalculatorClient = makeCalculatorClient({
   slug: 'steps-to-calories-calculator',
+  l10n: StepsToCaloriesCalculatorL10n,
   urlState: true,
   inputs: [
     { key: 'steps', label: 'Daily steps', default: '10000', slider: { min: 0, max: 30000, step: 500 } },
@@ -460,6 +478,7 @@ export const StepsToCaloriesCalculatorClient = makeCalculatorClient({
 // ── 油漆用量 ──
 export const PaintCalculatorClient = makeCalculatorClient({
   slug: 'paint-calculator',
+  l10n: PaintCalculatorL10n,
   urlState: true,
   inputs: [
     { key: 'perimeter', label: 'Room perimeter', suffix: 'm', default: '14', slider: { min: 4, max: 60, step: 0.5 } },
@@ -532,6 +551,7 @@ const DOG_STAGE_L10N: [string, string][] = [
 ]
 export const DogAgeCalculatorClient = makeCalculatorClient({
   slug: 'dog-age-calculator',
+  l10n: DogAgeCalculatorL10n,
   // 2 个输入、强分享属性(晒自家狗的换算结果),无隐私字段(B3)
   urlState: true,
   inputs: [

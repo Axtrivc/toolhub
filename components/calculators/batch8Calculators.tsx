@@ -9,7 +9,20 @@ import { useApp } from '@/components/providers/AppProviders'
 import { fmtUSD, fmtNum, toNum, toNumStrict } from '@/lib/format'
 import { calendarDaysBetween } from '@/lib/date-utils'
 import { getCalculatorSample } from '@/lib/tool-samples'
-import { tui, tuiCalc } from '@/lib/i18n/tool-l10n'
+import { tui, tuiCalc } from '@/lib/i18n/tool-l10n-accessors/calculators/batch8Calculators'
+import { apyCalculatorL10n } from '@/lib/i18n/tools-l10n/apy-calculator'
+import { creditCardMinimumPaymentCalculatorL10n } from '@/lib/i18n/tools-l10n/credit-card-minimum-payment-calculator'
+import { cashBackCalculatorL10n } from '@/lib/i18n/tools-l10n/cash-back-calculator'
+import { downPaymentCalculatorL10n } from '@/lib/i18n/tools-l10n/down-payment-calculator'
+import { dtiCalculatorL10n } from '@/lib/i18n/tools-l10n/dti-calculator'
+import { commissionCalculatorL10n } from '@/lib/i18n/tools-l10n/commission-calculator'
+import { gradeCalculatorL10n } from '@/lib/i18n/tools-l10n/grade-calculator'
+import { finalGradeCalculatorL10n } from '@/lib/i18n/tools-l10n/final-grade-calculator'
+import { billSplitCalculatorL10n } from '@/lib/i18n/tools-l10n/bill-split-calculator'
+import { trapezoidCalculatorL10n } from '@/lib/i18n/tools-l10n/trapezoid-calculator'
+import { cubeCalculatorL10n } from '@/lib/i18n/tools-l10n/cube-calculator'
+import { sphereCalculatorL10n } from '@/lib/i18n/tools-l10n/sphere-calculator'
+import { salaryConverterL10n } from '@/lib/i18n/tools-l10n/salary-converter'
 
 /** 第八批:金融 6 + 生活 4 + 几何 3 = 13 个计算器 */
 
@@ -17,6 +30,7 @@ import { tui, tuiCalc } from '@/lib/i18n/tool-l10n'
 
 export const APYCalculatorClient = makeCalculatorClient({
   slug: 'apy-calculator',
+  l10n: apyCalculatorL10n,
   urlState: true,
   inputs: [
     { key: 'principal', label: 'Principal', suffix: '$', default: '10000' },
@@ -91,6 +105,7 @@ export const APYCalculatorClient = makeCalculatorClient({
 
 export const CreditCardMinimumCalculatorClient = makeCalculatorClient({
   slug: 'credit-card-minimum-payment-calculator',
+  l10n: creditCardMinimumPaymentCalculatorL10n,
   urlState: true,
   inputs: [
     { key: 'balance', label: 'Current balance', suffix: '$', default: '5000' },
@@ -237,6 +252,7 @@ export const CreditCardMinimumCalculatorClient = makeCalculatorClient({
 
 export const CashBackCalculatorClient = makeCalculatorClient({
   slug: 'cash-back-calculator',
+  l10n: cashBackCalculatorL10n,
   urlState: true,
   inputs: [
     { key: 'spend', label: 'Monthly spending', suffix: '$', default: '2000', slider: { min: 0, max: 10000, step: 100 } },
@@ -281,6 +297,7 @@ export const CashBackCalculatorClient = makeCalculatorClient({
 
 export const DownPaymentCalculatorClient = makeCalculatorClient({
   slug: 'down-payment-calculator',
+  l10n: downPaymentCalculatorL10n,
   urlState: true,
   inputs: [
     { key: 'price', label: 'Home price', suffix: '$', default: '400000', slider: { min: 10000, max: 2000000, step: 10000 } },
@@ -342,6 +359,7 @@ export const DownPaymentCalculatorClient = makeCalculatorClient({
 
 export const DTICalculatorClient = makeCalculatorClient({
   slug: 'dti-calculator',
+  l10n: dtiCalculatorL10n,
   urlState: true,
   inputs: [
     { key: 'income', label: 'Monthly gross income', suffix: '$', default: '6000', slider: { min: 500, max: 20000, step: 100 } },
@@ -397,6 +415,7 @@ export const DTICalculatorClient = makeCalculatorClient({
 
 export const CommissionCalculatorClient = makeCalculatorClient({
   slug: 'commission-calculator',
+  l10n: commissionCalculatorL10n,
   urlState: true,
   inputs: [
     { key: 'sales', label: 'Total sales', suffix: '$', default: '50000', slider: { min: 0, max: 500000, step: 5000 } },
@@ -589,6 +608,7 @@ export function AgeDifferenceCalculatorClient() {
 
 export const GradeCalculatorClient = makeCalculatorClient({
   slug: 'grade-calculator',
+  l10n: gradeCalculatorL10n,
   urlState: true,
   inputs: [
     { key: 'earned', label: 'Points earned', default: '85' },
@@ -631,6 +651,7 @@ export const GradeCalculatorClient = makeCalculatorClient({
 
 export const FinalGradeCalculatorClient = makeCalculatorClient({
   slug: 'final-grade-calculator',
+  l10n: finalGradeCalculatorL10n,
   urlState: true,
   inputs: [
     { key: 'current', label: 'Current grade', suffix: '%', default: '85' },
@@ -670,6 +691,7 @@ export const FinalGradeCalculatorClient = makeCalculatorClient({
 
 export const BillSplitCalculatorClient = makeCalculatorClient({
   slug: 'bill-split-calculator',
+  l10n: billSplitCalculatorL10n,
   urlState: true,
   inputs: [
     { key: 'total', label: 'Bill total', suffix: '$', default: '120', slider: { min: 0, max: 1000, step: 5 } },
@@ -719,6 +741,7 @@ export const BillSplitCalculatorClient = makeCalculatorClient({
 
 export const TrapezoidCalculatorClient = makeCalculatorClient({
   slug: 'trapezoid-calculator',
+  l10n: trapezoidCalculatorL10n,
   urlState: true,
   inputs: [
     { key: 'a', label: 'Top side (a)', default: '5', slider: { min: 1, max: 50, step: 0.5 } },
@@ -743,6 +766,7 @@ export const TrapezoidCalculatorClient = makeCalculatorClient({
 
 export const CubeCalculatorClient = makeCalculatorClient({
   slug: 'cube-calculator',
+  l10n: cubeCalculatorL10n,
   urlState: true,
   inputs: [{ key: 'side', label: 'Side length', default: '5', slider: { min: 1, max: 50, step: 0.5 } }],
   outputs: [
@@ -767,6 +791,7 @@ export const CubeCalculatorClient = makeCalculatorClient({
 
 export const SphereCalculatorClient = makeCalculatorClient({
   slug: 'sphere-calculator',
+  l10n: sphereCalculatorL10n,
   urlState: true,
   inputs: [{ key: 'r', label: 'Radius', default: '5', slider: { min: 1, max: 50, step: 0.5 } }],
   outputs: [
@@ -792,6 +817,7 @@ export const SphereCalculatorClient = makeCalculatorClient({
 
 export const SalaryConverterClient = makeCalculatorClient({
   slug: 'salary-converter',
+  l10n: salaryConverterL10n,
   urlState: true,
   inputs: [
     {

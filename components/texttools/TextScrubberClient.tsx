@@ -5,7 +5,8 @@ import { CopyButton } from '@/components/CopyButton'
 import { LoadSampleButton } from '@/components/LoadSampleButton'
 import { ResultActions } from '@/components/ResultActions'
 import { useApp } from '@/components/providers/AppProviders'
-import { tui } from '@/lib/i18n/tool-l10n'
+import { tuiFromEntry, type ToolL10n } from '@/lib/i18n/tool-l10n-core'
+import { textCleanerL10n } from '@/lib/i18n/tools-l10n/text-cleaner'
 
 /**
  * Deep Text Cleaner(组件名 TextScrubber,与既有 TextCleanerClient 区分)
@@ -100,9 +101,16 @@ const inputStyle = {
   color: 'rgb(var(--text))',
 }
 
-export function TextScrubberClient({ slug = 'text-cleaner' }: { slug?: string }) {
+export function TextScrubberClient({
+  slug = 'text-cleaner',
+  // slug 未注册/未传 → 回退英文原值(与全量表未注册行为一致)
+  l10n = textCleanerL10n,
+}: {
+  slug?: string
+  l10n?: ToolL10n
+}) {
   const { locale } = useApp()
-  const L = (key: string, fb: string) => tui(slug, locale, key, fb)
+  const L = (key: string, fb: string) => tuiFromEntry(l10n, locale, key, fb)
   const [input, setInput] = useState('')
   const [opts, setOpts] = useState<CleanOptions>({
     stripEmojis: false,

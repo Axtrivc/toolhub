@@ -11,7 +11,7 @@ import { ResultActions } from '@/components/ResultActions'
 import { getCalculatorSample } from '@/lib/tool-samples'
 import { toNumStrict } from '@/lib/format'
 import { useApp } from '@/components/providers/AppProviders'
-import { tui } from '@/lib/i18n/tool-l10n'
+import { tui } from '@/lib/i18n/tool-l10n-accessors/calculators/LoanCalculatorClient'
 
 interface AmortRow {
   month: number

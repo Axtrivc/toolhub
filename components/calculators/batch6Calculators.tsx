@@ -8,7 +8,14 @@ import { ResultActions } from '@/components/ResultActions'
 import { makeCalculatorClient } from '../calculator/makeCalculatorClient'
 import { fmtUSD, fmtNum, toNum } from '@/lib/format'
 import { useApp } from '@/components/providers/AppProviders'
-import { tui, tuiCalc } from '@/lib/i18n/tool-l10n'
+import { tui, tuiCalc } from '@/lib/i18n/tool-l10n-accessors/calculators/batch6Calculators'
+import { savingsGoalCalculatorL10n } from '@/lib/i18n/tools-l10n/savings-goal-calculator'
+import { netWorthCalculatorL10n } from '@/lib/i18n/tools-l10n/net-worth-calculator'
+import { annuityCalculatorL10n } from '@/lib/i18n/tools-l10n/annuity-calculator'
+import { capitalGainsTaxEstimatorL10n } from '@/lib/i18n/tools-l10n/capital-gains-tax-estimator'
+import { rentVsBuyCalculatorL10n } from '@/lib/i18n/tools-l10n/rent-vs-buy-calculator'
+import { macroCalculatorL10n } from '@/lib/i18n/tools-l10n/macro-calculator'
+import { pregnancyDueDateCalculatorL10n } from '@/lib/i18n/tools-l10n/pregnancy-due-date-calculator'
 
 /**
  * 第六批:金融 5 个 + 健康 3 个 = 8 个计算器
@@ -122,6 +129,7 @@ function CalcSelect({ id, label, value, onChange, options }: {
 
 export const SavingsGoalCalculatorClient = makeCalculatorClient({
   slug: 'savings-goal-calculator',
+  l10n: savingsGoalCalculatorL10n,
   urlState: true,
   inputs: [
     { key: 'goal', label: 'Savings goal', suffix: '$', default: '50000' },
@@ -189,6 +197,7 @@ export const SavingsGoalCalculatorClient = makeCalculatorClient({
 
 export const NetWorthCalculatorClient = makeCalculatorClient({
   slug: 'net-worth-calculator',
+  l10n: netWorthCalculatorL10n,
   urlState: true,
   inputs: [
     { key: 'assets', label: 'Total assets (cash, home, investments)', suffix: '$', default: '250000' },
@@ -224,6 +233,7 @@ export const NetWorthCalculatorClient = makeCalculatorClient({
 
 export const AnnuityCalculatorClient = makeCalculatorClient({
   slug: 'annuity-calculator',
+  l10n: annuityCalculatorL10n,
   urlState: true,
   inputs: [
     { key: 'principal', label: 'Initial principal', suffix: '$', default: '100000' },
@@ -277,6 +287,7 @@ export const AnnuityCalculatorClient = makeCalculatorClient({
 
 export const CapitalGainsTaxEstimatorClient = makeCalculatorClient({
   slug: 'capital-gains-tax-estimator',
+  l10n: capitalGainsTaxEstimatorL10n,
   urlState: true,
   inputs: [
     { key: 'purchase', label: 'Purchase price', suffix: '$', default: '10000', slider: { min: 0, max: 100000, step: 1000 } },
@@ -395,6 +406,7 @@ export const CapitalGainsTaxEstimatorClient = makeCalculatorClient({
 
 export const RentVsBuyCalculatorClient = makeCalculatorClient({
   slug: 'rent-vs-buy-calculator',
+  l10n: rentVsBuyCalculatorL10n,
   urlState: true,
   inputs: [
     { key: 'home', label: 'Home price', suffix: '$', default: '400000' },
@@ -773,6 +785,7 @@ export function BodyFatCalculatorClient() {
 
 export const MacroCalculatorClient = makeCalculatorClient({
   slug: 'macro-calculator',
+  l10n: macroCalculatorL10n,
   urlState: true,
   inputs: [
     { key: 'calories', label: 'Daily calorie target', default: '2000' },
@@ -831,6 +844,7 @@ export const MacroCalculatorClient = makeCalculatorClient({
 
 export const PregnancyDueDateCalculatorClient = makeCalculatorClient({
   slug: 'pregnancy-due-date-calculator',
+  l10n: pregnancyDueDateCalculatorL10n,
   inputs: [
     { key: 'lmp', label: 'First day of last period (YYYY-MM-DD)', default: '2026-01-01', type: 'text', placeholder: 'YYYY-MM-DD' },
   ],

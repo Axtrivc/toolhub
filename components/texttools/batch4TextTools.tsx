@@ -5,14 +5,20 @@ import { makeTextTool } from '../tools/makeTextTool'
 import { CopyButton } from '@/components/CopyButton'
 import { ResultActions } from '../ResultActions'
 import { useApp } from '@/components/providers/AppProviders'
-import { tui } from '@/lib/i18n/tool-l10n'
+import { tui } from '@/lib/i18n/tool-l10n-accessors/texttools/batch4TextTools'
 import { countWords } from '@/lib/text-stats'
+import { urlQueryParserL10n } from '@/lib/i18n/tools-l10n/url-query-parser'
+import { htmlTagStripperL10n } from '@/lib/i18n/tools-l10n/html-tag-stripper'
+import { characterFrequencyL10n } from '@/lib/i18n/tools-l10n/character-frequency'
+import { textDiffL10n } from '@/lib/i18n/tools-l10n/text-diff'
+import { textSizeEstimatorL10n } from '@/lib/i18n/tools-l10n/text-size-estimator'
 
 /** 第七批:开发者 + 文本工具 7 个 */
 
 // ── URL 查询字符串解析 ──
 export const URLQueryParserClient = makeTextTool({
   slug: 'url-query-parser',
+  l10n: urlQueryParserL10n,
   inputLabel: 'URL with query string',
   outputLabel: 'Parsed query parameters',
   defaultInput: 'https://example.com/search?q=hello&page=2&sort=desc',
@@ -46,6 +52,7 @@ export const URLQueryParserClient = makeTextTool({
 // ── HTML 标签删除 ──
 export const HTMLTagStripperClient = makeTextTool({
   slug: 'html-tag-stripper',
+  l10n: htmlTagStripperL10n,
   inputLabel: 'HTML source',
   outputLabel: 'Plain text (tags removed)',
   defaultInput: '<h1>Title</h1><p>This is <strong>bold</strong> text.</p>',
@@ -77,6 +84,7 @@ export const HTMLTagStripperClient = makeTextTool({
 // ── 字符频率统计 ──
 export const CharacterFrequencyClient = makeTextTool({
   slug: 'character-frequency',
+  l10n: characterFrequencyL10n,
   inputLabel: 'Text to analyze',
   outputLabel: 'Character frequency',
   defaultInput: 'hello world',
@@ -368,6 +376,7 @@ export function URLExtractorClient() {
 // ── 文本差异比较 ──
 export const TextDiffClient = makeTextTool({
   slug: 'text-diff',
+  l10n: textDiffL10n,
   inputLabel: 'Format: text1 ||| text2',
   outputLabel: 'Comparison',
   defaultInput: 'the quick brown fox ||| the slow brown fox',
@@ -429,6 +438,7 @@ export const TextDiffClient = makeTextTool({
 // ── 文本大小估算 ──
 export const TextSizeEstimatorClient = makeTextTool({
   slug: 'text-size-estimator',
+  l10n: textSizeEstimatorL10n,
   inputLabel: 'Your text',
   outputLabel: 'Size estimates',
   defaultInput: 'Hello, this is some sample text to measure.',

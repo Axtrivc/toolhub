@@ -2,7 +2,7 @@
 
 import { useState, useMemo, useCallback } from 'react'
 import { useApp } from '@/components/providers/AppProviders'
-import { tui } from '@/lib/i18n/tool-l10n'
+import { tui } from '@/lib/i18n/tool-l10n-accessors/tools/WordCounterClient'
 import { countWords, hasCJK } from '@/lib/text-stats'
 import { LoadSampleButton } from '@/components/LoadSampleButton'
 import { CopyButton } from '@/components/CopyButton'

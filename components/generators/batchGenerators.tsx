@@ -7,7 +7,16 @@ import { makeCalculatorClient } from '../calculator/makeCalculatorClient'
 import { PresetChips } from '../calculator/PresetChips'
 import { fmtNum, toNum } from '@/lib/format'
 import { useApp } from '@/components/providers/AppProviders'
-import { tui } from '@/lib/i18n/tool-l10n'
+import { tui } from '@/lib/i18n/tool-l10n-accessors/generators/batchGenerators'
+import { circleCalculatorL10n } from '@/lib/i18n/tools-l10n/circle-calculator'
+import { triangleCalculatorL10n } from '@/lib/i18n/tools-l10n/triangle-calculator'
+import { rectangleCalculatorL10n } from '@/lib/i18n/tools-l10n/rectangle-calculator'
+import { standardDeviationCalculatorL10n } from '@/lib/i18n/tools-l10n/standard-deviation-calculator'
+import { percentileCalculatorL10n } from '@/lib/i18n/tools-l10n/percentile-calculator'
+import { inflationCalculatorL10n } from '@/lib/i18n/tools-l10n/inflation-calculator'
+import { retirementCalculatorL10n } from '@/lib/i18n/tools-l10n/retirement-calculator'
+import { simpleInterestCalculatorL10n } from '@/lib/i18n/tools-l10n/simple-interest-calculator'
+import { unitPriceCalculatorL10n } from '@/lib/i18n/tools-l10n/unit-price-calculator'
 
 /**
  * 生成器类工具(UUID、Lorem Ipsum)+ 几何 + 统计计算器
@@ -210,6 +219,7 @@ export function LoremIpsumGeneratorClient() {
 // ── 几何计算器(圆)──
 export const CircleCalculatorClient = makeCalculatorClient({
   slug: 'circle-calculator',
+  l10n: circleCalculatorL10n,
   inputs: [{ key: 'r', label: 'Radius', suffix: 'r', default: '5', slider: { min: 1, max: 50, step: 0.5 } }],
   outputs: [
     { key: 'area', label: 'Area', highlight: true },
@@ -235,6 +245,7 @@ export const CircleCalculatorClient = makeCalculatorClient({
 // ── 几何计算器(三角形 - 勾股定理)──
 export const TriangleCalculatorClient = makeCalculatorClient({
   slug: 'triangle-calculator',
+  l10n: triangleCalculatorL10n,
   inputs: [
     { key: 'a', label: 'Side a', default: '3', slider: { min: 1, max: 50, step: 0.5 } },
     { key: 'b', label: 'Side b', default: '4', slider: { min: 1, max: 50, step: 0.5 } },
@@ -265,6 +276,7 @@ export const TriangleCalculatorClient = makeCalculatorClient({
 // ── 矩形计算器 ──
 export const RectangleCalculatorClient = makeCalculatorClient({
   slug: 'rectangle-calculator',
+  l10n: rectangleCalculatorL10n,
   inputs: [
     { key: 'w', label: 'Width', default: '8', slider: { min: 1, max: 50, step: 0.5 } },
     { key: 'h', label: 'Height', default: '5', slider: { min: 1, max: 50, step: 0.5 } },
@@ -317,6 +329,7 @@ function parseDataset(
 // ── 标准差计算器 ──
 export const StandardDeviationCalculatorClient = makeCalculatorClient({
   slug: 'standard-deviation-calculator',
+  l10n: standardDeviationCalculatorL10n,
   // type:'text' 必须显式声明:缺省渲染 <input type="number">,逗号串会被浏览器
   // 消毒成空——输入框看着空白、结果却照算,"没算 vs 算了"无从分辨(B2/F3)
   inputs: [{ key: 'numbers', label: 'Numbers (comma-separated)', default: '4, 8, 15, 16, 23, 42', type: 'text' }],
@@ -367,6 +380,7 @@ export const StandardDeviationCalculatorClient = makeCalculatorClient({
 // ── 百分位数计算器 ──
 export const PercentileCalculatorClient = makeCalculatorClient({
   slug: 'percentile-calculator',
+  l10n: percentileCalculatorL10n,
   inputs: [
     // 同标准差:type:'text' 防 type="number" 把逗号列表消毒成空显示
     { key: 'numbers', label: 'Numbers (comma-separated)', default: '15, 20, 35, 40, 50', type: 'text' },
@@ -411,6 +425,7 @@ export const PercentileCalculatorClient = makeCalculatorClient({
 // ── 通货膨胀计算器 ──
 export const InflationCalculatorClient = makeCalculatorClient({
   slug: 'inflation-calculator',
+  l10n: inflationCalculatorL10n,
   inputs: [
     { key: 'amount', label: 'Amount', suffix: '$', default: '1000', slider: { min: 10, max: 100000, step: 10 } },
     { key: 'rate', label: 'Annual inflation', suffix: '%', default: '3', slider: { min: 0, max: 15, step: 0.25 } },
@@ -471,6 +486,7 @@ function fmtUSDValue(n: number): string {
 // ── 退休计算器 ──
 export const RetirementCalculatorClient = makeCalculatorClient({
   slug: 'retirement-calculator',
+  l10n: retirementCalculatorL10n,
   urlState: true,
   allowCompare: true,
   presets: [
@@ -558,6 +574,7 @@ export const RetirementCalculatorClient = makeCalculatorClient({
 // ── 单利计算器 ──
 export const SimpleInterestCalculatorClient = makeCalculatorClient({
   slug: 'simple-interest-calculator',
+  l10n: simpleInterestCalculatorL10n,
   inputs: [
     { key: 'principal', label: 'Principal', suffix: '$', default: '10000', slider: { min: 100, max: 1000000, step: 100 } },
     { key: 'rate', label: 'Annual rate', suffix: '%', default: '5', slider: { min: 0, max: 20, step: 0.25 } },
@@ -615,6 +632,7 @@ const UNIT_TO_BASE: Record<string, number> = {
 }
 export const UnitPriceCalculatorClient = makeCalculatorClient({
   slug: 'unit-price-calculator',
+  l10n: unitPriceCalculatorL10n,
   inputs: [
     { key: 'price1', label: 'Price 1', suffix: '$', default: '12.99', slider: { min: 0.5, max: 200, step: 0.5 } },
     { key: 'size1', label: 'Size 1', default: '500', slider: { min: 1, max: 5000, step: 5 } },

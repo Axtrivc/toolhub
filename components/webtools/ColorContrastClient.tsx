@@ -3,7 +3,7 @@
 import { useState, useMemo } from 'react'
 import { rgbToHex, rgbToHsl, hslToRgb } from '@/lib/color'
 import { useApp } from '@/components/providers/AppProviders'
-import { tui } from '@/lib/i18n/tool-l10n'
+import { tui } from '@/lib/i18n/tool-l10n-accessors/webtools/ColorContrastClient'
 
 /**
  * Color Contrast Checker (WCAG)

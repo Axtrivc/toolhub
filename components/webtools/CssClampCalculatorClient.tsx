@@ -5,7 +5,7 @@ import { CalculatorSliderField, ResultCard, CalculatorShell, CalculatorNote } fr
 import { LineAreaChart } from '@/components/charts/LineAreaChart'
 import { CopyButton } from '@/components/CopyButton'
 import { useApp } from '@/components/providers/AppProviders'
-import { tui } from '@/lib/i18n/tool-l10n'
+import { tui } from '@/lib/i18n/tool-l10n-accessors/webtools/CssClampCalculatorClient'
 
 /**
  * CSS clamp() Fluid Typography Calculator —— 纯前端计算

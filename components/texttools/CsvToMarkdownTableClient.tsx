@@ -5,7 +5,7 @@ import { CopyButton } from '@/components/CopyButton'
 import { LoadSampleButton } from '@/components/LoadSampleButton'
 import { ResultActions } from '@/components/ResultActions'
 import { useApp } from '@/components/providers/AppProviders'
-import { tui } from '@/lib/i18n/tool-l10n'
+import { tui } from '@/lib/i18n/tool-l10n-accessors/texttools/CsvToMarkdownTableClient'
 
 /**
  * CSV/TSV → GitHub-flavored Markdown 表格

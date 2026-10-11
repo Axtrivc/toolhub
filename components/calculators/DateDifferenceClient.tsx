@@ -4,7 +4,7 @@ import { useState, useEffect, useMemo } from 'react'
 import { ResultCard, CalculatorNote } from '../calculator/CalculatorField'
 import { ResultActions } from '../ResultActions'
 import { useApp } from '@/components/providers/AppProviders'
-import { tui } from '@/lib/i18n/tool-l10n'
+import { tui } from '@/lib/i18n/tool-l10n-accessors/calculators/DateDifferenceClient'
 import { calendarDaysBetween } from '@/lib/date-utils'
 
 function toInputDate(d: Date): string {

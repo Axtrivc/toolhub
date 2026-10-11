@@ -5,7 +5,10 @@ import { CalculatorNote } from '../calculator/CalculatorField'
 import { CopyButton } from '../CopyButton'
 import { makeTextTool } from '../tools/makeTextTool'
 import { useApp } from '@/components/providers/AppProviders'
-import { tui } from '@/lib/i18n/tool-l10n'
+import { tui } from '@/lib/i18n/tool-l10n-accessors/texttools/batch5TextTools'
+import { slugToTitleL10n } from '@/lib/i18n/tools-l10n/slug-to-title'
+import { binaryToTextL10n } from '@/lib/i18n/tools-l10n/binary-to-text'
+import { textToBinaryL10n } from '@/lib/i18n/tools-l10n/text-to-binary'
 
 /** 第八批:编码 + 文本工具 4 个 */
 
@@ -128,6 +131,7 @@ function titleCaseWords(t: string): string {
 // ── Slug → Title(反转 slug generator)──
 export const SlugToTitleClient = makeTextTool({
   slug: 'slug-to-title',
+  l10n: slugToTitleL10n,
   inputLabel: 'URL slug',
   outputLabel: 'Title',
   defaultInput: 'how-to-make-pancakes',
@@ -144,6 +148,7 @@ export const SlugToTitleClient = makeTextTool({
 // ── 二进制 ↔ 文本(UTF-8 字节,支持中文/emoji,两工具互逆)──
 export const BinaryToTextClient = makeTextTool({
   slug: 'binary-to-text',
+  l10n: binaryToTextL10n,
   inputLabel: 'Binary (space-separated bytes)',
   outputLabel: 'Decoded text',
   defaultInput: '01001000 01101001',
@@ -167,6 +172,7 @@ export const BinaryToTextClient = makeTextTool({
 
 export const TextToBinaryClient = makeTextTool({
   slug: 'text-to-binary',
+  l10n: textToBinaryL10n,
   inputLabel: 'Text',
   outputLabel: 'Binary',
   defaultInput: 'Hi',

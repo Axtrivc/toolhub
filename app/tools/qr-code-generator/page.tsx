@@ -4,6 +4,7 @@ import dynamic from 'next/dynamic'
 import { getTool } from '@/lib/tools'
 import { buildToolMetadata, buildToolJsonLd, jsonLdStringify } from '@/lib/seo'
 import { ToolLayout } from '@/components/ToolLayout'
+import { getToolL10nRecord } from '@/lib/i18n/tool-l10n'
 import { QRCodeGeneratorContent } from './content'
 
 // QR 生成器主体依赖 qrcode 库(较重)→ 动态导入,独立 chunk 按需加载,
@@ -25,7 +26,7 @@ export default function QRCodeGeneratorPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: jsonLdStringify(jsonLd) }}
       />
-      <ToolLayout tool={tool}>
+      <ToolLayout tool={tool} l10n={getToolL10nRecord('qr-code-generator')}>
         <QRCodeGeneratorClient />
         <QRCodeGeneratorContent />
       </ToolLayout>

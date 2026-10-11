@@ -6,7 +6,7 @@ import { ResultActions } from '../ResultActions'
 import { GaugeChart } from '@/components/charts/GaugeChart'
 import { fmtNum } from '@/lib/format'
 import { useApp } from '@/components/providers/AppProviders'
-import { tui, tuiUc } from '@/lib/i18n/tool-l10n'
+import { tui, tuiUc } from '@/lib/i18n/tool-l10n-accessors/calculators/GPACalculatorClient'
 
 /**
  * GPA 计算器 - 独立组件

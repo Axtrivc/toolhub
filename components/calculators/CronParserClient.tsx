@@ -4,7 +4,7 @@ import { useState, useMemo, useCallback, useEffect } from 'react'
 import { ResultActions } from '@/components/ResultActions'
 import { describeCron, nextFires, isRebootAlias } from '@/lib/cron'
 import { useApp } from '@/components/providers/AppProviders'
-import { tui } from '@/lib/i18n/tool-l10n'
+import { tui } from '@/lib/i18n/tool-l10n-accessors/calculators/CronParserClient'
 
 /**
  * Cron Expression Parser 客户端组件

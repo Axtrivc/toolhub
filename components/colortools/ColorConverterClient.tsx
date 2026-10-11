@@ -5,7 +5,7 @@ import { rgbToHex, rgbToHsl, hslToRgb, parseRgb, parseHsl, type RGB } from '@/li
 import { CalculatorNote } from '../calculator/CalculatorField'
 import { CopyButton } from '../CopyButton'
 import { useApp } from '@/components/providers/AppProviders'
-import { tui } from '@/lib/i18n/tool-l10n'
+import { tui } from '@/lib/i18n/tool-l10n-accessors/colortools/ColorConverterClient'
 
 /**
  * 统一颜色转换器 - 输入任一格式(hex/rgb/hsl),自动转成全部格式

@@ -6,8 +6,16 @@ import { AnimatedNumber } from '@/components/calculator/CalculatorField'
 import { makeTextTool } from '../tools/makeTextTool'
 import { useApp } from '@/components/providers/AppProviders'
 import { t } from '@/lib/i18n'
-import { tui } from '@/lib/i18n/tool-l10n'
+import { tui } from '@/lib/i18n/tool-l10n-accessors/texttools/batchTextTools'
 import { countWords, hasCJK } from '@/lib/text-stats'
+import { uppercaseConverterL10n } from '@/lib/i18n/tools-l10n/uppercase-converter'
+import { lowercaseConverterL10n } from '@/lib/i18n/tools-l10n/lowercase-converter'
+import { titleCaseConverterL10n } from '@/lib/i18n/tools-l10n/title-case-converter'
+import { sentenceCaseConverterL10n } from '@/lib/i18n/tools-l10n/sentence-case-converter'
+import { reverseTextL10n } from '@/lib/i18n/tools-l10n/reverse-text'
+import { removeDuplicateLinesL10n } from '@/lib/i18n/tools-l10n/remove-duplicate-lines'
+import { sortLinesL10n } from '@/lib/i18n/tools-l10n/sort-lines'
+import { removeLineBreaksL10n } from '@/lib/i18n/tools-l10n/remove-line-breaks'
 
 /**
  * 批量文本工具 - 除 FindReplaceClient 外全部用 makeTextTool 工厂,每个仅需一个 transform 函数
@@ -23,6 +31,7 @@ function titleCaseWords(t: string): string {
 
 export const UppercaseConverterClient = makeTextTool({
   slug: 'uppercase-converter',
+  l10n: uppercaseConverterL10n,
   inputLabel: 'Your text',
   outputLabel: 'UPPERCASE',
   placeholder: 'Type or paste text...',
@@ -33,6 +42,7 @@ export const UppercaseConverterClient = makeTextTool({
 
 export const LowercaseConverterClient = makeTextTool({
   slug: 'lowercase-converter',
+  l10n: lowercaseConverterL10n,
   inputLabel: 'Your text',
   outputLabel: 'lowercase',
   placeholder: 'Type or paste text...',
@@ -43,6 +53,7 @@ export const LowercaseConverterClient = makeTextTool({
 
 export const TitleCaseConverterClient = makeTextTool({
   slug: 'title-case-converter',
+  l10n: titleCaseConverterL10n,
   inputLabel: 'Your text',
   outputLabel: 'Title Case',
   defaultInput: 'the quick brown fox',
@@ -61,6 +72,7 @@ export const TitleCaseConverterClient = makeTextTool({
 
 export const SentenceCaseConverterClient = makeTextTool({
   slug: 'sentence-case-converter',
+  l10n: sentenceCaseConverterL10n,
   inputLabel: 'Your text',
   outputLabel: 'Sentence case',
   defaultInput: 'hello. my name is john. how are you?',
@@ -79,6 +91,7 @@ export const SentenceCaseConverterClient = makeTextTool({
 
 export const ReverseTextClient = makeTextTool({
   slug: 'reverse-text',
+  l10n: reverseTextL10n,
   inputLabel: 'Your text',
   outputLabel: 'Reversed',
   defaultInput: 'Hello World',
@@ -88,6 +101,7 @@ export const ReverseTextClient = makeTextTool({
 
 export const RemoveDuplicatesClient = makeTextTool({
   slug: 'remove-duplicate-lines',
+  l10n: removeDuplicateLinesL10n,
   inputLabel: 'List (one item per line)',
   outputLabel: 'Unique items',
   defaultInput: 'apple\nbanana\napple\ncherry\nbanana\ndate',
@@ -109,6 +123,7 @@ export const RemoveDuplicatesClient = makeTextTool({
 
 export const SortLinesClient = makeTextTool({
   slug: 'sort-lines',
+  l10n: sortLinesL10n,
   inputLabel: 'List (one item per line)',
   outputLabel: 'Sorted',
   defaultInput: 'cherry\napple\ndate\nbanana',
@@ -146,6 +161,7 @@ export const SortLinesClient = makeTextTool({
 
 export const RemoveLineBreaksClient = makeTextTool({
   slug: 'remove-line-breaks',
+  l10n: removeLineBreaksL10n,
   inputLabel: 'Your text',
   outputLabel: 'Single line',
   defaultInput: 'This text\nspans multiple\nlines.',

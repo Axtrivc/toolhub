@@ -6,7 +6,7 @@ import { CopyButton } from '@/components/CopyButton'
 import { ResultActions } from '@/components/ResultActions'
 import { GaugeChart } from '@/components/charts/GaugeChart'
 import { useApp } from '@/components/providers/AppProviders'
-import { tui } from '@/lib/i18n/tool-l10n'
+import { tui } from '@/lib/i18n/tool-l10n-accessors/securitytools/SecretKeyGeneratorClient'
 
 /**
  * Secret Key Generator —— crypto.getRandomValues 高熵密钥/令牌生成

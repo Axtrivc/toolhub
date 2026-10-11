@@ -16,24 +16,28 @@
  *
  * SEO 安全:en 永不在此注册,SSR/预渲染恒为英文,Google 索引不变。
  * name/shortIntro 不在此,继续用 lib/i18n/tools.{zh,es,de}.ts(已译完)。
+ *
+ * Bundle 安全:本模块聚合全部 239 份词典,仅供 server 侧使用(工具页 RSC、
+ * seo/faq 构建器)。client 组件一律按需 import './tools-l10n/<slug>' 数据 +
+ * './tool-l10n-core' 查表逻辑(或生成于 lib/i18n/tool-l10n-accessors/ 的
+ * per-file 子表 accessor),勿 import 本模块,否则整表词典进首载 chunk。
  */
 
 import type { Locale } from '../i18n'
 
-/** 单个语种的工具本地化条目(所有字段可选,按需覆盖英文原值) */
-export interface ToolL10nEntry {
-  /** 可见 FAQ Q&A(覆盖 lib/tool-faqs.ts 的英文) */
-  faqs?: Array<{ q: string; a: string }>
-  /** 工具交互界面字符串(供 Client 组件 tui() 读取) */
-  ui?: Record<string, string>
-  /** ToolInfoSection "Common uses" 列表(替代英文 formatUseCases) */
-  useCases?: string[]
-  /** FormulaSection 公式与解释(覆盖 lib/tool-formulas.ts) */
-  formula?: { formula: string; variables?: string; explain?: string; example?: string }
-}
-
-/** 非英文语种 → 条目。en 不出现,保证英文走原值。 */
-export type ToolL10n = Partial<Record<Exclude<Locale, 'en'>, ToolL10nEntry>>
+// 类型与跨工具共享 COMMON 表(tuiCalc/tuiUc)移入零依赖核心层,此处原样 re-export
+// 保持既有 import 路径兼容。
+import type { ToolL10nEntry, ToolL10n } from './tool-l10n-core'
+export type { ToolL10nEntry, ToolL10n } from './tool-l10n-core'
+export {
+  COMMON_CALC_UI,
+  COMMON_UC_UI,
+  tuiCalc,
+  tuiUc,
+  l10nEntryFor,
+  tuiFromEntry,
+  makeRegistryTui,
+} from './tool-l10n-core'
 
 // ──────────── 注册表:slug → ToolL10n ────────────
 import { loanCalculatorL10n } from './tools-l10n/loan-calculator'
@@ -529,6 +533,17 @@ export function getToolL10n(slug: string, locale: Locale): ToolL10nEntry | null 
 }
 
 /**
+ * 取工具的原始多语种记录(zh/es/de,不做 locale 解析)。
+ * 供 server 组件(工具页 RSC)把单条记录作为 prop 下发给 client 组件 ——
+ * client 侧经 tool-l10n-core 的 l10nEntryFor 按运行时 locale 解析,
+ * 语义与 getToolL10n 完全一致,而整表注册表不进 client bundle。
+ * slug 未注册 → undefined(调用方传 undefined,client 回退英文)。
+ */
+export function getToolL10nRecord(slug: string): ToolL10n | undefined {
+  return registry[slug]
+}
+
+/**
  * 取工具某语种的 FAQ(可见)。
  * 有本地化 → 用之;否则回退 lib/tool-faqs.ts 英文原值。
  */
@@ -548,166 +563,4 @@ export function getToolFaqsL10n(
 export function tui(slug: string, locale: Locale, key: string, fallback: string): string {
   const entry = getToolL10n(slug, locale)
   return entry?.ui?.[key] ?? fallback
-}
-
-// ──────────── makeCalculatorClient 通用 UI key(跨工具共享) ────────────
-// 这些 key(summaryTitle / inputsLabel / csvField ...)在所有 makeCalculatorClient
-// 生成的计算器里语义一致,译一次即可,不必逐 bundle 重复。en 不在此 → 回退英文。
-export const COMMON_CALC_UI: Record<Exclude<Locale, 'en'>, Record<string, string>> = {
-  zh: {
-    summaryTitle: '计算摘要',
-    chartEmpty: '输入数值后即可看到图表。',
-    inputsLabel: '输入:',
-    resultsLabel: '结果:',
-    copySummary: '复制摘要',
-    csvField: '字段',
-    csvType: '类型',
-    csvValue: '数值',
-    csvInput: '输入',
-    csvResult: '结果',
-    inputs: '输入',
-    reset: '重置',
-    // Scenario A/B 对比模式(工厂 allowCompare)
-    compareAdd: '+ 对比方案',
-    compareExit: '× 退出对比',
-    compareSync: '⟲ A → B 同步',
-    scenarioA: '方案 A',
-    scenarioB: '方案 B',
-    deltaCol: 'B 相对 A',
-  },
-  es: {
-    summaryTitle: 'Resumen del cálculo',
-    chartEmpty: 'Introduce valores para ver el gráfico.',
-    inputsLabel: 'Entradas:',
-    resultsLabel: 'Resultados:',
-    copySummary: 'Copiar resumen',
-    csvField: 'Campo',
-    csvType: 'Tipo',
-    csvValue: 'Valor',
-    csvInput: 'Entrada',
-    csvResult: 'Resultado',
-    inputs: 'Entradas',
-    reset: 'Restablecer',
-    // Modo comparación A/B (allowCompare)
-    compareAdd: '+ Comparar escenario',
-    compareExit: '× Salir de la comparación',
-    compareSync: '⟲ Copiar A → B',
-    scenarioA: 'Escenario A',
-    scenarioB: 'Escenario B',
-    deltaCol: 'B frente a A',
-  },
-  de: {
-    summaryTitle: 'Zusammenfassung der Berechnung',
-    chartEmpty: 'Werte eingeben, um das Diagramm zu sehen.',
-    inputsLabel: 'Eingaben:',
-    resultsLabel: 'Ergebnisse:',
-    copySummary: 'Zusammenfassung kopieren',
-    csvField: 'Feld',
-    csvType: 'Typ',
-    csvValue: 'Wert',
-    csvInput: 'Eingabe',
-    csvResult: 'Ergebnis',
-    inputs: 'Eingaben',
-    reset: 'Zurücksetzen',
-    // Szenario-A/B-Vergleich (allowCompare)
-    compareAdd: '+ Szenario vergleichen',
-    compareExit: '× Vergleich beenden',
-    compareSync: '⟲ A → B kopieren',
-    scenarioA: 'Szenario A',
-    scenarioB: 'Szenario B',
-    deltaCol: 'B gegenüber A',
-  },
-}
-
-/**
- * 取 makeCalculatorClient 通用 UI key 的本地化值(跨工具共享)。
- * locale==='en' 或缺失 → 回退 fallback(英文原值),保证 SSR 恒英文。
- */
-export function tuiCalc(key: string, locale: Locale, fallback: string): string {
-  if (locale === 'en') return fallback
-  return COMMON_CALC_UI[locale]?.[key] ?? fallback
-}
-
-// ──────────── makeUnitConverter 通用 UI key(跨工具共享)────────────
-// 单位转换器的 chrome(Convert / Value / From / To / Formula / 摘要)在所有
-// makeUnitConverter 生成的转换器里语义一致,译一次即可。en 不在此 → 回退英文。
-export const COMMON_UC_UI: Record<Exclude<Locale, 'en'>, Record<string, string>> = {
-  zh: {
-    convert: '转换',
-    value: '数值',
-    from: '从',
-    to: '到',
-    convertedValue: '换算结果',
-    formula: '公式',
-    conversionSummary: '换算摘要',
-    summaryValue: '数值:',
-    summaryResult: '结果:',
-    summaryFormula: '公式:',
-    conversionNone: '换算: —',
-    conversionTitle: '{from} 转换为 {to}',
-    quickValues: '快捷数值',
-    scaleTitle: '量级对比',
-    generatedBy: '由 ToolHub 生成',
-    swapUnits: '交换单位',
-    swap: '互换',
-    // All-units 同显面板(makeUnitConverter)
-    allUnits: '所有单位',
-    allUnitsHint: '点击任一单位将其设为换算目标',
-    sourceUnitTag: '输入',
-  },
-  es: {
-    convert: 'Convertir',
-    value: 'Valor',
-    from: 'De',
-    to: 'A',
-    convertedValue: 'Valor convertido',
-    formula: 'Fórmula',
-    conversionSummary: 'Resumen de conversión',
-    summaryValue: 'Valor:',
-    summaryResult: 'Resultado:',
-    summaryFormula: 'Fórmula:',
-    conversionNone: 'Conversión: —',
-    conversionTitle: 'Conversión de {from} a {to}',
-    quickValues: 'Valores rápidos',
-    scaleTitle: 'Escala de magnitud',
-    generatedBy: 'Generado por ToolHub',
-    swapUnits: 'Intercambiar unidades',
-    swap: 'Intercambiar',
-    // Panel «todas las unidades» (makeUnitConverter)
-    allUnits: 'Todas las unidades',
-    allUnitsHint: 'Haz clic en una unidad para fijarla como destino',
-    sourceUnitTag: 'entrada',
-  },
-  de: {
-    convert: 'Umrechnen',
-    value: 'Wert',
-    from: 'Von',
-    to: 'Nach',
-    convertedValue: 'Umgerechneter Wert',
-    formula: 'Formel',
-    conversionSummary: 'Umrechnungszusammenfassung',
-    summaryValue: 'Wert:',
-    summaryResult: 'Ergebnis:',
-    summaryFormula: 'Formel:',
-    conversionNone: 'Umrechnung: —',
-    conversionTitle: '{from} nach {to} Umrechnung',
-    quickValues: 'Schnellwerte',
-    scaleTitle: 'Größenordnung',
-    generatedBy: 'Erstellt von ToolHub',
-    swapUnits: 'Einheiten tauschen',
-    swap: 'Tauschen',
-    // Alle-Einheiten-Panel (makeUnitConverter)
-    allUnits: 'Alle Einheiten',
-    allUnitsHint: 'Klicke auf eine Einheit, um sie als Ziel festzulegen',
-    sourceUnitTag: 'Eingabe',
-  },
-}
-
-/**
- * 取 makeUnitConverter 通用 UI key 的本地化值(跨工具共享)。
- * locale==='en' 或缺失 → 回退 fallback(英文原值),保证 SSR 恒英文。
- */
-export function tuiUc(key: string, locale: Locale, fallback: string): string {
-  if (locale === 'en') return fallback
-  return COMMON_UC_UI[locale]?.[key] ?? fallback
 }

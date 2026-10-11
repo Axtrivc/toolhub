@@ -5,7 +5,7 @@ import { CopyButton } from '@/components/CopyButton'
 import { ResultCard } from '@/components/calculator/CalculatorField'
 import { BreakdownChart } from '@/components/calculator/BreakdownChart'
 import { useApp } from '@/components/providers/AppProviders'
-import { tui } from '@/lib/i18n/tool-l10n'
+import { tui } from '@/lib/i18n/tool-l10n-accessors/devtools/GptTokenCounterClient'
 import { MODEL_GROUPS, MODEL_PRICES, type ModelPrice } from '@/lib/model-pricing'
 import { countWords, countSentences } from '@/lib/text-stats'
 

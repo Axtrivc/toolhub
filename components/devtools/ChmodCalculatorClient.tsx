@@ -3,7 +3,7 @@
 import { useState, useMemo, useCallback } from 'react'
 import { CopyButton } from '@/components/CopyButton'
 import { useApp } from '@/components/providers/AppProviders'
-import { tui } from '@/lib/i18n/tool-l10n'
+import { tui } from '@/lib/i18n/tool-l10n-accessors/devtools/ChmodCalculatorClient'
 
 /**
  * chmod Calculator —— Linux 文件权限位交互计算器

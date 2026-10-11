@@ -15,7 +15,7 @@
 
 import type { ReactNode } from 'react'
 import { useApp } from '@/components/providers/AppProviders'
-import { tuiCalc } from '@/lib/i18n/tool-l10n'
+import { tuiCalc } from '@/lib/i18n/tool-l10n-core'
 
 /** 从已格式化结果串里剥出首个数值(剥 $/€/£/¥/%/千分位/空白) */
 function parseNumeric(formatted: string | undefined): number {

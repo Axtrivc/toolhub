@@ -5,7 +5,7 @@ import { CopyButton } from '@/components/CopyButton'
 import { ResultActions } from '@/components/ResultActions'
 import { LoadSampleButton } from '@/components/LoadSampleButton'
 import { useApp } from '@/components/providers/AppProviders'
-import { tui } from '@/lib/i18n/tool-l10n'
+import { tui } from '@/lib/i18n/tool-l10n-accessors/devtools/CodeBeautifierClient'
 
 /**
  * Code Beautifier —— HTML / CSS / JavaScript / JSON 格式化
