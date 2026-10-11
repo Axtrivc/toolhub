@@ -9,7 +9,8 @@ const en: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>What Is This Tool?</h2>
     <p>
-      A <strong>JSON Web Token (JWT)</strong> is a compact, URL-safe string used to securely pass claims between a
+      A <strong>JSON Web Token (JWT)</strong>{' '}
+      is a compact, URL-safe string used to securely pass claims between a
       client and a server &mdash; most often for authentication. A JWT has three Base64URL-encoded parts separated by dots:{' '}
       <code>header.payload.signature</code>. This decoder splits those three parts and shows the header and payload
       as readable JSON, plus the raw signature.
@@ -33,7 +34,8 @@ const en: ReactNode = (
     <div>
       <h2>Is it safe to paste my token here?</h2>
       <p>
-        Yes. Decoding runs entirely in your browser with the built-in <code>atob</code> function &mdash; your token is
+        Yes. Decoding runs entirely in your browser with the built-in <code>atob</code>{' '}
+        function &mdash; your token is
         never uploaded to a server, stored, or logged. That said, treat real access tokens like passwords: do not
         share them in screenshots, chat, or public repos. If you only want to understand a token&apos;s structure,
         use the <em>Load Sample</em> button for a harmless example.

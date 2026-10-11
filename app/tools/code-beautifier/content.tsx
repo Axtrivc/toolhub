@@ -38,7 +38,8 @@ const en: ReactNode = (
     <div>
       <h2>When to reach for it</h2>
       <p>
-        Typical uses: un-minifying a <code>.min.js</code> snippet to understand what it does, normalizing a
+        Typical uses: un-minifying a <code>.min.js</code>{' '}
+        snippet to understand what it does, normalizing a
         config file before committing it, cleaning up HTML copied out of a browser&apos;s &quot;view
         source&quot;, or pretty-printing a compacted API response. For day-to-day editing, a full
         Prettier/ESLint setup in your project is still the right tool — this one is for quick, one-off

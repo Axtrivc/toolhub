@@ -11,7 +11,8 @@ const en: ReactNode = (
     <p>
       <strong>YAML</strong> (YAML Ain&apos;t Markup Language) is a human-friendly configuration format
       used by Docker Compose, Kubernetes, GitHub Actions, Ansible, and many CI tools.{' '}
-      <strong>JSON</strong> is the data interchange format every API speaks. Converting YAML to JSON is
+      <strong>JSON</strong>{' '}
+      is the data interchange format every API speaks. Converting YAML to JSON is
       a common need when feeding config into tooling that only accepts JSON — and YAML&apos;s
       indentation rules make it easy to get wrong by hand. This tool parses YAML locally and emits
       clean JSON.
@@ -45,7 +46,8 @@ const en: ReactNode = (
         Unlike JSON, YAML is <strong>indentation-sensitive</strong> — two spaces versus four changes
         the structure entirely. Tabs are forbidden for indentation (use spaces only). Plain scalars
         are also implicitly typed: <code>yes</code>, <code>no</code>, <code>on</code>, and{' '}
-        <code>off</code> become booleans in older YAML 1.1 parsers, which is a famous source of
+        <code>off</code>{' '}
+        become booleans in older YAML 1.1 parsers, which is a famous source of
         bugs (the &quot;Norway problem&quot; where <code>NO</code> became <code>false</code>). Quote
         such values if you need them as strings.
       </p>

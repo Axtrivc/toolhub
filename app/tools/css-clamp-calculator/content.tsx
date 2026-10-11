@@ -29,7 +29,8 @@ const en: ReactNode = (
         Between your two viewport points the size follows a straight line:{' '}
         <code>slope = (maxFont − minFont) / (maxViewport − minViewport) × 100</code>, expressed in{' '}
         <code>vw</code>, and <code>intercept = minFont − slope × minViewport / 100</code>, in px. The preferred
-        middle value <code>intercept + slope × vw</code> does the scaling; <code>clamp()</code> then guarantees
+        middle value <code>intercept + slope × vw</code> does the scaling; <code>clamp()</code>{' '}
+        then guarantees
         the result never goes below your minimum on small phones or above your maximum on wide monitors. The
         scale table shows exactly where the &quot;scaling&quot; zone ends and clamping begins.
       </p>

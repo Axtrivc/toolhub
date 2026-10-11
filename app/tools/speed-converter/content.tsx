@@ -53,7 +53,8 @@ const en: ReactNode = (
 
     <h2>What Is a Knot?</h2>
     <p>
-      A <strong>knot</strong> is one nautical mile per hour, where a nautical mile is based on the
+      A <strong>knot</strong>{' '}
+      is one nautical mile per hour, where a nautical mile is based on the
       Earth&apos;s circumference (one minute of latitude). Because nautical miles relate directly
       to navigation, knots remain the standard in aviation and maritime use worldwide, even in
       countries that use metric for everything else.

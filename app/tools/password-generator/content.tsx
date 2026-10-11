@@ -35,7 +35,8 @@ const en: ReactNode = (
         about 95 characters — every extra character then adds ~6.6 bits of entropy.
       </li>
       <li>
-        <strong>Avoid the predictable.</strong> Never use names, birthdays, &quot;password123,&quot;
+        <strong>Avoid the predictable.</strong>{' '}
+        Never use names, birthdays, &quot;password123,&quot;
         keyboard patterns (qwerty), or anything found in a dictionary. Attackers try these first.
       </li>
       <li>
@@ -89,7 +90,8 @@ const en: ReactNode = (
     <h2>Should I Memorize or Use a Manager?</h2>
     <p>
       For most people, a password manager is the right answer. The only password you need to
-      memorize is the <strong>master password</strong> that unlocks your manager — make it a long
+      memorize is the <strong>master password</strong>{' '}
+      that unlocks your manager — make it a long
       passphrase (4-5 random words) rather than a short complex string. Every other password can
       be a random 20+ character string generated here, since you&apos;ll never need to type it.
     </p>

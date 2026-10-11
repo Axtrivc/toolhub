@@ -82,7 +82,8 @@ const en: ReactNode = (
     <h2>Tips for Reaching Your Target Word Count</h2>
     <ol>
       <li>
-        <strong>Don&apos;t pad.</strong> Adding fluff hurts readability and SEO. If you&apos;re
+        <strong>Don&apos;t pad.</strong>{' '}
+        Adding fluff hurts readability and SEO. If you&apos;re
         short, add substance — examples, data, or a deeper explanation — not filler.
       </li>
       <li>
@@ -90,7 +91,8 @@ const en: ReactNode = (
         without rambling. Allocate roughly equal words to each section.
       </li>
       <li>
-        <strong>Edit ruthlessly to cut.</strong> If you&apos;re over the limit, look for redundant
+        <strong>Edit ruthlessly to cut.</strong>{' '}
+        If you&apos;re over the limit, look for redundant
         phrases, adverbs, and repetition. Cutting usually improves the writing.
       </li>
     </ol>

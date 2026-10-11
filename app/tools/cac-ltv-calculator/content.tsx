@@ -33,7 +33,8 @@ const en: ReactNode = (
     <p>
       Below <strong>1:1</strong> you lose money on every customer — stop scaling and fix retention or targeting.
       Around <strong>3:1</strong> is the classic healthy zone: enough margin to fund operations and mistakes.
-      Above <strong>5:1</strong> is efficient but may mean you&apos;re underinvesting in growth competitors will
+      Above <strong>5:1</strong>{' '}
+      is efficient but may mean you&apos;re underinvesting in growth competitors will
       happily take. Also watch <strong>CAC payback</strong> — the months of gross margin needed to recover
       acquisition cost; under 12 months keeps cash flow comfortable.
     </p>

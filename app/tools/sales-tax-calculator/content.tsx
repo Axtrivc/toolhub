@@ -131,7 +131,7 @@ const es: ReactNode = (
       El impuesto sobre las ventas es un impuesto al consumo que se cobra sobre bienes y servicios,
       calculado como un porcentaje del precio de venta. En Estados Unidos, los tipos varían según el
       estado, el condado y la ciudad — desde el 0 % (Oregón, Delaware) hasta más del 10 % en algunas
-      zonas. Muchos otros países usan sistemas similares con nombres distintos: el <strong>IVA</strong>
+      zonas. Muchos otros países usan sistemas similares con nombres distintos: el <strong>IVA</strong>{' '}
       en Europa, y el <strong>GST</strong> en Canadá, Australia e India.
     </p>
 
@@ -191,7 +191,7 @@ const de: ReactNode = (
       Die Umsatzsteuer ist eine Verbrauchsteuer auf Waren und Dienstleistungen, die als Prozentsatz
       des Verkaufspreises berechnet wird. In den USA variieren die Sätze nach Bundesstaat, Landkreis
       und Stadt — von 0 % (Oregon, Delaware) bis über 10 % in einigen Gebieten. Viele andere Länder
-      nutzen ähnliche Systeme unter anderen Namen: die <strong>Mehrwertsteuer</strong> in Europa, die
+      nutzen ähnliche Systeme unter anderen Namen: die <strong>Mehrwertsteuer</strong> in Europa, die{' '}
       <strong>GST</strong> in Kanada, Australien und Indien.
     </p>
 

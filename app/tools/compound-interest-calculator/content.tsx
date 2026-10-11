@@ -16,7 +16,8 @@ const en: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>What Is Compound Interest?</h2>
     <p>
-      <strong>Compound interest</strong> is interest earned on both your initial principal and the
+      <strong>Compound interest</strong>{' '}
+      is interest earned on both your initial principal and the
       interest that accumulates over time. It&apos;s often called &quot;interest on interest,&quot;
       and it&apos;s the most powerful force in long-term investing. Unlike simple interest, which
       only grows your original deposit, compounding makes your money grow exponentially — slowly

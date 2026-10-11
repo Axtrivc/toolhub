@@ -25,7 +25,8 @@ const en: ReactNode = (
     <h2>How much waste should you add?</h2>
     <p>
       <strong>5–10%</strong> covers straight-lay plank flooring and standard tile in simple rectangular rooms.
-      Go <strong>10–15%</strong> for diagonal or herringbone patterns, large-format tile, rooms with lots of
+      Go <strong>10–15%</strong>{' '}
+      for diagonal or herringbone patterns, large-format tile, rooms with lots of
       jogs and closets, or hardwood with color-matching needs. Waste isn&apos;t optional: boards must be cut to
       stagger seams, and the last row is almost always ripped lengthwise.
     </p>
@@ -138,7 +139,7 @@ const de: ReactNode = (
 
     <h2>Wie viel Verschnitt einplanen?</h2>
     <p>
-      <strong>5–10 %</strong> decken gerade verlegte Dielen und Standardfliesen in einfachen Rechteckräumen. Nimm
+      <strong>5–10 %</strong> decken gerade verlegte Dielen und Standardfliesen in einfachen Rechteckräumen. Nimm{' '}
       <strong>10–15 %</strong> für diagonale Verlegung oder Fischgrät, Großformat, Räume mit vielen Ecken und
       Nischen oder Hartholz mit Farbgleichheits-Anspruch. Verschnitt ist nicht optional: Dielen müssen für
       versetzte Fugen geschnitten werden, und die letzte Reihe wird fast immer längs zugeschnitten.

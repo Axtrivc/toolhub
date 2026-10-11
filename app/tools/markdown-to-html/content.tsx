@@ -18,7 +18,8 @@ const en: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>What Is This Tool?</h2>
     <p>
-      <strong>Markdown</strong> is the lightweight markup language used by GitHub, Reddit, Slack,
+      <strong>Markdown</strong>{' '}
+      is the lightweight markup language used by GitHub, Reddit, Slack,
       Notion, and most developer documentation. Browsers cannot render Markdown directly &mdash; they need{' '}
       <strong>HTML</strong>. This converter turns Markdown into clean HTML on the left while showing a
       live rendered preview on the right, so you can see exactly what your readers will get.

@@ -9,7 +9,8 @@ const en: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>What Is This Tool?</h2>
     <p>
-      A <strong>data URI</strong> embeds a file&apos;s contents directly inside a URL string, prefixed
+      A <strong>data URI</strong>{' '}
+      embeds a file&apos;s contents directly inside a URL string, prefixed
       with <code>data:image/png;base64,…</code>. Inlining an image as a data URI means the browser does
       not make a separate HTTP request to fetch it — useful for tiny icons, email assets, and
       self-contained HTML/CSS demos. This tool converts any image you upload into a Base64 data URI

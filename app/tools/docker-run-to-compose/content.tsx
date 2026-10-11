@@ -42,7 +42,7 @@ const en: ReactNode = (
     <h2>Modern Compose Spec vs. Legacy v3</h2>
     <p>
       Modern Docker Compose (v2 CLI) follows the official <em>Compose Specification</em> where top-level <code>version:</code> keys
-      are deprecated and optional. By default, this tool outputs clean, modern Compose YAML. You can also toggle the
+      are deprecated and optional. By default, this tool outputs clean, modern Compose YAML. You can also toggle the{' '}
       <code>version: &apos;3.8&apos;</code> header if your CI/CD runner relies on legacy Compose v1.
     </p>
   </section>

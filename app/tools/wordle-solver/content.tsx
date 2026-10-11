@@ -103,7 +103,7 @@ const es: ReactNode = (
     <div>
       <h2>Cómo trasladar tus intentos a los filtros</h2>
       <p>
-        Tras cada intento de Wordle, escribe las letras confirmadas en las cinco casillas <strong>verdes</strong>
+        Tras cada intento de Wordle, escribe las letras confirmadas en las cinco casillas <strong>verdes</strong>{' '}
         en sus posiciones exactas, pon las letras que están en la palabra pero mal colocadas en{' '}
         <em>debe contener</em> (amarillo), y lista las letras descartadas en <em>NO debe contener</em> (gris). La
         lista se actualiza con cada pulsación, mostrando hasta 200 coincidencias con el recuento exacto. Haz clic

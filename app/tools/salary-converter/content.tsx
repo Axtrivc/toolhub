@@ -18,7 +18,8 @@ const en: ReactNode = (
     <h2>What Is This Tool?</h2>
     <p>
       This converter translates a salary between <strong>annual</strong>, <strong>monthly</strong>,{' '}
-      <strong>bi-weekly</strong>, and <strong>hourly</strong> figures. Enter what you actually get
+      <strong>bi-weekly</strong>, and <strong>hourly</strong>{' '}
+      figures. Enter what you actually get
       paid and pick the unit &mdash; the tool normalizes everything to an annual total and derives
       the rest, so you can compare job offers that quote pay differently.
     </p>
@@ -45,7 +46,8 @@ const en: ReactNode = (
     <div>
       <h2>Bi-Weekly vs Semi-Monthly</h2>
       <p>
-        Bi-weekly pay (every two weeks) gives <strong>26</strong> checks a year &mdash; which means
+        Bi-weekly pay (every two weeks) gives <strong>26</strong>{' '}
+        checks a year &mdash; which means
         two months you get three checks instead of two. Semi-monthly pay (twice a month) gives
         exactly <strong>24</strong> checks. Over a year, a $60,000 salary is $2,308 per bi-weekly
         check but $2,500 per semi-monthly check. This tool uses the standard bi-weekly (26-period)

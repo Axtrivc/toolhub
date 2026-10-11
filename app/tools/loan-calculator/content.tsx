@@ -79,7 +79,8 @@ const en: ReactNode = (
         lower than unsecured loans.
       </li>
       <li>
-        <strong>Personal loans.</strong> 1-7 year unsecured loans for any purpose. Rates are
+        <strong>Personal loans.</strong>{' '}
+        1-7 year unsecured loans for any purpose. Rates are
         higher because there&apos;s no collateral.
       </li>
       <li>
@@ -91,7 +92,8 @@ const en: ReactNode = (
     <h2>How to Lower Your Interest Costs</h2>
     <ol>
       <li>
-        <strong>Choose a shorter term.</strong> If you can afford the higher payment, you&apos;ll
+        <strong>Choose a shorter term.</strong>{' '}
+        If you can afford the higher payment, you&apos;ll
         save dramatically on interest.
       </li>
       <li>
@@ -104,7 +106,8 @@ const en: ReactNode = (
         which compounds into big savings over a long loan.
       </li>
       <li>
-        <strong>Refinance when rates drop.</strong> If market rates fall below what you&apos;re
+        <strong>Refinance when rates drop.</strong>{' '}
+        If market rates fall below what you&apos;re
         paying, refinancing into a lower-rate loan can save you thousands — just weigh the closing
         costs.
       </li>

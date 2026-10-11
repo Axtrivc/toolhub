@@ -74,7 +74,8 @@ const en: ReactNode = (
         code reliably.
       </li>
       <li>
-        <strong>Download.</strong> Click &quot;Download PNG&quot; to save a high-resolution image
+        <strong>Download.</strong>{' '}
+        Click &quot;Download PNG&quot; to save a high-resolution image
         ready for print or web.
       </li>
     </ol>
@@ -94,12 +95,14 @@ const en: ReactNode = (
         (about 0.8 inches). Smaller codes struggle to scan, especially from a distance.
       </li>
       <li>
-        <strong>Add a quiet zone.</strong> The white margin around the code (the &quot;quiet
+        <strong>Add a quiet zone.</strong>{' '}
+        The white margin around the code (the &quot;quiet
         zone&quot;) helps scanners detect it. This tool adds a margin automatically — don&apos;t
         crop it off when placing the image.
       </li>
       <li>
-        <strong>Test before printing.</strong> Always scan your generated code with a real phone
+        <strong>Test before printing.</strong>{' '}
+        Always scan your generated code with a real phone
         before printing 1,000 flyers. A typo in a URL is a costly mistake once it&apos;s on paper.
       </li>
       <li>

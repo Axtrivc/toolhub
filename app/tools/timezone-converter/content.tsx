@@ -49,7 +49,8 @@ const en: ReactNode = (
       <p>
         <em>&quot;My local zone&quot;</em> is detected from your device settings, so double-check it if you travel
         or use a VPN-adjusted system clock. Remember that the input is always read in the <em>source</em> zone —
-        pressing <strong>Now</strong> fills in the current time as seen in that zone, which may differ from your
+        pressing <strong>Now</strong>{' '}
+        fills in the current time as seen in that zone, which may differ from your
         own clock. Around DST switchover weekends, a given wall time can be ambiguous or nonexistent in the
         affected zone; the converter resolves it to the closest valid instant, but it&apos;s worth confirming
         critical events for those dates with participants directly.

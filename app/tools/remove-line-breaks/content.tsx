@@ -26,7 +26,8 @@ const en: ReactNode = (
     <div>
       <h2>Preserving Paragraphs</h2>
       <p>
-        This tool joins <em>everything</em> into one line, including what were originally
+        This tool joins <em>everything</em>{' '}
+        into one line, including what were originally
         separate paragraphs. If you need to keep paragraph breaks while only removing
         single-line breaks within paragraphs, you&apos;ll need to process each paragraph
         separately.

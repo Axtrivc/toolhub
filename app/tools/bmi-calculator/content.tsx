@@ -50,16 +50,18 @@ const en: ReactNode = (
     </p>
     <ul>
       <li>
-        <strong>Athletes and bodybuilders</strong> often score &quot;overweight&quot; because
+        <strong>Athletes and bodybuilders</strong>{' '}
+        often score &quot;overweight&quot; because
         muscle is denser than fat. A professional rugby player with 10% body fat might have a BMI
         of 28.
       </li>
       <li>
-        <strong>Older adults</strong> may have a &quot;healthy&quot; BMI but high body fat and low
+        <strong>Older adults</strong>{' '}may have a &quot;healthy&quot; BMI but high body fat and low
         muscle mass — a risk that BMI misses.
       </li>
       <li>
-        <strong>Body fat distribution</strong> matters. Fat around the waist carries more health
+        <strong>Body fat distribution</strong>{' '}
+        matters. Fat around the waist carries more health
         risk than fat around the hips, but BMI can&apos;t tell the difference.
       </li>
       <li>

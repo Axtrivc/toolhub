@@ -54,7 +54,8 @@ const en: ReactNode = (
         <code>how-to-brew</code> over <code>how_to_brew</code>.
       </li>
       <li>
-        <strong>Strip stop words.</strong> Articles and prepositions like &quot;the,&quot;
+        <strong>Strip stop words.</strong>{' '}
+        Articles and prepositions like &quot;the,&quot;
         &quot;a,&quot; &quot;of,&quot; &quot;for&quot; add length without value.{' '}
         <code>best-coffee-grinders</code> is better than <code>the-best-coffee-grinders-for-you</code>.
       </li>

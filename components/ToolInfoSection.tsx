@@ -83,7 +83,8 @@ function EnglishToolInfo({ tool }: { tool: ToolMeta }): ReactNode {
     intro = (
       <>
         <p>
-          The <strong>{tool.name}</strong> lets you figure out {mainKeyword} instantly, without
+          The <strong>{tool.name}</strong> lets you figure out {mainKeyword}{' '}
+          instantly, without
           reaching for a spreadsheet or doing the math by hand. Whether you&apos;re planning a
           budget, checking a loan, or working through homework, the tool applies the correct formula
           behind the scenes and shows the result the moment you enter your numbers.
@@ -111,7 +112,8 @@ function EnglishToolInfo({ tool }: { tool: ToolMeta }): ReactNode {
     intro = (
       <>
         <p>
-          The <strong>{tool.name}</strong> converts {mainKeyword} from one unit to another using the
+          The <strong>{tool.name}</strong> converts {mainKeyword}{' '}from one unit to another
+          using the
           exact internationally defined conversion factors. Type a value, choose your source and
           target units, and the converted result is shown instantly &mdash; no waiting, no page
           reload.
@@ -163,7 +165,8 @@ function EnglishToolInfo({ tool }: { tool: ToolMeta }): ReactNode {
     intro = (
       <>
         <p>
-          The <strong>{tool.name}</strong> handles {mainKeyword} directly in your browser. Paste or
+          The <strong>{tool.name}</strong> handles {mainKeyword}{' '}
+          directly in your browser. Paste or
           type your input, and the tool processes it instantly &mdash; no upload, no signup, no
           waiting. It&apos;s built for the moments when you need a quick transformation and
           don&apos;t want to leave your workflow.
@@ -215,7 +218,8 @@ function EnglishToolInfo({ tool }: { tool: ToolMeta }): ReactNode {
           device.
         </li>
         <li>
-          <strong>Always up to date.</strong> There&apos;s nothing to update &mdash; you always get
+          <strong>Always up to date.</strong>{' '}
+          There&apos;s nothing to update &mdash; you always get
           the latest version when you load the page.
         </li>
         <li>

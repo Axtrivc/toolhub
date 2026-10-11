@@ -49,7 +49,8 @@ const en: ReactNode = (
       <p>
         Where <code>M</code> is monthly payment, <code>P</code> is loan principal,{' '}
         <code>r</code> is the monthly interest rate (annual rate &divide; 12), and{' '}
-        <code>n</code> is the number of payments (years &times; 12). The calculator handles
+        <code>n</code>{' '}
+        is the number of payments (years &times; 12). The calculator handles
         this for you, but understanding it explains why small rate changes have outsized
         effects.
       </p>
@@ -64,15 +65,18 @@ const en: ReactNode = (
       </p>
       <ul>
         <li>
-          <strong>Property taxes:</strong> Typically 0.5%&ndash;2% of home value per year,
+          <strong>Property taxes:</strong>{' '}
+          Typically 0.5%&ndash;2% of home value per year,
           varying widely by location. On a $400k home, budget $170&ndash;$670/month.
         </li>
         <li>
-          <strong>Homeowners insurance:</strong> Usually $80&ndash;$250/month, depending on
+          <strong>Homeowners insurance:</strong>{' '}
+          Usually $80&ndash;$250/month, depending on
           location, coverage, and home value.
         </li>
         <li>
-          <strong>PMI (if under 20% down):</strong> Private mortgage insurance, typically
+          <strong>PMI (if under 20% down):</strong>{' '}
+          Private mortgage insurance, typically
           $50&ndash;$300/month, required until you reach 20% equity. This calculator adds it
           automatically when your down payment is under 20%; at 20% or more it is $0.
         </li>
@@ -82,7 +86,8 @@ const en: ReactNode = (
         </li>
       </ul>
       <p>
-        A common rule of thumb: your <em>total</em> PITI should stay under 28% of your gross
+        A common rule of thumb: your <em>total</em>{' '}
+        PITI should stay under 28% of your gross
         monthly income. Lenders also look at all your debts (PITI + car loans + student
         loans + minimum card payments) staying under 36%&ndash;43% of gross income.
       </p>
@@ -104,7 +109,8 @@ const en: ReactNode = (
           payments, and instant equity if home values dip.
         </li>
         <li>
-          <strong>3.5%&ndash;5% minimum:</strong> FHA loans allow 3.5% down, some conventional
+          <strong>3.5%&ndash;5% minimum:</strong>{' '}
+          FHA loans allow 3.5% down, some conventional
           loans allow 3%&ndash;5%, but you&apos;ll pay PMI and a higher rate.
         </li>
       </ul>
@@ -126,7 +132,8 @@ const en: ReactNode = (
         </li>
       </ul>
       <p>
-        The 15-year saves about <strong>$300,000 in interest</strong> for ~$940 more per
+        The 15-year saves about <strong>$300,000 in interest</strong>{' '}
+        for ~$940 more per
         month. A popular middle path: take a 30-year for flexibility, then pay extra
         principal whenever you can. Even one extra payment a year shaves years off the term
         &mdash; use the extra monthly payment field above to see the exact payoff time,

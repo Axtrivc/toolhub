@@ -17,7 +17,8 @@ const en: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>What Is This Tool?</h2>
     <p>
-      The <strong>minimum payment</strong> is the smallest amount your card issuer will accept
+      The <strong>minimum payment</strong>{' '}
+      is the smallest amount your card issuer will accept
       each month without charging a late fee or reporting you as delinquent. It is calculated
       as a small percentage of your balance (usually 1%&ndash;3%) plus any interest and fees
       accrued that month. This calculator shows exactly where your minimum payment goes &mdash;
@@ -66,7 +67,8 @@ const en: ReactNode = (
         Goes&nbsp;to&nbsp;Principal = Minimum&nbsp;Payment &minus; Monthly&nbsp;Interest
       </p>
       <p>
-        where <strong>Floor</strong> is typically $25&ndash;$35, <strong>Min%</strong> is usually
+        where <strong>Floor</strong> is typically $25&ndash;$35, <strong>Min%</strong>{' '}
+        is usually
         1%&ndash;3%, and <strong>APR &divide; 12</strong> converts the annual rate to a monthly rate.
         This is the formula the calculator above applies to your numbers in real time.
       </p>
@@ -83,12 +85,14 @@ const en: ReactNode = (
           <strong>Minimum payment (2%, floored at $25):</strong> $100.00 (= $5,000 &times; 2%)
         </li>
         <li>
-          <strong>Goes to principal:</strong> only $16.71 (= $100.00 &minus; $83.29)
+          <strong>Goes to principal:</strong>{' '}
+          only $16.71 (= $100.00 &minus; $83.29)
         </li>
       </ul>
       <p>
         In other words, about <strong>83% of your payment vanishes as interest</strong>, and just
-        17% reduces what you owe. At that rate it takes <strong>decades</strong> to pay off &mdash; and
+        17% reduces what you owe. At that rate it takes <strong>decades</strong>{' '}
+        to pay off &mdash; and
         that&apos;s assuming you never charge another dollar. If your payment is at or below
         the monthly interest, the balance never drops at all. You can verify every number above
         by entering $5,000 / 19.99 / 2 into the calculator.
@@ -113,7 +117,8 @@ const en: ReactNode = (
       <h2>How to Read Your Statement</h2>
       <ul>
         <li>
-          <strong>Minimum payment warning box:</strong> Required on US statements since 2010.
+          <strong>Minimum payment warning box:</strong>{' '}
+          Required on US statements since 2010.
           It shows how long repayment takes at the minimum vs. a 3-year payoff amount. Read it
           &mdash; it&apos;s the clearest picture of your situation.
         </li>
@@ -122,7 +127,8 @@ const en: ReactNode = (
           29.99%) that apply if you miss the due date.
         </li>
         <li>
-          <strong>Interest charge:</strong> The total interest accrued this month. Compare it
+          <strong>Interest charge:</strong>{' '}
+          The total interest accrued this month. Compare it
           to your minimum payment &mdash; if interest is most of the payment, you&apos;re
           treading water.
         </li>
@@ -149,7 +155,8 @@ const en: ReactNode = (
         </li>
       </ul>
       <p>
-        See our related <em>Credit Card Payoff Calculator</em> for full strategy (avalanche,
+        See our related <em>Credit Card Payoff Calculator</em>{' '}
+        for full strategy (avalanche,
         snowball, balance transfers) &mdash; this page focuses on understanding the minimum
         payment itself.
       </p>

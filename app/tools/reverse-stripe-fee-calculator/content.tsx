@@ -36,7 +36,8 @@ const en: ReactNode = (
       <h2>Which preset should I pick?</h2>
       <p>
         <strong>Stripe US online</strong> (2.9% + $0.30) covers standard domestic card charges. Add the{' '}
-        <strong>international card</strong> preset (+1.5%) when the buyer&apos;s card was issued outside the US,
+        <strong>international card</strong>{' '}
+        preset (+1.5%) when the buyer&apos;s card was issued outside the US,
         and the <strong>currency conversion</strong> preset (+1% more) when you also charge in a foreign
         currency. <strong>PayPal US</strong> uses 3.49% + $0.49. If your plan differs — volume discounts,
         non-profit rates, micropayments — switch to <strong>Custom</strong> and type your exact numbers.
@@ -155,7 +156,7 @@ const de: ReactNode = (
       <h2>Vorwärts- vs. Rückwärtsmodus</h2>
       <p>
         Im <strong>Vorwärtsmodus</strong> gibst du ein, was du verlangst, und erhältst die Gebühr, die Nettoauszahlung und die{' '}
-        <em>effektive Gebührenrate</em> — die bei kleinen Transaktionen wegen der festen Gebühr von <code>0,30 $</code>
+        <em>effektive Gebührenrate</em> — die bei kleinen Transaktionen wegen der festen Gebühr von <code>0,30 $</code>{' '}
         immer über dem nominalen Prozentsatz liegt. Im <strong>Rückwärtsmodus</strong> gibst du ein, was du
         erhalten möchtest, und das Werkzeug löst <code>charge = (net + fixed) / (1 − pct)</code> und verifiziert das Ergebnis anschließend
         mit einer Netto-Prüfkarte. Nutze den Rückwärtsmodus beim Angebot an Kunden, damit die Gebühr deine Rate nicht auffrisst.

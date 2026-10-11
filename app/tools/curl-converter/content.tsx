@@ -18,7 +18,8 @@ const en: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>What Is This Tool?</h2>
     <p>
-      <code>curl</code> is the universal language of HTTP debugging &mdash; copy a request from your browser&apos;s
+      <code>curl</code>{' '}
+      is the universal language of HTTP debugging &mdash; copy a request from your browser&apos;s
       DevTools, a colleague&apos;s README, or a Stripe doc, and you want to fire the same request from your own
       code. This converter parses the curl command (URL, method, headers, body) and emits ready-to-use
       snippets for <strong>JavaScript Fetch</strong>, <strong>Axios</strong>, and <strong>Python requests</strong>.
@@ -53,7 +54,8 @@ const en: ReactNode = (
       <p>
         The Fetch output uses the native <code>fetch()</code> API with an <code>await</code> on{' '}
         <code>response.json()</code> &mdash; zero dependencies, works in browsers and Node 18+. The Axios
-        output assumes you have <code>axios</code> installed; it tends to produce shorter code and
+        output assumes you have <code>axios</code>{' '}
+        installed; it tends to produce shorter code and
         throws on non-2xx status codes by default. Pick whichever matches your project&apos;s existing
         HTTP layer.
       </p>
@@ -64,7 +66,8 @@ const en: ReactNode = (
         Multipart form uploads (<code>-F</code> / <code>--form</code>) and cookie jars (<code>-b</code>{' '}
         / <code>-c</code>) are not expanded into language-specific multipart code &mdash; they are noisy
         to generate correctly and vary by library. Basic auth (<code>-u user:pass</code>), on the other
-        hand, <em>is</em> converted into an <code>Authorization: Basic</code> header automatically. For
+        hand, <em>is</em> converted into an <code>Authorization: Basic</code>{' '}
+        header automatically. For
         the rest, use your HTTP client&apos;s dedicated multipart helpers with the parsed URL and
         headers as a starting point.
       </p>

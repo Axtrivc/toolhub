@@ -49,7 +49,8 @@ const en: ReactNode = (
     <div>
       <h2>Bulk mode for renames</h2>
       <p>
-        Flip on <strong>bulk mode</strong> and paste one phrase per line — ideal when renaming a batch of
+        Flip on <strong>bulk mode</strong>{' '}
+        and paste one phrase per line — ideal when renaming a batch of
         variables, migrating config keys, or generating CSS classes from a design spec. Each output row then
         shows every converted line, and the row&apos;s copy button copies the whole block at once. Blank lines
         are ignored, and the conversion updates live as you type.

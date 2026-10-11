@@ -16,7 +16,8 @@ const en: ReactNode = (
     <h2>What Is This Tool?</h2>
     <p>
       This tool generates a complete <strong>SSH key pair</strong> — a public key in the{' '}
-      <code>authorized_keys</code> format you paste onto servers, and a matching private key in PKCS#8 PEM — using
+      <code>authorized_keys</code>{' '}
+      format you paste onto servers, and a matching private key in PKCS#8 PEM — using
       only your browser&apos;s built-in <strong>Web Crypto API</strong>. It is handy for spinning up a key for a new
       server, CI job, or Git hosting account when you are away from a terminal. Everything runs 100% locally: the
       keys are created in your browser tab and are never sent anywhere.

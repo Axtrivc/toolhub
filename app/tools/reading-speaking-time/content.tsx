@@ -41,7 +41,8 @@ const en: ReactNode = (
         For a <strong>blog read-time badge</strong>, some CMS plugins assume 150–200 wpm; Medium, for example,
         assumes ~265 wpm. For a <strong>speech or voice-over</strong>, use the speaking figures — and remember they assume
         continuous delivery. Slides, demos, pauses for laughter, and Q&amp;A easily add 10–20%, so if the tool
-        says 9:30, plan a 10–11 minute slot. The <em>pages</em> estimate (250 words/page) helps when a brief asks
+        says 9:30, plan a 10–11 minute slot. The <em>pages</em>{' '}
+        estimate (250 words/page) helps when a brief asks
         for &quot;about four pages&quot;.
       </p>
     </div>

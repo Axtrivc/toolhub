@@ -26,7 +26,8 @@ const en: ReactNode = (
       <h2>When Decoding Fails</h2>
       <p>
         If you see an error, the input is likely not valid Base64. Common causes: characters outside the Base64
-        alphabet (A-Z, a-z, 0-9, +, / &mdash; the URL-safe <code>-</code> and <code>_</code> variants are also
+        alphabet (A-Z, a-z, 0-9, +, / &mdash; the URL-safe <code>-</code> and <code>_</code>{' '}
+        variants are also
         accepted), or a string truncated when copying so its length no longer fits Base64&apos;s 4-character groups.
         Missing <code>=</code> padding and stray whitespace are handled automatically.
       </p>

@@ -25,7 +25,8 @@ const en: ReactNode = (
       <h2>Countdown tab</h2>
       <p>
         Pick a target date (and an optional time) and the display ticks live, showing{' '}
-        <strong>days, hours, minutes, and seconds</strong> remaining. If the moment has already passed, the same
+        <strong>days, hours, minutes, and seconds</strong>{' '}
+        remaining. If the moment has already passed, the same
         cards flip to elapsed time — &quot;X days ago&quot;. Breakdown cards add the <strong>total days</strong>{' '}
         (including the partial day), the gap expressed as <strong>weeks + days</strong>, and the number of{' '}
         <strong>business days</strong> with Saturdays and Sundays skipped. The preset buttons jump to New Year,

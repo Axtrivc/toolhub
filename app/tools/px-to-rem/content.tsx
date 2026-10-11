@@ -9,17 +9,21 @@ const en: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>What Is This Tool?</h2>
     <p>
-      Modern CSS uses <code>rem</code> and <code>em</code> instead of pixels so layouts scale with the
-      user&apos;s font-size preference. But converting <code>px</code> to <code>rem</code> in your head is
+      Modern CSS uses <code>rem</code> and <code>em</code>{' '}
+      instead of pixels so layouts scale with the
+      user&apos;s font-size preference. But converting <code>px</code> to <code>rem</code>{' '}
+      in your head is
       error-prone — you have to divide by the root font size, which isn&apos;t always exactly 16px. This
       tool does the math instantly and shows a live table for the sizes you use every day.
     </p>
     <div>
       <h2>rem vs em — when to use which</h2>
       <p>
-        <code>rem</code> (root em) is always relative to the <code>&lt;html&gt;</code> element&apos;s
+        <code>rem</code> (root em) is always relative to the <code>&lt;html&gt;</code>{' '}
+        element&apos;s
         font size, so it is predictable and consistent everywhere — ideal for layout, spacing, and
-        base font sizes. <code>em</code> is relative to the nearest parent element&apos;s font size, so
+        base font sizes. <code>em</code>{' '}
+        is relative to the nearest parent element&apos;s font size, so
         it compounds in nested elements. Use <code>em</code> for padding and margins inside
         components that should scale with their own text (e.g. a button whose padding grows with its
         label). For everything else, prefer <code>rem</code>.
@@ -39,7 +43,8 @@ const en: ReactNode = (
       <h2>Why pixel values still appear</h2>
       <p>
         Some contexts (design specs, Figma exports, browser DevTools) speak in pixels. Converting
-        those <code>px</code> values to <code>rem</code> keeps your stylesheet scalable while matching
+        those <code>px</code> values to <code>rem</code>{' '}
+        keeps your stylesheet scalable while matching
         the designer&apos;s intent. This tool&apos;s table covers the common sizes (8, 12, 16,
         20, 24, 32, 40, 48…) so you can copy the right value without reaching for a calculator.
       </p>

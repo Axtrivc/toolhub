@@ -17,7 +17,8 @@ const en: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>What Is This Tool?</h2>
     <p>
-      The <strong>down payment</strong> is the upfront cash you pay toward a home; the rest becomes
+      The <strong>down payment</strong>{' '}
+      is the upfront cash you pay toward a home; the rest becomes
       your mortgage. This calculator shows the dollar amount and whether you&apos;ll need PMI.
     </p>
 

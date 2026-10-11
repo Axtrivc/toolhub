@@ -70,7 +70,8 @@ const en: ReactNode = (
     <h2>Common Percentage Mistakes to Avoid</h2>
     <ul>
       <li>
-        <strong>Adding percentages directly.</strong> A 10% discount plus another 10% off is not a
+        <strong>Adding percentages directly.</strong>{' '}
+        A 10% discount plus another 10% off is not a
         20% discount — it&apos;s a 19% discount, because the second 10% applies to the already
         reduced price.
       </li>

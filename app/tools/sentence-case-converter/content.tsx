@@ -9,7 +9,8 @@ const en: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>What Is This Tool?</h2>
     <p>
-      <strong>Sentence case</strong> capitalizes only the first letter of each sentence, leaving the
+      <strong>Sentence case</strong>{' '}
+      capitalizes only the first letter of each sentence, leaving the
       rest lowercase. It&apos;s the natural capitalization of normal writing and the most readable
       for paragraphs of text.
     </p>

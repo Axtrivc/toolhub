@@ -26,7 +26,8 @@ const en: ReactNode = (
         Enter your name or company, your client, an invoice number, and the issue and due dates. Add as many
         line items as you need — each with a <strong>description, quantity, and unit rate</strong> — and an
         optional tax percentage. The preview computes the subtotal, tax, and total automatically in one of 10
-        currencies — USD, EUR, GBP, JPY, CNY, CAD, AUD, CHF, INR, or KRW. <strong>Print / Save as PDF</strong> opens a
+        currencies — USD, EUR, GBP, JPY, CNY, CAD, AUD, CHF, INR, or KRW. <strong>Print / Save as PDF</strong>{' '}
+        opens a
         self-contained invoice page and triggers the
         browser&apos;s print dialog (choose &quot;Save as PDF&quot; as the destination), while{' '}
         <strong>Download HTML</strong> saves the same invoice as a standalone file you can email or archive.

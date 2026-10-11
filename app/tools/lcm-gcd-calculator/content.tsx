@@ -18,11 +18,13 @@ const en: ReactNode = (
       <h2>What GCD and LCM Mean</h2>
       <ul>
         <li>
-          <strong>GCD</strong> is the largest number that divides all inputs evenly. For 12 and 18,
+          <strong>GCD</strong>{' '}
+          is the largest number that divides all inputs evenly. For 12 and 18,
           that&apos;s 6 (both divide by 1, 2, 3, and 6 &mdash; and 6 is the largest).
         </li>
         <li>
-          <strong>LCM</strong> is the smallest number that all inputs divide into evenly. For 4 and
+          <strong>LCM</strong>{' '}
+          is the smallest number that all inputs divide into evenly. For 4 and
           6, that&apos;s 12 (the smallest number divisible by both).
         </li>
       </ul>

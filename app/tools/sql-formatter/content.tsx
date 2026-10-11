@@ -21,7 +21,8 @@ const en: ReactNode = (
         a string is not mistaken for a keyword), then re-emits it clause by clause. Top-level
         keywords like <code>SELECT</code>, <code>FROM</code>, <code>WHERE</code>, <code>GROUP BY</code>,
         <code>ORDER BY</code>, <code>LIMIT</code>, <code>JOIN</code>, and <code>ON</code> each start a
-        new line; columns after <code>SELECT</code> and conditions after <code>WHERE</code> wrap onto
+        new line; columns after <code>SELECT</code> and conditions after <code>WHERE</code>{' '}
+        wrap onto
         a new line after each comma. The result is the canonical &quot;vertical SQL&quot; layout that
         most teams use in code reviews.
       </p>

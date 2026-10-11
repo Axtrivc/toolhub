@@ -9,14 +9,16 @@ const en: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>What Is This Tool?</h2>
     <p>
-      <strong>Title case</strong> capitalizes the first letter of every word. This tool applies it
+      <strong>Title case</strong>{' '}
+      capitalizes the first letter of every word. This tool applies it
       instantly to any text. It&apos;s the standard for book titles, song names, article headlines,
       and button labels.
     </p>
     <div>
       <h2>Title Case vs. Capitalize-First-Letter</h2>
       <p>
-        This tool capitalizes <em>every</em> word. Professional style guides (APA, Chicago) often
+        This tool capitalizes <em>every</em>{' '}
+        word. Professional style guides (APA, Chicago) often
         keep short words like &quot;the,&quot; &quot;of,&quot; and &quot;in&quot; in lowercase. For
         example: &quot;The Lord of the Rings&quot; (style guide) vs. &quot;The Lord Of The
         Rings&quot; (this tool). For marketing copy and UI buttons, capitalizing every word is fine

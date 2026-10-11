@@ -30,7 +30,8 @@ const en: ReactNode = (
     <h2>Modeling the early-exit penalty</h2>
     <p>
       US banks typically charge <strong>1 month of interest</strong> for CDs under 12 months, <strong>3 months</strong>{' '}
-      for 12-48 month terms, and <strong>6-12 months</strong> for 5-year CDs. Penalties come out of accrued interest,
+      for 12-48 month terms, and <strong>6-12 months</strong>{' '}
+      for 5-year CDs. Penalties come out of accrued interest,
       never principal — but if you exit in month 2 of a 3-month CD, the penalty can wipe out everything you earned.
       Use the &quot;Early exit at&quot; slider to see exactly what breaking the CD would cost you at any point.
     </p>

@@ -127,7 +127,7 @@ const es: ReactNode = (
         valor más alto que mantenga tu flujo de login cómodamente rápido en tu hardware de producción y revísalo cada
         año o dos a medida que las máquinas se vuelven más rápidas. Los valores por encima de <code>12</code> son
         notablemente lentos en una pestaña del navegador (esta herramienta te avisa), que es precisamente la resistencia
-        que quieres contra el craqueo sin conexión. Ten en cuenta que bcrypt solo lee los <strong>primeros 72 bytes</strong>
+        que quieres contra el craqueo sin conexión. Ten en cuenta que bcrypt solo lee los <strong>primeros 72 bytes</strong>{' '}
         de una contraseña; el resto se ignora silenciosamente por diseño.
       </p>
     </div>
@@ -176,7 +176,7 @@ const de: ReactNode = (
     <div>
       <h2>Einen Cost-Faktor wählen</h2>
       <p>
-        Der Cost-Faktor ist exponentiell: <strong>2^cost Iterationen</strong>, sodass jeder Schritt den Aufwand für dich
+        Der Cost-Faktor ist exponentiell: <strong>2^cost Iterationen</strong>, sodass jeder Schritt den Aufwand für dich{' '}
         <em>und</em> den Angreifer verdoppelt. <code>10</code>–<code>12</code> ist heute der übliche Sweet Spot — wähle
         den höchsten Wert, der deinen Login-Ablauf auf deiner Produktionshardware angenehm schnell hält, und überprüfe ihn
         alle ein bis zwei Jahre, wenn die Maschinen schneller werden. Werte über <code>12</code> sind in einem Browser-Tab

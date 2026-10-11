@@ -17,7 +17,8 @@ const en: ReactNode = (
     <p>
       Both accounts share the same $7,500 contribution limit (2026: $8,600 if you&apos;re 50 or older) and grow
       tax-free inside the account. The entire decision comes down to <em>when</em> you pay tax: a{' '}
-      <strong>Traditional IRA</strong> deducts contributions today (lowering this year&apos;s tax bill) but taxes
+      <strong>Traditional IRA</strong>{' '}
+      deducts contributions today (lowering this year&apos;s tax bill) but taxes
       every withdrawal in retirement; a <strong>Roth IRA</strong> takes after-tax money now and every qualified
       withdrawal — principal <em>and</em> growth — is 100% tax-free.
     </p>

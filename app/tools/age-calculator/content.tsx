@@ -33,7 +33,7 @@ const en: ReactNode = (
         documents often require age in years and months, not just years.
       </li>
       <li>
-        <strong>Pediatrics.</strong> A baby&apos;s development is tracked in months for the first
+        <strong>Pediatrics.</strong>{' '}A baby&apos;s development is tracked in months for the first
         two years and sometimes weeks for newborns.
       </li>
       <li>
@@ -70,7 +70,8 @@ const en: ReactNode = (
         birthday. This is the system this calculator uses.
       </li>
       <li>
-        <strong>Traditional East Asian (Korean):</strong> You are 1 at birth and gain a year on
+        <strong>Traditional East Asian (Korean):</strong>{' '}
+        You are 1 at birth and gain a year on
         New Year&apos;s Day rather than your birthday. A baby born on December 31 turns 2 the next
         day. South Korea officially shifted to the international system in 2023.
       </li>

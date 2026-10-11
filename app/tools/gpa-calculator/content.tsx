@@ -180,7 +180,7 @@ const es: ReactNode = (
     <h2>GPA ponderado vs. no ponderado</h2>
     <p>
       Esta calculadora usa la escala <strong>no ponderada</strong> de 4,0, donde una A siempre vale 4,0
-      independientemente de la dificultad del curso. Muchas escuelas secundarias usan una escala <strong>ponderada</strong>
+      independientemente de la dificultad del curso. Muchas escuelas secundarias usan una escala <strong>ponderada</strong>{' '}
       que da puntos extra por cursos de honores o AP (una A en AP puede ser 5,0). Si tu escuela pondera las
       calificaciones, ajusta los valores de puntos para que coincidan — la matemática es la misma.
     </p>

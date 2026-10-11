@@ -108,9 +108,7 @@ export function makeTextTool(config: TextToolConfig): ComponentType {
     const wordCount = countWords(input)
     // 行数与阅读时长(200 wpm 口径;纯中文按 300 字/分钟计,与 WordCounter 同族)
     const lineCount = input === '' ? 0 : input.split('\n').length
-    const readingSec = Math.round(
-      (locale === 'zh' ? charCount / 5 : wordCount / 200) * 60,
-    )
+    const readingSec = Math.round(locale === 'zh' ? charCount / 5 : (wordCount / 200) * 60)
     const readingLabel =
       readingSec < 60 ? `${Math.max(readingSec, input ? 1 : 0)}s` : `${Math.floor(readingSec / 60)}m ${readingSec % 60}s`
     // 数字格式跟随应用语言(en 固定 en-US,保证 SSR 首屏与英文输出不变)

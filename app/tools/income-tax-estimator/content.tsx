@@ -61,7 +61,8 @@ const en: ReactNode = (
       <h2>Marginal vs. Effective Rate</h2>
       <p>
         A single person earning $75,000 has a <strong>marginal rate</strong> of 22% (their
-        top bracket), but their <strong>effective rate</strong> is only about 10% because most
+        top bracket), but their <strong>effective rate</strong>{' '}
+        is only about 10% because most
         of their income is taxed at lower rates. Always know your effective rate &mdash; that&apos;s
         what you actually pay.
       </p>

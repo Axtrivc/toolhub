@@ -36,7 +36,8 @@ const en: ReactNode = (
     <div>
       <h2>Watch out for platform quirks</h2>
       <p>While the five core fields are standard, macros (<code>@daily</code>, <code>@reboot</code>), seconds, and
-      years are <em>not</em> universal. GitHub Actions, Kubernetes, and AWS EventBridge each add their own fields
+      years are <em>not</em>{' '}
+      universal. GitHub Actions, Kubernetes, and AWS EventBridge each add their own fields
       or syntax. This parser covers the standard five-field format used by Linux crontab; confirm any extra
       fields against your specific platform&apos;s docs.</p>
     </div>

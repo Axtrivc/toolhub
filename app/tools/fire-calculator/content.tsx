@@ -33,7 +33,8 @@ const en: ReactNode = (
 
     <h2>The shockingly simple savings-rate math</h2>
     <p>
-      Saving more attacks the target from both sides: the portfolio grows faster <em>and</em> the required number
+      Saving more attacks the target from both sides: the portfolio grows faster <em>and</em>{' '}
+      the required number
       shrinks. At a 10% savings rate you&apos;re ~50 years from FIRE; at 50% it&apos;s roughly 15–17 years; at
       65% it&apos;s about a decade. That&apos;s why this calculator shows exactly how many years each{' '}
       <strong>+10% of savings rate</strong> buys you — the compression effect is the whole game.

@@ -43,7 +43,8 @@ const en: ReactNode = (
       <h2>Real Example</h2>
       <p>
         Laundry detergent: Brand A is $19.99 for 75 loads (26.7¢/load). Brand B is $14.99 for
-        50 loads (30.0¢/load). Brand A is bigger <em>and</em> cheaper per use. Without unit
+        50 loads (30.0¢/load). Brand A is bigger <em>and</em>{' '}
+        cheaper per use. Without unit
         pricing, you might grab Brand B thinking it&apos;s the budget option.
       </p>
     </div>

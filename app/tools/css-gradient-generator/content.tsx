@@ -38,7 +38,8 @@ const en: ReactNode = (
       <p>
         Two stops is a fade; three or more is a design. Keep adjacent stops in the same hue family for smooth
         blends — jumping straight from, say, blue to yellow passes through muddy gray in RGB interpolation. The{' '}
-        <strong>Random palette</strong> button only picks pastel pairs and triples that blend cleanly, which is a
+        <strong>Random palette</strong>{' '}
+        button only picks pastel pairs and triples that blend cleanly, which is a
         good starting point. Move a stop&apos;s position toward its neighbor for a harder edge: two stops at the
         same percentage create a crisp stripe with zero blending.
       </p>

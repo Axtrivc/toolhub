@@ -121,7 +121,7 @@ const es: ReactNode = (
     <h2>¿Cuánto deberías dejar de propina?</h2>
     <p>
       Las costumbres de propina varían según el país, pero en Estados Unidos y Canadá se espera
-      dejar propina en la mayoría de los servicios de mesa. Las horquillas habituales son del
+      dejar propina en la mayoría de los servicios de mesa. Las horquillas habituales son del{' '}
       <strong>15-20 %</strong> de la cuenta sin impuestos para el servicio de restaurante, siendo el
       18 % lo más habitual para un servicio satisfactorio. Esta calculadora hace los
       cálculos al instante y reparte el resultado a partes iguales entre cualquier número de personas.
@@ -178,7 +178,7 @@ const de: ReactNode = (
     <h2>Wie viel Trinkgeld solltest du geben?</h2>
     <p>
       Die Trinkgeldbräuche unterscheiden sich von Land zu Land, doch in den USA und Kanada wird bei
-      den meisten Servicemahlzeiten ein Trinkgeld erwartet. Der übliche Rahmen liegt bei
+      den meisten Servicemahlzeiten ein Trinkgeld erwartet. Der übliche Rahmen liegt bei{' '}
       <strong>15-20 %</strong> der Rechnung ohne Steuer für den Restaurantservice, wobei 18 % der
       häufigste Standard für zufriedenstellenden Service ist. Dieser Rechner erledigt die
       Berechnung sofort und teilt das Ergebnis gleichmäßig auf beliebig viele Personen auf.
