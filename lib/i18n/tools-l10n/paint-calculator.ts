@@ -42,6 +42,10 @@ export const PaintCalculatorL10n: ToolL10n = {
       'out.wallHeight': '墙面高度',
       'out.windows': '窗户',
           'errInvalidDims': "请输入有效的房间尺寸",
+      'unit.coats': "遍",
+      'cans.gallon': "加仑桶",
+      'cans.liter': "2.5 L 桶",
+      'assumption': "10 m²/L(400 ft²/gal),+10% 余量",
 },
   },
   es: {
@@ -81,6 +85,10 @@ export const PaintCalculatorL10n: ToolL10n = {
       'out.wallHeight': 'Altura de pared',
       'out.windows': 'Ventanas',
           'errInvalidDims': "Introduce dimensiones válidas de la habitación",
+      'unit.coats': "manos",
+      'cans.gallon': "botes de galón",
+      'cans.liter': "cubos de 2,5 L",
+      'assumption': "10 m²/L (400 ft²/gal), +10 % de margen",
 },
   },
   de: {
@@ -120,6 +128,10 @@ export const PaintCalculatorL10n: ToolL10n = {
       'out.wallHeight': 'Wandhöhe',
       'out.windows': 'Fenster',
           'errInvalidDims': "Gib gültige Raummaße ein",
+      'unit.coats': "Anstriche",
+      'cans.gallon': "Gallonen-Gebinde",
+      'cans.liter': "2,5-L-Eimer",
+      'assumption': "10 m²/L (400 ft²/gal), +10 % Reserve",
 },
   },
 }

@@ -401,10 +401,10 @@ export function AesEncryptDecryptClient() {
       </div>
 
       <div className="space-y-4 rounded-lg p-4" style={{ backgroundColor: 'rgb(var(--bg-subtle))' }}>
-        <CalculatorField id="ae-text" type="text" label={mode === 'encrypt' ? L('plainLabel', 'Text to encrypt') : L('payloadLabel', 'Encrypted payload (AES-v1:…)')} value={text} onChange={setText} placeholder={mode === 'encrypt' ? 'secret message' : 'AES-v1:…:…:…'} />
+        <CalculatorField id="ae-text" type="text" label={mode === 'encrypt' ? L('plainLabel', 'Text to encrypt') : L('payloadLabel', 'Encrypted payload (AES-v1:…)')} value={text} onChange={setText} placeholder={mode === 'encrypt' ? L('plainPlaceholder', 'secret message') : 'AES-v1:…:…:…'} />
         {/* 密码字段:CalculatorField 已支持 type=password(掩码 + new-password
             防 WebView 凭据自动填充 + spellCheck 关闭),替换此前手写的掩码输入 */}
-        <CalculatorField id="ae-pass" type="password" label={L('passLabel', 'Password')} value={password} onChange={setPassword} placeholder="strong passphrase" />
+        <CalculatorField id="ae-pass" type="password" label={L('passLabel', 'Password')} value={password} onChange={setPassword} placeholder={L('passPlaceholder', 'strong passphrase')} />
       </div>
 
       {error && (

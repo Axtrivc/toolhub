@@ -376,7 +376,7 @@ export const CaffeineCalculatorClient = makeCalculatorClient({
     return {
       now: `${fmtNum(nowMg, 0)} mg`,
       atBed: `${fmtNum(bedMg, 0)} mg`,
-      halfLifeLeft: `${fmtNum(hoursAgo / 5, 1)} half-lives`,
+      halfLifeLeft: `${fmtNum(hoursAgo / 5, 1)} ${tui('caffeine-calculator', locale, 'unit.halfLives', 'half-lives')}`,
       advice,
     }
   },
@@ -494,11 +494,11 @@ export const PaintCalculatorClient = makeCalculatorClient({
     const buyLiters = Math.ceil(paintLiters * 1.1) // 10% 余量
     return {
       paintNeeded: v.unit === 'gallon' ? `${fmtNum(buyLiters / 3.78541, 1)} gal` : `${buyLiters} L`,
-      wallArea: `${fmtNum(netArea, 1)} m² × ${coats} coats`,
+      wallArea: `${fmtNum(netArea, 1)} m² × ${coats} ${tui('paint-calculator', locale, 'unit.coats', 'coats')}`,
       cans: v.unit === 'gallon'
-        ? `${Math.ceil(buyLiters / 3.78541)} gallon can(s)`
-        : `${Math.ceil(buyLiters / 2.5)} × 2.5 L bucket(s)`,
-      assumption: '10 m²/L (400 ft²/gal), +10% margin',
+        ? `${Math.ceil(buyLiters / 3.78541)} ${tui('paint-calculator', locale, 'cans.gallon', 'gallon can(s)')}`
+        : `${Math.ceil(buyLiters / 2.5)} × ${tui('paint-calculator', locale, 'cans.liter', '2.5 L bucket(s)')}`,
+      assumption: tui('paint-calculator', locale, 'assumption', '10 m²/L (400 ft²/gal), +10% margin'),
     }
   },
   chart: { kind: 'compare', title: 'Exact need vs what to buy' },
@@ -568,7 +568,7 @@ export const DogAgeCalculatorClient = makeCalculatorClient({
       human < 55 ? 3 : 4
     const stage = tui('dog-age-calculator', locale, DOG_STAGE_L10N[stageIdx][0], DOG_STAGE_L10N[stageIdx][1])
     return {
-      humanAge: `${fmtNum(human, 0)} human years`,
+      humanAge: `${fmtNum(human, 0)} ${tui('dog-age-calculator', locale, 'unit.humanYears', 'human years')}`,
       lifeStage: stage,
       mythNote: tui('dog-age-calculator', locale, 'myth', 'The ×7 rule ignores maturation pace'),
     }

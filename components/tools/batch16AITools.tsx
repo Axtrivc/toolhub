@@ -21,6 +21,19 @@ const selVars = { borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rg
  *  每次按键全量同步重算;超过 20 万字符(与文本工具家族同款阈值)直接跳过。 */
 const JR_MAX_INPUT_CHARS = 200_000
 
+/** 修复日志 → l10n key:引擎产出恒为英文原串(与 SSR 恒英文同构),渲染时按语种映射;
+ *  未知串(如 JSON.parse 的浏览器报错)与字面量记号(undefined → null 等)原样透传。 */
+const REPAIR_LOG_KEYS: Record<string, string> = {
+  'Stripped markdown code fences': 'logFence',
+  'Trimmed text outside the outermost { } or [ ]': 'logTrimmed',
+  'Converted smart quotes to straight quotes': 'logSmartQuotes',
+  'Removed control characters': 'logControlChars',
+  'Quoted bare object keys': 'logBareKeys',
+  'Converted single-quoted strings to double quotes': 'logSingleQuotes',
+  'Removed trailing commas': 'logTrailingCommas',
+  'Closed truncated brackets/strings': 'logClosed',
+}
+
 /** 修复启发式管线:每步记录日志;先纯字符级,再截断补全,最后 parse 验证 */
 export function repairJson(input: string): { output: string; log: string[]; ok: boolean } {
   const log: string[] = []
@@ -149,6 +162,10 @@ function closeTruncated(s: string): string {
 export function JsonRepairClient() {
   const { locale } = useApp()
   const L = (key: string, fb: string) => tui('json-repair', locale, key, fb)
+  const logLabel = (msg: string) => {
+    const key = REPAIR_LOG_KEYS[msg]
+    return key ? L(key, msg) : msg
+  }
   const sample = getCalculatorSample('json-repair')
   const [input, setInput] = useState(sample?.input ?? '')
 
@@ -182,7 +199,7 @@ export function JsonRepairClient() {
             <div className="rounded-lg border p-3" style={{ borderColor: 'rgb(var(--border))', backgroundColor: 'rgb(var(--bg-subtle))' }}>
               <div className="mb-1 text-xs font-semibold uppercase tracking-wide" style={{ color: 'rgb(var(--text-faint))' }}>{L('repairsApplied', 'Repairs applied')}</div>
               <ul className="list-inside list-disc space-y-0.5 text-xs" style={{ color: 'rgb(var(--text-muted))' }}>
-                {result.log.map((r, i) => <li key={i}>{r}</li>)}
+                {result.log.map((r, i) => <li key={i}>{logLabel(r)}</li>)}
               </ul>
             </div>
           )}
@@ -204,7 +221,7 @@ export function JsonRepairClient() {
             {result.log[result.log.length - 1]}
           </p>
           {result.log.length > 1 && (
-            <p className="text-xs" style={{ color: 'rgb(var(--text-faint))' }}>{L('appliedAnyway', 'Repairs attempted before failing:')} {result.log.slice(0, -1).join(' / ')}</p>
+            <p className="text-xs" style={{ color: 'rgb(var(--text-faint))' }}>{L('appliedAnyway', 'Repairs attempted before failing:')} {result.log.slice(0, -1).map(logLabel).join(' / ')}</p>
           )}
         </div>
       ))}

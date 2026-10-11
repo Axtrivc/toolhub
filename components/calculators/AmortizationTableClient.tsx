@@ -125,7 +125,7 @@ export function AmortizationTableGeneratorClient() {
         {/* A1:type=text 数值字段补 inputMode=decimal,移动端弹数字键盘 */}
         <CalculatorField id="am-principal" type="text" inputMode="decimal" label={T('in.principal', 'Loan amount')} suffix="$" value={values.principal} onChange={(v) => setValue('principal', v)} placeholder="320000" />
         <CalculatorField id="am-rate" type="text" inputMode="decimal" label={T('in.rate', 'Annual rate')} suffix="%" value={values.rate} onChange={(v) => setValue('rate', v)} placeholder="6.5" />
-        <CalculatorField id="am-years" type="text" inputMode="decimal" label={T('in.years', 'Term')} suffix="yrs" value={values.years} onChange={(v) => setValue('years', v)} placeholder="30" />
+        <CalculatorField id="am-years" type="text" inputMode="decimal" label={T('in.years', 'Term')} suffix={T('in.yearsSuffix', 'yrs')} value={values.years} onChange={(v) => setValue('years', v)} placeholder="30" />
       </div>
 
       <div role="status" aria-live="polite" className="grid grid-cols-1 gap-3 sm:grid-cols-2">

@@ -19,7 +19,7 @@ export const CsvToFinetuneJsonlL10n: ToolL10n = {
       { q: '微调需要多少条样本?', a: 'OpenAI 官方建议 50-100 条高质量样本起步即可看到明显提升,多数任务几百条足够。样本质量(一致的风格、正确的答案)远比数量重要——先用本工具把数据洗干净再谈规模。' },
     ],
     ui: {
-      'note': '输出即 OpenAI 微调 API 所需的 chat-messages JSONL。assistant 为空的行会被标记(而非丢弃)以便修正源数据。单元格内的引号与逗号按 RFC 4180 处理。',
+      'note': '📚 输出即 OpenAI 微调 API 所需的 chat-messages JSONL。assistant 为空的行会被标记(而非丢弃)以便修正源数据。单元格内的引号与逗号按 RFC 4180 处理。',
       'assistantColLabel': 'assistant 列',
       'copyJsonl': '复制 JSONL',
       'csvLabel': 'CSV(含表头行)',
@@ -49,7 +49,7 @@ export const CsvToFinetuneJsonlL10n: ToolL10n = {
       { q: '¿Cuántas muestras hacen falta?', a: 'OpenAI recomienda empezar con 50-100 ejemplos de alta calidad para ver mejoras claras; la mayoría de tareas bastan con unos cientos. La calidad (estilo consistente, respuestas correctas) pesa mucho más que la cantidad — limpia los datos aquí antes de escalar.' },
     ],
     ui: {
-      'note': 'La salida es el JSONL de mensajes que espera la API de fine-tuning de OpenAI. Las filas con assistant vacío se marcan (no se descartan). Comillas y comas dentro de las celdas se tratan según RFC 4180.',
+      'note': '📚 La salida es el JSONL de mensajes que espera la API de fine-tuning de OpenAI. Las filas con assistant vacío se marcan (no se descartan). Comillas y comas dentro de las celdas se tratan según RFC 4180.',
       'assistantColLabel': 'Columna assistant',
       'copyJsonl': 'Copiar JSONL',
       'csvLabel': 'CSV (con fila de encabezado)',
@@ -79,7 +79,7 @@ export const CsvToFinetuneJsonlL10n: ToolL10n = {
       { q: 'Wie viele Beispiele braucht ein Fine-Tuning?', a: 'OpenAI empfiehlt 50-100 hochwertige Beispiele für den Anfang; die meisten Aufgaben kommen mit wenigen hundert aus. Qualität (konsistenter Stil, korrekte Antworten) schlägt Quantität deutlich — erst hier säubern, dann skalieren.' },
     ],
     ui: {
-      'note': 'Die Ausgabe ist das Chat-Messages-JSONL der OpenAI-Fine-Tuning-API. Zeilen mit leerem Assistant werden markiert, nicht verworfen. Anführungszeichen und Kommas in Zellen folgen RFC 4180.',
+      'note': '📚 Die Ausgabe ist das Chat-Messages-JSONL der OpenAI-Fine-Tuning-API. Zeilen mit leerem Assistant werden markiert, nicht verworfen. Anführungszeichen und Kommas in Zellen folgen RFC 4180.',
       'assistantColLabel': 'Assistant-Spalte',
       'copyJsonl': 'JSONL kopieren',
       'csvLabel': 'CSV (mit Kopfzeile)',

@@ -188,7 +188,8 @@ export function TextScrubberClient({ slug = 'text-cleaner' }: { slug?: string })
             />
             <span>
               <span className="block font-medium" style={{ color: 'rgb(var(--text))' }}>{L(`toggle.${t.key}`, t.label)}</span>
-              <span className="block text-xs" style={{ color: 'rgb(var(--text-faint))' }}>{L(`toggleHint.${t.key}`, t.hint)}</span>
+              {/* pre-wrap 保留 collapseSpaces 示例中的连续空格("a    b → a b"),否则被 HTML 折叠 */}
+              <span className="block whitespace-pre-wrap text-xs" style={{ color: 'rgb(var(--text-faint))' }}>{L(`toggleHint.${t.key}`, t.hint)}</span>
             </span>
           </label>
         ))}

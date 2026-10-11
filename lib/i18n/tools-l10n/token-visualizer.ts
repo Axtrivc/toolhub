@@ -19,7 +19,7 @@ export const TokenVisualizerL10n: ToolL10n = {
       { q: '大段文本有上限吗?', a: '超长输入会跳过实时可视化以保证输入流畅;渲染只显示前若干块,但「复制 tokens / 下载」始终包含全部分块结果,不会丢内容。' },
     ],
     ui: {
-      'note': '这是一个相当接近的可视化近似(≤5 字符的词算 1 个 token,长词按 4 字符切分,CJK 约每字 1 token),并非任何具体模型的精确分词器——算成本请用 GPT Token Counter。适合建立直觉:为什么有的短语更贵。',
+      'note': '🎨 这是一个相当接近的可视化近似(≤5 字符的词算 1 个 token,长词按 4 字符切分,CJK 约每字 1 token),并非任何具体模型的精确分词器——算成本请用 GPT Token Counter。适合建立直觉:为什么有的短语更贵。',
       'approxTokens': '近似 token 数',
       'charactersLabel': '字符',
       'chunkTitle': '块 {n}',
@@ -44,7 +44,7 @@ export const TokenVisualizerL10n: ToolL10n = {
       { q: '¿Hay límite para textos grandes?', a: 'Con entradas muy largas la vista en vivo se omite para que la escritura siga fluida; el render muestra solo los primeros bloques, pero «Copiar tokens / Descargar» incluye siempre el resultado completo.' },
     ],
     ui: {
-      'note': 'Es una aproximación visual (palabras de ≤5 caracteres = 1 token, las largas se cortan cada 4, CJK ≈ 1 por carácter), no el tokenizador exacto de ningún modelo — para costes usa el GPT Token Counter. Ideal para entender por qué algunas frases cuestan más.',
+      'note': '🎨 Es una aproximación visual (palabras de ≤5 caracteres = 1 token, las largas se cortan cada 4, CJK ≈ 1 por carácter), no el tokenizador exacto de ningún modelo — para costes usa el GPT Token Counter. Ideal para entender por qué algunas frases cuestan más.',
       'approxTokens': 'Tokens aproximados',
       'charactersLabel': 'caracteres',
       'chunkTitle': 'bloque {n}',
@@ -69,7 +69,7 @@ export const TokenVisualizerL10n: ToolL10n = {
       { q: 'Gibt es ein Limit für große Texte?', a: 'Bei sehr langen Eingaben wird die Live-Ansicht übersprungen, damit das Tippen flüssig bleibt; gerendert werden nur die ersten Blöcke, aber „Tokens kopieren / Herunterladen" enthält stets das vollständige Ergebnis.' },
     ],
     ui: {
-      'note': 'Eine recht genaue visuelle Näherung (Wörter ≤5 Zeichen = 1 Token, längere bei 4 Zeichen geteilt, CJK ≈ 1 pro Zeichen), nicht der exakte Tokenizer eines bestimmten Modells — für Kosten den GPT Token Counter nutzen. Gut, um zu verstehen, warum manche Phrasen mehr kosten.',
+      'note': '🎨 Eine recht genaue visuelle Näherung (Wörter ≤5 Zeichen = 1 Token, längere bei 4 Zeichen geteilt, CJK ≈ 1 pro Zeichen), nicht der exakte Tokenizer eines bestimmten Modells — für Kosten den GPT Token Counter nutzen. Gut, um zu verstehen, warum manche Phrasen mehr kosten.',
       'approxTokens': 'Ungefähre Tokens',
       'charactersLabel': 'Zeichen',
       'chunkTitle': 'Block {n}',

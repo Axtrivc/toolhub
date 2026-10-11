@@ -129,7 +129,7 @@ export function SaasLtvChurnCalculatorClient() {
           />
           <ResultCard
             label={L('expectedCustomerLifetime', 'Expected customer lifetime')}
-            value={isFinite(parsed.lifetimeMonths) ? `${parsed.lifetimeMonths.toFixed(1)} mo` : '∞'}
+            value={isFinite(parsed.lifetimeMonths) ? `${parsed.lifetimeMonths.toFixed(1)}${L('moAbbr', ' mo')}` : '∞'}
             sublabel={isFinite(parsed.lifetimeMonths) ? L('oneOverChurn', '1 ÷ monthly churn') : L('noChurnHint', 'No churn — 200+ months')}
           />
           <ResultCard
@@ -151,7 +151,7 @@ export function SaasLtvChurnCalculatorClient() {
           />
           <ResultCard
             label={L('cacPaybackPeriod', 'CAC payback period')}
-            value={parsed.paybackMonths !== null ? `${parsed.paybackMonths.toFixed(1)} mo` : '—'}
+            value={parsed.paybackMonths !== null ? `${parsed.paybackMonths.toFixed(1)}${L('moAbbr', ' mo')}` : '—'}
             sublabel={L('paybackFormula', 'CAC ÷ (ARPU × margin)')}
           />
           <ResultCard

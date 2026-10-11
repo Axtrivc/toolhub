@@ -149,7 +149,7 @@ export function BMICalculatorClient() {
             type="button"
             onClick={() => switchUnit(u)}
             aria-pressed={unit === u}
-            className={`rounded-lg px-4 py-2 text-sm font-medium capitalize transition ${
+            className={`rounded-lg px-4 py-2 text-sm font-medium transition ${
               unit === u ? 'bg-brand-600 text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200 dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-slate-700'
             }`}
           >

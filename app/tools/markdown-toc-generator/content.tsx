@@ -1,16 +1,60 @@
-/**
- * MarkdownTocGenerator 长文正文 —— 工具说明(英文;SSR 恒英文,与全站一致)
- */
+'use client'
 
-export function MarkdownTocGeneratorContent() {
-  return (
-    <section className="prose-content mt-10 max-w-3xl">
-      <h2>GitHub anchor rules</h2>
-      <p>GitHub lowercases headings, strips punctuation, converts spaces to dashes, and appends -1/-2 for duplicates. Links generated elsewhere frequently miss the duplicate rule — these do not.</p>
-      <h2>Choosing depth</h2>
-      <p>Depth H2-H3 produces a scannable outline for typical articles; pulling in H4+ helps long technical docs but clutters README files. The selector above regenerates instantly.</p>
-      <h2>Where to paste it</h2>
-      <p>Drop the list right after your intro paragraph. On GitHub, readers can jump via the built-in outline icon too — but rendered TOCs work everywhere Markdown renders, including blogs and docs sites.</p>
-    </section>
-  )
+import type { ReactNode } from 'react'
+import type { Locale } from '@/lib/i18n'
+import { useApp } from '@/components/providers/AppProviders'
+
+// ──────────────────────────── en ────────────────────────────
+const en: ReactNode = (
+  <section className="prose-content mt-10 max-w-3xl">
+    <h2>GitHub anchor rules</h2>
+    <p>GitHub lowercases headings, strips punctuation, converts spaces to dashes, and appends -1/-2 for duplicates. Links generated elsewhere frequently miss the duplicate rule — these do not.</p>
+    <h2>Choosing depth</h2>
+    <p>Depth H2-H3 produces a scannable outline for typical articles; pulling in H4+ helps long technical docs but clutters README files. The selector above regenerates instantly.</p>
+    <h2>Where to paste it</h2>
+    <p>Drop the list right after your intro paragraph. On GitHub, readers can jump via the built-in outline icon too — but rendered TOCs work everywhere Markdown renders, including blogs and docs sites.</p>
+  </section>
+)
+
+// ──────────────────────────── 中文 ────────────────────────────
+const zh: ReactNode = (
+  <section className="prose-content mt-10 max-w-3xl">
+    <h2>GitHub 锚点规则</h2>
+    <p>GitHub 会把标题转为小写、去掉标点、空格换成连字符,并为重复标题追加 -1/-2。别处生成的链接经常漏掉重复规则——这里不会。</p>
+    <h2>深度怎么选</h2>
+    <p>H2-H3 深度对常见文章足够清爽;纳入 H4+ 适合长篇技术文档,但会让 README 显得杂乱。上方选择器一改就即时重新生成。</p>
+    <h2>粘贴到哪里</h2>
+    <p>把列表放在开头段落之后即可。GitHub 上读者也能点自带的大纲图标跳转——但渲染出来的 TOC 在任何支持 Markdown 的地方都能用,包括博客和文档站。</p>
+  </section>
+)
+
+// ──────────────────────────── Español ────────────────────────────
+const es: ReactNode = (
+  <section className="prose-content mt-10 max-w-3xl">
+    <h2>Reglas de anclas de GitHub</h2>
+    <p>GitHub pone los títulos en minúsculas, quita la puntuación, convierte espacios en guiones y añade -1/-2 a los duplicados. Los enlaces generados en otras herramientas suelen ignorar la regla de duplicados — estos no.</p>
+    <h2>Elegir la profundidad</h2>
+    <p>La profundidad H2-H3 da un esquema legible para artículos típicos; incluir H4+ ayuda en documentación técnica larga, pero satura los README. El selector de arriba regenera al instante.</p>
+    <h2>Dónde pegarlo</h2>
+    <p>Coloca la lista justo después del párrafo de introducción. En GitHub también se puede saltar con el icono de esquema integrado — pero un TOC renderizado funciona dondequiera que se renderice Markdown, incluidos blogs y sitios de documentación.</p>
+  </section>
+)
+
+// ──────────────────────────── Deutsch ────────────────────────────
+const de: ReactNode = (
+  <section className="prose-content mt-10 max-w-3xl">
+    <h2>GitHub-Anker-Regeln</h2>
+    <p>GitHub kleinschreibt Überschriften, entfernt Satzzeichen, wandelt Leerzeichen in Bindestriche und hängt bei Duplikaten -1/-2 an. Anderswo erzeugte Links missachten oft die Duplikat-Regel — diese hier nicht.</p>
+    <h2>Tiefe wählen</h2>
+    <p>Die Tiefe H2-H3 ergibt eine übersichtliche Gliederung für typische Artikel; H4+ hilft bei langen technischen Doks, wirkt in READMEs aber überladen. Der Selektor oben generiert sofort neu.</p>
+    <h2>Wo einfügen?</h2>
+    <p>Setze die Liste direkt nach dem Einleitungsabsatz ein. Auf GitHub springt man auch über das eingebaute Gliederungssymbol — aber ein gerenderter TOC funktioniert überall, wo Markdown gerendert wird, auch in Blogs und auf Dokumentationsseiten.</p>
+  </section>
+)
+
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+
+export function MarkdownTocGeneratorContent(): ReactNode {
+  const { locale } = useApp()
+  return CONTENT_BY_LOCALE[locale] ?? en
 }

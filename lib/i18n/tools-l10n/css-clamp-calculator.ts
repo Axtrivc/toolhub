@@ -8,9 +8,9 @@ export const cssClampCalculatorL10n: ToolL10n = {
   zh: {
     ui: {
       'fluidCurveTitle': '流式字号曲线',
-      'lineMin': '下限夹紧',
+      'lineMin': '下限钳制',
       'lineFluid': '流式字号',
-      'lineMax': '上限夹紧',
+      'lineMax': '上限钳制',
       'clampedEnd': 'px),而不再继续缩放。',
       'clampedPxOutside': 'px 的宽度超出你的 ',
       'clampedRange': 'px 视口范围之外,所以字号被钳制在 ',

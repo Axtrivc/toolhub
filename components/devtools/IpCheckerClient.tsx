@@ -622,9 +622,11 @@ export function IpCheckerClient() {
   const ipDisplay = geo?.ip ?? trace?.ip ?? '…'
   const levelStyle = analysis ? LEVEL_STYLE[analysis.level] : null
   const ratings = analysis ? useCaseStars(analysis) : []
+  // OSM embed 默认按访客 Accept-Language 选语言;显式传 locale 让地图归属文案跟随站点语言(zh 需映射 OSM 的 zh-CN)
+  const osmLocale = locale === 'zh' ? 'zh-CN' : locale
   const mapUrl =
     geo?.latitude != null && geo?.longitude != null
-      ? `https://www.openstreetmap.org/export/embed.html?bbox=${geo.longitude - 0.08}%2C${geo.latitude - 0.05}%2C${geo.longitude + 0.08}%2C${geo.latitude + 0.05}&layer=mapnik&marker=${geo.latitude}%2C${geo.longitude}`
+      ? `https://www.openstreetmap.org/export/embed.html?bbox=${geo.longitude - 0.08}%2C${geo.latitude - 0.05}%2C${geo.longitude + 0.08}%2C${geo.latitude + 0.05}&layer=mapnik&marker=${geo.latitude}%2C${geo.longitude}&locale=${osmLocale}`
       : null
 
   return (
@@ -759,7 +761,7 @@ export function IpCheckerClient() {
                   key={mapUrl}
                   src={mapUrl}
                   title={L('mapTitle', 'IP location map (OpenStreetMap)')}
-                  className="mt-3 h-56 w-full border-0 lg:h-[calc(100%-3.5rem)]"
+                  className="mt-3 h-56 w-full border-0 lg:h-[calc(100%-5.5rem)]"
                   loading="lazy"
                 />
               ) : (

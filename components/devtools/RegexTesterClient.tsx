@@ -296,8 +296,10 @@ const CHEAT_SHEET: { syntax: string; key: string; fb: string }[] = [
   { syntax: '(?=...) (?!...)', key: 'csLookahead', fb: 'Positive / Negative lookahead' },
 ]
 
+// 宽度工具类放在使用点而非此处:本类被定宽 flags 输入框(w-20)复用,
+// w-full 与 w-20 同为 width,编译后 w-full 在样式表中靠后会覆盖 w-20
 const inputCls =
-  'w-full rounded-lg border p-4 font-mono text-xs shadow-sm outline-none transition focus:ring-2'
+  'rounded-lg border p-4 font-mono text-xs shadow-sm outline-none transition focus:ring-2'
 
 // flags 可视切换 chips(与手输框双向同步),title 复用各 flag 的既有本地化文案
 const FLAG_CHIPS: { flag: string; key: string; fb: string }[] = [
@@ -487,7 +489,7 @@ export function RegexTesterClient() {
           placeholder={L('placeholder', 'Paste the text you want to test against...')}
           rows={6}
           spellCheck={false}
-          className={inputCls}
+          className={`${inputCls} w-full`}
           style={{ borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rgb(var(--bg-card))', color: 'rgb(var(--text))' }}
         />
       </div>
@@ -572,7 +574,7 @@ export function RegexTesterClient() {
             rows={2}
             spellCheck={false}
             placeholder={L('replacePlaceholder', 'Replacement template — $1 references a capture group, $& the whole match')}
-            className={inputCls}
+            className={`${inputCls} w-full`}
             style={{ borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rgb(var(--bg-card))', color: 'rgb(var(--text))' }}
           />
           {replaceOut && (

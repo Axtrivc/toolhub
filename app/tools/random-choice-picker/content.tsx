@@ -16,7 +16,8 @@ const en: ReactNode = (
     <h2>What Is This Tool?</h2>
     <p>
       Can&apos;t decide where to eat, who goes first, or which ticket gets the prize? This{' '}
-      <strong>random choice picker</strong> takes a list of options — one per line — and draws one or more winners
+      <strong>random choice picker</strong>{' '}
+      takes a list of options — one per line — and draws one or more winners
       with a quick spinning animation and a satisfying reveal. It uses your browser&apos;s{' '}
       <strong>cryptographically secure random generator</strong>, runs entirely offline, and keeps a history of
       past draws so raffles stay auditable.
@@ -27,7 +28,8 @@ const en: ReactNode = (
       <p>
         Winners are selected with <code>crypto.getRandomValues</code> — the same randomness source browsers use
         for security keys — combined with <strong>rejection sampling</strong>, which removes the subtle bias that
-        a naive <code>random() % n</code> introduces. Every option therefore has an exactly equal chance. The
+        a naive <code>random() % n</code>{' '}
+        introduces. Every option therefore has an exactly equal chance. The
         spinning display is pure showmanship: the winners are already decided before the animation starts, so
         the outcome can&apos;t be influenced by when you look away.
       </p>
@@ -36,7 +38,8 @@ const en: ReactNode = (
     <div>
       <h2>Winners, repeats, and removal</h2>
       <p>
-        Set <strong>number of winners</strong> to draw several at once (it&apos;s clamped to your option count).
+        Set <strong>number of winners</strong>{' '}
+        to draw several at once (it&apos;s clamped to your option count).
         With <em>no repeat winners</em> on — the default — picks are sampled <strong>without replacement</strong>,
         like drawing names from a hat; turn it off to allow the same option to win multiple times, like spinning a
         wheel repeatedly. Enable <em>remove winner after picking</em> to strike winners from the list as you go —
@@ -48,7 +51,8 @@ const en: ReactNode = (
       <h2>Tips for fair use</h2>
       <p>
         Each line is one option; blank lines and surrounding spaces are ignored, and you need{' '}
-        <strong>at least two options</strong> to draw. Duplicate lines are treated as separate entries — so
+        <strong>at least two options</strong>{' '}
+        to draw. Duplicate lines are treated as separate entries — so
         entering a name twice genuinely doubles its odds, which is a feature if you&apos;re running a weighted
         giveaway. For high-stakes draws, read the <em>history</em> list aloud as you go; it records your most recent
         draws newest-first (up to 20) until you clear it.

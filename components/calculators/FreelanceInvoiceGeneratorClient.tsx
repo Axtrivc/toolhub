@@ -213,7 +213,8 @@ ${itemRows}
     URL.revokeObjectURL(url)
   }
 
-  const inputCls = 'w-full rounded-lg border p-3 shadow-sm outline-none transition focus:ring-2'
+  // 不含 w-full:行项目里 w-20/w-28/flex-1 需要真正生效(类属性顺序不决定覆盖,构建产物顺序才决定)
+  const inputCls = 'rounded-lg border p-3 shadow-sm outline-none transition focus:ring-2'
   const inputStyle = {
     borderColor: 'rgb(var(--border-strong))',
     backgroundColor: 'rgb(var(--bg-card))',
@@ -238,7 +239,7 @@ ${itemRows}
               <label htmlFor="currency" className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
                 {L('currency', 'Currency')}
               </label>
-              <select id="currency" value={currency} onChange={(e) => setCurrency(e.target.value)} className={inputCls} style={inputStyle}>
+              <select id="currency" value={currency} onChange={(e) => setCurrency(e.target.value)} className={`${inputCls} w-full`} style={inputStyle}>
                 {CURRENCIES.map((c) => (
                   <option key={c.code} value={c.code}>
                     {c.code} ({c.symbol})
@@ -318,7 +319,7 @@ ${itemRows}
               onChange={(e) => setNotes(e.target.value)}
               rows={3}
               placeholder={L('notesPlaceholder', 'Payment due within 30 days. Thank you for your business!')}
-              className={`${inputCls} font-mono text-sm`}
+              className={`${inputCls} w-full font-mono text-sm`}
               style={inputStyle}
             />
           </div>

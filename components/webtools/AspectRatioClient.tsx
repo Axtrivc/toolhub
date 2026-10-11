@@ -189,7 +189,7 @@ export function AspectRatioClient() {
 
       {/* 结果(C1:与同族工具一致,结果可一键复制 "宽 × 高") */}
       {(computed.width || computed.height) && (
-        <div role="status" aria-live="polite" className="rounded-lg border border-blue-100 bg-gradient-to-b from-blue-50/40 to-transparent p-4 dark:border-blue-900/40">
+        <div role="status" aria-live="polite" className="rounded-lg border border-blue-100 bg-gradient-to-b from-blue-50/40 to-transparent p-4 dark:border-blue-900/40 dark:from-blue-950/40">
           <div className="mb-2 flex items-center justify-end">
             <CopyButton value={`${computed.width} × ${computed.height}`} label={L('copyResult', 'Copy')} />
           </div>

@@ -542,7 +542,8 @@ export function CurlConverterClient() {
           <span className="rounded-md bg-blue-50 px-2 py-1 font-semibold text-blue-700 dark:bg-blue-950/50 dark:text-blue-300">
             {result.parsed.method}
           </span>
-          <span className="font-mono" style={{ color: 'rgb(var(--text-muted))' }}>
+          {/* break-all:真实 curl 常带超长 URL/token,不折行会撑破容器出横向滚动 */}
+          <span className="break-all font-mono" style={{ color: 'rgb(var(--text-muted))' }}>
             {result.parsed.url || L('noUrl', '(no URL)')}
           </span>
           {Object.keys(result.parsed.headers).length > 0 && (
