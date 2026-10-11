@@ -182,7 +182,7 @@ const de: ReactNode = (
     <div>
       <h2>BMR vs. TDEE</h2>
       <p>
-        Der BMR sind die Kalorien in <em>vollständiger Ruhe</em>. Dein tatsächlicher Tagesverbrauch
+        Der BMR ist der Kalorienverbrauch in <em>vollständiger Ruhe</em>. Dein tatsächlicher Tagesverbrauch
         (TDEE) ist der BMR multipliziert mit einem Aktivitätsfaktor. Selbst leichte Aktivität legt
         20-40 % obendrauf. Nutze den Kalorienrechner, wenn du deinen vollständigen Tagesverbrauch
         wissen möchtest.

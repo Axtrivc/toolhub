@@ -68,13 +68,13 @@ const zh: ReactNode = (
     <div>
       <h2>选择合适的图片</h2>
       <p>
-        对于 <code>og:image</code> 和 <code>twitter:image</code>,使用 <strong>1.91:1</strong> 比例、<strong>1200×630px</strong> 的图片,控制在约 1 MB 以内,格式为 JPG 或 PNG。正方形图片(1080×1080)适用于 <code>summary</code> 卡片类型,但在期望宽比例的平台上会被裁剪。图片务必使用绝对网址(包含 <code>https://</code>)——相对路径无效。
+        对于 <code>og:image</code> 和 <code>twitter:image</code>,使用 <strong>1.91:1</strong> 比例、<strong>1200×630px</strong> 的图片,控制在约 1 MB 以内,格式为 JPG 或 PNG。正方形图片(1080×1080)适用于 <code>summary</code> 卡片类型,但在期望宽比例的平台上会被裁剪。图片务必使用绝对 URL(包含 <code>https://</code>)——相对路径无效。
       </p>
     </div>
     <div>
       <h2>为什么部署后预览仍然不对</h2>
       <p>
-        平台会激进地缓存预览,有时长达数天。部署标签后,使用{' '}
+        平台会大量缓存预览,有时长达数天。部署标签后,使用{' '}
         <strong>Facebook Sharing Debugger</strong>、{' '}
         <strong>Twitter Card Validator</strong> 或{' '}
         <strong>LinkedIn Post Inspector</strong> 强制重新抓取。关键在于,这些标签必须存在于服务器原始 HTML(SSR 或静态)中——不执行 JavaScript 的爬虫无法看到由客户端框架在运行时注入的标签。
@@ -108,8 +108,8 @@ const es: ReactNode = (
     <div>
       <h2>Elegir la imagen adecuada</h2>
       <p>
-        Para <code>og:image</code> y <code>twitter:image</code>, usa una proporción{' '}
-        <strong>1.91:1</strong> a <strong>1200×630px</strong>, por debajo de ~1 MB y en JPG o PNG. Las
+        Para <code>og:image</code> y <code>twitter:image</code>, usa una proporción de{' '}
+        <strong>1,91:1</strong> a <strong>1200×630px</strong>, por debajo de ~1 MB y en JPG o PNG. Las
         imágenes cuadradas (1080×1080) funcionan para el tipo de tarjeta <code>summary</code>, pero se
         recortan en plataformas que esperan la proporción amplia. Usa siempre una URL absoluta
         (incluido <code>https://</code>) para la imagen — las rutas relativas no funcionan.
@@ -122,7 +122,7 @@ const es: ReactNode = (
         Tras desplegar tus etiquetas, fuerza un nuevo rastreo con el{' '}
         <strong>Facebook Sharing Debugger</strong>, el{' '}
         <strong>Twitter Card Validator</strong> o el{' '}
-        <strong>LinkedIn Post Inspector</strong>. Lo crítico es que las etiquetas deben estar en el
+        <strong>LinkedIn Post Inspector</strong>. Lo crucial es que las etiquetas estén en el
         HTML sin procesar del servidor (SSR o estático) — los rastreadores que no ejecutan JavaScript
         no pueden ver las etiquetas inyectadas por un framework del lado del cliente en tiempo de
         ejecución.
@@ -137,10 +137,10 @@ const de: ReactNode = (
     <h2>Was ist dieses Werkzeug?</h2>
     <p>
       Wenn jemand deinen Link in Facebook, X, LinkedIn, Slack oder Discord einfügt, liest die
-      Plattform besondere <code>&lt;meta&gt;</code>-Tags auf deiner Seite, um Titel, Beschreibung und
+      Plattform spezielle <code>&lt;meta&gt;</code>-Tags auf deiner Seite, um Titel, Beschreibung und
       Bildkarte zu erzeugen. Diese Tags richtig zu setzen, ist der Unterschied zwischen einem Link,
-      auf den geklickt wird, und einem, der kaputt wirkt. Dieses Werkzeug lässt dich die Felder
-      ausfüllen und <strong>die Vorschau live sehen</strong>, während es den kompletten Satz an
+      auf den man klickt, und einem, der kaputt wirkt. Dieses Werkzeug lässt dich die Felder
+      ausfüllen und <strong>die Vorschau live sehen</strong>, während es alle
       Open-Graph- und Twitter-Card-Tags erzeugt.
     </p>
     <div>
@@ -157,7 +157,7 @@ const de: ReactNode = (
       <h2>Das passende Bild wählen</h2>
       <p>
         Verwende für <code>og:image</code> und <code>twitter:image</code> ein Seitenverhältnis von{' '}
-        <strong>1.91:1</strong> bei <strong>1200×630px</strong>, unter ~1 MB und als JPG oder PNG.
+        <strong>1,91:1</strong> bei <strong>1200×630px</strong>, unter ~1 MB und als JPG oder PNG.
         Quadratische Bilder (1080×1080) funktionieren für den Kartentyp <code>summary</code>, werden
         aber auf Plattformen, die das breite Verhältnis erwarten, abgeschnitten. Verwende für das Bild
         immer eine absolute URL (inklusive <code>https://</code>) — relative Pfade funktionieren

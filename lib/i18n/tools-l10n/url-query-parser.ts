@@ -1,6 +1,6 @@
 /**
  * url-query-parser 本地化 bundle —— zh / es / de
- * 覆盖:faqs + useCases(交互客户端为自定义组件,UI 本地化留待后续)
+ * 覆盖:ui + faqs + useCases(交互客户端为 batch 文本工具)
  */
 import type { ToolL10n } from '../tool-l10n'
 

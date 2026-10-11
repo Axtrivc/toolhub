@@ -73,7 +73,7 @@ const zh: ReactNode = (
     <div>
       <h2>投资战胜通胀</h2>
       <p>
-        把钱以现金形式存放,意味着每年因通胀损失约 3%。要保持购买力,你需要回报率高于通胀的投资。股市历史回报率约为 10%(通胀后约 7%),这使其成为长期储蓄对抗通胀的主要工具。
+        把钱以现金形式存放,意味着每年因通胀损失约 3%。要保持购买力,你需要回报率高于通胀的投资。股市历史回报率约为 10%(通胀后约 7%),这使其成为长期储蓄对抗通胀的主要对冲手段。
       </p>
     </div>
   </section>
@@ -108,9 +108,9 @@ const es: ReactNode = (
     <div>
       <h2>Invertir para vencer a la inflación</h2>
       <p>
-        Mantener el dinero en efectivo significa perder ~3 % anual por la inflación. Para preservar el poder
+        Mantener el dinero sin invertir significa perder ~3 % anual por la inflación. Para preservar el poder
         adquisitivo, necesitas inversiones que rindan más que la inflación. La bolsa ha
-        rendido históricamente ~10 % (~7 % después de inflación), lo que la convierte en la principal cobertura
+        rendido históricamente ~10 % (~7 % en términos reales), lo que la convierte en una de las principales coberturas
         frente a la inflación para el ahorro a largo plazo.
       </p>
     </div>
@@ -130,15 +130,15 @@ const de: ReactNode = (
       <h2>Warum Inflation wichtig ist</h2>
       <p>
         Bei 3 % jährlicher Inflation (etwa dem historischen US-Durchschnitt) verdoppeln sich die Preise alle 24
-        Jahre. Das bedeutet, dass ein Gehalt von $50,000 im Jahr 2000 Anfang 2026 etwa die gleiche Kaufkraft wie $94,000
-        hat. Löhne, die mit der Inflation nicht Schritt halten, machen dich allmählich ärmer, selbst
+        Jahre. Das bedeutet: Ein Gehalt von $50,000 im Jahr 2000 entspricht Anfang 2026 einer Kaufkraft von rund
+        $94,000. Löhne, die mit der Inflation nicht Schritt halten, machen dich allmählich ärmer, selbst
         wenn die Zahl gleich bleibt.
       </p>
     </div>
     <div>
       <h2>Die 70er-Regel</h2>
       <p>
-        Eine schnelle Kopfübung: Teile 70 durch die Inflationsrate, um die Verdopplungszeit zu finden.
+        Eine schnelle Kopfübung: Teile 70 durch die Inflationsrate, um die Verdopplungszeit zu bestimmen.
         Bei 3,5 % Inflation verdoppeln sich die Preise in <code>70 &divide; 3.5 = 20</code> Jahren. Bei 7 %
         verdoppeln sie sich in 10 Jahren.
       </p>
@@ -146,9 +146,9 @@ const de: ReactNode = (
     <div>
       <h2>Investieren, um die Inflation zu schlagen</h2>
       <p>
-        Geld als Bargeld zu behalten bedeutet, ~3 % pro Jahr an Inflation zu verlieren. Um die Kaufkraft
+        Geld in Cash zu halten bedeutet, jedes Jahr rund 3 % durch Inflation zu verlieren. Um die Kaufkraft
         zu erhalten, brauchst du Investitionen, die mehr abwerfen als die Inflation. Die Börse hat
-        historisch ~10 % (~7 % nach Inflation) gebracht, was sie zum wichtigsten Inflationsschutz
+        historisch ~10 % (inflationsbereinigt ~7 %) gebracht, was sie zu einem wichtigen Inflationsschutz
         für langfristige Ersparnisse macht.
       </p>
     </div>

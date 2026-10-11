@@ -302,7 +302,7 @@ export const toolFaqs: Record<string, FaqPair[]> = {
   'character-frequency': [
     {
       q: "Why doesn't it count spaces?",
-      a: 'Whitespace is excluded by default to focus on actual characters. To include spaces, prefix them in your input — they\'ll appear as " " in the output.',
+      a: 'Whitespace — spaces, tabs, and line breaks — is never counted; the tool focuses on actual characters and there is no option to include it. If you need the space count, use the character counter under the input box, which includes spaces.',
     },
   ],
   'email-extractor': [
@@ -434,6 +434,18 @@ export const toolFaqs: Record<string, FaqPair[]> = {
       q: 'Can a hash be decrypted?',
       a: 'No — by design. Hashes are one-way functions. The only way to "crack" a hash is to try inputs until one matches (brute force). For SHA-256, this is computationally infeasible for any reasonable-length input.',
     },
+    {
+      q: 'How is SHA-256 different from MD5 and SHA-1?',
+      a: 'MD5 (128 bits) and SHA-1 (160 bits) have both been broken by practical collision attacks and must not be used for signatures or certificates; SHA-256 outputs 256 bits and still has no feasible collision method. MD5 remains acceptable for checksumming downloads — for anything security-related, use SHA-256 or higher.',
+    },
+    {
+      q: 'Can two different inputs produce the same hash?',
+      a: 'In theory yes — a hash maps infinitely many inputs onto a fixed-length output, and that is called a collision. But finding one SHA-256 collision takes on the order of 2^128 operations; all the computing power on Earth running for hundreds of millions of years would not get there, so it is treated as impossible in practice.',
+    },
+    {
+      q: 'Is SHA-256 good for storing passwords?',
+      a: 'Not on its own. SHA-256 is too fast — attackers can try billions of guesses per second. Passwords need deliberately slow, salted algorithms like bcrypt, scrypt, or Argon2. The SHA-256 here is right for verifying files and generating fingerprints, not for password storage.',
+    },
   ],
   'slug-to-title': [
     {
@@ -445,6 +457,18 @@ export const toolFaqs: Record<string, FaqPair[]> = {
     {
       q: 'Does this handle UTF-8 / Unicode?',
       a: 'Yes — each space-separated group is one byte, and consecutive groups decode together as full UTF-8, so multi-byte characters (Chinese, emoji) work as long as their bytes are entered as consecutive groups. Example: 你好 is three bytes per character (E4 BD A0 E5 A5 BD), so six groups decode both characters at once.',
+    },
+    {
+      q: 'Why does my decoded text come out garbled?',
+      a: 'Almost always misaligned groups: the bytes of a multi-byte UTF-8 character must stay together as consecutive groups, and a missing or extra byte shifts everything after it. First confirm each group is exactly 8 bits with single spaces between groups, then check whether the source text was saved in a non-UTF-8 encoding like GBK.',
+    },
+    {
+      q: 'How do I convert binary to hexadecimal or octal by hand?',
+      a: 'From the right, every 4 binary digits map to 1 hex digit and every 3 to 1 octal digit. For example, 01001000 = 0x48 = decimal 72 = the letter H. It is the fastest path for reading memory dumps.',
+    },
+    {
+      q: 'What range can one byte represent?',
+      a: 'An unsigned 8-bit integer covers 0-255; signed (two\'s complement) covers −128 to 127. That is also why ASCII fits in 0-127, while Chinese characters and emoji need several bytes combined into a UTF-8 sequence.',
     },
   ],
   'text-to-binary': [
@@ -608,7 +632,7 @@ export const toolFaqs: Record<string, FaqPair[]> = {
   'reverse-text': [
     {
       q: 'Why do emojis sometimes break?',
-      a: 'Some emojis (family, flags) are composed of multiple code points. This tool uses grapheme-aware splitting, so most emojis reverse correctly, but complex composed emojis may still separate.',
+      a: 'Some emojis (family, flags) are composed of multiple code points. This tool reverses by Unicode code point, so single-codepoint emojis reverse correctly, but complex composed emojis (ZWJ sequences, flags) may still separate.',
     },
   ],
   'remove-duplicate-lines': [
@@ -624,11 +648,11 @@ export const toolFaqs: Record<string, FaqPair[]> = {
   'sort-lines': [
     {
       q: 'Can I sort in reverse (Z to A)?',
-      a: 'This tool sorts ascending. For descending order, sort here then manually reverse the output. We may add a reverse option in a future update.',
+      a: 'Yes. Add " ||| desc" after the last line for descending order (Z → A); use " ||| numeric,desc" to sort numerically from largest to smallest.',
     },
     {
       q: 'How are numbers sorted?',
-      a: 'Lines are sorted as text, so "10" comes before "9" (because "1" < "9"). For natural numeric sorting, pad numbers with leading zeros first.',
+      a: 'By default lines sort as text, so "10" comes before "9" (because "1" < "9"). Add the instruction " ||| numeric" after the last line to sort naturally by value ("9" before "10").',
     },
   ],
   'remove-line-breaks': [
@@ -636,15 +660,27 @@ export const toolFaqs: Record<string, FaqPair[]> = {
       q: 'Will it remove the spaces between words?',
       a: 'No — line breaks are replaced with a single space, and multiple consecutive spaces collapse to one. Words stay properly separated.',
     },
+    {
+      q: 'What happens to blank lines between paragraphs?',
+      a: 'A blank line is also a line break and becomes a space — the whole text becomes one continuous line. To keep paragraphs, process them in blocks or mark the boundaries with an uncommon separator first.',
+    },
+    {
+      q: 'How much text can it handle at once?',
+      a: 'As a plain-text operation the browser comfortably handles hundreds of thousands of characters (1-2 MB); beyond that, device memory is the limit. Split very long texts into batches.',
+    },
+    {
+      q: 'Can I use it on CSV or code?',
+      a: 'Carefully: in those formats line breaks are legitimate syntax (a new record in CSV, a new statement in code). Replace real line breaks with commas, semicolons, or escapes before joining.',
+    },
   ],
   'find-and-replace': [
     {
       q: 'Is the search case-sensitive?',
-      a: 'Yes — "Cat" and "cat" are different. For case-insensitive replace, convert your whole text to one case first, then replace.',
+      a: 'No — by default "Cat" also matches "cat". Check "Case sensitive" to require exact case.',
     },
     {
       q: 'Can I use regular expressions?',
-      a: 'This basic version matches literal text only. Regex support may come in a future update.',
+      a: 'Yes. With "Regex" enabled, the find field matches patterns (e.g. \\d+, [a-z]+) and the replacement supports references like $1 or $&; an invalid pattern shows a friendly warning.',
     },
   ],
   'whitespace-remover': [
@@ -700,11 +736,35 @@ export const toolFaqs: Record<string, FaqPair[]> = {
       q: 'Why does my electric bill use kWh?',
       a: "A watt is joules per second, so multiplying by hours gives total energy. 1 kWh = using 1,000 watts for 1 hour. It's a convenient unit for household electricity.",
     },
+    {
+      q: 'Which "calories" are on food labels?',
+      a: 'Nutrition "calories" are kilocalories: 1 kcal = 4.184 kJ = 1,000 cal. So 500 kcal ≈ 2,092 kJ. If a conversion doesn\'t check out, the units were probably mixed.',
+    },
+    {
+      q: 'What does BTU mean on an air conditioner?',
+      a: '1 BTU ≈ 1,055 J — the energy to raise 1 pound of water by 1°F. AC units are rated in BTU/h: 12,000 BTU/h ≈ 3.5 kW of cooling. BTU is energy; BTU/h is power — don\'t mix them when converting.',
+    },
+    {
+      q: 'How do I estimate an appliance\'s electricity cost?',
+      a: 'Power × hours × price per kWh. A 1,500 W heater on for 8 hours uses 12 kWh; at $0.15/kWh that\'s $1.80 a day, about $54 a month. Convert to kWh first and the math is easy.',
+    },
   ],
   'frequency-converter': [
     {
       q: 'How do I convert RPM to Hz?',
       a: 'Divide RPM by 60. A motor spinning at 3,600 RPM runs at 60 Hz. This is why AC power in the US is 60 Hz — generators spin at 3,600 RPM.',
+    },
+    {
+      q: 'Why does Europe use 50 Hz and the US 60 Hz?',
+      a: 'A historical choice with no clear winner: Europe and China (220-230 V) use 50 Hz; the US (120 V) uses 60 Hz. Generators spin at 3,000 RPM at 50 Hz and 3,600 RPM at 60 Hz. Before plugging in an appliance abroad, check its label supports both frequencies.',
+    },
+    {
+      q: 'How do I convert between rad/s and Hz?',
+      a: '1 Hz = 2π rad/s ≈ 6.283 rad/s; for example, 60 Hz is about 377 rad/s. Engineering uses rad/s for angular quantities and Hz for cyclic ones — this 2π conversion comes up constantly in motors and vibration analysis.',
+    },
+    {
+      q: 'What frequencies can humans hear?',
+      a: 'Roughly 20 Hz to 20 kHz (20,000 Hz). Subwoofers typically reach down to 20-30 Hz and CD audio tops out at 22.05 kHz; high-frequency hearing goes first with age — many people over 40 no longer hear above 15 kHz.',
     },
   ],
 
@@ -742,11 +802,35 @@ export const toolFaqs: Record<string, FaqPair[]> = {
       q: 'Is this enough to prevent all XSS?',
       a: 'HTML body escaping covers the most common case, but XSS has many variants (attribute-based, script-based, URL-based). Use a reputable library like DOMPurify for untrusted HTML.',
     },
+    {
+      q: 'Which characters get escaped exactly?',
+      a: 'Five core characters: & becomes &amp;, < becomes &lt;, > becomes &gt;, " becomes &quot;, and \' becomes &#39; (or &#x27;). This is the set of HTML entities recommended by OWASP, covering both tag injection and breaking out of attributes.',
+    },
+    {
+      q: 'What\'s the difference between escaping and sanitizing?',
+      a: 'Escaping turns special characters into entities so the browser displays text instead of parsing tags; sanitizing filters out or removes dangerous tags and attributes while keeping some HTML. Escape user input for display; sanitize only when you truly allow rich text (e.g. bold in comments).',
+    },
+    {
+      q: 'Escaped text gets longer — does it matter?',
+      a: 'Yes, it grows: &amp; is five characters instead of one, and long text can expand by 10-20%, which can hit length limits in database fields or textareas. When displayed, the browser reverses it — readers see exactly the original text.',
+    },
   ],
   'html-unescape': [
     {
       q: 'Is unescaping safe?',
       a: 'This tool uses a detached textarea element, which decodes entities without executing any HTML. The output is plain text, so it cannot trigger scripts.',
+    },
+    {
+      q: 'What\'s the difference between &amp; and &amp;amp;?',
+      a: '&amp; is "&" escaped once; &amp;amp; is escaped twice. After one pass the first yields "&" while the second still leaves &amp; — it needs a second decode. It\'s the classic pitfall of nested templates.',
+    },
+    {
+      q: 'When should I use the Encode direction?',
+      a: 'To escape & < > " and \' before putting user input into HTML, preventing XSS. Unescaping is the reverse path: turning entities in scraped content or database fields back into readable characters.',
+    },
+    {
+      q: 'Does it decode numeric entities like &#169;?',
+      a: 'Yes. Both decimal (&#169;) and hexadecimal (&#xA9;) entities are handled by the textarea decoding mechanism: ©, ™, and numeric character references come back correctly.',
     },
   ],
   'url-encoder': [
@@ -850,6 +934,10 @@ export const toolFaqs: Record<string, FaqPair[]> = {
       q: "What's the ideal password length?",
       a: 'For online accounts protected by rate limiting, 12-16 characters is plenty. For offline targets like encrypted drives or password manager master passwords, go longer — 20+ characters, since an attacker with the file can brute-force without rate limits.',
     },
+    {
+      q: 'What do the bits in the strength meter mean?',
+      a: 'Each random character contributes log₂(charset size) of entropy: about 4.7 bits per character with lowercase only, about 6.6 bits across the 94 printable characters. Sixteen characters over the full set is roughly 105 bits — brute force is infeasible on cosmic timescales. The bits value shown by the tool is exactly that entropy reading.',
+    },
   ],
   'percentage-calculator': [
     {
@@ -919,6 +1007,14 @@ export const toolFaqs: Record<string, FaqPair[]> = {
     {
       q: 'What does "percent off" mean?',
       a: "It's the percentage by which the original price is reduced. 30% off means you pay 70% of the original price.",
+    },
+    {
+      q: 'Can I compare a dollar-off deal with a percentage discount?',
+      a: 'Not directly. $50 off $300 is about 17% off at exactly $300 — but on a $250 cart it saves nothing, while a percentage discount applies at any amount. Convert the threshold deal into its equivalent percentage at your actual cart value before comparing.',
+    },
+    {
+      q: 'How do I spot a fake "was/now" discount?',
+      a: 'Check the 30-day lowest-price record or a price-history tool. If the "original" price was inflated just before the sale, 30% off can cost more than the everyday price — judge the real discount by the gap between the final price and the historical low.',
     },
   ],
 
@@ -1168,6 +1264,14 @@ export const toolFaqs: Record<string, FaqPair[]> = {
       q: 'Why is my preview not updating after I deploy?',
       a: 'Platforms cache share previews aggressively. Use Facebook Sharing Debugger, Twitter Card Validator, or LinkedIn Post Inspector to force a re-scrape after your tags are live. The tags must be in the raw server HTML, not injected by JavaScript, for crawlers that do not execute scripts.',
     },
+    {
+      q: 'What is the difference between og:title and <title>?',
+      a: 'They are independent: <title> shows in the browser tab and search results, while og:title only appears on social share cards. Write each deliberately — the share title can be more conversational and hook-driven, while <title> stays keyword-first and under 60 characters.',
+    },
+    {
+      q: 'Do messaging apps like WhatsApp read these tags too?',
+      a: 'Yes — WhatsApp builds its link previews from Open Graph tags (og:title, og:description, og:image), as do LinkedIn, Slack, and most chat apps. The same 1200×630 image and concise description that serve Facebook will serve your chat previews, provided the tags are in the server-rendered HTML.',
+    },
   ],
   'css-shadow-generator': [
     {
@@ -1181,6 +1285,10 @@ export const toolFaqs: Record<string, FaqPair[]> = {
     {
       q: 'Does backdrop-filter work in all browsers?',
       a: 'It works in all modern Chrome, Edge, Safari (with -webkit- prefix), and Firefox 103+. Older browsers ignore it and the element shows the solid background instead. The generated CSS includes the -webkit-backdrop-filter prefix for Safari compatibility.',
+    },
+    {
+      q: 'How do I write multiple box-shadow layers?',
+      a: 'box-shadow accepts comma-separated layers: a close contact shadow (0 2px 4px) plus a larger ambient shadow (0 8px 24px rgba(0,0,0,0.12)). Two or three layers read more naturally than one — it is the idea behind Material Design elevation.',
     },
   ],
   'regex-tester': [
@@ -1200,15 +1308,19 @@ export const toolFaqs: Record<string, FaqPair[]> = {
   'favicon-generator': [
     {
       q: 'Which image formats can I upload?',
-      a: 'PNG, JPG/JPEG, GIF, and WebP. PNG with transparency is recommended because favicons look best on coloured browser tabs. SVG source also works but is rasterised to PNG favicons here, since 16x16 and 32x32 raster favicons have the widest browser support.',
+      a: 'PNG, JPG/JPEG, GIF, and WebP. PNG with transparency is recommended because favicons look best on colored browser tabs. SVG source also works but is rasterized to PNG favicons here, since 16×16 and 32×32 raster favicons have the widest browser support.',
     },
     {
       q: 'Why do I need multiple sizes?',
-      a: 'Different contexts use different sizes: 16x16 for the browser tab, 32x32 for retina tabs and the Windows taskbar, and 180x180 (Apple Touch Icon) for iOS home-screen bookmarks. Serving one large image and letting the browser scale it looks blurry at 16x16.',
+      a: 'Different contexts use different sizes: 16×16 for the browser tab, 32×32 for retina tabs and the Windows taskbar, and 180×180 (Apple Touch Icon) for iOS home-screen bookmarks. Serving one large image and letting the browser scale it looks blurry at 16×16.',
     },
     {
       q: 'Is my image uploaded to a server?',
       a: 'No. The image is loaded into an in-browser canvas, cropped and scaled, and exported via canvas.toBlob — all locally. Your file never leaves your device, which also means this works offline once the page is loaded.',
+    },
+    {
+      q: 'What\'s inside the generated favicon.ico?',
+      a: 'It bundles 16, 32, and 48 px PNGs into a single .ico file, and the browser picks the right size for each context. Together with the 180×180 apple-touch-icon.png and the 192/512 px PWA icons, the included HTML snippet covers every scenario.',
     },
   ],
 
@@ -1234,7 +1346,7 @@ export const toolFaqs: Record<string, FaqPair[]> = {
     },
     {
       q: 'What is the difference between fitting and filling a box?',
-      a: 'Fit (contain) scales the image so the whole thing is visible inside the box, which may leave empty space. Fill (cover) scales so the box is completely covered, which may crop the image. When in doubt for photos, use cover; for logos and screenshots that must stay fully visible, use contain.',
+      a: 'Fit (contain) scales the image so the whole thing is visible inside the box, which may leave empty space. Fill (cover) scales so the box is completely covered, which may crop the image. When in doubt for photos, use cover; for logos and screenshots that must stay fully visible, use contain. These are the same terms CSS object-fit / background-size use, and the aspect-ratio math determines how much is cropped or left empty.',
     },
     {
       q: 'Which aspect ratios are most common?',
@@ -1290,11 +1402,19 @@ export const toolFaqs: Record<string, FaqPair[]> = {
     },
     {
       q: 'Is the output HTML safe to embed directly?',
-      a: 'The generated HTML is escaped for inline code and code blocks, but this tool does not run a full sanitizer. If your Markdown source contains raw HTML or user-submitted content, pass the output through a sanitizer like DOMPurify before inserting it into a live page to prevent XSS.',
+      a: 'Raw HTML is escaped, links with unsafe protocols (javascript:) degrade to plain text, and both the preview and the copied output are additionally sanitized with DOMPurify. If your Markdown contains user-submitted content, still pass the output through a sanitizer like DOMPurify in your own rendering pipeline before inserting it into a live page, to prevent XSS.',
     },
     {
       q: 'Why do my line breaks not appear?',
       a: 'Standard Markdown treats a single newline as a space and requires two spaces at the end of a line, or a blank line, for a break. If you need every newline to render as a <br>, that is the "hard line breaks" extension — common in chat-style Markdown. This tool follows the standard soft-break behavior.',
+    },
+    {
+      q: 'Does the conversion happen locally or on a server?',
+      a: 'Entirely in your browser — nothing is uploaded, and it also works offline, so it suits internal documents that must not leave your network. The input limit is 100,000 characters; beyond that, you are asked to trim the input before converting.',
+    },
+    {
+      q: 'How do I write a pipe | inside a table cell?',
+      a: 'Escape it with \\|. The number of columns is defined by the --- separator row; you do not need to align the pipes with spaces in the source — alignment is purely for readability, and the resulting HTML is identical.',
     },
   ],
   'image-to-base64': [
@@ -1313,8 +1433,8 @@ export const toolFaqs: Record<string, FaqPair[]> = {
   ],
   'list-diff': [
     {
-      q: 'What do "only in A", "only in B", and "both" mean?',
-      a: '"Only in A" lists items present in the first list but not the second; "only in B" is the reverse; "both" is the intersection (items in both). The union combines every unique item from either list. Together these four sets fully describe how the two lists differ.',
+      q: 'What do "Only in A", "Only in B", and "In Both (Intersection)" mean?',
+      a: '"Only in A" lists items present in the first list but not the second; "Only in B" is the reverse; "In Both (Intersection)" lists the items present in both. The "Union (All Unique)" section combines every unique item from either list. Together these four sets fully describe how the two lists differ.',
     },
     {
       q: 'How are duplicates and whitespace handled?',
@@ -1449,7 +1569,15 @@ export const toolFaqs: Record<string, FaqPair[]> = {
     },
     {
       q: 'Does bulk mode keep one converted name per line?',
-      a: 'Yes. Paste a whole list (one identifier per line) and each line is converted independently, preserving the line order. Blank lines stay blank, so the output aligns one-to-one with your input.',
+      a: 'Yes. Paste a whole list (one identifier per line) and each line is converted independently, preserving the line order. Blank lines are skipped.',
+    },
+    {
+      q: 'When is CONSTANT_CASE used?',
+      a: 'All caps with underscores, reserved for constants: MAX_RETRY_COUNT = 5. Companion conventions include Python\'s PEP 8 (PascalCase for classes, snake_case for modules) and Java\'s UPPER_SNAKE constants — pick per your language\'s convention when unifying team style.',
+    },
+    {
+      q: 'What about acronyms like iOS or XMLHttp?',
+      a: 'Consecutive uppercase runs count as one word: HTMLParser splits into HTML and Parser, matching html_parser, so round trips stay consistent. For unconventional casings like iOS the split can be ambiguous — spot-check the output before replacing in bulk.',
     },
   ],
   'nginx-config-generator': [
@@ -1464,6 +1592,10 @@ export const toolFaqs: Record<string, FaqPair[]> = {
     {
       q: 'Can it configure a WebSocket reverse proxy?',
       a: 'Yes. Enabling the WebSocket option adds the Upgrade and Connection headers and the proxy timeout tuning that WebSocket long-lived connections need, so real-time apps work behind the proxy without extra editing.',
+    },
+    {
+      q: 'How do I deploy the generated config?',
+      a: 'Save the server block to /etc/nginx/sites-available/<your-domain>, symlink it into sites-enabled/ to enable it, run nginx -t to validate the syntax, then apply it with systemctl reload nginx — a reload keeps existing connections, a restart drops them.',
     },
   ],
   'webp-to-png-converter': [
@@ -1527,9 +1659,9 @@ export const toolFaqs: Record<string, FaqPair[]> = {
       q: 'What is the difference between linear and radial gradients?',
       a: 'A linear gradient blends colors along a straight line at an angle you set, while a radial gradient radiates outward from a center point in a circle or ellipse. Use linear for backgrounds and buttons; radial for spotlights and spherical effects.',
     },
-      {
+    {
       q: 'How do I add more than two color stops?',
-      a: 'Add stops on the preview bar and drag them to position; each gets a percentage position automatically. The generator writes the full stops list into the CSS, so multi-color blends and hard-edged bands both copy out ready to paste.',
+      a: 'Add stops with the \'+ Add stop\' button and set each stop\'s position in its percentage number input (0-100). The generator writes the full stops list into the CSS, so multi-color blends and hard-edged bands both copy out ready to paste.',
     },
     {
       q: 'Does the output work in all browsers?',
@@ -1541,7 +1673,7 @@ export const toolFaqs: Record<string, FaqPair[]> = {
       q: 'What does clamp() actually do?',
       a: 'clamp(min, preferred, max) lets a value grow and shrink with the viewport (via the preferred vw part) but never goes below min or above max. It is the cleanest way to make font sizes and spacing fluid without media queries.',
     },
-      {
+    {
       q: 'Why is my text too big on mobile or too small on desktop?',
       a: 'Usually the min/max bounds or the viewport range are mis-set. Set the min font size for the smallest screen and the max for the largest, then give the viewport range that spans those two breakpoints — the calculator builds the preferred value so the scaling stays smooth between them.',
     },
@@ -1557,7 +1689,7 @@ export const toolFaqs: Record<string, FaqPair[]> = {
     },
     {
       q: 'Can I control column alignment?',
-      a: 'Yes. You can set left, center, or right alignment per column, which becomes the Markdown alignment row (:---, :---:, ---:). Default is left alignment, matching what most READMEs expect.',
+      a: 'Yes. You can set left, center, or right alignment for the whole table, which becomes the Markdown alignment row (:---, :---:, ---:). The default (---) is rendered left-aligned by most viewers, matching what most READMEs expect.',
     },
     {
       q: 'Does it accept TSV (tab-separated) input?',
@@ -1672,8 +1804,8 @@ export const toolFaqs: Record<string, FaqPair[]> = {
       a: 'No. All details — your info, client info, line items, and tax — live only in your browser for the current session; nothing is uploaded or persisted on a server. Refresh or close the tab and the data is gone.',
     },
     {
-      q: 'Can I add tax and discounts?',
-      a: 'Yes. You set a tax rate that applies to the subtotal, and per-line or overall discounts flow through to the totals automatically, so the final amount due is always calculated consistently.',
+      q: 'Can I add tax?',
+      a: 'Yes. You set a tax rate that applies to the subtotal, and the total updates automatically, so the final amount due is always calculated consistently.',
     },
   ],
   'reverse-stripe-fee-calculator': [
@@ -1745,6 +1877,10 @@ export const toolFaqs: Record<string, FaqPair[]> = {
       q: 'Does it keep a history of past picks?',
       a: 'Yes, recent results are kept in a history list so you can review what was chosen across multiple draws. This helps when running several rounds and you need to confirm no one was skipped or double-picked.',
     },
+    {
+      q: 'What is the difference between "no repeat winners" and "remove winner after picking"?',
+      a: 'No repeat winners limits a single draw: within one round each option wins at most once (sampling without replacement). Remove winner after picking strikes the option from the list itself, affecting all later rounds. Use the former to hand out several prizes at once, the latter to cross names off a list round by round.',
+    },
   ],
   'wordle-solver': [
     {
@@ -1764,7 +1900,7 @@ export const toolFaqs: Record<string, FaqPair[]> = {
   'epoch-converter': [
     {
       q: 'Seconds or milliseconds — which do I have?',
-      a: 'Count the digits: 10 digits is seconds, 13 digits is milliseconds (the JavaScript convention). The converter auto-detects both and flags anything from 9 to 14 digits with a best-guess warning, so odd values do not silently misparse.',
+      a: 'Count the digits: 10 digits is seconds, 13 digits is milliseconds (the JavaScript convention). The converter auto-detects both; input it cannot interpret reliably — non-numeric characters or more than 14 digits — gets a warning instead of a guess, so odd values never silently misparse.',
     },
     {
       q: 'Does it handle dates before 1970?',
@@ -1800,7 +1936,7 @@ export const toolFaqs: Record<string, FaqPair[]> = {
   'line-diff-checker': [
     {
       q: 'What algorithm does it use?',
-      a: 'Longest common subsequence (LCS) — the same family of algorithm behind git diff. It computes the smallest set of added and removed lines that turns the original text into the changed one, then displays them with + and − markers.',
+      a: 'Longest common subsequence (LCS) — the same family of algorithms behind git diff. It computes the smallest set of added and removed lines that turns the original text into the changed one, then displays them with + and − markers.',
     },
     {
       q: 'How big can the inputs be?',
@@ -1822,7 +1958,7 @@ export const toolFaqs: Record<string, FaqPair[]> = {
     },
     {
       q: 'Does the block-AI preset really work?',
-      a: 'It emits explicit disallow rules for GPTBot, ClaudeBot, and CCBot — the crawlers behind OpenAI, Anthropic, and Common Crawl training sets. Those operators currently honor robots.txt, so it works as long as they keep doing so; treat it as a respected request, not a technical wall.',
+      a: 'It emits explicit disallow rules for the major AI training crawlers — GPTBot, ClaudeBot, PerplexityBot, Bytespider, Google-Extended, Applebot-Extended, Cohere-ai, and Amazonbot. Those operators currently honor robots.txt, so it works as long as they keep doing so; treat it as a respected request, not a technical wall.',
     },
     {
       q: 'Why is my crawl-delay ignored?',
@@ -1912,7 +2048,7 @@ export const toolFaqs: Record<string, FaqPair[]> = {
     },
     {
       q: 'I must wake at 6 AM — when should I sleep?',
-      a: 'Switch to the wake-up mode, enter 06:00, and you get a ladder of bedtimes counting back in 90-minute steps: 22:45 for five cycles, 21:15 for six. Pick the one you can actually keep consistently.',
+      a: 'Switch to the wake-up mode, enter 06:00, and you get a ladder of bedtimes counting back in 90-minute steps: 22:15 for five cycles, 20:45 for six. Pick the one you can actually keep consistently.',
     },
   ],
   'cooking-converter': [
@@ -1973,7 +2109,7 @@ export const toolFaqs: Record<string, FaqPair[]> = {
   'overtime-calculator': [
     {
       q: 'When is overtime legally required?',
-      a: 'US federal law (FLSA) requires 1.5× pay past 40 hours per week for non-exempt employees. Some states add daily overtime (California after 8 h/day) or double time on holidays — pick the multiplier your jurisdiction or contract specifies.',
+      a: 'US federal law (FLSA) requires 1.5× pay past 40 hours per week for non-exempt employees. Some states add daily overtime (California after 8 h/day, double past 12 h); holiday double time typically comes from union contracts or employer policies — pick the multiplier your jurisdiction or contract specifies.',
     },
     {
       q: 'How is my pay computed?',
@@ -2081,7 +2217,7 @@ export const toolFaqs: Record<string, FaqPair[]> = {
     },
     {
       q: 'How far is 10,000 steps?',
-      a: 'About 7-8 km (4.5-5 miles) for average adults. The tool computes your exact distance from your height, because stride length drives it — taller walkers cover more ground per step, shorter walkers travel farther for the same count.',
+      a: 'About 7-8 km (4.5-5 miles) for average adults. The tool computes your exact distance from your height, because stride length drives it — taller walkers cover more ground per step — shorter walkers cover less for the same count.',
     },
   ],
   'paint-calculator': [
@@ -2124,7 +2260,7 @@ export const toolFaqs: Record<string, FaqPair[]> = {
     },
     {
       q: 'Why does keyCode show 0 or odd values?',
-      a: 'keyCode was never standardized; modern engines ship only an approximation of old IE behavior, so some keys report 0 and the same key can differ across browsers. Copy it when reproducing a legacy bug — write new code against key or code.',
+      a: 'keyCode was never standardized; modern engines ship only an approximation of old IE behavior, so some keys report 0 and the same key can differ across browsers. It can still help when reproducing a legacy bug — write new code against key or code.',
     },
     {
       q: 'How do I inspect shortcut combinations?',
@@ -2146,7 +2282,7 @@ export const toolFaqs: Record<string, FaqPair[]> = {
     },
     {
       q: 'How do I find a type fast?',
-      a: 'Type the extension (.svg) or part of the MIME string (image/) and the table filters live, with a copy button on every row. Searching "zip" instantly shows .zip → application/zip alongside 7z, gzip, and rar.',
+      a: 'Type the extension (.svg) or part of the MIME string (image/) and the table filters live, with a copy button on every row. Searching "zip" instantly shows .zip → application/zip — and since MIME strings match too, .gz (application/gzip) and .epub (application/epub+zip) turn up as well.',
     },
     {
       q: 'What about fonts and modern formats?',
@@ -2215,6 +2351,14 @@ export const toolFaqs: Record<string, FaqPair[]> = {
     {
       q: 'Why is line feed a control character?',
       a: 'LF (10) was ASCII\u2019s line separator from teleprinter days; Windows later paired it with CR (13) as CRLF. Both are control codes — that heritage is why line endings still differ between Windows and Unix systems.',
+    },
+    {
+      q: 'What is the relationship between ASCII and Unicode?',
+      a: 'ASCII was standardized in 1963 as a 7-bit code; Unicode adopts it verbatim in its first 128 code points (0-127), and in UTF-8 those characters still take 1 byte each. ASCII is the base subset of UTF-8 — memorizing it keeps paying off.',
+    },
+    {
+      q: 'Which codes are worth memorizing?',
+      a: 'The high-frequency groups: "0" is 48 (through 9 = 57), "A" is 65 (Z = 90), "a" is 97 (z = 122). Digit checks, case toggling (always a difference of 32), and hand-rolled base conversion all lean on these groups.',
     },
   ],
   'screen-time-calculator': [
@@ -2307,7 +2451,7 @@ export const toolFaqs: Record<string, FaqPair[]> = {
     },
     {
       q: 'Can it convert fractional numbers?',
-      a: 'Yes — enter 255.5 and the fractional part converts positionally, rounded at roughly 10 digits. Be aware many decimal fractions (0.1 included) repeat forever in binary; the tool truncates instead of implying false exactness.',
+      a: 'Yes — enter 255.5 and the fractional part converts positionally, truncated at roughly 10 digits. Be aware many decimal fractions (0.1 included) repeat forever in binary; the tool truncates instead of implying false exactness.',
     },
     {
       q: 'Why might it differ from my calculator?',
@@ -2457,7 +2601,7 @@ export const toolFaqs: Record<string, FaqPair[]> = {
     },
     {
       q: 'Why are output tokens so expensive?',
-      a: 'Generation is compute-heavier than reading a prompt, so output tokens cost 3-15× input on nearly every model. An app that writes long answers can pay more for output than for a much larger prompt — trimming max_tokens is often the biggest lever.',
+      a: 'Generation is compute-heavier than reading a prompt, so output tokens cost 3-8× input on nearly every model. An app that writes long answers can pay more for output than for a much larger prompt — trimming max_tokens is often the biggest lever.',
     },
     {
       q: 'Are cached or batch prices included?',
@@ -2473,11 +2617,11 @@ export const toolFaqs: Record<string, FaqPair[]> = {
     },
     {
       q: 'What is the IRA contribution limit?',
-      a: '$7,000 per year in 2025, plus a $1,000 catch-up (total $8,000) if you are 50 or older. The limit is shared between Roth and Traditional — contributing to both doesn\'t double it. Your employer 401(k) limit is separate and much higher.',
+      a: '$7,500 per year in 2026, plus a $1,100 catch-up (total $8,600) if you are 50 or older. The limit is shared between Roth and Traditional — contributing to both doesn\'t double it. Your employer 401(k) limit is separate and much higher.',
     },
     {
       q: 'Does the calculator account for income phase-outs?',
-      a: 'No — it isolates the tax-timing decision by growing identical contributions in both accounts. Roth contributions phase out above ~$150k single / $236k married (2025), and Traditional deductibility phases out if you have a workplace plan. Check IRS Publication 590-A for your situation.',
+      a: 'No — it isolates the tax-timing decision by growing identical contributions in both accounts. Roth contributions phase out above ~$153k single / $242k married (2026), and Traditional deductibility phases out if you have a workplace plan. Check IRS Publication 590-A for your situation.',
     },
   ],
   'fire-calculator': [
@@ -2553,7 +2697,7 @@ export const toolFaqs: Record<string, FaqPair[]> = {
     },
     {
       q: 'Why do I get the same numbers often — is it rigged?',
-      a: 'Randomness is clumpy: in 20 rolls of a d6, seeing a 4 three times is statistically normal. Over hundreds of rolls the counts converge toward even. The roll history lets you verify this yourself across a session.',
+      a: 'Randomness is clumpy: in 20 rolls of a d6, seeing a 4 three times is statistically normal. Over hundreds of rolls the counts converge toward even. The history panel keeps only your most recent rolls, so verifying the convergence means tallying the counts yourself over a longer session.',
     },
   ],
   'coin-flip': [
@@ -2613,7 +2757,7 @@ export const toolFaqs: Record<string, FaqPair[]> = {
   'typing-speed-test': [
     {
       q: 'What is a good typing speed?',
-      a: 'The average adult types 35-40 WPM; 60+ WPM puts you in the top quartile of office workers; professional typists sit around 75-95 WPM. Accuracy matters as much as speed — 55 WPM at 98% accuracy beats 70 WPM at 90% in real work.',
+      a: 'The average adult types 38-42 net WPM; professional transcriptionists exceed 80, and competitive typists top 150. Accuracy matters as much as speed — 55 WPM at 98% accuracy beats 70 WPM at 90% in real work.',
     },
     {
       q: 'How is WPM calculated here?',
@@ -2671,7 +2815,7 @@ export const toolFaqs: Record<string, FaqPair[]> = {
     },
     {
       q: 'What are cached-input tokens and how much do they save?',
-      a: 'Providers like Anthropic and OpenAI discount tokens that repeat across requests — a fixed system prompt, retrieved documents, few-shot examples — by 50-90%. If your requests share a stable prefix, enabling prompt caching routinely cuts input spend by more than half. The calculator includes that saving as a separate line.',
+      a: 'Providers like Anthropic and OpenAI discount tokens that repeat across requests — a fixed system prompt, retrieved documents, few-shot examples — by 50-90%. Set the prompt cache hit-rate slider to your expected share and the calculator blends it into each model\'s effective input price — input × (1 − hit rate) + cached-input price × hit rate — shown in green next to the list price. With a stable prefix, caching routinely cuts input spend by more than half.',
     },
     {
       q: 'Why do my real invoices differ from the estimate?',
@@ -2685,7 +2829,7 @@ export const toolFaqs: Record<string, FaqPair[]> = {
   'context-window-checker': [
     {
       q: 'How are tokens estimated?',
-      a: 'The tool applies per-language heuristics calibrated against modern tokenizers: English averages ~4 characters per token, code and non-Latin scripts differ. Expect ±10% versus an exact tokenizer count — good enough for capacity planning, not for billing reconciliation.',
+      a: 'The tool applies per-language heuristics calibrated against modern tokenizers: English averages ~4 characters per token, code and non-Latin scripts differ. Expect counts to vary by 5-10% per model versus an exact tokenizer count — good enough for capacity planning, not for billing reconciliation.',
     },
     {
       q: "What happens when text exceeds a model's context window?",
@@ -2703,7 +2847,7 @@ export const toolFaqs: Record<string, FaqPair[]> = {
   'json-to-zod': [
     {
       q: 'How are types inferred from my JSON?',
-      a: 'Each value maps by its JavaScript type: strings → z.string(), numbers → z.number(), booleans → z.boolean(), null → z.null(), arrays → z.array() of the element type, nested objects → nested z.object(). Optional keys (missing in some array elements) are marked .optional() so real-world data validates.',
+      a: 'Each value maps by its JavaScript type: strings → z.string(), numbers → z.number(), booleans → z.boolean(), null → z.null(), arrays → z.array() of the element type, nested objects → nested z.object(). Keys present in the sample become required — add .optional() by hand where your API omits fields.',
     },
     {
       q: 'Does it handle mixed arrays and nested objects?',
@@ -2775,7 +2919,7 @@ export const toolFaqs: Record<string, FaqPair[]> = {
   'markdown-fence-extractor': [
     {
       q: 'What counts as a fenced code block?',
-      a: 'Anything between triple backticks (```lang ... ```) in Markdown — including blocks with a language tag, plain fences, and nested fences opened with four or more backticks (the standard way LLMs embed code samples that themselves contain triple-backtick blocks).',
+      a: 'Anything between triple backticks (```lang ... ```) in Markdown, with or without a language tag. Four-or-more-backtick fences are not recognized — if a code sample itself contains triple backticks, re-fence the outer block before extracting.',
     },
     {
       q: 'Can I filter blocks by language?',
@@ -2787,17 +2931,17 @@ export const toolFaqs: Record<string, FaqPair[]> = {
     },
     {
       q: 'Does downloading work for many blocks at once?',
-      a: 'Yes — copy each block individually or download all extracted blocks. Files get sensible names from the block language and index, so a response containing an HTML, CSS, and JS block downloads as three ready-to-use files.',
+      a: 'Yes — copy each block individually, or download all extracted blocks in one go as a single code-blocks.txt file. When you need each snippet as its own file, use the per-block copy buttons.',
     },
   ],
   'prompt-template-filler': [
     {
       q: 'What placeholder syntax does it support?',
-      a: 'Double-brace variables: {{variable_name}}. Undeclared variables in the template are detected and listed, unfilled variables are flagged with warnings, and you can escape literal braces when a template legitimately needs to output {{...}} text.',
+      a: 'Two styles: {{double_braces}} and {single} (f-string style). Undeclared variables in the template are detected and listed, and unfilled variables are left in place and flagged with warnings.',
     },
     {
       q: 'How do I fill variables — form or JSON?',
-      a: 'Both. The form gives you one input per detected variable with live preview; JSON mode accepts an object like {"audience": "CTOs", "tone": "direct"} for batch or scripted filling. JSON values can be strings, numbers, or booleans and are stringified into the template.',
+      a: 'Via JSON: the right-hand textarea accepts an object like {"audience": "CTOs", "tone": "direct"} and its values are stringified into the template — strings verbatim, numbers and booleans too. That makes batch or scripted filling straightforward.',
     },
     {
       q: 'Can I use this for few-shot prompt batching?',
@@ -2811,7 +2955,7 @@ export const toolFaqs: Record<string, FaqPair[]> = {
   'openai-tools-builder': [
     {
       q: 'What schema does this generate?',
-      a: 'A function definition for the OpenAI-style tools API parameter: a name, a natural-language description, and a JSON Schema parameters object with typed properties (string, number, boolean, array, object), enum constraints, and a required list — all built through a form instead of hand-writing JSON Schema.',
+      a: 'A function definition for the OpenAI-style tools API parameter: a name, a natural-language description, and a JSON Schema parameters object with typed properties (string, number, boolean, integer, array, object), enum constraints, and a required list — all built through a form instead of hand-writing JSON Schema.',
     },
     {
       q: 'What makes a good function name and description?',
@@ -2833,7 +2977,7 @@ export const toolFaqs: Record<string, FaqPair[]> = {
     },
     {
       q: 'What are the most common validation errors?',
-      a: 'Trailing blank lines, a BOM on the first line, unescaped newlines inside cells, missing the assistant message, and role typos. The tool validates every line and points at the offending row — fixing the CSV once beats a failed upload cycle.',
+      a: 'The tool validates structure, not content: it needs a header row plus at least one data row, the user and assistant (and optional system) columns must be found by name in that header, fully empty rows are skipped, and any row with an empty assistant cell is reported with its line number. Fixing the CSV once beats a failed upload cycle.',
     },
     {
       q: 'How much training data do I need?',
@@ -2865,7 +3009,7 @@ export const toolFaqs: Record<string, FaqPair[]> = {
   'embedding-price-calculator': [
     {
       q: 'How is the embedding cost computed?',
-      a: 'Cost = tokens processed × price per million tokens, with dimensions and model chosen from each provider\'s current rate card. For recurring workloads the tool projects daily and monthly spend from your documents-per-day and average tokens-per-document figures.',
+      a: 'Cost = tokens processed × price per million tokens, with dimensions and model chosen from each provider\'s current rate card. For recurring workloads the tool computes per-run and monthly spend from your document count, average tokens per document, and re-embed runs per month.',
     },
     {
       q: 'Do dimensions affect the price?',
@@ -2873,7 +3017,7 @@ export const toolFaqs: Record<string, FaqPair[]> = {
     },
     {
       q: 'How do open-source models change the math?',
-      a: 'Self-hosted models (BGE, E5, GTE class) shift cost from per-token API spend to GPU time and infrastructure. Above roughly 50-100 million tokens per month, hosting usually wins; below that, API pricing is cheaper than keeping hardware warm. The comparison lines make the crossover visible.',
+      a: 'Self-hosted models (BGE, E5, GTE class) shift cost from per-token API spend to GPU time and infrastructure. Above roughly 50-100 million tokens per month, hosting usually wins; below that, API pricing is cheaper than keeping hardware warm. Estimate the crossover yourself with the per-run and monthly columns.',
     },
     {
       q: "What's a realistic token count per document?",

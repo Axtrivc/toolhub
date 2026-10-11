@@ -46,9 +46,9 @@ const zh: ReactNode = (
       这个工具会移除 JSON 中的所有空白字符,以最小化文件大小。适用于 API 响应、内嵌数据以及每个字节都很重要的存储场景。
     </p>
     <div>
-      <h2>体积的节省</h2>
+      <h2>体积节省幅度</h2>
       <p>
-        压缩后的 JSON 通常比格式化美化的 JSON 小 20-50%。对于通过网络传输的大型负载,这点节省会累积起来——尤其在移动网络或按量计费的连接上更是如此。
+        压缩后的 JSON 通常比格式化后的 JSON 小 20-50%。对于通过网络传输的大型负载,这些节省会积少成多——尤其在移动网络或按流量计费的连接上更是如此。
       </p>
     </div>
     <div>
@@ -80,9 +80,9 @@ const es: ReactNode = (
     <div>
       <h2>El ahorro de tamaño</h2>
       <p>
-        El JSON minimizado suele ser entre un 20-50 % más pequeño que el JSON con formato legible. Para
-        payloads grandes servidos por la red, esto se acumula — especialmente en conexiones móviles o
-        de pago por consumo.
+        El JSON minimizado suele ser un 20-50 % más pequeño que el JSON con formato legible. Para
+        payloads grandes servidos a través de la red, esto se acumula — especialmente en conexiones
+        móviles o de pago por consumo.
       </p>
     </div>
     <div>

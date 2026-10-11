@@ -102,7 +102,7 @@ const es: ReactNode = (
     <div>
       <h2>Usos comunes</h2>
       <ul>
-        <li><strong>Colores hex</strong> en diseño web: #FFFFFF = 255,255,255 en decimal</li>
+        <li><strong>Colores hex</strong> en diseño web: #FFFFFF = 255.255.255 en decimal</li>
         <li><strong>Direcciones de memoria</strong> mostradas en hex por los depuradores</li>
         <li><strong>Permisos de archivos</strong> en Unix: chmod 755 (octal)</li>
         <li><strong>Máscaras de red</strong> y direcciones MAC</li>
@@ -134,7 +134,7 @@ const de: ReactNode = (
       <h2>Warum es verschiedene Zahlensysteme gibt</h2>
       <ul>
         <li><strong>Dezimal</strong> — was Menschen täglich nutzen (10 Finger)</li>
-        <li><strong>Binär</strong> — wie Computer Daten speichern (an/aus-Elektriksignale)</li>
+        <li><strong>Binär</strong> — wie Computer Daten speichern (elektrische Ein/Aus-Signale)</li>
         <li><strong>Hexadezimal</strong> — kompakte Darstellung von Binär (4 Bits = 1 Hex-Ziffer)</li>
         <li><strong>Oktal</strong> — historische Unix-Dateirechte, heute seltener</li>
       </ul>
@@ -142,7 +142,7 @@ const de: ReactNode = (
     <div>
       <h2>Häufige Anwendungen</h2>
       <ul>
-        <li><strong>Hex-Farben</strong> im Webdesign: #FFFFFF = 255,255,255 als Dezimalzahl</li>
+        <li><strong>Hex-Farben</strong> im Webdesign: #FFFFFF = 255.255.255 als Dezimalzahl</li>
         <li><strong>Speicheradressen</strong> werden von Debuggern in Hex angezeigt</li>
         <li><strong>Dateirechte</strong> unter Unix: chmod 755 (oktal)</li>
         <li><strong>Netzmasken</strong> und MAC-Adressen</li>

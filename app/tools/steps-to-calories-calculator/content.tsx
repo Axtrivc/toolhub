@@ -49,8 +49,8 @@ const es: ReactNode = (
     <h2>¿Qué tienen de especial 10 000 pasos?</h2>
     <p>Nació como eslogan de marketing de un podómetro japonés de 1965. La investigación sitúa beneficios reales para la salud desde unos 7 000-8 000 pasos, con retornos que siguen pero se aplanan pasado los 10 000.</p>
     <h2>Por qué las pulseras difieren de nosotros</h2>
-    <p>Los rastreadores de muñeca acreditan todo tu día, incluido el metabolismo basal, y sus estimaciones de zancada se pasan de largas. Espera cifras un 10-25 % por encima de estimaciones solo-ejercicio como esta.</p>
-    <h2>Rápido gana a largo</h2>
+    <p>Los rastreadores de muñeca acreditan todo tu día, incluido el metabolismo basal, y sus estimaciones de zancada se pasan de largas. Espera cifras un 10-25 % por encima de estimaciones de solo ejercicio como esta.</p>
+    <h2>Mejor rápido que largo</h2>
     <p>Cubriendo la misma distancia, caminar a ritmo moderado o rápido difiere en menos del 10 % en calorías — el MET sube casi exactamente lo que baja el tiempo. El paseo lento es el que más cuesta por kilómetro, así que acelerar sobre todo te devuelve tiempo.</p>
   </section>
 )
@@ -60,10 +60,10 @@ const de: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>Wie die Schätzung funktioniert</h2>
     <p>Die Distanz kommt aus der Schrittlänge (≈0,414 × Körpergröße), die Kalorien aus der MET-Methode — das Tempo setzt die Intensität, das Gewicht die Verbrennungsrate. Schwerere Geher verbrennen pro Schritt tatsächlich mehr.</p>
-    <h2>Ist an 10 000 Schritten etwas besonders?</h2>
-    <p>Das war der Marketing-Slogan eines japanischen Schrittzählers von 1965. Studien sehen echte Gesundheitsgewinne ab etwa 7 000-8 000 Schritten, mit weiterem, aber flacher werdendem Ertrag über 10 000 hinaus.</p>
+    <h2>Ist an 10.000 Schritten etwas Besonderes?</h2>
+    <p>Das war der Marketing-Slogan eines japanischen Schrittzählers von 1965. Studien sehen echte Gesundheitsgewinne ab etwa 7.000-8.000 Schritten, mit weiterem, aber flacher werdendem Ertrag über 10.000 hinaus.</p>
     <h2>Warum Tracker anders rechnen als wir</h2>
-    <p>Handgurt-Tracker schreiben dir den ganzen Tag gut, inklusive Grundumsatz, und ihre Schrittlängen-Schätzungen geraten zu lang. Erwarte Werte, die 10-25 % über reinen Trainingswerten wie diesem hier liegen.</p>
+    <p>Handgelenk-Tracker schreiben dir den ganzen Tag gut, inklusive Grundumsatz, und ihre Schrittlängen-Schätzungen geraten zu lang. Erwarte Werte, die 10-25 % über reinen Trainingswerten wie diesem hier liegen.</p>
     <h2>Zügig schlägt lang</h2>
     <p>Über dieselbe Distanz liegen moderates und zügiges Gehen bei den Kalorien rund 10 % auseinander — der MET-Wert steigt fast exakt so schnell, wie die Zeit sinkt. Der gemütliche Spaziergang kostet pro Kilometer am meisten: Schneller gehen spart vor allem Zeit.</p>
   </section>

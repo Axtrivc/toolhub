@@ -14,11 +14,11 @@ export const timezoneConverterL10n: ToolL10n = {
       'dateTimeLabel': '日期与时间(源时区)',
       'day': '天',
       'emptyState': '选择日期与时间即可查看换算。',
-      'meetingPlanner': '会议规划器 — 各时区的小时数',
+      'meetingPlanner': '会议规划器 — 各时区一天中的时刻',
       'myLocal': '我的本地',
       'myLocalZone': '我的本地时区',
       'noteIntro': '🌍 偏移和夏令时规则来自你浏览器内置的 ',
-      'noteOutro': ' 数据库——数据不离开你的设备。标绿的行处于本地工作时间(9:00–17:00)内;当换算后的日期与源日期不同时,会出现日期偏移徽章。',
+      'noteOutro': ' 数据库——数据不离开你的设备。标绿的行处于本地工作时间(9:00–17:00)内;当换算后的日期与源日期不同时,会出现跨日徽章。',
       'now': '现在',
       'removeTargetTimezone': '移除目标时区',
       'sSource': '来源: ',
@@ -27,7 +27,7 @@ export const timezoneConverterL10n: ToolL10n = {
       'summaryTitle': '时区换算',
       'targetTimezone': '目标时区',
       'targetTimezones': '目标时区(最多 6 个)',
-      'thDayShift': '日期偏移',
+      'thDayShift': '跨日',
       'thLocalTime': '本地时间',
       'thUtcOffset': 'UTC 偏移',
       'thZone': '时区',
@@ -86,11 +86,11 @@ export const timezoneConverterL10n: ToolL10n = {
       },
       {
         q: '怎么找出跨地区重叠的工作时间?',
-        a: '把每位参会者的时区都加上,在一个时区里设定会议时间,然后读出每个时区的本地时刻。日期偏移指示会显示谁会进入第二天或前一天,让你一眼看出不便的深夜时段。',
+        a: '把每位参会者的时区都加上,在一个时区里设定会议时间,然后读出每个时区的本地时刻。跨日标记会显示谁会进入第二天或前一天,让你一眼看出不便的深夜时段。',
       },
       {
         q: '「第二天」或「前一天」是什么意思?',
-        a: '意思是虽然各地都是同一个日历时刻,但该时区的本地日期相对于你输入的时间已经向前(第二天)或向后(前一天)翻了一天。它标记的是会让一位或多位参会者跨过午夜的排程。',
+        a: '意思是:尽管各地对应的是同一时刻,但该时区的本地日期已经相对你输入的时间向前翻了一天(第二天)或向后翻了一天(前一天)。它标记的是会让一位或多位参会者跨过午夜的安排。',
       },
     ],
   },
@@ -142,7 +142,7 @@ export const timezoneConverterL10n: ToolL10n = {
       'zoneMadrid': 'Madrid',
       'zoneMexicoCity': 'Ciudad de México',
       'zoneMoscow': 'Moscú',
-      'zoneMountainDenver': 'Hora de Montaña (Denver)',
+      'zoneMountainDenver': 'Hora de la Montaña (Denver)',
       'zonePacificLa': 'Hora del Pacífico (Los Ángeles)',
       'zoneParis': 'París',
       'zonePhoenix': 'Phoenix',
@@ -160,7 +160,7 @@ export const timezoneConverterL10n: ToolL10n = {
     },
     formula: {
       formula: 'local time = UTC + offset',
-      explain: 'Cada zona horaria es UTC más un offset fijo (que puede cambiar con el horario de verano). Convertir entre zonas pasa por UTC: suma un offset, resta el otro.',
+      explain: 'Cada zona horaria es UTC más un desfase fijo (que puede cambiar con el horario de verano). Convertir entre zonas pasa por UTC: suma un desfase y resta el otro.',
     },
     useCases: [
       'planificador de reuniones entre zonas horarias',
@@ -171,15 +171,15 @@ export const timezoneConverterL10n: ToolL10n = {
     faqs: [
       {
         q: '¿Tiene en cuenta el horario de verano (DST)?',
-        a: 'Sí. Cada zona se gestiona por su identificador IANA (p. ej. America/New_York), que incluye sus propias reglas de DST, así los offsets y la marca de «¿es al día siguiente?» se actualizan correctamente en las fechas exactas de transición. No tienes que sumar o restar una hora a mano.',
+        a: 'Sí. Cada zona se gestiona por su identificador IANA (p. ej. America/New_York), que incluye sus propias reglas de DST, de modo que los desfases y la marca de «¿es al día siguiente?» se actualizan correctamente en las fechas exactas de transición. No tienes que sumar o restar una hora a mano.',
       },
       {
         q: '¿Cómo encuentro horas laborables solapadas entre regiones?',
-        a: 'Añade la zona horaria de cada participante, fija la hora de la reunión en una y lee qué reloj local marca cada una. Los indicadores de cambio de día muestran quién estaría en el día siguiente o anterior, así detectas al instante huecos incómodos de madrugada.',
+        a: 'Añade la zona horaria de cada participante, fija la hora de la reunión en una y comprueba qué hora es en las demás. Los indicadores de cambio de día muestran quién estaría en el día siguiente o en el anterior, así detectas al instante las franjas incómodas de madrugada.',
       },
       {
         q: '¿Qué significa una etiqueta de «día siguiente» o «día anterior»?',
-        a: 'Significa que, aunque en todas partes es el mismo instante de calendario, la fecha local en esa zona ha avanzado (día siguiente) o retrocedido (día anterior) respecto a la hora que introdujiste. Marca planificaciones que cruzan la medianoche para uno o más asistentes.',
+        a: 'Significa que, aunque en todas partes sea el mismo instante, la fecha local en esa zona ha avanzado (día siguiente) o retrocedido (día anterior) respecto a la hora que introdujiste. Señala las programaciones que cruzan la medianoche para uno o más asistentes.',
       },
     ],
   },
@@ -193,7 +193,7 @@ export const timezoneConverterL10n: ToolL10n = {
       'day': 'Tag',
       'emptyState': 'Datum & Uhrzeit wählen, um die Umrechnung zu sehen.',
       'meetingPlanner': 'Meeting-Planer — Stunde in jeder Zone',
-      'myLocal': 'Mein lokal',
+      'myLocal': 'Lokal',
       'myLocalZone': 'Meine lokale Zone',
       'noteIntro': '🌍 Verschiebungen und Sommerzeitregeln stammen aus der integrierten ',
       'noteOutro': '-Datenbank deines Browsers — keine Daten verlassen dein Gerät. Grün getönte Zeilen liegen in der lokalen Arbeitszeit (9:00–17:00); ein Tageswechsel-Badge erscheint, wenn das umgerechnete Datum vom Quelldatum abweicht.',
@@ -232,7 +232,7 @@ export const timezoneConverterL10n: ToolL10n = {
       'zoneMexicoCity': 'Mexiko-Stadt',
       'zoneMoscow': 'Moskau',
       'zoneMountainDenver': 'Mountain Time (Denver)',
-      'zonePacificLa': 'Pazifikzeit (Los Angeles)',
+      'zonePacificLa': 'Pacific Time (Los Angeles)',
       'zoneParis': 'Paris',
       'zonePhoenix': 'Phoenix',
       'zoneSaoPaulo': 'São Paulo',
@@ -249,7 +249,7 @@ export const timezoneConverterL10n: ToolL10n = {
     },
     formula: {
       formula: 'local time = UTC + offset',
-      explain: 'Jede Zeitzone ist UTC plus ein fester Offset (der sich mit der Sommerzeit ändern kann). Umrechnen zwischen Zonen geht über UTC: einen Offset addieren, den anderen subtrahieren.',
+      explain: 'Jede Zeitzone ist UTC plus eine feste Verschiebung (die sich mit der Sommerzeit ändern kann). Umrechnen zwischen Zonen geht über UTC: eine Verschiebung addieren, die andere subtrahieren.',
     },
     useCases: [
       'Meeting-Planer über Zeitzonen hinweg',
@@ -260,15 +260,15 @@ export const timezoneConverterL10n: ToolL10n = {
     faqs: [
       {
         q: 'Berücksichtigt er die Sommerzeit (DST)?',
-        a: 'Ja. Jede Zeitzone wird über ihre IANA-Kennung (z. B. America/New_York) geführt, die ihre eigenen DST-Regeln mitbringt, sodass Offsets und das «ist es am nächsten Tag»-Kennzeichen an den exakten Umstelltagen korrekt aktualisiert werden. Du musst keine Stunde von Hand addieren oder subtrahieren.',
+        a: 'Ja. Jede Zeitzone wird über ihre IANA-Kennung (z. B. America/New_York) geführt, die ihre eigenen DST-Regeln mitbringt, sodass Verschiebungen und das «ist es am nächsten Tag»-Kennzeichen an den exakten Umstelltagen korrekt aktualisiert werden. Du musst keine Stunde von Hand addieren oder subtrahieren.',
       },
       {
         q: 'Wie finde ich überlappende Arbeitszeiten über Regionen hinweg?',
-        a: 'Füge die Zeitzone jedes Teilnehmers hinzu, setze die Meeting-Zeit in einer und lies ab, was die lokale Uhr in jeder anzeigt. Die Tageswechsel-Indikatoren zeigen, wer am nächsten oder vorherigen Tag wäre, sodass du ungünstige Spät-Zeiten sofort erkennst.',
+        a: 'Füge die Zeitzone jedes Teilnehmers hinzu, setze die Meeting-Zeit in einer und lies ab, was die lokale Uhr in jeder anzeigt. Die Tageswechsel-Indikatoren zeigen, wer am nächsten oder vorherigen Tag wäre, sodass du ungünstige späte Zeitfenster sofort erkennst.',
       },
       {
         q: 'Was bedeutet ein «nächster Tag»- oder «vorheriger Tag»-Hinweis?',
-        a: 'Dass überall derselbe Kalendermoment herrscht, das lokale Datum in dieser Zeitzone aber im Vergleich zu deiner Eingabe vorgerückt (nächster Tag) oder zurückgegangen (vorheriger Tag) ist. Es kennzeichnet Planungen, die für einen oder mehrere Teilnehmer über Mitternacht gehen.',
+        a: 'Dass es sich überall um denselben Zeitpunkt handelt, das lokale Datum in dieser Zeitzone aber im Vergleich zu deiner Eingabe vorgerückt (nächster Tag) oder zurückgegangen (vorheriger Tag) ist. Es kennzeichnet Planungen, die für einen oder mehrere Teilnehmer über Mitternacht gehen.',
       },
     ],
   },

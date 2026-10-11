@@ -30,7 +30,7 @@ const zh: ReactNode = (
     <h2>五小时半衰期</h2>
     <p>咖啡因按指数规律清除:下午 3 点摄入 200 mg,晚上 8 点还剩约 100 mg,凌晨 1 点约 50 mg。哪怕你能正常入睡,这点睡前残留也足以推迟深睡。</p>
     <h2>个体差异巨大</h2>
-    <p>CYP1A2 基因把人分成快代谢与慢代谢两型。口服避孕药大约让半衰期翻倍,吸烟则大致减半。根据咖啡因对你起效的迟早来调整预期。</p>
+    <p>CYP1A2 基因把人分成快代谢与慢代谢两型。口服避孕药大约让半衰期翻倍,吸烟则大致减半。留意咖啡因在你身上起效有多晚,再据此调整预期。</p>
     <h2>常见饮品剂量</h2>
     <p>现煮咖啡 ≈95 mg/杯,浓缩咖啡 ≈63 mg/份,红茶 ≈47 mg,可乐 ≈34 mg,能量饮料 80-300 mg,黑巧克力每 40 g ≈24 mg。</p>
     <h2>安全截止时间</h2>
@@ -58,8 +58,8 @@ const de: ReactNode = (
     <h2>Die Fünf-Stunden-Halbwertszeit</h2>
     <p>Koffein wird exponentiell abgebaut: 200 mg um 15 Uhr hinterlassen um 20 Uhr noch ~100 mg, um 1 Uhr ~50 mg. Dieses Restniveau zur Bettzeit reicht aus, den Tiefschlaf zu verschieben, selbst wenn du problemlos einschläfst.</p>
     <h2>Die individuelle Streuung ist riesig</h2>
-    <p>Das Gen CYP1A2 teilt Menschen in schnelle und langsame Verstoffwechsler. Die Antibabypille verdoppelt die Halbwertszeit ungefähr, Rauchen halbiert sie. Passe deine Erwartungen daran an, wie spät Kaffee dich trifft.</p>
-    <h2>Übliche Getränkedosen</h2>
+    <p>Das Gen CYP1A2 teilt Menschen in schnelle und langsame Verstoffwechsler. Die Antibabypille verdoppelt die Halbwertszeit ungefähr, Rauchen halbiert sie. Passe deine Erwartungen daran an, wie spät der Kaffee bei dir wirkt.</p>
+    <h2>Typische Dosen in Getränken</h2>
     <p>Filterkaffee ≈95 mg pro Tasse, Espresso ≈63 mg pro Shot, Schwarztee ≈47 mg, Cola ≈34 mg, Energydrinks 80-300 mg, dunkle Schokolade ≈24 mg pro 40 g.</p>
     <h2>Sichere Grenzen</h2>
     <p>Schlafforscher raten, 8-10 Stunden vor dem Schlafengehen aufzuhören. Wer um 22:30 ins Bett geht, sollte nach dem Mittagessen kein Koffein mehr zu sich nehmen — früher, als die meisten denken.</p>

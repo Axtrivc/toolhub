@@ -64,20 +64,20 @@ const zh: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>这是什么工具?</h2>
     <p>
-      粘贴任意文章、博客草稿、脚本或演讲稿,这个工具会立刻估算出<strong>阅读或朗读需要多长时间</strong>,并同时给出词数、字符数、句子数和页数。它专为核对阅读时长徽章的作者、为演讲掐时间的讲者,以及衡量脚本篇幅的播客打造。一切都在你的浏览器中运行,文本绝不上传。
+      粘贴任意文章、博客草稿、脚本或演讲稿,这个工具会立刻估算出<strong>阅读或朗读需要多长时间</strong>,并同时给出词数、字符数、句子数和页数。它专为核对阅读时长徽章的作者、为演讲掐时间的讲者,以及估算脚本篇幅的播客创作者打造。一切都在你的浏览器中运行,文本绝不上传。
     </p>
 
     <div>
       <h2>估算是如何计算的</h2>
       <p>
-        词数通过将去除首尾空白的文本按空白拆分来统计,时间就是 <code>words ÷ words-per-minute</code>。预设覆盖了常见语速:<strong>慢速阅读</strong>(100 wpm)、<strong>成年人平均</strong>(~150 wpm)、<strong>快速阅读</strong>(200 wpm)和<strong>略读</strong>(300 wpm),另有 50–400 wpm 的自定义滑块。口语预设反映真实表达:从容的<strong>演讲</strong>(~100 wpm)、正常<strong>对话</strong>(~130 wpm)和<strong>快语速</strong>(~160 wpm)。粘贴中文(或日文/韩文)文本时,每个字符计为 1 词,预设会自动切换成字/分口径:阅读 200/300/400/600、演讲 150/200/250,自定义滑块上限也随之放宽到 800。
+        词数通过按空白拆分去除首尾空白的文本来统计,时间就是 <code>words ÷ words-per-minute</code>。预设覆盖了常见语速:<strong>慢速阅读</strong>(100 词/分)、<strong>成年人平均</strong>(~150 词/分)、<strong>快速阅读</strong>(200 词/分)和<strong>略读</strong>(300 词/分),另有 50–400 词/分的自定义滑块。口语预设反映真实表达:从容的<strong>演讲</strong>(~100 词/分)、正常<strong>对话</strong>(~130 词/分)和<strong>快语速</strong>(~160 词/分)。粘贴中文(或日文/韩文)文本时,每个字符计为 1 词,预设会自动切换成字/分口径:阅读 200/300/400/600、演讲 150/200/250,自定义滑块上限也随之放宽到 800。
       </p>
     </div>
 
     <div>
       <h2>你该用哪个数字?</h2>
       <p>
-        做<strong>博客阅读时长徽章</strong>时,一些 CMS 插件假设 150–200 wpm,而 Medium 假设约 265 wpm。做<strong>演讲或配音</strong>时,请使用口语数据 —— 并记住它们假定不间断地表达。幻灯片、演示、等笑声的停顿以及 Q&A 很容易额外增加 10–20%,所以如果工具显示 9:30,请预留 10–11 分钟的档期。<em>页数</em>估算(250 词/页)在需求写「约四页」时很有用。
+        做<strong>博客阅读时长徽章</strong>时,一些 CMS 插件假设 150–200 词/分,而 Medium 假设约 265 词/分。做<strong>演讲或配音</strong>时,请以演讲时长的数字为准 —— 并记住这些数字假定不间断地表达。幻灯片、演示、等观众笑完的停顿以及 Q&A 很容易额外增加 10–20%,所以如果工具显示 9:30,请预留 10–11 分钟的档期。<em>页数</em>估算(250 词/页)在需求文档要求「约四页」时很有用。
       </p>
     </div>
 
@@ -97,21 +97,21 @@ const es: ReactNode = (
     <p>
       Pega cualquier artículo, borrador de blog, guion o discurso y esta herramienta estima al instante{' '}
       <strong>cuánto tiempo lleva leerlo o decirlo en voz alta</strong>, junto con los recuentos de palabras,
-      caracteres, frases y páginas. Está pensada para escritores que comprueban las insignias de tiempo de lectura,
-      oradores que cronometran una charla y podcasters que dimensionan un guion. Todo se ejecuta en tu navegador; tu
+      caracteres, frases y páginas. Está pensada para escritores que comprueban las etiquetas de tiempo de lectura,
+      oradores que cronometran una charla y podcasters que calculan la duración de un guion. Todo se ejecuta en tu navegador; tu
       texto nunca se sube.
     </p>
 
     <div>
       <h2>Cómo se calcula la estimación</h2>
       <p>
-        Las palabras se cuentan dividiendo el texto recortado por los espacios en blanco, y el tiempo es simplemente{' '}
+        Las palabras se cuentan dividiendo por espacios en blanco el texto tras recortar los extremos, y el tiempo es simplemente{' '}
         <code>words ÷ words-per-minute</code>. Los preajustes cubren velocidades habituales:{' '}
-        <strong>lectura lenta</strong> (100 wpm), el <strong>promedio de adultos</strong> (~150 wpm),{' '}
-        <strong>lectura rápida</strong> (200 wpm) y <strong>lectura diagonal</strong> (300 wpm), además de un
-        deslizador personalizado de 50–400 wpm. Los preajustes de habla reflejan una entrega real: una{' '}
-        <strong>presentación</strong> mesurada (~100 wpm), una <strong>conversación</strong> normal (~130 wpm) y un{' '}
-        <strong>hablante rápido</strong> (~160 wpm). Con texto chino, japonés o coreano, cada carácter cuenta
+        <strong>lectura lenta</strong> (100 ppm), el <strong>promedio de adultos</strong> (~150 ppm),{' '}
+        <strong>lectura rápida</strong> (200 ppm) y <strong>lectura diagonal</strong> (300 ppm), además de un
+        deslizador personalizado de 50–400 ppm. Los preajustes de habla reflejan una entrega real: una{' '}
+        <strong>presentación</strong> mesurada (~100 ppm), una <strong>conversación</strong> normal (~130 ppm) y un{' '}
+        <strong>hablante rápido</strong> (~160 ppm). Con texto chino, japonés o coreano, cada carácter cuenta
         como una palabra y los preajustes cambian automáticamente a caracteres por minuto (lectura
         200/300/400/600, habla 150/200/250), con el deslizador hasta 800.
       </p>
@@ -120,9 +120,9 @@ const es: ReactNode = (
     <div>
       <h2>¿Qué número deberías usar?</h2>
       <p>
-        Para una <strong>insignia de tiempo de lectura de blog</strong>, algunos plugins de CMS asumen 150–200
-        wpm; Medium, por ejemplo, asume ~265 wpm. Para un <strong>discurso o locución</strong>, usa las cifras de habla
-        — y recuerda que asumen una entrega continua. Diapositivas, demos, pausas para las risas y Q&A añaden
+        Para una <strong>etiqueta de tiempo de lectura de blog</strong>, algunos plugins de CMS asumen 150–200
+        ppm; Medium, por ejemplo, asume ~265 ppm. Para un <strong>discurso o locución</strong>, usa los tiempos de habla
+        — y recuerda que suponen hablar sin interrupciones. Diapositivas, demos, pausas para las risas y Q&A añaden
         fácilmente un 10–20 %, así que si la herramienta dice 9:30, planifica un hueco de 10–11 minutos. La
         estimación de <em>páginas</em> (250 palabras/página) ayuda cuando un brief pide «unas cuatro páginas».
       </p>
@@ -150,20 +150,22 @@ const de: ReactNode = (
       Füge einen beliebigen Artikel, Blog-Entwurf, ein Skript oder eine Rede ein und dieses Werkzeug schätzt sofort{' '}
       <strong>wie lange es dauert, ihn zu lesen oder laut vorzutragen</strong> — inklusive Wort-, Zeichen-, Satz-
       und Seitenanzahl. Es ist gemacht für Autoren, die Read-Time-Badges prüfen, für Vortragende, die einen Talk
-      timen, und für Podcaster, die ein Skript vermessen. Alles läuft in deinem Browser; dein Text wird nie
+      timen, und für Podcaster, die die Länge eines Skripts
+      abschätzen. Alles läuft in deinem Browser; dein Text wird nie
       hochgeladen.
     </p>
 
     <div>
       <h2>Wie die Schätzung berechnet wird</h2>
       <p>
-        Wörter werden gezählt, indem der getrimmte Text an Leerzeichen geteilt wird, und die Zeit ist einfach{' '}
+        Wörter werden gezählt, indem der Text an Anfang und Ende von Leerzeichen befreit und anschließend an
+        Leerzeichen aufgeteilt wird; die Zeit ist einfach{' '}
         <code>words ÷ words-per-minute</code>. Voreinstellungen decken gängige Geschwindigkeiten ab:{' '}
-        <strong>langsames Lesen</strong> (100 wpm), der <strong>Erwachsenen-Durchschnitt</strong> (~150 wpm),{' '}
-        <strong>schnelles Lesen</strong> (200 wpm) und <strong>überfliegendes Lesen</strong> (300 wpm), plus ein
-        Schieberegler von 50–400 wpm. Sprech-Voreinstellungen spiegeln reales Sprechen: eine gemessene{' '}
-        <strong>Präsentation</strong> (~100 wpm), ein normales <strong>Gespräch</strong> (~130 wpm) und ein{' '}
-        <strong>schneller Sprecher</strong> (~160 wpm). Bei chinesischem, japanischem oder koreanischem Text
+        <strong>langsames Lesen</strong> (100 WpM), der <strong>Erwachsenen-Durchschnitt</strong> (~150 WpM),{' '}
+        <strong>schnelles Lesen</strong> (200 WpM) und <strong>überfliegendes Lesen</strong> (300 WpM), plus ein
+        Schieberegler von 50–400 WpM. Sprech-Voreinstellungen spiegeln reales Sprechen wider: eine{' '}
+        <strong>Präsentation</strong> in ruhigem Tempo (~100 WpM), ein normales <strong>Gespräch</strong> (~130 WpM) und ein{' '}
+        <strong>schneller Sprecher</strong> (~160 WpM). Bei chinesischem, japanischem oder koreanischem Text
         zählt jedes Zeichen als Wort, und die Voreinstellungen wechseln automatisch auf Zeichen pro Minute
         (Lesen 200/300/400/600, Sprechen 150/200/250); der Regler reicht dann bis 800.
       </p>
@@ -172,22 +174,22 @@ const de: ReactNode = (
     <div>
       <h2>Welche Zahl solltest du verwenden?</h2>
       <p>
-        Für ein <strong>Blog-Read-Time-Badge</strong> nehmen manche CMS-Plugins 150–200 wpm an; Medium geht
-        beispielsweise von ~265 wpm aus. Für eine <strong>Rede oder Sprechrolle</strong> verwende die Sprech-Zahlen — und denke
-        daran, dass sie durchgehendes Sprechen voraussetzen. Folien, Demos, Lach-Pausen und Q&A bringen leicht
+        Für ein <strong>Blog-Read-Time-Badge</strong> nehmen manche CMS-Plugins 150–200 WpM an; Medium geht
+        beispielsweise von ~265 WpM aus. Für eine <strong>Rede oder ein Voice-over</strong> verwende die Sprechwerte — und denke
+        daran, dass sie durchgehendes Sprechen voraussetzen. Folien, Demos, Lachpausen und Q&A bringen leicht
         10–20 % extra, also plane bei einer Tool-Angabe von 9:30 einen 10–11-Minuten-Slot ein. Die{' '}
-        <em>Seiten</em>-Schätzung (250 Wörter/Seite) hilft bei Briefings, die „ungefähr vier Seiten" verlangen.
+        <em>Seiten</em>-Schätzung (250 Wörter/Seite) hilft bei Briefings, die „ungefähr vier Seiten“ verlangen.
       </p>
     </div>
 
     <div>
       <h2>Wissenswerte Einschränkungen</h2>
       <p>
-        Schätzungen behandeln jedes Token als ein Wort, daher laufen dichte Fachprosa, Code-Blöcke, laut vorgelesene
-        Zahlen („3.14159" dauert eine Weile) und unbekannte Namen in der Praxis langsamer. Sätze werden über
+        Schätzungen behandeln jedes Token als ein Wort, daher kosten dichte Fachprosa, Code-Blöcke, laut vorgelesene
+        Zahlen („3.14159“ dauert eine Weile) und unbekannte Namen in der Praxis mehr Zeit. Sätze werden über
         Satzschlusszeichen (<code>.</code>, <code>!</code>, <code>?</code>) gezählt, deshalb können Abkürzungen und
         Auslassungspunkte die Zahl leicht verändern. Bei zeitkritischen Einsätzen — einer Keynote, einem
-        Broadcast-Segment — mach immer einen echten Durchlauf mit Stoppuhr.
+        Broadcast-Segment — mach immer einen echten Probelauf mit der Stoppuhr.
       </p>
     </div>
   </section>

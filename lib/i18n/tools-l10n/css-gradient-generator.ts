@@ -23,8 +23,8 @@ export const cssGradientGeneratorL10n: ToolL10n = {
       'mode.radial': '径向',
       'noteIntro': '💡 网格渐变用堆叠的 ',
       'noteMid': ' 层模拟——每种颜色向 ',
-      'noteOutro': ' 之上渐变。这在所有现代浏览器中都无需图片、SVG 或 JavaScript 即可工作。',
-      'noteOverBase': ' 在底色 ',
+      'noteOutro': ' 之上。这在所有现代浏览器中都无需图片、SVG 或 JavaScript 即可工作。',
+      'noteOverBase': ' 渐隐,垫在底色 ',
       'optionCircle': '圆形',
       'optionEllipse': '椭圆',
       'pos.bottom': '下',
@@ -57,7 +57,7 @@ export const cssGradientGeneratorL10n: ToolL10n = {
       },
       {
         q: '怎么加超过两个色标?',
-        a: '在预览条上加色标并拖动定位,每个色标会自动得到百分比位置。生成器会把完整色标列表写进 CSS,所以多色混合和硬边色带都能一键复制粘贴。',
+        a: '点「+ 添加色标」新增一个色标,再用每个色标旁的百分比数字框(0-100)设定位置。生成器会把完整色标列表写进 CSS,所以多色混合和硬边色带都能一键复制粘贴。',
       },
       {
         q: '输出能在所有浏览器里用吗?',
@@ -72,17 +72,17 @@ export const cssGradientGeneratorL10n: ToolL10n = {
       'colorStops': 'Paradas de color',
       'copyCss': 'Copiar CSS',
       'gradientPreviewAria': 'Vista previa en vivo del degradado',
-      'meshColorAria': 'Color de malla ',
+      'meshColorAria': 'Color mesh ',
       'meshPreset.0': 'Equilibrado',
       'meshPreset.1': 'Esquinas',
       'meshPreset.2': 'Brillo superior',
       'meshPreset.3': 'Diagonal',
-      'meshPreset.4': 'Estallido central',
+      'meshPreset.4': 'Explosión central',
       'mode.linear': 'lineal',
-      'mode.mesh': 'malla',
+      'mode.mesh': 'Mesh',
       'mode.radial': 'radial',
-      'noteIntro': '💡 Los degradados malla se simulan con capas ',
-      'noteMid': ' apiladas — cada color se desvanece hacia ',
+      'noteIntro': '💡 Los degradados mesh se simulan con capas apiladas de ',
+      'noteMid': ' — cada color se desvanece hacia ',
       'noteOutro': '. Funciona en cualquier navegador moderno sin imágenes, SVG ni JavaScript.',
       'noteOverBase': ' sobre una base ',
       'optionCircle': 'Círculo',
@@ -97,7 +97,7 @@ export const cssGradientGeneratorL10n: ToolL10n = {
       'pos.top left': 'arriba izquierda',
       'pos.top right': 'arriba derecha',
       'position': 'Posición',
-      'positionPreset': 'Preset de posición',
+      'positionPreset': 'Preajuste de posición',
       'randomPalette': 'Paleta aleatoria',
       'remove': 'Quitar',
       'shape': 'Forma',
@@ -113,11 +113,11 @@ export const cssGradientGeneratorL10n: ToolL10n = {
     faqs: [
       {
         q: '¿Cuál es la diferencia entre degradado lineal y radial?',
-        a: 'Un degradado lineal mezcla colores a lo largo de una línea recta en el ángulo que fijes, mientras que uno radial irradia hacia afuera desde un punto central en círculo o elipse. Usa lineal para fondos y botones; radial para focos y efectos esféricos.',
+        a: 'Un degradado lineal mezcla colores a lo largo de una línea recta en el ángulo que fijes, mientras que uno radial irradia hacia afuera desde un punto central, en forma de círculo o elipse. Usa lineal para fondos y botones; radial para focos y efectos esféricos.',
       },
       {
-        q: '¿Cómo añado más de dos puntos de color?',
-        a: 'Añade puntos en la barra de previsualización y arrástralos para posicionarlos; cada uno recibe automáticamente una posición en porcentaje. El generador escribe la lista completa de puntos en el CSS, así que mezclas multicolor y bandas de borde duro se copian listas para pegar.',
+        q: '¿Cómo añado más de dos paradas de color?',
+        a: 'Añade paradas con el botón «+ Añadir parada» y fija la posición de cada una en su casilla numérica de porcentaje (0-100). El generador escribe la lista completa de paradas en el CSS, así que las mezclas multicolor y las bandas de bordes duros quedan listas para copiar y pegar.',
       },
       {
         q: '¿La salida funciona en todos los navegadores?',
@@ -137,7 +137,7 @@ export const cssGradientGeneratorL10n: ToolL10n = {
       'meshPreset.1': 'Ecken',
       'meshPreset.2': 'Oberes Glühen',
       'meshPreset.3': 'Diagonal',
-      'meshPreset.4': 'Zentraler Ausbruch',
+      'meshPreset.4': 'Zentrale Explosion',
       'mode.linear': 'linear',
       'mode.mesh': 'Mesh',
       'mode.radial': 'radial',
@@ -162,7 +162,7 @@ export const cssGradientGeneratorL10n: ToolL10n = {
       'remove': 'Entfernen',
       'shape': 'Form',
       'stopColorAria': 'Stop-Farbe ',
-      'stopPositionAria': 'Stop-Position Prozent',
+      'stopPositionAria': 'Stop-Position in Prozent',
     },
     useCases: [
       'CSS-Mesh-Gradient-Generator',
@@ -173,11 +173,11 @@ export const cssGradientGeneratorL10n: ToolL10n = {
     faqs: [
       {
         q: 'Was ist der Unterschied zwischen linearen und radialen Gradienten?',
-        a: 'Ein linearer Gradient mischt Farben entlang einer Geraden im von dir gesetzten Winkel, ein radialer Gradient strahlt von einem Mittelpunkt nach außen in Kreis oder Ellipse. Linear für Hintergründe und Schaltflächen; radial für Scheinwerfer und kugelige Effekte.',
+        a: 'Ein linearer Gradient mischt Farben entlang einer Geraden im von dir gesetzten Winkel, ein radialer Gradient strahlt von einem Mittelpunkt nach außen, in Form eines Kreises oder einer Ellipse. Linear für Hintergründe und Schaltflächen; radial für Spotlights und kugelförmige Effekte.',
       },
       {
         q: 'Wie füge ich mehr als zwei Farbstops hinzu?',
-        a: 'Füge Stops auf der Vorschau-Leiste hinzu und ziehe sie an die Position; jeder erhält automatisch eine Prozentposition. Der Generator schreibt die gesamte Stoppliste ins CSS, sodass Mehrfarb-Mischungen und harte Farbbänder kopierfertig entstehen.',
+        a: 'Füge Stops mit der Schaltfläche „+ Stop hinzufügen“ hinzu und setze die Position jedes Stops im Prozent-Zahlenfeld (0-100) daneben. Der Generator schreibt die gesamte Stoppliste ins CSS, sodass sich Mehrfarb-Mischungen und harte Farbbänder direkt kopieren und einfügen lassen.',
       },
       {
         q: 'Funktioniert die Ausgabe in allen Browsern?',

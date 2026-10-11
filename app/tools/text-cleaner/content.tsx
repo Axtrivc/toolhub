@@ -77,7 +77,7 @@ const zh: ReactNode = (
     <div>
       <h2>操作顺序很重要</h2>
       <p>
-        处理流水线按精心设计的顺序运行：HTML 标签和 URL 会在特殊字符剥离之 <em>前</em> 先被移除——否则 URL 会在 URL 移除器识别它之前就被切成碎片。重音也会在特殊字符剥离之前被折叠，于是带重音的字母会变成普通 ASCII，而不是被直接删除。空白操作（合并空格、修剪行、删除空行）放在最后，把前面步骤留下的杂乱一并收拾干净。前后的字符计数会准确显示移除了多少。
+        处理流水线按精心设计的顺序运行：HTML 标签和 URL 会在特殊字符剥离之 <em>前</em> 先被移除——否则 URL 会先被切成碎片，让网址清理规则无从识别。重音折叠同样在特殊字符剥离之前进行，于是带重音的字母会变成普通 ASCII，而不是被直接删除。空白操作（合并空格、修剪行、删除空行）放在最后，把前面步骤留下的杂乱一并收拾干净。清洗前后的字符数对比会准确显示移除了多少。
       </p>
     </div>
 
@@ -95,20 +95,20 @@ const es: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>¿Qué es esta herramienta?</h2>
     <p>
-      Un <strong>limpiador de texto profundo</strong> que depura el texto pegado hasta dejar exactamente lo que quieres conservar: elimina emojis y pictogramas, quita acentos y diacríticos, borra caracteres especiales, corta URLs y etiquetas HTML, colapsa espacios en blanco descontrolados, suprime líneas vacías y pasa todo a minúsculas. Resulta práctico cuando limpias contenido web copiado, preparas datos para importar o normalizas texto generado por usuarias. Todo se ejecuta 100 % en tu navegador — tu texto no se envía a ningún sitio.
+      Un <strong>limpiador de texto profundo</strong> que depura el texto pegado hasta dejar exactamente lo que quieres conservar: elimina emojis y pictogramas, quita acentos y diacríticos, borra caracteres especiales, corta URLs y etiquetas HTML, colapsa espacios en blanco descontrolados, suprime líneas vacías y pasa todo a minúsculas. Resulta práctico cuando limpias contenido web copiado, preparas datos para importar o normalizas texto generado por usuarios. Todo se ejecuta 100 % en tu navegador — tu texto no se envía a ningún sitio.
     </p>
 
     <div>
       <h2>Cada limpiador es un interruptor independiente</h2>
       <p>
-        No ocurre nada salvo que lo pidas. Marca solo las operaciones que necesites — la salida se actualiza en vivo mientras escribes o activas interruptores. La opción <strong>Quitar caracteres especiales</strong> conserva letras, dígitos y espacios más lo que pongas en el campo <em>caracteres a conservar</em> (por defecto <code>.,!?-&apos;&quot;</code>), así la puntuación que te importa sobrevive mientras ™, © y otros símbolos sueltos desaparecen. La eliminación de acentos usa normalización Unicode (<code>NFD</code>) para descomponer <code>é</code> en <code>e</code> + acento y luego quitar el acento — de modo que <em>café</em> pasa limpiamente a <em>cafe</em>.
+        No ocurre nada salvo que lo pidas. Marca solo las operaciones que necesites — la salida se actualiza en vivo mientras escribes o activas interruptores. La opción <strong>Quitar caracteres especiales</strong> conserva letras, dígitos y espacios, además de lo que pongas en el campo <em>caracteres a conservar</em> (por defecto <code>.,!?-&apos;&quot;</code>), así la puntuación que te importa sobrevive mientras ™, © y otros símbolos sueltos desaparecen. La eliminación de acentos usa normalización Unicode (<code>NFD</code>) para descomponer <code>é</code> en <code>e</code> + acento y luego quitar el acento — de modo que <em>café</em> pasa limpiamente a <em>cafe</em>.
       </p>
     </div>
 
     <div>
       <h2>El orden de las operaciones importa</h2>
       <p>
-        La tubería se ejecuta en un orden deliberado: las etiquetas HTML y las URLs se eliminan <em>primero</em>, antes de quitar caracteres especiales — de lo contrario una URL quedaría hecha pedazos antes de que el eliminador de URLs pudiera reconocerla. Los acentos también se pliegan antes de la eliminación de caracteres especiales, así las letras acentuadas se convierten en ASCII plano en vez de borrarse. Las operaciones de espacios en blanco (colapsar espacios, recortar líneas, eliminar líneas vacías) se ejecutan al final, ordenando lo que dejaron los pasos previos. Los conteos de caracteres «antes/después» muestran exactamente cuánto se eliminó.
+        La tubería se ejecuta en un orden deliberado: las etiquetas HTML y las URLs se eliminan <em>primero</em>, antes de quitar caracteres especiales — de lo contrario, la URL acabaría hecha pedazos antes de que el paso de eliminación de URLs pudiera reconocerla. Los acentos también se pliegan antes de la eliminación de caracteres especiales, así las letras acentuadas se convierten en ASCII plano en vez de borrarse. Las operaciones de espacios en blanco (colapsar espacios, recortar líneas, eliminar líneas vacías) se ejecutan al final, ordenando lo que dejaron los pasos previos. Los conteos de caracteres «antes/después» muestran exactamente cuánto se eliminó.
       </p>
     </div>
 
@@ -132,21 +132,21 @@ const de: ReactNode = (
     <div>
       <h2>Jeder Reiniger ist ein unabhängiger Schalter</h2>
       <p>
-        Nichts passiert, außer du forderst es. Aktiviere nur die Operationen, die du brauchst — die Ausgabe aktualisiert sich live, während du tippst oder Schalter umlegst. Die Option <strong>Sonderzeichen entfernen</strong> behält Buchstaben, Ziffern und Leerzeichen plus das, was du ins Feld <em>zu behaltende Zeichen</em> einträgst (Standard <code>.,!?-&apos;&quot;</code>), sodass die Zeichensetzung, die dir wichtig ist, erhalten bleibt, während ™, © und verstreute Symbole verschwinden. Die Akzententfernung nutzt Unicode-Normalisierung (<code>NFD</code>), um <code>é</code> in <code>e</code> + Akzent zu zerlegen, und streift dann den Akzent — aus <em>café</em> wird so sauber <em>cafe</em>.
+        Nichts passiert, außer du verlangst es. Aktiviere nur die Operationen, die du brauchst — die Ausgabe aktualisiert sich live, während du tippst oder Schalter umlegst. Die Option <strong>Sonderzeichen entfernen</strong> behält Buchstaben, Ziffern und Leerzeichen plus das, was du ins Feld <em>zu behaltende Zeichen</em> einträgst (Standard <code>.,!?-&apos;&quot;</code>), sodass die Zeichensetzung, die dir wichtig ist, erhalten bleibt, während ™, © und verstreute Symbole verschwinden. Die Akzententfernung nutzt Unicode-Normalisierung (<code>NFD</code>), um <code>é</code> in <code>e</code> + Akzent zu zerlegen, und streift dann den Akzent — aus <em>café</em> wird so sauber <em>cafe</em>.
       </p>
     </div>
 
     <div>
       <h2>Die Reihenfolge der Operationen ist wichtig</h2>
       <p>
-        Die Pipeline läuft in einer bewussten Reihenfolge: HTML-Tags und URLs werden <em>zuerst</em> entfernt, noch bevor Sonderzeichen gestrippt werden — sonst würde eine URL in Stücke zerrissen, bevor der URL-Entferner sie erkennen könnte. Auch Akzente werden vor dem Sonderzeichen-Stripping gefaltet, sodass akzentuierte Buchstaben zu plain ASCII werden, statt gelöscht zu werden. Leerzeichen-Operationen (Leerzeichen zusammenziehen, Zeilen trimmen, Leerzeilen entfernen) laufen zuletzt und räumen auf, was die früheren Schritte hinterlassen haben. Die Vorher-/Nachher-Zeichenzähler zeigen genau, wie viel entfernt wurde.
+        Die Pipeline läuft in einer bewussten Reihenfolge: HTML-Tags und URLs werden <em>zuerst</em> entfernt, noch bevor Sonderzeichen aussortiert werden — sonst würde eine URL in Stücke zerrissen, bevor die URL-Regel sie erkennen könnte. Auch Akzente werden vor dem Sonderzeichen-Stripping gefaltet, sodass akzentuierte Buchstaben zu reinem ASCII werden, statt gelöscht zu werden. Leerzeichen-Operationen (Leerzeichen zusammenziehen, Zeilen trimmen, Leerzeilen entfernen) laufen zuletzt und räumen auf, was die früheren Schritte hinterlassen haben. Die Vorher-/Nachher-Zeichenzähler zeigen genau, wie viel entfernt wurde.
       </p>
     </div>
 
     <div>
       <h2>Tipps und Fallstricke</h2>
       <p>
-        Das Entfernen von Emojis entfernt auch Dingbats und Symbolbereiche wie ✓ und ❤ — das ist beabsichtigt, aber gut zu wissen, wenn deine Häkchen wichtig sind. Die Kleinschreibung wird auf den gesamten Text angewendet, ist also ungeeignet, wenn Groß-/Kleinschreibung Bedeutung trägt (Akronyme, Satzanfang-Großschreibung für Publikationen). Wenn du bestimmte Symbole behalten willst — etwa <code>#</code> für Überschriften oder <code>@</code> für Erwähnungen — füge sie einfach zur Behaltens-Liste hinzu. Im Zweifel aktiviere jeweils nur einen Reiniger und beobachte die Live-Vorschau.
+        Das Entfernen von Emojis erfasst auch Dingbats und Symbolbereiche wie ✓ und ❤ — das ist beabsichtigt, aber gut zu wissen, wenn deine Häkchen wichtig sind. Die Kleinschreibung wird auf den gesamten Text angewendet, ist also ungeeignet, wenn Groß-/Kleinschreibung Bedeutung trägt (Akronyme, Satzanfang-Großschreibung für Publikationen). Wenn du bestimmte Symbole behalten willst — etwa <code>#</code> für Überschriften oder <code>@</code> für Erwähnungen — füge sie einfach zur Liste der zu behaltenden Zeichen hinzu. Im Zweifel aktiviere jeweils nur einen Reiniger und beobachte die Live-Vorschau.
       </p>
     </div>
   </section>

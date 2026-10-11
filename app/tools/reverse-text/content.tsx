@@ -45,10 +45,10 @@ const zh: ReactNode = (
       <h2>有趣与实用的用途</h2>
       <ul>
         <li><strong>谜题和文字游戏</strong> —— 解码反转的消息</li>
-        <li><strong>创作回文/对称图形</strong>或对称设计</li>
-        <li><strong>测试代码</strong>,处理字符串的程序</li>
+        <li><strong>创作双向图(ambigram)</strong>或对称设计</li>
+        <li><strong>测试处理字符串的代码</strong></li>
         <li><strong>隐私保护</strong> —— 反转邮箱地址可以迷惑基础的爬虫(john@example.com → moc.elpmaxe@nhoj)</li>
-        <li><strong>希伯来语/阿拉伯语处理</strong>,在从左到右的环境中</li>
+        <li><strong>在从左到右的环境中处理希伯来语/阿拉伯语文本</strong></li>
       </ul>
     </div>
     <div>
@@ -115,8 +115,8 @@ const de: ReactNode = (
     <div>
       <h2>Wörter vs. Zeichen umkehren</h2>
       <p>
-        Dieses Werkzeug kehrt <em>Zeichen</em> um. Um die Wortreihenfolge umzukehren („hello world"
-        → „world hello"), würdest du an Leerzeichen aufteilen, das Array umkehren und wieder
+        Dieses Werkzeug kehrt <em>Zeichen</em> um. Um die Wortreihenfolge umzukehren („hello world“
+        → „world hello“), würdest du an Leerzeichen aufteilen, das Array umkehren und wieder
         zusammenfügen. Zeichenumkehr ist die häufigere Anfrage und ist, was dieses Werkzeug tut.
       </p>
     </div>

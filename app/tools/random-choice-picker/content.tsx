@@ -62,7 +62,7 @@ const zh: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>这是什么工具?</h2>
     <p>
-      决定不了去哪儿吃、谁先来,或者哪张票中奖?这个<strong>随机选择器</strong>接收一个选项列表(每行一个),用快速的滚动动画和令人满意的揭晓效果抽出一个或多个中奖者。它使用你浏览器的<strong>加密安全随机数生成器</strong>,完全离线运行,并保留历史抽奖记录,让抽奖可审计。
+      决定不了去哪儿吃、谁先来,或者哪张票中奖?这个<strong>随机选择器</strong>接收一个选项列表(每行一个),用快速的滚动动画抽出一名或多名中奖者,揭晓一刻充满惊喜。它使用你浏览器的<strong>加密安全随机数生成器</strong>,完全离线运行,并保留历史抽奖记录,让抽奖可审计。
     </p>
 
     <div>
@@ -75,7 +75,7 @@ const zh: ReactNode = (
     <div>
       <h2>中奖者、重复与移除</h2>
       <p>
-        设置<strong>中奖者数量</strong>可以一次抽取多个(会按你的选项数量截断)。默认开启<em>不重复中奖</em>时,采用<strong>不放回抽样</strong>,就像从帽子里抽名字;关闭它则允许同一选项多次中奖,就像反复转动转盘。开启<em>抽中后移除该选项</em>,可以在抽取过程中把中奖的选项从列表中划掉 —— 适合淘汰轮次或给整个小组分配先后顺序。
+        设置<strong>中奖者数量</strong>可以一次抽取多个(会自动限制在选项总数以内)。默认开启<em>不重复中奖</em>时,采用<strong>不放回抽样</strong>,就像从帽子里抽名字;关闭它则允许同一选项多次中奖,就像反复转动转盘。开启<em>抽中后移除该选项</em>,可以在抽取过程中把中奖的选项从列表中划掉 —— 适合淘汰轮次或给整个小组分配先后顺序。
       </p>
     </div>
 
@@ -94,7 +94,7 @@ const es: ReactNode = (
     <h2>¿Qué es esta herramienta?</h2>
     <p>
       ¿No puedes decidir dónde comer, quién va primero o qué billete se lleva el premio? Este{' '}
-      <strong>selector de elección aleatoria</strong> toma una lista de opciones — una por línea — y saca uno o más
+      <strong>selector de elección aleatoria</strong> toma una lista de opciones — una por línea — y extrae uno o más
       ganadores con una rápida animación de giro y un revelado satisfactorio. Usa el{' '}
       <strong>generador aleatorio criptográficamente seguro</strong> de tu navegador, funciona completamente sin
       conexión y guarda un historial de sorteos pasados para que las rifas sean auditables.
@@ -107,7 +107,7 @@ const es: ReactNode = (
         los navegadores usan para las claves de seguridad — combinada con <strong>muestreo por rechazo</strong>, que
         elimina el sutil sesgo que un <code>random() % n</code> ingenuo introduce. Por tanto, cada opción tiene
         exactamente las mismas posibilidades. La pantalla giratoria es puro espectáculo: los ganadores ya están
-        decididos antes de que empiece la animación, así que el resultado no puede influirse por cuándo apartas la
+        decididos antes de que empiece la animación, así que el resultado no depende de cuándo apartas la
         mirada.
       </p>
     </div>
@@ -115,12 +115,12 @@ const es: ReactNode = (
     <div>
       <h2>Ganadores, repeticiones y eliminación</h2>
       <p>
-        Ajusta el <strong>número de ganadores</strong> para sacar varios a la vez (se limita a tu número de
-        opciones). Con <em>sin ganadores repetidos</em> activado — el valor por defecto — los sorteos se hacen{' '}
+        Ajusta el <strong>número de ganadores</strong> para extraer varios a la vez (se limita a tu número de
+        opciones). Con <em>sin repetir ganadores</em> activado — el valor por defecto — los sorteos se hacen{' '}
         <strong>sin reemplazo</strong>, como sacar nombres de un sombrero; desactívalo para permitir que la misma
-        opción gane varias veces, como girar una ruleta repetidamente. Activa <em>eliminar ganador tras
-        elegirlo</em> para tachar ganadores de la lista sobre la marcha — útil para rondas eliminatorias o repartir
-        turnos a todo un grupo.
+        opción gane varias veces, como girar una ruleta repetidamente. Activa <em>quitar ganador tras
+        elegir</em> para tachar ganadores de la lista sobre la marcha — útil para rondas eliminatorias o para
+        repartir turnos a todo un grupo.
       </p>
     </div>
 
@@ -144,9 +144,9 @@ const de: ReactNode = (
     <p>
       Kannst du dich nicht entscheiden, wo es zum Essen gehen soll, wer zuerst dran ist oder welches Los den Preis
       bekommt? Dieser <strong>Zufallsauswahl-Picker</strong> nimmt eine Liste von Optionen — eine pro Zeile — und
-      zieht einen oder mehrere Gewinner mit einer schnellen Dreh-Animation und einer befriedigenden Enthüllung. Er
+      zieht einen oder mehrere Gewinner mit einer schnellen Dreh-Animation und einem spannenden Enthüllungsmoment. Er
       verwendet den <strong>kryptografisch sicheren Zufallsgenerator</strong> deines Browsers, läuft komplett
-      offline und führt einen Verlauf vergangener Ziehungen, damit Verlosungen prüfbar bleiben.
+      offline und speichert den Verlauf vergangener Ziehungen, damit Verlosungen prüfbar bleiben.
     </p>
 
     <div>
@@ -156,7 +156,7 @@ const de: ReactNode = (
         für Sicherheitsschlüssel nutzen — kombiniert mit <strong>Rejection Sampling</strong>, das den subtilen Bias
         entfernt, den ein naives <code>random() % n</code> einführt. Jede Option hat deshalb exakt die gleiche
         Chance. Die Dreh-Anzeige ist reine Show: Die Gewinner stehen schon fest, bevor die Animation startet, also
-        kann das Ergebnis nicht davon beeinflusst werden, wann du wegschaust.
+        hängt das Ergebnis nicht davon ab, wann du wegschaust.
       </p>
     </div>
 
@@ -164,11 +164,11 @@ const de: ReactNode = (
       <h2>Gewinner, Wiederholungen und Entfernung</h2>
       <p>
         Stelle die <strong>Anzahl der Gewinner</strong> ein, um mehrere auf einmal zu ziehen (sie wird auf deine
-        Optionsanzahl begrenzt). Mit <em>keine Gewinner wiederholen</em> an — dem Standard — wird{' '}
+        Optionsanzahl begrenzt). Mit <em>„keine wiederholten Gewinner“</em> an — dem Standard — wird{' '}
         <strong>ohne Zurücklegen</strong> gezogen, wie Namen aus einem Hut ziehen; schalte es aus, um dieselbe
-        Option mehrfach gewinnen zu lassen, wie ein wiederholt gedrehtes Rad. Aktiviere <em>Gewinner nach dem
-        Ziehen entfernen</em>, um Gewinner unterwegs von der Liste zu streichen — praktisch für
-        Ausscheidungsrunden oder das Austeilen an eine ganze Gruppe.
+        Option mehrfach gewinnen zu lassen — wie bei einem Rad, das immer wieder gedreht wird. Aktiviere <em>Gewinner
+        nach dem Ziehen entfernen</em>, um Gewinner unterwegs von der Liste zu streichen — praktisch für
+        Ausscheidungsrunden oder um einer ganzen Gruppe die Reihenfolge auszulosen.
       </p>
     </div>
 
@@ -177,7 +177,7 @@ const de: ReactNode = (
       <p>
         Jede Zeile ist eine Option; Leerzeilen und umgebende Leerzeichen werden ignoriert, und du brauchst{' '}
         <strong>mindestens zwei Optionen</strong> zum Ziehen. Doppelte Zeilen werden als separate Einträge
-        behandelt — also verdoppelt die doppelte Eingabe eines Namens dessen Chancen wirklich, was ein Feature
+        behandelt — gibst du einen Namen doppelt ein, verdoppelt sich seine Gewinnchance wirklich, was ein Feature
         ist, wenn du eine gewichtete Verlosung durchführst. Bei wichtigen Ziehungen lies die{' '}
         <em>Verlauf</em>-Liste beim Ziehen laut vor; sie notiert deine letzten 20 Ergebnisse mit dem neuesten
         zuerst, bis du sie löschst.

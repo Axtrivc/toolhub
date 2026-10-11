@@ -46,7 +46,7 @@ const en: ReactNode = (
 const zh: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>这是什么工具?</h2>
-    <p><strong>DTI</strong>(债务收入比)将你的月度偿债支出与税前收入进行对比。贷款机构在审批房贷、车贷和信用卡时,会把它作为关键指标。</p>
+    <p><strong>DTI</strong>(负债收入比)将你的月度偿债支出与税前收入进行对比。贷款机构在审批房贷、车贷和信用卡时,会把它作为关键指标。</p>
 
     <div>
       <h2>贷款机构的 DTI 阈值</h2>
@@ -91,7 +91,7 @@ const es: ReactNode = (
 
     <div>
       <h2>La regla 28/36</h2>
-      <p>Una pauta clásica: el pago de la vivienda no debe superar el 28 % de los ingresos brutos; el total de deudas (incluida la vivienda), el 36 %. Muchas hipotecas convencionales permiten hasta un 43-50 % en el backend con un buen historial crediticio.</p>
+      <p>Una pauta clásica: el pago de la vivienda no debe superar el 28 % de los ingresos brutos; el total de deudas (incluida la vivienda), el 36 %. Muchas hipotecas convencionales permiten hasta un 43-50 % en el back end con un buen historial crediticio.</p>
     </div>
 
     <div>
@@ -123,7 +123,7 @@ const de: ReactNode = (
 
     <div>
       <h2>Die 28/36-Regel</h2>
-      <p>Eine klassische Richtlinie: Die Wohnungsbelastung sollte ≤28 % des Bruttoeinkommens betragen; die Gesamtschulden (einschließlich Wohnen) ≤36 %. Viele konventionelle Hypotheken erlauben auf der Rückseite bis zu 43-50 % bei starker Bonität.</p>
+      <p>Eine klassische Richtlinie: Die Wohnungsbelastung sollte ≤28 % des Bruttoeinkommens betragen; die Gesamtschulden (einschließlich Wohnen) ≤36 %. Viele konventionelle Hypotheken erlauben bei der Back-End-Quote bis zu 43-50 %, sofern die Bonität stark ist.</p>
     </div>
 
     <div>

@@ -217,7 +217,7 @@ export function GptTokenCounterClient() {
           centerLabel={L('chartCenter', 'Total')}
           centerValue={formatUsd(totalCost)}
           slices={[
-            { label: L('sliceInput', `Input (${model.label})`), value: inputCost, color: '#3b82f6' },
+            { label: `${L('sliceInput', 'Input')} (${model.label})`, value: inputCost, color: '#3b82f6' },
             { label: L('sliceOutput', 'Output'), value: outputCost, color: '#f59e0b' },
           ]}
         />

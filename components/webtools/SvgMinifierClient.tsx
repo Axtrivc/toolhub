@@ -432,7 +432,7 @@ export function SvgMinifierClient() {
           <div className="flex flex-wrap items-center gap-3">
             <CopyButton value={output} label={L('copySvg', 'Copy SVG')} />
             <button type="button" onClick={download} className="btn btn-secondary">
-              {L('downloadMinified', 'Download minified.svg')}
+              {L('downloadMinified', 'Download minified SVG')}
             </button>
           </div>
         </div>

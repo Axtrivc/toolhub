@@ -84,7 +84,7 @@ const zh: ReactNode = (
     <div>
       <h2>用价格表估算 prompt 成本</h2>
       <p>
-        下拉菜单列出了 OpenAI、Anthropic、Google、DeepSeek 等各家当前旗舰模型(例如 GPT-5.6、Claude Sonnet 5、Gemini 3.6 Flash)每百万 token 的价格(<em>截至 2026 年</em>)——各提供商调价频繁,正式使用前请核实。一个快速的直觉校验:1,000 个单词的 prompt 大约是 1,300 个 token,按下拉菜单中的输入价格算最多也就一两美分。成本只有在规模上来之后才有意义,所以请乘以你的实际请求量——并记住<strong>输出 token 单独计费</strong>,通常费率是输入的数倍。
+        下拉菜单列出了 OpenAI、Anthropic、Google、DeepSeek 等各家当前旗舰模型(例如 GPT-5.6、Claude Sonnet 5、Gemini 3.6 Flash)每百万 token 的价格(<em>截至 2026 年</em>)——各提供商调价频繁,正式使用前请核实。快速心算一下来验证:1,000 个单词的 prompt 大约是 1,300 个 token,按下拉菜单中的输入价格算最多也就一两美分。成本只有在规模上来之后才有意义,所以请乘以你的实际请求量——并记住<strong>输出 token 单独计费</strong>,通常费率是输入的数倍。
       </p>
     </div>
   </section>
@@ -117,7 +117,7 @@ const es: ReactNode = (
       <h2>Cuándo las estimaciones se desvían de la realidad</h2>
       <p>
         La heurística está ajustada para prosa en inglés. El <strong>código fuente</strong> se tokeniza peor
-        (símbolos densos y sangría); el <strong>texto no inglés</strong> — especialmente CJK — suele costar 1–2
+        (símbolos densos y sangría); el <strong>texto en otros idiomas</strong> — especialmente CJK — suele costar 1–2
         caracteres por token en lugar de 4, y los emoji o caracteres Unicode raros pueden costar varios tokens cada
         uno. Si necesitas una cifra exacta, ejecuta el tokenizador del proveedor (<code>tiktoken</code> para OpenAI,
         o el endpoint de recuento de tokens del SDK de Anthropic) sobre el mismo texto y compara.
@@ -129,10 +129,10 @@ const es: ReactNode = (
       <p>
         El menú desplegable lista los precios por millón de tokens de los modelos insignia actuales de OpenAI,
         Anthropic, Google, DeepSeek y otros — por ejemplo GPT-5.6, Claude Sonnet 5 y Gemini 3.6 Flash —{' '}
-        <em>a fecha de 2026</em>. Los proveedores cambian los precios con frecuencia, así que verifica antes de
-        comprometerte. Una comprobación rápida: un prompt de 1.000 palabras son unos 1.300 tokens, que a los
-        precios de entrada del desplegable cuesta como mucho uno o dos céntimos. Los costes solo importan a
-        escala, así que multiplícalos por tu volumen real de peticiones — y recuerda que los{' '}
+        <em>a fecha de 2026</em>. Los proveedores cambian los precios con frecuencia, así que verifica los precios
+        antes de decidirte. Una comprobación rápida: un prompt de 1.000 palabras son unos 1.300 tokens, que a los
+        precios de entrada del desplegable cuestan como mucho uno o dos céntimos. Los costes solo cobran importancia a
+        gran escala, así que multiplícalos por tu volumen real de peticiones — y recuerda que los{' '}
         <strong>tokens de salida se facturan aparte</strong>, normalmente a varias veces la tarifa de entrada.
       </p>
     </div>
@@ -178,9 +178,9 @@ const de: ReactNode = (
       <p>
         Das Dropdown listet die Preise pro Million Tokens für die aktuellen Flaggschiff-Modelle von OpenAI,
         Anthropic, Google, DeepSeek und anderen — etwa GPT-5.6, Claude Sonnet 5 und Gemini 3.6 Flash —{' '}
-        <em>Stand 2026</em>. Anbieter ändern ihre Preise häufig, also prüfe sie vor der Verbindlichkeit. Ein
+        <em>Stand 2026</em>. Anbieter ändern ihre Preise häufig, also prüfe sie, bevor du dich darauf verlässt. Ein
         kurzer Plausibilitätscheck: Ein 1.000-Wörter-Prompt sind etwa 1.300 Tokens, was zu den Eingabepreisen
-        im Dropdown höchstens ein bis zwei Cent kostet. Kosten werden erst bei Skalierung relevant, also
+        im Dropdown höchstens ein bis zwei Cent kostet. Kosten werden erst bei größerem Volumen relevant, also
         multipliziere sie mit deinem tatsächlichen Anfragevolumen — und denk daran, dass{' '}
         <strong>Ausgabe-Tokens separat abgerechnet werden</strong>, meist zum Mehrfachen des Eingabepreises.
       </p>

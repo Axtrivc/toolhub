@@ -162,7 +162,7 @@ export const OvertimeCalculatorClient = makeCalculatorClient({
     ],
     centerLabel: 'Total weekly',
   },
-  note: '💼 US federal law (FLSA) requires ×1.5 past 40 h/week for non-exempt employees; some states mandate daily overtime and ×2 for holidays. Salaried non-exempt workers use regular rate ÷ 40.',
+  note: '💼 US federal law (FLSA) requires ×1.5 past 40 h/week for non-exempt employees; some states mandate daily overtime, while holiday double time typically comes from union contracts or employer policies. Salaried non-exempt workers use regular rate ÷ 40.',
 })
 
 // ── 税后到手工资估算 ──

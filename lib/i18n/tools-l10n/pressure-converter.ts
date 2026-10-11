@@ -23,6 +23,7 @@ export const pressureConverterL10n: ToolL10n = {
       '检查汽车轮胎气压(PSI ↔ bar)',
       '换算血压的毫米汞柱(mmHg)值',
       '在气象气压单位之间互转(mbar / hPa)',
+      '在工程计算中换算 Pa、bar 与 atm',
     ],
     faqs: [
       { q: '汽车轮胎该打多少 PSI?', a: '查看驾驶员侧门框上的贴纸——大多数车为 30-35 PSI(2-2.4 bar)。轮胎侧壁上标注的数字是最大值,不是推荐胎压。' },
@@ -46,6 +47,7 @@ export const pressureConverterL10n: ToolL10n = {
       'comprobar la presión de los neumáticos (PSI ↔ bar)',
       'convertir valores de presión arterial en mmHg',
       'alternar entre unidades meteorológicas (mbar / hPa)',
+      'convertir entre Pa, bar y atm en cálculos de ingeniería',
     ],
     faqs: [
       { q: '¿Qué PSI deben tener mis neumáticos?', a: 'Consulta la pegatina en el marco de la puerta del conductor — la mayoría de los coches usan 30-35 PSI (2-2,4 bar). El número en el lateral del neumático es el máximo, no la presión recomendada.' },
@@ -69,6 +71,7 @@ export const pressureConverterL10n: ToolL10n = {
       'Reifendruck prüfen (PSI ↔ bar)',
       'Blutdruckwerte in mmHg umrechnen',
       'zwischen meteorologischen Druckeinheiten wechseln (mbar / hPa)',
+      'in technischen Berechnungen zwischen Pa, bar und atm umrechnen',
     ],
     faqs: [
       { q: 'Welchen PSI sollen meine Autoreifen haben?', a: 'Sieh auf dem Aufkleber im Türrahmen der Fahrerseite nach — die meisten Autos brauchen 30-35 PSI (2-2,4 bar). Die Zahl auf der Reifenflanke ist das Maximum, nicht der empfohlene Druck.' },

@@ -73,7 +73,11 @@ const en: ReactNode = (
     <ol>
       <li>Normalizes Unicode (so <code>café</code> becomes <code>cafe</code>).</li>
       <li>Lowercases the text if the option is enabled.</li>
-      <li>Removes special characters, keeping only letters, numbers, and spaces.</li>
+      <li>Removes special characters, keeping only letters, numbers, spaces, and hyphens.</li>
+      <li>
+        Drops any remaining non-ASCII characters if the &quot;ASCII only&quot; option is enabled (so{' '}
+        <code>你好 2026</code> becomes <code>2026</code>).
+      </li>
       <li>Replaces spaces with your chosen separator (hyphen by default).</li>
       <li>Collapses multiple separators and trims leading/trailing ones.</li>
     </ol>
@@ -101,30 +105,30 @@ const en: ReactNode = (
 // ──────────────────────────── 中文 ────────────────────────────
 const zh: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
-    <h2>什么是 URL 别名?</h2>
+    <h2>什么是 URL slug?</h2>
     <p>
-      <strong>URL 别名(slug)</strong>是网址中可读的部分,用于标识特定页面。在网址 <code>example.com/blog/{`{slug}`}</code> 中,别名就是末尾的描述性文本 —— 例如 <code>example.com/blog/how-to-brew-coffee</code> 里的 <code>how-to-brew-coffee</code>。一个精心设计的别名能在任何人点击之前就告诉读者和搜索引擎这个页面是关于什么的。
+      <strong>URL slug</strong> 是网址中可读的部分,用于标识特定页面。在网址 <code>example.com/blog/{`{slug}`}</code> 中,slug 就是末尾的描述性文本 —— 例如 <code>example.com/blog/how-to-brew-coffee</code> 里的 <code>how-to-brew-coffee</code>。一个精心设计的 slug 能在任何人点击之前就告诉读者和搜索引擎这个页面是关于什么的。
     </p>
 
-    <h2>为什么别名对 SEO 很重要?</h2>
-    <p>Google 等搜索引擎会把网址作为理解页面主题的众多信号之一。简洁、具描述性的别名会从三个方面切实提升排名:</p>
+    <h2>为什么 slug 对 SEO 很重要?</h2>
+    <p>Google 等搜索引擎会把网址作为理解页面主题的众多信号之一。简洁、具描述性的 slug 会从三个方面切实提升排名:</p>
     <ul>
       <li>
-        <strong>关键词相关性。</strong>当别名包含目标关键词(如 <code>best-coffee-grinders</code>)时,会强化页面主题。Google 已确认网址中的词是一个(次要的)排名信号。
+        <strong>关键词相关性。</strong>当 slug 包含目标关键词(如 <code>best-coffee-grinders</code>)时,会强化页面主题。Google 已确认网址中的词是一个(次要的)排名信号。
       </li>
       <li>
         <strong>点击率。</strong>像 <code>/seo-slug-guide</code> 这样可读的网址,在搜索结果中比 <code>/p=12345</code> 或 <code>/2024/01/15/post-id-987</code> 这类晦涩网址获得更多点击。
       </li>
       <li>
-        <strong>被链接时的锚文本。</strong>其他网站常把原始网址直接当作链接文本粘贴。具描述性的别名会变成自然的锚文本,帮助搜索引擎理解链接的语境。
+        <strong>作为外链锚文本。</strong>其他网站常把原始网址直接当作链接文本粘贴。具描述性的 slug 会变成自然的锚文本,帮助搜索引擎理解链接的语境。
       </li>
     </ul>
 
-    <h2>什么样的别名才是好别名?</h2>
-    <p>遵循这些规则,你的别名就能既利于 SEO 又对用户友好:</p>
+    <h2>什么样的 slug 才是好 slug?</h2>
+    <p>遵循这些规则,你的 slug 就能既利于 SEO 又对用户友好:</p>
     <ol>
       <li>
-        <strong>保持简短。</strong>目标 3–5 个词。过长的别名会稀释关键词权重,并在搜索结果中被截断。<code>best-coffee-grinders</code> 胜过 <code>the-absolute-best-coffee-grinders-for-home-use-in-2026</code>。
+        <strong>保持简短。</strong>以 3–5 个词为宜。过长的 slug 会稀释关键词权重,并在搜索结果中被截断。<code>best-coffee-grinders</code> 胜过 <code>the-absolute-best-coffee-grinders-for-home-use-in-2026</code>。
       </li>
       <li>
         <strong>使用小写。</strong>许多服务器上网址在技术上区分大小写,混用大小写会导致重复内容问题。小写是最稳妥的惯例。
@@ -140,21 +144,22 @@ const zh: ReactNode = (
       </li>
     </ol>
 
-    <h2>这款别名生成器的工作原理</h2>
+    <h2>这款 slug 生成器的工作原理</h2>
     <p>
       本工具完全在你的浏览器中运行 —— 不会向任何服务器发送数据。当你输入标题时,它会实时执行以下处理流程:
     </p>
     <ol>
       <li>归一化 Unicode(使 <code>café</code> 变为 <code>cafe</code>)。</li>
       <li>若开启选项,则将文本转为小写。</li>
-      <li>移除特殊字符,只保留字母、数字和空格。</li>
+      <li>移除特殊字符,只保留字母、数字、空格和连字符。</li>
+      <li>若开启「仅 ASCII」选项,则剔除剩余的非 ASCII 字符(使 <code>你好 2026</code> 变为 <code>2026</code>)。</li>
       <li>用你选择的分隔符(默认连字符)替换空格。</li>
       <li>合并多个连续的分隔符,并去除首尾的分隔符。</li>
     </ol>
     <p>最终结果是一段干净、URL 安全的字符串,可直接粘贴到你的 CMS、静态站点生成器或路由配置中。</p>
 
-    <h2>别名示例</h2>
-    <p>这里有几个真实场景的转换,展示你可以期待的结果:</p>
+    <h2>slug 示例</h2>
+    <p>这里有几个真实场景的转换,让你对输出结果心中有数:</p>
     <ul>
       <li>
         <code>10 SEO Tips for Better Rankings</code> → <code>10-seo-tips-for-better-rankings</code>
@@ -229,7 +234,7 @@ const es: ReactNode = (
       </li>
       <li>
         <strong>Quita los caracteres especiales.</strong> Evita apóstrofos, comillas, paréntesis y
-        acentos. Deben codificarse porcentualmente en las URL, produciendo cadenas feas como{' '}
+        acentos. Deben codificarse en porcentaje en las URL, produciendo cadenas feas como{' '}
         <code>%26</code> o <code>%e2%80%99</code>.
       </li>
     </ol>
@@ -242,7 +247,11 @@ const es: ReactNode = (
     <ol>
       <li>Normaliza Unicode (así <code>café</code> pasa a <code>cafe</code>).</li>
       <li>Pasa el texto a minúsculas si la opción está activada.</li>
-      <li>Elimina los caracteres especiales, conservando solo letras, números y espacios.</li>
+      <li>Elimina los caracteres especiales, conservando solo letras, números, espacios y guiones.</li>
+      <li>
+        Si la opción «Solo ASCII» está activada, elimina los caracteres no ASCII restantes (así{' '}
+        <code>你好 2026</code> pasa a <code>2026</code>).
+      </li>
       <li>Sustituye los espacios por el separador que elijas (guion por defecto).</li>
       <li>Colapsa varios separadores seguidos y recorta los del principio y final.</li>
     </ol>
@@ -319,7 +328,7 @@ const de: ReactNode = (
       </li>
       <li>
         <strong>Streiche Füllwörter.</strong> Artikel und Präpositionen wie „the“, „a“, „of“, „for“
-        verlängern ohne Mehrwert. <code>best-coffee-grinders</code> ist besser als{' '}
+        verlängern den Slug ohne Mehrwert. <code>best-coffee-grinders</code> ist besser als{' '}
         <code>the-best-coffee-grinders-for-you</code>.
       </li>
       <li>
@@ -337,14 +346,18 @@ const de: ReactNode = (
     <ol>
       <li>Normalisiert Unicode (aus <code>café</code> wird <code>cafe</code>).</li>
       <li>Wandelt den Text in Kleinbuchstaben um, wenn die Option aktiviert ist.</li>
-      <li>Entfernt Sonderzeichen und behält nur Buchstaben, Zahlen und Leerzeichen.</li>
+      <li>Entfernt Sonderzeichen und behält nur Buchstaben, Zahlen, Leerzeichen und Bindestriche.</li>
+      <li>
+        Entfernt bei aktivierter Option „Nur ASCII“ alle übrigen Nicht-ASCII-Zeichen (aus{' '}
+        <code>你好 2026</code> wird <code>2026</code>).
+      </li>
       <li>Ersetzt Leerzeichen durch dein gewähltes Trennzeichen (standardmäßig Bindestrich).</li>
       <li>Fasst mehrere Trennzeichen zusammen und entfernt führende/abschließende.</li>
     </ol>
     <p>Das Ergebnis ist eine saubere, URL-sichere Zeichenkette, die du direkt in dein CMS, deinen Static-Site-Generator oder deine Routing-Konfiguration einfügen kannst.</p>
 
     <h2>Slug-Beispiele</h2>
-    <p>Hier sind ein paar reale Umwandlungen, damit du weißt, was du erwarten kannst:</p>
+    <p>Hier sind ein paar Beispiele aus der Praxis, damit du weißt, was dich erwartet:</p>
     <ul>
       <li>
         <code>10 SEO Tips for Better Rankings</code> → <code>10-seo-tips-for-better-rankings</code>

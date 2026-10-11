@@ -1,6 +1,7 @@
 /**
  * gpa-calculator 本地化 bundle —— zh / es / de
- * 覆盖:faqs + useCases(client = GPACalculatorClient = 自定义 client,无需 slug)
+ * 覆盖:faqs + ui + useCases(client = GPACalculatorClient,自定义组件,
+ * 经 tui('gpa-calculator', ...) 取本 bundle 的 ui 串)
  */
 import type { ToolL10n } from '../tool-l10n'
 
@@ -18,7 +19,7 @@ export const gpaCalculatorL10n: ToolL10n = {
       'credits': '学分',
       'grade': '等级',
       'gradePoints': '绩点',
-      'note': '📚 使用标准 4.0 GPA 量表。荣誉/AP 课程在你校可能权重不同——请调整等级以匹配你所在学校的体系。',
+      'note': '📚 使用标准 4.0 GPA 量表。荣誉/AP 课程在你所在的学校可能权重不同——请调整等级以匹配你所在学校的体系。',
       'on4Scale': '4.0 量表',
       'remove': '移除',
       'thCourseName': '课程名',

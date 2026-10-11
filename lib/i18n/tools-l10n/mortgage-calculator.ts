@@ -187,7 +187,7 @@ export const mortgageCalculatorL10n: ToolL10n = {
   // ──────────────────────────── Deutsch ────────────────────────────
   de: {
     useCases: [
-      'einen Hypothekenrechner mit PMI und Steuern anzeigen',
+      'einen Hypothekenrechner mit PMI und Steuern nutzen',
       'die Monatsrate nach Anzahlung berechnen',
       'die Monatsrate mit Steuern und Versicherung schätzen',
       'die Hypothekenrate mit PMI berechnen',
@@ -207,7 +207,7 @@ export const mortgageCalculatorL10n: ToolL10n = {
       },
       {
         q: 'Welchen Bonitätsscore brauche ich für eine Hypothek?',
-        a: 'Konventionelle Kredite verlangen meist 620 oder mehr. FHA-Kredite nehmen Scores ab 580 (manchmal 500 mit 10 % Anzahlung). Aber der Zins, den du bekommst, verbessert sich deutlich mit deinem Score — ein Score ab 760 kann einen über 0,5 % niedrigeren Zins bedeuten als ein 680er, was über die Laufzeit zigtausend Dollar spart. Vor der Antragstellung solltest du deinen Score prüfen und Fehler im Bericht korrigieren.',
+        a: 'Konventionelle Kredite verlangen meist 620 oder mehr. FHA-Kredite nehmen Scores ab 580 (manchmal 500 mit 10 % Anzahlung). Aber der Zins, den du bekommst, verbessert sich deutlich mit deinem Score — ein Score ab 760 kann einen über 0,5 % niedrigeren Zins bedeuten als ein 680er, was über die Laufzeit Zehntausende Dollar spart. Vor der Antragstellung solltest du deinen Score prüfen und Fehler im Bericht korrigieren.',
       },
       {
         q: 'Hilft Sondertilgung?',
@@ -217,7 +217,7 @@ export const mortgageCalculatorL10n: ToolL10n = {
     formula: {
       formula: FORMULA,
       explain:
-        'Monatliche Hypothekenrate (Annuitätentilgung). P = Kreditbetrag, r = monatlicher Zins, n = Anzahl der Monate. Dieses Werkzeug legt zusätzlich Schätzungen für PMI, Grundsteuer und Versicherung darüber.',
+        'Monatliche Hypothekenrate (Annuitätentilgung). P = Kreditbetrag, r = monatlicher Zins, n = Anzahl der Monate. Dieses Werkzeug rechnet zusätzlich Schätzungen für PMI, Grundsteuer und Versicherung darauf.',
     },
     ui: {
       errYears: 'Die Laufzeit muss größer als 0 sein',
@@ -238,7 +238,7 @@ export const mortgageCalculatorL10n: ToolL10n = {
       'in.pmiRate': 'PMI-Satz (pro Jahr)',
       'in.extra': 'Zusätzliche Monatsrate',
       'out.piti': 'Gesamte Monatsrate (PITI)',
-      'out.monthly': 'Monatsrate (Kredit + Zins)',
+      'out.monthly': 'Monatsrate (Tilgung + Zins)',
       'out.loan': 'Kreditbetrag',
       'out.total': 'Zinsen gesamt',
       'out.taxM': 'Grundsteuer / Monat',
@@ -255,9 +255,9 @@ export const mortgageCalculatorL10n: ToolL10n = {
       yrsN: '{y} Jahre',
       monthsYrs: '{m} Monate ({y})',
       note: '🏠 PMI wird nur automatisch hinzugefügt, wenn die Anzahlung unter 20 % liegt (LTV über 80 %) — ab 20 % sind es 0 $. Grundsteuer und Versicherung sind Jahresbeträge ÷ 12; das Hausgeld ist monatlich. Sondertilgungen gehen direkt auf den Kredit.',
-      chartTitle: 'Gesamtbetrag: Kredit vs. Zinsen',
+      chartTitle: 'Gesamte Zahlungen: Tilgung vs. Zinsen',
       chartCenter: 'Gesamt',
-      'slice.principal': 'Kredit (Kreditbetrag)',
+      'slice.principal': 'Tilgung (Kreditbetrag)',
       'slice.total': 'Zins (Kosten des Kredits)',
       chartTitleBalance: 'Kreditsaldo über die Zeit',
       'preset.0': '30 Jahre fest (6.8 %)',

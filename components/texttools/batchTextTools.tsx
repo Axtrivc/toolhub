@@ -74,7 +74,7 @@ export const SentenceCaseConverterClient = makeTextTool({
     }
     return out
   },
-  note: '✍️ Capitalizes the first letter of each sentence. Preserves proper nouns best manually.',
+  note: '✍️ Capitalizes the first letter of each sentence. Fix proper nouns manually for best results.',
 })
 
 export const ReverseTextClient = makeTextTool({

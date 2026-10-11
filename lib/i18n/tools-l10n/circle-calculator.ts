@@ -16,12 +16,12 @@ export const circleCalculatorL10n: ToolL10n = {
     },
     useCases: [
       '建筑:计算圆柱的混凝土用量',
-      '比萨:对比 12 寸和 16 寸大小',
+      '披萨:对比 12 寸和 16 寸大小',
       '工程:管道流量、轮子转动、齿轮',
       '农业:中心轴灌溉覆盖范围',
     ],
     faqs: [
-      { q: '为什么 16 寸比萨比 12 寸的大一倍多?', a: '面积与半径的平方成正比。16 寸比萨的面积是 π(8)² = 201 平方英寸;12 寸的是 π(6)² = 113 平方英寸。所以 16 寸大了 78 %,而不是 33 %。' },
+      { q: '为什么 16 寸披萨比 12 寸的大一倍多?', a: '面积与半径的平方成正比。16 寸披萨的面积是 π(8)² = 201 平方英寸;12 寸的是 π(6)² = 113 平方英寸。所以 16 寸大了 78 %,而不是 33 %。' },
     ],
   },
   es: {
@@ -35,7 +35,7 @@ export const circleCalculatorL10n: ToolL10n = {
     },
     useCases: [
       'construcción: calcular el hormigón para columnas circulares',
-      'pizzas: comparar tamaños de 12 y 16 pulgadas',
+      'pizza: comparar tamaños de 12 y 16 pulgadas',
       'ingeniería: flujo de tuberías, rotación de ruedas, engranajes',
       'agricultura: alcance del riego de pivote central',
     ],

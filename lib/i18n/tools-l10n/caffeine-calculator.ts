@@ -45,7 +45,7 @@ export const CaffeineCalculatorL10n: ToolL10n = {
     faqs: [
       { q: '¿Cómo funciona el cálculo de la vida media?', a: 'La cafeína se reduce a la mitad aproximadamente cada 5 horas: tras una vida media queda el 50 %, tras dos el 25 %. La herramienta aplica mg × 0,5^(horas ÷ 5) y muestra cuánto queda ahora y —el número que importa— cuánto seguirá en tu sistema a la hora de dormir.' },
       { q: '¿Cuánta cafeína está bien al acostarse?', a: 'Según los umbrales de esta herramienta: menos de ~50 mg al dormir va bien para la mayoría; 50-100 mg es fronterizo para dormidores sensibles; más de 100 mg probablemente altere el sueño. La investigación sugiere cortar el café 6-8 horas antes de dormir.' },
-      { q: '¿Qué cuenta en mi total diario?', a: 'Todo: café filtrado ≈ 95 mg por taza, espresso ≈ 63 por dosis, té negro ≈ 47, refresco de cola ≈ 34, bebidas energéticas 80-300, y el chocolate negro aporta unos pocos mg por onza. Suma tus fuentes reales antes de introducir la dosis.' },
+      { q: '¿Qué cuenta en mi total diario?', a: 'Todo: café filtrado ≈ 95 mg por taza, espresso ≈ 63 por dosis, té negro ≈ 47, refresco de cola ≈ 34, bebidas energéticas 80-300, y el chocolate negro aporta unos pocos mg por cuadrado. Suma tus fuentes reales antes de introducir la dosis.' },
       { q: '¿Por qué a mí me afecta más que a mis amigos?', a: 'El gen CYP1A2 gobierna el metabolismo de la cafeína: los metabolizadores lentos notan el efecto muchas más horas y pierden más sueño; los rápidos lo eliminan tranquilamente. Fumar duplica la velocidad de eliminación; los anticonceptivos orales la ralentizan.' },
     ],
     ui: {
@@ -81,7 +81,7 @@ export const CaffeineCalculatorL10n: ToolL10n = {
       { q: 'Wie funktioniert die Halbwertszeit-Rechnung?', a: 'Koffein halbiert sich ungefähr alle 5 Stunden: nach einer Halbwertszeit bleiben 50 %, nach zwei 25 %. Das Tool rechnet mg × 0,5^(Stunden ÷ 5) und zeigt, was jetzt übrig ist — und die entscheidende Zahl: was zur Bettzeit noch kreist.' },
       { q: 'Wie viel Koffein ist zur Bettzeit okay?', a: 'Nach den Schwellen dieses Tools: unter ~50 mg ist für die meisten unbedenklich, 50-100 mg grenzwertig für empfindliche Schläfer, über 100 mg stört den Schlaf wahrscheinlich. Studien raten, 6-8 Stunden vor dem Schlafengehen aufzuhören.' },
       { q: 'Was zählt zur Tagesdosis?', a: 'Alles: Filterkaffee ≈ 95 mg pro Tasse, Espresso ≈ 63 pro Shot, Schwarztee ≈ 47, Cola ≈ 34, Energydrinks 80-300, und dunkle Schokolade bringt einige mg pro Stück. Summiere deine echten Quellen, bevor du die Dosis eingibst.' },
-      { q: 'Warum trifft mich Kaffee härter als meine Freunde?', a: 'Das Gen CYP1A2 steuert den Koffeinstoffwechsel: Langsame Metabolisierer spüren die Wirkung stundenlang länger und verlieren mehr Schlaf; schnelle bauen es locker ab. Rauchen verdoppelt ungefähr die Abbaugeschwindigkeit, Antibabypille bremst ihn.' },
+      { q: 'Warum trifft mich Kaffee härter als meine Freunde?', a: 'Das Gen CYP1A2 steuert den Koffeinstoffwechsel: Langsame Metabolisierer spüren die Wirkung mehrere Stunden länger und verlieren mehr Schlaf; schnelle bauen es locker ab. Rauchen verdoppelt ungefähr die Abbaugeschwindigkeit, Antibabypille bremst ihn.' },
     ],
     ui: {
       'chartTitle': 'Koffein im Körper jetzt',

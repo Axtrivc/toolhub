@@ -86,8 +86,8 @@ const es: ReactNode = (
       <p>
         El texto todo en mayúsculas es más difícil de leer en pasajes largos porque las letras
         pierden sus formas distintivas (contornos de palabra). Úsalo para etiquetas cortas y
-        titulares, no para párrafos. Para el cuerpo del texto, la capitalización de frase o de
-        título se lee mucho más rápido.
+        titulares, no para párrafos. Para el cuerpo del texto, el tipo oración o el tipo título se
+        lee mucho más rápido.
       </p>
     </div>
   </section>

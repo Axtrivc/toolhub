@@ -18,7 +18,7 @@ const en: ReactNode = (
       Every HTTP request your browser sends carries a <strong>User-Agent header</strong> — a dense string
       identifying the browser, rendering engine, operating system, and device type. This parser decodes that
       string into readable fields plus a structured JSON result. It auto-detects your own browser on load, accepts
-      any pasted string for testing, flags known search-engine bots, and runs entirely in your browser — nothing
+      any pasted string for testing, flags known bots, and runs entirely in your browser — nothing
       is sent anywhere.
     </p>
 
@@ -65,7 +65,7 @@ const zh: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>这是什么工具?</h2>
     <p>
-      你的浏览器发出的每一个 HTTP 请求都带有一个 <strong>User-Agent 头</strong>——一段密密麻麻的字符串,标识了浏览器、渲染引擎、操作系统和设备类型。本解析器把这段字符串解码成易读的字段,并附上结构化的 JSON 结果。加载时会自动检测你自己的浏览器,也接受任意粘贴的字符串用于测试,还能标记已知的搜索引擎爬虫——所有运算都在你的浏览器中完成,不向任何地方发送数据。
+      你的浏览器发出的每一个 HTTP 请求都带有一个 <strong>User-Agent 头</strong>——一段密密麻麻的字符串,标识了浏览器、渲染引擎、操作系统和设备类型。本解析器把这段字符串解码成易读的字段,并附上结构化的 JSON 结果。加载时会自动检测你自己的浏览器,也接受任意粘贴的字符串用于测试,还能标记已知爬虫——所有运算都在你的浏览器中完成,不向任何地方发送数据。
     </p>
 
     <div>
@@ -78,14 +78,14 @@ const zh: ReactNode = (
     <div>
       <h2>各字段能告诉你什么、不能告诉你什么</h2>
       <p>
-        对于 CSS 和 JavaScript 兼容性而言,<strong>引擎</strong>字段(Blink、Gecko、WebKit)往往比浏览器品牌更重要。<strong>设备类型</strong>是根据 <code>Mobile</code>、<code>iPad</code> 等标记推断的——不含 <code>Mobile</code> 的 Android UA 会被当作平板,这与浏览器自我报告的方式一致。两个诚实的局限:Windows 10 和 11 都报告 <code>Windows NT 10.0</code>,仅凭 UA 无法区分;而 iPadOS 出于设计会伪装成桌面版 macOS。
+        对于 CSS 和 JavaScript 兼容性而言,<strong>引擎</strong>字段(Blink、Gecko、WebKit)往往比浏览器品牌更重要。<strong>设备类型</strong>是根据 <code>Mobile</code>、<code>iPad</code> 等标记推断的——不含 <code>Mobile</code> 的 Android UA 会被当作平板,这与浏览器自我报告的方式一致。坦白说,有两个局限:Windows 10 和 11 都报告 <code>Windows NT 10.0</code>,仅凭 UA 无法区分;而 iPadOS 刻意伪装成桌面版 macOS。
       </p>
     </div>
 
     <div>
       <h2>实际用途——以及为什么不应过度依赖它</h2>
       <p>
-        粘贴来自服务器日志的 UA,就能识别访客或爬虫的真实身份——爬虫检测器覆盖了 Googlebot、Bingbot、DuckDuckBot、GPTBot 等十余种。在构造测试夹具或调试「在我机器上能跑」的问题时也很方便。但对于生产环境的功能支持,请优先使用<strong>特性检测</strong>(<code>&apos;clipboard&apos; in navigator</code>)而非 UA 嗅探:字符串极易伪造,浏览器会定期冻结或打乱这些标记,而 Client Hints 正在 Chromium 中逐步取代 UA 头。
+        粘贴来自服务器日志的 UA,就能识别访客或爬虫的真实身份——爬虫检测器覆盖了 Googlebot、Bingbot、DuckDuckBot、GPTBot 以及另外十多种爬虫。在构造测试夹具或调试「在我机器上能跑」的问题时也很方便。但对于生产环境的功能支持,请优先使用<strong>特性检测</strong>(<code>&apos;clipboard&apos; in navigator</code>)而非 UA 嗅探:字符串极易伪造,浏览器会定期冻结或打乱这些标记,而 Client Hints 正在 Chromium 中逐步取代 UA 头。
       </p>
     </div>
   </section>
@@ -98,8 +98,8 @@ const es: ReactNode = (
     <p>
       Cada petición HTTP que envía tu navegador lleva una <strong>cabecera User-Agent</strong> — una cadena densa
       que identifica el navegador, el motor de renderizado, el sistema operativo y el tipo de dispositivo. Este
-      analizador decodifica esa cadena en campos legibles además de un resultado JSON estructurado. Detecta tu propio
-      navegador al cargar, acepta cualquier cadena pegada para pruebas, marca los bots de buscadores conocidos y se
+      analizador decodifica esa cadena en campos legibles, además de un resultado JSON estructurado. Detecta tu propio
+      navegador al cargar, acepta cualquier cadena pegada para pruebas, marca los bots conocidos y se
       ejecuta por completo en tu navegador — nada se envía a ningún sitio.
     </p>
 
@@ -119,9 +119,9 @@ const es: ReactNode = (
       <h2>Qué pueden y qué no pueden decirte los campos</h2>
       <p>
         El campo <strong>motor</strong> (Blink, Gecko, WebKit) a menudo importa más que la marca del navegador para
-        la compatibilidad de CSS y JavaScript. El <strong>tipo de dispositivo</strong> se infiere de marcadores como{' '}
+        la compatibilidad de CSS y JavaScript. El <strong>tipo de dispositivo</strong> se infiere de tokens como{' '}
         <code>Mobile</code> e <code>iPad</code> — un UA de Android sin <code>Mobile</code> se trata como una tablet,
-        coincidiendo con cómo se autoidentifican los navegadores. Dos limitaciones honestas: Windows 10 y 11 ambos
+        coincidiendo con cómo se autoidentifican los navegadores. Dos limitaciones honestas: tanto Windows 10 como Windows 11
         reportan <code>Windows NT 10.0</code> y son indistinguibles solo por el UA, y iPadOS finge ser macOS de
         escritorio por diseño.
       </p>
@@ -134,8 +134,8 @@ const es: ReactNode = (
         Googlebot, Bingbot, DuckDuckBot, GPTBot y una docena más. También es útil para construir fixtures de prueba o
         depurar problemas de «en mi máquina funciona». Sin embargo, para el soporte de funciones en producción,
         prefiere la <strong>detección de características</strong> (<code>&apos;clipboard&apos; in navigator</code>) al
-        rastreo del UA: las cadenas se falsifican trivialmente, los navegadores congelan o reordenan los marcadores con
-        regularidad y Client Hints está reemplazando gradualmente la cabecera UA en Chromium.
+        rastreo del UA: las cadenas se falsifican con facilidad, los navegadores congelan o reordenan los tokens con
+        regularidad y Client Hints están reemplazando gradualmente la cabecera UA en Chromium.
       </p>
     </div>
   </section>
@@ -149,7 +149,7 @@ const de: ReactNode = (
       Jede HTTP-Anfrage, die dein Browser sendet, trägt einen <strong>User-Agent-Header</strong> — eine dichte
       Zeichenkette, die Browser, Rendering-Engine, Betriebssystem und Gerätetyp identifiziert. Dieser Parser decodiert
       diese Zeichenkette in lesbare Felder plus ein strukturiertes JSON-Ergebnis. Er erkennt deinen eigenen Browser beim
-      Laden, akzeptiert beliebige eingefügte Zeichenketten zum Testen, markiert bekannte Suchmaschinen-Bots und läuft
+      Laden, akzeptiert beliebige eingefügte Zeichenketten zum Testen, markiert bekannte Bots und läuft
       vollständig in deinem Browser — nichts wird irgendwohin gesendet.
     </p>
 

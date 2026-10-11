@@ -165,7 +165,7 @@ const zh: ReactNode = (
       <strong>最低还款额</strong>是发卡机构每月允许你偿还的最小金额,低于这个数就会产生滞纳金或被记为逾期。它的计算方式通常是余额的一小部分(1%–3%)加上当月产生的利息和费用。这个计算器清楚地展示你的最低还款都花在哪里——多少是利息,多少才真正减少了债务,以及如果你只还最低额要还多久。
     </p>
     <p>
-      算法很残酷。在一般余额下,最低还款额被刻意设得很低,大部分都用来付利息,只剩一小丁点冲本金。这是有意为之:低最低还款让你尽可能长时间地还下去。理解这个拆分,是摆脱债务的第一步。
+      这笔账很残酷。在一般余额下,最低还款额被刻意设得很低,大部分都用来付利息,只剩一小丁点冲本金。这是有意为之:低最低还款让你尽可能长时间地还下去。理解这个拆分,是摆脱债务的第一步。
     </p>
 
     <div>
@@ -373,14 +373,14 @@ const de: ReactNode = (
       Monat akzeptiert, ohne eine Säumnisgebühr zu erheben oder dich als säumig zu melden. Sie
       wird als ein kleiner Prozentsatz deines Saldos (normalerweise 1 %–3 %) berechnet plus der in
       diesem Monat angefallenen Zinsen und Gebühren. Dieser Rechner zeigt genau, wohin deine
-      Mindestzahlung geht — wie viel Zins ist, wie viel deine Schuld tatsächlich reduziert und wie
+      Mindestzahlung geht — wie viel davon Zinsen sind, wie viel deine Schuld tatsächlich reduziert und wie
       lange du zahlen müsstest, wenn du immer nur das Minimum überweist.
     </p>
     <p>
       Die Mathematik ist brutal. Bei einem typischen Saldo wird die Mindestzahlung absichtlich so
-      niedrig angesetzt, dass der Großteil davon Zinsen abdeckt und nur ein winziger Schlitz für
+      niedrig angesetzt, dass der Großteil davon Zinsen abdeckt und nur ein winziger Teil für
       die Tilgung bleibt. Das ist Absicht: Eine niedrige Mindestzahlung hält dich am längsten am
-      Zahnen. Den Aufschlüsselungsprozess zu verstehen, ist der erste Schritt, um ihm zu entkommen.
+      Zahnen. Die Aufschlüsselung zu verstehen, ist der erste Schritt, um der Schuldenfalle zu entkommen.
     </p>
 
     <div>
@@ -421,7 +421,7 @@ const de: ReactNode = (
         <li><strong>Tilgung:</strong> nur 16,71 $ (= 100,00 $ − 83,29 $)</li>
       </ul>
       <p>
-        Mit anderen Worten: Etwa <strong>83 % deiner Zahlung verschwinden als Zins</strong>, nur
+        Mit anderen Worten: Etwa <strong>83 % deiner Zahlung verschwinden als Zinsen</strong>, nur
         17 % reduzieren deine Schuld. In diesem Tempo dauert es <strong>Jahrzehnte</strong> bis zur
         Tilgung — und das unter der Annahme, dass du keinen einzigen Dollar mehr belastest. Wenn
         deine Zahlung beim Monatszins oder darunter liegt, sinkt der Saldo gar nicht. Du kannst jede
@@ -432,7 +432,7 @@ const de: ReactNode = (
     <div>
       <h2>Warum Banken die Mindestzahlung so niedrig ansetzen</h2>
       <p>
-        Mindestzahlungen früher lagen bei etwa 5 % des Saldos. In den 2000ern drängten
+        Früher lagen Mindestzahlungen bei etwa 5 % des Saldos. In den 2000ern drängten
         Aufsichtsbehörden die Aussteller, die Mindestzahlungen zu erhöhen, damit Verbraucher ihre
         Schulden tatsächlich tilgen konnten, und viele wechselten zum aktuellen Modell aus ~1 %–3 %
         plus Zinsen. Diese Formel streckt die Rückzahlung noch über viele Jahre — aber sie
@@ -467,7 +467,7 @@ const de: ReactNode = (
       <h2>Die Lösung: Zahle über dem Minimum</h2>
       <p>
         Jeder Dollar, den du über den Zinsen hinaus zahlst, geht zu 100 % in die Tilgung. Der
-        Effekt verstärkt sich: Wenn die Tilgung schrumpft, sinkt auch der Zins im nächsten Monat,
+        Effekt verstärkt sich: Wenn der Saldo schrumpft, sinkt auch der Zins im nächsten Monat,
         sodass noch mehr deiner Zahlung in die Tilgung fließt. Das ist der Mechanismus, der kleine
         Sondertilgungen so wirkungsvoll macht.
       </p>

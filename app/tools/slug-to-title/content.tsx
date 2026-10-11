@@ -45,7 +45,7 @@ const es: ReactNode = (
       <h2>Usos comunes</h2>
       <ul>
         <li>Importar artículos antiguos del blog y recuperar títulos a partir de URLs</li>
-        <li>Limpiar datos CMS exportados</li>
+        <li>Limpiar datos exportados de un CMS</li>
         <li>Generar nombres legibles para humanos a partir de cadenas con formato máquina</li>
       </ul>
     </div>

@@ -38,7 +38,7 @@ const zh: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>这是什么工具?</h2>
     <p>
-      这个工具用于格式化和校验 JSON。粘贴压缩或混乱的 JSON,即可获得正确缩进、便于阅读的输出。语法错误会附带提示信息显示。
+      这个工具用于格式化和校验 JSON。粘贴压缩或混乱的 JSON,即可获得正确缩进、便于阅读的输出。出现语法错误时会显示提示信息。
     </p>
     <div>
       <h2>为什么要格式化 JSON?</h2>
@@ -67,7 +67,7 @@ const es: ReactNode = (
     <h2>¿Qué es esta herramienta?</h2>
     <p>
       Esta herramienta formatea y valida JSON. Pega JSON minimizado o desordenado y obtén una salida
-      correctamente indentada y legible. Los errores de sintaxis se muestran con un mensaje.
+      correctamente sangrada y legible. Los errores de sintaxis se muestran con un mensaje.
     </p>
     <div>
       <h2>¿Por qué formatear JSON?</h2>
@@ -96,7 +96,7 @@ const de: ReactNode = (
     <h2>Was ist dieses Werkzeug?</h2>
     <p>
       Dieses Werkzeug formatiert und validiert JSON. Füge minimiertes oder unordentliches JSON ein
-      und du erhältst richtig eingerückten, lesbaren Output. Syntaxfehler werden mit einer Meldung
+      und du erhältst richtig eingerückte, lesbare Ausgabe. Syntaxfehler werden mit einer Meldung
       angezeigt.
     </p>
     <div>

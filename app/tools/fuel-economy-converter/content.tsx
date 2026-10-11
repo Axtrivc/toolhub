@@ -131,7 +131,7 @@ const de: ReactNode = (
     <div>
       <h2>Die umgekehrte Beziehung</h2>
       <p>
-        MPG und L/100km arbeiten in entgegengesetzte Richtungen. Ein höherer MPG ist besser
+        MPG und L/100km arbeiten in entgegengesetzten Richtungen. Ein höherer MPG ist besser
         (mehr Meilen pro Gallone); ein niedrigerer L/100km ist besser (weniger Kraftstoff für
         dieselbe Strecke). Deshalb ist die Umrechnung kein einfacher Multiplikator — sie ist ein
         Kehrwert.

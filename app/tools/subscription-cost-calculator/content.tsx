@@ -32,7 +32,7 @@ const zh: ReactNode = (
     <h2>如何诚实地盘点</h2>
     <p>翻最近三个月的信用卡账单,搜出所有周期性扣款。年付服务藏得最深:域名、云存储、杀毒软件、软件授权。</p>
     <h2>账单周期陷阱</h2>
-    <p>服务故意把续费日期错开,让任何单月账单都看不到全貌。把一切折算成月度(本计算器所做的)能恢复可见度。</p>
+    <p>服务故意把续费日期错开,让任何单月账单都看不到全貌。把一切折算成月度(就像本计算器做的那样)能恢复可见度。</p>
     <h2>留还是砍的检验</h2>
     <p>对每项订阅问一句:过去 30 天我是否主动用过它?"主动使用"指你特意打开它,而不是因为一封邮件提醒你想起了它的存在。</p>
   </section>
@@ -56,7 +56,7 @@ const es: ReactNode = (
 const de: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>Warum die Jahreszahl schockiert</h2>
-    <p>14,99 $ im Monat fühlen sich gewichtslos an, sind aber 180 $ pro Dienst und Jahr. Haushalte mit im Schnitt acht Abos entdecken routinemäßig 1 500-2 500 $ Jahresausgaben, die sie vorher beim Namen nicht nennen konnten.</p>
+    <p>14,99 $ im Monat fühlen sich gewichtslos an, sind aber 180 $ pro Dienst und Jahr. Haushalte mit im Schnitt acht Abos entdecken regelmäßig 1.500-2.500 $ Jahresausgaben, die sie vorher beim Namen nicht nennen konnten.</p>
     <h2>Wie du ehrlich prüfst</h2>
     <p>Gehe die Kartenabrechnungen der letzten drei Monate nach wiederkehrenden Posten durch. Jahresabos verstecken sich am besten: Domains, Cloud-Speicher, Virenschutz, Softwarelizenzen.</p>
     <h2>Die Abrechnungszyklus-Falle</h2>

@@ -1,6 +1,6 @@
 /**
  * wordle-solver 本地化 bundle —— zh / es / de
- * 覆盖:useCases + faqs
+ * 覆盖:ui + useCases + faqs
  */
 import type { ToolL10n } from '../tool-l10n'
 
@@ -8,11 +8,11 @@ export const wordleSolverL10n: ToolL10n = {
   zh: {
     ui: {
       'anagramEmpty': '输入至少 3 个字母即可查找可拼出的词。',
-      'anagramHint': '找出能用这些字母拼出的词典词(最多为输入的字母数)。',
+      'anagramHint': '找出仅用这些字母就能拼出的词典词(词长不超过你输入的字母数)。',
       'anagramLabel': '可用字母(3–10)',
       'anagramMode': '易位构词模式',
       'anagramNoMatch': '没有词能由这些字母拼出。试着加更多字母,或在下方粘贴额外词汇。',
-      'anagramPlaceholder': '如 rates',
+      'anagramPlaceholder': '如 least',
       'clear': '清空',
       'clickAnyWordToCopy': '点击任意词即可复制',
       'clickToCopy': '点击复制',
@@ -32,34 +32,34 @@ export const wordleSolverL10n: ToolL10n = {
       'privacyIntro': '🔒 100% 在客户端——一个 ',
       'privacyOutro': ' 词的词典随页面打包;不联网查询。',
       'solverEmpty': '在上方输入至少一个约束——一个绿色位置、必须包含的字母或要排除的字母——匹配的词会显示在这里。',
-      'solverMode': 'Wordle 解算',
-      'solverNoMatch': '没有词匹配这些约束。请复查灰色字母是否也被标成了绿色或黄色。',
+      'solverMode': 'Wordle 求解器',
+      'solverNoMatch': '没有词匹配这些约束。请检查灰色字母是否又被标成了绿色或黄色。',
       'summaryConstraints': '必含 {m}|排除 {x}|绿位 {g}',
       'wordPlural': '个词',
       'wordSingular': '个词',
     },
     useCases: [
-      '按字母位置的 Wordle 解算器',
+      '按字母位置的 Wordle 求解器',
       'Wordle 五字母单词查找器',
       'Wordle 绿黄灰提示助手',
       '文字游戏易位构词查找器',
     ],
     faqs: [
       {
-        q: '它用的是真正的 Wordle 答案表吗?',
-        a: '它用一个很大的内置英文词表,覆盖 Wordle 风格的五字母答案,所以建议贴合游戏接受的词汇类型。它是很强的解题辅助,但没有任何第三方词表能保证在未来的每一天都与游戏完全一致。',
+        q: '它用的是官方的 Wordle 答案表吗?',
+        a: '它用一个很大的内置英文词表,覆盖 Wordle 风格的五字母答案,所以给出的建议与游戏接受的词汇类型相符。它是很强的解题辅助,但没有任何第三方词表能保证在未来的每一天都与游戏完全一致。',
       },
       {
         q: '绿、黄、灰提示怎么对应到输入框?',
-        a: '绿色(位置正确)的字母填进「已知位置」字段;黄色(在词中但位置不对)填进「包含字母」框;灰色(不在词中)填进「排除字母」。解算器对三者一起过滤词典来缩小候选。',
+        a: '绿色(位置正确)的字母填进「已知位置」字段;黄色(在词中但位置不对)填进「必须包含」框;灰色(不在词中)填进「不能包含」。求解器会用这三类约束同时过滤词典,缩小候选范围。',
       },
       {
-        q: '支持易位构词和模式解算吗?',
+        q: '支持易位构词和模式求解吗?',
         a: '支持。除了标准的提示过滤,它还能匹配易位构词模式和已知字母位置,当你有打乱的字母或部分信息、想找出所有符合条件的词典单词时很有帮助。',
       },
       {
         q: '为什么不建议直接抄第一个候选词?',
-        a: '列表默认按词典词频排序,但 Wordle 的博弈价值不完全等于词频:候选剩好几个时,先试一个含未测高频字母的词(哪怕不是候选)常常更快锁定答案。把解算器当过滤引擎,而不是答案生成器。',
+        a: '列表默认把最常见词排在前面(同档内按字母序),但 Wordle 的博弈价值不完全等于词频:候选剩好几个时,先试一个含未测高频字母的词(哪怕不是候选)常常更快锁定答案。把求解器当过滤引擎,而不是答案生成器。',
       },
     ],
   },
@@ -70,13 +70,13 @@ export const wordleSolverL10n: ToolL10n = {
       'anagramLabel': 'Letras disponibles (3–10)',
       'anagramMode': 'Modo anagrama',
       'anagramNoMatch': 'No se puede formar ninguna palabra con esas letras. Prueba a añadir más letras o pega palabras extra abajo.',
-      'anagramPlaceholder': 'p. ej. rates',
+      'anagramPlaceholder': 'p. ej. least',
       'clear': 'Limpiar',
       'clickAnyWordToCopy': 'pulsa cualquier palabra para copiarla',
       'clickToCopy': 'Pulsa para copiar',
       'commonFirst': 'Primero las más comunes',
-      'extraWordsLabel': 'Palabras extra (opcional — una por línea o separadas por espacios, se fusionan al diccionario de esta sesión)',
-      'foundClickToCopy': 'encontradas — pulsa cualquier palabra para copiarla',
+      'extraWordsLabel': 'Palabras extra (opcional — una por línea o separadas por espacios, se incorporan al diccionario de esta sesión)',
+      'foundClickToCopy': '— pulsa cualquier palabra para copiarla',
       'inDictionary': '{n} palabras en el diccionario',
       'knownPositions': 'Posiciones conocidas (verde)',
       'letterPosition': 'Letra en la posición {n}',
@@ -88,10 +88,10 @@ export const wordleSolverL10n: ToolL10n = {
       'mustPlaceholder': 'p. ej. ar',
       'notPlaceholder': 'p. ej. xyz',
       'privacyIntro': '🔒 100% en el cliente — un diccionario de ',
-      'privacyOutro': ' palabras va con la página; nada se consulta online.',
-      'solverEmpty': 'Introduce al menos una restricción arriba — una posición verde, letras que deben estar o letras a excluir — y las palabras aparecerán aquí.',
-      'solverMode': 'Solucionador Wordle',
-      'solverNoMatch': 'Ninguna palabra cumple esas restricciones. Revisa que las letras grises no estén también en verde o amarillo.',
+      'privacyOutro': ' palabras se incluye con la página; nada se consulta online.',
+      'solverEmpty': 'Introduce al menos una restricción arriba — una posición verde, letras que la palabra deba contener o letras a excluir — y las palabras aparecerán aquí.',
+      'solverMode': 'Solucionador de Wordle',
+      'solverNoMatch': 'Ninguna palabra cumple esas restricciones. Revisa que las letras grises no estén también marcadas en verde o amarillo.',
       'summaryConstraints': 'debe contener {m}|excluir {x}|verde {g}',
       'wordPlural': 'palabras',
       'wordSingular': 'palabra',
@@ -99,17 +99,17 @@ export const wordleSolverL10n: ToolL10n = {
     useCases: [
       'solucionador de Wordle por posición de letra',
       'buscador de palabras de 5 letras para Wordle',
-      'ayudante de Wordle verde amarillo gris',
+      'ayudante de Wordle con verde, amarillo y gris',
       'buscador de anagramas para juegos de palabras',
     ],
     faqs: [
       {
         q: '¿Usa la lista oficial de respuestas de Wordle?',
-        a: 'Usa una amplia lista de palabras en inglés integrada, dimensionada para cubrir respuestas de cinco letras estilo Wordle, así que las sugerencias encajan con el tipo de palabras que acepta el juego. Es una potente ayuda, aunque ninguna lista de terceros garantiza replicar el juego exactamente cada día futuro.',
+        a: 'Usa una amplia lista de palabras en inglés integrada, dimensionada para cubrir respuestas de cinco letras estilo Wordle, así que las sugerencias encajan con el tipo de palabras que acepta el juego. Es una potente ayuda, aunque ninguna lista de terceros garantice reflejar el juego con exactitud todos los días futuros.',
       },
       {
         q: '¿Cómo se mapean las pistas verde, amarillo y gris a las entradas?',
-        a: 'Las letras verdes (posición correcta) van en los campos de «posición conocida»; las amarillas (en la palabra, posición errónea) en la casilla de «letras incluidas»; las grises (no en la palabra) en «letras excluidas». El solucionador filtra el diccionario con las tres a la vez para acotar candidatos.',
+        a: 'Las letras verdes (posición correcta) van en los campos de «posición conocida»; las amarillas (en la palabra, posición errónea) en la casilla de «debe contener»; las grises (no en la palabra) en «NO debe contener». El solucionador filtra el diccionario con las tres a la vez para acotar candidatos.',
       },
       {
         q: '¿Admite anagramas y resolución por patrón?',
@@ -117,18 +117,18 @@ export const wordleSolverL10n: ToolL10n = {
       },
       {
         q: '¿Por qué no conviene probar el primer candidato tal cual?',
-        a: 'La lista sale ordenada por frecuencia de diccionario, pero el valor de una jugada no es solo la frecuencia: cuando quedan varios candidatos, una palabra de sondeo con letras aún sin probar (aunque no sea candidata) suele acotar antes. Usa el solucionador como filtro, no como generador de respuestas.',
+        a: 'La lista se ordena con las más comunes primero (alfabético dentro de cada grupo), pero el valor de una jugada no es solo la frecuencia: cuando quedan varios candidatos, una palabra de sondeo con letras aún sin probar (aunque no sea candidata) suele acotar antes. Usa el solucionador como filtro, no como generador de respuestas.',
       },
     ],
   },
   de: {
     ui: {
-      'anagramEmpty': 'Mindestens 3 Buchstaben eingeben, um bildbare Wörter zu finden.',
+      'anagramEmpty': 'Gib mindestens 3 Buchstaben ein, um Wörter zu finden, die sich daraus bilden lassen.',
       'anagramHint': 'Findet Wörterbuchwörter (bis zur Anzahl der eingegebenen Buchstaben), die nur aus diesen Buchstaben bildbar sind.',
       'anagramLabel': 'Verfügbare Buchstaben (3–10)',
       'anagramMode': 'Anagramm-Modus',
-      'anagramNoMatch': 'Aus diesen Buchstaben lässt sich kein Wort bilden. Probier mehr Buchstaben oder füge unten zusätzliche Wörter ein.',
-      'anagramPlaceholder': 'z. B. rates',
+      'anagramNoMatch': 'Aus diesen Buchstaben lässt sich kein Wort bilden. Probier es mit mehr Buchstaben oder füge unten zusätzliche Wörter ein.',
+      'anagramPlaceholder': 'z. B. least',
       'clear': 'Leeren',
       'clickAnyWordToCopy': 'klicke ein Wort zum Kopieren',
       'clickToCopy': 'Zum Kopieren klicken',
@@ -138,8 +138,8 @@ export const wordleSolverL10n: ToolL10n = {
       'inDictionary': '{n} Wörter im Wörterbuch',
       'knownPositions': 'Bekannte Positionen (grün)',
       'letterPosition': 'Buchstabe an Position {n}',
-      'matchingWordPlural': 'treffende Wörter',
-      'matchingWordSingular': 'treffendes Wort',
+      'matchingWordPlural': 'passende Wörter',
+      'matchingWordSingular': 'passendes Wort',
       'more': 'mehr',
       'mustContain': 'Muss enthalten (gelb)',
       'mustNotContain': 'Darf NICHT enthalten (grau)',
@@ -147,9 +147,9 @@ export const wordleSolverL10n: ToolL10n = {
       'notPlaceholder': 'z. B. xyz',
       'privacyIntro': '🔒 100% clientseitig — ein ',
       'privacyOutro': '-Wörter-Wörterbuch ist mit der Seite gebündelt; nichts wird online nachgeschlagen.',
-      'solverEmpty': 'Gib oben mindestens eine Einschränkung ein — eine grüne Position, enthaltene Buchstaben oder auszuschließende Buchstaben — und passende Wörter erscheinen hier.',
+      'solverEmpty': 'Gib oben mindestens eine Einschränkung ein — eine grüne Position, Buchstaben, die enthalten sein müssen, oder auszuschließende Buchstaben — und passende Wörter erscheinen hier.',
       'solverMode': 'Wordle-Löser',
-      'solverNoMatch': 'Keine Wörter passen zu diesen Einschränkungen. Prüfe, ob graue Buchstaben nicht auch grün oder gelb markiert sind.',
+      'solverNoMatch': 'Keine Wörter passen zu diesen Einschränkungen. Prüfe, dass graue Buchstaben nicht auch als grün oder gelb markiert sind.',
       'summaryConstraints': 'muss enthalten {m}|ausschließen {x}|grün {g}',
       'wordPlural': 'Wörter',
       'wordSingular': 'Wort',
@@ -157,25 +157,25 @@ export const wordleSolverL10n: ToolL10n = {
     useCases: [
       'Wordle-Löser nach Buchstabenposition',
       '5-Buchstaben-Wortfinder für Wordle',
-      'Wordle-Helfer grün gelb grau',
+      'Wordle-Helfer mit Grün, Gelb und Grau',
       'Anagramm-Finder für Wortspiele',
     ],
     faqs: [
       {
         q: 'Nutzt es die offizielle Wordle-Antwortliste?',
-        a: 'Es nutzt eine große eingebaute englische Wortliste, die Wordle-artige Fünfbuchstaben-Antworten abdeckt, sodass Vorschläge zur Art von Wörtern passen, die das Spiel akzeptiert. Es ist eine starke Hilfe, aber keine Drittanbieter-Liste garantiert, an jedem zukünftigen Tag exakt mit dem Spiel übereinzustimmen.',
+        a: 'Es nutzt eine große eingebaute englische Wortliste, die Wordle-artige Fünfbuchstaben-Antworten abdeckt, sodass die Vorschläge dem Worttyp entsprechen, den das Spiel akzeptiert. Es ist eine starke Hilfe, aber keine Drittanbieter-Liste garantiert, an jedem zukünftigen Tag exakt mit dem Spiel übereinzustimmen.',
       },
       {
         q: 'Wie werden grüne, gelbe und graue Hinweise den Eingaben zugeordnet?',
-        a: 'Grüne (richtige Position) Buchstaben gehören in die Felder «bekannte Position»; gelbe (im Wort, falsche Position) ins Feld «enthaltene Buchstaben»; graue (nicht im Wort) zu «ausgeschlossene Buchstaben». Der Löser filtert das Wörterbuch gegen alle drei, um Kandidaten einzuengen.',
+        a: 'Grüne Buchstaben (richtige Position) gehören in die Felder „Bekannte Positionen“; gelbe (im Wort, falsche Position) ins Feld „Muss enthalten“; graue (nicht im Wort) zu „Darf NICHT enthalten“. Der Löser gleicht das Wörterbuch mit allen drei Bedingungen ab, um die Kandidaten einzuengen.',
       },
       {
-        q: 'Werden Anagramm- und Musterlösen unterstützt?',
-        a: 'Ja. Neben den Standard-Hinweisfiltern kann es Anagramm-Muster und bekannte Buchstabenpositionen matchen, was hilft, wenn du vertauschte Buchstaben oder Teilinformationen hast und jedes passende Wort aus dem Wörterbuch finden willst.',
+        q: 'Werden Anagramm- und Mustersuche unterstützt?',
+        a: 'Ja. Neben den Standard-Hinweisfiltern deckt es auch Anagramm-Muster und bekannte Buchstabenpositionen ab, was hilft, wenn du vertauschte Buchstaben oder Teilinformationen hast und jedes passende Wort aus dem Wörterbuch finden willst.',
       },
       {
-        q: 'Warum einfach den ersten Kandidaten raten?',
-        a: 'Die Liste ist standardmäßig nach Worthäufigkeit sortiert, aber der Spielwert eines Wortes ist mehr als Frequenz: Bleiben mehrere Kandidaten, grenzt ein Sondierungswort mit ungetesteten Buchstaben (auch wenn es kein Kandidat ist) oft schneller ein. Nutze den Löser als Filter, nicht als Antwortgenerator.',
+        q: 'Warum sollte man nicht einfach den ersten Kandidaten übernehmen?',
+        a: 'Die Liste sortiert die häufigsten Wörter standardmäßig nach oben (innerhalb der Gruppe alphabetisch), aber der Spielwert eines Wortes ist mehr als bloße Häufigkeit: Bleiben mehrere Kandidaten, grenzt ein Sondierungswort mit ungetesteten Buchstaben (auch wenn es kein Kandidat ist) oft schneller ein. Nutze den Löser als Filter, nicht als Antwortgenerator.',
       },
     ],
   },

@@ -44,11 +44,11 @@ const es: ReactNode = (
     <h2>De dónde salió el ×7 — y por qué falla</h2>
     <p>La vieja regla dividía una vida humana entre una vida canina. Olvida que los perros alcanzan la edad adulta en dos años: un labrador de un año se parece más a un humano de 15 que a un niño de 7.</p>
     <h2>El tamaño cambia la curva</h2>
-    <p>Tras el segundo año, las razas pequeñas suman unos 4 años humanos por año canino, las medianas 5 y las gigantes 6,5+. Los gran daneses llegan a la vejez años antes que los chihuahuas pese a calendarios idénticos.</p>
+    <p>Tras el segundo año, las razas pequeñas suman unos 4 años humanos por año canino, las medianas 5 y las gigantes 6,5+. Los grandes daneses llegan a la vejez años antes que los chihuahuas pese a tener calendarios idénticos.</p>
     <h2>Etapas vitales para planificar</h2>
     <p>Cachorro (menos de 1), joven (1-2), adulto en plenitud (2-7 según tamaño), maduro, senior. La frecuencia de las revisiones veterinarias debería subir en la etapa senior: analíticas anuales en lugar de cada dos años.</p>
     <h2>Mejor que cualquier tabla</h2>
-    <p>La condición corporal gana al cumpleaños: perros delgadamente alimentados y bien ejercitados de la misma edad son biológicamente más jóvenes. Mantén el peso a raya y el cuidado dental al día — nada mueve más los años-caninos que eso.</p>
+    <p>La condición corporal gana al cumpleaños: perros delgados y bien ejercitados de la misma edad son biológicamente más jóvenes. Mantén el peso a raya y el cuidado dental al día — nada influye más en sus años caninos que eso.</p>
   </section>
 )
 
@@ -62,7 +62,7 @@ const de: ReactNode = (
     <h2>Lebensphasen, die man planen sollte</h2>
     <p>Welpe (unter 1), Junghund (1-2), erwachsen in Bestform (2-7 je nach Größe), reif, Senior. Im Senior-Band sollte die tierärztliche Vorsorge hochgestuft werden — Blutwerte jährlich statt alle zwei Jahre.</p>
     <h2>Besser als jede Tabelle</h2>
-    <p>Der Körperzustand schlägt den Geburtstag: schlank gefütterte, gut bewegte Hunde sind im selben Alter biologisch jünger. Halte das Gewicht unten und die Zahnpflege oben — nichts verschiebt Hundejahre mehr.</p>
+    <p>Der Körperzustand schlägt den Geburtstag: schlank gefütterte, gut bewegte Hunde sind im selben Alter biologisch jünger. Halte das Gewicht niedrig und die Zahnpflege hoch — nichts senkt das Hundealter stärker.</p>
   </section>
 )
 

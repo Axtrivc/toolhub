@@ -58,7 +58,7 @@ const de: ReactNode = (
     <h2>Warum 90 Minuten?</h2>
     <p>Schlaf verläuft in Zyklen von rund 90 Minuten — vom Leichtschlaf über den Tiefschlaf in den REM-Schlaf. Aufwachen im Tiefschlaf erzeugt Schlafträgheit, dieses schwere, desorientierte Gefühl; Aufwachen nahe einer Zyklusgrenze fällt spürbar leichter.</p>
     <h2>So liest du die Ergebnisse</h2>
-    <p>Wähle den Vorschlag mit genug Gesamtruhe: Den meisten Erwachsenen bekommt 5–6 Zyklen (7,5–9 Stunden) am besten. Jede Schätzung enthält etwa 15 Minuten Einschlafzeit; lege sie früher, wenn du meist länger wach liegst.</p>
+    <p>Wähle den Vorschlag mit genug Gesamtruhe: Den meisten Erwachsenen bekommt 5–6 Zyklen (7,5–9 Stunden) am besten. Jede Schätzung enthält etwa 15 Minuten Einschlafzeit; wähle eine frühere Zeit, wenn du meist länger wach liegst.</p>
     <h2>Gleichmäßigkeit schlägt Optimierung</h2>
     <p>Jeden Tag zur gleichen Zeit ins Bett und aufzustehen trainiert deinen Körper, Schlaf in genau diesem Fenster zu erwarten. Ein stabiler Rhythmus verstärkt jeden Nutzen des Zyklus-Timings.</p>
     <h2>Individuelle Unterschiede</h2>

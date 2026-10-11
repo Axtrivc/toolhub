@@ -46,9 +46,9 @@ const es: ReactNode = (
     <h2>El número de invitados es la palanca maestra</h2>
     <p>El coste por invitado arrastra catering, alquileres, invitaciones, detalles y hasta el tamaño del recinto. Quitar 10 invitados libera más presupuesto que bajar el nivel de las flores.</p>
     <h2>La temporada baja ahorra de verdad</h2>
-    <p>Los sábados por la noche de junio a septiembre pagan precios pico. Los viernes por la noche, los domingos y las fechas de noviembre-abril suelen ahorrar un 20-30 % en recinto y proveedores por igual.</p>
+    <p>Los sábados por la noche de junio a septiembre se pagan a precios pico. Los viernes por la noche, los domingos y las fechas de noviembre-abril suelen ahorrar un 20-30 % en recinto y proveedores por igual.</p>
     <h2>Construye el colchón</h2>
-    <p>Aparta parte del porcentaje de imprevistos como contingencia. Las bodas medias se pasan del presupuesto inicial en torno a un 10-15 %, casi siempre en comensales de última hora y alquileres extra.</p>
+    <p>Reserva parte de la partida miscelánea para imprevistos. Las bodas medias se pasan del presupuesto inicial en torno a un 10-15 %, casi siempre por el número de comensales y los alquileres de última hora.</p>
   </section>
 )
 
@@ -56,13 +56,13 @@ const es: ReactNode = (
 const de: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>Die Standardaufteilung</h2>
-    <p>Catering und Bar schlucken etwa 30 % eines typischen Budgets, Location und Ausstattung 25 %, Foto und Video 15 %. Diese drei dominieren; alles andere verhandelt sich um sie herum.</p>
+    <p>Catering und Bar schlucken etwa 30 % eines typischen Budgets, Location und Ausstattung 25 %, Foto und Video 15 %. Diese drei dominieren; alles andere wird um sie herum verhandelt.</p>
     <h2>Die Gästezahl ist der Haupt-Hebel</h2>
-    <p>Die Kosten pro Gast treiben Catering, Ausstattung, Einladungen, Gastgeschenke und sogar die nötige Größe der Location. Zehn Gäste weniger freien mehr Budget als jedes Blumen-Downgrade.</p>
+    <p>Die Kosten pro Gast treiben Catering, Ausstattung, Einladungen, Gastgeschenke und sogar die nötige Größe der Location. Zehn Gäste weniger setzen mehr Budget frei als jedes Blumen-Downgrade.</p>
     <h2>Nebensaison spart echtes Geld</h2>
     <p>Samstagsabende von Juni bis September kosten Höchstpreise. Freitagsabende, Sonntage und Termine von November bis April sparen bei Location und Dienstleistern regelmäßig 20-30 %.</p>
-    <h2>Baut den Puffer ein</h2>
-    <p>Legt einen Teil des Sonstige-Postens als Rücklage zurück. Hochzeiten überschreiten ihr Anfangsbudget im Schnitt um rund 10-15 % — meist über Last-Minute-Gästezahlen und Extra-Mieten.</p>
+    <h2>Baue den Puffer ein</h2>
+    <p>Lege einen Teil des Sonstige-Postens als Reserve zurück. Hochzeiten überschreiten ihr Anfangsbudget im Schnitt um rund 10-15 % — meist bei den Catering-Zahlen und Last-Minute-Mieten.</p>
   </section>
 )
 

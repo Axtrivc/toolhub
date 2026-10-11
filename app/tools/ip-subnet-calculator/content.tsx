@@ -119,7 +119,7 @@ const es: ReactNode = (
       <p>
         Dos prefijos rompen la regla de «menos dos». Los enlaces <code>/31</code> (RFC 3021) son enlaces WAN
         punto a punto sin dirección de red ni de broadcast — <strong>ambas</strong> direcciones son utilizables, lo
-        que reduce a la mitad el desperdicio en enlaces entre routers. <code>/32</code> identifica exactamente un host
+        que reduce a la mitad el desperdicio de direcciones en enlaces entre routers. <code>/32</code> identifica exactamente un host
         y es común en interfaces de loopback y reglas de firewall. Esta herramienta gestiona ambos correctamente en
         lugar de reportar cero hosts utilizables.
       </p>
@@ -144,7 +144,7 @@ const de: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>Was ist dieses Werkzeug?</h2>
     <p>
-      Subnetting ist die Arithmetik, die jeder Netzwerkingenieur täglich betreibt: Zu einer Adresse wie{' '}
+      Subnetting ist die Arithmetik, die jeder Netzwerkingenieur täglich durchführt: Zu einer Adresse wie{' '}
       <code>192.168.1.10/24</code> — zu welchem Netz gehört sie, wie lautet ihre Broadcast-Adresse und wie viele
       Hosts passen hinein? Dieser Rechner antwortet sofort mit Subnetzmaske, Wildcard-Maske, Netzwerk- und
       Broadcast-Adresse, nutzbarem Host-Bereich, Adressklasse und der privaten/öffentlichen RFC-1918-Klassifizierung —
@@ -155,7 +155,7 @@ const de: ReactNode = (
       <h2>Wie die CIDR-Mathematik funktioniert</h2>
       <p>
         Eine IPv4-Adresse ist eine 32-Bit-Zahl, und die Präfixlänge (<code>/24</code>) gibt an, wie viele führende
-        Bits das Netz identifizieren. Die <strong>Subnetzmaske</strong> sind genau diese Bits auf 1 gesetzt; die{' '}
+        Bits das Netz identifizieren. Die <strong>Subnetzmaske</strong> besteht aus genau diesen auf 1 gesetzten Bits; die{' '}
         <strong>Wildcard-Maske</strong> ist deren Umkehrung, verwendet in Cisco-ACLs und OSPF. Ein AND aus Adresse und
         Maske ergibt die <strong>Netzwerkadresse</strong>; ein OR mit der Wildcard ergibt die{' '}
         <strong>Broadcast-Adresse</strong>. Alles dazwischen — abzüglich dieser beiden reservierten Adressen — ist der

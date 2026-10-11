@@ -33,7 +33,7 @@ const en: ReactNode = (
 const zh: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>这是什么工具?</h2>
-    <p>比较两个列表是一项出人意料地常见的任务:哪些邮箱地址在表格 A 中却不在 B 中,哪些文件存在于某个文件夹却不在另一个文件夹,哪些 SKU 出现在上个月的报告中却不在本月。只要项目超过寥寥几个,靠肉眼比对就毫无希望。本工具逐行比较两个列表,并将其拆分为完整描述两者差异的四个集合。</p>
+    <p>比较两个列表是一项出人意料地常见的任务:哪些邮箱地址在电子表格 A 中却不在 B 中,哪些文件在这个文件夹里有、那个文件夹里却没有,哪些 SKU 出现在上个月的报告中、这个月却没有。只要项目超过寥寥几个,靠肉眼比对就行不通。本工具逐行比较两个列表,并将其拆分为四个集合,完整呈现两者的差异。</p>
     <div>
       <h2>四个结果集</h2>
       <ul>
@@ -49,7 +49,7 @@ const zh: ReactNode = (
     </div>
     <div>
       <h2>处理重复项</h2>
-      <p>在单个列表内,重复项会被合并 —— <code>apple</code> 在列表 A 中出现三次只算作一个项目。这与集合运算在数学上的工作方式一致,在做差异比对时几乎总是你想要的结果。如果你需要知道 A 有三份而 B 有一份,请先用行计数器处理列表,再对唯一键进行比对。</p>
+      <p>在单个列表内,重复项会被合并 —— <code>apple</code> 在列表 A 中出现三次只算作一个项目。这与集合运算的数学定义一致,做差异比对时几乎总是你想要的结果。如果你需要知道 A 有三份而 B 有一份,请先用行计数器处理列表,再对唯一键进行比对。</p>
     </div>
   </section>
 )
@@ -58,7 +58,7 @@ const zh: ReactNode = (
 const es: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>¿Qué es esta herramienta?</h2>
-    <p>Comparar dos listas es una tarea sorprendentemente común: qué direcciones de correo están en la hoja de cálculo A pero no en B, qué archivos existen en una carpeta pero no en otra, qué SKU aparecieron en el informe del mes pasado pero no en el de este mes. Hacerlo a simple vista es imposible para más que un puñado de elementos. Esta herramienta compara dos listas línea por línea y las divide en los cuatro conjuntos que describen completamente cómo difieren.</p>
+    <p>Comparar dos listas es una tarea sorprendentemente común: qué direcciones de correo están en la hoja de cálculo A pero no en B, qué archivos existen en una carpeta pero no en otra, qué SKU aparecieron en el informe del mes pasado pero no en el de este mes. Hacerlo a simple vista resulta inviable más allá de un puñado de elementos. Esta herramienta compara dos listas línea por línea y las divide en los cuatro conjuntos que describen completamente cómo difieren.</p>
     <div>
       <h2>Los cuatro conjuntos de resultados</h2>
       <ul>
@@ -74,7 +74,7 @@ const es: ReactNode = (
     </div>
     <div>
       <h2>Gestión de duplicados</h2>
-      <p>Dentro de una sola lista, los duplicados se contraen — <code>apple</code> que aparece tres veces en la lista A cuenta como un solo elemento. Esto coincide con cómo funcionan matemáticamente las operaciones de conjuntos y casi siempre es lo que quieres al hacer un diff. Si necesitas saber que A tenía tres copias y B una, preprocesa primero las listas con un contador de líneas y luego compara las claves únicas.</p>
+      <p>Dentro de una sola lista, los duplicados se fusionan — <code>apple</code> que aparece tres veces en la lista A cuenta como un solo elemento. Esto coincide con cómo funcionan matemáticamente las operaciones de conjuntos y casi siempre es lo que quieres al hacer un diff. Si necesitas saber que A tenía tres copias y B una, preprocesa primero las listas con un contador de líneas y luego compara las claves únicas.</p>
     </div>
   </section>
 )
@@ -83,19 +83,19 @@ const es: ReactNode = (
 const de: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>Was ist dieses Werkzeug?</h2>
-    <p>Zwei Listen zu vergleichen ist eine überraschend häufige Aufgabe: Welche E-Mail-Adressen stehen in Tabelle A, aber nicht in B, welche Dateien existieren in dem einen Ordner, aber nicht in einem anderen, welche SKUs tauchten im Bericht des letzten Monats auf, aber nicht in diesem. Es per Auge zu tun, ist bei mehr als einer Handvoll Elementen aussichtslos. Dieses Werkzeug vergleicht zwei Listen Zeile für Zeile und teilt sie in die vier Mengen auf, die vollständig beschreiben, wie sie sich unterscheiden.</p>
+    <p>Zwei Listen zu vergleichen ist eine überraschend häufige Aufgabe: Welche E-Mail-Adressen stehen in Tabelle A, aber nicht in B, welche Dateien existieren in dem einen Ordner, aber nicht in einem anderen, welche SKUs tauchten im Bericht des letzten Monats auf, aber nicht in diesem. Sobald es mehr als eine Handvoll Elemente sind, ist das von Hand aussichtslos. Dieses Werkzeug vergleicht zwei Listen Zeile für Zeile und teilt sie in die vier Mengen auf, die vollständig beschreiben, wie sie sich unterscheiden.</p>
     <div>
       <h2>Die vier Ergebnismengen</h2>
       <ul>
         <li><strong>Nur in A</strong> — Elemente, die in der ersten Liste vorhanden sind, aber in der zweiten fehlen. Das sind die Dinge, die A hat und B nicht.</li>
         <li><strong>Nur in B</strong> — umgekehrt: Elemente in der zweiten Liste, aber nicht in der ersten.</li>
         <li><strong>In beiden (Schnittmenge)</strong> — Elemente, die in beiden Listen vorhanden sind. Nützlich, um Überschneidungen oder gemeinsame Mitglieder zu finden.</li>
-        <li><strong>Vereinigungsmenge</strong> — jedes einzigartige Element aus einer der Listen, kombiniert und entdupliziert.</li>
+        <li><strong>Vereinigungsmenge</strong> — jedes eindeutige Element aus einer der Listen, kombiniert und ohne Duplikate.</li>
       </ul>
     </div>
     <div>
       <h2>Trimmen und Groß-/Kleinschreibung</h2>
-      <p>Standardmäßig schneidet das Werkzeug Leerzeichen aus jeder Zeile (sodass <code>&quot;apple &quot;</code> mit <code>&quot;apple&quot;</code> übereinstimmt) und vergleicht ohne Berücksichtigung der Groß-/Kleinschreibung (sodass <code>&quot;Apple&quot;</code> mit <code>&quot;apple&quot;</code> übereinstimmt). Deaktiviere das Trimmen, wenn führende Leerzeichen für dich wichtig sind, und aktiviere die Unterscheidung der Groß-/Kleinschreibung, wenn <code>SKU001</code> und <code>sku001</code> tatsächlich verschiedene Elemente sind. Jede Ergebnismenge hat eine eigene Kopieren-Schaltfläche, damit du sie direkt in eine Tabellenkalkulation oder ein anderes Werkzeug einfügen kannst.</p>
+      <p>Standardmäßig entfernt das Werkzeug umgebende Leerzeichen aus jeder Zeile (sodass <code>&quot;apple &quot;</code> mit <code>&quot;apple&quot;</code> übereinstimmt) und vergleicht ohne Berücksichtigung der Groß-/Kleinschreibung (sodass <code>&quot;Apple&quot;</code> mit <code>&quot;apple&quot;</code> übereinstimmt). Deaktiviere das Trimmen, wenn führende Leerzeichen für dich wichtig sind, und aktiviere die Unterscheidung der Groß-/Kleinschreibung, wenn <code>SKU001</code> und <code>sku001</code> tatsächlich verschiedene Elemente sind. Jede Ergebnismenge hat eine eigene Kopieren-Schaltfläche, damit du sie direkt in eine Tabellenkalkulation oder ein anderes Werkzeug einfügen kannst.</p>
     </div>
     <div>
       <h2>Umgang mit Duplikaten</h2>

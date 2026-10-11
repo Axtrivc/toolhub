@@ -102,7 +102,7 @@ const zh: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>字数统计器是如何工作的?</h2>
     <p>
-      本工具会在你打字时实时统计单词数、字符数、句子数、段落数以及估算的阅读时间。「单词」定义为任意非空白字符序列 —— 因此 <code>hello</code>、<code>2026</code> 和 <code>don&apos;t</code> 各算作一个单词。所有计算都在你的浏览器本地完成,因此没有延迟,你的文本也绝不会离开你的设备。
+      本工具会在你打字时实时统计单词数、字符数、句子数、段落数以及估算的阅读时间。「单词」定义为任意非空白字符序列——因此 <code>hello</code>、<code>2026</code> 和 <code>don&apos;t</code> 各算作一个单词。所有计算都在你的浏览器本地完成,因此没有延迟,你的文本也绝不会离开你的设备。
     </p>
 
     <h2>为什么要统计字数?</h2>
@@ -143,7 +143,7 @@ const zh: ReactNode = (
       </li>
     </ul>
     <p>
-      这些都是平均值 —— 你的实际速度取决于内容密度、专业术语以及是否在略读。请把它们当作规划参考,而不是秒表。
+      这些都是平均值——你的实际速度取决于内容密度、专业术语以及是否在略读。请把它们当作规划参考,而不是秒表。
     </p>
 
     <h2>常见平台的字符数限制</h2>
@@ -160,7 +160,7 @@ const zh: ReactNode = (
     <h2>达到目标字数的技巧</h2>
     <ol>
       <li>
-        <strong>不要凑字数。</strong>堆砌废话会损害可读性和 SEO。如果字数不足,请增加实质内容 —— 例子、数据或更深入的解释 —— 而不是填充。
+        <strong>不要凑字数。</strong>堆砌废话会损害可读性和 SEO。如果字数不足,请增加实质内容——例子、数据或更深入的解释——而不是填充。
       </li>
       <li>
         <strong>先列大纲。</strong>结构化的大纲让你更容易命中目标而不东拉西扯。给每个部分分配大致相等的字数。
@@ -179,9 +179,9 @@ const es: ReactNode = (
     <p>
       Esta herramienta cuenta palabras, caracteres, frases, párrafos y el tiempo estimado de
       lectura en tiempo real mientras escribes. Una «palabra» se define como cualquier secuencia de
-      caracteres que no sean espacios — así que <code>hello</code>, <code>2026</code> y{' '}
+      caracteres que no sean espacios en blanco — así que <code>hello</code>, <code>2026</code> y{' '}
       <code>don&apos;t</code> cuentan cada uno como una palabra. Todo ocurre localmente en tu
-      navegador, así que no hay retardo y tu texto nunca sale de tu dispositivo.
+      navegador, así que no hay demoras y tu texto nunca sale de tu dispositivo.
     </p>
 
     <h2>¿Por qué contar palabras?</h2>
@@ -192,7 +192,7 @@ const es: ReactNode = (
     <ul>
       <li>
         <strong>Escritura académica.</strong> Ensayos, tesis y envíos a revistas casi siempre tienen
-        límites estrictos de palabras. Quedarse corto o pasarse te puede costar puntos o que rechacen
+        límites estrictos de palabras. Quedarse corto o pasarse te puede costar puntos o hacer que rechacen
         tu trabajo.
       </li>
       <li>
@@ -214,7 +214,7 @@ const es: ReactNode = (
       </li>
     </ul>
 
-    <h2>Tiempo de lectura frente a tiempo de habla</h2>
+    <h2>Tiempo de lectura frente a tiempo de locución</h2>
     <p>
       La herramienta estima dos duraciones a partir de tu recuento de palabras, usando velocidades de
       lectura estándar:
@@ -226,16 +226,16 @@ const es: ReactNode = (
         herramienta de tiempo de lectura).
       </li>
       <li>
-        <strong>Tiempo de habla:</strong> ~130 palabras por minuto (el ritmo medio de una
+        <strong>Tiempo de locución:</strong> ~130 palabras por minuto (el ritmo medio de una
         presentación clara o un pódcast).
       </li>
       <li>
         <strong>Texto en chino, japonés o coreano:</strong> cada carácter cuenta como una palabra, y
-        las velocidades pasan a ~350 caracteres por minuto de lectura y ~220 de habla.
+        las velocidades pasan a ~350 caracteres por minuto de lectura y ~220 de locución.
       </li>
     </ul>
     <p>
-      Son promedios — tu velocidad real depende de la densidad del contenido, la jerga técnica y si
+      Son promedios — tu velocidad real depende de la densidad del contenido, la jerga técnica y de si
       estás hojeando. Úsalos como guía de planificación, no como cronómetro.
     </p>
 
@@ -253,12 +253,12 @@ const es: ReactNode = (
     <h2>Consejos para alcanzar tu recuento de palabras objetivo</h2>
     <ol>
       <li>
-        <strong>No rellenes.</strong> Añadir paja perjudica la legibilidad y el SEO. Si te quedas
+        <strong>No rellenes.</strong> Añadir relleno perjudica la legibilidad y el SEO. Si te quedas
         corto, añade sustancia — ejemplos, datos o una explicación más profunda —, no relleno.
       </li>
       <li>
         <strong>Haz un esquema primero.</strong> Un esquema estructurado facilita alcanzar tu objetivo
-        sin divagar. Reparte palabras más o menos equitativas entre las secciones.
+        sin divagar. Reparte aproximadamente la misma cantidad de palabras en cada sección.
       </li>
       <li>
         <strong>Edita sin piedad para recortar.</strong> Si te pasas del límite, busca frases
@@ -298,21 +298,22 @@ const de: ReactNode = (
       </li>
       <li>
         <strong>Juristische und professionelle Dokumente.</strong> Schriftsätze, Verträge und
-        Berichte haben oft Wortlimits, die von Gerichten oder Mandanten vorgegeben sind.
+        Berichte haben oft Wortlimits, die von Gerichten oder Auftraggebern vorgegeben sind.
       </li>
       <li>
         <strong>Soziale Medien.</strong> Jede Plattform hat eigene Limits: X (Twitter)-Posts,
-        Meta-Descriptions für SEO (rund 155 Zeichen), Werbetexte und mehr.
+        Meta-Beschreibungen für SEO (rund 155 Zeichen), Werbetexte und mehr.
       </li>
       <li>
-        <strong>Übersetzung und freies Schreiben.</strong> Viele Übersetzer und Autoren werden pro
+        <strong>Übersetzung und freiberufliches Schreiben.</strong> Viele Übersetzer und Autoren werden pro
         Wort bezahlt, daher sind genaue Zählungen für die Abrechnung unerlässlich.
       </li>
     </ul>
 
     <h2>Lesezeit vs. Sprechzeit</h2>
     <p>
-      Das Werkzeug schätzt zwei Dauerwerte auf Basis deiner Wortzahl mit Standard-Lesegeschwindigkeiten:
+      Auf Grundlage deiner Wortzahl schätzt das Werkzeug zwei Zeiten, jeweils mit gängigen
+      Standardgeschwindigkeiten:
     </p>
     <ul>
       <li>
@@ -326,19 +327,20 @@ const de: ReactNode = (
       </li>
       <li>
         <strong>Chinesischer, japanischer und koreanischer Text:</strong> Jedes Zeichen zählt als
-        Wort, und die Tempi wechseln zu ~350 Zeichen pro Minute beim Lesen und ~220 beim Sprechen.
+        Wort, und die Geschwindigkeiten ändern sich auf ~350 Zeichen pro Minute beim Lesen bzw. ~220
+        beim Sprechen.
       </li>
     </ul>
     <p>
-      Dies sind Durchschnittswerte — dein tatsächliches Tempo hängt von der Inhalbsdichte, dem
+      Dies sind Durchschnittswerte — dein tatsächliches Tempo hängt von der Inhaltsdichte, dem
       Fachjargon und davon ab, ob du nur überfliegst. Nutze sie als Planungshilfe, nicht als
       Stoppuhr.
     </p>
 
     <h2>Zeichenanzahlen gängiger Plattformen</h2>
-    <p>Schnellreferenz für Limits, auf die du hinschreiben könntest:</p>
+    <p>Schnellreferenz für Limits, an denen du dich beim Schreiben orientieren kannst:</p>
     <ul>
-      <li><strong>Google Meta-Description:</strong> ~155 Zeichen (danach wird abgeschnitten).</li>
+      <li><strong>Google Meta-Beschreibung:</strong> ~155 Zeichen (danach wird abgeschnitten).</li>
       <li><strong>X (Twitter)-Post:</strong> 280 Zeichen.</li>
       <li><strong>Instagram-Caption:</strong> 2,200 Zeichen (nur die ersten 125 sind ohne Tippen auf „mehr" sichtbar).</li>
       <li><strong>Facebook-Post:</strong> Kein striktes Limit, aber kürzere Posts bekommen mehr Engagement.</li>
@@ -349,7 +351,7 @@ const de: ReactNode = (
     <h2>Tipps, um deine Zielwortzahl zu erreichen</h2>
     <ol>
       <li>
-        <strong>Nicht aufblähen.</strong> Füllsel schadet Lesbarkeit und SEO. Wenn du zu kurz bist,
+        <strong>Nicht aufblähen.</strong> Füllmaterial schadet der Lesbarkeit und dem SEO. Wenn du zu kurz bist,
         füge Substanz hinzu — Beispiele, Daten oder eine tiefere Erklärung —, keinen Fülltext.
       </li>
       <li>
@@ -357,7 +359,7 @@ const de: ReactNode = (
         zu treffen, ohne abzuschweifen. Verteile ungefähr gleich viele Wörter auf jeden Abschnitt.
       </li>
       <li>
-        <strong>Beim Kürzen schonungslos editieren.</strong> Wenn du über dem Limit liegst, suche
+        <strong>Beim Kürzen schonungslos überarbeiten.</strong> Wenn du über dem Limit liegst, suche
         nach redundanten Phrasen, Adverbien und Wiederholungen. Kürzen verbessert den Text meistens.
       </li>
     </ol>

@@ -17,7 +17,7 @@ export const rothIraCalculatorL10n: ToolL10n = {
       'in.age': '当前年龄',
       'in.retireAge': '预期退休年龄',
       'in.contribution': '每年存入金额',
-      'in.currentTax': '当前的综合税率',
+      'in.currentTax': '当前边际税率',
       'in.retireTax': '退休时的预期税率',
       'in.returnRate': '预期年化投资回报率',
       'out.verdict': '分析建议',
@@ -41,12 +41,12 @@ export const rothIraCalculatorL10n: ToolL10n = {
       'chartTitle': 'Roth 与 Traditional 资产增长对比',
       'line.trad': 'Traditional 余额（税前）',
       'line.roth': 'Roth 余额（税后投入）',
-      'note': '💡 2025 年 IRA 限额为 7,000 美元（50 岁及以上为 8,000 美元）。Roth 与 Traditional 的本质区别仅在于纳税时间点：相同投资额、相同复合增长——胜负取决于你今天的税率与退休时的税率对比。',
+      'note': '💡 2026 年 IRA 限额为 7,500 美元（50 岁及以上为 8,600 美元）。Roth 与 Traditional 的本质区别仅在于纳税时间点：相同投资额、相同复合增长——胜负取决于你今天的税率与退休时的税率对比。',
     },
     useCases: [
       '同样每年 7000 美元、7% 回报、存 30 年:两账户税前都约 66 万美元,输入 22% 与 32% 两档税率,税后差约 6.6 万美元',
-      '职业早期税率 12%-22% 时优先 Roth,进入 24%-32% 收入峰值期换传统账户,逐年比出切换点',
-      '50 岁以上补缴场景:限额升到 8000 美元,每年多出的 1000 美元按 7% 年金复利 15 年累计约 2.5 万美元',
+      '职业早期税率 12%-22% 时优先 Roth,进入 24%-32% 收入峰值期改用 Traditional,逐年比出切换点',
+      '50 岁以上追加供款场景:限额升到 8600 美元,每年多出的 1100 美元按 7% 年金复利 15 年累计约 2.8 万美元',
       '压力测试「退休税率更高」的直觉:把 t_now 与 t_retire 对调各跑一遍,胜负和差距一目了然',
     ],
     faqs: [
@@ -56,11 +56,11 @@ export const rothIraCalculatorL10n: ToolL10n = {
       },
       {
         q: '每年能存多少?',
-        a: '2025 年上限 7000 美元,50 岁及以上另有 1000 美元追加(合计 8000)。该限额在 Roth 与 Traditional 之间共享,同时开两个不会翻倍;雇主 401(k) 的限额另算且高得多。',
+        a: '2026 年上限 7500 美元,50 岁及以上另有 1100 美元追加(合计 8600)。该限额在 Roth 与 Traditional 之间共享,同时开两个不会翻倍;雇主 401(k) 的限额另算且高得多。',
       },
       {
         q: '计算器考虑收入上限(phase-out)吗?',
-        a: '没有——它把两份相同投入分别复利,只隔离「何时缴税」这一个变量。2025 年 Roth 供款在单人约 15 万美元、夫妻合报约 23.6 万美元以上逐步取消;有雇主计划时 Traditional 的抵扣也有收入线。具体查 IRS 590-A 号刊物。',
+        a: '没有——它把两份相同投入分别复利,只隔离「何时缴税」这一个变量。2026 年 Roth 供款在单人约 15.3 万美元、夫妻合报约 24.2 万美元以上逐步取消;有雇主计划时 Traditional 的抵扣也有收入线。具体查 IRS 590-A 号刊物。',
       },
       {
         q: '和国内个人养老金是什么关系?',
@@ -103,12 +103,12 @@ export const rothIraCalculatorL10n: ToolL10n = {
       'chartTitle': 'Crecimiento de saldo: Roth vs Traditional',
       'line.trad': 'Saldo Traditional (bruto)',
       'line.roth': 'Saldo Roth (aportación neta)',
-      'note': '💡 El límite IRA para 2025 es de 7.000 $ (8.000 $ para mayores de 50 años). La diferencia clave radica en cuándo se pagan los impuestos.',
+      'note': '💡 El límite IRA para 2026 es de 7.500 $ (8.600 $ para mayores de 50 años). La diferencia clave radica en cuándo se pagan los impuestos.',
     },
     useCases: [
       '7000 $ al año al 7 % durante 30 años: ambos crecen a unos 661.000 $ brutos; con 22 % hoy y 32 % al jubilarse, el Roth saca unos 66.000 $ netos de ventaja',
       'arrancar la carrera con Roth (12-22 % marginal) y pasar a Tradicional en años de pico (24-32 %): comparar año a año el punto de cruce',
-      'escenario 50+: el límite sube a 8000 $; los 1000 $ extra al año al 7 % acumulan unos 25.000 $ en 15 años',
+      'escenario 50+: el límite sube a 8600 $; los 1100 $ extra al año al 7 % acumulan unos 27.600 $ en 15 años',
       'poner a prueba la intuición «los impuestos subirán»: intercambia t_now y t_retire y compara los dos escenarios lado a lado',
     ],
     faqs: [
@@ -118,11 +118,11 @@ export const rothIraCalculatorL10n: ToolL10n = {
       },
       {
         q: '¿Cuál es el límite de aportación?',
-        a: '7000 $ al año en 2025, más 1000 $ de catch-up a partir de los 50 (8000 $ en total). El límite se comparte entre Roth y Tradicional — aportar a ambos no lo duplica. El límite del 401(k) de tu empleador es aparte y mucho más alto.',
+        a: '7500 $ al año en 2026, más 1100 $ de catch-up a partir de los 50 (8600 $ en total). El límite se comparte entre Roth y Tradicional — aportar a ambos no lo duplica. El límite del 401(k) de tu empleador es aparte y mucho más alto.',
       },
       {
         q: '¿Tiene en cuenta los tramos de exclusión (phase-out)?',
-        a: 'No — aísla la decisión de calendario fiscal haciendo crecer aportaciones idénticas en ambas cuentas. Las aportaciones Roth dejan de ser válidas por encima de ~150.000 $ (soltero) / 236.000 $ (matrimonio) en 2025, y la deducibilidad del Tradicional desaparece si tienes plan en la empresa. Consulta la Publicación 590-A del IRS.',
+        a: 'No — aísla la decisión de calendario fiscal haciendo crecer aportaciones idénticas en ambas cuentas. Las aportaciones Roth dejan de ser válidas por encima de ~153.000 $ (soltero) / 242.000 $ (matrimonio) en 2026, y la deducibilidad del Tradicional desaparece si tienes plan en la empresa. Consulta la Publicación 590-A del IRS.',
       },
       {
         q: '¿Cómo se relaciona con los planes de pensiones españoles?',
@@ -165,12 +165,12 @@ export const rothIraCalculatorL10n: ToolL10n = {
       'chartTitle': 'Vermögenswachstum: Roth vs. Traditional',
       'line.trad': 'Traditional-Guthaben (brutto)',
       'line.roth': 'Roth-Guthaben (nach Steuern eingezahlt)',
-      'note': '💡 Das IRA-Beitragslimit für 2025 beträgt 7.000 $ (8.000 $ ab 50 Jahren). Der Unterschied liegt rein im Besteuerungszeitpunkt.',
+      'note': '💡 Das IRA-Beitragslimit für 2026 beträgt 7.500 $ (8.600 $ ab 50 Jahren). Der Unterschied liegt rein im Besteuerungszeitpunkt.',
     },
     useCases: [
       '7000 $ jährlich bei 7 % über 30 Jahre: beide Konten wachsen auf rund 661.000 $ brutto; bei 22 % heute und 32 % im Ruhestand liegt Roth um etwa 66.000 $ vorn',
       'Berufseinstieg mit Roth (Grenzsteuersatz 12-22 %), Wechsel zu Traditional im Peak-Earnings-Jahr (24-32 %): Schnittpunkt Jahr für Jahr vergleichen',
-      'Szenario 50+: das Limit steigt auf 8000 $; die zusätzlichen 1000 $ pro Jahr bringen bei 7 % rund 25.000 $ in 15 Jahren',
+      'Szenario 50+: das Limit steigt auf 8600 $; die zusätzlichen 1100 $ pro Jahr bringen bei 7 % rund 27.600 $ in 15 Jahren',
       'die Intuition »die Steuern steigen noch« prüfen: t_now und t_retire tauschen und beide Durchläufe gegenüberstellen',
     ],
     faqs: [
@@ -180,11 +180,11 @@ export const rothIraCalculatorL10n: ToolL10n = {
       },
       {
         q: 'Wie hoch ist das Beitragslimit?',
-        a: '7000 $ pro Jahr (2025), ab 50 weitere 1000 $ catch-up (zusammen 8000 $). Das Limit gilt für Roth und Traditional zusammen — zwei Konten verdoppeln es nicht. Das 401(k)-Limit des Arbeitgebers ist separat und deutlich höher.',
+        a: '7500 $ pro Jahr (2026), ab 50 weitere 1100 $ catch-up (zusammen 8600 $). Das Limit gilt für Roth und Traditional zusammen — zwei Konten verdoppeln es nicht. Das 401(k)-Limit des Arbeitgebers ist separat und deutlich höher.',
       },
       {
         q: 'Berücksichtigt der Rechner die Einkommens-Phase-outs?',
-        a: 'Nein — er isoliert die Steuer-Timing-Entscheidung, indem er identische Beiträge in beiden Konten wachsen lässt. Roth-Beiträge laufen 2025 ab ca. 150.000 $ (Ledige) / 236.000 $ (Verheiratete) aus; die Traditional-Absetzbarkeit ebenfalls, wenn ein Firmenplan existiert. Details: IRS Publication 590-A.',
+        a: 'Nein — er isoliert die Steuer-Timing-Entscheidung, indem er identische Beiträge in beiden Konten wachsen lässt. Roth-Beiträge laufen 2026 ab ca. 153.000 $ (Ledige) / 242.000 $ (Verheiratete) aus; die Traditional-Absetzbarkeit ebenfalls, wenn ein Firmenplan existiert. Details: IRS Publication 590-A.',
       },
       {
         q: 'Gibt es eine deutsche Entsprechung?',

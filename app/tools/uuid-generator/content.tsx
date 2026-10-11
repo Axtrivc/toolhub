@@ -56,7 +56,7 @@ const zh: ReactNode = (
     <div>
       <h2>为什么需要 UUID?</h2>
       <ul>
-        <li><strong>无需中心化机构</strong> —— 任何人都可以无需协调地生成</li>
+        <li><strong>无需中心化机构</strong> —— 任何人无需协调即可生成</li>
         <li><strong>实际唯一</strong> —— 冲突概率低到天文级别</li>
         <li><strong>无处不在</strong> —— 数据库、OAuth、文件系统、消息队列</li>
         <li><strong>匿名</strong> —— 不嵌入序列号或时间戳,不会泄露数量或顺序</li>
@@ -91,7 +91,7 @@ const es: ReactNode = (
       <h2>¿Por qué UUID?</h2>
       <ul>
         <li><strong>Sin autoridad central</strong> — cualquiera puede generarlos sin coordinación</li>
-        <li><strong>Efectivamente únicos</strong> — la probabilidad de colisión es astronómicamente baja</li>
+        <li><strong>Prácticamente únicos</strong> — la probabilidad de colisión es astronómicamente baja</li>
         <li><strong>Usados en todas partes</strong> — bases de datos, OAuth, sistemas de archivos, colas de mensajes</li>
         <li><strong>Anónimos</strong> — ninguna secuencia o marca de tiempo incrustada revela cantidad u orden</li>
       </ul>
@@ -106,7 +106,7 @@ const es: ReactNode = (
       <h2>Usos comunes</h2>
       <ul>
         <li>Claves primarias en bases de datos (especialmente sistemas distribuidos)</li>
-        <li>Tokens de sesión e IDs de petición API</li>
+        <li>Tokens de sesión e IDs de petición de API</li>
         <li>Nombres de archivo para contenido subido</li>
         <li>Identificar dispositivos, usuarios o eventos</li>
       </ul>
@@ -127,7 +127,7 @@ const de: ReactNode = (
         <li><strong>Keine zentrale Instanz</strong> — jeder kann sie ohne Absprache erzeugen</li>
         <li><strong>Effektiv eindeutig</strong> — die Kollisionswahrscheinlichkeit ist astronomisch gering</li>
         <li><strong>Überall im Einsatz</strong> — Datenbanken, OAuth, Dateisysteme, Message-Queues</li>
-        <li><strong>Anonym</strong> — keine eingebettete Sequenz oder kein Zeitstempel verrät Anzahl oder Reihenfolge</li>
+        <li><strong>Anonym</strong> — weder eingebettete Sequenzen noch Zeitstempel verraten Anzahl oder Reihenfolge</li>
       </ul>
     </div>
     <div>

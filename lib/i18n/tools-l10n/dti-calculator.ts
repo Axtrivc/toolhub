@@ -23,7 +23,7 @@ export const dtiCalculatorL10n: ToolL10n = {
       errIncome: '请输入您的月收入',
       errNonNegative: '数值不能为负',
       verdictHealthy: '✓ 健康 — 多数贷款机构会批准',
-      verdictTight: '⚠️ 偏高 — 已达多数贷款机构上限',
+      verdictTight: '⚠️ 偏紧 — 已达多数贷款机构上限',
       verdictHigh: '✗ 过高 — 很可能被拒',
       'in.income': '月总收入', 'in.debts': '月债务还款',
       'out.dti': '负债收入比', 'out.max': '最大月供（28% 法则）', 'out.verdict': '贷款机构评估',
@@ -33,7 +33,7 @@ export const dtiCalculatorL10n: ToolL10n = {
   es: {
     formula: {
       formula: 'DTI = ( total monthly debt / gross monthly income ) × 100%',
-      explain: 'Ratio deuda/ingresos. Suma vivienda, coche, estudios, pago mínimo de tarjetas y el nuevo préstamo, dividido entre los ingresos brutos mensuales. Los prestamistas suelen pedir < 36–43%.',
+      explain: 'Ratio deuda/ingresos. Suma vivienda, coche, estudios, pago mínimo de tarjetas y el nuevo préstamo, dividido entre los ingresos brutos mensuales. Los prestamistas suelen querer esta cifra por debajo del 36–43 %.',
     },
     useCases: ['calcular el DTI para hipoteca', 'calcular la ratio deuda-ingresos', 'verificar la regla del 43 % de DTI', 'calcular el DTI inicial y final'],
     faqs: [
@@ -58,26 +58,26 @@ export const dtiCalculatorL10n: ToolL10n = {
   de: {
     formula: {
       formula: 'DTI = ( total monthly debt / gross monthly income ) × 100%',
-      explain: 'Schulden-Einkommens-Verhältnis. Summe aus Wohnen, Auto, Studium, minimalen Kartenraten und dem neuen Kredit, geteilt durch das brutto Monatseinkommen. Geldgeber wollen meist < 36–43%.',
+      explain: 'Schulden-Einkommens-Verhältnis. Summe aus Wohnen, Auto, Studium, minimalen Kartenraten und dem neuen Kredit, geteilt durch das brutto Monatseinkommen. Kreditgeber wollen meist Werte unter 36–43 %.',
     },
     useCases: ['die DTI für Hypothekengenehmigung berechnen', 'die Schulden-Einkommens-Quote berechnen', 'die 43 %-DTI-Regel prüfen', 'Front-End-/Back-End-DTI berechnen'],
     faqs: [
       { q: 'Wie kann ich meine DTI senken?', a: 'Bestehende Schulden abbauen (besonders hochverzinsliche), Einkommen erhöhen oder vor der Antragstellung neue Schulden vermeiden. Eine Kreditkarte zu tilgen kann deine DTI innerhalb eines Abrechnungszyklus senken.' },
     ],
     ui: {
-      'chartTitle': 'Debt-to-Income-Wertung',
+      'chartTitle': 'Bewertung der Schulden-Einkommens-Quote',
       'zone.0': 'Gesund',
       'zone.1': 'Knapp',
       'zone.2': 'Hoch',
       'zone.3': 'Wahrscheinlich abgelehnt',
       errIncome: 'Gib dein Monatseinkommen ein',
       errNonNegative: 'Werte dürfen nicht negativ sein',
-      verdictHealthy: '✓ Gesund — die meisten Kreditgeber stimmen zu',
+      verdictHealthy: '✓ Gesund — die meisten Kreditgeber genehmigen den Kredit',
       verdictTight: '⚠️ Knapp — das Maximum der meisten Kreditgeber',
       verdictHigh: '✗ Hoch — Ablehnung wahrscheinlich',
       'in.income': 'Monatliches Bruttoeinkommen', 'in.debts': 'Monatliche Schuldentilgung',
       'out.dti': 'Schulden-Einkommens-Quote', 'out.max': 'Max. Rate (28 %-Regel)', 'out.verdict': 'Kreditgeber-Einschätzung',
-      note: '🏦 Die DTI ist das Hauptkriterium der Kreditgeber. Unter 36 % ist gesund, 43 % ist meist das Maximum für Hypotheken.',
+      note: '🏦 Die DTI ist das Hauptkriterium der Kreditgeber. Unter 36 % gilt sie als gesund, 43 % sind meist das Maximum für Hypotheken.',
     },
   },
 }

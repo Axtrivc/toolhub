@@ -86,7 +86,7 @@ const es: ReactNode = (
 const de: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>Was ist dieses Werkzeug?</h2>
-    <p>Ein <strong>Verhältnis</strong> vergleicht zwei Größen, wie 3:2 oder 5 zu 4. Dieser Rechner löst Proportionen — gegeben drei Werte von A:B = C:D, findet er den vierten. Er vereinfacht Verhältnisse außerdem auf die kleinsten Terme.</p>
+    <p>Ein <strong>Verhältnis</strong> vergleicht zwei Größen, wie 3:2 oder 5 zu 4. Dieser Rechner löst Proportionen — sind drei Werte von A:B = C:D gegeben, findet er den vierten. Er kürzt Verhältnisse außerdem vollständig.</p>
     <div>
       <h2>Wie Proportionen funktionieren</h2>
       <p>Bei einer Proportion A:B = C:D sind die Kreuzprodukte gleich: <code>A × D = B × C</code>. Wenn du also drei beliebige Werte kennst, kannst du den vierten berechnen. Um D zu finden: <code>D = (B × C) ÷ A</code>.</p>

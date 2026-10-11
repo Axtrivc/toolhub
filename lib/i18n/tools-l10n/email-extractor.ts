@@ -7,7 +7,7 @@ import type { ToolL10n } from '../tool-l10n'
 export const emailExtractorL10n: ToolL10n = {
   zh: {
     ui: {
-      defaultInput: '联系我们：hello@example.com 或 support@test.org 获取帮助。',
+      defaultInput: '欢迎通过 hello@example.com 或 support@test.org 联系我们。',
       'noEmailsFound': '未找到邮箱',
       'clear': '清空',
       'placeholder': '粘贴包含邮箱地址的文本…',
@@ -33,7 +33,7 @@ export const emailExtractorL10n: ToolL10n = {
     faqs: [
       { q: '这个工具会验证邮箱是否有效吗?', a: '它只检测格式是否匹配。真正的验证需要发送一封邮件——没有任何工具能在不发邮件的情况下确认地址存在。联系提取到的地址时,请务必遵守反垃圾邮件相关法律。' },
       { q: '重复的邮箱会被保留吗?', a: '不会——工具自动去重,同一个地址无论在文本里出现多少次,结果里只留一条。先在这里提取一遍,比在 Excel 里手动删重复行快得多。' },
-      { q: '能识别带 + 号或子域名的地址吗?', a: '可以,user.name+tag@gmail.com 这类常见格式都能匹配。不过它按模式识别,不保证语法 100% 合规(比如极罕见的引号本地部分);批量提取后建议先抽查几条再使用。' },
+      { q: '能识别带 + 号或子域名的地址吗?', a: '可以,user.name+tag@gmail.com 这类常见格式都能匹配。不过它按模式识别,不保证语法 100% 合规(比如本地部分带引号这类极罕见的写法);批量提取后建议先抽查几条再使用。' },
       { q: '用提取到的邮箱发营销邮件合法吗?', a: '分场景:欧盟按 GDPR 需要明确同意,德国还要求双重确认(Double Opt-in);中国《个人信息保护法》同样要求事先取得同意;美国 CAN-SPAM 允许冷邮件但必须提供退订。没有同意基础的名单,不要群发。' },
     ],
   },
@@ -80,7 +80,7 @@ export const emailExtractorL10n: ToolL10n = {
       'outputLabel': 'Extrahierte E-Mails',
       'formatLabel': 'Exportformat',
       'fmtNewline': 'Zeilenumbrüche',
-      'fmtComma': 'Komma-getrennt (für CC)',
+      'fmtComma': 'Kommagetrennt (für CC)',
       'filterPublic': 'Öffentliche Postfächer ausfiltern (Gmail, Yahoo…)',
       'foundN': '{n} eindeutige',
       'filteredN': '{n} öffentliche entfernt',
@@ -97,8 +97,8 @@ export const emailExtractorL10n: ToolL10n = {
     faqs: [
       { q: 'Validiert dieses Werkzeug E-Mail-Adressen?', a: 'Es erkennt das Formatmuster. Eine echte Validierung erfordert das Senden einer E-Mail — kein Werkzeug kann ohne diesen Schritt bestätigen, dass eine Adresse existiert. Halte dich beim Kontaktieren extrahierter Adressen immer an die Anti-Spam-Gesetze.' },
       { q: 'Bleiben Dubletten in der Liste?', a: 'Nein — das Werkzeug entfernt Duplikate automatisch; jede Adresse erscheint nur einmal, egal wie oft sie im Text auftaucht. Das ist deutlich schneller als manuelles Deduplizieren in Excel.' },
-      { q: 'Werden Adressen mit + oder Subdomains erkannt?', a: 'Ja, das Muster deckt gängige Formate wie vor.nachname+tag@gmail.com ab. Da es per Muster erkennt, garantiert es keine 100 % syntaktisch gültigen Treffer (etwa seltene Anführungszeichen im Localpart) — stichprobe die Liste vor der Nutzung.' },
-      { q: 'Darf ich an die extrahierten Adressen Werbung schicken?', a: 'In der EU verlangt die DSGVO eine ausdrückliche Einwilligung, in Deutschland zusätzlich Double-Opt-in; die USA erlauben mit CAN-SPAM Kaltakquise, verlangen aber eine Abmeldemöglichkeit. Ohne Rechtsgrundlage — Einwilligung oder bestehender Kundenbeziehung — ist der Massenversand verboten.' },
+      { q: 'Werden Adressen mit + oder Subdomains erkannt?', a: 'Ja, das Muster deckt gängige Formate wie vor.nachname+tag@gmail.com ab. Da es per Muster erkennt, garantiert es keine 100 % syntaktisch gültigen Treffer (etwa seltene Anführungszeichen im Localpart) — prüfe die Liste vor der Nutzung stichprobenartig.' },
+      { q: 'Darf ich an die extrahierten Adressen Werbung schicken?', a: 'In der EU verlangt die DSGVO eine ausdrückliche Einwilligung, in Deutschland zusätzlich Double-Opt-in; die USA erlauben mit CAN-SPAM Kaltakquise, verlangen aber eine Abmeldemöglichkeit. Ohne Rechtsgrundlage — Einwilligung oder bestehende Kundenbeziehung — ist der Massenversand verboten.' },
     ],
   },
 }

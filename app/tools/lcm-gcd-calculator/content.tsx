@@ -178,7 +178,7 @@ const de: ReactNode = (
       <ul>
         <li>
           Der <strong>GCD</strong> ist die größte Zahl, die alle Eingaben ohne Rest teilt. Für 12
-          und 18 ist das 6 (beide sind teilbar durch 1, 2, 3 und 6 — und 6 ist die größte).
+          und 18 ist das 6 (beide sind durch 1, 2, 3 und 6 teilbar — und 6 ist die größte).
         </li>
         <li>
           Das <strong>LCM</strong> ist die kleinste Zahl, in die alle Eingaben ohne Rest aufgehen.

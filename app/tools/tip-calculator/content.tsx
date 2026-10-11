@@ -17,7 +17,7 @@ const en: ReactNode = (
     <h2>How Much Should You Tip?</h2>
     <p>
       Tipping customs vary by country, but in the United States and Canada, tipping is expected
-      for most sit-down service. The standard ranges are <strong>15-20%</strong> of the pre-tax
+      for most sit-down service. The standard range is <strong>15-20%</strong> of the pre-tax
       bill for restaurant service, with 18% being the most common default for satisfactory service.
       This calculator handles the math instantly and splits the result evenly across any number of
       people.
@@ -72,7 +72,7 @@ const zh: ReactNode = (
     <h2>你该给多少小费?</h2>
     <p>
       小费习俗因国家而异,但在美国和加拿大,大多数堂食服务都期望给小费。餐饮服务的标准范围是税前账单的
-      <strong>15-20%</strong>,其中 18% 是对满意服务最常见的默认值。这个计算器能即时完成计算,
+      <strong>15-20%</strong>,其中 18% 是最常见的默认比例。这个计算器能即时完成计算,
       并把结果在任意人数之间平均分摊。
     </p>
 
@@ -104,7 +104,7 @@ const zh: ReactNode = (
     <h2>世界各地的小费</h2>
     <p>
       小费规范因国家差异巨大。在日本,给小费实际上会被视为失礼。在欧洲大部分地区,账单里已经包含了服务费,
-      把账单向上取整就很受欢迎。旅行时务必了解当地习俗——在一个国家"合适"的小费,在另一个国家可能是冒犯。
+      把账单向上取整就很受欢迎。旅行时务必了解当地习俗——在一个国家「合适」的小费,在另一个国家可能是冒犯。
     </p>
 
     <h2>小费要按含税金额算吗?</h2>
@@ -123,14 +123,14 @@ const es: ReactNode = (
       Las costumbres de propina varían según el país, pero en Estados Unidos y Canadá se espera
       dejar propina en la mayoría de los servicios de mesa. Las horquillas habituales son del
       <strong>15-20 %</strong> de la cuenta sin impuestos para el servicio de restaurante, siendo el
-      18 % el valor por defecto más común para un servicio satisfactorio. Esta calculadora hace los
+      18 % lo más habitual para un servicio satisfactorio. Esta calculadora hace los
       cálculos al instante y reparte el resultado a partes iguales entre cualquier número de personas.
     </p>
 
     <h2>Tipos de propina habituales</h2>
     <ul>
       <li><strong>15 %</strong> — Servicio adecuado</li>
-      <li><strong>18 %</strong> — Buen servicio (el valor por defecto más común)</li>
+      <li><strong>18 %</strong> — Buen servicio (el más habitual)</li>
       <li><strong>20 %</strong> — Servicio excelente</li>
       <li><strong>25 %+</strong> — Servicio excepcional o restaurante de lujo</li>
     </ul>
@@ -179,15 +179,15 @@ const de: ReactNode = (
     <p>
       Die Trinkgeldbräuche unterscheiden sich von Land zu Land, doch in den USA und Kanada wird bei
       den meisten Servicemahlzeiten ein Trinkgeld erwartet. Der übliche Rahmen liegt bei
-      <strong>15-20 %</strong> der Rechnung ohne Steuer für den Restaurantservice, wobei 18 % die
-      häufigste Standardeinstellung für zufriedenstellenden Service sind. Dieser Rechner erledigt die
-      Rechnung sofort und teilt das Ergebnis gleichmäßig auf beliebig viele Personen auf.
+      <strong>15-20 %</strong> der Rechnung ohne Steuer für den Restaurantservice, wobei 18 % der
+      häufigste Standard für zufriedenstellenden Service ist. Dieser Rechner erledigt die
+      Berechnung sofort und teilt das Ergebnis gleichmäßig auf beliebig viele Personen auf.
     </p>
 
     <h2>Übliche Trinkgeldsätze</h2>
     <ul>
       <li><strong>15 %</strong> — Ordentlicher Service</li>
-      <li><strong>18 %</strong> — Guter Service (die häufigste Standardeinstellung)</li>
+      <li><strong>18 %</strong> — Guter Service (der häufigste Standard)</li>
       <li><strong>20 %</strong> — Ausgezeichneter Service</li>
       <li><strong>25 %+</strong> — Herausragender Service oder Fine Dining</li>
     </ul>
@@ -199,13 +199,13 @@ const de: ReactNode = (
       <li><strong>Lieferdienste:</strong> 15-20 %, mindestens $3-5</li>
       <li><strong>Taxis / Ride-Sharing:</strong> 10-20 %</li>
       <li><strong>Friseure:</strong> 15-20 %</li>
-      <li><strong>Hotelputzpersonal:</strong> $2-5 pro Nacht</li>
+      <li><strong>Hotelreinigung:</strong> $2-5 pro Nacht</li>
     </ul>
 
     <h2>Wie man ein Trinkgeld berechnet</h2>
     <p>
       Um ein Trinkgeld von Hand zu berechnen, verschiebe das Komma in deiner Rechnung um eine Stelle
-      nach links für 10 %, verdopple es dann für 20 % oder halbiere es für 5 %. Beispiel: bei einer
+      nach links für 10 %, verdopple den Betrag dann für 20 % oder halbiere ihn für 5 %. Beispiel: bei einer
       Rechnung von $45 sind 10 % $4,50, also sind 20 % $9,00 und 15 % rund $6,75 (genau dazwischen).
       Oder nutze einfach diesen Rechner, um das Kopfrechnen zu sparen.
     </p>

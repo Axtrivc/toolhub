@@ -59,8 +59,8 @@ const es: ReactNode = (
       <h2>Usos reales</h2>
       <ul>
         <li>Parcelas irregulares en bienes raíces</li>
-        <li>Ventanas trapeciales y elementos arquitectónicos</li>
-        <li>Cálculo de volúmenes de zanjas y taludes</li>
+        <li>Ventanas trapezoidales y elementos arquitectónicos</li>
+        <li>Cálculo de volúmenes de zanjas y terraplenes</li>
         <li>Trabajo de gráficos y diseño</li>
       </ul>
     </div>

@@ -22,7 +22,7 @@ export const rectangleCalculatorL10n: ToolL10n = {
       '地产:地块和房屋尺寸',
     ],
     faqs: [
-      { q: '地板应该多买多少?', a: '额外加 10 % 用于损耗和切割误差。需要拼花的材料则加 15 %–20 %。宁可多订一点——不同批次的染色会有差异。' },
+      { q: '地板应该多买多少?', a: '额外加 10% 用于损耗和切割误差。需要拼花的材料则加 15%–20%。宁可多订一点——不同批次的染色会有差异。' },
     ],
   },
   es: {
@@ -42,7 +42,7 @@ export const rectangleCalculatorL10n: ToolL10n = {
       'inmobiliaria: dimensiones de parcelas y viviendas',
     ],
     faqs: [
-      { q: '¿Cuánto suelo extra debo comprar?', a: 'Añade un 10 % para desperdicio y errores de corte. Para materiales con dibujo que requieren encuadre, añade un 15–20 %. Pide un poco más de lo que creas necesario — los lotes de tinte varían entre fabricaciones.' },
+      { q: '¿Cuánto suelo extra debo comprar?', a: 'Añade un 10 % para desperdicio y errores de corte. Para materiales con patrón que hay que casar, añade un 15–20 %. Pide un poco más de lo que creas necesario — los lotes de tinte varían entre fabricaciones.' },
     ],
   },
   de: {
@@ -56,13 +56,13 @@ export const rectangleCalculatorL10n: ToolL10n = {
       note: '▭ Fläche = Breite × Höhe. Die Diagonale nutzt den Satz des Pythagoras.',
     },
     useCases: [
-      'Bodenbelag: wie viel Fliese oder Teppich nötig ist',
+      'Bodenbelag: wie viele Fliesen oder wie viel Teppich nötig sind',
       'Farbe: Wandfläche für den Anstrich schätzen',
       'Bildschirme: TV- und Monitorgröße (Diagonale)',
       'Immobilien: Grundstücks- und Hausmaße',
     ],
     faqs: [
-      { q: 'Wie viel Bodenbelag sollte ich extra kaufen?', a: 'Schlage 10 % für Verschnitt und Schneidefehler auf. Bei gemusterten Materialien, die angepasst werden müssen, 15–20 %. Bestelle etwas mehr, als du zu brauchen glaubst — die Farbchargen unterscheiden sich zwischen den Partien.' },
+      { q: 'Wie viel Bodenbelag sollte ich extra kaufen?', a: 'Schlage 10 % für Verschnitt und Schneidefehler auf. Bei gemusterten Materialien, die angepasst werden müssen, 15–20 %. Bestelle etwas mehr, als du zu brauchen glaubst — die Färbung unterscheidet sich je nach Partie.' },
     ],
   },
 }

@@ -96,7 +96,7 @@ export const toolFormulas: Record<string, ToolFormula> = {
   },
   "overtime-calculator": {
     formula: "Regular pay = Hourly rate × Regular hours\nOvertime pay = Hourly rate × Multiplier × OT hours\nTotal weekly pay = Regular pay + Overtime pay\nHourly rate from salary = Annual salary ÷ 2,080",
-    variables: "Hourly rate = Base pay per hour ($)\nRegular hours = Hours up to 40 in a week\nOT hours = Hours beyond 40 in a week\nMultiplier = 1.5 for time-and-a-half (FLSA standard), 2 for double time, or a custom rate\nTotal weekly pay = Regular pay plus overtime pay ($)",
+    variables: "Hourly rate = Base pay per hour ($)\nRegular hours = Hours up to 40 in a week\nOT hours = Hours beyond 40 in a week\nMultiplier = 1.5 for time-and-a-half (FLSA standard), 2 for double time\nTotal weekly pay = Regular pay plus overtime pay ($)",
     explain: "Under the FLSA, hours worked beyond 40 in a week earn at least 1.5 times the regular rate. Salaried workers can convert to an hourly equivalent using a 2,080-hour work year.",
     example: "Step 1: Hourly rate $25.00, 46 hours worked in the week, multiplier 1.5.\nStep 2: Regular pay = 25 × 40 = $1,000.00.\nStep 3: Overtime pay = 25 × 1.5 × 6 = 37.50 × 6 = $225.00.\nStep 4: Total = 1,000 + 225 = $1,225.00.\nResult: gross weekly pay is $1,225.00, of which $225.00 is overtime.",
   },
@@ -246,7 +246,7 @@ export const toolFormulas: Record<string, ToolFormula> = {
     formula: "Net = sale − [ sale × finalValue% + fixed + sale × processing% ]",
     variables: "Net = Amount that reaches your account ($)\nsale = Total amount the buyer pays, including shipping ($)\nfinalValue% = Final value fee rate for the category (decimal)\nfixed = Fixed per-order fee ($)\nprocessing% = Payment processing rate (decimal)",
     explain: "eBay deducts a final value fee (a percentage of the total sale) plus a fixed per-order fee and a payment processing percentage. The net is what reaches your account.",
-    example: "Step 1: sale = $120, final value fee 13.25% → 120 × 0.1325 = $15.90.\nStep 2: processing 3% → 120 × 0.03 = $3.60; fixed per-order fee = $0.40.\nStep 3: total fees = 15.90 + 3.60 + 0.40 = $19.90.\nResult: Net = 120 − 19.90 = $100.10, so about 83.4% of the sale reaches your account.",
+    example: "Step 1: sale = $120, final value fee 13.6% → 120 × 0.136 = $16.32.\nStep 2: processing 3% → 120 × 0.03 = $3.60; fixed per-order fee = $0.40.\nStep 3: total fees = 16.32 + 3.60 + 0.40 = $20.32.\nResult: Net = 120 − 20.32 = $99.68, so about 83.1% of the sale reaches your account.",
   },
   "reverse-stripe-fee-calculator": {
     formula: "Charge = ( target + fixed ) / (1 − rate%)",
@@ -757,10 +757,10 @@ export const toolFormulas: Record<string, ToolFormula> = {
     example: "Step 1: Take a /26 subnet, so prefix = 26.\nStep 2: Host bits = 32 − 26 = 6.\nStep 3: Total addresses = 2^6 = 64.\nStep 4: Usable hosts = 64 − 2 = 62.\nResult: a /26 subnet holds 64 addresses, 62 usable.",
   },
   "ip-checker": {
-    formula: "Risk Score = W_type × S_datacenter + W_tz × S_timezone_diff + W_bl × S_blacklist",
-    variables: "W_type, W_tz, W_bl: weights for the datacenter, timezone-mismatch, and blacklist signals (points)\nS_datacenter: 1 if the IP ASN matches datacenter keywords such as AWS, hosting, or cloud, else 0\nS_timezone_diff: 1 if the device timezone differs from the IP geolocation timezone, else 0\nS_blacklist: proxy/VPN keyword and public blacklist trait score (0-1)",
-    explain: "A heuristic weighted model. S_datacenter is scored 1 when the ASN owner matches datacenter keywords such as AWS, hosting, or cloud, and carries the highest weight W_type. S_timezone_diff flags a mismatch between your device timezone and the IP geolocation timezone (a classic proxy leak signal). S_blacklist approximates proxy/VPN keywords and public blacklist traits. The total is scaled to 0–100: 0–20 low risk (native residential), 21–60 medium risk (hosting/VPN traits), 61–100 high risk (proxy/Tor/blacklisted).",
-    example: "Step 1: An IP sits on a hosting ASN (S_datacenter = 1) with a matching device timezone (S_timezone_diff = 0) and no blacklist hits (S_blacklist = 0).\nStep 2: Use weights W_type = 40, W_tz = 20, W_bl = 40.\nStep 3: Risk Score = 40 × 1 + 20 × 0 + 40 × 0 = 40.\nResult: 40 out of 100, medium risk (hosting/VPN traits).",
+    formula: "Risk Score = min(100, 6 + W_type × S_datacenter + W_tz × S_timezone_diff + W_bl × S_proxy)",
+    variables: "6: base score every IP starts with\nW_type = 52: datacenter-ASN signal weight\nW_tz = 20: timezone-mismatch signal weight\nW_bl = 22: proxy/VPN signal weight\nS_datacenter: 1 if the IP ASN matches datacenter keywords such as AWS, hosting, or cloud, else 0\nS_timezone_diff: 1 if the device timezone differs from the IP geolocation timezone (checked only when inspecting your own exit IP), else 0\nS_proxy: 1 if the ASN owner or ISP matches proxy/VPN keywords (or Tor), else 0",
+    explain: "A heuristic additive model. S_datacenter is scored 1 when the ASN owner matches datacenter keywords such as AWS, hosting, or cloud, and carries the highest weight W_type. S_timezone_diff flags a mismatch between your device timezone and the IP geolocation timezone (a classic proxy leak signal). S_proxy flags proxy/VPN keywords in the ASN owner or ISP. The total starts from a base of 6 and is capped at 100: 0–20 low risk (native residential), 21–60 medium risk (hosting/VPN traits), 61–100 high risk (proxy/Tor/blacklisted).",
+    example: "Step 1: An IP sits on a hosting ASN (S_datacenter = 1) with a matching device timezone (S_timezone_diff = 0) and no proxy keyword hits (S_proxy = 0).\nStep 2: Start from the base score 6 and add the datacenter signal W_type = 52.\nStep 3: Risk Score = 6 + 52 × 1 + 20 × 0 + 22 × 0 = 58.\nResult: 58 out of 100, medium risk (hosting/VPN traits).",
   },
   "chmod-calculator": {
     formula: "octal digit = read(4) + write(2) + execute(1)",
@@ -835,10 +835,10 @@ export const toolFormulas: Record<string, ToolFormula> = {
     example: "Step 1: Generate a 16-character password from the 62 alphanumeric symbols.\nStep 2: log₂(62) = 5.954 bits per character.\nStep 3: H = 16 × 5.954 ≈ 95.3 bits.\nResult: about 95 bits of entropy, well above the 80-bit comfort threshold.",
   },
   "password-strength-checker": {
-    formula: "H = L × log₂(N) − penalties\ncrack time ≈ 2^H ÷ guesses per second",
-    variables: "H: entropy estimate (bits)\nL: password length (characters)\nN: charset pool size (26 lowercase, 52 both cases, 62 with digits, 95 with symbols)\npenalties: bits subtracted for dictionary words, repeats, and sequences\nguesses per second: attacker hash rate, e.g. 10^10 for fast offline cracking of weak hashes",
-    explain: "Strength is estimated as brute-force entropy from length and charset, then reduced for predictable structure such as dictionary words, repeated characters, or sequences like abcdef. Dividing 2^H guesses by the attacker's hash rate converts entropy into an honest time-to-crack estimate.",
-    example: "Step 1: Take the password summer2024, L = 10, using lowercase plus digits so N = 62.\nStep 2: H = 10 × log₂(62) = 10 × 5.954 ≈ 59.5 bits.\nStep 3: Subtract about 20 bits for two dictionary words plus a year pattern: H ≈ 39.5 bits.\nStep 4: Crack time ≈ 2^39.5 ÷ 10^10 ≈ 7.8 × 10^11 ÷ 10^10 ≈ 78 seconds.\nResult: weak despite decent length, because the pattern penalty leaves under 40 bits.",
+    formula: "H = L × log₂(N)\ncrack time ≈ 2^H ÷ guesses per second",
+    variables: "H: entropy estimate (bits) — shown as-is by the tool; pattern penalties lower the strength rating, not the displayed entropy\nL: password length (characters)\nN: charset pool size (26 lowercase, 52 both cases, 62 with digits, 95 with symbols)\nguesses per second: attacker hash rate, e.g. 10^10 for fast offline cracking of weak hashes",
+    explain: "Strength is estimated as brute-force entropy from length and charset; the displayed bit count is that raw value. Predictable structure — common passwords, repeated characters, or sequences like abcdef — lowers the strength rating instead of the entropy number. Dividing 2^H guesses by the attacker's hash rate converts entropy into an honest time-to-crack estimate.",
+    example: "Step 1: Take the password summer2024, L = 10, using lowercase plus digits so N = 62.\nStep 2: H = 10 × log₂(62) = 10 × 5.954 ≈ 59.5 bits, which is what the tool displays.\nStep 3: The rating is lowered for two dictionary words plus a year pattern, so the tool rates it weak despite the entropy count.\nStep 4: Crack time ≈ 2^59.5 ÷ 10^10 ≈ 7.5 × 10^17 ÷ 10^10 ≈ 2.4 years against fast offline cracking.\nResult: raw entropy of ~59.5 bits looks decent, but the pattern-penalized rating warns you the password is weaker than its length suggests.",
   },
   "secret-key-generator": {
     formula: "keyspace bits = log₂(charset^length) = length × log₂(charset)\nbytes for a 256-bit key = 256 ÷ 8 = 32",

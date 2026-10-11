@@ -52,7 +52,7 @@ const zh: ReactNode = (
       <h2>常见用途</h2>
       <ul>
         <li>规划数据库 VARCHAR 字段大小</li>
-        <li>检查 API 负载限制</li>
+        <li>检查 API 载荷限制</li>
         <li>估算存储成本</li>
         <li>校验文本字段约束</li>
       </ul>
@@ -81,7 +81,7 @@ const es: ReactNode = (
       <h2>Usos comunes</h2>
       <ul>
         <li>Planificar tamaños de VARCHAR en bases de datos</li>
-        <li>Comprobar límites de payloads de API</li>
+        <li>Comprobar límites de carga útil de la API</li>
         <li>Estimar costes de almacenamiento</li>
         <li>Validar restricciones de campos de texto</li>
       </ul>

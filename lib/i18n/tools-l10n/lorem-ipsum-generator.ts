@@ -32,7 +32,7 @@ export const loremIpsumGeneratorL10n: ToolL10n = {
       'count': 'Cantidad',
       'generate': '📝 Generar',
       'regenerate': 'Regenerar',
-      'note': '📄 Genera texto de marcador para maquetas, diseños y layouts. Basado en un texto de Cicerón del siglo I a. C.',
+      'note': '📄 Genera texto de relleno para maquetas, diseños y layouts. Basado en un texto de Cicerón del siglo I a. C.',
       'startWithLorem': 'Empezar con "Lorem ipsum"',
       'unit': 'Unidad',
       'unitParagraphs': 'Párrafos',
@@ -46,7 +46,7 @@ export const loremIpsumGeneratorL10n: ToolL10n = {
       'probar cómo fluye el texto en un diseño',
     ],
     faqs: [
-      { q: '¿Es realmente latín?', a: 'Empezó como latín, pero el texto Lorem Ipsum estándar está revuelto y alterado — ningún hablante real de latín lo entendería. Es intencional: debe parecer texto sin leerse como ningún idioma real.' },
+      { q: '¿Es realmente latín?', a: 'Empezó como latín, pero el texto Lorem Ipsum estándar está revuelto y alterado — ningún hablante real de latín lo entendería. Es intencional: debe parecer texto, pero no leerse como ningún idioma real.' },
     ],
   },
   de: {
@@ -55,7 +55,7 @@ export const loremIpsumGeneratorL10n: ToolL10n = {
       'generate': '📝 Generieren',
       'regenerate': 'Neu generieren',
       'note': '📄 Erzeugt Platzhaltertext für Mockups, Designs und Layouts. Basiert auf einem Text von Cicero aus dem 1. Jh. v. Chr.',
-      'startWithLorem': 'Mit „Lorem ipsum" beginnen',
+      'startWithLorem': 'Mit „Lorem ipsum“ beginnen',
       'unit': 'Einheit',
       'unitParagraphs': 'Absätze',
       'unitSentences': 'Sätze',
@@ -65,7 +65,7 @@ export const loremIpsumGeneratorL10n: ToolL10n = {
       'Mockups und Wireframes',
       'Website-Templates und Demos',
       'Print-Layouts vor dem finalen Text',
-      'testen, wie Text in einem Design fließt',
+      'Testen, wie Text in einem Design fließt',
     ],
     faqs: [
       { q: 'Ist das eigentlich Latein?', a: 'Es begann als Latein, aber der Standard-Lorem-Ipsum-Text ist verdreht und verändert — kein echter Lateinsprecher würde ihn verstehen. Das ist Absicht: Er soll wie Text wirken, ohne als echte Sprache lesbar zu sein.' },

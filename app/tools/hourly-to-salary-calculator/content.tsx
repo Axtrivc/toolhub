@@ -81,7 +81,7 @@ const zh: ReactNode = (
         <li><strong>加班费</strong>(美国超过 40 小时按 1.5 倍计算)</li>
         <li><strong>无薪假期</strong>——许多时薪员工没有带薪假</li>
         <li><strong>税费</strong>——到手收入大约是税前的 65-75%</li>
-        <li><strong>福利</strong>——医疗保险和退休匹配可能价值每年 $10,000 以上</li>
+        <li><strong>福利</strong>——医疗保险和退休金匹配缴款可能价值每年 $10,000 以上</li>
       </ul>
     </div>
   </section>
@@ -100,7 +100,7 @@ const es: ReactNode = (
       <h2>La fórmula estándar</h2>
       <p>
         Salario anual = tarifa por hora × horas por semana × semanas por año. El valor predeterminado
-        usa 40 horas y 52 semanas (2,080 horas/año). Ajusta el campo de horas si trabajas más o menos.
+        usa 40 horas y 52 semanas (2.080 horas/año). Ajusta el campo de horas si trabajas más o menos.
       </p>
     </div>
     <div>
@@ -118,7 +118,7 @@ const es: ReactNode = (
       <h2>Lo que esta calculadora no tiene en cuenta</h2>
       <ul>
         <li><strong>Horas extra</strong> (pago de tiempo y medio sobre 40 horas en EE. UU.)</li>
-        <li><strong>Ausencias sin permiso retribuido</strong> — muchos trabajadores por hora no tienen vacaciones pagadas</li>
+        <li><strong>Ausencias no remuneradas</strong> — muchos trabajadores por hora no tienen vacaciones pagadas</li>
         <li><strong>Impuestos</strong> — lo que recibes es aproximadamente el 65-75 % del bruto</li>
         <li><strong>Prestaciones</strong> — el seguro médico y las aportaciones a la jubilación pueden valer más de $10,000/año</li>
       </ul>
@@ -133,13 +133,13 @@ const de: ReactNode = (
     <p>
       Dieser Rechner rechnet deinen Stundenlohn in das entsprechende Jahres-, Monats-, Wochen- und
       Tagesgehalt um. Er geht von 40 Stunden pro Woche und 52 bezahlten Wochen pro Jahr aus, aber du
-      kannst die Stunden für Teilzeit- oder Überstundenarbeit anpassen.
+      kannst die Stunden bei Teilzeit oder Überstunden anpassen.
     </p>
     <div>
       <h2>Die Standardformel</h2>
       <p>
-        Jahresgehalt = Stundenlohn × Stunden pro Woche × Wochen pro Jahr. Der Standard verwendet 40
-        Stunden und 52 Wochen (2,080 Stunden/Jahr). Passe das Stundenfeld an, wenn du mehr oder weniger arbeitest.
+        Jahresgehalt = Stundenlohn × Stunden pro Woche × Wochen pro Jahr. Die Voreinstellung verwendet 40
+        Stunden und 52 Wochen (2.080 Stunden/Jahr). Passe das Stundenfeld an, wenn du mehr oder weniger arbeitest.
       </p>
     </div>
     <div>

@@ -6,6 +6,10 @@ import type { ToolL10n } from '../tool-l10n'
 
 export const primeNumberCheckerL10n: ToolL10n = {
   zh: {
+    formula: {
+      formula: 'n 是质数 ⟺ n > 1 且对所有 d ∈ [2, √n] 都有 n mod d ≠ 0',
+      explain: '试除法只除到平方根:任何合数必有一个不超过 √n 的因数,因此更大的除数无需再试。按定义 1 不是质数;2 是唯一的偶质数。',
+    },
     ui: {
       noUnder2: '否(质数从 2 开始)',
       errIntegers: '请输入整数',
@@ -20,7 +24,7 @@ export const primeNumberCheckerL10n: ToolL10n = {
       note: '🔢 质数只能被 1 和它本身整除。质数是密码学(RSA)的基石。',
     },
     useCases: [
-      '密码学:RSA 加密依赖大质数分解的难度',
+      '密码学:RSA 加密依赖两个大质数乘积分解的难度',
       '哈希表:质数容量的桶能减少冲突',
       '数论学习与数学作业',
       '查找某个数附近的前后质数',
@@ -33,6 +37,10 @@ export const primeNumberCheckerL10n: ToolL10n = {
     ],
   },
   es: {
+    formula: {
+      formula: 'n es primo ⟺ n > 1 y n mod d ≠ 0 para todo d ∈ [2, √n]',
+      explain: 'División por tentativa hasta la raíz cuadrada: todo número compuesto tiene un factor menor o igual que √n, así que no hace falta probar divisores mayores. Por definición, 1 no es primo; 2 es el único primo par.',
+    },
     ui: {
       noUnder2: 'No (los números primos empiezan en 2)',
       errIntegers: 'Introduce un número entero',
@@ -47,7 +55,7 @@ export const primeNumberCheckerL10n: ToolL10n = {
       note: '🔢 Un primo solo es divisible entre 1 y entre sí mismo. Los primos son la base de la criptografía (RSA).',
     },
     useCases: [
-      'criptografía: el cifrado RSA se basa en la dificultad de factorizar primos grandes',
+      'criptografía: el cifrado RSA se basa en la dificultad de factorizar el producto de dos primos grandes',
       'tablas hash: los cubos de tamaño primo reducen las colisiones',
       'estudiar teoría de números y hacer deberes de matemáticas',
       'encontrar los primos anteriores y siguientes a un número',
@@ -60,6 +68,10 @@ export const primeNumberCheckerL10n: ToolL10n = {
     ],
   },
   de: {
+    formula: {
+      formula: 'n ist prim ⟺ n > 1 und n mod d ≠ 0 für jedes d ∈ [2, √n]',
+      explain: 'Probedivision bis zur Quadratwurzel: Jede zusammengesetzte Zahl hat einen Teiler kleiner oder gleich √n, also müssen größere Teiler nicht geprüft werden. Nach Definition ist 1 keine Primzahl; 2 ist die einzige gerade Primzahl.',
+    },
     ui: {
       noUnder2: 'Nein (Primzahlen beginnen bei 2)',
       errIntegers: 'Gib eine ganze Zahl ein',
@@ -74,8 +86,8 @@ export const primeNumberCheckerL10n: ToolL10n = {
       note: '🔢 Eine Primzahl ist nur durch 1 und sich selbst teilbar. Primzahlen sind die Bausteine der Kryptografie (RSA).',
     },
     useCases: [
-      'Kryptografie: Die RSA-Verschlüsselung beruht auf der Schwierigkeit, große Primzahlen zu faktorisieren',
-      'Hash-Tabellen: Eimer mit primzahliger Größe verringern Kollisionen',
+      'Kryptografie: Die RSA-Verschlüsselung beruht auf der Schwierigkeit, das Produkt zweier großer Primzahlen zu faktorisieren',
+      'Hash-Tabellen: Buckets in Primzahlgröße verringern Kollisionen',
       'Zahlentheorie lernen und Mathehausaufgaben',
       'die benachbarten Primzahlen vor und nach einer Zahl finden',
     ],

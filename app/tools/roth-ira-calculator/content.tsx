@@ -15,7 +15,7 @@ const en: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>Roth vs. Traditional: the only difference is tax timing</h2>
     <p>
-      Both accounts share the same $7,000 contribution limit (2025: $8,000 if you&apos;re 50 or older) and grow
+      Both accounts share the same $7,500 contribution limit (2026: $8,600 if you&apos;re 50 or older) and grow
       tax-free inside the account. The entire decision comes down to <em>when</em> you pay tax: a{' '}
       <strong>Traditional IRA</strong> deducts contributions today (lowering this year&apos;s tax bill) but taxes
       every withdrawal in retirement; a <strong>Roth IRA</strong> takes after-tax money now and every qualified
@@ -54,7 +54,7 @@ const zh: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>Roth 与 Traditional:唯一的区别是纳税时点</h2>
     <p>
-      两类账户共享相同的 7,000 美元年度供款限额(2025 年:50 岁及以上为 8,000 美元),账户内增值均免税。整个决策只归结为<em>何时缴税</em>:<strong>Traditional IRA</strong> 今天抵扣供款(降低今年的税单),但退休后每笔提取都要纳税;<strong>Roth IRA</strong> 现在投入税后资金,之后每笔合格提取——本金<em>和</em>收益——都 100% 免税。
+      两类账户共享相同的 7,500 美元年度供款限额(2026 年:50 岁及以上为 8,600 美元),账户内增值均免税。整个决策只归结为<em>何时缴税</em>:<strong>Traditional IRA</strong> 今天抵扣供款(降低今年的税单),但退休后每笔提取都要纳税;<strong>Roth IRA</strong> 现在投入税后资金,之后每笔合格提取——本金<em>和</em>收益——都 100% 免税。
     </p>
 
     <h2>决定胜负的唯一法则</h2>
@@ -70,7 +70,7 @@ const zh: ReactNode = (
 
     <h2>盈亏平衡点之外的考量</h2>
     <p>
-      即使 Traditional 略微领先,Roth 也有战略优势:一生都无最低提取要求(RMD)(传统账户 73 岁起强制)、受益人继承免税,以及对未来税率上升的对冲。许多人<em>两个</em>都持有——高收入年份用 Traditional 抵扣,用 Roth 换取灵活性与税务多元化。每当税率档位变化时,就重新跑一遍对比。
+      即使 Traditional 略微领先,Roth 也有战略优势:持有人终身没有最低提取要求(RMD)(Traditional 从 73 岁起强制提取)、受益人继承免税,以及对未来税率上升的对冲。许多人<em>两个</em>都持有——高收入年份用 Traditional 抵扣,用 Roth 换取灵活性与税务多元化。每当税率档位变化时,就重新跑一遍对比。
     </p>
   </section>
 )
@@ -80,7 +80,7 @@ const es: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>Roth frente a Tradicional: la única diferencia es cuándo pagas impuestos</h2>
     <p>
-      Ambas cuentas comparten el mismo límite de aportación de 7.000 $ (2025: 8.000 $ a partir de los 50 años) y
+      Ambas cuentas comparten el mismo límite de aportación de 7.500 $ (2026: 8.600 $ a partir de los 50 años) y
       crecen libres de impuestos en su interior. Toda la decisión se reduce a <em>cuándo</em> pagas el impuesto: una{' '}
       <strong>Traditional IRA</strong> deduce las aportaciones hoy (reduce la factura de este año) pero grava cada
       retirada en la jubilación; una <strong>Roth IRA</strong> recibe dinero ya tributado y cada retirada
@@ -120,7 +120,7 @@ const de: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>Roth vs. Traditional: Der einzige Unterschied ist der Steuerzeitpunkt</h2>
     <p>
-      Beide Konten teilen sich dieselbe Beitragsgrenze von 7.000 $ (2025: 8.000 $ ab 50 Jahren) und wachsen im
+      Beide Konten teilen sich dieselbe Beitragsgrenze von 7.500 $ (2026: 8.600 $ ab 50 Jahren) und wachsen im
       Konto steuerfrei. Die gesamte Entscheidung läuft auf <em>wann</em> du Steuern zahlst hinaus: Ein{' '}
       <strong>Traditional IRA</strong> zieht Beiträge heute ab (senkt die diesjährige Steuerrechnung), besteuert
       aber jede Entnahme im Ruhestand; ein <strong>Roth IRA</strong> nimmt heute versteuertes Geld auf, und jede
@@ -141,7 +141,7 @@ const de: ReactNode = (
       Beiträge verzinsen sich jährlich mit deiner erwarteten Rendite über den Endwert einer Rente:
       <code>FV = C × ((1+r)<sup>n</sup> − 1) / r</code>. Das Traditional-Guthaben wächst auf Brutto-Dollar
       (größeres Guthaben, bei Entnahme versteuert); das Roth-Guthaben auf Netto-Dollar (kleineres Guthaben, null
-      Steuer beim Austritt). Der Vergleich ist fair, weil der heutige Aufwand aus der Tasche identisch ist.
+      Steuer beim Austritt). Der Vergleich ist fair, weil der heutige Eigenaufwand identisch ist.
     </p>
 
     <h2>Jenseits der Break-even-Rechnung</h2>

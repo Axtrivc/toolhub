@@ -52,7 +52,7 @@ export const uppercaseConverterL10n: ToolL10n = {
     useCases: [
       'Großbuchstaben für Titel oder Design einsetzen',
       'Akronyme schreiben (NASA, HTML)',
-      'hocheintscheidbare Warnschilder erstellen',
+      'gut sichtbare Warnhinweise erstellen',
       'Produktcodes oder Seriennummern formatieren',
     ],
     faqs: [

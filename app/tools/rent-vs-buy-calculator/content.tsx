@@ -136,14 +136,14 @@ const de: ReactNode = (
     <p>Die Entscheidung zwischen Mieten und Kaufen ist eine der größten finanziellen Entscheidungen, die die meisten Menschen treffen. Dieser Rechner vergleicht die Gesamtkosten über einen Haltezeitraum, aber beachte, dass es sich um eine vereinfachte Sicht handelt — die echte Antwort hängt von vielen Faktoren ab.</p>
     <div>
       <h2>Was dieser Rechner zeigt</h2>
-      <p>Die Gesamtkosten des Kaufens (Eigenkapital + Hypothek + Zinsen) im Vergleich zum Mieten einer vergleichbaren Wohnung über denselben Zeitraum. Nicht enthalten sind Grundsteuer, Versicherung, Instandhaltung (typischerweise 1-2 % des Hauswerts pro Jahr), Kaufnebenkosten sowie die Wertsteigerung, die du beim Haus gewinnen (oder verlieren) könntest.</p>
+      <p>Die Gesamtkosten des Kaufens (Anzahlung + Hypothek + Zinsen) im Vergleich zum Mieten einer vergleichbaren Wohnung über denselben Zeitraum. Nicht enthalten sind Grundsteuer, Versicherung, Instandhaltung (typischerweise 1-2 % des Hauswerts pro Jahr), Kaufnebenkosten sowie die Wertsteigerung, die du beim Haus gewinnen (oder verlieren) könntest.</p>
     </div>
     <div>
       <h2>Verborgene Kosten beim Kaufen</h2>
       <ul>
         <li>Kaufnebenkosten (~2-5 % des Preises)</li>
         <li>Grundsteuer (0,5-2,5 % pro Jahr)</li>
-        <li>Versicherung, PMI bei unter 20 % Eigenkapital</li>
+        <li>Versicherung, PMI bei unter 20 % Anzahlung</li>
         <li>Wartung und Reparaturen (1-2 % des Werts/Jahr)</li>
         <li>Hausgelder, Nebenkosten in größeren Häusern oft höher</li>
       </ul>
@@ -163,7 +163,7 @@ const de: ReactNode = (
     </div>
     <div>
       <h2>Durchgerechnetes Beispiel</h2>
-      <p>Betrachte ein <strong>$400,000</strong>-Haus mit 20 % Eigenkapital ($80,000) bei einer 30-jährigen Hypothek mit 6,5 %, gegenüber dem Mieten einer vergleichbaren Wohnung für <strong>$2,000/Monat</strong> über einen Zeitraum von <strong>7 Jahren</strong>. Dieses Werkzeug vergleicht das Eigenkapital plus Hypothekenzinsen mit der gezahlten Miete — Kaufen zeigt rund $139,000 an Zinsen über den Zeitraum, während Mieten $168,000 kostet. Aber rechne Kaufnebenkosten (~$12,000), Grundsteuer (~$42,000 über 7 Jahre) und Instandhaltung (~$28,000) dazu, und die Lücke schrumpft drastisch. Der echte Entscheidungsgrund ist die Wertsteigerung des Hauses und die Opportunitätskosten jener $80,000 Eigenkapital.</p>
+      <p>Betrachte ein <strong>$400,000</strong>-Haus mit 20 % Anzahlung ($80,000) bei einer 30-jährigen Hypothek mit 6,5 %, gegenüber dem Mieten einer vergleichbaren Wohnung für <strong>$2,000/Monat</strong> über einen Zeitraum von <strong>7 Jahren</strong>. Dieses Werkzeug vergleicht die Anzahlung plus Hypothekenzinsen mit der gezahlten Miete — Kaufen zeigt rund $139,000 an Zinsen über den Zeitraum, während Mieten $168,000 kostet. Aber rechne Kaufnebenkosten (~$12,000), Grundsteuer (~$42,000 über 7 Jahre) und Instandhaltung (~$28,000) dazu, und die Lücke schrumpft drastisch. Der echte Entscheidungsgrund ist die Wertsteigerung des Hauses und die Opportunitätskosten der $80,000-Anzahlung.</p>
     </div>
   </section>
 )

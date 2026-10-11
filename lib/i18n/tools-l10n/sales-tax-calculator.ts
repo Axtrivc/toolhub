@@ -16,7 +16,7 @@ export const salesTaxCalculatorL10n: ToolL10n = {
       { q: '销售税和 VAT 一样吗?', a: '两者都是消费税,但运作方式不同。销售税只在最终卖给消费者时征收一次。VAT 在每个生产环节都征收但会抵扣回去,最终仍由消费者承担。对最终买家来说,计算方式相似。' },
       { q: '为什么美国标价不含税?', a: '因为美国有成千上万个地方税区,零售商显示税前价格以便做全国统一广告。税款在结账时根据购买地加上。' },
       { q: '拿到含税价怎么反推税前金额?', a: '用「去税」模式:税前 = 含税 ÷ (1 + 税率)。含税 10,800 元、税率 8%,税前为 10,800 ÷ 1.08 = 10,000 元,税额 800 元。不要直接用 10,800 × 8% = 864——那是把税基搞错的最常见错误。' },
-      { q: '中国的增值税算这类税吗?', a: '算。中国增值税普遍税率 13%,部分商品 9% 或 6%,是价内税——标价已含税;美国式的"结账另加"销售税则是价外税。用「去税」模式可以把含税价拆回净额与税额。' },
+      { q: '中国的增值税算这类税吗?', a: '算。中国增值税普遍税率 13%,部分商品 9% 或 6%,是价内税——标价已含税;美国式的「结账另加」销售税则是价外税。用「去税」模式可以把含税价拆回净额与税额。' },
     ],
     ui: {
       'chartTitle': '净额 vs 税额',
@@ -60,9 +60,9 @@ export const salesTaxCalculatorL10n: ToolL10n = {
   de: {
     formula: {
       formula: 'tax = price × rate\ntotal = price × (1 + rate)',
-      explain: 'Die Mehrwertsteuer ist ein Prozentsatz des Nettopreises, der an der Kasse addiert wird. Rate als Dezimalzahl (z. B. 0,08 für 8%).',
+      explain: 'Die Umsatzsteuer ist ein Prozentsatz des Nettopreises, der an der Kasse addiert wird. Rate als Dezimalzahl (z. B. 0,08 für 8 %).',
     },
-    useCases: ['den Endpreis inklusive Steuer vor dem Bezahlen ausrechnen', 'den Netto­betrag aus dem Brutto­total zurückrechnen (Spesen, Abrechnung)', 'kombinierte Steuersätze verschiedener Bundesstaaten/Kantone vergleichen', 'den Zusammenhang zwischen Mehrwertsteuer/GST und Sales Tax verstehen'],
+    useCases: ['den Endpreis inklusive Steuer vor dem Bezahlen ausrechnen', 'den Nettobetrag aus dem Bruttobetrag zurückrechnen (Spesen, Abrechnung)', 'kombinierte Steuersätze verschiedener Bundesstaaten und Countys vergleichen', 'den Zusammenhang zwischen Umsatzsteuer/Sales Tax und Mehrwertsteuer/GST verstehen'],
     faqs: [
       { q: 'Werden Lebensmittel besteuert?', a: 'In vielen US-Bundesstaaten sind Lebensmittel befreit oder werden niedriger besteuert. Grundnahrungsmittel und Medikamente erhalten oft eine Sonderbehandlung, aber die Regeln unterscheiden sich je nach Gebiet stark.' },
       { q: 'Ist Sales Tax dasselbe wie die Mehrwertsteuer?', a: 'Beides sind Verbrauchsteuern, aber sie funktionieren unterschiedlich. Sales Tax wird einmalig beim Endverkauf an den Verbraucher erhoben. Die Mehrwertsteuer wird auf jeder Produktionsstufe erhoben, aber erstattet, sodass sie am Ende der Verbraucher trägt. Die Rechnung für den Endkäufer ist ähnlich.' },
@@ -80,7 +80,7 @@ export const salesTaxCalculatorL10n: ToolL10n = {
       'in.amount': 'Betrag', 'inSuffix.amount': '$', 'in.rate': 'Steuersatz', 'inSuffix.rate': '%', 'in.mode': 'Berechnungsmodus',
       'opt.mode.add': 'Steuer hinzufügen (netto → brutto)', 'opt.mode.remove': 'Steuer abziehen (brutto → netto)',
       'out.tax': 'Steuerbetrag', 'out.result': 'Endbetrag',
-      note: '💰 Nutze „Steuer abziehen", um den Nettobetrag zu finden, wenn du nur das Bruttototal hast — häufig bei Mehrwertsteuer und GST.',
+      note: '💰 Nutze „Steuer abziehen", um den Nettobetrag zu finden, wenn du nur den Bruttobetrag hast — häufig bei Mehrwertsteuer und GST.',
     },
   },
 }

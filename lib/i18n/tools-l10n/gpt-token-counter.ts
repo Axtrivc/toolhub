@@ -105,7 +105,7 @@ export const gptTokenCounterL10n: ToolL10n = {
       'noSpaces': 'Sin espacios',
       'noteF1': '⚠️ Esto es una ',
       'noteF2': ', no un recuento exacto. La facturación real usa el tokenizador de cada proveedor (GPT-4o usa ',
-      'noteF3': '); esta heurística promedia la regla de 4 caracteres por token con una división por palabras/puntuación. Los precios son de 2026-08 y cambian a menudo — confírmalos siempre en la página de precios del proveedor.',
+      'noteF3': '); esta heurística promedia la regla de 4 caracteres por token (≈0,75 tokens por carácter CJK) con una división por palabras/puntuación. Los precios son de 2026-08 y cambian a menudo — confírmalos siempre en la página de precios del proveedor.',
       'outShort': 'sal',
       'output': 'salida',
       'pastePrompt': 'Pega tu prompt o documento',
@@ -124,7 +124,7 @@ export const gptTokenCounterL10n: ToolL10n = {
     },
     formula: {
       formula: 'tokens ≈ characters / 4',
-      explain: 'Regla aproximada: el texto inglés promedia ~4 caracteres por token, refinada separando por palabras y signos. Los recuentos reales dependen del tokenizador exacto del modelo.',
+      explain: 'Regla aproximada: el texto en inglés promedia ~4 caracteres por token, con un refinado que divide por palabras y signos de puntuación. Los recuentos reales dependen del tokenizador exacto del modelo.',
     },
     useCases: [
       'contador de tokens de GPT-4o online',
@@ -139,7 +139,7 @@ export const gptTokenCounterL10n: ToolL10n = {
       },
       {
         q: '¿Por qué mi recuento real de tokens difiere de esta estimación?',
-        a: 'Los modelos usan tokenizadores distintos (cl100k_base, o200k_base, el de Claude) y el código, el texto CJK, los emojis y el Unicode poco habitual rompen la media de 4 caracteres por token. El texto no inglés suele necesitar más tokens por carácter, donde más se desvía la estimación.',
+        a: 'Los modelos usan tokenizadores distintos (cl100k_base, o200k_base, el de Claude) y el código, el texto CJK, los emojis y los caracteres Unicode poco habituales rompen la media de 4 caracteres por token. El texto en otros idiomas suele necesitar más tokens por carácter, y ahí es donde más se desvía la estimación.',
       },
       {
         q: '¿Cómo se calcula el coste de la API?',
@@ -151,7 +151,7 @@ export const gptTokenCounterL10n: ToolL10n = {
     ui: {
       'chartTitle': 'Wohin die Kosten gehen',
       'chartCenter': 'Gesamt',
-      'cachedShort': 'gespeichert',
+      'cachedShort': 'gecacht',
       'sliceInput': 'Eingabe',
       'sliceOutput': 'Ausgabe',
       'expectedOutputTokens': 'Erwartete Ausgabe-Tokens',
@@ -176,7 +176,7 @@ export const gptTokenCounterL10n: ToolL10n = {
       'noSpaces': 'Ohne Leerzeichen',
       'noteF1': '⚠️ Dies ist eine ',
       'noteF2': ', keine genaue Zahl. Die echte Abrechnung nutzt den Tokenizer jedes Anbieters (GPT-4o nutzt ',
-      'noteF3': '); diese Heuristik mittelt die 4-Zeichen-pro-Token-Regel mit einer Wort-/Satzzeichentrennung. Preise Stand 2026-08 und ändern sich oft — immer auf der Preisseite des Anbieters bestätigen.',
+      'noteF3': '); diese Heuristik mittelt die 4-Zeichen-pro-Token-Regel (≈0,75 Tokens pro CJK-Zeichen) mit einer Wort-/Satzzeichentrennung. Preise Stand 2026-08 und ändern sich oft — immer auf der Preisseite des Anbieters bestätigen.',
       'outShort': 'aus',
       'output': 'Ausgabe',
       'pastePrompt': 'Füge deinen Prompt oder dein Dokument ein',
@@ -190,12 +190,12 @@ export const gptTokenCounterL10n: ToolL10n = {
       'sSentences': 'Sätze:',
       'sWords': 'Wörter:',
       'sentences': 'Sätze',
-      'summaryTitle': 'Token-Anzahl Zusammenfassung (Schätzung)',
+      'summaryTitle': 'Zusammenfassung der Token-Anzahl (Schätzung)',
       'words': 'Wörter',
     },
     formula: {
       formula: 'tokens ≈ characters / 4',
-      explain: 'Daumenregel: Englischer Text im Schnitt ~4 Zeichen pro Token, verfeinert durch Wort-/Satzzeichentrennung. Echte Zahlen hängen vom exakten Tokenizer des Modells ab.',
+      explain: 'Daumenregel: Englischer Text hat im Schnitt ~4 Zeichen pro Token, verfeinert durch Wort-/Satzzeichentrennung. Echte Zahlen hängen vom exakten Tokenizer des Modells ab.',
     },
     useCases: [
       'Online-Token-Zähler für GPT-4o',
@@ -206,7 +206,7 @@ export const gptTokenCounterL10n: ToolL10n = {
     faqs: [
       {
         q: 'Ist diese Token-Anzahl exakt oder eine Schätzung?',
-        a: 'Eine Schätzung. Sie nutzt die Daumenregel von ~4 Zeichen pro Token, verfeinert durch eine Wort-/Satzzeichen-Aufteilung, und landet damit nahe cl100k_base. Die echte Abrechnung verwendet den exakten Tokenizer des Anbieters, also betrachte die Zahl als Größenordnungs-Hinweis.',
+        a: 'Eine Schätzung. Sie nutzt die Daumenregel von ~4 Zeichen pro Token, verfeinert durch eine Wort-/Satzzeichen-Aufteilung, und landet damit nahe cl100k_base. Die echte Abrechnung verwendet den exakten Tokenizer des Anbieters, also betrachte die Zahl als Richtwert für die Größenordnung.',
       },
       {
         q: 'Warum weicht meine echte Token-Anzahl von dieser Schätzung ab?',

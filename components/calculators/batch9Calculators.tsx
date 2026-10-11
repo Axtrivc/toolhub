@@ -144,6 +144,7 @@ export const PaceCalculatorClient = makeCalculatorClient({
     { key: 'races', label: 'Equivalent race predictions' },
   ],
   compute: (v, locale) => {
+    const T = (key: string, fb: string) => tui('pace-calculator', locale, key, fb)
     const distance = toNumStrict(v.distance)
     const timeSec = parseDuration(v.time)
     // 空输入保持 '—' 占位(出厂默认观感);非空但非法(负数/乱格式)时把提示放到
@@ -162,10 +163,11 @@ export const PaceCalculatorClient = makeCalculatorClient({
       ? `${fmtNum(speedKmh / 1.609344, 2)} mph`
       : `${fmtNum(speedKmh, 2)} km/h`
     // 等效成绩预测(同配速外推;不做 Riegel 减速修正,保持可解释性)。
-    // 用 ' · ' 分隔:ResultCard 无 whitespace-pre,'\n' 会被折叠成空格挤成一行
+    // 用 ' · ' 分隔:ResultCard 无 whitespace-pre,'\n' 会被折叠成空格挤成一行;
+    // 赛事名经 race.* 键本地化(en 回退即原英文名),与 preset.* 芯片用词对齐
     const lines = RACE_DISTANCES_KM.map(([name, km]) => {
       const t = (timeSec / distance) * km
-      return `${name}: ${formatDuration(t)}`
+      return `${T(`race.${name}`, name)}: ${formatDuration(t)}`
     })
     return {
       pace: `${formatDuration(paceSec)} /${v.unit}`,

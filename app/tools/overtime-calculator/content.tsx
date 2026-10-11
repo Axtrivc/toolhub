@@ -56,13 +56,13 @@ const es: ReactNode = (
 const de: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>Wer in den USA Überstunden bekommt</h2>
-    <p>Non-exempt Beschäftigte unter der FLSA erhalten ab 40 Wochenstunden mindestens das 1,5-Fache ihres Regellohns. Der Exempt-Status hängt von Gehaltshöhe und Aufgaben des Postens ab — der Jobtitel allein entscheidet nicht.</p>
+    <p>Nicht freigestellte Beschäftigte unter der FLSA erhalten ab 40 Wochenstunden mindestens das 1,5-Fache ihres Regelstundenlohns. Die Einstufung als freigestellt (exempt) hängt von Gehaltshöhe und Aufgaben des Postens ab — der Jobtitel allein entscheidet nicht.</p>
     <h2>Überstunden mit Festgehalt</h2>
-    <p>Non-exempt Festangestellte bekommen ebenfalls Überstunden: das Wochengehalt durch 40 geteilt ergibt den Regellohn. Manche Bundesstaaten verlangen zusätzlich tägliche Überstunden nach 8 Stunden, unabhängig von der Wochensumme.</p>
+    <p>Nicht freigestellte Festangestellte bekommen ebenfalls Überstunden: das Wochengehalt durch 40 geteilt ergibt den Regelstundenlohn. Manche Bundesstaaten verlangen zusätzlich tägliche Überstunden nach 8 Stunden, unabhängig von der Wochensumme.</p>
     <h2>Was in den Regellohn einfließt</h2>
     <p>Bei der Berechnung des «Regellohns» müssen Boni, Provisionen und Schichtzulagen in der Regel eingerechnet werden — der bloße Stundenlohn unterschätzt, was dir zusteht.</p>
     <h2>Doppelte Zeit</h2>
-    <p>Das Bundesrecht verlangt nie ×2, aber Kalifornien schreibt es ab 12 Stunden pro Tag vor, und viele Tarifverträge und Firmenrichtlinien bieten Feiertags-Doppeltzeit freiwillig an.</p>
+    <p>Das Bundesrecht verlangt nie ×2, aber Kalifornien schreibt es ab 12 Stunden pro Tag vor, und viele Tarifverträge und Firmenrichtlinien bieten Feiertags-Doppellohn freiwillig an.</p>
   </section>
 )
 

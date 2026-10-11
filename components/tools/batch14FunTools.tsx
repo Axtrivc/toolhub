@@ -769,9 +769,9 @@ export function PasswordEntropyCheckerClient() {
     const crackTime =
       seconds < 1 ? L('instant', 'instantly') :
       seconds < 3600 ? L('minutes', '< 1 hour') :
-      seconds < 86400 * 365 ? `${fmtNum(seconds / 86400, 0)} days` :
-      seconds < 86400 * 365 * 1e6 ? `${fmtNum(seconds / 86400 / 365, 0)} years` :
-      seconds < 86400 * 365 * 1e12 ? `${fmtNum(seconds / 86400 / 365 / 1e6, 0)} million years` :
+      seconds < 86400 * 365 ? `${fmtNum(seconds / 86400, 0)} ${L('days', 'days')}` :
+      seconds < 86400 * 365 * 1e6 ? `${fmtNum(seconds / 86400 / 365, 0)} ${L('years', 'years')}` :
+      seconds < 86400 * 365 * 1e12 ? `${fmtNum(seconds / 86400 / 365 / 1e6, 0)} ${L('millionYears', 'million years')}` :
       L('heatDeath', 'beyond cosmic timescales')
     return { bits: Math.round(bits), pool, crackTime, penalties }
     // penalties 走本地化:locale 切换时重算(否则旧语言标签残留)

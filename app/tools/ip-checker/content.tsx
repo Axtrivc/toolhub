@@ -75,7 +75,7 @@ const zh: ReactNode = (
     <h2>这是什么工具？</h2>
     <p>
       这个 IP 质量检测器以反欺诈系统的方式给任意 IP 地址打分——解析它的 <strong>ASN 与归属</strong>，把它归类为
-      <strong> 住宅 ISP 还是机房（IDC）</strong>，计算一个 <strong>0–100 的欺诈评分</strong>，并交叉核对一致性信号，比如你的浏览器
+      <strong>住宅 ISP 还是机房（IDC）</strong>，计算一个 <strong>0–100 的欺诈评分</strong>，并交叉核对一致性信号，比如你的浏览器
       时区与 IP 归属地是否吻合。所有检测都在浏览器中完成，直连免费的、支持 CORS 的接口（Cloudflare trace、ipwho.is、
       ipapi.co 以及 Cloudflare DNS-over-HTTPS）；任何查询都不会经过我们自己的服务器。
     </p>
@@ -92,7 +92,7 @@ const zh: ReactNode = (
           出现 <code>Asia/Shanghai</code> 与 <code>America/New_York</code> 这类不匹配，是典型的 VPN/代理泄漏，会拉高评分。
         </li>
         <li>
-          <strong>代理与黑名单启发式</strong> —— ASN 所有者名称中的 VPN/代理关键词，加上已知的机房 IP 段，近似还原了商用
+          <strong>代理与黑名单启发式</strong> —— ASN 所有者名称中的 VPN/代理关键词，加上已知的机房 IP 段，近似模拟了商用
           黑名单服务的标记逻辑。
         </li>
       </ul>
@@ -103,7 +103,7 @@ const zh: ReactNode = (
       <p>
         TikTok、Amazon、Meta 以及 OpenAI 等 AI 服务商都会对入站 IP 打分。<strong>住宅 ISP</strong> 地址映射到真实家庭，
         能通过大多数检测；而<strong>机房</strong> IP 段被批量出售、大量用于自动化滥用——因此机房 IP 上的账号会被限流、
-        挑战甚至封禁。工具里的用途评级矩阵把检测结果翻译成各平台的星级评分，让你一眼看出一个出口节点是否适合做视频
+        遭遇验证挑战甚至封禁。工具里的用途评级矩阵把检测结果转换为各平台的星级评分，让你一眼看出一个出口节点是否适合做视频
         触达、跨境电商、社媒运营或 AI 服务。
       </p>
     </div>
@@ -160,9 +160,9 @@ const es: ReactNode = (
         TikTok, Amazon, Meta y proveedores de IA como OpenAI puntúan las IP entrantes. Las direcciones de{' '}
         <strong>ISP residencial</strong> se asignan a hogares reales y superan la mayoría de las comprobaciones, mientras
         que los rangos de <strong>centro de datos</strong> se venden al por mayor y se usan de forma masiva y abusiva para
-        automatización — por eso las cuentas en IP de IDC sufren limitaciones, comprobaciones de seguridad o baneos. La matriz de calificación de casos de uso
-        de la herramienta traduce el resultado de la inspección en valoraciones por estrellas para cada plataforma, de
-        modo que veas de un vistazo si un nodo de salida es adecuado para outreach en vídeo, comercio electrónico
+        automatización — por eso las cuentas en IP de IDC sufren limitaciones, desafíos de verificación o baneos. La matriz de calificación de casos de uso
+        de la herramienta traduce el resultado de la inspección en valoraciones con estrellas para cada plataforma, de
+        modo que veas de un vistazo si un nodo de salida es adecuado para divulgación en vídeo, comercio electrónico
         transfronterizo, operaciones en redes sociales o servicios de IA.
       </p>
     </div>
@@ -173,7 +173,7 @@ const es: ReactNode = (
         Pega cualquier dirección IPv4/IPv6 o dominio en el cuadro de consulta. Los dominios se resuelven primero a través
         del resolver DNS-over-HTTPS de Cloudflare y luego se geolocalizan; el DNS inverso (PTR) se consulta de la misma
         manera. La sonda de latencia mide los tiempos reales de ida y vuelta HTTP desde tu conexión actual a las regiones
-        edge de AWS en Costa Oeste de EE. UU., Costa Este, Tokio, Singapur y Fráncfort usando la temporización de{' '}
+        edge de AWS en Oeste de EE. UU., Este de EE. UU., Tokio, Singapur y Fráncfort usando la temporización de{' '}
         <code>performance.now()</code>.
       </p>
     </div>
@@ -188,7 +188,7 @@ const de: ReactNode = (
       Dieser IP-Qualitäts-Inspektor bewertet jede IP-Adresse so wie Anti-Betrugssysteme: Er löst{' '}
       <strong>ASN und Eigentümer</strong> auf, klassifiziert sie als <strong>Residential-ISP oder Datacenter (IDC)</strong>,
       berechnet einen <strong>Betrugsscore von 0–100</strong> und gleicht Konsistenzsignale ab, etwa deine Browser-Zeitzone
-      gegenüber der Geolokalisierung der IP. Alles läuft in deinem Browser gegen kostenlose, CORS-fähige Endpunkte
+      mit der Geolokalisierung der IP. Alles läuft in deinem Browser gegen kostenlose, CORS-fähige Endpunkte
       (Cloudflare trace, ipwho.is, ipapi.co und Cloudflare DNS-over-HTTPS); keine Abfrage berührt jemals einen von uns
       kontrollierten Server.
     </p>
@@ -204,7 +204,7 @@ const de: ReactNode = (
         <li>
           <strong>Zeitzonen-Konsistenz</strong> — deine Gerätezeitzone (aus <code>Intl.DateTimeFormat</code>) wird mit der
           Zeitzone des IP-Standorts verglichen. Eine Abweichung wie <code>Asia/Shanghai</code> gegenüber{' '}
-          <code>America/New_York</code> ist ein klassischer VPN-/Proxy-Leck und erhöht den Score.
+          <code>America/New_York</code> ist ein klassischer VPN-/Proxy-Leak und erhöht den Score.
         </li>
         <li>
           <strong>Proxy- und Blacklist-Heuristiken</strong> — VPN-/Proxy-Schlüsselwörter im ASN-Eigentümernamen und
@@ -231,7 +231,7 @@ const de: ReactNode = (
       <p>
         Füge beliebige IPv4-/IPv6-Adressen oder Domains in das Abfragefeld ein. Domains werden zuerst über den
         DNS-over-HTTPS-Resolver von Cloudflare aufgelöst und anschließend geolokalisiert; Reverse-DNS (PTR) wird
-        gleichermaßen abgefragt. Die Latenzsonde misst mit <code>performance.now()</code>-Zeitmessung die echten
+        gleichermaßen abgefragt. Die Latenzsonde misst mit <code>performance.now()</code> die echten
         HTTP-Round-Trips von deiner aktuellen Verbindung zu AWS-Edge-Regionen in US-West, US-Ost, Tokio, Singapur und
         Frankfurt.
       </p>

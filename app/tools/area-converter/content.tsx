@@ -91,7 +91,7 @@ const zh: ReactNode = (
 
     <h2>英亩与公顷</h2>
     <p>
-      这两个大面积单位最容易让人混淆。<strong>英亩</strong>是传统单位,大约相当于一个美式足球场的大小(不含端区)。一 <strong>公顷</strong>正好是 10,000 m²——一个边长 100 米的正方形。一公顷约等于 2.47 英亩。农田、牧场和森林通常根据国家不同而采用其中之一。
+      这两个大面积单位最容易让人混淆。<strong>英亩</strong>是传统单位,大约相当于一个美式足球场的大小(不含端区)。<strong>公顷</strong>正好是 10,000 m²——一个边长 100 米的正方形。一公顷约等于 2.47 英亩。农田、牧场和森林通常根据国家不同而采用其中之一。
     </p>
 
     <h2>快速参考点</h2>
@@ -143,10 +143,10 @@ const es: ReactNode = (
     <h2>Acres frente a hectáreas</h2>
     <p>
       Estas dos unidades de gran superficie son las que más confunden. Un <strong>acre</strong> es
-      una unidad tradicional aproximadamente del tamaño de un campo de fútbol (sin las zonas de
-      marca). Una <strong>hectárea</strong> es exactamente 10.000 m² — un cuadrado de 100 metros de
-      lado. Una hectárea equivale a unos 2,47 acres. Las tierras de cultivo, los ranchos y los
-      bosques se miden normalmente en una u otra según el país.
+      una unidad tradicional aproximadamente del tamaño de un campo de fútbol americano (sin las
+      zonas de anotación). Una <strong>hectárea</strong> es exactamente 10.000 m² — un cuadrado de
+      100 metros de lado. Una hectárea equivale a unos 2,47 acres. Las tierras de cultivo, los
+      ranchos y los bosques se miden normalmente en una u otra según el país.
     </p>
 
     <h2>Puntos de referencia rápidos</h2>
@@ -202,7 +202,7 @@ const de: ReactNode = (
     <h2>Acres vs. Hektar</h2>
     <p>
       Diese beiden großen Flächeneinheiten sorgen für die meiste Verwirrung. Ein <strong>Acre</strong>{' '}
-      ist eine traditionelle Einheit, etwa so groß wie ein Fußballfeld (ohne Endzonen). Ein{' '}
+      ist eine traditionelle Einheit, etwa so groß wie ein Footballfeld (ohne Endzonen). Ein{' '}
       <strong>Hektar</strong> ist exakt 10.000 m² — ein Quadrat mit 100 Metern Seitenlänge. Ein
       Hektar entspricht etwa 2,47 Acres. Ackerland, Ranches und Wälder werden je nach Land in der
       einen oder der anderen Einheit gemessen.

@@ -14,12 +14,12 @@ export const reverseTextL10n: ToolL10n = {
     },
     useCases: [
       '解谜和文字游戏(破译倒序信息)',
-      '制作回文或对称设计',
+      '制作双向图(ambigram)或对称设计',
       '测试处理字符串的代码',
       '反转邮箱地址以防基础爬虫抓取',
     ],
     faqs: [
-      { q: '为什么 emoji 有时会出错?', a: '部分 emoji(家庭、旗帜)由多个码位组合而成。本工具使用字形簇感知的分割方式,大多数 emoji 能正确反转,但复杂的组合 emoji 仍可能被拆开。' },
+      { q: '为什么 emoji 有时会出错?', a: '部分 emoji(家庭、旗帜)由多个码位组合而成。本工具按 Unicode 码位反转,单个码位的 emoji 能正确反转,但由多个码位组合而成的复杂 emoji(ZWJ 序列、旗帜)仍可能被拆开。' },
     ],
   },
   es: {
@@ -36,7 +36,7 @@ export const reverseTextL10n: ToolL10n = {
       'invertir correos para despistar a raspadores básicos',
     ],
     faqs: [
-      { q: '¿Por qué a veces se rompen los emojis?', a: 'Algunos emojis (familias, banderas) se componen de varios puntos de código. Esta herramienta usa una división consciente de grafemas, de modo que la mayoría de los emojis se invierten correctamente, aunque los emojis compuestos complejos pueden separarse.' },
+      { q: '¿Por qué a veces se rompen los emojis?', a: 'Algunos emojis (familias, banderas) se componen de varios puntos de código. Esta herramienta invierte por puntos de código Unicode: los emojis de un solo punto de código se invierten correctamente, pero los compuestos por varios puntos (secuencias ZWJ, banderas) pueden separarse.' },
     ],
   },
   de: {
@@ -53,7 +53,7 @@ export const reverseTextL10n: ToolL10n = {
       'E-Mail-Adressen umkehren, um einfache Scraper zu verwirren',
     ],
     faqs: [
-      { q: 'Warum gehen Emojis manchmal kaputt?', a: 'Einige Emojis (Familien, Flaggen) bestehen aus mehreren Codepunkten. Dieses Werkzeug nutzt graphembewusste Aufteilung, sodass sich die meisten Emojis korrekt umkehren lassen, komplex zusammengesetzte Emojis können jedoch auseinanderfallen.' },
+      { q: 'Warum gehen Emojis manchmal kaputt?', a: 'Einige Emojis (Familien, Flaggen) bestehen aus mehreren Codepunkten. Dieses Werkzeug kehrt nach Unicode-Codepunkten um: Emojis aus einem einzelnen Codepunkt werden korrekt umgekehrt, doch aus mehreren Codepunkten zusammengesetzte (ZWJ-Folgen, Flaggen) können auseinanderfallen.' },
     ],
   },
 }

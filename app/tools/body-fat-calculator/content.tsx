@@ -54,7 +54,7 @@ const zh: ReactNode = (
       <ul>
         <li><strong>必需脂肪：</strong>男性 2-5% / 女性 10-13%（维持生存的最低值）</li>
         <li><strong>运动员：</strong>男性 6-13% / 女性 14-20%</li>
-        <li><strong>健身水平：</strong>男性 14-17% / 女性 21-24%</li>
+        <li><strong>健康体型：</strong>男性 14-17% / 女性 21-24%</li>
         <li><strong>平均水平：</strong>男性 18-24% / 女性 25-31%</li>
         <li><strong>偏高：</strong>男性 25%+ / 女性 32%+</li>
       </ul>
@@ -85,7 +85,7 @@ const es: ReactNode = (
       <ul>
         <li><strong>Grasa esencial:</strong> 2-5% hombres / 10-13% mujeres (mínimo para sobrevivir)</li>
         <li><strong>Atleta:</strong> 6-13% hombres / 14-20% mujeres</li>
-        <li><strong>Fitness:</strong> 14-17% hombres / 21-24% mujeres</li>
+        <li><strong>En forma:</strong> 14-17% hombres / 21-24% mujeres</li>
         <li><strong>Promedio:</strong> 18-24% hombres / 25-31% mujeres</li>
         <li><strong>Alto:</strong> 25%+ hombres / 32%+ mujeres</li>
       </ul>
@@ -115,7 +115,7 @@ const de: ReactNode = (
       <h2>Körperfett-Kategorien</h2>
       <ul>
         <li><strong>Essentielles Fett:</strong> 2-5% Männer / 10-13% Frauen (Minimum zum Überleben)</li>
-        <li><strong>Athlet:</strong> 6-13% Männer / 14-20% Frauen</li>
+        <li><strong>Sportler:</strong> 6-13% Männer / 14-20% Frauen</li>
         <li><strong>Fitness:</strong> 14-17% Männer / 21-24% Frauen</li>
         <li><strong>Durchschnitt:</strong> 18-24% Männer / 25-31% Frauen</li>
         <li><strong>Hoch:</strong> 25%+ Männer / 32%+ Frauen</li>

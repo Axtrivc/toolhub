@@ -62,7 +62,7 @@ const de: ReactNode = (
     <h2>Typische Anwendungen</h2>
     <p>Vertragsänderungen prüfen, Config-Änderungen vor dem Commit kontrollieren, Log-Ausgaben zweier Läufe vergleichen oder sicherstellen, dass ein Bereinigungsskript nichts gelöscht hat.</p>
     <h2>Leerzeichen zählen</h2>
-    <p>Zeilen werden exakt verglichen, einschließlich nachfolgender Leerzeichen. Nutze zuerst das Text-Cleaner-Tool, wenn unsichtbarer Leerraum-Lärm die echten Änderungen überdeckt.</p>
+    <p>Zeilen werden exakt verglichen, einschließlich nachfolgender Leerzeichen. Nutze zuerst das Text-Cleaner-Tool, wenn unsichtbare Leerzeichen die echten Änderungen überdecken.</p>
   </section>
 )
 

@@ -1,6 +1,7 @@
 /**
  * temperature-converter 本地化 bundle —— zh / es / de
- * 覆盖:faqs + useCases(client = TemperatureConverterClient,自定义组件,UI 保持英文)
+ * 覆盖:faqs + ui + useCases(client = TemperatureConverterClient,自定义组件;
+ * 键为组件内 L() 调用口径,summaryTitle/sInput/sResult 供 Copy 摘要用)
  */
 import type { ToolL10n } from '../tool-l10n'
 
@@ -43,7 +44,7 @@ export const temperatureConverterL10n: ToolL10n = {
     ui: {
       'chartTitle': 'Escala de temperatura (°C)',
       'ptFreezing': 'Congelación',
-      'ptBody': 'Cuerpo',
+      'ptBody': 'Corporal',
       'ptBoiling': 'Ebullición',
       'summaryTitle': 'Conversión de temperatura',
       'sInput': 'Entrada: ',
@@ -55,7 +56,7 @@ export const temperatureConverterL10n: ToolL10n = {
       'from': 'De',
       'swapUnits': 'Intercambiar origen y destino',
       'swap': 'Intercambiar',
-      'noteText': '🌡️ Puntos de referencia: 0°C = 32°F (congelación), 100°C = 212°F (ebullición), 37°C = 98.6°F (corporal).',
+      'noteText': '🌡️ Puntos de referencia: 0°C = 32°F (congelación), 100°C = 212°F (ebullición), 37°C = 98,6°F (corporal).',
       'optCelsius': 'Celsius (°C)',
       'optFahrenheit': 'Fahrenheit (°F)',
       'optKelvin': 'Kelvin (K)',
@@ -87,9 +88,9 @@ export const temperatureConverterL10n: ToolL10n = {
       'convertedValue': 'Umgerechneter Wert',
       'formula': 'Formel',
       'from': 'Von',
-      'swapUnits': '„Von" und „Nach" tauschen',
+      'swapUnits': '„Von“ und „Nach“ tauschen',
       'swap': 'Tauschen',
-      'noteText': '🌡️ Referenzpunkte: 0°C = 32°F (Gefrierpunkt), 100°C = 212°F (Siedepunkt), 37°C = 98.6°F (Körper).',
+      'noteText': '🌡️ Referenzpunkte: 0°C = 32°F (Gefrierpunkt), 100°C = 212°F (Siedepunkt), 37°C = 98,6°F (Körpertemp.).',
       'optCelsius': 'Celsius (°C)',
       'optFahrenheit': 'Fahrenheit (°F)',
       'optKelvin': 'Kelvin (K)',
@@ -103,7 +104,7 @@ export const temperatureConverterL10n: ToolL10n = {
     ],
     faqs: [
       { q: 'Wie rechne ich Celsius im Kopf in Fahrenheit um?', a: 'Verdopple den Celsius-Wert, ziehe 10 % ab und addiere 32. Für 20 °C: verdoppeln zu 40, 10 % abziehen → 36, plus 32 = 68 °F. Die genaue Formel ist °F = °C × 9/5 + 32. Diese Faustregel ist bei Alltagstemperaturen auf einen Grad genau.' },
-      { q: 'Warum sagt man bei Kelvin nicht „Grad"?', a: 'Kelvin ist eine absolute Temperaturskala ab dem absoluten Nullpunkt, und der Konvention nach sagt man „Kelvin" nicht „Grad Kelvin". 0 K = −273,15 °C. Kelvin verwendet dieselbe Schrittweite wie Celsius, die Umrechnung ist also nur Addition oder Subtraktion von 273,15.' },
+      { q: 'Warum sagt man bei Kelvin nicht „Grad“?', a: 'Kelvin ist eine absolute Temperaturskala ab dem absoluten Nullpunkt, und der Konvention nach sagt man „Kelvin“ nicht „Grad Kelvin“. 0 K = −273,15 °C. Kelvin verwendet dieselbe Schrittweite wie Celsius, die Umrechnung ist also nur Addition oder Subtraktion von 273,15.' },
       { q: 'Bei welcher Temperatur sind Celsius und Fahrenheit gleich?', a: 'Bei −40. Das ist der einzige Punkt, an dem sich die beiden Skalen kreuzen: −40 °C = −40 °F. Eine praktische Referenz, um zu prüfen, ob eine Umrechnungsformel stimmt.' },
     ],
   },

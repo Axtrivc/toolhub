@@ -66,10 +66,10 @@ const zh: ReactNode = (
       <h2>你实际需要哪些尺寸</h2>
       <ul>
         <li>
-          <strong>16×16</strong> —— 经典的浏览器标签页图标。这是最小且最常可见的尺寸,因此这里的清晰度最为重要。
+          <strong>16×16</strong> —— 经典的浏览器标签页图标。这是最小也最显眼的尺寸,因此这里的清晰度最为重要。
         </li>
         <li>
-          <strong>32×32</strong> —— 用于视网膜标签页、Windows 任务栏以及现代书签。
+          <strong>32×32</strong> —— 用于 Retina 标签页、Windows 任务栏以及现代书签。
         </li>
         <li>
           <strong>180×180(Apple Touch Icon)</strong> —— 当用户将你的网站添加到主屏幕时,iOS 使用的高分辨率图标。
@@ -133,7 +133,7 @@ const es: ReactNode = (
         <code>&lt;link rel=&quot;icon&quot; type=&quot;image/png&quot; sizes=&quot;32x32&quot; href=&quot;/favicon-32x32.png&quot;&gt;</code>,{' '}
         <code>&lt;link rel=&quot;icon&quot; type=&quot;image/png&quot; sizes=&quot;16x16&quot; href=&quot;/favicon-16x16.png&quot;&gt;</code> y{' '}
         <code>&lt;link rel=&quot;apple-touch-icon&quot; sizes=&quot;180x180&quot; href=&quot;/apple-touch-icon.png&quot;&gt;</code>.
-        Los navegadores eligen la mejor coincidencia automáticamente.
+        Los navegadores eligen automáticamente la mejor coincidencia.
       </p>
     </div>
     <div>
@@ -181,12 +181,12 @@ const de: ReactNode = (
     <div>
       <h2>Wie du sie in deinem HTML deklarierst</h2>
       <p>
-        Platziere nach dem Download die Dateien im Wurzelverzeichnis deiner Seite und füge deinem{' '}
+        Platziere nach dem Download die Dateien im Stammverzeichnis deiner Seite und füge deinem{' '}
         <code>&lt;head&gt;</code> diese Tags hinzu:{' '}
         <code>&lt;link rel=&quot;icon&quot; type=&quot;image/png&quot; sizes=&quot;32x32&quot; href=&quot;/favicon-32x32.png&quot;&gt;</code>,{' '}
         <code>&lt;link rel=&quot;icon&quot; type=&quot;image/png&quot; sizes=&quot;16x16&quot; href=&quot;/favicon-16x16.png&quot;&gt;</code> und{' '}
         <code>&lt;link rel=&quot;apple-touch-icon&quot; sizes=&quot;180x180&quot; href=&quot;/apple-touch-icon.png&quot;&gt;</code>.
-        Der Browser wählt automatisch die beste Passung.
+        Der Browser wählt automatisch das am besten passende Icon aus.
       </p>
     </div>
     <div>

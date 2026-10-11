@@ -68,7 +68,7 @@ const zh: ReactNode = (
 const es: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>¿Qué es esta herramienta?</h2>
-    <p>Esta calculadora realiza aritmética exacta con fracciones — sumar, restar, multiplicar y dividir. Los resultados se simplifican automáticamente a su mínima expresión y se muestran tanto como fracción como en decimal.</p>
+    <p>Esta calculadora realiza aritmética exacta con fracciones — sumar, restar, multiplicar y dividir. Los resultados se simplifican automáticamente a su mínima expresión y se muestran tanto como fracción como decimal.</p>
     <div>
       <h2>Las cuatro operaciones</h2>
       <ul>

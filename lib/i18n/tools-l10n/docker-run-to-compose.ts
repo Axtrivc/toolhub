@@ -14,12 +14,12 @@ export const dockerRunToComposeL10n: ToolL10n = {
       'sample.node': 'Node.js 开发环境',
       inputTitle: 'Docker Run 命令输入',
       clearBtn: '清空',
-      inputHint: '支持多行反斜杠续行、各种单双引号、端口映射、数据卷、环境变量及常见 docker run 参数。',
+      inputHint: '粘贴任意 docker run 或 docker create 命令, 支持多行反斜杠续行、单双引号、端口映射、数据卷、环境变量及常见参数。',
       outputTitle: 'docker-compose.yml 输出',
       copyYaml: '复制 Compose 配置',
       includeVersionLabel: "包含旧版 version: '3.8' 声明头",
       envFormatLabel: '环境变量语法:',
-      summaryTitle: '检测到的参数解析概览',
+      summaryTitle: '检测到的配置概览',
       badgeService: '服务:',
       badgeImage: '镜像:',
       badgePorts: '端口:',
@@ -30,10 +30,10 @@ export const dockerRunToComposeL10n: ToolL10n = {
       ignoredFlagsNote: '已安全忽略的参数(Compose 中不适用或未识别):',
     },
     useCases: [
-      '将复杂命令版本化: 将一条带 10 个 -e 和 -v 参数的 PostgreSQL 启动命令转为 git 可追踪的 docker-compose.yml',
-      'Web 代理一键生成: 将 Nginx 容器连同宿主机 80/443 端口与只读证书挂载一键转为 Compose 服务',
-      '本地开发环境配置: 转换带 -it、--rm 和 $(pwd) 目录绑定的 Node/Python 开发容器为长期服务',
-      '提取命名数据卷: 自动识别 pgdata 或 redis-data 等命名卷, 并在 YAML 底部自动声明 volumes: 节点',
+      '将复杂命令版本化: 将一条带 10 个 -e 和 -v 参数的 PostgreSQL 启动命令转为 Git 可追踪的 docker-compose.yml',
+      'Web 服务器一键转换: 将 Nginx 容器连同宿主机 80/443 端口与只读证书挂载转为 Compose 服务',
+      '本地开发环境配置: 将带 -it、--rm 和 $(pwd) 目录绑定的 Node/Python 开发容器转换为可复现的服务',
+      '提取命名数据卷: 自动识别 pgdata 或 redis-data 等命名卷, 并在 YAML 底部声明 volumes: 节点',
     ],
     faqs: [
       {
@@ -41,7 +41,7 @@ export const dockerRunToComposeL10n: ToolL10n = {
         a: '单条 docker run 命令容易在终端历史中丢失, 且参数复杂时极易遗漏。Docker Compose 可以将端口、数据卷、环境变量等全部配置纳入 Git 版本管理, 并通过一条 docker compose up -d 轻松启动。',
       },
       {
-        q: '如何处理命名数据卷与宿主机绝对路径挂载?',
+        q: '如何处理命名数据卷与宿主机路径挂载?',
         a: '如果数据卷以 /、./、../ 或 Windows 盘符开头, 本工具将其视为宿主机目录绑定挂载(bind mount); 如果是类似 pgdata:/var/lib/postgresql 的纯名称, 则会自动在 YAML 根节点补充 volumes: 声明。',
       },
       {
@@ -50,7 +50,7 @@ export const dockerRunToComposeL10n: ToolL10n = {
       },
       {
         q: '生成的 Docker Compose 是什么版本?',
-        a: '默认生成现代 Compose Specification 标准格式(支持 docker compose v2, 无需冗余的 version 声明)。也可以随时勾选开关保留旧版 version: "3.8" 头。',
+        a: '默认输出符合现代 Compose Specification 标准的格式(支持 docker compose v2, 无需冗余的 version 声明)。也可以随时勾选开关保留旧版的 version: "3.8" 头。',
       },
     ],
   },
@@ -60,10 +60,10 @@ export const dockerRunToComposeL10n: ToolL10n = {
       'sample.postgres': 'Base de datos PostgreSQL',
       'sample.nginx': 'Servidor web Nginx',
       'sample.redis': 'Redis con comando personalizado',
-      'sample.node': 'Desarrollo Node.js',
+      'sample.node': 'Entorno de desarrollo Node.js',
       inputTitle: 'Comando Docker Run',
       clearBtn: 'Limpiar',
-      inputHint: 'Pega cualquier comando docker run o docker create con barras invertidas, puertos, volúmenes y variables de entorno.',
+      inputHint: 'Pega cualquier comando docker run o docker create: se admiten barras invertidas de continuación de línea, comillas, puertos, volúmenes y variables de entorno.',
       outputTitle: 'docker-compose.yml generado',
       copyYaml: 'Copiar Compose',
       includeVersionLabel: "Incluir encabezado version: '3.8'",
@@ -82,7 +82,7 @@ export const dockerRunToComposeL10n: ToolL10n = {
       'Control de versiones: convierte comandos largos de PostgreSQL en un docker-compose.yml almacenable en Git',
       'Servidores web: traduce contenedores Nginx con puertos 80/443 y montajes de solo lectura a servicios estructurados',
       'Entornos de desarrollo: convierte comandos interactivos de Node.js o Python en servicios reproducibles',
-      'Volúmenes persistentes: genera automáticamente la sección superior de volumes: para datos con nombre',
+      'Volúmenes persistentes: genera automáticamente la sección raíz de volúmenes (volumes:) para volúmenes con nombre',
     ],
     faqs: [
       {
@@ -91,14 +91,14 @@ export const dockerRunToComposeL10n: ToolL10n = {
       },
       {
         q: '¿Cómo gestiona volúmenes con nombre frente a rutas de host?',
-        a: 'Las rutas que empiezan por /, ./ o letras de unidad se tratan como montajes de host (bind mounts). Los nombres simples como pgdata:/var/lib/postgresql se declaran automáticamente en la sección global volumes:.',
+        a: 'Las rutas que empiezan por /, ./ o letras de unidad se tratan como montajes de host (bind mounts). Los nombres simples como pgdata:/var/lib/postgresql se declaran automáticamente en la sección raíz de volúmenes (volumes:).',
       },
       {
         q: '¿Es seguro el conversor?',
-        a: 'Funciona 100% en tu navegador mediante JavaScript local. Tus contraseñas y claves de entorno nunca se envían a ningún servidor.',
+        a: 'Sí: funciona 100% en tu navegador mediante JavaScript local. Tus contraseñas y claves de entorno nunca se envían a ningún servidor.',
       },
       {
-        q: '¿Qué versión de Docker Compose se produce?',
+        q: '¿Qué versión de Docker Compose se genera?',
         a: 'Genera el estándar moderno Compose Spec (compatible con docker compose v2), con opción de activar la cabecera clásica version: "3.8".',
       },
     ],
@@ -112,7 +112,7 @@ export const dockerRunToComposeL10n: ToolL10n = {
       'sample.node': 'Node.js-Entwicklung',
       inputTitle: 'Docker Run Befehl',
       clearBtn: 'Leeren',
-      inputHint: 'Füge beliebige docker run Befehle mit Backslashes, Ports, Volumes und Umgebungsvariablen ein.',
+      inputHint: 'Füge beliebige docker run oder docker create Befehle ein: Backslash-Zeilenumbrüche, Anführungszeichen, Ports, Volumes und Umgebungsvariablen werden unterstützt.',
       outputTitle: 'docker-compose.yml Ausgabe',
       copyYaml: 'Compose kopieren',
       includeVersionLabel: "Header version: '3.8' einbinden",
@@ -125,22 +125,22 @@ export const dockerRunToComposeL10n: ToolL10n = {
       badgeEnvVars: 'Umgebungsvariablen:',
       badgeRestart: 'Neustart:',
       badgeNetworks: 'Netzwerke:',
-      ignoredFlagsNote: 'Ignorierte Parameter (in Compose nicht anwendbar oder ungenutzt):',
+      ignoredFlagsNote: 'Ignorierte Parameter (in Compose nicht anwendbar oder nicht erkannt):',
     },
     useCases: [
       'Versionskontrolle in Git: Lange docker run Befehle mit Passwörtern und Mounts in lesbare Compose-Dateien wandeln',
-      'Webserver-Deployment: Nginx mit Ports 80/443 und Read-Only Zertifikaten sauber als Service definieren',
+      'Webserver-Deployment: Nginx mit Ports 80/443 und schreibgeschützten Mounts sauber als Service definieren',
       'Entwicklungsumgebungen: Interaktive Node.js Container mit Workdir und Volumes reproduzierbar machen',
       'Named Volumes automatisch deklarieren: Erkennt Namen wie pgdata und legt den volumes: Block am Ende an',
     ],
     faqs: [
       {
         q: 'Warum sollte man docker run in docker-compose.yml umwandeln?',
-        a: 'docker run Befehle gehen im Terminalverlauf verloren. Docker Compose speichert alle Ports, Volumes und Umgebungsvariablen in einer sauberen Datei im Git-Repository, startbar mit docker compose up -d.',
+        a: 'Lange docker run Befehle sind fehleranfällig, gehen im Terminalverlauf verloren und lassen sich schwer versionieren. Docker Compose speichert alle Ports, Volumes und Umgebungsvariablen in einer sauberen Datei im Git-Repository, startbar mit docker compose up -d.',
       },
       {
         q: 'Wie werden Named Volumes und Host-Pfade unterschieden?',
-        a: 'Pfade mit /, ./ oder Laufwerksbuchstaben werden als Bind Mounts formatiert. Namen wie pgdata werden automatisch im Root-Bereich volumes: deklariert.',
+        a: 'Pfade mit /, ./ oder Laufwerksbuchstaben werden als Bind Mounts behandelt. Namen wie pgdata werden automatisch im Root-Abschnitt volumes: deklariert.',
       },
       {
         q: 'Ist der Konverter datenschutzsicher?',
@@ -148,7 +148,7 @@ export const dockerRunToComposeL10n: ToolL10n = {
       },
       {
         q: 'Welche Docker Compose Version wird erzeugt?',
-        a: 'Standardmäßig die moderne Compose Specification (für docker compose v2). Die klassische version: "3.8" Zeile kann optional aktiviert werden.',
+        a: 'Standardmäßig die moderne Compose Specification (für docker compose v2). Optional lässt sich die klassische Zeile version: "3.8" aktivieren.',
       },
     ],
   },

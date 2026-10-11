@@ -153,7 +153,7 @@ const zh: ReactNode = (
     <p>想要更全面地了解健康状况，可以考虑以下互补的测量指标：</p>
     <ul>
       <li>
-        <strong>腰围。</strong>男性超过 40 inches（102 cm）或女性超过 35 inches（88 cm）提示较高的代谢风险。
+        <strong>腰围。</strong>男性超过 40 英寸（102 cm）或女性超过 35 英寸（88 cm）提示较高的代谢风险。
       </li>
       <li>
         <strong>腰臀比。</strong>比较腰围和臀围，用以评估脂肪分布。
@@ -241,7 +241,7 @@ const es: ReactNode = (
     <p>Para una imagen más completa de la salud, considera estas mediciones complementarias:</p>
     <ul>
       <li>
-        <strong>Perímetro de cintura.</strong> Más de 40 inches (102 cm) en hombres o 35 inches
+        <strong>Perímetro de cintura.</strong> Más de 40 pulgadas (102 cm) en hombres o 35 pulgadas
         (88 cm) en mujeres indica un riesgo metabólico mayor.
       </li>
       <li>
@@ -333,7 +333,7 @@ const de: ReactNode = (
     <p>Für ein vollständigeres Bild der Gesundheit ziehe diese ergänzenden Messungen in Betracht:</p>
     <ul>
       <li>
-        <strong>Taillenumfang.</strong> Über 40 inches (102 cm) bei Männern oder 35 inches (88 cm)
+        <strong>Taillenumfang.</strong> Über 40 Zoll (102 cm) bei Männern oder 35 Zoll (88 cm)
         bei Frauen weist auf ein höheres metabolisches Risiko hin.
       </li>
       <li>

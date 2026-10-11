@@ -53,12 +53,12 @@ const zh: ReactNode = (
       <h2>五个字段</h2>
       <p>从左到右,字段依次为<strong>分钟</strong>(0–59)、<strong>小时</strong>(0–23)、{' '}
       <strong>日</strong>(1–31)、<strong>月</strong>(1–12 或 JAN–DEC),以及{' '}
-      <strong>星期</strong>(0–6,其中 0 = 周日,或 SUN–SAT)。每个字段都接受 <code>*</code>(任意值)、逗号列表(<code>1,15</code>)、区间(<code>9-17</code>)或步进值(<code>*/15</code> 表示每 15 分钟)。经典示例:<code>0 9 * * 1-5</code> 表示工作日的 09:00。</p>
+      <strong>星期</strong>(0–6,其中 0 = 周日,也可写作 SUN–SAT)。每个字段都接受 <code>*</code>(任意值)、逗号列表(<code>1,15</code>)、区间(<code>9-17</code>)或步进值(<code>*/15</code> 表示每 15 分钟)。经典示例:<code>0 9 * * 1-5</code> 表示工作日的 09:00。</p>
     </div>
 
     <div>
       <h2>为什么「日」和「星期」使用「或」逻辑</h2>
-      <p>当「日」和「星期」两个字段都被限定(都不是 <code>*</code>)时,只要<em>任一</em>匹配 cron 就会触发——这是 Vixie cron 标准。所以 <code>0 0 1 * 1</code> 会在每月 1 号午夜<strong>或</strong>任意一个周一运行。如果其中一个字段是 <code>*</code>,则只考虑另一个字段。这是 cron 最常见的混淆来源,所以务必用「下次运行」预览来核对。</p>
+      <p>当「日」和「星期」两个字段都被限定(都不是 <code>*</code>)时,只要<em>任一</em>匹配,cron 就会触发——这是 Vixie cron 标准。所以 <code>0 0 1 * 1</code> 会在每月 1 号午夜<strong>或</strong>任意一个周一运行。如果其中一个字段是 <code>*</code>,则只考虑另一个字段。这是 cron 最常见的混淆来源,所以务必用「下次运行」预览来核对。</p>
     </div>
 
     <div>
@@ -85,7 +85,7 @@ const es: ReactNode = (
 
     <div>
       <h2>Por qué el día del mes y el día de la semana usan OR</h2>
-      <p>Cuando tanto el campo del día del mes como el del día de la semana están restringidos (ninguno es <code>*</code>), cron se ejecuta si coincide <em>cualquiera</em> de los dos — esto es el estándar Vixie cron. Por tanto, <code>0 0 1 * 1</code> se ejecuta a medianoche el día 1 del mes <strong>o</strong> cualquier lunes. Si uno de esos campos es <code>*</code>, solo se tiene en cuenta el otro. Esta es la fuente más común de confusión con cron, así que verifica siempre con la vista previa de próximas ejecuciones.</p>
+      <p>Cuando tanto el campo del día del mes como el del día de la semana están restringidos (ninguno es <code>*</code>), cron se ejecuta si coincide <em>cualquiera</em> de los dos — esto es el estándar Vixie cron. Por tanto, <code>0 0 1 * 1</code> se ejecuta a medianoche el día 1 del mes <strong>o</strong> en cualquier lunes. Si uno de esos campos es <code>*</code>, solo se tiene en cuenta el otro. Esta es la fuente más común de confusión con cron, así que verifica siempre con la vista previa de próximas ejecuciones.</p>
     </div>
 
     <div>
@@ -105,7 +105,7 @@ const de: ReactNode = (
       <h2>Die fünf Felder</h2>
       <p>Von links nach rechts sind die Felder <strong>Minute</strong> (0–59), <strong>Stunde</strong> (0–23),{' '}
       <strong>Tag des Monats</strong> (1–31), <strong>Monat</strong> (1–12 oder JAN–DEC) und{' '}
-      <strong>Wochentag</strong> (0–6, wobei 0 = Sonntag, oder SUN–SAT). Jedes Feld akzeptiert <code>*</code> (jeder
+      <strong>Wochentag</strong> (0–6, wobei 0 = Sonntag ist, oder SUN–SAT). Jedes Feld akzeptiert <code>*</code> (jeder
       Wert), eine Kommaliste (<code>1,15</code>), einen Bereich (<code>9-17</code>) oder eine Schrittweite (<code>*/15</code> für
       alle 15 Minuten). Ein klassisches Beispiel: <code>0 9 * * 1-5</code> bedeutet 09:00 Uhr an Werktagen.</p>
     </div>

@@ -25,10 +25,12 @@ function formatUseCases(
   isCalculator: boolean,
   isConverter: boolean,
 ): string {
-  const lead = isConverter ? 'look up a' : isCalculator ? 'find a' : 'use a'
+  const verb = isConverter ? 'look up' : isCalculator ? 'find' : 'use'
   const phrases = longTailKeywords.slice(0, 4)
-  if (phrases.length === 1) return `${lead} ${phrases[0]}`
-  return `${lead} ${phrases.slice(0, -1).join(', ')}, or ${phrases[phrases.length - 1]}`
+  // 冠词按首个短语的首字母选 a/an(否则 "find a age calculator" 一类病句直接可见于 en 页面)
+  const art = /^[aeiou]/i.test(phrases[0] ?? '') ? 'an' : 'a'
+  if (phrases.length === 1) return `${verb} ${art} ${phrases[0]}`
+  return `${verb} ${art} ${phrases.slice(0, -1).join(', ')}, or ${phrases[phrases.length - 1]}`
 }
 
 /** 按工具名探测类型(与英文分支判定保持一致) */

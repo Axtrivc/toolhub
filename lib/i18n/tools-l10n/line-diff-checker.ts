@@ -44,7 +44,7 @@ export const LineDiffCheckerL10n: ToolL10n = {
     faqs: [
       { q: 'Welcher Algorithmus steckt dahinter?', a: 'Längste gemeinsame Teilfolge (LCS) — dieselbe Algorithmenfamilie wie hinter git diff. Es berechnet die kleinste Menge hinzugefügter und gelöschter Zeilen, die den Originaltext in den geänderten überführt, und zeigt sie mit + und − an.' },
       { q: 'Wie groß dürfen die Eingaben sein?', a: 'Bis zu 100 000 Zeichen oder 2000 Zeilen pro Seite. Darüber würde die O(n²)-LCS-Tabelle den Browser-Tab belasten, deshalb bittet das Werkzeug um Kürzen statt einzufrieren. Diese Grenze deckt E-Mails, Verträge und die meisten Config-Dateien ab.' },
-      { q: 'Zählen Leerzeilen als Unterschied?', a: 'Ja. Leerzeilen nehmen an der Vergleich teil — genau wie bei Versionsverwaltung; eine gelöschte Leerzeile erscheint als Entfernung. Wenn dich nur Inhalt interessiert, entferne vorher beidseitig die Leerzeilen.' },
+      { q: 'Zählen Leerzeilen als Unterschied?', a: 'Ja. Leerzeilen nehmen am Vergleich teil — genau wie bei der Versionsverwaltung; eine gelöschte Leerzeile erscheint als Entfernung. Wenn dich nur der Inhalt interessiert, entferne vorher beidseitig die Leerzeilen.' },
       { q: 'Kann ich das Ergebnis kopieren?', a: 'Der Kopieren-Button exportiert die vollständige annotierte Ausgabe — jede Zeile mit „+ “, „− “ oder zwei Leerzeichen als Präfix — samt Zählern oben. Ein fertiges Diff für E-Mail, Doku oder Bugreport.' },
     ],
     ui: {

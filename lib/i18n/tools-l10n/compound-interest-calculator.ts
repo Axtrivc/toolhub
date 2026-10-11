@@ -9,7 +9,7 @@
 
 import type { ToolL10n } from '../tool-l10n'
 
-const FORMULA = 'A = P × (1 + r/n)^(n·t)'
+const FORMULA = 'A = P × (1 + r/n)^(n·t) + PMT × [((1 + r/n)^(n·t) − 1) / (r/n)]'
 
 export const compoundInterestCalculatorL10n: ToolL10n = {
   // ──────────────────────────── 中文 ────────────────────────────
@@ -22,8 +22,8 @@ export const compoundInterestCalculatorL10n: ToolL10n = {
     ],
     faqs: [
       {
-        q: '复利和简单利息有什么区别?',
-        a: '简单利息只在你最初的本金上产生。复利在本金和已累积的利息上共同产生——所以你的余额呈指数增长。长期来看,同样利率下复利远超简单利息。',
+        q: '复利和单利有什么区别?',
+        a: '单利只在你最初的本金上产生。复利在本金和已累积的利息上共同产生——所以你的余额呈指数增长。长期来看,同样利率下复利远超单利。',
       },
       {
         q: '按日复利好还是按月复利好?',
@@ -41,10 +41,10 @@ export const compoundInterestCalculatorL10n: ToolL10n = {
     formula: {
       formula: FORMULA,
       explain:
-        '复利(终值)。P = 本金,r = 年利率,n = 每年复利次数,t = 年数。A 是期末总余额。',
+        '复利(终值)。P = 初始本金,PMT = 每期定期投入,r = 年利率,n = 每年复利次数,t = 年数。A 是期末总余额:第一项让本金增长,第二项是定期投入的终值。',
     },
     ui: {
-      errNonNegative: '利率和年数不能为负',
+      errNonNegative: '数值不能为负',
       'in.principal': '初始投资',
       'inSuffix.monthly': '$',
       'inSuffix.principal': '$',
@@ -106,10 +106,10 @@ export const compoundInterestCalculatorL10n: ToolL10n = {
     formula: {
       formula: FORMULA,
       explain:
-        'Interés compuesto (valor futuro). P = capital, r = tasa anual, n = periodos de capitalización por año, t = años. A es el saldo total al final.',
+        'Interés compuesto (valor futuro). P = capital inicial, PMT = aportación periódica, r = tasa anual, n = periodos de capitalización por año, t = años. A es el saldo total al final: el primer término hace crecer el capital y el segundo es el valor futuro de las aportaciones.',
     },
     ui: {
-      errNonNegative: 'La tasa de interés y los años no pueden ser negativos',
+      errNonNegative: 'Los valores no pueden ser negativos',
       'in.principal': 'Inversión inicial',
       'inSuffix.monthly': '$',
       'inSuffix.principal': '$',
@@ -161,7 +161,7 @@ export const compoundInterestCalculatorL10n: ToolL10n = {
       },
       {
         q: 'Wie wird Zinseszins besteuert?',
-        a: 'Zinsen aus einem normalen Spar- oder Depotkonto werden im Entstehungsjahr als ordentliches Einkommen versteuert, was den Zinseszins verlangsamt. Steuervorteilhafte Konten (IRA, 401k, HSA) lassen Zinsen steuerfrei oder steuerlich aufgeschoben Zinseszins sammeln — ein Hauptgrund, warum sie über Jahrzehnte besser abschneiden.',
+        a: 'Zinsen aus einem normalen Spar- oder Depotkonto werden im Entstehungsjahr als ordentliches Einkommen versteuert, was den Zinseszins verlangsamt. Steuervorteilhafte Konten (IRA, 401k, HSA) lassen Zinsen steuerfrei oder steuerlich aufgeschoben wachsen — ein Hauptgrund, warum sie über Jahrzehnte besser abschneiden.',
       },
       {
         q: 'Enthält dieser Rechner regelmäßige Einzahlungen?',
@@ -171,10 +171,10 @@ export const compoundInterestCalculatorL10n: ToolL10n = {
     formula: {
       formula: FORMULA,
       explain:
-        'Zinseszins (zukünftiger Wert). P = Einlage, r = Jahressatz, n = Zinsperioden pro Jahr, t = Jahre. A ist der Gesamtsaldo am Ende.',
+        'Zinseszins (zukünftiger Wert). P = Anfangseinlage, PMT = regelmäßige Einzahlung pro Zinsperiode, r = Jahreszinssatz, n = Zinsperioden pro Jahr, t = Jahre. A ist der Gesamtsaldo am Ende: Der erste Term lässt die Einlage wachsen, der zweite ist der zukünftige Wert der Einzahlungen.',
     },
     ui: {
-      errNonNegative: 'Zinssatz und Jahre dürfen nicht negativ sein',
+      errNonNegative: 'Werte dürfen nicht negativ sein',
       'in.principal': 'Ersteinlage',
       'inSuffix.monthly': '$',
       'inSuffix.principal': '$',

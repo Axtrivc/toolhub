@@ -22,7 +22,7 @@ export const JSONFormatterClient = makeTextTool({
       return `⚠️ Invalid JSON: ${(e as Error).message}`
     }
   },
-  note: '🔧 Formats and pretty-prints JSON with 2-space indentation. Validates syntax — errors show with a message.',
+  note: '🔧 Formats and pretty-prints JSON with 2-space indentation. Validates syntax — errors are reported with a message.',
 })
 
 // ── JSON 压缩(minify)──
@@ -173,7 +173,7 @@ export const JSONtoCSVClient = makeTextTool({
       return `⚠️ Invalid JSON: ${(e as Error).message}`
     }
   },
-  note: '🔄 Converts a JSON array of objects to CSV. Handles commas and quotes with proper escaping. Nested objects and arrays are emitted as JSON strings. Fields missing from later objects are included in the header union.',
+  note: '🔄 Converts a JSON array of objects to CSV. Handles commas and quotes with proper escaping. Nested objects and arrays are emitted as JSON strings. Keys that only appear in later objects are kept in the header union.',
 })
 
 // ── 添加行号 ──

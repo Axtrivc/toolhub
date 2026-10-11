@@ -10,7 +10,7 @@ const en: ReactNode = (
     <h2>What Is This Tool?</h2>
     <p>
       HTML escaping converts special characters (<code>&amp; &lt; &gt; &quot;</code>) into
-      their entity equivalents (<code>&amp;amp; &amp;lt; &amp;gt;</code>), so they display
+      their entity equivalents (<code>&amp;amp; &amp;lt; &amp;gt; &amp;quot;</code>), so they display
       correctly in a browser and prevent XSS attacks.
     </p>
     <div>
@@ -18,7 +18,7 @@ const en: ReactNode = (
       <p>
         If user input contains <code>&lt;script&gt;</code> and you insert it into a page
         without escaping, the browser runs the script — a classic XSS (cross-site scripting)
-        attack. Escaping turns it into harmless text that displays as <code>&lt;script&gt;</code>
+        attack. Escaping turns it into harmless text that displays as <code>&lt;script&gt;</code>{' '}
         instead of executing.
       </p>
     </div>
@@ -48,7 +48,7 @@ const zh: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>这是什么工具?</h2>
     <p>
-      HTML 转义会将特殊字符(<code>&amp; &lt; &gt; &quot;</code>)转换成对应的实体形式(<code>&amp;amp; &amp;lt; &amp;gt;</code>),使它们能在浏览器中正确显示,并防止 XSS 攻击。
+      HTML 转义会将特殊字符(<code>&amp; &lt; &gt; &quot;</code>)转换成对应的实体形式(<code>&amp;amp; &amp;lt; &amp;gt; &amp;quot;</code>),使它们能在浏览器中正确显示,并防止 XSS 攻击。
     </p>
     <div>
       <h2>为什么转义很重要</h2>
@@ -81,15 +81,15 @@ const es: ReactNode = (
     <h2>¿Qué es esta herramienta?</h2>
     <p>
       El escape HTML convierte caracteres especiales (<code>&amp; &lt; &gt; &quot;</code>) en sus
-      entidades equivalentes (<code>&amp;amp; &amp;lt; &amp;gt;</code>), para que se muestren
-      correctamente en el navegador y prevenga ataques XSS.
+      entidades equivalentes (<code>&amp;amp; &amp;lt; &amp;gt; &amp;quot;</code>), para que se
+      muestren correctamente en el navegador y se prevengan ataques XSS.
     </p>
     <div>
       <h2>Por qué importa el escape</h2>
       <p>
         Si la entrada del usuario contiene <code>&lt;script&gt;</code> y la insertas en una página
         sin escapar, el navegador ejecuta el script — un ataque clásico XSS (cross-site scripting).
-        El escape lo convierte en texto inofensivo que se muestra como <code>&lt;script&gt;</code>
+        El escape lo convierte en texto inofensivo que se muestra como <code>&lt;script&gt;</code>{' '}
         en lugar de ejecutarse.
       </p>
     </div>
@@ -121,7 +121,7 @@ const de: ReactNode = (
     <h2>Was ist dieses Werkzeug?</h2>
     <p>
       HTML-Escaping wandelt Sonderzeichen (<code>&amp; &lt; &gt; &quot;</code>) in ihre
-      Entitäts-Äquivalente (<code>&amp;amp; &amp;lt; &amp;gt;</code>) um, damit sie im Browser
+      Entitäts-Äquivalente (<code>&amp;amp; &amp;lt; &amp;gt; &amp;quot;</code>) um, damit sie im Browser
       richtig angezeigt werden und XSS-Angriffe verhindert werden.
     </p>
     <div>
@@ -129,7 +129,7 @@ const de: ReactNode = (
       <p>
         Wenn eine Benutzereingabe <code>&lt;script&gt;</code> enthält und du sie ohne Escaping in
         eine Seite einfügst, führt der Browser das Skript aus — ein klassischer XSS-Angriff
-        (Cross-Site-Scripting). Escaping verwandelt es in harmlosen Text, der als
+        (Cross-Site-Scripting). Escaping verwandelt es in harmlosen Text, der als{' '}
         <code>&lt;script&gt;</code> angezeigt wird, statt ausgeführt zu werden.
       </p>
     </div>

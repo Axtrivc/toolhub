@@ -7,7 +7,7 @@ import type { ToolL10n } from '../tool-l10n'
 export const sortLinesL10n: ToolL10n = {
   zh: {
     ui: {
-      defaultInput: '樱桃\n苹果\n大枣\n香蕉',
+      defaultInput: '樱桃\n苹果\n椰枣\n香蕉',
       inputLabel: '列表(每行一项)',
       outputLabel: '已排序',
       note: '🔤 按字母顺序排序各行。空行会被移除。相等的行保持原有相对顺序(稳定排序)。可选指令:列表末尾加 " ||| numeric"(按数值自然排序)、" ||| desc"(降序)或 " ||| numeric,desc"。',
@@ -59,7 +59,7 @@ export const sortLinesL10n: ToolL10n = {
     ],
     faqs: [
       { q: 'Kann ich absteigend sortieren (Z bis A)?', a: 'Ja. Hänge " ||| desc" ans Ende der Liste für absteigende Reihenfolge (Z → A); mit " ||| numeric,desc" wird numerisch von groß nach klein sortiert.' },
-      { q: 'Wie werden Zahlen sortiert?', a: 'Standardmäßig werden Zeilen als Text sortiert, daher steht „10" vor „9". Mit der Anweisung " ||| numeric" wird numerisch sortiert („9" vor „10").' },
+      { q: 'Wie werden Zahlen sortiert?', a: 'Standardmäßig werden Zeilen als Text sortiert, daher steht „10“ vor „9“. Mit der Anweisung " ||| numeric" wird numerisch sortiert („9“ vor „10“).' },
     ],
   },
 }

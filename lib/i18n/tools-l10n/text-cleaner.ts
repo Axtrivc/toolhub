@@ -16,7 +16,7 @@ export const textCleanerL10n: ToolL10n = {
       'keepLabel': '要保留的字符(除字母、数字、空格外)',
       'note': '🔒 100% 在客户端处理——你的文本绝不离开浏览器。',
       'placeholder': '粘贴或输入要清理的文本…',
-      'removed': '已移除',
+      'removed': '个已移除',
       'toggle.collapseSpaces': '合并多余空格',
       'toggle.lowercase': '转为小写',
       'toggle.removeAccents': '移除重音与变音符',
@@ -29,9 +29,9 @@ export const textCleanerL10n: ToolL10n = {
       'toggleHint.collapseSpaces': 'a    b → a b',
       'toggleHint.lowercase': 'ABC → abc',
       'toggleHint.removeAccents': 'café → cafe,naïve → naive',
-      'toggleHint.removeEmptyLines': '删除空白行',
-      'toggleHint.removeSpecial': '保留所有文字(含中文)、数字、空格 + 你的清单',
-      'toggleHint.stripEmojis': '移除 😀 等符号、装饰符、旗帜',
+      'toggleHint.removeEmptyLines': '删除空行',
+      'toggleHint.removeSpecial': '保留所有文字(含中文)、数字、空格,外加你指定的字符',
+      'toggleHint.stripEmojis': '移除 😀 等符号、装饰符号、旗帜',
       'toggleHint.stripHtml': '<b>bold</b> → bold',
       'toggleHint.stripUrls': '移除 http(s):// 和 www. 链接',
       'toggleHint.trimLines': '移除每行首尾空白',
@@ -97,11 +97,11 @@ export const textCleanerL10n: ToolL10n = {
     faqs: [
       {
         q: '¿Qué hace exactamente «quitar acentos»?',
-        a: 'Convierte los caracteres acentuados a su forma base —café pasa a cafe, Münster a Munster— mediante normalización Unicode (NFD y luego quitar marcas combinantes). Elimina las marcas diacríticas, no las letras, así el texto sigue siendo legible.',
+        a: 'Convierte los caracteres acentuados a su forma base —café pasa a cafe, Münster a Munster— mediante la normalización Unicode (NFD seguida de la eliminación de las marcas combinantes). Elimina las marcas diacríticas, no las letras, así el texto sigue siendo legible.',
       },
       {
         q: '¿Borrará mi puntuación normal?',
-        a: 'Solo si activas la opción «eliminar caracteres especiales». Por defecto se conservan la puntuación normal, los dígitos y las letras; la herramienta es opcional por regla, así que controlas exactamente qué transformaciones se ejecutan.',
+        a: 'Solo si activas la opción «eliminar caracteres especiales». Por defecto se conservan la puntuación normal, los dígitos y las letras; cada regla de limpieza es opcional, así que controlas exactamente qué transformaciones se ejecutan.',
       },
       {
         q: '¿Elimina emojis y URLs?',
@@ -121,7 +121,7 @@ export const textCleanerL10n: ToolL10n = {
       'note': '🔒 100% clientseitig — dein Text verlässt nie deinen Browser.',
       'placeholder': 'Text zum Säubern einfügen oder eintippen…',
       'removed': 'entfernt',
-      'toggle.collapseSpaces': 'Mehrfache Leerzeichen verbinden',
+      'toggle.collapseSpaces': 'Mehrfache Leerzeichen zusammenziehen',
       'toggle.lowercase': 'In Kleinbuchstaben wandeln',
       'toggle.removeAccents': 'Akzente & Diakritika entfernen',
       'toggle.removeEmptyLines': 'Leerzeilen entfernen',
@@ -134,7 +134,7 @@ export const textCleanerL10n: ToolL10n = {
       'toggleHint.lowercase': 'ABC → abc',
       'toggleHint.removeAccents': 'café → cafe, naïve → naive',
       'toggleHint.removeEmptyLines': 'Löscht leere Zeilen',
-      'toggleHint.removeSpecial': 'Behält Buchstaben (auch chinesische), Ziffern, Leerzeichen + deine Liste',
+      'toggleHint.removeSpecial': 'Behält Buchstaben (auch chinesische), Ziffern, Leerzeichen plus deine Liste',
       'toggleHint.stripEmojis': 'Entfernt 😀, Dingbats, Flaggen',
       'toggleHint.stripHtml': '<b>bold</b> → bold',
       'toggleHint.stripUrls': 'Entfernt http(s):// und www.-Links',
@@ -153,7 +153,7 @@ export const textCleanerL10n: ToolL10n = {
       },
       {
         q: 'Werden meine normalen Satzzeichen gelöscht?',
-        a: 'Nur wenn du die Option „Sonderzeichen entfernen“ aktivierst. Standardmäßig bleiben normale Satzzeichen, Ziffern und Buchstaben erhalten; das Werkzeug ist pro Regel optional, du steuerst also genau, welche Umwandlungen laufen.',
+        a: 'Nur wenn du die Option „Sonderzeichen entfernen“ aktivierst. Standardmäßig bleiben normale Satzzeichen, Ziffern und Buchstaben erhalten; jede Reinigungsregel lässt sich einzeln zuschalten, du steuerst also genau, welche Umwandlungen laufen.',
       },
       {
         q: 'Werden Emojis und URLs entfernt?',

@@ -50,11 +50,11 @@ const es: ReactNode = (
 const de: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>Die Tabelle lesen</h2>
-    <p>Jede Zeile zeigt ein Zeichen in dezimal, hexadezimal, oktal und binär. 65 = 0x41 = 01000001 = „A" — derselbe Wert in vier Schreibweisen. Steuerzeichen (0-31) tragen Standardkürzel wie CR und LF statt Glyphen.</p>
+    <p>Jede Zeile zeigt ein Zeichen dezimal, hexadezimal, oktal und binär. 65 = 0x41 = 01000001 = „A“ — derselbe Wert in vier Schreibweisen. Steuerzeichen (0-31) tragen Standardkürzel wie CR und LF statt Glyphen.</p>
     <h2>Die Zeilen, die man kennen sollte</h2>
-    <p>32 = Leerzeichen, 48-57 = Ziffern 0-9, 65-90 = Großbuchstaben A-Z, 97-122 = Kleinbuchstaben a-z. Der Unterschied zwischen Groß- und Kleinschreibung ist immer exakt 32 — deshalb ist das Umschalten der Schreibweise ein einziger Bit-Flip.</p>
+    <p>32 = Leerzeichen, 48-57 = Ziffern 0-9, 65-90 = Großbuchstaben A-Z, 97-122 = Kleinbuchstaben a-z. Der Unterschied zwischen Groß- und Kleinbuchstaben ist immer exakt 32 — deshalb ist das Umschalten zwischen beiden ein einziger Bit-Flip.</p>
     <h2>Über ASCII hinaus</h2>
-    <p>ASCII endet bei 127. Moderne Systeme kodieren Text als UTF-8, das bytekompatibel zu ASCII bleibt — jedes ASCII-Zeichen ist in UTF-8 sich selbst — während Emoji und akzentuierte Buchstaben mehrere Bytes belegen.</p>
+    <p>ASCII endet bei 127. Moderne Systeme kodieren Text als UTF-8, das bytekompatibel zu ASCII bleibt — jedes ASCII-Zeichen bleibt in UTF-8 unverändert — während Emoji und akzentuierte Buchstaben mehrere Bytes belegen.</p>
   </section>
 )
 

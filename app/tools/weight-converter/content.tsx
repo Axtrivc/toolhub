@@ -88,7 +88,7 @@ const zh: ReactNode = (
 
     <h2>质量与重量的区别</h2>
     <p>
-      从技术上讲,<strong>质量</strong>(千克)衡量某物包含多少物质,而<strong>重量</strong>(牛顿,或磅力)衡量作用在该质量上的引力。你在地球和月球上的质量相同;而你在月球上的重量约为地球的 1/6。在日常使用中,我们把两者视为可互换,本换算器也是如此。
+      从技术上讲,<strong>质量</strong>(千克)衡量一个物体所含物质的多少,而<strong>重量</strong>(牛顿,或磅力)衡量作用在该质量上的引力。你在地球和月球上的质量相同;而你在月球上的重量约为地球的 1/6。在日常使用中,我们把两者视为可互换,本换算器也是如此。
     </p>
   </section>
 )
@@ -183,8 +183,8 @@ const de: ReactNode = (
     <p>
       Streng genommen misst die <strong>Masse</strong> (Kilogramm), wie viel Materie etwas enthält,
       während das <strong>Gewicht</strong> (Newton oder Pound-force) die Gravitationskraft auf diese
-      Masse misst. Deine Masse ist auf der Erde und auf dem Mond gleich; dein Gewicht ist auf dem
-      Mond etwa 1/6. Im Alltag behandeln wir sie als austauschbar, und dieser Konverter tut dasselbe.
+      Masse misst. Deine Masse ist auf der Erde und auf dem Mond gleich; dein Gewicht beträgt auf
+      dem Mond etwa 1/6. Im Alltag behandeln wir sie als austauschbar, und dieser Konverter tut dasselbe.
     </p>
   </section>
 )

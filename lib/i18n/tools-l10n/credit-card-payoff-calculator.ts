@@ -7,7 +7,7 @@ import type { ToolL10n } from '../tool-l10n'
 export const creditCardPayoffCalculatorL10n: ToolL10n = {
   zh: {
     formula: {
-      formula: 'months = − ln( 1 + r·B / PMT ) / ln(1 + r)',
+      formula: 'months = − ln( 1 − r·B / PMT ) / ln(1 + r)',
       explain: '以固定月供 PMT、月利率 r 还清余额 B 所需的月数。还款越大,每月累积的利息越少,时间显著缩短。',
     },
     useCases: ['看还清信用卡要多久', '算还清过程中要付多少利息', '比较不同月供的还款时间', '决定用雪崩法还是滚雪球法还债'],
@@ -26,7 +26,7 @@ export const creditCardPayoffCalculatorL10n: ToolL10n = {
       yrOne: '1 年',
       yrsN: '{y} 年',
       monthsYrs: '{m} 个月({y})',
-      'in.balance': '当前余额', 'in.apr': '年利率 (APR)', 'in.payment': '月供',
+      'in.balance': '当前余额', 'in.apr': '年利率(APR)', 'in.payment': '月供',
       'out.months': '还清时间', 'out.total': '总还款额', 'out.interest': '总利息',
       note: '💳 只还最低还款可能要几十年。多还会大幅节省利息。',
       chartTitle: '总还款:本金 vs 利息', chartCenter: '总计', 'slice.principal': '本金(你借的)', 'slice.interest': '利息(借钱成本)',
@@ -36,7 +36,7 @@ export const creditCardPayoffCalculatorL10n: ToolL10n = {
   },
   es: {
     formula: {
-      formula: 'months = − ln( 1 + r·B / PMT ) / ln(1 + r)',
+      formula: 'months = − ln( 1 − r·B / PMT ) / ln(1 + r)',
       explain: 'Meses para saldar el saldo B con un pago fijo PMT al interés mensual r. Pagos mayores acortan mucho el plazo porque se acumulan menos intereses cada mes.',
     },
     useCases: ['ver cuánto tardas en pagar la tarjeta', 'calcular cuánto interés pagarás al saldarla', 'comparar el plazo con distintos pagos mensuales', 'decidir entre método avalancha o bola de nieve'],
@@ -65,15 +65,15 @@ export const creditCardPayoffCalculatorL10n: ToolL10n = {
   },
   de: {
     formula: {
-      formula: 'months = − ln( 1 + r·B / PMT ) / ln(1 + r)',
+      formula: 'months = − ln( 1 − r·B / PMT ) / ln(1 + r)',
       explain: 'Monate, um den Saldo B mit fester Rate PMT bei monatlichem Zins r zu tilgen. Höhere Raten verkürzen die Zeit deutlich, da jeden Monat weniger Zinsen anfallen.',
     },
     useCases: ['sehen, wie lange die Kartenschuld noch läuft', 'berechnen, wie viel Zins bis zur Tilgung anfallen', 'die Laufzeit bei verschiedenen monatlichen Raten vergleichen', 'zwischen Lawinen- und Schneeballmethode wählen'],
     faqs: [
       { q: 'Was, wenn meine Rate unter den Monatszinsen liegt?', a: 'Der Rechner warnt dich. Wenn deine Zahlung nur die Zinsen (oder weniger) deckt, sinkt der Saldo nie — du könntest ewig zahlen, ohne Fortschritt. Du musst mehr als die monatlichen Zinsen zahlen. Bei $5,000 und 22 % APR sind die Monatszinsen etwa $92; jede Zahlung über $92 beginnt, die Kreditsumme zu tilgen.' },
       { q: 'Helfen vierzehntägige Zahlungen?', a: 'Ja. Die Monatsrate halbieren und alle zwei Wochen zahlen ergibt 26 Halbraten pro Jahr — das Äquivalent einer zusätzlichen Monatsrate. Bei einer Karte senkt das auch leicht deinen durchschnittlichen Tagessaldo und damit die Zinsen. Beides zusammen kann die Tilgung um Monate verkürzen.' },
-      { q: 'Wie wird die Mindestrate berechnet?', a: 'Das variiert je nach Herausgeber, ist aber üblicherweise der höhere Wert von: einem Festbetrag (z. B. $25-35) oder 1-3 % deines Saldos plus Zinsen und Gebühren. Manche zählen auch Beträge über dem Limit oder Rückstände dazu. Schau in deine Kartenvereinbarung für die genaue Formel — sie bestimmt, wie langsam du zurückzahlen darfst.' },
-      { q: 'Schadet das Tilgen meiner Karte meinem Kredit-Score?', a: 'Nein — Kredite tilgen hilft deinem Score meist. Ein Hauptfaktor ist die Kreditnutzung (Saldo geteilt durch Limit). Unter 30 %, idealerweise unter 10 %, verbessert den Score. Salden abbauen senkt die Nutzung. Behalte die Karte nach dem Tilgen offen, um verfügbaren Kredit und Kontoalter zu erhalten.' },
+      { q: 'Wie wird die Mindestrate berechnet?', a: 'Das variiert je nach Aussteller, ist aber üblicherweise der höhere Wert von: einem Festbetrag (z. B. $25-35) oder 1-3 % deines Saldos plus Zinsen und Gebühren. Manche zählen auch Beträge über dem Limit oder Rückstände dazu. Schau in deine Kartenvereinbarung für die genaue Formel — sie bestimmt, wie langsam du zurückzahlen darfst.' },
+      { q: 'Schadet das Tilgen meiner Karte meinem Kredit-Score?', a: 'Nein — Kreditkartenschulden zu tilgen hilft deinem Score meist. Ein Hauptfaktor ist die Kreditnutzung (Saldo geteilt durch Limit). Unter 30 %, idealerweise unter 10 %, verbessert das den Score. Salden abbauen senkt die Nutzung. Behalte die Karte nach dem Tilgen offen, um verfügbaren Kredit und Kontoalter zu erhalten.' },
     ],
     ui: {
       errPaymentTooLow: 'Die Rate ist zu niedrig (sie muss die Zinsen decken)',

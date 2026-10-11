@@ -260,7 +260,7 @@ export function BaseConverterClient() {
           </div>
         ))}
       </div>
-      <CalculatorNote>{L('note', '🔢 Digits above 9 are letters a-z (so base 36 uses 0-9 then a-z). Fractional conversions round at ~10 digits; binary fractions like 0.1 decimal repeat forever by nature.')}</CalculatorNote>
+      <CalculatorNote>{L('note', '🔢 Digits above 9 are letters a-z (so base 36 uses 0-9 then a-z). Fractional conversions truncate at ~10 digits; binary fractions like 0.1 decimal repeat forever by nature.')}</CalculatorNote>
     </div>
   )
 }

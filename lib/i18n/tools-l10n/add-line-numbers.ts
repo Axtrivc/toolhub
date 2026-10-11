@@ -31,7 +31,7 @@ export const addLineNumbersL10n: ToolL10n = {
     },
     useCases: [
       'revisión de código — para decir «la línea 42 tiene un error»',
-      'ordenar entrevistas y transcripciones',
+      'organizar entrevistas y transcripciones',
       'analizar archivos de registro',
       'preparar materiales y tutoriales educativos',
     ],
@@ -53,7 +53,7 @@ export const addLineNumbersL10n: ToolL10n = {
       'Lernmaterialien und Tutorials erstellen',
     ],
     faqs: [
-      { q: 'Warum rechtsbündige Zahlen?', a: 'Die Rechtsausrichtung hält die Textspalte stabil, wenn die Zeilenzahl wächst — Zeile 9 und Zeile 10 beginnen an derselben Position. Das ist die Konvention in Code-Editoren und Druckschriften.' },
+      { q: 'Warum rechtsbündige Zahlen?', a: 'Die Rechtsausrichtung hält die Textspalte stabil, wenn die Zeilenzahl wächst — Zeile 9 und Zeile 10 beginnen an derselben Position. Das ist die Konvention in Code-Editoren und Printmedien.' },
     ],
   },
 }

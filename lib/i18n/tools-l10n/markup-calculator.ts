@@ -25,7 +25,7 @@ export const markupCalculatorL10n: ToolL10n = {
   es: {
     formula: {
       formula: 'Selling price = cost × (1 + markup%)',
-      explain: 'El margen se añade al coste para fijar el precio de venta. Ojo: el markup% es relativo al coste, mientras que el margin% es relativo al precio de venta — no son el mismo número.',
+      explain: 'El markup se añade al coste para fijar el precio de venta. Ojo: el markup % es relativo al coste, mientras que el margen es relativo al precio de venta — no son el mismo número.',
     },
     useCases: ['calcular precio de venta y margen desde el coste y el markup', 'entender la diferencia entre markup y margen', 'fijar precios en retail o restauración', 'obtener el precio para un margen objetivo'],
     faqs: [
@@ -42,11 +42,11 @@ export const markupCalculatorL10n: ToolL10n = {
   de: {
     formula: {
       formula: 'Selling price = cost × (1 + markup%)',
-      explain: 'Die Aufschlagrate wird auf die Kosten aufgeschlagen, um den Verkaufspreis zu setzen. Markup% bezieht sich auf die Kosten, Margin% auf den Verkaufspreis — das sind nicht dieselben Zahlen.',
+      explain: 'Der Aufschlag wird auf die Kosten aufgeschlagen, um den Verkaufspreis festzulegen. Der Markup-Prozentsatz bezieht sich auf die Kosten, die Marge auf den Verkaufspreis — das sind nicht dieselben Zahlen.',
     },
     useCases: ['Verkaufspreis und Marge aus Kosten und Aufschlag berechnen', 'den Unterschied zwischen Aufschlag (Markup) und Marge verstehen', 'Preise für Einzelhandel oder Gastronomie festlegen', 'den Preis für eine Zielmarge zurückrechnen'],
     faqs: [
-      { q: 'Wie berechne ich den Preis für eine Zielmarge?', a: 'Preis = Kosten ÷ (1 − Marge). Für 40 % Marge auf $60 Kosten: 60 ÷ 0,60 = $100.' },
+      { q: 'Wie berechne ich den Preis für eine Zielmarge?', a: 'Preis = Kosten ÷ (1 − Marge). Für 40 % Marge bei Kosten von $60: 60 ÷ 0,60 = $100.' },
     ],
     ui: {
       errNonNegative: 'Kosten und Aufschlag dürfen nicht negativ sein',

@@ -69,15 +69,15 @@ const zh: ReactNode = (
     <div>
       <h2>手续费是如何计算的</h2>
       <p>
-        两个平台都按<strong>销售总额</strong>收取它们的百分比——即商品价格{' '}
-        <em>加上</em>向买家收取的运费。对 eBay 而言，这意味着最终价值费（<code>13.6%</code>，适用于大多数类目），加上每笔订单 <code>$0.40</code> 的费用（$10 及以下的订单为{' '}
+        两个平台都按<strong>销售总额</strong>的一定比例收费——即商品价格{' '}
+        <em>加上</em>向买家收取的运费。对 eBay 而言，这意味着成交费（<code>13.6%</code>，适用于大多数类目），加上每笔订单 <code>$0.40</code> 的费用（$10 及以下的订单为{' '}
         <code>$0.30</code>），以及如果你投放广告时可选的 Promoted Listings 广告费率。对 Etsy 而言，则是一笔 <code>$0.20</code> 的上架费、一笔{' '}
-        <code>6.5%</code> 的交易费，以及支付处理费（美国预设：<code>3% + $0.25</code>）。这个高级开关允许你在类目或地区不同时覆盖这个百分比。
+        <code>6.5%</code> 的交易费，以及支付处理费（美国预设：<code>3% + $0.25</code>）。通过「高级」开关，当你的类目或地区费率不同时，可以手动覆盖该百分比。
       </p>
     </div>
 
     <div>
-      <h2>理解各项输出</h2>
+      <h2>如何解读各项结果</h2>
       <p>
         <strong>净到账</strong>是销售总额减去平台手续费——真正进入你账户的钱。{' '}
         <strong>净利润</strong>从到账额里再扣掉你的商品成本和真实运费；如果它变成负数，说明你在倒贴钱卖东西。<strong>盈亏平衡价</strong>反向求解手续费公式，找到能覆盖所有成本的最低价格——在决定是否接受报价或搞折扣时，把它当作底线。
@@ -87,7 +87,7 @@ const zh: ReactNode = (
     <div>
       <h2>给卖家的定价建议</h2>
       <p>
-        「包邮」从来都不是免费的：因为手续费会作用在你收取的运费上，把运费并入商品价格在手续费上没有任何变化，但可能改善搜索排名。留意广告费率——一场 10% 的 Promoted Listings 推广可能悄悄让你的实际手续费翻倍。另外请记住，这些都是 2026 年时的近似值：店铺订阅、顶尖卖家折扣、国际销售以及类目专属费率都会改变计算结果，因此在敲定价格前，请对照平台当前的费率表核实。
+        「包邮」从来都不是免费的：因为手续费会作用在你收取的运费上，把运费并入商品价格对手续费没有任何影响，但可能改善搜索排名。留意广告费率——一场 10% 的 Promoted Listings 推广可能悄悄让你的实际手续费翻倍。另外请记住，这些都是 2026 年时的近似值：店铺订阅、顶尖卖家折扣、国际销售以及类目专属费率都会改变计算结果，因此在敲定价格前，请对照平台当前的费率表核实。
       </p>
     </div>
   </section>
@@ -99,7 +99,7 @@ const es: ReactNode = (
     <h2>¿Qué es esta herramienta?</h2>
     <p>
       Esta <strong>calculadora de comisiones del vendedor</strong> muestra lo que eBay o Etsy realmente se llevan de una venta — y lo que
-      tú te quedas. Introduce tu precio de venta, el envío y los costes para ver las comisiones totales, el ingreso neto, el beneficio neto, el margen
+      tú te quedas. Introduce tu precio de venta, el envío y los costes para ver las comisiones totales, el pago neto, el beneficio neto, el margen
       de beneficio y el precio de equilibrio. Todo se ejecuta localmente en tu navegador; jamás se suben datos de ventas.
     </p>
 
@@ -107,11 +107,11 @@ const es: ReactNode = (
       <h2>Cómo se calculan las comisiones</h2>
       <p>
         Ambas plataformas cobran su porcentaje sobre el <strong>importe total de la venta</strong> — precio del artículo{' '}
-        <em>más</em> envío cobrado al comprador. Para eBay eso significa la comisión de valor final
+        <em>más</em> envío cobrado al comprador. Para eBay eso significa la comisión final
         (<code>13.6%</code> para la mayoría de categorías) más una tarifa de <code>$0.40</code> por pedido
         (<code>$0.30</code> en pedidos de <code>$10</code> o menos) y, opcionalmente, una
-        tasa de anuncios de Promoted Listings si publicitas. Para Etsy son una tarifa de publicación de <code>$0.20</code>, una{' '}
-        <code>6.5%</code> de tarifa de transacción y el procesamiento de pagos (valor predefinido de EE. UU.: <code>3% + $0.25</code>). El
+        tasa de anuncios de Promoted Listings si publicitas. Para Etsy son una tarifa de publicación de <code>$0.20</code>, una tarifa
+        de transacción del <code>6.5%</code> y el procesamiento de pagos (valor predefinido de EE. UU.: <code>3% + $0.25</code>). El
         conmutador avanzado te permite sobrescribir el porcentaje cuando tu categoría o región difiere.
       </p>
     </div>
@@ -119,8 +119,8 @@ const es: ReactNode = (
     <div>
       <h2>Entender los resultados</h2>
       <p>
-        <strong>Ingreso neto</strong> es el total de la venta menos las comisiones de la plataforma — lo que realmente llega a tu cuenta.{' '}
-        <strong>Beneficio neto</strong> resta el coste de tu artículo y tu coste real de envío del ingreso; si
+        <strong>El pago neto</strong> es el total de la venta menos las comisiones de la plataforma — lo que realmente llega a tu cuenta.{' '}
+        <strong>Beneficio neto</strong> resta el coste de tu artículo y tu coste real de envío del pago; si
         se vuelve negativo, estás pagando por vender. <strong>Precio de equilibrio</strong> resuelve la fórmula de comisiones
         al revés para hallar el precio mínimo que cubre todos los costes — úsalo como suelo al decidir si
         aceptas una oferta o lanzas un descuento.
@@ -130,9 +130,9 @@ const es: ReactNode = (
     <div>
       <h2>Consejos de precios para vendedores</h2>
       <p>
-        El envío gratuito nunca es gratis: dado que las comisiones se aplican al envío que cobras, meter el envío en el precio
+        El envío gratuito nunca es gratis: dado que las comisiones se aplican al envío que cobras, incluir el envío en el precio
         del artículo no cambia las comisiones, pero puede mejorar tu posicionamiento en búsquedas. Vigila la tasa de anuncios — una campaña de Promoted
-        Listings del 10 % puede duplicar silenciosamente tu comisión efectiva. Y recuerda que son aproximaciones a fecha de
+        Listings del 10% puede duplicar tu comisión efectiva sin que te des cuenta. Y recuerda que son aproximaciones a fecha de
         2026: las suscripciones a tiendas, los descuentos de vendedor top, las ventas internacionales y las tarifas por categoría
         cambian todas el cálculo, así que verifica con la tabla de comisiones actual de la plataforma antes de fijar un
         precio.
@@ -154,7 +154,7 @@ const de: ReactNode = (
     <div>
       <h2>Wie die Gebühren berechnet werden</h2>
       <p>
-        Beide Plattformen berechnen ihren Prozentsatz auf den <strong>Gesamtverkaufsbetrag</strong> — Artikelpreis{' '}
+        Beide Plattformen erheben ihre Gebühr als Prozentsatz des <strong>Gesamtverkaufsbetrags</strong> — Artikelpreis{' '}
         <em>plus</em> Versand, den du vom Käufer verlangst. Bei eBay bedeutet das die Final-Value-Gebühr
         (<code>13.6%</code> für die meisten Kategorien) plus einer <code>$0.40</code>-Gebühr pro Bestellung
         (<code>$0.30</code> für Bestellungen von <code>$10</code> oder weniger) und optional einer
@@ -165,12 +165,12 @@ const de: ReactNode = (
     </div>
 
     <div>
-      <h2>Die Ausgaben verstehen</h2>
+      <h2>Die Ergebnisse verstehen</h2>
       <p>
         <strong>Netto-Auszahlung</strong> ist der Verkaufsgesamtbetrag minus Plattformgebühren — was tatsächlich auf deinem Konto ankommt.{' '}
         <strong>Nettogewinn</strong> zieht deine Artikelkosten und deine tatsächlichen Versandkosten von der Auszahlung ab; wird er
         negativ, zahlst du dafür, verkaufen zu dürfen. <strong>Break-Even-Verkaufspreis</strong> löst die Gebührenformel
-        rückwärts, um den Mindestpreis zu finden, der alle Kosten deckt — nutze ihn als Boden, wenn du entscheidest, ob du
+        rückwärts, um den Mindestpreis zu finden, der alle Kosten deckt — nutze ihn als Untergrenze, wenn du entscheidest, ob du
         ein Angebot annimmst oder einen Rabatt startest.
       </p>
     </div>
@@ -178,11 +178,11 @@ const de: ReactNode = (
     <div>
       <h2>Preis-Tipps für Verkäufer</h2>
       <p>
-        Gratisversand ist nie gratis: Da Gebühren auf den Versand anfallen, den du berechnest, ändert das Einrollen des Versands in den
-        Artikelpreis nichts an den Gebühren, kann aber die Suchplatzierung verbessern. Behalte die Anzeigenrate im Blick — eine{' '}
-        10-%-Promoted-Listings-Kampagne kann deine effektive Gebühr leise verdoppeln. Und denk daran, dass dies Näherungen Stand
+        Gratisversand ist nie gratis: Da Gebühren auf den berechneten Versand anfallen, ändert es nichts an den Gebühren, den Versand in den
+        Artikelpreis einzurechnen — es kann aber die Suchplatzierung verbessern. Behalte die Anzeigenrate im Blick — eine{' '}
+        10-%-Promoted-Listings-Kampagne kann deine effektive Gebühr unauffällig verdoppeln. Und denk daran, dass dies Näherungen Stand
         2026 sind: Shop-Abos, Top-Rated-Rabatte, internationale Verkäufe und kategoriespezifische Sätze
-        ändern die Rechnung alle, also gleiche gegen die aktuelle Gebührentabelle der Plattform ab, bevor du dich auf einen
+        ändern die Rechnung alle, also gleiche mit der aktuellen Gebührentabelle der Plattform ab, bevor du dich auf einen
         Preis festlegst.
       </p>
     </div>

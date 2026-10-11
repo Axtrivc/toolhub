@@ -83,7 +83,7 @@ const es: ReactNode = (
 const de: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>Was ist dieses Werkzeug?</h2>
-    <p>Die <strong>Durchflussrate</strong> misst, wie viel Flüssigkeit pro Zeiteinheit an einem Punkt vorbeiströmt. Dieses Werkzeug rechnet zwischen Litern/Sekunde, Litern/Minute, Kubikmetern/Stunde, Gallonen/Minute und Kubikfuß/Minute um.</p>
+    <p>Die <strong>Durchflussmenge</strong> misst, wie viel Fluid pro Zeiteinheit an einem Punkt vorbeiströmt. Dieses Werkzeug rechnet zwischen Litern/Sekunde, Litern/Minute, Kubikmetern/Stunde, Gallonen/Minute und Kubikfuß/Minute um.</p>
     <div>
       <h2>Häufige Umrechnungen</h2>
       <ul>
@@ -93,11 +93,11 @@ const de: ReactNode = (
       </ul>
     </div>
     <div>
-      <h2>Durchflussraten in der Praxis</h2>
+      <h2>Durchflussmengen in der Praxis</h2>
       <ul>
         <li>Duschkopf: ~8-10 L/min</li>
         <li>Gartenschlauch: ~15-20 L/min</li>
-        <li>Feuerhydrant: ~1000+ L/min</li>
+        <li>Feuerwehrhydrant: ~1000+ L/min</li>
         <li>Kleiner Fluss: ~10,000 m³/h</li>
       </ul>
     </div>

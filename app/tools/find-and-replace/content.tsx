@@ -157,7 +157,7 @@ const de: ReactNode = (
       <ul>
         <li>Einen Begriff in einem langen Dokument umbenennen</li>
         <li>Platzhaltertext wie [NAME] durch den echten Wert ersetzen</li>
-        <li>Formatierungszeichen austauschen (z. B. „--" in Gedankenstrich)</li>
+        <li>Formatierungszeichen austauschen (z. B. „--“ in Gedankenstrich)</li>
         <li>Inkonsistente Schreibweise bereinigen (color → colour)</li>
         <li>Sensible Daten vor dem Teilen des Textes ersetzen</li>
       </ul>

@@ -262,6 +262,8 @@ export function describeCron(expr: string, locale: Locale = 'en'): string {
     L('mon5', 'May'), L('mon6', 'June'), L('mon7', 'July'), L('mon8', 'August'),
     L('mon9', 'September'), L('mon10', 'October'), L('mon11', 'November'), L('mon12', 'December'),
   ]
+  // 自然语名称列表的分隔符:中文用顿号,其余语言维持逗号(数字列表仍用 ', ')
+  const listSep = locale === 'zh' ? '、' : ', '
 
   // 秒部分:6/7 字段且秒字段被限定(非 *、非 0)时,前置"第 N 秒"说明
   let secPart = ''
@@ -291,7 +293,7 @@ export function describeCron(expr: string, locale: Locale = 'en'): string {
     day = L('everyDay', 'every day')
   } else if (domF === '*') {
     const dows = expandDow(dowF)
-    day = L('onDays', 'on {days}').replace('{days}', dows.map((d) => dowNames[d]).join(', '))
+    day = L('onDays', 'on {days}').replace('{days}', dows.map((d) => dowNames[d]).join(listSep))
   } else if (dowF === '*') {
     day = L('onDayOfMonth', 'on day-of-month {doms}').replace('{doms}', describeList(domF))
   } else {
@@ -300,7 +302,7 @@ export function describeCron(expr: string, locale: Locale = 'en'): string {
     const doms = expand(domF, 1, 31)
     day = L('onDomOrDow', 'on day-of-month {doms} OR on {dows}')
       .replace('{doms}', doms.join(', '))
-      .replace('{dows}', dows.map((d) => dowNames[d]).join(', '))
+      .replace('{dows}', dows.map((d) => dowNames[d]).join(listSep))
   }
 
   // 月份部分
@@ -308,8 +310,8 @@ export function describeCron(expr: string, locale: Locale = 'en'): string {
   if (monF === '*') {
     month = ''
   } else {
-    const months = expand(monF, 1, 12)
-    month = L('inMonths', ' in {months}').replace('{months}', months.map((m) => monNames[m]).join(', '))
+    const months = expand(monF, 1, 12, MONTH_NAMES)
+    month = L('inMonths', ' in {months}').replace('{months}', months.map((m) => monNames[m]).join(listSep))
   }
 
   // 简化常见情况
@@ -323,9 +325,9 @@ export function describeCron(expr: string, locale: Locale = 'en'): string {
 }
 
 // ── describeCron 的小工具 ──
-function expand(field: string, min: number, max: number): number[] {
+function expand(field: string, min: number, max: number, names?: Record<string, number>): number[] {
   try {
-    return Array.from(parseField(field, min, max)).sort((a, b) => a - b)
+    return Array.from(parseField(field, min, max, names)).sort((a, b) => a - b)
   } catch (err) {
     console.warn('cron expand failed:', field, err)
     return []

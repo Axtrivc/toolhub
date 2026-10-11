@@ -10,9 +10,9 @@ import { getCalculatorSample } from '@/lib/tool-samples'
 
 /**
  * TOML → JSON 转换器
- * 手写零依赖 TOML 1.0 子集解析器:表/数组表/内联表/点分 key/字符串(基本+多行+
- * 字面量)/整数(含 hex/oct/bin/下划线)/浮点/布尔/数组。不支持:日期时间对象
- * (按字符串保留)、多行字面量、\x 转义 —— 遇到会给出明确错误而非静默出错。
+ * 手写零依赖 TOML 1.0 子集解析器:表/数组表/内联表/点分 key/字符串(基本+字面量)/
+ * 整数(含 hex/oct/bin/下划线)/浮点/布尔/数组。不支持:日期时间对象(按字符串保留)、
+ * 多行字符串(基本与字面量均带行号拒绝)、\x 转义 —— 遇到会给出明确错误而非静默出错。
  */
 
 type Json = string | number | boolean | null | Json[] | { [k: string]: Json }

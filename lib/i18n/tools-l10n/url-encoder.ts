@@ -8,6 +8,7 @@ export const urlEncoderL10n: ToolL10n = {
   zh: {
     ui: {
       'inputTooLarge': '⚠️ 输入过大——支持规模最多 10 万字符。请裁剪输入后再转换。',
+      'invalidInput': '⚠️ 此方向的输入无效',
       'defaultInputDecode': '%E4%BD%A0%E5%A5%BD%E4%B8%96%E7%95%8C',
       'defaultInputEncode': '你好世界',
       'characters': '字符',
@@ -47,6 +48,7 @@ export const urlEncoderL10n: ToolL10n = {
   es: {
     ui: {
       'inputTooLarge': '⚠️ Entrada demasiado grande: el tamaño admitido es de hasta 100 000 caracteres. Recorta la entrada para convertir.',
+      'invalidInput': '⚠️ Entrada no válida para esta dirección',
       'defaultInputDecode': 'hola%20mundo',
       'defaultInputEncode': 'hola mundo',
       'characters': 'caracteres',
@@ -86,6 +88,7 @@ export const urlEncoderL10n: ToolL10n = {
   de: {
     ui: {
       'inputTooLarge': '⚠️ Eingabe zu groß – die unterstützte Größe beträgt maximal 100.000 Zeichen. Kürze die Eingabe.',
+      'invalidInput': '⚠️ Ungültige Eingabe für diese Richtung',
       'defaultInputDecode': 'hallo%20welt',
       'defaultInputEncode': 'hallo welt',
       'characters': 'Zeichen',

@@ -107,8 +107,8 @@ const de: ReactNode = (
       <h2>Titelschreibweise vs. erster Buchstabe groß</h2>
       <p>
         Dieses Werkzeug schreibt <em>jedes</em> Wort groß. Professionelle Stilrichtlinien (APA,
-        Chicago) lassen kurze Wörter wie „the", „of" und „in" oft klein. Zum Beispiel: „The Lord of
-        the Rings" (Stilrichtlinie) vs. „The Lord Of The Rings" (dieses Werkzeug). Für
+        Chicago) lassen kurze Wörter wie „the“, „of“ und „in“ oft klein. Zum Beispiel: „The Lord of
+        the Rings“ (Stilrichtlinie) vs. „The Lord Of The Rings“ (dieses Werkzeug). Für
         Marketingtexte und UI-Schaltflächen ist es völlig in Ordnung, jedes Wort großzuschreiben,
         und das sieht oft sauberer aus.
       </p>

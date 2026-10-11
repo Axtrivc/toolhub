@@ -73,7 +73,7 @@ const zh: ReactNode = (
     <div>
       <h2>生成的配置包含哪些内容</h2>
       <p>
-        每份配置都会转发你的应用查看真实客户端所需的头:<code>Host</code>、<code>X-Real-IP</code>、<code>X-Forwarded-For</code>、<code>X-Forwarded-Proto</code>,以及 <code>proxy_http_version 1.1</code>。
+        每份配置都会转发你的应用识别真实客户端所需的请求头:<code>Host</code>、<code>X-Real-IP</code>、<code>X-Forwarded-For</code>、<code>X-Forwarded-Proto</code>,以及 <code>proxy_http_version 1.1</code>。
         开启 <strong>SSL</strong> 可得到一个 <code>443 ssl http2</code> 监听器,带 Let's Encrypt 证书路径和 HTTP→HTTPS 跳转块;开启 <strong>WebSocket 支持</strong> 可加上 <code>Upgrade</code>/<code>Connection</code> 头以及必需的 <code>map</code> 块。可选的 <strong>gzip</strong> 与 <strong>静态资源缓存</strong>(<code>expires 30d</code>)让整套配置达到生产可用。
       </p>
     </div>
@@ -89,7 +89,7 @@ const zh: ReactNode = (
     <div>
       <h2>需要检查的常见坑</h2>
       <p>
-        大多数反向代理 bug 都源自三类错误。第一,缺失或错误的 <code>Host</code> 头会让按域名路由的应用崩溃 —— 生成的配置始终会设置它。第二,没有 <code>Upgrade</code> 头和 <code>map $http_upgrade $connection_upgrade</code> 块,WebSocket 应用会悄无声息地卡住。第三,上传会以 <em>413 Request Entity Too Large</em> 失败,直到你调大 <code>client_max_body_size</code> —— 选一个匹配你最大预期上传的值。
+        大多数反向代理 bug 都源自三类错误。第一,缺失或错误的 <code>Host</code> 头会让按域名路由的应用出问题 —— 生成的配置始终会设置它。第二,没有 <code>Upgrade</code> 头和 <code>map $http_upgrade $connection_upgrade</code> 块,WebSocket 应用会悄无声息地卡住。第三,上传会以 <em>413 Request Entity Too Large</em> 失败,直到你调大 <code>client_max_body_size</code> —— 选一个与你预期的最大上传大小相符的值。
         另外,请确保应用监听在代理目标端口上(<code>127.0.0.1</code> 最安全),并让防火墙放行 80/443 端口。
       </p>
     </div>
@@ -101,7 +101,7 @@ const es: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>¿Qué es esta herramienta?</h2>
     <p>
-      Configurar <strong>nginx como reverse proxy</strong> — por delante de una app Node.js, una API Python o cualquier servicio local — significa recordar una docena de directivas: qué cabeceras reenviar, cómo terminar SSL, cómo funcionan las actualizaciones WebSocket. Este generador construye una configuración <code>sites-available</code> completa y comentada a partir de un formulario sencillo, en vivo mientras escribes.
+      Configurar <strong>nginx como proxy inverso</strong> — por delante de una app Node.js, una API Python o cualquier servicio local — significa recordar una docena de directivas: qué cabeceras reenviar, cómo terminar SSL, cómo funcionan los upgrades de WebSocket. Este generador construye una configuración <code>sites-available</code> completa y comentada a partir de un formulario sencillo, en vivo mientras escribes.
       Todo ocurre en tu navegador, y el resultado se descarga como un archivo <code>.conf</code> listo para tu servidor.
     </p>
 
@@ -109,7 +109,7 @@ const es: ReactNode = (
       <h2>Qué incluye la configuración generada</h2>
       <p>
         Toda configuración reenvía las cabeceras que tu app necesita para ver a los clientes reales: <code>Host</code>, <code>X-Real-IP</code>, <code>X-Forwarded-For</code> y <code>X-Forwarded-Proto</code>, además de <code>proxy_http_version 1.1</code>.
-        Activa <strong>SSL</strong> para obtener un listener <code>443 ssl http2</code> con rutas de certificado de Let's Encrypt y un bloque de redirección HTTP→HTTPS; activa el <strong>soporte WebSocket</strong> para las cabeceras <code>Upgrade</code>/<code>Connection</code> y el bloque <code>map</code> requerido. El <strong>gzip</strong> opcional y la <strong>caché de activos estáticos</strong> (<code>expires 30d</code>) redondean una configuración lista para producción.
+        Activa <strong>SSL</strong> para obtener un listener <code>443 ssl http2</code> con rutas de certificado de Let's Encrypt y un bloque de redirección HTTP→HTTPS; activa el <strong>soporte WebSocket</strong> para las cabeceras <code>Upgrade</code>/<code>Connection</code> y el bloque <code>map</code> requerido. El <strong>gzip</strong> opcional y la <strong>caché de recursos estáticos</strong> (<code>expires 30d</code>) completan una configuración lista para producción.
       </p>
     </div>
 
@@ -124,7 +124,7 @@ const es: ReactNode = (
     <div>
       <h2>Errores comunes que conviene revisar</h2>
       <p>
-        Tres errores causan la mayoría de los bugs de reverse proxy. Primero, una cabecera <code>Host</code> ausente o incorrecta rompe las apps que enrutan por dominio — la configuración generada siempre la establece. Segundo, las apps WebSocket se cuelgan en silencio sin las cabeceras <code>Upgrade</code> y el bloque <code>map $http_upgrade $connection_upgrade</code>. Tercero, las subidas fallan con <em>413 Request Entity Too Large</em> hasta que se aumenta <code>client_max_body_size</code> — elige el valor que coincida con tu mayor subida esperada.
+        Tres errores causan la mayoría de los bugs de proxy inverso. Primero, una cabecera <code>Host</code> ausente o incorrecta rompe las apps que enrutan por dominio — la configuración generada siempre la establece. Segundo, las apps WebSocket se cuelgan en silencio sin las cabeceras <code>Upgrade</code> y el bloque <code>map $http_upgrade $connection_upgrade</code>. Tercero, las subidas fallan con <em>413 Request Entity Too Large</em> hasta que se aumenta <code>client_max_body_size</code> — elige un valor que cubra la subida más grande que esperas.
         Además, asegúrate de que tu app escuche en el puerto destino del proxy (<code>127.0.0.1</code> es lo más seguro) y de que el firewall permita los puertos 80/443.
       </p>
     </div>
@@ -137,7 +137,7 @@ const de: ReactNode = (
     <h2>Was ist dieses Werkzeug?</h2>
     <p>
       <strong>nginx als Reverse Proxy</strong> einzurichten — vor einer Node.js-App, einer Python-API oder einem beliebigen lokalen Service — bedeutet, sich an ein Dutzend Direktiven zu erinnern: welche Header weitergeleitet werden, wie SSL terminiert wird, wie WebSocket-Upgrades funktionieren. Dieser Generator erstellt aus einem einfachen Formular eine vollständige, kommentierte <code>sites-available</code>-Konfiguration, live während du tippst.
-      Alles läuft im Browser, und das Ergebnis lädt als <code>.conf</code>-Datei herunter, bereit für deinen Server.
+      Alles läuft im Browser, und das Ergebnis wird als <code>.conf</code>-Datei heruntergeladen, bereit für deinen Server.
     </p>
 
     <div>
@@ -159,8 +159,8 @@ const de: ReactNode = (
     <div>
       <h2>Häufige Stolperfallen, die du prüfen solltest</h2>
       <p>
-        Drei Fehler verursachen die meisten Reverse-Proxy-Bugs. Erstens: Ein fehlender oder falscher <code>Host</code>-Header bringt Apps durcheinander, die nach Domain routen — die generierte Konfiguration setzt ihn immer. Zweitens: WebSocket-Apps hängen sich lautlos auf ohne die <code>Upgrade</code>-Header und den Block <code>map $http_upgrade $connection_upgrade</code>. Drittens: Uploads scheitern mit <em>413 Request Entity Too Large</em>, bis <code>client_max_body_size</code> erhöht wird — wähle den Wert, der zu deinem größten erwarteten Upload passt.
-        Stelle außerdem sicher, dass deine App an den Proxy-Zielport bindet (<code>127.0.0.1</code> ist am sichersten) und dass die Firewall die Ports 80/443 zulässt.
+        Drei Fehler verursachen die meisten Reverse-Proxy-Bugs. Erstens: Ein fehlender oder falscher <code>Host</code>-Header bringt Apps durcheinander, die anhand der Domain routen — die generierte Konfiguration setzt ihn immer. Zweitens: Ohne die <code>Upgrade</code>-Header und den Block <code>map $http_upgrade $connection_upgrade</code> bleiben WebSocket-Apps lautlos hängen. Drittens: Uploads scheitern mit <em>413 Request Entity Too Large</em>, bis <code>client_max_body_size</code> erhöht wird — wähle den Wert, der zu deinem größten erwarteten Upload passt.
+        Stelle außerdem sicher, dass deine App an den Proxy-Zielport gebunden ist (<code>127.0.0.1</code> ist am sichersten) und dass die Firewall die Ports 80/443 zulässt.
       </p>
     </div>
   </section>

@@ -55,7 +55,7 @@ export const findAndReplaceL10n: ToolL10n = {
       'censurar datos sensibles antes de compartir el texto',
     ],
     faqs: [
-      { q: '¿La búsqueda distingue mayúsculas y minúsculas?', a: 'Por defecto no — «Cat» coincide con «cat». Activa «Distinguir mayúsculas» para que solo coincidan las coincidencias exactas.' },
+      { q: '¿La búsqueda distingue mayúsculas y minúsculas?', a: 'Por defecto no — «Cat» coincide con «cat». Activa «Distinguir mayúsculas» para que solo se acepten coincidencias exactas.' },
       { q: '¿Puedo usar expresiones regulares?', a: 'Sí. Con «Expresión regular» activado, el campo de búsqueda coincide por patrón (p. ej. \\d+, [a-z]+) y el reemplazo admite referencias como $1 o $&; un patrón no válido muestra un aviso amable en lugar de un error.' },
     ],
   },
@@ -82,8 +82,8 @@ export const findAndReplaceL10n: ToolL10n = {
       'sensible Daten vor dem Teilen schwärzen',
     ],
     faqs: [
-      { q: 'Wird bei der Suche Groß-/Kleinschreibung unterschieden?', a: 'Standardmäßig nein — „Cat" matcht „cat". Aktiviere „Groß-/Kleinschreibung beachten", damit nur exakte Schreibweisen treffen.' },
-      { q: 'Kann ich reguläre Ausdrücke verwenden?', a: 'Ja. Mit aktiviertem „Regulärer Ausdruck" matcht das Suchfeld nach Muster (z. B. \\d+, [a-z]+), und die Ersetzung unterstützt Rückverweise wie $1 oder $&; ein ungültiges Muster zeigt einen freundlichen Hinweis statt eines Fehlers.' },
+      { q: 'Wird bei der Suche Groß-/Kleinschreibung unterschieden?', a: 'Standardmäßig nein — „Cat“ matcht „cat“. Aktiviere „Groß-/Kleinschreibung beachten“, damit nur exakte Schreibweisen treffen.' },
+      { q: 'Kann ich reguläre Ausdrücke verwenden?', a: 'Ja. Mit aktiviertem „Regulärer Ausdruck“ matcht das Suchfeld nach Muster (z. B. \\d+, [a-z]+), und die Ersetzung unterstützt Rückverweise wie $1 oder $&; ein ungültiges Muster zeigt einen freundlichen Hinweis statt eines Fehlers.' },
     ],
   },
 }

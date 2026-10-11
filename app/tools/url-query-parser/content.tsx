@@ -31,7 +31,7 @@ const zh: ReactNode = (
       <ul>
         <li>调试 API 请求</li>
         <li>逆向分析跟踪链接</li>
-        <li>检查 UTM 广告系列参数</li>
+        <li>检查 UTM 营销参数</li>
         <li>在代码中构建查询字符串</li>
       </ul>
     </div>

@@ -1,6 +1,6 @@
 /**
  * amortization-table-generator 本地化 bundle —— zh / es / de(2025-08 扩张批次)
- * 覆盖: ui。useCases/formula/faqs 缺失自动回退英文。
+ * 覆盖: ui / useCases / faqs。formula 缺失自动回退英文。
  */
 import type { ToolL10n } from '../tool-l10n'
 
@@ -8,7 +8,7 @@ export const AmortizationTableGeneratorL10n: ToolL10n = {
   zh: {
     useCases: ['生成逐期还款的完整摊销表', '看每期还款里本金和利息各占多少', '导出全周期 CSV 给 Excel', '看清提前还款为何能省大量利息'],
     faqs: [
-      { q: '明细表到底展示什么?', a: '按顺序列出每一期:期数、还款额、本金与利息的拆分、剩余余额。前期利息占大头——30 年贷款第一期往往三分之二都在付息——本金反超的拐点在表里一目了然。' },
+      { q: '明细表到底展示什么?', a: '按顺序列出每一期:期数、还款额、本金与利息的拆分、剩余余额。前期利息占大头——常见利率下,第一期还款大部分付的是利息——本金反超的拐点在表里一目了然。' },
       { q: '月供是怎么算的?', a: '标准摊销公式 P × r(1+r)^n ÷ ((1+r)^n − 1),r 为月利率、n 为期数。之后每行套用"利息 = 余额 × 月利率,本金 = 月供 − 利息",完整模拟放贷方的记账过程。' },
       { q: '能导出完整计划吗?', a: '能——下载的是完整 CSV(带 UTF-8 BOM,Excel 打开不乱码),整个期限每期一行。页面默认预览前 12 期并提供展开按钮,但导出文件永远是全表。' },
       { q: '提前还款会改变这张表吗?', a: '本工具只展示合同计划表。但这张表恰恰解释了提前还款为何有效:多还的每一块钱都直接冲本金,之后所有利息都按更小的余额计提——这就是适度多还能把 30 年贷款缩短好几年的原因。' },
@@ -36,7 +36,7 @@ export const AmortizationTableGeneratorL10n: ToolL10n = {
       'in.principal': '贷款金额',
       'in.rate': '年利率',
       'in.years': '期限',
-      'note': '📋 用上方下载逐期还款 CSV 明细——每行把固定月供拆为利息(余额×月利率)与本金,并附运行余额。前期以利息为主。',
+      'note': '📋 点击上方按钮下载逐期还款 CSV 明细——每行把固定月供拆为利息(余额 × 月利率)与本金,并附运行余额。前期以利息为主。',
       'out.interestShare': '利息占还款比例',
       'out.monthly': '月供',
       'out.totalInterest': '总利息',
@@ -46,10 +46,10 @@ export const AmortizationTableGeneratorL10n: ToolL10n = {
   es: {
     useCases: ['generar la tabla de amortización completa', 'ver cuánto capital e intereses paga cada mes', 'exportar el CSV completo para Excel', 'entender por qué adelantar pagos ahorra tanto'],
     faqs: [
-      { q: '¿Qué muestra exactamente la tabla?', a: 'Cada pago en orden: número, importe, el reparto capital/intereses y el saldo pendiente. Las primeras filas cargan de intereses —un préstamo a 30 años destina dos tercios de la primera cuota a intereses— y se ve el cruce donde el capital toma el mando.' },
-      { q: '¿Cómo se calcula la cuota mensual?', a: 'Con la fórmula estándar P × r(1+r)^n ÷ ((1+r)^n − 1), donde r es el tipo mensual y n el número de pagos. Cada fila aplica intereses = saldo × r y capital = cuota − intereses, simulando exactamente cómo el prestamista lleva la cuenta.' },
-      { q: '¿Puedo exportar el calendario completo?', a: 'Sí: la descarga es un CSV completo (con BOM UTF-8 para que Excel lo abra bien), una fila por pago en todo el plazo. La página previsualiza las primeras 12 cuotas con botón de expandir, pero el archivo siempre contiene la tabla entera.' },
-      { q: '¿Los pagos extra cambian la tabla?', a: 'En esta herramienta no: muestra el calendario contractual. Pero la tabla explica por qué adelantar funciona: cada euro extra va directo a capital, así que todos los intereses posteriores se calculan sobre un saldo menor. Por eso pagos modestos recortan años a un préstamo a 30.' },
+      { q: '¿Qué muestra exactamente la tabla?', a: 'Cada pago en orden: número, importe, el reparto capital/intereses y el saldo pendiente. Las primeras filas cargan de intereses —con las tasas habituales, la mayor parte de la primera cuota son intereses— y se ve el cruce donde el capital toma el mando.' },
+      { q: '¿Cómo se calcula la cuota mensual?', a: 'Con la fórmula estándar P × r(1+r)^n ÷ ((1+r)^n − 1), donde r es la tasa mensual y n el número de pagos. Cada fila aplica intereses = saldo × r y capital = cuota − intereses, simulando exactamente cómo el prestamista lleva la cuenta.' },
+      { q: '¿Puedo exportar el calendario completo?', a: 'Sí: la descarga es un CSV completo (con BOM UTF-8 para que Excel lo abra bien), una fila por pago en todo el plazo. La página previsualiza las primeras 12 cuotas con un botón para expandir, pero el archivo siempre contiene la tabla entera.' },
+      { q: '¿Los pagos extra cambian la tabla?', a: 'En esta herramienta no: muestra el calendario contractual. Pero la tabla explica por qué adelantar funciona: cada dólar extra va directo a capital, así que todos los intereses posteriores se calculan sobre un saldo menor. Por eso pagos modestos recortan años a un préstamo de 30 años.' },
     ],
     ui: {
       'scheduleLabel': 'Tabla de amortización',
@@ -59,7 +59,7 @@ export const AmortizationTableGeneratorL10n: ToolL10n = {
       'thInterest': 'Interés',
       'thBalance': 'Saldo',
       'expand': 'Ver las {n} filas',
-      'collapse': 'Ver 12 primeras',
+      'collapse': 'Ver las 12 primeras filas',
       'chartBalance': 'Saldo pendiente',
       'chartTitle': 'Saldo en el tiempo',
       'csvNum': 'N.º de pago',
@@ -74,8 +74,8 @@ export const AmortizationTableGeneratorL10n: ToolL10n = {
       'in.principal': 'Importe del préstamo',
       'in.rate': 'Tasa anual',
       'in.years': 'Plazo',
-      'note': '📋 Descarga arriba la tabla completa en CSV: cada fila separa el pago fijo en interés (saldo × tasa mensual) y capital, con el saldo corrido. Los primeros años pesan los intereses.',
-      'out.interestShare': 'Proporción de intereses',
+      'note': '📋 Descarga arriba la tabla completa en CSV: cada fila separa el pago fijo en interés (saldo × tasa mensual) y capital, con el saldo acumulado. Los primeros años pesan los intereses.',
+      'out.interestShare': 'Proporción de intereses en los pagos',
       'out.monthly': 'Pago mensual',
       'out.totalInterest': 'Interés total',
       'out.totalPaid': 'Total pagado',
@@ -84,10 +84,10 @@ export const AmortizationTableGeneratorL10n: ToolL10n = {
   de: {
     useCases: ['den vollständigen Tilgungsplan erzeugen', 'sehen, wie viel Zinsen und Tilgung pro Rate sind', 'das komplette CSV für Excel exportieren', 'verstehen, warum Sondertilgungen so viel sparen'],
     faqs: [
-      { q: 'Was genau zeigt die Tabelle?', a: 'Jede Rate der Reihe nach: Nummer, Betrag, die Aufteilung Tilgung/Zinsen und der Restsaldo. Die ersten Zeilen sind zinslastig — bei einem 30-Jahres-Kredit gehen zwei Drittel der ersten Rate oft in Zinsen — und der Punkt, an dem die Tilgung überholt, ist gut sichtbar.' },
-      { q: 'Wie wird die Monatsrate berechnet?', a: 'Mit der Standardformel P × r(1+r)^n ÷ ((1+r)^n − 1), r = Monatszins, n = Zahl der Raten. Jede Zeile wendet dann Zinsen = Saldo × r und Tilgung = Rate − Zinsen an — exakt die Buchung des Kreditgebers simuliert.' },
+      { q: 'Was genau zeigt die Tabelle?', a: 'Jede Rate der Reihe nach: Nummer, Betrag, die Aufteilung Tilgung/Zinsen und der Restsaldo. Die ersten Zeilen sind zinslastig — bei üblichen Zinsen geht der Großteil der ersten Rate in Zinsen — und man sieht genau, an welcher Stelle die Tilgung die Zinsen überholt.' },
+      { q: 'Wie wird die Monatsrate berechnet?', a: 'Mit der Standardformel P × r(1+r)^n ÷ ((1+r)^n − 1), r = Monatszins, n = Zahl der Raten. Jede Zeile wendet dann Zinsen = Saldo × r und Tilgung = Rate − Zinsen an — exakt so, wie der Kreditgeber den Kredit abrechnet.' },
       { q: 'Kann ich den ganzen Plan exportieren?', a: 'Ja — der Download ist ein vollständiges CSV (mit UTF-8-BOM, damit Excel es sauber öffnet), eine Zeile pro Rate über die gesamte Laufzeit. Die Seite zeigt die ersten 12 Raten mit Ausklapp-Button, die Datei enthält aber immer den kompletten Plan.' },
-      { q: 'Ändern Sondertilgungen diese Tabelle?', a: 'In diesem Werkzeug nicht — es zeigt den vertraglichen Plan. Aber die Tabelle erklärt, warum Sondertilgung funktioniert: Jeder zusätzliche Euro trifft direkt die Tilgung, alle späteren Zinsen berechnen sich auf kleinerem Saldo. So kürzen moderate Extras einem 30-Jahres-Kredit Jahre.' },
+      { q: 'Ändern Sondertilgungen diese Tabelle?', a: 'In diesem Werkzeug nicht — es zeigt den vertraglichen Plan. Aber die Tabelle erklärt, warum Sondertilgung funktioniert: Jeder zusätzliche Dollar geht direkt auf die Tilgung, sodass sich alle späteren Zinsen auf einem kleineren Saldo berechnen. Genau so kürzen schon moderate Zusatzzahlungen die Laufzeit eines 30-Jahres-Kredits um Jahre.' },
     ],
     ui: {
       'scheduleLabel': 'Tilgungsplan',
@@ -96,8 +96,8 @@ export const AmortizationTableGeneratorL10n: ToolL10n = {
       'thPrincipal': 'Tilgung',
       'thInterest': 'Zins',
       'thBalance': 'Restschuld',
-      'expand': 'Alle {n} Zeilen',
-      'collapse': 'Erste 12 Zeilen',
+      'expand': 'Alle {n} Zeilen anzeigen',
+      'collapse': 'Erste 12 Zeilen anzeigen',
       'chartBalance': 'Restschuld',
       'chartTitle': 'Saldo im Zeitverlauf',
       'csvNum': 'Zahlung Nr.',
@@ -112,7 +112,7 @@ export const AmortizationTableGeneratorL10n: ToolL10n = {
       'in.principal': 'Darlehensbetrag',
       'in.rate': 'Jahreszins',
       'in.years': 'Laufzeit',
-      'note': '📋 Lade oben den kompletten Tilgungsplan als CSV — jede Zeile zerlegt die Rate in Zins (Saldo × Monatszins) und Tilgung mit Restschuld. Frühe Jahre sind zinslastig.',
+      'note': '📋 Lade oben den kompletten Tilgungsplan als CSV — jede Zeile zerlegt die Rate in Zins (Saldo × Monatszins) und Tilgung, dazu die fortlaufende Restschuld. Frühe Jahre sind zinslastig.',
       'out.interestShare': 'Zinsanteil der Zahlungen',
       'out.monthly': 'Monatsrate',
       'out.totalInterest': 'Zinsen gesamt',

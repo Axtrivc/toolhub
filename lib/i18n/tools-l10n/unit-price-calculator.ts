@@ -1,6 +1,6 @@
 /**
  * unit-price-calculator 本地化 bundle —— zh / es / de
- * 覆盖:faqs + ui + useCases
+ * 覆盖:faqs + ui + useCases + formula.explain(公式串回退英文)
  */
 import type { ToolL10n } from '../tool-l10n'
 
@@ -36,7 +36,7 @@ export const unitPriceCalculatorL10n: ToolL10n = {
     },
     useCases: ['comparar el valor real por gramo/ml/unidad', 'ver si el formato grande sale realmente más barato', 'comparar precios con unidades distintas', 'encontrar la opción más barata por unidad'],
     faqs: [
-      { q: '¿Sirve para productos que no son alimentos?', a: 'Sí. Usa «unidad» para papel higiénico, pañales, pilas o cualquier producto vendido por cantidad. Usa ml para líquidos y g para sólidos. La matemática es la misma.' },
+      { q: '¿Sirve para productos que no son alimentos?', a: 'Sí. Usa «unidades» para papel higiénico, pañales, pilas o cualquier producto vendido por cantidad. Usa ml para líquidos y g para sólidos. La matemática es la misma.' },
     ],
     ui: {
       'chartTitle': 'Duelo de precio unitario',
@@ -56,14 +56,14 @@ export const unitPriceCalculatorL10n: ToolL10n = {
   de: {
     formula: {
       formula: 'Unit price = total price / quantity',
-      explain: 'Preis pro Einheit (pro Unze, pro Stück, pro Meter). Den Einheitspreis zu vergleichen — nicht den Packungspreis — zeigt bei unterschiedlichen Größen den wahren Bestkauf.',
+      explain: 'Preis pro Einheit (pro Unze, pro Stück, pro Meter). Den Einheitspreis zu vergleichen — nicht den Packungspreis — zeigt bei unterschiedlichen Größen den wirklich besten Kauf.',
     },
     useCases: ['den echten Wert pro Gramm/ml/Stück vergleichen', 'sehen, ob die Großpackung wirklich günstiger ist', 'Preise bei unterschiedlichen Einheiten vergleichen', 'die günstigste Option pro Einheit finden'],
     faqs: [
       { q: 'Funktioniert das für Nicht-Lebensmittel?', a: 'Ja. Verwende „Stück" als Einheit für Toilettenpapier, Windeln, Batterien oder alles, was pro Stück verkauft wird. Für Flüssigkeiten ml, für Feststoffe g. Die Rechnung ist dieselbe.' },
     ],
     ui: {
-      'chartTitle': 'Preisvergleich',
+      'chartTitle': 'Stückpreis-Duell',
       'cmp.0': 'Option 1',
       'cmp.1': 'Option 2',
       'in.price1': 'Preis 1', 'in.size1': 'Größe 1', 'in.unit1': 'Einheit 1', 'in.price2': 'Preis 2', 'in.size2': 'Größe 2', 'in.unit2': 'Einheit 2',

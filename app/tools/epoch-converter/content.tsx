@@ -56,7 +56,7 @@ const es: ReactNode = (
 const de: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>Was ist ein Unix-Timestamp?</h2>
-    <p>Ein Unix-Timestamp (auch Epoch- oder POSIX-Zeit genannt) ist die Zahl der Sekunden seit dem <strong>1970-01-01 00:00:00 UTC</strong> — der „Unix-Epoche“. Es ist die Standardweise, wie Computer Zeitpunkte speichern: ohne Zeitzone und ohne Kalenderregeln.</p>
+    <p>Ein Unix-Timestamp (auch Epoch- oder POSIX-Zeit genannt) ist die Zahl der Sekunden seit dem <strong>1970-01-01 00:00:00 UTC</strong> — der „Unix-Epoche“. Es ist die Standardmethode, mit der Computer Zeitpunkte speichern: ohne Zeitzone und ohne Kalenderregeln.</p>
     <h2>Sekunden oder Millisekunden</h2>
     <p>Klassische Unix-Systeme speichern Sekunden (heute 10 Stellen). JavaScript, Java und viele APIs nutzen stattdessen Millisekunden (13 Stellen). Landet eine Umrechnung im Januar 1970, hast du fast sicher Sekunden eingefügt, wo Millisekunden erwartet wurden — oder umgekehrt.</p>
     <h2>Berücksichtigt Unix-Zeit Schaltsekunden?</h2>

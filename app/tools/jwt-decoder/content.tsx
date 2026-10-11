@@ -67,7 +67,7 @@ const zh: ReactNode = (
     <div>
       <h2>在这里粘贴我的令牌安全吗?</h2>
       <p>
-        安全。解码完全在你的浏览器中通过内置的 <code>atob</code> 函数完成——你的令牌绝不会被上传到服务器、存储或记录。话虽如此,请把真实的访问令牌当作密码一样对待:不要在截图、聊天或公开仓库中分享。如果你只是想了解令牌的结构,可以使用 <em>Load Sample</em> 按钮加载一个无害的示例。
+        安全。解码完全在你的浏览器中通过内置的 <code>atob</code> 函数完成——你的令牌绝不会被上传到服务器、存储或记录。话虽如此,请把真实的访问令牌当作密码一样对待:不要在截图、聊天或公开仓库中分享。如果你只是想了解令牌的结构,可以使用 <em>加载示例</em> 按钮加载一个无害的示例。
       </p>
     </div>
   </section>
@@ -106,7 +106,7 @@ const es: ReactNode = (
         Sí. La descodificación se ejecuta completamente en tu navegador con la función incorporada <code>atob</code> —
         tu token nunca se sube a un servidor, se almacena ni se registra. Dicho esto, trata los tokens de acceso reales
         como contraseñas: no los compartas en capturas de pantalla, chats ni repositorios públicos. Si solo quieres
-        entender la estructura de un token, usa el botón <em>Load Sample</em> para un ejemplo inofensivo.
+        entender la estructura de un token, usa el botón <em>Cargar ejemplo</em> para cargar un ejemplo inofensivo.
       </p>
     </div>
   </section>
@@ -118,7 +118,7 @@ const de: ReactNode = (
     <h2>Was ist dieses Werkzeug?</h2>
     <p>
       Ein <strong>JSON Web Token (JWT)</strong> ist ein kompakter, URL-sicherer String, der verwendet wird, um Claims
-      sicher zwischen einem Client und einem Server zu übertragen — meistens zur Authentifizierung. Ein JWT besteht
+      sicher zwischen Client und Server zu übertragen — meistens zur Authentifizierung. Ein JWT besteht
       aus drei Base64URL-kodierten Teilen, die durch Punkte getrennt sind:{' '}
       <code>header.payload.signature</code>. Dieser Decoder trennt diese drei Teile und zeigt den Header und den
       Payload als lesbares JSON sowie die rohe Signatur an.
@@ -131,7 +131,7 @@ const de: ReactNode = (
         </li>
         <li>
           <strong>Payload</strong> — die Claims: für wen das Token ist (<code>sub</code>), wann es ausgestellt wurde (<code>iat</code>),
-          wann es abläuft (<code>exp</code>), und alle selbst hinzugefügten Felder deiner App.
+          wann es abläuft (<code>exp</code>), und alle benutzerdefinierten Felder, die deine App hinzufügt.
         </li>
         <li>
           <strong>Signature</strong> — beweist, dass das Token nicht manipuliert wurde. Es kann nur mit dem passenden
@@ -146,8 +146,8 @@ const de: ReactNode = (
         Ja. Das Dekodieren läuft vollständig in deinem Browser mit der eingebauten Funktion <code>atob</code> — dein
         Token wird nie auf einen Server hochgeladen, gespeichert oder protokolliert. Trotzdem solltest du echte
         Access-Tokens wie Passwörter behandeln: Teile sie nicht in Screenshots, Chats oder öffentlichen Repos. Wenn du
-        nur die Struktur eines Tokens verstehen willst, verwende die Schaltfläche <em>Load Sample</em> für ein
-        harmloses Beispiel.
+        nur die Struktur eines Tokens verstehen willst, verwende die Schaltfläche <em>Beispiel laden</em>, um ein
+        harmloses Beispiel zu laden.
       </p>
     </div>
   </section>

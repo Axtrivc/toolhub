@@ -21,9 +21,9 @@ export const codeBeautifierL10n: ToolL10n = {
     },
     useCases: [
       '在线美化压缩的 JavaScript',
-      '带缩进的 HTML 格式化工具',
+      '给 HTML 代码加上缩进',
       '免费在线还原压缩 CSS',
-      'JSON 美化打印工具',
+      '美化打印 JSON 数据',
     ],
     faqs: [
       {
@@ -36,7 +36,7 @@ export const codeBeautifierL10n: ToolL10n = {
       },
       {
         q: '该用 2 空格还是 4 空格?',
-        a: '与你项目现有风格保持一致。HTML、CSS、JSON 常用 2 空格;JavaScript 有时用 4 空格。代码库内部的一致性比具体数字更重要,所以选符合你团队约定的那个。',
+        a: '与你项目现有风格保持一致。HTML、CSS、JSON 常用 2 空格;JavaScript 则多用 4 空格。代码库内部的一致性比具体数字更重要,所以选符合你团队约定的那个。',
       },
       {
         q: '代码会被上传到服务器吗?',
@@ -60,14 +60,14 @@ export const codeBeautifierL10n: ToolL10n = {
     },
     useCases: [
       'embellecer JavaScript minificado online',
-      'formateador HTML con sangría',
+      'formatear HTML con sangría',
       'desminificar CSS online gratis',
-      'herramienta pretty print JSON',
+      'hacer pretty print de JSON',
     ],
     faqs: [
       {
         q: '¿Qué lenguajes formatea?',
-        a: 'HTML, CSS, JavaScript y JSON. Cada uno se analiza con un formateador consciente del lenguaje que vuelve a sangrar y normalizar los espacios, así el código minificado o desordenado se vuelve legible sin cambiar su significado.',
+        a: 'HTML, CSS, JavaScript y JSON. Cada uno se analiza con un formateador adaptado al lenguaje, que vuelve a sangrar y normaliza los espacios; así el código minificado o desordenado se vuelve legible sin cambiar su significado.',
       },
       {
         q: '¿Embellecer cambia cómo se ejecuta mi código?',
@@ -98,18 +98,18 @@ export const codeBeautifierL10n: ToolL10n = {
       'tooLong': '⚠️ Die Eingabe überschreitet die unterstützte Größe (100.000 Zeichen). Kürze die Eingabe, um sie zu formatieren.',
     },
     useCases: [
-      'minimiertes JavaScript online verschönern',
-      'HTML-Formatierer mit Einrückung',
+      'minifiziertes JavaScript online verschönern',
+      'HTML mit Einrückung formatieren',
       'CSS kostenlos online de-minifizieren',
-      'JSON-Pretty-Print-Tool',
+      'JSON mit Pretty-Print formatieren',
     ],
     faqs: [
       {
         q: 'Welche Sprachen formatiert es?',
-        a: 'HTML, CSS, JavaScript und JSON. Jede wird mit einem sprachbewussten Formatter neu eingerückt und in den Abständen normalisiert, sodass minifizierter oder unordentlicher Code lesbar wird, ohne die Bedeutung zu ändern.',
+        a: 'HTML, CSS, JavaScript und JSON. Jede wird mit einem sprachspezifischen Formatierer neu eingerückt und in den Abständen normalisiert, sodass minifizierter oder unordentlicher Code lesbar wird, ohne die Bedeutung zu ändern.',
       },
       {
-        q: 'Verändert Verschönern, wie mein Code läuft?',
+        q: 'Verändert das Verschönern, wie mein Code läuft?',
         a: 'Nein. Formatieren passt nur Leerzeichen, Zeilenumbrüche und Einrückung an — es ändert keine Tokens, Logik oder Werte. Die verschönerte Ausgabe ist funktionell identisch mit der Eingabe, nur besser lesbar.',
       },
       {

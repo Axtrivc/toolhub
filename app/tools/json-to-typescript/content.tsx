@@ -98,7 +98,7 @@ const zh: ReactNode = (
       <h2>当示例数据不完整时</h2>
       <p>
         推断出的类型 <em>精确</em> 反映了你粘贴的 JSON,而非 API 可能返回的完整模式。如果某个字段在你的示例中是 <code>string</code>,但在生产环境中也可能是{' '}
-        <code>null</code>,请手动放宽其类型。对于你能控制的 API,建议使用一个包含可选和空状态的样本来生成类型,这样联合类型才能反映真实情况。
+        <code>null</code>,请手动放宽其类型。对于你能控制的 API,建议使用一个包含可选和空状态的示例来生成类型,这样联合类型才能反映真实情况。
       </p>
     </div>
   </section>
@@ -109,7 +109,7 @@ const es: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>¿Qué es esta herramienta?</h2>
     <p>
-      Escribir a mano los tipos de TypeScript para una respuesta de API grande es tedioso y propenso a errores. Esta herramienta toma cualquier JSON válido y <strong>infiere la forma de manera recursiva</strong>, generando declaraciones <code>interface</code> limpias y anidadas que puedes pegar directamente en tu base de código. Maneja objetos anidados, arrays, campos opcionales (aceptan null) e incluso arrays con tipos mezclados.
+      Escribir a mano los tipos de TypeScript para una respuesta de API grande es tedioso y propenso a errores. Esta herramienta toma cualquier JSON válido y <strong>infiere la forma de manera recursiva</strong>, generando declaraciones <code>interface</code> limpias y anidadas que puedes pegar directamente en tu base de código. Maneja objetos anidados, arrays, campos opcionales (que aceptan null) e incluso arrays con tipos mezclados.
     </p>
     <div>
       <h2>Cómo se infieren los tipos</h2>
@@ -122,7 +122,7 @@ const es: ReactNode = (
           <strong>Objetos</strong> — cada objeto se convierte en su propio <code>interface</code>, con el nombre de su clave padre en PascalCase (p. ej. <code>address</code> → <code>Address</code>). Los objetos anidados se procesan de forma recursiva, así que las respuestas con estructuras profundas producen un árbol de tipos completo.
         </li>
         <li>
-          <strong>Arrays</strong> — se tipan como el tipo del elemento más <code>[]</code>. Si todos los elementos comparten un tipo obtienes <code>string[]</code>; si difieren, obtienes una unión como{' '}
+          <strong>Arrays</strong> — se tipan como el tipo del elemento seguido de <code>[]</code>. Si todos los elementos comparten un tipo obtienes <code>string[]</code>; si difieren, obtienes una unión como{' '}
           <code>(string | number)[]</code>.
         </li>
         <li>
@@ -141,7 +141,7 @@ const es: ReactNode = (
       <h2>Cuando los datos de muestra están incompletos</h2>
       <p>
         Los tipos inferidos reflejan <em>exactamente</em> el JSON que pegaste, no el esquema completo que la API podría devolver. Si un campo es <code>string</code> en tu muestra pero también puede ser{' '}
-        <code>null</code> en producción, amplíalo manualmente. Para las API que controlas, prefiere generar los tipos a partir de una muestra que incluya estados opcionales y vacíos para que la unión capture la realidad.
+        <code>null</code> en producción, amplíalo manualmente. Para las API que controlas, prefiere generar los tipos a partir de una muestra que incluya estados opcionales y vacíos para que la unión refleje la realidad.
       </p>
     </div>
   </section>
@@ -183,8 +183,8 @@ const de: ReactNode = (
     <div>
       <h2>Wenn die Beispieldaten unvollständig sind</h2>
       <p>
-        Die abgeleiteten Typen spiegeln <em>exakt</em> den JSON-Code wider, den du eingefügt hast, nicht das vollständige Schema, das die API möglicherweise zurückgibt. Wenn ein Feld in deiner Stichprobe <code>string</code> ist, in Produktion aber auch{' '}
-        <code>null</code> sein kann, erweitere es manuell. Bei APIs, die du selbst kontrollierst, ziehe vor, Typen aus einer Stichprobe zu generieren, die optionale und leere Zustände enthält, damit die Union die Realität abbildet.
+        Die abgeleiteten Typen spiegeln <em>exakt</em> den JSON-Code wider, den du eingefügt hast, nicht das vollständige Schema, das die API möglicherweise zurückgibt. Wenn ein Feld in deinen Beispieldaten <code>string</code> ist, in Produktion aber auch{' '}
+        <code>null</code> sein kann, erweitere den Typ manuell. Bei APIs, die du selbst kontrollierst, generiere die Typen am besten aus einem Beispiel, das optionale und leere Zustände enthält, damit die Union die Realität abbildet.
       </p>
     </div>
   </section>

@@ -36,7 +36,7 @@ const en: ReactNode = (
       <h2>encodeURI vs. encodeURIComponent</h2>
       <p>
         JavaScript has two functions. <code>encodeURI</code> preserves URL-structure
-        characters (<code>/ ? &amp; =</code>) for whole URLs. <code>encodeURIComponent</code>
+        characters (<code>/ ? &amp; =</code>) for whole URLs. <code>encodeURIComponent</code>{' '}
         encodes everything, for query parameter values. This tool uses the latter, which is
         what you usually want.
       </p>
@@ -82,7 +82,7 @@ const es: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>¿Qué es esta herramienta?</h2>
     <p>
-      La codificación URL (también llamada «codificación porcentaje») convierte los caracteres especiales en un formato seguro para incluir en una URL. Los espacios se convierten en <code>%20</code>, <code>&amp;</code> se convierte en <code>%26</code>, y así sucesivamente.
+      La codificación URL (también llamada «codificación porcentual») convierte los caracteres especiales en un formato seguro para incluir en una URL. Los espacios se convierten en <code>%20</code>, <code>&amp;</code> se convierte en <code>%26</code>, y así sucesivamente.
     </p>
     <div>
       <h2>Por qué las URLs necesitan codificación</h2>

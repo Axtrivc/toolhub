@@ -1,6 +1,6 @@
 /**
  * srt-subtitle-shift 本地化 bundle —— zh / es / de
- * 覆盖:useCases + faqs
+ * 覆盖:ui + useCases + faqs
  */
 import type { ToolL10n } from '../tool-l10n'
 
@@ -9,11 +9,11 @@ export const srtSubtitleShiftL10n: ToolL10n = {
     ui: {
       'blockPlural': '块',
       'blockSingular': '块',
-      'clampClampedTo': '被钳制为 00:00:00,000。',
+      'clampClampedTo': '钳制为 00:00:00,000。',
       'clampLabel': '将负时间钳制为 00:00:00,000',
-      'clampWas': '是',
-      'clampWentBelowZero': '偏移后低于零,且',
-      'clampWere': '是',
+      'clampWas': '已被',
+      'clampWentBelowZero': '平移后低于零,',
+      'clampWere': '已被',
       'clear': '清空',
       'copy': '复制',
       'copySrt': '复制 SRT',
@@ -26,10 +26,10 @@ export const srtSubtitleShiftL10n: ToolL10n = {
       'invalidOffsetSuffix': '。',
       'offsetHint': '负数 = 字幕提前出现;正数 = 延后。',
       'offsetLabel': '偏移(秒,可为负)',
-      'parseCouldNotBeParsed': '无法解析(没有有效时间戳行),且',
-      'parseSkipped': '已跳过。',
-      'parseWas': '是',
-      'parseWere': '是',
+      'parseCouldNotBeParsed': '无法解析(没有有效时间戳行),',
+      'parseSkipped': '跳过。',
+      'parseWas': '已被',
+      'parseWere': '已被',
       'privacyNote': '🔒 100% 在客户端——你的字幕文件绝不离开浏览器。',
       'renumberLabel': '重新编号字幕',
       'resultTitle': '偏移后的 SRT',
@@ -45,7 +45,7 @@ export const srtSubtitleShiftL10n: ToolL10n = {
     faqs: [
       {
         q: '正偏移是把字幕提前还是延后?',
-        a: '正偏移是加时间,所以每条字幕都更晚开始——字幕比说话早时用这个。负偏移是减时间,把字幕提前,适合字幕滞后于音频的情况。',
+        a: '正偏移会加时间,所以每条字幕都更晚开始——适用于字幕比台词出现得早的情况。负偏移会减时间,把字幕提前,适合字幕滞后于音频的情况。',
       },
       {
         q: '它会重新编号字幕序号吗?',
@@ -53,7 +53,7 @@ export const srtSubtitleShiftL10n: ToolL10n = {
       },
       {
         q: '能剥离 HTML 和 ASS 格式标签吗?',
-        a: '能。剥离标签选项会移除行内 HTML(<i>、<b>)和 ASS 样式覆盖标签,留下干净的纯文本字幕。当播放器把标签当成可见乱码而非样式来渲染时,这个功能很有用。',
+        a: '能。剥离格式选项会移除行内 HTML(<i>、<b>)和 ASS 样式覆盖标签,留下干净的纯文本字幕。当播放器把标签当成可见乱码而非样式来渲染时,这个功能很有用。',
       },
       {
         q: '需要的偏移量怎么估?',
@@ -61,7 +61,7 @@ export const srtSubtitleShiftL10n: ToolL10n = {
       },
       {
         q: '处理后的文件能直接用吗?',
-        a: '能,输出是重新编号的标准 SRT,PotPlayer、VLC、IINA 等直接加载。整个处理在浏览器本地完成,字幕文件不上传;源文件若带 ASS 块或 ♪ 符号,勾选「剥离格式」后导入播放器更干净。',
+        a: '能,输出是重新编号的标准 SRT,VLC、MPC-HC、IINA 等直接加载。整个处理在浏览器本地完成,字幕文件不上传;源文件若带 ASS 块或 ♪ 符号,勾选「剥离格式」后导入播放器更干净。',
       },
     ],
   },
@@ -69,11 +69,11 @@ export const srtSubtitleShiftL10n: ToolL10n = {
     ui: {
       'blockPlural': 'bloques',
       'blockSingular': 'bloque',
-      'clampClampedTo': 'limitado a 00:00:00,000.',
+      'clampClampedTo': 'a 00:00:00,000.',
       'clampLabel': 'Limitar tiempos negativos a 00:00:00,000',
-      'clampWas': 'fue',
-      'clampWentBelowZero': 'quedó por debajo de cero al desplazar y',
-      'clampWere': 'fueron',
+      'clampWas': 'se limitó',
+      'clampWentBelowZero': 'al quedar por debajo de cero tras el desplazamiento,',
+      'clampWere': 'se limitaron',
       'clear': 'Limpiar',
       'copy': 'Copiar',
       'copySrt': 'Copiar SRT',
@@ -86,12 +86,12 @@ export const srtSubtitleShiftL10n: ToolL10n = {
       'invalidOffsetSuffix': '.',
       'offsetHint': 'Negativo = los subtítulos aparecen antes; positivo = más tarde.',
       'offsetLabel': 'Desfase (segundos, negativo permitido)',
-      'parseCouldNotBeParsed': 'no se pudo analizar (sin línea de tiempo válida) y',
-      'parseSkipped': 'omitido.',
-      'parseWas': 'fue',
-      'parseWere': 'fueron',
+      'parseCouldNotBeParsed': 'con error de análisis (sin línea de tiempo válida) y',
+      'parseSkipped': 'del resultado.',
+      'parseWas': 'se omitió',
+      'parseWere': 'se omitieron',
       'privacyNote': '🔒 100% en el cliente — tu archivo de subtítulos nunca sale del navegador.',
-      'renumberLabel': 'Renumerar pistas',
+      'renumberLabel': 'Renumerar entradas',
       'resultTitle': 'SRT desplazado',
       'stripLabel': 'Quitar formato (etiquetas, bloques ASS, ♪)',
       'uploadSrt': 'Subir .srt',
@@ -99,17 +99,17 @@ export const srtSubtitleShiftL10n: ToolL10n = {
     useCases: [
       'desplazar subtítulos SRT por segundos online',
       'arreglar subtítulos desincronizados',
-      'ajustador de offset de subtítulos gratis',
+      'ajustador de desfase de subtítulos gratis',
       'eliminar etiquetas HTML de archivos SRT',
     ],
     faqs: [
       {
-        q: '¿Un offset positivo adelanta o retrasa los subtítulos?',
-        a: 'Un offset positivo suma tiempo, así que cada entrada empieza más tarde — úsalo cuando los subtítulos aparecen antes que la voz. Un offset negativo resta tiempo y adelanta las entradas, para cuando van por detrás del audio.',
+        q: '¿Un desfase positivo adelanta o retrasa los subtítulos?',
+        a: 'Un desfase positivo suma tiempo, así que cada entrada empieza más tarde — úsalo cuando los subtítulos aparecen antes que la voz. Un desfase negativo resta tiempo y adelanta las entradas, para cuando van por detrás del audio.',
       },
       {
-        q: '¿Renumerar los índices de las entradas?',
-        a: 'Sí. Tras desplazar, las entradas se renumeran secuencialmente desde 1 en su nuevo orden cronológico, así la salida es siempre un archivo SRT válido y correctamente ordenado aunque los offsets muevan entradas unas respecto a otras.',
+        q: '¿Se renumeran los índices de las entradas?',
+        a: 'Sí. Tras desplazar, las entradas se renumeran secuencialmente desde 1 en su nuevo orden cronológico, así la salida es siempre un archivo SRT válido y correctamente ordenado aunque los desfases muevan las entradas unas respecto a otras.',
       },
       {
         q: '¿Puede eliminar etiquetas de formato HTML y ASS?',
@@ -117,7 +117,7 @@ export const srtSubtitleShiftL10n: ToolL10n = {
       },
       {
         q: '¿Cómo calculo el desfase necesario?',
-        a: 'Apunta a una frase concreta: mira en qué tiempo la voz dice la línea (el reproductor lo muestra) y cuándo aparece el subtítulo; la diferencia es el desfase, con 0,5 segundos de precisión basta. Si el retraso crece a lo largo del vídeo, no es un desfase: es un mismatch de FPS y el offset no lo corrige.',
+        a: 'Apunta a una frase concreta: mira en qué tiempo la voz dice la línea (el reproductor lo muestra) y cuándo aparece el subtítulo; la diferencia es el desfase, con 0,5 segundos de precisión basta. Si el retraso crece a lo largo del vídeo, no es cuestión de desfase: los FPS no coinciden y ningún desfase lo corrige.',
       },
       {
         q: '¿El archivo resultante sirve tal cual?',
@@ -132,7 +132,7 @@ export const srtSubtitleShiftL10n: ToolL10n = {
       'clampClampedTo': 'auf 00:00:00,000 begrenzt.',
       'clampLabel': 'Negative Zeiten auf 00:00:00,000 begrenzen',
       'clampWas': 'wurde',
-      'clampWentBelowZero': 'rutschte beim Verschieben unter null und',
+      'clampWentBelowZero': 'nach dem Verschieben unter null',
       'clampWere': 'wurden',
       'clear': 'Leeren',
       'copy': 'Kopieren',
@@ -145,8 +145,8 @@ export const srtSubtitleShiftL10n: ToolL10n = {
       'invalidOffsetPrefix': '⚠️ Bitte gültige Sekundenzahl eingeben, z. B. ',
       'invalidOffsetSuffix': '.',
       'offsetHint': 'Negativ = Untertitel erscheinen früher; positiv = später.',
-      'offsetLabel': 'Verschiebung (Sekunden, negativ erlaubt)',
-      'parseCouldNotBeParsed': 'konnte nicht analysiert werden (keine gültige Zeitstempelzeile) und',
+      'offsetLabel': 'Offset (Sekunden, negativ erlaubt)',
+      'parseCouldNotBeParsed': 'nicht analysierbar (keine gültige Zeitstempelzeile) und',
       'parseSkipped': 'übersprungen.',
       'parseWas': 'wurde',
       'parseWere': 'wurden',
@@ -159,7 +159,7 @@ export const srtSubtitleShiftL10n: ToolL10n = {
     useCases: [
       'SRT-Untertitel online um Sekunden verschieben',
       'nicht synchronisierte Untertitel reparieren',
-      'kostenloser Untertitel-Offset-Anpasser',
+      'Untertitel-Offset kostenlos anpassen',
       'HTML-Tags aus SRT-Datei entfernen',
     ],
     faqs: [
@@ -180,7 +180,7 @@ export const srtSubtitleShiftL10n: ToolL10n = {
         a: 'Nimm einen konkreten Satz: Wann sagt die Stimme den Text (der Player zeigt es) und wann erscheint der Untertitel? Die Differenz ist der Offset, 0,5 Sekunden Genauigkeit genügt. Wächst der Versatz im Lauf des Films, ist es kein Offset-Problem, sondern ein FPS-Mismatch — den korrigiert kein Offset.',
       },
       {
-        q: 'Lädt VLC oder PotPlayer das Ergebnis direkt?',
+        q: 'Kann ich das Ergebnis direkt verwenden?',
         a: 'Ja, die Ausgabe ist Standard-SRT mit neu nummerierten Indizes; VLC, MPC-HC oder IINA laden sie ohne Anpassung. Alles bleibt im Browser, nichts wird hochgeladen; bei ASS-Blöcken oder ♪-Symbolen im Original vorab „Format entfernen" aktivieren.',
       },
     ],

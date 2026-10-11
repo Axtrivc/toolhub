@@ -73,7 +73,7 @@ const zh: ReactNode = (
           <strong>小图标与 Logo</strong> —— 一个 2 KB 的 Logo 内联在 CSS 中,可以省去一次网络往返。
         </li>
         <li>
-          <strong>邮件签名与电子报</strong> —— 许多邮件客户端会屏蔽外部图片,内联素材能稳定渲染。
+          <strong>邮件签名与邮件简报</strong> —— 许多邮件客户端会屏蔽外部图片,内联素材能稳定渲染。
         </li>
         <li>
           <strong>单文件演示</strong> —— 一个无外部依赖的自包含 HTML 文件,便于分享和归档。
@@ -86,7 +86,7 @@ const zh: ReactNode = (
     <div>
       <h2>何时不要使用 data URI</h2>
       <p>
-        Base64 编码会让文件体积膨胀大约 <strong>33%</strong>,而一个大的 data URI 会阻塞解析器,直到它被解码完才能渲染页面。对于超过几 KB 的内容——首屏大图、商品图片、视频——请改用真实文件并配合恰当的缓存。此外,data URI 无法被独立缓存:如果同一张图片出现在 50 个页面上,每个页面都会自带一份副本。
+        Base64 编码会让文件体积膨胀大约 <strong>33%</strong>,而一个大的 data URI 会阻塞解析器,页面要等它解码完才能渲染。对于超过几 KB 的内容——首屏大图、商品图片、视频——请改用真实文件并配合恰当的缓存。此外,data URI 无法被独立缓存:如果同一张图片出现在 50 个页面上,每个页面都会自带一份副本。
       </p>
     </div>
     <div>
@@ -109,23 +109,23 @@ const es: ReactNode = (
       <h2>Cuándo usar una data URI</h2>
       <ul>
         <li>
-          <strong>Iconos y logos pequeños</strong> — un logo de 2 KB ahorra un viaje de red al vivir en línea dentro del CSS.
+          <strong>Iconos y logos pequeños</strong> — un logo de 2 KB ahorra una ida y vuelta de red al ir inline en el CSS.
         </li>
         <li>
-          <strong>Firmas de correo y newsletters</strong> — muchos clientes de correo bloquean las imágenes externas, así que los recursos en línea se renderizan de forma fiable.
+          <strong>Firmas de correo y newsletters</strong> — muchos clientes de correo bloquean las imágenes externas, así que los recursos inline se renderizan de forma fiable.
         </li>
         <li>
           <strong>Demos de un solo archivo</strong> — un archivo HTML autocontenido, sin dependencias externas, es fácil de compartir y archivar.
         </li>
         <li>
-          <strong>Payloads JSON</strong> — las API que aceptan subidas de imágenes a veces quieren una cadena Base64 en el cuerpo JSON en lugar de datos de formulario multipart.
+          <strong>Payloads JSON</strong> — las API que aceptan subidas de imágenes a veces esperan una cadena Base64 en el cuerpo JSON en lugar de datos de formulario multipart.
         </li>
       </ul>
     </div>
     <div>
       <h2>Cuándo NO usar una data URI</h2>
       <p>
-        La codificación Base64 infla el tamaño del archivo aproximadamente un <strong>33 %</strong>, y una data URI grande bloquea el analizador e impide que la página se renderice hasta que se decodifica. Para cualquier cosa de más de unos pocos kilobytes — fotos principales, imágenes de producto, vídeos — sirve mejor un archivo real con caché adecuada. Además, las data URIs no se pueden cachear de forma independiente: si la misma imagen aparece en 50 páginas, cada una lleva su propia copia.
+        La codificación Base64 infla el tamaño del archivo aproximadamente un <strong>33 %</strong>, y una data URI grande bloquea el analizador e impide que la página se renderice hasta que se decodifica. Para cualquier cosa de más de unos pocos kilobytes — fotos principales, imágenes de producto, vídeos — sirve en su lugar un archivo real con caché adecuada. Además, las data URIs no se pueden cachear de forma independiente: si la misma imagen aparece en 50 páginas, cada una lleva su propia copia.
       </p>
     </div>
     <div>
@@ -148,7 +148,7 @@ const de: ReactNode = (
       <h2>Wann du eine Data URI verwenden solltest</h2>
       <ul>
         <li>
-          <strong>Kleine Icons &amp; Logos</strong> — ein 2-KB-Logo spart einen Netzwerk-Roundtrip, weil es inline im CSS lebt.
+          <strong>Kleine Icons &amp; Logos</strong> — ein 2-KB-Logo spart einen Netzwerk-Roundtrip, weil es inline im CSS steckt.
         </li>
         <li>
           <strong>E-Mail-Signaturen &amp; Newsletter</strong> — viele E-Mail-Clients blockieren externe Bilder, daher rendern Inline-Assets zuverlässig.
@@ -164,7 +164,7 @@ const de: ReactNode = (
     <div>
       <h2>Wann du KEINE Data URI verwenden solltest</h2>
       <p>
-        Die Base64-Kodierung bläht die Dateigröße um etwa <strong>33 %</strong> auf, und eine große Data URI blockiert den Parser daran, die Seite zu rendern, bis sie dekodiert ist. Für alles über wenige Kilobyte — Hero-Fotos, Produktbilder, Videos — liefere stattdessen eine echte Datei mit richtigem Caching aus. Außerdem lassen sich Data URIs nicht unabhängig cachen: Wenn dasselbe Bild auf 50 Seiten erscheint, trägt jede Seite ihre eigene Kopie.
+        Die Base64-Kodierung bläht die Dateigröße um etwa <strong>33 %</strong> auf, und eine große Data URI blockiert den Parser, sodass die Seite erst gerendert wird, wenn sie dekodiert ist. Für alles, was über ein paar Kilobyte hinausgeht — Hero-Fotos, Produktbilder, Videos —, liefere stattdessen eine echte Datei mit richtigem Caching aus. Außerdem lassen sich Data URIs nicht unabhängig cachen: Wenn dasselbe Bild auf 50 Seiten erscheint, trägt jede Seite ihre eigene Kopie.
       </p>
     </div>
     <div>

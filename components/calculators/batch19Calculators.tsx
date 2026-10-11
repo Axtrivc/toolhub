@@ -126,7 +126,7 @@ export const RothIraCalculatorClient = makeCalculatorClient({
       formatY: (n) => fmtUSD(n, 0),
     }
   },
-  note: '💡 The 2025 IRA limit is $7,000 ($8,000 if 50+). Roth vs Traditional is only about tax timing: same limit, same growth — the winner is decided by your tax rate today vs. retirement.',
+  note: '💡 The 2026 IRA limit is $7,500 ($8,600 if 50+). Roth vs Traditional is only about tax timing: same limit, same growth — the winner is decided by your tax rate today vs. retirement.',
 })
 
 // ───────────────────────────────────────────
@@ -494,7 +494,7 @@ export const DogFoodCalculatorClient = makeCalculatorClient({
     const gramsPerCup = toNumStrict(v.gramsPerCup)
     if ([weight, factor, density, gramsPerCup].some((n) => Number.isNaN(n)) || !(weight > 0) || weight > 120 || !(factor > 0) || !(density > 0) || !(gramsPerCup > 0)) {
       return {
-        mer: `⚠️ ${T('errInvalid', 'Enter a weight of 0.5–120 kg and positive label values')}`,
+        mer: `⚠️ ${T('errInvalid', 'Enter a positive weight up to 120 kg and positive label values')}`,
         rer: '—', activityExtra: '—', cups: '—', grams: '—',
       }
     }

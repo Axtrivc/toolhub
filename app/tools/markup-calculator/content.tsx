@@ -66,7 +66,7 @@ const zh: ReactNode = (
       <ul>
         <li><strong>食品杂货:</strong>加价率 10-15%,利润率约 10%</li>
         <li><strong>餐厅:</strong>毛利率 60-70%(食材成本约占菜单售价的 30-40%)</li>
-        <li><strong>服装:</strong>加价率 100-300%(keystone = 100% = 50% 利润率)</li>
+        <li><strong>服装:</strong>加价率 100-300%(翻倍定价 keystone:加价 100% = 利润率 50%)</li>
         <li><strong>电子产品:</strong>加价率 20-40%,利润率薄</li>
         <li><strong>珠宝:</strong>加价率 200-400%</li>
       </ul>
@@ -122,9 +122,9 @@ const de: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>Was ist dieses Werkzeug?</h2>
     <p>
-      Dieser Rechner ermittelt deinen Verkaufspreis und deine Gewinnmarge aus deinen Kosten und der
-      Aufschlagsquote. Er ist unerlässlich für Einzelhändler, Restaurants und jedes Unternehmen, das
-      Produkte bepreist.
+      Dieser Rechner ermittelt deinen Verkaufspreis und deine Gewinnmarge aus deinen Kosten und dem
+      prozentualen Aufschlag. Er ist unerlässlich für Einzelhändler, Restaurants und jedes Unternehmen,
+      das Preise für seine Produkte festlegt.
     </p>
     <div>
       <h2>Aufschlag vs. Marge: der entscheidende Unterschied</h2>

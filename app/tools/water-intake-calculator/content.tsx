@@ -90,7 +90,7 @@ const zh: ReactNode = (
     <div>
       <h2>水喝多了会有问题吗?</h2>
       <p>
-        是的。<strong>低钠血症</strong>(因饮水过量导致的血钠过低)虽然罕见但很危险,已有耐力运动员因饮水远超流失量而发病的案例。除非医生另有建议,否则不要为了硬灌而喝下超过口渴需求的几升水。
+        是的。<strong>低钠血症</strong>(因饮水过量导致的血钠过低)虽然罕见但很危险,已有耐力运动员因饮水远超流失量而发病的案例。除非医生另有建议,否则不要在口渴之外硬灌好几升水。
       </p>
     </div>
   </section>
@@ -152,7 +152,7 @@ const de: ReactNode = (
     <h2>Worum geht es bei diesem Werkzeug?</h2>
     <p>
       Dieser Rechner schätzt, wie viel Wasser du täglich trinken solltest, basierend auf
-      Körpergewicht, Bewegung und Klima. Er verwendet die oft zitierte Richtlinie von ~35 ml pro kg
+      Körpergewicht, Bewegung und Klima. Er verwendet die häufig zitierte Richtlinie von ~35 ml pro kg
       Körpergewicht, angepasst an Aktivität und Hitze.
     </p>
 
@@ -179,8 +179,9 @@ const de: ReactNode = (
       <h2>Hör auf deinen Körper</h2>
       <p>
         Formeln sind Ausgangspunkte, keine Regeln. Durst ist für die meisten Menschen ein
-        zuverlässiges Signal. Achte auf die Urinfarbe — hellgelb bedeutet, du bist gut hydriert;
-        dunkelgelb bedeutet, trink mehr. Klarer Urin kann bedeuten, dass du überhydriert bist.
+        zuverlässiges Signal. Achte auf die Urinfarbe — hellgelb bedeutet, dass du gut hydriert
+        bist; dunkelgelb bedeutet, dass du mehr trinken solltest. Klarer Urin kann bedeuten, dass
+        du überhydriert bist.
       </p>
     </div>
 

@@ -27,7 +27,7 @@ export const loanCalculatorL10n: ToolL10n = {
       },
       {
         q: '什么是等额本息(摊销)?',
-        a: '等额本息是指以相等的金额分期偿还贷款。每期还款在利息(借款成本)和本金(减少欠款)之间分配。上方的明细表展示了这种分配如何随时间变化。',
+        a: '等额本息是指以相等的金额分期偿还贷款。每期还款在利息(借款成本)和本金(减少欠款)之间分配。上方的还款明细表展示了这种分配如何随时间变化。',
       },
       {
         q: '多少利率算好利率?',
@@ -58,9 +58,9 @@ export const loanCalculatorL10n: ToolL10n = {
       'preset.3': '房贷 ($320k @ 6.8%)',
       lineBalance: '剩余欠款',
       optAll: '全部 ',
-      first12Months: '前 12 期',
+      first12Months: '前 12 个月',
       showAll: '显示全部 ',
-      showFirst12: '显示前 12 期',
+      showFirst12: '显示前 12 个月',
       errNegativeRate: '利率不能为负——请输入 0% 或以上。',
       errTermTooLong: '贷款期限过长——最长 50 年(600 期)。',
       summaryErrorPrefix: '贷款计算器: ',
@@ -92,8 +92,8 @@ export const loanCalculatorL10n: ToolL10n = {
   // ──────────────────────────── Español ────────────────────────────
   es: {
     useCases: [
-      'ver un simulador de préstamo con cuadro de amortización',
-      'calcular la cuota mensual de un préstamo personal',
+      'ver un simulador de préstamo con tabla de amortización',
+      'calcular el pago mensual de un préstamo personal',
       'simular la amortización de un préstamo de coche',
       'comparar planes de pago según el tipo de préstamo',
     ],
@@ -104,7 +104,7 @@ export const loanCalculatorL10n: ToolL10n = {
       },
       {
         q: '¿Qué es la amortización?',
-        a: 'La amortización es el proceso de devolver un préstamo en cuotas iguales. Cada pago se reparte entre intereses (el coste de pedir prestado) y capital (reducir lo que debes). El cuadro anterior muestra cómo evoluciona ese reparto a lo largo del tiempo.',
+        a: 'La amortización es el proceso de devolver un préstamo en cuotas iguales. Cada pago se reparte entre intereses (el coste de pedir prestado) y capital (reducir lo que debes). La tabla anterior muestra cómo evoluciona ese reparto a lo largo del tiempo.',
       },
       {
         q: '¿Qué tasa de interés es buena?',
@@ -114,7 +114,7 @@ export const loanCalculatorL10n: ToolL10n = {
     formula: {
       formula: FORMULA,
       explain:
-        'Cuota mensual de amortización constante. P = capital, r = tasa mensual (anual ÷ 12), n = número total de meses. El resultado M es la cuota mensual fija.',
+        'Pago mensual de amortización constante. P = capital, r = tasa mensual (anual ÷ 12), n = número total de meses. El resultado M es el pago mensual fijo.',
     },
     ui: {
       inputs: 'Entradas',
@@ -128,16 +128,16 @@ export const loanCalculatorL10n: ToolL10n = {
       overMonths: 'Durante {n} meses',
       totalPaid: 'Total pagado',
       principalPlusInterest: 'Capital + intereses',
-      amortTitle: 'Calendario de amortización ',
+      amortTitle: 'Tabla de amortización ',
       chartTitleBalance: 'Saldo del préstamo en el tiempo',
       'preset.0': 'Préstamo personal ($10k al 9%)',
       'preset.1': 'Consolidar deuda ($25k al 7%)',
       'preset.2': 'Coche ($25k al 7.5%)',
       'preset.3': 'Hipoteca ($320k al 6.8%)',
       lineBalance: 'Saldo pendiente',
-      optAll: 'todas ',
+      optAll: 'todos ',
       first12Months: 'primeros 12 meses',
-      showAll: 'Mostrar todas ',
+      showAll: 'Mostrar los ',
       showFirst12: 'Mostrar primeros 12',
       errNegativeRate: 'La tasa de interés no puede ser negativa — introduce un 0% o más.',
       errTermTooLong: 'El plazo del préstamo es demasiado largo — 50 años (600 meses) como máximo.',
@@ -178,7 +178,7 @@ export const loanCalculatorL10n: ToolL10n = {
     faqs: [
       {
         q: 'Enthält dieser Rechner Steuern und Versicherungen?',
-        a: 'Nein. Er rechnet nur Kredit und Zinsen. Bei einer echten Hypothek zahlst du zusätzlich Grundsteuer, Wohngebäudeversicherung und eventuell PMI oder Hausgeld — das kann die monatliche Rate um Hunderte erhöhen.',
+        a: 'Nein. Er berechnet nur Zins und Tilgung. Bei einer echten Hypothek zahlst du zusätzlich Grundsteuer, Wohngebäudeversicherung und eventuell PMI oder Hausgeld — das kann die monatliche Rate um Hunderte Dollar erhöhen.',
       },
       {
         q: 'Was ist Tilgung?',
@@ -215,7 +215,7 @@ export const loanCalculatorL10n: ToolL10n = {
       lineBalance: 'Restschuld',
       optAll: 'alle ',
       first12Months: 'erste 12 Monate',
-      showAll: 'Alle anzeigen ',
+      showAll: 'Zeige alle ',
       showFirst12: 'Erste 12 anzeigen',
       errNegativeRate: 'Der Zinssatz darf nicht negativ sein — gib 0% oder mehr ein.',
       errTermTooLong: 'Die Laufzeit ist zu lang — maximal 50 Jahre (600 Monate).',

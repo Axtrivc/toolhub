@@ -74,20 +74,20 @@ const es: ReactNode = (
     <div>
       <h2>Conversiones comunes</h2>
       <ul>
-        <li>1 atmósfera (atm) = 101,325 Pa = 1.01325 bar = 14.696 PSI = 760 torr</li>
-        <li>1 bar = 100,000 Pa = 14.5038 PSI</li>
-        <li>1 PSI = 6,894.76 Pa = 0.0689 bar</li>
-        <li>1 torr ≈ 133.322 Pa (aproximadamente 1 mmHg)</li>
+        <li>1 atmósfera (atm) = 101.325 Pa = 1,01325 bar = 14,696 PSI = 760 torr</li>
+        <li>1 bar = 100.000 Pa = 14,5038 PSI</li>
+        <li>1 PSI = 6.894,76 Pa = 0,0689 bar</li>
+        <li>1 torr ≈ 133,322 Pa (aproximadamente 1 mmHg)</li>
       </ul>
     </div>
     <div>
       <h2>Presiones reales</h2>
       <ul>
-        <li>Neumático de coche: 30-35 PSI (~2-2.4 bar)</li>
+        <li>Neumático de coche: 30-35 PSI (~2-2,4 bar)</li>
         <li>Neumático de bicicleta: 40-120 PSI según el tipo</li>
         <li>Atmosférica a nivel del mar: 1 atm = 1013 mbar</li>
         <li>Botella de buceo (llena): ~200 bar</li>
-        <li>Cabina de avión en altitud: ~0.75 atm</li>
+        <li>Cabina de avión en altitud: ~0,75 atm</li>
       </ul>
     </div>
     <div>
@@ -101,24 +101,24 @@ const es: ReactNode = (
 const de: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>Was ist dieses Werkzeug?</h2>
-    <p>Dieses Werkzeug rechnet zwischen Druckeinheiten um: <strong>Pascal</strong>, <strong>Bar</strong>, <strong>PSI</strong>, <strong>Atmosphären</strong> und <strong>Torr</strong>. Druck spielt eine Rolle bei allem, vom Reifenaufpumpen bis zur Wettervorhersage.</p>
+    <p>Dieses Werkzeug rechnet zwischen Druckeinheiten um: <strong>Pascal</strong>, <strong>Bar</strong>, <strong>PSI</strong>, <strong>Atmosphären</strong> und <strong>Torr</strong>. Druck spielt eine Rolle bei allem, vom Aufpumpen der Reifen bis zur Wettervorhersage.</p>
     <div>
       <h2>Häufige Umrechnungen</h2>
       <ul>
-        <li>1 Atmosphäre (atm) = 101,325 Pa = 1.01325 bar = 14.696 PSI = 760 torr</li>
-        <li>1 bar = 100,000 Pa = 14.5038 PSI</li>
-        <li>1 PSI = 6,894.76 Pa = 0.0689 bar</li>
-        <li>1 torr ≈ 133.322 Pa (ungefähr 1 mmHg)</li>
+        <li>1 Atmosphäre (atm) = 101.325 Pa = 1,01325 bar = 14,696 PSI = 760 Torr</li>
+        <li>1 bar = 100.000 Pa = 14,5038 PSI</li>
+        <li>1 PSI = 6.894,76 Pa = 0,0689 bar</li>
+        <li>1 Torr ≈ 133,322 Pa (ungefähr 1 mmHg)</li>
       </ul>
     </div>
     <div>
       <h2>Reale Drücke</h2>
       <ul>
-        <li>Autoreifen: 30-35 PSI (~2-2.4 bar)</li>
+        <li>Autoreifen: 30-35 PSI (~2-2,4 bar)</li>
         <li>Fahrradreifen: 40-120 PSI je nach Typ</li>
         <li>Atmosphärendruck auf Meereshöhe: 1 atm = 1013 mbar</li>
         <li>Tauchflasche (voll): ~200 bar</li>
-        <li>Flugzeugkabine in der Höhe: ~0.75 atm</li>
+        <li>Flugzeugkabine in der Höhe: ~0,75 atm</li>
       </ul>
     </div>
     <div>

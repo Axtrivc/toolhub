@@ -49,10 +49,10 @@ const es: ReactNode = (
 // ──────────────────────────── Deutsch ────────────────────────────
 const de: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
-    <h2>Warum Konstantzeit wichtig ist</h2>
+    <h2>Warum zeitkonstante Vergleiche wichtig sind</h2>
     <p>Ein naiver Vergleich bricht beim ersten abweichenden Byte mit false ab, die Antwortzeit verrät also, wie viele führende Zeichen übereinstimmen. Timing-Angriffe haben genau das gegen Signaturprüfungen ausgenutzt; XOR-Akkumulation über alle Bytes beseitigt das Signal.</p>
     <h2>Downloads prüfen</h2>
-    <p>Publisher legen SHA-256-Digeste neben ihre Releases, damit du beschädigte oder manipulierte Dateien erwischst. Berechne den lokalen Hash (sha256sum, shasum -a 256) und füge beide Seiten hier ein.</p>
+    <p>Publisher legen SHA-256-Digests neben ihre Releases, damit du beschädigte oder manipulierte Dateien erwischst. Berechne den lokalen Hash (sha256sum, shasum -a 256) und füge beide Seiten hier ein.</p>
     <h2>Zuerst normalisieren</h2>
     <p>Hashes kommen in Groß- oder Kleinschreibung, manchmal paarweise mit Leerzeichen (Windows-certutil-Stil). Beide Felder werden vor dem Vergleich normalisiert — Formatierung erzeugt daher nie eine falsche Nichtübereinstimmung.</p>
   </section>

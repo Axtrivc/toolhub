@@ -1,6 +1,7 @@
 /**
  * speed-converter 本地化 bundle —— zh / es / de
- * 覆盖:faqs + useCases(client = makeUnitConverter,不 locale-aware,UI 保持英文)
+ * 覆盖:faqs + ui + useCases(client = makeUnitConverter,slug 已注册;
+ * 键用工厂 unit.* 口径——unit.<key> 同时喂 From/To 下拉、结果卡单位、All units 面板)
  */
 import type { ToolL10n } from '../tool-l10n'
 
@@ -62,7 +63,7 @@ export const speedConverterL10n: ToolL10n = {
     faqs: [
       { q: 'Wie rechne ich mph in km/h um?', a: 'Multipliziere mph mit 1,609 für km/h. Umgekehrt multipliziere km/h mit 0,6214 für mph. Also: 60 mph ≈ 96,6 km/h und 100 km/h ≈ 62,1 mph. Das sind die zwei häufigsten Tempolimit-Einheiten weltweit.' },
       { q: 'Was ist ein Knoten und wer verwendet ihn?', a: 'Ein Knoten ist eine Seemeile pro Stunde (1,852 km/h oder 1,151 mph). Er ist die Standard-Einheit in der Luftfahrt und Schifffahrt, weil Seemeilen auf dem Erdumfang basieren und Navigationsberechnungen einfacher machen.' },
-      { q: 'Wie schnell ist Mach 1?', a: 'Mach 1 ist die Schallgeschwindigkeit, etwa 1.225 km/h (761 mph) auf Meereshöhe bei 15 °C. Sie ändert sich mit Höhe und Temperatur, da die Schallgeschwindigkeit von der Luftdichte abhängt. „Mach" ist das Verhältnis der lokalen Geschwindigkeit zur lokalen Schallgeschwindigkeit, keine feste Zahl.' },
+      { q: 'Wie schnell ist Mach 1?', a: 'Mach 1 ist die Schallgeschwindigkeit, etwa 1.225 km/h (761 mph) auf Meereshöhe bei 15 °C. Sie ändert sich mit Höhe und Temperatur, da die Schallgeschwindigkeit von der Luftdichte abhängt. „Mach“ ist das Verhältnis der lokalen Geschwindigkeit zur lokalen Schallgeschwindigkeit, keine feste Zahl.' },
     ],
   },
 }

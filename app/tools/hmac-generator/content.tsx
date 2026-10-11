@@ -28,7 +28,7 @@ const en: ReactNode = (
 const zh: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>HMAC 与普通哈希的区别</h2>
-    <p>单独的 SHA-256 意味着任何人都能对篡改后的消息重新算出摘要。HMAC 把一个密钥折进计算里,没有密钥就无法伪造——这正是 Webhook 采用它的原因。</p>
+    <p>单独的 SHA-256 意味着任何人都能对篡改后的消息重新算出摘要。HMAC 在计算中混入一个密钥,没有密钥就无法伪造——这正是 Webhook 采用它的原因。</p>
     <h2>验证 Webhook 签名</h2>
     <p>Stripe、GitHub 和 Slack 都用你的签名密钥对原始请求体计算 HMAC-SHA256 来签名。粘贴一字不差的原始请求体(而不是重新序列化的 JSON),再把算出的 hex 与请求头里的值比对。</p>
     <h2>hex 与 base64 输出</h2>
@@ -56,13 +56,13 @@ const es: ReactNode = (
 const de: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>HMAC gegenüber purem Hashing</h2>
-    <p>Ein nackter SHA-256 erlaubt jedem, den Digest einer veränderten Nachricht neu zu berechnen. HMAC faltet einen geheimen Schlüssel in die Berechnung, wodurch Fälschung ohne den Schlüssel praktisch aussichtslos ist — deshalb nutzen Webhooks es.</p>
+    <p>Ein nackter SHA-256 erlaubt jedem, den Digest einer veränderten Nachricht neu zu berechnen. HMAC mischt einen geheimen Schlüssel in die Berechnung ein, wodurch Fälschung ohne den Schlüssel praktisch aussichtslos ist — deshalb nutzen Webhooks es.</p>
     <h2>Webhook-Signaturen prüfen</h2>
     <p>Stripe, GitHub und Slack signieren Payloads als HMAC-SHA256 des Raw-Bodys mit deinem Signing-Secret. Füge den exakten Raw-Body ein (nicht neu serialisiertes JSON) und vergleiche den berechneten Hex-Wert mit dem Header.</p>
     <h2>Hex- vs. Base64-Ausgabe</h2>
     <p>Dieselben Bytes, andere Kodierung. Die Dienste unterscheiden sich: Stripe zeigt Vergleiche im Hex-Stil, AWS SigV4 nutzt Hex, OAuth1 nutzt Base64. Dieses Werkzeug liefert beide und erspart den Konvertierungsschritt.</p>
     <h2>Schlüsselhygiene</h2>
-    <p>Kurze Secrets untergraben HMAC. Nutze 32+ zufällige Bytes. Die Rotation eines geleakten Schlüssels invalidiert alte Signaturen sofort — berechne nach jeder Rotation zuerst die neue erwartete Signatur, bevor du Missmatches debuggst.</p>
+    <p>Kurze Secrets untergraben HMAC. Nutze 32+ zufällige Bytes. Die Rotation eines geleakten Schlüssels invalidiert alte Signaturen sofort — berechne nach jeder Rotation zuerst die neue erwartete Signatur, bevor du Abweichungen untersuchst.</p>
   </section>
 )
 

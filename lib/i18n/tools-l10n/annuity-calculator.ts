@@ -52,11 +52,11 @@ export const annuityCalculatorL10n: ToolL10n = {
       formula: 'PMT = P × [ r(1+r)^n / ((1+r)^n − 1) ]',
       explain: 'Feste Rate (PMT), die einen Barwert P über n Perioden zum Zins r tilgt — dieselbe Tilgungsformel wie bei einem Kredit, hier für die Auszahlungsplanung einer Annuität.',
     },
-    useCases: ['planen, wie viele Jahre das Entsparen in der Rente reicht', 'zwischen Einmalbetrag und Rente wählen', 'Pensionen oder Strukturierte Vergleiche bewerten', 'pro Jahr und Monat berechnen, was du entnehmen kannst'],
+    useCases: ['planen, wie viele Jahre das Entsparen in der Rente reicht', 'zwischen Einmalbetrag und Rente wählen', 'Pensionen oder strukturierte Abfindungen bewerten', 'nach Jahren berechnen, wie viel du monatlich entnehmen kannst'],
     faqs: [
       { q: 'Was, wenn ich länger als N Jahre lebe?', a: 'Dann ist die Rente aufgebraucht. Das ist das Kernrisiko selbst verwalteter Entnahmen. Gewerbliche Renten von Versicherungen zahlen oft lebenslang, aber zu niedrigeren Sätzen, weil sie das Langlebigkeitsrisiko über viele Käufer streuen.' },
       { q: 'Welche Rendite sollte ich für die Rente annehmen?', a: 'Vorsichtige Planer rechnen mit 4-5 %, um auf der sicheren Seite zu sein, weil das Rentengeld Marktrückgängen früh in der Rente standhalten muss (Sequenzrisiko). Mit optimistischen 7 % wirkt die Auszahlung größer, aber das Risiko, das Geld zu überleben, steigt. Rechne beide Szenarien.' },
-      { q: 'Lohnt sich eine sofortbeginnende Rente?', a: 'Es hängt von deiner Lebenserwartung und dem Bedarf an garantiertem Einkommen ab. Renten glänzen, wenn du lange zu leben erwartest, weil der Versicherer weiter zahlt, auch wenn du das Versicherungsalter überlebst. Der Preis ist der Verlust des Zugriffs auf den Einmalbetrag und weniger für die Erben.' },
+      { q: 'Lohnt sich eine sofortbeginnende Rente?', a: 'Es hängt von deiner Lebenserwartung und dem Bedarf an garantiertem Einkommen ab. Renten glänzen, wenn du lange zu leben erwartest, weil der Versicherer weiter zahlt, auch wenn du den versicherungsmathematischen Durchschnitt überlebst. Der Preis ist der Verlust des Zugriffs auf den Einmalbetrag und weniger für die Erben.' },
     ],
     ui: {
       errYears: 'Gib eine Anzahl von Jahren größer als 0 ein',

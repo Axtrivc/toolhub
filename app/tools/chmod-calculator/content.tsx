@@ -54,7 +54,7 @@ const en: ReactNode = (
         bit</strong> — without it you can list names (<code>r</code>) but cannot enter or access anything inside.
         Also note <code>chmod</code> is not recursive unless you pass <code>-R</code>, and recursive apply-every
         mode to a tree mixes files and folders — use{' '}
-        <code>find . -type d -exec chmod 755 {} +</code> and a matching <code>-type f</code> pass instead.
+        <code>{'find . -type d -exec chmod 755 {} +'}</code> and a matching <code>-type f</code> pass instead.
       </p>
     </div>
   </section>
@@ -71,21 +71,21 @@ const zh: ReactNode = (
     <div>
       <h2>读懂八进制权限</h2>
       <p>
-        每个八进制位都是 <strong>读 = 4、写 = 2、执行 = 1</strong> 的加和,三个位依次对应所有者、组和其他人。因此 <code>755</code> 表示所有者拥有 4+2+1(全部权限),而组和其他人拥有 4+1(读 + 执行)——这是脚本和 Web 目录的标准权限。<code>644</code>(所有者可读写,其他人只读)是普通文件的默认权限,而 <code>600</code> 将文件锁定为仅所有者可访问——这是 SSH 私钥要求的权限模式。
+        每个八进制位都是 <strong>读 = 4、写 = 2、执行 = 1</strong> 的加和,三个位依次对应属主、属组和其他人。因此 <code>755</code> 表示属主拥有 4+2+1(全部权限),而属组和其他人拥有 4+1(读 + 执行)——这是脚本和 Web 目录的标准权限。<code>644</code>(属主可读写,其他人只读)是普通文件的默认权限,而 <code>600</code> 将文件锁定为仅属主可访问——这是 SSH 私钥要求的权限模式。
       </p>
     </div>
 
     <div>
       <h2>特殊位:setuid、setgid、sticky</h2>
       <p>
-        第四个前导八进制位编码了三个特殊标志。<strong>setuid</strong>(4)让可执行文件以文件所有者的权限运行——<code>passwd</code> 正是借此编辑 <code>/etc/shadow</code>。<strong>setgid</strong>(2)对组起到同样作用,当作用于目录时,它会强制新建文件继承该目录的组。<strong>sticky 位</strong>(1)作用于目录时,只允许文件所有者删除该文件——这对 <code>/tmp</code>(<code>1777</code>)等共享文件夹至关重要。在符号表示中,它们叠加在执行位上,显示为 <code>s</code>/<code>S</code> 和 <code>t</code>/<code>T</code>。
+        第四个前导八进制位编码了三个特殊标志。<strong>setuid</strong>(4)让可执行文件以文件属主的权限运行——<code>passwd</code> 正是借此编辑 <code>/etc/shadow</code>。<strong>setgid</strong>(2)对属组起到同样作用,当作用于目录时,它会强制新建文件继承该目录的属组。<strong>sticky 位</strong>(1)作用于目录时,只允许文件属主删除该文件——这对 <code>/tmp</code>(<code>1777</code>)等共享文件夹至关重要。在符号表示中,它们叠加在执行位上,显示为 <code>s</code>/<code>S</code> 和 <code>t</code>/<code>T</code>。
       </p>
     </div>
 
     <div>
       <h2>需要避免的常见陷阱</h2>
       <p>
-        慎用 <code>chmod 777</code>:全局可写的文件是典型的安全漏洞,而真正的解决办法通常是用 <code>chown</code> 纠正属主。请记住<strong>目录需要执行位</strong>——没有它,你能列出名称(<code>r</code>),却无法进入或访问其中的任何内容。另外,除非传入 <code>-R</code>,否则 <code>chmod</code> 不会递归执行;而对整个目录树应用统一的权限模式会混淆文件与文件夹——请改用 <code>find . -type d -exec chmod 755 {} +</code>,并配合一次对应的 <code>-type f</code> 处理。
+        慎用 <code>chmod 777</code>:全局可写的文件是典型的安全漏洞,而真正的解决办法通常是用 <code>chown</code> 纠正属主。请记住<strong>目录需要执行位</strong>——没有它,你能列出名称(<code>r</code>),却无法进入或访问其中的任何内容。另外,除非传入 <code>-R</code>,否则 <code>chmod</code> 不会递归处理;而对整个目录树应用统一的权限模式会混淆文件与文件夹——请改用 <code>{'find . -type d -exec chmod 755 {} +'}</code>,并配合一次对应的 <code>-type f</code> 处理。
       </p>
     </div>
   </section>
@@ -116,7 +116,7 @@ const es: ReactNode = (
     <div>
       <h2>Errores comunes que conviene evitar</h2>
       <p>
-        Resiste <code>chmod 777</code>: los archivos escribibles por todos son un agujero de seguridad clásico, y la solución real suele ser corregir la propiedad con <code>chown</code>. Recuerda que <strong>los directorios necesitan el bit de ejecución</strong> — sin él puedes listar los nombres (<code>r</code>), pero no entrar ni acceder a nada de su interior. Ten en cuenta también que <code>chmod</code> no es recursivo a menos que pases <code>-R</code>, y aplicar recursivamente un único modo a un árbol mezcla archivos y carpetas — usa <code>find . -type d -exec chmod 755 {} +</code> y una pasada <code>-type f</code> equivalente en su lugar.
+        Evita <code>chmod 777</code>: los archivos escribibles por todos son un agujero de seguridad clásico, y la solución real suele ser corregir la propiedad con <code>chown</code>. Recuerda que <strong>los directorios necesitan el bit de ejecución</strong> — sin él puedes listar los nombres (<code>r</code>), pero no entrar ni acceder a nada de su interior. Ten en cuenta también que <code>chmod</code> no es recursivo a menos que pases <code>-R</code>, y aplicar recursivamente un único modo a un árbol mezcla archivos y carpetas — usa <code>{'find . -type d -exec chmod 755 {} +'}</code> y una pasada <code>-type f</code> equivalente en su lugar.
       </p>
     </div>
   </section>
@@ -127,27 +127,27 @@ const de: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>Was ist dieses Tool?</h2>
     <p>
-      Linux-Dateirechte legen fest, wer jede Datei lesen, beschreiben oder ausführen darf, und <code>chmod</code> ist der Befehl, um sie zu ändern. Dieser Rechner verwandelt die abstrakte Oktal- und Symbolnotation in ein klickbares Raster: Setze die Häkchen und sieh sofort den Oktalwert (<code>755</code>), die Symbolform (<code>rwxr-xr-x</code>) und einen fertigen <code>chmod</code>-Befehl zum Einfügen. Es funktioniert auch umgekehrt — füge <code>644</code> oder <code>rw-r--r--</code> ein und das Raster aktualisiert sich. Alles läuft lokal in deinem Browser.
+      Linux-Dateirechte legen fest, wer jede Datei lesen, schreiben oder ausführen darf, und <code>chmod</code> ist der Befehl, um sie zu ändern. Dieser Rechner verwandelt die abstrakte Oktal- und Symbolnotation in ein klickbares Raster: Setze die Häkchen und sieh sofort den Oktalwert (<code>755</code>), die Symbolform (<code>rwxr-xr-x</code>) und einen fertigen <code>chmod</code>-Befehl zum Einfügen. Es funktioniert auch umgekehrt — füge <code>644</code> oder <code>rw-r--r--</code> ein und das Raster aktualisiert sich. Alles läuft lokal in deinem Browser.
     </p>
 
     <div>
       <h2>Oktale Berechtigungen lesen</h2>
       <p>
-        Jede Oktalziffer ist die Summe aus <strong>Lesen = 4, Schreiben = 2, Ausführen = 1</strong>, und die drei Ziffern decken in dieser Reihenfolge Eigentümer, Gruppe und Andere ab. <code>755</code> bedeutet also, dass der Eigentümer 4+2+1 (alles) erhält, während Gruppe und Andere 4+1 (Lesen + Ausführen) bekommen — der Standard für Skripte und Webverzeichnisse. <code>644</code> (Eigentümer liest/schreibt, alle anderen nur lesend) ist die Voreinstellung für reguläre Dateien, und <code>600</code> sperrt eine Datei auf ihren Eigentümer — der erforderliche Modus für private SSH-Schlüssel.
+        Jede Oktalziffer ist die Summe aus <strong>Lesen = 4, Schreiben = 2, Ausführen = 1</strong>, und die drei Ziffern decken in dieser Reihenfolge Eigentümer, Gruppe und Sonstige ab. <code>755</code> bedeutet also, dass der Eigentümer 4+2+1 (alles) erhält, während Gruppe und Sonstige 4+1 (Lesen + Ausführen) bekommen — der Standard für Skripte und Webverzeichnisse. <code>644</code> (Eigentümer liest/schreibt, alle anderen nur lesend) ist die Voreinstellung für reguläre Dateien, und <code>600</code> sperrt eine Datei auf ihren Eigentümer — der erforderliche Modus für private SSH-Schlüssel.
       </p>
     </div>
 
     <div>
       <h2>Die Spezialbits: setuid, setgid, sticky</h2>
       <p>
-        Eine vierte, führende Oktalziffer codiert drei spezielle Flags. <strong>setuid</strong> (4) lässt ein Programm mit den Rechten des Dateieigentümers laufen — so bearbeitet <code>passwd</code> die Datei <code>/etc/shadow</code>. <strong>setgid</strong> (2) macht das Gleiche für die Gruppe und erzwingt bei einem Verzeichnis, dass neue Dateien die Gruppe des Verzeichnisses erben. Das <strong>Sticky-Bit</strong> (1) auf einem Verzeichnis erlaubt nur dem Eigentümer einer Datei, diese zu löschen — unerlässlich für gemeinsame Ordner wie <code>/tmp</code> (<code>1777</code>). In der Symbolausgabe überlagern sie den Ausführungs-Slot als <code>s</code>/<code>S</code> und <code>t</code>/<code>T</code>.
+        Eine vierte, führende Oktalziffer codiert drei spezielle Flags. <strong>setuid</strong> (4) lässt ein Programm mit den Rechten des Dateieigentümers laufen — so bearbeitet <code>passwd</code> die Datei <code>/etc/shadow</code>. <strong>setgid</strong> (2) macht das Gleiche für die Gruppe und erzwingt bei einem Verzeichnis, dass neue Dateien die Gruppe des Verzeichnisses erben. Das <strong>Sticky-Bit</strong> (1) auf einem Verzeichnis erlaubt nur dem Eigentümer einer Datei, diese zu löschen — unerlässlich für gemeinsame Ordner wie <code>/tmp</code> (<code>1777</code>). In der Symbolausgabe überlagern sie das Ausführungsbit als <code>s</code>/<code>S</code> und <code>t</code>/<code>T</code>.
       </p>
     </div>
 
     <div>
       <h2>Häufige Fallstricke, die du vermeiden solltest</h2>
       <p>
-        Widerstehe <code>chmod 777</code>: weltweit beschreibbare Dateien sind ein klassisches Sicherheitsloch, und die echte Lösung besteht meist darin, den Eigentümer mit <code>chown</code> zu korrigieren. Denk daran, dass <strong>Verzeichnisse das Ausführungsbit brauchen</strong> — ohne es kannst du zwar Namen auflisten (<code>r</code>), aber nicht eintreten oder auf den Inhalt zugreifen. Beachte außerdem, dass <code>chmod</code> nur mit <code>-R</code> rekursiv ist, und ein rekursiver Modus für den gesamten Baum Dateien und Ordner vermischt — verwende stattdessen <code>find . -type d -exec chmod 755 {} +</code> und einen passenden <code>-type f</code>-Durchlauf.
+        Verzichte auf <code>chmod 777</code>: für alle beschreibbare Dateien sind ein klassisches Sicherheitsloch, und die echte Lösung besteht meist darin, die Eigentümerschaft mit <code>chown</code> zu korrigieren. Denk daran, dass <strong>Verzeichnisse das Ausführungsbit brauchen</strong> — ohne es kannst du zwar Namen auflisten (<code>r</code>), aber nicht eintreten oder auf den Inhalt zugreifen. Beachte außerdem, dass <code>chmod</code> nur mit <code>-R</code> rekursiv ist, und ein rekursiv auf den gesamten Baum angewendeter Modus vermischt Dateien und Ordner — verwende stattdessen <code>{'find . -type d -exec chmod 755 {} +'}</code> und einen passenden <code>-type f</code>-Durchlauf.
       </p>
     </div>
   </section>

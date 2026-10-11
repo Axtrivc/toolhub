@@ -15,7 +15,7 @@ export function LlmApiCostContent() {
 
       <h2>Why output tokens dominate the bill</h2>
       <p>
-        Output tokens run 3-15× the input price on nearly every model. An agent that reads a 20k-token page but writes
+        Output tokens run 3-8× the input price on nearly every model. An agent that reads a 20k-token page but writes
         a 2k-token answer often pays more for the answer. Trimming <code>max_tokens</code>, forcing concise response
         styles, and caching repeated system prompts are the three biggest levers — the last one alone cuts input costs
         50-90% on OpenAI, Anthropic, and DeepSeek.

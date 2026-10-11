@@ -412,7 +412,7 @@ export function WordleSolverClient() {
               type="text"
               value={anagramLetters}
               onChange={(e) => setAnagramLetters(e.target.value.replace(/[^a-zA-Z]/g, '').slice(0, 10))}
-              placeholder={L('anagramPlaceholder', 'e.g. rates')}
+              placeholder={L('anagramPlaceholder', 'e.g. least')}
               spellCheck={false}
               className="w-full max-w-md rounded-lg border p-3 font-mono text-sm shadow-sm outline-none transition focus:ring-2"
               style={inputStyle}

@@ -9,7 +9,7 @@ export const secretKeyGeneratorL10n: ToolL10n = {
     ui: {
       'entropyGauge': '熵值强度',
       'strengthExcellent': '极佳',
-      'bits': '比特',
+      'bits': '位',
       'bytes': '字节',
       'chars': '字符',
       'copy': '复制',
@@ -39,12 +39,12 @@ export const secretKeyGeneratorL10n: ToolL10n = {
     useCases: [
       '在线随机 API 密钥生成器',
       '为 JWT 生成密钥',
-      '加密安全的令牌生成器',
+      '密码学安全的令牌生成器',
       '十六进制密钥生成器',
     ],
     faqs: [
       {
-        q: '这些密钥是加密安全的吗?',
+        q: '这些密钥是密码学安全的吗?',
         a: '是。它们用的是浏览器的安全随机源(crypto.getRandomValues),和 TLS 密钥用的是同一个 CSPRNG,所以输出适合用于 API 密钥、会话令牌等安全敏感的值——而不是 Math.random()。',
       },
       {
@@ -161,7 +161,7 @@ export const secretKeyGeneratorL10n: ToolL10n = {
       },
       {
         q: 'Wie lang sollte ein API-Key sein?',
-        a: '32 Hex-Zeichen (128 Bit) sind ein sinnvolles Minimum, 64 Hex-Zeichen (256 Bit) geben einen starken Aufschlag. Gegen Brute Force zählt die Länge weit mehr als das Alphabet, daher ziehe länger vor statt exotischere Zeichen.',
+        a: '32 Hex-Zeichen (128 Bit) sind ein sinnvolles Minimum, 64 Hex-Zeichen (256 Bit) bieten einen guten Puffer. Gegen Brute Force zählt die Länge weit mehr als das Alphabet — lieber mehr Länge als exotischere Zeichen.',
       },
       {
         q: 'Was ist der Unterschied zwischen Hex- und Base64-Ausgabe?',

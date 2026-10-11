@@ -8,7 +8,7 @@ export const primeFactorizationCalculatorL10n: ToolL10n = {
   zh: {
     formula: {
       formula: 'n = p₁^e₁ × p₂^e₂ × … × pₖ^eₖ',
-      explain: '每个大于 1 的整数都能唯一分解为素数。指数表示每个素数整除 n 的次数。工具依次除尽 2、3、5……直到 √n。',
+      explain: '每个大于 1 的整数都能唯一分解为质数。指数表示每个质数整除 n 的次数。工具依次除尽 2、3、5……直到 √n。',
     },
     ui: {
       errMinTwo: '请输入 ≥ 2 的数',
@@ -19,9 +19,9 @@ export const primeFactorizationCalculatorL10n: ToolL10n = {
       note: '🧮 每个大于 1 的整数都有唯一的质因数分解(算术基本定理)。',
     },
     useCases: [
-      '化简分数:GCD 来自公共质因数',
+      '化简分数:最大公约数来自公共质因数',
       '密码学:RSA 密钥依赖分解难度',
-      '数学作业:求 LCM、GCD、化简根式',
+      '数学作业:求最小公倍数、最大公约数、化简根式',
       '音乐理论:纯律使用质数比',
     ],
     faqs: [
@@ -54,7 +54,7 @@ export const primeFactorizationCalculatorL10n: ToolL10n = {
   de: {
     formula: {
       formula: 'n = p₁^e₁ × p₂^e₂ × … × pₖ^eₖ',
-      explain: 'Jede ganze Zahl > 1 zerfällt eindeutig in Primzahlen. Die Exponenten zählen, wie oft jede Primzahl n teilt. Das Werkzeug dividiert 2, dann 3, 5, … bis √n heraus.',
+      explain: 'Jede ganze Zahl > 1 zerfällt eindeutig in Primzahlen. Die Exponenten zählen, wie oft jede Primzahl n teilt. Das Werkzeug teilt nacheinander durch 2, dann 3, 5, … bis √n.',
     },
     ui: {
       errMinTwo: 'Gib eine Zahl ≥ 2 ein',
@@ -66,7 +66,7 @@ export const primeFactorizationCalculatorL10n: ToolL10n = {
     },
     useCases: [
       'Brüche kürzen: der ggT stammt aus gemeinsamen Primfaktoren',
-      'Kryptografie: RSA-Schlüssel beruhen auf Faktorisierungsschwierigkeit',
+      'Kryptografie: RSA-Schlüssel beruhen auf der Schwierigkeit der Faktorisierung',
       'Mathehausaufgaben: kgV, ggT, Wurzeln vereinfachen',
       'Musiktheorie: Die reine Stimmung nutzt Primzahlverhältnisse',
     ],

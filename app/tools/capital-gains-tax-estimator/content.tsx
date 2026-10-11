@@ -99,10 +99,10 @@ const es: ReactNode = (
     <div>
       <h2>Lo que no está incluido</h2>
       <ul>
-        <li><strong>NIIT:</strong> recargo del 3,8 % sobre los ingresos de inversión para altos rentistas</li>
+        <li><strong>NIIT:</strong> recargo del 3,8 % sobre los ingresos de inversión para contribuyentes con altos ingresos</li>
         <li><strong>Impuesto estatal:</strong> varía del 0 al 13 % según el estado</li>
         <li><strong>Pérdidas de capital:</strong> pueden compensar ganancias dólar por dólar</li>
-        <li><strong>Harvesting de pérdidas:</strong> asumir pérdidas estratégicamente para reducir impuestos</li>
+        <li><strong>Cosecha de pérdidas fiscales:</strong> asumir pérdidas estratégicamente para reducir impuestos</li>
       </ul>
     </div>
   </section>
@@ -126,7 +126,7 @@ const de: ReactNode = (
     </div>
     <div>
       <h2>Durchgerechnetes Beispiel</h2>
-      <p>Du hast 100 Aktien zu $50 gekauft (insgesamt $5,000) und verkaufst sie nach <strong>14 Monaten</strong> zu $80 ($8,000). Dein Gewinn ist <strong>$3,000</strong>, und da du sie länger als ein Jahr gehalten hast, gilt er als langfristig. Wenn dein zu versteuerndes Einkommen dich in den 15 %-Langfriststeuersatz bringt, schuldest du <strong>$450</strong> Bundessteuer. Hättest du nur wenige Wochen früher verkauft — vor dem Ablauf des einen Jahres (kurzfristig) —, während du im 24 %-Ordentlichkeitssteuersatz warst, würde derselbe Gewinn <strong>$720</strong> kosten — das Halten über die Ein-Jahres-Grenze hinaus hat $270 gespart.</p>
+      <p>Du hast 100 Aktien zu $50 gekauft (insgesamt $5,000) und verkaufst sie nach <strong>14 Monaten</strong> zu $80 ($8,000). Dein Gewinn ist <strong>$3,000</strong>, und da du sie länger als ein Jahr gehalten hast, gilt er als langfristig. Wenn dein zu versteuerndes Einkommen dich in den 15 %-Langfriststeuersatz bringt, schuldest du <strong>$450</strong> Bundessteuer. Hättest du nur wenige Wochen früher verkauft — vor dem Ablauf des einen Jahres (kurzfristig) —, während du im 24 %-Steuersatz für ordentliches Einkommen warst, würde derselbe Gewinn <strong>$720</strong> kosten — das Halten über die Ein-Jahres-Grenze hinaus hat $270 gespart.</p>
     </div>
     <div>
       <h2>Was nicht enthalten ist</h2>

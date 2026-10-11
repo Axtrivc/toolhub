@@ -28,8 +28,8 @@ export const intermittentFastingCalculatorL10n: ToolL10n = {
       'fastingWindow': '断食窗口',
       'statusEating': '🥗 进食窗口开放中',
       'statusFasting': '🔥 断食中 · 脂肪燃烧与自噬模式',
-      'untilClose': '距进食窗口关闭还有',
-      'untilOpen': '距下一轮进食窗口开启还有',
+      'untilClose': '后进食窗口关闭',
+      'untilOpen': '后开启下一轮进食窗口',
       'statusLoading': '正在加载实时倒计时…',
       'timelineTitle': '24 小时代谢阶段变化时间轴',
       'tlEating': '进食窗口',
@@ -117,7 +117,7 @@ export const intermittentFastingCalculatorL10n: ToolL10n = {
       'tlEating': 'Ventana de alimentación',
       'nowCursor': 'Ahora',
       'thPhase': 'Fase',
-      'thWhen': 'Tiempo ayunado',
+      'thWhen': 'Tiempo de ayuno',
       'thClock': 'Hora del reloj',
       'thWhat': 'Qué ocurre en tu cuerpo',
       'phase0': 'Digestión',
@@ -143,7 +143,7 @@ export const intermittentFastingCalculatorL10n: ToolL10n = {
       'csvField': 'Campo',
       'csvValue': 'Valor',
       'copySummary': 'Copiar resumen',
-      'note': '⏰ Los tiempos de cada fase son estimaciones basadas en estudios. Consulta a un médico antes de realizar ayunos prolongados.',
+      'note': '⏰ Los tiempos de las fases (cetosis ≈ 12 h+, autofagia ≈ 16-24 h) son estimaciones basadas en estudios: los cambios metabólicos reales varían según lo que y cuánto comas, tu actividad y tu cuerpo. Este planificador es información general, no consejo médico; embarazadas, lactantes, personas con diabetes o bajo peso deben consultar a un médico antes de ayunos prolongados.',
     },
     useCases: [
       'montar un 16:8: primera comida a las 12:00, ventana hasta las 20:00, cuenta atrás hasta el marcador de cetosis (12 h aprox.)',
@@ -166,7 +166,7 @@ export const intermittentFastingCalculatorL10n: ToolL10n = {
       },
       {
         q: '¿Puedo entrenar en ayunas?',
-        a: 'Sí para sesiones suaves o moderadas; para series intensas conviene algo de hidratos. La línea metabólica sigue corriendo: el entrenamiento no la reinicia, pero un café con leche (unas 60 kcal) sí — por eso cuenta como primera comida si mides el ayuno estricto.',
+        a: 'Sí para sesiones suaves o moderadas; para series intensas conviene algo de hidratos. La línea temporal sigue corriendo: entrenar no la reinicia, pero un café con leche (unas 60 kcal) sí — por eso cuenta como primera comida si mides el ayuno estricto.',
       },
     ],
     formula: {
@@ -225,7 +225,7 @@ export const intermittentFastingCalculatorL10n: ToolL10n = {
       'csvField': 'Feld',
       'csvValue': 'Wert',
       'copySummary': 'Zusammenfassung kopieren',
-      'note': '⏰ Die Phasenzeitpunkte sind wissenschaftlich fundierte Schätzungen. Bei Vorerkrankungen vorab einen Arzt konsultieren.',
+      'note': '⏰ Die Phasenzeitpunkte (Ketose ≈ 12 h+, Autophagie ≈ 16-24 h) sind forschungsbasierte Schätzungen — die tatsächlichen Stoffwechselwechsel hängen davon ab, was und wie viel du isst, sowie von Aktivität und Körper. Dieser Planer ist allgemeine Information, keine medizinische Beratung; Schwangere, Stillende, Diabetiker oder Untergewichtige sollten vor verlängertem Fasten ärztlichen Rat einholen.',
     },
     useCases: [
       '16:8 einrichten: erste Mahlzeit 12:00, Fenster bis 20:00, Countdown bis zum Ketose-Marker (ca. 12 h)',
@@ -244,7 +244,7 @@ export const intermittentFastingCalculatorL10n: ToolL10n = {
       },
       {
         q: 'Bricht Kaffee das Fasten?',
-        a: 'Wasser, schwarzer Kaffee und ungesüßter Tee gelten als fastenkompatibel. Alles mit Kalorien — Sahne, Zucker oder ein „kleiner" Latte — beendet den Nüchternzustand und stellt die Uhr zurück.',
+        a: 'Wasser, schwarzer Kaffee und ungesüßter Tee gelten als fastenkompatibel. Alles mit Kalorien — Sahne, Zucker oder ein „kleiner“ Latte — beendet den Nüchternzustand und stellt die Uhr zurück.',
       },
       {
         q: 'Worauf achten im Essensfenster?',

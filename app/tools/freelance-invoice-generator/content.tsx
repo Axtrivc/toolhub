@@ -62,39 +62,27 @@ const zh: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>这是什么工具？</h2>
     <p>
-      这款<strong>自由职业发票生成器</strong>直接在你的浏览器里制作一份干净、专业的发票：填写信息、添加明细项，就能看到票据样式的预览实时更新。完成后，
-      打印或保存为 PDF 即可 —— 无需账号、无需上传、无需订阅。
+      这款<strong>自由职业发票生成器</strong>直接在你的浏览器里制作一份干净、专业的发票：填写信息、添加明细项，就能看到票据样式的预览实时更新。完成后，打印或保存为 PDF 即可——无需账号、无需上传、无需订阅。
     </p>
 
     <div>
       <h2>工作原理</h2>
       <p>
-        填写你的姓名或公司、客户、发票编号，以及开票日期和到期日期。按需添加任意数量的明细项 —— 每项包含<strong>描述、数量和单价</strong> —— 再加上
-        可选的税率。预览会自动计算出小计、税额和总计，支持 USD、EUR、
-        GBP、JPY、CNY、CAD、AUD、CHF、INR、KRW 十种货币。<strong>打印 / 另存为 PDF</strong> 会打开一个独立的发票页面并触发
-        浏览器的打印对话框（在目标中选择「另存为 PDF」），而{' '}
-        <strong>下载 HTML</strong> 会把同一份发票保存为独立文件，方便你邮件发送或归档。
+        填写你的姓名或公司、客户、发票编号，以及开票日期和到期日。按需添加任意数量的明细项——每项包含<strong>描述、数量和单价</strong>——再加上可选的税率。预览会自动计算出小计、税额和总计，支持 USD、EUR、GBP、JPY、CNY、CAD、AUD、CHF、INR、KRW 十种货币。<strong>打印 / 另存为 PDF</strong> 会打开一个独立的发票页面并触发浏览器的打印对话框（在目标中选择「另存为 PDF」），而<strong>下载 HTML</strong> 会把同一份发票保存为独立文件，方便你邮件发送或归档。
       </p>
     </div>
 
     <div>
       <h2>一份合格的发票应包含什么</h2>
       <p>
-        发票越清晰，客户付款就越快。务必包含<strong>唯一的发票编号</strong>{' '}
-        （按客户递增，例如 <code>INV-0042</code>）、明确的到期日期，以及条理清晰且能指明已交付工作的描述 —— 「落地页改版 —— 里程碑 2」就胜过「设计
-        工作」。在备注栏填写付款条款：可接受的付款方式、滞纳金，以及你的银行账户或付款
-        链接。如果你做跨境业务，请让货币与客户合同保持一致，以免因汇率
-        产生纠纷。
+        发票越清晰，客户付款就越快。务必包含<strong>唯一的发票编号</strong>（按客户递增，例如 <code>INV-0042</code>）、明确的到期日，以及条理清晰、能指明已交付工作的描述——「落地页改版——里程碑 2」就胜过「设计工作」。在备注栏填写付款条款：可接受的付款方式、滞纳金，以及你的银行账户或付款链接。如果你做跨境业务，请让货币与客户合同保持一致，以免因汇率产生纠纷。
       </p>
     </div>
 
     <div>
       <h2>隐私 —— 以及它的代价</h2>
       <p>
-        一切都在<strong>100% 客户端</strong>运行：你的客户名称、费率和金额永远不会离开你的
-        设备，因此非常适合处理敏感合同。但代价是什么都不会保存 ——{' '}
-        <em>刷新页面会丢失你的工作</em>。一旦发票准备就绪，请立即
-        打印或下载 HTML，并将下载的文件作为你的存档；每一份都可以在任何浏览器中离线打开。
+        一切都在<strong>100% 客户端</strong>运行：你的客户名称、费率和金额永远不会离开你的设备，因此非常适合处理敏感合同。但代价是什么都不会保存——<em>刷新页面会丢失你的工作</em>。一旦发票准备就绪，请立即打印或下载 HTML，并将下载的文件作为你的存档；每一份都可以在任何浏览器中离线打开。
       </p>
     </div>
   </section>
@@ -114,10 +102,10 @@ const es: ReactNode = (
       <h2>Cómo funciona</h2>
       <p>
         Introduce tu nombre o empresa, tu cliente, un número de factura y las fechas de emisión y de vencimiento. Añade todas
-        las líneas de concepto que necesites — cada una con una <strong>descripción, cantidad y tarifa unitaria</strong> — y un
+        las líneas de concepto que necesites — cada una con una <strong>descripción, cantidad y precio unitario</strong> — y un
         porcentaje de impuestos opcional. La vista previa calcula el subtotal, los impuestos y el total automáticamente en una de
         10 monedas: USD, EUR, GBP, JPY, CNY, CAD, AUD, CHF, INR o KRW. <strong>Imprimir / Guardar como PDF</strong> abre una página
-        de factura independiente y abre el
+        de factura independiente y activa el
         diálogo de impresión del navegador (elige «Guardar como PDF» como destino), mientras que{' '}
         <strong>Descargar HTML</strong> guarda la misma factura como un archivo independiente que puedes enviar por correo o archivar.
       </p>
@@ -136,7 +124,7 @@ const es: ReactNode = (
     </div>
 
     <div>
-      <h2>Privacidad — y su contraparte</h2>
+      <h2>Privacidad — y su contrapartida</h2>
       <p>
         Todo se ejecuta <strong>100 % en el lado del cliente</strong>: los nombres de tus clientes, las tarifas y los totales nunca salen de tu
         dispositivo, lo cual hace que esto sea seguro para contratos sensibles. El reverso de la moneda es que no se guarda nada —{' '}
@@ -165,7 +153,7 @@ const de: ReactNode = (
         optionalen Steuersatz. Die Vorschau berechnet Zwischensumme, Steuer und Gesamtbetrag automatisch in einer von
         10 Währungen: USD, EUR, GBP, JPY, CNY, CAD, AUD, CHF, INR oder KRW. <strong>Drucken / Als PDF speichern</strong> öffnet eine in
         sich geschlossene Rechnungsseite und löst den
-        Druckdialog des Browsers aus (wähle „Als PDF speichern" als Ziel), während{' '}
+        Druckdialog des Browsers aus (wähle „Als PDF speichern“ als Ziel), während{' '}
         <strong>HTML herunterladen</strong> dieselbe Rechnung als eigenständige Datei speichert, die du per E-Mail verschicken oder archivieren kannst.
       </p>
     </div>
@@ -175,20 +163,18 @@ const de: ReactNode = (
       <p>
         Kunden zahlen schneller, wenn Rechnungen eindeutig sind. Gib immer eine <strong>eindeutige Rechnungsnummer</strong>{' '}
         an (inkrementiere sie pro Kunde, z. B. <code>INV-0042</code>), ein klares Fälligkeitsdatum und detaillierte Beschreibungen,
-        die die gelieferte Arbeit referenzieren — „Redesign der Landingpage — Meilenstein 2" schlägt „Design-
-        Arbeit". Nutze das Notizfeld für die Zahlungsbedingungen: akzeptierte Methoden, Säumnisgebühren und deine Bank- oder Zahlungs-
-        links. Wenn du über Grenzen hinweg abrechnest, wähle die Währung passend zum Vertrag des Kunden, um Streit
+        die die gelieferte Arbeit referenzieren — „Redesign der Landingpage — Meilenstein 2“ schlägt „Design-Arbeit“. Nutze das Notizfeld für die Zahlungsbedingungen: akzeptierte Zahlungsmethoden, Verzugsgebühren sowie deine Bankverbindung oder deinen Zahlungslink. Wenn du grenzüberschreitend abrechnest, wähle die Währung passend zum Vertrag des Kunden, um Streit
         über Wechselkurse zu vermeiden.
       </p>
     </div>
 
     <div>
-      <h2>Datenschutz — und sein Kompromiss</h2>
+      <h2>Datenschutz — und der Preis dafür</h2>
       <p>
-        Alles läuft <strong>zu 100 % clientseitig</strong>: deine Kundennamen, Sätze und Summen verlassen nie dein
+        Alles läuft <strong>zu 100 % clientseitig</strong>: deine Kundennamen, Preise und Summen verlassen nie dein
         Gerät, was dies sicher für sensible Verträge macht. Die Kehrseite ist, dass nichts gespeichert wird —{' '}
         <em>ein Seitenreload verwirft deine Arbeit</em>. Drucke oder lade das HTML herunter, sobald eine Rechnung
-        fertig ist, und bewahre die heruntergeladenen Dateien als deine Unterlage auf; jede davon öffnet sich offline in jedem Browser.
+        fertig ist, und bewahre die heruntergeladenen Dateien als deine Unterlagen auf; jede davon lässt sich offline in jedem Browser öffnen.
       </p>
     </div>
   </section>

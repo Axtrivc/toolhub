@@ -1,6 +1,6 @@
 /**
  * sql-formatter 本地化 bundle —— zh / es / de
- * 覆盖:faqs + useCases(交互客户端为自定义组件,UI 本地化留待后续)
+ * 覆盖:ui + faqs + useCases(交互客户端为自定义组件,UI 经 SqlFormatterClient 内 tui() 读取)
  */
 import type { ToolL10n } from '../tool-l10n'
 
@@ -40,7 +40,7 @@ export const sqlFormatterL10n: ToolL10n = {
       'note': '🔒 100% en el cliente — un formateador SQL ANSI genérico. Las palabras clave se capitalizan; la sangría sigue la jerarquía de cláusulas.',
     },
     useCases: [
-      'formatear SQL minimizado copiado de registros',
+      'formatear SQL minimizado copiado de logs',
       'preparar consultas legibles para revisión de código',
       'comprimir SQL en una sola línea para payloads JSON',
       'embellecer SQL de terceros o proveedores',
@@ -70,8 +70,8 @@ export const sqlFormatterL10n: ToolL10n = {
     ],
     faqs: [
       { q: 'Welchen SQL-Dialekt formatiert das Werkzeug?', a: 'Es wendet generische ANSI-SQL-Formatierung an, die für MySQL, PostgreSQL, SQLite, SQL Server und Oracle funktioniert. Die wichtigsten Schlüsselwörter (SELECT, FROM, WHERE, JOIN, GROUP BY, ORDER BY, INSERT, UPDATE, DELETE) werden erkannt und großgeschrieben. Dialektspezifische Syntax (PL/pgSQL-Blöcke, T-SQL-Variablen) wird eventuell nicht perfekt eingerückt.' },
-      { q: 'Validiert oder führt es meine Abfrage aus?', a: 'Nein. Es ist ein reiner Formatter — er rückt neu ein und schreibt Schlüsselwörter groß, prüft aber nicht, ob die Abfrage gültiges SQL ist, und führt sie nicht gegen eine Datenbank aus. Das heißt, er formatiert fröhlich eine Abfrage mit Syntaxfehler; er macht den Text nur besser lesbar.' },
-      { q: 'Kann es SQL auch minimieren statt nur verschönern?', a: 'Ja. Nutze die Option „Minify“, um die Abfrage mit normalisierten Leerzeichen in eine Zeile zu falten — praktisch, um Queries kompakt zu speichern oder zu versenden. Schalte zurück auf „Format“, um sie wieder zu erweitern und zu bearbeiten.' },
+      { q: 'Validiert oder führt es meine Abfrage aus?', a: 'Nein. Es ist ein reiner Formatter — er rückt neu ein und schreibt Schlüsselwörter groß, prüft aber nicht, ob die Abfrage gültiges SQL ist, und führt sie nicht gegen eine Datenbank aus. Das heißt, er formatiert fröhlich eine Abfrage mit Syntaxfehlern; er macht den Text nur besser lesbar.' },
+      { q: 'Kann es SQL auch minimieren statt nur verschönern?', a: 'Ja. Nutze die Option „Minifizieren“, um die Abfrage mit normalisierten Leerzeichen auf eine einzige Zeile zu reduzieren — praktisch, um Queries kompakt zu speichern oder zu versenden. Schalte zurück auf „Formatieren“, um sie wieder zu erweitern und zu bearbeiten.' },
     ],
   },
 }

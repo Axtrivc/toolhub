@@ -30,10 +30,10 @@ export const WheelSpinnerL10n: ToolL10n = {
   },
   es: {
     useCases: [
-      'orden de exposiciones en clase: una docena de nombres con la misma probabilidad para todos',
-      'repartir tareas domésticas: platos, basura y pasear al perro los decide la rueda',
-      'elegir el restaurante del viernes entre una docena de candidatos sin discusiones eternas',
-      'sorteo de premios: elimina al ganador y gira de nuevo para el segundo puesto',
+      'Orden de participación en clase: una docena de nombres con la misma probabilidad para todos',
+      'Reparto de tareas domésticas: fregar, la basura y el paseo del perro los decide la rueda',
+      'Elegir el restaurante del viernes entre una docena de candidatos, sin eternas discusiones',
+      'Sorteo de premios: elimina al ganador y gira de nuevo para el segundo puesto',
     ],
     faqs: [
       { q: '¿Qué tan aleatorio es el giro?', a: 'La opción ganadora se sortea con aleatoriedad criptográfica antes de reproducir la animación: el giro es solo una revelación visual. Todas las opciones tienen la misma probabilidad, sin importar su posición en la rueda.' },
@@ -54,9 +54,9 @@ export const WheelSpinnerL10n: ToolL10n = {
   de: {
     useCases: [
       'Abfrage-Reihenfolge im Unterricht: ein Dutzend Schülernamen, für jeden dieselbe Chance',
-      'Haushaltsaufgaben verteilen: Spülen, Müll, Gassigängen — das Rad entscheidet',
-      'aus einem Dutzend Restaurantkandidaten das Freitagabend-Lokal ermitteln, ohne Diskussion',
-      'Gewinnspiel: Gewinner aus dem Rad löschen und den zweiten Platz nachziehen',
+      'Haushaltsaufgaben verteilen: Spülen, Müll rausbringen, Gassigehen — das Rad entscheidet',
+      'Aus einem Dutzend Restaurantkandidaten das Freitagabend-Lokal ermitteln — ohne Diskussion',
+      'Gewinnspiel: Gewinner aus dem Rad löschen und den zweiten Platz in einer weiteren Runde auslosen',
     ],
     faqs: [
       { q: 'Wie zufällig ist das Rad?', a: 'Der Gewinnereintrag wird vor der Animation mit kryptografischer Zufälligkeit gezogen — die Drehbewegung ist nur eine visuelle Enthüllung. Jeder Eintrag hat dieselbe Chance, unabhängig von seiner Position auf dem Rad.' },

@@ -8,6 +8,7 @@ export const htmlUnescapeL10n: ToolL10n = {
   zh: {
     ui: {
       'inputTooLarge': '⚠️ 输入过大——支持规模最多 10 万字符。请裁剪输入后再转换。',
+      'invalidInput': '⚠️ 此方向的输入无效',
       'defaultInputDecode': '&lt;a href=&quot;x&quot;&gt;汤姆 &amp; 杰瑞&lt;/a&gt;',
       'defaultInputEncode': '<a href="x">汤姆 & 杰瑞</a>',
       'characters': '字符',
@@ -44,6 +45,7 @@ export const htmlUnescapeL10n: ToolL10n = {
   es: {
     ui: {
       'inputTooLarge': '⚠️ Entrada demasiado grande: el tamaño admitido es de hasta 100 000 caracteres. Recorta la entrada para convertir.',
+      'invalidInput': '⚠️ Entrada no válida para esta dirección',
       'defaultInputDecode': '&lt;a href=&quot;x&quot;&gt;España &amp; café&lt;/a&gt;',
       'defaultInputEncode': '<a href="x">España & café</a>',
       'characters': 'caracteres',
@@ -80,6 +82,7 @@ export const htmlUnescapeL10n: ToolL10n = {
   de: {
     ui: {
       'inputTooLarge': '⚠️ Eingabe zu groß – die unterstützte Größe beträgt maximal 100.000 Zeichen. Kürze die Eingabe.',
+      'invalidInput': '⚠️ Ungültige Eingabe für diese Richtung',
       'defaultInputDecode': '&lt;a href=&quot;x&quot;&gt;Grüße &amp; Käfer&lt;/a&gt;',
       'defaultInputEncode': '<a href="x">Grüße & Käfer</a>',
       'characters': 'Zeichen',

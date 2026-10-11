@@ -81,7 +81,7 @@ const zh: ReactNode = (
           <code>{`{key: value}`}</code> 表示对象。
         </li>
         <li>
-          <strong>标量</strong> —— 字符串(带引号和纯文本)、数字、布尔值(<code>true</code> /<code>false</code>),以及 <code>null</code>(也可以是 <code>~</code>)。
+          <strong>标量</strong> —— 字符串(带引号的和纯文本的)、数字、布尔值(<code>true</code> /<code>false</code>),以及 <code>null</code>(也可以是 <code>~</code>)。
         </li>
         <li>
           <strong>注释</strong> —— 空格后的 <code>#</code>(引号外)开始一段注释,该行其余内容会被忽略。
@@ -94,14 +94,14 @@ const zh: ReactNode = (
     <div>
       <h2>为什么 YAML 解析很棘手</h2>
       <p>
-        与 JSON 不同,YAML 对 <strong>缩进敏感</strong> —— 两个空格和四个空格会得到完全不同的结构。缩进禁止使用制表符(只能用空格)。纯标量还会被隐式推断类型:<code>yes</code>、<code>no</code>、<code>on</code> 和{' '}
+        与 JSON 不同,YAML 对 <strong>缩进敏感</strong> —— 用两个空格还是四个空格,得到的结构完全不同。缩进禁止使用制表符(只能用空格)。纯标量还会被隐式推断类型:<code>yes</code>、<code>no</code>、<code>on</code> 和{' '}
         <code>off</code> 在旧版 YAML 1.1 解析器中会变成布尔值,这是一个著名的 bug 来源(即「Norway problem」,<code>NO</code> 被解释成了 <code>false</code>)。如果需要把它们当作字符串,请加上引号。
       </p>
     </div>
     <div>
       <h2>当转换失败时</h2>
       <p>
-        最常见的原因是缩进不一致——混合使用 2 空格和 4 空格,或者从复制粘贴中混入了制表符。错误信息会指向出错的那一行。此外还要留意同一个映射中是否有重复键:虽然有些 YAML 库会静默覆盖,但本解析器会将其报告为错误,因为重复键几乎总是意味着一个真实的错误。
+        最常见的原因是缩进不一致——混合使用 2 空格和 4 空格,或者复制粘贴时混入了制表符。错误信息会指向出错的那一行。此外还要留意同一个映射中是否有重复键:虽然有些 YAML 库会静默覆盖,但本解析器会将其报告为错误,因为重复键几乎总是意味着真实的错误。
       </p>
     </div>
   </section>
@@ -113,7 +113,7 @@ const es: ReactNode = (
     <h2>¿Qué es esta herramienta?</h2>
     <p>
       <strong>YAML</strong> (YAML Ain't Markup Language) es un formato de configuración amigable para humanos utilizado por Docker Compose, Kubernetes, GitHub Actions, Ansible y muchas herramientas de CI.{' '}
-      <strong>JSON</strong> es el formato de intercambio de datos que habla cada API. Convertir YAML a JSON es una necesidad común cuando se pasa configuración a herramientas que solo aceptan JSON — y las reglas de indentación de YAML hacen que sea fácil equivocarse a mano. Esta herramienta analiza YAML localmente y emite JSON limpio.
+      <strong>JSON</strong> es el formato de intercambio de datos que entiende cada API. Convertir YAML a JSON es una necesidad común cuando se pasa configuración a herramientas que solo aceptan JSON — y las reglas de indentación de YAML hacen que sea fácil equivocarse a mano. Esta herramienta analiza YAML localmente y genera JSON limpio.
     </p>
     <div>
       <h2>Qué admite este analizador</h2>
@@ -126,7 +126,7 @@ const es: ReactNode = (
           <code>{`{key: value}`}</code> para objetos.
         </li>
         <li>
-          <strong>Escalares</strong> — cadenas (entre comillas y simples), números, booleanos (<code>true</code> /<code>false</code>) y <code>null</code> (también <code>~</code>).
+          <strong>Escalares</strong> — cadenas (con comillas y sin comillas), números, booleanos (<code>true</code> /<code>false</code>) y <code>null</code> (también <code>~</code>).
         </li>
         <li>
           <strong>Comentarios</strong> — un <code>#</code> precedido de un espacio (fuera de
@@ -140,7 +140,7 @@ const es: ReactNode = (
     <div>
       <h2>Por qué analizar YAML es delicado</h2>
       <p>
-        A diferencia de JSON, YAML es <strong>sensible a la indentación</strong> — dos espacios frente a cuatro cambia por completo la estructura. Las tabulaciones están prohibidas para la indentación (usa solo espacios). Los escalares simples también se tipan implícitamente: <code>yes</code>, <code>no</code>, <code>on</code> y{' '}
+        A diferencia de JSON, YAML es <strong>sensible a la indentación</strong> — dos espacios en lugar de cuatro cambian por completo la estructura. Las tabulaciones están prohibidas para la indentación (usa solo espacios). Los escalares simples también se tipan implícitamente: <code>yes</code>, <code>no</code>, <code>on</code> y{' '}
         <code>off</code> se convierten en booleanos en los analizadores YAML 1.1 más antiguos, una fuente célebre de errores (el «Norway problem», donde <code>NO</code> se convertía en <code>false</code>). Entrecomilla esos valores si necesitas que sean cadenas.
       </p>
     </div>
@@ -159,20 +159,20 @@ const de: ReactNode = (
     <h2>Was ist dieses Werkzeug?</h2>
     <p>
       <strong>YAML</strong> (YAML Ain't Markup Language) ist ein menschenfreundliches Konfigurationsformat, das von Docker Compose, Kubernetes, GitHub Actions, Ansible und vielen CI-Tools verwendet wird.{' '}
-      <strong>JSON</strong> ist das Datenaustauschformat, das jede API spricht. Das Umwandeln von YAML in JSON ist ein häufiges Bedürfnis, wenn man Konfiguration an Werkzeuge übergibt, die nur JSON akzeptieren — und die Einrückungsregeln von YAML machen es fehleranfällig, dies von Hand zu tun. Dieses Werkzeug parst YAML lokal und gibt sauberes JSON aus.
+      <strong>JSON</strong> ist das Datenaustauschformat, das jede API versteht. Die Umwandlung von YAML in JSON ist häufig nötig, wenn man Konfiguration an Werkzeuge übergibt, die nur JSON akzeptieren — und die Einrückungsregeln von YAML machen die manuelle Umwandlung fehleranfällig. Dieses Werkzeug parst YAML lokal und gibt sauberes JSON aus.
     </p>
     <div>
       <h2>Was dieser Parser unterstützt</h2>
       <ul>
         <li>
-          <strong>Mappings &amp; Sequences</strong> — verschachtelte Schlüssel-Wert-Paare und Listen ({`- item`}).
+          <strong>Mappings &amp; Sequenzen</strong> — verschachtelte Schlüssel-Wert-Paare und Listen ({`- item`}).
         </li>
         <li>
           <strong>Inline-Flow</strong> — <code>[a, b]</code> für Arrays und{' '}
           <code>{`{key: value}`}</code> für Objekte.
         </li>
         <li>
-          <strong>Skalare</strong> — Strings (in Anführungszeichen und einfach), Zahlen, Booleans (<code>true</code> /<code>false</code>) und <code>null</code> (auch <code>~</code>).
+          <strong>Skalare</strong> — Strings (mit und ohne Anführungszeichen), Zahlen, Booleans (<code>true</code> /<code>false</code>) und <code>null</code> (auch <code>~</code>).
         </li>
         <li>
           <strong>Kommentare</strong> — ein <code>#</code> nach einem Leerzeichen (außerhalb von

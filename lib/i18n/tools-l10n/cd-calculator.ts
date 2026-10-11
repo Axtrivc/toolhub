@@ -70,7 +70,7 @@ export const cdCalculatorL10n: ToolL10n = {
       },
       {
         q: '刚好在期限一半时支取会怎样?',
-        a: '用『提前退出』滑块:你只累积一半期限的利息,再扣掉罚息月数。若罚金超过已生利息,结果就是拿回本金——工具显示的到手金额永远不会低于存入额。',
+        a: '用『提前支取时点』滑块:你只累积一半期限的利息,再扣掉罚息月数。若罚金超过已生利息,结果就是拿回本金——工具显示的到手金额永远不会低于存入额。',
       },
       {
         q: '对应国内的什么产品?',
@@ -123,11 +123,11 @@ export const cdCalculatorL10n: ToolL10n = {
       'cmpseg.1': 'Intereses conservados',
       'cmpseg.2': 'Penalización perdida',
       'chartTitle': 'Mantener hasta vencimiento vs Retirada anticipada',
-      'note': '💰 En la mayoría de bancos, las penalizaciones por retirada anticipada solo se aplican a los intereses generados (nunca al capital). Usa el control deslizante para simular una cancelación anticipada.',
+      'note': '💰 En la mayoría de bancos de EE. UU., las penalizaciones por retirada anticipada se cobran sobre los intereses generados (nunca sobre el capital) — normalmente 3 meses de interés en CDs cortos y hasta 12 en plazos de 5 años. El deslizador «Retirada anticipada en el» permite simular romper el CD a mitad de plazo.',
     },
     useCases: [
       'comparar un CD de 12 meses al 4,6 % con uno de 18 meses al 4,3 %: 25.000 € rinden unos 1.175 € frente a 1.660 €',
-      'ensayar la salida anticipada: a los 14 meses de un CD a dos años, con 3 meses de multa, cuánto llega a mano frente a dos CDs de un año',
+      'ensayar la salida anticipada: a los 14 meses de un CD a dos años, con 3 meses de penalización, cuánto recibes realmente frente a dos CDs de un año',
       'montar una escalera: 30.000 € en tramos de 1, 2 y 3 años, un tramo que madura cada año; verifica el vencimiento de cada tramo',
       'medir la capitalización: al mismo 4,5 %, el interés mensual compuesto supera al simple en unos 0,1 puntos el primer año — la brecha crece con el plazo',
     ],
@@ -138,11 +138,11 @@ export const cdCalculatorL10n: ToolL10n = {
       },
       {
         q: '¿Cuál es la penalización típica por retirar antes?',
-        a: 'En los bancos americanos: 1 mes de interés para CDs de menos de un año, 3 meses para plazos de 1-4 años y 6-12 meses para CDs a 5 años. La multa sale de los intereses devengados, nunca del capital — pero salir casi de inmediato puede borrar todo lo ganado.',
+        a: 'En los bancos americanos: 1 mes de interés para CDs de menos de un año, 3 meses para plazos de 1-4 años y 6-12 meses para CDs a 5 años. La penalización sale de los intereses devengados, nunca del capital — pero salir casi de inmediato puede borrar todo lo ganado.',
       },
       {
         q: '¿Qué pasa si retiro justo a mitad del plazo?',
-        a: 'Usa el deslizador «Salida anticipada en»: acumulas la mitad de los intereses del plazo y luego pierdes los meses de penalización. Si la multa supera lo devengado, simplemente recuperas el capital — la herramienta nunca muestra menos de lo depositado.',
+        a: 'Usa el deslizador «Retirada anticipada en el»: acumulas la mitad de los intereses del plazo y luego pierdes los meses de penalización. Si la penalización supera lo devengado, simplemente recuperas el capital — la herramienta nunca muestra menos de lo depositado.',
       },
       {
         q: '¿En qué se parece a un plazo fijo?',
@@ -151,7 +151,7 @@ export const cdCalculatorL10n: ToolL10n = {
     ],
     formula: {
       formula: FORMULA,
-      explain: 'Valor al vencimiento con r = tipo anual, n = frecuencia de capitalización, t = plazo en años. Un retiro anticipado conserva los intereses devengados menos la multa, que los bancos expresan en meses de interés sobre el capital — el capital nunca se toca.',
+      explain: 'Valor al vencimiento con r = tipo anual, n = frecuencia de capitalización, t = plazo en años. Un retiro anticipado conserva los intereses devengados menos la penalización, que los bancos expresan en meses de interés sobre el capital — el capital nunca se toca.',
     },
   },
 
@@ -167,12 +167,12 @@ export const cdCalculatorL10n: ToolL10n = {
       'opt.term.24': '24 Monate (2 Jahre)',
       'opt.term.36': '36 Monate (3 Jahre)',
       'opt.term.60': '60 Monate (5 Jahre)',
-      'in.compound': 'Zinseszins-Intervall',
+      'in.compound': 'Verzinsung',
       'opt.compound.daily': 'Täglich',
       'opt.compound.monthly': 'Monatlich',
       'opt.compound.quarterly': 'Vierteljährlich',
       'in.exitAt': 'Vorzeitige Auszahlung bei',
-      'in.penalty': 'Vorfälligkeitsentschädigung',
+      'in.penalty': 'Strafzinsen bei vorzeitiger Kündigung',
       'opt.penalty.1': '1 Monat Zinsen',
       'opt.penalty.3': '3 Monate Zinsen',
       'opt.penalty.6': '6 Monate Zinsen',
@@ -180,7 +180,7 @@ export const cdCalculatorL10n: ToolL10n = {
       'out.totalInterest': 'Gesamtzinsen bei Fälligkeit',
       'out.earlyExitValue': 'Wert bei vorzeitiger Auszahlung',
       'outSub.earlyExitValue': 'Bei vorzeitiger Kündigung',
-      'out.penaltyCost': 'Strafgebühr',
+      'out.penaltyCost': 'Strafzinsen',
       'outSub.penaltyCost': 'Einbehaltene Zinsen',
       'preset.0': '1-Jahr-Festgeld (4,0% APY)',
       'preset.1': '6-Monate-Festgeld (4,5% APY)',
@@ -193,9 +193,9 @@ export const cdCalculatorL10n: ToolL10n = {
       'cmp.1': 'Vorzeitige Auszahlung',
       'cmpseg.0': 'Kapital',
       'cmpseg.1': 'Behaltene Zinsen',
-      'cmpseg.2': 'Verlorene Strafgebühr',
+      'cmpseg.2': 'Verlorene Strafzinsen',
       'chartTitle': 'Halten bis Fälligkeit vs. Vorzeitige Auszahlung',
-      'note': '💰 Vorfälligkeitsentschädigungen werden bei den meisten Banken nur auf aufgelaufene Zinsen erhoben (nie auf den Hauptbetrag). Mit dem Schieberegler kannst du eine vorzeitige Kündigung simulieren.',
+      'note': '💰 Bei den meisten US-Banken gehen Strafzinsen von den aufgelaufenen Zinsen ab (nie vom Kapital) — typisch 3 Monatszinsen bei kurzen Laufzeiten und bis zu 12 bei fünf Jahren. Mit dem Schieberegler »Vorzeitige Auszahlung bei« lässt sich durchspielen, was eine Kündigung mitten in der Laufzeit kostet.',
     },
     useCases: [
       'zwölfmonatige CD mit 4,6 % gegen 18 Monate mit 4,3 % rechnen: 25.000 € bringen rund 1.175 € gegen 1.660 € Zinsen',
@@ -214,7 +214,7 @@ export const cdCalculatorL10n: ToolL10n = {
       },
       {
         q: 'Was passiert beim Exit genau bei 50 % der Laufzeit?',
-        a: 'Nimm den Regler »vorzeitiger Exit bei«: Es läuft die Hälfte der Laufzeitzinsen an, dann werden die Strafmonate abgezogen. Übersteigt die Strafe die Zinsen, bekommst du eben das Kapital zurück — das Tool zeigt nie weniger als die Einzahlung.',
+        a: 'Nimm den Regler »Vorzeitige Auszahlung bei«: Es läuft die Hälfte der Laufzeitzinsen an, dann werden die Strafmonate abgezogen. Übersteigt die Strafe die Zinsen, bekommst du eben das Kapital zurück — das Tool zeigt nie weniger als die Einzahlung.',
       },
       {
         q: 'Wie passt das zu deutschem Festgeld?',

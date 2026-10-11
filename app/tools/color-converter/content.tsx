@@ -110,14 +110,14 @@ const es: ReactNode = (
       <ul>
         <li>
           <strong>HEX</strong> — seis dígitos hexadecimales (#RRGGBB); cada par es un canal de color de
-          00-FF. El más común en CSS y herramientas de diseño.
+          00 a FF. El más común en CSS y herramientas de diseño.
         </li>
         <li>
           <strong>RGB</strong> — tres números decimales de 0-255 para rojo, verde y azul. Más fácil de leer
           mediante programación.
         </li>
         <li>
-          <strong>HSL</strong> — tono (0-360°), saturación %, luminosidad %. El más intuitivo para personas —{' '}
+          <strong>HSL</strong> — tono (0-360°), saturación %, luminosidad %. El más intuitivo para las personas —{' '}
           «oscurecer» significa bajar la luminosidad.
         </li>
       </ul>
@@ -158,8 +158,8 @@ const de: ReactNode = (
       <h2>Die drei Farbformate</h2>
       <ul>
         <li>
-          <strong>HEX</strong> — sechs Hexadezimalziffern (#RRGGBB), jedes Paar ist ein Farbkanal 00-FF. Am
-          häufigsten in CSS und Design-Tools.
+          <strong>HEX</strong> — sechs Hexadezimalziffern (#RRGGBB), jedes Paar ist ein Farbkanal von 00
+          bis FF. Am häufigsten in CSS und Design-Tools.
         </li>
         <li>
           <strong>RGB</strong> — drei Dezimalzahlen 0-255 für Rot, Grün und Blau. Leichter programmatisch
@@ -167,12 +167,12 @@ const de: ReactNode = (
         </li>
         <li>
           <strong>HSL</strong> — Farbton (0-360°), Sättigung %, Helligkeit %. Am intuitivsten für Menschen —{' '}
-          „dunkler machen" bedeutet geringere Helligkeit.
+          „dunkler machen“ bedeutet geringere Helligkeit.
         </li>
       </ul>
     </div>
     <div>
-      <h2>Wann du was verwendest</h2>
+      <h2>Wann du welches Format verwendest</h2>
       <p>
         <strong>HEX</strong> ist der Standard für CSS und die meisten Design-Tools. <strong>RGB</strong> ist
         nützlich, wenn du Kanäle im Code verändern oder Alphatransparenz (rgba) hinzufügen musst.{' '}

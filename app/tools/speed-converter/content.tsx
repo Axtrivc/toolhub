@@ -66,7 +66,7 @@ const zh: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>常用速度单位</h2>
     <p>
-      速度的计量因场景和国家而异。<strong>km/h</strong> 和 <strong>mph</strong> 在日常驾驶中占主导,<strong>m/s</strong> 是物理和工程领域的标准,<strong>knots</strong> 用于航空和航海,<strong>ft/s</strong> 出现在一些美国的工程场景中。
+      速度的计量因场景和国家而异。<strong>km/h</strong> 和 <strong>mph</strong> 在日常驾驶中占主导,<strong>m/s</strong> 是物理和工程领域的标准,<strong>节(knot)</strong> 用于航空和航海,<strong>ft/s</strong> 出现在一些美国的工程场景中。
     </p>
 
     <h2>换算系数</h2>
@@ -82,8 +82,8 @@ const zh: ReactNode = (
     <ul>
       <li><strong>在境外驾车:</strong> 限速多用 km/h(大多数国家)或 mph(美国、英国)</li>
       <li><strong>跑步和骑行:</strong> 配速常用 min/km 或 min/mile</li>
-      <li><strong>航空:</strong> 空速以 knots 为单位</li>
-      <li><strong>天气:</strong> 风速视国家而定为 m/s、km/h、mph 或 knots</li>
+      <li><strong>航空:</strong> 空速以节为单位</li>
+      <li><strong>天气:</strong> 风速视国家而定为 m/s、km/h、mph 或节</li>
       <li><strong>物理题:</strong> 几乎总是用 m/s</li>
     </ul>
 
@@ -92,7 +92,7 @@ const zh: ReactNode = (
       <li><strong>km/h 转 mph:</strong> 乘以 0.6,或取 60%(100 km/h ≈ 62 mph)</li>
       <li><strong>mph 转 km/h:</strong> 乘以 1.6(60 mph ≈ 97 km/h)</li>
       <li><strong>m/s 转 km/h:</strong> 乘以 3.6(10 m/s = 36 km/h)</li>
-      <li><strong>knots 转 mph:</strong> 加 15%(100 knots ≈ 115 mph)</li>
+      <li><strong>节转 mph:</strong> 加 15%(100 节 ≈ 115 mph)</li>
     </ul>
 
     <h2>参考速度</h2>
@@ -100,14 +100,14 @@ const zh: ReactNode = (
       <li><strong>步行:</strong> ~5 km/h(3 mph)</li>
       <li><strong>马拉松选手(精英):</strong> ~20 km/h(12.4 mph)</li>
       <li><strong>高速公路限速:</strong> 100-130 km/h(60-80 mph)</li>
-      <li><strong>商用客机(巡航):</strong> ~900 km/h(560 mph,~486 knots)</li>
+      <li><strong>商用客机(巡航):</strong> ~900 km/h(560 mph,~486 节)</li>
       <li><strong>声速:</strong> ~1225 km/h(761 mph,Mach 1)</li>
       <li><strong>光速:</strong> ~10.8 亿 km/h</li>
     </ul>
 
-    <h2>什么是 knot(节)?</h2>
+    <h2>什么是节(knot)?</h2>
     <p>
-      一个 <strong>knot</strong> 等于每小时一海里,而海里基于地球周长(一纬度分)。由于海里与导航直接相关,即使其他国家在所有方面都使用公制,knots 在全球航空和航海中仍是标准。
+      一 <strong>节</strong>等于每小时一海里,而海里基于地球周长(纬度一分)。由于海里与导航直接相关,即使在其他方面都使用公制的国家,节仍然是全球航空和航海的标准单位。
     </p>
   </section>
 )

@@ -56,7 +56,7 @@ export const csvToJsonL10n: ToolL10n = {
       'aus Excel exportierte Daten umwandeln',
     ],
     faqs: [
-      { q: 'Was ist mit Excel-Dateien (.xlsx)?', a: 'Dieses Werkzeug verarbeitet nur CSV (Klartext). Für Excel-Dateien exportiere sie erst aus Excel als CSV und wandle sie hier um. Bibliotheken wie SheetJS verarbeiten .xlsx im Code direkt.' },
+      { q: 'Was ist mit Excel-Dateien (.xlsx)?', a: 'Dieses Werkzeug verarbeitet nur CSV (Klartext). Für Excel-Dateien exportiere sie zuerst aus Excel als CSV und wandle sie hier um. Bibliotheken wie SheetJS verarbeiten .xlsx im Code direkt.' },
     ],
   },
 }

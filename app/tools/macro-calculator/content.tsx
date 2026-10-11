@@ -162,9 +162,9 @@ const de: ReactNode = (
       <>
         <p>Die Gramm jedes Makros ergeben sich aus seinem Kalorienanteil geteilt durch seine Kalorien pro Gramm:</p>
         <p style={{ fontFamily: 'monospace', background: 'rgb(var(--bg-subtle))', padding: '0.75rem 1rem', borderRadius: '0.5rem', fontSize: '0.95rem' }}>
-          Gramm = (Tägliche Kalorien × Makro %) ÷ Kal pro Gramm
+          Gramm = (Tägliche Kalorien × Makro %) ÷ kcal pro Gramm
         </p>
-        <p>Für ein 2,000-Kalorien-Halt-Ziel (30% Protein / 40% Kohlenhydrate / 30% Fett):</p>
+        <p>Bei einem Erhaltungsziel von 2,000 Kalorien (30% Protein / 40% Kohlenhydrate / 30% Fett):</p>
         <ul>
           <li><strong>Protein:</strong> 2000 × 0.30 ÷ 4 = 150 g</li>
           <li><strong>Kohlenhydrate:</strong> 2000 × 0.40 ÷ 4 = 200 g</li>

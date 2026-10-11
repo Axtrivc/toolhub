@@ -48,7 +48,7 @@ export const llmApiCostCalculatorL10n: ToolL10n = {
       },
       {
         q: '为什么输出 token 这么贵?',
-        a: '生成比读提示词更耗算力,几乎每个模型的输出单价都是输入的 3-15 倍。写长回答的应用在输出上花的钱可能比大得多的输入还多——收紧 max_tokens 往往是最大的省钱杠杆。',
+        a: '生成比读提示词更耗算力,几乎每个模型的输出单价都是输入的 3-8 倍。写长回答的应用在输出上花的钱可能比大得多的输入还多——收紧 max_tokens 往往是最大的省钱杠杆。',
       },
       {
         q: '包含缓存价或批量价吗?',
@@ -87,7 +87,7 @@ export const llmApiCostCalculatorL10n: ToolL10n = {
       'sIn': 'Tokens mensuales de entrada',
       'sOut': 'Tokens mensuales de salida',
       'copySummary': 'Copiar resumen',
-      'note': '💸 Las tarifas mensuales se basan en precios por 1M de tokens sin caché. Con prompt caching o APIs por lotes el coste real suele ser menor.',
+      'note': '💸 Las facturas mensuales asumen tarifas de entrada sin caché por 1 M de tokens (tokencost.app, revisado 2026-08). El prompt caching abarata la entrada un 50-90 % y las API por lotes reducen la salida más o menos a la mitad — la factura real suele quedar por debajo de estos números de peor caso.',
     },
     useCases: [
       'ordenar la factura por modelo: 20 M de tokens de entrada y 4 M de salida al mes, a precios de lista, del más barato en adelante',
@@ -102,7 +102,7 @@ export const llmApiCostCalculatorL10n: ToolL10n = {
       },
       {
         q: '¿Por qué son tan caros los tokens de salida?',
-        a: 'Generar cuesta más cómputo que leer el prompt, así que los tokens de salida cuestan 3-15 veces más que los de entrada en casi todos los modelos. Una app que redacta respuestas largas puede gastar más en salida que en un prompt mucho mayor — recortar max_tokens suele ser la palanca grande.',
+        a: 'Generar cuesta más cómputo que leer el prompt, así que los tokens de salida cuestan 3-8 veces más que los de entrada en casi todos los modelos. Una app que redacta respuestas largas puede gastar más en salida que en un prompt mucho mayor — recortar max_tokens suele ser la palanca grande.',
       },
       {
         q: '¿Incluyen los precios de caché o por lotes?',
@@ -136,18 +136,18 @@ export const llmApiCostCalculatorL10n: ToolL10n = {
       'thMonthly': 'Monatliche Rechnung',
       'thVsCheapest': 'ggü. günstigstem',
       'thSavings': 'Ersparnis ggü. teuerstem',
-      'invalid': 'Gültige Token-Mengen eingeben',
+      'invalid': 'Nicht-negative Token-Mengen eingeben',
       'summaryTitle': 'LLM-API-Monatskosten-Vergleich',
       'sIn': 'Monatliche Eingabe-Tokens',
       'sOut': 'Monatliche Ausgabe-Tokens',
       'copySummary': 'Zusammenfassung kopieren',
-      'note': '💸 Die Kosten basieren auf Preisen pro 1 Mio. Tokens ohne Caching. Mit Prompt-Caching und Batch-APIs fallen die tatsächlichen Rechnungen meist niedriger aus.',
+      'note': '💸 Die Monatsrechnungen basieren auf ungecachten Eingangspreisen pro 1 Mio. Tokens (tokencost.app, geprüft 2026-08). Prompt-Caching macht den Input 50-90 % günstiger, Batch-APIs halbieren den Output ungefähr — echte Rechnungen liegen meist unter diesen Worst-case-Zahlen.',
     },
     useCases: [
       'Rechnungen pro Modell sortieren: 20 M Input- und 4 M Output-Tokens im Monat zu Listenpreisen, günstigste zuerst',
       'Output-Anteil diagnostizieren: bei antwortlastigen Apps machen Output-Tokens die Hälfte aus; max_tokens von 4096 auf 1024 senken spart deutlich',
       'Cache-Hebel abschätzen: Prompt-Caching spart 50-90 % beim Input (OpenAI, Anthropic, DeepSeek); die Tabelle zeigt Listenpreise',
-      'Budget-Zaun bauen: Volumen in 30-Tage-Kosten umrechnen und ein monatliches Limit je App festlegen',
+      'Budget-Obergrenze setzen: Volumen in 30-Tage-Kosten umrechnen und ein monatliches Limit je App festlegen',
     ],
     faqs: [
       {
@@ -156,7 +156,7 @@ export const llmApiCostCalculatorL10n: ToolL10n = {
       },
       {
         q: 'Warum sind Output-Tokens so teuer?',
-        a: 'Generieren ist rechenintensiver als das Lesen des Prompts — Output-Tokens kosten fast überall das 3-15-Fache des Inputs. Eine App mit langen Antworten kann für Output mehr zahlen als für einen deutlich größeren Prompt; max_tokens stutzen ist oft der größte Hebel.',
+        a: 'Generieren ist rechenintensiver als das Lesen des Prompts — Output-Tokens kosten fast überall das 3-8-Fache des Inputs. Eine App mit langen Antworten kann für Output mehr zahlen als für einen deutlich größeren Prompt; max_tokens zu reduzieren ist oft der größte Hebel.',
       },
       {
         q: 'Sind Cache- oder Batch-Preise enthalten?',

@@ -21,7 +21,7 @@ const en: ReactNode = (
     <h2>Butter is the exception</h2>
     <p>Stick butter is sold by weight with tablespoon markings already printed on the wrapper — trust those. One US cup of butter equals exactly 227 g or two sticks.</p>
     <h2>When precision really matters</h2>
-    <p>Baking (bread, cakes, macarons) rewards scale accuracy; soups and stews forgive everything. If a dough feels wrong by feel, trust the dough over the chart.</p>
+    <p>Baking (bread, cakes, macarons) rewards scale accuracy; soups and stews forgive everything. If a dough feels wrong, trust the dough over the chart.</p>
   </section>
 )
 
@@ -59,7 +59,7 @@ const de: ReactNode = (
     <h2>Warum die Zutat entscheidend ist</h2>
     <p>Eine US-Tasse fasst rund 237 Milliliter von allem — aber das Gewicht hängt davon ab, was sie füllt: Eine Tasse Mehl wiegt etwa 120 g, eine Tasse Honig 340 g. „1 Tasse“ umzurechnen, ohne die Zutat zu nennen, ist der Punkt, an dem Rezepte schiefgehen.</p>
     <h2>Geschöpft, gesiebt oder gelöffelt</h2>
-    <p>Mehl, das mit der Tasse direkt aus dem Beutel geschöpft wird, kann 140 g oder mehr wiegen; gelöffelt und abgestrichen landet es bei ~120 g; gesiebt fällt es Richtung 114 g. Dieses Tool nutzt Löffel-und-abstreichen-Mittelwerte, den Standard moderner Backbücher.</p>
+    <p>Mehl, das mit der Tasse direkt aus dem Beutel geschöpft wird, kann 140 g oder mehr wiegen; gelöffelt und abgestrichen landet es bei ~120 g; gesiebt fällt es Richtung 114 g. Dieses Tool nutzt Löffel-und-Abstreichen-Mittelwerte, den Standard moderner Backbücher.</p>
     <h2>Butter ist die Ausnahme</h2>
     <p>Stangenbutter wird nach Gewicht verkauft, und die Esslöffelmarken stehen bereits auf der Verpackung — vertrau ihnen. Eine US-Tasse Butter entspricht exakt 227 g, also zwei Stangen.</p>
     <h2>Wann Präzision wirklich zählt</h2>

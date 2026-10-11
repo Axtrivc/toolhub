@@ -68,21 +68,21 @@ const zh: ReactNode = (
     <div>
       <h2>真正的 CSV 解析器，而非简单的逗号切分</h2>
       <p>
-        只要某个字段本身包含逗号，按逗号切分就会出错。本工具使用一个正规的状态机解析器，理解 CSV 标准：用 <code>&quot;double quotes&quot;</code> 包裹的字段可以包含逗号、制表符，甚至换行；字面引号写作两个引号（<code>&quot;&quot;</code>）。Windows 的 <code>CRLF</code> 行尾会被透明处理。带引号字段中的内嵌换行在输出单元格中变成 <code>&lt;br&gt;</code>，管道符被转义为 <code>\|</code>，从而保证表格结构完整。
+        只要某个字段本身包含逗号，按逗号切分就会出错。本工具使用真正的状态机解析器，遵循 CSV 标准：用 <code>&quot;double quotes&quot;</code> 包裹的字段可以包含逗号、制表符，甚至换行；字面引号写作两个引号（<code>&quot;&quot;</code>）。Windows 的 <code>CRLF</code> 行尾也能被正常处理。带引号字段中的内嵌换行在输出单元格中变成 <code>&lt;br&gt;</code>，管道符被转义为 <code>\|</code>，从而保证表格结构完整。
       </p>
     </div>
 
     <div>
       <h2>分隔符检测与参差不齐的行</h2>
       <p>
-        把分隔符保持为 <strong>自动检测</strong>，工具会扫描第一行中的制表符、逗号和分号——出现最多的胜出。你也可以随时手动覆盖。单元少于最宽行的行会被 <em>用空单元格补齐</em>（工具会告诉你补了多少个），这样缺失的末尾值就不会破坏表格。如果你的数据没有表头行，取消勾选 <strong>首行为表头</strong>，即可生成通用的 <code>Column 1…N</code> 列名。
+        把分隔符保持为<strong>自动检测</strong>，工具会扫描第一行中的制表符、逗号和分号——出现次数最多的胜出。你也可以随时手动覆盖。单元格数少于最宽行的行会被<em>用空单元格补齐</em>（工具会告诉你补了多少个），这样缺失的末尾值就不会破坏表格。如果你的数据没有表头行，取消勾选<strong>首行为表头</strong>，即可生成通用的 <code>Column 1…N</code> 列名。
       </p>
     </div>
 
     <div>
       <h2>对齐与美化填充</h2>
       <p>
-        Markdown 表格通过分隔行支持按列对齐：<code>:---</code> 左对齐，<code>:---:</code> 居中，<code>---:</code> 右对齐。你选定的对齐方式会应用到每一列。开启 <strong>整齐填充列</strong>，每个单元格会用空格填充，使原始 Markdown 源码在纯文本编辑器中整齐对齐——这纯粹是视觉上的，但能让 diff 和手工编辑轻松得多。两种方式的渲染结果完全相同。
+        Markdown 表格通过分隔行支持按列对齐：<code>:---</code> 左对齐，<code>:---:</code> 居中，<code>---:</code> 右对齐。你选定的对齐方式会应用到每一列。开启<strong>整齐填充列</strong>，每个单元格会用空格填充，使原始 Markdown 源码在纯文本编辑器中整齐对齐——这纯粹是视觉上的，但能让 diff 和手工编辑轻松得多。两种方式的渲染结果完全相同。
       </p>
     </div>
   </section>
@@ -99,19 +99,19 @@ const es: ReactNode = (
     <div>
       <h2>Un analizador CSV real, no un split ingenuo</h2>
       <p>
-        Dividir por comas se rompe en cuanto un campo contiene una coma. Esta herramienta usa un analizador con máquina de estados que entiende el estándar CSV: los campos envueltos en <code>&quot;double quotes&quot;</code> pueden contener comas, tabuladores e incluso saltos de línea, y una comilla literal se escribe como dos comillas (<code>&quot;&quot;</code>). Los finales de línea <code>CRLF</code> de Windows se gestionan de forma transparente. Los saltos de línea incrustados dentro de un campo entrecomillado se convierten en <code>&lt;br&gt;</code> en la celda de salida, y los caracteres pipe se escapan como <code>\|</code> para que la estructura de la tabla se mantenga intacta.
+        Dividir por comas falla en cuanto un campo contiene una coma. Esta herramienta usa un analizador con máquina de estados que entiende el estándar CSV: los campos delimitados por <code>&quot;double quotes&quot;</code> pueden contener comas, tabuladores e incluso saltos de línea, y una comilla literal se escribe como dos comillas (<code>&quot;&quot;</code>). Los finales de línea <code>CRLF</code> de Windows se gestionan de forma transparente. Los saltos de línea incrustados dentro de un campo entrecomillado se convierten en <code>&lt;br&gt;</code> en la celda de salida, y los caracteres pipe se escapan como <code>\|</code> para que la estructura de la tabla se mantenga intacta.
       </p>
     </div>
 
     <div>
       <h2>Detección del delimitador y filas desiguales</h2>
       <p>
-        Deja el delimitador en <strong>Detectar auto</strong> y la primera línea se escanea en busca de tabuladores, comas y puntos y comas — gana el más frecuente. Siempre puedes anularlo manualmente. Las filas con menos celdas que la fila más ancha se <em>rellenan con celdas vacías</em> (la herramienta te dice cuántas se corrigieron), así un valor final que falte nunca corrompe tu tabla. Si tus datos no tienen fila de encabezado, desmarca <strong>La primera fila es encabezado</strong> y se generan encabezados genéricos <code>Column 1…N</code>.
+        Deja el delimitador en <strong>Detección automática</strong> y la primera línea se escanea en busca de tabuladores, comas y puntos y comas — gana el más frecuente. Siempre puedes anularlo manualmente. Las filas con menos celdas que la fila más ancha se <em>rellenan con celdas vacías</em> (la herramienta te dice cuántas se corrigieron), de modo que un valor final que falte nunca corrompa tu tabla. Si tus datos no tienen fila de encabezado, desmarca <strong>La primera fila es el encabezado</strong> y se generan encabezados genéricos <code>Column 1…N</code>.
       </p>
     </div>
 
     <div>
-      <h2>Alineación y padding elegante</h2>
+      <h2>Alineación y relleno elegante</h2>
       <p>
         Las tablas Markdown soportan alineación por columna mediante la fila separadora: <code>:---</code> para la izquierda, <code>:---:</code> para el centro y <code>---:</code> para la derecha. La alineación que elijas se aplica a cada columna. Activa <strong>Rellenar columnas</strong> y cada celda se rellena con espacios para que el código fuente Markdown quede alineado en un editor de texto plano — solo es cosmético, pero facilita mucho los diffs y la edición manual. El renderizado es idéntico en cualquier caso.
       </p>
@@ -130,7 +130,7 @@ const de: ReactNode = (
     <div>
       <h2>Ein echter CSV-Parser, kein naives Split</h2>
       <p>
-        Ein Aufteilen an Kommas bricht, sobald ein Feld ein Komma enthält. Dieses Tool nutzt einen echten State-Machine-Parser, der den CSV-Standard versteht: Felder, die in <code>&quot;double quotes&quot;</code> eingeschlossen sind, dürfen Kommas, Tabulatoren und sogar Zeilenumbrüche enthalten, und ein literales Anführungszeichen wird als zwei Anführungszeichen geschrieben (<code>&quot;&quot;</code>). Windows-<code>CRLF</code>-Zeilenenden werden transparent behandelt. Eingebettete Zeilenumbrüche innerhalb eines gequoteten Felds werden in der Ausgabezelle zu <code>&lt;br&gt;</code>, und Pipe-Zeichen werden als <code>\|</code> maskiert, damit die Tabellenstruktur intakt bleibt.
+        Das Aufteilen nach Kommas scheitert, sobald ein Feld ein Komma enthält. Dieses Tool nutzt einen echten State-Machine-Parser, der den CSV-Standard versteht: Felder, die in <code>&quot;double quotes&quot;</code> eingeschlossen sind, dürfen Kommas, Tabulatoren und sogar Zeilenumbrüche enthalten, und ein literales Anführungszeichen wird als zwei Anführungszeichen geschrieben (<code>&quot;&quot;</code>). Windows-<code>CRLF</code>-Zeilenenden werden transparent behandelt. Eingebettete Zeilenumbrüche innerhalb eines in Anführungszeichen gesetzten Felds werden in der Ausgabezelle zu <code>&lt;br&gt;</code>, und Pipe-Zeichen werden als <code>\|</code> maskiert, damit die Tabellenstruktur intakt bleibt.
       </p>
     </div>
 
@@ -142,9 +142,9 @@ const de: ReactNode = (
     </div>
 
     <div>
-      <h2>Ausrichtung und hübsches Padding</h2>
+      <h2>Ausrichtung und Spaltenauffüllung</h2>
       <p>
-        Markdown-Tabellen unterstützen Spaltenausrichtung über die Trennzeile: <code>:---</code> für links, <code>:---:</code> für zentriert und <code>---:</code> für rechts. Die von dir gewählte Ausrichtung wird auf jede Spalte angewendet. Aktiviere <strong>Spalten auffüllen</strong> und jede Zelle wird mit Leerzeichen aufgefüllt, sodass die rohe Markdown-Quelle in einem Texteditor bündig ausgerichtet ist — rein kosmetisch, aber es erleichtert Diffs und manuelle Bearbeitung enorm. Das Rendering ist in beiden Fällen identisch.
+        Markdown-Tabellen unterstützen Spaltenausrichtung über die Trennzeile: <code>:---</code> für links, <code>:---:</code> für zentriert und <code>---:</code> für rechts. Die von dir gewählte Ausrichtung wird auf jede Spalte angewendet. Aktiviere <strong>Spalten auffüllen</strong> und jede Zelle wird mit Leerzeichen aufgefüllt, sodass der rohe Markdown-Quelltext in einem Texteditor bündig ausgerichtet ist — rein kosmetisch, aber es erleichtert Diffs und manuelle Bearbeitung enorm. Das Rendering ist in beiden Fällen identisch.
       </p>
     </div>
   </section>

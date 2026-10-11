@@ -43,7 +43,7 @@ const en: ReactNode = (
     </div>
 
     <div>
-      <h2>{'Downscale, don&apos;t upscale'}</h2>
+      <h2>{'Downscale, don’t upscale'}</h2>
       <p>
         Canvas resampling is excellent at making images <em>smaller</em>, but enlarging beyond the original
         dimensions just invents pixels — expect softness. For crisp results, start from the largest source you
@@ -59,13 +59,13 @@ const zh: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>这是什么工具？</h2>
     <p>
-      需要把照片精确调成 1200×630 的社交分享卡、256×256 的头像，还是缩到一半尺寸的产品图？本缩放工具能在浏览器中把任意图像缩放到你输入的尺寸。它会用 <strong>高质量平滑</strong> 在本地画布中重绘图像，在下载前就显示 <strong>真实的编码文件大小</strong>，而且绝不上传任何内容 —— 文件永远不会离开你的设备。
+      需要一张精确为 1200×630 的社交分享卡图、256×256 的头像，还是缩到一半尺寸的产品图？本缩放工具能在浏览器中把任意图像缩放到你输入的尺寸。它会用 <strong>高质量平滑</strong> 在本地画布中重绘图像，在下载前就显示 <strong>真实的编码文件大小</strong>，而且绝不上传任何内容 —— 文件永远不会离开你的设备。
     </p>
 
     <div>
       <h2>（通常）保持宽高比锁定</h2>
       <p>
-        锁定开启时，修改宽度会按原始比例重新计算高度，反之亦然 —— 图像永远不会被拉伸。只有当你确实需要变形，或打算稍后裁剪时才关闭它。<strong>25% / 50% / 75% / 100%</strong> 按钮是为邮件、缩略图或 <code>srcset</code> 变体快速缩小图像的最快方式，无需任何计算。
+        锁定开启时，修改宽度会按原始比例重新计算高度，反之亦然 —— 图像永远不会被拉伸。只有当你确实需要变形，或打算稍后裁剪时才关闭它。<strong>25% / 50% / 75% / 100%</strong> 按钮是最快的缩小方式，适合邮件、缩略图或 <code>srcset</code> 变体，无需任何计算。
       </p>
     </div>
 
@@ -79,7 +79,7 @@ const zh: ReactNode = (
     <div>
       <h2>缩小，别放大</h2>
       <p>
-        画布重采样非常擅长把图像变 <em>更小</em>，但放大到超过原始尺寸只是在凭空生成像素 —— 画面会变软。想要锐利的效果，请从你能拿到的最大源文件开始向下缩放。另外请注意：PNG 和 WebP 输出会保留透明度，而 JPEG 会把透明区域压平到白色背景上；标志和抠图素材请选择 PNG 或 WebP。
+        画布重采样非常擅长把图像变得 <em>更小</em>，但放大到超过原始尺寸只是在凭空生成像素 —— 画面会变软。想要锐利的效果，请从你能拿到的最大源文件开始向下缩放。另外请注意：PNG 和 WebP 输出会保留透明度，而 JPEG 会把透明区域压平到白色背景上；标志和抠图素材请选择 PNG 或 WebP。
       </p>
     </div>
   </section>
@@ -96,7 +96,7 @@ const es: ReactNode = (
     <div>
       <h2>Mantén la relación de aspecto bloqueada (normalmente)</h2>
       <p>
-        Con el bloqueo activado, cambiar el ancho recalcula el alto a partir de las proporciones originales — y viceversa —, así la imagen nunca se estira. Desactívalo solo cuando realmente necesites deformarla o cuando planees recortar después. Los botones <strong>25 % / 50 % / 75 % / 100 %</strong> son la forma más rápida de reducir para correo, miniaturas o variantes <code>srcset</code> sin hacer cálculos.
+        Con el bloqueo activado, cambiar el ancho recalcula el alto a partir de las proporciones originales — y viceversa —, así la imagen nunca se estira. Desactívalo solo cuando realmente necesites deformarla o cuando planees recortar después. Los botones <strong>25 % / 50 % / 75 % / 100 %</strong> son la forma más rápida de reducir imágenes para correo, miniaturas o variantes <code>srcset</code> sin hacer cálculos.
       </p>
     </div>
 
@@ -127,21 +127,21 @@ const de: ReactNode = (
     <div>
       <h2>Seitenverhältnis gesperrt lassen (meistens)</h2>
       <p>
-        Ist die Sperre an, ändert sich bei neuer Breite die Höhe nach den Originalproportionen — und umgekehrt —, sodass das Bild nie gestreckt wird. Schalte sie nur aus, wenn du wirklich verzerren musst oder später beschneiden willst. Die Buttons <strong>25 % / 50 % / 75 % / 100 %</strong> sind der schnellste Weg, um für E-Mail, Vorschaubilder oder <code>srcset</code>-Varianten zu verkleinern, ohne zu rechnen.
+        Ist die Sperre aktiv, wird bei geänderter Breite die Höhe aus den Originalproportionen neu berechnet — und umgekehrt —, sodass das Bild nie verzerrt wird. Schalte sie nur aus, wenn du wirklich verzerren musst oder später beschneiden willst. Die Buttons <strong>25 % / 50 % / 75 % / 100 %</strong> sind der schnellste Weg, um für E-Mail, Vorschaubilder oder <code>srcset</code>-Varianten zu verkleinern, ohne zu rechnen.
       </p>
     </div>
 
     <div>
       <h2>Die Größenschätzung ist real, kein Raten</h2>
       <p>
-        Die meisten Skalierer raten die Ausgabegröße; dieses Werkzeug kodiert das Bild beim Tippen wirklich in einer versteckten Canvas neu (entprellt, damit es flott bleibt) und meldet die genaue Byte-Anzahl aus <code>canvas.toBlob</code>. Auch das Vorschaubild ist die tatsächliche kodierte Ausgabe — was du siehst, ist buchstäblich das, was du herunterlädst. Ist das Ergebnis größer als erhofft, senke den Qualitätsregler oder wechsle vor dem Export zu WebP.
+        Die meisten Skalierer raten die Ausgabegröße; dieses Werkzeug kodiert das Bild beim Tippen wirklich in einer versteckten Canvas neu (entprellt, damit es flott bleibt) und meldet die genaue Byte-Anzahl aus <code>canvas.toBlob</code>. Auch das Vorschaubild ist die tatsächliche kodierte Ausgabe — was du siehst, ist buchstäblich das, was du herunterlädst. Ist das Ergebnis größer als erhofft, ziehe den Qualitätsregler herunter oder wechsle vor dem Export zu WebP.
       </p>
     </div>
 
     <div>
       <h2>Verkleinern, nicht vergrößern</h2>
       <p>
-        Canvas-Resampling ist hervorragend darin, Bilder <em>kleiner</em> zu machen, aber eine Vergrößerung über die Originalmaße hinaus erfindet nur Pixel — rechne mit weicher Zeichnung. Für knackscharfe Ergebnisse geh von der größten Vorlage aus, die du hast, und skaliere nach unten. Beachte außerdem: Transparenz bleibt in PNG- und WebP-Ausgabe erhalten, während JPEG sie auf einen weißen Hintergrund einebnet; wähle für Logos und Freisteller also PNG oder WebP.
+        Canvas-Resampling ist hervorragend darin, Bilder <em>kleiner</em> zu machen, aber eine Vergrößerung über die Originalmaße hinaus erfindet nur Pixel — rechne mit weicher Zeichnung. Für knackscharfe Ergebnisse starte mit der größten Vorlage, die du hast, und verkleinere von dort aus. Beachte außerdem: Transparenz bleibt in PNG- und WebP-Ausgabe erhalten, während JPEG sie auf einen weißen Hintergrund setzt; wähle für Logos und Freisteller also PNG oder WebP.
       </p>
     </div>
   </section>

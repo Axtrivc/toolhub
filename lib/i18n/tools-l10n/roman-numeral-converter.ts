@@ -6,9 +6,9 @@ import type { ToolL10n } from '../tool-l10n'
 
 export const RomanNumeralConverterL10n: ToolL10n = {
   zh: {
-    useCases: ['换算电影版权年份的罗马数字', '做罗马数字作业或教学', '核对章节/钟面写法是否规范', '1-3999 数字与罗马数字互转'],
+    useCases: ['把电影版权年份换算成罗马数字', '做罗马数字作业或教学', '核对章节/钟面写法是否规范', '1-3999 数字与罗马数字互转'],
     faqs: [
-      { q: '支持的数字范围是多少?', a: '1 到 3999。古典记数法没有零,也无法在键盘和大多数字体表达的上划线记法之外写出 4000+。对于年份、章节号和版权行,3999 覆盖了几乎所有实际用途。' },
+      { q: '支持的数字范围是多少?', a: '1 到 3999。古典记数法没有零,4000 以上的数只能用上划线记法表示,而这种写法键盘打不出、大多数字体也不支持。对年份、章节号和版权行来说,3999 几乎覆盖了所有实际用途。' },
       { q: '为什么 4 写作 IV 而不是 IIII?', a: '标准形式使用减法对——IV=4、IX=9、XL=40、XC=90、CD=400、CM=900。钟面出于传统显示 IIII,但本转换器强制标准形式:输入 IIII 或 VX 会被拒绝,并给出规范写法的建议。' },
       { q: '会显示拆解过程吗?', a: '会。数字转罗马会按顺序列出符号(2024 拆成 MM + XX + IV);罗马转数字会先按规范形式校验再采信——非法组合会被拒绝,而不是被误读。' },
     ],
@@ -41,7 +41,7 @@ export const RomanNumeralConverterL10n: ToolL10n = {
       'in.num': 'Número (1-3999)',
       'in.result': 'Valor convertido',
       'in.roman': 'o número romano',
-      'note': '🏛️ Los números romanos usan pares de sustracción (IV=4, IX=9). El rango es 1-3999: la notación clásica no tiene cero ni forma de escribir más.',
+      'note': '🏛️ Los números romanos estándar usan pares sustractivos (IV=4, IX=9). El rango es 1-3999: la notación clásica no tiene cero ni forma de escribir números mayores.',
       'out.breakdown': 'Desglose',
       'out.num': 'Número (1-3999)',
       'out.result': 'Valor convertido',
@@ -65,7 +65,7 @@ export const RomanNumeralConverterL10n: ToolL10n = {
       'in.num': 'Zahl (1-3999)',
       'in.result': 'Umgerechneter Wert',
       'in.roman': 'Oder römische Zahl',
-      'note': '🏛️ Römische Zahlen nutzen Subtraktionspaare (IV=4, IX=9). Der Bereich ist 1-3999 — die klassische Notation kennt keine Null und keine größeren Zahlen.',
+      'note': '🏛️ Römische Zahlen in Standardform nutzen Subtraktionspaare (IV=4, IX=9). Der Bereich ist 1-3999 — die klassische Notation kennt keine Null und keine größeren Zahlen.',
       'out.breakdown': 'Aufschlüsselung',
       'out.num': 'Zahl (1-3999)',
       'out.result': 'Umgerechneter Wert',

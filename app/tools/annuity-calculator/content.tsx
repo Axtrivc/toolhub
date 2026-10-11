@@ -91,7 +91,7 @@ const es: ReactNode = (
       <h2>Usos reales</h2>
       <ul>
         <li>Planificación de retiros en la jubilación</li>
-        <li>Decisiones sobre pagos de lotería (lump sum frente a anualidad)</li>
+        <li>Decisiones sobre pagos de lotería (pago único frente a anualidad)</li>
         <li>Evaluación de pensiones y acuerdos estructurados</li>
         <li>Anualidades de donación benéfica</li>
       </ul>
@@ -121,8 +121,8 @@ const de: ReactNode = (
       <ul>
         <li>Planung von Entnahmen im Ruhestand</li>
         <li>Entscheidungen über Lottogewinne (Einmalbetrag versus Rente)</li>
-        <li>Bewertung von Pensionen und Strukturierten Vergleichen</li>
-        <li>Schenkungsenten für wohltätige Zwecke</li>
+        <li>Bewertung von Pensionen und strukturierten Abfindungen</li>
+        <li>Wohltätige Schenkungsrenten</li>
       </ul>
     </div>
   </section>

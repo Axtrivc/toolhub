@@ -61,8 +61,8 @@ const zh: ReactNode = (
     <div>
       <h2>计算公式</h2>
       <ul>
-        <li><strong>总 ROI</strong> =(期末价值 − 初始成本)÷ 初始成本 × 100</li>
-        <li><strong>年化(CAGR)</strong> =(期末/初始)^(1/年数) − 1</li>
+        <li><strong>总 ROI</strong> = (期末价值 − 初始成本) ÷ 初始成本 × 100</li>
+        <li><strong>年化(CAGR)</strong> = (期末/初始)^(1/年数) − 1</li>
       </ul>
     </div>
 
@@ -117,7 +117,7 @@ const es: ReactNode = (
     <div>
       <h2>Retornos anuales típicos</h2>
       <ul>
-        <li><strong>S&amp;P 500 (promedio a largo plazo):</strong> ~10 % (7 % después de inflación)</li>
+        <li><strong>S&amp;P 500 (promedio a largo plazo):</strong> ~10 % (7 % después de la inflación)</li>
         <li><strong>Bonos:</strong> ~4–5 %</li>
         <li><strong>Bienes raíces:</strong> ~8–10 % (con alquiler + revalorización)</li>
         <li><strong>Cuenta de ahorro:</strong> ~2–5 % (varía con las tasas)</li>

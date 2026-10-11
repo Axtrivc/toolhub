@@ -60,7 +60,7 @@ export const removeLineBreaksL10n: ToolL10n = {
     ],
     faqs: [
       { q: 'Werden die Leerzeichen zwischen den Wörtern entfernt?', a: 'Nein — Zeilenumbrüche werden durch ein einzelnes Leerzeichen ersetzt und mehrere aufeinanderfolgende Leerzeichen zu einem zusammengefasst. Die Wörter bleiben sauber getrennt.' },
-      { q: 'Was passiert mit Leerzeilen zwischen Absätzen?', a: 'Eine Leerzeile ist auch ein Umbruch und wird zum Leerzeichen — der Text wird komplett eine Zeile. Willst du Absätze behalten, bearbeite sie blockweise oder markiere die Brüche vorher mit einem ungewöhnlichen Trennzeichen.' },
+      { q: 'Was passiert mit Leerzeilen zwischen Absätzen?', a: 'Eine Leerzeile ist auch ein Umbruch und wird zum Leerzeichen — der Text wird komplett zu einer Zeile. Willst du Absätze behalten, bearbeite sie blockweise oder markiere die Brüche vorher mit einem ungewöhnlichen Trennzeichen.' },
       { q: 'Wie viel Text fasst das Tool auf einmal?', a: 'Als reine Textoperation verarbeitet der Browser problemlos mehrere Hunderttausend Zeichen (1–2 MB); darüber entscheidet der Arbeitsspeicher des Geräts. Sehr lange Texte in Etappen verarbeiten.' },
       { q: 'Geeignet für CSV oder Code?', a: 'Nur mit Vorsicht: Dort ist der Zeilenumbruch legitime Syntax — in CSV eine neue Zeile, im Code eine neue Anweisung. Vor dem Zusammenfügen die echten Umbrüche durch Kommas, Semikolons oder Escapes ersetzen.' },
     ],

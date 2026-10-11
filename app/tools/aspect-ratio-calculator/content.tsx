@@ -65,16 +65,16 @@ const zh: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>这是什么工具?</h2>
     <p>
-      <strong>宽高比</strong>是宽度与高度之间的比例关系(表示为 <code>W:H</code>,如 16:9)。当你调整图片、视频或容器的尺寸时,保持比例不变可以避免拉伸和变形。本计算器接收任意比例加其中一个维度,算出另一个,并实时预览该比例的形状。
+      <strong>宽高比</strong>是宽度与高度之间的比例关系(表示为 <code>W:H</code>,如 16:9)。当你调整图片、视频或容器的尺寸时,保持比例不变可以避免拉伸和变形。本计算器只需输入任意比例和其中一个尺寸,即可算出另一个,并实时预览该比例的形状。
     </p>
     <div>
       <h2>背后的数学原理</h2>
       <p>
-        给定比例 <code>W:H</code>,各维度始终保持成比例:<code>宽 ÷ 高 = W ÷ H</code>。因此,如果已知宽度,<code>高 = 宽 × (H ÷ W)</code>;如果已知高度,<code>宽 = 高 × (W ÷ H)</code>。对于宽 1920px 的 16:9 视频,高度为 <code>1920 × (9 ÷ 16) = 1080</code>。本计算器可对任意比例完成除法运算,包括 5:4、21:9 这类少见比例。
+        给定比例 <code>W:H</code>,宽和高始终保持成比例:<code>宽 ÷ 高 = W ÷ H</code>。因此,如果已知宽度,<code>高 = 宽 × (H ÷ W)</code>;如果已知高度,<code>宽 = 高 × (W ÷ H)</code>。对于宽 1920px 的 16:9 视频,高度为 <code>1920 × (9 ÷ 16) = 1080</code>。本计算器可为任意比例算出缺失的尺寸,包括 5:4、21:9 这类少见比例。
       </p>
     </div>
     <div>
-      <h2>常见比例及其出现场景</h2>
+      <h2>常见比例及其应用场景</h2>
       <ul>
         <li>
           <strong>16:9</strong> —— YouTube、Netflix、现代显示器、大多数手机视频。
@@ -97,9 +97,9 @@ const zh: ReactNode = (
       </ul>
     </div>
     <div>
-      <h2>适应(contain)对比填充(cover)</h2>
+      <h2>适应(contain)与填充(cover)</h2>
       <p>
-        把某个比例嵌入固定方框时,<strong>contain</strong>(包含)会缩放图片使整体完全可见,可能留下黑边。<strong>cover</strong>(覆盖)则缩放到方框完全填满,裁掉溢出部分。CSS 的 <code>object-fit</code> 和{' '}
+        把某个比例嵌入固定方框时,<strong>contain</strong>(适应)会缩放图片使整体完全可见,可能留下黑边。<strong>cover</strong>(填充)则缩放到方框完全填满,裁掉溢出部分。CSS 的 <code>object-fit</code> 和{' '}
         <code>background-size</code> 用的就是这些术语。当你必须显示完整图片时选 contain;当方框必须保持填满(如 hero 背景图)时选 cover。
       </p>
     </div>
@@ -111,19 +111,19 @@ const es: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>¿Qué es esta herramienta?</h2>
     <p>
-      Una <strong>proporción de aspecto</strong> es la relación proporcional entre el ancho y el alto (expresada como <code>W:H</code>, por ejemplo 16:9). Al redimensionar una imagen, un vídeo o un contenedor, mantener la proporción constante evita estiramientos y distorsiones. Esta calculadora toma cualquier proporción más una dimensión y calcula la otra, con una vista previa en vivo de la forma resultante.
+      Una <strong>relación de aspecto</strong> es la relación proporcional entre el ancho y el alto (expresada como <code>W:H</code>, por ejemplo 16:9). Al redimensionar una imagen, un vídeo o un contenedor, mantener la proporción constante evita estiramientos y distorsiones. Esta calculadora toma cualquier relación más una dimensión y calcula la otra, con una vista previa en tiempo real de la forma resultante.
     </p>
     <div>
-      <h2>Las matemáticas detrás</h2>
+      <h2>Las matemáticas que hay detrás</h2>
       <p>
-        Dada una proporción <code>W:H</code>, las dimensiones son siempre proporcionales: <code>ancho ÷ alto = W ÷ H</code>. Por tanto, si conoces el ancho, <code>alto = ancho × (H ÷ W)</code>; si conoces el alto, <code>ancho = alto × (W ÷ H)</code>. Para un vídeo 16:9 de 1920px de ancho, el alto es <code>1920 × (9 ÷ 16) = 1080</code>. La calculadora realiza la división para cualquier proporción, incluidas las inusuales como 5:4 o 21:9.
+        Dada una relación <code>W:H</code>, las dimensiones son siempre proporcionales: <code>ancho ÷ alto = W ÷ H</code>. Por tanto, si conoces el ancho, <code>alto = ancho × (H ÷ W)</code>; si conoces el alto, <code>ancho = alto × (W ÷ H)</code>. Para un vídeo 16:9 de 1920px de ancho, el alto es <code>1920 × (9 ÷ 16) = 1080</code>. La calculadora realiza la división para cualquier relación, incluidas las inusuales como 5:4 o 21:9.
       </p>
     </div>
     <div>
       <h2>Proporciones comunes y dónde las encuentras</h2>
       <ul>
         <li>
-          <strong>16:9</strong> — YouTube, Netflix, monitores modernos, la mayoría de vídeo de teléfono.
+          <strong>16:9</strong> — YouTube, Netflix, monitores modernos, la mayoría de los vídeos de móvil.
         </li>
         <li>
           <strong>9:16</strong> — vídeo vertical (TikTok, Instagram Reels, Stories).
@@ -145,7 +145,7 @@ const es: ReactNode = (
     <div>
       <h2>Ajustar (contain) frente a rellenar (cover)</h2>
       <p>
-        Al ajustar una proporción en un recuadro fijo, <strong>contain</strong> (contener) escala la imagen para que se vea entera, posiblemente dejando barras negras. <strong>Cover</strong> (cubrir) escala de modo que el recuadro quede completamente relleno, recortando lo que sobra. Las propiedades CSS <code>object-fit</code> y{' '}
+        Al ajustar una relación en un recuadro fijo, <strong>contain</strong> (ajustar) escala la imagen para que se vea entera, posiblemente dejando barras negras. <strong>Cover</strong> (rellenar) escala de modo que el recuadro quede completamente cubierto, recortando lo que sobra. Las propiedades CSS <code>object-fit</code> y{' '}
         <code>background-size</code> usan estos mismos términos. Elige contain cuando debas mostrar la imagen entera; elige cover cuando el recuadro deba quedar lleno (p. ej. fondos hero).
       </p>
     </div>
@@ -157,7 +157,7 @@ const de: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>Was ist dieses Werkzeug?</h2>
     <p>
-      Ein <strong>Seitenverhältnis</strong> ist die proportionale Beziehung zwischen Breite und Höhe (ausgedrückt als <code>W:H</code>, z. B. 16:9). Wenn du ein Bild, ein Video oder einen Container in der Größe änderst, verhindert ein konstantes Verhältnis Stauchung und Verzerrung. Dieser Rechner nimmt ein beliebiges Verhältnis plus eine Dimension und berechnet die andere, mit einer Live-Vorschau der resultierenden Form.
+      Ein <strong>Seitenverhältnis</strong> ist die proportionale Beziehung zwischen Breite und Höhe (ausgedrückt als <code>W:H</code>, z. B. 16:9). Wenn du ein Bild, ein Video oder einen Container in der Größe änderst, verhindert ein konstantes Verhältnis Stauchung und Verzerrung. Dieser Rechner nimmt ein beliebiges Verhältnis und eine Dimension und berechnet die andere, mit einer Live-Vorschau der resultierenden Form.
     </p>
     <div>
       <h2>Die Mathematik dahinter</h2>
@@ -175,10 +175,10 @@ const de: ReactNode = (
           <strong>9:16</strong> — Hochformat-Video (TikTok, Instagram Reels, Stories).
         </li>
         <li>
-          <strong>4:3</strong> — ältere Fernseher, einige Kameras, Instagram-Landschaftsformat.
+          <strong>4:3</strong> — ältere Fernseher, einige Kameras, Instagram-Querformat.
         </li>
         <li>
-          <strong>1:1</strong> — Instagram-Feed-Quadrate, Avatare.
+          <strong>1:1</strong> — quadratische Instagram-Feed-Bilder, Avatare.
         </li>
         <li>
           <strong>21:9</strong> — Ultrawide-Monitore, Kinofilm.
@@ -189,7 +189,7 @@ const de: ReactNode = (
       </ul>
     </div>
     <div>
-      <h2>Einpassen (contain) vs. füllen (cover)</h2>
+      <h2>Einpassen (contain) vs. Füllen (cover)</h2>
       <p>
         Beim Einpassen eines Verhältnisses in einen festen Rahmen skaliert <strong>contain</strong> das Bild so, dass es vollständig sichtbar ist, wobei eventuell Letterbox-Balken entstehen. <strong>Cover</strong> skaliert so, dass der Rahmen komplett gefüllt ist und das Überstehende abgeschnitten wird. Die CSS-Eigenschaften <code>object-fit</code> und{' '}
         <code>background-size</code> verwenden dieselben Begriffe. Wähle contain, wenn das gesamte Bild sichtbar sein muss; wähle cover, wenn der Rahmen voll bleiben muss (z. B. Hero-Hintergründe).

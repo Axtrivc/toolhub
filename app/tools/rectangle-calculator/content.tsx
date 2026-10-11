@@ -110,7 +110,7 @@ const de: ReactNode = (
     <div>
       <h2>Alltägliche Anwendungen</h2>
       <ul>
-        <li><strong>Bodenbelag:</strong> Wie viel Fliese oder Teppich du brauchst</li>
+        <li><strong>Bodenbelag:</strong> Wie viele Fliesen oder wie viel Teppich du brauchst</li>
         <li><strong>Farbe:</strong> Wandfläche zum Abschätzen der Farbmenge</li>
         <li><strong>Bildschirme:</strong> Größe von Fernsehern und Monitoren (diagonal)</li>
         <li><strong>Grundstücke:</strong> Maße von Parzellen und Immobilien</li>

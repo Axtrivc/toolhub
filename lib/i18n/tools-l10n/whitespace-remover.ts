@@ -1,6 +1,6 @@
 /**
  * whitespace-remover 本地化 bundle —— zh / es / de
- * 覆盖:faqs + useCases(交互客户端为 batch 文本工具,UI 本地化留待后续)
+ * 覆盖:ui(TextCleanerClient 经 tui() 读取)+ useCases + faqs
  */
 import type { ToolL10n } from '../tool-l10n'
 
@@ -26,14 +26,14 @@ export const whitespaceRemoverL10n: ToolL10n = {
       'yourText': '你的文本',
     },
     useCases: [
-      '清理从网页或 PDF 复制的文本',
+      '清理从网站或 PDF 复制的文本',
       '在粘贴到电子表格前格式化数据',
       '为代码准备文本(多余空格会破坏缩进)',
       '规范表单中的用户输入',
       '整理笔记和草稿',
     ],
     faqs: [
-      { q: '会删除所有换行吗?', a: '不会——换行会保留,但空行会被删除。如果你想把所有内容合并成一行,请使用「移除换行」工具。' },
+      { q: '会删除所有换行吗?', a: '不会——换行会保留,但空行会被删除。如果你想把所有内容合并成一行,请使用「删除换行」工具。' },
     ],
   },
   es: {
@@ -41,14 +41,14 @@ export const whitespaceRemoverL10n: ToolL10n = {
       'characters': 'caracteres',
       'cleanedText': 'Texto limpio',
       'clear': 'Limpiar',
-      'collapseSpaces': 'Colapsar espacios múltiples',
+      'collapseSpaces': 'Contraer espacios múltiples',
       'dedupe': 'Quitar líneas duplicadas',
       'dropEmptyLines': 'Quitar líneas vacías',
       'join': 'Unir:',
       'joinNewline': 'Saltos de línea (multilínea)',
       'joinSingle': 'Línea única',
       'joinSpace': 'Espacios (párrafo)',
-      'note': '🧹 Combina colapso de espacios, eliminación de líneas vacías, deduplicación y orden en una herramienta. Activa cualquier opción; todo corre localmente en tu navegador.',
+      'note': '🧹 Combina la contracción de espacios, la eliminación de líneas vacías, la deduplicación y la ordenación en una sola herramienta. Activa cualquier opción; todo corre localmente en tu navegador.',
       'placeholder': 'Pega texto con espacios extra, líneas vacías o duplicados…',
       'resultPlaceholder': 'El resultado aparecerá aquí…',
       'sortAZ': 'Ordenar A → Z',
@@ -64,23 +64,23 @@ export const whitespaceRemoverL10n: ToolL10n = {
       'ordenar notas y borradores',
     ],
     faqs: [
-      { q: '¿Esto elimina todos los saltos de línea?', a: 'No — los saltos de línea se conservan, pero las líneas vacías se eliminan. Usa la herramienta Eliminar saltos de línea si también quieres unir todo en una sola línea.' },
+      { q: '¿Esto elimina todos los saltos de línea?', a: 'No — los saltos de línea se conservan, pero las líneas vacías se eliminan. Usa la herramienta Quitar saltos de línea si también quieres unir todo en una sola línea.' },
     ],
   },
   de: {
     ui: {
       'characters': 'Zeichen',
-      'cleanedText': 'Gesäuberter Text',
+      'cleanedText': 'Bereinigter Text',
       'clear': 'Leeren',
-      'collapseSpaces': 'Mehrfache Leerzeichen verbinden',
+      'collapseSpaces': 'Mehrfache Leerzeichen zusammenfassen',
       'dedupe': 'Doppelte Zeilen entfernen',
       'dropEmptyLines': 'Leerzeilen entfernen',
       'join': 'Verbinden:',
       'joinNewline': 'Zeilenumbrüche (mehrzeilig)',
       'joinSingle': 'Einzelne Zeile',
       'joinSpace': 'Leerzeichen (Absatz)',
-      'note': '🧹 Vereint Leerzeichen-Verbinden, Leerzeilen-Entfernen, Deduplizieren und Sortieren in einem Werkzeug. Beliebige Option aktivieren; alles läuft lokal in deinem Browser.',
-      'placeholder': 'Text mit excessiven Leerzeichen, Leerzeilen oder Duplikaten einfügen…',
+      'note': '🧹 Vereint das Zusammenfassen von Leerzeichen, das Entfernen von Leerzeilen, Deduplizieren und Sortieren in einem Werkzeug. Aktiviere oben die gewünschten Optionen; alles läuft lokal in deinem Browser.',
+      'placeholder': 'Text mit überflüssigen Leerzeichen, Leerzeilen oder Duplikaten einfügen…',
       'resultPlaceholder': 'Das Ergebnis erscheint hier…',
       'sortAZ': 'A → Z sortieren',
       'trimEachLine': 'Jede Zeile trimmen',
@@ -88,14 +88,14 @@ export const whitespaceRemoverL10n: ToolL10n = {
       'yourText': 'Dein Text',
     },
     useCases: [
-      'aus Webseiten oder PDFs kopierten Text bereinigen',
+      'aus Websites oder PDFs kopierten Text bereinigen',
       'Daten vor dem Einfügen in eine Tabelle formatieren',
       'Text für Code vorbereiten (zusätzliche Leerzeichen zerstören die Einrückung)',
       'Benutzereingaben in Formularen vereinheitlichen',
       'Notizen und Entwürfe aufräumen',
     ],
     faqs: [
-      { q: 'Entfernt dies alle Zeilenumbrüche?', a: 'Nein — Zeilenumbrüche bleiben erhalten, aber leere Zeilen werden entfernt. Nutze das Werkzeug Zeilenumbrüche entfernen, wenn du alles in einer Zeile verbinden möchtest.' },
+      { q: 'Entfernt dies alle Zeilenumbrüche?', a: 'Nein — Zeilenumbrüche bleiben erhalten, aber leere Zeilen werden entfernt. Nutze das Werkzeug Zeilenumbrüche entfernen, wenn du alles in einer Zeile zusammenfassen möchtest.' },
     ],
   },
 }

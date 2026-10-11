@@ -10,7 +10,7 @@ export const sentenceCaseConverterL10n: ToolL10n = {
       defaultInput: 'hello. 我叫小明. nice to meet you.',
       inputLabel: '你的文本',
       outputLabel: '句首大写',
-      note: '✍️ 把每个句子的首字母大写。专有名词最好手动保留。',
+      note: '✍️ 把每个句子的首字母大写。专有名词建议转换后手动修正。',
       'cjkNoEffectNote': 'ℹ️ 大小写转换只作用于英文字母——中文字符保持不变。',
     },
     useCases: [
@@ -45,7 +45,7 @@ export const sentenceCaseConverterL10n: ToolL10n = {
     ui: {
       defaultInput: 'hallo. ich heiße max. wie geht es dir?',
       inputLabel: 'Dein Text',
-      outputLabel: 'Satz-Schreibweise',
+      outputLabel: 'Satzschreibweise',
       note: '✍️ Schreibt den ersten Buchstaben jedes Satzes groß. Eigennamen am besten manuell prüfen.',
       'cjkNoEffectNote': 'ℹ️ Die Groß-/Kleinschreibung betrifft nur lateinische Buchstaben — chinesische Zeichen bleiben unverändert.',
     },
@@ -56,7 +56,7 @@ export const sentenceCaseConverterL10n: ToolL10n = {
       'leicht verständliche Texte mit hoher Lesbarkeit',
     ],
     faqs: [
-      { q: 'Was ist mit Abkürzungen wie „USA"?', a: 'Dieses Werkzeug wandelt sie in „usa" um. Nach der Umwandlung musst du Abkürzungen und Eigennamen manuell korrigieren. Kein automatisches Werkzeug kann sie fehlerfrei unterscheiden.' },
+      { q: 'Was ist mit Abkürzungen wie „USA“?', a: 'Dieses Werkzeug wandelt sie in „usa“ um. Nach der Umwandlung musst du Abkürzungen und Eigennamen manuell korrigieren. Kein automatisches Werkzeug kann sie fehlerfrei unterscheiden.' },
     ],
   },
 }

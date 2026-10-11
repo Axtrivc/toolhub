@@ -279,7 +279,7 @@ export function SecretKeyGeneratorClient() {
           { upTo: 256, color: '#22c55e', label: L('strengthStrong', 'Strong') },
           { upTo: 512, color: '#3b82f6', label: L('strengthExcellent', 'Excellent') },
         ]}
-        formatValue={(n) => `${Math.round(n)} bits`}
+        formatValue={(n) => `${Math.round(n)} ${L('bits', 'bits')}`}
       />
 
       {/* 生成数量 */}

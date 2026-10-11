@@ -98,7 +98,7 @@ const de: ReactNode = (
       <h2>Häufige Einsatzorte</h2>
       <ul>
         <li>Zwei Versionen eines Dokuments vergleichen</li>
-        <li>Änderungen Korrektur lesen</li>
+        <li>Änderungen beim Korrekturlesen prüfen</li>
         <li>Textbearbeitungen prüfen</li>
         <li>Veränderungen zwischen Entwürfen nachverfolgen</li>
       </ul>

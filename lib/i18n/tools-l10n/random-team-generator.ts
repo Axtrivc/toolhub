@@ -54,7 +54,7 @@ export const RandomTeamGeneratorL10n: ToolL10n = {
   de: {
     useCases: [
       'Zufallsgruppen fürs Teambuilding oder den Unterricht: Liste einfügen, mit einem Klick ausgewogene Teams ohne „Cliquen"',
-      'Sport-Teams bilden: 20 Leute auf 4 Teams per Round-Robin — höchstens ein Person Unterschied',
+      'Sport-Teams bilden: 20 Leute auf 4 Teams per Round-Robin — der Unterschied beträgt höchstens eine Person',
       'Zufällige Teams zu Hackathon-Beginn: Wer zuerst eingetippt wurde, hat keinerlei Vorteil',
       'Passt das Ergebnis nicht? „Neu mischen" erzeugt jedes Mal eine kryptografisch frische Kombination',
     ],

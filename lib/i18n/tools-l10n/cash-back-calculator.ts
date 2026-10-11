@@ -39,7 +39,7 @@ export const cashBackCalculatorL10n: ToolL10n = {
     formula: { formula: FORMULA, explain: 'Multiplica el gasto de cada categoría por su tasa de recompensa, suma todas las categorías y resta la cuota anual de la tarjeta. Las tasas bonus solo se aplican hasta sus límites trimestrales o anuales.' },
     ui: {
       'chartTitle': 'Recompensas vs cuota anual',
-      'cmp.0': 'Cashback al año',
+      'cmp.0': 'Reembolso al año',
       'cmp.1': 'Cuota anual',
       'cmpseg.0': 'Recompensas',
       'cmpseg.1': 'Cuota',

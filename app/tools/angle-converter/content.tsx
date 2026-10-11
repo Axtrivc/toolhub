@@ -49,7 +49,7 @@ const zh: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>这是什么工具?</h2>
     <p>
-      本工具在角度单位之间换算:<strong>度</strong>、<strong>弧度</strong>、<strong>梯度</strong>、角分、角秒以及整圆(转)。
+      本工具在角度单位之间换算:<strong>度</strong>、<strong>弧度</strong>、<strong>百分度</strong>、角分、角秒以及整圆(转)。
     </p>
     <div>
       <h2>关键换算</h2>
@@ -58,7 +58,7 @@ const zh: ReactNode = (
         <li>1 度 = π/180 弧度 ≈ 0.01745 rad</li>
         <li>1 弧度 ≈ 57.2958°</li>
         <li>1 度 = 60 角分 = 3,600 角秒</li>
-        <li>1 梯度 = 0.9°(整圆 = 400 梯度)</li>
+        <li>1 百分度 = 0.9°(整圆 = 400 百分度)</li>
       </ul>
     </div>
     <div>
@@ -68,7 +68,7 @@ const zh: ReactNode = (
         <li><strong>编程</strong>——大多数数学函数(sin、cos)以弧度为参数</li>
         <li><strong>天文学</strong>——极小角度用角秒表示</li>
         <li><strong>导航</strong>——方位角用度表示</li>
-        <li><strong>测量</strong>——一些国家使用梯度(gon)</li>
+        <li><strong>测量</strong>——一些国家使用百分度(gon)</li>
       </ul>
     </div>
     <div>

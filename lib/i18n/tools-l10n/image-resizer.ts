@@ -7,7 +7,7 @@ import type { ToolL10n } from '../tool-l10n'
 export const imageResizerL10n: ToolL10n = {
   zh: {
     ui: {
-      'byWord': '缩小',
+      'byWord': '乘',
       'change': '更换',
       'download': '下载',
       'errDecodeImage': '无法解码图片文件。',
@@ -23,7 +23,7 @@ export const imageResizerL10n: ToolL10n = {
       'formatWebp': 'WebP',
       'keepOriginalFormat': '保持原格式',
       'lockAspectRatio': '锁定宽高比',
-      'noteText': '🔒 100% 在客户端——缩放在浏览器内画布上完成,带高质量平滑。所示大小是用',
+      'noteText': '🔒 100% 在客户端——缩放在浏览器内画布上完成,带高质量平滑。所示大小为真实编码输出,来自',
       'originalInfo': '原图:',
       'outputFormat': '输出格式',
       'qualityLabel': '质量 —',
@@ -48,7 +48,7 @@ export const imageResizerL10n: ToolL10n = {
       },
       {
         q: '能不变形地缩放吗(锁定宽高比)?',
-        a: '能。宽高比锁定会让宽高保持比例,改一个尺寸时另一个自动更新。只有需要强制非比例裁剪时才关闭它。',
+        a: '能。宽高比锁定会让宽和高保持比例,调整其中一个尺寸时,另一个会自动更新。只有需要强制非比例裁剪时才关闭它。',
       },
       {
         q: '缩放后该选哪种输出格式?',
@@ -83,8 +83,8 @@ export const imageResizerL10n: ToolL10n = {
       'targetHeight': 'Alto objetivo (px)',
       'targetWidth': 'Ancho objetivo (px)',
       'uploadHint': 'PNG, JPG, GIF o WebP',
-      'uploadPrompt': 'Clic para subir o arrastra',
-      'uploadedSourceAlt': 'Origen subido',
+      'uploadPrompt': 'Haz clic o arrastra para subir',
+      'uploadedSourceAlt': 'Imagen original subida',
     },
     useCases: [
       'redimensionar imagen a píxeles exactos online',
@@ -109,11 +109,11 @@ export const imageResizerL10n: ToolL10n = {
   },
   de: {
     ui: {
-      'byWord': 'um',
+      'byWord': 'mal',
       'change': 'Ändern',
       'download': 'Herunterladen',
       'errDecodeImage': 'Bild konnte nicht dekodiert werden.',
-      'errDimsValid': 'Breite und Höhe müssen ganze Zahlen von mindestens 1 px sein.',
+      'errDimsValid': 'Breite und Höhe müssen ganze Zahlen ab 1 px sein.',
       'errEncodeFailed': 'Codierung fehlgeschlagen — der Browser konnte das Bild nicht erzeugen. Versuche eine kleinere Zielgröße.',
       'errReadFile': 'Datei konnte nicht gelesen werden.',
       'errFileTooLarge': 'Die Datei ist zu groß ({size}). Maximal 20 MB.',
@@ -129,7 +129,7 @@ export const imageResizerL10n: ToolL10n = {
       'originalInfo': 'Original:',
       'outputFormat': 'Ausgabeformat',
       'qualityLabel': 'Qualität —',
-      'resizedPreviewAlt': 'Vorschau skaliert',
+      'resizedPreviewAlt': 'Skalierte Vorschau',
       'smaller': 'kleiner',
       'targetHeight': 'Zielhöhe (px)',
       'targetWidth': 'Zielbreite (px)',
@@ -146,15 +146,15 @@ export const imageResizerL10n: ToolL10n = {
     faqs: [
       {
         q: 'Verringert Skalieren die Bildqualität?',
-        a: 'Verkleinern verwirft Pixel und wendet Resampling an, gibt also etwas Weichzeichnung, die bei normaler Ansicht kaum auffällt. Vergrößern kann keine echten Details hinzufügen und wirkt unscharf, daher skaliere am besten von einem größeren Original.',
+        a: 'Verkleinern verwirft Pixel und wendet Resampling an, daher wirkt das Ergebnis etwas weich — bei normaler Betrachtungsgröße fällt das kaum auf. Vergrößern kann keine echten Details hinzufügen und wirkt unscharf. Verkleinere daher am besten aus einem größeren Original heraus.',
       },
       {
         q: 'Kann ich ohne Verzerrung skalieren (Seitenverhältnis fest)?',
-        a: 'Ja. Die Seitenverhältnis-Sperre hält Breite und Höhe proportional, änderst du eine Dimension, passt sich die andere automatisch an. Schalte sie nur ab, wenn du einen erzwungenen, nicht proportionalen Zuschnitt brauchst.',
+        a: 'Ja. Die Seitenverhältnis-Sperre hält Breite und Höhe proportional. Änderst du eine Dimension, passt sich die andere automatisch an. Schalte sie nur ab, wenn du einen erzwungenen, nicht proportionalen Zuschnitt brauchst.',
       },
       {
         q: 'Welches Ausgabeformat soll ich nach dem Skalieren wählen?',
-        a: 'WebP für die kleinsten Dateien, JPG für Fotos und PNG bei Bedarf an verlustfreier Qualität oder Transparenz. Das Werkzeug zeigt die Ergebnisgröße jeder Option sofort an, damit du vor dem Download den besten Kompromiss wählst.',
+        a: 'WebP für die kleinsten Dateien, JPG für Fotos und PNG, wenn du verlustfreie Qualität oder Transparenz brauchst. Das Werkzeug zeigt die Ergebnisgröße jeder Option sofort an, damit du vor dem Download den besten Kompromiss wählst.',
       },
     ],
   },

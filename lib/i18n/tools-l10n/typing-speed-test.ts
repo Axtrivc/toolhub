@@ -14,8 +14,8 @@ export const TypingSpeedTestL10n: ToolL10n = {
     ],
     faqs: [
       { q: 'WPM 是怎么算的?', a: '行业标准:每 5 个字符(含空格)折算为 1 个"词",再除以分钟数。总 WPM 只看速度;净 WPM 会从中扣除错误数,因此更能反映真实产出——快速度配低准确率毫无意义。' },
-      { q: '什么时候开始计时?', a: '首次击键即开始,停止输入后出结果。没有倒计时压力,测的是你自然状态下的稳定速度,不是冲刺速度。' },
-      { q: '多少 WPM 算快?', a: '普通成人 38-42;经常码字的职场人 50-60;专业速录员 80 以上;竞技选手可达 120+。比绝对值更重要的是净 WPM:95% 以上的准确率才算有效速度。' },
+      { q: '什么时候开始计时?', a: '首次击键即开始,打满整句后自动出结果。没有倒计时压力,测的是你自然状态下的稳定速度,不是冲刺速度。' },
+      { q: '多少 WPM 算快?', a: '普通成人 38-42;经常码字的职场人 50-60;专业速录员 80 以上;竞技选手可超 150。比绝对值更重要的是净 WPM:95% 以上的准确率才算有效速度。' },
       { q: '我的输入会被记录吗?', a: '不会。测试完全在浏览器本地运行,键入的每一个字符都不会上传——可以直接拿工作邮件或真实文档来测。' },
     ],
     ui: {
@@ -28,7 +28,7 @@ export const TypingSpeedTestL10n: ToolL10n = {
       'modeQuotes': '英语金句',
       'netExplain': '已扣除错误',
       'netWpm': '净 WPM',
-      'note': '⌨️ 净 WPM 按标准公式:每分钟字符数 ÷ 5 再减错误。三种模式:经典英语金句、程序员高频代码语法、按当前语言匹配的多语言谚语。结尾打错字?退格修正后再结算。普通成人 38-42;专业速录员超过 80。',
+      'note': '⌨️ 净 WPM 按标准公式:每分钟字符数 ÷ 5 再减错误。三种模式:经典英语金句、程序员代码片段、按当前语言匹配的多语言谚语。结尾打错字?退格修正后再结算。普通成人 38-42;专业速录员超过 80。',
       'progress': '{n}/{m} 字符',
       'reset': '重置',
       'startTyping': '在此开始输入——首次击键即开始计时',
@@ -42,13 +42,13 @@ export const TypingSpeedTestL10n: ToolL10n = {
     useCases: [
       'Autoevaluación antes de postular: los puestos de administración y datos suelen pedir 40+ PPM',
       'Medir el progreso tras dos semanas de mecanografía táctil: misma frase, comparar PPM neto y precisión',
-      'Estudiantes de idiomas midiendo su velocidad en inglés — quien escribe 60 PPM en su lengua suele bajar a la mitad',
+      'Estudiantes de idiomas midiendo su velocidad en inglés — quien escribe 60 PPM en su lengua suele bajar a la mitad; así localizas el cuello de botella',
       'Benchmark diario para mecanógrafos de competición que buscan superar las 100 PPM',
     ],
     faqs: [
       { q: '¿Cómo se calcula el PPM?', a: 'El estándar del sector: cada 5 caracteres (espacios incluidos) equivalen a una «palabra», dividido por los minutos. El PPM bruto mide solo velocidad; el neto descuenta los errores y refleja la producción real — rapidez con mala precisión no sirve.' },
-      { q: '¿Cuándo empieza el cronómetro?', a: 'Con la primera pulsación; el resultado aparece al dejar de escribir. Sin cuenta atrás: mide tu velocidad estable y natural, no un sprint.' },
-      { q: '¿Cuánto es «rápido»?', a: 'Adultos medios: 38-42 PPM; oficinistas habituales: 50-60; profesionales: más de 80; competidores: 120+. Más importante que la cifra es el PPM neto: solo cuenta como velocidad efectiva con una precisión superior al 95 %.' },
+      { q: '¿Cuándo empieza el cronómetro?', a: 'Con la primera pulsación; el resultado aparece al completar la frase. Sin cuenta atrás: mide tu velocidad estable y natural, no un sprint.' },
+      { q: '¿Cuánto es «rápido»?', a: 'Adultos medios: 38-42 PPM; oficinistas habituales: 50-60; profesionales: más de 80; competidores: más de 150. Más importante que la cifra es el PPM neto: solo cuenta como velocidad efectiva con una precisión superior al 95 %.' },
       { q: '¿Se guarda lo que escribo?', a: 'No. La prueba corre 100 % en tu navegador y ninguna tecla sale del dispositivo — puedes practicar con correos o documentos reales de trabajo.' },
     ],
     ui: {
@@ -61,7 +61,7 @@ export const TypingSpeedTestL10n: ToolL10n = {
       'modeQuotes': 'Citas en inglés',
       'netExplain': 'errores descontados',
       'netWpm': 'PPM neto',
-      'note': '⌨️ El PPM neto sigue la fórmula estándar: caracteres ÷ 5 por minuto menos errores. Tres modos: citas clásicas en inglés, sintaxis de código para programadores y proverbios multilingües según tu idioma. ¿Fallo al final? Corrige con Retroceso antes de terminar. Adultos medios: 38-42; profesionales superan 80.',
+      'note': '⌨️ El PPM neto sigue la fórmula estándar: caracteres ÷ 5 por minuto menos errores. Tres modos: citas clásicas en inglés, fragmentos de código para programadores y proverbios multilingües según tu idioma. ¿Fallo al final? Corrige con Retroceso antes de terminar. Adultos medios: 38-42; profesionales superan 80.',
       'progress': '{n}/{m} caracteres',
       'reset': 'Restablecer',
       'startTyping': 'Escribe aquí: el reloj arranca con la primera tecla',
@@ -75,13 +75,13 @@ export const TypingSpeedTestL10n: ToolL10n = {
     useCases: [
       'Selbsttest vor der Bewerbung: Büro- und Datenerfassungsjobs verlangen oft 40+ WPM',
       'Fortschritt nach zwei Wochen Zehnfingertippen beziffern: gleicher Satz, Netto-WPM und Genauigkeit vergleichen',
-      'Sprachlernende messen ihre Englisch-Tipproutine — wer in der Muttersprache 60 WPM schafft, liegt fremdsprachig oft bei der Hälfte',
+      'Sprachlernende messen ihre Englisch-Tippgeschwindigkeit — wer in der Muttersprache 60 WPM schafft, tippt in der Fremdsprache oft nur halb so schnell; so findet man den Engpass',
       'Täglicher Benchmark für Speed-Tipper, die die 100-WPM-Marke knacken wollen',
     ],
     faqs: [
       { q: 'Wie wird WPM berechnet?', a: 'Industriestandard: Je 5 Zeichen (inkl. Leerzeichen) zählen als ein „Wort", geteilt durch die Minuten. Brutto-WPM misst nur Tempo; Netto-WPM zieht Fehler ab und bildet die reale Leistung ab — schnell mit vielen Fehlern ist wertlos.' },
-      { q: 'Wann startet die Zeitmessung?', a: 'Mit dem ersten Tastendruck; das Ergebnis erscheint, sobald du aufhörst. Kein Countdown — gemessen wird dein natürliches Dauertempo, kein Sprint.' },
-      { q: 'Was gilt als schnell?', a: 'Durchschnitt: 38-42 WPM; Vielschreiber: 50-60; Profis: über 80; Wettkämpfer: 120+. Wichtiger als der Rohwert ist der Netto-Wert: Erst ab 95 % Genauigkeit zählt Tempo als echte Geschwindigkeit.' },
+      { q: 'Wann startet die Zeitmessung?', a: 'Mit dem ersten Tastendruck; das Ergebnis erscheint, sobald du den Satz vollständig getippt hast. Kein Countdown — gemessen wird dein natürliches Dauertempo, kein Sprint.' },
+      { q: 'Was gilt als schnell?', a: 'Durchschnitt: 38-42 WPM; Vielschreiber: 50-60; Profis: über 80; Wettkämpfer: über 150. Wichtiger als der Rohwert ist der Netto-Wert: Erst ab 95 % Genauigkeit zählt Tempo als echte Geschwindigkeit.' },
       { q: 'Wird meine Eingabe gespeichert?', a: 'Nein. Der Test läuft komplett lokal im Browser, kein Anschlag verlässt das Gerät — du kannst bedenkenlos echte Arbeitsdokumente verwenden.' },
     ],
     ui: {
@@ -94,7 +94,7 @@ export const TypingSpeedTestL10n: ToolL10n = {
       'modeQuotes': 'Englische Zitate',
       'netExplain': 'Fehler abgezogen',
       'netWpm': 'Netto-WPM',
-      'note': '⌨️ Netto-WPM nach Standardformel: Zeichen ÷ 5 pro Minute minus Fehler. Drei Modi: klassische englische Zitate, Programmier-Syntax und mehrsprachige Sprichwörter passend zur Spracheinstellung. Tippfehler am Ende? Mit Rücktaste korrigieren, dann abgeben. Durchschnitt: 38-42; Profis über 80.',
+      'note': '⌨️ Netto-WPM nach Standardformel: Zeichen ÷ 5 pro Minute minus Fehler. Drei Modi: klassische englische Zitate, Code-Snippets für Programmierer und mehrsprachige Sprichwörter passend zur Spracheinstellung. Tippfehler am Ende? Mit Rücktaste korrigieren, dann abgeben. Durchschnitt: 38-42; Profis über 80.',
       'progress': '{n}/{m} Zeichen',
       'reset': 'Zurücksetzen',
       'startTyping': 'Hier tippen — die Uhr startet beim ersten Tastendruck',

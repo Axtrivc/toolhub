@@ -79,12 +79,12 @@ const zh: ReactNode = (
     <div>
       <h2>累进税档如何运作</h2>
       <p>
-        许多人以为进入更高档位意味着所有收入都按更高税率征税。这是个误区。只有<em>超过</em>每个档位阈值的那部分收入才按该档税率征税。你的边际税率是你最后一元收入所适用的税率;有效税率则是你的总税额除以总收入。
+        许多人以为进入更高档位意味着所有收入都按更高税率征税。这是个误区。只有<em>超过</em>每个档位阈值的那部分收入才按该档税率征税。你的边际税率是你最后一美元收入所适用的税率;有效税率则是你的总税额除以总收入。
       </p>
     </div>
     <div>
       <h2>计算公式</h2>
-      <p>税款通过累加每个档位的贡献来计算:</p>
+      <p>税款通过累加每个税档的应纳税额来计算:</p>
       <p style={{ fontFamily: 'monospace', background: 'rgb(var(--bg-subtle))', padding: '0.75rem 1rem', borderRadius: '0.5rem', fontSize: '0.95rem' }}>
         Tax = &Sigma; (income in bracket &times; bracket rate)
       </p>
@@ -120,7 +120,7 @@ const es: ReactNode = (
     <p>
       Este estimador calcula tu impuesto federal sobre la renta de EE. UU. usando los tramos
       fiscales de 2026. Aplica automáticamente la deducción estándar y muestra tu impuesto
-      estimado, tu tasa efectiva y tu sueldo neto. Esto es solo una estimación — tu impuesto real
+      estimado, tu tipo efectivo y tu sueldo neto. Esto es solo una estimación — tu impuesto real
       depende de deducciones, créditos e impuestos estatales.
     </p>
     <div>
@@ -128,8 +128,8 @@ const es: ReactNode = (
       <p>
         Muchas personas creen que pasar a un tramo superior significa que todos sus ingresos se
         gravan al tipo más alto. Es un mito. Solo los ingresos <em>por encima</em> de cada límite
-        de tramo se gravan a ese tipo. Tu tasa marginal es el tipo que pagas por tu último dólar
-        ganado; tu tasa efectiva es tu impuesto total dividido entre tus ingresos totales.
+        de tramo se gravan a ese tipo. Tu tipo marginal es el que pagas por tu último dólar
+        ganado; tu tipo efectivo es tu impuesto total dividido entre tus ingresos totales.
       </p>
     </div>
     <div>
@@ -157,12 +157,12 @@ const es: ReactNode = (
       </ul>
     </div>
     <div>
-      <h2>Tasa marginal frente a tasa efectiva</h2>
+      <h2>Tipo marginal frente a tipo efectivo</h2>
       <p>
-        Una persona soltera que gana $75,000 tiene una <strong>tasa marginal</strong> del 22 %
-        (su tramo superior), pero su <strong>tasa efectiva</strong> es de solo alrededor del 10 %
-        porque la mayor parte de sus ingresos se grava a tipos más bajos. Conoce siempre tu tasa
-        efectiva — es lo que realmente pagas.
+        Una persona soltera que gana $75,000 tiene un <strong>tipo marginal</strong> del 22 %
+        (su tramo superior), pero su <strong>tipo efectivo</strong> es de solo alrededor del 10 %
+        porque la mayor parte de sus ingresos se grava a tipos más bajos. Conoce siempre tu tipo
+        efectivo — es lo que realmente pagas.
       </p>
     </div>
   </section>
@@ -174,16 +174,16 @@ const de: ReactNode = (
     <h2>Was ist dieses Werkzeug?</h2>
     <p>
       Dieser Schätzer berechnet deine US-Bundeseinkommensteuer anhand der Steuerklassen von 2026.
-      Er wendet den Standardpauschbetrag automatisch an und zeigt deine geschätzte Steuer, deinen
+      Er wendet den Standardabzug automatisch an und zeigt deine geschätzte Steuer, deinen
       effektiven Steuersatz und dein Nettoeinkommen. Dies ist nur eine Schätzung — deine
-      tatsächliche Steuer hängt von Abzügen, Freibeträgen und Landessteuern ab.
+      tatsächliche Steuer hängt von Abzügen, Freibeträgen und Bundesstaatensteuern ab.
     </p>
     <div>
       <h2>Wie progressive Steuerklassen funktionieren</h2>
       <p>
         Viele glauben, beim Aufsteigen in eine höhere Steuerklasse werde das gesamte Einkommen mit
         dem höheren Satz besteuert. Das ist ein Mythos. Nur das Einkommen <em>oberhalb</em> jeder
-        Klassengrenze wird mit diesem Satz besteuert. Dein Grenzsteuersatz ist der Satz auf deinem
+        Klassengrenze wird mit diesem Satz besteuert. Dein Grenzsteuersatz ist der Satz für deinen
         zuletzt verdienten Dollar; dein effektiver Steuersatz ist deine Gesamtsteuer geteilt durch
         dein Gesamteinkommen.
       </p>
@@ -207,8 +207,8 @@ const de: ReactNode = (
       <h2>Was enthalten ist und was nicht</h2>
       <ul>
         <li><strong>Enthalten:</strong> Bundeseinkommensteuer mit den Klassen von 2026</li>
-        <li><strong>NICHT enthalten:</strong> Landessteuer (0-13 % je nach Bundesstaat), FICA (Social Security + Medicare = 7,65 %), lokale Steuern</li>
-        <li><strong>Standardpauschbetrag:</strong> $16,100 Single / $32,200 verheiratet (2026)</li>
+        <li><strong>NICHT enthalten:</strong> Bundesstaatensteuer (0-13 % je nach Bundesstaat), FICA (Social Security + Medicare = 7,65 %), lokale Steuern</li>
+        <li><strong>Standardabzug:</strong> $16,100 Single / $32,200 verheiratet (2026)</li>
         <li><strong>Nicht berücksichtigt:</strong> 401(k)-Beiträge, Kinderfreibeträge, Bildungsfreibeträge, itemisierte Abzüge</li>
       </ul>
     </div>

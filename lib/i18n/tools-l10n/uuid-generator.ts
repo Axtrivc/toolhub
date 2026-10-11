@@ -1,8 +1,11 @@
 /**
  * uuid-generator 本地化 bundle —— zh / es / de
- * 覆盖:faqs + useCases
+ * 覆盖:faqs + useCases + formula.explain(公式串/variables/example 回退英文)
  */
 import type { ToolL10n } from '../tool-l10n'
+
+// 公式串与 lib/tool-formulas.ts 的 en 原文保持一致(类型要求 formula 必填)
+const FORMULA = 'random bits = 128 − 6 = 122 (RFC 4122 v4)\ncollision probability p ≈ n² / 2^123 for n generated UUIDs (birthday bound)'
 
 export const uuidGeneratorL10n: ToolL10n = {
   zh: {
@@ -13,6 +16,10 @@ export const uuidGeneratorL10n: ToolL10n = {
       'note': '🆔 使用 Web Crypto API 生成 RFC 4122 v4 UUID。用于数据库、会话和分布式系统的唯一 ID。',
     },
     useCases: ['为数据库生成唯一主键', '创建会话令牌或 API 请求 ID', '给上传的文件生成唯一文件名', '在分布式系统中标识设备、用户或事件'],
+    formula: {
+      formula: FORMULA,
+      explain: 'v4 UUID 共 128 位,其中 6 位由版本位和变体位占用,剩下 122 位随机。生日界表明,只有当 n 接近 2^61.5 时碰撞才变得现实,因此对任何实际规模的 n,p 都几乎为零。',
+    },
     faqs: [
       { q: 'UUID 真的唯一吗?', a: '从实用角度来说,是的。两个随机 v4 UUID 碰撞的概率约为 1/2.7 × 10^36。你需要每秒生成数十亿个、持续数千年,才可能看到一次碰撞。' },
     ],
@@ -25,8 +32,12 @@ export const uuidGeneratorL10n: ToolL10n = {
       'note': '🆔 Genera UUID v4 RFC 4122 con la Web Crypto API. Se usan como IDs únicos en bases de datos, sesiones y sistemas distribuidos.',
     },
     useCases: ['generar claves primarias únicas para bases de datos', 'crear tokens de sesión o IDs de petición para APIs', 'producir nombres de archivo únicos para contenido subido', 'identificar dispositivos, usuarios o eventos en sistemas distribuidos'],
+    formula: {
+      formula: FORMULA,
+      explain: 'Un UUID v4 tiene 128 bits, pero 6 los fijan los campos de versión y variante, dejando 122 bits aleatorios. Según la cota del cumpleaños, las colisiones solo empiezan a ser plausibles cuando n se acerca a 2^61.5, así que p se mantiene cerca de cero para cualquier n realista.',
+    },
     faqs: [
-      { q: '¿Los UUID son realmente únicos?', a: 'Para todos los efectos prácticos, sí. La probabilidad de que dos UUID v4 aleatorios colisionen es de unas 1 en 2,7 × 10^36. Tendrías que generar miles de millones por segundo durante milenios para ver una colisión.' },
+      { q: '¿Los UUID son realmente únicos?', a: 'A efectos prácticos, sí. La probabilidad de que dos UUID v4 aleatorios colisionen es de aproximadamente 1 entre 2,7 × 10^36. Tendrías que generar miles de millones por segundo durante milenios para ver una colisión.' },
     ],
   },
   de: {
@@ -37,6 +48,10 @@ export const uuidGeneratorL10n: ToolL10n = {
       'note': '🆔 Erzeugt RFC-4122-v4-UUIDs mit der Web Crypto API. Dienen als eindeutige IDs in Datenbanken, Sessions und verteilten Systemen.',
     },
     useCases: ['eindeutige Primärschlüssel für Datenbanken erzeugen', 'Session-Tokens oder API-Request-IDs erstellen', 'eindeutige Dateinamen für Uploads erzeugen', 'Geräte, Benutzer oder Ereignisse in verteilten Systemen kennzeichnen'],
+    formula: {
+      formula: FORMULA,
+      explain: 'Eine v4-UUID hat 128 Bits, 6 davon sind durch die Versions- und Variantenfelder festgelegt, es bleiben 122 zufällige Bits. Nach der Geburtstagsabschätzung werden Kollisionen erst plausibel, wenn sich n 2^61.5 nähert — p bleibt also für jedes realistische n nahe null.',
+    },
     faqs: [
       { q: 'Sind UUIDs wirklich eindeutig?', a: 'Für alle praktischen Zwecke: ja. Die Wahrscheinlichkeit einer Kollision zwischen zwei zufälligen v4-UUIDs liegt bei etwa 1 zu 2,7 × 10^36. Du müsstest Milliarden pro Sekunde über Jahrtausende hinweg erzeugen, um eine Kollision zu sehen.' },
     ],

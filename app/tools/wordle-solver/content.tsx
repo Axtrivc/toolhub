@@ -66,23 +66,23 @@ const zh: ReactNode = (
     </p>
 
     <div>
-      <h2>把你的猜测映射到筛选条件</h2>
+      <h2>把你的猜测对应到筛选条件</h2>
       <p>
-        每次 Wordle 猜测后,把已确认的字母输入五个<strong>绿色</strong>方框(放在确切位置),把在单词中但位置错误的字母放入<em>必须包含</em>(黄色),把排除的字母列入<em>不能包含</em>(灰色)。列表会随每次按键更新,最多显示 200 个匹配项及其精确数量。点击任意词条即可把它直接复制到下一次猜测中。
+        每次 Wordle 猜测后,把已确认的字母输入五个<strong>绿色</strong>方框(放在确切位置),把在单词中但位置错误的字母放入<em>必须包含</em>(黄色),把排除的字母列入<em>不能包含</em>(灰色)。列表会随每次按键更新,最多显示 200 个匹配项,并给出精确总数。点击任意词条即可把它直接复制到下一次猜测中。
       </p>
     </div>
 
     <div>
       <h2>棘手的情况:重复字母</h2>
       <p>
-        当答案中某个字母的出现次数少于你猜测的次数时,Wordle 会把它标灰 —— 这会诱使你把该字母完全排除。本求解器能处理这种情况:同时出现在<em>灰色</em>列表和绿色/黄色约束中的字母不会被一刀切地禁用;答案只是不能包含超过你已确认次数的该字母。因此像 <code>sleet</code> 这样的答案,只要已有两个 <code>e</code> 被确认为绿色或黄色,就能通过一个灰色的 <code>e</code> —— 而包含第三个 <code>e</code> 的 <code>eerie</code> 则会被排除。
+        当答案中某个字母的出现次数少于你猜测的次数时,Wordle 会把它标灰 —— 这会诱使你把该字母完全排除。本求解器能处理这种情况:同时出现在<em>灰色</em>列表和绿色/黄色约束中的字母不会被一刀切地禁用;答案只是不能包含超过你已确认次数的该字母。因此像 <code>sleet</code> 这样的答案,只要已有两个 <code>e</code> 被确认为绿色或黄色,就不会因一个灰色的 <code>e</code> 而被排除 —— 而包含第三个 <code>e</code> 的 <code>eerie</code> 则会被过滤掉。
       </p>
     </div>
 
     <div>
       <h2>易位构词模式与自定义词典</h2>
       <p>
-        切换到<strong>易位构词模式</strong>,输入 3–10 个字母,即可找出词典中所有能由这些字母拼出的单词:长度不超过输入的字母数,按长度从长到短排序,且同一字母的使用次数不会超过你输入的份数。非常适合 Scrabble 类谜题。如果某个有效词不在内置列表中,把你的词(每行一个或用空格分隔)粘贴到<em>额外词汇</em>中,它们就会在本次会话中(两种模式下)加入词典。
+        切换到<strong>易位构词模式</strong>,输入 3–10 个字母,即可找出词典中所有能由这些字母拼出的单词:长度不超过输入的字母数,按长度从长到短排序,且同一字母的使用次数不会超过你输入的份数。非常适合 Scrabble 类谜题。如果某个有效词不在内置列表中,把你的词(每行一个或用空格分隔)粘贴到<em>额外词汇</em>中,它们就会加入本次会话的词典,两种模式下都生效。
       </p>
     </div>
   </section>
@@ -95,29 +95,29 @@ const es: ReactNode = (
     <p>
       Un <strong>solucionador y buscador de palabras para Wordle</strong> que reduce un diccionario integrado de
       palabras inglesas comunes de cinco letras a las que encajan con lo que ya sabes: posiciones verdes fijas,
-      letras que la palabra debe contener y letras que no debe contener. Un modo de anagrama encuentra cada
-      palabra que puedes formar a partir de un conjunto de letras, y puedes fusionar tus propias palabras extra.
+      letras que la palabra debe contener y letras que no debe contener. El modo anagrama encuentra todas las
+      palabras que puedes formar a partir de un conjunto de letras, y puedes añadir tus propias palabras extra.
       Todo se ejecuta 100% en tu navegador — sin consultas, sin red.
     </p>
 
     <div>
-      <h2>Mapear tus conjeturas a los filtros</h2>
+      <h2>Cómo trasladar tus intentos a los filtros</h2>
       <p>
-        Tras cada conjetura de Wordle, escribe las letras confirmadas en las cinco casillas <strong>verdes</strong>
+        Tras cada intento de Wordle, escribe las letras confirmadas en las cinco casillas <strong>verdes</strong>
         en sus posiciones exactas, pon las letras que están en la palabra pero mal colocadas en{' '}
         <em>debe contener</em> (amarillo), y lista las letras descartadas en <em>NO debe contener</em> (gris). La
         lista se actualiza con cada pulsación, mostrando hasta 200 coincidencias con el recuento exacto. Haz clic
-        en cualquier ficha de palabra para copiarla directamente en tu próxima conjetura.
+        en cualquier ficha de palabra para copiarla directamente en tu próximo intento.
       </p>
     </div>
 
     <div>
       <h2>El caso complicado: letras duplicadas</h2>
       <p>
-        Wordle pone en gris una letra repetida cuando la respuesta la contiene menos veces de las que conjeturaste
+        Wordle pone en gris una letra repetida cuando la respuesta la contiene menos veces de las que marcaste
         — lo que te tienta a excluir esa letra por completo. Este solucionador lo maneja: una letra que aparece{' '}
         <em>tanto</em> en tu lista gris como en una restricción verde/amarilla no se prohíbe sin más; la respuesta
-        simplemente puede no contenerla más veces de las que has confirmado. Así, una respuesta como{' '}
+        simplemente no puede contenerla más veces de las que has confirmado. Así, una respuesta como{' '}
         <code>sleet</code> sobrevive a un <code>e</code> gris siempre que dos <code>e</code>s ya estén confirmadas
         en verde o amarillo — mientras que <code>eerie</code>, con una tercera <code>e</code>, queda descartada.
       </p>
@@ -126,12 +126,12 @@ const es: ReactNode = (
     <div>
       <h2>Modo anagrama y diccionarios personalizados</h2>
       <p>
-        Cambia al <strong>modo anagrama</strong> e introduce 3–10 letras para encontrar cada palabra del
-        diccionario — de hasta el número de letras que escribas, ordenadas de más larga a más corta — que pueda
-        escribirse sin reutilizar una letra más veces de las que tienes. Estupendo para puzzles tipo Scrabble.
+        Cambia al <strong>modo anagrama</strong> e introduce 3–10 letras para encontrar todas las palabras del
+        diccionario — de hasta tantas letras como introduzcas, ordenadas de más larga a más corta — que puedan
+        escribirse sin reutilizar una letra más veces de las que tienes. Perfecto para juegos tipo Scrabble.
         Si falta una palabra válida de la lista incluida, pega tus propias palabras (una por línea o separadas
         por espacios) en{' '}
-        <em>palabras extra</em> y se unirán al diccionario durante la sesión, en ambos modos.
+        <em>palabras extra</em> y se añadirán al diccionario durante la sesión, en ambos modos.
       </p>
     </div>
   </section>
@@ -142,11 +142,11 @@ const de: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>Was ist dieses Werkzeug?</h2>
     <p>
-      Ein <strong>Wordle-Solver und Wort-Finder</strong>, der ein eingebautes Wörterbuch häufiger englischer
+      Ein <strong>Wordle-Löser und Wort-Finder</strong>, der ein eingebautes Wörterbuch häufiger englischer
       Fünfbuchstabenwörter auf die eingrenzt, die zu dem passen, was du schon weißt: feste grüne Positionen,
       Buchstaben, die das Wort enthalten muss, und Buchstaben, die es nicht enthalten darf. Ein Anagramm-Modus
       findet jedes Wort, das du aus einem Buchstabenpool bilden kannst, und du kannst eigene zusätzliche
-      Wörter einfügen. Alles läuft zu 100 % in deinem Browser — keine Lookups, kein Netzwerk.
+      Wörter einfügen. Alles läuft zu 100 % in deinem Browser — keine Online-Abfragen, kein Netzwerk.
     </p>
 
     <div>
@@ -164,10 +164,10 @@ const de: ReactNode = (
       <h2>Der knifflige Fall: doppelte Buchstaben</h2>
       <p>
         Wordle graut einen wiederholten Buchstaben aus, wenn die Antwort ihn seltener enthält, als du geraten hast
-        — was dich verleitet, diesen Buchstaben ganz auszuschließen. Dieser Solver handhabt das: Ein Buchstabe,
+        — was dich verleitet, diesen Buchstaben ganz auszuschließen. Dieser Löser handhabt das: Ein Buchstabe,
         der <em>sowohl</em> in deiner Grauliste als auch in einer Grün/Gelb-Bedingung steht, wird nicht pauschal
         verboten; die Antwort darf ihn nur nicht öfter enthalten, als du bestätigt hast. Also überlebt eine
-        Antwort wie <code>sleet</code> ein graues <code>e</code>, solange zwei <code>e</code>s bereits grün oder
+        Antwort wie <code>sleet</code> ein graues <code>e</code>, solange zwei <code>e</code> bereits grün oder
         gelb bestätigt sind — während <code>eerie</code> mit einem dritten <code>e</code> ausgeschlossen wird.
       </p>
     </div>
@@ -180,7 +180,7 @@ const de: ReactNode = (
         das sich bilden lässt, ohne einen Buchstaben häufiger zu verwenden, als du ihn hast. Toll für
         Scrabble-artige Rätsel. Fehlt ein gültiges Wort
         in der mitgelieferten Liste, füge deine eigenen Wörter (eines pro Zeile oder leerzeichengetrennt) unter{' '}
-        <em>zusätzliche Wörter</em> ein und sie kommen für die Sitzung zum Wörterbuch hinzu, in beiden Modi.
+        <em>zusätzliche Wörter</em> ein — sie kommen dann in beiden Modi für die Sitzung zum Wörterbuch hinzu.
       </p>
     </div>
   </section>

@@ -108,7 +108,7 @@ const zh: ReactNode = (
       </p>
     </div>
     <div>
-      <h2>此引擎为 JavaScript 风味</h2>
+      <h2>此引擎采用 JavaScript 方言</h2>
       <p>
         匹配结果反映的是在你浏览器中运行的 JavaScript(ECMAScript)RegExp 引擎。它支持先行断言(lookahead)、命名分组以及 <code>s</code>/<code>u</code> 标志。它不支持旧版 Safari(16.4 之前)中的后行断言(lookbehind),也不支持 PCRE 独有的特性,如原子分组和占有型量词。如果你在这里测试某个模式,它在你的 JavaScript 代码中行为会完全一致。
       </p>
@@ -127,7 +127,7 @@ const es: ReactNode = (
       coincidencia en vivo, enumera cada grupo de captura e incluye una guía rápida de sintaxis.
     </p>
     <div>
-      <h2>Las flags, explicadas</h2>
+      <h2>Las banderas, explicadas</h2>
       <ul>
         <li>
           <code>g</code> — <strong>global</strong>: encuentra todas las coincidencias, no solo la primera. Sin ella,
@@ -165,7 +165,7 @@ const es: ReactNode = (
       <h2>Este motor tiene el sabor de JavaScript</h2>
       <p>
         Las coincidencias reflejan el motor JavaScript (ECMAScript) RegExp que se ejecuta en tu navegador. Admite
-        inspección hacia adelante (lookahead), grupos con nombre y las flags <code>s</code>/<code>u</code>. No admite{' '}
+        inspección hacia adelante (lookahead), grupos con nombre y las banderas <code>s</code>/<code>u</code>. No admite{' '}
         inspección hacia atrás (lookbehind) en Safari antiguo (anterior a 16.4) ni funciones exclusivas de PCRE como
         grupos atómicos y cuantificadores posesivos. Si pruebas un patrón aquí, se comportará de forma idéntica en tu
         código JavaScript.
@@ -180,9 +180,9 @@ const de: ReactNode = (
     <h2>Was ist dieses Werkzeug?</h2>
     <p>
       Ein <strong>regulärer Ausdruck</strong> (regex) ist eine kompakte Mustersprache zum Durchsuchen von Text —
-      E-Mails validieren, Bestellnummern extrahieren, Logs aufteilen oder suchen und ersetzen. Das Problem: Eine
-      regex ist fast unmöglich zu lesen, bis man sieht, worauf sie passt. Dieser Tester hebt jeden Treffer live
-      hervor, listet jede Capture-Group und enthält eine Syntax-Übersicht.
+      E-Mails validieren, Bestellnummern extrahieren, Logs aufteilen oder suchen und ersetzen. Das Problem: Ein
+      Regex ist fast unmöglich zu lesen, bis man sieht, worauf er passt. Dieser Tester hebt jeden Treffer live
+      hervor, listet jede Capture-Gruppe und enthält eine Syntax-Übersicht.
     </p>
     <div>
       <h2>Die Flags, erklärt</h2>
@@ -209,9 +209,9 @@ const de: ReactNode = (
       </ul>
     </div>
     <div>
-      <h2>Capture-Groups lesen</h2>
+      <h2>Capture-Gruppen lesen</h2>
       <p>
-        Klammern <code>(...)</code> erzeugen eine <strong>Capture-Group</strong>, die sich den getroffenen
+        Klammern <code>(...)</code> erzeugen eine <strong>Capture-Gruppe</strong>, die sich den getroffenen
         Abschnitt merkt, zugänglich als <code>$1</code>, <code>$2</code> usw. (von links nach rechts nach
         öffnender Klammer). Benannte Gruppen <code>(?&lt;name&gt;...)</code> werden über den Namen referenziert. Dieses
         Tool listet jede Gruppe für jeden Treffer — der schnellste Weg, ein Muster wie{' '}
@@ -222,7 +222,7 @@ const de: ReactNode = (
     <div>
       <h2>Diese Engine spricht den JavaScript-Dialekt</h2>
       <p>
-        Die Treffer spiegeln die JavaScript- (ECMAScript) RegExp-Engine wider, die in deinem Browser läuft. Sie
+        Die Treffer spiegeln die JavaScript-RegExp-Engine (ECMAScript) wider, die in deinem Browser läuft. Sie
         unterstützt Lookahead, benannte Gruppen und die <code>s</code>/<code>u</code>-Flags. Sie unterstützt kein{' '}
         Lookbehind in älterem Safari (vor 16.4) und keine PCRE-exklusiven Features wie atomare Gruppen und
         possessive Quantoren. Wenn du ein Muster hier testest, verhält es sich in deinem JavaScript-Code identisch.

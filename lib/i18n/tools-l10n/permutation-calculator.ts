@@ -77,7 +77,7 @@ export const permutationCalculatorL10n: ToolL10n = {
       'ID- und Codegenerierung',
     ],
     faqs: [
-      { q: 'Wann ist P(n,r) = n!?', a: 'Wenn r = n — du ordnest ALLE Elemente an. Die Anzahl der Möglichkeiten, n verschiedene Elemente anzuordnen, ist n! (n Fakultät). Für 5 Bücher auf einem Regal: 5! = 120 Anordnungen.' },
+      { q: 'Wann ist P(n,r) = n!?', a: 'Wenn r = n — du ordnest ALLE Elemente an. Die Anzahl der Möglichkeiten, n verschiedene Elemente anzuordnen, ist n! (n Fakultät). Für 5 Bücher im Regal: 5! = 120 Anordnungen.' },
     ],
   },
 }

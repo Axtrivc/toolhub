@@ -76,7 +76,7 @@ const zh: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>这是什么工具?</h2>
     <p>
-      <strong>Markdown</strong> 是一种轻量级标记语言,被 GitHub、Reddit、Slack、Notion 和大多数开发者文档使用。浏览器无法直接渲染 Markdown——它们需要 <strong>HTML</strong>。这个转换器在左侧将 Markdown 转换为干净的 HTML,同时在右侧显示实时渲染预览,让你清楚看到读者最终会看到什么。
+      <strong>Markdown</strong> 是一种轻量级标记语言,被 GitHub、Reddit、Slack、Notion 和大多数开发者文档使用。浏览器无法直接渲染 Markdown——它们需要 <strong>HTML</strong>。这个转换器在左侧将 Markdown 转换为干净的 HTML,同时在右侧显示实时渲染预览,让你确切知道读者最终会看到什么。
     </p>
     <div>
       <h2>支持的 Markdown 特性</h2>
@@ -99,20 +99,20 @@ const zh: ReactNode = (
           <code>![alt](url)</code>。
         </li>
         <li>
-          <strong>GFM 表格</strong> —— 以竖线分隔的行,带表头分隔符。
+          <strong>GFM 表格</strong> —— 各行以竖线分隔,并带一行表头分隔符。
         </li>
       </ul>
     </div>
     <div>
       <h2>CommonMark 与软换行规则</h2>
       <p>
-        这个转换器遵循 <strong>CommonMark</strong> 规范,其中段落内的单个换行被视为软换行(渲染为一个空格)。若要强制硬换行,请在行末加两个空格,或用空行开启新段落。一些聊天式 Markdown 变体(用于即时通讯应用)会把每个换行都当作断行,但这并非标准,在此也不是默认行为。
+        这个转换器遵循 <strong>CommonMark</strong> 规范,其中段落内的单个换行被视为软换行(渲染为一个空格)。若要强制硬换行,请在行末加两个空格,或用空行开启新段落。一些聊天式 Markdown 变体(用于即时通讯应用)会把每个换行都当作硬换行,但这并非标准,在此也不是默认行为。
       </p>
     </div>
     <div>
       <h2>关于安全性的提示</h2>
       <p>
-        生成的 HTML 会对行内代码和代码块中的尖括号进行转义,但如果你要将输出插入到渲染用户提交 Markdown 的页面中,请务必先通过 <strong>DOMPurify</strong> 之类的清理器处理。原始 HTML 和巧妙的属性注入,是基于 Markdown 的评论系统和 wiki 中存储型 XSS 的典型攻击途径。
+        生成的 HTML 会对行内代码和代码块中的尖括号进行转义,但如果你要将输出插入到渲染用户提交 Markdown 的页面中,请务必先通过 <strong>DOMPurify</strong> 之类的清理器处理。原始 HTML 和精心构造的属性注入,是基于 Markdown 的评论系统和 wiki 中存储型 XSS 的典型攻击途径。
       </p>
     </div>
   </section>
@@ -162,7 +162,7 @@ const es: ReactNode = (
         dentro de un párrafo se trata como un salto suave (renderizado como un espacio). Para forzar un salto
         de línea duro, termina la línea con dos espacios o usa una línea en blanco para iniciar un nuevo
         párrafo. Algunas variantes de Markdown estilo chat (usadas en apps de mensajería) tratan cada salto de
-        línea como un corte, pero eso no es estándar y no es el comportamiento por defecto aquí.
+        línea como un salto duro, pero eso no es estándar y no es el comportamiento por defecto aquí.
       </p>
     </div>
     <div>
@@ -170,7 +170,7 @@ const es: ReactNode = (
       <p>
         El HTML generado escapa los corchetes angulares en el código en línea y en los bloques de código, pero
         si insertas la salida en una página que renderiza Markdown enviado por usuarios, pásalo siempre antes
-        por un saneador como <strong>DOMPurify</strong>. El HTML crudo y la inyección inteligente de atributos
+        por un sanitizador como <strong>DOMPurify</strong>. El HTML crudo y la inyección maliciosa de atributos
         son los vectores clásicos de XSS almacenado en sistemas de comentarios y wikis basados en Markdown.
       </p>
     </div>
@@ -209,7 +209,7 @@ const de: ReactNode = (
           <code>![alt](url)</code>.
         </li>
         <li>
-          <strong>GFM-Tabellen</strong> — durch Pipes getrennte Zeilen mit einem Header-Trennzeichen.
+          <strong>GFM-Tabellen</strong> — durch Pipes getrennte Zeilen mit einer Trennzeile unter der Kopfzeile.
         </li>
       </ul>
     </div>
@@ -219,8 +219,9 @@ const de: ReactNode = (
         Dieser Konverter folgt der <strong>CommonMark</strong>-Spezifikation, in der ein einzelner
         Zeilenumbruch innerhalb eines Absatzes als Soft Break behandelt wird (gerendert als Leerzeichen). Um
         einen harten Zeilenumbruch zu erzwingen, beende die Zeile mit zwei Leerzeichen oder verwende eine
-        Leerzeile, um einen neuen Absatz zu beginnen. Einige Chat-Stil-Markdown-Varianten (in Messenger-Apps)
-        behandeln jeden Umbruch als Break, aber das ist nicht standardmäßig und hier nicht die Voreinstellung.
+        Leerzeile, um einen neuen Absatz zu beginnen. Einige Markdown-Varianten im Chat-Stil (in Messenger-Apps)
+        behandeln jeden Zeilenumbruch als harten Umbruch, aber das entspricht nicht dem Standard und ist hier
+        nicht die Voreinstellung.
       </p>
     </div>
     <div>
@@ -228,7 +229,7 @@ const de: ReactNode = (
       <p>
         Das erzeugte HTML maskiert spitze Klammern in Inline-Code und Codeblöcken, aber wenn du die Ausgabe in
         eine Seite einfügst, die von Nutzern eingereichtes Markdown rendert, leite sie immer zuerst durch
-        einen Sanitizer wie <strong>DOMPurify</strong>. Rohes HTML und clevere Attribut-Injection sind die
+        einen Sanitizer wie <strong>DOMPurify</strong>. Rohes HTML und gezielte Attribut-Injection sind die
         klassischen Vektoren für Stored-XSS in Markdown-basierten Kommentarsystemen und Wikis.
       </p>
     </div>

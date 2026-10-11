@@ -94,13 +94,13 @@ const zh: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>年龄是如何计算的</h2>
     <p>
-      计算年龄听起来简单,但远不止把两个年份相减那么简单。规范的年龄计算要统计<strong>已满的年、月、日</strong>——在你的第 25 个生日完全过去之前,你还不算「25 岁」。本计算器采用日历感知逻辑,能处理不同的月份长度、闰年以及月末边界情况(例如 1 月 31 日与 2 月 28 日之间的差值)。
+      计算年龄看似简单,但远不止把两个年份相减。规范的年龄计算要统计<strong>已满的年、月、日</strong>——在你的第 25 个生日完全过去之前,你还不算「25 岁」。本计算器采用日历感知逻辑,能处理不同的月份长度、闰年以及月末边界情况(例如 1 月 31 日与 2 月 28 日之间的差值)。
     </p>
 
     <h2>为什么要精确计算年龄?</h2>
     <ul>
       <li>
-        <strong>年龄核验。</strong> 许多服务——驾驶、投票、饮酒、退休福利以及限制年龄的内容——都依赖精确的年龄门槛。
+        <strong>年龄核验。</strong> 许多服务——驾驶、投票、饮酒、退休福利以及有年龄限制的内容——都依赖精确的年龄门槛。
       </li>
       <li>
         <strong>法律与医疗。</strong> 保险费率、儿科用药剂量以及法律文件常常需要精确到年和月的年龄,而不仅仅是年。
@@ -156,13 +156,13 @@ const es: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>Cómo se calcula la edad</h2>
     <p>
-      Calcular la edad parece sencillo, pero hay más que restar dos años. El cálculo correcto de la edad cuenta <strong>años, meses y días completos</strong> — no tienes «25 años» hasta que tu cumpleaños número 25 ha pasado por completo. Esta calculadora usa una lógica basada en el calendario que maneja distintas duraciones de mes, años bisiestos y casos límite de fin de mes (por ejemplo, la diferencia entre el 31 de enero y el 28 de febrero).
+      Calcular la edad parece sencillo, pero es más que restar dos años. El cálculo correcto de la edad cuenta <strong>años, meses y días completos</strong> — no tienes «25 años» hasta que tu cumpleaños número 25 ha pasado por completo. Esta calculadora usa una lógica basada en el calendario que maneja distintas duraciones de mes, años bisiestos y casos límite de fin de mes (por ejemplo, la diferencia entre el 31 de enero y el 28 de febrero).
     </p>
 
     <h2>¿Por qué calcular la edad con precisión?</h2>
     <ul>
       <li>
-        <strong>Verificación de edad.</strong> Muchos servicios — conducir, votar, beber, prestaciones de jubilación y contenido con restricción de edad — dependen de umbrales exactos de edad.
+        <strong>Verificación de edad.</strong> Muchos servicios — conducir, votar, beber alcohol, prestaciones de jubilación y contenido con restricción de edad — dependen de umbrales exactos de edad.
       </li>
       <li>
         <strong>Legal y médico.</strong> Las primas de seguros, la dosificación pediátrica y los documentos legales suelen requerir la edad en años y meses, no solo en años.
@@ -171,7 +171,7 @@ const es: ReactNode = (
         <strong>Pediatría.</strong> El desarrollo de un bebé se sigue en meses durante los dos primeros años y, a veces, en semanas para los recién nacidos.
       </li>
       <li>
-        <strong>Mascotas.</strong> La edad de los animales, especialmente de los jóvenes, se suele medir en meses.
+        <strong>Mascotas.</strong> La edad de los animales, especialmente la de las mascotas jóvenes, suele medirse en meses.
       </li>
       <li>
         <strong>Investigación histórica.</strong> Descubre exactamente qué edad tenía una persona en un acontecimiento histórico concreto, o cuánto tiempo hace que ocurrió algo.
@@ -180,7 +180,7 @@ const es: ReactNode = (
 
     <h2>Distintas formas de expresar la edad</h2>
     <p>
-      Según el contexto, puede que quieras la edad expresada en distintas unidades. Esta calculadora ofrece todas ellas:
+      Según el contexto, puede que quieras expresar la edad en distintas unidades. Esta calculadora ofrece todas ellas:
     </p>
     <ul>
       <li><strong>Años + meses + días</strong> — el formato cotidiano, ideal para la mayoría de los usos</li>
@@ -218,7 +218,7 @@ const de: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>Wie das Alter berechnet wird</h2>
     <p>
-      Das Alter zu berechnen klingt einfach, aber es ist mehr als die Subtraktion zweier Jahreszahlen. Eine korrekte Altersberechnung zählt <strong>volle Jahre, Monate und Tage</strong> — du bist nicht „25 Jahre alt", bis dein 25. Geburtstag vollständig vergangen ist. Dieser Rechner verwendet eine kalenderbewusste Logik, die unterschiedlich lange Monate, Schaltjahre und Monatsend-Fälle (z. B. die Differenz zwischen dem 31. Januar und dem 28. Februar) korrekt behandelt.
+      Das Alter zu berechnen klingt einfach, aber dahinter steckt mehr als das Subtrahieren zweier Jahreszahlen. Eine korrekte Altersberechnung zählt <strong>volle Jahre, Monate und Tage</strong> — du bist nicht „25 Jahre alt", bis dein 25. Geburtstag vollständig vergangen ist. Dieser Rechner verwendet eine kalenderbewusste Logik, die unterschiedlich lange Monate, Schaltjahre und Monatsend-Fälle (z. B. die Differenz zwischen dem 31. Januar und dem 28. Februar) korrekt behandelt.
     </p>
 
     <h2>Warum das Alter präzise berechnen?</h2>
@@ -242,7 +242,7 @@ const de: ReactNode = (
 
     <h2>Verschiedene Arten, das Alter auszudrücken</h2>
     <p>
-      Je nach Kontext möchtest du das Alter vielleicht in verschiedenen Einheiten ausgedrückt haben. Dieser Rechner bietet sie alle:
+      Je nach Kontext willst du das Alter vielleicht in verschiedenen Einheiten ausdrücken. Dieser Rechner bietet sie alle:
     </p>
     <ul>
       <li><strong>Jahre + Monate + Tage</strong> — das alltägliche Format, ideal für die meisten Zwecke</li>
@@ -261,7 +261,7 @@ const de: ReactNode = (
         <strong>International (am weitesten verbreitet):</strong> Du bist bei der Geburt 0 und bekommst jedes Jahr an deinem Geburtstag ein Jahr dazu. Das ist das System, das dieser Rechner verwendet.
       </li>
       <li>
-        <strong>Traditionell ostasiatisch (koreanisch):</strong> Du bist bei der Geburt 1 und bekommst ein Jahr am Neujahrstag statt an deinem Geburtstag. Ein am 31. Dezember geborenes Baby wird am nächsten Tag 2. Südkorea ist 2023 offiziell zum internationalen System gewechselt.
+        <strong>Traditionell ostasiatisch (koreanisch):</strong> Du bist bei der Geburt 1 und bekommst ein Jahr am Neujahrstag statt an deinem Geburtstag dazu. Ein am 31. Dezember geborenes Baby wird am nächsten Tag 2. Südkorea ist 2023 offiziell zum internationalen System gewechselt.
       </li>
       <li>
         <strong>Vietnamesisch:</strong> Ähnlich dem traditionellen ostasiatischen System.

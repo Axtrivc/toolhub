@@ -71,7 +71,7 @@ const es: ReactNode = (
 const de: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>Was ist dieses Werkzeug?</h2>
-    <p>Eine <strong>Kombination</strong> zählt, auf wie viele Arten du r Elemente aus n auswählen kannst, wobei die Reihenfolge keine Rolle spielt. 3 Zutaten aus 10 auszuwählen ist gleich, egal in welcher Reihenfolge du sie wählst — das ist eine Kombination.</p>
+    <p>Eine <strong>Kombination</strong> zählt, auf wie viele Arten du r Elemente aus n auswählen kannst, wobei die Reihenfolge keine Rolle spielt. 3 Zutaten aus 10 auszuwählen führt zum gleichen Ergebnis, egal in welcher Reihenfolge du sie wählst — das ist eine Kombination.</p>
     <div>
       <h2>Die Formel</h2>
       <p>C(n,r) = n! / (r! × (n−r)!). Für die Wahl von 3 aus 10: <code>10! / (3! × 7!) = 120</code>.</p>

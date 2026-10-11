@@ -65,7 +65,7 @@ const zh: ReactNode = (
     <div>
       <h2>卡路里需求是如何计算的</h2>
       <p>
-        Mifflin-St Jeor 公式根据你的体重、身高、年龄和性别估算 BMR。你的 TDEE 将 BMR 乘以一个活动系数(久坐为 1.2,非常高强度可达 1.9)。想减重,摄入要低于 TDEE;想增重,摄入要高于 TDEE。
+        Mifflin-St Jeor 公式根据你的体重、身高、年龄和性别估算 BMR。TDEE 等于 BMR 乘以一个活动系数(久坐为 1.2,非常活跃可达 1.9)。想减重,摄入要低于 TDEE;想增重,摄入要高于 TDEE。
       </p>
     </div>
 

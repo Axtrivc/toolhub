@@ -26,7 +26,7 @@ export const colorContrastCheckerL10n: ToolL10n = {
     },
     formula: {
       formula: 'CR = ( L_lighter + 0.05 ) / ( L_darker + 0.05 )',
-      explain: '两种颜色由相对亮度 L 算出的 WCAG 对比度。比值 ≥ 4.5 普通文本达 AA;≥ 7 达 AAA。0.05 用于补偿环境光眩光。',
+      explain: '两种颜色由相对亮度 L 算出的 WCAG 对比度。比值 ≥ 4.5 时普通文本达 AA;≥ 7 时达 AAA。0.05 用于补偿环境光眩光。',
     },
     useCases: [
       '检测配色是否达到 WCAG 标准',
@@ -61,7 +61,7 @@ export const colorContrastCheckerL10n: ToolL10n = {
     },
     formula: {
       formula: 'CR = ( L_lighter + 0.05 ) / ( L_darker + 0.05 )',
-      explain: 'Ratio de contraste WCAG de dos colores a partir de su luminancia relativa L. Ratios ≥ 4,5 cumplen AA para texto normal; ≥ 7 cumplen AAA. El 0,05 compensa el destello de luz ambiente.',
+      explain: 'Relación de contraste WCAG de dos colores a partir de su luminancia relativa L. Una relación ≥ 4,5 cumple AA para texto normal; una ≥ 7 cumple AAA. El 0,05 compensa el destello de luz ambiente.',
     },
     useCases: [
       'comprobar si una combinación de colores cumple WCAG',
@@ -96,17 +96,17 @@ export const colorContrastCheckerL10n: ToolL10n = {
     },
     formula: {
       formula: 'CR = ( L_lighter + 0.05 ) / ( L_darker + 0.05 )',
-      explain: 'WCAG-Kontrastverhältnis zweier Farben aus ihrer relativen Leuchtdichte L. Werte ≥ 4,5 erfüllen AA für normalen Text; ≥ 7 erfüllen AAA. Die 0,05 gleicht Streulicht aus.',
+      explain: 'WCAG-Kontrastverhältnis zweier Farben aus ihrer relativen Leuchtdichte L. Werte ≥ 4,5 erfüllen AA für normalen Text; ≥ 7 erfüllen AAA. Der Wert 0,05 gleicht Streulicht aus.',
     },
     useCases: [
       'prüfen, ob eine Farbkombination WCAG entspricht',
-      'die Barrierefrei-Konformität einer Seite auditieren',
-      'Probleme mit zu geringem Kontrast bei der Lesbarkeit diagnostizieren',
+      'die Barrierefreiheits-Konformität einer Seite überprüfen',
+      'Lesbarkeitsprobleme durch zu geringen Kontrast diagnostizieren',
       'geeignete Hintergrundfarben für Fließtext auswählen',
     ],
     faqs: [
       { q: 'Welches Kontrastverhältnis brauche ich, um WCAG zu bestehen?', a: 'Für AA brauchst du mindestens 4,5:1 bei normalem Text und 3:1 bei großem Text (18pt oder 14pt fett). Für AAA steigt die Latte auf 7:1 bei normalem Text und 4,5:1 bei großem Text. Nicht-textliche UI-Komponenten (Icons, Rahmen) benötigen 3:1 unter AA.' },
-      { q: 'Wie wird das Kontrastverhältnis berechnet?', a: 'Es verwendet die relative Leuchtdichte jeder Farbe. Die Formel lautet (L1 + 0,05) ÷ (L2 + 0,05), wobei L1 die hellere und L2 die dunklere Leuchtdichte ist. Reinweiß auf Reinschwarz ergibt 21:1, das Maximum. Das Verhältnis ist gleich, egal ob Text auf Hintergrund oder umgekehrt.' },
+      { q: 'Wie wird das Kontrastverhältnis berechnet?', a: 'Die Berechnung basiert auf der relativen Leuchtdichte jeder Farbe. Die Formel lautet (L1 + 0,05) ÷ (L2 + 0,05), wobei L1 die hellere und L2 die dunklere Leuchtdichte ist. Reinweiß auf Reinschwarz ergibt 21:1, das Maximum. Das Verhältnis ist gleich, egal ob Text auf Hintergrund oder umgekehrt.' },
       { q: 'Kann der Prüfer halbtransparente Farben verarbeiten?', a: 'Nein — er berechnet das Verhältnis für deckende Vor- und Hintergrundfarben, wie es WCAG vorgibt. Wenn dein Text eine Deckkraft hat, mische ihn zuerst mit dem tatsächlichen Hintergrund, um die effektive Volltonfarbe zu erhalten, und teste diese. Alpha-Compositing verändert den wahrgenommenen Kontrast.' },
     ],
   },

@@ -52,7 +52,7 @@ export const qrCodeGeneratorL10n: ToolL10n = {
       '网址转二维码生成器',
       '免费在线二维码制作',
       '生成 WiFi 二维码',
-      '二维码下载 PNG/SVG',
+      '下载 PNG/SVG 格式二维码',
     ],
     faqs: [
       { q: '这些二维码会过期吗?', a: '不会。因为数据直接编码在图案里,静态二维码永远不会过期、也永远能正常扫描。只要内容本身(比如一个网址)仍然有效,这个二维码就能一直用下去。' },
@@ -169,7 +169,7 @@ export const qrCodeGeneratorL10n: ToolL10n = {
     faqs: [
       { q: 'Verfallen diese QR-Codes?', a: 'Nein. Da die Daten direkt im Code eingebettet sind, verfallen statische QR-Codes nie und funktionieren dauerhaft. Solange der Inhalt selbst (etwa eine URL) gültig bleibt, lässt sich der Code für immer scannen.' },
       { q: 'Gibt es ein Limit, wie viel Daten ich kodieren kann?', a: 'Ja. Ein einzelner QR-Code fasst grob 4.000 alphanumerische Zeichen oder 2.900 Byte Binärdaten. Für URLs und WLAN-Zugangsdaten reicht das mehr als aus. Wenn du einen sehr langen Text kodierst, wird der Code dichter und schwerer zu scannen.' },
-      { q: 'Sind QR-Codes sicher?', a: 'QR-Codes sind selbst nur ein Weg, Text zu übermitteln – sie sind weder sicher noch gefährlich. Das Risiko besteht darin, dass ein böswilliger Code auf eine Phishing-Seite verlinken könnte. Als Nutzer behandle gescannte Links mit derselben Vorsicht wie jeden anderen Link. Als Ersteller verlinke nur auf Ziele, die du kontrollierst und vertraust.' },
+      { q: 'Sind QR-Codes sicher?', a: 'QR-Codes sind selbst nur ein Weg, Text zu übermitteln – sie sind weder sicher noch gefährlich. Das Risiko besteht darin, dass ein böswilliger Code auf eine Phishing-Seite verlinken könnte. Als Nutzer behandle gescannte Links mit derselben Vorsicht wie jeden anderen Link. Als Ersteller verlinke nur auf Ziele, die du kontrollierst und denen du vertraust.' },
       { q: 'Welche Fehlerkorrekturstufe soll ich wählen?', a: 'Stufe H verträgt ~30 % beschädigte oder verdeckte Fläche — ideal für Verpackungen und gedruckte Poster. Am Bildschirm reicht M (~15 %). Je höher die Stufe, desto dichter der Code; bei langen Texten wird das Scannen schwieriger.' },
     ],
   },

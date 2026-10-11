@@ -85,18 +85,18 @@ const zh: ReactNode = (
     <h2>销售税如何计算</h2>
     <p>
       加上税额:<code>total = price × (1 + tax rate)</code>。例如,一件 $100 的商品加 8.25%
-      的税:<code>100 × 1.0825 = $108.25</code>。要扣除税额(求税前金额):{' '}
+      的税:<code>100 × 1.0825 = $108.25</code>。要去除税额(求税前金额):{' '}
       <code>pre-tax = total ÷ (1 + tax rate)</code>。
     </p>
 
-    <h2>加税与扣税</h2>
+    <h2>加税与去税</h2>
     <p>这两种操作解决的是相反的问题:</p>
     <ul>
       <li>
         <strong>加税</strong> —— 当你知道标价,想算出收银台的最终金额时使用。在美国很常见,因为标价都是税前的。
       </li>
       <li>
-        <strong>扣税</strong> —— 当你知道最终总额,想找出税前金额时使用。适用于 VAT/GST 账务处理、费用报销和核对收据。
+        <strong>去税</strong> —— 当你知道最终总额,想找出税前金额时使用。适用于 VAT/GST 账务处理、费用报销和核对收据。
       </li>
     </ul>
 
@@ -197,28 +197,28 @@ const de: ReactNode = (
 
     <h2>Wie die Umsatzsteuer berechnet wird</h2>
     <p>
-      Zum Hinzurechnen der Steuer: <code>total = price × (1 + tax rate)</code>. Beispiel: ein Artikel
-      für $100 mit 8,25 % Steuer: <code>100 × 1.0825 = $108.25</code>. Zum Herausrechnen der Steuer
+      Zum Hinzufügen der Steuer: <code>total = price × (1 + tax rate)</code>. Beispiel: ein Artikel
+      für $100 mit 8,25 % Steuer: <code>100 × 1.0825 = $108.25</code>. Zum Abziehen der Steuer
       (Nettobetrag ermitteln):{' '}
       <code>pre-tax = total ÷ (1 + tax rate)</code>.
     </p>
 
-    <h2>Steuer hinzurechnen vs. herausrechnen</h2>
+    <h2>Steuer hinzufügen vs. abziehen</h2>
     <p>Diese beiden Operationen lösen entgegengesetzte Probleme:</p>
     <ul>
       <li>
-        <strong>Steuer hinzurechnen</strong> — wenn du den Etikettenpreis kennst und die Endkosten an
+        <strong>Steuer hinzufügen</strong> — wenn du den Etikettenpreis kennst und die Endkosten an
         der Kasse wissen willst. In den USA üblich, wo Preise ohne Steuer ausgewiesen werden.
       </li>
       <li>
-        <strong>Steuer herausrechnen</strong> — wenn du den Endbetrag kennst und den Nettobetrag finden
+        <strong>Steuer abziehen</strong> — wenn du den Endbetrag kennst und den Nettobetrag finden
         willst. Nützlich für die MwSt-/GST-Buchhaltung, Spesenabrechnungen und die Prüfung von
         Kassenbons.
       </li>
     </ul>
 
     <h2>Umsatzsteuer nach US-Bundesstaat (Auswahl)</h2>
-    <p>Durchschnittliche kombinierte Bundesstaat- + Kommunalumsatzsteuersätze für wichtige Bundesstaaten (aktuelle Sätze lokal prüfen):</p>
+    <p>Durchschnittliche kombinierte Steuersätze (Bundesstaat + Kommune) für wichtige Bundesstaaten (aktuelle Sätze lokal prüfen):</p>
     <ul>
       <li><strong>Tennessee:</strong> 9,55 %</li>
       <li><strong>California:</strong> 8,82 %</li>
@@ -234,7 +234,7 @@ const de: ReactNode = (
 
     <h2>Mehrwertsteuer und GST weltweit</h2>
     <ul>
-      <li><strong>VAT Großbritannien:</strong> 20 % (Normalsatz)</li>
+      <li><strong>Mehrwertsteuer Großbritannien:</strong> 20 % (Normalsatz)</li>
       <li><strong>Mehrwertsteuer Deutschland:</strong> 19 %</li>
       <li><strong>GST Australien:</strong> 10 %</li>
       <li><strong>GST Kanada:</strong> 5 % (zuzüglich Provinzsteuer in einigen Provinzen)</li>

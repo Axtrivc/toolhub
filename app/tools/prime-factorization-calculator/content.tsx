@@ -29,7 +29,7 @@ const en: ReactNode = (
 const zh: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>这是什么工具?</h2>
-    <p><strong>质因数分解</strong>把一个数拆成它的质数构建模块。每个大于 1 的整数都有唯一一种质因数分解——这就是算术基本定理。</p>
+    <p><strong>质因数分解</strong>把一个数拆成若干质数的乘积。每个大于 1 的整数的质因数分解都是唯一的——这就是算术基本定理。</p>
     <div>
       <h2>工作原理</h2>
       <p>本工具从 2 开始,逐一除以各个质数。例如:<code>360 = 2 × 2 × 2 × 3 × 3 × 5 = 2³ × 3² × 5</code>。</p>
@@ -50,7 +50,7 @@ const zh: ReactNode = (
 const es: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>¿Qué es esta herramienta?</h2>
-    <p>La <strong>factorización en primos</strong> descompone un número en sus bloques de construcción primos. Cada entero mayor que 1 tiene exactamente una factorización en primos única — este es el Teorema Fundamental de la Aritmética.</p>
+    <p>La <strong>factorización en primos</strong> descompone un número en sus componentes básicos: los números primos. Cada entero mayor que 1 tiene una única factorización en primos — este es el Teorema Fundamental de la Aritmética.</p>
     <div>
       <h2>Cómo funciona</h2>
       <p>Esta herramienta va dividiendo entre los primos uno a uno, empezando por el 2. Por ejemplo: <code>360 = 2 × 2 × 2 × 3 × 3 × 5 = 2³ × 3² × 5</code>.</p>
@@ -71,7 +71,7 @@ const es: ReactNode = (
 const de: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>Was ist dieses Werkzeug?</h2>
-    <p>Die <strong>Primfaktorzerlegung</strong> zerlegt eine Zahl in ihre Primzahl-Bausteine. Jede ganze Zahl größer als 1 hat genau eine eindeutige Primfaktorzerlegung — das ist der Fundamentalsatz der Arithmetik.</p>
+    <p>Die <strong>Primfaktorzerlegung</strong> zerlegt eine Zahl in ihre Primzahl-Bausteine. Jede ganze Zahl größer als 1 hat eine eindeutige Primfaktorzerlegung — das ist der Fundamentalsatz der Arithmetik.</p>
     <div>
       <h2>So funktioniert es</h2>
       <p>Dieses Werkzeug teilt nacheinander durch Primzahlen, beginnend bei 2. Zum Beispiel: <code>360 = 2 × 2 × 2 × 3 × 3 × 5 = 2³ × 3² × 5</code>.</p>

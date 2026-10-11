@@ -26,7 +26,7 @@ const en: ReactNode = (
     <div>
       <h2>How the formula works</h2>
       <p>
-        Between your two viewport points the size is a straight line:{' '}
+        Between your two viewport points the size follows a straight line:{' '}
         <code>slope = (maxFont − minFont) / (maxViewport − minViewport) × 100</code>, expressed in{' '}
         <code>vw</code>, and <code>intercept = minFont − slope × minViewport / 100</code>, in px. The preferred
         middle value <code>intercept + slope × vw</code> does the scaling; <code>clamp()</code> then guarantees
@@ -70,7 +70,7 @@ const zh: ReactNode = (
     </p>
 
     <div>
-      <h2>公式是如何工作的</h2>
+      <h2>公式的工作原理</h2>
       <p>
         在两个视口点之间，字号沿一条直线变化：<code>slope = (maxFont − minFont) / (maxViewport − minViewport) × 100</code>，单位为{' '}
         <code>vw</code>；截距 <code>intercept = minFont − slope × minViewport / 100</code>，单位为 px。中间的偏好值{' '}
@@ -82,7 +82,7 @@ const zh: ReactNode = (
       <h2>为可访问性优先使用 rem</h2>
       <p>
         浏览器允许用户设置默认字号，而用 <code>px</code> 声明的尺寸会忽略这一偏好。本工具输出以 <strong>rem</strong>{' '}
-        为单位的 clamp（默认根字号 16px），使整段缩放都尊重用户的缩放设置。与视口相关的部分仍需要{' '}
+        为单位的 clamp（默认根字号 16px），使整套字号都尊重用户的缩放偏好。与视口相关的部分仍需要{' '}
         <code>vw</code> —— 在偏好值中混用 <code>rem + vw</code> 正是 <code>clamp()</code> 的标准用法，既保证缩放又兼顾可访问性。
       </p>
     </div>
@@ -90,7 +90,7 @@ const zh: ReactNode = (
     <div>
       <h2>选择合理的范围</h2>
       <p>
-        正文的一个常见起点是「375px 手机上 16px，到 1440px 桌面上 18–20px」；标题则能容忍更大范围，例如 28px → 48px。要避免斜率过陡导致文字在平板上过度膨胀——可在表中查看{' '}
+        正文的一个常见起点是「375px 手机上 16px，到 1440px 桌面上 18–20px」；标题则能容忍宽得多的范围，例如 28px → 48px。要避免斜率过陡导致文字在平板上过度膨胀——可在表中查看{' '}
         <code>768px</code> 处的计算尺寸。还要记住：这里设定的是 <em>视口</em> 范围而非设备范围，用户调整桌面窗口大小时会遍历整段缩放，所以要让中间每个宽度都保持流畅舒适。
       </p>
     </div>
@@ -103,7 +103,7 @@ const es: ReactNode = (
     <h2>¿Qué es esta herramienta?</h2>
     <p>
       La <strong>tipografía fluida</strong> escala de forma suave con el viewport en lugar de saltar en los breakpoints. La forma moderna de hacerlo es una sola línea de CSS —{' '}
-      <code>clamp(min, preferred, max)</code> — pero calcular a mano la pendiente en <code>vw</code> y la intersección en{' '}
+      <code>clamp(min, preferred, max)</code> — pero calcular a mano la pendiente en <code>vw</code> y el intercepto en{' '}
       <code>rem</code> es propenso a errores. Esta calculadora hace el álgebra por ti: introduce los tamaños de fuente mínimo y máximo y el rango de viewport en el que aplican, y obtendrás una declaración{' '}
       <code>clamp()</code> lista para copiar y pegar, además de una tabla con el tamaño exacto renderizado en viewports habituales.
     </p>
@@ -119,11 +119,11 @@ const es: ReactNode = (
     </div>
 
     <div>
-      <h2>Prefiere rem antes que px por accesibilidad</h2>
+      <h2>Prefiere rem a px por accesibilidad</h2>
       <p>
-        Los navegadores permiten a las usuarias definir un tamaño de fuente por defecto, y los tamaños declarados en{' '}
+        Los navegadores permiten a los usuarios definir un tamaño de fuente por defecto, y los tamaños declarados en{' '}
         <code>px</code> ignoran esa preferencia. Esta herramienta genera el clamp en unidades de{' '}
-        <strong>rem</strong> (usando tu tamaño de fuente raíz, 16 px por defecto), de modo que toda la escala respeta el zoom de la usuaria. La parte relativa al viewport sigue necesitando{' '}
+        <strong>rem</strong> (usando tu tamaño de fuente raíz, 16 px por defecto), de modo que toda la escala respeta el zoom del usuario. La parte relativa al viewport sigue necesitando{' '}
         <code>vw</code> — mezclar <code>rem + vw</code> dentro del valor preferido es justo como debe usarse{' '}
         <code>clamp()</code>, y mantiene intactos tanto el escalado como la accesibilidad.
       </p>
@@ -133,7 +133,7 @@ const es: ReactNode = (
       <h2>Elegir rangos razonables</h2>
       <p>
         Un punto de partida habitual para el cuerpo de texto es «16 px en un teléfono de 375 px hasta 18–20 px en un escritorio de 1440 px»; los encabezados toleran rangos mucho más amplios, como 28 px → 48 px. Evita una pendiente tan pronunciada que el texto se infle en tablets — comprueba el tamaño calculado en{' '}
-        <code>768px</code> en la tabla. Y recuerda que el rango es de <em>viewport</em>, no de dispositivo: al redimensionar una ventana de escritorio, las usuarias recorren toda la escala, así que mantén un comportamiento fluido agradable en cada anchura intermedia.
+        <code>768px</code> en la tabla. Y recuerda que el rango es de <em>viewport</em>, no de dispositivo: al redimensionar una ventana de escritorio, los usuarios recorren toda la escala, así que mantén un comportamiento fluido y agradable en cada anchura intermedia.
       </p>
     </div>
   </section>
@@ -155,19 +155,19 @@ const de: ReactNode = (
       <p>
         Zwischen deinen beiden Viewport-Punkten verläuft die Größe auf einer geraden Linie:{' '}
         <code>slope = (maxFont − minFont) / (maxViewport − minViewport) × 100</code>, ausgedrückt in{' '}
-        <code>vw</code>, und <code>intercept = minFont − slope × minViewport / 100</code>, in px. Der mittlere Preferred-Wert{' '}
+        <code>vw</code>, und <code>intercept = minFont − slope × minViewport / 100</code>, in px. Der mittlere bevorzugte Wert{' '}
         <code>intercept + slope × vw</code> übernimmt die Skalierung; <code>clamp()</code> garantiert dann, dass das Ergebnis nie unter dein Minimum auf kleinen Handys sinkt und nie über dein Maximum auf breiten Monitoren steigt. Die Tabelle zeigt genau, wo die „Skalierungs“-Zone endet und das Clampen beginnt.
       </p>
     </div>
 
     <div>
-      <h2>Für Accessibility lieber rem als px</h2>
+      <h2>Für Barrierefreiheit lieber rem als px</h2>
       <p>
-        Browser erlauben Nutzerinnen, eine Standardschriftgröße festzulegen, und Größen in{' '}
+        Browser erlauben Nutzern, eine Standardschriftgröße festzulegen, und Größen in{' '}
         <code>px</code> ignorieren diese Einstellung. Dieses Tool gibt den Clamp in{' '}
-        <strong>rem</strong>-Einheiten aus (mit deiner Root-Schriftgröße, standardmäßig 16 px), sodass die gesamte Skalierung den Zoom der Nutzerin respektiert. Der viewport-relative Teil braucht weiterhin{' '}
-        <code>vw</code> — <code>rem + vw</code> innerhalb des Preferred-Werts zu mischen ist genau, wie{' '}
-        <code>clamp()</code> gedacht ist, und erhält sowohl Skalierung als auch Accessibility.
+        <strong>rem</strong>-Einheiten aus (mit deiner Root-Schriftgröße, standardmäßig 16 px), sodass die gesamte Skala den Zoom der Nutzer respektiert. Der viewport-relative Teil braucht weiterhin{' '}
+        <code>vw</code> — <code>rem + vw</code> innerhalb des bevorzugten Werts zu mischen ist genau, wie{' '}
+        <code>clamp()</code> gedacht ist, und erhält sowohl Skalierung als auch Barrierefreiheit.
       </p>
     </div>
 

@@ -182,7 +182,8 @@ export function UserAgentParserClient() {
 
       {parsed === null ? (
         <p className="rounded-md p-3 text-sm" style={{ backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text-subtle))' }}>
-          {L('emptyHint', 'Paste any User-Agent string above, or click')} <strong>{L('loadMyUa', 'Load my UA')}</strong> {L('emptyHintSuffix', 'to parse your current browser.')}
+          {L('emptyHint', 'Paste any User-Agent string above, or click')} <strong>{L('loadMyUa', 'Load my UA')}</strong>
+          {L('emptyHintSuffix', ' to parse your current browser.')}
         </p>
       ) : (
         <>

@@ -12,7 +12,7 @@ export const downPaymentCalculatorL10n: ToolL10n = {
     },
     useCases: ['按房价算首付金额', '算买房需要多少首付', '查 20% PMI 阈值', '算免 PMI 需要多少首付'],
     faqs: [
-      { q: 'PMI 什么时候能取消?', a: '常规贷款的 PMI 在贷款价值比降到 78% 时自动取消，你也可以在 80% 时主动申请取消。FHA 贷款（2013 年后）除非再融资，否则终身需要 PMI。' },
+      { q: 'PMI 什么时候能取消?', a: '常规贷款的 PMI 在贷款价值比降到 78% 时自动取消,你也可以在 80% 时主动申请取消。FHA 贷款(2013 年后)除非再融资,否则终身需要 PMI。' },
       { q: '首付必须凑到 20% 吗?', a: '不是硬性要求。常规贷款最低可 3%–5% 首付、FHA 3.5%,但低于 20% 通常要付 PMI(约为贷款额的 0.5%–2%/年)。要不要凑足 20%,取决于省下的 PMI 与保持应急现金哪个更值。' },
       { q: '首付之外还要准备哪些钱?', a: '还有过户结算费,通常占房价 2%–5%,外加预付税费、保险和评估费。以 $400,000 的房子为例,20% 首付是 $80,000,结算费另需 $8,000–$20,000。' },
       { q: '国内买房适用这套 PMI 规则吗?', a: '不适用。PMI 是美国房贷概念;国内对应的是商业贷款首付比例(首套普遍 15%–30%,各城市不同)和公积金贷款规则。本工具的 20% 阈值按美国市场设计。' },
@@ -68,9 +68,9 @@ export const downPaymentCalculatorL10n: ToolL10n = {
     },
     useCases: ['die Anzahlung nach Preis berechnen', 'herausfinden, wie viel Anzahlung nötig ist', 'die 20 %-PMI-Schwelle prüfen', 'die Anzahlung berechnen, um PMI zu vermeiden'],
     faqs: [
-      { q: 'Wann fällt der PMI weg?', a: 'Bei konventionellen Krediten wird der PMI automatisch bei 78 % Beleihungsauslastung storniert, oder du kannst die Streichung bei 80 % beantragen. FHA-Kredite (ab 2013) verlangen PMI für die gesamte Laufzeit, es sei denn, es wird umschuldiert.' },
+      { q: 'Wann fällt der PMI weg?', a: 'Bei konventionellen Krediten wird der PMI automatisch bei 78 % Beleihungsauslastung beendet, oder du kannst die Streichung bei 80 % beantragen. FHA-Kredite (ab 2013) verlangen PMI für die gesamte Laufzeit, es sei denn, es wird refinanziert.' },
       { q: 'Muss die Anzahlung wirklich 20 % betragen?', a: 'Nicht zwingend: In den USA starten konventionelle Kredite bei 3 %–5 %, FHA bei 3,5 % — unter 20 % fällt aber PMI an (0,5 %–2 % des Darlehens pro Jahr). In Deutschland finanzieren Banken meist bis 80 %: 20 % Eigenkapital plus 5 %–10 % für Nebenkosten sind Standard.' },
-      { q: 'Was kostet neben der Anzahlung noch Geld?', a: 'In den USA 2 %–5 % Closing Costs. In Deutschland kommen Grunderwerbsteuer (3,5 %–6,5 % je nach Bundesland), Notar und Grundbuch (~1,5 %) und ggf. Maklerprovision hinzu — bei 400.000 € schnell 40.000 €+ neben der Anzahlung.' },
+      { q: 'Was kostet neben der Anzahlung noch Geld?', a: 'In den USA 2 %–5 % Closing Costs. In Deutschland kommen Grunderwerbsteuer (3,5 %–6,5 % je nach Bundesland), Notar und Grundbuch (~1,5 %) und ggf. Maklerprovision hinzu — bei 400.000 € schnell über 40.000 € neben der Anzahlung.' },
       { q: 'Lohnt es sich, PMI zu vermeiden?', a: 'PMI kostet 0,5 %–2 % des Darlehens pro Jahr und läuft bis 78 % Restbeleihung. In Deutschland gibt es keinen PMI — dort steigt stattdessen der Zinsaufschlag, sobald die Beleihung über 80 % liegt.' },
     ],
     ui: {
@@ -86,7 +86,7 @@ export const downPaymentCalculatorL10n: ToolL10n = {
       errNonNegative: 'Preis und Anzahlungsprozent dürfen nicht negativ sein',
       'in.price': 'Hauspreis', 'in.down': 'Anzahlung',
       'out.amount': 'Anzahlungsbetrag', 'out.loan': 'Kreditbetrag', 'out.pmi': 'PMI erforderlich?',
-      note: '🏠 Unter 20 % Anzahlung ist meist PMI nötig (50–300 $/Monat). Ab 20 % entfällt diese Kosten.',
+      note: '🏠 Unter 20 % Anzahlung ist meist PMI nötig (50–300 $/Monat). Ab 20 % entfallen diese Kosten.',
     },
   },
 }

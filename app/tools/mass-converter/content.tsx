@@ -40,9 +40,9 @@ const zh: ReactNode = (
     <div>
       <h2>主要换算</h2>
       <ul>
-        <li>1 carat = 200 mg = 0.2 g(钻石和宝石的标准)</li>
-        <li>1 grain = 64.7989 mg(用于子弹和早期的药房剂量)</li>
-        <li>1 gram = 5 carats = 15.4324 grains</li>
+        <li>1 克拉 = 200 mg = 0.2 g(钻石和宝石的标准)</li>
+        <li>1 格令 = 64.7989 mg(用于子弹和早期的药房剂量)</li>
+        <li>1 克 = 5 克拉 = 15.4324 格令</li>
       </ul>
     </div>
     <div>
@@ -65,9 +65,9 @@ const es: ReactNode = (
     <div>
       <h2>Conversiones clave</h2>
       <ul>
-        <li>1 carat = 200 mg = 0.2 g (estándar para diamantes y gemas)</li>
-        <li>1 grain = 64.7989 mg (usado en balas y antiguas dosis de farmacia)</li>
-        <li>1 gram = 5 carats = 15.4324 grains</li>
+        <li>1 quilate = 200 mg = 0,2 g (estándar para diamantes y gemas)</li>
+        <li>1 grano = 64,7989 mg (usado en balas y antiguas dosis de farmacia)</li>
+        <li>1 gramo = 5 quilates = 15,4324 granos</li>
       </ul>
     </div>
     <div>
@@ -81,23 +81,23 @@ const es: ReactNode = (
 const de: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>Was ist dieses Werkzeug?</h2>
-    <p>Dieses Werkzeug rechnet zwischen präzisen Masseneinheiten um — einschließlich Karat (für Edelsteine und Schmuck) und Grain (für Munition und historische Medizin-Dosierungen). Anders als das Gewicht, das technisch gesehen eine Kraft ist.</p>
+    <p>Dieses Werkzeug rechnet zwischen präzisen Masseneinheiten um — einschließlich Karat (für Edelsteine und Schmuck) und Gran (für Munition und historische Medizin-Dosierungen). Anders als das Gewicht, das technisch gesehen eine Kraft ist.</p>
     <p>
-      <strong>Hinweis:</strong> Masse und Gewicht teilen sich denselben Umrechner unten — jede Einheit (metrisch, imperial, Karat, Grain) ist an einem Ort verfügbar. Für alltägliche Körpergewichtsumrechnungen (kg ↔ lb) zeigt unser{' '}
+      <strong>Hinweis:</strong> Masse und Gewicht teilen sich denselben Umrechner unten — jede Einheit (metrisch, imperial, Karat, Gran) ist an einem Ort verfügbar. Für alltägliche Körpergewichtsumrechnungen (kg ↔ lb) zeigt unser{' '}
       <a href="/tools/weight-converter/" className="text-brand-600 underline">Gewichtsumrechner</a>{' '}
       dasselbe Werkzeug. Wechsle jede Einheit frei.
     </p>
     <div>
       <h2>Wichtige Umrechnungen</h2>
       <ul>
-        <li>1 carat = 200 mg = 0.2 g (Standard für Diamanten und Edelsteine)</li>
-        <li>1 grain = 64.7989 mg (verwendet bei Kugeln und alten Apotheker-Dosierungen)</li>
-        <li>1 gram = 5 carats = 15.4324 grains</li>
+        <li>1 Karat = 200 mg = 0,2 g (Standard für Diamanten und Edelsteine)</li>
+        <li>1 Gran = 64,7989 mg (verwendet bei Kugeln und alten Apotheker-Dosierungen)</li>
+        <li>1 Gramm = 5 Karat = 15,4324 Gran</li>
       </ul>
     </div>
     <div>
       <h2>Warum so viele Einheiten</h2>
-      <p>Historisch haben sich verschiedene Fachgebiete auf unterschiedliche Grundlagen geeinigt. Juweliere verwenden Karat, Munitions-Nachlader verwenden Grain, Wissenschaftler verwenden Gramm. Dieses Werkzeug vereint sie.</p>
+      <p>Historisch haben sich verschiedene Fachgebiete auf unterschiedliche Grundlagen geeinigt. Juweliere verwenden Karat, Munitions-Nachlader verwenden Gran, Wissenschaftler verwenden Gramm. Dieses Werkzeug vereint sie.</p>
     </div>
   </section>
 )

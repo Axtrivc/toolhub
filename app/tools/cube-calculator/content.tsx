@@ -56,7 +56,7 @@ const zh: ReactNode = (
 const es: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>¿Qué es esta herramienta?</h2>
-    <p>Calcula el volumen y el área superficial de un cubo a partir de la longitud del lado.</p>
+    <p>Calcula el volumen y el área superficial de un cubo a partir de la longitud de la arista.</p>
     <div>
       <h2>Las fórmulas</h2>
       <ul>
@@ -91,10 +91,10 @@ const de: ReactNode = (
     <div>
       <h2>Alltagswürfel</h2>
       <ul>
-        <li>Spielwürfel (16mm Seite, ~4 cm³ Volumen)</li>
-        <li>Zauberwürfel (57mm Seite, ~185 cm³)</li>
+        <li>Spielwürfel (Kantenlänge 16 mm, ~4 cm³)</li>
+        <li>Zauberwürfel (Kantenlänge 57 mm, ~185 cm³)</li>
         <li>Versandkartons (oft annähernd würfelförmig aus Effizienz)</li>
-        <li>Zuckerwürfel (16mm Seite)</li>
+        <li>Zuckerwürfel (Kantenlänge 16 mm)</li>
       </ul>
     </div>
   </section>

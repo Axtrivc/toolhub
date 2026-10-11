@@ -162,7 +162,7 @@ const zh: ReactNode = (
         大多数信用卡按<strong>每日</strong>复利计息,基于你的日均余额。宣传的 APR 除以 365 得到日利率,这个日利率每天都应用到你的余额上。一个月累积下来,会比 APR ÷ 12 略高一些。
       </p>
       <p>
-        只要你带有未还余额,宽限期就会消失。新的消费从交易当日起立即开始计息。这就是为什么带余额滚动成本如此之高——你失去了全额还款持卡人享受的 21-25 天免息期。
+        只要你带有未还余额,宽限期就会消失。新的消费从交易当日起立即开始计息。这就是为什么余额滚存的代价如此之高——你失去了全额还款持卡人享受的 21-25 天免息期。
       </p>
     </div>
     <div>
@@ -383,7 +383,7 @@ const de: ReactNode = (
       Kreditkartenschulden gehören zu den teuersten Krediten, die du haben kannst. Die
       durchschnittlichen APRs in den USA liegen zwischen 20 % und 28 %, weit über Hypotheken,
       Autokrediten oder Privatkrediten. Dieser Rechner zeigt genau, wie lange du brauchst, um
-      deinen Saldo bei einer gegebenen monatlichen Zahlung zu tilgen — und wichtiger noch —,
+      deinen Saldo bei einer gegebenen monatlichen Zahlung zu tilgen — und, was wichtiger ist —,
       wie viel deines Geldes in Zinsen fließt im Vergleich zur eigentlichen Schuld.
     </p>
     <p>
@@ -401,8 +401,8 @@ const de: ReactNode = (
         Monat summiert sich das zu etwas mehr, als APR ÷ 12 vermuten ließe.
       </p>
       <p>
-        Sobald du einen Saldo mitführst, verschwindet deine Karenzzeit. Neue Einkäufe beginnen
-        sofort, ab dem Tag der Transaktion, Zinsen zu sammeln. Deshalb ist das Mitführen eines
+        Sobald du einen Saldo stehen lässt, verschwindet deine Karenzzeit. Neue Einkäufe verursachen
+        ab dem Tag der Transaktion sofort Zinsen. Deshalb ist das Stehenlassen eines
         Saldos so teuer — du verlierst das zinsfreie Fenster von 21-25 Tagen, das Kartennutzer
         genießen, die voll bezahlen.
       </p>
@@ -453,8 +453,8 @@ const de: ReactNode = (
         <li>
           <strong>Lawinen-Methode (am günstigsten):</strong> Zahle das Minimum auf jeder Karte und
           stecke dann alles zusätzliche Geld zuerst auf die Karte mit dem <em>höchsten APR</em>.
-          Mathematisch spart das die meisten Zinsen. Ist die Karte weg, rolle die Zahlung in die
-          nächsthöchste APR.
+          Mathematisch spart das die meisten Zinsen. Ist die Karte weg, rolle die Zahlung auf den
+          nächsthöchsten APR über.
         </li>
         <li>
           <strong>Schneeball-Methode (psychologisch):</strong> Tilge zuerst den <em>kleinsten
@@ -465,7 +465,7 @@ const de: ReactNode = (
           <strong>Umschuldungskarte (Balance Transfer):</strong> Übertrage die Schuld auf eine
           Karte mit 0 % Einführungs-APR (typischerweise 12-21 Monate). Jeder Dollar fließt während
           der Promo-Zeit in die Tilgung. Achte auf 3-5 % Überweisungsgebühren und habe einen Plan,
-          sie vor Ende der Promo zu tilgen.
+          die Schuld vor Ende der Promo zu tilgen.
         </li>
         <li>
           <strong>Umschuldungskredit:</strong> Ein Privatkredit zu 8-15 % schlägt eine 24 %
@@ -481,7 +481,7 @@ const de: ReactNode = (
           pro Monat verändern deine Laufzeit grundlegend.
         </li>
         <li>
-          <strong>Die Karte weiter verwenden.</strong> Neue Abbuchungen machen deine Zahlungen
+          <strong>Die Karte weiter verwenden.</strong> Neue Umsätze machen deine Zahlungen
           zunichte. Friere die Karte ein (wörtlich, in einem Eisblock), während du sie abstotterst.
         </li>
         <li>
@@ -492,7 +492,7 @@ const de: ReactNode = (
         <li>
           <strong>Zahlungen verpassen.</strong> Eine verspätete Zahlung löst eine Säumnisgebühr
           (bis zu $41) und oft einen Straf-APR von 29,99 % aus, der unbegrenzt gelten kann. Richte
-          eine Dauerauftrag für mindestens das Minimum ein.
+          einen Dauerauftrag für mindestens das Minimum ein.
         </li>
       </ul>
     </div>

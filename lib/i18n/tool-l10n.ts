@@ -600,7 +600,7 @@ export const COMMON_CALC_UI: Record<Exclude<Locale, 'en'>, Record<string, string
     summaryTitle: 'Zusammenfassung der Berechnung',
     chartEmpty: 'Werte eingeben, um das Diagramm zu sehen.',
     inputsLabel: 'Eingaben:',
-    resultsLabel: 'Ergebnis:',
+    resultsLabel: 'Ergebnisse:',
     copySummary: 'Zusammenfassung kopieren',
     csvField: 'Feld',
     csvType: 'Typ',

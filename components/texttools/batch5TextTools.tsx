@@ -138,7 +138,7 @@ export const SlugToTitleClient = makeTextTool({
         .replace(/\s+/g, ' ')
         .trim(),
     ),
-  note: '🔤 Reverses URL slugs back to readable titles. Replaces hyphens with spaces and capitalizes words.',
+  note: '🔤 Reverses URL slugs back to readable titles. Replaces hyphens and underscores with spaces and capitalizes words.',
 })
 
 // ── 二进制 ↔ 文本(UTF-8 字节,支持中文/emoji,两工具互逆)──

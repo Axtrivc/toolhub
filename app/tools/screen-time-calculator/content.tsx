@@ -14,7 +14,7 @@ import { useApp } from '@/components/providers/AppProviders'
 const en: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>What the numbers mean</h2>
-    <p>Four hours daily equals 61 full 24-hour days per year — two months of awake time. Projected across decades the figure feels abstract until compared against learning a language or writing a book.</p>
+    <p>Four hours daily equals 61 full 24-hour days per year — about two months. Projected across decades the figure feels abstract until compared against learning a language or writing a book.</p>
     <h2>Where the average sits</h2>
     <p>US adults average roughly 4.5-5 hours daily on mobile alone; total screen exposure including TV and work pushes past seven hours. If yours is below average, that still compounds the same way.</p>
     <h2>Reclaiming realistically</h2>
@@ -40,7 +40,7 @@ const es: ReactNode = (
     <h2>Qué significan los números</h2>
     <p>Cuatro horas diarias son 61 días completos de 24 horas al año — cerca de dos meses. Proyectada a décadas, la cifra suena abstracta hasta que la comparas con aprender un idioma o escribir un libro.</p>
     <h2>Dónde está la media</h2>
-    <p>Los adultos de EE. UU. promedian unas 4,5-5 h diarias solo en el móvil; la exposición total a pantallas, con TV y trabajo, supera las siete horas. Aunque estés por debajo de la media, el efecto se acumula igual.</p>
+    <p>Los adultos de EE. UU. promedian unas 4.5-5 h diarias solo en el móvil; la exposición total a pantallas, con TV y trabajo, supera las siete horas. Aunque estés por debajo de la media, el efecto se acumula igual.</p>
     <h2>Recuperar con realismo</h2>
     <p>El escenario de 1 hora es deliberadamente modesto: eliminar una sesión habitual de app suele recuperarla sin dramas de fuerza de voluntad. El modo escala de grises y depurar la pantalla de inicio ganan a los límites de apps en la mayoría de los ensayos.</p>
   </section>
@@ -52,7 +52,7 @@ const de: ReactNode = (
     <h2>Was die Zahlen bedeuten</h2>
     <p>Vier Stunden täglich sind 61 volle 24-Stunden-Tage pro Jahr — gut zwei Monate. Über Jahrzehnte projiziert wirkt die Zahl abstrakt, bis du sie gegen eine neue Sprache oder ein Buch hältst.</p>
     <h2>Wo der Durchschnitt liegt</h2>
-    <p>US-Erwachsene schaffen im Schnitt 4,5-5 Stunden täglich allein am Handy; die gesamte Bildschirmzeit inklusive TV und Arbeit liegt über sieben Stunden. Selbst unterdurchschnittliche Werte summieren sich genauso.</p>
+    <p>US-Erwachsene schaffen im Schnitt 4.5-5 Stunden täglich allein am Handy; die gesamte Bildschirmzeit inklusive TV und Arbeit liegt über sieben Stunden. Selbst unterdurchschnittliche Werte summieren sich genauso.</p>
     <h2>Realistisch zurückgewinnen</h2>
     <p>Das 1-Stunden-Szenario ist bewusst bescheiden: Eine gewohnheitsmäßige App-Session zu löschen, holt die Stunde meist ohne Willenskraft-Theater zurück. Graustufenmodus und ausgeräumter Homescreen schlagen App-Timer in den meisten Studien.</p>
   </section>

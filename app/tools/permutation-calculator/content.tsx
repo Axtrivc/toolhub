@@ -8,7 +8,7 @@ import { useApp } from '@/components/providers/AppProviders'
 const en: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>What Is This Tool?</h2>
-    <p>A <strong>permutation</strong> counts how many ways to arrange r items from n, where order matters. Arranging 3 books on a shelf from 5 is different based on which order — that&apos;s a permutation.</p>
+    <p>A <strong>permutation</strong> counts how many ways to arrange r items from n, where order matters. Arranging 3 books on a shelf from 5 differs depending on the order — that&apos;s a permutation.</p>
     <div>
       <h2>The Formula</h2>
       <p>P(n,r) = n! / (n−r)!. For arranging 3 from 5: <code>5! / 2! = 60</code>.</p>
@@ -29,7 +29,7 @@ const en: ReactNode = (
 const zh: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>这是什么工具?</h2>
-    <p><strong>排列</strong>计算从 n 个物品中取出 r 个进行有序排列的方式数，此时先后顺序至关重要。从 5 本书里挑 3 本摆上书架，摆放顺序不同结果就不同——这就是排列。</p>
+    <p><strong>排列</strong>计算从 n 个物品中取出 r 个进行有序排列的方式数,此时先后顺序至关重要。从 5 本书里挑 3 本摆上书架,摆放顺序不同结果就不同——这就是排列。</p>
     <div>
       <h2>公式</h2>
       <p>P(n,r) = n! / (n−r)!。从 5 个中排 3 个:<code>5! / 2! = 60</code>。</p>

@@ -27,7 +27,7 @@ export const colorConverterL10n: ToolL10n = {
       'colorPickerAria': 'Selector de color',
       'colorValueLabel': 'Valor de color (hex, rgb o hsl)',
       'emptyState': 'Introduce un hex válido (#3b82f6), rgb(59,130,246) o hsl(217,91%,60%)',
-      'note': '🎨 Usa el selector o escribe cualquier formato — convierte a los tres al instante. Común en diseño web, CSS y guías de marca.',
+      'note': '🎨 Usa el selector de color o escribe cualquier formato — se convierte a los tres al instante. Es habitual en diseño web, CSS y guías de marca.',
     },
     useCases: [
       'convertir códigos de color HEX a RGB',
@@ -44,11 +44,11 @@ export const colorConverterL10n: ToolL10n = {
       'colorPickerAria': 'Farbwähler',
       'colorValueLabel': 'Farbwert (hex, rgb oder hsl)',
       'emptyState': 'Gültiges hex (#3b82f6), rgb(59,130,246) oder hsl(217,91%,60%) eingeben',
-      'note': '🎨 Farbwähler nutzen oder beliebiges Format tippen — wandert sofort in alle drei Formate. Häufig bei Webdesign, CSS und Markenrichtlinien.',
+      'note': '🎨 Farbwähler nutzen oder ein beliebiges Format eingeben — wird sofort in alle drei Formate umgewandelt. Häufig verwendet im Webdesign, bei CSS und in Markenrichtlinien.',
     },
     useCases: [
       'HEX-Farbcodes in RGB umwandeln',
-      'RGB-Werte zurück in HEX umrechnen',
+      'RGB-Werte zurück in HEX umwandeln',
       'HSL online in RGB umwandeln',
       'Farben mit einem visuellen Picker auswählen und umwandeln',
     ],

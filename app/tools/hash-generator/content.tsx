@@ -99,10 +99,10 @@ const de: ReactNode = (
     </div>
     <div>
       <h2>Warum SHA-256, nicht MD5</h2>
-      <p>MD5 und SHA-1 sind kryptografisch gebrochen — Kollisionen (zwei Eingaben mit demselben Hash) lassen sich finden. SHA-256 ist Stand 2026 weiterhin sicher. Für alles Sicherheitkritische verwende SHA-256 oder stärker.</p>
+      <p>MD5 und SHA-1 sind kryptografisch gebrochen — Kollisionen (zwei Eingaben mit demselben Hash) lassen sich finden. SHA-256 ist Stand 2026 weiterhin sicher. Für alles, was sicherheitskritisch ist, verwende SHA-256 oder stärker.</p>
     </div>
     <div>
-      <h2>Hashes sind Einweg</h2>
+      <h2>Hashes sind Einwegfunktionen</h2>
       <p>Du kannst „hello" in einen SHA-256 hashen, aber du kannst den Hash nicht zurück in „hello" verwandeln (ohne Brute Force). Diese Einwegeigenschaft macht Hashes nützlich für Passwörter — selbst wenn eine Datenbank geleakt wird, erhalten Angreifer nur Hashes.</p>
     </div>
   </section>

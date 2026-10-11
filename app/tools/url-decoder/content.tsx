@@ -88,7 +88,7 @@ const de: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>Was ist dieses Werkzeug?</h2>
     <p>
-      Dieses Werkzeug dekodiert prozent-kodierte URLs zurück zu lesbarem Text. Füge eine beliebige URL-kodierte Zeichenkette ein, um die ursprünglichen Zeichen wiederherzustellen, einschließlich Leerzeichen, Symbole und internationaler Text.
+      Dieses Werkzeug dekodiert prozentkodierte URLs zurück in lesbaren Text. Füge eine beliebige URL-kodierte Zeichenkette ein, um die ursprünglichen Zeichen wiederherzustellen, einschließlich Leerzeichen, Symbole und internationalen Text.
     </p>
     <div>
       <h2>Wann du das brauchst</h2>
@@ -102,7 +102,7 @@ const de: ReactNode = (
     <div>
       <h2>Doppelte Kodierung</h2>
       <p>
-        Manchmal werden URLs versehentlich doppelt kodiert — ein Leerzeichen wird zu <code>%2520</code> statt <code>%20</code>. Wenn der dekodierte Text noch <code>%</code>-Sequenzen enthält, lege ihn erneut durch dieses Werkzeug, um ihn vollständig zu dekodieren.
+        Manchmal werden URLs versehentlich doppelt kodiert — ein Leerzeichen wird zu <code>%2520</code> statt <code>%20</code>. Wenn der dekodierte Text noch <code>%</code>-Sequenzen enthält, leite ihn erneut durch dieses Werkzeug, um ihn vollständig zu dekodieren.
       </p>
     </div>
   </section>

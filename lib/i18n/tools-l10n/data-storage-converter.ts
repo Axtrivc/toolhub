@@ -28,6 +28,7 @@ export const dataStorageConverterL10n: ToolL10n = {
       '规划数据库字段和存储容量',
       '核对 API 负载大小限制',
       '估算文件、照片、视频的存储占用',
+      '换算 TB 与 GB 之间的大文件体积',
     ],
     faqs: [
       { q: '为什么 256GB 手机显示的可用空间更少?', a: '两个原因:系统按二进制单位显示(十进制 256 GB ≈ 二进制 238 GB),而且操作系统本身就要占用好几个 GB。实际可用空间还会更少。' },
@@ -41,7 +42,7 @@ export const dataStorageConverterL10n: ToolL10n = {
       'unit.bit': 'Bits (bit)',
       'unit.gb': 'Gigabytes (GB)',
       'unit.gbit': 'Gigabits (Gb)',
-      'unit.gib': 'Gigabibytes (GiB)',
+      'unit.gib': 'Gibibytes (GiB)',
       'unit.kb': 'Kilobytes (KB)',
       'unit.kbit': 'Kilobits (Kb)',
       'unit.kib': 'Kibibytes (KiB)',
@@ -57,6 +58,7 @@ export const dataStorageConverterL10n: ToolL10n = {
       'planificar campos de base de datos y capacidad de almacenamiento',
       'comprobar los límites de tamaño de las cargas de API',
       'estimar el espacio que ocupan archivos, fotos y vídeos',
+      'convertir TB a GB en tamaños de archivo',
     ],
     faqs: [
       { q: '¿Por qué mi teléfono de 256 GB muestra menos espacio libre?', a: 'Por dos razones: el sistema operativo informa en unidades binarias (256 GB decimales ≈ 238 GB binarios) y el propio sistema operativo ocupa varios GB. El espacio realmente utilizable es aún menor.' },
@@ -86,6 +88,7 @@ export const dataStorageConverterL10n: ToolL10n = {
       'Datenbankfelder und Speicherkapazität planen',
       'Größenbeschränkungen von API-Payloads prüfen',
       'den Speicherbedarf von Dateien, Fotos und Videos abschätzen',
+      'TB in GB bei Dateigrößen umrechnen',
     ],
     faqs: [
       { q: 'Warum zeigt mein 256-GB-Handy weniger freien Speicher?', a: 'Aus zwei Gründen: Das Betriebssystem rechnet in binären Einheiten (256 dezimale GB ≈ 238 binäre GB), und das Betriebssystem selbst belegt mehrere GB. Der tatsächlich nutzbare Speicher ist noch geringer.' },

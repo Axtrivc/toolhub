@@ -37,8 +37,8 @@ export const passwordStrengthCheckerL10n: ToolL10n = {
     faqs: [
       { q: '在这里输入真实密码安全吗?', a: '安全。本工具完全在你的浏览器本地处理,不会发起任何网络请求——你的密码绝不会离开你的设备。你也可以测试各种变体。' },
       { q: '如果我的密码已经出现在数据泄露中怎么办?', a: '强度只衡量「可猜测性」,并不代表它是否已经泄露。请到 Have I Been Pwned 查询你的密码是否出现在已知泄露里。' },
-      { q: '多少比特的熵才算够?', a: '粗略基准:40 bits 以下几小时内可被离线暴力破解;60 bits 能扛数十年;75 bits 以上对离线攻击基本免疫。长度比字符种类更有效——12 位随机小写(约 56 bits)强于 8 位全字符混排(约 52 bits)。' },
-      { q: '一堆密码记不住,怎么办?', a: '只记一条主口令:用 4 个以上随机词拼成口令短语(20 字符以上),熵高又好记;其余密码交给密码管理器生成 16 位随机串,并给关键账户开启两步验证。' },
+      { q: '多少比特的熵才算够?', a: '粗略基准:40 比特以下几小时内可被离线暴力破解;60 比特能扛数十年;75 比特以上对离线攻击基本免疫。长度比字符种类更有效——12 位随机小写(约 56 比特)强于 8 位全字符混排(约 52 比特)。' },
+      { q: '一堆密码记不住,怎么办?', a: '只记一条口令短语:用 4 个以上随机词拼成(20 个字符以上),熵高又好记;其余密码交给密码管理器生成 16 位随机串,并给关键账户开启两步验证。' },
     ],
   },
   es: {
@@ -55,7 +55,7 @@ export const passwordStrengthCheckerL10n: ToolL10n = {
       'numbers': 'Números',
       'passwordPlaceholder': 'Escribe tu contraseña…',
       'sequenceWarning': 'Los caracteres repetidos o secuenciales (como aaa o abc123) son fáciles de adivinar.',
-      'strength': 'Fortaleza',
+      'strength': 'Fuerza',
       'strengthEmpty': 'Vacía',
       'strengthStrong': 'Fuerte',
       'strengthVeryStrong': 'Muy fuerte',
@@ -74,7 +74,7 @@ export const passwordStrengthCheckerL10n: ToolL10n = {
       { q: '¿Es seguro escribir aquí mi contraseña real?', a: 'Sí. Esta herramienta procesa todo localmente en tu navegador. No hay ninguna petición de red: tu contraseña nunca sale de tu dispositivo. También puedes probar variaciones.' },
       { q: '¿Qué pasa si mi contraseña está en una filtración de datos?', a: 'La fuerza solo mide la adivinabilidad, no si ha sido filtrada. Consulta Have I Been Pwned para ver si tu contraseña ha aparecido en filtraciones conocidas.' },
       { q: '¿Cuántos bits de entropía hacen falta?', a: 'Regla aproximada: por debajo de 40 bits se rompe en horas offline; 60 bits aguantan décadas; con 75+ la fuerza bruta offline es inviable. La longitud vence a la variedad: 12 minúsculas aleatorias (~56 bits) superan 8 caracteres de todo tipo (~52 bits).' },
-      { q: 'No consigo recordar tantas contraseñas, ¿qué hago?', a: 'Memoriza solo una frase de paso: 4 palabras al azar (20+ caracteres), fuerte y fácil de recordar. El resto, generados por el gestor con 16 caracteres aleatorios; y verificación en dos pasos en las cuentas críticas.' },
+      { q: 'No consigo recordar tantas contraseñas, ¿qué hago?', a: 'Memoriza solo una frase de paso: 4 palabras al azar (20+ caracteres), fuerte y fácil de recordar. El resto, déjalo en manos del gestor de contraseñas (16 caracteres aleatorios); y activa la verificación en dos pasos en las cuentas críticas.' },
     ],
   },
   de: {
@@ -86,7 +86,7 @@ export const passwordStrengthCheckerL10n: ToolL10n = {
       'enterPasswordLabel': 'Passwort zum Testen eingeben',
       'entropy': 'Entropie',
       'length': 'Länge',
-      'localPrivacyNote': '🔒 Lokal in deinem Browser getestet. Dein Passwort wird nirgendwo gesendet.',
+      'localPrivacyNote': '🔒 Lokal in deinem Browser getestet. Dein Passwort wird nirgendwohin gesendet.',
       'lowercaseLetters': 'Kleinbuchstaben',
       'numbers': 'Zahlen',
       'passwordPlaceholder': 'Passwort eingeben…',

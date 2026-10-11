@@ -36,7 +36,7 @@ const en: ReactNode = (
         <li><strong>&quot;Bulk&quot; isn&apos;t always cheaper</strong> &mdash; sometimes the smaller size is on sale</li>
         <li><strong>Different units confuse comparison</strong> &mdash; one product in oz, another in g</li>
         <li><strong>Brand vs. store brand</strong> &mdash; store brands often win on unit price by 30%+</li>
-        <li><strong>Smaller packages of the same brand</strong> &mdash; surprisingly sometimes cheaper per unit</li>
+        <li><strong>Smaller packages of the same brand</strong> &mdash; surprisingly, sometimes cheaper per unit</li>
       </ul>
     </div>
     <div>
@@ -60,14 +60,14 @@ const zh: ReactNode = (
     <div>
       <h2>为什么单价胜过总价</h2>
       <p>
-        一瓶 500g 的花生酱 $8 看起来比一瓶 350g 的 $6 更贵。但按克算: 大瓶 1.6¢/g, 小瓶
-        1.7¢/g。大瓶其实更便宜。超市知道顾客习惯看总价——单价才能揭示真相。
+        一瓶 500g 装的花生酱卖 $8,看起来比 350g 装卖 $6 的更贵。但按克算: 大瓶 1.6¢/g,
+        小瓶 1.7¢/g。大瓶其实更便宜。超市知道顾客习惯看总价——单价才能揭示真相。
       </p>
     </div>
     <div>
       <h2>常见陷阱</h2>
       <ul>
-        <li><strong>“大包装”不一定更便宜</strong> —— 有时小尺寸在打折</li>
+        <li><strong>“大包装”不一定更便宜</strong> —— 有时小规格在打折</li>
         <li><strong>单位不同让人难以比较</strong> —— 一个用 oz, 另一个用 g</li>
         <li><strong>品牌与自有品牌</strong> —— 自有品牌的单价通常便宜 30% 以上</li>
         <li><strong>同一品牌的小包装</strong> —— 令人意外的是, 有时单价反而更低</li>
@@ -77,7 +77,7 @@ const zh: ReactNode = (
       <h2>真实案例</h2>
       <p>
         洗衣液: 品牌 A 是 $19.99 洗 75 loads (26.7¢/load)。品牌 B 是 $14.99 洗 50 loads
-        (30.0¢/load)。品牌 A 容量更大, <em>而且</em>每次使用更便宜。没有单价对比, 你可能会拿起品牌 B, 以为它是更划算的选择。
+        (30.0¢/load)。品牌 A 洗的次数更多, <em>而且</em>每次使用更便宜。没有单价对比, 你可能会拿起品牌 B, 以为它是更划算的选择。
       </p>
     </div>
   </section>
@@ -89,7 +89,7 @@ const es: ReactNode = (
     <h2>¿Qué es esta herramienta?</h2>
     <p>
       El precio unitario te indica el coste por gramo, onza, litro o unidad — permitiéndote comparar
-      productos de forma justa independientemente del tamaño del envase. Esta calculadora hace las
+      productos de forma justa, independientemente del tamaño del envase. Esta calculadora hace las
       cuentas para que la caja más grande no te engañe y pagues de más.
     </p>
     <div>
@@ -104,7 +104,7 @@ const es: ReactNode = (
     <div>
       <h2>Trampas comunes</h2>
       <ul>
-        <li><strong>«El gran formato» no siempre es más barato</strong> — a veces la talla pequeña está en oferta</li>
+        <li><strong>«El gran formato» no siempre es más barato</strong> — a veces el formato pequeño está en oferta</li>
         <li><strong>Unidades distintas confunden</strong> — un producto en oz, otro en g</li>
         <li><strong>Marca frente a marca del supermercado</strong> — las marcas propias suelen ganar en precio unitario por más de un 30 %</li>
         <li><strong>Envases más pequeños de la misma marca</strong> — sorprendentemente, a veces más baratos por unidad</li>
@@ -113,7 +113,7 @@ const es: ReactNode = (
     <div>
       <h2>Ejemplo real</h2>
       <p>
-        Detergente de ropa: la marca A cuesta $19.99 por 75 loads (26,7¢/load). La marca B cuesta
+        Detergente para ropa: la marca A cuesta $19.99 por 75 loads (26,7¢/load). La marca B cuesta
         $14.99 por 50 loads (30,0¢/load). La marca A es más grande <em>y</em> más barata por uso. Sin
         precio unitario, podrías coger la marca B pensando que es la opción económica.
       </p>

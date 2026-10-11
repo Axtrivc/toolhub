@@ -64,7 +64,7 @@ const zh: ReactNode = (
     <h2>这是什么工具？</h2>
     <p>
       跨时区安排会议，常常是好会议的坟墓。这款<strong>时区转换器</strong>把一个本地日期和时间一次性换算成最多六个其他时区的对应当地时间 —— 附带 UTC 偏移、
-      跨日提醒和一张营业时段热力图，让你一眼就能挑出一个人性化的会议时段。它完全
+      跨日提醒和一张工作时间热力图，让你一眼就能挑出一个人性化的会议时段。它完全
       在你的浏览器中基于内置的 <code>Intl</code> API 运行，因此你输入的任何内容都不会离开你的设备。
     </p>
 
@@ -74,7 +74,7 @@ const zh: ReactNode = (
         你输入的时间会被当作<strong>源时区的本地钟面时间</strong>来解读，先转换成一个
         绝对时刻，再以正确的偏移渲染到每一个目标时区 —— 包括{' '}
         <strong>夏令时</strong>。由于 DST 由浏览器自带的时区数据库来应用，
-        对于纽约或伦敦这样的时区，三月的同一场会议和十一月的同一场会议可能落在不同的 UTC 偏移上。<code>UTC offset</code> 这一列显示的是该时刻实际生效的偏移，而非
+        对于纽约或伦敦这样的时区，三月的同一场会议和十一月的同一场会议可能落在不同的 UTC 偏移上。<code>UTC 偏移</code> 这一列显示的是该时刻实际生效的偏移，而非
         全年平均值。
       </p>
     </div>
@@ -82,7 +82,7 @@ const zh: ReactNode = (
     <div>
       <h2>如何阅读这张表</h2>
       <p>
-        被标为<strong>绿色</strong>的行落在当地营业时段（9:00–17:00）内 —— 尽量挑选
+        被标为<strong>绿色</strong>的行落在当地工作时间（9:00–17:00）内 —— 尽量挑选
         每一行都变绿的时段。当换算后的时间落在与源时区不同的日历日期时，会出现一个<strong>跨日徽标</strong>（+1 天 / -1 天）；这正是与亚太地区队友协作时「等等，是你那里的
         周二还是我这边的周二？」这种困惑的经典来源。表格下方的小时条会为每个时区展示一条
         可视化的 0–23 小时条带，所选小时以蓝色标出。
@@ -94,9 +94,9 @@ const zh: ReactNode = (
       <p>
         <em>「我的本地时区」</em>是根据你的设备设置检测出来的，所以如果你出差
         或使用了被 VPN 调整过的系统时钟，请务必再次确认。请记住，输入始终是按<em>源</em>时区来读取的 ——
-        按下 <strong>Now</strong> 会填入该时区当前所见的时间，这可能与你自己时钟上的时间不同。在 DST 切换的那个周末前后，某个钟面时间在
-        受影响的时区里可能是歧义的或根本不存在；转换器会把它解析为最接近的合法时刻，但对于
-        这些日期的关键活动，最好还是直接与参与人再次确认。
+        按下 <strong>现在</strong> 会填入该时区当前所见的时间，这可能与你自己时钟上的时间不同。在 DST 切换的那个周末前后，某个钟面时间在
+        受影响的时区里可能有歧义或根本不存在；转换器会把它解析为最接近的合法时刻，但对于
+        这些日期的关键活动，最好还是直接与参会者再次确认。
       </p>
     </div>
   </section>
@@ -108,7 +108,7 @@ const es: ReactNode = (
     <h2>¿Qué es esta herramienta?</h2>
     <p>
       Planificar entre zonas horarias es donde las buenas reuniones van a morir. Este <strong>conversor de zonas horarias</strong> convierte una
-      fecha y hora local en la hora equivalente en hasta seis zonas distintas a la vez — con desplazamientos UTC,
+      fecha y hora local en la hora equivalente en hasta seis zonas distintas a la vez — con desfases UTC,
       avisos de cambio de día y un mapa de calor de horas laborables para que detectes de un vistazo una franja de reunión razonable. Se ejecuta
       completamente en tu navegador sobre la API <code>Intl</code> integrada, así que nada de lo que introduzcas abandona jamás tu dispositivo.
     </p>
@@ -117,10 +117,10 @@ const es: ReactNode = (
       <h2>Cómo funciona la conversión</h2>
       <p>
         La hora que introduces se interpreta como <strong>hora local en la zona de origen</strong>, se convierte a un
-        instante absoluto y luego se muestra en cada zona de destino con el desplazamiento correcto — incluido{' '}
+        instante absoluto y luego se muestra en cada zona de destino con el desfase correcto — incluido{' '}
         <strong>el horario de verano</strong>. Como el horario de verano lo aplica la propia base de datos de zonas horarias del navegador,
-        una reunión en marzo y esa misma reunión en noviembre pueden caer en distintos desplazamientos UTC para zonas como Nueva
-        York o Londres. La columna <code>UTC offset</code> muestra el desplazamiento vigente en ese instante exacto, no una
+        una reunión en marzo y esa misma reunión en noviembre pueden caer en distintos desfases UTC para zonas como Nueva
+        York o Londres. La columna <code>Desfase UTC</code> muestra el desfase vigente en ese instante exacto, no una
         media anual.
       </p>
     </div>
@@ -141,9 +141,9 @@ const es: ReactNode = (
       <p>
         <em>«Mi zona local»</em> se detecta a partir de los ajustes de tu dispositivo, así que compruébala si viajas
         o usas un reloj de sistema ajustado por VPN. Recuerda que la entrada siempre se lee en la zona <em>de origen</em> —
-        al pulsar <strong>Now</strong> se rellena la hora actual tal como se ve en esa zona, que puede diferir de tu
+        al pulsar <strong>Ahora</strong> se rellena la hora actual tal como se ve en esa zona, que puede diferir de tu
         propio reloj. En los fines de semana de cambio de horario de verano, una hora local dada puede ser ambigua o inexistente en la
-        zona afectada; el conversor la resuelve al instante válido más cercano, pero merece la pena confirmar
+        zona afectada; el conversor la resuelve en el instante válido más cercano, pero merece la pena confirmar
         los eventos críticos de esas fechas directamente con los participantes.
       </p>
     </div>
@@ -168,7 +168,7 @@ const de: ReactNode = (
         absoluten Zeitpunkt umgerechnet und dann in jeder Zielzone mit der korrekten Verschiebung dargestellt — einschließlich{' '}
         <strong>der Sommerzeit</strong>. Da die Sommerzeit von der eigenen Zeitzonendatenbank des Browsers angewendet wird,
         kann ein Meeting im März und dasselbe Meeting im November für Zonen wie New
-        York oder London auf unterschiedliche UTC-Verschiebungen fallen. Die Spalte <code>UTC offset</code> zeigt die Verschiebung, die in genau diesem Moment gilt, nicht einen
+        York oder London auf unterschiedliche UTC-Verschiebungen fallen. Die Spalte <code>UTC-Verschiebung</code> zeigt die Verschiebung, die in genau diesem Moment gilt, nicht einen
         Jahresdurchschnitt.
       </p>
     </div>
@@ -189,10 +189,10 @@ const de: ReactNode = (
       <p>
         <em>„Meine lokale Zone“</em> wird aus deinen Geräteeinstellungen erkannt, also prüfe sie nach, wenn du reist
         oder eine per VPN verstellte Systemuhr verwendest. Denk daran, dass die Eingabe immer in der <em>Quell-</em>zone gelesen wird —
-        ein Druck auf <strong>Now</strong> füllt die aktuelle Zeit, wie sie in dieser Zone gesehen wird, ein, was von deiner
+        ein Klick auf <strong>Jetzt</strong> füllt die aktuelle Zeit, wie sie in dieser Zone gesehen wird, ein, was von deiner
         eigenen Uhr abweichen kann. An den Wochenenden der Sommerzeit-Umstellung kann eine bestimmte Uhrzeit in der
         betroffenen Zone mehrdeutig oder nichtexistent sein; der Konverter löst sie zum nächstgelegenen gültigen Zeitpunkt auf, aber es lohnt sich,
-        kritische Termine an diesen Daten direkt mit den Teilnehmern abzustimmen.
+        kritische Termine für diese Daten direkt mit den Teilnehmern abzustimmen.
       </p>
     </div>
   </section>

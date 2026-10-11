@@ -2993,12 +2993,12 @@ export const tools: ToolMeta[] = [
     intent: 'commercial', category: 'Finance Calculators', h1: 'eBay & Etsy Fee Calculator',
     shortIntro: 'See exactly what you net after eBay or Etsy fees.', published: true,
     longTailKeywords: [
-      'ebay final value fee calculator 2025',
+      'ebay final value fee calculator 2026',
       'etsy seller fee calculator',
       'how much does ebay take per sale',
       'ebay net profit calculator',
     ],
-    titleLongTail: 'eBay Fee Calculator 2025 - Know Your Net Profit',
+    titleLongTail: 'eBay Fee Calculator 2026 - Know Your Net Profit',
     descriptionLongTail: 'Enter your sale price and costs to see exact eBay or Etsy fees, payout, and profit margin. Editable rates keep it accurate. Free, no signup.',
   },
   {

@@ -69,7 +69,7 @@ const zh: ReactNode = (
       <h2>PNG 还是 JPEG —— 该选哪个?</h2>
       <p>
         当你需要像素级完美副本,或图像包含透明度(Logo、UI 素材、带文字的截图)时,请选择 <strong>PNG</strong> —— PNG 是无损格式,画质不会有任何损失。当你更在意文件体积而非完美时(通常是照片),请选择 <strong>JPEG</strong>。
-        JPEG 没有 alpha 通道,所以任何透明像素都会被压平到你所选的背景色上(默认为白色)—— 下载前请用该颜色检查透明作品的边缘。
+        JPEG 没有 alpha 通道,所以任何透明像素都会被压平到你所选的背景色上(默认为白色)—— 下载前请对照该颜色检查透明作品的边缘。
       </p>
     </div>
 
@@ -104,14 +104,14 @@ const es: ReactNode = (
       <h2>¿PNG o JPEG — cuál elegir?</h2>
       <p>
         Elige <strong>PNG</strong> cuando necesites una copia perfecta al píxel o la imagen tenga transparencia (logos, activos de UI, capturas con texto) — PNG es sin pérdidas, así que nada se degrada. Elige <strong>JPEG</strong> cuando el tamaño del archivo importe más que la perfección, típicamente para fotos.
-        JPEG no tiene canal alfa, así que los píxeles transparentes se aplanan sobre el color de fondo que elijas (blanco por defecto) — comprueba los bordes de los gráficos transparentes contra ese color antes de descargar.
+        JPEG no tiene canal alfa, así que los píxeles transparentes se aplanan sobre el color de fondo que elijas (blanco por defecto) — revisa los bordes de los gráficos transparentes sobre ese color antes de descargar.
       </p>
     </div>
 
     <div>
       <h2>Por qué un archivo convertido puede ser más grande que el original</h2>
       <p>
-        WebP usa una compresión más moderna que PNG, así que una re-codificación PNG sin pérdidas suele ser <em>más grande</em> que el WebP de partida — es normal, no un bug. Si tu objetivo es el tamaño, cambia a JPEG y baja el deslizador de calidad; el tamaño de salida en vivo que se muestra sobre el botón de descarga te dice exactamente lo que obtendrás.
+        WebP usa una compresión más moderna que PNG, así que una recodificación PNG sin pérdidas suele ser <em>más grande</em> que el WebP de partida — es normal, no es un bug. Si tu objetivo es el tamaño, cambia a JPEG y baja el deslizador de calidad; el tamaño de salida en vivo que se muestra sobre el botón de descarga te dice exactamente lo que obtendrás.
         Para fotos, una calidad en torno a <code>80–90%</code> suele ser indistinguible del original.
       </p>
     </div>
@@ -138,8 +138,8 @@ const de: ReactNode = (
     <div>
       <h2>PNG oder JPEG — welches solltest du wählen?</h2>
       <p>
-        Wähle <strong>PNG</strong>, wenn du eine pixelgenaue Kopie brauchst oder das Bild Transparenz hat (Logos, UI-Assets, Screenshots mit Text) — PNG ist verlustfrei, also verliert nichts an Qualität. Wähle <strong>JPEG</strong>, wenn die Dateigröße wichtiger ist als Perfektion, typischerweise bei Fotos.
-        JPEG hat keinen Alphakanal, daher werden transparente Pixel auf die Hintergrundfarbe deiner Wahl (standardmäßig Weiß) gelegt — prüfe die Ränder transparenter Grafik gegen diese Farbe vor dem Download.
+        Wähle <strong>PNG</strong>, wenn du eine pixelgenaue Kopie brauchst oder das Bild Transparenz hat (Logos, UI-Assets, Screenshots mit Text) — PNG ist verlustfrei, also geht keine Qualität verloren. Wähle <strong>JPEG</strong>, wenn die Dateigröße wichtiger ist als Perfektion, typischerweise bei Fotos.
+        JPEG hat keinen Alphakanal, daher werden transparente Pixel auf die Hintergrundfarbe deiner Wahl (standardmäßig Weiß) gelegt — prüfe die Ränder transparenter Grafiken vor dem Download gegen diese Farbe.
       </p>
     </div>
 
@@ -147,14 +147,14 @@ const de: ReactNode = (
       <h2>Warum eine konvertierte Datei größer sein kann als das Original</h2>
       <p>
         WebP nutzt eine modernere Kompression als PNG, daher ist eine verlustfreie PNG-Neukodierung oft <em>größer</em> als das WebP, mit dem du begonnen hast — das ist normal, kein Bug. Wenn es dir auf die Größe ankommt, wechsle zu JPEG und ziehe den Qualitätsregler nach unten; die Live-Ausgabegröße über dem Download-Button sagt dir genau, was du bekommst.
-        Bei Fotos ist eine Qualität um <code>80–90%</code> meist vom Original nicht zu unterscheiden.
+        Bei Fotos ist eine Qualität von etwa <code>80–90%</code> meist vom Original nicht zu unterscheiden.
       </p>
     </div>
 
     <div>
       <h2>Tipps für die sauberste Konvertierung</h2>
       <p>
-        Die Konvertierung erfolgt bei der <strong>Originalauflösung</strong> des Bildes — kein Resampling; Metadaten wie EXIF werden verworfen, nicht neu komprimiert. Wenn du auch die Größe ändern musst, tu das zuerst (mit einem Bild-Resize-Tool) und konvertiere danach, damit du den Qualitätsverlust nur einmal in Kauf nimmst.
+        Die Konvertierung erfolgt in der <strong>Originalauflösung</strong> des Bildes — kein Resampling; Metadaten wie EXIF werden verworfen, nicht neu komprimiert. Wenn du auch die Größe ändern musst, tu das zuerst (mit einem Bild-Resize-Tool) und konvertiere danach, damit du den Qualitätsverlust nur einmal in Kauf nimmst.
         Animierte WebP-Dateien werden als ihr <em>erstes Frame</em> konvertiert; die Canvas-Dekodierung überträgt keine Animation auf PNG oder JPEG.
       </p>
     </div>

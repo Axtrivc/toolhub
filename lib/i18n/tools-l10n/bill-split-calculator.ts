@@ -42,7 +42,7 @@ export const billSplitCalculatorL10n: ToolL10n = {
   de: {
     useCases: ['die Rechnung mit Trinkgeld teilen', 'die Rechnung mit Steuer und Trinkgeld splitten', 'die Restaurantrechnung auf Personen aufteilen', 'ausrechnen, was jeder zahlt'],
     faqs: [
-      { q: 'Was tun, wenn jemand nichts getrunken hat?', a: 'Diesen Teil separat abrechnen. Ziehe die Getränkekosten vom Gesamtbetrag ab, teile sie unter den Trinkenden auf und teile das Essen zu gleichen Teilen.' },
+      { q: 'Was tun, wenn jemand nichts getrunken hat?', a: 'Rechne diesen Teil separat ab. Ziehe die Getränkekosten vom Gesamtbetrag ab, teile sie unter den Trinkenden auf und teile das Essen zu gleichen Teilen.' },
     ],
     ui: {
       'chartTitle': 'Rechnung + Trinkgeld',

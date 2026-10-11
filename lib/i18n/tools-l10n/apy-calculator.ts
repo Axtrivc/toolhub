@@ -45,7 +45,7 @@ export const apyCalculatorL10n: ToolL10n = {
       chartTitle: '随时间的增长',
       'line.principal': '本金',
       'line.balance': '余额',
-      'band.principal-balance': '赚到的利息',
+      'band.principal-balance': '赚取的利息',
     },
   },
 
@@ -107,7 +107,7 @@ export const apyCalculatorL10n: ToolL10n = {
     formula: {
       formula: FORMULA,
       explain:
-        'Effektive Jahresrendite. r = nominaler Jahressatz, n = Zinsperioden pro Jahr. Der APY spiegelt die tatsächliche Jahresrendite nach Verzinsung wider.',
+        'Effektive Jahresrendite. r = nominaler Jahreszinssatz, n = Zinsperioden pro Jahr. Der APY spiegelt die tatsächliche Jahresrendite nach Zinseszins wider.',
     },
     ui: {
       'in.principal': 'Einlage',
@@ -120,7 +120,7 @@ export const apyCalculatorL10n: ToolL10n = {
       'opt.compound.365': 'Täglich',
       'out.apy': 'APY (effektiver Satz)',
       'out.final': 'Endsaldo',
-      'out.interest': 'Erzielter Zins',
+      'out.interest': 'Erzielte Zinsen',
       errNonNegative: 'Einlage, Satz und Jahre dürfen nicht negativ sein',
       errInvalidInput: 'Bitte in allen Feldern gültige Zahlen eingeben',
       note: '🏦 Der APY (effektive Jahresrendite) berücksichtigt die Verzinsung. APY > APR, wenn öfter als einmal pro Jahr verrechnet wird.',

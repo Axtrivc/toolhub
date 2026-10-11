@@ -10,7 +10,7 @@ export const DogAgeCalculatorL10n: ToolL10n = {
     faqs: [
       { q: '为什么不直接乘以 7?', a: '"×7"在两端都不成立:一岁的狗已经性成熟、行为上相当于青少年(约 15 人岁),而且狗在前两年老得最快。本工具用 AVMA 共识曲线——第一年 15 人岁、第二年 24,之后按体型每狗年加 4-6.5 人岁。' },
       { q: '体型怎么影响计算?', a: '两岁之后,小型犬(小于 9 kg)每狗年约加 4 人岁,中型 5,大型 6.5。所以 13 岁的吉娃娃约相当于 68 岁,而 13 岁的大丹犬已约 96 岁——大型犬成熟速度相同,之后老得更快。' },
-      { q: '狗几岁算老年?', a: '大致相当于人类年龄过 55-60 岁——大型犬约 7-9 岁、小型犬 10-12 岁,生命阶段输出会直接标出。即使看起来健康,兽医也建议从这些年龄开始做老年筛查。' },
+      { q: '狗几岁算老年?', a: '大致相当于人类等效年龄过了 55 岁——大型犬约 7-9 岁、小型犬 10-12 岁,生命阶段输出会直接标出。即使看起来健康,兽医也建议从这些年龄开始做老年筛查。' },
     ],
     ui: {
       'chartTitle': '生命阶段',
@@ -46,9 +46,9 @@ export const DogAgeCalculatorL10n: ToolL10n = {
   es: {
     useCases: ['convertir la edad de tu perro a años humanos', 'ajustar el envejecimiento por tamaño de raza', 'saber en qué etapa vital está tu perro', 'deshacer el mito del «por siete»'],
     faqs: [
-      { q: '¿Por qué no multiplicar simplemente por 7?', a: 'La regla del ×7 falla en ambos extremos: un perro de un año ya es maduro y adolescente (≈15 años humanos), y los perros corren en sus dos primeros años. Esta herramienta usa la curva de consenso de la AVMA: 15 al primer año, 24 al segundo y luego 4-6,5 años humanos por año canino según el tamaño.' },
-      { q: '¿Cómo cambia el cálculo según el tamaño?', a: 'Tras el segundo año, los perros pequeños (<9 kg) suman unos 4 años humanos por año canino, los medianos 5 y los grandes 6,5. Por eso un chihuahua de 13 años equivale a unos 68, mientras un gran danés de 13 va por un ~96: las razas grandes maduran igual pero envejecen más rápido después.' },
-      { q: '¿Cuándo es un perro senior?', a: 'Aproximadamente cuando la edad humana equivalente supera los 55-60: unos 7-9 años calendario en razas grandes y 10-12 en pequeñas, como refleja la etapa vital que muestra la herramienta. Los veterinarios recomiendan chequeos de senior desde esas edades aunque el perro parezca sano.' },
+      { q: '¿Por qué no multiplicar simplemente por 7?', a: 'La regla del ×7 falla en ambos extremos: un perro de un año ya es maduro y adolescente (≈15 años humanos), y en los dos primeros años maduran a toda velocidad. Esta herramienta usa la curva de consenso de la AVMA: 15 al primer año, 24 al segundo y luego 4-6,5 años humanos por año canino según el tamaño.' },
+      { q: '¿Cómo cambia el cálculo según el tamaño?', a: 'Tras el segundo año, los perros pequeños (<9 kg) suman unos 4 años humanos por año canino, los medianos 5 y los grandes 6,5. Por eso un chihuahua de 13 años equivale a unos 68, mientras un gran danés de 13 va por un ~96: las razas grandes maduran al mismo ritmo pero envejecen más rápido después.' },
+      { q: '¿Cuándo es un perro senior?', a: 'Aproximadamente cuando la edad humana equivalente ronda o supera los 55: unos 7-9 años calendario en razas grandes y 10-12 en pequeñas, como refleja la etapa vital que muestra la herramienta. Los veterinarios recomiendan chequeos de senior desde esas edades aunque el perro parezca sano.' },
     ],
     ui: {
       'chartTitle': 'Etapa vital',
@@ -63,7 +63,7 @@ export const DogAgeCalculatorL10n: ToolL10n = {
       'in.mythNote': 'Sobre la regla ×7',
       'in.size': 'Tamaño de raza',
       'inSuffix.dogAge': 'años',
-      'note': '🐶 Los perros alcanzan la madurez adolescente (~15 años humanos) al año y son adultos a los dos — imposible con ×7. Después las razas grandes envejecen antes.',
+      'note': '🐶 Los perros alcanzan la madurez adolescente (~15 años humanos) al año y son adultos a los dos — imposible con ×7. Después las razas grandes envejecen más rápido y llegan a senior años antes que las mini.',
       'opt.size.large': 'Grande (> 23 kg)',
       'opt.size.medium': 'Mediano (9-23 kg)',
       'opt.size.small': 'Pequeño (< 9 kg)',
@@ -82,11 +82,11 @@ export const DogAgeCalculatorL10n: ToolL10n = {
 },
   },
   de: {
-    useCases: ['das Hundealter in Menschenjahre umrechnen', 'die Alterung großer Rassen korrigieren', 'erkennen, in welcher Lebensphase dein Hund ist', 'mit dem ×7-Mythos aufräumen'],
+    useCases: ['das Hundealter in Menschenjahre umrechnen', 'das Tempo der Alterung nach Rassegröße korrigieren', 'erkennen, in welcher Lebensphase dein Hund ist', 'mit dem ×7-Mythos aufräumen'],
     faqs: [
       { q: 'Warum nicht einfach mit 7 multiplizieren?', a: 'Die ×7-Regel scheitert an beiden Enden: Ein einjähriger Hund ist schon geschlechtsreif und im Teenager-Alter (≈15 Menschenjahre), und Hunde rasen durch die ersten zwei Jahre. Dieses Tool nutzt die AVMA-Konsenskurve: 15 im ersten Jahr, 24 im zweiten, danach 4-6,5 Menschenjahre pro Hundejahr je nach Größe.' },
       { q: 'Wie ändert die Größe die Rechnung?', a: 'Nach Jahr zwei addieren kleine Hunde (<9 kg) etwa 4 Menschenjahre pro Hundejahr, mittlere 5, große 6,5. Deshalb entspricht ein 13-jähriger Chihuahua etwa einem 68-Jährigen, eine 13-jährige Deutsche Dogge einem ~96-Jährigen — große Rassen reifen gleich schnell, altern danach aber schneller.' },
-      { q: 'Ab wann ist ein Hund Senior?', a: 'Etwa wenn das Menschenäquivalent die Mitte 50 übersteigt — bei großen Rassen um die Kalenderjahre 7-9, bei kleinen 10-12, was die Lebensphasen-Ausgabe widerspiegelt. Tierärzte empfehlen ab diesem Alter Senior-Screenings, auch wenn der Hund gesund wirkt.' },
+      { q: 'Ab wann ist ein Hund Senior?', a: 'Etwa wenn das Menschenäquivalent die Mitte 50 übersteigt — bei großen Rassen um die Kalenderjahre 7-9, bei kleinen 10-12, was die Lebensphasen-Ausgabe widerspiegelt. Tierärzte empfehlen ab diesem Alter Senior-Vorsorgeuntersuchungen, auch wenn der Hund gesund wirkt.' },
     ],
     ui: {
       'chartTitle': 'Lebensphase',
@@ -101,7 +101,7 @@ export const DogAgeCalculatorL10n: ToolL10n = {
       'in.mythNote': 'Zur ×7-Regel',
       'in.size': 'Rassegröße',
       'inSuffix.dogAge': 'Jahre',
-      'note': '🐶 Hunde erreichen im ersten Jahr Jugendreife (~15 Menschenjahre) und sind mit zwei erwachsen — mit ×7 unmöglich. Danach altern große Rassen schneller.',
+      'note': '🐶 Hunde erreichen im ersten Jahr Jugendreife (~15 Menschenjahre) und sind mit zwei erwachsen — mit ×7 unmöglich. Danach altern große Rassen schneller und werden Jahre früher Senior als Zwergrassen.',
       'opt.size.large': 'Groß (> 23 kg)',
       'opt.size.medium': 'Mittel (9-23 kg)',
       'opt.size.small': 'Klein (< 9 kg)',

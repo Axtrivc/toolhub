@@ -18,7 +18,7 @@ export const userAgentParserL10n: ToolL10n = {
       'deviceTablet': '平板',
       'deviceTypeLabel': '设备类型',
       'emptyHint': '在上方粘贴任意 User-Agent 字符串,或点击',
-      'emptyHintSuffix': '解析你当前的浏览器。',
+      'emptyHintSuffix': ' 来解析你当前的浏览器。',
       'engineLabel': '引擎',
       'inputLabel': 'User-Agent 字符串',
       'loadMyUa': '加载我的 UA',
@@ -39,7 +39,7 @@ export const userAgentParserL10n: ToolL10n = {
     faqs: [
       {
         q: '我用的是 Edge 或 Brave,为什么 UA 里写着 Chrome?',
-        a: '基于 Chromium 的浏览器(Edge、Brave、Opera、Vivaldi)为了兼容性都会在 UA 里带上 Chrome 字样,再加上各自的标识。解析器会报告能识别到的最具体的浏览器,所以 Edge 和 Brave 是靠各自专属标识识别的,而不是共用的 Chrome。',
+        a: '基于 Chromium 的浏览器(Edge、Brave、Opera、Vivaldi)为了兼容性都会在 UA 里带上 Chrome 字样。Edge 和 Opera 会在此基础上加一个专属标识(「Edg」「OPR」),解析器会报告能识别到的最具体的浏览器,因此它们能凭这些标识被识别出来。而 Brave 和 Vivaldi 刻意使用与 Chrome 完全相同的 UA、不加自己的标识,所以在这里会显示为 Chrome。',
       },
       {
         q: '靠 UA 字符串检测浏览器和操作系统可靠吗?',
@@ -64,12 +64,12 @@ export const userAgentParserL10n: ToolL10n = {
       'deviceTablet': 'Tablet',
       'deviceTypeLabel': 'Tipo de dispositivo',
       'emptyHint': 'Pega arriba cualquier cadena User-Agent, o pulsa',
-      'emptyHintSuffix': 'para analizar tu navegador actual.',
+      'emptyHintSuffix': ' para analizar tu navegador actual.',
       'engineLabel': 'Motor',
       'inputLabel': 'Cadena User-Agent',
       'loadMyUa': 'Cargar mi UA',
       'notABot': 'no es un bot conocido',
-      'noteMain': '🔒 El análisis es 100% local — la cadena nunca sale de tu navegador. El UA sniffing es heurístico por naturaleza: los clientes pueden mentir en cualquier campo, y Windows 10 frente a 11 es intencionadamente indistinguible (ambos reportan',
+      'noteMain': '🔒 El análisis es 100% local — la cadena nunca sale de tu navegador. El rastreo del UA es heurístico por naturaleza: los clientes pueden mentir en cualquier campo, y Windows 10 y 11 son deliberadamente indistinguibles (ambos reportan',
       'noteSuffix': ').',
       'osLabel': 'Sistema operativo',
       'parsedResultLabel': 'Resultado analizado (JSON)',
@@ -85,15 +85,15 @@ export const userAgentParserL10n: ToolL10n = {
     faqs: [
       {
         q: 'Uso Edge o Brave, ¿por qué mi UA dice Chrome?',
-        a: 'Los navegadores basados en Chromium (Edge, Brave, Opera, Vivaldi) incluyen la palabra Chrome en su UA por compatibilidad, además de su propio token. El analizador informa el navegador reconocido más específico, así que Edge y Brave se detectan por sus tokens dedicados, no por el compartido Chrome.',
+        a: 'Todos los navegadores basados en Chromium (Edge, Brave, Opera, Vivaldi) incluyen la palabra Chrome en su UA por compatibilidad. Edge y Opera añaden encima un token propio («Edg», «OPR»), y el analizador informa del navegador reconocido más específico, así que se detectan por esos tokens. Brave y Vivaldi usan deliberadamente un UA idéntico al de Chrome, sin token propio, así que aquí aparecen como Chrome.',
       },
       {
         q: '¿Es fiable detectar navegador y SO desde la cadena UA?',
-        a: 'Útil, pero no infalible. Los navegadores están reduciendo la UA granular (User-Agent Client Hints), las herramientas de privacidad la congelan o falsifican, y los productos nuevos o minoritarios pueden faltar en la base de detección. Tómalo como una pista, no como una garantía.',
+        a: 'Útil, pero no infalible. Los navegadores están reduciendo el detalle de la cadena UA (User-Agent Client Hints), las herramientas de privacidad la congelan o falsifican, y los productos nuevos o minoritarios pueden faltar en la base de detección. Tómalo como una pista, no como una garantía.',
       },
       {
         q: '¿Para qué sirve realmente la cadena User-Agent?',
-        a: 'Servidores y analítica la usan para elegir contenido (p. ej. diseño móvil), registrar la cuota de navegadores o bloquear bots conocidos. Hoy se prefiere la detección de características en JavaScript frente al UA sniffing, porque la UA no es fiable y se falsifica fácilmente.',
+        a: 'Servidores y analítica la usan para elegir contenido (p. ej. diseño móvil), registrar la cuota de navegadores o bloquear bots conocidos. Hoy se prefiere la detección de características en JavaScript frente al rastreo del UA, porque la UA no es fiable y se falsifica fácilmente.',
       },
     ],
   },
@@ -109,8 +109,8 @@ export const userAgentParserL10n: ToolL10n = {
       'deviceMobile': 'Mobil',
       'deviceTablet': 'Tablet',
       'deviceTypeLabel': 'Gerätetyp',
-      'emptyHint': 'Füge oben eine beliebige User-Agent-Zeichenkette ein oder klicke',
-      'emptyHintSuffix': 'um deinen aktuellen Browser zu parsen.',
+      'emptyHint': 'Füge oben eine beliebige User-Agent-Zeichenkette ein oder klicke auf',
+      'emptyHintSuffix': ', um deinen aktuellen Browser zu parsen.',
       'engineLabel': 'Engine',
       'inputLabel': 'User-Agent-Zeichenkette',
       'loadMyUa': 'Meine UA laden',
@@ -131,15 +131,15 @@ export const userAgentParserL10n: ToolL10n = {
     faqs: [
       {
         q: 'Ich nutze Edge oder Brave — warum steht in meiner UA Chrome?',
-        a: 'Chromium-basierte Browser (Edge, Brave, Opera, Vivaldi) nehmen aus Kompatibilitätsgründen das Wort Chrome in die UA auf, zusätzlich zu ihrem eigenen Token. Der Parser meldet den spezifischsten erkannten Browser, sodass Edge und Brave über ihre eigenen Tokens erkannt werden, nicht über das gemeinsame Chrome.',
+        a: 'Chromium-basierte Browser (Edge, Brave, Opera, Vivaldi) nehmen aus Kompatibilitätsgründen alle das Wort Chrome in die UA auf. Edge und Opera fügen oben ein eigenes Token hinzu („Edg“, „OPR“), und der Parser meldet den spezifischsten erkannten Browser, sodass sie über diese Tokens erkannt werden. Brave und Vivaldi verwenden bewusst eine Chrome-identische UA ohne eigenes Token und erscheinen hier daher als Chrome.',
       },
       {
         q: 'Ist die Browser- und OS-Erkennung aus der UA zuverlässig?',
-        a: 'Nützlich, aber nicht unfehlbar. Browser reduzieren die detaillierte UA (User-Agent Client Hints), Datenschutz-Tools frieren sie ein oder fälschen sie, und neue oder nischige Produkte fehlen evtl. noch in der Datenbank. Betrachte das Ergebnis als Hinweis, nicht als Garantie.',
+        a: 'Nützlich, aber nicht unfehlbar. Browser reduzieren den Detailgrad der UA (User-Agent Client Hints), Datenschutz-Tools frieren sie ein oder fälschen sie, und neue oder Nischenprodukte fehlen möglicherweise noch in der Datenbank. Betrachte das Ergebnis als Hinweis, nicht als Garantie.',
       },
       {
         q: 'Wofür wird die User-Agent-Zeichenkette überhaupt verwendet?',
-        a: 'Server und Analytics nutzen sie, um Inhalte auszuwählen (z. B. Mobile-Layout), Browser-Anteile zu erfassen oder bekannte Bots zu blockieren. Heute wird Feature-Erkennung in JavaScript gegenüber UA-Sniffing bevorzugt, da die UA unzuverlässig und leicht fälschbar ist.',
+        a: 'Server und Analytics nutzen sie, um Inhalte auszuwählen (z. B. Mobile-Layout), Browser-Anteile zu erfassen oder bekannte Bots zu blockieren. Heute wird Feature Detection in JavaScript gegenüber UA-Sniffing bevorzugt, da die UA unzuverlässig und leicht fälschbar ist.',
       },
     ],
   },

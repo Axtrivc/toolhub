@@ -8,7 +8,7 @@ export const pngToWebpConverterL10n: ToolL10n = {
   zh: {
     ui: {
       'alreadyCompressedPrefix': '此图片已压缩得很好——',
-      'alreadyCompressedSuffix': '质量的 WebP 比原图更大。试着调低质量滑块。',
+      'alreadyCompressedSuffix': '质量的 WebP 比原图更大。试着调低质量。',
       'bestQuality': '最佳质量',
       'change': '更换',
       'downloadWebp': '下载 WebP',
@@ -19,7 +19,7 @@ export const pngToWebpConverterL10n: ToolL10n = {
       'errReadFile': '无法读取文件。',
       'errUnsupportedWebp': '你的浏览器无法编码 WebP(画布回退为 PNG)。任何版本的 Safari 都无法编码 WebP——请使用 Chrome、Edge 或 Firefox 来转换。',
       'errUploadPngJpg': '请上传 PNG 或 JPG 图片文件。',
-      'noteText': '🔒 100% 在客户端——编码在浏览器内画布上经',
+      'noteText': '🔒 100% 在客户端——编码在浏览器内的画布上通过',
       'noteTextSuffix': ' 完成。你的图片绝不离开你的设备。',
       'originalLabel': '原图',
       'reading': '读取中…',
@@ -56,7 +56,7 @@ export const pngToWebpConverterL10n: ToolL10n = {
   es: {
     ui: {
       'alreadyCompressedPrefix': 'Esta imagen ya está bien comprimida — WebP a',
-      'alreadyCompressedSuffix': 'calidad es mayor que el origen. Prueba a bajar la calidad.',
+      'alreadyCompressedSuffix': 'de calidad es más grande que el original. Prueba a bajar la calidad.',
       'bestQuality': 'Mejor calidad',
       'change': 'Cambiar',
       'downloadWebp': 'Descargar WebP',
@@ -93,7 +93,7 @@ export const pngToWebpConverterL10n: ToolL10n = {
       },
       {
         q: '¿Admite WebP transparencia?',
-        a: 'Sí. WebP tiene transparencia alfa sin pérdida igual que PNG, así que recortes, logos e iconos conservan su fondo transparente mientras reduce el tamaño. Sube la calidad para mantener bordes nítidos.',
+        a: 'Sí. WebP tiene transparencia alfa sin pérdida igual que PNG, así que recortes, logos e iconos conservan su fondo transparente mientras se reduce el tamaño del archivo. Sube la calidad para mantener bordes nítidos.',
       },
       {
         q: '¿Qué calidad debo elegir?',
@@ -104,7 +104,7 @@ export const pngToWebpConverterL10n: ToolL10n = {
   de: {
     ui: {
       'alreadyCompressedPrefix': 'Dieses Bild ist bereits gut komprimiert — WebP bei',
-      'alreadyCompressedSuffix': 'Qualität ist größer als die Quelle. Probier einen niedrigeren Qualitätsregler.',
+      'alreadyCompressedSuffix': 'Qualität ist größer als die Quelle. Probier, den Qualitätsregler niedriger zu stellen.',
       'bestQuality': 'Beste Qualität',
       'change': 'Ändern',
       'downloadWebp': 'WebP herunterladen',
@@ -118,7 +118,7 @@ export const pngToWebpConverterL10n: ToolL10n = {
       'noteText': '🔒 100% clientseitig — die Codierung erfolgt lokal auf einer Browser-Canvas via',
       'noteTextSuffix': '. Dein Bild verlässt nie dein Gerät.',
       'originalLabel': 'Original',
-      'reading': 'Lesen…',
+      'reading': 'Wird gelesen…',
       'savings': 'Ersparnis',
       'smallestFile': 'Kleinste Datei',
       'uploadHint': 'PNG- oder JPG-Bilder',

@@ -17,7 +17,7 @@ const en: ReactNode = (
     <h2>How to Calculate a Discount</h2>
     <p>
       A discount reduces an item&apos;s original price by a percentage. To find the sale price,
-      multiply the original by <code>(1 − discount%)</code>. For example, a $80 shirt at 25% off:{' '}
+      multiply the original by <code>(1 − discount%)</code>. For example, an $80 shirt at 25% off:{' '}
       <code>80 × (1 − 0.25) = 80 × 0.75 = $60</code>. You save $20.
     </p>
 
@@ -62,20 +62,20 @@ const zh: ReactNode = (
     <h2>如何计算折扣</h2>
     <p>
       折扣是按百分比降低商品的原价。要算出促销价,把原价乘以 <code>(1 − discount%)</code>。例如,
-      一件 $80 的衬衫打 25% 折:{' '}<code>80 × (1 − 0.25) = 80 × 0.75 = $60</code>。你省了 $20。
+      一件 $80 的衬衫降价 25%:{' '}<code>80 × (1 − 0.25) = 80 × 0.75 = $60</code>。你省了 $20。
     </p>
 
     <h2>常见的折扣形式</h2>
     <ul>
       <li><strong>百分比折扣:</strong> 20%、30%、50% —— 最常见的类型</li>
-      <li><strong>买一送一(BOGO):</strong> 相当于每件 50% 折</li>
+      <li><strong>买一送一(BOGO):</strong> 相当于每件 5 折</li>
       <li><strong>固定金额减免:</strong> 满 $50 立减 $10</li>
       <li><strong>叠加折扣:</strong> 多个折扣依次适用</li>
     </ul>
 
     <h2>叠加折扣怎么算</h2>
     <p>
-      当商家打出"已降价商品再额外减 20%"时,第二次折扣是在已经打折后的价格上计算,而不是原价。
+      当商家打出「已降价商品再额外减 20%」时,第二次折扣是在已经打折后的价格上计算,而不是原价。
       一件 $100 的商品先降价 30% 变成 $70。再额外减 20% 是在 $70 上算,得到 $56 —— 总共节省 44%,
       而不是 50%。要正确处理叠加折扣,可以用这个计算器算两次(每次算一个折扣)。
     </p>
@@ -83,14 +83,14 @@ const zh: ReactNode = (
     <h2>反向折扣:求原价</h2>
     <p>
       如果你只知道促销价和折扣百分比,可以通过除法求出原价:<code>original = sale price ÷ (1 − discount%)</code>。
-      例如,一件商品打 25% 折后是 $60,那么原价是 <code>60 ÷ 0.75 = $80</code>。
+      例如,一件商品降价 25% 后是 $60,那么原价是 <code>60 ÷ 0.75 = $80</code>。
     </p>
 
     <h2>这个优惠真的划算吗?</h2>
     <p>并非所有折扣都一样。要留意:</p>
     <ul>
-      <li><strong>虚高的原价:</strong> 有些商家抬高"原价"让折扣看起来更大</li>
-      <li><strong>最低消费门槛:</strong> "满 $100 立减 30%"可能会诱使你超额消费</li>
+      <li><strong>虚高的原价:</strong> 有些商家抬高「原价」让折扣看起来更大</li>
+      <li><strong>最低消费门槛:</strong> 「满 $100 立减 30%」可能会诱使你超额消费</li>
       <li><strong>比较单价:</strong> 打折的大包装按每盎司算,可能仍然比原价的小包装更贵</li>
     </ul>
   </section>
@@ -177,8 +177,8 @@ const de: ReactNode = (
     <h2>Ist das Angebot wirklich gut?</h2>
     <p>Nicht alle Rabatte sind gleich. Achte auf:</p>
     <ul>
-      <li><strong>Überhöhte Originalpreise:</strong> Manche Händler erhöhen den „war"-Preis, damit der Rabatt größer wirkt</li>
-      <li><strong>Mindestbestellwerte:</strong> „Spare 30 % ab $100 Einkauf" kann dich zum Mehrkaufen verleiten</li>
+      <li><strong>Überhöhte Originalpreise:</strong> Manche Händler erhöhen den „statt"-Preis, damit der Rabatt größer wirkt</li>
+      <li><strong>Mindestbestellwerte:</strong> „Spare 30 % ab $100 Einkauf" kann dich dazu verleiten, mehr auszugeben</li>
       <li><strong>Stückpreise vergleichen:</strong> Eine rabattierte Großpackung kann pro Unze immer noch teurer sein als eine kleinere Packung zum Vollpreis</li>
     </ul>
   </section>

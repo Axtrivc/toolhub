@@ -1,6 +1,7 @@
 /**
  * area-converter 本地化 bundle —— zh / es / de
- * 覆盖:faqs + useCases(client = makeUnitConverter,不 locale-aware,UI 保持英文)
+ * 覆盖:faqs + ui + useCases(client = makeUnitConverter,slug 已注册;
+ * 键用工厂 unit.* 口径——unit.<key> 同时喂 From/To 下拉、结果卡单位、All units 面板)
  */
 import type { ToolL10n } from '../tool-l10n'
 
@@ -34,13 +35,13 @@ export const areaConverterL10n: ToolL10n = {
       'note': '📐 Para bienes raíces, terrenos y construcción. Incluye acres y hectáreas.',
       'unit.acre': 'Acres (ac)',
       'unit.hectare': 'Hectáreas (ha)',
-      'unit.sqcm': 'Centímetros² (cm²)',
-      'unit.sqft': 'Pies² (ft²)',
-      'unit.sqin': 'Pulgadas² (in²)',
-      'unit.sqkm': 'Kilómetros² (km²)',
-      'unit.sqm': 'Metros² (m²)',
-      'unit.sqmm': 'Milímetros² (mm²)',
-      'unit.sqyd': 'Yardas² (yd²)',
+      'unit.sqcm': 'Centímetros cuadrados (cm²)',
+      'unit.sqft': 'Pies cuadrados (ft²)',
+      'unit.sqin': 'Pulgadas cuadradas (in²)',
+      'unit.sqkm': 'Kilómetros cuadrados (km²)',
+      'unit.sqm': 'Metros cuadrados (m²)',
+      'unit.sqmm': 'Milímetros cuadrados (mm²)',
+      'unit.sqyd': 'Yardas cuadradas (yd²)',
     },
     useCases: [
       'convertir la superficie de viviendas entre m² y ft²',
@@ -56,7 +57,7 @@ export const areaConverterL10n: ToolL10n = {
   de: {
     ui: {
       'note': '📐 Für Immobilien, Grundstücke und Bau. Enthält Acres und Hektar.',
-      'unit.acre': 'Morgen (ac)',
+      'unit.acre': 'Acre (ac)',
       'unit.hectare': 'Hektar (ha)',
       'unit.sqcm': 'Quadratzentimeter (cm²)',
       'unit.sqft': 'Quadratfuß (ft²)',

@@ -143,8 +143,8 @@ const de: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>Was ist dieses Werkzeug?</h2>
     <p>
-      Die <strong>Anzahlung</strong> ist der Betrag, den du vorab bar zahlst; der Rest wird zu
-      deiner Hypothek. Dieser Rechner zeigt den Dollar-Betrag und ob du PMI brauchst.
+      Die <strong>Anzahlung</strong> ist der Betrag, den du vorab bar zahlst; der Rest wird über
+      deine Hypothek finanziert. Dieser Rechner zeigt den Betrag in Dollar und ob du PMI brauchst.
     </p>
 
     <div>
@@ -172,7 +172,7 @@ const de: ReactNode = (
     </div>
 
     <div>
-      <h2>Leer nicht dein Erspartes</h2>
+      <h2>Leere nicht dein Erspartes</h2>
       <p>
         Höhere Anzahlungen bedeuten kleinere Kredite und keinen PMI — aber entleere nicht deinen
         Notgroschen, um das zu erreichen. Kreditgeber möchten nach dem Abschluss Reserven sehen.

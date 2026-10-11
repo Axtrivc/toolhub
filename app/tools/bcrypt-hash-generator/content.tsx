@@ -81,7 +81,7 @@ const zh: ReactNode = (
     <div>
       <h2>如何选择成本因子</h2>
       <p>
-        成本因子是指数级的:<strong>2^cost 次迭代</strong>,所以每提高一档,你和攻击者的计算量都翻倍。如今 <code>10</code>–<code>12</code> 是常见的最佳区间——在生产硬件上选择能让登录流程保持流畅的最高值,然后每隔一两年随着机器变快再回顾调整。高于 <code>12</code> 的值在浏览器标签页中会明显变慢(本工具会警告你),而这恰恰是你抵御离线破解所希望的阻力。请注意,bcrypt 只读取密码的<strong>前 72 个字节</strong>;超出部分会被设计上静默忽略。
+        成本因子是指数级的:<strong>2^cost 次迭代</strong>,所以每提高一档,你和攻击者的计算量都翻倍。如今 <code>10</code>–<code>12</code> 是常见的最佳区间——在生产硬件上选择能让登录流程保持流畅的最高值,然后每隔一两年随着机器变快再回顾调整。高于 <code>12</code> 的值在浏览器标签页中会明显变慢(本工具会警告你),而这恰恰是你抵御离线破解所希望的阻力。请注意,bcrypt 只读取密码的<strong>前 72 个字节</strong>;超出部分在设计上会被静默忽略。
       </p>
     </div>
 
@@ -122,7 +122,7 @@ const es: ReactNode = (
     <div>
       <h2>Elegir un factor de coste</h2>
       <p>
-        El factor de coste es exponencial: <strong>2^coste iteraciones</strong>, así que cada paso duplica el trabajo
+        El factor de coste es exponencial: <strong>2^cost iteraciones</strong>, así que cada paso duplica el trabajo
         para ti <em>y</em> para el atacante. <code>10</code>–<code>12</code> es el punto óptimo habitual hoy — elige el
         valor más alto que mantenga tu flujo de login cómodamente rápido en tu hardware de producción y revísalo cada
         año o dos a medida que las máquinas se vuelven más rápidas. Los valores por encima de <code>12</code> son
@@ -182,16 +182,17 @@ const de: ReactNode = (
         alle ein bis zwei Jahre, wenn die Maschinen schneller werden. Werte über <code>12</code> sind in einem Browser-Tab
         spürbar langsam (dieses Werkzeug warnt dich), was genau der Widerstand ist, den du gegen Offline-Knacken willst.
         Beachte, dass bcrypt nur die <strong>ersten 72 Byte</strong> eines Passworts liest; alles darüber hinaus wird
-        bewusst still ignoriert.
+        bewusst stillschweigend ignoriert.
       </p>
     </div>
 
     <div>
       <h2>Gesalzenes SHA-256/SHA-512 — und seine Grenzen</h2>
       <p>
-        Ein gesalzener SHA-2-Hash (<code>sha256$salt$hash</code>) stoppt Rainbow Tables und Identische-Passwort-Kollisionen,
+        Ein gesalzener SHA-2-Hash (<code>sha256$salt$hash</code>) stoppt Rainbow Tables und Kollisionen bei identischen
+        Passwörtern,
         aber SHA-2 ist für <strong>Geschwindigkeit</strong> gebaut — eine GPU kann Milliarden Kandidaten pro Sekunde testen,
-        sodass er <em>nicht</em> geeignet ist, um echte Nutzerpasswörter allein zu speichern. Nutze die SHA-Optionen hier
+        sodass er allein <em>nicht</em> geeignet ist, echte Nutzerpasswörter zu speichern. Nutze die SHA-Optionen hier
         zum Lernen, für Checksummen oder zum Verifizieren von Legacy-Formaten; für alles, was echte Konten schützt, hashe{' '}
         <strong>serverseitig</strong> mit <code>argon2id</code> oder <code>bcrypt</code> (oder zumindest PBKDF2 mit hoher
         Iterationszahl), bewahre auch die Hashes serverseitig auf und protokolliere nie Klartextpasswörter. Diese Seite

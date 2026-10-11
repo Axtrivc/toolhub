@@ -60,7 +60,7 @@ const zh: ReactNode = (
       </ul>
     </div>
     <div>
-      <h2>保留有意的格式</h2>
+      <h2>保留刻意设置的格式</h2>
       <p>本工具会删除<em>所有</em>多余的空白。如果你有刻意保留的缩进(如代码或诗歌),默认选项会把一切都铺平。如需保留缩进,请取消勾选上方的<em>「修剪每行」</em>与<em>「合并多余空格」</em>。</p>
     </div>
   </section>
@@ -92,7 +92,7 @@ const es: ReactNode = (
     </div>
     <div>
       <h2>Conservar el formato intencional</h2>
-      <p>Esta herramienta elimina <em>todo</em> el espacio en blanco adicional. Si tienes sangría intencional (como código o poesía), no la uses en ese texto — los ajustes predeterminados lo aplanarán todo. Para conservar la sangría, desmarca <em>Recortar cada línea</em> y <em>Colapsar espacios múltiples</em> arriba.</p>
+      <p>Esta herramienta elimina <em>todo</em> el espacio en blanco adicional. Si tienes sangría intencional (como código o poesía), no la uses en ese texto — los ajustes predeterminados lo aplanarán todo. Para conservar la sangría, desmarca <em>Recortar cada línea</em> y <em>Contraer espacios múltiples</em> arriba.</p>
     </div>
   </section>
 )
@@ -123,7 +123,7 @@ const de: ReactNode = (
     </div>
     <div>
       <h2>Bewusste Formatierung beibehalten</h2>
-      <p>Dieses Werkzeug entfernt <em>alle</em> zusätzlichen Leerzeichen. Wenn du bewusste Einrückungen hast (wie Code oder Poesie), benutze es nicht für diesen Text — die Standardeinstellungen ebenen alles eine. Um Einrückungen zu behalten, deaktiviere oben <em>Jede Zeile trimmen</em> und <em>Mehrfache Leerzeichen verbinden</em>.</p>
+      <p>Dieses Werkzeug entfernt <em>alle</em> zusätzlichen Leerzeichen. Wenn du Einrückungen bewusst gesetzt hast (wie bei Code oder Poesie), benutze es nicht für diesen Text — die Standardeinstellungen ebnen alles ein. Um Einrückungen zu behalten, deaktiviere oben <em>Jede Zeile trimmen</em> und <em>Mehrfache Leerzeichen zusammenfassen</em>.</p>
     </div>
   </section>
 )

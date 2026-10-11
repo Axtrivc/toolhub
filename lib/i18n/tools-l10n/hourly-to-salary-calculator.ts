@@ -54,11 +54,11 @@ export const hourlyToSalaryCalculatorL10n: ToolL10n = {
   de: {
     formula: {
       formula: 'Annual salary = hourly rate × hours/week × weeks/year',
-      explain: 'Rechnet einen Stundenlohn in ein Jahresgehalt um. Standardannahme sind 40 Std./Woche und 52 Wochen/Jahr (2.080 Std.); für Teilzeit oder unbezahlte Freizeit anpassbar.',
+      explain: 'Rechnet einen Stundenlohn in ein Jahresgehalt um. Standardannahme sind 40 Std./Woche und 52 Wochen/Jahr (2.080 Std.); für Teilzeit oder unbezahlte Auszeiten anpassbar.',
     },
     useCases: ['Stundenlohn in Jahres-/Monats-/Wochenlohn umrechnen', 'Jahreseinkommen nach Wochenstunden berechnen', 'die tatsächliche Bezahlung von zwei Angeboten vergleichen', 'Einkommen bei Teilzeit oder Überstunden berechnen'],
     faqs: [
-      { q: 'Ist Festgehalt oder Stundenlohn besser?', a: 'Festanstellungen bieten meist Benefits und Sicherheit; Stundenlohn bietet Überstundengeld und Flexibilität. $50.000 Festgehalt bei 50 Stunden/Woche entsprechen ~$19/Stunde — weniger als ein Job mit $25/Stunde bei 40 Stunden.' },
+      { q: 'Ist Festgehalt oder Stundenlohn besser?', a: 'Festanstellungen bieten meist Benefits und Sicherheit; Stundenlohn bietet Überstundengeld und Flexibilität. $50,000 Festgehalt bei 50 Stunden/Woche entsprechen ~$19/Stunde — weniger als ein Job mit $25/Stunde bei 40 Stunden.' },
     ],
     ui: {
       'chartTitle': 'Deine Woche (168 Std.)',

@@ -17,7 +17,7 @@ export const textToBinaryL10n: ToolL10n = {
       '计算机科学作业',
       '理解文本在计算机中的存储方式',
       '调试底层数据格式',
-      '制作二进制主题的艺术或信息',
+      '创作二进制主题的艺术或留言',
     ],
     faqs: [
       { q: '为什么每个字符用 8 位?', a: '8 位(一个字节)可表示 256 个不同的值(0–255),足以覆盖英文文本、常用符号和 ASCII/扩展 ASCII 的控制字符。UTF-8 用 1–4 个字节表示一个字符,以支持完整的 Unicode。' },
@@ -25,7 +25,7 @@ export const textToBinaryL10n: ToolL10n = {
   },
   es: {
     ui: {
-      defaultInput: 'Ho',
+      defaultInput: 'Hola',
       inputLabel: 'Texto',
       outputLabel: 'Binario',
       note: '💾 Convierte texto a binario UTF-8 — cada carácter pasa a ser uno o más bytes de 8 bits.',

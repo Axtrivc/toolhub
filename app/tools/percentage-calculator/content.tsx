@@ -91,7 +91,7 @@ const zh: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>如何计算百分比</h2>
     <p>
-      百分比把一个数表示为一百的几分之几。这个词的字面意思就是「per hundred」——所以 25% 表示每 100 中的 25，即四分之一。本计算器在一个地方处理最常见的四种百分比计算，这样你就不必再去记公式。
+      百分比把一个数表示为一百的几分之几。这个词的字面意思就是「每一百」——所以 25% 表示每 100 中的 25，即四分之一。本计算器把最常见的四种百分比计算集中在一处，让你不必再去记公式。
     </p>
 
     <h2>四个百分比公式</h2>
@@ -110,7 +110,7 @@ const zh: ReactNode = (
 
     <h3>3. 百分比增加或减少</h3>
     <p>
-      用新的减去原来的，除以原来的，再乘以 100。例如，价格从 $100 变为 $125：{' '}
+      用新值减去原值，除以原值，再乘以 100。例如，价格从 $100 变为 $125：{' '}
       <code>((125 − 100) ÷ 100) × 100 = 25%</code> 的增长。用于衡量增长、通货膨胀或薪资变化。
     </p>
 
@@ -123,7 +123,7 @@ const zh: ReactNode = (
     <h2>实际用途</h2>
     <ul>
       <li>
-        <strong>购物折扣。</strong>一件 $60 的衬衫降价 30%。X% 的 Y 是多少会告诉你折扣额（$18）；减去后得到售价（$42）。
+        <strong>购物折扣。</strong>一件 $60 的衬衫降价 30%。「X% 的 Y 是多少」会告诉你折扣额（$18）；减去后得到售价（$42）。
       </li>
       <li>
         <strong>餐厅小费。</strong>立即算出账单的 15%、18% 或 20%。
@@ -148,7 +148,7 @@ const zh: ReactNode = (
         <strong>把百分点和百分比混淆。</strong>利率从 5% 上升到 7% 是 2 个 <em>百分点</em> 的增加，但<em>相对</em>增加了 40%。
       </li>
       <li>
-        <strong>忘记基数。</strong>「200% of」与「200% more than」并不相同。200% of 50 是 100；200% more than 50 是 150。
+        <strong>忘记基数。</strong>「200% 的」与「多 200%」并不相同。200% 的 50 是 100；比 50 多 200% 则是 150。
       </li>
     </ul>
   </section>
@@ -173,7 +173,7 @@ const es: ReactNode = (
       <code>200 × 0.15 = 30</code>. Úsalo para propinas, descuentos y cálculos de impuestos.
     </p>
 
-    <h3>2. ¿X es qué porcentaje de Y?</h3>
+    <h3>2. ¿Qué porcentaje es X de Y?</h3>
     <p>
       Divide la parte entre el total y multiplica por 100. Por ejemplo, para hallar qué porcentaje
       es 30 de 200: <code>(30 ÷ 200) × 100 = 15%</code>. Úsalo para calcular calificaciones de
@@ -182,7 +182,7 @@ const es: ReactNode = (
 
     <h3>3. Aumento o disminución porcentual</h3>
     <p>
-      Resta el original del nuevo, divide entre el original y multiplica por 100. Por ejemplo, un
+      Resta el valor original del nuevo, divide entre el valor original y multiplica por 100. Por ejemplo, un
       cambio de precio de $100 a $125: <code>((125 − 100) ÷ 100) × 100 = 25%</code>{' '}
       de aumento. Úsalo para medir crecimiento, inflación o cambios de salario.
     </p>
@@ -244,9 +244,9 @@ const de: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>Wie man Prozente berechnet</h2>
     <p>
-      Ein Prozent stellt eine Zahl als Bruchteil von 100 dar. Das Wort bedeutet wörtlich „pro
+      Ein Prozentsatz drückt eine Zahl als Bruchteil von 100 aus. Das Wort bedeutet wörtlich „pro
       Hundert“ — 25% bedeutet also 25 von jeweils 100, das heißt, ein Viertel. Dieser Rechner
-      erledigt die vier häufigsten Prozentrechnungen an einem Ort, sodass du dir die Formeln nicht
+      vereint die vier häufigsten Prozentrechnungen, sodass du dir die Formeln nicht
       merken musst.
     </p>
 
@@ -254,12 +254,12 @@ const de: ReactNode = (
 
     <h3>1. Wie viel sind X% von Y?</h3>
     <p>
-      Multipliziere das Ganze mit dem Prozentwert als Dezimalzahl. Um beispielsweise 15% von 200 zu
+      Multipliziere das Ganze mit dem Prozentsatz als Dezimalzahl. Um beispielsweise 15% von 200 zu
       berechnen: <code>200 × 0.15 = 30</code>. Verwende dies für Trinkgelder, Rabatte und
       Steuerberechnungen.
     </p>
 
-    <h3>2. X ist wie viel Prozent von Y?</h3>
+    <h3>2. Wie viel Prozent von Y ist X?</h3>
     <p>
       Teile den Teil durch das Ganze und multipliziere mit 100. Um beispielsweise zu berechnen, wie
       viel Prozent 30 von 200 sind: <code>(30 ÷ 200) × 100 = 15%</code>. Verwende dies für
@@ -268,7 +268,7 @@ const de: ReactNode = (
 
     <h3>3. Prozentuale Zu- oder Abnahme</h3>
     <p>
-      Subtrahiere den Ursprungswert vom neuen, teile durch den Ursprungswert und multipliziere mit
+      Subtrahiere den Ursprungswert vom neuen Wert, teile durch den Ursprungswert und multipliziere mit
       100. Bei einer Preisänderung von $100 auf $125 beispielsweise:{' '}
       <code>((125 − 100) ÷ 100) × 100 = 25%</code> Anstieg. Verwende dies, um Wachstum, Inflation
       oder Gehaltsänderungen zu messen.

@@ -98,7 +98,7 @@ const zh: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>复利是什么?</h2>
     <p>
-      <strong>复利</strong>是指在你最初的本金和随时间累积的利息之上共同产生的利息。它常被称为「利滚利」,是长期投资中最强大的力量。与只增长原始存款的简单利息不同,复利让你的钱呈指数增长——起初缓慢,然后随着岁月流逝越来越快。
+      <strong>复利</strong>是指在你最初的本金和随时间累积的利息之上共同产生的利息。它常被称为「利滚利」,是长期投资中最强大的力量。与只增长原始存款的单利不同,复利让你的钱呈指数增长——起初缓慢,然后随着岁月流逝越来越快。
     </p>
 
     <h2>复利公式</h2>
@@ -121,10 +121,10 @@ const zh: ReactNode = (
     <p>时间比投资金额更重要。看看两位储蓄者:</p>
     <ul>
       <li>
-        <strong>储蓄者 A</strong> 从 25 岁到 35 岁每月投 $200(10 年,共 $24,000),然后停止。按 7% 回报率,到 65 岁约有 ~$281,000。
+        <strong>储蓄者 A</strong> 从 25 岁到 35 岁每月投 $200(10 年,共 $24,000),然后停止。按 7% 回报率,到 65 岁约有 $281,000。
       </li>
       <li>
-        <strong>储蓄者 B</strong> 等到 35 岁才开始,然后每月投 $200、持续 30 年到 65 岁(共 $72,000)。按 7% 回报率,到 65 岁约有 ~$244,000。
+        <strong>储蓄者 B</strong> 等到 35 岁才开始,然后每月投 $200、持续 30 年到 65 岁(共 $72,000)。按 7% 回报率,到 65 岁约有 $244,000。
       </li>
     </ul>
     <p>
@@ -146,7 +146,7 @@ const zh: ReactNode = (
 
     <h2>如何最大化复利增长</h2>
     <ol>
-      <li><strong>现在就开始。</strong>每等一年,你的损失远不止那笔本可以投资的金额。</li>
+      <li><strong>现在就开始。</strong>每等一年,损失都会呈指数级放大——远不止那笔本可以投资的金额。</li>
       <li><strong>坚持定投。</strong>每月投入能自动推动增长,还能平滑市场波动。</li>
       <li><strong>分红再投资。</strong>别拿走现金——让它继续复利。</li>
       <li><strong>控制费率。</strong>费率 0.03% 的指数基金长期跑赢费率 1%+ 的主动管理基金。</li>
@@ -194,12 +194,12 @@ const es: ReactNode = (
     <p>El tiempo importa más que la cantidad que inviertes. Considera dos ahorradores:</p>
     <ul>
       <li>
-        El <strong>Ahorrador A</strong> invierte 200 $/mes desde los 25 hasta los 35 (10 años,
-        24 000 $ en total) y luego para. Al 7 % de retorno, a los 65 tiene ~281 000 $.
+        El <strong>Ahorrador A</strong> invierte $200/mes desde los 25 hasta los 35 (10 años,
+        $24,000 en total) y luego para. Al 7% de retorno, a los 65 tiene $281,000.
       </li>
       <li>
-        El <strong>Ahorrador B</strong> espera hasta los 35 y luego invierte 200 $/mes durante
-        30 años hasta los 65 (72 000 $ en total). Al 7 % de retorno, a los 65 tiene ~244 000 $.
+        El <strong>Ahorrador B</strong> espera hasta los 35 y luego invierte $200/mes durante
+        30 años hasta los 65 ($72,000 en total). Al 7% de retorno, a los 65 tiene $244,000.
       </li>
     </ul>
     <p>
@@ -210,14 +210,14 @@ const es: ReactNode = (
     <h2>Tasas de retorno realistas</h2>
     <p>Tasas de referencia habituales para invertir a largo plazo:</p>
     <ul>
-      <li><strong>Promedio histórico del S&amp;P 500:</strong> ~10 %/año (antes de inflación)</li>
-      <li><strong>Después de inflación (retorno «real»):</strong> ~7 %/año</li>
-      <li><strong>Bonos:</strong> ~4–5 %/año</li>
-      <li><strong>Cuentas de ahorro de alto rendimiento:</strong> ~4–5 % (varía con las tasas)</li>
-      <li><strong>Cartera conservadora (acciones + bonos):</strong> ~6–7 %/año</li>
+      <li><strong>Promedio histórico del S&amp;P 500:</strong> ~10%/año (antes de inflación)</li>
+      <li><strong>Después de inflación (retorno «real»):</strong> ~7%/año</li>
+      <li><strong>Bonos:</strong> ~4–5%/año</li>
+      <li><strong>Cuentas de ahorro de alto rendimiento:</strong> ~4–5% (varía con las tasas)</li>
+      <li><strong>Cartera conservadora (acciones + bonos):</strong> ~6–7%/año</li>
     </ul>
     <p>
-      Usa el 7 % para inversiones a largo plazo basadas en bolsa. El rendimiento pasado no
+      Usa el 7% para inversiones a largo plazo basadas en bolsa. El rendimiento pasado no
       garantiza resultados futuros y los retornos varían de un año a otro — pero la capitalización
       funciona igual sin importar eso.
     </p>
@@ -227,15 +227,15 @@ const es: ReactNode = (
       <li><strong>Empieza ahora.</strong> Cada año que esperas te cuesta exponencialmente más de lo que podrías haber invertido.</li>
       <li><strong>Invierte con constancia.</strong> Las aportaciones mensuales automatizan el crecimiento y suavizan la volatilidad del mercado.</li>
       <li><strong>Reinvierte los dividendos.</strong> No retires el efectivo — deja que capitalice.</li>
-      <li><strong>Mantén bajas las comisiones.</strong> Los fondos indexados con ratios de gastos del 0,03 % superan a los fondos gestionados activamente con comisiones del 1 %+ a largo plazo.</li>
+      <li><strong>Mantén bajas las comisiones.</strong> Los fondos indexados con ratios de gastos del 0,03% superan a los fondos gestionados activamente con comisiones del 1%+ a largo plazo.</li>
       <li><strong>Ten paciencia.</strong> Las mayores ganancias llegan en los últimos años. No vendas por pánico en las caídas.</li>
     </ol>
 
     <h2>La regla del 72</h2>
     <p>
       Un atajo mental rápido: divide 72 entre tu tasa de retorno anual para estimar cuántos años
-      tarda en duplicarse tu dinero. Al 7 %, se duplica en aproximadamente{' '}
-      <code>72 ÷ 7 ≈ 10,3 años</code>. Al 10 %, en 7,2 años. Esta calculadora te da el número
+      tarda en duplicarse tu dinero. Al 7%, se duplica en aproximadamente{' '}
+      <code>72 ÷ 7 ≈ 10,3 años</code>. Al 10%, en 7,2 años. Esta calculadora te da el número
       exacto.
     </p>
   </section>
@@ -274,48 +274,48 @@ const de: ReactNode = (
     <p>Zeit ist wichtiger als die investierte Summe. Stell dir zwei Sparer vor:</p>
     <ul>
       <li>
-        <strong>Sparer A</strong> investiert 200 $/Monat von 25 bis 35 (10 Jahre, insgesamt
-        24 000 $) und hört dann auf. Bei 7 % Rendite hat er mit 65 etwa ~281 000 $.
+        <strong>Sparer A</strong> investiert $200/Monat von 25 bis 35 (10 Jahre, insgesamt
+        $24,000) und hört dann auf. Bei 7% Rendite hat er mit 65 etwa $281,000.
       </li>
       <li>
-        <strong>Sparer B</strong> wartet bis 35 und investiert dann 200 $/Monat für 30 Jahre bis
-        65 (insgesamt 72 000 $). Bei 7 % Rendite hat er mit 65 etwa ~244 000 $.
+        <strong>Sparer B</strong> wartet bis 35 und investiert dann $200/Monat für 30 Jahre bis
+        65 (insgesamt $72,000). Bei 7% Rendite hat er mit 65 etwa $244,000.
       </li>
     </ul>
     <p>
-      Obwohl er nur ein Drittel investiert hat, endet Sparer A deutlich vorn — weil sein Geld
+      Obwohl er nur ein Drittel investiert hat, liegt Sparer A am Ende deutlich vorn — weil sein Geld
       30 Jahre länger Zinseszins sammeln konnte.
     </p>
 
     <h2>Realistische Renditen</h2>
     <p>Übliche Richtrenditen für langfristiges Investieren:</p>
     <ul>
-      <li><strong>S&amp;P 500 historischer Durchschnitt:</strong> ~10 %/Jahr (vor Inflation)</li>
-      <li><strong>Nach Inflation („reale" Rendite):</strong> ~7 %/Jahr</li>
-      <li><strong>Anleihen:</strong> ~4–5 %/Jahr</li>
-      <li><strong>Tagesgeld mit hoher Verzinsung:</strong> ~4–5 % (schwankt mit dem Leitzins)</li>
-      <li><strong>Konservativer Mix (Aktien + Anleihen):</strong> ~6–7 %/Jahr</li>
+      <li><strong>S&amp;P 500 historischer Durchschnitt:</strong> ~10%/Jahr (vor Inflation)</li>
+      <li><strong>Nach Inflation („reale" Rendite):</strong> ~7%/Jahr</li>
+      <li><strong>Anleihen:</strong> ~4–5%/Jahr</li>
+      <li><strong>Tagesgeld mit hoher Verzinsung:</strong> ~4–5% (schwankt mit den Zinsen)</li>
+      <li><strong>Konservativer Mix (Aktien + Anleihen):</strong> ~6–7%/Jahr</li>
     </ul>
     <p>
-      Nutze 7 % für aktienbasierte Langfristanlagen. Vergangene Rendite garantiert keine
+      Nutze 7% für aktienbasierte Langfristanlagen. Vergangene Rendite garantiert keine
       zukünftigen Ergebnisse, und die Erträge schwanken von Jahr zu Jahr — aber der Zinseszins
       wirkt immer gleich.
     </p>
 
     <h2>So maximierst du das Zinseszinzwachstum</h2>
     <ol>
-      <li><strong>Fang jetzt an.</strong> Jedes Jahr, das du wartest, kostet dich exponentiell mehr, als du hätte investieren können.</li>
+      <li><strong>Fang jetzt an.</strong> Jedes Jahr, das du wartest, kostet dich exponentiell mehr, als du hättest investieren können.</li>
       <li><strong>Investiere beständig.</strong> Monatliche Einzahlungen automatisieren das Wachstum und glätten die Marktschwankungen.</li>
       <li><strong>Dividenden reinvestieren.</strong> Nimm kein Bargeld — lass es Zinseszins sammeln.</li>
-      <li><strong>Halte Gebühren niedrig.</strong> Indexfonds mit 0,03 % Kostenquote schlagen aktiv gemanagte Fonds mit 1 %+ Gebühren langfristig.</li>
+      <li><strong>Halte Gebühren niedrig.</strong> Indexfonds mit 0,03% Kostenquote schlagen aktiv gemanagte Fonds mit 1%+ Gebühren langfristig.</li>
       <li><strong>Sei geduldig.</strong> Die größten Gewinne kommen in den späteren Jahren. Verkaufe nicht in Panik bei Rückgängen.</li>
     </ol>
 
     <h2>Die 72er-Regel</h2>
     <p>
       Eine schnelle Kopfrechnung: Teile 72 durch deine jährliche Rendite, um zu schätzen, wie
-      viele Jahre dein Geld braucht, um sich zu verdoppeln. Bei 7 % verdoppelt sich das Geld in
-      etwa <code>72 ÷ 7 ≈ 10,3 Jahren</code>. Bei 10 % in 7,2 Jahren. Dieser Rechner gibt dir die
+      viele Jahre dein Geld braucht, um sich zu verdoppeln. Bei 7% verdoppelt sich das Geld in
+      etwa <code>72 ÷ 7 ≈ 10,3 Jahren</code>. Bei 10% in 7,2 Jahren. Dieser Rechner gibt dir die
       genaue Zahl.
     </p>
   </section>

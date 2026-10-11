@@ -6,6 +6,10 @@ import type { ToolL10n } from '../tool-l10n'
 
 export const triangleCalculatorL10n: ToolL10n = {
   zh: {
+    formula: {
+      formula: 'A = ½ × b × h',
+      explain: '三角形面积。b = 底边长,h = 该底边对应的高。',
+    },
     ui: {
       'chartTitle': '图形预览',
       'in.a': '边 a',
@@ -14,6 +18,7 @@ export const triangleCalculatorL10n: ToolL10n = {
       'out.area': '面积',
       'out.perimeter': '周长',
       note: '📐 勾股定理:a² + b² = c²。仅适用于直角三角形。',
+      errNonNegative: '边长不能为负',
     },
     useCases: [
       '建筑:直角校验(3-4-5 法)',
@@ -26,6 +31,10 @@ export const triangleCalculatorL10n: ToolL10n = {
     ],
   },
   es: {
+    formula: {
+      formula: 'A = ½ × b × h',
+      explain: 'Área de un triángulo. b = longitud de la base, h = altura correspondiente a esa base.',
+    },
     ui: {
       'chartTitle': 'Vista previa',
       'in.a': 'Lado a',
@@ -34,6 +43,7 @@ export const triangleCalculatorL10n: ToolL10n = {
       'out.area': 'Área',
       'out.perimeter': 'Perímetro',
       note: '📐 Teorema de Pitágoras: a² + b² = c². Solo para triángulos rectángulos.',
+      errNonNegative: 'Los lados no pueden ser negativos',
     },
     useCases: [
       'construcción: escuadrar esquinas (método 3-4-5)',
@@ -46,6 +56,10 @@ export const triangleCalculatorL10n: ToolL10n = {
     ],
   },
   de: {
+    formula: {
+      formula: 'A = ½ × b × h',
+      explain: 'Dreiecksfläche. b = Länge der Basis, h = zugehörige Höhe.',
+    },
     ui: {
       'chartTitle': 'Formvorschau',
       'in.a': 'Seite a',
@@ -54,6 +68,7 @@ export const triangleCalculatorL10n: ToolL10n = {
       'out.area': 'Fläche',
       'out.perimeter': 'Umfang',
       note: '📐 Satz des Pythagoras: a² + b² = c². Nur für rechtwinklige Dreiecke.',
+      errNonNegative: 'Die Seitenlängen dürfen nicht negativ sein',
     },
     useCases: [
       'Bauwesen: Ecken rechtwinklig machen (3-4-5-Methode)',

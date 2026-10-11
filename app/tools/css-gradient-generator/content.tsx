@@ -68,21 +68,21 @@ const zh: ReactNode = (
     <div>
       <h2>linear、radial 与 mesh 的对比</h2>
       <p>
-        <strong>linear</strong> 沿某个角度扫过颜色（0° 朝上，90° 朝右），是按钮和主视觉横幅的主力。<strong>radial</strong> 从某个位置向外辐射 —— 圆形或椭圆形 —— 适合光晕和暗角。<strong>mesh</strong> 是现代落地页上常见的柔和、多色模糊效果；浏览器原生并不支持 mesh 渐变，因此本工具叠加了四层 <code>radial-gradient</code>，每层都在底色上向 <code>transparent</code> 渐隐。最终效果看起来像 mesh，但其实是纯粹的、被广泛支持的 CSS。
+        <strong>linear</strong> 沿某个角度扫过颜色（0° 朝上，90° 朝右），是按钮和首屏横幅的主力。<strong>radial</strong> 从某个位置向外辐射 —— 圆形或椭圆形 —— 适合光晕和暗角。<strong>mesh</strong> 是现代落地页上常见的柔和、多色模糊效果；浏览器原生并不支持 mesh 渐变，因此本工具叠加了四层 <code>radial-gradient</code>，每层都在底色上向 <code>transparent</code> 渐隐。最终效果看起来像 mesh，但其实是纯粹的、被广泛支持的 CSS。
       </p>
     </div>
 
     <div>
-      <h2>让色标看起来有意图</h2>
+      <h2>让色标显得有设计感</h2>
       <p>
-        两个色标只是过渡；三个或更多才是设计。让相邻色标保持在同一色系内以获得平滑过渡 —— 比如直接从蓝色跳到黄色，在 RGB 插值下会经过浑浊的灰色。<strong>Random palette</strong> 按钮只会挑选能干净融合的柔和成对或三色组合，是个不错的起点。把某个色标的位置向相邻色标移近以获得更硬的边缘：两个位于相同百分比的色标会形成一条没有过渡的清晰条纹。
+        两个色标只是过渡；三个或更多才是设计。让相邻色标保持在同一色系内以获得平滑过渡 —— 比如直接从蓝色跳到黄色，在 RGB 插值下会经过浑浊的灰色。<strong>随机调色板</strong>按钮只会挑选能自然融合的柔和双色或三色组合，是个不错的起点。把某个色标的位置向相邻色标移近，就能得到更硬的边缘：两个相同百分比的色标会形成一条毫无过渡的清晰条纹。
       </p>
     </div>
 
     <div>
       <h2>上线前的实用建议</h2>
       <p>
-        渐变的渲染成本很低，但巨大的动画渐变仍可能拖累低端 GPU —— 在全屏区块上尽量使用静态背景。对于 mesh 或 radial 光晕上的文字，请添加一层微妙的遮罩或检查对比度，因为亮度会随渐变位置变化。另外，当设计需要背景图加一层色调时，请记住你可以在同一个 <code>background</code> 简写里把 <code>linear-gradient</code> 叠加在 <code>url(...)</code> 之上，而不必去编辑图像本身。
+        渐变的渲染成本很低，但巨大的动画渐变仍可能拖累低端 GPU —— 在全屏区块上尽量使用静态背景。对于 mesh 或 radial 光晕上的文字，请加一层淡淡的遮罩，或检查对比度，因为亮度会随渐变位置变化。另外，当设计需要背景图加一层色调时，请记住你可以在同一个 <code>background</code> 简写属性里把 <code>linear-gradient</code> 叠加在 <code>url(...)</code> 之上，而不必去编辑图像本身。
       </p>
     </div>
   </section>
@@ -93,27 +93,27 @@ const es: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>¿Qué es esta herramienta?</h2>
     <p>
-      Escribir la sintaxis de gradientes a mano es tedioso — comas, ángulos, posiciones de color-stop y peculiaridades de cada navegador. Este generador te ofrece un lienzo en vivo para gradientes <strong>linear</strong>, <strong>radial</strong> y <strong>mesh</strong>, y luego emite CSS limpio y listo para copiar y pegar. Todo se renderiza en tu navegador con CSS puro: sin librerías, sin cuentas, sin subidas.
+      Escribir la sintaxis de gradientes a mano es tedioso — comas, ángulos, posiciones de las paradas de color y peculiaridades de cada navegador. Este generador te ofrece un lienzo en vivo para gradientes <strong>linear</strong>, <strong>radial</strong> y <strong>mesh</strong>, y luego emite CSS limpio y listo para copiar y pegar. Todo se renderiza en tu navegador con CSS puro: sin librerías, sin cuentas, sin subidas.
     </p>
 
     <div>
       <h2>linear vs radial vs mesh</h2>
       <p>
-        <strong>linear</strong> barre el color a lo largo de un ángulo (0° apunta hacia arriba, 90° hacia la derecha) y es el caballo de batalla para botones y cabeceras. <strong>radial</strong> irradia desde una posición — un círculo o elipse — y encaja con brillos y viñetas. <strong>mesh</strong> es el desenfoque suave y multicolor de moda en las landing pages modernas; los navegadores no tienen un gradiente mesh nativo, así que esta herramienta apila cuatro capas de <code>radial-gradient</code> que cada una se desvanece a <code>transparent</code> sobre un color base. El resultado parece un mesh, pero es CSS puro y ampliamente compatible.
+        <strong>linear</strong> barre el color a lo largo de un ángulo (0° apunta hacia arriba, 90° hacia la derecha) y es el caballo de batalla para botones y cabeceras. <strong>radial</strong> irradia desde una posición — un círculo o elipse — y encaja con brillos y viñetas. <strong>mesh</strong> es el desenfoque suave y multicolor de moda en las landing pages modernas; los navegadores no tienen un gradiente mesh nativo, así que esta herramienta apila cuatro capas de <code>radial-gradient</code>, cada una de las cuales se desvanece a <code>transparent</code> sobre un color base. El resultado parece un mesh, pero es CSS puro y ampliamente compatible.
       </p>
     </div>
 
     <div>
-      <h2>Color stops con aspecto intencional</h2>
+      <h2>Paradas de color elegidas con intención</h2>
       <p>
-        Dos stops son un degradado; tres o más son diseño. Mantén los stops adyacentes en la misma familia de tonos para transiciones suaves — saltar directamente de, por ejemplo, azul a amarillo pasa por un gris turbio en la interpolación RGB. El botón <strong>Random palette</strong> solo elige pares y tríos pastel que combinan limpiamente, un buen punto de partida. Mueve la posición de un stop hacia su vecino para un borde más duro: dos stops en el mismo porcentaje crean una franja nítida sin interpolación.
+        Dos paradas son un simple fundido; tres o más son diseño. Mantén las paradas adyacentes en la misma familia de tonos para transiciones suaves — saltar directamente de azul a amarillo, por ejemplo, atraviesa un gris turbio en la interpolación RGB. El botón <strong>Paleta aleatoria</strong> solo elige pares y tríos pastel que se funden limpiamente, un buen punto de partida. Mueve la posición de una parada hacia su vecina para lograr un borde más duro: dos paradas en el mismo porcentaje crean una franja nítida sin fundido.
       </p>
     </div>
 
     <div>
       <h2>Consejos prácticos para producción</h2>
       <p>
-        Los gradientes son baratos de renderizar, pero los gradientes animados gigantes pueden cargar las GPU modestas — prefiere fondos estáticos en secciones a pantalla completa. Para texto sobre un mesh o brillo radial, añade un sutil overlay o comprueba el contraste, ya que la luminancia varía a lo largo del gradiente. Y cuando un diseño pide una imagen de fondo más un tinte, recuerda que puedes apilar un <code>linear-gradient</code> sobre <code>url(...)</code> en el mismo atajo <code>background</code> en lugar de editar la propia imagen.
+        Los gradientes se renderizan sin apenas coste, pero los gradientes animados gigantes pueden penalizar a las GPU de gama baja — prefiere fondos estáticos en las secciones a pantalla completa. Para texto sobre un mesh o brillo radial, añade una capa superpuesta sutil o comprueba el contraste, ya que la luminancia varía a lo largo del gradiente. Y cuando un diseño pide una imagen de fondo más un tinte, recuerda que puedes apilar un <code>linear-gradient</code> sobre <code>url(...)</code> en la misma propiedad abreviada <code>background</code> en lugar de editar la propia imagen.
       </p>
     </div>
   </section>
@@ -137,14 +137,14 @@ const de: ReactNode = (
     <div>
       <h2>Color Stops, die absichtlich wirken</h2>
       <p>
-        Zwei Stops sind ein Verlauf; drei oder mehr sind Design. Halte benachbarte Stops in derselben Farbfamilie für saubere Übergänge — ein direkter Sprung von beispielsweise Blau nach Gelb läuft durch den trüben Graubereich der RGB-Interpolation. Der Button <strong>Random palette</strong> wählt nur Pastell-Paare und -Tripel, die sauber verschmelzen — ein guter Startpunkt. Verschiebe die Position eines Stops Richtung Nachbar für eine härtere Kante: zwei Stops auf demselben Prozentwert erzeugen einen scharfen Streifen ohne Verschmelzung.
+        Zwei Stops sind nur ein Übergang; drei oder mehr sind Design. Halte benachbarte Stops in derselben Farbfamilie für saubere Übergänge — ein direkter Sprung von beispielsweise Blau nach Gelb läuft durch den trüben Graubereich der RGB-Interpolation. Der Button <strong>Zufallspalette</strong> wählt nur Pastell-Paare und -Tripel, die sauber ineinander übergehen — ein guter Startpunkt. Verschiebe die Position eines Stops Richtung Nachbar für eine härtere Kante: zwei Stops auf demselben Prozentwert erzeugen einen scharfen Streifen ohne Übergang.
       </p>
     </div>
 
     <div>
       <h2>Praktische Tipps für den Live-Betrieb</h2>
       <p>
-        Gradienten sind billig zu rendern, aber riesige animierte Gradienten können schwache GPUs belasten — bevorzuge statische Hintergründe auf Full-Screen-Abschnitten. Für Text über einem Mesh- oder Radial-Glow füge ein dezentes Overlay hinzu oder prüfe den Kontrast, da die Leuchtkraft über den Gradienten variiert. Und wenn ein Design ein Hintergrundbild plus Tönung verlangt, denke daran, dass du einen <code>linear-gradient</code> über <code>url(...)</code> in derselben <code>background</code>-Kurzschreibweise stapeln kannst, statt das Bild selbst zu bearbeiten.
+        Gradienten sind günstig zu rendern, aber riesige animierte Gradienten können schwache GPUs belasten — bevorzuge statische Hintergründe auf Full-Screen-Abschnitten. Für Text über einem Mesh- oder Radial-Glow füge ein dezentes Overlay hinzu oder prüfe den Kontrast, da die Leuchtkraft über den Gradienten variiert. Und wenn ein Design ein Hintergrundbild plus Tönung verlangt, denke daran, dass du einen <code>linear-gradient</code> über <code>url(...)</code> in derselben <code>background</code>-Kurzschreibweise stapeln kannst, statt das Bild selbst zu bearbeiten.
       </p>
     </div>
   </section>

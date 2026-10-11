@@ -86,7 +86,7 @@ export const combinationCalculatorL10n: ToolL10n = {
       'Qualitätskontrolle und Stichproben',
     ],
     faqs: [
-      { q: 'Kombination oder Permutation?', a: 'Bei Kombinationen spielt die Reihenfolge keine Rolle (ein Salat aus {Salat, Tomate} ist gleich {Tomate, Salat}). Bei Permutationen ist die Reihenfolge wichtig (das Passwort „abc" unterscheidet sich von „cba"). Für geordnete Anordnungen nutze den Permutationsrechner.' },
+      { q: 'Kombination oder Permutation?', a: 'Bei Kombinationen spielt die Reihenfolge keine Rolle (ein Salat aus {Kopfsalat, Tomate} ist gleich {Tomate, Kopfsalat}). Bei Permutationen ist die Reihenfolge wichtig (das Passwort „abc“ unterscheidet sich von „cba“). Für geordnete Anordnungen nutze den Permutationsrechner.' },
     ],
   },
 }

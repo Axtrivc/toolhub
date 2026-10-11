@@ -34,7 +34,7 @@ const zh: ReactNode = (
     <h2>真实油耗去哪找</h2>
     <p>行车电脑显示的是真实路况平均值——别信宣传册上的实验室数字。市区开空调行车可能比高速巡航多耗 30%。</p>
     <h2>通勤积累得很快</h2>
-    <p>单程 30 km 的通勤,按 7.5 L/100km 和 $1.65/L 算,一年要烧掉约 $1,900。在接受城市另一头的工作之前,先乘一乘这笔账。</p>
+    <p>单程 30 km 的通勤,按 7.5 L/100km 和 $1.65/L 算,一年要烧掉约 $1,900。在接受城市另一头的工作之前,先算一算这笔账。</p>
     <h2>公平分摊</h2>
     <p>人均分摊只除油费。如果朋友还要分摊过路费和车辆损耗,惯例是在纯油费之上再加 10-20%。</p>
   </section>
@@ -44,7 +44,7 @@ const zh: ReactNode = (
 const es: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>La fórmula del coste del viaje</h2>
-    <p>El dinero en combustible = distancia ÷ (100 ÷ consumo por 100 km) × precio. La calculadora se encarga del dobleo por ida y vuelta y del reparto entre pasajeros que complican los viajes reales.</p>
+    <p>El dinero en combustible = distancia ÷ (100 ÷ consumo por 100 km) × precio. La calculadora se encarga de duplicar la distancia en la ida y vuelta y de repartir entre pasajeros: dos cosas que complican los viajes reales.</p>
     <h2>Dónde encontrar tu consumo real</h2>
     <p>El ordenador de a bordo muestra una media del mundo real — fíate de ella antes que de la cifra del catálogo, que sale de laboratorio. Conducir en ciudad con aire acondicionado puede costar un 30 % más que en carretera.</p>
     <h2>El trayecto diario suma rápido</h2>
@@ -58,7 +58,7 @@ const es: ReactNode = (
 const de: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>Die Formel für die Fahrtkosten</h2>
-    <p>Spritgeld = Strecke ÷ (100 ÷ Verbrauch pro 100 km) × Preis. Der Rechner übernimmt die Verdopplung für Hin- und Rückfahrt und das Aufteilen auf Mitfahrer, die echte Fahrten kompliziert machen.</p>
+    <p>Spritgeld = Strecke ÷ (100 ÷ Verbrauch pro 100 km) × Preis. Der Rechner übernimmt die Verdopplung für Hin- und Rückfahrt und das Aufteilen auf Mitfahrer — beides macht echte Fahrten kompliziert.</p>
     <h2>Wo du deinen Verbrauch findest</h2>
     <p>Der Bordcomputer zeigt einen Alltagsmittelwert — vertraue ihm mehr als der Prospektangabe, die aus dem Labor stammt. Stadtverkehr mit Klimaanlage kann 30 % über der Autobahnfahrt liegen.</p>
     <h2>Pendeln summiert sich schnell</h2>

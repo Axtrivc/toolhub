@@ -8,7 +8,7 @@ export const inflationCalculatorL10n: ToolL10n = {
   zh: {
     formula: {
       formula: 'Future value = present × (1 + i)^n',
-      explain: '购买力侵蚀。i = 年通胀率,n = 年数。同样的钱在价格复利上涨后能买到的东西按比例变少。',
+      explain: '购买力侵蚀。i = 年通胀率,n = 年数。价格复利上涨时,同样的钱能买到的东西按比例减少。',
     },
     useCases: ['看通胀如何蚕食购买力', '把今天的钱换算成未来的等值金额', '按通胀率算钱缩水多少', '为长期目标估算合理回报率'],
     faqs: [
@@ -24,18 +24,18 @@ export const inflationCalculatorL10n: ToolL10n = {
       'in.amount': '金额', 'in.rate': '年通胀率', 'in.years': '年数',
       'out.future': '未来等值成本', 'out.lost': '损失的购买力',
       note: '💸 今天 $1,000 在 3% 通胀下逐年贬值。10 年后你需要 $1,344 才能买到现在 $1,000 能买到的东西。',
-          'errNonNegative': "金额、通胀率与年数不能为负",
-},
+      errNonNegative: '金额、通胀率与年数不能为负',
+    },
   },
   es: {
     formula: {
       formula: 'Future value = present × (1 + i)^n',
-      explain: 'Erosión del poder adquisitivo. i = tasa de inflación anual, n = años. El mismo dinero compra proporcionalmente menos a medida que los precios suben compuestamente.',
+      explain: 'Erosión del poder adquisitivo. i = tasa de inflación anual, n = años. El mismo dinero compra proporcionalmente menos a medida que los precios suben de forma compuesta.',
     },
     useCases: ['ver cómo la inflación erosiona el poder adquisitivo', 'convertir dinero de hoy al equivalente futuro', 'calcular cuánto se devalúa el dinero por la inflación', 'estimar la rentabilidad necesaria para objetivos a largo plazo'],
     faqs: [
       { q: '¿Cuál es una tasa de inflación normal?', a: 'Los bancos centrales fijan un objetivo del 2 % aprox. como inflación «saludable». EE. UU. promedió un 3 % en el último siglo. Tanto la alta inflación (10 %+) como la deflación (negativa) causan problemas económicos.' },
-      { q: '¿Qué tasa uso para España o Latinoamérica?', a: 'Para la zona euro toma el IPC armonizado (objetivo del BCE: 2 %); España ha oscilado entre el 2 % y el 4 % en años recientes, y varios países latinoamericanos han visto picos del 7-10 %. Usa la media a largo plazo de tu país, no el último dato mensual.' },
+      { q: '¿Qué tasa uso para España o Latinoamérica?', a: 'Para la zona euro toma el IPC armonizado (objetivo del BCE: 2 %); España ha rondado el 2-4 % en años recientes (con el pico de 2022 por encima del 8 %), y varios países latinoamericanos han visto picos del 7-10 %. Usa la media a largo plazo de tu país, no el último dato mensual.' },
       { q: '¿Cuánto pierde mi dinero en 10 años con un 3 %?', a: 'Dentro de 10 años necesitarás 13.439 € para comprar lo que hoy cuesta 10.000 €: la inflación se aplica en compuesto y el poder adquisitivo cae cerca de un 26 %; a 20 años quedan unos 5.540 €. Cuanto más largo el plazo, más agresiva la erosión.' },
       { q: '¿La deflación no es buena noticia?', a: 'A corto plazo parece un alivio, pero si los precios bajan de forma sostenida la gente pospone compras, las empresas recortan plantillas y las deudas pesan más en términos reales. La deflación japonesa tras 1990 es el caso de manual — por eso el BCE apunta al 2 % y no al 0 %.' },
     ],
@@ -46,8 +46,8 @@ export const inflationCalculatorL10n: ToolL10n = {
       'in.amount': 'Importe', 'in.rate': 'Inflación anual', 'in.years': 'Años',
       'out.future': 'Coste equivalente en el futuro', 'out.lost': 'Poder adquisitivo perdido',
       note: '💸 $1,000 hoy con una inflación del 3 % valen menos cada año. En 10 años necesitarías $1,344 para comprar lo que $1,000 compran ahora.',
-          'errNonNegative': "El importe, la inflación y los años no pueden ser negativos",
-},
+      errNonNegative: 'El importe, la inflación y los años no pueden ser negativos',
+    },
   },
   de: {
     formula: {
@@ -68,7 +68,7 @@ export const inflationCalculatorL10n: ToolL10n = {
       'in.amount': 'Betrag', 'in.rate': 'Jährliche Inflation', 'in.years': 'Jahre',
       'out.future': 'Entsprechende Zukunftskosten', 'out.lost': 'Verlorene Kaufkraft',
       note: '💸 $1,000 heute verlieren bei 3 % Inflation jährlich an Wert. In 10 Jahren brauchst du $1,344 für das, was $1,000 jetzt kaufen.',
-          'errNonNegative': "Betrag, Inflation und Jahre dürfen nicht negativ sein",
-},
+      errNonNegative: 'Betrag, Inflation und Jahre dürfen nicht negativ sein',
+    },
   },
 }

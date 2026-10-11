@@ -250,14 +250,14 @@ const zh: ReactNode = (
     <div>
       <h2>利率 vs. APR</h2>
       <p>
-        <strong>利率</strong>是你为贷款本身支付的利息。<strong>APR</strong>(年化百分率)则把利率加上某些费用(手续费、贴现点、部分过户费)合并成一个年化比率。APR 永远等于或高于利率,是比较不同贷款机构报价时更好的参考。6.5% 的利率如果费用很高,APR 可能达到 6.9%——实际上比 6.7% 利率但低费用(APR 6.8%)的贷款更贵。
+        <strong>利率</strong>是你为贷款本身支付的利息。<strong>APR</strong>(年化百分率)则把利率加上某些费用(贷款手续费、贴现点、部分交割费用)合并成一个年化比率。APR 永远等于或高于利率,是比较不同贷款机构报价时更好的参考。6.5% 的利率如果费用很高,APR 可能达到 6.9%——实际上比 6.7% 利率但低费用(APR 6.8%)的贷款更贵。
       </p>
     </div>
 
     <div>
       <h2>什么时候该再融资</h2>
       <p>
-        再融资是用一笔新房贷替换你现有的房贷,通常是为了拿到更低的利率。以前的经验法则是:利率比你低 1% 以上就该再融资,但真正的判断标准是<strong>盈亏平衡点</strong>:把过户费(通常为贷款额的 2%–5%)除以每月省下的金额。如果你打算在房子里住得比这个时间更长,再融资就划算。也可以为了取消 PMI、缩短期限或从浮动利率转为固定利率而再融资——不只是为了降低月供。
+        再融资是用一笔新房贷替换你现有的房贷,通常是为了拿到更低的利率。以前的经验法则是:利率比你低 1% 以上就该再融资,但真正的判断标准是<strong>盈亏平衡点</strong>:把交割费用(通常为贷款额的 2%–5%)除以每月省下的金额。如果你打算在房子里住得比这个时间更长,再融资就划算。也可以为了取消 PMI、缩短期限或从浮动利率转为固定利率而再融资——不只是为了降低月供。
       </p>
     </div>
   </section>
@@ -277,7 +277,7 @@ const es: ReactNode = (
       intereses a lo largo del préstamo y qué te ahorra un pago extra mensual.
     </p>
     <p>
-      La cifra del titular es solo el principio. La mayoría se fija en la cuota mensual, pero
+      La cifra más destacada es solo el principio. La mayoría se fija en la cuota mensual, pero
       el interés total pagado en 30 años a menudo iguala — o supera — el precio de la propia
       vivienda. Ver ambas cifras una al lado de la otra es lo más útil que hace esta
       calculadora.
@@ -428,7 +428,7 @@ const de: ReactNode = (
       Laufzeit zahlst und was eine zusätzliche Monatsrate spart.
     </p>
     <p>
-      Die Headline-Zahl ist nur der Anfang. Die meisten schauen auf die Monatsrate, aber die
+      Die große Zahl ist nur der Anfang. Die meisten schauen auf die Monatsrate, aber die
       gesamten Zinsen über 30 Jahre erreichen oft — oder übersteigen — den Hauspreis selbst.
       Beide Zahlen nebeneinander zu sehen ist das Nützlichste, was dieser Rechner tut.
     </p>
@@ -471,7 +471,7 @@ const de: ReactNode = (
         </li>
         <li>
           <strong>PMI (bei unter 20 % Anzahlung):</strong> private Hypothekenversicherung,
-          typischerweise 50–300 $/Monat, erforderlich bis du 20 % Eigenanteil erreichst. Dieser
+          typischerweise 50–300 $/Monat, erforderlich bis du 20 % Eigenkapital erreichst. Dieser
           Rechner fügt sie automatisch hinzu, wenn die Anzahlung unter 20 % liegt; ab 20 % sind
           es 0 $.
         </li>
@@ -497,7 +497,7 @@ const de: ReactNode = (
         </li>
         <li>
           <strong>Unter 20 % Anzahlung</strong> → die meisten konventionellen Kreditgeber
-          verlangen PMI, das 50–300 $/Monat kostet, bis du 20 % Eigenanteil erreichst.
+          verlangen PMI, das 50–300 $/Monat kostet, bis du 20 % Eigenkapital erreichst.
         </li>
         <li>
           <strong>20 % und mehr Anzahlung</strong> → kein PMI, Zugang zu besseren Zinsen,
@@ -514,9 +514,9 @@ const de: ReactNode = (
       <h2>Laufzeit-Kompromisse</h2>
       <p>
         Eine 30-jährige Hypothek hat niedrigere Monatsraten, kostet aber dramatisch mehr Zins.
-        Eine 15-jährige hat höhere Raten, spart aber zigtausend.
+        Eine 15-jährige hat höhere Raten, spart aber Zehntausende.
       </p>
-      <p>Bei einem <strong>400 000 $-Kredit und 6,8 %</strong>:</p>
+      <p>Bei einem <strong>400 000 $-Kredit mit 6,8 %</strong>:</p>
       <ul>
         <li>
           <strong>30 Jahre:</strong> ~2 608 $/Monat, ~540 000 $ Zinsen gesamt
@@ -527,7 +527,7 @@ const de: ReactNode = (
       </ul>
       <p>
         Die 15 Jahre sparen etwa <strong>300 000 $ Zinsen</strong> für ~940 $ mehr pro Monat.
-        Ein beliebter Mittelweg: Wähl 30 Jahre für Flexibilität und tilge dann zusätzlich, wann
+        Ein beliebter Mittelweg: Wähle 30 Jahre für Flexibilität und tilge dann zusätzlich, wann
         immer du kannst. Schon eine zusätzliche Rate pro Jahr kürzt die Laufzeit um Jahre — mit
         dem Feld für die zusätzliche Monatsrate oben siehst du das exakte Tilgungsende, die
         Zinsersparnis und die gekürzten Monate für deine eigenen Zahlen.
@@ -539,8 +539,8 @@ const de: ReactNode = (
       <p>
         Der <strong>Zinssatz</strong> ist, was du für den Kredit selbst zahlst. Der{' '}
         <strong>APR</strong> (effektiver Jahreszins) umfasst den Zins plus bestimmte Gebühren
-        (Bearbeitungsgebühr, Disagiopunkte, einige Abschlusskosten) als jährlicher Satz. Der APR
-        ist immer gleich oder höher als der Zinssatz und ist die bessere Zahl beim Vergleich von
+        (Bearbeitungsgebühr, Disagio, einen Teil der Abschlusskosten), ausgedrückt als Jahreszins.
+        Der APR ist immer gleich oder höher als der Zinssatz und ist die bessere Zahl beim Vergleich von
         Angeboten verschiedener Kreditgeber. Ein 6,5 %-Zins mit hohen Gebühren kann einen APR
         von 6,9 % ergeben — tatsächlich ein teurerer Kredit als ein 6,7 %-Zins mit niedrigen
         Gebühren (APR 6,8 %).
@@ -551,10 +551,10 @@ const de: ReactNode = (
       <h2>Wann sich Umschuldung lohnt</h2>
       <p>
         Eine Umschuldung ersetzt deine aktuelle Hypothek durch eine neue, meist um einen
-        niedrigeren Zins zu bekommen. Die alte Faustregel lautete, umschulden wenn die Zinsen
-        mehr als 1 % unter deinem liegen, aber der echte Test ist die{' '}
+        niedrigeren Zins zu bekommen. Die alte Faustregel lautete, bei Zinsen, die mehr als 1 %
+        unter deinem liegen, umzuschulden; der echte Test ist aber die{' '}
         <strong>Break-even-Schwelle</strong>: Teile die Abschlusskosten (üblicherweise 2 %–5 %
-        des Kredits) durch die monatliche Ersparnis. Wenn du länger in der Wohnung bleibst als
+        des Kredits) durch die monatliche Ersparnis. Wenn du länger in der Immobilie bleibst als
         das, lohnt sich die Umschuldung. Erwäge auch eine Umschuldung, um PMI fallen zu lassen,
         die Laufzeit zu verkürzen oder von einem variablen zu einem festen Zins zu wechseln —
         nicht nur um die Rate zu senken.

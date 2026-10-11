@@ -738,8 +738,8 @@ export const esTools: Record<string, { name: string; shortIntro: string }> = {
     shortIntro: 'Calcula la diferencia de edad entre dos personas.',
   },
   'days-countdown-calculator': {
-    name: 'Calculadora de cuenta regresiva',
-    shortIntro: 'Cuenta regresiva en vivo a cualquier fecha, o días entre dos fechas.',
+    name: 'Calculadora de cuenta atrás',
+    shortIntro: 'Cuenta atrás en vivo a cualquier fecha, o días entre dos fechas.',
   },
   'reading-speaking-time': {
     name: 'Calculadora de tiempo de lectura',

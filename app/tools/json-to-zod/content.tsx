@@ -12,7 +12,7 @@ export function JsonToZodContent() {
       <h2>What to tighten by hand</h2>
       <p>JSON samples cannot reveal optionality — a key present in your example becomes required. Add .optional() where APIs omit fields; keys sampled as null emit z.null(), so widen those by hand if real values can appear.</p>
       <h2>Using with OpenAI/Anthropic</h2>
-      <p>Pass zodResponseFormat(schema) (openai sdk) or feed the JSON Schema equivalent via structured outputs. Validation failures then surface as parse errors instead of silent shape bugs.</p>
+      <p>Pass zodResponseFormat(schema) (OpenAI SDK) or feed the JSON Schema equivalent via structured outputs. Validation failures then surface as parse errors instead of silent shape bugs.</p>
     </section>
   )
 }

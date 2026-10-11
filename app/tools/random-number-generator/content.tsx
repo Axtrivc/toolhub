@@ -106,7 +106,7 @@ const es: ReactNode = (
       <p>
         La mayoría del software (incluida esta herramienta) usa números <strong>pseudoaleatorios</strong>,
         generados por algoritmos matemáticos. Son suficientes para juegos, simulaciones y uso
-        cotidiano, pero siguen siendo algorítmicos, no azar físico. Para sorteos de lotería
+        cotidiano, pero siguen siendo algorítmicos, no fruto del azar físico. Para sorteos de lotería
         certificados y juegos de azar oficiales se exigen números «verdaderamente» aleatorios de
         fuentes físicas (desintegración radiactiva, ruido atmosférico) — consulta Random.org para eso.
       </p>
@@ -132,7 +132,7 @@ const de: ReactNode = (
     <p>
       Dieses Werkzeug erzeugt Zufallszahlen in einem beliebigen Bereich, den du festlegst. Nutze
       es für Lotteriezahlen, die Auswahl von Gewinnern, das zufällige Auswählen eines Schülers,
-      Simulationen oder wann immer du eine unvoreingenommene Zufallsauswahl brauchst.
+      Simulationen oder wann immer du eine unparteiische Zufallsauswahl brauchst.
     </p>
     <div>
       <h2>Wie es funktioniert</h2>
@@ -149,8 +149,8 @@ const de: ReactNode = (
       <p>
         Die meiste Software (auch dieses Werkzeug) verwendet <strong>pseudozufällige</strong>
         Zahlen, die von mathematischen Algorithmen erzeugt werden. Sie reichen für Spiele,
-        Simulationen und den Alltagsgebrauch aus, bleiben aber algorithmisch statt physikalisch.
-        Für zertifizierte Lottoziehungen und offizielles Glücksspiel sind „echte“ Zufallszahlen
+        Simulationen und den Alltagsgebrauch aus, bleiben aber algorithmisch statt physikalisch
+        zufällig. Für zertifizierte Lottoziehungen und offizielles Glücksspiel sind „echte“ Zufallszahlen
         aus physikalischen Quellen (radioaktiver Zerfall, atmosphärisches Rauschen) vorgeschrieben
         — siehe dazu Random.org.
       </p>
@@ -158,9 +158,9 @@ const de: ReactNode = (
     <div>
       <h2>Häufige Einsatzzwecke</h2>
       <ul>
-        <li>Gerecht einen Gewinn für Wettbewerb oder Verlosung ziehen</li>
+        <li>Gewinner von Wettbewerben oder Verlosungen fair auslosen</li>
         <li>Lotteriezahlen-Kombinationen erzeugen</li>
-        <li>Schüler- oder Teamauswahl randomisieren</li>
+        <li>Schüler oder Teams zufällig auswählen</li>
         <li>Monte-Carlo-Simulationen durchführen</li>
         <li>Code mit zufälligen Eingaben testen</li>
         <li>Virtuelle Würfel werfen (Min. 1, Max. 6)</li>

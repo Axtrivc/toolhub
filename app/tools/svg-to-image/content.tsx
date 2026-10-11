@@ -48,12 +48,12 @@ const zh: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>这是什么工具?</h2>
     <p>
-      <strong>SVG</strong>(可缩放矢量图形)用数学方式描述图形,因此无论放到多大都保持清晰,非常适合 Logo 和图标。<strong>PNG</strong> 和 <strong>WebP</strong> 是由像素构成的位图格式,任何浏览器、图片查看器和社交平台都无需 SVG 渲染器即可显示。本转换器借助 HTML5 canvas,完全在你的浏览器内将 SVG 光栅化为 PNG 或 WebP。
+      <strong>SVG</strong>(可缩放矢量图形)用数学方式描述图形,因此无论放大到多大都保持清晰,非常适合 Logo 和图标。<strong>PNG</strong> 和 <strong>WebP</strong> 是由像素构成的位图格式,任何浏览器、图片查看器和社交平台都无需 SVG 渲染器即可显示。本转换器借助 HTML5 canvas,完全在你的浏览器内将 SVG 光栅化为 PNG 或 WebP。
     </p>
     <div>
       <h2>何时把 SVG 转换为 PNG/WebP</h2>
       <ul>
-        <li>你需要一张缩略图、favicon 或 Open Graph 图片,且要求格式被通用支持。</li>
+        <li>你需要一张缩略图、favicon 或 Open Graph 图片,且所用格式需得到普遍支持。</li>
         <li>某些平台(部分邮件客户端、老旧 CMS)无法渲染内联 SVG。</li>
         <li>你想要固定尺寸的位图导出,用于打印或 2x/3x 倍率的设计稿。</li>
       </ul>
@@ -61,14 +61,14 @@ const zh: ReactNode = (
     <div>
       <h2>获得清晰的结果</h2>
       <p>
-        由于位图存储固定数量的像素,在高 DPI 屏幕上应以更高倍率进行转换。2x 选项会把两个维度都翻倍;3x 则变为三倍。你的 SVG 应声明 <code>width</code>/{' '}
+        由于位图存储固定数量的像素,在高 DPI 屏幕上应以更高倍率进行转换。2x 选项会把宽和高都翻倍;3x 则变为三倍。你的 SVG 应声明 <code>width</code>/{' '}
         <code>height</code> 或 <code>viewBox</code>,以便转换器获知目标尺寸 —— 没有尺寸信息的 SVG 会回退到默认大小。
       </p>
     </div>
     <div>
       <h2>自包含的 SVG 转换效果最好</h2>
       <p>
-        如果你的 SVG 引用了外部图片(<code>&lt;image href=&quot;https://...&quot;&gt;</code>)或网络字体,浏览器的安全策略可能会阻止 canvas 导出(即「受污染的 canvas」)。把图片内联为 data URI、并把文字转换为路径,转换最可靠。你粘贴或上传的所有内容都只保留在你的设备上。
+        如果你的 SVG 引用了外部图片(<code>&lt;image href=&quot;https://...&quot;&gt;</code>)或网络字体,浏览器的安全策略可能会阻止 canvas 导出(即「受污染的 canvas」)。把图片内联为 data URI,并把文字转换为路径,转换效果最可靠。你粘贴或上传的所有内容都只保留在你的设备上。
       </p>
     </div>
   </section>
@@ -79,14 +79,14 @@ const es: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>¿Qué es esta herramienta?</h2>
     <p>
-      <strong>SVG</strong> (gráficos vectoriales escalables) describe formas con matemáticas, por lo que se mantiene nítido a cualquier tamaño — perfecto para logos e iconos. <strong>PNG</strong> y <strong>WebP</strong> son formatos rasterizados compuestos por píxeles, que cualquier navegador, visor de imágenes y plataforma social puede mostrar sin un renderizador SVG. Este conversor rasteriza tu SVG a PNG o WebP usando un canvas HTML5, completamente en tu navegador.
+      <strong>SVG</strong> (gráficos vectoriales escalables) describe formas mediante matemáticas, por lo que se mantiene nítido a cualquier tamaño — perfecto para logos e iconos. <strong>PNG</strong> y <strong>WebP</strong> son formatos rasterizados compuestos por píxeles, que cualquier navegador, visor de imágenes y plataforma social puede mostrar sin un renderizador SVG. Este conversor rasteriza tu SVG a PNG o WebP usando un canvas HTML5, completamente en tu navegador.
     </p>
     <div>
       <h2>Cuándo convertir SVG a PNG/WebP</h2>
       <ul>
         <li>Necesitas una miniatura, favicon u imagen Open Graph en un formato universalmente compatible.</li>
         <li>Una plataforma (algunos clientes de correo, CMS antiguos) no renderiza SVG en línea.</li>
-        <li>Quieres una exportación rasterizada de tamaño fijo para impresión o un mockup de diseño a densidad 2x/3x.</li>
+        <li>Quieres una exportación rasterizada de tamaño fijo para impresión o una maqueta de diseño a densidad 2x/3x.</li>
       </ul>
     </div>
     <div>
@@ -123,7 +123,7 @@ const de: ReactNode = (
     <div>
       <h2>So erhältst du ein scharfes Ergebnis</h2>
       <p>
-        Da Rasterbilder eine feste Anzahl Pixel speichern, konvertiere für High-DPI-Bildschirme mit einer höheren Skalierung. Die Option 2x verdoppelt beide Abmessungen, 3x verdreifacht sie. Dein SVG sollte <code>width</code>/{' '}
+        Da Rasterbilder eine feste Anzahl von Pixeln speichern, konvertiere für High-DPI-Bildschirme mit einer höheren Skalierung. Die Option 2x verdoppelt beide Abmessungen, 3x verdreifacht sie. Dein SVG sollte <code>width</code>/{' '}
         <code>height</code> oder ein <code>viewBox</code> deklarieren, damit der Konverter die Zielabmessungen kennt — ein SVG ohne Abmessungen fällt auf eine Standardgröße zurück.
       </p>
     </div>

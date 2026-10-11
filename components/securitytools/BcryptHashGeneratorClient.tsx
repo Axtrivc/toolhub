@@ -36,7 +36,7 @@ function isValidSaltHex(s: string): boolean {
 /** hex 字符串 → 字节(校验格式,非法抛错) */
 function hexToBytes(hex: string): Uint8Array {
   if (hex.length === 0 || hex.length % 2 !== 0 || !/^[0-9a-fA-F]+$/.test(hex)) {
-    throw new Error('Salt must be a non-empty, even-length hex string (0-9, a-f).')
+    throw new Error('Salt must be a non-empty, even-length hex string (0-9, a-f/A-F).')
   }
   const out = new Uint8Array(hex.length / 2)
   for (let i = 0; i < out.length; i++) out[i] = parseInt(hex.slice(i * 2, i * 2 + 2), 16)
@@ -108,7 +108,7 @@ export function BcryptHashGeneratorClient() {
         out = hashSync(password, genSaltSync(cost))
       } else {
         if (!isValidSaltHex(saltHex)) {
-          throw new Error(L('errorInvalidSalt', 'The salt must be a non-empty, even-length hex string (0-9, a-f).'))
+          throw new Error(L('errorInvalidSalt', 'The salt must be a non-empty, even-length hex string (0-9, a-f/A-F).'))
         }
         out = await saltedShaHash(algorithm === 'sha256' ? 'SHA-256' : 'SHA-512', saltHex, password)
       }
@@ -141,7 +141,7 @@ export function BcryptHashGeneratorClient() {
       } else if (h.startsWith('sha256$') || h.startsWith('sha512$')) {
         const [tag, salt] = h.split('$')
         if (!isValidSaltHex(salt)) {
-          throw new Error(L('errorInvalidSalt', 'The salt must be a non-empty, even-length hex string (0-9, a-f).'))
+          throw new Error(L('errorInvalidSalt', 'The salt must be a non-empty, even-length hex string (0-9, a-f/A-F).'))
         }
         const recomputed = await saltedShaHash(tag === 'sha256' ? 'SHA-256' : 'SHA-512', salt, verifyPassword)
         setVerifyResult(recomputed === h)
@@ -211,7 +211,7 @@ export function BcryptHashGeneratorClient() {
           />
           <div className="mt-1 flex justify-between text-xs" style={{ color: 'rgb(var(--text-faint))' }}>
             <span>{L('costFastWeak', '4 (fast, weak)')}</span>
-            <span>{L('costTypical', '10–12 typical')}</span>
+            <span>{L('costTypical', '10–12 (typical)')}</span>
             <span>{L('costSlowStrong', '15 (slow, strong)')}</span>
           </div>
           {/* E1:用户不知道拉到 cost 12/15 要等多久,给出数量级预估(比"能花几秒"更具体) */}

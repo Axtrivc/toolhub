@@ -12,7 +12,7 @@ const en: ReactNode = (
     <div>
       <h2>Why Primes Matter</h2>
       <ul>
-        <li><strong>Cryptography:</strong> RSA encryption relies on the difficulty of factoring large primes</li>
+        <li><strong>Cryptography:</strong> RSA encryption relies on the difficulty of factoring the product of two large primes</li>
         <li><strong>Hash tables:</strong> Prime-sized buckets reduce collisions</li>
         <li><strong>Number theory:</strong> The Fundamental Theorem of Arithmetic</li>
         <li><strong>Random number generators:</strong> Often use primes</li>
@@ -38,7 +38,7 @@ const zh: ReactNode = (
     <div>
       <h2>质数为何重要</h2>
       <ul>
-        <li><strong>密码学:</strong> RSA 加密依赖于大质数分解的困难性</li>
+        <li><strong>密码学:</strong> RSA 加密依赖于分解两个大质数之积的困难性</li>
         <li><strong>哈希表:</strong> 质数大小的桶能减少冲突</li>
         <li><strong>数论:</strong> 算术基本定理</li>
         <li><strong>随机数生成器:</strong> 常使用质数</li>
@@ -64,7 +64,7 @@ const es: ReactNode = (
     <div>
       <h2>Por qué importan los primos</h2>
       <ul>
-        <li><strong>Criptografía:</strong> El cifrado RSA se basa en la dificultad de factorizar primos grandes</li>
+        <li><strong>Criptografía:</strong> El cifrado RSA se basa en la dificultad de factorizar el producto de dos primos grandes</li>
         <li><strong>Tablas hash:</strong> Los cubos de tamaño primo reducen las colisiones</li>
         <li><strong>Teoría de números:</strong> El Teorema Fundamental de la Aritmética</li>
         <li><strong>Generadores de números aleatorios:</strong> A menudo usan primos</li>
@@ -90,7 +90,7 @@ const de: ReactNode = (
     <div>
       <h2>Warum Primzahlen wichtig sind</h2>
       <ul>
-        <li><strong>Kryptografie:</strong> Die RSA-Verschlüsselung beruht auf der Schwierigkeit, große Primzahlen zu faktorisieren</li>
+        <li><strong>Kryptografie:</strong> Die RSA-Verschlüsselung beruht auf der Schwierigkeit, das Produkt zweier großer Primzahlen zu faktorisieren</li>
         <li><strong>Hashtabellen:</strong> Buckets in Primzahlgröße verringern Kollisionen</li>
         <li><strong>Zahlentheorie:</strong> Der Fundamentalsatz der Arithmetik</li>
         <li><strong>Zufallszahlengeneratoren:</strong> Nutzen oft Primzahlen</li>

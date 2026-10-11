@@ -14,7 +14,7 @@ const en: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>The Freelancer Pricing Fallacy</h2>
     <p>
-      The most common mistake new freelancers, consultants, and contractors make is dividing an employee salary by
+      The most common mistake new freelancers, consultants, and contractors make is dividing an employee&apos;s salary by
       2,080 hours (40 hours × 52 weeks). An employee earning $100,000 thinks they can charge $48/hour as a contractor.
       In reality, they will take home barely half of that after factoring in self-employment taxes, unpaid vacation,
       equipment, health insurance, and non-billable client acquisition time.
@@ -91,7 +91,7 @@ const es: ReactNode = (
     <h2>La falacia del precio freelance</h2>
     <p>
       El error más común de los freelancers, consultores y contratistas novatos es dividir el sueldo de un asalariado
-      entre 2.080 horas (40 horas × 52 semanas). Un empleado que gana 100.000 $ cree que puede cobrar 48 $/hora como
+      entre 2,080 horas (40 horas × 52 semanas). Un empleado que gana $100,000 cree que puede cobrar $48/hora como
       autónomo. En realidad, apenas se llevará a casa la mitad después de impuestos de autónomos, vacaciones no
       pagadas, equipo, seguro médico y el tiempo de captación de clientes que no se puede facturar.
     </p>
@@ -103,7 +103,7 @@ const es: ReactNode = (
       El marketing, escribir propuestas, emitir facturas, la contabilidad y la comunicación con clientes consumen del
       30% al 50% de tu semana laboral. La mayoría de los independientes que funcionan bien facturan{' '}
       <strong>entre 20 y 25 horas semanales</strong> a lo largo de 44 a 48 semanas de trabajo al año (aproximadamente
-      1.000 a 1.200 horas facturables anuales).
+      1,000 a 1,200 horas facturables anuales).
     </p>
 
     <h2>La fórmula de cálculo inverso</h2>
@@ -132,8 +132,8 @@ const de: ReactNode = (
     <h2>Der Freelancer-Preis-Trugschluss</h2>
     <p>
       Der häufigste Fehler von Freelancer-, Berater- und Auftragnehmer-Einsteigern: ein Angestelltengehalt durch
-      2.080 Stunden (40 Stunden × 52 Wochen) zu teilen. Wer als Angestellter 100.000 $ verdient, glaubt, als
-      Auftragnehmer 48 $/Std. verlangen zu können. Real nimmt man davon nach Abzug von Selbstständigen-Abgaben,
+      2,080 Stunden (40 Stunden × 52 Wochen) zu teilen. Wer als Angestellter $100,000 verdient, glaubt, als
+      Auftragnehmer $48/Std. verlangen zu können. Real nimmt man davon nach Abzug von Selbstständigen-Abgaben,
       unbezahltem Urlaub, Equipment, Krankenversicherung und nicht abrechenbarer Akquisezeit kaum die Hälfte mit nach
       Hause.
     </p>
@@ -144,13 +144,13 @@ const de: ReactNode = (
       Leerlauf und bezahltem Krankheitsurlaub. Freelancer verdienen nur an abrechenbarer Kundenarbeit. Marketing,
       Angebote schreiben, Rechnungen stellen, Buchhaltung und Kundenkommunikation verschlingen 30% bis 50% der
       Arbeitswoche. Die meisten erfolgreichen Solo-Selbstständigen fakturieren{' '}
-      <strong>20 bis 25 Stunden pro Woche</strong> über 44 bis 48 Arbeitswochen im Jahr (grob 1.000 bis 1.200
+      <strong>20 bis 25 Stunden pro Woche</strong> über 44 bis 48 Arbeitswochen im Jahr (grob 1,000 bis 1,200
       abrechenbare Stunden jährlich).
     </p>
 
     <h2>Die Rückwärts-Formel</h2>
     <p>
-      Für nachhaltige Sätze rechne vom gewünschten jährlichen Nettoeinkommen rückwärts:
+      Für tragfähige Sätze rechne vom gewünschten jährlichen Nettoeinkommen rückwärts:
     </p>
     <ol>
       <li><strong>Brutto-Ziel:</strong> Teile das Wunsch-Nettogehalt durch <code>(1 − Steuersatz)</code>, um Einkommensteuer und Selbstständigen-Abgaben abzudecken.</li>

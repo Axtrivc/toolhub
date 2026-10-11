@@ -10,7 +10,7 @@ export const StepsToCaloriesCalculatorL10n: ToolL10n = {
     faqs: [
       { q: '卡路里是怎么估算的?', a: '距离 = 步数 × 步距,步距 ≈ 身高 × 0.414。卡路里采用 2011 年身体活动概要的 MET 法:MET 值(慢速 2.8、中速 3.5、快走 5.0)× 体重 × 步行小时数——这是运动科学的标准近似。' },
       { q: '为什么手环显示的消耗更多?', a: '手环往往把所有活动都计入,包括身体静止时本来就要消耗的热量(BMR 重叠),而且各家计步算法差异不小。本工具只计步行的增量部分,所以数字更低——通常也更接近真实多消耗的能量。' },
-      { q: '一万步大约多远?', a: '普通成年人约 7-8 公里(4.5-5 英里)。工具会根据你的身高算出精确距离,因为步距才是决定因素——高个子每步跨得更远,矮个子同样步数要走更长的路。' },
+      { q: '一万步大约多远?', a: '普通成年人约 7-8 公里(4.5-5 英里)。工具会根据你的身高算出精确距离,因为步距才是决定因素——高个子每步跨得更远,矮个子同样的步数走的距离更短。' },
     ],
     ui: {
       'chartTitle': '步数 vs 每日目标',
@@ -42,11 +42,11 @@ export const StepsToCaloriesCalculatorL10n: ToolL10n = {
 },
   },
   es: {
-    useCases: ['convertir tus pasos diarios en calorías', 'estimar cuánto caminan 10 000 pasos', 'calcular distancia real con tu altura', 'comparar el gasto a distinto ritmo'],
+    useCases: ['convertir tus pasos diarios en calorías', 'estimar a cuánta distancia equivalen 10 000 pasos', 'calcular la zancada y la distancia reales con tu altura', 'comparar el gasto según el ritmo'],
     faqs: [
       { q: '¿Cómo se estiman las calorías?', a: 'La distancia es pasos × longitud de zancada, con zancada ≈ altura × 0,414. Las calorías usan el método MET del Compendio de 2011: valor MET (2,8 lento, 3,5 moderado, 5,0 rápido) × peso × horas caminadas — la aproximación estándar en ciencia del ejercicio.' },
       { q: '¿Por qué mi pulsera muestra más?', a: 'Los rastreadores suelen acreditar todo el movimiento, incluidas las calorías que el cuerpo quema en reposo (solapamiento con el TMB), y sus algoritmos varían. Esta herramienta cuenta solo el incremento por caminar: por eso su cifra es menor y suele acercarse más a la energía extra real.' },
-      { q: '¿Cuánto son 10 000 pasos?', a: 'Unos 7-8 km (4,5-5 millas) para un adulto medio. La herramienta calcula tu distancia exacta a partir de la altura, porque manda la zancada: los más altos cubren más suelo por paso y los más bajos caminan más lejos con el mismo conteo.' },
+      { q: '¿Cuánto son 10 000 pasos?', a: 'Unos 7-8 km (4,5-5 millas) para un adulto medio. La herramienta calcula tu distancia exacta a partir de la altura, porque manda la zancada: los más altos cubren más suelo por paso, y los más bajos recorren menos con el mismo conteo.' },
     ],
     ui: {
       'chartTitle': 'Pasos vs objetivo diario',
@@ -78,15 +78,15 @@ export const StepsToCaloriesCalculatorL10n: ToolL10n = {
 },
   },
   de: {
-    useCases: ['tägliche Schritte in Kalorien umrechnen', 'schätzen, wie weit 10 000 Schritte tragen', 'aus der Körpergröße Distanz exakt bestimmen', 'den Verbrauch bei unterschiedlichem Tempo vergleichen'],
+    useCases: ['tägliche Schritte in Kalorien umrechnen', 'schätzen, wie weit 10.000 Schritte bringen', 'die Distanz exakt aus der Körpergröße bestimmen', 'den Verbrauch bei unterschiedlichem Tempo vergleichen'],
     faqs: [
       { q: 'Wie werden die Kalorien geschätzt?', a: 'Die Distanz ist Schritte × Schrittlänge, mit Schrittlänge ≈ Körpergröße × 0,414. Die Kalorien folgen der MET-Methode des Compendiums 2011: MET-Wert (2,8 langsam, 3,5 moderat, 5,0 zügig) × Gewicht × gegangene Stunden — die Standardnäherung der Sportwissenschaft.' },
-      { q: 'Warum zeigt mein Tracker mehr an?', a: 'Tracker schreiben oft jede Bewegung gut — auch Kalorien, die der Körper ohnehin in Ruhe verbrennt (BMR-Überlappung) — und ihre Schritt-Algorithmen unterscheiden sich. Dieses Tool zählt nur den Gehzuwachs, deshalb ist der Wert niedriger — und meist näher an der tatsächlich zusätzlichen Energie.' },
-      { q: 'Wie weit sind 10 000 Schritte?', a: 'Etwa 7-8 km (4,5-5 Meilen) für Durchschnittserwachsene. Das Tool rechnet deine exakte Distanz aus der Körpergröße, denn die Schrittlänge gibt den Ausschlag: Größere kommen pro Schritt weiter, kleinere gehen für dieselbe Zahl weiter.' },
+      { q: 'Warum zeigt mein Tracker mehr an?', a: 'Tracker schreiben oft jede Bewegung gut — auch Kalorien, die der Körper ohnehin in Ruhe verbrennt (BMR-Überlappung) — und ihre Schritt-Algorithmen unterscheiden sich. Dieses Tool zählt nur den Mehrverbrauch durch das Gehen selbst, deshalb ist der Wert niedriger — und meist näher an der tatsächlich zusätzlichen Energie.' },
+      { q: 'Wie weit sind 10.000 Schritte?', a: 'Etwa 7-8 km (4,5-5 Meilen) für Durchschnittserwachsene. Das Tool rechnet deine exakte Distanz aus der Körpergröße, denn die Schrittlänge gibt den Ausschlag: Größere kommen pro Schritt weiter, kleinere schaffen bei gleicher Schrittzahl weniger Strecke.' },
     ],
     ui: {
       'chartTitle': 'Schritte vs. Tagesziel',
-      'cmp.0': 'Ihr Tag',
+      'cmp.0': 'Dein Tag',
       'cmp.1': 'Tagesziel',
       'cmpseg.0': 'Gelaufene Schritte',
       'cmpseg.1': 'Bis zum Ziel',
@@ -98,7 +98,7 @@ export const StepsToCaloriesCalculatorL10n: ToolL10n = {
       'in.pace': 'Schritttempo',
       'in.steps': 'Tägliche Schritte',
       'in.weight': 'Gewicht',
-      'note': '👟 Schätzung per MET-Methode (Compendium 2011). Fitness-Tracker messen oft zu hoch, da sie Grundumsatzanteile mitzählen. 10.000 Schritte ≈ 7-8 km.',
+      'note': '👟 Schätzung per MET-Methode (Compendium 2011). Fitness-Tracker messen oft zu hoch, da sie Grundumsatzanteile mitzählen. 10.000 Schritte ≈ 7-8 km bei Durchschnittserwachsenen.',
       'opt.pace.brisk': 'Zügiges Gehen (≈6,5 km/h)',
       'opt.pace.moderate': 'Moderates Gehen (≈5 km/h)',
       'opt.pace.slow': 'Langsamer Spaziergang (≈3 km/h)',

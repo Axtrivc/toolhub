@@ -25,7 +25,7 @@ const en: ReactNode = (
 const zh: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>这是什么工具?</h2>
-    <p>本工具会把多行文本转换为项目列表,在每个非空行开头添加项目符号(•)。非常适合把随手记录的笔记整理成结构化清单。</p>
+    <p>本工具会把多行文本转换为项目符号列表,在每个非空行开头添加项目符号(•)。非常适合把随手记录的笔记整理成结构化列表。</p>
     <div>
       <h2>常见用途</h2>
       <ul>
@@ -42,7 +42,7 @@ const zh: ReactNode = (
 const es: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>¿Qué es esta herramienta?</h2>
-    <p>Esta herramienta convierte líneas de texto en una lista de viñetas, añadiendo una viñeta (•) al inicio de cada línea no vacía. Perfecto para transformar notas rápidas en una lista estructurada.</p>
+    <p>Esta herramienta convierte líneas de texto en una lista con viñetas, añadiendo una viñeta (•) al inicio de cada línea no vacía. Perfecto para transformar notas rápidas en una lista estructurada.</p>
     <div>
       <h2>Usos comunes</h2>
       <ul>

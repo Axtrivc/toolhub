@@ -366,7 +366,7 @@ export function EmbeddingPriceClient() {
         mime="text/csv;charset=utf-8;"
         copyLabel={L('copySummary', 'Copy Summary')}
       />
-      <CalculatorNote>{L('note', '🧮 Prices checked 2026-08 (deprecated ada-002 removed); embedding input is cheap enough that most workloads cost cents — storage and retrieval usually dominate real RAG bills. The storage column estimates raw vector memory at float32 precision: dims × 4 bytes × documents (3072-dim vectors cost 4× the memory of 768-dim). Gemini text-embedding-004 is free-tier within quotas.')}</CalculatorNote>
+      <CalculatorNote>{L('note', '🧮 Prices checked 2026-08 (deprecated ada-002 removed); embedding input is cheap enough that most workloads cost cents — storage and retrieval usually dominate real RAG bills. The storage column estimates raw vector memory at float32 precision: dims × 4 bytes × documents (3072-dim vectors cost 4× the memory of 768-dim). Gemini text-embedding-004 is free within its quota.')}</CalculatorNote>
     </div>
   )
 }

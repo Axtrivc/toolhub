@@ -63,8 +63,8 @@ export const capitalGainsTaxEstimatorL10n: ToolL10n = {
     useCases: ['die Kapitalertragsteuer für Aktien oder Krypto schätzen', 'kurz- vs. langfristige Steuersätze vergleichen', 'die Schuld nach Haltedauer berechnen', 'entscheiden, jetzt verkaufen oder länger halten'],
     faqs: [
       { q: 'Wie berechne ich meine Kapitalertragsteuer?', a: 'Verfolge Kauf- und Verkaufspreis je Tranche. Gewinn = Verkauf − Kauf − Gebühren. Langfristige Gewinne werden mit 0/15/20 % besteuert, je nach gesamtem zu versteuerndem Einkommen (inklusive des Gewinns selbst); kurzfristige Gewinne verwenden deinen Grenzsteuersatz.' },
-      { q: 'Was ist Tax-Loss Harvesting?', a: 'Verlustreiche Investitionen verkaufen, um realisierte Gewinne zu verrechnen und die Steuerlast zu senken. Verluste verrechnen Gewinne eins zu eins; übersteigen die Verluste die Gewinne, können bis zu $3,000 pro Jahr gegen ordentliches Einkommen verrechnet werden, der Rest wird vorgetragen. Achte auf die Wash-Sale-Regel: du darfst denselben Wert innerhalb von 30 Tagen nicht zurückkaufen.' },
-      { q: 'Zahle ich Steuer, wenn ich den Erlös reinvestiere?', a: 'Ja. Der Verkauf löst ein steuerpflichtiges Ereignis aus, unabhängig davon, ob du reinvestierst — die Steuer behandelt den realisierten Gewinn. Nur das Halten innerhalb steuervergünstigter Konten (IRA, 401k) schiebt das auf, und nur bestimmte Strukturen vermeiden es ganz.' },
+      { q: 'Was ist Tax-Loss Harvesting?', a: 'Verlustbringende Investitionen verkaufen, um realisierte Gewinne zu verrechnen und die Steuerlast zu senken. Verluste verrechnen Gewinne eins zu eins; übersteigen die Verluste die Gewinne, können bis zu $3,000 pro Jahr gegen ordentliches Einkommen verrechnet werden, der Rest wird vorgetragen. Achte auf die Wash-Sale-Regel: du darfst denselben Wert innerhalb von 30 Tagen nicht zurückkaufen.' },
+      { q: 'Zahle ich Steuer, wenn ich den Erlös reinvestiere?', a: 'Ja. Der Verkauf löst ein steuerpflichtiges Ereignis aus, unabhängig davon, ob du reinvestierst — das Finanzamt besteuert den realisierten Gewinn. Nur das Halten innerhalb steuervergünstigter Konten (IRA, 401k) schiebt das auf, und nur bestimmte Strukturen vermeiden es ganz.' },
     ],
     ui: {
       'chartTitle': 'Wohin der Verkaufserlös geht',
@@ -74,8 +74,8 @@ export const capitalGainsTaxEstimatorL10n: ToolL10n = {
       'cmpseg.2': 'Geschuldete Steuer',
       longTerm: 'Langfristig', shortTerm: 'Kurzfristig',
       'outSub.rate': 'Mischsatz über die Tranchenanteile',
-      'in.purchase': 'Kaufpreis', 'in.sale': 'Verkaufspreis', 'in.years': 'Haltedauer (Jahre)', 'in.taxableIncome': 'Zu versteuerndes Einkommen', 'in.filing': 'Steuerklasse',
-      'opt.filing.single': 'Allein', 'opt.filing.married': 'Verheiratet, gemeinsam',
+      'in.purchase': 'Kaufpreis', 'in.sale': 'Verkaufspreis', 'in.years': 'Haltedauer (Jahre)', 'in.taxableIncome': 'Zu versteuerndes Einkommen', 'in.filing': 'Steuerstatus',
+      'opt.filing.single': 'Ledig', 'opt.filing.married': 'Verheiratet, gemeinsam veranlagt',
       'out.gain': 'Kapitalgewinn', 'out.rate': 'Steuersatz', 'out.tax': 'Geschätzte Steuerschuld',
       note: '📈 US-Kapitalgewinne: mehr als 1 Jahr gehalten = langfristig (0/15/20 % nach zu versteuerndem Einkommen 2026). <1 Jahr gehalten = kurzfristig (Grenzsteuersatz). Zur Trimmermittlung wird der Gewinn auf das ordentliche Einkommen gestapelt (langfristige Tranchen und der kurzfristige Grenzsteuersatz beruhen auf Einkommen + Gewinn). Vereinfachte Schätzung — ohne NIIT und Steuer des Bundesstaates.',
     },

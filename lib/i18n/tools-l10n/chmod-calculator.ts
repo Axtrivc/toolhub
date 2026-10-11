@@ -21,7 +21,7 @@ export const chmodCalculatorL10n: ToolL10n = {
       'hintSticky': '受限删除',
       'inputPlaceholder': '644 或 rw-r--r--',
       'noteAnd': ' 和 ',
-      'noteF1': '🔒 八进制数字依次为属主 / 属组 / 其他,每位是 read(4)+write(2)+execute(1) 之和。前导第四位编码特殊位:setuid(4)、setgid(2)、sticky(1)——所以 ',
+      'noteF1': '🔒 八进制数字依次为属主 / 属组 / 其他,每位是 读取(4)+写入(2)+执行(1) 之和。前导第四位编码特殊位:setuid(4)、setgid(2)、sticky(1)——所以 ',
       'noteF2': ' 表示 setuid + ',
       'noteF3': '。在符号形式中它们出现在执行位之上,显示为 ',
       'noteF4': '。',
@@ -98,7 +98,7 @@ export const chmodCalculatorL10n: ToolL10n = {
     },
     useCases: [
       'qué significa chmod 755',
-      'convertir permisos octales a simbólicos',
+      'conversión entre permisos octales y simbólicos',
       'generador de permisos de archivos Linux',
       'constructor de comandos chmod online',
     ],
@@ -113,7 +113,7 @@ export const chmodCalculatorL10n: ToolL10n = {
       },
       {
         q: '¿Cuál es la diferencia entre 755 y 644?',
-        a: '755 (rwxr-xr-x) permite al propietario leer, escribir y ejecutar mientras otros solo leen y ejecutan — correcto para directorios y scripts. 644 (rw-r--r--) permite al propietario leer y escribir y a los demás solo leer — el valor por defecto seguro para archivos estáticos como HTML e imágenes.',
+        a: '755 (rwxr-xr-x) permite al propietario leer, escribir y ejecutar mientras otros solo leen y ejecutan — correcto para directorios y scripts. 644 (rw-r--r--) permite al propietario leer y escribir, y a los demás solo leer — el valor por defecto seguro para archivos estáticos como HTML e imágenes.',
       },
     ],
   },
@@ -154,7 +154,7 @@ export const chmodCalculatorL10n: ToolL10n = {
     },
     useCases: [
       'Bedeutung von chmod 755',
-      'Oktale in symbolische Berechtigungen umwandeln',
+      'Umrechnung zwischen oktalen und symbolischen Berechtigungen',
       'Generator für Linux-Dateiberechtigungen',
       'Online-Baukasten für chmod-Befehle',
     ],
@@ -169,7 +169,7 @@ export const chmodCalculatorL10n: ToolL10n = {
       },
       {
         q: 'Was ist der Unterschied zwischen 755 und 644?',
-        a: '755 (rwxr-xr-x) erlaubt dem Eigentümer Lesen, Schreiben und Ausführen, während andere nur lesen und ausführen dürfen — richtig für Verzeichnisse und Skripte. 644 (rw-r--r--) erlaubt dem Eigentümer Lesen und Schreiben, anderen nur Lesen — der sichere Standard für statische Dateien wie HTML und Bilder.',
+        a: '755 (rwxr-xr-x) erlaubt dem Eigentümer Lesen, Schreiben und Ausführen, während andere nur lesen und ausführen dürfen — richtig für Verzeichnisse und Skripte. 644 (rw-r--r--) erlaubt dem Eigentümer Lesen und Schreiben, anderen nur Lesen — der sichere Standardwert für statische Dateien wie HTML und Bilder.',
       },
     ],
   },

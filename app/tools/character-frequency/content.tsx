@@ -11,7 +11,7 @@ const en: ReactNode = (
     <p>This tool counts how often each character appears in your text, sorted by frequency. Useful for writing analysis, cryptanalysis, and understanding text patterns.</p>
     <div>
       <h2>Letter Frequency in English</h2>
-      <p>In typical English text, the most common letters are E, T, A, O, I, N &mdash; accounting for about half of all letters. This pattern is exploited in simple substitution ciphers (like in Sherlock Holmes&apos; &quot;Dancing Men&quot;).</p>
+      <p>In typical English text, the most common letters are E, T, A, O, I, N &mdash; accounting for about half of all letters. This pattern is exploited in simple substitution ciphers (as in Sherlock Holmes&apos; &quot;Dancing Men&quot;).</p>
     </div>
     <div>
       <h2>Uses</h2>

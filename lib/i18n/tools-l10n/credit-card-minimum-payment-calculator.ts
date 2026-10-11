@@ -48,6 +48,8 @@ export const creditCardMinimumPaymentCalculatorL10n: ToolL10n = {
       'out.minPayment': '最低还款额',
       'out.interest': '本月利息',
       'out.principal': '冲抵本金',
+      'out.payoff': '还清时间(只还最低)',
+      'out.totalInterest': '总利息(只还最低)',
       note: '💳 最低还款几乎只够付利息——只还最低意味着要还几十年。能多还就多还。',
       chartTitleBalance: '只还最低还款的余额变化',
       chartTitleCompare: '只还最低 vs 每月多还 $50',
@@ -78,7 +80,7 @@ export const creditCardMinimumPaymentCalculatorL10n: ToolL10n = {
     faqs: [
       {
         q: '¿Pagar solo el mínimo perjudica mi puntaje de crédito?',
-        a: 'Pagar el mínimo a tiempo mantiene la cuenta en buen estado y evita marcas de retraso, así que no perjudica directamente tu puntaje. Pero mantiene alta tu utilización de crédito (saldo ÷ límite), un factor importante de puntuación. Una utilización alta puede bajar tu puntaje incluso con un historial de pagos perfecto. Reducir los saldos es la forma más rápida de mejorar tu puntaje.',
+        a: 'Pagar el mínimo a tiempo mantiene la cuenta en buen estado y evita marcas de retraso, así que no perjudica directamente tu puntaje. Pero mantiene alta tu utilización de crédito (saldo ÷ límite), un factor importante en el cálculo del puntaje. Una utilización alta puede bajar tu puntaje incluso con un historial de pagos perfecto. Reducir los saldos es la forma más rápida de mejorar tu puntaje.',
       },
       {
         q: '¿Cómo calculan las tarjetas de crédito el pago mínimo?',
@@ -103,6 +105,8 @@ export const creditCardMinimumPaymentCalculatorL10n: ToolL10n = {
       'out.minPayment': 'Pago mínimo',
       'out.interest': 'Interés de este mes',
       'out.principal': 'A capital',
+      'out.payoff': 'Tiempo para saldar (solo el mínimo)',
+      'out.totalInterest': 'Interés total (solo el mínimo)',
       note: '💳 Los pagos mínimos apenas cubren los intereses — pagar solo el mínimo significa décadas para saldar. Paga más siempre que puedas.',
       chartTitleBalance: 'Saldo pagando solo el mínimo',
       chartTitleCompare: 'Solo el mínimo vs +$50 al mes',
@@ -122,7 +126,7 @@ export const creditCardMinimumPaymentCalculatorL10n: ToolL10n = {
   de: {
     formula: {
       formula: 'Min payment = max( balance × min%, fixed floor )',
-      explain: 'Der Herausgeber verlangt das größere aus einem kleinen Prozentsatz des Saldos (oft 1–3%) und einem festen Mindestbetrag (z. B. 25 $). Auf den Restsaldo werden weiterhin Zinsen berechnet, bis er getilgt ist.',
+      explain: 'Der Aussteller verlangt den größeren aus einem kleinen Prozentsatz des Saldos (oft 1–3%) und einem festen Mindestbetrag (z. B. 25 $). Auf den Restsaldo werden weiterhin Zinsen berechnet, bis er getilgt ist.',
     },
     useCases: [
       'verstehen, wie die Mindestzahlung berechnet wird',
@@ -145,7 +149,7 @@ export const creditCardMinimumPaymentCalculatorL10n: ToolL10n = {
       },
       {
         q: 'Ändert sich die Mindestzahlung jeden Monat?',
-        a: 'Ja. Da sie auf deinem Saldo und den Monatszinsen basiert, steigt sie, wenn du mehr schuldest oder die Zinsen steigen, und sinkt, wenn du abbast. Neue Käufe, Barvorschüsse und Gebühren treiben sie ebenfalls nach oben. Sinkt dein Saldo, sinkt irgendwann auch das Minimum — verlass dich aber nie auf ein niedriges Minimum als Grund, die Schulden weiter zu tragen.',
+        a: 'Ja. Da sie auf deinem Saldo und den Monatszinsen basiert, steigt sie, wenn du mehr schuldest oder die Zinsen steigen, und sinkt, wenn du abbaust. Neue Käufe, Barvorschüsse und Gebühren treiben sie ebenfalls nach oben. Sinkt dein Saldo, sinkt irgendwann auch das Minimum — verlass dich aber nie auf ein niedriges Minimum als Grund, die Schulden weiter zu tragen.',
       },
     ],
     ui: {
@@ -156,8 +160,10 @@ export const creditCardMinimumPaymentCalculatorL10n: ToolL10n = {
       'in.apr': 'APR',
       'in.minPct': 'Mindestzahlung %',
       'out.minPayment': 'Mindestzahlung',
-      'out.interest': 'Zins diesen Monat',
+      'out.interest': 'Zinsen diesen Monat',
       'out.principal': 'Tilgung',
+      'out.payoff': 'Tilgungsdauer (nur Minimum)',
+      'out.totalInterest': 'Gesamtzinsen (nur Minimum)',
       note: '💳 Mindestzahlungen decken kaum die Zinsen — nur das Minimum zu zahlen bedeutet Jahrzehnte bis zur Tilgung. Zahl mehr, wann immer möglich.',
       chartTitleBalance: 'Saldo bei nur Mindestzahlung',
       chartTitleCompare: 'Nur Minimum vs +$50 im Monat',
@@ -168,7 +174,7 @@ export const creditCardMinimumPaymentCalculatorL10n: ToolL10n = {
       'line.balance': 'Restschuld',
       chartTitle: 'Wohin deine Mindestzahlung geht',
       chartCenter: 'Zahlung',
-      'slice.interest': 'Zins',
+      'slice.interest': 'Zinsen',
       'slice.principal': 'Tilgung',
     },
   },

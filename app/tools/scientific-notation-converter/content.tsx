@@ -8,7 +8,7 @@ import { useApp } from '@/components/providers/AppProviders'
 const en: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>What Is This Tool?</h2>
-    <p><strong>Scientific notation</strong> expresses very large or small numbers as a mantissa times a power of 10 — like 6.022 × 10²³ for Avogadro&apos;s number, or 1.6 × 10⁻¹⁹ for an electron&apos;s charge. This tool converts to scientific, E-, and engineering notation.</p>
+    <p><strong>Scientific notation</strong> expresses very large or very small numbers as a mantissa times a power of 10 — like 6.022 × 10²³ for Avogadro&apos;s number, or 1.6 × 10⁻¹⁹ for an electron&apos;s charge. This tool converts to scientific, E-, and engineering notation.</p>
     <div>
       <h2>Three Notations</h2>
       <ul>
@@ -58,13 +58,13 @@ const zh: ReactNode = (
 const es: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>¿Qué es esta herramienta?</h2>
-    <p><strong>La notación científica</strong> expresa números muy grandes o pequeños como una mantisa multiplicada por una potencia de 10 — como 6,022 × 10²³ para el número de Avogadro, o 1,6 × 10⁻¹⁹ para la carga de un electrón. Esta herramienta convierte a notación científica, E y de ingeniería.</p>
+    <p><strong>La notación científica</strong> expresa números muy grandes o pequeños como una mantisa multiplicada por una potencia de 10 — como 6,022 × 10²³ para el número de Avogadro, o 1,6 × 10⁻¹⁹ para la carga de un electrón. Esta herramienta convierte entre notación científica, E y de ingeniería.</p>
     <div>
       <h2>Tres notaciones</h2>
       <ul>
         <li><strong>Científica:</strong> a × 10ⁿ (mantisa entre 1 y 10)</li>
         <li><strong>Notación E:</strong> ae±n (estilo de programación: 6.022e23)</li>
-        <li><strong>Ingeniería:</strong> el exponente es múltiplo de 3 (coincide con los prefijos SI: kilo, mega, giga)</li>
+        <li><strong>Notación de ingeniería:</strong> el exponente es múltiplo de 3 (coincide con los prefijos SI: kilo, mega, giga)</li>
       </ul>
     </div>
     <div>
@@ -89,7 +89,7 @@ const de: ReactNode = (
       <ul>
         <li><strong>Wissenschaftlich:</strong> a × 10ⁿ (Mantisse zwischen 1 und 10)</li>
         <li><strong>E-Notation:</strong> ae±n (Programmierstil: 6.022e23)</li>
-        <li><strong>Ingenieurwesen:</strong> Der Exponent ist ein Vielfaches von 3 (passt zu SI-Präfixen: kilo, mega, giga)</li>
+        <li><strong>Ingenieurnotation:</strong> Der Exponent ist ein Vielfaches von 3 (passt zu SI-Präfixen: Kilo, Mega, Giga)</li>
       </ul>
     </div>
     <div>

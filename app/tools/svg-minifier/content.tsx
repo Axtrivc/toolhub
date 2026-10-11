@@ -69,7 +69,7 @@ const zh: ReactNode = (
     <div>
       <h2>每个开关分别移除什么</h2>
       <p>
-        该流程借鉴了 SVGO 中最安全的部分：<strong>XML 声明与 DOCTYPE</strong>（浏览器在内联或 <code>&lt;img&gt;</code> SVG 时并不需要它们）、<strong>注释</strong>、<strong>元数据块</strong>（<code>&lt;metadata&gt;</code>、<code>&lt;title&gt;</code>、<code>&lt;desc&gt;</code>），以及 <strong>编辑器残留</strong> —— Inkscape/Sodipodi 的属性和命名空间、Adobe 导出的冗余，还有 <code>enable-background</code>。它还能折叠标签之间的空白，并丢弃那些只是重申规范默认值的属性，例如 <code>version=&quot;1.1&quot;</code>。
+        该流程借鉴了 SVGO 中最安全的部分：<strong>XML 声明与 DOCTYPE</strong>（浏览器在内联或 <code>&lt;img&gt;</code> SVG 时并不需要它们）、<strong>注释</strong>、<strong>元数据块</strong>（<code>&lt;metadata&gt;</code>、<code>&lt;title&gt;</code>、<code>&lt;desc&gt;</code>），以及 <strong>编辑器残留</strong> —— Inkscape/Sodipodi 的属性和命名空间、Adobe 导出的冗余，还有 <code>enable-background</code>。它还能折叠标签之间的空白，并丢弃那些只是重复规范默认值的属性，例如 <code>version=&quot;1.1&quot;</code>。
       </p>
     </div>
 
@@ -105,9 +105,9 @@ const es: ReactNode = (
     </div>
 
     <div>
-      <h2>Redondeo de números: la mayor ganancia, usado con cuidado</h2>
+      <h2>Redondeo de números: la mayor ganancia, si se usa con cuidado</h2>
       <p>
-        Los datos de ruta dominan la mayoría de los archivos SVG, y las exportaciones suelen traer coordenadas como <code>12.34567891</code>. Redondear a <strong>2 decimales</strong> es invisible a tamaños normales y puede reducir drásticamente un archivo cargado de rutas. El redondeo aquí solo afecta a números <em>dentro de valores de atributos y datos de ruta</em>, deja intactos los enteros y la notación científica (<code>1e-5</code>) y nunca reescribe la estructura del marcado. Para obras muy grandes o con zoom, conserva 3 decimales para evitar escalones visibles en las curvas.
+        Los datos de ruta dominan la mayoría de los archivos SVG, y las exportaciones suelen traer coordenadas como <code>12.34567891</code>. Redondear a <strong>2 decimales</strong> es invisible a tamaños normales y puede reducir drásticamente un archivo cargado de rutas. El redondeo aquí solo afecta a números <em>dentro de valores de atributos y datos de ruta</em>, deja intactos los enteros y la notación científica (<code>1e-5</code>) y nunca reescribe la estructura del marcado. Para gráficos muy grandes o vistos con zoom, conserva 3 decimales para evitar escalones visibles en las curvas.
       </p>
     </div>
 
@@ -125,27 +125,27 @@ const de: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>Was ist dieses Werkzeug?</h2>
     <p>
-      Aus Figma, Illustrator oder Inkscape exportierte SVGs sind voller Ballast: XML-Deklarationen, Kommentare, Editor-Namespaces, Metadaten-Blöcke und Pfadkoordinaten mit acht Nachkommastellen. Dieser Minifier entfernt diesen Totballast und spart typischerweise <strong>30–60 %</strong> der Dateigröße — ideal, bevor du Icons in HTML einbindest oder ein Sprite-Sheet auslieferst. Alles läuft lokal in deinem Browser; es wird keine Datei hochgeladen.
+      Aus Figma, Illustrator oder Inkscape exportierte SVGs sind voller Ballast: XML-Deklarationen, Kommentare, Editor-Namespaces, Metadaten-Blöcke und Pfadkoordinaten mit acht Nachkommastellen. Dieser Minifier entfernt diesen toten Ballast und spart typischerweise <strong>30–60 %</strong> der Dateigröße — ideal, bevor du Icons in HTML einbindest oder ein Sprite-Sheet auslieferst. Alles läuft lokal in deinem Browser; es wird keine Datei hochgeladen.
     </p>
 
     <div>
       <h2>Was jeder Schalter entfernt</h2>
       <p>
-        Dieser Minifier spiegelt die sichersten Teile von SVGO wider: <strong>XML-Deklaration und DOCTYPE</strong> (Browser brauchen sie für Inline- oder <code>&lt;img&gt;</code>-SVG nicht), <strong>Kommentare</strong>, <strong>Metadaten-Blöcke</strong> (<code>&lt;metadata&gt;</code>, <code>&lt;title&gt;</code>, <code>&lt;desc&gt;</code>) und <strong>Editor-Reste</strong> — Inkscape/Sodipodi-Attribute und -Namespaces, Adobe-Export-Müll und <code>enable-background</code>. Er kann auch Whitespace zwischen Tags kollabieren lassen und Attribute verwerfen, die lediglich den Spezifikations-Standard wiederholen, etwa <code>version=&quot;1.1&quot;</code>.
+        Dieser Minifier spiegelt die sichersten Teile von SVGO wider: <strong>XML-Deklaration und DOCTYPE</strong> (Browser brauchen sie für Inline- oder <code>&lt;img&gt;</code>-SVG nicht), <strong>Kommentare</strong>, <strong>Metadaten-Blöcke</strong> (<code>&lt;metadata&gt;</code>, <code>&lt;title&gt;</code>, <code>&lt;desc&gt;</code>) und <strong>Editor-Reste</strong> — Inkscape/Sodipodi-Attribute und -Namespaces, Adobe-Export-Müll und <code>enable-background</code>. Er kann auch Leerzeichen zwischen Tags zusammenfassen und Attribute verwerfen, die lediglich den Spezifikations-Standard wiederholen, etwa <code>version=&quot;1.1&quot;</code>.
       </p>
     </div>
 
     <div>
       <h2>Zahlen runden: der größte Gewinn, mit Bedacht eingesetzt</h2>
       <p>
-        Pfaddaten dominieren die meisten SVG-Dateien, und Exporte bringen oft Koordinaten wie <code>12.34567891</code> mit. Auf <strong>2 Nachkommastellen</strong> zu runden ist bei normalen Größen unsichtbar und kann eine pfadlastige Datei drastisch verkleinern. Das Runden hier betrifft nur Zahlen <em>innerhalb von Attributwerten und Pfaddaten</em>, lässt Ganzzahlen und wissenschaftliche Notation (<code>1e-5</code>) unangetastet und schreibt die Markup-Struktur nie um. Für sehr große oder gezoomte Grafiken behalte 3 Nachkommastellen, um sichtbare Stufen auf Kurven zu vermeiden.
+        Pfaddaten dominieren die meisten SVG-Dateien, und Exporte bringen oft Koordinaten wie <code>12.34567891</code> mit. Auf <strong>2 Nachkommastellen</strong> zu runden ist bei normalen Größen unsichtbar und kann eine pfadlastige Datei drastisch verkleinern. Das Runden hier betrifft nur Zahlen <em>innerhalb von Attributwerten und Pfaddaten</em>, lässt Ganzzahlen und wissenschaftliche Notation (<code>1e-5</code>) unangetastet und schreibt die Markup-Struktur nie um. Für sehr große oder stark vergrößerte Grafiken behalte 3 Nachkommastellen, um sichtbare Stufen auf Kurven zu vermeiden.
       </p>
     </div>
 
     <div>
       <h2>Zwei Dinge, die du vor dem Ausliefern prüfen solltest</h2>
       <p>
-        Erstens: Wenn du <strong>SVG per CSS-Selektoren stylst</strong>, die auf <code>title</code> zielen oder auf <code>inkscape:</code>-Attribute angewiesen sind, lass diese Schalter aus. Zweitens, Barrierefreiheit: Das Entfernen von <code>&lt;title&gt;</code> entfernt den zugänglichen Namen eines dekorativen Inline-Icons — das ist in Ordnung, wenn das Icon dekorativ ist, aber behalte bei aussagekräftigen Grafiken einen Titel (oder füge <code>aria-label</code> am übergeordneten Element hinzu). Nutze die Live-Vorschau, um zu bestätigen, dass die minifizierte Ausgabe vor dem Download noch identisch rendert.
+        Erstens: Wenn du <strong>SVG per CSS-Selektoren stylst</strong>, die auf <code>title</code> zielen oder auf <code>inkscape:</code>-Attribute angewiesen sind, lass diese Schalter deaktiviert. Zweitens, Barrierefreiheit: Das Entfernen von <code>&lt;title&gt;</code> entfernt den zugänglichen Namen eines dekorativen Inline-Icons — das ist in Ordnung, wenn das Icon dekorativ ist, aber behalte bei aussagekräftigen Grafiken einen Titel (oder füge <code>aria-label</code> am übergeordneten Element hinzu). Nutze die Live-Vorschau, um vor dem Download zu bestätigen, dass die minifizierte Ausgabe weiterhin identisch rendert.
       </p>
     </div>
   </section>

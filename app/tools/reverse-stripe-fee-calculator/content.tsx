@@ -102,7 +102,7 @@ const es: ReactNode = (
     <p>
       Esta <strong>calculadora de comisiones de pago</strong> funciona en ambos sentidos: consulta cuánto te deja realmente un cobro con Stripe o PayPal,
       o trabaja a la inversa desde el importe que necesitas recibir y averigua el precio que tienes que cobrar.
-      Los ajustes predefinidos cubren las comisiones habituales de Stripe y PayPal, y un modo personalizado acepta cualquier porcentaje + comisión fija. Todos los cálculos
+      Los presets cubren las comisiones habituales de Stripe y PayPal, y un modo personalizado acepta cualquier porcentaje + comisión fija. Todos los cálculos
       se hacen localmente en tu navegador.
     </p>
 
@@ -118,12 +118,12 @@ const es: ReactNode = (
     </div>
 
     <div>
-      <h2>¿Qué ajuste predefinido debo elegir?</h2>
+      <h2>¿Qué preset debo elegir?</h2>
       <p>
-        <strong>Stripe US online</strong> (2,9 % + $0.30) cubre los cobros nacionales estándar con tarjeta. Añade el ajuste{' '}
-        <strong>international card</strong> (+1,5 %) cuando la tarjeta del comprador se emitió fuera de EE. UU.,
-        y el ajuste <strong>currency conversion</strong> (+1 % más) cuando también cobras en una
-        moneda extranjera. <strong>PayPal US</strong> usa 3,49 % + $0.49. Si tu plan es distinto — descuentos por volumen,
+        <strong>Stripe US online</strong> (2,9% + $0.30) cubre los cobros nacionales estándar con tarjeta. Añade el preset{' '}
+        <strong>international card</strong> (+1,5%) cuando la tarjeta del comprador se emitió fuera de EE. UU.,
+        y el preset <strong>currency conversion</strong> (+1% más) cuando también cobras en una
+        moneda extranjera. <strong>PayPal US</strong> usa 3,49% + $0.49. Si tu plan es distinto — descuentos por volumen,
         tarifas para organizaciones sin ánimo de lucro, micropagos — cambia a <strong>Custom</strong> y escribe tus cifras exactas.
       </p>
     </div>
@@ -155,7 +155,7 @@ const de: ReactNode = (
       <h2>Vorwärts- vs. Rückwärtsmodus</h2>
       <p>
         Im <strong>Vorwärtsmodus</strong> gibst du ein, was du verlangst, und erhältst die Gebühr, die Nettoauszahlung und die{' '}
-        <em>effektive Gebührenrate</em> — die bei kleinen Transaktionen wegen der festen Gebühr von <code>$0.30</code>
+        <em>effektive Gebührenrate</em> — die bei kleinen Transaktionen wegen der festen Gebühr von <code>0,30 $</code>
         immer über dem nominalen Prozentsatz liegt. Im <strong>Rückwärtsmodus</strong> gibst du ein, was du
         erhalten möchtest, und das Werkzeug löst <code>charge = (net + fixed) / (1 − pct)</code> und verifiziert das Ergebnis anschließend
         mit einer Netto-Prüfkarte. Nutze den Rückwärtsmodus beim Angebot an Kunden, damit die Gebühr deine Rate nicht auffrisst.
@@ -165,9 +165,9 @@ const de: ReactNode = (
     <div>
       <h2>Welche Voreinstellung soll ich wählen?</h2>
       <p>
-        <strong>Stripe US online</strong> (2,9 % + $0.30) deckt Standard-Inlandskartenzahlungen ab. Füge die Voreinstellung{' '}
-        <strong>international card</strong> (+1,5 %) hinzu, wenn die Karte des Käufers außerhalb der USA ausgegeben wurde,
-        und die Voreinstellung <strong>currency conversion</strong> (+1 % mehr), wenn du außerdem in einer Fremdwährung abrechnest. <strong>PayPal US</strong> nutzt 3,49 % + $0.49. Wenn dein Plan abweicht — Mengenrabatte,
+        <strong>Stripe US online</strong> (2,9% + 0,30 $) deckt Standard-Inlandskartenzahlungen ab. Füge die Voreinstellung{' '}
+        <strong>international card</strong> (+1,5%) hinzu, wenn die Karte des Käufers außerhalb der USA ausgegeben wurde,
+        und die Voreinstellung <strong>currency conversion</strong> (+1% mehr), wenn du außerdem in einer Fremdwährung abrechnest. <strong>PayPal US</strong> nutzt 3,49% + 0,49 $. Wenn dein Plan abweicht — Mengenrabatte,
         Nonprofit-Tarife, Micropayments — wechsle zu <strong>Custom</strong> und gib deine genauen Zahlen ein.
       </p>
     </div>

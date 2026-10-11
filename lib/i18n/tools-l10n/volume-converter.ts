@@ -1,6 +1,7 @@
 /**
  * volume-converter 本地化 bundle —— zh / es / de
- * 覆盖:faqs + useCases(client = makeUnitConverter,不 locale-aware,UI 保持英文)
+ * 覆盖:faqs + ui + useCases(client = makeUnitConverter,slug 已注册;
+ * 键用工厂 unit.* 口径——unit.<key> 同时喂 From/To 下拉、结果卡单位、All units 面板)
  */
 import type { ToolL10n } from '../tool-l10n'
 
@@ -57,7 +58,7 @@ export const volumeConverterL10n: ToolL10n = {
   },
   de: {
     ui: {
-      'note': '🥤 Metrisch (ml, L, m³) und US-Kochmaße (TL, EL, Tasse, Gallone).',
+      'note': '🥤 Umfasst metrische Einheiten (ml, L, m³) und US-Kochmaße (TL, EL, Tasse, Gallone).',
       'unit.cbm': 'Kubikmeter (m³)',
       'unit.cup': 'Tassen (US)',
       'unit.floz': 'Flüssigunzen (US)',
@@ -75,7 +76,7 @@ export const volumeConverterL10n: ToolL10n = {
       'Dosierungen von flüssigen Medikamenten umrechnen (ml)',
     ],
     faqs: [
-      { q: 'Wie viele Flüssigunzen sind in einer Tasse?', a: '1 US-Tasse = 8 US-Flüssigunzen = 16 Esslöffel = 237 ml. Beachte, dass eine US-„legale Tasse" (auf Nährwertetiketten) genau 240 ml ist und eine britische Imperial-Tasse wieder abweicht — prüfe also, welchen Standard ein Rezept verwendet.' },
+      { q: 'Wie viele Flüssigunzen sind in einer Tasse?', a: '1 US-Tasse = 8 US-Flüssigunzen = 16 Esslöffel = 237 ml. Beachte, dass eine US-„legale Tasse“ (auf Nährwertetiketten) genau 240 ml ist und eine britische Imperial-Tasse wieder abweicht — prüfe also, welchen Standard ein Rezept verwendet.' },
       { q: 'Warum unterscheiden sich US- und Imperial-Gallonen?', a: 'Die US-Gallone (3,785 L) basiert auf der alten englischen Weingallone; die Imperial-Gallone (4,546 L) wurde 1824 definiert und ist etwa 20 % größer. Deshalb wirkt der britische Verbrauch (MPG) bei gleichem Auto besser als der US-Verbrauch — die Gallone ist größer.' },
       { q: 'Wie rechne ich Tassen in Gramm um?', a: 'Du kannst Volumen nicht ohne die Dichte der Zutat in Gewicht umrechnen. 1 Tasse Mehl (~120 g) und 1 Tasse Zucker (~200 g) wiegen sehr unterschiedlich. Für Backgenauigkeit solltest du Zutaten wiegen statt nach Volumen messen.' },
     ],

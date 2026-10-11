@@ -24,7 +24,7 @@ const en: ReactNode = (
     </div>
     <div>
       <h2>Percentile vs. Percentage</h2>
-      <p>These are different. A <strong>percentage</strong> is a fraction of 100 (you got 85% of questions right). A <strong>percentile</strong> compares you to others (you scored higher than 90% of people). Scoring 85% on a test might put you in the 70th or 99th percentile, depending on how others did.</p>
+      <p>These are different. A <strong>percentage</strong> is a fraction of 100 (you got 85% of the questions right). A <strong>percentile</strong> compares you to others (you scored higher than 90% of people). Scoring 85% on a test might put you in the 70th or 99th percentile, depending on how others did.</p>
     </div>
   </section>
 )
@@ -49,7 +49,7 @@ const zh: ReactNode = (
     </div>
     <div>
       <h2>百分位数 vs 百分比</h2>
-      <p>二者不同。<strong>百分比</strong>是 100 中的份额(你答对了 85% 的题目)。<strong>百分位数</strong>则是将你与他人比较(你的得分高于 90% 的人)。在一场考试中考 85%,可能把你置于第 70 或第 99 百分位,取决于其他人的表现。</p>
+      <p>二者不同。<strong>百分比</strong>是 100 中的份额(你答对了 85% 的题目)。<strong>百分位数</strong>则是将你与他人比较(你的得分高于 90% 的人)。一场考试考了 85%,你可能排在第 70 或第 99 百分位——取决于其他人的表现。</p>
     </div>
   </section>
 )
@@ -99,7 +99,7 @@ const de: ReactNode = (
     </div>
     <div>
       <h2>Perzentil vs. Prozent</h2>
-      <p>Das sind verschiedene Dinge. Ein <strong>Prozent</strong>satz ist ein Bruchteil von 100 (du hast 85 % der Fragen richtig). Ein <strong>Perzentil</strong> vergleicht dich mit anderen (du hast besser abgeschnitten als 90 % der Leute). 85 % in einer Prüfung können dich ins 70. oder 99. Perzentil bringen, je nachdem, wie die anderen abgeschnitten haben.</p>
+      <p>Das sind verschiedene Dinge. Ein <strong>Prozentsatz</strong> ist ein Bruchteil von 100 (du hast 85 % der Fragen richtig beantwortet). Ein <strong>Perzentil</strong> vergleicht dich mit anderen (du hast besser abgeschnitten als 90 % der Leute). 85 % in einer Prüfung können dich ins 70. oder 99. Perzentil bringen, je nachdem, wie die anderen abgeschnitten haben.</p>
     </div>
   </section>
 )

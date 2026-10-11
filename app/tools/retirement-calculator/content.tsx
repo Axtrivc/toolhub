@@ -87,14 +87,14 @@ const es: ReactNode = (
     <p>
       Esta calculadora proyecta cuánto tendrás ahorrado para el momento de la jubilación, combinando el
       crecimiento compuesto de tus ahorros actuales con aportaciones mensuales regulares. Es un
-      poderoso motivador — las cifras suelen sorprender a la gente.
+      gran estímulo — las cifras suelen sorprender a la gente.
     </p>
     <div>
       <h2>La regla del 4 %</h2>
       <p>
         Una pauta común: puedes retirar el 4 % de tus ahorros para la jubilación cada año con bajo
         riesgo de quedarte sin dinero. Para jubilarte con $60,000/año de ingresos por inversión, necesitarías
-        unos $1,5 millones ahorrados ($60,000 ÷ 0.04).
+        unos $1,5 millones ahorrados ($60,000 ÷ 0,04).
       </p>
     </div>
     <div>
@@ -108,10 +108,10 @@ const es: ReactNode = (
     <div>
       <h2>Tasas de retorno realistas</h2>
       <ul>
-        <li><strong>Agresivo (sobre todo acciones):</strong> ~7 % después de inflación — volátil pero alto a largo plazo</li>
-        <li><strong>Equilibrado (acciones + bonos):</strong> ~5 % después de inflación</li>
-        <li><strong>Conservador (sobre todo bonos):</strong> ~3 % después de inflación</li>
-        <li><strong>Ahorro en efectivo:</strong> ~0-1 % después de inflación — apenas sigue el ritmo</li>
+        <li><strong>Agresivo (sobre todo acciones):</strong> ~7 % después de la inflación — volátil pero alto a largo plazo</li>
+        <li><strong>Equilibrado (acciones + bonos):</strong> ~5 % después de la inflación</li>
+        <li><strong>Conservador (sobre todo bonos):</strong> ~3 % después de la inflación</li>
+        <li><strong>Ahorro en efectivo:</strong> ~0-1 % después de la inflación — apenas sigue el ritmo</li>
       </ul>
     </div>
   </section>
@@ -123,15 +123,15 @@ const de: ReactNode = (
     <h2>Was ist dieses Werkzeug?</h2>
     <p>
       Dieser Rechner projiziert, wie viel du bis zur Rente gespart haben wirst, indem er das
-      Zinseszinswachstum deiner aktuellen Ersparnisse mit regelmäßigen monatlichen Einzahlungen kombiniert. Das ist ein
-      starker Motivator — die Zahlen überraschen die Leute oft.
+      Zinseszinswachstum deiner aktuellen Ersparnisse mit regelmäßigen monatlichen Einzahlungen kombiniert. Das wirkt
+      enorm motivierend — die Zahlen überraschen oft.
     </p>
     <div>
       <h2>Die 4 %-Regel</h2>
       <p>
         Eine gängige Faustregel: Du kannst jedes Jahr 4 % deiner Altersvorsorge entnehmen, mit geringem
         Risiko, dass das Geld ausgeht. Um mit $60,000/Jahr an Investmenterträgen in Rente zu gehen, bräuchtest du
-        etwa $1,5 Millionen gespart ($60,000 ÷ 0.04).
+        etwa $1,5 Millionen gespart ($60,000 ÷ 0,04).
       </p>
     </div>
     <div>
@@ -139,7 +139,7 @@ const de: ReactNode = (
       <p>
         Zeit ist wichtiger als der Betrag. Wer von 25 bis 35 Jahren $500/Monat spart (und dann
         aufhört), hat am Ende oft mehr als jemand, der von 35 bis 65 Jahren $500/Monat spart.
-        Das Geld des frühen Sparers hat 30 Jahre länger Zeit, sich zu verzinsen.
+        Das Geld des frühen Sparers hat 30 Jahre mehr Zeit, sich zu verzinsen.
       </p>
     </div>
     <div>

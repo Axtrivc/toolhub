@@ -32,13 +32,13 @@ const en: ReactNode = (
 const zh: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>这是什么工具？</h2>
-    <p>本计算器使用三种经典医学公式（Devine、Robinson、Hamwi）计算你的「理想体重」，并给出基于 BMI 的健康体重范围。每种公式都针对不同人群开发，结果会略有差异。</p>
+    <p>本计算器使用三种经典医学公式(Devine、Robinson、Hamwi)计算你的「理想体重」，并给出基于 BMI 的健康体重范围。每种公式都针对不同人群开发，结果会略有差异。</p>
     <div>
       <h2>三大公式</h2>
       <ul>
-        <li><strong>Devine（1974）：</strong>最初用于药物剂量计算，至今仍是最常被引用的公式</li>
-        <li><strong>Robinson（1983）：</strong>基于更新的数据对 Devine 公式进行了修订</li>
-        <li><strong>Hamwi（1964）：</strong>较老的公式，部分临床场景仍在使用</li>
+        <li><strong>Devine(1974)：</strong>最初用于药物剂量计算，至今仍是最常被引用的公式</li>
+        <li><strong>Robinson(1983)：</strong>基于更新的数据对 Devine 公式进行了修订</li>
+        <li><strong>Hamwi(1964)：</strong>较老的公式，部分临床场景仍在使用</li>
       </ul>
     </div>
     <div>
@@ -47,7 +47,7 @@ const zh: ReactNode = (
     </div>
     <div>
       <h2>更有用的数字：BMI 范围</h2>
-      <p>基于 BMI 的健康体重范围（18.5-24.9 × 身高²）比单一的理想体重更灵活。对大多数成年人来说，该范围内的任何体重在统计学上都与最低健康风险相关。</p>
+      <p>基于 BMI 的健康体重范围(18.5-24.9 × 身高²)比单一的理想体重更灵活。对大多数成年人来说，该范围内的任何体重在统计学上都与最低健康风险相关。</p>
     </div>
   </section>
 )
@@ -67,7 +67,7 @@ const es: ReactNode = (
     </div>
     <div>
       <h2>Por qué los resultados varían</h2>
-      <p>Las fórmulas se basaron en diferentes datos y suposiciones sobre la composición corporal. Todas son estimaciones — tu peso saludable real depende de la masa muscular, la complexión, la distribución de la grasa corporal y la salud general, ninguno de los cuales puede capturar una simple fórmula.</p>
+      <p>Las fórmulas se basaron en diferentes datos y suposiciones sobre la composición corporal. Todas son estimaciones — tu peso saludable real depende de la masa muscular, la complexión, la distribución de la grasa corporal y la salud general, y ninguna fórmula simple puede capturar todo eso.</p>
     </div>
     <div>
       <h2>Un número más útil: el rango de IMC</h2>

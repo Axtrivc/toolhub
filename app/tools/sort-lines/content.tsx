@@ -106,7 +106,7 @@ const de: ReactNode = (
     <div>
       <h2>Häufige Anwendungsfälle</h2>
       <ul>
-        <li>Eine per Brainstorming erstellte Ideensliste organisieren</li>
+        <li>Eine per Brainstorming erstellte Ideenliste organisieren</li>
         <li>Namen alphabetisch für ein Verzeichnis sortieren</li>
         <li>Produkt-SKUs oder Codes ordnen</li>
         <li>Schlüsselwörter oder Tags zur Prüfung vorbereiten</li>

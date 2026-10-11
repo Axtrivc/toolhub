@@ -56,11 +56,11 @@ const es: ReactNode = (
 const de: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>Warum der Ruhepuls zählt</h2>
-    <p>Zonen aus nackten Maximalpuls-Prozenten behandeln einen trainierten Athleten und einen unsportlichen Anfänger identisch. Die Karvonen-Methode nutzt die Herzfrequenzreserve (Max − Ruhe), die die Zonen proportional zur Fitness spreizt.</p>
+    <p>Zonen, die nur auf Prozenten des Maximalpulses beruhen, behandeln einen trainierten Athleten und einen unsportlichen Anfänger identisch. Die Karvonen-Methode nutzt die Herzfrequenzreserve (Max − Ruhe), die die Zonen proportional zur Fitness spreizt.</p>
     <h2>Ruhepuls richtig messen</h2>
     <p>Miss direkt nach dem Aufwachen eine volle Minute, vor Kaffee und Aufstehen, über mehrere Tage. Gut trainierte Ausdauersportler liegen häufig bei 40-50 bpm, Durchschnittserwachsene bei 60-80.</p>
     <h2>Der Haken an 220 minus Alter</h2>
-    <p>Maximalpuls-Formeln tragen einen individuellen Fehler von ±10-12 bpm. Wenn du in einem harten Rennen oder Labortest einen höheren Wert gesehen hast, nimm den als deine echte Obergrenze.</p>
+    <p>Maximalpuls-Formeln haben einen individuellen Fehler von etwa ±10-12 bpm. Wenn du in einem harten Rennen oder Labortest einen höheren Wert gesehen hast, nimm den als deine echte Obergrenze.</p>
     <h2>Training in Zone 2</h2>
     <p>Zone 2 (etwa 60-70 % der Reserve) baut Mitochondriendichte und Fettoxidation auf. Die meisten Hobbyläufer laufen an leichten Tagen zu hart — das Nasenatmungstempo landet meist in Z2.</p>
   </section>

@@ -46,7 +46,7 @@ export const lcmGcdCalculatorL10n: ToolL10n = {
     useCases: [
       'encontrar el denominador común para sumar fracciones',
       'programar cuándo coinciden eventos periódicos',
-      'hallar el azulejo cuadrado más grande que enlosa un rectángulo',
+      'hallar la baldosa cuadrada más grande que cubra un suelo rectangular',
       'entender la base del algoritmo RSA',
     ],
     faqs: [
@@ -70,7 +70,7 @@ export const lcmGcdCalculatorL10n: ToolL10n = {
     useCases: [
       'einen gemeinsamen Nenner für die Bruchaddition finden',
       'zeitplanen, wann periodische Ereignisse zusammenfallen',
-      'die größte quadratische Fliese finden, die einen Boden lückenlos auslegt',
+      'die größte quadratische Fliese finden, die lückenlos in einen rechteckigen Boden passt',
       'die Zahlentheorie hinter dem RSA-Verfahren verstehen',
     ],
     faqs: [

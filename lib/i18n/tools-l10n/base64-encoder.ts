@@ -8,6 +8,7 @@ export const base64EncoderL10n: ToolL10n = {
   zh: {
     ui: {
       'inputTooLarge': '⚠️ 输入过大——支持规模最多 10 万字符。请裁剪输入后再转换。',
+      'invalidInput': '⚠️ 此方向的输入无效',
       'defaultInputDecode': '5L2g5aW9',
       'defaultInputEncode': '你好',
       'characters': '字符',
@@ -39,6 +40,7 @@ export const base64EncoderL10n: ToolL10n = {
   es: {
     ui: {
       'inputTooLarge': '⚠️ Entrada demasiado grande: el tamaño admitido es de hasta 100 000 caracteres. Recorta la entrada para convertir.',
+      'invalidInput': '⚠️ Entrada no válida para esta dirección',
       'defaultInputDecode': 'SG9sYSBNdW5kbw==',
       'defaultInputEncode': 'Hola Mundo',
       'characters': 'caracteres',
@@ -64,12 +66,13 @@ export const base64EncoderL10n: ToolL10n = {
     },
     useCases: ['codificar texto a Base64 para correo o API', 'generar data URIs para incrustar en HTML/CSS', 'codificar el header/payload de tokens JWT', 'transportar datos por sistemas basados en texto que no admiten binario'],
     faqs: [
-      { q: '¿Por qué mi texto no inglés se ve mal?', a: 'Esta herramienta usa un manejo UTF-8 correcto, así que letras acentuadas y emojis se codifican bien. Si ves mojibake, el decodificador que usas probablemente asume una codificación de caracteres distinta.' },
+      { q: '¿Por qué se ve mal mi texto que no está en inglés?', a: 'Esta herramienta usa un manejo UTF-8 correcto, así que letras acentuadas y emojis se codifican bien. Si ves mojibake, el decodificador que usas probablemente asume una codificación de caracteres distinta.' },
     ],
   },
   de: {
     ui: {
       'inputTooLarge': '⚠️ Eingabe zu groß – die unterstützte Größe beträgt maximal 100.000 Zeichen. Kürze die Eingabe.',
+      'invalidInput': '⚠️ Ungültige Eingabe für diese Richtung',
       'defaultInputDecode': 'SGFsbG8gV2VsdA==',
       'defaultInputEncode': 'Hallo Welt',
       'characters': 'Zeichen',
@@ -93,7 +96,7 @@ export const base64EncoderL10n: ToolL10n = {
       'encodeFailed': '⚠️ Diese Eingabe ließ sich nicht kodieren',
       'words': 'Wörter',
     },
-    useCases: ['Text für E-Mail oder API als Base64 codieren', 'Data-URIs zum Einbetten in HTML/CSS erzeugen', 'den Header/Payload von JWT-Tokens codieren', 'Daten über textbasierte Systeme transportieren, die kein Binär unterstützen'],
+    useCases: ['Text für E-Mail oder API als Base64 codieren', 'Data-URIs zum Einbetten in HTML/CSS erzeugen', 'den Header/Payload von JWT-Tokens codieren', 'Daten über textbasierte Systeme transportieren, die keine Binärdaten unterstützen'],
     faqs: [
       { q: 'Warum sieht mein nicht-englischer Text falsch aus?', a: 'Dieses Tool nutzt korrekte UTF-8-Behandlung, sodass akzentuierte Buchstaben und Emojis richtig codiert werden. Wenn du Zeichensalat siehst, nimmt der Decoder, den du verwendest, wahrscheinlich eine andere Zeichenkodierung an.' },
     ],

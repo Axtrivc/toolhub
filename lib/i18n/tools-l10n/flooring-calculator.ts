@@ -20,12 +20,12 @@ export const flooringCalculatorL10n: ToolL10n = {
       'opt.unit.ft': '英尺 (ft)',
       'opt.unit.m': '米 (m)',
       'in.type': '地板 / 瓷砖类型',
-      'opt.type.tile': '瓷砖 (Ceramic tile)',
+      'opt.type.tile': '瓷砖',
       'opt.type.hardwood': '实木 / 强化复合地板',
-      'opt.type.vinyl': '石塑 / 乙烯天地板 (LVP)',
+      'opt.type.vinyl': '石塑 / 乙烯地板 (LVP)',
       'opt.type.marble': '大理石 / 天然石材',
       'in.waste': '损耗预留比例',
-      'in.boxPrice': '每箱包装单价',
+      'in.boxPrice': '每箱单价',
       'out.boxes': '所需包装箱数',
       'out.area': '房间净面积',
       'out.withWaste': '计入损耗后的总面积',
@@ -38,7 +38,7 @@ export const flooringCalculatorL10n: ToolL10n = {
       'boxWord': '箱',
       'boxesWord': '箱',
       'chartTitle': '房间平面布局示意',
-      'note': '💡 常见损耗率：标准顺铺铺设约 5–10%；人字拼、对角菱形铺贴、大尺寸瓷砖或不规则房型建议预留 10–15%。购买箱数向上取整——多备一箱未拆封材料可作为日后维修的完美色号保障。',
+      'note': '💡 常见损耗率：标准顺铺铺设约 5–10%；人字拼、对角菱形铺贴、大尺寸瓷砖或不规则房型建议预留 10–15%。购买箱数向上取整——多备一箱未拆封材料，日后维修才有同色号的保障。',
     },
     useCases: [
       '5.5×3.7 米客厅铺强化地板:约 20.4 平米,加 10% 损耗,按每箱 2.3 平米算出 10 箱',
@@ -61,7 +61,7 @@ export const flooringCalculatorL10n: ToolL10n = {
       },
       {
         q: '平方英尺怎么换算?',
-        a: '1 平方英尺 ≈ 0.093 平米。国内地板按平米计价、按包装(每箱约 1.2-2.3 平米)出售;损耗建议相同:直铺 5%-10%,斜铺或鱼骨拼 10%-15%。箱数务必向上取整——散装是买不到的。',
+        a: '1 平方英尺 ≈ 0.093 平米。国内地板按平米计价、按包装(每箱约 1.4-2.8 平米)出售;损耗建议相同:直铺 5%-10%,斜铺或鱼骨拼 10%-15%。箱数务必向上取整——散装是买不到的。',
       },
     ],
     formula: {
@@ -81,7 +81,7 @@ export const flooringCalculatorL10n: ToolL10n = {
       'in.type': 'Tipo de suelo',
       'opt.type.tile': 'Baldosa cerámica',
       'opt.type.hardwood': 'Madera multicapa / parquet',
-      'opt.type.vinyl': 'Vinilo / LVT',
+      'opt.type.vinyl': 'Vinilo (LVP)',
       'opt.type.marble': 'Mármol / piedra natural',
       'in.waste': 'Margen de desperdicio',
       'in.boxPrice': 'Precio por caja',
@@ -97,7 +97,7 @@ export const flooringCalculatorL10n: ToolL10n = {
       'boxWord': 'caja',
       'boxesWord': 'cajas',
       'chartTitle': 'Plano de la estancia',
-      'note': '💡 Desperdicio habitual: 5–10% para colocación recta; 10–15% para colocación en espiga, diagonal o estancias irregulares. Las cajas siempre se redondean al alza.',
+      'note': '💡 Desperdicio habitual: 5–10% para colocación recta; 10–15% para colocación en espiga, diagonal, gran formato o estancias irregulares. Las cajas siempre se redondean al alza.',
     },
     useCases: [
       'suelo laminado en un salón de 5,5×3,7 m: unos 20,4 m², con 10 % de desperdicio y cajas de 2,3 m² salen 10 cajas',
@@ -156,7 +156,7 @@ export const flooringCalculatorL10n: ToolL10n = {
       'boxWord': 'Karton',
       'boxesWord': 'Kartons',
       'chartTitle': 'Raumgrundriss',
-      'note': '💡 Üblicher Verschnitt: 5–10% bei gerader Verlegung; 10–15% bei Fischgrät, diagonaler Verlegung oder verwinkelten Räumen. Kartons werden stets aufgerundet.',
+      'note': '💡 Üblicher Verschnitt: 5–10% bei gerader Verlegung; 10–15% bei Fischgrät, diagonaler Verlegung, Großformat oder verwinkelten Räumen. Kartons werden stets aufgerundet.',
     },
     useCases: [
       'Laminat im 5,5×3,7-m-Wohnzimmer: rund 20,4 m², mit 10 % Verschnitt und 2,3-m²-Paketen ergeben sich 10 Pakete',
@@ -179,7 +179,7 @@ export const flooringCalculatorL10n: ToolL10n = {
       },
       {
         q: 'Und die Sockelleisten?',
-        a: 'Sockelleisten laufen über Laufmeter (Raumumfang minus Türen), nicht über m². Bei 4×5 m sind das rund 17 m; kaufe 5-10 % mehr für Schnitte. Achtung: Bodenpakete haben unterschiedliche Mengen (1,8-3,0 m²) — das Etikett entscheidet.',
+        a: 'Sockelleisten laufen über Laufmeter (Raumumfang minus Türen), nicht über m². Bei 4×5 m sind das rund 17 m; kaufe 5-10 % mehr für Schnitte. Achtung: Bodenpakete haben unterschiedliche Mengen (1,4-2,8 m²) — das Etikett entscheidet.',
       },
     ],
     formula: {

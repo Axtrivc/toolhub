@@ -114,7 +114,7 @@ const zh: ReactNode = (
         <strong>混合多种字符类型。</strong>结合大写字母、小写字母、数字和符号。四种类型全部混用,字符池会从 26 个(仅小写字母)扩大到约 95 个字符——此后每多一个字符大约增加 6.6 比特的熵。
       </li>
       <li>
-        <strong>避开可预测的内容。</strong>绝不使用姓名、生日、「password123」、键盘图案(qwerty)或任何能在字典里查到的词。攻击者会最先尝试这些。
+        <strong>避开可预测的内容。</strong>绝不使用姓名、生日、「password123」、键盘模式(qwerty)或任何能在字典里查到的词。攻击者会最先尝试这些。
       </li>
       <li>
         <strong>每个账户使用唯一的密码。</strong>一旦某个服务被攻破,攻击者就会拿同一个密码去试你的邮箱、银行和社交账户。
@@ -138,22 +138,22 @@ const zh: ReactNode = (
     </p>
     <ul>
       <li>
-        <strong>极弱(&lt;40 位):</strong>几秒到几分钟即可破解。切勿用于任何重要账户。
+        <strong>非常弱(&lt;40 比特):</strong>几秒到几分钟即可破解。切勿用于任何重要账户。
       </li>
       <li>
-        <strong>较弱(40–59 位):</strong>用消费级硬件数小时到数天可破解。请增加长度。
+        <strong>弱(40–59 比特):</strong>用消费级硬件数小时到数天可破解。请增加长度。
       </li>
       <li>
-        <strong>较强(60–79 位):</strong>需要数年才能破解。适合大多数个人账户。
+        <strong>强(60–79 比特):</strong>需要数年才能破解。适合大多数个人账户。
       </li>
       <li>
-        <strong>极强(≥80 位):</strong>实际上无法破解。用于邮箱、银行和密码管理器主密码。
+        <strong>非常强(≥80 比特):</strong>实际上无法破解。用于邮箱、银行和密码管理器主密码。
       </li>
     </ul>
 
     <h2>该记在脑子里,还是用管理器?</h2>
     <p>
-      对大多数人来说,密码管理器才是正确答案。你唯一需要记住的是解锁管理器的<strong>主密码</strong>——把它做成长口令(4-5 个随机单词),而不是一个短而复杂的字符串。其他所有密码都可以是这里生成的 20 位以上随机字符串,因为你永远不需要手动输入它们。
+      对大多数人来说,密码管理器才是正确答案。你唯一需要记住的是解锁管理器的<strong>主密码</strong>——把它做成长口令短语(4-5 个随机单词),而不是一个短而复杂的字符串。其他所有密码都可以是这里生成的 20 位以上随机字符串,因为你永远不需要手动输入它们。
     </p>
   </section>
 )
@@ -164,9 +164,9 @@ const es: ReactNode = (
     <h2>¿Qué hace fuerte a una contraseña?</h2>
     <p>
       La fuerza de una contraseña se reduce a una sola cosa: la <strong>entropía</strong> — lo impredecible que es
-      para un atacante. Cuanta más entropía (medida en bits), más tiempo tarda en romperse. Una contraseña aleatoria
+      para un atacante. Cuanta más entropía (medida en bits), más tiempo tarda en descifrarse. Una contraseña aleatoria
       de 16 caracteres con mayúsculas, minúsculas, números y símbolos tiene aproximadamente 100 bits de entropía, lo
-      que tardaría miles de millones de años en fuerza bruta con hardware moderno.
+      que tardaría miles de millones de años en un ataque de fuerza bruta con hardware moderno.
     </p>
 
     <h2>Cómo crear una contraseña fuerte</h2>
@@ -174,7 +174,7 @@ const es: ReactNode = (
     <ol>
       <li>
         <strong>Hazla larga.</strong> La longitud vence a la complejidad. Una contraseña de 20 caracteres con palabras
-        aleatorias es más fuerte que una corta y enrevesada. Apunta a al menos 12 caracteres; 16+ es ideal.
+        aleatorias es más fuerte que una corta y enrevesada. Apunta a un mínimo de 12 caracteres; 16 o más es lo ideal.
       </li>
       <li>
         <strong>Mezcla tipos de caracteres.</strong> Combina mayúsculas, minúsculas, números y símbolos. Mezclando
@@ -191,7 +191,7 @@ const es: ReactNode = (
       </li>
       <li>
         <strong>Guárdalas en un gestor de contraseñas.</strong> Memorizar decenas de contraseñas fuertes es imposible.
-        Usa un gestor reputado (Bitwarden, 1Password, KeePass) para almacenarlas cifradas.
+        Usa un gestor de confianza (Bitwarden, 1Password, KeePass) para almacenarlas cifradas.
       </li>
     </ol>
 
@@ -200,11 +200,11 @@ const es: ReactNode = (
       Esta herramienta usa la <code>Web Crypto API</code> (<code>crypto.getRandomValues</code>), que obtiene
       aleatoriedad del generador de números criptográficamente seguro de tu sistema operativo. Es el mismo estándar
       que usan los bancos y el software de seguridad. Es drásticamente más seguro que <code>Math.random()</code>, que
-      es predecible y no seguro para contraseñas.
+      es predecible e inseguro para contraseñas.
     </p>
     <p>
       Mejor aún: la contraseña se genera por completo en tu navegador y nunca se transmite a ningún sitio. No hay
-      log del servidor, ni base de datos, ni rastreo. Una vez que la copias, vive solo en tu portapapeles.
+      registros del servidor, ni base de datos, ni rastreo. Una vez que la copias, vive solo en tu portapapeles.
     </p>
 
     <h2>Entender las puntuaciones de fuerza</h2>
@@ -214,13 +214,13 @@ const es: ReactNode = (
     </p>
     <ul>
       <li>
-        <strong>Muy débil (&lt;40 bits):</strong> se rompe en segundos o minutos. Nunca la uses para algo importante.
+        <strong>Muy débil (&lt;40 bits):</strong> se descifra en segundos o minutos. Nunca la uses para algo importante.
       </li>
       <li>
-        <strong>Débil (40–59 bits):</strong> se rompe en horas o días con hardware de consumo. Aumenta la longitud.
+        <strong>Débil (40–59 bits):</strong> se descifra en horas o días con hardware de consumo. Aumenta la longitud.
       </li>
       <li>
-        <strong>Fuerte (60–79 bits):</strong> tardaría años en romperse. Adecuada para la mayoría de cuentas personales.
+        <strong>Fuerte (60–79 bits):</strong> tardaría años en descifrarse. Adecuada para la mayoría de cuentas personales.
       </li>
       <li>
         <strong>Muy fuerte (≥80 bits):</strong> prácticamente irrompible. Úsala para correo, banca y la contraseña
@@ -243,7 +243,7 @@ const de: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>Was macht ein Passwort stark?</h2>
     <p>
-      Passwortstärke kommt auf eins hinaus: <strong>Entropie</strong> — wie unvorhersehbar das Passwort für einen
+      Passwortstärke läuft auf eines hinaus: <strong>Entropie</strong> — wie unvorhersehbar das Passwort für einen
       Angreifer ist. Je mehr Entropie (gemessen in Bit), desto länger dauert das Knacken. Ein zufälliges 16-stelliges
       Passwort aus Groß-, Kleinbuchstaben, Zahlen und Symbolen hat rund 100 Bit Entropie und würde auf moderner
       Hardware Milliarden Jahre für eine Brute-Force-Attacke brauchen.
@@ -254,7 +254,7 @@ const de: ReactNode = (
     <ol>
       <li>
         <strong>Geh in die Länge.</strong> Länge schlägt Komplexität. Ein 20-stelliges Passwort aus Zufallswörtern ist
-        stärker als ein kurzes, wirres. Ziel auf mindestens 12 Zeichen; 16+ ist ideal.
+        stärker als ein kurzes, wirres. Ziel: mindestens 12 Zeichen; ideal sind 16 oder mehr.
       </li>
       <li>
         <strong>Mische Zeichentypen.</strong> Kombiniere Groß-, Kleinbuchstaben, Zahlen und Symbole. Mischst du alle
@@ -262,7 +262,7 @@ const de: ReactNode = (
         bringt dann ~6,6 Bit Entropie.
       </li>
       <li>
-        <strong>Vermeide das Vorhersehbare.</strong> Nutze nie Namen, Geburtstage, „password123", Tastaturmuster
+        <strong>Vermeide das Vorhersehbare.</strong> Nutze nie Namen, Geburtstage, „password123“, Tastaturmuster
         (qwerty) oder irgendetwas aus dem Wörterbuch. Angreifer probieren das zuerst.
       </li>
       <li>
@@ -277,9 +277,9 @@ const de: ReactNode = (
 
     <h2>Wie sicher ist dieser Generator?</h2>
     <p>
-      Dieses Werkzeug nutzt die <code>Web Crypto API</code> (<code>crypto.getRandomValues</code>), die Zufälligkeit
-      aus dem kryptografisch sicheren Zufallszahlengenerator deines Betriebssystems zieht. Das ist derselbe Standard,
-      den Banken und Security-Software verwenden. Er ist dramatisch sicherer als <code>Math.random()</code>, das
+      Dieses Werkzeug nutzt die <code>Web Crypto API</code> (<code>crypto.getRandomValues</code>), die Zufallswerte
+      aus dem kryptografisch sicheren Zufallszahlengenerator deines Betriebssystems bezieht. Das ist derselbe Standard,
+      den Banken und Security-Software verwenden. Das ist dramatisch sicherer als <code>Math.random()</code>, das
       vorhersagbar und für Passwörter ungeeignet ist.
     </p>
     <p>
@@ -289,7 +289,7 @@ const de: ReactNode = (
 
     <h2>Die Stärkebewertungen verstehen</h2>
     <p>
-      Die oben angezeigte Stärkeanzeige schätzt die Entropie anhand der Länge deines Passworts und der Größe des
+      Die Stärkeanzeige oben schätzt die Entropie anhand der Länge deines Passworts und der Größe des
       genutzten Zeichenpools. Das bedeuten die einzelnen Stufen:
     </p>
     <ul>

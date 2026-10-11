@@ -89,7 +89,7 @@ const es: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>¿Por qué convertir docker run a Docker Compose?</h2>
     <p>
-      Los comandos <code>docker run</code> son ideales para pruebas rápidas de contenedores. Sin embargo, en cuanto añades
+      Los comandos <code>docker run</code> son ideales para pruebas rápidas y puntuales de contenedores. Sin embargo, en cuanto añades
       mapeos de puertos, volúmenes persistentes, variables de entorno, políticas de reinicio y reglas de red personalizadas,
       un solo comando puede estirarse a una docena de líneas de bash con contrabarras frágiles.
     </p>
@@ -142,14 +142,14 @@ const de: ReactNode = (
 
     <h2>Named Volumes vs. Host Bind Mounts</h2>
     <p>
-      Docker unterstützt zwei Haupt-Speicherarten:
+      Docker unterstützt zwei grundlegende Speicherarten:
     </p>
     <ul>
-      <li><strong>Named Volumes (z. B. <code>pgdata:/var/lib/postgresql/data</code>):</strong> vom Docker-Engine verwaltet, im internen Docker-Verzeichnis gespeichert und zwischen Containern teilbar. Dieses Tool deklariert sie automatisch im Root-Abschnitt <code>volumes:</code>.</li>
+      <li><strong>Named Volumes (z. B. <code>pgdata:/var/lib/postgresql/data</code>):</strong> von der Docker-Engine verwaltet, im internen Docker-Verzeichnis gespeichert und zwischen Containern gemeinsam nutzbar. Dieses Tool deklariert sie automatisch im Root-Abschnitt <code>volumes:</code>.</li>
       <li><strong>Bind Mounts (z. B. <code>./html:/usr/share/nginx/html</code>):</strong> direkt auf bestimmte Host-Pfade gemappt. Sie benötigen keine Root-Volume-Deklaration.</li>
     </ul>
 
-    <h2>Modernes Compose Spec vs. Legacy v3</h2>
+    <h2>Moderne Compose Spec vs. Legacy v3</h2>
     <p>
       Das moderne Docker Compose (v2 CLI) folgt der offiziellen <em>Compose Specification</em>, in der der Top-Level-Key{' '}
       <code>version:</code> als veraltet gilt und optional ist. Dieses Tool erzeugt standardmäßig sauberes, modernes Compose

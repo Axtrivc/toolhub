@@ -35,8 +35,8 @@ export const trapezoidCalculatorL10n: ToolL10n = {
     },
     ui: {
       'chartTitle': 'Vista previa',
-      'in.a': 'Lado superior (a)',
-      'in.b': 'Lado inferior (b)',
+      'in.a': 'Base superior (a)',
+      'in.b': 'Base inferior (b)',
       'in.h': 'Altura (h)',
       'out.area': 'Área',
       errNonNegative: 'Los lados y la altura no pueden ser negativos',

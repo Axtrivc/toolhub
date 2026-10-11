@@ -45,7 +45,7 @@ export const titleCaseConverterL10n: ToolL10n = {
     ui: {
       defaultInput: 'der schnelle braune fuchs',
       inputLabel: 'Dein Text',
-      outputLabel: 'Titel-Schreibweise',
+      outputLabel: 'Titelschreibweise',
       note: '📝 Schreibt den ersten Buchstaben jedes Wortes groß. Ideal für Titel und Überschriften.',
       'cjkNoEffectNote': 'ℹ️ Die Groß-/Kleinschreibung betrifft nur lateinische Buchstaben — chinesische Zeichen bleiben unverändert.',
     },

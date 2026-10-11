@@ -112,7 +112,7 @@ export const deTools: Record<string, { name: string; shortIntro: string }> = {
     shortIntro: 'Rechne Gehalt zwischen jährlich, monatlich, 14-tägig und stündlich um.',
   },
   'sales-tax-calculator': {
-    name: 'Mehrwertsteuerrechner',
+    name: 'Umsatzsteuerrechner',
     shortIntro: 'Füge Steuer zu jedem Preis hinzu oder entferne sie sofort.',
   },
   'tip-calculator': {

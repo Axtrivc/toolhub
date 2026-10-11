@@ -1,6 +1,6 @@
 /**
  * slug-generator 本地化 bundle —— zh / es / de
- * 覆盖:faqs + useCases(交互客户端为自定义组件,UI 本地化留待后续)
+ * 覆盖:faqs + useCases + 交互 UI(自定义客户端经 tui() 读取)
  */
 import type { ToolL10n } from '../tool-l10n'
 
@@ -11,7 +11,7 @@ export const slugGeneratorL10n: ToolL10n = {
       'clear': '清空',
       'copy': '复制',
       'enterTitle': '输入你的标题或文本',
-      'inputPlaceholder': '如:提升网站流量的 10 种已验证方法',
+      'inputPlaceholder': '如:提升网站流量的 10 种经过验证的方法',
       'lowercase': '小写',
       'recent': '最近',
       'result': '结果',
@@ -20,7 +20,7 @@ export const slugGeneratorL10n: ToolL10n = {
       'sepUnderscore': '下划线 ( _ )',
       'separator': '分隔符',
       'slugPlaceholder': '你的 slug 会显示在这里',
-      'stripSymbols': '去除符号',
+      'stripSymbols': '移除特殊字符',
       'try': '试试:',
     },
     useCases: [
@@ -51,7 +51,7 @@ export const slugGeneratorL10n: ToolL10n = {
       'sepUnderscore': 'Guion bajo ( _ )',
       'separator': 'Separador',
       'slugPlaceholder': 'tu-slug-aparecerá-aquí',
-      'stripSymbols': 'Quitar símbolos',
+      'stripSymbols': 'Quitar caracteres especiales',
       'try': 'Prueba:',
     },
     useCases: [
@@ -73,16 +73,16 @@ export const slugGeneratorL10n: ToolL10n = {
       'clear': 'Leeren',
       'copy': 'Kopieren',
       'enterTitle': 'Titel oder Text eingeben',
-      'inputPlaceholder': 'z. B. 10 bewährte Wege den Website-Traffic zu steigern',
+      'inputPlaceholder': 'z. B. 10 bewährte Wege, den Website-Traffic zu steigern',
       'lowercase': 'Kleinbuchstaben',
-      'recent': 'Zuletzt',
+      'recent': 'Letzte Slugs',
       'result': 'Ergebnis',
       'save': 'Speichern',
       'sepHyphen': 'Bindestrich ( - )',
       'sepUnderscore': 'Unterstrich ( _ )',
       'separator': 'Trennzeichen',
       'slugPlaceholder': 'dein-slug-erscheint-hier',
-      'stripSymbols': 'Symbole entfernen',
+      'stripSymbols': 'Sonderzeichen entfernen',
       'try': 'Probier:',
     },
     useCases: [

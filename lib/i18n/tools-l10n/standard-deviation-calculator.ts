@@ -6,6 +6,10 @@ import type { ToolL10n } from '../tool-l10n'
 
 export const standardDeviationCalculatorL10n: ToolL10n = {
   zh: {
+    formula: {
+      formula: 'σ = √[ Σ(xᵢ − x̄)² / n ]',
+      explain: '总体标准差。x̄ 是均值,n 是数据点个数。样本标准差的分母用 n−1。',
+    },
     ui: {
       'chartTitle': '数据 vs 平均值',
       'line.value': '数值',
@@ -23,13 +27,17 @@ export const standardDeviationCalculatorL10n: ToolL10n = {
       '分析考试成绩的离散程度',
       '评估数据集的波动性与稳定性',
       '质量控制:衡量产品一致性',
-      '研究报告:报告均值 ± 标准差',
+      '研究报告:给出均值 ± 标准差',
     ],
     faqs: [
       { q: '什么时候用总体标准差,什么时候用样本标准差?', a: '当你的数据就是整个研究对象时用总体标准差(例如一个班的全部学生)。当你的数据代表一个更大的总体时用样本标准差(例如调查 100 名选民来估计全国)。' },
     ],
   },
   es: {
+    formula: {
+      formula: 'σ = √[ Σ(xᵢ − x̄)² / n ]',
+      explain: 'Desviación típica poblacional. x̄ es la media, n es el número de datos. La desviación típica muestral usa n−1 en el denominador.',
+    },
     ui: {
       'chartTitle': 'Tus números vs la media',
       'line.value': 'Valor',
@@ -54,6 +62,10 @@ export const standardDeviationCalculatorL10n: ToolL10n = {
     ],
   },
   de: {
+    formula: {
+      formula: 'σ = √[ Σ(xᵢ − x̄)² / n ]',
+      explain: 'Standardabweichung der Grundgesamtheit. x̄ ist der Mittelwert, n ist die Anzahl der Datenpunkte. Die Standardabweichung der Stichprobe verwendet n−1 im Nenner.',
+    },
     ui: {
       'chartTitle': 'Deine Zahlen vs. Mittelwert',
       'line.value': 'Wert',
@@ -74,7 +86,7 @@ export const standardDeviationCalculatorL10n: ToolL10n = {
       'Forschungsberichte: Mittelwert ± Standardabweichung angeben',
     ],
     faqs: [
-      { q: 'Wann nehme ich Grundgesamtheit oder Stichprobe?', a: 'Nutze die Grundgesamtheit, wenn deine Daten die gesamte Interessengruppe sind (alle Schüler einer Klasse). Nutze die Stichprobe, wenn deine Daten eine größere Grundgesamtheit vertreten (100 befragte Wähler, um ein Land zu schätzen).' },
+      { q: 'Wann nehme ich Grundgesamtheit oder Stichprobe?', a: 'Nutze die Grundgesamtheit, wenn deine Daten die gesamte betrachtete Gruppe sind (alle Schüler einer Klasse). Nutze die Stichprobe, wenn deine Daten eine größere Grundgesamtheit vertreten (100 befragte Wähler, um ein Land zu schätzen).' },
     ],
   },
 }

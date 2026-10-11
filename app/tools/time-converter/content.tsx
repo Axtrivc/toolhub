@@ -144,7 +144,7 @@ const de: ReactNode = (
       <p>
         Monate dauern zwischen 28 und 31 Tagen, daher gibt es keine exakte Umrechnung. Dieses
         Werkzeug verwendet den Durchschnitt von <strong>30,44 Tagen pro Monat</strong> (365,25 ÷
-        12). Für genaue Datumsberechnungen verwende stattdessen die Datumsdifferenz-Rechnung.
+        12). Für genaue Datumsberechnungen verwende stattdessen den Datumsdifferenz-Rechner.
       </p>
     </div>
     <div>

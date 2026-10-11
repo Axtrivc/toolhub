@@ -23,7 +23,7 @@ const en: ReactNode = (
     </p>
     <p>
       Unlike traditional barcodes that hold a short string of numbers, a single QR code can store
-      up to several thousand characters, making them far more versatile for both digital and print
+      up to several thousand characters, making it far more versatile for both digital and print
       use.
     </p>
 
@@ -215,7 +215,7 @@ const es: ReactNode = (
     </p>
     <p>
       A diferencia de los códigos de barras tradicionales, que contienen una breve cadena de números, un único código
-      QR puede almacenar hasta varios miles de caracteres, lo que los hace mucho más versátiles para uso digital e impreso.
+      QR puede almacenar hasta varios miles de caracteres, lo que lo hace mucho más versátil para uso digital e impreso.
     </p>
 
     <h2>Usos comunes de los códigos QR</h2>
@@ -230,7 +230,7 @@ const es: ReactNode = (
       </li>
       <li>
         <strong>Compartir WiFi.</strong> Genera un código QR de WiFi una vez y tus invitados podrán unirse a tu red
-        escaneando — sin más deletrear contraseñas largas. El código configura el SSID y la contraseña en su móvil.
+        escaneando — sin tener que deletrear contraseñas largas. El código configura el SSID y la contraseña en su móvil.
       </li>
       <li>
         <strong>Pagos.</strong> Las apps de pago usan códigos QR para transferir dinero al instante entre cuentas,
@@ -277,8 +277,8 @@ const es: ReactNode = (
         combinaciones claras sobre oscuras o de bajo contraste.
       </li>
       <li>
-        <strong>No los hagas demasiado pequeños.</strong> Para impresión, apunta a al menos 2 × 2 cm (unos 0,8 pulgadas).
-        Los códigos más pequeños cuesta escanearlos, sobre todo a distancia.
+        <strong>No los hagas demasiado pequeños.</strong> Para impresión, apunta a un mínimo de 2 × 2 cm (unos 0,8 pulgadas).
+        Los códigos más pequeños se escanean peor, sobre todo a distancia.
       </li>
       <li>
         <strong>Añade una zona tranquila.</strong> El margen blanco alrededor del código (la «zona tranquila») ayuda a
@@ -302,7 +302,7 @@ const es: ReactNode = (
     </p>
     <p>
       Los códigos QR <strong>dinámicos</strong> (que ofrecen servicios de pago) codifican una URL de redirección corta
-      en lugar del contenido final, lo que te permite cambiar el destino más adelante y rastrear analíticas de
+      en lugar del contenido final, lo que te permite cambiar el destino más adelante y rastrear estadísticas de
       escaneo. Para la mayoría de usos personales y de pequeña empresa, los códigos estáticos son todo lo que necesitas.
     </p>
   </section>
@@ -343,10 +343,10 @@ const de: ReactNode = (
       </li>
       <li>
         <strong>Eventtickets und Boardingpässe.</strong> Fluggesellschaften, Konzertlocations und Konferenzen nutzen
-        QR-Codes für schnelle, scannbare Einlasskontrolle.
+        QR-Codes für schnelle, scanbare Einlasskontrolle.
       </li>
       <li>
-        <strong>Kontaktteilen.</strong> Codiere eine vCard, damit Menschen deine Kontaktdaten mit einem Tipp aufs Handy
+        <strong>Kontaktteilen.</strong> Codiere eine vCard, damit Menschen deine Kontaktdaten mit einem Fingertipp aufs Handy
         speichern können.
       </li>
     </ul>
@@ -358,33 +358,33 @@ const de: ReactNode = (
       </li>
       <li>
         <strong>Gib deinen Inhalt ein.</strong> Für URLs den vollständigen Link einfügen (inklusive <code>https://</code>).
-        Für WLAN Netzwerkname, Passwort und Verschlüsselungstyp eingeben.
+        Für WLAN: Netzwerkname, Passwort und Verschlüsselungstyp eingeben.
       </li>
       <li>
         <strong>Passe das Aussehen an.</strong> Stelle die Vorschaugröße ein und wähle Vorder- und Hintergrundfarben
         passend zu deiner Marke. Halte den Kontrast hoch, damit Scanner den Code zuverlässig lesen.
       </li>
       <li>
-        <strong>Herunterladen.</strong> Klicke auf „PNG herunterladen", um ein hochauflösendes Bild für Druck oder Web zu speichern.
+        <strong>Herunterladen.</strong> Klicke auf „PNG herunterladen“, um ein hochauflösendes Bild für Druck oder Web zu speichern.
       </li>
     </ol>
 
-    <h2>Tipps für scannbare QR-Codes</h2>
+    <h2>Tipps für scanbare QR-Codes</h2>
     <p>
-      Ein QR-Code ist nur nützlich, wenn er zuverlässig scannt. Folge diesen Richtlinien, damit deine Codes auf jedem
+      Ein QR-Code ist nur nützlich, wenn er sich zuverlässig scannen lässt. Folge diesen Richtlinien, damit deine Codes auf jedem
       Gerät funktionieren:
     </p>
     <ul>
       <li>
         <strong>Hoher Kontrast.</strong> Dunkle Vordergrund auf hellem Hintergrund scannt am besten. Vermeide
-        hell-auf-dunkel oder paarungen mit geringem Kontrast.
+        hell-auf-dunkel oder Kombinationen mit geringem Kontrast.
       </li>
       <li>
         <strong>Nicht zu klein machen.</strong> Für Druck auf mindestens 2 × 2 cm (ca. 0,8 Zoll) abzielen. Kleinere
         Codes lassen sich schwer scannen, besonders aus der Ferne.
       </li>
       <li>
-        <strong>Ruhezone lassen.</strong> Der weiße Rand um den Code (die „Ruhezone") hilft Scannern, ihn zu erkennen.
+        <strong>Ruhezone lassen.</strong> Der weiße Rand um den Code (die „Ruhezone“) hilft Scannern, ihn zu erkennen.
         Dieses Werkzeug fügt automatisch einen Rand hinzu — schneide ihn beim Platzieren des Bildes nicht ab.
       </li>
       <li>

@@ -91,8 +91,8 @@ const de: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>Was ist dieses Werkzeug?</h2>
     <p>
-      Konvertiert ein JSON-Array von Objekten in das CSV-Format. Nützlich, um Anwendungsdaten in
-      Tabellenkalkulationen, Datenanalysewerkzeuge oder für Datenbankimporte zu exportieren.
+      Konvertiert ein JSON-Array von Objekten in das CSV-Format. Nützlich, um Anwendungsdaten für
+      Tabellenkalkulationen, Datenanalysewerkzeuge oder Datenbankimporte zu exportieren.
     </p>
     <div>
       <h2>Wie es funktioniert</h2>

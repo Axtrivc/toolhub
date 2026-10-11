@@ -16,7 +16,7 @@ export const textToListL10n: ToolL10n = {
       '把随手记下的笔记整理成结构化列表',
       '从零散想法生成大纲',
       '准备购物清单或待办清单',
-      '为幻灯片和文档排版数据',
+      '为幻灯片和文档格式化数据',
     ],
     faqs: [
       { q: '能用不同的项目符号吗?', a: '能。默认使用「•」(圆点);在文本末尾加 " ||| -" 或 " ||| *" 可换成连字符或星号,加 " ||| 1." 则用数字编号。' },
@@ -47,8 +47,8 @@ export const textToListL10n: ToolL10n = {
       note: '📝 Fügt jeder Zeile ein Aufzählungszeichen (•) hinzu. Hänge " ||| -", " ||| *" oder " ||| 1." an den Text an, um Bindestriche, Sterne oder Nummerierung zu verwenden.',
     },
     useCases: [
-      'schnell notierte Gedanken in eine strukturierte Liste umwandeln',
-      'aus verteilten Ideen eine Gliederung erstellen',
+      'Schnell notierte Gedanken in eine strukturierte Liste umwandeln',
+      'Aus verteilten Ideen eine Gliederung erstellen',
       'Einkaufs- oder Aufgabenlisten vorbereiten',
       'Daten für Folien und Dokumente formatieren',
     ],

@@ -42,7 +42,7 @@ const zh: ReactNode = (
 const es: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>Cuándo usarlo</h2>
-    <p>Perfecto para depurar flujos de autenticación: acuña un token con claims conocidos, pásalo a tu API en una petición de prueba e inspecciona lo que extrae tu middleware. Combínalo con nuestro JWT Decoder para ver exactamente lo que un servidor leerá de vuelta.</p>
+    <p>Perfecto para depurar flujos de autenticación: genera un token con claims conocidos, pásalo a tu API en una petición de prueba e inspecciona lo que extrae tu middleware. Combínalo con nuestro JWT Decoder para ver exactamente lo que un servidor leerá de vuelta.</p>
     <h2>Notas sobre los algoritmos</h2>
     <p>HS256/384/512 son simétricos — el mismo secreto firma y verifica. Por eso esta herramienta funciona por completo en el cliente: el secreto se queda en tu navegador vía WebCrypto. RS256/ES256 exigen una clave privada y pertenecen al código del servidor.</p>
     <h2>Claims que conviene fijar</h2>
@@ -56,7 +56,7 @@ const es: ReactNode = (
 const de: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>Wann du das nutzt</h2>
-    <p>Ideal zum Debuggen von Auth-Flows: Präge einen Token mit bekannten Claims, gib ihn in einer Testanfrage an deine API und prüfe, was deine Middleware daraus extrahiert. Kombiniere es mit unserem JWT-Decoder, um genau zu sehen, was ein Server zurückliest.</p>
+    <p>Ideal zum Debuggen von Auth-Flows: Erzeuge einen Token mit bekannten Claims, gib ihn in einer Testanfrage an deine API und prüfe, was deine Middleware daraus extrahiert. Kombiniere es mit unserem JWT-Decoder, um genau zu sehen, was ein Server zurückliest.</p>
     <h2>Hinweise zu den Algorithmen</h2>
     <p>HS256/384/512 sind symmetrisch — dasselbe Secret signiert und verifiziert. Genau deshalb läuft dieses Tool komplett clientseitig: Das Secret bleibt über WebCrypto in deinem Browser. RS256/ES256 brauchen einen privaten Schlüssel und gehören in Servercode.</p>
     <h2>Claims, die sich lohnen</h2>

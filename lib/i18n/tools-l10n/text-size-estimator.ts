@@ -1,6 +1,6 @@
 /**
  * text-size-estimator 本地化 bundle —— zh / es / de
- * 覆盖:faqs + useCases(交互客户端为自定义组件,UI 本地化留待后续)
+ * 覆盖:ui + faqs + useCases(交互客户端为 batch 文本工具)
  */
 import type { ToolL10n } from '../tool-l10n'
 
@@ -10,7 +10,7 @@ export const textSizeEstimatorL10n: ToolL10n = {
       defaultInput: '你好，这是一段用于测量大小的示例文本。',
       inputLabel: '你的文本',
       outputLabel: '大小估算',
-      note: '📏 估算不同单位下的存储大小。适合在把文本存入数据库或 API 前预估。',
+      note: '📏 估算不同单位下的存储大小。适合在把文本存入数据库或经 API 传输前预估。',
     },
     useCases: [
       '规划数据库 VARCHAR 字段长度',

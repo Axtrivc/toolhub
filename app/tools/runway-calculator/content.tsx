@@ -131,7 +131,7 @@ const de: ReactNode = (
     <h2>Warum Runway für Startups und Solo-Gründer entscheidend ist</h2>
     <p>
       <strong>Runway</strong> ist die Anzahl der Monate, die dein Unternehmen noch operieren kann, bevor das Geld
-      vollständig aufgebraucht ist. Ob VC-finanziertes Startup oder bootstrapped Solo-Entwickler: Wer seine Runway
+      vollständig aufgebraucht ist. Ob VC-finanziertes Startup oder bootstrapped Solo-Entwickler: Wer die Runway
       exakt kennt, trifft ruhige, strategische Einstellungsentscheidungen — wer sie nicht kennt, gerät in Panik,
       wenn das Konto leergeht.
     </p>
@@ -154,8 +154,8 @@ const de: ReactNode = (
       Paul Graham prägte die Begriffe <em>Default Alive</em> und <em>Default Dead</em>. Ein Startup ist default alive,
       wenn seine aktuelle Umsatzwachstumsrate es vor dem Cash-Ende in die Profitabilität trägt. Wenn nicht, ist es
       default dead und stirbt, sofern es keine neue Runde aufnimmt oder die Kosten drastisch senkt. Dieser Rechner
-      projiziert das monatlich compounding Wachstum und zeigt, ob du organisch profitabel wirst oder gegen die
-      Null-Cash-Wand fährst.
+      projiziert den Cashflow mit monatlich compoundierendem Umsatzwachstum und zeigt, ob du organisch profitabel
+      wirst oder gegen die Null-Cash-Wand fährst.
     </p>
 
     <h2>Wann die nächste Finanzierungsrunde starten?</h2>

@@ -60,7 +60,7 @@ const de: ReactNode = (
     <h2>Wie Arrays verglichen werden</h2>
     <p>Die Schlüsselreihenfolge von Objekten ist egal, die Reihenfolge von Arrays nicht: <code>[&quot;a&quot;,&quot;b&quot;]</code> und <code>[&quot;b&quot;,&quot;a&quot;]</code> gelten als geändert. Das spiegelt, wie die meisten Anwendungen JSON verarbeiten.</p>
     <h2>Die Ausgabe lesen</h2>
-    <p>Jede Zeile zeigt den exakten Pfad einer Abweichung in Punktnotation (<code>user.address.city</code>). Grün heißt hinzugefügt, rot entfernt, und Bernstein zeigt Wertänderungen als alt → neu.</p>
+    <p>Jede Zeile zeigt den exakten Pfad einer Abweichung in Punktnotation (<code>user.address.city</code>). Grün heißt hinzugefügt, rot entfernt, und in Bernsteinfarbe erscheinen Wertänderungen als alt → neu.</p>
     <h2>Datenschutz</h2>
     <p>Beide Dokumente werden vollständig im Browser geparst. Es wird nichts hochgeladen — auch API-Antworten mit Tokens oder persönlichen Daten kannst du bedenkenlos vergleichen.</p>
   </section>

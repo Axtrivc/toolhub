@@ -38,7 +38,7 @@ export const jsonMinifierL10n: ToolL10n = {
       'aplicaciones móviles sensibles al ancho de banda',
     ],
     faqs: [
-      { q: '¿La minimización rompe algo?', a: 'No. Los espacios en blanco no son significativos en la sintaxis JSON. El JSON minimizado se analiza igual que el JSON formateado. Volver a minimizar JSON ya minimizado no produce cambios.' },
+      { q: '¿La minificación rompe algo?', a: 'No. Los espacios en blanco no son significativos en la sintaxis JSON. El JSON minificado se analiza igual que el JSON con formato. Volver a minificar JSON ya minificado no produce cambios.' },
     ],
   },
   de: {
@@ -51,12 +51,12 @@ export const jsonMinifierL10n: ToolL10n = {
     },
     useCases: [
       'API-Antworten (oft zusätzlich gzip-komprimiert)',
-      'eingebettetes JSON in HTML oder JavaScript',
-      'in Datenbanken gespeicherte Konfigurationen',
-      'bandbreitenkritische mobile Apps',
+      'Eingebettetes JSON in HTML oder JavaScript',
+      'In Datenbanken gespeicherte Konfigurationen',
+      'Bandbreitenkritische mobile Apps',
     ],
     faqs: [
-      { q: 'Macht Minifizierung etwas kaputt?', a: 'Nein. Leerzeichen sind in der JSON-Syntax nicht bedeutend. Minifiziertes JSON wird genauso geparst wie formatiertes JSON. Bereits minifiziertes JSON erneut zu minifizieren ist ein No-Op.' },
+      { q: 'Macht Minimierung etwas kaputt?', a: 'Nein. Leerzeichen sind in der JSON-Syntax nicht bedeutend. Minimiertes JSON wird genauso geparst wie formatiertes JSON. Bereits minimiertes JSON erneut zu minimieren ist ein No-Op.' },
     ],
   },
 }

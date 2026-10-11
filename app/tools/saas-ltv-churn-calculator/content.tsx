@@ -62,7 +62,7 @@ const zh: ReactNode = (
     <h2>这是什么工具？</h2>
     <p>
       这款<strong>SaaS 指标计算器</strong>只需几项输入 —— ARPU、毛利率、流失率、CAC、增长率与客户数 ——
-      就能算出创始人和投资人真正关注的数字：客户生命周期、LTV、LTV:CAC 比率、CAC 回收期、流失 MRR，以及一个简化的净收入留存提示。它完全在你的浏览器中运行，不会向任何地方发送数据。
+      就能算出创始人和投资人真正关注的数字：客户生命周期、LTV、LTV:CAC 比率、CAC 回本周期、流失 MRR，以及一个简化的净收入留存提示。它完全在你的浏览器中运行，不会向任何地方发送数据。
     </p>
 
     <div>
@@ -76,7 +76,7 @@ const zh: ReactNode = (
     <div>
       <h2>如何解读健康度信号</h2>
       <p>
-        <strong>LTV:CAC 比率</strong>是经典的单位经济性检验：低于 1 表示每位客户都在亏钱，1–3 属于可行区间，高于 3 则被视为健康增长。<strong>CAC 回收期</strong>告诉你需要多少个月的毛利才能收回获客支出 —— 12 个月以内是常见的基准。流失客户和流失 MRR 卡片把抽象的百分比换算成每月实际流失的账户数和收入。
+        <strong>LTV:CAC 比率</strong>是经典的单位经济性检验：低于 1 表示每位客户都在亏钱，1–3 属于可行区间，高于 3 则被视为健康增长。<strong>CAC 回本周期</strong>告诉你需要多少个月的毛利才能收回获客支出 —— 12 个月以内是常见的基准。流失客户和流失 MRR 卡片把抽象的百分比换算成每月实际流失的账户数和收入。
       </p>
     </div>
 
@@ -97,7 +97,7 @@ const es: ReactNode = (
     <p>
       Esta <strong>calculadora de métricas SaaS</strong> convierte un puñado de entradas — ARPU, margen bruto, churn, CAC,
       crecimiento y número de clientes — en los números que de verdad vigilan fundadores e inversores: vida del cliente, LTV,
-      ratio LTV:CAC, payback de CAC, MRR perdido y una pista simplificada de retención neta de ingresos. Funciona por completo en
+      ratio LTV:CAC, payback de CAC, MRR perdido y una estimación simplificada de la retención neta de ingresos. Funciona por completo en
       tu navegador; no se envía nada a ninguna parte.
     </p>
 
@@ -124,10 +124,10 @@ const es: ReactNode = (
     </div>
 
     <div>
-      <h2>Advertencias y trampas</h2>
+      <h2>Advertencias y limitaciones</h2>
       <p>
         Estas fórmulas asumen que el churn y el ARPU se mantienen constantes a lo largo de la vida — las cohortes reales decaen de forma no lineal,
-        y el churn inicial suele ser mayor que el del régimen estacionario. La pista de <strong>NRR</strong> (
+        y el churn inicial suele ser mayor que el del régimen estacionario. La estimación de <strong>NRR</strong> (
         <code>1 + growth − churn</code>) es una simplificación: la retención neta de ingresos real también cuenta la expansión,
         las bajadas y las reactivaciones dentro de la base existente. Usa estos números para comprobaciones rápidas y
         para las cuentas de una presentación a inversores, no como sustituto del análisis de cohortes sobre datos de facturación reales.
@@ -141,9 +141,9 @@ const de: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>Was ist dieses Werkzeug?</h2>
     <p>
-      Dieser <strong>SaaS-Metriken-Rechner</strong> verwandelt eine Handvoll Eingaben — ARPU, Rohertrag, Churn, CAC,
+      Dieser <strong>SaaS-Metriken-Rechner</strong> verwandelt eine Handvoll Eingaben — ARPU, Bruttomarge, Churn, CAC,
       Wachstum und Kundenzahl — in die Zahlen, die Gründer und Investoren wirklich im Blick behalten: Kundenlebensdauer, LTV,
-      LTV:CAC-Verhältnis, CAC-Payback, verloren gegangener MRR und einen vereinfachten Hinweis auf die Netto-Umsatzbindung. Er läuft vollständig in
+      LTV:CAC-Verhältnis, CAC-Payback, verloren gegangener MRR und einen vereinfachten NRR-Hinweis (Net Revenue Retention). Er läuft vollständig in
       deinem Browser; es wird nichts irgendwohin gesendet.
     </p>
 
@@ -152,7 +152,7 @@ const de: ReactNode = (
       <p>
         Bei einer konstanten monatlichen Churn-Rate überlebt ein Kunde im Durchschnitt <code>1 / churn</code> Monate — 5 %
         Churn bedeuten eine erwartete Lebensdauer von 20 Monaten. Die Multiplikation mit dem monatlichen Rohertrag pro Kunde ergibt{' '}
-        <code>LTV = ARPU × gross margin ÷ churn</code>. Den <em>Rohertrag</em> (und nicht den reinen Umsatz) zu verwenden, ist wichtig:
+        <code>LTV = ARPU × gross margin ÷ churn</code>. Die <em>Bruttomarge</em> (und nicht den reinen Umsatz) zu verwenden, ist wichtig:
         bei 80 % Marge stehen von jedem Umsatzdollar nur $0.80 für die Deckung der Akquisekosten zur Verfügung. Bei 0 % Churn
         ist die Lebensdauer mathematisch unbegrenzt, was das Werkzeug als ∞ anzeigt.
       </p>
@@ -163,7 +163,7 @@ const de: ReactNode = (
       <p>
         Das <strong>LTV:CAC-Verhältnis</strong> ist der klassische Test der Unit Economics: unter 1 verlierst du mit jedem
         Kunden Geld, 1–3 ist tragbar, und über 3 gilt als gesundes Wachstum. Das <strong>CAC-Payback</strong> sagt
-        dir, wie viele Monate Rohertrag nötig sind, um die Akquisekosten wieder einzuspielen — unter 12 Monate ist ein
+        dir, wie viele Monate Rohertrag nötig sind, um die Akquisekosten wieder einzuspielen — weniger als 12 Monate ist ein
         gängiger Richtwert. Die Karten für verlorene Kunden und verlorenen MRR übersetzen einen abstrakten Prozentsatz in die
         tatsächliche Anzahl von Konten und Umsatz, die jeden Monat aus der Tür gehen.
       </p>
@@ -172,9 +172,9 @@ const de: ReactNode = (
     <div>
       <h2>Vorbehalte und Fallstricke</h2>
       <p>
-        Diese Formeln gehen davon aus, dass Churn und ARPU über die gesamte Lebensdauer konstant bleiben — reale Kohorten zerfallen nicht-linear,
-        und die frühe Churn ist meist höher als im stationären Zustand. Der <strong>NRR-Hinweis</strong> (
-        <code>1 + growth − churn</code>) ist eine Vereinfachung: die echte Netto-Umsatzbindung zählt auch Expansion,
+        Diese Formeln gehen davon aus, dass Churn und ARPU über die gesamte Lebensdauer konstant bleiben — reale Kohorten laufen nicht-linear aus,
+        und anfangs ist die Churn-Rate meist höher als im späteren Verlauf. Der <strong>NRR-Hinweis</strong> (
+        <code>1 + growth − churn</code>) ist eine Vereinfachung: die echte Net Revenue Retention zählt auch Expansion,
         Downgrades und Reaktivierungen innerhalb der bestehenden Basis. Nutze diese Zahlen für schnelle Plausibilitätsprüfungen und
         Pitch-Deck-Rechnungen, nicht als Ersatz für eine Kohortenanalyse echter Abrechnungsdaten.
       </p>

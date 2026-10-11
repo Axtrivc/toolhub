@@ -48,7 +48,7 @@ export const netWorthCalculatorL10n: ToolL10n = {
       formula: 'Net worth = total assets − total liabilities',
       explain: 'Vermögenswerte sind das, was du hast (Bar, Anlagen, Haus, Auto); Verbindlichkeiten das, was du schuldest (Hypothek, Kredite, Karten). Positives Reinvermögen heißt, Aktiva übersteigen Schulden.',
     },
-    useCases: ['das Reinvermögen berechnen (Aktiva minus Verbindlichkeiten)', 'die Entwicklung des Reinvermögens über Zeit verfolgen', 'sehen, in welcher Vermögensstufe du liegst', 'zwischen „anlagefähigem" und Wohnimmobilie-inkludiertem Vermögen unterscheiden'],
+    useCases: ['das Reinvermögen berechnen (Aktiva minus Verbindlichkeiten)', 'die Entwicklung des Reinvermögens über Zeit verfolgen', 'sehen, in welcher Vermögensstufe du liegst', 'zwischen „anlagefähigem" Vermögen und Vermögen inklusive selbstgenutzter Immobilie unterscheiden'],
     faqs: [
       { q: 'Zählt meine selbstgenutzte Immobilie?', a: 'Ja, aber ziehe die Hypothek ab. Das verbleibende Eigenkapital ist ein echter Vermögenswert. Manche Rechner lassen die selbstgenutzte Immobilie weg, um sich auf „anlagefähiges" Reinvermögen zu konzentrieren — beide Ansätze sind gültig, solange du beim Jahresvergleich konsistent bleibst.' },
       { q: 'Ist ein negatives Reinvermögen schlimm?', a: 'Bei jungen Erwachsenen mit Studienkrediten und wenig Ersparnissen ist es häufig. Eine negative Zahl ist kein moralischer Fehlschlag — sie ist ein Startpunkt. Ziel ist stetiger Fortschritt: Überprüfe alle 6-12 Monate und konzentriere dich zuerst auf den Abbau hochverzinslicher Schulden und den Aufbau eines Notgroschens.' },

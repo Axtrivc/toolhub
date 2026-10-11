@@ -14,12 +14,12 @@ export const CsvToFinetuneJsonlL10n: ToolL10n = {
     ],
     faqs: [
       { q: '输出的 JSONL 长什么样?', a: '每行一个 JSON 对象,形如 {"messages":[{"role":"system",...},{"role":"user",...},{"role":"assistant",...}]}——这正是 OpenAI 微调端点要求的 chat 格式,转换结果可直接用于 files API 上传。' },
-      { q: 'assistant 为空的行会怎样?', a: '被标记而非丢弃。空 assistant 在微调里是致命的(模型会学到"不回答"),工具会把这些行的行号列出来,方便你回到源 CSV 逐条修正。' },
+      { q: 'assistant 为空的行会怎样?', a: '被标记而非丢弃。空 assistant 在微调里是致命的(模型会学到“不回答”),工具会把这些行的行号列出来,方便你回到源 CSV 逐条修正。' },
       { q: '单元格里有逗号和引号怎么办?', a: '按 RFC 4180 标准解析:带逗号、换行或引号的单元格用双引号包裹、内部引号双写转义。Excel 和 Google Sheets 导出的 CSV 天然符合该规范,直接粘贴即可。' },
       { q: '微调需要多少条样本?', a: 'OpenAI 官方建议 50-100 条高质量样本起步即可看到明显提升,多数任务几百条足够。样本质量(一致的风格、正确的答案)远比数量重要——先用本工具把数据洗干净再谈规模。' },
     ],
     ui: {
-      'note': '输出即 OpenAI 微调 API 所需的 chat-messages JSONL。assistant 为空的行会被标记(而非丢弃)以便修正源数据。单元格内引号与逗号按 RFC 4180 处理。',
+      'note': '输出即 OpenAI 微调 API 所需的 chat-messages JSONL。assistant 为空的行会被标记(而非丢弃)以便修正源数据。单元格内的引号与逗号按 RFC 4180 处理。',
       'assistantColLabel': 'assistant 列',
       'copyJsonl': '复制 JSONL',
       'csvLabel': 'CSV(含表头行)',
@@ -38,7 +38,7 @@ export const CsvToFinetuneJsonlL10n: ToolL10n = {
   es: {
     useCases: [
       'Convertir el CSV de pares pregunta-respuesta del equipo de etiquetado al JSONL chat-messages que exige la API de fine-tuning de OpenAI',
-      'Inyectar una columna system opcional para dar a cada muestra la misma personalidad o reglas de negocio, sin escribir scripts',
+      'Usar la columna system opcional para que todas las muestras compartan la misma personalidad o reglas de negocio, sin escribir scripts',
       'Chequeo de formato antes del envío: convertir 50 muestras y verificar la estructura messages y la codificación UTF-8',
       'Limpieza de datos: las filas con assistant vacío quedan marcadas para corregirlas en el origen en lugar de descartarlas',
     ],
@@ -49,7 +49,7 @@ export const CsvToFinetuneJsonlL10n: ToolL10n = {
       { q: '¿Cuántas muestras hacen falta?', a: 'OpenAI recomienda empezar con 50-100 ejemplos de alta calidad para ver mejoras claras; la mayoría de tareas bastan con unos cientos. La calidad (estilo consistente, respuestas correctas) pesa mucho más que la cantidad — limpia los datos aquí antes de escalar.' },
     ],
     ui: {
-      'note': 'La salida es el JSONL de mensajes que espera la API de fine-tuning de OpenAI. Las filas con assistant vacío se marcan (no se descartan). Comillas internas según RFC 4180.',
+      'note': 'La salida es el JSONL de mensajes que espera la API de fine-tuning de OpenAI. Las filas con assistant vacío se marcan (no se descartan). Comillas y comas dentro de las celdas se tratan según RFC 4180.',
       'assistantColLabel': 'Columna assistant',
       'copyJsonl': 'Copiar JSONL',
       'csvLabel': 'CSV (con fila de encabezado)',
@@ -68,18 +68,18 @@ export const CsvToFinetuneJsonlL10n: ToolL10n = {
   de: {
     useCases: [
       'Das CSV mit Frage-Antwort-Paaren vom Labeling-Team in das chat-messages-JSONL der OpenAI-Fine-Tuning-API umwandeln',
-      'Über die optionale system-Spalte jeder Probe dieselbe Persona oder Geschäftsregel einimpfen — ganz ohne Skript',
+      'Über die optionale system-Spalte in jeder Probe dieselbe Persona oder Geschäftsregel hinterlegen — ganz ohne Skript',
       'Format-Check vor dem Upload: 50 Proben konvertieren und messages-Struktur sowie UTF-8-Kodierung verifizieren',
-      'Datenhygiene: Zeilen mit leerem Assistant werden explizit markiert, damit du sie in der Quelle nachziehst, statt sie still zu verlieren',
+      'Datenhygiene: Zeilen mit leerem Assistant werden explizit markiert, damit du sie direkt in der Quelle korrigierst, statt sie still zu verlieren',
     ],
     faqs: [
       { q: 'Wie sieht das JSONL aus?', a: 'Ein JSON-Objekt pro Zeile: {"messages":[{"role":"system",...},{"role":"user",...},{"role":"assistant",...}]} — exakt das Chat-Format des OpenAI-Fine-Tuning-Endpunkts, direkt für die files-API geeignet.' },
       { q: 'Was passiert mit Zeilen ohne Assistant?', a: 'Sie werden markiert, nicht verworfen. Ein leerer Assistant ist im Fine-Tuning fatal (das Modell lernt „nicht antworten"), darum listet das Werkzeug die Zeilennummern zur Korrektur im Quell-CSV.' },
-      { q: 'Wie werden Kommas und Anführungszeichen behandelt?', a: 'Strikt nach RFC 4180: Zellen mit Kommas, Zeilenumbrüchen oder Anführungszeichen stehen in doppelten Anführungszeichen, innere Anführungszeichen werden verdoppelt. Exporte aus Excel und Google Sheets erfüllen das von Haus aus.' },
+      { q: 'Wie werden Kommas und Anführungszeichen behandelt?', a: 'Strikt nach RFC 4180: Zellen mit Kommas, Zeilenumbrüchen oder Anführungszeichen stehen in doppelten Anführungszeichen, innere Anführungszeichen werden verdoppelt. Exporte aus Excel und Google Sheets erfüllen das von Haus aus — du kannst sie direkt einfügen.' },
       { q: 'Wie viele Beispiele braucht ein Fine-Tuning?', a: 'OpenAI empfiehlt 50-100 hochwertige Beispiele für den Anfang; die meisten Aufgaben kommen mit wenigen hundert aus. Qualität (konsistenter Stil, korrekte Antworten) schlägt Quantität deutlich — erst hier säubern, dann skalieren.' },
     ],
     ui: {
-      'note': 'Die Ausgabe ist das Chat-Messages-JSONL der OpenAI-Fine-Tuning-API. Zeilen mit leerem Assistant werden markiert, nicht verworfen. Anführungszeichen folgen RFC 4180.',
+      'note': 'Die Ausgabe ist das Chat-Messages-JSONL der OpenAI-Fine-Tuning-API. Zeilen mit leerem Assistant werden markiert, nicht verworfen. Anführungszeichen und Kommas in Zellen folgen RFC 4180.',
       'assistantColLabel': 'Assistant-Spalte',
       'copyJsonl': 'JSONL kopieren',
       'csvLabel': 'CSV (mit Kopfzeile)',
@@ -92,7 +92,7 @@ export const CsvToFinetuneJsonlL10n: ToolL10n = {
       'rowNoAssistant': 'Zeile {n}: leerer Assistant-Inhalt',
       'sysColLabel': 'System-Spalte (optional)',
       'userColLabel': 'User-Spalte',
-      'inputTooLarge': 'Die Eingabe überschreitet {n} Zeichen — die Konvertierung wird übersprungen, damit die Eingabe reaktionsfähig bleibt. CSV kürzen oder teilen.',
+      'inputTooLarge': 'Die Eingabe überschreitet {n} Zeichen — die Konvertierung wird übersprungen, damit die Eingabe reaktionsfähig bleibt. CSV kürzen oder aufteilen.',
     },
   },
 }

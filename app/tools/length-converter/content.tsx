@@ -76,7 +76,7 @@ const zh: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>公制与英制单位</h2>
     <p>
-      世界上主要有两种长度计量系统。<strong>公制</strong>(毫米、厘米、米、千米)被几乎所有国家采用,基于 10 的幂次,换算简单。<strong>英制</strong>(英寸、英尺、码、英里)主要在美国使用,各单位之间的关系更不规则。
+      世界上主要有两种长度计量系统。<strong>公制</strong>(毫米、厘米、米、公里)被几乎所有国家采用,基于 10 的幂次,换算简单。<strong>英制</strong>(英寸、英尺、码、英里)主要在美国使用,各单位之间的关系更不规则。
     </p>
 
     <h2>常用换算系数</h2>
@@ -85,9 +85,9 @@ const zh: ReactNode = (
       <li><strong>1 英寸</strong> = 2.54 厘米(精确)</li>
       <li><strong>1 英尺</strong> = 0.3048 米(精确)</li>
       <li><strong>1 码</strong> = 0.9144 米(精确)</li>
-      <li><strong>1 英里</strong> = 1.609344 千米(精确)</li>
+      <li><strong>1 英里</strong> = 1.609344 公里(精确)</li>
       <li><strong>1 米</strong> = 3.28084 英尺</li>
-      <li><strong>1 千米</strong> = 0.621371 英里</li>
+      <li><strong>1 公里</strong> = 0.621371 英里</li>
     </ul>
 
     <h2>快速参考表</h2>

@@ -49,7 +49,7 @@ const es: ReactNode = (
 // ──────────────────────────── Deutsch ────────────────────────────
 const de: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
-    <h2>Ziffern über 9 hinaus</h2>
+    <h2>Ziffern jenseits der 9</h2>
     <p>Basen über zehn brauchen zusätzliche Ziffernsymbole: a=10, b=11 … z=35. Basis 36 besteht daher aus 0-9 gefolgt von a-z — deshalb taucht sie in URL-Shortnern und automatisch erzeugten IDs auf, wo es auf kompakte Schreibweise ohne Groß-/Kleinschreibung ankommt.</p>
     <h2>Brüche verhalten sich anders</h2>
     <p>Dezimal 0,1 hat keine exakte binäre Darstellung — Binärbrüche wiederholen sich endlos, wie 1/3 im Dezimalsystem. Der Konverter zeigt bis zu zehn Nachkommastellen; zum Prüfen reicht das locker, für bitgenaue Speicherarithmetik nicht.</p>

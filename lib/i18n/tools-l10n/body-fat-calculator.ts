@@ -109,7 +109,7 @@ export const bodyFatCalculatorL10n: ToolL10n = {
     ui: {
       errWaist: 'Der Taillenumfang muss größer als der Halsumfang sein',
       errInvalid: 'Ungültige Messwerte',
-      catEssential: 'Essentielle Fette', catAthlete: 'Sportler', catFitness: 'Fit', catAverage: 'Durchschnitt', catHigh: 'Hoch',
+      catEssential: 'Essentielles Fett', catAthlete: 'Sportler', catFitness: 'Fitness', catAverage: 'Durchschnitt', catHigh: 'Hoch',
       gaugeTitle: 'Wo du liegst',
       metric: 'Metrisch (cm / kg)',
       imperial: 'Imperial (ft/in / lb)',
@@ -143,7 +143,7 @@ export const bodyFatCalculatorL10n: ToolL10n = {
     ],
     faqs: [
       { q: 'Wie genau ist die Navy-Methode?', a: 'Sie hat eine Abweichung von etwa ±3–4 % gegenüber DEXA-Scans. Am besten funktioniert sie bei Menschen mit durchschnittlicher Körperzusammensetzung. Für sehr schlanke oder sehr muskulöse Personen sind andere Methoden (Caliper, DEXA, Unterwassergewicht) genauer.' },
-      { q: 'Welche Fettwerte sind gesund?', a: 'ACE-Referenz: essentiell 2-5 % (Männer) bzw. 10-13 % (Frauen); Sportler 6-13 % und 14-20 %; fit 14-17 % und 21-24 %. Frauen brauchen naturgemäß mehr Fett — männliche Tabellen auf Frauen anzuwenden ist falsch.' },
+      { q: 'Welche Fettwerte sind gesund?', a: 'ACE-Referenz: essentiell 2-5 % (Männer) bzw. 10-13 % (Frauen); Sportler 6-13 % und 14-20 %; Fitness 14-17 % und 21-24 %. Frauen brauchen naturgemäß mehr Fett — männliche Tabellen auf Frauen anzuwenden ist falsch.' },
       { q: 'Wie messe ich mit minimalem Fehler?', a: 'Immer gleiche Bedingungen: morgens, nüchtern, ohne vorheriges Training. Maßband anlegen, ohne zu drücken; Hals unter dem Kehlkopf, Taille auf Nabelhöhe (Frauen zusätzlich die Hüfte an der breitesten Stelle). Dreimal messen, Median nehmen.' },
       { q: 'Und verglichen mit der BIA-Waage im Studio?', a: 'Bioimpedanz (InBody & Co.) liegt ebenfalls bei ±3–4 % Abweichung und reagiert stark auf Trinkmenge und letzte Mahlzeit. Das Maßband punktet mit Reproduzierbarkeit: gleiche Technik täglich — bei einer Diät zählt der Trend, nicht der Einzelwert.' },
     ],

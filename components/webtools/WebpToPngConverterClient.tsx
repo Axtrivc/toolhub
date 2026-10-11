@@ -364,7 +364,7 @@ export function WebpToPngConverterClient() {
                 />
               </div>
               <div className="min-w-0 flex-1 text-sm" style={{ color: 'rgb(var(--text))' }}>
-                <span className="font-semibold">{format === 'png' ? L('png', 'PNG') : L('jpeg', 'JPEG')} {L('outputSuffix', 'output')}</span>
+                <span className="font-semibold">{format === 'png' ? L('pngOutputLabel', 'PNG output') : L('jpegOutputLabel', 'JPEG output')}</span>
                 <span className="ml-2 font-mono text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>
                   {formatBytes(output.size)} · {source.width} × {source.height} px
                 </span>
@@ -377,7 +377,7 @@ export function WebpToPngConverterClient() {
                 )}
               </div>
               <button type="button" onClick={download} className="btn btn-primary text-sm">
-                {L('download', 'Download')} {format === 'png' ? L('png', 'PNG') : L('jpg', 'JPG')}
+                {format === 'png' ? L('downloadPng', 'Download PNG') : L('downloadJpg', 'Download JPG')}
               </button>
             </div>
           )}

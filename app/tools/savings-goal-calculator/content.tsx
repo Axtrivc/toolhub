@@ -118,7 +118,7 @@ const de: ReactNode = (
 
     <div>
       <h2>Funktionsweise</h2>
-      <p>Der Rechner hochrechnet den Zukunftswert deiner aktuellen Ersparnisse und ermittelt dann die monatliche Rate, die die Lücke zu deinem Ziel schließt. Eine höhere Rendite bedeutet kleinere monatliche Raten — aber mit mehr Risiko.</p>
+      <p>Der Rechner berechnet den Zukunftswert deiner aktuellen Ersparnisse und ermittelt dann die monatliche Rate, die die Lücke zu deinem Ziel schließt. Eine höhere Rendite bedeutet kleinere monatliche Raten — aber mit mehr Risiko.</p>
     </div>
 
     <div>

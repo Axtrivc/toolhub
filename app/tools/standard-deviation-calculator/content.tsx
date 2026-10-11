@@ -48,18 +48,18 @@ const zh: ReactNode = (
 const es: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>¿Qué es esta herramienta?</h2>
-    <p>La <strong>desviación estándar</strong> mide cómo se distribuye un conjunto de números respecto al promedio. Una desviación estándar pequeña significa que los valores se agrupan estrechamente en torno a la media; una grande significa que están muy dispersos. Es una de las estadísticas más útiles en el análisis de datos.</p>
+    <p>La <strong>desviación típica</strong> mide cómo se distribuye un conjunto de números respecto al promedio. Una desviación típica pequeña significa que los valores se agrupan estrechamente en torno a la media; una grande significa que están muy dispersos. Es una de las estadísticas más útiles en el análisis de datos.</p>
     <div>
-      <h2>Lo que te dice la desviación estándar</h2>
-      <p>Si las notas de un examen tienen una media de 75 con una desviación estándar de 5, la mayoría se sitúa entre 70 y 80. Con la misma media pero una desviación estándar de 15, las notas se reparten de 60 a 90. Mismo promedio — imagen muy distinta.</p>
+      <h2>Lo que te dice la desviación típica</h2>
+      <p>Si las notas de un examen tienen una media de 75 con una desviación típica de 5, la mayoría se sitúa entre 70 y 80. Con la misma media pero una desviación típica de 15, las notas se reparten de 60 a 90. Mismo promedio — imagen muy distinta.</p>
     </div>
     <div>
       <h2>La regla 68-95-99,7</h2>
-      <p>Para datos con distribución normal: ~68 % de los valores caen dentro de 1 desviación estándar de la media, ~95 % dentro de 2 y ~99,7 % dentro de 3. Así, si la altura adulta promedia 170 cm con DE 7, alrededor del 95 % de las personas mide entre 156 y 184 cm.</p>
+      <p>Para datos con distribución normal: ~68 % de los valores caen dentro de 1 desviación típica de la media, ~95 % dentro de 2 y ~99,7 % dentro de 3. Así, si la altura adulta promedia 170 cm con una desviación típica de 7, alrededor del 95 % de las personas mide entre 156 y 184 cm.</p>
     </div>
     <div>
       <h2>Población frente a muestra</h2>
-      <p>Esta calculadora usa la desviación estándar de la <strong>población</strong> (divide entre N). Si tus datos son una muestra de una población mayor, usa la desviación estándar de la <strong>muestra</strong> (divide entre N−1) para obtener una estimación insesgada. Multiplica nuestro resultado por <code>√(N/(N−1))</code> para convertirlo.</p>
+      <p>Esta calculadora usa la desviación típica de la <strong>población</strong> (divide entre N). Si tus datos son una muestra de una población mayor, usa la desviación típica de la <strong>muestra</strong> (divide entre N−1) para obtener una estimación insesgada. Multiplica nuestro resultado por <code>√(N/(N−1))</code> para convertirlo.</p>
     </div>
   </section>
 )
@@ -75,11 +75,11 @@ const de: ReactNode = (
     </div>
     <div>
       <h2>Die 68-95-99,7-Regel</h2>
-      <p>Bei normalverteilten Daten: ~68 % der Werte liegen innerhalb von 1 Standardabweichung des Mittelwerts, ~95 % innerhalb von 2 und ~99,7 % innerhalb von 3. Wenn also die Körpergröße von Erwachsenen im Durchschnitt 170 cm beträgt mit SA 7, sind etwa 95 % der Menschen zwischen 156 und 184 cm groß.</p>
+      <p>Bei normalverteilten Daten: ~68 % der Werte liegen innerhalb von 1 Standardabweichung des Mittelwerts, ~95 % innerhalb von 2 und ~99,7 % innerhalb von 3. Wenn die Körpergröße von Erwachsenen im Durchschnitt 170 cm mit einer Standardabweichung von 7 beträgt, sind etwa 95 % der Menschen zwischen 156 und 184 cm groß.</p>
     </div>
     <div>
-      <h2>Population vs. Stichprobe</h2>
-      <p>Dieser Rechner verwendet die Standardabweichung der <strong>Population</strong> (teilt durch N). Wenn deine Daten eine Stichprobe aus einer größeren Population sind, verwende die Standardabweichung der <strong>Stichprobe</strong> (teilt durch N−1), um eine erwartungstreue Schätzung zu erhalten. Multipliziere unser Ergebnis mit <code>√(N/(N−1))</code> zur Umrechnung.</p>
+      <h2>Grundgesamtheit vs. Stichprobe</h2>
+      <p>Dieser Rechner verwendet die Standardabweichung der <strong>Grundgesamtheit</strong> (teilt durch N). Wenn deine Daten eine Stichprobe aus einer größeren Grundgesamtheit sind, verwende die Standardabweichung der <strong>Stichprobe</strong> (teilt durch N−1), um eine erwartungstreue Schätzung zu erhalten. Multipliziere unser Ergebnis mit <code>√(N/(N−1))</code> zur Umrechnung.</p>
     </div>
   </section>
 )

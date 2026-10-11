@@ -8,7 +8,7 @@ export const salaryConverterL10n: ToolL10n = {
   zh: {
     formula: {
       formula: 'Annual = hourly × 2080\nMonthly = annual / 12',
-      explain: '在时薪、周薪、月薪和年薪之间换算。假设每年工作 2,080 小时(40 h × 52 周);按不同排班调整工时。',
+      explain: '在时薪、周薪、月薪和年薪之间换算。假设每年工作 2,080 小时(40 h × 52 周);可按不同工作安排调整工时。',
     },
     useCases: ['比较以不同方式报价(年薪/月薪/时薪)的工作机会', '把兼职或合同工时薪换算成年收入', '搞清双周薪和半月薪的区别', '做预算时在年薪、月薪、时薪之间换算'],
     faqs: [
@@ -26,15 +26,15 @@ export const salaryConverterL10n: ToolL10n = {
       'opt.unit.annual': '年薪', 'opt.unit.monthly': '月薪', 'opt.unit.semimonthly': '半月薪', 'opt.unit.biweekly': '双周薪', 'opt.unit.weekly': '周薪', 'opt.unit.hourly': '时薪',
       'out.annual': '年薪', 'out.monthly': '月薪', 'out.semimonthly': '半月薪', 'out.biweekly': '双周薪', 'out.weekly': '周薪', 'out.hourly': '时薪',
       errNonNegative: '金额不能为负',
-      note: '💵 假设每年 12 个月薪、26 个双周薪周期、52 个带薪周。加班和奖金不计入。',
+      note: '💵 按每年 12 次月薪、24 次半月薪、26 次双周薪、52 个带薪周计算。加班和奖金不计入。',
     },
   },
   es: {
     formula: {
       formula: 'Annual = hourly × 2080\nMonthly = annual / 12',
-      explain: 'Convierte entre paga por hora, semana, mes y año. Asume 2.080 horas laborales al año (40 h × 52 s); ajusta las horas para otro horario.',
+      explain: 'Convierte entre paga por hora, semana, mes y año. Asume 2.080 horas laborales al año (40 h × 52 semanas); ajusta las horas para otro horario.',
     },
-    useCases: ['comparar ofertas que cotizan el sueldo de forma distinta (anual/mensual/hora)', 'convertir una tarifa por hora a sueldo anual para trabajos a tiempo parcial o por contrato', 'entender la diferencia entre pago quincenal y semestral', 'pasar entre sueldo anual, mensual y por hora al hacer presupuesto'],
+    useCases: ['comparar ofertas que cotizan el sueldo de forma distinta (anual/mensual/hora)', 'convertir una tarifa por hora a sueldo anual para trabajos a tiempo parcial o por contrato', 'entender la diferencia entre pago quincenal y semimensual', 'pasar entre sueldo anual, mensual y por hora al hacer presupuesto'],
     faqs: [
       { q: '¿Cuántas horas tiene un año laboral a tiempo completo?', a: 'El año estándar a tiempo completo en EE. UU. son 2.080 horas (40 horas × 52 semanas). La tarifa por hora que muestra esta herramienta usa esa cifra, escalada por las horas semanales que ingreses.' },
       { q: '¿Esto incluye impuestos y prestaciones?', a: 'No. Son conversiones brutas (antes de impuestos). Tu sueldo neto real depende del impuesto federal y estatal, Seguridad Social, Medicare, aportaciones a jubilación y deducciones de prestaciones.' },
@@ -46,17 +46,17 @@ export const salaryConverterL10n: ToolL10n = {
       'cmp.2': 'Semanal',
       'cmp.3': 'Por hora',
       'cmpseg.0': 'Por periodo',
-      'in.unit': 'Cobro por', 'in.amount': 'Importe', 'inSuffix.amount': '$', 'in.hours': 'Horas por semana',
+      'in.unit': 'Frecuencia de pago', 'in.amount': 'Importe', 'inSuffix.amount': '$', 'in.hours': 'Horas por semana',
       'opt.unit.annual': 'Anual', 'opt.unit.monthly': 'Mensual', 'opt.unit.semimonthly': 'Semimensual', 'opt.unit.biweekly': 'Quincenal', 'opt.unit.weekly': 'Semanal', 'opt.unit.hourly': 'Por hora',
       'out.annual': 'Sueldo anual', 'out.monthly': 'Mensual', 'out.semimonthly': 'Semimensual', 'out.biweekly': 'Quincenal', 'out.weekly': 'Semanal', 'out.hourly': 'Por hora',
       errNonNegative: 'El importe no puede ser negativo',
-      note: '💵 Asume 12 pagas mensuales, 26 pagas quincenales y 52 semanas pagadas/año. No incluye horas extra ni bonos.',
+      note: '💵 Asume 12 pagas mensuales, 24 semimensuales, 26 quincenales y 52 semanas pagadas al año. No incluye horas extra ni bonos.',
     },
   },
   de: {
     formula: {
       formula: 'Annual = hourly × 2080\nMonthly = annual / 12',
-      explain: 'Rechnet zwischen Stunden-, Wochen-, Monats- und Jahreslohn um. Setzt 2.080 Arbeitsstunden pro Jahr (40 Std. × 52 W.) voraus; Stunden für andere Modelle anpassen.',
+      explain: 'Rechnet zwischen Stunden-, Wochen-, Monats- und Jahreslohn um. Setzt 2.080 Arbeitsstunden pro Jahr (40 Std. × 52 Wochen) voraus; Stunden für andere Modelle anpassen.',
     },
     useCases: ['Jobangebote vergleichen, die das Gehalt unterschiedlich angeben (jährlich/monatlich/stündlich)', 'einen Stundenlohn in Jahresgehalt umrechnen für Teilzeit- oder Vertragsarbeit', 'den Unterschied zwischen 14-tägigem und halbmonatlichem Gehalt verstehen', 'zwischen Jahres-, Monats- und Stundenlohn für die Budgetplanung umrechnen'],
     faqs: [
@@ -74,7 +74,7 @@ export const salaryConverterL10n: ToolL10n = {
       'opt.unit.annual': 'Jährlich', 'opt.unit.monthly': 'Monatlich', 'opt.unit.semimonthly': 'Halbmonatlich', 'opt.unit.biweekly': '14-tägig', 'opt.unit.weekly': 'Wöchentlich', 'opt.unit.hourly': 'Stündlich',
       'out.annual': 'Jahresgehalt', 'out.monthly': 'Monatlich', 'out.semimonthly': 'Halbmonatlich', 'out.biweekly': '14-tägig', 'out.weekly': 'Wöchentlich', 'out.hourly': 'Stündlich',
       errNonNegative: 'Der Betrag darf nicht negativ sein',
-      note: '💵 Geht von 12 Monatsgehältern, 26 14-tägigen Zahlungen und 52 bezahlten Wochen/Jahr aus. Überstunden und Boni sind nicht enthalten.',
+      note: '💵 Geht von 12 Monatsgehältern, 24 halbmonatlichen Zahlungen, 26 14-tägigen Zahlungen und 52 bezahlten Wochen/Jahr aus. Überstunden und Boni sind nicht enthalten.',
     },
   },
 }

@@ -117,7 +117,7 @@ const zh: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>月供是怎么算出来的</h2>
     <p>
-      大多数分期贷款——房贷、车贷、个人贷款和学生贷款——都用一种叫<strong>等额本息(摊销)</strong>的公式。每个月你还一个固定金额,同时覆盖已产生的利息和一部分本金。贷款前期,还款大部分是利息;到后期,大部分才是本金。
+      大多数分期贷款——房贷、车贷、个人贷款和学生贷款——都用一种叫<strong>等额本息(摊销)</strong>的公式。你每月偿还一个固定金额,同时覆盖已产生的利息和一部分本金。贷款前期,还款大部分是利息;到后期,大部分才是本金。
     </p>
     <p>月供的计算公式是:</p>
     <p>
@@ -134,7 +134,7 @@ const zh: ReactNode = (
     <p>三个变量决定月供,搞懂它们能帮你省钱:</p>
     <ul>
       <li>
-        <strong>贷款金额(本金)。</strong>借得越多,月供越高——但这是线性关系。借一倍,月供大约也翻一倍。
+        <strong>贷款金额(本金)。</strong>借得越多,月供越高——但这是线性关系。多借一倍,月供大约也翻一倍。
       </li>
       <li>
         <strong>利率。</strong>利率影响很大,尤其是长期贷款。在 30 年房贷上,哪怕利率只差 1%,整个贷款期也可能相差数万美元。
@@ -185,7 +185,7 @@ const zh: ReactNode = (
         <strong>提升信用分。</strong>信用越好,能拿到的利率越低,长期累积下来能省不少。
       </li>
       <li>
-        <strong>利率下降时再融资。</strong>如果市场利率低于你现在的利率,再融资到更低利率的贷款能省几千美元——只是要权衡一下过户费用。
+        <strong>利率下降时再融资。</strong>如果市场利率低于你现在的利率,再融资到更低利率的贷款能省几千美元——只是要权衡一下交割费用。
       </li>
     </ol>
   </section>
@@ -245,7 +245,7 @@ const es: ReactNode = (
     </ul>
     <p>
       Pasar de 3 a 7 años reduce tu pago mensual a la mitad, pero más que duplica el coste en
-      intereses. Fíjate siempre en los <em>intereses totales</em>, no solo en la cuota mensual.
+      intereses. Fíjate siempre en los <em>intereses totales</em>, no solo en el pago mensual.
     </p>
 
     <h2>Tipos comunes de préstamo</h2>
@@ -322,7 +322,8 @@ const de: ReactNode = (
       </li>
       <li>
         <strong>Zinssatz.</strong> Er hat besonders bei langen Krediten große Wirkung. Bei einer
-        30-jährigen Hypothek kann 1 % Zinsunterschied über die Laufzeit zigtausend Dollar ausmachen.
+        30-jährigen Hypothek kann 1 % Zinsunterschied über die Laufzeit Zehntausende Dollar
+        ausmachen.
       </li>
       <li>
         <strong>Laufzeit.</strong> Eine längere Laufzeit senkt die Monatsrate, erhöht aber die
@@ -377,8 +378,8 @@ const de: ReactNode = (
       </li>
       <li>
         <strong>Leiste Sondertilgungen.</strong> Schon eine zusätzliche Rate pro Jahr, direkt auf
-        den Kredit angewendet, kann Jahre von einer Hypothek nehmen. Kläre vorher, ob dein
-        Kreditgeber das ohne Vorfälligkeitsentschädigung erlaubt.
+        den Kredit angewendet, kann die Laufzeit einer Hypothek um Jahre verkürzen. Kläre vorher,
+        ob dein Kreditgeber das ohne Vorfälligkeitsentschädigung erlaubt.
       </li>
       <li>
         <strong>Verbessere deinen Bonitätsscore.</strong> Bessere Bonität öffnet die Tür zu

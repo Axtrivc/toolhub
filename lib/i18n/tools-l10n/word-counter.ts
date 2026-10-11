@@ -1,6 +1,6 @@
 /**
  * word-counter 本地化 bundle —— zh / es / de
- * 覆盖:faqs + useCases(交互客户端为自定义组件,UI 本地化留待后续)
+ * 覆盖:faqs + useCases + ui(交互客户端为自定义组件,经 tui('word-counter', ...) 读取)
  */
 import type { ToolL10n } from '../tool-l10n'
 
@@ -16,9 +16,9 @@ export const wordCounterL10n: ToolL10n = {
       'readingTime': '阅读时间',
       'sentences': '句数',
       'speakingTime': '演讲时间',
-      'textExceeds': '文本超过',
+      'textExceeds': '文本已超过',
       'textPlaceholder': '在此输入或粘贴文本…',
-      'truncatedForSafety': '字符——为保证页面流畅,只统计前面的部分。',
+      'truncatedForSafety': '字符——为保证页面流畅,只统计开头部分。',
       'words': '词数',
       'yourText': '你的文本',
     },
@@ -47,7 +47,7 @@ export const wordCounterL10n: ToolL10n = {
       'privacyNote': '🔒 Tu texto se analiza localmente en tu navegador y nunca se sube a ningún sitio.',
       'readingTime': 'Tiempo de lectura',
       'sentences': 'Oraciones',
-      'speakingTime': 'Tiempo de habla',
+      'speakingTime': 'Tiempo de locución',
       'textExceeds': 'El texto supera los',
       'textPlaceholder': 'Escribe o pega tu texto aquí…',
       'truncatedForSafety': 'caracteres — solo se cuenta la primera parte para mantener la página fluida.',
@@ -56,15 +56,15 @@ export const wordCounterL10n: ToolL10n = {
     },
     useCases: [
       'cumplir los límites de palabras de ensayos y artículos',
-      'escribir contenido alineado con SEO',
-      'comprobar los conteos de cada red social',
+      'escribir contenido optimizado para SEO',
+      'comprobar los recuentos de cada red social',
       'facturar trabajos freelance por palabra',
     ],
     faqs: [
       { q: '¿Las palabras con guion cuentan como una o dos?', a: 'Como una. Una palabra con guion como `well-being` cuenta como una sola porque no tiene espacio. Lo mismo aplica a contracciones como `don\'t`.' },
       { q: '¿Los números cuentan como palabras?', a: 'Sí. Cualquier secuencia de caracteres sin espacios — incluidos números sueltos como `2026` — cuenta como una palabra.' },
-      { q: '¿Es precisa la estimación del tiempo de lectura?', a: 'Es un promedio razonable, no una medida exacta. La velocidad real varía de 100 palabras por minuto (material técnico denso) a más de 400 (texto fácil de ojear). Tómalo como una ayuda de planificación, no como una cifra exacta.' },
-      { q: '¿Mi texto se sube a algún servidor?', a: 'No. Todo se analiza localmente en tu navegador, así que puedes pegar contratos o borradores sin exponerlos — práctico bajo acuerdos de confidencialidad.' },
+      { q: '¿Es precisa la estimación del tiempo de lectura?', a: 'Es un promedio razonable, no una medida exacta. La velocidad real varía de 100 palabras por minuto (material técnico denso) a más de 400 (en una lectura rápida). Tómalo como una ayuda de planificación, no como una cifra exacta.' },
+      { q: '¿Mi texto se sube a algún servidor?', a: 'No. Todo se analiza localmente en tu navegador, así que puedes pegar contratos o borradores sin exponerlos, incluso si trabajas bajo acuerdos de confidencialidad.' },
       { q: '¿Qué límites manejan las redes sociales?', a: 'X/Twitter 280 caracteres, Instagram 2.200 en las descripciones, LinkedIn unos 3.000 por publicación: para esos límites mira «Caracteres», no «Palabras». Los artículos SEO suelen medirse en palabras (1.000-2.000).' },
       { q: '¿Qué pasa con textos muy largos?', a: 'Al superar el límite, solo se cuenta la parte inicial para que la página siga fluida. Para un manuscrito completo, pégalo por capítulos y suma los resultados.' },
     ],
@@ -90,14 +90,14 @@ export const wordCounterL10n: ToolL10n = {
       'Wortlimits für Aufsätze und Manuskripte einhalten',
       'SEO-gerechte Inhalte schreiben',
       'die Limits der einzelnen Social-Media-Plattformen prüfen',
-      'Freelance-Arbeit nach Wort abgerechnen',
+      'Freelance-Arbeit pro Wort abrechnen',
     ],
     faqs: [
       { q: 'Zählen Wörter mit Bindestrich als eins oder zwei?', a: 'Als eins. Ein Wort mit Bindestrich wie `well-being` zählt als einzelnes Wort, weil kein Leerzeichen darin steckt. Dasselbe gilt für Kontraktionen wie `don\'t`.' },
       { q: 'Zählen Zahlen als Wörter?', a: 'Ja. Jede Folge von Zeichen ohne Leerzeichen — einschließlich eigenständiger Zahlen wie `2026` — zählt als ein Wort.' },
       { q: 'Wie genau ist die Schätzung der Lesezeit?', a: 'Es ist ein sinnvoller Durchschnitt, keine präzise Messung. Die echte Lesegeschwindigkeit variiert von 100 Wörtern pro Minute (dichtes technisches Material) bis über 400 (leichtes Überfliegen). Behandle die Schätzung als Planungshilfe, nicht als exakte Zahl.' },
       { q: 'Wird mein Text hochgeladen?', a: 'Nein. Die Analyse läuft komplett lokal im Browser — Verträge oder unveröffentlichte Manuskripte kannst du gefahrlos einfügen, auch unter Vertraulichkeitsvereinbarungen.' },
-      { q: 'Welche Limits gelten in sozialen Medien?', a: 'X/Twitter 280 Zeichen, Instagram 2.200 für Bildunterschriften, LinkedIn rund 3.000 pro Beitrag — dafür zähle die «Zeichen», nicht die «Wörter». SEO-Texte misst man dagegen in Wörtern (üblich 1.000-2.000 pro Artikel).' },
+      { q: 'Welche Limits gelten in sozialen Medien?', a: 'X/Twitter 280 Zeichen, Instagram 2.200 für Bildunterschriften, LinkedIn rund 3.000 pro Beitrag — dafür zählen die „Zeichen", nicht die „Wörter". SEO-Texte misst man dagegen in Wörtern (üblich 1.000-2.000 pro Artikel).' },
       { q: 'Was passiert bei sehr langen Texten?', a: 'Über dem Limit wird nur der Anfang gezählt, damit die Seite reaktionsschnell bleibt. Bei einem ganzen Manuskript: kapitelweise einfügen und die Ergebnisse addieren.' },
     ],
   },

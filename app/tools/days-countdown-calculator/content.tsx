@@ -75,7 +75,7 @@ const zh: ReactNode = (
     <div>
       <h2>天数间隔标签页</h2>
       <p>
-        输入任意两个日期,即可得到它们之间的<strong>总日历天数</strong>、以<strong>周 + 余下天数</strong>表示的同一间隔、<strong>近似月数</strong>(按平均 30.44 天/月计算),以及<strong>工作日</strong>与<strong>周末日</strong>的拆分。起始日期记为第 0 天,因此「今天到明天」会显示为 1 天。结果带正负号:结束日期更早会得到负的间隔,但卡片展示的是绝对值。
+        输入任意两个日期,即可得到它们之间的<strong>总日历天数</strong>、以<strong>周 + 余下天数</strong>表示的同一间隔、<strong>近似月数</strong>(按平均 30.44 天/月计算),以及<strong>工作日</strong>与<strong>周末天数</strong>的拆分。起始日期记为第 0 天,因此「今天到明天」会显示为 1 天。结果带正负号:结束日期更早会得到负的间隔,但卡片展示的是绝对值。
       </p>
     </div>
 
@@ -117,8 +117,8 @@ const es: ReactNode = (
         Introduce dos fechas cualesquiera para obtener los <strong>días naturales totales</strong> entre ellas, el
         mismo intervalo como <strong>semanas + días sobrantes</strong>, un <strong>recuento aproximado de meses</strong>{' '}
         (usando el mes promedio de 30,44 días), más un desglose en <strong>días laborables</strong> y{' '}
-        <strong>días de fin de semana</strong>. La fecha de inicio cuenta como día cero, así que de hoy a mañana se
-        informa 1 día. El resultado tiene signo: una fecha de finalización anterior produce un intervalo negativo,
+        <strong>días de fin de semana</strong>. La fecha de inicio cuenta como día cero, así que de hoy a mañana el
+        resultado es 1 día. El resultado tiene signo: una fecha de finalización anterior produce un intervalo negativo,
         pero las tarjetas muestran magnitudes absolutas.
       </p>
     </div>
@@ -156,7 +156,7 @@ const de: ReactNode = (
         Karten zu verstrichener Zeit — „vor X Tagen“. Die Aufschlüsselungskarten ergänzen die <strong>Gesamttage</strong>{' '}
         (inklusive des anteiligen Tages), die Spanne als <strong>Wochen + Tage</strong> sowie die Anzahl an{' '}
         <strong>Werktagen</strong> ohne Samstag und Sonntag. Die Vorlagen springen zu Neujahr, Weihnachten oder 30/90
-        Tage ab jetzt.
+        Tage voraus.
       </p>
     </div>
 

@@ -115,7 +115,7 @@ const zh: ReactNode = (
       <h2>哪些内容不会被转换</h2>
       <p>
         Multipart 表单上传(<code>-F</code> / <code>--form</code>)和 cookie jars(<code>-b</code>{' '}
-        / <code>-c</code>)不会被展开为特定语言的多部分代码——正确生成这些内容会很繁琐,而且各库实现各异。而 <code>-u user:pass</code> 基本认证则会自动转换成 <code>Authorization: Basic</code> 请求头。其余情况请使用你的 HTTP 客户端提供的专用 multipart 辅助函数,并以解析出的 URL 和请求头作为起点。
+        / <code>-c</code>)不会被展开为特定语言的 multipart 代码——正确生成这些内容会很繁琐,而且各库实现各异。而 <code>-u user:pass</code> 基本认证则会自动转换成 <code>Authorization: Basic</code> 请求头。其余情况请使用你的 HTTP 客户端提供的专用 multipart 辅助函数,并以解析出的 URL 和请求头作为起点。
       </p>
     </div>
   </section>
@@ -127,9 +127,9 @@ const es: ReactNode = (
     <h2>¿Qué es esta herramienta?</h2>
     <p>
       <code>curl</code> es el lenguaje universal de la depuración HTTP — copias una petición de las DevTools
-      de tu navegador, del README de un colega o de la documentación de Stripe, y quieres lanzar la misma
+      de tu navegador, del README de un colega o de la documentación de Stripe, y quieres hacer la misma
       petición desde tu propio código. Este conversor analiza el comando curl (URL, método, cabeceras, cuerpo)
-      y genera fragmentos listos para usar en <strong>JavaScript Fetch</strong>, <strong>Axios</strong> y
+      y genera fragmentos listos para usar en <strong>JavaScript Fetch</strong>, <strong>Axios</strong> y{' '}
       <strong>Python requests</strong>.
     </p>
     <div>
@@ -137,7 +137,7 @@ const es: ReactNode = (
       <ul>
         <li>
           <strong>URL y método</strong> — la URL de destino y el verbo HTTP (<code>-X</code> /{' '}
-          <code>--request</code>); <code>-I</code> / <code>--head</code> se traduce en una petición{' '}
+          <code>--request</code>); <code>-I</code> / <code>--head</code> se convierte en una petición{' '}
           <code>HEAD</code>. Si envías un cuerpo con <code>-d</code> pero omites{' '}
           <code>-X</code>, el método pasa automáticamente a <code>POST</code>.
         </li>
@@ -152,7 +152,7 @@ const es: ReactNode = (
           <code>JSON.stringify()</code>; en caso contrario se envía como cadena sin procesar.
         </li>
         <li>
-          <strong>Comillado</strong> — las comillas simples, dobles, las barras invertidas de escape y la
+          <strong>Entrecomillado</strong> — las comillas simples, dobles, las barras invertidas de escape y la
           sintaxis ANSI-C <code>$&apos;...&apos;</code> se gestionan con un analizador léxico escrito a mano.
         </li>
       </ul>
@@ -162,8 +162,8 @@ const es: ReactNode = (
       <p>
         La salida de Fetch usa la API nativa <code>fetch()</code> con un <code>await</code> sobre{' '}
         <code>response.json()</code> — cero dependencias, funciona en navegadores y Node 18+. La salida de
-        Axios asume que tienes <code>axios</code> instalado; tiende a producir código más corto y lanza una
-        excepción por defecto con códigos de estado fuera del rango 2xx. Elige la que coincida con la capa HTTP
+        Axios asume que tienes <code>axios</code> instalado; tiende a producir código más corto y por defecto
+        lanza una excepción con los códigos de estado fuera del rango 2xx. Elige la que coincida con la capa HTTP
         existente de tu proyecto.
       </p>
     </div>
@@ -174,8 +174,8 @@ const es: ReactNode = (
         / <code>-c</code>) no se expanden a código multipart específico del lenguaje — son propensas a
         errores al generarlas y varían según la biblioteca. La autenticación básica (<code>-u user:pass</code>),
         en cambio, sí se convierte automáticamente en una cabecera <code>Authorization: Basic</code>. Para el
-        resto, usa las utilidades multipart dedicadas de tu cliente HTTP partiendo de la URL y las cabeceras
-        ya analizadas.
+        resto, usa las utilidades multipart dedicadas de tu cliente HTTP, tomando la URL y las cabeceras
+        ya analizadas como punto de partida.
       </p>
     </div>
   </section>
@@ -189,11 +189,11 @@ const de: ReactNode = (
       <code>curl</code> ist die universelle Sprache beim HTTP-Debugging — du kopierst einen Request aus den
       DevTools deines Browsers, aus dem README eines Kollegen oder aus der Stripe-Doku und möchtest denselben
       Request aus deinem eigenen Code absetzen. Dieser Konverter analysiert den curl-Befehl (URL, Methode,
-      Header, Body) und erzeugt fertige Snippets für <strong>JavaScript Fetch</strong>, <strong>Axios</strong>
+      Header, Body) und erzeugt fertige Snippets für <strong>JavaScript Fetch</strong>, <strong>Axios</strong>{' '}
       und <strong>Python requests</strong>.
     </p>
     <div>
-      <h2>Was ausgewertet wird</h2>
+      <h2>Was geparst wird</h2>
       <ul>
         <li>
           <strong>URL &amp; Methode</strong> — die Ziel-URL und das HTTP-Verb (<code>-X</code> /{' '}
@@ -213,7 +213,7 @@ const de: ReactNode = (
         </li>
         <li>
           <strong>Quoting</strong> — einfache Anführungszeichen, doppelte Anführungszeichen,
-          Backslash-Escapes und die ANSI-C-Syntax <code>$&apos;...&apos;</code> werden alles von einem
+          Backslash-Escapes und die ANSI-C-Syntax <code>$&apos;...&apos;</code> werden alle von einem
           handgeschriebenen Tokenizer behandelt.
         </li>
       </ul>
@@ -224,8 +224,8 @@ const de: ReactNode = (
         Die Fetch-Ausgabe nutzt die native <code>fetch()</code>-API mit einem <code>await</code> auf{' '}
         <code>response.json()</code> — null Abhängigkeiten, funktioniert in Browsern und Node 18+. Die
         Axios-Ausgabe setzt voraus, dass <code>axios</code> installiert ist; sie erzeugt tendenziell kürzeren
-        Code und wirft standardmäßig bei Statuscodes außerhalb des 2xx-Bereichs. Wähl das, was zur bestehenden
-        HTTP-Schicht deines Projekts passt.
+        Code und löst standardmäßig bei Statuscodes außerhalb des 2xx-Bereichs eine Ausnahme aus. Wähl das,
+        was zur bestehenden HTTP-Schicht deines Projekts passt.
       </p>
     </div>
     <div>
@@ -233,10 +233,10 @@ const de: ReactNode = (
       <p>
         Multipart-Formular-Uploads (<code>-F</code> / <code>--form</code>) und Cookie-Jars (<code>-b</code>{' '}
         / <code>-c</code>) werden nicht zu sprachspezifischem Multipart-Code expandiert — sie korrekt zu
-        erzeugen ist fehleranfällig und variiert je nach Bibliothek. Basic-Auth per <code>-u user:pass</code>{' '}
-        hingegen wird automatisch in einen <code>Authorization: Basic</code>-Header umgesetzt. Für den Rest
-        greif auf die dedizierten Multipart-Helfer deines HTTP-Clients zurück und nutze die ausgewertete
-        URL und Header als Ausgangspunkt.
+        erzeugen ist fehleranfällig, und der resultierende Code variiert je nach Bibliothek. Basic-Auth per{' '}
+        <code>-u user:pass</code> hingegen wird automatisch in einen <code>Authorization: Basic</code>-Header
+        umgesetzt. Für den Rest greif auf die dedizierten Multipart-Helfer deines HTTP-Clients zurück und nutze
+        die geparste URL und die Header als Ausgangspunkt.
       </p>
     </div>
   </section>

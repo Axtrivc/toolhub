@@ -121,7 +121,7 @@ export function LlmCostCalculatorClient() {
 // 模型窗口表不再硬编码:直接派生自 lib/model-pricing.ts 的 CONTEXT_MODELS
 // (峰/谷价条目已归并,按窗口降序),与成本计算器共用同一数据源。
 
-/** 粗估 token 数:英文 ≈ chars/4;含 CJK 时每个 CJK 字符按 ~1 token */
+/** 粗估 token 数:英文 ≈ chars/4;含 CJK 时每个 CJK 字符按 ~1.1 token */
 function estimateTokens(text: string): number {
   let ascii = 0
   let cjk = 0

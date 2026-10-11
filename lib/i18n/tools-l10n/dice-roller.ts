@@ -7,23 +7,23 @@ import type { ToolL10n } from '../tool-l10n'
 export const DiceRollerL10n: ToolL10n = {
   zh: {
     useCases: [
-      'D&D 团里掷 d20 攻击与豁免判定,再用 4d6 弃最低生成六维角色属性',
+      'D&D 团里掷 d20 攻击与豁免判定,再用 4d6 弃最低生成六项角色属性',
       '桌面 RPG 缺实体骰时补位:一次掷 3d6,每颗点数与总和都可见,DM 可当场核验',
       '连点掷骰 200 次 d6 验证骰子是否均匀——各面频数应趋近 1/6',
-      '概率课上对比 2d6 与 1d12 的点数分布,直观展示多个骰子求和后的中心化效应',
+      '概率课上对比 2d6 与 1d12 的点数分布,直观展示多个骰子求和后向 7 聚拢的钟形效应',
     ],
     faqs: [
       {
         q: '骰子结果真的随机吗?',
-        a: '是。工具使用浏览器的 crypto.getRandomValues()——与生成安全密钥同一级别的密码学随机源,而非较旧的 Math.random();每颗骰子独立采样,一颗 d20 每个面恰好 5% 概率。',
+        a: '是。工具使用浏览器的 crypto.getRandomValues()——与生成安全密钥同一级别的密码学随机源,而非较旧的 Math.random();每颗骰子独立采样,掷一颗 d20 时每个面恰好是 5% 的概率。',
       },
       {
         q: '能一次掷多个骰子吗,比如 3d6+2?',
-        a: '可以。选骰型(d4、d6、d8、d10、d12、d20、d100),设定数量。结果同时列出每颗骰子的点数和总和,玩家和 DM 都能逐个核对。',
+        a: '可以。选择骰型(d4、d6、d8、d10、d12、d20、d100),再设定数量。结果同时列出每颗骰子的点数和总和,玩家和 DM 都能逐个核对。',
       },
       {
         q: '为什么同一个数总反复出现,是不是有猫腻?',
-        a: '随机本来就"扎堆":掷 20 次 d6,某个数出现 3 次在统计上完全正常。掷到几百次后各面频数会趋向均等,从最近掷骰记录即可自行验证。',
+        a: '随机本来就"扎堆":掷 20 次 d6,某个数出现 3 次在统计上完全正常。掷到几百次后各面频数会趋向均等,历史列表只保留最近几条掷骰,想亲眼看到收敛得自己在更长的一轮里统计各面频数。',
       },
       {
         q: '掷骰记录会上传或保存吗?',
@@ -56,7 +56,7 @@ export const DiceRollerL10n: ToolL10n = {
       },
       {
         q: '¿Por qué repiten tanto los mismos números, está trucado?',
-        a: 'El azar se agrupa: en 20 tiradas de un d6 es estadísticamente normal que un 4 salga tres veces. A partir de cientos de tiradas las frecuencias convergen; compruébalo con las tiradas recientes durante la sesión.',
+        a: 'El azar se agrupa: en 20 tiradas de un d6 es estadísticamente normal que un 4 salga tres veces. A partir de cientos de tiradas las frecuencias convergen; el historial solo conserva las tiradas más recientes, así que comprobar la convergencia exige llevar tú mismo la cuenta a lo largo de más tiradas.',
       },
       {
         q: '¿Funciona sin conexión y se guardan mis tiradas?',
@@ -89,7 +89,7 @@ export const DiceRollerL10n: ToolL10n = {
       },
       {
         q: 'Warum kommen manche Zahlen so oft — ist der Würfel gezinkt?',
-        a: 'Zufall klumpt: Bei 20 Würfen mit einem W6 ist es statistisch völlig normal, wenn dieselbe Zahl dreimal erscheint. Erst über Hunderte Würfe gleichen sich die Häufigkeiten an — anhand der letzten Würfe selbst überprüfbar.',
+        a: 'Zufall klumpt: Bei 20 Würfen mit einem W6 ist es statistisch völlig normal, wenn dieselbe Zahl dreimal erscheint. Erst über Hunderte Würfe gleichen sich die Häufigkeiten an — der Verlauf behält nur die letzten Würfe; die Angleichung siehst du nur, wenn du über mehr Würfe selbst mitzählst.',
       },
       {
         q: 'Brauche ich Internet, und wo landen die Ergebnisse?',

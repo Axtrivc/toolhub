@@ -9,7 +9,7 @@ export const CoinFlipL10n: ToolL10n = {
     useCases: [
       '买单或开局起争执时抛一次硬币当场定夺,把"谁先谁后"的拉扯压缩到一秒钟',
       '课堂上演示大数定律:连抛 200 次,让学生看着正面比例从随机波动收敛到 50%',
-      '球赛、辩论赛或桌游选边:当场抛掷、累计记录留在屏幕上,事后无人能翻供',
+      '球赛、辩论赛或桌游选边:当场抛掷、累计记录留在屏幕上,事后没人能反悔',
       '露营或飞行模式下的公平决策:随机数来自本机 Web Crypto,断网照常可用,结果不留存',
     ],
     faqs: [
@@ -79,7 +79,7 @@ export const CoinFlipL10n: ToolL10n = {
   },
   de: {
     useCases: [
-      'Streit um die Rechnung oder den Anwurf mit einem Wurf beenden — statt Schere-Stein-Papier und Diskussionen',
+      'Streit um die Rechnung oder den Aufschlag mit einem Wurf beenden — statt Schere-Stein-Papier und Diskussionen',
       'Im Unterricht das Gesetz der großen Zahlen zeigen: 200 Würfe hintereinander, der Kopf-Anteil konvergiert gegen 50 %',
       'Seitenwahl oder Anstoß vor dem Spiel auslosen, mit laufender Statistik auf dem Bildschirm — niemand kann es nachträglich anfechten',
       'Entscheidungen ohne Netz: Die Entropie kommt aus der Web-Crypto-API des Geräts, beim Camping genauso nutzbar',

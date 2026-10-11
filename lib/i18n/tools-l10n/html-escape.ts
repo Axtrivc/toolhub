@@ -8,6 +8,7 @@ export const htmlEscapeL10n: ToolL10n = {
   zh: {
     ui: {
       'inputTooLarge': '⚠️ 输入过大——支持规模最多 10 万字符。请裁剪输入后再转换。',
+      'invalidInput': '⚠️ 此方向的输入无效',
       'defaultInputDecode': '&lt;a href=&quot;x&quot;&gt;汤姆 &amp; 杰瑞&lt;/a&gt;',
       'defaultInputEncode': '<a href="x">汤姆 & 杰瑞</a>',
       'characters': '字符',
@@ -44,6 +45,7 @@ export const htmlEscapeL10n: ToolL10n = {
   es: {
     ui: {
       'inputTooLarge': '⚠️ Entrada demasiado grande: el tamaño admitido es de hasta 100 000 caracteres. Recorta la entrada para convertir.',
+      'invalidInput': '⚠️ Entrada no válida para esta dirección',
       'defaultInputDecode': '&lt;a href=&quot;x&quot;&gt;España &amp; café&lt;/a&gt;',
       'defaultInputEncode': '<a href="x">España & café</a>',
       'characters': 'caracteres',
@@ -74,12 +76,13 @@ export const htmlEscapeL10n: ToolL10n = {
       { q: '¿Es suficiente para prevenir todo XSS?', a: 'El escapado del cuerpo HTML cubre el caso más común, pero el XSS tiene muchas variantes (por atributo, por script, por URL). Usa una librería de confianza como DOMPurify para HTML no confiable.' },
       { q: '¿Qué caracteres se escapan exactamente?', a: 'Cinco: & por &amp;, < por &lt;, > por &gt;, " por &quot; y \' por &#39; (o &#x27;). Es el conjunto de entidades HTML que recomienda OWASP y cubre tanto la inyección de etiquetas como la fuga de atributos.' },
       { q: '¿Diferencia entre escapar y sanitizar?', a: 'Escapar convierte los caracteres especiales en entidades para que el navegador muestre texto sin interpretar etiquetas; sanitizar filtra o elimina etiquetas y atributos peligrosos conservando parte del HTML. Escapa toda entrada de usuario; sanitiza solo si realmente permites HTML enriquecido (p. ej. negritas en comentarios).' },
-      { q: 'El texto escapado se alarga, ¿importa?', a: 'Sí crece: &amp; ocupa 5 veces el carácter original y un texto largo puede engordar un 10-20 %, con riesgo de topar con límites de campos de base de datos o textareas. Al mostrarse, el navegador lo revierte: el lector ve exactamente el texto original.' },
+      { q: 'El texto escapado se alarga, ¿importa?', a: 'Sí crece: &amp; ocupa 5 veces el tamaño del carácter original y un texto largo puede engordar un 10-20 %, con riesgo de topar con límites de campos de base de datos o textareas. Al mostrarse, el navegador lo revierte: el lector ve exactamente el texto original.' },
     ],
   },
   de: {
     ui: {
       'inputTooLarge': '⚠️ Eingabe zu groß – die unterstützte Größe beträgt maximal 100.000 Zeichen. Kürze die Eingabe.',
+      'invalidInput': '⚠️ Ungültige Eingabe für diese Richtung',
       'defaultInputDecode': '&lt;a href=&quot;x&quot;&gt;Grüße &amp; Käfer&lt;/a&gt;',
       'defaultInputEncode': '<a href="x">Grüße & Käfer</a>',
       'characters': 'Zeichen',

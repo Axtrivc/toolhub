@@ -1,6 +1,6 @@
 /**
  * html-tag-stripper 本地化 bundle —— zh / es / de
- * 覆盖:faqs + useCases(交互客户端为 batch 文本工具,UI 本地化留待后续)
+ * 覆盖:ui + faqs + useCases(交互客户端为 batch 文本工具)
  */
 import type { ToolL10n } from '../tool-l10n'
 
@@ -28,7 +28,7 @@ export const htmlTagStripperL10n: ToolL10n = {
       defaultInput: '<h1>Título</h1><p>Este es texto <strong>en negrita</strong>.</p>',
       inputLabel: 'Código HTML',
       outputLabel: 'Texto plano (etiquetas quitadas)',
-      'tooLongNote': '⚠️ Esta entrada es demasiado larga para procesarla aquí — mantenla por debajo de unas 100.000 caracteres.',
+      'tooLongNote': '⚠️ Esta entrada es demasiado larga para procesarla aquí — mantenla por debajo de unos 100.000 caracteres.',
       note: '🌐 Elimina todas las etiquetas HTML y deja texto legible. Usa el analizador DOM del navegador — solo en el cliente.',
     },
     useCases: [
@@ -46,13 +46,13 @@ export const htmlTagStripperL10n: ToolL10n = {
       defaultInput: '<h1>Überschrift</h1><p>Dies ist <strong>fetter</strong> Text.</p>',
       inputLabel: 'HTML-Quellcode',
       outputLabel: 'Klartext (Tags entfernt)',
-      'tooLongNote': '⚠️ Diese Eingabe ist zu lang für die Verarbeitung hier — halte sie unter etwa 100.000 Zeichen.',
+      'tooLongNote': '⚠️ Diese Eingabe ist zu lang, um sie hier zu verarbeiten — halte sie unter etwa 100.000 Zeichen.',
       note: '🌐 Entfernt alle HTML-Tags und lässt lesbaren Text. Nutzt den DOM-Parser des Browsers — nur clientseitig.',
     },
     useCases: [
       'von Webseiten extrahierten Text bereinigen',
       'HTML-E-Mails in reinen Text umwandeln',
-      'Artikeltext aus CMS-Exporten herausziehen',
+      'Artikeltext aus CMS-Exporten extrahieren',
       'Formatierung vor dem Einfügen in einen Klartext-Editor entfernen',
     ],
     faqs: [

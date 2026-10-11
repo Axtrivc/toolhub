@@ -99,7 +99,7 @@ export const CarCostCalculatorL10n: ToolL10n = {
       },
       {
         q: '¿Hay que incluir la financiación?',
-        a: 'Sí si pediste un préstamo: los intereses son parte del coste de conducir. Esta herramienta no los suma por sí sola; calcula la cuota en el simulador de préstamo de coche y añádela a la partida de seguro para comparar. Si compraste al contado, déjalo en cero.',
+        a: 'Sí si pediste un préstamo: los intereses son parte del coste de conducir. Esta herramienta no los suma por sí sola; calcula la cuota en el simulador de préstamo de coche y, si pesa lo suficiente, añádela a la partida de seguro. Si compraste al contado, compara directamente el coste puro de uso.',
       },
     ],
     ui: {
@@ -131,7 +131,7 @@ export const CarCostCalculatorL10n: ToolL10n = {
       'inSuffix.maintenance': '$',
       'inSuffix.ownYears': 'años',
       'inSuffix.resale': '$',
-      'note': '🚗 La depreciación (compra − reventa) suele ser el mayor coste: un coche nuevo pierde 20-30 % el primer año. No incluye financiación, aparcamiento ni peajes.',
+      'note': '🚗 La depreciación (compra − reventa) suele ser el mayor coste: un coche nuevo pierde 20-30 % el primer año. No incluye financiación, aparcamiento, peajes ni tasas; si son significativos, súmalos a la partida de seguro.',
       'out.carPrice': 'Precio del coche',
       'out.consumption': 'Consumo',
       'out.depreciation': 'Depreciación total',
@@ -171,7 +171,7 @@ export const CarCostCalculatorL10n: ToolL10n = {
       },
       {
         q: 'Muss ich die Finanzierung einrechnen?',
-        a: 'Ja, wenn du einen Kredit hast — Zinsen sind Teil der Fahrkosten. Dieser Rechner enthält sie nicht; berechne die Rate im Autokredit-Rechner und rechne sie wie auf der Seite angemerkt zur Versicherung dazu. Barzahler lassen den Posten einfach weg.',
+        a: 'Ja, wenn du einen Kredit hast — Zinsen sind Teil der Fahrkosten. Dieser Rechner enthält sie nicht; berechne die Rate im Autokredit-Rechner und rechne sie, wenn sie ins Gewicht fällt, zur Versicherung dazu. Barzahler vergleichen einfach die reinen Betriebskosten.',
       },
     ],
     ui: {
@@ -183,7 +183,7 @@ export const CarCostCalculatorL10n: ToolL10n = {
       'errInvalid': 'Gültige Werte eingeben (Restwert nicht über Kaufpreis)',
       'in.carPrice': 'Kaufpreis',
       'in.consumption': 'Verbrauch',
-      'in.depreciation': 'Wertverlust',
+      'in.depreciation': 'Wertverlust gesamt',
       'in.fuel': 'Kraftstoff gesamt',
       'in.fuelPrice': 'Kraftstoffpreis',
       'in.insurance': 'Versicherung pro Jahr',
@@ -203,10 +203,10 @@ export const CarCostCalculatorL10n: ToolL10n = {
       'inSuffix.maintenance': '$',
       'inSuffix.ownYears': 'Jahre',
       'inSuffix.resale': '$',
-      'note': '🚗 Die Wertminderung (Kauf − Verkauf) ist meist der größte Posten — Neuwagen verlieren im ersten Jahr 20-30 %. Finanzierung, Parken und Maut nicht enthalten.',
+      'note': '🚗 Die Wertminderung (Kauf − Verkauf) ist meist der größte Posten — Neuwagen verlieren im ersten Jahr 20-30 %. Finanzierung, Parken, Maut und Zulassung sind nicht enthalten; fallen sie deutlich ins Gewicht, rechne sie zur Versicherung dazu.',
       'out.carPrice': 'Kaufpreis',
       'out.consumption': 'Verbrauch',
-      'out.depreciation': 'Wertverlust',
+      'out.depreciation': 'Wertverlust gesamt',
       'out.fuel': 'Kraftstoff gesamt',
       'out.fuelPrice': 'Kraftstoffpreis',
       'out.insurance': 'Versicherung pro Jahr',

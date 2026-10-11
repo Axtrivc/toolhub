@@ -23,7 +23,7 @@ export const idealWeightCalculatorL10n: ToolL10n = {
       outDevine: 'Devine 公式',
       outRobinson: 'Robinson 公式',
       outHamwi: 'Hamwi 公式',
-      outBmi: '健康 BMI 范围(18.5–24.9)',
+      outBmi: '健康 BMI 范围(18.5-24.9)',
       emptyState: '输入性别和身高即可查看理想体重估算',
       note: '⚖️ 理想体重只是粗略估算。肌肉量、体型和整体健康状况比单一数字更重要。',
       gaugeTitle: 'Devine 公式 vs BMI 健康区间',
@@ -39,7 +39,7 @@ export const idealWeightCalculatorL10n: ToolL10n = {
       '了解不同公式为何结果略有差异',
     ],
     faqs: [
-      { q: '该信哪个公式?', a: '哪个都不完美。把 BMI 健康体重区间作为主要参考,把公式给出的数值当作大致参照。肌肉量和身体成分比任何一个单一目标体重都更重要。' },
+      { q: '该相信哪个公式?', a: '哪个都不完美。把 BMI 健康体重区间作为主要参考,把公式给出的数值当作大致参照。肌肉量和身体成分比任何一个单一目标体重都更重要。' },
     ],
   },
   es: {
@@ -59,7 +59,7 @@ export const idealWeightCalculatorL10n: ToolL10n = {
       outDevine: 'Fórmula de Devine',
       outRobinson: 'Fórmula de Robinson',
       outHamwi: 'Fórmula de Hamwi',
-      outBmi: 'Rango de IMC saludable (18.5-24.9)',
+      outBmi: 'Rango de IMC saludable (18,5-24,9)',
       emptyState: 'Introduce sexo y altura para ver tus estimaciones de peso ideal',
       note: '⚖️ El peso ideal es una estimación aproximada. La masa muscular, la complexión y la salud importan más que un solo número.',
       gaugeTitle: 'Devine vs rango de IMC saludable',
@@ -95,7 +95,7 @@ export const idealWeightCalculatorL10n: ToolL10n = {
       outDevine: 'Devine-Formel',
       outRobinson: 'Robinson-Formel',
       outHamwi: 'Hamwi-Formel',
-      outBmi: 'Gesunder BMI-Bereich (18.5-24.9)',
+      outBmi: 'Gesunder BMI-Bereich (18,5-24,9)',
       emptyState: 'Gib Geschlecht und Größe ein, um deine Idealgewicht-Schätzungen zu sehen',
       note: '⚖️ Das Idealgewicht ist nur eine grobe Schätzung. Muskelmasse, Körperbau und Gesundheit zählen mehr als eine einzelne Zahl.',
       gaugeTitle: 'Devine vs gesunder BMI-Bereich',
@@ -106,12 +106,12 @@ export const idealWeightCalculatorL10n: ToolL10n = {
     },
     useCases: [
       'das Idealgewicht mit den Formeln von Devine, Robinson und Hamwi schätzen',
-      'die BMI-basierte Spanne für gesundes Gewicht ansehen',
+      'den BMI-basierten gesunden Bereich ansehen',
       'eine Referenz für Fitness oder Gewichtsverlust setzen',
       'verstehen, warum die Formeln leicht abweichen',
     ],
     faqs: [
-      { q: 'Welcher Formel sollte ich vertrauen?', a: 'Keine ist perfekt. Nutze die BMI-Spanne für gesundes Gewicht als Hauptorientierung und behandle die Formelwerte als grobe Referenz. Muskelmasse und Körperzusammensetzung sind wichtiger als eine einzige Zielzahl.' },
+      { q: 'Welcher Formel sollte ich vertrauen?', a: 'Keine ist perfekt. Nutze den BMI-Bereich für gesundes Gewicht als Hauptorientierung und nimm die Formelwerte als grobe Richtwerte. Muskelmasse und Körperzusammensetzung sind wichtiger als eine einzige Zielzahl.' },
     ],
   },
 }

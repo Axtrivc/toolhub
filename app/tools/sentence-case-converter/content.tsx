@@ -62,15 +62,15 @@ const es: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>¿Qué es esta herramienta?</h2>
     <p>
-      El <strong>Sentence case</strong> capitaliza solo la primera letra de cada frase, dejando el
+      El <strong>tipo oración</strong> capitaliza solo la primera letra de cada frase, dejando el
       resto en minúsculas. Es la capitalización natural de la escritura normal y la más legible para
       párrafos de texto.
     </p>
     <div>
-      <h2>Cuándo usar sentence case</h2>
+      <h2>Cuándo usar el tipo oración</h2>
       <ul>
         <li><strong>Texto corrido</strong> en artículos, correos y documentación</li>
-        <li><strong>Titulares de periódicos</strong> — la mayoría del periodismo impreso usa sentence case</li>
+        <li><strong>Titulares de periódicos</strong> — la mayoría del periodismo impreso usa el tipo oración</li>
         <li><strong>Escritura en lenguaje claro</strong> donde la legibilidad importa más</li>
       </ul>
     </div>
@@ -109,7 +109,7 @@ const de: ReactNode = (
       <p>
         Dieses Werkzeug schreibt nach satzbeendender Zeichensetzung (. ! ?) groß, kann aber
         Eigennamen wie Personen-, Marken- oder Ortsnamen nicht erkennen. Wandle nach der Umwandlung
-        manuell „john" → „John", „paris" → „Paris" usw. um. Für die meisten Aufräumaufgaben (in
+        manuell „john“ → „John“, „paris“ → „Paris“ usw. um. Für die meisten Aufräumaufgaben (in
         GROSSBUCHSTABEN getippter Text) erledigt dieses Werkzeug 95 % der Arbeit.
       </p>
     </div>

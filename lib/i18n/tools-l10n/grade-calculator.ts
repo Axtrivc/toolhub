@@ -31,7 +31,7 @@ export const gradeCalculatorL10n: ToolL10n = {
   es: {
     formula: {
       formula: 'grade = Σ ( scoreᵢ × weightᵢ ) / Σ weightᵢ',
-      explain: 'Promedio ponderado. Cada nota se multiplica por su peso (p. ej. examen 40%, deberes 60%) y se divide entre el peso total. Los ítems con más peso mueven más la nota.',
+      explain: 'Promedio ponderado. Cada nota se multiplica por su peso (p. ej. examen 40 %, deberes 60 %) y se divide entre el peso total. Los elementos con más peso influyen más en la nota.',
     },
     ui: {
       'in.earned': 'Puntos obtenidos',
@@ -54,14 +54,14 @@ export const gradeCalculatorL10n: ToolL10n = {
   de: {
     formula: {
       formula: 'grade = Σ ( scoreᵢ × weightᵢ ) / Σ weightᵢ',
-      explain: 'Gewichteter Durchschnitt. Jede Note wird mit ihrer Gewichtung multipliziert (z. B. Klausur 40%, Hausaufgaben 60%) und durch das Gesamtgewicht geteilt. Höher gewichtete Posten bewegen die Note mehr.',
+      explain: 'Gewichteter Durchschnitt. Jede Note wird mit ihrer Gewichtung multipliziert (z. B. Klausur 40 %, Hausaufgaben 60 %) und durch das Gesamtgewicht geteilt. Stärker gewichtete Anteile wirken sich stärker auf die Note aus.',
     },
     ui: {
       'in.earned': 'Erreichte Punkte',
       'in.possible': 'Mögliche Punkte',
       'out.pct': 'Prozentsatz',
       'out.grade': 'Buchstabennote',
-      note: '📚 Standard-US-Notenskala mit Buchstaben. Manche Schulen nutzen +/– (B+, B, B-); dieses Tool verwendet die einfache A-F-Skala.',
+      note: '📚 Standard-US-Notenskala mit Buchstaben. Manche Schulen nutzen +/- (B+, B, B-); dieses Tool verwendet die einfache A-F-Skala.',
       chartTitle: 'Wo du liegst',
     },
     useCases: [
@@ -71,7 +71,7 @@ export const gradeCalculatorL10n: ToolL10n = {
       'eine gewichtete Note berechnen',
     ],
     faqs: [
-      { q: 'Was ist mit +/– Noten?', a: 'Viele Schulen nutzen feinere Unterteilungen (A-, B+ usw.). Dieses Werkzeug verwendet die einfache 5-Stufen-Skala. Frag an deiner Schule nach den genauen Grenzwerten für Plus-/Minusnoten.' },
+      { q: 'Was ist mit +/- Noten?', a: 'Viele Schulen nutzen feinere Unterteilungen (A-, B+ usw.). Dieses Werkzeug verwendet die einfache 5-Stufen-Skala. Frag an deiner Schule nach den genauen Grenzwerten für Plus-/Minusnoten.' },
     ],
   },
 }

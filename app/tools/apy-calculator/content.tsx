@@ -41,7 +41,7 @@ const en: ReactNode = (
 const zh: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>这是什么工具?</h2>
-    <p><strong>APY</strong>(年化收益率)是考虑复利后储蓄的真实回报。APR 是简单利率;APY 是一年内复利超过一次时你实际赚到的收益。</p>
+    <p><strong>APY</strong>(年化收益率)是考虑复利后储蓄的真实回报。APR 是单利利率;APY 是一年内复利超过一次时你实际赚到的收益。</p>
 
     <div>
       <h2>APR vs APY</h2>
@@ -68,7 +68,7 @@ const zh: ReactNode = (
 const es: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>¿Qué es esta herramienta?</h2>
-    <p>El <strong>APY</strong> (rendimiento porcentual anual) es el rendimiento real del ahorro teniendo en cuenta la capitalización. La APR es la tasa simple; el APY es lo que realmente ganas cuando el interés se capitaliza más de una vez al año.</p>
+    <p>El <strong>APY</strong> (rendimiento porcentual anual) es el rendimiento real del ahorro teniendo en cuenta la capitalización. El APR es la tasa simple; el APY es lo que realmente ganas cuando el interés se capitaliza más de una vez al año.</p>
 
     <div>
       <h2>APR frente a APY</h2>

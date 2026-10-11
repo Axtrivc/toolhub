@@ -30,7 +30,7 @@ export const breakEvenCalculatorL10n: ToolL10n = {
       'inSuffix.fixed': '$',
       'inSuffix.price': '$',
       'inSuffix.variable': '$',
-      'cmp.0': '单价构成',
+      'cmp.0': '单价',
       'cmpseg.0': '变动成本',
       'cmpseg.1': '边际贡献',
       'chartTitle': '每笔销售的成本与毛利构成',
@@ -89,7 +89,7 @@ export const breakEvenCalculatorL10n: ToolL10n = {
       'cmpseg.0': 'Coste variable',
       'cmpseg.1': 'Margen de contribución',
       'chartTitle': 'Desglose de cada venta',
-      'note': '📊 Punto de equilibrio = Costes fijos ÷ (Precio − Coste variable). Cada venta antes del equilibrio cubre costes fijos; después aporta margen neto. El ratio de contribución indica qué porcentaje de cada venta cubre costes fijos.',
+      'note': '📊 Punto de equilibrio = Costes fijos ÷ (Precio − Coste variable). Cada venta antes del equilibrio cubre costes fijos; después aporta beneficio puro. El ratio de contribución indica qué porcentaje de cada venta cubre costes fijos.',
     },
     useCases: [
       'poner precio a una cafetería: 3.500 € fijos al mes, latte a 2,80 € con 0,90 € de coste variable, unas 1.842 tazas para cuadrar',
@@ -149,17 +149,17 @@ export const breakEvenCalculatorL10n: ToolL10n = {
     useCases: [
       'Preise für ein Café kalkulieren: 3.500 € Fixkosten im Monat, Latte für 2,80 € bei 0,90 € variabel — rund 1.842 Tassen zum Break-even',
       'Preissenkung prüfen: Preis von 45 auf 39, Deckungsbeitrag 27 → 21, Break-even-Menge von 315 auf 405 Stück',
-      'teilsvariable Kosten splitten: Grundgehalt zu den Fixkosten, 4,50 € Provision und Verpackung pro Auftrag zu den variablen Kosten',
+      'Teilsvariable Kosten splitten: Grundgehalt zu den Fixkosten, 4,50 € Provision und Verpackung pro Auftrag zu den variablen Kosten',
       'Break-even-Umsatz ermitteln: 8.500 € fix, Preis 45 €, variabel 18 € — 315 Stück ≈ 14.175 € Umsatz als Monatsminimum',
     ],
     faqs: [
       {
         q: 'Wie lautet die Break-even-Formel?',
-        a: 'Break-even-Menge = Fixkosten ÷ (Preis − variable Kosten je Stück). Jede Einlage trägt ihre Marge zu den Fixkosten bei; sobald die Beiträge die Fixkosten decken, bist du in der schwarzen Zone.',
+        a: 'Break-even-Menge = Fixkosten ÷ (Preis − variable Kosten je Stück). Jede verkaufte Einheit trägt ihren Deckungsbeitrag zu den Fixkosten bei; sobald die Beiträge die Fixkosten decken, hast du die Gewinnschwelle erreicht.',
       },
       {
         q: 'Was ist die Deckungsbeitragsquote?',
-        a: 'Sie ist (Preis − variable Kosten) ÷ Preis — der Anteil jedes Euro Umsatz nach variablen Kosten. 60 % bedeuten: von jedem Verkaufseuro bleiben 0,60 € für Fixkosten und danach als Gewinn.',
+        a: 'Sie ist (Preis − variable Kosten) ÷ Preis — der Anteil jedes Euro Umsatz nach variablen Kosten. 60 % bedeuten: Von jedem Verkaufseuro bleiben 0,60 €, um Fixkosten zu decken — und danach bleibt Gewinn.',
       },
       {
         q: 'Wie teile ich teilsvariable Kosten auf?',

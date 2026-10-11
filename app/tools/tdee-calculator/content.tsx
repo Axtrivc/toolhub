@@ -53,12 +53,12 @@ const zh: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>这个工具是什么？</h2>
     <p>
-      <strong>TDEE</strong>（每日总能量消耗）是你一天中消耗的卡路里数，它把你的静息代谢（BMR）与你做的所有事情结合起来——走路、锻炼、消化食物。它是管理体重最有用的一个数字：低于它摄入可减脂，等于它可维持，高于它可增重。本计算器使用 Mifflin-St Jeor BMR 公式，这是无需实验室设备所能得到的最准确估算。
+      <strong>TDEE</strong>（每日总能量消耗）是你一天中消耗的卡路里数，它把你的静息代谢（BMR）与你做的所有事情结合起来——走路、锻炼、消化食物。它是管理体重最有用的一个数字：吃得比它少可减脂，与它持平可维持，吃得比它多可增重。本计算器使用 Mifflin-St Jeor BMR 公式，这是无需实验室设备所能得到的最准确估算。
     </p>
     <div>
       <h2>TDEE 是如何计算的</h2>
       <p>
-        计算器首先使用 Mifflin-St Jeor 求出你的 <strong>BMR</strong>（基础代谢率）——即你的身体在静息状态下仅仅为了维持生命所消耗的卡路里：<code>10×weight(kg) + 6.25×height(cm) − 5×age + s</code>，其中 <code>s</code> 对男性为 +5，对女性为 −161。然后用一个从 1.2（久坐）到 1.9（每日两次训练或体力工作）的<strong>活动因子</strong>相乘，得到你的 TDEE。
+        计算器首先使用 Mifflin-St Jeor 求出你的 <strong>BMR</strong>（基础代谢率）——即你的身体在静息状态下仅仅为了维持生命所消耗的卡路里：<code>10×weight(kg) + 6.25×height(cm) − 5×age + s</code>，其中 <code>s</code> 对男性为 +5，对女性为 −161。然后将 BMR 乘以一个从 1.2（久坐）到 1.9（每日两次训练或体力工作）的<strong>活动因子</strong>，得到你的 TDEE。
       </p>
     </div>
     <div>
@@ -66,7 +66,7 @@ const zh: ReactNode = (
       <ul>
         <li><strong>减脂（−10 到 −20%）：</strong>适度的热量缺口，在保留肌肉的同时减掉脂肪。</li>
         <li><strong>维持：</strong>你的 TDEE——体重大致保持稳定。</li>
-        <li><strong>增肌（+10 到 +20%）：</strong>适度的热量盈余，以最少的脂肪增长来构建肌肉。</li>
+        <li><strong>增肌（+10 到 +20%）：</strong>较小的热量盈余，以最少的脂肪增长来构建肌肉。</li>
       </ul>
     </div>
     <div>
@@ -74,7 +74,7 @@ const zh: ReactNode = (
       <p>
         卡路里决定你的体重是升还是降；<strong>宏量营养素</strong>（蛋白质、碳水、脂肪）决定这些体重由什么构成。保持高蛋白摄入（每公斤体重 1.6–2.2 g）以保留或增长肌肉。此处显示的分配（30/40/30）是一个均衡的默认值——参见我们的{' '}
         <a href="/tools/macro-calculator/" className="text-brand-600 underline">「宏量营养素计算器」</a>了解针对特定目标的比例，或{' '}
-        <a href="/tools/calorie-calculator/" className="text-brand-600 underline">「卡路里计算器」</a>获取膳食规划视角。
+        <a href="/tools/calorie-calculator/" className="text-brand-600 underline">「卡路里计算器」</a>来规划每日膳食。
       </p>
     </div>
   </section>
@@ -90,13 +90,13 @@ const es: ReactNode = (
     <div>
       <h2>Cómo se calcula el TDEE</h2>
       <p>
-        Primero la calculadora halla tu <strong>BMR</strong> (Tasa Metabólica Basal) — las calorías que tu cuerpo usa solo para mantenerse vivo en reposo — usando Mifflin-St Jeor: <code>10×weight(kg) + 6.25×height(cm) − 5×age + s</code>, donde <code>s</code> es +5 para hombres y −161 para mujeres. Luego multiplica por un <strong>factor de actividad</strong> de 1.2 (sedentario) hasta 1.9 (entrenamiento dos veces al día o un trabajo físico) para obtener tu TDEE.
+        Primero la calculadora halla tu <strong>BMR</strong> (Tasa Metabólica Basal) — las calorías que tu cuerpo usa solo para mantenerse vivo en reposo — usando Mifflin-St Jeor: <code>10×weight(kg) + 6.25×height(cm) − 5×age + s</code>, donde <code>s</code> es +5 para hombres y −161 para mujeres. Luego multiplica por un <strong>factor de actividad</strong> de 1,2 (sedentario) hasta 1,9 (entrenamiento dos veces al día o un trabajo físico) para obtener tu TDEE.
       </p>
     </div>
     <div>
       <h2>Elegir un objetivo de calorías</h2>
       <ul>
-        <li><strong>Déficit (−10 a −20%):</strong> un déficit moderado que pierde grasa mientras conserva músculo.</li>
+        <li><strong>Déficit (−10 a −20%):</strong> un déficit moderado que te permite perder grasa conservando el músculo.</li>
         <li><strong>Mantener:</strong> tu TDEE — el peso se mantiene más o menos estable.</li>
         <li><strong>Superávit (+10 a +20%):</strong> un pequeño excedente que construye músculo con mínima grasa.</li>
       </ul>
@@ -104,9 +104,9 @@ const es: ReactNode = (
     <div>
       <h2>Los macros también importan</h2>
       <p>
-        Las calorías determinan si tu peso sube o baja; los <strong>macros</strong> (proteína, carbohidratos, grasa) determinan de qué está hecho ese peso. Mantén la proteína alta (1.6–2.2 g por kg de peso corporal) para conservar o construir músculo. La distribución que se muestra aquí (30/40/30) es un valor predeterminado equilibrado — consulta nuestra{' '}
+        Las calorías determinan si tu peso sube o baja; los <strong>macros</strong> (proteína, carbohidratos, grasa) determinan de qué está hecho ese peso. Mantén la proteína alta (1,6–2,2 g por kg de peso corporal) para conservar o construir músculo. La distribución que se muestra aquí (30/40/30) es un valor predeterminado equilibrado — consulta nuestra{' '}
         <a href="/tools/macro-calculator/" className="text-brand-600 underline">«Calculadora de macros»</a> para proporciones específicas según tu objetivo, o la{' '}
-        <a href="/tools/calorie-calculator/" className="text-brand-600 underline">«Calculadora de calorías»</a> para una vista de planificación de comidas.
+        <a href="/tools/calorie-calculator/" className="text-brand-600 underline">«Calculadora de calorías»</a> para planificar tus comidas.
       </p>
     </div>
   </section>
@@ -122,23 +122,23 @@ const de: ReactNode = (
     <div>
       <h2>Wie der TDEE berechnet wird</h2>
       <p>
-        Zuerst ermittelt der Rechner deinen <strong>BMR</strong> (Grundumsatz) — die Kalorien, die dein Körper allein benötigt, um in Ruhe am Leben zu bleiben — mit Mifflin-St Jeor: <code>10×weight(kg) + 6.25×height(cm) − 5×age + s</code>, wobei <code>s</code> +5 für Männer und −161 für Frauen ist. Danach wird mit einem <strong>Aktivitätsfaktor</strong> von 1.2 (sitzend) bis 1.9 (zweimal tägliches Training oder ein körperlicher Beruf) multipliziert, um deinen TDEE zu erhalten.
+        Zuerst ermittelt der Rechner deinen <strong>BMR</strong> (Grundumsatz) — die Kalorien, die dein Körper allein benötigt, um in Ruhe am Leben zu bleiben — mit Mifflin-St Jeor: <code>10×weight(kg) + 6.25×height(cm) − 5×age + s</code>, wobei <code>s</code> +5 für Männer und −161 für Frauen ist. Danach wird mit einem <strong>Aktivitätsfaktor</strong> von 1,2 (sitzend) bis 1,9 (zweimal tägliches Training oder ein körperlicher Beruf) multipliziert, um deinen TDEE zu erhalten.
       </p>
     </div>
     <div>
       <h2>Ein Kalorienziel wählen</h2>
       <ul>
-        <li><strong>Defizit (−10 bis −20%):</strong> ein moderates Defizit, das Fett verliert und Muskelmasse erhält.</li>
+        <li><strong>Defizit (−10 bis −20%):</strong> ein moderates Defizit, das Fett abbaut und Muskelmasse erhält.</li>
         <li><strong>Halten:</strong> dein TDEE — das Gewicht bleibt ungefähr stabil.</li>
-        <li><strong>Überschuss (+10 bis +20%):</strong> ein kleiner Überschuss, der Muskel mit minimalem Fettaufbau aufbaut.</li>
+        <li><strong>Überschuss (+10 bis +20%):</strong> ein kleiner Überschuss, der Muskeln mit minimalem Fettaufbau aufbaut.</li>
       </ul>
     </div>
     <div>
       <h2>Makros sind ebenfalls wichtig</h2>
       <p>
-        Kalorien bestimmen, ob dein Gewicht zu- oder abnimmt; die <strong>Makros</strong> (Protein, Kohlenhydrate, Fett) bestimmen, woraus dieses Gewicht besteht. Halte Protein hoch (1.6–2.2 g pro kg Körpergewicht), um Muskel zu erhalten oder aufzubauen. Die hier gezeigte Aufteilung (30/40/30) ist ein ausgewogener Standard — sieh dir unseren{' '}
-        <a href="/tools/macro-calculator/" className="text-brand-600 underline">„Makro-Rechner"</a> für zielspezifische Verhältnisse an oder den{' '}
-        <a href="/tools/calorie-calculator/" className="text-brand-600 underline">„Kalorienrechner"</a> für eine Ansicht zur Mahlzeitenplanung.
+        Kalorien bestimmen, ob dein Gewicht zu- oder abnimmt; die <strong>Makros</strong> (Protein, Kohlenhydrate, Fett) bestimmen, woraus dieses Gewicht besteht. Halte Protein hoch (1,6–2,2 g pro kg Körpergewicht), um Muskel zu erhalten oder aufzubauen. Die hier gezeigte Aufteilung (30/40/30) ist ein ausgewogener Standard — sieh dir unseren{' '}
+        <a href="/tools/macro-calculator/" className="text-brand-600 underline">„Makro-Rechner“</a> für zielspezifische Verhältnisse an oder den{' '}
+        <a href="/tools/calorie-calculator/" className="text-brand-600 underline">„Kalorienrechner“</a> für die Mahlzeitenplanung.
       </p>
     </div>
   </section>

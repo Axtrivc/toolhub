@@ -36,12 +36,12 @@ const zh: ReactNode = (
     <p>这个计算器利用勾股定理求解<strong>直角三角形</strong>。已知两条直角边(a 和 b),它就能求出斜边(c)、面积和周长。</p>
     <div>
       <h2>勾股定理</h2>
-      <p>对任意直角三角形,<code>a² + b² = c²</code>,其中 a、b 是两条直角边,c 是斜边(直角所对的边)。这是数学中最古老、最有用的结论之一,已被用超过 400 种方法证明。</p>
+      <p>对任意直角三角形,<code>a² + b² = c²</code>,其中 a、b 是两条直角边,c 是斜边(直角所对的边)。这是数学中最古老、最有用的结论之一,已有超过 400 种证明方法。</p>
     </div>
     <div>
       <h2>常见用途</h2>
       <ul>
-        <li><strong>建筑:</strong>方正的直角——沿一个方向量 3 ft,另一方向量 4 ft,对角线应为 5 ft</li>
+        <li><strong>建筑:</strong>把墙角校成直角——一个方向量 3 ft,另一方向量 4 ft,对角线应为 5 ft</li>
         <li><strong>导航:</strong>两个 GPS 坐标之间的直线距离</li>
         <li><strong>电视尺寸:</strong>65 英寸电视按对角线测量</li>
         <li><strong>梯子:</strong>梯子斜靠时能达到多高</li>
@@ -83,7 +83,7 @@ const es: ReactNode = (
 const de: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>Was ist dieses Werkzeug?</h2>
-    <p>Dieser Rechner löst <strong>rechtwinklige Dreiecke</strong> mit dem Satz des Pythagoras. Bei den beiden Katheten (a und b) ermittelt er die Hypotenuse (c), die Fläche und den Umfang.</p>
+    <p>Dieser Rechner löst <strong>rechtwinklige Dreiecke</strong> mit dem Satz des Pythagoras. Aus den beiden Katheten (a und b) ermittelt er die Hypotenuse (c), die Fläche und den Umfang.</p>
     <div>
       <h2>Der Satz des Pythagoras</h2>
       <p>Für jedes rechtwinklige Dreieck gilt <code>a² + b² = c²</code>, wobei a und b die Katheten sind und c die Hypotenuse (die dem rechten Winkel gegenüberliegende Seite). Es ist eines der ältesten und nützlichsten Ergebnisse der Mathematik, auf über 400 verschiedene Arten bewiesen.</p>

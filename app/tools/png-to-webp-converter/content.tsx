@@ -39,7 +39,7 @@ const en: ReactNode = (
         WebP supports an alpha channel, so <strong>transparent PNGs stay transparent</strong> after conversion —
         no background fill is applied. One caveat: this tool converts a single static image. Animated content and
         EXIF metadata (orientation, camera data) are not carried through canvas re-encoding, so export a still
-        frame or strip-sensitive files deliberately.
+        frame or strip sensitive files deliberately.
       </p>
     </div>
 
@@ -98,7 +98,7 @@ const es: ReactNode = (
     <div>
       <h2>Elegir la calidad adecuada</h2>
       <p>
-        El control de calidad se asigna directamente al ajuste del codificador: <strong>80 %</strong> (el valor por defecto) es el punto ideal para la mayoría de fotos, y <code>90%+</code> es una buena opción para imágenes con texto nítido o detalles de interfaz. Observa la <strong>barra de ahorro</strong> mientras arrastras — compara los bytes reales de salida con tu archivo original, para que puedas detenerte en la calidad más baja que aún se vea nítida. Si el WebP sale <em>más grande</em> que el original, tu imagen ya estaba bien comprimida; baja la calidad o conserva el original.
+        El control de calidad se corresponde directamente con el ajuste del codificador: <strong>80 %</strong> (el valor por defecto) es el punto ideal para la mayoría de fotos, y <code>90%+</code> es una buena opción para imágenes con texto nítido o detalles de interfaz. Observa la <strong>barra de ahorro</strong> mientras arrastras — compara los bytes reales de salida con tu archivo original, para que puedas detenerte en la calidad más baja que aún se vea nítida. Si el WebP sale <em>más grande</em> que el original, tu imagen ya estaba bien comprimida; baja la calidad o conserva el original.
       </p>
     </div>
 
@@ -129,7 +129,7 @@ const de: ReactNode = (
     <div>
       <h2>Die richtige Qualität wählen</h2>
       <p>
-        Der Qualitätsregler greift direkt die Einstellung des Encoders auf: <strong>80 %</strong> (Standardwert) ist der Sweet Spot für die meisten Fotos, und <code>90%+</code> ist eine gute Wahl für Bilder mit scharfem Text oder UI-Details. Achte beim Ziehen auf die <strong>Einsparungsleiste</strong> — sie vergleicht die tatsächlichen Ausgabe-Bytes mit deiner Originaldatei, sodass du bei der niedrigsten Qualität stoppen kannst, die noch sauber aussieht. Falls das WebP <em>größer</em> wird als die Vorlage, war dein Bild bereits gut komprimiert; senke die Qualität oder behalte das Original.
+        Der Qualitätsregler greift direkt die Einstellung des Encoders auf: <strong>80 %</strong> (Standardwert) ist der Sweet Spot für die meisten Fotos, und <code>90%+</code> ist eine gute Wahl für Bilder mit scharfem Text oder UI-Details. Achte beim Ziehen auf die <strong>Einsparungsleiste</strong> — sie vergleicht die tatsächlichen Ausgabe-Bytes mit deiner Originaldatei, sodass du bei der niedrigsten Qualität stoppen kannst, die noch sauber aussieht. Falls das WebP <em>größer</em> wird als das Original, war dein Bild bereits gut komprimiert; senke die Qualität oder behalte das Original.
       </p>
     </div>
 

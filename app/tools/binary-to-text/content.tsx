@@ -74,7 +74,7 @@ const de: ReactNode = (
     <p>Dieses Werkzeug dekodiert Binärdaten (Einsen und Nullen) zurück in lesbaren Text. Jede 8-Bit-Gruppe ist ein Byte: Ein ASCII-Zeichen belegt eine Gruppe, Mehrbyte-Zeichen in UTF-8 bestehen aus mehreren aufeinanderfolgenden Gruppen.</p>
     <div>
       <h2>Wie binäre Codierung funktioniert</h2>
-      <p>Computer speichern alles als Bits — 0en und 1en. Textzeichen bekommen numerische Codes zugewiesen (ASCII): ‘H’ ist 72, also 01001000 im Binärsystem. Acht Bits = ein Byte = ein Zeichen.</p>
+      <p>Computer speichern alles als Bits — Nullen und Einsen. Textzeichen bekommen numerische Codes zugewiesen (ASCII): ‘H’ ist 72, also 01001000 im Binärsystem. Acht Bits = ein Byte = ein Zeichen.</p>
     </div>
     <div>
       <h2>Häufige Binärmuster</h2>
