@@ -186,7 +186,7 @@ export const compoundInterestCalculatorL10n: ToolL10n = {
       'out.totalContributed': 'Deine Einzahlung',
       'out.interestEarned': 'Erzielter Zins',
       'outSub.interestEarned': 'Zinseszinzwachstum',
-      note: '📈 Zinseszins ist „Zins auf Zins" — je länger dein Anlagehorizont, desto dramatischer das Wachstum. Früh zu beginnen ist wichtiger als mit viel zu beginnen.',
+      note: '📈 Zinseszins ist „Zins auf Zins“ — je länger dein Anlagehorizont, desto dramatischer das Wachstum. Früh zu beginnen ist wichtiger als mit viel zu beginnen.',
       chartTitle: 'Deine Einzahlungen vs. Zinseszinzwachstum',
       chartCenter: 'Zukünftiger Wert',
       'slice.totalContributed': 'Von dir eingezahlt',

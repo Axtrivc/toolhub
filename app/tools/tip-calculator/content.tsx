@@ -215,7 +215,7 @@ const de: ReactNode = (
       Die Trinkgeldnormen unterscheiden sich je nach Land drastisch. In Japan kann ein Trinkgeld
       sogar als unhöflich empfunden werden. In weiten Teilen Europas ist eine Servicegebühr schon in
       der Rechnung enthalten, und das Aufrunden wird geschätzt. Informiere dich beim Reisen immer
-      über die lokalen Bräuche — das „richtige" Trinkgeld in einem Land kann in einem anderen
+      über die lokalen Bräuche — das „richtige“ Trinkgeld in einem Land kann in einem anderen
       beleidigend sein.
     </p>
 

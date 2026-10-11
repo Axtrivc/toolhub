@@ -276,7 +276,7 @@ const de: ReactNode = (
     <h2>Wie funktioniert der Wörterzähler?</h2>
     <p>
       Dieses Werkzeug zählt Wörter, Zeichen, Sätze, Absätze und die geschätzte Lesezeit in Echtzeit
-      während du tippst. Ein „Wort" ist definiert als jede Folge von Zeichen, die keine Leerzeichen
+      während du tippst. Ein „Wort“ ist definiert als jede Folge von Zeichen, die keine Leerzeichen
       sind — also zählen <code>hello</code>, <code>2026</code> und <code>don&apos;t</code> jeweils als
       ein Wort. Alles passiert lokal in deinem Browser, sodass es keine Verzögerung gibt und dein Text
       nie dein Gerät verlässt.
@@ -344,7 +344,7 @@ const de: ReactNode = (
     <ul>
       <li><strong>Google Meta-Beschreibung:</strong> ~155 Zeichen (danach wird abgeschnitten).</li>
       <li><strong>X (Twitter)-Post:</strong> 280 Zeichen.</li>
-      <li><strong>Instagram-Caption:</strong> 2,200 Zeichen (nur die ersten 125 sind ohne Tippen auf „mehr" sichtbar).</li>
+      <li><strong>Instagram-Caption:</strong> 2,200 Zeichen (nur die ersten 125 sind ohne Tippen auf „mehr“ sichtbar).</li>
       <li><strong>Facebook-Post:</strong> Kein striktes Limit, aber kürzere Posts bekommen mehr Engagement.</li>
       <li><strong>LinkedIn-Post:</strong> 3,000 Zeichen.</li>
       <li><strong>YouTube-Titel:</strong> 100 Zeichen (~70 sichtbar in der Suche).</li>

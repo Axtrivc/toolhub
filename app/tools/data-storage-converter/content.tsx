@@ -110,7 +110,7 @@ const de: ReactNode = (
     <p>Digitaler Speicher wird in <strong>Bytes</strong> und Vielfachen davon gemessen. Dieses Werkzeug rechnet sowohl mit <strong>dezimalen Einheiten</strong> (KB = 1.000 Bytes, wie auf Festplattenetiketten und bei Netzwerkangaben) als auch mit <strong>binären Einheiten</strong> (KiB = 1.024 Bytes, wie Betriebssysteme Dateigrößen und Speicherplatz angeben).</p>
     <div>
       <h2>Binäre vs. dezimale Einheiten</h2>
-      <p>Es gibt zwei Konventionen. <strong>Dezimal</strong> (1 KB = 1.000 Bytes) wird von Speicherherstellern verwendet. <strong>Binär</strong> (1 KiB = 1.024 Bytes) wird von Windows und der meisten Software verwendet — deshalb wird eine „500 GB"-Festplatte auf deinem Computer als ~465 GiB angezeigt. Dieses Werkzeug unterstützt beide.</p>
+      <p>Es gibt zwei Konventionen. <strong>Dezimal</strong> (1 KB = 1.000 Bytes) wird von Speicherherstellern verwendet. <strong>Binär</strong> (1 KiB = 1.024 Bytes) wird von Windows und der meisten Software verwendet — deshalb wird eine „500 GB“-Festplatte auf deinem Computer als ~465 GiB angezeigt. Dieses Werkzeug unterstützt beide.</p>
     </div>
     <div>
       <h2>Häufige Umrechnungen</h2>

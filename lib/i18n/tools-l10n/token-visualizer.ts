@@ -57,16 +57,16 @@ export const TokenVisualizerL10n: ToolL10n = {
   },
   de: {
     useCases: [
-      'Token-Intuition aufbauen: live sehen, wie „strawberry" in mehrere Stücke zerfällt — und verstehen, warum das Modell die r falsch zählt',
+      'Token-Intuition aufbauen: live sehen, wie „strawberry“ in mehrere Stücke zerfällt — und verstehen, warum das Modell die r falsch zählt',
       'Dem Team die Kostenstruktur zeigen: derselbe Inhalt auf Chinesisch verbraucht sichtbar mehr Tokens als auf Englisch',
       'Im Unterricht BPE-Verhalten demonstrieren: Das Leerzeichen verschmilzt mit dem Folge-Token (␣), lange Wörter werden alle ~4 Zeichen geschnitten',
       'Vor der Prompt-Optimierung prüfen, welche Füllwörter Budget fressen, ohne Semantik beizutragen',
     ],
     faqs: [
       { q: 'Ist das der echte Tokenizer eines Modells?', a: 'Nein. Es ist eine visuelle Näherung: Wörter ≤5 Zeichen = 1 Token, längere werden bei 4 Zeichen geteilt, CJK ≈ 1 Token pro Zeichen. Echte Tokenizer (tiktoken, SentencePiece …) haben eigene Vokabulare — für abrechnungsreife Zahlen den GPT Token Counter nutzen. Dieses Werkzeug baut Intuition, keine Rechnungen.' },
-      { q: 'Warum erscheint das Leerzeichen als ␣ am nächsten Wort?', a: 'Es ahmt echte BPE-Tokenizer nach: Das führende Leerzeichen verschmilzt meist mit dem Wort zu einem einzigen Token („ hello" ist eines). Leerzeichen zu löschen spart also keine Tokens — es kann die Segmentierung sogar verändern.' },
+      { q: 'Warum erscheint das Leerzeichen als ␣ am nächsten Wort?', a: 'Es ahmt echte BPE-Tokenizer nach: Das führende Leerzeichen verschmilzt meist mit dem Wort zu einem einzigen Token („ hello“ ist eines). Leerzeichen zu löschen spart also keine Tokens — es kann die Segmentierung sogar verändern.' },
       { q: 'Warum werden lange Wörter bei 4 Zeichen geteilt?', a: 'Im englischen Korpus mittelt BPE auf ~4 Zeichen pro Token (0,75 Wörter) — die etablierte Faustregel. Häufige Kurzwörter bleiben ganz; lange, seltene Wörter oder URLs zerfallen in Subword-Einheiten, deren Trennstellen je nach Modell variieren.' },
-      { q: 'Gibt es ein Limit für große Texte?', a: 'Bei sehr langen Eingaben wird die Live-Ansicht übersprungen, damit das Tippen flüssig bleibt; gerendert werden nur die ersten Blöcke, aber „Tokens kopieren / Herunterladen" enthält stets das vollständige Ergebnis.' },
+      { q: 'Gibt es ein Limit für große Texte?', a: 'Bei sehr langen Eingaben wird die Live-Ansicht übersprungen, damit das Tippen flüssig bleibt; gerendert werden nur die ersten Blöcke, aber „Tokens kopieren / Herunterladen“ enthält stets das vollständige Ergebnis.' },
     ],
     ui: {
       'note': '🎨 Eine recht genaue visuelle Näherung (Wörter ≤5 Zeichen = 1 Token, längere bei 4 Zeichen geteilt, CJK ≈ 1 pro Zeichen), nicht der exakte Tokenizer eines bestimmten Modells — für Kosten den GPT Token Counter nutzen. Gut, um zu verstehen, warum manche Phrasen mehr kosten.',
@@ -76,7 +76,7 @@ export const TokenVisualizerL10n: ToolL10n = {
       'hint': 'Jeder Farbblock ≈ ein Token. Das Leerzeichen (␣) verschmilzt mit dem nächsten Token — ungefähr wie bei BPE.',
       'inputLabel': 'Dein Text',
       'inputTooLarge': 'Die Eingabe überschreitet {n} Zeichen — die Visualisierung wird übersprungen, damit die Eingabe reaktionsfähig bleibt. Text kürzen oder leeren, um zu tokenisieren.',
-      'renderCapped': 'Nur die ersten {shown} von {total} Blöcken werden gerendert, damit es schnell bleibt — „Tokens kopieren / Herunterladen" unten enthält alle {total}.',
+      'renderCapped': 'Nur die ersten {shown} von {total} Blöcken werden gerendert, damit es schnell bleibt — „Tokens kopieren / Herunterladen“ unten enthält alle {total}.',
       'copyTokens': 'Tokens kopieren',
     },
   },

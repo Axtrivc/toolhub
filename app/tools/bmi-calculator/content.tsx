@@ -305,12 +305,12 @@ const de: ReactNode = (
     </p>
     <ul>
       <li>
-        <strong>Athleten und Bodybuilder</strong> erzielen oft den Wert „Übergewicht", da Muskel
+        <strong>Athleten und Bodybuilder</strong> erzielen oft den Wert „Übergewicht“, da Muskel
         dichter ist als Fett. Ein professioneller Rugbyspieler mit 10% Körperfett könnte einen BMI
         von 28 haben.
       </li>
       <li>
-        <strong>Ältere Erwachsene</strong> können einen „gesunden" BMI haben, aber einen hohen
+        <strong>Ältere Erwachsene</strong> können einen „gesunden“ BMI haben, aber einen hohen
         Körperfettanteil und eine geringe Muskelmasse — ein Risiko, das der BMI übersieht.
       </li>
       <li>

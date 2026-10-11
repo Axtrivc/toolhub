@@ -82,7 +82,7 @@ export const PasswordEntropyCheckerL10n: ToolL10n = {
   de: {
     useCases: [
       'Vor dem Passwortwechsel die Stärke beziffern: erst bei 75+ Bits im Passwort-Manager speichern',
-      'Zwei Strategien direkt vergleichen: „P@ssw0rd!" (kurz und komplex) gegen „correct horse battery staple" (lange Phrase)',
+      'Zwei Strategien direkt vergleichen: „P@ssw0rd!“ (kurz und komplex) gegen „correct horse battery staple“ (lange Phrase)',
       'Geteilte Team-Passwörter gegen die 75-Bit-Empfehlung der Security-Teams auditieren',
       'Lehr-Demo: Wie Wörterbuchwörter und Tastaturfolgen 60 theoretische Bits auf 30 einbrechen lassen',
     ],
@@ -104,9 +104,9 @@ export const PasswordEntropyCheckerL10n: ToolL10n = {
       'instant': 'sofort',
       'millionYears': 'Millionen Jahre',
       'minutes': '< 1 Stunde',
-      'note': '🔐 Basis = Länge × log2(Zeichenvorrat): „correct horse battery staple" schlägt „P@ssw0rd!", denn Länge dominiert. Abzüge ahmen echte Cracker nach. Analyse 100 % offline.',
+      'note': '🔐 Basis = Länge × log2(Zeichenvorrat): „correct horse battery staple“ schlägt „P@ssw0rd!“, denn Länge dominiert. Abzüge ahmen echte Cracker nach. Analyse 100 % offline.',
       'penRepeat': 'viele wiederholte Zeichen',
-      'penDictStart': 'beginnt mit „password"',
+      'penDictStart': 'beginnt mit „password“',
       'penKeyboardSeq': 'Tastatursequenz',
       'penRepeatRun': 'einzelnes wiederholtes Zeichen',
       'penalties': 'Abzüge angewandt: {list}',

@@ -219,7 +219,7 @@ const de: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>Wie das Alter berechnet wird</h2>
     <p>
-      Das Alter zu berechnen klingt einfach, aber dahinter steckt mehr als das Subtrahieren zweier Jahreszahlen. Eine korrekte Altersberechnung zählt <strong>volle Jahre, Monate und Tage</strong> — du bist nicht „25 Jahre alt", bis dein 25. Geburtstag vollständig vergangen ist. Dieser Rechner verwendet eine kalenderbewusste Logik, die unterschiedlich lange Monate, Schaltjahre und Monatsend-Fälle (z. B. die Differenz zwischen dem 31. Januar und dem 28. Februar) korrekt behandelt.
+      Das Alter zu berechnen klingt einfach, aber dahinter steckt mehr als das Subtrahieren zweier Jahreszahlen. Eine korrekte Altersberechnung zählt <strong>volle Jahre, Monate und Tage</strong> — du bist nicht „25 Jahre alt“, bis dein 25. Geburtstag vollständig vergangen ist. Dieser Rechner verwendet eine kalenderbewusste Logik, die unterschiedlich lange Monate, Schaltjahre und Monatsend-Fälle (z. B. die Differenz zwischen dem 31. Januar und dem 28. Februar) korrekt behandelt.
     </p>
 
     <h2>Warum das Alter präzise berechnen?</h2>
@@ -249,7 +249,7 @@ const de: ReactNode = (
       <li><strong>Jahre + Monate + Tage</strong> — das alltägliche Format, ideal für die meisten Zwecke</li>
       <li><strong>Monate gesamt</strong> — nützlich für die Entwicklung von Säuglingen und Abonnements</li>
       <li><strong>Wochen gesamt</strong> — üblich für Schwangerschaft und das Alter von Säuglingen</li>
-      <li><strong>Tage gesamt</strong> — spaßig für Meilensteine wie „10.000 Tage am Leben"</li>
+      <li><strong>Tage gesamt</strong> — spaßig für Meilensteine wie „10.000 Tage am Leben“</li>
       <li><strong>Stunden gesamt</strong> — wenn es auf Präzision ankommt oder aus reiner Neugier</li>
     </ul>
 

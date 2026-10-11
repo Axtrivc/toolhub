@@ -249,7 +249,7 @@ const de: ReactNode = (
     <p>
       <strong>Zinseszins</strong> ist der Zins, den du sowohl auf deine anfängliche Einlage als
       auch auf die im Laufe der Zeit angesammelten Zinsen verdienst. Er wird oft als „Zins auf
-      Zins" bezeichnet und ist die stärkste Kraft bei langfristigen Investitionen. Anders als der
+      Zins“ bezeichnet und ist die stärkste Kraft bei langfristigen Investitionen. Anders als der
       einfache Zins, der nur deine Ersteinlage wachsen lässt, lässt der Zinseszins dein Geld
       exponentiell wachsen — anfangs langsam, dann mit den Jahren immer dramatischer schneller.
     </p>
@@ -292,7 +292,7 @@ const de: ReactNode = (
     <p>Übliche Richtrenditen für langfristiges Investieren:</p>
     <ul>
       <li><strong>S&amp;P 500 historischer Durchschnitt:</strong> ~10%/Jahr (vor Inflation)</li>
-      <li><strong>Nach Inflation („reale" Rendite):</strong> ~7%/Jahr</li>
+      <li><strong>Nach Inflation („reale“ Rendite):</strong> ~7%/Jahr</li>
       <li><strong>Anleihen:</strong> ~4–5%/Jahr</li>
       <li><strong>Tagesgeld mit hoher Verzinsung:</strong> ~4–5% (schwankt mit den Zinsen)</li>
       <li><strong>Konservativer Mix (Aktien + Anleihen):</strong> ~6–7%/Jahr</li>

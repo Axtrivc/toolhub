@@ -67,7 +67,7 @@ export const salesTaxCalculatorL10n: ToolL10n = {
       { q: 'Werden Lebensmittel besteuert?', a: 'In vielen US-Bundesstaaten sind Lebensmittel befreit oder werden niedriger besteuert. Grundnahrungsmittel und Medikamente erhalten oft eine Sonderbehandlung, aber die Regeln unterscheiden sich je nach Gebiet stark.' },
       { q: 'Ist Sales Tax dasselbe wie die Mehrwertsteuer?', a: 'Beides sind Verbrauchsteuern, aber sie funktionieren unterschiedlich. Sales Tax wird einmalig beim Endverkauf an den Verbraucher erhoben. Die Mehrwertsteuer wird auf jeder Produktionsstufe erhoben, aber erstattet, sodass sie am Ende der Verbraucher trägt. Die Rechnung für den Endkäufer ist ähnlich.' },
       { q: 'Warum enthalten US-Preise keine Steuer?', a: 'Da die USA Tausende lokale Steuergebiete haben, zeigen Händler Nettopreise, um einheitliche nationale Werbung zu schalten. Die Steuer wird an der Kasse basierend auf dem Kaufort hinzugefügt.' },
-      { q: 'Wie rechne ich die Mehrwertsteuer aus einem Bruttopreis heraus?', a: 'Mit „Steuer abziehen": Brutto ÷ (1 + Satz). 119 € brutto bei 19 % ergeben 100 € netto und 19 € USt. Nicht einfach 19 % vom Brutto abziehen — das ergäbe falsche 96,39 €.' },
+      { q: 'Wie rechne ich die Mehrwertsteuer aus einem Bruttopreis heraus?', a: 'Mit „Steuer abziehen“: Brutto ÷ (1 + Satz). 119 € brutto bei 19 % ergeben 100 € netto und 19 € USt. Nicht einfach 19 % vom Brutto abziehen — das ergäbe falsche 96,39 €.' },
       { q: 'Welche Sätze gelten im DACH-Raum?', a: 'Deutschland: 19 % Regelsatz, 7 % ermäßigt für Lebensmittel und Bücher. Österreich: 20 % bzw. 10 %; die Schweiz: 8,1 % Normalsatz seit 2024. Setze den passenden Satz ein, dann stimmen Netto und Brutto exakt.' },
     ],
     ui: {
@@ -80,7 +80,7 @@ export const salesTaxCalculatorL10n: ToolL10n = {
       'in.amount': 'Betrag', 'inSuffix.amount': '$', 'in.rate': 'Steuersatz', 'inSuffix.rate': '%', 'in.mode': 'Berechnungsmodus',
       'opt.mode.add': 'Steuer hinzufügen (netto → brutto)', 'opt.mode.remove': 'Steuer abziehen (brutto → netto)',
       'out.tax': 'Steuerbetrag', 'out.result': 'Endbetrag',
-      note: '💰 Nutze „Steuer abziehen", um den Nettobetrag zu finden, wenn du nur den Bruttobetrag hast — häufig bei Mehrwertsteuer und GST.',
+      note: '💰 Nutze „Steuer abziehen“, um den Nettobetrag zu finden, wenn du nur den Bruttobetrag hast — häufig bei Mehrwertsteuer und GST.',
     },
   },
 }

@@ -504,7 +504,7 @@ const de: ReactNode = (
         die Zahlungshöhe. Wenn du schon die Mindestzahlungen kaum schaffst, wende dich an das
         Härtefall-Programm deines Kartenausstellers — viele bieten vorübergehend gesenkte Zinsen
         oder Zahlungspläne an, statt dich in den Verzug rutschen zu sehen. Vermeide Payday-Kredite
-        und andere teure Kredite, um Kreditkartenzahlungen zu „decken"; das tauscht ein Problem
+        und andere teure Kredite, um Kreditkartenzahlungen zu „decken“; das tauscht ein Problem
         gegen ein schlimmeres.
       </p>
     </div>

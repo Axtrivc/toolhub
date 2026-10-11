@@ -192,9 +192,9 @@ const de: ReactNode = (
 
     <h2>Häufige Fehler bei der Datumsrechnung</h2>
     <ul>
-      <li><strong>„30 Tage" ≠ „1 Monat".</strong> Monate haben 28–31 Tage. Ein Monat ab dem 31. Januar landet am 28. (oder 29.) Februar, nicht am 2. März.</li>
+      <li><strong>„30 Tage“ ≠ „1 Monat“.</strong> Monate haben 28–31 Tage. Ein Monat ab dem 31. Januar landet am 28. (oder 29.) Februar, nicht am 2. März.</li>
       <li><strong>Zeitzonen.</strong> Derselbe Moment kann je nach Zeitzone auf unterschiedliche Kalenderdaten fallen. Dieser Rechner verwendet dein lokales Datum.</li>
-      <li><strong>Inklusive vs. exklusive Zählweise.</strong> „Vom 1. bis 31. Januar" sind 30 Tage Differenz, oder 31 Tage, wenn beide Endpunkte gezählt werden. Sei dir klar, welche Konvention du verwendest.</li>
+      <li><strong>Inklusive vs. exklusive Zählweise.</strong> „Vom 1. bis 31. Januar“ sind 30 Tage Differenz, oder 31 Tage, wenn beide Endpunkte gezählt werden. Sei dir klar, welche Konvention du verwendest.</li>
     </ul>
 
     <h2>Mit Zeitspannen arbeiten</h2>

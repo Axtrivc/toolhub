@@ -69,7 +69,7 @@ export const densityConverterL10n: ToolL10n = {
     ],
     faqs: [
       { q: 'Warum schwimmt Eis?', a: 'Wasser ist ungewöhnlich — es dehnt sich beim Gefrieren aus, sodass Eis weniger dicht ist als flüssiges Wasser. Die meisten Stoffe sind als Feststoff dichter. Ohne diese Besonderheit würden Seen von unten nach oben gefrieren.' },
-      { q: 'Wie rechne ich kg/m³ und g/cm³ um?', a: 'Faktor 1000: 1 g/cm³ = 1000 kg/m³ = 1 g/mL = 1 kg/L. Weil Wasser 1000 kg/m³ hat, reicht die Eselsbrücke „Wasser = 1 g/cm³", um fast jede Umrechnung im Kopf zu machen.' },
+      { q: 'Wie rechne ich kg/m³ und g/cm³ um?', a: 'Faktor 1000: 1 g/cm³ = 1000 kg/m³ = 1 g/mL = 1 kg/L. Weil Wasser 1000 kg/m³ hat, reicht die Eselsbrücke „Wasser = 1 g/cm³“, um fast jede Umrechnung im Kopf zu machen.' },
       { q: 'Wie messe ich die Dichte einfach selbst?', a: 'Probe auf der Waage wiegen, verdrängtes Volumen im Messzylinder ablesen, dividieren. Ein 82-g-Block, der 10 mL verdrängt, hat 8,2 g/cm³ — nahe an Kupfer (8,96), das grenzt das Material schon ein.' },
       { q: 'Macht die Temperatur einen Unterschied?', a: 'Ja. Wasser ist bei 4 °C am dichtesten (rund 999,97 kg/m³), bei 20 °C etwa 998 kg/m³ und nahe am Siedepunkt etwa 958 kg/m³. Für exakte Lösungen oder Kalibrierungen den Wert bei der tatsächlichen Temperatur zugrunde legen.' },
     ],

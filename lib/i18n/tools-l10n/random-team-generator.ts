@@ -53,10 +53,10 @@ export const RandomTeamGeneratorL10n: ToolL10n = {
   },
   de: {
     useCases: [
-      'Zufallsgruppen fürs Teambuilding oder den Unterricht: Liste einfügen, mit einem Klick ausgewogene Teams ohne „Cliquen"',
+      'Zufallsgruppen fürs Teambuilding oder den Unterricht: Liste einfügen, mit einem Klick ausgewogene Teams ohne „Cliquen“',
       'Sport-Teams bilden: 20 Leute auf 4 Teams per Round-Robin — der Unterschied beträgt höchstens eine Person',
       'Zufällige Teams zu Hackathon-Beginn: Wer zuerst eingetippt wurde, hat keinerlei Vorteil',
-      'Passt das Ergebnis nicht? „Neu mischen" erzeugt jedes Mal eine kryptografisch frische Kombination',
+      'Passt das Ergebnis nicht? „Neu mischen“ erzeugt jedes Mal eine kryptografisch frische Kombination',
     ],
     faqs: [
       { q: 'Ist die Verteilung wirklich fair?', a: 'Ja. Der Algorithmus ist Fisher-Yates-Shuffle + Round-Robin-Austeilen: Erst wird die Liste mit Krypto-Zufall (crypto.getRandomValues) durchgemischt — jede Permutation ist mathematisch gleich wahrscheinlich — dann werden Person 1, 2, 3 … reihum an die Teams verteilt. Es gibt keinen Positions- oder Reihenfolgen-Bias.' },

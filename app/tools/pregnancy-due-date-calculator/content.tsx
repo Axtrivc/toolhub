@@ -83,7 +83,7 @@ const de: ReactNode = (
     <p>Dieser Rechner schätzt deinen Geburtstermin mit der <strong>Naegele-Regel</strong>: Addiere 280 Tage (40 Wochen) zum ersten Tag deiner letzten Periode. Er zeigt auch den wahrscheinlichen Empfängniszeitpunkt und die aktuelle Woche.</p>
     <div>
       <h2>Das 40-Wochen-Modell</h2>
-      <p>Die Schwangerschaft wird ab der letzten Periode in Wochen gezählt, nicht ab der Empfängnis. Die „40 Wochen" enthalten ~2 Wochen, bevor du tatsächlich empfangen hast. Voll ausgetragen ist alles von 37 bis 42 Wochen.</p>
+      <p>Die Schwangerschaft wird ab der letzten Periode in Wochen gezählt, nicht ab der Empfängnis. Die „40 Wochen“ enthalten ~2 Wochen, bevor du tatsächlich empfangen hast. Voll ausgetragen ist alles von 37 bis 42 Wochen.</p>
     </div>
     <div>
       <h2>Trimester</h2>

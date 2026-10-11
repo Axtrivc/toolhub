@@ -568,13 +568,13 @@ export const howIBuiltToolHubArticle: LocalizedArticle = {
       {
         heading: '1. Das Problem: Moderne Web-Werkzeuge sind leise kaputt',
         blocks: [
-          'Öffne irgendein „kostenloses Online-Tool" auf der ersten Google-Seite. Dies ist fast immer die Erfahrung, die du bekommst:',
+          'Öffne irgendein „kostenloses Online-Tool“ auf der ersten Google-Seite. Dies ist fast immer die Erfahrung, die du bekommst:',
           {
             list: [
               '**Aufblähung.** Ein einziges Textfeld-Utility liefert 2–4 MB JavaScript, einen clientseitigen Router, ein Analytics-SDK, ein Chat-Widget und drei Cookie-Banner — alles, um einen Slug zu berechnen.',
-              '**Tracking.** Deine Eingabe verlässt das Gerät in dem Moment, in dem du sie einfügst. Das „Werkzeug" ist in Wahrheit ein Formular, das auf einen Server POSTet, wo deine Daten protokolliert, gespeichert und letztlich verkauft werden.',
+              '**Tracking.** Deine Eingabe verlässt das Gerät in dem Moment, in dem du sie einfügst. Das „Werkzeug“ ist in Wahrheit ein Formular, das auf einen Server POSTet, wo deine Daten protokolliert, gespeichert und letztlich verkauft werden.',
               '**Layout Shift (CLS).** Der Ad-Slot ist 800 ms leer, schnappt dann ein und schubst das Ergebnis, das du gelesen hast, um 250 px nach unten. Mal 3 Ad-Slots pro Seite.',
-              '**Langsames Server-Rendering.** Ein Werkzeug, das eine statische HTML-Datei sein könnte, ist stattdessen ein Node/PHP-Render mit 600–1200 ms TTFB an einem kalten Origin, weil jemand meinte, jede URL müsse „dynamisch" sein.',
+              '**Langsames Server-Rendering.** Ein Werkzeug, das eine statische HTML-Datei sein könnte, ist stattdessen ein Node/PHP-Render mit 600–1200 ms TTFB an einem kalten Origin, weil jemand meinte, jede URL müsse „dynamisch“ sein.',
             ],
           },
           'Nichts davon ist nötig. Ein *Einheiten-Umrechner* braucht keine Datenbank. Ein *JSON-Formatter* braucht kein Backend. Die ehrliche Version dieser Werkzeuge ist: eine HTML-Datei, ein kleines Script, läuft in deinem Tab, vergisst alles beim Schließen. ToolHub ist mein Versuch, die ehrliche Version zu bauen — skaliert, über **169 Werkzeuge**.',
@@ -589,7 +589,7 @@ export const howIBuiltToolHubArticle: LocalizedArticle = {
             card: {
               title: 'Slug-Generator',
               href: '/tools/slug-generator/',
-              desc: 'Saubere URL-Slugs aus jedem Titel — die ehrliche Version von „alles, um einen Slug zu berechnen".',
+              desc: 'Saubere URL-Slugs aus jedem Titel — die ehrliche Version von „alles, um einen Slug zu berechnen“.',
             },
           },
         ],
@@ -610,7 +610,7 @@ export const howIBuiltToolHubArticle: LocalizedArticle = {
           'Der SWR-Handler ist ein Dutzend Zeilen:',
           { code: CODE_SW_EN },
           'Zwei Details zählen: (a) der SW **cacht explizit keine Cross-Origin-Requests** — AdSense- und Analytics-Traffic wird direkt durchgereicht, sodass ich nie versehentlich Ad-Creatives cache oder Impression-Zählungen kaputt mache; (b) der SW bumpht bei jedem Deploy eine `VERSION`-Konstante und kombiniert sie mit `skipWaiting()` + Alt-Cache-Räumung bei `activate`, was die 24-Stunden-Max-Age des Browsers für `sw.js` umgeht und neuen Code in Minuten zu den Nutzern bringt. Die Registrierungsseite ruft außerdem bei jedem Page-Load `registration.update()` auf.',
-          'Das Ergebnis ist „träges" Caching by Design: nur Seiten, die ein Besucher wirklich öffnet, werden gecacht. Über 169 Werkzeugseiten hinweg pre-cache ich den Long Tail nicht — das würde die Installationszeit aufblähen. Leute bekommen Offline-Zugriff auf *die Werkzeuge, die sie nutzen*, und das ist der einzige Offline-Zugriff, der zählt.',
+          'Das Ergebnis ist „träges“ Caching by Design: nur Seiten, die ein Besucher wirklich öffnet, werden gecacht. Über 169 Werkzeugseiten hinweg pre-cache ich den Long Tail nicht — das würde die Installationszeit aufblähen. Leute bekommen Offline-Zugriff auf *die Werkzeuge, die sie nutzen*, und das ist der einzige Offline-Zugriff, der zählt.',
         ],
       },
       {
@@ -620,7 +620,7 @@ export const howIBuiltToolHubArticle: LocalizedArticle = {
           'Jedes Werkzeug wird einmal in einer einzigen Source of Truth (`lib/tools.ts`) beschrieben und generiert dann automatisch vier JSON-LD-Blöcke:',
           {
             list: [
-              '`WebApplication` + `SoftwareApplication` — sagt Google „das ist eine kostenlose In-Browser-App" mit einem `Offer` zum Preis 0 und der richtigen `applicationCategory` (Finance / Developer / Health / …).',
+              '`WebApplication` + `SoftwareApplication` — sagt Google „das ist eine kostenlose In-Browser-App“ mit einem `Offer` zum Preis 0 und der richtigen `applicationCategory` (Finance / Developer / Health / …).',
               '`BreadcrumbList` — Home › Kategorie › Werkzeug, sowohl als sichtbare `<nav>` als auch als maschinenlesbares Schema gerendert.',
               '`FAQPage` — aus derselben FAQ-Datendatei gezogen, die auch das sichtbare FAQ auf der Seite rendert, sodass Schema und sichtbarer Inhalt nie auseinanderdriften können (Drift ist es, was dir eine manuelle Maßnahme einbringt).',
               '`HowTo` — die drei Standardschritte (Eingabe → Ansehen → Kopieren/Exportieren), mit einer `totalTime`-Schätzung.',
@@ -643,10 +643,10 @@ export const howIBuiltToolHubArticle: LocalizedArticle = {
               'HTML liegt auf einem CDN, geliefert in zig Millisekunden.',
               'JS ist pro Werkzeug gesplittet; der interaktive Chunk ist klein.',
               'Rückkehrende Besuche sind sofort da (SWR-Cache).',
-              'Werbung verschiebt das Layout nicht, also ist das CWV-Band „gut" stabil.',
+              'Werbung verschiebt das Layout nicht, also ist das CWV-Band „gut“ stabil.',
             ],
           },
-          'Das realistische Ergebnis ist ein Sub-Sekunden-First-Contentful-Paint auf warmem Cache und ein sauberer Lighthouse-Durchlauf auf kaltem. Ich jage keiner 100 nach; ich jage „die Seite ist für einen Menschen offensichtlich schnell", was eine viel niedrigere Latte ist und die einzige, die ein Nutzer wirklich bemerkt.',
+          'Das realistische Ergebnis ist ein Sub-Sekunden-First-Contentful-Paint auf warmem Cache und ein sauberer Lighthouse-Durchlauf auf kaltem. Ich jage keiner 100 nach; ich jage „die Seite ist für einen Menschen offensichtlich schnell“, was eine viel niedrigere Latte ist und die einzige, die ein Nutzer wirklich bemerkt.',
         ],
       },
       {
@@ -667,7 +667,7 @@ export const howIBuiltToolHubArticle: LocalizedArticle = {
       {
         heading: '6. Micro-Interactions & ambientes Aurora-Glow mit 60 FPS',
         blocks: [
-          'Ein schnelles Werkzeug muss nicht aussehen wie ein Klartext-Dokument aus den 90ern. Damit sich ToolHub „lebendig" anfühlt, ohne die Core Web Vitals zu versenken, habe ich eine leichte Animations-Schicht mit Framer Motion (Spring-Physik) und CSS-Ambient-Glows gebaut:',
+          'Ein schnelles Werkzeug muss nicht aussehen wie ein Klartext-Dokument aus den 90ern. Damit sich ToolHub „lebendig“ anfühlt, ohne die Core Web Vitals zu versenken, habe ich eine leichte Animations-Schicht mit Framer Motion (Spring-Physik) und CSS-Ambient-Glows gebaut:',
           {
             list: [
               '**Ambientes Aurora-Glow**: Ein reines CSS-Hintergrund-Mesh-Glow mit `blur-[100px]` und 8-Sekunden-Keyframe-Loops, das einen subtil atmenden Hintergrund erzeugt — ganz ohne Main-Thread-JS-Kosten.',
@@ -683,11 +683,11 @@ export const howIBuiltToolHubArticle: LocalizedArticle = {
           'Wenn ich das ganze Projekt in wenige Zeilen pressen müsste:',
           {
             list: [
-              '**Standardmäßig statisch.** 95% der „Werkzeuge" haben nichts als Server-Render gesucht. `output: \'export\'` löscht eine ganze Klasse von Latenz- und Ops-Problemen.',
+              '**Standardmäßig statisch.** 95% der „Werkzeuge“ haben nichts als Server-Render gesucht. `output: \'export\'` löscht eine ganze Klasse von Latenz- und Ops-Problemen.',
               '**Ein Service Worker ist eine Caching-Schicht, kein Framework.** Unter 200 Zeilen Vanilla-JS haben mir Offline-Support + SWR über 169 Seiten gegeben. Kein `workbox`, keine Abstraktion.',
               '**pSEO ist ein Datenmodell, keine Content-Farm.** Eine Config-Datei → 676+ strukturierte Datenblöcke + ein automatisches Internal-Link-Mesh. Schema und sichtbare Seite teilen sich eine Source of Truth, also können sie nie uneinig sein.',
               '**Reserviere Ad-Space immer.** Zero-CLS ist keine Polier-Aufgabe; es ist eine 1-Komponenten-Architekturentscheidung, die sich in UX, CWV und Ad-Review auszahlt.',
-              '**Datenschutz ist Architektur, kein Versprechen.** „Deine Daten verlassen nie das Gerät" stimmt hier nur, weil die Werkzeuge buchstäblich kein Backend haben, an das sie etwas senden könnten.',
+              '**Datenschutz ist Architektur, kein Versprechen.** „Deine Daten verlassen nie das Gerät“ stimmt hier nur, weil die Werkzeuge buchstäblich kein Backend haben, an das sie etwas senden könnten.',
             ],
           },
           { heading: 'Offene Metriken (zum Zeitpunkt dieses Posts)' },

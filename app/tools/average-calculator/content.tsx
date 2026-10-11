@@ -215,7 +215,7 @@ const de: ReactNode = (
 
     <h2>Mittelwert vs. Median: Warum beide wichtig sind</h2>
     <p>
-      Der <strong>Mittelwert</strong> (was die meisten „den Durchschnitt" nennen) ist die Summe
+      Der <strong>Mittelwert</strong> (was die meisten „den Durchschnitt“ nennen) ist die Summe
       geteilt durch die Anzahl. Der <strong>Median</strong> ist der mittlere Wert, wenn die Zahlen
       sortiert sind. Sie unterscheiden sich stark, wenn Ausreißer vorhanden sind.
     </p>

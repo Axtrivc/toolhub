@@ -55,7 +55,7 @@ export const savingsGoalCalculatorL10n: ToolL10n = {
     useCases: ['das Sparziel nach Datum berechnen', 'herausfinden, wie viel monatlich zu sparen ist', 'das Sparziel mit Zinsen berechnen', 'ein Sparziel bis zu einem bestimmten Jahr erreichen'],
     faqs: [
       { q: 'Welche Rendite soll ich annehmen?', a: 'Nutze 4–5 % für Hochzinstagesgeld oder konservative Anlagen. Nutze 7 % für langfristige Aktienanlage. Höhere Raten bedeuten niedrigere Monatsbeiträge, aber mehr Schwankung. Im Zweifel rechne zweimal — einmal optimistisch, einmal konservativ — und ziele auf den höheren Beitrag.' },
-      { q: 'Soll ich die Inflation berücksichtigen?', a: 'Ja, wenn dein Ziel Jahre entfernt liegt. Ein 30 000 $-Ziel in 5 Jahren kauft weniger als 30 000 $ heute. Zum Ausgleich erhöhe dein Ziel um ~3 % pro Jahr oder nutze eine „reale" Rendite (Anlagerendite minus Inflation). Eine nominale 7 %-Rendite wird z. B. zu ~4 % real.' },
+      { q: 'Soll ich die Inflation berücksichtigen?', a: 'Ja, wenn dein Ziel Jahre entfernt liegt. Ein 30 000 $-Ziel in 5 Jahren kauft weniger als 30 000 $ heute. Zum Ausgleich erhöhe dein Ziel um ~3 % pro Jahr oder nutze eine „reale“ Rendite (Anlagerendite minus Inflation). Eine nominale 7 %-Rendite wird z. B. zu ~4 % real.' },
       { q: 'Ist monatliches Sparen oder Einmalanlage besser?', a: 'Monatliche Einzahlungen gewinnen für die meisten, weil sie Disziplin erzwingen und Risiko streuen (Cost-Average-Effekt). Die Einmalanlage schneidet im Schnitt leicht besser ab, weil das Geld länger am Markt ist, erfordert aber, das Geld vorab zu haben und kurzfristige Schwankungen auszuhalten.' },
     ],
     ui: {

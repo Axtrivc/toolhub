@@ -184,7 +184,7 @@ const de: ToolInfoTemplate = {
   intros: {
     calculator: [
       '{name} liefert dir das Ergebnis sofort, ohne Tabellenkalkulation oder Kopfrechnen. Egal, ob du einen Haushaltsplan erstellst, einen Kredit prüfst oder Hausaufgaben rechnest — das Werkzeug wendet im Hintergrund die richtige Formel an und zeigt das Ergebnis, sobald du deine Zahlen eingibst.',
-      'Anders als eine statische Tabelle oder Grafik passt sich dieser Rechner an deine genauen Eingaben an. Du kannst jeden Wert ändern und siehst das Ergebnis in Echtzeit aktualisiert — praktisch, um Szenarien zu vergleichen, etwa „Was wäre, wenn der Zins 1 % niedriger wäre?" oder „Was, wenn ich 50 $ mehr im Monat zahle?".',
+      'Anders als eine statische Tabelle oder Grafik passt sich dieser Rechner an deine genauen Eingaben an. Du kannst jeden Wert ändern und siehst das Ergebnis in Echtzeit aktualisiert — praktisch, um Szenarien zu vergleichen, etwa „Was wäre, wenn der Zins 1 % niedriger wäre?“ oder „Was, wenn ich 50 $ mehr im Monat zahle?“.',
     ],
     converter: [
       '{name} rechnet mit den international festgelegten Umrechnungsfaktoren von einer Einheit in eine andere. Gib einen Wert ein, wähle Quell- und Zieleinheit — das Ergebnis erscheint sofort, ohne Warten und ohne Neuladen.',

@@ -345,7 +345,7 @@ export const mortgagePitiGuideArticle: LocalizedArticle = {
         heading: '3. Sondertilgung: der fünfstellige Hebel im Tilgungsplan',
         blocks: [
           'Jeder zusätzliche Dollar fließt **direkt in die Tilgung**, und alle künftigen Zinsen berechnen sich auf den kleineren Saldo. Der Effekt zinst sich nach vorn: Bei jenem $360 000-Darlehen zu 6,8 % kürzen **$200/Monat extra** die Laufzeit um rund **6 Jahre** und sparen etwa **$117 000 Zinsen**. Selbst eine einmalige $10 000-Sondertilgung in Jahr 2 spart noch ~$52 000.',
-          'Zwei Disziplinen schlagen den Betrag. Erstens: **Früh schlägt groß** — eine Sondertilgung in Jahr 2 spart um Größenordnungen mehr als dieselbe in Jahr 20, weil sie Jahrzehnte künftiger Zinsen killt. Zweitens: **Zweckbindung angeben** — „apply to principal" auf die Überweisung schreiben, sonst bucht der Servicer sie als nächste Monatsrate: gleiches Geld, null Zinsvorteil.',
+          'Zwei Disziplinen schlagen den Betrag. Erstens: **Früh schlägt groß** — eine Sondertilgung in Jahr 2 spart um Größenordnungen mehr als dieselbe in Jahr 20, weil sie Jahrzehnte künftiger Zinsen killt. Zweitens: **Zweckbindung angeben** — „apply to principal“ auf die Überweisung schreiben, sonst bucht der Servicer sie als nächste Monatsrate: gleiches Geld, null Zinsvorteil.',
           'Der Zwei-Wochen-Trick nutzt dasselbe Prinzip: 26 Halbraten ergeben 13 Monatsraten pro Jahr — eine volle Extrarate schleicht sich jährlich ein, ganz ohne Budget-Schmerz.',
           {
             card: {

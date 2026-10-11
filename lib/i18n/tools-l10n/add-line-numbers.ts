@@ -47,7 +47,7 @@ export const addLineNumbersL10n: ToolL10n = {
       note: '🔢 Fügt jeder Zeile Zeilennummern hinzu. Nützlich für Code-Review, Transkripte und Referenzen.',
     },
     useCases: [
-      'Code-Review — praktisch für „in Zeile 42 ist ein Bug"',
+      'Code-Review — praktisch für „in Zeile 42 ist ein Bug“',
       'Interviews und Transkripte ordnen',
       'Logdateien analysieren',
       'Lernmaterialien und Tutorials erstellen',

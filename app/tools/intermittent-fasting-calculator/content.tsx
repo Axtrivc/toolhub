@@ -103,7 +103,7 @@ const de: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>Wähle dein Protokoll</h2>
     <p>
-      <strong>Intervallfasten (IF)</strong> beschränkt <em>wann</em> du isst, nicht was. Die vier am besten untersuchten Schemata sind <strong>16:8</strong> (16 h fasten / 8 h essen — am verbreitetsten), <strong>18:6</strong> (engeres Fenster für konstantere Fettverbrennung), <strong>20:4</strong> (die „Warrior Diet", fortgeschritten) und <strong>14:10</strong> (sanfter Einstieg, mit dem viele anfangen). Beständigkeit schlägt Härte — ein 14:10-Plan, den du durchhältst, schlägt ein 20:4, das du am Donnerstag aufgibst.
+      <strong>Intervallfasten (IF)</strong> beschränkt <em>wann</em> du isst, nicht was. Die vier am besten untersuchten Schemata sind <strong>16:8</strong> (16 h fasten / 8 h essen — am verbreitetsten), <strong>18:6</strong> (engeres Fenster für konstantere Fettverbrennung), <strong>20:4</strong> (die „Warrior Diet“, fortgeschritten) und <strong>14:10</strong> (sanfter Einstieg, mit dem viele anfangen). Beständigkeit schlägt Härte — ein 14:10-Plan, den du durchhältst, schlägt ein 20:4, das du am Donnerstag aufgibst.
     </p>
 
     <h2>Was Stunde für Stunde passiert</h2>
@@ -113,7 +113,7 @@ const de: ReactNode = (
 
     <h2>Warum das Essensfenster weniger zählt als du denkst — und mehr</h2>
     <p>
-      Kontrollierte Studien zeigen: IF wirkt vor allem über spontane Kalorienreduktion, nicht über Magie — ein kürzeres Fenster streicht einfach den Mitternachtssnack. Entscheidend ist aber die Adhärenz — wer Kalorien nicht zählen mag, hält oft einen Zeitplan ein. Wasser, schwarzer Kaffee und purer Tee brechen das Fasten nicht; ein 50-Kalorien-Latte „nur mit Sahne" schon.
+      Kontrollierte Studien zeigen: IF wirkt vor allem über spontane Kalorienreduktion, nicht über Magie — ein kürzeres Fenster streicht einfach den Mitternachtssnack. Entscheidend ist aber die Adhärenz — wer Kalorien nicht zählen mag, hält oft einen Zeitplan ein. Wasser, schwarzer Kaffee und purer Tee brechen das Fasten nicht; ein 50-Kalorien-Latte „nur mit Sahne“ schon.
     </p>
 
     <h2>Wer nicht fasten sollte</h2>

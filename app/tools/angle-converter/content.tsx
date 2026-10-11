@@ -153,7 +153,7 @@ const de: ReactNode = (
     <div>
       <h2>Warum Radiant?</h2>
       <p>
-        Der Radiant ist die „natürliche" Winkeleinheit, weil er direkt mit der Kreisgeometrie
+        Der Radiant ist die „natürliche“ Winkeleinheit, weil er direkt mit der Kreisgeometrie
         zusammenhängt: Ein Winkel von 1 Radiant schneidet einen Bogen ab, der genau so lang ist
         wie der Radius. Die Formeln der Analysis (Ableitungen von Sinus und Cosinus)
         funktionieren sauber nur im Bogenmaß.

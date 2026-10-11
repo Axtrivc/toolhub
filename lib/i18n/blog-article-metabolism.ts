@@ -287,7 +287,7 @@ export const metabolismGuideArticle: LocalizedArticle = {
       {
         heading: '1. BMR: Die Kosten des bloßen Lebendigseins',
         blocks: [
-          'Dein Grundumsatz ist die Energie, die der Körper in völliger Ruhe verbrennt — Herzschlag, Denken, Zellreparatur. Er macht **60–75 % des Tagesverbrauchs** bei sitzenden Erwachsenen aus. „Ich esse kaum und nehme trotzdem zu" heißt daher meist: Die Zufuhr-Schätzung ist falsch, nicht der Stoffwechsel.',
+          'Dein Grundumsatz ist die Energie, die der Körper in völliger Ruhe verbrennt — Herzschlag, Denken, Zellreparatur. Er macht **60–75 % des Tagesverbrauchs** bei sitzenden Erwachsenen aus. „Ich esse kaum und nehme trotzdem zu“ heißt daher meist: Die Zufuhr-Schätzung ist falsch, nicht der Stoffwechsel.',
           { code: CODE_MIFFLIN },
           'Mifflin-St Jeor schlägt die ältere Harris-Benedict-Formel in modernen Populationen und bleibt der klinische Standard. Beachte die Treiber: **Gewicht, Größe, Alter, Geschlecht** — keine mysteriöse Variable. Zwei Menschen mit identischen Werten liegen beim BMR typisch innerhalb von ±10 %.',
           {

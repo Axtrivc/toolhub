@@ -74,7 +74,7 @@ export const CsvToFinetuneJsonlL10n: ToolL10n = {
     ],
     faqs: [
       { q: 'Wie sieht das JSONL aus?', a: 'Ein JSON-Objekt pro Zeile: {"messages":[{"role":"system",...},{"role":"user",...},{"role":"assistant",...}]} — exakt das Chat-Format des OpenAI-Fine-Tuning-Endpunkts, direkt für die files-API geeignet.' },
-      { q: 'Was passiert mit Zeilen ohne Assistant?', a: 'Sie werden markiert, nicht verworfen. Ein leerer Assistant ist im Fine-Tuning fatal (das Modell lernt „nicht antworten"), darum listet das Werkzeug die Zeilennummern zur Korrektur im Quell-CSV.' },
+      { q: 'Was passiert mit Zeilen ohne Assistant?', a: 'Sie werden markiert, nicht verworfen. Ein leerer Assistant ist im Fine-Tuning fatal (das Modell lernt „nicht antworten“), darum listet das Werkzeug die Zeilennummern zur Korrektur im Quell-CSV.' },
       { q: 'Wie werden Kommas und Anführungszeichen behandelt?', a: 'Strikt nach RFC 4180: Zellen mit Kommas, Zeilenumbrüchen oder Anführungszeichen stehen in doppelten Anführungszeichen, innere Anführungszeichen werden verdoppelt. Exporte aus Excel und Google Sheets erfüllen das von Haus aus — du kannst sie direkt einfügen.' },
       { q: 'Wie viele Beispiele braucht ein Fine-Tuning?', a: 'OpenAI empfiehlt 50-100 hochwertige Beispiele für den Anfang; die meisten Aufgaben kommen mit wenigen hundert aus. Qualität (konsistenter Stil, korrekte Antworten) schlägt Quantität deutlich — erst hier säubern, dann skalieren.' },
     ],

@@ -50,7 +50,7 @@ export const slugToTitleL10n: ToolL10n = {
       'maschinenformatierte Zeichenketten in lesbare Namen umwandeln',
     ],
     faqs: [
-      { q: 'Stellt das die ursprüngliche Groß-/Kleinschreibung wieder her?', a: 'Nein — Slugs werden meist kleingeschrieben, sodass die ursprünglichen Großbuchstaben verloren sind. Dieses Werkzeug wendet Title Case an, was in den meisten Fällen gut funktioniert, aber Namen wie „iPhone" oder „McDonald" nicht wiederherstellen kann.' },
+      { q: 'Stellt das die ursprüngliche Groß-/Kleinschreibung wieder her?', a: 'Nein — Slugs werden meist kleingeschrieben, sodass die ursprünglichen Großbuchstaben verloren sind. Dieses Werkzeug wendet Title Case an, was in den meisten Fällen gut funktioniert, aber Namen wie „iPhone“ oder „McDonald“ nicht wiederherstellen kann.' },
     ],
   },
 }

@@ -68,7 +68,7 @@ export const hashGeneratorL10n: ToolL10n = {
       'Blockchain & Content Addressing (Bitcoin, IPFS)',
     ],
     faqs: [
-      { q: 'Kann ein Hash entschlüsselt werden?', a: 'Nein — absichtlich so. Hashes sind Einwegfunktionen. Der einzige Weg, einen Hash zu „knacken", ist, Eingaben so lange auszuprobieren, bis eine passt (Brute Force). Bei SHA-256 ist das für jede Eingabe sinnvoller Länge rechnerisch undurchführbar.' },
+      { q: 'Kann ein Hash entschlüsselt werden?', a: 'Nein — absichtlich so. Hashes sind Einwegfunktionen. Der einzige Weg, einen Hash zu „knacken“, ist, Eingaben so lange auszuprobieren, bis eine passt (Brute Force). Bei SHA-256 ist das für jede Eingabe sinnvoller Länge rechnerisch undurchführbar.' },
       { q: 'Worin unterscheidet sich SHA-256 von MD5 und SHA-1?', a: 'MD5 (128 Bit) und SHA-1 (160 Bit) sind durch praktische Kollisionsangriffe gebrochen und für Signaturen/Zertifikate unbrauchbar. SHA-256 liefert 256 Bit; eine praktikable Kollision ist nicht bekannt. Für Download-Prüfsummen reicht MD5, für Sicherheit immer SHA-256 oder besser.' },
       { q: 'Können zwei Eingaben denselben Hash ergeben?', a: 'Theoretisch ja: Ein Hash bildet unendlich viele Eingaben auf feste Länge ab — das nennt sich Kollision. Bei SHA-256 liegt die Größenordnung bei rund 2^128 Operationen, selbst mit weltweiter Rechenleistung nicht erreichbar — praktisch unmöglich.' },
       { q: 'Kann ich Passwörter direkt mit SHA-256 speichern?', a: 'Nein. SHA-256 ist zu schnell: Angreifer testen Milliarden Passwörter pro Sekunde. Für Passwörter nutze absichtlich langsame, gesalzene Verfahren wie bcrypt, scrypt oder Argon2. SHA-256 eignet sich für Prüfsummen und Fingerabdrücke, nicht für die Passwortspeicherung.' },

@@ -113,7 +113,7 @@ const de: ReactNode = (
 
     <h2>Die Vergleichstabelle lesen</h2>
     <p>
-      Jede Zeile ist der aktuelle ungecachte Listenpreis pro 1 Mio. Tokens (aggregiert von tokencost.app, geprüft im August 2026 — Anbieter ändern Preise oft, die Zahlen sind Planungsschätzungen). „vs cheapest" zeigt, was es kostet, die Budgetklasse zu verlassen; „you save vs priciest", was du monatlich einbehältst, wenn du statt des Frontier-Modells irgendeine andere Zeile wählst.
+      Jede Zeile ist der aktuelle ungecachte Listenpreis pro 1 Mio. Tokens (aggregiert von tokencost.app, geprüft im August 2026 — Anbieter ändern Preise oft, die Zahlen sind Planungsschätzungen). „vs cheapest“ zeigt, was es kostet, die Budgetklasse zu verlassen; „you save vs priciest“, was du monatlich einbehältst, wenn du statt des Frontier-Modells irgendeine andere Zeile wählst.
     </p>
 
     <h2>Budget-Faustregel</h2>

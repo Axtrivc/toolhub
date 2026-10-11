@@ -106,7 +106,7 @@ const de: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>Marge vs. Aufschlag — endlich sauber getrennt</h2>
     <p>
-      Die <strong>Marge</strong> teilt den Gewinn durch den <em>Verkaufspreis</em>; der <strong>Aufschlag (Markup)</strong> teilt ihn durch deine <em>Kosten</em>. Ein Aufschlag von 100 % (Kosten von 40 $ auf 80 $ verdoppeln) ist nur eine Marge von 50 %. Ein „Aufschlag von 30 %" entspricht einer Marge von 23 %. Wer „30 % Marge" ansetzt, aber „30 % Aufschlag" meinte, preist systematisch zu niedrig — dieses Tool rechnet sofort zwischen beiden um, damit Angebote, Decks und Marktplätze dieselbe Sprache sprechen.
+      Die <strong>Marge</strong> teilt den Gewinn durch den <em>Verkaufspreis</em>; der <strong>Aufschlag (Markup)</strong> teilt ihn durch deine <em>Kosten</em>. Ein Aufschlag von 100 % (Kosten von 40 $ auf 80 $ verdoppeln) ist nur eine Marge von 50 %. Ein „Aufschlag von 30 %“ entspricht einer Marge von 23 %. Wer „30 % Marge“ ansetzt, aber „30 % Aufschlag“ meinte, preist systematisch zu niedrig — dieses Tool rechnet sofort zwischen beiden um, damit Angebote, Decks und Marktplätze dieselbe Sprache sprechen.
     </p>
 
     <h2>Die Umrechnungsformeln</h2>
@@ -118,7 +118,7 @@ const de: ReactNode = (
 
     <h2>Bruttomarge in der Praxis</h2>
     <p>
-      Lebensmittelhändler fahren 25-30 % Bruttomarge, Softwarefirmen 70-90 %, Luxusmode 60-75 %, Restaurants auf Essen vor Lohnkosten gerade 60-70 %. Allein die Marketplace-Gebühren von Amazon fressen 8-15 % des Preises — ein FBA-Händler, der „50 % Marge" ruft, ohne landed costs zu kennen, fährt real 25 %. Benchmark dich mit deiner Branche, bevor du deine Marge für gesund erklärst.
+      Lebensmittelhändler fahren 25-30 % Bruttomarge, Softwarefirmen 70-90 %, Luxusmode 60-75 %, Restaurants auf Essen vor Lohnkosten gerade 60-70 %. Allein die Marketplace-Gebühren von Amazon fressen 8-15 % des Preises — ein FBA-Händler, der „50 % Marge“ ruft, ohne landed costs zu kennen, fährt real 25 %. Benchmark dich mit deiner Branche, bevor du deine Marge für gesund erklärst.
     </p>
 
     <h2>Preis-Leitplanken</h2>

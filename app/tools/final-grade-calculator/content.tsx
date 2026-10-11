@@ -68,7 +68,7 @@ const es: ReactNode = (
 const de: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>Was ist dieses Werkzeug?</h2>
-    <p>Dieser Rechner beantwortet die klassische Frage der Studierenden: „Was brauche ich in der Abschlussprüfung für eine A?" Trage deine aktuelle Note, die Zielnote und das Gewicht der Abschlussprüfung ein, um die nötige Punktzahl zu sehen.</p>
+    <p>Dieser Rechner beantwortet die klassische Frage der Studierenden: „Was brauche ich in der Abschlussprüfung für eine A?“ Trage deine aktuelle Note, die Zielnote und das Gewicht der Abschlussprüfung ein, um die nötige Punktzahl zu sehen.</p>
 
     <div>
       <h2>Wie es funktioniert</h2>

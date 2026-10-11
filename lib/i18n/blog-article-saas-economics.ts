@@ -307,14 +307,14 @@ export const saasEconomicsArticle: LocalizedArticle = {
       {
         heading: '1. CAC: Der voll beladene Preis eines Kunden',
         blocks: [
-          'CAC ist der gesamte Vertriebs- und Marketingaufwand geteilt durch Neukunden — *voll beladen*: Anzeigen, Gehälter, Provisionen, Tools, Agenturhonorare. Ein Startup, das $120 000/Monat in S&M steckt und 200 Kunden gewinnt, hat einen **CAC von $600** — egal, wie niedrig der „Cost per Click" im Werbe-Dashboard aussieht.',
-          'Der übliche Fehler ist Teil-Buchhaltung: Werbebudget zählen, das Team dahinter nicht. Wenn dein „CAC" Gehälter ausklammert, ist es kein CAC — es ist eine Media-Kennzahl im Kostüm.',
+          'CAC ist der gesamte Vertriebs- und Marketingaufwand geteilt durch Neukunden — *voll beladen*: Anzeigen, Gehälter, Provisionen, Tools, Agenturhonorare. Ein Startup, das $120 000/Monat in S&M steckt und 200 Kunden gewinnt, hat einen **CAC von $600** — egal, wie niedrig der „Cost per Click“ im Werbe-Dashboard aussieht.',
+          'Der übliche Fehler ist Teil-Buchhaltung: Werbebudget zählen, das Team dahinter nicht. Wenn dein „CAC“ Gehälter ausklammert, ist es kein CAC — es ist eine Media-Kennzahl im Kostüm.',
         ],
       },
       {
         heading: '2. LTV: Umsatz ist Eitelkeit, Marge mal Lebensdauer ist Verstand',
         blocks: [
-          'Der Lifetime Value ist nicht „Umsatz bis zur Kündigung" — er ist der **Bruttogewinn** bis zur Kündigung. Ein $50/Monat-Kunde bei 80 % Bruttomarge trägt $40/Monat bei; bei 2 % monatlichem Churn liegt die mittlere Lebensdauer bei 1/0,02 = **50 Monaten**, der LTV bei $40 × 50 = **$2 000**.',
+          'Der Lifetime Value ist nicht „Umsatz bis zur Kündigung“ — er ist der **Bruttogewinn** bis zur Kündigung. Ein $50/Monat-Kunde bei 80 % Bruttomarge trägt $40/Monat bei; bei 2 % monatlichem Churn liegt die mittlere Lebensdauer bei 1/0,02 = **50 Monaten**, der LTV bei $40 × 50 = **$2 000**.',
           { code: CODE_LTV },
           'Beachte, was die Formel freilegt: **Der Churn steht im Nenner**. Churn zu halbieren verdoppelt den LTV — ohne Preis, Vertrieb oder Marketing anzufassen. Darum verzinst sich Retention-Arbeit, während Akquise nur addiert.',
           {
@@ -337,7 +337,7 @@ export const saasEconomicsArticle: LocalizedArticle = {
         heading: '3. Das entscheidende Verhältnis: LTV/CAC ≥ 3, Payback ≤ 12 Monate',
         blocks: [
           'Die VC-Heuristiken existieren aus gutem Grund. **LTV/CAC unter 1** heißt: Jeder Kunde verbrennt Geld — Wachstum beschleunigt die Blutung. **Zwischen 1 und 3** funktioniert das Modell, bleibt aber fragil: Jeder Churn-Spike oder CAC-Anstieg wischt die Sicherheitsmarge weg. **Über 3** mit Payback unter 12 Monaten ist Wachstumsausgabe eine Maschine: Ein Dollar rein, drei raus über die Kundenlebensdauer, der erste zurück innerhalb eines Jahres.',
-          'Über 5 ist nicht „großartig" — meist heißt es, du *unterinvestierst* in Wachstum und überlässt den Markt der Konkurrenz. Das Verhältnis ist ein Lenkrad, keine Trophäe.',
+          'Über 5 ist nicht „großartig“ — meist heißt es, du *unterinvestierst* in Wachstum und überlässt den Markt der Konkurrenz. Das Verhältnis ist ein Lenkrad, keine Trophäe.',
           {
             card: {
               title: 'ROI-Rechner',

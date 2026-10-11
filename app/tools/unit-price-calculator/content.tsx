@@ -143,7 +143,7 @@ const de: ReactNode = (
     <div>
       <h2>Häufige Fallen</h2>
       <ul>
-        <li><strong>„Großpackung" ist nicht immer billiger</strong> — manchmal ist die kleinere Größe im Angebot</li>
+        <li><strong>„Großpackung“ ist nicht immer billiger</strong> — manchmal ist die kleinere Größe im Angebot</li>
         <li><strong>Unterschiedliche Einheiten verwirren</strong> — ein Produkt in oz, ein anderes in g</li>
         <li><strong>Marke vs. Eigenmarke</strong> — Eigenmarken gewinnen oft beim Stückpreis um 30 % und mehr</li>
         <li><strong>Kleinere Packungen derselben Marke</strong> — überraschenderweise manchmal billiger pro Einheit</li>

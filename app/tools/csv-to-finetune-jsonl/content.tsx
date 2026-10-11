@@ -62,7 +62,7 @@ const de: ReactNode = (
     <h2>Validierung, bevor du bezahlst</h2>
     <p>Zeilen mit leerer Assistant-Zelle werden mitsamt Zeilennummer markiert, statt still verworfen zu werden — Training auf leeren Completions ruiniert Runs im Verborgenen. Anführungszeichen und eingebettete Kommas folgen RFC 4180.</p>
     <h2>Mengenerwartungen</h2>
-    <p>Hunderte Beispiele lehren Stil; Tausende lehren Verhalten. Bevor du überhaupt ein Fine-Tuning startest, probiere Few-Shot-Prompting — viele Aufgaben, die angeblich „Fine-Tuning brauchen", sind in Wahrheit Prompt-Engineering-Aufgaben.</p>
+    <p>Hunderte Beispiele lehren Stil; Tausende lehren Verhalten. Bevor du überhaupt ein Fine-Tuning startest, probiere Few-Shot-Prompting — viele Aufgaben, die angeblich „Fine-Tuning brauchen“, sind in Wahrheit Prompt-Engineering-Aufgaben.</p>
   </section>
 )
 

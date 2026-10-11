@@ -181,7 +181,7 @@ export const srtSubtitleShiftL10n: ToolL10n = {
       },
       {
         q: 'Kann ich das Ergebnis direkt verwenden?',
-        a: 'Ja, die Ausgabe ist Standard-SRT mit neu nummerierten Indizes; VLC, MPC-HC oder IINA laden sie ohne Anpassung. Alles bleibt im Browser, nichts wird hochgeladen; bei ASS-Blöcken oder ♪-Symbolen im Original vorab „Format entfernen" aktivieren.',
+        a: 'Ja, die Ausgabe ist Standard-SRT mit neu nummerierten Indizes; VLC, MPC-HC oder IINA laden sie ohne Anpassung. Alles bleibt im Browser, nichts wird hochgeladen; bei ASS-Blöcken oder ♪-Symbolen im Original vorab „Format entfernen“ aktivieren.',
       },
     ],
   },

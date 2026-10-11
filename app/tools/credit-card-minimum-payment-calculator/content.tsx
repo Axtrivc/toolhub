@@ -401,7 +401,7 @@ const de: ReactNode = (
       <p>
         Es gibt meist auch einen Boden — einen Mindestbetrag (oft 25–35 $), der greift, wenn die
         Prozentrechnung niedriger ausfällt. Manche Aussteller verwenden stattdessen eine Formel wie
-        „Zinsen + Gebühren + 1 % Tilgung", die den Kredit etwas schneller tilgt. Die genaue Methode
+        „Zinsen + Gebühren + 1 % Tilgung“, die den Kredit etwas schneller tilgt. Die genaue Methode
         steht in deiner Kartenvereinbarung.
       </p>
     </div>

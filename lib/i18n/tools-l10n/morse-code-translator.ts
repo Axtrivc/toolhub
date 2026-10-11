@@ -63,7 +63,7 @@ export const MorseCodeTranslatorL10n: ToolL10n = {
     faqs: [
       { q: 'Welcher Morse-Standard wird verwendet?', a: 'Das internationale ITU-Morsealphabet: 26 lateinische Buchstaben, 10 Ziffern und übliche Satzzeichen. Nicht zu verwechseln mit dem amerikanischen Morse (Railroad Morse) aus dem Telegrafenzeitalter — der moderne Funk nutzt ausschließlich den internationalen Standard.' },
       { q: 'Nach welchem Timing läuft das Audio?', a: 'Striktes ITU-Timing: Punkt = 1 Zeiteinheit, Strich = 3; Pause innerhalb eines Zeichens 1, zwischen Buchstaben 3, zwischen Wörtern 7. Der Ton liegt bei 600 Hz — der im Amateurfunk üblichsten Seitentonfrequenz.' },
-      { q: 'Was bedeuten Leerzeichen und Schrägstrich im Code?', a: 'Die Standard-Schreibkonvention: Buchstaben trennt ein Leerzeichen, Wörter ein „/". Also „SOS" = „··· --- ···" und „SOS SOS" = „··· --- ··· / ··· --- ···". Beim Dekodieren gilt dieselbe Konvention.' },
+      { q: 'Was bedeuten Leerzeichen und Schrägstrich im Code?', a: 'Die Standard-Schreibkonvention: Buchstaben trennt ein Leerzeichen, Wörter ein „/“. Also „SOS“ = „··· --- ···“ und „SOS SOS“ = „··· --- ··· / ··· --- ···“. Beim Dekodieren gilt dieselbe Konvention.' },
       { q: 'Wird Chinesisch unterstützt?', a: 'Nein. Der Zeichensatz des internationalen Morse umfasst nur lateinische Buchstaben, Ziffern und Satzzeichen — für chinesische Schriftzeichen existiert keine Codierung. Das chinesische Telegrafenwesen nutzte historisch einen Vier-Ziffern-Code pro Zeichen, ein völlig anderes System.' },
     ],
     ui: {

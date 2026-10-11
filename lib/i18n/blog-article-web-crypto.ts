@@ -304,7 +304,7 @@ export const webCryptoGuideArticle: LocalizedArticle = {
       {
         heading: '1. Warum überhaupt clientseitig? Das Zero-Knowledge-Argument',
         blocks: [
-          'Jede serverseitige Verschlüsselung verlangt vom Nutzer, einem Versprechen zu trauen. Clientseitige Verschlüsselung ersetzt das Versprechen durch eine *Eigenschaft*: Klartext und Passwörter verlassen das Gerät nie, ein Server-Einbruch erntet nur Chiffretext. Für Notizen, Backups, Vertragsentwürfe und persönliche Aufzeichnungen ist das der Unterschied zwischen „wir versprechen, es nicht lesen zu können" und „es gibt nichts zu lesen".',
+          'Jede serverseitige Verschlüsselung verlangt vom Nutzer, einem Versprechen zu trauen. Clientseitige Verschlüsselung ersetzt das Versprechen durch eine *Eigenschaft*: Klartext und Passwörter verlassen das Gerät nie, ein Server-Einbruch erntet nur Chiffretext. Für Notizen, Backups, Vertragsentwürfe und persönliche Aufzeichnungen ist das der Unterschied zwischen „wir versprechen, es nicht lesen zu können“ und „es gibt nichts zu lesen“.',
           'Der Haken: Der Browser muss echte Kryptografie leisten, kein XOR mit einem Hex-Schlüssel. Dafür existiert die Web Crypto API (`crypto.subtle`) — eine native, konstantzeitige, hardwaregestützte Implementierung, die keine reine JS-Bibliothek sicherheitstechnisch erreicht.',
         ],
       },
@@ -365,7 +365,7 @@ export const webCryptoGuideArticle: LocalizedArticle = {
       {
         heading: '5. JWTs: Dekodieren ist nicht Verifizieren',
         blocks: [
-          'Ein JWT ist base64url(header).base64url(payload).signatur. Jeder kann die ersten zwei Segmente dekodieren — sie sind *signiert, nicht verschlüsselt*. Zwei Konsequenzen, über die Entwickler stolpern: Nie Secrets ins JWT-Payload legen (deine Nutzer lesen es mit jedem Decoder), und auf dem Server **die Signatur verifizieren, bevor man auch nur einem Claim traut** — mit gepinnter `alg`-Whitelist; die klassischen „alg: none"- und RS256-zu-HS256-Verwechslungsangriffe beginnen beide mit dem Überspringen dieses Schritts.',
+          'Ein JWT ist base64url(header).base64url(payload).signatur. Jeder kann die ersten zwei Segmente dekodieren — sie sind *signiert, nicht verschlüsselt*. Zwei Konsequenzen, über die Entwickler stolpern: Nie Secrets ins JWT-Payload legen (deine Nutzer lesen es mit jedem Decoder), und auf dem Server **die Signatur verifizieren, bevor man auch nur einem Claim traut** — mit gepinnter `alg`-Whitelist; die klassischen „alg: none“- und RS256-zu-HS256-Verwechslungsangriffe beginnen beide mit dem Überspringen dieses Schritts.',
           'Clientseitiges Dekodieren dient dem *Debugging*: Ablaufzeit, Audience und Scopes des erhaltenen Tokens inspizieren — verifiziert wird serverseitig, wo das Secret oder der Public Key liegt.',
           {
             card: {

@@ -141,7 +141,7 @@ export const creditCardMinimumPaymentCalculatorL10n: ToolL10n = {
       },
       {
         q: 'Wie berechnen Kreditkartenunternehmen die Mindestzahlung?',
-        a: 'Die meisten nehmen 1 %–3 % deines Rechnungssaldos plus die Zinsen und Gebühren dieses Monats, mit einem Boden von etwa 25–35 $. Manche nutzen „Zinsen + Gebühren + 1 % Tilgung". Die genaue Formel steht in deiner Kartenvereinbarung. Der CARD Act von 2009 verlangt, dass Aussteller alles über dem Minimum zuerst auf den Saldo mit dem höchsten APR anwenden.',
+        a: 'Die meisten nehmen 1 %–3 % deines Rechnungssaldos plus die Zinsen und Gebühren dieses Monats, mit einem Boden von etwa 25–35 $. Manche nutzen „Zinsen + Gebühren + 1 % Tilgung“. Die genaue Formel steht in deiner Kartenvereinbarung. Der CARD Act von 2009 verlangt, dass Aussteller alles über dem Minimum zuerst auf den Saldo mit dem höchsten APR anwenden.',
       },
       {
         q: 'Was passiert, wenn ich weniger als das Minimum zahle?',

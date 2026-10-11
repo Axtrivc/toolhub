@@ -230,14 +230,14 @@ export const canineNutritionArticle: LocalizedArticle = {
         blocks: [
           'Der **Ruheenergiebedarf (RER)** sind die Kalorien, die ein Hund in Ruhe bei neutraler Raumtemperatur verbrennt — das canine BMR-Pendant. Die Formel ist allometrisch, nicht linear: Der Stoffwechsel skaliert mit dem Körpergewicht hoch 3/4, also braucht ein 40-kg-Hund weit weniger als das Doppelte eines 20-kg-Hundes.',
           { code: CODE_RER },
-          'Diese Nichtlinearität ist der Grund, warum „pro-kg"-Tabellen auf Säcken in die Irre führen: Sie legen eine Gerade über eine Kurve. Der RER ist der korrekte Startpunkt — aber er ist eine *Ruhe*-Zahl, und kein lebender Hund ist eine Ruhe-Zahl.',
+          'Diese Nichtlinearität ist der Grund, warum „pro-kg“-Tabellen auf Säcken in die Irre führen: Sie legen eine Gerade über eine Kurve. Der RER ist der korrekte Startpunkt — aber er ist eine *Ruhe*-Zahl, und kein lebender Hund ist eine Ruhe-Zahl.',
         ],
       },
       {
         heading: '2. MER: Der Lebensstufen-Multiplikator, der alles entscheidet',
         blocks: [
           'Der **Erhaltungsenergiebedarf (MER)** multipliziert den RER mit einem Faktor für den Hund, der dein Hund wirklich ist. Die Spreizung ist enorm: Ein kastrierter Erwachsener braucht 1,6× RER; ein intakter 1,8×; ein Welpe unter 4 Monaten **3,0×**; ein Hund im tierärztlich begleiteten Abnehmplan nur 1,0×.',
-          'Zwei Hunde gleichen Gewichts können legitim das 2–3-Fache an Kalorien brauchen. „Wie viel soll ich füttern?" hat keine Antwort, bevor du nicht beantwortest: *welcher* Hund — Alter, Kastrationsstatus, Aktivität, Körperkondition?',
+          'Zwei Hunde gleichen Gewichts können legitim das 2–3-Fache an Kalorien brauchen. „Wie viel soll ich füttern?“ hat keine Antwort, bevor du nicht beantwortest: *welcher* Hund — Alter, Kastrationsstatus, Aktivität, Körperkondition?',
           {
             card: {
               title: 'Hundefutter-Rechner',
@@ -264,7 +264,7 @@ export const canineNutritionArticle: LocalizedArticle = {
       {
         heading: '5. Alter ist eine Fütterungsvariable: Der Menschenjahre-Mythos',
         blocks: [
-          'Die „mal 7"-Regel scheitert, weil Hunde früh schnell reifen und später abbremsen: Ein 1-jähriger Hund entspricht grob 15 Menschenjahren; Jahr 2 addiert ~9; jedes weitere Jahr 4–5. Fütterungsrelevant ist die *Lebensstufe*, die diese Abbildung freilegt — der Welpenfaktor (3,0×) endet um 12 Monate (18–24 bei Riesenrassen), der Senior-Faktor greift ab ~7 (bei Riesenrassen schon ab 5–6), wenn Aktivität und Magermasse sinken.',
+          'Die „mal 7“-Regel scheitert, weil Hunde früh schnell reifen und später abbremsen: Ein 1-jähriger Hund entspricht grob 15 Menschenjahren; Jahr 2 addiert ~9; jedes weitere Jahr 4–5. Fütterungsrelevant ist die *Lebensstufe*, die diese Abbildung freilegt — der Welpenfaktor (3,0×) endet um 12 Monate (18–24 bei Riesenrassen), der Senior-Faktor greift ab ~7 (bei Riesenrassen schon ab 5–6), wenn Aktivität und Magermasse sinken.',
           'Von 2 bis 12 denselben Becher zu füttern ist der Grund, warum Hunde mittleren Alters lautlos zunehmen: Der Faktor hat sich bewegt, der Napf nicht.',
           {
             card: {

@@ -426,7 +426,7 @@ export const contactPage: LocalizedPage = {
         heading: '',
         blocks: [
           { heading: 'Business & Partnerschaften' },
-          'Für Werbe-, Sponsorings- oder Kooperationsanfragen nutze dieselbe Adresse mit dem Betreff „Partnership".',
+          'Für Werbe-, Sponsorings- oder Kooperationsanfragen nutze dieselbe Adresse mit dem Betreff „Partnership“.',
         ],
       },
       {
@@ -804,7 +804,7 @@ export const privacyPage: LocalizedPage = {
       {
         heading: '',
         blocks: [
-          'Diese Datenschutzerklärung erläutert, wie ToolHub („wir") mit Informationen umgeht, wenn du unsere Website und Werkzeuge nutzt. Wir haben sie kurz, klar und ehrlich gehalten — ohne juristischen Nebel.',
+          'Diese Datenschutzerklärung erläutert, wie ToolHub („wir“) mit Informationen umgeht, wenn du unsere Website und Werkzeuge nutzt. Wir haben sie kurz, klar und ehrlich gehalten — ohne juristischen Nebel.',
         ],
       },
       {
@@ -903,7 +903,7 @@ export const privacyPage: LocalizedPage = {
       {
         heading: 'Änderungen dieser Richtlinie',
         blocks: [
-          'Wir können diese Datenschutzerklärung von Zeit zu Zeit aktualisieren. Dabei ändern wir das Datum „Zuletzt aktualisiert" oben auf dieser Seite. Wir empfehlen dir, diese Seite regelmäßig zu überprüfen.',
+          'Wir können diese Datenschutzerklärung von Zeit zu Zeit aktualisieren. Dabei ändern wir das Datum „Zuletzt aktualisiert“ oben auf dieser Seite. Wir empfehlen dir, diese Seite regelmäßig zu überprüfen.',
         ],
       },
       {
@@ -1177,7 +1177,7 @@ export const termsPage: LocalizedPage = {
       {
         heading: '',
         blocks: [
-          'Willkommen bei ToolHub. Diese Nutzungsbedingungen („Bedingungen") regeln deinen Zugang zu und die Nutzung unserer Website und Werkzeuge (der „Dienst"). Mit der Nutzung des Dienstes stimmst du diesen Bedingungen zu. Wenn du nicht einverstanden bist, nutze den Dienst bitte nicht.',
+          'Willkommen bei ToolHub. Diese Nutzungsbedingungen („Bedingungen“) regeln deinen Zugang zu und die Nutzung unserer Website und Werkzeuge (der „Dienst“). Mit der Nutzung des Dienstes stimmst du diesen Bedingungen zu. Wenn du nicht einverstanden bist, nutze den Dienst bitte nicht.',
         ],
       },
       {
@@ -1210,7 +1210,7 @@ export const termsPage: LocalizedPage = {
       {
         heading: '4. Haftungsausschluss',
         blocks: [
-          'Der Dienst wird „wie besehen" und „wie verfügbar" ohne jegliche Gewährleistung, ausdrücklich oder stillschweigend, bereitgestellt. Wir garantieren nicht, dass die Werkzeuge fehlerfrei, unterbrechungsfrei oder für jeden Zweck geeignet sind. Du verwendest die Ausgabe auf eigenes Ermessen.',
+          'Der Dienst wird „wie besehen“ und „wie verfügbar“ ohne jegliche Gewährleistung, ausdrücklich oder stillschweigend, bereitgestellt. Wir garantieren nicht, dass die Werkzeuge fehlerfrei, unterbrechungsfrei oder für jeden Zweck geeignet sind. Du verwendest die Ausgabe auf eigenes Ermessen.',
         ],
       },
       {
@@ -1235,7 +1235,7 @@ export const termsPage: LocalizedPage = {
       {
         heading: '8. Änderungen am Dienst und an den Bedingungen',
         blocks: [
-          'Wir können den Dienst jederzeit ändern oder einstellen oder diese Bedingungen aktualisieren. Wenn sich die Bedingungen ändern, aktualisieren wir das Datum „Zuletzt aktualisiert" oben. Fortgesetzte Nutzung des Dienstes nach Inkrafttreten der Änderungen gilt als Zustimmung zu den neuen Bedingungen.',
+          'Wir können den Dienst jederzeit ändern oder einstellen oder diese Bedingungen aktualisieren. Wenn sich die Bedingungen ändern, aktualisieren wir das Datum „Zuletzt aktualisiert“ oben. Fortgesetzte Nutzung des Dienstes nach Inkrafttreten der Änderungen gilt als Zustimmung zu den neuen Bedingungen.',
         ],
       },
       {

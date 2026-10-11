@@ -50,7 +50,7 @@ const es: ReactNode = (
 const de: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>Wann der Münzwurf passt</h2>
-    <p>Jede Zwei-Wege-Entscheidung, bei der beide Optionen akzeptabel sind: wer zuerst aufschlägt, welches Restaurant heute Abend, die Pattsituation „Mir egal, du entscheidest" auflösen. Die Verhaltensforschung zeigt: Innerlich favorisiert man meistens schon eine Seite — achte auf deine Reaktion, wenn die Münze landet.</p>
+    <p>Jede Zwei-Wege-Entscheidung, bei der beide Optionen akzeptabel sind: wer zuerst aufschlägt, welches Restaurant heute Abend, die Pattsituation „Mir egal, du entscheidest“ auflösen. Die Verhaltensforschung zeigt: Innerlich favorisiert man meistens schon eine Seite — achte auf deine Reaktion, wenn die Münze landet.</p>
     <h2>Bleibt Best-of-three fair?</h2>
     <p>Ja. Unabhängige faire Würfe bleiben in Folge fair; Best-of-three ändert nur, welcher Teilausschnitt entscheidet. Die laufende Statistik erfasst deine ganze Sitzung, sodass Abweichungen sichtbar werden — über hunderte Würfe hinweg ist Konvergenz gegen ~50 % zu erwarten.</p>
     <h2>Nicht für die Sicherheit</h2>

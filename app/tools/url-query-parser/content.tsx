@@ -59,7 +59,7 @@ const es: ReactNode = (
 const de: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>Was ist dieses Werkzeug?</h2>
-    <p><strong>URL-Abfragezeichenketten</strong> (Query Strings) sind der Teil nach dem „?" — Parameter wie <code>?q=hello&page=2</code>. Dieses Werkzeug parst sie in ein sauberes JSON-Objekt zur einfachen Inspektion oder Verwendung.</p>
+    <p><strong>URL-Abfragezeichenketten</strong> (Query Strings) sind der Teil nach dem „?“ — Parameter wie <code>?q=hello&page=2</code>. Dieses Werkzeug parst sie in ein sauberes JSON-Objekt zur einfachen Inspektion oder Verwendung.</p>
     <div>
       <h2>Wann du das brauchst</h2>
       <ul>

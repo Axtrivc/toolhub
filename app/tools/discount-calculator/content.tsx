@@ -160,7 +160,7 @@ const de: ReactNode = (
 
     <h2>Wie gestaffelte Rabatte funktionieren</h2>
     <p>
-      Wenn Geschäfte „nochmals 20 % auf bereits reduzierte Artikel" anbieten, wird der zweite Rabatt
+      Wenn Geschäfte „nochmals 20 % auf bereits reduzierte Artikel“ anbieten, wird der zweite Rabatt
       auf den bereits rabattierten Preis angewendet, nicht auf den Originalpreis. Ein $100-Artikel,
       der zuerst um 30 % reduziert wurde, kostet $70. Ein zusätzlicher 20 % Rabatt wird auf $70
       angewendet und ergibt $56 — eine Gesamtersparnis von 44 %, nicht 50 %. Nutze diesen Rechner
@@ -177,8 +177,8 @@ const de: ReactNode = (
     <h2>Ist das Angebot wirklich gut?</h2>
     <p>Nicht alle Rabatte sind gleich. Achte auf:</p>
     <ul>
-      <li><strong>Überhöhte Originalpreise:</strong> Manche Händler erhöhen den „statt"-Preis, damit der Rabatt größer wirkt</li>
-      <li><strong>Mindestbestellwerte:</strong> „Spare 30 % ab $100 Einkauf" kann dich dazu verleiten, mehr auszugeben</li>
+      <li><strong>Überhöhte Originalpreise:</strong> Manche Händler erhöhen den „statt“-Preis, damit der Rabatt größer wirkt</li>
+      <li><strong>Mindestbestellwerte:</strong> „Spare 30 % ab $100 Einkauf“ kann dich dazu verleiten, mehr auszugeben</li>
       <li><strong>Stückpreise vergleichen:</strong> Eine rabattierte Großpackung kann pro Unze immer noch teurer sein als eine kleinere Packung zum Vollpreis</li>
     </ul>
   </section>

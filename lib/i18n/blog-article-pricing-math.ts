@@ -348,8 +348,8 @@ export const pricingMathArticle: LocalizedArticle = {
       {
         heading: '2. Vom Ziel-Margin aus bepreisen (nicht aus Gewohnheit)',
         blocks: [
-          'Cost-plus-Gewohnheiten erzeugen Preise wie „verdoppeln" — Keystone-Pricing (100 % Aufschlag) ist in Wahrheit eine 50-%-Marge, was für deine Kategorie wild falsch sein kann. Lebensmittel laufen auf 1–3 % netto, Bekleidung auf 50–60 % brutto, Software auf 80 %+ brutto. Der Preis folgt der Marge, die deine Kategorie braucht, um Retouren, Gebühren und Marketing zu überleben.',
-          'Die Arbeitsformel: **Preis = Kosten ÷ (1 − Zielmarge)**. Brauchst du 40 % Marge auf einen $25-Artikel? Preis = 25 ÷ 0,6 = **$41,67** — nicht die $35, die die „40-%-Aufschlag"-Gewohnheit ergäbe. Die $6,67 Differenz mal Volumen ist das Geschäft.',
+          'Cost-plus-Gewohnheiten erzeugen Preise wie „verdoppeln“ — Keystone-Pricing (100 % Aufschlag) ist in Wahrheit eine 50-%-Marge, was für deine Kategorie wild falsch sein kann. Lebensmittel laufen auf 1–3 % netto, Bekleidung auf 50–60 % brutto, Software auf 80 %+ brutto. Der Preis folgt der Marge, die deine Kategorie braucht, um Retouren, Gebühren und Marketing zu überleben.',
+          'Die Arbeitsformel: **Preis = Kosten ÷ (1 − Zielmarge)**. Brauchst du 40 % Marge auf einen $25-Artikel? Preis = 25 ÷ 0,6 = **$41,67** — nicht die $35, die die „40-%-Aufschlag“-Gewohnheit ergäbe. Die $6,67 Differenz mal Volumen ist das Geschäft.',
           {
             card: {
               title: 'Aufschlags-Rechner',
@@ -383,7 +383,7 @@ export const pricingMathArticle: LocalizedArticle = {
       {
         heading: '4. Freelance-Preise: Dieselbe Mathematik als Rechnung verkleidet',
         blocks: [
-          'Freelancer, die „Stunden × Satz" berechnen, betreiben Cost-plus mit der eigenen Zeit als Kostenbasis. Die Margen-Brille gilt trotzdem: Dein Satz muss nicht fakturierbare Stunden, Steuern, Software, Versicherung und unbezahlte Verwaltung decken — typischerweise **ist ein Drittel bis die Hälfte der Arbeitszeit nicht fakturierbar**. Ein $60/Stunde-Angestellten-Äquivalent braucht als Freelancer $90–120/Stunde, um dasselbe Leben zu finanzieren.',
+          'Freelancer, die „Stunden × Satz“ berechnen, betreiben Cost-plus mit der eigenen Zeit als Kostenbasis. Die Margen-Brille gilt trotzdem: Dein Satz muss nicht fakturierbare Stunden, Steuern, Software, Versicherung und unbezahlte Verwaltung decken — typischerweise **ist ein Drittel bis die Hälfte der Arbeitszeit nicht fakturierbar**. Ein $60/Stunde-Angestellten-Äquivalent braucht als Freelancer $90–120/Stunde, um dasselbe Leben zu finanzieren.',
           'Dann schütze die Rechnung selbst: Verzugszinsen vorab genannt, net-15 statt net-60, und eine Anzahlung bei jedem Auftrag über einer Woche. Die Rechnung ist ein Preis-Instrument, kein Papierkram.',
           {
             card: {
@@ -420,7 +420,7 @@ export const pricingMathArticle: LocalizedArticle = {
         blocks: [
           { list: [
             'Summiere die **wahren Einstandskosten**: Ware, Verpackung, Inbound-Versand, Zahlungsanteil.',
-            'Setze die **Zielmarge** aus Kategorie und Fixkostenlast — nicht aus „was fair wirkt".',
+            'Setze die **Zielmarge** aus Kategorie und Fixkostenlast — nicht aus „was fair wirkt“.',
             'Rechne Preis = Kosten ÷ (1 − Marge) und prüfe gegen Vergleichsangebote.',
             'Ziehe den **vollen Gebührenstapel** bei diesem Preis ab; verfehlt der Rest das Ziel, neu bepreisen.',
             'Vor jedem Rabatt: das gewinnhaltende Volumen berechnen; Spenden ablehnen.',

@@ -52,7 +52,7 @@ const de: ReactNode = (
     <h2>Was Unicode wirklich ist</h2>
     <p>Ein einziger Katalog, der jedem Zeichen jedes Schriftsystems eine Nummer (Codepunkt) zuweist — über 150.000 Einträge. Die Schriftart entscheidet über das Aussehen, Unicode über die Identität. U+2014 ist überall ein Geviertstrich, egal wie unterschiedlich Fonts ihn zeichnen.</p>
     <h2>Gefahren beim Kopieren und Einfügen</h2>
-    <p>Homoglyphen (kyrillisches а gegenüber lateinischem a) sehen identisch aus, brechen aber unbemerkt Passwörter, Domains und Codesuchen. Wenn Text „übereinstimmt", Vergleiche aber fehlschlagen, füge beide Versionen hier ein und vergleiche die Codepunkte.</p>
+    <p>Homoglyphen (kyrillisches а gegenüber lateinischem a) sehen identisch aus, brechen aber unbemerkt Passwörter, Domains und Codesuchen. Wenn Text „übereinstimmt“, Vergleiche aber fehlschlagen, füge beide Versionen hier ein und vergleiche die Codepunkte.</p>
     <h2>Dieses kuratierte Set gegenüber vollständigen Katalogen</h2>
     <p>150.000 Zeichen wären nur Rauschen. Hier findest du die Pfeile, Mathe-Operatoren, typografischen Anführungszeichen, Währungszeichen und Box-Drawing-Zeichen, nach denen tatsächlich gesucht wird — jedes mit seinem echten Namen und Codepunkt.</p>
   </section>

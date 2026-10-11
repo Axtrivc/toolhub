@@ -53,7 +53,7 @@ export const textToListL10n: ToolL10n = {
       'Daten für Folien und Dokumente formatieren',
     ],
     faqs: [
-      { q: 'Kann ich andere Aufzählungszeichen verwenden?', a: 'Ja. Standardmäßig wird „•" (Aufzählungspunkt) verwendet; hänge " ||| -" oder " ||| *" an den Text an, um Bindestriche oder Sterne zu nutzen, oder " ||| 1." für Nummerierung.' },
+      { q: 'Kann ich andere Aufzählungszeichen verwenden?', a: 'Ja. Standardmäßig wird „•“ (Aufzählungspunkt) verwendet; hänge " ||| -" oder " ||| *" an den Text an, um Bindestriche oder Sterne zu nutzen, oder " ||| 1." für Nummerierung.' },
     ],
   },
 }

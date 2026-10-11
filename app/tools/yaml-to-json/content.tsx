@@ -189,7 +189,7 @@ const de: ReactNode = (
       <h2>Warum YAML-Parsing tückisch ist</h2>
       <p>
         Im Gegensatz zu JSON ist YAML <strong>einrückungsempfindlich</strong> — zwei statt vier Leerzeichen ändern die Struktur vollständig. Tabulatoren sind für die Einrückung verboten (verwende nur Leerzeichen). Einfache Skalare werden außerdem implizit typisiert: <code>yes</code>, <code>no</code>, <code>on</code> und{' '}
-        <code>off</code> werden in älteren YAML-1.1-Parsern zu Booleans, was eine berühmte Fehlerquelle ist (das „Norway-Problem", bei dem <code>NO</code> zu <code>false</code> wurde). Setze solche Werte in Anführungszeichen, wenn du sie als Strings brauchst.
+        <code>off</code> werden in älteren YAML-1.1-Parsern zu Booleans, was eine berühmte Fehlerquelle ist (das „Norway-Problem“, bei dem <code>NO</code> zu <code>false</code> wurde). Setze solche Werte in Anführungszeichen, wenn du sie als Strings brauchst.
       </p>
     </div>
     <div>

@@ -79,10 +79,10 @@ const de: ReactNode = (
     <div>
       <h2>Häufige Binärmuster</h2>
       <ul>
-        <li>01001000 01101001 = „Hi"</li>
-        <li>01000001 = „A" (Großbuchstabe)</li>
-        <li>01100001 = „a" (Kleinbuchstabe)</li>
-        <li>00110000 = „0" (Ziffer null)</li>
+        <li>01001000 01101001 = „Hi“</li>
+        <li>01000001 = „A“ (Großbuchstabe)</li>
+        <li>01100001 = „a“ (Kleinbuchstabe)</li>
+        <li>00110000 = „0“ (Ziffer null)</li>
       </ul>
     </div>
   </section>

@@ -62,7 +62,7 @@ export const unitPriceCalculatorL10n: ToolL10n = {
     },
     useCases: ['den echten Wert pro Gramm/ml/Stück vergleichen', 'sehen, ob die Großpackung wirklich günstiger ist', 'Preise bei unterschiedlichen Einheiten vergleichen', 'die günstigste Option pro Einheit finden'],
     faqs: [
-      { q: 'Funktioniert das für Nicht-Lebensmittel?', a: 'Ja. Verwende „Stück" als Einheit für Toilettenpapier, Windeln, Batterien oder alles, was pro Stück verkauft wird. Für Flüssigkeiten ml, für Feststoffe g. Die Rechnung ist dieselbe.' },
+      { q: 'Funktioniert das für Nicht-Lebensmittel?', a: 'Ja. Verwende „Stück“ als Einheit für Toilettenpapier, Windeln, Batterien oder alles, was pro Stück verkauft wird. Für Flüssigkeiten ml, für Feststoffe g. Die Rechnung ist dieselbe.' },
     ],
     ui: {
       'chartTitle': 'Stückpreis-Duell',

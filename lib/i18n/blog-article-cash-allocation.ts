@@ -382,7 +382,7 @@ export const cashAllocationGuideArticle: LocalizedArticle = {
       {
         heading: '4. Die CD-Schicht: Verkaufe Liquidität, die du nicht brauchst',
         blocks: [
-          'Ein CD ist ein Vertrag: Die Bank zahlt einen Festzins dafür, dass du auf Zugriff verzichtest. Damit passt er zu Geld mit *bekanntem Datum* — Anzahlung in 18 Monaten, Studiengebühr in 3 Jahren. Du „sperrst" kein Geld weg; du verkaufst eine Option, die du nie gezogen hättest.',
+          'Ein CD ist ein Vertrag: Die Bank zahlt einen Festzins dafür, dass du auf Zugriff verzichtest. Damit passt er zu Geld mit *bekanntem Datum* — Anzahlung in 18 Monaten, Studiengebühr in 3 Jahren. Du „sperrst“ kein Geld weg; du verkaufst eine Option, die du nie gezogen hättest.',
           'Die Profi-Struktur ist die **CD-Leiter**: $40 000 in vier $10 000-CDs mit 1, 2, 3 und 4 Jahren aufteilen. Jedes Jahr läuft eine Sprosse aus — ausgeben oder als neue 4-Jahres-Sprosse oben anlegen. Nach dem ersten Zyklus hältst du nur Langfrist-Zinsen, und doch wird jährlich ein Viertel frei. Die Leiter verwandelt die Liquiditätsstrafe in einen Kalender.',
           'Kenne den Ausstiegspreis vor dem Einstieg: Vorfälligkeitsstrafen liegen bei 3–12 Monatszinsen. Ein 2-Jahres-CD, der in Monat 6 vorzeitig aufgelöst wird, kann mit einer Strafe von 6 Monatszinsen den gesamten Ertrag verlieren. Geld mit geratenem Datum gehört nie in die Leiter.',
           {
@@ -403,7 +403,7 @@ export const cashAllocationGuideArticle: LocalizedArticle = {
             card: {
               title: 'Inflationsrechner',
               href: '/tools/inflation-calculator/',
-              desc: 'Übersetze jeden früheren Betrag in heutige Kaufkraft — und sieh, was dein „sicheres" Cash wirklich brachte.',
+              desc: 'Übersetze jeden früheren Betrag in heutige Kaufkraft — und sieh, was dein „sicheres“ Cash wirklich brachte.',
             },
           },
         ],

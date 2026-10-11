@@ -220,7 +220,7 @@ const de: ReactNode = (
     <h2>Schnellreferenztabelle</h2>
     <p>Alltagsumrechnungen, die es sich zu merken lohnt:</p>
     <ul>
-      <li>5 km ≈ 3,1 Meilen (übliche Distanz eines „5K"-Laufs)</li>
+      <li>5 km ≈ 3,1 Meilen (übliche Distanz eines „5K“-Laufs)</li>
       <li>1,6 km ≈ 1 Meile (verwende 1,6 beim Kopfrechnen)</li>
       <li>30 cm ≈ 12 Zoll (1 Fuß)</li>
       <li>1,8 Meter ≈ 6 Fuß (typische Türhöhe)</li>

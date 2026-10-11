@@ -89,7 +89,7 @@ export const finalGradeCalculatorL10n: ToolL10n = {
       'Abschlussnoten-Rechner (im Stil von rogerhub)',
     ],
     faqs: [
-      { q: 'Meine Abschlussprüfung ist umfassend – funktioniert die Formel dann noch?', a: 'Ja – die Formel gilt für jede Abschlussprüfung. Das „Gewicht" ist lediglich der Anteil der Abschlussprüfung an der Gesamtnote, unabhängig davon, was sie abdeckt.' },
+      { q: 'Meine Abschlussprüfung ist umfassend – funktioniert die Formel dann noch?', a: 'Ja – die Formel gilt für jede Abschlussprüfung. Das „Gewicht“ ist lediglich der Anteil der Abschlussprüfung an der Gesamtnote, unabhängig davon, was sie abdeckt.' },
     ],
   },
 }

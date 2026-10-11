@@ -92,7 +92,7 @@ export const urlExtractorL10n: ToolL10n = {
       'ausgehende Links in einem Text prüfen',
     ],
     faqs: [
-      { q: 'Warum wird „example.com" ohne http nicht erkannt?', a: 'Dieses Werkzeug erfasst nur URLs, die mit http:// oder https:// beginnen. Domains ohne Protokoll könnten mit Dateinamen oder anderem Text verwechselt werden. Wenn du reine Domains finden möchtest, ist ein aggressiveres Muster nötig.' },
+      { q: 'Warum wird „example.com“ ohne http nicht erkannt?', a: 'Dieses Werkzeug erfasst nur URLs, die mit http:// oder https:// beginnen. Domains ohne Protokoll könnten mit Dateinamen oder anderem Text verwechselt werden. Wenn du reine Domains finden möchtest, ist ein aggressiveres Muster nötig.' },
       { q: 'Werden URLs mit Umlauten erfasst?', a: 'Ist die URL prozentkodiert (z. B. %C3%A4), wird sie vollständig erkannt. Unkodierte Umlaute verletzen zwar die URL-Syntax, werden aber trotzdem vollständig erfasst — nur Leerzeichen und ähnliche Trennzeichen beenden den Treffer. Kodiere den Link vor dem Teilen.' },
       { q: 'Wie viel Text schafft das Tool auf einmal?', a: 'Bis etwa 100.000 Zeichen läuft die Mustersuche flüssig; mehrere MB lieber abschnittsweise einfügen. Die Treffer erscheinen dedupliziert in Reihenfolge des Auftretens.' },
       { q: 'Prüft es, ob die Links erreichbar sind?', a: 'Nein — es extrahiert nur und greift nicht aufs Netz. Für die Validierung die Liste in einen Link-Checker stecken, der Anfragen stellt; hier bekommst du die saubere, duplikatfreie Liste.' },

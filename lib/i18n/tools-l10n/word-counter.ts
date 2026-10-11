@@ -97,7 +97,7 @@ export const wordCounterL10n: ToolL10n = {
       { q: 'Zählen Zahlen als Wörter?', a: 'Ja. Jede Folge von Zeichen ohne Leerzeichen — einschließlich eigenständiger Zahlen wie `2026` — zählt als ein Wort.' },
       { q: 'Wie genau ist die Schätzung der Lesezeit?', a: 'Es ist ein sinnvoller Durchschnitt, keine präzise Messung. Die echte Lesegeschwindigkeit variiert von 100 Wörtern pro Minute (dichtes technisches Material) bis über 400 (leichtes Überfliegen). Behandle die Schätzung als Planungshilfe, nicht als exakte Zahl.' },
       { q: 'Wird mein Text hochgeladen?', a: 'Nein. Die Analyse läuft komplett lokal im Browser — Verträge oder unveröffentlichte Manuskripte kannst du gefahrlos einfügen, auch unter Vertraulichkeitsvereinbarungen.' },
-      { q: 'Welche Limits gelten in sozialen Medien?', a: 'X/Twitter 280 Zeichen, Instagram 2.200 für Bildunterschriften, LinkedIn rund 3.000 pro Beitrag — dafür zählen die „Zeichen", nicht die „Wörter". SEO-Texte misst man dagegen in Wörtern (üblich 1.000-2.000 pro Artikel).' },
+      { q: 'Welche Limits gelten in sozialen Medien?', a: 'X/Twitter 280 Zeichen, Instagram 2.200 für Bildunterschriften, LinkedIn rund 3.000 pro Beitrag — dafür zählen die „Zeichen“, nicht die „Wörter“. SEO-Texte misst man dagegen in Wörtern (üblich 1.000-2.000 pro Artikel).' },
       { q: 'Was passiert bei sehr langen Texten?', a: 'Über dem Limit wird nur der Anfang gezählt, damit die Seite reaktionsschnell bleibt. Bei einem ganzen Manuskript: kapitelweise einfügen und die Ergebnisse addieren.' },
     ],
   },

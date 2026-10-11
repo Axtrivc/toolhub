@@ -113,7 +113,7 @@ export const fractionCalculatorL10n: ToolL10n = {
       'Taktarten und Intervalle in der Musiktheorie',
     ],
     faqs: [
-      { q: 'Kann es gemischte Zahlen wie 2 1/2 verarbeiten?', a: 'Gib 5/2 (die unechte Form) ein. Das Ergebnis wird als „2 1/2" angezeigt, wenn es größer als 1 ist.' },
+      { q: 'Kann es gemischte Zahlen wie 2 1/2 verarbeiten?', a: 'Gib 5/2 (die unechte Form) ein. Das Ergebnis wird als „2 1/2“ angezeigt, wenn es größer als 1 ist.' },
       { q: 'Wie wird das Ergebnis gekürzt?', a: 'Nach jeder Operation werden Zähler und Nenner durch den größten gemeinsamen Teiler geteilt: 3/12 → 1/4; zusätzlich erscheint der Dezimalwert zum Abgleich. Gerechnet wird durchweg mit exakter Ganzzahlarithmetik — keine Rundungsfehler wie bei 0,1 + 0,2.' },
       { q: 'Darf der Nenner negativ sein?', a: 'Ja, das Vorzeichen wandert in den Zähler: 1/-2 wird als -1/2 behandelt und genauso gekürzt. Ein Nenner von 0 liefert direkt eine Fehlermeldung — Division durch null ist undefiniert.' },
       { q: 'Wie rechne ich in mehreren Schritten?', a: 'Das Tool rechnet einen Schritt pro Eingabe: erst 1/2 + 1/3, dann geht das Ergebnis 5/6 in den nächsten Schritt ein. Bei langen Ketten das Zwischenergebnis als Bruch weiterverwenden — eine Dezimalumwandlung zwischendrin schleppt Rundungsfehler ein.' },

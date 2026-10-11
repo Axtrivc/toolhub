@@ -182,7 +182,7 @@ const de: ReactNode = (
       <p>
         Füge die UA aus einem Server-Log ein, um zu erkennen, was ein Besucher oder Bot wirklich war — der Bot-Detektor
         deckt Googlebot, Bingbot, DuckDuckBot, GPTBot und ein Dutzend weitere ab. Es ist auch praktisch beim Erstellen
-        von Test-Fixtures oder beim Debuggen von „bei mir funktioniert es"-Problemen. Für Produktions-Feature-Support
+        von Test-Fixtures oder beim Debuggen von „bei mir funktioniert es“-Problemen. Für Produktions-Feature-Support
         solltest du jedoch <strong>Feature Detection</strong> (<code>&apos;clipboard&apos; in navigator</code>) dem
         UA-Sniffing vorziehen: Zeichenketten lassen sich trivial fälschen, Browser frieren Tokens regelmäßig ein oder
         mischen sie um, und Client Hints ersetzen in Chromium zunehmend den UA-Header.

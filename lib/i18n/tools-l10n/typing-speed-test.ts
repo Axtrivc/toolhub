@@ -79,7 +79,7 @@ export const TypingSpeedTestL10n: ToolL10n = {
       'Täglicher Benchmark für Speed-Tipper, die die 100-WPM-Marke knacken wollen',
     ],
     faqs: [
-      { q: 'Wie wird WPM berechnet?', a: 'Industriestandard: Je 5 Zeichen (inkl. Leerzeichen) zählen als ein „Wort", geteilt durch die Minuten. Brutto-WPM misst nur Tempo; Netto-WPM zieht Fehler ab und bildet die reale Leistung ab — schnell mit vielen Fehlern ist wertlos.' },
+      { q: 'Wie wird WPM berechnet?', a: 'Industriestandard: Je 5 Zeichen (inkl. Leerzeichen) zählen als ein „Wort“, geteilt durch die Minuten. Brutto-WPM misst nur Tempo; Netto-WPM zieht Fehler ab und bildet die reale Leistung ab — schnell mit vielen Fehlern ist wertlos.' },
       { q: 'Wann startet die Zeitmessung?', a: 'Mit dem ersten Tastendruck; das Ergebnis erscheint, sobald du den Satz vollständig getippt hast. Kein Countdown — gemessen wird dein natürliches Dauertempo, kein Sprint.' },
       { q: 'Was gilt als schnell?', a: 'Durchschnitt: 38-42 WPM; Vielschreiber: 50-60; Profis: über 80; Wettkämpfer: über 150. Wichtiger als der Rohwert ist der Netto-Wert: Erst ab 95 % Genauigkeit zählt Tempo als echte Geschwindigkeit.' },
       { q: 'Wird meine Eingabe gespeichert?', a: 'Nein. Der Test läuft komplett lokal im Browser, kein Anschlag verlässt das Gerät — du kannst bedenkenlos echte Arbeitsdokumente verwenden.' },

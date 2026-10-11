@@ -101,7 +101,7 @@ const de: ReactNode = (
     <p>Dieses Werkzeug rechnet zwischen Energieeinheiten um: <strong>Joule</strong>, <strong>Kalorien</strong>, <strong>Kilowattstunden</strong>, <strong>BTU</strong> und Elektronenvolt. Energie begegnet uns in Ernährung, Strom, Physik und Heizung.</p>
     <div>
       <h2>Die Kalorien-Verwirrung</h2>
-      <p>Lebensmitteletiketten verwenden <strong>Kalorien</strong> mit großem C, was eigentlich <strong>Kilokalorien</strong> (kcal) bedeutet. Eine Nahrungskalorie = 1.000 kleine Kalorien = 4.184 Joule. Ein „200-Kalorien"-Snack enthält also 200.000 kleine Kalorien — aber alle meinen kcal, wenn es um Essen geht.</p>
+      <p>Lebensmitteletiketten verwenden <strong>Kalorien</strong> mit großem C, was eigentlich <strong>Kilokalorien</strong> (kcal) bedeutet. Eine Nahrungskalorie = 1.000 kleine Kalorien = 4.184 Joule. Ein „200-Kalorien“-Snack enthält also 200.000 kleine Kalorien — aber alle meinen kcal, wenn es um Essen geht.</p>
     </div>
     <div>
       <h2>Wichtige Umrechnungen</h2>

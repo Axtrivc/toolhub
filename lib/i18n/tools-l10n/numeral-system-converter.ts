@@ -65,7 +65,7 @@ export const numeralSystemConverterL10n: ToolL10n = {
       'zwischen Binär und Hex umrechnen (z. B. für Bitmasken)',
     ],
     faqs: [
-      { q: 'Warum verwenden Programmierer Hexadezimal?', a: 'Weil eine Hexadezimalziffer genau 4 Binärziffern (ein „Nibble") darstellt. Damit werden lange Binärzahlen deutlich kürzer und leichter lesbar. FF ist kompakter als 11111111.' },
+      { q: 'Warum verwenden Programmierer Hexadezimal?', a: 'Weil eine Hexadezimalziffer genau 4 Binärziffern (ein „Nibble“) darstellt. Damit werden lange Binärzahlen deutlich kürzer und leichter lesbar. FF ist kompakter als 11111111.' },
     ],
   },
 }

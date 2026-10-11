@@ -103,7 +103,7 @@ const de: ReactNode = (
     </div>
     <div>
       <h2>Hashes sind Einwegfunktionen</h2>
-      <p>Du kannst „hello" in einen SHA-256 hashen, aber du kannst den Hash nicht zurück in „hello" verwandeln (ohne Brute Force). Diese Einwegeigenschaft macht Hashes nützlich für Passwörter — selbst wenn eine Datenbank geleakt wird, erhalten Angreifer nur Hashes.</p>
+      <p>Du kannst „hello“ in einen SHA-256 hashen, aber du kannst den Hash nicht zurück in „hello“ verwandeln (ohne Brute Force). Diese Einwegeigenschaft macht Hashes nützlich für Passwörter — selbst wenn eine Datenbank geleakt wird, erhalten Angreifer nur Hashes.</p>
     </div>
   </section>
 )

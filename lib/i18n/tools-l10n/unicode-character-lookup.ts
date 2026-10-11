@@ -35,13 +35,13 @@ export const UnicodeCharacterLookupL10n: ToolL10n = {
     useCases: ['Symbole finden: Pfeile, Sterne, Anführungszeichen', 'Codepunkt eines eingefügten Zeichens bestimmen', 'CSS-Escapes oder HTML-Entities schreiben', 'verwechselbare Zeichen auseinanderhalten'],
     faqs: [
       { q: 'Wie viele Zeichen sind enthalten?', a: 'Ein paar hundert kuratierte, die tatsächlich gesucht werden: Pfeile, Mathe-Symbole, griechische Buchstaben, typografische Striche/Anführungszeichen/Auslassungspunkte, Währungszeichen, Häkchen und Sterne, Box-Drawing und Mac-Tasten wie ⌘. Das volle Unicode hat 150.000+ — das übernehmen Emoji-Picker.' },
-      { q: 'Wie finde ich ein Zeichen?', a: 'Nach Namen suchen — „arrow", „star", „quote" — oder das Zeichen selbst einfügen, um es zu identifizieren. Jedes Ergebnis zeigt den Codepunkt (U+2192 für →) plus Kopier-Button für das Zeichen.' },
+      { q: 'Wie finde ich ein Zeichen?', a: 'Nach Namen suchen — „arrow“, „star“, „quote“ — oder das Zeichen selbst einfügen, um es zu identifizieren. Jedes Ergebnis zeigt den Codepunkt (U+2192 für →) plus Kopier-Button für das Zeichen.' },
       { q: 'Warum der Codepunkt?', a: 'Codepunkte sind die universelle Referenz: CSS-\\2192-Escapes, HTML-Entities und Rendering-Bugreports. Außerdem unterscheiden sie verwechselbare Zeichen, etwa Gradzeichen und hochgestellte Null.' },
     ],
     ui: {
-      'noMatch': 'Keine Treffer — versuche „arrow", „star", „quote"…',
+      'noMatch': 'Keine Treffer — versuche „arrow“, „star“, „quote“…',
       'note': '🔤 Kuratierte Auswahl häufig gesuchter Zeichen. Füge eines als Suchbegriff ein, um seinen Codepunkt zu sehen. Volles Unicode: 150.000+.',
-      'searchPlaceholder': 'Nach Name suchen („arrow", „star") oder Zeichen einfügen…',
+      'searchPlaceholder': 'Nach Name suchen („arrow“, „star“) oder Zeichen einfügen…',
     },
   },
 }

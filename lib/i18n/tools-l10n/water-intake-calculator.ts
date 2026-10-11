@@ -114,7 +114,7 @@ export const waterIntakeCalculatorL10n: ToolL10n = {
       explain: 'Eine gängige Trinkregel: etwa die Hälfte deines Körpergewichts in Pfund, in Unzen pro Tag — rund 35 ml pro kg. Der Rechner hebt diesen Basiswert für Sport, heißes Klima und Schwangerschaft an.',
     },
     faqs: [
-      { q: 'Zählen Kaffee und Tee?', a: 'Ja. Obwohl sie leicht harntreibend wirken, liefern koffeinhaltige Getränke netto positiven Wasseranteil. Die alte Behauptung, Kaffee „zähle nicht", ist widerlegt.' },
+      { q: 'Zählen Kaffee und Tee?', a: 'Ja. Obwohl sie leicht harntreibend wirken, liefern koffeinhaltige Getränke netto positiven Wasseranteil. Die alte Behauptung, Kaffee „zähle nicht“, ist widerlegt.' },
       { q: 'Wie viel Wasser sollte ich pro Tag trinken?', a: 'Ein gängiger Richtwert sind 30–35 ml pro kg Körpergewicht — etwa die Hälfte deines Gewichts in Pfund, in Unzen. Ein 70-kg-Erwachsener kommt auf etwa 2,45 L pro Tag, bevor Sport, Hitze oder Schwangerschaft angerechnet werden, die dieser Rechner zusätzlich aufschlägt.' },
       { q: 'Kann man zu viel Wasser trinken?', a: 'Ja. Überwässerung (Hyponatriämie) verdünnt das Natrium im Blut und kann gefährlich sein, meist bei Ausdauerwettkämpfen. Gesunde Nieren scheiden etwa 0,8–1,0 L pro Stunde aus, also verteile die Aufnahme über den Tag statt viel auf einmal zu trinken.' },
     ],
