@@ -280,7 +280,7 @@ ${itemRows}
                     aria-label={`${L('itemPrefix', 'Item ')}${idx + 1} ${L('quantityWord', 'quantity')}`}
                     min="0"
                     step="any"
-                    className={`${inputCls} w-20 p-2.5 text-sm`}
+                    className={`${inputCls} w-16 p-2.5 text-sm sm:w-20`}
                     style={inputStyle}
                   />
                   <input
@@ -291,7 +291,7 @@ ${itemRows}
                     aria-label={`${L('itemPrefix', 'Item ')}${idx + 1} ${L('unitRateWord', 'unit rate')}`}
                     min="0"
                     step="any"
-                    className={`${inputCls} w-28 p-2.5 text-sm`}
+                    className={`${inputCls} w-20 p-2.5 text-sm sm:w-28`}
                     style={inputStyle}
                   />
                   <button
@@ -373,26 +373,29 @@ ${itemRows}
             </div>
           </div>
 
-          <table className="mt-6 w-full text-sm">
-            <thead>
-              <tr className="bg-slate-100 text-[10px] uppercase tracking-wider text-slate-500">
-                <th scope="col" className="rounded-l-md px-3 py-2 text-left font-medium">{L('description', 'Description')}</th>
-                <th scope="col" className="px-3 py-2 text-right font-medium">{L('qty', 'Qty')}</th>
-                <th scope="col" className="px-3 py-2 text-right font-medium">{L('rate', 'Rate')}</th>
-                <th scope="col" className="rounded-r-md px-3 py-2 text-right font-medium">{L('amount', 'Amount')}</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-slate-100">
-              {rows.map((r) => (
-                <tr key={r.id}>
-                  <td className="px-3 py-2.5">{r.description || <span className="text-slate-300">—</span>}</td>
-                  <td className="px-3 py-2.5 text-right font-mono text-sm">{r.valid ? r.qtyN : '—'}</td>
-                  <td className="px-3 py-2.5 text-right font-mono text-sm">{r.valid ? fmt(r.rateN) : '—'}</td>
-                  <td className="px-3 py-2.5 text-right font-mono text-sm">{r.valid ? fmt(r.amount) : '—'}</td>
+          {/* overflow-x-auto:de/es 表头(BESCHREIBUNG/DESCRIPCIÓN)为不可断行单词,窄屏防溢出(适配时零视觉差异) */}
+          <div className="mt-6 overflow-x-auto">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="bg-slate-100 text-[10px] uppercase tracking-wider text-slate-500">
+                  <th scope="col" className="rounded-l-md px-3 py-2 text-left font-medium">{L('description', 'Description')}</th>
+                  <th scope="col" className="px-3 py-2 text-right font-medium">{L('qty', 'Qty')}</th>
+                  <th scope="col" className="px-3 py-2 text-right font-medium">{L('rate', 'Rate')}</th>
+                  <th scope="col" className="rounded-r-md px-3 py-2 text-right font-medium">{L('amount', 'Amount')}</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody className="divide-y divide-slate-100">
+                {rows.map((r) => (
+                  <tr key={r.id}>
+                    <td className="px-3 py-2.5">{r.description || <span className="text-slate-300">—</span>}</td>
+                    <td className="px-3 py-2.5 text-right font-mono text-sm">{r.valid ? r.qtyN : '—'}</td>
+                    <td className="px-3 py-2.5 text-right font-mono text-sm">{r.valid ? fmt(r.rateN) : '—'}</td>
+                    <td className="px-3 py-2.5 text-right font-mono text-sm">{r.valid ? fmt(r.amount) : '—'}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
 
           <div className="mt-4 flex justify-end">
             <div className="w-56 text-sm">

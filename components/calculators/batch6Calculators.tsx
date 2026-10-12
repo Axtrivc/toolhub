@@ -82,7 +82,7 @@ function UnitToggle({ unit, onSwitch, L }: {
   L: (key: string, fb: string) => string
 }) {
   return (
-    <div className="flex gap-2">
+    <div className="flex flex-wrap gap-2">
       {(['metric', 'imperial'] as const).map((u) => (
         <button
           key={u}
@@ -666,7 +666,7 @@ export function BodyFatCalculatorClient() {
       {/* 方法切换:US Navy 围度法 / BMI(Deurenberg) */}
       <div>
         <span className="mb-1.5 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>{L('method', 'Method')}</span>
-        <div className="flex gap-2">
+        <div className="flex flex-wrap gap-2">
           {(['navy', 'bmi'] as const).map((m) => (
             <button
               key={m}

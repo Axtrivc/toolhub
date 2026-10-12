@@ -164,7 +164,9 @@ export function AsciiTableClient() {
     <div className="space-y-4">
       <input
         type="search" value={q} onChange={(e) => setQ(e.target.value)}
-        placeholder={L('searchPlaceholder', 'Search char ("A"), decimal (65), hex (41), or binary…')}
+        // en 占位符刻意短于一行(390px 视口输入框约 286px 可视宽,55 字符串会被拦腰截断);
+        // 四种记法各留一个实例,char/dec/hex/bin 与表头 Dec/Hex/Oct/Bin 一一对应
+        placeholder={L('searchPlaceholder', 'Search "A", 65, 41, or 01000001…')}
         aria-label={L('searchPlaceholder', 'Search characters or codes')}
         className="w-full rounded-lg border p-3 shadow-sm outline-none transition focus:ring-2"
         style={{ borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rgb(var(--bg-card))', color: 'rgb(var(--text))' }}

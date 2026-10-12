@@ -334,7 +334,7 @@ export function NginxConfigGeneratorClient() {
           <CopyButton value={config} label={L('copy', 'Copy')} />
         </div>
         {warnPath && (
-          <div className="rounded-lg border border-amber-200 bg-amber-50 p-3 text-xs text-amber-700 dark:border-amber-800 dark:bg-amber-950/40 dark:text-amber-300">
+          <div className="break-words rounded-lg border border-amber-200 bg-amber-50 p-3 text-xs text-amber-700 dark:border-amber-800 dark:bg-amber-950/40 dark:text-amber-300">
             ⚠️{' '}
             {L(
               'warnTargetPath',
@@ -363,8 +363,15 @@ export function NginxConfigGeneratorClient() {
         className="rounded-md p-3 text-xs"
         style={{ backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text-subtle))' }}
       >
-        {L('notePlace', '📁 Place the file in')} <code>/etc/nginx/sites-available/</code> {L('noteSymlink', 'and symlink it into')}{' '}
-        <code>/etc/nginx/sites-enabled/</code>{L('noteThenRun', ', then run')} <code>sudo nginx -t &amp;&amp; sudo systemctl reload nginx</code>.{' '}
+        {/* 空格与句末标点由各语种串自带(JSX 跨行子元素间空白被剥离):
+            zh 全角标点前不留半角空格、句末用「。」;en 输出与改造前逐字节一致。 */}
+        {L('notePlace', '📁 Place the file in ')}
+        <code>/etc/nginx/sites-available/</code>
+        {L('noteSymlink', ' and symlink it into ')}
+        <code>/etc/nginx/sites-enabled/</code>
+        {L('noteThenRun', ', then run ')}
+        <code>sudo nginx -t &amp;&amp; sudo systemctl reload nginx</code>
+        {L('noteEnd', '. ')}
         {L('noteClientSide', '🔒 Generated 100% client-side — nothing is sent anywhere.')}
       </p>
     </div>

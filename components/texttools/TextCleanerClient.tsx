@@ -106,8 +106,10 @@ export function TextCleanerClient({
         {checkbox('dropEmptyLines', L('dropEmptyLines', 'Remove empty lines'))}
         {checkbox('dedupe', L('dedupe', 'Remove duplicate lines'))}
         {checkbox('sortAZ', L('sortAZ', 'Sort A → Z'))}
-        <label className="flex items-center gap-2 text-sm" style={{ color: 'rgb(var(--text-muted))' }}>
-          <span>{L('join', 'Join:')}</span>
+        {/* 移动端 2 列网格下 "Join:"+select 自然宽度超出单列(390px 视口溢出卡片右缘、
+            zh 标签被挤成逐字竖排),故小屏跨满整行,sm+ 回到单列 */}
+        <label className="col-span-2 flex items-center gap-2 text-sm sm:col-span-1" style={{ color: 'rgb(var(--text-muted))' }}>
+          <span className="whitespace-nowrap">{L('join', 'Join:')}</span>
           <select
             value={opts.joinMode}
             onChange={(e) => setOpt('joinMode', e.target.value as Options['joinMode'])}

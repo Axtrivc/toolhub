@@ -251,8 +251,8 @@ export function BaseConverterClient() {
 
       <div role="status" aria-live="polite" className="space-y-3">
         {bases.map(([b, label]) => (
-          <div key={b} className="flex items-center gap-3 rounded-lg border p-3" style={{ borderColor: 'rgb(var(--border))' }}>
-            <span className="w-40 shrink-0 text-sm" style={{ color: 'rgb(var(--text-muted))' }}>{label}</span>
+          <div key={b} className="flex items-center gap-2 rounded-lg border p-3 sm:gap-3" style={{ borderColor: 'rgb(var(--border))' }}>
+            <span className="w-32 shrink-0 text-sm sm:w-40" style={{ color: 'rgb(var(--text-muted))' }}>{label}</span>
             <code className="min-w-0 flex-1 break-all font-mono text-sm" style={{ color: 'rgb(var(--text))' }}>
               {parsed === null ? '—' : formatInBase(parsed, b)}
             </code>

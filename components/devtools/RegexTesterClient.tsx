@@ -399,6 +399,8 @@ export function RegexTesterClient() {
             <LoadSampleButton onLoad={handleLoadSample} variant="compact" />
           </div>
         </div>
+        {/* min-w-0:input 固有 min-content 宽度会阻止 flex 收缩,窄视口(≤390px)下
+            整行溢出卡片,把定宽 flags 输入框推出屏幕外(与 IpCheckerClient 同款处理) */}
         <div className="flex gap-2">
           <div className="flex items-center gap-1 rounded-lg border px-3 font-mono text-xs text-slate-400" style={{ borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rgb(var(--bg-card))' }}>
             /
@@ -410,7 +412,7 @@ export function RegexTesterClient() {
             onChange={(e) => setPattern(e.target.value)}
             placeholder="\\d+"
             spellCheck={false}
-            className={`${inputCls} flex-1`}
+            className={`${inputCls} min-w-0 flex-1`}
             style={{ borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rgb(var(--bg-card))', color: 'rgb(var(--text))' }}
           />
           <div className="flex items-center gap-1 rounded-lg border px-3 font-mono text-xs text-slate-400" style={{ borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rgb(var(--bg-card))' }}>

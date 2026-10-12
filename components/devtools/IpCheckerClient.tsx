@@ -633,7 +633,9 @@ export function IpCheckerClient() {
     <div className="space-y-6">
       {/* ───── 头部:当前 IP + 查询 ───── */}
       <div className="surface rounded-xl border p-5 shadow-sm">
-        <div className="flex flex-wrap items-center gap-3">
+        {/* 移动端纵向堆叠:横向排列时 flex-1(min-w-0)会被按钮行挤压到 ~100px,
+            break-all 让 15 字符的 IP 逐字断行(390px 截图实测);sm+ 恢复同行排列 */}
+        <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
           <div className="min-w-0 flex-1" role="status" aria-live="polite">
             <p className="text-xs font-medium uppercase tracking-wider" style={{ color: 'rgb(var(--text-subtle))' }}>
               {d.yourCurrentIp}

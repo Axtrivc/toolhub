@@ -18,7 +18,7 @@ const en: ReactNode = (
       <p>
         <strong>Case sensitive</strong> matches the exact letter case. Turn on{' '}
         <strong>Regex</strong> to search with regular expressions (for example{' '}
-        <code>\d{4}</code> matches any four digits) and use capture groups like{' '}
+        <code>{'\\d{4}'}</code> matches any four digits) and use capture groups like{' '}
         <code>$1</code> in the replacement.
       </p>
     </div>
@@ -57,7 +57,7 @@ const zh: ReactNode = (
       <h2>如何使用</h2>
       <p>
         勾选<strong>区分大小写</strong>可精确匹配字母大小写;开启<strong>正则模式</strong>后可用正则表达式查找
-        (例如 <code>\d{4}</code> 匹配任意四位数字),替换内容中支持 <code>$1</code> 等捕获组引用。
+        (例如 <code>{'\\d{4}'}</code> 匹配任意四位数字),替换内容中支持 <code>$1</code> 等捕获组引用。
       </p>
     </div>
     <div>
@@ -97,7 +97,7 @@ const es: ReactNode = (
       <p>
         <strong>Sensible a mayúsculas</strong> distingue entre mayúsculas y minúsculas. Activa{' '}
         <strong>Regex</strong> para buscar con expresiones regulares (por ejemplo,{' '}
-        <code>\d{4}</code> coincide con cuatro dígitos) y usa grupos de captura como{' '}
+        <code>{'\\d{4}'}</code> coincide con cuatro dígitos) y usa grupos de captura como{' '}
         <code>$1</code> en el reemplazo.
       </p>
     </div>
@@ -138,7 +138,7 @@ const de: ReactNode = (
       <p>
         <strong>Groß-/Kleinschreibung beachten</strong> unterscheidet exakt die Schreibweise.
         Aktiviere <strong>Regex</strong>, um mit regulären Ausdrücken zu suchen (z. B. trifft{' '}
-        <code>\d{4}</code> auf vier Ziffern zu), und verwende Erfassungsgruppen wie{' '}
+        <code>{'\\d{4}'}</code> auf vier Ziffern zu), und verwende Erfassungsgruppen wie{' '}
         <code>$1</code> im Ersatz.
       </p>
     </div>

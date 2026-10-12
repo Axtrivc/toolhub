@@ -268,7 +268,7 @@ export function CssGradientGeneratorClient() {
               </button>
             </div>
             {sortedStops.map((s) => (
-              <div key={s.id} className="flex items-center gap-3">
+              <div key={s.id} className="flex flex-wrap items-center gap-3">
                 <input
                   type="color"
                   value={s.color}

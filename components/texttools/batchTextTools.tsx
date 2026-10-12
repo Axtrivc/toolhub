@@ -406,7 +406,9 @@ export function FindReplaceClient() {
           const max = Math.max(charCount, outChars, 1)
           return (
             <div key={row.label} className="flex items-center gap-3">
-              <span className="w-20 shrink-0 truncate text-xs font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
+              {/* w-32:es 标签「Longitud de entrada/salida」较长,w-20 会截成
+                  两个相同的「Longitud de …」而无法区分输入/输出 */}
+              <span className="w-32 shrink-0 truncate text-xs font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
                 {row.label}
               </span>
               <div className="h-2.5 flex-1 overflow-hidden rounded-full" style={{ backgroundColor: 'rgb(var(--bg-subtle))' }}>

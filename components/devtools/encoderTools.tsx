@@ -98,7 +98,7 @@ export function URLCodecTool({ initialMode = 'encode', slug = 'url-encoder', l10
           {L('uriTarget', 'Target')}
         </span>
         <div
-          className="inline-flex overflow-hidden rounded-lg border"
+          className="inline-flex max-w-full flex-wrap overflow-hidden rounded-lg border"
           style={{ borderColor: 'rgb(var(--border-strong))' }}
           role="group"
           aria-label={L('uriTarget', 'Target')}

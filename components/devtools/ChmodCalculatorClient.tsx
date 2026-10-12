@@ -130,7 +130,7 @@ export function ChmodCalculatorClient() {
     <div className="space-y-5">
       {/* 权限矩阵 */}
       <div className="overflow-x-auto rounded-lg border p-4" style={{ borderColor: 'rgb(var(--border))', backgroundColor: 'rgb(var(--bg-card))' }}>
-        <table className="w-full min-w-[320px] text-sm" aria-label={L('permission', 'Permission')}>
+        <table className="w-full text-sm" aria-label={L('permission', 'Permission')}>
           <thead>
             <tr style={{ color: 'rgb(var(--text-subtle))' }}>
               <th scope="col" className="pb-2 text-left font-medium">{L('permission', 'Permission')}</th>

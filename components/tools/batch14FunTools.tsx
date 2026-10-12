@@ -132,16 +132,19 @@ export function CoinFlipClient() {
   }, [flipping])
 
   const total = tally.H + tally.T
+  // 硬币面单行大字:es/de 的 LANZAR/WERFEN(6 字母)与英文回退 HEADS/TAILS(5 字母)
+  // 在固定 text-6xl 下会横向溢出 176px 圆面(es/de 桌面截图已证实)——按长度降一档
+  const face = flipping ? '…' : result === null ? L('tapFlip', 'FLIP') : result === 'H' ? L('heads', 'HEADS') : L('tails', 'TAILS')
 
   return (
     <div className="space-y-6">
       <div className="flex justify-center">
         <button type="button" onClick={flip}
-          className={`flex h-44 w-44 items-center justify-center rounded-full border-8 text-6xl font-black shadow-lg transition-transform duration-300 ${
-            flipping ? '[transform:rotateY(180deg)_scale(0.9)]' : 'hover:scale-105'
-          }`}
+          className={`flex h-44 w-44 items-center justify-center rounded-full border-8 font-black shadow-lg transition-transform duration-300 ${
+            face.length > 4 ? 'text-4xl' : 'text-6xl'
+          } ${flipping ? '[transform:rotateY(180deg)_scale(0.9)]' : 'hover:scale-105'}`}
           style={{ borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rgb(var(--bg-card))', color: 'rgb(var(--text))' }}>
-          {flipping ? '…' : result === null ? L('tapFlip', 'FLIP') : result === 'H' ? L('heads', 'HEADS') : L('tails', 'TAILS')}
+          {face}
         </button>
       </div>
 
