@@ -1,0 +1,92 @@
+/**
+ * tire-size-calculator 本地化 bundle —— zh / es / de(B10 批次)
+ * 覆盖: ui + useCases + faqs。formula 缺失自动回退英文。
+ */
+import type { ToolL10n } from '../tool-l10n'
+
+export const TireSizeCalculatorL10n: ToolL10n = {
+  zh: {
+    useCases: ['换胎前对比新旧规格的实际直径差', '估算时速表会偏差多少、会不会超速', '按每英里转数校准里程表/耗油口径', '在 +3% 直径容差内找更宽或更大的合规规格'],
+    faqs: [
+      { q: '225/45R17 每个数字是什么意思?', a: '225 是胎面断面宽(毫米),45 是高径比(胎侧高度 = 225 × 45% ≈ 101 mm),R17 表示子午线结构、17 英寸轮毂。直径 = 轮毂 × 25.4 + 2 × 胎侧 ≈ 634 mm。' },
+      { q: '换大轮胎后时速表会怎样?', a: '时速表按转数推算,轮胎直径变大 → 每英里转数变少 → 表显比实际慢:直径 +1.4% 时,表显 60 实际约 60.9——反向开容易无意超速。工具同时给两个方向的换算。' },
+      { q: '直径差多少算安全?', a: '业内心照不宣的容差约 ±3%,超出会带来时速表失准、里程表偏差、ABS/ESP 标定失配甚至刮叶子板。最稳妥的做法是选"加一码"(如 225/45→235/45 差值仍很小或配更低高径比)。' },
+      { q: '每英里转数有什么用?', a: '它直接联动里程表与耗油表:转数每英里 808 → 796 意味着里程表开始少记。车队与改装调校常用这个数重新标定。' },
+    ],
+    ui: {
+      'in.tire1': '现用轮胎',
+      'in.tire2': '新轮胎(留空则只算单条)',
+      'in.speed': '参考车速',
+      'inSuffix.speed': 'mph',
+      'out.d1': '现用直径',
+      'out.d2': '新胎直径',
+      'out.diffPct': '直径变化',
+      'out.speedoAt': '表显读数(按真实车速)',
+      'out.trueAt': '真实车速(表显为参考值时)',
+      'out.revs': '每英里转数',
+      'chartTitle': '直径对比:现用 vs 新胎',
+      'cmpseg.0': '直径',
+      'note': '📏 225/45R17:断面宽 225 mm、高径比 45(胎侧 = 225 × 0.45 ≈ 101 mm)、17 英寸轮毂;直径 = 轮毂 × 25.4 + 2 × 胎侧。直径差超过约 +3% 就要当心表显偏低与刮胎。',
+      'errSpec': '轮胎规格请按 宽度/高径比R轮毂 填写,如 225/45R17',
+      'errSpec2': '第二条轮胎无法解析——请用如 235/45R17 的写法',
+      'errSpeed': '参考车速必须为正',
+      'noSecond': '— 填第二条规格可对比',
+    },
+  },
+  es: {
+    useCases: ['comparar el diámetro real entre la medida actual y la nueva', 'saber cuánto se desvía el velocímetro antes de cambiar', 'recalibrar cuentakilómetros y consumo por revoluciones/milla', 'buscar una medida más ancha dentro del ±3 % de diámetro'],
+    faqs: [
+      { q: '¿Qué significa cada número del 225/45R17?', a: '225 es el ancho de sección en mm; 45, el perfil (flanco = 225 × 45 % ≈ 101 mm); R17, construcción radial y llanta de 17 pulgadas. Diámetro = llanta × 25,4 + 2 × flanco ≈ 634 mm.' },
+      { q: '¿Qué pasa con el velocímetro al montar más grande?', a: 'Cuenta vueltas: más diámetro → menos vueltas por milla → marca MENOS de lo real. Con +1,4 % de diámetro, marcar 60 equivale a unos 60,9 reales — multas por sorpresa. La herramienta da la conversión en ambos sentidos.' },
+      { q: '¿Cuánta diferencia de diámetro es aceptable?', a: 'La regla no escrita del sector es ±3 %; más allá fallan velocímetro, odómetro, la calibración de ABS/ESP e incluso roza el paso de rueda. Lo limpio es buscar la medida equivalente manteniendo el diámetro.' },
+      { q: '¿Para qué sirven las revoluciones por milla?', a: 'Enlazan directamente con odómetro y consumo: pasar de 808 a 796 rev/milla hace que el cuentakilómetros se quede corto. Flotas y preparadores usan esa cifra para recalibrar.' },
+    ],
+    ui: {
+      'in.tire1': 'Neumático actual',
+      'in.tire2': 'Neumático nuevo (vacío = sin comparar)',
+      'in.speed': 'Velocidad de referencia',
+      'inSuffix.speed': 'mph',
+      'out.d1': 'Diámetro actual',
+      'out.d2': 'Diámetro nuevo',
+      'out.diffPct': 'Cambio de diámetro',
+      'out.speedoAt': 'Marca el velocímetro (velocidad real)',
+      'out.trueAt': 'Velocidad real (marcando la referencia)',
+      'out.revs': 'Revoluciones por milla',
+      'chartTitle': 'Diámetro: actual vs nuevo',
+      'cmpseg.0': 'Diámetro',
+      'note': '📏 225/45R17: 225 mm de ancho, perfil 45 (flanco = 225 × 0,45 ≈ 101 mm), llanta de 17″; diámetro = llanta × 25,4 + 2 × flanco. Más de un +3 % de diámetro: velocímetro bajo y riesgo de roce.',
+      'errSpec': 'Escribe la medida como ANCHO/PERFIL R LLANTA, p. ej. 225/45R17',
+      'errSpec2': 'No pude interpretar la segunda medida — usa p. ej. 235/45R17',
+      'errSpeed': 'La velocidad de referencia debe ser positiva',
+      'noSecond': '— introduce una segunda medida para comparar',
+    },
+  },
+  de: {
+    useCases: ['den echten Durchmesserunterschied Alt vs. Neu vergleichen', 'vor dem Reifenkauf wissen, wie weit der Tacho abweicht', 'Kilometerzähler und Verbrauch über Umdrehungen pro Meile einordnen', 'eine breitere Größe innerhalb der +3 %-Toleranz finden'],
+    faqs: [
+      { q: 'Was bedeuten die Zahlen bei 225/45R17?', a: '225 ist die Reifenbreite in mm, 45 die Höhe-Breite-Relation (Seitenwand = 225 × 45 % ≈ 101 mm), R17 radiale Bauweise mit 17-Zoll-Felge. Durchmesser = Felge × 25,4 + 2 × Seitenwand ≈ 634 mm.' },
+      { q: 'Was macht der Tacho bei größeren Reifen?', a: 'Er zählt Umdrehungen: größerer Durchmesser → weniger Umdrehungen pro Meile → der Tacho zeigt ZU WENIG an. Bei +1,4 % Durchmesser entspricht „Tacho 60“ real etwa 60,9 — die Blitze-Falle. Der Rechner rechnet beide Richtungen.' },
+      { q: 'Wie viel Durchmesserunterschied geht klar?', a: 'Ungefähre Branchentoleranz ±3 %; darüber leiden Tacho, Kilometerzähler, ABS/ESP-Kalibrierung und der Kotflügel-Spielraum. Sauber ist die „Plus-Size“-Regel: Breite zulegen, Profil abnehmen.' },
+      { q: 'Wozu Umdrehungen pro Meile?', a: 'Sie hängen direkt an Kilometerzähler und Verbrauch: 808 → 796 U/min… je Meile heißt, der Zähler unterzählt. Flotten und Tuner kalibrieren mit genau dieser Zahl nach.' },
+    ],
+    ui: {
+      'in.tire1': 'Aktueller Reifen',
+      'in.tire2': 'Neuer Reifen (leer = kein Vergleich)',
+      'in.speed': 'Referenzgeschwindigkeit',
+      'inSuffix.speed': 'mph',
+      'out.d1': 'Durchmesser aktuell',
+      'out.d2': 'Durchmesser neu',
+      'out.diffPct': 'Durchmesseränderung',
+      'out.speedoAt': 'Tachoanzeige (bei echtem Tempo)',
+      'out.trueAt': 'Echtes Tempo (bei Referenzanzeige)',
+      'out.revs': 'Umdrehungen pro Meile',
+      'chartTitle': 'Durchmesser: aktuell vs. neu',
+      'cmpseg.0': 'Durchmesser',
+      'note': '📏 225/45R17: 225 mm Breite, 45er Profil (Seitenwand = 225 × 0,45 ≈ 101 mm), 17-Zoll-Felge; Durchmesser = Felge × 25,4 + 2 × Seitenwand. Über etwa +3 % Durchmesser drohen Tacho-Untertreibung und Kotflügelkontakt.',
+      'errSpec': 'Größe als BREITE/PROFIL R FELGE eingeben, z. B. 225/45R17',
+      'errSpec2': 'Zweite Größe unlesbar — schreibe z. B. 235/45R17',
+      'errSpeed': 'Die Referenzgeschwindigkeit muss positiv sein',
+      'noSecond': '— zweite Größe eingeben zum Vergleichen',
+    },
+  },
+}

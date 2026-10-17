@@ -1,0 +1,86 @@
+/**
+ * 401k-match-calculator 本地化 bundle —— zh / es / de(B4 家庭与人生大事批)
+ * 覆盖: ui。useCases/formula/faqs 缺失自动回退英文。
+ */
+import type { ToolL10n } from '../tool-l10n'
+
+export const Match401kCalculatorL10n: ToolL10n = {
+  zh: {
+    useCases: ['算出雇主匹配一年到底值多少钱', '确认自缴比例是否拿满了匹配上限', '算出"没拿满的免费钱"还剩多少', '决定要不要把自缴比例提到匹配上限'],
+    faqs: [
+      { q: '"50% up to 6%" 是什么意思?', a: '你每缴 1 美元,雇主跟缴 50 美分,但只对你工资前 6% 的部分生效。年薪 $75,000 的人把自缴比例提到 6%,每年最多能拿 $2,250 匹配;只缴 4% 就只匹配 $1,500。' },
+      { q: '怎么算"留在桌上的免费钱"?', a: '满配匹配减去当前实际匹配就是差额。它一年一年累积——十年不拿满 6%,按上面的例子就是 $7,500 纯粹放弃的雇主款,还不算它后来的增值。' },
+      { q: '2025 年个人缴存上限是多少?', a: '2025 年 50 岁以下员工税前缴存上限是 $23,500(50-59 与 60+ 另有追加额度)。匹配款是雇主出的,不占你的个人上限,但 IRS 对"员工+雇主"合计另有工资百分比上限。' },
+      { q: '归属进度(vesting)会影响结果吗?', a: '会。本工具算的是雇主"给"的匹配额;如果你未满归属期就离职,部分或全部匹配会被收回。常见的是 3-5 年悬崖式或逐年递增归属,明细看你公司的 plan 文件。' },
+    ],
+    ui: {
+      'chartTitle': '每年进入账户的钱',
+      'slice.yourContribution': '你的缴存',
+      'slice.employerMatch': '雇主匹配',
+      'slice.unclaimedMatch': '未拿满的匹配',
+      'in.salary': '年薪',
+      'in.contribPct': '你的缴存比例',
+      'in.matchPct': '雇主匹配率',
+      'in.matchLimitPct': '匹配适用的工资上限',
+      'out.yourContribution': '你的年缴存',
+      'out.employerMatch': '年雇主匹配',
+      'out.maxMatch': '满配可拿匹配',
+      'out.unclaimedMatch': '留在桌上的免费钱',
+      'outSub.unclaimedMatch': '提高自缴比例即可拿到',
+      'note': '💰 匹配公式五花八门:美元对美元(100% up to X%)最慷慨,50% up to 6% 最常见。缴到上限即止——多缴的部分照常免税增值,但不再有匹配。先拿满匹配,再谈其他理财。',
+      'errInvalid': '请输入有效的年薪与非负比例(匹配率 ≤ 100%)',
+    },
+  },
+  es: {
+    useCases: ['calcular cuánto vale al año el matching de tu empleador', 'comprobar si tu aporte alcanza el tope del matching', 'saber cuánto «dinero gratis» dejas sobre la mesa', 'decir si conviene subir tu porcentaje de aporte'],
+    faqs: [
+      { q: '¿Qué significa «50% up to 6%»?', a: 'Por cada dólar que aportas, el empleador añade 50 centavos, pero solo sobre el primer 6% de tu salario. Con 75 000 $ al año y un aporte del 6%, el matching máximo es de 2 250 $; aportando solo el 4%, recibes 1 500 $.' },
+      { q: '¿Cómo se calcula el «dinero gratis» perdido?', a: 'El matching máximo menos el matching que recibes hoy. Se acumula año tras año — una década sin llegar al 6% son 7 500 $ aportados por el empleador que rechazaste, sin contar su crecimiento posterior.' },
+      { q: '¿Cuál es el límite de aporte en 2025?', a: 'Para empleados menores de 50 años, el límite de aplazamiento elective es de 23 500 $ en 2025 (hay aportaciones adicionales para 50-59 y 60+). El matching lo paga el empleador y no consume tu límite personal, aunque el IRS limita el combined como % del salario.' },
+      { q: '¿Afecta el vesting al resultado?', a: 'Sí. La herramienta calcula lo que el empleador «pone»; si te vas antes de cumplir el vesting, puedes perder parte o todo el matching. Lo habitual es cliff de 3-5 años o gradual anual — revisa el documento del plan.' },
+    ],
+    ui: {
+      'chartTitle': 'Dinero anual que entra en tu 401(k)',
+      'slice.yourContribution': 'Tu aporte',
+      'slice.employerMatch': 'Matching del empleador',
+      'slice.unclaimedMatch': 'Matching sin reclamar',
+      'in.salary': 'Salario anual',
+      'in.contribPct': 'Tu % de aporte',
+      'in.matchPct': 'Tasa de matching',
+      'in.matchLimitPct': 'Tope salarial del matching',
+      'out.yourContribution': 'Tu aporte anual',
+      'out.employerMatch': 'Matching anual',
+      'out.maxMatch': 'Matching máximo posible',
+      'out.unclaimedMatch': 'Dinero gratis perdido',
+      'outSub.unclaimedMatch': 'sube tu % para capturarlo',
+      'note': '💰 Las fórmulas varían: dólar por dólar (100% up to X%) es la más generosa; 50% up to 6% la más común. El matching se detiene en el tope — aportar de más sigue creciendo a favor de impuestos, pero sin matching extra. Captura el matching antes que cualquier otra cosa.',
+      'errInvalid': 'Introduce un salario válido y porcentajes no negativos (matching ≤ 100%)',
+    },
+  },
+  de: {
+    useCases: ['ausrechnen, wie viel der Arbeitgeber-Match pro Jahr wert ist', 'prüfen, ob der eigene Beitrag das Match-Limit erreicht', 'sehen, wie viel „gratis Geld“ liegen bleibt', 'entscheiden, ob der eigene Beitragssatz steigen sollte'],
+    faqs: [
+      { q: 'Was bedeutet „50 % up to 6 %“?', a: 'Zu jedem eingezahlten Dollar legt der Arbeitgeber 50 Cent dazu — aber nur auf die ersten 6% des Gehalts. Bei 75.000 $ Jahresgehalt und 6% Eigenanteil sind das bis zu 2.250 $ Match pro Jahr; bei nur 4% Eigenanteil gibt es 1.500 $.' },
+      { q: 'Wie wird das liegen gelassene „gratis Geld“ berechnet?', a: 'Maximaler Match minus tatsächlich erhaltener Match. Das summiert sich: Ein Jahrzehnt unter 6% sind im Beispiel 7.500 $ abgelehnter Arbeitgeberbeitrag — ohne dessen spätere Wertsteigerung.' },
+      { q: 'Wie hoch ist die Einzahlungsgrenze 2025?', a: 'Für unter 50-Jährige liegt das Elective-Deferral-Limit 2025 bei 23.500 $ (zusätzlich Catch-up für 50-59 und 60+). Der Match zahlt der Arbeitgeber und zählt nicht gegen dein persönliches Limit; der IRS begrenzt aber die Summe als Prozentsatz des Gehalts.' },
+      { q: 'Spielt Vesting eine Rolle?', a: 'Ja. Der Rechner zeigt, was der Arbeitgeber „hineinlegt“ — wer vor Erfüllung der Vesting-Frist geht, verliert Teil oder alles vom Match. Üblich sind Cliff-Vesting über 3-5 Jahre oder jährlich gestaffelt; Details stehen im Plan-Dokument.' },
+    ],
+    ui: {
+      'chartTitle': 'Geld pro Jahr im 401(k)',
+      'slice.yourContribution': 'Deine Einzahlung',
+      'slice.employerMatch': 'Arbeitgeber-Match',
+      'slice.unclaimedMatch': 'Ungenutzter Match',
+      'in.salary': 'Jahresgehalt',
+      'in.contribPct': 'Dein Einzahlungssatz',
+      'in.matchPct': 'Match-Quote',
+      'in.matchLimitPct': 'Gehaltsobergrenze für Match',
+      'out.yourContribution': 'Deine Jahreseinzahlung',
+      'out.employerMatch': 'Jährlicher Match',
+      'out.maxMatch': 'Maximal möglicher Match',
+      'out.unclaimedMatch': 'Liegengelassenes Gratis-Geld',
+      'outSub.unclaimedMatch': 'mit höherem Satz holbar',
+      'note': '💰 Die Formeln variieren: Dollar-für-Dollar (100% up to X%) ist am großzügigsten, 50% up to 6% am häufigsten. Der Match endet am Limit — mehr Einzahlung wächst weiter steuerbegünstigt, aber ohne Zusatz-Match. Erst den Match sichern, dann alles andere.',
+      'errInvalid': 'Gib ein gültiges Gehalt und nicht-negative Prozente ein (Match ≤ 100%)',
+    },
+  },
+}

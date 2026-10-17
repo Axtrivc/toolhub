@@ -1,0 +1,92 @@
+/**
+ * student-loan-payment-calculator 本地化 bundle —— zh / es / de(B4 家庭与人生大事批)
+ * 覆盖: ui。useCases/formula/faqs 缺失自动回退英文。
+ */
+import type { ToolL10n } from '../tool-l10n'
+
+export const StudentLoanCalculatorL10n: ToolL10n = {
+  zh: {
+    useCases: ['对比标准 10 年与延长 25 年的月供和总利息', '看阶梯递增计划起步月供有多低', '算清宽限期内资本化的利息', '决定多付月供能省多少利息'],
+    faqs: [
+      { q: '三种计划的月供怎么算?', a: '标准计划按 10 年(120 期)等额本息摊还;延长计划拉到 25 年(300 期),月供更低但总利息高得多;阶梯递增计划同为 10 年,起始月供更低、每两年上台阶,本工具按每两年 25% 递增精确解出起付额。' },
+      { q: '宽限期资本化是什么坑?', a: '联邦贷款毕业后有 6 个月宽限期,补贴型贷款期间政府替你付息,而非补贴型(Subsidized 之外)的利息照常累积,进入还款时并入本金——之后你对这 1190 美元级别的额外本金再付 10-25 年利息。' },
+      { q: '延长 25 年到底多付多少?', a: '以 $35,000、6.8%、6 个月宽限为例:10 年标准月供约 $417、总利息约 $13,800;延长 25 年月供降到约 $251,但总利息冲到约 $39,200——多出的 $25,000 就是"月供轻松"的价格。' },
+      { q: '这个结果适用于私人学生贷款吗?', a: '数学上适用——任何等额本息贷款都能算。但私人贷款没有联邦计划的阶梯/延长选项,也常在在校期间就计息;具体条款以你的贷款合同为准。' },
+    ],
+    ui: {
+      'chartTitle': '三种计划的剩余本金',
+      'line.std': '标准 10 年',
+      'line.grad': '阶梯 10 年',
+      'line.ext': '延长 25 年',
+      'in.balance': '贷款本金',
+      'in.rate': '年利率',
+      'in.deferred': '宽限期月数',
+      'out.capitalized': '宽限期资本化利息',
+      'out.stdPay': '标准 10 年月供',
+      'out.gradStart': '阶梯计划起始月供',
+      'out.extPay': '延长 25 年月供',
+      'out.totalInt10': '10 年总利息',
+      'out.totalInt25': '25 年总利息',
+      'outSub.stdPay': '120 期等额',
+      'outSub.gradStart': '每 2 年 +25%',
+      'note': '🎓 阶梯计划适合"起步薪水低、涨得快"的职业:前期月供低,代价是后期台阶陡、总利息高于标准计划。宽限期里能付多少利息就付多少——资本化后每一美元都要陪你摊上很多年。',
+      'errInvalid': '请输入正的贷款本金、非负利率与 0-24 的宽限期月数',
+    },
+  },
+  es: {
+    useCases: ['comparar mensualidad e intereses totales: 10 años estándar vs 25 extendido', 'ver cuán baja arranca la cuota del plan escalonado', 'calcular el interés capitalizado durante el grace period', 'decidir cuánto ahorra pagar de más cada mes'],
+    faqs: [
+      { q: '¿Cómo se calculan las tres cuotas?', a: 'El plan estándar amortiza a 10 años (120 cuotas) con cuota fija; el extendido, a 25 años (300 cuotas), con cuota menor pero muchos más intereses; el escalonado dura también 10 años, arranca bajo y sube cada dos años — la herramienta resuelve la cuota inicial exacta con incrementos del 25% bianual.' },
+      { q: '¿En qué consiste la trampa de la capitalización?', a: 'Los préstamos federales tienen 6 meses de carencia tras graduarse: en los subsidiados el gobierno paga el interés; en los no subsidiados se acumula y se suma al capital al empezar a pagar — después pagas intereses sobre ese capital extra durante 10-25 años.' },
+      { q: '¿Cuánto cuesta de más extender a 25 años?', a: 'Con 35 000 $ al 6,8% y 6 meses de carencia: la cuota estándar a 10 años ronda los 417 $ con unos 13 800 $ de intereses; a 25 años baja a unos 251 $ pero los intereses suben a unos 39 200 $ — unos 25 000 $ extra es el precio de la comodidad.' },
+      { q: '¿Sirve para préstamos privados?', a: 'La matemática sirve — cualquier préstamo a cuota fija se calcula igual. Pero los privados no ofrecen los planes escalonado/extendido federales y a menudo devengan interés ya durante los estudios; manda tu contrato.' },
+    ],
+    ui: {
+      'chartTitle': 'Saldo pendiente de los tres planes',
+      'line.std': 'Estándar 10 años',
+      'line.grad': 'Escalonado 10 años',
+      'line.ext': 'Extendido 25 años',
+      'in.balance': 'Capital del préstamo',
+      'in.rate': 'Tasa anual',
+      'in.deferred': 'Meses de carencia',
+      'out.capitalized': 'Interés capitalizado en la carencia',
+      'out.stdPay': 'Cuota estándar 10 años',
+      'out.gradStart': 'Cuota inicial escalonada',
+      'out.extPay': 'Cuota extendida 25 años',
+      'out.totalInt10': 'Intereses totales a 10 años',
+      'out.totalInt25': 'Intereses totales a 25 años',
+      'outSub.stdPay': '120 cuotas fijas',
+      'outSub.gradStart': '+25% cada 2 años',
+      'note': '🎓 El escalonado encaja en carreras que arrancan con sueldo bajo y crecen rápido: cuota baja al principio, escalones empinados después y más intereses totales que el estándar. Durante la carencia, paga el interés que puedas — cada dólar capitalizado te acompaña años.',
+      'errInvalid': 'Introduce un capital positivo, una tasa no negativa y 0-24 meses de carencia',
+    },
+  },
+  de: {
+    useCases: ['Rate und Zinsen vergleichen: 10 Jahre Standard vs 25 verlängert', 'sehen, wie niedrig die Startquote der gestuften Rate ist', 'die während der Karenzzeit kapitalisierten Zinsen berechnen', 'entscheiden, wie viel Mehrrate spart'],
+    faqs: [
+      { q: 'Wie entstehen die drei Raten?', a: 'Der Standardplan tilgt über 10 Jahre (120 Raten) mit fester Quote; der verlängerte über 25 Jahre (300 Raten) mit niedrigerer Quote, aber deutlich mehr Zinsen; der gestufte läuft ebenfalls 10 Jahre, startet niedrig und steigt alle zwei Jahre — der Rechner löst die exakte Startquote bei +25% je Stufe.' },
+      { q: 'Worin besteht die Kapitalisierungsfalle?', a: 'Bundeskredite haben nach dem Abschluss 6 Monate Karenz: Bei subventionierten zahlt der Staat die Zinsen, bei nicht subventionierten laufen sie weiter und werden beim Tilgungsstart dem Kapital zugeschlagen — danach zahlst du auf dieses Mehrkapital 10-25 Jahre lang Zinsen.' },
+      { q: 'Was kostet die Verlängerung auf 25 Jahre?', a: 'Bei 35.000 $, 6,8% und 6 Monaten Karenz: Die Standardrate liegt um 417 $ mit rund 13.800 $ Zinsen; auf 25 Jahre sinkt sie auf etwa 251 $, aber die Zinsen steigen auf rund 39.200 $ — etwa 25.000 $ Aufpreis für die bequeme Rate.' },
+      { q: 'Gilt das auch für private Studienkredite?', a: 'Die Mathematik ja — jeder Kredit mit fester Rate rechnet gleich. Private Kredite kennen aber keine bundesweisen gestuften/verlängerten Pläne und verzinsen oft schon während des Studiums; maßgeblich ist dein Vertrag.' },
+    ],
+    ui: {
+      'chartTitle': 'Restschuld der drei Pläne',
+      'line.std': 'Standard 10 Jahre',
+      'line.grad': 'Gestuft 10 Jahre',
+      'line.ext': 'Verlängert 25 Jahre',
+      'in.balance': 'Kreditbetrag',
+      'in.rate': 'Jahreszins',
+      'in.deferred': 'Karenzmonate',
+      'out.capitalized': 'Kapitalisierte Zinsen',
+      'out.stdPay': 'Standardrate 10 Jahre',
+      'out.gradStart': 'Startquote gestuft',
+      'out.extPay': 'Rate verlängert 25 Jahre',
+      'out.totalInt10': 'Zinsen gesamt, 10 Jahre',
+      'out.totalInt25': 'Zinsen gesamt, 25 Jahre',
+      'outSub.stdPay': '120 feste Raten',
+      'outSub.gradStart': '+25% alle 2 Jahre',
+      'note': '🎓 Der gestufte Plan passt zu Berufen mit niedrigem Start- und steigendem Gehalt: erst niedrige Rate, später steile Stufen und mehr Gesamtzinsen als im Standard. In der Karenz Zinsen zahlen, wo möglich — jeder kapitalisierte Dollar begleitet dich jahrelang.',
+      'errInvalid': 'Gib einen positiven Kreditbetrag, einen nicht-negativen Zins und 0-24 Karenzmonate ein',
+    },
+  },
+}

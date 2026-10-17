@@ -1001,5 +1001,449 @@ export const deTools: Record<string, { name: string; shortIntro: string }> = {
     name: 'Docker Run zu Compose Konverter',
     shortIntro: 'Wandelt docker run Befehle direkt in saubere docker-compose.yml-Dateien um.',
   },
+  'mortgage-affordability-calculator': {
+    name: 'Wohnbezahlbarkeitsrechner',
+    shortIntro: 'Vom Einkommen und Schulden zum maximalen Hauspreis — inklusive Steuern, Versicherung, HOA.',
+  },
+  'refinance-break-even-calculator': {
+    name: 'Refinanzierungs-Break-Even-Rechner',
+    shortIntro: 'Alte gegen neue Rate: nach wie vielen Monaten sich das Refinanzieren rechnet.',
+  },
+  'biweekly-mortgage-payment-calculator': {
+    name: '14-Tage-Raten-Rechner',
+    shortIntro: 'Halbraten alle zwei Wochen: gesparte Zinsen und frühere Tilgung.',
+  },
+  'closing-cost-calculator': {
+    name: 'Abschlusskostenrechner',
+    shortIntro: 'Käufer- und Verkäuferkosten im Detail plus Bare auf dem Tisch.',
+  },
+  'property-tax-calculator': {
+    name: 'Grundsteuerrechner',
+    shortIntro: 'Steuerwert × Mills: Jahresgrundsteuer und Monatsanteil der Rate.',
+  },
+  'prorated-rent-calculator': {
+    name: 'Pro-rata-Mietrechner',
+    shortIntro: 'Einzug oder Auszug mittendrin: Tagesmiete und exakter erster/letzter Monat.',
+  },
+  'rental-property-calculator': {
+    name: 'Mietobjektrechner',
+    shortIntro: 'NOI, Cap-Rate, Cashflow, Cash-on-Cash und 1%-Regel in einem Durchgang.',
+  },
+  'house-flip-calculator': {
+    name: 'House-Flip-Rechner',
+    shortIntro: 'Maximalpreis per 70%-Regel, Flip-Gewinn und ROI.',
+  },
+  'college-savings-calculator': {
+    name: 'College-Sparrechner',
+    shortIntro: 'Gesamtkosten mit Bildungsinflation hochrechnen und das Monatsziel ableiten.',
+  },
+  '401k-match-calculator': {
+    name: '401(k)-Match-Rechner',
+    shortIntro: 'Wie viel der Arbeitgeber-Match wert ist — und was liegen bleibt.',
+  },
+  'social-security-break-even-calculator': {
+    name: 'Social-Security-Break-even-Rechner',
+    shortIntro: 'Beantragung mit 62, FRA oder 70 vergleichen, mit Einhol-Alter.',
+  },
+  'student-loan-payment-calculator': {
+    name: 'Studienkredit-Rechner',
+    shortIntro: 'Rate und Zinsen in drei Tilgungsplänen gegenüberstellen.',
+  },
+  'car-lease-calculator': {
+    name: 'Auto-Leasing-Rechner',
+    shortIntro: 'Monatsrate, APR-Äquivalent und Leasing-Gesamtkosten berechnen.',
+  },
+  'ev-charging-cost-calculator': {
+    name: 'E-Auto-Ladekosten-Rechner',
+    shortIntro: 'Kosten pro Meile und Jahr beim Laden, im Vergleich zu Benzin.',
+  },
+  'rent-budget-calculator': {
+    name: 'Mietbudget-Rechner',
+    shortIntro: 'Bezahlbare Miete nach 30%-Regel und 50/30/20-Regel.',
+  },
+  'christmas-budget-calculator': {
+    name: 'Weihnachtsbudget-Rechner',
+    shortIntro: 'Das Festbudget nach Personen und Kategorien aufteilen.',
+  },
+  'one-rep-max-calculator': {
+    name: 'Maximalkraft-Rechner (1RM)',
+    shortIntro: 'Jeder harte Satz als geschätztes 1RM, inklusive 50-95%-Tabelle.',
+  },
+  'race-time-predictor': {
+    name: 'Laufzeit-Prognose',
+    shortIntro: 'Ein Rennen rein — Vorhersagen von 5K bis Marathon plus Tempo.',
+  },
+  'vo2-max-calculator': {
+    name: 'VO2max-Rechner',
+    shortIntro: 'Zwei Feldmethoden: Cooper-12-Minuten-Lauf und Pulsquotient.',
+  },
+  'body-surface-area-calculator': {
+    name: 'Körperoberflächen-Rechner',
+    shortIntro: 'BSA in m² nach Mosteller und DuBois aus Größe und Gewicht.',
+  },
+  'waist-to-height-ratio-calculator': {
+    name: 'Taille-zu-Größe-Rechner',
+    shortIntro: 'Umfang ÷ Größe mit Risikobändern nach der 0,5-Regel.',
+  },
+  'steps-to-miles-calculator': {
+    name: 'Schritte-zu-Meilen-Rechner',
+    shortIntro: 'Schritte in Meilen und km nach Größe oder gemessener Schrittweite.',
+  },
+  'weight-loss-goal-calculator': {
+    name: 'Abnehmziel-Rechner',
+    shortIntro: 'Zielgewicht rein — Tagesdefizit, Wochen und Zieldatum raus.',
+  },
+  'fiber-intake-calculator': {
+    name: 'Ballaststoff-Rechner',
+    shortIntro: 'Tägliche Gramm nach Alter und Geschlecht, mit Lebensmittel-Äquivalenten.',
+  },
+  'paypal-fee-calculator': {
+    name: 'PayPal-Gebührenrechner',
+    shortIntro: 'PayPal-Gebühren in beide Richtungen: dein Netto und der passende Preis.',
+  },
+  'etsy-fee-calculator': {
+    name: 'Etsy-Gebührenrechner',
+    shortIntro: 'Alle Gebühren pro Etsy-Auftrag, die effektive Quote und deine Auszahlung.',
+  },
+  'amazon-seller-fee-calculator': {
+    name: 'Amazon-Verkäufergebühren-Rechner',
+    shortIntro: 'Provision + FBA + Landed Cost → Gewinn, Marge und ROI pro Stück.',
+  },
+  'square-fee-calculator': {
+    name: 'Square-Gebührenrechner',
+    shortIntro: 'Square-Gebühren in beide Richtungen plus effektiver Satz je Ticket.',
+  },
+  'youtube-money-calculator': {
+    name: 'YouTube-Geldrechner',
+    shortIntro: 'Aufrufe × RPM-Spanne → monatliches und jährliches AdSense-Einkommen.',
+  },
+  'nps-calculator': {
+    name: 'NPS-Rechner',
+    shortIntro: 'Promotoren − Kritiker: dein NPS-Score mit Bain-Stufen.',
+  },
+  'conversion-rate-calculator': {
+    name: 'Conversion-Rate-Rechner',
+    shortIntro: 'Besucher → Conversions: Rate, CPA und Steigerungsziel.',
+  },
+  'gym-cost-per-visit-calculator': {
+    name: 'Kosten-pro-Besuch-Rechner',
+    shortIntro: 'Beitrag ÷ echte Besuche: Kosten pro Training und ob es sich lohnt.',
+  },
+  'concrete-calculator': {
+    name: 'Betonrechner',
+    shortIntro: 'Platte, Stütze oder Stufe zu Kubikyards und 40/60/80-lb-Säcken.',
+  },
+  'mulch-calculator': {
+    name: 'Mulchrechner',
+    shortIntro: 'Beet und Höhe zu Kubikyards, Säcken und Kosten.',
+  },
+  'gravel-calculator': {
+    name: 'Kiesrechner',
+    shortIntro: 'Fläche und Dicke zu Yards und Tonnen nach Materialdichte.',
+  },
+  'drywall-calculator': {
+    name: 'Gipsplatten-Rechner',
+    shortIntro: 'Wände und Decke zu Platten, Schrauben und Spachtelmasse.',
+  },
+  'roofing-calculator': {
+    name: 'Dachrechner',
+    shortIntro: 'Grundriss × Neigung zu Squares, Schindelbündeln und Bahnen.',
+  },
+  'fence-calculator': {
+    name: 'Zaunrechner',
+    shortIntro: 'Länge und Pfostenabstand zu Pfosten, Latten und Beton.',
+  },
+  'paver-calculator': {
+    name: 'Pflasterrechner',
+    shortIntro: 'Fläche zu Steinen, Schotterbasis und Bettsand.',
+  },
+  'deck-board-calculator': {
+    name: 'Deckbretter-Rechner',
+    shortIntro: 'Fläche, Breite und Fuge zu Brettern, Laufmetern und Balken.',
+  },
+  'dividend-calculator': {
+    name: 'Dividenden-Rechner',
+    shortIntro: 'Dividendeneinkommen, Rendite und den DRIP-Effekt über Jahrzehnte schätzen.',
+  },
+  'dca-calculator': {
+    name: 'Sparplan-Rechner',
+    shortIntro: 'Durchschnittskurs berechnen und Sparplan gegen Einmalanlage testen.',
+  },
+  'stock-average-calculator': {
+    name: 'Aktien-Verbilligungsrechner',
+    shortIntro: 'Gewichteter Durchschnittskurs über Pakete und das unrealisierte G/V.',
+  },
+  'options-profit-calculator': {
+    name: 'Optionen-Gewinn-Rechner',
+    shortIntro: 'Break-even, Maximalwerte und die Auszahlungskurve zum Verfall.',
+  },
+  'crypto-profit-calculator': {
+    name: 'Krypto-Gewinn-Rechner',
+    shortIntro: 'Nettogewinn nach Gebühren, ROI und Ziel-Verkaufskurs.',
+  },
+  'treasury-bill-calculator': {
+    name: 'Treasury-Bill-Rechner',
+    shortIntro: 'Kaufpreis und beide Renditekonventionen (360/365 Tage).',
+  },
+  'bond-yield-calculator': {
+    name: 'Anleihenrendite-Rechner',
+    shortIntro: 'Laufende Rendite und genäherte Umlaufrendite auf einen Blick.',
+  },
+  'lottery-odds-calculator': {
+    name: 'Lotto-Wahrscheinlichkeitsrechner',
+    shortIntro: 'Exakte Chancen der großen Lotterien oder eigener Trommeln.',
+  },
+  'self-employment-tax-calculator': {
+    name: 'Selbstständigen-Steuerrechner',
+    shortIntro: 'SE-Steuer auf Freelance-Gewinn: 15,3 % und die absetzbare Hälfte.',
+  },
+  'depreciation-calculator': {
+    name: 'Abschreibungsrechner',
+    shortIntro: 'Linear, degressiv und digitale Summe, Jahr für Jahr.',
+  },
+  'mileage-reimbursement-calculator': {
+    name: 'Meilen-Erstattungsrechner',
+    shortIntro: 'Meilen × IRS-Pauschale: 70 ¢ geschäftlich ab 2025.',
+  },
+  'contractor-vs-employee-calculator': {
+    name: '1099-vs-W-2-Rechner',
+    shortIntro: 'Dasselbe Gehalt, beide Welten: die echte Netto-Differenz.',
+  },
+  'gross-up-calculator': {
+    name: 'Gross-Up-Rechner',
+    shortIntro: 'Vom Wunsch-Netto zum exakten Brutto, das gezahlt werden muss.',
+  },
+  'commute-cost-calculator': {
+    name: 'Pendelkosten-Rechner',
+    shortIntro: 'Jahreskosten des Arbeitswegs — in Geld und in Stunden.',
+  },
+  'smoking-cost-calculator': {
+    name: 'Rauchkosten-Rechner',
+    shortIntro: 'Wochen-, Jahres- und 10-Jahres-Kosten plus angelegte Alternative.',
+  },
+  'emergency-fund-calculator': {
+    name: 'Notgroschen-Rechner',
+    shortIntro: 'Ziel von 3-12 Monaten setzen und die Füllzeit sehen.',
+  },
+  'btu-calculator': {
+    name: 'BTU-Rechner',
+    shortIntro: 'Klimageräte nach Fläche, Decke, Sonne und Personen dimensionieren – in BTU und Tonnen.',
+  },
+  'board-foot-calculator': {
+    name: 'Board-Foot-Rechner',
+    shortIntro: 'Dicke × Breite × Länge ÷ 12: Volumen und Kosten der Holzbestellung.',
+  },
+  'wallpaper-calculator': {
+    name: 'Tapetenrechner',
+    shortIntro: 'Bahnen, Rapport und Rollen: Tapete bedarfsgerecht kalkuliert.',
+  },
+  'raised-bed-soil-calculator': {
+    name: 'Hochbeet-Erde-Rechner',
+    shortIntro: 'Wie viel Erde das Hochbeet braucht – mit Mel-Mix und Spar-Mischung.',
+  },
+  'generator-wattage-calculator': {
+    name: 'Generator-Rechner',
+    shortIntro: 'Geräte ankreuzen: Betriebslast, Anlaufspitze und empfohlene Generatorgröße.',
+  },
+  'pool-volume-calculator': {
+    name: 'Poolvolumen-Rechner',
+    shortIntro: 'Gallonen und Liter für Rechteck-, Rund- und Nierenbecken samt Umwälzzeit.',
+  },
+  'coffee-ratio-calculator': {
+    name: 'Kaffeeverhältnis-Rechner',
+    shortIntro: 'Wasser und Kaffee in Gramm je Methode: Filter, French Press, Espresso, Cold Brew.',
+  },
+  'bread-hydration-calculator': {
+    name: 'Brot-Hydratationsrechner',
+    shortIntro: 'Wasser ÷ Mehl in Bäckerprozent, mit Levain-Anteil und Gesamtteiggewicht.',
+  },
+  'ovulation-calculator': {
+    name: 'Eisprungrechner',
+    shortIntro: 'Eisprungtag und fruchtbares Fenster aus deinem Zyklus.',
+  },
+  'pregnancy-weight-gain-calculator': {
+    name: 'Schwangerschaftszunahme-Rechner',
+    shortIntro: 'IOM-Bereiche und Wochentempo nach Vor-BMI.',
+  },
+  'diaper-cost-calculator': {
+    name: 'Windelkosten-Rechner',
+    shortIntro: 'Monats-, Jahres- und Gesamtkosten für Windeln.',
+  },
+  'cat-age-calculator': {
+    name: 'Katzenalter-Rechner',
+    shortIntro: 'Katzenjahre in Menschenjahre nach der 15/24/+4-Kurve.',
+  },
+  'cat-food-calculator': {
+    name: 'Katzenfutter-Rechner',
+    shortIntro: 'Tageskalorien, Dosen und Gramm nach Lebensphase.',
+  },
+  'zodiac-sign-calculator': {
+    name: 'Sternzeichen-Rechner',
+    shortIntro: 'Dein Sternzeichen nach Geburtstag, Element und Modalität.',
+  },
+  'chinese-zodiac-calculator': {
+    name: 'Chinesischer Tierkreis-Rechner',
+    shortIntro: 'Tier, Element und Yin-Yang nach Geburtsjahr.',
+  },
+  'shoe-size-converter': {
+    name: 'Schuhgrößen-Konverter',
+    shortIntro: 'US, UK, EU und cm für Damen, Herren und Kinder.',
+  },
+  'time-card-calculator': {
+    name: 'Stundenzettel-Rechner',
+    shortIntro: 'Stempelzeiten in Dezimalstunden, Wochensumme und Überstunden.',
+  },
+  'business-days-calculator': {
+    name: 'Werktage-Rechner',
+    shortIntro: 'Werktage addieren oder abziehen — Wochenende und Feiertage ausgespart.',
+  },
+  'week-number-calculator': {
+    name: 'Wochennummer-Rechner',
+    shortIntro: 'ISO-Wochennummer, Wochenpanne und Restwochen jedes Datums.',
+  },
+  'pto-accrual-calculator': {
+    name: 'Urlaubssaldo-Rechner',
+    shortIntro: 'Angesparter Urlaub und Prognose zum Jahreswechsel.',
+  },
+  'download-time-calculator': {
+    name: 'Downloadzeit-Rechner',
+    shortIntro: 'Dateigröße ÷ Speed (mit Overhead) → Stunden, Minuten, Sekunden.',
+  },
+  'gps-coordinate-converter': {
+    name: 'GPS-Koordinatenkonverter',
+    shortIntro: 'Dezimalgrade ↔ GMS ↔ GDM mit Hemisphären-Erkennung.',
+  },
+  'tire-size-calculator': {
+    name: 'Reifengrößen-Rechner',
+    shortIntro: 'Reifengröße dekodiert; Größenvergleich mit Tachoabweichung.',
+  },
+  'wind-chill-calculator': {
+    name: 'Windchill-Rechner',
+    shortIntro: 'Temperatur + Wind → gefühlte Temperatur nach JAG/TI-Formel.',
+  },
+  'quadratic-equation-solver': {
+    name: 'Quadratische Gleichungen lösen',
+    shortIntro: 'Diskriminante, Wurzeln, Scheitelpunkt und Faktorform auf einmal.',
+  },
+  'slope-calculator': {
+    name: 'Steigungsrechner',
+    shortIntro: 'Zwei Punkte → Steigung, Achsenabschnitt, Winkel, Gleichung.',
+  },
+  'confidence-interval-calculator': {
+    name: 'Konfidenzintervall-Rechner',
+    shortIntro: 'KI für Mittelwert oder Anteil auf 90/95/99%.',
+  },
+  'sample-size-calculator': {
+    name: 'Stichprobengrößen-Rechner',
+    shortIntro: 'Wie viele Befragte nötig sind, nach Konfidenz und Fehlerband.',
+  },
+  'z-score-calculator': {
+    name: 'z-Wert-Rechner',
+    shortIntro: 'Standardisieren, Percentil und p-Wert — auch z→x.',
+  },
+  'bayes-theorem-calculator': {
+    name: 'Bayes-Theorem-Rechner',
+    shortIntro: 'Was ein positives Screening-Ergebnis wirklich bedeutet.',
+  },
+  'heat-index-calculator': {
+    name: 'Hitzeindex-Rechner',
+    shortIntro: 'Temperatur + Feuchte → Hitzeindex des NWS und Risikostufe.',
+  },
+  'dew-point-calculator': {
+    name: 'Taupunktrechner',
+    shortIntro: 'Magnus-Tetens-Taupunkt, absolute Feuchte und Komfort.',
+  },
+  'passphrase-generator': {
+    name: 'Passphrasen-Generator',
+    shortIntro: 'Zufallswörter aus einer 256-Liste mit Live-Entropie.',
+  },
+  'border-radius-generator': {
+    name: 'Border-Radius-Generator',
+    shortIntro: 'Vier Ecken, Ellipsen-Syntax und CSS mit Live-Vorschau.',
+  },
+  'color-palette-generator': {
+    name: 'Farbpaletten-Generator',
+    shortIntro: 'Aus einer Grundfarbe fünf Harmonieschemata mit hex/rgb/hsl.',
+  },
+  'image-compressor': {
+    name: 'Bildkompressor',
+    shortIntro: 'JPG/WebP lokal neu kodieren mit echtem Größenvergleich.',
+  },
+  'username-generator': {
+    name: 'Benutzernamen-Generator',
+    shortIntro: 'Stichwort + vier Stile, gefiltert nach Maximallänge.',
+  },
+  'secret-santa-generator': {
+    name: 'Wichtel-Generator',
+    shortIntro: 'Geschlossener Kreis mit Ausschlüssen, einzeln aufdecken.',
+  },
+  'faq-schema-generator': {
+    name: 'FAQ-Schema-Generator',
+    shortIntro: 'Frage-Antwort-Paare einfügen und FAQPage-JSON-LD erhalten.',
+  },
+  'number-to-words-converter': {
+    name: 'Zahlen-in-Wörter-Umwandler',
+    shortIntro: 'Zahlen als englische Wörter — Billionen, Dezimalen, Ordinalzahlen.',
+  },
+  'ohms-law-calculator': {
+    name: 'Ohmscher-Gesetz-Rechner',
+    shortIntro: 'Zwei von V, I, R oder P eingeben, den Rest lösen.',
+  },
+  'led-resistor-calculator': {
+    name: 'LED-Vorwiderstandsrechner',
+    shortIntro: 'Spannung, Flussspannung, Strom rein — Ideal- und E12-Wert raus.',
+  },
+  'resistor-color-code-calculator': {
+    name: 'Widerstands-Farbcode-Rechner',
+    shortIntro: '4-6 Ringe deuten oder Ohm in Farben zurückübersetzen.',
+  },
+  'voltage-divider-calculator': {
+    name: 'Spannungsteiler-Rechner',
+    shortIntro: 'Vin, R1, R2 zu Vout und Leistung — oder R2 rückwärts.',
+  },
+  'tone-generator': {
+    name: 'Ton-Generator',
+    shortIntro: 'Sinus, Rechteck, Dreieck und Sägezahn von 20 Hz bis 20 kHz.',
+  },
+  'bpm-tap-counter': {
+    name: 'BPM-Tap-Zähler',
+    shortIntro: 'Mit dem Song tippen und das BPM lesen, inkl. Konsistenz.',
+  },
+  'delay-time-calculator': {
+    name: 'Delay-Zeit-Rechner',
+    shortIntro: 'BPM zu Millisekunden je Notenwert und LFO-Raten.',
+  },
+  'utm-link-builder': {
+    name: 'UTM-Link-Generator',
+    shortIntro: 'Basis-URL plus UTM-Parameter: fertiger Tracking-Link inklusive Naming-Hinweisen.',
+  },
+  'credit-card-validator': {
+    name: 'Kreditkarten-Prüfer',
+    shortIntro: 'Luhn-Prüfsumme plus Marken-Präfix und Längenregeln, rein lokal.',
+  },
+  'iban-validator': {
+    name: 'IBAN-Prüfer',
+    shortIntro: 'Länderlängen aus dem offiziellen Register plus mod-97, im Browser.',
+  },
+  'graphql-formatter': {
+    name: 'GraphQL-Formatter',
+    shortIntro: 'GraphQL mit echtem Lexer beautifacen und minifizieren — Queries und SDL.',
+  },
+  'http-status-code-lookup': {
+    name: 'HTTP-Statuscode-Suche',
+    shortIntro: 'Alle 62 IANA-Codes nach Nummer oder Stichwort, mit Lösungen.',
+  },
+  'css-minifier': {
+    name: 'CSS-Minifier',
+    shortIntro: 'Bytesichere Kompression: calc()-Leerzeichen, Strings und /*!-Banner überleben.',
+  },
+  'csv-to-sql-converter': {
+    name: 'CSV-zu-SQL-Konverter',
+    shortIntro: 'CSV rein, gestapelte Mehrfach-INSERTs raus — mit Escaping und NULL-Optionen.',
+  },
+  'rot13-converter': {
+    name: 'ROT13-Konverter',
+    shortIntro: 'ROT13 kodieren und dekodieren, optional ROT5 und ROT-N-Verschiebung.',
+  },
 
 }

@@ -279,6 +279,117 @@ import { llmApiCostCalculatorL10n } from './tools-l10n/llm-api-cost-calculator'
 import { runwayCalculatorL10n } from './tools-l10n/runway-calculator'
 import { freelanceRateCalculatorL10n } from './tools-l10n/freelance-rate-calculator'
 import { dockerRunToComposeL10n } from './tools-l10n/docker-run-to-compose'
+import { HouseAffordabilityCalculatorL10n } from './tools-l10n/mortgage-affordability-calculator'
+import { RefinanceBreakEvenCalculatorL10n } from './tools-l10n/refinance-break-even-calculator'
+import { BiweeklyMortgagePaymentCalculatorL10n } from './tools-l10n/biweekly-mortgage-payment-calculator'
+import { ClosingCostCalculatorL10n } from './tools-l10n/closing-cost-calculator'
+import { PropertyTaxCalculatorL10n } from './tools-l10n/property-tax-calculator'
+import { ProratedRentCalculatorL10n } from './tools-l10n/prorated-rent-calculator'
+import { RentalPropertyCalculatorL10n } from './tools-l10n/rental-property-calculator'
+import { HouseFlipCalculatorL10n } from './tools-l10n/house-flip-calculator'
+import { CollegeSavingsCalculatorL10n } from './tools-l10n/college-savings-calculator'
+import { Match401kCalculatorL10n } from './tools-l10n/401k-match-calculator'
+import { SocialSecurityBreakEvenCalculatorL10n } from './tools-l10n/social-security-break-even-calculator'
+import { StudentLoanCalculatorL10n } from './tools-l10n/student-loan-payment-calculator'
+import { CarLeaseCalculatorL10n } from './tools-l10n/car-lease-calculator'
+import { EvChargingCostCalculatorL10n } from './tools-l10n/ev-charging-cost-calculator'
+import { RentBudgetCalculatorL10n } from './tools-l10n/rent-budget-calculator'
+import { ChristmasBudgetCalculatorL10n } from './tools-l10n/christmas-budget-calculator'
+import { OneRepMaxCalculatorL10n } from './tools-l10n/one-rep-max-calculator'
+import { RaceTimePredictorL10n } from './tools-l10n/race-time-predictor'
+import { Vo2MaxCalculatorL10n } from './tools-l10n/vo2-max-calculator'
+import { BodySurfaceAreaCalculatorL10n } from './tools-l10n/body-surface-area-calculator'
+import { WaistToHeightRatioCalculatorL10n } from './tools-l10n/waist-to-height-ratio-calculator'
+import { StepsToMilesCalculatorL10n } from './tools-l10n/steps-to-miles-calculator'
+import { WeightLossGoalCalculatorL10n } from './tools-l10n/weight-loss-goal-calculator'
+import { FiberIntakeCalculatorL10n } from './tools-l10n/fiber-intake-calculator'
+import { PayPalFeeCalculatorL10n } from './tools-l10n/paypal-fee-calculator'
+import { EtsyFeeCalculatorL10n } from './tools-l10n/etsy-fee-calculator'
+import { AmazonSellerFeeCalculatorL10n } from './tools-l10n/amazon-seller-fee-calculator'
+import { SquareFeeCalculatorL10n } from './tools-l10n/square-fee-calculator'
+import { YouTubeMoneyCalculatorL10n } from './tools-l10n/youtube-money-calculator'
+import { NpsCalculatorL10n } from './tools-l10n/nps-calculator'
+import { ConversionRateCalculatorL10n } from './tools-l10n/conversion-rate-calculator'
+import { GymCostPerVisitCalculatorL10n } from './tools-l10n/gym-cost-per-visit-calculator'
+import { ConcreteCalculatorL10n } from './tools-l10n/concrete-calculator'
+import { MulchCalculatorL10n } from './tools-l10n/mulch-calculator'
+import { GravelCalculatorL10n } from './tools-l10n/gravel-calculator'
+import { DrywallCalculatorL10n } from './tools-l10n/drywall-calculator'
+import { RoofingCalculatorL10n } from './tools-l10n/roofing-calculator'
+import { FenceCalculatorL10n } from './tools-l10n/fence-calculator'
+import { PaverCalculatorL10n } from './tools-l10n/paver-calculator'
+import { DeckBoardCalculatorL10n } from './tools-l10n/deck-board-calculator'
+import { DividendCalculatorL10n } from './tools-l10n/dividend-calculator'
+import { DcaCalculatorL10n } from './tools-l10n/dca-calculator'
+import { StockAverageCalculatorL10n } from './tools-l10n/stock-average-calculator'
+import { OptionsProfitCalculatorL10n } from './tools-l10n/options-profit-calculator'
+import { CryptoProfitCalculatorL10n } from './tools-l10n/crypto-profit-calculator'
+import { TreasuryBillCalculatorL10n } from './tools-l10n/treasury-bill-calculator'
+import { BondYieldCalculatorL10n } from './tools-l10n/bond-yield-calculator'
+import { LotteryOddsCalculatorL10n } from './tools-l10n/lottery-odds-calculator'
+import { SelfEmploymentTaxCalculatorL10n } from './tools-l10n/self-employment-tax-calculator'
+import { DepreciationCalculatorL10n } from './tools-l10n/depreciation-calculator'
+import { MileageReimbursementCalculatorL10n } from './tools-l10n/mileage-reimbursement-calculator'
+import { ContractorVsEmployeeCalculatorL10n } from './tools-l10n/contractor-vs-employee-calculator'
+import { GrossUpCalculatorL10n } from './tools-l10n/gross-up-calculator'
+import { CommuteCostCalculatorL10n } from './tools-l10n/commute-cost-calculator'
+import { SmokingCostCalculatorL10n } from './tools-l10n/smoking-cost-calculator'
+import { EmergencyFundCalculatorL10n } from './tools-l10n/emergency-fund-calculator'
+import { BtuCalculatorL10n } from './tools-l10n/btu-calculator'
+import { BoardFootCalculatorL10n } from './tools-l10n/board-foot-calculator'
+import { WallpaperCalculatorL10n } from './tools-l10n/wallpaper-calculator'
+import { RaisedBedSoilCalculatorL10n } from './tools-l10n/raised-bed-soil-calculator'
+import { GeneratorWattageCalculatorL10n } from './tools-l10n/generator-wattage-calculator'
+import { PoolVolumeCalculatorL10n } from './tools-l10n/pool-volume-calculator'
+import { CoffeeRatioCalculatorL10n } from './tools-l10n/coffee-ratio-calculator'
+import { BreadHydrationCalculatorL10n } from './tools-l10n/bread-hydration-calculator'
+import { OvulationCalculatorL10n } from './tools-l10n/ovulation-calculator'
+import { PregnancyWeightGainCalculatorL10n } from './tools-l10n/pregnancy-weight-gain-calculator'
+import { DiaperCostCalculatorL10n } from './tools-l10n/diaper-cost-calculator'
+import { CatAgeCalculatorL10n } from './tools-l10n/cat-age-calculator'
+import { CatFoodCalculatorL10n } from './tools-l10n/cat-food-calculator'
+import { ZodiacSignCalculatorL10n } from './tools-l10n/zodiac-sign-calculator'
+import { ChineseZodiacCalculatorL10n } from './tools-l10n/chinese-zodiac-calculator'
+import { ShoeSizeConverterL10n } from './tools-l10n/shoe-size-converter'
+import { TimeCardCalculatorL10n } from './tools-l10n/time-card-calculator'
+import { BusinessDaysCalculatorL10n } from './tools-l10n/business-days-calculator'
+import { WeekNumberCalculatorL10n } from './tools-l10n/week-number-calculator'
+import { PtoAccrualCalculatorL10n } from './tools-l10n/pto-accrual-calculator'
+import { DownloadTimeCalculatorL10n } from './tools-l10n/download-time-calculator'
+import { GpsCoordinateConverterL10n } from './tools-l10n/gps-coordinate-converter'
+import { TireSizeCalculatorL10n } from './tools-l10n/tire-size-calculator'
+import { WindChillCalculatorL10n } from './tools-l10n/wind-chill-calculator'
+import { QuadraticEquationSolverL10n } from './tools-l10n/quadratic-equation-solver'
+import { SlopeCalculatorL10n } from './tools-l10n/slope-calculator'
+import { ConfidenceIntervalCalculatorL10n } from './tools-l10n/confidence-interval-calculator'
+import { SampleSizeCalculatorL10n } from './tools-l10n/sample-size-calculator'
+import { ZScoreCalculatorL10n } from './tools-l10n/z-score-calculator'
+import { BayesTheoremCalculatorL10n } from './tools-l10n/bayes-theorem-calculator'
+import { HeatIndexCalculatorL10n } from './tools-l10n/heat-index-calculator'
+import { DewPointCalculatorL10n } from './tools-l10n/dew-point-calculator'
+import { PassphraseGeneratorL10n } from './tools-l10n/passphrase-generator'
+import { BorderRadiusGeneratorL10n } from './tools-l10n/border-radius-generator'
+import { ColorPaletteGeneratorL10n } from './tools-l10n/color-palette-generator'
+import { ImageCompressorL10n } from './tools-l10n/image-compressor'
+import { UsernameGeneratorL10n } from './tools-l10n/username-generator'
+import { SecretSantaGeneratorL10n } from './tools-l10n/secret-santa-generator'
+import { FaqSchemaGeneratorL10n } from './tools-l10n/faq-schema-generator'
+import { NumberToWordsConverterL10n } from './tools-l10n/number-to-words-converter'
+import { OhmsLawCalculatorL10n } from './tools-l10n/ohms-law-calculator'
+import { LedResistorCalculatorL10n } from './tools-l10n/led-resistor-calculator'
+import { ResistorColorCodeCalculatorL10n } from './tools-l10n/resistor-color-code-calculator'
+import { VoltageDividerCalculatorL10n } from './tools-l10n/voltage-divider-calculator'
+import { ToneGeneratorL10n } from './tools-l10n/tone-generator'
+import { BpmTapCounterL10n } from './tools-l10n/bpm-tap-counter'
+import { DelayTimeCalculatorL10n } from './tools-l10n/delay-time-calculator'
+import { UtmLinkBuilderL10n } from './tools-l10n/utm-link-builder'
+import { CreditCardValidatorL10n } from './tools-l10n/credit-card-validator'
+import { IbanValidatorL10n } from './tools-l10n/iban-validator'
+import { GraphqlFormatterL10n } from './tools-l10n/graphql-formatter'
+import { HttpStatusCodeLookupL10n } from './tools-l10n/http-status-code-lookup'
+import { CssMinifierL10n } from './tools-l10n/css-minifier'
+import { CsvToSqlConverterL10n } from './tools-l10n/csv-to-sql-converter'
+import { Rot13ConverterL10n } from './tools-l10n/rot13-converter'
 
 const registry: Record<string, ToolL10n> = {
   'loan-calculator': loanCalculatorL10n,
@@ -520,6 +631,117 @@ const registry: Record<string, ToolL10n> = {
   'runway-calculator': runwayCalculatorL10n,
   'freelance-rate-calculator': freelanceRateCalculatorL10n,
   'docker-run-to-compose': dockerRunToComposeL10n,
+  'mortgage-affordability-calculator': HouseAffordabilityCalculatorL10n,
+  'refinance-break-even-calculator': RefinanceBreakEvenCalculatorL10n,
+  'biweekly-mortgage-payment-calculator': BiweeklyMortgagePaymentCalculatorL10n,
+  'closing-cost-calculator': ClosingCostCalculatorL10n,
+  'property-tax-calculator': PropertyTaxCalculatorL10n,
+  'prorated-rent-calculator': ProratedRentCalculatorL10n,
+  'rental-property-calculator': RentalPropertyCalculatorL10n,
+  'house-flip-calculator': HouseFlipCalculatorL10n,
+  'college-savings-calculator': CollegeSavingsCalculatorL10n,
+  '401k-match-calculator': Match401kCalculatorL10n,
+  'social-security-break-even-calculator': SocialSecurityBreakEvenCalculatorL10n,
+  'student-loan-payment-calculator': StudentLoanCalculatorL10n,
+  'car-lease-calculator': CarLeaseCalculatorL10n,
+  'ev-charging-cost-calculator': EvChargingCostCalculatorL10n,
+  'rent-budget-calculator': RentBudgetCalculatorL10n,
+  'christmas-budget-calculator': ChristmasBudgetCalculatorL10n,
+  'one-rep-max-calculator': OneRepMaxCalculatorL10n,
+  'race-time-predictor': RaceTimePredictorL10n,
+  'vo2-max-calculator': Vo2MaxCalculatorL10n,
+  'body-surface-area-calculator': BodySurfaceAreaCalculatorL10n,
+  'waist-to-height-ratio-calculator': WaistToHeightRatioCalculatorL10n,
+  'steps-to-miles-calculator': StepsToMilesCalculatorL10n,
+  'weight-loss-goal-calculator': WeightLossGoalCalculatorL10n,
+  'fiber-intake-calculator': FiberIntakeCalculatorL10n,
+  'paypal-fee-calculator': PayPalFeeCalculatorL10n,
+  'etsy-fee-calculator': EtsyFeeCalculatorL10n,
+  'amazon-seller-fee-calculator': AmazonSellerFeeCalculatorL10n,
+  'square-fee-calculator': SquareFeeCalculatorL10n,
+  'youtube-money-calculator': YouTubeMoneyCalculatorL10n,
+  'nps-calculator': NpsCalculatorL10n,
+  'conversion-rate-calculator': ConversionRateCalculatorL10n,
+  'gym-cost-per-visit-calculator': GymCostPerVisitCalculatorL10n,
+  'concrete-calculator': ConcreteCalculatorL10n,
+  'mulch-calculator': MulchCalculatorL10n,
+  'gravel-calculator': GravelCalculatorL10n,
+  'drywall-calculator': DrywallCalculatorL10n,
+  'roofing-calculator': RoofingCalculatorL10n,
+  'fence-calculator': FenceCalculatorL10n,
+  'paver-calculator': PaverCalculatorL10n,
+  'deck-board-calculator': DeckBoardCalculatorL10n,
+  'dividend-calculator': DividendCalculatorL10n,
+  'dca-calculator': DcaCalculatorL10n,
+  'stock-average-calculator': StockAverageCalculatorL10n,
+  'options-profit-calculator': OptionsProfitCalculatorL10n,
+  'crypto-profit-calculator': CryptoProfitCalculatorL10n,
+  'treasury-bill-calculator': TreasuryBillCalculatorL10n,
+  'bond-yield-calculator': BondYieldCalculatorL10n,
+  'lottery-odds-calculator': LotteryOddsCalculatorL10n,
+  'self-employment-tax-calculator': SelfEmploymentTaxCalculatorL10n,
+  'depreciation-calculator': DepreciationCalculatorL10n,
+  'mileage-reimbursement-calculator': MileageReimbursementCalculatorL10n,
+  'contractor-vs-employee-calculator': ContractorVsEmployeeCalculatorL10n,
+  'gross-up-calculator': GrossUpCalculatorL10n,
+  'commute-cost-calculator': CommuteCostCalculatorL10n,
+  'smoking-cost-calculator': SmokingCostCalculatorL10n,
+  'emergency-fund-calculator': EmergencyFundCalculatorL10n,
+  'btu-calculator': BtuCalculatorL10n,
+  'board-foot-calculator': BoardFootCalculatorL10n,
+  'wallpaper-calculator': WallpaperCalculatorL10n,
+  'raised-bed-soil-calculator': RaisedBedSoilCalculatorL10n,
+  'generator-wattage-calculator': GeneratorWattageCalculatorL10n,
+  'pool-volume-calculator': PoolVolumeCalculatorL10n,
+  'coffee-ratio-calculator': CoffeeRatioCalculatorL10n,
+  'bread-hydration-calculator': BreadHydrationCalculatorL10n,
+  'ovulation-calculator': OvulationCalculatorL10n,
+  'pregnancy-weight-gain-calculator': PregnancyWeightGainCalculatorL10n,
+  'diaper-cost-calculator': DiaperCostCalculatorL10n,
+  'cat-age-calculator': CatAgeCalculatorL10n,
+  'cat-food-calculator': CatFoodCalculatorL10n,
+  'zodiac-sign-calculator': ZodiacSignCalculatorL10n,
+  'chinese-zodiac-calculator': ChineseZodiacCalculatorL10n,
+  'shoe-size-converter': ShoeSizeConverterL10n,
+  'time-card-calculator': TimeCardCalculatorL10n,
+  'business-days-calculator': BusinessDaysCalculatorL10n,
+  'week-number-calculator': WeekNumberCalculatorL10n,
+  'pto-accrual-calculator': PtoAccrualCalculatorL10n,
+  'download-time-calculator': DownloadTimeCalculatorL10n,
+  'gps-coordinate-converter': GpsCoordinateConverterL10n,
+  'tire-size-calculator': TireSizeCalculatorL10n,
+  'wind-chill-calculator': WindChillCalculatorL10n,
+  'quadratic-equation-solver': QuadraticEquationSolverL10n,
+  'slope-calculator': SlopeCalculatorL10n,
+  'confidence-interval-calculator': ConfidenceIntervalCalculatorL10n,
+  'sample-size-calculator': SampleSizeCalculatorL10n,
+  'z-score-calculator': ZScoreCalculatorL10n,
+  'bayes-theorem-calculator': BayesTheoremCalculatorL10n,
+  'heat-index-calculator': HeatIndexCalculatorL10n,
+  'dew-point-calculator': DewPointCalculatorL10n,
+  'passphrase-generator': PassphraseGeneratorL10n,
+  'border-radius-generator': BorderRadiusGeneratorL10n,
+  'color-palette-generator': ColorPaletteGeneratorL10n,
+  'image-compressor': ImageCompressorL10n,
+  'username-generator': UsernameGeneratorL10n,
+  'secret-santa-generator': SecretSantaGeneratorL10n,
+  'faq-schema-generator': FaqSchemaGeneratorL10n,
+  'number-to-words-converter': NumberToWordsConverterL10n,
+  'ohms-law-calculator': OhmsLawCalculatorL10n,
+  'led-resistor-calculator': LedResistorCalculatorL10n,
+  'resistor-color-code-calculator': ResistorColorCodeCalculatorL10n,
+  'voltage-divider-calculator': VoltageDividerCalculatorL10n,
+  'tone-generator': ToneGeneratorL10n,
+  'bpm-tap-counter': BpmTapCounterL10n,
+  'delay-time-calculator': DelayTimeCalculatorL10n,
+  'utm-link-builder': UtmLinkBuilderL10n,
+  'credit-card-validator': CreditCardValidatorL10n,
+  'iban-validator': IbanValidatorL10n,
+  'graphql-formatter': GraphqlFormatterL10n,
+  'http-status-code-lookup': HttpStatusCodeLookupL10n,
+  'css-minifier': CssMinifierL10n,
+  'csv-to-sql-converter': CsvToSqlConverterL10n,
+  'rot13-converter': Rot13ConverterL10n,
 }
 
 /**

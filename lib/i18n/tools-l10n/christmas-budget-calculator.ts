@@ -1,0 +1,92 @@
+/**
+ * christmas-budget-calculator 本地化 bundle —— zh / es / de(B4 家庭与人生大事批)
+ * 覆盖: ui。useCases/formula/faqs 缺失自动回退英文。
+ */
+import type { ToolL10n } from '../tool-l10n'
+
+export const ChristmasBudgetCalculatorL10n: ToolL10n = {
+  zh: {
+    useCases: ['把节日总预算拆成礼物、装饰、餐饮三大块', '按收礼人数算每人该花多少', '确保家人/朋友/同事各拿到合理份额', '提前定预算,避免一月账单惊喜'],
+    faqs: [
+      { q: '预算按什么比例拆?', a: '典型拆法:礼物 70%、装饰 15%、餐饮聚会 15%。礼物池内部再按家人 60%、朋友 30%、同事 10% 加权——亲近程度决定单位预算,这也是绝大多数节日支出指南的共识结构。' },
+      { q: '人均金额怎么算?', a: '各人群分到的金额 ÷ 该人群人数。$800 预算下礼物池 $560:家人分 $336(5 人 ≈ $67/人)、朋友 $168(6 人 = $28/人)、同事 $56(4 人 = $14/人)。人数变,人均自动跟着变。' },
+      { q: '每个人该花多少钱才"合适"?', a: '没有标准答案,但预算制的方法是"总预算定盘子、比例定结构、人数定单价":先定你能承受的总额,再让工具算出每个人多少,而不是进店现想。调查显示多数家庭实际超支 30% 以上,几乎都因为没先定盘。' },
+      { q: '怎么避免一月账单惊吓?', a: '十月定总额、黑五前完成清单、单笔不超过预算人均的 1.5 倍。把本工具的人均数字直接写进购物清单,进场前核对——"预算漂移"多发生在最后一周的凑单和加购上。' },
+    ],
+    ui: {
+      'chartTitle': '节日预算构成',
+      'slice.gifts': '礼物 70%',
+      'slice.decor': '装饰 15%',
+      'slice.food': '餐饮 15%',
+      'in.total': '节日总预算',
+      'in.family': '家人人数',
+      'in.friends': '朋友人数',
+      'in.coworkers': '同事人数',
+      'out.giftPool': '礼物总池 (70%)',
+      'out.perFamily': '每位家人',
+      'out.perFriend': '每位朋友',
+      'out.perCoworker': '每位同事',
+      'out.decor': '装饰 (15%)',
+      'out.food': '餐饮聚会 (15%)',
+      'outSub.giftPool': '家人 60% / 朋友 30% / 同事 10%',
+      'note': '🎄 典型拆分 70/15/15(礼物/装饰/餐饮),礼物池内按家人 60%、朋友 30%、同事 10% 加权。真正的功夫在执行:把人均数字写进购物清单,最后一周的"顺手加购"才是超支主力。',
+      'errInvalid': '请输入非负的总预算与人数',
+    },
+  },
+  es: {
+    useCases: ['repartir el presupuesto festivo en regalos, decoración y comida', 'calcular cuánto por persona según tu lista', 'asegurar una parte razonable para familia, amigos y compañeros', 'fijar el tope antes de evitar el susto de la tarjeta en enero'],
+    faqs: [
+      { q: '¿En qué proporciones se reparte?', a: 'Reparto típico: regalos 70%, decoración 15%, comida y reuniones 15%. Dentro del fondo de regalos: familia 60%, amigos 30%, compañeros 10% — la cercanía fija el gasto unitario, la estructura que coincide con casi todas las guías de gasto navideño.' },
+      { q: '¿Cómo sale el importe por persona?', a: 'Lo que recibe cada grupo ÷ su número de personas. Con 800 $: el fondo de regalos son 560 $ — familia 336 $ (5 personas ≈ 67 $), amigos 168 $ (6 = 28 $), compañeros 56 $ (4 = 14 $). Cambia un número y el por cabeza se recalcula solo.' },
+      { q: '¿Cuánto «debería» gastar por cabeza?', a: 'No hay respuesta única; el método presupuestario es «el total fija el marco, las proporciones la estructura, el censo el precio unitario». Define primero lo que puedes permitirte y deja que la calculadora reparta — la mayoría de hogares supera el gasto en 30%+ precisamente por empezar por la tienda.' },
+      { q: '¿Cómo evitar el susto de enero?', a: 'Fija el total en octubre, cierra la lista antes del Black Friday y no pases de 1,5 × el por-cabeza previsto en una sola compra. Anota los números por persona en tu lista y revísalos antes de pagar — la «deriva presupuestaria» vive en las compras de última semana.' },
+    ],
+    ui: {
+      'chartTitle': 'Composición del presupuesto festivo',
+      'slice.gifts': 'Regalos 70%',
+      'slice.decor': 'Decoración 15%',
+      'slice.food': 'Comida 15%',
+      'in.total': 'Presupuesto festivo total',
+      'in.family': 'Personas de familia',
+      'in.friends': 'Amigos',
+      'in.coworkers': 'Compañeros',
+      'out.giftPool': 'Fondo de regalos (70%)',
+      'out.perFamily': 'Por cada familiar',
+      'out.perFriend': 'Por cada amigo',
+      'out.perCoworker': 'Por cada compañero',
+      'out.decor': 'Decoración (15%)',
+      'out.food': 'Comida y fiestas (15%)',
+      'outSub.giftPool': 'familia 60% / amigos 30% / compañeros 10%',
+      'note': '🎄 Reparto típico 70/15/15 (regalos/decoración/comida), con el fondo de regalos ponderado 60/30/10 entre familia, amigos y compañeros. El trabajo real es la ejecución: lleva los números por persona a tu lista de compras — el «compra extra» de la última semana es lo que dispara el gasto.',
+      'errInvalid': 'Introduce un presupuesto y unos conteos no negativos',
+    },
+  },
+  de: {
+    useCases: ['das Festbudget auf Geschenke, Deko und Essen aufteilen', 'das Pro-Kopf-Budget nach Empfängerliste berechnen', 'Familie, Freunde und Kollegen fair gewichten', 'das Limit vorab festlegen statt im Januar zu erschrecken'],
+    faqs: [
+      { q: 'In welchen Proportionen wird verteilt?', a: 'Typisch: Geschenke 70%, Deko 15%, Essen und Feiern 15%. Innerhalb des Geschenketopfes: Familie 60%, Freunde 30%, Kollegen 10% — die Nähe bestimmt den Pro-Kopf-Satz; das ist die Struktur, die fast alle Weihnachtsbudget-Leitfäden teilen.' },
+      { q: 'Wie entsteht der Pro-Kopf-Betrag?', a: 'Gruppenbudget ÷ Personenzahl. Bei 800 $ sind 560 $ Geschenketopf — Familie 336 $ (5 Personen ≈ 67 $), Freunde 168 $ (6 = 28 $), Kollegen 56 $ (4 = 14 $). Ändert sich eine Zahl, rechnet sich der Pro-Kopf-Wert neu.' },
+      { q: 'Wie viel pro Person ist „passend“?', a: 'Darauf gibt es keine alleinige Antwort; die Budget-Methode lautet: „Die Summe setzt den Rahmen, die Proportionen die Struktur, die Liste den Stückpreis.“ Lege zuerst fest, was tragbar ist, und lass den Rechner verteilen — die meisten Haushalte überschreiten um 30%+, weil sie im Laden anfangen.' },
+      { q: 'Wie vermeidet man den Januar-Schock?', a: 'Summe im Oktober fixieren, Liste vor dem Black Friday abschließen, keine Einzelkäufe über dem 1,5-fachen Pro-Kopf-Satz. Schreib die Zahlen in die Einkaufsliste und prüfe vor dem Bezahlen — die „Budgetdrift“ entsteht in den Käufen der letzten Woche.' },
+    ],
+    ui: {
+      'chartTitle': 'Zusammensetzung des Festbudgets',
+      'slice.gifts': 'Geschenke 70%',
+      'slice.decor': 'Deko 15%',
+      'slice.food': 'Essen 15%',
+      'in.total': 'Gesamtes Festbudget',
+      'in.family': 'Familienmitglieder',
+      'in.friends': 'Freunde',
+      'in.coworkers': 'Kollegen',
+      'out.giftPool': 'Geschenketopf (70%)',
+      'out.perFamily': 'Pro Familienmitglied',
+      'out.perFriend': 'Pro Freund',
+      'out.perCoworker': 'Pro Kollege',
+      'out.decor': 'Deko (15%)',
+      'out.food': 'Essen & Feiern (15%)',
+      'outSub.giftPool': 'Familie 60% / Freunde 30% / Kollegen 10%',
+      'note': '🎄 Typische Aufteilung 70/15/15 (Geschenke/Deko/Essen), Geschenketopf gewichtet 60/30/10 auf Familie, Freunde, Kollegen. Die eigentliche Arbeit ist die Umsetzung: nimm die Pro-Kopf-Zahlen in die Einkaufsliste — die Zugeständnisse der letzten Woche sprengen das Budget.',
+      'errInvalid': 'Gib ein nicht-negatives Budget und nicht-negative Anzahlen ein',
+    },
+  },
+}

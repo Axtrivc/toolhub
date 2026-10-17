@@ -1,0 +1,98 @@
+/**
+ * ohms-law-calculator 本地化 bundle —— zh / es / de(B13 电子与音频批)
+ * 覆盖: ui + useCases + faqs + formula。
+ */
+import type { ToolL10n } from '../tool-l10n'
+
+export const OhmsLawCalculatorL10n: ToolL10n = {
+  zh: {
+    useCases: ['已知电压和阻值求流过电路的电流', '由电池电压与电流估算所需电阻', '核算电阻或元件的实际功耗选功率档', '验证电源、保险丝与线径的载流估算'],
+    faqs: [
+      { q: '为什么恰好要输入两个量?', a: 'V = I × R 与 P = V × I 把四个量约束成两个自由度:任意两个定,其余两个随之确定。多输会超定、少输则无解。' },
+      { q: '欧姆定律一共十二个公式是什么?', a: '把 V = IR 与 P = VI 组合可推出十二个式子:由 I 和 R 或 P 和 I 或 P 和 R 求 V,由 V 和 R 或 P 和 V 或 P 和 R 求 I,依此类推。本计算器按你给出的任意一对自动套用。' },
+      { q: '交流电路能用吗?', a: '能用,但要代入有效值(RMS)。对阻性负载,RMS 电压与电流完全适用这些公式;含电感电容时要用阻抗与功率因数,那是另一套算法。' },
+      { q: '为什么 9V 电池带负载后不到 9V?', a: '任何真实电源都有内阻,电流一上来端电压就被拉低。小 9V 电池超过约 100mA 就会明显跌落——要带载测量,别测开路电压。' },
+    ],
+    formula: {
+      formula: 'V = I × R\nP = V × I = I² × R = V² ÷ R',
+      variables: 'V = 电压(伏特)\nI = 电流(安培)\nR = 电阻(欧姆)\nP = 功率(瓦特)',
+      explain: '欧姆定律把电压、电流、电阻绑在一起,瓦特定律再补上功率。四个量中任意两个即可解出其余两个——所以计算器只要求输入两个。',
+      example: '第 1 步:9V 电池接 470Ω 电阻。\n第 2 步:I = V ÷ R = 9 ÷ 470 = 0.019149 A ≈ 19.15 mA。\n第 3 步:P = V × I = 9 × 0.019149 = 0.1723 W ≈ 172.3 mW。\n第 4 步(交叉验证):P = V² ÷ R = 81 ÷ 470 = 0.1723 W ✓\n结果:电流 19.15 mA,电阻耗散 172.3 mW——1/4W 电阻会偏热,选 1/2W 更从容。',
+    },
+    ui: {
+      'in.voltage': '电压',
+      'in.current': '电流',
+      'in.resistance': '电阻',
+      'in.power': '功率',
+      'out.voltage': '电压',
+      'out.current': '电流',
+      'out.resistance': '电阻',
+      'out.power': '功率',
+      'errEnterTwo': '请恰好输入两个值,其余两个留空',
+      'errDivZero': '出现除零——检查输入的两个量',
+      'chartTitle': '此电压下的电流-电阻曲线',
+      'line.current': '电流 (mA)',
+      'note': '⚡ 欧姆定律只对阻性负载严格成立:LED、电机启动电流都不是线性负载。电阻有 ±5% 公差、电池有内阻压降,临界设计请用最坏值核算。',
+    },
+  },
+  es: {
+    useCases: ['calcular la corriente de un circuito desde voltaje y resistencia', 'estimar la resistencia necesaria para una pila y una corriente', 'comprobar la disipación para elegir la potencia del resistor', 'verificar corrientes de fuente, fusibles y cableado'],
+    faqs: [
+      { q: '¿Por qué exactamente dos valores?', a: 'V = I × R y P = V × I atan las cuatro magnitudes con dos grados de libertad: cualquier par fija las otras dos. Con más el sistema queda sobredeterminado; con menos, sin solución.' },
+      { q: '¿Cuáles son las doce fórmulas de la ley de Ohm?', a: 'Combinando V = IR con P = VI salen doce ecuaciones: V a partir de I y R, o P e I, o P y R; I a partir de V y R, o P y V, o P y R; y así sucesivamente. La calculadora aplica el par que des.' },
+      { q: '¿Sirve para circuitos de CA?', a: 'Sí, con valores RMS: usa el voltaje y la corriente eficaces y las fórmulas valen para cargas resistivas. Con bobinas o condensadores hacen falta impedancia y factor de potencia, que es otro cálculo.' },
+      { q: '¿Por qué mi pila de 9 V no da 9 V con carga?', a: 'Toda fuente real tiene resistencia interna que hunde el voltaje en bornes al subir la corriente. Una pila pequeña de 9 V cae visiblemente por encima de unos 100 mA: mide bajo carga, no en vacío.' },
+    ],
+    formula: {
+      formula: 'V = I × R\nP = V × I = I² × R = V² ÷ R',
+      variables: 'V = Voltaje (voltios)\nI = Corriente (amperios)\nR = Resistencia (ohmios)\nP = Potencia (vatios)',
+      explain: 'La ley de Ohm liga voltaje, corriente y resistencia; la ley de Watt añade la potencia. Cualquier dos de las cuatro magnitudes determinan las otras dos, y por eso la calculadora pide exactamente dos.',
+      example: 'Paso 1: pila de 9 V sobre un resistor de 470 Ω.\nPaso 2: I = V ÷ R = 9 ÷ 470 = 0,019149 A ≈ 19,15 mA.\nPaso 3: P = V × I = 9 × 0,019149 = 0,1723 W ≈ 172,3 mW.\nPaso 4 (comprobación): P = V² ÷ R = 81 ÷ 470 = 0,1723 W ✓\nResultado: circulan 19,15 mA y el resistor disipa 172,3 mW — una pieza de 1/4 W se calienta; 1/2 W va holgada.',
+    },
+    ui: {
+      'in.voltage': 'Voltaje',
+      'in.current': 'Corriente',
+      'in.resistance': 'Resistencia',
+      'in.power': 'Potencia',
+      'out.voltage': 'Voltaje',
+      'out.current': 'Corriente',
+      'out.resistance': 'Resistencia',
+      'out.power': 'Potencia',
+      'errEnterTwo': 'Introduce exactamente dos valores y deja los otros dos vacíos',
+      'errDivZero': 'División entre cero — revisa el par introducido',
+      'chartTitle': 'Corriente vs resistencia a este voltaje',
+      'line.current': 'Corriente (mA)',
+      'note': '⚡ La ley de Ohm es exacta solo para cargas resistivas: los LED y la arranque de motores no lo son. Los resistores tienen ±5 % de tolerancia y las pilas caen bajo carga; verifica los diseños justos con valores peores.',
+    },
+  },
+  de: {
+    useCases: ['Strom aus Spannung und Widerstand berechnen', 'den nötigen Widerstand für Batterie und Strom abschätzen', 'die Verlustleistung für die Watt-Bemessung prüfen', 'Ströme für Netzteil, Sicherung und Leitungsquerschnitt verifizieren'],
+    faqs: [
+      { q: 'Warum genau zwei Werte?', a: 'V = I × R und P = V × I verknüpfen die vier Größen mit zwei Freiheitsgraden: irgend zwei legen die anderen zwei fest. Mehr macht das System überbestimmt, weniger unlösbar.' },
+      { q: 'Was sind die zwölf Formeln des Ohmschen Gesetzes?', a: 'V = IR mit P = VI kombiniert ergibt zwölf Gleichungen: V aus I und R, aus P und I oder aus P und R; I aus V und R, aus P und V oder aus P und R; und so weiter. Der Rechner wendet automatisch das passende Paar an.' },
+      { q: 'Funktioniert das bei Wechselstrom?', a: 'Ja, mit Effektivwerten: RMS-Spannung und -Strom erfüllen die Formeln für ohmsche Lasten. Bei Spulen und Kondensatoren gehören Impedanz und Leistungsfaktor dazu — eine andere Rechnung.' },
+      { q: 'Warum liefert meine 9-V-Batterie unter Last keine 9 V?', a: 'Jede reale Quelle hat einen Innenwiderstand, der die Klemmenspannung mit steigendem Strom fallen lässt. Kleine 9-V-Blöcken sacken über rund 100 mA deutlich ab — miss unter Last, nicht im Leerlauf.' },
+    ],
+    formula: {
+      formula: 'V = I × R\nP = V × I = I² × R = V² ÷ R',
+      variables: 'V = Spannung (Volt)\nI = Strom (Ampere)\nR = Widerstand (Ohm)\nP = Leistung (Watt)',
+      explain: 'Das Ohmsche Gesetz verbindet Spannung, Strom und Widerstand; das Wattgesetz ergänzt die Leistung. Je zwei der vier Größen bestimmen die anderen zwei — deshalb fragt der Rechner nach genau zweien.',
+      example: 'Schritt 1: 9-V-Batterie an 470 Ω.\nSchritt 2: I = V ÷ R = 9 ÷ 470 = 0,019149 A ≈ 19,15 mA.\nSchritt 3: P = V × I = 9 × 0,019149 = 0,1723 W ≈ 172,3 mW.\nSchritt 4 (Gegenprobe): P = V² ÷ R = 81 ÷ 470 = 0,1723 W ✓\nErgebnis: 19,15 mA fließen, der Widerstand verheizt 172,3 mW — 1/4-W-Typen werden warm; 1/2 W ist bequem.',
+    },
+    ui: {
+      'in.voltage': 'Spannung',
+      'in.current': 'Strom',
+      'in.resistance': 'Widerstand',
+      'in.power': 'Leistung',
+      'out.voltage': 'Spannung',
+      'out.current': 'Strom',
+      'out.resistance': 'Widerstand',
+      'out.power': 'Leistung',
+      'errEnterTwo': 'Genau zwei Werte eingeben, die anderen zwei leer lassen',
+      'errDivZero': 'Division durch Null — eingegebenes Paar prüfen',
+      'chartTitle': 'Strom gegen Widerstand bei dieser Spannung',
+      'line.current': 'Strom (mA)',
+      'note': '⚡ Das Ohmsche Gesetz gilt streng nur für ohmsche Lasten: LEDs und Motoranlaufströme sind nichtlinear. Widerstände haben ±5 % Toleranz, Batterien sacken unter Last ab — knappe Auslegungen mit Worst-Case-Werten prüfen.',
+    },
+  },
+}

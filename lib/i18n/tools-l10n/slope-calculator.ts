@@ -1,0 +1,87 @@
+/**
+ * slope-calculator 本地化 bundle —— zh / es / de(B11 批次)
+ * 覆盖: ui + useCases + faqs。formula 缺失自动回退英文。
+ */
+import type { ToolL10n } from '../tool-l10n'
+
+export const SlopeCalculatorL10n: ToolL10n = {
+  zh: {
+    useCases: ['由两个坐标点求斜率与截距', '把斜率换算成倾角或坡度百分比', '直接得到 y = mx + b 的直线方程', '求平行线与垂线的斜率'],
+    faqs: [
+      { q: '斜率怎么算?', a: 'm = (y₂ − y₁)/(x₂ − x₁),即两点间的"竖直变化除以水平变化"。代入任一点可得截距 b = y₁ − m·x₁,于是直线方程 y = mx + b 就齐了。' },
+      { q: '斜率为负或"无定义"是什么意思?', a: '负斜率表示从左到右下降;无定义对应竖直线(x₁ = x₂),分母为零。水平线的斜率恰好是 0。' },
+      {q: '怎么求平行线和垂线的斜率?', a: '平行线斜率完全相同;垂直线斜率乘积为 −1,即 m⊥ = −1/m。竖直线的垂线是水平线(m = 0),反之亦然。' },
+      { q: '倾角是什么?', a: 'θ = arctan(m),从 x 轴正方向量起——m = 1 是 45°,m = 2 是 63.43°。道路标志上的坡度百分比是 rise/run × 100,所以 8% 坡道对应 arctan(0.08) ≈ 4.6°。' },
+    ],
+    ui: {
+      'in.x1': 'x₁',
+      'in.y1': 'y₁',
+      'in.x2': 'x₂',
+      'in.y2': 'y₂',
+      'out.slope': '斜率 m',
+      'out.intercept': 'y 轴截距 b',
+      'out.angle': '倾角',
+      'out.equation': '直线方程',
+      'out.perp': '垂线斜率',
+      'chartTitle': '过两点的直线',
+      'line.line': 'y = mx + b',
+      'line.zero': 'y = 0',
+      'note': '📏 m = (y₂ − y₁)/(x₂ − x₁) 即"高差除以水平距离";b = y₁ − m·x₁ 锚定直线。平行线共用 m;垂直线斜率相乘为 −1(m⊥ = −1/m)。竖直段斜率无定义,水平线 m = 0。',
+      'errNumeric': '两个点的坐标请填数字',
+      'errSamePoint': '两点重合 —— 斜率无定义',
+      'undefined': '无定义(竖直线)',
+      'horizontal': '水平线',
+      'perpVertical': '无定义(竖直线)',
+    },
+  },
+  es: {
+    useCases: ['calcular pendiente e intersección a partir de dos puntos', 'convertir la pendiente en ángulo o porcentaje de pendiente', 'obtener la ecuación y = mx + b directamente', 'hallar la pendiente de rectas paralelas y perpendiculares'],
+    faqs: [
+      { q: '¿Cómo se calcula la pendiente?', a: 'm = (y₂ − y₁)/(x₂ − x₁), el «sube entre corre» entre los dos puntos. Sustituyendo cualquiera de ellos sale la intersección b = y₁ − m·x₁, y con ella la ecuación y = mx + b.' },
+      { q: '¿Qué significa pendiente negativa o indefinida?', a: 'Negativa: la recta baja de izquierda a derecha; indefinida corresponde a una recta vertical (x₁ = x₂), donde el denominador es cero. Una recta horizontal tiene m = 0.' },
+      { q: '¿Cómo hallo la pendiente paralela o perpendicular?', a: 'Las paralelas comparten exactamente la misma m; las perpendiculares se multiplican hasta −1, o sea m⊥ = −1/m. La perpendicular de una vertical es horizontal (m = 0) y al revés.' },
+      { q: '¿Qué es el ángulo de inclinación?', a: 'θ = arctan(m) medido desde el eje x positivo: m = 1 da 45° y m = 2 da 63,43°. Los porcentajes de las señales viales son rise/run × 100, así que una rampa del 8% corresponde a arctan(0,08) ≈ 4,6°.' },
+    ],
+    ui: {
+      'out.slope': 'Pendiente m',
+      'out.intercept': 'Intersección con y (b)',
+      'out.angle': 'Ángulo de inclinación',
+      'out.equation': 'Ecuación de la recta',
+      'out.perp': 'Pendiente perpendicular',
+      'chartTitle': 'La recta que pasa por tus dos puntos',
+      'line.line': 'y = mx + b',
+      'line.zero': 'y = 0',
+      'note': '📏 m = (y₂ − y₁)/(x₂ − x₁) es el desnivel por unidad horizontal; b = y₁ − m·x₁ ancla la recta. Las paralelas comparten m; las perpendiculares se multiplican hasta −1 (m⊥ = −1/m). Un tramo vertical no tiene pendiente definida, uno horizontal tiene m = 0.',
+      'errNumeric': 'Introduce números para ambos puntos',
+      'errSamePoint': 'Los dos puntos son idénticos — la pendiente no está definida',
+      'undefined': 'indefinida (recta vertical)',
+      'horizontal': 'horizontal',
+      'perpVertical': 'indefinida (recta vertical)',
+    },
+  },
+  de: {
+    useCases: ['Steigung und Achsenabschnitt aus zwei Punkten bestimmen', 'Steigung in Neigungswinkel oder Gefälle-Prozente umrechnen', 'die Geradengleichung y = mx + b direkt erhalten', 'Steigungen paralleler und senkrechter Geraden bestimmen'],
+    faqs: [
+      { q: 'Wie wird die Steigung berechnet?', a: 'm = (y₂ − y₁)/(x₂ − x₁) — das »Höhengewinn durch Horizontalschritt«-Verhältnis der beiden Punkte. Mit einem der Punkte folgt der Achsenabschnitt b = y₁ − m·x₁ und damit y = mx + b.' },
+      { q: 'Was heißt negative oder undefinierte Steigung?', a: 'Negativ: Die Gerade fällt von links nach rechts; undefiniert gehört zu einer senkrechten Geraden (x₁ = x₂), wo der Nenner null ist. Eine waagerechte Gerade hat m = 0.' },
+      { q: 'Wie finde ich parallele und senkrechte Steigungen?', a: 'Parallele Geraden teilen exakt dieselbe m; senkrechtemultiplizieren zu −1, also m⊥ = −1/m. Die Senkrechte zu einer Vertikalen ist horizontal (m = 0) und umgekehrt.' },
+      { q: 'Was ist der Neigungswinkel?', a: 'θ = arctan(m), von der positiven x-Achse gemessen: m = 1 ergibt 45°, m = 2 ergibt 63,43°. Gefälle-Prozente auf Verkehrszeichen sind rise/run × 100, eine 8%-Rampe entspricht also arctan(0,08) ≈ 4,6°.' },
+    ],
+    ui: {
+      'out.slope': 'Steigung m',
+      'out.intercept': 'y-Achsenabschnitt b',
+      'out.angle': 'Neigungswinkel',
+      'out.equation': 'Geradengleichung',
+      'out.perp': 'Senkrechte Steigung',
+      'chartTitle': 'Die Gerade durch deine zwei Punkte',
+      'line.line': 'y = mx + b',
+      'line.zero': 'y = 0',
+      'note': '📏 m = (y₂ − y₁)/(x₂ − x₁) ist der Höhenunterschied pro horizontalem Schritt; b = y₁ − m·x₁ verankert die Gerade. Parallele teilen m; Senkrechte multiplizieren zu −1 (m⊥ = −1/m). Ein vertikales Stück hat keine definierte Steigung, ein horizontales m = 0.',
+      'errNumeric': 'Für beide Punkte Zahlen eingeben',
+      'errSamePoint': 'Die beiden Punkte sind identisch — die Steigung ist undefiniert',
+      'undefined': 'undefiniert (senkrechte Gerade)',
+      'horizontal': 'waagerecht',
+      'perpVertical': 'undefiniert (senkrechte Gerade)',
+    },
+  },
+}

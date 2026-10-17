@@ -1002,5 +1002,450 @@ export const zhTools: Record<string, { name: string; shortIntro: string }> = {
     name: 'Docker Run 转 Compose',
     shortIntro: '把 docker run 命令转成干净的 docker-compose.yml 文件。',
   },
+  'mortgage-affordability-calculator': {
+    name: '可负担房价计算器',
+    shortIntro: '收入+债务按 28/36 规则反推能买多贵的房(含税险与 HOA)。',
+  },
+  'refinance-break-even-calculator': {
+    name: '再融资回本计算器',
+    shortIntro: '新旧月供差与过户费 → 几个月回本、全期利息变化。',
+  },
+  'biweekly-mortgage-payment-calculator': {
+    name: '双周供计算器',
+    shortIntro: '双周供加速还款:省多少利息、提前几个月还清。',
+  },
+  'closing-cost-calculator': {
+    name: '过户费用计算器',
+    shortIntro: '买卖双方过户费分项估算与买家现金需求。',
+  },
+  'property-tax-calculator': {
+    name: '房产税计算器',
+    shortIntro: '评估值 × millage 费率 → 年税额与月摊进月供。',
+  },
+  'prorated-rent-calculator': {
+    name: '按天房租计算器',
+    shortIntro: '月中入住或搬出,按天比例算首末月房租。',
+  },
+  'rental-property-calculator': {
+    name: '租赁房产计算器',
+    shortIntro: 'NOI、cap rate、现金流、cash-on-cash 与 1% 规则一屏算清。',
+  },
+  'house-flip-calculator': {
+    name: '翻房计算器',
+    shortIntro: '70% 规则最高买价、利润与 ROI 一次算完。',
+  },
+  'college-savings-calculator': {
+    name: '大学储蓄计算器',
+    shortIntro: '按学费通胀推算总费用,得出每月 529 定存目标。',
+  },
+  '401k-match-calculator': {
+    name: '401(k) 雇主匹配计算器',
+    shortIntro: '算出雇主匹配值多少,以及没拿满的免费钱。',
+  },
+  'social-security-break-even-calculator': {
+    name: '社保申领回补计算器',
+    shortIntro: '比较 62/FRA/70 三档申领的月额与回补年龄。',
+  },
+  'student-loan-payment-calculator': {
+    name: '学生贷款计算器',
+    shortIntro: '标准、阶梯、延长三计划的月供与总利息对比。',
+  },
+  'car-lease-calculator': {
+    name: '汽车租赁计算器',
+    shortIntro: '用 money factor 口径算月供、APR 与总租赁成本。',
+  },
+  'ev-charging-cost-calculator': {
+    name: '电动车充电成本计算器',
+    shortIntro: '每英里电费与年成本,直接对比同里程油车。',
+  },
+  'rent-budget-calculator': {
+    name: '房租预算计算器',
+    shortIntro: '30% 规则与 50/30/20 下的可负担房租上限。',
+  },
+  'christmas-budget-calculator': {
+    name: '圣诞预算计算器',
+    shortIntro: '按人群与类别拆分节日总预算,给出人均上限。',
+  },
+  'one-rep-max-calculator': {
+    name: '最大重量(1RM)计算器',
+    shortIntro: '用任意一组正式训练推算 1RM,附 50-95% 训练重量表。',
+  },
+  'race-time-predictor': {
+    name: '比赛成绩预测器',
+    shortIntro: '输入一场近期比赛,预测 5K 到全马的完赛时间与配速。',
+  },
+  'vo2-max-calculator': {
+    name: '最大摄氧量计算器',
+    shortIntro: 'Cooper 12 分钟跑与心率比值两条口径估算 VO₂max。',
+  },
+  'body-surface-area-calculator': {
+    name: '体表面积计算器',
+    shortIntro: '由身高体重算 Mosteller 与 DuBois 两种 BSA(m²)。',
+  },
+  'waist-to-height-ratio-calculator': {
+    name: '腰高比计算器',
+    shortIntro: '腰围÷身高,按 0.5 规则给出健康风险分级。',
+  },
+  'steps-to-miles-calculator': {
+    name: '步数换英里计算器',
+    shortIntro: '步数按身高或实测步幅换算成英里、公里与步行时长。',
+  },
+  'weight-loss-goal-calculator': {
+    name: '减重目标计算器',
+    shortIntro: '目标体重换算每日热量缺口、周数与达成日期。',
+  },
+  'fiber-intake-calculator': {
+    name: '纤维摄入量计算器',
+    shortIntro: '按年龄性别查每日纤维克数,并换算成常见食物份数。',
+  },
+  'paypal-fee-calculator': {
+    name: 'PayPal 手续费计算器',
+    shortIntro: '双向算清 PayPal 手续费:实际到账与应收回款。',
+  },
+  'etsy-fee-calculator': {
+    name: 'Etsy 费用计算器',
+    shortIntro: '一单 Etsy 的全部费用、实际费率与到手净额。',
+  },
+  'amazon-seller-fee-calculator': {
+    name: '亚马逊卖家费用计算器',
+    shortIntro: '佣金 + FBA + 落地成本 → 单件净利、利润率与 ROI。',
+  },
+  'square-fee-calculator': {
+    name: 'Square 手续费计算器',
+    shortIntro: 'Square 手续费双向计算,附小票额实际费率曲线。',
+  },
+  'youtube-money-calculator': {
+    name: 'YouTube 收益计算器',
+    shortIntro: '观看量 × RPM 区间 → 月/年 AdSense 收入三档估算。',
+  },
+  'nps-calculator': {
+    name: 'NPS 净推荐值计算器',
+    shortIntro: '推荐者 − 贬损者 → NPS 分与 Bain 等级判读。',
+  },
+  'conversion-rate-calculator': {
+    name: '转化率计算器',
+    shortIntro: '访问 → 转化:转化率、CPA 与提升目标反推。',
+  },
+  'gym-cost-per-visit-calculator': {
+    name: '单次使用成本计算器',
+    shortIntro: '会员费 ÷ 真实次数:每次健身成本与值不值。',
+  },
+  // ─────────── 🏠 B8 建材与施工 ───────────
+  'concrete-calculator': {
+    name: '混凝土计算器',
+    shortIntro: '板/柱/台阶尺寸 → 立方码与 40/60/80 磅袋数(含损耗)。',
+  },
+  'mulch-calculator': {
+    name: '覆盖物计算器',
+    shortIntro: '床尺寸与铺厚 → 立方码、袋数与总花费。',
+  },
+  'gravel-calculator': {
+    name: '砾石计算器',
+    shortIntro: '面积与厚度 → 立方码与吨数(按材料密度)。',
+  },
+  'drywall-calculator': {
+    name: '石膏板计算器',
+    shortIntro: '墙面天花面积 → 板数、螺丝与嵌缝膏。',
+  },
+  'roofing-calculator': {
+    name: '屋面计算器',
+    shortIntro: '投影 × 坡度系数 → squares、瓦束与防水卷。',
+  },
+  'fence-calculator': {
+    name: '栅栏计算器',
+    shortIntro: '周长与桩距 → 桩、栏板、横杆与混凝土袋数。',
+  },
+  'paver-calculator': {
+    name: '铺路石计算器',
+    shortIntro: '面积 → 铺石块数与碎石基料、铺沙量。',
+  },
+  'deck-board-calculator': {
+    name: '甲板板材计算器',
+    shortIntro: '面积与板宽缝宽 → 板数、线性英尺与托梁数。',
+  },
+  'dividend-calculator': {
+    name: '股息计算器',
+    shortIntro: '估算股息收入、股息率,以及 DRIP 复利数十年后的差距。',
+  },
+  'dca-calculator': {
+    name: '定投计算器',
+    shortIntro: '算出平均成本,并对比定投与一次性买入谁更划算。',
+  },
+  'stock-average-calculator': {
+    name: '股票摊平成本计算器',
+    shortIntro: '多笔买入的加权平均成本、总成本与浮动盈亏。',
+  },
+  'options-profit-calculator': {
+    name: '期权损益计算器',
+    shortIntro: '盈亏平衡点、最大盈亏与任意价位的到期损益曲线。',
+  },
+  'crypto-profit-calculator': {
+    name: '加密货币利润计算器',
+    shortIntro: '扣除双边手续费后的净利润、ROI 与目标卖价。',
+  },
+  'treasury-bill-calculator': {
+    name: '短期国债计算器',
+    shortIntro: '算出 T-Bill 买入价与两种收益率口径(360/365 天)。',
+  },
+  'bond-yield-calculator': {
+    name: '债券收益率计算器',
+    shortIntro: '当前收益率与到期收益率(YTM 近似)一键算清。',
+  },
+  'lottery-odds-calculator': {
+    name: '彩票概率计算器',
+    shortIntro: 'Powerball/Mega Millions/EuroMillions 精确概率,或自定义奖池。',
+  },
+  'self-employment-tax-calculator': {
+    name: '自营税计算器',
+    shortIntro: '算出自由职业利润要缴的 SECA 税(15.3%)与可抵扣的一半。',
+  },
+  'depreciation-calculator': {
+    name: '折旧计算器',
+    shortIntro: '直线、双倍余额递减与年数总和法,逐年折旧与账面价值。',
+  },
+  'mileage-reimbursement-calculator': {
+    name: '里程报销计算器',
+    shortIntro: '里程 × IRS 标准费率(2025 商务 70¢),四类用途。',
+  },
+  'contractor-vs-employee-calculator': {
+    name: '1099 vs W-2 计算器',
+    shortIntro: '同额年收入在两种身份下的税后到手差异。',
+  },
+  'gross-up-calculator': {
+    name: 'Gross-Up 反算器',
+    shortIntro: '输入期望净额与税率,反推应发的税前总额。',
+  },
+  'commute-cost-calculator': {
+    name: '通勤成本计算器',
+    shortIntro: '算出年通勤花费:里程费率或真实油耗,外加时间成本。',
+  },
+  'smoking-cost-calculator': {
+    name: '吸烟成本计算器',
+    shortIntro: '周/年/十年烟钱,以及同额投资的复利对照。',
+  },
+  'emergency-fund-calculator': {
+    name: '应急基金计算器',
+    shortIntro: '定 3-12 个月目标,看现有储蓄能撑多久、还要攒几个月。',
+  },
+  'btu-calculator': {
+    name: 'BTU 空调计算器',
+    shortIntro: '按面积、层高、日照与人数算出空调 BTU 与吨位,过大过小都提醒。',
+  },
+  'board-foot-calculator': {
+    name: '板英尺计算器',
+    shortIntro: '厚×宽×长÷12 算板英尺,乘单价得整单木料成本。',
+  },
+  'wallpaper-calculator': {
+    name: '壁纸卷数计算器',
+    shortIntro: '逐条计算壁纸用量:墙高+对花重复,美式双卷与欧式卷都支持。',
+  },
+  'raised-bed-soil-calculator': {
+    name: '菜床土壤计算器',
+    shortIntro: '算出菜床要填多少土,附 Mel 混合与经济配方分量及袋数。',
+  },
+  'generator-wattage-calculator': {
+    name: '发电机功率计算器',
+    shortIntro: '勾选电器算运行瓦与启动浪涌,推荐合适的发电机档位。',
+  },
+  'pool-volume-calculator': {
+    name: '泳池水量计算器',
+    shortIntro: '矩形/圆形/肾形池的加仑与升,附泵循环周转时间。',
+  },
+  'coffee-ratio-calculator': {
+    name: '咖啡比例计算器',
+    shortIntro: '手冲、法压、浓缩、冷萃的粉水比例互算与杯量换算。',
+  },
+  'bread-hydration-calculator': {
+    name: '面包水合度计算器',
+    shortIntro: '水÷粉得水合度,折算酵种后的有效水合与总面团重。',
+  },
+  'ovulation-calculator': {
+    name: '排卵期计算器',
+    shortIntro: '按末次月经与周期长度推算排卵日与易孕窗口。',
+  },
+  'pregnancy-weight-gain-calculator': {
+    name: '孕期增重计算器',
+    shortIntro: '按 IOM 指南与孕前 BMI 给出增重区间与每周节奏。',
+  },
+  'diaper-cost-calculator': {
+    name: '尿布开销计算器',
+    shortIntro: '算出每月、每年与如厕训练前的尿布总花费。',
+  },
+  'cat-age-calculator': {
+    name: '猫咪年龄计算器',
+    shortIntro: '按 15/24/+4 曲线把猫龄换算成人类年龄。',
+  },
+  'cat-food-calculator': {
+    name: '猫粮喂食量计算器',
+    shortIntro: '按 RER×系数算出每日热量、罐数与克数。',
+  },
+  'zodiac-sign-calculator': {
+    name: '星座查询计算器',
+    shortIntro: '按出生月日查星座、日期区间与元素属性。',
+  },
+  'chinese-zodiac-calculator': {
+    name: '生肖查询计算器',
+    shortIntro: '按出生年份查生肖、五行与阴阳(立春口径)。',
+  },
+  'shoe-size-converter': {
+    name: '鞋码换算器',
+    shortIntro: '美/英/欧/厘米鞋码男女童对照查表互转。',
+  },
+  'time-card-calculator': {
+    name: '工时卡计算器',
+    shortIntro: '打卡时刻转十进制工时、周合计与加班标注。',
+  },
+  'business-days-calculator': {
+    name: '工作日推算器',
+    shortIntro: '从任意日期加/减 N 个工作日,跳过周末与自定义假日。',
+  },
+  'week-number-calculator': {
+    name: '周数计算器',
+    shortIntro: '任意日期的 ISO 周号、周一起止与剩余周数。',
+  },
+  'pto-accrual-calculator': {
+    name: '年假累积计算器',
+    shortIntro: '按发薪周期累积的年假余额与年末结转预测。',
+  },
+  'download-time-calculator': {
+    name: '下载时间计算器',
+    shortIntro: '文件大小 ÷ 网速(含协议开销)→ 时分秒。',
+  },
+  'gps-coordinate-converter': {
+    name: 'GPS 坐标转换器',
+    shortIntro: '十进制度 ↔ 度分秒 ↔ 度分互转,方向字母自动解析。',
+  },
+  'tire-size-calculator': {
+    name: '轮胎规格计算器',
+    shortIntro: '轮胎规格解码为直径/周长/转数,两规格对比看表显偏差。',
+  },
+  'wind-chill-calculator': {
+    name: '风寒计算器',
+    shortIntro: '气温 + 风速 → JAG/TI 公式风寒体感温度。',
+  },
+  'quadratic-equation-solver': {
+    name: '一元二次方程求解器',
+    shortIntro: '判别式、实/复根、顶点与因式分解一次出全。',
+  },
+  'slope-calculator': {
+    name: '斜率计算器',
+    shortIntro: '两点求斜率、截距、倾角与直线方程。',
+  },
+  'confidence-interval-calculator': {
+    name: '置信区间计算器',
+    shortIntro: '均值或比例的 90/95/99% 区间与误差幅度。',
+  },
+  'sample-size-calculator': {
+    name: '样本量计算器',
+    shortIntro: '按置信水平与误差幅度算出该调查多少人。',
+  },
+  'z-score-calculator': {
+    name: 'Z 分数计算器',
+    shortIntro: '标准化、百分位与两侧 p 值,可反解 z→x。',
+  },
+  'bayes-theorem-calculator': {
+    name: '贝叶斯定理计算器',
+    shortIntro: '筛查阳性后的真实患病概率,破除基础率谬误。',
+  },
+  'heat-index-calculator': {
+    name: '湿热指数计算器',
+    shortIntro: '气温+湿度算 NWS 体感温度与中暑风险分级。',
+  },
+  'dew-point-calculator': {
+    name: '露点计算器',
+    shortIntro: 'Magnus-Tetens 露点、绝对湿度与舒适分级。',
+  },
+  'passphrase-generator': {
+    name: '口令短语生成器',
+    shortIntro: '256 词表随机抽词组合,熵位数实时可见。',
+  },
+  'border-radius-generator': {
+    name: '圆角生成器',
+    shortIntro: '四角滑杆 + 椭圆斜杠语法,实时预览直出 CSS。',
+  },
+  'color-palette-generator': {
+    name: '配色生成器',
+    shortIntro: '一个基色推出五类调和色板,hex/rgb/hsl 齐备。',
+  },
+  'image-compressor': {
+    name: '图片压缩器',
+    shortIntro: '本地重编码 JPG/WebP,实测压缩前后体积对比。',
+  },
+  'username-generator': {
+    name: '用户名生成器',
+    shortIntro: '关键词 + 四种风格,按平台长度上限过滤。',
+  },
+  'secret-santa-generator': {
+    name: '秘密圣诞抽取器',
+    shortIntro: '闭环配对 + 互斥对,逐人揭晓不剧透。',
+  },
+  'faq-schema-generator': {
+    name: 'FAQ 结构化数据生成器',
+    shortIntro: '粘贴问答对,一键生成 FAQPage JSON-LD 代码。',
+  },
+  'number-to-words-converter': {
+    name: '数字转英文单词',
+    shortIntro: '把数字拼成英文单词——万亿级、小数、序数都在行。',
+  },
+  'ohms-law-calculator': {
+    name: '欧姆定律计算器',
+    shortIntro: '输入 V/I/R/P 任意两个,即刻解出其余。',
+  },
+  'led-resistor-calculator': {
+    name: 'LED 限流电阻计算器',
+    shortIntro: '输入电压、正向压降与电流,给出理想值与 E12 标准值。',
+  },
+  'resistor-color-code-calculator': {
+    name: '电阻色环计算器',
+    shortIntro: '解读 4-6 环色环,或由阻值反查颜色。',
+  },
+  'voltage-divider-calculator': {
+    name: '分压器计算器',
+    shortIntro: 'Vin、R1、R2 算 Vout 与功耗,或反解 R2。',
+  },
+  'tone-generator': {
+    name: '音频发生器',
+    shortIntro: '浏览器里播放 20Hz-20kHz 的正弦/方波/三角/锯齿波。',
+  },
+  'bpm-tap-counter': {
+    name: 'BPM 点按测速器',
+    shortIntro: '跟着歌点按读出 BPM,附一致性指示。',
+  },
+  'delay-time-calculator': {
+    name: '延迟时间计算器',
+    shortIntro: 'BPM 换算各音符毫秒时值与 LFO 速率。',
+  },
+  'utm-link-builder': {
+    name: 'UTM 链接构建器',
+    shortIntro: '基础 URL 加 UTM 参数,一键生成完整跟踪链接并给命名提示。',
+  },
+  'credit-card-validator': {
+    name: '信用卡号校验器',
+    shortIntro: 'Luhn 校验和加卡组织前缀与长度规则,纯本地计算。',
+  },
+  'iban-validator': {
+    name: 'IBAN 校验器',
+    shortIntro: '官方注册表国别长度加 ISO 7064 mod-97 校验,浏览器内完成。',
+  },
+  'graphql-formatter': {
+    name: 'GraphQL 格式化器',
+    shortIntro: '基于词法分析的 GraphQL 美化与压缩,查询与 SDL 通用。',
+  },
+  'http-status-code-lookup': {
+    name: 'HTTP 状态码查询',
+    shortIntro: '全部 62 个 IANA 状态码,按码或关键词搜索并附排查建议。',
+  },
+  'css-minifier': {
+    name: 'CSS 压缩器',
+    shortIntro: '字节级安全压缩:calc() 空格、字符串与 /*! 横幅完好无损。',
+  },
+  'csv-to-sql-converter': {
+    name: 'CSV 转 SQL 转换器',
+    shortIntro: 'CSV 进,批量多行 INSERT 出——带转义与 NULL 选项。',
+  },
+  'rot13-converter': {
+    name: 'ROT13 转换器',
+    shortIntro: 'ROT13 编解码,可选 ROT5 数字旋转与 ROT-N 自定义位移。',
+  },
 
 }

@@ -1,0 +1,92 @@
+/**
+ * college-savings-calculator 本地化 bundle —— zh / es / de(B4 家庭与人生大事批)
+ * 覆盖: ui。useCases/formula/faqs 缺失自动回退英文。
+ */
+import type { ToolL10n } from '../tool-l10n'
+
+export const CollegeSavingsCalculatorL10n: ToolL10n = {
+  zh: {
+    useCases: ['按孩子年龄倒推每月要存多少大学学费', '对比公立本州、外州与私立大学的总花费', '把学费通胀(而非普通通胀)算进目标额', '检验现有 529 余额按预期收益复利后还差多少'],
+    faqs: [
+      { q: '学费通胀为什么不用普通 CPI?', a: '美国高等教育费用的历史增速长期在每年 4-6%,明显高于整体通胀。按 2-3% 的普通通胀做目标,几乎必然在入学那年差出一大截;本工具默认 5% 即来自这段历史区间。' },
+      { q: '总费用是怎么算出来的?', a: '今天的年费用先按通胀率复利到入学那一年,之后每一学年再继续通胀一年——四年制的总费用是四笔逐年递增的数字之和,而不是入学年费用简单乘四。' },
+      { q: '已存金额和每月存款怎么处理?', a: '已存余额按月复利到入学年;每月定存按普通年金终值折算。两者相抵后剩下的缺口,除以年金系数就是"每月还需存多少"。' },
+      { q: '529 计划有什么税务优势?', a: '增值部分用于合格教育支出时联邦免税,很多州还有州税抵扣。它只是存钱的"容器",本工具算的是要存多少——钱可以放 529、Coverdell 或普通应税账户,预期收益自行对应调整。' },
+    ],
+    ui: {
+      'chartTitle': '储蓄增长 vs 入学总费用',
+      'line.balance': '预计账户余额',
+      'line.target': '入学总费用目标',
+      'in.childAge': '孩子年龄',
+      'in.annualCost': '当前年度总费用',
+      'in.years': '大学年限',
+      'in.inflation': '费用通胀率',
+      'in.currentSavings': '已存金额',
+      'in.returnRate': '预期年化收益',
+      'out.costAtStart': '入学那年的一年费用',
+      'out.totalCost': '在校总费用',
+      'out.savingsFV': '入学时已有存款终值',
+      'out.monthlyNeed': '每月还需定存',
+      'outSub.costAtStart': '含通胀复利',
+      'outSub.monthlyNeed': '含已存金额的复利抵扣',
+      'note': '🎓 预设用的是 2024-25 学年全部入学成本(学费+食宿+杂费)的典型值:公立本州约 $30k、外州约 $49k、私立约 $68k。529 里的钱按教育用途免税增值——但先得知道目标是多少。',
+      'errInvalid': '请输入有效的年龄(0-17)、正的年费用与合理的比率',
+    },
+  },
+  es: {
+    useCases: ['calcular cuánto ahorrar al mes para la universidad según la edad del hijo', 'comparar el coste total de universidad pública estatal, fuera del estado y privada', 'incluir la inflación educativa (no la general) en la meta', 'comprobar cuánto falta tras capitalizar el saldo actual del plan 529'],
+    faqs: [
+      { q: '¿Por qué no usar la inflación normal?', a: 'La educación superior en EE. UU. ha subido históricamente un 4-6% anual, muy por encima del IPC general. Fijar la meta con un 2-3% casi garantiza quedarse corto el año de ingreso; el 5% que usa la herramienta por defecto viene de ese rango histórico.' },
+      { q: '¿Cómo se calcula el coste total?', a: 'El coste anual de hoy se capitaliza con la inflación hasta el año de ingreso, y cada curso posterior infla un año más: el total de una carrera de cuatro años es la suma de cuatro cifras crecientes, no el coste del primer año por cuatro.' },
+      { q: '¿Cómo se tratan los ahorros actuales y el ahorro mensual?', a: 'El saldo actual se capitaliza con interés mensual hasta el ingreso; la aportación mensual usa el valor futuro de una renta ordinaria. La diferencia restante dividida por el factor de renta es el «cuánto al mes falta ahorrar».' },
+      { q: '¿Qué ventajas fiscales tiene un plan 529?', a: 'Las ganancias retiradas para gastos educativos cualificados son libres de impuestos federales, y muchos estados ofrecen deducciones. Es solo el «recipiente»: la herramienta calcula cuánto ahorrar — el dinero puede estar en un 529, un Coverdell o una cuenta taxable, ajustando el rendimiento esperado.' },
+    ],
+    ui: {
+      'chartTitle': 'Ahorro acumulado vs coste total',
+      'line.balance': 'Saldo previsto de la cuenta',
+      'line.target': 'Meta: coste total al ingreso',
+      'in.childAge': 'Edad del hijo',
+      'in.annualCost': 'Coste anual actual',
+      'in.years': 'Años de carrera',
+      'in.inflation': 'Inflación del coste',
+      'in.currentSavings': 'Ahorros actuales',
+      'in.returnRate': 'Rentabilidad esperada',
+      'out.costAtStart': 'Coste en el año de ingreso',
+      'out.totalCost': 'Coste total de la carrera',
+      'out.savingsFV': 'Valor futuro de lo ahorrado',
+      'out.monthlyNeed': 'Aporte mensual necesario',
+      'outSub.costAtStart': 'con inflación capitalizada',
+      'outSub.monthlyNeed': 'descontando el saldo actual',
+      'note': '🎓 Los valores predefinidos usan costes totales de 2024-25 (matrícula + alojamiento + varios): pública estatal ≈ 30 000 $, fuera del estado ≈ 49 000 $, privada ≈ 68 000 $. El 529 crece libre de impuestos si se gasta en educación — pero primero hay que saber la meta.',
+      'errInvalid': 'Introduce una edad válida (0-17), un coste anual positivo y tasas razonables',
+    },
+  },
+  de: {
+    useCases: ['aus dem Alter des Kindes das nötige Monats-Sparziel fürs Studium ableiten', 'Gesamtkosten von Landesuniversität, Out-of-State und Privatuni vergleichen', 'die Bildungsinflation (nicht die allgemeine) in das Ziel einrechnen', 'prüfen, wie viel nach Verzinsung des vorhandenen 529-Guthabens fehlt'],
+    faqs: [
+      { q: 'Warum nicht die normale Inflation nehmen?', a: 'Die Studienkosten in den USA sind historisch um 4-6% pro Jahr gestiegen — deutlich schneller als die allgemeine Inflation. Wer die Zielsumme mit 2-3% ansetzt, reißt im Einschulungsjahr fast sicher eine Lücke; die 5%-Voreinstellung stammt aus diesem historischen Bereich.' },
+      { q: 'Wie entsteht die Gesamtsumme?', a: 'Die heutigen Jahreskosten werden bis zum Einschulungsjahr verzinst, und jedes weitere Studienjahr inflate nochmals ein Jahr: Die Summe eines Vierjahresstudiums ist die Addition von vier steigenden Jahresbeträgen, nicht Jahreskosten mal vier.' },
+      { q: 'Wie werden vorhandenes Guthaben und Monatssparen behandelt?', a: 'Das vorhandene Guthaben wird mit monatlicher Verzinsung bis zur Einschulung hochgerechnet; der Monatsbeitrag über den Endwert einer nachschüssigen Rente. Die verbleibende Lücke geteilt durch den Rentenfaktor ergibt das nötige „wie viel pro Monat“.' },
+      { q: 'Welche Steuervorteile hat ein 529-Plan?', a: 'Gewinne sind steuerfrei, wenn sie für qualifizierte Bildungsausgaben abgezogen werden; viele Bundesstaaten gewähren zusätzlich Abzüge. Der 529 ist nur das „Gefäß“ — der Rechner bestimmt die Sparsumme. Das Geld kann auch in Coverdell oder einem normalen Depot liegen, dann die erwartete Rendite anpassen.' },
+    ],
+    ui: {
+      'chartTitle': 'Sparverlauf vs. Gesamtkosten',
+      'line.balance': 'Erwartetes Guthaben',
+      'line.target': 'Ziel: Gesamtkosten bei Einschulung',
+      'in.childAge': 'Alter des Kindes',
+      'in.annualCost': 'Aktuelle Jahreskosten',
+      'in.years': 'Studienjahre',
+      'in.inflation': 'Kosteninflation',
+      'in.currentSavings': 'Bereits gespart',
+      'in.returnRate': 'Erwartete Rendite',
+      'out.costAtStart': 'Jahreskosten bei Einschulung',
+      'out.totalCost': 'Gesamtkosten des Studiums',
+      'out.savingsFV': 'Endwert des Ersparten',
+      'out.monthlyNeed': 'Nötige Monatsrate',
+      'outSub.costAtStart': 'inflationiert',
+      'outSub.monthlyNeed': 'abzüglich verzinstem Guthaben',
+      'note': '🎓 Die Voreinstellungen nutzen volle Jahreskosten 2024-25 (Studiengebühren + Unterkunft + Sonstiges): staatlich im Bundesstaat ≈ 30 000 $, Out-of-State ≈ 49 000 $, privat ≈ 68 000 $. Ein 529 wächst steuerfrei für Bildung — aber erst muss das Ziel stehen.',
+      'errInvalid': 'Gib ein gültiges Alter (0-17), positive Jahreskosten und sinnvolle Sätze ein',
+    },
+  },
+}

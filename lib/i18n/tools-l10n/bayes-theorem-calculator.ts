@@ -1,0 +1,92 @@
+/**
+ * bayes-theorem-calculator 本地化 bundle —— zh / es / de(B11 批次)
+ * 覆盖: ui + useCases + faqs。formula 缺失自动回退英文。
+ */
+import type { ToolL10n } from '../tool-l10n'
+
+export const BayesTheoremCalculatorL10n: ToolL10n = {
+  zh: {
+    useCases: ['解读医学筛查阳性结果的真实患病概率', '理解基础率谬误:罕见病为何大多报假阳性', '评估检测手段:提升特异度还是敏感度更划算', '把先验证据更新为后验概率的课程与面试练习'],
+    faqs: [
+      { q: '计算器怎么用贝叶斯定理?', a: 'P(患病|阳性) = 敏感度 × 先验 ÷ P(阳性),其中 P(阳性) = 敏感度 × 先验 + (1 − 特异度) × (1 − 先验)。全部按医学筛查口径表达:基础率、敏感度、特异度。' },
+      { q: '为什么 95% 敏感度的检测,阳性了也只有 8.8% 患病概率?', a: '1% 的基础率意味着 10,000 人里 9,900 人健康,而 10% 的假阳性率会把其中 990 人变成阳性——远超 95 个真阳性。图表展示的正是一份阳性结果的这种构成。' },
+      { q: '什么是基础率谬误?', a: '把 P(阳性|患病) 与 P(患病|阳性) 混为一谈。前者高达 95%;后者取决于病有多罕见,先验越低后验越低——这就是对罕见病做全民筛查会制造海量误报的原因。' },
+      { q: '怎样让这个数字变好?', a: '提升特异度而不是敏感度:假阳性率从 10% 降到 1%,同样 1% 的先验下后验能从 8.8% 升到约 49%。复检有效的原理也一样——第一次阳性把第二次的先验抬高了。' },
+    ],
+    ui: {
+      'in.prior': '先验(基础率)',
+      'in.sens': '敏感度',
+      'in.spec': '特异度',
+      'out.posterior': 'P(患病 | 阳性)',
+      'out.rate': '阳性意味着什么',
+      'out.tp': '真阳性',
+      'out.fp': '假阳性',
+      'outSub.tp': '每 10,000 名受检者',
+      'outSub.fp': '每 10,000 名受检者',
+      'chartTitle': '一份阳性结果的构成(每 10,000 人)',
+      'slice.tp': '真阳性',
+      'slice.fp': '假阳性',
+      'note': '🩺 后验 = 敏感度 × 先验 ÷ P(阳性)。基础率 1%、敏感度 95%、特异度 90% 时,阳性仍只意味着约 8.8% 的患病可能——9,900 名健康人的假阳性淹没了 95 个真阳性。这个落差就是基础率谬误;病越罕见越糟,而能修复它的是特异度(不是敏感度)。',
+      'errInput': '先验 0–100%(须大于 0),敏感度与特异度 0–100%',
+      'errZero': '这个检测永远不会返回阳性结果',
+      'ratePrefix': '每',
+      'rateSuffix': '个阳性中才有 1 个真阳性',
+    },
+  },
+  es: {
+    useCases: ['interpretar la probabilidad real de enfermedad tras un cribado positivo', 'entender la falacia de la tasa base', 'evaluar si compensa subir la sensibilidad o la especificidad', 'practicar la actualización de prior a posterior'],
+    faqs: [
+      { q: '¿Cómo aplica la calculadora el teorema de Bayes?', a: 'P(enfermedad|positivo) = sensibilidad × prior ÷ P(positivo), donde P(positivo) = sensibilidad × prior + (1 − especificidad) × (1 − prior). Todo se expresa al estilo del cribado médico: tasa base, sensibilidad y especificidad.' },
+      { q: '¿Por qué con un test del 95% de sensibilidad un positivo solo da 8,8%?', a: 'La tasa base del 1% significa que 9.900 de cada 10.000 personas están sanas, y la tasa de falsos positivos del 10% vuelve positivos a 990 de ellas — abrumando a los 95 verdaderos. El gráfico muestra exactamente esa composición de un positivo.' },
+      { q: '¿Qué es la falacia de la tasa base?', a: 'Confundir P(positivo|enfermedad) con P(enfermedad|positivo). La primera es alta (95%); la segunda depende de lo rara que sea la enfermedad: cuanto menor el prior, menor el posterior. Por eso cribar a toda la población genera sobre todo falsas alarmas.' },
+      { q: '¿Cómo mejora el resultado?', a: 'Subiendo la especificidad, no la sensibilidad: bajar los falsos positivos del 10% al 1% eleva el mismo prior del 1% del 8,8% a cerca del 49%. La segunda prueba confirmatoria funciona igual: el primer positivo sube el prior de la segunda.' },
+    ],
+    ui: {
+      'in.prior': 'Prior (tasa base)',
+      'in.sens': 'Sensibilidad',
+      'in.spec': 'Especificidad',
+      'out.posterior': 'P(enfermedad | positivo)',
+      'out.rate': 'Qué significa un positivo',
+      'out.tp': 'Verdaderos positivos',
+      'out.fp': 'Falsos positivos',
+      'outSub.tp': 'por cada 10.000 analizados',
+      'outSub.fp': 'por cada 10.000 analizados',
+      'chartTitle': 'De qué está hecho un positivo (por 10.000)',
+      'slice.tp': 'Verdaderos positivos',
+      'slice.fp': 'Falsos positivos',
+      'note': '🩺 Posterior = sensibilidad × prior ÷ P(positivo). Con tasa base del 1%, sensibilidad 95% y especificidad 90%, un positivo sigue significando solo ~8,8% de probabilidad: los falsos positivos de las 9.900 personas sanas sepultan a los 95 casos verdaderos. Ese hueco es la falacia de la tasa base; cuanto más rara la enfermedad, peor — y lo que la arregla es la especificidad, no la sensibilidad.',
+      'errInput': 'Prior 0-100% (por encima de 0), sensibilidad y especificidad 0-100%',
+      'errZero': 'Este test nunca da un positivo',
+      'ratePrefix': '1 de cada',
+      'rateSuffix': 'positivos es verdadero',
+    },
+  },
+  de: {
+    useCases: ['ein positives Screening-Ergebnis richtig einordnen', 'die Basisraten-Fehlschluss verstehen', 'bewerten, ob Sensitivität oder Spezifität erhöht werden sollte', 'die Aktualisierung von A-priori zu A-posteriori üben'],
+    faqs: [
+      { q: 'Wie wendet der Rechner den Satz von Bayes an?', a: 'P(Krankheit|positiv) = Sensitivität × Prior ÷ P(positiv), wobei P(positiv) = Sensitivität × Prior + (1 − Spezifität) × (1 − Prior). Alles ist im medizinischen Screening-Jargon gehalten: Basisrate, Sensitivität, Spezifität.' },
+      { q: 'Warum ist ein positives Ergebnis bei 95% Sensitivität nur zu 8,8% krank?', a: 'Die 1%-Basisrate heißt: 9.900 von 10.000 Menschen sind gesund, und die 10% False-Positive-Rate macht 990 von ihnen positiv — die 95 echten Fälle gehen darin unter. Das Diagramm zeigt genau diese Zusammensetzung.' },
+      { q: 'Was ist der Basisraten-Fehlschluss?', a: 'P(positiv|krank) mit P(krank|positiv) zu verwechseln. Ersteres ist hoch (95%); letzteres hängt davon ab, wie selten die Krankheit ist — je niedriger der Prior, desto niedriger der Posterior. Deshalb erzeugt das Screening seltener Krankheiten fast nur Fehlalarme.' },
+      { q: 'Wie lässt sich die Zahl verbessern?', a: 'Spezifität erhöhen, nicht Sensitivität: Senkt man die False-Positive-Rate von 10% auf 1%, steigt der Posterior beim gleichen 1%-Prior von 8,8% auf etwa 49%. Auch ein Bestätigungstest funktioniert so — das erste Positive erhöht den Prior des zweiten.' },
+    ],
+    ui: {
+      'in.prior': 'Prior (Basisrate)',
+      'in.sens': 'Sensitivität',
+      'in.spec': 'Spezifität',
+      'out.posterior': 'P(Krankheit | positiv)',
+      'out.rate': 'Was ein positives Ergebnis bedeutet',
+      'out.tp': 'Echte Positive',
+      'out.fp': 'Falsch Positive',
+      'outSub.tp': 'je 10.000 Getestete',
+      'outSub.fp': 'je 10.000 Getestete',
+      'chartTitle': 'Woraus ein positives Ergebnis besteht (je 10.000)',
+      'slice.tp': 'Echte Positive',
+      'slice.fp': 'Falsch Positive',
+      'note': '🩺 Posterior = Sensitivität × Prior ÷ P(positiv). Bei 1% Basisrate, 95% Sensitivität und 90% Spezifität bedeutet ein Positiv immer noch nur ~8,8% Krankheitswahrscheinlichkeit — die falsch-positiven der 9.900 Gesunden überwältigen die 95 echten Fälle. Diese Lücke ist der Basisraten-Fehlschluss; je seltener die Krankheit, desto schlimmer — beheben lässt ihn die Spezifität, nicht die Sensitivität.',
+      'errInput': 'Prior 0-100% (über 0), Sensitivität und Spezifität 0-100%',
+      'errZero': 'Dieser Test fällt nie positiv aus',
+      'ratePrefix': '1 von',
+      'rateSuffix': 'Positiven ist echt',
+    },
+  },
+}

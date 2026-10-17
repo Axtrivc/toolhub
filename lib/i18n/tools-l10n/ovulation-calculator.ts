@@ -1,0 +1,92 @@
+/**
+ * ovulation-calculator 本地化 bundle —— zh / es / de(2026-10 B7 家庭健康批次)
+ * 覆盖: ui + faqs + useCases(client = OvulationCalculatorClient = makeCalculatorClient)
+ */
+import type { ToolL10n } from '../tool-l10n'
+
+export const OvulationCalculatorL10n: ToolL10n = {
+  zh: {
+    useCases: ['按末次月经与周期长度推算排卵日', '圈出受孕概率最高的 6 天易孕窗口', '预测下次月经日期', '备孕安排同房时机'],
+    faqs: [
+      { q: '计算器怎么找到我的排卵日?', a: '排卵发生在下一次月经前固定的 14 天(黄体期),而不是上次月经后固定的天数。工具把周期长度加到末次月经首日,再往回数黄体期天数——这就是为什么周期长度比什么都关键。' },
+      { q: '易孕窗口里每天受孕概率一样吗?', a: '不一样:窗口是排卵前 5 天加排卵当天。精子最多能存活 5 天,卵子排出后只有约 24 小时寿命;实际上排卵前 1-2 天同房的受孕概率最高。' },
+      { q: '月经不规律还算得准吗?', a: '只能粗略参考。周期在 26-40 天之间波动时,排卵日可能相差两周;本工具接受 21-45 天输入,但请把结果当窗口而非精确日期。排卵试纸或基础体温能确认实际排卵日。' },
+      { q: '能用它来避孕吗?', a: '不能。日历推算本身不是可靠的避孕方式——精子存活时间和周期波动都会让真实窗口更宽。它是备孕规划助手;要避孕请使用经过验证的方法。' },
+    ],
+    ui: {
+      'in.lmp': '末次月经首日(YYYY-MM-DD)',
+      'in.cycle': '月经周期长度',
+      'in.luteal': '黄体期长度',
+      'out.ovulation': '预计排卵日',
+      'out.fertileStart': '易孕窗口开始',
+      'out.fertileEnd': '易孕窗口结束',
+      'out.nextPeriod': '预计下次月经',
+      'out.status': '当前状态',
+      'outSub.status': '以今天为准',
+      'chartTitle': '周期里的易孕天数',
+      'slice.fertileDays': '易孕窗口(6 天)',
+      'slice.otherDays': '周期其余天数',
+      'errInvalid': '请输入合法日期(YYYY-MM-DD)、周期 21-45 天、黄体期 9-16 天',
+      'statusFertile': '易孕窗口正在进行中',
+      'statusToday': '今天就是排卵日',
+      'statusIn': '下次排卵还有 {n} 天',
+      'note': '📅 排卵日 = 下次月经 − 14 天(黄体期)。精子最多存活 5 天、卵子约 24 小时,所以易孕窗口是排卵前 5 天到后 1 天。支持 21-45 天周期。',
+    },
+  },
+  es: {
+    useCases: ['calcular el día de ovulación desde tu última regla', 'marcar la ventana fértil de 6 días con mayores probabilidades', 'predecir la fecha de la próxima regla', 'planificar las relaciones si buscas embarazo'],
+    faqs: [
+      { q: '¿Cómo encuentra la calculadora mi día de ovulación?', a: 'La ovulación ocurre un número fijo de días (tu fase lútea, 14 por defecto) antes de la PRÓXIMA regla, no un tiempo fijo después de la última. La herramienta suma tu ciclo al primer día de la última regla y luego cuenta hacia atrás tu fase lútea — por eso la duración del ciclo lo es todo.' },
+      { q: '¿Las probabilidades son iguales todos los días de la ventana fértil?', a: 'No: la ventana son los 5 días previos a la ovulación más el propio día. Los espermatozoides sobreviven hasta 5 días, pero el óvulo solo vive unas 24 horas; de hecho, las mayores probabilidades están 1-2 días antes de ovular.' },
+      { q: 'Mi ciclo es irregular, ¿sirve igual?', a: 'Solo como aproximación. Con ciclos que oscilan entre 26 y 40 días la ovulación puede moverse dos semanas; la herramienta acepta ciclos de 21-45 días, pero trata el resultado como una ventana, no como una fecha. Las pruebas de LH o la temperatura basal confirman el día real.' },
+      { q: '¿Puedo usarlo para evitar el embarazo?', a: 'No. La predicción de calendario por sí sola no es anticoncepción fiable: la supervivencia espermática y las variaciones del ciclo ensanchan la ventana real. Es una ayuda para planificar el embarazo; para evitarlo usa métodos probados.' },
+    ],
+    ui: {
+      'in.lmp': 'Primer día de la última regla (AAAA-MM-DD)',
+      'in.cycle': 'Duración del ciclo',
+      'in.luteal': 'Duración de la fase lútea',
+      'out.ovulation': 'Día de ovulación estimado',
+      'out.fertileStart': 'Empieza la ventana fértil',
+      'out.fertileEnd': 'Termina la ventana fértil',
+      'out.nextPeriod': 'Próxima regla prevista',
+      'out.status': 'Ahora mismo',
+      'outSub.status': 'Según hoy',
+      'chartTitle': 'Días fértiles en tu ciclo',
+      'slice.fertileDays': 'Ventana fértil (6 días)',
+      'slice.otherDays': 'Resto del ciclo',
+      'errInvalid': 'Introduce una fecha válida (AAAA-MM-DD), ciclo de 21-45 días y fase lútea de 9-16',
+      'statusFertile': 'La ventana fértil está abierta',
+      'statusToday': 'Hoy es el día de la ovulación',
+      'statusIn': 'Próxima ovulación en {n} días',
+      'note': '📅 Ovulación = próxima regla − 14 días (fase lútea). Los espermatozoides sobreviven hasta 5 días y el óvulo unas 24 horas, así que la ventana fértil va de 5 días antes a 1 día después. Ciclos de 21-45 días.',
+    },
+  },
+  de: {
+    useCases: ['den Eisprungtag aus der letzten Periode berechnen', 'das 6-tägige fruchtbare Fenster mit besten Chancen markieren', 'den nächsten Periodentermin vorhersagen', 'Verkehrstermine bei Kinderwunsch planen'],
+    faqs: [
+      { q: 'Wie findet der Rechner meinen Eisprungtag?', a: 'Der Eisprung liegt eine feste Zahl von Tagen (deine Lutealphase, standardmäßig 14) vor der NÄCHSTEN Periode — nicht feste Tage nach der letzten. Das Werkzeug addiert deine Zykluslänge zum ersten Tag der letzten Periode und zählt dann die Lutealphase zurück; deshalb zählt die Zykluslänge mehr als alles andere.' },
+      { q: 'Sind die Chancen an jedem Tag des fruchtbaren Fensters gleich?', a: 'Nein: Das Fenster sind die 5 Tage vor dem Eisprung plus der Tag selbst. Spermien überleben bis zu 5 Tage, die Eizelle nur etwa 24 Stunden — die höchsten Befruchtungschancen haben Geschlechtsverkehr 1-2 Tage vor dem Eisprung.' },
+      { q: 'Mein Zyklus ist unregelmäßig — stimmt das Ergebnis?', a: 'Nur grob. Schwankt der Zyklus etwa zwischen 26 und 40 Tagen, kann sich der Eisprung um zwei Wochen verschieben; der Rechner akzeptiert 21-45 Tage, aber betrachte das Ergebnis als Fenster, nicht als Datum. LH-Tests oder Basaltemperatur bestätigen den echten Tag.' },
+      { q: 'Kann ich damit verhüten?', a: 'Nein. Die Kalenderrechnung allein ist keine zuverlässige Verhütung — Spermienüberleben und Zyklusschwankungen machen das echte Fenster breiter. Sie ist eine Hilfe bei Kinderwunsch; zur Verhütung nutze erprobte Methoden.' },
+    ],
+    ui: {
+      'in.lmp': 'Erster Tag der letzten Periode (JJJJ-MM-TT)',
+      'in.cycle': 'Zykluslänge',
+      'in.luteal': 'Länge der Lutealphase',
+      'out.ovulation': 'Voraussichtlicher Eisprungtag',
+      'out.fertileStart': 'Fruchtbares Fenster beginnt',
+      'out.fertileEnd': 'Fruchtbares Fenster endet',
+      'out.nextPeriod': 'Nächste Periode erwartet',
+      'out.status': 'Aktuell',
+      'outSub.status': 'Bezogen auf heute',
+      'chartTitle': 'Fruchtbare Tage im Zyklus',
+      'slice.fertileDays': 'Fruchtbares Fenster (6 Tage)',
+      'slice.otherDays': 'Rest des Zyklus',
+      'errInvalid': 'Gültiges Datum eingeben (JJJJ-MM-TT), Zyklus 21-45 Tage, Lutealphase 9-16',
+      'statusFertile': 'Das fruchtbare Fenster ist gerade offen',
+      'statusToday': 'Heute ist der Eisprungtag',
+      'statusIn': 'Nächster Eisprung in {n} Tagen',
+      'note': '📅 Eisprung = nächste Periode − 14 Tage (Lutealphase). Spermien überleben bis zu 5 Tage, die Eizelle etwa 24 Stunden — das fruchtbare Fenster reicht daher von 5 Tagen vor bis 1 Tag nach dem Eisprung. Zyklen von 21-45 Tagen.',
+    },
+  },
+}

@@ -3078,6 +3078,2004 @@ export const toolFaqs: Record<string, FaqPair[]> = {
       a: 'By default, it outputs modern Compose Specification YAML (compatible with docker compose v2). You can also toggle on the legacy version: "3.8" header if your deployment pipeline requires it.',
     },
   ],
+  'mortgage-affordability-calculator': [
+    {
+      q: 'How much house can I afford with a $100,000 salary?',
+      a: 'At the standard 28/36 rules, $100,000 a year supports about $2,333 of monthly PITI; with $80,000 down at 6.5% in a low-tax area that lands near a $375,000 home — less where property taxes run 2%+. Run your actual debts and rates through the calculator for a firm number.',
+    },
+    {
+      q: 'What are the 28/36 rules?',
+      a: 'Lenders cap your total housing payment at 28% of gross monthly income (front-end) and housing plus all recurring debts at 36% (back-end). The tighter of the two limits your maximum price; FHA and some conventional loans stretch to 43-50% with compensating factors.',
+    },
+    {
+      q: 'Do car loans and student loans count against me?',
+      a: 'Yes — every recurring obligation on your credit report (car, student loans, card minimums, child support) reduces your housing budget dollar for dollar under the 36% back-end rule. Paying off a $650 car loan before applying raises your housing allowance by $650 a month.',
+    },
+    {
+      q: 'Why does the calculator include property tax and insurance?',
+      a: 'Underwriters qualify you on the full PITI payment, not just principal and interest. A 2.4% property tax area versus 0.6% changes the house you can buy at the same income by six figures, so taxes, insurance, and HOA are solved into the loan equation here.',
+    },
+  ],
+  'refinance-break-even-calculator': [
+    {
+      q: 'How do I calculate my refinance break-even point?',
+      a: 'Divide total closing costs by monthly savings. Saving $303 a month on $4,800 of costs breaks even in 15.8 months — keep the new loan past that and you are ahead. This tool runs the division and shows the cumulative savings curve crossing your cost line.',
+    },
+    {
+      q: 'Is it worth refinancing for 1%?',
+      a: 'Usually yes: a 1-point drop on a $320,000 balance saves over $200 a month at the same remaining term (more if you also stretch to 30 years), recouping $4,800 of costs in about two years. The honest threshold is lower than folklore — even 0.5 point often pays back within three to four years.',
+    },
+    {
+      q: 'Why did my payment drop but my total interest go up?',
+      a: 'Term reset: rolling a balance with 27 years left into a new 30-year loan re-spreads principal over 360 months, so the payment falls partly from amortization, not savings. Compare the interest-change figure and consider a new term that matches your remaining years.',
+    },
+    {
+      q: 'What counts toward refinance closing costs?',
+      a: 'Everything you would not pay otherwise: appraisal, origination or points, title search, lender title insurance, recording, and escrow setup — typically 2-5% of the loan. Prepaid interest and escrow deposits are excluded because you owe them regardless.',
+    },
+  ],
+  'biweekly-mortgage-payment-calculator': [
+    {
+      q: 'How much does a biweekly payment plan save?',
+      a: 'On a $320,000 loan at 6.5% for 30 years, biweekly half-payments pay off in about 290 months instead of 360 and save roughly $93,000 in interest. The higher your rate, the bigger the saving — at 3.5% the same trick saves about $28,000.',
+    },
+    {
+      q: 'Can I set up biweekly payments myself for free?',
+      a: 'Yes — adding 1/12 of your monthly payment to every check, marked "apply to principal", produces virtually the same payoff. Third-party biweekly plans charge $300-500 in setup fees for what your own discipline does for nothing.',
+    },
+    {
+      q: 'Why does one extra payment a year matter so much?',
+      a: 'Because it hits principal in year one and stops compounding for decades: every prepaid dollar of principal skips 25+ years of interest at your note rate. Twenty-six half-payments equal 13 full payments — the 13th is the entire engine.',
+    },
+    {
+      q: 'Is biweekly better than investing the extra money?',
+      a: 'It depends on your rate. Above roughly 5-6%, the guaranteed interest saving from prepayment beats most risk-free alternatives; at a 3.5% pandemic-era rate, a money-market fund paying more wins, and you keep the liquidity.',
+    },
+  ],
+  'closing-cost-calculator': [
+    {
+      q: 'How much are closing costs for a buyer?',
+      a: 'Typically 2-5% of the purchase price: on a $400,000 home, roughly $8,000-12,000 covering lender fees, title and escrow charges, appraisal, and prepaid taxes and insurance. FHA and low-down-payment loans run at the high end because more is escrowed.',
+    },
+    {
+      q: 'Who pays closing costs — buyer or seller?',
+      a: 'Both, on different bills. Buyers pay lender, title, and escrow setup; sellers pay agent commissions (5-6%) plus transfer taxes and their settlement share — 6-10% of the price in total. In a buyer market, sellers can credit part of the buyer costs as a negotiation lever.',
+    },
+    {
+      q: 'Can I roll closing costs into the mortgage?',
+      a: 'Sometimes: lender-paid options build costs into a higher rate, and FHA/VA allow limited seller credits, while true no-cost refinances trade roughly 0.25% more rate for the fees. Rolling costs in always costs more over time than paying them at the table.',
+    },
+    {
+      q: 'Which closing costs can I shop for?',
+      a: 'More than most buyers think: title insurance varies 30%+ between providers, and settlement and escrow fees are negotiable in many states. The Loan Estimate marks shoppable services in its Services You Can Shop For section — compare at least two providers.',
+    },
+  ],
+  'property-tax-calculator': [
+    {
+      q: 'How do I calculate my property tax?',
+      a: 'Multiply assessed value by the millage rate and divide by 1,000: a $320,000 assessment at 20 mills owes $6,400 a year. Assessed value is usually market value times the county assessment ratio, minus any exemptions you have filed.',
+    },
+    {
+      q: 'What is a mill in property tax?',
+      a: 'One mill equals $1 of tax per $1,000 of assessed value — a 20-mill rate charges $20 per $1,000. Mills and percentages convert directly: 20 mills = 2% of assessed value.',
+    },
+    {
+      q: 'Will my taxes go up if I buy above the assessment?',
+      a: 'Often yes. Caps like California Prop 13 protect current owners, but many jurisdictions reassess a long-held home at your purchase price after the sale. Budget your taxes on what you paid, not on the seller current bill.',
+    },
+    {
+      q: 'How do I lower my property tax bill?',
+      a: 'File every exemption you qualify for (homestead, senior, veteran) — they are usually not automatic — and appeal the assessment when it outruns comparable sales. Appeals typically must be filed within 30-60 days of the assessment notice.',
+    },
+  ],
+  'prorated-rent-calculator': [
+    {
+      q: 'How is prorated rent calculated?',
+      a: 'Divide monthly rent by the days in that month and multiply by days occupied: $1,800 rent with a November 10 move-in means 21 days × $60.00 = $1,260. Some leases use annual rent ÷ 365 as the daily rate instead — $59.18 here — so check the lease first.',
+    },
+    {
+      q: 'Which is better, prorating by month or by 365 days?',
+      a: 'For tenants the 365-day basis is slightly cheaper because it spreads rent across a uniform year; in February the month basis is the priciest ($64.29/day on $1,800 rent). The difference is usually under $20 — the lease clause decides, not preference.',
+    },
+    {
+      q: 'Does the move-in day itself count?',
+      a: 'Normally yes — you hold the keys, you pay for the day. A November 10 move-in owes the 10th through the 30th, 21 days. Some leases count from the lease start date instead; confirm which convention yours uses before signing.',
+    },
+    {
+      q: 'How do I prorate the last month of rent?',
+      a: 'Same math, fewer days: a June 8 move-out owes 8 days × the daily rate ($480 on $1,800 month-basis). Landlords typically prorate the final month and return the balance of any last-month deposit collected upfront.',
+    },
+  ],
+  'rental-property-calculator': [
+    {
+      q: 'What is a good cap rate?',
+      a: 'It depends on market and leverage: 4-6% is common in appreciation-driven coastal cities, 8%+ in slower-growth Midwest markets. Cap rate grades the asset before financing — compare it against your borrowing rate; deals rarely work when cap rate sits below the mortgage rate without a big down payment.',
+    },
+    {
+      q: 'What is the 1% rule in real estate?',
+      a: 'Monthly rent should equal at least 1% of the purchase price — a screen from a higher-yield era. This sample shows 0.73% and still cash-flows positively; treat the rule as a fast filter for sorting listings, then let NOI, cash flow, and cash-on-cash decide.',
+    },
+    {
+      q: 'How do you calculate cash-on-cash return?',
+      a: 'Annual pre-tax cash flow divided by total cash invested. With $2,078 of annual flow on $81,000 of cash in (down payment plus closing costs), the return is 2.57%. It measures your actual leverage — the same property all-cash shows a different number.',
+    },
+    {
+      q: 'What expenses should a landlord budget?',
+      a: 'Property tax, insurance, maintenance, property management (8-10% of rent if outsourced), leasing fees, and vacancy of 5-8%. The 50% rule of thumb — half of gross rent goes to expenses before the mortgage — remains the sanest first-pass filter.',
+    },
+  ],
+  'house-flip-calculator': [
+    {
+      q: 'What is the 70% rule in house flipping?',
+      a: 'Pay at most 70% of the after-repair value minus repair costs: on a $450,000 ARV with $60,000 of repairs, that is a $255,000 maximum purchase. The margin covers hard-money interest, closing costs on both ends, and the rehab running over.',
+    },
+    {
+      q: 'How much profit should a house flip make?',
+      a: 'Experienced flippers target 10-20% of ARV after all costs — $45,000-90,000 on a $450,000 ARV — because thinner margins evaporate with one surprise. This sample projects $73,200 (21.2% ROI), squarely in the professional zone.',
+    },
+    {
+      q: 'What are holding costs on a flip?',
+      a: 'Everything the property burns monthly while you own it: taxes, vacant-property insurance (2-3× normal), utilities, and hard-money interest at 10-12% plus points. Six months at $1,200 plus loan interest is typical carry — budget one month more than the contractor promises.',
+    },
+    {
+      q: 'Do I need a hard money loan to flip houses?',
+      a: 'No, but most flippers use them: banks rarely finance distressed properties, and hard money closes in days based on the deal, not your W-2. The cost — points plus double-digit rates — is exactly why the 70% rule exists: it reserves the spread that pays for that money.',
+    },
+  ],
+  'college-savings-calculator': [
+    {
+      q: 'Why not just use regular inflation?',
+      a: 'US college costs have historically risen 4-6% per year while general CPI runs closer to 2-3%, so a target built on ordinary inflation almost guarantees a shortfall in the enrollment year. The 5% default comes from that historical range.',
+    },
+    {
+      q: 'How is the total cost computed?',
+      a: 'Today\'s annual cost is inflated to the enrollment year, and each later academic year inflates one more year - a four-year degree is the sum of four rising numbers, not the first year times four.',
+    },
+    {
+      q: 'How are current savings and monthly contributions handled?',
+      a: 'Existing savings compound monthly to enrollment, and monthly contributions use the future value of an ordinary annuity. The remaining gap divided by the annuity factor is the required monthly amount.',
+    },
+    {
+      q: 'What are the tax advantages of a 529 plan?',
+      a: 'Growth withdrawn for qualified education expenses is federally tax-free, and many states add deductions. The 529 is just the container - this tool computes how much to save, whether the money sits in a 529, Coverdell, or a taxable account.',
+    },
+  ],
+  '401k-match-calculator': [
+    {
+      q: 'What does "50% up to 6%" mean?',
+      a: 'For every dollar you contribute, the employer adds 50 cents, but only on the first 6% of your salary. At $75,000 contributing the full 6%, the maximum match is $2,250 per year; contributing only 4% earns $1,500.',
+    },
+    {
+      q: 'How is the "free money left on table" calculated?',
+      a: 'Maximum possible match minus the match you actually receive. It compounds year after year - a decade below the 6% threshold at the example salary is $7,500 of declined employer money, before any growth.',
+    },
+    {
+      q: 'What is the 2025 contribution limit?',
+      a: 'The elective deferral limit is $23,500 for employees under 50 in 2025, with additional catch-up room at 50-59 and 60+. Employer matching is paid on top and does not consume your personal limit, though combined contributions face a separate pay-percentage ceiling.',
+    },
+    {
+      q: 'Does vesting affect the result?',
+      a: 'Yes - the tool shows what the employer deposits; if you leave before vesting is complete, part or all of the match can be forfeited. Common schedules are 3-5 year cliffs or annual graded vesting per your plan document.',
+    },
+  ],
+  'social-security-break-even-calculator': [
+    {
+      q: 'How much do I lose by claiming at 62?',
+      a: 'It depends on your full retirement age: those born in 1960 or later have an FRA of 67 and receive 70% at 62; with an FRA of 66 it is 75%. The rule is 5/9 of a percent per month for the first 36 early months, then 5/12 per month.',
+    },
+    {
+      q: 'How much does waiting until 70 pay?',
+      a: 'Those born in 1943 or later earn 2/3 of a percent per delayed month - 8% per year. An FRA of 67 reaches 124% of PIA at 70; an FRA of 66 tops out at 132%. No further credits accrue past 70.',
+    },
+    {
+      q: 'What does the break-even age mean?',
+      a: 'Claiming early pays smaller checks for more months; delaying pays larger checks that start later. The break-even age is where the cumulative totals cross - outlive it and delaying won; die before it and claiming early paid more. This tool solves the crossings month-precisely.',
+    },
+    {
+      q: 'What does this model simplify?',
+      a: 'Benefits are nominal: no COLA, no taxes, no investment returns on early benefits, and no spousal or survivor effects - each of those moves the real crossover. It answers the core question of where the cumulative curves intersect at these monthly amounts.',
+    },
+  ],
+  'student-loan-payment-calculator': [
+    {
+      q: 'How are the three payments calculated?',
+      a: 'The standard plan amortizes over 10 years (120 payments); extended stretches to 25 years (300); graduated also runs 10 years but starts lower and rises every two years - this tool solves the exact starting payment with 25% biennial steps.',
+    },
+    {
+      q: 'What is the grace-period capitalization trap?',
+      a: 'Federal loans have 6 months after graduation: subsidized loans have the government paying interest, while unsubsidized loans accrue it and add it to principal at repayment - you then pay interest on that extra principal for 10-25 years.',
+    },
+    {
+      q: 'How much does extending to 25 years really cost?',
+      a: 'With $35,000 at 6.8% and 6 grace months: the 10-year payment is about $416 with roughly $13,800 in interest; over 25 years it drops to about $251 but interest climbs to about $39,200 - the extra $25,000 is the price of the easier payment.',
+    },
+    {
+      q: 'Does this work for private student loans?',
+      a: 'The math does - any fixed-payment loan computes the same way. But private loans do not offer the federal graduated or extended plans and often accrue interest during school; your promissory note governs.',
+    },
+  ],
+  'car-lease-calculator': [
+    {
+      q: 'How do I convert money factor to APR?',
+      a: 'Money factor × 2400 ≈ the equivalent annual rate: 0.00225 is about 5.4%. It is an industry convention rather than exact math, but it is enough to decode fine print - when a salesperson says the rate is low, ask for the money factor and multiply.',
+    },
+    {
+      q: 'What makes up the monthly payment?',
+      a: 'Two parts: depreciation = (adjusted cap cost − residual value) ÷ months, and the rent charge = (adjusted cap cost + residual value) × money factor. Note the plus sign - you are financing the whole car, not just the part you consume.',
+    },
+    {
+      q: 'What is adjusted cap cost?',
+      a: 'Negotiated price plus fees (like the acquisition fee) minus down payment or trade-in credit. Dealers often capitalize fees without highlighting them; verify line by line before signing - it is the usual source of inflated payments.',
+    },
+    {
+      q: 'Is buying the car at lease end worth it?',
+      a: 'Usually not arithmetically: total lease cost plus residual almost always exceeds buying the same car from the start (the tool shows both). Buying out makes sense when the residual is below market, the car is known-good, or you value skipping the shopping trip.',
+    },
+  ],
+  'ev-charging-cost-calculator': [
+    {
+      q: 'How is cost per mile calculated?',
+      a: 'Blended rate ÷ efficiency in miles per kWh. With $0.17 home, $0.45 public, and 80% home charging, the blended rate is about $0.226; divided by 3.5 miles/kWh that is about $0.065 per mile - versus $0.117 for a 30-MPG gas car at $3.50.',
+    },
+    {
+      q: 'What efficiency should I enter?',
+      a: 'Typical EVs range 2.5-4.5 miles per kWh: compacts around 3.5-4.5, large SUVs and pickups 2-3. Winter can knock off another 20-30%. Use the real figure from your dashboard or app, not the EPA peak.',
+    },
+    {
+      q: 'Why does public charging matter so much?',
+      a: 'DC fast charging commonly costs 2-4× the home rate. At 12,000 miles a year and 3.5 miles/kWh, every 10% of mileage moved from home to $0.45 public charging adds roughly $95 a year - and "occasional" fast charging becomes a habit quickly.',
+    },
+    {
+      q: 'What is not included?',
+      a: 'Time-of-use rates (off-peak plans can cut home charging sharply), one-time home charger installation, insurance and maintenance differences, and battery degradation. As a fuel comparison it is accurate; full cost of ownership needs those added.',
+    },
+  ],
+  'rent-budget-calculator': [
+    {
+      q: 'How do I use the 30% rule?',
+      a: 'Keep rent under 30% of your monthly income - traditionally gross. Above that, US housing policy considers you rent-burdened. At $6,000 a month the cap is $1,800. It is a screening tool, not a law: expensive cities often force a breach.',
+    },
+    {
+      q: 'Why is the 50/30/20 cap 50% instead of 30%?',
+      a: 'The 50/30/20 budget splits after-tax income into needs, wants, and savings, and rent lives inside the needs bucket. The bucket is 50% total, but rent is only one need - food, commuting, and insurance come from the same bucket. In practice aim for 25-30% of net for rent.',
+    },
+    {
+      q: 'How different are gross and net?',
+      a: 'The 30% rule is traditionally applied to gross income; 50/30/20 works on after-tax. When you choose gross, this tool estimates net at about 22% effective tax and shows both - that band is your decision range.',
+    },
+    {
+      q: 'Is going over 30% automatically bad?',
+      a: 'No, but compensate deliberately: rent at 40% of net usually pushes savings below 20% - either accept a low-saving phase, cut transport and food, or move farther out. The rule makes the trade-off explicit; it does not decide for you.',
+    },
+  ],
+  'christmas-budget-calculator': [
+    {
+      q: 'What split does the budget use?',
+      a: 'A typical split is gifts 70%, decorations 15%, and food or hosting 15%. Inside the gift pool, weighting family 60%, friends 30%, and coworkers 10% matches how closeness works - the structure most holiday spending guides converge on.',
+    },
+    {
+      q: 'How are per-person amounts calculated?',
+      a: 'Each group\'s share of the gift pool divided by its headcount. On an $800 budget the pool is $560: family gets $336 (5 people ≈ $67 each), friends $168 ($28 each), coworkers $56 ($14 each). Change a count and the per-person figure updates.',
+    },
+    {
+      q: 'How much "should" I spend per person?',
+      a: 'There is no universal answer - the budget method is total sets the frame, proportions set the structure, headcount sets the unit price. Fix what you can afford first and let the calculator allocate, rather than deciding in the store aisle.',
+    },
+    {
+      q: 'How do I avoid the January bill shock?',
+      a: 'Set the total in October, finish the list before Black Friday, and keep any single purchase under 1.5× the planned per-person amount. Put the calculator\'s numbers on your shopping list - last-week add-ons are what blow the budget.',
+    },
+  ],
+  'one-rep-max-calculator': [
+    {
+      q: 'Which formula should I trust?',
+      a: 'Up to five reps the three formulas agree within 2-4%: Epley reads highest, Lander and Brzycki slightly more conservative. The average of all three is a sane default; take the lowest estimate for conservative training blocks.',
+    },
+    {
+      q: 'Why estimate instead of testing a true max?',
+      a: 'A true 1RM test is deeply fatiguing, carries real injury risk, and needs a spotter. Estimating from a hard set of ten reps or fewer typically lands within 5-10% — plenty accurate mid-program at a fraction of the recovery cost.',
+    },
+    {
+      q: 'What percentage should I train at?',
+      a: 'Strength phases live at 85-95% for 1-3 reps; hypertrophy responds best to 65-80% for 6-12; speed work and deloads sit at 50-60%. The table keys off the three-formula average, so log which basis you used to stay consistent.',
+    },
+    {
+      q: 'Is it accurate for high-rep sets?',
+      a: 'Beyond 10-12 reps muscular endurance dominates and every formula drifts upward — Epley most of all. To refresh your estimate, re-test with a weight you can lift 3-5 times rather than extrapolating a 15-rep set.',
+    },
+  ],
+  'race-time-predictor': [
+    {
+      q: 'How accurate is the Riegel formula?',
+      a: 'For adjacent distances and well-trained runners it usually lands within ±5%. Error grows with the size of the jump: projecting a marathon from a 5K is only the ceiling for "if I also did the long runs".',
+    },
+    {
+      q: 'Why does the marathon prediction look too fast?',
+      a: 'Riegel extrapolates the fatigue curve but models no fueling, no wall, and no glycogen debt. First-time marathoners should add 3-5% and plan 60-90 g of carbohydrate per hour of racing.',
+    },
+    {
+      q: 'What does the 1.06 exponent mean?',
+      a: 'It is the fatigue exponent: 1.0 would mean your pace never slows with distance. Riegel fitted 1.06 to large race databases in 1981; elite runners sit nearer 1.03-1.05 and novices above it.',
+    },
+    {
+      q: 'Can I use training runs?',
+      a: 'Prefer race efforts or all-out time trials: solo training typically runs 2-5% slower than race day (no rivals, no adrenaline, no aid stations), which drags every prediction down with it.',
+    },
+  ],
+  'vo2-max-calculator': [
+    {
+      q: 'Which method is better?',
+      a: 'The Cooper 12-minute run is the field substitute for what labs measure directly and typically lands within ±3-5 ml/kg/min; the heart-ratio method (Uth-Sørensen) only captures cardiovascular efficiency and varies more between people. Use Cooper whenever you can run it.',
+    },
+    {
+      q: 'What counts as a good VO2 max?',
+      a: 'Values in the 40s already beat most age peers; the 50s are competitive-runner territory; elites reach 70-85 for men and 60-75 for women. The bands slide down with age — a 45 at 40 is not a 45 at 25.',
+    },
+    {
+      q: 'How do I run a Cooper test?',
+      a: 'Warm up properly, then cover the maximum distance in exactly 12 minutes on a measured course. Bad pacing (going out too hard in the first two minutes) visibly skews the result; avoid hard training in the prior 24 hours.',
+    },
+    {
+      q: 'Can I improve my VO2 max?',
+      a: 'Yes — a large Zone 2 base plus 1-2 weekly interval sessions at 90-95% of max heart rate. Beginners commonly gain 10-15% in 8-12 weeks; gains shrink with training age as genetics set much of the ceiling.',
+    },
+  ],
+  'body-surface-area-calculator': [
+    {
+      q: 'Why are there two formulas?',
+      a: 'DuBois (1916) was fitted from wax molds of just nine subjects; Mosteller (1987) simplified it to √(height × weight / 3600). They agree within about 2% for typical adults — Mosteller reads slightly lower at extreme body sizes.',
+    },
+    {
+      q: 'What is BSA used for?',
+      a: 'Chemotherapy dosing in mg/m², cardiac index (cardiac output ÷ BSA, normal 2.5-4.0 L/min/m²), pediatric fluid rules, burn-area charts, and some renal function conversions.',
+    },
+    {
+      q: 'Is it accurate at very high BMI?',
+      a: 'Both formulas underestimate surface area in severe obesity. Oncology protocols commonly cap BSA at 2.2-2.5 m² to avoid overdosing — dosing decisions always belong to the treating institution.',
+    },
+    {
+      q: 'Can I enter pounds and inches?',
+      a: 'The constants here are calibrated for cm and kg, so convert first (1 in = 2.54 cm, 1 lb ≈ 0.4536 kg). For imperial inputs the equivalent Mosteller form is √(lb × in / 3131).',
+    },
+  ],
+  'waist-to-height-ratio-calculator': [
+    {
+      q: 'Where exactly do I measure my waist?',
+      a: 'At the midpoint between your lowest rib and the top of your hip bone, tape horizontal and snug without digging in, reading after a normal exhale. Measuring over clothing or while sucking in are the classic errors and shave 0.03-0.05 off the ratio.',
+    },
+    {
+      q: 'Why is 0.5 the threshold?',
+      a: 'Multiple systematic reviews (notably Ashwell\'s) support waist-at-half-height as the flag for central obesity and rising insulin resistance. Between 0.4 and 0.5 metabolic markers look best; 0.5-0.6 climbs; above 0.6 risk is clearly elevated.',
+    },
+    {
+      q: 'How does WHtR compare to BMI?',
+      a: 'BMI cannot tell muscle from visceral fat — muscular people get flagged as overweight while "normal weight, big waist" gets missed entirely. WHtR measures abdominal storage directly and needs no age or sex tables.',
+    },
+    {
+      q: 'Does it work for children and older adults?',
+      a: 'From about age 5 the same 0.5 cutoff works as a screen, which is its practical advantage over BMI percentiles. Below that age use age-specific percentiles and check with a pediatrician when in doubt.',
+    },
+  ],
+  'steps-to-miles-calculator': [
+    {
+      q: 'How accurate is estimating stride from height?',
+      a: 'Walking stride ≈ height × 0.414 (the Hatano relationship), typically within about 10%. For precision, walk 10 steps at normal pace, measure the distance, and divide by 10 — or count steps around a full 400 m track lap.',
+    },
+    {
+      q: 'How many steps are in a mile?',
+      a: 'Roughly 2,000-2,500 for adults, averaging about 2,100: taller walkers take fewer steps per mile. In the other direction, 10,000 steps come to about 4-5 miles (7-8 km).',
+    },
+    {
+      q: 'Why does this tool not calculate calories?',
+      a: 'Calories depend on body weight, terrain, and pace — a different question from distance conversion, which is all this tool does. For the energy side, pair it with the steps-to-calories calculator (see Next Steps below).',
+    },
+    {
+      q: 'Do fitness trackers and phones count the same steps?',
+      a: 'No. Wrist devices count arm swings (dishwashing included) and miss stroller-pushing; phones undercount slow walking by 5-10%. A 10-20% disagreement between devices on the same day is normal — track the trend on one device.',
+    },
+  ],
+  'weight-loss-goal-calculator': [
+    {
+      q: 'Why 7,700 kcal per kilogram?',
+      a: 'It converts the Wishnofsky convention (3,500 kcal per pound) into metric — a working rule, not physics. Real values run about 5,000-9,000 kcal depending on adherence and how much your metabolism adapts as you diet.',
+    },
+    {
+      q: 'What happens if my deficit is over 1,000 kcal?',
+      a: 'It gets hard to sustain, muscle-loss risk climbs, and training performance drops. Most people do better at a 500-750 kcal deficit while keeping protein at 1.6-2.2 g per kg to protect lean mass.',
+    },
+    {
+      q: 'Why did I lose weight so fast in week one?',
+      a: 'The early drop is mostly water and glycogen: each gram of stored carbohydrate holds about 3 g of water, so cutting carbs flushes 1-2 kg in days. That is not fat — do not extrapolate week-one speed to the whole plan.',
+    },
+    {
+      q: 'What weekly rate should I choose?',
+      a: 'The common guidance is 0.5-1% of body weight per week — for most people 0.25-0.75 kg. Stay at the low end if you train hard or are already lean; slower rates measurably improve your odds of keeping the weight off.',
+    },
+  ],
+  'fiber-intake-calculator': [
+    {
+      q: 'Why does the target drop after age 50?',
+      a: 'These are the Institute of Medicine Adequate Intakes, which scale with average energy intake: 30 g for men and 21 g for women aged 51+. If you are still active and eating more, the 14 g per 1,000 kcal rule may exceed the AI — which is fine.',
+    },
+    {
+      q: 'What about soluble vs insoluble fiber?',
+      a: 'Both count toward the total. Oats, barley, and legumes skew soluble (cholesterol, blood sugar); wheat bran and vegetables skew insoluble (regularity). A varied diet delivers both without any bookkeeping.',
+    },
+    {
+      q: 'Can I cover the gap with supplements?',
+      a: 'Food first — it brings potassium, magnesium, and antioxidants along. If you supplement, psyllium husk has the strongest evidence; inulin-type fructanes ferment quickly and cause gas when overdosed, so start small.',
+    },
+    {
+      q: 'Is it possible to eat too much fiber?',
+      a: 'Above roughly 60-70 g per day, bloating and gas are common and mineral absorption (iron, zinc) can suffer. Increase by about 5 g per week and drink extra water — your microbiome adapts within weeks.',
+    },
+  ],
+  'paypal-fee-calculator': [
+    {
+      q: 'How much does PayPal charge per transaction?',
+      a: 'The standard US commercial rate is 3.49% + $0.49 per transaction. International buyers add a 1.50% cross-border fee, and currency conversion adds roughly a 3-4% spread on top — often the biggest hidden cost.',
+    },
+    {
+      q: 'How do I calculate how much to charge so I net a specific amount?',
+      a: 'Divide backwards: charge = (target net + fixed fee) ÷ (1 − percentage rate). To net $100 at 3.49% + $0.49, charge $100.49 ÷ 0.9651 ≈ $104.12. Switch the calculator to reverse mode and it does this automatically.',
+    },
+    {
+      q: 'Does PayPal charge a fee for friends and family?',
+      a: 'US Friends & Family payments funded by PayPal balance or bank are free, but card-funded ones cost the sender 2.9% + $0.30. Sellers must never use it — it offers no seller protection.',
+    },
+    {
+      q: 'Why does my effective rate differ from 3.49%?',
+      a: 'The $0.49 fixed fee dominates small payments: on a $10 sale it alone is 4.9%, pushing the effective rate near 8.4%. On $1,000 the same fee is negligible and the effective rate approaches the headline 3.49%.',
+    },
+  ],
+  'etsy-fee-calculator': [
+    {
+      q: 'How much does Etsy take per sale?',
+      a: 'Etsy charges a $0.20 listing fee per item, a 6.5% transaction fee on the item price plus shipping, and payment processing (3% + $0.25 in the US). Offsite Ads adds 15% (12.5% above $10k/yr) on attributed orders — a typical $29 order with ads runs near 26% total.',
+    },
+    {
+      q: 'What are Offsite Ads and when do they apply?',
+      a: "Offsite Ads is Etsy's off-platform advertising. If a buyer clicks an ad on Google or social media before purchasing, Etsy adds 15% of the order total — 12.5% if you sell more than $10k in a 12-month period, at which point participation becomes mandatory.",
+    },
+    {
+      q: 'Do Etsy fees apply to shipping?',
+      a: 'Yes — the 6.5% transaction fee and payment processing are calculated on the item price plus whatever shipping you charge. Offering "free shipping" by building it into the price changes only what the buyer sees, not what Etsy takes.',
+    },
+    {
+      q: 'How can I lower my Etsy fees?',
+      a: 'The controllable lever is Offsite Ads (opt out while under $10k in 12-month sales), plus catalog mix: listing fees are fixed per item, so fewer, higher-priced listings waste less in $0.20 increments. Processing rates vary by seller country, so set up your bank and shop country deliberately.',
+    },
+  ],
+  'amazon-seller-fee-calculator': [
+    {
+      q: 'What percentage does Amazon take?',
+      a: 'Most categories carry a 15% referral fee, though it ranges from 8% (consumer electronics) to 45% (Amazon device accessories), with a $0.30-per-item minimum. FBA fulfillment is a separate per-unit fee set by size tier.',
+    },
+    {
+      q: 'What is the FBA fulfillment fee?',
+      a: "It's Amazon's charge for picking, packing, and shipping your order — roughly $2-$7 per unit for standard-size items as of 2026, set by size tier and weight. Bulky items can pay far more, so always check the current rate card before pricing.",
+    },
+    {
+      q: 'Is FBA cheaper than fulfilling myself (FBM)?',
+      a: 'For small, light, fast-moving items FBA usually wins on per-unit cost and Buy Box visibility. For large, slow, or low-margin items the fee can swallow the margin — run both numbers before committing inventory.',
+    },
+    {
+      q: 'What costs does this calculator leave out?',
+      a: 'Monthly storage fees (spiking in Q4), long-term storage surcharges, ad spend, returns processing, and inbound shipping unless you fold them into the prep cost field. A common rule of thumb: leave 15-20% headroom under your calculated margin.',
+    },
+  ],
+  'square-fee-calculator': [
+    {
+      q: 'What are Square\u2019s fees?',
+      a: 'Square US pricing: 2.6% + 10¢ for tapped, dipped, or QR payments in person; 2.9% + 30¢ for Square Online; 3.5% + 15¢ for manually keyed-in cards; 3.3% + 30¢ for invoices paid by card. Standard plans have no monthly fee.',
+    },
+    {
+      q: 'Why is my effective rate higher than 2.6%?',
+      a: 'The 10¢ fixed fee dominates small tickets: on a $5 coffee it adds 2%, making the effective rate 4.6%. Average across a full day of mixed tickets for the number that actually matters.',
+    },
+    {
+      q: 'How do I pass Square fees to customers?',
+      a: "Many US states restrict card surcharges and Square enforces its own rules — a common workaround is a cash-discount price. To net a target, switch to reverse mode: charge = (net + fixed fee) ÷ (1 − rate). Check your state's surcharge law first.",
+    },
+    {
+      q: 'Does Square charge a monthly fee?',
+      a: 'No — the standard plan charges only per transaction, with no monthly minimum, setup, or PCI-compliance fees. Optional paid subscriptions add loyalty programs and team management, but basic card acceptance stays pay-as-you-go.',
+    },
+  ],
+  'youtube-money-calculator': [
+    {
+      q: 'What is RPM and how is it different from CPM?',
+      a: 'RPM (revenue per mille) is what YOU earn per 1,000 views after YouTube keeps its 45% cut of ads; CPM is what advertisers pay per 1,000 ad impressions. RPM is always the lower number and the honest one for channel revenue.',
+    },
+    {
+      q: 'What RPM should I use?',
+      a: 'Long-form finance and business content typically clears $8-15, tech $4-10, general vlogs $2-5, gaming $1.5-3, and Shorts a fraction of that ($0.05-0.15). Once monetized, your own YouTube Studio RPM report replaces every estimate.',
+    },
+    {
+      q: 'How many views do you need to make money on YouTube?',
+      a: 'You need 1,000 subscribers plus 4,000 public watch hours (or 10 million Shorts views in 90 days) to join the Partner Program. At a $4 RPM that is roughly $4 per 1,000 views, so 100,000 monthly views ≈ $400/month.',
+    },
+    {
+      q: 'Does AdSense pay for all views?',
+      a: 'No — only monetized playbacks with served ads earn. Repeat views, ad-blocker sessions, and restricted or demonetized content earn nothing, which is why real checks often land 10-20% under naive view-times-RPM estimates.',
+    },
+  ],
+  'nps-calculator': [
+    {
+      q: 'How is NPS calculated?',
+      a: 'Subtract the percentage of detractors (0-6) from the percentage of promoters (9-10). Passives (7-8) count in the denominator but cancel out. With 250 promoters, 90 passives, and 60 detractors: 62.5% − 15% = 47.5, rounded to +48.',
+    },
+    {
+      q: 'What is a good NPS score?',
+      a: "Bain's widely used reading: 0-30 is good, 31-70 is great, 71+ is excellent, and anything negative means detractors outnumber promoters. Most industries average somewhere in the 30s — compare against your own sector, not Apple.",
+    },
+    {
+      q: 'Why do passives not count in the score?',
+      a: 'NPS measures active recommendation, not satisfaction. Passives are satisfied but unenthusiastic — they neither promote nor damage you, so they only dilute the denominator. Converting even a few passives into promoters moves the score sharply.',
+    },
+    {
+      q: 'How many responses do I need for a reliable NPS?',
+      a: 'Treat NPS as a margin-of-error statistic. With 100 responses the margin is roughly ±8-10 points; 400 responses bring it near ±5. Track the trend across waves rather than reacting to single small-sample swings.',
+    },
+  ],
+  'conversion-rate-calculator': [
+    {
+      q: 'How do I calculate conversion rate?',
+      a: 'Divide conversions by visitors (or sessions) and multiply by 100: 120 conversions from 5,000 visitors = 2.4%. Use the same denominator consistently — sessions and unique visitors produce different rates.',
+    },
+    {
+      q: 'What is a good conversion rate?',
+      a: 'Typical e-commerce sits near 2-3%; well-optimized stores clear 5%+. Landing pages for a warm, targeted audience often reach 10%+. Benchmark against your own traffic quality, not industry averages.',
+    },
+    {
+      q: 'Is it cheaper to raise conversion or buy more traffic?',
+      a: 'Mathematically interchangeable (+20% rate equals +20% traffic) but not in cost: rate gains compound on the ad spend you already pay, while traffic gains scale the spend. Improve rate first, then reinvest.',
+    },
+    {
+      q: 'How much traffic do I need for more conversions?',
+      a: 'At the current rate, extra conversions need proportionally extra visitors: +24 conversions at 2.4% requires about +1,000 visitors. That linear math is exactly why conversion improvements are so valuable — they bend the line.',
+    },
+  ],
+  'gym-cost-per-visit-calculator': [
+    {
+      q: 'How do I calculate cost per visit?',
+      a: 'Divide your effective monthly cost by how many times you actually go: a $45/month plan used 8 times costs $5.63 per visit. For annual plans, divide the payment by 12 first to get the true monthly figure.',
+    },
+    {
+      q: 'How many gym visits make a membership worth it?',
+      a: 'Divide the monthly fee by your gym\u2019s drop-in rate: $45 ÷ $15 = 3 visits/month just to break even. Survey data keeps finding the average member goes about 4 times a month, so most people are only marginally ahead.',
+    },
+    {
+      q: 'Are annual gym memberships worth it?',
+      a: 'They usually run 15-25% cheaper than paying monthly, but only if you keep going. If your visit habit collapses, you have prepaid for nothing — a monthly plan is the honest test before committing to a year.',
+    },
+    {
+      q: 'What counts as a visit?',
+      a: 'Count the sessions you realistically complete, not the ones you plan. Check-ins, shower-and-leave days, and twice-a-day sessions all distort the math in different directions — pick one definition and stay consistent.',
+    },
+  ],
+  'concrete-calculator': [
+    {
+      q: 'How many 80 lb bags of concrete for a 10×10 slab?',
+      a: 'At 4 inches thick, a 10×10 slab holds 33.3 ft³ — about 1.23 cubic yards. With the 10% waste margin you order 1.36 yd³, which is 62 eighty-pound bags if you are mixing by hand.',
+    },
+    {
+      q: 'How many bags make one cubic yard?',
+      a: 'An 80 lb bag yields 0.60 ft³, so a full yard takes 45 bags — or 61 sixty-pound bags, or 90 forty-pound bags. Past one yard, ready-mix delivered by truck is cheaper and far less labor.',
+    },
+    {
+      q: 'Why add a 10% waste margin?',
+      a: 'Spills, an uneven subgrade, and over-dug edges all eat volume. Ten percent is the trade standard for formed work; bump it to 15% for hand-dug footings where dimensions wander.',
+    },
+    {
+      q: 'How does it calculate columns and steps?',
+      a: 'Round columns use π × (diameter ÷ 2)² × height × quantity. Steps are treated as triangular prisms — tread run × rise ÷ 2, times width, per step — which matches the pour for steps formed against the house.',
+    },
+  ],
+  'mulch-calculator': [
+    {
+      q: 'How deep should mulch be?',
+      a: 'Two to three inches is the sweet spot for beds: enough to suppress weeds and hold moisture, thin enough for air and water to reach roots. Going past 4 inches can suffocate roots and invite rot.',
+    },
+    {
+      q: 'How many bags is a cubic yard?',
+      a: 'One yard is 27 ft³ — fourteen 2-ft³ bags or nine 3-ft³ bags. Bulk delivery usually wins on price once a project passes about six yards.',
+    },
+    {
+      q: 'Why does depth matter so much to cost?',
+      a: 'Volume scales linearly with depth: going from 2 to 4 inches doubles the order. The depth comparison chart shows the cost of each common depth at your bag price.',
+    },
+    {
+      q: 'Is playground mulch different?',
+      a: 'Yes. Play areas need 9-12 inches of certified engineered wood fiber tested for impact attenuation — decorative mulch is not rated for falls and should never substitute.',
+    },
+  ],
+  'gravel-calculator': [
+    {
+      q: 'How many tons in a cubic yard of gravel?',
+      a: 'Crushed stone runs about 2,700 lb (1.35 tons) per yard, pea gravel about 2,600 lb, dry sand about 2,500 lb. Suppliers sell by weight, so convert volume to tons before comparing quotes.',
+    },
+    {
+      q: 'How thick should a gravel driveway be?',
+      a: 'Four to six inches of compacted crushed stone over decent subgrade for passenger cars; heavier vehicles want 6-12 inches with larger stone at the base. Keep finish layers near pea-gravel size.',
+    },
+    {
+      q: 'Gravel vs mulch — which calculator?',
+      a: 'Use this one when weight and compaction matter (driveways, bases, drainage); mulch work is sold and spread by volume. The two tools even price differently: per ton vs per bag.',
+    },
+    {
+      q: 'How much does a dump truck deliver?',
+      a: 'Small end-dumps carry 1-5 yards, full-size tri-axles 10 or more (roughly 13-14 tons of crushed stone). Surcharges kick in past the truck tier, so matching load to project saves a second delivery fee.',
+    },
+  ],
+  'drywall-calculator': [
+    {
+      q: 'Should I use 4×8 or 4×12 sheets?',
+      a: 'Twelve-foot sheets mean fewer joints — about a quarter less taping on 8-ft walls — but need two people and strain handling. Solo first-timers usually pick 4×8; crews with lifts hang 4×12 horizontally.',
+    },
+    {
+      q: 'Why the 10% waste factor?',
+      a: 'Cutouts at openings, broken corners, and odd angles consume stock; 10% is the standard allowance, 15% if rooms have many bump-outs. Sheets come in whole units, so the count always rounds up.',
+    },
+    {
+      q: 'How is joint compound estimated?',
+      a: 'At roughly one gallon per 100 ft² for tape plus two finish coats — so a typical room needs one 4.5-gallon pail. Textured finishes add 25-50% on top.',
+    },
+    {
+      q: 'What about screws?',
+      a: 'About one screw per square foot (every 12 inches on ceilings, 16 on walls) works out to a pound per 250 ft². Screws are cheap; buy an extra box rather than stretch spacing.',
+    },
+  ],
+  'roofing-calculator': [
+    {
+      q: 'How do I measure my roof from the ground?',
+      a: 'Multiply building length × width — the footprint, both slopes included — then apply the pitch factor. For a 30×20 footprint at 6/12, that is 600 × 1.118 ≈ 671 ft² of actual roof.',
+    },
+    {
+      q: 'What is a roofing square?',
+      a: 'One hundred square feet of roof area — the trade unit for materials and labor bids. Three bundles of 3-tab shingles cover one square, which is why bundles = squares × 3.',
+    },
+    {
+      q: 'Why does pitch change the area?',
+      a: 'A steeper slope covers more surface over the same footprint. The multiplier rises from 1.054 at 4/12 to 1.25 at 9/12 — a 30×20 roof gains about 1.2 squares, or 3-4 extra bundles, between those pitches.',
+    },
+    {
+      q: 'Does 3 bundles per square always hold?',
+      a: 'Only for standard 3-tab. Architectural and premium shingles are thicker and often need 4-5 bundles per square — check the wrapper and adjust before ordering.',
+    },
+  ],
+  'fence-calculator': [
+    {
+      q: 'How far apart should fence posts be?',
+      a: 'Six to eight feet for privacy panels and pickets, 8-10 for post-and-rail. Wider spacing saves posts and concrete but sags mid-span; never exceed the panel rating.',
+    },
+    {
+      q: 'How much concrete per post hole?',
+      a: 'A 10-inch-diameter, 24-inch-deep hole is about 1.09 ft³ — nearly two 80-lb bags. The tool sizes this from your hole dimensions and multiplies by post count.',
+    },
+    {
+      q: 'How deep should posts go?',
+      a: 'Below the frost line and at least one-third of the above-ground height — a 6-ft fence wants 2-3 ft buried. Crown the concrete above grade and slope it away so water does not pool at the post.',
+    },
+    {
+      q: 'Why does picket count ignore posts?',
+      a: 'Pickets fasten to rails, not posts, and field cuts absorb the difference at ends and corners — the count is total run ÷ picket-plus-gap width, rounded up.',
+    },
+  ],
+  'paver-calculator': [
+    {
+      q: 'How many 4×8 pavers in a square foot?',
+      a: 'Four and a half — so a 16×12 patio (192 ft²) needs 864 exact pieces plus the 10% waste, ordering 951. Bigger pavers drop the count fast: 12×12 needs just one per foot.',
+    },
+    {
+      q: 'How thick should the base be?',
+      a: 'Four inches of compacted crushed stone for patios and walkways; driveways want 6-12 inches. The stone is structural — sand is only ever a 1-inch bedding layer.',
+    },
+    {
+      q: 'Why only 1 inch of bedding sand?',
+      a: 'Thicker sand beds hold water, creep under load, and develop ruts. Screed exactly 1 inch, lay pavers, then sweep polymeric sand into the joints.',
+    },
+    {
+      q: 'Does the waste margin matter?',
+      a: 'Yes — cuts at edges, broken corners, and pattern changes consume stock. Ten percent covers straight layouts; herringbone and diagonal patterns cut more, so allow 15%.',
+    },
+  ],
+  'deck-board-calculator': [
+    {
+      q: 'How do I calculate decking boards?',
+      a: 'Deck area divided by board coverage: (width + gap) in feet per lineal foot. A 16×12 deck with 5.5-inch boards and a 1/8-inch gap needs 410 linear feet — 29 sixteen-footers with waste.',
+    },
+    {
+      q: 'What gap should I leave?',
+      a: 'An 1/8-1/4 inch for pressure-treated lumber (it shrinks as it dries); 3/16 inch or more for composite per the manufacturer spec. Butt treated boards tight and shrinking opens the gap; composite never shrinks, so the gap must be built in.',
+    },
+    {
+      q: 'How is joist count calculated?',
+      a: 'Deck length ÷ on-center spacing, plus one. At 16 inches OC a 16-ft deck carries 13 joists. 24-inch OC only works with boards perpendicular to joists.',
+    },
+    {
+      q: 'Deck boards vs indoor flooring?',
+      a: 'This tool assumes exterior structure: exposed fasteners, gaps for drainage, 16-inch OC framing, and 10% waste for end splits. Interior flooring uses tighter tolerances and finish materials — that is the flooring calculator job.',
+    },
+  ],
+  'dividend-calculator': [
+    {
+      q: 'How is dividend yield calculated?',
+      a: 'Divide the annual dividend per share by the current share price — $2.40 on a $50 stock is a 4.8% yield. Most US payers distribute quarterly, so multiply the quarterly payout by 4 before entering it.',
+    },
+    {
+      q: 'How does the DRIP projection work?',
+      a: 'Each year your dividends buy new shares at the price you entered, and those shares generate their own dividends next year, so income compounds annually. The model holds the share price constant and grows the dividend at your growth rate — it shows the power of reinvestment, not a price forecast.',
+    },
+    {
+      q: 'What is a good dividend yield?',
+      a: 'The S&P 500 has historically averaged 1.3-2%; yields far above 6-8% often signal a payout at risk (a dividend trap). A long record of consistent growth beats a fat starting yield.',
+    },
+    {
+      q: 'Are dividends guaranteed?',
+      a: 'No — boards can cut or suspend them any quarter (2009 and 2020 both saw waves of cuts). The growth input assumes steady raises; stress-test your plan by setting it to 0%.',
+    },
+  ],
+  'dca-calculator': [
+    {
+      q: 'How is the average cost computed?',
+      a: 'Each contribution buys shares at that moment price, and total cash divided by total shares gives your average cost. On the assumed linear path it lands slightly below the midpoint price when markets fall, because more shares are bought cheaply.',
+    },
+    {
+      q: 'When does DCA beat a lump sum?',
+      a: 'Mechanically, whenever the price ends below where it started — the calculator shows the gap directly. Historically lump sum wins about two-thirds of the time because markets rise more often than they fall; DCA\'s real edge is discipline and buying the dips.',
+    },
+    {
+      q: 'Does dollar cost averaging reduce risk?',
+      a: 'It spreads entry-point risk across time and removes timing anxiety, but the cash held back for later buys misses early gains. It is a discipline tool more than a return maximizer.',
+    },
+    {
+      q: 'What contribution frequency should I pick?',
+      a: 'Align it with your paycheck — monthly or every two weeks. With the same total cash, a higher frequency only shaves the average cost marginally; consistency matters far more.',
+    },
+  ],
+  'stock-average-calculator': [
+    {
+      q: 'How is the average cost calculated?',
+      a: 'Each lot counts shares × price, commissions are added once per order, and the total divides by total shares — the same weighted-average cost basis your broker reports. Lots with zero shares are skipped.',
+    },
+    {
+      q: 'Does averaging down make sense?',
+      a: 'It lowers your break-even price but increases your exposure to an idea the market has been rejecting. The honest test for the next lot is: would I open this position fresh, today, at this price?',
+    },
+    {
+      q: 'How does the wash-sale rule affect this?',
+      a: 'If you sold this stock at a loss within ±30 days, a repurchase — including shares bought by dividend reinvestment — makes the loss non-deductible this year; it moves into your cost basis instead. Averaging down right after a tax-loss sale is the classic trap.',
+    },
+    {
+      q: 'Are commissions included?',
+      a: 'Yes. Enter the commission per order and the tool charges it once per active lot, folded into cost basis exactly the way tax reporting treats it.',
+    },
+  ],
+  'options-profit-calculator': [
+    {
+      q: 'How is breakeven calculated?',
+      a: 'Strike ± premium: a long call breaks even at strike + premium per share and a long put at strike − premium. The figure is at expiration and excludes commissions.',
+    },
+    {
+      q: 'Why is max profit or loss "Unlimited"?',
+      a: 'A short call\'s loss grows one-for-one as the stock rises with no cap, and a long call mirrors that upside. Long puts cap at (strike − premium) × 100 × contracts with the stock at zero; short puts lose that same amount at most.',
+    },
+    {
+      q: 'Does the payoff curve include time value?',
+      a: 'No — all figures are at expiration, when time value is zero and the option is worth pure intrinsic value. Closing early gives different results because remaining extrinsic value and early assignment risk come into play.',
+    },
+    {
+      q: 'What does the 100 multiplier mean?',
+      a: 'One US equity option contract controls 100 shares, so the per-share premium × 100 × contracts is the actual cash at stake. Watch for corporate actions that change the multiplier.',
+    },
+  ],
+  'crypto-profit-calculator': [
+    {
+      q: 'How are exchange fees applied?',
+      a: 'The percentage fee is charged on both legs: on capital in at the buy and on gross proceeds at the sell. Even 0.1% per side costs about 0.2% round trip, before the spread.',
+    },
+    {
+      q: 'What does "sell price needed for target" mean?',
+      a: 'It back-solves the exit price that nets your profit target after both fee legs: S = (target + invested × (1 + fee)) ÷ (quantity × (1 − fee)). Use it directly as a limit order price.',
+    },
+    {
+      q: 'Why is my ROI lower than the price move?',
+      a: 'ROI is measured on invested capital after both fees: a 30% price move nets about 29.8% with 0.1% fees per side. Leverage adds funding rates and liquidation risk that this calculator does not model.',
+    },
+    {
+      q: 'Does this include taxes?',
+      a: 'No. In the US and many other countries selling crypto is a taxable disposal, so set aside part of the gain or check the capital-gains rules for your jurisdiction.',
+    },
+  ],
+  'treasury-bill-calculator': [
+    {
+      q: 'Why are there two different yields?',
+      a: 'The auction quotes the bank discount yield: discount ÷ face value × (360 ÷ days). The investment yield divides by the price you actually paid and uses a 365-day year, so it is always slightly higher and is the number comparable to CDs and bonds.',
+    },
+    {
+      q: 'How is the purchase price determined?',
+      a: 'Price = face value × (1 − rate × days ÷ 360). A 13-week bill at a 4.5% discount rate costs $988.63 per $1,000 of face value.',
+    },
+    {
+      q: 'How are T-bills taxed?',
+      a: 'The interest is exempt from state and local income tax but fully federally taxable as ordinary income, reported on a 1099-INT. That state exemption is a real edge in high-tax states.',
+    },
+    {
+      q: 'What if I sell before maturity?',
+      a: 'You receive the market price, which moves with interest rates — only holding to maturity locks the yield. Short bills have minimal rate sensitivity, but it is not zero.',
+    },
+  ],
+  'bond-yield-calculator': [
+    {
+      q: 'What is the difference between current yield and YTM?',
+      a: 'Current yield is the annual coupon divided by price and ignores what happens at maturity. Yield to maturity also annualizes the pull-to-par gain or loss: a discount bond\'s YTM is above its current yield, a premium bond\'s below.',
+    },
+    {
+      q: 'How accurate is the YTM here?',
+      a: 'It uses the classic approximation [C + (F − P)/n] ÷ [(F + P)/2]. Within about ±10% of par it lands within a few basis points of the exact IRR; deep discounts and very long maturities widen the error.',
+    },
+    {
+      q: 'Why do bond prices fall when rates rise?',
+      a: 'New bonds pay the going rate, so an old bond with fixed coupons must be cheaper to compete. That is why market price is an input here — price and yield move opposite by construction.',
+    },
+    {
+      q: 'What does this calculator leave out?',
+      a: 'Semiannual compounding (US convention; the effective yield is slightly higher than the annual figure shown), accrued interest and clean-versus-dirty pricing, credit risk, and call features.',
+    },
+  ],
+  'lottery-odds-calculator': [
+    {
+      q: 'How are the odds calculated?',
+      a: 'Exact hypergeometric probability on both pools: C(K,a) × C(N−K, K−a) ÷ C(N,K) for the main numbers, multiplied by the same formula on the bonus pool. That reproduces the official Powerball jackpot of 1 in 292,201,338.',
+    },
+    {
+      q: 'Does buying more tickets help?',
+      a: 'Each ticket is an independent combination: ten tickets make the jackpot chance 10 in 292,201,338 — about 1 in 29 million. Proportionally ten times better, absolutely still near zero, and expected value stays negative.',
+    },
+    {
+      q: 'Which lottery is easiest to win?',
+      a: 'EuroMillions: its jackpot is 1 in 139,838,160, roughly half as hard as Powerball\'s 292,201,338, and any-prize odds are about 1 in 13 versus roughly 1 in 24-25 for the US games.',
+    },
+    {
+      q: 'How does custom mode work?',
+      a: 'Enter your main pool size N, numbers picked K, and optionally a bonus pool M/J. Jackpot odds are 1 ÷ [C(N,K) × C(M,J)], and "any prize" becomes "at least one main number matched" since prize tiers vary by operator.',
+    },
+  ],
+  'self-employment-tax-calculator': [
+    {
+      q: 'How is self-employment tax calculated?',
+      a: 'Net profit is multiplied by 92.35% to get net earnings; then 12.4% Social Security applies up to the wage base ($176,100 in 2025) and 2.9% Medicare with no cap, plus 0.9% Additional Medicare above $200k single / $250k joint.',
+    },
+    {
+      q: 'Why is it taxed on 92.35% and not my full profit?',
+      a: 'Employees never pay FICA on the employer half, so the law lets the self-employed subtract the equivalent (7.65%) before rates apply — net earnings = profit × 0.9235, making the effective rate about 14.13% rather than 15.3%.',
+    },
+    {
+      q: 'What is the deductible half?',
+      a: 'Half of the SE tax is an above-the-line adjustment: it lowers AGI even if you take the standard deduction, and it never counts back into the SE tax base itself. Remember it when you estimate quarterly payments or you will overpay every quarter.',
+    },
+    {
+      q: 'I have a W-2 job and a side business — do I pay Social Security twice?',
+      a: 'No. Wages and self-employment income share one Social Security wage base: if your salary already covers $176,100, side income skips the 12.4% layer and owes only the 2.9% Medicare part. The calculator subtracts your W-2 wages from the remaining headroom.',
+    },
+  ],
+  'depreciation-calculator': [
+    {
+      q: 'Which depreciation method should I pick?',
+      a: 'Even benefit over the years (buildings, long-lived improvements) fits straight line. Assets that earn most of their value early — vans, laptops — fit double-declining or sum-of-the-years-digits. Your tax return does not get a vote: MACRS classes decide that one.',
+    },
+    {
+      q: 'Is this the depreciation I use on my tax return?',
+      a: 'No. US federal returns run MACRS: salvage value is ignored, recovery periods are fixed by property class (5 years for computers and cars, 27.5 for residential rentals), and the half-year convention blurs year one. This tool does book/GAAP depreciation; Section 179 and bonus depreciation can expense small assets immediately.',
+    },
+    {
+      q: 'Why does double-declining balance never quite reach zero?',
+      a: 'It applies a fixed percentage to a shrinking book value, so it only approaches zero asymptotically. Real schedules stop at salvage value — built into this calculator — and commonly switch to straight-line on the remaining balance once that deduction becomes larger.',
+    },
+    {
+      q: 'What salvage value should I use?',
+      a: 'In accounting, a realistic estimate of what you will sell the asset for; 0 or a symbolic dollar works if you have none. Tax-side MACRS forces salvage to 0 no matter what you enter here.',
+    },
+  ],
+  'mileage-reimbursement-calculator': [
+    {
+      q: 'What are the IRS standard mileage rates for 2025?',
+      a: '70 cents per business mile (up from 67 cents in 2024), 21 cents for medical and moving mileage, and 14 cents for charitable volunteer driving. The charitable rate is written into statute and moves only when Congress changes it.',
+    },
+    {
+      q: 'Can my employer reimburse more or less than the IRS rate?',
+      a: 'Yes — the standard rate is not a legal ceiling. Under an accountable plan, reimbursement up to the IRS rate stays tax-free; anything above becomes taxable wages. The self-employed deduct directly at the rate for their purpose.',
+    },
+    {
+      q: 'Is moving mileage still deductible?',
+      a: 'Only for active-duty members of the Armed Forces moving under orders — that has been the rule since 2018. Everyone else deducts nothing for relocation driving, even for a new job across the country.',
+    },
+    {
+      q: 'Which records do I need to keep?',
+      a: 'A mileage log: date, miles, and purpose. Choosing the standard rate replaces fuel receipts and maintenance records, but the log itself is non-negotiable — verbal estimates rarely survive an audit.',
+    },
+  ],
+  'contractor-vs-employee-calculator': [
+    {
+      q: 'How much more should a 1099 contractor charge?',
+      a: 'The recruiting rule of thumb says 20-30% more per year to cover the extra SE tax, self-bought health insurance, and unpaid leave. That is a starting point: enter your actual premiums, match, and tax rate here and let the arithmetic decide.',
+    },
+    {
+      q: 'Why does 1099 owe more tax on the same pay?',
+      a: 'On W-2, employee and employer split FICA 7.65% each; on 1099 you are both sides at 15.3% of 92.35% of pay — about 14.13% effective. At $100,000 that difference alone is roughly $6,480 per year.',
+    },
+    {
+      q: 'Does health insurance change the picture?',
+      a: 'It is the biggest lever. Employer plans are subsidized and paid pre-tax; a contractor buys on the marketplace with after-tax money (the SE health deduction softens income tax only, never the SE tax). Add a 401(k) match and unemployment insurance and the gap widens fast.',
+    },
+    {
+      q: 'What is not modeled here?',
+      a: 'State income taxes, the QBI pass-through deduction of up to 20%, HSA eligibility, and the value of protections like workers compensation. Treat the result as a well-informed directional gap, not a tax return.',
+    },
+  ],
+  'gross-up-calculator': [
+    {
+      q: 'What tax rate should I use to gross up a bonus?',
+      a: 'US bonus payments under $1 million use 22% federal supplemental withholding; add 7.65% FICA for the 29.65% working rate most payroll systems apply. Above $1 million the supplemental rate is 37%, and state withholding stacks on top of both.',
+    },
+    {
+      q: 'Is the withholding the same as my final tax?',
+      a: 'No. A gross-up guarantees the net at payment time, not at filing. If your true marginal rate is lower you reclaim the difference on your return; if higher, you owe it — the formula itself never changes.',
+    },
+    {
+      q: 'What is the gross-up formula?',
+      a: 'Gross = desired net ÷ (1 − tax rate), and tax = gross − net. Example: $5,000 net at 29.65% means 5,000 ÷ 0.7035 = $7,107.32 gross, with $2,107.32 withheld.',
+    },
+    {
+      q: 'When do people actually gross up payments?',
+      a: 'Taxable relocation packages are the classic case — the employer wants the transferee to keep a round number. Award payments, spot bonuses, and certain legal settlements follow the same pattern wherever a fixed net is promised.',
+    },
+  ],
+  'commute-cost-calculator': [
+    {
+      q: 'Can I deduct my commuting miles?',
+      a: 'No. Miles between home and a regular workplace have never counted as deductible business mileage for employees, and unreimbursed employee expenses disappeared entirely after 2017. For deductible business trips, use the mileage reimbursement calculator.',
+    },
+    {
+      q: 'Which costing method should I use?',
+      a: 'The per-mile rate (70 cents is the 2025 IRS-style figure) prices the whole car: fuel, tires, maintenance, insurance, depreciation. The MPG method prices fuel only and typically understates the true cost by half.',
+    },
+    {
+      q: 'How is the time value computed?',
+      a: 'One-way minutes × 2 × days per week × working weeks ÷ 60 gives annual hours, multiplied by your after-tax hourly rate. Thirty minutes each way, five days a week, is about 240 hours a year — six work weeks.',
+    },
+    {
+      q: 'What does this calculator leave out?',
+      a: 'Parking, tolls, transit passes, and occasional remote weeks sit outside it — add them by hand. It also prices the present, not the commitment: a commute you can quit in a month by moving is a different decision from one locked into a 30-year mortgage.',
+    },
+  ],
+  'smoking-cost-calculator': [
+    {
+      q: 'How is the invested value calculated?',
+      a: 'The yearly cigarette spend is invested once a year and compounded annually at your chosen return for ten years: yearly amount × ((1 + r)^10 − 1) ÷ r. A pack a day at $12 with a 7% return grows to about $60,500 — assuming prices never rise, which tobacco taxes make unlikely.',
+    },
+    {
+      q: 'What if cigarette prices keep rising?',
+      a: 'They almost certainly will: a pack runs $6-7 in Missouri and $12-15 in New York, with taxes often more than half the sticker. Entering today\'s price already understates the future — the real ten-year number will be higher.',
+    },
+    {
+      q: 'I smoke less than a pack a day — how do I enter that?',
+      a: 'Just type the cigarettes per day (packs are 20): half a pack is 10, and a few a day works too. The price field is your local retail price for a 20-pack.',
+    },
+    {
+      q: 'How fast does quitting pay off?',
+      a: 'Cash flow improves from the first smoke-free day; the investment line needs a few years of compounding to pull away. Insurance surcharges of up to 50% on marketplace plans and the health costs weigh even more than the cash this tool counts.',
+    },
+  ],
+  'emergency-fund-calculator': [
+    {
+      q: 'How many months of expenses do I actually need?',
+      a: 'Three fits stable dual-income households with replaceable jobs; six is the standard for single earners and volatile industries; freelancers, commission sales, and seasonal workers should think nine to twelve — the fund bridges the whole slow season, not just one layoff.',
+    },
+    {
+      q: 'What counts as an essential expense?',
+      a: 'The must-pays: housing, groceries, utilities, insurance premiums, minimum debt payments, and the childcare that keeps you employable. Dining out and subscriptions are the first things a real emergency cuts — leave them out of the target.',
+    },
+    {
+      q: 'Where should the money sit?',
+      a: 'In a high-yield savings account or money market fund — same-day liquid with zero volatility. Investing the fund defeats the purpose: markets can drop 30% in exactly the quarter you lose your job.',
+    },
+    {
+      q: 'Should I save the full fund before paying off credit cards?',
+      a: 'No — build a one-month mini fund first, then attack the card: paying off 20%+ APR debt is a guaranteed 20% return no savings account matches. Finish the full fund after the card is gone.',
+    },
+  ],
+  'btu-calculator': [
+    {
+      q: 'How many BTU do I need per square foot?',
+      a: 'The classic rule is 20 BTU per sq ft at 8 ft ceilings, so a 350 ft² room starts at 7,000 BTU. The calculator then adjusts for ceiling height, sun, top floor, extra people, and kitchens.',
+    },
+    {
+      q: 'Why is an oversized air conditioner a problem?',
+      a: 'It short-cycles: the room cools fast, the compressor shuts off before moisture condenses, and humidity stays high. Buy the calculated size, not the next one up.',
+    },
+    {
+      q: 'How do I convert BTU to tons?',
+      a: '12,000 BTU/hr equals 1 ton of cooling. A 24,000 BTU result is a 2-ton unit — central and mini-split systems are quoted in tons, window units in BTU.',
+    },
+    {
+      q: 'Do kitchens really need 4,000 extra BTU?',
+      a: 'Appliance heat and cooking gain make kitchens the hottest rooms, and DOE guidance adds about 4,000 BTU if the unit runs while cooking. Skip it if the AC only runs at night.',
+    },
+  ],
+  'board-foot-calculator': [
+    {
+      q: 'How do I calculate board feet?',
+      a: 'Board feet = thickness (inches) × width (inches) × length (feet) ÷ 12. A 1.5 × 5.5 in board 8 ft long is 5.5 board feet; ten of them are 55.',
+    },
+    {
+      q: 'How much do nominal and actual dimensions differ?',
+      a: 'A planed "2×6" measures 1.5 × 5.5 inches. Computing with nominal dimensions overstates volume by about 23% — on a 200 bf order, that is 46 board feet of error.',
+    },
+    {
+      q: 'What do BDFT, FBM, and MBF mean?',
+      a: 'BDFT is a single board foot; MBF (also written FBM) is 1,000 board feet — the unit sawmills use for volume pricing. Enter their per-BDFT price and the tool extends it to the order total.',
+    },
+    {
+      q: 'How many board feet is a 2×4×8?',
+      a: 'Use actual dimensions — 1.5 in thick and 3.5 in wide: 1.5 × 3.5 × 8 ÷ 12 = 3.5 board feet. The nominal-size math (5.33) would badly overstate the bill.',
+    },
+  ],
+  'wallpaper-calculator': [
+    {
+      q: 'Why count strips instead of dividing wall area?',
+      a: 'Every strip must start at the same point in the pattern, so a repeat adds real length to each strip. Area division ignores that waste and regularly leaves you a roll short.',
+    },
+    {
+      q: 'What is the difference between US single and double rolls?',
+      a: 'US wallpaper is priced per single roll (about 36 ft²) but nearly always sold as a double roll — 27 in wide × 33 ft long, the format with decent yield; 16.5 ft singles waste heavily.',
+    },
+    {
+      q: 'How do I measure pattern repeat?',
+      a: 'Find the vertical distance over which the motif repeats completely — from the top of one figure to the top of its next occurrence. Plain paper is 0; a drop match uses the full repeat.',
+    },
+    {
+      q: 'Why should I buy one extra roll?',
+      a: 'Wallpaper is dyed in batches and adjacent lot numbers can differ visibly. A spare roll is cheap insurance for repairs, and stores accept unopened returns.',
+    },
+  ],
+  'raised-bed-soil-calculator': [
+    {
+      q: 'How much soil does a 4×8 raised bed need?',
+      a: 'Exactly 32 cubic feet (about 906 L, or 1.19 yd³) at 12 inches deep. Bulk soil sells by the yard and bags by the liter — the tool gives both figures.',
+    },
+    {
+      q: 'Why does soil settle after filling?',
+      a: 'Bagged soil is measured fluffed and settles 20-30% in the first season as water and roots work it down. The "settled" figure is what the bed actually holds next spring.',
+    },
+    {
+      q: "Should I use Mel's Mix or a topsoil blend?",
+      a: "Mel's Mix (equal thirds compost, coir, vermiculite) is weed-free and drains superbly but costs more; 50% topsoil + 30% compost + 20% coir is the budget option — heavier and more compacting.",
+    },
+    {
+      q: 'What should I put in the bottom of a deep bed?',
+      a: 'Cardboard or weed barrier, then sticks, leaves, or untreated wood scraps as filler below the root zone. A 24 in bed can legitimately need only half its depth in purchased mix.',
+    },
+  ],
+  'generator-wattage-calculator': [
+    {
+      q: 'Why do starting watts exceed running watts?',
+      a: 'Motors — refrigerator compressors, furnace blowers, pumps — briefly draw 2-3× their running watts to overcome inertia. Generators are sized by surge capacity, not running load.',
+    },
+    {
+      q: 'How do you add up the total surge?',
+      a: 'Sum the running watts of everything running at once, then add the largest single surge margin, because you can sequence starts: biggest motor first, then the rest. That is the method this tool uses.',
+    },
+    {
+      q: 'Are inverter generators worth it?',
+      a: 'Their clean output is safe for laptops, TVs, and chargers, and they run quieter and thriftier. But motor loads still depend on the surge rating — the word "inverter" is not a capacity number.',
+    },
+    {
+      q: 'Why not run a water heater on a generator?',
+      a: 'Heating elements have no surge but draw thousands of watts for hours — an electric water heater alone claims 4,000 W. Outage priority goes to refrigeration, heat, pumps, and lights.',
+    },
+  ],
+  'pool-volume-calculator': [
+    {
+      q: 'How do I find average depth on a sloped floor?',
+      a: 'The standard approximation is (shallow end + deep end) ÷ 2. A 3 ft shallow and 8 ft deep pool uses 5 ft; hopper-bottom pools run a few percent off, which still keeps you inside pump-sizing accuracy.',
+    },
+    {
+      q: 'How many gallons are in a cubic foot?',
+      a: '7.48 US gallons. Length × width × average depth in feet × 7.48 gives rectangular-pool gallons — a 32×16×5 ft pool holds about 19,150 gallons.',
+    },
+    {
+      q: 'How do you compute a kidney pool area?',
+      a: 'The surveyor approximation: 0.45 × (width A + width B) × length, measured at the two widest lobes, then × average depth. An estimate, but accurate enough for pumps and heaters.',
+    },
+    {
+      q: 'How often should pool water circulate?',
+      a: 'Residential guidance turns the full volume over every 8-12 hours; commercial pools run faster. Divide gallons by your pump GPM for one turnover — this tool does circulation sizing only, not chemical dosing.',
+    },
+  ],
+  'coffee-ratio-calculator': [
+    {
+      q: 'What is the golden pour-over ratio?',
+      a: 'Balanced drip cups live near 1:15-1:17 (water to coffee); 1:16 is a safe start. That is 500 g of water to about 31 g of coffee — two honest cups.',
+    },
+    {
+      q: 'Why weigh coffee instead of using scoops?',
+      a: 'Bean density varies widely — a scoop can swing 2-3 g between light and dark roasts. And 1 g of water = 1 ml, so grams scale cleanly; espresso ratios are mass ratios, not volume.',
+    },
+    {
+      q: 'What about French press and cold brew ratios?',
+      a: 'French press runs about 1:12 (richer to balance immersion extraction) and cold brew concentrate 1:8, diluted when serving. Both presets are built in.',
+    },
+    {
+      q: 'Should I adjust the ratio or the grind first?',
+      a: 'Grind first. Harsh and drying points to too fine (over-extraction); sour and thin points too coarse. The ratio changes strength, the grind changes extraction flavor — fix extraction, then tune strength.',
+    },
+  ],
+  'bread-hydration-calculator': [
+    {
+      q: "What are baker's percentages and hydration?",
+      a: "In baker's percentages flour is always 100% and everything else is measured against it. Hydration = water ÷ flour: 350 g water on 500 g flour is 70%.",
+    },
+    {
+      q: 'Why calculate an effective hydration?',
+      a: 'Levain carries its own flour and water: 100 g of a 100%-hydration starter is 50 g + 50 g. Counting it shows what the dough really feels like — heavy levain use otherwise reads dry.',
+    },
+    {
+      q: 'What counts as high hydration?',
+      a: '60-68% is standard loaf territory; 70-78% opens the crumb on artisan breads; above 80% is ciabatta-class, needing autolysis and fold-based development rather than kneading.',
+    },
+    {
+      q: 'Why is salt also given as a percentage?',
+      a: 'Salt sits at 1.8-2.2% of flour weight, steering fermentation, tightening gluten, and seasoning — 500 g flour × 2% = 10 g salt. Calculating it against flour keeps any batch size consistent.',
+    },
+  ],
+  'ovulation-calculator': [
+    {
+      q: 'How does the calculator find my ovulation day?',
+      a: 'Ovulation happens a fixed 14 days (your luteal phase) before the NEXT period, not a fixed time after the last one. The tool adds your cycle length to your last period\'s first day, then counts back your luteal phase - which is why cycle length matters more than anything else.',
+    },
+    {
+      q: 'Are my chances equal on every day of the fertile window?',
+      a: 'No - the window is the five days before ovulation plus the day itself. Sperm survive up to five days, but the egg is viable for only about 24 hours; intercourse 1-2 days before ovulation actually has the highest conception odds.',
+    },
+    {
+      q: 'My cycle is irregular - is this still accurate?',
+      a: 'Only roughly. With cycles swinging between, say, 26 and 40 days, ovulation can shift by two weeks; the 21-45 day range is accepted but treat results as a window, not a date. OPKs or basal temperature tracking confirm the actual day.',
+    },
+    {
+      q: 'Can I use this to avoid pregnancy?',
+      a: 'Calendar prediction alone is not reliable contraception - sperm survival and cycle shifts make the real window wider. It is a conception-planning aid; for avoiding pregnancy use proven methods.',
+    },
+  ],
+  'pregnancy-weight-gain-calculator': [
+    {
+      q: 'Where do the recommended ranges come from?',
+      a: 'The 2009 IOM (now National Academy of Medicine) guidelines: 11.5-16 kg for normal BMI, 12.5-18 kg underweight, 7-11.5 kg overweight, 5-9 kg obese - wider ranges for twins (17-25 kg at normal BMI).',
+    },
+    {
+      q: 'How much should I gain each week?',
+      a: 'Almost nothing in trimester one (0.5-2 kg total), then a steady 0.42 kg/week at normal BMI - 0.51 underweight, 0.28 overweight, 0.22 obese. The calculator prorates this to your current week.',
+    },
+    {
+      q: 'I have gained more than the range - should I diet?',
+      a: 'No. Restricting calories during pregnancy risks nutrients the baby needs; discuss the trend with your OB or midwife instead. Gains above range are common with fluid retention and are a conversation, not a verdict.',
+    },
+    {
+      q: 'Does this work for twins?',
+      a: 'Yes - it applies the IOM twin ranges (17-25 kg normal BMI, 14-23 kg overweight, 11-19 kg obese). There is no IOM twin guideline for underweight BMI, so the tool tells you rather than inventing numbers.',
+    },
+  ],
+  'diaper-cost-calculator': [
+    {
+      q: 'How many diapers does a baby actually use?',
+      a: 'Newborns run 8-12 a day, easing to 6-8 by six months and 4-6 as toddlers - roughly 2,500-3,000 diapers in the first year alone and 6,000-8,000 before potty training.',
+    },
+    {
+      q: 'Is cloth really cheaper?',
+      a: 'Usually, if you reuse the same stash across siblings: a $400-800 set plus laundry beats $1,500-2,500 of disposables. For a single child the gap narrows once water, electricity and your time are counted.',
+    },
+    {
+      q: 'What is the real per-diaper price?',
+      a: 'Small packs run $0.30-0.40 per diaper; jumbo boxes and subscribe-and-save drop it to $0.18-0.25. Sizing up to the biggest box your baby fits is the single biggest lever.',
+    },
+    {
+      q: 'When should I stock up?',
+      a: 'Buy ahead only in sizes you are sure to reach - many babies skip or blow through a size, and most retailers exchange unopened boxes within 90 days.',
+    },
+  ],
+  'cat-age-calculator': [
+    {
+      q: 'How is cat age converted to human years?',
+      a: 'Year one equals about 15 human years, year two adds nine more (24 total), and every year after adds four - so a 5-year-old cat is roughly 36 in human terms. Unlike dogs, the curve does not depend on breed size.',
+    },
+    {
+      q: 'Why is the x7 rule wrong for cats?',
+      a: 'It makes kittens absurdly young (a 1-year-old cat is fully mature, yet x7 says "7") and seniors too old. The 15/24/+4 curve matches how cats actually mature and age.',
+    },
+    {
+      q: 'When is a cat a senior?',
+      a: 'Around 11 years old (about 60 in human terms), with 15+ considered super senior. Indoor cats routinely live to 18-20 - roughly 88-96 human years.',
+    },
+    {
+      q: 'Do outdoor cats age faster?',
+      a: 'Statistically they live much shorter lives (2-5 years on average) due to traffic, predators and disease, though aging itself does not tick faster - the risk profile does.',
+    },
+  ],
+  'cat-food-calculator': [
+    {
+      q: 'How many calories does a cat need per day?',
+      a: 'RER = 70 x weight(kg)^0.75 gives the resting need - about 198 kcal for a 4 kg cat - then multiply by a life-stage factor: 1.2 for a neutered indoor cat, 0.8 for weight loss, up to 2.5 for a kitten.',
+    },
+    {
+      q: 'How do I read the results in cans or grams?',
+      a: 'Enter the label\'s kcal per can (plus can weight) for wet food or kcal per 100 g for dry; the tool divides daily calories by that density - e.g. 238 kcal is about 2.5 of a 95-kcal can or 63 g of a 380 kcal/100 g dry food.',
+    },
+    {
+      q: 'Why is my neutered cat gaining weight?',
+      a: 'Neutering drops energy needs by roughly 20-30% while appetite rises. The x1.2 factor - not the x1.4 of an intact cat - is the honest baseline for the typical indoor cat.',
+    },
+    {
+      q: 'Can I use this to put my cat on a diet?',
+      a: 'As a starting point only. Cats must lose weight slowly (0.5-1% of body weight per week); crash dieting triggers hepatic lipidosis, which is life-threatening. Design the plan with your vet.',
+    },
+  ],
+  'zodiac-sign-calculator': [
+    {
+      q: 'Which sign am I if I was born on a cusp date?',
+      a: 'You are exactly one sign - the one the Sun was in at your birth moment. Pop astrology calls the boundary 1-2 days a "cusp"; the calculator flags it but always assigns one definite sign.',
+    },
+    {
+      q: 'Does the year I was born matter?',
+      a: 'Not for your Sun sign - the boundary dates shift by at most a day across years (leap years nudge things slightly). Only Chinese astrology and slow-moving placements use the birth year.',
+    },
+    {
+      q: 'What do element, modality and polarity mean?',
+      a: 'Each sign belongs to one of four elements (Fire, Earth, Air, Water), one of three modalities (Cardinal starts, Fixed holds, Mutable adapts), and a positive/negative polarity - the shared grammar behind compatibility talk.',
+    },
+    {
+      q: 'Is the zodiac scientifically accurate?',
+      a: 'No - constellation boundaries, precession of the equinoxes and decades of drift mean the Sun is not where newspaper horoscopes put it. It is culture and entertainment, not astronomy.',
+    },
+  ],
+  'chinese-zodiac-calculator': [
+    {
+      q: 'Why does my birth year sometimes give the wrong animal?',
+      a: 'The zodiac year starts at Lichun (Start of Spring, Feb 3-5), not January 1. Born in January or early February, you likely belong to the previous year\'s animal - pick the "Jan 1 - Feb 3" option.',
+    },
+    {
+      q: 'How do the animal, element and yin-yang cycles work?',
+      a: 'Twelve animals rotate yearly (Rat through Pig), elements change every two years (Wood, Fire, Earth, Metal, Water) and yin/yang alternates - a full 60-year cycle (1984 and 2044 are both Yang Wood Rat).',
+    },
+    {
+      q: 'What is my Ben Ming Nian?',
+      a: 'Your zodiac sign\'s year, recurring every 12 years (2026 for Horse natives) - traditionally a year to wear red and be a bit careful, not a lucky jackpot.',
+    },
+    {
+      q: 'Lichun or Chinese New Year - which starts the zodiac?',
+      a: 'Both traditions exist: the solar-term (Bazi) school uses Lichun, the folk calendar uses Lunar New Year, which falls Jan 21-Feb 20 and moves yearly. This tool follows the Lichun school used by Bazi practitioners.',
+    },
+  ],
+  'shoe-size-converter': [
+    {
+      q: 'Is there a single conversion formula between US, UK and EU sizes?',
+      a: 'No - that is the trap. US and UK sizes differ by about 0.5-1 (and US women\'s from men\'s by 1.5), while EU sizes use Paris points on a different scale entirely. Lookup tables are the only honest method, and even then brands vary by about one size.',
+    },
+    {
+      q: 'How do I measure my foot at home?',
+      a: 'Stand on paper, trace both feet, measure heel-to-longest-toe in cm at the end of the day (feet swell), and use the larger foot. That centimeter number converts into every system.',
+    },
+    {
+      q: 'Why do women\'s and men\'s sizes differ?',
+      a: 'A US women\'s size runs 1.5 numbers above the men\'s size for the same foot length - a women\'s 8.5 fits like a men\'s 7. UK charts do not do this, which is why US women\'s to UK conversions subtract about 2.',
+    },
+    {
+      q: 'Which size should I actually buy?',
+      a: 'Trust the manufacturer\'s own chart first - Nike, Adidas and ASICS each publish different EU mappings for the same US size. Between sizes, go up a half for running shoes (feet swell about one size over a run).',
+    },
+  ],
+  'time-card-calculator': [
+    {
+      q: 'How do I convert time-card hours to decimal for payroll?',
+      a: 'Divide the minutes by 60 — 7 h 45 m becomes 7.75 — and payroll multiplies your rate by that decimal. The tool shows both the h:mm and the decimal figure so you copy the right one.',
+    },
+    {
+      q: 'Does it handle overnight and past-midnight shifts?',
+      a: 'Yes. When clock-out is earlier than clock-in, 24 hours are added automatically: 22:00 to 06:00 counts 8 hours before the unpaid break comes off.',
+    },
+    {
+      q: 'How does the 40-hour overtime threshold work?',
+      a: 'It follows the US FLSA convention of counting overtime past 40 hours in a workweek. Change the threshold for daily-overtime states like California or union rules; for the dollar amounts use the overtime pay calculator.',
+    },
+    {
+      q: 'Should paid breaks be subtracted?',
+      a: 'No — only unpaid time comes off the total, so enter paid breaks as 0. If your employer rounds punches to the quarter hour, apply the same rounding to the times you enter so the totals reconcile.',
+    },
+  ],
+  'business-days-calculator': [
+    {
+      q: 'Does the start date count as a business day?',
+      a: 'No. Counting starts the next calendar day, and the target is the day that completes N business days — adding 10 business days from a Monday with no holidays lands on the Monday two weeks out.',
+    },
+    {
+      q: 'How are holidays handled?',
+      a: 'Paste any YYYY-MM-DD dates and each weekday on the list is skipped like a weekend. Holidays that fall on Saturday or Sunday are already skipped by the weekend rule and are never double-counted.',
+    },
+    {
+      q: 'Can I subtract business days from a deadline?',
+      a: 'Yes — choose Subtract and the calculator counts backward, which answers clauses like "submit five business days before the closing date" without finger-counting.',
+    },
+    {
+      q: 'How is this different from counting business days between dates?',
+      a: 'This tool projects a target date forward or backward from a start. If you already have two dates and want the number of business days between them, the date difference calculator is the right tool.',
+    },
+  ],
+  'week-number-calculator': [
+    {
+      q: 'What does ISO week number mean?',
+      a: 'ISO 8601 numbers weeks from Monday, and week 1 is the week containing the year\'s first Thursday. A year therefore has 52 or 53 ISO weeks — 2026 is a 53-week year.',
+    },
+    {
+      q: 'Why can January 1st be week 52 or 53 of the previous year?',
+      a: 'When New Year\'s Day falls on a Friday, Saturday, or Sunday, that week\'s Thursday belongs to the old year, so the whole week is numbered there — January 1, 2027 sits inside 2026-W53.',
+    },
+    {
+      q: 'Is the US week number the same as ISO?',
+      a: 'Not always. The common US system starts weeks on Sunday and calls the week containing January 1 "week 1", which can sit one week off ISO in border weeks. International schedules should state which standard they use.',
+    },
+    {
+      q: 'How many ISO weeks are in a year?',
+      a: 'Either 52 or 53 — a year gets 53 when it starts on a Thursday, or on a Wednesday in a leap year. The calculator derives it from the date rather than a fixed table.',
+    },
+  ],
+  'pto-accrual-calculator': [
+    {
+      q: 'How is my current PTO balance calculated?',
+      a: 'Allowance ÷ pay periods gives the accrual rate; that rate times the periods elapsed so far, minus hours already used, is your spendable balance. Mid-year you can only spend what has actually accrued.',
+    },
+    {
+      q: 'What happens at the carryover cap?',
+      a: 'Year-end balance above the cap is forfeited — carried hours equal min(balance, cap). A cap of zero models use-it-or-lose-it plans where everything resets on January 1.',
+    },
+    {
+      q: 'Why is my balance negative?',
+      a: 'You took time off before accruing it — advance PTO. Most policies allow it but claw the unaccrued hours back from your final paycheck if you leave before earning them.',
+    },
+    {
+      q: 'How much PTO is normal in the US?',
+      a: 'There is no federal minimum. Private-industry averages run about 11 days after one year and 20 after twenty; the EU mandates at least 20 working days, which is why forfeiture there is rare.',
+    },
+  ],
+  'download-time-calculator': [
+    {
+      q: 'Why is my real download slower than my plan\'s speed?',
+      a: 'Plans quote megabits and files measure megabytes — an 8× gap — and another 10-15% disappears into TCP overhead, retransmits, and Wi-Fi contention. The effective MB/s output is what your file manager actually sees.',
+    },
+    {
+      q: 'Should I include protocol overhead?',
+      a: 'Yes — 10% is the honest default for a wired connection; pick 15% for busy Wi-Fi. The "None" option shows the theoretical best case, which no real network achieves.',
+    },
+    {
+      q: 'How do I calculate upload time?',
+      a: 'Run the same numbers with your upload speed, which on asymmetric plans is often 10-20× slower than download. That is why backing up a large drive to the cloud takes days, not hours.',
+    },
+    {
+      q: 'Are file sizes decimal or binary here?',
+      a: 'Network math uses decimal units — 1 GB = 1,000 MB — matching how ISPs quote speeds. Windows counts binary GiB, which is why a downloaded "4.5 GB" file shows as about 4.19 GB on disk.',
+    },
+  ],
+  'gps-coordinate-converter': [
+    {
+      q: 'Which coordinate format should I use?',
+      a: 'Decimal degrees for anything digital — Google Maps, GeoJSON, GPS APIs. DMS (degrees° minutes\' seconds") fits charts, aviation, and legal descriptions; degrees decimal minutes is what handheld GPS units and NMEA displays show.',
+    },
+    {
+      q: 'How do hemisphere letters map to signs?',
+      a: 'N and E are positive, S and W are negative, so 74.0060° W equals -74.0060. The converter accepts letters at the start or end, glued to the number or standing alone.',
+    },
+    {
+      q: 'How many decimal places do I need?',
+      a: 'Four decimals locates within about 11 m, five within 1.1 m, and six within 0.11 m. Street-level work needs five; geocaching and surveying use six.',
+    },
+    {
+      q: 'Why does GeoJSON want longitude first?',
+      a: 'GeoJSON, PostGIS, and shapely order coordinates [x, y] — longitude, latitude — the reverse of spoken convention. The output includes a lon-first line so you can paste without swapping by hand.',
+    },
+  ],
+  'tire-size-calculator': [
+    {
+      q: 'What do the numbers in 225/45R17 mean?',
+      a: '225 mm section width, 45% aspect ratio (a 101 mm sidewall), radial construction, and a 17-inch rim. Diameter = 17 × 25.4 + 2 × 101.25 ≈ 634 mm, or about 24.97 inches.',
+    },
+    {
+      q: 'How much does a bigger tire throw off my speedometer?',
+      a: 'The speedo counts wheel revolutions, so a +1.4% diameter change (225/45R17 → 235/45R17) makes a true 60 mph read about 59.2. Past roughly +3% the error, gearing, and ABS calibration stop being acceptable.',
+    },
+    {
+      q: 'What is the ±3% rule?',
+      a: 'The industry rule of thumb keeps the new diameter within 3% of stock so speedometer error stays small and the tire clears the wheel well. Plus-sizing stays inside it by pairing wider treads with lower profiles.',
+    },
+    {
+      q: 'Does tire width change fuel economy?',
+      a: 'Usually — going 10 mm wider typically costs 1-2% more fuel from rolling resistance, in exchange for a slightly larger contact patch and better dry grip.',
+    },
+  ],
+  'wind-chill-calculator': [
+    {
+      q: 'What formula does this calculator use?',
+      a: 'The JAG/TI wind chill model adopted by Environment Canada and the US National Weather Service in 2001: W = 13.12 + 0.6215T − 11.37·V^0.16 + 0.3965·T·V^0.16, with T in °C and V in km/h.',
+    },
+    {
+      q: 'When is wind chill not valid?',
+      a: 'The formula is defined only up to 10°C (50°F) and above 4.8 km/h (3 mph) of wind. Outside that window the calculator still returns a number but flags it as an extrapolation.',
+    },
+    {
+      q: 'Can wind chill make objects colder than the air?',
+      a: 'No. Wind chill describes how fast exposed skin loses heat; an engine block or a bucket of water never drops below the actual air temperature no matter how hard the wind blows.',
+    },
+    {
+      q: 'Which is colder: -10°C calm or -5°C with 30 km/h wind?',
+      a: 'On skin, the windy one — -5°C at 30 km/h feels near -13°C, colder than still air at -10°C. That is the point of wind chill: comparing heat-loss rates, not thermometer readings.',
+    },
+  ],
+  'quadratic-equation-solver': [
+    {
+      q: 'How do I solve ax² + bx + c = 0?',
+      a: 'The quadratic formula x = (−b ± √(b² − 4ac)) / (2a) always works. The discriminant b² − 4ac tells you the root type before you compute: positive gives two real roots, zero one double root, negative a complex conjugate pair.',
+    },
+    {
+      q: 'What do the vertex and axis of symmetry mean?',
+      a: 'The vertex (−b/2a, k) is the parabola\'s turning point, and the axis x = −b/2a is the vertical mirror line through it. With a > 0 the vertex is the minimum, with a < 0 the maximum.',
+    },
+    {
+      q: 'Why does my result show complex numbers?',
+      a: 'A negative discriminant means the parabola never touches the x-axis, so the roots exist only as the complex pair p ± qi. The tool switches to completed-square form a(x − h)² + k, which stays true over the reals and shows how far the vertex sits from zero.',
+    },
+    {
+      q: 'Can a be zero?',
+      a: 'Then it is not quadratic — the calculator solves the linear equation bx + c = 0 with the single root x = −c/b. If a and b are both zero there is no equation in x to solve.',
+    },
+  ],
+  'slope-calculator': [
+    {
+      q: 'How is the slope calculated?',
+      a: 'm = (y₂ − y₁)/(x₂ − x₁) — rise over run between the two points. The y-intercept follows as b = y₁ − m·x₁, which completes the line equation y = mx + b.',
+    },
+    {
+      q: 'What does a negative or undefined slope mean?',
+      a: 'A negative slope falls left to right; undefined means a vertical line (x₁ = x₂) where the run is zero and the equation is simply x = c. A horizontal line has m = 0.',
+    },
+    {
+      q: 'How do I find a parallel or perpendicular slope?',
+      a: 'Parallel lines share exactly the same m; perpendicular slopes multiply to −1, so m⊥ = −1/m. The perpendicular to a horizontal line is vertical and vice versa — the tool states this instead of dividing by zero.',
+    },
+    {
+      q: 'What is the inclination angle?',
+      a: 'θ = arctan(m), measured from the positive x-axis: m = 1 gives 45° and m = 2 gives 63.43°. Road grade percentages are rise/run × 100, so an 8% grade is only arctan(0.08) ≈ 4.6°.',
+    },
+  ],
+  'confidence-interval-calculator': [
+    {
+      q: 'Which formula is used?',
+      a: 'For a mean, CI = x̄ ± z·s/√n; for a proportion, p̂ ± z·√(p̂(1−p̂)/n) (the Wald interval). z is 1.645, 1.96 or 2.576 at the 90/95/99% levels.',
+    },
+    {
+      q: 'What does 95% confident actually mean?',
+      a: 'It is about the method, not this one interval: 95% of intervals built this way from repeated samples would contain the true value. Any single interval either contains it or does not — no probability remains once the numbers are fixed.',
+    },
+    {
+      q: 'Why does a bigger sample help so little?',
+      a: 'The margin of error shrinks with 1/√n: doubling n cuts it only about 29%, and you need to quadruple n to halve it. That is why ±1% precision costs four times the sample of ±2%.',
+    },
+    {
+      q: 'When is this approximation invalid?',
+      a: 'The z approach wants n ≥ 30 for means (use a t-interval below that) and np̂ ≥ 5 with n(1−p̂) ≥ 5 for proportions. For rare events or proportions near 0 or 1, use the Wilson score interval — Wald undercovers there.',
+    },
+  ],
+  'sample-size-calculator': [
+    {
+      q: 'Which formula is used?',
+      a: 'n₀ = z²·p(1−p)/e², then the finite-population correction n = n₀/(1 + n₀/N) when the population N is small enough to matter. The result is always rounded up, never down.',
+    },
+    {
+      q: 'Why does p = 50% give the biggest sample?',
+      a: 'p(1−p) peaks at 0.25 when p = 0.5, so it is the conservative choice when you have no prior estimate. A p of 90% needs only 36% of that sample for the same margin.',
+    },
+    {
+      q: 'When does the population correction matter?',
+      a: 'Only below roughly N = 20,000. At N = 100,000 the famous 385 drops just to 383; at N = 500 it drops to 218 — surveying more than a fifth of a small population buys real precision.',
+    },
+    {
+      q: 'Why does ±1% cost so much?',
+      a: 'Sample size scales with 1/e²: at 95% confidence, ±3% needs about 1,068 respondents but ±1% needs 9,604 — nine times the sample for three times the precision. That is why national polls settle for ±3%.',
+    },
+  ],
+  'z-score-calculator': [
+    {
+      q: 'How is the z score computed?',
+      a: 'z = (x − μ)/σ — subtract the mean, divide by the standard deviation. It counts how many σ a value sits from the mean, which makes unlike scales comparable (IQ, exam scores, process measurements).',
+    },
+    {
+      q: 'What are the percentile and two-tailed p?',
+      a: 'Φ(z) is the share of the population below your value (the percentile); the two-tailed p is 2·(1 − Φ(|z|)), the probability of landing at least this far from the mean in either direction. Beyond ±1.96, p < 0.05.',
+    },
+    {
+      q: 'How accurate are the probabilities?',
+      a: 'The normal CDF uses the Abramowitz-Stegun 26.2.17 rational approximation, with an absolute error below 7.5×10⁻⁸ — more digits than any real dataset justifies.',
+    },
+    {
+      q: 'How do I reverse from z back to x?',
+      a: 'Switch the direction to z → x and apply x = μ + z·σ. For example, the top-5% cutoff of a μ = 100, σ = 15 distribution is 100 + 1.645×15 = 124.7.',
+    },
+  ],
+  'bayes-theorem-calculator': [
+    {
+      q: 'How does the calculator apply Bayes theorem?',
+      a: 'P(disease|positive) = sensitivity × prior ÷ P(positive), where P(positive) = sensitivity × prior + (1 − specificity) × (1 − prior). Everything is expressed the medical-screening way: base rate, sensitivity, specificity.',
+    },
+    {
+      q: 'Why is a positive only 8.8% with a 95% sensitive test?',
+      a: 'The 1% base rate means 9,900 of 10,000 people are healthy, and the 10% false-positive rate turns 990 of them positive — swamping the 95 true positives. The chart shows exactly this composition of a positive result.',
+    },
+    {
+      q: 'What is the base-rate fallacy?',
+      a: 'Confusing P(positive|disease) with P(disease|positive). The first is high (95%); the second depends on how rare the condition is, and it falls as the prior falls. That is why universal screening of rare conditions produces mostly false alarms.',
+    },
+    {
+      q: 'How can the number be improved?',
+      a: 'Raise specificity, not sensitivity: cutting the false-positive rate from 10% to 1% lifts the same 1% prior from 8.8% to about 49%. Confirmatory second tests work the same way — the first positive raises the prior for the second.',
+    },
+  ],
+  'heat-index-calculator': [
+    {
+      q: 'Which formula is used?',
+      a: 'The NWS Rothfusz regression HI = −42.379 + 2.04901523T + 10.14333127R − 0.22475541TR − 0.00683783T² − 0.05481717R² + 0.00122874T²R + 0.00085282TR² − 0.00000199T²R² (T in °F, R in %), with the 1984 low/high-humidity adjustments and a simple-formula fallback below 80°F.',
+    },
+    {
+      q: 'Why does humidity make it feel hotter?',
+      a: 'Sweat cools the body by evaporating; high humidity stalls that evaporation, so the body loses its main cooling channel. The heat index folds the effect into one apparent temperature.',
+    },
+    {
+      q: 'When is the heat index defined?',
+      a: 'The NWS treats it as meaningful from about 80°F and 40% relative humidity. Below that the formula still computes, but the thermometer alone is a fair guide — the tool applies the official fallback formula there.',
+    },
+    {
+      q: 'What are the health risk bands?',
+      a: '80-90°F caution (fatigue with prolonged exposure), 90-103°F extreme caution (sunstroke and cramps possible), 103-125°F danger (heat exhaustion likely), above 125°F extreme danger (heat stroke imminent). Full sun adds up to 15°F; shade, light clothing and water move all of these in your favor.',
+    },
+  ],
+  'dew-point-calculator': [
+    {
+      q: 'Which formula is used?',
+      a: 'Magnus-Tetens: γ = ln(RH/100) + 17.27T/(237.7 + T) and Td = 237.7γ/(17.27 − γ) with T in °C — accurate to about ±0.35°C for RH above 50%.',
+    },
+    {
+      q: 'Why is dew point better than relative humidity for comfort?',
+      a: 'Relative humidity swings with temperature through the day even when the moisture does not change, while dew point measures the actual water content. Below a 10°C dew point air feels dry, 10-16°C is comfortable, and above 18°C most people call it sticky.',
+    },
+    {
+      q: 'What is absolute humidity?',
+      a: 'The literal grams of water vapor per cubic meter of air, here computed from the Magnus saturation vapor pressure. At 25°C and 60% RH that is about 13.8 g/m³ — the most direct metric for drying, storage or humidity-control work.',
+    },
+    {
+      q: 'What does a dew point close to the air temperature mean?',
+      a: 'The gap between Td and T is the evaporation headroom. When they are equal the air is saturated (RH = 100%) and fog, dew or condensation can form; a large gap means thirsty air that dries things fast.',
+    },
+  ],
+  'passphrase-generator': [
+    {
+      q: 'How many words should I use?',
+      a: 'Six words from the 256-word list give 48 bits of entropy; ten words give 80 bits, the level security teams recommend for high-value accounts. Four words (32 bits) only suit throwaway logins.',
+    },
+    {
+      q: 'How is the entropy calculated?',
+      a: 'Each word is a uniform pick from exactly 256 options, so every word contributes log2(256) = 8 bits, and each trailing digit adds log2(10) ≈ 3.3 bits. Capitalization adds at most 1 bit per word and is left out of the estimate.',
+    },
+    {
+      q: 'Passphrase or random password - which should I use?',
+      a: 'At equal entropy, passphrases are far easier to type and remember. Use the character-based password generator when a site caps password length; use passphrases for master passwords and phone keyboards.',
+    },
+    {
+      q: 'Is it safe to generate a passphrase online?',
+      a: 'The word list is built into this page and words are drawn with the browser Web Crypto API - nothing is transmitted, and no word list is downloaded from anywhere.',
+    },
+  ],
+  'border-radius-generator': [
+    {
+      q: 'What does the slash in border-radius mean?',
+      a: 'Values before the slash are horizontal radii, values after it are vertical radii - border-radius: 30% 70% / 40% 60% creates elliptical corners. A single value with no slash gives a circular arc.',
+    },
+    {
+      q: 'Should I use px or percentages?',
+      a: 'Pixels are predictable but stop matching when the box resizes. Percentages resolve against each side they touch, so 50% on a non-square box gives an ellipse - prefer % in fluid layouts and px in fixed components.',
+    },
+    {
+      q: 'How does the CSS shorthand collapse?',
+      a: 'Four values run clockwise from top left (TL TR BR BL); when TR equals BL it can be omitted, and when both diagonals pair up you get two values - the generator always emits the shortest valid form.',
+    },
+    {
+      q: 'How do I make a pill or a perfect circle?',
+      a: 'Any radius at least half the shorter side fully rounds the box - 999px is the common idiom. A circle needs width equal to height plus a 50% radius.',
+    },
+  ],
+  'color-palette-generator': [
+    {
+      q: 'Which harmony scheme should I choose?',
+      a: 'Analogous (±30°) is the safest and most cohesive; complementary gives a high-contrast accent pair; split-complementary keeps contrast with less tension; triadic suits playful brands; monochrome reads calm and premium.',
+    },
+    {
+      q: 'Why does the generator work in HSL?',
+      a: 'Harmony is about hue distance, and HSL puts hue on a 0-360° wheel where rotations are simple additions. Every swatch also shows hex and rgb() because CSS accepts all three notations.',
+    },
+    {
+      q: 'What is the 60-30-10 rule?',
+      a: 'Use the base color for about 60% of a surface, a secondary palette color for 30%, and the most contrasting one for roughly 10% as an accent - the tint and shade fill hover and border states.',
+    },
+    {
+      q: 'How is this different from a gradient generator?',
+      a: 'This tool produces a set of discrete, flat colors for a design system; a CSS gradient generator blends colors into one continuous background image.',
+    },
+  ],
+  'image-compressor': [
+    {
+      q: 'Does compressing change the image dimensions?',
+      a: 'No - pixels are redrawn at the original width and height; only the lossy encoding changes. To reduce resolution, use an image resizer first.',
+    },
+    {
+      q: 'What quality setting should I choose?',
+      a: '70-85 is the usual sweet spot where artifacts stay invisible on screens; above 90 the file barely shrinks. At equal quality, WebP is typically 25-35% smaller than JPEG.',
+    },
+    {
+      q: 'Why did my file get bigger?',
+      a: 'Re-encoding an already-optimized JPEG at high quality, or a tiny PNG into JPEG, can inflate the file - lower the quality, switch to WebP, or keep the original.',
+    },
+    {
+      q: 'Are my photos uploaded anywhere?',
+      a: 'No. Decoding and re-encoding happen in an in-browser canvas on your device; the download link points at a local blob and nothing leaves the page.',
+    },
+  ],
+  'username-generator': [
+    {
+      q: 'Can I use the same username on every platform?',
+      a: 'Length rules differ - Instagram allows 30 characters, X 15, Discord 32 - so set the max length to the strictest platform you use and favor lowercase letters plus digits for portability.',
+    },
+    {
+      q: 'Are these usernames safe to use as passwords?',
+      a: 'No. Handles are public and guessable by design; use the password generator for anything that protects an account.',
+    },
+    {
+      q: 'Why does it say no candidate fits?',
+      a: 'The max-length filter drops longer combinations - raise the limit or use a shorter keyword. The generator never truncates, because a cut-off name looks worse than a different one.',
+    },
+    {
+      q: 'What do the four styles do?',
+      a: 'Gamer adds leet digits and xX...Xx decoration, Retro picks an 80s/90s year suffix, Minimal stays clean lowercase, and Underscore joins two words with the classic _.',
+    },
+  ],
+  'secret-santa-generator': [
+    {
+      q: 'How do exclusion pairs work?',
+      a: 'Enter one pair per line like "Alice - Bob" and those two will never draw each other - useful for couples, teammates, or rivals. Everyone still gives and receives exactly one gift.',
+    },
+    {
+      q: 'Can anyone draw their own name?',
+      a: 'No. The result is a derangement - a closed loop where every giver maps to a different receiver - and it is verified before anything is shown.',
+    },
+    {
+      q: 'What if the exclusions make a draw impossible?',
+      a: 'The tool tells you instead of quietly bending a rule, for example three people where every pair is banned. Loosen one exclusion and draw again.',
+    },
+    {
+      q: 'How do I share the results without spoiling them?',
+      a: 'Pass the device around: each person picks their own name, sees only their recipient, and copies the message to their notes. The organizer never needs to see any pairing.',
+    },
+  ],
+  'faq-schema-generator': [
+    {
+      q: 'Where do I paste the generated FAQ schema?',
+      a: 'Anywhere in the page HTML - the head or just before the closing body tag both work. Search engines read the whole document, so placement does not affect parsing.',
+    },
+    {
+      q: 'Does the FAQ text have to be visible on the page?',
+      a: 'Yes. Google\'s guidelines require the questions and answers in the markup to also appear on the page for users. Schema-only FAQs that visitors cannot see risk losing rich results entirely.',
+    },
+    {
+      q: 'Will my page get FAQ rich results in Google?',
+      a: 'Since August 2023 Google shows FAQ rich results mostly for authoritative government and health sites. The markup is still valid and helps other search engines and AI answer engines understand your page.',
+    },
+    {
+      q: 'Why JSON-LD instead of microdata?',
+      a: 'Google recommends JSON-LD: it lives in one script tag, survives CMS and theme changes, and can be generated server-side without touching your visible HTML.',
+    },
+  ],
+  'number-to-words-converter': [
+    {
+      q: 'How large a number can it spell out?',
+      a: 'Up to 999 trillion in the short scale used in American English - thousand, million, billion, trillion. Beyond that English needs quadrillion, which this tool flags as out of range.',
+    },
+    {
+      q: 'How are decimals and negative numbers written?',
+      a: 'The whole-number part is spelled normally, the decimal point becomes the word "point", and the following digits are read one at a time: 3.14 is "three point one four". Negatives get "negative" in front.',
+    },
+    {
+      q: 'When do I use the ordinal form?',
+      a: 'Use ordinals for positions and dates: 21 becomes "twenty-first", 42 "forty-second". Legal and financial writing usually spells the cardinal ("forty-two") and adds digits in parentheses for clarity.',
+    },
+    {
+      q: 'Should there be an "and" as in British English?',
+      a: 'American style omits it: 123 is "one hundred twenty-three". British usage inserts "and" ("one hundred and twenty-three"). Both are correct; this tool follows the American convention.',
+    },
+  ],
+  'ohms-law-calculator': [
+    {
+      q: 'Why exactly two values?',
+      a: 'V = I × R and P = V × I tie the four quantities together with two degrees of freedom: any two fix the other two. Enter more and the system is over-determined, fewer and it is unsolvable.',
+    },
+    {
+      q: "What are the twelve Ohm's law formulas?",
+      a: 'Combining V = IR with P = VI yields twelve equations: V from I and R or P and I or P and R; I from V and R or P and V or P and R; and so on. This calculator applies whichever pair you supply.',
+    },
+    {
+      q: 'Does it work for AC circuits?',
+      a: 'Yes, with RMS values. Use the RMS voltage and current and the formulas hold for resistive loads. For reactive components you need impedance and power factor, which is a different calculation.',
+    },
+    {
+      q: 'Why does my 9 V battery not give 9 V under load?',
+      a: 'Every real source has internal resistance that drops the terminal voltage as current rises. A small 9 V battery sags noticeably above about 100 mA - measure under load, not open-circuit.',
+    },
+  ],
+  'led-resistor-calculator': [
+    {
+      q: 'Why round up to the next E12 value?',
+      a: 'A larger resistor means less current, and less current is always safe for the LED. Rounding up typically costs a few percent brightness; rounding down can push the LED past its rated current.',
+    },
+    {
+      q: 'Can I skip the resistor on a 3 V coin cell?',
+      a: "Often yes - a coin cell's internal resistance (tens of ohms) limits current naturally, which is why 3 V lithium cells run LEDs directly. Any stiffer supply needs the resistor.",
+    },
+    {
+      q: 'What power rating should the resistor have?',
+      a: 'Pick a rating at least twice the dissipation shown, and four times for enclosed or hot builds. A 1/4 W part running at 200 mW is fine on a bench but toasts inside a sealed enclosure.',
+    },
+    {
+      q: 'Should I wire LEDs in series or parallel?',
+      a: 'Series, whenever the supply allows it: one resistor serves the string and currents stay matched. Parallel LEDs share unevenly because of forward-voltage spread - give each branch its own resistor.',
+    },
+  ],
+  'resistor-color-code-calculator': [
+    {
+      q: 'Which end of the resistor do I start reading from?',
+      a: 'Hold it so the gold or silver tolerance band sits on the right - that band has a visibly wider gap to its neighbor. On 5-band parts without gold or silver, put the extra digit band on the left.',
+    },
+    {
+      q: 'What is the difference between 4, 5, and 6 bands?',
+      a: 'Four bands give two significant digits, a multiplier, and tolerance (±5% or ±10% typical). Five bands add a third digit for ±1% and better precision. The rare sixth band is temperature drift in ppm/K.',
+    },
+    {
+      q: 'How do I read resistances under 10 ohms?',
+      a: 'Gold and silver appear as multipliers: gold multiplies by 0.1 and silver by 0.01. So brown-black-gold-gold reads 1.0 Ω ±5% - the decimal lives in the multiplier band.',
+    },
+    {
+      q: 'Why does my multimeter disagree with the code?',
+      a: 'Within tolerance, it should. A ±5% 470 Ω part may legally read anywhere from 446.5 to 493.5 Ω; if it reads further off, you are likely measuring it in-circuit, where parallel paths skew the reading.',
+    },
+  ],
+  'voltage-divider-calculator': [
+    {
+      q: 'What load can I hang on a divider?',
+      a: 'Treat the load as a resistor in parallel with R2. As a rule of thumb keep the divider current at least ten times the load current, or the output sags well below the calculated value.',
+    },
+    {
+      q: 'How do I get exactly 3.3 V from a divider?',
+      a: 'Switch to solve mode, enter Vin and R1, and set the target to 3.3 V - the calculator returns the exact R2 (for 12 V and 10 kΩ that is 3.79 kΩ, so grab the nearest E12 value, 3.9 kΩ).',
+    },
+    {
+      q: 'Can a divider step 12 V down to power a 3.3 V chip?',
+      a: 'No. Dividers regulate voltage only, not current - a load that draws milliamps will drag the node everywhere. Use a linear regulator or buck converter for power; dividers are for signals and bias.',
+    },
+    {
+      q: 'Why does my measured Vout read low?',
+      a: "Your meter's input impedance (usually 10 MΩ) parallels R2, plus the load itself. Very high-value dividers shift the most - the chart's Vout-vs-R2 curve shows how the node saturates as R2 grows.",
+    },
+  ],
+  'tone-generator': [
+    {
+      q: 'Is it safe for my speakers and ears?',
+      a: 'At moderate volume, yes. Start low: sine tones at 60-80 dB feel louder than music because they concentrate all energy at one frequency. Avoid full volume with headphones, especially below 100 Hz where damage is painless.',
+    },
+    {
+      q: 'Why do equal-volume frequencies sound unequal?',
+      a: 'Hearing is not flat - the Fletcher-Munson curves show ears are most sensitive around 2-4 kHz and roll off at the extremes. A 100 Hz tone needs far more level than a 1 kHz tone to sound as loud.',
+    },
+    {
+      q: 'Which frequency is concert pitch A?',
+      a: '440 Hz, A4, the orchestral reference. Each semitone is a factor of the twelfth root of two, so A5 is 880 Hz and A3 is 220 Hz - the tool shows the nearest note and cents off for any frequency.',
+    },
+    {
+      q: 'What are square and sawtooth waves used for?',
+      a: 'Square waves contain odd harmonics and drive synthesizer brash and distortion pedals; sawtooth waves contain all harmonics and are the classic analog synth string and brass building block. Sine is pure tone with no harmonics.',
+    },
+  ],
+  'bpm-tap-counter': [
+    {
+      q: 'How many taps do I need for an accurate BPM?',
+      a: 'Four to eight is the sweet spot. This counter averages your last eight intervals, so the first impulsive taps fade out and the reading stabilizes - keep tapping until the consistency meter reads steady or locked.',
+    },
+    {
+      q: 'Why is my reading double what the song feels like?',
+      a: 'You are probably tapping eighth notes, or the track is in half-time. Tap the pulse you would nod your head to - the quarter note - and halve or double deliberately, not by accident.',
+    },
+    {
+      q: 'Does the counter work with recorded and live music?',
+      a: 'Both. Tap along to any audio source - a phone speaker, a band rehearsal, a video. Human taps land a few milliseconds either side of the beat, which is exactly what the windowed average smooths out.',
+    },
+    {
+      q: 'What is the consistency meter telling me?',
+      a: 'It is the spread of your tap intervals: locked means under 2% variation, steady under 5%. An uneven reading usually means the rhythm is rubato, not that your fingers failed.',
+    },
+  ],
+  'delay-time-calculator': [
+    {
+      q: 'How do I sync a delay pedal to a song?',
+      a: 'Know the tempo, then dial the delay to a note fraction: 1/4 for spacious repeats, 1/8 for a busier trail, dotted 1/8 for the rhythm-defining syncopation. This calculator gives the exact milliseconds.',
+    },
+    {
+      q: 'Why is the dotted eighth so famous?',
+      a: 'A dotted eighth repeats every 3/4 of a beat, so echoes land off-grid and interleave with your playing - the pulse-pushing sound of "Where the Streets Have No Name" and "Run Like Hell".',
+    },
+    {
+      q: 'What do the triplet values mean?',
+      a: 'A triplet note plays three-in-the-space-of-two, so a triplet eighth lasts 2/3 of a straight eighth. Use triplet delays over swing or shuffle feels so the repeats sit inside the groove.',
+    },
+    {
+      q: 'What is the LFO rate column for?',
+      a: 'Modulation pedals - chorus, flanger, tremolo - repeat at a frequency you can set in Hz. Rate-per-note at the song tempo makes the sweep lock musically to the beat instead of drifting against it.',
+    },
+  ],
+  'utm-link-builder': [
+    {
+      q: 'What are the five UTM parameters for?',
+      a: 'utm_source says where the traffic came from (newsletter, google), utm_medium the channel (email, cpc), utm_campaign the specific push, utm_term the paid keyword, and utm_content the creative variant. GA4 stitches them into session source/medium so campaigns land in reports instead of "(direct)".',
+    },
+    {
+      q: 'Which UTM parameters are required?',
+      a: 'source and medium at minimum — GA4 drops attribution without both and the session becomes direct/none. utm_campaign is strongly recommended for any report you slice by campaign.',
+    },
+    {
+      q: 'Do UTM parameters hurt SEO or get indexed?',
+      a: 'Google ignores them for ranking, but the URL with parameters can still be crawled and shown in results. Canonical tags or Search Console parameter handling keep the clean version indexed — and never tag internal links, which overwrites the visitor\'s original source.',
+    },
+    {
+      q: 'Why did my report split Email and email into two rows?',
+      a: 'Values are case-sensitive, and so are spacing and encoding. Pick lowercase-with-dashes once and keep a shared list of campaign names — naming drift is the number one UTM reporting problem, and this tool flags uppercase input for exactly that reason.',
+    },
+  ],
+  'credit-card-validator': [
+    {
+      q: 'What does this validator actually check?',
+      a: 'Three things: the digit shape (12-19 digits), the brand implied by the issuer prefix with its allowed lengths (Visa, Mastercard, Amex, Discover, JCB, Diners, UnionPay), and the Luhn checksum. It cannot check whether the account exists or is funded — only the issuing bank knows that at authorization time.',
+    },
+    {
+      q: 'Is it safe to paste a real card number here?',
+      a: 'Everything runs in your browser with no network request and nothing stored. That said, the good habit is to use published test numbers like Visa\'s 4111 1111 1111 1111 — they pass Luhn and connect to no real account.',
+    },
+    {
+      q: 'Why does a "valid" card still get declined?',
+      a: 'Passing Luhn only means the digits are well-formed. Real declines come from account status, funds, fraud rules, expiry or a wrong CVC — none of which live in the number itself.',
+    },
+    {
+      q: 'How does the Luhn checksum work?',
+      a: 'From the right, double every second digit, subtract 9 from results over 9, and require the total to be a multiple of 10. It is IBM 1954 anti-typo engineering, not security — it catches single mistyped digits and almost all adjacent transpositions.',
+    },
+  ],
+  'iban-validator': [
+    {
+      q: 'What does the mod-97 check prove?',
+      a: 'That the IBAN is structurally sound: move the first four characters to the end, convert letters to numbers (A=10 … Z=35), and the whole string must leave remainder 1 when divided by 97. That rejects roughly 99% of random typos — but says nothing about whether the account exists or accepts payments.',
+    },
+    {
+      q: 'Why does my correct IBAN fail validation?',
+      a: 'The most common cause is wrong length for the country — this tool checks the official registry table, where Norway is 15, Germany and the UK 22, Malta 31. Lookalike characters come next (O and I typed as 0 and 1), and check digits 00, 01 or 99 are always invalid under ISO 13616.',
+    },
+    {
+      q: 'Do I still need the BIC/SWIFT code?',
+      a: 'This tool validates IBANs only. Within SEPA (EU/EEA) the IBAN alone is enough; transfers further out usually also require the recipient bank\'s BIC, which is a separate registry.',
+    },
+    {
+      q: 'Do all countries use IBAN?',
+      a: 'Around 90 countries and territories do. The US, Canada and Australia still use domestic routing systems (like the ABA routing number), so such inputs here report an uncatalogued country code.',
+    },
+  ],
+  'graphql-formatter': [
+    {
+      q: 'Does it validate my GraphQL?',
+      a: 'It runs a real tokenizer plus bracket-balance checking: unterminated strings, unclosed braces and stray characters are reported with their position, and incomplete input is rejected instead of producing half-formatted output. Semantic schema validation (does this field exist) is a different job for the server side.',
+    },
+    {
+      q: 'What happens to # comments?',
+      a: 'Beautify keeps them, realigned to the new indentation; minify drops them, which is the point of minifying. Everything else — strings, block strings, directives, variables, fragment spreads — round-trips unchanged.',
+    },
+    {
+      q: 'Does it work on schema (SDL) files?',
+      a: 'Yes. type, interface, union, enum, input and triple-quoted descriptions tokenize with the same rules as operations, so .graphql schema files format here too.',
+    },
+    {
+      q: 'How much does minifying save?',
+      a: 'It depends on comment and whitespace density; 30-40% is typical for a long commented query. Remember that gzip already compresses whitespace extremely well, so the real gains are parse time and log readability rather than network bytes.',
+    },
+  ],
+  'http-status-code-lookup': [
+    {
+      q: 'Are all status codes in this table?',
+      a: 'All 62 IANA-registered codes from 100 to 511. Vendor extensions — Cloudflare\'s 52x family, nginx\'s 499, homegrown 599s — are deliberately excluded: they are not standard and mean different things in different stacks.',
+    },
+    {
+      q: 'What is the difference between 401 and 403?',
+      a: '401 is "who are you?" — missing or invalid credentials, usually fixed by logging in again or refreshing a token. 403 is "I know you, and no" — an authorization problem where better credentials do not help; only different permissions do.',
+    },
+    {
+      q: 'How do I choose between 301, 302, 307 and 308?',
+      a: 'Two axes: permanence and method preservation. 301/302 are historic and browsers may rewrite a POST into a GET; 307/308 guarantee the method and body arrive intact. Use 307 for temporary and 308 for permanent redirects of non-GET requests.',
+    },
+    {
+      q: 'Which status codes matter for SEO?',
+      a: '200 (fine), 301/308 (moved for good), 302 (temporary), 404 (not here), 410 (deliberately gone — delists faster than 404) and 503 with Retry-After during maintenance, which signals "come back later" instead of "this site is dead".',
+    },
+  ],
+  'css-minifier': [
+    {
+      q: 'How much smaller will my CSS get?',
+      a: 'Comments plus whitespace typically mean 15-30%. Since gzip already compresses whitespace very well, the network win is modest — the real benefits are parse time, cache-hash stability, and CSS small enough to inline above the fold.',
+    },
+    {
+      q: 'Why does it keep spaces inside calc()?',
+      a: 'The CSS grammar requires whitespace around + and - inside calc(); removing it invalidates the whole declaration. That is the number one way naive minifiers corrupt stylesheets, so those spaces stay — as do string contents and /*! banner comments.',
+    },
+    {
+      q: 'Does it merge rules or shorten colors?',
+      a: 'Deliberately not. Merging overlapping selectors changes cascade order and can break stylesheets far from the edit. Only provably safe byte-level folds are applied: 0px to 0, 0.5 to .5, dropping trailing semicolons and empty rules.',
+    },
+    {
+      q: 'Is 0% folded to 0 as well?',
+      a: 'No — that is a deliberate exception. Inside flex-basis (and a few other corners) 0% and 0 resolve differently, so only absolute units (px, em, rem, vh, vw, pt…) are folded. Percentages pass through untouched.',
+    },
+  ],
+  'csv-to-sql-converter': [
+    {
+      q: 'Which SQL dialect does it generate?',
+      a: 'Plain multi-row INSERT INTO ... VALUES that works in MySQL, PostgreSQL and SQLite. Identifier quoting toggles between MySQL backticks and ANSI double quotes; values use the universal single-quote doubling.',
+    },
+    {
+      q: 'How are quotes and special characters escaped?',
+      a: 'Single quotes in values are doubled (the SQL standard, accepted everywhere), and table or column names from the CSV header are sanitized to [A-Za-z0-9_] before quoting — nothing from the file ever becomes raw statement syntax.',
+    },
+    {
+      q: 'How are empty cells handled?',
+      a: 'Your choice: NULL or empty string. Type inference also kicks in — a column whose non-empty cells all parse as numbers is emitted unquoted; everything else is quoted as a string.',
+    },
+    {
+      q: 'Can it create the table too?',
+      a: 'No — it generates INSERT statements only. The header row becomes your column list, which is exactly what you need for the CREATE TABLE; column types cannot be inferred reliably from CSV and belong in your schema.',
+    },
+  ],
+  'rot13-converter': [
+    {
+      q: 'Is ROT13 encryption?',
+      a: 'No. There are only 25 possible shifts and any decoder reverses it in seconds — it is obfuscation against a passing glance, not confidentiality. Never protect anything real with it.',
+    },
+    {
+      q: 'How do I decode ROT13?',
+      a: 'Paste the output back into the input — ROT13 is its own inverse because 13 + 13 = 26, one full turn of the alphabet. Any other shift N is undone by 26 − N, so ROT7 decodes with ROT19.',
+    },
+    {
+      q: 'What happens to numbers and punctuation?',
+      a: 'They pass through unchanged unless ROT5 is enabled, which rotates digits by 5 (0↔5, 1↔6) and is also self-inverse. Punctuation, spaces and non-Latin letters never change.',
+    },
+    {
+      q: 'Why do people still use ROT13?',
+      a: 'Forum spoiler etiquette, puzzle hints, scrambled answer keys — the classic Usenet use case survives because a veil you must choose to lift is exactly right for "read only if you want to know".',
+    },
+  ],
 }
 export function getToolFaqs(slug: string): FaqPair[] {
   return toolFaqs[slug] ?? []
