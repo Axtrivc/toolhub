@@ -58,11 +58,11 @@ const de: ReactNode = (
     <h2>Die 15/24/+4-Kurve und ihre Herkunft</h2>
     <p>Tierärzte und Verbände wie die AAFP beschreiben die Katzenreifung als vorgelagert: Das erste Jahr entspricht etwa 15 Menschenjahren, das zweite addiert 9 (24 gesamt), danach je Jahr rund 4. Eine 5-jährige Katze ist ungefähr 36; eine 15-jährige etwa 76. Die Kurve ist nahezu rassenunabhängig — Maine Coon und Siam altern fast gleich schnell, der größte Unterschied zu Hunden.</p>
     <h2>Warum ×7 peinlich scheitert</h2>
-    <p>Die Sieben-für-eins-Regel macht aus einer 1-jährigen Katze „7 Jahre" — dabei ist sie ausgewachsen, geschlechtsreif und verhaltenstechnisch erwachsen. Sie unterschätzt auch die Seniorenbetreuung: Mit 11 (veterinär Senior) behauptet ×7 77, während das echte Äquivalent bei etwa 60 liegt. Der praktische Preis des Mythos sind verpasste Senior-Blutuntersuchungen, weil Halter den Wechsel von Jahres- zu Halbjahreschecks zu spät ansetzen.</p>
+    <p>Die Sieben-für-eins-Regel macht aus einer 1-jährigen Katze „7 Jahre“ — dabei ist sie ausgewachsen, geschlechtsreif und verhaltenstechnisch erwachsen. Sie unterschätzt auch die Seniorenbetreuung: Mit 11 (veterinär Senior) behauptet ×7 77, während das echte Äquivalent bei etwa 60 liegt. Der praktische Preis des Mythos sind verpasste Senior-Blutuntersuchungen, weil Halter den Wechsel von Jahres- zu Halbjahreschecks zu spät ansetzen.</p>
     <h2>Lebensphasen, die den Tierarztrhythmus bestimmen</h2>
     <p>Kitten (unter 1), junger Erwachsener (1-6), erwachsen (7-10), Senior (11-14) und Super-Senior (15+). Senioren wechseln zu halbjährlichen Untersuchungen mit Blutwerten und Blutdruck — Katzen verstecken Nierenerkrankungen und Hyperthyreose meisterhaft, Früherkennung ist alles. Wohnungskatzen erreichen häufig 18-20 Jahre, rund 88-96 in Menschenjahren.</p>
     <h2>Adoptierte Katze ohne bekanntem Geburtstag?</h2>
-    <p>Heime schätzen das Alter über die Zähne: Milchzähne bedeuten unter 6 Monaten, bleibende Eckzähne sind mit ~7 Monaten da, Zahnstein und Abrieb schieben die Schätzung nach oben. Das Etikett „1-2 Jahre" bedeutet meist jungen Erwachsenen — trage 1,5 ein und richte die Pflege nach der Lebensphasen-Karte, nicht nach der Menschenzahl.</p>
+    <p>Heime schätzen das Alter über die Zähne: Milchzähne bedeuten unter 6 Monaten, bleibende Eckzähne sind mit ~7 Monaten da, Zahnstein und Abrieb schieben die Schätzung nach oben. Das Etikett „1-2 Jahre“ bedeutet meist jungen Erwachsenen — trage 1,5 ein und richte die Pflege nach der Lebensphasen-Karte, nicht nach der Menschenzahl.</p>
   </section>
 )
 

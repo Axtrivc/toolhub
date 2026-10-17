@@ -36,7 +36,7 @@ function parseHours(s: string): number {
   return isFinite(n) ? n : NaN
 }
 
-/** 秒 → "X h Y min Z s" 紧凑时长(小时/分钟为零时省略对应段) */
+/** 秒 → "X h Y min Z s" 紧凑时长(小时/分钟为零时省略对应段;≥24h 进位到天) */
 function fmtDuration(sec: number): string {
   if (!isFinite(sec) || sec < 0) return '—'
   const h = Math.floor(sec / 3600)
@@ -49,6 +49,13 @@ function fmtDuration(sec: number): string {
   if (ss === 60) { ss = 0; mm += 1 }
   let hh = h
   if (mm === 60) { mm = 0; hh += 1 }
+  if (hh >= 24) {
+    // 大文件 × 慢链路动辄几十小时:"98 h" 不如 "4 d 2 h" 直观;
+    // 天级下秒是噪声(totalSeconds 行保留精确秒值)
+    const dayParts = [`${Math.floor(hh / 24)} d`, `${hh % 24} h`]
+    if (mm > 0) dayParts.push(`${mm} min`)
+    return dayParts.join(' ')
+  }
   if (hh > 0) parts.push(`${hh} h`)
   if (mm > 0 || (hh > 0 && ss > 0)) parts.push(`${mm} min`)
   parts.push(`${ss} s`)
@@ -102,7 +109,13 @@ export const TimeCardCalculatorClient = makeCalculatorClient({
     const total = soFar + worked
     const ot = Math.max(0, total - thr)
     const reg = Math.min(total, thr)
-    const hm = (x: number) => `${Math.floor(x)}h ${String(Math.round((x % 1) * 60)).padStart(2, '0')}m`
+    // 进位兜底:手动输入十进制小时(如 8.9999)四舍五入后分钟可到 60
+    const hm = (x: number) => {
+      let hh = Math.floor(x)
+      let mm = Math.round((x % 1) * 60)
+      if (mm === 60) { mm = 0; hh += 1 }
+      return `${hh}h ${String(mm).padStart(2, '0')}m`
+    }
     return {
       todayHM: hm(worked),
       todayDec: `${fmtNum(worked, 2)} h`,
@@ -186,6 +199,15 @@ export const BusinessDaysCalculatorClient = makeCalculatorClient({
       counted += 1
     }
     const iso = new Date(cur).toISOString().slice(0, 10)
+    // 走查上限兜底:手输超大量(>约 2,850 个工作日)时 4,000 个日历日走不完,
+    // 此时 cur 停在半路 —— 不能把未达标日期当答案静默展示(与 mortgage 的
+    // "Not paid off within 600 months" 同款拦截口径)
+    if (counted < n) {
+      return {
+        targetDate: `⚠️ ${L('errRange', 'Too many business days — the day-by-day walk stops after about 2,850 business days (~11 years)')}`,
+        targetISO: '—', calendarDays: `${calendar}`, weekendDays: '—', holidayHits: '—',
+      }
+    }
     return {
       targetDate: fmtUtcDate(cur),
       targetISO: iso,
@@ -485,6 +507,11 @@ export const TireSizeCalculatorClient = makeCalculatorClient({
       revs: `${fmtNum(a.revs, 0)} → ${fmtNum(b.revs, 0)} rev/mi`,
     }
   },
+  presets: [
+    { label: 'Plus-size one step', values: { tire1: '225/45R17', tire2: '235/45R17', speed: '60' } },
+    { label: 'Taller sidewall (comfort)', values: { tire1: '225/45R17', tire2: '225/50R17', speed: '60' } },
+    { label: 'Truck all-terrain swap', values: { tire1: '265/70R17', tire2: '285/70R17', speed: '65' } },
+  ],
   chart: { kind: 'compare', title: 'Diameter: current vs new' },
   compare: (v) => {
     const parseTire = (s: string) => {
@@ -563,22 +590,30 @@ export const WindChillCalculatorClient = makeCalculatorClient({
     const t = Number(v.temp)
     const w = Number(v.wind)
     if (!isFinite(t) || !isFinite(w)) return null
+    const outC = v.tUnit === 'C'
     const tc = v.tUnit === 'F' ? (t - 32) * (5 / 9) : t
     const vkmh = v.wUnit === 'kmh' ? w : v.wUnit === 'mph' ? w * 1.609344 : w * 3.6
     if (!isFinite(tc) || !isFinite(vkmh)) return null
-    const marks = [5, 10, 15, 20, 30, 40, 50, 60]
-    const chillAt = (vk: number) => {
-      const p = Math.pow(vk, 0.16)
+    // 横轴刻度跟随所选风速单位(km/h 基准点换算取整),纵轴跟随所选温度单位 ——
+    // 图表单位与结果卡一致,°F/mph 用户不再读到 °C/km/h 轴
+    const marksKmh = [5, 10, 15, 20, 30, 40, 50, 60]
+    const toUnit = (kmh: number) =>
+      v.wUnit === 'mph' ? Math.round(kmh / 1.609344) : v.wUnit === 'ms' ? Math.round((kmh / 3.6) * 2) / 2 : kmh
+    const marks = marksKmh.map(toUnit)
+    const toC = (m: number) => (v.wUnit === 'mph' ? m * 1.609344 : v.wUnit === 'ms' ? m * 3.6 : m)
+    const chillAt = (unitVal: number) => {
+      const p = Math.pow(toC(unitVal), 0.16)
       return 13.12 + 0.6215 * tc - 11.37 * p + 0.3965 * tc * p
     }
+    const disp = (c: number) => (outC ? c : c * (9 / 5) + 32)
     return {
-      xLabels: marks.map((m) => `${m}`),
+      xLabels: marks.map((m) => (Number.isInteger(m) ? `${m}` : m.toFixed(1))),
       lines: [
-        { key: 'chill', label: 'Wind chill', color: '#3b82f6', points: marks.map(chillAt), area: true },
-        { key: 'air', label: 'Actual air temp', color: '#94a3b8', points: marks.map(() => tc), dashed: true },
+        { key: 'chill', label: 'Wind chill', color: '#3b82f6', points: marks.map((m) => disp(chillAt(m))), area: true },
+        { key: 'air', label: 'Actual air temp', color: '#94a3b8', points: marks.map(() => disp(tc)), dashed: true },
       ],
       highlightBetween: { a: 'air', b: 'chill' },
-      formatY: (n) => `${n.toFixed(0)}°C`,
+      formatY: (n) => `${n.toFixed(0)}°${outC ? 'C' : 'F'}`,
     }
   },
   presets: [

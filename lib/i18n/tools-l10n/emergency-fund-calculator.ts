@@ -51,7 +51,7 @@ export const EmergencyFundCalculatorL10n: ToolL10n = {
       'fijar el objetivo según 3/6/9/12 meses de gastos esenciales',
       'ver cuántos meses de paro cubren tus ahorros actuales',
       'calcular cuántos meses tardarás en llegar a la meta ahorrando cada mes',
-      'definir el colchón de 9-12 meses si tu ingresos son irregulares',
+      'definir el colchón de 9-12 meses si tus ingresos son irregulares',
     ],
     faqs: [
       { q: '¿Cuántos meses necesito de verdad?', a: 'Con dos sueldos estables, tres meses bastan; con un solo ingreso o en un sector volátil, seis es el estándar; autónomos, comisionistas y trabajadores de temporada deberían plantearse nueve a doce: el colchón tiene que cubrir la temporada baja entera, no solo el primer mes de paro.' },
@@ -122,7 +122,7 @@ export const EmergencyFundCalculatorL10n: ToolL10n = {
       'preset.1': 'Freelancer-Puffer',
       'preset.2': 'Fast geschafft',
       'errInvalid': 'Ausgaben müssen positiv sein, Sparraten nicht negativ',
-      'never': 'Nie — Monats Sparen sind 0 $',
+      'never': 'Nie — die Sparrate ist 0 $',
       'funded': 'Ziel erreicht ✓',
       'chartTitle': 'Weg zum vollen Notgroschen',
       'line.balance': 'Sparguthaben',

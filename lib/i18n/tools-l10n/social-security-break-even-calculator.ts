@@ -15,6 +15,9 @@ export const SocialSecurityBreakEvenCalculatorL10n: ToolL10n = {
     ],
     ui: {
       'chartTitle': '累计领取总额(62-90 岁)',
+      'preset.0': '平均收入者($2,000)',
+      'preset.1': '较高收入者($2,800)',
+      'preset.2': '顶格($4,000+)',
       'line.at62': '62 岁开始领',
       'line.atFRA': 'FRA 开始领',
       'line.at70': '70 岁开始领',
@@ -42,6 +45,9 @@ export const SocialSecurityBreakEvenCalculatorL10n: ToolL10n = {
     ],
     ui: {
       'chartTitle': 'Total acumulado (62-90 años)',
+      'preset.0': 'Salario medio (2 000 $)',
+      'preset.1': 'Salario alto (2 800 $)',
+      'preset.2': 'Máximo (4 000 $+)',
       'line.at62': 'Cobrando desde los 62',
       'line.atFRA': 'Cobrando desde la FRA',
       'line.at70': 'Cobrando desde los 70',
@@ -69,6 +75,9 @@ export const SocialSecurityBreakEvenCalculatorL10n: ToolL10n = {
     ],
     ui: {
       'chartTitle': 'Kumulierte Bezüge (62-90 Jahre)',
+      'preset.0': 'Durchschnittsverdiener (2.000 $)',
+      'preset.1': 'Höheres Einkommen (2.800 $)',
+      'preset.2': 'Höchstsatz (4.000 $+)',
       'line.at62': 'Bezug ab 62',
       'line.atFRA': 'Bezug ab FRA',
       'line.at70': 'Bezug ab 70',

@@ -15,6 +15,9 @@ export const StudentLoanCalculatorL10n: ToolL10n = {
     ],
     ui: {
       'chartTitle': '三种计划的剩余本金',
+      'preset.0': '非补贴 Stafford 贷款',
+      'preset.1': '研究生院债务',
+      'preset.2': '已再融资、无宽限期',
       'line.std': '标准 10 年',
       'line.grad': '阶梯 10 年',
       'line.ext': '延长 25 年',
@@ -43,6 +46,9 @@ export const StudentLoanCalculatorL10n: ToolL10n = {
     ],
     ui: {
       'chartTitle': 'Saldo pendiente de los tres planes',
+      'preset.0': 'Stafford no subsidiado',
+      'preset.1': 'Deuda de posgrado',
+      'preset.2': 'Refinanciado, sin carencia',
       'line.std': 'Estándar 10 años',
       'line.grad': 'Escalonado 10 años',
       'line.ext': 'Extendido 25 años',
@@ -71,6 +77,9 @@ export const StudentLoanCalculatorL10n: ToolL10n = {
     ],
     ui: {
       'chartTitle': 'Restschuld der drei Pläne',
+      'preset.0': 'Unsubsidized Stafford',
+      'preset.1': 'Master-Schulden',
+      'preset.2': 'Refinanziert, ohne Karenz',
       'line.std': 'Standard 10 Jahre',
       'line.grad': 'Gestuft 10 Jahre',
       'line.ext': 'Verlängert 25 Jahre',

@@ -45,6 +45,7 @@ export const CollegeSavingsCalculatorClient = makeCalculatorClient({
   ],
   outputs: [
     { key: 'monthlyNeed', label: 'Save per month', highlight: true, sublabel: 'On top of current savings' },
+    // (line.target 画的是全部学年合计,标签已与 totalCost 卡片对齐,见 series 配置)
     { key: 'costAtStart', label: 'First-year cost at enrollment' },
     { key: 'totalCost', label: 'Total cost of college' },
     { key: 'savingsFV', label: 'Savings by enrollment' },
@@ -103,7 +104,7 @@ export const CollegeSavingsCalculatorClient = makeCalculatorClient({
       xLabels: marks.map((y) => (y === 0 ? 'Now' : `Y${y}`)),
       lines: [
         { key: 'balance', label: 'Projected account balance', color: '#3b82f6', points: marks.map(balanceAt), area: true },
-        { key: 'target', label: 'Total cost at enrollment', color: '#ef4444', points: marks.map(() => total), dashed: true },
+        { key: 'target', label: 'Total cost of college', color: '#ef4444', points: marks.map(() => total), dashed: true },
       ],
       formatY: (n2) => fmtUSD(n2, 0),
     }
@@ -131,7 +132,7 @@ export const Match401kCalculatorClient = makeCalculatorClient({
     { key: 'employerMatch', label: 'Employer match this year', highlight: true },
     { key: 'yourContribution', label: 'Your contribution' },
     { key: 'maxMatch', label: 'Max possible match' },
-    { key: 'unclaimedMatch', label: 'Free money left on table' },
+    { key: 'unclaimedMatch', label: 'Free money left on table', sublabel: 'Raise your contribution to capture it' },
   ],
   compute: (v, locale) => {
     const salary = toNumStrict(v.salary)
@@ -196,11 +197,13 @@ export const SocialSecurityBreakEvenCalculatorClient = makeCalculatorClient({
     { label: 'Maximum ($4,000+)', values: { pia: '4000' } },
   ],
   outputs: [
-    { key: 'benefit62', label: 'Claim at 62', highlight: true },
+    { key: 'benefit62', label: 'Claim at 62', sublabel: 'After the early-claiming reduction' },
     { key: 'benefitFRA', label: 'Claim at FRA' },
-    { key: 'benefit70', label: 'Claim at 70' },
+    { key: 'benefit70', label: 'Claim at 70', sublabel: 'Includes delayed credits' },
     { key: 'fra', label: 'Your full retirement age' },
-    { key: 'breakEven1', label: 'FRA catches age-62 at' },
+    // 工具同名的主结果是回补年龄(移动端 sticky 条/分享卡都取 highlight),
+    // 三档月额是并列输入派生值——主结果落在 breakEven1 才贴合工具定位
+    { key: 'breakEven1', label: 'FRA catches age-62 at', highlight: true },
     { key: 'breakEven2', label: 'Age-70 catches FRA at' },
     { key: 'at80', label: 'Cumulative by 80' },
     { key: 'at85', label: 'Cumulative by 85' },
@@ -279,7 +282,7 @@ export const StudentLoanCalculatorClient = makeCalculatorClient({
     { label: 'Refinanced, no grace', values: { balance: '35000', rate: '4.5', deferred: '0' } },
   ],
   outputs: [
-    { key: 'stdPay', label: 'Standard 10-yr payment', highlight: true },
+    { key: 'stdPay', label: 'Standard 10-yr payment', highlight: true, sublabel: '120 level payments' },
     { key: 'gradStart', label: 'Graduated first payment', sublabel: 'Steps up +25% every 2 yrs' },
     { key: 'extPay', label: 'Extended 25-yr payment' },
     { key: 'capitalized', label: 'Interest capitalized in grace' },
@@ -399,7 +402,7 @@ export const CarLeaseCalculatorClient = makeCalculatorClient({
     { key: 'depPart', label: 'Depreciation portion' },
     { key: 'rentPart', label: 'Rent (interest) portion' },
     { key: 'aprEquivalent', label: 'APR equivalent', sublabel: 'money factor × 2400' },
-    { key: 'totalLeaseCost', label: 'Total lease cost' },
+    { key: 'totalLeaseCost', label: 'Total lease cost', sublabel: 'Down payment + all payments' },
     { key: 'endBuyout', label: 'Buyout at lease end' },
   ],
   compute: (v, locale) => {
@@ -466,7 +469,7 @@ export const EvChargingCostCalculatorClient = makeCalculatorClient({
     { key: 'perMileGas', label: 'Gas cost per mile' },
     { key: 'annualGas', label: 'Gas annual cost' },
     { key: 'annualSavings', label: 'Saved per year' },
-    { key: 'kwhNeeded', label: 'Charging needed' },
+    { key: 'kwhNeeded', label: 'Charging needed', sublabel: '≈ total kWh for the year' },
   ],
   compute: (v, locale) => {
     const miles = toNum(v.annualMiles)
@@ -535,8 +538,8 @@ export const RentBudgetCalculatorClient = makeCalculatorClient({
     ]},
   ],
   outputs: [
-    { key: 'rent30', label: 'Rent cap, 30% rule', highlight: true },
-    { key: 'rentCap50', label: 'Needs bucket (50/30/20)' },
+    { key: 'rent30', label: 'Rent cap, 30% rule', highlight: true, sublabel: 'On the income basis chosen' },
+    { key: 'rentCap50', label: 'Needs bucket (50/30/20)', sublabel: 'Rent shares this bucket with other needs' },
     { key: 'wants30', label: 'Wants (30%)' },
     { key: 'savings20', label: 'Savings (20%)' },
     { key: 'annualRent', label: 'Annual rent total' },
@@ -589,7 +592,7 @@ export const ChristmasBudgetCalculatorClient = makeCalculatorClient({
     { label: 'Big family', values: { total: '1500', family: '10', friends: '6', coworkers: '3' } },
   ],
   outputs: [
-    { key: 'giftPool', label: 'Gift pool (70%)', highlight: true },
+    { key: 'giftPool', label: 'Gift pool (70%)', highlight: true, sublabel: 'Family 60% / friends 30% / coworkers 10%' },
     { key: 'perFamily', label: 'Per family member' },
     { key: 'perFriend', label: 'Per friend' },
     { key: 'perCoworker', label: 'Per coworker' },

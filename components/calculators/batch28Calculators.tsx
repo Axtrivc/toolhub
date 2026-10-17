@@ -114,7 +114,7 @@ export const ConcreteCalculatorClient = makeCalculatorClient({
         { label: 'Exact need', segments: [{ label: 'Volume', value: ft3 / 27, color: '#3b82f6' }] },
         { label: 'Order (with waste)', segments: [{ label: 'Volume', value: (ft3 * (1 + waste / 100)) / 27, color: '#f59e0b' }] },
       ],
-      formatTotal: (n) => `${n.toFixed(2)} yd³`,
+      formatTotal: (n) => `${fmtNum(n, 2)} yd³`,
     }
   },
   note: '🧱 At 4 inches thick, one cubic yard covers 81 ft². Past about a full yard (≈45 eighty-lb bags) order ready-mix by the truck — hand-mixing 20+ bags is a day of its own.',
@@ -207,9 +207,10 @@ export const GravelCalculatorClient = makeCalculatorClient({
     { key: 'width', label: 'Area width', suffix: 'ft', default: '10', slider: { min: 1, max: 200, step: 1 } },
     { key: 'depth', label: 'Depth', suffix: 'in', default: '3', slider: { min: 1, max: 12, step: 0.5 } },
     { key: 'material', label: 'Material', default: 'crushed', options: [
-      { label: 'Crushed stone (2,700 lb/yd³)', value: 'crushed' },
-      { label: 'Pea gravel (2,600 lb/yd³)', value: 'pea' },
-      { label: 'Sand, dry (2,500 lb/yd³)', value: 'sand' },
+      // 标签保持 ≤10 字符:3 段分段控件在 375px 下每段约 78px 可用,密度数值放 note
+      { label: 'Crushed', value: 'crushed' },
+      { label: 'Pea gravel', value: 'pea' },
+      { label: 'Dry sand', value: 'sand' },
     ]},
     { key: 'price', label: 'Price per ton', suffix: '$', default: '45', slider: { min: 0, max: 200, step: 1 } },
   ],
@@ -251,10 +252,10 @@ export const GravelCalculatorClient = makeCalculatorClient({
         { label: 'Pea gravel', segments: [{ label: 'Weight', value: (yd * 2600) / 2000, color: '#22c55e' }] },
         { label: 'Sand (dry)', segments: [{ label: 'Weight', value: (yd * 2500) / 2000, color: '#f59e0b' }] },
       ],
-      formatTotal: (n) => `${n.toFixed(2)} t`,
+      formatTotal: (n) => `${fmtNum(n, 2)} t`,
     }
   },
-  note: '🪨 Quarries bill by the ton, not the yard: crushed stone runs ≈1.35 tons per yard, and delivered loads step in 1-10 yd³ truck tiers. A two-car driveway (≈600 ft² at 4″) lands near 10 tons.',
+  note: '🪨 Quarries bill by the ton, not the yard: crushed stone ≈2,700 lb/yd³ (1.35 tons), pea gravel 2,600, dry sand 2,500. Delivered loads step in 1-10 yd³ truck tiers — a two-car driveway (≈600 ft² at 4″) lands near 10 tons.',
 })
 
 // ─────────────────────────────────────────────────────────────
@@ -283,7 +284,7 @@ export const DrywallCalculatorClient = makeCalculatorClient({
   outputs: [
     { key: 'sheets', label: 'Drywall sheets', highlight: true, sublabel: '10% waste included' },
     { key: 'totalArea', label: 'Board area' },
-    { key: 'screws', label: 'Screws' },
+    { key: 'screws', label: 'Screws', sublabel: '≈300 screws per lb' },
     { key: 'mud', label: 'Joint compound' },
   ],
   compute: (v, locale) => {
@@ -323,7 +324,7 @@ export const DrywallCalculatorClient = makeCalculatorClient({
         { label: '4×8 panels', segments: [{ label: 'Sheets', value: Math.ceil(buy / 32), color: '#3b82f6' }] },
         { label: '4×12 panels', segments: [{ label: 'Sheets', value: Math.ceil(buy / 48), color: '#22c55e' }] },
       ],
-      formatTotal: (n) => `${Math.round(n)}`,
+      formatTotal: (n) => `${fmtNum(Math.round(n), 0)}`,
     }
   },
   note: '🔨 On 8-ft walls, hanging 12-ft sheets horizontally cuts total joint length by a quarter. Screw spacing: 12″ on ceilings, 16″ on walls. Buy every sheet in one trip — finish batches differ visibly.',
@@ -358,7 +359,7 @@ export const RoofingCalculatorClient = makeCalculatorClient({
   outputs: [
     { key: 'bundles', label: 'Shingle bundles', highlight: true, sublabel: '3 bundles per square' },
     { key: 'roofArea', label: 'Roof surface area' },
-    { key: 'squares', label: 'Roofing squares' },
+    { key: 'squares', label: 'Roofing squares', sublabel: '1 square = 100 ft²' },
     { key: 'buySq', label: 'Squares to buy', sublabel: 'Waste included' },
     { key: 'rolls', label: 'Underlayment rolls', sublabel: '400 ft² per roll' },
   ],
@@ -397,7 +398,7 @@ export const RoofingCalculatorClient = makeCalculatorClient({
         { label: '6/12 pitch', segments: [{ label: 'Bundles', value: bundlesAt(1.118), color: '#3b82f6' }] },
         { label: '9/12 pitch', segments: [{ label: 'Bundles', value: bundlesAt(1.25), color: '#ef4444' }] },
       ],
-      formatTotal: (n) => `${Math.round(n)}`,
+      formatTotal: (n) => `${fmtNum(Math.round(n), 0)}`,
     }
   },
   note: '🏠 Three bundles per square holds only for 3-tab shingles — architectural lines often run 4-5 bundles per square, so check the wrapper. Measure the footprint from the ground; the pitch factor turns it into roof area.',
@@ -479,7 +480,7 @@ export const FenceCalculatorClient = makeCalculatorClient({
         { label: '8 ft spacing', segments: [{ label: 'Posts', value: postsAt(8), color: '#22c55e' }] },
         { label: '10 ft spacing', segments: [{ label: 'Posts', value: postsAt(10), color: '#f59e0b' }] },
       ],
-      formatTotal: (n) => `${Math.round(n)}`,
+      formatTotal: (n) => `${fmtNum(Math.round(n), 0)}`,
     }
   },
   note: '🪵 Set posts to one-third their height and below the local frost line — a 10″×24″ hole takes nearly two 80-lb bags. Pickets shrink: butted cedar now is a spaced fence later.',
@@ -502,10 +503,11 @@ export const PaverCalculatorClient = makeCalculatorClient({
     { key: 'length', label: 'Area length', suffix: 'ft', default: '16', slider: { min: 1, max: 200, step: 0.5 } },
     { key: 'width', label: 'Area width', suffix: 'ft', default: '12', slider: { min: 1, max: 200, step: 0.5 } },
     { key: 'paver', label: 'Paver size', default: '4x8', options: [
-      { label: '4×8 (4.5 per ft²)', value: '4x8' },
-      { label: '6×6 (4 per ft²)', value: '6x6' },
-      { label: '8×8 (2.25 per ft²)', value: '8x8' },
-      { label: '12×12 (1 per ft²)', value: '12x12' },
+      // 短标签:4 段分段控件 375px 下每段约 70px,每 ft² 用量放 note
+      { label: '4×8', value: '4x8' },
+      { label: '6×6', value: '6x6' },
+      { label: '8×8', value: '8x8' },
+      { label: '12×12', value: '12x12' },
     ]},
     { key: 'base', label: 'Crushed base depth', suffix: 'in', default: '4', slider: { min: 2, max: 12, step: 1 } },
     { key: 'waste', label: 'Waste margin', suffix: '%', default: '10', slider: { min: 5, max: 20, step: 1 } },
@@ -547,7 +549,7 @@ export const PaverCalculatorClient = makeCalculatorClient({
       { valueKey: 'sandYd', label: 'Bedding sand', color: '#f59e0b' },
     ],
   },
-  note: '🧱 Base depth follows traffic: 4″ for patios and paths, 6-12″ under driveways. Bedding sand stays at 1″ — thicker sand beds creep, rut, and wreck the surface.',
+  note: '🧱 Coverage runs 4.5 pieces per ft² for 4×8, 4 for 6×6, 2.25 for 8×8 and 1 for 12×12. Base depth follows traffic: 4″ for patios and paths, 6-12″ under driveways. Bedding sand stays at 1″ — thicker sand beds creep, rut, and wreck the surface.',
 })
 
 // ─────────────────────────────────────────────────────────────
@@ -624,7 +626,7 @@ export const DeckBoardCalculatorClient = makeCalculatorClient({
         { label: '16 ft boards', segments: [{ label: 'Boards', value: boardsAt(16), color: '#22c55e' }] },
         { label: '20 ft boards', segments: [{ label: 'Boards', value: boardsAt(20), color: '#f59e0b' }] },
       ],
-      formatTotal: (n) => `${Math.round(n)}`,
+      formatTotal: (n) => `${fmtNum(Math.round(n), 0)}`,
     }
   },
   note: '🪵 Gap pressure-treated lumber 1/8-1/4″ — it shrinks as it dries — and follow composite specs (often 3/16″+). 16″ OC joists suit most decking; 24″ OC only for boards perpendicular to joists.',

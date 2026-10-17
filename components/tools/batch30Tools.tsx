@@ -166,6 +166,9 @@ export const GpsCoordinateConverterClient = makeTextTool({
   inputLabel: 'Coordinate (any format)',
   outputLabel: 'Converted to all formats',
   defaultInput: '40.7128° N, 74.0060° W',
+  // 坐标输入天然极短:2000 字符门控拦住误粘贴大文本(分词+多正则逐 token
+  // 处理,大输入会卡顿),与 batch32 校验器族同款口径
+  maxInputChars: 2000,
   transform: (t) => convertGps(t),
   note: '🧭 Decimal degrees ↔ DMS ↔ DDM, with N/S/E/W hemisphere letters parsed in any position (glued to the number is fine). Latitude must stay within ±90°, longitude ±180°; the 6-decimal DD output resolves to roughly 0.11 m.',
 })

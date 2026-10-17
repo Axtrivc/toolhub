@@ -15,6 +15,9 @@ export const EvChargingCostCalculatorL10n: ToolL10n = {
     ],
     ui: {
       'chartTitle': '年燃料成本:电 vs 油',
+      'preset.0': '高效轿车',
+      'preset.1': '大型电动 SUV',
+      'preset.2': '以公共桩为主',
       'cmp.0': '电车充电',
       'cmp.1': '油车加油',
       'cmpseg.0': '家充',
@@ -48,6 +51,9 @@ export const EvChargingCostCalculatorL10n: ToolL10n = {
     ],
     ui: {
       'chartTitle': 'Coste anual: electricidad vs gasolina',
+      'preset.0': 'Sedán eficiente',
+      'preset.1': 'SUV eléctrico grande',
+      'preset.2': 'Casi todo carga pública',
       'cmp.0': 'Carga del eléctrico',
       'cmp.1': 'Gasolina del térmico',
       'cmpseg.0': 'En casa',
@@ -81,6 +87,9 @@ export const EvChargingCostCalculatorL10n: ToolL10n = {
     ],
     ui: {
       'chartTitle': 'Jahreskosten: Strom vs. Benzin',
+      'preset.0': 'Effiziente Limousine',
+      'preset.1': 'Großes E-SUV',
+      'preset.2': 'Überwiegend öffentlich laden',
       'cmp.0': 'Laden des E-Autos',
       'cmp.1': 'Sprit des Verbrenners',
       'cmpseg.0': 'Zu Hause',

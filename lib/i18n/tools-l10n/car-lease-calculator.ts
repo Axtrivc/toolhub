@@ -15,6 +15,10 @@ export const CarLeaseCalculatorL10n: ToolL10n = {
     ],
     ui: {
       'chartTitle': '月供构成',
+      'chartCenter': '月供',
+      'preset.0': '36 个月主流车型',
+      'preset.1': '24 个月豪华车型',
+      'preset.2': '48 个月经济车型',
       'slice.depPart': '折旧部分',
       'slice.rentPart': '租金(利息)部分',
       'in.msrp': 'MSRP 厂商指导价',
@@ -46,6 +50,10 @@ export const CarLeaseCalculatorL10n: ToolL10n = {
     ],
     ui: {
       'chartTitle': 'Composición de la cuota',
+      'chartCenter': 'Cuota',
+      'preset.0': '36 meses, gama media',
+      'preset.1': '24 meses, lujo',
+      'preset.2': '48 meses, económico',
       'slice.depPart': 'Depreciación',
       'slice.rentPart': 'Carga financiera',
       'in.msrp': 'PVP (MSRP)',
@@ -77,6 +85,10 @@ export const CarLeaseCalculatorL10n: ToolL10n = {
     ],
     ui: {
       'chartTitle': 'Zusammensetzung der Rate',
+      'chartCenter': 'Rate',
+      'preset.0': '36 Monate, Mainstream',
+      'preset.1': '24 Monate, Luxus',
+      'preset.2': '48 Monate, Preiswert',
       'slice.depPart': 'Abschreibung',
       'slice.rentPart': 'Finanzierungsanteil',
       'in.msrp': 'Unverbindliche Preisempfehlung',

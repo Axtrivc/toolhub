@@ -16,7 +16,9 @@ export const OvulationCalculatorL10n: ToolL10n = {
     ui: {
       'in.lmp': '末次月经首日(YYYY-MM-DD)',
       'in.cycle': '月经周期长度',
+      'inSuffix.cycle': '天',
       'in.luteal': '黄体期长度',
+      'inSuffix.luteal': '天',
       'out.ovulation': '预计排卵日',
       'out.fertileStart': '易孕窗口开始',
       'out.fertileEnd': '易孕窗口结束',
@@ -44,7 +46,9 @@ export const OvulationCalculatorL10n: ToolL10n = {
     ui: {
       'in.lmp': 'Primer día de la última regla (AAAA-MM-DD)',
       'in.cycle': 'Duración del ciclo',
+      'inSuffix.cycle': 'días',
       'in.luteal': 'Duración de la fase lútea',
+      'inSuffix.luteal': 'días',
       'out.ovulation': 'Día de ovulación estimado',
       'out.fertileStart': 'Empieza la ventana fértil',
       'out.fertileEnd': 'Termina la ventana fértil',
@@ -72,7 +76,9 @@ export const OvulationCalculatorL10n: ToolL10n = {
     ui: {
       'in.lmp': 'Erster Tag der letzten Periode (JJJJ-MM-TT)',
       'in.cycle': 'Zykluslänge',
+      'inSuffix.cycle': 'Tage',
       'in.luteal': 'Länge der Lutealphase',
+      'inSuffix.luteal': 'Tage',
       'out.ovulation': 'Voraussichtlicher Eisprungtag',
       'out.fertileStart': 'Fruchtbares Fenster beginnt',
       'out.fertileEnd': 'Fruchtbares Fenster endet',

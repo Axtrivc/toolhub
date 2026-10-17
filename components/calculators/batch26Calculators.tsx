@@ -122,7 +122,7 @@ export const RaceTimePredictorClient = makeCalculatorClient({
     { key: 'dist', label: 'Recent race distance', default: '10', options: [
       { label: '5K', value: '5' },
       { label: '10K', value: '10' },
-      { label: 'Half marathon', value: 'half' },
+      { label: 'Half', value: 'half' },
       { label: 'Marathon', value: 'marathon' },
     ]},
     { key: 'hours', label: 'Hours', default: '0', slider: { min: 0, max: 5, step: 1 } },
@@ -131,7 +131,7 @@ export const RaceTimePredictorClient = makeCalculatorClient({
     { key: 'target', label: 'Predict for', default: 'marathon', options: [
       { label: '5K', value: '5' },
       { label: '10K', value: '10' },
-      { label: 'Half marathon', value: 'half' },
+      { label: 'Half', value: 'half' },
       { label: 'Marathon', value: 'marathon' },
     ]},
   ],
@@ -272,6 +272,11 @@ export const BodySurfaceAreaCalculatorClient = makeCalculatorClient({
     { key: 'height', label: 'Height', suffix: 'cm', default: '175', slider: { min: 120, max: 220, step: 1 } },
     { key: 'weight', label: 'Weight', suffix: 'kg', default: '70', slider: { min: 30, max: 200, step: 1 } },
   ],
+  presets: [
+    { label: 'Average adult', values: { height: '170', weight: '65' } },
+    { label: 'Tall & heavy', values: { height: '190', weight: '100' } },
+    { label: 'Smaller frame', values: { height: '155', weight: '48' } },
+  ],
   outputs: [
     { key: 'mosteller', label: 'BSA — Mosteller', highlight: true, sublabel: '√(H × W ÷ 3600)' },
     { key: 'dubois', label: 'BSA — DuBois', sublabel: '0.007184 × H^0.725 × W^0.425' },
@@ -292,7 +297,9 @@ export const BodySurfaceAreaCalculatorClient = makeCalculatorClient({
     return {
       mosteller: `${fmtNum(mosteller, 2)} m²`,
       dubois: `${fmtNum(dubois, 2)} m²`,
-      diff: `±${fmtNum(Math.abs(mosteller - dubois), 2)} m²`,
+      // 两公式差值常在 0.001-0.05 m²:fmtNum 2 位小数会掉进 toExponential
+      // 分支渲染成 "3.4810e-3 m²",故取 3 位小数保可读
+      diff: `±${fmtNum(Math.abs(mosteller - dubois), 3)} m²`,
       cardiac: `${fmtNum(5 / ((mosteller + dubois) / 2), 2)} L/min/m²`,
     }
   },
@@ -324,6 +331,11 @@ export const WaistToHeightRatioCalculatorClient = makeCalculatorClient({
   inputs: [
     { key: 'waist', label: 'Waist circumference', suffix: 'cm', default: '85', slider: { min: 50, max: 180, step: 1 } },
     { key: 'height', label: 'Height', suffix: 'cm', default: '175', slider: { min: 120, max: 220, step: 1 } },
+  ],
+  presets: [
+    { label: 'Healthy ≈ 0.45', values: { waist: '77', height: '170' } },
+    { label: 'Increased ≈ 0.55', values: { waist: '94', height: '170' } },
+    { label: 'High ≈ 0.65', values: { waist: '110', height: '170' } },
   ],
   outputs: [
     { key: 'whtr', label: 'Waist-to-height ratio', highlight: true, sublabel: 'Waist ÷ height' },
@@ -383,15 +395,15 @@ export const StepsToMilesCalculatorClient = makeCalculatorClient({
   inputs: [
     { key: 'steps', label: 'Steps', default: '10000', slider: { min: 0, max: 30000, step: 100 } },
     { key: 'mode', label: 'Stride length', default: 'auto', options: [
-      { label: 'Estimate from height (×0.414)', value: 'auto' },
-      { label: 'Enter my own measurement', value: 'manual' },
+      { label: 'From height', value: 'auto' },
+      { label: 'Measured', value: 'manual' },
     ]},
     { key: 'height', label: 'Height', suffix: 'cm', default: '175', slider: { min: 120, max: 220, step: 1 } },
     { key: 'stride', label: 'Your stride length', suffix: 'cm', default: '72', slider: { min: 40, max: 120, step: 1 } },
     { key: 'pace', label: 'Walking pace', default: 'moderate', options: [
-      { label: 'Slow stroll (≈3 km/h)', value: 'slow' },
-      { label: 'Moderate walk (≈5 km/h)', value: 'moderate' },
-      { label: 'Brisk walk (≈6.5 km/h)', value: 'brisk' },
+      { label: 'Slow', value: 'slow' },
+      { label: 'Moderate', value: 'moderate' },
+      { label: 'Brisk', value: 'brisk' },
     ]},
   ],
   outputs: [
@@ -448,7 +460,7 @@ export const StepsToMilesCalculatorClient = makeCalculatorClient({
     { label: 'Sedentary day', values: { steps: '3000', mode: 'auto', height: '175', pace: 'slow' } },
     { label: 'Active 15k', values: { steps: '15000', mode: 'auto', height: '175', pace: 'brisk' } },
   ],
-  note: '👟 Walking stride ≈ height × 0.414 (shorter than your running stride). For a true number, walk 10 normal-pace steps and divide the distance by 10. Wrist trackers credit every arm swing — compare trends on the same device.',
+  note: '👟 Walking stride ≈ height × 0.414 (shorter than your running stride). For a true number, walk 10 normal-pace steps and divide the distance by 10. Pace bands: slow ≈3 km/h, moderate ≈5, brisk ≈6.5. Wrist trackers credit every arm swing — compare trends on the same device.',
 })
 
 // ───────────────────────────────────────────
@@ -530,7 +542,10 @@ export const WeightLossGoalCalculatorClient = makeCalculatorClient({
     const weight: number[] = []
     const goalLine: number[] = []
     for (let i = 0; i <= steps; i++) {
-      xLabels.push(`W${Math.round(i * stride)}`)
+      // 步距 < 1 周时取 1 位小数,避免 Math.round 把相邻刻度撞成重复标签
+      // (如 6.4 周计划 → W6/W6;不足 2 周的极短计划 → W0/W0/W0)
+      const wk = i * stride
+      xLabels.push(stride >= 1 ? `W${Math.round(wk)}` : `W${wk.toFixed(1)}`)
       weight.push(current - (current - goal) * (i / steps))
       goalLine.push(goal)
     }

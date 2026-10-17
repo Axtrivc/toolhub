@@ -14,7 +14,7 @@ import { useApp } from '@/components/providers/AppProviders'
 const en: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>Cost per mile is the number that matters</h2>
-    <p>An EV doing 3.5 miles per kWh on a $0.17 home rate costs about 5 cents a mile; a 30-MPG gas car at $3.50 a gallon pays nearly 12. Over 12,000 miles a year that gap compounds into roughly $625 — before counting oil changes, brake wear, and the absence of a transmission to service.</p>
+    <p>An EV doing 3.5 miles per kWh on a $0.17 home rate costs about 5 cents a mile; a 30-MPG gas car at $3.50 a gallon pays nearly 12. Over 12,000 miles a year that gap compounds into roughly $800 — and it stays near $625 even at the calculator&apos;s default 20% public-charging mix — before counting oil changes, brake wear, and the absence of a transmission to service.</p>
     <h2>Efficiency varies more than drivers expect</h2>
     <p>Compact EVs commonly return 3.5-4.5 miles per kWh; big SUVs and trucks sit closer to 2-3. Cold weather takes another 20-30% off, and highway speeds hurt more than they do in gas cars. Your dashboard&apos;s lifetime average beats any brochure figure — use that.</p>
     <h2>Public charging quietly rewrites the math</h2>
@@ -28,7 +28,7 @@ const en: ReactNode = (
 const zh: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>每英里成本才是关键数字</h2>
-    <p>效率 3.5 miles/kWh 的电车在家充 $0.17 的费率下,每英里约 5 美分;30 MPG、油价 $3.50 的油车接近 12 美分。按年 12,000 英里,这个差距累计约 $625——还没算机油、刹车磨损,以及那台不需要保养的变速箱。</p>
+    <p>效率 3.5 miles/kWh 的电车在家充 $0.17 的费率下,每英里约 5 美分;30 MPG、油价 $3.50 的油车接近 12 美分。按年 12,000 英里,这个差距累计约 $800——即使按计算器默认的 20% 公共桩占比,也有约 $625——还没算机油、刹车磨损,以及那台不需要保养的变速箱。</p>
     <h2>效率的差异比想象中大</h2>
     <p>紧凑级电车普遍能做到 3.5-4.5 miles/kWh;大型 SUV 和皮卡只有 2-3。低温再打个 7-8 折,高速工况的伤害也比油车更明显。仪表盘上的累计平均油耗比任何宣传册都可信——用它。</p>
     <h2>公共桩在悄悄改写账本</h2>
@@ -42,7 +42,7 @@ const zh: ReactNode = (
 const es: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>El coste por milla es la cifra que importa</h2>
-    <p>Un eléctrico que hace 3,5 millas por kWh con tarifa doméstica de 0,17 $ cuesta unos 5 céntimos por milla; un gasolina de 30 MPG con gasolina a 3,50 $ paga casi 12. En 12 000 millas anuales, la diferencia acumula unos 625 $ — sin contar cambios de aceite, frenos ni la ausencia de transmisión que mantener.</p>
+    <p>Un eléctrico que hace 3,5 millas por kWh con tarifa doméstica de 0,17 $ cuesta unos 5 céntimos por milla; un gasolina de 30 MPG con gasolina a 3,50 $ paga casi 12. En 12 000 millas anuales, la diferencia acumula unos 800 $ — y sigue cerca de los 625 $ incluso con el 20 % de carga pública por defecto — sin contar cambios de aceite, frenos ni la ausencia de transmisión que mantener.</p>
     <h2>La eficiencia varía más de lo que crees</h2>
     <p>Los compactos eléctricos suelen rendir 3,5-4,5 millas por kWh; SUV y camionetas grandes se quedan en 2-3. El frío resta otro 20-30%, y la autopista les duele más que a los térmicos. La media acumulada del cuadro de mandos vale más que cualquier folleto — usa esa.</p>
     <h2>La carga pública reescribe las cuentas en silencio</h2>
@@ -56,7 +56,7 @@ const es: ReactNode = (
 const de: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>Die Kosten pro Meile sind die entscheidende Zahl</h2>
-    <p>Ein E-Auto mit 3,5 Meilen pro kWh und Heimtarif von 0,17 $ kostet etwa 5 Cent pro Meile; ein 30-MPG-Benziner bei 3,50 $ pro Gallone zahlt fast 12. Über 12.000 Meilen im Jahr summiert sich die Lücke auf rund 625 $ — ohne Ölwechsel, Bremsverschleiß und die nicht vorhandene Getriebe-Wartung.</p>
+    <p>Ein E-Auto mit 3,5 Meilen pro kWh und Heimtarif von 0,17 $ kostet etwa 5 Cent pro Meile; ein 30-MPG-Benziner bei 3,50 $ pro Gallone zahlt fast 12. Über 12.000 Meilen im Jahr summiert sich die Lücke auf rund 800 $ — und bleibt selbst mit dem Standard-Anteil von 20 % öffentlichem Laden nahe 625 $ — ohne Ölwechsel, Bremsverschleiß und die nicht vorhandene Getriebe-Wartung.</p>
     <h2>Die Effizienz streut stärker als gedacht</h2>
     <p>Kompakt-E-Autos schaffen üblicherweise 3,5-4,5 Meilen pro kWh; große SUVs und Pickups liegen näher bei 2-3. Kälte kostet weitere 20-30%, und Autobahntempo schadet mehr als beim Benziner. Der Langzeitdurchschnitt im Borddisplay schlägt jeden Prospekt — nimm den.</p>
     <h2>Public Charging schreibt die Rechnung still um</h2>

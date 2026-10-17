@@ -15,6 +15,10 @@ export const ChristmasBudgetCalculatorL10n: ToolL10n = {
     ],
     ui: {
       'chartTitle': '节日预算构成',
+      'chartCenter': '总计',
+      'preset.0': '紧巴巴的一年',
+      'preset.1': '普通年份',
+      'preset.2': '大家庭',
       'slice.gifts': '礼物 70%',
       'slice.decor': '装饰 15%',
       'slice.food': '餐饮 15%',
@@ -43,6 +47,10 @@ export const ChristmasBudgetCalculatorL10n: ToolL10n = {
     ],
     ui: {
       'chartTitle': 'Composición del presupuesto festivo',
+      'chartCenter': 'Total',
+      'preset.0': 'Año ajustado',
+      'preset.1': 'Año típico',
+      'preset.2': 'Familia grande',
       'slice.gifts': 'Regalos 70%',
       'slice.decor': 'Decoración 15%',
       'slice.food': 'Comida 15%',
@@ -71,6 +79,10 @@ export const ChristmasBudgetCalculatorL10n: ToolL10n = {
     ],
     ui: {
       'chartTitle': 'Zusammensetzung des Festbudgets',
+      'chartCenter': 'Gesamt',
+      'preset.0': 'Karges Jahr',
+      'preset.1': 'Typisches Jahr',
+      'preset.2': 'Große Familie',
       'slice.gifts': 'Geschenke 70%',
       'slice.decor': 'Deko 15%',
       'slice.food': 'Essen 15%',

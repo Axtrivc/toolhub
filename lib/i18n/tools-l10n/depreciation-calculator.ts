@@ -92,7 +92,7 @@ export const DepreciationCalculatorL10n: ToolL10n = {
     faqs: [
       { q: 'Welche Methode soll ich wählen?', a: 'Gleichmäßiger Nutzen (Gebäude, lange Umbauten) → linear. Starker Nutzen am Anfang (Transporter, Laptops) → degressiv oder digitale Summe, um den Aufwand vorzuziehen. In der US-Steuererklärung wählst du nicht — die MACRS-Klasse entscheidet.' },
       { q: 'Ist das die Abschreibung fürs Finanzamt?', a: 'Nein. US-Bundessteuern nutzen MACRS: kein Restwert, feste Wiederherstellungszeiträume nach Klasse (5 Jahre für Computer und Pkw, 27,5 für Wohnvermietung) und Halbjahreskonvention. Hier geht es um Handelsbilanz (GAAP) und Planung; kleine Anlagen lassen sich per Section 179 oder Bonus-Abschreibung sofort absetzen.' },
-      { q: 'Warum erreicht die degressive Abschreibung nie null?', a: 'Sie wendet einen festen Prozentsatz auf den sinkenden Restbuchwert an und nähert sich nur asymptotisch an. In der Praxis stoppt man am Restwert und wechscht zur linearen Methode, sobald diese mehr absetzt — die Restwertuntergrenze steckt bereits in der Kurve.' },
+      { q: 'Warum erreicht die degressive Abschreibung nie null?', a: 'Sie wendet einen festen Prozentsatz auf den sinkenden Restbuchwert an und nähert sich nur asymptotisch an. In der Praxis stoppt man am Restwert und wechselt zur linearen Methode, sobald diese mehr absetzt — die Restwertuntergrenze steckt bereits in der Kurve.' },
       { q: 'Welchen Restwert soll ich eintragen?', a: 'In der Buchhaltung eine realistische Verkaufserwartung; ohne Ahnung 0 oder einen symbolischen Dollar — nie negativ. Steuerlich (MACRS) ist der Restwert immer 0, egal was du einträgst.' },
     ],
     ui: {
@@ -104,7 +104,7 @@ export const DepreciationCalculatorL10n: ToolL10n = {
       'inSuffix.salvage': '$',
       'inSuffix.life': 'Jahre',
       'opt.method.sl': 'Linear',
-      'opt.method.ddb': 'Dekressiv (DDB)',
+      'opt.method.ddb': 'Degressiv (DDB)',
       'opt.method.syd': 'Digitale Summe (SYD)',
       'out.year1': 'Abschreibung Jahr 1',
       'out.first3': 'Summe der ersten 3 Jahre',
@@ -116,7 +116,7 @@ export const DepreciationCalculatorL10n: ToolL10n = {
       'errInvalid': 'Kosten positiv, Restwert kleiner als Kosten, Dauer mindestens 1 Jahr',
       'chartTitle': 'Restbuchwert je Jahr — drei Methoden',
       'line.sl': 'Linear',
-      'line.ddb': 'Dekressiv',
+      'line.ddb': 'Degressiv',
       'line.syd': 'Digitale Summe',
       'note': '📊 Linear verteilt (Kosten − Restwert) ÷ Jahre; degressiv wendet 2 ÷ Jahre auf den Restbuchwert an (Restwert als Untergrenze); die digitale Summe gewichtet mit der Restlaufzeit über n(n+1)/2. US-Steuern nutzen MACRS — ohne Restwert, feste Klassen, Halbjahreskonvention; diese Methoden gelten für Buchführung und Budgets.',
     },

@@ -219,7 +219,8 @@ export const RefinanceBreakEvenCalculatorClient = makeCalculatorClient({
     const m2 = amortPayment(balance, newRate, Math.round(newTerm) * 12)
     const savings = m1 - m2
     if (savings <= 0) return null
-    const marks = [0, 6, 12, 18, 24, 30, 36, 48, 60]
+    // 6 个月等距取样:x 轴等间距 = 时间等间距,回本穿越点的位置与斜率不失真
+    const marks = [0, 6, 12, 18, 24, 30, 36, 42, 48, 54, 60]
     return {
       xLabels: marks.map((m) => `${m}m`),
       lines: [
@@ -281,7 +282,7 @@ export const BiweeklyMortgagePaymentCalculatorClient = makeCalculatorClient({
       interestSaved: fmtUSD(i1 - i2, 0),
       biweeklyPayment: `${fmtUSD(m / 2, 2)} / 2 ${T('weeksWord', 'weeks')}`,
       monthlyPayment: fmtUSD(m, 2),
-      payoffTime: `${months2} ${T('monthsWord', 'months')} (${fmtNum(months2 / 12, 1)} ${T('yearsWord', 'yr')}) vs ${n}`,
+      payoffTime: `${months2} ${T('monthsWord', 'months')} (${fmtNum(months2 / 12, 1)} ${T('yearsWord', 'yr')}) vs ${n} ${T('monthsWord', 'months')}`,
       totalInterestMonthly: fmtUSD(i1, 0),
       totalInterestBiweekly: fmtUSD(i2, 0),
     }
@@ -419,8 +420,8 @@ export const PropertyTaxCalculatorClient = makeCalculatorClient({
   urlState: true,
   inputs: [
     { key: 'marketValue', label: 'Market value', suffix: '$', default: '400000', slider: { min: 50000, max: 2000000, step: 5000 } },
-    { key: 'ratio', label: 'Assessment ratio', suffix: '%', default: '80', slider: { min: 10, max: 100, step: 1 } },
-    { key: 'millage', label: 'Millage rate', suffix: 'mills', default: '20', slider: { min: 0, max: 80, step: 0.1 } },
+    { key: 'ratio', label: 'Assessment ratio', suffix: '%', default: '80', slider: { min: 0, max: 100, step: 1 } },
+    { key: 'millage', label: 'Millage rate', suffix: 'mills', default: '20', slider: { min: 0, max: 300, step: 0.1 } },
     { key: 'exemption', label: 'Exemptions', suffix: '$', default: '0', slider: { min: 0, max: 100000, step: 500 } },
   ],
   outputs: [
@@ -455,6 +456,7 @@ export const PropertyTaxCalculatorClient = makeCalculatorClient({
     { label: 'High-tax state (~2.2%)', values: { marketValue: '400000', ratio: '100', millage: '22', exemption: '0' } },
     { label: 'Assessment gap (60% × 30 mills)', values: { marketValue: '400000', ratio: '60', millage: '30', exemption: '0' } },
     { label: 'With $50k homestead exemption', values: { marketValue: '400000', ratio: '80', millage: '20', exemption: '50000' } },
+    { label: 'South Carolina (4% × 250 mills)', values: { marketValue: '400000', ratio: '4', millage: '250', exemption: '0' } },
   ],
   note: '🏛️ One mill = $1 of tax per $1,000 of assessed value, so 20 mills on a $320,000 assessment = $6,400/yr. Many states assess below market (e.g., 80%) — your county assessor publishes both the ratio and the millage. Buying at a higher price can trigger reassessment to your purchase price; caps like California Prop 13 or Florida Save Our Homes shield long-time owners, not buyers.',
 })
@@ -597,7 +599,7 @@ export const RentalPropertyCalculatorClient = makeCalculatorClient({
       capRate: `${fmtNum(cap, 2)}%`,
       cashOnCash: cashInvested > 0 ? `${fmtNum(coc, 2)}%` : '—',
       onePercent: rentPct >= 1
-        ? `✅ ${T('passRule', 'Passes at')}${fmtNum(rentPct, 2)}%`
+        ? `✅ ${T('passRule', 'Passes at ')}${fmtNum(rentPct, 2)}%`
         : `⚠️ ${fmtNum(rentPct, 2)}% ${T('failRule', 'of price — below the 1% rule')}`,
       _debt: fmtUSD(payment * 12, 2),
       _opex: fmtUSD(opex * 12, 2),

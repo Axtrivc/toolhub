@@ -8,7 +8,7 @@ export const ChineseZodiacCalculatorL10n: ToolL10n = {
   zh: {
     useCases: ['按出生年份查生肖、五行与阴阳', '处理 1 月 / 2 月初生日的立春归属', '查生肖本命年(每逢 12 年一遇)', '快速核对 1924-2031 生肖对照'],
     faqs: [
-      { q: '为什么按出生年份算有时会差一个生肖?', a: '生肖年从立春(2 月 3-5 日)开始,不是 1 月 1 日。生于 1 月或 2 月上旬的你,很可能属于上一年的生肖——选择"1 月 1 日-2 月 3 日"选项即可。' },
+      { q: '为什么按出生年份算有时会差一个生肖?', a: '生肖年从立春(2 月 3-5 日)开始,不是 1 月 1 日。生于 1 月或 2 月上旬的你,很可能属于上一年的生肖——选择"立春前"选项即可。' },
       { q: '生肖、五行和阴阳是怎么循环的?', a: '十二生肖逐年轮换(鼠到猪),五行每两年一换(木、火、土、金、水),阴阳逐年交替——合起来是完整的 60 年一循环(如 1984 与 2044 都是阳木鼠)。' },
       { q: '什么是"本命年"?', a: '你所属生肖每 12 年重现一次的年份(如属马者的 2026 年)——传统上认为是穿红色、行事需谨慎的一年,不是"中大奖"之年。' },
       { q: '立春和春节,到底哪个算生肖年开始?', a: '两种传统并存:八字命理用立春,民俗日历用农历新年(公历 1 月 21 日-2 月 20 日之间浮动)。本工具采用八字命理使用的立春口径。' },
@@ -16,9 +16,12 @@ export const ChineseZodiacCalculatorL10n: ToolL10n = {
     ui: {
       'in.year': '出生年份',
       'in.edge': '生日相对立春(2 月 4 日前后)',
-      'opt.edge.after': '2 月 4 日及以后出生',
-      'opt.edge.before': '1 月 1 日 - 2 月 3 日出生',
-      'opt.edge.unknown': '不确定 / 直接按公历年算',
+      'opt.edge.after': '立春后',
+      'opt.edge.before': '立春前',
+      'opt.edge.unknown': '不确定',
+      'preset.0': '1990(马)',
+      'preset.1': '2000(龙)',
+      'preset.2': '2000 年 1 月生?',
       'out.animal': '你的生肖',
       'out.element': '五行与阴阳',
       'out.yinYang': '阴阳',
@@ -39,7 +42,7 @@ export const ChineseZodiacCalculatorL10n: ToolL10n = {
   es: {
     useCases: ['consultar animal, elemento y yin-yang por año de nacimiento', 'resolver cumpleaños de enero y principios de febrero con Lichun', 'averiguar los años de tu signo (cada 12 años)', 'revisar la tabla 1924-2031 de un vistazo'],
     faqs: [
-      { q: '¿Por qué mi año de nacimiento a veces da otro animal?', a: 'El año zodiacal empieza en Lichun (Inicio de la Primavera, 3-5 de febrero), no el 1 de enero. Si naciste en enero o principios de febrero, probablemente perteneces al animal del año anterior — elige la opción «1 de enero - 3 de febrero».' },
+      { q: '¿Por qué mi año de nacimiento a veces da otro animal?', a: 'El año zodiacal empieza en Lichun (Inicio de la Primavera, 3-5 de febrero), no el 1 de enero. Si naciste en enero o principios de febrero, probablemente perteneces al animal del año anterior — elige la opción «Antes».' },
       { q: '¿Cómo funcionan los ciclos de animal, elemento y yin-yang?', a: 'Doce animales rotan cada año (de Rata a Cerdo), el elemento cambia cada dos años (Madera, Fuego, Tierra, Metal, Agua) y el yin/yang se alterna por año — un ciclo completo de 60 años (1984 y 2044 son ambas Rata de Madera Yang).' },
       { q: '¿Qué es el «Ben Ming Nian»?', a: 'El año en que tu animal reaparece cada 12 años (p. ej., 2026 para los nacidos en Caballo) — tradicionalmente un año para llevar rojo y pisar con cuidado, no un premio gordo.' },
       { q: '¿Lichun o Año Nuevo chino: qué inicia el zodiaco?', a: 'Conviven dos tradiciones: la escuela de términos solares (Bazi) usa Lichun; el calendario popular usa el Año Nuevo lunar, que cae entre el 21 de enero y el 20 de febrero y cambia cada año. Esta herramienta sigue la escuela de Lichun.' },
@@ -47,9 +50,12 @@ export const ChineseZodiacCalculatorL10n: ToolL10n = {
     ui: {
       'in.year': 'Año de nacimiento',
       'in.edge': 'Cumpleaños respecto a Lichun (≈4 de febrero)',
-      'opt.edge.after': 'Nacido el 4 de febrero o después',
-      'opt.edge.before': 'Nacido entre el 1 de enero y el 3 de febrero',
-      'opt.edge.unknown': 'No estoy seguro / usar el año gregoriano',
+      'opt.edge.after': 'Después',
+      'opt.edge.before': 'Antes',
+      'opt.edge.unknown': 'No lo sé',
+      'preset.0': '1990 (Caballo)',
+      'preset.1': '2000 (Dragón)',
+      'preset.2': '¿Nacido en ene. 2000?',
       'out.animal': 'Tu animal zodiacal',
       'out.element': 'Elemento y yin-yang',
       'out.yinYang': 'Yin / Yang',
@@ -70,7 +76,7 @@ export const ChineseZodiacCalculatorL10n: ToolL10n = {
   de: {
     useCases: ['Tier, Element und Yin-Yang nach Geburtsjahr bestimmen', 'Januar- und Anfangs-Februar-Geburtstage mit Lichun klären', 'die eigenen Tierkreisjahre finden (alle 12 Jahre)', 'die Tabelle 1924-2031 schnell abgleichen'],
     faqs: [
-      { q: 'Warum ergibt mein Geburtsjahr manchmal das falsche Tier?', a: 'Das Tierkreisjahr beginnt am Lichun (Beginn des Frühlings, 3.-5. Februar), nicht am 1. Januar. Wer im Januar oder Anfang Februar geboren ist, gehört vermutlich zum Tier des Vorjahres — wähle die Option „1. Januar - 3. Februar“.' },
+      { q: 'Warum ergibt mein Geburtsjahr manchmal das falsche Tier?', a: 'Das Tierkreisjahr beginnt am Lichun (Beginn des Frühlings, 3.-5. Februar), nicht am 1. Januar. Wer im Januar oder Anfang Februar geboren ist, gehört vermutlich zum Tier des Vorjahres — wähle die Option „Vor 4. Feb“.' },
       { q: 'Wie funktionieren Tier-, Element- und Yin-Yang-Zyklus?', a: 'Zwölf Tiere rotieren jährlich (Ratte bis Schwein), das Element wechselt alle zwei Jahre (Holz, Feuer, Erde, Metall, Wasser), Yin/Yang wechselt jährlich — ein vollständiger Zyklus dauert 60 Jahre (1984 und 2044 sind beide Yang-Holz-Ratte).' },
       { q: 'Was ist das „Ben Ming Nian“?', a: 'Das Jahr, in dem dein Tier alle 12 Jahre wiederkehrt (z. B. 2026 für Pferd-Geborene) — traditionell ein Jahr, in dem man Rot trägt und vorsichtig agiert, kein Jackpot-Jahr.' },
       { q: 'Lichun oder chinesisches Neujahr — was startet das Tierkreisjahr?', a: 'Beide Traditionen existieren: die Sonnentermen-Schule (Bazi) nutzt Lichun, der Volkskalender das Mondneujahr (21. Januar bis 20. Februar, jährlich anders). Dieses Werkzeug folgt der Lichun-Schule.' },
@@ -78,9 +84,12 @@ export const ChineseZodiacCalculatorL10n: ToolL10n = {
     ui: {
       'in.year': 'Geburtsjahr',
       'in.edge': 'Geburtstag relativ zu Lichun (≈4. Februar)',
-      'opt.edge.after': 'Geboren am 4. Februar oder später',
-      'opt.edge.before': 'Geboren zwischen 1. Januar und 3. Februar',
-      'opt.edge.unknown': 'Weiß nicht / gregorianisches Jahr verwenden',
+      'opt.edge.after': 'Ab 4. Feb',
+      'opt.edge.before': 'Vor 4. Feb',
+      'opt.edge.unknown': 'Unsicher',
+      'preset.0': '1990 (Pferd)',
+      'preset.1': '2000 (Drache)',
+      'preset.2': 'Jan. 2000 geboren?',
       'out.animal': 'Dein Tierzeichen',
       'out.element': 'Element und Yin-Yang',
       'out.yinYang': 'Yin / Yang',

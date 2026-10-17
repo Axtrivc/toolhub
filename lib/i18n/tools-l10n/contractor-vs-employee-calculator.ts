@@ -92,7 +92,7 @@ export const ContractorVsEmployeeCalculatorL10n: ToolL10n = {
     useCases: [
       'denselben Jahresbetrag als 1099-Contractor und W-2-Angestellte(r) vergleichen',
       'herausfinden, wie viel mehr als Freelancer abgerechnet werden muss',
-      ' private Krankenversicherung und 401(k)-Match in Geld umrechnen',
+      'private Krankenversicherung und 401(k)-Match in Geld umrechnen',
       'die wahre SE-Steuer-Last vor dem Sprung in die Selbstständigkeit sehen',
     ],
     faqs: [

@@ -52,7 +52,7 @@ export const SelfEmploymentTaxCalculatorClient = makeCalculatorClient({
     ]},
   ],
   outputs: [
-    { key: 'seTax', label: 'Self-employment tax', highlight: true },
+    { key: 'seTax', label: 'Self-employment tax', highlight: true, sublabel: 'No SE tax under $400 net earnings (IRC §1402)' },
     { key: 'netEarnings', label: 'Net earnings (× 92.35%)' },
     { key: 'ssTax', label: 'Social Security part (12.4%)' },
     { key: 'medicareTax', label: 'Medicare part (2.9% + 0.9%)', sublabel: '0.9% extra only above the threshold' },
@@ -400,7 +400,7 @@ export const GrossUpCalculatorClient = makeCalculatorClient({
     const net = toNumStrict(v.targetNet)
     const rate = toNum(v.rate)
     if (!(net > 0) || rate <= 0 || rate >= 95) {
-      return { gross: `⚠️ ${T('errInvalid', 'Net must be positive and the combined rate between 0 and 95%')}`, tax: '—', netCheck: '—', multiplier: '—' }
+      return { gross: `⚠️ ${T('errInvalid', 'Net must be positive and the combined rate above 0 and below 95%')}`, tax: '—', netCheck: '—', multiplier: '—' }
     }
     const gross = net / (1 - rate / 100)
     const tax = gross - net

@@ -1,0 +1,14 @@
+{
+  "schemaVersion": "mimosa-hook-status/v1",
+  "recordedAt": "2026-10-17T12:36:46.954Z",
+  "sessionId": "sess_dwf-dwfrun-24d39cad-3469-4457-9356-570dac21f11b-actor_5_10",
+  "event": "PostToolUse",
+  "toolName": "Edit",
+  "file": "business-days-calculator.ts",
+  "outcome": "clear",
+  "coverage": "complete",
+  "findingCount": 0,
+  "durationMs": 26,
+  "hostState": "hook_complete",
+  "reportHint": ".mimosa/reports/"
+}

@@ -570,9 +570,12 @@ export const ChineseZodiacCalculatorClient = makeCalculatorClient({
   inputs: [
     { key: 'year', label: 'Birth year', default: '1990', slider: { min: 1924, max: 2031, step: 1 } },
     { key: 'edge', label: 'Birthday vs Lichun (≈Feb 4)', default: 'after', options: [
-      { label: 'Born Feb 4 or later', value: 'after' },
-      { label: 'Born Jan 1 – Feb 3', value: 'before' },
-      { label: 'Not sure / use calendar year', value: 'unknown' },
+      // ≤3 段的分段控件在 375px 下每段仅 ~79px 文本宽(实测 scrollWidth),
+      // 长句必被省略号截断;完整语境由字段标签(Lichun ≈Feb 4)与 edgeNote
+      // 结果行承接,这里只留实测放得下的短词(各语种均经 DOM 测量验证)
+      { label: 'After', value: 'after' },
+      { label: 'Before', value: 'before' },
+      { label: 'Not sure', value: 'unknown' },
     ]},
   ],
   outputs: [

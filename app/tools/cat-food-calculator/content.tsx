@@ -60,7 +60,7 @@ const de: ReactNode = (
     <h2>Etiketten lesen, ohne reinzufallen</h2>
     <p>Nassfutter nennt kcal pro Dose oder pro 100 g (die meisten Pasten liegen nahe 1 kcal/g, eine 156-g-Dose hat also ~150 kcal); Trockenfutter nennt kcal/kg oder kcal/becher, typisch 3.500-4.500 kcal/kg. Die Fütterungstabellen auf dem Sack sind für intakte Adultkatzen kalibriert — rechnest du für die kastrierte Wohnungskatze mit ×1,2 nach, überfüttert die Tabelle meist um 15-20 %.</p>
     <h2>Gramm schlägt Messbecher</h2>
-    <p>Ein „Becher" Trockenfutter schwankt je nach Füllart und Krokettenform um bis zu 20 %; eine günstige Küchenwaage eliminiert diesen Fehler komplett. Bei Dosen gilt dasselbe: 2-3 kleine Dosen schlagen eine Großmahlzeit — Katzen sind auf mehrere kleine Mahlzeiten ausgelegt, und das Aufteilen bremst Schlinger und durchbricht den Bettel-Kreislauf.</p>
+    <p>Ein „Becher“ Trockenfutter schwankt je nach Füllart und Krokettenform um bis zu 20 %; eine günstige Küchenwaage eliminiert diesen Fehler komplett. Bei Dosen gilt dasselbe: 2-3 kleine Dosen schlagen eine Großmahlzeit — Katzen sind auf mehrere kleine Mahlzeiten ausgelegt, und das Aufteilen bremst Schlinger und durchbricht den Bettel-Kreislauf.</p>
     <h2>Abnehmen birgt eine katzenspezifische Gefahr</h2>
     <p>Anders als Hunde können Katzen, die fressen stoppen oder zu streng diäten, eine hepatische Lipidose entwickeln — Futter flutet die Leber — die innerhalb von Tagen lebensbedrohlich wird. Sicheres Katzen-Abnehmen heißt 0,5-1 % des Körpergewichts pro Woche, und der Plan einer übergewichtigen Katze gehört immer in die Tierarztpraxis. Nutze den ×0,8-Faktor hier als Gesprächseinstieg, nicht als Rezept.</p>
   </section>

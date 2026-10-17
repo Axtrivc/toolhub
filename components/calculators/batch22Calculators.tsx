@@ -89,7 +89,7 @@ export const DividendCalculatorClient = makeCalculatorClient({
     }
   },
   presets: [
-    { label: 'Dividend aristocrat', values: { shares: '100', price: '75', dps: '3.60', growth: '5', drip: 'yes', years: '20' } },
+    { label: 'Dividend aristocrat', values: { shares: '100', price: '90', dps: '2.70', growth: '5', drip: 'yes', years: '20' } },
     { label: 'High-yield REIT', values: { shares: '500', price: '20', dps: '1.60', growth: '1', drip: 'no', years: '10' } },
     { label: 'Monthly income plan', values: { shares: '1000', price: '25', dps: '1.00', growth: '2', drip: 'yes', years: '15' } },
   ],
@@ -119,8 +119,13 @@ export const DividendCalculatorClient = makeCalculatorClient({
       cashPts.push(cumCash)
       xLabels.push(`Y${y}`)
     }
-    const lines: SeriesData['lines'] = [{ key: 'drip', label: 'With DRIP', color: '#22c55e', points: dripPts, area: true }]
-    if (drip) lines.push({ key: 'cash', label: 'Dividends as cash', color: '#3b82f6', points: cashPts })
+    // DRIP 关闭时两条累计曲线完全重合,只画「取现」一条,避免图例误标 "With DRIP"
+    const lines: SeriesData['lines'] = drip
+      ? [
+          { key: 'drip', label: 'With DRIP', color: '#22c55e', points: dripPts, area: true },
+          { key: 'cash', label: 'Dividends as cash', color: '#3b82f6', points: cashPts },
+        ]
+      : [{ key: 'cash', label: 'Dividends as cash', color: '#22c55e', points: cashPts }]
     return { xLabels, lines, formatY: (n) => fmtUSD(n, 0) }
   },
   note: '💵 Most US payers distribute quarterly — enter the annual dividend per share (quarterly × 4). The DRIP projection compounds annually at a constant share price; it shows the power of reinvested income, not a price forecast.',
@@ -257,7 +262,7 @@ export const StockAverageCalculatorClient = makeCalculatorClient({
     { key: 'q3', label: 'Lot 3 shares', default: '50', slider: { min: 0, max: 2000, step: 10 } },
     { key: 'p3', label: 'Lot 3 price', suffix: '$', default: '30', slider: { min: 0.5, max: 1000, step: 0.5 } },
     { key: 'q4', label: 'Lot 4 shares', default: '0', slider: { min: 0, max: 2000, step: 10 } },
-    { key: 'p4', label: 'Lot 4 price', suffix: '$', default: '0', slider: { min: 0.5, max: 1000, step: 0.5 } },
+    { key: 'p4', label: 'Lot 4 price', suffix: '$', default: '0', slider: { min: 0, max: 1000, step: 0.5 } },
     { key: 'fee', label: 'Commission per order', suffix: '$', default: '0', slider: { min: 0, max: 30, step: 0.5 } },
     { key: 'current', label: 'Current share price', suffix: '$', default: '36', slider: { min: 0.5, max: 1000, step: 0.5 } },
   ],
@@ -339,10 +344,10 @@ export const OptionsProfitCalculatorClient = makeCalculatorClient({
   urlState: true,
   inputs: [
     { key: 'pos', label: 'Position', default: 'longCall', options: [
-      { label: 'Buy call (long)', value: 'longCall' },
-      { label: 'Sell call (short)', value: 'shortCall' },
-      { label: 'Buy put (long)', value: 'longPut' },
-      { label: 'Sell put (short)', value: 'shortPut' },
+      { label: 'Buy call', value: 'longCall' },
+      { label: 'Sell call', value: 'shortCall' },
+      { label: 'Buy put', value: 'longPut' },
+      { label: 'Sell put', value: 'shortPut' },
     ]},
     { key: 'strike', label: 'Strike price', suffix: '$', default: '100', slider: { min: 1, max: 1000, step: 1 } },
     { key: 'premium', label: 'Premium per share', suffix: '$', default: '3.50', slider: { min: 0.05, max: 100, step: 0.05 } },
@@ -493,7 +498,7 @@ export const CryptoProfitCalculatorClient = makeCalculatorClient({
   },
   presets: [
     { label: 'BTC swing', values: { qty: '0.5', buy: '40000', sell: '52000', feePct: '0.1', targetProfit: '1000' } },
-    { label: 'Altcoin scalp', values: { qty: '500', buy: '1.20', sell: '1.80', feePct: '0.15', targetProfit: '200' } },
+    { label: 'Altcoin swing', values: { qty: '10', buy: '150', sell: '220', feePct: '0.15', targetProfit: '500' } },
     { label: 'Long-term hold', values: { qty: '2', buy: '25000', sell: '60000', feePct: '0.2', targetProfit: '50000' } },
   ],
   chart: { kind: 'compare', title: 'What goes in vs what comes out' },
@@ -543,7 +548,7 @@ export const TreasuryBillCalculatorClient = makeCalculatorClient({
     const rate = toNumStrict(v.rate)
     const days = Math.round(toNumStrict(v.days))
     if ([face, rate, days].some((n) => Number.isNaN(n)) || face <= 0 || rate < 0 || days < 1 || days > 730) {
-      return { price: `⚠️ ${T('errInvalid', 'Enter positive face value and 1-730 days')}`, interest: '—', per100: '—', invYield: '—', discYield: '—' }
+      return { price: `⚠️ ${T('errInvalid', 'Enter a positive face value and a term of up to two years')}`, interest: '—', per100: '—', invYield: '—', discYield: '—' }
     }
     // 银行贴现口径:price = face × (1 − rate × days/360)
     const frac = (rate / 100) * (days / 360)
@@ -674,10 +679,10 @@ export const LotteryOddsCalculatorClient = makeCalculatorClient({
   l10n: LotteryOddsCalculatorL10n,
   inputs: [
     { key: 'game', label: 'Game', default: 'powerball', options: [
-      { label: 'Powerball (5/69 + PB 1/26)', value: 'powerball' },
-      { label: 'Mega Millions (5/70 + MB 1/25)', value: 'mega' },
-      { label: 'EuroMillions (5/50 + 2/12)', value: 'euro' },
-      { label: 'Custom pools', value: 'custom' },
+      { label: 'Powerball', value: 'powerball' },
+      { label: 'Mega Millions', value: 'mega' },
+      { label: 'EuroMillions', value: 'euro' },
+      { label: 'Custom', value: 'custom' },
     ]},
     { key: 'poolN', label: 'Custom: main pool size', default: '49', slider: { min: 10, max: 99, step: 1 } },
     { key: 'picksK', label: 'Custom: numbers picked', default: '6', slider: { min: 1, max: 10, step: 1 } },
@@ -732,7 +737,8 @@ export const LotteryOddsCalculatorClient = makeCalculatorClient({
       return { jackpot: `⚠️ ${T('errInvalid', 'Main pool 2-99, picks 1-12 and ≤ pool, bonus 0-3 and ≤ bonus pool')}`, jackpotPct: '—', tier2: '—', tier3: '—', anyPrize: '—', noPrize: '—', totalCombos: '—' }
     }
     const combos = nCk(N, K) * (M > 0 && J > 0 ? nCk(M, J) : 1)
-    const bonusTag = (b: number) => (M > 0 && J > 0 ? `+${b}` : '')
+    // 副池命中数为 0 时不显示 "+0"(官方奖级表惯例写作 "Match 5",非 "Match 5+0")
+    const bonusTag = (b: number) => (M > 0 && J > 0 && b > 0 ? `+${b}` : '')
     // 自定义模式:anyPrize = 至少命中 1 个主号(无官方奖级表可加总)
     const anyP = tiers ? tiers.reduce((s, [a, b]) => s + tierProb(N, K, M, J, a, b), 0) : 1 - nCk(N - K, K) / nCk(N, K)
     // 奖池概率极小:保留 10 位小数再去掉尾零(0.0000003422%)
@@ -761,5 +767,5 @@ export const LotteryOddsCalculatorClient = makeCalculatorClient({
     ],
     centerLabel: 'Per ticket',
   },
-  note: '🎲 Odds use exact hypergeometric math on both pools (main + bonus), matching the published 1-in-292,201,338 Powerball and 1-in-139,838,160 EuroMillions jackpots. For custom games "any prize" becomes "at least one main number matched" — prize tiers vary by operator.',
+  note: '🎲 Odds use exact hypergeometric math on both pools (main + bonus), matching the published 1-in-292,201,338 Powerball and 1-in-139,838,160 EuroMillions jackpots. Game structures — Powerball 5/69 + 1/26 · Mega Millions 5/70 + 1/25 · EuroMillions 5/50 + 2/12. For custom games "any prize" becomes "at least one main number matched" — prize tiers vary by operator.',
 })

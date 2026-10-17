@@ -331,7 +331,10 @@ export const SampleSizeCalculatorClient = makeCalculatorClient({
   sample: { N: '100000', level: '95', moe: '5', p: '50' },
   urlState: true,
   inputs: [
-    { key: 'N', label: 'Population size', suffix: '0 = infinite', default: '0', slider: { min: 0, max: 1000000, step: 1000 } },
+    // "0 = 无限总体"提示放标签括号里(老工具惯例,如 "Property tax (per year)"):
+    // suffix 渲染在输入框内右侧(pr-16 ≈ 64px),"0 = infinite" 约 90px 会压到数字;
+    // 且 CSV/摘要把 suffix 拼在值后,读出来是 "Population size: 20000 = infinite" 歧义
+    { key: 'N', label: 'Population size (0 = infinite)', default: '0', slider: { min: 0, max: 1000000, step: 1000 } },
     { key: 'level', label: 'Confidence level', default: '95', options: [
       { label: '90% (z = 1.645)', value: '90' },
       { label: '95% (z = 1.96)', value: '95' },
@@ -571,7 +574,9 @@ export const HeatIndexCalculatorClient = makeCalculatorClient({
     return {
       hi: `${fmtNum(main, 1)}°${outF ? 'F' : 'C'}`,
       hiAlt: `${fmtNum(alt, 1)}°${outF ? 'C' : 'F'}`,
-      diff: `+${fmtNum(diff, 1)}°`,
+      // 干热时 HI 低于气温(Rothfusz 在 105°F/15% 给 ~101.6°F):fmtNum 自带
+      // 负号,前缀 "+" 只在非负时补,避免出现 "+-3.4°"
+      diff: `${diff >= 0 ? '+' : ''}${fmtNum(diff, 1)}°`,
       risk,
     }
   },

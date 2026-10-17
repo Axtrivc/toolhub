@@ -36,8 +36,8 @@ export const PayPalFeeCalculatorClient = makeCalculatorClient({
   urlState: true,
   inputs: [
     { key: 'mode', label: 'Mode', default: 'forward', options: [
-      { label: 'Buyer pays this → find my net', value: 'forward' },
-      { label: 'I want to net this → find the price', value: 'reverse' },
+      { label: 'Buyer pays → net', value: 'forward' },
+      { label: 'I want net → price', value: 'reverse' },
     ]},
     { key: 'amount', label: 'Amount', suffix: '$', default: '100', slider: { min: 1, max: 2000, step: 1 } },
     { key: 'feePct', label: 'Percentage fee', suffix: '%', default: '3.49', slider: { min: 0.5, max: 6, step: 0.01 } },
@@ -85,7 +85,7 @@ export const PayPalFeeCalculatorClient = makeCalculatorClient({
         { key: 'fee', label: 'PayPal fee', color: '#ef4444', points: marks.map((m) => m * (p / 100) + f) },
         { key: 'net', label: 'You receive', color: '#22c55e', points: marks.map((m) => m - (m * (p / 100) + f)), area: true },
       ],
-      formatY: (n) => fmtUSD(n),
+      formatY: (n) => fmtUSD(n, 0),
     }
   },
   note: '💳 US commercial rate: 3.49% + $0.49. Cross-border buyers add +1.50%, and currency conversion adds a ~3-4% spread on top — often the biggest hidden cost. Friends & Family has no fee but offers no seller protection.',
@@ -107,10 +107,10 @@ export const EtsyFeeCalculatorClient = makeCalculatorClient({
     { key: 'ordersMonth', label: 'Orders per month', default: '10', slider: { min: 1, max: 500, step: 1 } },
     { key: 'procPct', label: 'Payment processing rate', suffix: '%', default: '3', slider: { min: 0, max: 6, step: 0.1 } },
     { key: 'procFixed', label: 'Processing fixed fee', suffix: '$', default: '0.25', slider: { min: 0, max: 1, step: 0.05 } },
-    { key: 'offsiteAds', label: 'Offsite Ads fee', default: '15', options: [
+    { key: 'offsiteAds', label: 'Offsite Ads fee (15% if 12-mo sales under $10k, then 12.5%)', default: '15', options: [
       { label: 'None', value: '0' },
-      { label: '15% (sales under $10k/yr)', value: '15' },
-      { label: '12.5% (sales over $10k/yr)', value: '12.5' },
+      { label: '15%', value: '15' },
+      { label: '12.5%', value: '12.5' },
     ]},
   ],
   outputs: [
@@ -268,8 +268,8 @@ export const SquareFeeCalculatorClient = makeCalculatorClient({
   urlState: true,
   inputs: [
     { key: 'mode', label: 'Mode', default: 'forward', options: [
-      { label: 'Customer pays this → find my net', value: 'forward' },
-      { label: 'I want to net this → find the price', value: 'reverse' },
+      { label: 'Buyer pays → net', value: 'forward' },
+      { label: 'I want net → price', value: 'reverse' },
     ]},
     { key: 'amount', label: 'Amount', suffix: '$', default: '100', slider: { min: 1, max: 2000, step: 1 } },
     { key: 'pct', label: 'Percentage rate', suffix: '%', default: '2.6', slider: { min: 0.5, max: 5, step: 0.01 } },
@@ -317,10 +317,10 @@ export const SquareFeeCalculatorClient = makeCalculatorClient({
       lines: [
         { key: 'eff', label: 'Effective rate', color: '#3b82f6', points: tickets.map((t) => (p + (f / t) * 100)), area: true },
       ],
-      formatY: (n) => `${fmtNum(n, 2)}%`,
+      formatY: (n) => `${fmtNum(n, 1)}%`,
     }
   },
-  note: '📲 Square US rates: 2.6% + 10¢ tapped/dipped/QR, 2.9% + 30¢ online, 3.5% + 15¢ keyed-in. The fixed cents dominate small tickets — a $5 tap costs 4.2% effective. No monthly fee on the standard plan.',
+  note: '📲 Square US rates: 2.6% + 10¢ tapped/dipped/QR, 2.9% + 30¢ online, 3.5% + 15¢ keyed-in. The fixed cents dominate small tickets — a $5 tap costs 4.6% effective. No monthly fee on the standard plan.',
 })
 
 // ───────────────────────────────────────────
@@ -333,8 +333,8 @@ export const YouTubeMoneyCalculatorClient = makeCalculatorClient({
   urlState: true,
   inputs: [
     { key: 'monthlyViews', label: 'Monthly views', default: '100000', slider: { min: 1000, max: 2000000, step: 1000 } },
-    { key: 'rpmLow', label: 'RPM — conservative', suffix: '$', default: '2', slider: { min: 0.1, max: 30, step: 0.1 } },
-    { key: 'rpmTypical', label: 'RPM — typical', suffix: '$', default: '4', slider: { min: 0.1, max: 40, step: 0.1 } },
+    { key: 'rpmLow', label: 'RPM — conservative', suffix: '$', default: '2', slider: { min: 0.1, max: 60, step: 0.1 } },
+    { key: 'rpmTypical', label: 'RPM — typical', suffix: '$', default: '4', slider: { min: 0.1, max: 60, step: 0.1 } },
     { key: 'rpmHigh', label: 'RPM — optimistic', suffix: '$', default: '8', slider: { min: 0.1, max: 60, step: 0.1 } },
   ],
   outputs: [
@@ -540,7 +540,7 @@ export const GymCostPerVisitCalculatorClient = makeCalculatorClient({
     { key: 'fee', label: 'Membership fee', suffix: '$', default: '45', slider: { min: 0, max: 300, step: 1 } },
     { key: 'cycle', label: 'Billing cycle', default: 'monthly', options: [
       { label: 'Monthly', value: 'monthly' },
-      { label: 'Annual (one payment)', value: 'yearly' },
+      { label: 'Annual (prepay)', value: 'yearly' },
     ]},
     { key: 'visits', label: 'Visits per month (be honest)', default: '8', slider: { min: 0, max: 40, step: 1 } },
     { key: 'dropIn', label: 'Drop-in price per visit', suffix: '$', default: '15', slider: { min: 0, max: 50, step: 0.5 } },
