@@ -40,7 +40,10 @@ export function FormulaSection({ slug, tool, l10n }: { slug: string; tool: ToolM
             </span>
           ))}
       </p>
-      <pre className="overflow-x-auto">{formula.formula}</pre>
+      {/* 桌面端长行不再横向滚动截断(审计:zodiac/chinese-zodiac/heat-index/pregnancy
+          四页右缘硬裁)——与 globals.css <640px 的移动端策略保持一致:安全换行
+          (pre-wrap + break-words),保留 overflow-x-auto 兜底超长不可断 token。 */}
+      <pre className="overflow-x-auto whitespace-pre-wrap break-words">{formula.formula}</pre>
       {formula.variables && (
         <p>
           <strong>{t(locale, 'formulaVariables')}:</strong> {formula.variables}

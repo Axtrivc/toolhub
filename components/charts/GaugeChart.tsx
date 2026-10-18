@@ -77,12 +77,14 @@ export function GaugeChart({ title, value, min, max, zones, formatValue, caption
   // 指针:从圆心出发的细长三角 + 圆心点;旋转角 = -90°(正上) + frac*180°
   const angleDeg = -90 + frac * 180
   const valueText = formatValue ? formatValue(clamped) : String(Math.round(clamped * 10) / 10)
+  // 中心数值画在 SVG 内、轴心圆点上方(带单位的长文案按长度降字号,避免越出弧内沿)
+  const valueFontSize = valueText.length > 8 ? 15 : valueText.length > 5 ? 17 : 19
 
   return (
     <ChartCard title={title}>
       <div className="flex flex-col items-center">
         <div className="relative w-full max-w-[280px]">
-          <svg viewBox="0 0 200 118" className="w-full" role="img" aria-label={title ?? 'gauge'}>
+          <svg viewBox="0 0 200 118" className="w-full" role="img" aria-label={`${title ?? 'gauge'}: ${valueText}`}>
             {/* 底轨 */}
             <path
               d={arcPath(0, 1, R)}
@@ -124,13 +126,23 @@ export function GaugeChart({ title, value, min, max, zones, formatValue, caption
             </motion.g>
             <circle cx={CX} cy={CY} r={5} fill="rgb(var(--text))" />
             <circle cx={CX} cy={CY} r={2} fill="rgb(var(--bg-card))" />
-          </svg>
-          {/* 当前值(HTML 层,清晰可控) */}
-          <div className="absolute inset-x-0 bottom-0 flex flex-col items-center">
-            <span className="text-2xl font-bold" style={{ color: activeZone?.color ?? 'rgb(var(--text))' }}>
+            {/* 当前值:置于轴心圆点上方(与圆点顶部 y=99 留出间距),
+                画在指针之后并带卡片底色描边光晕,指针划过时数字与小数点仍完整可读 */}
+            <text
+              x={CX}
+              y={CY - 17}
+              textAnchor="middle"
+              fontSize={valueFontSize}
+              fontWeight={700}
+              fill={activeZone?.color ?? 'rgb(var(--text))'}
+              stroke="rgb(var(--bg-card))"
+              strokeWidth={4}
+              strokeLinejoin="round"
+              paintOrder="stroke"
+            >
               {valueText}
-            </span>
-          </div>
+            </text>
+          </svg>
         </div>
         {caption && (
           <p className="mt-2 text-center text-xs" style={{ color: 'rgb(var(--text-muted))' }}>

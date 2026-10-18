@@ -6,11 +6,11 @@
  * 用途:两三个方案的成本构成对比(如 30 年 vs 15 年贷款的
  * 本金/利息构成,"费用吞噬"对比)。所有行共用同一比例尺,
  * 总长差异一眼可比;每段色块对应一个构成分量。
- * SSR 首帧渲染终态;入场动画仅动 opacity(reduced-motion 直显)。
+ * SSR 首帧渲染终态:分段不播入场动画(逐行错峰渐隐会让行与行
+ * 出现瞬时不透明度差,且未水合的静态导出里条会停在 opacity:0)。
  */
 
 import { useEffect, useRef, useState } from 'react'
-import { motion, useReducedMotion } from '../motion/MotionPrimitives'
 import { ChartCard, fmtCompact } from './chartKit'
 
 export interface StackedRow {
@@ -34,9 +34,20 @@ const LABEL_H = 16
    会被缩到 ~6px 完全不可读 */
 const W_MIN = 240
 const W_MAX = 640
+/* 行尾总值字号(粗体)与分段最小可见宽(viewBox 单位 ≈ 1px) */
+const VALUE_FONT = 12
+const MIN_SEG_W = 4
+
+/**
+ * 粗估 12px 粗体总值文本的渲染宽(字符数 × 0.62em)。
+ * 刻意高估:高估只会把标签判到"条外深色字"分支(永远可读),
+ * 低估才可能让白字尾部重新溢出到浅灰轨道上。
+ */
+function estimateValueWidth(s: string): number {
+  return s.length * VALUE_FONT * 0.62
+}
 
 export function StackedCompareChart({ title, rows, formatTotal = fmtCompact }: StackedCompareChartProps) {
-  const reduceMotion = useReducedMotion()
   const svgRef = useRef<SVGSVGElement>(null)
   // SSR 首帧用 W_MAX(与旧渲染一致);挂载后 ResizeObserver 校准到容器实宽
   const [W, setW] = useState(W_MAX)
@@ -78,45 +89,47 @@ export function StackedCompareChart({ title, rows, formatTotal = fmtCompact }: S
               <text x={0} y={y0 + 11} fontSize={11} fill="rgb(var(--text-muted))">
                 {r.label}
               </text>
-              <motion.g
-                initial={reduceMotion ? false : { opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.45, delay: ri * 0.12 }}
-              >
-                {/* 轨道底 */}
-                <rect x={0} y={y0 + LABEL_H} width={barW} height={BAR_H} rx={6} fill="rgb(var(--bg-subtle))" />
-                {r.segments.map((s, si) => {
-                  const w = (s.value / maxTotal) * barW
-                  const rect = (
-                    <rect
-                      key={si}
-                      x={x}
-                      y={y0 + LABEL_H}
-                      width={Math.max(0, w - (si === r.segments.length - 1 ? 0 : 1.5))}
-                      height={BAR_H}
-                      rx={si === 0 && si === r.segments.length - 1 ? 6 : si === 0 ? 6 : 0}
-                      fill={s.color}
-                      opacity={0.92}
-                    />
-                  )
-                  x += w
-                  return rect
-                })}
-              </motion.g>
-              {/* 行尾总值:紧跟条形末端;条太满时退回条内右端(反色) */}
+              {/* 轨道底 */}
+              <rect x={0} y={y0 + LABEL_H} width={barW} height={BAR_H} rx={6} fill="rgb(var(--bg-subtle))" />
+              {r.segments.map((s, si) => {
+                const w = (s.value / maxTotal) * barW
+                // 最小可见宽:极小分段(如 1/16 行在移动端)不至于塌缩成 0;
+                // 后续分段按真实 w 推进,兜宽最多 4 单位、被后绘制的分段盖住
+                const segW = Math.max(MIN_SEG_W, w - (si === r.segments.length - 1 ? 0 : 1.5))
+                const rect = (
+                  <rect
+                    key={si}
+                    x={x}
+                    y={y0 + LABEL_H}
+                    width={segW}
+                    height={BAR_H}
+                    rx={si === 0 && si === r.segments.length - 1 ? 6 : si === 0 ? 6 : 0}
+                    fill={s.color}
+                  />
+                )
+                x += w
+                return rect
+              })}
+              {/* 行尾总值自适应:条外放得下 → 紧跟条形末端,主题文字色
+                  (落在浅灰轨道上也清晰);条外放不下(条近满)→ 退回
+                  条内右端,锚定真实条末端(非图表右缘),白字必压在彩条上 */}
               {(() => {
                 const barEnd = (total / maxTotal) * barW
-                const inside = barEnd > barW - 64
+                const text = formatTotal(total)
+                const estW = estimateValueWidth(text)
+                const fitsOutside = barEnd + 8 + estW <= barW
+                const fitsInside = barEnd - 8 >= estW
+                const outside = fitsOutside || !fitsInside
                 return (
                   <text
-                    x={inside ? barW - 8 : barEnd + 8}
+                    x={outside ? barEnd + 8 : barEnd - 8}
                     y={y0 + LABEL_H + BAR_H / 2 + 4}
-                    textAnchor={inside ? 'end' : 'start'}
-                    fontSize={12}
+                    textAnchor={outside ? 'start' : 'end'}
+                    fontSize={VALUE_FONT}
                     fontWeight={700}
-                    fill={inside ? '#ffffff' : 'rgb(var(--text))'}
+                    fill={outside ? 'rgb(var(--text))' : '#ffffff'}
                   >
-                    {formatTotal(total)}
+                    {text}
                   </text>
                 )
               })()}

@@ -3661,7 +3661,7 @@ export const toolFaqs: Record<string, FaqPair[]> = {
     },
     {
       q: 'How many bags make one cubic yard?',
-      a: 'An 80 lb bag yields 0.60 ft³, so a full yard takes 45 bags — or 61 sixty-pound bags, or 90 forty-pound bags. Past one yard, ready-mix delivered by truck is cheaper and far less labor.',
+      a: 'An 80 lb bag yields 0.60 ft³, so a full yard takes 45 bags — or 60 sixty-pound bags, or 90 forty-pound bags. Past one yard, ready-mix delivered by truck is cheaper and far less labor.',
     },
     {
       q: 'Why add a 10% waste margin?',

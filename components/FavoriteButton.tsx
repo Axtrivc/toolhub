@@ -31,7 +31,7 @@ export function FavoriteButton({ slug, name }: { slug: string; name: string }) {
       aria-pressed={saved}
       aria-label={t(locale, saved ? 'favRemoveAria' : 'favAddAria', { name })}
       title={t(locale, saved ? 'favSavedTitle' : 'favSaveTitle')}
-      className="inline-flex shrink-0 items-center gap-1.5 rounded-lg border px-3 py-2 text-sm font-medium transition hover:bg-slate-100 dark:border-slate-600 dark:hover:bg-slate-700"
+      className="inline-flex shrink-0 self-start items-center gap-1.5 rounded-lg border px-3 py-2 text-sm font-medium transition hover:bg-slate-100 dark:border-slate-600 dark:hover:bg-slate-700"
       style={{
         borderColor: 'rgb(var(--border-strong))',
         // 已收藏:亮色 red-600/red-100;深色改为 red-400 + 半透明暗红底,避免浅粉底刺眼
@@ -54,7 +54,9 @@ export function FavoriteButton({ slug, name }: { slug: string; name: string }) {
           d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
         />
       </svg>
-      <span className="hidden sm:inline">{t(locale, saved ? 'favSaved' : 'favSave')}</span>
+      {/* 文案常显(含 <sm):self-start 防止父级移动端 flex-col 列布局把按钮
+          拉伸成通栏(TS184 header flex flex-col gap-4),保持桌面同款紧凑胶囊 */}
+      <span>{t(locale, saved ? 'favSaved' : 'favSave')}</span>
     </button>
   )
 }

@@ -9,6 +9,8 @@
  *  - 指示器宽度 = (容器宽 - 两侧 padding) / 段数,translateX(段序 × 100%)
  *    做滑动 —— 只动 transform,无布局抖动;
  *  - 按钮语义用 aria-pressed(切换型控件),键盘 Tab + Enter/Space 可达;
+ *  - 选项文字不截断:窄屏放不下时自动换行(居中,最多两行常见文案),
+ *    flex 拉伸保证各段等高,滑块指示器 inset-y 自适应变高的行;
  *  - SSR 首帧渲染当前值对应位置(确定性,hydration 安全),无入场动画。
  */
 export function SegmentedControl({
@@ -60,7 +62,7 @@ export function SegmentedControl({
             type="button"
             onClick={() => onChange(o.value)}
             aria-pressed={selected}
-            className="relative z-10 min-w-0 flex-1 truncate rounded-lg px-1.5 py-2.5 text-center text-sm font-medium transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400"
+            className="relative z-10 min-w-0 flex-1 break-words rounded-lg px-1.5 max-sm:px-0.5 py-2.5 text-center text-sm font-medium leading-snug transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400"
             style={{ color: selected ? 'rgb(var(--text))' : 'rgb(var(--text-subtle))' }}
           >
             {o.label}

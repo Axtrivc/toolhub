@@ -134,11 +134,38 @@ export function LineAreaChart({ title, xLabels, lines, highlightBetween, formatY
             .join(' ')} Z`
         : null
 
-    // 窄 viewBox(移动端)横向空间减半,标签数同步减半防重叠
-    const labelEvery = Math.max(1, Math.ceil(n / (W < W_MAX ? 4 : 7)))
-    const xTickIdx: number[] = []
-    for (let i = 0; i < n; i += labelEvery) xTickIdx.push(i)
-    if (xTickIdx[xTickIdx.length - 1] !== n - 1) xTickIdx.push(n - 1)
+    // ---- x 轴刻度抽稀(确定性宽度估算,SSR 安全,无测量 API)----
+    // 旧逻辑按固定条数隔取后无条件硬塞尾刻度,窄视口下尾刻度常与前一保留
+    // 刻度叠印(Y9Y10 / $118$30 / 90%100% / 1.41kΩ·18.8kΩ …)。
+    // 改为:按 viewBox 宽与标签字符数估算字符宽(常规 0.62em,与 y 轴
+    // padLeft 的 5.9px/10px 字号同源、略保守;希腊/西里尔 0.75em;
+    // CJK/全角 1em),再按渲染锚点推标签左右边缘:
+    // 首=start 只向右、尾=end 只向左、中间=middle 两翼各半;
+    // 贪心保留刻度,保证相邻标签净空 ≥ MIN_GAP,首尾刻度必保。
+    const wideChar = /[\u2E80-\u9FFF\uF900-\uFAFF\uFF00-\uFFEF\u3000-\u303F]/
+    const greekChar = /[\u0370-\u04FF]/
+    const labelW = (s: string) => {
+      let em = 0
+      for (const ch of s) em += wideChar.test(ch) ? 1 : greekChar.test(ch) ? 0.75 : 0.62
+      return em * axisFont
+    }
+    const leftEdge = (i: number) => x(i) - (i === 0 ? 0 : i === n - 1 ? labelW(xLabels[i]) : labelW(xLabels[i]) / 2)
+    const rightEdge = (i: number) => x(i) + (i === n - 1 ? 0 : i === 0 ? labelW(xLabels[i]) : labelW(xLabels[i]) / 2)
+    // 密度上限维持旧观感(桌面 ≤7 条、窄屏 ≤4 条):(i-j)*maxCount>=n
+    // 是旧 labelEvery=ceil(n/maxCount) 的整数等价形式,无浮点边界问题
+    const maxCount = W < W_MAX ? 4 : 7
+    const MIN_GAP = 4 // 相邻标签最小净空(viewBox px)
+    const xTickIdx: number[] = [0]
+    for (let i = 1; i < n - 1; i++) {
+      const j = xTickIdx[xTickIdx.length - 1]
+      if ((i - j) * maxCount >= n && leftEdge(i) >= rightEdge(j) + MIN_GAP) xTickIdx.push(i)
+    }
+    // 尾刻度必保:与前一保留标签按估算重叠时回退撤下重叠者(连锁回退),
+    // 极端放不下(首尾都放不进)则仅留尾刻度
+    while (xTickIdx.length > 0 && leftEdge(n - 1) < rightEdge(xTickIdx[xTickIdx.length - 1]) + MIN_GAP) {
+      xTickIdx.pop()
+    }
+    xTickIdx.push(n - 1)
 
     return { linePath, areaPath, bandPath, xTickIdx }
     // eslint-disable-next-line react-hooks/exhaustive-deps
