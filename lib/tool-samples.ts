@@ -182,7 +182,7 @@ export const calculatorSamples: Record<string, Record<string, string>> = {
   'property-tax-calculator': { marketValue: '400000', ratio: '80', millage: '20', exemption: '0' },
   'prorated-rent-calculator': { rent: '1800', date: '2026-11-10', period: 'first', basis: 'month' },
   'rental-property-calculator': { price: '300000', downPct: '25', rate: '6.8', years: '30', rent: '2200', vacancyPct: '5', opexMonthly: '450', extraCash: '6000' },
-  'house-flip-calculator': { arv: '450000', offer: '270000', repairs: '60000', rehabMonths: '6', holdingMonthly: '1200', buyPct: '3', sellPct: '7' },
+  'house-flip-calculator': { arv: '450000', offer: '240000', repairs: '60000', rehabMonths: '6', holdingMonthly: '1200', buyPct: '3', sellPct: '7' },
   // ── batch24(B4 家庭与人生大事)──
   'college-savings-calculator': { childAge: '8', annualCost: '30000', years: '4', inflation: '5', currentSavings: '10000', returnRate: '6' },
   '401k-match-calculator': { salary: '75000', contribPct: '4', matchPct: '50', matchLimitPct: '6' },

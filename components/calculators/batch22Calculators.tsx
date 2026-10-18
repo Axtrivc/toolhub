@@ -749,7 +749,11 @@ export const LotteryOddsCalculatorClient = makeCalculatorClient({
     let tiers: [number, number][] | null = null
     // 自定义玩法无副池(J=0)时可能凑不出与头奖可区分的第三奖级 → tier3 显示占位符
     let hasT3 = true
-    if (v.game !== 'custom' && GAMES[v.game]) {
+    // 隐式自定义:预设玩法下用户动了 "Custom:" 字段(偏离默认 49/6/27/1)时,
+    // 死输入不如活回退 —— 按自定义口径计算并在 totalCombos 上标注,
+    // 否则改 poolN 只改 URL 不改结果(交互验收 2026-10-18 实测)。
+    const customTouched = v.poolN !== '49' || v.picksK !== '6' || v.bonusPool !== '27' || v.bonusPicks !== '1'
+    if (v.game !== 'custom' && GAMES[v.game] && !customTouched) {
       const g = GAMES[v.game]
       N = g.N; K = g.K; M = g.M; J = g.J; t2 = g.t2; t3 = g.t3; tiers = g.tiers
     } else {
@@ -792,7 +796,7 @@ export const LotteryOddsCalculatorClient = makeCalculatorClient({
         : '—',
       anyPrize: `${fmtNum(anyP * 100, 2)}% · ${oneIn(anyP)}`,
       noPrize: `${fmtNum((1 - anyP) * 100, 2)}%`,
-      totalCombos: fmtNum(combos, 0),
+      totalCombos: `${fmtNum(combos, 0)}${v.game !== 'custom' && customTouched ? ` · ${T('customNumbers', 'custom numbers')}` : ''}`,
     }
   },
   presets: [

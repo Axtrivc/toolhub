@@ -652,7 +652,7 @@ export const HouseFlipCalculatorClient = makeCalculatorClient({
   l10n: HouseFlipCalculatorL10n,
   inputs: [
     { key: 'arv', label: 'After-repair value (ARV)', suffix: '$', default: '450000', slider: { min: 50000, max: 2000000, step: 5000 } },
-    { key: 'offer', label: 'Your purchase offer', suffix: '$', default: '270000', slider: { min: 0, max: 1500000, step: 5000 } },
+    { key: 'offer', label: 'Your purchase offer', suffix: '$', default: '240000', slider: { min: 0, max: 1500000, step: 5000 } },
     { key: 'repairs', label: 'Repair budget', suffix: '$', default: '60000', slider: { min: 0, max: 500000, step: 2500 } },
     { key: 'rehabMonths', label: 'Rehab timeline', suffix: 'mo', default: '6', slider: { min: 1, max: 24, step: 1 } },
     { key: 'holdingMonthly', label: 'Monthly holding costs', suffix: '$', default: '1200', slider: { min: 0, max: 10000, step: 50 } },

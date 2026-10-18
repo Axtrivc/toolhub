@@ -160,7 +160,7 @@ export function PassphraseGeneratorClient() {
         <label className="flex cursor-pointer items-center gap-2 self-end rounded-lg border p-3 text-sm text-slate-700 transition hover:bg-slate-50 dark:border-slate-700 dark:text-slate-300 dark:hover:bg-slate-800"
           style={{ borderColor: 'rgb(var(--border-strong))' }}>
           <input type="checkbox" checked={capitalize} onChange={(e) => setCapitalize(e.target.checked)}
-            className="h-4 w-4 rounded border-slate-300 text-brand-600 focus:ring-brand-500" />
+            className="h-4 w-4 rounded border-slate-300 text-brand-600 focus:ring-brand-500 dark:border-slate-600 dark:bg-slate-800" />
           {L('capitalize', 'Capitalize each word')}
         </label>
       </div>
