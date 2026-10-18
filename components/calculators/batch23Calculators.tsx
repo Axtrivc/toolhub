@@ -43,12 +43,12 @@ export const SelfEmploymentTaxCalculatorClient = makeCalculatorClient({
     { key: 'netProfit', label: 'Net profit from self-employment', suffix: '$', default: '80000', slider: { min: 0, max: 500000, step: 1000 } },
     { key: 'w2Wages', label: 'W-2 wages already taxed for Social Security', suffix: '$', default: '0', slider: { min: 0, max: 300000, step: 1000 } },
     { key: 'year', label: 'Tax year', default: '2025', options: [
-      { label: '2025 (cap $176,100)', value: '2025' },
-      { label: '2024 (cap $168,600)', value: '2024' },
+      { label: '2025', value: '2025' },
+      { label: '2024', value: '2024' },
     ]},
     { key: 'filing', label: 'Additional Medicare threshold', default: 'single', options: [
       { label: 'Single ($200k)', value: 'single' },
-      { label: 'Married joint ($250k)', value: 'married' },
+      { label: 'Married ($250k)', value: 'married' },
     ]},
   ],
   outputs: [
@@ -64,7 +64,7 @@ export const SelfEmploymentTaxCalculatorClient = makeCalculatorClient({
     const profit = toNumStrict(v.netProfit)
     const w2 = toNum(v.w2Wages)
     if (Number.isNaN(profit) || profit < 0 || w2 < 0) {
-      return { seTax: `⚠️ ${T('errInvalid', 'Net profit and W-2 wages cannot be negative')}`, netEarnings: '—', ssTax: '—', medicareTax: '—', half: '—', employeeFica: '—' }
+      return { seTax: `⚠️ ${T('errInvalid', 'Enter non-negative numbers for net profit and W-2 wages')}`, netEarnings: '—', ssTax: '—', medicareTax: '—', half: '—', employeeFica: '—' }
     }
     const ssCap = v.year === '2024' ? 168600 : 176100
     const addThreshold = v.filing === 'married' ? 250000 : 200000
@@ -148,9 +148,9 @@ export const DepreciationCalculatorClient = makeCalculatorClient({
     { key: 'salvage', label: 'Salvage value', suffix: '$', default: '5000', slider: { min: 0, max: 200000, step: 500 } },
     { key: 'life', label: 'Useful life', suffix: 'years', default: '5', slider: { min: 1, max: 40, step: 1 } },
     { key: 'method', label: 'Method', default: 'sl', options: [
-      { label: 'Straight line', value: 'sl' },
-      { label: 'Double declining balance', value: 'ddb' },
-      { label: 'Sum of the years digits', value: 'syd' },
+      { label: 'Straight', value: 'sl' },
+      { label: 'Declining', value: 'ddb' },
+      { label: 'Sum of yrs', value: 'syd' },
     ]},
   ],
   outputs: [
@@ -228,15 +228,15 @@ export const MileageReimbursementCalculatorClient = makeCalculatorClient({
   inputs: [
     { key: 'miles', label: 'Miles driven', suffix: 'miles', default: '1200', slider: { min: 1, max: 100000, step: 10 } },
     { key: 'purpose', label: 'Purpose', default: 'business', options: [
-      { label: 'Business', value: 'business' },
+      { label: 'Work', value: 'business' },
       { label: 'Medical', value: 'medical' },
-      { label: 'Moving (Armed Forces)', value: 'moving' },
-      { label: 'Charitable volunteer', value: 'charitable' },
+      { label: 'Moving', value: 'moving' },
+      { label: 'Charity', value: 'charitable' },
     ]},
     { key: 'year', label: 'Rate year', default: '2025', options: [
-      { label: '2025 rates', value: '2025' },
-      { label: '2024 rates', value: '2024' },
-      { label: 'Custom rate', value: 'custom' },
+      { label: '2025', value: '2025' },
+      { label: '2024', value: '2024' },
+      { label: 'Custom', value: 'custom' },
     ]},
     { key: 'customRate', label: 'Custom rate per mile', suffix: '$', default: '0.35', slider: { min: 0, max: 2, step: 0.01 } },
   ],
@@ -250,11 +250,12 @@ export const MileageReimbursementCalculatorClient = makeCalculatorClient({
     const miles = toNumStrict(v.miles)
     const custom = toNum(v.customRate)
     if (Number.isNaN(miles) || miles < 0 || (v.year === 'custom' && custom < 0)) {
-      return { reimbursement: `⚠️ ${T('errInvalid', 'Miles and rate cannot be negative')}`, rate: '—', ctx: '—' }
+      return { reimbursement: `⚠️ ${T('errInvalid', 'Enter non-negative numbers for miles and rate')}`, rate: '—', ctx: '—' }
     }
     const year = v.year === 'custom' ? null : IRS_MILEAGE_RATES[v.year]
     const rate = year ? year[v.purpose as 'business' | 'medical' | 'moving' | 'charitable'] ?? year.business : custom
     const yearLabel = year ? `${v.year} ` : ''
+    const purposeLabel = T(`opt.purpose.${v.purpose}`, v.purpose)
     const ctx =
       v.purpose === 'business' ? T('ctx.business', 'Self-employed: deduct against business income')
       : v.purpose === 'medical' ? T('ctx.medical', 'Deductible only for costs above 7.5% of AGI')
@@ -262,7 +263,7 @@ export const MileageReimbursementCalculatorClient = makeCalculatorClient({
       : T('ctx.charitable', 'Volunteer mileage for qualified nonprofits')
     return {
       reimbursement: fmtUSD(miles * rate),
-      rate: `${fmtUSD(rate)}/mile (${yearLabel}${v.purpose})`,
+      rate: `${fmtUSD(rate)}/mile (${yearLabel}${purposeLabel})`,
       ctx,
     }
   },
@@ -440,8 +441,8 @@ export const CommuteCostCalculatorClient = makeCalculatorClient({
     { key: 'days', label: 'Days per week', suffix: 'days', default: '5', slider: { min: 1, max: 7, step: 1 } },
     { key: 'weeks', label: 'Working weeks per year', suffix: 'weeks', default: '48', slider: { min: 40, max: 52, step: 1 } },
     { key: 'method', label: 'Costing method', default: 'irs', options: [
-      { label: 'Per-mile rate (gas + wear)', value: 'irs' },
-      { label: 'Your MPG + gas price', value: 'fuel' },
+      { label: 'Per-mile rate', value: 'irs' },
+      { label: 'MPG + gas price', value: 'fuel' },
     ]},
     { key: 'rate', label: 'Rate per mile', suffix: '$', default: '0.70', slider: { min: 0.1, max: 1.5, step: 0.01 } },
     { key: 'mpg', label: 'Fuel economy', suffix: 'MPG', default: '28', slider: { min: 5, max: 60, step: 1 } },
@@ -458,7 +459,8 @@ export const CommuteCostCalculatorClient = makeCalculatorClient({
   ],
   compute: (v, locale) => {
     const T = (k: string, fb: string) => tui('commute-cost-calculator', locale, k, fb)
-    const distance = toNum(v.distance)
+    // 核心驱动字段严格解析:距离清空/非法走 ⚠️ 错误卡,而非静默折叠成 0 算出 "$0.00/年"
+    const distance = toNumStrict(v.distance)
     const days = toNum(v.days)
     const weeks = toNum(v.weeks)
     const rate = toNum(v.rate)
@@ -466,8 +468,11 @@ export const CommuteCostCalculatorClient = makeCalculatorClient({
     const gasPrice = toNum(v.gasPrice)
     const minutes = toNum(v.minutes)
     const wage = toNum(v.wage)
-    if (distance < 0 || days < 0 || weeks < 0 || rate < 0 || mpg < 0 || gasPrice < 0 || minutes < 0 || wage < 0) {
-      return { annualCost: `⚠️ ${T('errInvalid', 'Values cannot be negative')}`, annualMiles: '—', monthly: '—', hours: '—', timeValue: '—' }
+    if (Number.isNaN(distance) || distance <= 0) {
+      return { annualCost: `⚠️ ${T('errDistance', 'Enter a one-way distance above 0')}`, annualMiles: '—', monthly: '—', hours: '—', timeValue: '—' }
+    }
+    if (days < 0 || weeks < 0 || rate < 0 || mpg < 0 || gasPrice < 0 || minutes < 0 || wage < 0) {
+      return { annualCost: `⚠️ ${T('errInvalid', 'Other values cannot be negative')}`, annualMiles: '—', monthly: '—', hours: '—', timeValue: '—' }
     }
     const annualMiles = distance * 2 * days * weeks
     const annualCost = v.method === 'fuel' ? mpg > 0 ? (annualMiles / mpg) * gasPrice : 0 : annualMiles * rate
@@ -482,7 +487,7 @@ export const CommuteCostCalculatorClient = makeCalculatorClient({
   },
   chart: { kind: 'compare', title: 'Money vs time' },
   compare: (v) => {
-    const distance = toNum(v.distance)
+    const distance = toNumStrict(v.distance)
     const days = toNum(v.days)
     const weeks = toNum(v.weeks)
     const rate = toNum(v.rate)
@@ -490,7 +495,7 @@ export const CommuteCostCalculatorClient = makeCalculatorClient({
     const gasPrice = toNum(v.gasPrice)
     const minutes = toNum(v.minutes)
     const wage = toNum(v.wage)
-    if (distance < 0 || days < 0 || weeks < 0 || rate < 0 || mpg < 0 || gasPrice < 0 || minutes < 0 || wage < 0) return null
+    if (Number.isNaN(distance) || distance <= 0 || days < 0 || weeks < 0 || rate < 0 || mpg < 0 || gasPrice < 0 || minutes < 0 || wage < 0) return null
     const annualMiles = distance * 2 * days * weeks
     const annualCost = v.method === 'fuel' ? mpg > 0 ? (annualMiles / mpg) * gasPrice : 0 : annualMiles * rate
     const timeValue = ((minutes * 2 * days * weeks) / 60) * wage
@@ -567,7 +572,7 @@ export const SmokingCostCalculatorClient = makeCalculatorClient({
       formatY: (n) => fmtUSD(n, 0),
     }
   },
-  note: '🚬 At a pack a day and $12 a pack, smoking costs about $4,380 a year — a decent car payment or a maxed Roth IRA contribution. The invested line assumes the yearly money goes in once a year at your chosen return; quitting also buys back the hours, lungs, and insurance surcharges this tool cannot price.',
+  note: '🚬 At a pack a day and $12 a pack, smoking costs about $4,380 a year — a decent car payment or most of a maxed Roth IRA contribution. The invested line assumes the yearly money goes in once a year at your chosen return; quitting also buys back the hours, lungs, and insurance surcharges this tool cannot price.',
 })
 
 // ───────────────────────────────────────────
@@ -587,11 +592,11 @@ export const EmergencyFundCalculatorClient = makeCalculatorClient({
     { key: 'monthlyExpenses', label: 'Monthly essential expenses', suffix: '$', default: '3500', slider: { min: 500, max: 15000, step: 100 } },
     { key: 'currentSavings', label: 'Current emergency savings', suffix: '$', default: '4000', slider: { min: 0, max: 100000, step: 500 } },
     { key: 'monthlySave', label: 'Saving per month', suffix: '$', default: '500', slider: { min: 0, max: 5000, step: 50 } },
-    { key: 'targetMonths', label: 'Target size', default: '6', options: [
-      { label: '3 months', value: '3' },
-      { label: '6 months', value: '6' },
-      { label: '9 months', value: '9' },
-      { label: '12 months', value: '12' },
+    { key: 'targetMonths', label: 'Target size (months)', default: '6', options: [
+      { label: '3', value: '3' },
+      { label: '6', value: '6' },
+      { label: '9', value: '9' },
+      { label: '12', value: '12' },
     ]},
   ],
   outputs: [

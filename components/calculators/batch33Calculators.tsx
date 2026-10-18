@@ -18,17 +18,22 @@ import { DelayTimeCalculatorL10n } from '@/lib/i18n/tools-l10n/delay-time-calcul
  * (与 per-file accessor 查表行为一致,免额外生成 accessor)。
  */
 
-/** 工程单位格式化:0.863 A → "863 µA"、4700 Ω → "4.70 kΩ"、0.165 W → "165 mW" */
-function fmtEng(n: number, unit: string, digits = 2): string {
+/**
+ * 工程单位格式化:0.863 A → "863 µA"、4700 Ω → "4.70 kΩ"、0.165 W → "165 mW"
+ * refAbs:可选参考量级 —— 用它(而非 n 自己)决定 SI 前缀,让一组值同前缀输出。
+ * 环形图(BreakdownChart)从显示串 parseNumeric 取数:两个功耗若各自选前缀,
+ * "2.28 W vs 120.00 mW" 会被当成 2.28 : 120 把比例画反;同前缀则比例恒真。
+ */
+function fmtEng(n: number, unit: string, digits = 2, refAbs?: number): string {
   if (!isFinite(n)) return '—'
-  const abs = Math.abs(n)
-  if (abs === 0) return `0 ${unit}`
-  if (abs < 1e-6) return `${fmtNum(n * 1e9, digits)} n${unit}`
-  if (abs < 1e-3) return `${fmtNum(n * 1e6, digits)} µ${unit}`
-  if (abs < 1) return `${fmtNum(n * 1e3, digits)} m${unit}`
-  if (abs < 1e3) return `${fmtNum(n, digits)} ${unit}`
-  if (abs < 1e6) return `${fmtNum(n / 1e3, digits)} k${unit}`
-  if (abs < 1e9) return `${fmtNum(n / 1e6, digits)} M${unit}`
+  const ref = Math.abs(refAbs ?? n)
+  if (ref === 0) return `0 ${unit}`
+  if (ref < 1e-6) return `${fmtNum(n * 1e9, digits)} n${unit}`
+  if (ref < 1e-3) return `${fmtNum(n * 1e6, digits)} µ${unit}`
+  if (ref < 1) return `${fmtNum(n * 1e3, digits)} m${unit}`
+  if (ref < 1e3) return `${fmtNum(n, digits)} ${unit}`
+  if (ref < 1e6) return `${fmtNum(n / 1e3, digits)} k${unit}`
+  if (ref < 1e9) return `${fmtNum(n / 1e6, digits)} M${unit}`
   return `${fmtNum(n / 1e9, digits)} G${unit}`
 }
 
@@ -182,12 +187,16 @@ export const LedResistorCalculatorClient = makeCalculatorClient({
     const e12 = e12Ceil(ideal)
     const chosen = e12 ?? ideal
     const actual = (supply - vf) / chosen
+    // 两项功耗共用前缀(取较大者的量级),保证环形图比例与真实功耗一致(见 fmtEng)
+    const pResistor = actual * actual * chosen
+    const pLed = actual * vf
+    const pRef = Math.max(pResistor, pLed)
     return {
       resistor: fmtEng(ideal, 'Ω'),
       e12: e12 != null ? `${fmtEng(e12, 'Ω')} (E12)` : '—',
       actualCurrent: `${fmtNum(actual * 1000, 2)} mA`,
-      resistorPower: fmtEng(actual * actual * chosen, 'W'),
-      ledPower: fmtEng(actual * vf, 'W'),
+      resistorPower: fmtEng(pResistor, 'W', 2, pRef),
+      ledPower: fmtEng(pLed, 'W', 2, pRef),
     }
   },
   chart: {

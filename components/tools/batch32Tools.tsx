@@ -5,6 +5,7 @@ import { CalculatorNote, ResultCard } from '../calculator/CalculatorField'
 import { ResultActions } from '../ResultActions'
 import { CopyButton } from '@/components/CopyButton'
 import { useApp } from '@/components/providers/AppProviders'
+import { t } from '@/lib/i18n'
 import { makeTextTool } from './makeTextTool'
 import { tuiFromEntry } from '@/lib/i18n/tool-l10n-core'
 import { getCalculatorSample } from '@/lib/tool-samples'
@@ -51,7 +52,7 @@ export function UtmLinkBuilderClient() {
 
   const result = useMemo(() => {
     const raw = url.trim()
-    if (!raw) return { link: '', error: L('errEmpty', 'Enter a base URL first.'), hints: [] as string[] }
+    if (!raw) return { link: '', error: `⚠️ ${L('errEmpty', 'Enter a base URL first.')}`, hints: [] as string[] }
     // 无协议时按浏览器地址栏惯例补 https:// 再解析
     const candidate = /^[a-zA-Z][a-zA-Z0-9+.-]*:/.test(raw) ? raw : `https://${raw}`
     let u: URL
@@ -659,7 +660,7 @@ export function HttpStatusCodeLookupClient() {
         style={txtVars}
       />
       <p className="text-xs" style={{ color: 'rgb(var(--text-faint))' }}>
-        {results.length} / {HTTP_STATUS_DB.length} · {L('coverageNote', 'All 62 IANA-registered status codes')}
+        {results.length} / {HTTP_STATUS_DB.length} · {L('coverageNote', 'All {n} IANA-registered status codes').replace('{n}', String(HTTP_STATUS_DB.length))}
       </p>
       <div className="overflow-x-auto rounded-lg border border-border bg-card">
         <table className="w-full text-left text-sm">
@@ -1042,6 +1043,7 @@ export function Rot13ConverterClient() {
           <CopyButton value={output} disabled={!output} />
         </div>
         <textarea id="rot-out" readOnly value={output} rows={6}
+          placeholder={t(locale, 'textToolResultPlaceholder')}
           className="w-full rounded-lg border-2 p-4 font-mono text-sm outline-none"
           style={outVars} />
       </div>

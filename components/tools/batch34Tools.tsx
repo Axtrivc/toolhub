@@ -239,7 +239,9 @@ export function BorderRadiusGeneratorClient() {
   const previewRadius = css.replace(/^border-radius: |;$/g, '')
 
   const applyPreset = (p: (typeof BR_PRESETS)[number]) => {
-    const strip = (x: string) => x.replace(/[^0-9.%]/g, '')
+    // 只留数字与小数点:预设值里带的 'px'/'%' 后缀一律剥掉,
+    // 单位由 setUnit 统一追加 —— 否则 '30%' 会拼成 '30%%'(滑杆也会 NaN 归零)
+    const strip = (x: string) => x.replace(/[^0-9.]/g, '')
     const hasPct = [p.tl, p.tr, p.br, p.bl].some((x) => x.includes('%'))
     setUnit(hasPct ? '%' : 'px')
     setElliptical(p.ell)
@@ -530,15 +532,16 @@ export function ColorPaletteGeneratorClient() {
             const light = (0.299 * rgb.r + 0.587 * rgb.g + 0.114 * rgb.b) / 255 > 0.6
             return (
               <div key={sw.role} className="flex items-center gap-4 rounded-xl border p-3" style={{ borderColor: 'rgb(var(--border))', backgroundColor: 'rgb(var(--bg-card))' }}>
-                <div className="h-14 w-24 shrink-0 rounded-lg border" style={{ backgroundColor: hex, borderColor: 'rgb(var(--border))' }} />
+                {/* 窄屏色块收窄到 w-16,给右侧 rgb/hsl 留出整行宽度,避免值在括号中间折行 */}
+                <div className="h-14 w-16 shrink-0 rounded-lg border sm:w-24" style={{ backgroundColor: hex, borderColor: 'rgb(var(--border))' }} />
                 <div className="min-w-0 flex-1">
                   <div className="text-xs font-semibold uppercase tracking-wide" style={{ color: 'rgb(var(--text-faint))' }}>
                     {L(sw.role, ROLE_FB[sw.role] ?? sw.role)}
                   </div>
                   <div className="mt-1 flex flex-wrap gap-x-4 gap-y-1 font-mono text-xs" style={{ color: 'rgb(var(--text-muted))' }}>
-                    <span className="font-semibold" style={{ color: light ? '#111827' : '#f9fafb', backgroundColor: hex, padding: '1px 6px', borderRadius: 4 }}>{hex.toUpperCase()}</span>
-                    <span>rgb({rgb.r}, {rgb.g}, {rgb.b})</span>
-                    <span>hsl({hsl.h}, {hsl.s}%, {hsl.l}%)</span>
+                    <span className="whitespace-nowrap font-semibold" style={{ color: light ? '#111827' : '#f9fafb', backgroundColor: hex, padding: '1px 6px', borderRadius: 4 }}>{hex.toUpperCase()}</span>
+                    <span className="whitespace-nowrap">rgb({rgb.r}, {rgb.g}, {rgb.b})</span>
+                    <span className="whitespace-nowrap">hsl({hsl.h}, {hsl.s}%, {hsl.l}%)</span>
                   </div>
                 </div>
                 <CopyButton value={hex.toUpperCase()} label={L('copyHex', 'Copy')} />
@@ -587,11 +590,14 @@ export function ImageCompressorClient() {
   const [result, setResult] = useState<CompressResult | null>(null)
   const [error, setError] = useState('')
   const [dragging, setDragging] = useState(false)
+  // 解码失败标记:失败时重新展示上传区,否则用户只剩一条错误、无法换文件重试
+  const [imgFailed, setImgFailed] = useState(false)
   const imgRef = useRef<HTMLImageElement | null>(null)
   const outUrlRef = useRef('')
 
   const handleFile = useCallback((file: File) => {
     setError('')
+    setImgFailed(false)
     if (!file.type.startsWith('image/')) {
       setError(L('errUploadImage', 'Please upload an image file (PNG, JPG, or WebP).'))
       return
@@ -637,7 +643,12 @@ export function ImageCompressorClient() {
       imgRef.current = img
       setNatural({ w: img.naturalWidth, h: img.naturalHeight })
     }
-    img.onerror = () => { if (!cancelled) setError(L('errDecodeImage', 'Could not decode the image file.')) }
+    img.onerror = () => {
+      if (cancelled) return
+      imgRef.current = null
+      setImgFailed(true)
+      setError(L('errDecodeImage', 'Could not decode the image file.'))
+    }
     img.src = imgSrc
     return () => { cancelled = true }
   }, [imgSrc, locale])
@@ -710,7 +721,7 @@ export function ImageCompressorClient() {
 
   return (
     <div className="space-y-5">
-      {!imgSrc && (
+      {(!imgSrc || imgFailed) && (
         <label
           htmlFor="compressor-upload"
           onDragOver={(e) => { e.preventDefault(); setDragging(true) }}
@@ -774,12 +785,13 @@ export function ImageCompressorClient() {
           </div>
 
           {result && (
-            <div className="flex flex-wrap items-center gap-4 rounded-lg border p-4" style={{ borderColor: 'rgb(var(--border))', backgroundColor: 'rgb(var(--bg-card))' }} role="status" aria-live="polite">
+            <div className="flex flex-col items-start gap-4 rounded-lg border p-4 sm:flex-row sm:items-center" style={{ borderColor: 'rgb(var(--border))', backgroundColor: 'rgb(var(--bg-card))' }} role="status" aria-live="polite">
+              {/* 窄屏纵向堆叠:否则 flex-1 文本区被缩到几十 px,「12.5 KB → 10.1 KB」逐词竖排折行 */}
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src={result.url} alt={L('compressedAlt', 'Compressed preview')} className="max-h-24 max-w-32 rounded-lg border object-contain" style={{ borderColor: 'rgb(var(--border))' }} />
               <div className="flex-1 text-sm" style={{ color: 'rgb(var(--text))' }}>
                 <div className="font-semibold">{formatBytes(origSize)} → {formatBytes(result.size)}</div>
-                <div className="mt-1 font-mono text-xs" style={{ color: savedPct > 0 ? '#16a34a' : '#d97706' }}>
+                <div className={`mt-1 font-mono text-xs ${savedPct > 0 ? 'text-green-600 dark:text-green-400' : 'text-amber-600 dark:text-amber-400'}`}>
                   {extOf(result.mime).toUpperCase()} · q{Math.round(quality * 100)}
                   {savedPct > 0
                     ? ` · ${savedPct}% ${L('smaller', 'smaller')}`

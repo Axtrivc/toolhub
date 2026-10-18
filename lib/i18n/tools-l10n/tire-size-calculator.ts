@@ -31,6 +31,9 @@ export const TireSizeCalculatorL10n: ToolL10n = {
       'errSpec2': '第二条轮胎无法解析——请用如 235/45R17 的写法',
       'errSpeed': '参考车速必须为正',
       'noSecond': '— 填第二条规格可对比',
+      'preset.0': '加宽一档',
+      'preset.1': '更高胎侧(舒适向)',
+      'preset.2': '皮卡全地形换胎',
     },
   },
   es: {
@@ -59,6 +62,9 @@ export const TireSizeCalculatorL10n: ToolL10n = {
       'errSpec2': 'No pude interpretar la segunda medida — usa p. ej. 235/45R17',
       'errSpeed': 'La velocidad de referencia debe ser positiva',
       'noSecond': '— introduce una segunda medida para comparar',
+      'preset.0': 'Plus-size un paso',
+      'preset.1': 'Flanco más alto (confort)',
+      'preset.2': 'Pickup todo terreno',
     },
   },
   de: {
@@ -87,6 +93,9 @@ export const TireSizeCalculatorL10n: ToolL10n = {
       'errSpec2': 'Zweite Größe unlesbar — schreibe z. B. 235/45R17',
       'errSpeed': 'Die Referenzgeschwindigkeit muss positiv sein',
       'noSecond': '— zweite Größe eingeben zum Vergleichen',
+      'preset.0': 'Plus-Size ein Schritt',
+      'preset.1': 'Höhere Seitenwand (Komfort)',
+      'preset.2': 'Pickup-All-Terrain-Wechsel',
     },
   },
 }

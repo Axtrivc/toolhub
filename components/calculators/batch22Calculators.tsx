@@ -141,9 +141,9 @@ export const DcaCalculatorClient = makeCalculatorClient({
   inputs: [
     { key: 'amount', label: 'Amount per contribution', suffix: '$', default: '500', slider: { min: 25, max: 5000, step: 25 } },
     { key: 'freq', label: 'Frequency', default: 'monthly', options: [
-      { label: 'Weekly (52/yr)', value: 'weekly' },
-      { label: 'Every 2 weeks (26/yr)', value: 'biweekly' },
-      { label: 'Monthly (12/yr)', value: 'monthly' },
+      { label: 'Weekly', value: 'weekly' },
+      { label: 'Biweekly', value: 'biweekly' },
+      { label: 'Monthly', value: 'monthly' },
     ]},
     { key: 'months', label: 'Total months', default: '12', slider: { min: 1, max: 120, step: 1 } },
     { key: 'startPrice', label: 'Price at start', suffix: '$', default: '100', slider: { min: 1, max: 1000, step: 1 } },
@@ -236,6 +236,14 @@ export const DcaCalculatorClient = makeCalculatorClient({
         xLabels.push(`M${monthMark}`)
       }
     }
+    // 单期场景(monthly × 1 个月只买 1 次)只采到 1 个点,LineAreaChart 视为
+    // n<2 不可成线而落到空态文案;补一个期初 $0 点(买入前的真实组合价值)保证成图
+    if (dcaPts.length < 2) {
+      dcaPts.unshift(0)
+      lumpPts.unshift(0)
+      xLabels.unshift('M0')
+      if (xLabels.length === 2 && xLabels[1] === 'M0') xLabels[1] = 'M1'
+    }
     return {
       xLabels,
       lines: [
@@ -245,7 +253,7 @@ export const DcaCalculatorClient = makeCalculatorClient({
       formatY: (n) => fmtUSD(n, 0),
     }
   },
-  note: '📈 The price path is assumed linear between your start and end prices, so "average cost" here is the honest arithmetic of a one-way slide. Real markets zig-zag — volatility between the endpoints is exactly what lowers a real DCA average cost below this.',
+  note: '📈 The price path is assumed linear between your start and end prices, so "average cost" here is the honest arithmetic of a one-way slide. Real markets zig-zag — volatility between the endpoints is exactly what lowers a real DCA average cost below this. Frequencies: weekly = 52 buys a year, every 2 weeks = 26, monthly = 12.',
 })
 
 // ───────────────────────────────────────────
@@ -254,6 +262,7 @@ export const DcaCalculatorClient = makeCalculatorClient({
 export const StockAverageCalculatorClient = makeCalculatorClient({
   slug: 'stock-average-calculator',
   l10n: StockAverageCalculatorL10n,
+  urlState: true,
   inputs: [
     { key: 'q1', label: 'Lot 1 shares', default: '100', slider: { min: 0, max: 2000, step: 10 } },
     { key: 'p1', label: 'Lot 1 price', suffix: '$', default: '48', slider: { min: 0.5, max: 1000, step: 0.5 } },
@@ -294,6 +303,11 @@ export const StockAverageCalculatorClient = makeCalculatorClient({
     const active = lots.filter((l) => l.q > 0)
     if (active.length === 0) {
       return { avgCost: `⚠️ ${T('errEmpty', 'Enter at least one lot (shares > 0)')}`, totalShares: '—', totalCost: '—', currentValue: '—', plTotal: '—', plPct: '—' }
+    }
+    // 有股数但价格为 0 的批次不合法:$0 买入会静默拉低平均成本(第 4 笔价格默认 0,
+    // 只填股数忘填价就会触发),必须显式报错而不是算出一个偏低的"平均成本"
+    if (active.some((l) => l.p <= 0)) {
+      return { avgCost: `⚠️ ${T('errLotPrice', 'Lots with shares need a price above 0')}`, totalShares: '—', totalCost: '—', currentValue: '—', plTotal: '—', plPct: '—' }
     }
     const totalShares = active.reduce((s, l) => s + l.q, 0)
     const totalCost = active.reduce((s, l) => s + l.q * l.p, 0) + fee * active.length
@@ -355,8 +369,10 @@ export const OptionsProfitCalculatorClient = makeCalculatorClient({
     { key: 'target', label: 'Stock price at expiry', suffix: '$', default: '110', slider: { min: 0, max: 1000, step: 1 } },
   ],
   outputs: [
-    { key: 'breakeven', label: 'Breakeven at expiry', highlight: true },
-    { key: 'plTarget', label: 'P/L at your target price' },
+    // highlight 落在主结果:工具名是"期权利润",主结果应是目标价下的损益金额
+    // (与 crypto 的 netProfit、dca 的 finalValue 同一惯例);盈亏平衡点保留普通卡
+    { key: 'plTarget', label: 'P/L at your target price', highlight: true },
+    { key: 'breakeven', label: 'Breakeven at expiry' },
     { key: 'maxProfit', label: 'Max profit' },
     { key: 'maxLoss', label: 'Max loss' },
     { key: 'premiumStake', label: 'Premium paid / received' },
@@ -677,6 +693,7 @@ function oneIn(p: number): string {
 export const LotteryOddsCalculatorClient = makeCalculatorClient({
   slug: 'lottery-odds-calculator',
   l10n: LotteryOddsCalculatorL10n,
+  urlState: true,
   inputs: [
     { key: 'game', label: 'Game', default: 'powerball', options: [
       { label: 'Powerball', value: 'powerball' },
@@ -685,7 +702,7 @@ export const LotteryOddsCalculatorClient = makeCalculatorClient({
       { label: 'Custom', value: 'custom' },
     ]},
     { key: 'poolN', label: 'Custom: main pool size', default: '49', slider: { min: 10, max: 99, step: 1 } },
-    { key: 'picksK', label: 'Custom: numbers picked', default: '6', slider: { min: 1, max: 10, step: 1 } },
+    { key: 'picksK', label: 'Custom: numbers picked', default: '6', slider: { min: 1, max: 12, step: 1 } },
     { key: 'bonusPool', label: 'Custom: bonus pool size', default: '27', slider: { min: 0, max: 99, step: 1 } },
     { key: 'bonusPicks', label: 'Custom: bonus numbers', default: '1', slider: { min: 0, max: 3, step: 1 } },
   ],

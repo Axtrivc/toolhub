@@ -383,6 +383,12 @@ export const DownloadTimeCalculatorClient = makeCalculatorClient({
       { label: '15% (busy Wi-Fi)', value: '15' },
     ]},
   ],
+  presets: [
+    // 只覆写 size/sizeUnit:网速保留用户当前值(与 tip 预设只动 tipPct 同款口径)
+    { label: 'Streaming movie (4.5 GB)', values: { size: '4.5', sizeUnit: 'GB' } },
+    { label: 'Game download (80 GB)', values: { size: '80', sizeUnit: 'GB' } },
+    { label: 'Photo batch (500 MB)', values: { size: '500', sizeUnit: 'MB' } },
+  ],
   outputs: [
     { key: 'time', label: 'Transfer time', highlight: true },
     { key: 'totalSeconds', label: 'Total seconds' },
@@ -539,7 +545,10 @@ export const WindChillCalculatorClient = makeCalculatorClient({
   slug: 'wind-chill-calculator',
   l10n: WindChillCalculatorL10n,
   inputs: [
-    { key: 'temp', label: 'Air temperature', default: '-5', slider: { min: -50, max: 20, step: 1 } },
+    // 上限 50:°F 预设(23°F)要落在滑杆范围内 —— 旧上限 20 会让 °F 用户
+    // 一进预设就出现「数字框 23、滑杆顶死在 20」的矛盾显示;°C 侧 >10 由
+    // range 行的 ⚠️ 外推标注兜底(公式适用上限 10°C,见 note)
+    { key: 'temp', label: 'Air temperature', default: '-5', slider: { min: -50, max: 50, step: 1 } },
     { key: 'tUnit', label: 'Temperature unit', default: 'C', options: [
       { label: '°C', value: 'C' },
       { label: '°F', value: 'F' },

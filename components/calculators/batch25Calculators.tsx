@@ -78,7 +78,9 @@ export const PayPalFeeCalculatorClient = makeCalculatorClient({
     const p = toNum(v.feePct)
     const f = toNum(v.fixedFee)
     if (!(p >= 0) || p >= 100 || !(f >= 0)) return null
-    const marks = [25, 50, 100, 250, 500, 1000, 2000]
+    // $10 起步:固定费稀释曲线的戏剧点($10 → ~8.4% 实际费率)在低票段,
+    // 与 note / 长文引用的口径一致
+    const marks = [10, 25, 50, 100, 250, 500, 1000, 2000]
     return {
       xLabels: marks.map((m) => `$${m.toLocaleString('en-US')}`),
       lines: [
@@ -359,12 +361,14 @@ export const YouTubeMoneyCalculatorClient = makeCalculatorClient({
     const k = views / 1000
     const m = (r: number) => k * r
     return {
+      // 月收入保留分位(小额场景需要);年收入已在 4-6 位数量级,
+      // ".00" 只是噪声,与 mortgage/compound-interest 的大额口径一致取 0 位
       monthlyLow: fmtUSD(m(lo)),
       monthlyTypical: fmtUSD(m(mid)),
       monthlyHigh: fmtUSD(m(hi)),
-      yearlyLow: fmtUSD(m(lo) * 12),
-      yearlyTypical: fmtUSD(m(mid) * 12),
-      yearlyHigh: fmtUSD(m(hi) * 12),
+      yearlyLow: fmtUSD(m(lo) * 12, 0),
+      yearlyTypical: fmtUSD(m(mid) * 12, 0),
+      yearlyHigh: fmtUSD(m(hi) * 12, 0),
     }
   },
   presets: [
@@ -405,6 +409,13 @@ export const NpsCalculatorClient = makeCalculatorClient({
     { key: 'promoters', label: 'Promoters (9-10)', default: '250', slider: { min: 0, max: 1000, step: 5 } },
     { key: 'passives', label: 'Passives (7-8)', default: '90', slider: { min: 0, max: 1000, step: 5 } },
     { key: 'detractors', label: 'Detractors (0-6)', default: '60', slider: { min: 0, max: 1000, step: 5 } },
+  ],
+  presets: [
+    // 三档 Bain 等级各一组,均恰好 1,000 份回复,标签分值与 compute 口径一致:
+    // (250-500)/1000=-25;(600-150)/1000=+45;(800-60)/1000=+74
+    { label: 'Struggling (-25, 1,000 resp.)', values: { promoters: '250', passives: '250', detractors: '500' } },
+    { label: 'Solid B2B (+45, 1,000 resp.)', values: { promoters: '600', passives: '250', detractors: '150' } },
+    { label: 'World-class (+74, 1,000 resp.)', values: { promoters: '800', passives: '140', detractors: '60' } },
   ],
   outputs: [
     { key: 'totalResponses', label: 'Total responses' },
@@ -469,6 +480,11 @@ export const ConversionRateCalculatorClient = makeCalculatorClient({
     { key: 'spend', label: 'Total spend (optional)', suffix: '$', default: '600', slider: { min: 0, max: 50000, step: 10 } },
     { key: 'liftPct', label: 'Target conversion lift', suffix: '%', default: '20', slider: { min: 0, max: 200, step: 5 } },
   ],
+  presets: [
+    { label: 'E-commerce typical (~2.5%)', values: { visitors: '5000', conversions: '125', spend: '750' } },
+    { label: 'Paid search (~3.5%)', values: { visitors: '5000', conversions: '175', spend: '1050' } },
+    { label: 'Strong landing page (~8%)', values: { visitors: '5000', conversions: '400', spend: '1600' } },
+  ],
   outputs: [
     { key: 'convRate', label: 'Conversion rate', highlight: true },
     { key: 'cpa', label: 'Cost per acquisition (CPA)' },
@@ -511,15 +527,18 @@ export const ConversionRateCalculatorClient = makeCalculatorClient({
     const lift = toNum(v.liftPct)
     if (!(vis > 0) || con < 0 || con > vis || !(lift >= 0)) return null
     const target = Math.min(vis, Math.ceil(con * (1 + lift / 100)))
+    // 未转化段用 slate-500:转化率低时该段几乎占满条宽,行尾总值会以白字
+    // 压在段上(StackedCompareChart inside 分支)——浅灰 #cbd5e1/#e2e8f0 上
+    // 白字不可读,且暗色模式下过亮;#64748b 与 amazon 工具中性段一致
     return {
       rows: [
         { label: 'Now', segments: [
           { label: 'Converted', value: con, color: '#22c55e' },
-          { label: 'Did not convert', value: vis - con, color: '#cbd5e1' },
+          { label: 'Did not convert', value: vis - con, color: '#64748b' },
         ] },
         { label: 'Target', segments: [
           { label: 'Converted', value: target, color: '#3b82f6' },
-          { label: 'Did not convert', value: Math.max(0, vis - target), color: '#e2e8f0' },
+          { label: 'Did not convert', value: Math.max(0, vis - target), color: '#64748b' },
         ] },
       ],
       formatTotal: (n) => fmtNum(n, 0),
@@ -545,6 +564,13 @@ export const GymCostPerVisitCalculatorClient = makeCalculatorClient({
     { key: 'visits', label: 'Visits per month (be honest)', default: '8', slider: { min: 0, max: 40, step: 1 } },
     { key: 'dropIn', label: 'Drop-in price per visit', suffix: '$', default: '15', slider: { min: 0, max: 50, step: 0.5 } },
   ],
+  presets: [
+    // 覆盖真实月费带:平价连锁($15)、中端商业健身房($45)、精品团课工作室($185)、年卡预付
+    { label: 'Budget chain ($15/mo)', values: { fee: '15', cycle: 'monthly' } },
+    { label: 'Mid-tier gym ($45/mo)', values: { fee: '45', cycle: 'monthly' } },
+    { label: 'Boutique studio ($185/mo)', values: { fee: '185', cycle: 'monthly' } },
+    { label: 'Annual prepay ($420/yr)', values: { fee: '420', cycle: 'yearly' } },
+  ],
   outputs: [
     { key: 'perMonth', label: 'Effective cost per month' },
     { key: 'costPerVisit', label: 'Cost per visit', highlight: true },
@@ -566,23 +592,25 @@ export const GymCostPerVisitCalculatorClient = makeCalculatorClient({
     }
     const perMonth = v.cycle === 'yearly' ? fee / 12 : fee
     const savings = visits * drop - perMonth
+    // verdict 是 ResultCard 的 value(text-2xl 粗体,375px 不折行换行会占 4 行),
+    // 只留短判语;"为什么"由上方 monthlySwing 卡与 note 承担
     let verdictKey: string
     let verdictFb: string
     if (visits < 1) {
       verdictKey = 'verdict.zero'
-      verdictFb = 'Zero visits — you are paying full price for nothing'
+      verdictFb = 'Zero visits'
     } else if (drop <= 0) {
       verdictKey = 'verdict.member'
-      verdictFb = 'Membership it is — no drop-in alternative entered'
+      verdictFb = 'Membership it is'
     } else if (savings > perMonth * 0.05) {
       verdictKey = 'verdict.worth'
-      verdictFb = 'Worth it — membership beats paying per visit'
+      verdictFb = 'Worth it'
     } else if (savings < -perMonth * 0.05) {
       verdictKey = 'verdict.dropIn'
-      verdictFb = 'Not worth it — paying per visit would be cheaper'
+      verdictFb = 'Not worth it'
     } else {
       verdictKey = 'verdict.border'
-      verdictFb = 'Roughly a wash — pick whichever you will actually use'
+      verdictFb = 'Roughly a wash'
     }
     return {
       perMonth: fmtUSD(perMonth),

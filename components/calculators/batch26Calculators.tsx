@@ -96,10 +96,12 @@ export const OneRepMaxCalculatorClient = makeCalculatorClient({
     const lander = w / (1.0278 - 0.0278 * reps)
     const avg = (epley + brzycki + lander) / 3
     const pcts = [95, 90, 85, 80, 75, 70, 65, 60, 55, 50]
+    const unit = v.unit === 'lb' ? 'lb' : 'kg'
     return {
       xLabels: pcts.map((p) => `${p}%`),
       lines: [{ key: 'weight', label: 'Working weight', color: '#3b82f6', points: pcts.map((p) => avg * (p / 100)), area: true }],
-      formatY: (n) => `${n.toFixed(1)}`,
+      // y 轴带单位(与 weight-loss 的 kg、steps 的 mi 同口径),随 kg/lb 切换
+      formatY: (n) => `${n.toFixed(1)} ${unit}`,
     }
   },
   presets: [
@@ -125,7 +127,9 @@ export const RaceTimePredictorClient = makeCalculatorClient({
       { label: 'Half', value: 'half' },
       { label: 'Marathon', value: 'marathon' },
     ]},
-    { key: 'hours', label: 'Hours', default: '0', slider: { min: 0, max: 5, step: 1 } },
+    // max 6:6 小时开外是走跑结合全马的常见区间(多数赛事关门 6:00-6:30),
+    // 滑杆应能表达主流输入;更慢的手输仍有效
+    { key: 'hours', label: 'Hours', default: '0', slider: { min: 0, max: 6, step: 1 } },
     { key: 'minutes', label: 'Minutes', default: '50', slider: { min: 0, max: 59, step: 1 } },
     { key: 'seconds', label: 'Seconds', default: '0', slider: { min: 0, max: 59, step: 1 } },
     { key: 'target', label: 'Predict for', default: 'marathon', options: [
@@ -165,13 +169,20 @@ export const RaceTimePredictorClient = makeCalculatorClient({
     }
   },
   chart: { kind: 'series', title: 'Equivalent times by distance' },
-  series: (v) => {
+  series: (v, locale) => {
     const h = toNum(v.hours), m = toNum(v.minutes), s = toNum(v.seconds)
     const t1 = h + m / 60 + s / 3600
     const d1 = RIEGEL_DIST[v.dist] ?? 10
     if (!(t1 > 0) || h < 0 || m < 0 || s < 0) return null
+    // x 轴距离标签复用 opt.dist.* 词典:zh 页不再出现英文 'Half'/'Marathon'
+    const dl = (key: string, fb: string) => tui('race-time-predictor', locale, key, fb)
     return {
-      xLabels: ['5K', '10K', 'Half', 'Marathon'],
+      xLabels: [
+        dl('opt.dist.5', '5K'),
+        dl('opt.dist.10', '10K'),
+        dl('opt.dist.half', 'Half'),
+        dl('opt.dist.marathon', 'Marathon'),
+      ],
       lines: [{
         key: 'predicted', label: 'Predicted time', color: '#3b82f6',
         points: [5, 10, 21.0975, 42.195].map((d) => t1 * Math.pow(d / d1, 1.06)),
@@ -204,7 +215,10 @@ export const Vo2MaxCalculatorClient = makeCalculatorClient({
   l10n: Vo2MaxCalculatorL10n,
   urlState: true,
   inputs: [
-    { key: 'distance', label: '12-minute run distance', suffix: 'm', default: '2400', slider: { min: 800, max: 5000, step: 25 } },
+    // 滑杆范围对齐仪表盘 [15,70]:1200 m → VO₂ 15.5、3600 m → 69.2,
+    // 拖到任意位置都不会撞上仪表 clamp(旧 max 5000 会算出 VO₂ 100 的
+    // 不可能值,卡片与仪表大字互相矛盾);手输仍按 compute 的 400-8000 校验
+    { key: 'distance', label: '12-minute run distance', suffix: 'm', default: '2400', slider: { min: 1200, max: 3600, step: 25 } },
     { key: 'hrmax', label: 'Max heart rate', suffix: 'bpm', default: '190', slider: { min: 140, max: 220, step: 1 } },
     { key: 'hrrest', label: 'Resting heart rate', suffix: 'bpm', default: '60', slider: { min: 40, max: 100, step: 1 } },
   ],
@@ -372,8 +386,11 @@ export const WaistToHeightRatioCalculatorClient = makeCalculatorClient({
     kind: 'gauge',
     title: 'Your WHtR on the scale',
     valueKey: 'whtr',
-    min: 0.3,
-    max: 0.8,
+    // 刻度取 [0,1]:GaugeChart 端点标注走 Math.round,0.3/0.8 会被印成
+    // "0"和"1"且指针位置与印出来的刻度对不上;0-1 刻度下 0.5 恰在正中,
+    // 呼应"腰围不超过身高一半"的主张,红色高风险区由尾段延伸补满到 1
+    min: 0,
+    max: 1,
     zones: [
       { upTo: 0.4, color: '#38bdf8', label: 'Slim' },
       { upTo: 0.5, color: '#22c55e', label: 'Healthy' },
@@ -504,6 +521,7 @@ export const WeightLossGoalCalculatorClient = makeCalculatorClient({
     const toLose = current - goal
     const weeks = toLose / rate
     const deficit = (rate * 7700) / 7
+    const wk = T('unit.wk', 'wk')
     let safety: string
     if (rate > 1) safety = `⚠️ ${T('pace.warn', 'Above 1 kg/week: muscle-loss and rebound risk climbs')}`
     else if (deficit > 1000) safety = `⚠️ ${T('pace.deficitWarn', 'Deficit exceeds 1,000 kcal — most people need to eat back exercise calories')}`
@@ -511,7 +529,7 @@ export const WeightLossGoalCalculatorClient = makeCalculatorClient({
     else safety = `✅ ${T('pace.ok', 'Within the recommended 0.25-1 kg/week range')}`
     return {
       toLose: `${fmtNum(toLose, 1)} kg`,
-      weeks: `${fmtNum(weeks, 1)} (${Math.ceil(weeks)} wk)`,
+      weeks: `${fmtNum(weeks, 1)} (${Math.ceil(weeks)} ${wk})`,
       dailyDeficit: `${fmtNum(deficit, 0)} kcal/day`,
       // 目标日期依赖"今天":SSR/首帧恒 '—',挂载后由 deriveNow 补齐
       goalDate: '—',
@@ -593,7 +611,7 @@ export const FiberIntakeCalculatorClient = makeCalculatorClient({
   l10n: FiberIntakeCalculatorL10n,
   urlState: true,
   inputs: [
-    { key: 'age', label: 'Age', default: '35', slider: { min: 2, max: 100, step: 1 } },
+    { key: 'age', label: 'Age', default: '35', slider: { min: 1, max: 100, step: 1 } },
     { key: 'sex', label: 'Sex', default: 'male', options: [
       { label: 'Male', value: 'male' },
       { label: 'Female', value: 'female' },

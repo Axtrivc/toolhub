@@ -465,7 +465,11 @@ export function ResistorColorCodeClient() {
                 )}
               </>
             ) : (
-              <ResultCard label={L('valueLabel', 'Resistance')} value="⚠️" error />
+              <ResultCard
+                label={L('valueLabel', 'Resistance')}
+                value={`⚠️ ${L('errBands', 'Could not decode that band combination — check the selected colors')}`}
+                error
+              />
             )}
           </div>
         </>
@@ -750,6 +754,27 @@ export function ToneGeneratorClient() {
         <div className="mt-1 flex justify-between text-[11px]" style={{ color: 'rgb(var(--text-faint))' }}>
           <span>20 Hz</span><span>200 Hz</span><span>2 kHz</span><span>20 kHz</span>
         </div>
+        {/* 常用测试音一键直达:市电嗡鸣 / A4 标准音 / 中频参考 / 高频检查(标签纯单位,免译) */}
+        <div className="mt-2 flex flex-wrap gap-2">
+          {([60, 440, 1000, 10000] as const).map((f) => {
+            const active = freqClamped === f
+            return (
+              <button
+                key={f}
+                type="button"
+                onClick={() => setFreq(f)}
+                aria-pressed={active}
+                className={`rounded-lg border px-3 py-1.5 text-sm transition-colors ${
+                  active ? 'border-brand-600 bg-brand-600 text-white' : ''
+                }`}
+                style={active ? undefined : selectStyle}
+              >
+                {f >= 1000 ? `${f / 1000} kHz` : `${f} Hz`}
+                {f === 440 ? ' · A4' : ''}
+              </button>
+            )
+          })}
+        </div>
       </div>
 
       {/* 波形 */}
@@ -924,7 +949,7 @@ export function BpmTapCounterClient() {
       </div>
 
       <div className="flex flex-wrap items-center gap-2">
-        <CopyButton value={summary} label="Copy" disabled={!stats} />
+        <CopyButton value={summary} disabled={!stats} />
         <button
           type="button"
           onClick={() => setTaps([])}

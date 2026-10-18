@@ -19,6 +19,7 @@ export const GpsCoordinateConverterL10n: ToolL10n = {
       'placeholder': '40.7128, -74.0060 或 40° 42\' 46.1" N, 74° 0\' 21.6" W',
       'defaultInput': '40.7128° N, 74.0060° W',
       'note': '🧭 十进制度 ↔ 度分秒 ↔ 度分互转,N/S/E/W 方向字母任意位置都能解析(粘在数字上也行)。纬度须在 ±90°、经度 ±180° 之内;6 位小数的十进制度约合 0.11 米。',
+      'usage': '⚠️ 无法解析该坐标。支持的格式:',
     },
   },
   es: {
@@ -33,8 +34,11 @@ export const GpsCoordinateConverterL10n: ToolL10n = {
       'inputLabel': 'Coordenada (cualquier formato)',
       'outputLabel': 'Convertida a todos los formatos',
       'placeholder': "40.7128, -74.0060 o 40° 42' 46.1\" N, 74° 0' 21.6\" W",
-      'defaultInput': '40.7128° N, 74.0060° O',
+      // 西经字母必须用 W:解析器只认 N/S/E/W 国际字母(USAGE 列表同口径),
+      // 西班牙语的 "O"(Oeste)会被判为无法解析,示例不能自相矛盾
+      'defaultInput': '40.7128° N, 74.0060° W',
       'note': '🧭 Grados decimales ↔ DMS ↔ DDM, con letras N/S/E/W en cualquier posición (pegadas al número también). Latitud dentro de ±90°, longitud ±180°; los 6 decimales resuelven unos 0,11 m.',
+      'usage': '⚠️ No he podido interpretar esa coordenada. Formatos aceptados:',
     },
   },
   de: {
@@ -51,6 +55,7 @@ export const GpsCoordinateConverterL10n: ToolL10n = {
       'placeholder': "40.7128, -74.0060 oder 40° 42' 46.1\" N, 74° 0' 21.6\" W",
       'defaultInput': '40.7128° N, 74.0060° W',
       'note': '🧭 Dezimalgrade ↔ DMS ↔ DDM, Buchstaben N/S/E/W an beliebiger Position (auch direkt an der Zahl). Breite innerhalb ±90°, Länge ±180°; sechs Nachkommastellen auflösen etwa 0,11 m.',
+      'usage': '⚠️ Diese Koordinate konnte nicht gelesen werden. Unterstützte Formate:',
     },
   },
 }

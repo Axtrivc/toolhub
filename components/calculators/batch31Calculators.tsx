@@ -23,6 +23,10 @@ import { DewPointCalculatorL10n } from '@/lib/i18n/tools-l10n/dew-point-calculat
 /** 通用数字格式:去掉尾随零(fmtNum(1.5000,4) → "1.5") */
 const f = (n: number, d = 4) => fmtNum(n, d)
 
+/** 数学排版负号:组合表达式(方程/顶点/对称轴/判别式)里的负数用 U+2212,
+ *  与本批既有的 signed()/lead()/kSign 手写 − 号保持一致(纯数值结果卡仍走 f,同全站)。 */
+const minus = (n: number, d = 4) => (n < 0 ? `−${f(Math.abs(n), d)}` : f(n, d))
+
 /** 标准正态 CDF —— Abramowitz & Stegun 26.2.17 有理近似,|误差| < 7.5e-8 */
 function normCdf(z: number): number {
   const b1 = 0.319381530, b2 = -0.356563782, b3 = 1.781477937, b4 = -1.821255978, b5 = 1.330274429
@@ -89,7 +93,7 @@ export const QuadraticEquationSolverClient = makeCalculatorClient({
       return {
         x1: `${f(x)} (${L('linear', 'linear: single root')})`,
         x2: '—', discriminant: '—', vertex: '—', axis: '—',
-        form: `${f(b)}x ${c >= 0 ? '+' : '−'} ${f(Math.abs(c))} = 0`,
+        form: `${minus(b)}x ${c >= 0 ? '+' : '−'} ${f(Math.abs(c))} = 0`,
       }
     }
     const disc = b * b - 4 * a * c
@@ -104,9 +108,9 @@ export const QuadraticEquationSolverClient = makeCalculatorClient({
       return {
         x1: f(r1),
         x2: f(r2),
-        discriminant: `${f(disc)} (${L('twoRoots', 'two real roots')})`,
-        vertex: `(${f(h)}, ${f(k)})`,
-        axis: `x = ${f(h)}`,
+        discriminant: `${minus(disc)} (${L('twoRoots', 'two real roots')})`,
+        vertex: `(${minus(h)}, ${minus(k)})`,
+        axis: `x = ${minus(h)}`,
         form: `${lead(a)}(${signed(Math.max(r1, r2))})(${signed(Math.min(r1, r2))})`,
       }
     }
@@ -115,8 +119,8 @@ export const QuadraticEquationSolverClient = makeCalculatorClient({
         x1: f(h),
         x2: `${f(h)} (${L('doubleRoot', 'double root')})`,
         discriminant: `0 (${L('doubleRoot', 'double root')})`,
-        vertex: `(${f(h)}, ${f(k)})`,
-        axis: `x = ${f(h)}`,
+        vertex: `(${minus(h)}, ${minus(k)})`,
+        axis: `x = ${minus(h)}`,
         form: `${lead(a)}(${signed(h)})²`,
       }
     }
@@ -125,9 +129,9 @@ export const QuadraticEquationSolverClient = makeCalculatorClient({
     return {
       x1: `${f(re)} + ${f(Math.abs(im))}i`,
       x2: `${f(re)} − ${f(Math.abs(im))}i`,
-      discriminant: `${f(disc)} (${L('complexRoots', 'complex conjugate roots')})`,
-      vertex: `(${f(h)}, ${f(k)})`,
-      axis: `x = ${f(h)}`,
+      discriminant: `${minus(disc)} (${L('complexRoots', 'complex conjugate roots')})`,
+      vertex: `(${minus(h)}, ${minus(k)})`,
+      axis: `x = ${minus(h)}`,
       form: `${lead(a)}(${signed(h)})² ${kSign}`,
     }
   },
@@ -194,13 +198,14 @@ export const SlopeCalculatorClient = makeCalculatorClient({
     const m = (y2 - y1) / (x2 - x1)
     const b = y1 - m * x1
     const angle = (Math.atan(m) * 180) / Math.PI
-    const mTerm = m === 1 ? 'x' : m === -1 ? '−x' : m === 0 ? '' : `${f(m)}x`
-    const bTerm = m === 0 ? `${f(b)}` : b >= 0 ? `+ ${f(b)}` : `− ${f(Math.abs(b))}`
+    // 方程串是数学排版:负号统一 U+2212,项间留空格(此前 "y = -2x+ 3" 既挤又混用两种负号)
+    const mTerm = m === 1 ? 'x' : m === -1 ? '−x' : m === 0 ? '' : `${minus(m)}x`
+    const bTerm = m === 0 ? minus(b) : b >= 0 ? `+ ${f(b)}` : `− ${f(Math.abs(b))}`
     return {
       slope: f(m),
       intercept: f(b),
       angle: `${f(angle, 2)}°`,
-      equation: `y = ${mTerm}${bTerm}`,
+      equation: m === 0 ? `y = ${minus(b)}` : `y = ${mTerm} ${bTerm}`,
       perp: m === 0 ? L('perpVertical', 'undefined (vertical line)') : f(-1 / m),
     }
   },
@@ -223,7 +228,7 @@ export const SlopeCalculatorClient = makeCalculatorClient({
   presets: [
     { label: 'Gentle grade: (0, 0) → (100, 8)', values: { x1: '0', y1: '0', x2: '100', y2: '8' } },
     { label: 'Downhill: (2, 7) → (6, 3)', values: { x1: '2', y1: '7', x2: '6', y2: '3' } },
-    { label: 'Roof-like 45°: (0, 0) → (5, 5)', values: { x1: '0', y1: '0', x2: '5', y2: '5' } },
+    { label: 'Steep 45°: (0, 0) → (5, 5)', values: { x1: '0', y1: '0', x2: '5', y2: '5' } },
   ],
   note: '📏 m = (y₂ − y₁)/(x₂ − x₁) is rise over run; b = y₁ − m·x₁ anchors the line. Parallel lines share m; perpendicular lines multiply to −1 (m⊥ = −1/m). A vertical segment has undefined slope, a horizontal one m = 0.',
 })
@@ -319,7 +324,7 @@ export const ConfidenceIntervalCalculatorClient = makeCalculatorClient({
   presets: [
     { label: 'Delivery time: 4.2 ± ?, 95%', values: { mode: 'mean', mean: '4.2', sd: '1.1', n: '150', level: '95' } },
     { label: 'Poll: 55%, n = 1000, 95%', values: { mode: 'prop', p: '55', n: '1000', level: '95' } },
-    { label: 'Medical study: 99%', values: { mode: 'mean', mean: '4.2', sd: '1.1', n: '150', level: '99' } },
+    { label: 'Clinical trial: 8.4 days, n = 64, 99%', values: { mode: 'mean', mean: '8.4', sd: '2.6', n: '64', level: '99' } },
   ],
   note: '📊 Mean mode uses CI = x̄ ± z·s/√n (σ unknown, n ≥ 30 for the normal approximation to hold); proportion mode is the Wald interval p̂ ± z·√(p̂(1−p̂)/n). For small samples or proportions near 0/1 use a t-interval or the Wilson score interval instead — Wald undercovers there.',
 })
@@ -379,7 +384,9 @@ export const SampleSizeCalculatorClient = makeCalculatorClient({
       z: f(z, 3),
     }
   },
-  chart: { kind: 'series', title: 'Sample size vs margin of error (95%, p = 50%)' },
+  // 标题不带固定参数:曲线跟随当前的置信水平与 p,写死 "(95%, p = 50%)" 会在
+  // 用户改参数后与图对不上(series 与标题不同源)
+  chart: { kind: 'series', title: 'Required sample size vs margin of error' },
   series: (v) => {
     const z = Z_BY_LEVEL[v.level] ?? 1.96
     const q = toNum(v.p) / 100
@@ -554,8 +561,10 @@ export const HeatIndexCalculatorClient = makeCalculatorClient({
   ],
   compute: (v, locale) => {
     const L = (k: string, fb: string) => tuiFromEntry(HeatIndexCalculatorL10n, locale, k, fb)
-    const t = Number(v.temp)
-    const rh = Number(v.rh)
+    // toNumStrict:空串/非法显式报错,而不是 Number('') 静默折叠成 0°F 出结果
+    // (与其余 6 个 B11 工具的 errNumeric 门控同口径)
+    const t = toNumStrict(v.temp)
+    const rh = toNumStrict(v.rh)
     if (!isFinite(t) || !isFinite(rh) || rh < 0 || rh > 100) {
       return { hi: `⚠️ ${L('errInput', 'Enter a numeric temperature and humidity 0-100%')}`, hiAlt: '—', diff: '—', risk: '—' }
     }
@@ -582,7 +591,7 @@ export const HeatIndexCalculatorClient = makeCalculatorClient({
   },
   chart: { kind: 'series', title: 'Heat index vs humidity at your temperature' },
   series: (v) => {
-    const t = Number(v.temp)
+    const t = toNumStrict(v.temp)
     if (!isFinite(t)) return null
     const outF = v.tUnit === 'F'
     const tf = outF ? t : (t * 9) / 5 + 32
@@ -628,7 +637,8 @@ export const DewPointCalculatorClient = makeCalculatorClient({
   ],
   compute: (v, locale) => {
     const L = (k: string, fb: string) => tuiFromEntry(DewPointCalculatorL10n, locale, k, fb)
-    const t = Number(v.temp)
+    // toNumStrict:与 heat-index 同口径,空串/非法显式 ⚠️ 而非静默按 0°C 计算
+    const t = toNumStrict(v.temp)
     const rh = Number(v.rh)
     if (!isFinite(t) || !isFinite(rh) || rh <= 0 || rh > 100) {
       return { dewPoint: `⚠️ ${L('errInput', 'Enter a numeric temperature and humidity 1-100%')}`, dewAlt: '—', absHumidity: '—', comfort: '—' }
@@ -657,7 +667,7 @@ export const DewPointCalculatorClient = makeCalculatorClient({
   },
   chart: { kind: 'series', title: 'Dew point vs humidity at your temperature' },
   series: (v) => {
-    const t = Number(v.temp)
+    const t = toNumStrict(v.temp)
     if (!isFinite(t)) return null
     const outC = v.tUnit === 'C'
     const tc = outC ? t : ((t - 32) * 5) / 9

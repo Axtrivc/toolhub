@@ -511,13 +511,17 @@ export const EvChargingCostCalculatorClient = makeCalculatorClient({
     const gas = toNum(v.gasPrice)
     if (!(miles > 0) || !(eff > 0) || home < 0 || pub < 0 || share < 0 || share > 1 || !(mpg > 0) || gas < 0) return null
     const kwh = miles / eff
+    // 段标签按工厂 cmpseg.<si> 以「行内序号」取词典:两行各只有一个段(共用
+    // si=0),标签必须同名(与 trip-cost/membership 等既有双行对比图同一惯例),
+    // 否则 zh/es/de 的行 1 段会错用行 0 的段名(油费被标成"家充")。区别由行名承担。
     return {
       rows: [
         { label: 'EV charging', segments: [
-          { label: 'Home', value: kwh * (1 - share) * home, color: '#22c55e' },
-          { label: 'Public', value: kwh * share * pub, color: '#3b82f6' },
+          { label: 'Annual cost', value: kwh * (1 - share) * home + kwh * share * pub, color: '#22c55e' },
         ] },
-        { label: 'Gas car', segments: [{ label: 'Gasoline', value: (miles / mpg) * gas, color: '#ef4444' }] },
+        { label: 'Gas car', segments: [
+          { label: 'Annual cost', value: (miles / mpg) * gas, color: '#ef4444' },
+        ] },
       ],
       formatTotal: (n2) => fmtUSD(n2, 0),
     }

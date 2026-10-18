@@ -31,9 +31,10 @@ export const BtuCalculatorClient = makeCalculatorClient({
     { key: 'area', label: 'Room area', suffix: 'sq ft', default: '350', slider: { min: 50, max: 2000, step: 10 } },
     { key: 'ceiling', label: 'Ceiling height', suffix: 'ft', default: '8', slider: { min: 6, max: 16, step: 0.5 } },
     { key: 'sun', label: 'Sun exposure', default: 'average', options: [
-      { label: 'Heavily shaded (−10%)', value: 'shaded' },
+      // 短标签:375px 分段控件每段文字空间仅 ~90px,带百分号必截断;±10% 细节在 FAQ/note
+      { label: 'Shaded', value: 'shaded' },
       { label: 'Average', value: 'average' },
-      { label: 'Very sunny (+10%)', value: 'sunny' },
+      { label: 'Sunny', value: 'sunny' },
     ]},
     { key: 'topFloor', label: 'Top floor / attic above', default: 'no', options: [
       { label: 'No', value: 'no' },
@@ -149,6 +150,11 @@ export const BoardFootCalculatorClient = makeCalculatorClient({
     }
   },
   sample: { thickness: '1.5', width: '5.5', length: '8', qty: '10', price: '6.5' },
+  presets: [
+    { label: '2×6 × 8 ft studs (actual)', values: { thickness: '1.5', width: '5.5', length: '8', qty: '10', price: '6.5' } },
+    { label: '2×4 × 10 ft studs (actual)', values: { thickness: '1.5', width: '3.5', length: '10', qty: '20', price: '5.5' } },
+    { label: '4/4 × 8 in × 12 ft hardwood', values: { thickness: '1', width: '8', length: '12', qty: '5', price: '12' } },
+  ],
   note: "🪵 Nominal vs actual: a finished \"2×6\" measures 1.5 in × 5.5 in — that difference is ~23% of the volume. Sawmills quote per board foot (BDFT) or per MBF (1,000 bf); this tool's math is the industry T×W×(L÷12).",
 })
 
@@ -209,6 +215,11 @@ export const WallpaperCalculatorClient = makeCalculatorClient({
     }
   },
   sample: { perimeter: '48', height: '8', doors: '2', windows: '2', rollWidth: '27', rollLength: '33', repeat: '10' },
+  presets: [
+    { label: '12×12 ft room', values: { perimeter: '48', height: '8', doors: '2', windows: '2', rollWidth: '27', rollLength: '33', repeat: '10' } },
+    { label: 'Single accent wall', values: { perimeter: '14', height: '9', doors: '0', windows: '0', rollWidth: '27', rollLength: '33', repeat: '0' } },
+    { label: 'Euro roll, 10 ft ceiling', values: { perimeter: '40', height: '10', doors: '1', windows: '1', rollWidth: '21', rollLength: '33', repeat: '18' } },
+  ],
   chart: { kind: 'compare', title: 'Double vs single rolls' },
   compare: (v) => {
     const perimeter = toNum(v.perimeter), height = toNum(v.height)
@@ -242,11 +253,13 @@ export const RaisedBedSoilCalculatorClient = makeCalculatorClient({
   urlState: true,
   inputs: [
     { key: 'unit', label: 'Units', default: 'ft', options: [
-      { label: 'Feet & inches (imperial)', value: 'ft' },
-      { label: 'Meters & cm (metric)', value: 'm' },
+      // 短标签:375px 分段控件每段 ~170px,括注 (imperial/metric) 会被截断
+      { label: 'Feet & inches', value: 'ft' },
+      { label: 'Meters & cm', value: 'm' },
     ]},
     { key: 'length', label: 'Bed length', default: '8', slider: { min: 1, max: 40, step: 0.5 } },
-    { key: 'width', label: 'Bed width', default: '4', slider: { min: 1, max: 20, step: 0.5 } },
+    // min 0.5:公制阳台床(0.5 m 宽)能落在滑杆行程内,英制 6 in 窄槽也覆盖
+    { key: 'width', label: 'Bed width', default: '4', slider: { min: 0.5, max: 20, step: 0.5 } },
     { key: 'depth', label: 'Bed depth', default: '12', slider: { min: 2, max: 48, step: 1 } },
   ],
   outputs: [
@@ -328,8 +341,9 @@ export const PoolVolumeCalculatorClient = makeCalculatorClient({
   urlState: true,
   inputs: [
     { key: 'shape', label: 'Pool shape', default: 'rect', options: [
-      { label: 'Rectangular', value: 'rect' },
-      { label: 'Round (length = diameter)', value: 'round' },
+      // 短标签:375px 分段控件放不下括注;"长=直径"已由 Length 字段标签表达
+      { label: 'Rectangle', value: 'rect' },
+      { label: 'Round', value: 'round' },
       { label: 'Kidney', value: 'kidney' },
     ]},
     { key: 'length', label: 'Length / diameter', suffix: 'ft', default: '32', slider: { min: 4, max: 80, step: 0.5 } },
@@ -379,6 +393,11 @@ export const PoolVolumeCalculatorClient = makeCalculatorClient({
     }
   },
   sample: { shape: 'rect', length: '32', width: '16', width2: '10', depth: '5', flow: '60' },
+  presets: [
+    { label: '16×32 in-ground', values: { shape: 'rect', length: '32', width: '16', depth: '5', flow: '60' } },
+    { label: '24 ft round above-ground', values: { shape: 'round', length: '24', width: '12', depth: '4', flow: '40' } },
+    { label: 'Kidney freeform', values: { shape: 'kidney', length: '30', width: '14', width2: '10', depth: '5.5', flow: '55' } },
+  ],
   note: '🏊 Average depth on a sloped floor ≈ (shallow end + deep end) ÷ 2; 1 ft³ = 7.48 gal. Residential guidance turns the full volume over every 8-12 hours. Circulation sizing only — this is not water-chemistry dosing advice.',
 })
 
@@ -503,7 +522,13 @@ export const BreadHydrationCalculatorClient = makeCalculatorClient({
     title: 'Hydration class',
     valueKey: 'hydration',
     min: 40,
-    max: 100,
+    // max 为函数:输入非法时返回 0(≤min),工厂据 maxVal<=min 判定不出图 ——
+    // 否则错误文案里的 "0" 会被 parseNumeric 当成水合度,仪表盘画出一根假指针
+    max: (v) => {
+      const f = toNumStrict(v.flour)
+      const w = toNumStrict(v.water)
+      return isNaN(f) || f <= 0 || isNaN(w) || w < 0 ? 0 : 100
+    },
     zones: [
       { upTo: 58, color: '#94a3b8', label: 'Stiff — bagels' },
       { upTo: 68, color: '#3b82f6', label: 'Standard loaf' },

@@ -26,6 +26,9 @@ export const WeekNumberCalculatorL10n: ToolL10n = {
       'note': '🗓️ ISO 8601 周从周一开始,包含当年第一个周四的那周为第 1 周——所以 1 月 1 日可能落在上一年的 W52/W53(2027-01-01 属于 2026-W53)。美国"含 1/1 的周为第 1 周"的口径在部分年份会偏移一周。',
       'errDate': '日期请按 YYYY-MM-DD 填写',
       'weekFmt': '{y}-W{w}',
+      'preset.0': '2026-01-01 → W1',
+      'preset.1': '2026-12-28 → W53',
+      'preset.2': '2027-01-01 → 仍是 2026 年!',
     },
   },
   es: {
@@ -49,6 +52,9 @@ export const WeekNumberCalculatorL10n: ToolL10n = {
       'note': '🗓️ Las semanas ISO 8601 empiezan el lunes y la semana 1 contiene el primer jueves del año — el 1 de enero puede caer en la W52/W53 anterior (el 2027-01-01 es 2026-W53). El criterio estadounidense («semana del 1/1») se desvía una semana en algunos años.',
       'errDate': 'Introduce la fecha como AAAA-MM-DD',
       'weekFmt': '{y}-W{w}',
+      'preset.0': '1 ene 2026 → S1',
+      'preset.1': '28 dic 2026 → S53',
+      'preset.2': '1 ene 2027 → ¡todavía 2026!',
     },
   },
   de: {
@@ -72,6 +78,9 @@ export const WeekNumberCalculatorL10n: ToolL10n = {
       'note': '🗓️ ISO-8601-Wochen beginnen montags; Woche 1 enthält den ersten Donnerstag des Jahres — der 1. Januar kann daher in die Vorjahres-KW 52/53 fallen (01.01.2027 ist KW 53/2026). Das US-System (Woche des 1.1.) weicht in manchen Jahren um eine Woche ab.',
       'errDate': 'Datum als JJJJ-MM-TT eingeben',
       'weekFmt': 'KW {w}/{y}',
+      'preset.0': '1. Jan 2026 → KW 1',
+      'preset.1': '28. Dez 2026 → KW 53',
+      'preset.2': '1. Jan 2027 → noch 2026!',
     },
   },
 }

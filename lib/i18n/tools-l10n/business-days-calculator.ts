@@ -30,6 +30,9 @@ export const BusinessDaysCalculatorL10n: ToolL10n = {
       'errCount': '工作日数至少为 1',
       'errRange': '工作日数过多——逐日推算最多支持约 2,850 个工作日(约 11 年)',
       'none': '区间内无',
+      'preset.0': '感恩节那一周',
+      'preset.1': '往后 30 个工作日',
+      'preset.2': '往前 10 个工作日',
     },
   },
   es: {
@@ -57,6 +60,9 @@ export const BusinessDaysCalculatorL10n: ToolL10n = {
       'errCount': 'Los días hábiles deben ser al menos 1',
       'errRange': 'Demasiados días hábiles: el recuento día a día se detiene en unos 2.850 días hábiles (~11 años)',
       'none': 'Ninguno en el rango',
+      'preset.0': 'Semana de Acción de Gracias',
+      'preset.1': '30 días hábiles después',
+      'preset.2': '10 días hábiles antes',
     },
   },
   de: {
@@ -84,6 +90,9 @@ export const BusinessDaysCalculatorL10n: ToolL10n = {
       'errCount': 'Werktage müssen mindestens 1 sein',
       'errRange': 'Zu viele Werktage — die Tag-für-Tag-Rechnung endet bei etwa 2.850 Werktagen (~11 Jahre)',
       'none': 'Keine im Zeitraum',
+      'preset.0': 'Thanksgiving-Woche',
+      'preset.1': '30 Werktage später',
+      'preset.2': '10 Werktage zurück',
     },
   },
 }

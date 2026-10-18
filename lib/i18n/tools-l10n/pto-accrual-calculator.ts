@@ -41,6 +41,10 @@ export const PtoAccrualCalculatorL10n: ToolL10n = {
       'negative': '负数——预支了未累积的假期',
       'useIt': '12 月 31 日前安排休假',
       'noneLost': '无——全部结转',
+      'chartCenter': '年度额度',
+      'preset.0': '美国标准(2 周)',
+      'preset.1': '科技公司优厚(4 周)',
+      'preset.2': '过期作废制',
     },
   },
   es: {
@@ -79,6 +83,10 @@ export const PtoAccrualCalculatorL10n: ToolL10n = {
       'negative': 'negativo — vacaciones anticipadas',
       'useIt': 'planifica vacaciones antes del 31 de diciembre',
       'noneLost': 'Nada — todo se transfiere',
+      'chartCenter': 'Asignación anual',
+      'preset.0': 'EE. UU. estándar (2 semanas)',
+      'preset.1': 'Tech generoso (4 semanas)',
+      'preset.2': 'Úsalo o piérdelo',
     },
   },
   de: {
@@ -117,6 +125,10 @@ export const PtoAccrualCalculatorL10n: ToolL10n = {
       'negative': 'negativ — vorgezogener Urlaub',
       'useIt': 'Urlaub vor dem 31. Dezember planen',
       'noneLost': 'Kein Verfall — alles wird übertragen',
+      'chartCenter': 'Jahresanspruch',
+      'preset.0': 'US-Standard (2 Wochen)',
+      'preset.1': 'Großzügige Tech-Firma (4 Wochen)',
+      'preset.2': 'Use-it-or-lose-it',
     },
   },
 }

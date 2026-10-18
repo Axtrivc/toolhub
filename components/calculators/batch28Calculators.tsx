@@ -87,9 +87,9 @@ export const ConcreteCalculatorClient = makeCalculatorClient({
     return {
       buyYd: `${fmtNum(withWaste / 27, 2)} yd³`,
       volFt: `${fmtNum(ft3, 1)} ft³`,
-      bags80: `${Math.ceil(withWaste / 0.6)}`,
-      bags60: `${Math.ceil(withWaste / 0.45)}`,
-      bags40: `${Math.ceil(withWaste / 0.3)}`,
+      bags80: fmtNum(Math.ceil(withWaste / 0.6), 0),
+      bags60: fmtNum(Math.ceil(withWaste / 0.45), 0),
+      bags40: fmtNum(Math.ceil(withWaste / 0.3), 0),
     }
   },
   chart: { kind: 'compare', title: 'Exact volume vs order volume' },
@@ -166,8 +166,8 @@ export const MulchCalculatorClient = makeCalculatorClient({
     return {
       mulchYd: `${fmtNum(cf / 27, 2)} yd³`,
       mulchCf: `${fmtNum(cf, 1)} ft³`,
-      bags2cf: `${bags2}`,
-      bags3cf: `${bags3}`,
+      bags2cf: fmtNum(bags2, 0),
+      bags3cf: fmtNum(bags3, 0),
       cost: fmtUSD(bags * price),
     }
   },
@@ -205,7 +205,7 @@ export const GravelCalculatorClient = makeCalculatorClient({
   inputs: [
     { key: 'length', label: 'Area length', suffix: 'ft', default: '20', slider: { min: 1, max: 400, step: 1 } },
     { key: 'width', label: 'Area width', suffix: 'ft', default: '10', slider: { min: 1, max: 200, step: 1 } },
-    { key: 'depth', label: 'Depth', suffix: 'in', default: '3', slider: { min: 1, max: 12, step: 0.5 } },
+    { key: 'depth', label: 'Depth', suffix: 'in', default: '3', slider: { min: 1, max: 24, step: 0.5 } },
     { key: 'material', label: 'Material', default: 'crushed', options: [
       // 标签保持 ≤10 字符:3 段分段控件在 375px 下每段约 78px 可用,密度数值放 note
       { label: 'Crushed', value: 'crushed' },
@@ -306,9 +306,9 @@ export const DrywallCalculatorClient = makeCalculatorClient({
     const screwLb = Math.ceil(total / 250) // ≈1 螺丝/ft²,300 颗/lb
     const mudGal = total * 0.01 // 贴带 + 三道腻子
     return {
-      sheets: `${sheets} × ${sheetArea === 48 ? '4×12' : '4×8'}`,
+      sheets: `${fmtNum(sheets, 0)} × ${sheetArea === 48 ? '4×12' : '4×8'}`,
       totalArea: `${fmtNum(total, 0)} ft²`,
-      screws: `${screwLb} lb`,
+      screws: `${fmtNum(screwLb, 0)} lb`,
       mud: `${fmtNum(mudGal, 1)} gal (${Math.ceil(mudGal / 4.5)} × 4.5 gal)`,
     }
   },
@@ -379,11 +379,11 @@ export const RoofingCalculatorClient = makeCalculatorClient({
     const buyArea = area * (1 + waste / 100)
     const buySq = buyArea / 100
     return {
-      bundles: `${Math.ceil(buySq * 3)}`,
+      bundles: fmtNum(Math.ceil(buySq * 3), 0),
       roofArea: `${fmtNum(area, 0)} ft²`,
       squares: `${fmtNum(area / 100, 2)} sq`,
       buySq: `${fmtNum(buySq, 2)} sq`,
-      rolls: `${Math.ceil(buyArea / 400)}`,
+      rolls: fmtNum(Math.ceil(buyArea / 400), 0),
     }
   },
   chart: { kind: 'compare', title: 'Bundles rise with pitch' },
@@ -462,11 +462,11 @@ export const FenceCalculatorClient = makeCalculatorClient({
     const holeFt3 = Math.PI * (holeD / 24) ** 2 * (holeDepth / 12)
     const bags = Math.ceil((posts * holeFt3) / 0.6)
     return {
-      posts: `${posts}`,
-      sections: `${sections}`,
-      pickets: isPrivacy ? `${pickets}` : T('notApplicable', 'n/a for rail fence'),
-      rails: `${rails}`,
-      bags: `${bags}`,
+      posts: fmtNum(posts, 0),
+      sections: fmtNum(sections, 0),
+      pickets: isPrivacy ? fmtNum(pickets, 0) : T('notApplicable', 'n/a for rail fence'),
+      rails: fmtNum(rails, 0),
+      bags: fmtNum(bags, 0),
     }
   },
   chart: { kind: 'compare', title: 'Post count by spacing' },
@@ -535,7 +535,7 @@ export const PaverCalculatorClient = makeCalculatorClient({
     const gravelCf = area * (base / 12)
     const sandCf = area * (1 / 12)
     return {
-      pavers: `${pavers}`,
+      pavers: fmtNum(pavers, 0),
       area: `${fmtNum(area, 0)} ft²`,
       gravelYd: `${fmtNum(gravelCf / 27, 2)} yd³`,
       sandYd: `${fmtNum(sandCf / 27, 2)} yd³`,
@@ -607,9 +607,9 @@ export const DeckBoardCalculatorClient = makeCalculatorClient({
     const boards = Math.ceil((lineal * 1.1) / boardLen)
     const joists = Math.ceil(l / (joistSp / 12)) + 1
     return {
-      boards: `${boards} × ${boardLen} ft`,
+      boards: `${fmtNum(boards, 0)} × ${boardLen} ft`,
       lineal: `${fmtNum(lineal, 0)} ft`,
-      joists: `${joists}`,
+      joists: fmtNum(joists, 0),
       area: `${fmtNum(area, 0)} ft²`,
     }
   },

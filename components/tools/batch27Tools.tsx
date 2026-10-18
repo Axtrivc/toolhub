@@ -3,6 +3,7 @@
 import { useMemo, useState, useCallback } from 'react'
 import { CalculatorField, ResultCard, CalculatorNote } from '@/components/calculator/CalculatorField'
 import { LoadSampleButton } from '@/components/LoadSampleButton'
+import { ResultActions } from '@/components/ResultActions'
 import { useApp } from '@/components/providers/AppProviders'
 import { tuiFromEntry } from '@/lib/i18n/tool-l10n-core'
 import { fmtNum } from '@/lib/format'
@@ -113,15 +114,42 @@ export function ShoeSizeConverterClient() {
   const [group, setGroup] = useState<Group>('men')
   const [system, setSystem] = useState<System>('us')
   const [value, setValue] = useState('9')
+  // 覆盖确认态(与工厂工具同款):用户已有输入时,Load Sample 第一次点击只 arm,
+  // 按钮变「Overwrite?」;再点才真正填充 —— 避免误触毁掉用户手填的尺码
+  const [dirty, setDirty] = useState(false)
+  const [sampleArmed, setSampleArmed] = useState(false)
 
   const rows = GROUP_ROWS[group]
   const matched = useMemo(() => lookupRow(rows, system, value), [rows, system, value])
 
-  const handleLoadSample = useCallback(() => {
+  const handleInput = useCallback((v: string) => {
+    setValue(v)
+    setDirty(true)
+    setSampleArmed(false)
+  }, [])
+
+  const pickGroup = useCallback((g: Group) => {
+    setGroup(g)
+    setDirty(true)
+    setSampleArmed(false)
+  }, [])
+
+  const pickSystem = useCallback((s: System) => {
+    setSystem(s)
+    setDirty(true)
+    setSampleArmed(false)
+  }, [])
+
+  const handleLoadSample = useCallback((): void | false => {
+    if (dirty && !sampleArmed) {
+      setSampleArmed(true)
+      return false
+    }
     setGroup('men')
     setSystem('us')
     setValue('9')
-  }, [])
+    setSampleArmed(false)
+  }, [dirty, sampleArmed])
 
   const groupTabs: { key: Group; label: string }[] = [
     { key: 'men', label: L('tab.men', 'Men') },
@@ -136,6 +164,8 @@ export function ShoeSizeConverterClient() {
   ]
 
   const usSub = group === 'women' ? L('tab.women', 'Women') : group === 'men' ? L('tab.men', 'Men') : L('tab.kids', 'Kids')
+  const valueLabel = system === 'cm' ? L('in.valueCm', 'Foot length (cm)') : L('in.value', 'Size to convert')
+  const valueSuffix = system === 'cm' ? 'cm' : system.toUpperCase()
 
   return (
     <div className="space-y-6">
@@ -145,7 +175,7 @@ export function ShoeSizeConverterClient() {
           <button
             key={g.key}
             type="button"
-            onClick={() => setGroup(g.key)}
+            onClick={() => pickGroup(g.key)}
             aria-pressed={group === g.key}
             className={`rounded-lg px-4 py-2 text-sm font-medium transition ${
               group === g.key
@@ -162,7 +192,7 @@ export function ShoeSizeConverterClient() {
         <span className="text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>
           {L('in.system', 'Convert from')}
         </span>
-        <LoadSampleButton onLoad={handleLoadSample} />
+        <LoadSampleButton onLoad={handleLoadSample} confirmOverwrite={sampleArmed} onDisarm={() => setSampleArmed(false)} />
       </div>
       {/* 输入体系切换 */}
       <div className="flex flex-wrap gap-2">
@@ -170,7 +200,7 @@ export function ShoeSizeConverterClient() {
           <button
             key={s.key}
             type="button"
-            onClick={() => setSystem(s.key)}
+            onClick={() => pickSystem(s.key)}
             aria-pressed={system === s.key}
             className={`rounded-lg px-4 py-2 text-sm font-medium transition ${
               system === s.key
@@ -186,10 +216,10 @@ export function ShoeSizeConverterClient() {
       <div className="grid grid-cols-1 gap-4 rounded-lg p-4 sm:grid-cols-2" style={{ backgroundColor: 'rgb(var(--bg-subtle))' }}>
         <CalculatorField
           id="size-value"
-          label={system === 'cm' ? L('in.valueCm', 'Foot length (cm)') : L('in.value', 'Size to convert')}
+          label={valueLabel}
           value={value}
-          onChange={setValue}
-          suffix={system === 'cm' ? 'cm' : system.toUpperCase()}
+          onChange={handleInput}
+          suffix={valueSuffix}
           placeholder={system === 'cm' ? '27' : '9'}
         />
       </div>
@@ -237,6 +267,34 @@ export function ShoeSizeConverterClient() {
           </table>
         </div>
       </div>
+
+      {/* 结果操作行:复制摘要 / 下载 / 打印,与工厂计算器同一组件同一形态 */}
+      <ResultActions
+        summary={
+          [
+            L('summaryTitle', 'Shoe Size Conversion'),
+            `${valueLabel}: ${value} ${valueSuffix}`,
+            matched
+              ? `${L('out.us', 'US size')}: ${matched.label} · ${L('out.uk', 'UK size')}: ${trim1(matched.uk)} · ${L('out.eu', 'EU size')}: ${trim1(matched.eu)} · ${L('out.cm', 'Foot length (cm)')}: ${fmtNum(matched.cm, 1)} cm`
+              : L('errInvalid', 'Enter a valid size value'),
+          ].join('\n')
+        }
+        filename="shoe-size-conversion.txt"
+        downloadContent={
+          matched
+            ? [
+                L('summaryTitle', 'Shoe Size Conversion'),
+                `${valueLabel}: ${value} ${valueSuffix}`,
+                `${L('out.us', 'US size')}: ${matched.label}`,
+                `${L('out.uk', 'UK size')}: ${trim1(matched.uk)}`,
+                `${L('out.eu', 'EU size')}: ${trim1(matched.eu)}`,
+                `${L('out.cm', 'Foot length (cm)')}: ${fmtNum(matched.cm, 1)} cm`,
+              ].join('\n')
+            : L('errInvalid', 'Enter a valid size value')
+        }
+        copyLabel={L('copySummary', 'Copy Summary')}
+        disabled={!matched}
+      />
 
       <CalculatorNote>
         {L('note', '📏 Conversion is by lookup table, not a formula: US and UK differ by ~0.5 sizes, US women\'s runs +1.5 over men\'s, and EU uses Paris points (2/3 cm). Brands vary by ±1 size — check the manufacturer\'s chart before buying.')}

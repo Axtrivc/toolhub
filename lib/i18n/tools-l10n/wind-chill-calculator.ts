@@ -34,6 +34,9 @@ export const WindChillCalculatorL10n: ToolL10n = {
       'errInput': '气温与风速请填数字',
       'inRange': '有效——在公式适用范围内',
       'outRange': '超出范围——公式仅在 ≤10°C(50°F)、风速 >4.8 km/h 时有效',
+      'preset.0': '霜晨步行',
+      'preset.1': '北欧寒风',
+      'preset.2': '美制单位(23°F、19 mph)',
     },
   },
   es: {
@@ -65,6 +68,9 @@ export const WindChillCalculatorL10n: ToolL10n = {
       'errInput': 'Introduce temperatura y viento numéricos',
       'inRange': 'Válido — dentro del rango de la fórmula',
       'outRange': 'Fuera de rango — válido hasta 10 °C (50 °F) y con viento superior a 4,8 km/h',
+      'preset.0': 'Paseo matinal de escarcha',
+      'preset.1': 'Viento nórdico',
+      'preset.2': 'Unidades EE. UU. (23 °F, 19 mph)',
     },
   },
   de: {
@@ -96,6 +102,9 @@ export const WindChillCalculatorL10n: ToolL10n = {
       'errInput': 'Temperatur und Wind als Zahlen eingeben',
       'inRange': 'Gültig — innerhalb des Formelbereichs',
       'outRange': 'Außerhalb des Bereichs — gültig bis 10 °C (50 °F) und über 4,8 km/h Wind',
+      'preset.0': 'Frostiger Morgenspaziergang',
+      'preset.1': 'Nordischer Eiswind',
+      'preset.2': 'US-Einheiten (23 °F, 19 mph)',
     },
   },
 }

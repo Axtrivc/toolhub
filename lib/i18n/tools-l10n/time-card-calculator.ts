@@ -36,6 +36,10 @@ export const TimeCardCalculatorL10n: ToolL10n = {
       'errSpan': '休息时长超过班次总长——请核对上下班时刻',
       'otFlag': '已越线',
       'noOt': '无——仍在门槛内',
+      'chartCenter': '本周合计',
+      'preset.0': '标准朝九晚五',
+      'preset.1': '跨夜班',
+      'preset.2': '周六加班',
     },
   },
   es: {
@@ -69,6 +73,10 @@ export const TimeCardCalculatorL10n: ToolL10n = {
       'errSpan': 'El descanso supera la duración del turno — revisa las horas',
       'otFlag': 'umbral superado',
       'noOt': 'Ninguna — aún bajo el umbral',
+      'chartCenter': 'Total semanal',
+      'preset.0': 'Oficina de 9 a 5',
+      'preset.1': 'Turno de noche',
+      'preset.2': 'Extra el sábado',
     },
   },
   de: {
@@ -102,6 +110,10 @@ export const TimeCardCalculatorL10n: ToolL10n = {
       'errSpan': 'Die Pause ist länger als die Schicht — Zeiten prüfen',
       'otFlag': 'Schwelle überschritten',
       'noOt': 'Keine — noch unter der Schwelle',
+      'chartCenter': 'Wochensumme',
+      'preset.0': 'Büro 9 bis 17 Uhr',
+      'preset.1': 'Nachtschicht',
+      'preset.2': 'Samstags-Überstunden',
     },
   },
 }

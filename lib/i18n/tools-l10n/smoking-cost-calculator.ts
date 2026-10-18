@@ -35,7 +35,7 @@ export const SmokingCostCalculatorL10n: ToolL10n = {
       'chartTitle': '烧掉的钱 vs 投资的钱(十年)',
       'line.smoked': '累计烟钱',
       'line.invested': '同额投资价值',
-      'note': '🚬 每天一包、每包 $12,一年就是约 $4,380——相当于一份像样的车贷或一份打满的 Roth IRA。投资线假设每年的钱按你设定的收益一次性投入;戒烟还能赎回本工具无法定价的时间、肺与保险附加费。',
+      'note': '🚬 每天一包、每包 $12,一年就是约 $4,380——相当于一份像样的车贷,或大半份打满的 Roth IRA。投资线假设每年的钱按你设定的收益一次性投入;戒烟还能赎回本工具无法定价的时间、肺与保险附加费。',
     },
   },
   es: {
@@ -69,7 +69,7 @@ export const SmokingCostCalculatorL10n: ToolL10n = {
       'chartTitle': 'Dinero quemado vs invertido (10 años)',
       'line.smoked': 'Tabaco acumulado',
       'line.invested': 'Mismo dinero invertido',
-      'note': '🚬 Un paquete al día a 12 $ son unos 4.380 $ al año — el precio de un buen coche a plazos o de un Roth IRA completo. La línea de inversión supone que el dinero anual entra de una vez a la rentabilidad elegida; dejar de fumar además devuelve horas, pulmones y recargos de seguro que esta herramienta no puede tasar.',
+      'note': '🚬 Un paquete al día a 12 $ son unos 4.380 $ al año — el precio de un buen coche a plazos o de la mayor parte de un Roth IRA completo. La línea de inversión supone que el dinero anual entra de una vez a la rentabilidad elegida; dejar de fumar además devuelve horas, pulmones y recargos de seguro que esta herramienta no puede tasar.',
     },
   },
   de: {
@@ -103,7 +103,7 @@ export const SmokingCostCalculatorL10n: ToolL10n = {
       'chartTitle': 'Verbranntes vs. angelegtes Geld (10 Jahre)',
       'line.smoked': 'Kumulierte Rauchkosten',
       'line.invested': 'Gleiches Geld investiert',
-      'note': '🚬 Eine Schachtel täglich zu 12 $ sind rund 4.380 $ im Jahr — eine ordentliche Autorate oder ein voller Roth-IRA. Die Investitionslinie legt das Jahresgeld einmal jährlich zur gewählten Rendite an; mit dem Aufhören bekommst du zusätzlich Stunden, Lunge und Versicherungszuschläge zurück, die dieser Rechner nicht beziffern kann.',
+      'note': '🚬 Eine Schachtel täglich zu 12 $ sind rund 4.380 $ im Jahr — eine ordentliche Autorate oder der Großteil eines vollen Roth-IRA. Die Investitionslinie legt das Jahresgeld einmal jährlich zur gewählten Rendite an; mit dem Aufhören bekommst du zusätzlich Stunden, Lunge und Versicherungszuschläge zurück, die dieser Rechner nicht beziffern kann.',
     },
   },
 }

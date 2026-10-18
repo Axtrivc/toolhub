@@ -9,6 +9,7 @@
 
 import { useMemo, useState } from 'react'
 import { ResultCard, CalculatorNote } from '../calculator/CalculatorField'
+import { PresetChips } from '../calculator/PresetChips'
 import { ResultActions } from '../ResultActions'
 import { LoadSampleButton } from '../LoadSampleButton'
 import { useApp } from '@/components/providers/AppProviders'
@@ -63,11 +64,9 @@ export function GeneratorWattageCalculatorClient() {
     setQty(next)
   }
 
-  const applyPreset = (on: string[]) => {
-    const next: QtyMap = {}
-    for (const id of on) next[id] = 1
-    setQty(next)
-  }
+  // 与工厂一致:有任何勾选即出现 Reset,一键回到空选状态
+  const hasSelection = Object.keys(qty).some((k) => (qty[k] ?? 0) > 0)
+  const handleReset = () => setQty({})
 
   const setOne = (id: string, v: number) => {
     setQty((prev) => {
@@ -106,23 +105,35 @@ export function GeneratorWattageCalculatorClient() {
         <span className="text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>
           {L('pickAppliances', 'Pick what you need to run')}
         </span>
-        {sample && <LoadSampleButton onLoad={loadSample} />}
+        <div className="flex items-center gap-2">
+          {hasSelection && (
+            <button
+              type="button"
+              onClick={handleReset}
+              className="rounded-lg border px-3 py-1.5 text-sm transition-colors hover:bg-slate-100 dark:border-slate-600 dark:hover:bg-slate-800"
+              style={{ borderColor: 'rgb(var(--border-strong))', color: 'rgb(var(--text-muted))' }}
+            >
+              {L('reset', 'Reset')}
+            </button>
+          )}
+          {sample && <LoadSampleButton onLoad={loadSample} />}
+        </div>
       </div>
 
-      {/* 场景预设 */}
-      <div className="flex flex-wrap gap-2">
-        {PRESETS.map((p) => (
-          <button
-            key={p.label}
-            type="button"
-            onClick={() => applyPreset(p.on)}
-            className="rounded-full border px-3 py-1 text-xs font-medium transition-colors hover:opacity-80"
-            style={{ borderColor: 'rgb(var(--border-strong))', color: 'rgb(var(--text-muted))' }}
-          >
-            {L(`preset.${PRESETS.indexOf(p)}`, p.label)}
-          </button>
-        ))}
-      </div>
+      {/* 场景预设(与工厂 PresetChips 同款交互/hover/暗色样式) */}
+      <PresetChips
+        presets={PRESETS.map((p) => {
+          const values: Record<string, string> = {}
+          for (const id of p.on) values[id] = '1'
+          return { label: p.label, values }
+        })}
+        labelOf={(fb, i) => L(`preset.${i}`, fb)}
+        onApply={(values) => {
+          const next: QtyMap = {}
+          for (const id of Object.keys(values)) next[id] = 1
+          setQty(next)
+        }}
+      />
 
       {/* 电器清单:勾选 + 数量 */}
       <div className="grid grid-cols-1 gap-2 rounded-lg p-4 sm:grid-cols-2" style={{ backgroundColor: 'rgb(var(--bg-subtle))' }}>
@@ -170,7 +181,8 @@ export function GeneratorWattageCalculatorClient() {
         <ResultCard label={L('surgeLoad', 'Starting surge')} value={result ? fmtW(result.surge) : '—'} />
         <ResultCard
           label={L('recommended', 'Recommended generator')}
-          highlight
+          highlight={!!result && !!result.rec}
+          error={!!result && !result.rec}
           value={result ? (result.rec ? fmtW(result.rec) : `⚠️ ${L('tooBig', 'Beyond a single portable unit')}`) : '—'}
         />
       </div>

@@ -35,6 +35,9 @@ export const DownloadTimeCalculatorL10n: ToolL10n = {
       'cmpseg.0': '传输耗时',
       'note': '📡 运营商卖兆位(Mb),文件是兆字节(MB)——差 8 倍,还没算开销。TCP/IP 头部、重传与 Wi-Fi 争用再吃掉 10-15%;"有效吞吐"才是诚实数字。上传同理,把速度换成上传带宽即可(通常慢得多)。',
       'errInput': '文件大小与速度必须是正数',
+      'preset.0': '流媒体电影(4.5 GB)',
+      'preset.1': '游戏下载(80 GB)',
+      'preset.2': '照片批量(500 MB)',
     },
   },
   es: {
@@ -67,6 +70,9 @@ export const DownloadTimeCalculatorL10n: ToolL10n = {
       'cmpseg.0': 'Tiempo de transferencia',
       'note': '📡 Tu proveedor vende megabits (Mb), los archivos son megabytes (MB): 8× de diferencia antes de la sobrecarga. Cabeceras TCP/IP, retransmisiones y Wi-Fi se comen otro 10-15 %; el «rendimiento efectivo» es la cifra honesta. La subida es la misma fórmula con tu velocidad de subida.',
       'errInput': 'El tamaño y la velocidad deben ser números positivos',
+      'preset.0': 'Película en streaming (4,5 GB)',
+      'preset.1': 'Descarga de juego (80 GB)',
+      'preset.2': 'Lote de fotos (500 MB)',
     },
   },
   de: {
@@ -99,6 +105,9 @@ export const DownloadTimeCalculatorL10n: ToolL10n = {
       'cmpseg.0': 'Übertragungsdauer',
       'note': '📡 Anbieter verkaufen Megabits (Mb), Dateien sind Megabytes (MB) — Faktor 8, bevor der Overhead kommt. TCP/IP-Header, Retransmits und WLAN kosten weitere 10–15 %; der „effektive Durchsatz“ ist die ehrliche Zahl. Upload: gleiche Formel mit deiner Upload-Rate.',
       'errInput': 'Dateigröße und Geschwindigkeit müssen positiv sein',
+      'preset.0': 'Streaming-Film (4,5 GB)',
+      'preset.1': 'Spiele-Download (80 GB)',
+      'preset.2': 'Fotostapel (500 MB)',
     },
   },
 }

@@ -35,7 +35,9 @@ export const OvulationCalculatorClient = makeCalculatorClient({
   inputs: [
     { key: 'lmp', label: 'First day of last period (YYYY-MM-DD)', default: '2026-10-01', type: 'text', placeholder: 'YYYY-MM-DD' },
     { key: 'cycle', label: 'Cycle length', suffix: 'days', default: '28', slider: { min: 21, max: 45, step: 1 } },
-    { key: 'luteal', label: 'Luteal phase length', suffix: 'days', default: '14', slider: { min: 10, max: 16, step: 1 } },
+    // 滑杆 min 与 compute/deriveNow 校验、错误文案(9-16)对齐:免得手输 9 时
+    // 数字框与滑杆位置各说各话(滑杆停在 10 的位置)
+    { key: 'luteal', label: 'Luteal phase length', suffix: 'days', default: '14', slider: { min: 9, max: 16, step: 1 } },
   ],
   outputs: [
     { key: 'ovulation', label: 'Estimated ovulation day', highlight: true },
@@ -210,7 +212,10 @@ export const PregnancyWeightGainCalculatorClient = makeCalculatorClient({
     min: 0,
     max: (v) => {
       const m = pregnancyModel(v)
-      if (m === null || 'twinsUnder' in m) return 20
+      // 无效输入 / 偏瘦双胎(无 IOM 区间)返回 NaN:工厂按「解析失败静默不出图」
+      // 隐藏仪表(makeCalculatorClient 的 !Number.isFinite(maxVal) 分支),
+      // 避免红色 ⚠️ 卡下方还挂着一根停在 0 的指针
+      if (m === null || 'twinsUnder' in m) return NaN
       return Math.max(m.expHi * 1.5 + 2, m.gain + 1.5)
     },
     zones: (v) => {
@@ -345,7 +350,10 @@ export const CatAgeCalculatorClient = makeCalculatorClient({
     valueKey: 'humanAge',
     min: 0,
     max: (v) => {
-      const age = toNum(v.catAge)
+      // 与 compute 同一口径判无效:返回 NaN 让工厂隐藏仪表,避免错误卡
+      // 下方出现一根停在 0、区间带照常显示的"假"仪表
+      const age = toNumStrict(v.catAge)
+      if (Number.isNaN(age) || age < 0 || age > 25) return NaN
       const human = age <= 1 ? age * 15 : age <= 2 ? 15 + (age - 1) * 9 : 24 + (age - 2) * 4
       return Math.max(96, human + 8)
     },
@@ -409,6 +417,9 @@ export const CatFoodCalculatorClient = makeCalculatorClient({
       return {
         mer: `⚠️ ${T('errInvalid', 'Enter a weight of 0.5-15 kg and positive label values')}`,
         rer: '—', activityExtra: '—', cans: '—', grams: '—',
+        // 图表隐藏输出归零 → donut 无非零切片自动隐藏(否则 ⚠️ 文案里的
+        // "0.5-15" 会被 parseNumeric 提取成 0.5,画出两块假切片)
+        chartRer: '0 kcal/day', chartActivity: '0 kcal/day',
       }
     }
     // RER = 70 × kg^0.75(与犬同一公式);MER = RER × 猫用生命阶段系数(AAHA)
@@ -422,20 +433,27 @@ export const CatFoodCalculatorClient = makeCalculatorClient({
       cans = mer / density
       gramsPerDay = cans * canWeight
     }
+    // 图表隐藏输出:donut 只吃非负两段。factor < 1(减肥喂食低于 RER)时
+    // "活动增量"是负数、RER 反而高于 MER——环形图表达不了负段,此时两段清零、
+    // 整图隐藏,避免"满圈 RER 却标着 MER 中心"的误导(结果卡仍如实显示负值)
+    const chartRer = factor >= 1 ? rer : 0
+    const chartActivity = Math.max(0, mer - rer)
     return {
       mer: `${fmtNum(mer, 0)} kcal/day`,
       rer: `${fmtNum(rer, 0)} kcal/day`,
       activityExtra: `${fmtNum(mer - rer, 0)} kcal/day`,
       cans: cans === null ? '—' : `${fmtNum(cans, 2)} ${T('cupsWord', 'cans/day')}`,
       grams: `${fmtNum(gramsPerDay, 0)} g/day`,
+      chartRer: `${fmtNum(chartRer, 0)} kcal/day`,
+      chartActivity: `${fmtNum(chartActivity, 0)} kcal/day`,
     }
   },
   chart: {
     title: 'Where the daily calories come from',
     centerLabel: 'MER',
     slices: [
-      { valueKey: 'rer', label: 'Resting need (RER)', color: '#3b82f6' },
-      { valueKey: 'activityExtra', label: 'Activity multiplier', color: '#22c55e' },
+      { valueKey: 'chartRer', label: 'Resting need (RER)', color: '#3b82f6' },
+      { valueKey: 'chartActivity', label: 'Activity multiplier', color: '#22c55e' },
     ],
   },
   note: '🐟 RER = 70 × weight(kg)^0.75 kcal/day, then a life-stage factor — an indoor neutered cat needs just ×1.2. Split the daily amount into at least 2 meals; most wet foods run ≈1 kcal per gram. Cats must lose weight slowly (crash dieting causes hepatic lipidosis) — design diets with your vet.',

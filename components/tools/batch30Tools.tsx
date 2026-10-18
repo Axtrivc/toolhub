@@ -1,6 +1,8 @@
 'use client'
 
 import { makeTextTool } from './makeTextTool'
+import { tuiFromEntry } from '@/lib/i18n/tool-l10n-core'
+import type { Locale } from '@/lib/i18n'
 import { GpsCoordinateConverterL10n } from '@/lib/i18n/tools-l10n/gps-coordinate-converter'
 
 /**
@@ -80,13 +82,18 @@ function toDDM(dd: number, positive: string, negative: string): string {
   return `${d}° ${m.toFixed(3)}′ ${hemi}`
 }
 
-const USAGE = '⚠️ Could not parse that coordinate. Accepted formats:\n' +
-  '  40.7128, -74.0060\n' +
+// ⚠️ 错误态文案:说明行随 locale 本地化(l10n bundle 的 'usage' 键),
+// 格式示例四语通用保持不变 —— 与 makeTextTool 其余可见串同一条本地化链路
+const USAGE_FORMATS = '  40.7128, -74.0060\n' +
   '  40.7128° N, 74.0060° W\n' +
   "  40° 42.768' N, 74° 0.360' W\n" +
   '  40° 42\' 46.1" N, 74° 0\' 21.6" W'
+const USAGE_EN = '⚠️ Could not parse that coordinate. Accepted formats:\n' + USAGE_FORMATS
+const usageText = (locale: Locale): string =>
+  tuiFromEntry(GpsCoordinateConverterL10n, locale, 'usage', USAGE_EN)
 
-function convertGps(input: string): string {
+function convertGps(input: string, locale: Locale): string {
+  const usage = usageText(locale)
   const raw = input.trim()
   if (raw === '') return ''
   const tokens = detachHemispheres(raw)
@@ -148,7 +155,7 @@ function convertGps(input: string): string {
   const lat = latTokens.length ? parseCoordPart(latTokens, 'S', 'N') : null
   const lon = lonTokens.length ? parseCoordPart(lonTokens, 'W', 'E') : null
   if (!lat || Math.abs(lat.dd) > 90 || (lonTokens.length > 0 && (!lon || Math.abs(lon.dd) > 180))) {
-    return USAGE
+    return usage
   }
   const lines: string[] = []
   lines.push(`Decimal degrees (DD):  ${lat.dd.toFixed(6)}${lon ? `, ${lon.dd.toFixed(6)}` : ''}`)
@@ -169,6 +176,6 @@ export const GpsCoordinateConverterClient = makeTextTool({
   // 坐标输入天然极短:2000 字符门控拦住误粘贴大文本(分词+多正则逐 token
   // 处理,大输入会卡顿),与 batch32 校验器族同款口径
   maxInputChars: 2000,
-  transform: (t) => convertGps(t),
+  transform: (t, locale) => convertGps(t, locale),
   note: '🧭 Decimal degrees ↔ DMS ↔ DDM, with N/S/E/W hemisphere letters parsed in any position (glued to the number is fine). Latitude must stay within ±90°, longitude ±180°; the 6-decimal DD output resolves to roughly 0.11 m.',
 })

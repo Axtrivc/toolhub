@@ -12,7 +12,7 @@ import { useApp } from '@/components/providers/AppProviders'
 const en: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>A pack a day is a car payment</h2>
-    <p>Twenty cigarettes at $12 a pack is $84 a week and $4,380 a year — a decent car payment or a maxed-out Roth IRA contribution. Light smokers still hand over four figures a year without ever seeing a single bill for it.</p>
+    <p>Twenty cigarettes at $12 a pack is $84 a week and $4,380 a year — a decent car payment or most of a maxed-out Roth IRA contribution. Light smokers still hand over four figures a year without ever seeing a single bill for it.</p>
     <h2>The investment counterfactual</h2>
     <p>Money not burned compounds. Redirecting that yearly $4,380 into an index fund at 7% grows to roughly $60,500 over ten years of contributions — and that assumes prices never rise again, which tobacco taxes make unlikely.</p>
     <h2>Prices only move one way</h2>
@@ -26,7 +26,7 @@ const en: ReactNode = (
 const zh: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>一天一包,就是一份车贷</h2>
-    <p>每天 20 支、每包 $12,一周 $84、一年 $4,380——一份体面的车贷,或一份缴满的 Roth IRA。轻度烟民一年也在不知不觉里交出四位数,却从未收到过一张账单。</p>
+    <p>每天 20 支、每包 $12,一周 $84、一年 $4,380——一份体面的车贷,或大半份缴满的 Roth IRA。轻度烟民一年也在不知不觉里交出四位数,却从未收到过一张账单。</p>
     <h2>投资的反事实</h2>
     <p>没被烧掉的钱会复利。把每年这 $4,380 转投年化 7% 的指数基金,十年缴费期大约长成 $60,500——这还是假设烟价从此不涨,而烟草税让这种假设几乎不可能成立。</p>
     <h2>价格只有一个方向</h2>
@@ -40,7 +40,7 @@ const zh: ReactNode = (
 const es: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>Un paquete al día es una cuota de coche</h2>
-    <p>Veinte cigarrillos a 12 $ el paquete son 84 $ a la semana y 4.380 $ al año — una letra decente de coche o un Roth IRA completo. Los fumadores ligeros también entregan cuatro cifras al año sin recibir jamás una factura por ello.</p>
+    <p>Veinte cigarrillos a 12 $ el paquete son 84 $ a la semana y 4.380 $ al año — una letra decente de coche o la mayor parte de un Roth IRA completo. Los fumadores ligeros también entregan cuatro cifras al año sin recibir jamás una factura por ello.</p>
     <h2>La contrafactual de la inversión</h2>
     <p>El dinero que no se quema se capitaliza. Redirigir esos 4.380 $ anuales a un indexado al 7% crece hasta unos 60.500 $ en diez años de aportaciones — y eso suponiendo que el precio no suba nunca más, algo que los impuestos al tabaco hacen improbable.</p>
     <h2>Los precios solo van en una dirección</h2>
@@ -54,7 +54,7 @@ const es: ReactNode = (
 const de: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>Eine Schachtel täglich ist eine Autorate</h2>
-    <p>Zwanzig Zigaretten zu 12 $ die Schachtel sind 84 $ pro Woche und 4.380 $ im Jahr — eine ordentliche Autorate oder ein voller Roth-IRA. Auch Gelegenheitsraucher blättern vierstellig pro Jahr hin, ohne je eine Rechnung zu sehen.</p>
+    <p>Zwanzig Zigaretten zu 12 $ die Schachtel sind 84 $ pro Woche und 4.380 $ im Jahr — eine ordentliche Autorate oder der Großteil eines vollen Roth-IRA. Auch Gelegenheitsraucher blättern vierstellig pro Jahr hin, ohne je eine Rechnung zu sehen.</p>
     <h2>Das Investitions-Gegenszenario</h2>
     <p>Nicht verbranntes Geld verzinst sich. Die jährlichen 4.380 $ in einen Indexfonds bei 7 % umgeleitet, wachsen über zehn Einzahlungsjahre auf rund 60.500 $ — und das ohne jede Preiserhöhung, die Tabaksteuern unwahrscheinlich macht.</p>
     <h2>Die Preise kennen nur eine Richtung</h2>

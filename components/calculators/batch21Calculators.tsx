@@ -207,7 +207,9 @@ export const RefinanceBreakEvenCalculatorClient = makeCalculatorClient({
   presets: [
     { label: 'Rate drop 1.1 pt', values: { balance: '320000', oldRate: '7', remainingYears: '27', newRate: '5.9', newTerm: '30', costs: '4800' } },
     { label: 'Small drop 0.5 pt', values: { balance: '320000', oldRate: '7', remainingYears: '27', newRate: '6.5', newTerm: '30', costs: '4800' } },
-    { label: 'Refi into 15-yr', values: { balance: '320000', oldRate: '7', remainingYears: '27', newRate: '5.7', newTerm: '15', costs: '3800' } },
+    // 预设必须落在本工具的有效解空间里:月供口径下"缩短期限"必然抬高月供,
+    // 会直接触发 errNoSavings 错误卡 —— 换成大余额场景(降息 1 点、费用随余额上调)
+    { label: 'Jumbo $650k, 1 pt drop', values: { balance: '650000', oldRate: '6.9', remainingYears: '27', newRate: '5.9', newTerm: '30', costs: '8600' } },
   ],
   chart: { kind: 'series', title: 'Cumulative savings minus closing costs' },
   series: (v) => {
