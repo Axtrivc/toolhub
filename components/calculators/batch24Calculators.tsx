@@ -98,7 +98,14 @@ export const CollegeSavingsCalculatorClient = makeCalculatorClient({
     const fvSaved = saved * Math.pow(1 + mr, 12 * n)
     const need = Math.max(0, total - fvSaved)
     const monthly = n === 0 ? need : mr === 0 ? need / (12 * n) : need / ((Math.pow(1 + mr, 12 * n) - 1) / mr)
-    const marks = Array.from({ length: n + 1 }, (_, y) => y)
+    // 采样步长随年限放大:共享 LineAreaChart 窄屏只取 ~4 个刻度并强制补末端
+    // 刻度,逐年采样时末端两刻度(Y9/Y10)相邻互压成 "Y910"。隔 2 年采样
+    // (距入学 ≥13 年时隔 3 年)让末端刻度与前一刻度至少隔 2 个采样点,
+    // 各 childAge(0-17)下移动端刻度均不叠字,曲线形状不变(等间隔采样)。
+    const step = n >= 13 ? 3 : 2
+    const marks: number[] = []
+    for (let y = 0; y < n; y += step) marks.push(y)
+    if (marks[marks.length - 1] !== n) marks.push(n)
     const balanceAt = (y: number) => saved * Math.pow(1 + mr, 12 * y) + (mr === 0 ? monthly * 12 * y : monthly * ((Math.pow(1 + mr, 12 * y) - 1) / mr))
     return {
       xLabels: marks.map((y) => (y === 0 ? 'Now' : `Y${y}`)),
@@ -145,11 +152,17 @@ export const Match401kCalculatorClient = makeCalculatorClient({
         yourContribution: '—', maxMatch: '—', unclaimedMatch: '—',
       }
     }
-    const yourContribution = salary * (contribPct / 100)
-    // 匹配只作用于工资前 limitPct%:超过上限的自缴部分照常免税,但不再有匹配
-    const matchedPortion = Math.min(contribPct, limitPct)
-    const match = salary * (matchPct / 100) * (matchedPortion / 100)
-    const maxMatch = salary * (matchPct / 100) * (limitPct / 100)
+    // IRS 限额(Notice 2025-67,2026 年):员工 elective deferral 上限 $24,500;
+    // 匹配等缴存计算的年薪酬上限 $360,000。滑块上限组合($400k × 30%)若不设限,
+    // "Your contribution" 会显示 $120,000、匹配按全额工资算,双双超出法定口径。
+    const deferralLimit = 24500
+    const compForMatch = Math.min(salary, 360000)
+    const yourContribution = Math.min(salary * (contribPct / 100), deferralLimit)
+    // 匹配只作用于工资前 limitPct%:超过上限的自缴部分照常免税,但不再有匹配。
+    // 缴存被美元上限截断时,实际参与匹配的比例也随之封顶(deferralLimit/comp)。
+    const matchedPortion = Math.min(contribPct, limitPct, (deferralLimit / compForMatch) * 100)
+    const match = compForMatch * (matchPct / 100) * (matchedPortion / 100)
+    const maxMatch = compForMatch * (matchPct / 100) * (limitPct / 100)
     return {
       employerMatch: fmtUSD(match, 0),
       yourContribution: fmtUSD(yourContribution, 0),
@@ -166,7 +179,7 @@ export const Match401kCalculatorClient = makeCalculatorClient({
     ],
     centerLabel: 'Annual total',
   },
-  note: '💰 Match formulas vary: dollar-for-dollar (100% up to X%) is the most generous, 50% up to 6% the most common. Matching stops at the cap — contributing more still grows tax-advantaged, just without extra match. Capture the match before any other investing.',
+  note: '💰 Match formulas vary: dollar-for-dollar (100% up to X%) is the most generous, 50% up to 6% the most common. Matching stops at the cap — contributing more still grows tax-advantaged, just without extra match. Capture the match before any other investing. IRS limits apply (2026): elective deferrals max out at $24,500/yr and matching is figured on compensation up to $360,000.',
 })
 
 // ── 社保申领回补年龄计算器 ──
@@ -200,12 +213,12 @@ export const SocialSecurityBreakEvenCalculatorClient = makeCalculatorClient({
     { key: 'benefit62', label: 'Claim at 62', sublabel: 'After the early-claiming reduction' },
     { key: 'benefitFRA', label: 'Claim at FRA' },
     { key: 'benefit70', label: 'Claim at 70', sublabel: 'Includes delayed credits' },
-    { key: 'fra', label: 'Your full retirement age' },
     // 工具同名的主结果是回补年龄(移动端 sticky 条/分享卡都取 highlight),
-    // 三档月额是并列输入派生值——主结果落在 breakEven1 才贴合工具定位
+    // 三档月额是并列输入派生值——主结果落在 breakEven1 才贴合工具定位。
+    // 输出保持 6 张:结果网格在桌面为 3 列(>4 输出),6 = 3+3 两行铺满,
+    // 不留半行空位;FRA 年龄(1965→67y0m)与 80 岁累计由图表曲线与 FAQ 承载。
     { key: 'breakEven1', label: 'FRA catches age-62 at', highlight: true },
     { key: 'breakEven2', label: 'Age-70 catches FRA at' },
-    { key: 'at80', label: 'Cumulative by 80' },
     { key: 'at85', label: 'Cumulative by 85' },
   ],
   compute: (v, locale) => {
@@ -214,7 +227,7 @@ export const SocialSecurityBreakEvenCalculatorClient = makeCalculatorClient({
     if (!Number.isInteger(birthYear) || birthYear < 1943 || birthYear > 2010 || isNaN(pia) || pia <= 0) {
       return {
         benefit62: `⚠️ ${tui('social-security-break-even-calculator', locale, 'errInvalid', 'Enter a birth year between 1943 and 2010 and a positive PIA')}`,
-        benefitFRA: '—', benefit70: '—', fra: '—', breakEven1: '—', breakEven2: '—', at80: '—', at85: '—',
+        benefitFRA: '—', benefit70: '—', breakEven1: '—', breakEven2: '—', at85: '—',
       }
     }
     const fraM = ssFraMonths(birthYear)
@@ -233,10 +246,8 @@ export const SocialSecurityBreakEvenCalculatorClient = makeCalculatorClient({
       benefit62: fmtUSD(b62, 0),
       benefitFRA: fmtUSD(bFRA, 0),
       benefit70: fmtUSD(b70, 0),
-      fra: fmtAgeFromMonths(fraM),
       breakEven1: fmtAgeFromMonths(be1),
       breakEven2: fmtAgeFromMonths(be2),
-      at80: `62: ${fmtUSD(cumAt(b62, 62 * 12, 80), 0)} · FRA: ${fmtUSD(cumAt(bFRA, fraM, 80), 0)} · 70: ${fmtUSD(cumAt(b70, 70 * 12, 80), 0)}`,
       at85: `62: ${fmtUSD(cumAt(b62, 62 * 12, 85), 0)} · FRA: ${fmtUSD(cumAt(bFRA, fraM, 85), 0)} · 70: ${fmtUSD(cumAt(b70, 70 * 12, 85), 0)}`,
     }
   },
@@ -286,8 +297,10 @@ export const StudentLoanCalculatorClient = makeCalculatorClient({
     { key: 'gradStart', label: 'Graduated first payment', sublabel: 'Steps up +25% every 2 yrs' },
     { key: 'extPay', label: 'Extended 25-yr payment' },
     { key: 'capitalized', label: 'Interest capitalized in grace' },
-    { key: 'totalInt10', label: 'Total interest, 10-yr' },
-    { key: 'totalInt25', label: 'Total interest, 25-yr' },
+    // 两张利息卡是「还款期利息」(全部月供 − 还款起点本金),不含上面单列的
+    // 宽限期资本化利息;标签写明口径,避免被读成全贷款周期总利息(差 $1,190)
+    { key: 'totalInt10', label: 'Interest over 10-yr repayment', sublabel: 'Excludes capitalized grace interest' },
+    { key: 'totalInt25', label: 'Interest over 25-yr repayment', sublabel: 'Excludes capitalized grace interest' },
   ],
   compute: (v, locale) => {
     const balance = toNumStrict(v.balance)
@@ -344,8 +357,12 @@ export const StudentLoanCalculatorClient = makeCalculatorClient({
       const disc = blocks.reduce((s, f, j) => s + f * Math.pow(1 + i, -24 * j), 0)
       k = eff / (a24 * disc)
     }
+    // 采样步长 20 个月(而非阶梯计划的 24 个月):共享 LineAreaChart 在窄屏只取
+    // ~4 个刻度并强制补末端刻度,24 步长下末两个刻度(24y/25y)相邻互压;
+    // 20 步长 16 点使末端刻度与前一刻度隔 3 个采样点,移动端不再叠字,
+    // 桌面刻度恰好落在 0/5/10/15/20/25y。
     const marks: number[] = []
-    for (let m = 0; m <= 300; m += 24) marks.push(m)
+    for (let m = 0; m <= 300; m += 20) marks.push(m)
     if (marks[marks.length - 1] !== 300) marks.push(300)
     const walk = (payAt: (m: number) => number) => {
       const pts: number[] = []
@@ -416,6 +433,14 @@ export const CarLeaseCalculatorClient = makeCalculatorClient({
     if (isNaN(msrp) || msrp <= 0 || isNaN(price) || price <= 0 || residualPct < 0 || residualPct > 100 || mf < 0 || months < 12 || months > 60 || down < 0 || fees < 0) {
       return {
         monthlyPayment: `⚠️ ${tui('car-lease-calculator', locale, 'errInvalid', 'Enter positive prices, residual 0-100, non-negative money factor, and 12-60 months')}`,
+        depPart: '—', rentPart: '—', aprEquivalent: '—', totalLeaseCost: '—', endBuyout: '—',
+      }
+    }
+    // 首付不能吞掉全部资本成本:滑块区间内(down 最高 $20,000、price 最低 $10,000)
+    // 可达 down > price + fees,调整后资本成本转负、月供算出负数 —— 按输入错误报错
+    if (down > price + fees) {
+      return {
+        monthlyPayment: `⚠️ ${tui('car-lease-calculator', locale, 'errDownTooBig', 'Down payment can\'t exceed the negotiated price plus fees — the adjusted cap cost would go negative')}`,
         depPart: '—', rentPart: '—', aprEquivalent: '—', totalLeaseCost: '—', endBuyout: '—',
       }
     }

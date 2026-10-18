@@ -193,6 +193,19 @@ function collapse4(a: string, b: string, c: string, d: string): string[] {
   return [a, b, c, d]
 }
 
+/**
+ * 数值文本框清洗:只留数字与「第一个」小数点,孤立 '.' 归空。
+ * 旧正则 [^0-9.] 放行 '1.2.3' / '...',会原样拼进可复制 CSS(border-radius: 1.2.3px),
+ * 而滑杆 Number()→NaN→0 静默归零,用户看不出输出已非法。
+ */
+function sanitizeRadiusNum(v: string): string {
+  let s = v.replace(/[^0-9.]/g, '')
+  const first = s.indexOf('.')
+  if (first !== -1) s = s.slice(0, first + 1) + s.slice(first + 1).replace(/\./g, '')
+  if (s === '.') s = ''
+  return s
+}
+
 export function BorderRadiusGeneratorClient() {
   const { locale } = useApp()
   const L = (key: string, fb: string) => tui('border-radius-generator', locale, key, fb)
@@ -212,19 +225,20 @@ export function BorderRadiusGeneratorClient() {
   const maxSlider = unit === 'px' ? 150 : 100
 
   const setH = (setter: (v: string) => void, v: string) => {
-    const clean = v.replace(/[^0-9.]/g, '')
+    const clean = sanitizeRadiusNum(v)
     setter(clean)
     if (linkAll) { setTl(clean); setTr(clean); setBr(clean); setBl(clean) }
   }
   const setV = (setter: (v: string) => void, v: string) => {
-    const clean = v.replace(/[^0-9.]/g, '')
+    const clean = sanitizeRadiusNum(v)
     setter(clean)
     if (linkAll) { setVtl(clean); setVtr(clean); setVbr(clean); setVbl(clean) }
   }
 
   const h = [tl, tr, br, bl]
   const v = [vtl, vtr, vbr, vbl]
-  const withUnit = (vals: string[]) => vals.map((x) => `${x || 0}${unit}`)
+  // 输出再过一道 Number():状态允许 '1.' 这类输入中间态,但 CSS 里必须是无歧义数字
+  const withUnit = (vals: string[]) => vals.map((x) => `${Number.isFinite(Number(x)) ? String(Number(x)) : 0}${unit}`)
   const [htl, htr, hbr, hbl] = withUnit(h)
   const [vtlu, vtru, vbru, vblu] = withUnit(v)
   const hCss = collapse4(htl, htr, hbr, hbl)
@@ -320,7 +334,8 @@ export function BorderRadiusGeneratorClient() {
           </div>
 
           {elliptical && <p className="text-xs font-medium" style={{ color: 'rgb(var(--text-faint))' }}>{L('horizontal', 'Horizontal radii')}</p>}
-          <div className="grid grid-cols-2 gap-3">
+          {/* linkAll 时只有一条滑杆,单列铺满整行——放进 2 列网格会只占左格,移动端右半留白 */}
+          <div className={`grid gap-3 ${linkAll ? 'grid-cols-1' : 'grid-cols-2'}`}>
             {linkAll
               ? sliderRow('br-tl', L('allCorners', 'All corners'), tl, setTl, false)
               : <>
@@ -334,7 +349,7 @@ export function BorderRadiusGeneratorClient() {
           {elliptical && (
             <>
               <p className="text-xs font-medium" style={{ color: 'rgb(var(--text-faint))' }}>{L('vertical', 'Vertical radii')}</p>
-              <div className="grid grid-cols-2 gap-3">
+              <div className={`grid gap-3 ${linkAll ? 'grid-cols-1' : 'grid-cols-2'}`}>
                 {linkAll
                   ? sliderRow('br-vtl', L('allCornersV', 'All corners'), vtl, setVtl, true)
                   : <>
@@ -996,7 +1011,9 @@ export function SecretSantaGeneratorClient() {
     })
   }, [namesText])
 
-  // 互斥对解析:"A - B" / "A & B" / "A, B" 都收;大小写不敏感匹配名单
+  // 互斥对解析:"A - B"(连字符两侧须有空格)/ "A -> B" / "A & B" / "A, B" / "A / B" 都收。
+  // 裸 "-" 不当分隔符:否则带连字符的名字(Mary-Jane - Bob)被拆成 3 段永远报错。
+  // 大小写不敏感匹配名单。
   const exclPairs = useMemo(() => exclText.split(/\r?\n/).map((x) => x.trim()).filter(Boolean), [exclText])
 
   const draw = useCallback(() => {
@@ -1009,7 +1026,7 @@ export function SecretSantaGeneratorClient() {
     const lowerIdx = new Map<string, number>(names.map((nm, i) => [nm.toLowerCase(), i]))
     const banned: Set<number>[] = names.map(() => new Set<number>())
     for (const line of exclPairs) {
-      const parts = line.split(/\s*(?:->|-|&|,|\/)\s*/i).map((p) => p.trim()).filter(Boolean)
+      const parts = line.split(/\s*->\s*|\s*[&,\/]\s*|\s+-\s+/).map((p) => p.trim()).filter(Boolean)
       if (parts.length !== 2) {
         setAssign(null)
         setError(`⚠️ ${L('errBadPair', 'Could not read pair: {line}').replace('{line}', line)}`)
@@ -1069,7 +1086,7 @@ export function SecretSantaGeneratorClient() {
             className="w-full rounded-lg border p-4 font-mono text-sm outline-none transition focus:ring-2"
             style={{ borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rgb(var(--bg-card))', color: 'rgb(var(--text))' }} />
           <p className="mt-1 text-xs" style={{ color: 'rgb(var(--text-faint))' }}>
-            {L('exclHint', 'Couples or teammates who must not draw each other, e.g. Alice - Bob. Accepts - & , as separators.')}
+            {L('exclHint', 'Couples or teammates who must not draw each other, e.g. Alice - Bob. Separators: ->, &, comma, or a hyphen with spaces on both sides — hyphenated names like Mary-Jane keep working.')}
           </p>
         </div>
       </div>

@@ -37,8 +37,8 @@ const APPLIANCES: { id: string; label: string; run: number; surge: number }[] = 
   { id: 'laptop', label: 'Laptop + chargers', run: 150, surge: 150 },
 ]
 
-/** 市售便携/全屋发电机常见功率档(瓦) */
-const STANDARD_SIZES = [2000, 3000, 4000, 5000, 6500, 7500, 10000, 12000, 15000, 18000, 22000, 24000, 30000]
+/** 市售便携/全屋发电机常见功率档(瓦)—— 与公式声明的 12 档一致 */
+const STANDARD_SIZES = [2000, 3000, 4000, 5000, 6500, 7500, 10000, 12000, 15000, 18000, 22000, 24000]
 
 const PRESETS: { label: string; on: string[] }[] = [
   { label: 'Outage basics', on: ['fridge', 'lights', 'tv', 'laptop'] },
@@ -145,14 +145,15 @@ export function GeneratorWattageCalculatorClient() {
               className="flex cursor-pointer items-center justify-between gap-3 rounded-md px-2 py-1.5"
               style={{ opacity: q > 0 ? 1 : 0.75 }}
             >
-              <span className="flex min-w-0 items-center gap-2">
+              <span className="flex min-w-0 items-start gap-2">
                 <input
                   type="checkbox"
                   checked={q > 0}
                   onChange={(e) => setOne(a.id, e.target.checked ? 1 : 0)}
-                  className="h-4 w-4 shrink-0"
+                  className="mt-0.5 h-4 w-4 shrink-0"
                 />
-                <span className="truncate text-sm" style={{ color: 'rgb(var(--text))' }}>
+                {/* 不截断:375px 下 truncate 会把 "Refrigerator / freezer" 词中截成 "…fr…";允许换行完整展示 */}
+                <span className="text-sm leading-snug" style={{ color: 'rgb(var(--text))' }}>
                   {L(`item.${a.id}`, a.label)}
                 </span>
               </span>

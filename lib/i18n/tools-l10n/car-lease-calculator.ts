@@ -38,6 +38,7 @@ export const CarLeaseCalculatorL10n: ToolL10n = {
       'outSub.totalLeaseCost': '首付 + 全部月供',
       'note': '🚗 money factor × 2400 ≈ APR:0.00225 ≈ 5.4%。租约里唯一真正可谈的是成交价(cap cost)——残值与 money factor 通常由租赁公司定死。9 成"月供刺客"都藏在资本化的费用里,逐项核对再签。',
       'errInvalid': '请输入正的价格、0-100 的残值率、非负 money factor 与 12-60 的租期',
+      'errDownTooBig': '首付不能超过成交价 + 费用(否则调整后资本成本为负)',
     },
   },
   es: {
@@ -73,6 +74,7 @@ export const CarLeaseCalculatorL10n: ToolL10n = {
       'outSub.totalLeaseCost': 'entrada + todas las cuotas',
       'note': '🚗 Money factor × 2400 ≈ APR: 0,00225 ≈ 5,4%. Lo único negociable de un leasing es el precio acordado (cap cost) — residual y money factor los fija la financiera. Nueve de cada diez «cuotas sorpresa» viven en las comisiones capitalizadas: revisa partida por partida.',
       'errInvalid': 'Introduce precios positivos, residual 0-100, money factor no negativo y 12-60 meses',
+      'errDownTooBig': 'La entrada no puede superar el precio acordado + comisiones (el coste de capital ajustado sería negativo)',
     },
   },
   de: {
@@ -108,6 +110,7 @@ export const CarLeaseCalculatorL10n: ToolL10n = {
       'outSub.totalLeaseCost': 'Anzahlung + alle Raten',
       'note': '🚗 Money Factor × 2400 ≈ APR: 0,00225 ≈ 5,4%. Verhandelbar ist beim Leasing nur der Einigungspreis (Cap Cost) — Restwert und Money Factor setzt die Bank fest. Neun von zehn „Raten-Überraschungen“ stecken in kapitalisierten Gebühren: Posten für Posten prüfen.',
       'errInvalid': 'Gib positive Preise, Restwert 0-100, nicht-negativen Money Factor und 12-60 Monate ein',
+      'errDownTooBig': 'Die Anzahlung darf Einigungspreis + Gebühren nicht übersteigen (sonst wären die bereinigten Kapitalkosten negativ)',
     },
   },
 }

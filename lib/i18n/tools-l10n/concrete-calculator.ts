@@ -9,7 +9,7 @@ export const ConcreteCalculatorL10n: ToolL10n = {
     useCases: ['估算露台或工具棚垫层的混凝土用量', '为甲板、花架算基础方量', '小修补按袋备料', '浇筑入口台阶前核定体积'],
     faqs: [
       { q: '10×10 的板需要多少袋 80 磅混凝土?', a: '4 英寸厚时,10×10 的板体积是 33.3 ft³——约 1.23 立方码。加上 10% 损耗应订 1.36 yd³;若手工搅拌,折合 62 袋 80 磅装。' },
-      { q: '一立方 yard 等于多少袋?', a: '一袋 80 磅出料 0.60 ft³,所以一整码要 45 袋;60 磅装要 61 袋,40 磅装要 90 袋。超过一码后,罐车送的现拌混凝土更便宜也省力得多。' },
+      { q: '一立方 yard 等于多少袋?', a: '一袋 80 磅出料 0.60 ft³,所以一整码要 45 袋;60 磅装要 60 袋,40 磅装要 90 袋。超过一码后,罐车送的现拌混凝土更便宜也省力得多。' },
       { q: '为什么要加 10% 损耗?', a: '洒漏、垫层不平、开挖超深都会吃掉方量。10% 是支模浇筑的行业惯例;人工开挖的基础尺寸容易跑偏,可加到 15%。' },
       { q: '柱和台阶是怎么算的?', a: '圆柱按 π × (直径 ÷ 2)² × 高 × 数量;台阶按三角棱柱近似——每级踏步的「进深 × 高 ÷ 2 × 宽」,正好对应贴房屋支模浇筑的实际方量。' },
     ],
@@ -52,7 +52,7 @@ export const ConcreteCalculatorL10n: ToolL10n = {
     useCases: ['estimar hormigón para una losa de terraza o cobertizo', 'dimensionar zapatas para decks y pérgolas', 'comprar sacos para pequeñas reparaciones', 'calcular el volumen de unos escalones de entrada'],
     faqs: [
       { q: '¿Cuántos sacos de 80 lb necesito para una losa de 10×10?', a: 'Con 4 pulgadas de espesor, una losa de 10×10 ocupa 33,3 ft³ —unos 1,23 yd³. Con el 10% de margen pides 1,36 yd³, es decir 62 sacos de 80 lb si mezclas a mano.' },
-      { q: '¿Cuántos sacos hacen una yarda cúbica?', a: 'Un saco de 80 lb rinde 0,60 ft³, así que una yarda completa son 45 sacos; 61 de 60 lb o 90 de 40 lb. Pasada una yarda, el hormigón preparado por camión sale más barato y mucho más cómodo.' },
+      { q: '¿Cuántos sacos hacen una yarda cúbica?', a: 'Un saco de 80 lb rinde 0,60 ft³, así que una yarda completa son 45 sacos; 60 de 60 lb o 90 de 40 lb. Pasada una yarda, el hormigón preparado por camión sale más barato y mucho más cómodo.' },
       { q: '¿Por qué añadir un 10% de margen?', a: 'Los derrames, una base irregular y las paredes de excavación más anchas consumen volumen. El 10% es el estándar del oficio para trabajo encofrado; súbelo al 15% en zapatas cavadas a mano, donde las medidas se desvían.' },
       { q: '¿Cómo calcula columnas y escalones?', a: 'Las columnas circulares usan π × (diámetro ÷ 2)² × altura × cantidad. Los escalones se tratan como prismas triangulares —huella × contrahuélo ÷ 2, por ancho, por peldaño—, que es el volumen real de una escalera encofrada contra la casa.' },
     ],
@@ -95,7 +95,7 @@ export const ConcreteCalculatorL10n: ToolL10n = {
     useCases: ['Beton für Terrassen- oder Schuppenplatten abschätzen', 'Fundamente für Deck und Pergola dimensionieren', 'Sackware für kleine Reparaturen einkaufen', 'Volumen für Eingangsstufen berechnen'],
     faqs: [
       { q: 'Wie viele 80-lb-Säcke für eine 10×10-Platte?', a: 'Bei 4 Zoll Dicke hält eine 10×10-Platte 33,3 ft³ — etwa 1,23 Kubikyards. Mit 10% Zuschlag bestellst du 1,36 yd³, also 62 Säcke à 80 lb, wenn du von Hand mischst.' },
-      { q: 'Wie viele Säcke ergeben einen Kubikyard?', a: 'Ein 80-lb-Sack ergibt 0,60 ft³, ein ganzer Yard braucht also 45 Säcke — 61 Stück à 60 lb oder 90 Stück à 40 lb. Über einen Yard hinaus ist Lieferbeton billiger und deutlich bequemer.' },
+      { q: 'Wie viele Säcke ergeben einen Kubikyard?', a: 'Ein 80-lb-Sack ergibt 0,60 ft³, ein ganzer Yard braucht also 45 Säcke — 60 Stück à 60 lb oder 90 Stück à 40 lb. Über einen Yard hinaus ist Lieferbeton billiger und deutlich bequemer.' },
       { q: 'Warum 10% Zuschlag?', a: 'Verschüttet, unebener Untergrund und weiter ausgehobene Ränder fressen Volumen. 10% sind der Handwerksstandard für Schalungsarbeiten; bei handgegrabenen Fundamenten nimm 15%.' },
       { q: 'Wie werden Stützen und Stufen berechnet?', a: 'Runde Stützen: π × (Durchmesser ÷ 2)² × Höhe × Anzahl. Stufen werden als Dreiecksprismen behandelt — Auftritt × Höhe ÷ 2, mal Breite, pro Stufe — das entspricht dem realen Volumen einer angedübelten Treppenschalung.' },
     ],

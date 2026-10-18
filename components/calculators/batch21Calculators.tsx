@@ -193,12 +193,26 @@ export const RefinanceBreakEvenCalculatorClient = makeCalculatorClient({
       }
     }
     const be = costs / savings
+    // 展示口径:回本不足 1 个月时换算成"天";极小值(< 0.1 天)直接给文字结论。
+    // fmtNum 对 abs<10^-digits 的非零值走科学计数法(format.ts),消费金融工具
+    // 不该出现 "1.1552e-3 months" 这类原生指数记号 —— 数值本身无误,纯展示问题。
+    // 同理,年括注仅在 ≥0.1 yr(be≥1.2 个月)时显示,否则 yrs 也会掉进指数分支。
+    const beDays = be * 30.4375
+    const beYr = be / 12
+    const breakEvenText =
+      be >= 1
+        ? beYr >= 0.1
+          ? `${fmtNum(be, 1)} ${T('monthsWord', 'months')} (${fmtNum(beYr, 1)} ${T('yearsWord', 'yr')})`
+          : `${fmtNum(be, 1)} ${T('monthsWord', 'months')}`
+        : beDays >= 0.1
+          ? `${fmtNum(beDays, 1)} ${T('daysWord', 'days')}`
+          : T('underOneDay', 'less than 1 day')
     const ti1 = m1 * n1 - balance
     const ti2 = m2 * n2 - balance
     const delta = ti2 - ti1
     return {
       monthlySavings: fmtUSD(savings, 2),
-      breakEven: `${fmtNum(be, 1)} ${T('monthsWord', 'months')} (${fmtNum(be / 12, 1)} ${T('yearsWord', 'yr')})`,
+      breakEven: breakEvenText,
       oldPayment: fmtUSD(m1, 2),
       newPayment: fmtUSD(m2, 2),
       interestDelta: `${delta > 0 ? '+' : '−'}${fmtUSD(Math.abs(delta), 0)} ${delta > 0 ? T('moreInterest', 'more interest') : T('lessInterest', 'less interest')}`,
@@ -473,12 +487,15 @@ export const ProratedRentCalculatorClient = makeCalculatorClient({
   inputs: [
     { key: 'rent', label: 'Monthly rent', suffix: '$', default: '1800', slider: { min: 200, max: 10000, step: 25 } },
     { key: 'date', label: 'Move-in / move-out date', type: 'text', default: '2026-11-10', placeholder: 'YYYY-MM-DD' },
+    // 分段控件选项文案必须短:SegmentedControl 各段 ~100px 文本空间,360px
+    // 移动端长文案会被 truncate 成 "First month (mo…" —— 语义不完整。
+    // move-in/move-out 的完整语义由字段标签(Prorating)与 note 承担。
     { key: 'period', label: 'Prorating', default: 'first', options: [
-      { label: 'First month (move-in)', value: 'first' },
-      { label: 'Last month (move-out)', value: 'last' },
+      { label: 'First month', value: 'first' },
+      { label: 'Last month', value: 'last' },
     ]},
     { key: 'basis', label: 'Daily rate basis', default: 'month', options: [
-      { label: 'Days in that month', value: 'month' },
+      { label: 'Days in month', value: 'month' },
       { label: '365-day year', value: 'year' },
     ]},
   ],
@@ -677,7 +694,10 @@ export const HouseFlipCalculatorClient = makeCalculatorClient({
     return {
       maxPurchase: fmtUSD(maxPurchase, 0),
       profit: fmtUSD(profit, 0),
-      roi: `${fmtNum(roi, 1)}%`,
+      // cashInvested=0(offer/repairs/holding 全为滑块最小值 0)时 roi=NaN,
+      // fmtNum(NaN)='—' 会渲染成悬挂的 "—%" —— 与同批 rental 工具的
+      // cashOnCash 守卫对齐:无现金投入时给干净占位
+      roi: cashInvested > 0 ? `${fmtNum(roi, 1)}%` : '—',
       totalCost: fmtUSD(totalCost, 0),
       verdict: gap <= 0
         ? `✅ ${fmtUSD(-gap, 0)} ${T('underCap', 'under the cap')}`

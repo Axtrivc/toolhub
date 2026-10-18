@@ -43,7 +43,7 @@ export const ContractorVsEmployeeCalculatorL10n: ToolL10n = {
       'cmpseg.0': '税款',
       'cmpseg.1': '福利成本',
       'cmpseg.2': '到手 + 匹配',
-      'note': '⚖️ 纸面同数,实质不同:1099 侧要缴两半 FICA(按收入 92.35% 计 15.3%)并自购福利,但换来 SE 医保扣除与半额 SE 税扣除;W-2 侧平摊 FICA 还可能有匹配。未建模:QBI 扣除、州税、失业保险。',
+      'note': '⚖️ 纸面同数,实质不同:1099 侧要缴两半 FICA(按收入 92.35% 计 15.3%,超过 $200k 再加 0.9% 附加医保税——W-2 侧工资同线代扣)并自购福利,但换来 SE 医保扣除与半额 SE 税扣除;W-2 侧平摊 FICA 还可能有匹配。未建模:QBI 扣除、州税、失业保险。',
     },
   },
   es: {
@@ -85,7 +85,7 @@ export const ContractorVsEmployeeCalculatorL10n: ToolL10n = {
       'cmpseg.0': 'Impuestos',
       'cmpseg.1': 'Coste de beneficios',
       'cmpseg.2': 'Neto + match',
-      'note': '⚖️ Mismo número en el papel, distinto trato real: el lado 1099 paga las dos mitades del FICA (15,3% sobre el 92,35%) y compra sus propios beneficios, a cambio de la deducción del seguro SE y de la mitad del SECA; el lado W-2 reparte FICA y puede cobrar un match. Sin modelar: QBI, impuesto estatal, seguro de paro.',
+      'note': '⚖️ Mismo número en el papel, distinto trato real: el lado 1099 paga las dos mitades del FICA (15,3% sobre el 92,35%, más el 0,9% de Medicare adicional por encima de 200 k$ — que el lado W-2 también retiene sobre esos salarios) y compra sus propios beneficios, a cambio de la deducción del seguro SE y de la mitad del SECA; el lado W-2 reparte FICA y puede cobrar un match. Sin modelar: QBI, impuesto estatal, seguro de paro.',
     },
   },
   de: {
@@ -127,7 +127,7 @@ export const ContractorVsEmployeeCalculatorL10n: ToolL10n = {
       'cmpseg.0': 'Steuern',
       'cmpseg.1': 'Benefit-Kosten',
       'cmpseg.2': 'Netto + Match',
-      'note': '⚖️ Gleiche Zahl auf dem Papier, anderes Paket real: Die 1099-Seite zahlt beide FICA-Hälften (15,3 % auf 92,35 %) und kauft eigene Benefits, bekommt dafür den SE-Krankenversicherungs- und den halben SE-Steuer-Abzug; die W-2-Seite teilt FICA und kann ein Match kassieren. Nicht modelliert: QBI, Landessteuer, Arbeitslosenversicherung.',
+      'note': '⚖️ Gleiche Zahl auf dem Papier, anderes Paket real: Die 1099-Seite zahlt beide FICA-Hälften (15,3 % auf 92,35 %, plus 0,9 % Zusatz-Medicare über 200 T$ — die W-2-Seite behält denselben Zuschlag auf solche Löhne ein) und kauft eigene Benefits, bekommt dafür den SE-Krankenversicherungs- und den halben SE-Steuer-Abzug; die W-2-Seite teilt FICA und kann ein Match kassieren. Nicht modelliert: QBI, Landessteuer, Arbeitslosenversicherung.',
     },
   },
 }

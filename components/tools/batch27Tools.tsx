@@ -16,7 +16,7 @@ import { ShoeSizeConverterL10n } from '@/lib/i18n/tools-l10n/shoe-size-converter
  * 大 1.5),EU 用巴黎点(2/3 cm)刻度。表按公开对照表共识口径生成:
  *  - 成人脚长 cm = 18 + 美码(男);女码 = 男码 + 1.5
  *  - UK = 美码 − 0.5(男/女统一按长度);EU = 1.5 × (cm + 1.5),四舍五入到 0.5
- *  - 童鞋从 8C(14.5 cm)起每半码 +0.4235 cm,1Y ≈ 20 cm,UK 按 US−0.5(≤0.5 时回绕 +13)
+ *  - 童鞋从 8C(14.5 cm)起每半码 +0.4235 cm(1Y = 19.6 cm),UK 按 US−0.5(≤0.5 时回绕 +13)
  * 全部纯静态数据与确定性查表,无浏览器 API、无随机性,SSR/hydration 安全。
  */
 
@@ -78,23 +78,43 @@ type System = 'us' | 'uk' | 'eu' | 'cm'
 
 const GROUP_ROWS: Record<Group, SizeRow[]> = { men: MEN_ROWS, women: WOMEN_ROWS, kids: KIDS_ROWS }
 
+/** 当前体系对应的取数函数(-999 = 童表 C/Y 段消解后该行不属于所选段) */
+function fieldOf(rows: SizeRow[], system: System, n: number): (r: SizeRow) => number {
+  if (system === 'us') {
+    // 童表歧义消解:8-13.5 视为 C 码,1-7.5 视为 Y 码(C 与 Y 的数值区间天然分开)
+    if (rows === KIDS_ROWS && n >= 1 && n < 8) {
+      return (r) => (r.label.endsWith('Y') ? r.us : -999)
+    }
+    if (rows === KIDS_ROWS && n >= 8 && n <= 13.5) {
+      return (r) => (r.label.endsWith('C') ? r.us : -999)
+    }
+    return (r) => r.us
+  }
+  return system === 'uk' ? (r) => r.uk : system === 'eu' ? (r) => r.eu : (r) => r.cm
+}
+
+/**
+ * 输入是否超出当前表覆盖范围:超界时最近行的换算是被截断的猜测
+ * (输入男鞋 US 20 会静默显示 US 16 的结果),必须提示而不是照常出卡。
+ * 容差:码数 0.25(表按半码步进)、脚长 0.3 cm。返回有效区间供文案展示。
+ */
+function outOfRange(rows: SizeRow[], system: System, raw: string): { min: number; max: number } | null {
+  const n = Number(raw.replace(',', '.'))
+  if (raw.trim() === '' || !isFinite(n) || n <= 0) return null
+  const field = fieldOf(rows, system, n)
+  const vals = rows.map(field).filter((x) => x !== -999)
+  if (vals.length === 0) return null
+  const tol = system === 'cm' ? 0.3 : 0.25
+  const min = Math.min(...vals)
+  const max = Math.max(...vals)
+  return n < min - tol || n > max + tol ? { min, max } : null
+}
+
 /** 按当前输入体系查最近行(确定性:平手取靠前的行) */
 function lookupRow(rows: SizeRow[], system: System, raw: string): SizeRow | null {
   const n = Number(raw.replace(',', '.'))
   if (raw.trim() === '' || !isFinite(n) || n <= 0) return null
-  let field: (r: SizeRow) => number
-  if (system === 'us') {
-    // 童表歧义消解:8-13.5 视为 C 码,1-7.5 视为 Y 码(C 与 Y 的数值区间天然分开)
-    if (rows === KIDS_ROWS && n >= 1 && n < 8) {
-      field = (r) => (r.label.endsWith('Y') ? r.us : -999)
-    } else if (rows === KIDS_ROWS && n >= 8 && n <= 13.5) {
-      field = (r) => (r.label.endsWith('C') ? r.us : -999)
-    } else {
-      field = (r) => r.us
-    }
-  } else {
-    field = system === 'uk' ? (r) => r.uk : system === 'eu' ? (r) => r.eu : (r) => r.cm
-  }
+  const field = fieldOf(rows, system, n)
   let best: SizeRow | null = null
   let bestDiff = Infinity
   for (const r of rows) {
@@ -121,6 +141,9 @@ export function ShoeSizeConverterClient() {
 
   const rows = GROUP_ROWS[group]
   const matched = useMemo(() => lookupRow(rows, system, value), [rows, system, value])
+  // 超出表范围的输入:换算结果是被截断的最近行,不能无提示地照常展示
+  const range = useMemo(() => outOfRange(rows, system, value), [rows, system, value])
+  const valid = matched !== null && range === null
 
   const handleInput = useCallback((v: string) => {
     setValue(v)
@@ -224,7 +247,7 @@ export function ShoeSizeConverterClient() {
         />
       </div>
 
-      {matched ? (
+      {valid && matched ? (
         <div role="status" aria-live="polite" className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
           <ResultCard label={`${L('out.us', 'US size')} · ${usSub}`} value={matched.label} highlight />
           <ResultCard label={L('out.uk', 'UK size')} value={trim1(matched.uk)} />
@@ -232,8 +255,13 @@ export function ShoeSizeConverterClient() {
           <ResultCard label={L('out.cm', 'Foot length (cm)')} value={`${fmtNum(matched.cm, 1)} cm`} />
         </div>
       ) : (
-        <div className="rounded-lg border-2 border-dashed p-6 text-center text-sm" style={{ borderColor: 'rgb(var(--border-strong))', color: 'rgb(var(--text-faint))' }}>
-          ⚠️ {L('errInvalid', 'Enter a valid size value')}
+        <div role="status" aria-live="polite" className="rounded-lg border-2 border-dashed p-6 text-center text-sm" style={{ borderColor: 'rgb(var(--border-strong))', color: 'rgb(var(--text-faint))' }}>
+          ⚠️ {range
+            ? L('errRange', 'Outside the table range ({min}–{max} {unit}) - enter a size the table covers')
+                .replace('{min}', trim1(range.min))
+                .replace('{max}', trim1(range.max))
+                .replace('{unit}', valueSuffix)
+            : L('errInvalid', 'Enter a valid size value')}
         </div>
       )}
 
@@ -274,14 +302,19 @@ export function ShoeSizeConverterClient() {
           [
             L('summaryTitle', 'Shoe Size Conversion'),
             `${valueLabel}: ${value} ${valueSuffix}`,
-            matched
+            valid && matched
               ? `${L('out.us', 'US size')}: ${matched.label} · ${L('out.uk', 'UK size')}: ${trim1(matched.uk)} · ${L('out.eu', 'EU size')}: ${trim1(matched.eu)} · ${L('out.cm', 'Foot length (cm)')}: ${fmtNum(matched.cm, 1)} cm`
-              : L('errInvalid', 'Enter a valid size value'),
+              : range
+                ? L('errRange', 'Outside the table range ({min}–{max} {unit}) - enter a size the table covers')
+                    .replace('{min}', trim1(range.min))
+                    .replace('{max}', trim1(range.max))
+                    .replace('{unit}', valueSuffix)
+                : L('errInvalid', 'Enter a valid size value'),
           ].join('\n')
         }
         filename="shoe-size-conversion.txt"
         downloadContent={
-          matched
+          valid && matched
             ? [
                 L('summaryTitle', 'Shoe Size Conversion'),
                 `${valueLabel}: ${value} ${valueSuffix}`,
@@ -293,7 +326,7 @@ export function ShoeSizeConverterClient() {
             : L('errInvalid', 'Enter a valid size value')
         }
         copyLabel={L('copySummary', 'Copy Summary')}
-        disabled={!matched}
+        disabled={!valid}
       />
 
       <CalculatorNote>

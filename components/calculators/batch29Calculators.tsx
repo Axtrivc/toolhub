@@ -57,7 +57,7 @@ export const BtuCalculatorClient = makeCalculatorClient({
     const area = toNumStrict(v.area)
     const ceiling = toNumStrict(v.ceiling)
     const occupants = toNum(v.occupants)
-    if (isNaN(area) || isNaN(ceiling) || area <= 0 || area > 2000 || ceiling < 6 || ceiling > 16) {
+    if (isNaN(area) || isNaN(ceiling) || area < 50 || area > 2000 || ceiling < 6 || ceiling > 16) {
       return {
         btu: `⚠️ ${T('errInvalid', 'Enter a valid area (50-2,000 sq ft) and ceiling (6-16 ft)')}`,
         tons: '—', kw: '—', sizing: '—',
@@ -75,7 +75,7 @@ export const BtuCalculatorClient = makeCalculatorClient({
     const ratio = rounded / areaOnly
     const sizing =
       ratio > 1.3 ? `⚠️ ${T('sizing.up', 'Corrections add a lot — fix insulation or shade before buying a bigger unit')}`
-      : ratio < 0.85 ? `✅ ${T('sizing.down', 'Shading trims the load — a smaller unit avoids short-cycling')}`
+      : ratio < 0.85 ? `✅ ${T('sizing.down', 'Corrections trim the load — a smaller unit avoids short-cycling')}`
       : T('sizing.right', 'Right-sized: oversizing cools fast but never dehumidifies')
     return {
       btu: `${rounded.toLocaleString('en-US')} BTU/hr`,
@@ -93,7 +93,7 @@ export const BtuCalculatorClient = makeCalculatorClient({
   chart: { kind: 'compare', title: 'Base load vs your corrections' },
   compare: (v) => {
     const area = toNum(v.area), ceiling = toNum(v.ceiling)
-    if (!(area > 0) || area > 2000 || !(ceiling >= 6) || ceiling > 16) return null
+    if (!(area >= 50) || area > 2000 || !(ceiling >= 6) || ceiling > 16) return null
     const sunAdj = v.sun === 'shaded' ? -0.1 : v.sun === 'sunny' ? 0.1 : 0
     const floorAdj = v.topFloor === 'yes' ? 0.1 : 0
     const total =
@@ -168,7 +168,8 @@ export const WallpaperCalculatorClient = makeCalculatorClient({
     { key: 'doors', label: 'Doors', default: '2', slider: { min: 0, max: 10, step: 1 } },
     { key: 'windows', label: 'Windows', default: '2', slider: { min: 0, max: 15, step: 1 } },
     { key: 'rollWidth', label: 'Roll width', suffix: 'in', default: '27', slider: { min: 18, max: 36, step: 0.5 } },
-    { key: 'rollLength', label: 'Roll length', suffix: 'ft', default: '33', slider: { min: 10, max: 40, step: 0.5 } },
+    // 默认 = 真实美式双卷 27 in × 27 ft(≈60.75 ft²);此前的 27×33 混拼了两种规格,卷面积虚高 ~22%
+    { key: 'rollLength', label: 'Roll length', suffix: 'ft', default: '27', slider: { min: 10, max: 40, step: 0.5 } },
     { key: 'repeat', label: 'Pattern repeat', suffix: 'in', default: '10', slider: { min: 0, max: 36, step: 1 } },
   ],
   outputs: [
@@ -214,10 +215,10 @@ export const WallpaperCalculatorClient = makeCalculatorClient({
       wallArea: `${fmtNum(area, 0)} ft²`,
     }
   },
-  sample: { perimeter: '48', height: '8', doors: '2', windows: '2', rollWidth: '27', rollLength: '33', repeat: '10' },
+  sample: { perimeter: '48', height: '8', doors: '2', windows: '2', rollWidth: '27', rollLength: '27', repeat: '10' },
   presets: [
-    { label: '12×12 ft room', values: { perimeter: '48', height: '8', doors: '2', windows: '2', rollWidth: '27', rollLength: '33', repeat: '10' } },
-    { label: 'Single accent wall', values: { perimeter: '14', height: '9', doors: '0', windows: '0', rollWidth: '27', rollLength: '33', repeat: '0' } },
+    { label: '12×12 ft room', values: { perimeter: '48', height: '8', doors: '2', windows: '2', rollWidth: '27', rollLength: '27', repeat: '10' } },
+    { label: 'Single accent wall', values: { perimeter: '14', height: '9', doors: '0', windows: '0', rollWidth: '27', rollLength: '27', repeat: '0' } },
     { label: 'Euro roll, 10 ft ceiling', values: { perimeter: '40', height: '10', doors: '1', windows: '1', rollWidth: '21', rollLength: '33', repeat: '18' } },
   ],
   chart: { kind: 'compare', title: 'Double vs single rolls' },
@@ -233,17 +234,18 @@ export const WallpaperCalculatorClient = makeCalculatorClient({
       return perRoll < 1 ? null : Math.ceil(strips / perRoll)
     }
     const dbl = rollsFor(rollLength)
-    const single = rollsFor(16.5)
+    // 美式单卷 = 双卷的一半:27 in × 13.5 ft(27×16.5 并非真实规格)
+    const single = rollsFor(13.5)
     if (dbl == null || single == null) return null
     return {
       rows: [
         { label: 'Your roll', segments: [{ label: 'Rolls', value: dbl, color: '#3b82f6' }] },
-        { label: 'US single roll (16.5 ft)', segments: [{ label: 'Rolls', value: single, color: '#f59e0b' }] },
+        { label: 'US single (13.5 ft)', segments: [{ label: 'Rolls', value: single, color: '#f59e0b' }] },
       ],
       formatTotal: (n) => `${Math.round(n)}`,
     }
   },
-  note: '🧱 Strip counting beats area division: every strip must start at the same point in the pattern, so a repeat eats real length per strip. US "double rolls" (27 in × 33 ft) and Euro rolls (21 in × 33 ft) waste far less than 16.5 ft singles. Buy one extra roll — dye lots differ.',
+  note: '🧱 Strip counting beats area division: every strip must start at the same point in the pattern, so a repeat eats real length per strip. US "double rolls" (27 in × 27 ft) and Euro rolls (21 in × 33 ft) waste far less than 13.5 ft singles. Buy one extra roll — dye lots differ.',
 })
 
 // ── 菜床土方计算器 ──
@@ -257,10 +259,12 @@ export const RaisedBedSoilCalculatorClient = makeCalculatorClient({
       { label: 'Feet & inches', value: 'ft' },
       { label: 'Meters & cm', value: 'm' },
     ]},
-    { key: 'length', label: 'Bed length', default: '8', slider: { min: 1, max: 40, step: 0.5 } },
+    // 后缀双单位:长宽 ft|m、深度 in|cm 随上方 Units 开关二选一 —— 深度单位与长宽不同,
+    // 静态后缀至少让"米制下深度是 cm、长宽是 m"这一差异在输入框里可见
+    { key: 'length', label: 'Bed length', suffix: 'ft / m', default: '8', slider: { min: 1, max: 40, step: 0.5 } },
     // min 0.5:公制阳台床(0.5 m 宽)能落在滑杆行程内,英制 6 in 窄槽也覆盖
-    { key: 'width', label: 'Bed width', default: '4', slider: { min: 0.5, max: 20, step: 0.5 } },
-    { key: 'depth', label: 'Bed depth', default: '12', slider: { min: 2, max: 48, step: 1 } },
+    { key: 'width', label: 'Bed width', suffix: 'ft / m', default: '4', slider: { min: 0.5, max: 20, step: 0.5 } },
+    { key: 'depth', label: 'Bed depth', suffix: 'in / cm', default: '12', slider: { min: 2, max: 48, step: 1 } },
   ],
   outputs: [
     { key: 'volume', label: 'Soil volume to fill', highlight: true },
@@ -320,7 +324,9 @@ export const RaisedBedSoilCalculatorClient = makeCalculatorClient({
         { label: "Mel's Mix (1:1:1)", segments: [
           { label: 'Compost', value: ft3 / 3, color: '#22c55e' },
           { label: 'Coir', value: ft3 / 3, color: '#a16207' },
-          { label: 'Vermiculite', value: ft3 / 3, color: '#f59e0b' },
+          // 蛭石是本行末段:行尾白色总值标签压在它上面,深板岩灰
+          // (#475569,含 0.92 不透明度合成后白字对比 ~6:1;原 #f59e0b 仅 ~2:1)
+          { label: 'Vermiculite', value: ft3 / 3, color: '#475569' },
         ] },
         { label: 'Budget blend (50/30/20)', segments: [
           { label: 'Compost', value: ft3 * 0.3, color: '#22c55e' },
@@ -496,9 +502,21 @@ export const BreadHydrationCalculatorClient = makeCalculatorClient({
     const levain = Math.max(0, toNum(v.levain))
     const levainHyd = toNum(v.levainHyd)
     const saltPct = toNum(v.saltPct)
-    if (isNaN(flour) || isNaN(water) || isNaN(levainHyd) || flour <= 0 || water < 0 || levainHyd <= 0 || levainHyd > 300 || saltPct < 0) {
+    // 面粉/水未填(如草稿恢复了空 Flour):结果占位 '—',不弹错误横幅 ——
+    // 用户还没操作就不该先看到报错
+    if ((v.flour ?? '').trim() === '' || (v.water ?? '').trim() === '') {
+      return { hydration: '—', effHydration: '—', levainPct: '—', salt: '—', doughWeight: '—' }
+    }
+    if (isNaN(flour) || isNaN(water) || flour <= 0 || water < 0) {
       return {
         hydration: `⚠️ ${tui('bread-hydration-calculator', locale, 'errPositive', 'Enter a positive flour weight and non-negative water')}`,
+        effHydration: '—', levainPct: '—', salt: '—', doughWeight: '—',
+      }
+    }
+    // 报错文案指向真正非法的字段:液种水合度须为 1-300%,盐量非负
+    if (levainHyd <= 0 || levainHyd > 300 || saltPct < 0) {
+      return {
+        hydration: `⚠️ ${tui('bread-hydration-calculator', locale, 'errLevain', 'Enter a levain hydration of 1-300% and a non-negative salt %')}`,
         effHydration: '—', levainPct: '—', salt: '—', doughWeight: '—',
       }
     }

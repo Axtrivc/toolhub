@@ -125,7 +125,10 @@ export const RaceTimePredictorClient = makeCalculatorClient({
       { label: '5K', value: '5' },
       { label: '10K', value: '10' },
       { label: 'Half', value: 'half' },
-      { label: 'Marathon', value: 'marathon' },
+      // 'Full'(与 'Half' 成对)而非 'Marathon':分段控件每段在 360px 下
+      // 仅 ~60px 宽,8 字符的 'Marathon' 会被 truncate 成 "Marat…";
+      // 全称保留在图表 x 轴与输出卡("Equivalent marathon")
+      { label: 'Full', value: 'marathon' },
     ]},
     // max 6:6 小时开外是走跑结合全马的常见区间(多数赛事关门 6:00-6:30),
     // 滑杆应能表达主流输入;更慢的手输仍有效
@@ -136,7 +139,8 @@ export const RaceTimePredictorClient = makeCalculatorClient({
       { label: '5K', value: '5' },
       { label: '10K', value: '10' },
       { label: 'Half', value: 'half' },
-      { label: 'Marathon', value: 'marathon' },
+      // 同 dist:短标签防 360px 截断(见上方注释)
+      { label: 'Full', value: 'marathon' },
     ]},
   ],
   outputs: [
@@ -149,7 +153,9 @@ export const RaceTimePredictorClient = makeCalculatorClient({
   ],
   compute: (v, locale) => {
     const h = toNum(v.hours), m = toNum(v.minutes), s = toNum(v.seconds)
-    const t1 = h + m / 60 + s / 3600
+    // 全程按「分钟」累计:fmtClock 的入参口径是分钟(×60 得秒),此前误传
+    // 小时会把所有输出压缩 60 倍(5K 显示 0:24 而非 23:59、配速 0:05 而非 5:27)
+    const t1 = h * 60 + m + s / 60
     const d1 = RIEGEL_DIST[v.dist] ?? 10
     if (!(t1 > 0) || h < 0 || m < 0 || s < 0) {
       return {
@@ -171,7 +177,8 @@ export const RaceTimePredictorClient = makeCalculatorClient({
   chart: { kind: 'series', title: 'Equivalent times by distance' },
   series: (v, locale) => {
     const h = toNum(v.hours), m = toNum(v.minutes), s = toNum(v.seconds)
-    const t1 = h + m / 60 + s / 3600
+    // 与 compute 同口径:分钟(fmtClock/formatY 均按分钟解释)
+    const t1 = h * 60 + m + s / 60
     const d1 = RIEGEL_DIST[v.dist] ?? 10
     if (!(t1 > 0) || h < 0 || m < 0 || s < 0) return null
     // x 轴距离标签复用 opt.dist.* 词典:zh 页不再出现英文 'Half'/'Marathon'
@@ -181,6 +188,7 @@ export const RaceTimePredictorClient = makeCalculatorClient({
         dl('opt.dist.5', '5K'),
         dl('opt.dist.10', '10K'),
         dl('opt.dist.half', 'Half'),
+        // 图表轴标签空间充裕,保留全称(分段控件里才用短标签 'Full')
         dl('opt.dist.marathon', 'Marathon'),
       ],
       lines: [{
@@ -326,8 +334,11 @@ export const BodySurfaceAreaCalculatorClient = makeCalculatorClient({
     const dubois = 0.007184 * Math.pow(h, 0.725) * Math.pow(w, 0.425)
     return {
       rows: [
-        { label: 'Mosteller', segments: [{ label: 'BSA', value: mosteller, color: '#3b82f6' }] },
-        { label: 'DuBois', segments: [{ label: 'BSA', value: dubois, color: '#22c55e' }] },
+        // 段标签按行给(Mosteller/DuBois 是人名,各语言同形,无需词典):
+        // StackedCompareChart 的图例按段标签去重,全部段同名 'BSA' 时
+        // 只剩一个蓝色图例,与绿色 DuBois 条对不上
+        { label: 'Mosteller', segments: [{ label: 'Mosteller', value: mosteller, color: '#3b82f6' }] },
+        { label: 'DuBois', segments: [{ label: 'DuBois', value: dubois, color: '#22c55e' }] },
       ],
       formatTotal: (n) => `${n.toFixed(2)} m²`,
     }
@@ -445,13 +456,16 @@ export const StepsToMilesCalculatorClient = makeCalculatorClient({
     const km = (steps * strideCm) / 100000
     const speedKmh = v.pace === 'slow' ? 3 : v.pace === 'brisk' ? 6.5 : 5
     const minutes = (km / speedKmh) * 60
+    // 先对总分钟取整再拆时/分:Math.floor(h) 与 Math.round(m%60) 各自取值时,
+    // 59.5+ 分钟会舍入成 60 却不向小时进位,出现 "1 h 60 min" 这类非法组合
+    const durMin = Math.round(minutes)
     return {
       miles: `${fmtNum(km / 1.609344, 2)} mi`,
       km: `${fmtNum(km, 2)} km`,
       perMile: `${fmtNum(1609.344 / (strideCm / 100), 0)}`,
-      duration: minutes >= 60
-        ? `${Math.floor(minutes / 60)} h ${Math.round(minutes % 60)} min`
-        : `${Math.round(minutes)} min`,
+      duration: durMin >= 60
+        ? `${Math.floor(durMin / 60)} h ${durMin % 60} min`
+        : `${durMin} min`,
     }
   },
   chart: { kind: 'series', title: 'More steps, more distance' },
@@ -529,7 +543,9 @@ export const WeightLossGoalCalculatorClient = makeCalculatorClient({
     else safety = `✅ ${T('pace.ok', 'Within the recommended 0.25-1 kg/week range')}`
     return {
       toLose: `${fmtNum(toLose, 1)} kg`,
-      weeks: `${fmtNum(weeks, 1)} (${Math.ceil(weeks)} ${wk})`,
+      // 标签已是 "Weeks to goal",值只给取整周数 + 单位;此前 "20.0 (20 wk)"
+      // 同一数字说三遍(标签/数值/括号),读起来像模板拼接错误
+      weeks: `${Math.ceil(weeks)} ${wk}`,
       dailyDeficit: `${fmtNum(deficit, 0)} kcal/day`,
       // 目标日期依赖"今天":SSR/首帧恒 '—',挂载后由 deriveNow 补齐
       goalDate: '—',
@@ -554,7 +570,14 @@ export const WeightLossGoalCalculatorClient = makeCalculatorClient({
     const rate = toNumStrict(v.rate)
     if (!(current > 0) || !(goal > 0) || !(rate > 0) || goal >= current || rate > 3) return null
     const weeks = (current - goal) / rate
-    const steps = Math.min(Math.max(Math.ceil(weeks), 2), 24)
+    // x 轴刻度防叠印:LineAreaChart 按 labelEvery 抽稀后再强制补末刻度,
+    // (n-1)%labelEvery ≠ 0 时倒数第二刻度会与末刻度挤到一起 —— 360px 下
+    // n=21 的 W18(居中)与 W20(右对齐)相距仅 ~22px,叠成 "WW80"。
+    // 把步数收敛到 {12,6,4,3,2}:这些 n=steps+1 在移动端(÷4)与桌面(÷7)
+    // 两种抽稀密度下都整除,刻度恒均匀;体重投影是精确直线,降采样不改曲线。
+    const SAFE_STEPS = [12, 6, 4, 3, 2]
+    const rawSteps = Math.min(Math.max(Math.ceil(weeks), 2), 24)
+    const steps = SAFE_STEPS.find((s) => s <= rawSteps) ?? 2
     const stride = weeks / steps
     const xLabels: string[] = []
     const weight: number[] = []
@@ -648,10 +671,14 @@ export const FiberIntakeCalculatorClient = makeCalculatorClient({
     const { grams } = fiberTargetFor(age, v.sex !== 'female')
     return {
       rows: [
+        // 单系列语义:四根条统一蓝色,与唯一图例 "Fiber grams" 一致
+        // (段标签全部同名时图例按标签去重只剩一个蓝色方块,若各条异色
+        // 就会出现"绿/粉/紫条配蓝色图例"的错配;食物名无法走 cmpseg.*
+        // 按行翻译,故取统一色而非按行改标签)
         { label: 'Daily target', segments: [{ label: 'Fiber grams', value: grams, color: '#3b82f6' }] },
-        { label: 'Lentils 1 cup', segments: [{ label: 'Fiber grams', value: 15.5, color: '#22c55e' }] },
-        { label: 'Raspberries 1 cup', segments: [{ label: 'Fiber grams', value: 8, color: '#ec4899' }] },
-        { label: 'Chia 1 tbsp', segments: [{ label: 'Fiber grams', value: 4.1, color: '#a855f7' }] },
+        { label: 'Lentils 1 cup', segments: [{ label: 'Fiber grams', value: 15.5, color: '#3b82f6' }] },
+        { label: 'Raspberries 1 cup', segments: [{ label: 'Fiber grams', value: 8, color: '#3b82f6' }] },
+        { label: 'Chia 1 tbsp', segments: [{ label: 'Fiber grams', value: 4.1, color: '#3b82f6' }] },
       ],
       formatTotal: (n) => `${n.toFixed(1)} g`,
     }

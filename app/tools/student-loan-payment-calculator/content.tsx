@@ -14,7 +14,7 @@ import { useApp } from '@/components/providers/AppProviders'
 const en: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>Three repayment plans, one honest comparison</h2>
-    <p>On $35,000 at 6.8% after a 6-month grace period, the standard 10-year plan runs about $416 a month. Stretching to 25 years drops the payment to roughly $251 — but total interest jumps from about $13,800 to $39,200. The graduated plan starts near $269 and steps up every two years, landing in between.</p>
+    <p>On $35,000 at 6.8% after a 6-month grace period, the standard 10-year plan runs about $416 a month. Stretching to 25 years drops the payment to roughly $251 — but interest over the repayment jumps from about $13,800 to $39,200. The graduated plan starts near $269 and steps up every two years, landing in between.</p>
     <h2>Why grace-period interest is a trap</h2>
     <p>Unsubsidized federal loans accrue interest the entire time you are in school and during the six-month grace period. Nothing is due, so nothing feels wrong — then the accrued interest capitalizes, joining the principal. Every subsequent payment is computed on the bigger number, and interest-on-interest runs for decades.</p>
     <h2>When each plan actually makes sense</h2>
@@ -28,7 +28,7 @@ const en: ReactNode = (
 const zh: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>三种还款计划,一次诚实的对比</h2>
-    <p>$35,000、6.8%、6 个月宽限期后:标准 10 年计划月供约 $416;拉长到 25 年降到约 $251——但总利息从约 $13,800 跳到 $39,200。阶梯计划从约 $269 起步、每两年上调一档,总成本落在两者之间。</p>
+    <p>$35,000、6.8%、6 个月宽限期后:标准 10 年计划月供约 $416;拉长到 25 年降到约 $251——但还款期利息从约 $13,800 跳到 $39,200。阶梯计划从约 $269 起步、每两年上调一档,总成本落在两者之间。</p>
     <h2>宽限期利息为什么是陷阱</h2>
     <p>非补贴联邦贷款在你整个在校期和毕业后的六个月宽限期内照常计息。因为不用还款,感觉不到任何异样——到期末利息资本化,并入本金。之后的每一笔月供都按更大的基数计算,利滚利能跑几十年。</p>
     <h2>各计划真正的适用场景</h2>
@@ -42,7 +42,7 @@ const zh: ReactNode = (
 const es: ReactNode = (
   <section className="prose-content mt-10 max-w-3xl">
     <h2>Tres planes de reembolso, una comparación honesta</h2>
-    <p>Con 35 000 $ al 6,8% tras 6 meses de carencia, el plan estándar a 10 años ronda los 416 $/mes. Estirar a 25 años baja la cuota a unos 251 $ — pero el interés total salta de unos 13 800 $ a 39 200 $. El escalonado arranca cerca de 269 $ y sube cada dos años, quedando en medio.</p>
+    <p>Con 35 000 $ al 6,8% tras 6 meses de carencia, el plan estándar a 10 años ronda los 416 $/mes. Estirar a 25 años baja la cuota a unos 251 $ — pero el interés durante la amortización salta de unos 13 800 $ a 39 200 $. El escalonado arranca cerca de 269 $ y sube cada dos años, quedando en medio.</p>
     <h2>Por qué el interés de la carencia es una trampa</h2>
     <p>Los préstamos federales no subsidiados devengan interés durante toda la carrera y los seis meses de carencia. No hay que pagar nada, así que nada duele — hasta que el interés acumulado se capitaliza y se une al capital. Cada cuota posterior se calcula sobre la cifra mayor, y el interés sobre interés corre durante décadas.</p>
     <h2>Cuándo tiene sentido cada plan</h2>

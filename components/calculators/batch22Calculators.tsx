@@ -65,6 +65,14 @@ export const DividendCalculatorClient = makeCalculatorClient({
         yieldPct: '—', monthlyAvg: '—', endIncome: '—', cumDividends: '—', dripShares: '—',
       }
     }
+    // 增长率下界:滑杆 min=0,但数字输入框透传原文不回夹;负增长会算出
+    // 负股息收入/负累计等无意义结果,必须显式报错(恒定派息应填 0)
+    if (growth < 0) {
+      return {
+        annualIncome: `⚠️ ${T('errGrowth', 'Dividend growth cannot be negative — use 0% for a flat payout')}`,
+        yieldPct: '—', monthlyAvg: '—', endIncome: '—', cumDividends: '—', dripShares: '—',
+      }
+    }
     // 年度复利模型:每年股息 = 持股 × 每股股息;DRIP 把当年股息按当前价买入新股;
     // 股价假设恒定(只投影收入复利,不预测股价),每股股息按 growth 复利增长。
     const drip = v.drip !== 'no'
@@ -100,7 +108,7 @@ export const DividendCalculatorClient = makeCalculatorClient({
     const dps = toNumStrict(v.dps)
     const growth = toNumStrict(v.growth)
     const years = Math.round(toNumStrict(v.years))
-    if ([shares, price, dps, growth, years].some((n) => Number.isNaN(n)) || shares <= 0 || price <= 0 || dps < 0 || years < 1 || years > 40) return null
+    if ([shares, price, dps, growth, years].some((n) => Number.isNaN(n)) || shares <= 0 || price <= 0 || dps < 0 || growth < 0 || years < 1 || years > 40) return null
     const drip = v.drip !== 'no'
     let sh = shares
     let d = dps
@@ -388,30 +396,31 @@ export const OptionsProfitCalculatorClient = makeCalculatorClient({
     }
     const mult = 100 * contracts
     const stake = prem * mult
-    // 到期损益(欧式简化,不计手续费/提前指派):
-    // long call (S−K−prem)×mult | short call (K+prem−S)×mult
-    // long put  (K−S−prem)×mult | short put  (S−K+prem)×mult
+    // 到期损益(欧式简化,不计手续费/提前指派)—— 价内按内在价值、价外归零:
+    // long call (max(0,S−K)−prem)×mult | short call (prem−max(0,S−K))×mult
+    // long put  (max(0,K−S)−prem)×mult | short put  (prem−max(0,K−S))×mult
+    // (线性式只对价内成立;价外必须归零,否则多头亏损会越过权利金上限)
     let pl: number
     let be: number
     let maxP: string
     let maxL: string
     if (v.pos === 'longCall') {
-      pl = (S - K - prem) * mult
+      pl = (Math.max(0, S - K) - prem) * mult
       be = K + prem
       maxP = T('unlimited', 'Unlimited')
       maxL = fmtUSD(stake)
     } else if (v.pos === 'shortCall') {
-      pl = (K + prem - S) * mult
+      pl = (prem - Math.max(0, S - K)) * mult
       be = K + prem
       maxP = fmtUSD(stake)
       maxL = T('unlimited', 'Unlimited')
     } else if (v.pos === 'longPut') {
-      pl = (K - S - prem) * mult
+      pl = (Math.max(0, K - S) - prem) * mult
       be = K - prem
       maxP = fmtUSD((K - prem) * mult)
       maxL = fmtUSD(stake)
     } else {
-      pl = (S - K + prem) * mult
+      pl = (prem - Math.max(0, K - S)) * mult
       be = K - prem
       maxP = fmtUSD(stake)
       maxL = fmtUSD((K - prem) * mult)
@@ -439,16 +448,19 @@ export const OptionsProfitCalculatorClient = makeCalculatorClient({
     const mult = 100 * contracts
     const lo = K * 0.7
     const hi = K * 1.3
-    const n = 25
+    // 采样 13 点(而非 25):x 轴抽稀步长 ceil(13/4)=4 与 ceil(13/7)=2 都整除 12,
+    // 末刻度不会因"强制补末点"与前一刻度相邻重叠($118$30 那类);拐点 S=K 落在
+    // i=6(70+60×6/12=100)被精确采样,到期损益本就是单拐点折线,13 点即几何精确
+    const n = 13
     const pts: number[] = []
     const xLabels: string[] = []
     for (let i = 0; i < n; i++) {
       const S = lo + ((hi - lo) * i) / (n - 1)
       let pl: number
-      if (v.pos === 'longCall') pl = (S - K - prem) * mult
-      else if (v.pos === 'shortCall') pl = (K + prem - S) * mult
-      else if (v.pos === 'longPut') pl = (K - S - prem) * mult
-      else pl = (S - K + prem) * mult
+      if (v.pos === 'longCall') pl = (Math.max(0, S - K) - prem) * mult
+      else if (v.pos === 'shortCall') pl = (prem - Math.max(0, S - K)) * mult
+      else if (v.pos === 'longPut') pl = (Math.max(0, K - S) - prem) * mult
+      else pl = (prem - Math.max(0, K - S)) * mult
       pts.push(pl)
       xLabels.push(`$${Math.round(S)}`)
     }
@@ -735,6 +747,8 @@ export const LotteryOddsCalculatorClient = makeCalculatorClient({
     let N: number, K: number, M: number, J: number
     let t2: [number, number], t3: [number, number]
     let tiers: [number, number][] | null = null
+    // 自定义玩法无副池(J=0)时可能凑不出与头奖可区分的第三奖级 → tier3 显示占位符
+    let hasT3 = true
     if (v.game !== 'custom' && GAMES[v.game]) {
       const g = GAMES[v.game]
       N = g.N; K = g.K; M = g.M; J = g.J; t2 = g.t2; t3 = g.t3; tiers = g.tiers
@@ -747,7 +761,16 @@ export const LotteryOddsCalculatorClient = makeCalculatorClient({
         return { jackpot: `⚠️ ${T('errInvalid', 'Main pool 2-99, picks 1-12 and ≤ pool, bonus 0-3 and ≤ bonus pool')}`, jackpotPct: '—', tier2: '—', tier3: '—', anyPrize: '—', noPrize: '—', totalCombos: '—' }
       }
       t2 = [K - 1, J]
-      t3 = [K, Math.max(0, J - 1)]
+      // 无副池时 [K, J−1] 退化为 [K, 0],恰好就是头奖本身(如 6/49 不开 bonus:
+      // 头奖 Match 6 会被再次标成 "Third-tier"),不能当第三奖级重复展示——
+      // 主池 ≥3 个号时降一档展示 Match K−2;主池太小则没有可区分的第三奖级
+      if (J > 0) t3 = [K, J - 1]
+      else if (K >= 3) t3 = [K - 2, 0]
+      else {
+        // 主池 ≤2 个号且无副池:凑不出第三个可区分奖级(占位值不会被展示)
+        hasT3 = false
+        t3 = t2
+      }
     }
     const pJp = tierProb(N, K, M, J, K, J)
     if (!(pJp > 0)) {
@@ -764,7 +787,9 @@ export const LotteryOddsCalculatorClient = makeCalculatorClient({
       jackpot: oneIn(pJp),
       jackpotPct: `${pctStr}%`,
       tier2: `${T('match', 'Match')} ${t2[0]}${bonusTag(t2[1])} · ${oneIn(tierProb(N, K, M, J, t2[0], t2[1]))}`,
-      tier3: `${T('match', 'Match')} ${t3[0]}${bonusTag(t3[1])} · ${oneIn(tierProb(N, K, M, J, t3[0], t3[1]))}`,
+      tier3: hasT3
+        ? `${T('match', 'Match')} ${t3[0]}${bonusTag(t3[1])} · ${oneIn(tierProb(N, K, M, J, t3[0], t3[1]))}`
+        : '—',
       anyPrize: `${fmtNum(anyP * 100, 2)}% · ${oneIn(anyP)}`,
       noPrize: `${fmtNum((1 - anyP) * 100, 2)}%`,
       totalCombos: fmtNum(combos, 0),

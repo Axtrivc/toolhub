@@ -23,6 +23,8 @@ import { DelayTimeCalculatorL10n } from '@/lib/i18n/tools-l10n/delay-time-calcul
  * refAbs:可选参考量级 —— 用它(而非 n 自己)决定 SI 前缀,让一组值同前缀输出。
  * 环形图(BreakdownChart)从显示串 parseNumeric 取数:两个功耗若各自选前缀,
  * "2.28 W vs 120.00 mW" 会被当成 2.28 : 120 把比例画反;同前缀则比例恒真。
+ * 注意极小尾数仍会落入 fmtNum 的科学计数法分支,环图功耗对改用 fmtEngPair
+ * (共前缀 + 自适应小数位)双保险。
  */
 function fmtEng(n: number, unit: string, digits = 2, refAbs?: number): string {
   if (!isFinite(n)) return '—'
@@ -42,6 +44,39 @@ function parseOrEmpty(s: string): number {
   const t = s.trim()
   if (t === '') return NaN
   return toNumStrict(t)
+}
+
+/**
+ * 环图(BreakdownChart)功耗对的共前缀格式化:与 fmtEng 同款前缀选择,
+ * 但小值侧按量级自适应加大小数位 —— fmtNum 对 |n| < 10^-digits 的非零值
+ * 走科学计数法分支(lib/format.ts),而环图从显示串 parseNumeric 只取得
+ * 尾数("1.0000e-4 W" 被读成 1.0),极小 Vf 下比例会完全失真。
+ * 自适应位数保证两侧都以十进制小数显示(如 "2.13 W" / "0.000089 W"),
+ * parseNumeric 读到的比例即真实功耗比。
+ */
+function fmtEngPair(a: number, b: number, unit: string): { a: string; b: string } {
+  const ref = Math.max(Math.abs(a), Math.abs(b))
+  if (!isFinite(ref) || ref === 0) return { a: `0 ${unit}`, b: `0 ${unit}` }
+  let mult = 1
+  let prefix = ''
+  if (ref < 1e-6) { mult = 1e9; prefix = 'n' }
+  else if (ref < 1e-3) { mult = 1e6; prefix = 'µ' }
+  else if (ref < 1) { mult = 1e3; prefix = 'm' }
+  else if (ref < 1e3) { mult = 1; prefix = '' }
+  else if (ref < 1e6) { mult = 1e-3; prefix = 'k' }
+  else if (ref < 1e9) { mult = 1e-6; prefix = 'M' }
+  else { mult = 1e-9; prefix = 'G' }
+  const sa = a * mult
+  const sb = b * mult
+  // 每侧独立定小数位:大值侧保持 2 位;小值侧加到 ≥3 位有效数字,
+  // 保证以十进制小数显示(如 "2.13 W" / "0.000089 W")
+  const digitsFor = (v: number): number => {
+    const abs = Math.abs(v)
+    return abs > 0 && abs < 0.01
+      ? Math.min(12, Math.max(2, Math.ceil(-Math.log10(abs)) + 2))
+      : 2
+  }
+  return { a: `${fmtNum(sa, digitsFor(sa))} ${prefix}${unit}`, b: `${fmtNum(sb, digitsFor(sb))} ${prefix}${unit}` }
 }
 
 // ── 欧姆定律:V/I/R/P 任填两个解其余 ──
@@ -111,7 +146,10 @@ export const OhmsLawCalculatorClient = makeCalculatorClient({
   series: (v) => {
     const sol = solveOhms(v)
     if (!sol || sol.V <= 0 || sol.R <= 0) return null
-    const rs = [0.25, 0.5, 0.75, 1, 1.5, 2, 3, 4].map((m) => sol.R * m)
+    // 7 个采样点:LineAreaChart 的 x 轴抽稀在移动端每 2 个索引取一档
+    // (ceil(7/4)=2,7-1=6 恰被整除),4/7 个标签均匀分布不叠印;
+    // 8 点时 6 与 7 相邻索引都被选中,窄屏上 "1.41 kΩ"/"1.88 kΩ" 会重叠
+    const rs = [0.25, 0.5, 1, 1.5, 2, 3, 4].map((m) => sol.R * m)
     return {
       xLabels: rs.map((r) => fmtEng(r, 'Ω')),
       lines: [
@@ -187,16 +225,17 @@ export const LedResistorCalculatorClient = makeCalculatorClient({
     const e12 = e12Ceil(ideal)
     const chosen = e12 ?? ideal
     const actual = (supply - vf) / chosen
-    // 两项功耗共用前缀(取较大者的量级),保证环形图比例与真实功耗一致(见 fmtEng)
+    // 两项功耗经 fmtEngPair 共前缀 + 自适应小数位输出,保证环形图按
+    // 显示串 parse 出的比例与真实功耗一致(见 fmtEngPair 注释)
     const pResistor = actual * actual * chosen
     const pLed = actual * vf
-    const pRef = Math.max(pResistor, pLed)
+    const pw = fmtEngPair(pResistor, pLed, 'W')
     return {
       resistor: fmtEng(ideal, 'Ω'),
       e12: e12 != null ? `${fmtEng(e12, 'Ω')} (E12)` : '—',
       actualCurrent: `${fmtNum(actual * 1000, 2)} mA`,
-      resistorPower: fmtEng(pResistor, 'W', 2, pRef),
-      ledPower: fmtEng(pLed, 'W', 2, pRef),
+      resistorPower: pw.a,
+      ledPower: pw.b,
     }
   },
   chart: {
@@ -299,7 +338,9 @@ export const VoltageDividerCalculatorClient = makeCalculatorClient({
     const chain = dividerChain(v)
     if (!chain) return null
     const { vin, r1, r2 } = chain
-    const rs = [0.1, 0.25, 0.5, 0.75, 1, 1.5, 2, 3, 4].map((m) => r2 * m)
+    // 7 个采样点:同 OhmsLaw —— 移动端抽稀 ceil(7/4)=2 且 6 可被整除,
+    // 标签 0.25/1/2/4 倍均匀分布;9 点时 6 与 8 两档在窄屏重叠
+    const rs = [0.1, 0.5, 1, 1.5, 2, 3, 4].map((m) => r2 * m)
     return {
       xLabels: rs.map((r) => fmtEng(r, 'Ω')),
       lines: [

@@ -53,8 +53,12 @@ export function UtmLinkBuilderClient() {
   const result = useMemo(() => {
     const raw = url.trim()
     if (!raw) return { link: '', error: `⚠️ ${L('errEmpty', 'Enter a base URL first.')}`, hints: [] as string[] }
-    // 无协议时按浏览器地址栏惯例补 https:// 再解析
-    const candidate = /^[a-zA-Z][a-zA-Z0-9+.-]*:/.test(raw) ? raw : `https://${raw}`
+    // 无协议时按浏览器地址栏惯例补 https:// 再解析。
+    // host:port 形态(example.com:8080/x、localhost:3000/dashboard)冒号前的 token
+    // 含点或就是 localhost —— WHATWG URL 会把它误当 scheme,这里按 host 处理再补协议。
+    const schemeMatch = /^([a-zA-Z][a-zA-Z0-9+.-]*):/.exec(raw)
+    const looksLikeScheme = !!schemeMatch && !schemeMatch[1].includes('.') && schemeMatch[1].toLowerCase() !== 'localhost'
+    const candidate = looksLikeScheme ? raw : `https://${raw}`
     let u: URL
     try {
       u = new URL(candidate)
@@ -146,7 +150,7 @@ export function UtmLinkBuilderClient() {
           ))}
         </ul>
       )}
-      <CalculatorNote>{L('note', '🔗 Existing query parameters on the base URL are preserved; utm_* values are URL-encoded, spaces become %20 or + depending on position. Keep a spreadsheet of campaign names — consistent naming is 90% of usable reports.')}</CalculatorNote>
+      <CalculatorNote>{L('note', '🔗 Existing query parameters on the base URL are preserved; utm_* values are URL-encoded (spaces serialize as + in query strings). Keep a spreadsheet of campaign names — consistent naming is 90% of usable reports.')}</CalculatorNote>
     </div>
   )
 }
@@ -156,7 +160,7 @@ export function UtmLinkBuilderClient() {
 interface CardBrand { name: string; test: (d: string) => boolean; lengths: number[] }
 
 const CARD_BRANDS: CardBrand[] = [
-  { name: 'Visa', test: (d) => d.startsWith('4'), lengths: [13, 16, 18, 19] },
+  { name: 'Visa', test: (d) => d.startsWith('4'), lengths: [13, 16, 19] },
   { name: 'Mastercard', test: (d) => /^(5[1-5]|222[1-9]|22[3-9]\d|2[3-6]\d\d|27[01]\d|2720)/.test(d), lengths: [16] },
   { name: 'American Express', test: (d) => /^3[47]/.test(d), lengths: [15] },
   { name: 'Discover', test: (d) => /^(6011|64[4-9]|65|622(12[6-9]|1[3-9]\d|[2-8]\d\d|9[01]\d|92[0-5]))/.test(d), lengths: [16, 17, 18, 19] },
@@ -224,23 +228,26 @@ export const CreditCardValidatorClient = makeTextTool({
 
 // ─────────────────────────── IBAN Validator (mod-97) ───────────────────────────
 
-/** 官方 IBAN 注册表:国家代码 → [英文国名, 总长度] */
+/** 官方 IBAN 注册表:国家代码 → [英文国名, 总长度](89 国,与 Wikipedia/SWIFT 官方清单对齐) */
 const IBAN_REGISTRY: Record<string, [string, number]> = {
   AL: ['Albania', 28], AD: ['Andorra', 24], AT: ['Austria', 20], AZ: ['Azerbaijan', 28], BH: ['Bahrain', 22],
-  BY: ['Belarus', 28], BE: ['Belgium', 16], BA: ['Bosnia and Herzegovina', 20], BR: ['Brazil', 29], BG: ['Bulgaria', 22],
-  CR: ['Costa Rica', 22], HR: ['Croatia', 21], CY: ['Cyprus', 28], CZ: ['Czech Republic', 24], DK: ['Denmark', 18],
-  DO: ['Dominican Republic', 28], EG: ['Egypt', 29], SV: ['El Salvador', 28], EE: ['Estonia', 20], FO: ['Faroe Islands', 18],
-  FI: ['Finland', 18], FR: ['France', 27], GE: ['Georgia', 22], DE: ['Germany', 22], GI: ['Gibraltar', 23],
-  GR: ['Greece', 27], GL: ['Greenland', 18], GT: ['Guatemala', 28], HN: ['Honduras', 28], HU: ['Hungary', 28],
-  IS: ['Iceland', 26], IQ: ['Iraq', 23], IE: ['Ireland', 22], IL: ['Israel', 23], IT: ['Italy', 27],
-  JO: ['Jordan', 30], KZ: ['Kazakhstan', 20], XK: ['Kosovo', 20], KW: ['Kuwait', 30], LV: ['Latvia', 21],
-  LB: ['Lebanon', 28], LI: ['Liechtenstein', 21], LT: ['Lithuania', 20], LU: ['Luxembourg', 20], MT: ['Malta', 31],
+  BY: ['Belarus', 28], BE: ['Belgium', 16], BA: ['Bosnia and Herzegovina', 20], BI: ['Burundi', 27], BR: ['Brazil', 29],
+  BG: ['Bulgaria', 22], CR: ['Costa Rica', 22], HR: ['Croatia', 21], CY: ['Cyprus', 28], CZ: ['Czech Republic', 24],
+  DK: ['Denmark', 18], DJ: ['Djibouti', 27], DO: ['Dominican Republic', 28], EG: ['Egypt', 29], SV: ['El Salvador', 28],
+  EE: ['Estonia', 20], FO: ['Faroe Islands', 18], FK: ['Falkland Islands', 18], FI: ['Finland', 18], FR: ['France', 27],
+  GE: ['Georgia', 22], DE: ['Germany', 22], GI: ['Gibraltar', 23], GR: ['Greece', 27], GL: ['Greenland', 18],
+  GT: ['Guatemala', 28], HN: ['Honduras', 28], HU: ['Hungary', 28], IS: ['Iceland', 26], IQ: ['Iraq', 23],
+  IE: ['Ireland', 22], IL: ['Israel', 23], IT: ['Italy', 27], JO: ['Jordan', 30], KZ: ['Kazakhstan', 20],
+  XK: ['Kosovo', 20], KW: ['Kuwait', 30], LV: ['Latvia', 21], LB: ['Lebanon', 28], LC: ['Saint Lucia', 32],
+  LI: ['Liechtenstein', 21], LT: ['Lithuania', 20], LU: ['Luxembourg', 20], LY: ['Libya', 25], MT: ['Malta', 31],
   MR: ['Mauritania', 27], MU: ['Mauritius', 30], MC: ['Monaco', 27], MD: ['Moldova', 24], ME: ['Montenegro', 22],
-  NL: ['Netherlands', 18], MK: ['North Macedonia', 19], NO: ['Norway', 15], PK: ['Pakistan', 24], PS: ['Palestine', 29],
-  PL: ['Poland', 28], PT: ['Portugal', 25], QA: ['Qatar', 29], RO: ['Romania', 24], SM: ['San Marino', 27],
-  SA: ['Saudi Arabia', 24], RS: ['Serbia', 22], SC: ['Seychelles', 31], SK: ['Slovakia', 24], SI: ['Slovenia', 19],
-  ES: ['Spain', 24], SE: ['Sweden', 24], CH: ['Switzerland', 21], TN: ['Tunisia', 24], TR: ['Turkey', 26],
-  AE: ['United Arab Emirates', 23], GB: ['United Kingdom', 22], VA: ['Vatican City', 22],
+  MN: ['Mongolia', 20], NL: ['Netherlands', 18], NI: ['Nicaragua', 28], MK: ['North Macedonia', 19], NO: ['Norway', 15],
+  OM: ['Oman', 23], PK: ['Pakistan', 24], PS: ['Palestine', 29], PL: ['Poland', 28], PT: ['Portugal', 25],
+  QA: ['Qatar', 29], RO: ['Romania', 24], RU: ['Russia', 33], SM: ['San Marino', 27], SA: ['Saudi Arabia', 24],
+  RS: ['Serbia', 22], SC: ['Seychelles', 31], SD: ['Sudan', 18], SK: ['Slovakia', 24], SI: ['Slovenia', 19],
+  SO: ['Somalia', 23], ST: ['São Tomé and Príncipe', 25], ES: ['Spain', 24], SE: ['Sweden', 24], CH: ['Switzerland', 21],
+  TL: ['Timor-Leste', 23], TN: ['Tunisia', 24], TR: ['Turkey', 26], UA: ['Ukraine', 29], AE: ['United Arab Emirates', 23],
+  GB: ['United Kingdom', 22], VA: ['Vatican City', 22], VG: ['British Virgin Islands', 24], YE: ['Yemen', 30],
 }
 
 function validateIban(input: string): string {
@@ -581,6 +588,9 @@ const HTTP_STATUS_DB: StatusRow[] = [
   { code: 204, name: 'No Content', cause: 'Success with an intentionally empty body (DELETE, PUT).', tip: '204 must have no body — use 200 with a body if you need one.' },
   { code: 205, name: 'Reset Content', cause: 'Success; the client should reset the form that sent the request.', tip: 'Rare today; mostly legacy form flows.' },
   { code: 206, name: 'Partial Content', cause: 'A Range request was satisfied; Content-Range describes the slice.', tip: 'Resume downloads with Range + If-Range validators.' },
+  { code: 207, name: 'Multi-Status', cause: 'WebDAV (RFC 4918): several operations reported together in one XML body.', tip: 'Parse the <d:response> elements — per-resource statuses live inside.' },
+  { code: 208, name: 'Already Reported', cause: 'WebDAV bindings (RFC 5842): members already enumerated earlier are omitted.', tip: 'Prevents infinite loops when a collection binds to itself.' },
+  { code: 226, name: 'IM Used', cause: 'RFC 3229 delta encoding: the served instance is an incremental manipulation.', tip: 'Rare — needs A-IM support on both client and server.' },
   { code: 300, name: 'Multiple Choices', cause: 'The resource has several representations and the server lists them.', tip: 'Rare — servers usually pick via content negotiation.' },
   { code: 301, name: 'Moved Permanently', cause: 'The URL changed for good; search engines transfer link equity.', tip: 'Update sitemaps and bookmarks; keep the redirect indefinitely.' },
   { code: 302, name: 'Found', cause: 'Temporary redirect; historic behavior may switch POST to GET.', tip: 'Need the method preserved? Use 307 instead.' },
@@ -881,9 +891,18 @@ export function CsvToSqlConverterClient() {
     const width = Math.max(...rows.map((r) => r.length))
     const padded = rows.map((r) => (r.length === width ? r : [...r, ...Array(width - r.length).fill('')]))
     const ragged = rows.filter((r) => r.length !== width).length
-    const columns = headerRow
+    const rawColumns = headerRow
       ? padded[0].map((h, i) => sanitizeIdent(h || `col${i + 1}`))
       : Array.from({ length: width }, (_, i) => `col${i + 1}`)
+    // 清洗后去重:'first name' 与 'first-name' 都成 first_name,重复列名会让 INSERT 非法
+    const used = new Set<string>()
+    const columns = rawColumns.map((c) => {
+      let name = c
+      let n = 1
+      while (used.has(name)) name = `${c}_${++n}`
+      used.add(name)
+      return name
+    })
     const data = headerRow ? padded.slice(1) : padded
     if (data.length === 0) return { sql: `⚠️ ${L('errHeaderOnly', 'Only a header row was found — add at least one data row.')}`, stat: '' }
 
@@ -893,7 +912,8 @@ export function CsvToSqlConverterClient() {
     const valueOf = (v: string, isNum: boolean) => {
       const t = v.trim()
       if (t === '') return nullsAsNull ? 'NULL' : "''"
-      if (isNum) return t
+      // 前导零(02134、007)按数值字面量导入会静默丢零 —— 保留引号按字符串原样输出
+      if (isNum && !/^-?0\d/.test(t)) return t
       return `'${t.replace(/'/g, "''")}'`
     }
     const stmts: string[] = []

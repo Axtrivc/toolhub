@@ -5,7 +5,7 @@
  *  - paypal-fee-calculator:PayPal 标准费率正算/反算(净额 ↔ 应收金额);
  *  - etsy-fee-calculator:Etsy 专属费率(上架 + 交易 + 支付处理 + Offsite Ads);
  *  - amazon-seller-fee-calculator:亚马逊类目佣金 + FBA 履约费 → 净利与利润率;
- *  - square-fee-calculator:Square 2.6%+10¢ 拍卡费率正算/反算 + 小票额有效费率曲线;
+ *  - square-fee-calculator:Square 2.6%+15¢ 拍卡费率正算/反算 + 小票额有效费率曲线;
  *  - youtube-money-calculator:月观看 × RPM 区间 → AdSense 月/年收入区间;
  *  - nps-calculator:推荐者/中立/贬损者 → NPS 分与 Bain 等级仪表盘;
  *  - conversion-rate-calculator:访问→转化 → 转化率、CPA 与提升 X% 的反推;
@@ -79,8 +79,12 @@ export const PayPalFeeCalculatorClient = makeCalculatorClient({
     const f = toNum(v.fixedFee)
     if (!(p >= 0) || p >= 100 || !(f >= 0)) return null
     // $10 起步:固定费稀释曲线的戏剧点($10 → ~8.4% 实际费率)在低票段,
-    // 与 note / 长文引用的口径一致
-    const marks = [10, 25, 50, 100, 250, 500, 1000, 2000]
+    // 与 note / 长文引用的口径一致。
+    // 取 7 个采样点而非 8:LineAreaChart 移动端抽稀(labelEvery=ceil(n/4))
+    // 会在末尾追加最后一个下标 —— n=8 时 $1,000/$2,000 两刻度相邻叠印成
+    // "$1,$2,000"(实测 375px);n=7 时末位下标 6 恰为抽稀格点,不再追加。
+    // fee/net 对金额均为线性,去掉 $1,000 采样点不影响曲线形状。
+    const marks = [10, 25, 50, 100, 250, 500, 2000]
     return {
       xLabels: marks.map((m) => `$${m.toLocaleString('en-US')}`),
       lines: [
@@ -234,7 +238,10 @@ export const AmazonSellerFeeCalculatorClient = makeCalculatorClient({
   },
   presets: [
     { label: '$25 private-label gadget', values: { price: '25', cogs: '8', otherCost: '2', referral: '15', fbaFee: '5.00' } },
-    { label: '$60 electronics accessory', values: { price: '60', cogs: '18', otherCost: '2.5', referral: '8', fbaFee: '5.60' } },
+    // 配件 ≠ 消费电子:Electronics Accessories 类目 ≤$100 部分佣金 15%
+    // (官方 sell.amazon.com/pricing,2026-10 核对),低价配件按 8% 展示会高估利润;
+    // 本预设演示的是 Consumer Electronics 基础类目的 flat 8%
+    { label: '$60 consumer electronics (8%)', values: { price: '60', cogs: '18', otherCost: '2.5', referral: '8', fbaFee: '5.60' } },
     { label: '$35 apparel (17%)', values: { price: '35', cogs: '9', otherCost: '2', referral: '17', fbaFee: '4.70' } },
   ],
   chart: { kind: 'compare', title: 'Where the sale price goes' },
@@ -245,15 +252,38 @@ export const AmazonSellerFeeCalculatorClient = makeCalculatorClient({
     const ref = toNum(v.referral)
     const fba = toNum(v.fbaFee)
     if (!(price > 0) || cogs < 0 || other < 0 || !(ref >= 0) || ref >= 100 || !(fba >= 0)) return null
+    const referralFee = price * (ref / 100)
+    const landed = cogs + other
+    const profit = price - referralFee - fba - landed
+    if (profit >= 0) {
+      return {
+        rows: [
+          { label: 'Sale price', segments: [
+            { label: 'Your profit', value: profit, color: '#22c55e' },
+            { label: 'Referral fee', value: referralFee, color: '#ef4444' },
+            { label: 'FBA fee', value: fba, color: '#f59e0b' },
+            { label: 'Goods + prep', value: landed, color: '#64748b' },
+          ] },
+        ],
+        formatTotal: (n) => fmtUSD(n),
+      }
+    }
+    // 亏损场景(费用+成本 > 售价):各费用段按真实美元值依次装进"售价"条,
+    // 装不下的直接截断 —— 条形总值恒等于售价,不再膨胀为 售价+|亏损|
+    // (旧实现 profit 段 Math.max(0,…) 清零后其余段原值保留,$10 售价能画出
+    // $29.50 的条)。亏损本身由结果卡的负值净利明示,图只表达售价被吞到哪。
+    let budget = price
+    const capped = [
+      { label: 'Referral fee', value: referralFee, color: '#ef4444' },
+      { label: 'FBA fee', value: fba, color: '#f59e0b' },
+      { label: 'Goods + prep', value: landed, color: '#64748b' },
+    ].map((s) => {
+      const value = Math.min(s.value, budget)
+      budget -= value
+      return { ...s, value }
+    })
     return {
-      rows: [
-        { label: 'Sale price', segments: [
-          { label: 'Your profit', value: Math.max(0, price - price * (ref / 100) - fba - cogs - other), color: '#22c55e' },
-          { label: 'Referral fee', value: price * (ref / 100), color: '#ef4444' },
-          { label: 'FBA fee', value: fba, color: '#f59e0b' },
-          { label: 'Goods + prep', value: cogs + other, color: '#64748b' },
-        ] },
-      ],
+      rows: [{ label: 'Sale price', segments: capped }],
       formatTotal: (n) => fmtUSD(n),
     }
   },
@@ -261,8 +291,11 @@ export const AmazonSellerFeeCalculatorClient = makeCalculatorClient({
 })
 
 // ───────────────────────────────────────────
-// Square Fee Calculator(2.6% + 10¢ 正算/反算)
+// Square Fee Calculator(2.6% + 15¢ 正算/反算)
 // 与 paypal-fee-calculator 同构,但 Square 费率档与"小票额有效费率"视角不同。
+// 2026 费率(squareup.com/help/us/en/article/5068,2026-10 核对):
+// 到店 2.6%+15¢(2026 初由 10¢ 上调);在线/发票免费档 3.3%+30¢,
+// Plus/Premium 2.9%+30¢;键入 3.5%+15¢ 不变。
 // ───────────────────────────────────────────
 export const SquareFeeCalculatorClient = makeCalculatorClient({
   slug: 'square-fee-calculator',
@@ -275,7 +308,7 @@ export const SquareFeeCalculatorClient = makeCalculatorClient({
     ]},
     { key: 'amount', label: 'Amount', suffix: '$', default: '100', slider: { min: 1, max: 2000, step: 1 } },
     { key: 'pct', label: 'Percentage rate', suffix: '%', default: '2.6', slider: { min: 0.5, max: 5, step: 0.01 } },
-    { key: 'fixed', label: 'Fixed fee', suffix: '$', default: '0.10', slider: { min: 0, max: 0.5, step: 0.01 } },
+    { key: 'fixed', label: 'Fixed fee', suffix: '$', default: '0.15', slider: { min: 0, max: 0.5, step: 0.01 } },
   ],
   outputs: [
     { key: 'toCharge', label: 'Charge the customer' },
@@ -303,16 +336,18 @@ export const SquareFeeCalculatorClient = makeCalculatorClient({
     }
   },
   presets: [
-    { label: 'In-person tap/dip (2.6% + 10¢)', values: { mode: 'forward', pct: '2.6', fixed: '0.10' } },
-    { label: 'Online checkout (2.9% + 30¢)', values: { mode: 'forward', pct: '2.9', fixed: '0.30' } },
+    { label: 'In-person tap/dip (2.6% + 15¢)', values: { mode: 'forward', pct: '2.6', fixed: '0.15' } },
+    { label: 'Online checkout (3.3% + 30¢)', values: { mode: 'forward', pct: '3.3', fixed: '0.30' } },
     { label: 'Keyed-in (3.5% + 15¢)', values: { mode: 'forward', pct: '3.5', fixed: '0.15' } },
-    { label: 'Invoices (3.3% + 30¢)', values: { mode: 'forward', pct: '3.3', fixed: '0.30' } },
+    { label: 'Online — Plus plan (2.9% + 30¢)', values: { mode: 'forward', pct: '2.9', fixed: '0.30' } },
   ],
   chart: { kind: 'series', title: 'Effective rate by ticket size' },
   series: (v) => {
     const p = toNum(v.pct)
     const f = toNum(v.fixed)
-    if (!(p > 0) || p >= 100 || !(f >= 0)) return null
+    // p=0(纯固定费)与 paypal 工具同口径:仍出图(有效费率 = f/t 曲线),
+    // 仅拦 p<0 / p≥100 / f<0 —— compute 也接受 p=0,图表不应比结果卡更严
+    if (!(p >= 0) || p >= 100 || !(f >= 0)) return null
     const tickets = [5, 10, 20, 50, 100, 250, 500]
     return {
       xLabels: tickets.map((t) => `$${t}`),
@@ -322,7 +357,7 @@ export const SquareFeeCalculatorClient = makeCalculatorClient({
       formatY: (n) => `${fmtNum(n, 1)}%`,
     }
   },
-  note: '📲 Square US rates: 2.6% + 10¢ tapped/dipped/QR, 2.9% + 30¢ online, 3.5% + 15¢ keyed-in. The fixed cents dominate small tickets — a $5 tap costs 4.6% effective. No monthly fee on the standard plan.',
+  note: '📲 Square US rates since early 2026: 2.6% + 15¢ tapped/dipped/QR in person (up from 10¢), 3.3% + 30¢ online checkout & invoices on the free plan (2.9% + 30¢ on Plus/Premium), 3.5% + 15¢ keyed-in. The fixed cents dominate small tickets — a $5 tap costs 5.6% effective. No monthly fee on the free plan.',
 })
 
 // ───────────────────────────────────────────

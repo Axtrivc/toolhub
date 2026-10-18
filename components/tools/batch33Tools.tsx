@@ -41,11 +41,14 @@ export const FaqSchemaGeneratorClient = makeTextTool({
     for (const block of blocks) {
       const lines = block.split('\n').map((l) => l.trim()).filter(Boolean)
       if (lines.length < 2) continue
-      const q = lines[0].replace(/^(Q(uestion)?)\s*[:.\-)]?\s*/i, '').trim()
+      // 前缀剥离要求显式分隔符(: . - )):占位符引导的主用法是纯文本首行问题/
+      // 答案,分隔符可选会把 "Quick question…" / "All orders…" 的首字母静默吃掉,
+      // 生成与页面可见内容不一致的 JSON-LD 文本(Google 要求 schema 与页面一致)。
+      const q = lines[0].replace(/^(Q(?:uestion)?)\s*[:.\-)]\s*/i, '').trim()
       const a = lines
         .slice(1)
         .join(' ')
-        .replace(/^(A(nswer)?)\s*[:.\-)]?\s*/i, '')
+        .replace(/^(A(?:nswer)?)\s*[:.\-)]\s*/i, '')
         .trim()
       if (q && a) pairs.push({ q, a })
     }
@@ -149,7 +152,9 @@ export const NumberToWordsConverterClient = makeTextTool({
       .map((line) => {
         const t = line.trim()
         if (t === '') return ''
-        const cleaned = t.replace(/[$,\s]/g, '')
+        // 四语文案承诺 $ 与 % 均被剥离(note/l10n):字符类必须含 %,否则
+        // 粘贴 "50%" 会走到「不是数字」分支,与文案不符
+        const cleaned = t.replace(/[$,\s%]/g, '')
         if (!/^[+-]?\d+(\.\d+)?$/.test(cleaned)) {
           return `${t} → ⚠️ ${L('errNotNumber', 'not a number')}`
         }

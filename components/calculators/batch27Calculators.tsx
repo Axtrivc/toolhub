@@ -44,6 +44,7 @@ export const OvulationCalculatorClient = makeCalculatorClient({
     { key: 'fertileStart', label: 'Fertile window starts' },
     { key: 'fertileEnd', label: 'Fertile window ends' },
     { key: 'nextPeriod', label: 'Next period expected' },
+    { key: 'nextPeriodIn', label: 'Next period in', sublabel: 'Based on today' },
     { key: 'status', label: 'Right now', sublabel: 'Based on today' },
   ],
   compute: (v, locale) => {
@@ -53,19 +54,21 @@ export const OvulationCalculatorClient = makeCalculatorClient({
     if (isNaN(t) || !Number.isInteger(cycle) || cycle < 21 || cycle > 45 || luteal < 9 || luteal > 16 || luteal >= cycle) {
       return {
         ovulation: `⚠️ ${tui('ovulation-calculator', locale, 'errInvalid', 'Enter a valid date (YYYY-MM-DD), cycle 21-45 days, luteal 9-16')}`,
-        fertileStart: '—', fertileEnd: '—', nextPeriod: '—', status: '—',
+        fertileStart: '—', fertileEnd: '—', nextPeriod: '—', status: '—', nextPeriodIn: '—',
         fertileDays: '0 days', otherDays: '0 days',
       }
     }
-    // 排卵日 = 下次月经 − 黄体期;易孕窗口 = 排卵前 5 天到后 1 天
+    // 排卵日 = 下次月经 − 黄体期;易孕窗口 = 排卵前 5 天到排卵当天(6 天,
+    // ASRM/Wilcox 1995 临床口径:精子最长存活 5 天 + 卵子约 24 h)
     const ov = t + (cycle - luteal) * MS_DAY
     return {
       ovulation: isoDate(ov),
       fertileStart: isoDate(ov - 5 * MS_DAY),
-      fertileEnd: isoDate(ov + MS_DAY),
+      fertileEnd: isoDate(ov),
       nextPeriod: isoDate(t + cycle * MS_DAY),
       // 挂载后由 deriveNow 基于今天补齐
       status: '—',
+      nextPeriodIn: '—',
       // 图表隐藏输出:窗口 6 天 vs 周期其余(值仅供 donut parseNumeric 取数,标签走 slice.* 键本地化)
       fertileDays: '6 days',
       otherDays: `${cycle - 6} days`,
@@ -77,26 +80,44 @@ export const OvulationCalculatorClient = makeCalculatorClient({
     const cycle = toNum(v.cycle)
     const luteal = toNum(v.luteal)
     if (isNaN(t) || !Number.isInteger(cycle) || cycle < 21 || cycle > 45 || luteal < 9 || luteal > 16) {
-      return { status: '—' }
+      return { status: '—', nextPeriodIn: '—' }
     }
     const now = new Date()
     const today = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate())
     const cycleMs = cycle * MS_DAY
     let ov = t + (cycle - luteal) * MS_DAY
-    // 窗口已完全过去则整周期后移(上限 60 个周期防死循环)
-    let k = 0
-    while (ov + MS_DAY < today && k < 60) {
-      ov += cycleMs
-      k++
+    // 窗口已完全过去则整周期后移。周期数直接按整除向上取整,不再用
+    // 「最多 60 次的 while」——旧写法在 60 个周期用尽后 ov 仍停在过去,
+    // 会渲染出 "Next ovulation in -5628 days" 这类负数倒计时(年份笔误
+    // 如 2006↔2026 即可触发)。超过 60 个周期视为日期填错,提示检查
+    // 而不是继续投影。
+    if (ov < today) {
+      const cycles = Math.ceil((today - ov) / cycleMs)
+      if (cycles > 60) {
+        return {
+          status: `⚠️ ${T('errTooOld', 'LMP is more than 60 cycles in the past - check the date (year typo?)')}`,
+          nextPeriodIn: '—',
+        }
+      }
+      ov += cycles * cycleMs
     }
-    if (today >= ov - 5 * MS_DAY && today <= ov + MS_DAY) {
-      return { status: T('statusFertile', 'Fertile window is open now') }
+    // 下次月经倒计时:与排卵日同一轮整周期推进(np = ov + 黄体期,边界
+    // 情形单独取整,保证 np ≥ today、天数非负)
+    let np = t + cycle * MS_DAY
+    if (np < today) np += Math.ceil((today - np) / cycleMs) * cycleMs
+    const daysToPeriod = Math.round((np - today) / MS_DAY)
+    const periodIn = daysToPeriod === 0
+      ? T('periodToday', 'Expected today')
+      : T('periodIn', 'In {n} days').replace('{n}', String(daysToPeriod))
+    if (today >= ov - 5 * MS_DAY && today <= ov) {
+      return { status: T('statusFertile', 'Fertile window is open now'), nextPeriodIn: periodIn }
     }
     const days = Math.round((ov - today) / MS_DAY)
     return {
       status: days === 0
         ? T('statusToday', 'Ovulation is today')
         : T('statusIn', 'Next ovulation in {n} days').replace('{n}', String(days)),
+      nextPeriodIn: periodIn,
     }
   },
   chart: {
@@ -107,7 +128,7 @@ export const OvulationCalculatorClient = makeCalculatorClient({
       { valueKey: 'otherDays', label: 'Rest of the cycle', color: '#cbd5e1' },
     ],
   },
-  note: '📅 Ovulation = next period − 14 days (the luteal phase), not a fixed time after the last one. Sperm survive up to 5 days and the egg ~24 hours, so the fertile window spans ovulation −5 to +1. Cycles of 21-45 days supported.',
+  note: '📅 Ovulation = next period − 14 days (the luteal phase), not a fixed time after the last one. Sperm survive up to 5 days and the egg ~24 hours, so the fertile window spans the 5 days before ovulation plus the day itself (6 days). Cycles of 21-45 days supported.',
 })
 
 // ─────────────────────────────────────────────
@@ -128,7 +149,11 @@ const IOM_TWINS: Record<string, { total: [number, number] | null; rate: number |
   obese: { total: [11, 19], rate: 0.49 },
 }
 const KG_TO_LB = 2.20462
-const fmtKg = (kg: number) => `${fmtNum(kg, 1)} kg`
+// kg 格式化:常规 1 位小数;|kg| < 0.1 时升到 2 位 —— fmtNum 对小于
+// 显示精度的非零值走科学计数法(0.5×1/13=0.0385 → "3.8462e-2"),
+// 孕 1-2 周的 "Expected gain by now" 会渲染成 "3.8462e-2 kg",健康
+// 指标给用户看科学计数法是误导性呈现,这里按量级自适应小数位规避
+const fmtKg = (kg: number) => `${fmtNum(kg, kg !== 0 && Math.abs(kg) < 0.1 ? 2 : 1)} kg`
 
 /** 从输入推导 BMI 档/本周推荐区间/当前增重;非法或双胎偏瘦返回 null(bmiKey 字段单独放行) */
 function pregnancyModel(v: Record<string, string>): {
@@ -313,6 +338,13 @@ const CAT_STAGE_L10N: [string, string][] = [
   ['stage.senior', 'Senior'],
   ['stage.superSenior', 'Super senior'],
 ]
+/** 下一生命阶段:[到龄年龄, 阶段 key(与 CAT_STAGE_L10N 对应,阈值与 stageIdx 对齐 1/7/11/15)] */
+const CAT_NEXT_STAGE: [number, string][] = [
+  [1, 'stage.youngAdult'],
+  [7, 'stage.matureAdult'],
+  [11, 'stage.senior'],
+  [15, 'stage.superSenior'],
+]
 export const CatAgeCalculatorClient = makeCalculatorClient({
   slug: 'cat-age-calculator',
   l10n: CatAgeCalculatorL10n,
@@ -324,6 +356,7 @@ export const CatAgeCalculatorClient = makeCalculatorClient({
   outputs: [
     { key: 'humanAge', label: 'Human-equivalent age', highlight: true },
     { key: 'lifeStage', label: 'Life stage' },
+    { key: 'nextStage', label: 'Next life stage' },
     { key: 'mythNote', label: 'About the ×7 rule' },
   ],
   compute: (v, locale) => {
@@ -332,15 +365,24 @@ export const CatAgeCalculatorClient = makeCalculatorClient({
     if (Number.isNaN(age) || age < 0 || age > 25) {
       return {
         humanAge: `⚠️ ${T('errInvalidAge', 'Enter an age between 0 and 25 years')}`,
-        lifeStage: '—', mythNote: '—',
+        lifeStage: '—', nextStage: '—', mythNote: '—',
       }
     }
     // 兽医共识曲线:第 1 年 ≈ 15 人岁,第 2 年 +9,之后每年 +4(与体型无关)
     const human = age <= 1 ? age * 15 : age <= 2 ? 15 + (age - 1) * 9 : 24 + (age - 2) * 4
     const stageIdx = age < 1 ? 0 : age < 7 ? 1 : age < 11 ? 2 : age < 15 ? 3 : 4
+    // 下一阶段与到龄年龄(≥15 岁已是最后阶段);结果卡第 4 格,
+    // 兼补齐 2 列网格尾行空位
+    const nextTh = CAT_NEXT_STAGE.find(([th]) => age < th)
+    const nextStage = nextTh
+      ? T('nextStageAt', '{stage} at age {n}')
+          .replace('{stage}', T(nextTh[1], CAT_STAGE_L10N.find(([k]) => k === nextTh[1])![1]))
+          .replace('{n}', String(nextTh[0]))
+      : T('stageFinal', 'Final stage')
     return {
       humanAge: `${fmtNum(human, 0)} ${T('unit.humanYears', 'human years')}`,
       lifeStage: T(CAT_STAGE_L10N[stageIdx][0], CAT_STAGE_L10N[stageIdx][1]),
+      nextStage,
       mythNote: T('myth', 'The ×7 rule ignores maturation pace'),
     }
   },
@@ -406,6 +448,7 @@ export const CatFoodCalculatorClient = makeCalculatorClient({
     { key: 'activityExtra', label: 'Activity portion (MER − RER)' },
     { key: 'cans', label: 'Cans per day', sublabel: 'Wet food (can basis)' },
     { key: 'grams', label: 'Daily food by weight' },
+    { key: 'perMeal', label: 'Per meal', sublabel: 'Split into 2 meals' },
   ],
   compute: (v, locale) => {
     const T = (key: string, fb: string) => tui('cat-food-calculator', locale, key, fb)
@@ -416,7 +459,7 @@ export const CatFoodCalculatorClient = makeCalculatorClient({
     if ([weight, factor, density, canWeight].some((n) => Number.isNaN(n)) || !(weight >= 0.5) || weight > 15 || !(factor > 0) || !(density > 0) || !(canWeight > 0)) {
       return {
         mer: `⚠️ ${T('errInvalid', 'Enter a weight of 0.5-15 kg and positive label values')}`,
-        rer: '—', activityExtra: '—', cans: '—', grams: '—',
+        rer: '—', activityExtra: '—', cans: '—', grams: '—', perMeal: '—',
         // 图表隐藏输出归零 → donut 无非零切片自动隐藏(否则 ⚠️ 文案里的
         // "0.5-15" 会被 parseNumeric 提取成 0.5,画出两块假切片)
         chartRer: '0 kcal/day', chartActivity: '0 kcal/day',
@@ -444,6 +487,8 @@ export const CatFoodCalculatorClient = makeCalculatorClient({
       activityExtra: `${fmtNum(mer - rer, 0)} kcal/day`,
       cans: cans === null ? '—' : `${fmtNum(cans, 2)} ${T('cupsWord', 'cans/day')}`,
       grams: `${fmtNum(gramsPerDay, 0)} g/day`,
+      // 按每日 2 餐拆分(note 同款建议:猫每日至少分 2 餐喂),兼补齐 3 列网格尾行
+      perMeal: `${fmtNum(gramsPerDay / 2, 0)} g`,
       chartRer: `${fmtNum(chartRer, 0)} kcal/day`,
       chartActivity: `${fmtNum(chartActivity, 0)} kcal/day`,
     }
@@ -600,6 +645,7 @@ export const ChineseZodiacCalculatorClient = makeCalculatorClient({
     { key: 'animal', label: 'Your zodiac animal', highlight: true },
     { key: 'element', label: 'Element & yin-yang' },
     { key: 'yinYang', label: 'Yin / Yang' },
+    { key: 'cyclePos', label: 'Cycle position', sublabel: '60-year cycle' },
     { key: 'cycleYears', label: 'Your zodiac years' },
     { key: 'edgeNote', label: 'Year applied' },
   ],
@@ -609,13 +655,16 @@ export const ChineseZodiacCalculatorClient = makeCalculatorClient({
     if (!Number.isInteger(year) || year < 1924 || year > 2031) {
       return {
         animal: `⚠️ ${T('errInvalidYear', 'Enter a year between 1924 and 2031')}`,
-        element: '—', yinYang: '—', cycleYears: '—', edgeNote: '—',
+        element: '—', yinYang: '—', cycleYears: '—', edgeNote: '—', cyclePos: '—',
       }
     }
     // 生肖年自立春(2/3-2/5)起算:立春前出生属上一年(八字口径)
     const effYear = v.edge === 'before' ? year - 1 : year
     const idx = ((effYear - 4) % 12 + 12) % 12
     const elIdx = ((effYear - 4) % 10 + 10) % 10
+    // 60 年甲子周期里的位置(12 动物 × 5 对阴阳五行,1984 年木鼠为第 1 年);
+    // 兼补齐 3 列结果网格的尾行空位
+    const cyclePos = T('cyclePos', 'Year {n} of 60').replace('{n}', String(((effYear - 4) % 60 + 60) % 60 + 1))
     const animalKey = ZODIAC_ANIMALS[idx]
     const elementKey = ELEMENT_KEYS[Math.floor(elIdx / 2)]
     const yang = elIdx % 2 === 0
@@ -633,6 +682,7 @@ export const ChineseZodiacCalculatorClient = makeCalculatorClient({
       animal: T(`animal.${animalKey}`, ANIMAL_DISPLAY[animalKey]),
       element: `${T(yang ? 'yang' : 'yin', yang ? 'Yang' : 'Yin')} ${T(`element.${elementKey}`, ELEMENT_DISPLAY[elementKey])}`,
       yinYang: T(yang ? 'yang' : 'yin', yang ? 'Yang' : 'Yin'),
+      cyclePos,
       cycleYears: years.join(' · '),
       edgeNote,
     }

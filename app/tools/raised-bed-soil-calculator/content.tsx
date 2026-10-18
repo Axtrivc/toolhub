@@ -58,7 +58,7 @@ const de: ReactNode = (
     <h2>Warum Erde setzt — und wie viel du kaufst</h2>
     <p>Sackerde wird aufgelockert gemessen und setzt in der ersten Saison um 20-30 %, während Wasser und Wurzeln sie verdichten. Zum einmaligen Füllen kaufe das geometrische Volumen; um im Frühjahr noch plan zu sein, plane mit der Zahl „nach Setzung" nach. Schüttgut schrumpft genauso — eine „5-Yards"-Lieferung sind im Beet keine fünf Yards.</p>
     <h2>Mel-Mix gegen Mutterboden-Mischung</h2>
-    <p>Der Mix von Mel Bartholomew (Square Foot Gardening) ist je ein Drittel Kompost, Kokosfasern (oder Torf) und Blähton: unkrautfrei, hervorragend drainiert und pro Kubikfuß teuer. Die günstige Alternative — etwa 50 % Mutterboden, 30 % Kompost, 20 % Kokos — kostet halb so viel, hält Wasser anders und verfestigt bei Regen. Beide Rezepte werden komponentenweise ausgewiesen.</p>
+    <p>Der Mix von Mel Bartholomew (Square Foot Gardening) ist je ein Drittel Kompost, Kokosfasern (oder Torf) und Vermiculit: unkrautfrei, hervorragend drainiert und pro Kubikfuß teuer. Die günstige Alternative — etwa 50 % Mutterboden, 30 % Kompost, 20 % Kokos — kostet halb so viel, hält Wasser anders und verfestigt bei Regen. Beide Rezepte werden komponentenweise ausgewiesen.</p>
     <h2>Tiefe Beete füllen, ohne Tiefe zu bezahlen</h2>
     <p>Wurzelgemüse will 12-18 Zoll lockeres Substrat, doch Kräuter und Blattsalate wurzeln nur in den oberen 6-8. Unten Karton, darauf Äste, Laub oder unbehandeltes Holz als Hügelbeet-Füllung — ein 24-Zoll-Beet braucht real nur die halbe Tiefe an gekaufter Mischung.</p>
   </section>

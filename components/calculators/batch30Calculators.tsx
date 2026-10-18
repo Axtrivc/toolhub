@@ -22,9 +22,13 @@ import { WindChillCalculatorL10n } from '@/lib/i18n/tools-l10n/wind-chill-calcul
 
 const DAY = 86400000
 
-/** 解析 "HH:MM" / "H:MM"(24 小时制,冒号或 h 分隔);裸数字(如 "7.75"/"32.5")按十进制小时;非法返回 NaN */
+/** 解析 "HH:MM" / "H:MM"(24 小时制,冒号或 h 分隔);裸数字(如 "7.75"/"32.5")按十进制小时;空串与非法返回 NaN */
 function parseHours(s: string): number {
   const t = s.trim()
+  // 空串 ≠ 00:00:00:00 恰是合法打卡时刻,清空打卡框若静默按午夜解释
+  // 会产出看似合法的错误工时(审计 B10:clockOut=17:00 时被算成 17h 班)。
+  // 需要「空 = 0」语义的字段(weekSoFar)由调用方自行短路,不经本函数。
+  if (t === '') return NaN
   const m = t.match(/^(\d{1,3})[:h](\d{1,2})$/)
   if (m) {
     const h = parseInt(m[1], 10)
@@ -94,7 +98,8 @@ export const TimeCardCalculatorClient = makeCalculatorClient({
     const tIn = parseHours(v.clockIn)
     const tOut = parseHours(v.clockOut)
     const brk = Number(v.breakMin)
-    const soFar = parseHours(v.weekSoFar)
+    // weekSoFar 清空 → 0(本周尚无累计,语义合理不误导);打卡时刻清空则走 errTime 报错
+    const soFar = v.weekSoFar.trim() === '' ? 0 : parseHours(v.weekSoFar)
     const thr = Number(v.otThreshold)
     const bad = (msg: string) => ({
       todayHM: `⚠️ ${msg}`, todayDec: '—', weekTotal: '—', regular: '—', overtime: '—', remaining: '—',
@@ -149,9 +154,12 @@ export const BusinessDaysCalculatorClient = makeCalculatorClient({
   l10n: BusinessDaysCalculatorL10n,
   inputs: [
     { key: 'startDate', label: 'Start date', default: '2026-10-19', type: 'text', placeholder: 'YYYY-MM-DD' },
+    // 选项标签从 'Add business days'/'Subtract business days' 缩短:360px 下
+    // 两段各 ~15 字符,原标签被截成 'Add business d…'(审计 B10);完整语义
+    // 由相邻的 'Business days' 数字字段标签补足
     { key: 'direction', label: 'Direction', default: 'add', options: [
-      { label: 'Add business days', value: 'add' },
-      { label: 'Subtract business days', value: 'sub' },
+      { label: 'Add', value: 'add' },
+      { label: 'Subtract', value: 'sub' },
     ]},
     { key: 'count', label: 'Business days', default: '10', slider: { min: 1, max: 90, step: 1 } },
     { key: 'holidays', label: 'Holidays (optional)', default: '2026-11-26, 2026-12-25', type: 'text', placeholder: 'YYYY-MM-DD, comma separated' },
@@ -238,7 +246,9 @@ export const WeekNumberCalculatorClient = makeCalculatorClient({
     { key: 'isoYear', label: 'ISO week-numbering year' },
     { key: 'weeksInYear', label: 'Weeks in that ISO year' },
     { key: 'weeksRemaining', label: 'ISO weeks remaining after this one' },
-    { key: 'thisWeek', label: 'This week (today)', sublabel: 'Loads after mount' },
+    // thisWeek 依赖客户端当前日期:SSR/首帧显示 '—' 占位,挂载后 deriveNow 补齐。
+    // 不加 sublabel 说明(原 'Loads after mount' 是开发口吻,已按审计移除)
+    { key: 'thisWeek', label: 'This week (today)' },
   ],
   compute: (v, locale) => {
     const L = (k: string, fb: string) => tuiFromEntry(WeekNumberCalculatorL10n, locale, k, fb)
@@ -296,11 +306,13 @@ export const PtoAccrualCalculatorClient = makeCalculatorClient({
   l10n: PtoAccrualCalculatorL10n,
   inputs: [
     { key: 'annualHours', label: 'Annual PTO allowance', suffix: 'h', default: '120', slider: { min: 0, max: 260, step: 4 } },
-    { key: 'frequency', label: 'Pay frequency', default: '26', options: [
-      { label: 'Weekly (52/year)', value: '52' },
-      { label: 'Biweekly (26/year)', value: '26' },
-      { label: 'Semimonthly (24/year)', value: '24' },
-      { label: 'Monthly (12/year)', value: '12' },
+    // 分段控件 4 段在 360px 每段仅容 ~6 字符:选项用「次数/年」短式保期数信息,
+    // 周频名称映射上移到字段标签,移动端不再省略号截断(审计 B10)
+    { key: 'frequency', label: 'Pay frequency (52 weekly · 26 biweekly · 24 semimonthly · 12 monthly)', default: '26', options: [
+      { label: '52/yr', value: '52' },
+      { label: '26/yr', value: '26' },
+      { label: '24/yr', value: '24' },
+      { label: '12/yr', value: '12' },
     ]},
     { key: 'periodsElapsed', label: 'Pay periods elapsed this year', default: '18', slider: { min: 0, max: 52, step: 1 } },
     { key: 'usedHours', label: 'PTO hours already used', suffix: 'h', default: '40', slider: { min: 0, max: 260, step: 1 } },
@@ -373,14 +385,16 @@ export const DownloadTimeCalculatorClient = makeCalculatorClient({
       { label: 'TB', value: 'TB' },
     ]},
     { key: 'speed', label: 'Connection speed', default: '100', slider: { min: 1, max: 2000, step: 1 } },
+    // 选项短式:Mb/MB 之辨在 note 详述;括号说明在 360px 分段控件里只会被
+    // 截成 'Mbps (megabits…'(审计 B10),不如不写
     { key: 'speedUnit', label: 'Speed unit', default: 'Mbps', options: [
-      { label: 'Mbps (megabits/s)', value: 'Mbps' },
-      { label: 'MB/s (megabytes/s)', value: 'MBps' },
+      { label: 'Mbps', value: 'Mbps' },
+      { label: 'MB/s', value: 'MBps' },
     ]},
     { key: 'overhead', label: 'Protocol overhead', default: '10', options: [
-      { label: 'None (theoretical)', value: '0' },
-      { label: '10% (typical TCP)', value: '10' },
-      { label: '15% (busy Wi-Fi)', value: '15' },
+      { label: 'None', value: '0' },
+      { label: '10% TCP', value: '10' },
+      { label: '15% WiFi', value: '15' },
     ]},
   ],
   presets: [

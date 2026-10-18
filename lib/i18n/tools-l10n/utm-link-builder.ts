@@ -22,7 +22,7 @@ export const UtmLinkBuilderL10n: ToolL10n = {
       'errProto': '仅支持 http:// 与 https:// 基础 URL——当前是',
       'hintRequired': 'utm_source 与 utm_medium 必填——缺任何一个,GA4 都会把会话归入 "direct / none"。',
       'hintCase': '参数值区分大小写:"Email" 与 "email" 在报表里是两行。小写是通行惯例。',
-      'note': '🔗 基础 URL 上已有的查询参数会保留;utm_* 值按规则编码,空格会变 %20 或 +(取决于位置)。维护一张活动命名表——命名一致是报表可用的九成功力。',
+      'note': '🔗 基础 URL 上已有的查询参数会保留;utm_* 值按规则编码,空格在查询串里统一序列化为 +。维护一张活动命名表——命名一致是报表可用的九成功力。',
     },
   },
   es: {
@@ -42,7 +42,7 @@ export const UtmLinkBuilderL10n: ToolL10n = {
       'errProto': 'Solo se admiten URL base http:// y https:// — se recibió',
       'hintRequired': 'utm_source y utm_medium son obligatorios: sin ambos, GA4 arrastra la sesión a «direct / none».',
       'hintCase': 'Los valores distinguen mayúsculas: «Email» y «email» son dos filas distintas en los informes. La convención es minúsculas.',
-      'note': '🔗 Los parámetros de consulta existentes en la URL base se conservan; los valores utm_* se codifican (los espacios pasan a %20 o + según la posición). Mantén una hoja con los nombres de campaña: la consistencia es el 90 % de unos informes utilizables.',
+      'note': '🔗 Los parámetros de consulta existentes en la URL base se conservan; los valores utm_* se codifican (los espacios se serializan como + en la cadena de consulta). Mantén una hoja con los nombres de campaña: la consistencia es el 90 % de unos informes utilizables.',
     },
   },
   de: {
@@ -62,7 +62,7 @@ export const UtmLinkBuilderL10n: ToolL10n = {
       'errProto': 'Nur http://- und https://-Basis-URLs werden unterstützt — erhalten wurde',
       'hintRequired': 'utm_source und utm_medium sind Pflicht — ohne beide schiebt GA4 die Session in „direct / none“.',
       'hintCase': 'Werte sind case-sensitive: „Email“ und „email“ werden zu zwei Berichtszeilen. Kleinbuchstaben sind die Konvention.',
-      'note': '🔗 Vorhandene Query-Parameter der Basis-URL bleiben erhalten; utm_*-Werte werden kodiert (Leerzeichen je nach Position zu %20 oder +). Führe eine Tabelle mit Kampagnennamen — konsistentes Naming ist 90 % brauchbarer Reports.',
+      'note': '🔗 Vorhandene Query-Parameter der Basis-URL bleiben erhalten; utm_*-Werte werden kodiert (Leerzeichen serialisieren sich in der Query-Zeichenkette als +). Führe eine Tabelle mit Kampagnennamen — konsistentes Naming ist 90 % brauchbarer Reports.',
     },
   },
 }

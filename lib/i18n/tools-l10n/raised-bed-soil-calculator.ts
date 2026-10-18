@@ -82,11 +82,11 @@ export const RaisedBedSoilCalculatorL10n: ToolL10n = {
     },
   },
   de: {
-    useCases: ['ausrechnen, wie viel Erde ein neues Hochbeet braucht (ft³/yd³/Liter)', 'Kompost, Kokos und Blähton nach Mel-Mix 1:1:1 einkaufen', 'mit der günstigen Mutterboden-Mischung das Budget halten', 'das Volumen auf 30-L-Säcke umrechnen'],
+    useCases: ['ausrechnen, wie viel Erde ein neues Hochbeet braucht (ft³/yd³/Liter)', 'Kompost, Kokos und Vermiculit nach Mel-Mix 1:1:1 einkaufen', 'mit der günstigen Mutterboden-Mischung das Budget halten', 'das Volumen auf 30-L-Säcke umrechnen'],
     faqs: [
       { q: 'Wie viel Erde braucht ein 4×8-Fuß-Beet mit 12 Zoll Tiefe?', a: 'Genau 32 Kubikfuß (etwa 906 Liter, 1,19 yd³). Schüttgut bestellst du pro Kubikyard, Sackware pro Liter — hier bekommst du beide Angaben.' },
       { q: 'Warum „schrumpft" die Erde?', a: 'Sackerde wird locker gemessen und setzt in der ersten Saison um 20-30 %. Zum einmaligen Füllen kaufe das geometrische Volumen; die Zeile „nach Setzung" zeigt, was wirklich im Beet bleibt.' },
-      { q: 'Mel-Mix oder günstige Mischung?', a: 'Der Mel-Mix (Square-Foot-Gardening von Mel Bartholomew) ist je ein Drittel Kompost, Kokosfasern und Blähton/Vermiculit — leicht und hervorragend drainiert, aber teuer. 50 % Mutterboden + 30 % Kompost + 20 % Kokos kostet weniger, ist aber schwerer und verdichtet schneller.' },
+      { q: 'Mel-Mix oder günstige Mischung?', a: 'Der Mel-Mix (Square-Foot-Gardening von Mel Bartholomew) ist je ein Drittel Kompost, Kokosfasern und Vermiculit — leicht und hervorragend drainiert, aber teuer. 50 % Mutterboden + 30 % Kompost + 20 % Kokos kostet weniger, ist aber schwerer und verdichtet schneller.' },
       { q: 'Was kommt in den Boden des Beets?', a: 'Üblich ist: Karton oder Unkrautvlies unten, grobe Äste und Laub als voluminöse Füllung, darauf 20-30 cm gute Erde — außer bei Tiefwurzeln. Das spart echte Erde.' },
     ],
     ui: {
@@ -103,7 +103,7 @@ export const RaisedBedSoilCalculatorL10n: ToolL10n = {
       'out.budgetMix': 'Günstige Mischung',
       'out.bags': 'Sackware',
       'outSub.settled': 'Lockere Erde setzt ~25 %',
-      'outSub.melMix': '⅓ Kompost · ⅓ Kokos · ⅓ Blähton',
+      'outSub.melMix': '⅓ Kompost · ⅓ Kokos · ⅓ Vermiculit',
       'outSub.budgetMix': '50 % Mutterboden · 30 % Kompost · 20 % Kokos',
       'each': 'je',
       'errPositive': 'Gib positive Beetmaße ein',
@@ -112,7 +112,7 @@ export const RaisedBedSoilCalculatorL10n: ToolL10n = {
       'cmp.1': 'Günstige Mischung (50/30/20)',
       'cmpseg.0': 'Kompost',
       'cmpseg.1': 'Kokos',
-      'cmpseg.2': 'Blähton/Mutterboden',
+      'cmpseg.2': 'Vermiculit/Mutterboden',
       'preset.0': 'Klassisches 4×8-Beet',
       'preset.1': 'Flaches 2×6-Kräuterbeet',
       'preset.2': 'Balkon 1 × 0,5 m',

@@ -51,7 +51,7 @@ export const CommuteCostCalculatorL10n: ToolL10n = {
       'cmp.0': '车辆成本',
       'cmp.1': '时间价值',
       'cmpseg.0': '年度金额',
-      'note': '🚙 每英里费率法(70¢ 为 2025 年 IRS 口径)给整辆车定价:燃油、轮胎、折旧、保险。MPG 法只算油钱,会低估约一半的真实成本。无论哪种算法,单程 30 分钟的通勤一年要花掉约 6 个 40 小时工作周的时间。',
+      'note': '🚙 每英里费率法(76¢ 为 2026 年下半年 IRS 口径)给整辆车定价:燃油、轮胎、折旧、保险。MPG 法只算油钱,会低估约一半的真实成本。无论哪种算法,单程 30 分钟的通勤一年要花掉约 6 个 40 小时工作周的时间。',
     },
   },
   es: {
@@ -101,7 +101,7 @@ export const CommuteCostCalculatorL10n: ToolL10n = {
       'cmp.0': 'Coste del coche',
       'cmp.1': 'Valor del tiempo',
       'cmpseg.0': 'Importe anual',
-      'note': '🚙 La tarifa por milla (70¢, cifra IRS 2025) paga el coche completo: combustible, neumáticos, depreciación y seguros. El método MPG solo cubre la gasolina y subestima el coste real en torno a la mitad. En cualquier caso, 30 minutos de trayecto consumen unas seis semanas de trabajo al año solo en tiempo.',
+      'note': '🚙 La tarifa por milla (76¢, cifra IRS del 2º semestre de 2026) paga el coche completo: combustible, neumáticos, depreciación y seguros. El método MPG solo cubre la gasolina y subestima el coste real en torno a la mitad. En cualquier caso, 30 minutos de trayecto consumen unas seis semanas de trabajo al año solo en tiempo.',
     },
   },
   de: {
@@ -151,7 +151,7 @@ export const CommuteCostCalculatorL10n: ToolL10n = {
       'cmp.0': 'Autokosten',
       'cmp.1': 'Zeitwert',
       'cmpseg.0': 'Jahresbetrag',
-      'note': '🚙 Der Meilensatz (70 ¢, IRS-Referenz 2025) bezahlt das ganze Auto: Kraftstoff, Reifen, Wertverlust, Versicherung. Die MPG-Methode deckt nur den Sprit und unterschätzt die echten Kosten um rund die Hälfte. So oder so: 30 Minuten einfach pro Weg kosten etwa sechs 40-Stunden-Wochen pro Jahr allein an Zeit.',
+      'note': '🚙 Der Meilensatz (76 ¢, IRS-Referenz für das 2. Halbjahr 2026) bezahlt das ganze Auto: Kraftstoff, Reifen, Wertverlust, Versicherung. Die MPG-Methode deckt nur den Sprit und unterschätzt die echten Kosten um rund die Hälfte. So oder so: 30 Minuten einfach pro Weg kosten etwa sechs 40-Stunden-Wochen pro Jahr allein an Zeit.',
     },
   },
 }

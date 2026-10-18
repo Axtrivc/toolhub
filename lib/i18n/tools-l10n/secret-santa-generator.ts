@@ -1,12 +1,22 @@
 /**
  * secret-santa-generator 本地化 bundle —— zh / es / de(B14 生成器与趣味批次)
- * 覆盖: ui / faqs / useCases。formula 缺失自动回退英文。
+ * 覆盖: ui / faqs / useCases / formula.example。其余 formula 字段缺失自动回退英文。
+ *
+ * formula.example 为修正版计数:互斥一对是双向禁止(A 送 B、B 送 A 都排除),
+ * n=4 的 9 个错排中该规则排除 5 个、仅存活 4 个(原英文注册表误写为 8)。
  */
 import type { ToolL10n } from '../tool-l10n'
+
+/** 与 lib/tool-formulas.ts 英文原值一致的公式行(数学记号,四语通用) */
+const SS_FORMULA = 'assign: bijection [0..n−1] → [0..n−1] with\nassign(i) ≠ i  and  assign(i) ∉ banned(i)\n!n = n! × Σ(k=0..n) (−1)^k / k!   (valid draws without exclusions)'
 
 export const SecretSantaGeneratorL10n: ToolL10n = {
   zh: {
     useCases: ['家庭/公司圣诞互抽一次成局', '保证夫妻/队友不会互相抽到', '传递设备逐人查看,谁也不剧透', '复制文案发给每个人做提醒'],
+    formula: {
+      formula: SS_FORMULA,
+      example: 'Step 1:n = 4、无互斥:排列总数 4! = 24。\nStep 2:错排 !4 = 24 × (1 − 1 + 1/2 − 1/6 + 1/24) = 9 个有效闭环。\nStep 3:Alice→Bob→Carla→Dev→Alice 是其中之一:没有人映射到自己,闭环成立。\nStep 4:互斥 Alice-Bob 一对是双向禁止:凡 Alice→Bob 或 Bob→Alice 的闭环都被排除,共 3 + 3 − 1 = 5 个,9 个里仅存活 4 个。\nResult:生成器从剩下的有效闭环中随机返回一个。',
+    },
     faqs: [
       { q: '互斥对怎么用?', a: '每行写一对,如 “Alice - Bob”——这两个人永远不会互相抽到(夫妻、队友、对头)。每个人仍然恰好送出并收到一份礼物。' },
       { q: '有人会抽到自己吗?', a: '不会——抽取结果是一个错排:每个送礼人映射到不同接收者的闭环,展示结果前已校验通过。' },
@@ -18,7 +28,7 @@ export const SecretSantaGeneratorL10n: ToolL10n = {
       'nNames': '{n} 位参与者',
       'nExcl': '{n} 组互斥对',
       'exclLabel': '互斥对——每行一组(可选)',
-      'exclHint': '不能互抽的人,如夫妻或队友,写法 Alice - Bob;支持 - & , 分隔。',
+      'exclHint': '不能互抽的人,如夫妻或队友,写法 Alice - Bob;分隔符支持 -> 、&、逗号,或两侧留空的连字符——名字自带的连字符(如 Mary-Jane)不受影响。',
       'drawBtn': '开始抽取',
       'redraw': '重新抽取',
       'revealTitle': '逐人查看——把设备传一圈',
@@ -35,6 +45,10 @@ export const SecretSantaGeneratorL10n: ToolL10n = {
   },
   es: {
     useCases: ['sortear el amigo invisible de familia u oficina', 'evitar que parejas o compañeros se emparejen', 'pasar el dispositivo y revelar de uno en uno', 'copiar el mensaje de cada persona como recordatorio'],
+    formula: {
+      formula: SS_FORMULA,
+      example: 'Paso 1: n = 4, sin exclusiones: permutaciones totales 4! = 24.\nPaso 2: Desarreglos !4 = 24 × (1 − 1 + 1/2 − 1/6 + 1/24) = 9 circuitos válidos.\nPaso 3: Alice→Bob→Carla→Dev→Alice es uno de ellos: nadie se corresponde a sí mismo, circuito cerrado.\nPaso 4: Vetar el par mutuo Alice-Bob: caen todos los circuitos con Alice→Bob o Bob→Alice — son 3 + 3 − 1 = 5 de los 9, así que sobreviven 4.\nResultado: el generador devuelve al azar uno de los circuitos válidos restantes.',
+    },
     faqs: [
       { q: '¿Cómo funcionan los pares de exclusión?', a: 'Escribe una pareja por línea, como «Alice - Bob»: esas dos personas nunca se sacarán mutuamente (parejas, compañeros, rivales). Cada quien sigue dando y recibiendo exactamente un regalo.' },
       { q: '¿Alguien puede sacarse a sí mismo?', a: 'No — el sorteo es una permutación sin puntos fijos: un circuito cerrado donde cada dador corresponde a un receptor distinto, verificado antes de mostrar nada.' },
@@ -46,7 +60,7 @@ export const SecretSantaGeneratorL10n: ToolL10n = {
       'nNames': '{n} participantes',
       'nExcl': '{n} pares de exclusión',
       'exclLabel': 'Pares de exclusión — uno por línea (opcional)',
-      'exclHint': 'Quienes no deben emparejarse, p. ej. Alice - Bob. Acepta - & , como separadores.',
+      'exclHint': 'Quienes no deben emparejarse, p. ej. Alice - Bob. Separadores: ->, &, coma, o un guion con espacios a ambos lados; los nombres con guion (Mary-Jane) funcionan.',
       'drawBtn': 'Sortear',
       'redraw': 'Sortear de nuevo',
       'revealTitle': 'Revela de uno en uno — pasa el dispositivo',
@@ -63,6 +77,10 @@ export const SecretSantaGeneratorL10n: ToolL10n = {
   },
   de: {
     useCases: ['das Wichteln für Familie oder Büro auslosen', 'Paare und Teamkollegen auseinanderhalten', 'das Gerät herumgeben und einzeln aufdecken', 'die Nachricht pro Person als Erinnerung kopieren'],
+    formula: {
+      formula: SS_FORMULA,
+      example: 'Schritt 1: n = 4, ohne Ausschlüsse: Permutationen insgesamt 4! = 24.\nSchritt 2: Derangements !4 = 24 × (1 − 1 + 1/2 − 1/6 + 1/24) = 9 gültige Kreise.\nSchritt 3: Alice→Bob→Carla→Dev→Alice ist einer davon: niemand bildet auf sich selbst ab, Kreis geschlossen.\nSchritt 4: Das Paar Alice-Bob gegenseitig verbieten: alle Kreise mit Alice→Bob oder Bob→Alice fallen weg — das sind 3 + 3 − 1 = 5 von 9, also überleben 4.\nErgebnis: Der Generator liefert zufällig einen der verbleibenden gültigen Kreise.',
+    },
     faqs: [
       { q: 'Wie funktionieren Ausschluss-Paare?', a: 'Schreibe ein Paar pro Zeile, etwa „Alice - Bob“ — die beiden ziehen nie einander (Paare, Teamkollegen, Rivalen). Jeder schenkt und bekommt trotzdem genau einmal.' },
       { q: 'Kann jemand sich selbst ziehen?', a: 'Nein — die Auslosung ist eine fixpunktfreie Permutation: ein geschlossener Kreis, in dem jeder Schenker auf einen anderen Beschenkten zeigt, vor der Anzeige geprüft.' },
@@ -74,7 +92,7 @@ export const SecretSantaGeneratorL10n: ToolL10n = {
       'nNames': '{n} Teilnehmende',
       'nExcl': '{n} Ausschluss-Paare',
       'exclLabel': 'Ausschluss-Paare — eines pro Zeile (optional)',
-      'exclHint': 'Wer sich nicht gegenseitig ziehen darf, z. B. Alice - Bob. Trenner -, & oder ,',
+      'exclHint': 'Wer sich nicht gegenseitig ziehen darf, z. B. Alice - Bob. Trenner: ->, &, Komma oder ein von Leerzeichen umgebenes Minus; Namen mit Bindestrich (Mary-Jane) funktionieren.',
       'drawBtn': 'Auslosen',
       'redraw': 'Neu auslosen',
       'revealTitle': 'Nacheinander aufdecken — gib das Gerät herum',

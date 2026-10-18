@@ -1,6 +1,9 @@
 'use client'
 
-import { makeTextTool } from './makeTextTool'
+import { useState, useEffect, useMemo, useRef } from 'react'
+import { CopyButton } from '@/components/CopyButton'
+import { useApp } from '@/components/providers/AppProviders'
+import { t } from '@/lib/i18n'
 import { tuiFromEntry } from '@/lib/i18n/tool-l10n-core'
 import type { Locale } from '@/lib/i18n'
 import { GpsCoordinateConverterL10n } from '@/lib/i18n/tools-l10n/gps-coordinate-converter'
@@ -167,15 +170,123 @@ function convertGps(input: string, locale: Locale): string {
   return lines.join('\n')
 }
 
-export const GpsCoordinateConverterClient = makeTextTool({
-  slug: 'gps-coordinate-converter',
-  l10n: GpsCoordinateConverterL10n,
-  inputLabel: 'Coordinate (any format)',
-  outputLabel: 'Converted to all formats',
-  defaultInput: '40.7128° N, 74.0060° W',
-  // 坐标输入天然极短:2000 字符门控拦住误粘贴大文本(分词+多正则逐 token
-  // 处理,大输入会卡顿),与 batch32 校验器族同款口径
-  maxInputChars: 2000,
-  transform: (t, locale) => convertGps(t, locale),
-  note: '🧭 Decimal degrees ↔ DMS ↔ DDM, with N/S/E/W hemisphere letters parsed in any position (glued to the number is fine). Latitude must stay within ±90°, longitude ±180°; the 6-decimal DD output resolves to roughly 0.11 m.',
-})
+const DEFAULT_INPUT_EN = '40.7128° N, 74.0060° W'
+const NOTE_EN = '🧭 Decimal degrees ↔ DMS ↔ DDM, with N/S/E/W hemisphere letters parsed in any position (glued to the number is fine). Latitude must stay within ±90°, longitude ±180°; the 6-decimal DD output resolves to roughly 0.11 m.'
+// 坐标输入天然极短:2000 字符门控拦住误粘贴大文本(分词+多正则逐 token
+// 处理,大输入会卡顿),与 batch32 校验器族同款口径
+const MAX_INPUT_CHARS = 2000
+
+/**
+ * GPS 坐标转换器专用客户端 —— 刻意不走 makeTextTool(审计 B10):
+ *  - 共享工厂输出框是 rows=6 的 textarea:360px 下 4 种格式折 ~13 行,
+ *    末行被框底切半、GeoJSON 行完全不可见;本工具输出天然多行,改用
+ *    自动高度的输出块,内容全部可见、无需框内滚动;
+ *  - 不带文本工具的字符/词数/阅读时长统计(对坐标换算无意义);
+ *  - l10n 键(inputLabel/outputLabel/placeholder/defaultInput/note/usage/
+ *    inputTooLarge)与 makeTextTool 版完全同名,词典零改动。
+ */
+export function GpsCoordinateConverterClient() {
+  const { locale } = useApp()
+  const [input, setInput] = useState(DEFAULT_INPUT_EN)
+  // 挂载门控:SSR/首帧输出恒空,挂载后再 transform(与 makeTextTool 同款
+  // hydration 策略)
+  const [mounted, setMounted] = useState(false)
+  useEffect(() => setMounted(true), [])
+
+  // 默认示例本地化:pristine 门控 —— 用户首次编辑即永久失效(同 makeTextTool)
+  const pristineRef = useRef(true)
+  useEffect(() => {
+    if (!mounted) return
+    if (pristineRef.current) {
+      setInput(tuiFromEntry(GpsCoordinateConverterL10n, locale, 'defaultInput', DEFAULT_INPUT_EN))
+    }
+  }, [mounted, locale])
+
+  const output = useMemo(() => {
+    if (!mounted) return ''
+    try {
+      if (input.length > MAX_INPUT_CHARS) {
+        const n = MAX_INPUT_CHARS.toLocaleString('en-US')
+        return tuiFromEntry(GpsCoordinateConverterL10n, locale, 'inputTooLarge',
+          `⚠️ Input is too large — the supported size is up to ${n} characters. Trim the input to compute.`)
+      }
+      return convertGps(input, locale)
+    } catch {
+      return ''
+    }
+  }, [input, mounted, locale])
+
+  const inputLabel = tuiFromEntry(GpsCoordinateConverterL10n, locale, 'inputLabel', 'Coordinate (any format)')
+  const outputLabel = tuiFromEntry(GpsCoordinateConverterL10n, locale, 'outputLabel', 'Converted to all formats')
+  const placeholder = tuiFromEntry(GpsCoordinateConverterL10n, locale, 'placeholder', '40.7128, -74.0060 …')
+  const note = tuiFromEntry(GpsCoordinateConverterL10n, locale, 'note', NOTE_EN)
+
+  return (
+    <div className="space-y-5">
+      {/* 输入区 */}
+      <div>
+        <div className="mb-2 flex items-center justify-between">
+          <label htmlFor="gps-input" className="text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
+            {inputLabel}
+          </label>
+          {input && (
+            <button
+              type="button"
+              onClick={() => setInput('')}
+              className="-my-1 rounded-md px-2 py-1.5 text-xs text-slate-500 dark:text-slate-400 hover:text-red-500 sm:text-sm"
+            >
+              {t(locale, 'textToolClear')}
+            </button>
+          )}
+        </div>
+        <textarea
+          id="gps-input"
+          value={input}
+          onChange={(e) => {
+            pristineRef.current = false
+            setInput(e.target.value)
+          }}
+          placeholder={placeholder}
+          rows={3}
+          className="w-full rounded-lg border p-4 font-mono text-sm shadow-sm outline-none transition focus:ring-2"
+          style={{
+            borderColor: 'rgb(var(--border-strong))',
+            backgroundColor: 'rgb(var(--bg-card))',
+            color: 'rgb(var(--text))',
+          }}
+        />
+      </div>
+
+      {/* 输出区:自动高度,4 种格式全部可见(替代 rows=6 textarea 的框内滚动) */}
+      <div>
+        <div className="mb-2 flex items-center justify-between">
+          <span className="text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
+            {outputLabel}
+          </span>
+          <CopyButton value={output} disabled={!output} />
+        </div>
+        <div
+          className="min-h-[9.75rem] w-full rounded-lg border-2 p-4 font-mono text-sm"
+          style={{
+            borderColor: 'rgb(var(--border))',
+            backgroundColor: 'rgb(var(--bg-subtle))',
+            color: 'rgb(var(--text))',
+          }}
+        >
+          {output ? (
+            <p className="whitespace-pre-wrap break-words leading-5">{output}</p>
+          ) : (
+            <p className="leading-5" style={{ color: 'rgb(var(--text-faint))' }}>
+              {t(locale, 'textToolResultPlaceholder')}
+            </p>
+          )}
+        </div>
+      </div>
+
+      {/* 说明 */}
+      <p className="rounded-md p-3 text-xs" style={{ backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text-subtle))' }}>
+        {note}
+      </p>
+    </div>
+  )
+}

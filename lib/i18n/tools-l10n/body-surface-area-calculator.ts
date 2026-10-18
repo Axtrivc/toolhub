@@ -27,7 +27,8 @@ export const BodySurfaceAreaCalculatorL10n: ToolL10n = {
       'chartTitle': 'Mosteller 与 DuBois 对比',
       'cmp.0': 'Mosteller',
       'cmp.1': 'DuBois',
-      'cmpseg.0': '体表面积',
+      // cmpseg.0 移除:图例段标签改为按行的 Mosteller/DuBois(人名,各语言同形),
+      // 共享键会把两行都覆写成同一文本,图例退化成单色单条
       'preset.0': '普通成年人',
       'preset.1': '高大壮实',
       'preset.2': '娇小体型',
@@ -56,7 +57,7 @@ export const BodySurfaceAreaCalculatorL10n: ToolL10n = {
       'chartTitle': 'Mosteller frente a DuBois',
       'cmp.0': 'Mosteller',
       'cmp.1': 'DuBois',
-      'cmpseg.0': 'Superficie corporal',
+      // cmpseg.0 移除(见 zh 段注释):段标签按行走 Mosteller/DuBois
       'preset.0': 'Adulto medio',
       'preset.1': 'Alto y corpulento',
       'preset.2': 'Complexión pequeña',
@@ -85,7 +86,7 @@ export const BodySurfaceAreaCalculatorL10n: ToolL10n = {
       'chartTitle': 'Mosteller gegen DuBois',
       'cmp.0': 'Mosteller',
       'cmp.1': 'DuBois',
-      'cmpseg.0': 'Körperoberfläche',
+      // cmpseg.0 移除(见 zh 段注释):段标签按行走 Mosteller/DuBois
       'preset.0': 'Erwachsener, Durchschnitt',
       'preset.1': 'Groß & schwer',
       'preset.2': 'Zierliche Statur',

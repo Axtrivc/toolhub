@@ -52,9 +52,12 @@ function rothfuszHI(tf: number, rh: number): number {
   if (rh > 85 && tf >= 80 && tf <= 87) {
     hi += ((rh - 85) / 10) * ((87 - tf) / 5)
   }
-  // 简式(Steudel)与回归均值 < 80°F 时用简式(NWS 官方算法)
+  // NWS 官方算法(wpc.ncep.noaa.gov/html/heatindex_equation.shtml):先算简式,
+  // 「简式结果与气温」的均值 < 80°F 才用简式;≥ 80°F 用回归。
+  // 注意均值对象是气温 tf,不是回归值 hi —— 低温端回归外推出 200°F+ 的荒谬值,
+  // 若拿 hi 均值会把阈值拖过 80°F 使回退失效(20°F/50% 曾输出 206.5°F)。
   const simple = 0.5 * (tf + 61.0 + (tf - 68.0) * 1.2 + rh * 0.094)
-  if ((hi + simple) / 2 < 80) return simple
+  if ((tf + simple) / 2 < 80) return simple
   return hi
 }
 
@@ -251,9 +254,11 @@ export const ConfidenceIntervalCalculatorClient = makeCalculatorClient({
     { key: 'p', label: 'Sample proportion', suffix: '%', default: '55', slider: { min: 1, max: 99, step: 1 } },
     { key: 'n', label: 'Sample size', default: '150', slider: { min: 5, max: 2000, step: 5 } },
     { key: 'level', label: 'Confidence level', default: '95', options: [
-      { label: '90% (z = 1.645)', value: '90' },
-      { label: '95% (z = 1.96)', value: '95' },
-      { label: '99% (z = 2.576)', value: '99' },
+      // 短标签:375px 下三等分胶囊放不下 "90% (z = 1.645)"(会被 truncate 成省略号),
+      // z 值由输出区 Critical value z 行完整给出
+      { label: '90%', value: '90' },
+      { label: '95%', value: '95' },
+      { label: '99%', value: '99' },
     ]},
   ],
   outputs: [
@@ -271,8 +276,9 @@ export const ConfidenceIntervalCalculatorClient = makeCalculatorClient({
       return { ci: `⚠️ ${L('errN', 'Sample size must be at least 2')}`, ...blank }
     }
     if (v.mode === 'prop') {
-      const p = toNum(v.p)
-      if (p < 0 || p > 100) {
+      // toNumStrict:清空输入显式 ⚠️(toNum 会把空串折叠成 0,静默输出 "0% – 0%")
+      const p = toNumStrict(v.p)
+      if (isNaN(p) || p < 0 || p > 100) {
         return { ci: `⚠️ ${L('errProp', 'Proportion must be between 0 and 100%')}`, ...blank }
       }
       const q = p / 100
@@ -286,8 +292,9 @@ export const ConfidenceIntervalCalculatorClient = makeCalculatorClient({
       }
     }
     const mean = toNumStrict(v.mean)
-    const sd = toNum(v.sd)
-    if (isNaN(mean) || sd < 0) {
+    // toNumStrict:清空 sd 显式 ⚠️(否则空串折叠成 0,静默输出零宽区间,与 n/mean 口径不一)
+    const sd = toNumStrict(v.sd)
+    if (isNaN(mean) || isNaN(sd) || sd < 0) {
       return { ci: `⚠️ ${L('errNumeric', 'Enter a valid mean and non-negative std. deviation')}`, ...blank }
     }
     const se = sd / Math.sqrt(n)
@@ -341,9 +348,10 @@ export const SampleSizeCalculatorClient = makeCalculatorClient({
     // 且 CSV/摘要把 suffix 拼在值后,读出来是 "Population size: 20000 = infinite" 歧义
     { key: 'N', label: 'Population size (0 = infinite)', default: '0', slider: { min: 0, max: 1000000, step: 1000 } },
     { key: 'level', label: 'Confidence level', default: '95', options: [
-      { label: '90% (z = 1.645)', value: '90' },
-      { label: '95% (z = 1.96)', value: '95' },
-      { label: '99% (z = 2.576)', value: '99' },
+      // 短标签:同 confidence-interval,375px 下三等分胶囊放不下带 z 值的长文案
+      { label: '90%', value: '90' },
+      { label: '95%', value: '95' },
+      { label: '99%', value: '99' },
     ]},
     { key: 'moe', label: 'Margin of error', suffix: '%', default: '5', slider: { min: 0.5, max: 20, step: 0.5 } },
     { key: 'p', label: 'Expected proportion', suffix: '%', default: '50', slider: { min: 1, max: 99, step: 1 } },
@@ -358,11 +366,13 @@ export const SampleSizeCalculatorClient = makeCalculatorClient({
     const L = (k: string, fb: string) => tuiFromEntry(SampleSizeCalculatorL10n, locale, k, fb)
     const N = toNum(v.N)
     const moe = toNum(v.moe)
-    const p = toNum(v.p)
+    // toNumStrict + 严格 (0,100) 开区间:清空/0/100 都拦 —— Cochran 在零方差下
+    // 退化成 n₀ = 0,把『所需样本量: 0』当可用答案展示是误导
+    const p = toNumStrict(v.p)
     const z = Z_BY_LEVEL[v.level] ?? 1.96
     const blank = { infinite: '—', saved: '—', z: f(z, 3) }
-    if (!(moe > 0) || moe >= 100 || p < 0 || p > 100 || N < 0) {
-      return { required: `⚠️ ${L('errInput', 'Margin must be 0-100%, proportion 0-100%, population ≥ 0')}`, ...blank }
+    if (!(moe > 0) || moe >= 100 || isNaN(p) || p <= 0 || p >= 100 || N < 0) {
+      return { required: `⚠️ ${L('errInput', 'Margin must be 0-100%, expected proportion strictly between 0 and 100%, population ≥ 0')}`, ...blank }
     }
     const q = p / 100
     const e = moe / 100
@@ -412,15 +422,16 @@ export const SampleSizeCalculatorClient = makeCalculatorClient({
 export const ZScoreCalculatorClient = makeCalculatorClient({
   slug: 'z-score-calculator',
   l10n: ZScoreCalculatorL10n,
-  sample: { mode: 'x2z', x: '130', z: '1.96', mu: '100', sigma: '15' },
+  sample: { mode: 'x2z', x: '130', z: '2', mu: '100', sigma: '15' },
   urlState: true,
   inputs: [
     { key: 'mode', label: 'Direction', default: 'x2z', options: [
-      { label: 'x → z (standardize)', value: 'x2z' },
-      { label: 'z → x (reverse)', value: 'z2x' },
+      // 短标签:移动端两等分胶囊放不下 "x → z (standardize)"(截断成省略号)
+      { label: 'x → z', value: 'x2z' },
+      { label: 'z → x', value: 'z2x' },
     ]},
-    { key: 'x', label: 'Raw score x', default: '110', slider: { min: 40, max: 160, step: 1 } },
-    { key: 'z', label: 'Z score', default: '1.96', slider: { min: -4, max: 4, step: 0.05 } },
+    { key: 'x', label: 'Raw score x', default: '130', slider: { min: 40, max: 160, step: 1 } },
+    { key: 'z', label: 'Z score', default: '2', slider: { min: -4, max: 4, step: 0.05 } },
     { key: 'mu', label: 'Mean μ', default: '100', slider: { min: 0, max: 200, step: 1 } },
     { key: 'sigma', label: 'Std. deviation σ', default: '15', slider: { min: 0.5, max: 100, step: 0.5 } },
   ],
@@ -596,7 +607,10 @@ export const HeatIndexCalculatorClient = makeCalculatorClient({
     const outF = v.tUnit === 'F'
     const tf = outF ? t : (t * 9) / 5 + 32
     const conv = (f: number) => (outF ? f : ((f - 32) * 5) / 9)
-    const rhs = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+    // 5 个采样点:11 点时移动端抽稀规则(ceil(n/4)=3 → 0,30,60,90,+末点100)
+    // 会让 "90%" 与 "100%" 挤进一个步距(375px 下 ≈18px)叠成 "90100%";
+    // n=5 抽稀后标签为 0%/50%/100%,任意宽度都不相邻
+    const rhs = [0, 25, 50, 75, 100]
     return {
       xLabels: rhs.map((r) => `${r}%`),
       lines: [
@@ -659,8 +673,10 @@ export const DewPointCalculatorClient = makeCalculatorClient({
       tdC < 21 ? L('comfort.sticky', 'Sticky and uncomfortable for most people') :
       L('comfort.oppressive', 'Oppressive — tropical air, exertion becomes risky')
     return {
-      dewPoint: `${fmtNum(tdC, 1)}°${outC ? 'C' : 'F'}`,
-      dewAlt: `${fmtNum(outC ? (tdC * 9) / 5 + 32 : ((tdC - 32) * 5) / 9, 1)}°${outC ? 'F' : 'C'}`,
+      // tdC 恒为摄氏露点:°F 模式主输出须先 C→F 换算再贴 °F 标签,
+      // 「另一单位」就是摄氏原值(旧代码 F 模式把摄氏值当华氏再做 F→C,双重换算全错)
+      dewPoint: `${fmtNum(outC ? tdC : (tdC * 9) / 5 + 32, 1)}°${outC ? 'C' : 'F'}`,
+      dewAlt: `${fmtNum(outC ? (tdC * 9) / 5 + 32 : tdC, 1)}°${outC ? 'F' : 'C'}`,
       absHumidity: `${fmtNum(ah, 1)} g/m³`,
       comfort,
     }
