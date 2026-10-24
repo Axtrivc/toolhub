@@ -36,7 +36,11 @@ export const loanCalculatorL10n: ToolL10n = {
     ],
     formula: {
       formula: FORMULA,
+      variables:
+        'M = 每月固定还款额($)\nP = 贷款本金($)\nr = 月利率(年利率 ÷ 12,写成小数)\nn = 还款总期数',
       explain: '等额本息月供。P = 本金,r = 月利率(年利率 ÷ 12),n = 总月数。结果 M 即每月固定还款额。',
+      example:
+        '第 1 步:P = $20,000,年利率 7% → r = 0.07 / 12 = 0.0058333,n = 5 × 12 = 60 个月。\n第 2 步:(1 + r)^n = 1.0058333^60 ≈ 1.4176。\n第 3 步:分子 = 0.0058333 × 1.4176 ≈ 0.0082695;分母 = 1.4176 − 1 = 0.4176。\n第 4 步:M = 20,000 × 0.0082695 / 0.4176 ≈ $396。\n结果:每月固定还款额约 $396——60 期合计约 $23,760,其中利息约 $3,760。',
     },
     ui: {
       inputs: '输入',
@@ -113,8 +117,12 @@ export const loanCalculatorL10n: ToolL10n = {
     ],
     formula: {
       formula: FORMULA,
+      variables:
+        'M = Pago mensual fijo ($)\nP = Capital del préstamo ($)\nr = Tasa de interés mensual (tasa anual ÷ 12, en decimal)\nn = Número total de pagos mensuales',
       explain:
         'Pago mensual de amortización constante. P = capital, r = tasa mensual (anual ÷ 12), n = número total de meses. El resultado M es el pago mensual fijo.',
+      example:
+        'Paso 1: P = 20 000 $, tasa anual del 7 % → r = 0,07 / 12 = 0,0058333, n = 5 × 12 = 60 meses.\nPaso 2: (1 + r)^n = 1,0058333^60 ≈ 1,4176.\nPaso 3: numerador = 0,0058333 × 1,4176 ≈ 0,0082695; denominador = 1,4176 − 1 = 0,4176.\nPaso 4: M = 20 000 × 0,0082695 / 0,4176 ≈ 396 $.\nResultado: el pago mensual fijo ronda los 396 $ — unos 23 760 $ en total por los 60 pagos, de los que unos 3 760 $ son intereses.',
     },
     ui: {
       inputs: 'Entradas',
@@ -191,8 +199,12 @@ export const loanCalculatorL10n: ToolL10n = {
     ],
     formula: {
       formula: FORMULA,
+      variables:
+        'M = feste monatliche Rate ($)\nP = Kreditbetrag ($)\nr = monatlicher Zinssatz (Jahreszins ÷ 12, als Dezimalzahl)\nn = Gesamtzahl der Monatsraten',
       explain:
         'Annuitätentilgung (gleiche Monatsrate). P = Kreditbetrag, r = monatlicher Zins (Jahreszins ÷ 12), n = Gesamtmonate. Das Ergebnis M ist die feste monatliche Rate.',
+      example:
+        'Schritt 1: P = 20.000 $, Jahreszins 7 % → r = 0,07 / 12 = 0,0058333, n = 5 × 12 = 60 Monate.\nSchritt 2: (1 + r)^n = 1,0058333^60 ≈ 1,4176.\nSchritt 3: Zähler = 0,0058333 × 1,4176 ≈ 0,0082695; Nenner = 1,4176 − 1 = 0,4176.\nSchritt 4: M = 20.000 × 0,0082695 / 0,4176 ≈ 396 $.\nErgebnis: die feste monatliche Rate liegt bei etwa 396 $ — rund 23.760 $ über die 60 Raten, davon etwa 3.760 $ Zinsen.',
     },
     ui: {
       inputs: 'Eingaben',

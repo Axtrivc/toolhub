@@ -1,11 +1,24 @@
 /**
  * caffeine-calculator 本地化 bundle —— zh / es / de(2025-08 扩张批次)
- * 覆盖: ui。useCases/formula/faqs 缺失自动回退英文。
+ * 覆盖: ui / useCases / faqs / formula(explain・variables・example 译文;
+ * formula 代码块是数学/代码示例,按站规保持英文原值)。
  */
 import type { ToolL10n } from '../tool-l10n'
 
+const FORMULA =
+  'C(t) = C₀ × 0.5^(t / H)\ntime to cutoff: t = H × log₂(C₀ / Ccutoff)\nH = 5 hours in this tool (population average ≈ 5.7 h)'
+
 export const CaffeineCalculatorL10n: ToolL10n = {
   zh: {
+    formula: {
+      formula: FORMULA,
+      variables:
+        'C(t) = 摄入后 t 小时体内残留的咖啡因(mg)\nC₀ = 摄入剂量的大小(mg)\nt = 距摄入的小时数(小时)\nH = 半衰期,本工具固定为 5 小时(人群平均 ≈ 5.7 小时)\nCcutoff = 个人截止水平,如 50-100 mg(mg)\nlog₂ = 以 2 为底的对数',
+      explain:
+        '咖啡因按指数规律清除:每过一个半衰期,残留量就减半,因此不会骤然降到零。你记录的每一杯饮品都在按自己的时钟衰减,当前体内水平是各饮品残留量之和。',
+      example:
+        '第 1 步:一大杯咖啡 = 95 mg,上午 8:00 摄入。\n第 2 步:下午 2:00(t = 6 小时):C = 95 × 0.5^(6/5) ≈ 95 × 0.435 ≈ 41 mg。\n第 3 步:晚上 8:00(t = 12 小时):C = 95 × 0.5^(12/5) ≈ 95 × 0.189 ≈ 18 mg。\n第 4 步:降到 50 mg 以下所需时间:t = 5 × log₂(95/50) ≈ 5 × 0.926 ≈ 4.6 小时 → 约 12:38。\n结果:下午 2:00 体内约剩 41 mg,晚上 8:00 约剩 18 mg;大约 12:40 起降到 50 mg 以下。',
+    },
     useCases: ['算睡前体内还剩多少咖啡因', '决定下午那杯咖啡该不该喝', '评估咖啡因对睡眠的影响', '复盘一天咖啡摄入总量'],
     faqs: [
       { q: '半衰期怎么算的?', a: '咖啡因大约每 5 小时减半:一个半衰期后剩 50%,两个后剩 25%。工具按 mg × 0.5^(小时 ÷ 5) 计算,同时显示"现在还剩多少"和——真正关键的那个数——"睡前还在血液里多少"。' },
@@ -42,6 +55,15 @@ export const CaffeineCalculatorL10n: ToolL10n = {
 },
   },
   es: {
+    formula: {
+      formula: FORMULA,
+      variables:
+        'C(t) = Cafeína que queda en el cuerpo t horas después de la dosis (mg)\nC₀ = Tamaño de la dosis consumida (mg)\nt = Horas transcurridas desde la dosis (horas)\nH = Vida media, fija en 5 horas en esta herramienta (media poblacional ≈ 5,7 h)\nCcutoff = Nivel de corte personal, p. ej. 50-100 mg (mg)\nlog₂ = Logaritmo en base 2',
+      explain:
+        'La cafeína se elimina de forma exponencial: cada vida media reduce a la mitad lo que queda, así que nunca cae a cero de golpe. Cada bebida registrada se degrada con su propio reloj y tu nivel actual es la suma de lo que queda de cada una.',
+      example:
+        'Paso 1: Un café grande = 95 mg a las 8:00.\nPaso 2: A las 14:00 (t = 6 h): C = 95 × 0,5^(6/5) ≈ 95 × 0,435 ≈ 41 mg.\nPaso 3: A las 20:00 (t = 12 h): C = 95 × 0,5^(12/5) ≈ 95 × 0,189 ≈ 18 mg.\nPaso 4: Tiempo en bajar de 50 mg: t = 5 × log₂(95/50) ≈ 5 × 0,926 ≈ 4,6 h → hacia las 12:38.\nResultado: hacia las 14:00 quedan unos 41 mg y a las 20:00 unos 18 mg; bajas de 50 mg hacia las 12:40.',
+    },
     useCases: ['saber cuánta cafeína te queda al acostarte', 'decidir si tomarte ese café de la tarde', 'evaluar cómo afecta la cafeína a tu sueño', 'revisar el total de cafeína del día'],
     faqs: [
       { q: '¿Cómo funciona el cálculo de la vida media?', a: 'La cafeína se reduce a la mitad aproximadamente cada 5 horas: tras una vida media queda el 50 %, tras dos el 25 %. La herramienta aplica mg × 0,5^(horas ÷ 5) y muestra cuánto queda ahora y —el número que importa— cuánto seguirá en tu sistema a la hora de dormir.' },
@@ -78,6 +100,15 @@ export const CaffeineCalculatorL10n: ToolL10n = {
 },
   },
   de: {
+    formula: {
+      formula: FORMULA,
+      variables:
+        'C(t) = Koffein im Körper t Stunden nach der Dosis (mg)\nC₀ = Größe der konsumierten Dosis (mg)\nt = Stunden seit der Dosis (Stunden)\nH = Halbwertszeit, in diesem Tool fest auf 5 Stunden (Bevölkerungsdurchschnitt ≈ 5,7 h)\nCcutoff = persönliche Grenze, z. B. 50-100 mg (mg)\nlog₂ = Logarithmus zur Basis 2',
+      explain:
+        'Koffein wird exponentiell abgebaut: Jede Halbwertszeit halbiert den Rest, deshalb fällt der Wert nie schlagartig auf null. Jedes erfasste Getränk baut sich mit eigener Uhr ab, und dein aktueller Spiegel ist die Summe der Reste aller.',
+      example:
+        'Schritt 1: Ein großer Kaffee = 95 mg um 8:00 Uhr.\nSchritt 2: Um 14:00 Uhr (t = 6 h): C = 95 × 0,5^(6/5) ≈ 95 × 0,435 ≈ 41 mg.\nSchritt 3: Um 20:00 Uhr (t = 12 h): C = 95 × 0,5^(12/5) ≈ 95 × 0,189 ≈ 18 mg.\nSchritt 4: Zeit bis unter 50 mg: t = 5 × log₂(95/50) ≈ 5 × 0,926 ≈ 4,6 h → gegen 12:38 Uhr.\nErgebnis: gegen 14:00 Uhr bleiben etwa 41 mg, um 20:00 Uhr etwa 18 mg; unter 50 mg kommst du gegen 12:40 Uhr.',
+    },
     useCases: ['ausrechnen, wie viel Koffein zur Bettzeit übrig ist', 'entscheiden, ob der Nachmittagskaffee noch geht', 'bewerten, wie Koffein deinen Schlaf stört', 'die Tagesgesamtdosis Koffein bilanzieren'],
     faqs: [
       { q: 'Wie funktioniert die Halbwertszeit-Rechnung?', a: 'Koffein halbiert sich ungefähr alle 5 Stunden: nach einer Halbwertszeit bleiben 50 %, nach zwei 25 %. Das Tool rechnet mg × 0,5^(Stunden ÷ 5) und zeigt, was jetzt übrig ist — und die entscheidende Zahl: was zur Bettzeit noch kreist.' },

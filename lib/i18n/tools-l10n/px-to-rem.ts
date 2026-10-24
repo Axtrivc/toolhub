@@ -21,7 +21,11 @@ export const pxToRemL10n: ToolL10n = {
     },
     formula: {
       formula: 'rem = px / root font size (px)',
+      variables:
+        'px: 像素长度(px)\nroot font size: html 元素的字号,默认为 16 px\nrem: rem 单位的长度',
       explain: '把像素换算成相对根字号的 rem(默认 16 px)。rem 会随用户字号设置缩放,因此是排版与间距的无障碍单位。',
+      example:
+        '第 1 步:以默认根字号 16 px 换算 24 px。\n第 2 步:rem = 24 / 16 = 1.5。\n结果:24 px = 1.5 rem。',
     },
     useCases: [
       '把 Figma 标注的 px 值转成 rem',
@@ -51,7 +55,11 @@ export const pxToRemL10n: ToolL10n = {
     },
     formula: {
       formula: 'rem = px / root font size (px)',
+      variables:
+        'px: longitud en píxeles (px)\nroot font size: tamaño de fuente del elemento html, 16 px por defecto\nrem: longitud en unidades rem',
       explain: 'Convierte píxeles a rem respecto al tamaño de fuente raíz (por defecto 16 px). rem escala con la configuración tipográfica del usuario, por lo que es la unidad accesible para texto y espaciado.',
+      example:
+        'Paso 1: Convierte 24 px con el tamaño de fuente raíz por defecto de 16 px.\nPaso 2: rem = 24 / 16 = 1.5.\nResultado: 24 px = 1.5 rem.',
     },
     useCases: [
       'convertir valores px de Figma a rem',
@@ -81,7 +89,11 @@ export const pxToRemL10n: ToolL10n = {
     },
     formula: {
       formula: 'rem = px / root font size (px)',
+      variables:
+        'px: Länge in Pixel (px)\nroot font size: Schriftgröße des html-Elements, Standard 16 px\nrem: Länge in rem-Einheiten',
       explain: 'Rechnet Pixel in rem relativ zur Root-Schriftgröße um (Standard 16 px). rem skaliert mit den Schriftgrößen-Einstellungen des Nutzers — die barrierefreie Einheit für Typo und Abstände.',
+      example:
+        'Schritt 1: Rechne 24 px mit der Standard-Root-Schriftgröße von 16 px um.\nSchritt 2: rem = 24 / 16 = 1.5.\nErgebnis: 24 px = 1.5 rem.',
     },
     useCases: [
       'px-Werte aus Figma in rem umwandeln',

@@ -251,9 +251,13 @@ export function BaseConverterClient() {
 
       <div role="status" aria-live="polite" className="space-y-3">
         {bases.map(([b, label]) => (
-          <div key={b} className="flex items-center gap-2 rounded-lg border p-3 sm:gap-3" style={{ borderColor: 'rgb(var(--border))' }}>
+          <div key={b} className="flex flex-wrap items-center gap-2 rounded-lg border p-3 sm:gap-3" style={{ borderColor: 'rgb(var(--border))' }}>
             <span className="w-32 shrink-0 text-sm sm:w-40" style={{ color: 'rgb(var(--text-muted))' }}>{label}</span>
-            <code className="min-w-0 flex-1 break-all font-mono text-sm" style={{ color: 'rgb(var(--text))' }}>
+            {/* flex-auto(而非 flex-1):折行判定按数值真实宽度算——es/de 的
+                Copiar/Kopieren 按钮更宽,把 flex-1 数值列挤到 60px 会让
+                "11111111" 这类短结果从中间断行;空间不足时按钮整颗换到
+                第二行,数值保持完整一行。 */}
+            <code className="min-w-0 flex-auto break-all font-mono text-sm" style={{ color: 'rgb(var(--text))' }}>
               {parsed === null ? '—' : formatInBase(parsed, b)}
             </code>
             {parsed !== null && <CopyButton value={formatInBase(parsed, b)} />}

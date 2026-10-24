@@ -12,7 +12,11 @@ export const roiCalculatorL10n: ToolL10n = {
   zh: {
     formula: {
       formula: 'ROI = (Gain − Cost) / Cost × 100%',
+      variables:
+        'ROI = 投资回报率(%)\nGain = 投资终值($)\nCost = 初始投入金额($)',
       explain: '投资回报率。收益 = 终值 − 成本(或卖出价 − 买入价),以原始成本的百分比表示。',
+      example:
+        '第 1 步:Cost = $2,000,终值(Gain)= $2,500。\n第 2 步:利润 = 2,500 − 2,000 = $500。\n第 3 步:ROI = 500 / 2,000 × 100% = 25%。\n结果:这笔投资回报 25% —— 每投入 $1.00 拿回 $1.25。',
     },
     useCases: [
       '计算带年化回报的 ROI',
@@ -60,7 +64,11 @@ export const roiCalculatorL10n: ToolL10n = {
   es: {
     formula: {
       formula: 'ROI = (Gain − Cost) / Cost × 100%',
+      variables:
+        'ROI = retorno de la inversión (%)\nGain = valor final de la inversión ($)\nCost = importe invertido originalmente ($)',
       explain: 'Rentabilidad de la inversión. Ganancia = valor final − coste (o precio de venta − precio de compra). Se expresa como porcentaje del coste original.',
+      example:
+        'Paso 1: Cost = $2,000, valor final (Gain) = $2,500.\nPaso 2: beneficio = 2,500 − 2,000 = $500.\nPaso 3: ROI = 500 / 2,000 × 100% = 25%.\nResultado: la inversión devolvió un 25% — $1.25 por cada $1.00 invertido.',
     },
     useCases: [
       'calcular el ROI con retorno anualizado',
@@ -108,7 +116,11 @@ export const roiCalculatorL10n: ToolL10n = {
   de: {
     formula: {
       formula: 'ROI = (Gain − Cost) / Cost × 100%',
+      variables:
+        'ROI = Rendite der Investition (%)\nGain = Endwert der Investition ($)\nCost = ursprünglich investierter Betrag ($)',
       explain: 'Rendite der Investition. Gewinn = Endwert − Kosten (oder Verkaufspreis − Kaufpreis), ausgedrückt als Prozentsatz der ursprünglichen Kosten.',
+      example:
+        'Schritt 1: Cost = $2,000, Endwert (Gain) = $2,500.\nSchritt 2: Gewinn = 2,500 − 2,000 = $500.\nSchritt 3: ROI = 500 / 2,000 × 100% = 25%.\nErgebnis: die Investition brachte 25% — $1.25 für jeden investierten $1.00.',
     },
     useCases: [
       'den ROI mit annualisierter Rendite berechnen',

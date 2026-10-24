@@ -44,7 +44,7 @@ const en: ReactNode = (
         This generator uses <code>interface</code> declarations because they are the most extensible
         convention for object shapes — they support declaration merging and are easier to augment
         later. If your codebase prefers <code>type</code> aliases, a simple find-and-replace of{' '}
-        <code>interface Foo {`{'{'}`} </code> → <code>type Foo = {'{'}</code> on the output converts
+        <code>interface Foo {'{'}</code> → <code>type Foo = {'{'}</code> on the output converts
         them. The inferred member types are identical either way.
       </p>
     </div>
@@ -91,7 +91,7 @@ const zh: ReactNode = (
       <h2>接口与类型别名</h2>
       <p>
         本生成器使用 <code>interface</code> 声明,因为这是对象结构最可扩展的约定——它支持声明合并,后续也更易于扩充。如果你的代码库更偏好 <code>type</code> 别名,只需对输出做一次简单的查找替换:{' '}
-        <code>interface Foo {`{'{'}`} </code> → <code>type Foo = {'{'}</code> 即可完成转换。两种方式推断出的成员类型完全相同。
+        <code>interface Foo {'{'}</code> → <code>type Foo = {'{'}</code> 即可完成转换。两种方式推断出的成员类型完全相同。
       </p>
     </div>
     <div>
@@ -134,7 +134,7 @@ const es: ReactNode = (
       <h2>Interfaces frente a alias de tipo</h2>
       <p>
         Este generador utiliza declaraciones <code>interface</code> porque son la convención más extensible para las formas de objeto — admiten la fusión de declaraciones y son más fáciles de ampliar posteriormente. Si tu base de código prefiere los alias <code>type</code>, una simple búsqueda y reemplazo de{' '}
-        <code>interface Foo {`{'{'}`} </code> → <code>type Foo = {'{'}</code> en la salida los convierte. Los tipos de miembro inferidos son idénticos en cualquier caso.
+        <code>interface Foo {'{'}</code> → <code>type Foo = {'{'}</code> en la salida los convierte. Los tipos de miembro inferidos son idénticos en cualquier caso.
       </p>
     </div>
     <div>
@@ -177,7 +177,7 @@ const de: ReactNode = (
       <h2>Interfaces vs. Type-Aliase</h2>
       <p>
         Dieser Generator verwendet <code>interface</code>-Deklarationen, da sie die am besten erweiterbare Konvention für Objektformen sind — sie unterstützen Declaration Merging und lassen sich später leichter erweitern. Wenn deine Codebasis <code>type</code>-Aliase bevorzugt, wandelt ein einfaches Suchen-Ersetzen von{' '}
-        <code>interface Foo {`{'{'}`} </code> → <code>type Foo = {'{'}</code> in der Ausgabe sie um. Die abgeleiteten Elementtypen sind in beiden Fällen identisch.
+        <code>interface Foo {'{'}</code> → <code>type Foo = {'{'}</code> in der Ausgabe sie um. Die abgeleiteten Elementtypen sind in beiden Fällen identisch.
       </p>
     </div>
     <div>

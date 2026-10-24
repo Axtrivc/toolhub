@@ -56,7 +56,11 @@ export const daysCountdownCalculatorL10n: ToolL10n = {
     },
     formula: {
       formula: 'days remaining = target date − today',
+      variables:
+        'today: 当前日历日期\ntarget date: 要倒数到的未来日期\ndays remaining: 距目标日期的完整日历天数',
       explain: '从今天到目标日期的日历天数。工作日模式进一步从计数中排除周六和周日。',
+      example:
+        '第 1 步:今天是 2024-12-25,目标是 2025-01-01。\n第 2 步:12 月有 31 天,因此 31 − 25 = 6 天为 12 月剩余天数。\n第 3 步:再加 1 天即到 1 月 1 日。\n结果:还剩 7 天。',
     },
     useCases: [
       '距某日期还有多少天',
@@ -130,7 +134,11 @@ export const daysCountdownCalculatorL10n: ToolL10n = {
     },
     formula: {
       formula: 'days remaining = target date − today',
+      variables:
+        'today: fecha calendario actual\ntarget date: fecha futura hasta la que se cuenta atrás\ndays remaining: días naturales completos hasta la fecha objetivo',
       explain: 'Días calendario desde hoy hasta la fecha objetivo. El modo de días laborables además excluye sábados y domingos del recuento.',
+      example:
+        'Paso 1: Hoy es 2024-12-25 y el objetivo es 2025-01-01.\nPaso 2: Diciembre tiene 31 días, así que 31 − 25 = 6 días restantes en diciembre.\nPaso 3: Suma 1 día para llegar al 1 de enero.\nResultado: quedan 7 días.',
     },
     useCases: [
       'cuántos días faltan para una fecha',
@@ -204,7 +212,11 @@ export const daysCountdownCalculatorL10n: ToolL10n = {
     },
     formula: {
       formula: 'days remaining = target date − today',
+      variables:
+        'today: aktuelles Kalenderdatum\ntarget date: Zukunftsdatum, auf das heruntergezählt wird\ndays remaining: ganze Kalendertage bis zum Zieldatum',
       explain: 'Kalendertage von heute bis zum Zieldatum. Der Werktage-Modus schließt zusätzlich Samstage und Sonntage aus der Zählung aus.',
+      example:
+        'Schritt 1: Heute ist der 2024-12-25, das Ziel ist der 2025-01-01.\nSchritt 2: Der Dezember hat 31 Tage, also bleiben 31 − 25 = 6 Tage im Dezember.\nSchritt 3: Addiere 1 Tag, um den 1. Januar zu erreichen.\nErgebnis: 7 Tage verbleiben.',
     },
     useCases: [
       'wie viele Tage bis zu einem Datum',

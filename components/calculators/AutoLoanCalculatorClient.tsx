@@ -341,7 +341,7 @@ export function AutoLoanCalculatorClient() {
                 <button
                   type="button"
                   onClick={() => setShowAll((s) => !s)}
-                  className="text-xs font-medium underline underline-offset-2"
+                  className="shrink-0 whitespace-nowrap text-xs font-medium underline underline-offset-2"
                   style={{ color: 'rgb(var(--text-muted))' }}
                 >
                   {showAll ? L('showFirst12', 'Show first 12') : `${L('showAll', 'Show all ')}${parsed.schedule.length}`}

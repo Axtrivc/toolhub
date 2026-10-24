@@ -26,7 +26,9 @@ export const colorContrastCheckerL10n: ToolL10n = {
     },
     formula: {
       formula: 'CR = ( L_lighter + 0.05 ) / ( L_darker + 0.05 )',
+      variables: 'L_lighter: 较亮颜色的相对亮度(0-1)\nL_darker: 较暗颜色的相对亮度(0-1)\nCR: 对比度(取值范围 1 到 21)\n0.05: 用于补偿环境光眩光的常数',
       explain: '两种颜色由相对亮度 L 算出的 WCAG 对比度。比值 ≥ 4.5 时普通文本达 AA;≥ 7 时达 AAA。0.05 用于补偿环境光眩光。',
+      example: '第 1 步:白字(亮度 L = 1.0)置于黑底(亮度 L = 0.0)之上。\n第 2 步:CR = (1.0 + 0.05) / (0.0 + 0.05) = 1.05 / 0.05 = 21。\n结果:21:1,即最大可能对比度;达到 AAA(≥ 7)。',
     },
     useCases: [
       '检测配色是否达到 WCAG 标准',
@@ -61,7 +63,9 @@ export const colorContrastCheckerL10n: ToolL10n = {
     },
     formula: {
       formula: 'CR = ( L_lighter + 0.05 ) / ( L_darker + 0.05 )',
+      variables: 'L_lighter: luminancia relativa del color más claro (0-1)\nL_darker: luminancia relativa del color más oscuro (0-1)\nCR: relación de contraste (entre 1 y 21)\n0,05: constante que compensa el destello de luz ambiente',
       explain: 'Relación de contraste WCAG de dos colores a partir de su luminancia relativa L. Una relación ≥ 4,5 cumple AA para texto normal; una ≥ 7 cumple AAA. El 0,05 compensa el destello de luz ambiente.',
+      example: 'Paso 1: el texto blanco tiene L = 1,0 sobre un fondo negro con L = 0,0.\nPaso 2: CR = (1,0 + 0,05) / (0,0 + 0,05) = 1,05 / 0,05 = 21.\nResultado: 21:1, el contraste máximo posible; supera AAA (≥ 7).',
     },
     useCases: [
       'comprobar si una combinación de colores cumple WCAG',
@@ -96,7 +100,9 @@ export const colorContrastCheckerL10n: ToolL10n = {
     },
     formula: {
       formula: 'CR = ( L_lighter + 0.05 ) / ( L_darker + 0.05 )',
+      variables: 'L_lighter: relative Leuchtdichte der helleren Farbe (0-1)\nL_darker: relative Leuchtdichte der dunkleren Farbe (0-1)\nCR: Kontrastverhältnis (Bereich 1 bis 21)\n0,05: Konstante, die Streulicht ausgleicht',
       explain: 'WCAG-Kontrastverhältnis zweier Farben aus ihrer relativen Leuchtdichte L. Werte ≥ 4,5 erfüllen AA für normalen Text; ≥ 7 erfüllen AAA. Der Wert 0,05 gleicht Streulicht aus.',
+      example: 'Schritt 1: Weißer Text hat L = 1,0 auf schwarzem Hintergrund mit L = 0,0.\nSchritt 2: CR = (1,0 + 0,05) / (0,0 + 0,05) = 1,05 / 0,05 = 21.\nErgebnis: 21:1, der maximal mögliche Kontrast; erfüllt AAA (≥ 7).',
     },
     useCases: [
       'prüfen, ob eine Farbkombination WCAG entspricht',

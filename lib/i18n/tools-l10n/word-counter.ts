@@ -1,8 +1,12 @@
 /**
  * word-counter 本地化 bundle —— zh / es / de
- * 覆盖:faqs + useCases + ui(交互客户端为自定义组件,经 tui('word-counter', ...) 读取)
+ * 覆盖:ui + useCases + faqs + formula(变量说明/解释/算例;公式本体保留英文,
+ * 与 lib/tool-formulas.ts 逐字一致)
  */
 import type { ToolL10n } from '../tool-l10n'
+
+// 公式本体(四语共用;与 lib/tool-formulas.ts "word-counter" 逐字一致)
+const FORMULA = 'reading time ≈ words ÷ 200 wpm\nspeaking time ≈ words ÷ 130 wpm'
 
 export const wordCounterL10n: ToolL10n = {
   zh: {
@@ -36,6 +40,15 @@ export const wordCounterL10n: ToolL10n = {
       { q: '中文写作该看哪个数字?', a: '以「字符数」为准:中文按空格切分的词数意义不大,公众号、论文和出版排版普遍按字符数计。英文字数要求才对应「词数」。' },
       { q: '超长文本会怎样?', a: '超过上限后只统计开头部分,以保证页面流畅。需要统计整本书稿时,按章节分段粘贴,再把结果相加即可。' },
     ],
+    formula: {
+      formula: FORMULA,
+      variables:
+        'words = 文本的词数\n200 wpm = 成人默读平均速度(通常 200-250 wpm)\n130 wpm = 演示与旁白的平均语速',
+      explain:
+        '每个人的阅读与说话速度大体恒定,因此用词数除以速度就能得到时长。默读(约 200-250 wpm)快于口头表达(约 130 wpm),这就是照稿宣讲比浏览更耗时的原因。',
+      example:
+        '第 1 步:一篇文章共 1,500 词。\n第 2 步:阅读时间 ≈ 1500 ÷ 200 = 7.5 分钟。\n第 3 步:演讲时间 ≈ 1500 ÷ 130 ≈ 11.5 分钟。\n结果:默读约需 7.5 分钟,朗读约需 11.5 分钟。',
+    },
   },
   es: {
     ui: {
@@ -68,6 +81,15 @@ export const wordCounterL10n: ToolL10n = {
       { q: '¿Qué límites manejan las redes sociales?', a: 'X/Twitter 280 caracteres, Instagram 2.200 en las descripciones, LinkedIn unos 3.000 por publicación: para esos límites mira «Caracteres», no «Palabras». Los artículos SEO suelen medirse en palabras (1.000-2.000).' },
       { q: '¿Qué pasa con textos muy largos?', a: 'Al superar el límite, solo se cuenta la parte inicial para que la página siga fluida. Para un manuscrito completo, pégalo por capítulos y suma los resultados.' },
     ],
+    formula: {
+      formula: FORMULA,
+      variables:
+        'words = número de palabras del texto\n200 wpm (palabras por minuto) = velocidad media de lectura silenciosa de un adulto (normalmente 200-250)\n130 wpm = ritmo medio de locución en presentaciones y narración',
+      explain:
+        'La velocidad al leer y al hablar es más o menos constante en cada persona, así que dividir el número de palabras entre la velocidad da la duración. La lectura silenciosa (unas 200-250 wpm) es más rápida que la locución (unas 130 wpm): por eso leer un guion en voz alta lleva más tiempo que hojearlo.',
+      example:
+        'Paso 1: un artículo tiene 1,500 palabras.\nPaso 2: tiempo de lectura ≈ 1500 ÷ 200 = 7.5 minutos.\nPaso 3: tiempo de locución ≈ 1500 ÷ 130 ≈ 11.5 minutos.\nResultado: unos 7.5 minutos para leerlo y 11.5 para leerlo en voz alta.',
+    },
   },
   de: {
     ui: {
@@ -100,5 +122,14 @@ export const wordCounterL10n: ToolL10n = {
       { q: 'Welche Limits gelten in sozialen Medien?', a: 'X/Twitter 280 Zeichen, Instagram 2.200 für Bildunterschriften, LinkedIn rund 3.000 pro Beitrag — dafür zählen die „Zeichen“, nicht die „Wörter“. SEO-Texte misst man dagegen in Wörtern (üblich 1.000-2.000 pro Artikel).' },
       { q: 'Was passiert bei sehr langen Texten?', a: 'Über dem Limit wird nur der Anfang gezählt, damit die Seite reaktionsschnell bleibt. Bei einem ganzen Manuskript: kapitelweise einfügen und die Ergebnisse addieren.' },
     ],
+    formula: {
+      formula: FORMULA,
+      variables:
+        'words = Anzahl der Wörter im Text\n200 wpm = durchschnittliches stilles Lesetempo Erwachsener (typisch 200-250 wpm)\n130 wpm = durchschnittliches Sprechtempo für Präsentationen und Erzählungen',
+      explain:
+        'Lese- und Sprechtempo sind pro Person ziemlich konstant: Geteilt man die Wortzahl durch das Tempo, erhält man die Dauer. Stilles Lesen (etwa 200-250 wpm) geht schneller als gesprochene Rede (etwa 130 wpm) — deshalb dauert das Vortragen eines Textes länger als das Überfliegen.',
+      example:
+        'Schritt 1: Ein Artikel enthält 1,500 Wörter.\nSchritt 2: Lesezeit ≈ 1500 ÷ 200 = 7.5 Minuten.\nSchritt 3: Sprechzeit ≈ 1500 ÷ 130 ≈ 11.5 Minuten.\nErgebnis: etwa 7.5 Minuten zum Lesen, 11.5 Minuten zum Vorlesen.',
+    },
   },
 }

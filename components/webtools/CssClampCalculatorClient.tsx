@@ -186,7 +186,7 @@ export function CssClampCalculatorClient() {
                   <th scope="col" className="px-4 py-2.5 text-left font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
                     rem
                   </th>
-                  <th scope="col" className="px-4 py-2.5 text-left font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
+                  <th scope="col" className="whitespace-nowrap px-4 py-2.5 text-left font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
                     {L('thState', 'State')}
                   </th>
                 </tr>
@@ -207,7 +207,7 @@ export function CssClampCalculatorClient() {
                       <td className="px-4 py-2.5 font-mono" style={{ color: 'rgb(var(--text-subtle))' }}>
                         {fmt(px / c.rootF)}rem
                       </td>
-                      <td className="px-4 py-2.5 text-xs" style={{ color: 'rgb(var(--text-faint))' }}>
+                      <td className="whitespace-nowrap px-4 py-2.5 text-xs" style={{ color: 'rgb(var(--text-faint))' }}>
                         {clampedLow ? L('stateClampedMin', 'clamped (min)') : clampedHigh ? L('stateClampedMax', 'clamped (max)') : L('stateScaling', 'scaling')}
                       </td>
                     </tr>

@@ -50,7 +50,11 @@ export const ipSubnetCalculatorL10n: ToolL10n = {
     },
     formula: {
       formula: 'addresses = 2^(32 − prefix)\nusable hosts = 2^(32 − prefix) − 2',
+      variables:
+        'prefix: CIDR 前缀长度,网络位的个数(0–32)\naddresses: 子网内的地址总数\nusable hosts: 可分配给设备的地址数,不含网络地址和广播地址',
       explain: 'IPv4 /prefix 中,主机位为 (32 − prefix)。两个地址保留(网络地址和广播地址),所以可用主机比地址总数少 2。',
+      example:
+        '第 1 步:取一个 /26 子网,前缀 = 26。\n第 2 步:主机位 = 32 − 26 = 6。\n第 3 步:地址总数 = 2^6 = 64。\n第 4 步:可用主机 = 64 − 2 = 62。\n结果:一个 /26 子网容纳 64 个地址,62 台可用主机。',
     },
     useCases: [
       'CIDR 到子网掩码转换器',
@@ -118,7 +122,11 @@ export const ipSubnetCalculatorL10n: ToolL10n = {
     },
     formula: {
       formula: 'addresses = 2^(32 − prefix)\nusable hosts = 2^(32 − prefix) − 2',
+      variables:
+        'prefix: longitud del prefijo CIDR, número de bits de red (0–32)\naddresses: total de direcciones en la subred\nusable hosts: direcciones asignables a dispositivos, excluyendo red y broadcast',
       explain: 'En un /prefix IPv4, los bits de host son (32 − prefix). Dos direcciones se reservan (red y broadcast), así los hosts utilizables son dos menos que el total.',
+      example:
+        'Paso 1: Toma una subred /26, así prefix = 26.\nPaso 2: Bits de host = 32 − 26 = 6.\nPaso 3: Direcciones totales = 2^6 = 64.\nPaso 4: Hosts utilizables = 64 − 2 = 62.\nResultado: una subred /26 contiene 64 direcciones, 62 utilizables.',
     },
     useCases: [
       'convertidor de CIDR a máscara de subred',
@@ -186,7 +194,11 @@ export const ipSubnetCalculatorL10n: ToolL10n = {
     },
     formula: {
       formula: 'addresses = 2^(32 − prefix)\nusable hosts = 2^(32 − prefix) − 2',
+      variables:
+        'prefix: CIDR-Präfixlänge, Anzahl der Netzwerk-Bits (0–32)\naddresses: Gesamtzahl der Adressen im Subnetz\nusable hosts: Geräten zuweisbare Adressen, ohne Netzwerk- und Broadcast-Adresse',
       explain: 'Bei einem IPv4 /prefix sind die Host-Bits (32 − prefix). Zwei Adressen sind reserviert (Netzwerk und Broadcast), daher sind nutzbare Hosts zwei weniger als die Gesamtanzahl.',
+      example:
+        'Schritt 1: Nimm ein /26-Subnetz, also prefix = 26.\nSchritt 2: Host-Bits = 32 − 26 = 6.\nSchritt 3: Adressen gesamt = 2^6 = 64.\nSchritt 4: Nutzbare Hosts = 64 − 2 = 62.\nErgebnis: Ein /26-Subnetz enthält 64 Adressen, 62 nutzbar.',
     },
     useCases: [
       'CIDR-in-Subnetzmaske-Umrechner',

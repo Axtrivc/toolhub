@@ -8,7 +8,11 @@ export const salaryConverterL10n: ToolL10n = {
   zh: {
     formula: {
       formula: 'Annual = hourly × 2080\nMonthly = annual / 12',
+      variables:
+        'Annual = 税前年薪($)\nhourly = 时薪($/小时)\n2080 = 每年工作小时数(40 小时/周 × 52 周)\nMonthly = 税前月薪($)',
       explain: '在时薪、周薪、月薪和年薪之间换算。假设每年工作 2,080 小时(40 h × 52 周);可按不同工作安排调整工时。',
+      example:
+        '第 1 步:hourly = $25.00。\n第 2 步:Annual = 25 × 2080 = $52,000。\n第 3 步:Monthly = 52,000 / 12 ≈ $4,333.33。\n第 4 步:交叉验证:weekly = 25 × 40 = $1,000,biweekly = $2,000。\n结果:$25/小时 约等于每年 $52,000,或每月 $4,333.33(税前,未计扣除)。',
     },
     useCases: ['比较以不同方式报价(年薪/月薪/时薪)的工作机会', '把兼职或合同工时薪换算成年收入', '搞清双周薪和半月薪的区别', '做预算时在年薪、月薪、时薪之间换算'],
     faqs: [
@@ -32,7 +36,11 @@ export const salaryConverterL10n: ToolL10n = {
   es: {
     formula: {
       formula: 'Annual = hourly × 2080\nMonthly = annual / 12',
+      variables:
+        'Annual = salario bruto anual ($)\nhourly = salario por hora ($/hora)\n2080 = horas de trabajo al año (40 horas/semana × 52 semanas)\nMonthly = salario bruto mensual ($)',
       explain: 'Convierte entre paga por hora, semana, mes y año. Asume 2.080 horas laborales al año (40 h × 52 semanas); ajusta las horas para otro horario.',
+      example:
+        'Paso 1: hourly = $25.00.\nPaso 2: Annual = 25 × 2080 = $52,000.\nPaso 3: Monthly = 52,000 / 12 ≈ $4,333.33.\nPaso 4: comprobación: weekly = 25 × 40 = $1,000, biweekly = $2,000.\nResultado: $25/hora son unos $52,000 al año o $4,333.33 al mes antes de impuestos y deducciones.',
     },
     useCases: ['comparar ofertas que cotizan el sueldo de forma distinta (anual/mensual/hora)', 'convertir una tarifa por hora a sueldo anual para trabajos a tiempo parcial o por contrato', 'entender la diferencia entre pago quincenal y semimensual', 'pasar entre sueldo anual, mensual y por hora al hacer presupuesto'],
     faqs: [
@@ -56,7 +64,11 @@ export const salaryConverterL10n: ToolL10n = {
   de: {
     formula: {
       formula: 'Annual = hourly × 2080\nMonthly = annual / 12',
+      variables:
+        'Annual = Bruttojahresgehalt ($)\nhourly = Stundenlohn ($/Stunde)\n2080 = Arbeitsstunden pro Jahr (40 Stunden/Woche × 52 Wochen)\nMonthly = Bruttomonatsgehalt ($)',
       explain: 'Rechnet zwischen Stunden-, Wochen-, Monats- und Jahreslohn um. Setzt 2.080 Arbeitsstunden pro Jahr (40 Std. × 52 Wochen) voraus; Stunden für andere Modelle anpassen.',
+      example:
+        'Schritt 1: hourly = $25.00.\nSchritt 2: Annual = 25 × 2080 = $52,000.\nSchritt 3: Monthly = 52,000 / 12 ≈ $4,333.33.\nSchritt 4: Gegenprobe: weekly = 25 × 40 = $1,000, biweekly = $2,000.\nErgebnis: $25/Stunde sind etwa $52,000 pro Jahr oder $4,333.33 pro Monat vor Steuern und Abzügen.',
     },
     useCases: ['Jobangebote vergleichen, die das Gehalt unterschiedlich angeben (jährlich/monatlich/stündlich)', 'einen Stundenlohn in Jahresgehalt umrechnen für Teilzeit- oder Vertragsarbeit', 'den Unterschied zwischen 14-tägigem und halbmonatlichem Gehalt verstehen', 'zwischen Jahres-, Monats- und Stundenlohn für die Budgetplanung umrechnen'],
     faqs: [

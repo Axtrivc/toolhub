@@ -8,7 +8,11 @@ export const percentileCalculatorL10n: ToolL10n = {
   zh: {
     formula: {
       formula: 'rank = ( P / 100 ) × (n − 1)',
+      variables:
+        'rank = 排序后列表中的位置(从 0 开始)\nP = 要求的百分位数(0-100)\nn = 数据点个数',
       explain: 'P 百分位在已排序的 n 个值中的位置。当 rank 不是整数时,在相邻排名之间插值。',
+      example:
+        '第 1 步:已排序的成绩 3、5、8、10、14(n = 5),求第 50 百分位数。\n第 2 步:rank = (50 / 100) × (5 − 1) = 0.5 × 4 = 2。\n第 3 步:rank 2 即第三个值:8。rank 为整数,无需插值。\n结果:第 50 百分位数(中位数)为 8。',
     },
     ui: {
       'chartTitle': '分布',
@@ -36,7 +40,11 @@ export const percentileCalculatorL10n: ToolL10n = {
   es: {
     formula: {
       formula: 'rank = ( P / 100 ) × (n − 1)',
+      variables:
+        'rank = posición basada en 0 en la lista ordenada\nP = percentil que se quiere hallar (0-100)\nn = número de puntos de datos',
       explain: 'Posición del percentil P-ésimo en una lista ordenada de n valores. Cuando el rango no es entero, se interpola entre los vecinos.',
+      example:
+        'Paso 1: puntuaciones ordenadas 3, 5, 8, 10, 14 (n = 5); halla el percentil 50.\nPaso 2: rank = (50 / 100) × (5 − 1) = 0.5 × 4 = 2.\nPaso 3: el rank 2 corresponde al tercer valor: 8. El rango es un número entero, así que no hay que interpolar.\nResultado: el percentil 50 (la mediana) es 8.',
     },
     ui: {
       'chartTitle': 'Distribución',
@@ -64,7 +72,11 @@ export const percentileCalculatorL10n: ToolL10n = {
   de: {
     formula: {
       formula: 'rank = ( P / 100 ) × (n − 1)',
+      variables:
+        'rank = nullbasierte Position in der sortierten Liste\nP = gesuchtes Perzentil (0-100)\nn = Anzahl der Datenpunkte',
       explain: 'Position des P-ten Perzentils in einer sortierten Liste von n Werten. Ist der Rang nicht ganzzahlig, wird zwischen Nachbarrängen interpoliert.',
+      example:
+        'Schritt 1: Sortierte Punkte 3, 5, 8, 10, 14 (n = 5); finde das 50. Perzentil.\nSchritt 2: rank = (50 / 100) × (5 − 1) = 0.5 × 4 = 2.\nSchritt 3: Rank 2 ist der dritte Wert: 8. Der Rang ist eine ganze Zahl, also ist keine Interpolation nötig.\nErgebnis: das 50. Perzentil (der Median) ist 8.',
     },
     ui: {
       'chartTitle': 'Verteilung',

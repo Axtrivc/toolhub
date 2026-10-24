@@ -60,7 +60,11 @@ export const saasLtvChurnCalculatorL10n: ToolL10n = {
     },
     formula: {
       formula: 'LTV = ARPU / churn\nLTV:CAC = LTV / CAC',
+      variables:
+        'LTV = 客户终身价值($)\nARPU = 每用户平均月收入($)\nchurn = 月流失率(小数,如 4% 记作 0.04)\nCAC = 客户获取成本($)\nLTV:CAC = 终身价值与获客成本之比',
       explain: '客户终身价值 = 每用户平均收入 ÷ 流失率(平均生命周期 ≈ 1/流失率)。LTV:CAC 比较价值与获客成本;3:1 是常见目标。',
+      example:
+        '第 1 步:ARPU = $40/月,月流失率 = 4% → 0.04。\n第 2 步:LTV = 40 / 0.04 = $1,000(平均客户生命周期 = 1/0.04 = 25 个月)。\n第 3 步:CAC = $250 → LTV:CAC = 1,000 / 250 = 4:1。\n结果:4:1 的比率超过 3:1 的目标,说明在该流失水平下获客投入是高效的。',
     },
     useCases: [
       'SaaS 客户终身价值计算器',
@@ -138,7 +142,11 @@ export const saasLtvChurnCalculatorL10n: ToolL10n = {
     },
     formula: {
       formula: 'LTV = ARPU / churn\nLTV:CAC = LTV / CAC',
+      variables:
+        'LTV = valor de vida del cliente ($)\nARPU = ingreso medio por usuario al mes ($)\nchurn = tasa de cancelación mensual (decimal, p. ej. 0.04 para el 4 %)\nCAC = coste de adquisición de clientes ($)\nLTV:CAC = ratio entre el valor de vida y el coste de adquisición',
       explain: 'El valor de vida del cliente = ARPU ÷ churn (vida media ≈ 1/churn). LTV:CAC compara el valor con el coste de adquisición; 3:1 es un objetivo común.',
+      example:
+        'Paso 1: ARPU = $40/mes, churn mensual = 4 % → 0.04.\nPaso 2: LTV = 40 / 0.04 = $1,000 (vida media del cliente = 1/0.04 = 25 meses).\nPaso 3: CAC = $250 → LTV:CAC = 1,000 / 250 = 4:1.\nResultado: un ratio de 4:1 supera el objetivo de 3:1, así que el gasto de adquisición es eficiente con estos niveles de churn.',
     },
     useCases: [
       'Calculadora de valor de vida del cliente SaaS',
@@ -216,7 +224,11 @@ export const saasLtvChurnCalculatorL10n: ToolL10n = {
     },
     formula: {
       formula: 'LTV = ARPU / churn\nLTV:CAC = LTV / CAC',
+      variables:
+        'LTV = Kunden-Lifetime-Value ($)\nARPU = durchschnittlicher Umsatz pro Nutzer und Monat ($)\nchurn = monatliche Churn-Rate (dezimal, z. B. 0.04 für 4 %)\nCAC = Kundengewinnungskosten ($)\nLTV:CAC = Verhältnis von Lifetime-Value zu Akquisitionskosten',
       explain: 'Kunden-Lifetime-Value = ARPU ÷ Churn (Ø Lebensdauer ≈ 1/Churn). LTV:CAC vergleicht Wert mit Akquisitionskosten; 3:1 ist ein gängiges Ziel.',
+      example:
+        'Schritt 1: ARPU = $40/Monat, monatlicher Churn = 4 % → 0.04.\nSchritt 2: LTV = 40 / 0.04 = $1,000 (durchschnittliche Kundenlebensdauer = 1/0.04 = 25 Monate).\nSchritt 3: CAC = $250 → LTV:CAC = 1,000 / 250 = 4:1.\nErgebnis: Ein Verhältnis von 4:1 übertrifft das 3:1-Ziel — die Akquisition ist bei dieser Churn-Rate also effizient.',
     },
     useCases: [
       'SaaS-Customer-Lifetime-Value-Rechner',

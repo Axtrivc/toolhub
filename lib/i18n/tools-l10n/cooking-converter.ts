@@ -1,12 +1,22 @@
 /**
  * cooking-converter 本地化 bundle —— zh / es / de(2025-08 扩张批次)
- * 覆盖: ui。useCases/formula/faqs 缺失自动回退英文。
+ * 覆盖: ui + useCases + faqs + formula(公式区 variables/explain/example 可见文案;
+ * formula 数学记法恒为 en,与 bmi-calculator 先例一致)。缺失自动回退英文。
  */
 import type { ToolL10n } from '../tool-l10n'
+
+// 与 lib/tool-formulas.ts 的 en 公式逐字一致(仅满足类型必填,合并后无视觉变化)
+const FORMULA = 'weight (g) = volume (ml) × density (g/ml)\n1 cup = 236.588 ml\n1 tbsp = 14.79 ml = 3 tsp\n1 tsp = 4.93 ml\n1 cup flour ≈ 125 g\n1 cup sugar ≈ 200 g\n1 cup butter ≈ 227 g'
 
 export const CookingConverterL10n: ToolL10n = {
   zh: {
     useCases: ['把杯/tbsp/tsp 换算成克', '按食材密度精确换算烘焙用量', '把克数食谱反算成杯量', '适配欧式称重与美式杯量食谱'],
+    formula: {
+      formula: FORMULA,
+      variables: 'cup = 美制体积杯,236.588 ml\ntbsp = 汤匙,14.79 ml\ntsp = 茶匙,4.93 ml\ng = 厨房秤上的克数\noz = 盎司,1 oz = 28.35 g\ndensity = 食材的装杯密度,单位 g/ml',
+      explain: '杯量的是体积,克称的是重量,所以换算结果取决于食材密度:过筛面粉约 0.53 g/ml,砂糖压实后约 0.85 g/ml。这就是为什么一杯面粉约重 125 g、一杯砂糖约 200 g,而黄油恰好 227 g(两条美式标准装)。',
+      example: '食谱要求 2 杯面粉:\ng = 2 × 125 = 250 g\n你有 340 g 黄油:\ncups = 340 ÷ 227 ≈ 1.5 杯(3 条)\n少量换算:1 tbsp = 3 tsp = 14.79 ml',
+    },
     faqs: [
       { q: '为什么一杯面粉不等于一杯糖?', a: '杯量计的是体积,而食材密度不同:一杯美式中筋面粉约 120 g,一杯砂糖却有 200 g。本转换器用的是按食材区分的密度表(基于 USDA),不是一个笼统的换算系数。' },
       { q: '换算有多准?', a: '日常烘焙足够用——数值是标准的「勺舀后刮平」均值。装杯方式不同会让结果相差最多约 20%(过筛面粉 vs 直接舀),所以马卡龙、酸面团这类精细配方,厨房秤仍然更可靠。' },
@@ -54,6 +64,12 @@ export const CookingConverterL10n: ToolL10n = {
   },
   es: {
     useCases: ['convertir tazas y cucharadas a gramos', 'medir ingredientes de repostería por densidad', 'pasar recetas en gramos a tazas', 'adaptar recetas europeas por peso a medidas en tazas'],
+    formula: {
+      formula: FORMULA,
+      variables: 'cup = taza US de volumen, 236.588 ml\ntbsp = cucharada, 14.79 ml\ntsp = cucharadita, 4.93 ml\ng = gramos en una báscula de cocina\noz = onzas, 1 oz = 28.35 g\ndensity = densidad de llenado del ingrediente en g/ml',
+      explain: 'Las tazas miden volumen y los gramos pesan, así que la conversión depende de la densidad de cada ingrediente: la harina tamizada ronda 0.53 g/ml y el azúcar granulado, 0.85 g/ml. Por eso una taza de harina pesa unos 125 g, una de azúcar 200 g y la mantequilla exactamente 227 g (dos barras US).',
+      example: 'Una receta pide 2 tazas de harina:\ng = 2 × 125 = 250 g\nTienes 340 g de mantequilla:\ncups = 340 ÷ 227 ≈ 1.5 tazas (3 barras)\nCantidades pequeñas: 1 tbsp = 3 tsp = 14.79 ml',
+    },
     faqs: [
       { q: '¿Por qué una taza de harina no es una de azúcar?', a: 'Las tazas miden volumen, pero los ingredientes difieren en densidad: una taza US de harina de trigo son unos 120 g y una de azúcar granulado, 200 g. Este conversor usa una tabla de densidades por ingrediente (base USDA), no un único factor.' },
       { q: '¿Cómo de preciso es?', a: 'Suficiente para hornear a diario: los valores son medias estándar de cuchara y rasero. Cómo llenes la taza puede mover el resultado hasta un ~20 % (harina tamizada frente a cuchareada), así que para recetas delicadas como macarons o masa madre, la báscula sigue ganando.' },
@@ -101,6 +117,12 @@ export const CookingConverterL10n: ToolL10n = {
   },
   de: {
     useCases: ['Tassen und Esslöffel in Gramm umrechnen', 'Backzutaten über die Dichte genau umrechnen', 'Rezepte in Gramm zurück in Tassen rechnen', 'europäische Gewichts- und US-Tassenrezepte vereinbaren'],
+    formula: {
+      formula: FORMULA,
+      variables: 'cup = US-Volumentasse, 236.588 ml\ntbsp = Esslöffel, 14.79 ml\ntsp = Teelöffel, 4.93 ml\ng = Gramm auf der Küchenwaage\noz = Unzen, 1 oz = 28.35 g\ndensity = Fülldichte der Zutat in g/ml',
+      explain: 'Tassen messen Volumen, Gramm wiegen — die Umrechnung hängt daher von der Dichte der Zutat ab: gesiebtes Mehl liegt bei etwa 0.53 g/ml, Kristallzucker bei rund 0.85 g/ml. Deshalb wiegt eine Tasse Mehl grob 125 g, eine Tasse Zucker 200 g und Butter exakt 227 g (zwei US-Stangen).',
+      example: 'Ein Rezept verlangt 2 Tassen Mehl:\ng = 2 × 125 = 250 g\nDu hast 340 g Butter:\ncups = 340 ÷ 227 ≈ 1.5 Tassen (3 Stangen)\nKleine Mengen: 1 tbsp = 3 tsp = 14.79 ml',
+    },
     faqs: [
       { q: 'Warum ist eine Tasse Mehl nicht eine Tasse Zucker?', a: 'Tassen messen Volumen, aber Zutaten unterscheiden sich in der Dichte: Eine US-Tasse Weizenmehl wiegt etwa 120 g, eine Tasse Kristallzucker 200 g. Dieser Konverter nutzt eine Dichtetabelle je Zutat (USDA-Grundlage), keinen pauschalen Faktor.' },
       { q: 'Wie genau ist das?', a: 'Für das tägliche Backen reicht es — die Werte sind gängige Mittelwerte für Löffeln und Abstreichen. Wie du die Tasse füllst, verschiebt das Ergebnis um bis zu ~20 % (gesiebtes vs. hineingeschaufeltes Mehl); bei empfindlichen Rezepten wie Makronen oder Sauerteig gewinnt dennoch die Küchenwaage.' },

@@ -8,7 +8,11 @@ export const ratioCalculatorL10n: ToolL10n = {
   zh: {
     formula: {
       formula: 'a : b = (a/g) : (b/g),    g = GCD(a, b)',
+      variables:
+        'a、b = 比的两项\ng = GCD(a, b),即能同时整除两项的最大数',
       explain: '用两项的最大公约数去除以化简比。缩放时两项乘以同一系数,比例保持不变。',
+      example:
+        '第 1 步:化简 36 : 60。\n第 2 步:GCD(36, 60) = 12。\n第 3 步:36 / 12 = 3,60 / 12 = 5。\n结果:36 : 60 = 3 : 5。',
     },
     ui: {
       'chartTitle': 'A : B 与 C : D',
@@ -43,7 +47,11 @@ export const ratioCalculatorL10n: ToolL10n = {
   es: {
     formula: {
       formula: 'a : b = (a/g) : (b/g),    g = GCD(a, b)',
+      variables:
+        'a, b = los dos términos de la razón\ng = GCD(a, b), el mayor número que divide a ambos términos',
       explain: 'Simplifica una razón dividiendo ambos términos entre su máximo común divisor. Escalar multiplica ambos términos por el mismo factor, conservando la proporción.',
+      example:
+        'Paso 1: simplifica 36 : 60.\nPaso 2: GCD(36, 60) = 12.\nPaso 3: 36 / 12 = 3 y 60 / 12 = 5.\nResultado: 36 : 60 = 3 : 5.',
     },
     ui: {
       'chartTitle': 'A : B vs C : D',
@@ -78,7 +86,11 @@ export const ratioCalculatorL10n: ToolL10n = {
   de: {
     formula: {
       formula: 'a : b = (a/g) : (b/g),    g = GCD(a, b)',
+      variables:
+        'a, b = die beiden Terme des Verhältnisses\ng = GCD(a, b), die größte Zahl, die beide Terme teilt',
       explain: 'Ein Verhältnis wird vereinfacht, indem man beide Seiten durch ihren ggT teilt. Beim Skalieren werden beide Seiten mit demselben Faktor multipliziert, das Verhältnis bleibt erhalten.',
+      example:
+        'Schritt 1: Vereinfache 36 : 60.\nSchritt 2: GCD(36, 60) = 12.\nSchritt 3: 36 / 12 = 3 und 60 / 12 = 5.\nErgebnis: 36 : 60 = 3 : 5.',
     },
     ui: {
       'chartTitle': 'A : B vs. C : D',

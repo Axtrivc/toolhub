@@ -8,7 +8,11 @@ export const retirementCalculatorL10n: ToolL10n = {
   zh: {
     formula: {
       formula: 'Balance = P(1+i)^n + PMT × [ ((1+i)^n − 1) / i ]   (i = annual rate ÷ 12, n = years × 12)\nSafe withdrawal ≈ Balance × 4%',
+      variables:
+        'Balance = 退休时的养老金总额($)\nP = 当前退休储蓄($)\nPMT = 每月存入金额($)\ni = 月利率(年收益率 ÷ 12)\nn = 距退休的月数(年数 × 12)\nSafe withdrawal = 按 4% 法则的年提取额($)',
       explain: '复利储蓄(起始 P 加每月供款 PMT,i = 年收益率 ÷ 12,n 为月数)构成养老金;一个常用经验法则是每年提取约 4%。',
+      example:
+        '第 1 步:P = $25,000,PMT = $500/月,i = 7% ÷ 12 ≈ 0.0058333,n = 30 × 12 = 360 个月。\n第 2 步:(1 + i)^n = 1.0058333^360 ≈ 8.1165。\n第 3 步:存量储蓄:25,000 × 8.1165 ≈ $202,913。\n第 4 步:累月供款:500 × (8.1165 − 1) / 0.0058333 ≈ $609,985。\n结果:养老金 ≈ $202,913 + $609,985 = $812,898;按 4% 法则每年约可提取 $32,516。',
     },
     useCases: ['按当前储蓄和供款预测退休金', '看自己是否走在退休目标的正轨上', '比较不同回报率下的退休积累', '算还要存多少年才能退休'],
     faqs: [
@@ -29,7 +33,11 @@ export const retirementCalculatorL10n: ToolL10n = {
   es: {
     formula: {
       formula: 'Balance = P(1+i)^n + PMT × [ ((1+i)^n − 1) / i ]   (i = annual rate ÷ 12, n = years × 12)\nSafe withdrawal ≈ Balance × 4%',
+      variables:
+        'Balance = fondo de jubilación al retirarte ($)\nP = ahorro de jubilación actual ($)\nPMT = aportación mensual ($)\ni = tipo mensual (rentabilidad anual ÷ 12)\nn = meses hasta la jubilación (años × 12)\nSafe withdrawal = retiro anual según la regla del 4% ($)',
       explain: 'Ahorro capitalizado (saldo inicial P más aportaciones mensuales PMT, i = rentabilidad anual ÷ 12, n en meses) forma el fondo; una regla común es retirar ~4 % anual.',
+      example:
+        'Paso 1: P = $25,000, PMT = $500/mes, i = 7 % ÷ 12 ≈ 0.0058333, n = 30 × 12 = 360 meses.\nPaso 2: (1 + i)^n = 1.0058333^360 ≈ 8.1165.\nPaso 3: capital inicial: 25,000 × 8.1165 ≈ $202,913.\nPaso 4: aportaciones: 500 × (8.1165 − 1) / 0.0058333 ≈ $609,985.\nResultado: fondo ≈ $202,913 + $609,985 = $812,898; con la regla del 4 % se pueden retirar unos $32,516 al año.',
     },
     useCases: ['proyectar el ahorro para la jubilación con el capital y las aportaciones actuales', 'ver si vas camino de tu meta de jubilación', 'comparar la acumulación con distintas rentabilidades', 'calcular cuántos años más debes ahorrar'],
     faqs: [
@@ -50,7 +58,11 @@ export const retirementCalculatorL10n: ToolL10n = {
   de: {
     formula: {
       formula: 'Balance = P(1+i)^n + PMT × [ ((1+i)^n − 1) / i ]   (i = annual rate ÷ 12, n = years × 12)\nSafe withdrawal ≈ Balance × 4%',
+      variables:
+        'Balance = Altersvermögen beim Ruhestand ($)\nP = aktuelle Ersparnisse ($)\nPMT = monatlicher Beitrag ($)\ni = monatlicher Zinssatz (Jahresrendite ÷ 12)\nn = Monate bis zum Ruhestand (Jahre × 12)\nSafe withdrawal = jährliche Entnahme nach der 4%-Regel ($)',
       explain: 'Verzinstes Sparen (Startguthaben P plus monatliche Beiträge PMT, i = Jahresrendite ÷ 12, n in Monaten) bildet das Altersvermögen; eine Daumenregel ist, etwa 4 % pro Jahr zu entnehmen.',
+      example:
+        'Schritt 1: P = $25,000, PMT = $500/Monat, i = 7 % ÷ 12 ≈ 0.0058333, n = 30 × 12 = 360 Monate.\nSchritt 2: (1 + i)^n = 1.0058333^360 ≈ 8.1165.\nSchritt 3: Startkapital: 25,000 × 8.1165 ≈ $202,913.\nSchritt 4: Beiträge: 500 × (8.1165 − 1) / 0.0058333 ≈ $609,985.\nErgebnis: Altersvermögen ≈ $202,913 + $609,985 = $812,898; nach der 4%-Regel lassen sich jährlich etwa $32,516 entnehmen.',
     },
     useCases: ['das Rentenkapital mit aktuellem Sparstand und Beiträgen hochrechnen', 'sehen, ob du auf Kurs für dein Rentenziel bist', 'die Ansparung bei verschiedenen Renditen vergleichen', 'berechnen, wie viele Jahre du noch sparen musst'],
     faqs: [

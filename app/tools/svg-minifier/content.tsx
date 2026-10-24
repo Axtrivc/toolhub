@@ -24,7 +24,7 @@ const en: ReactNode = (
     <div>
       <h2>What each toggle removes</h2>
       <p>
-        The pipeline mirrors the safest parts of SVGO: <strong>XML declaration &amp; DOCTYPE</strong> (browsers
+        The pipeline mirrors the safest parts of SVGO: <strong>XML declaration &amp; DOCTYPE</strong>{' '}(browsers
         don&apos;t need them for inline or <code>&lt;img&gt;</code> SVG), <strong>comments</strong>,{' '}
         <strong>metadata blocks</strong> (<code>&lt;metadata&gt;</code>, <code>&lt;title&gt;</code>,{' '}
         <code>&lt;desc&gt;</code>), and <strong>editor leftovers</strong> — Inkscape/Sodipodi attributes and
@@ -100,7 +100,7 @@ const es: ReactNode = (
     <div>
       <h2>Qué elimina cada interruptor</h2>
       <p>
-        El proceso refleja las partes más seguras de SVGO: <strong>declaración XML y DOCTYPE</strong> (los navegadores no las necesitan para SVG en línea o <code>&lt;img&gt;</code>), <strong>comentarios</strong>, <strong>bloques de metadatos</strong> (<code>&lt;metadata&gt;</code>, <code>&lt;title&gt;</code>, <code>&lt;desc&gt;</code>) y <strong>restos del editor</strong> — atributos y namespaces de Inkscape/Sodipodi, basura de exportación de Adobe y <code>enable-background</code>. También puede colapsar los espacios en blanco entre etiquetas y descartar atributos que solo repiten el valor por defecto de la especificación, como <code>version=&quot;1.1&quot;</code>.
+        El proceso refleja las partes más seguras de SVGO: <strong>declaración XML y DOCTYPE</strong>{' '}(los navegadores no las necesitan para SVG en línea o <code>&lt;img&gt;</code>), <strong>comentarios</strong>, <strong>bloques de metadatos</strong> (<code>&lt;metadata&gt;</code>, <code>&lt;title&gt;</code>, <code>&lt;desc&gt;</code>) y <strong>restos del editor</strong> — atributos y namespaces de Inkscape/Sodipodi, basura de exportación de Adobe y <code>enable-background</code>. También puede colapsar los espacios en blanco entre etiquetas y descartar atributos que solo repiten el valor por defecto de la especificación, como <code>version=&quot;1.1&quot;</code>.
       </p>
     </div>
 
@@ -131,7 +131,7 @@ const de: ReactNode = (
     <div>
       <h2>Was jeder Schalter entfernt</h2>
       <p>
-        Dieser Minifier spiegelt die sichersten Teile von SVGO wider: <strong>XML-Deklaration und DOCTYPE</strong> (Browser brauchen sie für Inline- oder <code>&lt;img&gt;</code>-SVG nicht), <strong>Kommentare</strong>, <strong>Metadaten-Blöcke</strong> (<code>&lt;metadata&gt;</code>, <code>&lt;title&gt;</code>, <code>&lt;desc&gt;</code>) und <strong>Editor-Reste</strong> — Inkscape/Sodipodi-Attribute und -Namespaces, Adobe-Export-Müll und <code>enable-background</code>. Er kann auch Leerzeichen zwischen Tags zusammenfassen und Attribute verwerfen, die lediglich den Spezifikations-Standard wiederholen, etwa <code>version=&quot;1.1&quot;</code>.
+        Dieser Minifier spiegelt die sichersten Teile von SVGO wider: <strong>XML-Deklaration und DOCTYPE</strong>{' '}(Browser brauchen sie für Inline- oder <code>&lt;img&gt;</code>-SVG nicht), <strong>Kommentare</strong>, <strong>Metadaten-Blöcke</strong> (<code>&lt;metadata&gt;</code>, <code>&lt;title&gt;</code>, <code>&lt;desc&gt;</code>) und <strong>Editor-Reste</strong> — Inkscape/Sodipodi-Attribute und -Namespaces, Adobe-Export-Müll und <code>enable-background</code>. Er kann auch Leerzeichen zwischen Tags zusammenfassen und Attribute verwerfen, die lediglich den Spezifikations-Standard wiederholen, etwa <code>version=&quot;1.1&quot;</code>.
       </p>
     </div>
 

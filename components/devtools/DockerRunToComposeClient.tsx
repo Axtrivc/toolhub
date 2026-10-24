@@ -714,11 +714,11 @@ export function DockerRunToComposeClient() {
 
         {/* Right: Output Compose YAML */}
         <div className="flex flex-col space-y-2">
-          <div className="flex items-center justify-between">
+          <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1">
             <label className="text-sm font-semibold text-slate-800 dark:text-slate-200">
               {T('outputTitle', 'docker-compose.yml')}
             </label>
-            <div className="flex items-center gap-2">
+            <div className="flex shrink-0 items-center gap-2 whitespace-nowrap">
               <CopyButton value={yamlOutput} label={T('copyYaml', 'Copy Compose')} />
             </div>
           </div>

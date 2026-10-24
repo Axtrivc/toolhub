@@ -1,6 +1,6 @@
 /**
  * gpt-token-counter 本地化 bundle —— zh / es / de
- * 覆盖:useCases + faqs(client = GptTokenCounterClient = 自定义 devtool client)
+ * 覆盖:formula(variables/example)+ useCases + faqs(client = GptTokenCounterClient = 自定义 devtool client)
  */
 import type { ToolL10n } from '../tool-l10n'
 
@@ -53,7 +53,11 @@ export const gptTokenCounterL10n: ToolL10n = {
     },
     formula: {
       formula: 'tokens ≈ characters / 4',
+      variables:
+        'characters:文本中的字符数(个)\ntokens:文本的估算 token 数(token)\n4:英文文本每 token 的经验平均字符数',
       explain: '经验估算法:英文文本平均约每 4 个字符 1 个 token,再按单词和标点切分修正。真实计数取决于模型的确切分词器。',
+      example:
+        '第 1 步:取一段 1,200 字符的英文文本。\n第 2 步:套用经验法则:tokens ≈ 1200 / 4 = 300。\n第 3 步:真实分词器可能返回 280–320,因为标点、代码和生僻词的切分方式不同。\n结果:约 300 个 token(估算)。',
     },
     useCases: [
       '在线 GPT-4o token 计数器',
@@ -124,7 +128,11 @@ export const gptTokenCounterL10n: ToolL10n = {
     },
     formula: {
       formula: 'tokens ≈ characters / 4',
+      variables:
+        'characters: número de caracteres del texto (recuento)\ntokens: recuento estimado de tokens del texto (tokens)\n4: promedio orientativo de caracteres por token en texto en inglés',
       explain: 'Regla aproximada: el texto en inglés promedia ~4 caracteres por token, con un refinado que divide por palabras y signos de puntuación. Los recuentos reales dependen del tokenizador exacto del modelo.',
+      example:
+        'Paso 1: Toma un párrafo de texto en inglés de 1.200 caracteres.\nPaso 2: Aplica la regla orientativa: tokens ≈ 1200 / 4 = 300.\nPaso 3: Un tokenizador real puede devolver 280–320 porque la puntuación, el código y las palabras poco frecuentes se dividen de forma distinta.\nResultado: unos 300 tokens (estimación).',
     },
     useCases: [
       'contador de tokens de GPT-4o online',
@@ -195,7 +203,11 @@ export const gptTokenCounterL10n: ToolL10n = {
     },
     formula: {
       formula: 'tokens ≈ characters / 4',
+      variables:
+        'characters: Anzahl der Zeichen im Text (Anzahl)\ntokens: geschätzte Token-Anzahl des Texts (Tokens)\n4: Faustregel-Durchschnitt von Zeichen pro Token für englischen Text',
       explain: 'Daumenregel: Englischer Text hat im Schnitt ~4 Zeichen pro Token, verfeinert durch Wort-/Satzzeichentrennung. Echte Zahlen hängen vom exakten Tokenizer des Modells ab.',
+      example:
+        'Schritt 1: Nimm einen englischen Textabsatz mit 1.200 Zeichen.\nSchritt 2: Wende die Daumenregel an: tokens ≈ 1200 / 4 = 300.\nSchritt 3: Ein echter Tokenizer liefert womöglich 280–320, weil Satzzeichen, Code und seltene Wörter anders zerlegt werden.\nErgebnis: etwa 300 Tokens (Schätzung).',
     },
     useCases: [
       'Online-Token-Zähler für GPT-4o',

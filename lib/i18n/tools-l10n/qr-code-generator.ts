@@ -1,8 +1,12 @@
 /**
  * qr-code-generator 本地化 bundle —— zh / es / de
- * 覆盖:faqs + useCases(client = QRCodeGeneratorClient = 自定义 client,无需 slug)
+ * 覆盖:faqs + useCases + formula(explain・variables・example 译文;
+ * formula 代码块是数学/代码示例,按站规保持英文原值)
  */
 import type { ToolL10n } from '../tool-l10n'
+
+const FORMULA =
+  'modules per side = 21 + 4 × (version − 1)\nerror correction: L 7%, M 15%, Q 25%, H 30% of codewords recoverable\nquiet zone = 4 modules on each side'
 
 export const qrCodeGeneratorL10n: ToolL10n = {
   zh: {
@@ -60,6 +64,15 @@ export const qrCodeGeneratorL10n: ToolL10n = {
       { q: '二维码安全吗?', a: '二维码本身只是传递文本的一种方式——它本身既不安全也不危险。风险在于恶意二维码可能链接到钓鱼网站。作为用户,要把扫描到的链接当作普通链接一样谨慎对待;作为创建者,只链接到你拥有并信任的目标。' },
       { q: '容错等级该怎么选?', a: 'H 级能容忍约 30% 的图案污损或遮挡,适合印在包装、海报上;屏幕显示用 M 级(~15%)就够了。等级越高图案越密,内容较长时反而更难扫描。' },
     ],
+    formula: {
+      formula: FORMULA,
+      variables:
+        'version: 二维码规格等级,1(最小)到 40(最大)\nmodules: 符号每边的黑白格子数\nL、M、Q、H: 容错等级,分别可恢复 7%、15%、25% 和 30% 的码字\nquiet zone: 码周围的空白边距,宽 4 个模块',
+      explain:
+        '二维码共有 40 个规格,方形网格从规格 1 的每边 21 个模块起,每升一级每边增加 4 个模块。容错等级越高,用于冗余的码字越多,因此抗污损能力上升的同时容量下降。4 模块宽的静区能帮助扫描器找到符号的边缘。',
+      example:
+        '第 1 步:取一个规格 5 的二维码。\n第 2 步:每边模块数 = 21 + 4 × (5 − 1) = 21 + 16 = 37。\n第 3 步:在 M 级容错下最多可承受 15% 的污损,且四周需要 4 模块宽的静区。\n结果:一个 37 × 37 模块的码,外加边距。',
+    },
   },
   es: {
     ui: {
@@ -116,6 +129,15 @@ export const qrCodeGeneratorL10n: ToolL10n = {
       { q: '¿Son seguros los códigos QR?', a: 'Los códigos QR por sí solos son solo una forma de entregar texto: no son ni seguros ni peligrosos en sí mismos. El riesgo es que un código malicioso pueda enlazar a un sitio de phishing. Como usuario, trata los enlaces escaneados con la misma cautela que cualquier otro enlace. Como creador, enlaza solo a destinos que controlas y en los que confías.' },
       { q: '¿Qué nivel de corrección de errores elijo?', a: 'El nivel H tolera que ~30 % del código esté dañado u oculto: ideal para envases y carteles impresos. En pantalla basta el M (~15 %). Cuanto más alto el nivel, más denso el código, y con textos largos cuesta más escanearlo.' },
     ],
+    formula: {
+      formula: FORMULA,
+      variables:
+        'version: nivel de tamaño del código QR, de 1 (el más pequeño) a 40 (el más grande)\nmodules: celdas blancas/negras por lado del símbolo\nL, M, Q, H: niveles de corrección de errores que recuperan el 7 %, 15 %, 25 % y 30 % de las palabras de código\nquiet zone: margen en blanco alrededor del código, de 4 módulos de ancho',
+      explain:
+        'Los símbolos QR tienen 40 versiones cuya cuadrícula crece 4 módulos por lado en cada versión, empezando en 21 para la versión 1. Los niveles de corrección de errores más altos dedican más palabras de código a la redundancia, así que la capacidad baja a medida que sube la tolerancia al daño. Una zona de silencio de 4 módulos ayuda a los escáneres a encontrar los bordes del símbolo.',
+      example:
+        'Paso 1: Toma un código QR de versión 5.\nPaso 2: módulos por lado = 21 + 4 × (5 − 1) = 21 + 16 = 37.\nPaso 3: En el nivel M soporta hasta un 15 % de daño y necesita una zona de silencio de 4 módulos alrededor.\nResultado: un código de 37 × 37 módulos, más el margen.',
+    },
   },
   de: {
     ui: {
@@ -172,5 +194,14 @@ export const qrCodeGeneratorL10n: ToolL10n = {
       { q: 'Sind QR-Codes sicher?', a: 'QR-Codes sind selbst nur ein Weg, Text zu übermitteln – sie sind weder sicher noch gefährlich. Das Risiko besteht darin, dass ein böswilliger Code auf eine Phishing-Seite verlinken könnte. Als Nutzer behandle gescannte Links mit derselben Vorsicht wie jeden anderen Link. Als Ersteller verlinke nur auf Ziele, die du kontrollierst und denen du vertraust.' },
       { q: 'Welche Fehlerkorrekturstufe soll ich wählen?', a: 'Stufe H verträgt ~30 % beschädigte oder verdeckte Fläche — ideal für Verpackungen und gedruckte Poster. Am Bildschirm reicht M (~15 %). Je höher die Stufe, desto dichter der Code; bei langen Texten wird das Scannen schwieriger.' },
     ],
+    formula: {
+      formula: FORMULA,
+      variables:
+        'version: Größenstufe des QR-Codes, 1 (kleinste) bis 40 (größte)\nmodules: schwarz-weiße Zellen je Seite des Symbols\nL, M, Q, H: Fehlerkorrekturstufen, die 7 %, 15 %, 25 % bzw. 30 % der Codewörter wiederherstellen\nquiet zone: freier Rand um den Code, 4 Module breit',
+      explain:
+        'QR-Symbole gibt es in 40 Versionen, deren quadratisches Raster pro Version um 4 Module je Seite wächst, beginnend bei 21 für Version 1. Höhere Fehlerkorrekturstufen verwenden mehr Codewörter für Redundanz, daher sinkt die Kapazität, während die Toleranz gegenüber Beschädigung steigt. Eine 4 Module breite Ruhezone hilft Scannern, die Ränder des Symbols zu finden.',
+      example:
+        'Schritt 1: Nimm einen QR-Code der Version 5.\nSchritt 2: Module je Seite = 21 + 4 × (5 − 1) = 21 + 16 = 37.\nSchritt 3: Auf Stufe M verträgt er bis zu 15 % Beschädigung und braucht rundherum eine 4 Module breite Ruhezone.\nErgebnis: ein Code mit 37 × 37 Modulen plus Rand.',
+    },
   },
 }

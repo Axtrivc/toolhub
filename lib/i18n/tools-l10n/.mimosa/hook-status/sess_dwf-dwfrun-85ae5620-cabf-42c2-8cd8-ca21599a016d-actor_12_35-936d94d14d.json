@@ -1,0 +1,14 @@
+{
+  "schemaVersion": "mimosa-hook-status/v1",
+  "recordedAt": "2026-10-24T05:35:58.181Z",
+  "sessionId": "sess_dwf-dwfrun-85ae5620-cabf-42c2-8cd8-ca21599a016d-actor_12_35",
+  "event": "PostToolUse",
+  "toolName": "Edit",
+  "file": "color-contrast-checker.ts",
+  "outcome": "clear",
+  "coverage": "complete",
+  "findingCount": 0,
+  "durationMs": 35,
+  "hostState": "hook_complete",
+  "reportHint": ".mimosa/reports/"
+}
