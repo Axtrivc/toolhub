@@ -21,6 +21,8 @@ import { pricingMathArticle } from '@/lib/i18n/blog-article-pricing-math'
 import { canineNutritionArticle } from '@/lib/i18n/blog-article-canine-nutrition'
 import { renovationMathArticle } from '@/lib/i18n/blog-article-renovation-math'
 import type { Locale } from '@/lib/i18n'
+import { t } from '@/lib/i18n'
+import { SITE_NAME } from '@/lib/seo'
 
 /**
  * 博客长文正文渲染器(客户端组件)。
@@ -153,9 +155,12 @@ function renderSection(section: ArticleSection, idx: number): ReactNode {
   )
 }
 
+/** 文章 key,对应 ARTICLES 表的键 */
+type ArticleKey = keyof typeof ARTICLES
+
 interface BlogArticleBodyProps {
   /** 文章 key,对应 ARTICLES 表的键 */
-  articleKey: keyof typeof ARTICLES
+  articleKey: ArticleKey
 }
 
 export function BlogArticleBody({ articleKey }: BlogArticleBodyProps) {
@@ -178,5 +183,67 @@ export function BlogArticleBody({ articleKey }: BlogArticleBodyProps) {
         {content.sections.map((section, idx) => renderSection(section, idx))}
       </article>
     </>
+  )
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// 博客文章页"页框文案"本地化叶子组件(H1 / 面包屑 / 返回链接 / 阅读时长)
+//
+// 文章页 page.tsx 是 server component(metadata/JSON-LD 等 SEO 字段英文稳定,
+// 绝不在此列),页框的可见文案与正文一样交给本文件的客户端组件按 locale 渲染。
+// 标题/短标题/阅读分钟数来自数据层 ArticleContent(lib/i18n/blog-articles.ts);
+// SSR 首帧 locale 默认 en,与正文渲染行为一致。
+// ─────────────────────────────────────────────────────────────────────────────
+
+/** 取当前 locale 下某篇文章的标题类元数据(整篇缺当前 locale → 回退 en) */
+function useArticleMeta(articleKey: ArticleKey) {
+  const { locale } = useApp()
+  const articleData = ARTICLES[articleKey]
+  const content: ArticleContent | undefined = articleData?.[locale] ?? articleData?.en
+  return {
+    title: content?.articleTitle[locale] ?? content?.articleTitle.en ?? '',
+    crumbTitle: content?.breadcrumbTitle[locale] ?? content?.breadcrumbTitle.en ?? '',
+    readMinutes: content?.readMinutes,
+  }
+}
+
+/** 返回首页按钮文案("Back to ToolHub",箭头与按钮壳仍在 page.tsx) */
+export function BlogBackLabel() {
+  const { locale } = useApp()
+  return <>{t(locale, 'blogBackToSite', { site: SITE_NAME })}</>
+}
+
+/** 面包屑"Home" */
+export function BlogCrumbHome() {
+  const { locale } = useApp()
+  return <>{t(locale, 'toolHome')}</>
+}
+
+/** 面包屑"Blog" */
+export function BlogCrumbBlog() {
+  const { locale } = useApp()
+  return <>{t(locale, 'navBlog')}</>
+}
+
+/** 面包屑当前页短标题(数据层 breadcrumbTitle) */
+export function BlogCrumbTitle({ articleKey }: { articleKey: ArticleKey }) {
+  const { crumbTitle } = useArticleMeta(articleKey)
+  return <>{crumbTitle}</>
+}
+
+/** 文章 H1 标题(数据层 articleTitle;SEO 的 metadata/JSON-LD 标题仍由 page.tsx 英文提供) */
+export function BlogArticleTitle({ articleKey }: { articleKey: ArticleKey }) {
+  const { title } = useArticleMeta(articleKey)
+  return <>{title}</>
+}
+
+/** 阅读时长(数据层 readMinutes 按 locale 格式化:"9 min read" / "9 分钟阅读" / …) */
+export function BlogReadTime({ articleKey }: { articleKey: ArticleKey }) {
+  const { locale } = useApp()
+  const { readMinutes } = useArticleMeta(articleKey)
+  return (
+    <span>
+      {readMinutes === undefined ? '—' : t(locale, 'blogArticleReadTime', { count: readMinutes })}
+    </span>
   )
 }

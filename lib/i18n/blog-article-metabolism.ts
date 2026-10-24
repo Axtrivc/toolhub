@@ -16,8 +16,15 @@ Women: BMR = 10*kg + 6.25*cm - 5*age - 161
 // Deficit math: ~7,700 kcal per kg of fat
 //   500 kcal/day deficit ≈ 0.45 kg per week`
 
+// ── 标题类字段英文原值(articleTitle 三语已回填;breadcrumbTitle 暂以 en 值占位)──
+const EN_TITLE = 'The Science of Human Metabolism: Calculating BMR, TDEE, Caloric Deficits, and 16:8 Fasting'
+const EN_CRUMB_TITLE = 'Metabolism & Calorie Deficit Guide'
+
 export const metabolismGuideArticle: LocalizedArticle = {
   en: {
+    articleTitle: { en: EN_TITLE, zh: '人体代谢的科学:算清 BMR、TDEE、热量缺口与 16:8 断食', es: 'La ciencia del metabolismo humano: calcular BMR, TDEE, el déficit calórico y el ayuno 16:8', de: 'Die Wissenschaft des menschlichen Stoffwechsels: BMR, TDEE, Kaloriendefizit und 16:8-Fasten berechnen' },
+    breadcrumbTitle: { en: EN_CRUMB_TITLE, zh: EN_CRUMB_TITLE, es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
+    readMinutes: 11,
     lead: 'Weight change is not a morality play; it is an energy ledger with three entries — BMR, activity, and intake. Here is the equation set clinicians use, the honest math of deficits, and where 16:8 fasting actually helps (and where it does not).',
     sections: [
       {
@@ -106,6 +113,9 @@ export const metabolismGuideArticle: LocalizedArticle = {
     ],
   },
   zh: {
+    articleTitle: { en: EN_TITLE, zh: '人体代谢的科学:算清 BMR、TDEE、热量缺口与 16:8 断食', es: 'La ciencia del metabolismo humano: calcular BMR, TDEE, el déficit calórico y el ayuno 16:8', de: 'Die Wissenschaft des menschlichen Stoffwechsels: BMR, TDEE, Kaloriendefizit und 16:8-Fasten berechnen' },
+    breadcrumbTitle: { en: EN_CRUMB_TITLE, zh: EN_CRUMB_TITLE, es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
+    readMinutes: 11,
     lead: '体重变化不是道德剧,而是一本只有三个科目的能量账:BMR、活动量、摄入量。本文给出临床营养师实际使用的方程组、缺口计算的诚实数学,以及 16:8 断食真正有用(和没用)的地方。',
     sections: [
       {
@@ -194,6 +204,9 @@ export const metabolismGuideArticle: LocalizedArticle = {
     ],
   },
   es: {
+    articleTitle: { en: EN_TITLE, zh: '人体代谢的科学:算清 BMR、TDEE、热量缺口与 16:8 断食', es: 'La ciencia del metabolismo humano: calcular BMR, TDEE, el déficit calórico y el ayuno 16:8', de: 'Die Wissenschaft des menschlichen Stoffwechsels: BMR, TDEE, Kaloriendefizit und 16:8-Fasten berechnen' },
+    breadcrumbTitle: { en: EN_CRUMB_TITLE, zh: EN_CRUMB_TITLE, es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
+    readMinutes: 11,
     lead: 'El cambio de peso no es una obra de moralidad; es un libro contable de energía con tres apuntes: BMR, actividad e ingesta. Aquí está el juego de ecuaciones que usan los clínicos, la matemática honesta del déficit y dónde ayuda de verdad el ayuno 16:8 (y dónde no).',
     sections: [
       {
@@ -282,6 +295,9 @@ export const metabolismGuideArticle: LocalizedArticle = {
     ],
   },
   de: {
+    articleTitle: { en: EN_TITLE, zh: '人体代谢的科学:算清 BMR、TDEE、热量缺口与 16:8 断食', es: 'La ciencia del metabolismo humano: calcular BMR, TDEE, el déficit calórico y el ayuno 16:8', de: 'Die Wissenschaft des menschlichen Stoffwechsels: BMR, TDEE, Kaloriendefizit und 16:8-Fasten berechnen' },
+    breadcrumbTitle: { en: EN_CRUMB_TITLE, zh: EN_CRUMB_TITLE, es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
+    readMinutes: 11,
     lead: 'Gewichtsveränderung ist kein Moralstück, sondern ein Energiekonto mit drei Positionen — BMR, Aktivität und Zufuhr. Hier der Gleichungssatz der Kliniker, die ehrliche Defizit-Mathematik und wo 16:8-Fasten wirklich hilft (und wo nicht).',
     sections: [
       {

@@ -262,6 +262,9 @@ export interface Dict {
   blogBannerTitle: string // "Featured tools, free and in-browser"
   blogBannerBody: string
   blogBannerBrowse: string // "Browse all {count}+ tools"
+  // 博客文章页页框文案(标题数据在 lib/i18n/blog-articles.ts 的 ArticleContent)
+  blogBackToSite: string // "Back to {site}"(文章页返回首页按钮)
+  blogArticleReadTime: string // "{count} min read"(文章页阅读时长,按 locale 格式化)
   // 首页底部 SEO 文案区(Why Use / Browse / Popular 三段)
   seoWhyTitle: string
   seoWhyBody1: string
@@ -520,6 +523,8 @@ const en: Dict = {
   blogBannerBody:
     'No signup, no upload, no tracking. Everything below runs entirely in your tab — exactly the architecture this post describes.',
   blogBannerBrowse: 'Browse all {count}+ tools',
+  blogBackToSite: 'Back to {site}',
+  blogArticleReadTime: '{count} min read',
   // 首页底部 SEO 文案区
   seoWhyTitle: 'Why Use Our Online Tools?',
   seoWhyBody1: 'Most online tools ask you to sign up, accept cookies, or upload your files to a server you can\'t audit. We do things differently: every tool here runs entirely in your browser. That means three things for you:',
@@ -771,6 +776,8 @@ const zh: Dict = {
   blogBannerBody:
     '无需注册、无需上传、不追踪。下面的工具全部在你的浏览器标签页内运行 —— 正如本文所描述的架构。',
   blogBannerBrowse: '浏览全部 {count}+ 个工具',
+  blogBackToSite: '返回 {site}',
+  blogArticleReadTime: '{count} 分钟阅读',
   // 首页底部 SEO 文案区
   seoWhyTitle: '为什么要用我们的在线工具?',
   seoWhyBody1: '大多数在线工具都要你注册、接受 cookie,或把文件上传到无法审计的服务器。我们不一样:这里的每个工具都完全在你的浏览器中运行。这对你意味着三件事:',
@@ -1022,6 +1029,8 @@ const es: Dict = {
   blogBannerBody:
     'Sin registro, sin subidas, sin rastreo. Todo lo que ves abajo se ejecuta por completo en tu pestaña — exactamente la arquitectura que describe este artículo.',
   blogBannerBrowse: 'Ver las {count}+ herramientas',
+  blogBackToSite: 'Volver a {site}',
+  blogArticleReadTime: '{count} min de lectura',
   // 首页底部 SEO 文案区
   seoWhyTitle: '¿Por qué usar nuestras herramientas online?',
   seoWhyBody1: 'La mayoría de herramientas online te piden registrarte, aceptar cookies o subir tus archivos a un servidor que no puedes auditar. Nosotros lo hacemos distinto: cada herramienta aquí se ejecuta por completo en tu navegador. Para ti eso significa tres cosas:',
@@ -1273,6 +1282,8 @@ const de: Dict = {
   blogBannerBody:
     'Keine Anmeldung, kein Upload, kein Tracking. Alles darunter läuft komplett in deinem Tab — genau die Architektur, die dieser Beitrag beschreibt.',
   blogBannerBrowse: 'Alle {count}+ Werkzeuge ansehen',
+  blogBackToSite: 'Zurück zu {site}',
+  blogArticleReadTime: '{count} Min. Lesezeit',
   // 首页底部 SEO 文案区
   seoWhyTitle: 'Warum unsere Online-Werkzeuge nutzen?',
   seoWhyBody1: 'Die meisten Online-Tools verlangen Anmeldung, Cookie-Zustimmung oder laden deine Dateien auf einen Server, den du nicht prüfen kannst. Wir machen es anders: Jedes Werkzeug hier läuft vollständig in deinem Browser. Für dich bedeutet das drei Dinge:',

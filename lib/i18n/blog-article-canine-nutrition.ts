@@ -17,8 +17,15 @@ RER = 70 * (weight_kg ^ 0.75)
 //
 // 20 kg neutered adult: RER = 70*20^0.75 ≈ 662, MER ≈ 1,060 kcal`
 
+// ── 标题类字段英文原值(articleTitle 三语已回填;breadcrumbTitle 暂以 en 值占位)──
+const EN_TITLE = 'Veterinary Math for Dog Owners: Decoding RER, MER, and Accurate Daily Calorie Intake'
+const EN_CRUMB_TITLE = 'Canine RER & MER Guide'
+
 export const canineNutritionArticle: LocalizedArticle = {
   en: {
+    articleTitle: { en: EN_TITLE, zh: '写给养狗人的兽医数学:读懂 RER、MER 与准确的每日热量摄入', es: 'Matemática veterinaria para dueños de perros: descifrar RER, MER y la ingesta calórica diaria exacta', de: 'Veterinär-Mathematik für Hundebesitzer: RER, MER und die exakte tägliche Kalorienzufuhr entschlüsselt' },
+    breadcrumbTitle: { en: EN_CRUMB_TITLE, zh: EN_CRUMB_TITLE, es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
+    readMinutes: 9,
     lead: 'Feeding guidelines on kibble bags are written for intact, active, young dogs — and most pets are none of the three. The veterinary RER/MER framework gives you the actual number, and the 10% treat rule keeps you honest about where calories hide.',
     sections: [
       {
@@ -87,6 +94,9 @@ export const canineNutritionArticle: LocalizedArticle = {
     ],
   },
   zh: {
+    articleTitle: { en: EN_TITLE, zh: '写给养狗人的兽医数学:读懂 RER、MER 与准确的每日热量摄入', es: 'Matemática veterinaria para dueños de perros: descifrar RER, MER y la ingesta calórica diaria exacta', de: 'Veterinär-Mathematik für Hundebesitzer: RER, MER und die exakte tägliche Kalorienzufuhr entschlüsselt' },
+    breadcrumbTitle: { en: EN_CRUMB_TITLE, zh: EN_CRUMB_TITLE, es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
+    readMinutes: 9,
     lead: '狗粮袋上的喂食建议是按"未绝育、高活动、年轻犬"写的——而多数宠物犬三者皆非。兽医界的 RER/MER 框架给出真实数字,10% 零食规则则让你诚实面对热量藏在哪里。',
     sections: [
       {
@@ -155,6 +165,9 @@ export const canineNutritionArticle: LocalizedArticle = {
     ],
   },
   es: {
+    articleTitle: { en: EN_TITLE, zh: '写给养狗人的兽医数学:读懂 RER、MER 与准确的每日热量摄入', es: 'Matemática veterinaria para dueños de perros: descifrar RER, MER y la ingesta calórica diaria exacta', de: 'Veterinär-Mathematik für Hundebesitzer: RER, MER und die exakte tägliche Kalorienzufuhr entschlüsselt' },
+    breadcrumbTitle: { en: EN_CRUMB_TITLE, zh: EN_CRUMB_TITLE, es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
+    readMinutes: 9,
     lead: 'Las guías de los sacos de pienso están escritas para perros jóvenes, activos y sin esterilizar — y la mayoría de las mascotas no es ninguna de las tres. El marco veterinario RER/MER te da el número real, y la regla del 10 % de premios te obliga a ser honesto sobre dónde se esconden las calorías.',
     sections: [
       {
@@ -223,6 +236,9 @@ export const canineNutritionArticle: LocalizedArticle = {
     ],
   },
   de: {
+    articleTitle: { en: EN_TITLE, zh: '写给养狗人的兽医数学:读懂 RER、MER 与准确的每日热量摄入', es: 'Matemática veterinaria para dueños de perros: descifrar RER, MER y la ingesta calórica diaria exacta', de: 'Veterinär-Mathematik für Hundebesitzer: RER, MER und die exakte tägliche Kalorienzufuhr entschlüsselt' },
+    breadcrumbTitle: { en: EN_CRUMB_TITLE, zh: EN_CRUMB_TITLE, es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
+    readMinutes: 9,
     lead: 'Die Fütterungsempfehlungen auf Futtersäcken sind für intakte, aktive, junge Hunde geschrieben — und die meisten Haushunde sind nichts davon. Das veterinäre RER/MER-Framework liefert die echte Zahl, und die 10-%-Leckerli-Regel zwingt zur Ehrlichkeit, wo Kalorien sich verstecken.',
     sections: [
       {

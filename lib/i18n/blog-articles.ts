@@ -44,8 +44,17 @@ export interface ArticleSection {
   blocks: ArticleBlock[]
 }
 
+/** 单个标题类文案的四语映射(缺翻译的语种以 en 值占位,回退安全) */
+export type LocalizedText = Record<Locale, string>
+
 /** 一篇文章的完整内容 */
 export interface ArticleContent {
+  /** 页面可见 H1(四语;metadata/JSON-LD 的英文 SEO 标题仍由 page.tsx 管理,不在此列) */
+  articleTitle: LocalizedText
+  /** 面包屑最后一节的短标题(四语) */
+  breadcrumbTitle: LocalizedText
+  /** 阅读时长(分钟;展示文案由渲染层按 locale 格式化) */
+  readMinutes: number
   /** 副标题(H1 下方那行 lead) */
   lead: string
   sections: ArticleSection[]
@@ -129,8 +138,15 @@ const CODE_AD_EN = `// components/AdSlot.tsx (simplified)
 // ─────────────────────────────────────────────────────────────────────────────
 // 《How I Built ToolHub》正文
 // ─────────────────────────────────────────────────────────────────────────────
+// ── 标题类字段英文原值(articleTitle 三语已回填;breadcrumbTitle 暂以 en 值占位)──
+const EN_TITLE = 'How I Built ToolHub: A 169-Tool Static PWA That Stays Sub-Second'
+const EN_CRUMB_TITLE = 'How I Built ToolHub'
+
 export const howIBuiltToolHubArticle: LocalizedArticle = {
   en: {
+    articleTitle: { en: EN_TITLE, zh: '我是如何打造 ToolHub 的:169 个工具的静态 PWA,加载始终亚秒级', es: 'Cómo construí ToolHub: una PWA estática de 169 herramientas con cargas siempre sub-segundo', de: 'Wie ich ToolHub gebaut habe: eine statische PWA mit 169 Werkzeugen, deren Ladezeit unter einer Sekunde bleibt' },
+    breadcrumbTitle: { en: EN_CRUMB_TITLE, zh: EN_CRUMB_TITLE, es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
+    readMinutes: 9,
     lead: 'A no-bullshit retrospective on shipping a Next.js static export of 169 in-browser tools — the architecture, the pSEO engine, the zero-CLS ad story, and what I would do differently.',
     sections: [
       {
@@ -275,6 +291,9 @@ export const howIBuiltToolHubArticle: LocalizedArticle = {
   },
 
   zh: {
+    articleTitle: { en: EN_TITLE, zh: '我是如何打造 ToolHub 的:169 个工具的静态 PWA,加载始终亚秒级', es: 'Cómo construí ToolHub: una PWA estática de 169 herramientas con cargas siempre sub-segundo', de: 'Wie ich ToolHub gebaut habe: eine statische PWA mit 169 Werkzeugen, deren Ladezeit unter einer Sekunde bleibt' },
+    breadcrumbTitle: { en: EN_CRUMB_TITLE, zh: EN_CRUMB_TITLE, es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
+    readMinutes: 9,
     lead: '一篇不绕弯子的复盘:用 Next.js 静态导出做出 169 个浏览器内工具 —— 聊架构、pSEO 引擎、零 CLS 的广告方案,以及我会重做的部分。',
     sections: [
       {
@@ -419,6 +438,9 @@ export const howIBuiltToolHubArticle: LocalizedArticle = {
   },
 
   es: {
+    articleTitle: { en: EN_TITLE, zh: '我是如何打造 ToolHub 的:169 个工具的静态 PWA,加载始终亚秒级', es: 'Cómo construí ToolHub: una PWA estática de 169 herramientas con cargas siempre sub-segundo', de: 'Wie ich ToolHub gebaut habe: eine statische PWA mit 169 Werkzeugen, deren Ladezeit unter einer Sekunde bleibt' },
+    breadcrumbTitle: { en: EN_CRUMB_TITLE, zh: EN_CRUMB_TITLE, es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
+    readMinutes: 9,
     lead: 'Una retrospectiva sin rodeos sobre haber publicado una exportación estática de Next.js con 169 herramientas en el navegador — la arquitectura, el motor de pSEO, la historia de anuncios sin CLS y qué haría distinto.',
     sections: [
       {
@@ -563,6 +585,9 @@ export const howIBuiltToolHubArticle: LocalizedArticle = {
   },
 
   de: {
+    articleTitle: { en: EN_TITLE, zh: '我是如何打造 ToolHub 的:169 个工具的静态 PWA,加载始终亚秒级', es: 'Cómo construí ToolHub: una PWA estática de 169 herramientas con cargas siempre sub-segundo', de: 'Wie ich ToolHub gebaut habe: eine statische PWA mit 169 Werkzeugen, deren Ladezeit unter einer Sekunde bleibt' },
+    breadcrumbTitle: { en: EN_CRUMB_TITLE, zh: EN_CRUMB_TITLE, es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
+    readMinutes: 9,
     lead: 'Ein ungeschönter Rückblick darauf, wie ich einen statischen Next.js-Export mit 169 In-Browser-Werkzeugen veröffentlicht habe — Architektur, die pSEO-Engine, die Zero-CLS-Werbegeschichte und was ich anders machen würde.',
     sections: [
       {

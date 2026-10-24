@@ -17,8 +17,15 @@ M = P * r(1+r)^n / ((1+r)^n - 1)
 //   principal = M - interest
 //   balance  -= principal`
 
+// ── 标题类字段英文原值(articleTitle 三语已回填;breadcrumbTitle 暂以 en 值占位)──
+const EN_TITLE = 'The Complete Guide to Mortgage Amortization, PITI Breakdown, and Prepayment Strategies'
+const EN_CRUMB_TITLE = 'Mortgage Amortization & PITI Guide'
+
 export const mortgagePitiGuideArticle: LocalizedArticle = {
   en: {
+    articleTitle: { en: EN_TITLE, zh: '房贷摊销、PITI 分解与提前还款策略完全指南', es: 'La guía completa de la amortización hipotecaria, el desglose del PITI y las estrategias de amortización anticipada', de: 'Der komplette Leitfaden zu Hypotheken-Tilgung, PITI-Aufschlüsselung und Sondertilgungsstrategien' },
+    breadcrumbTitle: { en: EN_CRUMB_TITLE, zh: EN_CRUMB_TITLE, es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
+    readMinutes: 11,
     lead: 'A 30-year mortgage is the largest amortization schedule most people ever sign — yet lenders quote it as a single monthly number. This guide opens the black box: the payment formula, the full PITI stack, and the prepayment math that quietly saves five figures.',
     sections: [
       {
@@ -114,6 +121,9 @@ export const mortgagePitiGuideArticle: LocalizedArticle = {
     ],
   },
   zh: {
+    articleTitle: { en: EN_TITLE, zh: '房贷摊销、PITI 分解与提前还款策略完全指南', es: 'La guía completa de la amortización hipotecaria, el desglose del PITI y las estrategias de amortización anticipada', de: 'Der komplette Leitfaden zu Hypotheken-Tilgung, PITI-Aufschlüsselung und Sondertilgungsstrategien' },
+    breadcrumbTitle: { en: EN_CRUMB_TITLE, zh: EN_CRUMB_TITLE, es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
+    readMinutes: 11,
     lead: '30 年房贷是大多数人签过的最大一张摊销表,而银行只报给你一个月供数字。本指南拆开黑盒:月供公式、PITI 全口径,以及悄悄省下五位数的提前还款数学。',
     sections: [
       {
@@ -209,6 +219,9 @@ export const mortgagePitiGuideArticle: LocalizedArticle = {
     ],
   },
   es: {
+    articleTitle: { en: EN_TITLE, zh: '房贷摊销、PITI 分解与提前还款策略完全指南', es: 'La guía completa de la amortización hipotecaria, el desglose del PITI y las estrategias de amortización anticipada', de: 'Der komplette Leitfaden zu Hypotheken-Tilgung, PITI-Aufschlüsselung und Sondertilgungsstrategien' },
+    breadcrumbTitle: { en: EN_CRUMB_TITLE, zh: EN_CRUMB_TITLE, es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
+    readMinutes: 11,
     lead: 'Una hipoteca a 30 años es la mayor tabla de amortización que firma la mayoría — y el banco la resume en una sola cuota. Esta guía abre la caja negra: la fórmula de la cuota, el PITI completo y la matemática de amortización anticipada que ahorra cinco cifras.',
     sections: [
       {
@@ -304,6 +317,9 @@ export const mortgagePitiGuideArticle: LocalizedArticle = {
     ],
   },
   de: {
+    articleTitle: { en: EN_TITLE, zh: '房贷摊销、PITI 分解与提前还款策略完全指南', es: 'La guía completa de la amortización hipotecaria, el desglose del PITI y las estrategias de amortización anticipada', de: 'Der komplette Leitfaden zu Hypotheken-Tilgung, PITI-Aufschlüsselung und Sondertilgungsstrategien' },
+    breadcrumbTitle: { en: EN_CRUMB_TITLE, zh: EN_CRUMB_TITLE, es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
+    readMinutes: 11,
     lead: 'Eine 30-jährige Hypothek ist der größte Tilgungsplan, den die meisten je unterschreiben — und die Bank nennt nur eine Monatsrate. Dieser Leitfaden öffnet die Blackbox: die Ratenformel, der volle PITI-Stapel und die Sondertilgungs-Mathematik, die leise fünfstellig spart.',
     sections: [
       {

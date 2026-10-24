@@ -4,17 +4,24 @@ import { SITE_NAME, jsonLdStringify } from '@/lib/seo'
 import { SITE_URL } from '@/lib/constants'
 import { BlogToolsBanner } from '@/components/BlogToolsBanner'
 import { getFeaturedTools, getPublishedTools } from '@/lib/tools'
-import { BlogArticleBody } from '@/components/BlogArticleBody'
+import {
+  BlogArticleBody,
+  BlogArticleTitle,
+  BlogBackLabel,
+  BlogCrumbBlog,
+  BlogCrumbHome,
+  BlogCrumbTitle,
+  BlogReadTime,
+} from '@/components/BlogArticleBody'
 
 /**
  * 金融计算器指南(面向使用者,四语正文 + 工具内链卡)。
- * 静态导出兼容:纯 server component;正文交由 BlogArticleBody 客户端
- * 组件跟随 locale 渲染(SSR 首帧英文)。
+ * 静态导出兼容:纯 server component;正文与页框文案(H1/面包屑/返回链接/阅读时长)
+ * 交由 BlogArticleBody 系客户端组件跟随 locale 渲染(SSR 首帧英文)。
  */
 
 const SLUG = '/blog/mortgage-loan-calculators/'
 const PUBLISH_DATE = '2026-08-26'
-const READ_TIME = '7 min read'
 const TITLE = 'Mortgage & Loan Calculators: The Honest Guide (PITI, PMI, Payoff Curves)'
 const DESC =
   'Lenders quote P&I and skip taxes, insurance, and PMI. This guide walks the real numbers — full PITI, the five-figure lever of extra payments, the rent-vs-buy crossover year, and the minimum-payment trap — with free calculators that run entirely in your browser.'
@@ -89,7 +96,7 @@ export default function MortgageLoanCalculatorsPost() {
 
       <div className="mb-6">
         <Link href="/" className="btn btn-secondary">
-          <span aria-hidden="true">←</span> Back to {SITE_NAME}
+          <span aria-hidden="true">←</span> <BlogBackLabel />
         </Link>
       </div>
 
@@ -97,18 +104,18 @@ export default function MortgageLoanCalculatorsPost() {
         <ol className="flex items-center gap-2">
           <li>
             <Link href="/" className="hover:text-brand-600">
-              Home
+              <BlogCrumbHome />
             </Link>
           </li>
           <li aria-hidden="true">/</li>
           <li>
             <Link href="/blog/" className="hover:text-brand-600">
-              Blog
+              <BlogCrumbBlog />
             </Link>
           </li>
           <li aria-hidden="true">/</li>
           <li aria-current="page" style={{ color: 'rgb(var(--text-muted))' }}>
-            Mortgage &amp; Loan Calculators
+            <BlogCrumbTitle articleKey="mortgage-loan-calculators" />
           </li>
         </ol>
       </nav>
@@ -117,10 +124,10 @@ export default function MortgageLoanCalculatorsPost() {
         <div className="mb-3 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>
           <time dateTime={PUBLISH_DATE}>{PUBLISH_DATE}</time>
           <span aria-hidden="true">·</span>
-          <span>{READ_TIME}</span>
+          <BlogReadTime articleKey="mortgage-loan-calculators" />
         </div>
         <h1 className="text-3xl font-bold tracking-tight sm:text-4xl" style={{ color: 'rgb(var(--text))' }}>
-          {TITLE}
+          <BlogArticleTitle articleKey="mortgage-loan-calculators" />
         </h1>
       </header>
 

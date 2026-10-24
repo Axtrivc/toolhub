@@ -20,8 +20,15 @@ markup = (price - cost) / cost     // share of the COST
 //   margin = markup / (1 + markup)
 //   price  = cost / (1 - target margin)`
 
+// ── 标题类字段英文原值(articleTitle 三语已回填;breadcrumbTitle 暂以 en 值占位)──
+const EN_TITLE = 'Markup vs. Margin: The Math of Profitable E-commerce and Retail Pricing'
+const EN_CRUMB_TITLE = 'Markup vs Margin Guide'
+
 export const pricingMathArticle: LocalizedArticle = {
   en: {
+    articleTitle: { en: EN_TITLE, zh: '加价率 vs. 利润率:电商与零售盈利定价的数学', es: 'Markup vs. margen: la matemática de los precios rentables en e-commerce y comercio minorista', de: 'Markup vs. Marge: die Mathematik profitabler Preise im E-Commerce und Einzelhandel' },
+    breadcrumbTitle: { en: EN_CRUMB_TITLE, zh: EN_CRUMB_TITLE, es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
+    readMinutes: 10,
     lead: 'Confusing markup with margin is the most expensive arithmetic error in small business — a 50% markup is only a 33% margin, and the gap is where profits leak. This guide nails the formulas, walks the fee stack, and prices a product end to end.',
     sections: [
       {
@@ -124,6 +131,9 @@ export const pricingMathArticle: LocalizedArticle = {
     ],
   },
   zh: {
+    articleTitle: { en: EN_TITLE, zh: '加价率 vs. 利润率:电商与零售盈利定价的数学', es: 'Markup vs. margen: la matemática de los precios rentables en e-commerce y comercio minorista', de: 'Markup vs. Marge: die Mathematik profitabler Preise im E-Commerce und Einzelhandel' },
+    breadcrumbTitle: { en: EN_CRUMB_TITLE, zh: EN_CRUMB_TITLE, es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
+    readMinutes: 10,
     lead: '把 markup(加价率)和 margin(利润率)混为一谈,是小生意里最贵的算术错误——50% 加价率只是 33% 利润率,差额正是利润漏掉的地方。本文钉死公式、拆透费用栈,并把一个产品从头定价到尾。',
     sections: [
       {
@@ -226,6 +236,9 @@ export const pricingMathArticle: LocalizedArticle = {
     ],
   },
   es: {
+    articleTitle: { en: EN_TITLE, zh: '加价率 vs. 利润率:电商与零售盈利定价的数学', es: 'Markup vs. margen: la matemática de los precios rentables en e-commerce y comercio minorista', de: 'Markup vs. Marge: die Mathematik profitabler Preise im E-Commerce und Einzelhandel' },
+    breadcrumbTitle: { en: EN_CRUMB_TITLE, zh: EN_CRUMB_TITLE, es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
+    readMinutes: 10,
     lead: 'Confundir markup con margin es el error aritmético más caro del pequeño negocio: un markup del 50 % es solo un margen del 33 %, y la diferencia es por donde se fuga el beneficio. Esta guía fija las fórmulas, desmonta la pila de comisiones y pone precio a un producto de principio a fin.',
     sections: [
       {
@@ -328,6 +341,9 @@ export const pricingMathArticle: LocalizedArticle = {
     ],
   },
   de: {
+    articleTitle: { en: EN_TITLE, zh: '加价率 vs. 利润率:电商与零售盈利定价的数学', es: 'Markup vs. margen: la matemática de los precios rentables en e-commerce y comercio minorista', de: 'Markup vs. Marge: die Mathematik profitabler Preise im E-Commerce und Einzelhandel' },
+    breadcrumbTitle: { en: EN_CRUMB_TITLE, zh: EN_CRUMB_TITLE, es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
+    readMinutes: 10,
     lead: 'Markup mit Margin zu verwechseln ist der teuerste Rechenfehler im Kleinunternehmen — ein 50-%-Aufschlag ist nur eine 33-%-Marge, und in der Lücke versickert der Gewinn. Dieser Leitfaden nagelt die Formeln fest, zerlegt den Gebührenstapel und bepreist ein Produkt von Anfang bis Ende.',
     sections: [
       {

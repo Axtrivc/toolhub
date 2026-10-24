@@ -7,8 +7,15 @@
 
 import type { LocalizedArticle } from './blog-articles'
 
+// ── 标题类字段英文原值(articleTitle 三语已回填;breadcrumbTitle 暂以 en 值占位)──
+const EN_TITLE = 'Mortgage & Loan Calculators: The Honest Guide (PITI, PMI, Payoff Curves)'
+const EN_CRUMB_TITLE = 'Mortgage & Loan Calculators'
+
 export const mortgageLoanCalculatorsArticle: LocalizedArticle = {
   en: {
+    articleTitle: { en: EN_TITLE, zh: '房贷与贷款计算器:PITI、PMI 与还款曲线的诚实指南', es: 'Calculadoras de hipoteca y préstamos: la guía honesta (PITI, PMI y curvas de liquidación)', de: 'Hypotheken- und Kreditrechner: der ehrliche Ratgeber (PITI, PMI und Tilgungskurven)' },
+    breadcrumbTitle: { en: EN_CRUMB_TITLE, zh: EN_CRUMB_TITLE, es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
+    readMinutes: 7,
     lead: 'Lenders quote you a monthly payment that quietly excludes taxes, insurance, and PMI. Here is the math they skip — PITI, extra payments, the rent-vs-buy crossover — with calculators that run entirely in your browser.',
     sections: [
       {
@@ -114,6 +121,9 @@ export const mortgageLoanCalculatorsArticle: LocalizedArticle = {
     ],
   },
   zh: {
+    articleTitle: { en: EN_TITLE, zh: '房贷与贷款计算器:PITI、PMI 与还款曲线的诚实指南', es: 'Calculadoras de hipoteca y préstamos: la guía honesta (PITI, PMI y curvas de liquidación)', de: 'Hypotheken- und Kreditrechner: der ehrliche Ratgeber (PITI, PMI und Tilgungskurven)' },
+    breadcrumbTitle: { en: EN_CRUMB_TITLE, zh: EN_CRUMB_TITLE, es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
+    readMinutes: 7,
     lead: '银行报给你的月供悄悄剔除了税费、保险和 PMI。这里把他们跳过的算给你看——PITI 全口径、提前还款、租房买房的交叉年——所有计算器都在浏览器本地运行。',
     sections: [
       {
@@ -219,6 +229,9 @@ export const mortgageLoanCalculatorsArticle: LocalizedArticle = {
     ],
   },
   es: {
+    articleTitle: { en: EN_TITLE, zh: '房贷与贷款计算器:PITI、PMI 与还款曲线的诚实指南', es: 'Calculadoras de hipoteca y préstamos: la guía honesta (PITI, PMI y curvas de liquidación)', de: 'Hypotheken- und Kreditrechner: der ehrliche Ratgeber (PITI, PMI und Tilgungskurven)' },
+    breadcrumbTitle: { en: EN_CRUMB_TITLE, zh: EN_CRUMB_TITLE, es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
+    readMinutes: 7,
     lead: 'El banco te cotiza una cuota que excluye silenciosamente impuestos, seguro y PMI. Aquí está el cálculo que omiten — PITI completo, pagos extra y el año de cruce entre alquilar y comprar — con calculadoras que corren 100 % en tu navegador.',
     sections: [
       {
@@ -322,6 +335,9 @@ export const mortgageLoanCalculatorsArticle: LocalizedArticle = {
     ],
   },
   de: {
+    articleTitle: { en: EN_TITLE, zh: '房贷与贷款计算器:PITI、PMI 与还款曲线的诚实指南', es: 'Calculadoras de hipoteca y préstamos: la guía honesta (PITI, PMI y curvas de liquidación)', de: 'Hypotheken- und Kreditrechner: der ehrliche Ratgeber (PITI, PMI und Tilgungskurven)' },
+    breadcrumbTitle: { en: EN_CRUMB_TITLE, zh: EN_CRUMB_TITLE, es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
+    readMinutes: 7,
     lead: 'Die Bank nennt dir eine Rate, die Steuern, Versicherung und PMI still ausklammert. Hier ist die Rechnung, die sie weglassen — volle PITI, Sondertilgung und das Mieter-Käufer-Schnittpunkt-Jahr — mit Rechnern, die komplett im Browser laufen.',
     sections: [
       {

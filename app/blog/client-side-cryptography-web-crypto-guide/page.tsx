@@ -4,17 +4,24 @@ import { SITE_NAME, jsonLdStringify } from '@/lib/seo'
 import { SITE_URL } from '@/lib/constants'
 import { BlogToolsBanner } from '@/components/BlogToolsBanner'
 import { getFeaturedTools, getPublishedTools } from '@/lib/tools'
-import { BlogArticleBody } from '@/components/BlogArticleBody'
+import {
+  BlogArticleBody,
+  BlogArticleTitle,
+  BlogBackLabel,
+  BlogCrumbBlog,
+  BlogCrumbHome,
+  BlogCrumbTitle,
+  BlogReadTime,
+} from '@/components/BlogArticleBody'
 
 /**
  * Pillar #5:浏览器端加密 WebCrypto 实战指南(四语正文 + 工具内链卡)。
- * 静态导出兼容:纯 server component;正文交由 BlogArticleBody 客户端
- * 组件跟随 locale 渲染(SSR 首帧英文)。
+ * 静态导出兼容:纯 server component;正文与页框文案(H1/面包屑/返回链接/阅读时长)
+ * 交由 BlogArticleBody 系客户端组件跟随 locale 渲染(SSR 首帧英文)。
  */
 
 const SLUG = '/blog/client-side-cryptography-web-crypto-guide/'
 const PUBLISH_DATE = '2026-09-05'
-const READ_TIME = '12 min read'
 const TITLE = 'Demystifying In-Browser AES-256-GCM and PBKDF2: A Developer’s Practical Guide'
 const DESC = 'Zero-knowledge architecture in the browser: why GCM’s auth tag beats CBC, the IV-reuse rule that must never break, PBKDF2 parameters that stretch passwords properly, CSPRNG key generation, and JWT decoding vs verifying.'
 
@@ -85,7 +92,7 @@ export default function WebCryptoGuidePost() {
 
       <div className="mb-6">
         <Link href="/" className="btn btn-secondary">
-          <span aria-hidden="true">←</span> Back to {SITE_NAME}
+          <span aria-hidden="true">←</span> <BlogBackLabel />
         </Link>
       </div>
 
@@ -93,18 +100,18 @@ export default function WebCryptoGuidePost() {
         <ol className="flex items-center gap-2">
           <li>
             <Link href="/" className="hover:text-brand-600">
-              Home
+              <BlogCrumbHome />
             </Link>
           </li>
           <li aria-hidden="true">/</li>
           <li>
             <Link href="/blog/" className="hover:text-brand-600">
-              Blog
+              <BlogCrumbBlog />
             </Link>
           </li>
           <li aria-hidden="true">/</li>
           <li aria-current="page" style={{ color: 'rgb(var(--text-muted))' }}>
-            In-Browser AES &amp; PBKDF2 Guide
+            <BlogCrumbTitle articleKey="client-side-cryptography-web-crypto-guide" />
           </li>
         </ol>
       </nav>
@@ -113,10 +120,10 @@ export default function WebCryptoGuidePost() {
         <div className="mb-3 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>
           <time dateTime={PUBLISH_DATE}>{PUBLISH_DATE}</time>
           <span aria-hidden="true">·</span>
-          <span>{READ_TIME}</span>
+          <BlogReadTime articleKey="client-side-cryptography-web-crypto-guide" />
         </div>
         <h1 className="text-3xl font-bold tracking-tight sm:text-4xl" style={{ color: 'rgb(var(--text))' }}>
-          {TITLE}
+          <BlogArticleTitle articleKey="client-side-cryptography-web-crypto-guide" />
         </h1>
       </header>
 

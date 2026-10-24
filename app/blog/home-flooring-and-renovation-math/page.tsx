@@ -4,17 +4,24 @@ import { SITE_NAME, jsonLdStringify } from '@/lib/seo'
 import { SITE_URL } from '@/lib/constants'
 import { BlogToolsBanner } from '@/components/BlogToolsBanner'
 import { getFeaturedTools, getPublishedTools } from '@/lib/tools'
-import { BlogArticleBody } from '@/components/BlogArticleBody'
+import {
+  BlogArticleBody,
+  BlogArticleTitle,
+  BlogBackLabel,
+  BlogCrumbBlog,
+  BlogCrumbHome,
+  BlogCrumbTitle,
+  BlogReadTime,
+} from '@/components/BlogArticleBody'
 
 /**
  * Pillar #10:家居施工材料估算与损耗系数指南(四语正文 + 工具内链卡)。
- * 静态导出兼容:纯 server component;正文交由 BlogArticleBody 客户端
- * 组件跟随 locale 渲染(SSR 首帧英文)。
+ * 静态导出兼容:纯 server component;正文与页框文案(H1/面包屑/返回链接/阅读时长)
+ * 交由 BlogArticleBody 系客户端组件跟随 locale 渲染(SSR 首帧英文)。
  */
 
 const SLUG = '/blog/home-flooring-and-renovation-math/'
 const PUBLISH_DATE = '2026-09-05'
-const READ_TIME = '9 min read'
 const TITLE = 'The Contractor’s Guide to Material Estimating: Calculating Tile, Flooring, and Paint Waste Factors'
 const DESC = 'The waste factor separates a DIY weekend from a third trip to the store: 10% straight-lay flooring, 15–20% diagonal tile, 350–400 ft² per gallon per coat, batch-number matching, and the 10–20% budget contingency.'
 
@@ -85,7 +92,7 @@ export default function RenovationMathPost() {
 
       <div className="mb-6">
         <Link href="/" className="btn btn-secondary">
-          <span aria-hidden="true">←</span> Back to {SITE_NAME}
+          <span aria-hidden="true">←</span> <BlogBackLabel />
         </Link>
       </div>
 
@@ -93,18 +100,18 @@ export default function RenovationMathPost() {
         <ol className="flex items-center gap-2">
           <li>
             <Link href="/" className="hover:text-brand-600">
-              Home
+              <BlogCrumbHome />
             </Link>
           </li>
           <li aria-hidden="true">/</li>
           <li>
             <Link href="/blog/" className="hover:text-brand-600">
-              Blog
+              <BlogCrumbBlog />
             </Link>
           </li>
           <li aria-hidden="true">/</li>
           <li aria-current="page" style={{ color: 'rgb(var(--text-muted))' }}>
-            Material Estimating Guide
+            <BlogCrumbTitle articleKey="home-flooring-and-renovation-math" />
           </li>
         </ol>
       </nav>
@@ -113,10 +120,10 @@ export default function RenovationMathPost() {
         <div className="mb-3 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>
           <time dateTime={PUBLISH_DATE}>{PUBLISH_DATE}</time>
           <span aria-hidden="true">·</span>
-          <span>{READ_TIME}</span>
+          <BlogReadTime articleKey="home-flooring-and-renovation-math" />
         </div>
         <h1 className="text-3xl font-bold tracking-tight sm:text-4xl" style={{ color: 'rgb(var(--text))' }}>
-          {TITLE}
+          <BlogArticleTitle articleKey="home-flooring-and-renovation-math" />
         </h1>
       </header>
 

@@ -15,8 +15,15 @@ Coast FIRE   = FIRE number / (1 + r)^years_left
 //   FIRE       = $1,000,000
 //   Coast FIRE = 1,000,000 / 1.05^30 ≈ $231,000`
 
+// ── 标题类字段英文原值(articleTitle 三语已回填;breadcrumbTitle 暂以 en 值占位)──
+const EN_TITLE = 'The 2026 FIRE Playbook: Safe Withdrawal Rates, Coast FIRE, and Tax-Advantaged Stacking'
+const EN_CRUMB_TITLE = '2026 FIRE Playbook'
+
 export const firePlaybookArticle: LocalizedArticle = {
   en: {
+    articleTitle: { en: EN_TITLE, zh: '2026 FIRE 实战手册:安全提取率、Coast FIRE 与税优账户堆叠', es: 'El playbook FIRE 2026: tasas de retirada seguras, Coast FIRE y el apilado fiscal', de: 'Das FIRE-Playbook 2026: sichere Entnahmeraten, Coast FIRE und steuerbegünstigtes Stacking' },
+    breadcrumbTitle: { en: EN_CRUMB_TITLE, zh: EN_CRUMB_TITLE, es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
+    readMinutes: 12,
     lead: 'FIRE is not a vibes-based dream — it is a solvency equation with three variables: your expenses, your portfolio, and time. This playbook covers the 4% rule\u2019s real origin, the Coast FIRE shortcut, and the account-stacking order that decides how much of your number taxes quietly confiscate.',
     sections: [
       {
@@ -110,6 +117,9 @@ export const firePlaybookArticle: LocalizedArticle = {
     ],
   },
   zh: {
+    articleTitle: { en: EN_TITLE, zh: '2026 FIRE 实战手册:安全提取率、Coast FIRE 与税优账户堆叠', es: 'El playbook FIRE 2026: tasas de retirada seguras, Coast FIRE y el apilado fiscal', de: 'Das FIRE-Playbook 2026: sichere Entnahmeraten, Coast FIRE und steuerbegünstigtes Stacking' },
+    breadcrumbTitle: { en: EN_CRUMB_TITLE, zh: EN_CRUMB_TITLE, es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
+    readMinutes: 12,
     lead: 'FIRE 不是玄学梦想——它是一道只有三个变量的偿付方程:开销、组合、时间。本手册讲清 4% 法则的真实出处、Coast FIRE 捷径,以及决定你的目标数字被税收悄悄没收多少的账户堆叠顺序。',
     sections: [
       {
@@ -203,6 +213,9 @@ export const firePlaybookArticle: LocalizedArticle = {
     ],
   },
   es: {
+    articleTitle: { en: EN_TITLE, zh: '2026 FIRE 实战手册:安全提取率、Coast FIRE 与税优账户堆叠', es: 'El playbook FIRE 2026: tasas de retirada seguras, Coast FIRE y el apilado fiscal', de: 'Das FIRE-Playbook 2026: sichere Entnahmeraten, Coast FIRE und steuerbegünstigtes Stacking' },
+    breadcrumbTitle: { en: EN_CRUMB_TITLE, zh: EN_CRUMB_TITLE, es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
+    readMinutes: 12,
     lead: 'FIRE no es una vibra — es una ecuación de solvencia con tres variables: tus gastos, tu cartera y el tiempo. Este playbook cubre el origen real de la regla del 4 %, el atajo de Coast FIRE y el orden de cuentas que decide cuánto de tu número se llevan los impuestos.',
     sections: [
       {
@@ -296,6 +309,9 @@ export const firePlaybookArticle: LocalizedArticle = {
     ],
   },
   de: {
+    articleTitle: { en: EN_TITLE, zh: '2026 FIRE 实战手册:安全提取率、Coast FIRE 与税优账户堆叠', es: 'El playbook FIRE 2026: tasas de retirada seguras, Coast FIRE y el apilado fiscal', de: 'Das FIRE-Playbook 2026: sichere Entnahmeraten, Coast FIRE und steuerbegünstigtes Stacking' },
+    breadcrumbTitle: { en: EN_CRUMB_TITLE, zh: EN_CRUMB_TITLE, es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
+    readMinutes: 12,
     lead: 'FIRE ist kein Bauchgefühl-Traum — es ist eine Solvenz-Gleichung mit drei Variablen: Ausgaben, Portfolio und Zeit. Dieses Playbook deckt den echten Ursprung der 4-%-Regel, die Coast-FIRE-Abkürzung und die Konto-Reihenfolge ab, die entscheidet, wie viel deiner Zielzahl die Steuer still konfisziert.',
     sections: [
       {

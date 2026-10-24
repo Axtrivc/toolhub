@@ -18,8 +18,15 @@ LTV  = ARPU * gross margin / monthly churn
 //
 // Rules of thumb:  LTV/CAC >= 3   |   payback <= 12 months`
 
+// ── 标题类字段英文原值(articleTitle 三语已回填;breadcrumbTitle 暂以 en 值占位)──
+const EN_TITLE = 'Mastering SaaS Unit Economics: The Mathematical Relationship Between CAC, LTV, and Churn'
+const EN_CRUMB_TITLE = 'SaaS Unit Economics'
+
 export const saasEconomicsArticle: LocalizedArticle = {
   en: {
+    articleTitle: { en: EN_TITLE, zh: '掌握 SaaS 单位经济:CAC、LTV 与流失率的数学关系', es: 'Dominar la economía unitaria de las SaaS: la relación matemática entre CAC, LTV y churn', de: 'SaaS-Unit-Economics meistern: die mathematische Beziehung zwischen CAC, LTV und Churn' },
+    breadcrumbTitle: { en: EN_CRUMB_TITLE, zh: EN_CRUMB_TITLE, es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
+    readMinutes: 10,
     lead: 'SaaS businesses do not die from bad products; they die from inverted unit economics — paying $600 to acquire a customer worth $400. CAC, LTV, and churn are one equation, not three KPIs. Here is the math that decides whether growth is an engine or a bonfire.',
     sections: [
       {
@@ -114,6 +121,9 @@ export const saasEconomicsArticle: LocalizedArticle = {
     ],
   },
   zh: {
+    articleTitle: { en: EN_TITLE, zh: '掌握 SaaS 单位经济:CAC、LTV 与流失率的数学关系', es: 'Dominar la economía unitaria de las SaaS: la relación matemática entre CAC, LTV y churn', de: 'SaaS-Unit-Economics meistern: die mathematische Beziehung zwischen CAC, LTV und Churn' },
+    breadcrumbTitle: { en: EN_CRUMB_TITLE, zh: EN_CRUMB_TITLE, es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
+    readMinutes: 10,
     lead: 'SaaS 公司很少死于烂产品,它们死于倒挂的单位经济——花 $600 获取一个只值 $400 的客户。CAC、LTV、流失率不是三个 KPI,而是同一个方程。本文给出判断"增长是引擎还是篝火"的数学。',
     sections: [
       {
@@ -208,6 +218,9 @@ export const saasEconomicsArticle: LocalizedArticle = {
     ],
   },
   es: {
+    articleTitle: { en: EN_TITLE, zh: '掌握 SaaS 单位经济:CAC、LTV 与流失率的数学关系', es: 'Dominar la economía unitaria de las SaaS: la relación matemática entre CAC, LTV y churn', de: 'SaaS-Unit-Economics meistern: die mathematische Beziehung zwischen CAC, LTV und Churn' },
+    breadcrumbTitle: { en: EN_CRUMB_TITLE, zh: EN_CRUMB_TITLE, es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
+    readMinutes: 10,
     lead: 'Las SaaS no mueren por malos productos; mueren por economía unitaria invertida: pagar $600 por un cliente que vale $400. CAC, LTV y churn no son tres KPI, son una sola ecuación. Aquí está la matemática que decide si el crecimiento es un motor o una hoguera.',
     sections: [
       {
@@ -302,6 +315,9 @@ export const saasEconomicsArticle: LocalizedArticle = {
     ],
   },
   de: {
+    articleTitle: { en: EN_TITLE, zh: '掌握 SaaS 单位经济:CAC、LTV 与流失率的数学关系', es: 'Dominar la economía unitaria de las SaaS: la relación matemática entre CAC, LTV y churn', de: 'SaaS-Unit-Economics meistern: die mathematische Beziehung zwischen CAC, LTV und Churn' },
+    breadcrumbTitle: { en: EN_CRUMB_TITLE, zh: EN_CRUMB_TITLE, es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
+    readMinutes: 10,
     lead: 'SaaS-Firmen sterben nicht an schlechten Produkten; sie sterben an umgedrehter Unit-Economics — $600 für einen Kunden, der $400 wert ist. CAC, LTV und Churn sind keine drei KPIs, sondern eine Gleichung. Hier die Mathematik, die entscheidet, ob Wachstum ein Motor oder ein Freudenfeuer ist.',
     sections: [
       {

@@ -4,17 +4,24 @@ import { SITE_NAME, jsonLdStringify } from '@/lib/seo'
 import { SITE_URL } from '@/lib/constants'
 import { BlogToolsBanner } from '@/components/BlogToolsBanner'
 import { getFeaturedTools, getPublishedTools } from '@/lib/tools'
-import { BlogArticleBody } from '@/components/BlogArticleBody'
+import {
+  BlogArticleBody,
+  BlogArticleTitle,
+  BlogBackLabel,
+  BlogCrumbBlog,
+  BlogCrumbHome,
+  BlogCrumbTitle,
+  BlogReadTime,
+} from '@/components/BlogArticleBody'
 
 /**
  * Pillar #1:房贷摊销与 PITI 深度指南(四语正文 + 工具内链卡)。
- * 静态导出兼容:纯 server component;正文交由 BlogArticleBody 客户端
- * 组件跟随 locale 渲染(SSR 首帧英文)。
+ * 静态导出兼容:纯 server component;正文与页框文案(H1/面包屑/返回链接/阅读时长)
+ * 交由 BlogArticleBody 系客户端组件跟随 locale 渲染(SSR 首帧英文)。
  */
 
 const SLUG = '/blog/mortgage-piti-and-amortization-guide/'
 const PUBLISH_DATE = '2026-09-05'
-const READ_TIME = '11 min read'
 const TITLE = 'The Complete Guide to Mortgage Amortization, PITI Breakdown, and Prepayment Strategies'
 const DESC = 'Open the black box of a 30-year loan: the amortization formula, why 87% of your first payment is interest, the full PITI stack, and the prepayment math that saves five figures — with free in-browser calculators.'
 
@@ -86,7 +93,7 @@ export default function MortgagePitiGuidePost() {
 
       <div className="mb-6">
         <Link href="/" className="btn btn-secondary">
-          <span aria-hidden="true">←</span> Back to {SITE_NAME}
+          <span aria-hidden="true">←</span> <BlogBackLabel />
         </Link>
       </div>
 
@@ -94,18 +101,18 @@ export default function MortgagePitiGuidePost() {
         <ol className="flex items-center gap-2">
           <li>
             <Link href="/" className="hover:text-brand-600">
-              Home
+              <BlogCrumbHome />
             </Link>
           </li>
           <li aria-hidden="true">/</li>
           <li>
             <Link href="/blog/" className="hover:text-brand-600">
-              Blog
+              <BlogCrumbBlog />
             </Link>
           </li>
           <li aria-hidden="true">/</li>
           <li aria-current="page" style={{ color: 'rgb(var(--text-muted))' }}>
-            Mortgage Amortization &amp; PITI Guide
+            <BlogCrumbTitle articleKey="mortgage-piti-and-amortization-guide" />
           </li>
         </ol>
       </nav>
@@ -114,10 +121,10 @@ export default function MortgagePitiGuidePost() {
         <div className="mb-3 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>
           <time dateTime={PUBLISH_DATE}>{PUBLISH_DATE}</time>
           <span aria-hidden="true">·</span>
-          <span>{READ_TIME}</span>
+          <BlogReadTime articleKey="mortgage-piti-and-amortization-guide" />
         </div>
         <h1 className="text-3xl font-bold tracking-tight sm:text-4xl" style={{ color: 'rgb(var(--text))' }}>
-          {TITLE}
+          <BlogArticleTitle articleKey="mortgage-piti-and-amortization-guide" />
         </h1>
       </header>
 

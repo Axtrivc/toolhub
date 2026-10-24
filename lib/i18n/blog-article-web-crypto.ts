@@ -21,8 +21,15 @@ const cipher = await crypto.subtle.encrypt(
   { name: 'AES-GCM', iv }, key, new TextEncoder().encode(plaintext))
 // Ship salt:iv:cipher together — no server ever saw the password.`
 
+// ── 标题类字段英文原值(articleTitle 三语已回填;breadcrumbTitle 暂以 en 值占位)──
+const EN_TITLE = 'Demystifying In-Browser AES-256-GCM and PBKDF2: A Developer’s Practical Guide'
+const EN_CRUMB_TITLE = 'In-Browser AES & PBKDF2 Guide'
+
 export const webCryptoGuideArticle: LocalizedArticle = {
   en: {
+    articleTitle: { en: EN_TITLE, zh: '一文讲透浏览器内 AES-256-GCM 与 PBKDF2:开发者实战指南', es: 'AES-256-GCM y PBKDF2 en el navegador, sin misterios: la guía práctica para desarrolladores', de: 'AES-256-GCM und PBKDF2 im Browser entmystifiziert: ein praktischer Leitfaden für Entwickler' },
+    breadcrumbTitle: { en: EN_CRUMB_TITLE, zh: EN_CRUMB_TITLE, es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
+    readMinutes: 12,
     lead: 'The strongest privacy architecture is the one where the server never holds the plaintext. Browser-native WebCrypto makes AES-256-GCM + PBKDF2 available without a single dependency — here is how the pieces actually fit, and where developers still cut their fingers.',
     sections: [
       {
@@ -115,6 +122,9 @@ export const webCryptoGuideArticle: LocalizedArticle = {
     ],
   },
   zh: {
+    articleTitle: { en: EN_TITLE, zh: '一文讲透浏览器内 AES-256-GCM 与 PBKDF2:开发者实战指南', es: 'AES-256-GCM y PBKDF2 en el navegador, sin misterios: la guía práctica para desarrolladores', de: 'AES-256-GCM und PBKDF2 im Browser entmystifiziert: ein praktischer Leitfaden für Entwickler' },
+    breadcrumbTitle: { en: EN_CRUMB_TITLE, zh: EN_CRUMB_TITLE, es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
+    readMinutes: 12,
     lead: '最强的隐私架构是服务器根本拿不到明文的那种。浏览器原生 WebCrypto 让 AES-256-GCM + PBKDF2 零依赖可用——本文讲清各部件如何真正咬合,以及开发者仍会割到手的地方。',
     sections: [
       {
@@ -207,6 +217,9 @@ export const webCryptoGuideArticle: LocalizedArticle = {
     ],
   },
   es: {
+    articleTitle: { en: EN_TITLE, zh: '一文讲透浏览器内 AES-256-GCM 与 PBKDF2:开发者实战指南', es: 'AES-256-GCM y PBKDF2 en el navegador, sin misterios: la guía práctica para desarrolladores', de: 'AES-256-GCM und PBKDF2 im Browser entmystifiziert: ein praktischer Leitfaden für Entwickler' },
+    breadcrumbTitle: { en: EN_CRUMB_TITLE, zh: EN_CRUMB_TITLE, es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
+    readMinutes: 12,
     lead: 'La arquitectura de privacidad más fuerte es aquella en la que el servidor nunca posee el texto en claro. WebCrypto, nativo del navegador, ofrece AES-256-GCM + PBKDF2 sin una sola dependencia — así encajan las piezas de verdad, y dónde se cortan los desarrolladores.',
     sections: [
       {
@@ -299,6 +312,9 @@ export const webCryptoGuideArticle: LocalizedArticle = {
     ],
   },
   de: {
+    articleTitle: { en: EN_TITLE, zh: '一文讲透浏览器内 AES-256-GCM 与 PBKDF2:开发者实战指南', es: 'AES-256-GCM y PBKDF2 en el navegador, sin misterios: la guía práctica para desarrolladores', de: 'AES-256-GCM und PBKDF2 im Browser entmystifiziert: ein praktischer Leitfaden für Entwickler' },
+    breadcrumbTitle: { en: EN_CRUMB_TITLE, zh: EN_CRUMB_TITLE, es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
+    readMinutes: 12,
     lead: 'Die stärkste Privacy-Architektur ist die, bei der der Server den Klartext nie besitzt. Das browser-native WebCrypto bringt AES-256-GCM + PBKDF2 ohne eine einzige Abhängigkeit — so passen die Teile wirklich zusammen, und wo sich Entwickler noch schneiden.',
     sections: [
       {

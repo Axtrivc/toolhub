@@ -4,10 +4,18 @@ import { SITE_NAME, jsonLdStringify } from '@/lib/seo'
 import { SITE_URL } from '@/lib/constants'
 import { BlogToolsBanner } from '@/components/BlogToolsBanner'
 import { getFeaturedTools, getPublishedTools } from '@/lib/tools'
-import { BlogArticleBody } from '@/components/BlogArticleBody'
+import {
+  BlogArticleBody,
+  BlogArticleTitle,
+  BlogBackLabel,
+  BlogCrumbBlog,
+  BlogCrumbHome,
+  BlogCrumbTitle,
+  BlogReadTime,
+} from '@/components/BlogArticleBody'
 
 /**
- * 技术架构复盘博客 —— 面向 HN / 极客社区的全英文长文。
+ * 技术架构复盘博客 —— 面向 HN / 极客社区的长文(正文与页框文案四语,SEO 字段英文稳定)。
  *
  * 路由:/blog/how-i-built-toolhub/  (trailingSlash: true)
  * 静态导出兼容:本页为纯 server component,无 'use client',
@@ -19,7 +27,6 @@ const PUBLISH_DATE = '2026-08-04'
 // 正文最后一次实质修订(公开指标定格 169 个工具的那次,git acb12ef6)——
 // 与发布日不同,JSON-LD dateModified 单独取该日期。
 const DATE_MODIFIED = '2026-08-13'
-const READ_TIME = '9 min read'
 
 export const metadata: Metadata = {
   title: 'How I Built ToolHub: A 169-Tool Static PWA That Stays Sub-Second',
@@ -106,7 +113,7 @@ export default function HowIBuiltToolHubPost() {
       {/* 顶部:返回首页 Button(用户明确要求) */}
       <div className="mb-6">
         <Link href="/" className="btn btn-secondary">
-          <span aria-hidden="true">←</span> Back to {SITE_NAME}
+          <span aria-hidden="true">←</span> <BlogBackLabel />
         </Link>
       </div>
 
@@ -119,17 +126,19 @@ export default function HowIBuiltToolHubPost() {
         <ol className="flex items-center gap-2">
           <li>
             <Link href="/" className="hover:text-brand-600">
-              Home
+              <BlogCrumbHome />
             </Link>
           </li>
           <li aria-hidden="true">/</li>
           <li>
             <Link href="/blog/" className="hover:text-brand-600">
-              Blog
+              <BlogCrumbBlog />
             </Link>
           </li>
           <li aria-hidden="true">/</li>
-          <li style={{ color: 'rgb(var(--text-muted))' }}>How I Built ToolHub</li>
+          <li style={{ color: 'rgb(var(--text-muted))' }}>
+            <BlogCrumbTitle articleKey="how-i-built-toolhub" />
+          </li>
         </ol>
       </nav>
 
@@ -150,7 +159,7 @@ export default function HowIBuiltToolHubPost() {
           </span>
         </div>
         <h1 className="text-3xl font-bold leading-tight sm:text-4xl" style={{ color: 'rgb(var(--text))' }}>
-          How I Built ToolHub: A 169-Tool Static PWA That Stays Sub-Second
+          <BlogArticleTitle articleKey="how-i-built-toolhub" />
         </h1>
         <div
           className="mt-5 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm"
@@ -158,16 +167,17 @@ export default function HowIBuiltToolHubPost() {
         >
           <time dateTime={PUBLISH_DATE}>{PUBLISH_DATE}</time>
           <span aria-hidden="true">·</span>
-          <span>{READ_TIME}</span>
+          <BlogReadTime articleKey="how-i-built-toolhub" />
           <span aria-hidden="true">·</span>
           <span>by the {SITE_NAME} team</span>
         </div>
       </header>
 
       {/*
-        正文(lead + sections)交给客户端组件 BlogArticleBody,跟随 locale 切换。
-        本页保留 server component 身份以导出 metadata + JSON-LD(SEO 字段英文稳定)。
-        H1 / 日期 / 标签 / 面包屑保持英文(server 端拿不到 locale,且符合"HN/极客社区英文长文"定位)。
+        正文(lead + sections)与页框文案(H1/面包屑/返回链接/阅读时长)交给
+        BlogArticleBody 的客户端组件,跟随 locale 切换。
+        本页保留 server component 身份以导出 metadata + JSON-LD(SEO 字段英文稳定);
+        日期 / 标签 / byline 保持英文(server 端拿不到 locale)。
       */}
       <BlogArticleBody articleKey="how-i-built-toolhub" />
 

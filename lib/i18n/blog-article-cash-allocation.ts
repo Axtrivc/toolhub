@@ -14,8 +14,15 @@ APY = (1 + r/n)^n - 1
 // 4.40% APR daily:   (1 + 0.044/365)^365 - 1 = 4.498% APY
 // 4.40% APR monthly: (1 + 0.044/12)^12  - 1 = 4.490% APY`
 
+// ── 标题类字段英文原值(articleTitle 三语已回填;breadcrumbTitle 暂以 en 值占位)──
+const EN_TITLE = 'HYSA vs. CD vs. Money Market: The Optimal Cash Allocation Strategy for 2026'
+const EN_CRUMB_TITLE = 'HYSA vs CD Cash Strategy'
+
 export const cashAllocationGuideArticle: LocalizedArticle = {
   en: {
+    articleTitle: { en: EN_TITLE, zh: 'HYSA vs. CD vs. 货币基金:2026 年的最优现金分层策略', es: 'HYSA vs. CD vs. mercado monetario: la estrategia óptima de asignación de efectivo para 2026', de: 'HYSA vs. CD vs. Geldmarktfonds: die optimale Cash-Allokationsstrategie für 2026' },
+    breadcrumbTitle: { en: EN_CRUMB_TITLE, zh: EN_CRUMB_TITLE, es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
+    readMinutes: 5,
     lead: 'Cash is no longer the idle zero-yield asset it was in 2015 — but only if you park it in the right vehicle. HYSA, CDs, and money market funds price the same dollar three different ways. Here is the 2026 allocation logic, with the math to back each rung.',
     sections: [
       {
@@ -118,6 +125,9 @@ export const cashAllocationGuideArticle: LocalizedArticle = {
     ],
   },
   zh: {
+    articleTitle: { en: EN_TITLE, zh: 'HYSA vs. CD vs. 货币基金:2026 年的最优现金分层策略', es: 'HYSA vs. CD vs. mercado monetario: la estrategia óptima de asignación de efectivo para 2026', de: 'HYSA vs. CD vs. Geldmarktfonds: die optimale Cash-Allokationsstrategie für 2026' },
+    breadcrumbTitle: { en: EN_CRUMB_TITLE, zh: EN_CRUMB_TITLE, es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
+    readMinutes: 5,
     lead: '现金不再是 2015 年那种零收益的闲置资产——前提是停对地方。HYSA、CD 存单、货币基金把同一块钱定出三种价格。本文给出 2026 年的现金分层逻辑,每一层都配数学依据。',
     sections: [
       {
@@ -220,6 +230,9 @@ export const cashAllocationGuideArticle: LocalizedArticle = {
     ],
   },
   es: {
+    articleTitle: { en: EN_TITLE, zh: 'HYSA vs. CD vs. 货币基金:2026 年的最优现金分层策略', es: 'HYSA vs. CD vs. mercado monetario: la estrategia óptima de asignación de efectivo para 2026', de: 'HYSA vs. CD vs. Geldmarktfonds: die optimale Cash-Allokationsstrategie für 2026' },
+    breadcrumbTitle: { en: EN_CRUMB_TITLE, zh: EN_CRUMB_TITLE, es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
+    readMinutes: 5,
     lead: 'El efectivo ya no es ese activo ocioso de rendimiento cero de 2015 — pero solo si lo aparcas en el vehículo correcto. HYSA, CD y fondos de mercado monetario ponen tres precios al mismo dólar. Esta es la lógica de asignación para 2026, con la matemática de cada peldaño.',
     sections: [
       {
@@ -322,6 +335,9 @@ export const cashAllocationGuideArticle: LocalizedArticle = {
     ],
   },
   de: {
+    articleTitle: { en: EN_TITLE, zh: 'HYSA vs. CD vs. 货币基金:2026 年的最优现金分层策略', es: 'HYSA vs. CD vs. mercado monetario: la estrategia óptima de asignación de efectivo para 2026', de: 'HYSA vs. CD vs. Geldmarktfonds: die optimale Cash-Allokationsstrategie für 2026' },
+    breadcrumbTitle: { en: EN_CRUMB_TITLE, zh: EN_CRUMB_TITLE, es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
+    readMinutes: 5,
     lead: 'Bargeld ist nicht mehr der renditelose Parkplatz von 2015 — aber nur, wenn es im richtigen Vehikel liegt. HYSA, CDs und Geldmarktfonds bepreisen denselben Dollar dreifach unterschiedlich. Hier die Allokationslogik für 2026, mit der Mathematik hinter jeder Stufe.',
     sections: [
       {

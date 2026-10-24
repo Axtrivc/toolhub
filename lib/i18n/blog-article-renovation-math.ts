@@ -17,8 +17,15 @@ materials = area * (1 + waste)
 // Paint: 1 gallon ≈ 350-400 sq ft per coat
 //   gallons = (wall area * coats * 1.1) / 350`
 
+// ── 标题类字段英文原值(articleTitle 三语已回填;breadcrumbTitle 暂以 en 值占位)──
+const EN_TITLE = 'The Contractor’s Guide to Material Estimating: Calculating Tile, Flooring, and Paint Waste Factors'
+const EN_CRUMB_TITLE = 'Material Estimating Guide'
+
 export const renovationMathArticle: LocalizedArticle = {
   en: {
+    articleTitle: { en: EN_TITLE, zh: '包工头的材料估算指南:算清瓷砖、地板与油漆的损耗系数', es: 'La guía del contratista para estimar materiales: calcular el factor de desperdicio de baldosas, suelos y pintura', de: 'Der Handwerker-Leitfaden zur Materialberechnung: Verschnitt-Faktoren für Fliesen, Bodenbeläge und Farbe' },
+    breadcrumbTitle: { en: EN_CRUMB_TITLE, zh: EN_CRUMB_TITLE, es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
+    readMinutes: 9,
     lead: 'The difference between a DIY weekend and a third trip to the store is one number: the waste factor. Contractors price it into every estimate; homeowners discover it mid-project. Here is the measuring math and the waste factors the trade actually uses.',
     sections: [
       {
@@ -100,6 +107,9 @@ export const renovationMathArticle: LocalizedArticle = {
     ],
   },
   zh: {
+    articleTitle: { en: EN_TITLE, zh: '包工头的材料估算指南:算清瓷砖、地板与油漆的损耗系数', es: 'La guía del contratista para estimar materiales: calcular el factor de desperdicio de baldosas, suelos y pintura', de: 'Der Handwerker-Leitfaden zur Materialberechnung: Verschnitt-Faktoren für Fliesen, Bodenbeläge und Farbe' },
+    breadcrumbTitle: { en: EN_CRUMB_TITLE, zh: EN_CRUMB_TITLE, es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
+    readMinutes: 9,
     lead: '"DIY 一个周末"和"第三次跑建材店"之间的差别就是一个数字:损耗系数。包工头把它写进每份报价,业主在工程过半时才认识它。本文给出测量数学与行业真实使用的损耗系数。',
     sections: [
       {
@@ -181,6 +191,9 @@ export const renovationMathArticle: LocalizedArticle = {
     ],
   },
   es: {
+    articleTitle: { en: EN_TITLE, zh: '包工头的材料估算指南:算清瓷砖、地板与油漆的损耗系数', es: 'La guía del contratista para estimar materiales: calcular el factor de desperdicio de baldosas, suelos y pintura', de: 'Der Handwerker-Leitfaden zur Materialberechnung: Verschnitt-Faktoren für Fliesen, Bodenbeläge und Farbe' },
+    breadcrumbTitle: { en: EN_CRUMB_TITLE, zh: EN_CRUMB_TITLE, es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
+    readMinutes: 9,
     lead: 'La diferencia entre un fin de semana de bricolaje y un tercer viaje a la tienda es un número: el factor de desperdicio. Los contratistas lo incluyen en cada presupuesto; el particular lo descubre a mitad de obra. Aquí va la matemática de medición y los factores que el oficio usa de verdad.',
     sections: [
       {
@@ -262,6 +275,9 @@ export const renovationMathArticle: LocalizedArticle = {
     ],
   },
   de: {
+    articleTitle: { en: EN_TITLE, zh: '包工头的材料估算指南:算清瓷砖、地板与油漆的损耗系数', es: 'La guía del contratista para estimar materiales: calcular el factor de desperdicio de baldosas, suelos y pintura', de: 'Der Handwerker-Leitfaden zur Materialberechnung: Verschnitt-Faktoren für Fliesen, Bodenbeläge und Farbe' },
+    breadcrumbTitle: { en: EN_CRUMB_TITLE, zh: EN_CRUMB_TITLE, es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
+    readMinutes: 9,
     lead: 'Der Unterschied zwischen einem DIY-Wochenende und der dritten Fahrt zum Baumarkt ist eine Zahl: der Verschnitt-Faktor. Handwerker kalkulieren ihn in jeden Kostenvoranschlag; Hausbesitzer lernen ihn mitten im Projekt kennen. Hier die Mess-Mathematik und die Verschnitt-Faktoren, die das Gewerbe wirklich nutzt.',
     sections: [
       {
