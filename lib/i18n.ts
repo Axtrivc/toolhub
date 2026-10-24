@@ -294,6 +294,7 @@ export interface Dict {
   bentoMortgageTitle: string
   bentoMortgageMonthly: string
   bentoMortgageDemo: string
+  bentoMortgageParams: string
   bentoVisitorsTitle: string
   bentoVisitorsToday: string
   bentoVisitorsTotal: string
@@ -363,7 +364,7 @@ const en: Dict = {
     'Fast, privacy-friendly utilities for developers, students, and everyday tasks. Everything runs right in your browser — no signup, no upload, no tracking.',
   heroOfflineBadge: '⚡ 100% Client-Side & Works Offline',
   heroCtaExplore: 'Explore {count}+ Free Tools',
-  searchPlaceholder: 'Search {count} tools... (e.g. "loan", "json", "kg to lb")',
+  searchPlaceholder: 'Search {count} tools...',
   heroSearchLabel: 'Search tools',
   categoryAll: 'All',
   showingAll: 'Showing all {count} tools',
@@ -549,6 +550,7 @@ const en: Dict = {
   bentoMortgageTitle: 'Mortgage payment',
   bentoMortgageMonthly: 'per month',
   bentoMortgageDemo: 'watching a live example',
+  bentoMortgageParams: '$400,000 · 20% down · 30 yrs',
   bentoVisitorsTitle: 'Live visitors',
   bentoVisitorsToday: 'today',
   bentoVisitorsTotal: 'all-time visits',
@@ -614,7 +616,7 @@ const zh: Dict = {
     '为开发者、学生和日常任务打造的快速、注重隐私的实用工具。所有计算都在浏览器中完成 —— 无需注册,无需上传,不追踪。',
   heroOfflineBadge: '⚡ 100% 本地运行 · 支持离线',
   heroCtaExplore: '探索 {count}+ 免费工具',
-  searchPlaceholder: '搜索 {count} 个工具...(例如 "loan"、"json"、"kg to lb")',
+  searchPlaceholder: '搜索 {count} 个工具...',
   heroSearchLabel: '搜索工具',
   categoryAll: '全部',
   showingAll: '显示全部 {count} 个工具',
@@ -799,6 +801,7 @@ const zh: Dict = {
   bentoMortgageTitle: '房贷月供',
   bentoMortgageMonthly: '每月',
   bentoMortgageDemo: '正在演示实时示例',
+  bentoMortgageParams: '$400,000 · 20% 首付 · 30 年',
   bentoVisitorsTitle: '实时访客',
   bentoVisitorsToday: '今日',
   bentoVisitorsTotal: '累计访问',
@@ -863,7 +866,7 @@ const es: Dict = {
     'Utilidades rápidas y respetuosas con la privacidad para desarrolladores, estudiantes y tareas diarias. Todo se ejecuta en tu navegador: sin registro, sin subir archivos, sin rastreo.',
   heroOfflineBadge: '⚡ 100% en el cliente · Sin conexión',
   heroCtaExplore: 'Explorar más de {count} herramientas gratuitas',
-  searchPlaceholder: 'Buscar {count} herramientas... (p. ej. "préstamo", "json", "kg a lb")',
+  searchPlaceholder: 'Buscar {count} herramientas...',
   heroSearchLabel: 'Buscar herramientas',
   categoryAll: 'Todas',
   showingAll: 'Mostrando las {count} herramientas',
@@ -1049,6 +1052,7 @@ const es: Dict = {
   bentoMortgageTitle: 'Cuota hipotecaria',
   bentoMortgageMonthly: 'al mes',
   bentoMortgageDemo: 'ejemplo en vivo',
+  bentoMortgageParams: '$400,000 · 20% entrada · 30 años',
   bentoVisitorsTitle: 'Visitas en vivo',
   bentoVisitorsToday: 'hoy',
   bentoVisitorsTotal: 'visitas en total',
@@ -1113,7 +1117,7 @@ const de: Dict = {
     'Schnelle, datenschutzfreundliche Helfer für Entwickler, Studierende und Alltag. Alles läuft direkt im Browser — keine Anmeldung, kein Upload, kein Tracking.',
   heroOfflineBadge: '⚡ 100% clientseitig · Offline-fähig',
   heroCtaExplore: 'Über {count} kostenlose Tools entdecken',
-  searchPlaceholder: '{count} Werkzeuge durchsuchen... (z. B. "Kredit", "json", "kg in lb")',
+  searchPlaceholder: '{count} Werkzeuge durchsuchen...',
   heroSearchLabel: 'Werkzeuge suchen',
   categoryAll: 'Alle',
   showingAll: 'Zeige alle {count} Werkzeuge',
@@ -1299,6 +1303,7 @@ const de: Dict = {
   bentoMortgageTitle: 'Monatsrate',
   bentoMortgageMonthly: 'pro Monat',
   bentoMortgageDemo: 'Live-Beispiel läuft',
+  bentoMortgageParams: '$400,000 · 20% Anzahlung · 30 Jahre',
   bentoVisitorsTitle: 'Live-Besucher',
   bentoVisitorsToday: 'heute',
   bentoVisitorsTotal: 'Besuche insgesamt',

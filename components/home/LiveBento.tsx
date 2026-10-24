@@ -223,7 +223,7 @@ function MortgageDemoCell() {
       <div className="flex items-center justify-between gap-3">
         <div>
           <div className="text-xs" style={{ color: 'rgb(var(--text-faint))' }}>
-            $400,000 · 20% down · 30 yrs
+            {t(locale, 'bentoMortgageParams')}
           </div>
           <div className="mt-1 text-xs" style={{ color: 'rgb(var(--text-muted))' }}>
             {t(locale, 'bentoMortgageDemo')}: <span className="font-mono font-semibold">{typed || '…'}</span>%
