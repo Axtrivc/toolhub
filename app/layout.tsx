@@ -12,6 +12,7 @@ import { CookieConsent } from '@/components/CookieConsent'
 import { ServiceWorkerRegister } from '@/components/ServiceWorkerRegister'
 import { SkipToContent } from '@/components/SkipToContent'
 import { getPublishedTools } from '@/lib/tools'
+import { ADSENSE_CLIENT } from '@/lib/adsense'
 import { siteMetadata, websiteJsonLd, jsonLdStringify } from '@/lib/seo'
 
 /**
@@ -53,14 +54,11 @@ export const viewport: Viewport = {
 
 /**
  * AdSense publisher ID(环境驱动)。
- * 设置 NEXT_PUBLIC_ADSENSE_CLIENT=ca-pub-XXXX 后:
- *  - <head> 注入 AdSense 加载脚本(AdSenseScript 组件);
- *  - 输出 google-adsense-account meta(AdSense 新版站点验证,取 pub-XXXX 部分);
- *  - 所有 <AdSlot /> 渲染真实广告单元。
- * 未设置时以上全部不输出,站点行为与无广告时完全一致。
+ * 设置合法的 NEXT_PUBLIC_ADSENSE_CLIENT 后输出站点验证 meta;
+ * 还需配置至少一个真实数字 NEXT_PUBLIC_ADSENSE_SLOT_* 才会加载广告脚本与单元。
+ * 缺失或格式错误时不输出广告配置。
  */
-const ADSENSE_CLIENT = process.env.NEXT_PUBLIC_ADSENSE_CLIENT
-const ADSENSE_PUB_ID = ADSENSE_CLIENT?.replace(/^ca-/, '') // ca-pub-xxx → pub-xxx
+const ADSENSE_PUB_ID = ADSENSE_CLIENT?.replace(/^ca-/, '') // 仅合法 ca-pub-数字 → pub-数字
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (

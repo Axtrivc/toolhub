@@ -85,27 +85,26 @@ function EnglishToolInfo({ tool }: { tool: ToolMeta }): ReactNode {
         <p>
           The <strong>{tool.name}</strong> lets you figure out {mainKeyword}{' '}
           instantly, without
-          reaching for a spreadsheet or doing the math by hand. Whether you&apos;re planning a
-          budget, checking a loan, or working through homework, the tool applies the correct formula
-          behind the scenes and shows the result the moment you enter your numbers.
+          reaching for a spreadsheet or doing the math by hand. Whether you&apos;re comparing
+          options, double-checking your work, or working through homework, the tool applies the
+          correct formula behind the scenes and shows the result the moment you enter your numbers.
         </p>
         <p>
           Unlike a static chart or table, this calculator adapts to your exact inputs. You can
           adjust any value and see the outcome update in real time, which makes it easy to compare
-          scenarios &mdash; for example, &quot;what if the rate were 1% lower?&quot; or &quot;what if
-          I paid an extra $50 a month?&quot;
+          scenarios &mdash; change one field at a time and watch how the answer responds.
         </p>
       </>
     )
     howTo = (
       <ol>
-        <li>Enter the main values the calculator asks for (for example, amount, rate, and time).</li>
+        <li>Enter the values the form above asks for.</li>
         <li>Pick the right unit or option where the tool offers a choice.</li>
-        <li>Read the result, which appears instantly below the inputs.</li>
+        <li>Check your units and inputs, then read the result, which appears instantly below.</li>
         <li>
           Adjust any field to test a different scenario &mdash; the answer updates without a reload.
         </li>
-        <li>Copy or note the result. Nothing is stored, so close the tab when you&apos;re done.</li>
+        <li>Copy or note the result. Calculations run locally in your browser.</li>
       </ol>
     )
   } else if (isConverter) {
@@ -134,7 +133,7 @@ function EnglishToolInfo({ tool }: { tool: ToolMeta }): ReactNode {
         <li>
           The converted value appears instantly. Adjust either unit to compare across the board.
         </li>
-        <li>Copy the result if you need it elsewhere. Your input is never sent anywhere.</li>
+        <li>Copy the result if you need it elsewhere. Conversion runs locally in your browser.</li>
       </ol>
     )
   } else if (isGenerator) {
@@ -142,8 +141,8 @@ function EnglishToolInfo({ tool }: { tool: ToolMeta }): ReactNode {
       <>
         <p>
           The <strong>{tool.name}</strong> creates {mainKeyword} on demand, right in your browser.
-          Set the options you need, click generate, and the result is ready to copy. Because
-          everything runs locally, nothing you enter or produce leaves your device.
+          Set the options you need, click generate, and the result is ready to copy. Generation
+          happens locally in your browser.
         </p>
         <p>
           Generators like this are useful when you need a specific output (a password, a UUID, a QR
@@ -167,14 +166,14 @@ function EnglishToolInfo({ tool }: { tool: ToolMeta }): ReactNode {
         <p>
           The <strong>{tool.name}</strong> handles {mainKeyword}{' '}
           directly in your browser. Paste or
-          type your input, and the tool processes it instantly &mdash; no upload, no signup, no
+          type your input, and the tool processes it instantly &mdash; no signup, no
           waiting. It&apos;s built for the moments when you need a quick transformation and
           don&apos;t want to leave your workflow.
         </p>
         <p>
-          Because the tool runs client-side, it&apos;s fast and private. Your text never touches a
-          server, which makes it safe for sensitive content. The interface is keyboard-friendly and
-          works on any device with a modern browser.
+          Because the tool runs client-side, it&apos;s fast and private. Your text is processed in
+          your browser; shareable links may include settings in the URL.
+          The interface is keyboard-friendly and works on any device with a modern browser.
         </p>
       </>
     )
@@ -190,7 +189,9 @@ function EnglishToolInfo({ tool }: { tool: ToolMeta }): ReactNode {
 
   return (
     <section className="prose-content mt-10 max-w-3xl">
-      <h2>About the {tool.name}</h2>
+      {/* 单一模板字符串文本节点:避免 SSR 注释节点让纯文本提取器把标题拼成
+          "About theBMI..."(浏览器渲染有空格,但提取器按文本节点拼接) */}
+      <h2>{`About the ${tool.name}`}</h2>
       {intro}
 
       {tool.longTailKeywords && tool.longTailKeywords.length > 0 && (
@@ -214,8 +215,8 @@ function EnglishToolInfo({ tool }: { tool: ToolMeta }): ReactNode {
           system.
         </li>
         <li>
-          <strong>Private by default.</strong> Everything runs locally, so your data stays on your
-          device.
+          <strong>Private by default.</strong>{' '}
+          Tools process inputs locally; shareable links may include settings in the URL.
         </li>
         <li>
           <strong>Always up to date.</strong>{' '}

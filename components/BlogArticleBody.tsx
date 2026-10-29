@@ -237,6 +237,24 @@ export function BlogArticleTitle({ articleKey }: { articleKey: ArticleKey }) {
   return <>{title}</>
 }
 
+/** 独立项目署名,与 About / Contact 的维护者口径一致。 */
+export function BlogArticleByline({ updated }: { updated?: string }) {
+  const { locale } = useApp()
+  const bylines: Record<Locale, string> = {
+    en: `By the ${SITE_NAME} maintainer`,
+    zh: `${SITE_NAME} 独立维护者出品`,
+    es: `Por el responsable de ${SITE_NAME}`,
+    de: `Vom ${SITE_NAME}-Betreuer`,
+  }
+  const updatedLabels: Record<Locale, string> = {
+    en: 'Updated',
+    zh: '更新于',
+    es: 'Actualizado',
+    de: 'Aktualisiert',
+  }
+  return <span>{bylines[locale]}{updated ? ` · ${updatedLabels[locale]} ${updated}` : ''}</span>
+}
+
 /** 阅读时长(数据层 readMinutes 按 locale 格式化:"9 min read" / "9 分钟阅读" / …) */
 export function BlogReadTime({ articleKey }: { articleKey: ArticleKey }) {
   const { locale } = useApp()

@@ -49,7 +49,7 @@ export function Footer({ nav, totalCount }: { nav: FooterNavCategory[]; totalCou
                 {total > tools.length && (
                   <li>
                     <Link
-                      href={`/?category=${encodeURIComponent(category)}`}
+                      href={`/?category=${encodeURIComponent(category)}#all-tools`}
                       className="text-xs font-medium text-brand-600 hover:underline"
                     >
                       {t(locale, 'footerMore', { count: total - tools.length })}
@@ -76,6 +76,12 @@ export function Footer({ nav, totalCount }: { nav: FooterNavCategory[]; totalCou
           </div>
 
           <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm sm:justify-end">
+            <Link href="/#all-tools" className="hover:text-brand-600 max-sm:py-2" style={{ color: 'rgb(var(--text-muted))' }}>
+              {t(locale, 'navAllTools')}
+            </Link>
+            <Link href="/blog/" className="hover:text-brand-600 max-sm:py-2" style={{ color: 'rgb(var(--text-muted))' }}>
+              {t(locale, 'navBlog')}
+            </Link>
             <Link href="/about/" className="hover:text-brand-600 max-sm:py-2" style={{ color: 'rgb(var(--text-muted))' }}>
               {t(locale, 'footerAbout')}
             </Link>

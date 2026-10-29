@@ -3,14 +3,19 @@
 import { useEffect, useRef, useState } from 'react'
 import Script from 'next/script'
 import { CONSENT_STORAGE_KEY, CONSENT_CHANGED_EVENT } from './CookieConsent'
+import { ADSENSE_ACTIVE, ADSENSE_CLIENT, getAdSlotId } from '@/lib/adsense'
 
 /**
  * 广告位组件 - 环境驱动的 AdSense 接入
  *
  * 激活方式:在项目根目录 .env.local 设置
  *   NEXT_PUBLIC_ADSENSE_CLIENT=ca-pub-XXXXXXXXXXXXXXXX
- * 然后重新部署。无此环境变量时,本组件在生产环境渲染空(不显示半成品),
- * 在开发环境显示占位框便于定位广告位。
+ *   NEXT_PUBLIC_ADSENSE_SLOT_HOME=<numeric-ad-unit-id>
+ *   NEXT_PUBLIC_ADSENSE_SLOT_TOOL_TOP=<numeric-ad-unit-id>
+ *   NEXT_PUBLIC_ADSENSE_SLOT_TOOL_IN_CONTENT=<numeric-ad-unit-id>
+ *   NEXT_PUBLIC_ADSENSE_SLOT_TOOL_MID=<numeric-ad-unit-id>
+ *   NEXT_PUBLIC_ADSENSE_SLOT_TOOL_BOTTOM=<numeric-ad-unit-id>
+ * 然后重新部署。客户端或广告单元 ID 缺失/格式不正确时,不输出无效广告。
  *
  * 合规门控(Opt-out 模式):
  *   只要用户未在 Cookie 横幅显式选择「仅必要(necessary)」,默认允许加载
@@ -36,16 +41,13 @@ import { CONSENT_STORAGE_KEY, CONSENT_CHANGED_EVENT } from './CookieConsent'
  */
 
 interface AdSlotProps {
-  /** 广告位标识,用于区分位置统计(也用作 DOM key) */
+  /** 版式位置名；真实数字广告单元 ID 由环境变量按位置解析 */
   slot: string
   /** AdSense 广告格式: 'auto' | 'horizontal' | 'vertical' | 'rectangle' */
   format?: 'auto' | 'horizontal' | 'vertical' | 'rectangle'
   /** 是否全宽 */
   fullWidth?: boolean
 }
-
-const ADSENSE_CLIENT = process.env.NEXT_PUBLIC_ADSENSE_CLIENT
-const ADSENSE_ACTIVE = !!ADSENSE_CLIENT
 
 // 声明 window.adsbygoogle 类型,避免 TS 报错
 declare global {
@@ -121,24 +123,25 @@ export function AdSlot({ slot, format = 'auto', fullWidth = false }: AdSlotProps
   const insRef = useRef<HTMLModElement>(null)
   const consent = useAdConsent()
   const isEmbed = useIsEmbed()
+  const adSlotId = getAdSlotId(slot)
 
   useEffect(() => {
     // 仅在 AdSense 激活、非嵌入、已同意、ins 已挂载后 push 一次(consent 变
     // 'allowed' 时 <ins> 才首次渲染,effect 随依赖重跑完成本次 push)
-    if (!ADSENSE_ACTIVE || isEmbed || consent !== 'allowed' || !insRef.current) return
+    if (!ADSENSE_ACTIVE || !adSlotId || isEmbed || consent !== 'allowed' || !insRef.current) return
     try {
       ;(window.adsbygoogle = window.adsbygoogle || []).push({})
     } catch {
       // AdSense 偶发抛错(如重复 push 或脚本未就绪),静默忽略即可
     }
-  }, [consent, isEmbed])
+  }, [adSlotId, consent, isEmbed])
 
-  // 未接入 AdSense:生产隐藏,开发显示占位框(同 format 骨架尺寸,便于 CLS 预估)
-  if (!ADSENSE_ACTIVE) {
+  // 客户端或真实数字广告单元未配置:生产隐藏,开发显示位置占位框
+  if (!ADSENSE_ACTIVE || !adSlotId) {
     if (process.env.NODE_ENV === 'production') return null
     return (
       <div
-        data-ad-slot={slot}
+        data-placement={slot}
         data-ad-format={format}
         aria-hidden="true"
         className={`my-6 flex w-full items-center justify-center rounded-lg border border-dashed border-slate-300 bg-slate-100/50 text-xs text-slate-400 ${FORMAT_MIN_HEIGHT[format]} ${
@@ -174,7 +177,8 @@ export function AdSlot({ slot, format = 'auto', fullWidth = false }: AdSlotProps
             className="adsbygoogle"
             style={{ display: 'block' }}
             data-ad-client={ADSENSE_CLIENT}
-            data-ad-slot={slot}
+            data-ad-slot={adSlotId}
+            data-placement={slot}
             data-ad-format={format}
             data-full-width-responsive={format === 'auto' ? 'true' : 'false'}
           />

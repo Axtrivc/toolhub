@@ -19,7 +19,6 @@ import { RecentlyUsedTracker } from './RecentlyUsedTracker'
 import { useApp } from './providers/AppProviders'
 import { t, getToolName, getToolShortIntro, tc } from '@/lib/i18n'
 import { buildFaqJsonLd } from '@/lib/faq-jsonld'
-import { getToolRating, ratingCountBadge } from '@/lib/rating'
 import { SITE_URL, SITE_NAME } from '@/lib/constants'
 import { type ToolMeta } from '@/lib/tools'
 import { type ToolL10n } from '@/lib/i18n/tool-l10n-core'
@@ -121,8 +120,6 @@ export function ToolLayout({ tool, l10n, children }: ToolLayoutProps) {
   const faqJsonLd = buildFaqJsonLd(tool.slug, locale, l10n)
   const breadcrumbJsonLd = buildBreadcrumbJsonLdFrom(tool)
   const howToJsonLd = buildHowToJsonLdFrom(tool)
-  // 星标徽章用的确定性评分(与 lib/seo.ts buildToolJsonLd 的 aggregateRating 同源)
-  const rating = getToolRating(tool.slug)
 
   return (
     <div className="container-page py-8">
@@ -195,16 +192,10 @@ export function ToolLayout({ tool, l10n, children }: ToolLayoutProps) {
             <h1 className="text-3xl font-bold sm:text-4xl" style={{ color: 'rgb(var(--text))' }}>
               {visibleH1}
             </h1>
-            {/* E-E-A-T 星标微标:与页面 WebApplication JSON-LD 的 aggregateRating
-                共用 lib/rating.ts 确定性映射,保证 schema 声明与页面所见严格一致。
-                数量向下取整到十位展示("260+"),恒 ≤ schema 的真实 ratingCount。 */}
+            {/* 真实徽章:免费、无需注册。slug 哈希评分已移除(无真实评价来源,
+                星标与 "xxx+ ratings" 属无来源声称,不再展示) */}
             <div className="mt-2 flex flex-wrap items-center gap-x-2 gap-y-1 text-sm">
-              <span className="inline-flex items-center gap-1.5 rounded-full border border-amber-300/70 bg-amber-50 px-2.5 py-0.5 font-medium text-amber-700 dark:border-amber-500/30 dark:bg-amber-950/40 dark:text-amber-300">
-                <span aria-hidden="true" className="text-base leading-none">★</span>
-                <span aria-hidden="true">{rating.ratingValue}</span>
-                <span aria-hidden="true">·</span>
-                {t(locale, 'ratingRatings', { count: ratingCountBadge(rating.ratingCount) })}
-                <span aria-hidden="true">·</span>
+              <span className="inline-flex items-center rounded-full border border-primary/20 bg-primary/5 px-2.5 py-0.5 font-medium text-primary">
                 {t(locale, 'badgeFree')}
               </span>
             </div>

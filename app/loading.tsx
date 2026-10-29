@@ -7,7 +7,7 @@ export default function Loading() {
   const { locale } = useApp()
 
   return (
-    <div className="flex min-h-[50vh] items-center justify-center">
+    <div role="status" aria-live="polite" className="flex min-h-[50vh] items-center justify-center">
       <div className="text-sm text-slate-500">{t(locale, 'loading')}</div>
     </div>
   )

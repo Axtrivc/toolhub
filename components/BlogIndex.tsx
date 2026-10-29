@@ -19,21 +19,26 @@ export interface BlogPostMeta {
   title: string
   description: string
   date: string
+  /** 最后一次实质内容修订;缺省回退发布日期,不使用构建时间 */
+  modifiedAt?: string
   readTime: string
   tags: string[]
   published: boolean
+  /** 人工策展的相关文章与配套工具 */
+  relatedSlugs?: string[]
+  featuredToolSlugs?: string[]
   /** 可选:各语种的标题/描述覆盖(缺则回退英文原值) */
   i18n?: Partial<Record<Locale, { title: string; description: string }>>
 }
 
 /** 按语言取文章标题(回退英文) */
-function getPostTitle(locale: Locale, post: BlogPostMeta): string {
+export function getPostTitle(locale: Locale, post: BlogPostMeta): string {
   if (locale === 'en') return post.title
   return post.i18n?.[locale]?.title ?? post.title
 }
 
 /** 按语言取文章描述(回退英文) */
-function getPostDescription(locale: Locale, post: BlogPostMeta): string {
+export function getPostDescription(locale: Locale, post: BlogPostMeta): string {
   if (locale === 'en') return post.description
   return post.i18n?.[locale]?.description ?? post.description
 }

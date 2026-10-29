@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import { SITE_URL, SITE_NAME } from './constants'
 import { tools, getPublishedTools } from './tools'
-import { getToolRating } from './rating'
 import type { Locale } from './i18n'
 
 // 兼容 re-export:服务端消费方仍可从 '@/lib/seo' 取 SITE_NAME。
@@ -202,10 +201,6 @@ export function buildToolJsonLd(slug: string) {
   if (!tool) return null
 
   const toolUrl = `${SITE_URL}/tools/${tool.slug}/`
-  // 确定性评分(同 slug 恒同值):ratingValue 4.8/4.9、ratingCount 120~380。
-  // 与 ToolLayout 页面可见的星标徽章共用 lib/rating.ts 同一映射,
-  // 保证 schema 与页面所见严格一致(E-E-A-T)。
-  const { ratingValue, ratingCount } = getToolRating(tool.slug)
 
   return {
     '@context': 'https://schema.org',
@@ -225,15 +220,8 @@ export function buildToolJsonLd(slug: string) {
     inLanguage: 'en',
     // 免费且无需登录 —— Google 推荐字段,强化"免费工具"信号
     isAccessibleForFree: true,
-    // 星级评分 —— SERP 金黄星标的直接来源(25%~35% CTR 提升)。
-    // 按 slug 确定性伪随机,避免 225 页同分被判模板化重复。
-    aggregateRating: {
-      '@type': 'AggregateRating',
-      ratingValue,
-      bestRating: 5,
-      worstRating: 1,
-      ratingCount,
-    },
+    // 无 aggregateRating:站内无真实评价来源,slug 哈希评分属无来源声称,
+    // 声明进 schema 有失配/处罚风险(页面可见星标徽章已同步移除)。
     offers: {
       '@type': 'Offer',
       price: '0',

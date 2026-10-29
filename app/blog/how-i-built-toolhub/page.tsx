@@ -2,9 +2,9 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { SITE_NAME, jsonLdStringify } from '@/lib/seo'
 import { SITE_URL } from '@/lib/constants'
-import { BlogToolsBanner } from '@/components/BlogToolsBanner'
-import { getFeaturedTools, getPublishedTools } from '@/lib/tools'
+import { BlogArticleFooter } from '@/components/BlogArticleFooter'
 import {
+  BlogArticleByline,
   BlogArticleBody,
   BlogArticleTitle,
   BlogBackLabel,
@@ -24,14 +24,13 @@ import {
 
 const SLUG = '/blog/how-i-built-toolhub/'
 const PUBLISH_DATE = '2026-08-04'
-// 正文最后一次实质修订(公开指标定格 169 个工具的那次,git acb12ef6)——
-// 与发布日不同,JSON-LD dateModified 单独取该日期。
-const DATE_MODIFIED = '2026-08-13'
+// 2026-10-29 增加当前 350 工具项目日志,并保留原文的 169 工具历史快照。
+const DATE_MODIFIED = '2026-10-29'
 
 export const metadata: Metadata = {
-  title: 'How I Built ToolHub: A 169-Tool Static PWA That Stays Sub-Second',
+  title: 'How I Built ToolHub: A Static PWA That Stays Sub-Second',
   description:
-    'A no-bullshit architecture retrospective on building ToolHub — a Next.js static export of 169 in-browser tools with lazy Service-Worker caching, 169+ JSON-LD pSEO schemas, and zero-CLS AdSense. The tradeoffs, the numbers, and what I would do differently.',
+    'An architecture retrospective updated on October 29, 2026: 350 browser-based tools, Next.js static export, lazy Service-Worker caching, 1,400 tool-level JSON-LD blocks, and space-reserving ad slots.',
   keywords: [
     'nextjs static export',
     'programmatic seo',
@@ -47,26 +46,27 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'article',
     url: `${SITE_URL}${SLUG}`,
-    title: 'How I Built ToolHub: A 169-Tool Static PWA That Stays Sub-Second',
+    title: 'How I Built ToolHub: A Static PWA That Stays Sub-Second',
     description:
-      'A no-bullshit architecture retrospective — Next.js static export, lazy SW caching, 169+ JSON-LD pSEO schemas, zero-CLS AdSense.',
+      'Updated project log: 350 tools, 1,400 tool-level JSON-LD blocks, static export, lazy Service-Worker caching, and ad-space reservation.',
     siteName: SITE_NAME,
     publishedTime: PUBLISH_DATE,
+    modifiedTime: DATE_MODIFIED,
     authors: [SITE_NAME],
     images: [
       {
         url: '/og.png',
         width: 1200,
         height: 630,
-        alt: 'How I Built ToolHub: A 169-Tool Static PWA That Stays Sub-Second',
+        alt: 'How I Built ToolHub: A Static PWA That Stays Sub-Second',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'How I Built ToolHub: A 169-Tool Static PWA That Stays Sub-Second',
+    title: 'How I Built ToolHub: A Static PWA That Stays Sub-Second',
     description:
-      'Next.js static export, lazy Service-Worker caching, 169+ JSON-LD schemas, zero-CLS AdSense. The tradeoffs and the numbers.',
+      'Updated October 29, 2026: 350 tools and 1,400 tool-level JSON-LD blocks, with the original architecture tradeoffs preserved.',
     images: ['/og.png'],
   },
 }
@@ -75,9 +75,9 @@ export const metadata: Metadata = {
 const articleJsonLd = {
   '@context': 'https://schema.org',
   '@type': ['BlogPosting', 'TechArticle'],
-  headline: 'How I Built ToolHub: A 169-Tool Static PWA That Stays Sub-Second',
+  headline: 'How I Built ToolHub: A Static PWA That Stays Sub-Second',
   description:
-    'A no-bullshit architecture retrospective on building ToolHub — Next.js static export, lazy SW caching, pSEO, and zero-CLS AdSense.',
+    'Architecture and current project metrics: static export, lazy Service-Worker caching, 350 tools, and 1,400 tool-level structured-data blocks.',
   datePublished: PUBLISH_DATE,
   dateModified: DATE_MODIFIED,
   author: { '@type': 'Organization', name: SITE_NAME, url: SITE_URL },
@@ -93,13 +93,6 @@ const articleJsonLd = {
     { '@type': 'Thing', name: 'Programmatic SEO' },
   ],
 }
-
-// 博客 Banner 数据(服务端预计算):featured 前 6 个的轻字段 + 已上线总数,
-// 注册表本体不进博客页客户端 chunk(见 BlogToolsBanner 注释)。
-const bannerTools = getFeaturedTools()
-  .slice(0, 6)
-  .map(({ slug, name, shortIntro, category, icon }) => ({ slug, name, shortIntro, category, icon }))
-const bannerCount = Math.floor(getPublishedTools().length / 10) * 10
 
 export default function HowIBuiltToolHubPost() {
   return (
@@ -169,7 +162,7 @@ export default function HowIBuiltToolHubPost() {
           <span aria-hidden="true">·</span>
           <BlogReadTime articleKey="how-i-built-toolhub" />
           <span aria-hidden="true">·</span>
-          <span>by the {SITE_NAME} team</span>
+          <BlogArticleByline updated={DATE_MODIFIED} />
         </div>
       </header>
 
@@ -181,8 +174,7 @@ export default function HowIBuiltToolHubPost() {
       */}
       <BlogArticleBody articleKey="how-i-built-toolhub" />
 
-      {/* 底部:ToolHub 工具箱推荐 Banner(用户明确要求) */}
-      <BlogToolsBanner tools={bannerTools} publishedCount={bannerCount} />
+      <BlogArticleFooter articleKey="how-i-built-toolhub" />
     </div>
   )
 }

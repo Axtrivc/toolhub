@@ -2,9 +2,9 @@
 
 # 🧰 ToolHub
 
-### **225 free online tools — calculators, converters & developer utilities that run 100% in your browser.**
+### **350 free online tools — calculators, converters & developer utilities with browser-local computation.**
 
-No sign-up · No uploads · Nothing you type ever leaves your device
+No sign-up · Local calculations · Shareable URLs documented in the privacy policy
 
 [![Next.js 16](https://img.shields.io/badge/Next.js-16-black?logo=nextdotjs&logoColor=white)](https://nextjs.org)
 [![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org)
@@ -19,7 +19,7 @@ No sign-up · No uploads · Nothing you type ever leaves your device
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="docs/assets/hero-dark.png">
-  <img src="docs/assets/hero-light.png" alt="ToolHub homepage — 160+ free online tools that just work" width="100%">
+  <img src="docs/assets/hero-light.png" alt="ToolHub homepage — 350 free online tools that just work" width="100%">
 </picture>
 
 </div>
@@ -28,16 +28,16 @@ No sign-up · No uploads · Nothing you type ever leaves your device
 
 ## ✨ Why ToolHub?
 
-> Every tool is a single static page — fast to load, free to use, and **all computation happens locally in your browser**. No accounts, no server-side processing, no data collection of what you type.
+> Every tool is a single static page — fast to load, free to use, and **all computation happens locally in your browser**. No accounts and no server-side calculation API. Tools with shareable URLs may encode settings in the link, as disclosed in the privacy policy.
 
 | | |
 |:---|:---|
-| 🔒 **Privacy-first** | Inputs never leave your device — calculations run client-side, period |
+| 🔒 **Privacy-first** | Browser-local computation, with shareable URL and site-analytics boundaries documented |
 | 🌍 **Four languages** | English, 中文, Español, Deutsch — switchable from any page |
-| ⌨️ **Command palette** | Press <kbd>Ctrl</kbd>/<kbd>Cmd</kbd> + <kbd>K</kbd> to fuzzy-search all 225 tools |
+| ⌨️ **Command palette** | Press <kbd>Ctrl</kbd>/<kbd>Cmd</kbd> + <kbd>K</kbd> to fuzzy-search all 350 tools |
 | 📱 **Installable PWA** | Service-worker caching keeps repeat visits fast, even offline |
 | 🌗 **Dark & light themes** | Plus keyboard-friendly dialogs, skip links & reduced-motion support |
-| 🍪 **Consent-gated extras** | Ads and GA4 load only after opt-in; built-in analytics are cookie-free |
+| 🍪 **Configurable extras** | Cookie-free Cloudflare analytics, opt-in GA4, and ads that can be disabled with Necessary only |
 
 ---
 
@@ -47,7 +47,7 @@ No sign-up · No uploads · Nothing you type ever leaves your device
 <tr>
 <td width="50%" valign="top">
 
-**⌨️ Command palette** — fuzzy-search all 225 tools from anywhere
+**⌨️ Command palette** — fuzzy-search all 350 tools from anywhere
 
 <br/>
 
@@ -68,15 +68,15 @@ No sign-up · No uploads · Nothing you type ever leaves your device
 
 ---
 
-## 🗂️ 225 Tools · 15 Categories
+## 🗂️ 350 Tools · 15 Categories
 
 | | | |
 |:---|:---|:---|
-| 🧑‍💻 **Developer Tools** — 50 | 💰 **Finance Calculators** — 39 | 📝 **Text Tools** — 29 |
-| 🔄 **Unit Converters** — 19 | 🧮 **Math Calculators** — 19 | 🎨 **Web Design Tools** — 14 |
-| 🩺 **Health Calculators** — 15 | 🔐 **Security Tools** — 9 | ⏰ **Time Calculators** — 8 |
-| 🤖 **AI Tools** — 11 | 🎲 **Game Tools** — 4 | 🎓 **Education Calculators** — 3 |
-| 💼 **Business Tools** — 3 | 🐶 **Pet Tools** — 1 | 🏠 **Home Calculators** — 1 |
+| 💰 **Finance Calculators** — 74 | 🧑‍💻 **Developer Tools** — 66 | 📝 **Text Tools** — 31 |
+| 🧮 **Math Calculators** — 29 | 🩺 **Health Calculators** — 27 | 🔄 **Unit Converters** — 22 |
+| 🏠 **Home Calculators** — 18 | 🎨 **Web Design Tools** — 17 | 💼 **Business Tools** — 16 |
+| ⏰ **Time Calculators** — 15 | 🤖 **AI Tools** — 12 | 🔐 **Security Tools** — 10 |
+| 🎲 **Game Tools** — 6 | 🐶 **Pet Tools** — 4 | 🎓 **Education Calculators** — 3 |
 
 👉 [Explore the full directory](https://toolhub.axtrivc.com/tools)
 
@@ -118,12 +118,17 @@ The `out/` directory is plain HTML/CSS/JS — deployable to any static host.
 | Variable | What it does |
 |:---|:---|
 | `NEXT_PUBLIC_SITE_URL` | Canonical URL for sitemap / canonical tags / Open Graph |
-| `NEXT_PUBLIC_ADSENSE_CLIENT` | AdSense publisher ID — ad slots render only when set |
+| `NEXT_PUBLIC_ADSENSE_CLIENT` | Valid `ca-pub-<digits>` client; enables site verification and, with slots, the ad loader |
+| `NEXT_PUBLIC_ADSENSE_SLOT_HOME` | Numeric AdSense unit ID for the homepage placement |
+| `NEXT_PUBLIC_ADSENSE_SLOT_TOOL_TOP` | Numeric unit reused for tool-page top placements |
+| `NEXT_PUBLIC_ADSENSE_SLOT_TOOL_IN_CONTENT` | Numeric unit reused after tool content |
+| `NEXT_PUBLIC_ADSENSE_SLOT_TOOL_MID` | Numeric unit reused for tool-page middle placements |
+| `NEXT_PUBLIC_ADSENSE_SLOT_TOOL_BOTTOM` | Numeric unit reused for tool-page bottom placements |
 | `NEXT_PUBLIC_CF_ANALYTICS_TOKEN` | Cloudflare Web Analytics beacon token |
 | `NEXT_PUBLIC_GA_ID` | GA4 measurement ID — loaded only after cookie consent |
 
 > [!NOTE]
-> `NEXT_PUBLIC_*` values are inlined at **build time** — rebuild after changing them.
+> `NEXT_PUBLIC_*` values are inlined at **build time** — rebuild after changing them. Semantic placement names are never used as AdSense slot IDs. Before enabling ads, also replace the intentionally empty `public/ads.txt` policy with the real record supplied by your AdSense account. GA4 is opt-in; advertising is opt-out through **Necessary only**.
 
 ---
 

@@ -2,9 +2,9 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { SITE_NAME, jsonLdStringify } from '@/lib/seo'
 import { SITE_URL } from '@/lib/constants'
-import { BlogToolsBanner } from '@/components/BlogToolsBanner'
-import { getFeaturedTools, getPublishedTools } from '@/lib/tools'
+import { BlogArticleFooter } from '@/components/BlogArticleFooter'
 import {
+  BlogArticleByline,
   BlogArticleBody,
   BlogArticleTitle,
   BlogBackLabel,
@@ -44,6 +44,7 @@ export const metadata: Metadata = {
     description: DESC,
     siteName: SITE_NAME,
     publishedTime: PUBLISH_DATE,
+    modifiedTime: '2026-10-29',
     authors: [SITE_NAME],
     images: [{ url: '/og.png', width: 1200, height: 630, alt: TITLE }],
   },
@@ -61,7 +62,7 @@ const articleJsonLd = {
   headline: TITLE,
   description: DESC,
   datePublished: PUBLISH_DATE,
-  dateModified: PUBLISH_DATE,
+  dateModified: '2026-10-29',
   author: { '@type': 'Organization', name: SITE_NAME, url: SITE_URL },
   publisher: { '@type': 'Organization', name: SITE_NAME, url: SITE_URL },
   mainEntityOfPage: `${SITE_URL}${SLUG}`,
@@ -74,13 +75,6 @@ const articleJsonLd = {
     { '@type': 'Thing', name: 'Money market fund' },
   ],
 }
-
-// 博客 Banner 数据(服务端预计算):featured 前 6 个的轻字段 + 已上线总数,
-// 注册表本体不进博客页客户端 chunk(见 BlogToolsBanner 注释)。
-const bannerTools = getFeaturedTools()
-  .slice(0, 6)
-  .map(({ slug, name, shortIntro, category, icon }) => ({ slug, name, shortIntro, category, icon }))
-const bannerCount = Math.floor(getPublishedTools().length / 10) * 10
 
 export default function CashAllocationGuidePost() {
   return (
@@ -121,6 +115,8 @@ export default function CashAllocationGuidePost() {
           <time dateTime={PUBLISH_DATE}>{PUBLISH_DATE}</time>
           <span aria-hidden="true">·</span>
           <BlogReadTime articleKey="hysa-vs-cd-wealth-building-guide" />
+          <span aria-hidden="true">·</span>
+          <BlogArticleByline />
         </div>
         <h1 className="text-3xl font-bold tracking-tight sm:text-4xl" style={{ color: 'rgb(var(--text))' }}>
           <BlogArticleTitle articleKey="hysa-vs-cd-wealth-building-guide" />
@@ -131,9 +127,7 @@ export default function CashAllocationGuidePost() {
         <BlogArticleBody articleKey="hysa-vs-cd-wealth-building-guide" />
       </article>
 
-      <div className="mx-auto mt-12 max-w-3xl">
-        <BlogToolsBanner tools={bannerTools} publishedCount={bannerCount} />
-      </div>
+      <BlogArticleFooter articleKey="hysa-vs-cd-wealth-building-guide" />
     </div>
   )
 }

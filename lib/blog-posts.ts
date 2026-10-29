@@ -15,6 +15,9 @@ export const posts: BlogPostMeta[] = [
     readTime: '11 min',
     tags: ['mortgage', 'amortization', 'piti', 'prepayment', 'personal-finance'],
     published: true,
+    modifiedAt: '2026-10-29',
+    relatedSlugs: ['mortgage-loan-calculators', 'home-flooring-and-renovation-math', 'hysa-vs-cd-wealth-building-guide'],
+    featuredToolSlugs: ['mortgage-calculator', 'amortization-table-generator', 'mortgage-affordability-calculator', 'down-payment-calculator', 'biweekly-mortgage-payment-calculator', 'refinance-break-even-calculator'],
     i18n: {
       zh: {
         title: '房贷摊销完全指南:PITI 分解与提前还款策略',
@@ -42,6 +45,9 @@ export const posts: BlogPostMeta[] = [
     readTime: '5 min',
     tags: ['hysa', 'cd-ladder', 'cash-management', 'apy', 'inflation'],
     published: true,
+    modifiedAt: '2026-10-29',
+    relatedSlugs: ['fire-movement-retire-early-playbook', 'mortgage-piti-and-amortization-guide', 'mortgage-loan-calculators'],
+    featuredToolSlugs: ['hysa-calculator', 'cd-calculator', 'apy-calculator', 'compound-interest-calculator', 'inflation-calculator', 'emergency-fund-calculator'],
     i18n: {
       zh: {
         title: 'HYSA vs CD vs 货币基金:2026 年最优现金配置策略',
@@ -69,6 +75,9 @@ export const posts: BlogPostMeta[] = [
     readTime: '12 min',
     tags: ['fire', 'early-retirement', '4-percent-rule', 'roth-ira', 'coast-fire'],
     published: true,
+    modifiedAt: '2026-10-29',
+    relatedSlugs: ['hysa-vs-cd-wealth-building-guide', 'mortgage-piti-and-amortization-guide', 'mortgage-loan-calculators'],
+    featuredToolSlugs: ['fire-calculator', 'retirement-calculator', 'compound-interest-calculator', 'roth-ira-calculator', '401k-match-calculator', 'net-worth-calculator'],
     i18n: {
       zh: {
         title: '2026 FIRE 行动手册:安全提取率、Coast FIRE 与税优账户堆叠',
@@ -96,6 +105,9 @@ export const posts: BlogPostMeta[] = [
     readTime: '10 min',
     tags: ['saas', 'unit-economics', 'cac', 'ltv', 'churn'],
     published: true,
+    modifiedAt: '2026-10-29',
+    relatedSlugs: ['pricing-strategies-margin-vs-markup', 'llm-api-pricing-and-tokenomics'],
+    featuredToolSlugs: ['cac-ltv-calculator', 'saas-ltv-churn-calculator', 'runway-calculator', 'break-even-calculator', 'roi-calculator', 'profit-margin-calculator'],
     i18n: {
       zh: {
         title: '精通 SaaS 单位经济:CAC、LTV 与流失率的数学关系',
@@ -123,6 +135,9 @@ export const posts: BlogPostMeta[] = [
     readTime: '12 min',
     tags: ['webcrypto', 'aes-gcm', 'pbkdf2', 'security', 'jwt'],
     published: true,
+    modifiedAt: '2026-10-29',
+    relatedSlugs: ['how-i-built-toolhub', 'llm-api-pricing-and-tokenomics'],
+    featuredToolSlugs: ['aes-encrypt-decrypt', 'password-generator', 'password-entropy-checker', 'jwt-decoder', 'jwt-generator', 'hmac-generator'],
     i18n: {
       zh: {
         title: '揭秘浏览器内 AES-256-GCM 与 PBKDF2:开发者实战指南',
@@ -150,6 +165,9 @@ export const posts: BlogPostMeta[] = [
     readTime: '11 min',
     tags: ['metabolism', 'bmr', 'tdee', 'calorie-deficit', 'intermittent-fasting'],
     published: true,
+    modifiedAt: '2026-10-29',
+    relatedSlugs: ['canine-nutrition-and-calorie-guide'],
+    featuredToolSlugs: ['bmr-calculator', 'tdee-calculator', 'calorie-calculator', 'intermittent-fasting-calculator', 'macro-calculator', 'weight-loss-goal-calculator'],
     i18n: {
       zh: {
         title: '人体代谢科学:BMR、TDEE、热量缺口与 16:8 断食的计算',
@@ -177,6 +195,9 @@ export const posts: BlogPostMeta[] = [
     readTime: '10 min',
     tags: ['llm', 'api-pricing', 'tokens', 'prompt-caching', 'ai-budget'],
     published: true,
+    modifiedAt: '2026-10-29',
+    relatedSlugs: ['saas-unit-economics-cac-ltv-churn', 'how-i-built-toolhub', 'client-side-cryptography-web-crypto-guide'],
+    featuredToolSlugs: ['llm-api-cost-calculator', 'llm-cost-calculator', 'gpt-token-counter', 'token-visualizer', 'context-window-checker', 'embedding-price-calculator'],
     i18n: {
       zh: {
         title: '2026 LLM 定价手册:度量 Token 密度、上下文缓存与每月 API 预算',
@@ -204,6 +225,9 @@ export const posts: BlogPostMeta[] = [
     readTime: '10 min',
     tags: ['pricing', 'margin', 'markup', 'ecommerce', 'freelance'],
     published: true,
+    modifiedAt: '2026-10-29',
+    relatedSlugs: ['saas-unit-economics-cac-ltv-churn', 'llm-api-pricing-and-tokenomics'],
+    featuredToolSlugs: ['profit-margin-calculator', 'markup-calculator', 'discount-calculator', 'reverse-stripe-fee-calculator', 'freelance-rate-calculator', 'break-even-calculator'],
     i18n: {
       zh: {
         title: 'Markup vs Margin:电商与零售盈利的定价数学',
@@ -231,6 +255,9 @@ export const posts: BlogPostMeta[] = [
     readTime: '9 min',
     tags: ['dog-nutrition', 'rer', 'mer', 'pet-health', 'calories'],
     published: true,
+    modifiedAt: '2026-10-29',
+    relatedSlugs: ['metabolism-fasting-and-calorie-deficit'],
+    featuredToolSlugs: ['dog-food-calculator', 'dog-age-calculator'],
     i18n: {
       zh: {
         title: '养犬人的兽医数学:解读 RER、MER 与每日精确热量',
@@ -258,6 +285,9 @@ export const posts: BlogPostMeta[] = [
     readTime: '9 min',
     tags: ['renovation', 'flooring', 'tile', 'paint', 'waste-factor'],
     published: true,
+    modifiedAt: '2026-10-29',
+    relatedSlugs: ['mortgage-piti-and-amortization-guide', 'mortgage-loan-calculators'],
+    featuredToolSlugs: ['flooring-calculator', 'paint-calculator', 'paver-calculator', 'drywall-calculator', 'concrete-calculator', 'deck-board-calculator'],
     i18n: {
       zh: {
         title: '包工头的材料估算指南:瓷砖、地板与油漆的损耗系数计算',
@@ -285,6 +315,9 @@ export const posts: BlogPostMeta[] = [
     readTime: '7 min',
     tags: ['mortgage', 'loans', 'personal-finance', 'calculators'],
     published: true,
+    modifiedAt: '2026-10-29',
+    relatedSlugs: ['mortgage-piti-and-amortization-guide', 'hysa-vs-cd-wealth-building-guide', 'home-flooring-and-renovation-math'],
+    featuredToolSlugs: ['mortgage-calculator', 'loan-calculator', 'rent-vs-buy-calculator', 'credit-card-minimum-payment-calculator', 'amortization-table-generator', 'refinance-break-even-calculator'],
     i18n: {
       zh: {
         title: '房贷与贷款计算器诚实指南(PITI、PMI、还款曲线)',
@@ -305,31 +338,38 @@ export const posts: BlogPostMeta[] = [
   },
   {
     slug: 'how-i-built-toolhub',
-    title: 'How I Built ToolHub: A 169-Tool Static PWA That Stays Sub-Second',
+    title: 'How I Built ToolHub: A Static PWA That Stays Sub-Second',
     description:
-      'A no-bullshit architecture retrospective — Next.js static export, lazy Service-Worker caching, 169+ JSON-LD pSEO schemas, and zero-CLS AdSense. The tradeoffs and the numbers.',
+      'An architecture retrospective updated October 29, 2026: 350 browser tools, Next.js static export, lazy Service-Worker caching, 1,400 tool-level JSON-LD blocks, and space-reserving ad slots.',
     date: '2026-08-04',
     readTime: '9 min',
     tags: ['architecture', 'seo', 'pwa', 'build-in-public'],
     published: true,
+    modifiedAt: '2026-10-29',
+    relatedSlugs: ['client-side-cryptography-web-crypto-guide', 'llm-api-pricing-and-tokenomics'],
+    featuredToolSlugs: ['json-formatter', 'slug-generator', 'faq-schema-generator', 'open-graph-generator', 'robots-txt-generator'],
     i18n: {
       zh: {
-        title: '我是如何构建 ToolHub 的:169 个工具的静态 PWA,始终亚秒级',
+        title: '我是如何构建 ToolHub 的:始终亚秒级的静态 PWA',
         description:
-          '一份不掺水的架构复盘 —— Next.js 静态导出、懒加载 Service Worker 缓存、169+ JSON-LD pSEO 结构化数据,以及零 CLS 的 AdSense。讲清取舍与真实数字。',
+          '2026 年 10 月 29 日更新的架构复盘:350 个浏览器工具、Next.js 静态导出、懒加载 Service Worker 缓存、1,400 个工具级 JSON-LD 块与预留广告空间。',
       },
       es: {
-        title: 'Cómo construí ToolHub: una PWA estática de 169 herramientas que sigue siendo sub-segundo',
+        title: 'Cómo construí ToolHub: una PWA estática que sigue siendo sub-segundo',
         description:
-          'Una retrospectiva de arquitectura sin rodeos — Next.js estático, caché Service Worker perezosa, 169+ esquemas pSEO JSON-LD y AdSense sin CLS. Los tradeoffs y los números.',
+          'Retrospectiva actualizada el 29 de octubre de 2026: 350 herramientas, Next.js estático, caché Service Worker perezosa, 1.400 bloques JSON-LD y espacio reservado para anuncios.',
       },
       de: {
-        title: 'Wie ich ToolHub baute: Eine statische PWA mit 169 Werkzeugen, die unter einer Sekunde bleibt',
+        title: 'Wie ich ToolHub baute: Eine statische PWA, die unter einer Sekunde bleibt',
         description:
-          'Ein ehrlicher Architektur-Rückblick — Next.js Static Export, Lazy Service-Worker-Cache, 169+ JSON-LD-pSEO-Schemata und Zero-CLS AdSense. Die Tradeoffs und die Zahlen.',
+          'Aktualisiert am 29. Oktober 2026: 350 Browser-Werkzeuge, Next.js Static Export, Lazy Service-Worker-Cache, 1.400 JSON-LD-Blöcke und reservierter Werbeplatz.',
       },
     },
   },
 ]
 
 export const publishedBlogPosts = posts.filter((p) => p.published)
+
+export function getBlogPost(slug: string): BlogPostMeta | undefined {
+  return publishedBlogPosts.find((post) => post.slug === slug)
+}

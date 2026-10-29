@@ -24,29 +24,32 @@ import { SITE_URL } from '@/lib/constants'
 
 const publishedPosts = allPosts.filter((p) => p.published)
 
+const BLOG_TITLE = 'Practical Guides, Calculator Tutorials & Engineering Notes'
+const BLOG_DESCRIPTION = `Worked examples, calculator guides, and architecture notes from ${SITE_NAME} — covering finance, health, development, pricing, and browser-based tools.`
+
 export const metadata: Metadata = {
-  title: 'Blog',
-  description: `Engineering notes, architecture deep-dives, and build-in-public updates from the ${SITE_NAME} team.`,
+  title: BLOG_TITLE,
+  description: BLOG_DESCRIPTION,
   alternates: { canonical: '/blog/' },
   openGraph: {
     type: 'website',
     url: `${SITE_URL}/blog/`,
-    title: `${SITE_NAME} Blog`,
-    description: `Engineering notes, architecture deep-dives, and build-in-public updates from the ${SITE_NAME} team.`,
+    title: BLOG_TITLE,
+    description: BLOG_DESCRIPTION,
     siteName: SITE_NAME,
     images: [
       {
         url: '/og.png',
         width: 1200,
         height: 630,
-        alt: `${SITE_NAME} Blog`,
+        alt: BLOG_TITLE,
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: `${SITE_NAME} Blog`,
-    description: `Engineering notes and build-in-public updates from the ${SITE_NAME} team.`,
+    title: BLOG_TITLE,
+    description: BLOG_DESCRIPTION,
     images: ['/og.png'],
   },
 }
@@ -57,7 +60,7 @@ const blogJsonLd = {
   '@type': ['Blog', 'CollectionPage'],
   name: `${SITE_NAME} Blog`,
   url: `${SITE_URL}/blog/`,
-  description: `Engineering notes and build-in-public updates from the ${SITE_NAME} team.`,
+  description: BLOG_DESCRIPTION,
   inLanguage: 'en',
   publisher: { '@type': 'Organization', name: SITE_NAME, url: SITE_URL },
   blogPost: publishedPosts.map((p) => ({
@@ -66,7 +69,7 @@ const blogJsonLd = {
     description: p.description,
     url: `${SITE_URL}/blog/${p.slug}/`,
     datePublished: p.date,
-    dateModified: p.date,
+    dateModified: p.modifiedAt ?? p.date,
     author: { '@type': 'Organization', name: SITE_NAME },
   })),
 }
@@ -79,8 +82,8 @@ export default function BlogIndexPage() {
         dangerouslySetInnerHTML={{ __html: jsonLdStringify(blogJsonLd) }}
       />
       <PageShell
-        title="The ToolHub Blog"
-        description="Engineering deep-dives, architecture tradeoffs, and build-in-public notes from behind the toolbox."
+        title="ToolHub Guides & Engineering Notes"
+        description="Practical guides, worked examples, calculator tutorials, and architecture notes from behind the toolbox."
         crumb="Blog"
       >
         {/* 卡片渲染交给客户端组件(随语言切换标题/描述/日期/按钮文案)。

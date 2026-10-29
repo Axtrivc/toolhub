@@ -1987,7 +1987,7 @@ export const tools: ToolMeta[] = [
       'reading time from word count',
       'text statistics for essays',
     ],
-    titleLongTail: 'Word Counter - Words, Characters & Reading Time',
+    titleLongTail: 'Word & Character Counter - Reading Time',
     descriptionLongTail: 'Count words, characters, sentences, and reading time. Get text statistics for essays, articles, and social media, privately. Free, no signup.',
   },
   {
@@ -2350,7 +2350,7 @@ export const tools: ToolMeta[] = [
       'carat to gram converter',
       'metric to imperial mass',
     ],
-    titleLongTail: 'Mass Converter - kg to lbs, Carats & Grains Free',
+    titleLongTail: 'Mass Converter - kg, lb, Carats & Grains',
     descriptionLongTail: 'Convert between metric, carats, and grains instantly. Switch kg, g, mg, carats, and grains for jewelry and science, privately. Free, no signup.',
   },
   {
@@ -3237,13 +3237,14 @@ export const tools: ToolMeta[] = [
     shortIntro: 'Calculate your Body Mass Index and see your healthy weight range.',
     published: true,
     longTailKeywords: [
-      'bmi calculator for women',
-      'bmi calculator by age and gender',
-      'bmi prime and healthy range',
-      'bmi calculator men over 50',
+      'adult bmi calculator',
+      'bmi healthy weight range',
+      'bmi category calculator',
+      'body mass index metric imperial',
     ],
-    titleLongTail: 'BMI Calculator for Women & Men by Age',
-    descriptionLongTail: 'Calculate BMI by age and gender with a healthy weight range and BMI prime. Works in metric or imperial units, privately. Free, no signup.',
+    titleLongTail: 'BMI Calculator - Healthy Weight Range',
+    descriptionLongTail:
+      'Calculate adult BMI with metric or imperial units and see your BMI category and healthy weight range. Runs privately in your browser. Free, no signup.',
   },
   {
     slug: 'calorie-calculator', name: 'Calorie Calculator',
@@ -4060,13 +4061,14 @@ export const tools: ToolMeta[] = [
     shortIntro: 'Calculate your GPA instantly. Add courses, credits, and letter grades.',
     published: true,
     longTailKeywords: [
-      'gpa calculator weighted by credits',
+      'unweighted gpa calculator by credits',
       'college gpa on 4.0 scale',
-      'high school gpa calculator',
+      'credit weighted gpa calculator',
       'cumulative gpa by course credits',
     ],
-    titleLongTail: 'GPA Calculator - Weighted 4.0 by Credits',
-    descriptionLongTail: 'Calculate GPA on a 4.0 scale, weighted by credits. Add courses and letter grades to see cumulative GPA for college or high school. Free, no signup.',
+    titleLongTail: 'Unweighted GPA Calculator - Credit-Weighted',
+    descriptionLongTail:
+      'Calculate unweighted GPA on a 4.0 scale, weighted by course credits. Add courses and letter grades to see your cumulative GPA. Free, no signup.',
   },
 
   // ─────────── 🔒 Security Tools (6) ───────────
@@ -4301,18 +4303,18 @@ export const tools: ToolMeta[] = [
   {
     slug: 'gpt-token-counter', name: 'GPT Token Counter',
     title: 'Free GPT Token Counter - Estimate Tokens & API Cost Online',
-    description: 'Free token counter for GPT-4o, GPT-4o-mini and Claude. Estimate tokens, characters, words, and API cost as you type. 100% private, no signup.',
-    keywords: ['gpt token counter', 'token counter', 'tiktoken counter online', 'claude token counter', 'prompt token estimator'],
+    description: 'Free LLM token counter and API cost estimator. Estimate tokens, characters, words, and API cost for GPT, Claude, and Gemini prompts as you type. 100% private, no signup.',
+    keywords: ['llm token counter', 'gpt token counter', 'token counter', 'claude token counter', 'prompt token estimator', 'api cost calculator'],
     intent: 'informational', category: 'AI Tools', h1: 'GPT Token Counter',
-    shortIntro: 'Estimate tokens and API cost for GPT and Claude prompts.', published: true,
+    shortIntro: 'Estimate tokens and API cost for GPT, Claude, and Gemini prompts.', published: true,
     longTailKeywords: [
-      'gpt-4o token counter online',
+      'llm token counter online',
       'claude prompt token estimator',
       'how many tokens is my prompt',
       'openai api cost calculator per prompt',
     ],
-    titleLongTail: 'GPT-4o & Claude Token Counter - Estimate API Cost',
-    descriptionLongTail: 'Paste your prompt and instantly see tokens, words, and API cost for GPT-4o and Claude models. Runs fully in your browser — free, private, no signup.',
+    titleLongTail: 'LLM Token & API Cost Estimator',
+    descriptionLongTail: 'Paste your prompt and instantly see estimated tokens, words, and API cost across GPT, Claude, and Gemini pricing. Heuristic estimate — real billing uses each provider\u2019s tokenizer. Runs in your browser, free, no signup.',
   },
   {
     slug: 'ip-subnet-calculator', name: 'IP Subnet Calculator',

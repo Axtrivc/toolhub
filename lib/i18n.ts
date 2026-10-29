@@ -79,7 +79,7 @@ export interface Dict {
   heroTitle1: string // "Free Online Tools" 部分(被 {count} 替换)
   heroTitle2: string // "That Just Work"
   heroSubtitle: string
-  heroOfflineBadge: string // PWA/隐私卖点徽章 "⚡ 100% Client-Side & Works Offline"
+  heroOfflineBadge: string // PWA/隐私卖点徽章 "⚡ Tools Run In-Browser & Work Offline"
   heroMultilingualBadge: string // 多语卖点徽章 "🌐 Available in 4 Languages: EN | 中文 | Español | Deutsch"
   heroCtaExplore: string // Hero 快捷操作栏主 CTA "Explore {count}+ Free Tools"
   // 搜索 & 筛选
@@ -151,10 +151,10 @@ export interface Dict {
   recentSubtitle: string
   // 首页 Workspace 仪表盘(Hero 状态行 / 价值徽章)
   workspaceEyebrow: string // "Workspace / Developer & Creator Toolhub" 眉头等宽行
-  workspaceStatus: string // 状态指示 "● 100% LOCAL COMPUTE ENGINE · ZERO DATA LOGS"
+  workspaceStatus: string // 状态指示 "LOCAL COMPUTE ENGINE · NO ACCOUNT REQUIRED"
   workspaceBadgeEngines: string // "{count}+ Utility Engines"
   workspaceBadgeInstant: string // "Instant Local Compute"
-  workspaceBadgeZeroLogs: string // "Zero Server Storage"
+  workspaceBadgeZeroLogs: string // 历史 key 名(调用方多处引用);文案只描述浏览器本地处理
   // 首页 Quick Access 面板(Pinned + Recent)
   workspaceQuickAccess: string // 面板标题 "Quick Access"
   workspacePinnedTitle: string // "Pinned Tools"
@@ -356,7 +356,7 @@ const en: Dict = {
   toolsDirCategoriesAria: "Tool categories",
   toolsDirSeoTitle: "One Toolbox for Everyday Tasks",
   toolsDirSeoP1: "Instead of hunting down a different website for every small job, ToolHub puts the utilities you reach for most in one place. Need to convert kilograms to pounds, calculate a mortgage payment, format a JSON payload, or generate a strong password? It is all here, and it all runs locally in your browser.",
-  toolsDirSeoP2: "Every tool on this page is free with no signup and no upload. That means nothing you type ever leaves your device, which matters for sensitive inputs like salary figures, health numbers, or code snippets. Bookmark this page — we add new tools regularly based on what readers actually search for.",
+  toolsDirSeoP2: "Every tool on this page is free with no signup. Calculations run locally in your browser. Tools with shareable links may place settings in the URL, so review the privacy policy before sharing sensitive values. Bookmark this page — we add new tools regularly based on what readers actually search for.",
   navAbout: 'About',
   navBlog: 'Blog',
   navContact: 'Contact',
@@ -364,8 +364,8 @@ const en: Dict = {
   heroTitle1: 'Free Online Tools',
   heroTitle2: 'That Just Work',
   heroSubtitle:
-    'Fast, privacy-friendly utilities for developers, students, and everyday tasks. Everything runs right in your browser — no signup, no upload, no tracking.',
-  heroOfflineBadge: '⚡ 100% Client-Side & Works Offline',
+    'Fast, privacy-friendly utilities for developers, students, and everyday tasks. Calculations run in your browser, with no signup required.',
+  heroOfflineBadge: '⚡ Tools Run In-Browser & Work Offline',
   heroCtaExplore: 'Explore {count}+ Free Tools',
   searchPlaceholder: 'Search {count} tools...',
   heroSearchLabel: 'Search tools',
@@ -385,7 +385,7 @@ const en: Dict = {
   footerPrivacy: 'Privacy',
   footerTerms: 'Terms',
   footerTagline:
-    'Free, fast, and privacy-friendly online tools. Everything runs in your browser — no data leaves your device.',
+    'Free, fast, and privacy-friendly online tools. Calculations run in your browser, with no account required.',
   footerRights: 'tools and counting. All rights reserved.',
   footerMore: '+{count} more',
   statsTotalVisits: 'Total visits',
@@ -423,10 +423,10 @@ const en: Dict = {
   recentSubtitle: 'Pick up right where you left off',
   // Workspace 仪表盘
   workspaceEyebrow: 'Workspace / Developer & Creator Toolhub',
-  workspaceStatus: '100% LOCAL COMPUTE ENGINE · ZERO DATA LOGS',
+  workspaceStatus: 'LOCAL COMPUTE ENGINE · NO ACCOUNT REQUIRED',
   workspaceBadgeEngines: '{count}+ Utility Engines',
   workspaceBadgeInstant: 'Instant Local Compute',
-  workspaceBadgeZeroLogs: 'Zero Server Storage',
+  workspaceBadgeZeroLogs: 'Browser-Based Processing',
   workspaceQuickAccess: 'Quick Access',
   workspacePinnedTitle: 'Pinned Tools',
   workspacePinnedEmpty: 'Nothing pinned yet — hit the pin on any tool card to dock it here.',
@@ -511,7 +511,7 @@ const en: Dict = {
   cookieNecessaryOnly: 'Necessary only',
   // 博客索引页
   blogIndexTitle: 'Blog',
-  blogIndexSubtitle: 'Engineering notes, architecture deep-dives, and build-in-public updates.',
+  blogIndexSubtitle: 'Practical guides, worked examples, calculator tutorials, and engineering notes.',
   blogReadMore: 'Read more',
   blogReadTime: '{time} read',
   blogIndexEmpty: 'No posts yet — check back soon.',
@@ -521,7 +521,7 @@ const en: Dict = {
   blogBannerEyebrow: 'Try the toolbox',
   blogBannerTitle: 'Featured tools, free and in-browser',
   blogBannerBody:
-    'No signup, no upload, no tracking. Everything below runs entirely in your tab — exactly the architecture this post describes.',
+    'No signup — every tool below runs entirely in your tab and processes your input locally. Exactly the architecture this post describes.',
   blogBannerBrowse: 'Browse all {count}+ tools',
   blogBackToSite: 'Back to {site}',
   blogArticleReadTime: '{count} min read',
@@ -529,7 +529,7 @@ const en: Dict = {
   seoWhyTitle: 'Why Use Our Online Tools?',
   seoWhyBody1: 'Most online tools ask you to sign up, accept cookies, or upload your files to a server you can\'t audit. We do things differently: every tool here runs entirely in your browser. That means three things for you:',
   seoWhyPrivacy: 'Privacy by design.',
-  seoWhyPrivacyBody: ' Your text and files never leave your device. There is no server processing your input, so there is nothing to leak.',
+  seoWhyPrivacyBody: ' Your text and files are processed in your browser. Shareable links can place settings in the URL, so avoid sharing sensitive values.',
   seoWhyInstant: 'Instant results.',
   seoWhyInstantBody: ' No round-trip to a server means no waiting. Tools respond as fast as you can type.',
   seoWhyNoFriction: 'No friction.',
@@ -610,7 +610,7 @@ const zh: Dict = {
   toolsDirCategoriesAria: "工具分类",
   toolsDirSeoTitle: "一个工具箱,搞定日常所有任务",
   toolsDirSeoP1: "不必再为每个小任务翻找不同的网站——ToolHub 把你最常用的实用工具集中在一处。公斤换算磅、计算房贷月供、格式化 JSON、生成强密码?全都在这里,而且全部在你的浏览器本地运行。",
-  toolsDirSeoP2: "本页所有工具免费、无需注册、不上传任何数据。你输入的内容(薪资、健康数据、代码片段等敏感信息)永远不会离开你的设备。收藏本页——我们会根据读者的真实搜索持续新增工具。",
+  toolsDirSeoP2: "本页所有工具免费、无需注册,计算在浏览器本地完成。带分享链接的工具可能把设置写进 URL,分享敏感数值前请先查看隐私政策。收藏本页——我们会根据读者的真实搜索持续新增工具。",
   navAbout: '关于',
   navBlog: '博客',
   navContact: '联系',
@@ -618,8 +618,8 @@ const zh: Dict = {
   heroTitle1: '免费在线工具',
   heroTitle2: '简单好用',
   heroSubtitle:
-    '为开发者、学生和日常任务打造的快速、注重隐私的实用工具。所有计算都在浏览器中完成 —— 无需注册,无需上传,不追踪。',
-  heroOfflineBadge: '⚡ 100% 本地运行 · 支持离线',
+    '为开发者、学生和日常任务打造的快速、注重隐私的实用工具。计算在浏览器本地完成,无需注册。',
+  heroOfflineBadge: '⚡ 工具浏览器内运行 · 支持离线',
   heroCtaExplore: '探索 {count}+ 免费工具',
   searchPlaceholder: '搜索 {count} 个工具...',
   heroSearchLabel: '搜索工具',
@@ -639,7 +639,7 @@ const zh: Dict = {
   footerPrivacy: '隐私',
   footerTerms: '条款',
   footerTagline:
-    '免费、快速、注重隐私的在线工具。所有操作都在浏览器中完成 —— 数据不会离开你的设备。',
+    '免费、快速、注重隐私的在线工具。计算在浏览器本地完成,无需账号。',
   footerRights: '个工具,持续增加中。保留所有权利。',
   footerMore: '还有 {count} 个',
   statsTotalVisits: '总访问',
@@ -677,10 +677,10 @@ const zh: Dict = {
   recentSubtitle: '从上次离开的地方继续',
   // Workspace 仪表盘
   workspaceEyebrow: '工作台 / 开发者与创作者工具中心',
-  workspaceStatus: '100% 本地计算引擎 · 零数据日志',
+  workspaceStatus: '本地计算引擎 · 无需账号',
   workspaceBadgeEngines: '{count}+ 个实用引擎',
   workspaceBadgeInstant: '即时本地计算',
-  workspaceBadgeZeroLogs: '零服务器存储',
+  workspaceBadgeZeroLogs: '浏览器本地处理',
   workspaceQuickAccess: '快速访问',
   workspacePinnedTitle: '已固定工具',
   workspacePinnedEmpty: '还没有固定工具 —— 点击任意工具卡片上的图钉,把它固定到这里。',
@@ -764,7 +764,7 @@ const zh: Dict = {
   cookieNecessaryOnly: '仅必要',
   // 博客索引页
   blogIndexTitle: '博客',
-  blogIndexSubtitle: '工程笔记、架构深度复盘,与公开构建(build in public)动态。',
+  blogIndexSubtitle: '实用指南、可验算示例、计算器教程与工程笔记。',
   blogReadMore: '阅读全文',
   blogReadTime: '阅读 {time}',
   blogIndexEmpty: '暂无文章 —— 欢迎稍后再来。',
@@ -774,7 +774,7 @@ const zh: Dict = {
   blogBannerEyebrow: '试试工具箱',
   blogBannerTitle: '精选工具,免费、浏览器内运行',
   blogBannerBody:
-    '无需注册、无需上传、不追踪。下面的工具全部在你的浏览器标签页内运行 —— 正如本文所描述的架构。',
+    '无需注册 —— 下面的工具全部在你的浏览器标签页内运行,输入就地处理 —— 正如本文所描述的架构。',
   blogBannerBrowse: '浏览全部 {count}+ 个工具',
   blogBackToSite: '返回 {site}',
   blogArticleReadTime: '{count} 分钟阅读',
@@ -782,7 +782,7 @@ const zh: Dict = {
   seoWhyTitle: '为什么要用我们的在线工具?',
   seoWhyBody1: '大多数在线工具都要你注册、接受 cookie,或把文件上传到无法审计的服务器。我们不一样:这里的每个工具都完全在你的浏览器中运行。这对你意味着三件事:',
   seoWhyPrivacy: '隐私优先。',
-  seoWhyPrivacyBody: ' 你的文本和文件绝不离开你的设备。没有服务器处理你的输入,也就没有东西可泄露。',
+  seoWhyPrivacyBody: ' 你的文本和文件在浏览器本地处理。分享链接可能把设置写进 URL,请勿在链接中放入敏感数值。',
   seoWhyInstant: '即时结果。',
   seoWhyInstantBody: '无需往返服务器,意味着无需等待。工具响应速度和你打字一样快。',
   seoWhyNoFriction: '零摩擦。',
@@ -862,7 +862,7 @@ const es: Dict = {
   toolsDirCategoriesAria: "Categorías de herramientas",
   toolsDirSeoTitle: "Una caja de herramientas para el día a día",
   toolsDirSeoP1: "En lugar de buscar una web distinta para cada tarea pequeña, ToolHub reúne en un solo lugar las utilidades que más usas. ¿Convertir kilos a libras, calcular una hipoteca, formatear JSON o generar una contraseña fuerte? Está todo aquí y funciona localmente en tu navegador.",
-  toolsDirSeoP2: "Todas las herramientas son gratuitas, sin registro y sin subidas: lo que escribas nunca sale de tu dispositivo, importante con datos sensibles como salarios, cifras de salud o código. Guarda esta página — añadimos herramientas nuevas según lo que la gente busca de verdad.",
+  toolsDirSeoP2: "Todas las herramientas son gratuitas y sin registro. Los cálculos se ejecutan localmente en tu navegador. Las herramientas con enlaces para compartir pueden incluir opciones en la URL; consulta la privacidad antes de compartir valores sensibles. Guarda esta página: añadimos herramientas según las búsquedas reales.",
   navAbout: 'Acerca de',
   navBlog: 'Blog',
   navContact: 'Contacto',
@@ -870,8 +870,8 @@ const es: Dict = {
   heroTitle1: 'Herramientas online gratis',
   heroTitle2: 'Que simplemente funcionan',
   heroSubtitle:
-    'Utilidades rápidas y respetuosas con la privacidad para desarrolladores, estudiantes y tareas diarias. Todo se ejecuta en tu navegador: sin registro, sin subir archivos, sin rastreo.',
-  heroOfflineBadge: '⚡ 100% en el cliente · Sin conexión',
+    'Utilidades rápidas y respetuosas con la privacidad para desarrolladores, estudiantes y tareas diarias. Los cálculos se ejecutan en tu navegador y no necesitas registrarte.',
+  heroOfflineBadge: '⚡ Herramientas en tu navegador · Funciona offline',
   heroCtaExplore: 'Explorar más de {count} herramientas gratuitas',
   searchPlaceholder: 'Buscar {count} herramientas...',
   heroSearchLabel: 'Buscar herramientas',
@@ -891,7 +891,7 @@ const es: Dict = {
   footerPrivacy: 'Privacidad',
   footerTerms: 'Términos',
   footerTagline:
-    'Herramientas online gratuitas, rápidas y respetuosas con la privacidad. Todo se ejecuta en tu navegador: ningún dato sale de tu dispositivo.',
+    'Herramientas online gratuitas, rápidas y respetuosas con la privacidad. Los cálculos se ejecutan en tu navegador, sin cuenta.',
   footerRights: 'herramientas y contando. Todos los derechos reservados.',
   footerMore: '+{count} más',
   statsTotalVisits: 'Visitas totales',
@@ -929,10 +929,10 @@ const es: Dict = {
   recentSubtitle: 'Continúa justo donde lo dejaste',
   // Workspace 仪表盘
   workspaceEyebrow: 'Workspace / Centro de herramientas para desarrolladores y creadores',
-  workspaceStatus: 'MOTOR DE CÓMPUTO 100% LOCAL · CERO REGISTROS DE DATOS',
+  workspaceStatus: 'CÓMPUTO LOCAL · SIN CUENTA',
   workspaceBadgeEngines: '{count}+ motores de utilidad',
   workspaceBadgeInstant: 'Cómputo local instantáneo',
-  workspaceBadgeZeroLogs: 'Cero almacenamiento en servidor',
+  workspaceBadgeZeroLogs: 'Procesamiento en el navegador',
   workspaceQuickAccess: 'Acceso rápido',
   workspacePinnedTitle: 'Herramientas fijadas',
   workspacePinnedEmpty: 'Nada fijado aún — toca el pin en cualquier tarjeta para anclarla aquí.',
@@ -1017,7 +1017,7 @@ const es: Dict = {
   cookieNecessaryOnly: 'Solo necesarias',
   // 博客索引页
   blogIndexTitle: 'Blog',
-  blogIndexSubtitle: 'Notas de ingeniería, análisis de arquitectura y novedades de construcción pública.',
+  blogIndexSubtitle: 'Guías prácticas, ejemplos verificables, tutoriales de calculadoras y notas de ingeniería.',
   blogReadMore: 'Leer más',
   blogReadTime: '{time} de lectura',
   blogIndexEmpty: 'Aún no hay artículos — vuelve pronto.',
@@ -1027,7 +1027,7 @@ const es: Dict = {
   blogBannerEyebrow: 'Prueba la caja de herramientas',
   blogBannerTitle: 'Herramientas destacadas, gratis y en el navegador',
   blogBannerBody:
-    'Sin registro, sin subidas, sin rastreo. Todo lo que ves abajo se ejecuta por completo en tu pestaña — exactamente la arquitectura que describe este artículo.',
+    'Sin registro — cada herramienta de abajo se ejecuta por completo en tu pestaña y procesa tu entrada en local. Exactamente la arquitectura que describe este artículo.',
   blogBannerBrowse: 'Ver las {count}+ herramientas',
   blogBackToSite: 'Volver a {site}',
   blogArticleReadTime: '{count} min de lectura',
@@ -1035,7 +1035,7 @@ const es: Dict = {
   seoWhyTitle: '¿Por qué usar nuestras herramientas online?',
   seoWhyBody1: 'La mayoría de herramientas online te piden registrarte, aceptar cookies o subir tus archivos a un servidor que no puedes auditar. Nosotros lo hacemos distinto: cada herramienta aquí se ejecuta por completo en tu navegador. Para ti eso significa tres cosas:',
   seoWhyPrivacy: 'Privacidad por diseño.',
-  seoWhyPrivacyBody: ' Tu texto y tus archivos nunca salen de tu dispositivo. No hay servidor procesando tu entrada, así que no hay nada que filtrar.',
+  seoWhyPrivacyBody: ' Tu texto y tus archivos se procesan en tu navegador. Los enlaces para compartir pueden incluir opciones en la URL; evita compartir valores sensibles.',
   seoWhyInstant: 'Resultados al instante.',
   seoWhyInstantBody: ' Sin ida y vuelta a un servidor, no hay esperas. Las herramientas responden tan rápido como escribes.',
   seoWhyNoFriction: 'Sin fricción.',
@@ -1115,7 +1115,7 @@ const de: Dict = {
   toolsDirCategoriesAria: "Werkzeug-Kategorien",
   toolsDirSeoTitle: "Ein Werkzeugkasten für alltägliche Aufgaben",
   toolsDirSeoP1: "Statt für jede kleine Aufgabe eine andere Website zu suchen, findest du in ToolHub die meistgenutzten Helfer an einem Ort. Kilogramm in Pfund umrechnen, eine Hypothek berechnen, JSON formatieren oder ein starkes Passwort erzeugen? Alles hier – und alles läuft lokal in deinem Browser.",
-  toolsDirSeoP2: "Alle Tools sind kostenlos, ohne Anmeldung und ohne Upload. Was du eingibst, verlässt dein Gerät nie – wichtig bei sensiblen Angaben wie Gehaltszahlen, Gesundheitswerten oder Code. Speichere diese Seite – neue Tools kommen regelmäßig dazu.",
+  toolsDirSeoP2: "Alle Tools sind kostenlos und ohne Anmeldung. Berechnungen laufen lokal in deinem Browser. Tools mit teilbaren Links können Einstellungen in die URL schreiben; lies vor dem Teilen sensibler Werte die Datenschutzerklärung. Neue Tools kommen regelmäßig dazu.",
   navAbout: 'Über',
   navBlog: 'Blog',
   navContact: 'Kontakt',
@@ -1123,8 +1123,8 @@ const de: Dict = {
   heroTitle1: 'Kostenlose Online-Werkzeuge',
   heroTitle2: 'Die einfach funktionieren',
   heroSubtitle:
-    'Schnelle, datenschutzfreundliche Helfer für Entwickler, Studierende und Alltag. Alles läuft direkt im Browser — keine Anmeldung, kein Upload, kein Tracking.',
-  heroOfflineBadge: '⚡ 100% clientseitig · Offline-fähig',
+    'Schnelle, datenschutzfreundliche Helfer für Entwickler, Studierende und Alltag. Berechnungen laufen direkt im Browser, ganz ohne Anmeldung.',
+  heroOfflineBadge: '⚡ Tools im Browser · Offline-fähig',
   heroCtaExplore: 'Über {count} kostenlose Tools entdecken',
   searchPlaceholder: '{count} Werkzeuge durchsuchen...',
   heroSearchLabel: 'Werkzeuge suchen',
@@ -1144,7 +1144,7 @@ const de: Dict = {
   footerPrivacy: 'Datenschutz',
   footerTerms: 'AGB',
   footerTagline:
-    'Kostenlose, schnelle und datenschutzfreundliche Online-Werkzeuge. Alles läuft im Browser — keine Daten verlassen dein Gerät.',
+    'Kostenlose, schnelle und datenschutzfreundliche Online-Werkzeuge. Berechnungen laufen im Browser, ohne Konto.',
   footerRights: 'Werkzeuge und es werden mehr. Alle Rechte vorbehalten.',
   footerMore: '+{count} weitere',
   statsTotalVisits: 'Besuche insgesamt',
@@ -1182,10 +1182,10 @@ const de: Dict = {
   recentSubtitle: 'Mach genau da weiter, wo du aufgehört hast',
   // Workspace 仪表盘
   workspaceEyebrow: 'Workspace / Toolhub für Entwickler & Creator',
-  workspaceStatus: '100% LOKALE COMPUTE-ENGINE · KEINE DATENPROTOKOLLE',
+  workspaceStatus: 'LOKALE COMPUTE-ENGINE · OHNE KONTO',
   workspaceBadgeEngines: '{count}+ Utility-Engines',
   workspaceBadgeInstant: 'Sofortige lokale Berechnung',
-  workspaceBadgeZeroLogs: 'Keine Server-Speicherung',
+  workspaceBadgeZeroLogs: 'Verarbeitung im Browser',
   workspaceQuickAccess: 'Schnellzugriff',
   workspacePinnedTitle: 'Angepinnte Tools',
   workspacePinnedEmpty: 'Noch nichts angepinnt — tippe auf die Pinnadel einer Tool-Karte, um sie hier abzulegen.',
@@ -1270,7 +1270,7 @@ const de: Dict = {
   cookieNecessaryOnly: 'Nur notwendige',
   // 博客索引页
   blogIndexTitle: 'Blog',
-  blogIndexSubtitle: 'Engineering-Notizen, Architektur-Deep-Dives und Build-in-Public-Updates.',
+  blogIndexSubtitle: 'Praxis-Leitfäden, nachrechenbare Beispiele, Rechner-Tutorials und Engineering-Notizen.',
   blogReadMore: 'Weiterlesen',
   blogReadTime: '{time} Lesedauer',
   blogIndexEmpty: 'Noch keine Beiträge — schau bald wieder vorbei.',
@@ -1280,7 +1280,7 @@ const de: Dict = {
   blogBannerEyebrow: 'Probier die Werkzeugkiste',
   blogBannerTitle: 'Empfohlene Tools, kostenlos und im Browser',
   blogBannerBody:
-    'Keine Anmeldung, kein Upload, kein Tracking. Alles darunter läuft komplett in deinem Tab — genau die Architektur, die dieser Beitrag beschreibt.',
+    'Keine Anmeldung — jedes Tool darunter läuft komplett in deinem Tab und verarbeitet deine Eingabe lokal. Genau die Architektur, die dieser Beitrag beschreibt.',
   blogBannerBrowse: 'Alle {count}+ Werkzeuge ansehen',
   blogBackToSite: 'Zurück zu {site}',
   blogArticleReadTime: '{count} Min. Lesezeit',
@@ -1288,7 +1288,7 @@ const de: Dict = {
   seoWhyTitle: 'Warum unsere Online-Werkzeuge nutzen?',
   seoWhyBody1: 'Die meisten Online-Tools verlangen Anmeldung, Cookie-Zustimmung oder laden deine Dateien auf einen Server, den du nicht prüfen kannst. Wir machen es anders: Jedes Werkzeug hier läuft vollständig in deinem Browser. Für dich bedeutet das drei Dinge:',
   seoWhyPrivacy: 'Datenschutz by Design.',
-  seoWhyPrivacyBody: ' Dein Text und deine Dateien verlassen nie dein Gerät. Es gibt keinen Server, der deine Eingabe verarbeitet, also gibt es nichts, was geleakt werden kann.',
+  seoWhyPrivacyBody: ' Text und Dateien werden im Browser verarbeitet. Teilbare Links können Einstellungen in die URL schreiben; teile darüber keine sensiblen Werte.',
   seoWhyInstant: 'Sofortige Ergebnisse.',
   seoWhyInstantBody: ' Kein Roundtrip zum Server bedeutet kein Warten. Werkzeuge reagieren so schnell wie du tippst.',
   seoWhyNoFriction: 'Keine Hürden.',

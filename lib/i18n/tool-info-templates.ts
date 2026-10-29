@@ -50,36 +50,36 @@ const zh: ToolInfoTemplate = {
   commonUsesLead: '需要时,大家会用它来',
   intros: {
     calculator: [
-      '{name} 可以让你瞬间算出结果,无需打开电子表格或手动计算。无论你是在做预算、核对贷款,还是做作业,工具都会在后台套用正确的公式,你一输入数字就立刻显示结果。',
-      '和静态的图表或表格不同,这个计算器会根据你的输入实时调整。你可以修改任何一个数值,立即看到结果变化——方便你对比不同方案,比如「利率再低 1% 会怎样?」或「每月多还 50 美元会怎样?」。',
+      '{name} 可以让你瞬间算出结果,无需打开电子表格或手动计算。无论你是在比较方案、核对数字,还是做作业,工具都会在后台套用正确的公式,你一输入数字就立刻显示结果。',
+      '和静态的图表或表格不同,这个计算器会根据你的输入实时调整。你可以修改任何一个数值,立即看到结果变化——方便你逐一改动输入,对比不同方案。',
     ],
     converter: [
       '{name} 使用国际标准换算系数,把单位准确从一个换算到另一个。输入数值、选择源单位和目标单位,换算结果即时显示——无需等待、无需刷新。',
       '手动换算容易出错,因为要记一堆比例(一米等于几英尺、一升等于几品脱)。这个工具消除了这种摩擦:换算系数已内置,全程全精度计算,只在最后显示时才四舍五入。',
     ],
     generator: [
-      '{name} 在浏览器中按需生成结果。设置好所需选项、点击生成,结果即可复制。由于一切都在本地运行,你输入或生成的内容都不会离开你的设备。',
+      '{name} 在浏览器中按需生成结果。设置好所需选项、点击生成,结果即可复制。生成过程完全在你的浏览器本地完成。',
       '当你需要某个特定输出(密码、UUID、二维码、占位文本),又不想安装应用或把数据交给陌生网站时,这类生成器很有用。本工具免费、无使用次数限制,手机和电脑上体验一致。',
     ],
     tool: [
-      '{name} 直接在浏览器中处理你的内容。粘贴或输入内容,工具即时处理——无需上传、无需注册、无需等待。它专为那些需要快速变换、又不想离开当前工作流的时刻而做。',
-      '由于工具在客户端运行,它又快又私密。你的文本不会经过服务器,处理敏感内容也很安全。界面键盘友好,在任何装有现代浏览器的设备上都能用。',
+      '{name} 直接在浏览器中处理你的内容。粘贴或输入内容,工具即时处理——无需注册、无需等待。它专为那些需要快速变换、又不想离开当前工作流的时刻而做。',
+      '由于工具在客户端运行,它又快又注重隐私。文本在浏览器中处理;分享链接可能把设置写进 URL。界面键盘友好,在任何装有现代浏览器的设备上都能用。',
     ],
   },
   howTos: {
     calculator: [
-      '输入计算器要求的主要数值(例如金额、利率和时间)。',
+      '输入上方表单要求的数值。',
       '在工具提供选项的地方,选择正确的单位或选项。',
-      '查看结果,它会即时显示在输入框下方。',
+      '检查单位和输入无误后,查看即时显示在输入框下方的结果。',
       '调整任意字段以测试不同方案——结果无需刷新就会更新。',
-      '复制或记下结果。工具不会保存任何数据,用完直接关闭页面即可。',
+      '复制或记下结果。计算在浏览器本地完成。',
     ],
     converter: [
       '在输入框中输入要换算的数值。',
       '选择你正在换算的源单位。',
       '选择你想换算成的目标单位。',
       '换算值即时显示。可调整任一单位来做全面对比。',
-      '如需在别处使用,复制结果即可。你的输入不会被发送到任何地方。',
+      '如需在别处使用,复制结果即可。换算在浏览器本地完成。',
     ],
     generator: [
       '设置生成器提供的选项(长度、格式、数量等)。',
@@ -97,7 +97,7 @@ const zh: ToolInfoTemplate = {
   whyIntro: '像这样的浏览器工具,相比安装软件或手动方法,有几个实在的优势:',
   whyBullets: [
     { label: '无需安装。', body: '在任何浏览器、任何操作系统上都能即时打开。' },
-    { label: '默认私密。', body: '一切在本地运行,你的数据始终留在你的设备上。' },
+    { label: '默认私密。', body: '工具在本地处理输入;分享链接可能把设置写进 URL。' },
     { label: '始终保持最新。', body: '无需更新——打开页面时你用的就是最新版本。' },
     { label: '免费且无限制。', body: '想用几次用几次,无需账号、没有上限。' },
   ],
@@ -116,36 +116,36 @@ const es: ToolInfoTemplate = {
   commonUsesLead: 'la gente recurre a esta herramienta cuando necesita',
   intros: {
     calculator: [
-      '{name} te permite calcular el resultado al instante, sin recurrir a una hoja de cálculo ni hacer la operación a mano. Ya sea que prepares un presupuesto, revises un préstamo o resuelvas deberes, la herramienta aplica la fórmula correcta en segundo plano y muestra el resultado en cuanto introduces tus cifras.',
-      'A diferencia de un gráfico o una tabla estáticos, esta calculadora se adapta a tus entradas exactas. Puedes ajustar cualquier valor y ver el resultado actualizarse en tiempo real, lo que facilita comparar escenarios —por ejemplo, «¿qué pasaría si la tasa fuera 1 % más baja?» o «¿y si pago 50 $ más al mes?».',
+      '{name} te permite calcular el resultado al instante, sin recurrir a una hoja de cálculo ni hacer la operación a mano. Ya sea que compares opciones, revises tus cifras o resuelvas deberes, la herramienta aplica la fórmula correcta en segundo plano y muestra el resultado en cuanto introduces tus números.',
+      'A diferencia de un gráfico o una tabla estáticos, esta calculadora se adapta a tus entradas exactas. Puedes ajustar cualquier valor y ver el resultado actualizarse en tiempo real, lo que facilita comparar escenarios: cambia un campo a la vez y observa cómo responde el resultado.',
     ],
     converter: [
       '{name} convierte unidades de una a otra usando los factores de conversión definidos internacionalmente. Escribe un valor, elige las unidades de origen y destino, y el resultado convertido se muestra al instante —sin esperas ni recarga.',
       'La conversión manual es propensa a errores porque obliga a memorizar razones (cuántos pies en un metro, cuántas pintas en un litro). Esta herramienta elimina esa fricción: el factor va integrado y la cuenta se hace con precisión completa, sin redondear hasta el número final.',
     ],
     generator: [
-      '{name} crea el resultado bajo demanda, directamente en tu navegador. Configura las opciones que necesites, pulsa generar y el resultado queda listo para copiar. Como todo corre en local, nada de lo que introduces o generas sale de tu dispositivo.',
+      '{name} crea el resultado bajo demanda, directamente en tu navegador. Configura las opciones que necesites, pulsa generar y el resultado queda listo para copiar. La generación ocurre localmente en tu navegador.',
       'Los generadores como este son útiles cuando necesitas una salida concreta (una contraseña, un UUID, un código QR, texto de relleno) y no quieres instalar una app ni confiar tus datos a una web desconocida. Esta herramienta es gratuita, no tiene límites de uso y funciona igual en móvil y escritorio.',
     ],
     tool: [
-      '{name} procesa tu contenido directamente en el navegador. Pega o escribe la entrada y la herramienta la procesa al instante —sin subidas, sin registro, sin esperas. Está pensada para esos momentos en que necesitas una transformación rápida sin abandonar tu flujo de trabajo.',
-      'Como la herramienta corre del lado del cliente, es rápida y privada. Tu texto nunca pasa por un servidor, lo que la hace segura también para contenido delicado. La interfaz es amigable con el teclado y funciona en cualquier dispositivo con un navegador moderno.',
+      '{name} procesa tu contenido directamente en el navegador. Pega o escribe la entrada y la herramienta la procesa al instante —sin registro y sin esperas. Está pensada para esos momentos en que necesitas una transformación rápida sin abandonar tu flujo de trabajo.',
+      'Como la herramienta corre del lado del cliente, es rápida y privada. Tu texto se procesa en tu navegador; los enlaces para compartir pueden incluir opciones en la URL. La interfaz es amigable con el teclado y funciona en cualquier dispositivo con un navegador moderno.',
     ],
   },
   howTos: {
     calculator: [
-      'Introduce los valores principales que pide la calculadora (por ejemplo, importe, tasa y plazo).',
+      'Introduce los valores que pide el formulario de arriba.',
       'Elige la unidad u opción correcta cuando la herramienta ofrezca elegir.',
-      'Lee el resultado, que aparece al instante bajo las entradas.',
+      'Comprueba las unidades y las entradas, y lee el resultado, que aparece al instante debajo.',
       'Ajusta cualquier campo para probar otro escenario: la respuesta se actualiza sin recargar.',
-      'Copia o anota el resultado. No se guarda nada, así que cierra la pestaña cuando termines.',
+      'Copia o anota el resultado. El cálculo se ejecuta localmente en tu navegador.',
     ],
     converter: [
       'Escribe el valor que quieres convertir en el campo de entrada.',
       'Selecciona la unidad de la que conviertes.',
       'Selecciona la unidad a la que quieres convertir.',
       'El valor convertido aparece al instante. Ajusta cualquiera de las unidades para comparar.',
-      'Copia el resultado si lo necesitas en otro sitio. Tu entrada nunca se envía a ningún lado.',
+      'Copia el resultado si lo necesitas en otro sitio. La conversión se ejecuta en tu navegador.',
     ],
     generator: [
       'Configura las opciones del generador (longitud, formato, cantidad, etc.).',
@@ -164,7 +164,7 @@ const es: ToolInfoTemplate = {
     'Las herramientas basadas en navegador como esta tienen ventajas reales frente al software instalado o los métodos manuales:',
   whyBullets: [
     { label: 'Sin instalación.', body: 'Se abre al instante en cualquier navegador y en cualquier sistema operativo.' },
-    { label: 'Privado por defecto.', body: 'Todo corre en local, así que tus datos se quedan en tu dispositivo.' },
+    { label: 'Privado por defecto.', body: 'Las herramientas procesan entradas localmente; los enlaces para compartir pueden incluir opciones en la URL.' },
     { label: 'Siempre actualizado.', body: 'No hay nada que actualizar: siempre obtienes la última versión al cargar la página.' },
     { label: 'Gratis e ilimitado.', body: 'Úsala tantas veces como quieras, sin cuenta y sin límites.' },
   ],
@@ -183,36 +183,36 @@ const de: ToolInfoTemplate = {
   commonUsesLead: 'zu diesem Werkzeug greifen Leute, wenn sie',
   intros: {
     calculator: [
-      '{name} liefert dir das Ergebnis sofort, ohne Tabellenkalkulation oder Kopfrechnen. Egal, ob du einen Haushaltsplan erstellst, einen Kredit prüfst oder Hausaufgaben rechnest — das Werkzeug wendet im Hintergrund die richtige Formel an und zeigt das Ergebnis, sobald du deine Zahlen eingibst.',
-      'Anders als eine statische Tabelle oder Grafik passt sich dieser Rechner an deine genauen Eingaben an. Du kannst jeden Wert ändern und siehst das Ergebnis in Echtzeit aktualisiert — praktisch, um Szenarien zu vergleichen, etwa „Was wäre, wenn der Zins 1 % niedriger wäre?“ oder „Was, wenn ich 50 $ mehr im Monat zahle?“.',
+      '{name} liefert dir das Ergebnis sofort, ohne Tabellenkalkulation oder Kopfrechnen. Egal, ob du Optionen vergleichst, deine Zahlen prüfst oder Hausaufgaben rechnest — das Werkzeug wendet im Hintergrund die richtige Formel an und zeigt das Ergebnis, sobald du deine Zahlen eingibst.',
+      'Anders als eine statische Tabelle oder Grafik passt sich dieser Rechner an deine genauen Eingaben an. Du kannst jeden Wert ändern und siehst das Ergebnis in Echtzeit aktualisiert — praktisch, um Szenarien zu vergleichen: Ändere ein Feld nach dem anderen und beobachte, wie das Ergebnis reagiert.',
     ],
     converter: [
       '{name} rechnet mit den international festgelegten Umrechnungsfaktoren von einer Einheit in eine andere. Gib einen Wert ein, wähle Quell- und Zieleinheit — das Ergebnis erscheint sofort, ohne Warten und ohne Neuladen.',
       'Manuelles Umrechnen ist fehleranfällig, weil man Verhältnisse auswendig kennen muss (wie viele Fuß auf einen Meter, wie viele Pints auf einen Liter). Dieses Werkzeug nimmt diese Hürde: Der Faktor ist eingebaut, gerechnet wird mit voller Genauigkeit, erst bei der Anzeige wird gerundet.',
     ],
     generator: [
-      '{name} erzeugt die Ausgabe auf Abruf, direkt in deinem Browser. Stell die nötigen Optionen ein, klick auf Generieren und das Ergebnis ist kopierbereit. Weil alles lokal läuft, verlässt nichts, was du eingibst oder erzeugst, dein Gerät.',
+      '{name} erzeugt die Ausgabe auf Abruf, direkt in deinem Browser. Stell die nötigen Optionen ein, klick auf Generieren und das Ergebnis ist kopierbereit. Die Erzeugung passiert lokal in deinem Browser.',
       'Generatoren wie dieser sind nützlich, wenn du eine bestimmte Ausgabe brauchst (Passwort, UUID, QR-Code, Platzhaltertext) und dafür keine App installieren oder deine Daten einer unbekannten Website anvertrauen willst. Das Werkzeug ist kostenlos, ohne Nutzungslimit und funktioniert auf Handy und Desktop gleich.',
     ],
     tool: [
-      '{name} verarbeitet deine Eingabe direkt im Browser. Füge den Text ein oder tippe ihn ein — das Werkzeug verarbeitet ihn sofort, ohne Upload, ohne Anmeldung, ohne Warten. Es ist für die Momente gebaut, in denen du eine schnelle Umwandlung brauchst, ohne deinen Workflow zu verlassen.',
-      'Weil das Werkzeug clientseitig läuft, ist es schnell und privat. Dein Text berührt keinen Server, was es auch für sensible Inhalte sicher macht. Die Oberfläche ist tastaturfreundlich und läuft auf jedem Gerät mit modernem Browser.',
+      '{name} verarbeitet deine Eingabe direkt im Browser. Füge den Text ein oder tippe ihn ein — das Werkzeug verarbeitet ihn sofort, ohne Anmeldung und ohne Warten. Es ist für die Momente gebaut, in denen du eine schnelle Umwandlung brauchst, ohne deinen Workflow zu verlassen.',
+      'Weil das Werkzeug clientseitig läuft, ist es schnell und privat. Dein Text wird im Browser verarbeitet; teilbare Links können Einstellungen in die URL schreiben. Die Oberfläche ist tastaturfreundlich und läuft auf jedem Gerät mit modernem Browser.',
     ],
   },
   howTos: {
     calculator: [
-      'Gib die Hauptwerte ein, die der Rechner verlangt (z. B. Betrag, Zins und Laufzeit).',
+      'Gib die Werte ein, die das Formular oben verlangt.',
       'Wähle bei Angebot die richtige Einheit oder Option.',
-      'Lies das Ergebnis, das sofort unter den Eingaben erscheint.',
+      'Prüfe Einheiten und Eingaben und lies das Ergebnis, das sofort darunter erscheint.',
       'Passe beliebige Felder an, um ein anderes Szenario zu testen — das Ergebnis aktualisiert sich ohne Neuladen.',
-      'Kopiere oder notiere das Ergebnis. Es wird nichts gespeichert; schließe den Tab, wenn du fertig bist.',
+      'Kopiere oder notiere das Ergebnis. Die Berechnung läuft lokal in deinem Browser.',
     ],
     converter: [
       'Gib den Wert, den du umrechnen willst, in das Eingabefeld ein.',
       'Wähle die Einheit, von der du umrechnest.',
       'Wähle die Zieleinheit, in die du umrechnen willst.',
       'Der umgerechnete Wert erscheint sofort. Passe eine der Einheiten an, um flächendeckend zu vergleichen.',
-      'Kopiere das Ergebnis, falls du es woanders brauchst. Deine Eingabe wird nirgendwo hingeschickt.',
+      'Kopiere das Ergebnis, falls du es woanders brauchst. Die Umrechnung läuft in deinem Browser.',
     ],
     generator: [
       'Stell die Optionen des Generators ein (Länge, Format, Anzahl usw.).',
@@ -231,7 +231,7 @@ const de: ToolInfoTemplate = {
     'Browserbasierte Werkzeuge wie dieses haben ein paar echte Vorteile gegenüber installierter Software oder manuellen Methoden:',
   whyBullets: [
     { label: 'Keine Installation.', body: 'Öffnet sich sofort in jedem Browser, auf jedem Betriebssystem.' },
-    { label: 'Privat von Haus aus.', body: 'Alles läuft lokal, deine Daten bleiben auf deinem Gerät.' },
+    { label: 'Privat von Haus aus.', body: 'Werkzeuge verarbeiten Eingaben lokal; teilbare Links können Einstellungen in die URL schreiben.' },
     { label: 'Immer aktuell.', body: 'Es gibt nichts zu aktualisieren — beim Laden der Seite hast du immer die neueste Version.' },
     { label: 'Kostenlos und unbegrenzt.', body: 'Nutze es so oft du willst, ohne Konto und ohne Limits.' },
   ],

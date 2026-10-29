@@ -58,9 +58,9 @@ const en: ReactNode = (
       more secure than <code>Math.random()</code>, which is predictable and unsafe for passwords.
     </p>
     <p>
-      Even better: the password is generated entirely in your browser and is never transmitted
-      anywhere. There is no server log, no database, and no tracking. Once you copy it, it lives
-      only on your clipboard.
+      Even better: the password is generated entirely in your browser — neither it nor the options
+      you choose are uploaded to our servers. Once you copy it, it stays in your clipboard (and
+      possibly your clipboard manager&apos;s history) until something else replaces it.
     </p>
 
     <h2>Understanding Password Strength Scores</h2>
@@ -131,7 +131,7 @@ const zh: ReactNode = (
       本工具使用 <code>Web Crypto API</code>(<code>crypto.getRandomValues</code>),从你的操作系统的密码学安全随机数生成器中获取随机性。这与银行和安全软件使用的标准相同。它远比 <code>Math.random()</code> 安全——后者是可预测的,不适合用于密码。
     </p>
     <p>
-      更棒的是:密码完全在你的浏览器中生成,绝不会传输到任何地方。没有服务器日志、没有数据库、没有跟踪。一旦你复制了它,它只存在于你的剪贴板上。
+      更棒的是:密码完全在你的浏览器中生成——它和你选择的选项都不会上传到我们的服务器。复制之后,它会留在剪贴板(以及剪贴板管理器的历史)里,直到被其他内容覆盖。
     </p>
 
     <h2>理解密码强度评分</h2>
@@ -205,8 +205,9 @@ const es: ReactNode = (
       es predecible e inseguro para contraseñas.
     </p>
     <p>
-      Mejor aún: la contraseña se genera por completo en tu navegador y nunca se transmite a ningún sitio. No hay
-      registros del servidor, ni base de datos, ni rastreo. Una vez que la copias, vive solo en tu portapapeles.
+      Mejor aún: la contraseña se genera por completo en tu navegador — ni ella ni las opciones que
+      eliges se suben a nuestros servidores. Una vez copiada, queda en tu portapapeles (y posiblemente
+      en el historial de tu gestor de portapapeles) hasta que otra cosa la sustituya.
     </p>
 
     <h2>Entender las puntuaciones de fuerza</h2>
@@ -285,8 +286,9 @@ const de: ReactNode = (
       vorhersagbar und für Passwörter ungeeignet ist.
     </p>
     <p>
-      Noch besser: Das Passwort wird vollständig in deinem Browser erzeugt und nirgendwohin übertragen. Es gibt kein
-      Server-Log, keine Datenbank, kein Tracking. Sobald du es kopierst, existiert es nur in deiner Zwischenablage.
+      Noch besser: Das Passwort wird vollständig in deinem Browser erzeugt — weder es noch die
+      gewählten Optionen werden auf unsere Server hochgeladen. Nach dem Kopieren bleibt es in der
+      Zwischenablage (und eventuell im Verlauf deines Clipboard-Managers), bis es etwas anderes ersetzt.
     </p>
 
     <h2>Die Stärkebewertungen verstehen</h2>

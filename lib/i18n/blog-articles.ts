@@ -92,7 +92,8 @@ async function staleWhileRevalidate(request) {
 
 const CODE_AD = `// components/AdSlot.tsx(简化版)
 <div
-  data-ad-slot={slot}
+  data-placement={placement}
+  data-ad-slot={adSlotId}
   className="min-h-[250px] w-full rounded-xl
              border border-dashed
              bg-slate-100/50 dark:bg-slate-900/30"
@@ -127,7 +128,8 @@ async function staleWhileRevalidate(request) {
 
 const CODE_AD_EN = `// components/AdSlot.tsx (simplified)
 <div
-  data-ad-slot={slot}
+  data-placement={placement}
+  data-ad-slot={adSlotId}
   className="min-h-[250px] w-full rounded-xl
              border border-dashed
              bg-slate-100/50 dark:bg-slate-900/30"
@@ -139,16 +141,23 @@ const CODE_AD_EN = `// components/AdSlot.tsx (simplified)
 // 《How I Built ToolHub》正文
 // ─────────────────────────────────────────────────────────────────────────────
 // ── 标题类字段英文原值(articleTitle 三语已回填;breadcrumbTitle 暂以 en 值占位)──
-const EN_TITLE = 'How I Built ToolHub: A 169-Tool Static PWA That Stays Sub-Second'
+const EN_TITLE = 'How I Built ToolHub: A Static PWA That Stays Sub-Second'
 const EN_CRUMB_TITLE = 'How I Built ToolHub'
 
 export const howIBuiltToolHubArticle: LocalizedArticle = {
   en: {
-    articleTitle: { en: EN_TITLE, zh: '我是如何打造 ToolHub 的:169 个工具的静态 PWA,加载始终亚秒级', es: 'Cómo construí ToolHub: una PWA estática de 169 herramientas con cargas siempre sub-segundo', de: 'Wie ich ToolHub gebaut habe: eine statische PWA mit 169 Werkzeugen, deren Ladezeit unter einer Sekunde bleibt' },
+    articleTitle: { en: EN_TITLE, zh: '我是如何打造 ToolHub 的:始终亚秒级的静态 PWA', es: 'Cómo construí ToolHub: una PWA estática que sigue siendo sub-segundo', de: 'Wie ich ToolHub gebaut habe: eine statische PWA, die unter einer Sekunde bleibt' },
     breadcrumbTitle: { en: EN_CRUMB_TITLE, zh: EN_CRUMB_TITLE, es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
     readMinutes: 9,
-    lead: 'A no-bullshit retrospective on shipping a Next.js static export of 169 in-browser tools — the architecture, the pSEO engine, the zero-CLS ad story, and what I would do differently.',
+    lead: 'A retrospective on the original architecture, with a current project log covering 350 tools, structured data, advertising, and privacy.',
     sections: [
+      {
+        heading: 'Project log — October 29, 2026',
+        blocks: [
+          'This article was originally published with **169 tools and 676 tool-level structured-data blocks**. ToolHub now has **350 tools across 15 categories**, four interface languages, and **1,400 tool-level JSON-LD blocks (350 × 4)**. The 169/676 figures below are preserved as the August 2026 historical snapshot, not presented as the current count.',
+          'The implementation has also evolved: result cards show final values without animation intermediates, synthetic ratings have been removed, ad units require real numeric IDs, and the privacy policy distinguishes local computation from values placed in shareable URLs. Reserving ad space reduces layout shift; it is not a guarantee of measured zero CLS in every scenario.',
+        ],
+      },
       {
         heading: '1. The Problem: Modern Web Tools Are Quietly Broken',
         blocks: [
@@ -166,7 +175,7 @@ export const howIBuiltToolHubArticle: LocalizedArticle = {
             card: {
               title: 'JSON Formatter',
               href: '/tools/json-formatter/',
-              desc: 'Beautify and validate JSON entirely in your tab — no backend, no tracking, nothing leaves your device.',
+              desc: 'Beautify and validate JSON with local browser processing and no backend calculation API.',
             },
           },
           {
@@ -271,7 +280,7 @@ export const howIBuiltToolHubArticle: LocalizedArticle = {
               '**A Service Worker is a caching layer, not a framework.** Under 200 lines of vanilla JS gave me offline support + SWR across 169 pages. No `workbox`, no abstraction.',
               '**pSEO is a data model, not a content farm.** One config file → 676+ structured-data blocks + an automatic internal-link mesh. The schema and the visible page share one source of truth, so they can never disagree.',
               '**Reserve ad space always.** Zero-CLS is not a polish task; it\'s a 1-component architectural decision that pays off in UX, CWV, and ad review.',
-              '**Privacy is an architecture, not a promise.** "Your data never leaves the device" is a true statement here only because the tools literally have no backend to send it to.',
+              '**Privacy needs precise boundaries.** Calculations run locally, but shareable URLs can expose settings in request logs and analytics, so sensitive values do not belong in a shared link.',
             ],
           },
           { heading: 'Open metrics (as of this post)' },
@@ -291,11 +300,18 @@ export const howIBuiltToolHubArticle: LocalizedArticle = {
   },
 
   zh: {
-    articleTitle: { en: EN_TITLE, zh: '我是如何打造 ToolHub 的:169 个工具的静态 PWA,加载始终亚秒级', es: 'Cómo construí ToolHub: una PWA estática de 169 herramientas con cargas siempre sub-segundo', de: 'Wie ich ToolHub gebaut habe: eine statische PWA mit 169 Werkzeugen, deren Ladezeit unter einer Sekunde bleibt' },
+    articleTitle: { en: EN_TITLE, zh: '我是如何打造 ToolHub 的:始终亚秒级的静态 PWA', es: 'Cómo construí ToolHub: una PWA estática que sigue siendo sub-segundo', de: 'Wie ich ToolHub gebaut habe: eine statische PWA, die unter einer Sekunde bleibt' },
     breadcrumbTitle: { en: EN_CRUMB_TITLE, zh: EN_CRUMB_TITLE, es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
     readMinutes: 9,
-    lead: '一篇不绕弯子的复盘:用 Next.js 静态导出做出 169 个浏览器内工具 —— 聊架构、pSEO 引擎、零 CLS 的广告方案,以及我会重做的部分。',
+    lead: '一篇关于原始架构的复盘,并补充当前 350 个工具、结构化数据、广告与隐私口径的项目日志。',
     sections: [
+      {
+        heading: '项目日志 —— 2026 年 10 月 29 日',
+        blocks: [
+          '本文最初发布时,站点有 **169 个工具和 676 个工具级结构化数据块**。现在 ToolHub 有 **15 个分类、350 个工具**、4 种界面语言,以及 **1,400 个工具级 JSON-LD 块(350 × 4)**。下文中的 169/676 保留为 2026 年 8 月的历史快照,不再代表当前数量。',
+          '实现也已演进:结果卡直接显示终值、合成评分已移除、广告单元要求真实数字 ID,隐私政策则区分本地计算与分享 URL 中的参数。预留广告空间可以减少布局偏移,但不等于承诺所有场景实测 CLS 都为零。',
+        ],
+      },
       {
         heading: '1. 问题:现代在线工具其实都坏得悄无声息',
         blocks: [
@@ -313,7 +329,7 @@ export const howIBuiltToolHubArticle: LocalizedArticle = {
             card: {
               title: 'JSON 格式化器',
               href: '/tools/json-formatter/',
-              desc: '格式化与校验全部在标签页内完成——无后端、无追踪,数据不出设备。',
+              desc: '在浏览器本地格式化和校验 JSON,无需后端计算 API。',
             },
           },
           {
@@ -418,7 +434,7 @@ export const howIBuiltToolHubArticle: LocalizedArticle = {
               '**Service Worker 是缓存层,不是框架。** 不到 200 行原生 JS 就给了我跨 169 页的离线 + SWR。不用 `workbox`,不做抽象。',
               '**pSEO 是数据模型,不是内容农场。** 一个配置文件 → 676+ 结构化数据块 + 自动内链网。schema 和可见页共享同一事实源,所以永远不会产生分歧。',
               '**永远预留广告空间。** 零 CLS 不是打磨任务,而是一个组件级的架构决策,在 UX、CWV、广告审核三处都回报。',
-              '**隐私是架构,不是承诺。** "你的数据永不离开设备"在这里是句真话,仅仅是因为这些工具压根没有可发送的后端。',
+              '**隐私需要精确边界。** 计算在本地进行,但分享 URL 可能把设置暴露给请求日志和分析服务,因此敏感数值不应放进分享链接。',
             ],
           },
           { heading: '公开指标(截至本文发布时)' },
@@ -438,11 +454,18 @@ export const howIBuiltToolHubArticle: LocalizedArticle = {
   },
 
   es: {
-    articleTitle: { en: EN_TITLE, zh: '我是如何打造 ToolHub 的:169 个工具的静态 PWA,加载始终亚秒级', es: 'Cómo construí ToolHub: una PWA estática de 169 herramientas con cargas siempre sub-segundo', de: 'Wie ich ToolHub gebaut habe: eine statische PWA mit 169 Werkzeugen, deren Ladezeit unter einer Sekunde bleibt' },
+    articleTitle: { en: EN_TITLE, zh: '我是如何打造 ToolHub 的:始终亚秒级的静态 PWA', es: 'Cómo construí ToolHub: una PWA estática que sigue siendo sub-segundo', de: 'Wie ich ToolHub gebaut habe: eine statische PWA, die unter einer Sekunde bleibt' },
     breadcrumbTitle: { en: EN_CRUMB_TITLE, zh: EN_CRUMB_TITLE, es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
     readMinutes: 9,
-    lead: 'Una retrospectiva sin rodeos sobre haber publicado una exportación estática de Next.js con 169 herramientas en el navegador — la arquitectura, el motor de pSEO, la historia de anuncios sin CLS y qué haría distinto.',
+    lead: 'Una retrospectiva de la arquitectura original, con un registro actualizado sobre 350 herramientas, datos estructurados, publicidad y privacidad.',
     sections: [
+      {
+        heading: 'Registro del proyecto — 29 de octubre de 2026',
+        blocks: [
+          'El artículo se publicó originalmente con **169 herramientas y 676 bloques de datos estructurados**. Ahora ToolHub tiene **350 herramientas en 15 categorías**, cuatro idiomas y **1.400 bloques JSON-LD de herramientas (350 × 4)**. Las cifras 169/676 se conservan como la instantánea histórica de agosto de 2026, no como el recuento actual.',
+          'La implementación también ha cambiado: los resultados muestran valores finales sin interpolaciones, las valoraciones sintéticas se han eliminado, los anuncios exigen IDs numéricos reales y la privacidad distingue el cálculo local de los valores en URLs compartidas. Reservar espacio publicitario reduce el desplazamiento; no garantiza un CLS cero medido en todos los casos.',
+        ],
+      },
       {
         heading: '1. El problema: las herramientas web modernas están rotas en silencio',
         blocks: [
@@ -460,7 +483,7 @@ export const howIBuiltToolHubArticle: LocalizedArticle = {
             card: {
               title: 'Formateador JSON',
               href: '/tools/json-formatter/',
-              desc: 'Embellece y valida JSON por completo en tu pestaña — sin backend, sin rastreo, nada sale de tu dispositivo.',
+              desc: 'Formatea y valida JSON con procesamiento local y sin API de cálculo remota.',
             },
           },
           {
@@ -565,7 +588,7 @@ export const howIBuiltToolHubArticle: LocalizedArticle = {
               '**Un Service Worker es una capa de caché, no un framework.** Menos de 200 líneas de JS plano me dieron offline + SWR en 169 páginas. Sin `workbox`, sin abstracción.',
               '**pSEO es un modelo de datos, no una granja de contenido.** Un archivo de configuración → 676+ bloques estructurados + una malla de enlaces internos automática. El schema y la página visible comparten una sola fuente de verdad, así nunca pueden discrepar.',
               '**Reserva siempre el espacio de anuncios.** Cero CLS no es tarea de pulido; es una decisión arquitectónica de un componente que se paga en UX, CWV y revisión de anuncios.',
-              '**La privacidad es una arquitectura, no una promesa.** "Tus datos nunca salen del dispositivo" es cierto aquí solo porque las herramientas literalmente no tienen backend al que enviarlos.',
+              '**La privacidad necesita límites precisos.** Los cálculos son locales, pero las URLs compartidas pueden exponer opciones en registros y analítica; no incluyas valores sensibles en un enlace.',
             ],
           },
           { heading: 'Métricas abiertas (al publicar este post)' },
@@ -585,11 +608,18 @@ export const howIBuiltToolHubArticle: LocalizedArticle = {
   },
 
   de: {
-    articleTitle: { en: EN_TITLE, zh: '我是如何打造 ToolHub 的:169 个工具的静态 PWA,加载始终亚秒级', es: 'Cómo construí ToolHub: una PWA estática de 169 herramientas con cargas siempre sub-segundo', de: 'Wie ich ToolHub gebaut habe: eine statische PWA mit 169 Werkzeugen, deren Ladezeit unter einer Sekunde bleibt' },
+    articleTitle: { en: EN_TITLE, zh: '我是如何打造 ToolHub 的:始终亚秒级的静态 PWA', es: 'Cómo construí ToolHub: una PWA estática que sigue siendo sub-segundo', de: 'Wie ich ToolHub gebaut habe: eine statische PWA, die unter einer Sekunde bleibt' },
     breadcrumbTitle: { en: EN_CRUMB_TITLE, zh: EN_CRUMB_TITLE, es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
     readMinutes: 9,
-    lead: 'Ein ungeschönter Rückblick darauf, wie ich einen statischen Next.js-Export mit 169 In-Browser-Werkzeugen veröffentlicht habe — Architektur, die pSEO-Engine, die Zero-CLS-Werbegeschichte und was ich anders machen würde.',
+    lead: 'Ein Rückblick auf die ursprüngliche Architektur, ergänzt um ein aktuelles Projektprotokoll zu 350 Werkzeugen, strukturierten Daten, Werbung und Datenschutz.',
     sections: [
+      {
+        heading: 'Projektprotokoll — 29. Oktober 2026',
+        blocks: [
+          'Der Artikel erschien ursprünglich mit **169 Werkzeugen und 676 strukturierten Datenblöcken**. ToolHub umfasst jetzt **350 Werkzeuge in 15 Kategorien**, vier Sprachen und **1.400 JSON-LD-Blöcke auf Werkzeugebene (350 × 4)**. Die Werte 169/676 bleiben als historischer Stand vom August 2026 erhalten und sind nicht die aktuelle Zahl.',
+          'Die Implementierung hat sich ebenfalls weiterentwickelt: Ergebniskarten zeigen Endwerte ohne Zwischenanimation, synthetische Bewertungen wurden entfernt, Werbung verlangt echte numerische IDs, und die Datenschutzerklärung trennt lokale Berechnung von Werten in teilbaren URLs. Reservierter Werbeplatz reduziert Layoutverschiebungen, garantiert aber nicht in jedem Szenario einen gemessenen CLS-Wert von null.',
+        ],
+      },
       {
         heading: '1. Das Problem: Moderne Web-Werkzeuge sind leise kaputt',
         blocks: [
@@ -607,7 +637,7 @@ export const howIBuiltToolHubArticle: LocalizedArticle = {
             card: {
               title: 'JSON-Formatter',
               href: '/tools/json-formatter/',
-              desc: 'JSON vollständig im Tab formatieren und validieren — kein Backend, kein Tracking, nichts verlässt dein Gerät.',
+              desc: 'JSON mit lokaler Browser-Verarbeitung formatieren und validieren — ohne Remote-Rechen-API.',
             },
           },
           {
@@ -712,7 +742,7 @@ export const howIBuiltToolHubArticle: LocalizedArticle = {
               '**Ein Service Worker ist eine Caching-Schicht, kein Framework.** Unter 200 Zeilen Vanilla-JS haben mir Offline-Support + SWR über 169 Seiten gegeben. Kein `workbox`, keine Abstraktion.',
               '**pSEO ist ein Datenmodell, keine Content-Farm.** Eine Config-Datei → 676+ strukturierte Datenblöcke + ein automatisches Internal-Link-Mesh. Schema und sichtbare Seite teilen sich eine Source of Truth, also können sie nie uneinig sein.',
               '**Reserviere Ad-Space immer.** Zero-CLS ist keine Polier-Aufgabe; es ist eine 1-Komponenten-Architekturentscheidung, die sich in UX, CWV und Ad-Review auszahlt.',
-              '**Datenschutz ist Architektur, kein Versprechen.** „Deine Daten verlassen nie das Gerät“ stimmt hier nur, weil die Werkzeuge buchstäblich kein Backend haben, an das sie etwas senden könnten.',
+              '**Datenschutz braucht präzise Grenzen.** Berechnungen laufen lokal, aber teilbare URLs können Einstellungen in Logs und Analysen offenlegen; sensible Werte gehören nicht in einen geteilten Link.',
             ],
           },
           { heading: 'Offene Metriken (zum Zeitpunkt dieses Posts)' },

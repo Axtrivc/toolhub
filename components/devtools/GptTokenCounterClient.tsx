@@ -32,6 +32,10 @@ Remember: real billing uses the provider's exact tokenizer (o200k_base for GPT-4
 // 模型价格集中管理在 lib/model-pricing.ts（数据源 tokencost.app，最后核对 2026-08-14）
 const MODELS: ModelPrice[] = MODEL_PRICES
 
+/** 默认模型:显式常量固定,初始化与找不到选中项时的 fallback 都用它 ——
+    不再隐式依赖价格表首项,表内重排/删首项不会静默改变默认选择 */
+const DEFAULT_MODEL_ID = 'gpt-5.6-sol'
+
 const CJK_RE = /[\u3040-\u30ff\u3400-\u4dbf\u4e00-\u9fff\uf900-\ufaff\uac00-\ud7af]/g
 
 // 大文本防线:token/词统计要在每次输入上做多趟正则扫描并分配大量子串,
@@ -63,7 +67,7 @@ export function GptTokenCounterClient() {
   const L = (key: string, fb: string) => tui('gpt-token-counter', locale, key, fb)
 
   const [text, setText] = useState(SAMPLE_TEXT)
-  const [modelId, setModelId] = useState(MODELS[0].id)
+  const [modelId, setModelId] = useState(DEFAULT_MODEL_ID)
   const [outputTokens, setOutputTokens] = useState('0')
 
   // 超长输入截断:只统计前 MAX_INPUT_LEN 字符(计数器对前缀有代表性)
@@ -80,7 +84,8 @@ export function GptTokenCounterClient() {
     return { chars, charsNoSpaces, words, sentences, tokens }
   }, [safeText])
 
-  const model = MODELS.find((m) => m.id === modelId) ?? MODELS[0]
+  // 选中项不在表内 → 回退默认模型;默认模型本身也不在表内(理论防御)→ 首项兜底
+  const model = MODELS.find((m) => m.id === modelId) ?? MODELS.find((m) => m.id === DEFAULT_MODEL_ID) ?? MODELS[0]
   const inputCost = (stats.tokens / 1_000_000) * model.inputPer1M
   const outputTok = Math.max(0, Math.floor(Number(outputTokens) || 0))
   const outputCost = (outputTok / 1_000_000) * model.outputPer1M
