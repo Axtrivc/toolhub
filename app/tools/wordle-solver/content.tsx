@@ -54,6 +54,8 @@ const en: ReactNode = (
         dictionary for the session, in both modes.
       </p>
     </div>
+    <h2>Counts are not guess history</h2>
+    <p>A green A and one yellow A require at least two As: ADAPT can match, but ALONE cannot. Enter only the additional misplaced copies in yellow; do not add the same occurrence again after each guess. Yellow positions are not recorded by this simplified filter, so manually reject candidates that reuse a known yellow position. The bundled dictionary is not an official answer list or a guarantee of today’s answer.</p>
   </section>
 )
 
@@ -85,6 +87,8 @@ const zh: ReactNode = (
         切换到<strong>易位构词模式</strong>,输入 3–10 个字母,即可找出词典中所有能由这些字母拼出的单词:长度不超过输入的字母数,按长度从长到短排序,且同一字母的使用次数不会超过你输入的份数。非常适合 Scrabble 类谜题。如果某个有效词不在内置列表中,把你的词(每行一个或用空格分隔)粘贴到<em>额外词汇</em>中,它们就会加入本次会话的词典,两种模式下都生效。
       </p>
     </div>
+    <h2>次数不等于猜测历史</h2>
+    <p>一个绿色 A 加一个黄色 A 表示至少两个 A：ADAPT 可以匹配，ALONE 不可以。黄色只填写额外的错位字母，不要在每轮猜测后重复累计同一个字母。此简化筛选器不记录黄色位置，请自行排除仍把字母放在已知错误位置的候选词。内置词库不是官方答案表，也不能保证包含今日答案。</p>
   </section>
 )
 
@@ -134,6 +138,8 @@ const es: ReactNode = (
         <em>palabras extra</em> y se añadirán al diccionario durante la sesión, en ambos modos.
       </p>
     </div>
+    <h2>Las cantidades no son el historial</h2>
+    <p>Una A verde y una A amarilla exigen al menos dos aes: ADAPT puede coincidir, ALONE no. Introduce en amarillo solo las copias adicionales mal ubicadas, sin acumular la misma aparición en cada intento. Este filtro no registra posiciones amarillas: descarta manualmente las coincidencias en posiciones ya excluidas. El diccionario no es la lista oficial de respuestas.</p>
   </section>
 )
 
@@ -183,6 +189,8 @@ const de: ReactNode = (
         <em>zusätzliche Wörter</em> ein — sie kommen dann in beiden Modi für die Sitzung zum Wörterbuch hinzu.
       </p>
     </div>
+    <h2>Anzahl ist kein Rateverlauf</h2>
+    <p>Ein grünes A und ein gelbes A erfordern mindestens zwei A: ADAPT passt, ALONE nicht. Gelb erfasst nur zusätzliche falsch platzierte Buchstaben; dieselbe Fundstelle nicht nach jedem Versuch erneut zählen. Dieser Filter speichert keine gelben Positionen; solche Treffer bitte manuell ausschließen. Das Wörterbuch ist keine offizielle Antwortliste.</p>
   </section>
 )
 

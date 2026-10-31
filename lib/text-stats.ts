@@ -28,7 +28,7 @@ export function countWords(text: string): number {
   const latinTokens = trimmed
     .replace(CJK_RE, ' ')
     .split(/\s+/)
-    .filter(Boolean)
+    .filter((token) => /[\p{L}\p{N}]/u.test(token))
   return cjkCount + latinTokens.length
 }
 
@@ -37,9 +37,7 @@ export function countWords(text: string): number {
 export function countSentences(text: string): number {
   const trimmed = text.replace(/(\d)\.(\d)/g, '$1$2').trim()
   if (!trimmed) return 0
-  const matches = trimmed.match(/[^.!?。！？…]+[.!?。！？…]+/g)
-  if (matches && matches.length > 0) return matches.length
-  return 1
+  return trimmed.split(/[.!?。！？…]+/).filter((part) => /[\p{L}\p{N}]/u.test(part)).length
 }
 
 /**

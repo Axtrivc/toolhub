@@ -96,6 +96,8 @@ const en: ReactNode = (
         phrases, adverbs, and repetition. Cutting usually improves the writing.
       </li>
     </ol>
+    <h2>Reproducible counting examples</h2>
+    <p>Hello — world! counts as 2 words; 你好，世界！ counts as 4 CJK characters. Standalone punctuation and emoji are not words. One sentence. Another unfinished counts as 2 sentence segments. These are transparent heuristics, not linguistic segmentation: abbreviations and mixed writing systems can differ from a word processor. Character counts use Unicode code points, so a joined emoji can contain multiple characters.</p>
   </section>
 )
 
@@ -171,6 +173,8 @@ const zh: ReactNode = (
         <strong>果断删改。</strong>如果超出限制,寻找冗余的短语、副词和重复。删减通常能改善文章。
       </li>
     </ol>
+    <h2>可复现的统计示例</h2>
+    <p>Hello — world! 计为 2 个词；你好，世界！计为 4 个中日韩字符。独立标点和 emoji 不计为词。One sentence. Another unfinished 计为 2 个句段。这里采用启发式规则，不是语言学分词，缩写和混合文字可能与文字处理软件不同。字符数按 Unicode 码点计算，组合 emoji 可能包含多个字符。</p>
   </section>
 )
 
@@ -267,6 +271,8 @@ const es: ReactNode = (
         redundantes, adverbios y repeticiones. Recortar suele mejorar la escritura.
       </li>
     </ol>
+    <h2>Ejemplos reproducibles</h2>
+    <p>Hello — world! cuenta como 2 palabras; 你好，世界！ como 4 caracteres CJK. La puntuación aislada y los emoji no son palabras. One sentence. Another unfinished cuenta como 2 segmentos. Son reglas heurísticas: abreviaturas y escrituras mixtas pueden diferir de un procesador de textos. Los caracteres se cuentan por puntos de código Unicode; un emoji combinado puede incluir varios.</p>
   </section>
 )
 
@@ -365,6 +371,8 @@ const de: ReactNode = (
         nach redundanten Phrasen, Adverbien und Wiederholungen. Kürzen verbessert den Text meistens.
       </li>
     </ol>
+    <h2>Nachvollziehbare Zählbeispiele</h2>
+    <p>Hello — world! zählt als 2 Wörter; 你好，世界！ als 4 CJK-Zeichen. Einzelne Satzzeichen und Emoji sind keine Wörter. One sentence. Another unfinished zählt als 2 Satzsegmente. Das sind heuristische Regeln; Abkürzungen und gemischte Schriften können von Textprogrammen abweichen. Zeichen werden als Unicode-Codepunkte gezählt; ein zusammengesetztes Emoji kann mehrere enthalten.</p>
   </section>
 )
 

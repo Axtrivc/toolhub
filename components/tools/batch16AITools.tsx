@@ -7,6 +7,8 @@ import { CopyButton } from '@/components/CopyButton'
 import { useApp } from '@/components/providers/AppProviders'
 import { tui } from '@/lib/i18n/tool-l10n-accessors/tools/batch16AITools'
 import { getCalculatorSample } from '@/lib/tool-samples'
+import { repairJson } from '@/lib/json-repair'
+export { repairJson } from '@/lib/json-repair'
 
 /**
  * 第十六批:AI 工作流工具(2025-08 第四轮扩张)
@@ -32,131 +34,6 @@ const REPAIR_LOG_KEYS: Record<string, string> = {
   'Converted single-quoted strings to double quotes': 'logSingleQuotes',
   'Removed trailing commas': 'logTrailingCommas',
   'Closed truncated brackets/strings': 'logClosed',
-}
-
-/** 修复启发式管线:每步记录日志;先纯字符级,再截断补全,最后 parse 验证 */
-export function repairJson(input: string): { output: string; log: string[]; ok: boolean } {
-  const log: string[] = []
-  let s = input
-
-  // 0) 已是合法 JSON:直接格式化返回,不再过启发式。否则两处误伤:
-  //    字符串值里的单词 undefined 被静默改写成 null(数据损坏);两个
-  //    撇号被单引号转换吞掉,合法负载反而报「无法解析」。合法输入必须原样通过。
-  try {
-    return { output: JSON.stringify(JSON.parse(s), null, 2), log, ok: true }
-  } catch { /* 继续修复管线 */ }
-
-  // 1) 剥离 markdown 围栏(```json ... ``` 或 ``` ... ```)
-  const fence = /^\s*```[a-zA-Z]*\s*\n([\s\S]*?)\n?```\s*$/g.exec(s)
-  if (fence) {
-    s = fence[1]
-    log.push('Stripped markdown code fences')
-  }
-
-  // 2) 去首尾无关文本:截取第一个 { 或 [ 到最后一个 } 或 ]
-  const firstObj = s.search(/[{[]/)
-  const lastObj = Math.max(s.lastIndexOf('}'), s.lastIndexOf(']'))
-  if (firstObj > 0 || (lastObj >= 0 && lastObj < s.length - 1)) {
-    // 全文无任何闭合括号:带前导文本的截断输出,slice 到 -1+1=0 会把内容
-    // 清空。保留到末尾,交给第 9 步栈式补全收尾。
-    s = lastObj === -1 ? s.slice(firstObj) : s.slice(firstObj, lastObj + 1)
-    log.push('Trimmed text outside the outermost { } or [ ]')
-  }
-
-  // 3) 智能引号 → 直引号
-  if (/[\u201c\u201d\u201e\u00ab\u00bb]/.test(s)) {
-    s = s.replace(/[\u201c\u201d\u201e\u00ab\u00bb]/g, '"')
-    log.push('Converted smart quotes to straight quotes')
-  }
-
-  // 4) 控制字符(保留 \n \r \t)
-  if (/[\x00-\x08\x0b\x0c\x0e-\x1f]/.test(s)) {
-    s = s.replace(/[\x00-\x08\x0b\x0c\x0e-\x1f]/g, '')
-    log.push('Removed control characters')
-  }
-
-  // 5) 未加引号的键:{ foo: 1 } → { "foo": 1 }
-  const unquotedKeys = /([{,]\s*)([A-Za-z_$][\w$]*)(\s*:)/g
-  if (unquotedKeys.test(s)) {
-    s = s.replace(unquotedKeys, '$1"$2"$3')
-    log.push('Quoted bare object keys')
-  }
-
-  // 6) 单引号字符串 → 双引号
-  const singleRe = /'(?:[^'\n]|\\.)*'/
-  if (singleRe.test(s)) {
-    s = s.replace(new RegExp(singleRe.source, 'g'), (m) => '"' + m.slice(1, -1).replace(/"/g, '\"') + '"')
-    log.push("Converted single-quoted strings to double quotes")
-  }
-
-  // 7) 尾逗号:, } 或 ,] 前(含空白)
-  const trailing = /,\s*([}\]])/g
-  if (trailing.test(s)) {
-    s = s.replace(trailing, '$1')
-    log.push('Removed trailing commas')
-  }
-
-  // 8) JS 字面量 → JSON
-  if (/\bundefined\b/.test(s)) { s = s.replace(/\bundefined\b/g, 'null'); log.push('undefined → null') }
-  if (/:\s*NaN/.test(s)) { s = s.replace(/:\s*NaN/g, ': 0'); log.push('NaN → 0') }
-  if (/:\s*-?Infinity/.test(s)) { s = s.replace(/:\s*-?Infinity/g, ': 0'); log.push('Infinity → 0') }
-
-  // 9) 截断补全:栈式扫描字符串外的未闭合括号,同时关掉未终结的字符串
-  try {
-    JSON.parse(s)
-  } catch {
-    const closed = closeTruncated(s)
-    if (closed !== s) {
-      s = closed
-      log.push('Closed truncated brackets/strings')
-    }
-  }
-
-  try {
-    const parsed = JSON.parse(s)
-    return { output: JSON.stringify(parsed, null, 2), log, ok: true }
-  } catch (e) {
-    return { output: '', log: [...log, (e as Error).message], ok: false }
-  }
-}
-
-/** 扫描字符串感知的括号栈,补齐截断尾部。
- *  对「错位闭合」做容忍:占位示例 `{ "name": "Ada", tags: ['math',}` 里 } 试图闭合 [
- *  ——旧实现直接弹栈,末尾补全出一对错乱括号,连 UI 占位提示都修不好。
- *  现改为按类型匹配才弹栈,错位闭合符丢弃,最后按剩余开括号逐层补全。 */
-function closeTruncated(s: string): string {
-  const stack: string[] = []
-  let out = ''
-  let inStr = false
-  let esc = false
-  for (let i = 0; i < s.length; i++) {
-    const c = s[i]
-    if (inStr) {
-      out += c
-      if (esc) esc = false
-      else if (c === '\\') esc = true
-      else if (c === '"') inStr = false
-      continue
-    }
-    if (c === '"') { inStr = true; out += c; continue }
-    if (c === '{' || c === '[') { stack.push(c); out += c; continue }
-    if (c === '}' || c === ']') {
-      const want = stack[stack.length - 1]
-      if ((c === '}' && want === '{') || (c === ']' && want === '[')) {
-        stack.pop()
-        out += c
-        continue
-      }
-      continue // 错位闭合:结构上视为手误的闭合符,丢弃
-    }
-    out += c
-  }
-  if (inStr) { out += '"' }
-  out = out.replace(/[,:\s]+$/, '')
-  while (stack.length) {
-    out += stack.pop() === '{' ? '}' : ']'
-  }
-  return out
 }
 
 export function JsonRepairClient() {

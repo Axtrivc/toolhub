@@ -3,7 +3,7 @@
 import { useState, useMemo, useCallback } from 'react'
 import { useApp } from '@/components/providers/AppProviders'
 import { tui } from '@/lib/i18n/tool-l10n-accessors/tools/WordCounterClient'
-import { countWords, hasCJK } from '@/lib/text-stats'
+import { countWords, countSentences, hasCJK } from '@/lib/text-stats'
 import { LoadSampleButton } from '@/components/LoadSampleButton'
 import { CopyButton } from '@/components/CopyButton'
 
@@ -29,16 +29,8 @@ function analyzeText(text: string): TextStats {
   // 单词数:统一走 lib/text-stats 的混合口径(CJK 按字计、西文按空白分词)
   const words = countWords(trimmed)
 
-  // 句子数:按西文 . ! ? 和 CJK 句末标点 。！？(全角)分割,过滤空串。
-  // 断句前先抹掉小数点(3.14→314,与 lib/text-stats.countSentences 同一口径),
-  // 避免 "Pi is 3.14." 被计成 2 句、且与本站阅读时长工具的句数互相矛盾。
-  const normDecimal = trimmed ? trimmed.replace(/(\d)\.(\d)/g, '$1$2') : ''
-  const sentences = normDecimal
-    ? normDecimal
-        .split(/[.!?。！？…]+/)
-        .map((s) => s.trim())
-        .filter(Boolean).length
-    : 0
+  // Shared heuristic includes an unfinished final sentence and ignores punctuation-only input.
+  const sentences = countSentences(trimmed)
 
   // 段落数:按空行分割
   const paragraphs = trimmed

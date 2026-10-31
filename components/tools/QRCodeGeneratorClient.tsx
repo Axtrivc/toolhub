@@ -1,5 +1,7 @@
 'use client'
 
+import { QR_QUIET_ZONE } from '@/lib/qr-config'
+
 import { useState, useEffect, useRef } from 'react'
 import QRCode from 'qrcode'
 import { useApp } from '@/components/providers/AppProviders'
@@ -113,7 +115,7 @@ export function QRCodeGeneratorClient() {
     let cancelled = false
     const opts = {
       width: size,
-      margin: 2,
+      margin: QR_QUIET_ZONE,
       color: { dark: fgColor, light: bgColor },
       errorCorrectionLevel: ecl,
     }
@@ -154,7 +156,7 @@ export function QRCodeGeneratorClient() {
     if (!content) return
     QRCode.toString(content, {
       type: 'svg',
-      margin: 2,
+      margin: QR_QUIET_ZONE,
       width: Math.max(size, 512),
       color: { dark: fgColor, light: bgColor },
       errorCorrectionLevel: ecl,
