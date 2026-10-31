@@ -86,10 +86,9 @@ export default function ToolsHubPage() {
           runs locally in your browser.
         </p>
         <p>
-          Every tool on this page is free with no signup and no upload. That means nothing you type
-          ever leaves your device, which matters for sensitive inputs like salary figures, health
-          numbers, or code snippets. Bookmark this page — we add new tools regularly based on what
-          readers actually search for.
+          Browse the directory by category to choose the right utility for your task. Many tools
+          process inputs locally in the browser; check the individual tool page for supported
+          formats, limitations, and any network-dependent behavior. No account is needed to browse.
         </p>
       </section>
     </div>

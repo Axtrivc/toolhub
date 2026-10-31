@@ -1,10 +1,6 @@
 import type { Metadata } from 'next'
 import { SITE_URL, SITE_NAME } from './constants'
 import { tools, getPublishedTools } from './tools'
-import type { Locale } from './i18n'
-import { zhTools } from './i18n/tools.zh'
-import { esTools } from './i18n/tools.es'
-import { deTools } from './i18n/tools.de'
 
 // 兼容 re-export:服务端消费方仍可从 '@/lib/seo' 取 SITE_NAME。
 // 客户端组件请直接 import '@/lib/constants'(本模块携带重数据,客户端禁入)。
@@ -21,7 +17,7 @@ export function jsonLdStringify(value: unknown): string {
   return JSON.stringify(value).replace(/</g, '\\u003c')
 }
 export const SITE_DESCRIPTION =
-  'Collection of free, fast, and privacy-friendly online tools. No signup, no ads clutter, works right in your browser.'
+  'Practical calculators, converters, and developer tools, with useful examples and browser-based processing.'
 
 /** 站点级默认 metadata */
 export const siteMetadata: Metadata = {
@@ -126,41 +122,23 @@ export function buildHomeMetadata(): Metadata {
 }
 
 /**
- * SERP 标题优化:注入当前年份 + 让「标题 + 品牌后缀」总长控制在 60 字符内。
- *
- *  - 未含年份的标题,把 `(YYYY)` 插到首个 " - " 分隔符之前(核心词之后),
- *    如 `Loan Calculator (2026) - Free & Instant Payment Schedule`;
- *    无分隔符的标题直接尾部追加 ` (YYYY)`。
- *  - Next 会给页面 title 套 `%s | ${SITE_NAME}` 模板,Google 展示的是含品牌
- *    的完整串 —— 截断预算必须扣除品牌后缀,保证「核心词 + (2026) + 品牌名」
- *    全部落在 60 字符内,不被 SERP 省略成省略号。超出时按词边界截断次要
- *    修饰(保头部核心词),截断后剥离尾部悬挂的分隔符。
+ * Do not automatically date evergreen tools or truncate their titles mid-phrase.
+ * Google does not mandate a fixed title character count.
  */
-function finalizeSeoTitle(raw: string): string {
-  const year = new Date().getFullYear()
-  const budget = 60 - ` | ${SITE_NAME}`.length
-  const hasYear = /20\d{2}/.test(raw)
-  // 先截后插:超长时先把原始标题截到「预算 - 年份长度」,再插入年份,
-  // 保证 (YYYY) 与品牌后缀永不落在 60 字符之外(不被 SERP 截成省略号)。
-  let t = raw
-  const cap = budget - (hasYear ? 0 : ' (2026)'.length)
-  if (t.length > cap) {
-    const cut = t.slice(0, cap)
-    const lastSpace = cut.lastIndexOf(' ')
-    t = (lastSpace > 30 ? cut.slice(0, lastSpace) : cut).replace(/[\s\-–—|,;&.]+$/, '')
-  }
-  if (!hasYear) {
-    t = t.includes(' - ') ? t.replace(' - ', ` (${year}) - `) : `${t} (${year})`
-  }
-  return t
-}
+function finalizeSeoTitle(raw: string, fallbackName: string): string {
+  const title = raw.trim().replace(/\s+/g, ' ')
+  const editorialBudget = 70 - (` | ${SITE_NAME}`).length
+  if (title.length <= editorialBudget) return title
 
-/**
- * SERP 摘要优化:前置高吸引力断句。
- * 工具类用户的核心意图是「求快、免登录、隐私」——把该承诺放到摘要首句,
- * Google 截断摘要时永远保留前半句,点击欲望最大化。
- */
-const DESCRIPTION_HOOK = '100% Free & Private. No sign-up, runs in your browser.'
+  // Pick a complete first clause when the editorial title is too long.
+  for (const separator of [' - ', ' — ', ' | ', ': ']) {
+    const clause = title.split(separator)[0]?.trim()
+    if (clause && clause.length >= 16 && clause.length <= editorialBudget) return clause
+  }
+
+  const fallback = fallbackName.trim()
+  return fallback && fallback.length <= editorialBudget ? fallback : title
+}
 
 /** 生成工具页的 metadata */
 export function buildToolMetadata(slug: string): Metadata {
@@ -169,33 +147,15 @@ export function buildToolMetadata(slug: string): Metadata {
   if (!tool) return { title: 'Tool Not Found' }
 
   const url = `${SITE_URL}/tools/${tool.slug}/`
-  // 优先使用长尾版标题/描述(把蓝海长尾词放进 <title> 与 meta description);
-  // 未配置则回退到基础 title/description。标题注入年份并钳制长度,
-  // 描述前置免费/隐私断言(高 CTR 意图词)。
-  const title = finalizeSeoTitle(tool.titleLongTail ?? tool.title)
-  const description = `${DESCRIPTION_HOOK} ${tool.descriptionLongTail ?? tool.description}`
-  // 合并长尾关键词与已翻译工具名,让多语搜索查询也能匹配规范工具页。
-  const localizedTitles = [zhTools[tool.slug]?.name, esTools[tool.slug]?.name, deTools[tool.slug]?.name]
-    .filter((name): name is string => Boolean(name))
-  const keywords = Array.from(new Set([
-    ...tool.keywords,
-    ...(tool.longTailKeywords ?? []),
-    ...localizedTitles,
-  ]))
+  // Use per-tool factual copy, not the same marketing hook on every page.
+  const title = finalizeSeoTitle(tool.titleLongTail ?? tool.title, tool.name)
+  const description = (tool.descriptionLongTail ?? tool.description).trim()
 
   return {
     title,
     description,
-    keywords,
     alternates: {
       canonical: `/tools/${tool.slug}/`,
-      languages: {
-        en: url,
-        zh: `${url}?lang=zh`,
-        es: `${url}?lang=es`,
-        de: `${url}?lang=de`,
-        'x-default': url,
-      },
     },
     openGraph: {
       type: 'website',

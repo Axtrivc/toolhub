@@ -9,7 +9,6 @@ import { AdSlot } from './AdSlot'
 // 工具页的导出 HTML 直接自带 4 条静态 <a> 内链(无 JS 爬虫/二轮索引可抓,
 // 全站形成 900+ 条网状内链池);JS 侧仍是懒 chunk,首屏 bundle 零注册表。
 const RelatedTools = dynamic(() => import('./RelatedTools').then((m) => m.RelatedTools))
-import { ToolInfoSection } from './ToolInfoSection'
 import { VisibleFaqs } from './VisibleFaqs'
 import { FormulaSection } from './FormulaSection'
 import { EmbedTool } from './EmbedTool'
@@ -19,7 +18,7 @@ import { RecentlyUsedTracker } from './RecentlyUsedTracker'
 import { useApp } from './providers/AppProviders'
 import { t, getToolName, getToolShortIntro, tc } from '@/lib/i18n'
 import { buildFaqJsonLd } from '@/lib/faq-jsonld'
-import { SITE_URL, SITE_NAME } from '@/lib/constants'
+import { SITE_URL } from '@/lib/constants'
 import { type ToolMeta } from '@/lib/tool-types'
 import { type ToolL10n } from '@/lib/i18n/tool-l10n-core'
 import { getToolIcon } from '@/lib/tool-icons'
@@ -60,40 +59,8 @@ function buildBreadcrumbJsonLdFrom(tool: ToolMeta) {
     '@type': 'BreadcrumbList',
     itemListElement: [
       item('Home', `${SITE_URL}/`, 1),
-      item(tool.category, `${SITE_URL}/?category=${encodeURIComponent(tool.category)}#all-tools`, 2),
+      item('All Tools', `${SITE_URL}/tools/`, 2),
       item(tool.name, `${SITE_URL}/tools/${tool.slug}/`, 3),
-    ],
-  }
-}
-
-function buildHowToJsonLdFrom(tool: ToolMeta) {
-  return {
-    '@context': 'https://schema.org',
-    '@type': 'HowTo',
-    name: `How to use the ${tool.name}`,
-    description: tool.description,
-    totalTime: 'PT1M',
-    supply: [{ '@type': 'HowToSupply', name: 'Your input values or text' }],
-    tool: [{ '@type': 'HowToTool', name: `${SITE_NAME} ${tool.name} (free, in-browser)` }],
-    step: [
-      {
-        '@type': 'HowToStep',
-        position: 1,
-        name: 'Open the tool',
-        text: `Open the ${tool.name} page in your browser. The tool runs entirely client-side — no signup, no upload, no installation required.`,
-      },
-      {
-        '@type': 'HowToStep',
-        position: 2,
-        name: 'View the results',
-        text: 'The result updates instantly below the inputs as you type — no reload, no waiting. Adjust any field to compare scenarios.',
-      },
-      {
-        '@type': 'HowToStep',
-        position: 3,
-        name: 'Copy or export the result',
-        text: 'Use the "Copy" or "Download" button next to the result to save the output. Everything runs locally in your browser, so nothing is uploaded.',
-      },
     ],
   }
 }
@@ -103,7 +70,7 @@ function buildHowToJsonLdFrom(tool: ToolMeta) {
  *
  * 三段式结构:
  *  ① 顶层交互区:面包屑 + 标题(+ ❤️ 收藏按钮)+ 工具主组件
- *  ② 中部 SEO 长文本:About/How to Use + Formula 公式区 + FAQ 手风琴 + 嵌入邀请
+ *  ② 专属解释/算例 + Formula 公式区 + FAQ 手风琴 + 嵌入邀请
  *  ③ 底端关联推荐:同分类相关工具卡片
  *
  * 被 iframe 嵌入时(embed 模式)隐藏所有 [data-embed-hide] 元素,
@@ -119,20 +86,11 @@ export function ToolLayout({ tool, l10n, children }: ToolLayoutProps) {
   const visibleCategory = tc(locale, tool.category)
   const faqJsonLd = buildFaqJsonLd(tool.slug, locale, l10n)
   const breadcrumbJsonLd = buildBreadcrumbJsonLdFrom(tool)
-  const howToJsonLd = buildHowToJsonLdFrom(tool)
 
   return (
     <div className="container-page py-8">
       {/* 最近使用记录 - 静默写入 localStorage(渲染 null,不影响布局) */}
       <RecentlyUsedTracker slug={tool.slug} />
-
-      {/* HowTo 结构化数据 - 让 Google 展示「How to」步骤化富媒体卡片(标准化 3 步) */}
-      {howToJsonLd && (
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: jsonLdStringify(howToJsonLd) }}
-        />
-      )}
 
       {/* FAQ 结构化数据 - 让 Google 在搜索结果展示富媒体问答 */}
       {faqJsonLd && (
@@ -162,14 +120,12 @@ export function ToolLayout({ tool, l10n, children }: ToolLayoutProps) {
           </li>
           <li aria-hidden="true">/</li>
           <li>
-            {/* 分类跳回首页:带 ?category= 选中筛选 + #all-tools 锚点滚动定位
-                (首页工具目录区的固定锚点,见 app/page.tsx 的 id="all-tools")。
-                /tools/ 列表页仍在线,但分类筛选交互统一走首页。 */}
+            {/* Browse the canonical directory rather than a parameter-only filter URL. */}
             <Link
-              href={`/?category=${encodeURIComponent(tool.category)}#all-tools`}
+              href="/tools/"
               className="hover:text-brand-600"
             >
-              {visibleCategory}
+              {t(locale, 'navAllTools')}
             </Link>
           </li>
           <li aria-hidden="true">/</li>
@@ -197,6 +153,9 @@ export function ToolLayout({ tool, l10n, children }: ToolLayoutProps) {
             <div className="mt-2 flex flex-wrap items-center gap-x-2 gap-y-1 text-sm">
               <span className="inline-flex items-center rounded-full border border-primary/20 bg-primary/5 px-2.5 py-0.5 font-medium text-primary">
                 {t(locale, 'badgeFree')}
+              </span>
+              <span className="inline-flex items-center rounded-full border border-border/60 px-2.5 py-0.5 text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>
+                {visibleCategory}
               </span>
             </div>
             <p className="mt-3 max-w-2xl text-lg leading-relaxed" style={{ color: 'rgb(var(--text-muted))' }}>
@@ -233,10 +192,7 @@ export function ToolLayout({ tool, l10n, children }: ToolLayoutProps) {
 
       {/* ─────────── ② 中部 SEO 长文本区 ─────────── */}
       <div data-embed-hide>
-        {/* 通用信息区 - About / How to Use / Why(按工具类型生成,增厚内容) */}
-        <ToolInfoSection tool={tool} l10n={l10n} />
-
-        {/* 公式区 - 闭式公式工具渲染,无注册的工具返回 null 不渲染 */}
+                {/* 公式区 - 闭式公式工具渲染,无注册的工具返回 null 不渲染 */}
         <FormulaSection slug={tool.slug} tool={tool} l10n={l10n} />
 
         {/* 黄金广告位 ② - 文章内容区(content)与 FAQ 模块之间:真实 <ins>,
