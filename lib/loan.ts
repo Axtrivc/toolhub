@@ -42,4 +42,3 @@ export function calcLoan(principal: number, annualRate: number, years: number) {
 
   return { monthlyPayment, totalPaid, totalInterest, schedule, months }
 }
-

@@ -289,7 +289,7 @@ def main():
     args.output.mkdir(parents=True, exist_ok=True)
     (args.output / 'page-inventory.json').write_text(json.dumps(result, ensure_ascii=False, indent=2) + '\n')
     with (args.output / 'page-inventory.csv').open('w', newline='') as f:
-        writer = csv.DictWriter(f, fieldnames=list(result['pages'][0]))
+        writer = csv.DictWriter(f, fieldnames=list(result['pages'][0]), lineterminator='\n')
         writer.writeheader()
         for row in result['pages']:
             writer.writerow({k: json.dumps(v, ensure_ascii=False) if isinstance(v, (list, dict)) else v for k, v in row.items()})
