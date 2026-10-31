@@ -2,9 +2,9 @@
 
 # 🧰 ToolHub
 
-### **350 free online tools — calculators, converters & developer utilities with browser-local computation.**
+### **350+ Free Online Tools — Calculators, Converters & Developer Utilities with Browser-Local Computation**
 
-No sign-up · Local calculations · Shareable URLs documented in the privacy policy
+**350+ 免费在线实用工具集 · 纯浏览器本地计算 · 零注册 · 支持中 / 英 / 西 / 德四语切换**
 
 [![Next.js 16](https://img.shields.io/badge/Next.js-16-black?logo=nextdotjs&logoColor=white)](https://nextjs.org)
 [![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org)
@@ -26,7 +26,7 @@ No sign-up · Local calculations · Shareable URLs documented in the privacy pol
 
 ---
 
-## ✨ Why ToolHub?
+## ✨ Why ToolHub? (核心亮点)
 
 > Every tool is a single static page — fast to load, free to use, and **all computation happens locally in your browser**. No accounts and no server-side calculation API. Tools with shareable URLs may encode settings in the link, as disclosed in the privacy policy.
 
@@ -38,16 +38,17 @@ No sign-up · Local calculations · Shareable URLs documented in the privacy pol
 | 📱 **Installable PWA** | Service-worker caching keeps repeat visits fast, even offline |
 | 🌗 **Dark & light themes** | Plus keyboard-friendly dialogs, skip links & reduced-motion support |
 | 🍪 **Configurable extras** | Cookie-free Cloudflare analytics, opt-in GA4, and ads that can be disabled with Necessary only |
-
+| ⚡ **Quick Access Workspace & Scratchpad** | Built-in developer scratchpad (FORMAT JSON, BASE64 ENC/DEC, UPPER/LOWER/TRIM), pinned favorites & recent history persisted in localStorage |
+| 📊 **Scenario A/B Comparison & Live Charts** | Financial & math calculators support side-by-side Scenario A vs. Scenario B comparison tables and real-time balance curves |
 ---
 
-## 🎬 See It In Action
+## 🎬 See It In Action (实测界面预览)
 
 <table>
 <tr>
 <td width="50%" valign="top">
 
-**⌨️ Command palette** — fuzzy-search all 350 tools from anywhere
+**⌨️ Command palette (Ctrl + K)** — fuzzy-search all 350+ tools from anywhere
 
 <br/>
 
@@ -56,7 +57,7 @@ No sign-up · Local calculations · Shareable URLs documented in the privacy pol
 </td>
 <td width="50%" valign="top">
 
-**🧮 Live calculators** — results & charts update as you type
+**🧮 Live calculators & Scenario A/B diff** — results, amortization curves & side-by-side comparisons update as you type
 
 <br/>
 
