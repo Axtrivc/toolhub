@@ -61,11 +61,15 @@
 
 <br/>
 
-<img src="docs/assets/tool-page.png" alt="Mortgage calculator with live results and principal vs interest donut chart" width="100%">
+<img src="docs/assets/tool-page.png" alt="Loan calculator with Scenario A/B comparison, KPI summary, and live balance chart" width="100%">
 
 </td>
 </tr>
 </table>
+
+**⚡ Quick Access Workspace & LiveBento** — scratchpad utilities, Base64/JSON transforms, and interactive mini-tools right on the homepage
+
+<img src="docs/assets/workspace-bento.png" alt="Quick Access Scratchpad with JSON and Base64 utilities above LiveBento interactive cards" width="100%">
 
 ---
 
