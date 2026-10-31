@@ -150,10 +150,10 @@ export function ScenarioCompareResults({ rows }: { rows: CompareRowDef[] }) {
               </div>
               <div className="mt-1 flex flex-wrap items-baseline gap-x-3 gap-y-1">
                 <span className="text-xl font-bold tabular-nums sm:text-2xl" style={{ color: 'rgb(var(--text))' }}>
-                  {tuiCalc('scenarioA', locale, 'A')}: {headline.a}
+                  {tuiCalc('scenarioA', locale, 'Scenario A')}: {headline.a}
                 </span>
                 <span className="text-xl font-bold tabular-nums sm:text-2xl" style={{ color: 'rgb(var(--text-muted))' }}>
-                  {tuiCalc('scenarioB', locale, 'B')}: {headline.b}
+                  {tuiCalc('scenarioB', locale, 'Scenario B')}: {headline.b}
                 </span>
               </div>
             </div>

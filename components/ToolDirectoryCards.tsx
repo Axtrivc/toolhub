@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import type { ToolMeta } from '@/lib/tools'
+import type { ToolMeta } from '@/lib/tool-types'
 import { getToolIcon } from '@/lib/tool-icons'
 import { SmartIcon } from '@/components/SmartIcon'
 import { useApp } from '@/components/providers/AppProviders'

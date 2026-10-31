@@ -62,6 +62,25 @@ export function isLocale(v: unknown): v is Locale {
   return v === 'en' || v === 'zh' || v === 'es' || v === 'de'
 }
 
+/** URL 显式语言优先于本地偏好;非法/缺失值交由调用方继续回退。 */
+export function getUrlLocale(): Locale | null {
+  if (typeof window === 'undefined') return null
+  const value = new URLSearchParams(window.location.search).get('lang')
+  return isLocale(value) ? value : null
+}
+
+/** 切换语言时保留当前路径、其他 query 与 hash,不新增浏览器历史记录。 */
+export function writeLocaleToUrl(locale: Locale): void {
+  if (typeof window === 'undefined') return
+  const url = new URL(window.location.href)
+  url.searchParams.set('lang', locale)
+  window.history.replaceState(
+    window.history.state,
+    '',
+    `${url.pathname}${url.search}${url.hash}`,
+  )
+}
+
 export interface Dict {
   // Header 导航
   navAllTools: string

@@ -27,6 +27,10 @@ interface ResultActionsProps {
    * 他人点开链接即还原完整计算场景(带参反链,裂变流量入口)。
    */
   shareParams?: Record<string, string>
+  /** 可选分享按钮文案;不传沿用全局 i18n 默认标签 */
+  shareLabel?: string
+  /** 复制成功后的文字(✓ 由组件统一添加) */
+  shareCopiedLabel?: string
   /**
    * 「Print Report」按钮(默认 true):点击 window.print() 触发浏览器打印,
    * 配合 globals.css 的 @media print 排版输出机构级 A4 报告
@@ -102,6 +106,8 @@ export function ResultActions({
   disabled,
   copyLabel,
   shareParams,
+  shareLabel,
+  shareCopiedLabel,
   enablePrint = true,
   history,
 }: ResultActionsProps) {
@@ -198,7 +204,9 @@ export function ResultActions({
           className={`btn ${linkCopied ? 'btn-primary' : 'btn-secondary'} disabled:cursor-not-allowed disabled:opacity-50`}
           aria-live="polite"
         >
-          {linkCopied ? `✓ ${t(locale, 'linkCopied')}` : t(locale, 'shareLink')}
+          {linkCopied
+            ? `✓ ${shareCopiedLabel ?? t(locale, 'linkCopied')}`
+            : (shareLabel ?? t(locale, 'shareLink'))}
         </motion.button>
       )}
       {history && (

@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { CopyButton } from './CopyButton'
 import { SITE_URL } from '@/lib/constants'
-import type { ToolMeta } from '@/lib/tools'
+import type { ToolMeta } from '@/lib/tool-types'
 import { useApp } from './providers/AppProviders'
 import { t, getToolName } from '@/lib/i18n'
 

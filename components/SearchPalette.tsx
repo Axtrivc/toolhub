@@ -6,8 +6,7 @@ import { searchTools, highlightSegments } from '@/lib/tool-search'
 import { createPortal } from 'react-dom'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import type { ToolMeta } from '@/lib/tools'
-import { getPublishedTools } from '@/lib/tools'
+import { toolLiteMeta } from '@/lib/related-tools'
 import { getToolIcon } from '@/lib/tool-icons'
 import { SmartIcon } from '@/components/SmartIcon'
 import type { Locale } from '@/lib/i18n'
@@ -25,10 +24,8 @@ interface SearchPaletteProps {
 /** 单页最多展示的结果数,避免超长滚动 */
 const MAX_RESULTS = 30
 
-// 工具清单:注册表只读且不可变,模块加载时求值一次即可(避免每次 render
-// 重复调用 getPublishedTools())。本组件经 Header 的 dynamic() 懒加载,
-// 注册表随本 chunk 一起离开所有页面的首屏(首次 ⌘K 时才下载)。
-const TOOLS = getPublishedTools()
+// 轻量清单与注册表同序;保留搜索所需字段,避免懒加载弹窗时下载完整 SEO 注册表。
+const TOOLS = Object.values(toolLiteMeta)
 
 /**
  * 全局搜索弹窗(命令面板风格,参考 Raycast / macOS Spotlight)
@@ -440,7 +437,7 @@ export function SearchPalette({ locale, open, onClose }: SearchPaletteProps) {
             </div>
             <span style={{ color: 'rgb(var(--text-faint))' }}>
               {query.trim()
-                ? t(locale, 'searchMatchesCount', { count: total })
+                ? `${t(locale, 'searchMatchesCount', { count: total })} · ${t(locale, 'searchPaletteHint', { count: TOOLS.length })}`
                 : t(locale, 'searchPaletteHint', { count: TOOLS.length })}
             </span>
           </div>

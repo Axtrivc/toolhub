@@ -65,6 +65,10 @@ export interface TextToolConfig {
    * 可选字段:不填 = 完全向后兼容(不限长)。
    */
   maxInputChars?: number
+  /** 超过此字符数后延迟 transform,避免大输入逐键同步解析阻塞主线程 */
+  largeInputDebounceChars?: number
+  /** 大输入 transform 延迟(毫秒);与 largeInputDebounceChars 配套使用 */
+  largeInputDebounceMs?: number
 }
 
 export function makeTextTool(config: TextToolConfig): ComponentType {
@@ -88,11 +92,24 @@ export function makeTextTool(config: TextToolConfig): ComponentType {
       setInput(tuiFromEntry(config.l10n, locale, 'defaultInput', config.defaultInput))
     }, [mounted, locale, config])
 
+    // 输入框与统计仍即时更新;仅把昂贵 transform 的输入快照延后。
+    // 小输入 delay=0,大输入在停顿 200ms 后才 parse/stringify,连续粘贴会重置计时器。
+    const [transformInput, setTransformInput] = useState(input)
+    useEffect(() => {
+      const isLarge = config.largeInputDebounceChars !== undefined &&
+        input.length > config.largeInputDebounceChars
+      const timer = window.setTimeout(
+        () => setTransformInput(input),
+        isLarge ? (config.largeInputDebounceMs ?? 200) : 0,
+      )
+      return () => window.clearTimeout(timer)
+    }, [input, config])
+
     const output = useMemo(() => {
       if (!mounted) return ''
       try {
         // P-1 大输入防线:超过门控阈值直接走 ⚠️ 通道,不同步执行 transform
-        if (config.maxInputChars !== undefined && input.length > config.maxInputChars) {
+        if (config.maxInputChars !== undefined && transformInput.length > config.maxInputChars) {
           const n = config.maxInputChars.toLocaleString('en-US')
           return tuiFromEntry(config.l10n,
             locale,
@@ -100,11 +117,11 @@ export function makeTextTool(config: TextToolConfig): ComponentType {
             `⚠️ Input is too large — the supported size is up to ${n} characters. Trim the input to compute.`,
           )
         }
-        return config.transform(input, locale)
+        return config.transform(transformInput, locale)
       } catch {
         return ''
       }
-    }, [input, mounted, locale])
+    }, [transformInput, mounted, locale])
 
     const showStats = config.showStats !== false
     // 字符数按 Unicode 码点计([...input] 按码位拆分):emoji 等增补平面字符不再按 2 计

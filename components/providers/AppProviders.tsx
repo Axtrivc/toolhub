@@ -2,7 +2,7 @@
 
 import { createContext, useContext, useState, useEffect, useCallback, useRef, type ReactNode } from 'react'
 import type { Locale } from '@/lib/i18n'
-import { isLocale, detectBrowserLocale } from '@/lib/i18n'
+import { isLocale, detectBrowserLocale, getUrlLocale, writeLocaleToUrl } from '@/lib/i18n'
 import { FavoritesProvider } from '@/lib/useFavorites'
 import { RecentlyUsedProvider } from '@/lib/useRecentlyUsed'
 
@@ -42,11 +42,14 @@ export function AppProviders({ children }: { children: ReactNode }) {
   // 仅用户点击切换后才把 theme 写回 localStorage,避免首访即覆盖系统偏好推断。
   const userTouchedThemeRef = useRef(false)
 
-  // 初始化:从 localStorage 读取用户偏好;语言缺失时按浏览器语言自动匹配
+  // 初始化:URL ?lang= > localStorage > 浏览器语言;主题读取本地/系统偏好
   useEffect(() => {
-    // 语言:localStorage > 浏览器语言检测 > 'en'
+    const urlLocale = getUrlLocale()
     const savedLocale = typeof localStorage !== 'undefined' && localStorage.getItem(LOCALE_KEY)
-    if (isLocale(savedLocale)) {
+    if (urlLocale) {
+      setLocaleState(urlLocale)
+      try { localStorage.setItem(LOCALE_KEY, urlLocale) } catch { /* 无痕模式/禁用存储 */ }
+    } else if (isLocale(savedLocale)) {
       setLocaleState(savedLocale)
     } else {
       const detected = detectBrowserLocale()
@@ -86,6 +89,7 @@ export function AppProviders({ children }: { children: ReactNode }) {
 
   const setLocale = useCallback((l: Locale) => {
     setLocaleState(l)
+    writeLocaleToUrl(l)
     try { localStorage.setItem(LOCALE_KEY, l) } catch { /* 无痕模式/禁用存储 */ }
   }, [])
 
@@ -95,6 +99,7 @@ export function AppProviders({ children }: { children: ReactNode }) {
       const order: Locale[] = ['en', 'zh', 'es', 'de']
       const idx = order.indexOf(prev)
       const next = order[(idx + 1) % order.length]
+      writeLocaleToUrl(next)
       try { localStorage.setItem(LOCALE_KEY, next) } catch { /* 无痕模式/禁用存储 */ }
       return next
     })

@@ -1,6 +1,6 @@
 'use client'
 
-import type { ToolMeta } from '@/lib/tools'
+import type { ToolMeta } from '@/lib/tool-types'
 import { useApp } from './providers/AppProviders'
 import { t } from '@/lib/i18n'
 

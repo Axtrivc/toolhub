@@ -4,7 +4,7 @@
  * 背景:RelatedTools / NextSteps / 404 页需要工具展示数据,但直接 import
  * lib/tools.ts 会把 ~180KB(minified)的全量 SEO 注册表拖进客户端 chunk。
  * 本脚本在构建前(手动/CI)从注册表抽取轻量字段(name/shortIntro/category/
- * slug/h1/keywords/longTailKeywords/featured,覆盖展示 + 首页搜索所需最小集),
+ * slug/h1/keywords/longTailKeywords/featured/icon,覆盖展示 + 首页搜索所需最小集),
  * 生成独立小模块;排序复用 lib/tools.ts 的
  * getRelatedTools / getNextToolSlugs / getFeaturedTools,单一事实源,不复制业务逻辑。
  *
@@ -44,6 +44,7 @@ const lite = (t) => ({
   h1: t.h1,
   keywords: t.keywords,
   ...(t.longTailKeywords ? { longTailKeywords: t.longTailKeywords } : {}),
+  ...(t.icon ? { icon: t.icon } : {}),
   ...(t.featured ? { featured: true } : {}),
 })
 
@@ -67,7 +68,7 @@ const arr = (a) => `[${a.map(q).join(', ')}]`
 
 const metaLines = Object.values(liteMeta).map(
   (m) =>
-    `  ${q(m.slug)}: { slug: ${q(m.slug)}, name: ${q(m.name)}, shortIntro: ${q(m.shortIntro)}, category: ${q(m.category)}, h1: ${q(m.h1)}, keywords: ${arr(m.keywords)}${m.longTailKeywords ? `, longTailKeywords: ${arr(m.longTailKeywords)}` : ''}${m.featured ? ', featured: true' : ''} },`,
+    `  ${q(m.slug)}: { slug: ${q(m.slug)}, name: ${q(m.name)}, shortIntro: ${q(m.shortIntro)}, category: ${q(m.category)}, h1: ${q(m.h1)}, keywords: ${arr(m.keywords)}${m.longTailKeywords ? `, longTailKeywords: ${arr(m.longTailKeywords)}` : ''}${m.icon ? `, icon: ${q(m.icon)}` : ''}${m.featured ? ', featured: true' : ''} },`,
 )
 const relatedLines = Object.entries(relatedIndex).map(
   ([slug, slugs]) => `  ${q(slug)}: [${slugs.map(q).join(', ')}],`,
@@ -77,7 +78,7 @@ const nextLines = Object.entries(nextIndex).map(
 )
 const featuredLines = featuredLite.map(
   (m) =>
-    `  { slug: ${q(m.slug)}, name: ${q(m.name)}, shortIntro: ${q(m.shortIntro)}, category: ${q(m.category)}, h1: ${q(m.h1)}, keywords: ${arr(m.keywords)}, featured: true },`,
+    `  { slug: ${q(m.slug)}, name: ${q(m.name)}, shortIntro: ${q(m.shortIntro)}, category: ${q(m.category)}, h1: ${q(m.h1)}, keywords: ${arr(m.keywords)}${m.longTailKeywords ? `, longTailKeywords: ${arr(m.longTailKeywords)}` : ''}${m.icon ? `, icon: ${q(m.icon)}` : ''}, featured: true },`,
 )
 
 const out = `/**
@@ -102,6 +103,8 @@ export interface ToolLiteMeta {
   keywords: string[]
   /** 长尾关键词(首页搜索 ×5 加权用;留空回退 keywords) */
   longTailKeywords?: string[]
+  /** 可选图标覆盖;缺省由 lib/tool-icons 按 slug/category 解析 */
+  icon?: string
   /** 是否置顶推荐(与 lib/tools.ts featured 对齐;留空即 false) */
   featured?: boolean
 }

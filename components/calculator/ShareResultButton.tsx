@@ -24,7 +24,7 @@ export function ShareResultButton({
   lines,
   filename,
 }: {
-  /** 工具 slug:点击分享时懒加载注册表取工具名(注册表不进首屏 chunk) */
+  /** 工具 slug:点击分享时从轻量索引取工具名(完整注册表不进客户端 chunk) */
   toolSlug?: string
   /** 主结果:label + 大字 value */
   headline: { label: string; value: string }
@@ -37,10 +37,9 @@ export function ShareResultButton({
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
   const handleClick = useCallback(async () => {
-    // 工具名在点击时才解析:注册表(228 工具 SEO 文案,~180KB)只在用户
-    // 真正点分享时按需加载,所有计算器页的首屏 chunk 因此不再携带它。
+    // 点击时才解析轻量索引,避免完整注册表进入计算器客户端 chunk。
     const toolName = toolSlug
-      ? (await import('@/lib/tools')).getTool(toolSlug)?.name ?? toolSlug
+      ? (await import('@/lib/related-tools')).toolLiteMeta[toolSlug]?.name ?? toolSlug
       : 'Result'
     const canvas = canvasRef.current ?? document.createElement('canvas')
     canvas.width = 640

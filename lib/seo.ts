@@ -2,6 +2,9 @@ import type { Metadata } from 'next'
 import { SITE_URL, SITE_NAME } from './constants'
 import { tools, getPublishedTools } from './tools'
 import type { Locale } from './i18n'
+import { zhTools } from './i18n/tools.zh'
+import { esTools } from './i18n/tools.es'
+import { deTools } from './i18n/tools.de'
 
 // 兼容 re-export:服务端消费方仍可从 '@/lib/seo' 取 SITE_NAME。
 // 客户端组件请直接 import '@/lib/constants'(本模块携带重数据,客户端禁入)。
@@ -94,6 +97,34 @@ export const siteMetadata: Metadata = {
   },
 }
 
+/** 首页 metadata:由服务端 app/page.tsx 显式导出,数量与发布注册表一致。 */
+export function buildHomeMetadata(): Metadata {
+  const roundedCount = Math.floor(getPublishedTools().length / 10) * 10
+  const title = `${roundedCount}+ Free Online Tools That Just Work`
+  const description = `${roundedCount}+ free, privacy-friendly online calculators, converters, and developer utilities. No signup; computation runs in your browser.`
+
+  return {
+    title,
+    description,
+    alternates: { canonical: '/' },
+    openGraph: {
+      type: 'website',
+      locale: 'en_US',
+      url: SITE_URL,
+      siteName: SITE_NAME,
+      title,
+      description,
+      images: [{ url: '/og.png', width: 1200, height: 630, alt: title }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: ['/og.png'],
+    },
+  }
+}
+
 /**
  * SERP 标题优化:注入当前年份 + 让「标题 + 品牌后缀」总长控制在 60 字符内。
  *
@@ -143,16 +174,29 @@ export function buildToolMetadata(slug: string): Metadata {
   // 描述前置免费/隐私断言(高 CTR 意图词)。
   const title = finalizeSeoTitle(tool.titleLongTail ?? tool.title)
   const description = `${DESCRIPTION_HOOK} ${tool.descriptionLongTail ?? tool.description}`
-  // 合并长尾关键词到 keywords(去重,主词在前)。
-  const keywords = tool.longTailKeywords?.length
-    ? Array.from(new Set([...tool.keywords, ...tool.longTailKeywords]))
-    : tool.keywords
+  // 合并长尾关键词与已翻译工具名,让多语搜索查询也能匹配规范工具页。
+  const localizedTitles = [zhTools[tool.slug]?.name, esTools[tool.slug]?.name, deTools[tool.slug]?.name]
+    .filter((name): name is string => Boolean(name))
+  const keywords = Array.from(new Set([
+    ...tool.keywords,
+    ...(tool.longTailKeywords ?? []),
+    ...localizedTitles,
+  ]))
 
   return {
     title,
     description,
     keywords,
-    alternates: { canonical: `/tools/${tool.slug}/` },
+    alternates: {
+      canonical: `/tools/${tool.slug}/`,
+      languages: {
+        en: url,
+        zh: `${url}?lang=zh`,
+        es: `${url}?lang=es`,
+        de: `${url}?lang=de`,
+        'x-default': url,
+      },
+    },
     openGraph: {
       type: 'website',
       url,
@@ -407,6 +451,13 @@ export const websiteJsonLd = {
   name: SITE_NAME,
   url: SITE_URL,
   description: SITE_DESCRIPTION,
-  // 不声明 potentialAction/SearchAction:首页从不消费 ?q 搜索参数,
-  // 声明失实的搜索框会触发 Google 失配风险(声明功能却无对应实现)。
+  // 首页 HomeClient 挂载后消费 ?q=,使声明的搜索入口与实际行为一致。
+  potentialAction: {
+    '@type': 'SearchAction',
+    target: {
+      '@type': 'EntryPoint',
+      urlTemplate: `${SITE_URL}/?q={search_term_string}`,
+    },
+    'query-input': 'required name=search_term_string',
+  },
 }

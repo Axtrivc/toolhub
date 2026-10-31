@@ -13,7 +13,7 @@ import { ServiceWorkerRegister } from '@/components/ServiceWorkerRegister'
 import { SkipToContent } from '@/components/SkipToContent'
 import { getPublishedTools } from '@/lib/tools'
 import { ADSENSE_CLIENT } from '@/lib/adsense'
-import { siteMetadata, websiteJsonLd, jsonLdStringify } from '@/lib/seo'
+import { siteMetadata } from '@/lib/seo'
 
 /**
  * Footer 分类导航(服务端模块级预计算,一次算好全站复用)。
@@ -76,11 +76,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         {ADSENSE_PUB_ID && (
           <meta name="google-adsense-account" content={ADSENSE_PUB_ID} />
         )}
-        {/* 站点级结构化数据 */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: jsonLdStringify(websiteJsonLd) }}
-        />
+        {/* WebSite + SearchAction JSON-LD 由首页服务端组件注入。 */}
       </head>
       <body className="flex min-h-screen flex-col">
         <AppProviders>

@@ -20,6 +20,9 @@ export const JSONFormatterClient = makeTextTool({
   inputLabel: 'JSON (raw or minified)',
   outputLabel: 'Formatted JSON',
   defaultInput: '{"name":"John","age":30,"city":"NYC","skills":["js","css"]}',
+  // >50k 字符时停顿 200ms 再格式化;>200k 字符仍直接走大小门控提示。
+  largeInputDebounceChars: 50_000,
+  largeInputDebounceMs: 200,
   // P-1 大输入防线:>200k 字符跳过同步 parse/stringify(会冻结 UI),走 ⚠️ 提示
   maxInputChars: 200_000,
   transform: (t) => {

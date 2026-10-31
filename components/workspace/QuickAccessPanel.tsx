@@ -16,7 +16,7 @@ import Link from 'next/link'
 import { useMemo } from 'react'
 import { motion } from 'framer-motion'
 import { Clock, Pin } from 'lucide-react'
-import { getPublishedTools, type ToolMeta } from '@/lib/tools'
+import { toolLiteMeta, type ToolLiteMeta } from '@/lib/related-tools'
 import { getToolIcon } from '@/lib/tool-icons'
 import { SmartIcon } from '@/components/SmartIcon'
 import { useWorkspace } from '@/hooks/useWorkspace'
@@ -43,24 +43,24 @@ export function QuickAccessPanel() {
   const { pinned, recent, pinnedReady, recentReady, clearRecent } = useWorkspace()
 
   const bySlug = useMemo(() => {
-    const map = new Map<string, ToolMeta>()
-    for (const tool of getPublishedTools()) map.set(tool.slug, tool)
+    const map = new Map<string, ToolLiteMeta>()
+    for (const tool of Object.values(toolLiteMeta)) map.set(tool.slug, tool)
     return map
   }, [])
 
-  // slug → ToolMeta,防御历史脏数据(已下线工具的 slug 自动丢弃)
+  // slug → ToolLiteMeta,防御历史脏数据(已下线工具的 slug 自动丢弃)
   const pinnedTools = useMemo(
     () =>
       pinned
         .map((slug) => bySlug.get(slug))
-        .filter((tool): tool is ToolMeta => Boolean(tool)),
+        .filter((tool): tool is ToolLiteMeta => Boolean(tool)),
     [pinned, bySlug],
   )
   const recentEntries = useMemo(
     () =>
       recent
         .map((entry) => ({ entry, tool: bySlug.get(entry.slug) }))
-        .filter((x): x is { entry: (typeof recent)[number]; tool: ToolMeta } => Boolean(x.tool)),
+        .filter((x): x is { entry: (typeof recent)[number]; tool: ToolLiteMeta } => Boolean(x.tool)),
     [recent, bySlug],
   )
 

@@ -1,7 +1,7 @@
 'use client'
 
 import { getToolFormula } from '@/lib/tool-formulas'
-import type { ToolMeta } from '@/lib/tools'
+import type { ToolMeta } from '@/lib/tool-types'
 import { useApp } from './providers/AppProviders'
 import { t, getToolName } from '@/lib/i18n'
 import { l10nEntryFor, type ToolL10n } from '@/lib/i18n/tool-l10n-core'

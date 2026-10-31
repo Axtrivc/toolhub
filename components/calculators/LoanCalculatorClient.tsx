@@ -10,6 +10,7 @@ import { LoadSampleButton } from '@/components/LoadSampleButton'
 import { ResultActions } from '@/components/ResultActions'
 import { getCalculatorSample } from '@/lib/tool-samples'
 import { toNumStrict } from '@/lib/format'
+import { useUrlState } from '@/lib/useUrlState'
 import { useApp } from '@/components/providers/AppProviders'
 import { tui } from '@/lib/i18n/tool-l10n-accessors/calculators/LoanCalculatorClient'
 
@@ -77,9 +78,9 @@ export function LoanCalculatorClient() {
     { label: 'Car Loan ($25k @ 7.5%)', values: { amount: '25000', rate: '7.5', years: '5' } },
     { label: 'Mortgage ($320k @ 6.8%)', values: { amount: '320000', rate: '6.8', years: '30' } },
   ]
-  const [amount, setAmount] = useState('20000')
-  const [rate, setRate] = useState('7.5')
-  const [years, setYears] = useState('5')
+  const [amount, setAmount] = useUrlState('amount', '20000')
+  const [rate, setRate] = useUrlState('rate', '7.5')
+  const [years, setYears] = useUrlState('term', '5')
   // 展示区是否展开全部期数(默认只显示前 12 期)
   const [showAll, setShowAll] = useState(false)
   // ── 多方案对比:Scenario B 独立参数,激活时克隆 A ──
@@ -369,6 +370,9 @@ export function LoanCalculatorClient() {
             filename="loan-calculator-result.csv"
             downloadContent={csvContent}
             mime="text/csv;charset=utf-8;"
+            shareParams={{ amount, rate, term: years }}
+            shareLabel={L('copyShareableLink', 'Copy Shareable Link')}
+            shareCopiedLabel={L('linkCopied', 'Link Copied')}
           />
         </>
       ) : (

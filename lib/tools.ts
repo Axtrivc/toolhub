@@ -12,66 +12,10 @@
  *     commercial 工具(有花钱场景)广告主出价高,RPM 高,优先做
  */
 
-export type SearchIntent = 'commercial' | 'informational' | 'navigational'
+import type { ToolMeta } from './tool-types'
 
-export interface ToolMeta {
-  /** 工具唯一标识,同时是 URL slug,如 'slug-generator' → /tools/slug-generator/ */
-  slug: string
-  /** 工具名称(展示用) */
-  name: string
-  /** SEO 标题(会作为 <title>,建议 50-60 字符) */
-  title: string
-  /** SEO 描述(meta description,建议 150-160 字符) */
-  description: string
-  /** 目标关键词列表(主词在前) */
-  keywords: string[]
-  /** 搜索意图 - commercial 类 RPM 更高 */
-  intent: SearchIntent
-  /** 分类标签,用于首页分组展示 */
-  category: string
-  /** 工具页 H1 文案 */
-  h1: string
-  /** 简短介绍(首页卡片用) */
-  shortIntro: string
-  /** 是否已上线(用于首页过滤未完成工具) */
-  published: boolean
-  /**
-   * 长尾关键词(可选,蓝海词,低竞争高意图)。
-   * 会被合并进 meta keywords 与 WebApplication.featureList,
-   * 并被 ToolInfoSection 自然织入页面正文(长尾 SEO 流量主力)。
-   * 留空则回退到 keywords,不影响功能。
-   */
-  longTailKeywords?: string[]
-  /**
-   * 差异化 SEO 标题(可选)。设置后 buildToolMetadata 优先用它取代 title,
-   * 用于把长尾词放进 <title>(搜索引擎最重权的字段之一)。
-   * 建议 50-60 字符,自然语句,包含主长尾词 + 品牌利益点。
-   */
-  titleLongTail?: string
-  /**
-   * 差异化 SEO 描述(可选)。设置后 buildToolMetadata 优先用它取代 description,
-   * 用于把长尾词放进 meta description(影响 SERP 摘要与点击率)。
-   * 建议 150-160 字符,含主长尾词 + 行动号召。
-   */
-  descriptionLongTail?: string
-  /**
-   * 卡片/详情页用的 emoji 图标(可选)。留空则按 category 自动回退(见 CATEGORY_ICONS)。
-   * 仅对明星工具或与分类默认图标不符的工具单独覆盖,避免给 120+ 工具逐个配置。
-   */
-  icon?: string
-  /**
-   * 是否置顶推荐(可选)。true 时该工具会出现在首页 "🔥 Popular Tools" 置顶区。
-   * 仅标记高流量 / 高价值工具(当前 10 个),首页无搜索词且选中 All 分类时展示。
-   */
-  featured?: boolean
-  /**
-   * 工作流下一步推荐(可选,slug 数组):计算器出结果后「Next Steps」胶囊
-   * 展示的强关联工具(如 算完房贷月供 → 摊销表生成器)。
-   * 未配置时 getNextToolSlugs 回退到同分类前 2 款(featured 优先)。
-   * 仅维护「用户真实工作流相邻」的组合,不要拿来堆内链。
-   */
-  nextTools?: string[]
-}
+// 兼容服务端既有导入;客户端类型-only 消费方请直接引用 './tool-types'。
+export type { SearchIntent, ToolMeta } from './tool-types'
 
 export const tools: ToolMeta[] = [
   // ─────────── 💳 Finance Calculators (54) ───────────
