@@ -6312,7 +6312,7 @@ function rankRelated(arr: ToolMeta[]): ToolMeta[] {
  * 获取某工具的相关工具(用于工具详情页底部「Related Tools」内链矩阵)
  *
  * 匹配逻辑(pSEO + 内链权重传递优化):
- *  1. 同分类下的其他工具(剔除当前工具本身),featured 工具排在最前;
+ *  1. 真实任务关联与显式 nextTools 优先,再补同分类工具(featured 优先);
  *  2. 最多展示 `limit` 个(默认 4,与 RelatedTools 网格 4 列对齐);
  *  3. 若同分类数量不足,用全站热门工具(featured)补齐,保证矩阵永远满格,
  *     避免某些工具页内链过稀导致权重孤岛。
@@ -6330,7 +6330,23 @@ export function getRelatedTools(slug: string, limit = 4): ToolMeta[] {
     (t) => t.slug !== slug && t.category === current.category,
   )
   const rankedSame = rankRelated(sameCategory)
-  const picked = [...rankedSame.slice(0, limit)]
+  // Task-specific paths connect complementary operations across categories.
+  const taskRelated: Record<string, string[]> = {
+    'loan-calculator': ['amortization-table-generator', 'mortgage-calculator'],
+    'json-formatter': ['json-repair', 'json-to-zod', 'json-diff'],
+    'json-repair': ['json-formatter', 'json-to-zod', 'json-diff'],
+    'json-to-zod': ['json-repair', 'json-formatter', 'json-diff'],
+    'gpt-token-counter': ['llm-api-cost-calculator', 'context-window-checker'],
+    'llm-api-cost-calculator': ['gpt-token-counter', 'context-window-checker'],
+    'context-window-checker': ['gpt-token-counter', 'llm-api-cost-calculator'],
+  }
+  // Explicit next steps describe an actual workflow; category popularity is
+  // only a fallback. Resolve against published tools and deduplicate targets.
+  const explicit = [...new Set([...(taskRelated[slug] ?? []), ...(current.nextTools ?? [])])]
+    .map((target) => published.find((tool) => tool.slug === target))
+    .filter((tool): tool is ToolMeta => Boolean(tool && tool.slug !== slug))
+  const explicitSlugs = new Set(explicit.map((tool) => tool.slug))
+  const picked = [...explicit, ...rankedSame.filter((tool) => !explicitSlugs.has(tool.slug))].slice(0, Math.max(0, limit))
 
   // ② 名额不足时,用全站热门工具(featured)补齐,排除当前工具与已选中工具
   if (picked.length < limit) {

@@ -24,7 +24,7 @@
  */
 
 // ===== 版本号:每次更新本文件递增此值,触发新 SW 接管 + 旧缓存清理 =====
-const VERSION = 'toolhub-sw-v1.0.2'
+const VERSION = 'toolhub-sw-v1.0.3'
 const STATIC_CACHE = `static-${VERSION}`
 const RUNTIME_CACHE = `runtime-${VERSION}`
 
@@ -56,7 +56,7 @@ self.addEventListener('activate', (event) => {
       // 保留当前 VERSION 的缓存,删除所有其它(旧版本)
       await Promise.all(
         keys
-          .filter((key) => !key.endsWith(VERSION))
+          .filter((key) => /^(static|runtime)-toolhub-sw-/.test(key) && ![STATIC_CACHE, RUNTIME_CACHE].includes(key))
           .map((key) => caches.delete(key)),
       )
       // 立即控制所有已打开的页面(否则需刷新才接管)
@@ -123,9 +123,13 @@ async function networkFirst(request) {
     // 网络失败:先找缓存
     const cached = await cache.match(request)
     if (cached) return cached
-    // 缓存也没有:回退到首页(离线兜底)
-    const fallback = await cache.match(OFFLINE_FALLBACK)
-    if (fallback) return fallback
+    // Only HTML navigation may use the precached shell. Returning HTML for
+    // an uncached RSC/text request corrupts the response expected by Next.js.
+    if (request.mode === 'navigate' || (request.headers.get('accept') || '').includes('text/html')) {
+      const shell = await caches.open(STATIC_CACHE)
+      const fallback = await shell.match(OFFLINE_FALLBACK)
+      if (fallback) return fallback
+    }
     throw err
   }
 }

@@ -17,7 +17,7 @@ import { countWords, countSentences } from '@/lib/text-stats'
  *  - CJK(汉字/假名/谚文)按约 0.75 token/字(现代 tokenizer 常见 0.6–1.0 区间取中);
  *  - 细化:按「词串 / 标点」拆分,短词 ≈ 1 token,长词约每 5 字符 1 token,
  *    标点各计 1 token;
- *  - 取两者平均,结果仅作数量级参考(≈ cl100k_base),UI 中明确标注为估算。
+ *  - 取两者平均,结果仅作数量级参考(无经验证误差范围),UI 中明确标注为估算。
  * 成本估算:输入单价 × 输入 token + 输出单价 × 预期输出 token。
  */
 
@@ -95,7 +95,7 @@ export function GptTokenCounterClient() {
     () =>
       [
         L('summaryTitle', 'Token Count Summary (estimate)'),
-        `${L('sEstimatedTokens', 'Estimated tokens:')} ~${stats.tokens.toLocaleString('en-US')} ${L('sHeuristic', '(heuristic, ~cl100k_base)')}`,
+        `${L('sEstimatedTokens', 'Estimated tokens:')} ~${stats.tokens.toLocaleString('en-US')} ${L('sHeuristic', '(heuristic estimate)')}`,
         `${L('sCharacters', 'Characters:')} ${stats.chars.toLocaleString('en-US')}`,
         `${L('sCharactersNoSpaces', 'Characters (no spaces):')} ${stats.charsNoSpaces.toLocaleString('en-US')}`,
         `${L('sWords', 'Words:')} ${stats.words.toLocaleString('en-US')}`,

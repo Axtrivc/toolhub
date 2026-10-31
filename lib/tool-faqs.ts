@@ -1463,7 +1463,7 @@ export const toolFaqs: Record<string, FaqPair[]> = {
   'gpt-token-counter': [
     {
       q: 'Is this token count exact or an estimate?',
-      a: 'An estimate. It uses the ~4-characters-per-token rule of thumb refined by a word/punctuation split, so it lands near cl100k_base. Real billing uses the provider\'s exact tokenizer, so treat the number as an order-of-magnitude guide.',
+      a: 'An estimate. It uses the ~4-characters-per-token rule of thumb refined by a word/punctuation split, without running a model tokenizer or providing a validated error bound. Real billing uses the provider\'s exact tokenizer, so treat the number as an order-of-magnitude guide.',
     },
     {
       q: 'Why does my real token count differ from this estimate?',

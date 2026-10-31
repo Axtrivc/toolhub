@@ -28,8 +28,8 @@ const en: ReactNode = (
         is roughly <strong>4 characters or 0.75 words</strong> of English. This tool starts from that classic
         chars÷4 rule of thumb, then refines it by splitting your text into word runs and punctuation: short
         words count as about one token, long words as roughly one per five characters, and each punctuation mark
-        as its own token. The two heuristics are averaged. Expect the result to land within about 10–20% of the
-        real count — close enough for budgeting, not for billing disputes.
+        as its own token. The two heuristics are averaged. This heuristic has no validated error bound and does not run a model tokenizer.
+        Before checking a hard context limit or estimating a bill, use the selected model’s official tokenizer or token-count API.
       </p>
     </div>
 
@@ -70,7 +70,7 @@ const zh: ReactNode = (
     <div>
       <h2>估算值是如何算出来的</h2>
       <p>
-        诸如 <code>cl100k_base</code>(GPT-4 和 GPT-3.5 使用)之类的分词器会把文本切成子词单元,因此一个 token 大约对应英文的 <strong>4 个字符或 0.75 个单词</strong>。本工具以这条经典的「字符数 ÷ 4」经验法则为起点,再通过把文本拆分为单词段和标点来细化:短词大约算 1 个 token,长词大约每 5 个字符算 1 个,每个标点符号各算 1 个 token,最后取两种启发式的平均值。结果通常与真实计数相差约 10–20%——足够做预算估算,但不足以用于计费争议。
+        诸如 <code>cl100k_base</code>(GPT-4 和 GPT-3.5 使用)之类的分词器会把文本切成子词单元,因此一个 token 大约对应英文的 <strong>4 个字符或 0.75 个单词</strong>。本工具以这条经典的「字符数 ÷ 4」经验法则为起点,再通过把文本拆分为单词段和标点来细化:短词大约算 1 个 token,长词大约每 5 个字符算 1 个,每个标点符号各算 1 个 token,最后取两种启发式的平均值。此启发式方法没有经过验证的误差范围,也不运行模型分词器。检查上下文硬限制或估算账单前,请使用所选模型的官方分词器或 token 计数 API。
       </p>
     </div>
 
@@ -108,8 +108,8 @@ const es: ReactNode = (
         así que un token corresponde aproximadamente a <strong>4 caracteres o 0,75 palabras</strong> de inglés. Esta
         herramienta parte de esa regla clásica de caracteres÷4 y luego la refina dividiendo tu texto en secuencias
         de palabras y signos de puntuación: las palabras cortas cuentan como un token, las largas como uno por cada
-        cinco caracteres y cada signo de puntuación como su propio token. Se promedian ambas heurísticas. Espera que
-        el resultado caiga dentro de un 10–20 % del recuento real — suficiente para presupuestos, no para disputas de facturación.
+        cinco caracteres y cada signo de puntuación como su propio token. Se promedian ambas heurísticas. Esta heurística no tiene un margen de error validado ni ejecuta un tokenizador de modelo.
+        Para comprobar un límite de contexto o estimar una factura, usa el tokenizador oficial o la API de recuento del modelo seleccionado.
       </p>
     </div>
 
@@ -157,8 +157,8 @@ const de: ReactNode = (
         sodass ein Token etwa <strong>4 Zeichen oder 0,75 Wörter</strong> Englisch entspricht. Dieses Werkzeug geht
         von dieser klassischen Zeichen÷4-Regel aus und verfeinert sie, indem es deinen Text in Wortfolgen und
         Satzzeichen zerlegt: Kurze Wörter zählen als etwa ein Token, lange als grob eins pro fünf Zeichen und jedes
-        Satzzeichen als eigenes Token. Beide Heuristiken werden gemittelt. Erwarte ein Ergebnis innerhalb von etwa
-        10–20 % der tatsächlichen Anzahl — gut genug für die Budgetplanung, nicht für Abrechnungsstreitigkeiten.
+        Satzzeichen als eigenes Token. Beide Heuristiken werden gemittelt. Diese Heuristik hat keine validierte Fehlergrenze und führt keinen Modell-Tokenizer aus.
+        Prüfe Kontextgrenzen und Kosten mit dem offiziellen Tokenizer oder der Token-Zähl-API des gewählten Modells.
       </p>
     </div>
 

@@ -43,7 +43,7 @@ export const gptTokenCounterL10n: ToolL10n = {
       'sCharactersNoSpaces': '字符(不含空格):',
       'sEstimatedInputCost': '估算输入费用:',
       'sEstimatedTokens': '估算 token:',
-      'sHeuristic': '(启发式,~cl100k_base)',
+      'sHeuristic': '(启发式估算)',
       'sModel': '模型:',
       'sSentences': '句:',
       'sWords': '词:',
@@ -68,7 +68,7 @@ export const gptTokenCounterL10n: ToolL10n = {
     faqs: [
       {
         q: '这个 token 数是精确值还是估算值?',
-        a: '是估算值。它用「约每 4 个字符 1 个 token」的经验规则,并按单词/标点切分做修正,结果接近 cl100k_base。真正的计费用的是各家官方的分词器,所以请把这个数字当作量级参考。',
+        a: '是估算值。它用「约每 4 个字符 1 个 token」的经验规则,并按单词/标点切分做修正,不运行模型分词器,也没有经过验证的误差范围。真正的计费用的是各家官方的分词器,所以请把这个数字当作量级参考。',
       },
       {
         q: '为什么实际 token 数和这个估算不一样?',
@@ -118,7 +118,7 @@ export const gptTokenCounterL10n: ToolL10n = {
       'sCharactersNoSpaces': 'Caracteres (sin espacios):',
       'sEstimatedInputCost': 'Coste de entrada estimado:',
       'sEstimatedTokens': 'Tokens estimados:',
-      'sHeuristic': '(heurístico, ~cl100k_base)',
+      'sHeuristic': '(estimación heurística)',
       'sModel': 'Modelo:',
       'sSentences': 'Oraciones:',
       'sWords': 'Palabras:',
@@ -143,7 +143,7 @@ export const gptTokenCounterL10n: ToolL10n = {
     faqs: [
       {
         q: '¿Este recuento de tokens es exacto o una estimación?',
-        a: 'Es una estimación. Usa la regla aproximada de ~4 caracteres por token, refinada con una división por palabras y signos de puntuación, por lo que se acerca a cl100k_base. La facturación real usa el tokenizador exacto del proveedor, así que trátalo como una guía de orden de magnitud.',
+        a: 'Es una estimación. Usa la regla aproximada de ~4 caracteres por token, refinada con una división por palabras y signos de puntuación, sin ejecutar un tokenizador de modelo ni ofrecer un margen de error validado. La facturación real usa el tokenizador exacto del proveedor, así que trátalo como una guía de orden de magnitud.',
       },
       {
         q: '¿Por qué mi recuento real de tokens difiere de esta estimación?',
@@ -193,7 +193,7 @@ export const gptTokenCounterL10n: ToolL10n = {
       'sCharactersNoSpaces': 'Zeichen (ohne Leerzeichen):',
       'sEstimatedInputCost': 'Geschätzte Eingabekosten:',
       'sEstimatedTokens': 'Geschätzte Tokens:',
-      'sHeuristic': '(heuristisch, ~cl100k_base)',
+      'sHeuristic': '(heuristische Schätzung)',
       'sModel': 'Modell:',
       'sSentences': 'Sätze:',
       'sWords': 'Wörter:',
@@ -218,7 +218,7 @@ export const gptTokenCounterL10n: ToolL10n = {
     faqs: [
       {
         q: 'Ist diese Token-Anzahl exakt oder eine Schätzung?',
-        a: 'Eine Schätzung. Sie nutzt die Daumenregel von ~4 Zeichen pro Token, verfeinert durch eine Wort-/Satzzeichen-Aufteilung, und landet damit nahe cl100k_base. Die echte Abrechnung verwendet den exakten Tokenizer des Anbieters, also betrachte die Zahl als Richtwert für die Größenordnung.',
+        a: 'Eine Schätzung. Sie nutzt die Daumenregel von ~4 Zeichen pro Token, verfeinert durch eine Wort-/Satzzeichen-Aufteilung, ohne einen Modell-Tokenizer auszuführen oder eine validierte Fehlergrenze anzugeben. Die echte Abrechnung verwendet den exakten Tokenizer des Anbieters, also betrachte die Zahl als Richtwert für die Größenordnung.',
       },
       {
         q: 'Warum weicht meine echte Token-Anzahl von dieser Schätzung ab?',
