@@ -1,0 +1,88 @@
+{
+  "generated_at": "2026-10-31T08:42:35.579647+00:00",
+  "page_count": 372,
+  "sitemap_count": 369,
+  "finding_counts": {
+    "hidden_h1": 369,
+    "streamed_main_content": 369
+  },
+  "baseline": "d465717 exported snapshot restored from published environment; SHA provenance supplied by initial git baseline, not fresh build",
+  "similarity_top": [
+    {
+      "url": "https://toolhub.axtrivc.com/tools/lowercase-converter/",
+      "closest": "https://toolhub.axtrivc.com/tools/uppercase-converter/",
+      "similarity": 0.1841
+    },
+    {
+      "url": "https://toolhub.axtrivc.com/tools/uppercase-converter/",
+      "closest": "https://toolhub.axtrivc.com/tools/lowercase-converter/",
+      "similarity": 0.1841
+    },
+    {
+      "url": "https://toolhub.axtrivc.com/tools/text-to-binary/",
+      "closest": "https://toolhub.axtrivc.com/tools/url-query-parser/",
+      "similarity": 0.1837
+    },
+    {
+      "url": "https://toolhub.axtrivc.com/tools/url-query-parser/",
+      "closest": "https://toolhub.axtrivc.com/tools/text-to-binary/",
+      "similarity": 0.1837
+    },
+    {
+      "url": "https://toolhub.axtrivc.com/tools/slug-to-title/",
+      "closest": "https://toolhub.axtrivc.com/tools/text-to-list/",
+      "similarity": 0.1788
+    },
+    {
+      "url": "https://toolhub.axtrivc.com/tools/text-to-list/",
+      "closest": "https://toolhub.axtrivc.com/tools/slug-to-title/",
+      "similarity": 0.1788
+    },
+    {
+      "url": "https://toolhub.axtrivc.com/tools/json-to-csv/",
+      "closest": "https://toolhub.axtrivc.com/tools/url-query-parser/",
+      "similarity": 0.174
+    },
+    {
+      "url": "https://toolhub.axtrivc.com/tools/url-decoder/",
+      "closest": "https://toolhub.axtrivc.com/tools/url-query-parser/",
+      "similarity": 0.1677
+    },
+    {
+      "url": "https://toolhub.axtrivc.com/tools/commission-calculator/",
+      "closest": "https://toolhub.axtrivc.com/tools/simple-interest-calculator/",
+      "similarity": 0.1642
+    },
+    {
+      "url": "https://toolhub.axtrivc.com/tools/simple-interest-calculator/",
+      "closest": "https://toolhub.axtrivc.com/tools/commission-calculator/",
+      "similarity": 0.1642
+    },
+    {
+      "url": "https://toolhub.axtrivc.com/tools/bill-split-calculator/",
+      "closest": "https://toolhub.axtrivc.com/tools/commission-calculator/",
+      "similarity": 0.1616
+    },
+    {
+      "url": "https://toolhub.axtrivc.com/tools/roi-calculator/",
+      "closest": "https://toolhub.axtrivc.com/tools/commission-calculator/",
+      "similarity": 0.1597
+    },
+    {
+      "url": "https://toolhub.axtrivc.com/tools/text-diff/",
+      "closest": "https://toolhub.axtrivc.com/tools/slug-to-title/",
+      "similarity": 0.1595
+    },
+    {
+      "url": "https://toolhub.axtrivc.com/tools/markup-calculator/",
+      "closest": "https://toolhub.axtrivc.com/tools/commission-calculator/",
+      "similarity": 0.1594
+    },
+    {
+      "url": "https://toolhub.axtrivc.com/tools/html-tag-stripper/",
+      "closest": "https://toolhub.axtrivc.com/tools/slug-to-title/",
+      "similarity": 0.1591
+    }
+  ],
+  "method_note": "Retains raw baseline observations only; severity and provisional quality classifications were refined while implementing the gate. Compare finding_counts, not historical classifications."
+}

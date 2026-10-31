@@ -26,6 +26,16 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Tool and infrastructure regression tests
+        run: |
+          npm run smoke
+          node scripts/test-flagship.mjs
+          node scripts/test-json-repair.mjs
+          node scripts/test-service-worker.mjs
+          node scripts/test-related-tools.mjs
+          python3 scripts/seo-audit.test.py
+          python3 scripts/test-gsc-analysis.py
+
       - name: Verify tool samples
         run: node scripts/check-samples.mjs
 
@@ -34,8 +44,32 @@ jobs:
         env:
           NEXT_PUBLIC_SITE_URL: https://toolhub.axtrivc.com
 
+      - name: Type check
+        run: npm run lint
+
       - name: Verify static output
         run: test -f out/index.html && test -f out/sitemap.xml
 
       - name: Verify rendered SEO metadata and sitemap
         run: node scripts/verify-seo-export.mjs
+
+      - name: Audit every exported HTML page and internal link graph
+        run: python3 scripts/seo-audit.py
+
+      - name: Install Chromium for mobile browser regressions
+        run: npx playwright-core install --with-deps chromium
+
+      - name: Mobile browser and no-JavaScript regressions
+        run: |
+          node scripts/static-server.mjs out 3100 > /tmp/seo-static.log 2>&1 &
+          node scripts/seo-browser.mjs reports/seo/browser-final.json
+
+      - name: Retain rendered SEO inventory
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: seo-page-inventory
+          path: |
+            reports/seo/page-inventory.*
+            reports/seo/browser-final.json
+          if-no-files-found: warn
