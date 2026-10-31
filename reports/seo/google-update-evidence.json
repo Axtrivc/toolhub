@@ -1,0 +1,12 @@
+{
+  "checkedAtUTC": "2026-10-31T08:39:37Z",
+  "url": "https://status.search.google.com/incidents/LEubPCm2octf2uMqCFKE",
+  "httpStatus": 200,
+  "responseSha256": "4c365989d2af7bf4ace23792a10b72aca2626c28704e122ed293173702ddaed0",
+  "title": "August 2026 spam update",
+  "service": "Ranking",
+  "began": "2026-08-18 09:27 US/Pacific",
+  "ended": "2026-08-21 01:49 US/Pacific",
+  "scopeQuote": "Released the August 2026 spam update, which applies globally and to all languages. The rollout may take a few days to complete.",
+  "limitation": "Official incident timing only. Does not identify ToolHub or establish causality."
+}

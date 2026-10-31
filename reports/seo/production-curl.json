@@ -1,0 +1,162 @@
+{
+  "checkedAt": "2026-10-31T08:42:36.227169+00:00",
+  "observations": [
+    {
+      "url": "https://toolhub.axtrivc.com/",
+      "client": "curl default User-Agent, inherited proxy and CA",
+      "exitCode": 0,
+      "statusAndEffectiveUrl": [
+        "200",
+        "https://toolhub.axtrivc.com/"
+      ],
+      "responseChain": [
+        "HTTP/1.1 200 OK",
+        "HTTP/2 200 "
+      ],
+      "locations": [],
+      "xRobotsTag": [],
+      "canonicalTags": [
+        "<link rel=\"canonical\" href=\"https://toolhub.axtrivc.com/\"/>"
+      ],
+      "title": [
+        "350+ Free Online Tools That Just Work"
+      ],
+      "bodyBytes": 322560,
+      "error": ""
+    },
+    {
+      "url": "https://toolhub.axtrivc.com/robots.txt",
+      "client": "curl default User-Agent, inherited proxy and CA",
+      "exitCode": 0,
+      "statusAndEffectiveUrl": [
+        "200",
+        "https://toolhub.axtrivc.com/robots.txt"
+      ],
+      "responseChain": [
+        "HTTP/1.1 200 OK",
+        "HTTP/2 200 "
+      ],
+      "locations": [],
+      "xRobotsTag": [],
+      "canonicalTags": [],
+      "title": [],
+      "bodyBytes": 2862,
+      "error": ""
+    },
+    {
+      "url": "https://toolhub.axtrivc.com/sitemap.xml",
+      "client": "curl default User-Agent, inherited proxy and CA",
+      "exitCode": 0,
+      "statusAndEffectiveUrl": [
+        "200",
+        "https://toolhub.axtrivc.com/sitemap.xml"
+      ],
+      "responseChain": [
+        "HTTP/1.1 200 OK",
+        "HTTP/2 200 "
+      ],
+      "locations": [],
+      "xRobotsTag": [],
+      "canonicalTags": [],
+      "title": [],
+      "bodyBytes": 29895,
+      "error": ""
+    },
+    {
+      "url": "https://toolhub.axtrivc.com/tools/loan-calculator/",
+      "client": "curl default User-Agent, inherited proxy and CA",
+      "exitCode": 0,
+      "statusAndEffectiveUrl": [
+        "200",
+        "https://toolhub.axtrivc.com/tools/loan-calculator/"
+      ],
+      "responseChain": [
+        "HTTP/1.1 200 OK",
+        "HTTP/2 200 "
+      ],
+      "locations": [],
+      "xRobotsTag": [],
+      "canonicalTags": [
+        "<link rel=\"canonical\" href=\"https://toolhub.axtrivc.com/tools/loan-calculator/\"/>"
+      ],
+      "title": [
+        "Loan Calculator with Amortization Schedule | ToolHub"
+      ],
+      "bodyBytes": 104340,
+      "error": ""
+    },
+    {
+      "url": "https://toolhub.axtrivc.com/tools/loan-calculator",
+      "client": "curl default User-Agent, inherited proxy and CA",
+      "exitCode": 0,
+      "statusAndEffectiveUrl": [
+        "200",
+        "https://toolhub.axtrivc.com/tools/loan-calculator/"
+      ],
+      "responseChain": [
+        "HTTP/1.1 200 OK",
+        "HTTP/2 308 ",
+        "HTTP/2 200 "
+      ],
+      "locations": [
+        "location: /tools/loan-calculator/"
+      ],
+      "xRobotsTag": [],
+      "canonicalTags": [
+        "<link rel=\"canonical\" href=\"https://toolhub.axtrivc.com/tools/loan-calculator/\"/>"
+      ],
+      "title": [
+        "Loan Calculator with Amortization Schedule | ToolHub"
+      ],
+      "bodyBytes": 104340,
+      "error": ""
+    },
+    {
+      "url": "https://toolhub.axtrivc.com/tools/loan-calculator/?lang=zh",
+      "client": "curl default User-Agent, inherited proxy and CA",
+      "exitCode": 0,
+      "statusAndEffectiveUrl": [
+        "200",
+        "https://toolhub.axtrivc.com/tools/loan-calculator/?lang=zh"
+      ],
+      "responseChain": [
+        "HTTP/1.1 200 OK",
+        "HTTP/2 200 "
+      ],
+      "locations": [],
+      "xRobotsTag": [],
+      "canonicalTags": [
+        "<link rel=\"canonical\" href=\"https://toolhub.axtrivc.com/tools/loan-calculator/\"/>"
+      ],
+      "title": [
+        "Loan Calculator with Amortization Schedule | ToolHub"
+      ],
+      "bodyBytes": 104340,
+      "error": ""
+    },
+    {
+      "url": "https://toolhub.axtrivc.com/tools/nonexistent-seo-audit-20261031/",
+      "client": "curl default User-Agent, inherited proxy and CA",
+      "exitCode": 0,
+      "statusAndEffectiveUrl": [
+        "404",
+        "https://toolhub.axtrivc.com/tools/nonexistent-seo-audit-20261031/"
+      ],
+      "responseChain": [
+        "HTTP/1.1 200 OK",
+        "HTTP/2 404 "
+      ],
+      "locations": [],
+      "xRobotsTag": [],
+      "canonicalTags": [
+        "<link rel=\"canonical\" href=\"https://toolhub.axtrivc.com/\"/>"
+      ],
+      "title": [
+        "ToolHub - Free Online Tools"
+      ],
+      "bodyBytes": 49683,
+      "error": ""
+    }
+  ],
+  "limitations": "Current HTTP observations through cloud proxy; not historical evidence or verified Googlebot requests."
+}

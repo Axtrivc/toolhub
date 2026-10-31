@@ -1,0 +1,54 @@
+[
+  {
+    "cutoff": "2026-08-10T23:59:59+08:00",
+    "sha": "4590e10ef5be93f29562ed62e80342d91c7e613d",
+    "commit": "2026-08-10T23:11:00+08:00 fix(seo): batch-trim meta descriptions to 70-150 chars for Bing compliance",
+    "publishedTools": 168,
+    "toolPageFiles": 168,
+    "staticExport": true,
+    "trailingSlash": true,
+    "selfCanonical": true,
+    "ratingsInSeo": false,
+    "languageAlternatesInSeo": false,
+    "robotsAllowAll": true
+  },
+  {
+    "cutoff": "2026-08-17T23:59:59+08:00",
+    "sha": "716ad11c7225debaf64f49e83190a37952e4b338",
+    "commit": "2026-08-17T10:44:31+08:00 feat(mortgage-calculator): 补齐 PMI/房产税/保险/HOA 与提前还款对比,兑现 PITI 承诺",
+    "publishedTools": 169,
+    "toolPageFiles": 169,
+    "staticExport": true,
+    "trailingSlash": true,
+    "selfCanonical": true,
+    "ratingsInSeo": false,
+    "languageAlternatesInSeo": false,
+    "robotsAllowAll": true
+  },
+  {
+    "cutoff": "2026-08-18T23:59:59+08:00",
+    "sha": "716ad11c7225debaf64f49e83190a37952e4b338",
+    "commit": "2026-08-17T10:44:31+08:00 feat(mortgage-calculator): 补齐 PMI/房产税/保险/HOA 与提前还款对比,兑现 PITI 承诺",
+    "publishedTools": 169,
+    "toolPageFiles": 169,
+    "staticExport": true,
+    "trailingSlash": true,
+    "selfCanonical": true,
+    "ratingsInSeo": false,
+    "languageAlternatesInSeo": false,
+    "robotsAllowAll": true
+  },
+  {
+    "cutoff": "2026-08-22T23:59:59+08:00",
+    "sha": "b8e045b4576121a483f41455b3a23919a305091c",
+    "commit": "2026-08-22T21:38:12+08:00 feat(analytics): 站内访客计数器(Pages Functions + D1)+ CF Web Analytics/GA4 环境驱动接入",
+    "publishedTools": 169,
+    "toolPageFiles": 169,
+    "staticExport": true,
+    "trailingSlash": true,
+    "selfCanonical": true,
+    "ratingsInSeo": false,
+    "languageAlternatesInSeo": false,
+    "robotsAllowAll": true
+  }
+]

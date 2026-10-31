@@ -1,0 +1,44 @@
+{
+  "observed_at": "2026-10-31T08:40:41.064111+00:00",
+  "user_agent": "Python urllib (not verified Googlebot)",
+  "results": [
+    {
+      "url": "https://toolhub.axtrivc.com/",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "url": "https://toolhub.axtrivc.com/robots.txt",
+      "final_url": "https://toolhub.axtrivc.com/robots.txt",
+      "status": 200,
+      "headers": {
+        "content-type": "text/plain; charset=utf-8",
+        "cache-control": "private, max-age=0, no-store, no-cache, must-revalidate, post-check=0, pre-check=0"
+      },
+      "bytes": 2676
+    },
+    {
+      "url": "https://toolhub.axtrivc.com/sitemap.xml",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "url": "https://toolhub.axtrivc.com/tools/loan-calculator",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "url": "https://toolhub.axtrivc.com/tools/loan-calculator/",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "url": "https://toolhub.axtrivc.com/tools/loan-calculator/?lang=zh",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "url": "https://toolhub.axtrivc.com/seo-investigation-does-not-exist/",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "url": "https://www.toolhub.axtrivc.com/",
+      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+    }
+  ]
+}

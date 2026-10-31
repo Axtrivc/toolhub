@@ -1,0 +1,186 @@
+b7f4507324efb5023756c6a087e2d4b334d10368 2026-08-25T23:08:34+08:00 feat(faqs): content layer for expansion batch 3 — 9 tools
+50b9d362f7c5aeb0f5630624c7ce9c42f4ff64b5 2026-08-25T23:01:19+08:00 feat(faqs): content layer for expansion batch 2 — 11 tools
+d6eec657b3eccf06a145406bfcace91fcc182997 2026-08-25T22:51:24+08:00 feat(faqs): content layer for expansion batch 1 — 10 tools
+991364cfbb24c270842af002e687c63ce6ee90b2 2026-08-25T22:14:04+08:00 feat(tools): add 3 AI-data tools + promote AI hub to first-class card
+8fec8a05beba5f1d288d778053ef2e4f9b90e581 2026-08-25T21:44:51+08:00 feat(tools): add 4 AI-workflow tools — json repair, fence extractor, prompt filler, tools builder
+ecdd2f985251388ddb9f1e471aff5d20897abc43 2026-08-25T21:03:47+08:00 feat(tools): add 5 tools — LLM cost, context window, JSON→Zod, AES-GCM, car cost
+078b7697d70caec06b7630fb17a66b029911a56a 2026-08-25T20:47:31+08:00 fix(amortization): deliver the promised payment-by-payment schedule
+cf5c12ac29d3e345af8aee505c4d2850eeaebb82 2026-08-25T20:31:06+08:00 feat(l10n): zh/es/de UI bundles for all 44 expansion tools
+b78e282a3e99f67f28cb0e1d2fd359e4c45f58e5 2026-08-25T15:57:26+08:00 feat(tools): add 7 fun/decision tools — dice, coin flip, wheel spinner, morse translator, typing test, team generator, password entropy
+7fc2c8e1b181a82443ceb5cb32c20755baa47c23 2026-08-25T15:31:27+08:00 feat(tools): add 7 developer tools — jwt generator, hash comparator, base converter, cron builder, htaccess redirects, unicode lookup, toml-to-json
+0039ab340a8287fab4f6080a435bc21feef7c6d0 2026-08-25T14:44:08+08:00 feat(tools): add 9 more tools — keycode, mime lookup, xml formatter, markdown toc, log filter, ascii table, screen time, reading level, hmac
+8defd22bd101364481665ca4df9c14d5a0878499 2026-08-25T14:07:03+08:00 feat(tools): add 11 more tools — fuel, subscriptions, overtime, take-home pay, wedding, amortization, HR zones, caffeine, steps, paint, dog age
+ab5248b0df52d9e6025da7720b8b8e3819057d82 2026-08-25T13:56:43+08:00 feat(tools): add 10 new tools — epoch, json-diff, line-diff, robots.txt, roman, pace, protein, electricity, sleep, cooking
+dcf23ece80b40e5c0f5bee3b724fed62fce12c7f 2026-08-25T12:12:15+08:00 fix(dark-mode): theme obese-II category color in BMI calculator
+4de10d1c336dc9c0a7deb7daf6bd63cd8094a3ee 2026-08-25T12:09:28+08:00 fix(dark-mode): theme BMI/TDEE category red text (R4 verification leftovers)
+d501dc3223d974dbe12647031ece2e511964a528 2026-08-25T11:58:19+08:00 fix(dark-mode): R3 residual sweep — pre blocks, selects, labels, alerts
+66f9917b6c9e9d6d64ec814e8bf0773ed8f0b60c 2026-08-25T10:35:37+08:00 docs(readme): add live screenshots (hero light/dark, command palette, calculator)
+778d90430093a396ab62aa53fb35e65aaa46f7d3 2026-08-25T10:26:59+08:00 fix(ux): R2 review fixes — dark text leftovers, sample feedback, touch pin
+57b6816b000cb52bc91fd33cd1dd82345c8a8579 2026-08-25T10:17:39+08:00 docs: restyle README with badges, emoji sections and richer formatting
+5d9a6fd540bb349cc9aaf29cd5007b329ed3c690 2026-08-25T10:06:44+08:00 docs: rewrite README as a proper project introduction
+b63652a162a67503fe7ce62cabd4bfbc227bb988 2026-08-25T09:49:07+08:00 feat(calculators): opt-in URL state sync for shareable inputs
+4037b64715830fb16adac3703818d9ce6e9036f4 2026-08-25T09:42:55+08:00 feat(tools-dir): localize the /tools directory page
+3f7b77d9f6c528a15473c22552bd2abb18c2a361 2026-08-25T09:38:03+08:00 feat(ux): clear-recent button, curated 404 picks, live category deep-links
+0c25ea5dc8c8e806fc559afea61a508cbe14d0e6 2026-08-25T09:18:46+08:00 feat(calculators): reset button, overwrite-confirm on Load Sample, no autofill
+085106278b6f7e75450a9133d78ec71f4811da25 2026-08-25T09:05:29+08:00 feat(a11y): skip link, global focus-visible, dialog focus traps
+67c5325b2bad0d0d4634ef067e8dc7137cccd3be 2026-08-24T22:54:45+08:00 fix(dark-mode): repair syntax broken by the sweep script
+f0bcb37e3bc961a05998fb9cc8860688d5377610 2026-08-24T22:46:46+08:00 fix(dark-mode): theme-aware dark variants across ~30 tool pages
+cfc8cb086dfc3c7a52302b2d87fc459a4b62a53a 2026-08-24T21:19:24+08:00 fix(infra): fail-fast site URL, resilient stats widget, global error boundary
+e80ae21a1c98927afc27fd4fa6051026a71e266c 2026-08-24T21:13:45+08:00 fix(stats-api): stop leaking internals, reject cross-site POSTs
+580f0ca4d4e891ea4bafcd0b689effca27ec4e57 2026-08-24T21:10:15+08:00 fix(seo): apply jsonLdStringify to all JSON-LD injection sites
+9b02207f5c31cebb7c7e2bee2fca33904b95d847 2026-08-24T21:02:27+08:00 fix(tools): business-day parity, geometry guards, code-point counts, regex guard, print feedback
+e968011ac5f43e062ab83743be08c8c35baea4b5 2026-08-24T20:42:24+08:00 fix(calculators): block negative inputs across remaining finance tools
+6520cdfca7bc73083c02844a665030edcaa5ac4b 2026-08-24T20:16:07+08:00 fix(add-line-numbers): drop phantom number for trailing newline
+588d790ca71fbe5c623dafb94e901e002ba90ab3 2026-08-24T20:14:18+08:00 fix(combinatorics): exact BigInt results for C(n,r) and P(n,r)
+5ebcd57f37e81206810e16615f0b23fe2d7c58f9 2026-08-24T20:04:04+08:00 fix(credit-card-payoff): reject negative balance/APR/payment
+87b29ba437bf9d77acec5134322077ba3792c355 2026-08-24T20:00:06+08:00 fix(fraction-calculator): sample op must match select option values
+cc2b8b4a12965af350226f072d967ba5850752a1 2026-08-24T19:56:59+08:00 fix(age-difference): port anchored month arithmetic to eliminate negative days
+255ea88a6e947efb97aeb048639dbb497dce8f7e 2026-08-24T19:54:35+08:00 fix(capital-gains): stack short-term gain through ordinary brackets
+c627bdaefaa0acb43b4139018e2ba6fdb4486610 2026-08-23T20:06:15+08:00 fix(app): surface error digest in error UI
+544b6ac3964d96c345eb2ec3f103a36ecd84f612 2026-08-23T20:00:51+08:00 perf(seo): trim site-wide meta keywords
+7491e26bbf70cf179fec4ddf9abeec4a2bc3f904 2026-08-23T19:47:15+08:00 fix(embed): escape quotes in embed snippet title
+8ad5168b7849711ee803bbc1f836e0460862574e 2026-08-23T19:46:16+08:00 fix(jwt-decoder): refresh expiry check periodically
+cc1fc78dff754a9d1428881197c46e72307701ca 2026-08-23T19:41:04+08:00 feat(format): add strict number parsing for calculators
+6a054a2e64ab22ad0b8468ab1953162087254c87 2026-08-23T19:21:38+08:00 fix(seo): escape "<" in JSON-LD payloads
+8155f43982e2aa4472162b3db2d3d062409917ef 2026-08-23T19:16:52+08:00 fix(mortgage): reject invalid down payment percentage and price
+ca962cfd7d7a938113f11c2273f2c85c7d144b11 2026-08-23T19:13:58+08:00 fix(calculators): add non-negative validation to APY calculator
+a10ee91d08fc0e7beb091bed4cad2135963b5590 2026-08-23T19:10:31+08:00 fix(auto-loan): validate loan term to prevent divide-by-zero
+b8e045b4576121a483f41455b3a23919a305091c 2026-08-22T21:38:12+08:00 feat(analytics): 站内访客计数器(Pages Functions + D1)+ CF Web Analytics/GA4 环境驱动接入
+716ad11c7225debaf64f49e83190a37952e4b338 2026-08-17T10:44:31+08:00 feat(mortgage-calculator): 补齐 PMI/房产税/保险/HOA 与提前还款对比,兑现 PITI 承诺
+d5956a5297e2fb5be36a7f76bc02574834e40181 2026-08-17T09:26:17+08:00 feat(tools): D5 默认示例本地化 + 单位转换器交换按钮与全单位同显面板
+f79558b246263a4133c922d2ecb1e0bfef0f7224 2026-08-17T09:25:48+08:00 feat(tools): 健康类计算器英制单位支持——7 工具公英制切换 + BodyFat 双方法
+5d6a7dc47bebcce3ebbfbf493eff49fef81c94f0 2026-08-17T08:28:38+08:00 fix(tools): 全站逐工具实用性+缺陷审计修复——7 项 P0 算法错误与 40+ 项 P1/P2
+a784ea69724672b11c16f4669607286a3d62cd7f 2026-08-15T23:23:46+08:00 fix(tools): 二次全站逐行审计修复——10 项 P1、F-2 compute 三语本地化、SEO/暗色/合规与四语内容勘误
+054d98c175cea6a0802d162e5a077244988a4a96 2026-08-15T16:17:40+08:00 fix(tools): 全站审计修复——中文支持、2026 税率费率、21 项逻辑 bug 与本地化
+0dd487112c9325e503ed4d9d4e3b38a248d463b8 2026-08-14T21:10:04+08:00 feat(home): 新增姊妹站 WhatIf 投资回放入口横幅(四语)
+cdc03c5a9fc875e0708a5276673a42f2703252e4 2026-08-14T10:35:21+08:00 feat(gpt-token-counter): 模型价格更新到 2026-08 最新并按厂商分组
+29d2ac837caf4c382aefc6e1a1f597ac515ffc65 2026-08-14T10:00:42+08:00 feat(i18n): 补齐 FAQ/公式/交互界面三语本地化三大内容缺口
+2414889d8e0aa3e64a3b1b5c97f578e8df3f41ce 2026-08-13T21:22:56+08:00 feat(home): 按 GSC 曝光重排首页 Hub 精选与底部 Popular 栏
+d262f47b19f0919fa35a161bd4c0021b7214e63e 2026-08-13T15:56:07+08:00 chore: 新增 sample key 校验脚本并更新 gitignore
+acb12ef6df7e218c902287ab196ddf9f9fe0d18b 2026-08-13T15:55:56+08:00 fix: 修复 SQL/ListDiff/下载/博客翻译及深色模式等中低危问题
+434bb480498145bb7db410beb5848ea76ced7dff 2026-08-13T15:55:40+08:00 fix(calculators): 修复进制转换大数精度丢失与 Load Sample 示例 key 失配
+326df62c4a2d0c24fe69272ed8212158a87e168a 2026-08-13T12:11:47+08:00 chore(scripts): 新增 SEO 长度检查与 title 压缩辅助脚本
+a010c62265cb41b0b729fc6c0dbbf51fab856023 2026-08-13T12:08:29+08:00 chore(seo): 压缩超长 title 并同步工具数量
+c66f6b9422b2ab52c50de9d977b61068e1ec71cc 2026-08-13T12:08:21+08:00 feat: 新增全站错误边界、加载骨架与环境变量示例
+eb28a2f51088734ceb2204a767ccde224a88d273 2026-08-13T12:08:14+08:00 fix(calculators): 修复计算器除零与边界输入校验
+32167558c3af7194aba0206a4c69d88bfdaa2f25 2026-08-12T23:20:45+08:00 fix(round2-review): repair 23 issues from line-by-line audit
+2472afe310ac88a518a0aee64263affeb73a1051 2026-08-12T21:52:35+08:00 fix(security+i18n): sanitize markdown preview with DOMPurify, dedupe SSH comment field, localize 404 page, fill 30 missing tool translations zh/es/de
+15451da59af21d092f87dd53bab64dbf58dace16 2026-08-12T21:06:37+08:00 feat(i18n): client UI l10n batch7 + average (6 tools) zh/es/de — Phase 2 complete
+f8d9bee949b7ec9b4e72a7b53ad3b610426952f8 2026-08-12T20:59:53+08:00 feat(i18n): client UI l10n batch6Calculators (8 tools) zh/es/de
+f003adfa53db8b7f697c7095fb009960beeaf0f3 2026-08-12T20:49:21+08:00 feat(i18n): client UI l10n batchGenerators (9 tools) zh/es/de
+a75275c982cc9b2cc0e87233699bec9441735cb9 2026-08-12T20:38:46+08:00 feat(i18n): client UI l10n generatedClients (5 tools) zh/es/de
+24247001fa68b137b8e3a30a19be8392eb8e4ace 2026-08-12T20:10:39+08:00 feat(i18n): client UI l10n batch8 (14 tools) zh/es/de
+e5511825b94aa0256ee324903c0e29f37d9e68e9 2026-08-12T19:52:53+08:00 feat(i18n): client UI l10n infra + batch3 (13 tools) zh/es/de
+01a37e7bb8c5d2f93429045bf454d9e88a6e4041 2026-08-12T19:13:36+08:00 feat(i18n): localize ip-checker zh/es/de — complete site-wide l10n (169/169)
+bf2da7d9f4b5e13ed3a9ab327bf4156ee06933ce 2026-08-12T19:04:23+08:00 feat(i18n): localize 12 tools zh/es/de (Misc: code-beautifier → wordle-solver 12)
+db5fba5b19c0cf6bf76e87e07c66bfb589ad31d8 2026-08-12T18:37:44+08:00 feat(i18n): localize 12 tools zh/es/de (Dev/Image/CSS/Text 12)
+a151aecbbeb2906defa9b3e00c0cc48424425fb7 2026-08-12T17:58:04+08:00 feat(i18n): localize 12 tools zh/es/de (Grade/Security/DevOps 12)
+6e08292030d749279b0f26f0b0c1613e8bd45cb3 2026-08-12T17:11:09+08:00 feat(i18n): localize 12 tools zh/es/de (Web/Generator/Date 12)
+91e76582c370f76b270d02b0e07f1b17bbbe47f2 2026-08-12T16:32:32+08:00 feat(i18n): localize 12 tools zh/es/de (Math lcm-gcd + Health Calculators 11)
+15633e95eb1a51f525930fecec144767f9bbb68c 2026-08-12T15:47:39+08:00 feat(i18n): localize 12 tools zh/es/de (Calculators: math + geometry + stats)
+b208ff9f6e5f83ba650ddf6710283f1c574f5ee4 2026-08-12T13:44:53+08:00 feat(i18n): localize 12 tools zh/es/de (Converters 9 + Geometry 3)
+d17ac6c7a3b9c1d461c59fc67adcc0d388fc5238 2026-08-12T12:44:43+08:00 feat(i18n): localize 12 tools zh/es/de (Text finish + Converters 9)
+24411d82f06d77cec42ff8ec53705aa87f39ef25 2026-08-12T12:20:25+08:00 feat(i18n): localize 12 text tools zh/es/de
+fcc67971bbf0b6bca5c22ad479ab353e443d592e 2026-08-12T11:27:39+08:00 feat(i18n): localize 12 developer tools zh/es/de
+eb8013c57f0594317b227add7c4f8d038a5b3759 2026-08-12T10:39:21+08:00 feat(i18n): localize 12 developer tools zh/es/de
+c008fc50245ef10bc101d533618a3897d77befa7 2026-08-12T10:07:48+08:00 feat(i18n): localize 12 tools zh/es/de (Finance final 4 + Developer Tools 8)
+4164ab876037f0fd8e81e9319eb65810ebe09439 2026-08-12T09:25:22+08:00 feat(i18n): localize 12 finance tools zh/es/de
+808da1ef8720218c4ff12824aa8d4fafe862d5f9 2026-08-12T08:55:19+08:00 feat(i18n): localize 6 finance tools zh/es/de
+ce95c93ae7ff132efee64e9a4d86f9cdc07dfcfb 2026-08-12T08:38:47+08:00 feat(i18n): localize credit-card-minimum-payment-calculator zh/es/de
+b84f2b2da27b438f86b09f117b870f13abed0f7d 2026-08-11T23:16:22+08:00 feat(i18n): localize apy-calculator + roi-calculator zh/es/de
+b02daf145dca7a04cbe41ef37bb7f1e60e723210 2026-08-11T23:06:51+08:00 feat(i18n): localize compound-interest-calculator zh/es/de
+75e322412b676d748532e76c5dc155896b6e3e54 2026-08-11T22:56:48+08:00 feat(i18n): localize mortgage-calculator zh/es/de + make batch factory locale-aware
+07c567e6bb6a5c17e1dd4a2563c1919102efbebf 2026-08-11T22:33:31+08:00 feat(i18n): tool-level localization infra + loan-calculator pilot (zh/es/de)
+9afb286fecd772afef3696a6b1041d8e71656de6 2026-08-11T22:33:03+08:00 fix(seo): translate Chinese formula explanations to English on all tool pages
+fbd3c9cbac1300bacad2cf751e8689126cf4f478 2026-08-11T21:09:36+08:00 fix(ip-checker): scope tz/WebRTC signals to own-IP mode, fix 3 logic bugs
+ac3096de38c05b4c9eff903041d06423773e6298 2026-08-11T20:35:11+08:00 fix(ip-checker): localize tool UI via 4-locale i18n dict (en default)
+12c56d29b9852578d4b5813fc6ae101b1bbb6a7f 2026-08-11T19:13:42+08:00 fix(ip-checker): resolve client crash from Cloudflare meta colo object shape
+a650bd3c46b7aae4ed488e7c200552e9a566bf0f 2026-08-11T18:52:44+08:00 feat(tools): add IP Quality & Fraud Score Checker (ip-checker)
+4590e10ef5be93f29562ed62e80342d91c7e613d 2026-08-10T23:11:00+08:00 fix(seo): batch-trim meta descriptions to 70-150 chars for Bing compliance
+5d5f87e1f0a1e48a4a6317c9b0a8b1f7fe039dc1 2026-08-10T22:27:49+08:00 fix(seo): jwt-decoder Meta Description 压缩至 134 字符,修复 Bing 长度告警
+7b5a5050e714c117aa68025f57847cd3fa318e4f 2026-08-10T21:41:30+08:00 feat(seo): 4 个高曝光工具 Title/Description 重写 + 补齐 FAQ(3条) 与公式区块
+a24492ee9850f5e8b7ef1f54f55e2b10ece7ffa0 2026-08-10T20:44:57+08:00 fix(home): Hub 卡头锁定 88px 同高 + 副标语 36px 两行锁高,修复跨列内网格顶边横向错位
+800437a3e215cc4ec9ada74fbd25f7b233220e38 2026-08-10T20:17:33+08:00 fix(home): Hub 卡内网格 72px 定高对齐、未知分类兜底 Utilities、计数徽章加粗、Top-4 精选更新
+0d3940674dc9ccf4098dfb441edeb2d6fec039b9 2026-08-10T19:00:04+08:00 feat(home): redesign homepage into thematic category hubs with glass workspace drawer & sitemap
+2ae7537caf3bc5d650870619f08fe78f0a17f24e 2026-08-09T23:32:25+08:00 feat: add 30 new high-traffic developer, design, and finance tools
+43b5742180a7a1a76420a83db9b60087b1d42842 2026-08-09T18:39:16+08:00 feat: upgrade workspace into 2-column layout with smart scratchpad and complete SVG icon migration
+5dc83343a0d8f3f7965745335d56fe6da1fa4e59 2026-08-08T16:33:28+08:00 chore(seo): add IndexNow verification key file
+1bff1e02bdde1c18e7d8db8c835d81868c6fb531 2026-08-08T14:29:48+08:00 fix(security/logic): 全站二轮审查修复 14 项 bug 与安全漏洞
+e55c22e6d59d8aa048234ceb68c87c8cf4a6db2f 2026-08-07T14:35:06+08:00 docs(blog): 修正 SW 行数与 i18n 字典文件表述,与代码实况对齐
+2aab876abf30305af65044247a7afd883d0c1bb6 2026-08-07T14:21:17+08:00 docs(blog): 新增 i18n 与 UI 动画两章节,公开指标更新为四语言数据
+63df594749e9ff5172015cece5a20494379074f6 2026-08-06T21:02:56+08:00 fix(misc): 温度/百分比/单位转换器显示与 featured 数量、README 等小修
+b53db424a86be140c21c0feea15d1c389ce5928f 2026-08-06T20:57:43+08:00 chore(engineering): lint 脚本、SW 缓存策略、CI 阈值、主题持久化、IndexNow 修正
+953ca81f3fdadec6395cb7c93190ab13e5d12364 2026-08-06T20:53:26+08:00 fix(hydration): 日期与文本工具首帧改用 mounted 标记,消除 SSR/CSR mismatch
+10ab7d7533a20790927a4189fdfb92395302aa69 2026-08-06T20:50:19+08:00 fix(slug): 下划线转空格后统一为分隔符,不再被静默删除
+afc9d4d7b8b3d40725b0152b3f22ddc3693e323a 2026-08-06T20:48:33+08:00 fix(cron): nextFires 游标推进 +1 秒,避免整分边界被跳过
+0ec9017d0c45b6a8ce4f261fdad6f93f811cf9af 2026-08-06T20:46:55+08:00 fix(calculators): 贷款计算器年限不足 1/12 年返回空结果,避免除零 Infinity
+dd3bdbdd101dfb96da2326d978bf0f0e63cd5b4f 2026-08-06T20:45:44+08:00 fix(seo): HowTo Step 1 改为通用文案,去掉不存在的 Load Sample
+43eda758f07a40b4864e74e0f38e0673e5f0a8ee 2026-08-06T20:44:11+08:00 fix(seo): 删除首页失实的 SearchAction 结构化数据
+ae7109891293daa51cf6d7285519db7cd1dcb2cd 2026-08-06T20:42:59+08:00 fix(seo): buildToolMetadata 与自定义 OG 页补齐 og:image / twitter:image
+fde3ce208c5983dbf317f8c5d89255d123ca47b8 2026-08-06T20:41:07+08:00 fix(converters): 流量转换器 gpm/gps/cfm/m3h 系数修正 1000 倍(基准 L/s)
+008212be400076564d8f26a652c639a73b7df81d 2026-08-06T20:39:02+08:00 fix(converters): 燃油经济性改用倒数换算钩子,L/100km 与 mpg 互转正确
+217ffd92e3b0ebae3f35e8c82e25931e044e4f18 2026-08-06T20:37:06+08:00 fix(devtools): Markdown 转 HTML 补全 XSS 转义与 URL 协议白名单
+6bca8e1b881f52e4e2fa13ff849912dc0c6677a1 2026-08-06T20:33:52+08:00 fix(devtools): 随机数生成器非法输入与不重复超限改为报错,避免死循环
+5ab7f3361abc22486fb9229318f9b12380b30b94 2026-08-06T20:30:04+08:00 chore(repo): 停止跟踪内部文档与会话日志
+4158183854779929e213ade0bb2679f38f2c9a73 2026-08-06T15:00:12+08:00 feat(ui): custom language dropdown, semantic tokens, aurora hero & tool shell polish
+c5d9f3917e92bd613b75578158f16125ed8d16ef 2026-08-06T13:04:48+08:00 feat(motion): intensify animations — hero spring entrance, gradient river title, column-based viewport stagger, card hover lift + mouse-follow sheen
+56fd782396e9de69689478ea7e256c12f05c4b2f 2026-08-06T12:27:32+08:00 feat(motion): add hover sheen layer to AnimatedToolCard
+e359a432b9dc6dff8a6b6ad0af4817ee3fe13031 2026-08-06T12:24:05+08:00 feat(motion): search palette enter/exit animation + toggle micro-interactions
+96827a5989a02972c129802bff35cddc6f770f37 2026-08-06T12:15:45+08:00 feat(motion): hero entrance stagger + animated gradient title + explore CTA
+2d49940b89ce8e6fbb67f5b310a37a15c647fabc 2026-08-05T22:59:24+08:00 feat(i18n): blog article body + footer categories localized (4 langs)
+deebaad7881db0f6df6e6d98f78e81543ce2c1e4 2026-08-05T22:39:02+08:00 feat(i18n): localize 4 static pages (about/privacy/contact/terms) + log rule
+0bf1f96a248a91dee9cde370d21e1b3c8cf59e1d 2026-08-05T22:17:12+08:00 feat(i18n): Hero multilingual badge + Cookie banner + blog index + homepage SEO section
+92b8e37b75f024582a5b50026a301ae5a6499234 2026-08-05T21:37:50+08:00 feat(i18n): full 4-language support (en/zh/es/de) across the site
+dc43e45c5584fd8913b54edae55d9328f9662838 2026-08-04T13:44:01+08:00 fix(blog): rebuild code/pre styles — kill inline-code bg leak in blocks
+910f114202a0646ffc7d273d75b6759dc36360a5 2026-08-04T13:38:13+08:00 fix(blog): force button text visibility with !important
+eb1542b29bfdf009e14d06070bc3e5ba96538ca8 2026-08-04T13:34:08+08:00 fix(blog): invisible primary button text — prose-content cascade clash
+95f3c33eba3c9b4f10d1eb4794582ba9bc34f922 2026-08-04T13:27:55+08:00 feat(blog): add /blog/ index page + Blog nav link
+83d712a42a76d15d54228de402edbbfc1ee7b34f 2026-08-04T13:17:21+08:00 fix(copy): round tool count to 130+ in marketing surfaces
+d048a168941a3a578565c3abae4ce457221e32f9 2026-08-04T13:01:58+08:00 fix(cards): equal-height tool cards — grid stretch + flex fill + clamp
+56ee1ce5e72a3d349c38b9ef49f7c6aea5c301e9 2026-08-04T12:28:00+08:00 fix(cards): remove square shadow leak from card hover lift
+bc3abecd67277af0e873245697b7a590f32edc5c 2026-08-04T12:10:37+08:00 feat(cards): depth + contrast — float white cards on cool-grey field
+5dd295fad93664d7b1bdd0e0ee97932f96ab638f 2026-08-04T11:54:57+08:00 feat(hero): golden-ratio SaaS polish — glow + gradient title + contrast
+3c580fed1614e62e9ce1ddc7fcaa5495b339b27b 2026-08-04T11:42:43+08:00 fix(hero): shrink glow to subtle title-centered micro-glow
+988f55cab10c82406982c456a59e4b241df1ecf0 2026-08-04T11:35:18+08:00 fix(hero): remove clipPath polygon causing hard-edged violet triangle
+4d7f84b1fccee6dbae2c9705b93307fe64864862 2026-08-04T11:28:37+08:00 fix(hero): replace boxed gradient with borderless ambient glow
+c364c41beb6dd1675148d694d12f44928fb2b1f7 2026-08-04T11:21:52+08:00 feat(blog): add 'How I Built ToolHub' architecture retrospective
+03ac3c34c3ab448dc7490f97bd2c1e1ffa97678e 2026-08-03T22:38:32+08:00 feat(ui): framer-motion 极客细腻动画升级
+ebcd265124c9509217e8d8e4a38d47dfbb2cd038 2026-08-03T22:22:28+08:00 docs(memory): record pSEO/PWA/SW progress + fix gitignore whitelist
+500a1444395dd5867ae06b5bd7f274d006fb175c 2026-08-03T21:01:53+08:00 fix(pwa): SW not registering - replace NODE_ENV gate with runtime hostname check
+4adfbcf2849afe56d8c832792667c205382f39cc 2026-08-03T20:42:57+08:00 fix(pwa): remove duplicate manifest link causing preload warnings
+aae261c71fd60b3176b9c60b888a5ac20b056120 2026-08-03T20:21:41+08:00 feat(pwa): offline PWA + recently-used/favorites + anti-CLS ad placeholders
+e479af886ebbc988ac6f5b2e78d1113483429044 2026-08-03T19:50:32+08:00 feat(seo): pSEO engine - related tools matrix, schema alignment, IndexNow submit
+a56378d185d3fdd5bb43917de82303439cc6cb58 2026-08-03T19:12:40+08:00 fix(ui): restore Header, enforce w-full on body containers for centering
+0e9616150de9fad985e88fe0419d89c211ceb0e2 2026-08-03T19:03:57+08:00 fix(ui): tool card grid 2xl:grid-cols-4 → xl:grid-cols-4
+5ec39357202c8f3768c5394791226350e10e8d27 2026-08-03T19:01:29+08:00 fix(ui): unify horizontal container to max-w-7xl (fix asymmetric margins)
+dd1d522b687b998750ef1ee9d0c2b0b46332d403 2026-08-03T18:52:39+08:00 feat(ui): tool cards → Clean Outlined Dark Theme (solid bg + crisp border)
+5e06502a9c352f3b7a5331e3a6f16720f49b39a8 2026-08-03T18:47:41+08:00 fix(ui): tool card dark mode — remove inline style, use translucent white/[0.03]
+cd1b61c196d04102a870ec36e51ef60ec0d2a62d 2026-08-03T18:40:21+08:00 feat(ui): rebuild dark mode color system (Vercel/Raycast style)
+e25a5361cf145a112c632d3095f3cb13b9c3a992 2026-08-03T01:10:23+08:00 refactor(tools): reorder by category + update featured to 10 high-traffic tools
+0f45fa79cd32e83d40437a6b2d322fc02fc1704a 2026-08-03T00:42:20+08:00 feat(tools): add 8 high-traffic Web/Dev/Text tools + category audit (130 -> 138)
+ac6106f35c3e14ce6f96168d4dded4b05aeb903b 2026-08-03T00:31:04+08:00 feat(tools): add 6 high-traffic Web & Developer tools (124 -> 130)
+757b283bb89ef30bb131c6eab2ccba571949e444 2026-08-03T00:03:45+08:00 style(home): refine Featured cards + Hero + category chips
+2b9a7692112ff7da6a88858edb1318593afd5f0e 2026-08-02T23:41:28+08:00 feat(home): add 🔥 Popular Tools featured module on homepage
+c1a188c87bc457431b1f572df6e74795f1aa972c 2026-08-02T23:16:56+08:00 feat: tool architecture consolidation + 4 new high-traffic tools
+e9cfb4998f64332ee2738ea3edf2f71e9c6684b6 2026-08-02T22:28:39+08:00 feat(seo): add HowTo JSON-LD + Load Sample / result export to tool pages
+9a7425b2e2c8df6db9940627ab9319f46e6218f8 2026-08-02T21:51:45+08:00 feat(header): subtle kbd shortcut hint on search button
+353aa8e7275b93f0e7566d83fc542204c000e217 2026-08-02T21:32:43+08:00 feat(home): wider hero, larger title, 4-col card grid on 2xl
+b879f87c3d3ab8baf85e9ce8176e6819823533e5 2026-08-02T21:27:04+08:00 style(header): full-bleed layout with frosted sticky bar
+2b503d3a93956e61eeac06be60b05431bd60e54d 2026-08-02T21:18:31+08:00 fix(ui): align Header to body container-width and constrain category chips
+302b37259f1f6fb977a18048b8aaa3881e6de52a 2026-08-02T21:10:43+08:00 style: header full-width layout (logo far-left, nav far-right)
+322afbcf048b2c2ef017d1b7a1e19cda2ee870e2 2026-08-02T20:59:08+08:00 fix: portal search palette to body to fix overlay clipping
+2d9be9dd2c1fdf6b46f55d1dcbd375075bfb4969 2026-08-02T20:46:27+08:00 style: refine search palette UI (spotlight-style)
+955b0a6326c1a5cfe9f05cd3e41abfe05bfdc3c6 2026-08-02T18:02:06+08:00 fix: preventDefault on Ctrl/Cmd+K to stop Chrome address-bar hijack
+b324f9f3074cd5d24314c6e98a305e80fb3dd0e6 2026-08-02T17:45:37+08:00 feat: global Cmd/Ctrl+K search palette
+12708be8ba380b873671d4472999c6a5c875a297 2026-08-02T17:20:27+08:00 fix: breadcrumb route, legacy card badges, desktop container width (#2)
+0d8d7d6e1363bb3603f81fef8fec52e21c3fa975 2026-08-02T16:07:18+08:00 feat: mobile optimization, tool page 3-section layout, favorites & URL-sync
+70de8e7aaa426f0c173430f98275aaf2b70326c4 2026-08-02T12:09:57+08:00 feat(ui): per-tool icons, breakdown charts, formula sections, result export (#1)
+5c4349289ff15a6f5ea2c78ebf87e166affa7825 2026-08-02T10:23:27+08:00 feat: homepage SEO internal links, chrome-less embed mode, CI build guard
+7a2c31b1227ca9f7238f2ad92be19984af4e0923 2026-08-02T10:12:27+08:00 feat(seo): add long-tail keywords for remaining 88 tools (full coverage)
+d1bfbb54c49606f7415930faa961ea11d3efa0d6 2026-08-02T00:49:10+08:00 feat(seo): dynamic applicationCategory mapping + richer WebApplication schema
+ec511b31fb1fad3d4d125fd880d2f5034340e71a 2026-08-01T23:37:32+08:00 feat(seo): add YMYL disclaimers to finance/health tools
+f1c095936a06a1616692ad1390b482b991e89131 2026-08-01T23:21:36+08:00 feat(seo): fix FAQ schema/content mismatch, AdSense infra, long-tail keywords, embed widget
+18f07496cfab5bdd1055b9cc268643b52e0be4e5 2026-08-01T13:38:37+08:00 feat: brand assets, /tools hub, salary-converter, SEO schema, finance content
+ba1e4668c33e9a20ae58a36d50d79137f529e8f0 2026-08-01T01:03:48+08:00 feat(content): premium deep content for mortgage & credit-card-minimum pages
+544adccf0fb9ec19de1cb0b84e01b3119041e2d2 2026-08-01T00:41:50+08:00 fix: set real contact email to contact@axtrivc.com
+e8175a1103d33fb749d6d607b3708aec63590a63 2026-08-01T00:33:09+08:00 feat(seo): add internal links, FAQ schema, content enrichment across all tools
