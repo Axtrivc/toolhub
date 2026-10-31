@@ -1,0 +1,129 @@
+{
+  "observedAt": "2026-10-31T08:44:50.906Z",
+  "base": "http://127.0.0.1:3100",
+  "mode": "final",
+  "methodology": "Chromium headless, 390x844, fresh context per measured page, no CPU/network throttling, localhost uncompressed static server. External origins blocked; optional production ads/analytics excluded. One lab sample per page, not field p75. CLS is observed window only; INP not measured.",
+  "metrics": [
+    {
+      "route": "/",
+      "lcp": 636,
+      "cls": 0.011623584145540078,
+      "jsBytes": 1219798,
+      "resourceRequests": 27,
+      "horizontalOverflow": 0
+    },
+    {
+      "route": "/tools/",
+      "lcp": 184,
+      "cls": 0,
+      "jsBytes": 2078571,
+      "resourceRequests": 76,
+      "horizontalOverflow": 0
+    },
+    {
+      "route": "/tools/loan-calculator/",
+      "lcp": 204,
+      "cls": 0,
+      "jsBytes": 1891703,
+      "resourceRequests": 38,
+      "horizontalOverflow": 0
+    },
+    {
+      "route": "/tools/word-counter/",
+      "lcp": 168,
+      "cls": 0,
+      "jsBytes": 1841933,
+      "resourceRequests": 36,
+      "horizontalOverflow": 0
+    }
+  ],
+  "noJavaScript": [
+    {
+      "route": "/",
+      "h1Visible": true
+    },
+    {
+      "route": "/tools/",
+      "h1Visible": true
+    },
+    {
+      "route": "/tools/loan-calculator/",
+      "h1Visible": true
+    },
+    {
+      "route": "/tools/word-counter/",
+      "h1Visible": true
+    }
+  ],
+  "checks": [
+    {
+      "name": "mobile HTML/hydration /",
+      "status": "pass"
+    },
+    {
+      "name": "visible initial HTML without JavaScript /",
+      "status": "pass"
+    },
+    {
+      "name": "mobile HTML/hydration /tools/",
+      "status": "pass"
+    },
+    {
+      "name": "visible initial HTML without JavaScript /tools/",
+      "status": "pass"
+    },
+    {
+      "name": "mobile HTML/hydration /tools/loan-calculator/",
+      "status": "pass"
+    },
+    {
+      "name": "visible initial HTML without JavaScript /tools/loan-calculator/",
+      "status": "pass"
+    },
+    {
+      "name": "mobile HTML/hydration /tools/word-counter/",
+      "status": "pass"
+    },
+    {
+      "name": "visible initial HTML without JavaScript /tools/word-counter/",
+      "status": "pass"
+    },
+    {
+      "name": "loan zero-interest input, favorites and recent history",
+      "status": "pass"
+    },
+    {
+      "name": "loan CSV download",
+      "status": "pass"
+    },
+    {
+      "name": "percentage live calculation",
+      "status": "pass"
+    },
+    {
+      "name": "word count and real clipboard summary",
+      "status": "pass"
+    },
+    {
+      "name": "four client locales preserve canonical and title",
+      "status": "pass"
+    },
+    {
+      "name": "search palette navigation",
+      "status": "pass"
+    },
+    {
+      "name": "directory canonical links",
+      "status": "pass"
+    },
+    {
+      "name": "category navigation reaches filtered tools",
+      "status": "pass"
+    },
+    {
+      "name": "no uncaught browser runtime errors",
+      "status": "pass"
+    }
+  ],
+  "pageErrors": []
+}
