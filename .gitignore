@@ -75,3 +75,6 @@ nul
 
 # 移动端审计临时产物(scripts/mobile-audit.mjs 的输出)
 /.tmp.mobile-audit/
+# Local audit reports & AI task scratchpads
+tool-audit-report.html
+GLM-*.md
