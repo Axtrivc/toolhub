@@ -17,6 +17,35 @@ const en: ReactNode = (
         <li>Generating human-readable names from machine-formatted strings</li>
       </ul>
     </div>
+    <div>
+      <h2>Example Conversion</h2>
+      <p>
+        Paste <code>getting-started_with-nextjs</code> and the result is
+        <code>Getting Started With Nextjs</code>. Runs of hyphens or underscores are treated as word separators,
+        repeated whitespace is collapsed, and leading or trailing whitespace is removed before the title is built.
+      </p>
+      <p>
+        Apostrophes do not split a word, so a phrase containing <code>don&apos;t</code> becomes
+        <code>Don&apos;t</code> rather than incorrectly capitalizing the letter after the apostrophe.
+      </p>
+    </div>
+    <div>
+      <h2>What the Tool Can and Cannot Recover</h2>
+      <p>
+        A slug is a simplified identifier, not a complete copy of the original title. If the original used
+        <strong>iPhone</strong>, <strong>JavaScript</strong>, an acronym, or punctuation that was removed when the
+        slug was created, that styling cannot be reconstructed with certainty. The output is a readable draft that
+        you can review and edit, not a guaranteed restoration of the source capitalization.
+      </p>
+    </div>
+    <div>
+      <h2>Preparing a Clean Input</h2>
+      <p>
+        Use the slug itself rather than an entire URL or a file path. For example, paste
+        <code>release-notes-v2</code> to get <code>Release Notes V2</code>. Review names and abbreviations afterward,
+        then use the generated title in a CMS record, spreadsheet, migration note, or document heading.
+      </p>
+    </div>
   </section>
 )
 

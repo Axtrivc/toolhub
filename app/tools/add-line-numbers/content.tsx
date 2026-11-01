@@ -19,6 +19,34 @@ const en: ReactNode = (
         <li>Educational materials and tutorials</li>
       </ul>
     </div>
+    <div>
+      <h2>Example Output</h2>
+      <p>Three input lines named <code>First line</code>, <code>Second line</code>, and <code>Third line</code> become:</p>
+      <pre>{`   1.  First line
+   2.  Second line
+   3.  Third line`}</pre>
+      <p>
+        Numbering starts at 1 and follows the original line order. A single newline at the very end of the input is
+        ignored, so it does not create an additional empty numbered row.
+      </p>
+    </div>
+    <div>
+      <h2>Why Right Alignment Matters</h2>
+      <p>
+        The numbers are padded so that the text column remains aligned as the count grows. Without that padding, a
+        two-digit line number would push its text one character farther right than a one-digit number. Keeping the
+        content column stable makes long logs and review documents easier to scan.
+      </p>
+    </div>
+    <div>
+      <h2>Using Numbered Text in a Review</h2>
+      <ol>
+        <li>Paste the source text and check that the original line breaks are the ones you want to reference.</li>
+        <li>Copy the numbered output into your review note, tutorial, or static document.</li>
+        <li>Refer to a precise line in feedback instead of describing where a problem occurs.</li>
+      </ol>
+      <p>The generated numbers are plain text; later edits to the copied document will not renumber automatically.</p>
+    </div>
   </section>
 )
 

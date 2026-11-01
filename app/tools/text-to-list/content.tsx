@@ -18,6 +18,35 @@ const en: ReactNode = (
         <li>Formatting data for slides and documents</li>
       </ul>
     </div>
+    <div>
+      <h2>Choosing a Bullet Style</h2>
+      <p>
+        The default output uses <code>•</code>. To choose another style, append a space and the directive
+        <code>||| -</code> for hyphens, <code>||| *</code> for asterisks, or <code>||| 1.</code> for a numbered
+        list at the end of your text. The directive is removed from the final output.
+      </p>
+      <p>
+        For example, three lines containing <code>Apple</code>, <code>Banana</code>, and <code>Cherry</code>,
+        followed by <code>||| 1.</code>, become <code>1. Apple</code>, <code>2. Banana</code>, and
+        <code>3. Cherry</code>, each on its own line.
+      </p>
+    </div>
+    <div>
+      <h2>Preparing Text for the Best Result</h2>
+      <p>
+        Put one list item on each line. Leading and trailing spaces around an item are trimmed, and blank lines are
+        skipped so they do not become empty bullets. This makes the tool useful after copying rough notes from an
+        email, document, spreadsheet column, or brainstorming session.
+      </p>
+    </div>
+    <div>
+      <h2>Bullets or Numbers?</h2>
+      <p>
+        Bullets work well for unordered items such as ingredients, feature ideas, and reference notes. Numbers are a
+        better fit for instructions, priorities, and sequences whose order matters. After conversion, copy the plain
+        text into your editor and apply any final indentation or document-specific formatting there.
+      </p>
+    </div>
   </section>
 )
 

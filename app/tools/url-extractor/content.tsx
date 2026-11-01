@@ -18,6 +18,39 @@ const en: ReactNode = (
         <li>Auditing outbound links in text</li>
       </ul>
     </div>
+    <div>
+      <h2>From Messy Text to a Clean Link List</h2>
+      <p>
+        Paste prose, notes, or copied markup and the tool returns unique URLs one per line. Sentence punctuation at
+        the end of a link is cleaned so a sentence such as <code>Read https://example.com/docs.</code> produces
+        <code>https://example.com/docs</code> rather than including the final period.
+      </p>
+      <p>
+        Only links beginning with <code>http://</code> or <code>https://</code> are matched. A bare domain such as
+        <code>example.com</code> is intentionally ignored because it is harder to distinguish from ordinary text.
+      </p>
+    </div>
+    <div>
+      <h2>Filtering Assets and Grouping Domains</h2>
+      <p>
+        Enable the asset filter when you want page and API links rather than common images, stylesheets, scripts,
+        fonts, media, or PDF files. Switch to the domain view to aggregate the remaining URLs by their main domain,
+        with the most frequently occurring domains shown first.
+      </p>
+      <p>
+        That view is useful for a quick outbound-link audit: you can see which destinations dominate a document
+        before reviewing individual URLs in the full list.
+      </p>
+    </div>
+    <div>
+      <h2>A Simple Link-Audit Workflow</h2>
+      <ol>
+        <li>Paste the article, email, or document text and review the extracted URL list.</li>
+        <li>Filter static assets if they are not part of your audit.</li>
+        <li>Compare the domain summary with the full URLs, then copy the results into a spreadsheet or review note.</li>
+      </ol>
+      <p>Extraction and grouping run locally in your browser, so the text does not need to leave the page.</p>
+    </div>
   </section>
 )
 

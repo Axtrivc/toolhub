@@ -24,8 +24,8 @@ interface RelatedToolsProps {
  *  - UX:降低跳出率,引导用户在站内流转。
  *
  * 数据源:lib/related-tools.ts 轻量索引(由 scripts/gen-related-index.mjs
- * 从注册表生成,排序逻辑同 lib/tools.ts#getRelatedTools —— 同分类优先
- * featured 置顶,不足时全站热门补齐)。不 import lib/tools.ts 本体,
+ * 从注册表生成,排序逻辑同 lib/tools.ts#getRelatedTools —— 同分类稳定
+ * 轮转选择,避免所有页面重复指向同一批 featured 工具,不足时全站热门补齐)。
  * 避免全量 SEO 注册表(~180KB min)进入客户端 chunk。
  *
  * 卡片视觉与首页 ToolCard(ToolHubExplorer)严格一致:

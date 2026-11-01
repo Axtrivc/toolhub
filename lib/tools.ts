@@ -6296,8 +6296,8 @@ export function getToolsByCategory(): Record<string, ToolMeta[]> {
 }
 
 /**
- * 相关工具内部排序:featured 优先,其次按 slug 字典序做稳定回退。
- * 让置顶工具优先在「Related Tools」矩阵里获得内链,提升其权重传递效率。
+ * Stable related-tool ordering used to build each category's recommendation ring.
+ * Featured tools appear earlier in the ring without monopolizing every page's links.
  */
 function rankRelated(arr: ToolMeta[]): ToolMeta[] {
   return [...arr].sort((a, b) => {
@@ -6312,12 +6312,14 @@ function rankRelated(arr: ToolMeta[]): ToolMeta[] {
  * 获取某工具的相关工具(用于工具详情页底部「Related Tools」内链矩阵)
  *
  * 匹配逻辑(pSEO + 内链权重传递优化):
- *  1. 同分类下的其他工具(剔除当前工具本身),featured 工具排在最前;
- *  2. 最多展示 `limit` 个(默认 4,与 RelatedTools 网格 4 列对齐);
- *  3. 若同分类数量不足,用全站热门工具(featured)补齐,保证矩阵永远满格,
- *     避免某些工具页内链过稀导致权重孤岛。
+ *  1. Start after the current tool in its category's stable ring and select the
+ *     next `limit` tools (default 4), preserving relevance without sending every
+ *     page to the same featured destinations;
+ *  2. Wrap around when reaching the category end, so every tool can receive links;
+ *  3. If the category is too small, fill remaining slots with featured tools and
+ *     then other published tools, excluding duplicates and the current page.
  *
- * 顺序稳定且确定:相同输入永远输出相同列表(SSR 与 build 结果一致)。
+ * The result is deterministic: identical inputs always produce identical links.
  */
 export function getRelatedTools(slug: string, limit = 4): ToolMeta[] {
   const current = getTool(slug)
@@ -6325,12 +6327,17 @@ export function getRelatedTools(slug: string, limit = 4): ToolMeta[] {
 
   const published = getPublishedTools()
 
-  // ① 同分类的其他工具(featured 优先)
-  const sameCategory = published.filter(
-    (t) => t.slug !== slug && t.category === current.category,
-  )
-  const rankedSame = rankRelated(sameCategory)
-  const picked = [...rankedSame.slice(0, limit)]
+  // Walk a stable same-category ring instead of repeatedly selecting the same
+  // featured tools. Every page still recommends close neighbors, while inbound
+  // links are distributed across the whole category.
+  const rankedCategory = rankRelated(published.filter((t) => t.category === current.category))
+  const currentIndex = rankedCategory.findIndex((t) => t.slug === slug)
+  const startIndex = currentIndex >= 0 ? currentIndex : 0
+  const picked: ToolMeta[] = []
+  for (let offset = 1; offset <= rankedCategory.length && picked.length < limit; offset += 1) {
+    const candidate = rankedCategory[(startIndex + offset) % rankedCategory.length]
+    if (candidate.slug !== slug) picked.push(candidate)
+  }
 
   // ② 名额不足时,用全站热门工具(featured)补齐,排除当前工具与已选中工具
   if (picked.length < limit) {
@@ -6355,8 +6362,8 @@ export function getRelatedTools(slug: string, limit = 4): ToolMeta[] {
  * 获取某工具「工作流下一步」推荐 slug 列表(结果区 Next Steps 胶囊用)。
  *
  *  1. 显式配置的 tool.nextTools 优先(已过滤未上线/自身/不存在者);
- *  2. 未配置或过滤后为空 → 回退同分类前 2 款(复用 getRelatedTools 的
- *     featured 优先排序,顺序确定,build 产物稳定)。
+ *  2. 未配置或过滤后为空 → 回退到相关工具轮转序列的前 2 款（与
+ *     getRelatedTools 同源，顺序确定，build 产物稳定）。
  */
 export function getNextToolSlugs(slug: string): string[] {
   const current = getTool(slug)

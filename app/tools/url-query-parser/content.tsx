@@ -18,6 +18,40 @@ const en: ReactNode = (
         <li>Building query strings in code</li>
       </ul>
     </div>
+    <div>
+      <h2>Reading the JSON Output</h2>
+      <p>
+        Each parameter name becomes a key in the result. A single value stays a string, while repeated names are
+        collected into an array instead of silently overwriting one another. For example, a URL ending in
+        <code>?q=hello&page=2&tag=seo&tag=tools</code> produces a result shaped like
+        <code>{'{ "q": "hello", "page": "2", "tag": ["seo", "tools"] }'}</code>.
+      </p>
+      <p>
+        This is especially useful when a tracking link contains repeated filters or when you need to confirm which
+        value a backend will receive for each parameter.
+      </p>
+    </div>
+    <div>
+      <h2>Encoding, Fragments, and Accepted Input</h2>
+      <p>
+        URL-encoded values are decoded by the browser&apos;s native <code>URLSearchParams</code> parser, so encoded
+        spaces and other escaped characters become readable again. Anything after <code>#</code> is treated as a
+        fragment and is not mixed into the query parameters.
+      </p>
+      <p>
+        You can paste a complete URL or only the query portion, such as <code>page=2&sort=desc</code>. A complete URL
+        without a question mark has no query string and correctly returns an empty JSON object.
+      </p>
+    </div>
+    <div>
+      <h2>A Practical Debugging Workflow</h2>
+      <ol>
+        <li>Paste the full request or campaign URL into the input box.</li>
+        <li>Check parameter names, decoded values, and any repeated keys in the JSON output.</li>
+        <li>Copy the result into a bug report, test fixture, or API note, then edit the original URL as needed.</li>
+      </ol>
+      <p>Parsing runs locally in your browser, making the tool convenient for inspecting private development URLs.</p>
+    </div>
   </section>
 )
 
