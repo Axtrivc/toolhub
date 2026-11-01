@@ -5,40 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const PassphraseGeneratorL10n: ToolL10n = {
-  zh: {
-    useCases: ['为主密码和加密钥匙生成好记的高熵口令', '估算多词口令的熵位数再决定用几个词', '给家里长辈生成打得出来的口令', '与字符型密码互补的口令方案选型'],
-    faqs: [
-      { q: '该用几个词?', a: '256 词表下 6 个词给 48 位熵,10 个词给 80 位——安全团队对高价值账号推荐的量级。4 个词只有 32 位,只够低风险登录用。' },
-      { q: '熵位数是怎么算的?', a: '每个词都是从恰好 256 个等概率选项里均匀抽取,因此每词精确贡献 log2(256)=8 位;每个十进制后缀加 log2(10)≈3.32 位。首字母大写至多每词加 1 位,估算时忽略。' },
-      { q: '多词口令和随机字符密码哪个更好?', a: '熵相同时口令远比字符汤好打好记。网站限制长度时用字符型密码生成器;主密码、全键盘登录场景优先口令。' },
-      { q: '生成过程安全吗?', a: '词表内建在本页面里,抽词走浏览器本地 Web Crypto API——不发出任何网络请求,词表也不是下载来的。' },
-    ],
-    ui: {
-      'generatedLabel': '已生成的口令',
-      'clickGenerate': '点击生成',
-      'regenerate': '重新生成',
-      'copyPassphrase': '复制口令',
-      'wordCount': '词数',
-      'bits': '位',
-      'entropyLabel': '熵',
-      'entropyHint': '每个词恰好加 8 位(256 词表);每个数字约加 3.3 位。',
-      'verdictGreat': '极佳',
-      'verdictStrong': '强',
-      'verdictFair': '一般',
-      'verdictWeak': '弱',
-      'separator': '分隔符',
-      'digits': '数字后缀',
-      'none': '无',
-      'digitWord': '位数字',
-      'capitalize': '首字母大写',
-      'sep.-': '连字符 -',
-      'sep..': '点号 .',
-      'sep._': '下划线 _',
-      'sep.+': '加号 +',
-      'sep.space': '空格',
-      'note': '🔑 词从内建 256 词表用加密级随机抽取:4 个词 32 位,6 个词 48 位,10 个词满 80 位。比 16 位符号汤好记好打——生成过程 100% 离线。',
-    },
-  },
+
   es: {
     useCases: ['crear frases-contraseña memorables de alta entropía', 'saber cuántas palabras necesitas según los bits', 'generar claves que la familia pueda teclear', 'elegir entre frase-contraseña y contraseña de caracteres'],
     faqs: [

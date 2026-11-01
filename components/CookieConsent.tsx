@@ -13,7 +13,7 @@ import { t } from '@/lib/i18n'
  *  - 用户选择后存入 localStorage('toolhub-cookie-consent'),不再重复弹出。
  *  - 仅展示"接受 / 仅必要"两个选项,符合 AdSense 与一般合规最低要求。
  *  - 链接到隐私政策,让用户了解 cookie 用途。
- *  - 文案 4 语本地化(cookieAriaLabel / cookieBody / cookiePrivacyLink /
+ *  - 文案 3 语本地化(cookieAriaLabel / cookieBody / cookiePrivacyLink /
  *    cookieAcceptAll / cookieNecessaryOnly)。
  *
  * 与 AdSense 的关系:AdSense 的个性化广告默认依赖用户同意(EU/UK)。

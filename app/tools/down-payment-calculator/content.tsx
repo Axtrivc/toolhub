@@ -5,10 +5,10 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * Down Payment Calculator 长文正文 —— 四语 dispatcher
+ * Down Payment Calculator 长文正文 —— 三语 dispatcher
  *
  * en 分支等价于原 ToolContent 渲染输出(<h2>What Is This Tool?</h2> + intro
- * + 各 section 包在 <div> 中),字节级 SEO 安全。zh/es/de 仅客户端 hydration
+ * + 各 section 包在 <div> 中),字节级 SEO 安全。es/de 仅客户端 hydration
  * 后按 locale 切换。SSR/预渲染恒渲染 en → Google 索引英文不变。
  */
 
@@ -56,44 +56,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具?</h2>
-    <p>
-      <strong>首付</strong>是你买房时预先支付的现金,其余部分就成为你的房贷。这个计算器算出首付金额,并告诉你是否需要 PMI。
-    </p>
-
-    <div>
-      <h2>20% 的临界点</h2>
-      <p>
-        首付 20% 或更多就可以避免 <strong>PMI</strong>(私人房贷保险),它通常每月要花 $50-300。一套 $400,000 的房子,需要 $80,000 首付才能完全避免 PMI。
-      </p>
-    </div>
-
-    <div>
-      <h2>更低首付的选择</h2>
-      <ul>
-        <li>
-          <strong>常规贷款:</strong>最低 3% 首付(带 PMI)
-        </li>
-        <li>
-          <strong>FHA 贷款:</strong>3.5% 首付(首次购房者)
-        </li>
-        <li>
-          <strong>VA/USDA:</strong>0% 首付(符合条件的购房者)
-        </li>
-      </ul>
-    </div>
-
-    <div>
-      <h2>别掏空你的存款</h2>
-      <p>
-        更高的首付意味着更小的贷款、且不需要 PMI——但别为了凑首付就掏空你的应急资金。贷款机构希望看到过户后你手里还有储备金。
-      </p>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -182,7 +144,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function DownPaymentCalculatorContent(): ReactNode {
   const { locale } = useApp()

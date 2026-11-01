@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * SocialSecurityBreakEvenCalculator 长文正文 —— 四语 dispatcher
+ * SocialSecurityBreakEvenCalculator 长文正文 —— 三语 dispatcher
  *
- * en 分支与 SSR 渲染输出一致。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支与 SSR 渲染输出一致。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -24,19 +24,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>三个申领年龄的数字从哪来</h2>
-    <p>62 岁申领,提前的前 36 个月每月扣 5/9 个百分点、再往前每月扣 5/12 个百分点——完全退休年龄(FRA)为 67 岁的人共打 7 折。FRA 之后每延迟一年奖励 8%,到 70 岁封顶。1960 年及以后出生,FRA 恰好是 67 岁。</p>
-    <h2>回补年龄到底在告诉你什么</h2>
-    <p>早领是小额支票拿更多个月;晚领是大额支票但起步晚。回补年龄就是累计曲线的交叉点。默认场景($2,000 PIA、FRA 67)下,FRA 申领大约在 78 岁 8 个月追平 62 岁申领,70 岁申领大约在 82 岁半追平 FRA。活得比这久,延迟就赢了;活不到,早领拿得多。</p>
-    <h2>预期寿命才是决策的全部</h2>
-    <p>大约一半的 65 岁老人能活过 85 岁上下,而健康、家族史与婚姻状况对概率的影响,远大于任何"最优申领策略"。回补数学是思考框架,不是预测——夫妻还要考虑遗属福利:一方去世后,较高的那笔支票往往会继续发放。</p>
-    <h2>这个模型没算什么</h2>
-    <p>所有金额都是名义美元:不含 COLA、税、早领款项的投资收益,也不含 FRA 前继续工作时的收入审查。每个简化都会把真实交叉点挪动几个月而非几十年——图表的意义是让你看清取舍的形状,再套上自己的假设。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -66,7 +53,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function SocialSecurityBreakEvenCalculatorContent(): ReactNode {
   const { locale } = useApp()

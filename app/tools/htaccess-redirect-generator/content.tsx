@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * HtaccessRedirectGenerator 长文正文 —— 四语 dispatcher
+ * HtaccessRedirectGenerator 长文正文 —— 三语 dispatcher
  *
- * en 分支与改造前渲染输出一致。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支与改造前渲染输出一致。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en (与改造前渲染输出一致) ────────────────────────────
@@ -24,19 +24,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>规则的顺序很重要</h2>
-    <p>Apache 自上而下应用 RewriteRule;HTTPS 和规范主机名区块必须排在单条重定向之前,否则请求会一路链式穿过它们,把中间 URL 泄露给浏览器。</p>
-    <h2>先用 302 测试</h2>
-    <p>浏览器会激进地缓存 301,而且没有可靠的取消缓存的办法。新规则先以 R=302 上线,验证每条路径后再改成 R=301。本生成器直接输出 301,因为那才是最终目标。</p>
-    <h2>整域迁移</h2>
-    <p>整域区块会自动保留路径:old.com/any/path 一条规则就落到 new.com/any/path,而不必写几千行单条规则。之后记得更新 Search Console,加快重新收录。</p>
-    <h2>什么时候 .htaccess 会被忽略</h2>
-    <p>如果指令似乎不起作用,检查 vhost 配置里的 AllowOverride——共享主机通常会开启它;一些面向性能调优的部署则完全禁用 .htaccess,改用主配置。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -66,7 +53,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function HtaccessRedirectGeneratorContent(): ReactNode {
   const { locale } = useApp()

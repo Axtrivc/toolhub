@@ -5,39 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const EmbeddingPriceCalculatorL10n: ToolL10n = {
-  zh: {
-    useCases: [
-      'RAG 上线前算总账:全量语料 5 万篇 × 平均 800 token,横向对比 OpenAI / Gemini / Cohere 的首次嵌入成本',
-      '估算经常性支出:语料每月更新 10%,把“每月重嵌次数”设进去看增量账单',
-      '向决策层证明嵌入只是零头——多数负载月成本几美元,真正的开销在向量存储与检索',
-      '选型时对照维度与上下文长度:同价位下,3072 维的向量存储需求是 1536 维的两倍',
-    ],
-    faqs: [
-      { q: '成本是怎么算的?', a: '文档数 × 每篇平均 token 数 × 每月重嵌次数,得出总 token 量后按各模型的每百万 token 单价折算。首次全量嵌入一次性发生,之后只为变更部分付费——所以“每月重嵌次数”是长期成本的关键变量。' },
-      { q: '为什么说嵌入是 RAG 里最便宜的一环?', a: '主流嵌入模型单价在 $0.02-$0.13 / 百万 token,一个 10 亿 token 的语料全量嵌入约需 20-130 美元。真正的成本大头是向量数据库的存储(维度越高越贵)和在线检索的计算开销。' },
-      { q: '维度对成本有什么影响?', a: '对 API 费用没有影响(按 token 计价),但对存储影响巨大:3072 维 float32 向量每条约 12 KB,是 1536 维的两倍。百万级文档规模下,维度选型直接决定向量库的月租。' },
-      { q: '有免费额度吗?', a: '有。Google 的 text-embedding-004 在免费配额内可零成本嵌入;OpenAI 与 Cohere 按量计费无免费层。价格核对于 2026-08,厂商调价频繁,正式预算前请以官网价目为准。' },
-    ],
-    ui: {
-      'chartTitle': '各模型月成本',
-      'costLabel': '每月',
-      'cheapestLabel': '最便宜',
-      'note': '🧮 价格核对于 2026-08(已移除废弃的 ada-002);嵌入便宜到多数负载只需几美分——RAG 真实账单大头是存储与检索。存储列按 float32 估算向量库内存:维度 × 4 字节 × 文档数(3072 维是 768 维的 4 倍内存)。Gemini text-embedding-004 在配额内免费。',
-      'cheapest': '最便宜',
-      'copySummary': '复制摘要',
-      'docsLabel': '要嵌入的文档数',
-      'invalid': '请输入非负数',
-      'runsLabel': '每月重嵌次数',
-      'thCtx': '上下文',
-      'thDims': '维度',
-      'thModel': '模型',
-      'thMonthly': '每月',
-      'thPer1M': '$/1M token',
-      'thPerRun': '每次运行',
-      'thStorage': '向量存储 (float32)',
-      'tokensLabel': '每篇平均 token 数',
-    },
-  },
+
   es: {
     useCases: [
       'Estimar el coste inicial antes de lanzar RAG: 50 000 documentos × 800 tokens medios, comparando OpenAI / Gemini / Cohere',

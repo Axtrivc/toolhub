@@ -5,27 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const flowRateConverterL10n: ToolL10n = {
-  zh: {
-    ui: {
-      'note': '🚰 管道和水泵的流量。常用于水暖、暖通和灌溉。',
-      'unit.cfm': '立方英尺/分 (CFM)',
-      'unit.gpm': '美制加仑/分 (gpm)',
-      'unit.gps': '美制加仑/秒',
-      'unit.lh': '升/小时 (L/h)',
-      'unit.lmin': '升/分 (L/min)',
-      'unit.ls': '升/秒 (L/s)',
-      'unit.m3h': '立方米/小时',
-      'unit.m3s': '立方米/秒',
-    },
-    useCases: [
-      '计算管道和水泵的流量',
-      '估算淋浴喷头或花园水管的流量',
-      '评估暖通空调系统的送风量(CFM)',
-    ],
-    faqs: [
-      { q: '暖通里的 CFM 是什么?', a: 'CFM(立方英尺每分钟)用来衡量供暖制冷系统中的空气流量。一台典型的中央空调风量约为 1000–2000 CFM。CFM 越高,空气循环越快。' },
-    ],
-  },
+
   es: {
     ui: {
       'note': '🚰 Caudales de tuberías y bombas. Se usan en fontanería, climatización y riego.',

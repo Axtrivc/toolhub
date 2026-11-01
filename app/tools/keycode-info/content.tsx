@@ -16,17 +16,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>key、code 与 keyCode 的区别</h2>
-    <p><strong>event.key</strong> 是按键产生的字符("a"、"Enter"、"ArrowLeft"),并随键盘布局变化——现代代码应匹配它。<strong>event.code</strong> 指物理键位(KeyA 就是 A 键,即使它在 AZERTY 布局上印着 "q")。<strong>keyCode</strong> 是只为兼容老库而保留的旧编号。</p>
-    <h2>为什么修饰键组合很重要</h2>
-    <p>快捷键处理函数在检查 event.key 之外,还应检查修饰键标志(ctrlKey、metaKey、shiftKey)。记住 Mac 用户按 Meta/Cmd、Windows 用户按 Ctrl——多数应用两者都接受。</p>
-    <h2>需要 preventDefault 的按键</h2>
-    <p>空格会滚动页面,方向键会导航,Tab 会移动焦点。测试器在本页拦截了这些默认行为,你可以安心观察它们,页面不会跳动,焦点也不会跑掉。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -52,7 +41,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function KeycodeInfoContent(): ReactNode {
   const { locale } = useApp()

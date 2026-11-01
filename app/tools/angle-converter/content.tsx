@@ -44,41 +44,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具?</h2>
-    <p>
-      本工具在角度单位之间换算:<strong>度</strong>、<strong>弧度</strong>、<strong>百分度</strong>、角分、角秒以及整圆(转)。
-    </p>
-    <div>
-      <h2>关键换算</h2>
-      <ul>
-        <li>1 转 = 360° = 2π 弧度 ≈ 6.283 rad</li>
-        <li>1 度 = π/180 弧度 ≈ 0.01745 rad</li>
-        <li>1 弧度 ≈ 57.2958°</li>
-        <li>1 度 = 60 角分 = 3,600 角秒</li>
-        <li>1 百分度 = 0.9°(整圆 = 400 百分度)</li>
-      </ul>
-    </div>
-    <div>
-      <h2>何时会用到</h2>
-      <ul>
-        <li><strong>数学课</strong>——三角学用弧度,几何学用度</li>
-        <li><strong>编程</strong>——大多数数学函数(sin、cos)以弧度为参数</li>
-        <li><strong>天文学</strong>——极小角度用角秒表示</li>
-        <li><strong>导航</strong>——方位角用度表示</li>
-        <li><strong>测量</strong>——一些国家使用百分度(gon)</li>
-      </ul>
-    </div>
-    <div>
-      <h2>为什么用弧度?</h2>
-      <p>
-        弧度是「自然」的角度单位,因为它与圆的几何直接相关:1 弧度的角所对的弧长等于半径。微积分公式(正弦和余弦的导数)只有在弧度下才能简洁成立。
-      </p>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -162,7 +127,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function AngleConverterContent(): ReactNode {
   const { locale } = useApp()

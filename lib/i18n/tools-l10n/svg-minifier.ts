@@ -5,67 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const svgMinifierL10n: ToolL10n = {
-  zh: {
-    ui: {
-      'after': '压缩后',
-      'before': '压缩前',
-      'copySvg': '复制 SVG',
-      'decimalsAriaLabel': '数字取整的小数位数',
-      'decimalsLabel': '小数位',
-      'downloadMinified': '下载压缩后的 SVG',
-      'errFileTooLarge': '文件太大——最大支持 20 MB 的 SVG 文件。',
-      'errNotSvgPrefix': '这看起来不是 SVG——没有找到',
-      'errNotSvgSuffix': '元素。请检查粘贴的内容是否被截断。',
-      'errReadFile': '无法读取文件。',
-      'errUploadSvg': '请上传 .svg 文件(或在文本框中粘贴 SVG 代码)。',
-      'minifiedSvgLabel': '压缩后的 SVG',
-      'minifiedSvgPreviewAlt': '压缩后 SVG 预览',
-      'noteTextMiddle': ' 渲染,绝不使用',
-      'noteTextPrefix': '🔒 100% 在客户端——压缩是纯字符串处理。预览通过 data-URI ',
-      'noteTextSuffix': ',所以 SVG 内的脚本无法执行。',
-      'previewRendered': '预览(由压缩后的输出渲染)',
-      'savings': '节省',
-      'svgMarkupLabel': 'SVG 代码',
-      'svgPlaceholder': '在此粘贴 SVG 代码,或拖放 .svg 文件…',
-      'toggleCollapseWhitespaceHint': '> < 合并为 ><',
-      'toggleCollapseWhitespaceLabel': '标签间空白',
-      'toggleRemoveCommentsHint': '<!-- … -->',
-      'toggleRemoveCommentsLabel': '注释',
-      'toggleRemoveDeclHint': '<?xml …?> 和 <!DOCTYPE …>',
-      'toggleRemoveDeclLabel': 'XML 声明与 DOCTYPE',
-      'toggleRemoveDefaultAttrsHint': 'version="1.1"、fill-rule="nonzero"',
-      'toggleRemoveDefaultAttrsLabel': '默认属性',
-      'toggleRemoveEditorDataHint': 'inkscape:、sodipodi:、Adobe 命名空间、enable-background',
-      'toggleRemoveEditorDataLabel': '编辑器残留',
-      'toggleRemoveMetaHint': '<metadata>',
-      'toggleRemoveMetaLabel': '元数据块',
-      'toggleRemoveTitleDescHint': '<title>、<desc>(屏幕阅读器使用)',
-      'toggleRemoveTitleDescLabel': '标题与描述',
-      'toggleRoundNumbersHint': '属性值与路径数据内',
-      'toggleRoundNumbersLabel': '数字取整',
-      'uploadSvg': '上传 .svg',
-    },
-    useCases: [
-      '免费在线压缩 SVG',
-      '移除 SVG 的 Inkscape 元数据',
-      '无需上传即可优化 SVG',
-      '为 Web 清理 SVG 代码',
-    ],
-    faqs: [
-      {
-        q: '压缩后 SVG 看起来还一样吗?',
-        a: '一样。压缩只移除渲染器会忽略的数据——注释、编辑器元数据、隐藏图层、冗余空白和默认属性——所以视觉效果完全一致,只是编码更紧凑。',
-      },
-      {
-        q: '具体会移除哪些东西?',
-        a: '注释、编辑器注入的 inkscape/sodipodi 命名空间垃圾、空的 group 和 def、尾部空白,以及在安全前提下取整的坐标。凡是影响渲染的都会保留,所以文件变小但画面不变。',
-      },
-      {
-        q: '大概能省多少?',
-        a: '通常 20–60%,而对那些直接从设计工具导出、塞满元数据的文件会省得多。压缩前后的字节数会即时显示,你能看到确切的节省量。',
-      },
-    ],
-  },
+
   es: {
     ui: {
       'after': 'Después',

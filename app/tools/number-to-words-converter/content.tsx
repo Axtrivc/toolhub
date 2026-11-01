@@ -5,7 +5,7 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * NumberToWordsConverter 长文正文 —— 四语 dispatcher
+ * NumberToWordsConverter 长文正文 —— 三语 dispatcher
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -22,19 +22,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>能拼到多大的数</h2>
-    <p>本转换器采用美式英语的短级差制:thousand(10³)、million(10⁶)、billion(10⁹)、trillion(10¹²),最大拼到 999,999,999,999,999。再往上需要 quadrillion,工具会明确提示超范围,而不是硬编一个结果。</p>
-    <h2>连字符与消失的 "and"</h2>
-    <p>21 到 99 的合成数一律连字符(twenty-one);美式拼法不加 "and":123 是 "one hundred twenty-three",不是 "one hundred and twenty-three"。英式会插入 "and"——两种拼法都对,但同一份文档里混用就是错。</p>
-    <h2>什么场合必须拼写成单词</h2>
-    <p>支票和法律文书要求金额大写,因为单词比数字难篡改:"$1,250" 能改成 "$11,250","one thousand two hundred fifty" 却没法随手添一笔。序数负责位置和日期——第 42 条(the 42nd)、3 月 21 日(the 21st)。</p>
-    <h2>小数、负数与粘贴精度</h2>
-    <p>小数点读作 "point",其后逐位拼读:3.14159 是 "three point one four one five nine"。负数按数学惯例前置 "negative" 而非 "minus"。直接粘贴带逗号或货币符号的数值也行——解析器会在拼写前剥掉它们。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -64,7 +51,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function NumberToWordsConverterContent(): ReactNode {
   const { locale } = useApp()

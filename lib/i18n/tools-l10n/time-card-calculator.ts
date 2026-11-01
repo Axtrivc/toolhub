@@ -5,43 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const TimeCardCalculatorL10n: ToolL10n = {
-  zh: {
-    useCases: ['核对纸面工时卡与考勤机记录是否一致', '把上下班时刻换算成工资表要的十进制小时', '跨夜班(22:00→06:00)算全天工时', '追踪本周是否已越过 40 小时加班线'],
-    faqs: [
-      { q: '工资表要的是十进制还是时分?', a: '工资系统按十进制小时乘时薪:7 小时 45 分必须写成 7.75 而不是 745。本工具两个口径都给,抄十进制那一栏进工资表。' },
-      { q: '跨夜班怎么算?', a: '下班时刻早于上班时刻时自动按跨过午夜处理,加 24 小时:22:00 上班、06:00 下班 = 8 小时(再扣无薪休息)。' },
-      { q: '什么时候算加班?', a: '工具默认按美国 FLSA 的每周 40 小时口径,超过部分标为加班;阈值可以改,以适应每日加班(如加州 8 小时/天)或不同的合同约定。算加班费金额请用加班费计算器。' },
-      { q: '哪些时间不该计入?', a: '无薪休息(午休、间歇休息由政策决定)要扣除;带薪休息则把休息填 0。很多考勤系统按 15 分钟取整——如果公司按一刻钟取整,照同样规则填入。' },
-    ],
-    ui: {
-      'in.clockIn': '上班打卡(HH:MM)',
-      'in.clockOut': '下班打卡(HH:MM)',
-      'in.breakMin': '无薪休息',
-      'in.weekSoFar': '本周此前已记录工时',
-      'in.otThreshold': '加班门槛',
-      'inSuffix.breakMin': '分钟',
-      'inSuffix.otThreshold': '小时/周',
-      'out.todayHM': '今日工时',
-      'out.todayDec': '今日工时(十进制)',
-      'out.weekTotal': '本周合计',
-      'out.regular': '常规(门槛内)工时',
-      'out.overtime': '加班工时',
-      'out.remaining': '距门槛剩余工时',
-      'chartTitle': '本周常规工时 vs 加班',
-      'slice.regular': '常规工时',
-      'slice.overtime': '加班工时',
-      'note': '⏱️ 工资系统按十进制小时计薪(7h 45m = 7.75),抄十进制那栏进工资表。跨夜班(下班早于上班)自动加 24 小时;很多系统按 15 分钟取整——与你的保持一致。',
-      'errTime': '时刻请按 24 小时制 HH:MM 填写(如 08:30)',
-      'errBreak': '休息分钟数不能为负',
-      'errSpan': '休息时长超过班次总长——请核对上下班时刻',
-      'otFlag': '已越线',
-      'noOt': '无——仍在门槛内',
-      'chartCenter': '本周合计',
-      'preset.0': '标准朝九晚五',
-      'preset.1': '跨夜班',
-      'preset.2': '周六加班',
-    },
-  },
+
   es: {
     useCases: ['cotejar tu fichaje en papel con el registro del reloj', 'convertir horas de entrada y salida en horas decimales para nómina', 'calcular turnos nocturnos (22:00→06:00) sin errores', 'saber si ya pasaste las 40 horas semanales'],
     faqs: [

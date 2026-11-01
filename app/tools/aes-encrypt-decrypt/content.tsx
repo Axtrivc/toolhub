@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * AesEncryptDecrypt 长文正文 —— 四语 dispatcher
+ * AesEncryptDecrypt 长文正文 —— 三语 dispatcher
  *
- * en 分支与改造前渲染输出一致。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支与改造前渲染输出一致。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en (与改造前渲染输出一致) ────────────────────────────
@@ -24,19 +24,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>AES-GCM 提供什么保证</h2>
-    <p>机密性加真实性:GCM 认证标签能证明密文未被篡改——密码不对或载荷被改动时都会明确报错,而不是解出一堆乱码。</p>
-    <h2>PBKDF2 这一层</h2>
-    <p>密码不是密钥——PBKDF2-SHA256 以 15 万次迭代和每条消息独立的随机盐,把你的密码拉伸成 256 位密钥,让离线暴力破解的代价大幅提高。</p>
-    <h2>可移植的载荷格式</h2>
-    <p>输出为 base64 编码的 AES-v1:salt:iv:ciphertext——自包含,可在本页、Node 或任何支持 WebCrypto 的环境解密。没有隐藏状态,也不经过服务器中转。</p>
-    <h2>诚实的边界</h2>
-    <p>本工具在浏览器里加密文本;它不管理密钥、不轮换密钥,也保护不了已被入侵的设备。文件与备份场景,age 或 GPG 仍是更合适的工具。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -66,7 +53,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function AesEncryptDecryptContent(): ReactNode {
   const { locale } = useApp()

@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * OvertimeCalculator 长文正文 —— 四语 dispatcher
+ * OvertimeCalculator 长文正文 —— 三语 dispatcher
  *
- * en 分支与改造前渲染输出一致。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支与改造前渲染输出一致。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -24,19 +24,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>在美国,谁有资格拿加班费</h2>
-    <p>受 FLSA 保护的非豁免员工,每周超过 40 小时的部分至少按常规工资的 1.5 倍支付。豁免与否同时取决于工资水平和岗位职责——光看职位头衔说了不算。</p>
-    <h2>月薪员工的加班费</h2>
-    <p>非豁免的月薪员工同样有加班费:周薪除以 40 得出常规时薪。部分州还规定无论每周合计多少,每日超过 8 小时即计加班。</p>
-    <h2>哪些钱要计入时薪</h2>
-    <p>计算"常规工资"时,奖金、佣金和班次津贴通常必须计入——只按基本时薪算会低估你应得的金额。</p>
-    <h2>双倍工资</h2>
-    <p>联邦法律从不强制 ×2,但加州规定每日超过 12 小时按双倍计酬,许多工会合同和雇主政策也会自愿提供节假日双薪。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -66,7 +53,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function OvertimeCalculatorContent(): ReactNode {
   const { locale } = useApp()

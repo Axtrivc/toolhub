@@ -67,58 +67,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>三种温度标尺</h2>
-    <p>
-      常用的温度标尺有三种。<strong>摄氏度(°C)</strong>用于几乎所有国家的日常天气和烹饪。<strong>华氏度(°F)</strong>在美国用于相同用途。<strong>开尔文(K)</strong>用于科学领域,测量绝对温度,从绝对零度开始计起。
-    </p>
-
-    <h2>换算公式</h2>
-    <ul>
-      <li><strong>摄氏度转华氏度:</strong> °F = (°C × 9/5) + 32</li>
-      <li><strong>华氏度转摄氏度:</strong> °C = (°F − 32) × 5/9</li>
-      <li><strong>摄氏度转开尔文:</strong> K = °C + 273.15</li>
-      <li><strong>开尔文转摄氏度:</strong> °C = K − 273.15</li>
-      <li><strong>华氏度转开尔文:</strong> K = (°F − 32) × 5/9 + 273.15</li>
-    </ul>
-
-    <h2>关键参考点</h2>
-    <ul>
-      <li><strong>水的冰点:</strong> 0°C = 32°F = 273.15 K</li>
-      <li><strong>水的沸点:</strong> 100°C = 212°F = 373.15 K</li>
-      <li><strong>体温:</strong> 37°C = 98.6°F</li>
-      <li><strong>室温:</strong> ~20-22°C = 68-72°F</li>
-      <li><strong>绝对零度:</strong> 0 K = −273.15°C = −459.67°F</li>
-    </ul>
-
-    <h2>快速心算技巧</h2>
-    <p>
-      估算 °C 到 °F:把摄氏度数值加倍再加 30。对于 20°C:<code>2×20 + 30 = 70°F</code>{' '}
-      (实际:68°F — 对天气来说足够接近)。反过来,先减 30 再减半。这种近似方法适用于日常温度,但在极端温度下就不准了。
-    </p>
-
-    <h2>为什么美国使用华氏度</h2>
-    <p>
-      华氏温标由丹尼尔·加布里埃尔·华氏在 18 世纪初制定。美国在摄氏度成为全球标准之前就采用了它,而切换的成本——重新校准每一个恒温器、烤箱、天气预报和工业流程——使其沿用至今。大多数其他国家在 20 世纪 60—70 年代改用摄氏度。
-    </p>
-
-    <h2>开尔文在科学中的重要性</h2>
-    <p>
-      开尔文是一种<strong>绝对</strong>温标:0 K 是绝对零度,即所有热运动停止的理论点。开尔文温度没有负值(尽管摄氏度和华氏度的负值很常见)。开尔文与摄氏度的度数大小相同,只是偏移了 273.15,这使科学计算更简洁。
-    </p>
-
-    <h2>烹饪温度</h2>
-    <p>常见烤箱温度参考:</p>
-    <ul>
-      <li><strong>慢烤 / 低温:</strong> 120°C = 250°F</li>
-      <li><strong>中等:</strong> 180°C = 350°F(大多数烘焙)</li>
-      <li><strong>高温:</strong> 200°C = 400°F</li>
-      <li><strong>极高温:</strong> 230°C = 450°F(面包、披萨)</li>
-    </ul>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -253,7 +201,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function TemperatureConverterContent(): ReactNode {
   const { locale } = useApp()

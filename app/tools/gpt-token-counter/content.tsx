@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * GPT Token Counter 长文正文 —— 四语 dispatcher
+ * GPT Token Counter 长文正文 —— 三语 dispatcher
  *
- * en 分支等价于原 ToolContent 渲染输出。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支等价于原 ToolContent 渲染输出。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en (与改造前渲染输出一致) ────────────────────────────
@@ -59,36 +59,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具?</h2>
-    <p>
-      每张 LLM API 账单都以 <strong>token</strong>(模型实际读写的文本片段)来计量。本计数器估算你的 prompt 或文档包含多少 token,以及在主流 GPT 和 Claude 模型上输入这些内容大约需要多少钱。它<strong>100% 在你的浏览器中运行</strong>:你粘贴的任何内容都不会上传,因此可以安全地处理未发布的草稿、客户数据和 API 密钥。
-    </p>
-
-    <div>
-      <h2>估算值是如何算出来的</h2>
-      <p>
-        诸如 <code>cl100k_base</code>(GPT-4 和 GPT-3.5 使用)之类的分词器会把文本切成子词单元,因此一个 token 大约对应英文的 <strong>4 个字符或 0.75 个单词</strong>。本工具以这条经典的「字符数 ÷ 4」经验法则为起点,再通过把文本拆分为单词段和标点来细化:短词大约算 1 个 token,长词大约每 5 个字符算 1 个,每个标点符号各算 1 个 token,最后取两种启发式的平均值。结果通常与真实计数相差约 10–20%——足够做预算估算,但不足以用于计费争议。
-      </p>
-    </div>
-
-    <div>
-      <h2>估算值什么时候会偏离实际</h2>
-      <p>
-        这套启发式是针对英文散文调校的。<strong>源代码</strong>的分词效果较差(符号和缩进密集);<strong>非英文文本</strong>——尤其是中日韩(CJK)——往往 1–2 个字符就是 1 个 token,而不是 4 个;emoji 或罕见 Unicode 字符每个可能就要消耗好几个 token。如果你需要精确数字,请用各提供商自己的分词器(<code>tiktoken</code> 用于 OpenAI,或 Anthropic SDK 中的 token 计数接口)对同一段文本运行一遍,再作比较。
-      </p>
-    </div>
-
-    <div>
-      <h2>用价格表估算 prompt 成本</h2>
-      <p>
-        下拉菜单列出了 OpenAI、Anthropic、Google、DeepSeek 等各家当前旗舰模型(例如 GPT-5.6、Claude Sonnet 5、Gemini 3.6 Flash)每百万 token 的价格(<em>截至 2026 年</em>)——各提供商调价频繁,正式使用前请核实。快速心算一下来验证:1,000 个单词的 prompt 大约是 1,300 个 token,按下拉菜单中的输入价格算最多也就一两美分。成本只有在规模上来之后才有意义,所以请乘以你的实际请求量——并记住<strong>输出 token 单独计费</strong>,通常费率是输入的数倍。
-      </p>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -188,7 +158,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function GptTokenCounterClientContent(): ReactNode {
   const { locale } = useApp()

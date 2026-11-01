@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * LLM API Cost Calculator 长文正文 —— 四语 dispatcher
+ * LLM API Cost Calculator 长文正文 —— 三语 dispatcher
  *
- * en 分支与改造前渲染输出一致。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支与改造前渲染输出一致。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en(与改造前渲染输出一致) ────────────────────────────
@@ -46,30 +46,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>看月账单,别纠结单次请求</h2>
-    <p>
-      单 Token 单价不乘以用量就没有意义。本计算器从你的<strong>月度 Token 总量</strong>出发——分别统计提示词输入与输出——把各大厂商的预估账单并排列出,按最便宜优先排序,并用美元标出与最贵模型的差距。同样的负载,旗舰模型通常比经济档贵 10-20 倍。
-    </p>
-
-    <h2>为什么输出 Token 主宰账单</h2>
-    <p>
-      几乎所有模型的输出 Token 单价都是输入的 3-8 倍。一个读取 2 万 Token 网页、只写 2 千 Token 回答的智能体,常常为「回答」付出更多钱。收紧 <code>max_tokens</code>、强制简洁的回答风格、缓存重复的系统提示词,是三个最大的杠杆——仅最后一项就能在 OpenAI、Anthropic 和 DeepSeek 上把输入成本砍掉 50-90%。
-    </p>
-
-    <h2>如何读对比表</h2>
-    <p>
-      表中各行是当前未缓存列表价(每百万 Token,汇总自 tokencost.app,2026 年 8 月复核——厂商频繁调价,请把这些数字当规划参考)。「vs cheapest」显示离开经济档要付出多少;「you save vs priciest」显示不选旗舰模型、改选任意一行,每月能省下多少。
-    </p>
-
-    <h2>预算经验法则</h2>
-    <p>
-      用最便宜但够用的模型做原型,花一周测量真实的 Token 分布,再决定最终链路里哪些环节值得上旗舰智能。大多数生产应用最终把 80% 流量路由给经济档模型,把旗舰留给最难啃的 20%——这张表精确显示这种拆分能省多少。
-    </p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -123,7 +99,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function LlmApiCostContent(): ReactNode {
   const { locale } = useApp()

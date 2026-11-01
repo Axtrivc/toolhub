@@ -5,30 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const RomanNumeralConverterL10n: ToolL10n = {
-  zh: {
-    useCases: ['把电影版权年份换算成罗马数字', '做罗马数字作业或教学', '核对章节/钟面写法是否规范', '1-3999 数字与罗马数字互转'],
-    faqs: [
-      { q: '支持的数字范围是多少?', a: '1 到 3999。古典记数法没有零,4000 以上的数只能用上划线记法表示,而这种写法键盘打不出、大多数字体也不支持。对年份、章节号和版权行来说,3999 几乎覆盖了所有实际用途。' },
-      { q: '为什么 4 写作 IV 而不是 IIII?', a: '标准形式使用减法对——IV=4、IX=9、XL=40、XC=90、CD=400、CM=900。钟面出于传统显示 IIII,但本转换器强制标准形式:输入 IIII 或 VX 会被拒绝,并给出规范写法的建议。' },
-      { q: '会显示拆解过程吗?', a: '会。数字转罗马会按顺序列出符号(2024 拆成 MM + XX + IV);罗马转数字会先按规范形式校验再采信——非法组合会被拒绝,而不是被误读。' },
-    ],
-    ui: {
-      'in.breakdown': '分解',
-      'in.num': '数字 (1-3999)',
-      'in.result': '转换结果',
-      'in.roman': '或罗马数字',
-      'note': '🏛️ 标准罗马数字使用减法对(IV=4、IX=9)。范围是 1-3999——古典记数法没有零,也无法书写更大的数。',
-      'out.breakdown': '分解',
-      'out.num': '数字 (1-3999)',
-      'out.result': '转换结果',
-      'out.roman': '或罗马数字',
-      'errBothFilled': '两个字段只需填一个',
-      'errRange': '请输入 1–3999 之间的整数',
-      'errChars': '无效罗马数字(只允许 I V X L C D M)',
-      'errNonCanonical': '这不是规范写法的罗马数字',
-      'errDidYouMean': '(是不是想输入 {c}?)',
-    },
-  },
+
   es: {
     useCases: ['convertir años de copyright en números romanos', 'resolver deberes o explicar números romanos', 'comprobar si la escritura de un capítulo es canónica', 'convertir entre números y romanos del 1 al 3999'],
     faqs: [

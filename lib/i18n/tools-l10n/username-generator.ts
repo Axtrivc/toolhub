@@ -5,28 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const UsernameGeneratorL10n: ToolL10n = {
-  zh: {
-    useCases: ['为游戏和社交平台起不重复的昵称', '按平台长度上限过滤候选名', '让朋友队/战队拿到统一风格的 ID', '快速产出备选清单再挑顺眼的'],
-    faqs: [
-      { q: '能全平台用同一个用户名吗?', a: '各平台规则不同(Instagram 30 字符、X 15、Discord 现为 32)——把最大长度设到最严的那个,并少用数字/下划线,可移植性最好。' },
-      { q: '这些用户名能当密码用吗?', a: '不能——昵称本来就是公开且要被人猜到的。凡是守护账号的东西都用密码生成器。' },
-      { q: '为什么提示没有合适的候选?', a: '最大长度过滤掉了更长的组合——放宽上限或换更短的关键词;工具不会硬截断,因为断尾的 ID 比换一个更难看。' },
-      { q: '各种风格分别做什么?', a: '游戏风加 leet 数字和 xX…Xx 装饰;复古风挑 80/90 年代年份后缀;极简风保持干净小写;下划线风用经典 _ 连接两个词。' },
-    ],
-    ui: {
-      'keywordLabel': '关键词或名字(可选)',
-      'keywordPlaceholder': '如 nova、你的名字、战队标签',
-      'maxLenLabel': '最大长度',
-      'styleLabel': '风格',
-      'styleGamer': '🎮 游戏风',
-      'styleRetro': '👾 复古风',
-      'styleMinimal': '⬜ 极简风',
-      'styleUnderscore': '下划线风格',
-      'generate': '生成用户名',
-      'noneFit': '该长度限制下没有合适候选——放宽上限或缩短关键词。',
-      'note': '👤 游戏风带 leet 数字与 xX 装饰,复古风配 80/90 年代年份后缀,极简风只有干净小写,下划线风用经典 _ 连接两个词。这些是昵称不是密码——凡涉及账号安全请用密码生成器。',
-    },
-  },
+
   es: {
     useCases: ['crear aliases únicos para juegos y redes', 'filtrar candidatos por el límite de cada plataforma', 'dar a tu equipo o clan IDs del mismo estilo', 'generar una lista corta y elegir la que guste'],
     faqs: [

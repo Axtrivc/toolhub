@@ -152,7 +152,7 @@ export const NumberToWordsConverterClient = makeTextTool({
       .map((line) => {
         const t = line.trim()
         if (t === '') return ''
-        // 四语文案承诺 $ 与 % 均被剥离(note/l10n):字符类必须含 %,否则
+        // 三语文案承诺 $ 与 % 均被剥离(note/l10n):字符类必须含 %,否则
         // 粘贴 "50%" 会走到「不是数字」分支,与文案不符
         const cleaned = t.replace(/[$,\s%]/g, '')
         if (!/^[+-]?\d+(\.\d+)?$/.test(cleaned)) {

@@ -5,78 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const ipSubnetCalculatorL10n: ToolL10n = {
-  zh: {
-    ui: {
-      'addressType': '地址类型',
-      'binaryMask': '二进制掩码',
-      'broadcastAddress': '广播地址',
-      'copySummary': '复制摘要',
-      'clsA': 'A',
-      'clsB': 'B',
-      'clsC': 'C',
-      'clsD': 'D(多播)',
-      'clsE': 'E(实验)',
-      'errEnterIp': '请输入带前缀的 IPv4 地址,例如 192.168.1.10/24',
-      'errInvalidIp': '无效的 IPv4 地址 "{ip}" —— 应为 4 个 0–255 的八位组',
-      'errInvalidMask': '无效的子网掩码 "{mask}"',
-      'errInvalidPrefix': '无效的前缀 "/{prefix}" —— 请使用 0–32',
-      'errMissingPrefix': '缺少前缀长度 —— 请在 IP 后加上 /24(或空格 + 掩码)',
-      'errNonContiguousMask': '掩码 "{mask}" 不连续(必须是高位连续的 1 后跟 0)',
-      'errPrefixRange': '前缀 /{prefix} 超出范围(0–32)',
-      'errTwoParts': '请使用 192.168.1.10/24 或 192.168.1.10 255.255.255.0 这样的格式',
-      'firstUsableHost': '首个可用主机',
-      'inputLabel': '带前缀的 IPv4 地址(CIDR、点分掩码或空格分隔)',
-      'ipAddress': 'IP 地址',
-      'ipClass': 'IP 类别',
-      'lastUsableHost': '最后可用主机',
-      'networkAddress': '网络地址',
-      'noteF1': '🔒 接受的输入:',
-      'noteF2': ', ',
-      'noteF3': ', 或 ',
-      'noteF4': '。边界情况遵循 RFC:',
-      'noteF5': ' 是点对点链路,有 2 个可用地址(RFC 3021),而 ',
-      'noteF6': ' 标识单个主机。',
-      'sInput': '输入:',
-      'subnetMask': '子网掩码',
-      'summaryTitle': 'IP 子网摘要',
-      'totalAddresses': '地址总数',
-      'typeLinkLocal': '链路本地(169.254.0.0/16)',
-      'typeLoopback': '环回(127.0.0.0/8)',
-      'typePrivate': '私有(RFC 1918)',
-      'typePublic': '公网',
-      'typeReserved': '保留',
-      'usableHosts': '可用主机数',
-      'wildcardMask': '通配符掩码',
-    },
-    formula: {
-      formula: 'addresses = 2^(32 − prefix)\nusable hosts = 2^(32 − prefix) − 2',
-      variables:
-        'prefix: CIDR 前缀长度,网络位的个数(0–32)\naddresses: 子网内的地址总数\nusable hosts: 可分配给设备的地址数,不含网络地址和广播地址',
-      explain: 'IPv4 /prefix 中,主机位为 (32 − prefix)。两个地址保留(网络地址和广播地址),所以可用主机比地址总数少 2。',
-      example:
-        '第 1 步:取一个 /26 子网,前缀 = 26。\n第 2 步:主机位 = 32 − 26 = 6。\n第 3 步:地址总数 = 2^6 = 64。\n第 4 步:可用主机 = 64 − 2 = 62。\n结果:一个 /26 子网容纳 64 个地址,62 台可用主机。',
-    },
-    useCases: [
-      'CIDR 到子网掩码转换器',
-      '可用主机范围计算器',
-      '在线通配符掩码计算器',
-      '一个 /24 子网能容纳多少主机',
-    ],
-    faqs: [
-      {
-        q: '什么是 CIDR 表示法(例如 /24)?',
-        a: 'CIDR 是 IP 后面的「/数字」,表示有多少位属于网络部分。/24 表示前 24 位固定、后 8 位可变,共 256 个地址。数字越小(如 /16)覆盖主机越多;数字越大(如 /30)覆盖越少。',
-      },
-      {
-        q: '为什么可用主机数比地址总数少 2 个?',
-        a: '每个子网里,第一个地址保留为网络地址、最后一个保留为广播地址,两者都不能分配给设备。所以 /24 有 256 个地址但只有 254 个可用主机;/30 有 4 个地址但只有 2 个可用。',
-      },
-      {
-        q: '网络地址和广播地址分别是做什么用的?',
-        a: '网络地址标识子网本身,被路由器使用;广播地址用于向该子网内的所有主机发送数据包。两者都不属于任何一台具体设备,所以都被排除在可用主机范围之外。',
-      },
-    ],
-  },
+
   es: {
     ui: {
       'addressType': 'Tipo de dirección',

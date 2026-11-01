@@ -5,66 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const srtSubtitleShiftL10n: ToolL10n = {
-  zh: {
-    ui: {
-      'blockPlural': '块',
-      'blockSingular': '块',
-      'clampClampedTo': '钳制为 00:00:00,000。',
-      'clampLabel': '将负时间钳制为 00:00:00,000',
-      'clampWas': '已被',
-      'clampWentBelowZero': '平移后低于零,',
-      'clampWere': '已被',
-      'clear': '清空',
-      'copy': '复制',
-      'copySrt': '复制 SRT',
-      'cuePlural': '条字幕',
-      'cueSingular': '条字幕',
-      'errReadFile': '无法读取所选文件。请尝试将其重新另存为纯文本 (.srt)。',
-      'inputLabel': '粘贴 SRT 字幕',
-      'invalidOffsetOr': ' 或 ',
-      'invalidOffsetPrefix': '⚠️ 请输入有效的秒数,如 ',
-      'invalidOffsetSuffix': '。',
-      'offsetHint': '负数 = 字幕提前出现;正数 = 延后。',
-      'offsetLabel': '偏移(秒,可为负)',
-      'parseCouldNotBeParsed': '无法解析(没有有效时间戳行),',
-      'parseSkipped': '跳过。',
-      'parseWas': '已被',
-      'parseWere': '已被',
-      'privacyNote': '🔒 100% 在客户端——你的字幕文件绝不离开浏览器。',
-      'renumberLabel': '重新编号字幕',
-      'resultTitle': '偏移后的 SRT',
-      'stripLabel': '剥离格式(标签、ASS 块、♪)',
-      'uploadSrt': '上传 .srt',
-    },
-    useCases: [
-      '在线按秒偏移 SRT 字幕',
-      '修复不同步的字幕',
-      '免费字幕偏移调节器',
-      '移除 SRT 文件的 HTML 标签',
-    ],
-    faqs: [
-      {
-        q: '正偏移是把字幕提前还是延后?',
-        a: '正偏移会加时间,所以每条字幕都更晚开始——适用于字幕比台词出现得早的情况。负偏移会减时间,把字幕提前,适合字幕滞后于音频的情况。',
-      },
-      {
-        q: '它会重新编号字幕序号吗?',
-        a: '会。偏移后,字幕会按新的时间顺序从 1 重新连续编号,所以即使偏移改变了字幕之间的相对位置,输出也始终是合法、顺序正确的 SRT 文件。',
-      },
-      {
-        q: '能剥离 HTML 和 ASS 格式标签吗?',
-        a: '能。剥离格式选项会移除行内 HTML(<i>、<b>)和 ASS 样式覆盖标签,留下干净的纯文本字幕。当播放器把标签当成可见乱码而非样式来渲染时,这个功能很有用。',
-      },
-      {
-        q: '需要的偏移量怎么估?',
-        a: '挑一句台词:看播放器里角色开口的时间,减去字幕出现的时间,差值就是要填的偏移,精确到 0.5 秒通常足够。全片延迟一致时一次搞定;如果偏差随播放进度变大,那是帧率(FPS)错配,偏移修不了。',
-      },
-      {
-        q: '处理后的文件能直接用吗?',
-        a: '能,输出是重新编号的标准 SRT,VLC、MPC-HC、IINA 等直接加载。整个处理在浏览器本地完成,字幕文件不上传;源文件若带 ASS 块或 ♪ 符号,勾选「剥离格式」后导入播放器更干净。',
-      },
-    ],
-  },
+
   es: {
     ui: {
       'blockPlural': 'bloques',

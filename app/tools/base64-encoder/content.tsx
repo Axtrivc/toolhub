@@ -41,37 +41,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具?</h2>
-    <p>
-      Base64 把二进制数据编码为 ASCII 文本,这样它就能通过为文本设计的系统传输——邮件、JSON、HTML、URL。本工具把任意文本编码为 Base64,并正确支持非英语字符和 emoji 的 UTF-8 编码。
-    </p>
-    <div>
-      <h2>Base64 的用途</h2>
-      <ul>
-        <li><strong>邮件附件</strong>(MIME 编码)</li>
-        <li><strong>Data URI</strong> —— 在 HTML/CSS 中直接内嵌图片</li>
-        <li><strong>API</strong> —— 在 JSON 中发送二进制数据</li>
-        <li><strong>JWT 令牌</strong>,用于身份验证</li>
-        <li><strong>在基于文本的格式中存储二进制数据</strong></li>
-      </ul>
-    </div>
-    <div>
-      <h2>Base64 不是加密</h2>
-      <p>
-        Base64 是一种<em>编码</em>,不是加密。任何人都能瞬间解码——它不提供任何安全性。绝不要用 Base64 来保护敏感数据。它只用于传输兼容,真正的加密(AES 等)请另行处理。
-      </p>
-    </div>
-    <div>
-      <h2>体积代价</h2>
-      <p>
-        Base64 输出比输入大约 <strong>33%</strong>。每 3 个字节会变成 4 个字符。这就是文本安全传输所付出的代价。
-      </p>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -147,7 +116,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function Base64EncoderContent(): ReactNode {
   const { locale } = useApp()

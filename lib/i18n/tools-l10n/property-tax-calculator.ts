@@ -4,41 +4,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const PropertyTaxCalculatorL10n: ToolL10n = {
-  zh: {
-    useCases: [
-      '买房前按目标价估算年房产税与月摊',
-      '换算 mills 与百分比口径,跨县比较有效税率',
-      '算 homestead 豁免能省多少税',
-      '评估值与市场价脱钩时核对自己的真实税率',
-    ],
-    faqs: [
-      { q: '房产税怎么算?', a: '评估值乘以 millage 费率再除以 1,000:$320,000 评估值、20 mills 年缴 $6,400。评估值通常是市场价乘以县的评估率,再减去已申报的豁免额。' },
-      { q: '什么是 mill?', a: '一个 mill = 每 $1,000 评估值征 $1 税——20 mills 即每 $1,000 收 $20。"mills"与百分比可直接换算:20 mills = 评估值的 2%。' },
-      { q: '买价高于评估值,税会涨吗?', a: '经常会。像加州 Prop 13 这类上限保护的是现业主,但很多辖区会在成交后按你的购入价重新评估长期持有的房屋。按你实际付的钱做预算,而不是卖家眼下的账单。' },
-      { q: '怎么降低房产税?', a: '申报所有符合资格的豁免(自住、老人、退伍军人)——通常不会自动生效;评估涨幅超出可比成交时就去申诉。申诉一般须在评估通知后 30-60 天内提出。' },
-    ],
-    ui: {
-      'in.marketValue': '市场价值',
-      'in.ratio': '评估率',
-      'in.millage': 'millage 费率',
-      'in.exemption': '豁免额',
-      'inSuffix.marketValue': '$',
-      'inSuffix.ratio': '%',
-      'inSuffix.millage': 'mills',
-      'inSuffix.exemption': '$',
-      'out.annualTax': '年房产税',
-      'out.monthlyTax': '月摊金额 (escrow)',
-      'out.assessedValue': '评估价值',
-      'out.effectiveRate': '有效税率',
-      'errInvalid': '请输入正的价值、0-100 的评估率与非负 mills',
-      'preset.0': '美国中位 (~1.1%)',
-      'preset.1': '高税州 (~2.2%)',
-      'preset.2': '评估缺口 (60% × 30 mills)',
-      'preset.3': '含 $5万 自住豁免',
-      'preset.4': '南卡罗来纳 (4% × 250 mills)',
-      'note': '🏛️ 一个 mill = 每 $1,000 评估值 $1 税,所以 20 mills 对 $320,000 评估值 = 每年 $6,400。很多州评估值低于市场价(如 80%)——县评估官会同时公布评估率与 millage。高价成交可能触发按购入价重评;Prop 13、Save Our Homes 等上限保护的是老业主,不是买家。',
-    },
-  },
+
   es: {
     useCases: [
       'estimar el impuesto predial anual y su cuota mensual antes de comprar',

@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * TomlToJson 长文正文 —— 四语 dispatcher
+ * TomlToJson 长文正文 —— 三语 dispatcher
  *
- * en 分支与改造前渲染输出一致。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支与改造前渲染输出一致。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en (与改造前渲染输出一致) ────────────────────────────
@@ -22,17 +22,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>TOML 为什么存在</h2>
-    <p>Rust (Cargo)、Python (pyproject) 和许多现代工具都选 TOML 做配置格式,因为它对 diff 友好且类型明确:字符串带引号、数字不带引号、日期无歧义——没有 YAML 那种"猜类型"的惊吓。</p>
-    <h2>哪些内容能干净转换</h2>
-    <p>表转成对象、数组表转成对象数组、点分键逐层嵌套、整数(含十六进制/八进制/二进制与下划线分隔符)转成 JSON 数字、布尔值直接映射。日期时间保留为 ISO 字符串,因为 JSON 没有日期类型。</p>
-    <h2>有意为之的限制</h2>
-    <p>多行字符串会带行号大声拒绝,而不是被悄悄改坏——在配置文件上猜错的转换器要让人搭上好几个小时。请先修正语法,或把这些值收成单行再转。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -58,7 +47,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function TomlToJsonContent(): ReactNode {
   const { locale } = useApp()

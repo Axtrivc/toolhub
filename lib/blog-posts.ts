@@ -19,11 +19,7 @@ export const posts: BlogPostMeta[] = [
     relatedSlugs: ['mortgage-loan-calculators', 'home-flooring-and-renovation-math', 'hysa-vs-cd-wealth-building-guide'],
     featuredToolSlugs: ['mortgage-calculator', 'amortization-table-generator', 'mortgage-affordability-calculator', 'down-payment-calculator', 'biweekly-mortgage-payment-calculator', 'refinance-break-even-calculator'],
     i18n: {
-      zh: {
-        title: '房贷摊销完全指南:PITI 分解与提前还款策略',
-        description:
-          '拆开 30 年贷款的黑盒:摊销公式、为什么首期还款 87% 是利息、PITI 全口径,以及省下五位数的提前还款数学——配套浏览器本地运行的免费计算器。',
-      },
+
       es: {
         title: 'Guía completa de amortización hipotecaria, desglose PITI y estrategias de prepago',
         description:
@@ -49,11 +45,7 @@ export const posts: BlogPostMeta[] = [
     relatedSlugs: ['fire-movement-retire-early-playbook', 'mortgage-piti-and-amortization-guide', 'mortgage-loan-calculators'],
     featuredToolSlugs: ['hysa-calculator', 'cd-calculator', 'apy-calculator', 'compound-interest-calculator', 'inflation-calculator', 'emergency-fund-calculator'],
     i18n: {
-      zh: {
-        title: 'HYSA vs CD vs 货币基金:2026 年最优现金配置策略',
-        description:
-          '同一块钱,三种定价。2026 现金堆栈——应急金放 HYSA、有日期的目标进 CD 阶梯、通胀后的实际收益数学,以及银行希望你跳过的 APY 与 APR 换算。',
-      },
+
       es: {
         title: 'HYSA vs. CD vs. mercado monetario: la estrategia óptima de asignación de efectivo para 2026',
         description:
@@ -79,11 +71,7 @@ export const posts: BlogPostMeta[] = [
     relatedSlugs: ['hysa-vs-cd-wealth-building-guide', 'mortgage-piti-and-amortization-guide', 'mortgage-loan-calculators'],
     featuredToolSlugs: ['fire-calculator', 'retirement-calculator', 'compound-interest-calculator', 'roth-ira-calculator', '401k-match-calculator', 'net-worth-calculator'],
     i18n: {
-      zh: {
-        title: '2026 FIRE 行动手册:安全提取率、Coast FIRE 与税优账户堆叠',
-        description:
-          'FIRE 是偿付方程不是玄学:Trinity 研究真实的 4% 法则、你会早得吃惊地到达的 Coast FIRE 检查点、跑赢税收的账户堆叠顺序,以及序列风险的护栏。',
-      },
+
       es: {
         title: 'Playbook FIRE 2026: tasas de retirada seguras, Coast FIRE y apilado con ventaja fiscal',
         description:
@@ -109,11 +97,7 @@ export const posts: BlogPostMeta[] = [
     relatedSlugs: ['pricing-strategies-margin-vs-markup', 'llm-api-pricing-and-tokenomics'],
     featuredToolSlugs: ['cac-ltv-calculator', 'saas-ltv-churn-calculator', 'runway-calculator', 'break-even-calculator', 'roi-calculator', 'profit-margin-calculator'],
     i18n: {
-      zh: {
-        title: '精通 SaaS 单位经济:CAC、LTV 与流失率的数学关系',
-        description:
-          'CAC、LTV、流失率是同一个方程,不是三个 KPI。全口径 CAC、分母坐流失率的毛利 LTV、LTV/CAC ≥ 3 法则、回本期,以及为什么 3% 月流失其实是 31% 年流失。',
-      },
+
       es: {
         title: 'Dominar la economía unitaria SaaS: la relación matemática entre CAC, LTV y churn',
         description:
@@ -139,11 +123,7 @@ export const posts: BlogPostMeta[] = [
     relatedSlugs: ['how-i-built-toolhub', 'llm-api-pricing-and-tokenomics'],
     featuredToolSlugs: ['aes-encrypt-decrypt', 'password-generator', 'password-entropy-checker', 'jwt-decoder', 'jwt-generator', 'hmac-generator'],
     i18n: {
-      zh: {
-        title: '揭秘浏览器内 AES-256-GCM 与 PBKDF2:开发者实战指南',
-        description:
-          '浏览器里的零知识架构:GCM 认证标签为何胜过 CBC、绝不能破的 IV 复用禁令、正确拉伸口令的 PBKDF2 参数、CSPRNG 密钥生成,以及 JWT 解码与验签之别。',
-      },
+
       es: {
         title: 'Desmitificar AES-256-GCM y PBKDF2 en el navegador: guía práctica para desarrolladores',
         description:
@@ -169,11 +149,7 @@ export const posts: BlogPostMeta[] = [
     relatedSlugs: ['canine-nutrition-and-calorie-guide'],
     featuredToolSlugs: ['bmr-calculator', 'tdee-calculator', 'calorie-calculator', 'intermittent-fasting-calculator', 'macro-calculator', 'weight-loss-goal-calculator'],
     i18n: {
-      zh: {
-        title: '人体代谢科学:BMR、TDEE、热量缺口与 16:8 断食的计算',
-        description:
-          '临床营养师的方程组——Mifflin-St Jeor 基础代谢、诚实的 TDEE 活动档位、每公斤 7,700 kcal 的缺口账簿、16:8 断食真正有用的地方,以及如何对抗适应性产热。',
-      },
+
       es: {
         title: 'La ciencia del metabolismo humano: calcular BMR, TDEE, déficit calórico y ayuno 16:8',
         description:
@@ -199,11 +175,7 @@ export const posts: BlogPostMeta[] = [
     relatedSlugs: ['saas-unit-economics-cac-ltv-churn', 'how-i-built-toolhub', 'client-side-cryptography-web-crypto-guide'],
     featuredToolSlugs: ['llm-api-cost-calculator', 'llm-cost-calculator', 'gpt-token-counter', 'token-visualizer', 'context-window-checker', 'embedding-price-calculator'],
     i18n: {
-      zh: {
-        title: '2026 LLM 定价手册:度量 Token 密度、上下文缓存与每月 API 预算',
-        description:
-          'LLM 账单就是乘法:请求 × token × 单价。实测 p50/p95 token 密度、吃下 50–90% 的缓存折扣、批量与实时流量分流、简单任务路由给小模型,别再过度优化嵌入成本。',
-      },
+
       es: {
         title: 'Manual de precios LLM 2026: medir densidad de tokens, caché de contexto y presupuestos mensuales de API',
         description:
@@ -229,11 +201,7 @@ export const posts: BlogPostMeta[] = [
     relatedSlugs: ['saas-unit-economics-cac-ltv-churn', 'llm-api-pricing-and-tokenomics'],
     featuredToolSlugs: ['profit-margin-calculator', 'markup-calculator', 'discount-calculator', 'reverse-stripe-fee-calculator', 'freelance-rate-calculator', 'break-even-calculator'],
     i18n: {
-      zh: {
-        title: 'Markup vs Margin:电商与零售盈利的定价数学',
-        description:
-          '50% 加价率只是 33% 利润率——差额正是利润漏掉的地方。公式、按目标利润率反推定价、真实费用栈($30 订单上 2.9% + $0.30 实为 3.9%)、自由职业报价与折扣纪律。',
-      },
+
       es: {
         title: 'Markup vs. margin: la matemática del pricing rentable en e-commerce y retail',
         description:
@@ -259,11 +227,7 @@ export const posts: BlogPostMeta[] = [
     relatedSlugs: ['metabolism-fasting-and-calorie-deficit'],
     featuredToolSlugs: ['dog-food-calculator', 'dog-age-calculator'],
     i18n: {
-      zh: {
-        title: '养犬人的兽医数学:解读 RER、MER 与每日精确热量',
-        description:
-          '狗粮袋建议是按未绝育、高活动、年轻犬写的——你家狗多半不是。RER = 70 × kg^0.75 基线、从幼犬 3.0× 到减重 1.0× 的 MER 生命阶段乘数、10% 零食规则与体况评分。',
-      },
+
       es: {
         title: 'Matemática veterinaria para dueños de perros: descifrar RER, MER y la ingesta calórica diaria exacta',
         description:
@@ -289,11 +253,7 @@ export const posts: BlogPostMeta[] = [
     relatedSlugs: ['mortgage-piti-and-amortization-guide', 'mortgage-loan-calculators'],
     featuredToolSlugs: ['flooring-calculator', 'paint-calculator', 'paver-calculator', 'drywall-calculator', 'concrete-calculator', 'deck-board-calculator'],
     i18n: {
-      zh: {
-        title: '包工头的材料估算指南:瓷砖、地板与油漆的损耗系数计算',
-        description:
-          '损耗系数把"DIY 一个周末"和"第三次跑建材店"分开:直铺地板 10%、斜铺瓷砖 15–20%、每加仑每遍 350–400 ft²、批次号对齐,以及 10–20% 预算不可预见费。',
-      },
+
       es: {
         title: 'Guía del contratista para estimar materiales: factores de desperdicio en baldosa, suelo y pintura',
         description:
@@ -319,11 +279,7 @@ export const posts: BlogPostMeta[] = [
     relatedSlugs: ['mortgage-piti-and-amortization-guide', 'hysa-vs-cd-wealth-building-guide', 'home-flooring-and-renovation-math'],
     featuredToolSlugs: ['mortgage-calculator', 'loan-calculator', 'rent-vs-buy-calculator', 'credit-card-minimum-payment-calculator', 'amortization-table-generator', 'refinance-break-even-calculator'],
     i18n: {
-      zh: {
-        title: '房贷与贷款计算器诚实指南(PITI、PMI、还款曲线)',
-        description:
-          '银行只报本息、跳过税费保险与 PMI。真实数字——PITI 全口径、提前还款的五位数杠杆、租买交叉年与最低还款陷阱,配套全程浏览器本地运行的免费计算器。',
-      },
+
       es: {
         title: 'Calculadoras hipotecarias y de préstamos: la guía honesta (PITI, PMI, curvas de amortización)',
         description:
@@ -349,11 +305,7 @@ export const posts: BlogPostMeta[] = [
     relatedSlugs: ['client-side-cryptography-web-crypto-guide', 'llm-api-pricing-and-tokenomics'],
     featuredToolSlugs: ['json-formatter', 'slug-generator', 'faq-schema-generator', 'open-graph-generator', 'robots-txt-generator'],
     i18n: {
-      zh: {
-        title: '我是如何构建 ToolHub 的:始终亚秒级的静态 PWA',
-        description:
-          '2026 年 10 月 29 日更新的架构复盘:350 个浏览器工具、Next.js 静态导出、懒加载 Service Worker 缓存、1,400 个工具级 JSON-LD 块与预留广告空间。',
-      },
+
       es: {
         title: 'Cómo construí ToolHub: una PWA estática que sigue siendo sub-segundo',
         description:

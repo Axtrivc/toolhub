@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * User Agent Parser 长文正文 —— 四语 dispatcher
+ * User Agent Parser 长文正文 —— 三语 dispatcher
  *
- * en 分支等价于原 ToolContent 渲染输出。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支等价于原 ToolContent 渲染输出。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en (与改造前渲染输出一致) ────────────────────────────
@@ -60,36 +60,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具?</h2>
-    <p>
-      你的浏览器发出的每一个 HTTP 请求都带有一个 <strong>User-Agent 头</strong>——一段密密麻麻的字符串,标识了浏览器、渲染引擎、操作系统和设备类型。本解析器把这段字符串解码成易读的字段,并附上结构化的 JSON 结果。加载时会自动检测你自己的浏览器,也接受任意粘贴的字符串用于测试,还能标记已知爬虫——所有运算都在你的浏览器中完成,不向任何地方发送数据。
-    </p>
-
-    <div>
-      <h2>为什么要按特定顺序解析 UA 字符串</h2>
-      <p>
-        UA 解析本质上就是带有优先级陷阱的模式匹配。Microsoft Edge、Opera 和 Samsung Internet 的字符串里都含有 <code>Chrome/…</code>,因此必须在 Chrome <em>之前</em>检测它们——而 Chrome 又要先于 Safari,因为每个 Chromium 浏览器的结尾都是 <code>Safari/537.36</code>。操作系统同理:Android 的 UA 含有 <code>Linux</code> 一词,iOS 的 UA 含有 <code>like Mac OS X</code>,因此移动平台必须优先于桌面平台。本工具正是按这种顺序来处理的。
-      </p>
-    </div>
-
-    <div>
-      <h2>各字段能告诉你什么、不能告诉你什么</h2>
-      <p>
-        对于 CSS 和 JavaScript 兼容性而言,<strong>引擎</strong>字段(Blink、Gecko、WebKit)往往比浏览器品牌更重要。<strong>设备类型</strong>是根据 <code>Mobile</code>、<code>iPad</code> 等标记推断的——不含 <code>Mobile</code> 的 Android UA 会被当作平板,这与浏览器自我报告的方式一致。坦白说,有两个局限:Windows 10 和 11 都报告 <code>Windows NT 10.0</code>,仅凭 UA 无法区分;而 iPadOS 刻意伪装成桌面版 macOS。
-      </p>
-    </div>
-
-    <div>
-      <h2>实际用途——以及为什么不应过度依赖它</h2>
-      <p>
-        粘贴来自服务器日志的 UA,就能识别访客或爬虫的真实身份——爬虫检测器覆盖了 Googlebot、Bingbot、DuckDuckBot、GPTBot 以及另外十多种爬虫。在构造测试夹具或调试「在我机器上能跑」的问题时也很方便。但对于生产环境的功能支持,请优先使用<strong>特性检测</strong>(<code>&apos;clipboard&apos; in navigator</code>)而非 UA 嗅探:字符串极易伪造,浏览器会定期冻结或打乱这些标记,而 Client Hints 正在 Chromium 中逐步取代 UA 头。
-      </p>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -191,7 +161,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function UserAgentParserClientContent(): ReactNode {
   const { locale } = useApp()

@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * Credit Card Minimum Payment Calculator 长文正文 —— 四语 dispatcher
+ * Credit Card Minimum Payment Calculator 长文正文 —— 三语 dispatcher
  *
- * en 分支等价于原 ToolContent 渲染输出。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支等价于原 ToolContent 渲染输出。es/de 仅客户端 hydration 后切换。
  */
 
 const formulaStyle = { fontFamily: 'monospace', background: 'rgb(var(--bg-subtle))', padding: '0.75rem 1rem', borderRadius: '0.5rem', fontSize: '0.95rem' } as const
@@ -164,92 +164,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具?</h2>
-    <p>
-      <strong>最低还款额</strong>是发卡机构每月允许你偿还的最小金额,低于这个数就会产生滞纳金或被记为逾期。它的计算方式通常是余额的一小部分(1%–3%)加上当月产生的利息和费用。这个计算器清楚地展示你的最低还款都花在哪里——多少是利息,多少才真正减少了债务,以及如果你只还最低额要还多久。
-    </p>
-    <p>
-      这笔账很残酷。在一般余额下,最低还款额被刻意设得很低,大部分都用来付利息,只剩一小丁点冲本金。这是有意为之:低最低还款让你尽可能长时间地还下去。理解这个拆分,是摆脱债务的第一步。
-    </p>
-
-    <div>
-      <h2>最低还款额是怎么算的</h2>
-      <p>每家发卡机构的公式略有不同,但通用模式是:</p>
-      <ul>
-        <li><strong>账单余额的 1%–3%</strong>,加上</li>
-        <li><strong>当月的利息费用</strong>,加上</li>
-        <li><strong>上个周期产生的任何滞纳金或超限费</strong>。</li>
-      </ul>
-      <p>
-        通常还有一个下限——一个最低金额(常见 $25–$35),当百分比算出的金额更低时就用它。有些发卡机构改用「利息 + 费用 + 本金的 1%」这样的公式,还款会稍快一些。具体方法以你的持卡人协议为准。
-      </p>
-    </div>
-
-    <div>
-      <h2>公式</h2>
-      <p>本计算器采用最常见的模型——余额的百分比加下限:</p>
-      <p style={formulaStyle}>最低还款额 = max(下限, 余额 × 最低%)</p>
-      <p style={formulaStyle}>月利息 = 余额 × (APR ÷ 12)</p>
-      <p style={formulaStyle}>冲抵本金 = 最低还款额 − 月利息</p>
-      <p>
-        其中<strong>下限</strong>通常为 $25–$35,<strong>最低%</strong>通常为 1%–3%,<strong>APR ÷ 12</strong> 把年利率转换成月利率。这就是上方计算器实时套用到你的数字上的公式。
-      </p>
-    </div>
-
-    <div>
-      <h2>示例:$5,000 余额,19.99% APR</h2>
-      <p>这是最让人意外的部分。以下是用本计算器默认值——<strong>$5,000 余额、19.99% APR、2% 最低还款</strong>——算出的实际例子:</p>
-      <ul>
-        <li><strong>月利息:</strong>$83.29(= $5,000 × 0.1999 ÷ 12)</li>
-        <li><strong>最低还款额(2%,下限 $25):</strong>$100.00(= $5,000 × 2%)</li>
-        <li><strong>冲抵本金:</strong>仅 $16.71(= $100.00 − $83.29)</li>
-      </ul>
-      <p>
-        换句话说,约 <strong>83% 的还款作为利息蒸发了</strong>,只有 17% 真正减少了欠款。按这个速度要还<strong>几十年</strong>——而且前提是你一分钱都不再刷。如果你的还款等于或低于月利息,余额根本不会下降。你可以在计算器里输入 5000 / 19.99 / 2 来验证上面的每个数字。
-      </p>
-    </div>
-
-    <div>
-      <h2>银行为什么把最低还款设得这么低</h2>
-      <p>
-        最低还款曾经大约是余额的 5%。2000 年代监管机构推动发卡机构提高最低还款额,让消费者真能还清债务,很多机构改成了现在约 1%–3% 加利息的模式。这个公式仍然把还款拉长到很多年——但它确保贷款在技术上是可偿还的,从而满足监管。从银行的角度看,还款期越长利息收入越多;从你的角度看,这意味着数千美元本可以避免的利息。这套系统合法,但唯一真正保护你的办法就是多还。
-      </p>
-    </div>
-
-    <div>
-      <h2>如何看懂你的账单</h2>
-      <ul>
-        <li>
-          <strong>最低还款警示框:</strong>自 2010 年起美国账单必须显示。它展示只还最低额要多久 vs. 三年还清的金额。一定要看——这是对你处境最清晰的写照。
-        </li>
-        <li>
-          <strong>逾期还款警示:</strong>错过到期日会产生的费用(最高约 $41)和惩罚性 APR(通常 29.99%)。
-        </li>
-        <li>
-          <strong>利息费用:</strong>本月产生的总利息。把它和最低还款额对比——如果利息占了还款的大头,你就是在原地踏步。
-        </li>
-      </ul>
-    </div>
-
-    <div>
-      <h2>解决办法:多还一点</h2>
-      <p>
-        你付的每一块钱中,超过利息的部分 100% 都冲本金。效果会复利式叠加:本金减少后,下个月的利息也减少,于是你更多的还款又冲本金。这就是小额多还如此强大的机制。
-      </p>
-      <ul>
-        <li><strong>$5,000 @ 19.99%,最低还款(约 $100):</strong>约 44 年,利息约 $20,150</li>
-        <li><strong>同样余额,$200/月:</strong>约 2.8 年,利息约 $1,520</li>
-        <li><strong>同样余额,$500/月:</strong>约 1 年,利息约 $515</li>
-      </ul>
-      <p>
-        关于完整策略(雪崩法、雪球法、余额转移),请看我们的<em>信用卡还清计算器</em>——本页专注于理解最低还款本身。
-      </p>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -492,7 +406,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function CreditCardMinimumPaymentCalculatorContent(): ReactNode {
   const { locale } = useApp()

@@ -6,26 +6,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const speedConverterL10n: ToolL10n = {
-  zh: {
-    ui: {
-      'note': '🏃 支持 m/s、km/h、mph、节和 ft/s。常见用途:在不同国家间换算限速。',
-      'unit.fps': '英尺/秒 (ft/s)',
-      'unit.kmh': '千米/小时 (km/h)',
-      'unit.knot': '节 (kn)',
-      'unit.mph': '英里/小时 (mph)',
-      'unit.ms': '米/秒 (m/s)',
-    },
-    useCases: [
-      '在国外自驾时换算限速(km/h ↔ mph)',
-      '把航空速度从节(knots)换算成 km/h',
-      '在跑步配速单位之间互转(min/km ↔ min/mile)',
-    ],
-    faqs: [
-      { q: '怎样把 mph 换算成 km/h?', a: 'mph 乘以 1.609 即得 km/h。反之,km/h 乘以 0.6214 得 mph。所以 60 mph ≈ 96.6 km/h,100 km/h ≈ 62.1 mph。这是全球最常见的两种限速单位。' },
-      { q: '什么是节?谁在用?', a: '节是 1 海里/小时(1.852 km/h 或 1.151 mph)。它是航空和航海的标准单位,因为海里基于地球周长,使导航计算更简便。' },
-      { q: '1 马赫有多快?', a: '1 马赫是音速,在海平面和 15°C 时约 1225 km/h(761 mph)。它会随海拔和温度变化,因为音速取决于空气密度。「马赫」是局部速度与局部音速之比,不是固定数值。' },
-    ],
-  },
+
   es: {
     ui: {
       'note': '🏃 Admite m/s, km/h, mph, nudos y ft/s. Uso común: convertir límites de velocidad entre países.',

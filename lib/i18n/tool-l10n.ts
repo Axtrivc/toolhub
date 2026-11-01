@@ -2,7 +2,7 @@
  * 工具级本地化数据层
  *
  * 每个"需要本地化"的工具在 lib/i18n/tools-l10n/<slug>.ts 导出一份 ToolL10n,
- * 覆盖 zh/es/de 三语。en 永远不在此注册 → 始终回退英文原值:
+ * 覆盖 es/de 两语。en 永远不在此注册 → 始终回退英文原值:
  *   - lib/tool-faqs.ts            (可见 FAQ)
  *   - lib/tool-formulas.ts        (公式区)
  *   - Client 组件内英文 fallback   (工具交互界面)
@@ -15,7 +15,7 @@
  *  - formula:   FormulaSection 的 { formula, explain? }
  *
  * SEO 安全:en 永不在此注册,SSR/预渲染恒为英文,Google 索引不变。
- * name/shortIntro 不在此,继续用 lib/i18n/tools.{zh,es,de}.ts(已译完)。
+ * name/shortIntro 不在此,继续用 lib/i18n/tools.{es,de}.ts(已译完)。
  *
  * Bundle 安全:本模块聚合全部 239 份词典,仅供 server 侧使用(工具页 RSC、
  * seo/faq 构建器)。client 组件一律按需 import './tools-l10n/<slug>' 数据 +
@@ -755,7 +755,7 @@ export function getToolL10n(slug: string, locale: Locale): ToolL10nEntry | null 
 }
 
 /**
- * 取工具的原始多语种记录(zh/es/de,不做 locale 解析)。
+ * 取工具的原始多语种记录(es/de,不做 locale 解析)。
  * 供 server 组件(工具页 RSC)把单条记录作为 prop 下发给 client 组件 ——
  * client 侧经 tool-l10n-core 的 l10nEntryFor 按运行时 locale 解析,
  * 语义与 getToolL10n 完全一致,而整表注册表不进 client bundle。

@@ -21,22 +21,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具?</h2>
-    <p>本工具可以从任意文本中提取所有网页链接(http 和 https 的 URL),适合用来整理杂乱的文档、建立链接清单或分析内容。</p>
-    <div>
-      <h2>常见用途</h2>
-      <ul>
-        <li>从文章或邮件中提取所有链接</li>
-        <li>基于内容建立链接清单</li>
-        <li>整理复制粘贴得到的杂乱 URL</li>
-        <li>审计文本中的外链</li>
-      </ul>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -72,7 +56,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function URLExtractorContent(): ReactNode {
   const { locale } = useApp()

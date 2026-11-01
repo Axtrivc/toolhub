@@ -5,41 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const OvertimeCalculatorL10n: ToolL10n = {
-  zh: {
-    useCases: ['算本周加班费能拿多少', '核对工资条上的加班项', '比较 1.5 倍与 2 倍的加班方案', '评估接受加班班次是否划算'],
-    faqs: [
-      { q: '加班费什么时候是法定必须的?', a: '美国联邦法律(FLSA)要求非豁免员工每周超过 40 小时的部分按 1.5 倍支付。部分州还规定每日加班(加州每日超 8 小时);节假日双薪通常来自工会合同或雇主政策——按你所在辖区或合同规定的倍数选择即可。' },
-      { q: '工资是怎么算出来的?', a: '正常工资 = 时薪 × 正常工时;加班费 = 时薪 × 倍数 × 加班时数。选一个与你合同或辖区一致的倍率即可——多数美国非豁免员工适用 ×1.5,假日双薪通常由工会合同或雇主政策提供。' },
-      { q: '我是拿月薪的,适用吗?', a: '仅当你属于"非豁免"员工时适用。用周薪 ÷ 40 得出常规时薪,连同加班时数一起填入,倍数即从这里套用。真正豁免的员工无论工作多少小时都没有加班费。' },
-    ],
-    ui: {
-      'chartTitle': '周薪构成',
-      'slice.regularPay': '常规工资',
-      'slice.otPay': '加班费',
-      'chartCenter': '周薪合计',
-      'in.base': '时薪',
-      'in.otHours': '每周加班工时',
-      'in.otMultiplier': '加班倍率',
-      'in.otPay': '加班费',
-      'in.otRate': '实际加班时薪',
-      'in.regularHours': '每周常规工时',
-      'in.regularPay': '常规工资',
-      'in.totalWeekly': '周薪合计',
-      'note': '💼 美国联邦法律(FLSA)要求非豁免员工每周超 40 小时按 ×1.5 计酬;部分州规定按日加班,假日双薪通常来自工会合同或雇主政策。拿薪的非豁免员工:常规时薪 = 周薪 ÷ 40。',
-      'opt.otMultiplier.1.5': '1.5 倍加班费',
-      'opt.otMultiplier.2': '双倍加班费 (×2)',
-      'out.base': '时薪',
-      'out.otHours': '每周加班工时',
-      'out.otMultiplier': '加班倍率',
-      'out.otPay': '加班费',
-      'out.otRate': '实际加班时薪',
-      'out.regularHours': '每周常规工时',
-      'out.regularPay': '常规工资',
-      'out.totalWeekly': '周薪合计',
-          'errInvalidRate': "请输入有效的时薪",
-      'errNonNegative': "工时不能为负",
-},
-  },
+
   es: {
     useCases: ['calcular cuánto pagarán tus horas extra', 'comprobar la partida de horas extra de tu nómina', 'comparar multiplicadores de 1,5× y 2×', 'decidir si merece la pena aceptar un turno extra'],
     faqs: [

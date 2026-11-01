@@ -25,26 +25,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具?</h2>
-    <p><strong>质因数分解</strong>把一个数拆成若干质数的乘积。每个大于 1 的整数的质因数分解都是唯一的——这就是算术基本定理。</p>
-    <div>
-      <h2>工作原理</h2>
-      <p>本工具从 2 开始,逐一除以各个质数。例如:<code>360 = 2 × 2 × 2 × 3 × 3 × 5 = 2³ × 3² × 5</code>。</p>
-    </div>
-    <div>
-      <h2>用途</h2>
-      <ul>
-        <li><strong>化简分数:</strong> 最大公约数来自公共的质因数</li>
-        <li><strong>密码学:</strong> RSA 密钥依赖于分解的困难性</li>
-        <li><strong>数学作业:</strong> 最小公倍数、最大公约数、化简根式</li>
-        <li><strong>乐理:</strong> 纯律使用质数比</li>
-      </ul>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -88,7 +68,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function PrimeFactorizationCalculatorContent(): ReactNode {
   const { locale } = useApp()

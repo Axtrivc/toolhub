@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * SSH Key Generator 长文正文 —— 四语 dispatcher
+ * SSH Key Generator 长文正文 —— 三语 dispatcher
  *
- * en 分支等价于原渲染输出。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支等价于原渲染输出。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en (与改造前渲染输出一致) ────────────────────────────
@@ -65,36 +65,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这个工具是什么?</h2>
-    <p>
-      本工具生成一对完整的 <strong>SSH 密钥</strong>——一把可粘贴到服务器上的 <code>authorized_keys</code> 格式公钥,以及匹配的 PKCS#8 PEM 私钥——全部仅使用浏览器内置的 <strong>Web Crypto API</strong> 完成。当你手边没有终端,又需要为新服务器、CI 任务或 Git 托管账号快速生成密钥时,它非常实用。所有操作 100% 在本地运行:密钥在你的浏览器标签页内创建,绝不会发送到任何地方。
-    </p>
-
-    <div>
-      <h2>OpenSSH 公钥格式是如何工作的</h2>
-      <p>
-        一行 OpenSSH 公钥本质上就是<strong>一小段二进制数据的 base64 编码</strong>,外加可选的注释。这段数据由若干带长度前缀的字段组成:对于 Ed25519,它是字符串 <code>ssh-ed25519</code> 加上原始的 32 字节公钥;对于 RSA,它是 <code>ssh-rsa</code> 后跟指数 <code>e</code> 和模数 <code>n</code>,每个都以 <em>mpint</em> 格式编码(一种大端整数,当其最高位会被误判为负时补一个 <code>0x00</code> 字节)。生成后显示的 <strong>SHA256 指纹</strong>与 <code>ssh-keygen -l</code> 打印的结果一致,方便你之后在服务器上核对密钥。
-      </p>
-    </div>
-
-    <div>
-      <h2>选 Ed25519 还是 RSA?</h2>
-      <p>
-        <strong>除非有特殊原因,否则请选 Ed25519。</strong>它生成的密钥很短(公钥行约 68 个字符),生成和验证速度都快,被视为现代默认选择——GitHub、GitLab 以及当前所有 OpenSSH 版本都支持它。<strong>RSA</strong> 仍被普遍支持,对于非常老旧的服务器、设备或早于 Ed25519 的工具链是更稳妥的选择;在这些场景下使用 <code>4096</code> 位以获得充足的安全余量,若目标系统拒绝大密钥则用 <code>2048</code>。需要注意:Web Crypto API 中的 Ed25519 需要较新的浏览器——本工具会自动检测,并在你的浏览器过旧时提示你。
-      </p>
-    </div>
-
-    <div>
-      <h2>保护好私钥</h2>
-      <p>
-        私钥是<em>唯一</em>必须保密的一半,本页面也绝不传输它——但你接下来的操作同样重要。请将它保存为 <code>~/.ssh/id_ed25519</code>(或 <code>id_rsa</code>),并立即用 <code>chmod 600</code> 锁定,否则 ssh 会拒绝使用。导出格式为 <strong>PKCS#8 PEM</strong>,现代 OpenSSH 可直接读取;若要转换为 OpenSSH 原生私钥格式(<code>BEGIN OPENSSH PRIVATE KEY</code>),请运行 <code>ssh-keygen -p -f id_ed25519</code>(提示输入口令时按回车跳过,或设置一个口令)。最后,请把在浏览器标签页中生成的密钥当作普通凭据对待:存入 SSH agent 或密码管理器,并为高价值的生产系统<strong>在你自己的机器上重新生成一对全新密钥</strong>。
-      </p>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -158,7 +128,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function SshKeyGeneratorContent(): ReactNode {
   const { locale } = useApp()

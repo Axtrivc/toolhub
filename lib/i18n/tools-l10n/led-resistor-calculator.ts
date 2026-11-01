@@ -5,42 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const LedResistorCalculatorL10n: ToolL10n = {
-  zh: {
-    useCases: ['算出点亮一颗 LED 所需的限流电阻', '把阻值对齐到买得到的 E12 标准值', '确认电阻功耗该选 1/8W 还是 1/4W', '电池供电指示灯/面板灯的阻值快速估算'],
-    faqs: [
-      { q: '为什么 E12 要向上取整?', a: '阻值更大意味着电流更小,而电流小对 LED 永远安全。向上取整通常只损失百分之几的亮度;向下取整却可能让电流超过 LED 的额定值。' },
-      { q: '3V 纽扣电池可以不用电阻吗?', a: '经常可以——纽扣电池几十欧的内阻天然限流,所以 3V 锂电池能直接点亮 LED。但任何更"硬"的电源(USB、稳压器)都必须加电阻。' },
-      { q: '电阻功率该选多大?', a: '至少是所示功耗的 2 倍,密闭或高温环境取 4 倍。1/4W 电阻跑 200mW 在台面上没问题,塞进密封外壳里就会发烫。' },
-      { q: '多颗 LED 该串联还是并联?', a: '电源电压允许就串联:一颗电阻服务整串,电流天然一致。并联时各颗 LED 正向压降有离散,分流不均——每条支路都要配自己的电阻。' },
-    ],
-    formula: {
-      formula: 'R = (V电源 − V正向) ÷ I(LED)\nR_E12 = 不小于 R 的最小 E12 值\nI实际 = (V电源 − V正向) ÷ R_E12\nP_R = I实际² × R_E12',
-      variables: 'V电源 = 电源/电池电压 (V)\nV正向 = LED 在目标电流下的正向压降 (V)\nI(LED) = 目标 LED 电流 (A;20 mA = 0.02)\nR_E12 = 就近的标准值,来自 10/12/15/18/22/27/33/39/47/56/68/82 系列 (Ω)\nP_R = 电阻上的耗散功率 (W)',
-      explain: '电阻吃掉 LED 承担之外的电压,并把电流钉在你选定的值上。向上取整到下一个 E12 值,保证 LED 永远不会超过目标电流。',
-      example: '第 1 步:12V 电源、白光 LED Vf 3.2V、目标 20 mA → R = (12 − 3.2) ÷ 0.02 = 8.8 ÷ 0.02 = 440 Ω。\n第 2 步:440 不是 E12 值 → 向上取 470 Ω。\n第 3 步:I实际 = 8.8 ÷ 470 = 0.018723 A ≈ 18.72 mA。\n第 4 步:P_R = 0.018723² × 470 = 0.1648 W ≈ 165 mW → 用 1/2W 电阻(约 3 倍余量)。\n结果:470 Ω 下电流 18.72 mA——亮度约 94%,电流安全。',
-    },
-    ui: {
-      'in.supply': '电源电压',
-      'in.vf': 'LED 正向压降',
-      'in.current': 'LED 电流',
-      'out.resistor': '理想电阻值',
-      'out.e12': '最近的 E12 值',
-      'out.actualCurrent': '实际 LED 电流',
-      'out.resistorPower': '电阻功耗',
-      'out.ledPower': 'LED 功耗',
-      'errSupply': '电源电压必须大于 LED 正向压降',
-      'errPositive': '三个输入都必须为正数',
-      'chartTitle': '功率都去哪了',
-      'chartCenter': '合计',
-      'slice.resistorPower': '电阻',
-      'slice.ledPower': 'LED',
-      'preset.0': '红色 LED @ 5V',
-      'preset.1': '白色 LED @ 5V',
-      'preset.2': '蓝色 LED @ 3.3V',
-      'preset.3': '12V 指示灯',
-      'note': '💡 常见正向压降:红/黄 1.8-2.2V、绿 2.0-2.4V、蓝/白 3.0-3.4V;20 mA 是传统指示灯电流,现代高效 LED 用 2-5 mA 就够亮。多颗 LED 串联时把各 Vf 相加,但必须低于电源电压。',
-    },
-  },
+
   es: {
     useCases: ['calcular la resistencia limitadora para encender un LED', 'ajustar el valor al E12 que realmente se vende', 'elegir entre resistencia de 1/8 W o 1/4 W según disipación', 'dimensionar LEDs indicadores a batería'],
     faqs: [

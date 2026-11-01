@@ -5,43 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const colorContrastCheckerL10n: ToolL10n = {
-  zh: {
-    ui: {
-      'aaLarge': 'AA(大号)',
-      'aaNormal': 'AA(正常)',
-      'aaaLarge': 'AAA(大号)',
-      'aaaNormal': 'AAA(正常)',
-      'applySuggested': '应用为前景色',
-      'background': '背景',
-      'bgPickerAria': '背景色选择器',
-      'contrastRatio': '对比度',
-      'errorInvalidHex': '请输入有效的十六进制颜色(如 #ffffff)。',
-      'fgPickerAria': '前景色选择器',
-      'foregroundText': '前景(文字)',
-      'note': '🔒 100% 在客户端——使用 WCAG 2.1 相对亮度公式。大号文字 = ≥18pt 或 ≥14pt 加粗。',
-      'sampleText': '敏捷的棕色狐狸跳过那只懒狗。1234567890',
-      'suggestBtn': '建议无障碍配色',
-      'suggestedLabel': '最接近的达标前景色:',
-      'suggestNone': '调整亮度找不到达标的变体——请尝试更换背景色。',
-    },
-    formula: {
-      formula: 'CR = ( L_lighter + 0.05 ) / ( L_darker + 0.05 )',
-      variables: 'L_lighter: 较亮颜色的相对亮度(0-1)\nL_darker: 较暗颜色的相对亮度(0-1)\nCR: 对比度(取值范围 1 到 21)\n0.05: 用于补偿环境光眩光的常数',
-      explain: '两种颜色由相对亮度 L 算出的 WCAG 对比度。比值 ≥ 4.5 时普通文本达 AA;≥ 7 时达 AAA。0.05 用于补偿环境光眩光。',
-      example: '第 1 步:白字(亮度 L = 1.0)置于黑底(亮度 L = 0.0)之上。\n第 2 步:CR = (1.0 + 0.05) / (0.0 + 0.05) = 1.05 / 0.05 = 21。\n结果:21:1,即最大可能对比度;达到 AAA(≥ 7)。',
-    },
-    useCases: [
-      '检测配色是否达到 WCAG 标准',
-      '审计网页的可访问性合规情况',
-      '排查对比度过低导致阅读困难的问题',
-      '为正文文字挑选合格的背景色',
-    ],
-    faqs: [
-      { q: '对比度要达到多少才能通过 WCAG？', a: 'AA 级要求:正文至少 4.5:1,大号文字(18pt 或 14pt 加粗)至少 3:1。AAA 级门槛更高:正文 7:1,大号文字 4.5:1。非文本 UI 组件(图标、边框)在 AA 下需要 3:1。' },
-      { q: '对比度是怎么算出来的？', a: '使用每种颜色的相对亮度。公式为 (L1 + 0.05) ÷ (L2 + 0.05),其中 L1 是较亮的亮度、L2 是较暗的亮度。纯白配纯黑为 21:1,即最大值。无论文字在背景之上还是背景在文字之上,比值相同。' },
-      { q: '这个检测器支持半透明颜色吗？', a: '不支持——它按 WCAG 规定为不透明的前景和背景颜色计算比值。如果你的文字有透明度,先把它与实际背景混合得到等效的实色,再进行测试。Alpha 合成会改变感知到的对比度。' },
-    ],
-  },
+
   es: {
     ui: {
       'aaLarge': 'AA (grande)',

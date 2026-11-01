@@ -2,7 +2,6 @@ import type { Metadata } from 'next'
 import { SITE_URL, SITE_NAME } from './constants'
 import { tools, getPublishedTools } from './tools'
 import type { Locale } from './i18n'
-import { zhTools } from './i18n/tools.zh'
 import { esTools } from './i18n/tools.es'
 import { deTools } from './i18n/tools.de'
 
@@ -175,7 +174,7 @@ export function buildToolMetadata(slug: string): Metadata {
   const title = finalizeSeoTitle(tool.titleLongTail ?? tool.title)
   const description = `${DESCRIPTION_HOOK} ${tool.descriptionLongTail ?? tool.description}`
   // 合并长尾关键词与已翻译工具名,让多语搜索查询也能匹配规范工具页。
-  const localizedTitles = [zhTools[tool.slug]?.name, esTools[tool.slug]?.name, deTools[tool.slug]?.name]
+  const localizedTitles = [esTools[tool.slug]?.name, deTools[tool.slug]?.name]
     .filter((name): name is string => Boolean(name))
   const keywords = Array.from(new Set([
     ...tool.keywords,
@@ -191,7 +190,7 @@ export function buildToolMetadata(slug: string): Metadata {
       canonical: `/tools/${tool.slug}/`,
       languages: {
         en: url,
-        zh: `${url}?lang=zh`,
+
         es: `${url}?lang=es`,
         de: `${url}?lang=de`,
         'x-default': url,

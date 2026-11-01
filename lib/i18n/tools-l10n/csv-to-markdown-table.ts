@@ -5,59 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const csvToMarkdownTableL10n: ToolL10n = {
-  zh: {
-    ui: {
-      'alignCenter': '居中 (:---:)',
-      'alignDefault': '默认 (---)',
-      'alignLeft': '左 (:---)',
-      'alignRight': '右 (---:)',
-      'alignment': '列对齐',
-      'clear': '清空',
-      'columnPlural': '列',
-      'columnSingular': '列',
-      'copy': '复制',
-      'copyMarkdown': '复制 Markdown',
-      'delimiter': '分隔符',
-      'delimiterAuto': '自动检测',
-      'delimiterComma': '逗号 (,)',
-      'delimiterSemicolon': '分号 (;)',
-      'delimiterTab': '制表符 (\\t)',
-      'delimiterWord': '分隔符',
-      'firstRowHeader': '首行为表头',
-      'inputLabel': '粘贴你的 CSV / TSV',
-      'prettyPad': '整齐填充列',
-      'privacyNote': '🔒 100% 本地运行——你的数据绝不会离开浏览器。',
-      'raggedCellsAnd': '个单元格,',
-      'raggedHadFewerThan': '少于',
-      'raggedPaddedWithEmptyCells': '用空单元格填充。',
-      'raggedWas': '已',
-      'raggedWere': '已',
-      'resultTitle': 'Markdown 表格',
-      'rowPlural': '行',
-      'rowSingular': '行',
-      'tooLong': '⚠️ 输入超过支持的大小(100,000 字符)。请缩减输入后再转换。',
-    },
-    useCases: [
-      '在线 CSV 转 Markdown 表格',
-      '把 Excel 粘贴内容转为 Markdown 表格',
-      '从 CSV 生成 Markdown 表格',
-      'GitHub README 表格生成器',
-    ],
-    faqs: [
-      {
-        q: '带引号字段里的逗号怎么处理?',
-        a: '它会正确解析 CSV,所以双引号里的逗号会被当作普通文本而非分隔符。含换行和转义引号的带引号字段同样能处理,因此从电子表格导出的真实数据都能干净转换。',
-      },
-      {
-        q: '可以控制列的对齐方式吗?',
-        a: '可以。你可以为整张表统一设置左对齐、居中或右对齐,所选对齐会写进 Markdown 的对齐行(:---、:---:、---:)。默认(---)在大多数渲染器中呈现为左对齐,符合大多数 README 的预期。',
-      },
-      {
-        q: '支持 TSV(制表符分隔)输入吗?',
-        a: '支持。制表符分隔的数据会和逗号分隔的数据一样被检测和切分,因此你可以直接粘贴电子表格或数据库的输出,无需先转换分隔符。',
-      },
-    ],
-  },
+
   es: {
     ui: {
       'alignCenter': 'Centrado (:---:)',

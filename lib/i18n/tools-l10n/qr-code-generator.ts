@@ -9,71 +9,7 @@ const FORMULA =
   'modules per side = 21 + 4 × (version − 1)\nerror correction: L 7%, M 15%, Q 25%, H 30% of codewords recoverable\nquiet zone = 4 modules on each side'
 
 export const qrCodeGeneratorL10n: ToolL10n = {
-  zh: {
-    ui: {
-      'anyTextPlaceholder': '任意文本…',
-      'background': '背景色',
-      'contrastWarn': '扫描器普遍依赖深码浅底,当前配色可能难以可靠识别。',
-      'downloadPng': '下载 PNG',
-      'downloadSvg': '下载 SVG',
-      'eclH': 'H—高 (~30%)',
-      'eclL': 'L—低 (~7%)',
-      'eclM': 'M—中 (~15%)',
-      'eclQ': 'Q—四分位 (~25%)',
-      'emptyContent': '输入内容以生成二维码',
-      'emptyWifi': '输入网络名以生成二维码',
-      'encNoPass': '无密码',
-      'encWep': 'WEP',
-      'encWpa': 'WPA / WPA2',
-      'encryption': '加密方式',
-      'errorCorrection': '容错等级',
-      'errorTooLong': '当前容错等级下内容对二维码来说太长(按 UTF-8 字节数计)。请缩短输入或降低容错等级。',
-      'errGenerate': '二维码生成失败。请检查输入内容后重试。',
-      'errSameColor': '前景色与背景色不能相同。',
-      'foreground': '前景色',
-      'generatedQrAlt': '生成的二维码',
-      'hiddenNetwork': '隐藏网络',
-      'invertColors': '反转颜色',
-      'modeText': '文本',
-      'modeUrl': 'URL / 链接',
-      'modeWifi': 'WiFi',
-      'networkName': '网络名 (SSID)',
-      'password': '密码',
-      'previewSize': '预览尺寸',
-      'presetSwatches': '快速配色',
-      'privacyNote': '🔒 二维码在你的浏览器中本地生成。你的数据绝不上传到任何服务器。',
-      'quick': '快速:',
-      'sizeHint': '下载始终以高分辨率(至少 512px)渲染;此选项仅调整页面预览大小。',
-      'sizeLarge': '大 (384px)',
-      'sizeMedium': '中 (256px)',
-      'sizeSmall': '小 (192px)',
-      'textToEncode': '要编码的文本',
-      'websiteUrl': '网站 URL',
-      'wifiBadFormat': '这看起来像 WiFi 配置串,但解析失败。请检查其格式。',
-      'wifiParsed': '已识别 WiFi 配置并填充',
-    },
-    useCases: [
-      '网址转二维码生成器',
-      '免费在线二维码制作',
-      '生成 WiFi 二维码',
-      '下载 PNG/SVG 格式二维码',
-    ],
-    faqs: [
-      { q: '这些二维码会过期吗?', a: '不会。因为数据直接编码在图案里,静态二维码永远不会过期、也永远能正常扫描。只要内容本身(比如一个网址)仍然有效,这个二维码就能一直用下去。' },
-      { q: '能编码的数据量有限制吗?', a: '有。单个二维码最多大约能存 4,000 个字母数字字符或 2,900 字节的二进制数据。对网址和 WiFi 凭据来说绰绰有余。如果尝试编码很长的文本,图案会变得更密、更难扫描。' },
-      { q: '二维码安全吗?', a: '二维码本身只是传递文本的一种方式——它本身既不安全也不危险。风险在于恶意二维码可能链接到钓鱼网站。作为用户,要把扫描到的链接当作普通链接一样谨慎对待;作为创建者,只链接到你拥有并信任的目标。' },
-      { q: '容错等级该怎么选?', a: 'H 级能容忍约 30% 的图案污损或遮挡,适合印在包装、海报上;屏幕显示用 M 级(~15%)就够了。等级越高图案越密,内容较长时反而更难扫描。' },
-    ],
-    formula: {
-      formula: FORMULA,
-      variables:
-        'version: 二维码规格等级,1(最小)到 40(最大)\nmodules: 符号每边的黑白格子数\nL、M、Q、H: 容错等级,分别可恢复 7%、15%、25% 和 30% 的码字\nquiet zone: 码周围的空白边距,宽 4 个模块',
-      explain:
-        '二维码共有 40 个规格,方形网格从规格 1 的每边 21 个模块起,每升一级每边增加 4 个模块。容错等级越高,用于冗余的码字越多,因此抗污损能力上升的同时容量下降。4 模块宽的静区能帮助扫描器找到符号的边缘。',
-      example:
-        '第 1 步:取一个规格 5 的二维码。\n第 2 步:每边模块数 = 21 + 4 × (5 − 1) = 21 + 16 = 37。\n第 3 步:在 M 级容错下最多可承受 15% 的污损,且四周需要 4 模块宽的静区。\n结果:一个 37 × 37 模块的码,外加边距。',
-    },
-  },
+
   es: {
     ui: {
       'anyTextPlaceholder': 'Cualquier texto…',

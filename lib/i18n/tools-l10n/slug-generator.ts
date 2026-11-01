@@ -5,37 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const slugGeneratorL10n: ToolL10n = {
-  zh: {
-    ui: {
-      'asciiOnly': '仅 ASCII',
-      'clear': '清空',
-      'copy': '复制',
-      'enterTitle': '输入你的标题或文本',
-      'inputPlaceholder': '如:提升网站流量的 10 种经过验证的方法',
-      'lowercase': '小写',
-      'recent': '最近',
-      'result': '结果',
-      'save': '保存',
-      'sepHyphen': '连字符 ( - )',
-      'sepUnderscore': '下划线 ( _ )',
-      'separator': '分隔符',
-      'slugPlaceholder': '你的 slug 会显示在这里',
-      'stripSymbols': '移除特殊字符',
-      'try': '试试:',
-    },
-    useCases: [
-      '生成对 SEO 友好的 URL slug',
-      '为博客文章创建简洁的网址路径',
-      '把标题规范化用于前端路由',
-      '为 CMS 或静态站点生成器准备 URL',
-    ],
-    faqs: [
-      { q: '发布后还能改 slug 吗?', a: '一般不建议。修改 slug 会让原 URL 失效,所有指向它的外链也会断掉。如果必须改,请设置一条从旧 URL 到新 URL 的 301 重定向,这样访客和搜索引擎都能正确跳转,排名权重也不会丢失。' },
-      { q: 'URL 里用连字符还是下划线?', a: '用连字符。Google 明确表示它把连字符当作词分隔符,而把下划线视为词的一部分。所以 `seo-friendly-slugs` 会被读成三个词,而 `seo_friendly_slugs` 会被读成一个整体。连字符是公认的最佳实践。' },
-      { q: 'URL slug 多长合适?', a: '3 到 5 个词最理想——大约 30–50 个字符。越短的 slug 越易读、易分享,每个关键词的权重也越高。如果标题很长,把 slug 精简到核心,而不是把整条标题粘进去。' },
-      { q: '这个工具免费吗?', a: '完全免费。无需注册,没有使用次数限制,也没有付费版。文本全部在你的浏览器本地处理,从不上传到任何服务器。' },
-    ],
-  },
+
   es: {
     ui: {
       'asciiOnly': 'Solo ASCII',

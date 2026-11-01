@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * CSV to Markdown Table 长文正文 —— 四语 dispatcher
+ * CSV to Markdown Table 长文正文 —— 三语 dispatcher
  *
- * en 分支等价于原 ToolContent 渲染输出。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支等价于原 ToolContent 渲染输出。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en (与改造前渲染输出一致) ────────────────────────────
@@ -57,36 +57,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具？</h2>
-    <p>
-      一个 <strong>CSV 转 Markdown 表格</strong>转换器，把逗号或制表符分隔的数据，转换成 GitHub 风格的 Markdown 表格，可直接粘贴进 README、Pull Request、Wiki 或 Issue。它面向在 Markdown 中维护笔记、文档或静态站点内容的开发者和写作者。所有处理 100% 在你的浏览器中完成——不会上传任何东西。
-    </p>
-
-    <div>
-      <h2>真正的 CSV 解析器，而非简单的逗号切分</h2>
-      <p>
-        只要某个字段本身包含逗号，按逗号切分就会出错。本工具使用真正的状态机解析器，遵循 CSV 标准：用 <code>&quot;double quotes&quot;</code> 包裹的字段可以包含逗号、制表符，甚至换行；字面引号写作两个引号（<code>&quot;&quot;</code>）。Windows 的 <code>CRLF</code> 行尾也能被正常处理。带引号字段中的内嵌换行在输出单元格中变成 <code>&lt;br&gt;</code>，管道符被转义为 <code>\|</code>，从而保证表格结构完整。
-      </p>
-    </div>
-
-    <div>
-      <h2>分隔符检测与参差不齐的行</h2>
-      <p>
-        把分隔符保持为<strong>自动检测</strong>，工具会扫描第一行中的制表符、逗号和分号——出现次数最多的胜出。你也可以随时手动覆盖。单元格数少于最宽行的行会被<em>用空单元格补齐</em>（工具会告诉你补了多少个），这样缺失的末尾值就不会破坏表格。如果你的数据没有表头行，取消勾选<strong>首行为表头</strong>，即可生成通用的 <code>Column 1…N</code> 列名。
-      </p>
-    </div>
-
-    <div>
-      <h2>对齐与美化填充</h2>
-      <p>
-        Markdown 表格通过分隔行支持按列对齐：<code>:---</code> 左对齐，<code>:---:</code> 居中，<code>---:</code> 右对齐。你选定的对齐方式会应用到每一列。开启<strong>整齐填充列</strong>，每个单元格会用空格填充，使原始 Markdown 源码在纯文本编辑器中整齐对齐——这纯粹是视觉上的，但能让 diff 和手工编辑轻松得多。两种方式的渲染结果完全相同。
-      </p>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -150,7 +120,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function CsvToMarkdownTableContent(): ReactNode {
   const { locale } = useApp()

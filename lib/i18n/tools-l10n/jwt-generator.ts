@@ -5,25 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const JwtGeneratorL10n: ToolL10n = {
-  zh: {
-    useCases: ['本地生成 HS256 测试令牌', '调试 JWT 的 header/payload 结构', '给后端联调快速产 token', '验证签名算法是否与密钥匹配'],
-    faqs: [
-      { q: '支持哪些算法?', a: 'HS256、HS384、HS512——HMAC 家族,在浏览器里用 WebCrypto 签名。RS256/ES256 需要私钥,而私钥绝不能出现在前端代码里,所以非对称签名应在服务器或命令行完成。' },
-      { q: '不填密钥能生成吗?', a: '能——密钥留空会得到未签名预览:base64url(header).base64url(payload) 加末尾一个点。用它看清校验方实际收到的内容很方便,但任何认证系统都不会接受它。' },
-      { q: '在浏览器里签名安全吗?', a: '仅限测试与学习。浏览器页面里的密钥对任何打开开发者工具的人都可见,还会被打进生产包。在这里做 payload 原型和验证调试;生产签名请留在服务端。' },
-      { q: '会往我的 header 里加东西吗?', a: '不会——header 就是你提供的 JSON;默认值含 typ 和 alg,但不会注入任何内容。部分校验方对 alg 与密钥的匹配很严格,请保持一致。' },
-    ],
-    ui: {
-      'algErr': '此处仅支持 HS256/384/512',
-      'copyToken': '复制令牌',
-      'headerLabel': 'Header (JSON)',
-      'insecure': 'WebCrypto 需要 HTTPS 或 localhost',
-      'note': '🔑 仅用于测试:HS* 密钥在此完全在客户端,绝不要把密钥放进前端代码。RS256/ES256 请用服务端库——非对称签名必须保住私钥。',
-      'payloadLabel': 'Payload (JSON)',
-      'secretLabel': '签名密钥(留空则生成未签名预览)',
-      'tokenLabel': '已签名令牌',
-    },
-  },
+
   es: {
     useCases: ['generar tokens HS256 de prueba en local', 'depurar la estructura header/payload de un JWT', 'producir tokens rápidos para integrar con el backend', 'comprobar que el algoritmo coincide con la clave'],
     faqs: [

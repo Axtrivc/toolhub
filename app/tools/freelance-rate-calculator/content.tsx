@@ -5,8 +5,8 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * Freelance Rate Calculator 长文正文 —— 四语 dispatcher
- * en 分支与改造前渲染输出一致;zh/es/de 仅客户端 hydration 后切换。
+ * Freelance Rate Calculator 长文正文 —— 三语 dispatcher
+ * en 分支与改造前渲染输出一致;es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -48,42 +48,7 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>自由职业定价最常见的误区</h2>
-    <p>
-      新手自由职业者、顾问和外包承包商最常犯的错误,就是把上班族年薪直接除以 2,080 小时(40 小时 × 52 周)。
-      年薪 $100,000 的上班族会觉得自己接外包时收 $48/小时就够了。实际上,算上自雇税、无薪假期、设备投入、
-      医疗保险以及根本无法计费的获客时间,最后到手往往连一半都不到。
-    </p>
 
-    <h2>可计费工时的真实面貌</h2>
-    <p>
-      全职员工坐在工位上的每一个小时都有工资——内部会议、摸鱼发呆、带薪病假统统照付。而自由职业者只有做
-      客户付费工作的时间才有收入。营销获客、写方案、开发票、记账、客户沟通会吃掉你每周 30% 到 50% 的工作时间。
-      大多数运转良好的独立从业者每周实际计费 <strong>20 到 25 小时</strong>,一年工作 44 到 48 周
-      (全年大约 1,000 到 1,200 计费小时)。
-    </p>
-
-    <h2>倒推定价公式</h2>
-    <p>
-      想定出可持续的价格,应从期望的年度税后到手收入往回倒推:
-    </p>
-    <ol>
-      <li><strong>税前目标:</strong> 用期望到手收入除以 <code>(1 − 税率)</code>,覆盖个人所得税与自雇税。</li>
-      <li><strong>叠加经营成本:</strong> 加上全年软件订阅、硬件折旧、商业保险与代理记账费用。</li>
-      <li><strong>加利润缓冲:</strong> 再加 10%–20% 的利润率,抵御淡季与客户拖款。</li>
-      <li><strong>除以计费工时:</strong> 用年度总开票目标除以全年真实可计费工时,才是你该报的时薪。</li>
-    </ol>
-
-    <h2>时薪、日薪还是价值定价?</h2>
-    <p>
-      15–20 小时以内的小活适合按时报时薪;跨越数周的项目或顾问咨询,建议直接报日薪(按 8 倍时薪核算)。
-      日薪能避免客户对着每 15 分钟的细节锱铢必较,把注意力拉回到真正的交付成果上。
-    </p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -168,7 +133,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function FreelanceRateCalculatorContent(): ReactNode {
   const { locale } = useApp()

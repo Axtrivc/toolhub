@@ -25,26 +25,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具?</h2>
-    <p>一个<strong>梯形</strong>有两条平行的边(底边)。本计算器根据这两条边的长度和垂直高度求出面积。</p>
-    <div>
-      <h2>公式</h2>
-      <p>面积 = ((a + b) / 2) × h,其中 a 和 b 是两条平行边,h 是它们之间的垂直距离。</p>
-    </div>
-    <div>
-      <h2>实际用途</h2>
-      <ul>
-        <li>房地产中的不规则地块</li>
-        <li>梯形窗户和建筑构件</li>
-        <li>计算沟渠和堤坝的体积</li>
-        <li>图形与设计工作</li>
-      </ul>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -88,7 +68,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function TrapezoidCalculatorContent(): ReactNode {
   const { locale } = useApp()

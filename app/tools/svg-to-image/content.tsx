@@ -43,36 +43,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具?</h2>
-    <p>
-      <strong>SVG</strong>(可缩放矢量图形)用数学方式描述图形,因此无论放大到多大都保持清晰,非常适合 Logo 和图标。<strong>PNG</strong> 和 <strong>WebP</strong> 是由像素构成的位图格式,任何浏览器、图片查看器和社交平台都无需 SVG 渲染器即可显示。本转换器借助 HTML5 canvas,完全在你的浏览器内将 SVG 光栅化为 PNG 或 WebP。
-    </p>
-    <div>
-      <h2>何时把 SVG 转换为 PNG/WebP</h2>
-      <ul>
-        <li>你需要一张缩略图、favicon 或 Open Graph 图片,且所用格式需得到普遍支持。</li>
-        <li>某些平台(部分邮件客户端、老旧 CMS)无法渲染内联 SVG。</li>
-        <li>你想要固定尺寸的位图导出,用于打印或 2x/3x 倍率的设计稿。</li>
-      </ul>
-    </div>
-    <div>
-      <h2>获得清晰的结果</h2>
-      <p>
-        由于位图存储固定数量的像素,在高 DPI 屏幕上应以更高倍率进行转换。2x 选项会把宽和高都翻倍;3x 则变为三倍。你的 SVG 应声明 <code>width</code>/{' '}
-        <code>height</code> 或 <code>viewBox</code>,以便转换器获知目标尺寸 —— 没有尺寸信息的 SVG 会回退到默认大小。
-      </p>
-    </div>
-    <div>
-      <h2>自包含的 SVG 转换效果最好</h2>
-      <p>
-        如果你的 SVG 引用了外部图片(<code>&lt;image href=&quot;https://...&quot;&gt;</code>)或网络字体,浏览器的安全策略可能会阻止 canvas 导出(即「受污染的 canvas」)。把图片内联为 data URI,并把文字转换为路径,转换效果最可靠。你粘贴或上传的所有内容都只保留在你的设备上。
-      </p>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -136,7 +106,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function SvgToImageContent(): ReactNode {
   const { locale } = useApp()

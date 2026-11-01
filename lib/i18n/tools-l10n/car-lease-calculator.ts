@@ -5,42 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const CarLeaseCalculatorL10n: ToolL10n = {
-  zh: {
-    useCases: ['签字前验证经销商报的月供是否合理', '把 money factor 换算成等价 APR 看真实利率', '算出整个租期的总成本与期末买断价', '对比不同残值率/租期对月供的影响'],
-    faqs: [
-      { q: 'money factor 和 APR 怎么换算?', a: 'money factor × 2400 ≈ 等价年利率。0.00225 对应约 5.4%。这是行业惯例而非严格数学,但足以识破伪装:销售说"利率很低"时,让他直接给 money factor,乘 2400 见真章。' },
-      { q: '月供由哪几块组成?', a: '两块:折旧部分 =(调整后资本成本 − 残值)÷ 租期月数;租金部分 =(调整后资本成本 + 残值)× money factor。注意租金用的是两者之和——你为一辆"整辆车"的使用权付息,而不只为你消耗掉的部分。' },
-      { q: '调整后资本成本是什么?', a: '成交价 + 费用(如收购费) − 首付/置换抵扣。经销商常把收购费悄悄资本化进去;把每一项都问清楚再签字,这是月供虚高的常见来源。' },
-      { q: '租完买断划算吗?', a: '通常不划算:总租赁支出 + 按残值买断,几乎总是高于一开始直接买下(本工具两个输出并排显示)。买断的合理性来自残值被低估、车况好、或避免再交易成本,而不是算术。' },
-    ],
-    ui: {
-      'chartTitle': '月供构成',
-      'chartCenter': '月供',
-      'preset.0': '36 个月主流车型',
-      'preset.1': '24 个月豪华车型',
-      'preset.2': '48 个月经济车型',
-      'slice.depPart': '折旧部分',
-      'slice.rentPart': '租金(利息)部分',
-      'in.msrp': 'MSRP 厂商指导价',
-      'in.price': '成交价',
-      'in.residualPct': '残值率',
-      'in.moneyFactor': 'Money factor',
-      'in.months': '租期',
-      'in.down': '首付/置换抵扣',
-      'in.fees': '资本化的费用',
-      'out.monthlyPayment': '税前月供',
-      'out.depPart': '折旧部分',
-      'out.rentPart': '租金部分',
-      'out.aprEquivalent': '等价 APR',
-      'out.totalLeaseCost': '租期总支出',
-      'out.endBuyout': '期末买断价',
-      'outSub.aprEquivalent': 'money factor × 2400',
-      'outSub.totalLeaseCost': '首付 + 全部月供',
-      'note': '🚗 money factor × 2400 ≈ APR:0.00225 ≈ 5.4%。租约里唯一真正可谈的是成交价(cap cost)——残值与 money factor 通常由租赁公司定死。9 成"月供刺客"都藏在资本化的费用里,逐项核对再签。',
-      'errInvalid': '请输入正的价格、0-100 的残值率、非负 money factor 与 12-60 的租期',
-      'errDownTooBig': '首付不能超过成交价 + 费用(否则调整后资本成本为负)',
-    },
-  },
+
   es: {
     useCases: ['verificar si la cuota del concesionario es razonable antes de firmar', 'convertir el money factor a APR equivalente', 'calcular el coste total del arrendamiento y la opción de compra final', 'comparar cómo residual y plazo mueven la cuota'],
     faqs: [

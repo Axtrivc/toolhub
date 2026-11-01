@@ -34,35 +34,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具?</h2>
-    <p>本工具用于在能量单位之间换算:<strong>焦耳</strong>、<strong>卡路里</strong>、<strong>千瓦时</strong>、<strong>BTU</strong> 和电子伏特。能量出现在营养学、电力、物理和供暖中。</p>
-    <div>
-      <h2>卡路里的混淆</h2>
-      <p>食品标签使用大写 C 的 <strong>Calories</strong>,实际上指的是<strong>千卡</strong>(kcal)。1 食品卡 = 1,000 小卡 = 4,184 焦耳。所以一份「200 卡」的零食含有 200,000 小卡——但讨论食物时大家说的都是 kcal。</p>
-    </div>
-    <div>
-      <h2>关键换算</h2>
-      <ul>
-        <li>1 千卡 (kcal) = 4.184 千焦 (kJ)</li>
-        <li>1 千瓦时 (kWh) = 3,600,000 焦耳 = 860.4 kcal</li>
-        <li>1 BTU ≈ 1,055 焦耳(将 1 磅水加热 1°F 所需能量)</li>
-        <li>1 电子伏特 (eV) = 1.602 × 10⁻¹⁹ 焦耳(亚原子尺度)</li>
-      </ul>
-    </div>
-    <div>
-      <h2>现实中的能量</h2>
-      <ul>
-        <li>一根香蕉:~105 kcal = 439 kJ</li>
-        <li>1 千瓦时电力 ≈ 860 kcal</li>
-        <li>60W 灯泡点亮 1 小时:216,000 焦耳</li>
-        <li>成人每日平均饮食:2,000 kcal = 8,368 kJ</li>
-      </ul>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -124,7 +95,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function EnergyConverterContent(): ReactNode {
   const { locale } = useApp()

@@ -5,41 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const DownloadTimeCalculatorL10n: ToolL10n = {
-  zh: {
-    useCases: ['估算下载大型游戏或系统镜像要多久', '判断视频会议前上传演示文件是否来得及', '对比升级宽带后大文件传输省多少时间', '按实际上传带宽倒推云盘备份耗时'],
-    faqs: [
-      { q: '为什么 100 Mbps 不是每秒 100 MB?', a: '运营商卖的是兆位(bit),文件按兆字节(byte)计,1 字节 = 8 位——100 Mbps 理论上限 12.5 MB/s。再扣 10-15% 协议开销,实际约 11 MB/s。' },
-      { q: '协议开销是什么?', a: 'TCP/IP 头部、丢包重传、TLS 握手和 Wi-Fi 争用都会占用带宽。顺畅的有线连接约损 10%,拥挤的 Wi-Fi 可到 15% 或更多——所以"有效吞吐"那一栏才接近真实速度。' },
-      { q: '上传时间怎么算?', a: '公式完全相同,只是把连接速度换成你的上传带宽——通常远低于下载(很多宽带 1000/50,上下行相差 20 倍)。云备份、发大附件看的就是上传这一侧。' },
-      { q: '实际为什么更慢?', a: '共享带宽(家人在看流媒体)、服务器限速、跨区路由、峰值拥塞都会拉低速度。把本工具的估算当乐观下限,预留 20-30% 余量更稳妥。' },
-    ],
-    ui: {
-      'in.size': '文件大小',
-      'in.sizeUnit': '大小单位',
-      'in.speed': '连接速度',
-      'in.speedUnit': '速度单位',
-      'in.overhead': '协议开销',
-      'opt.sizeUnit.MB': 'MB',
-      'opt.sizeUnit.GB': 'GB',
-      'opt.sizeUnit.TB': 'TB',
-      'opt.speedUnit.Mbps': 'Mbps',
-      'opt.speedUnit.MBps': 'MB/s',
-      'opt.overhead.0': '不计',
-      'opt.overhead.10': '10% TCP',
-      'opt.overhead.15': '15% WiFi',
-      'out.time': '传输耗时',
-      'out.totalSeconds': '总秒数',
-      'out.effective': '有效吞吐',
-      'out.payloadMB': '数据量',
-      'chartTitle': '不同连接下的耗时',
-      'cmpseg.0': '传输耗时',
-      'note': '📡 运营商卖兆位(Mb),文件是兆字节(MB)——差 8 倍,还没算开销。TCP/IP 头部、重传与 Wi-Fi 争用再吃掉 10-15%;"有效吞吐"才是诚实数字。上传同理,把速度换成上传带宽即可(通常慢得多)。',
-      'errInput': '文件大小与速度必须是正数',
-      'preset.0': '流媒体电影(4.5 GB)',
-      'preset.1': '游戏下载(80 GB)',
-      'preset.2': '照片批量(500 MB)',
-    },
-  },
+
   es: {
     useCases: ['estimar cuánto tarda en bajar un juego o una ISO', 'decidir si te da tiempo a subir una presentación antes de la reunión', 'comparar cuánto ahorrarías al subir de banda ancha', 'calcular cuánto tardará una copia en la nube según tu subida'],
     faqs: [

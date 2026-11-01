@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * CaffeineCalculator 长文正文 —— 四语 dispatcher
+ * CaffeineCalculator 长文正文 —— 三语 dispatcher
  *
- * en 分支与改造前渲染输出一致。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支与改造前渲染输出一致。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -24,19 +24,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>五小时半衰期</h2>
-    <p>咖啡因按指数规律清除:下午 3 点摄入 200 mg,晚上 8 点还剩约 100 mg,凌晨 1 点约 50 mg。哪怕你能正常入睡,这点睡前残留也足以推迟深睡。</p>
-    <h2>个体差异巨大</h2>
-    <p>CYP1A2 基因把人分成快代谢与慢代谢两型。口服避孕药大约让半衰期翻倍,吸烟则大致减半。留意咖啡因在你身上起效有多晚,再据此调整预期。</p>
-    <h2>常见饮品剂量</h2>
-    <p>现煮咖啡 ≈95 mg/杯,浓缩咖啡 ≈63 mg/份,红茶 ≈47 mg,可乐 ≈34 mg,能量饮料 80-300 mg,黑巧克力每 40 g ≈24 mg。</p>
-    <h2>安全截止时间</h2>
-    <p>睡眠研究者建议睡前 8-10 小时停止摄入。对 10:30 入睡的人,这意味着午饭后就不该再碰咖啡因——比多数人以为的更早。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -66,7 +53,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function CaffeineCalculatorContent(): ReactNode {
   const { locale } = useApp()

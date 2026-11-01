@@ -26,8 +26,8 @@ const EN_CRUMB_TITLE = 'Markup vs Margin Guide'
 
 export const pricingMathArticle: LocalizedArticle = {
   en: {
-    articleTitle: { en: EN_TITLE, zh: '加价率 vs. 利润率:电商与零售盈利定价的数学', es: 'Markup vs. margen: la matemática de los precios rentables en e-commerce y comercio minorista', de: 'Markup vs. Marge: die Mathematik profitabler Preise im E-Commerce und Einzelhandel' },
-    breadcrumbTitle: { en: EN_CRUMB_TITLE, zh: EN_CRUMB_TITLE, es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
+    articleTitle: { en: EN_TITLE,  es: 'Markup vs. margen: la matemática de los precios rentables en e-commerce y comercio minorista', de: 'Markup vs. Marge: die Mathematik profitabler Preise im E-Commerce und Einzelhandel' },
+    breadcrumbTitle: { en: EN_CRUMB_TITLE,  es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
     readMinutes: 10,
     lead: 'Confusing markup with margin is the most expensive arithmetic error in small business — a 50% markup is only a 33% margin, and the gap is where profits leak. This guide nails the formulas, walks the fee stack, and prices a product end to end.',
     sections: [
@@ -130,114 +130,10 @@ export const pricingMathArticle: LocalizedArticle = {
       },
     ],
   },
-  zh: {
-    articleTitle: { en: EN_TITLE, zh: '加价率 vs. 利润率:电商与零售盈利定价的数学', es: 'Markup vs. margen: la matemática de los precios rentables en e-commerce y comercio minorista', de: 'Markup vs. Marge: die Mathematik profitabler Preise im E-Commerce und Einzelhandel' },
-    breadcrumbTitle: { en: EN_CRUMB_TITLE, zh: EN_CRUMB_TITLE, es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
-    readMinutes: 10,
-    lead: '把 markup(加价率)和 margin(利润率)混为一谈,是小生意里最贵的算术错误——50% 加价率只是 33% 利润率,差额正是利润漏掉的地方。本文钉死公式、拆透费用栈,并把一个产品从头定价到尾。',
-    sections: [
-      {
-        heading: '1. Margin 与 Markup:同样的差价,不同的分母',
-        blocks: [
-          '两者度量的是同一个"售价减成本"的差——只是除的东西不同。**Margin(利润率)**除以*售价*(每块钱营收里有多少是利润);**Markup(加价率)**除以*成本*(在成本上加了几成)。$40 进、$60 卖:margin 33.3%,markup 50%。',
-          { code: CODE_MARGIN },
-          '实务上为什么致命:折扣、手续费、佣金全部**按售价**收,你的损益表跑在 margin 上。用 markup 思考、按 price-based 费率付钱的卖家,会系统性地高估自己剩多少。',
-          {
-            card: {
-              title: '利润率计算器',
-              href: '/tools/profit-margin-calculator/',
-              desc: '任意成本/售价组合,同时给出 margin、markup 与利润——两个比率并排,混淆到此为止。',
-            },
-          },
-        ],
-      },
-      {
-        heading: '2. 从目标利润率反推定价(而不是凭习惯)',
-        blocks: [
-          '成本加成的习惯只会给出"翻倍卖"这类定价——keystone 定价(100% markup)其实只是 50% margin,在你的品类里可能错得离谱。杂货净利 1–3%,服装毛利 50–60%,软件毛利 80%+。定价要从"你的品类活下去需要的利润率"出发,覆盖退货、费率与营销。',
-          '工作公式:**price = cost ÷ (1 − 目标 margin)**。$25 的货要 40% margin?售价 = 25 ÷ 0.6 = **$41.67**——而不是"加 40%"习惯算出的 $35。差出来的 $6.67 乘以销量,就是这门生意本身。',
-          {
-            card: {
-              title: '加价率计算器',
-              href: '/tools/markup-calculator/',
-              desc: '任意 markup 换算成真实 margin(或反向)——按目标定价,不按习惯定价。',
-            },
-          },
-        ],
-      },
-      {
-        heading: '3. 费用栈:平台实际拿走多少',
-        blocks: [
-          '名义费率永远不是真实费率。平台与支付层层叠加:eBay 成交费 + 支付处理费;Stripe 2.9% + $0.30;PayPal 类似;再加上运费补贴与退货准备金。$30 的订单上,**2.9% + $0.30 实际是 3.9%**——固定那 $0.30 对小客单惩罚最狠。',
-          '如果你要的是扣费后*净到手*某个数,反解是另一笔账:2.9% + $0.30 的费率下要净收 $100,得开价 **$103.30** 而不是 $102.90——因为费用对"含费总额"计提。',
-          {
-            card: {
-              title: 'Stripe 反向费率计算器',
-              href: '/tools/reverse-stripe-fee-calculator/',
-              desc: '输入你想净到手的金额——得出百分比 + 固定费之后应该开价多少。',
-            },
-          },
-          {
-            card: {
-              title: 'eBay 费用计算器',
-              href: '/tools/ebay-fee-calculator/',
-              desc: '成交费、支付处理与推广费逐项算清——每笔 eBay(或 Etsy)订单的真实净到手。',
-            },
-          },
-        ],
-      },
-      {
-        heading: '4. 自由职业定价:同一套数学,穿成发票的样子',
-        blocks: [
-          '按"时薪 × 小时数"报价的自由职业者,本质是在用自己的时间做成本加成。利润率视角同样适用:你的费率必须覆盖不可计费时间、税负、软件、保险与无偿行政——典型有**三分之一到一半的工作时间不可计费**。相当于 $60/小时的雇员,自由职业要报 $90–120/小时才能维持同等生活。',
-          '然后保护发票本身:逾期费事先写明、账期 net-15 而非 net-60、超过一周的合作先收定金。发票是定价工具,不是文书工作。',
-          {
-            card: {
-              title: '自由职业报价计算器',
-              href: '/tools/freelance-rate-calculator/',
-              desc: '把 $90–120 的换算换成你自己的数字——由收入、可计费比例与开销推出时薪与日报价。',
-            },
-          },
-          {
-            card: {
-              title: '自由职业发票生成器',
-              href: '/tools/freelance-invoice-generator/',
-              desc: '明细、税额、定金与逾期条款一站式成票——利润率真正被收回来的最后一步。',
-            },
-          },
-        ],
-      },
-      {
-        heading: '5. 折扣纪律:你让渡的是利润率',
-        blocks: [
-          '折扣按售价让、从利润里扣。40% margin 时,**9 折会砍掉 25% 利润**——要赚回同样利润,销量必须涨 33%。25% margin 时同样 9 折,需要销量涨 67%。多数促销根本达不到;电子表格事前就知道。',
-          '纪律只有一条:任何促销前,先算"保持利润不变需要的销量"。活动方案若不可能达到,那不是营销,是捐赠。',
-          {
-            card: {
-              title: '折扣计算器',
-              href: '/tools/discount-calculator/',
-              desc: '促销价与叠加折扣一步算清——下一次活动上线前,先配上这套利润率数学。',
-            },
-          },
-        ],
-      },
-      {
-        heading: '十五分钟给一个产品定价',
-        blocks: [
-          { list: [
-            '算全**真实落地成本**:货品、包装、头程运费、支付分摊。',
-            '按品类与固定成本负担定**目标 margin**——不是按"什么价格显得公道"。',
-            '售价 = 成本 ÷ (1 − margin),再与竞品对照。',
-            '在该售价下减去**完整费用栈**;剩余不达目标就重新定价。',
-            '任何折扣前:先算保利润所需销量;对捐赠说不。',
-          ] },
-        ],
-      },
-    ],
-  },
+
   es: {
-    articleTitle: { en: EN_TITLE, zh: '加价率 vs. 利润率:电商与零售盈利定价的数学', es: 'Markup vs. margen: la matemática de los precios rentables en e-commerce y comercio minorista', de: 'Markup vs. Marge: die Mathematik profitabler Preise im E-Commerce und Einzelhandel' },
-    breadcrumbTitle: { en: EN_CRUMB_TITLE, zh: EN_CRUMB_TITLE, es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
+    articleTitle: { en: EN_TITLE,  es: 'Markup vs. margen: la matemática de los precios rentables en e-commerce y comercio minorista', de: 'Markup vs. Marge: die Mathematik profitabler Preise im E-Commerce und Einzelhandel' },
+    breadcrumbTitle: { en: EN_CRUMB_TITLE,  es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
     readMinutes: 10,
     lead: 'Confundir markup con margin es el error aritmético más caro del pequeño negocio: un markup del 50 % es solo un margen del 33 %, y la diferencia es por donde se fuga el beneficio. Esta guía fija las fórmulas, desmonta la pila de comisiones y pone precio a un producto de principio a fin.',
     sections: [
@@ -341,8 +237,8 @@ export const pricingMathArticle: LocalizedArticle = {
     ],
   },
   de: {
-    articleTitle: { en: EN_TITLE, zh: '加价率 vs. 利润率:电商与零售盈利定价的数学', es: 'Markup vs. margen: la matemática de los precios rentables en e-commerce y comercio minorista', de: 'Markup vs. Marge: die Mathematik profitabler Preise im E-Commerce und Einzelhandel' },
-    breadcrumbTitle: { en: EN_CRUMB_TITLE, zh: EN_CRUMB_TITLE, es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
+    articleTitle: { en: EN_TITLE,  es: 'Markup vs. margen: la matemática de los precios rentables en e-commerce y comercio minorista', de: 'Markup vs. Marge: die Mathematik profitabler Preise im E-Commerce und Einzelhandel' },
+    breadcrumbTitle: { en: EN_CRUMB_TITLE,  es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
     readMinutes: 10,
     lead: 'Markup mit Margin zu verwechseln ist der teuerste Rechenfehler im Kleinunternehmen — ein 50-%-Aufschlag ist nur eine 33-%-Marge, und in der Lücke versickert der Gewinn. Dieser Leitfaden nagelt die Formeln fest, zerlegt den Gebührenstapel und bepreist ein Produkt von Anfang bis Ende.',
     sections: [

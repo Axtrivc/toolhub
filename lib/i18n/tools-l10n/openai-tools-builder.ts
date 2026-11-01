@@ -5,35 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const OpenaiToolsBuilderL10n: ToolL10n = {
-  zh: {
-    useCases: [
-      '为 function calling 起草 tools 数组:可视化填函数名、描述、参数,复制即用',
-      '把已有 REST API 的参数文档快速转写成 JSON Schema parameters 块',
-      '用枚举参数把模型输出锁死在固定取值(如 sentiment 只能是 positive/negative/neutral)',
-      '写好的定义复制后略改键名,直接迁移到 Anthropic 的 tool-use 格式',
-    ],
-    faqs: [
-      { q: '输出的是什么格式?', a: 'OpenAI Chat Completions / Responses API 的 tools 数组:每个函数含 name、description 和符合 JSON Schema 的 parameters 对象。复制结果可直接粘贴进 API 请求的 tools 字段,零改动可用。' },
-      { q: '为什么描述(description)这么重要?', a: '模型完全靠 name 和 description 判断"何时调用、传什么参数"。描述写"获取天气"不如写"获取指定城市的实时天气,城市用英文拼写,如 Beijing"。模糊描述是 function calling 不触发的头号原因。' },
-      { q: 'integer 和 number 有什么区别?', a: 'JSON Schema 里 integer 只允许整数(如分页页码、数量),number 允许浮点(如价格、经纬度)。选错类型会让合法参数被校验拒绝——页码用 integer,金额用 number。' },
-      { q: 'required 勾选意味着什么?', a: '勾选的参数名会进入 parameters.required 数组,模型每次调用都必须给出这些值;未勾选的参数模型可以省略。经验法则:没有合理默认值的参数才设为必填,其余保持可选让模型灵活处理。' },
-    ],
-    ui: {
-      'addParam': '添加参数',
-      'copyJson': '复制 JSON',
-      'fnDesc': '描述（模型可见）',
-      'fnName': '函数名',
-      'jsonLabel': 'tools 数组 JSON',
-      'note': '🛠️ 输出符合 OpenAI tools 数组（Anthropic tool-use 略改键名即可用）。“integer” 映射为 JSON Schema 的 integer；枚举会变成模型必须遵守的字符串联合类型。描述写得越清楚，模型调用越准。',
-      'pDesc': '参数描述',
-      'pEnum': '枚举值（逗号分隔，可选）',
-      'pName': '参数名',
-      'pType': '类型',
-      'paramsLabel': '参数',
-      'removeParam': '删除参数',
-      'required': '必填',
-    },
-  },
+
   es: {
     useCases: [
       'Redactar el array tools para function calling: nombre, descripción y parámetros en visual, copiar y usar',

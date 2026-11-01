@@ -44,36 +44,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具?</h2>
-    <p>
-      <strong>JSON Web Token (JWT)</strong> 是一种紧凑、URL 安全的字符串,用于在客户端和服务器之间安全地传递声明——最常用于身份验证。一个 JWT 由三段 Base64URL 编码的部分组成,以点号分隔:{' '}
-      <code>header.payload.signature</code>。本解码器把这三段拆开,把 header 和 payload 显示为可读的 JSON,并展示原始签名。
-    </p>
-    <div>
-      <h2>如何阅读 JWT</h2>
-      <ul>
-        <li>
-          <strong>Header</strong> —— 算法(如 HS256、RS256)和令牌类型 (JWT)。
-        </li>
-        <li>
-          <strong>Payload</strong> —— 声明内容:令牌属于谁(<code>sub</code>),签发时间(<code>iat</code>),过期时间(<code>exp</code>),以及你的应用添加的任何自定义字段。
-        </li>
-        <li>
-          <strong>Signature</strong> —— 证明令牌未被篡改。它只能用匹配的密钥 (HMAC) 或公钥 (RSA/ECDSA) 来验证,而本解码器并不持有这些。
-        </li>
-      </ul>
-    </div>
-    <div>
-      <h2>在这里粘贴我的令牌安全吗?</h2>
-      <p>
-        安全。解码完全在你的浏览器中通过内置的 <code>atob</code> 函数完成——你的令牌绝不会被上传到服务器、存储或记录。话虽如此,请把真实的访问令牌当作密码一样对待:不要在截图、聊天或公开仓库中分享。如果你只是想了解令牌的结构,可以使用 <em>加载示例</em> 按钮加载一个无害的示例。
-      </p>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -155,7 +125,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function JwtDecoderContent(): ReactNode {
   const { locale } = useApp()

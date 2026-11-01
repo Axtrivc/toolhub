@@ -16,17 +16,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>美化 vs 压缩</h2>
-    <p>美化会重新缩进嵌套元素,便于阅读和 diff;压缩把所有无意义的空白折成一行,减小 SOAP 报文和站点地图的传输体积。两者都不会改动数据本身。</p>
-    <h2>错误报告</h2>
-    <p>校验用的是浏览器自带的 XML 解析器,报错信息直接引用规范——包括不匹配的标签名和非法字符及其位置。</p>
-    <h2>命名空间原样保留</h2>
-    <p>带 xmlns 声明的文档往返处理后原封不动:前缀、默认命名空间和属性值在格式化后逐字节保留(空白除外)。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -52,7 +41,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function XmlFormatterContent(): ReactNode {
   const { locale } = useApp()

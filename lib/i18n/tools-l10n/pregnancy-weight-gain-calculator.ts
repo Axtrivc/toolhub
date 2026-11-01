@@ -5,48 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const PregnancyWeightGainCalculatorL10n: ToolL10n = {
-  zh: {
-    useCases: ['按孕前 BMI 查看 IOM 增重推荐区间', '算出当前孕周应该增重多少', '核对本次怀孕已增重是否在区间内', '双胎妊娠的增重目标'],
-    faqs: [
-      { q: '推荐区间出自哪里?', a: '2009 年美国医学研究所(IOM,现国家医学院)指南:正常 BMI 增重 11.5-16 kg,偏瘦 12.5-18 kg,超重 7-11.5 kg,肥胖 5-9 kg;双胎区间更宽(正常 BMI 为 17-25 kg)。' },
-      { q: '每周应该长多少?', a: '孕早期几乎没有增长(全程 0.5-2 kg),之后按稳定速率:正常 BMI 约 0.42 kg/周,偏瘦 0.51,超重 0.28,肥胖 0.22。计算器把这个速率折算到你当前的孕周。' },
-      { q: '已经超出区间了,要节食吗?', a: '不要。孕期限制热量会危及胎儿所需的营养;正确的做法是带着趋势图和产科医生或助产士讨论。水肿导致的超区间增长很常见——这是一次谈话,不是一纸判决。' },
-      { q: '双胎也适用吗?', a: '适用——本工具采用 IOM 双胎区间(正常 BMI 17-25 kg,超重 14-23 kg,肥胖 11-19 kg)。偏瘦 BMI 的双胎没有 IOM 指南,工具会如实说明而不是编数字。' },
-    ],
-    ui: {
-      'in.height': '身高',
-      'in.preWeight': '孕前体重',
-      'in.curWeight': '当前体重',
-      'in.week': '当前孕周',
-      'in.babies': '胎儿数',
-      'opt.babies.single': '单胎',
-      'opt.babies.twins': '双胎',
-      'out.status': '增重进度',
-      'out.bmiOut': '孕前 BMI',
-      'out.totalRange': '全程推荐增重',
-      'out.expectedNow': '本周推荐已增',
-      'out.yourGain': '你已增重',
-      'out.rateOut': '每周增重速率',
-      'outSub.rateOut': '孕中晚期',
-      'chartTitle': '你的增重落点',
-      'zone.0': '低于区间',
-      'zone.1': '区间内',
-      'zone.2': '高于区间',
-      'preset.0': '正常 BMI · 孕 24 周',
-      'preset.1': '超重 · 孕 30 周',
-      'preset.2': '双胎 · 正常 BMI',
-      'bmiUnder': '偏瘦',
-      'bmiNormal': '正常',
-      'bmiOver': '超重',
-      'bmiObese': '肥胖',
-      'statusBelow': '低于推荐区间',
-      'statusWithin': '在推荐区间内',
-      'statusAbove': '高于推荐区间',
-      'noTwinsUnder': '偏瘦双胎无 IOM 建议,请咨询产科医生',
-      'errInvalid': '请输入合法数值:身高 120-220 cm、体重大于 0、孕周 1-42',
-      'note': '🤰 采用 IOM/NAM 2009 指南:孕早期全程约增 0.5-2 kg,之后按每周稳定速率增长;双胎区间更宽。数值供与产科医生讨论用,不是打分。',
-    },
-  },
+
   es: {
     useCases: ['ver el rango de aumento recomendado según tu IMC previo', 'calcular cuánto deberías haber aumentado en tu semana actual', 'comprobar si tu aumento está dentro del rango', 'objetivos de aumento en embarazo gemelar'],
     faqs: [

@@ -5,24 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const Rot13ConverterL10n: ToolL10n = {
-  zh: {
-    useCases: ['解谜题里的 ROT13 提示', '在论坛里遮住谜底/剧透', '学习凯撒密码的位移原理', '用 ROT-N 处理简单的字谜游戏'],
-    faqs: [
-      { q: 'ROT13 算加密吗?', a: '不算。总共只有 25 种位移,任何人一眼就能试穿——它是"防瞟见"不是保密。任何真要保护的东西都不该用它。' },
-      { q: '怎么解码?', a: '把输出再贴回输入即可——ROT13 是自逆运算(13+13=26 正好一整圈)。其他位移 N 的解码位移是 26−N,比如 ROT7 用 ROT19 解。' },
-      { q: '数字和标点会变吗?', a: '默认原样保留。开启 ROT5 后数字按 5 旋转(0↔5、1↔6),同样自逆;标点与空格永远不动。' },
-      { q: '现在还有人在用什么?', a: '论坛遮谜底、解谜游戏提示、 Usenet 时代传下来的剧透礼仪——故意留一层"想看再解"的薄纱。' },
-    ],
-    ui: {
-      'inputLabel': '输入文本',
-      'outputLabel': '输出',
-      'shiftLabel': '位移',
-      'rot5Label': '数字同步旋转 5(ROT5)',
-      'clear': '清空',
-      'tooLarge': '输入过大——支持的上限是 200,000 字符。',
-      'note': '🔁 ROT13 是自逆运算——把输出贴回输入即完成解码。其他 ROT-N 位移用 26 − N 解(ROT7 对 ROT19)。大小写保留;数字默认不动,开启 ROT5 后按 5 旋转,同样自逆。',
-    },
-  },
+
   es: {
     useCases: ['resolver pistas ROT13 de acertijos', 'ocultar soluciones o spoilers en foros', 'entender el desplazamiento del cifrado César', 'jugar con ROT-N en pasatiempos de letras'],
     faqs: [

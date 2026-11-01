@@ -5,35 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const aspectRatioCalculatorL10n: ToolL10n = {
-  zh: {
-    ui: {
-      'aspectRatio': '宽高比',
-      'copyResult': '复制结果',
-      'enterWidthPlaceholder': '输入宽度…',
-      'height': '高度',
-      'heightPx': '高度 (px)',
-      'note': '🔒 100% 在客户端完成。输入比例和其中一个尺寸,另一个按以下公式计算:',
-      'orEnterHeightPlaceholder': '或输入高度…',
-      'reducedRatio': '最简比例',
-      'width': '宽度',
-      'widthPx': '宽度 (px)',
-    },
-    formula: {
-      formula: 'h₂ = h₁ × ( w₂ / w₁ )',
-      explain: '保持宽高比缩放:高度按与宽度相同的系数缩放。给定一个新尺寸,即可按比例算出另一个。',
-    },
-    useCases: [
-      '缩放图片而不拉伸变形',
-      '把视频嵌入固定容器并保持比例',
-      '计算社交媒体发帖所需的尺寸',
-      '计算保持比例的响应式尺寸',
-    ],
-    faqs: [
-      { q: '缺失的尺寸怎么算？', a: '根据比例 W:H 计算。已知宽度时,高度 = 宽度 × (H ÷ W);已知高度时,宽度 = 高度 × (W ÷ H)。以 16:9、宽度 1920 为例,高度 = 1920 × (9 ÷ 16) = 1080。' },
-      { q: '适应(fit)和填充(fill)方框有什么区别？', a: '适应(contain)会缩放图片让整体完全可见,可能留下黑边。填充(cover)会缩放到完全盖住方框,可能裁掉溢出部分——这两种模式对应 CSS 的 object-fit / background-size,而宽高比计算正是决定留边还是裁切多少的前提。拿不准时,照片选 cover;Logo、截图这类必须完整显示的内容选 contain。' },
-      { q: '哪些宽高比最常见？', a: '16:9 用于 YouTube 和现代视频,4:3 用于老式电视和部分相机,21:9 用于超宽显示器,1:1 用于 Instagram 方图,9:16 用于手机竖屏短视频,3:2 用于大多数单反照片。可使用预设或输入 5:4 等任意自定义比例。' },
-    ],
-  },
+
   es: {
     ui: {
       'aspectRatio': 'Relación de aspecto',

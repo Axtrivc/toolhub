@@ -5,24 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const csvToJsonL10n: ToolL10n = {
-  zh: {
-    ui: {
-      inputTooLarge: '⚠️ 输入过大——支持规模最多 20 万字符。请裁剪输入后再计算。',
-      defaultInput: '姓名,年龄,城市\n张三,30,北京\n李四,25,上海',
-      inputLabel: 'CSV(含表头行)',
-      outputLabel: 'JSON 数组',
-      note: '🔄 把 CSV 转成 JSON 对象,每行用表头作为键组成一个对象。分隔符(逗号/分号/制表符)自动探测——在末尾追加 " ||| ;" 或 " ||| \\t" 可手动指定。引号内字段的空白原样保留。',
-    },
-    useCases: [
-      '把电子表格数据导入应用程序',
-      '将 CSV 表头转为 JSON 对象键',
-      '为 API 准备配置数据',
-      '转换从 Excel 导出的数据',
-    ],
-    faqs: [
-      { q: '支持 Excel 文件(.xlsx)吗?', a: '本工具只处理 CSV(纯文本)。对于 Excel 文件,请先在 Excel 中导出为 CSV,再在此转换。代码中可用 SheetJS 等库直接处理 .xlsx。' },
-    ],
-  },
+
   es: {
     ui: {
       inputTooLarge: '⚠️ Entrada demasiado grande: el tamaño admitido es de hasta 200 000 caracteres. Recorta la entrada para calcular.',

@@ -34,35 +34,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具?</h2>
-    <p>本计算器对分数进行精确运算——加、减、乘、除。结果会自动约简为最简分数,并同时以分数和小数两种形式显示。</p>
-    <div>
-      <h2>四则运算</h2>
-      <ul>
-        <li><strong>加/减:</strong>先找到公分母,再合并分子</li>
-        <li><strong>乘:</strong>分子相乘,分母相乘</li>
-        <li><strong>除:</strong>把第二个分数翻转(取倒数),然后相乘</li>
-        <li>结果通过最大公约数(GCD)约分</li>
-      </ul>
-    </div>
-    <div>
-      <h2>示例计算</h2>
-      <ul>
-        <li>1/2 + 1/3 = 5/6</li>
-        <li>3/4 × 2/5 = 6/20 = 3/10</li>
-        <li>2/3 ÷ 4/5 = 2/3 × 5/4 = 10/12 = 5/6</li>
-        <li>5/2 = 2 1/2(带分数)</li>
-      </ul>
-    </div>
-    <div>
-      <h2>为什么分数很重要</h2>
-      <p>在小数不得不四舍五入的地方,分数能给出精确答案。在木工、烹饪、工程和音乐理论中,分数是自然的语言。1/3 英寸的测量比 0.33 英寸更精确——而且分数计算器能避免舍入误差不断累积。</p>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -124,7 +95,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function FractionCalculatorContent(): ReactNode {
   const { locale } = useApp()

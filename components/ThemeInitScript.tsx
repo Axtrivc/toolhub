@@ -15,7 +15,7 @@ export function ThemeInitScript() {
           theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
         }
         if (theme === 'dark') document.documentElement.classList.add('dark');
-      } catch (e) { /* localStorage 不可用(隐私模式/禁用存储)时静默跳过 */ }
+      } catch (e) { /* Ignore unavailable localStorage in privacy-restricted contexts. */ }
     })();
   `
   return <script dangerouslySetInnerHTML={{ __html: code }} />

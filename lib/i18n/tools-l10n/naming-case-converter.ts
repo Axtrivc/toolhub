@@ -5,46 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const namingCaseConverterL10n: ToolL10n = {
-  zh: {
-    ui: {
-      'bulkInputLabel': '每行一个短语',
-      'bulkMode': '批量模式',
-      'bulkPlaceholder': 'user profile settings\ngetHTTPResponse\nAPI_BASE_URL',
-      'copy': '复制',
-      'hint': '处理空格、下划线、连字符、点、斜杠以及 camelCase/PascalCase 边界。',
-      'inputLabel': '要转换的短语',
-      'note': '🔒 100% 客户端处理——一切都在你的浏览器中完成转换,数据不离开页面。',
-      'placeholder': 'user profile settings',
-    },
-    useCases: [
-      'camelCase 转 snake_case 转换器',
-      'PascalCase 转 kebab-case',
-      '转换变量命名规范',
-      '在线 CONSTANT_CASE 生成器',
-    ],
-    faqs: [
-      {
-        q: 'camelCase 和 PascalCase 有什么区别?',
-        a: 'camelCase 以小写开头,其后每个单词首字母大写(parseHtml);PascalCase(即大驼峰)连第一个单词也大写(ParseHtml)。camelCase 常用于变量和函数,PascalCase 用于类和 React 组件。',
-      },
-      {
-        q: '它是怎么识别名字里的单词边界的?',
-        a: '转换器按连字符、下划线、空格和大小写变化来切分,所以 HTMLParser、html_parser、html-parser 都会先拆成同样的单词列表,再重新格式化。这样你就能在任意两种风格之间双向转换。',
-      },
-      {
-        q: '批量模式会保持「每行一个」吗?',
-        a: '会。粘贴一整列(每行一个标识符),每行会被独立转换,并保持原有行序。空行会被跳过。',
-      },
-      {
-        q: 'CONSTANT_CASE 是什么时候用的?',
-        a: '全大写加下划线,专用于常量:MAX_RETRY_COUNT = 5。配套惯例还有 Python 的 PEP 8(类名 PascalCase、模块名 snake_case)和 Java 的 UPPER_SNAKE 常量——统一团队风格时按语言约定选。',
-      },
-      {
-        q: '遇到 iOS、XMLHttp 这类缩写怎么办?',
-        a: '连续大写会被当作一个词:HTMLParser 拆成 HTML 和 Parser,与 html_parser 同源,来回转换保持一致。像 iOS 这种大小写交错的非常规缩写,拆分可能有歧义,转换后抽查一眼再替换。',
-      },
-    ],
-  },
+
   es: {
     ui: {
       'bulkInputLabel': 'Una frase por línea',

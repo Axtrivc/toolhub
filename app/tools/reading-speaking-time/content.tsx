@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * Reading & Speaking Time 长文正文 —— 四语 dispatcher
+ * Reading & Speaking Time 长文正文 —— 三语 dispatcher
  *
- * en 分支与改造前渲染输出一致。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支与改造前渲染输出一致。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en (与改造前渲染输出一致) ────────────────────────────
@@ -60,36 +60,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具?</h2>
-    <p>
-      粘贴任意文章、博客草稿、脚本或演讲稿,这个工具会立刻估算出<strong>阅读或朗读需要多长时间</strong>,并同时给出词数、字符数、句子数和页数。它专为核对阅读时长徽章的作者、为演讲掐时间的讲者,以及估算脚本篇幅的播客创作者打造。一切都在你的浏览器中运行,文本绝不上传。
-    </p>
-
-    <div>
-      <h2>估算是如何计算的</h2>
-      <p>
-        词数通过按空白拆分去除首尾空白的文本来统计,时间就是 <code>words ÷ words-per-minute</code>。预设覆盖了常见语速:<strong>慢速阅读</strong>(100 词/分)、<strong>成年人平均</strong>(~150 词/分)、<strong>快速阅读</strong>(200 词/分)和<strong>略读</strong>(300 词/分),另有 50–400 词/分的自定义滑块。口语预设反映真实表达:从容的<strong>演讲</strong>(~100 词/分)、正常<strong>对话</strong>(~130 词/分)和<strong>快语速</strong>(~160 词/分)。粘贴中文(或日文/韩文)文本时,每个字符计为 1 词,预设会自动切换成字/分口径:阅读 200/300/400/600、演讲 150/200/250,自定义滑块上限也随之放宽到 800。
-      </p>
-    </div>
-
-    <div>
-      <h2>你该用哪个数字?</h2>
-      <p>
-        做<strong>博客阅读时长徽章</strong>时,一些 CMS 插件假设 150–200 词/分,而 Medium 假设约 265 词/分。做<strong>演讲或配音</strong>时,请以演讲时长的数字为准 —— 并记住这些数字假定不间断地表达。幻灯片、演示、等观众笑完的停顿以及 Q&A 很容易额外增加 10–20%,所以如果工具显示 9:30,请预留 10–11 分钟的档期。<em>页数</em>估算(250 词/页)在需求文档要求「约四页」时很有用。
-      </p>
-    </div>
-
-    <div>
-      <h2>值得了解的注意事项</h2>
-      <p>
-        估算会把每个 token 都当作一个词,因此密集的技术性文字、代码块、需要逐字读出的数字(念「3.14159」要花点时间)以及生僻人名在实际中都会更慢。句子通过结尾标点(<code>.</code>、<code>!</code>、<code>?</code>)来统计,所以缩写和省略号可能会让计数略有偏差。对于关键的时间把控 —— 比如主题演讲、广播片段 —— 务必用秒表做一次真实的通读排练。
-      </p>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -196,7 +166,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function ReadingSpeakingTimeContent(): ReactNode {
   const { locale } = useApp()

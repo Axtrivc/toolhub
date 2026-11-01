@@ -7,45 +7,7 @@ import type { ToolL10n } from '../tool-l10n'
 const FORMULA = 'mean = ( Σ xᵢ ) / n'
 
 export const averageCalculatorL10n: ToolL10n = {
-  zh: {
-    ui: {
-      'chartTitle': '你的数据',
-      'line.value': '数值',
-      'line.mean': '平均值',
-      'in.numbers': '数字(用逗号、空格或换行分隔)',
-      'out.count': '个数',
-      'out.sum': '总和',
-      'out.mean': '平均值(均值)',
-      'out.median': '中位数',
-      'out.min': '最小值',
-      'out.max': '最大值',
-      'out.range': '极差',
-      'out.mode': '众数',
-      'out.stdSample': '标准差(样本)',
-      'out.stdPop': '标准差(总体)',
-      'out.ignored': '非数字条目',
-      'outSub.stdSample': 'n − 1 分母',
-      'outSub.stdPop': 'n 分母',
-      'noMode': '无(所有值均只出现一次)',
-      'ignoredN': '已忽略 {n} 个非数字值',
-      note: '📊 输入任意一组数字。支持逗号、空格或换行作为分隔符。',
-    },
-    useCases: [
-      '计算一组数据的均值、中位数和极差',
-      '处理含异常值的数据(用中位数)',
-      '统计成绩、销量、评分的平均水平',
-      '对比均值与中位数判断数据偏态',
-    ],
-    formula: {
-      formula: FORMULA,
-      explain: '算术平均数。xᵢ 为各数据点,n 为数据个数。',
-    },
-    faqs: [
-      { q: '均值、中位数、众数有什么区别?', a: '均值是总和除以个数(多数人所说的「平均」)。中位数是排序后的中间值,受异常值影响更小。众数是出现最频繁的值。本计算器侧重均值;数据有极端高值或低值时请用中位数。' },
-      { q: '算平均前要剔除异常值吗?', a: '取决于你的目的。若要呈现典型水平(如平均薪资),像 CEO 这样的异常值会拉偏均值,中位数更具代表性。若要核算必须计入每一笔的总和(如总收入),则保留所有数据。无论剔除与否都应说明。' },
-      { q: '加权平均有什么不同?', a: '加权平均先将每个值乘以其重要程度(权重)再求和,然后除以总权重。你的 GPA 就是一种加权平均,学分是权重。简单均值把每个值同等看待,当某些值更重要时这样做是错的。' },
-    ],
-  },
+
   es: {
     ui: {
       'chartTitle': 'Tus números',

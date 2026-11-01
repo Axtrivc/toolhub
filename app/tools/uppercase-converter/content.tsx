@@ -35,31 +35,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具?</h2>
-    <p>
-      本工具可将任意文本即时转换为<strong>大写</strong>(全大写)。每个小写字母都会变成对应的大写形式;数字、符号以及已是大写的字母保持不变。整个转换都在你的浏览器中完成 —— 不会向任何地方发送数据。
-    </p>
-    <div>
-      <h2>何时使用大写</h2>
-      <ul>
-        <li><strong>标题</strong>,用于印刷和设计中的强调</li>
-        <li><strong>缩写</strong>,如 NASA、HTML、CEO —— 惯例是全部大写</li>
-        <li><strong>警示标签</strong>和标识,可见性至关重要的场合</li>
-        <li><strong>键盘快捷键和代码</strong> —— 许多工具用大写显示按键</li>
-        <li><strong>产品编码和序列号</strong>,避免歧义</li>
-      </ul>
-    </div>
-    <div>
-      <h2>排版提示</h2>
-      <p>
-        在长段落中全大写文本较难阅读,因为字母会失去各自的轮廓(词形)。请用于简短的标签和标题,而非正文。正文使用句首大写或标题大写阅读起来要快得多。
-      </p>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -125,7 +100,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function UppercaseConverterContent(): ReactNode {
   const { locale } = useApp()

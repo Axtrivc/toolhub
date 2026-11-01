@@ -6,40 +6,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const temperatureConverterL10n: ToolL10n = {
-  zh: {
-    ui: {
-      'chartTitle': '温度标尺(°C)',
-      'ptFreezing': '冰点',
-      'ptBody': '体温',
-      'ptBoiling': '沸点',
-      'summaryTitle': '温度换算',
-      'sInput': '输入: ',
-      'sResult': '结果: ',
-      'copySummary': '复制摘要',
-      'belowAbsZero': '⚠️ 温度低于绝对零度(−273.15°C / 0K)——物理上不可能。',
-      'convertedValue': '换算结果',
-      'formula': '公式',
-      'from': '从',
-      'swapUnits': '交换「从/到」单位',
-      'swap': '互换',
-      'noteText': '🌡️ 关键参考点:0°C = 32°F(冰点),100°C = 212°F(沸点),37°C = 98.6°F(体温)。',
-      'optCelsius': '摄氏度 (°C)',
-      'optFahrenheit': '华氏度 (°F)',
-      'optKelvin': '开尔文 (K)',
-      'to': '到',
-      'value': '数值',
-    },
-    useCases: [
-      '在摄氏度、华氏度和开尔文之间换算',
-      '把美国食谱的烤箱温度转换成摄氏度',
-      '换算科学实验中的绝对温度(开尔文)',
-    ],
-    faqs: [
-      { q: '怎样在脑子里把摄氏度换算成华氏度?', a: '把摄氏度数值翻倍,减去 10%,再加 32。比如 20°C:翻倍得 40,减 10% 得 36,加 32 = 68°F。精确公式是 °F = °C × 9/5 + 32。这个速算对日常温度误差在 1 度以内。' },
-      { q: '为什么开尔文不说「度」?', a: '开尔文是从绝对零度开始的绝对温标,按惯例我们说「开尔文」而不是「度开尔文」。0 K = −273.15°C。开尔文与摄氏度刻度间隔相同,换算只需加减 273.15。' },
-      { q: '摄氏度和华氏度在什么温度下相等?', a: '−40。这是两个温标唯一的交点:−40°C = −40°F。这是一个方便的参考值,可用于验证换算公式是否正确。' },
-    ],
-  },
+
   es: {
     ui: {
       'chartTitle': 'Escala de temperatura (°C)',

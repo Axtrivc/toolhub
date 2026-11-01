@@ -21,8 +21,8 @@ const EN_CRUMB_TITLE = '2026 FIRE Playbook'
 
 export const firePlaybookArticle: LocalizedArticle = {
   en: {
-    articleTitle: { en: EN_TITLE, zh: '2026 FIRE 实战手册:安全提取率、Coast FIRE 与税优账户堆叠', es: 'El playbook FIRE 2026: tasas de retirada seguras, Coast FIRE y el apilado fiscal', de: 'Das FIRE-Playbook 2026: sichere Entnahmeraten, Coast FIRE und steuerbegünstigtes Stacking' },
-    breadcrumbTitle: { en: EN_CRUMB_TITLE, zh: EN_CRUMB_TITLE, es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
+    articleTitle: { en: EN_TITLE,  es: 'El playbook FIRE 2026: tasas de retirada seguras, Coast FIRE y el apilado fiscal', de: 'Das FIRE-Playbook 2026: sichere Entnahmeraten, Coast FIRE und steuerbegünstigtes Stacking' },
+    breadcrumbTitle: { en: EN_CRUMB_TITLE,  es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
     readMinutes: 12,
     lead: 'FIRE is not a vibes-based dream — it is a solvency equation with three variables: your expenses, your portfolio, and time. This playbook covers the 4% rule\u2019s real origin, the Coast FIRE shortcut, and the account-stacking order that decides how much of your number taxes quietly confiscate.',
     sections: [
@@ -116,105 +116,10 @@ export const firePlaybookArticle: LocalizedArticle = {
       },
     ],
   },
-  zh: {
-    articleTitle: { en: EN_TITLE, zh: '2026 FIRE 实战手册:安全提取率、Coast FIRE 与税优账户堆叠', es: 'El playbook FIRE 2026: tasas de retirada seguras, Coast FIRE y el apilado fiscal', de: 'Das FIRE-Playbook 2026: sichere Entnahmeraten, Coast FIRE und steuerbegünstigtes Stacking' },
-    breadcrumbTitle: { en: EN_CRUMB_TITLE, zh: EN_CRUMB_TITLE, es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
-    readMinutes: 12,
-    lead: 'FIRE 不是玄学梦想——它是一道只有三个变量的偿付方程:开销、组合、时间。本手册讲清 4% 法则的真实出处、Coast FIRE 捷径,以及决定你的目标数字被税收悄悄没收多少的账户堆叠顺序。',
-    sections: [
-      {
-        heading: '1. 4% 法则:Trinity 研究到底说了什么',
-        blocks: [
-          '1998 年的 Trinity 研究把股票+债券组合放回 1926 年以来每一个 30 年退休窗口回测,问:什么提取率能在几乎所有窗口活下来?答案约为**起始组合的 4%,之后每年随通胀微调**。取倒数就得到 FIRE 数字:**年开销 × 25**。',
-          '两个诚实的提醒。其一,4% 是*历史下限*而非保证——杀死计划的是回报序列风险(退休头几年撞上熊市),不是平均回报。其二,提前退休面对的是 40–60 年跨度而非 30 年;如今多数规划师对 45 岁前退休改用 **3.3–3.5%**,目标数字随之升到开销的 28–30 倍。',
-          {
-            card: {
-              title: 'FIRE 计算器',
-              href: '/tools/fire-calculator/',
-              desc: '由开销与提取率得出你的 FIRE 数字——并算出按当前轨迹哪一年触线。',
-            },
-          },
-        ],
-      },
-      {
-        heading: '2. Coast FIRE:更早改变一切的那个里程碑',
-        blocks: [
-          '完全 FIRE 意味着组合从明天起永远养你。**Coast FIRE** 更弱也更有用:已投资的资产在*零追加*的情况下,到传统退休年龄能自己滚到完整 FIRE 数字。到达 Coast 之后,你只需覆盖当下开销——可以降速换道、接那份有趣但低薪的工作,让复利替你跑完剩下的路。',
-          { code: CODE_FIRE },
-          '5% 实际回报、30 年跑道下,今天每投 $1,退休时就是 $4.32——这就是为什么 Coast FIRE 通常只有完整数字的 **20–30%**,是整个 FIRE 旅程中杠杆最高的检查点。',
-          {
-            card: {
-              title: '复利计算器',
-              href: '/tools/compound-interest-calculator/',
-              desc: '任意回报率下含定投的终值推演——把 Coast 组合送完剩下那段路的复利曲线。',
-            },
-          },
-        ],
-      },
-      {
-        heading: '3. 储蓄率是唯一重要的旋钮',
-        blocks: [
-          'FIRE 数学有个残酷的不对称性:提高储蓄率同时从两侧进攻——你投得更多,*而且*目标变小,因为开销定义了 FIRE 数字。10% 储蓄率对应约 50 年工龄;25% 约 32 年;50% 约 **17 年**;65% 不到 11 年。',
-          '这就是为什么这个运动紧盯住房、交通、食物三大件,而不是拿铁。每月砍掉 $1,000 经常性开销,既一年多投 $12,000,又让所需组合直接减少 **$300,000**。',
-        ],
-      },
-      {
-        heading: '4. 税优账户堆叠:操作顺序决定结局',
-        blocks: [
-          '储蓄相同的两个人,结局可能相差数年,差别只在钱进了*哪个账户*。基于证据的优先级队列:',
-          { list: [
-            '**401(k) 先拿满雇主匹配**——即时的 100% 回报,没有任何投资能与之竞争。',
-            '**HSA 健康储蓄账户**——三重税优(存入抵税、增长免税、医疗支取免税);65 岁后等同传统 IRA。',
-            '**Roth IRA**——现在缴税、永不再缴;几十年复利全额免税到账,且本金(非收益)可随时取出——是提前退休的隐形桥梁。',
-            '**401(k) 存到上限**——最后才是应税券商账户。',
-          ] },
-          'Roth 还是 Traditional,归结为一次比较:你今天的边际税率 vs 退休后的预期税率。高收入巅峰年?选 Traditional。职业早期,或计划在 FIRE 低收入年做 Roth 转换?选 Roth。',
-          {
-            card: {
-              title: 'Roth IRA 计算器',
-              href: '/tools/roth-ira-calculator/',
-              desc: '推演到退休的免税增长——并与同额供款的应税账户并排对比。',
-            },
-          },
-        ],
-      },
-      {
-        heading: '5. 序列风险与护栏:退休即遇熊市怎么办',
-        blocks: [
-          '平均回报完全相同的两位退休者可能结局相反:第 1–3 年撞熊市的那个会耗尽,第 25 年才撞的那个几乎无感。有实绩的缓释手段:持有 **1–2 年开销的现金**,永不卖在谷底;使用**弹性提取规则**(下跌年暂停通胀上调);脆弱的最初十年可辅以部分年金或债券帐篷(bond tent)。',
-          {
-            card: {
-              title: '退休计算器',
-              href: '/tools/retirement-calculator/',
-              desc: '养老金推演,含 4% 法则收入线——先压力测试你的计划,别等计划来压力测试你。',
-            },
-          },
-          {
-            card: {
-              title: 'ROI 计算器',
-              href: '/tools/roi-calculator/',
-              desc: '任何投资的年化回报——以上所有推演都依赖的这个诚实输入。',
-            },
-          },
-        ],
-      },
-      {
-        heading: '第一次实操,三十分钟',
-        blocks: [
-          { list: [
-            '算出真实年开销——记账比拍脑袋准 20–30%。',
-            '得出你的 **FIRE 数字**(×25;45 岁前退休用 ×30)。',
-            '得出你的 **Coast FIRE 数字**——它会早得让你吃惊。',
-            '先修好**账户顺序**再加钱——上面的队列就是免费午餐。',
-            '每年重跑一次。计划是活模型,不是纹身。',
-          ] },
-        ],
-      },
-    ],
-  },
+
   es: {
-    articleTitle: { en: EN_TITLE, zh: '2026 FIRE 实战手册:安全提取率、Coast FIRE 与税优账户堆叠', es: 'El playbook FIRE 2026: tasas de retirada seguras, Coast FIRE y el apilado fiscal', de: 'Das FIRE-Playbook 2026: sichere Entnahmeraten, Coast FIRE und steuerbegünstigtes Stacking' },
-    breadcrumbTitle: { en: EN_CRUMB_TITLE, zh: EN_CRUMB_TITLE, es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
+    articleTitle: { en: EN_TITLE,  es: 'El playbook FIRE 2026: tasas de retirada seguras, Coast FIRE y el apilado fiscal', de: 'Das FIRE-Playbook 2026: sichere Entnahmeraten, Coast FIRE und steuerbegünstigtes Stacking' },
+    breadcrumbTitle: { en: EN_CRUMB_TITLE,  es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
     readMinutes: 12,
     lead: 'FIRE no es una vibra — es una ecuación de solvencia con tres variables: tus gastos, tu cartera y el tiempo. Este playbook cubre el origen real de la regla del 4 %, el atajo de Coast FIRE y el orden de cuentas que decide cuánto de tu número se llevan los impuestos.',
     sections: [
@@ -309,8 +214,8 @@ export const firePlaybookArticle: LocalizedArticle = {
     ],
   },
   de: {
-    articleTitle: { en: EN_TITLE, zh: '2026 FIRE 实战手册:安全提取率、Coast FIRE 与税优账户堆叠', es: 'El playbook FIRE 2026: tasas de retirada seguras, Coast FIRE y el apilado fiscal', de: 'Das FIRE-Playbook 2026: sichere Entnahmeraten, Coast FIRE und steuerbegünstigtes Stacking' },
-    breadcrumbTitle: { en: EN_CRUMB_TITLE, zh: EN_CRUMB_TITLE, es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
+    articleTitle: { en: EN_TITLE,  es: 'El playbook FIRE 2026: tasas de retirada seguras, Coast FIRE y el apilado fiscal', de: 'Das FIRE-Playbook 2026: sichere Entnahmeraten, Coast FIRE und steuerbegünstigtes Stacking' },
+    breadcrumbTitle: { en: EN_CRUMB_TITLE,  es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
     readMinutes: 12,
     lead: 'FIRE ist kein Bauchgefühl-Traum — es ist eine Solvenz-Gleichung mit drei Variablen: Ausgaben, Portfolio und Zeit. Dieses Playbook deckt den echten Ursprung der 4-%-Regel, die Coast-FIRE-Abkürzung und die Konto-Reihenfolge ab, die entscheidet, wie viel deiner Zielzahl die Steuer still konfisziert.',
     sections: [

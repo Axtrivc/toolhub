@@ -5,7 +5,7 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * CryptoProfitCalculator 长文正文 —— 四语 dispatcher
+ * CryptoProfitCalculator 长文正文 —— 三语 dispatcher
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -22,19 +22,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>手续费是每笔交易的隐形税</h2>
-    <p>交易所按边收费,0.1% 的费率一个来回约 0.2%,还没算点差——冷门山寨币的点差往往远超费率表本身。30% 的价格波动净得 29.77%,这才是诚实的算术;若每边吃 0.5% 的 taker 费,高频小波段可能给交易所打工比自己赚得还多。</p>
-    <h2>反推你的出场价</h2>
-    <p>多数利润计算器停在"你赚了这么多"。进场前更有用的问题是反过来的:按我的仓位、入场价和费率档,要净赚 $1,000 得涨到什么价?这个数字由计算器直接给出,就是一张等待挂出的限价单——它把"希望"从出场计划里拿掉了。</p>
-    <h2>ROI 只对实际投入的本金诚实</h2>
-    <p>"我差点就投了"的基础上算收益率是经典自我安慰。ROI 应按实际投入的资金、扣完双边费用后计算,并对照你为此承担的风险。杠杆仓位还要加上每几小时一次的资金费率、爆仓风险,以及任何现货计算器都覆盖不了的损益结构。</p>
-    <h2>税务官也握着出场价的一角</h2>
-    <p>在美国和欧洲多数国家,把加密货币换回法币——或者花掉它、换成另一种代币——都构成处置,通常是应税事件。平仓的那一刻就该为收益预留税金;拖到四月再算,往往就是"盈利的一年变成痛苦的一年"的原因。从现在就登记你的批次,别等以后。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -64,7 +51,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function CryptoProfitCalculatorContent(): ReactNode {
   const { locale } = useApp()

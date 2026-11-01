@@ -52,34 +52,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具?</h2>
-    <p>
-      现代 CSS 使用 <code>rem</code> 和 <code>em</code> 而非像素,使布局能随用户的字号偏好缩放。但心算把 <code>px</code> 换算成 <code>rem</code> 很容易出错 —— 你得除以根字号,而它不一定恰好是 16px。本工具可即时完成换算,并为日常使用的尺寸提供一张实时表格。
-    </p>
-    <div>
-      <h2>rem 与 em —— 该用哪一个</h2>
-      <p>
-        <code>rem</code>(root em)始终相对于 <code>&lt;html&gt;</code> 元素的字号,因此处处可预测、一致 —— 非常适合布局、间距和基础字号。<code>em</code> 则相对于最近的父级元素字号,因此在嵌套元素中会逐级叠加。在应随自身文字缩放的组件内部(如按钮的内边距随标签增大),用 <code>em</code> 处理内边距和外边距。其余情况优先用 <code>rem</code>。
-      </p>
-    </div>
-    <div>
-      <h2>根字号的小技巧</h2>
-      <p>
-        许多团队会设置 <code>html {'{'} font-size: 62.5% {'}'}</code>,使根字号变为 10px,且{' '}
-        <code>1rem = 10px</code> —— 让心算变得简单(<code>1.6rem = 16px</code>)。如果你的项目采用这种做法,请把这里的根字号改为 10px,以保持换算一致。否则就保持 16px(浏览器默认值)。务必在 DevTools 中对照 <code>html</code> 元素的计算样式进行核对。
-      </p>
-    </div>
-    <div>
-      <h2>为什么仍然会出现像素值</h2>
-      <p>
-        某些场景(设计规范、Figma 导出、浏览器 DevTools)以像素为单位。把这些 <code>px</code> 值换算为 <code>rem</code>,既保持样式表的可缩放性,又符合设计师的意图。本工具的表格覆盖常用尺寸(8、12、16、20、24、32、40、48……),让你无需计算器就能复制到合适的值。
-      </p>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -141,7 +113,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function PxToRemContent(): ReactNode {
   const { locale } = useApp()

@@ -5,34 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const randomNumberGeneratorL10n: ToolL10n = {
-  zh: {
-    ui: {
-      'cantPickUniqueError': '⚠️ 无法从 {range} 个数的范围中选出 {limit} 个不重复的数',
-      'countAtLeastOneError': '⚠️ 个数至少为 1',
-      'countIntegerError': '⚠️ 个数必须是整数',
-      'countMaxError': '⚠️ 个数上限为 1000',
-      'clickGenerateHint': '点击「生成」即可生成随机数',
-      'generate': '🎲 生成',
-      'howMany': '生成个数',
-      'invalidNumbersError': '⚠️ 请为最小值、最大值和个数输入有效数字',
-      'max': '最大值',
-      'min': '最小值',
-      'minLteMaxError': '⚠️ 最小值必须 ≤ 最大值',
-      'noRepeats': '不重复(唯一数字)',
-    },
-    useCases: [
-      '公平抽出比赛或抽奖的中奖者',
-      '生成彩票号码组合',
-      '随机选择学生或分组',
-      '运行蒙特卡洛模拟',
-    ],
-    faqs: [
-      { q: '可以用于正式彩票或博彩吗?', a: '日常休闲可以。但受监管的博彩或正式彩票需要经过认证的硬件随机数发生器。本工具适合办公室抽奖、课堂点名和模拟使用。' },
-      { q: '「不重复」选项是什么意思?', a: '勾选后相当于不放回抽样:比如从 1–33 中抽 6 个不会出现重复,和彩票选号同一逻辑(双色球红球即 33 选 6)。不勾选则每次抽取相互独立,可能出现重复,适合模拟掷骰。' },
-      { q: '一次最多生成多少个?', a: '单次上限 1000 个,超出请分批。想验证分布是否均匀,可以生成 1000 个 1–6 的随机数,每个值应出现约 167 次。' },
-      { q: '办公室抽奖怎么做才公平?', a: '投屏操作:给每位参与者编号,输入 1–N 范围,勾选「不重复」依次抽出中奖序号并当场记录。公平性来自公开可查的过程,而不是事后解释。' },
-    ],
-  },
+
   es: {
     ui: {
       'cantPickUniqueError': '⚠️ No se pueden elegir {limit} números únicos de un rango de {range}',

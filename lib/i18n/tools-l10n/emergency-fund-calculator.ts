@@ -4,48 +4,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const EmergencyFundCalculatorL10n: ToolL10n = {
-  zh: {
-    useCases: [
-      '按 3/6/9/12 个月必要支出设定储备金目标',
-      '看现有储蓄能撑几个月失业',
-      '按每月定存算攒够目标要多久',
-      '失业风险高的自由职业者核定 9-12 个月安全线',
-    ],
-    faqs: [
-      { q: '到底需要几个月的储备金?', a: '双职工且工作稳定 3 个月够用;单职工或行业波动大是 6 个月;自由职业、销售提成与季节性工作者应按 9-12 个月准备——储备金要桥接的是整个淡季,而不只是失业的头一个月。' },
-      { q: '什么算「必要支出」?', a: '必须支付的项目:房租或房贷、吃饭、水电燃气、保险费、债务最低还款、以及让你能继续上班的托育。外出就餐和订阅服务是真正的紧急状况里最先被砍掉的,不算。' },
-      { q: '这笔钱放在哪里?', a: '高收益储蓄账户或货币基金:当日可取、没有波动。放进股市就失去意义——市场完全可能在你失业的那个季度跌 30%。' },
-      { q: '有信用卡欠款还先攒钱吗?', a: '先攒 1 个月的小额缓冲,然后全力还卡:还掉 20%+ 年利率的卡债等于稳赚 20%,任何存款利率都比不了;卡清了再把储备金补满。' },
-    ],
-    ui: {
-      'in.monthlyExpenses': '每月必要支出',
-      'in.currentSavings': '现有应急储蓄',
-      'in.monthlySave': '每月可存入',
-      'in.targetMonths': '目标月数',
-      'inSuffix.monthlyExpenses': '$',
-      'inSuffix.currentSavings': '$',
-      'inSuffix.monthlySave': '$',
-      'opt.targetMonths.3': '3',
-      'opt.targetMonths.6': '6',
-      'opt.targetMonths.9': '9',
-      'opt.targetMonths.12': '12',
-      'out.target': '目标储备金',
-      'out.gap': '还差',
-      'out.monthsToGoal': '攒够所需月数',
-      'out.coverage': '当前可覆盖',
-      'out.progress': '已完成',
-      'preset.0': '单收入刚起步',
-      'preset.1': '自由职业安全线',
-      'preset.2': '接近达标',
-      'errInvalid': '月支出须为正,储蓄与月存不能为负',
-      'never': '永远到不了——每月存入为 $0',
-      'funded': '已达标 ✓',
-      'chartTitle': '通往全额储备金之路',
-      'line.balance': '储蓄余额',
-      'line.target': '目标线',
-      'note': '🛟 双职工稳定 3 个月、单职工 6 个月、自由职业与季节性收入 9-12 个月。只算必须支付项——房租、吃饭、水电、保险、债务最低还款——并把钱放进高收益活期储蓄,而不是市场。',
-    },
-  },
+
   es: {
     useCases: [
       'fijar el objetivo según 3/6/9/12 meses de gastos esenciales',

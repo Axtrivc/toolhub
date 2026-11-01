@@ -5,7 +5,7 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * BreadHydrationCalculator 长文正文 —— 四语 dispatcher
+ * BreadHydrationCalculator 长文正文 —— 三语 dispatcher
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -22,19 +22,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>水合度只相对面粉而言</h2>
-    <p>烘焙百分比里面粉永远是 100%,水合度 = 水 ÷ 粉。500 克粉配 350 克水就是 70%,与批量无关——这正是其意义所在:配方靠乘法缩放,不用重推。盐、酵种和所有辅料都用同一套表达。</p>
-    <h2>你的酵种里藏着面粉和水</h2>
-    <p>100% 水合的液种按重量就是一半粉一半水:100 克贡献 50 克粉 + 50 克水。无视这一点,高酵种量的面团会被误判得偏干。有效水合度——(水 + 种中水)÷(粉 + 种中粉)——才是手上的真实触感;硬种(50-60%)拉低它,液态种(125%)推高它。</p>
-    <h2>各水合段位烤出来什么样</h2>
-    <p>55-60% 是贝果与三明治吐司,面团自己成型;65-70% 是友好的工匠区间——气孔够开、面团仍保张力;75-80% 进入乡村欧包与佛卡夏,揉面让位给叠抱面;85% 以上(夏巴塔、部分杜兰小麦面包)与其说是面团不如说是面糊,需要耐心、油和刮板。</p>
-    <h2>同一个配方为什么手感不同</h2>
-    <p>面粉并不等价:12-14% 蛋白的面包粉比中筋多吸好几个百分点的水,现磨全麦更甚——同样标"70%",全麦那缸会明显偏硬。把水合度当起点刻度,按手感微调,并记录有效的那组数字:离开具体面粉,这个数没有意义。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -64,7 +51,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function BreadHydrationCalculatorContent(): ReactNode {
   const { locale } = useApp()

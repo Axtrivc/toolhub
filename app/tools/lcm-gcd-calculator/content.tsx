@@ -61,52 +61,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这个工具是什么?</h2>
-    <p>
-      这个计算器可以求任意一组正整数的 <strong>GCD</strong>(最大公约数)和 <strong>LCM</strong>(最小公倍数)。它们是数论中的基本概念,在数学和编程中都有实际用途。
-    </p>
-
-    <div>
-      <h2>GCD 和 LCM 是什么</h2>
-      <ul>
-        <li>
-          <strong>GCD</strong> 是能整除所有输入的最大数。对于 12 和 18,就是 6(两者都能被 1、2、3 和 6 整除——而 6 是其中最大的)。
-        </li>
-        <li>
-          <strong>LCM</strong> 是所有输入都能整除它的最小数。对于 4 和 6,就是 12(能同时被两者整除的最小数)。
-        </li>
-      </ul>
-    </div>
-
-    <div>
-      <h2>实际用途</h2>
-      <ul>
-        <li>
-          <strong>分数加法:</strong> 分母的 LCM 给出公分母
-        </li>
-        <li>
-          <strong>排程:</strong> 如果事件 A 每 4 天发生一次,B 每 6 天一次,它们每 LCM(4,6) = 12 天重合一次
-        </li>
-        <li>
-          <strong>铺砖图案:</strong> 找出能正好铺满矩形地面的最大正方形瓷砖
-        </li>
-        <li>
-          <strong>密码学:</strong> GCD 是 RSA 算法的基础
-        </li>
-      </ul>
-    </div>
-
-    <div>
-      <h2>两者之间的关系</h2>
-      <p>
-        对于任意两个数:<code>GCD(a,b) × LCM(a,b) = a × b</code>。所以只要知道其中一个,就能立即算出另一个。本计算器使用高效的欧几里得算法,即使对非常大的数也适用。
-      </p>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -220,7 +174,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function LCMGcdCalculatorContent(): ReactNode {
   const { locale } = useApp()

@@ -5,19 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const jsonFormatterL10n: ToolL10n = {
-  zh: {
-    ui: {
-      inputTooLarge: '⚠️ 输入过大——支持规模最多 20 万字符。请裁剪输入后再计算。',
-      defaultInput: '{"姓名":"张三","年龄":30,"城市":"北京","技能":["js","css"]}',
-      inputLabel: 'JSON(原始或压缩)',
-      outputLabel: '格式化后的 JSON',
-      note: '🔧 用 2 空格缩进格式化并美化 JSON。会校验语法——出错时显示提示。',
-    },
-    useCases: ['调试 API 返回的 JSON 数据', '阅读和整理配置文件', '在开发阶段审查大型数据载荷', '部署前排查 JSON 语法错误'],
-    faqs: [
-      { q: 'JSON、JSON5 和 JSONC 有什么区别?', a: '标准 JSON 非常严格。JSON5 允许注释、尾随逗号和不加引号的键。JSONC 是带注释的 JSON(VS Code 在用)。本工具期望标准 JSON。' },
-    ],
-  },
+
   es: {
     ui: {
       inputTooLarge: '⚠️ Entrada demasiado grande: el tamaño admitido es de hasta 200 000 caracteres. Recorta la entrada para calcular.',

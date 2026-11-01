@@ -5,7 +5,7 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * WindChillCalculator 长文正文 —— 四语 dispatcher
+ * WindChillCalculator 长文正文 —— 三语 dispatcher
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -22,19 +22,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>一个公式,两家气象机构</h2>
-    <p>天气 App 上的体感数字来自 JAG/TI 公式,由加拿大环境部与美国国家气象局于 2001 年联合启用:W = 13.12 + 0.6215T − 11.37·V^0.16 + 0.3965·T·V^0.16,T 为 °C、V 为 km/h。它取代了在高风速下高估散热的老式 Siple-Passel 模型。公制与英制两个版本代数等价——代入 −5°C、30 km/h,都得到 −13。</p>
-    <h2>为什么风速带指数</h2>
-    <p>风会不断掀走贴在皮肤表面的那层薄暖气毯,但每多 1 km/h 偷走的热量都比上一次少——所以是 V^0.16。从无风到 10 km/h 是断崖;从 50 到 60 在图上几乎看不出来。这条迅速变平的曲线,正是预报员强调"头 20 km/h 风速"远胜过其后全部的原因。</p>
-    <h2>公式诚实的边界</h2>
-    <p>JAG/TI 只在气温 ≤ 10°C 且风速高于 4.8 km/h(3 mph)时有定义。低于风速门槛时,贴身气层并未被破坏,身体自身的对流占主导——风寒无从谈起。高于 10°C,湿度和热度接管,该换湿热指数。计算器对越界输入仍会算,但明确标注——外推出来的数字,误导多于参考。</p>
-    <h2>这个数字到底在说什么</h2>
-    <p>风寒本质是"速率",借温度的语言表达:它说热量离开裸露皮肤的速度,相当于无风 −13°C 时的水平——它不会把水或发动机冻到气温以下,那是流传最久的误解。冻伤时间表跟的是风寒而非气温:风寒 −28 时裸露皮肤约 30 分钟可冻伤;−48 时不到 10 分钟。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -64,7 +51,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function WindChillCalculatorContent(): ReactNode {
   const { locale } = useApp()

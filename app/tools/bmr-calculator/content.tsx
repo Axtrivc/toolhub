@@ -51,48 +51,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这个工具是什么?</h2>
-    <p>
-      <strong>BMR</strong>(基础代谢率)是你的身体在完全静息状态下、仅为维持生命所消耗的卡路里——呼吸、血液循环、维持体温。它占你每天消耗卡路里的 60-75%。
-    </p>
-
-    <div>
-      <h2>Mifflin-St Jeor 公式</h2>
-      <p>本计算器使用最准确的现代公式:</p>
-    </div>
-
-    <div>
-      <h2>影响 BMR 的因素</h2>
-      <ul>
-        <li>
-          <strong>肌肉量</strong>——即使在静息时,肌肉也比脂肪消耗更多
-        </li>
-        <li>
-          <strong>年龄</strong>——20 岁之后,BMR 每十年大约下降 2%
-        </li>
-        <li>
-          <strong>性别</strong>——由于肌肉更多,男性的 BMR 通常更高
-        </li>
-        <li>
-          <strong>体型</strong>——体型越大,消耗的卡路里越多
-        </li>
-        <li>
-          <strong>基因</strong>——有些人天生消耗更多或更少
-        </li>
-      </ul>
-    </div>
-
-    <div>
-      <h2>BMR 与 TDEE</h2>
-      <p>
-        BMR 是<em>完全静息</em>状态下的卡路里消耗。你实际的每日消耗(TDEE)是 BMR 乘以一个活动系数。即使是轻度活动,也会在 BMR 基础上增加 20-40%。如果你想知道完整的每日消耗,请使用卡路里计算器。
-      </p>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -191,7 +149,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function BMRCalculatorContent(): ReactNode {
   const { locale } = useApp()

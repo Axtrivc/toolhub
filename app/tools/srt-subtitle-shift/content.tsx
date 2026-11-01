@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * SRT Subtitle Shift 长文正文 —— 四语 dispatcher
+ * SRT Subtitle Shift 长文正文 —— 三语 dispatcher
  *
- * en 分支等价于原 ToolContent 渲染输出。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支等价于原 ToolContent 渲染输出。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en (与改造前渲染输出一致) ────────────────────────────
@@ -58,36 +58,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具？</h2>
-    <p>
-      一个 <strong>SRT 字幕平移器</strong>，把字幕文件中的每条字幕（cue）按固定的秒数向前或向后移动——这是修复字幕与视频不同步的经典办法。粘贴你的 SRT 文本，或上传一个 <code>.srt</code> 文件，设置一个偏移量（例如 <code>-2.5</code>），然后下载修正后的文件。它还能清理格式标签并重新编号字幕。所有处理 100% 在浏览器中完成。
-    </p>
-
-    <div>
-      <h2>平移是如何工作的</h2>
-      <p>
-        每条字幕的时间戳（<code>HH:MM:SS,mmm --&gt; HH:MM:SS,mmm</code>）会被换算成整数毫秒，加上偏移量后，再以补零格式写回——没有浮点漂移，也没有舍入意外。正偏移会让字幕延后（文字出现太早时使用）；像 <code>-1.75</code> 这样的负值会让字幕提前。当平移把某条字幕推到零以下时，<strong>钳制</strong>（clamp）选项会把它固定在 <code>00:00:00,000</code>，而不是写出无效的负时间戳，并且工具会告诉你有多少条字幕被钳制。
-      </p>
-    </div>
-
-    <div>
-      <h2>容错的解析，安全的重新编号</h2>
-      <p>
-        真实的 SRT 文件很乱：Windows <code>CRLF</code> 行尾、缺失或重复的索引号、零散的空行。解析器会把这些都处理好——字幕索引是可选的，任何没有有效时间戳行的块都会被跳过并报告为解析错误，绝不会悄无声息地被破坏。开启 <strong>重新编号字幕</strong>（默认），即可写出干净的连续索引，这是某些严格播放器的要求。
-      </p>
-    </div>
-
-    <div>
-      <h2>剥离格式与音乐符号</h2>
-      <p>
-        字幕文件常常带有播放器用不了的样式：<code>&lt;i&gt;</code>、<code>&lt;b&gt;</code> 和 <code>&lt;font&gt;</code> HTML 标签，ASS 覆盖块（如 <code>{'{\\an8}'}</code>），以及音乐字幕周围的 ♪ 标记。<strong>剥离格式</strong> 选项会把这些全部移除，并清理残留的空白，给你一条干净的纯文本字幕轨。小提示：先平移，用一两句对白核对同步，再下载——整文件平移比逐条字幕编辑高效得多。
-      </p>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -151,7 +121,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function SrtSubtitleShiftContent(): ReactNode {
   const { locale } = useApp()

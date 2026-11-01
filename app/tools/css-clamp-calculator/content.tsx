@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * CSS Clamp Calculator 长文正文 —— 四语 dispatcher
+ * CSS Clamp Calculator 长文正文 —— 三语 dispatcher
  *
- * en 分支等价于原 ToolContent 渲染输出。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支等价于原 ToolContent 渲染输出。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en (与改造前渲染输出一致) ────────────────────────────
@@ -60,43 +60,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具？</h2>
-    <p>
-      <strong>流式排版（fluid typography）</strong>会随视口平滑缩放，而不是在断点处跳变。现代做法只需一行 CSS ——{' '}
-      <code>clamp(min, preferred, max)</code> —— 但手算 <code>vw</code> 斜率和 <code>rem</code> 截距很容易出错。本计算器替你完成代数运算：输入最小、最大字号以及它们适用的视口范围，即可得到可直接复制的{' '}
-      <code>clamp()</code> 声明，外加一张常用视口下精确渲染尺寸的对照表。
-    </p>
-
-    <div>
-      <h2>公式的工作原理</h2>
-      <p>
-        在两个视口点之间，字号沿一条直线变化：<code>slope = (maxFont − minFont) / (maxViewport − minViewport) × 100</code>，单位为{' '}
-        <code>vw</code>；截距 <code>intercept = minFont − slope × minViewport / 100</code>，单位为 px。中间的偏好值{' '}
-        <code>intercept + slope × vw</code> 负责缩放，再由 <code>clamp()</code> 确保结果不会在小屏手机上低于最小值，也不会在宽屏显示器上超过最大值。对照表会清楚显示「缩放」区在哪里结束、clamp 从哪里开始。
-      </p>
-    </div>
-
-    <div>
-      <h2>为可访问性优先使用 rem</h2>
-      <p>
-        浏览器允许用户设置默认字号，而用 <code>px</code> 声明的尺寸会忽略这一偏好。本工具输出以 <strong>rem</strong>{' '}
-        为单位的 clamp（默认根字号 16px），使整套字号都尊重用户的缩放偏好。与视口相关的部分仍需要{' '}
-        <code>vw</code> —— 在偏好值中混用 <code>rem + vw</code> 正是 <code>clamp()</code> 的标准用法，既保证缩放又兼顾可访问性。
-      </p>
-    </div>
-
-    <div>
-      <h2>选择合理的范围</h2>
-      <p>
-        正文的一个常见起点是「375px 手机上 16px，到 1440px 桌面上 18–20px」；标题则能容忍宽得多的范围，例如 28px → 48px。要避免斜率过陡导致文字在平板上过度膨胀——可在表中查看{' '}
-        <code>768px</code> 处的计算尺寸。还要记住：这里设定的是 <em>视口</em> 范围而非设备范围，用户调整桌面窗口大小时会遍历整段缩放，所以要让中间每个宽度都保持流畅舒适。
-      </p>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -182,7 +145,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function CssClampCalculatorContent(): ReactNode {
   const { locale } = useApp()

@@ -5,32 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const ReadingLevelCheckerL10n: ToolL10n = {
-  zh: {
-    useCases: ['检查文案是否通俗易懂', '把文章难度控制在目标年级', '找出过长的句子并拆分', '对比改写前后的可读性变化'],
-    faqs: [
-      { q: '用的是哪些公式?', a: 'Flesch 阅读容易度(206.835 − 1.015 × 每句词数 − 84.6 × 每词音节)和 Flesch-Kincaid 年级水平——与文字处理软件用的是同一对。全部在本地根据你的文本计算,不上传任何内容。' },
-      { q: '应该以多少分为目标?', a: '一般网页文案瞄准 60-70 的容易度,大致相当于 8-9 年级。法律和学术文本落在 30-50 属正常。当最长句子超过 25 词时,工具会提示拆分——句长是最容易动的杠杆。' },
-      { q: '音节是怎么数的?', a: '用标准的英文元音组启发式:短词记 1 个音节;长词先去掉 -e、-ed 等静音结尾再按元音组计数。对多数单词准确,对不规则词可能差 1——整段评分能消化这点误差。' },
-    ],
-    ui: {
-      'avgSentenceLen': '平均句长',
-      'easeDifficult': '难 — 大学水平',
-      'easeEasy': '容易 — 6 年级',
-      'easeFairlyEasy': '较容易 — 7 年级',
-      'easeFairlyHard': '较难 — 10-12 年级',
-      'easeStandard': '标准 — 8-9 年级',
-      'easeVeryEasy': '非常容易 — 5 年级',
-      'easeVeryHard': '非常晦涩 — 研究生水平',
-      'fkGrade': 'Flesch-Kincaid 年级',
-      'fleschEase': 'Flesch 易读度',
-      'inputLabel': '粘贴文本',
-      'longestSentenceHint': '最长一句有 {n} 个词——建议拆分。',
-      'note': '📖 公式完全离线运行:Flesch 易读度 = 206.835 − 1.015 × 词/句 − 84.6 × 音节/词。通用网文目标 60-70;法律学术文本低是正常的。',
-      'placeholder': '请粘贴至少三句话以获得有意义的评分…',
-      'wordsSentences': '词数 / 句数',
-      'wordsUnit': '词',
-    },
-  },
+
   es: {
     useCases: ['comprobar si un texto se entiende fácil', 'ajustar la dificultad al curso objetivo', 'localizar frases demasiado largas y partirlas', 'comparar la legibilidad antes y después de editar'],
     faqs: [

@@ -5,34 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const salaryConverterL10n: ToolL10n = {
-  zh: {
-    formula: {
-      formula: 'Annual = hourly × 2080\nMonthly = annual / 12',
-      variables:
-        'Annual = 税前年薪($)\nhourly = 时薪($/小时)\n2080 = 每年工作小时数(40 小时/周 × 52 周)\nMonthly = 税前月薪($)',
-      explain: '在时薪、周薪、月薪和年薪之间换算。假设每年工作 2,080 小时(40 h × 52 周);可按不同工作安排调整工时。',
-      example:
-        '第 1 步:hourly = $25.00。\n第 2 步:Annual = 25 × 2080 = $52,000。\n第 3 步:Monthly = 52,000 / 12 ≈ $4,333.33。\n第 4 步:交叉验证:weekly = 25 × 40 = $1,000,biweekly = $2,000。\n结果:$25/小时 约等于每年 $52,000,或每月 $4,333.33(税前,未计扣除)。',
-    },
-    useCases: ['比较以不同方式报价(年薪/月薪/时薪)的工作机会', '把兼职或合同工时薪换算成年收入', '搞清双周薪和半月薪的区别', '做预算时在年薪、月薪、时薪之间换算'],
-    faqs: [
-      { q: '全职一年有多少工时?', a: '美国标准全职一年为 2,080 工时(每周 40 小时 × 52 周)。本工具显示的时薪即以此为基础,再按你输入的每周工时折算。' },
-      { q: '结果包含税费和福利吗?', a: '不包含。这些都是税前总额(gross)换算。你的实际到手收入取决于联邦和州所得税、社保、医保、退休缴款及福利扣款。' },
-    ],
-    ui: {
-      'chartTitle': '发薪周期阶梯',
-      'cmp.0': '每月',
-      'cmp.1': '每两周',
-      'cmp.2': '每周',
-      'cmp.3': '每小时',
-      'cmpseg.0': '每期金额',
-      'in.unit': '我的工资按', 'in.amount': '金额', 'inSuffix.amount': '$', 'in.hours': '每周工时',
-      'opt.unit.annual': '年薪', 'opt.unit.monthly': '月薪', 'opt.unit.semimonthly': '半月薪', 'opt.unit.biweekly': '双周薪', 'opt.unit.weekly': '周薪', 'opt.unit.hourly': '时薪',
-      'out.annual': '年薪', 'out.monthly': '月薪', 'out.semimonthly': '半月薪', 'out.biweekly': '双周薪', 'out.weekly': '周薪', 'out.hourly': '时薪',
-      errNonNegative: '金额不能为负',
-      note: '💵 按每年 12 次月薪、24 次半月薪、26 次双周薪、52 个带薪周计算。加班和奖金不计入。',
-    },
-  },
+
   es: {
     formula: {
       formula: 'Annual = hourly × 2080\nMonthly = annual / 12',

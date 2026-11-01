@@ -5,40 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const pxToRemL10n: ToolL10n = {
-  zh: {
-    ui: {
-      'livePreview': '实时字号预览',
-      'sizeBarHeader': '尺寸',
-      'commonSizesPrefix': '常用尺寸(root =',
-      'emParentRoot': 'em(父级 = 根字号)',
-      'emParentRootHeader': 'EM(父级 = 根字号)',
-      'noteText': '🔒 100% 在客户端——所有换算都在本地完成。',
-      'pxToRemHeading': 'PX → REM / EM',
-      'pxValueAriaLabel': '像素值',
-      'remToPxHeading': 'REM → PX',
-      'remValueAriaLabel': 'REM 值',
-      'rootFontSize': '根字号',
-    },
-    formula: {
-      formula: 'rem = px / root font size (px)',
-      variables:
-        'px: 像素长度(px)\nroot font size: html 元素的字号,默认为 16 px\nrem: rem 单位的长度',
-      explain: '把像素换算成相对根字号的 rem(默认 16 px)。rem 会随用户字号设置缩放,因此是排版与间距的无障碍单位。',
-      example:
-        '第 1 步:以默认根字号 16 px 换算 24 px。\n第 2 步:rem = 24 / 16 = 1.5。\n结果:24 px = 1.5 rem。',
-    },
-    useCases: [
-      '把 Figma 标注的 px 值转成 rem',
-      '搭建随用户字号缩放的自适应布局',
-      '配合 62.5% 根字号技巧简化心算',
-      '对照常用断点快速查表换算',
-    ],
-    faqs: [
-      { q: '根字号应该设为多少？', a: '浏览器默认是 16px,大多数 CSS reset 也以此为前提。如果你的设计设了 html { font-size: 62.5% }(即 10px),让 1rem = 10px 方便心算,就把这里的根字号改成 10px 以保持一致。rem 始终等于 px ÷ 根字号。' },
-      { q: 'rem 和 em 有什么区别？', a: 'rem 相对于根(html)元素的字号,因此在任何位置都保持一致。em 相对于最近的父元素字号,在嵌套元素中会层层叠加。需要可预测的布局间距和字号时用 rem;需要组件内部随自身文字缩放的内外边距时用 em。' },
-      { q: '为什么浏览器里的 rem 值看起来不对？', a: '最常见的原因是根字号不是 16px——某个 reset、媒体查询或用户的浏览器设置可能改动了它。在开发者工具中检查 html 元素的计算字号,把那个精确值填到这里。rem 始终按实际的根字号计算,而不是按定义取 16px。' },
-    ],
-  },
+
   es: {
     ui: {
       'livePreview': 'Vista previa de tamaño',

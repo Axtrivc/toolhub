@@ -20,8 +20,8 @@ const EN_CRUMB_TITLE = 'HYSA vs CD Cash Strategy'
 
 export const cashAllocationGuideArticle: LocalizedArticle = {
   en: {
-    articleTitle: { en: EN_TITLE, zh: 'HYSA vs. CD vs. 货币基金:2026 年的最优现金分层策略', es: 'HYSA vs. CD vs. mercado monetario: la estrategia óptima de asignación de efectivo para 2026', de: 'HYSA vs. CD vs. Geldmarktfonds: die optimale Cash-Allokationsstrategie für 2026' },
-    breadcrumbTitle: { en: EN_CRUMB_TITLE, zh: EN_CRUMB_TITLE, es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
+    articleTitle: { en: EN_TITLE,  es: 'HYSA vs. CD vs. mercado monetario: la estrategia óptima de asignación de efectivo para 2026', de: 'HYSA vs. CD vs. Geldmarktfonds: die optimale Cash-Allokationsstrategie für 2026' },
+    breadcrumbTitle: { en: EN_CRUMB_TITLE,  es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
     readMinutes: 5,
     lead: 'Cash is no longer the idle zero-yield asset it was in 2015 — but only if you park it in the right vehicle. HYSA, CDs, and money market funds price the same dollar three different ways. Here is the 2026 allocation logic, with the math to back each rung.',
     sections: [
@@ -124,114 +124,10 @@ export const cashAllocationGuideArticle: LocalizedArticle = {
       },
     ],
   },
-  zh: {
-    articleTitle: { en: EN_TITLE, zh: 'HYSA vs. CD vs. 货币基金:2026 年的最优现金分层策略', es: 'HYSA vs. CD vs. mercado monetario: la estrategia óptima de asignación de efectivo para 2026', de: 'HYSA vs. CD vs. Geldmarktfonds: die optimale Cash-Allokationsstrategie für 2026' },
-    breadcrumbTitle: { en: EN_CRUMB_TITLE, zh: EN_CRUMB_TITLE, es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
-    readMinutes: 5,
-    lead: '现金不再是 2015 年那种零收益的闲置资产——前提是停对地方。HYSA、CD 存单、货币基金把同一块钱定出三种价格。本文给出 2026 年的现金分层逻辑,每一层都配数学依据。',
-    sections: [
-      {
-        heading: '1. 同一块钱,三种定价',
-        blocks: [
-          '三种工具都安全、无聊、且受存款保险(或近似)保护。真正不同的是你做的那笔交易:',
-          { list: [
-            '**HYSA 高息储蓄**——浮动利率、随存随取,利率跟着央行走。你拿利率确定性换流动性。',
-            '**CD 定期存单**——固定利率、锁定期限,提前支取罚 3–12 个月利息。你拿流动性换确定性。',
-            '**货币市场基金**——收益跟踪短期国债,部分支持开支票,不受 FDIC 保险但持有政府债券。你拿担保换收益。',
-          ] },
-          '错误在于把它们当竞争对手。它们是*分层*:各自回答"这笔钱什么时候要用"的不同答案。',
-        ],
-      },
-      {
-        heading: '2. APY 与 APR:只比那个含复利的数',
-        blocks: [
-          '银行对哪个产品就报哪个显大的数。APR 是名义年利率,APY 把复利折进去。名义 4.40% 按日复利实际是 4.498%——5 万美元余额,这点差距每年白赚一顿好饭,零额外风险。',
-          { code: CODE_APY },
-          '两个都标 4.4% 的账户,一个日复利一个月复利,实际并不相等。比较之前一律换算成 APY,且只拿 APY 比 APY。',
-          {
-            card: {
-              title: 'APY 计算器',
-              href: '/tools/apy-calculator/',
-              desc: '任意计息频率下把 APR 换算成 APY——用你银行报的利率跑一遍本节这步换算。',
-            },
-          },
-          {
-            card: {
-              title: '复利计算器',
-              href: '/tools/compound-interest-calculator/',
-              desc: '用你的真实余额看复利频率如何改变结局——本金投入与利息增长逐年对照。',
-            },
-          },
-        ],
-      },
-      {
-        heading: '3. HYSA 层:会干活的应急金',
-        blocks: [
-          '应急基金只有一个职责:本周内全额可用。这就排除了股票、锁定和罚金——恰好是 HYSA 的形态,等待期间还付 4%+ 的 APY。3 万美元应急金按 4.4% 每年赚 **$1,320**;放在传统大行的 0.01%,一年 **$3**。换银行只要一个下午。',
-          '代价是 HYSA 利率*浮动*:央行降息,你的 APY 几周内跟随。任何预测都只是快照,每次议息后重跑一遍,绝不要用今天的 HYSA 利率做多年规划。',
-          {
-            card: {
-              title: 'HYSA 计算器',
-              href: '/tools/hysa-calculator/',
-              desc: '任意 APY + 每月定存的储蓄推演——并看看降息一次实际让你少赚多少。',
-            },
-          },
-          {
-            card: {
-              title: '储蓄目标计算器',
-              href: '/tools/savings-goal-calculator/',
-              desc: '应急金还没攒够?算出按固定日期达标所需的每月存款。',
-            },
-          },
-        ],
-      },
-      {
-        heading: '4. CD 层:卖出你用不到的流动性',
-        blocks: [
-          'CD 是一份合同:银行付你固定利率,你交出访问权。它因此天然适合*日期确定*的钱——18 个月后的首付、3 年后的学费。你不是"把钱锁死",而是在卖出一个你本来就不会行使的期权。',
-          '专业结构是 **CD 阶梯**:4 万美元拆成 4 笔 1 万,分别存 1、2、3、4 年期。每年有一档到期——要么用掉,要么滚成新的 4 年期放在顶端。首轮之后,你手里全是长期利率,但每 12 个月都有四分之一解禁。阶梯把流动性罚金变成了一张时间表。',
-          '进场前先看清退出价:提前支取罚金为 3–12 个月利息。2 年期 CD 存到第 6 个月提前支取,6 个月罚金可能吃掉全部已赚利息。日期不确定的钱,永远不要进阶梯。',
-          {
-            card: {
-              title: 'CD 存单计算器',
-              href: '/tools/cd-calculator/',
-              desc: '固定利率复利增长——承诺现金之前,先建模试算每一级阶梯。',
-            },
-          },
-        ],
-      },
-      {
-        heading: '5. 隐形的税:实际利率 = 名义利率 − 通胀',
-        blocks: [
-          '通胀 3% 的年份里,4.5% 的 APY 只是 **1.5% 的实际收益**。对现金而言依然体面——但它重塑了决策:现金的职责是*选择权与稳定*,不是增长。超出应急金和既定开支的每一块现金,都应该回答:为什么不放在增值资产里?',
-          '自己算一遍:你的存款去年能买什么,今年能买什么?APY 与 CPI 之间的差,才是真正复利你购买力的收益率。',
-          {
-            card: {
-              title: '通胀计算器',
-              href: '/tools/inflation-calculator/',
-              desc: '把任何历史金额折算成今日购买力——看看你"安全"的现金真实回报是多少。',
-            },
-          },
-        ],
-      },
-      {
-        heading: '2026 现金堆栈,自下而上',
-        blocks: [
-          { list: [
-            '**活期缓冲**——一个月开销,收益无关紧要,摩擦为零。',
-            '**HYSA**——3–6 个月开销(应急金),加上约 12 个月内要用的钱。',
-            '**CD 阶梯**——1–5 年后有明确日期的目标:首付、学费、间隔年。',
-            '**货币基金**——决策之间的停车场:要收益,不要担保。',
-            '**其余全部**——没日期、非应急的钱,先回答"为什么还是现金"。',
-          ] },
-          '把各层加总:6 万美元现金,从传统大行的约 0.5% 混合收益变成结构化的约 4.3%——每年多拿约 **$2,300**,风险等级不变,只需一个周末的手续。',
-        ],
-      },
-    ],
-  },
+
   es: {
-    articleTitle: { en: EN_TITLE, zh: 'HYSA vs. CD vs. 货币基金:2026 年的最优现金分层策略', es: 'HYSA vs. CD vs. mercado monetario: la estrategia óptima de asignación de efectivo para 2026', de: 'HYSA vs. CD vs. Geldmarktfonds: die optimale Cash-Allokationsstrategie für 2026' },
-    breadcrumbTitle: { en: EN_CRUMB_TITLE, zh: EN_CRUMB_TITLE, es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
+    articleTitle: { en: EN_TITLE,  es: 'HYSA vs. CD vs. mercado monetario: la estrategia óptima de asignación de efectivo para 2026', de: 'HYSA vs. CD vs. Geldmarktfonds: die optimale Cash-Allokationsstrategie für 2026' },
+    breadcrumbTitle: { en: EN_CRUMB_TITLE,  es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
     readMinutes: 5,
     lead: 'El efectivo ya no es ese activo ocioso de rendimiento cero de 2015 — pero solo si lo aparcas en el vehículo correcto. HYSA, CD y fondos de mercado monetario ponen tres precios al mismo dólar. Esta es la lógica de asignación para 2026, con la matemática de cada peldaño.',
     sections: [
@@ -335,8 +231,8 @@ export const cashAllocationGuideArticle: LocalizedArticle = {
     ],
   },
   de: {
-    articleTitle: { en: EN_TITLE, zh: 'HYSA vs. CD vs. 货币基金:2026 年的最优现金分层策略', es: 'HYSA vs. CD vs. mercado monetario: la estrategia óptima de asignación de efectivo para 2026', de: 'HYSA vs. CD vs. Geldmarktfonds: die optimale Cash-Allokationsstrategie für 2026' },
-    breadcrumbTitle: { en: EN_CRUMB_TITLE, zh: EN_CRUMB_TITLE, es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
+    articleTitle: { en: EN_TITLE,  es: 'HYSA vs. CD vs. mercado monetario: la estrategia óptima de asignación de efectivo para 2026', de: 'HYSA vs. CD vs. Geldmarktfonds: die optimale Cash-Allokationsstrategie für 2026' },
+    breadcrumbTitle: { en: EN_CRUMB_TITLE,  es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
     readMinutes: 5,
     lead: 'Bargeld ist nicht mehr der renditelose Parkplatz von 2015 — aber nur, wenn es im richtigen Vehikel liegt. HYSA, CDs und Geldmarktfonds bepreisen denselben Dollar dreifach unterschiedlich. Hier die Allokationslogik für 2026, mit der Mathematik hinter jeder Stufe.',
     sections: [

@@ -5,10 +5,10 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * AmortizationTableGenerator 长文正文 —— 四语 dispatcher
+ * AmortizationTableGenerator 长文正文 —— 三语 dispatcher
  *
  * SEO 安全:SSR/预渲染时 locale 恒为 'en' → 渲染 en 分支(与改造前字节一致,
- * Google 索引不变)。zh/es/de 仅在客户端 hydration 后按 locale 切换。
+ * Google 索引不变)。es/de 仅在客户端 hydration 后按 locale 切换。
  * 缺失 locale → 回退 en。
  */
 
@@ -26,19 +26,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>如何读懂摊还计划表</h2>
-    <p>每期固定月供都会拆成利息(当前余额 × 月利率)和本金(其余部分)。以 $320k、6.5%、30 年的贷款为例,首月约 $1,733 付给利息,只有约 $289 偿还本金。</p>
-    <h2>本金反超利息的拐点</h2>
-    <p>本金要到还款期深处才会反超利息——4% 利率下大约在第 13 年(共 30 年),6.5% 下则接近第 20 年。正因这种不对称,早期的额外本金还款威力格外大——每多还 1 美元本金,都能省下它未来本会产生的全部利息。</p>
-    <h2>善用 CSV 导出</h2>
-    <p>下载明细表后用 Excel 或 Sheets 建模:加一列额外本金、中途调整月供金额,或按年统计利息支出。</p>
-    <h2>利率的影响极其巨大</h2>
-    <p>在 30 年期贷款上,利率相差 1 个百分点,总利息就会相差数万美元。在贷款机构或买点之间抉择前,务必把几张还款计划并排比较。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -68,7 +55,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function AmortizationTableGeneratorContent(): ReactNode {
   const { locale } = useApp()

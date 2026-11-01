@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * AsciiTable 长文正文 —— 四语 dispatcher
+ * AsciiTable 长文正文 —— 三语 dispatcher
  *
- * en 分支与改造前渲染输出一致。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支与改造前渲染输出一致。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -22,17 +22,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>读懂这张表</h2>
-    <p>每一行用十进制、十六进制、八进制和二进制展示同一个字符:65 = 0x41 = 01000001 = "A"——同一个值,四种记法。控制字符(0-31)不显示字形,而是标 CR、LF 这类标准缩写。</p>
-    <h2>值得背下来的行</h2>
-    <p>32 是空格,48-57 是数字 0-9,65-90 是大写 A-Z,97-122 是小写 a-z。大小写永远恰好相差 32——这正是"翻转大小写只需翻转一个比特"的原因。</p>
-    <h2>ASCII 之外</h2>
-    <p>ASCII 止于 127。现代系统用 UTF-8 编码文本,并与 ASCII 保持字节兼容——每个 ASCII 字符在 UTF-8 里原样不变——而 emoji 和带重音的字母则要占多个字节。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -58,7 +47,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function AsciiTableContent(): ReactNode {
   const { locale } = useApp()

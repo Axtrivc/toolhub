@@ -51,33 +51,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具?</h2>
-    <p>
-      一整坨压缩在一起的 SQL——从日志、查询计划或同事的 Slack 消息中复制而来——几乎无法阅读。本格式化工具会重新缩进查询,让每个子句独占一行,子查询和括号分组也会被缩进,并自动大写关键字。粘贴杂乱的 SQL,立刻得到可读的 SQL。
-    </p>
-    <div>
-      <h2>格式化是如何工作的</h2>
-      <p>
-        格式化工具会对查询进行分词(并尊重字符串字面量,因此字符串中的 <code>'WHERE'</code> 不会被误认为关键字),然后按子句逐个重新输出。顶层关键字如 <code>SELECT</code>、<code>FROM</code>、<code>WHERE</code>、<code>GROUP BY</code>、<code>ORDER BY</code>、<code>LIMIT</code>、<code>JOIN</code> 和 <code>ON</code> 都会另起一行;<code>SELECT</code> 之后的列和 <code>WHERE</code> 之后的条件会在每个逗号后换行。最终得到的是大多数团队在代码评审中使用的标准「vertical SQL」版式。
-      </p>
-    </div>
-    <div>
-      <h2>格式化与压缩</h2>
-      <p>
-        <strong>格式化</strong> 会展开查询以便人类阅读。<strong>压缩</strong> 则相反:它把空白和换行折叠成一行,这在需要把查询嵌入 JSON 载荷、URL 参数或日志行(换行会破坏外层格式)时很有用。两者可按需切换——它们都会精确保留字符串字面量。
-      </p>
-    </div>
-    <div>
-      <h2>方言与局限</h2>
-      <p>
-        本格式化工具面向通用 ANSI SQL,因此对日常查询来说,它在 MySQL、PostgreSQL、SQLite、SQL Server 和 Oracle 上都能工作。它并不深入理解各方言特有的过程化扩展(PL/pgSQL 块、T-SQL 变量、Oracle PL/SQL),因此深度嵌套的过程化代码可能无法完美缩进。它是一个 <em>格式化工具</em>,而不是校验器——它会愉快地重新缩进一个有语法错误的查询,因为它既不执行查询也不检查语法。如需校验,请把格式化输出放到你真实的数据库上运行。
-      </p>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -135,7 +108,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function SqlFormatterContent(): ReactNode {
   const { locale } = useApp()

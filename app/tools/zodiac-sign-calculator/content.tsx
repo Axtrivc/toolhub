@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * ZodiacSignCalculator 长文正文 —— 四语 dispatcher
+ * ZodiacSignCalculator 长文正文 —— 三语 dispatcher
  *
- * en 分支与站点既有渲染口径一致。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支与站点既有渲染口径一致。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -24,19 +24,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>日期、分界与"交界"问题</h2>
-    <p>十二星座把太阳视运动的一年切分成十二段各 30° 的弧。白羊座从春分点开启黄道,所以日期是 3 月 21 日-4 月 19 日,以此类推——每条分界在不同年份最多相差一天,出生年份对太阳星座几乎没影响。出生在换座日前后一天?你仍然精确属于一个星座:"交界"是流行占星的叙事框架,本工具会标注它,但给出唯一确定的答案。</p>
-    <h2>元素、三态、极性——星座的语法</h2>
-    <p>每个星座属于一个元素(火开创、土建构、风联结、水感受)、一个三态(本位开启季节、固定守住季节、变动收尾季节),以及沿黄道交替的阴阳极性。同一结构每四个星座重复一次:白羊、狮子、射手都是火象,却分别是本位、固定、变动——这就是同元素星座气质仍不相同的原因。</p>
-    <h2>本计算器不假装知道的事</h2>
-    <p>太阳星座只是几十个落座之一;完整的本命盘需要精确的出生时间和地点才能安放月亮、上升与各行星。谁若声称只凭月份和日期就能断人格,那是娱乐——当作娱乐没问题。给好奇者一句:金星星座(爱情风格)和水星星座(思维方式)常常比太阳更有解释力。</p>
-    <h2>天文学的尴尬脚注</h2>
-    <p>自希腊化占星体系定型以来,岁差已把星座背景整体向西推移了约一个星座,太阳还会穿越蛇夫座——没有任何报纸星座提过它。这些都不否定这套象征传统,只是说明黄道是一套文化坐标系,不是天空地图。请按此使用。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -66,7 +53,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function ZodiacSignCalculatorContent(): ReactNode {
   const { locale } = useApp()

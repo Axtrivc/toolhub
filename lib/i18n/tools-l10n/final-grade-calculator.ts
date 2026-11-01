@@ -5,35 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const finalGradeCalculatorL10n: ToolL10n = {
-  zh: {
-    formula: {
-      formula: 'needed = ( target − current × (1 − w) ) / w',
-      explain: '为达到目标总成绩,期末需要考的分数。current 是你目前的分数,w 是期末占比(小数)。它告诉你剩余部分必须考多少。',
-    },
-    ui: {
-      errWeight: '期末考试占比必须大于 0%',
-      alreadyAchieved: '🎉 目标已达成 — 任意分数都能保住目标',
-      impossible: '无法实现',
-      'in.current': '当前成绩',
-      'in.goal': '目标成绩',
-      'in.finalWeight': '期末考试权重',
-      'out.needed': '期末考试所需分数',
-      note: '🎓 求解达到目标成绩所需的期末考试分数。若超过 100%,则目标无法实现。',
-      chartTitle: '目标的可达成度',
-      'zone.0': '轻松',
-      'zone.1': '紧但可行',
-      'zone.2': '需要超过 100%',
-    },
-    useCases: [
-      '期末考试成绩计算器',
-      '计算期末考试需要多少分',
-      '目标成绩计算器',
-      '期末成绩计算(rogerhub 风格)',
-    ],
-    faqs: [
-      { q: '我的期末考试是综合性的——这个公式还适用吗?', a: '适用——该公式对任何期末考试都成立。「权重」只是期末考试占总成绩的比例,与考试内容无关。' },
-    ],
-  },
+
   es: {
     formula: {
       formula: 'needed = ( target − current × (1 − w) ) / w',

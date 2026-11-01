@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * RentBudgetCalculator 长文正文 —— 四语 dispatcher
+ * RentBudgetCalculator 长文正文 —— 三语 dispatcher
  *
- * en 分支与 SSR 渲染输出一致。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支与 SSR 渲染输出一致。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -24,19 +24,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>30% 规则从哪来</h2>
-    <p>住房政策自 1980 年代就用"收入的 30%"作为门槛:超过即被视为"房租负担过重",留给其他一切的钱变少。月税前 $6,000,上限就是 $1,800。它是筛选经验法则而非法律——但突破它应当是有意的选择,而不是无意的事故。</p>
-    <h2>50/30/20 的交叉验证</h2>
-    <p>50/30/20 预算把税后收入按必要/想要/储蓄切成 50/30/20,房租属于"必要"桶。桶里还有食品、通勤、保险和水电——房租吃满整个 50%,其他必要项就没地方去了。实务上,把房租压在税后收入的 25-30% 附近,桶才是现实的。</p>
-    <h2>税前还是税后,答案不一样</h2>
-    <p>30% 规则传统上按税前收入计;50/30/20 按税后。同样 $6,000:按税前上限是 $1,800,按 22% 税后净额的 30% 只有约 $1,400。真相在两极之间——工具把两个口径都摆出来,由你决定站在哪。</p>
-    <h2>房东实际查什么</h2>
-    <p>很多房东要求税前年收入是月租的 40 倍——数学上等价于 30% 规则。有的接受月收入 3 倍;竞争激烈的市场常要求更高,担保人或额外押金可以替代比例。看房前先知道自己的数字,能替所有人省下一笔申请费。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -66,7 +53,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function RentBudgetCalculatorContent(): ReactNode {
   const { locale } = useApp()

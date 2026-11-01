@@ -44,41 +44,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具?</h2>
-    <p>
-      本工具在时间单位之间换算——从纳秒到年。对于较小单位(秒、分、时、天)使用精确换算系数,月和年因长度不固定而采用平均值。
-    </p>
-    <div>
-      <h2>标准换算</h2>
-      <ul>
-        <li>1 分钟 = 60 秒</li>
-        <li>1 小时 = 60 分钟 = 3,600 秒</li>
-        <li>1 天 = 24 小时 = 1,440 分钟</li>
-        <li>1 周 = 7 天 = 168 小时</li>
-        <li>1 年 ≈ 365.25 天(已计入闰年)</li>
-      </ul>
-    </div>
-    <div>
-      <h2>月份不好换算</h2>
-      <p>
-        月份长度从 28 天到 31 天不等,因此没有精确换算。本工具采用 <strong>每月 30.44 天</strong> 的平均值(365.25 ÷ 12)。如需精确的日期运算,请改用日期差计算器。
-      </p>
-    </div>
-    <div>
-      <h2>常见用途</h2>
-      <ul>
-        <li>换算跑步配速(分钟/公里 → 分钟/英里)</li>
-        <li>计算工时与工资</li>
-        <li>规划视频和音频时长</li>
-        <li>烹饪和烘焙计时</li>
-        <li>估算项目时间线</li>
-      </ul>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -160,7 +125,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function TimeConverterContent(): ReactNode {
   const { locale } = useApp()

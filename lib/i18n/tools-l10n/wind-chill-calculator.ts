@@ -5,40 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const WindChillCalculatorL10n: ToolL10n = {
-  zh: {
-    useCases: ['出门前看体感温度,决定加多少层', '评估孩子等校车时的冻伤风险', '对比无风与 30 km/h 风下的体感差', '越野滑雪/骑行按风寒指数补水补装备'],
-    faqs: [
-      { q: '风寒公式是哪个?', a: '用加拿大环境部与美国国家气象局 2001 年联合采用的 JAG/TI 公式:W = 13.12 + 0.6215T − 11.37·V^0.16 + 0.3965·T·V^0.16(T 为 °C、V 为 km/h),对暴露皮肤建模。' },
-      { q: '适用范围是多少?', a: '只在气温 ≤ 10 °C 且风速 > 4.8 km/h 时有定义——低于此风速风几乎不再增加蒸发与对流散热,高于 10 °C 应改用湿热指数。超出范围时工具会标注结果为外推。' },
-      { q: '为什么风速的影响是次方的?', a: 'V^0.16 反映对流边界层变薄的边际递减:风从 5 提到 10 km/h 风寒骤降,而从 50 到 55 几乎无感。图表里风寒曲线快速下坠后趋平,就是这个形状。' },
-      { q: '风寒温度会低于实际气温多少?', a: '典型寒潮场景 −5 °C、30 km/h 风下体感约 −13 °C,差 8 度;风越大、气温越低,差值越大。风寒永远不会把体感抬到气温之上——那是"闷热"另一套公式的领域。' },
-    ],
-    ui: {
-      'in.temp': '气温',
-      'in.tUnit': '温度单位',
-      'in.wind': '风速',
-      'in.wUnit': '风速单位',
-      'opt.tUnit.C': '°C',
-      'opt.tUnit.F': '°F',
-      'opt.wUnit.kmh': 'km/h',
-      'opt.wUnit.mph': 'mph',
-      'opt.wUnit.ms': 'm/s',
-      'out.chill': '风寒体感温度',
-      'out.chillAlt': '另一单位',
-      'out.drop': '比无风更冷',
-      'out.range': '公式适用范围校验',
-      'chartTitle': '风寒随风速的变化',
-      'line.chill': '风寒体感',
-      'line.air': '实际气温',
-      'note': '🥶 采用加拿大环境部与美国 NWS 2001 年启用的 JAG/TI 联合公式,对裸露皮肤建模;仅适用于气温 ≤ 10 °C(50 °F)且风速 > 4.8 km/h(3 mph)——超出该范围结果会被标注为外推。',
-      'errInput': '气温与风速请填数字',
-      'inRange': '有效——在公式适用范围内',
-      'outRange': '超出范围——公式仅在 ≤10°C(50°F)、风速 >4.8 km/h 时有效',
-      'preset.0': '霜晨步行',
-      'preset.1': '北欧寒风',
-      'preset.2': '美制单位(23°F、19 mph)',
-    },
-  },
+
   es: {
     useCases: ['mirar la sensación térmica antes de salir y decidir capas', 'evaluar el riesgo de congelación esperando el autobús', 'comparar la sensación con calma y con viento de 30 km/h', 'ajustar equipamiento de esquí o ciclismo al wind chill'],
     faqs: [

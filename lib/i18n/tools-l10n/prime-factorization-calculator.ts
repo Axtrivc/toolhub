@@ -5,29 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const primeFactorizationCalculatorL10n: ToolL10n = {
-  zh: {
-    formula: {
-      formula: 'n = p₁^e₁ × p₂^e₂ × … × pₖ^eₖ',
-      explain: '每个大于 1 的整数都能唯一分解为质数。指数表示每个质数整除 n 的次数。工具依次除尽 2、3、5……直到 √n。',
-    },
-    ui: {
-      errMinTwo: '请输入 ≥ 2 的数',
-      errIntegers: '请输入整数',
-      errTooBig: '请输入不超过 1,000,000,000,000(10¹²)的数',
-      'in.n': '要分解的数',
-      'out.factors': '质因数分解',
-      note: '🧮 每个大于 1 的整数都有唯一的质因数分解(算术基本定理)。',
-    },
-    useCases: [
-      '化简分数:最大公约数来自公共质因数',
-      '密码学:RSA 密钥依赖分解难度',
-      '数学作业:求最小公倍数、最大公约数、化简根式',
-      '音乐理论:纯律使用质数比',
-    ],
-    faqs: [
-      { q: '为什么大数分解很难?', a: '对小数字很容易,但对于两个大质数的乘积,目前没有已知的高效算法。这种「容易相乘、难以分解」的不对称性,正是 RSA 加密安全性的基础。' },
-    ],
-  },
+
   es: {
     formula: {
       formula: 'n = p₁^e₁ × p₂^e₂ × … × pₖ^eₖ',

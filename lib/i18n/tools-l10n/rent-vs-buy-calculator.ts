@@ -5,27 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const rentVsBuyCalculatorL10n: ToolL10n = {
-  zh: {
-    useCases: ['比较买房与租房在持有期内的总成本', '算出买房比租房便宜的盈亏平衡点', '按年限看租买哪个更划算', '决定该租房还是买房'],
-    faqs: [
-      { q: '这个计算器考虑房价上涨吗?', a: '不考虑——这个简化版本忽略了升值,而那是买房的一大好处。但它也忽略了把首付款投入股市的机会成本。完整的租买模型会同时纳入两者。从历史看,美国房价每年升值约 3-4%,大致跟通胀持平。' },
-      { q: '怎么判断自己会住得够久?', a: '工作稳定性、感情状况和学区是常见的信号。一个好的经验法则:有把握至少住 5 年,理想是 7-10 年。你每多住一年,成交成本就被摊得更薄,数学上更有利于买房。' },
-      { q: '房贷利息的税前扣除怎么算?', a: '自 2017 年美国税改后,更高的标准扣除额(2024 年单身 $14,600 / 已婚 $29,200)意味着大多数房主不再逐项列报,所以房贷利息扣除帮到的人比以前少。只有当你的逐项扣除总额明显超过标准扣除额时,才指望得上。' },
-      { q: '买房还有哪些成本没被算进来?', a: '契税(1%–3%)、中介费(约 1%–2%)、贷款评估与抵押登记费,以及持有期的物业费和维修,粗略合计房价的 3%–6%。持有年限越短,这些成本越摊不薄,对比结果就越不利于买房。' },
-      { q: '利率对结论的影响有多大?', a: '很大:100 万元贷款 30 年,利率从 4.2% 降到 3.5%,月供约少 400 元,30 年总利息省约 14 万。先按最新 LPR 和你实际能拿到的利率重算一遍,再下结论。' },
-    ],
-    ui: {
-      errYears: '请输入大于 0 的年数',
-      winnerBuying: '买房更划算(约省 {amount})',
-      winnerRenting: '租房更划算(约省 {amount})',
-      'in.home': '房价', 'in.rent': '可比月租金', 'in.down': '首付比例', 'in.rate': '房贷利率', 'in.term': '贷款期限', 'inSuffix.term': '年', 'in.years': '居住年限',
-      'out.buyTotal': '买房净成本', 'outSub.buyTotal': '首付 + 已付月供 − 期末净值', 'out.rentTotal': '租房总成本', 'outSub.rentTotal': '持有期内的租金', 'out.winner': '更省的选项',
-      note: '🏠 买房净成本 = 首付 + 居住期内已付月供 − 卖出时收回的净值(期末房价 − 剩余贷款本金)。简化估算——不含税费、维护费、升值以及投资的机会成本。作为初步粗略对比使用。',
-      chartTitle: '累计成本:租房 vs 买房',
-      'line.rent': '租房(累计)',
-      'line.buy': '买房(净成本)',
-    },
-  },
+
   es: {
     useCases: ['comparar el coste total de comprar frente a alquilar en el periodo', 'hallar el punto de equilibrio donde comprar sale más barato', 'ver por años si conviene comprar o alquilar', 'decidir si alquilar o comprar vivienda'],
     faqs: [

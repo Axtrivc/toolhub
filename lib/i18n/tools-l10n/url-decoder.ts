@@ -5,46 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const urlDecoderL10n: ToolL10n = {
-  zh: {
-    ui: {
-      'inputTooLarge': '⚠️ 输入过大——支持规模最多 10 万字符。请裁剪输入后再转换。',
-      'invalidInput': '⚠️ 此方向的输入无效',
-      'defaultInputDecode': '%E4%BD%A0%E5%A5%BD%E4%B8%96%E7%95%8C',
-      'defaultInputEncode': '你好世界',
-      'characters': '字符',
-      'clear': '清空',
-      'swapToDecode': '⇄ 切换为解码',
-      'swapToEncode': '⇄ 切换为编码',
-      'componentMode': '组件(encodeURIComponent)',
-      'decode': '解码',
-      'decodeInputLabel': 'URL 编码的文本',
-      'decodeNote': '🔗 把 %20 还原为空格、%26 还原为 & 等。',
-      'decodeOutputLabel': '解码结果',
-      'encode': '编码',
-      'encodeInputLabel': '要编码的文本',
-      'encodeNote': '🔗 为在 URL 中安全使用而编码特殊字符。空格变成 %20,& 变成 %26。',
-      'encodeOutputLabel': 'URL 编码结果',
-      'fullUriMode': '完整 URI(encodeURI)',
-      'invalidEscape': '⚠️ 无法解析的百分号转义——转义必须形如 %XX(两位十六进制)',
-      'mode': '模式',
-      'modeAria': '编码/解码模式',
-      'plusToSpace': '解码时把 + 当作空格',
-      'placeholder': '在此输入或粘贴…',
-      'resultPlaceholder': '结果将显示在这里…',
-      'strayPercent': '⚠️ 第 {n} 个字符处有孤立的 "%":百分号转义需要两位十六进制,如 %20、%26',
-      'uriTarget': '目标',
-      'words': '词',
-    },
-    useCases: [
-      '解码服务器日志中的编码 URL',
-      '还原分析数据里的查询参数',
-      '清理抓取或导出的 URL',
-      '调试代码中的 URL 处理逻辑',
-    ],
-    faqs: [
-      { q: '+ 表示空格怎么办?', a: '在查询字符串中,+ 常用来表示空格(表单编码)。本工具使用标准百分号解码,但「解码时把 + 当作空格」开关会自动把 + 转换为空格。' },
-    ],
-  },
+
   es: {
     ui: {
       'inputTooLarge': '⚠️ Entrada demasiado grande: el tamaño admitido es de hasta 100 000 caracteres. Recorta la entrada para convertir.',

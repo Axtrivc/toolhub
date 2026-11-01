@@ -6,23 +6,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const lengthConverterL10n: ToolL10n = {
-  zh: {
-    ui: {
-      'unit.mm': '毫米 (mm)', 'unit.cm': '厘米 (cm)', 'unit.m': '米 (m)', 'unit.km': '公里 (km)',
-      'unit.in': '英寸 (in)', 'unit.ft': '英尺 (ft)', 'unit.yd': '码 (yd)', 'unit.mi': '英里 (mi)',
-      note: '📏 支持公制(mm、cm、m、km)和英制(in、ft、yd、mi)单位。',
-    },
-    useCases: [
-      '在米和英尺之间换算身高或门高',
-      '把英里和公里互转(跑步/自驾)',
-      '换算国际网购家具的尺寸(英寸 ↔ 厘米)',
-    ],
-    faqs: [
-      { q: '一米等于多少英尺?', a: '1 米 = 3.28084 英尺。米换英尺乘以 3.281;英尺换米除以 3.281(或乘以 0.3048)。' },
-      { q: '一厘米等于多少英寸?', a: '1 厘米 = 0.3937 英寸。厘米换英寸乘以 0.394;英寸换厘米乘以 2.54。' },
-      { q: '怎样把公里换算成英里?', a: '公里数乘以 0.6214。一个心算捷径:取 60% 再加一点——比如 10 km ≈ 6.2 英里。' },
-    ],
-  },
+
   es: {
     ui: {
       'unit.mm': 'Milímetros (mm)', 'unit.cm': 'Centímetros (cm)', 'unit.m': 'Metros (m)', 'unit.km': 'Kilómetros (km)',

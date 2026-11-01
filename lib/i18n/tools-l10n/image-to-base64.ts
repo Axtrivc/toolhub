@@ -5,34 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const imageToBase64L10n: ToolL10n = {
-  zh: {
-    ui: {
-      'base64DataUri': 'Base64 Data URI',
-      'base64Size': 'Base64 大小 ≈ ',
-      'change': '更换',
-      'copy': '复制',
-      'cssBg': 'CSS background-image',
-      'errReadFile': '无法读取文件。',
-      'errTooLarge': '文件过大({size})。最大为 20 MB。',
-      'errUploadImage': '请上传图片文件(PNG、JPG、GIF、WebP 或 SVG)。',
-      'imgTag': '标签',
-      'notePrefix': '🔒 100% 在客户端——经 ',
-      'noteSuffix': ' 读取。你的图片绝不离开你的设备。',
-      'uploadHint': 'PNG、JPG、GIF、WebP、SVG——建议几 MB 以内',
-      'uploadPrompt': '点击上传或拖放',
-    },
-    useCases: [
-      '把小图标内联进 CSS',
-      '在邮件签名或简报中嵌入图片',
-      '构建自包含的 HTML 演示文件',
-      '为 JSON 请求准备图片载荷',
-    ],
-    faqs: [
-      { q: '什么是 data URI?什么时候该用?', a: 'data URI 把文件内容直接嵌入到 URL 字符串里(data:image/png;base64,....)。可以用它把小图片内联到 HTML、CSS 或 JSON 中,这样浏览器就不必再发一次单独请求——对图标、头像或邮件素材很方便。大文件要避免使用:Base64 会增大约 33% 体积,还会阻塞渲染。' },
-      { q: '支持哪些图片格式?', a: 'PNG、JPG/JPEG、GIF、WebP 和 SVG。data URI 会带上正确的 MIME 类型(image/png、image/jpeg 等),所以浏览器和邮件客户端都能正确渲染。SVG 可以用 Base64 嵌入,也可以用原始 UTF-8——本工具为统一一律使用 Base64。' },
-      { q: '我的图片会被上传吗?', a: '不会。文件通过 FileReader.readAsDataURL 读取,整个 Base64 字符串都在你的浏览器里生成。图片从不经过服务器,这对私密素材很重要,同时也意味着工具在离线状态下也能用。' },
-    ],
-  },
+
   es: {
     ui: {
       'base64DataUri': 'Data URI en Base64',

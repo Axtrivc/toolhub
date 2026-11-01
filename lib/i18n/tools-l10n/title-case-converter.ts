@@ -5,24 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const titleCaseConverterL10n: ToolL10n = {
-  zh: {
-    ui: {
-      defaultInput: 'the art of programming 编程之美',
-      inputLabel: '你的文本',
-      outputLabel: '标题大写',
-      note: '📝 把每个单词的首字母大写。适合标题和表头。',
-      'cjkNoEffectNote': 'ℹ️ 大小写转换只作用于英文字母——中文字符保持不变。',
-    },
-    useCases: [
-      '为博客文章和新闻标题做首字母大写',
-      '整理 YouTube 视频标题',
-      '规范化书名、电影名、歌曲名',
-      '设计 App 按钮和菜单标签',
-    ],
-    faqs: [
-      { q: '为什么不同排版指南规则不一样?', a: '主流排版指南(APA、Chicago、AP)对哪些词该大写各有规定,通常会把冠词、连词和短介词保持小写。本工具为简便起见把每个单词都首字母大写。' },
-    ],
-  },
+
   es: {
     ui: {
       defaultInput: 'el rápido zorro marrón',

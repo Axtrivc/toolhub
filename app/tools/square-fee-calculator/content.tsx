@@ -5,7 +5,7 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * SquareFeeCalculator 长文正文 —— 四语 dispatcher
+ * SquareFeeCalculator 长文正文 —— 三语 dispatcher
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -22,19 +22,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>每种收款方式一个费率</h2>
-    <p>Square 美国定价按方式区分:到店拍卡/插卡/扫码 2.6% + 15¢(固定费 2026 年初从 10¢ 上调);免费档的 Square Online 与发票卡支付均为 3.3% + 30¢,付费 Plus/Premium 档在线 2.9% + 30¢;手动键入卡号 3.5% + 15¢——多出来的部分对应更高的拒付风险,不纯粹是 Square 赚差价。</p>
-    <h2>真正的变量是那几美分固定费</h2>
-    <p>$5 拍卡的实际费率是 5.6%,$500 拍卡只有 2.63%。客单价低的商家应该看全天混合实际费率,而不是名义的 2.6%——上面的图画的正是固定 15¢ 随客单增长被稀释的速度。</p>
-    <h2>合规地把费率收回来</h2>
-    <p>刷卡附加费在美国各州监管不一,Square 还有自己的附加规则。反算模式回答的是更安全的问题:想净收某个数该收多少——(净额 + 固定费) ÷ (1 − 费率)。想到店净收 $100,应收 $102.82。</p>
-    <h2>基本无月费——大体如此</h2>
-    <p>标准方案只收按笔手续费:无月最低、无 PCI 合规费、无账单费。付费档增加忠诚度计划、团队管理与高级库存;硬件一次买断,跨方案通用。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -64,7 +51,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function SquareFeeCalculatorContent(): ReactNode {
   const { locale } = useApp()

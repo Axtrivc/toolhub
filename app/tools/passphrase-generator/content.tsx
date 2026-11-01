@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * PassphraseGenerator 长文正文 —— 四语 dispatcher
+ * PassphraseGenerator 长文正文 —— 三语 dispatcher
  *
- * en 分支与英文站渲染输出一致。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支与英文站渲染输出一致。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -24,19 +24,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>为什么词组胜过符号</h2>
-    <p>带符号的 10 位随机密码约有 65 位熵,但你要花一分钟才能打对。256 词表里的 5 个词有 40 位熵,读起来却像半句话。主密码、手机键盘这些场景,记得住的长串赢过记不住的密串。</p>
-    <h2>熵的算法</h2>
-    <p>每个词都是从恰好 256 个选项里均匀抽出,因此每词精确贡献 log2(256)=8 位——6 个词 48 位,10 个词 80 位。一个数字后缀加 log2(10)≈3.3 位。首字母大写至多每词加 1 位,估算里诚实地忽略。</p>
-    <h2>词数怎么选</h2>
-    <p>安全团队对高价值账号(邮箱、密码管理器、加密资产)普遍建议 75-80 位,在这里就是 9-10 个词。4-5 个词(32-40 位)适合重置毫无成本的临时登录。限制密码长度的网站,改用字符型密码生成器。</p>
-    <h2>毁掉好口令的几个错误</h2>
-    <p>跨站复用同一口令;从名言或歌词里挑词(攻击者最先试这些);或者写在便签上贴屏幕。生成走本地 Web Crypto API——不传输任何数据,口令的风险只剩你存放它的地方。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -66,7 +53,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function PassphraseGeneratorContent(): ReactNode {
   const { locale } = useApp()

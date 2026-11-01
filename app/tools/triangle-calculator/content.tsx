@@ -29,30 +29,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具?</h2>
-    <p>这个计算器利用勾股定理求解<strong>直角三角形</strong>。已知两条直角边(a 和 b),它就能求出斜边(c)、面积和周长。</p>
-    <div>
-      <h2>勾股定理</h2>
-      <p>对任意直角三角形,<code>a² + b² = c²</code>,其中 a、b 是两条直角边,c 是斜边(直角所对的边)。这是数学中最古老、最有用的结论之一,已有超过 400 种证明方法。</p>
-    </div>
-    <div>
-      <h2>常见用途</h2>
-      <ul>
-        <li><strong>建筑:</strong>把墙角校成直角——一个方向量 3 ft,另一方向量 4 ft,对角线应为 5 ft</li>
-        <li><strong>导航:</strong>两个 GPS 坐标之间的直线距离</li>
-        <li><strong>电视尺寸:</strong>65 英寸电视按对角线测量</li>
-        <li><strong>梯子:</strong>梯子斜靠时能达到多高</li>
-      </ul>
-    </div>
-    <div>
-      <h2>3-4-5 三角形</h2>
-      <p>最简单的勾股数是 3-4-5:3² + 4² = 9 + 16 = 25 = 5²。木匠常用它——沿一面墙量 3 个单位,沿另一面墙量 4 个单位,再调整到对角线正好是 5,这时的墙角就是完美的直角。</p>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -104,7 +80,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function TriangleCalculatorContent(): ReactNode {
   const { locale } = useApp()

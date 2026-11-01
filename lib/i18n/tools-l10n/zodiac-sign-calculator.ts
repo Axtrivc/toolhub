@@ -5,43 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const ZodiacSignCalculatorL10n: ToolL10n = {
-  zh: {
-    useCases: ['按出生月日查自己的太阳星座', '查看星座的日期区间与交界日', '了解星座的四元素与三态属性', '确认生日是否落在"交界日"上'],
-    faqs: [
-      { q: '生日在交界日,我到底算哪个星座?', a: '你只属于一个星座——出生那一刻太阳所在的星座。流行占星把边界前后 1-2 天叫"交界(cusp)";计算器会标注,但仍会给出唯一的星座。' },
-      { q: '出生年份有影响吗?', a: '对太阳星座几乎没有——各星座的分界日期在不同年份最多相差一天(闰年会轻微推移)。只有中国生肖和行星慢速换座才用到出生年份。' },
-      { q: '元素、三态和阴阳极性是什么?', a: '每个星座属于四元素之一(火、土、风、水)、三态之一(本位开创、固定坚守、变动适应)和阴阳极性之一——这是星座Compatibility话题背后的通用语法。' },
-      { q: '星座有科学依据吗?', a: '没有。星座边界、岁差和几十年的漂移意味着太阳实际位置和报纸星座运势写的并不一致。它属于文化与娱乐,不是天文学。' },
-    ],
-    ui: {
-      'in.month': '出生月份',
-      'opt.month.1': '一月', 'opt.month.2': '二月', 'opt.month.3': '三月',
-      'opt.month.4': '四月', 'opt.month.5': '五月', 'opt.month.6': '六月',
-      'opt.month.7': '七月', 'opt.month.8': '八月', 'opt.month.9': '九月',
-      'opt.month.10': '十月', 'opt.month.11': '十一月', 'opt.month.12': '十二月',
-      'in.day': '出生日期',
-      'out.sign': '你的星座',
-      'out.dates': '日期区间',
-      'out.element': '元素',
-      'out.modality': '三态',
-      'out.polarity': '阴阳极性',
-      'out.cusp': '交界日',
-      'sign.aries': '白羊座', 'sign.taurus': '金牛座', 'sign.gemini': '双子座',
-      'sign.cancer': '巨蟹座', 'sign.leo': '狮子座', 'sign.virgo': '处女座',
-      'sign.libra': '天秤座', 'sign.scorpio': '天蝎座', 'sign.sagittarius': '射手座',
-      'sign.capricorn': '摩羯座', 'sign.aquarius': '水瓶座', 'sign.pisces': '双鱼座',
-      'element.fire': '火象', 'element.earth': '土象', 'element.air': '风象', 'element.water': '水象',
-      'modality.cardinal': '本位(开创)', 'modality.fixed': '固定(坚守)', 'modality.mutable': '变动(适应)',
-      'polarity.positive': '阳(外向)', 'polarity.negative': '阴(内向)',
-      'notOnCusp': '不在交界日',
-      'preset.0': '3 月 21 日(白羊月初)',
-      'preset.1': '8 月 1 日(狮子座)',
-      'preset.2': '12 月 25 日(摩羯座)',
-      'cuspOf': '生于 {a} 与 {b} 的交界',
-      'errInvalidDay': '该月份没有这一天(二月最多 29 日,4/6/9/11 月最多 30 日)',
-      'note': '♈ 按出生月日定太阳星座。落在分界日(±1 天)只说明太阳正在换座——你仍精确属于一个星座;"交界"是流行说法,不是天文事实。',
-    },
-  },
+
   es: {
     useCases: ['averiguar tu signo solar por mes y día de nacimiento', 'consultar los rangos de fechas y días de cambio', 'conocer elemento, modalidad y polaridad de tu signo', 'comprobar si naciste en un día de "cúspide"'],
     faqs: [

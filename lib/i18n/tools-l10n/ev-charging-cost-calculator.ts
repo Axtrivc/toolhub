@@ -5,40 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const EvChargingCostCalculatorL10n: ToolL10n = {
-  zh: {
-    useCases: ['算出家充与公共桩混合下的真实每英里电费', '对比同里程下电车与油车的年成本', '按通勤里程估算年充电开销', '看公共桩占比对总成本的影响'],
-    faqs: [
-      { q: '每英里电费怎么算?', a: '混合电价 ÷ 车的效率(miles/kWh)。家充 $0.17、公共桩 $0.45、八成在家充时混合价约 $0.226,除以 3.5 miles/kWh ≈ 每英里 $0.065——同样里程油车(30 MPG、$3.50/gal)是每英里 $0.117。' },
-      { q: '效率(miles/kWh)填多少?', a: '常见电动车综合工况在 2.5-4.5 miles/kWh 之间:紧凑级约 3.5-4.5,大型 SUV/皮卡 2-3。冬天低温可再降 20-30%。用车载屏或 App 里的实测值最准,别用 EPA 峰值。' },
-      { q: '为什么公共桩影响这么大?', a: '公共快充价格常是家充的 2-4 倍。按 12,000 英里/年、3.5 miles/kWh 算,每把 10% 里程从家充挪到 $0.45 的公共桩,一年就多花约 $95——"偶尔快充"很容易变成习惯。' },
-      { q: '这里没算什么?', a: '没算电价分时(谷电能显著拉低家充成本)、安装家用桩的一次费用、保险与保养差价,以及电池损耗。作为燃料口径的对比它是准确的;完整的持有成本对比要把这些加进来。' },
-    ],
-    ui: {
-      'chartTitle': '年燃料成本:电 vs 油',
-      'preset.0': '高效轿车',
-      'preset.1': '大型电动 SUV',
-      'preset.2': '以公共桩为主',
-      'cmp.0': '电车充电',
-      'cmp.1': '油车加油',
-      'cmpseg.0': '年成本',
-      'in.annualMiles': '年行驶里程',
-      'in.efficiency': '效率 (miles/kWh)',
-      'in.homeRate': '家充电价',
-      'in.publicRate': '公共桩电价',
-      'in.publicShare': '公共桩占比',
-      'in.mpg': '对比油车 MPG',
-      'in.gasPrice': '油价 ($/gal)',
-      'out.perMileEV': '电车每英里成本',
-      'out.annualEV': '电车年充电成本',
-      'out.perMileGas': '油车每英里成本',
-      'out.annualGas': '油车年油费',
-      'out.annualSavings': '每年省下',
-      'out.kwhNeeded': '年充电量',
-      'outSub.kwhNeeded': '≈ 电量需求',
-      'note': '⚡ 每英里 = 混合电价 ÷ 效率;混合价按家充/公共桩占比加权。家充 $0.17 vs 公共快充 $0.45+ 是常态——公共桩占比每 +10 个点,年成本明显上抬。谷电计价的家充能把每英里压到 $0.03-04。',
-      'errInvalid': '请输入正的里程与效率、非负电价/油价与 0-100 的公共桩占比',
-    },
-  },
+
   es: {
     useCases: ['calcular el coste real por milla mezclando carga en casa y pública', 'comparar el coste anual de un eléctrico vs un gasolina', 'estimar el gasto anual de carga por tu kilometraje', 'ver cuánto mueve la aguja la proporción de carga pública'],
     faqs: [

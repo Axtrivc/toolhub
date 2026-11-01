@@ -5,48 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const jwtDecoderL10n: ToolL10n = {
-  zh: {
-    ui: {
-      'algNoneWarn': '此令牌未签名(alg 为 "none")——任何人都能伪造或篡改。未经其他渠道核验,切勿采信。',
-      'clear': '清空',
-      'copy': '复制',
-      'copyPayload': '复制 Payload',
-      'editResign': '去 JWT 生成器编辑并重新签名 →',
-      'errBase64': '无效的 Base64URL',
-      'errThreeParts': 'JWT 必须恰好由 3 个以点号分隔的部分组成。',
-      'expiredAgo': '已过期 {dur}',
-      'expiryLabel': '过期时间 (exp):',
-      'header': '头部',
-      'inputLabel': '粘贴你的 JWT',
-      'invalidJwt': '无效 JWT',
-      'issuedLabel': '签发时间 (iat):',
-      'notBeforeLabel': '生效时间 (nbf):',
-      'note': '🔒 100% 在客户端——你的 token 仅在你的浏览器中解析,绝不发送到任何服务器。本工具只解码 token;没有对应的密钥或公钥就无法验证签名。',
-      'payload': '载荷',
-      'resignHint': '复制 Payload,粘贴到生成器,换上你的密钥重新签名。',
-      'signature': '签名',
-      'signatureHint': '(验证需要密钥/公钥)',
-      'timeAgo': '{dur}前',
-      'timeIn': '{dur}后',
-      'unitDay': '天',
-      'unitDayPlural': '天',
-      'unitHour': '小时',
-      'unitHourPlural': '小时',
-      'unitMinute': '分钟',
-      'unitMinutePlural': '分钟',
-      'unitSecond': '秒',
-      'unitSecondPlural': '秒',
-      'unitYear': '年',
-      'unitYearPlural': '年',
-      'validFor': '剩余有效 {dur}',
-    },
-    useCases: ['查看 JWT 的 header 和 payload 内容', '确认令牌是否已过期(exp 字段)', '调试登录/鉴权流程中的令牌', '在不连服务器的情况下本地解码令牌'],
-    faqs: [
-      { q: '在这里粘贴真实 JWT 安全吗?', a: '解码是安全的——一切都在浏览器本地通过内置 atob 函数完成,令牌不会发往任何服务器。但要注意:JWT 是持有者凭证,任何拿到它的人在过期前都能冒充你。避免把真实访问令牌贴到截图、聊天或公开场合。如果只是想了解解码效果,点「加载示例」按钮即可。' },
-      { q: '为什么这个工具不能验证签名?', a: '验证签名需要密钥(HS256 等 HMAC 算法)或公钥(RS256/ES256 等 RSA/ECDSA 算法)。它们由签发服务器持有,不在令牌里。本工具只解码 header 和 payload——没有那把密钥,无法证明令牌是真实或未被篡改的。' },
-      { q: 'iat、exp、sub 这些字段是什么意思?', a: 'iat(签发时间)和 exp(过期时间)是秒级 Unix 时间戳。sub(主体)标识令牌的归属对象,通常是用户 ID。其他常见字段包括 iss(签发方)、aud(受众),以及你的应用可能添加的角色/邮箱字段。如果 exp 已过去,令牌即过期,服务器应拒绝它。' },
-    ],
-  },
+
   es: {
     ui: {
       'algNoneWarn': 'Este token no está firmado (alg «none») — cualquiera puede falsificarlo o manipularlo. Nunca lo aceptes sin verificarlo por otro canal.',

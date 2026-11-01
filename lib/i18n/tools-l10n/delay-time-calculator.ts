@@ -5,46 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const DelayTimeCalculatorL10n: ToolL10n = {
-  zh: {
-    useCases: ['把歌曲速度换算成延迟踏板的毫秒值', '设置附点八分音延迟做出律动回声', '给合唱/镶边踏板找按音符同步的 LFO 速率', '混音时对齐预延迟与房间尺寸感'],
-    faqs: [
-      { q: '延迟效果器怎么跟歌曲同步?', a: '先知道速度,再把延迟拨到某个音符分割:1/4 给空间感,1/8 更密,附点 1/8 造出定义律动的错位回声。本计算器给出精确毫秒。' },
-      { q: '附点八分音为什么那么出名?', a: '附点八分每 3/4 拍重复一次,回声落在正格之间、与演奏交错——《Where the Streets Have No Name》和《Run Like Hell》那种"推着走"的声音。' },
-      { q: '三连音值是什么意思?', a: '三连音是"三个音挤两个音的时值",所以三连八分音长是普通八分的 2/3。在 swing/shuffle 律动上用三连延迟,回声才会落在凹槽里。' },
-      { q: 'LFO 速率那一栏是干什么的?', a: '合唱、镶边、颤音这类调制踏板以 Hz 为单位循环。按歌曲速度把速率设成音符对应的频率,调制扫频就会与拍子锁在一起,而不是飘在拍外。' },
-    ],
-    formula: {
-      formula: '四分音符 (ms) = 60,000 ÷ BPM\n其他音符 = 四分 × 系数(1/2 = 0.5,附点 = 1.5,三连 = 2/3)\nLFO 频率 (Hz) = 1,000 ÷ 延迟 (ms)',
-      variables: 'BPM = 速度(每分钟拍数)\n四分音符 = 一拍的毫秒时长\n系数 = 相对四分音符的音符分割\nLFO 频率 = 该音符时值对应的调制循环频率',
-      explain: '一分钟有 60,000 毫秒,除以 BPM 就是一拍的时长;其他音符值都是四分音符的固定倍数,LFO 频率只是它的倒数。',
-      example: '第 1 步:120 BPM → 四分 = 60,000 ÷ 120 = 500 ms。\n第 2 步:1/8 = 500 × 0.5 = 250 ms;附点 1/8 = 250 × 1.5 = 375 ms;三连 1/8 = 500 × 2/3 = 333.3 ms。\n第 3 步:1/16 = 125 ms;附点 1/16 = 187.5 ms;1/32 = 62.5 ms。\n第 4 步:LFO:1/4 = 1,000 ÷ 500 = 2 Hz;1/8 = 4 Hz;1/16 = 8 Hz。\n结果:120 BPM 时,经典附点八分回声就是 375 ms。',
-    },
-    ui: {
-      'in.bpm': '速度',
-      'out.whole': '全音符 (1/1)',
-      'out.half': '二分 (1/2)',
-      'out.quarter': '四分 (1/4)',
-      'out.eighth': '八分 (1/8)',
-      'out.eighthD': '附点八分 (1/8.)',
-      'out.eighthT': '三连八分 (1/8T)',
-      'out.sixteenth': '十六分 (1/16)',
-      'out.sixteenthD': '附点十六分 (1/16.)',
-      'out.sixteenthT': '三连十六分 (1/16T)',
-      'out.thirtysecond': '三十二分 (1/32)',
-      'out.lfoQuarter': 'LFO 速率 · 1/4',
-      'out.lfoEighth': 'LFO 速率 · 1/8',
-      'out.lfoSixteenth': 'LFO 速率 · 1/16',
-      'errBpm': '请输入 20-300 BPM 之间的速度',
-      'chartTitle': '该速度下的音符时值',
-      'cmp.0': '1/1', 'cmp.1': '1/2', 'cmp.2': '1/4', 'cmp.3': '1/8', 'cmp.4': '1/16',
-      'cmpseg.0': '延迟时值',
-      'preset.0': '120 — 录音室默认',
-      'preset.1': '90 — 嘻哈',
-      'preset.2': '140 — EDM',
-      'preset.3': '60 — 氛围/半速',
-      'note': '🎸 附点 = ×1.5,三连 = ×2/3。模拟延迟踏板没有音符开关,直接拨毫秒:120 BPM 附点八分 = 375 ms。数码踏板设成 note 值时,反馈节流到 2-3 次重复最像磁带机;预延迟 10-30 ms 能把干声从混响里拎出来。',
-    },
-  },
+
   es: {
     useCases: ['convertir el tempo a milisegundos para un pedal de delay', 'programar el delay de corchea con puntillo', 'sincronizar la tasa LFO de chorus y flanger a la canción', 'ajustar pre-delay en la mezcla'],
     faqs: [

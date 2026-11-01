@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * WebP to PNG Converter 长文正文 —— 四语 dispatcher
+ * WebP to PNG Converter 长文正文 —— 三语 dispatcher
  *
- * en 分支等价于原 ToolContent 渲染输出。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支等价于原 ToolContent 渲染输出。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en (与改造前渲染输出一致) ────────────────────────────
@@ -56,40 +56,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具?</h2>
-    <p>
-      <strong>WebP</strong> 非常适合 Web 使用,但许多工具 —— 较老的 Photoshop 版本、办公套件、聊天软件以及部分 CMS 上传字段 —— 仍然拒绝打开它。本转换器可在浏览器中直接把 WebP 图片转换成被普遍支持的 <strong>PNG</strong>(无损)或 <strong>JPEG</strong>(更小、有损)。
-      不会上传到任何地方:文件先解码到浏览器内的 canvas,再在本地重新编码,因此既能离线工作,又适合处理私密图像。
-    </p>
-
-    <div>
-      <h2>PNG 还是 JPEG —— 该选哪个?</h2>
-      <p>
-        当你需要像素级完美副本,或图像包含透明度(Logo、UI 素材、带文字的截图)时,请选择 <strong>PNG</strong> —— PNG 是无损格式,画质不会有任何损失。当你更在意文件体积而非完美时(通常是照片),请选择 <strong>JPEG</strong>。
-        JPEG 没有 alpha 通道,所以任何透明像素都会被压平到你所选的背景色上(默认为白色)—— 下载前请对照该颜色检查透明作品的边缘。
-      </p>
-    </div>
-
-    <div>
-      <h2>为什么转换后的文件可能比原图更大</h2>
-      <p>
-        WebP 使用的压缩比 PNG 更先进,因此重新编码出的无损 PNG 往往比起始的 WebP <em>更大</em> —— 这是正常现象,不是 bug。如果你的目标是缩小体积,请切换到 JPEG 并把质量滑块调低;下载按钮上方实时显示的输出大小会准确告诉你最终结果。
-        对照片来说,质量在 <code>80–90%</code> 左右通常与原图肉眼难辨。
-      </p>
-    </div>
-
-    <div>
-      <h2>最干净转换的几点提示</h2>
-      <p>
-        转换在图像的<strong>原始分辨率</strong>下进行 —— 不做重采样,元数据(如 EXIF)会被直接丢弃而非重新压缩。如果你还需要调整尺寸,请先用图像缩放工具完成,然后再转换,这样只需承担一次画质损失。
-        动画 WebP 会取其<em>第一帧</em>进行转换;canvas 解码不会把动画带到 PNG 或 JPEG 中。
-      </p>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -161,7 +127,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function WebpToPngConverterContent(): ReactNode {
   const { locale } = useApp()

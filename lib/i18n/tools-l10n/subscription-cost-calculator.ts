@@ -5,36 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const SubscriptionCostCalculatorL10n: ToolL10n = {
-  zh: {
-    useCases: ['盘点所有订阅的真实月支出', '看"每月才 9.99"五年花多少', '按工时换算订阅的隐性成本', '决定该砍掉哪些订阅'],
-    faqs: [
-      { q: '计算逻辑是什么?', a: '年付订阅除以 12、季付除以 3,再加到月付总额上——这就是真实月成本。年度乘 12、五年乘 60,全程用一致的月度等效口径。' },
-      { q: '工时那个数字什么意思?', a: '它把你的年度总支出除以 25——大约是税后平均时薪——算出订阅每年消耗多少个工作小时。"一年 42 小时的生命"往往比任何美元数字更能催人砍订阅。' },
-      { q: '该把哪些费用算进来?', a: '所有周期性扣款:流媒体、云存储、App、健身房、域名、新闻,以及小额的应用内订阅都算。翻翻信用卡账单找认不出的扣款——普通家庭几乎都有几个被遗忘的"幽灵订阅"。' },
-      { q: '为什么要看五年?', a: '长周期会揭示"每月才 9.99"的真实价格——按这个费率一项服务五年约 600 美元。这和贷款看利息总支出是同一个道理:总价比每月零头更能说明问题。' },
-    ],
-    ui: {
-      'chartTitle': '累计支出',
-      'line.total': '累计已付',
-      'in.fiveYear': '五年累计',
-      'in.monthly': '真实月支出',
-      'in.monthlySubs': '月付订阅合计',
-      'in.quarterlySubs': '季付订阅合计',
-      'in.workHours': '每年工作小时',
-      'in.yearly': '年度总额',
-      'in.yearlySubs': '年付订阅合计',
-      'note': '💡 列出每一笔周期性支出:流媒体、云盘、应用、健身、域名、新闻。五年那一栏才是"每月才 $9.99"的诚实价格。',
-      'out.fiveYear': '五年累计',
-      'out.monthly': '真实月支出',
-      'out.monthlySubs': '月付订阅合计',
-      'out.quarterlySubs': '季付订阅合计',
-      'out.workHours': '每年工作小时',
-      'out.yearly': '年度总额',
-      'out.yearlySubs': '年付订阅合计',
-          'errNonNegative': "各订阅金额不能为负",
-      'outSub.workHours': "按税后 $25/小时折算",
-},
-  },
+
   es: {
     useCases: ['sumar el coste mensual real de todas tus suscripciones', 'ver cuánto cuesta ese «solo 9,99» en cinco años', 'convertir tus suscripciones a horas de trabajo', 'decidir qué suscripciones cancelar'],
     faqs: [

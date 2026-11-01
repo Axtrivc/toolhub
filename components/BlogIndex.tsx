@@ -47,7 +47,7 @@ export function getPostDescription(locale: Locale, post: BlogPostMeta): string {
 function formatDate(locale: Locale, iso: string): string {
   const localeMap: Record<Locale, string> = {
     en: 'en-US',
-    zh: 'zh-CN',
+
     es: 'es-ES',
     de: 'de-DE',
   }

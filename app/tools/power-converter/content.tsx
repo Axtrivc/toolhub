@@ -31,32 +31,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具?</h2>
-    <p><strong>功率</strong>是能量使用的速率——一瓦特等于每秒一焦耳。本工具可在瓦特、千瓦、马力、BTU/秒等单位之间换算。</p>
-    <div>
-      <h2>关键换算</h2>
-      <ul>
-        <li>1 马力(hp)≈ 745.7 瓦特</li>
-        <li>1 公制马力(PS)≈ 735.5 瓦特</li>
-        <li>1 千瓦(kW)= 1000 瓦特</li>
-        <li>1 BTU/秒 ≈ 1055 瓦特(用于制热/制冷)</li>
-      </ul>
-    </div>
-    <div>
-      <h2>现实中的功率</h2>
-      <ul>
-        <li>LED 灯泡:10 W</li>
-        <li>微波炉:1000 W(1 kW)</li>
-        <li>普通汽车发动机:100-200 hp(75-150 kW)</li>
-        <li>家庭用电:平均 ~1-2 kW,峰值 ~10-30 kW</li>
-        <li>核电站反应堆:~1 GW(1,000,000 kW)</li>
-      </ul>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -112,7 +86,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function PowerConverterContent(): ReactNode {
   const { locale } = useApp()

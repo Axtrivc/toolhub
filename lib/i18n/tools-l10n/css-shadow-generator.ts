@@ -5,42 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const cssShadowGeneratorL10n: ToolL10n = {
-  zh: {
-    ui: {
-      'backdropBlur': '背景模糊',
-      'backgroundOpacity': '背景不透明度',
-      'blur': '模糊',
-      'borderColorLabel': '边框颜色',
-      'boxShadowTitle': '盒阴影',
-      'colorLabel': '颜色',
-      'copy': '复制',
-      'enableLabel': '启用',
-      'generatedCss': '生成的 CSS',
-      'glassmorphismTitle': '玻璃拟态',
-      'insetLabel': '内阴影',
-      'livePreview': '实时预览',
-      'note': '🔒 100% 本地运行——所有数值均在本地计算。预览使用渐变背景,让玻璃拟态效果清晰可见。',
-      'offsetX': 'X 偏移',
-      'offsetY': 'Y 偏移',
-      'opacity': '不透明度',
-      'previewLabel': '预览',
-      'spread': '扩展',
-      'shadowColorAria': '阴影颜色',
-      'glassBorderColorAria': '玻璃边框颜色',
-    },
-    useCases: [
-      '拖动滑块调出理想的 box-shadow',
-      '打造毛玻璃(glassmorphism)质感',
-      '实时预览并一键复制 CSS',
-      '为新拟态(neumorphism)组件生成投影',
-    ],
-    faqs: [
-      { q: 'box-shadow 的模糊(blur)和扩展(spread)有什么区别？', a: '模糊半径会柔化阴影边缘——数值越大,阴影越柔和、越分散。扩展半径会让阴影本身变大或缩小——正值让它比元素更大,负值让它更小。0 模糊加正扩展会产生一个硬边的副本。' },
-      { q: '怎么做毛玻璃效果？', a: '毛玻璃需要三部分:半透明背景(低 alpha 的 rgba)、元素上的 backdrop-filter: blur(...) 以及一条细边框。本工具同时提供这三项,方便你实时调整。注意 backdrop-filter 要求元素背后有内容才能产生模糊。' },
-      { q: 'backdrop-filter 所有浏览器都支持吗？', a: '所有现代 Chrome、Edge、Safari(需 -webkit- 前缀)和 Firefox 103+ 都支持。旧浏览器会忽略它,元素则显示为纯色背景。生成的 CSS 已包含 -webkit-backdrop-filter 前缀以兼容 Safari。' },
-      { q: '多层阴影怎么写？', a: 'box-shadow 支持逗号分隔的多层:第一层做近距离接触阴影(0 2px 4px),第二层做扩散的环境阴影(0 8px 24px rgba(0,0,0,0.12))。两三层叠加比单层更接近真实光照,Material Design 的 elevation 就是这个思路。' },
-    ],
-  },
+
   es: {
     ui: {
       'backdropBlur': 'Desenfoque de fondo',

@@ -10,7 +10,7 @@
  *  - prorated-rent-calculator:首/末月按天比例房租(月口径 vs 年口径)
  *  - rental-property-calculator:NOI / cap rate / 现金流 / cash-on-cash / 1% 规则
  *  - house-flip-calculator:70% 规则最高买价、利润与 ROI
- * 均基于 makeCalculatorClient,compute 纯函数,遵循四语 l10n 与确定性首帧规范。
+ * 均基于 makeCalculatorClient,compute 纯函数,遵循三语 l10n 与确定性首帧规范。
  */
 
 import { makeCalculatorClient } from '../calculator/makeCalculatorClient'

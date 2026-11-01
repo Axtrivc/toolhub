@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * EvChargingCostCalculator 长文正文 —— 四语 dispatcher
+ * EvChargingCostCalculator 长文正文 —— 三语 dispatcher
  *
- * en 分支与 SSR 渲染输出一致。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支与 SSR 渲染输出一致。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -24,19 +24,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>每英里成本才是关键数字</h2>
-    <p>效率 3.5 miles/kWh 的电车在家充 $0.17 的费率下,每英里约 5 美分;30 MPG、油价 $3.50 的油车接近 12 美分。按年 12,000 英里,这个差距累计约 $800——即使按计算器默认的 20% 公共桩占比,也有约 $625——还没算机油、刹车磨损,以及那台不需要保养的变速箱。</p>
-    <h2>效率的差异比想象中大</h2>
-    <p>紧凑级电车普遍能做到 3.5-4.5 miles/kWh;大型 SUV 和皮卡只有 2-3。低温再打个 7-8 折,高速工况的伤害也比油车更明显。仪表盘上的累计平均油耗比任何宣传册都可信——用它。</p>
-    <h2>公共桩在悄悄改写账本</h2>
-    <p>直流快充的价格常是家充的 2-4 倍。默认场景里,公共桩占比从 20% 提到 80%,混合电价就从约 $0.23/kWh 升到 $0.40,每英里优势几乎被抹平。谷电家充则相反,能把每英里拉向 3-4 美分。</p>
-    <h2>完整的持有成本对比还应包括什么</h2>
-    <p>充电只是账本的"燃料"行。完整的电 vs 油对比还要加上家充桩安装费、保险差价、额外车重带来的轮胎磨损,以及折旧。单看燃料,电车通常显著占优——只是要用你自己的真实费率,而不是全国均价。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -66,7 +53,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function EvChargingCostCalculatorContent(): ReactNode {
   const { locale } = useApp()

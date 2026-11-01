@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * ScreenTimeCalculator 长文正文 —— 四语 dispatcher
+ * ScreenTimeCalculator 长文正文 —— 三语 dispatcher
  *
- * en 分支与改造前渲染输出一致。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支与改造前渲染输出一致。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -22,17 +22,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这些数字意味着什么</h2>
-    <p>每天 4 小时,一年就是 61 个完整的 24 小时天——约合两个月。拉长到几十年看,数字显得抽象;一旦换算成"够学一门语言、写一本书"就有感觉了。</p>
-    <h2>平均线在哪里</h2>
-    <p>美国成年人仅手机就日均约 4.5-5 小时;算上电视和工作,总屏幕暴露超过 7 小时。即使你低于平均,这笔账照样复利式累积。</p>
-    <h2>现实地找回时间</h2>
-    <p>"每天找回 1 小时"的情境刻意保守:删掉一个习惯性刷的应用通常就能拿回这一小时,不需要意志力表演。灰度模式和主屏精简在多数试验中比应用限时更有效。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -58,7 +47,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function ScreenTimeCalculatorContent(): ReactNode {
   const { locale } = useApp()

@@ -5,52 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const userAgentParserL10n: ToolL10n = {
-  zh: {
-    ui: {
-      'botFieldsUnreliable': '爬虫 UA 里的浏览器/操作系统字段常模仿真实浏览器,可能不可靠。',
-      'botLooksLike': '这看起来是自动爬虫(',
-      'botNotHuman': '),而非人类访客。',
-      'botPrefix': '爬虫:',
-      'browserLabel': '浏览器',
-      'copyJson': '复制 JSON',
-      'deviceDesktop': '桌面端',
-      'deviceMobile': '移动端',
-      'deviceTablet': '平板',
-      'deviceTypeLabel': '设备类型',
-      'emptyHint': '在上方粘贴任意 User-Agent 字符串,或点击',
-      'emptyHintSuffix': ' 来解析你当前的浏览器。',
-      'engineLabel': '引擎',
-      'inputLabel': 'User-Agent 字符串',
-      'loadMyUa': '加载我的 UA',
-      'notABot': '非已知爬虫',
-      'noteMain': '🔒 解析 100% 本地——字符串不离开你的浏览器。UA 嗅探本质上是启发式的:客户端可以伪造任何字段,且 Windows 10 与 11 故意无法区分(两者都报告',
-      'noteSuffix': ')。',
-      'osLabel': '操作系统',
-      'parsedResultLabel': '解析结果 (JSON)',
-      'unknown': '未知',
-      'versionUnknown': '版本未知',
-    },
-    useCases: [
-      '我的 User-Agent 字符串是什么',
-      '在线 User-Agent 解析器',
-      '从 User-Agent 检测浏览器',
-      'User-Agent 查询工具',
-    ],
-    faqs: [
-      {
-        q: '我用的是 Edge 或 Brave,为什么 UA 里写着 Chrome?',
-        a: '基于 Chromium 的浏览器(Edge、Brave、Opera、Vivaldi)为了兼容性都会在 UA 里带上 Chrome 字样。Edge 和 Opera 会在此基础上加一个专属标识(「Edg」「OPR」),解析器会报告能识别到的最具体的浏览器,因此它们能凭这些标识被识别出来。而 Brave 和 Vivaldi 刻意使用与 Chrome 完全相同的 UA、不加自己的标识,所以在这里会显示为 Chrome。',
-      },
-      {
-        q: '靠 UA 字符串检测浏览器和操作系统可靠吗?',
-        a: '有用,但并非万无一失。浏览器正在逐步精简 UA 字符串(User-Agent Client Hints),隐私工具会冻结或伪造它,新的或小众产品可能还没进检测库。请把结果当作提示,而非保证。',
-      },
-      {
-        q: 'User-Agent 字符串到底用来做什么?',
-        a: '服务器和分析系统用它来选择内容(如移动端布局)、统计浏览器占比,或拦截已知爬虫。如今越来越推荐用 JavaScript 做特性检测,因为 UA 字符串不可靠且容易伪造。',
-      },
-    ],
-  },
+
   es: {
     ui: {
       'botFieldsUnreliable': 'Los campos navegador/SO en UAs de bots suelen imitar navegadores reales y pueden ser poco fiables.',

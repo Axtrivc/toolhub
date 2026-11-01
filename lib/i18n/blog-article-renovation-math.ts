@@ -23,8 +23,8 @@ const EN_CRUMB_TITLE = 'Material Estimating Guide'
 
 export const renovationMathArticle: LocalizedArticle = {
   en: {
-    articleTitle: { en: EN_TITLE, zh: '包工头的材料估算指南:算清瓷砖、地板与油漆的损耗系数', es: 'La guía del contratista para estimar materiales: calcular el factor de desperdicio de baldosas, suelos y pintura', de: 'Der Handwerker-Leitfaden zur Materialberechnung: Verschnitt-Faktoren für Fliesen, Bodenbeläge und Farbe' },
-    breadcrumbTitle: { en: EN_CRUMB_TITLE, zh: EN_CRUMB_TITLE, es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
+    articleTitle: { en: EN_TITLE,  es: 'La guía del contratista para estimar materiales: calcular el factor de desperdicio de baldosas, suelos y pintura', de: 'Der Handwerker-Leitfaden zur Materialberechnung: Verschnitt-Faktoren für Fliesen, Bodenbeläge und Farbe' },
+    breadcrumbTitle: { en: EN_CRUMB_TITLE,  es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
     readMinutes: 9,
     lead: 'The difference between a DIY weekend and a third trip to the store is one number: the waste factor. Contractors price it into every estimate; homeowners discover it mid-project. Here is the measuring math and the waste factors the trade actually uses.',
     sections: [
@@ -106,93 +106,10 @@ export const renovationMathArticle: LocalizedArticle = {
       },
     ],
   },
-  zh: {
-    articleTitle: { en: EN_TITLE, zh: '包工头的材料估算指南:算清瓷砖、地板与油漆的损耗系数', es: 'La guía del contratista para estimar materiales: calcular el factor de desperdicio de baldosas, suelos y pintura', de: 'Der Handwerker-Leitfaden zur Materialberechnung: Verschnitt-Faktoren für Fliesen, Bodenbeläge und Farbe' },
-    breadcrumbTitle: { en: EN_CRUMB_TITLE, zh: EN_CRUMB_TITLE, es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
-    readMinutes: 9,
-    lead: '"DIY 一个周末"和"第三次跑建材店"之间的差别就是一个数字:损耗系数。包工头把它写进每份报价,业主在工程过半时才认识它。本文给出测量数学与行业真实使用的损耗系数。',
-    sections: [
-      {
-        heading: '1. 像包工头一样测量:净面积,不是户型图上的房间名',
-        blocks: [
-          '一切估算从实测面积开始——而房间从来不是户型图上那个矩形。量墙到墙,然后减去不铺的部分(壁炉台、橱柜占地、楼梯开口),加上要铺的(壁橱、凹室)。L 形房间拆成矩形求和。',
-          '单位纪律是估算悄悄死掉的地方:美国建材按平方英尺卖地板、按加仑卖漆;很多进口瓷砖按厘米标注。**开工前一次性换算**:1 m² = 10.764 ft²,1 ft² = 0.0929 m²。',
-          {
-            card: {
-              title: '矩形计算器',
-              href: '/tools/rectangle-calculator/',
-              desc: '每段长 × 宽再逐块求和——L 形与凹室的净面积算术。',
-            },
-          },
-          {
-            card: {
-              title: '面积换算器',
-              href: '/tools/area-converter/',
-              desc: 'ft² ↔ m² ↔ yd² 精确系数——下单前换算,别在收银台换算。',
-            },
-          },
-        ],
-      },
-      {
-        heading: '2. 地板:10% 规则,以及它不够用的时候',
-        blocks: [
-          '直铺默认 **10% 损耗**:墙边裁切、错缝拼花,以及你一定会裁废的那几块板。斜铺、人字拼、鱼骨拼把损耗推到 **15–20%**——每一条边都是斜切。',
-          { code: CODE_MATERIALS },
-          '两个值得偷师的行业习惯。其一,**所有箱子核对同一色号/批次号**——同一 SKU 不同生产批次的色差肉眼可见。其二,铺完留 1–2 箱备用:五年后一块板坏了,能不能修只取决于你家阁楼里还有没有同款。',
-          {
-            card: {
-              title: '地板计算器',
-              href: '/tools/flooring-calculator/',
-              desc: '房间面积到所需箱数,损耗系数可调——含按每箱片数取整的批次数学。',
-            },
-          },
-        ],
-      },
-      {
-        heading: '3. 瓷砖:排布方式在你下刀之前就决定了损耗',
-        blocks: [
-          '瓷砖损耗由几何决定,不由手艺决定。房间尺寸接近瓷砖整数倍的正铺,损耗约 10%;同一块砖转 45°,每条墙边都变斜切——15–20%。小房间里铺大板是极端情况:件数少,每刀切掉三分之一块砖。',
-          '勾缝剂和瓷砖胶用同样的纪律下单:勾缝用量随缝宽与砖尺寸缩放(包装上的表格默认 12" 砖配 1/8" 缝——小砖宽缝能把用量翻三倍);瓷砖胶的覆盖率假设基层平整,先做自流平比事后明白便宜得多。',
-        ],
-      },
-      {
-        heading: '4. 油漆:覆盖率数学、遍数,与底漆问题',
-        blocks: [
-          '墙面面积 = 周长 × 层高 − 开口(门 ≈ 21 ft²,窗 ≈ 15 ft²)。一加仑在平整石膏板上每遍覆盖 **350–400 ft²**——拉毛面、毛坯砖墙、深色改浅色都会更费。多数翻新需要**两遍**;大幅度改色需要底漆加两遍。',
-          '带损耗算加仑数:(墙面积 × 遍数 × 1.1) ÷ 350。12×15 ft、层高 8 ft 的房间,扣除开口约 400 ft² 墙面——两遍加损耗约 2.5 加仑,买 3 加仑,没开封的那桶留好小票可退。',
-          {
-            card: {
-              title: '油漆计算器',
-              href: '/tools/paint-calculator/',
-              desc: '房间尺寸到加仑数,遍数与损耗内置——天花板、墙面、踢脚线分开算。',
-            },
-          },
-        ],
-      },
-      {
-        heading: '5. 预算层:不可预见费不是悲观',
-        blocks: [
-          '材料是可预测的一半。不可预测的一半——地板下的腐朽、洗手盆后的霉菌、图纸上不存在的水管——就是装修预算带 **10–20% 不可预见费**的原因。老房和任何动水的工程取高值;纯面子工程取低值。',
-          '最后的纪律是顺序:量两次,订一次,且在拆旧**之前**订货。终结周末工程的是材料货期的次数,远多于手艺不精。',
-        ],
-      },
-      {
-        heading: '下单前清单',
-        blocks: [
-          { list: [
-            '逐房测**净面积**;非矩形房间画拆分草图。',
-            '开工前**一次性**换算单位;估算中途绝不混用 ft² 与 m²。',
-            '应用正确的**损耗系数**:直铺 10%,斜铺/拼花 15–20%。',
-            '所有箱子核对**批次/色号**;留 1–2 箱备用。',
-            '预算加 **10–20% 不可预见费**;先订料,再开拆。',
-          ] },
-        ],
-      },
-    ],
-  },
+
   es: {
-    articleTitle: { en: EN_TITLE, zh: '包工头的材料估算指南:算清瓷砖、地板与油漆的损耗系数', es: 'La guía del contratista para estimar materiales: calcular el factor de desperdicio de baldosas, suelos y pintura', de: 'Der Handwerker-Leitfaden zur Materialberechnung: Verschnitt-Faktoren für Fliesen, Bodenbeläge und Farbe' },
-    breadcrumbTitle: { en: EN_CRUMB_TITLE, zh: EN_CRUMB_TITLE, es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
+    articleTitle: { en: EN_TITLE,  es: 'La guía del contratista para estimar materiales: calcular el factor de desperdicio de baldosas, suelos y pintura', de: 'Der Handwerker-Leitfaden zur Materialberechnung: Verschnitt-Faktoren für Fliesen, Bodenbeläge und Farbe' },
+    breadcrumbTitle: { en: EN_CRUMB_TITLE,  es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
     readMinutes: 9,
     lead: 'La diferencia entre un fin de semana de bricolaje y un tercer viaje a la tienda es un número: el factor de desperdicio. Los contratistas lo incluyen en cada presupuesto; el particular lo descubre a mitad de obra. Aquí va la matemática de medición y los factores que el oficio usa de verdad.',
     sections: [
@@ -275,8 +192,8 @@ export const renovationMathArticle: LocalizedArticle = {
     ],
   },
   de: {
-    articleTitle: { en: EN_TITLE, zh: '包工头的材料估算指南:算清瓷砖、地板与油漆的损耗系数', es: 'La guía del contratista para estimar materiales: calcular el factor de desperdicio de baldosas, suelos y pintura', de: 'Der Handwerker-Leitfaden zur Materialberechnung: Verschnitt-Faktoren für Fliesen, Bodenbeläge und Farbe' },
-    breadcrumbTitle: { en: EN_CRUMB_TITLE, zh: EN_CRUMB_TITLE, es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
+    articleTitle: { en: EN_TITLE,  es: 'La guía del contratista para estimar materiales: calcular el factor de desperdicio de baldosas, suelos y pintura', de: 'Der Handwerker-Leitfaden zur Materialberechnung: Verschnitt-Faktoren für Fliesen, Bodenbeläge und Farbe' },
+    breadcrumbTitle: { en: EN_CRUMB_TITLE,  es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
     readMinutes: 9,
     lead: 'Der Unterschied zwischen einem DIY-Wochenende und der dritten Fahrt zum Baumarkt ist eine Zahl: der Verschnitt-Faktor. Handwerker kalkulieren ihn in jeden Kostenvoranschlag; Hausbesitzer lernen ihn mitten im Projekt kennen. Hier die Mess-Mathematik und die Verschnitt-Faktoren, die das Gewerbe wirklich nutzt.',
     sections: [

@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * BorderRadiusGenerator 长文正文 —— 四语 dispatcher
+ * BorderRadiusGenerator 长文正文 —— 三语 dispatcher
  *
- * en 分支与英文站渲染输出一致。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支与英文站渲染输出一致。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -24,19 +24,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>四值顺时针顺序</h2>
-    <p>CSS 的 border-radius 从左上角开始顺时针排列:TL TR BR BL。TR 等于 BL 时可省略成三值,两条对角线各自成对时折叠成两值,四角全等则只剩一个值——本工具自动输出最短合法形式。</p>
-    <h2>椭圆角与斜杠语法</h2>
-    <p>每角单值是圆弧。斜杠语法——border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%——斜杠前是水平半径、斜杠后是垂直半径,每个角因此可以是真正的椭圆。有机的「异形 Blob」和叶片形就是这么做出来的。</p>
-    <h2>像素还是百分比</h2>
-    <p>百分比按所在边解析:400×200 的盒子上,水平 50% 在上下边是 200px、在左右边只有 100px——所以四角 50% 会把任意矩形变成椭圆。盒子缩放时像素保持不动,圆角会失去设计感——流式布局用 %,定尺寸组件用 px。</p>
-    <h2>设计师常用的形状</h2>
-    <p>12-16px 是现代卡片;999px 是胶囊写法(半径不小于短边一半即完全变圆);超椭圆用 ~28% 更接近 iOS 的柔和感;票券和异形靠不对称的水平/垂直半径组合。按真实上线的尺寸预览——24px 在 40px 的 chip 上和 400px 的卡片上观感完全不同。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -66,7 +53,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function BorderRadiusGeneratorContent(): ReactNode {
   const { locale } = useApp()

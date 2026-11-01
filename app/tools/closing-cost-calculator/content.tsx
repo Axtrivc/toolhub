@@ -5,7 +5,7 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * ClosingCostCalculator 长文正文 —— 四语 dispatcher
+ * ClosingCostCalculator 长文正文 —— 三语 dispatcher
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -22,19 +22,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>买家付 2-5%,卖家付 6-10%</h2>
-    <p>过户费是房产交易的收费站。买家通常支付房价的 2-5%:贷款发起费、评估费、产权检索与贷款方产权保险、登记费,外加预缴数月房产税和一年房主保险来充实 escrow 账户。卖家负担更重——仅经纪人佣金就占 5-6%,还有转让税以及产权与结算费用的卖方份额。</p>
-    <h2>交房现金不只是首付</h2>
-    <p>首套买家常只按首付做预算,然后在其余部分上被打个措手不及。$400,000 的房子、20% 首付,桌上现金大约要备 $90,000:$80,000 首付加上约 $10,000 的过户费与预缴款。贷款机构必须在申请后三个工作日内给你 Loan Estimate——把它的过户费页和这里的估算对一遍再去比价。</p>
-    <h2>这些钱到底去了哪</h2>
-    <p>在买家的账单里,贷款方费用(发起费、点数、核贷费)是可以谈的部分——同一天内找多家机构报价,因为利率每天都在动。产权与 escrow 费同样可以货比三家:一模一样的贷款方产权保险,不同供应商能差 30% 以上;很多州还允许你自选结算公司。预缴款和 escrow 则是死数:本来就是你要缴的税和保险。</p>
-    <h2>2024 佣金规则巨变</h2>
-    <p>自 2024 年 NAR 和解案之后,经纪人佣金正式进入"可协商"时代,也不再自动展示在 MLS 挂牌信息里。卖家可以单独向买方经纪人提供补偿,也可以不给;买家可以直接和自己的经纪人谈佣金。无论谈成什么,写进估算里——在几乎所有市场,佣金仍是卖家最大的一笔成本。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -64,7 +51,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function ClosingCostCalculatorContent(): ReactNode {
   const { locale } = useApp()

@@ -5,7 +5,7 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * DepreciationCalculator 长文正文 —— 四语 dispatcher
+ * DepreciationCalculator 长文正文 —— 三语 dispatcher
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -22,19 +22,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>摊开一项资产的三种方式</h2>
-    <p>直线法每年计提等额的一块:(原值 − 残值) ÷ 年限。双倍余额递减把直线率翻倍、乘在不断缩小的账面价值上,把费用往前提。年数总和法按「剩余年限 ÷ n(n+1)/2」加权——同样前重,但比 DDB 温和。</p>
-    <h2>残值下限与直线切换</h2>
-    <p>加速折旧必须停在残值上:纯 DDB 会一路滑过去、永远落不了地。实际台账还会在「剩余余额按直线计提更多」的那一刻切换回直线法——这是会计准则和税务惯例里的通行做法。</p>
-    <h2>账面与报税是两回事</h2>
-    <p>本计算器算的是会计折旧。美国联邦报税走 MACRS:不考虑残值、回收期按资产类别固定(电脑和车辆 5 年、住宅租赁 27.5 年)、第一年还有半年惯例。Section 179 和奖励折旧甚至能让小资产一次性出表。</p>
-    <h2>什么时候该加速</h2>
-    <p>费用前移是为了匹配资产真正产出的年份:货车和笔记本大头价值都在早期流失,折旧也该如此。收益几乎不随时间衰减的建筑与长期改良,才适合平均摊。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -64,7 +51,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function DepreciationCalculatorContent(): ReactNode {
   const { locale } = useApp()

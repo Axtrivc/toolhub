@@ -5,34 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const combinationCalculatorL10n: ToolL10n = {
-  zh: {
-    formula: {
-      formula: 'C(n, k) = n! / [ k! × (n − k)! ]',
-      explain: '从 n 个物品中不计顺序地选出 k 个的方法数。读作「n 选 k」;是二项概率和帕斯卡三角的核心。',
-    },
-    ui: {
-      errRange: '需要 0 ≤ r ≤ n',
-      errIntegers: '请为 n 和 r 输入整数',
-      errTooBig: 'n 不能超过 10,000(结果太大,无法显示)',
-      'in.n': '总数 (n)',
-      'in.r': '选取 (r)',
-      'out.result': '组合数 C(n,r)',
-      'out.formula': '公式',
-      'out.odds': '中奖概率',
-      'outSub.odds': '随机选一组恰好命中',
-      oddsOneIn: '{c} 分之一',
-      note: '🃏 组合:从 n 个中选 r 个,不考虑顺序。彩票概率就用这个。',
-    },
-    useCases: [
-      '彩票概率:从 49 中选 6',
-      '卡牌游戏:5 张扑克牌的组合数',
-      '团队组建:从 10 人中选 3 人委员会',
-      '质量抽检与库存采样',
-    ],
-    faqs: [
-      { q: '组合和排列有什么区别?', a: '组合不考虑顺序({生菜,番茄} 和 {番茄,生菜} 是同一份沙拉)。排列考虑顺序(密码「abc」与「cba」不同)。需要有序排列时请用排列计算器。' },
-    ],
-  },
+
   es: {
     formula: {
       formula: 'C(n, k) = n! / [ k! × (n − k)! ]',

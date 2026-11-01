@@ -5,22 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const slugToTitleL10n: ToolL10n = {
-  zh: {
-    ui: {
-      defaultInput: '如何-制作-煎饼',
-      inputLabel: 'URL slug',
-      outputLabel: '标题',
-      note: '🔤 把 URL slug 还原成可读标题。把连字符与下划线换成空格,并将每个单词首字母大写。',
-    },
-    useCases: [
-      '导入旧博客时从 URL 还原标题',
-      '清理从 CMS 导出的数据',
-      '把机器格式的字符串转成可读名称',
-    ],
-    faqs: [
-      { q: '能还原原本的大小写吗?', a: '不能——slug 通常已被转为小写,原始大写信息已丢失。本工具套用「标题大写」规则,大多数场景都适用,但无法还原像「iPhone」「McDonald」这样的名称。' },
-    ],
-  },
+
   es: {
     ui: {
       defaultInput: 'como-hacer-panqueques',

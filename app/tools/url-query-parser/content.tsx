@@ -21,22 +21,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具?</h2>
-    <p>URL <strong>查询字符串</strong>就是「?」之后的部分 — 例如 <code>?q=hello&page=2</code> 这样的参数。本工具会将其解析为清晰的 JSON 对象,便于检查或使用。</p>
-    <div>
-      <h2>何时会用到它</h2>
-      <ul>
-        <li>调试 API 请求</li>
-        <li>逆向分析跟踪链接</li>
-        <li>检查 UTM 营销参数</li>
-        <li>在代码中构建查询字符串</li>
-      </ul>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -72,7 +56,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function URLQueryParserContent(): ReactNode {
   const { locale } = useApp()

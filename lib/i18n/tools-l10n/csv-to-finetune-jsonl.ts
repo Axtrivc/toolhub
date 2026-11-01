@@ -5,36 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const CsvToFinetuneJsonlL10n: ToolL10n = {
-  zh: {
-    useCases: [
-      '标注团队交付 CSV 问答对后,一键转成 OpenAI 微调 API 要求的 chat-messages JSONL',
-      '利用可选 system 列给每条样本统一注入人格或业务规则,无需手写脚本',
-      '微调提交前的格式体检:先转 50 条样本,确认 messages 结构与 UTF-8 编码无误',
-      '清洗数据:assistant 为空的行会被显式标记出来,逐行回炉修正而不是静默丢弃',
-    ],
-    faqs: [
-      { q: '输出的 JSONL 长什么样?', a: '每行一个 JSON 对象,形如 {"messages":[{"role":"system",...},{"role":"user",...},{"role":"assistant",...}]}——这正是 OpenAI 微调端点要求的 chat 格式,转换结果可直接用于 files API 上传。' },
-      { q: 'assistant 为空的行会怎样?', a: '被标记而非丢弃。空 assistant 在微调里是致命的(模型会学到“不回答”),工具会把这些行的行号列出来,方便你回到源 CSV 逐条修正。' },
-      { q: '单元格里有逗号和引号怎么办?', a: '按 RFC 4180 标准解析:带逗号、换行或引号的单元格用双引号包裹、内部引号双写转义。Excel 和 Google Sheets 导出的 CSV 天然符合该规范,直接粘贴即可。' },
-      { q: '微调需要多少条样本?', a: 'OpenAI 官方建议 50-100 条高质量样本起步即可看到明显提升,多数任务几百条足够。样本质量(一致的风格、正确的答案)远比数量重要——先用本工具把数据洗干净再谈规模。' },
-    ],
-    ui: {
-      'note': '📚 输出即 OpenAI 微调 API 所需的 chat-messages JSONL。assistant 为空的行会被标记(而非丢弃)以便修正源数据。单元格内的引号与逗号按 RFC 4180 处理。',
-      'assistantColLabel': 'assistant 列',
-      'copyJsonl': '复制 JSONL',
-      'csvLabel': 'CSV(含表头行)',
-      'errAssistantCol': '表头中未找到 assistant 列',
-      'errSysCol': '表头中未找到 system 列',
-      'errUserCol': '表头中未找到 user 列',
-      'examples': '个样本',
-      'loadSample': '加载示例',
-      'needHeaderRow': '至少需要表头行和一行数据',
-      'rowNoAssistant': '第 {n} 行:assistant 内容为空',
-      'sysColLabel': 'system 列(可选)',
-      'userColLabel': 'user 列',
-      'inputTooLarge': '输入超过 {n} 字符——为保证输入流畅已跳过转换。请精简或拆分 CSV 后再试。',
-    },
-  },
+
   es: {
     useCases: [
       'Convertir el CSV de pares pregunta-respuesta del equipo de etiquetado al JSONL chat-messages que exige la API de fine-tuning de OpenAI',

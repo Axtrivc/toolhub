@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * ShoeSizeConverter 长文正文 —— 四语 dispatcher
+ * ShoeSizeConverter 长文正文 —— 三语 dispatcher
  *
- * en 分支与站点既有渲染口径一致。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支与站点既有渲染口径一致。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -24,19 +24,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>为什么不存在换算公式</h2>
-    <p>美码和英码都数"大麦粒"(1/3 英寸),但零点不同——于是有了一贯的 ~0.5 码差,而到了品牌层面连这点稳定都会破功。欧码用"巴黎点"(2/3 cm),量的是鞋楦不是脚,还要加厂商的余量。美式女码对同一只脚直接比男码大 1.5 号。三套互不兼容的刻度面对同一只人类的脚:查表才是唯一诚实的翻译层。</p>
-    <h2>量脚,别量鞋</h2>
-    <p>傍晚站在纸上(脚到一天结束时最多会胀半码),描出两只脚的轮廓,量脚跟到最长脚趾——很多人是第二脚趾更长。按较大的那只脚买。这个厘米数能换算成任何体系,也是跨品牌时最可靠的锚点;鞋店里的量脚器只是把同一件事用硬件做了一遍。</p>
-    <h2>品牌差异就是那个 ±1 码的现实</h2>
-    <p>同样美码男鞋 9 码:Nike 对应 EU 42.5,Adidas 对应 42 2/3,ASICS 对应 42.5-43——同一只脚,三个标签。德国楦偏窄,日本品牌鞋头常更宽。介于两码之间时:跑鞋加半码(长跑中脚约胀大一码),正装鞋要跟脚可持平或减半码。退货政策的存在,就是因为尺码表是在猜。</p>
-    <h2>童鞋:每月一量,最多提前一季买</h2>
-    <p>孩子的脚是跳跃式生长——3 岁前每年最多 1.5 cm,6 岁后放缓。拇指法则:穿上鞋后,最长脚趾到鞋头之间应能塞进一个拇指宽(约 1-1.5 cm)。提前囤超过一码的鞋,结局通常是一双谁也穿不上的鞋。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -66,7 +53,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function ShoeSizeConverterContent(): ReactNode {
   const { locale } = useApp()

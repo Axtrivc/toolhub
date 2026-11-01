@@ -5,10 +5,10 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * Annuity Calculator 长文正文 —— 四语 dispatcher
+ * Annuity Calculator 长文正文 —— 三语 dispatcher
  *
  * en 分支等价于原 ToolContent 渲染输出(<h2>What Is This Tool?</h2> + intro
- * + 各 section 包在 <div> 中),字节级 SEO 安全。zh/es/de 仅客户端 hydration
+ * + 各 section 包在 <div> 中),字节级 SEO 安全。es/de 仅客户端 hydration
  * 后按 locale 切换。公式 (<code> 标签内) 保持英文/数学符号不变,仅翻译周边文字。
  */
 
@@ -41,34 +41,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具?</h2>
-    <p><strong>年金</strong>会在设定期间内,定期从本金中支付固定金额。本计算器求出在考虑投资增长的情况下,恰好在 N 年内耗尽本金所需的年度和月度支付额。</p>
-    <div>
-      <h2>年金公式</h2>
-      <p>年度支付额 = <code>P &times; r / (1 &minus; (1 + r)^&minus;n)</code>,其中 P 是本金,r 是年利率,n 是年数。该公式保证余额恰好在第 n 年归零。</p>
-    </div>
-    <div>
-      <h2>计算示例</h2>
-      <p>假设你带着 <strong>$500,000</strong> 退休,希望它维持 <strong>25 年</strong>,预期 <strong>年回报率 5%</strong>。代入公式:年度支付额约为 <strong>$35,480</strong>,约合 <strong>$2,960/月</strong>。如果只需要维持 20 年,支付额会升至约 $40,120/年——期限越短,每年拿得越多,但钱被花光的风险也更高。</p>
-    </div>
-    <div>
-      <h2>年金与永续年金</h2>
-      <p>年金在固定期限内支付。永续年金则永远支付(退休的「4% 法则」大致就是一种设计成永不枯竭的永续年金)。当期限非常长(30 年以上)时,两者会趋于一致。</p>
-    </div>
-    <div>
-      <h2>实际用途</h2>
-      <ul>
-        <li>退休提取规划</li>
-        <li>彩票奖金决策(一次性领取 vs. 年金)</li>
-        <li>养老金和结构性和解金评估</li>
-        <li>慈善赠与年金</li>
-      </ul>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -128,7 +100,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function AnnuityCalculatorContent(): ReactNode {
   const { locale } = useApp()

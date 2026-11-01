@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * ZScoreCalculator 长文正文 —— 四语 dispatcher
+ * ZScoreCalculator 长文正文 —— 三语 dispatcher
  *
- * en 分支与 SSR 渲染输出一致。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支与 SSR 渲染输出一致。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -24,19 +24,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>为什么一定要标准化</h2>
-    <p>z = (x − μ)/σ 把任何正态分布的测量值换算成不带单位的位置:高于或低于均值多少个标准差。IQ 130(μ = 100,σ = 15)对应 z = 2——与身高 6'1"(μ = 69 英寸、σ = 2.8 英寸的人群)是同一种相对位置。不做 z 变换,这两件事根本没法放在一起比较。</p>
-    <h2>概率要读对方向</h2>
-    <p>百分位 Φ(z) 回答"有多大比例在我之下":z = 2 就是第 97.72 百分位。P(Z &gt; z) 是上尾——严格高于你的比例。两侧 p 值 2 × (1 − Φ(|z|)) 是显著性标尺:超出 ±1.96 则 p &lt; 0.05,超出 ±2.576 则 p &lt; 0.01。</p>
-    <h2>68-95-99.7 骨架</h2>
-    <p>任何正态分布中,约 68% 的值落在均值 ±1σ 内,95% 在 ±1.96σ,99.7% 在 ±3σ。最后这条带就是"3σ 事件"真正稀有的原因——每尾约 1/370——也是质量控制警戒线(以及某些臭名昭著的金融模型)把 ±3σ 当报警阈值的原因。</p>
-    <h2>反着来:从百分位到原始分</h2>
-    <p>把工具切到 z → x 即可反解:x = μ + z·σ。要前 5% 的切点?第 95 百分位对应 z = 1.645,μ = 100、σ = 15 时切点是 124.7。按曲线给分、设定库存安全余量、划资格线,用的都是这一步反向查询。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -66,7 +53,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function ZScoreCalculatorContent(): ReactNode {
   const { locale } = useApp()

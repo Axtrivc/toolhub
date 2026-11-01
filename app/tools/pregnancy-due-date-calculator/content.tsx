@@ -28,29 +28,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具？</h2>
-    <p>本计算器使用 <strong>Naegele's rule</strong>（内格莱氏法则）估算你的预产期：将末次月经的第一天加上 280 天（40 周）。同时还会显示可能的受孕日期和当前孕周。</p>
-    <div>
-      <h2>40 周的计算框架</h2>
-      <p>孕期是从末次月经开始按周计算的，而非从受孕算起。「40 周」包含了你实际受孕前的大约 2 周。足月妊娠是指 37 到 42 周之间的任何时间。</p>
-    </div>
-    <div>
-      <h2>孕期的三个阶段</h2>
-      <ul>
-        <li><strong>孕早期：</strong>第 1-13 周（器官发育）</li>
-        <li><strong>孕中期：</strong>第 14-27 周（生长，可感觉到胎动）</li>
-        <li><strong>孕晚期：</strong>第 28-40+ 周（最后生长，为分娩做准备）</li>
-      </ul>
-    </div>
-    <div>
-      <h2>仅供参考</h2>
-      <p>只有大约 <strong>5% 的婴儿</strong>会在预产期当天出生。大多数婴儿会在预产期前后两周内出生。头胎通常会比预产期晚几天出生，而之后的婴儿往往会更早。</p>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -100,7 +77,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function PregnancyDueDateCalculatorContent(): ReactNode {
   const { locale } = useApp()

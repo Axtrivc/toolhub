@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * FenceCalculator 长文正文 —— 四语 dispatcher
+ * FenceCalculator 长文正文 —— 三语 dispatcher
  *
- * en 分支与既有工具页渲染一致。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支与既有工具页渲染一致。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -24,19 +24,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>一个长度撑起整张清单</h2>
-    <p>栅栏算术从桩距开始。8 英尺桩距下,100 英尺的长度要 14 根桩、13 跨;改 6 英尺就是 18 根桩。隐私式加栏板——5.5 英寸板密拼要 219 块——每跨两根横杆;柱栏式则换成三根横杆。</p>
-    <h2>混凝土跟着洞走</h2>
-    <p>直径 10 英寸、深 24 英寸的洞容纳 1.09 ft³——每根桩将近两袋 80 磅。14 根桩意味着约 26 袋,这还没锯一块板。栅栏的 DIY 预算,真正花在混凝土上。</p>
-    <h2>深度胜过直径</h2>
-    <p>桩要埋到地上高度的三分之一、低于冻土线——6 英尺栅栏要埋 2-3 英尺。洞加宽很快加混凝土;洞加深才真正抵抗冻胀与风倾。</p>
-    <h2>桩距就是下垂决策</h2>
-    <p>桩距每加一英尺就省一根桩、一个洞、两袋混凝土——也让积雪与门重下的下垂多一分。黏土上的 8 英尺隐私板配 6 英尺桩距;硬挺的柱栏围栏可到 10 英尺。按板材规格选,别按乐观选。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -66,7 +53,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function FenceCalculatorContent(): ReactNode {
   const { locale } = useApp()

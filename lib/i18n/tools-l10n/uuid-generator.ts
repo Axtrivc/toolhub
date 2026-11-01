@@ -8,22 +8,7 @@ import type { ToolL10n } from '../tool-l10n'
 const FORMULA = 'random bits = 128 − 6 = 122 (RFC 4122 v4)\ncollision probability p ≈ n² / 2^123 for n generated UUIDs (birthday bound)'
 
 export const uuidGeneratorL10n: ToolL10n = {
-  zh: {
-    ui: {
-      'copyAll': '复制全部',
-      'generate': '🎲 生成 UUID',
-      'howMany': '生成个数',
-      'note': '🆔 使用 Web Crypto API 生成 RFC 4122 v4 UUID。用于数据库、会话和分布式系统的唯一 ID。',
-    },
-    useCases: ['为数据库生成唯一主键', '创建会话令牌或 API 请求 ID', '给上传的文件生成唯一文件名', '在分布式系统中标识设备、用户或事件'],
-    formula: {
-      formula: FORMULA,
-      explain: 'v4 UUID 共 128 位,其中 6 位由版本位和变体位占用,剩下 122 位随机。生日界表明,只有当 n 接近 2^61.5 时碰撞才变得现实,因此对任何实际规模的 n,p 都几乎为零。',
-    },
-    faqs: [
-      { q: 'UUID 真的唯一吗?', a: '从实用角度来说,是的。两个随机 v4 UUID 碰撞的概率约为 1/2.7 × 10^36。你需要每秒生成数十亿个、持续数千年,才可能看到一次碰撞。' },
-    ],
-  },
+
   es: {
     ui: {
       'copyAll': 'Copiar todo',

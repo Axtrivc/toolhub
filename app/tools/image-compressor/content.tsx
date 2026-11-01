@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * ImageCompressor 长文正文 —— 四语 dispatcher
+ * ImageCompressor 长文正文 —— 三语 dispatcher
  *
- * en 分支与英文站渲染输出一致。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支与英文站渲染输出一致。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -24,19 +24,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>质量数字到底指什么</h2>
-    <p>JPEG 和 WebP 的质量是 0-100 的旋钮,决定编码器可以丢弃多少细节。低到 50 时,锐利边缘周围出现块状伪影;70-85 区间在屏幕上肉眼无差、体积却大幅下降;90 以上曲线走平,每一档几乎买不到东西。这里显示的体积是浏览器实测的真实编码输出,不是估算。</p>
-    <h2>同质量更小文件:选 WebP</h2>
-    <p>同等视觉质量下 WebP 通常比 JPEG 小 25-35%,且所有现代浏览器都能解码。只有当老旧设备必须读取文件时才留 JPEG。注意:WebP 与 JPEG 一样是有损的——把已压缩的照片再压一遍(无论什么格式),伪影会一代代叠加。</p>
-    <h2>文件反而变大的时候</h2>
-    <p>把已优化过的 JPEG 用高质量重编码可能膨胀:编码器会尽职地保留上一次压缩留下的噪点。颜色很少的小 PNG 拍平成 JPEG 也会变大。工具显示输出更大时,降低质量、换格式,或干脆保留原图——它会如实告诉你,而不是假装成功。</p>
-    <h2>压缩不是改尺寸</h2>
-    <p>本工具按原始宽高重绘每个像素——变的只是编码,图片在同样尺寸下看起来完全一致。如果目标是减少像素(4000px 的照片降到 1200px 上网),先用图片缩放工具改尺寸再压缩:分辨率砍掉的体积远比质量多。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -66,7 +53,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function ImageCompressorContent(): ReactNode {
   const { locale } = useApp()

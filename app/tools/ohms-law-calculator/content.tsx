@@ -5,7 +5,7 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * OhmsLawCalculator 长文正文 —— 四语 dispatcher
+ * OhmsLawCalculator 长文正文 —— 三语 dispatcher
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -22,19 +22,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>三角口诀背后藏着十二个公式</h2>
-    <p>人人都背过 V = I × R,但把它与瓦特定律(P = V × I)组合,能得到十二个可用公式:由 I 和 R、或 P 和 I、或 P 和 R 求 V——每个未知量都有三种解法。这正是本计算器只要求输入两个值的原因:任意一对就能定住其余。</p>
-    <h2>毫安与毫瓦的直觉检查</h2>
-    <p>实际电子工作以毫安计:9V 电压配 470Ω 电阻,电流 19.15 mA、电阻耗散 172 mW——1/4W 电阻毫无压力,1/8W 就开始发烫。把"多少毫安、多少毫瓦"练成条件反射,是原型能点亮和原型冒烟的区别。</p>
-    <h2>公差总往坏方向叠加</h2>
-    <p>±5% 的电阻、带载跌落 10% 的电池、标称条件在 25°C 的元件——都会偏离名义值。指示灯场景无所谓;但做恒流源、算保险丝,就得按每个公差的最坏角跑一遍计算。</p>
-    <h2>交流与有效值:细则</h2>
-    <p>交流电只在代入有效值(RMS)且负载纯阻性时适用这些公式。电机、变压器、任何电感电容都会引入相位,伏安乘积不再等于瓦特——那是功率因数的地盘,得换一个计算器。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -64,7 +51,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function OhmsLawCalculatorContent(): ReactNode {
   const { locale } = useApp()

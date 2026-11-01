@@ -5,40 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const WeightLossGoalCalculatorL10n: ToolL10n = {
-  zh: {
-    useCases: ['算出减到目标体重需要的每日热量缺口', '把目标体重换算成周数和达成日期', '比较 0.25/0.5/1 kg 每周速率的时间成本', '生成逐周体重下降曲线'],
-    faqs: [
-      { q: '为什么按 7,700 kcal 折 1 公斤?', a: '这是 Wishnofsky 法则(3,500 kcal/磅)换算来的工程约定。真实数值因人而异(约 5,000-9,000 kcal):随着体重下降,静息代谢会适应性下调,后期同样缺口减得更慢。' },
-      { q: '缺口超过 1,000 kcal 会怎样?', a: '很难坚持,流失肌肉的风险明显上升,训练表现也会掉。通常更好的做法是缺口控制在 500-750 kcal,并在食谱里保住每公斤体重 1.6-2.2 g 蛋白质来护住瘦体重。' },
-      { q: '为什么第一周掉得特别快?', a: '头两周的"快"主要是水分和糖原:每克糖原结合约 3 克水,砍掉碳水后 1-2 kg 的骤降是正常现象。这不算脂肪,也别把第一周速率外推全程。' },
-      { q: '每周减多少合适?', a: '常见指导是体重的 0.5-1%/周,对多数人就是 0.25-0.75 kg。要保持训练表现或体脂已经不高,取下限;速率越慢,保持住的概率越大。' },
-    ],
-    ui: {
-      'in.current': '当前体重',
-      'in.goal': '目标体重',
-      'in.rate': '每周减重速率',
-      'out.toLose': '共需减掉',
-      'out.weeks': '所需周数',
-      'out.dailyDeficit': '每日热量缺口',
-      'outSub.dailyDeficit': '按每公斤 7,700 kcal',
-      'out.goalDate': '达成日期',
-      'out.safety': '速率评估',
-      'pace.gentle': '温和节奏——最容易坚持',
-      'pace.ok': '在推荐的 0.25-1 kg/周范围内',
-      'pace.warn': '超过 1 kg/周:肌肉流失与反弹风险升高',
-      'pace.deficitWarn': '缺口超过 1,000 kcal:多数人需要把运动消耗吃回来',
-      'unit.wk': '周',
-      'errGoal': '目标体重必须低于当前体重(本工具只做减重)',
-      'errInvalid': '请输入正的体重和大于零的速率',
-      'chartTitle': '逐周体重曲线',
-      'line.weight': '体重',
-      'line.goal': '目标体重',
-      'preset.0': '经典 10 kg @ 0.5',
-      'preset.1': '慢而稳',
-      'preset.2': '入夏冲刺',
-      'note': '📉 7,700 kcal ≈ 1 kg 体脂是工程口径;真实下降还包含水分与糖原(前两周的快掉主要是水)。缺口超过 1,000 kcal/天难以坚持且容易掉肌肉。',
-    },
-  },
+
   es: {
     useCases: ['calcular el déficit diario para llegar a tu peso objetivo', 'convertir la meta en semanas y fecha concreta', 'comparar el coste temporal de 0,25/0,5/1 kg por semana', 'generar la curva semanal de descenso'],
     faqs: [

@@ -4,32 +4,11 @@
  */
 import type { ToolL10n } from '../tool-l10n'
 
-// 公式本体(纯数学,四语共用;与 lib/tool-formulas.ts 逐字一致)
+// 公式本体(纯数学,三语共用;与 lib/tool-formulas.ts 逐字一致)
 const FORMULA = 'DD = D + M ÷ 60 + S ÷ 3600 (negative for S/W)\nD = floor(|DD|);  M = floor((|DD| − D) × 60);  S = ((|DD| − D) × 60 − M) × 60'
 
 export const GpsCoordinateConverterL10n: ToolL10n = {
-  zh: {
-    formula: {
-      formula: FORMULA,
-      variables: 'DD = 十进制度(北纬/东经为正,南纬/西经为负)\nD、M、S = 度、分、秒\nHemisphere = 纬度用 N/S,经度用 E/W\nPrecision = 5 位小数 ≈ 1.1 米,6 位 ≈ 0.11 米',
-      explain: '分是一度的六十分之一,秒是一分的六十分之一,所以三种格式携带的信息完全一致——换算只是更换分数的基底,方向字母则翻译成正负号。',
-    },
-    useCases: ['把 Google Maps 的十进制坐标填进要求 DMS 的表格', '把地理缓存/航海日志里的度分秒转成十进制', '给无人机或 GPS 设备准备 WGS84 十进制输入', '核对纬度 ≤90°、经度 ≤180° 的数据合法性'],
-    faqs: [
-      { q: '三种格式分别用在哪?', a: '十进制度(DD)是 Google Maps、GeoJSON、多数软件的标准;度分秒(DMS)是海图、航空和传统导航仪的写法;度分(DDM,度.分分分)常见于手持 GPS 和 NMEA 语句。' },
-      { q: '方向字母和负号怎么对应?', a: '北纬、东经为正,南纬、西经为负——"74.0060° W" 与 "-74.0060" 是同一坐标。工具两种写法都认,字母粘在数字上(如 40.7128°N)也能拆开。' },
-      { q: '小数点后保留几位才够用?', a: '第 5 位小数约合 1.1 米,第 6 位约 0.11 米——日常定位 5 位足够,寻宝/测绘用 6 位。少于 4 位(约 11 米)对步行导航就开始偏了。' },
-      { q: '为什么 GeoJSON 要经度在前?', a: 'GeoJSON、PostGIS、shapely 等地理库遵循 [经度, 纬度] 的 x-y 顺序,与日常"纬度,经度"相反——抄错顺序会把点扔到海里。输出里专门给了 lon-first 的一行。' },
-    ],
-    ui: {
-      'inputLabel': '坐标(任意格式)',
-      'outputLabel': '转换为全部格式',
-      'placeholder': '40.7128, -74.0060 或 40° 42\' 46.1" N, 74° 0\' 21.6" W',
-      'defaultInput': '40.7128° N, 74.0060° W',
-      'note': '🧭 十进制度 ↔ 度分秒 ↔ 度分互转,N/S/E/W 方向字母任意位置都能解析(粘在数字上也行)。纬度须在 ±90°、经度 ±180° 之内;6 位小数的十进制度约合 0.11 米。',
-      'usage': '⚠️ 无法解析该坐标。支持的格式:',
-    },
-  },
+
   es: {
     formula: {
       formula: FORMULA,

@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * HouseAffordabilityCalculator 长文正文 —— 四语 dispatcher
+ * HouseAffordabilityCalculator 长文正文 —— 三语 dispatcher
  *
- * en 分支为 SEO 主文。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支为 SEO 主文。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -24,19 +24,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>从收入倒推,而不是盯着挂牌价</h2>
-    <p>多数买房人先看中房子、再发现月供供不起。可负担额度把这个顺序倒过来:贷款机构给你的住房总月供——本金、利息、房产税、保险与 HOA 合计——设两条线:不超过税前月收入的 28%(前端比),住房加全部其它债务不超过 36%(后端比)。你的真实预算由更紧的那条决定。</p>
-    <h2>为什么后端规则通常说了算</h2>
-    <p>$650 的车贷会悄悄吃掉 $650 的住房额度:在 36% 后端上限下,每一元既有债务都直接从住房配额里扣。这就是为什么收入相同的两个家庭,批下来的额度能差出一个档次——也是为什么申请前几个月先清掉车贷,最高房价能多出好几万。</p>
-    <h2>税费与保险的陷阱</h2>
-    <p>两套同样 $300,000 的房子,月供可以差出 $400:房产税 2.4% 的地区对上 0.6% 的地区,再叠加洪水或大风保险。因为贷款机构按完整 PITI 计数,高税州等于同样的收入买到更小的房。本计算器把税、保险、HOA 一并解进贷款代数式——和核贷员的真实做法一致。</p>
-    <h2>这个数不是什么</h2>
-    <p>它是常规贷款机构"愿意批"的上限,不是你"应该花"的上限。养老金储蓄、育儿开销、维修备用金都活在 36% 之外。多数理财规划师建议比批核上限低 10-15% 留出余地,锁利率时的上浮或 HOA 的特别摊派才不会把月供变成煎熬。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -66,7 +53,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function HouseAffordabilityCalculatorContent(): ReactNode {
   const { locale } = useApp()

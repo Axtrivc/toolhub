@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * WeightLossGoalCalculator 长文正文 —— 四语 dispatcher
+ * WeightLossGoalCalculator 长文正文 —— 三语 dispatcher
  *
- * en 分支与 SSR 输出一致。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支与 SSR 输出一致。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -24,19 +24,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>把目标变成算术</h2>
-    <p>目标体重一旦拆成每周速率、每日缺口和日历上的一个日期,就不再是愿望。工程口径是每公斤体脂 7,700 kcal(每磅 3,500):每周减 0.5 kg,意味着每天摄入与消耗之间留出 550 kcal 的缺口。</p>
-    <h2>前两周会撒谎</h2>
-    <p>早期体重下降主要是水分和糖原——每克储存的碳水结合约 3 克水,砍碳水几天就能掉 1-2 kg 而不碰脂肪。对着投影曲线核对,而不是对你表现最好的一周;并且做好准备:趋势变平的时刻,往往正是动力最脆弱的时候。</p>
-    <h2>选一个过得下去的速率</h2>
-    <p>有证据支撑的甜点区间是每周体重的 0.5-1%。快于每周约 1 kg,肌肉流失、训练表现和饮食依从性都会开始交过路费。如果算出来需要超过 1,000 kcal 的缺口,诚实的解法通常是拉长时间线或增加活动量——而不是挨更多饿。</p>
-    <h2>护住你现有的肌肉</h2>
-    <p>任何缺口期间,把蛋白质保持在每公斤体重 1.6-2.2 g 并坚持力量训练——抗阻训练就是告诉身体"肌肉还有用"的信号。变轻之后要重算热量需求:更小的发动机烧得更少,第一周的投影会慢慢变得乐观。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -66,7 +53,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function WeightLossGoalCalculatorContent(): ReactNode {
   const { locale } = useApp()

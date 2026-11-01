@@ -5,10 +5,10 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * Capital Gains Tax Estimator 长文正文 —— 四语 dispatcher
+ * Capital Gains Tax Estimator 长文正文 —— 三语 dispatcher
  *
  * en 分支等价于原 ToolContent 渲染输出(<h2>What Is This Tool?</h2> + intro
- * + 各 section 包在 <div> 中),字节级 SEO 安全。zh/es/de 仅客户端 hydration
+ * + 各 section 包在 <div> 中),字节级 SEO 安全。es/de 仅客户端 hydration
  * 后按 locale 切换。公式 (<code> 标签内) 保持英文/数学符号不变,仅翻译周边文字。
  */
 
@@ -44,37 +44,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具?</h2>
-    <p>当你以高于买入价的价格卖出投资时,这笔利润就是<strong>资本利得</strong>,需要纳税。你持有资产的时间长短会极大影响税率。本估算器适用美国联邦税规则。</p>
-    <div>
-      <h2>短期 vs. 长期</h2>
-      <ul>
-        <li><strong>短期(1 年及以内):</strong>按普通收入征税(你的边际税率,10-37%)</li>
-        <li><strong>长期(超过 1 年):</strong>享有 0%、15% 或 20% 的优惠税率,取决于收入水平</li>
-      </ul>
-    </div>
-    <div>
-      <h2>持有期为何重要</h2>
-      <p>差别巨大。在 24% 税级中,一笔 $10,000 的利得:短期需缴税 $2,400;长期只需 $1,500(节省 37.5% 的税)。对于接近最高税级的高收入者,持有超过 1 年可以省下数千美元。</p>
-    </div>
-    <div>
-      <h2>计算示例</h2>
-      <p>你以每股 $50 买入 100 股(合计 $5,000),在 <strong>14 个月</strong>后以 $80 卖出($8,000)。你的利得是 <strong>$3,000</strong>,由于持有超过一年,符合长期资本利得条件。如果你的应税收入处于 15% 的长期税级,需缴纳联邦税 <strong>$450</strong>。如果你早几周、在满一年之前(短期)卖出,同时处于 24% 的普通税级,同样的利得需缴税 <strong>$720</strong>——持有满一年就省下了 $270。</p>
-    </div>
-    <div>
-      <h2>未包含的内容</h2>
-      <ul>
-        <li><strong>NIIT(净投资收入税):</strong>对高收入者的投资收入征收 3.8% 的附加税</li>
-        <li><strong>州税:</strong>因州而异,范围 0-13%</li>
-        <li><strong>资本损失:</strong>可以一比一抵扣利得</li>
-        <li><strong>税损收割:</strong>策略性地确认亏损以减少税负</li>
-      </ul>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -140,7 +109,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function CapitalGainsTaxEstimatorContent(): ReactNode {
   const { locale } = useApp()

@@ -5,7 +5,7 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * GrossUpCalculator 长文正文 —— 四语 dispatcher
+ * GrossUpCalculator 长文正文 —— 三语 dispatcher
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -22,19 +22,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>为什么 $5,000 不止花 $5,000</h2>
-    <p>承诺一个净额的奖金必须做 gross-up:用目标净额除以 (1 − 税率),让预扣之后恰好落在你承诺的数字上。这一步算错,搬迁补贴就会变成愤怒的邮件。</p>
-    <h2>29.65% 的奖金预设</h2>
-    <p>美国 $100 万以下的奖金支票按 22% 联邦补充预扣;加上 7.65% 的 FICA,就是多数工资系统在用的 29.65% 工作费率。超过 $100 万,补充预扣率跳到 37%,州预扣再往上叠。</p>
-    <h2>预扣不是你的税</h2>
-    <p>Gross-up 保证的是「发钱那一刻」的净额,不是汇算清缴的结果。真实边际税率更低,差额在年度申报时退回;更高就补缴。gross-up 的公式永远不变——变的只是你喂给它的税率。</p>
-    <h2>哪些场景在做 gross-up</h2>
-    <p>应税搬迁补贴是经典案例:雇主希望外派员工实拿一个整数,于是把搬家补助反推税前。奖励金、即时奖金和某些法律和解金也一样——凡承诺了固定净额的地方,都需要反推。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -64,7 +51,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function GrossUpCalculatorContent(): ReactNode {
   const { locale } = useApp()

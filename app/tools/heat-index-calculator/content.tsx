@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * HeatIndexCalculator 长文正文 —— 四语 dispatcher
+ * HeatIndexCalculator 长文正文 —— 三语 dispatcher
  *
- * en 分支与 SSR 渲染输出一致。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支与 SSR 渲染输出一致。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -24,19 +24,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>为什么 92°F 能体感 112°F</h2>
-    <p>身体几乎全靠出汗散热——而汗只有在蒸发时才带走热量。92°F、相对湿度 70% 时,蒸发慢到让 NWS 湿热指数读出 112°F。温度计比干燥的日子只高了一点,你的散热系统却丢了约三分之一的产能。</p>
-    <h2>数字背后的公式</h2>
-    <p>NWS 用的是 Rothfusz 回归:一个九项多项式,按人体热平衡数据拟合,覆盖温度、湿度及它们的平方与交叉项。1984 年的两个修正补住角落——极干热(湿度低于 13%)实际体感低于原始多项式,而低温高湿(80-87°F 附近、湿度高于 85%)实际更高。低于 80°F 时计算器切换到官方简式,因为回归从未在那段上拟合过。</p>
-    <h2>干热与湿热是两种天气</h2>
-    <p>105°F、15% 湿度——六月的凤凰城——湿热指数反而略低于气温,约 102°F:干燥空气把汗蒸发得太快,甚至"过头"。88°F、90% 湿度——热带的早晨——读数却是 113°F。所以沙漠居民看温度计,墨西哥湾沿岸居民看湿度。</p>
-    <h2>诚实地读风险分级</h2>
-    <p>NWS 分级是 80-90°F 注意、90-103°F 极端注意、103-125°F 危险、125°F 以上极端危险——对的是湿热指数而非原始气温。实务上有两个修正:烈日直晒最高加 15°F,任何风或遮阴都做减法。指数越过 103°F 时,标准对策是轮换劳动节律、补水,并把户外作业挪到上午十点前。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -66,7 +53,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function HeatIndexCalculatorContent(): ReactNode {
   const { locale } = useApp()

@@ -5,10 +5,10 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * Retirement Calculator 长文正文 —— 四语 dispatcher
+ * Retirement Calculator 长文正文 —— 三语 dispatcher
  *
  * en 分支等价于原 ToolContent 渲染输出(<h2>What Is This Tool?</h2> + intro
- * + 各 section 包在 <div> 中),字节级 SEO 安全。zh/es/de 仅客户端 hydration
+ * + 各 section 包在 <div> 中),字节级 SEO 安全。es/de 仅客户端 hydration
  * 后按 locale 切换。SSR/预渲染恒渲染 en → Google 索引英文不变。
  */
 
@@ -49,36 +49,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具?</h2>
-    <p>
-      本计算器预测你到退休时能存下多少钱,将当前储蓄的复利增长与每月定期供款相结合。算出来的数字往往出人意料,非常有激励作用。
-    </p>
-    <div>
-      <h2>4% 法则</h2>
-      <p>
-        一个常见准则:你每年可以提取退休储蓄的 4%,而用光的风险很低。若想靠每年 $60,000 的投资收入退休,你大约需要存够 $1,500,000($60,000 ÷ 0.04)。
-      </p>
-    </div>
-    <div>
-      <h2>尽早开始的力量</h2>
-      <p>
-        时间比金额更重要。从 25 岁到 35 岁每月存 $500(然后停止)的人,最终往往比从 35 岁到 65 岁每月存 $500 的人存得更多。因为前者早存的钱多了 30 年的复利时间。
-      </p>
-    </div>
-    <div>
-      <h2>现实的回报率</h2>
-      <ul>
-        <li><strong>激进型(以股票为主):</strong>通胀后约 7%——波动大但长期回报高</li>
-        <li><strong>平衡型(股票 + 债券):</strong>通胀后约 5%</li>
-        <li><strong>保守型(以债券为主):</strong>通胀后约 3%</li>
-        <li><strong>现金储蓄:</strong>通胀后约 0-1%——勉强跟得上</li>
-      </ul>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -154,7 +124,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function RetirementCalculatorContent(): ReactNode {
   const { locale } = useApp()

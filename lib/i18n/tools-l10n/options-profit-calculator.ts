@@ -4,41 +4,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const OptionsProfitCalculatorL10n: ToolL10n = {
-  zh: {
-    useCases: ['算出期权到期日的盈亏平衡点与目标价损益', '画出到期损益曲线(P/L payoff)', '确认买方最大亏损与卖方最大盈利(权利金)', '比较认购/认沽、买方/卖方四种结构'],
-    faqs: [
-      { q: '盈亏平衡点怎么算?', a: '行权价 ± 权利金:买认购在行权价 + 权利金处保本,买认沽在行权价 − 权利金处保本。这里是到期口径,不含手续费。' },
-      { q: '为什么最大盈利/亏损显示“无上限”?', a: '卖认购的亏损随股价上涨一比一放大、没有上限;买认购的盈利则对应同样的无限上行空间。买认沽的最大盈利有上限(股价归零时 = 行权价 − 权利金),卖认沽的最大亏损同额。' },
-      { q: '损益曲线包含时间价值吗?', a: '不包含——所有数字都是到期日口径,此时时间价值归零,期权只值内在价值。到期前提前平仓结果会不同(剩余外在价值与指派风险)。' },
-      { q: '100 的乘数是什么?', a: '一张美股期权合约对应 100 股,所以每股权利金 × 100 × 张数才是真实现金流。注意公司行动(拆股、特别股息)可能改变合约乘数。' },
-    ],
-    ui: {
-      'in.pos': '头寸方向',
-      'in.strike': '行权价',
-      'in.premium': '每股权利金',
-      'in.contracts': '合约张数',
-      'in.target': '到期时股价',
-      'opt.pos.longCall': '买认购',
-      'opt.pos.shortCall': '卖认购',
-      'opt.pos.longPut': '买认沽',
-      'opt.pos.shortPut': '卖认沽',
-      'out.breakeven': '到期盈亏平衡点',
-      'out.plTarget': '目标价处的盈亏',
-      'out.maxProfit': '最大盈利',
-      'out.maxLoss': '最大亏损',
-      'out.premiumStake': '支付 / 收取的权利金',
-      'chartTitle': '不同到期价的损益',
-      'line.pl': '到期损益',
-      'line.zero': '盈亏平衡',
-      'preset.0': '买认购',
-      'preset.1': '备兑式卖认购',
-      'preset.2': '买认沽(对冲)',
-      'preset.3': '卖认沽(收租)',
-      'errInvalid': '请输入有效的行权价、权利金、张数与股价',
-      'unlimited': '无上限',
-      'note': '🧾 美股期权每张合约对应 100 股。所有数字为到期口径,不含指派/行权费用与佣金——美式期权提前指派(尤其除息前的卖认购)会改变结局。',
-    },
-  },
+
   es: {
     useCases: ['calcular el punto de equilibrio y el P/L a tu precio objetivo al vencimiento', 'dibujar la curva de pagos (payoff) al vencimiento', 'confirmar la pérdida máxima del comprador y la ganancia máxima del vendedor', 'comparar las cuatro estructuras: compra/venta × call/put'],
     faqs: [

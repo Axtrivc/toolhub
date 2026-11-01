@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * CAC & LTV Calculator 长文正文 —— 四语 dispatcher
+ * CAC & LTV Calculator 长文正文 —— 三语 dispatcher
  *
- * en 分支与改造前渲染输出一致。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支与改造前渲染输出一致。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en (与改造前渲染输出一致) ────────────────────────────
@@ -48,30 +48,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>每家企业都必须知道的两个数字</h2>
-    <p>
-      <strong>CAC</strong>(获客成本)是你花在营销和销售上的全部支出,除以这些支出带来的客户数。<strong>LTV</strong>(客户终身价值)是一个普通客户在流失之前为你创造的毛利总额。如果两个都不知道,你就是在猜:增长到底是在创造价值,还是在烧掉价值。
-    </p>
-
-    <h2>如何从流失率推算 LTV</h2>
-    <p>
-      给定月流失率,客户平均存留 <code>1 ÷ churn</code> 个月(5% 流失 → 20 个月)。客户每月贡献 <code>ARPU × 毛利率</code>的利润,因此 <code>LTV = ARPU × 毛利率 ÷ 流失率</code>。50 美元 ARPU、80% 毛利率、5% 月流失对应 800 美元的 LTV。毛利率很关键:留不下来的收入,还不起获客开销。
-    </p>
-
-    <h2>解读 LTV:CAC 比率</h2>
-    <p>
-      低于 <strong>1:1</strong> 意味着每个客户都在亏钱——先停止扩张,修好留存或定向投放。<strong>3:1</strong> 附近是经典健康区:毛利足以覆盖运营成本与试错。高于 <strong>5:1</strong> 说明效率很高,但也可能意味着你在增长上投入不足,而竞争对手会毫不客气地拿走这块份额。还要盯住 <strong>CAC 回本周期</strong>——收回获客成本所需的毛利月数;12 个月以内现金流才从容。
-    </p>
-
-    <h2>用好这些数字</h2>
-    <p>
-      按渠道和同期群(cohort)拆分:付费社交的比率往往与自然流量或口碑推荐完全不同。当 LTV:CAC 强劲时,正确的动作通常是在比率还能维持时<em>加大</em>获客投入——这个计算器让投放的天花板在财务发现之前,先被你看见。
-    </p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -151,7 +127,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function CacLtvCalculatorContent(): ReactNode {
   const { locale } = useApp()

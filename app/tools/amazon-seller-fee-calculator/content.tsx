@@ -5,7 +5,7 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * AmazonSellerFeeCalculator 长文正文 —— 四语 dispatcher
+ * AmazonSellerFeeCalculator 长文正文 —— 三语 dispatcher
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -22,19 +22,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>佣金:类目就是税率</h2>
-    <p>亚马逊多数类目抽售价的 15%,但档差很大:消费电子 8%、服装 17%、珠宝 20%、亚马逊设备配件最高到 45%。每件还有 $0.30 的下限,专门咬 $2 以下的商品。两个成本完全相同的选品,只因类目不同,一个活一个死。</p>
-    <h2>FBA 履约:小尺寸档最吃香</h2>
-    <p>2026 年标准尺寸件的 FBA 履约费大约每件 $2-$7,按尺寸与重量定档。能塞进小号信封封套的商品享受全平台最好的经济性;一旦商品变大变重,履约费可能在你察觉之前就吞掉扣除佣金后的全部毛利。</p>
-    <h2>30% 经验法则</h2>
-    <p>一件 $25 的商品,15% 佣金加 $5 FBA 费就交出去 $8.75——恰好 35%,还没算你自己的成本。老卖家常用的门槛:亚马逊费用 + 落地成本之后,售价至少要剩 30% 才肯上架;这里的利润率输出就是同一道闸门。</p>
-    <h2>数字里没算什么</h2>
-    <p>月度仓储费(Q4 有附加)、长期仓储费、PPC 广告、退货处理、头程运费都不在内。实用习惯:把算出的利润率当天花板,再扣 15-20% 的缓冲,然后才决定压不压库存。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -64,7 +51,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function AmazonSellerFeeCalculatorContent(): ReactNode {
   const { locale } = useApp()

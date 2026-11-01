@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * DiaperCostCalculator 长文正文 —— 四语 dispatcher
+ * DiaperCostCalculator 长文正文 —— 三语 dispatcher
  *
- * en 分支与站点既有渲染口径一致。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支与站点既有渲染口径一致。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -24,19 +24,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>真实的用量曲线</h2>
-    <p>新生儿每天消耗 8-12 片——第一个月常常超过 10 片——六个月后降到 6-8 片,学步期 4-6 片。第一年合计约 2,500-3,000 片,如厕训练完成前累计 6,000-8,000 片,而训练通常在 24-40 个月之间完成(男孩和晚训练的孩子会拉长尾巴)。</p>
-    <h2>单片价格决定一切</h2>
-    <p>药妆店小包约 $0.30-0.40/片;仓储超市和订阅渠道的大箱装能压到 $0.18-0.25。按 7,000 片算,$0.35 与 $0.22 之间的差距超过 $900——比多数家庭在婴儿用品其他任何单项上省下的都多。对大多数宝宝,自有品牌的吸收性与大牌相差在 10-15% 以内。</p>
-    <h2>布尿布的诚实账</h2>
-    <p>$400-800 的布尿布全套,加上每周 2-3 锅额外洗衣,对多数家庭来说确实比一次性尿布便宜——如果二胎接着用就更明显。但公平的对比要算上水、电、洗涤剂(每锅约 $0.50-1.00)以及你对冲洗的忍耐度。"在家布尿布、出门一次性"的混合策略之所以常见,正是因为非黑即白的争论是伪命题。</p>
-    <h2>囤货的时机</h2>
-    <p>只囤确定会穿到的码:宝宝会跳码(四个月的小胖墩可能再也回不去 1 码),而未开封整箱在多数零售商处 90 天内可退换。新生儿码永远不要大批囤——有的宝宝只穿两周,有的根本没穿进去过。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -66,7 +53,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function DiaperCostCalculatorContent(): ReactNode {
   const { locale } = useApp()

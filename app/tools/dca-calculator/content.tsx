@@ -5,7 +5,7 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * DcaCalculator 长文正文 —— 四语 dispatcher
+ * DcaCalculator 长文正文 —— 三语 dispatcher
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -22,19 +22,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>为什么平均成本会低于平均价格</h2>
-    <p>每月固定投 $500,价格低时自动买到更多份额、价格高时自动更少——你的平均成本最终会低于所付价格的简单平均。这是调和平均效应,也是定投唯一一条"机械性"优势:波动本身就在压低你的入场成本。</p>
-    <h2>诚实面对:定投 vs 一次性</h2>
-    <p>因为市场上涨的时候多于下跌,历史上第一天就全部买入约有三分之二的概率跑赢分批进场。当期末价低于期初价时,定投在数学上占优——在计算器里把价格调成下跌,看看差距有多大。它现实中的优势更多是行为层面的:消除猜顶猜底,让你在吓退一次性买家的回调里仍然在场。</p>
-    <h2>选一个不会让你犹豫的金额</h2>
-    <p>定投频率跟着发薪日走——月投或双周投——并设成自动执行。精确到什么频率对平均成本影响微乎其微;坚持才是变量。只要你在下跌时暂停一次计划,策略就废了:逢跌买入不是定投的副作用,它就是定投的全部机制。</p>
-    <h2>定投的隐性成本</h2>
-    <p>留待将来投入的现金会错过快速上涨行情的早期收益;单笔金额太小时,每笔手续费占比伤人;多年的持续买入还会攒下一大堆税务批次要记录。如果你拿到一笔整钱仍选择定投,请把它当成一个有明确时限的计划——而不是无限期推迟一个已经做出的决定。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -64,7 +51,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function DcaCalculatorContent(): ReactNode {
   const { locale } = useApp()

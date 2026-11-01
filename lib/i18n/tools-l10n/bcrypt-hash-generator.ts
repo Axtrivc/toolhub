@@ -5,71 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const bcryptHashGeneratorL10n: ToolL10n = {
-  zh: {
-    ui: {
-      'algoBcrypt': 'bcrypt(推荐)',
-      'algoSha256': '加盐 SHA-256',
-      'algoSha512': '加盐 SHA-512',
-      'algorithm': '算法',
-      'checking': '校验中…',
-      'copyHash': '复制哈希',
-      'costFactor': 'cost factor:',
-      'costFastWeak': '4(快,弱)',
-      'costSlowStrong': '15(慢,强)',
-      'costTimeHint': '⏱️ 普通台式机上每次哈希约需 {time}',
-      'costTypical': '10–12(典型)',
-      'costWarn': '⚠️ cost 高于 12 是故意变慢的——每升一级工作量翻倍,所以 15 在浏览器里可能要几秒。',
-      'errorEnterPassword': '请先输入密码。',
-      'errorHashingFailed': '哈希失败。',
-      'errorInvalidSalt': '盐必须是长度为偶数的非空十六进制字符串(0-9、a-f/A-F)。',
-      'errorNoWebCrypto': '此处无法使用 Web Crypto API。它需要安全上下文(HTTPS)和现代浏览器。',
-      'errorPasteHash': '请粘贴哈希并输入密码进行校验。',
-      'errorUnrecognizedHash': '无法识别的哈希格式。应为 bcrypt ($2a$/$2b$/$2y$…) 或本工具的 sha256$salt$hash / sha512$salt$hash。',
-      'errorVerifyFailed': '校验失败。',
-      'generateHash': '生成哈希',
-      'hash': '哈希',
-      'hashing': '哈希中…',
-      'highCostWait': 'cost 很高——请稍候…',
-      'iterations': '次迭代',
-      'matchCorrect': '✓ 匹配——密码正确',
-      'newRandomSalt': '新的随机盐',
-      'noMatch': '✗ 不匹配——密码或哈希错误',
-      'noteClientSide': '客户端演示',
-      'noteIntro': '⚠️ 这是一个',
-      'noteMid1': ':哈希在你的浏览器本地运行,不上传任何东西。生产环境应在',
-      'noteMid2': '用专门的密码哈希算法——',
-      'noteOr': ' 或 ',
-      'noteOutro': '——绝不要用裸 SHA-2 哈希。加盐 SHA-256/SHA-512 仅供学习和遗留格式校验。',
-      'noteServerSide': '服务端',
-      'password': '密码',
-      'passwordToCheck': '要校验的密码',
-      'passwordToHash': '要哈希的密码',
-      'regenerate': '重新生成',
-      'salt': '盐(hex,16 字节)',
-      'verify': '校验',
-      'verifyHeading': '用哈希校验密码',
-    },
-    useCases: [
-      '带 salt rounds 的 bcrypt 哈希生成器',
-      '在线校验 bcrypt 哈希',
-      '面向开发者的密码哈希工具',
-      'bcrypt cost factor 详解',
-    ],
-    faqs: [
-      {
-        q: '为什么 bcrypt 比 SHA-256 更适合存密码?',
-        a: 'bcrypt 故意设计得很慢,而且有可调的 cost factor,所以即便哈希泄露,暴力破解也会随硬件升级变得极不划算。SHA-256 设计上很快——适合做文件校验,但对密码很糟糕,因为攻击者每秒能猜几十亿次。',
-      },
-      {
-        q: 'cost factor 应该设多少?',
-        a: '选你的服务器在登录时能承受的最高值(现在一般 10–12)。每加 1 大约让哈希时间翻倍,所以合适数值取决于硬件和可接受的登录延迟。建议每过一两年重新评估一次。',
-      },
-      {
-        q: 'bcrypt 哈希能反推出原密码吗?',
-        a: '不能——哈希是单向的。攻击者只能靠猜:把每个猜测哈希后再比较。这正是慢速 cost factor 的关键所在:它让每次猜测都很贵。盐(salt,内嵌在哈希里)则防止复用预先算好的彩虹表。',
-      },
-    ],
-  },
+
   es: {
     ui: {
       'algoBcrypt': 'bcrypt (recomendado)',

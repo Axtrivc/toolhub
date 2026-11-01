@@ -62,49 +62,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具?</h2>
-    <p>
-      颜色对比度是 Web 上最常见的无障碍失败情形。如果你的文字与背景对比不足,低视力用户、身处强光下的人,以及任何使用昏暗屏幕的人都会阅读困难。<strong>WCAG</strong> 标准定义了最低对比度;本检查器会为任意两种颜色计算精确比率,并告诉你通过了哪些等级。
-    </p>
-    <div>
-      <h2>WCAG 的阈值</h2>
-      <ul>
-        <li>
-          <strong>AA(普通文本)</strong> —— 至少 <code>4.5:1</code>。这是大多数无障碍法规的法定要求。
-        </li>
-        <li>
-          <strong>AA(大号文本)</strong> —— 至少 <code>3:1</code>。「大号」指 ≥18pt,或 ≥14pt 加粗。
-        </li>
-        <li>
-          <strong>AAA(普通文本)</strong> —— 至少 <code>7:1</code>。追求最佳可读性时的更严格目标。
-        </li>
-        <li>
-          <strong>AAA(大号文本)</strong> —— 至少 <code>4.5:1</code>。
-        </li>
-        <li>
-          <strong>非文本 UI</strong>(图标、图表线条、焦点轮廓)—— 相对于相邻颜色为{' '}
-          <code>3:1</code>。
-        </li>
-      </ul>
-    </div>
-    <div>
-      <h2>对比度如何计算</h2>
-      <p>
-        每种颜色都会被换算成一个<strong>相对亮度</strong>值,该值按人眼对红、绿、蓝的敏感程度分别加权。对比度为{' '}
-        <code>(L1 + 0.05) ÷ (L2 + 0.05)</code>,其中 L1 是较亮的亮度,L2 是较暗的亮度。可能的最大比率为 21:1(纯黑置于纯白之上)。0.05 的偏移量用于补偿屏幕的环境眩光。
-      </p>
-    </div>
-    <div>
-      <h2>修复不达标的颜色组合</h2>
-      <p>
-        如果某组颜色不达标,就把文字加深或把背景调亮 —— 亮度的微小变化会显著改变比率。不要只依赖色相:红配绿可能「看起来」不同,但亮度几乎一致(这对色盲用户是个问题)。对大号文字你可以更宽松;但正文应明显高于 4.5:1,这样在昏暗或有污渍的屏幕上用户仍能轻松阅读。
-      </p>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -194,7 +151,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function ColorContrastContent(): ReactNode {
   const { locale } = useApp()

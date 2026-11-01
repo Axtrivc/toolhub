@@ -35,36 +35,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具？</h2>
-    <p>本计算器使用「美国海军体测法」估算你的体脂率，该方法通过测量颈围、腰围（女性还包括臀围）来计算。它是一种在家中即可进行的实用方法，可替代昂贵的体成分扫描。</p>
-    <div>
-      <h2>如何测量</h2>
-      <ul>
-        <li><strong>颈部：</strong>喉结下方，皮尺保持水平</li>
-        <li><strong>腰部：</strong>男性在肚脐处，女性在最细处</li>
-        <li><strong>臀部：</strong>臀部最宽处（仅限女性）</li>
-        <li>建议在早晨进食前测量，以保持结果一致</li>
-      </ul>
-    </div>
-    <div>
-      <h2>体脂率分类</h2>
-      <ul>
-        <li><strong>必需脂肪：</strong>男性 2-5% / 女性 10-13%（维持生存的最低值）</li>
-        <li><strong>运动员：</strong>男性 6-13% / 女性 14-20%</li>
-        <li><strong>健康体型：</strong>男性 14-17% / 女性 21-24%</li>
-        <li><strong>平均水平：</strong>男性 18-24% / 女性 25-31%</li>
-        <li><strong>偏高：</strong>男性 25%+ / 女性 32%+</li>
-      </ul>
-    </div>
-    <div>
-      <h2>为什么体脂率比 BMI 更有意义</h2>
-      <p>BMI 无法区分肌肉和脂肪。一位肌肉发达的运动员和一位超重者可能拥有相同的 BMI，但体脂率和健康风险却大不相同。体脂率是更有意义的指标——尽管它更难精确测量。</p>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -128,7 +98,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function BodyFatCalculatorContent(): ReactNode {
   const { locale } = useApp()

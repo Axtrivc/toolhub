@@ -25,26 +25,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具?</h2>
-    <p><strong>组合</strong>计算从 n 个物品中选取 r 个的方式数,其中顺序无关紧要。从 10 种配料里选 3 种,无论你按什么顺序挑选都一样——这就是组合。</p>
-    <div>
-      <h2>公式</h2>
-      <p>C(n,r) = n! / (r! × (n−r)!)。从 10 个中选 3 个:<code>10! / (3! × 7!) = 120</code>。</p>
-    </div>
-    <div>
-      <h2>常见用途</h2>
-      <ul>
-        <li><strong>彩票概率:</strong> 从 49 个中选 6 个 = C(49,6) = 13,983,816</li>
-        <li><strong>纸牌游戏:</strong> 一手 5 张扑克 = C(52,5) = 2,598,960</li>
-        <li><strong>组队:</strong> 从 10 人中选出 3 人委员会</li>
-        <li><strong>库存抽样:</strong> 质量控制</li>
-      </ul>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -88,7 +68,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function CombinationCalculatorContent(): ReactNode {
   const { locale } = useApp()

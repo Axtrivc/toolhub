@@ -5,39 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const StudentLoanCalculatorL10n: ToolL10n = {
-  zh: {
-    useCases: ['对比标准 10 年与延长 25 年的月供和总利息', '看阶梯递增计划起步月供有多低', '算清宽限期内资本化的利息', '决定多付月供能省多少利息'],
-    faqs: [
-      { q: '三种计划的月供怎么算?', a: '标准计划按 10 年(120 期)等额本息摊还;延长计划拉到 25 年(300 期),月供更低但总利息高得多;阶梯递增计划同为 10 年,起始月供更低、每两年上台阶,本工具按每两年 25% 递增精确解出起付额。' },
-      { q: '宽限期资本化是什么坑?', a: '联邦贷款毕业后有 6 个月宽限期,补贴型贷款期间政府替你付息,而非补贴型(Subsidized 之外)的利息照常累积,进入还款时并入本金——之后你对这 1190 美元级别的额外本金再付 10-25 年利息。' },
-      { q: '延长 25 年到底多付多少?', a: '以 $35,000、6.8%、6 个月宽限为例:10 年标准月供约 $417、还款期利息约 $13,800;延长 25 年月供降到约 $251,但还款期利息冲到约 $39,200——多出的 $25,000 就是"月供轻松"的价格。' },
-      { q: '这个结果适用于私人学生贷款吗?', a: '数学上适用——任何等额本息贷款都能算。但私人贷款没有联邦计划的阶梯/延长选项,也常在在校期间就计息;具体条款以你的贷款合同为准。' },
-    ],
-    ui: {
-      'chartTitle': '三种计划的剩余本金',
-      'preset.0': '非补贴 Stafford 贷款',
-      'preset.1': '研究生院债务',
-      'preset.2': '已再融资、无宽限期',
-      'line.std': '标准 10 年',
-      'line.grad': '阶梯 10 年',
-      'line.ext': '延长 25 年',
-      'in.balance': '贷款本金',
-      'in.rate': '年利率',
-      'in.deferred': '宽限期月数',
-      'out.capitalized': '宽限期资本化利息',
-      'out.stdPay': '标准 10 年月供',
-      'out.gradStart': '阶梯计划起始月供',
-      'out.extPay': '延长 25 年月供',
-      'out.totalInt10': '10 年还款期利息',
-      'out.totalInt25': '25 年还款期利息',
-      'outSub.totalInt10': '不含宽限期资本化利息',
-      'outSub.totalInt25': '不含宽限期资本化利息',
-      'outSub.stdPay': '120 期等额',
-      'outSub.gradStart': '每 2 年 +25%',
-      'note': '🎓 阶梯计划适合"起步薪水低、涨得快"的职业:前期月供低,代价是后期台阶陡、总利息高于标准计划。宽限期里能付多少利息就付多少——资本化后每一美元都要陪你摊上很多年。',
-      'errInvalid': '请输入正的贷款本金、非负利率与 0-24 的宽限期月数',
-    },
-  },
+
   es: {
     useCases: ['comparar mensualidad e intereses totales: 10 años estándar vs 25 extendido', 'ver cuán baja arranca la cuota del plan escalonado', 'calcular el interés capitalizado durante el grace period', 'decidir cuánto ahorra pagar de más cada mes'],
     faqs: [

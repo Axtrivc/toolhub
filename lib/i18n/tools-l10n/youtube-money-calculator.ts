@@ -5,42 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const YouTubeMoneyCalculatorL10n: ToolL10n = {
-  zh: {
-    useCases: ['用保守/典型/乐观三档 RPM 估算 AdSense 月收入', '决定要不要把频道从游戏转向财经等高 RPM 题材', '按年收入评估频道能否成为全职收入', '接商单前先有一个底价参考'],
-    faqs: [
-      { q: 'RPM 和 CPM 有什么区别?', a: 'RPM(每千次观看收入)是 YouTube 抽走 45% 广告分成后、你每 1,000 次观看实际拿到钱的指标;CPM 是广告主每 1,000 次广告展示支付的价格。RPM 永远更低,也是估算频道收入时诚实的那个数。' },
-      { q: '该用哪档 RPM?', a: '长视频的财经/商业内容通常能到 $8-15,科技 $4-10,一般 vlog $2-5,游戏 $1.5-3,Shorts 远低于此($0.05-0.15)。开通获利后直接看 YouTube Studio 自己的 RPM 报告——它会取代一切估算。' },
-      { q: '多少观看量才能在 YouTube 上赚钱?', a: '先加入合作伙伴计划:1,000 订阅 + 4,000 小时公开观看(或 90 天内 1,000 万 Shorts 观看)。按 $4 RPM 计算,月 10 万观看约 $400/月。' },
-      { q: 'AdSense 会为每次观看付钱吗?', a: '不会——只有真正展示广告的"获利播放"才有收入。重复观看、装了广告拦截器的会话、被限流或失去获利资格的内容都不产生收入,所以实际到账往往比"观看数×RPM"低 10-20%。' },
-    ],
-    ui: {
-      'in.monthlyViews': '每月观看量',
-      'in.rpmLow': 'RPM — 保守',
-      'in.rpmTypical': 'RPM — 典型',
-      'in.rpmHigh': 'RPM — 乐观',
-      'inSuffix.rpmLow': '$',
-      'inSuffix.rpmTypical': '$',
-      'inSuffix.rpmHigh': '$',
-      'out.monthlyLow': '月收入(保守)',
-      'out.monthlyTypical': '月收入(典型)',
-      'out.monthlyHigh': '月收入(乐观)',
-      'out.yearlyLow': '年收入(保守)',
-      'out.yearlyTypical': '年收入(典型)',
-      'out.yearlyHigh': '年收入(乐观)',
-      'preset.0': 'Vlog 与娱乐',
-      'preset.1': '科技评测',
-      'preset.2': '个人财经',
-      'preset.3': '游戏',
-      'chartTitle': '月收入三档情景',
-      'cmp.0': '保守',
-      'cmp.1': '典型',
-      'cmp.2': '乐观',
-      'cmpseg.0': 'AdSense',
-      'errViews': '请输入有效的观看量',
-      'errRpm': 'RPM 不能为负',
-      'note': '📺 RPM 是 YouTube 抽走 45% 之后每 1,000 次观看的收入——长视频的财经与科技内容能到 $8-15,游戏和 Shorts 低得多(Shorts RPM $0.05-0.15)。月观看过 10 万后,商单、会员与 Super Chat 通常比 AdSense 赚得多。',
-    },
-  },
+
   es: {
     useCases: ['estimar los ingresos mensuales de AdSense con tres escenarios de RPM', 'decidir si pivotar el canal hacia nichos de RPM alto', 'evaluar si el canal puede ser un ingreso a tiempo completo', 'tener una referencia antes de poner precio a un patrocinio'],
     faqs: [

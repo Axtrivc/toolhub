@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * Break-Even Calculator 长文正文 —— 四语 dispatcher
+ * Break-Even Calculator 长文正文 —— 三语 dispatcher
  *
- * en 分支与改造前渲染输出一致。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支与改造前渲染输出一致。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en(与改造前渲染输出一致) ────────────────────────────
@@ -45,31 +45,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>什么是盈亏平衡点?</h2>
-    <p>
-      <strong>盈亏平衡点</strong>是总收入恰好覆盖总成本的销售量——在此之前每卖出一件都在亏钱,之后每卖出一件都贡献纯利润。它是放贷方、投资人或特许经营披露文件最先要看的数字,也是检验一个商业想法最快的方法。
-    </p>
-
-    <h2>背后的公式</h2>
-    <p>
-      每售出一单位,可贡献 <code>单价 − 单位变动成本</code> 用于覆盖固定成本,因此{' '}
-      <code>保本销量 = 固定成本 ÷ (单价 − 单位变动成本)</code>。乘以单价即得保本销售额。<strong>边际贡献率</strong>(边际贡献 ÷ 单价)表示在支付变动成本之后,每 1 美元收入中还有多少可用于覆盖固定成本。
-    </p>
-
-    <h2>固定成本与变动成本</h2>
-    <p>
-      固定成本(房租、工资、保险、软件订阅)无论卖出多少件都保持不变。变动成本(原材料、支付手续费、运费、单件佣金)随每一笔销售等比增加。常见的错误是把半变动成本(如小时工)归错桶;应拆成固定基数加单件部分。
-    </p>
-
-    <h2>创业者如何使用它</h2>
-    <p>
-      提价 10%,保本点可能下降 20% 以上;变动成本悄悄上涨,保本点也会悄悄爬升。每次调价、换供应商或投广告前都先算一遍:如果所需的保本销量超出了市场现实的消化能力,要改的是商业模式,而不是营销。
-    </p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -123,7 +98,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function BreakEvenCalculatorContent(): ReactNode {
   const { locale } = useApp()

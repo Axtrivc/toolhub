@@ -25,26 +25,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具?</h2>
-    <p>本工具可以统计文本中每个字符出现的次数,并按频率排序。适用于写作分析、密码分析以及理解文本规律。</p>
-    <div>
-      <h2>英文字母频率</h2>
-      <p>在典型的英文文本中,最常见的字母是 E、T、A、O、I、N —— 约占所有字母的一半。这一规律常被用于简单的替换密码(例如夏洛克·福尔摩斯的《跳舞的小人》)。</p>
-    </div>
-    <div>
-      <h2>用途</h2>
-      <ul>
-        <li>密码分析与密码破译</li>
-        <li>对写作样本进行语言学分析</li>
-        <li>优化用于压缩的 Huffman 编码</li>
-        <li>检测异常的字符分布</li>
-      </ul>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -88,7 +68,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function CharacterFrequencyContent(): ReactNode {
   const { locale } = useApp()

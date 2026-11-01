@@ -5,23 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const urlQueryParserL10n: ToolL10n = {
-  zh: {
-    ui: {
-      defaultInput: 'https://example.com/search?q=你好&page=2&sort=desc',
-      inputLabel: '带查询串的 URL',
-      outputLabel: '解析后的查询参数',
-      note: '🔗 把 URL 中的查询参数提取成干净的 JSON 对象。重复的键会收集为数组。',
-    },
-    useCases: [
-      '调试 API 请求',
-      '逆向分析跟踪链接',
-      '检查 UTM 营销参数',
-      '在代码中构造查询字符串',
-    ],
-    faqs: [
-      { q: '值里的 URL 编码怎么办?', a: '本工具使用浏览器原生的 URLSearchParams 解析器,因此像 %20 这样的编码值会在输出中自动解码。' },
-    ],
-  },
+
   es: {
     ui: {
       defaultInput: 'https://example.com/search?q=hola&page=2&sort=desc',

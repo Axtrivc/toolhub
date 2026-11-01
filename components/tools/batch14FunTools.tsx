@@ -437,13 +437,7 @@ const CODE_PROMPTS = [
 
 /** 模式三:Multilingual —— 依当前 locale 匹配的谚语/金句(en 回退英语格言) */
 const MULTI_PROMPTS: Record<string, string[]> = {
-  zh: [
-    '工欲善其事,必先利其器;程序员的第一件事,是把手放在正确的键位上。',
-    '不积跬步,无以至千里;不积小流,无以成江海。',
-    '路漫漫其修远兮,吾将上下而求索;键盘上的每一次敲击,都是求索的脚印。',
-    '温故而知新,可以为师矣;常练而熟指,可以快写代码矣。',
-    '世上无难事,只怕有心人;代码无难事,只怕手生人。',
-  ],
+
   es: [
     'El que madruga, Dios lo ayuda; pero el que practica mecanografía, el teclado lo premia.',
     'Más vale pájaro en mano que cien volando, y más vale precisión que cien palabras por minuto.',

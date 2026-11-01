@@ -8,47 +8,7 @@ import type { ToolL10n } from '../tool-l10n'
 const FORMULA = 'BMR(men) = 10W + 6.25H − 5A + 5\nBMR(women) = 10W + 6.25H − 5A − 161'
 
 export const bmrCalculatorL10n: ToolL10n = {
-  zh: {
-    ui: {
-      caloriesPerDay: '千卡/天',
-      metric: '公制 (cm / kg)',
-      imperial: '英制 (ft/in / lb)',
-      gender: '性别',
-      optMale: '男',
-      optFemale: '女',
-      age: '年龄',
-      yrsSuffix: '岁',
-      weight: '体重',
-      height: '身高',
-      heightFt: '身高(英尺)',
-      heightIn: '身高(英寸)',
-      outBmr: '你的 BMR',
-      outBmi: '你的 BMI',
-      gaugeTitle: 'BMI 分类',
-      zoneUnder: '偏瘦',
-      zoneHealthy: '健康',
-      zoneOver: '超重',
-      zoneObese1: '肥胖 I 度',
-      zoneObese2: '肥胖 II 度',
-      zoneObese3: '肥胖 III 度',
-      subMifflin: 'Mifflin-St Jeor 公式',
-      emptyState: '输入性别、年龄、体重和身高即可计算你的 BMR',
-      note: '⚛️ BMR = 基础代谢率,即身体在完全静息状态下所需的最低能量。',
-    },
-    useCases: [
-      '了解完全静息时的基础热量消耗',
-      '为减脂或增肌设定热量起点',
-      '对比自身代谢水平与常人',
-      '配合 TDEE 计算每日总消耗',
-    ],
-    formula: {
-      formula: FORMULA,
-      explain: 'Mifflin-St Jeor 基础代谢率。W = 体重(kg),H = 身高(cm),A = 年龄。BMR 是静息状态下每天消耗的热量。',
-    },
-    faqs: [
-      { q: '能加快新陈代谢吗?', a: '增加肌肉是长期提高 BMR 唯一可靠的方法——每磅肌肉静息时每天约消耗 6 千卡,而脂肪只消耗约 2 千卡。极端节食反而会减慢代谢。' },
-    ],
-  },
+
   es: {
     ui: {
       caloriesPerDay: 'kcal/día',

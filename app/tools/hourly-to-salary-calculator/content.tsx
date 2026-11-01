@@ -5,10 +5,10 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * Hourly To Salary Calculator 长文正文 —— 四语 dispatcher
+ * Hourly To Salary Calculator 长文正文 —— 三语 dispatcher
  *
  * en 分支等价于原 ToolContent 渲染输出(<h2>What Is This Tool?</h2> + intro
- * + 各 section 包在 <div> 中),字节级 SEO 安全。zh/es/de 仅客户端 hydration
+ * + 各 section 包在 <div> 中),字节级 SEO 安全。es/de 仅客户端 hydration
  * 后按 locale 切换。SSR/预渲染恒渲染 en → Google 索引英文不变。
  */
 
@@ -51,41 +51,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具?</h2>
-    <p>
-      本计算器把你的时薪换算成等价的年薪、月薪、周薪和日薪。默认按每周 40 小时、每年 52 个带薪周计算,你可以根据兼职或加班调整工作时长。
-    </p>
-    <div>
-      <h2>标准公式</h2>
-      <p>
-        年薪 = 时薪 × 每周工时 × 每年周数。默认使用 40 小时和 52 周(每年 2,080 小时)。如果你工作时长更多或更少,请调整工时字段。
-      </p>
-    </div>
-    <div>
-      <h2>时薪与年薪对照</h2>
-      <ul>
-        <li>$15/小时 ≈ $31,200/年</li>
-        <li>$20/小时 ≈ $41,600/年</li>
-        <li>$25/小时 ≈ $52,000/年</li>
-        <li>$30/小时 ≈ $62,400/年</li>
-        <li>$50/小时 ≈ $104,000/年</li>
-        <li>$100/小时 ≈ $208,000/年</li>
-      </ul>
-    </div>
-    <div>
-      <h2>本计算器未考虑的因素</h2>
-      <ul>
-        <li><strong>加班费</strong>(美国超过 40 小时按 1.5 倍计算)</li>
-        <li><strong>无薪假期</strong>——许多时薪员工没有带薪假</li>
-        <li><strong>税费</strong>——到手收入大约是税前的 65-75%</li>
-        <li><strong>福利</strong>——医疗保险和退休金匹配缴款可能价值每年 $10,000 以上</li>
-      </ul>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -165,7 +130,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function HourlyToSalaryCalculatorContent(): ReactNode {
   const { locale } = useApp()

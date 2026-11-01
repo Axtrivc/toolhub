@@ -5,24 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const HashComparatorL10n: ToolL10n = {
-  zh: {
-    useCases: ['核对下载文件的校验值', '比对发布方与本地计算的哈希', '验证 ISO/安装包完整性', '排除大小写与空格干扰的比对'],
-    faqs: [
-      { q: '比较能防时序攻击吗?', a: '能——比较会对每个字符累积 XOR,最后才检查结果,绝不会在第一个不匹配处提前返回。想通过响应时间推断两个哈希从哪里开始不同的时序攻击,在这里观察不到任何信息。' },
-      { q: '大小写和空格会归一化吗?', a: '会——两侧输入都会先转小写并去掉所有空白,所以官方发布的大写、带换行的哈希也能匹配上。哈希数字本身则逐字符严格比较。' },
-      { q: '不匹配到底意味着什么?', a: '对文件下载来说:文件损坏或被篡改——先从官方源重新下载、再次比对,再决定是否运行。对自算校验:你算出的值与公布摘要在至少一个字符上不同。' },
-    ],
-    ui: {
-      'actualLabel': '实际哈希(你计算的)',
-      'expectedLabel': '期望哈希(发布方提供)',
-      'lenDiff': '长度不同——不可能是同一摘要。',
-      'match': '匹配 — 摘要一致',
-      'mismatch': '不匹配 — 请勿信任此文件',
-      'mismatchWarn': '下载文件校验不匹配可能意味着损坏或被篡改。请从官方来源重新下载并再次比对。',
-      'note': '🛡️ 比较是恒时的:即使出现差异也会异或校验每个字节,响应时序不会泄露哈希在哪里分叉。比较前会先归一化大小写与空格。',
-      'verdict': '结论',
-    },
-  },
+
   es: {
     useCases: ['verificar el checksum de una descarga', 'comparar el hash publicado con el local', 'validar la integridad de ISOs e instaladores', 'comparar sin que mayúsculas o espacios estorben'],
     faqs: [

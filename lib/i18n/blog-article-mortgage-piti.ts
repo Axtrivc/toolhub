@@ -23,8 +23,8 @@ const EN_CRUMB_TITLE = 'Mortgage Amortization & PITI Guide'
 
 export const mortgagePitiGuideArticle: LocalizedArticle = {
   en: {
-    articleTitle: { en: EN_TITLE, zh: '房贷摊销、PITI 分解与提前还款策略完全指南', es: 'La guía completa de la amortización hipotecaria, el desglose del PITI y las estrategias de amortización anticipada', de: 'Der komplette Leitfaden zu Hypotheken-Tilgung, PITI-Aufschlüsselung und Sondertilgungsstrategien' },
-    breadcrumbTitle: { en: EN_CRUMB_TITLE, zh: EN_CRUMB_TITLE, es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
+    articleTitle: { en: EN_TITLE,  es: 'La guía completa de la amortización hipotecaria, el desglose del PITI y las estrategias de amortización anticipada', de: 'Der komplette Leitfaden zu Hypotheken-Tilgung, PITI-Aufschlüsselung und Sondertilgungsstrategien' },
+    breadcrumbTitle: { en: EN_CRUMB_TITLE,  es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
     readMinutes: 11,
     lead: 'A 30-year mortgage is the largest amortization schedule most people ever sign — yet lenders quote it as a single monthly number. This guide opens the black box: the payment formula, the full PITI stack, and the prepayment math that quietly saves five figures.',
     sections: [
@@ -120,107 +120,10 @@ export const mortgagePitiGuideArticle: LocalizedArticle = {
       },
     ],
   },
-  zh: {
-    articleTitle: { en: EN_TITLE, zh: '房贷摊销、PITI 分解与提前还款策略完全指南', es: 'La guía completa de la amortización hipotecaria, el desglose del PITI y las estrategias de amortización anticipada', de: 'Der komplette Leitfaden zu Hypotheken-Tilgung, PITI-Aufschlüsselung und Sondertilgungsstrategien' },
-    breadcrumbTitle: { en: EN_CRUMB_TITLE, zh: EN_CRUMB_TITLE, es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
-    readMinutes: 11,
-    lead: '30 年房贷是大多数人签过的最大一张摊销表,而银行只报给你一个月供数字。本指南拆开黑盒:月供公式、PITI 全口径,以及悄悄省下五位数的提前还款数学。',
-    sections: [
-      {
-        heading: '1. 摊销的本质:月供不变,结构每月都在变',
-        blocks: [
-          '固定利率房贷 30 年月供恒定,但这笔钱的*内部结构*每月都在移动。利息永远按剩余本金计提,所以早期还款几乎全是利息,后期几乎全是本金。',
-          { code: CODE_AMORTIZATION },
-          '以 **36 万美元、6.8%、30 年**为例:月供 **$2,347**,第一个月拆成 **$2,040 利息 + $307 本金**——87% 在养债,13% 在积累净资产。本金占比要到**第 239 期(约第 19.9 年)**才过半。这不是银行阴谋,而是"恒定月供 × 递减余额"的数学必然。',
-          {
-            card: {
-              title: '摊销表生成器',
-              href: '/tools/amortization-table-generator/',
-              desc: '生成逐期完整摊销表,含运行余额、可导出 CSV——用你自己的数字亲眼看利息/本金的交叉点。',
-            },
-          },
-        ],
-      },
-      {
-        heading: '2. PITI:真实月供有四层',
-        blocks: [
-          '银行广告只报本息(P&I),你的银行卡实际承受的是 **PITI**:',
-          { list: [
-            '**本金 + 利息**——上面公式算出的摊销月供。',
-            '**房产税**——按房价每年 0.5–2.5%(各州差异巨大),按月托管扣缴。',
-            '**房屋保险**——中位房价约 $1,500–$3,500/年,同样走托管账户。',
-            '**PMI 房贷保险**——首付不足 20% 时收取,约为贷款额的 0.5–1%/年。',
-          ] },
-          '40 万美元的房子、10% 首付:P&I 约 $2,347,而 PITI 接近 **$3,050**——托管层多占约 30%。任何忽略税费、保险和 PMI 的"负担能力计算器"不是乐观,是错误。',
-          {
-            card: {
-              title: '房贷计算器(PITI 全口径)',
-              href: '/tools/mortgage-calculator/',
-              desc: '本息 + 税费 + 保险 + 首付低于 20% 自动计 PMI——和你银行卡实际扣款一致的数字。',
-            },
-          },
-        ],
-      },
-      {
-        heading: '3. 提前还款:藏在摊销表里的五位数杠杆',
-        blocks: [
-          '每一笔多还的钱都**直接冲减本金**,此后所有利息都按更小的余额计提,效果向前复利:36 万、6.8% 的贷款,每月多还 **$200**,期限缩短约 **6 年**,省下约 **$117,000** 利息;哪怕第 2 年一次性多还 $10,000,也能省约 $52,000。',
-          '两条纪律比金额更重要。其一,**越早越值钱**:第 2 年的一笔多还款,消灭的是未来几十年的利息,同样金额在第 20 年还效果差一个数量级。其二,**明确标注用途**:备注"apply to principal",否则服务商可能记成"预缴下月"——钱一样出,省息效果为零。',
-          '双周还款法利用同一原理:26 次半月供 = 13 个月供,每年悄悄多还一整期,且毫无预算痛感。',
-          {
-            card: {
-              title: '房贷计算器(提前还款)',
-              href: '/tools/mortgage-calculator/',
-              desc: '填入每月额外还款额,实时查看还清曲线与省息变化——用你的数字重算上面每月多还 $200 的场景。',
-            },
-          },
-        ],
-      },
-      {
-        heading: '4. 首付:20% 是 PMI 分界线,不是道德标准',
-        blocks: [
-          '20% 规则的真实来源是:贷款价值比(LTV)降到 78–80% 时 PMI 自动终止。但为攒够 20% 多等几年,房价和租金同时在涨——诚实的算法要两条路都跑:今天 5% 首付 + PMI,对比三年后 20% 首付 + 多付三年房租。',
-          'PMI 通常每年收贷款额的 **0.5–1%**(36 万贷款即 $150–$300/月),而人们忽略的一点:LTV 按原计划降到 78% 时它**自动终止**,降到 80% 时可主动申请取消。用 4 年 PMI 换掉 4 年房租,往往是划算的交易。',
-          {
-            card: {
-              title: '首付计算器',
-              href: '/tools/down-payment-calculator/',
-              desc: '对比各首付档位对应的 PMI 成本与月供——找到交易反转的那个档位。',
-            },
-          },
-        ],
-      },
-      {
-        heading: '5. 租与买:找到你的交叉年',
-        blocks: [
-          '买房把巨额摩擦前置:买入 Closing Cost 2–5%,卖出佣金约 5–6%。摊销结构雪上加霜——30 年贷款的头 5 年,你的还款只有约 15% 变成了净资产。在交叉年之前卖房,等于付了房东级的钱,还倒贴交易摩擦。',
-          '美国多数都市区,租买累计成本曲线在**第 5–8 年**交叉;便宜市场第 2–3 年即交叉。交叉点由三个杠杆决定:房价租金比、贷款利率,以及你真实的居住年限。对房源动心之前,先跑曲线。',
-          {
-            card: {
-              title: '租买对比计算器',
-              href: '/tools/rent-vs-buy-calculator/',
-              desc: '累计租房成本 vs 净持有成本逐年绘线——交叉点诚实地回答这个问题。',
-            },
-          },
-        ],
-      },
-      {
-        heading: '签约前五分钟清单',
-        blocks: [
-          { list: [
-            '算 **PITI 全口径**,不要广告里的 P&I——如果银行报价比你的结果低 25% 以上,说明托管层没算进去。',
-            '打开**摊销表**看第 1 期:利息占比会让你立刻尊重提前还款。',
-            '试算 **每月多还 $100/$300/$500** 三档,选你能长期坚持的那档——纪律胜过壮举。',
-            '把**交叉年**和你真实的居住计划对照,而不是和乐观版本对照。',
-            '确认所有计算都在浏览器本地完成、无需注册——你的贷款金额不属于任何服务器。',
-          ] },
-        ],
-      },
-    ],
-  },
+
   es: {
-    articleTitle: { en: EN_TITLE, zh: '房贷摊销、PITI 分解与提前还款策略完全指南', es: 'La guía completa de la amortización hipotecaria, el desglose del PITI y las estrategias de amortización anticipada', de: 'Der komplette Leitfaden zu Hypotheken-Tilgung, PITI-Aufschlüsselung und Sondertilgungsstrategien' },
-    breadcrumbTitle: { en: EN_CRUMB_TITLE, zh: EN_CRUMB_TITLE, es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
+    articleTitle: { en: EN_TITLE,  es: 'La guía completa de la amortización hipotecaria, el desglose del PITI y las estrategias de amortización anticipada', de: 'Der komplette Leitfaden zu Hypotheken-Tilgung, PITI-Aufschlüsselung und Sondertilgungsstrategien' },
+    breadcrumbTitle: { en: EN_CRUMB_TITLE,  es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
     readMinutes: 11,
     lead: 'Una hipoteca a 30 años es la mayor tabla de amortización que firma la mayoría — y el banco la resume en una sola cuota. Esta guía abre la caja negra: la fórmula de la cuota, el PITI completo y la matemática de amortización anticipada que ahorra cinco cifras.',
     sections: [
@@ -317,8 +220,8 @@ export const mortgagePitiGuideArticle: LocalizedArticle = {
     ],
   },
   de: {
-    articleTitle: { en: EN_TITLE, zh: '房贷摊销、PITI 分解与提前还款策略完全指南', es: 'La guía completa de la amortización hipotecaria, el desglose del PITI y las estrategias de amortización anticipada', de: 'Der komplette Leitfaden zu Hypotheken-Tilgung, PITI-Aufschlüsselung und Sondertilgungsstrategien' },
-    breadcrumbTitle: { en: EN_CRUMB_TITLE, zh: EN_CRUMB_TITLE, es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
+    articleTitle: { en: EN_TITLE,  es: 'La guía completa de la amortización hipotecaria, el desglose del PITI y las estrategias de amortización anticipada', de: 'Der komplette Leitfaden zu Hypotheken-Tilgung, PITI-Aufschlüsselung und Sondertilgungsstrategien' },
+    breadcrumbTitle: { en: EN_CRUMB_TITLE,  es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
     readMinutes: 11,
     lead: 'Eine 30-jährige Hypothek ist der größte Tilgungsplan, den die meisten je unterschreiben — und die Bank nennt nur eine Monatsrate. Dieser Leitfaden öffnet die Blackbox: die Ratenformel, der volle PITI-Stapel und die Sondertilgungs-Mathematik, die leise fünfstellig spart.',
     sections: [

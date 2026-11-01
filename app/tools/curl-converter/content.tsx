@@ -5,10 +5,10 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * Curl Converter 长文正文 —— 四语 dispatcher
+ * Curl Converter 长文正文 —— 三语 dispatcher
  *
  * en 分支等价于原 ToolContent 渲染输出(<h2>What Is This Tool?</h2> + intro
- * + 各 section 包在 <div> 中,faqs 已丢弃),DOM 级 SEO 安全。zh/es/de 在客户端
+ * + 各 section 包在 <div> 中,faqs 已丢弃),DOM 级 SEO 安全。es/de 在客户端
  * hydration 后按 locale 切换。<code> 中的 curl 标志 (-X/-H/-d/-F/-k/-u 等)、
  * 代码片段 (fetch/axios/json= 等) 与专有名词保持不变。
  */
@@ -75,54 +75,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具?</h2>
-    <p>
-      <code>curl</code> 是 HTTP 调试的通用语言——你从浏览器的 DevTools、同事的 README 或 Stripe 文档里复制了一条请求,想在自己的代码中发起同样的请求。这个转换器会解析 curl 命令(URL、方法、请求头、请求体),并输出可直接使用的 <strong>JavaScript Fetch</strong>、<strong>Axios</strong> 和 <strong>Python requests</strong> 代码片段。
-    </p>
-    <div>
-      <h2>哪些内容会被解析</h2>
-      <ul>
-        <li>
-          <strong>URL 与方法</strong> —— 目标 URL 和 HTTP 动词(<code>-X</code> /{' '}
-          <code>--request</code>);<code>-I</code> / <code>--head</code> 会映射为{' '}
-          <code>HEAD</code> 请求。如果你用 <code>-d</code> 发送了请求体却省略了{' '}
-          <code>-X</code>,方法会自动变为 <code>POST</code>。
-        </li>
-        <li>
-          <strong>请求头</strong> —— 每个 <code>-H</code> / <code>--header</code>{' '}
-          <code>&quot;Key: Value&quot;</code> 键值对都会被提取到一个 headers 对象中。
-        </li>
-        <li>
-          <strong>请求体</strong> —— 会检测 <code>-d</code> / <code>--data</code> /{' '}
-          <code>--data-raw</code> 请求体。如果请求体是 JSON(或设置了{' '}
-          <code>Content-Type: application/json</code>),Python 使用 <code>json=</code>,JS 使用{' '}
-          <code>JSON.stringify()</code>;否则以原始字符串发送。
-        </li>
-        <li>
-          <strong>引号处理</strong> —— 单引号、双引号、反斜杠转义,以及{' '}
-          <code>$&apos;...&apos;</code> 的 ANSI-C 语法,都由手写的分词器处理。
-        </li>
-      </ul>
-    </div>
-    <div>
-      <h2>JavaScript Fetch 与 Axios</h2>
-      <p>
-        Fetch 输出使用原生 <code>fetch()</code> API,并对{' '}
-        <code>response.json()</code> 使用 <code>await</code>——零依赖,在浏览器和 Node 18+ 中均可运行。Axios 输出假定你已安装 <code>axios</code>;它生成的代码通常更短,并且默认在非 2xx 状态码时抛出异常。选择与你项目现有 HTTP 层一致的方式即可。
-      </p>
-    </div>
-    <div>
-      <h2>哪些内容不会被转换</h2>
-      <p>
-        Multipart 表单上传(<code>-F</code> / <code>--form</code>)和 cookie jars(<code>-b</code>{' '}
-        / <code>-c</code>)不会被展开为特定语言的 multipart 代码——正确生成这些内容会很繁琐,而且各库实现各异。而 <code>-u user:pass</code> 基本认证则会自动转换成 <code>Authorization: Basic</code> 请求头。其余情况请使用你的 HTTP 客户端提供的专用 multipart 辅助函数,并以解析出的 URL 和请求头作为起点。
-      </p>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -245,7 +197,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function CurlConverterContent(): ReactNode {
   const { locale } = useApp()

@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * MulchCalculator 长文正文 —— 四语 dispatcher
+ * MulchCalculator 长文正文 —— 三语 dispatcher
  *
- * en 分支与既有工具页渲染一致。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支与既有工具页渲染一致。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -24,19 +24,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>铺厚决定一切</h2>
-    <p>覆盖物按体积计价,而体积随厚度线性增长。一立方码——14 袋 2 ft³ 装——1 英寸铺 324 ft²,2 英寸 162,标准 3 英寸 108。厚度翻倍账单就翻倍,别铺得像在埋东西。</p>
-    <h2>2-4 英寸的窗口</h2>
-    <p>两到三英寸既能压草保墒,又让空气和水够到根系。超过四英寸就有茎腐与环剥根的风险;床面沉降后按窗口补足即可,不要越铺越厚。</p>
-    <h2>袋装还是散装</h2>
-    <p>大约六码以内袋装划算:免运费、免苫布、免独轮车马拉松。20×10 的床铺 3 英寸是 1.85 码——25 袋 2 ft³ 装,零售约 $100-150。散装单价低 40-60%,但一次性全到。</p>
-    <h2>游乐区是另一种产品</h2>
-    <p>游戏架下的防坠区需要 9-12 英寸、经冲击衰减认证的工程木纤维。装饰覆盖物没有防坠等级——雪松与染色树皮只配花床,不配摔落。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -66,7 +53,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function MulchCalculatorContent(): ReactNode {
   const { locale } = useApp()

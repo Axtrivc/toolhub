@@ -25,26 +25,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具?</h2>
-    <p>本工具可以从任意文本中提取所有邮箱地址。只需粘贴文档、网页源码或列表,它就会自动找出所有格式合法的 email。</p>
-    <div>
-      <h2>工作原理</h2>
-      <p>工具使用正则表达式匹配标准邮箱格式:<code>user@domain.tld</code>。重复项会被去除,结果每行显示一个。</p>
-    </div>
-    <div>
-      <h2>常见用途</h2>
-      <ul>
-        <li>从文档中提取联系信息</li>
-        <li>整理零散的联系人列表</li>
-        <li>从已有资料中构建 email 列表(请合法使用)</li>
-        <li>核实旧文件中存在哪些邮箱</li>
-      </ul>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -88,7 +68,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function EmailExtractorContent(): ReactNode {
   const { locale } = useApp()

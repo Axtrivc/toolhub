@@ -5,33 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const CsvToSqlConverterL10n: ToolL10n = {
-  zh: {
-    useCases: ['把导出的 CSV 转成 INSERT 种子数据', '给演示环境快速造一批测试数据', '从 Excel 另存的 CSV 迁移到数据库', '生成批量多值 INSERT 以提高导入速度'],
-    faqs: [
-      { q: '输出的是哪种 SQL 方言?', a: '纯 INSERT INTO ... VALUES,MySQL/PostgreSQL/SQLite 通用;标识符引号可在反引号(MySQL)与双引号(ANSI)之间切换,默认按 MySQL。' },
-      { q: '引号和特殊字符怎么处理?', a: '值里的单引号按 SQL 标准翻倍转义;表名与列名先清洗成 [A-Za-z0-9_] 再加引号,防止 CSV 表头里夹带反引号或注入片段。' },
-      { q: '空单元格怎么处理?', a: '可选:输出 NULL 或空字符串。类型推断开启时,整列都是数字的值不加引号,其余按字符串输出。' },
-      { q: '能顺便生成 CREATE TABLE 吗?', a: '不能——本工具只生成 INSERT。表头行会转成列名,正好拿去手写 CREATE TABLE;类型无法从 CSV 可靠推断,交给数据库自己定更稳。' },
-    ],
-    ui: {
-      'inputLabel': '你的 CSV',
-      'outputLabel': 'SQL INSERT 语句',
-      'loadSample': '加载示例',
-      'tblLabel': '表名',
-      'batchLabel': '每条 INSERT 的行数',
-      'headerRow': '首行是表头',
-      'includeCols': 'INSERT 带列名清单',
-      'inferTypes': '数字列不加引号',
-      'nullsAsNull': '空单元格 → NULL',
-      'quoteLabel': '标识符引号:',
-      'rowsStat': '{r} 行 · {s} 条语句',
-      'raggedNote': '{n} 行偏短,已用空单元格补齐',
-      'errNoRows': '没有识别到数据行——请先粘贴带表头的 CSV 文本。',
-      'errHeaderOnly': '只找到表头行——请至少加一行数据。',
-      'tooLarge': '输入过大——支持的上限是 200,000 字符。',
-      'note': '🔐 值按 SQL 标准转义(单引号翻倍);标识符清洗为 [A-Za-z0-9_] 并按反引号/双引号包裹。这是导入脚本生成器——运行时加载不受信数据请改用参数化查询,不要拼接字符串。',
-    },
-  },
+
   es: {
     useCases: ['convertir un CSV exportado en datos semilla INSERT', 'montar rápido un lote de datos de prueba para demos', 'migrar a la base de datos un CSV guardado desde Excel', 'generar INSERT multivalor por lotes para importar más rápido'],
     faqs: [

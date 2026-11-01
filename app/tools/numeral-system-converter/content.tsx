@@ -43,42 +43,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具?</h2>
-    <p>
-      本工具在四种进制之间换算数字:<strong>二进制</strong>(基数 2)、<strong>八进制</strong>(基数 8)、<strong>十进制</strong>(基数 10)和 <strong>十六进制</strong>(基数 16)。这些都是计算机中使用的数制。
-    </p>
-    <div>
-      <h2>为什么会有不同的进制</h2>
-      <ul>
-        <li><strong>十进制</strong>——人类日常使用(10 根手指)</li>
-        <li><strong>二进制</strong>——计算机存储数据的方式(开/关电信号)</li>
-        <li><strong>十六进制</strong>——二进制的紧凑表示(4 位 = 1 个十六进制位)</li>
-        <li><strong>八进制</strong>——历史上的 Unix 文件权限,如今较少使用</li>
-      </ul>
-    </div>
-    <div>
-      <h2>常见用途</h2>
-      <ul>
-        <li>网页设计中的<strong>十六进制颜色</strong>:#FFFFFF = 十进制的 255,255,255</li>
-        <li>调试器用十六进制显示<strong>内存地址</strong></li>
-        <li>Unix 的<strong>文件权限</strong>:chmod 755(八进制)</li>
-        <li><strong>网络掩码</strong>和 MAC 地址</li>
-        <li>电子学和计算机课中的<strong>二进制逻辑</strong></li>
-      </ul>
-    </div>
-    <div>
-      <h2>速查表</h2>
-      <ul>
-        <li>十进制 255 = 十六进制 FF = 二进制 11111111</li>
-        <li>十进制 16 = 十六进制 10 = 二进制 10000</li>
-        <li>十进制 8 = 八进制 10 = 二进制 1000</li>
-      </ul>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -160,7 +124,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function NumeralSystemConverterContent(): ReactNode {
   const { locale } = useApp()

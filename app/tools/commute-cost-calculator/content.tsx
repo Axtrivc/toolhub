@@ -5,7 +5,7 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * CommuteCostCalculator 长文正文 —— 四语 dispatcher
+ * CommuteCostCalculator 长文正文 —— 三语 dispatcher
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -22,19 +22,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>通勤里程从来不能抵税</h2>
-    <p>家与固定办公场所之间的里程,对雇员来说从来就不算可抵扣的商务里程;2017 年税改之后,连未报销的雇员费用都整体取消了。通勤是纯粹的个人支出——这恰恰是它值得算清价格的原因。</p>
-    <h2>每英里费率胜过油钱算术</h2>
-    <p>2025 年 IRS 口径的每英里 70 美分,近似的是「让一辆车动起来」的全部成本:燃油、轮胎、保养、保险、折旧。只算 MPG × 油价通常会把真实成本低估一半以上——油钱在一英里的真实成本里连三分之一都不到。</p>
-    <h2>时间比钱更吓人</h2>
-    <p>单程 30 分钟、每周 5 天,一年约 240 小时——整整 6 个 40 小时工作周耗在路上。把这些小时按税后时薪定价,常会发现郊区「便宜」的房子在时间上比市区房子的租金还贵。</p>
-    <h2>需要自己加上的项</h2>
-    <p>停车费、过路费、公交月票和偶尔的充电账单都不在本计算器内。承诺的长度也一样要自己掂量:一个月就能搬走止损的通勤,和锁死 30 年房贷的通勤,是完全不同的决策。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -64,7 +51,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function CommuteCostCalculatorContent(): ReactNode {
   const { locale } = useApp()

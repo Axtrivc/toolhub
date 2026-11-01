@@ -30,31 +30,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具?</h2>
-    <p>哈希函数会将任意输入转换为固定长度的指纹。相同的输入始终产生相同的哈希;哪怕输入只改动一点点,也会得到完全不同的哈希。本工具使用你浏览器的 SubtleCrypto API 生成 SHA-256、SHA-384、SHA-512 和 SHA-1。</p>
-    <div>
-      <h2>哈希的用途</h2>
-      <ul>
-        <li><strong>验证文件完整性</strong> — 下载文件、计算哈希、与已公布的哈希对比</li>
-        <li><strong>密码存储</strong> — 网站存储的是哈希,而非明文密码</li>
-        <li><strong>数字签名</strong> — 对哈希签名,而不是对整个文档签名</li>
-        <li><strong>区块链</strong> — Bitcoin 使用 SHA-256 进行工作量证明</li>
-        <li><strong>内容寻址</strong> — IPFS 使用哈希作为地址</li>
-      </ul>
-    </div>
-    <div>
-      <h2>为什么用 SHA-256 而不是 MD5</h2>
-      <p>MD5 和 SHA-1 在密码学上已被攻破 — 可以找到碰撞(两个不同输入产生相同哈希)。截至 2026 年,SHA-256 依然安全。对于任何涉及安全的场景,请使用 SHA-256 或更强的算法。</p>
-    </div>
-    <div>
-      <h2>哈希是单向的</h2>
-      <p>你可以把「hello」哈希成 SHA-256,却无法把哈希还原回「hello」(除非暴力破解)。这种单向特性正是哈希适合用于密码的原因 — 即使数据库泄露,攻击者拿到的也只是哈希。</p>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -108,7 +83,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function HashGeneratorContent(): ReactNode {
   const { locale } = useApp()

@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * Reverse Stripe Fee Calculator 长文正文 —— 四语 dispatcher
+ * Reverse Stripe Fee Calculator 长文正文 —— 三语 dispatcher
  *
- * en 分支等价于原 ToolContent 渲染输出。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支等价于原 ToolContent 渲染输出。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en (与改造前渲染输出一致) ────────────────────────────
@@ -56,45 +56,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具？</h2>
-    <p>
-      这款<strong>支付手续费计算器</strong>双向可用：既能看到一次 Stripe 或 PayPal 收款实际到手多少，也能反过来从你需要收到的金额推算出该标价多少。
-      预设涵盖了常见的 Stripe 和 PayPal 费率，自定义模式则可填写任意百分比 + 固定费用。所有计算都在
-      你的浏览器本地完成。
-    </p>
-
-    <div>
-      <h2>正向模式与反向模式</h2>
-      <p>
-        在<strong>正向模式</strong>下，你输入标价，就能得到手续费、实际到账金额以及{' '}
-        <em>实际费率</em> —— 由于存在固定的 <code>$0.30</code>，小额交易的实际费率总会高于名义百分比。在<strong>反向模式</strong>下，你输入需要
-        收到的金额，工具会解出 <code>charge = (net + fixed) / (1 − pct)</code>，再用一张到账校验卡片验证结果。给客户报价时使用反向模式，手续费就不会侵蚀你的费率。
-      </p>
-    </div>
-
-    <div>
-      <h2>我该选哪个预设？</h2>
-      <p>
-        <strong>Stripe US online</strong>（2.9% + $0.30）覆盖标准的国内银行卡收款。当持卡人的卡片发行地在美国境外时，加上{' '}
-        <strong>international card</strong>（国际卡）预设（+1.5%）；当你还要以外币结算时，再加上 <strong>currency conversion</strong>（货币转换）预设（再多 +1%）。
-        <strong>PayPal US</strong> 采用 3.49% + $0.49。如果你的方案有所不同 —— 批量折扣、非营利费率、小额支付 —— 请切换到 <strong>Custom</strong>（自定义）并输入你的实际数字。
-      </p>
-    </div>
-
-    <div>
-      <h2>在把手续费转嫁给客户之前</h2>
-      <p>
-        附加费是<em>受监管的</em>：美国部分州和其他一些国家会限制或禁止这种做法，银行卡组织也会
-        规定上限和披露规则。一个常见的替代方案是先提高基础价格，再提供现金/ACH
-        折扣。这里显示的费率是 2026 年的近似值 —— 请以你实际的
-        Stripe 或 PayPal 协议为准，因为定价会变化，且协商费率很常见。
-      </p>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -185,7 +146,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function ReverseStripeFeeCalculatorClientContent(): ReactNode {
   const { locale } = useApp()

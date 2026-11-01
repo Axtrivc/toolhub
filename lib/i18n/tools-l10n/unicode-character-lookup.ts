@@ -5,19 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const UnicodeCharacterLookupL10n: ToolL10n = {
-  zh: {
-    useCases: ['查找箭头/星形/引号等常用符号', '识别粘贴字符的 Unicode 码点', '写 CSS content 转义或 HTML 实体', '区分外形相近的字符'],
-    faqs: [
-      { q: '收录了多少字符?', a: '精选几百个人们真正会搜的:箭头、数学符号、希腊字母、排版用破折号/引号/省略号、货币符号、对勾与星形、制表符,以及 ⌘ 这类 Mac 按键。完整 Unicode 有 15 万+ 字符——那块归 emoji 选择器管。' },
-      { q: '怎么找到一个字符?', a: '按名称搜——"arrow"、"star"、"quote"——或直接粘贴该字符来识别它。每条结果显示码点(如 → 是 U+2192),并附字符本身的复制按钮。' },
-      { q: '为什么要显示码点?', a: '码点是各处引用字符的通用方式:CSS \\2192 转义、HTML 实体、渲染 bug 报告都靠它。它还能区分长得像的字符,比如度数符号和上标零。' },
-    ],
-    ui: {
-      'noMatch': '无匹配 — 试试 "arrow"、"star"、"quote"…',
-      'note': '🔤 精选人们真正会搜的字符集。把其中任何字符粘贴为搜索词即可查其码点。完整 Unicode 有 15 万+ 字符——emoji 选择器负责那部分。',
-      'searchPlaceholder': '按名称搜索("arrow"、"star")或粘贴字符…',
-    },
-  },
+
   es: {
     useCases: ['buscar símbolos: flechas, estrellas, comillas', 'identificar el punto de código de un carácter', 'escribir escapes CSS o entidades HTML', 'distinguir caracteres casi idénticos'],
     faqs: [

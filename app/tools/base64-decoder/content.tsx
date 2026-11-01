@@ -35,31 +35,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具?</h2>
-    <p>
-      本工具把 Base64 解码回可读文本。粘贴任意合法的 Base64 字符串,即可还原原始内容。对国际文本能正确处理 UTF-8。
-    </p>
-    <div>
-      <h2>常见的解码场景</h2>
-      <ul>
-        <li>解码 JWT 令牌,查看其中的 payload</li>
-        <li>读取 HTML 或 CSS 中的 data URI</li>
-        <li>调试包含 Base64 的 API 响应</li>
-        <li>从邮件附件中还原文本</li>
-        <li>查看 HTTP Basic Auth 头</li>
-      </ul>
-    </div>
-    <div>
-      <h2>解码失败时</h2>
-      <p>
-        如果出现错误,输入很可能不是合法的 Base64。常见原因:出现了不在 Base64 字母表 (A-Z, a-z, 0-9, +, /，也兼容 URL 安全变体 <code>-</code> 和 <code>_</code>) 之内的字符,或复制时被截断、长度不再符合 Base64 的 4 字符分组。缺少 <code>=</code> 填充和多余空白会自动处理。
-      </p>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -122,7 +97,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function Base64DecoderContent(): ReactNode {
   const { locale } = useApp()

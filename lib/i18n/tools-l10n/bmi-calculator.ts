@@ -7,56 +7,7 @@ import type { ToolL10n } from '../tool-l10n'
 const FORMULA = 'BMI = weight(kg) / height(m)^2'
 
 export const bmiCalculatorL10n: ToolL10n = {
-  zh: {
-    ui: {
-      'bodyMassIndex': '身体质量指数',
-      'catAdvice_healthyWeight': '处于健康范围。保持当前习惯。',
-      'catAdvice_obeseI': '高于健康范围。可考虑咨询医生。',
-      'catAdvice_obeseII': '明显超出范围。建议就医。',
-      'catAdvice_obeseIII': '严重超出范围。请咨询医生。',
-      'catAdvice_overweight': '略高于健康范围。饮食和运动会有帮助。',
-      'catAdvice_underweight': '低于健康范围。可考虑咨询营养师。',
-      'catLabel_healthyWeight': '健康体重',
-      'catLabel_obeseI': '肥胖(I 级)',
-      'catLabel_obeseII': '肥胖(II 级)',
-      'catLabel_obeseIII': '肥胖(III 级)',
-      'catLabel_overweight': '超重',
-      'catLabel_underweight': '体重过轻',
-      'gaugeTitle': '你所在的区间',
-      'category': '类别',
-      'emptyState': '输入身高和体重以计算你的 BMI',
-      'healthyWeightRange': '你身高的健康体重范围',
-      'height': '身高',
-      'heightFt': '身高(英尺)',
-      'heightIn': '身高(英寸)',
-      'imperial': '英制 (ft/in / lb)',
-      'metric': '公制 (cm / kg)',
-      'preset.0': "成年男性 (5'10, 170 lb)",
-      'preset.1': "成年女性 (5'5, 135 lb)",
-      'note': '⚕️ 本计算器适用于 20 岁以上成人,是常规筛查工具,非医学诊断。BMI 不区分肌肉与脂肪,因此肌肉发达者可能得分偏高却不一定不健康。请咨询医生获取个性化建议。',
-      'range40Above': '40.0 及以上',
-      'rangeBelow': '低于 18.5',
-      'thBmiRange': 'BMI 范围',
-      'thCategory': '类别',
-      'weight': '体重',
-      'yourBmi': '你的 BMI',
-    },
-    useCases: [
-      '快速筛查自己的体重是否在健康范围',
-      '查看身高对应的健康体重区间',
-      '了解 WHO 的 BMI 分类标准',
-      '作为健身或减重的初步参考',
-    ],
-    formula: {
-      formula: FORMULA,
-      explain: '公制 BMI。英制请用 BMI = 703 × 体重(lb) / 身高(in)²。WHO 成人分类:18.5–24.9 为健康范围。',
-    },
-    faqs: [
-      { q: 'BMI 对所有人都准吗?', a: '不一定。BMI 对普通久坐成人较为合理,但会高估肌肉发达者的体脂,并低估肌肉流失的老年人的体脂。把它当作起点,而非最终结论。' },
-      { q: '我的健康 BMI 是多少?', a: '对多数 20–65 岁的成人,BMI 在 18.5 到 24.9 之间被视为健康。65 岁以上的人 BMI 略高一些(25–27)可能更有益,因为多一点体重在老年期有保护作用。请咨询医生获取个性化建议。' },
-      { q: '该用 BMI 设定减重目标吗?', a: 'BMI 是有用的参考,但更好的目标应聚焦体脂率、腰围、体能水平和你的感受。即使 BMI 没有跨过类别界限,减重 5–10% 也能显著改善健康指标。' },
-    ],
-  },
+
   es: {
     ui: {
       'bodyMassIndex': 'Índice de masa corporal',

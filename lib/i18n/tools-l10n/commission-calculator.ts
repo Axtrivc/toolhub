@@ -5,26 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const commissionCalculatorL10n: ToolL10n = {
-  zh: {
-    formula: {
-      formula: 'Commission = sales × rate + bonus',
-      explain: '与销售挂钩的报酬。rate 是每笔销售赚取的百分比;达到指标可加奖金。总报酬常把底薪与这笔佣金合并计算。',
-    },
-    useCases: ['算带底薪的佣金收入', '按比例算销售佣金', '算佣金加预支款收入', '算阶梯佣金'],
-    faqs: [
-      { q: '房产佣金怎么运作?', a: '总佣金通常为 6%，由买方经纪人（3%）和卖方经纪人（3%）分摊。每个经纪人再和所属中介分成——新经纪人常见五五分，资深经纪人条件更优。' },
-    ],
-    ui: {
-      'chartTitle': '总收入构成',
-      'cmp.0': '总报酬',
-      'cmpseg.0': '底薪',
-      'cmpseg.1': '佣金',
-      'in.sales': '销售总额', 'in.rate': '佣金比例', 'in.base': '底薪',
-      'out.commission': '佣金收入', 'out.total': '总收入',
-      errNonNegative: '数值不能为负',
-      note: '💼 常见于销售代表和房产经纪人。房产经纪人通常每方拿 2.5–3%。',
-    },
-  },
+
   es: {
     formula: {
       formula: 'Commission = sales × rate + bonus',

@@ -31,30 +31,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具?</h2>
-    <p>
-      本工具会逐词对比两段文本,并清晰地展示差异。用 <code>|||</code> 把两段文本分隔开,工具就能知道哪段结束、哪段开始。
-    </p>
-    <div>
-      <h2>如何使用</h2>
-      <p>
-        格式:<code>original text ||| modified text</code>。工具会逐词对比,并把行标记为 <code>=</code>(未改动)或 <code>-old → +new</code>(已改动)。
-      </p>
-    </div>
-    <div>
-      <h2>常见用途</h2>
-      <ul>
-        <li>对比一份文档的两个版本</li>
-        <li>校对改动</li>
-        <li>核对文本编辑</li>
-        <li>追踪草稿之间的变化</li>
-      </ul>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -106,7 +82,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function TextDiffContent(): ReactNode {
   const { locale } = useApp()

@@ -60,47 +60,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具？</h2>
-    <p>
-      优质的阴影是让 UI 显得有质感和现代感的最快方式，但靠反复试错手写{' '}
-      <code>box-shadow</code> 值很痛苦。本生成器让你拖动滑块调整偏移、模糊、扩展、颜色和不透明度，实时查看结果并复制精确的 CSS。它还能用{' '}
-      <code>backdrop-filter</code> 构建<strong>玻璃拟态</strong>（毛玻璃）效果。
-    </p>
-    <div>
-      <h2>理解阴影值</h2>
-      <ul>
-        <li>
-          <strong>偏移 X / Y</strong> —— 阴影向右、向下偏移的距离（负值 = 向左、向上）。较小的正值 Y 配合模糊，可模拟自然的自上而下光照。
-        </li>
-        <li>
-          <strong>模糊半径</strong> —— 柔化阴影边缘。零模糊 = 硬而锐利的副本；大模糊 = 柔和弥散的光晕。
-        </li>
-        <li>
-          <strong>扩展半径</strong> —— 放大（正值）或收缩（负值）阴影本身。许多现代 UI 阴影使用负扩展，使阴影比元素更小，营造微妙的悬浮感。
-        </li>
-        <li>
-          <strong>内阴影（Inset）</strong> —— 将阴影绘制在元素内部，适用于按下或凹陷状态（以及新拟态）。
-        </li>
-      </ul>
-    </div>
-    <div>
-      <h2>玻璃拟态的三要素</h2>
-      <p>
-        令人信服的毛玻璃效果需要三者兼备：<strong>半透明背景</strong>（让背后的内容透出来）、<strong>backdrop-filter: blur()</strong>（模糊元素背后的所有内容），以及<strong>细而亮的边框</strong>（勾勒边缘）。在此启用玻璃拟态面板即可同时调节这三项。预览使用渐变背景，使模糊效果真实可见。
-      </p>
-    </div>
-    <div>
-      <h2>backdrop-filter 的浏览器支持</h2>
-      <p>
-        <code>backdrop-filter</code> 在所有当前的 Chrome、Edge、Safari（需要{' '}
-        <code>-webkit-</code> 前缀，本工具已包含）以及 Firefox 103+ 中均可使用。不支持的浏览器只会显示半透明背景而不模糊——布局不会因此破坏，只是磨砂感弱一些。没有性能可接受的 polyfill，因此请把模糊视为渐进增强。
-      </p>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -220,7 +179,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function CssShadowGeneratorContent(): ReactNode {
   const { locale } = useApp()

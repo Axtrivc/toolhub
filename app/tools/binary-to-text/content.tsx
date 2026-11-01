@@ -25,26 +25,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具?</h2>
-    <p>本工具将二进制(1 和 0)解码为可读文本。每 8 位为一组、即一个字节 —— ASCII 字符占一组,中文等多字节 UTF-8 字符由相邻几组共同表示。</p>
-    <div>
-      <h2>二进制编码的工作原理</h2>
-      <p>计算机把一切都存储为位 — 即 0 和 1。每个文本字符都对应一个数字编码(ASCII):‘H’ 是 72,二进制写作 01001000。8 位 = 1 字节 = 1 个字符。</p>
-    </div>
-    <div>
-      <h2>常见的二进制模式</h2>
-      <ul>
-        <li>01001000 01101001 = “Hi”</li>
-        <li>01000001 = “A”(大写)</li>
-        <li>01100001 = “a”(小写)</li>
-        <li>00110000 = “0”(数字零)</li>
-      </ul>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -88,7 +68,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function BinaryToTextContent(): ReactNode {
   const { locale } = useApp()

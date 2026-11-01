@@ -5,47 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const BtuCalculatorL10n: ToolL10n = {
-  zh: {
-    useCases: ['给卧室/客厅选窗机或分体空调的 BTU 档位', '把 BTU 换算成吨位,对齐安装商报价', '顶楼、西晒、落地窗房间做热负荷修正', '避免买过大空调导致的频繁启停与潮湿'],
-    faqs: [
-      { q: '每平方英尺需要多少 BTU?', a: '经典经验法是 8 英尺层高下每平方英尺 20 BTU,所以 350 ft² 的房间基准是 7,000 BTU。本计算器再按层高、日照、顶楼、人数和厨房逐项修正。' },
-      { q: '空调买大了有什么问题?', a: '会导致频繁短循环:房间很快降温、压缩机在除湿之前就停机,湿度居高不下。按计算结果买,不要"买大一号"。' },
-      { q: 'BTU 怎么换算成吨?', a: '12,000 BTU/小时 = 1 冷吨。算出 24,000 BTU 就是 2 吨机组——中央分体系统按吨报价,窗机按 BTU 标注。' },
-      { q: '厨房真的要加 4,000 BTU 吗?', a: '电器散热和烹饪热量让厨房成为最热的房间,DOE 指南建议做饭时段运行的空调加约 4,000 BTU。如果空调只在夜间使用,可以不加。' },
-    ],
-    ui: {
-      'in.area': '房间面积',
-      'in.ceiling': '层高',
-      'in.sun': '日照情况',
-      'in.topFloor': '顶楼或上方为阁楼',
-      'in.occupants': '室内常驻人数',
-      'in.kitchen': '是厨房吗?',
-      'opt.sun.shaded': '遮荫',
-      'opt.sun.average': '一般',
-      'opt.sun.sunny': '向阳',
-      'opt.topFloor.no': '否',
-      'opt.topFloor.yes': '是(+10%)',
-      'opt.kitchen.no': '否',
-      'opt.kitchen.yes': '是(+4,000 BTU)',
-      'out.btu': '所需制冷量',
-      'out.tons': '吨位',
-      'out.kw': '制冷功率',
-      'out.sizing': '选型检查',
-      'outSub.tons': '12,000 BTU = 1 吨',
-      'sizing.up': '修正项加成很大——先改善隔热或遮荫,再考虑买更大机组',
-      'sizing.down': '修正项降低了负荷——小一号机组可避免频繁启停',
-      'sizing.right': '尺寸合适:过大会降温快但除不了湿',
-      'errInvalid': '请输入有效面积(50-2,000 ft²)与层高(6-16 ft)',
-      'chartTitle': '基准负荷 vs 修正后负荷',
-      'cmp.0': '仅按面积(20 BTU/ft²)',
-      'cmp.1': '含你的修正项',
-      'cmpseg.0': '冷负荷',
-      'preset.0': '朝南阳光卧室',
-      'preset.1': '朝北遮荫办公室',
-      'preset.2': '顶楼开间',
-      'note': '📏 经验法则:8 英尺层高按 20 BTU/ft²。过大的机组会频繁短循环——降温快但运行时间不足以除湿,所以小房间不要"加码到下一档"。',
-    },
-  },
+
   es: {
     useCases: ['elegir el BTU de un aire acondicionado de ventana o split', 'convertir BTU a toneladas para comparar presupuestos', 'corregir la carga térmica en áticos, orientación sur y grandes ventanales', 'evitar un equipo sobredimensionado que cicla demasiado'],
     faqs: [

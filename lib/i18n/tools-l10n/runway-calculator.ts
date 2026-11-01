@@ -5,76 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const runwayCalculatorL10n: ToolL10n = {
-  zh: {
-    ui: {
-      'in.cash': '当前可用现金储备',
-      'in.monthlyBurn': '每月总运营支出 (Gross Burn)',
-      'in.monthlyRevenue': '当前每月总营收 (Revenue)',
-      'in.revenueGrowth': '月度营收复合增长率',
-      'inSuffix.cash': '$',
-      'inSuffix.monthlyBurn': '$',
-      'inSuffix.monthlyRevenue': '$',
-      'inSuffix.revenueGrowth': '%',
-      'out.runwayMonths': '资金跑道 (Net Runway)',
-      'outSub.runwayMonths': '预计耗尽现金的月数',
-      'out.zeroCashDate': '资金归零预估日期',
-      'out.netBurn': '当前每月净烧钱 (Net Burn)',
-      'outSub.netBurn': '总支出 − 营业收入',
-      'out.profitStatus': '盈利平衡状态',
-      'outSub.profitStatus': '现金流自给自足判断',
-      'out.grossRunway': '原始跑道 (零收入兜底)',
-      'outSub.grossRunway': '资金储备 ÷ 每月总支出',
-      'preset.0': '种子轮 ($50万 / 月净烧$3万)',
-      'preset.1': '独立开发 ($6万 / 高速增长)',
-      'preset.2': '零收入阶段 ($20万 / 月烧$2万)',
-      'errInvalid': '请输入有效的正数现金与支出, 非负营收',
-      'monthsWord': '个月',
-      'infinite': '盈利中',
-      'never': '不会耗尽 (现金流为正)',
-      'alreadyProfitable': '已实现盈利',
-      'neverBreakeven': '不会耗尽 (先达到盈亏平衡)',
-      'breakevenIn': '{n} 个月后达到盈亏平衡',
-      'breakevenTooLate': '{n} 个月后可盈利, 但资金会先耗尽',
-      'notProfitableInRunway': '跑道期内无法实现盈利',
-      'zeroGrowth': '营收零增长',
-      'profitWord': '盈利',
-      'line.balance': '现金余额',
-      'line.zero': '现金归零',
-      'profitNotice': '已实现现金流为正 (月结余 {amount})',
-      'defaultAlive': 'Default Alive (第 {month} 个月实现盈利)',
-      'defaultDead': 'Default Dead (资金将在实现盈利前耗尽)',
-      'chartTitle': '未来 24 个月现金余额走势',
-      'note': '💡 净烧钱率 = 每月总支出 − 每月营收。资金跑道是初创公司与独立开发者的生命倒计时。若营收月增速能在资金耗尽前追平支出，企业将进入 Default Alive（自给自足）状态，摆脱对外部融资的依赖。',
-    },
-    useCases: [
-      '种子轮融资规划: 账上 $50万, 月支出 $4.5万, 月营收 $1.5万, 测算出 16.7 个月跑道, 为启动下轮融资留足谈判筹码',
-      '独立开发者保命线: 储蓄 $6万, 月生活开销 $4,000, SaaS 月入 $1,500 且月增 10%, 验证能否在资金耗尽前跑通自负盈亏',
-      '扩招员工测算: 计划新招 2 名工程师(月增成本 $2.5万), 跑道从 18 个月缩短至 11 个月, 直观评估现金风险',
-      'Default Alive 诊断: 结合当前营收增速模拟现金流曲线, 判断企业是自我造血还是必须依赖 VC 输血',
-    ],
-    faqs: [
-      {
-        q: '毛烧钱(Gross Burn)与净烧钱(Net Burn)有何区别?',
-        a: 'Gross Burn 是公司每月支付的所有现金成本(工资、服务器、房租、工具等); Net Burn 则是 Gross Burn 减去当月实际收到的营业收入。若每月支出 $30,000、营收 $10,000, 则 Gross Burn 为 $30,000, Net Burn 为 $20,000。跑道以 Net Burn 为准。',
-      },
-      {
-        q: '初创公司应该储备多少个月的资金跑道?',
-        a: '行业公认的安全标准是 18 到 24 个月, 绝对底线为 12 个月。这能为你提供约 6 个月的业务验证期, 以及预留 6 个月时间去推进和完成下一轮股权融资。',
-      },
-      {
-        q: '什么是 Default Alive 与 Default Dead?',
-        a: 'Paul Graham 提出的概念: 如果按当前的营收增长率推算, 公司账面现金能支撑到实现自负盈亏(现金流平衡), 则为 Default Alive; 反之如果在盈利前就会烧完钱, 则为 Default Dead。',
-      },
-      {
-        q: '营收增长如何影响我的资金跑道?',
-        a: '静态跑道假设净烧钱率恒定不变。在营收按月复合增长的情况下, 每个月进账的现金都更多, 净烧钱率随之持续收窄, 跑道因此能再延长好几个月。',
-      },
-    ],
-    formula: {
-      formula: 'Net Burn = Gross Expenses − Monthly Revenue\nGross Runway = Cash ÷ Gross Expenses\nNet Runway = Cash ÷ Net Burn\nCash(m) = Cash(m−1) − (Gross Expenses − Revenue(0) × (1 + g)^m)',
-      explain: '净烧钱率衡量企业每月净消耗的现金。若月营收保持复合增长, 每月净烧钱将逐步缩减, 从而将实际资金跑道显著延长, 直至实现现金流转正。',
-    },
-  },
+
   es: {
     ui: {
       'in.cash': 'Saldo de caja actual disponible',

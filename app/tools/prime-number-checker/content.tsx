@@ -30,31 +30,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具?</h2>
-    <p><strong>质数</strong>只能被 1 和它自身整除——例如 2、3、5、7、11。本工具可检查任意数字是否为质数,并找出相邻的下一个和上一个质数。</p>
-    <div>
-      <h2>质数为何重要</h2>
-      <ul>
-        <li><strong>密码学:</strong> RSA 加密依赖于分解两个大质数之积的困难性</li>
-        <li><strong>哈希表:</strong> 质数大小的桶能减少冲突</li>
-        <li><strong>数论:</strong> 算术基本定理</li>
-        <li><strong>随机数生成器:</strong> 常使用质数</li>
-      </ul>
-    </div>
-    <div>
-      <h2>有趣的质数冷知识</h2>
-      <ul>
-        <li>2 是唯一的偶数质数</li>
-        <li>质数有无穷多个(欧几里得在约公元前 300 年证明了这一点)</li>
-        <li>已知最大的质数是 2^136,279,841 − 1(2024 年 10 月发现),超过 4100 万位</li>
-        <li>数字越大,质数越稀少,但永远不会耗尽</li>
-      </ul>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -108,7 +83,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function PrimeNumberCheckerContent(): ReactNode {
   const { locale } = useApp()

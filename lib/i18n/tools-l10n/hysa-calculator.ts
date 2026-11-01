@@ -11,70 +11,8 @@ import type { ToolL10n } from '../tool-l10n'
 const FORMULA = 'FV = P × (1 + r/n)^(n·t) + PMT × [((1 + r/n)^(n·t) − 1) / (r/n)]'
 
 export const hysaCalculatorL10n: ToolL10n = {
-  // ──────────────────────────── 中文 ────────────────────────────
-  zh: {
-    ui: {
-      'in.initial': '初始存入金额',
-      'in.monthly': '每月定投金额',
-      'in.apy': '年化收益率 (APY)',
-      'in.years': '投资/储蓄年限',
-      'in.compound': '复利方式',
-      'opt.compound.daily': '按日复利 (常见 HYSA 规则)',
-      'opt.compound.monthly': '按月复利',
-      'out.finalBalance': '期末账户总额',
-      'out.totalInterest': '获得总利息收益',
-      'outSub.totalInterest': '纯高息账户利息',
-      'out.totalDeposited': '累计本金存入',
-      'outSub.totalDeposited': '初始本金 + 每月定投',
-      'out.avgMonthlyInterest': '月均利息收入',
-      'preset.0': '应急备用金 (4.5% APY / 2 年)',
-      'preset.1': '积极攒钱 (5.0% APY / 5 年)',
-      'preset.2': '闲钱理财 (3.5% APY / 1 年)',
-      'errInvalid': '请输入有效的非负数',
-      'errYears': '存续年限必须大于 0',
-      'inSuffix.initial': '$',
-      'inSuffix.monthly': '$',
-      'inSuffix.apy': '%',
-      'inSuffix.years': '年',
-      'chartTitle': '余额构成:存入本金 vs 利息',
-      'chartCenter': '期末',
-      'chartTitleGrowth': '账户增长曲线',
-      'slice.totalDeposited': '存入本金',
-      'slice.totalInterest': '利息收益',
-      'line.balance': '账户余额',
-      'line.deposited': '累计存入',
-      'band.deposited-balance': '复利利息',
-      'note': '🏦 大多数高收益储蓄账户（HYSA / 境外数字银行）按日计算复利、按月派息入账。利率为浮动利率——本测算假设 APY 在周期内保持恒定，仅供财务规划参考，不作为收益保证。',
-    },
-    useCases: [
-      '对比 4.25% 与 3.8% APY 的两种高息储蓄:10 万本金加每月 3000 定存,两年利息差在千元级',
-      '算应急基金的机会成本:6 个月生活费约 4.5 万,按 4% APY 存三年多出约 5700 元利息',
-      '把税算进去再决策:20% 税档下 4.5% APY 到手约 3.6%,判断值不值得把钱搬去利率更高的账户',
-      '银行降息后重测:APY 从 5% 降到 4%,5 万存款五年少拿约 3100 元利息,再决定要不要换银行',
-    ],
-    faqs: [
-      {
-        q: '高息储蓄(HYSA)的利息是怎么算的?',
-        a: '多数高息储蓄按日复利、按月入账:余额每年按 (1 + APY/365)^365 增长。本工具把它折算成有效月利率,并把每月定存一并计入来推算余额。',
-      },
-      {
-        q: '储蓄利息要交税吗?',
-        a: '要。在美国利息按普通收入计税(1099-INT 表),钱留在账户里也要报——4.5% APY 在 22% 税档下税后约 3.5%。中国大陆自 2008 年起对储蓄存款利息暂免个税,其他产品规则各异,按当地政策算。',
-      },
-      {
-        q: '银行调整 APY 怎么办?',
-        a: 'HYSA 利率是浮动的,跟着央行走。本预测假设利率恒定,长期只当估算看;银行每次改价就重跑一遍——用这个工具重测只要 10 秒。',
-      },
-      {
-        q: '它和货币基金可以直接比吗?',
-        a: '收益率口径可以直接比:七日年化与 APY 都含复利。保障不同——美国 HYSA 受 FDIC 存款保险(每行每户 25 万美元),货币基金不是存款,理论上可能亏损;把这点折进对比再决定。',
-      },
-    ],
-    formula: {
-      formula: FORMULA,
-      explain: '高息储蓄增长公式。P = 初始存款,PMT = 每月定存,r = APY(小数),n = 每年计息次数(按日复利取 365),t = 年数。第一项对本金复利,第二项对定存流复利。',
-    },
-  },
+
+
 
   // ──────────────────────────── Español ────────────────────────────
   es: {

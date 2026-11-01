@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * Commission Calculator 长文正文 —— 四语 dispatcher
+ * Commission Calculator 长文正文 —— 三语 dispatcher
  *
- * en 分支等价于原 ToolContent 渲染输出。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支等价于原 ToolContent 渲染输出。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en(与改造前渲染输出一致) ────────────────────────────
@@ -28,23 +28,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具?</h2>
-    <p>本计算器根据销售总额计算佣金收入。常用于房产经纪人、汽车销售、经纪人和软件销售代表。</p>
-
-    <div>
-      <h2>常见佣金比例</h2>
-      <ul>
-        <li><strong>房地产:</strong> 每方 2.5-3%(合计 5-6%,由买方/卖方经纪人分成)</li>
-        <li><strong>汽车销售:</strong> 经销商利润的 20-30%(非标价)</li>
-        <li><strong>科技销售:</strong> 合同金额的 5-15%(SaaS、企业级)</li>
-        <li><strong>保险:</strong> 保费的 5-15%,通常附带续保佣金</li>
-      </ul>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -82,7 +65,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function CommissionCalculatorContent(): ReactNode {
   const { locale } = useApp()

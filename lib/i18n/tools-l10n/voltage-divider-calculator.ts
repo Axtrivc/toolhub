@@ -5,44 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const VoltageDividerCalculatorL10n: ToolL10n = {
-  zh: {
-    useCases: ['把电池电压缩到 ADC 量程内再采样', '为比较器或运放生成基准/偏置电压', '从 12V/24V 电源得到 3.3V 逻辑电平信号', '核算分压链电流与两只电阻的功耗'],
-    faqs: [
-      { q: '分压器输出能带多大负载?', a: '负载相当于与 R2 并联的电阻。经验法则:让分压链电流至少是负载电流的 10 倍,否则输出会被明显拉低、偏离计算值。' },
-      { q: '怎么精确得到 3.3V 分压?', a: '切到反解模式,输入 Vin 与 R1,目标设为 3.3V——计算器直接给出所需 R2(12V 配 10kΩ 时是 3.79kΩ,实际选最近的 E12 值 3.9kΩ)。' },
-      { q: '能用分压器给 3.3V 芯片供电吗?', a: '不能。分压器只分压、不稳流也不稳压——毫安级负载会把节点电压拖得到处跑。供电要用 LDO 或降压 DC-DC;分压器是给信号和偏置用的。' },
-      { q: '为什么实测 Vout 偏低?', a: '万用表 10MΩ 输入阻抗与 R2 并联,加上负载本身都拉低节点。高阻分压器偏移最大——看 Vout-R2 曲线就知道 R2 越大节点越"虚"。' },
-    ],
-    formula: {
-      formula: 'Vout = Vin × R2 ÷ (R1 + R2)\nI = Vin ÷ (R1 + R2)\nP1 = I² × R1;P2 = I² × R2\n反解:R2 = R1 × V目标 ÷ (Vin − V目标)',
-      variables: 'Vin = 输入电压 (V)\nR1 = 上臂(串联)电阻 (Ω)\nR2 = 下臂(接地)电阻 (Ω)\nVout = R1-R2 交点电压 (V)\nI = 流过链路的电流 (A)\nP1、P2 = 各电阻上的功耗 (W)',
-      explain: '链路电流由总电阻决定,Vout 就是这个电流乘 R2。反过来求 R2 只是把同一公式绕目标电压重新整理。',
-      example: '第 1 步:12V 加在 R1 = 10kΩ 与 R2 = 4.7kΩ 上。\n第 2 步:Vout = 12 × 4,700 ÷ (10,000 + 4,700) = 12 × 0.31973 = 3.84 V。\n第 3 步:I = 12 ÷ 14,700 = 0.816 mA。\n第 4 步:P1 = (0.000816)² × 10,000 = 6.66 mW;P2 = 3.13 mW。\n反解示例:要从 12V 得到精确 3.3V、R1 = 10kΩ → R2 = 10,000 × 3.3 ÷ 8.7 = 3,793 Ω(最近 E12 值 3.9kΩ)。\n结果:正解 Vout = 3.84V;要 3.3V 目标则需 3.79kΩ。',
-    },
-    ui: {
-      'in.mode': '计算模式',
-      'in.vin': '输入电压 (Vin)',
-      'in.r1': '电阻 R1',
-      'in.r2': '电阻 R2',
-      'in.targetVout': '目标 Vout',
-      'opt.mode.forward': '正解 — 求 Vout',
-      'opt.mode.solve': '反解 — 求目标 Vout 的 R2',
-      'out.vout': '输出电压 (Vout)',
-      'out.current': '分压链电流',
-      'out.p1': 'R1 功耗',
-      'out.p2': 'R2 功耗',
-      'out.r2Solved': '所需 R2',
-      'errVout': '目标 Vout 必须小于 Vin',
-      'errPositive': '电压与电阻都必须为正',
-      'chartTitle': 'Vout 随 R2 变化',
-      'line.vout': 'Vout',
-      'preset.0': '12V → 3.3V(反解)',
-      'preset.1': '5V → 3.3V 电平',
-      'preset.2': '电池监测 100k/10k',
-      'preset.3': '中点分压 9V',
-      'note': '⚖️ 分压器只对高阻抗负载有效:任何并到 R2 上的负载都会拉低 Vout。保持分压链电流 ≥ 负载电流的 10 倍;电池供电的高阻分压链(如 100k+10k)能把静态电流压到 0.1mA 级。',
-    },
-  },
+
   es: {
     useCases: ['reducir la tensión de la batería al rango de un ADC', 'generar referencias y bias para comparadores y opamps', 'obtener una señal lógica de 3,3 V desde 12 V o 24 V', 'comprobar corriente de la cadena y potencia de cada resistor'],
     faqs: [

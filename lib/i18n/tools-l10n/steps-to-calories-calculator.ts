@@ -5,42 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const StepsToCaloriesCalculatorL10n: ToolL10n = {
-  zh: {
-    useCases: ['把每日步数换算成卡路里', '估算一万步走了多远', '按身高算出真实步距和距离', '对比不同步速的消耗差异'],
-    faqs: [
-      { q: '卡路里是怎么估算的?', a: '距离 = 步数 × 步距,步距 ≈ 身高 × 0.414。卡路里采用 2011 年身体活动概要的 MET 法:MET 值(慢速 2.8、中速 3.5、快走 5.0)× 体重 × 步行小时数——这是运动科学的标准近似。' },
-      { q: '为什么手环显示的消耗更多?', a: '手环往往把所有活动都计入,包括身体静止时本来就要消耗的热量(BMR 重叠),而且各家计步算法差异不小。本工具只计步行的增量部分,所以数字更低——通常也更接近真实多消耗的能量。' },
-      { q: '一万步大约多远?', a: '普通成年人约 7-8 公里(4.5-5 英里)。工具会根据你的身高算出精确距离,因为步距才是决定因素——高个子每步跨得更远,矮个子同样的步数走的距离更短。' },
-    ],
-    ui: {
-      'chartTitle': '步数 vs 每日目标',
-      'cmp.0': '你的一天',
-      'cmp.1': '每日目标',
-      'cmpseg.0': '已完成步数',
-      'cmpseg.1': '距目标',
-      'in.calories': '消耗卡路里',
-      'in.distanceKm': '距离',
-      'in.distanceMi': '距离(英里)',
-      'in.height': '身高',
-      'in.minutes': '活动分钟数',
-      'in.pace': '步行速度',
-      'in.steps': '每日步数',
-      'in.weight': '体重',
-      'note': '👟 估算采用 MET 法(2011 年 Compendium)。健身手环常偏高,因为它把基础代谢重叠部分也计入。普通成人 10,000 步 ≈ 7-8 km。',
-      'opt.pace.brisk': '快走(≈6.5 km/h)',
-      'opt.pace.moderate': '中速步行(≈5 km/h)',
-      'opt.pace.slow': '慢走(≈3 km/h)',
-      'out.calories': '消耗卡路里',
-      'out.distanceKm': '距离',
-      'out.distanceMi': '距离(英里)',
-      'out.height': '身高',
-      'out.minutes': '活动分钟数',
-      'out.pace': '步行速度',
-      'out.steps': '每日步数',
-      'out.weight': '体重',
-          'errInvalid': "请输入正数",
-},
-  },
+
   es: {
     useCases: ['convertir tus pasos diarios en calorías', 'estimar a cuánta distancia equivalen 10 000 pasos', 'calcular la zancada y la distancia reales con tu altura', 'comparar el gasto según el ritmo'],
     faqs: [

@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * UtmLinkBuilder 长文正文 —— 四语 dispatcher
+ * UtmLinkBuilder 长文正文 —— 三语 dispatcher
  *
- * en 分支与改造前渲染输出一致。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支与改造前渲染输出一致。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -24,19 +24,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>五个参数各管一件事</h2>
-    <p>utm_source 回答"这次点击从哪来"(google、newsletter、partner-42);utm_medium 指明渠道(cpc、email、referral);utm_campaign 把一次投放的所有流量归到一组(spring-sale-2026);utm_term 承载付费关键词,utm_content 区分 A/B 测试的素材变体。GA4 会把 source 与 medium 合成会话的 source/medium——缺了它们,每次点击都掉进 (direct)/(none) 桶,任何报表都救不回来。</p>
-    <h2>大小写是沉默的报表杀手</h2>
-    <p>"Email" 和 "email" 是两个不同的值,编码后 "Spring Sale" 与 "spring-sale" 也不会合并。多数归因混乱不是工具问题,而是命名漂移:三个营销人员把同一活动写成三种样子。一次性定好"小写加连字符"并公开记录。本工具对大写输入给出提示,正是为了这个。</p>
-    <h2>基础 URL 会经历什么</h2>
-    <p>已有的查询参数全部保留;你填写的每个 utm_* 参数会替换 URL 中同名参数,值按 URL 规则编码(空格变 %20)。缺协议时按浏览器惯例自动补 https://——但直接粘贴完整 https:// 地址,查询串里已有的编码字符会原样保留。</p>
-    <h2>别让带参链接进搜索结果</h2>
-    <p>UTM 参数不影响 Google 排名,但带参 URL 仍可能被抓取并展示在结果页,分散信号。落地页加自指 canonical 标签或用 Search Console 的参数处理,让干净版本保持权威。站内链接永远不要带 UTM:给内部导航打标签会在会话中途覆盖访客最初的来源。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -66,7 +53,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function UtmLinkBuilderContent(): ReactNode {
   const { locale } = useApp()

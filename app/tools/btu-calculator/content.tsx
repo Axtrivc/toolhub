@@ -5,8 +5,8 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * BtuCalculator 长文正文 —— 四语 dispatcher
- * en 分支与工厂渲染一致。zh/es/de 仅客户端 hydration 后切换。
+ * BtuCalculator 长文正文 —— 三语 dispatcher
+ * en 分支与工厂渲染一致。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -23,19 +23,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>"每平方英尺 20 BTU"从哪来</h2>
-    <p>20 BTU/ft² 的基准假设 8 英尺层高、普通隔热、日照适中——在这个条件下,350 ft² 的房间约需 7,000 BTU/小时。挑高会增加空气体积,所以计算器按"层高 ÷ 8"缩放:10 英尺层高在所有其他修正之前,就先给基准负荷加 25%。</p>
-    <h2>真正改变结果的修正项</h2>
-    <p>重度遮荫减 10%,朝南或朝西暴晒加 10%;顶楼上方是阁楼或屋面,再加 10%——天花板整个下午都在辐射蓄热。两人之外每多一人约加 600 BTU(静坐的人放出的热量接近一只老式白炽灯泡),厨房按 DOE 指南加约 4,000 BTU。</p>
-    <h2>为什么买大会适得其反</h2>
-    <p>过大的机组几分钟就把气温拉下来,温控器达标即停机——空气里的水分还没来得及冷凝排出。结果是一个又冷又潮的房间,频繁启停还伤压缩机。如果修正后的负荷比"只按面积"高出 30% 以上,加隔热、贴窗膜、做遮荫通常比买大一号更划算。</p>
-    <h2>用吨和 kW 读懂 BTU</h2>
-    <p>中央空调和迷你分体按"吨"销售:1 吨 = 12,000 BTU/小时,算出 24,000 BTU 就是 2 吨机组。工程口径 1 吨 ≈ 3.52 kW 制冷量。窗机仍以 BTU 标注——这正是本计算器两种单位都显示的原因。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -65,7 +52,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function BtuCalculatorContent(): ReactNode {
   const { locale } = useApp()

@@ -5,7 +5,7 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * ContractorVsEmployeeCalculator (1099 vs W-2) 长文正文 —— 四语 dispatcher
+ * ContractorVsEmployeeCalculator (1099 vs W-2) 长文正文 —— 三语 dispatcher
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -22,19 +22,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>同样的数字,不同的税收机器</h2>
-    <p>W-2 下,你和雇主各付 7.65% 的 FICA;1099 收入里你一个人是双方:按收入的 92.35% 缴 15.3%,有效约 14.13%——这还只是所得税开跑之前的差距。$100,000 收入下,光这一项每年就差约 $6,480。</p>
-    <h2>福利是更大的杠杆</h2>
-    <p>雇主团体医保有补贴、税前扣;承包商要拿税后钱去市场买——SE 医保扣除只减所得税,减不了 SE 税本身。再算上 401(k) 匹配、带薪假和失业保险这些看不见的隐性福利,差距迅速拉大。</p>
-    <h2>1099 到底该多要多少?</h2>
-    <p>招聘圈的老经验是:承包商要比 W-2 总薪酬多 20-30% 才打平。但经验值只是起点——把两份 offer 连同你真实的保费和匹配额丢进这个计算器,让算术替你拍板。</p>
-    <h2>这个估算没算什么</h2>
-    <p>州所得税、最高 20% 的 QBI 通行扣除、HSA 资格,以及工伤保险这类保障的货币价值都会移动结论。把输出当成有依据的方向性差距,而不是纳税申报表。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -64,7 +51,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function ContractorVsEmployeeCalculatorContent(): ReactNode {
   const { locale } = useApp()

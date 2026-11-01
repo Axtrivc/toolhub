@@ -5,29 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const trapezoidCalculatorL10n: ToolL10n = {
-  zh: {
-    formula: {
-      formula: 'A = ½ × (a + b) × h',
-      explain: '梯形面积。a、b 是两条平行边(底),h 是它们之间的垂直高。',
-    },
-    ui: {
-      'chartTitle': '图形预览',
-      'in.a': '上底 (a)',
-      'in.b': '下底 (b)',
-      'in.h': '高 (h)',
-      'out.area': '面积',
-      errNonNegative: '边长和高不能为负',
-      note: '📐 梯形面积 = 平行边平均值 × 高。',
-    },
-    useCases: [
-      '计算房产中不规则地块的面积',
-      '求梯形窗户或建筑构件的面积',
-      '估算沟渠、堤坝的土方截面面积',
-    ],
-    faqs: [
-      { q: '如果我的两条边不平行怎么办?', a: '那就不是梯形——而是一个不规则四边形。你需要更多测量数据或不同的公式(比如分割成三角形)。' },
-    ],
-  },
+
   es: {
     formula: {
       formula: 'A = ½ × (a + b) × h',

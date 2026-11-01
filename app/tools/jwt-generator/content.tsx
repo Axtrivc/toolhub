@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * JwtGenerator 长文正文 —— 四语 dispatcher
+ * JwtGenerator 长文正文 —— 三语 dispatcher
  *
- * en 分支与改造前渲染输出一致。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支与改造前渲染输出一致。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en (与改造前渲染输出一致) ────────────────────────────
@@ -24,19 +24,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>什么时候用它</h2>
-    <p>非常适合调试认证流程:铸造一个带已知声明的令牌,在测试请求里交给你的 API,再检查中间件提取到了什么。配合站内的 JWT 解码器,还能看清服务器到底会读回什么。</p>
-    <h2>算法说明</h2>
-    <p>HS256/384/512 是对称算法——同一个密钥既负责签名也负责验签。这也正是本工具能完全在客户端运行的原因:密钥通过 WebCrypto 始终留在你的浏览器里。RS256/ES256 需要私钥,属于服务端代码的领地。</p>
-    <h2>值得设置的声明</h2>
-    <p>正式令牌务必设置 exp(过期时间);多个服务共享令牌时,再加上 iss(签发者)和 aud(受众)。iat(签发时间)已自动预填为当前时间。</p>
-    <h2>永远不要把密钥发到前端</h2>
-    <p>内嵌在前端 JavaScript 里的签名密钥,部署那一刻就是公开的。本生成器请只搭配一次性的测试密钥使用。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -66,7 +53,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function JwtGeneratorContent(): ReactNode {
   const { locale } = useApp()

@@ -12,7 +12,7 @@ import { RecentlyUsedProvider } from '@/lib/useRecentlyUsed'
  * 持久化到 localStorage,用户切换后跨会话保留。
  * 默认:英文 + 跟随系统主题。
  *
- * 语言:4 语(en 默认 / zh / es / de)。
+ * Language: English (default), Español, and Deutsch.
  * 首访无缓存时按浏览器语言(navigator.language)自动匹配支持语种,
  * 匹配不到则保持英文。
  */
@@ -51,6 +51,10 @@ export function AppProviders({ children }: { children: ReactNode }) {
       try { localStorage.setItem(LOCALE_KEY, urlLocale) } catch { /* 无痕模式/禁用存储 */ }
     } else if (isLocale(savedLocale)) {
       setLocaleState(savedLocale)
+    } else if (savedLocale) {
+      // Legacy or corrupted persisted values must not trigger browser-language detection.
+      setLocaleState('en')
+      try { localStorage.setItem(LOCALE_KEY, 'en') } catch { /* Storage may be unavailable. */ }
     } else {
       const detected = detectBrowserLocale()
       if (detected !== 'en') {
@@ -96,7 +100,7 @@ export function AppProviders({ children }: { children: ReactNode }) {
   // 兼容旧调用点(多语下拉直接用 setLocale;此处保留一个有意义的轮换行为)
   const toggleLocale = useCallback(() => {
     setLocaleState((prev) => {
-      const order: Locale[] = ['en', 'zh', 'es', 'de']
+      const order: Locale[] = ['en', 'es', 'de']
       const idx = order.indexOf(prev)
       const next = order[(idx + 1) % order.length]
       writeLocaleToUrl(next)

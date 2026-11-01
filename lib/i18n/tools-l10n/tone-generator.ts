@@ -5,33 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const ToneGeneratorL10n: ToolL10n = {
-  zh: {
-    useCases: ['测试耳机、音箱与分频器的频率响应', '找出房间共振与设备噪声的频率', '给乐器调音时对照 A4=440Hz 参考音', '做听力测试与等响度课程演示'],
-    faqs: [
-      { q: '对扬声器和耳朵安全吗?', a: '中等音量下安全。从低音量开始:60-80dB 的正弦纯音比音乐听起来更响,因为能量全部集中在单一频率。戴耳机别开满音量,尤其 100Hz 以下——那里的听力损伤不痛。' },
-      { q: '同样音量的不同频率为什么听起来不一样响?', a: '听觉不是平直的:Fletcher-Munson 等响曲线显示人耳对 2-4kHz 最敏感,往两端滚降。要让 100Hz 听起来和 1kHz 一样响,需要高得多的声压级。' },
-      { q: '音乐会标准音 A 是多少?', a: '440Hz,即 A4,是管弦乐队的定音基准。每个半音相差 2 的十二分之一次方,所以 A5 是 880Hz、A3 是 220Hz——工具会显示任意频率最近的音符与偏差音分。' },
-      { q: '方波和锯齿波都用在什么地方?', a: '方波只含奇次谐波,是合成器“冲”的音色和失真踏板的基础;锯齿波含全部谐波,是模拟合成器弦乐与铜管的经典起点。正弦波则是无谐波的纯音。' },
-    ],
-    ui: {
-      'play': '播放',
-      'stop': '停止',
-      'playing': '播放中',
-      'idle': '待机',
-      'frequency': '频率',
-      'waveform': '波形',
-      'volume': '音量',
-      'duration': '时长',
-      'sine': '正弦波',
-      'square': '方波',
-      'triangle': '三角波',
-      'sawtooth': '锯齿波',
-      'continuous': '持续',
-      'nearestNote': '最近音符',
-      'errFreq': '频率须在 20 Hz 到 20 kHz 之间',
-      'note': '🔊 音量先低后高:纯音在同等声压下比音乐更“顶”。频率滑杆是对数刻度(和听觉一致),所以 20Hz-20kHz 每段都好调。AudioContext 只在你点击播放时创建,纯浏览器离线发声。',
-    },
-  },
+
   es: {
     useCases: ['probar la respuesta en frecuencia de auriculares y altavoces', 'localizar resonancias de sala y zumbidos de equipo', 'afinar instrumentos contra la referencia A4 = 440 Hz', 'demostraciones de audiometría y sonoridad en clase'],
     faqs: [

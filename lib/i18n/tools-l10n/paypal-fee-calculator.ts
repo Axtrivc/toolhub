@@ -5,39 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const PayPalFeeCalculatorL10n: ToolL10n = {
-  zh: {
-    useCases: ['算一笔收款实际到手多少钱', '想让买家净付到 $100 时倒推应收金额', '对比国际订单(+1.5%)与本地订单的费差', '给自由职业报价时把手续费摊进价格'],
-    faqs: [
-      { q: 'PayPal 每笔交易收多少手续费?', a: '美国标准商业费率为每笔 3.49% + $0.49。国际买家再加 1.5% 跨境费,货币换算另收约 3-4% 的点差——这往往是最大的一笔隐性成本。' },
-      { q: '想净收某个金额,该怎么倒推报价?', a: '用公式:应收 =(目标净额 + 固定费)÷(1 − 百分比费率)。想在 3.49% + $0.49 下净收 $100,应收 $100.49 ÷ 0.9651 ≈ $104.12。把计算器切到反算模式即可自动完成。' },
-      { q: 'PayPal 的朋友和家人转账收费吗?', a: '美国境内用 PayPal 余额或银行账户付款的朋友转账免费,但用卡支付时付款方需付 2.9% + $0.30。卖家绝不能用这种方式收款——它没有任何卖家保障。' },
-      { q: '为什么我的实际费率不是 3.49%?', a: '$0.49 的固定费在小额收款里占比极高:$10 的订单光固定费就占 4.9%,实际费率接近 8.4%;而 $1,000 的订单固定费只占 0.05%,实际费率就逼近 3.49% 的名义值。' },
-    ],
-    ui: {
-      'in.mode': '模式',
-      'in.amount': '金额',
-      'in.feePct': '百分比费率',
-      'in.fixedFee': '固定手续费',
-      'inSuffix.amount': '$',
-      'inSuffix.feePct': '%',
-      'inSuffix.fixedFee': '$',
-      'out.toCharge': '向客户收取',
-      'out.feeTotal': 'PayPal 手续费',
-      'out.net': '你的净收入',
-      'out.effective': '实际费率',
-      'opt.mode.forward': '实付 → 净收入',
-      'opt.mode.reverse': '净收目标 → 应收',
-      'preset.0': '标准在线收款 (3.49% + $0.49)',
-      'preset.1': '国际订单 (+1.5%)',
-      'preset.2': '慈善费率 (1.99% + $0.49)',
-      'chartTitle': '随客单价增长的手续费与净收入',
-      'line.fee': 'PayPal 手续费',
-      'line.net': '你的净收入',
-      'errAmount': '请输入有效金额',
-      'errRate': '费率需在 0-100% 之间,固定费不能为负',
-      'note': '💳 美国商业标准费率:3.49% + $0.49。跨境买家再加 1.50%,货币换算另收约 3-4% 点差——常常才是最大的隐性成本。朋友转账免手续费,但没有卖家保障。',
-    },
-  },
+
   es: {
     useCases: ['calcular cuánto llega realmente a tu cuenta tras las comisiones', 'averiguar cuánto cobrar para recibir neto 100 $', 'comparar la comisión de ventas internacionales (+1,5%) con las locales', 'incluir la comisión en tus tarifas de freelance'],
     faqs: [

@@ -5,7 +5,7 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * ResistorColorCodeCalculator 长文正文 —— 四语 dispatcher
+ * ResistorColorCodeCalculator 长文正文 —— 三语 dispatcher
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -22,19 +22,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>先找间距,再读色环</h2>
-    <p>把电阻拿正:金色或银色的容差环靠右——它与数字环之间的间距肉眼可见地更宽。然后从最左读起:黄紫红金 = 4-7、乘 100、±5%,即 4.7 kΩ。大多数"读错"只是把电阻拿倒了。</p>
-    <h2>四环、五环与六环</h2>
-    <p>四环是两位有效数字,配 ±5%/±10% 精度——业余电子的主力。五环多一位数字,服务 ±1% 及更精的电阻。罕见的第 6 环是以 ppm/K 计的温度系数,主要在测量电路与精密基准里有意义。</p>
-    <h2>金银两色的双重身份</h2>
-    <p>作倍率时金 ×0.1、银 ×0.01,10Ω 以下靠它编码:棕黑金金读作 1.0Ω ±5%。作末环时它们表示 ±5%/±10% 容差。所以金环既可能是倒数第二环也可能是第二环——靠间距区分。</p>
-    <h2>信色环,也要用表验证</h2>
-    <p>色环给出的是标称值与合法范围:470Ω ±5% 的电阻实测落在 446.5-493.5Ω 都算合格。若超出,多半是在路测量——并联支路会把读数拉低;翘起一条腿再量才是真值。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -64,7 +51,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function ResistorColorCodeCalculatorContent(): ReactNode {
   const { locale } = useApp()

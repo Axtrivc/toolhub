@@ -5,20 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const AsciiTableL10n: ToolL10n = {
-  zh: {
-    useCases: ['查字符的 ASCII 十进制/十六进制码', '查控制字符(NUL/ESC/LF)的含义', '核对八进制/二进制表示', '做编码作业的速查表'],
-    faqs: [
-      { q: '表格覆盖哪些码位?', a: '0-127,即真正的 ASCII 集。控制字符(0-31)不可打印、按名称显示(NUL、LF、ESC……),32-126 可打印,127 是 DEL。128 以上属于扩展编码或 Unicode,是另一回事。' },
-      { q: '怎么查最快?', a: '直接输入字符("A")、十进制(65)、十六进制(41)或二进制,表格对任意列实时过滤。比如搜 ESC 立刻定位到 27 号的转义字符。' },
-      { q: '换行为什么是控制字符?', a: 'LF(10)是电传打字机时代 ASCII 的换行符;Windows 后来把它和 CR(13)组合成 CRLF。两者都是控制码——这段历史正是 Windows 与 Unix 系统换行符至今不同的原因。' },
-      { q: 'ASCII 和 Unicode 是什么关系?', a: 'ASCII 是 1963 年定稿的 7 位编码;Unicode 把它原样收进最前面的 0-127 码位,UTF-8 中这些字符仍只占 1 字节。所以 ASCII 是 UTF-8 的基础子集,记住它不亏。' },
-      { q: '哪些码位最值得背下来?', a: '高频组:字符 0 是 48(到 9 是 57),A 是 65(到 Z 是 90),a 是 97(到 z 是 122)。判断"是否数字"、大小写转换(相差 32)、手写进制转换全靠这几组。' },
-    ],
-    ui: {
-      'note': '🔢 ASCII 覆盖 0-127。控制字符(0-31)有名字但不可打印;127 是 DEL。再往上属于扩展编码或 Unicode。',
-      'searchPlaceholder': '搜索字符或编码',
-    },
-  },
+
   es: {
     useCases: ['consultar el código decimal/hex ASCII de un carácter', 'identificar caracteres de control (NUL/ESC/LF)', 'verificar las formas octal y binaria', 'chuleta rápida para ejercicios de codificación'],
     faqs: [

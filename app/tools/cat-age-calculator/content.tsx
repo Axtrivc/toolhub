@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * CatAgeCalculator 长文正文 —— 四语 dispatcher
+ * CatAgeCalculator 长文正文 —— 三语 dispatcher
  *
- * en 分支与站点既有渲染口径一致。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支与站点既有渲染口径一致。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -24,19 +24,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>15/24/+4 曲线及其来历</h2>
-    <p>兽医与 AAFP 等机构对猫的成熟描述是"前置"的:第一年约等于人类 15 岁,第二年加 9(累计 24),之后每年约加 4。5 岁的猫约 36 岁,15 岁的猫约 76 岁。这条曲线几乎与品种无关——缅因猫和暹罗猫的老化节奏几乎一致,这也是与狗最大的不同。</p>
-    <h2>×7 法则错得有多离谱</h2>
-    <p>乘七法则把 1 岁的猫算成"7 岁"——可她早已体格成熟、性成熟、行为上是个成年猫。它还会低估老年护理:11 岁(兽医标准的老年)×7 只得 77,而真实等效约 60。这个迷信的实际代价是错过老年体检——主人低估了"一年一次该变一年两次"的时间点。</p>
-    <h2>决定体检节奏的生命阶段</h2>
-    <p>幼猫(1 岁以下)、青年成年(1-6)、壮年成年(7-10)、老年(11-14)、超级老年(15+)。进入老年后应转为每半年一次体检并加做血检和血压——猫藏肾病和甲亢是出了名的厉害,早发现就是一切。室内猫普遍能活到 18-20 岁,约人类 88-96 岁。</p>
-    <h2>领养的猫不知道生日怎么办?</h2>
-    <p>收容所靠牙齿估龄:乳牙还在是 6 个月以下,恒犬齿约 7 个月长齐,牙结石和磨损程度再往上推。"1-2 岁"的收容所标签通常意味着青年成年——填 1.5,照护决策看生命阶段卡片,别看人类年龄数字。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -66,7 +53,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function CatAgeCalculatorContent(): ReactNode {
   const { locale } = useApp()

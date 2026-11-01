@@ -5,43 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const PasswordEntropyCheckerL10n: ToolL10n = {
-  zh: {
-    useCases: [
-      '换密码前量化强度:先测熵值达标(75+ 位)再存进密码管理器',
-      '直观对比两种策略:"P@ssw0rd!" 这类复杂短密码 vs "correct horse battery staple" 长口令短语',
-      '审计团队共享账号密码:对照安全团队的 75 位阈值逐条过一遍',
-      '教学演示:让学生看到词典词、键盘序列如何把 60 位理论熵打到 30 位',
-    ],
-    faqs: [
-      { q: '熵是怎么计算的?', a: '基线公式:熵(位)= 长度 × log2(字符集大小)。纯小写字母每字符约 4.7 位,加数字约 5.2 位,再加大写与符号(全字符集 95 字符)约 6.6 位。在此基础上应用真实破解器的行为惩罚——词典词、键盘序列、重复串都会显著扣减,因为破解器远在穷举之前就先试这些模式。' },
-      { q: '75 位阈值是什么含义?', a: '这是安全团队对高价值账户(主邮箱、银行、密码管理器主密码)的通行推荐:在每秒 1000 亿次猜测的离线攻击下,75 位熵需要数千年才能穷尽。普通账户 60 位以上通常足够,低于 40 位等于没设防。' },
-      { q: '破解时间的假设靠谱吗?', a: '按每秒 1000 亿次(10¹¹)尝试估算,对应离线场景:攻击者拿到哈希库、用多卡 GPU 集群跑 hashcat。在线撞库受限于网络与验证码,实际速率低几个数量级——但离线泄露才是该担心的场景,这正是估算按最坏情况给出的原因。' },
-      { q: '我输入的密码会被上传吗?', a: '不会。分析 100% 在浏览器本地完成,零网络请求——可在 DevTools 网络面板验证。这正是它敢拿来测真实密码的原因;任何要求联网的密码强度工具都不该信任。' },
-    ],
-    ui: {
-      'analyzeIt': '回填分析 ↑',
-      'crackAssume': '按每秒 1000 亿次尝试',
-      'crackEstimate': '离线破解估算',
-      'days': '天',
-      'entropyBits': '熵',
-      'genStrong': '立即生成 128-bit 强密码',
-      'genStrongHint': '{n} 字符 · 加密级随机 · ≥128 位熵',
-      'heatDeath': '超出宇宙时间尺度',
-      'instant': '瞬间',
-      'millionYears': '百万年',
-      'minutes': '< 1 小时',
-      'note': '🔐 基线 = 长度 × log2(字符集大小):"correct horse battery staple" 胜过 "P@ssw0rd!",因为长度才是主导。惩罚模拟真实破解器——它们远在穷举前就先试词典词与模式。分析 100% 离线。',
-      'penRepeat': '大量重复字符',
-      'penDictStart': '以 "password" 开头',
-      'penKeyboardSeq': '键盘序列',
-      'penRepeatRun': '单一字符重复串',
-      'penalties': '已应用惩罚:{list}',
-      'pwLabel': '要分析的密码(绝不离开本页)',
-      'regenStrong': '↻ 重新生成',
-      'strongVerdict': '强:超过安全团队为高价值账户推荐的 75 位阈值。',
-      'years': '年',
-    },
-  },
+
   es: {
     useCases: [
       'Medir la fuerza antes de cambiar una contraseña: superar los 75 bits antes de guardarla en el gestor',

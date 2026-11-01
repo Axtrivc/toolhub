@@ -5,13 +5,13 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * Income Tax Estimator 长文正文 —— 四语 dispatcher
+ * Income Tax Estimator 长文正文 —— 三语 dispatcher
  *
  * en 分支等价于原 ToolContent 渲染输出(<h2>What Is This Tool?</h2> + intro
- * + 各 section 包在 <div> 中),字节级 SEO 安全。zh/es/de 仅客户端 hydration
+ * + 各 section 包在 <div> 中),字节级 SEO 安全。es/de 仅客户端 hydration
  * 后按 locale 切换。SSR/预渲染恒渲染 en → Google 索引英文不变。
  *
- * 注意:内联 monospace 公式 <p style> 块在四种语言下字节一致,不翻译公式标签。
+ * 注意:内联 monospace 公式 <p style> 块在三种语言下字节一致,不翻译公式标签。
  */
 
 // ──────────────────────────── en(与改造前渲染输出一致) ────────────────────────────
@@ -70,49 +70,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具?</h2>
-    <p>
-      本估算器使用 2026 年税率档位计算你的美国联邦所得税。它会自动应用标准扣除额,并显示你的预计税款、有效税率和到手收入。这只是一个估算——你的实际税额取决于各项扣除、抵免以及州税。
-    </p>
-    <div>
-      <h2>累进税档如何运作</h2>
-      <p>
-        许多人以为进入更高档位意味着所有收入都按更高税率征税。这是个误区。只有<em>超过</em>每个档位阈值的那部分收入才按该档税率征税。你的边际税率是你最后一美元收入所适用的税率;有效税率则是你的总税额除以总收入。
-      </p>
-    </div>
-    <div>
-      <h2>计算公式</h2>
-      <p>税款通过累加每个税档的应纳税额来计算:</p>
-      <p style={{ fontFamily: 'monospace', background: 'rgb(var(--bg-subtle))', padding: '0.75rem 1rem', borderRadius: '0.5rem', fontSize: '0.95rem' }}>
-        Tax = &Sigma; (income in bracket &times; bracket rate)
-      </p>
-      <p style={{ fontFamily: 'monospace', background: 'rgb(var(--bg-subtle))', padding: '0.75rem 1rem', borderRadius: '0.5rem', fontSize: '0.95rem' }}>
-        Effective&nbsp;Rate = Total&nbsp;Tax &divide; Total&nbsp;Income
-      </p>
-      <p>
-        只有落在每个档位内的那部分收入乘以该档税率,然后把各部分相加。上面的饼图展示了结果:红色扇区是你的联邦总税款,绿色扇区是你的到手收入。
-      </p>
-    </div>
-    <div>
-      <h2>包含与不包含的项目</h2>
-      <ul>
-        <li><strong>包含:</strong>使用 2026 年档位的联邦所得税</li>
-        <li><strong>不包含:</strong>州税(视各州而定,0-13%)、FICA(社会保障 + 医疗保险 = 7.65%)、地方税</li>
-        <li><strong>标准扣除额:</strong>$16,100 单身 / $32,200 已婚(2026 年)</li>
-        <li><strong>未考虑:</strong>401(k) 缴款、子女抵免、教育抵免、逐项扣除</li>
-      </ul>
-    </div>
-    <div>
-      <h2>边际税率 vs. 有效税率</h2>
-      <p>
-        一个年收入 $75,000 的单身人士,其<strong>边际税率</strong>为 22%(最高档位),但<strong>有效税率</strong>只有约 10%,因为大部分收入按更低的税率征税。永远要清楚自己的有效税率——那才是你真正支付的税率。
-      </p>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -225,7 +182,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function IncomeTaxEstimatorContent(): ReactNode {
   const { locale } = useApp()

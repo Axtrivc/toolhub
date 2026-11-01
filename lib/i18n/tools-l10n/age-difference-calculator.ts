@@ -5,36 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const ageDifferenceCalculatorL10n: ToolL10n = {
-  zh: {
-    formula: {
-      formula: 'gap = |birthdate₁ − birthdate₂|\nyears = 两个出生日期之间的完整日历年数\nmonths, days = 整年之后的日历余数(月、天)',
-      variables:
-        'gap = 年龄差(年、月、天)\nbirthdate₁, birthdate₂ = 两个出生日期(日、月、年)\nyears = 年龄差中的整年数(年)\nmonths, days = 整年之后的余数(月、天)',
-      explain:
-        '年龄差是两个出生日期之间经过的时间,表示方式与年龄完全一致:整年加上余下的月和天。绝对值符号表示无论先输入谁的出生日期,结果都相同。',
-      example:
-        '第 1 步:人物 A 生于 1990 年 6 月 15 日;人物 B 生于 1994 年 10 月 20 日。\n第 2 步:从 1990 年 6 月 15 日到 1994 年 6 月 15 日恰好是完整的 4 年;10 月 20 日在 6 月 15 日之后,因此整年数为 4。\n第 3 步:余数:6 月 15 日 → 10 月 15 日为 4 个月;10 月 15 日 + 5 天 = 10 月 20 日,即 4 个月零 5 天。\n结果:年龄差为 4 年 4 个月零 5 天。',
-    },
-    ui: {
-      errInvalidDate: '日期无效(请用 YYYY-MM-DD)',
-      ymdFormat: '{y} 年 {m} 个月 {d} 天',
-      daysN: '{n} 天',
-      'in.birth1': '人物 1 出生日期(YYYY-MM-DD)',
-      'in.birth2': '人物 2 出生日期(YYYY-MM-DD)',
-      'out.days': '相差天数',
-      'out.diff': '年龄差',
-      note: '🎂 计算两个人之间的年龄差距。适用于恋爱关系和家族史研究。',
-    },
-    useCases: [
-      '计算两个人之间的年龄差',
-      '根据出生年份推算年龄差距',
-      '按年比较两个出生日期',
-      '用于恋爱关系或家族史研究',
-    ],
-    faqs: [
-      { q: '什么是「你年龄的一半加七」规则？', a: '这是一条常见的社交经验法则,用于估算可接受的最低恋爱年龄:你年龄的一半加 7。对 30 岁的人而言就是 22。它只是一种文化上的粗略参考,并非硬性规则。' },
-    ],
-  },
+
   es: {
     formula: {
       formula: 'gap = |birthdate₁ − birthdate₂|\nyears = años calendario completos entre las dos fechas de nacimiento\nmonths, days = resto del calendario tras los años completos',

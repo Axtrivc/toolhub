@@ -5,44 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const RaisedBedSoilCalculatorL10n: ToolL10n = {
-  zh: {
-    useCases: ['算出新建菜床要填多少土(ft³/yd³/升)', '按 Mel 混合 1:1:1 分别买堆肥、椰糠、蛭石', '用经济配方(表土+堆肥+椰糠)控制预算', '按 30 升袋装土换算需要几袋'],
-    faqs: [
-      { q: '4×8 英尺、12 英寸深的菜床要多少土?', a: '正好 32 立方英尺(约 906 升、1.19 立方码)。散装土按立方码订,袋装按升——本工具两个口径都会给出。' },
-      { q: '为什么土会"变少"?', a: '袋装土是蓬松状态计量的,第一季会沉降 20-30%。要一次填满,按几何体积买;介意沉降的话看"沉降后"那一栏再决定补土量。' },
-      { q: 'Mel 混合和经济配方怎么选?', a: "Mel 混合(Mel Bartholomew 的方形园艺)是堆肥、椰纤/泥炭、蛭石各三分之一,轻、透气、排水极佳,但成本高;50% 表土+30% 堆肥+20% 椰糠更便宜,只是更重、更易压实。" },
-      { q: '底部要填什么?', a: '常见做法:床底铺纸板或杂草垫,再铺粗枝条/落叶占体积,最后填 20-30 厘米好土——深根菜除外。这样能省下不少土钱。' },
-    ],
-    ui: {
-      'in.unit': '单位制',
-      'in.length': '床长',
-      'in.width': '床宽',
-      'in.depth': '床深',
-      'opt.unit.ft': '英尺与英寸',
-      'opt.unit.m': '米与厘米',
-      'out.volume': '需填土壤体积',
-      'out.bulkOrder': '散装订购量',
-      'out.settled': '沉降后',
-      'out.melMix': 'Mel 混合(1:1:1)',
-      'out.budgetMix': '经济配方',
-      'out.bags': '袋装土',
-      'outSub.settled': '蓬松土约压实 25%',
-      'outSub.melMix': '⅓ 堆肥 · ⅓ 椰糠 · ⅓ 蛭石',
-      'outSub.budgetMix': '50% 表土 · 30% 堆肥 · 20% 椰糠',
-      'each': '每种',
-      'errPositive': '请输入正数的床体尺寸',
-      'chartTitle': 'Mel 混合 vs 经济配方',
-      'cmp.0': 'Mel 混合(1:1:1)',
-      'cmp.1': '经济配方(50/30/20)',
-      'cmpseg.0': '堆肥',
-      'cmpseg.1': '椰糠',
-      'cmpseg.2': '蛭石/表土',
-      'preset.0': '经典 4×8 床',
-      'preset.1': '浅 2×6 香草床',
-      'preset.2': '1 × 0.5 米阳台',
-      'note': '🌱 袋装土按蓬松状态计量,第一季会沉降 20-30%——"沉降后"才是床里真正的存量。Mel 混合(方形园艺,Mel Bartholomew)排水极好;表土配方更便宜但更重、压实更快。',
-    },
-  },
+
   es: {
     useCases: ['calcular cuánta tierra necesita un bancal nuevo (ft³/yd³/litros)', 'comprar compost, fibra de coco y vermiculita por partes iguales (Mel 1:1:1)', 'ajustar el presupuesto con la mezcla de tierra vegetal', 'convertir el volumen a bolsas de 30 L'],
     faqs: [

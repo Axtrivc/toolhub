@@ -5,27 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const angleConverterL10n: ToolL10n = {
-  zh: {
-    ui: {
-      'note': '📐 用于数学、工程和导航。1 转 = 360° = 2π 弧度。',
-      'unit.arcmin': '角分 (′)',
-      'unit.arcsec': '角秒 (″)',
-      'unit.deg': '度 (°)',
-      'unit.grad': '百分度 (grad)',
-      'unit.mrad': '毫弧度 (mrad)',
-      'unit.rad': '弧度 (rad)',
-      'unit.rev': '转 (rev)',
-    },
-    useCases: [
-      '换算数学课上的角度与弧度(三角函数用弧度,几何用度)',
-      '把角度换算成编程要用的弧度(大多数数学函数以弧度为参数)',
-      '换算天文学里的微小角度(角秒)',
-      '把测量用的百分度(gon)换算成度',
-    ],
-    faqs: [
-      { q: '在代码里怎么把角度转成弧度?', a: '把角度乘以 π/180,或者用内置函数(例如 Python 的 radians()、JavaScript 的 Math.PI/180)。大多数语言都有角度转弧度的辅助函数。' },
-    ],
-  },
+
   es: {
     ui: {
       'note': '📐 Usado en matemáticas, ingeniería y navegación. 1 revolución = 360° = 2π rad.',

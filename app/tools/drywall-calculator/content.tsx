@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * DrywallCalculator 长文正文 —— 四语 dispatcher
+ * DrywallCalculator 长文正文 —— 三语 dispatcher
  *
- * en 分支与既有工具页渲染一致。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支与既有工具页渲染一致。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -24,19 +24,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>先定板数,其余随之</h2>
-    <p>铺板面积决定整张清单:板材加 10% 损耗、螺丝每 250 ft² 一磅、嵌缝膏每 100 ft² 一加仑。12×10 的卧室、8 英尺墙带顶棚是 440 ft²——16 张 4×8、2 磅螺丝、一桶 4.5 加仑嵌缝膏。</p>
-    <h2>4×12 板省在接缝</h2>
-    <p>8 英尺墙上横铺 12 英尺板,几乎消灭所有竖向对接——嵌缝量省约四分之一。代价:每张重约 30 磅、搬运易弯。单人施工就选 4×8,完全没问题。</p>
-    <h2>损耗是真的,不是凑数</h2>
-    <p>插座开孔、磕碰阴角、小到用不上的边角料,普通房间就吃掉 10% 库存;墙面有凹凸和壁橱时是 15%。板整张卖,数量永远向上取整。</p>
-    <h2>一次买齐,一次收尾</h2>
-    <p>纸面与饰面色号随生产批次变化。所有板同一天从同一垛买齐;确要补货时,把新泥和剩泥混桶(boxing)再用,别拿另一批次去收一个角。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -66,7 +53,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function DrywallCalculatorContent(): ReactNode {
   const { locale } = useApp()

@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * Sleep Calculator 长文正文 —— 四语 dispatcher
+ * Sleep Calculator 长文正文 —— 三语 dispatcher
  *
- * en 分支与改造前渲染输出一致。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支与改造前渲染输出一致。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en (与改造前渲染输出一致) ────────────────────────────
@@ -24,19 +24,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>为什么是 90 分钟?</h2>
-    <p>睡眠以约 90 分钟为一个周期,从浅睡进入深睡、再到快速眼动(REM)。在深睡期被叫醒会产生睡眠惯性——那种昏沉、迷糊的感觉;而在周期边界附近醒来则明显轻松得多。</p>
-    <h2>如何解读结果</h2>
-    <p>选择总休息量足够的那一档:多数成年人在 5–6 个周期(7.5–9 小时)时状态最好。每个估算都包含了约 15 分钟的入睡时间;如果你通常躺很久才睡着,就再提前一点。</p>
-    <h2>规律比优化更重要</h2>
-    <p>每天同一时间上床、同一时间起床,会让身体学会在那个窗口期待睡眠。稳定的作息会放大周期计时带来的全部好处。</p>
-    <h2>个体差异</h2>
-    <p>每个人的周期长度大约在 80 到 110 分钟之间。把这些时间当作起点,留意一周内自己醒来的难易程度后再调整。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -66,7 +53,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function SleepCalculatorContent(): ReactNode {
   const { locale } = useApp()

@@ -66,27 +66,7 @@ export function makeRegistryTui(subset: Record<string, ToolL10n | undefined>) {
 // 这些 key(summaryTitle / inputsLabel / csvField ...)在所有 makeCalculatorClient
 // 生成的计算器里语义一致,译一次即可,不必逐 bundle 重复。en 不在此 → 回退英文。
 export const COMMON_CALC_UI: Record<Exclude<Locale, 'en'>, Record<string, string>> = {
-  zh: {
-    summaryTitle: '计算摘要',
-    chartEmpty: '输入数值后即可看到图表。',
-    inputsLabel: '输入:',
-    resultsLabel: '结果:',
-    copySummary: '复制摘要',
-    csvField: '字段',
-    csvType: '类型',
-    csvValue: '数值',
-    csvInput: '输入',
-    csvResult: '结果',
-    inputs: '输入',
-    reset: '重置',
-    // Scenario A/B 对比模式(工厂 allowCompare)
-    compareAdd: '+ 对比方案',
-    compareExit: '× 退出对比',
-    compareSync: '⟲ A → B 同步',
-    scenarioA: '方案 A',
-    scenarioB: '方案 B',
-    deltaCol: 'B 相对 A',
-  },
+
   es: {
     summaryTitle: 'Resumen del cálculo',
     chartEmpty: 'Introduce valores para ver el gráfico.',
@@ -144,29 +124,7 @@ export function tuiCalc(key: string, locale: Locale, fallback: string): string {
 // 单位转换器的 chrome(Convert / Value / From / To / Formula / 摘要)在所有
 // makeUnitConverter 生成的转换器里语义一致,译一次即可。en 不在此 → 回退英文。
 export const COMMON_UC_UI: Record<Exclude<Locale, 'en'>, Record<string, string>> = {
-  zh: {
-    convert: '转换',
-    value: '数值',
-    from: '从',
-    to: '到',
-    convertedValue: '换算结果',
-    formula: '公式',
-    conversionSummary: '换算摘要',
-    summaryValue: '数值:',
-    summaryResult: '结果:',
-    summaryFormula: '公式:',
-    conversionNone: '换算: —',
-    conversionTitle: '{from} 转换为 {to}',
-    quickValues: '快捷数值',
-    scaleTitle: '量级对比',
-    generatedBy: '由 ToolHub 生成',
-    swapUnits: '交换单位',
-    swap: '互换',
-    // All-units 同显面板(makeUnitConverter)
-    allUnits: '所有单位',
-    allUnitsHint: '点击任一单位将其设为换算目标',
-    sourceUnitTag: '输入',
-  },
+
   es: {
     convert: 'Convertir',
     value: 'Valor',

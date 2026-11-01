@@ -5,23 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const textToListL10n: ToolL10n = {
-  zh: {
-    ui: {
-      defaultInput: '苹果\n香蕉\n樱桃',
-      inputLabel: '多行文本',
-      outputLabel: '项目符号列表',
-      note: '📝 给每行加上项目符号(默认 •)。在文本末尾追加 " ||| -"、" ||| *" 或 " ||| 1." 可改用连字符、星号或数字编号。',
-    },
-    useCases: [
-      '把随手记下的笔记整理成结构化列表',
-      '从零散想法生成大纲',
-      '准备购物清单或待办清单',
-      '为幻灯片和文档格式化数据',
-    ],
-    faqs: [
-      { q: '能用不同的项目符号吗?', a: '能。默认使用「•」(圆点);在文本末尾加 " ||| -" 或 " ||| *" 可换成连字符或星号,加 " ||| 1." 则用数字编号。' },
-    ],
-  },
+
   es: {
     ui: {
       defaultInput: 'Manzana\nPlátano\nCereza',

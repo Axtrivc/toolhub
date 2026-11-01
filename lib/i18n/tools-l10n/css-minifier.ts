@@ -5,25 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const CssMinifierL10n: ToolL10n = {
-  zh: {
-    useCases: ['上线前压缩手写的 CSS', '看清压缩前后字节与压缩率', '给内联到 HTML 的关键 CSS 瘦身', '教学演示哪些空白可以安全删、哪些不能'],
-    faqs: [
-      { q: 'CSS 能压小多少?', a: '注释加空白通常省 15-30%。要注意 gzip 对空白本来就压得极好,网络层收益有限——真正赚的是解析开销、bundle 卫生与缓存指纹的稳定。' },
-      { q: '为什么 calc() 里的空格不删?', a: 'CSS 语法规定 calc() 内 + 和 - 两侧必须有空白,删掉整条声明就废了。这是天真压缩器毁样式表的头号事故点,本工具特意保留。' },
-      { q: '会合并规则或缩短颜色吗?', a: '故意不做。合并重叠选择器会改变层叠顺序,风险大于收益;只做字节级的安全折叠:0px→0、0.5→.5、去掉末尾分号与空规则。' },
-      { q: '/*! ... */ 注释能活下来吗?', a: '能——按惯例 /*! 开头的"重要注释"(通常是许可证文本)会被保留;普通 /* */ 注释则照常剥离。' },
-    ],
-    ui: {
-      'inputLabel': '你的 CSS',
-      'outputLabel': '压缩后 CSS',
-      'loadSample': '加载示例',
-      'statsIn': '原始字节',
-      'statsOut': '压缩后字节',
-      'statsSaved': '节省',
-      'tooLarge': '输入过大——支持的上限是 300,000 字符。',
-      'note': '🛡️ 刻意保守:字符串与 /*! 横幅先抽成占位符再做空白处理;calc() 保留其语法要求的空格;0% 永不折叠成 0(flex-basis 里两者不等价)。不做激进的规则合并,输出一次就能直接用。',
-    },
-  },
+
   es: {
     useCases: ['minificar CSS escrito a mano antes de subir a producción', 'ver bytes y porcentaje antes y después', 'aligerar el critical CSS que va inline en el HTML', 'mostrar qué espacios en blanco se pueden borrar y cuáles no'],
     faqs: [

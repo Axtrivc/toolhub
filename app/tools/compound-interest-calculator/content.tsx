@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * Compound Interest Calculator 长文正文 —— 四语 dispatcher
+ * Compound Interest Calculator 长文正文 —— 三语 dispatcher
  *
- * en 分支 = 改造前原文(字节不变)。zh/es/de 仅客户端 hydration 后按 locale
+ * en 分支 = 改造前原文(字节不变)。es/de 仅客户端 hydration 后按 locale
  * 切换。SSR/预渲染恒渲染 en → Google 索引英文不变。
  */
 
@@ -94,72 +94,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>复利是什么?</h2>
-    <p>
-      <strong>复利</strong>是指在你最初的本金和随时间累积的利息之上共同产生的利息。它常被称为「利滚利」,是长期投资中最强大的力量。与只增长原始存款的单利不同,复利让你的钱呈指数增长——起初缓慢,然后随着岁月流逝越来越快。
-    </p>
-
-    <h2>复利公式</h2>
-    <p>对于没有持续投入的单笔存款:</p>
-    <p>
-      <code>A = P × (1 + r/n)<sup>nt</sup></code>
-    </p>
-    <ul>
-      <li><strong>A</strong> = 最终金额</li>
-      <li><strong>P</strong> = 本金(初始投资)</li>
-      <li><strong>r</strong> = 年利率(小数)</li>
-      <li><strong>n</strong> = 每年复利次数</li>
-      <li><strong>t</strong> = 年数</li>
-    </ul>
-    <p>
-      本计算器假设按月复利,并允许你添加每月定投,这部分用年金终值公式计算。
-    </p>
-
-    <h2>早开始的力量</h2>
-    <p>时间比投资金额更重要。看看两位储蓄者:</p>
-    <ul>
-      <li>
-        <strong>储蓄者 A</strong> 从 25 岁到 35 岁每月投 $200(10 年,共 $24,000),然后停止。按 7% 回报率,到 65 岁约有 $281,000。
-      </li>
-      <li>
-        <strong>储蓄者 B</strong> 等到 35 岁才开始,然后每月投 $200、持续 30 年到 65 岁(共 $72,000)。按 7% 回报率,到 65 岁约有 $244,000。
-      </li>
-    </ul>
-    <p>
-      尽管只投了三分之一的钱,储蓄者 A 最终仍然明显领先——因为他们的钱多了 30 年的复利时间。
-    </p>
-
-    <h2>合理的回报率参考</h2>
-    <p>长期投资的常见参考回报率:</p>
-    <ul>
-      <li><strong>标普 500 历史平均:</strong>约 10%/年(通胀前)</li>
-      <li><strong>扣除通胀后(「真实」回报):</strong>约 7%/年</li>
-      <li><strong>债券:</strong>约 4–5%/年</li>
-      <li><strong>高收益储蓄:</strong>约 4–5%(随利率波动)</li>
-      <li><strong>保守组合(股票+债券):</strong>约 6–7%/年</li>
-    </ul>
-    <p>
-      股市型长期投资可用 7% 作为参考。过往表现不代表未来收益,每年回报也会有波动——但复利的规律始终不变。
-    </p>
-
-    <h2>如何最大化复利增长</h2>
-    <ol>
-      <li><strong>现在就开始。</strong>每等一年,损失都会呈指数级放大——远不止那笔本可以投资的金额。</li>
-      <li><strong>坚持定投。</strong>每月投入能自动推动增长,还能平滑市场波动。</li>
-      <li><strong>分红再投资。</strong>别拿走现金——让它继续复利。</li>
-      <li><strong>控制费率。</strong>费率 0.03% 的指数基金长期跑赢费率 1%+ 的主动管理基金。</li>
-      <li><strong>保持耐心。</strong>最大的收益来自后期。别在下跌时恐慌抛售。</li>
-    </ol>
-
-    <h2>72 法则</h2>
-    <p>
-      一个快速的心算捷径:用 72 除以你的年回报率,就能估算翻倍所需的年数。7% 回报下,约 <code>72 ÷ 7 ≈ 10.3 年</code>翻倍。10% 回报下,7.2 年翻倍。本计算器给你精确数字。
-    </p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -322,7 +256,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function CompoundInterestCalculatorContent(): ReactNode {
   const { locale } = useApp()

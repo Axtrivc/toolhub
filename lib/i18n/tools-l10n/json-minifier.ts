@@ -5,24 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const jsonMinifierL10n: ToolL10n = {
-  zh: {
-    ui: {
-      inputTooLarge: '⚠️ 输入过大——支持规模最多 20 万字符。请裁剪输入后再计算。',
-      defaultInput: '{\n  "姓名": "张三",\n  "年龄": 30\n}',
-      inputLabel: 'JSON(已格式化)',
-      outputLabel: '压缩后的 JSON',
-      note: '📦 移除所有空白以最小化 JSON 体积。用于 API 负载和存储。',
-    },
-    useCases: [
-      'API 响应(通常还会再 gzip)',
-      '嵌入 HTML 或 JavaScript 的 JSON',
-      '存入数据库的配置',
-      '带宽敏感的移动应用',
-    ],
-    faqs: [
-      { q: '压缩会破坏什么吗?', a: '不会。空白字符在 JSON 语法中无意义,压缩后的 JSON 与格式化后的 JSON 解析结果完全相同。对已压缩的 JSON 再次压缩不会有任何变化。' },
-    ],
-  },
+
   es: {
     ui: {
       inputTooLarge: '⚠️ Entrada demasiado grande: el tamaño admitido es de hasta 200 000 caracteres. Recorta la entrada para calcular.',

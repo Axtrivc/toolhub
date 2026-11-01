@@ -5,7 +5,7 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * TireSizeCalculator 长文正文 —— 四语 dispatcher
+ * TireSizeCalculator 长文正文 —— 三语 dispatcher
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -22,19 +22,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>像工程师一样读 225/45R17</h2>
-    <p>225 是断面宽(毫米),45 是高径比——胎侧高度占断面宽的百分比,225 × 0.45 ≈ 101 毫米——R17 表示子午线结构、17 英寸轮毂。总直径 = 轮毂 × 25.4 + 2 × 胎侧 = 431.8 + 202.5 ≈ 634 毫米(24.97 英寸)。周长随之是 π × 634 ≈ 1993 毫米,折合每英里约 808 转。</p>
-    <h2>加大码但不骗时速表</h2>
-    <p>时速表数的是车轮转数,并默认出厂的每英里转数。换上更大的胎,每转覆盖的路程变多,表针就开始偏低:直径 +1.4%(225/45R17 → 235/45R17)时,真实 60 mph 只显示 59.2。经验法则——直径差控制在 ±3% 以内——能把高速表显误差压在约 2 mph 内,也避开里程表、齿比与 ABS 标定的漂移。</p>
-    <h2>加宽的真实代价</h2>
-    <p>同轮毂上从 225 到 235,接地面积多 10 毫米——干地抓地与制动略好;若花纹相同,抗滑水略差;滚阻带来的油耗通常多 1-2%。只加宽不降高径比会抬高直径,而降一档又会矫枉过正:235/40R17 比 225/45R17 直径小 14.5 毫米(−2.3%),已贴近 ±3% 公差边缘。真正守住直径的是 245/40R17(−6.5 毫米,−1.0%)或 225/40R18(+2.9 毫米,+0.5%)——加大码对照表正是靠这类规格保持"合法"的。</p>
-    <h2>载重指数与速度级别才是硬门槛</h2>
-    <p>直径算得再合适,胎壁小字才有决定权:载重指数(如 94 = 单胎 670 kg)必须达到或超过车辆铭牌值,速度级别(W、Y、V……)应与厂家要求一致。四驱车前后混装不同直径会持续扭差速器——要么成套换,要么先问过专业人士。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -64,7 +51,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function TireSizeCalculatorContent(): ReactNode {
   const { locale } = useApp()

@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * HYSA Calculator 长文正文 —— 四语 dispatcher
+ * HYSA Calculator 长文正文 —— 三语 dispatcher
  *
- * en 分支与改造前渲染输出一致。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支与改造前渲染输出一致。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en(与改造前渲染输出一致) ────────────────────────────
@@ -46,30 +46,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>什么是高收益储蓄账户?</h2>
-    <p>
-      <strong>高收益储蓄账户(HYSA)</strong>的利率可达全国平均储蓄利率的 10-20 倍——互联网银行提供 4-5% APY 且免月费。大多数银行按日计算复利、按月派息入账,钱在你睡觉时也在增长。本计算器按日复利加每月定投,为你推演账户余额的变化。
-    </p>
-
-    <h2>数学原理</h2>
-    <p>
-      按日复利会把宣传的 APY 换算成实际月利率:<code>r = (1 + APY/365)^(365/12) − 1</code>。每个月余额按该利率增长,再加上你的定投。年复一年,雪球越滚越大——图表中余额曲线与累计本金之间的绿色差值,就是你「躺着」赚到的纯利息。
-    </p>
-
-    <h2>HYSA、定存与指数基金</h2>
-    <p>
-      HYSA 利率是<strong>浮动的</strong>——美联储随时可能降息——但本金不会缩水,FDIC 保险最高保障 25 万美元。CD 锁定当下利率,但提前支取要交罚金。指数基金历史回报更高(约 10%),但行情差的年份可能亏 30%。常见策略是:应急资金放 HYSA,长期资金做投资。
-    </p>
-
-    <h2>收益最大化技巧</h2>
-    <p>
-      利率每周都在变——银行会悄悄下调宣传 APY,赌你不留意。每季度核对一次自己的利率,并与当前最优水平比较。发薪日次日自动转入定投是最有效的习惯:看不见的钱,才花不掉。
-    </p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -123,7 +99,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function HysaCalculatorContent(): ReactNode {
   const { locale } = useApp()

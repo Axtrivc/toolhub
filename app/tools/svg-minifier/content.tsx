@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * SVG Minifier 长文正文 —— 四语 dispatcher
+ * SVG Minifier 长文正文 —— 三语 dispatcher
  *
- * en 分支等价于原 ToolContent 渲染输出。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支等价于原 ToolContent 渲染输出。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en (与改造前渲染输出一致) ────────────────────────────
@@ -58,36 +58,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具？</h2>
-    <p>
-      从 Figma、Illustrator 或 Inkscape 导出的 SVG 往往塞满冗余：XML 声明、注释、编辑器命名空间、元数据块，以及带八位小数的路径坐标。本压缩工具会剔除这些累赘，通常能节省 <strong>30–60%</strong> 的文件大小 —— 非常适合在把图标内联进 HTML 或发布 sprite sheet 之前使用。所有处理都在浏览器本地完成，不会上传任何文件。
-    </p>
-
-    <div>
-      <h2>每个开关分别移除什么</h2>
-      <p>
-        该流程借鉴了 SVGO 中最安全的部分：<strong>XML 声明与 DOCTYPE</strong>（浏览器在内联或 <code>&lt;img&gt;</code> SVG 时并不需要它们）、<strong>注释</strong>、<strong>元数据块</strong>（<code>&lt;metadata&gt;</code>、<code>&lt;title&gt;</code>、<code>&lt;desc&gt;</code>），以及 <strong>编辑器残留</strong> —— Inkscape/Sodipodi 的属性和命名空间、Adobe 导出的冗余，还有 <code>enable-background</code>。它还能折叠标签之间的空白，并丢弃那些只是重复规范默认值的属性，例如 <code>version=&quot;1.1&quot;</code>。
-      </p>
-    </div>
-
-    <div>
-      <h2>数字取整：最大的收益，需谨慎使用</h2>
-      <p>
-        路径数据在大多数 SVG 文件中占主导地位，而导出文件常常带有像 <code>12.34567891</code> 这样的坐标。四舍五入到 <strong>2 位小数</strong> 在正常尺寸下肉眼难以察觉，却能大幅缩减以路径为主的文件体积。此处的取整只影响 <em>属性值和路径数据内部的数字</em>，不会改动整数和科学计数法（<code>1e-5</code>），也绝不重写标记结构。对于非常大或会被放大的图形，请保留 3 位小数，以免曲线上出现可见的阶梯。
-      </p>
-    </div>
-
-    <div>
-      <h2>发布前要检查的两件事</h2>
-      <p>
-        首先，如果你用 <strong>CSS 选择器为 SVG 添加样式</strong>，并且这些选择器会匹配 <code>title</code> 或依赖 <code>inkscape:</code> 属性，请保持相应开关关闭。其次是无障碍：移除 <code>&lt;title&gt;</code> 会剥夺一个装饰性内联图标的可访问名称 —— 当图标确实是装饰性时这没问题，但对于有实际含义的图形，请保留 title（或在父元素上添加 <code>aria-label</code>）。下载前请用实时预览确认压缩后的输出仍然渲染一致。
-      </p>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -151,7 +121,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function SvgMinifierContent(): ReactNode {
   const { locale } = useApp()

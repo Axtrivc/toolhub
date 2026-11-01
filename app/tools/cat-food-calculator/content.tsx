@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * CatFoodCalculator 长文正文 —— 四语 dispatcher
+ * CatFoodCalculator 长文正文 —— 三语 dispatcher
  *
- * en 分支与站点既有渲染口径一致。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支与站点既有渲染口径一致。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -24,19 +24,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>先算 RER,再乘系数</h2>
-    <p>异速缩放给出静息能量:RER = 70 × 体重(kg)^0.75——4 kg 的猫光"待机"就要约 198 kcal/天。生命阶段系数才是真正干活的部分:绝育室内成年猫 ×1.2(宠物猫的绝对主流)、未绝育 ×1.4、活跃散养 ×1.6、减肥期 ×0.8、生长期幼猫 ×2.5。绝育会永久性降低约 20-30% 的能量需求,同时升高食欲——这就是"橘猪"养成的经典配方。</p>
-    <h2>读懂猫粮标签,不被套路</h2>
-    <p>湿粮标注每罐或每 100 g 的 kcal(大多数肉酱接近 1 kcal/g,所以 156 g 的 5.5 oz 罐约 150 kcal);干粮标注 kcal/kg 或 kcal/杯,典型在 3,500-4,500 kcal/kg。包装上的喂食表是按未绝育成年猫标定的——如果绝育室内猫按表喂,用 ×1.2 算一遍就会发现喂食表普遍超量 15-20%。</p>
-    <h2>称克数,别用量杯</h2>
-    <p>一杯干粮的重量随舀法和颗粒形状最多能差 20%;一把 $10 的厨房秤能彻底消除这个误差。罐头结果同理:一天 2-3 小罐好过一顿猛吃——猫天生适合少食多餐,分餐还能让进食快的猫慢下来,打断"讨食—喂食"的行为循环。</p>
-    <h2>猫减肥有一个犬科没有的雷区</h2>
-    <p>与狗不同,猫一旦停食或节食过猛可能引发肝脂沉积症——脂肪涌入肝脏——几天内就会危及生命。安全的猫减重速率是每周体重的 0.5-1%,超重猫的方案必须经过兽医。这里的 ×0.8 系数是谈话起点,不是处方。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -66,7 +53,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function CatFoodCalculatorContent(): ReactNode {
   const { locale } = useApp()

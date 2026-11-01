@@ -5,27 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const jsonToTypeScriptL10n: ToolL10n = {
-  zh: {
-    ui: {
-      'clear': '清空',
-      'copy': '复制',
-      'invalidJson': '无效 JSON',
-      'note': '🔒 100% 在客户端——你的 JSON 仅在你的浏览器中解析,绝不发送到任何服务器。',
-      'pasteJson': '粘贴你的 JSON',
-      'tsInterfaces': 'TypeScript 接口',
-    },
-    useCases: [
-      '从 API 响应生成 TypeScript 类型',
-      '用示例 JSON 快速搭建 interface',
-      '为后端返回数据补全类型定义',
-      '加速手写类型声明',
-    ],
-    faqs: [
-      { q: '支持数组和嵌套对象吗?', a: '支持。转换器会递归遍历嵌套对象和数组。数组按元素类型标注(例如 ["a","b"] 得到 string[]);对象数组会变成由生成的 interface 组成的数组。混合类型数组则回退为联合类型(例如 (string | number)[])。' },
-      { q: 'null 和 undefined 怎么处理?', a: 'JSON 的 null 会被标注为 null(在严格模式下该属性还会被标记为可选)。JSON 没有 undefined,所以它永远不会出现。空对象 {} 会变成 Record<string, unknown>,这样你之后可以随意添加键,TypeScript 不会报错。' },
-      { q: '能选择用 interface 还是 type 吗?', a: '本工具生成的是 interface(interface Foo {}),这是最常见、最易扩展的写法。interface 支持声明合并,更方便后续扩展,很适合 API 响应的结构。如果你更喜欢 type 别名,可以对输出做一次查找替换。' },
-    ],
-  },
+
   es: {
     ui: {
       'clear': 'Limpiar',

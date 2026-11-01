@@ -5,58 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const textCleanerL10n: ToolL10n = {
-  zh: {
-    ui: {
-      'chars': '字符',
-      'cleanedText': '清理后的文本',
-      'clear': '清空',
-      'copy': '复制',
-      'copyCleaned': '复制清理后的文本',
-      'inputLabel': '粘贴凌乱的文本',
-      'keepLabel': '要保留的字符(除字母、数字、空格外)',
-      'note': '🔒 100% 在客户端处理——你的文本绝不离开浏览器。',
-      'placeholder': '粘贴或输入要清理的文本…',
-      'removed': '个已移除',
-      'toggle.collapseSpaces': '合并多余空格',
-      'toggle.lowercase': '转为小写',
-      'toggle.removeAccents': '移除重音与变音符',
-      'toggle.removeEmptyLines': '移除空行',
-      'toggle.removeSpecial': '移除特殊字符',
-      'toggle.stripEmojis': '移除 emoji 与象形符号',
-      'toggle.stripHtml': '移除 HTML 标签',
-      'toggle.stripUrls': '移除网址',
-      'toggle.trimLines': '修剪每行',
-      'toggleHint.collapseSpaces': 'a    b → a b',
-      'toggleHint.lowercase': 'ABC → abc',
-      'toggleHint.removeAccents': 'café → cafe,naïve → naive',
-      'toggleHint.removeEmptyLines': '删除空行',
-      'toggleHint.removeSpecial': '保留所有文字(含中文)、数字、空格,外加你指定的字符',
-      'toggleHint.stripEmojis': '移除 😀 等符号、装饰符号、旗帜',
-      'toggleHint.stripHtml': '<b>bold</b> → bold',
-      'toggleHint.stripUrls': '移除 http(s):// 和 www. 链接',
-      'toggleHint.trimLines': '移除每行首尾空白',
-    },
-    useCases: [
-      '在线移除文本中的 emoji',
-      '去除重音和变音符号',
-      '移除字符串中的特殊字符',
-      '为数据库导入清理文本',
-    ],
-    faqs: [
-      {
-        q: '「去除重音」具体是做什么的?',
-        a: '它把带重音的字符转成基本形——café 变成 cafe、Münster 变成 Munster——用的是 Unicode 规范化(NFD 后剥离组合标记)。它移除的是变音符,而不是字母本身,所以文本仍然可读。',
-      },
-      {
-        q: '会把我的正常标点删掉吗?',
-        a: '只有你开启「移除特殊字符」选项时才会。默认情况下普通标点、数字和字母都保留;工具的每条清理规则都是可选的,所以由你精确控制运行哪些转换。',
-      },
-      {
-        q: '能移除 emoji 和网址吗?',
-        a: '能,两者都是可选规则。emoji 和符号按 Unicode 区间剥离,网址则按模式匹配移除——清理用户评论或为分析准备文本时很实用。',
-      },
-    ],
-  },
+
   es: {
     ui: {
       'chars': 'caracteres',

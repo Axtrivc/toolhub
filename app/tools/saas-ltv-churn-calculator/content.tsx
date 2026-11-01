@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * SaaS LTV & Churn Calculator 长文正文 —— 四语 dispatcher
+ * SaaS LTV & Churn Calculator 长文正文 —— 三语 dispatcher
  *
- * en 分支等价于原 ToolContent 渲染输出。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支等价于原 ToolContent 渲染输出。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en (与改造前渲染输出一致) ────────────────────────────
@@ -56,39 +56,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具？</h2>
-    <p>
-      这款<strong>SaaS 指标计算器</strong>只需几项输入 —— ARPU、毛利率、流失率、CAC、增长率与客户数 ——
-      就能算出创始人和投资人真正关注的数字：客户生命周期、LTV、LTV:CAC 比率、CAC 回本周期、流失 MRR，以及一个简化的净收入留存提示。它完全在你的浏览器中运行，不会向任何地方发送数据。
-    </p>
-
-    <div>
-      <h2>LTV 与生命周期是如何推导的</h2>
-      <p>
-        在固定的月流失率下，客户平均存活 <code>1 / churn</code> 个月 —— 5% 的流失率意味着 20 个月的预期生命周期。乘以每位客户的月毛利，得到{' '}
-        <code>LTV = ARPU × gross margin ÷ churn</code>。使用<em>毛利率</em>（而非原始收入）很关键：在 80% 毛利率下，每 1 美元收入中只有 $0.80 可用于偿还获客成本。当流失率为 0% 时，生命周期在数学上无限大，工具会将其显示为 ∞。
-      </p>
-    </div>
-
-    <div>
-      <h2>如何解读健康度信号</h2>
-      <p>
-        <strong>LTV:CAC 比率</strong>是经典的单位经济性检验：低于 1 表示每位客户都在亏钱，1–3 属于可行区间，高于 3 则被视为健康增长。<strong>CAC 回本周期</strong>告诉你需要多少个月的毛利才能收回获客支出 —— 12 个月以内是常见的基准。流失客户和流失 MRR 卡片把抽象的百分比换算成每月实际流失的账户数和收入。
-      </p>
-    </div>
-
-    <div>
-      <h2>注意事项与陷阱</h2>
-      <p>
-        这些公式假设流失率和 ARPU 在整个生命周期保持不变 —— 真实的同期群呈非线性衰减，且早期流失通常高于稳态。<strong>NRR 提示</strong>（
-        <code>1 + growth − churn</code>）是一种简化：真正的净收入留存还要计入现有客户群中的扩张、降级和重新激活。请把这些数字用于快速合理性检查和融资演示文稿的计算，而不能替代基于真实账单数据的同期群分析。
-      </p>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -182,7 +149,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function SaasLtvChurnCalculatorClientContent(): ReactNode {
   const { locale } = useApp()

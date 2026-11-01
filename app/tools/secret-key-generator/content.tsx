@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * Secret Key Generator 长文正文 —— 四语 dispatcher
+ * Secret Key Generator 长文正文 —— 三语 dispatcher
  *
- * en 分支等价于原 ToolContent 渲染输出。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支等价于原 ToolContent 渲染输出。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en (与改造前渲染输出一致) ────────────────────────────
@@ -64,48 +64,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具？</h2>
-    <p>
-      这个工具用 <code>crypto.getRandomValues</code>（你浏览器里密码学安全的随机数生成器）生成<strong>高熵密钥</strong>——API 密钥、访问令牌、webhook
-      密钥、签名密钥，或一次性初始密码。选择一种格式（hex、Base64、Base64URL、字母数字、带自定义前缀的
-      API-key 风格字符串，或 UUID v4），设置长度，然后生成一个密钥或一批五个、十个。整个过程 100% 在你的设备上完成：不会被记录、存储或上传。
-    </p>
-
-    <div>
-      <h2>你需要多少熵？</h2>
-      <p>
-        熵衡量的是攻击者平均需要多少次猜测才能找到你的密钥。经验法则：<strong>低于 80 位算弱</strong>（适合短时效的验证码，不适合做密钥），{' '}
-        <strong>80–128 位算良好</strong>（适用于大多数令牌），而<strong>高于 128 位算强</strong>——
-        这正是签名密钥和长期 API 密钥应处的区间。工具会把每个结果标注为 弱 / 一般 / 强，方便你一眼核对。对于按字节计算的格式，数学很简单：{' '}
-        <code>bytes × 8</code> 位，所以 32 个随机字节正好给出完整的 256 位。字母数字字符串每个字符大约承载{' '}
-        <code>5.95</code> 位（62 个符号的 log₂），因此你需要约 22 个字符才能超过 128 位。
-      </p>
-    </div>
-
-    <div>
-      <h2>选择合适的格式</h2>
-      <p>
-        对于 HMAC 密钥以及任何要复制进配置文件的内容，<strong>十六进制（Hex）</strong>都是经典选择；{' '}
-        <strong>Base64URL</strong> 把同样的熵塞进更少的字符里，并且在 URL 和 HTTP 头中无需转义即可原样使用，这也是 JWT 密钥和 OAuth 令牌常常使用它的原因。{' '}
-        <strong>字母数字</strong>完全避开了标点符号——在挑剔的系统拒绝符号时很方便。
-        <strong>API key 风格</strong>会加上一个人类可读的前缀，例如 <code>sk_live_</code>，让密钥在控制台和泄露扫描器中更容易被识别（前缀本身不增加熵——熵全部来自
-        随机后缀）。<strong>UUID v4</strong> 用于必须唯一且不透明的标识符，而不是密钥：在
-        122 位下它作为令牌没问题，但它真正的用途是生成 ID。
-      </p>
-    </div>
-
-    <div>
-      <h2>为什么拒绝采样很重要</h2>
-      <p>
-        挑选随机字符的一个朴素办法是 <code>byte % 62</code>——但 256 不是 62 的整数倍，因此少数几个字符出现的概率会略高于其他字符。这种偏差叫做<strong>模偏差（modulo bias）</strong>，
-        虽然很小，但恰恰是那种会在大规模下削弱密钥的缺陷。本生成器会丢弃任何 ≥ <code>248</code>（一个字节内 62 的最大倍数）的随机字节并重新抽取，因此每个字符都<em>完全均匀</em>。按字节计算的格式无需这种修正：每个字节都被完整使用。最后两个提示：每个环境都生成全新的密钥（绝不在开发和生产之间复用同一个），并且一旦某个密钥落进了日志、邮件或截图里，就<strong>立即轮换</strong>。
-      </p>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -215,7 +173,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function SecretKeyGeneratorContent(): ReactNode {
   const { locale } = useApp()

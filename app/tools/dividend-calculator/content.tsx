@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * DividendCalculator 长文正文 —— 四语 dispatcher
+ * DividendCalculator 长文正文 —— 三语 dispatcher
  *
- * en 分支与站点既有渲染一致。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支与站点既有渲染一致。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -24,19 +24,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>股息率的真实含义</h2>
-    <p>股息率就是年度每股股息除以股价——仅此而已。这意味着股价越跌,同一笔派息看起来越"诱人",所以高股息率先要分辨:是派息大方,还是股价在跳水。对比时用近十二个月口径,并剔除一次性特别股息——它只会虚增一年的数字。</p>
-    <h2>DRIP 的安静复利</h2>
-    <p>再投资的股息买入新股,新股明年又派自己的股息。4% 的股息率全部再投,哪怕公司一分不涨,收入每年也自然增长约 4%——这是不依赖任何股价预测的复利。拉长到几十年,再投资通常贡献股息组合总回报的三分之一以上。</p>
-    <h2>高息陷阱与派息安全垫</h2>
-    <p>远高于 6-8% 的收益率,往往是市场在提前定价一次削减。查派息率(普通股看盈利、REIT 看 FFO)、查负债、查上次衰退时股息有没有活下来。连续多年提升的历史——25 年以上的"股息贵族"——比任何单年的收益率都更有说服力。</p>
-    <h2>税收会咬掉预测的一角</h2>
-    <p>美国合格股息税率 0-20%,但按普通税率派息的品种(REIT 分配、多数外国股票)以及外国股息 15-30% 的预扣税,都会减少实际到手收入。如果股息要拿来花,请按"净股息"做投影;在 IRA 等免税账户里再投资,这笔拖累到取款前都不存在。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -66,7 +53,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function DividendCalculatorContent(): ReactNode {
   const { locale } = useApp()

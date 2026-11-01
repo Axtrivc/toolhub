@@ -5,24 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const lowercaseConverterL10n: ToolL10n = {
-  zh: {
-    ui: {
-      defaultInput: 'HELLO WORLD 你好世界',
-      inputLabel: '你的文本',
-      outputLabel: '小写',
-      placeholder: '输入或粘贴文本…',
-      note: '🔡 把每个字母转为小写。适合邮箱、网址和代码。',
-    },
-    useCases: [
-      '规范邮箱地址、URL 与 slug 用小写',
-      '编写程序变量(camelCase、snake_case)',
-      '整理标签(hashtag),阅读更清爽',
-      '日常聊天、非正式输入用小写',
-    ],
-    faqs: [
-      { q: '转小写会影响我的数据吗?', a: '不会——数字、符号和标点都不受影响,只有字母会改变。对于有大小写之分的字母,这种转换是无损的。' },
-    ],
-  },
+
   es: {
     ui: {
       defaultInput: 'HOLA MUNDO',

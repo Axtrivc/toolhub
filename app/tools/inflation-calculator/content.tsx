@@ -5,10 +5,10 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * Inflation Calculator 长文正文 —— 四语 dispatcher
+ * Inflation Calculator 长文正文 —— 三语 dispatcher
  *
  * en 分支等价于原 ToolContent 渲染输出(<h2>What Is This Tool?</h2> + intro
- * + 各 section 包在 <div> 中),字节级 SEO 安全。zh/es/de 仅客户端 hydration
+ * + 各 section 包在 <div> 中),字节级 SEO 安全。es/de 仅客户端 hydration
  * 后按 locale 切换。SSR/预渲染恒渲染 en → Google 索引英文不变。
  * <code> 标签内内容(含公式与 HTML 实体)在各语言中保持不变。
  */
@@ -51,33 +51,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具?</h2>
-    <p>
-      通胀会慢慢侵蚀金钱的购买力。本计算器显示:在稳定的通胀率下,你未来需要多少钱才能与今天的购买力相当。
-    </p>
-    <div>
-      <h2>为什么通胀很重要</h2>
-      <p>
-        在 3% 的年通胀率(约为美国历史平均水平)下,价格每 24 年翻一番。这意味着 2000 年的 $50,000 薪水,购买力相当于 2026 年初的约 $94,000。跟不上通胀的工资会让你逐渐变穷,即使数字保持不变。
-      </p>
-    </div>
-    <div>
-      <h2>70 法则</h2>
-      <p>
-        一个快速的心算捷径:用 70 除以通胀率,即可得到价格翻倍所需的时间。在 3.5% 的通胀率下,价格在 <code>70 &divide; 3.5 = 20</code> 年内翻一番。在 7% 时,10 年翻一番。
-      </p>
-    </div>
-    <div>
-      <h2>投资战胜通胀</h2>
-      <p>
-        把钱以现金形式存放,意味着每年因通胀损失约 3%。要保持购买力,你需要回报率高于通胀的投资。股市历史回报率约为 10%(通胀后约 7%),这使其成为长期储蓄对抗通胀的主要对冲手段。
-      </p>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -155,7 +128,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function InflationCalculatorContent(): ReactNode {
   const { locale } = useApp()

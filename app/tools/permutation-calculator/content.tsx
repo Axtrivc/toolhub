@@ -25,26 +25,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具?</h2>
-    <p><strong>排列</strong>计算从 n 个物品中取出 r 个进行有序排列的方式数,此时先后顺序至关重要。从 5 本书里挑 3 本摆上书架,摆放顺序不同结果就不同——这就是排列。</p>
-    <div>
-      <h2>公式</h2>
-      <p>P(n,r) = n! / (n−r)!。从 5 个中排 3 个:<code>5! / 2! = 60</code>。</p>
-    </div>
-    <div>
-      <h2>常见用途</h2>
-      <ul>
-        <li><strong>密码:</strong>4 位 PIN 码 = 10⁴ 种排列</li>
-        <li><strong>比赛名次:</strong>8 名选手取前 3 名(有先后顺序)</li>
-        <li><strong>座位安排:</strong>谁坐在桌子的哪个位置</li>
-        <li><strong>编码生成:</strong>统计可能的 ID 数量</li>
-      </ul>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -88,7 +68,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function PermutationCalculatorContent(): ReactNode {
   const { locale } = useApp()

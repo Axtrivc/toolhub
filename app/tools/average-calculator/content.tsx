@@ -74,61 +74,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>什么是平均值？</h2>
-    <p>
-      <strong>平均值</strong>是代表一组数据中心位置的单一数字。但平均值有好几种，同一组数据用不同的平均值可能讲出完全不同的故事。本计算器一次显示所有最常用的平均值，方便你根据情况选择合适的指标。
-    </p>
-
-    <h2>平均值与中位数：为什么两者都重要</h2>
-    <p>
-      <strong>平均值</strong>（大多数人所说的「平均」）是总和除以个数。<strong>中位数</strong>是将数字排序后的中间值。当存在离群值时，两者差异巨大。
-    </p>
-    <p>
-      例如：九个人每人收入 $50,000，一位 CEO 收入 $1,000,000。平均收入是 $145,000，但中位数是 $50,000。中位数反映了普通人实际挣多少；平均值被离群值拉高。<strong>务必两者都看。</strong>
-    </p>
-
-    <h2>何时使用每种指标</h2>
-    <ul>
-      <li>
-        <strong>平均值：</strong>数据对称分布且没有极端离群值时最佳。用于考试分数、温度、身高。
-      </li>
-      <li>
-        <strong>中位数：</strong>适用于收入、房价或响应时间等偏态数据。对离群值不敏感。
-      </li>
-      <li>
-        <strong>极差（最大值 − 最小值）：</strong>显示离散程度。范围越大，变异性越高。
-      </li>
-    </ul>
-
-    <h2>如何计算平均值</h2>
-    <p>
-      把所有数字相加，再除以数字的个数。对于 12, 15, 18, 22, 9：{' '}
-      <code>(12 + 15 + 18 + 22 + 9) ÷ 5 = 76 ÷ 5 = 15.2</code>。
-    </p>
-
-    <h2>如何计算中位数</h2>
-    <p>
-      将数字排序，然后取中间那个。如果是偶数个，就取中间两个数的平均值。对于 9, 12, 15, 18, 22（已排序）：中位数是 15。对于 9, 12, 15, 18（偶数个）：中位数是 <code>(12 + 15) ÷ 2 = 13.5</code>。
-    </p>
-
-    <h2>常见用途</h2>
-    <ul>
-      <li><strong>成绩：</strong>将多次考试分数求平均得到最终成绩</li>
-      <li><strong>体育：</strong>击球率、每场得分</li>
-      <li><strong>商业：</strong>平均销售额、响应时间、客户评分</li>
-      <li><strong>个人理财：</strong>月均支出</li>
-      <li><strong>科学：</strong>重复测量以减少误差</li>
-    </ul>
-
-    <h2>当心辛普森悖论</h2>
-    <p>
-      当你混合不同群体时，平均值可能产生误导。一个著名例子：一所大学的整体录取率可能偏向男性，尽管每个单独的院系都偏向女性——因为男性更多申请了更容易进入的院系。在相信一个平均值之前，务必检查你的数据是否混入了不同的人群。
-    </p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -275,7 +220,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function AverageCalculatorContent(): ReactNode {
   const { locale } = useApp()

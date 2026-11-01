@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * QR Code Generator 长文正文 —— 四语 dispatcher
+ * QR Code Generator 长文正文 —— 三语 dispatcher
  *
- * en 分支等价于原渲染输出。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支等价于原渲染输出。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en (与改造前渲染输出一致) ────────────────────────────
@@ -125,86 +125,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>什么是二维码?</h2>
-    <p>
-      <strong>二维码</strong>(QR 码,即快速响应码)是一种二维条形码,以白底黑色方块图案存储信息——网址、文本、联系方式、WiFi 凭据等等。用手机摄像头扫描后,设备会即时解码其中的信息并执行相应操作:打开网站、加入 WiFi 网络、显示文本或添加联系人。
-    </p>
-    <p>
-      不同于只能存一串数字的传统条形码,单个二维码最多能存储数千个字符,因此在数字和印刷领域都更加灵活。
-    </p>
-
-    <h2>二维码的常见用途</h2>
-    <ul>
-      <li>
-        <strong>营销与印刷品。</strong>把二维码放在传单、海报、名片或产品包装上,让人们直接跳转到你的网站、落地页或促销活动——无需手动输入。
-      </li>
-      <li>
-        <strong>餐厅菜单。</strong>疫情期间许多餐厅用二维码取代了纸质菜单,而这种便利保留了下来。顾客扫码即可在浏览器中查看菜单。
-      </li>
-      <li>
-        <strong>WiFi 共享。</strong>生成一次 WiFi 二维码,客人扫描就能加入你的网络——再也不用念一长串密码了。该码会自动在他们的手机上配置好 SSID 和密码。
-      </li>
-      <li>
-        <strong>支付。</strong>支付类 App 用二维码在账户之间即时转账,在全球移动钱包中被广泛使用。
-      </li>
-      <li>
-        <strong>活动门票和登机牌。</strong>航空公司、演出场馆和会议都用二维码进行快速、可扫描的入场验证。
-      </li>
-      <li>
-        <strong>联系人共享。</strong>编码一个 vCard,让人们一键把你的联系方式添加到手机里。
-      </li>
-    </ul>
-
-    <h2>如何使用本生成器</h2>
-    <ol>
-      <li>
-        <strong>选择类型。</strong>根据你想编码的内容,在工具顶部选择 URL、文本或 WiFi。
-      </li>
-      <li>
-        <strong>输入内容。</strong>对于 URL,粘贴完整链接(包含 <code>https://</code>)。对于 WiFi,输入网络名称、密码和加密类型。
-      </li>
-      <li>
-        <strong>自定义外观。</strong>调整预览尺寸,选择前景色和背景色以匹配你的品牌。保持高对比度,这样扫描器才能可靠读取。
-      </li>
-      <li>
-        <strong>下载。</strong>点击「下载 PNG」,保存一张适用于印刷或网页的高分辨率图片。
-      </li>
-    </ol>
-
-    <h2>让二维码易于扫描的技巧</h2>
-    <p>
-      二维码只有在能可靠扫描时才有用。遵循以下准则,确保你的码在每台设备上都能正常工作:
-    </p>
-    <ul>
-      <li>
-        <strong>保持高对比度。</strong>浅色背景上的深色前景扫描效果最好。避免浅色加深色或低对比度的颜色搭配。
-      </li>
-      <li>
-        <strong>不要太小。</strong>印刷用途至少要做到 2 × 2 厘米(约 0.8 英寸)。更小的码难以扫描,尤其是远距离时。
-      </li>
-      <li>
-        <strong>保留静区。</strong>码周围的白色边距(「静区」)有助于扫描器识别它。本工具会自动添加边距——放置图片时不要把它裁掉。
-      </li>
-      <li>
-        <strong>印刷前先测试。</strong>在打印 1,000 张传单之前,务必用真机扫描一下生成的码。URL 里的拼写错误一旦上了纸,代价可不小。
-      </li>
-      <li>
-        <strong>尽量缩短 URL。</strong>更短的 URL 会生成更简洁、模块更大的码,也更容易扫描。如有需要,可使用短链接服务。
-      </li>
-    </ul>
-
-    <h2>静态二维码与动态二维码</h2>
-    <p>
-      这里生成的码是<strong>静态</strong>的:内容直接编码在图案中,一旦生成就无法更改。这非常适合 WiFi 共享、联系人名片或固定的产品链接等永久性用途。
-    </p>
-    <p>
-      <strong>动态</strong>二维码(由付费服务提供)编码的是一个简短的重定向 URL,而非最终内容,让你日后可以更改目标地址并追踪扫描数据。对于大多数个人和小型企业用途来说,静态码就已经足够了。
-    </p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -414,7 +334,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function QRCodeGeneratorContent(): ReactNode {
   const { locale } = useApp()

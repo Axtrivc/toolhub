@@ -15,7 +15,7 @@ import {
 } from '@/components/BlogArticleBody'
 
 /**
- * 技术架构复盘博客 —— 面向 HN / 极客社区的长文(正文与页框文案四语,SEO 字段英文稳定)。
+ * 技术架构复盘博客 —— 面向 HN / 极客社区的长文(正文与页框文案三语,SEO 字段英文稳定)。
  *
  * 路由:/blog/how-i-built-toolhub/  (trailingSlash: true)
  * 静态导出兼容:本页为纯 server component,无 'use client',

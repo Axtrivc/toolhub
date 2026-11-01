@@ -30,31 +30,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具?</h2>
-    <p><strong>比例</strong>用来比较两个量,例如 3:2 或 5 比 4。本计算器用于求解比例式——给定 A:B = C:D 中的三个值,求出第四个。它还能把比例化简为最简形式。</p>
-    <div>
-      <h2>比例是如何运作的</h2>
-      <p>在比例 A:B = C:D 中,交叉相乘的结果相等:<code>A × D = B × C</code>。因此只要知道其中任意三个值,就能求出第四个。求 D:<code>D = (B × C) ÷ A</code>。</p>
-    </div>
-    <div>
-      <h2>常见用途</h2>
-      <ul>
-        <li><strong>食谱:</strong>把 4 人份的食谱放大到 6 人份</li>
-        <li><strong>地图:</strong>1 英寸 = 50 英里 → 那么 3.5 英寸有多远?</li>
-        <li><strong>商业:</strong>每名员工的营收、利润率</li>
-        <li><strong>摄影:</strong>纵横比,如 3:2 或 16:9</li>
-        <li><strong>建筑:</strong>按 1:2:3 的比例搅拌混凝土</li>
-      </ul>
-    </div>
-    <div>
-      <h2>示例</h2>
-      <p>一份食谱供 4 人食用,用了 2 杯面粉。6 人份需要多少面粉?列出比例 4:2 = 6:D。求解:<code>D = (2 × 6) ÷ 4 = 3 杯</code>。</p>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -108,7 +83,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function RatioCalculatorContent(): ReactNode {
   const { locale } = useApp()

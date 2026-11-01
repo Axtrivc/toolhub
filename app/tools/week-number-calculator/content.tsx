@@ -5,7 +5,7 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * WeekNumberCalculator 长文正文 —— 四语 dispatcher
+ * WeekNumberCalculator 长文正文 —— 三语 dispatcher
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -22,19 +22,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>周四规则</h2>
-    <p>ISO 8601 的周从周一开始,包含当年第一个星期四的那一周就是第 1 周。其余推论都由此而来:一年通常 52 周,当年首日是周四(闰年逢周三)时是 53 周。2026 正是长年——53 周,而 2027 是 52 周。</p>
-    <h2>1 月 1 日为什么总坑人</h2>
-    <p>只有 1 月 1 日落在周一至周四时,它才属于第 1 周;若逢周五、六、日,就滑进上一年的最后一周:2027 年 1 月 1 日是周五,所以那一整周都记作 2026-W53。日历软件若把"含 1/1 的周"(美国常用、周日起始)与 ISO 编号混用,恰好在这些边缘周会差出一周——交付日期撞车的多数根源在此。</p>
-    <h2>两套口径各用在哪</h2>
-    <p>ISO 周号是欧洲各国、项目管理工具和主流日期库(Python 的 isocalendar、SQL 的 ISO_WEEK)的默认口径。美国零售与薪资系统常用"含 1 月 1 日的那周为第 1 周",且从周日起算。当德国供应商说 KW 53、美国买家听成第 1 周时,两边都"没错"——锁定排期前先统一标准。</p>
-    <h2>用剩余周数做规划</h2>
-    <p>"剩余周数"统计的是本周之后完整的 ISO 周,这才是季度规划的诚实分母:在 53 周年份的第 42 周,你剩 11 周,不是拍脑袋的"一个季度 13 周"。财年日历与 ISO 周错位漂移,也正是某些年 Q4 计划莫名少一周的原因。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -64,7 +51,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function WeekNumberCalculatorContent(): ReactNode {
   const { locale } = useApp()

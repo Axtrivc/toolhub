@@ -5,43 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const htmlUnescapeL10n: ToolL10n = {
-  zh: {
-    ui: {
-      'inputTooLarge': '⚠️ 输入过大——支持规模最多 10 万字符。请裁剪输入后再转换。',
-      'invalidInput': '⚠️ 此方向的输入无效',
-      'defaultInputDecode': '&lt;a href=&quot;x&quot;&gt;汤姆 &amp; 杰瑞&lt;/a&gt;',
-      'defaultInputEncode': '<a href="x">汤姆 & 杰瑞</a>',
-      'characters': '字符',
-      'clear': '清空',
-      'swapToDecode': '⇄ 切换为解码',
-      'swapToEncode': '⇄ 切换为编码',
-      'decode': '解码',
-      'decodeInputLabel': '转义后的 HTML',
-      'decodeNote': '🌐 把 HTML 实体反转义回字符。安全——使用一个独立的 textarea 元素。',
-      'decodeOutputLabel': '反转义后的文本',
-      'encode': '编码',
-      'encodeInputLabel': '文本或 HTML',
-      'encodeNote': '🌐 转义 & < > " 和 \'。在把用户输入插入 HTML 前使用,以防 XSS。',
-      'encodeOutputLabel': '转义后的 HTML',
-      'mode': '模式',
-      'modeAria': '编码/解码模式',
-      'placeholder': '在此输入或粘贴…',
-      'resultPlaceholder': '结果将显示在这里…',
-      'words': '词',
-    },
-    useCases: [
-      '清理从网页抓取的内容',
-      '读取数据库或 API 里的转义文本',
-      '解码 CMS 导出的内容',
-      '修复双重转义文本(常见 bug)',
-    ],
-    faqs: [
-      { q: '反转义安全吗?', a: '本工具使用一个独立的 textarea 元素,解码实体时不会执行任何 HTML。输出是纯文本,因此不会触发脚本。' },
-      { q: '&amp; 和 &amp;amp; 有什么区别?', a: '&amp; 是「&」被转义一次的结果;&amp;amp; 被转义了两次。解码一次后前者得到 &,后者还剩 &amp;,需要再解一次——嵌套模板里最容易踩的坑。' },
-      { q: '什么时候该用「编码」方向?', a: '把用户输入写进 HTML 前先转义 & < > " \',防止 XSS——这正是编码模式做的事。反转义则用于把抓取内容、数据库字段里的转义文本还原成可读字符。' },
-      { q: '数字实体如 &#169; 能解吗?', a: '能。十进制实体(&#169;)和十六进制实体(&#xA9;)都由 textarea 解码机制处理,©、™ 以及中文字符的数字引用都能正确还原。' },
-    ],
-  },
+
   es: {
     ui: {
       'inputTooLarge': '⚠️ Entrada demasiado grande: el tamaño admitido es de hasta 100 000 caracteres. Recorta la entrada para convertir.',

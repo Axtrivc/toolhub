@@ -36,31 +36,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具?</h2>
-    <p>
-      本工具会移除文本中的所有换行,把全部内容合并成一条连续的行。多个空格和多余的空白会被压缩成单个空格,使输出干净整洁。
-    </p>
-    <div>
-      <h2>什么时候会用到</h2>
-      <ul>
-        <li><strong>从 PDF 复制粘贴</strong> —— PDF 经常插入多余的换行</li>
-        <li><strong>转发邮件</strong> —— 引用的文本会累积断行</li>
-        <li><strong>表单字段</strong> —— 不接受多行输入</li>
-        <li><strong>URL 和代码</strong> —— 被折行显示</li>
-        <li><strong>社交媒体</strong> —— 单行内容效果更好</li>
-      </ul>
-    </div>
-    <div>
-      <h2>保留段落</h2>
-      <p>
-        本工具会把<em>所有内容</em>(包括原本独立的段落)合并成一行。如果你只想删除段落内部的换行、同时保留段落之间的分隔,就需要逐段单独处理。
-      </p>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -114,7 +89,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function RemoveLineBreaksContent(): ReactNode {
   const { locale } = useApp()

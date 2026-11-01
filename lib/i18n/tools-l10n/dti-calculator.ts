@@ -5,31 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const dtiCalculatorL10n: ToolL10n = {
-  zh: {
-    formula: {
-      formula: 'DTI = ( total monthly debt / gross monthly income ) × 100%',
-      explain: '负债收入比。把房贷、车贷、学贷、最低卡还款加上新贷款的月供,除以税前月收入。贷款方通常要求低于 36–43%。',
-    },
-    useCases: ['算房贷审批用的 DTI', '算负债收入比', '查 43% DTI 规则', '算前端/后端 DTI'],
-    faqs: [
-      { q: '怎么降低 DTI?', a: '还掉现有债务（尤其是高息的），提高收入，或申请新贷款前避免新增负债。还清一张信用卡可能在一个账单周期内就拉低 DTI。' },
-    ],
-    ui: {
-      'chartTitle': '负债收入比健康度',
-      'zone.0': '健康',
-      'zone.1': '偏紧',
-      'zone.2': '偏高',
-      'zone.3': '大概率被拒',
-      errIncome: '请输入您的月收入',
-      errNonNegative: '数值不能为负',
-      verdictHealthy: '✓ 健康 — 多数贷款机构会批准',
-      verdictTight: '⚠️ 偏紧 — 已达多数贷款机构上限',
-      verdictHigh: '✗ 过高 — 很可能被拒',
-      'in.income': '月总收入', 'in.debts': '月债务还款',
-      'out.dti': '负债收入比', 'out.max': '最大月供（28% 法则）', 'out.verdict': '贷款机构评估',
-      note: '🏦 DTI 是贷款机构审批贷款资格的核心指标。低于 36% 健康，43% 通常是房贷上限。',
-    },
-  },
+
   es: {
     formula: {
       formula: 'DTI = ( total monthly debt / gross monthly income ) × 100%',

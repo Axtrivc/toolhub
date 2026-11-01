@@ -9,45 +9,7 @@ import type { ToolL10n } from '../tool-l10n'
 const FORMULA = 'APY = (1 + r/n)^n − 1'
 
 export const apyCalculatorL10n: ToolL10n = {
-  // ──────────────────────────── 中文 ────────────────────────────
-  zh: {
-    useCases: [
-      '把 APR 换算成 APY',
-      '按复利频率算 APY',
-      '了解 APY 和 APR 的区别',
-      '计算储蓄账户的 APY',
-    ],
-    faqs: [
-      {
-        q: '为什么银行显示 APY,而贷款方显示 APR?',
-        a: '营销策略。APY 让储蓄看起来更多,APR 让贷款看起来更便宜。一定要看细则,搞清楚标的是哪个指标。',
-      },
-    ],
-    formula: {
-      formula: FORMULA,
-      explain: '年化收益率。r = 名义年利率,n = 每年复利次数。APY 反映复利后的真实年回报。',
-    },
-    ui: {
-      'in.principal': '本金',
-      'in.apr': '年利率(APR)',
-      'in.compound': '复利频率',
-      'in.years': '年数',
-      'opt.compound.1': '按年',
-      'opt.compound.4': '按季度',
-      'opt.compound.12': '按月',
-      'opt.compound.365': '按日',
-      'out.apy': 'APY(实际利率)',
-      'out.final': '期末余额',
-      'out.interest': '赚取的利息',
-      errNonNegative: '本金、利率和年数不能为负',
-      errInvalidInput: '请在所有字段中输入有效数字',
-      note: '🏦 APY(年化收益率)考虑了复利。一年内复利超过一次时,APY > APR。',
-      chartTitle: '随时间的增长',
-      'line.principal': '本金',
-      'line.balance': '余额',
-      'band.principal-balance': '赚取的利息',
-    },
-  },
+
 
   // ──────────────────────────── Español ────────────────────────────
   es: {

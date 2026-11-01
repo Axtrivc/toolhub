@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * LogFilterTool 长文正文 —— 四语 dispatcher
+ * LogFilterTool 长文正文 —— 三语 dispatcher
  *
- * en 分支与改造前渲染输出一致。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支与改造前渲染输出一致。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -22,17 +22,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>为什么本地过滤很重要</h2>
-    <p>日志里全是令牌、用户标识、带内部路径的堆栈。把它们粘贴到来路不明的网页工具里等于泄露生产细节;本过滤器全程在你的浏览器里解析,一个字节都不上传。</p>
-    <h2>级别过滤的行为</h2>
-    <p>级别匹配按词边界精确进行:WARN 只匹配 WARN 行而不匹配 WARNING,混合格式的日志因此保持可预期。格式不统一时,留在"全部级别",改用包含/排除模式。</p>
-    <h2>正则技巧</h2>
-    <p>需要形如 error|timeout|refused 的多选一时,打开正则模式。模式保持简单——灾难性回溯的正则在哪里都会卡死,页面也不例外;优先用平铺的多选一,少用嵌套量词。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -58,7 +47,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function LogFilterToolContent(): ReactNode {
   const { locale } = useApp()

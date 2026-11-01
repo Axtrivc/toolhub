@@ -5,10 +5,10 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * Unit Price Calculator 长文正文 —— 四语 dispatcher
+ * Unit Price Calculator 长文正文 —— 三语 dispatcher
  *
  * en 分支等价于原 ToolContent 渲染输出(<h2>What Is This Tool?</h2> + intro
- * + 各 section 包在 <div> 中),字节级 SEO 安全。zh/es/de 仅客户端 hydration
+ * + 各 section 包在 <div> 中),字节级 SEO 安全。es/de 仅客户端 hydration
  * 后按 locale 切换。金额、单位缩写 (g/oz/ml/¢/loads) 与百分比保持不变。
  */
 
@@ -51,38 +51,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具?</h2>
-    <p>
-      单价告诉你每克、每盎司、每升或每件的价格——让你能不分包装大小地公平比较商品。这个计算器帮你算清楚,大包装就不会再骗你多花钱。
-    </p>
-    <div>
-      <h2>为什么单价胜过总价</h2>
-      <p>
-        一瓶 500g 装的花生酱卖 $8,看起来比 350g 装卖 $6 的更贵。但按克算: 大瓶 1.6¢/g,
-        小瓶 1.7¢/g。大瓶其实更便宜。超市知道顾客习惯看总价——单价才能揭示真相。
-      </p>
-    </div>
-    <div>
-      <h2>常见陷阱</h2>
-      <ul>
-        <li><strong>“大包装”不一定更便宜</strong> —— 有时小规格在打折</li>
-        <li><strong>单位不同让人难以比较</strong> —— 一个用 oz, 另一个用 g</li>
-        <li><strong>品牌与自有品牌</strong> —— 自有品牌的单价通常便宜 30% 以上</li>
-        <li><strong>同一品牌的小包装</strong> —— 令人意外的是, 有时单价反而更低</li>
-      </ul>
-    </div>
-    <div>
-      <h2>真实案例</h2>
-      <p>
-        洗衣液: 品牌 A 是 $19.99 洗 75 loads (26.7¢/load)。品牌 B 是 $14.99 洗 50 loads
-        (30.0¢/load)。品牌 A 洗的次数更多, <em>而且</em>每次使用更便宜。没有单价对比, 你可能会拿起品牌 B, 以为它是更划算的选择。
-      </p>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -160,7 +128,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function UnitPriceCalculatorContent(): ReactNode {
   const { locale } = useApp()

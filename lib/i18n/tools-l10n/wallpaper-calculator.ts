@@ -5,38 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const WallpaperCalculatorL10n: ToolL10n = {
-  zh: {
-    useCases: ['估算一面墙或整屋需要几卷壁纸', '按对花重复长度预留损耗,避免贴到一半缺货', '比较 27 英寸美式双卷与 21 英寸欧式卷的用量', '门窗较多的走廊/客厅精确算条数'],
-    faqs: [
-      { q: '壁纸为什么要按"条"算而不是按面积除?', a: '每一条都必须从花纹的同一位置起裁,对花重复会让每条多出实际长度;面积除法算不出这种损耗,经常差一两卷。' },
-      { q: '美式单卷和双卷有什么区别?', a: '美国壁纸名义上按单卷计价,但几乎只按双卷出货:标准双卷为 27 英寸宽 × 27 英尺长(约 60.75 ft²),单卷就是它的一半(27 × 13.5 英尺,约 30 ft²);按单卷买浪费严重。' },
-      { q: '对花重复(pattern repeat)怎么量?', a: '在壁纸上找到花纹完整重复一次的垂直距离:从一个图形的顶点到它下一次出现的顶点。直条(match)填 0,跌落式对花填完整重复长度。' },
-      { q: '为什么建议多买一卷?', a: '壁纸按染缸批次配色,不同批次可能有色差;以后修补时同批号未必还在售。多一卷是廉价的保险。' },
-    ],
-    ui: {
-      'in.perimeter': '墙面总周长',
-      'in.height': '墙高',
-      'in.doors': '门数',
-      'in.windows': '窗数',
-      'in.rollWidth': '卷宽',
-      'in.rollLength': '卷长',
-      'in.repeat': '对花重复',
-      'out.rolls': '需购卷数',
-      'out.strips': '所需条数',
-      'out.perRoll': '每卷可裁条数',
-      'out.wallArea': '净墙面积',
-      'errInvalid': '请输入有效尺寸(周长、墙高、卷宽与卷长必须为正)',
-      'errTall': '一条就超过卷长——请核对卷长或墙高',
-      'chartTitle': '双卷 vs 单卷用量',
-      'cmp.0': '你输入的卷',
-      'cmp.1': '美式单卷(13.5 ft)',
-      'cmpseg.0': '卷数',
-      'preset.0': '12×12 英尺房间',
-      'preset.1': '单面背景墙',
-      'preset.2': '欧式卷 · 10 英尺层高',
-      'note': '🧱 逐条计算优于面积均分:每条都要从花纹同一起点裁,对花重复会实打实吃掉长度。美式双卷(27 in × 27 ft)与欧式卷(21 in × 33 ft)远比 13.5 ft 单卷省料。记得多买一卷——染缸批次有色差。',
-    },
-  },
+
   es: {
     useCases: ['calcular cuántos rollos de papel pintado necesitas', 'reservar el desperdicio del rapport y no quedarte corto a mitad de pared', 'comparar el uso del rollo doble americano de 27" con el europeo de 21"', 'contar tiras exactas en pasillos y salones con muchas puertas'],
     faqs: [

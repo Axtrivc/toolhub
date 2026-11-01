@@ -5,36 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const PoolVolumeCalculatorL10n: ToolL10n = {
-  zh: {
-    useCases: ['算出自家泳池有多少加仑/升水', '按泵流量估算整池循环一遍的时间', '核对泳池服务/水车报价的水量口径', '买盖布、加热器时确认池子规格'],
-    faqs: [
-      { q: '斜底泳池的"平均深度"怎么取?', a: '最常用(浅端深 + 深端深)÷ 2。比如 3 英尺浅端、8 英尺深端,平均深度取 5.5 英尺;平台式深水区误差会稍大。' },
-      { q: '一立方英尺水是多少加仑?', a: '7.48 美制加仑。长×宽×平均深度×7.48 就是矩形池的加仑数——32×16×5 英尺的池约 19,150 加仑。' },
-      { q: '肾形池的面积怎么算?', a: '经验公式是 0.45 ×(宽 A + 宽 B)× 长,再乘平均深度。这是估算值,实测两腰最宽处代入即可,精度对水泵选型足够。' },
-      { q: '整池水多久要循环一遍?', a: '住宅泳池一般按 8-12 小时翻一遍整池水设计;本工具用你的泵流量(GPM)算出单次周转时间与每天周转次数。这只是循环口径,不做化学品投加建议。' },
-    ],
-    ui: {
-      'in.shape': '池型',
-      'in.length': '长/直径',
-      'in.width': '宽(肾形为宽 A)',
-      'in.width2': '肾形宽 B',
-      'in.depth': '平均深度',
-      'in.flow': '泵流量',
-      'opt.shape.rect': '矩形',
-      'opt.shape.round': '圆形',
-      'opt.shape.kidney': '肾形',
-      'out.gallons': '泳池水量',
-      'out.liters': '升数',
-      'out.turnover': '循环一整遍',
-      'out.perDay': '每天周转次数',
-      'outSub.turnover': '整池水过一遍过滤器',
-      'preset.0': '16×32 地下池',
-      'preset.1': '24 ft 圆形支架池',
-      'preset.2': '肾形自由池',
-      'errPositive': '请输入正数的尺寸与深度',
-      'note': '🏊 斜底池平均深度 ≈(浅端 + 深端)÷ 2;1 ft³ = 7.48 加仑。住宅建议 8-12 小时把整池水翻一遍。本工具只做循环估算,不构成水处理化学品投加建议。',
-    },
-  },
+
   es: {
     useCases: ['saber cuántos galones o litros tiene tu piscina', 'estimar cuánto tarda la bomba en mover todo el volumen', 'verificar la cifra de agua en presupuestos de mantenimiento', 'confirmar el tamaño al comprar lona o calentador'],
     faqs: [

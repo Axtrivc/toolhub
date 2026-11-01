@@ -5,55 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const dockerRunToComposeL10n: ToolL10n = {
-  zh: {
-    ui: {
-      samplesLabel: '快捷加载示例:',
-      'sample.postgres': 'PostgreSQL 数据库',
-      'sample.nginx': 'Nginx Web 服务器',
-      'sample.redis': 'Redis 自定义命令',
-      'sample.node': 'Node.js 开发环境',
-      inputTitle: 'Docker Run 命令输入',
-      clearBtn: '清空',
-      inputHint: '粘贴任意 docker run 或 docker create 命令, 支持多行反斜杠续行、单双引号、端口映射、数据卷、环境变量及常见参数。',
-      outputTitle: 'docker-compose.yml 输出',
-      copyYaml: '复制 Compose 配置',
-      includeVersionLabel: "包含旧版 version: '3.8' 声明头",
-      envFormatLabel: '环境变量语法:',
-      summaryTitle: '检测到的配置概览',
-      badgeService: '服务:',
-      badgeImage: '镜像:',
-      badgePorts: '端口:',
-      badgeVolumes: '数据卷:',
-      badgeEnvVars: '环境变量:',
-      badgeRestart: '重启策略:',
-      badgeNetworks: '网络:',
-      ignoredFlagsNote: '已安全忽略的参数(Compose 中不适用或未识别):',
-    },
-    useCases: [
-      '将复杂命令版本化: 将一条带 10 个 -e 和 -v 参数的 PostgreSQL 启动命令转为 Git 可追踪的 docker-compose.yml',
-      'Web 服务器一键转换: 将 Nginx 容器连同宿主机 80/443 端口与只读证书挂载转为 Compose 服务',
-      '本地开发环境配置: 将带 -it、--rm 和 $(pwd) 目录绑定的 Node/Python 开发容器转换为可复现的服务',
-      '提取命名数据卷: 自动识别 pgdata 或 redis-data 等命名卷, 并在 YAML 底部声明 volumes: 节点',
-    ],
-    faqs: [
-      {
-        q: '为什么要将 docker run 转换为 docker-compose.yml?',
-        a: '单条 docker run 命令容易在终端历史中丢失, 且参数复杂时极易遗漏。Docker Compose 可以将端口、数据卷、环境变量等全部配置纳入 Git 版本管理, 并通过一条 docker compose up -d 轻松启动。',
-      },
-      {
-        q: '如何处理命名数据卷与宿主机路径挂载?',
-        a: '如果数据卷以 /、./、../ 或 Windows 盘符开头, 本工具将其视为宿主机目录绑定挂载(bind mount); 如果是类似 pgdata:/var/lib/postgresql 的纯名称, 则会自动在 YAML 根节点补充 volumes: 声明。',
-      },
-      {
-        q: '命令解析是否安全? 会不会上传我的密钥?',
-        a: '100% 本地纯前端解析, 无任何后端接口调用。你的数据库密码、API Key 和私有服务器凭据绝不会离开你的浏览器。',
-      },
-      {
-        q: '生成的 Docker Compose 是什么版本?',
-        a: '默认输出符合现代 Compose Specification 标准的格式(支持 docker compose v2, 无需冗余的 version 声明)。也可以随时勾选开关保留旧版的 version: "3.8" 头。',
-      },
-    ],
-  },
+
   es: {
     ui: {
       samplesLabel: 'Cargar ejemplo:',

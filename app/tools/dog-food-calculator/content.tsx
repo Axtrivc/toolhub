@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * Dog Food Calculator 长文正文 —— 四语 dispatcher
+ * Dog Food Calculator 长文正文 —— 三语 dispatcher
  *
- * en 分支与改造前渲染输出一致。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支与改造前渲染输出一致。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en (与改造前渲染输出一致) ────────────────────────────
@@ -53,38 +53,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>为什么包装袋上的喂食表常常不适合你的狗</h2>
-    <p>
-      狗粮袋上的喂食表只是粗略的平均值——它不知道你的狗是否已绝育、是马拉松运动员还是爱沙发的老年犬。兽医标准是两步计算:<strong>RER</strong>(静息能量需求)= <code>70 × 体重(kg)<sup>0.75</sup></code>,再乘以 AAHA 指南中对应生命阶段的 <strong>MER 系数</strong>。
-    </p>
-
-    <h2>选对 MER 系数</h2>
-    <ul>
-      <li><strong>×1.2</strong> —— 减重期、易胖体质或老年犬</li>
-      <li><strong>×1.6</strong> —— 典型绝育成年犬(如今多数宠物)</li>
-      <li><strong>×1.8</strong> —— 未绝育成年犬</li>
-      <li><strong>×2.0</strong> —— 4–12 月龄幼犬</li>
-      <li><strong>×2.5+</strong> —— 活跃的工作犬或运动犬</li>
-      <li><strong>×3.0</strong> —— 4 月龄以下幼犬(快速生长期)</li>
-    </ul>
-    <p>
-      绝育会让代谢率下降约 20–30%——这也是术后默认用 ×1.6 绝育系数、而不是 ×1.8 的原因之一。
-    </p>
-
-    <h2>从千卡到杯数和克数</h2>
-    <p>
-      每种粮的能量密度都不同,印在袋身上,格式是<strong>每杯千卡</strong>或<strong>每 100 克千卡</strong>(常见 300–450 kcal/杯)。本计算器两种标签格式都能读,并借助每杯克重把狗狗的每日千卡换算成杯数<em>和</em>克数。克是更精确的单位:量杯的误差随舀粮的人不同可达 20%。
-    </p>
-
-    <h2>聪明喂食</h2>
-    <p>
-      把每日口粮分成两餐(幼犬三餐),有助消化并降低胃胀气风险。零食应控制在每日热量的 10% 以内。每隔几个月重新算一次——体重会悄悄变化,喂食量应跟随<em>理想</em>体重而非当前体重。医疗处方粮和减肥计划,请与你的兽医配合进行。
-    </p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -173,7 +141,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function DogFoodCalculatorContent(): ReactNode {
   const { locale } = useApp()

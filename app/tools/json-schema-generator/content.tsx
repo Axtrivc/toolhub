@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * JSON Schema Generator 长文正文 —— 四语 dispatcher
+ * JSON Schema Generator 长文正文 —— 三语 dispatcher
  *
- * en 分支等价于原 ToolContent 渲染输出。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支等价于原 ToolContent 渲染输出。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en (与改造前渲染输出一致) ────────────────────────────
@@ -59,39 +59,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具?</h2>
-    <p>
-      <strong>JSON Schema</strong> 用于描述一份 JSON 文档的结构 —— 包含哪些字段、各字段的类型是什么、哪些是必填 —— 从而让 API、配置文件和数据库都能自动校验。本工具根据你粘贴的任意示例 JSON 推断出 <strong>Draft-07 schema</strong>,并 100% 在浏览器中运行:不会上传任何数据,因此对私有 payload、API 响应和生产配置都是安全的。
-    </p>
-
-    <div>
-      <h2>推断是如何工作的</h2>
-      <p>
-        你的 JSON 中的每个值都会被递归遍历。对象会被转换为带 <code>properties</code> 映射的 <code>type: "object"</code>,所有出现过的键都会列入 <code>required</code>,并设置 <code>additionalProperties: true</code>,让 schema 保持宽松。
-        数字会被区分为 <code>integer</code> 与 <code>number</code>;字符串则会与常见格式 —— <code>date-time</code>、<code>date</code>、<code>email</code>、<code>uri</code>、<code>uuid</code> —— 进行匹配,只有当值确实匹配时才会加上 <code>format</code> 关键字。
-      </p>
-    </div>
-
-    <div>
-      <h2>数组会被合并,而非只采样第一个</h2>
-      <p>
-        生成器<strong>会合并每个元素的 schema</strong>,而不是只描述数组的第一个元素。字段相同的两个对象会合并为同一个 schema;某些元素中缺失的字段会从 <code>required</code> 中移除;真正混合的数组 —— 比如 <code>[1, "two", true]</code> —— 会变成一个 <code>anyOf</code> 联合类型。
-        为获得更好的结果,请粘贴一个数组中包含多个代表性元素的示例。
-      </p>
-    </div>
-
-    <div>
-      <h2>提示与注意事项</h2>
-      <p>
-        生成的 schema 的完整程度取决于你的示例:示例中缺失的可选字段无法被推断,而 <code>null</code> 值会被标记为 <code>null</code> 类型,而不是它们最终的类型。请把输出当作<strong>起点</strong> —— 手动检查 <code>required</code> 列表、收紧 <code>format</code> 提示,并自行添加 <code>minimum</code>、<code>maxLength</code> 等约束。
-        最后需要注意:在许多校验器中 <code>format</code> 仅作为注解,除非你显式开启格式校验。
-      </p>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -161,7 +128,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function JsonSchemaGeneratorContent(): ReactNode {
   const { locale } = useApp()

@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * Password Generator 长文正文 —— 四语 dispatcher
+ * Password Generator 长文正文 —— 三语 dispatcher
  *
- * en 分支等价于原渲染输出。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支等价于原渲染输出。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en (与改造前渲染输出一致) ────────────────────────────
@@ -98,67 +98,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>什么决定密码的强度?</h2>
-    <p>
-      密码强度归结为一件事:<strong>熵</strong>——也就是密码对攻击者来说有多不可预测。熵越高(以比特衡量),破解所需的时间就越长。一个由大写字母、小写字母、数字和符号随机组成的 16 位密码大约有 100 比特熵,在现代硬件上需要数十亿年才能暴力破解。
-    </p>
-
-    <h2>如何创建一个强密码</h2>
-    <p>遵循以下原则,你的账户将变得极难被攻破:</p>
-    <ol>
-      <li>
-        <strong>加长。</strong>长度胜过复杂度。一个 20 位的随机单词密码比一个短而杂乱的密码更强。至少要 12 位;16 位以上最理想。
-      </li>
-      <li>
-        <strong>混合多种字符类型。</strong>结合大写字母、小写字母、数字和符号。四种类型全部混用,字符池会从 26 个(仅小写字母)扩大到约 95 个字符——此后每多一个字符大约增加 6.6 比特的熵。
-      </li>
-      <li>
-        <strong>避开可预测的内容。</strong>绝不使用姓名、生日、「password123」、键盘模式(qwerty)或任何能在字典里查到的词。攻击者会最先尝试这些。
-      </li>
-      <li>
-        <strong>每个账户使用唯一的密码。</strong>一旦某个服务被攻破,攻击者就会拿同一个密码去试你的邮箱、银行和社交账户。
-      </li>
-      <li>
-        <strong>用密码管理器来存储。</strong>想要记住几十个强密码是不可能的。使用一个可信的管理器(Bitwarden、1Password、KeePass)以加密形式保存它们。
-      </li>
-    </ol>
-
-    <h2>这个生成器有多安全?</h2>
-    <p>
-      本工具使用 <code>Web Crypto API</code>(<code>crypto.getRandomValues</code>),从你的操作系统的密码学安全随机数生成器中获取随机性。这与银行和安全软件使用的标准相同。它远比 <code>Math.random()</code> 安全——后者是可预测的,不适合用于密码。
-    </p>
-    <p>
-      更棒的是:密码完全在你的浏览器中生成——它和你选择的选项都不会上传到我们的服务器。复制之后,它会留在剪贴板(以及剪贴板管理器的历史)里,直到被其他内容覆盖。
-    </p>
-
-    <h2>理解密码强度评分</h2>
-    <p>
-      上方显示的强度指示器根据你密码的长度和所使用的字符池大小来估算熵。以下是每个级别的含义:
-    </p>
-    <ul>
-      <li>
-        <strong>非常弱(&lt;40 比特):</strong>几秒到几分钟即可破解。切勿用于任何重要账户。
-      </li>
-      <li>
-        <strong>弱(40–59 比特):</strong>用消费级硬件数小时到数天可破解。请增加长度。
-      </li>
-      <li>
-        <strong>强(60–79 比特):</strong>需要数年才能破解。适合大多数个人账户。
-      </li>
-      <li>
-        <strong>非常强(≥80 比特):</strong>实际上无法破解。用于邮箱、银行和密码管理器主密码。
-      </li>
-    </ul>
-
-    <h2>该记在脑子里,还是用管理器?</h2>
-    <p>
-      对大多数人来说,密码管理器才是正确答案。你唯一需要记住的是解锁管理器的<strong>主密码</strong>——把它做成长口令短语(4-5 个随机单词),而不是一个短而复杂的字符串。其他所有密码都可以是这里生成的 20 位以上随机字符串,因为你永远不需要手动输入它们。
-    </p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -321,7 +260,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function PasswordGeneratorContent(): ReactNode {
   const { locale } = useApp()

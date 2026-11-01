@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * ChristmasBudgetCalculator 长文正文 —— 四语 dispatcher
+ * ChristmasBudgetCalculator 长文正文 —— 三语 dispatcher
  *
- * en 分支与 SSR 渲染输出一致。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支与 SSR 渲染输出一致。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -24,19 +24,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>先定总额,别让季节替你定</h2>
-    <p>调查一再显示,家庭节日实际支出平均超出计划 30% 以上,而超支几乎从来不是某笔大买卖——而是十几笔没有框架的小额消费。十月把总额定下来,让"分配"替你做决定,方法就这么多。</p>
-    <h2>70/15/15 为什么够用作骨架</h2>
-    <p>礼物吞掉节日预算的大头,所以给它 70%;装饰与餐饮聚会各 15%。礼物池内部按家人 60%、朋友 30%、同事 10% 加权,与"亲疏决定单价"的现实一致——你填进人数,人均数字自动算出。</p>
-    <h2>人均上限能杀死十二月漂移</h2>
-    <p>计算器给出"每位家人 $67、每位同事 $14"之后,把这些数字写进清单并当作硬上限。多数预算失守发生在最后一周:"再买一件"的加购和运费升级——单看每一个决定似乎都不足以需要理由。</p>
-    <h2>一月也是预算的一部分</h2>
-    <p>一月到账的信用卡账单和十二月的欢乐是同一笔钱,只是晚到。如果总额成立的前提是刷了一张还不清的卡,诚实的做法是调小总额——或者从春天开始为明年的数字专门攒钱。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -66,7 +53,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function ChristmasBudgetCalculatorContent(): ReactNode {
   const { locale } = useApp()

@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * Age Calculator 长文正文 —— 四语 dispatcher
+ * Age Calculator 长文正文 —— 三语 dispatcher
  *
- * en 分支与改造前渲染输出一致。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支与改造前渲染输出一致。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en (与改造前渲染输出一致) ────────────────────────────
@@ -90,67 +90,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>年龄是如何计算的</h2>
-    <p>
-      计算年龄看似简单,但远不止把两个年份相减。规范的年龄计算要统计<strong>已满的年、月、日</strong>——在你的第 25 个生日完全过去之前,你还不算「25 岁」。本计算器采用日历感知逻辑,能处理不同的月份长度、闰年以及月末边界情况(例如 1 月 31 日与 2 月 28 日之间的差值)。
-    </p>
-
-    <h2>为什么要精确计算年龄?</h2>
-    <ul>
-      <li>
-        <strong>年龄核验。</strong> 许多服务——驾驶、投票、饮酒、退休福利以及有年龄限制的内容——都依赖精确的年龄门槛。
-      </li>
-      <li>
-        <strong>法律与医疗。</strong> 保险费率、儿科用药剂量以及法律文件常常需要精确到年和月的年龄,而不仅仅是年。
-      </li>
-      <li>
-        <strong>儿科。</strong> 婴儿在前两年的发育以月为单位追踪,新生儿有时以周为单位。
-      </li>
-      <li>
-        <strong>宠物。</strong> 动物的年龄,尤其是幼龄宠物,通常以月来衡量。
-      </li>
-      <li>
-        <strong>历史研究。</strong> 精确查找某人在某个历史事件发生时的年龄,或某事距今已有多久。
-      </li>
-    </ul>
-
-    <h2>表达年龄的不同方式</h2>
-    <p>
-      根据具体场景,你可能希望用不同的单位来表达年龄。本计算器提供了所有这些方式:
-    </p>
-    <ul>
-      <li><strong>年 + 月 + 日</strong> —— 日常格式,适合大多数用途</li>
-      <li><strong>总月数</strong> —— 适用于婴儿发育和订阅周期</li>
-      <li><strong>总周数</strong> —— 常用于孕期和婴儿年龄</li>
-      <li><strong>总天数</strong> —— 适合庆祝「存活 10,000 天」这样的里程碑</li>
-      <li><strong>总小时数</strong> —— 在需要精确或纯粹出于好奇时使用</li>
-    </ul>
-
-    <h2>年龄计算的文化差异</h2>
-    <p>
-      各地计算年龄的方式并不相同。在国际间比较年龄时,请注意这些差异:
-    </p>
-    <ul>
-      <li>
-        <strong>国际通用(最常见):</strong> 出生时为 0 岁,每过一个生日长一岁。本计算器采用的就是这一体系。
-      </li>
-      <li>
-        <strong>传统东亚(韩国):</strong> 出生时即算 1 岁,并在新年当天而非生日当天长一岁。12 月 31 日出生的婴儿第二天就满 2 岁。韩国已于 2023 年正式改用国际通用体系。
-      </li>
-      <li>
-        <strong>越南:</strong> 与传统东亚体系类似。
-      </li>
-    </ul>
-
-    <h2>闰年带来的麻烦</h2>
-    <p>
-      2 月 29 日出生的人每四年才有一次真正的生日。按照惯例,在非闰年,他们的生日会在 2 月 28 日或 3 月 1 日庆祝,具体取决于国家和场景。本计算器把周年锚定到当月最后一天,因此 2 月 29 日出生的人在非闰年中于 2 月 28 日长一岁。
-    </p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -276,7 +215,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function AgeCalculatorContent(): ReactNode {
   const { locale } = useApp()

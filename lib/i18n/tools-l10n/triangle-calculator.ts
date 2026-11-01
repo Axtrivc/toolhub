@@ -5,31 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const triangleCalculatorL10n: ToolL10n = {
-  zh: {
-    formula: {
-      formula: 'A = ½ × b × h',
-      explain: '三角形面积。b = 底边长,h = 该底边对应的高。',
-    },
-    ui: {
-      'chartTitle': '图形预览',
-      'in.a': '边 a',
-      'in.b': '边 b',
-      'out.c': '斜边 (c)',
-      'out.area': '面积',
-      'out.perimeter': '周长',
-      note: '📐 勾股定理:a² + b² = c²。仅适用于直角三角形。',
-      errNonNegative: '边长不能为负',
-    },
-    useCases: [
-      '建筑:直角校验(3-4-5 法)',
-      '导航:两个 GPS 点之间的直线距离',
-      '电视尺寸:65 寸按对角线测量',
-      '梯子:靠墙斜放时的高度计算',
-    ],
-    faqs: [
-      { q: '非直角三角形怎么办?', a: '勾股定理只适用于直角三角形。其它三角形要用余弦定理(c² = a² + b² − 2ab·cos C)或正弦定理。' },
-    ],
-  },
+
   es: {
     formula: {
       formula: 'A = ½ × b × h',

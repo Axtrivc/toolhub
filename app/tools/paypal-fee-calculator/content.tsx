@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * PayPalFeeCalculator 长文正文 —— 四语 dispatcher
+ * PayPalFeeCalculator 长文正文 —— 三语 dispatcher
  *
- * en 分支与首帧渲染一致;zh/es/de 仅客户端 hydration 后切换。
+ * en 分支与首帧渲染一致;es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -24,19 +24,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>标准费率,以及叠加在其上的成本</h2>
-    <p>美国商业交易费率为 3.49% + $0.49。买家在境外时加 1.50% 跨境费,货币换算再收约 3-4% 的点差——对跨境卖家来说,点差而非名义费率通常才是最大成本。</p>
-    <h2>为什么小额收款最吃亏</h2>
-    <p>$10 的订单光 $0.49 固定费就占 4.9%,实际费率被推到 8.4%;而 $1,000 的订单里这笔固定费只是零头,实际费率逼近名义的 3.49%。计算器里的曲线图直接画出了这个稀释过程。</p>
-    <h2>反算:想净收整数该收多少</h2>
-    <p>想净收 $100,应收 (100 + 0.49) ÷ (1 − 0.0349) = $104.12。注意不能简单加 3.49%——手续费同样作用于你加价的那部分,每次"拍脑袋加百分比"都会让你差一点。</p>
-    <h2>朋友转账不是省费率的漏洞</h2>
-    <p>个人转账免手续费,但也同时免掉了买卖双方的保障,违反 PayPal 对商业用途的使用规则,且出现争议时你无从抗辩。正确做法是用反算模式把费用算进报价。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -66,7 +53,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function PayPalFeeCalculatorContent(): ReactNode {
   const { locale } = useApp()

@@ -10,7 +10,7 @@
  *  - ScenarioCompareResults:A/B 逐项对比表 + 主结果 Delta 差额徽章;
  *  - compareDelta:A/B 两个已格式化结果串的差额解析(B − A)。
  *
- * UI 文案走 tuiCalc 共享表(与工厂同源,zh/es/de 已译)。
+ * UI 文案走 tuiCalc 共享表(与工厂同源,es/de 已译)。
  */
 
 import type { ReactNode } from 'react'

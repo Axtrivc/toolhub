@@ -5,42 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const CoffeeRatioCalculatorL10n: ToolL10n = {
-  zh: {
-    useCases: ['按冲法预设把手冲粉量算准', '从粉量反推需要多少水', '用法压壶/浓缩比例换算整壶配方', '把克数换算成杯数(8 盎司)'],
-    faqs: [
-      { q: '手冲的黄金比例是多少?', a: '滴滤/手冲大多落在 1:15-1:17(水:粉),1:16 是稳妥起点。500 克水配约 31 克粉,基本就是两杯好咖啡。' },
-      { q: '为什么必须用秤而不用勺?', a: '不同豆子密度差很大,一勺粉能差 2-3 克;而且 1 克水 = 1 毫升,克数口算即得容量。浓缩尤其必须称重:1:2 是质量比,不是体积比。' },
-      { q: '法压壶和冷萃的比例呢?', a: '法压约 1:12(浓一点补偿浸泡式的厚重口感),冷萃浓缩常到 1:8,喝时再兑水或奶。本工具把两种预设都内置了。' },
-      { q: '喝着不对,先调比例还是先调研磨?', a: '先调研磨。过涩通常是磨太细或萃取过度,过淡偏酸则是磨太粗。比例决定浓度,研磨决定萃取方向——按这个顺序排查最快。' },
-    ],
-    ui: {
-      'in.method': '冲煮方式',
-      'in.amount': '已知的量',
-      'in.known': '这个量是',
-      'opt.method.16': '手冲/滴滤(1:16)',
-      'opt.method.14': 'AeroPress 标准(1:14)',
-      'opt.method.12': '法压壶(1:12)',
-      'opt.method.8': '冷萃浓缩(1:8)',
-      'opt.method.2': '浓缩咖啡(1:2)',
-      'opt.known.water': '水',
-      'opt.known.coffee': '粉',
-      'out.coffee': '咖啡粉量',
-      'out.water': '冲煮用水',
-      'out.ratio': '比例',
-      'out.cups': '杯数(8 oz)',
-      'errPositive': '请输入正数的量',
-      'chartTitle': '同样水量下各冲法所需粉量',
-      'cmp.0': '浓缩 1:2',
-      'cmp.1': '冷萃 1:8',
-      'cmp.2': '法压 1:12',
-      'cmp.3': '手冲 1:16',
-      'cmpseg.0': '咖啡粉',
-      'preset.0': '晨间马克杯(350 g 水)',
-      'preset.1': '法压整壶(1 L)',
-      'preset.2': '双份浓缩(18 g 粉)',
-      'note': '☕ 滴滤的平衡杯多在 1:15-1:17;法压 1:12、浓缩按质量 1:2(用秤,别用量勺)。1 克水 = 1 毫升,克数天然可缩放。味道不对时,先调研磨再动比例。',
-    },
-  },
+
   es: {
     useCases: ['calcular los gramos de café según el método de preparación', 'deducir cuánta agua necesitas a partir de la balanza de café', 'escalar recetas de prensa francesa o espresso', 'convertir gramos de agua a tazas de 8 onzas'],
     faqs: [

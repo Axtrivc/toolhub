@@ -60,44 +60,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具?</h2>
-    <p>
-      <strong>data URI</strong> 把文件内容直接嵌入到 URL 字符串中,以 <code>data:image/png;base64,…</code> 作为前缀。把图片以内联 data URI 的方式嵌入,意味着浏览器不需要发起单独的 HTTP 请求去获取它——这对小图标、邮件素材以及自包含的 HTML/CSS 演示很有用。本工具把你上传的任意图片转换为 Base64 data URI,可以直接粘贴到 HTML、CSS 或 JSON 中。
-    </p>
-    <div>
-      <h2>何时使用 data URI</h2>
-      <ul>
-        <li>
-          <strong>小图标与 Logo</strong> —— 一个 2 KB 的 Logo 内联在 CSS 中,可以省去一次网络往返。
-        </li>
-        <li>
-          <strong>邮件签名与邮件简报</strong> —— 许多邮件客户端会屏蔽外部图片,内联素材能稳定渲染。
-        </li>
-        <li>
-          <strong>单文件演示</strong> —— 一个无外部依赖的自包含 HTML 文件,便于分享和归档。
-        </li>
-        <li>
-          <strong>JSON 负载</strong> —— 接受图片上传的 API 有时希望 JSON body 里是 Base64 字符串,而不是 multipart 表单数据。
-        </li>
-      </ul>
-    </div>
-    <div>
-      <h2>何时不要使用 data URI</h2>
-      <p>
-        Base64 编码会让文件体积膨胀大约 <strong>33%</strong>,而一个大的 data URI 会阻塞解析器,页面要等它解码完才能渲染。对于超过几 KB 的内容——首屏大图、商品图片、视频——请改用真实文件并配合恰当的缓存。此外,data URI 无法被独立缓存:如果同一张图片出现在 50 个页面上,每个页面都会自带一份副本。
-      </p>
-    </div>
-    <div>
-      <h2>隐私与工作原理</h2>
-      <p>
-        转换过程使用 <code>FileReader.readAsDataURL()</code>,它会在你的浏览器内把文件读入内存,并在本地生成 Base64 字符串。你的图片绝不会被上传到服务器——这对私密或敏感素材很重要,同时也意味着页面加载后本工具可离线使用。提供三种输出格式:原始 data URI、可直接粘贴的 <code>&lt;img&gt;</code> 标签,以及 CSS 的 <code>background-image</code> 声明。
-      </p>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -177,7 +139,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function ImageToBase64Content(): ReactNode {
   const { locale } = useApp()

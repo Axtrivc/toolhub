@@ -30,31 +30,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具?</h2>
-    <p><strong>密度</strong>衡量一定体积内能容纳多少质量(质量 ÷ 体积)。水的密度为 1 g/cm³;黄金为 19.3 g/cm³;空气仅为 0.0012 g/cm³。</p>
-    <div>
-      <h2>参考密度</h2>
-      <ul>
-        <li>水(4°C):1000 kg/m³ = 1 g/cm³</li>
-        <li>冰:917 kg/m³(浮在水面上——这很不寻常)</li>
-        <li>黄金:19,320 kg/m³</li>
-        <li>铁:7,870 kg/m³</li>
-        <li>空气(海平面):1.225 kg/m³</li>
-      </ul>
-    </div>
-    <div>
-      <h2>密度为何重要</h2>
-      <ul>
-        <li><strong>浮或沉:</strong>密度小于流体的物体会浮起</li>
-        <li><strong>材料鉴别:</strong>密度有助于鉴别未知材料</li>
-        <li><strong>工程:</strong>强度重量比的计算</li>
-      </ul>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -108,7 +83,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function DensityConverterContent(): ReactNode {
   const { locale } = useApp()

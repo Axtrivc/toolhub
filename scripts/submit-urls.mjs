@@ -111,7 +111,7 @@ function parseToolSlugs() {
 
   if (slugs.length === 0) {
     // Fallback:扫描 app/tools/*/page.tsx 目录(最鲁棒,即使 tools.ts 结构变化)
-    console.warn('⚠️  未能从 tools.ts 解析 slug,回退到 app/tools/*/ 目录扫描')
+    console.warn('⚠️  Could not parse slugs from tools.ts; falling back to app/tools/*/ directory scan')
     const toolsDir = join(ROOT, 'app', 'tools')
     if (existsSync(toolsDir)) {
       for (const entry of readdirSync(toolsDir, { withFileTypes: true })) {
@@ -226,35 +226,35 @@ async function run() {
   console.log('───────────────────────────────────────────────────────────')
 
   if (!host) {
-    console.error('❌ 无法解析站点 host,请通过 SITE_URL 环境变量指定完整域名。')
+    console.error('❌ Could not determine the site host. Set SITE_URL to the full site URL.')
     process.exit(1)
   }
   if (!key) {
     console.error(
-      '❌ 未找到 IndexNow 密钥。请在 public/ 下放置 <key>.txt,或通过 INDEXNOW_KEY 环境变量指定。\n' +
-        '   生成密钥: openssl rand -hex 16  (或任意 8-128 位十六进制串)',
+      '❌ IndexNow key not found. Place <key>.txt under public/ or set INDEXNOW_KEY.\n' +
+        '   Generate a key: openssl rand -hex 16 (or any 8-128 character hexadecimal string)',
     )
     process.exit(1)
   }
 
   const { urls, toolCount } = buildUrlList(siteUrl)
-  console.log(`  Tools    : ${toolCount} 个工具 URL`)
-  console.log(`  Total    : ${urls.length} 个 URL 待提交`)
+  console.log(`  Tools    : ${toolCount} tool URLs`)
+  console.log(`  Total    : ${urls.length} URLs to submit`)
   console.log('═══════════════════════════════════════════════════════════\n')
 
   if (isDry) {
-    console.log('📝 DRY RUN — 将提交的 URL 列表:')
+    console.log('📝 DRY RUN — URLs to submit:')
     for (const u of urls) console.log('   ' + u)
-    console.log(`\n共 ${urls.length} 个 URL(未实际提交,移除 DRY_RUN=1 即可推送)`)
+    console.log(`\n${urls.length} URLs total (not submitted; remove DRY_RUN=1 to submit)`)
     return
   }
 
   // 提交前先确认密钥文件可达(本地提示,不强阻塞)
   const keyFile = `${key}.txt`
   if (existsSync(join(ROOT, 'public', keyFile))) {
-    console.log(`✅ 密钥文件 public/${keyFile} 存在(确保已部署到 https://${host}/${keyFile})`)
+    console.log(`✅ Key file public/${keyFile} exists (ensure it is deployed at https://${host}/${keyFile})`)
   } else {
-    console.warn(`⚠️  public/${keyFile} 不存在,Bing/Yandex 校验会失败。请先创建该文件。`)
+    console.warn(`⚠️  public/${keyFile} is missing; Bing/Yandex verification will fail. Create it first.`)
   }
   console.log()
 
@@ -267,7 +267,7 @@ async function run() {
   let lastResult = null
   for (let i = 0; i < batches.length; i++) {
     const batch = batches[i]
-    console.log(`🚀 [Batch ${i + 1}/${batches.length}] 提交 ${batch.length} 个 URL → IndexNow`)
+    console.log(`🚀 [Batch ${i + 1}/${batches.length}] Submitting ${batch.length} URLs → IndexNow`)
 
     // 主节点(api.indexnow.org)→ 失败自动 fallback 到 Bing 官方节点
     let result
@@ -280,7 +280,7 @@ async function run() {
         label: 'indexnow.org',
       })
       if (!result.ok) {
-        console.warn(`   ⚠️  主节点返回 ${result.status},切换到 Bing 备用节点…`)
+        console.warn(`   ⚠️  Primary endpoint returned ${result.status}; switching to the Bing fallback…`)
         result = await submitToIndexNow({
           urls: batch,
           host,
@@ -290,7 +290,7 @@ async function run() {
         })
       }
     } catch (err) {
-      console.warn(`   ⚠️  主节点网络错误: ${err.message},切换到 Bing 备用节点…`)
+      console.warn(`   ⚠️  Primary endpoint network error: ${err.message}; switching to the Bing fallback…`)
       result = await submitToIndexNow({
         urls: batch,
         host,
@@ -302,26 +302,26 @@ async function run() {
 
     lastResult = result
     if (result.ok) {
-      console.log(`   ✅ [${result.label}] HTTP ${result.status} — URL 已加入抓取队列(Bing/Yandex 同步生效)`)
+      console.log(`   ✅ [${result.label}] HTTP ${result.status} — URLs queued for crawling (Bing/Yandex synchronized)`)
     } else {
-      console.error(`   ❌ [${result.label}] HTTP ${result.status} — 提交失败`)
-      if (result.body) console.error(`      响应: ${result.body}`)
-      console.error('      常见原因:密钥文件未部署 / 密钥不匹配 / URL 不属于该 host')
+      console.error(`   ❌ [${result.label}] HTTP ${result.status} — Submission failed`)
+      if (result.body) console.error(`      Response: ${result.body}`)
+      console.error('      Common causes: key file not deployed / key mismatch / URL outside this host')
     }
   }
 
   console.log('\n═══════════════════════════════════════════════════════════')
   if (lastResult && lastResult.ok) {
-    console.log('🎉 全部 URL 已成功提交到 IndexNow(Bing/Yandex 秒级收录队列)。')
-    console.log('   搜索引擎将异步抓取并索引,通常几分钟到数小时内可见收录。')
+    console.log('🎉 All URLs were submitted to IndexNow (Bing/Yandex fast indexing queue).')
+    console.log('   Search engines will crawl and index asynchronously, usually within minutes to hours.')
   } else {
-    console.log('⚠️  提交未完全成功,请按上方提示排查后重试。')
+    console.log('⚠️  Submission did not fully succeed. Review the messages above and retry.')
     process.exitCode = 1
   }
   console.log('═══════════════════════════════════════════════════════════')
 }
 
 run().catch((err) => {
-  console.error('❌ 提交脚本异常:', err)
+  console.error('❌ Submission script error:', err)
   process.exit(1)
 })

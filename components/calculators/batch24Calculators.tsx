@@ -10,7 +10,7 @@
  *  - ev-charging-cost-calculator:家充/公共桩每英里电费 vs 油车
  *  - rent-budget-calculator:30% 规则 + 50/30/20 房租上限
  *  - christmas-budget-calculator:节日预算按人群/类别分配
- * 均基于 makeCalculatorClient 配置驱动,遵循四语 l10n 与确定性首帧规范。
+ * 均基于 makeCalculatorClient 配置驱动,遵循三语 l10n 与确定性首帧规范。
  */
 
 import { makeCalculatorClient } from '../calculator/makeCalculatorClient'
@@ -538,7 +538,7 @@ export const EvChargingCostCalculatorClient = makeCalculatorClient({
     const kwh = miles / eff
     // 段标签按工厂 cmpseg.<si> 以「行内序号」取词典:两行各只有一个段(共用
     // si=0),标签必须同名(与 trip-cost/membership 等既有双行对比图同一惯例),
-    // 否则 zh/es/de 的行 1 段会错用行 0 的段名(油费被标成"家充")。区别由行名承担。
+    // 否则 es/de 的行 1 段会错用行 0 的段名(油费被标成"家充")。区别由行名承担。
     return {
       rows: [
         { label: 'EV charging', segments: [

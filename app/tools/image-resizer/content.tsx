@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * Image Resizer 长文正文 —— 四语 dispatcher
+ * Image Resizer 长文正文 —— 三语 dispatcher
  *
- * en 分支等价于原 ToolContent 渲染输出。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支等价于原 ToolContent 渲染输出。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en (与改造前渲染输出一致) ────────────────────────────
@@ -54,36 +54,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具？</h2>
-    <p>
-      需要一张精确为 1200×630 的社交分享卡图、256×256 的头像，还是缩到一半尺寸的产品图？本缩放工具能在浏览器中把任意图像缩放到你输入的尺寸。它会用 <strong>高质量平滑</strong> 在本地画布中重绘图像，在下载前就显示 <strong>真实的编码文件大小</strong>，而且绝不上传任何内容 —— 文件永远不会离开你的设备。
-    </p>
-
-    <div>
-      <h2>（通常）保持宽高比锁定</h2>
-      <p>
-        锁定开启时，修改宽度会按原始比例重新计算高度，反之亦然 —— 图像永远不会被拉伸。只有当你确实需要变形，或打算稍后裁剪时才关闭它。<strong>25% / 50% / 75% / 100%</strong> 按钮是最快的缩小方式，适合邮件、缩略图或 <code>srcset</code> 变体，无需任何计算。
-      </p>
-    </div>
-
-    <div>
-      <h2>大小估算真实可靠，并非猜测</h2>
-      <p>
-        大多数缩放工具会猜测输出大小；而本工具会在你输入时（带防抖，保持流畅）真正在隐藏画布中重新编码图像，并报告来自 <code>canvas.toBlob</code> 的精确字节数。预览缩略图也是实际编码后的输出 —— 你所见即所下载。如果结果比你期望的更大，可在导出前调低质量滑块或改用 WebP。
-      </p>
-    </div>
-
-    <div>
-      <h2>缩小，别放大</h2>
-      <p>
-        画布重采样非常擅长把图像变得 <em>更小</em>，但放大到超过原始尺寸只是在凭空生成像素 —— 画面会变软。想要锐利的效果，请从你能拿到的最大源文件开始向下缩放。另外请注意：PNG 和 WebP 输出会保留透明度，而 JPEG 会把透明区域压平到白色背景上；标志和抠图素材请选择 PNG 或 WebP。
-      </p>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -147,7 +117,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function ImageResizerContent(): ReactNode {
   const { locale } = useApp()

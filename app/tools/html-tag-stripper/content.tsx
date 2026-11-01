@@ -25,26 +25,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具?</h2>
-    <p>本工具可移除输入中的所有 HTML 标签,只留下可读的文本。适合用于清理从网页复制的内容,或将 HTML 邮件转换为纯文本。</p>
-    <div>
-      <h2>工作原理</h2>
-      <p>本工具使用浏览器原生的 DOM 解析器 —— 比正则表达式更安全,后者可能会遗漏一些边缘情况。它会剥离标签,但保留标签之间的文本内容。</p>
-    </div>
-    <div>
-      <h2>常见用途</h2>
-      <ul>
-        <li>清理从网页抓取的文本</li>
-        <li>将 HTML 邮件转换为纯文本</li>
-        <li>从 CMS 导出中提取文章正文</li>
-        <li>粘贴到纯文本编辑器前去除格式</li>
-      </ul>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -88,7 +68,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function HTMLTagStripperContent(): ReactNode {
   const { locale } = useApp()

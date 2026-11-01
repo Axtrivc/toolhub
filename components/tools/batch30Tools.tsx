@@ -86,7 +86,7 @@ function toDDM(dd: number, positive: string, negative: string): string {
 }
 
 // ⚠️ 错误态文案:说明行随 locale 本地化(l10n bundle 的 'usage' 键),
-// 格式示例四语通用保持不变 —— 与 makeTextTool 其余可见串同一条本地化链路
+// 格式示例三语通用保持不变 —— 与 makeTextTool 其余可见串同一条本地化链路
 const USAGE_FORMATS = '  40.7128, -74.0060\n' +
   '  40.7128° N, 74.0060° W\n' +
   "  40° 42.768' N, 74° 0.360' W\n" +

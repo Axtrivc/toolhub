@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * PromptTemplateFiller 长文正文 —— 四语 dispatcher
+ * PromptTemplateFiller 长文正文 —— 三语 dispatcher
  *
- * en 分支与改造前渲染输出一致。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支与改造前渲染输出一致。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en (与改造前渲染输出一致) ────────────────────────────
@@ -24,19 +24,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>两种占位符写法</h2>
-    <p>双花括号占位符遵循 mustache 惯例并先替换;单花括号占位符是 Python f-string 风格。两者混用也没问题、行为可预期——双花括号先于单花括号解析。</p>
-    <h2>变量来自 JSON</h2>
-    <p>变量源直接粘贴 JSON 对象;非字符串值(数字、数组、嵌套对象)会自动字符串化。缺失的变量会按名字标出来,而不是留成无声的占位符。</p>
-    <h2>花 API 的钱之前先试提示词</h2>
-    <p>靠真实 API 调用迭代提示词,每个笔误都在烧 token。先在本地填充,变量不匹配、花括号数量不对、杂散文本立刻现形——API 只看到定稿。</p>
-    <h2>不止 LLM 提示词</h2>
-    <p>同一套引擎也适用于邮件模板、SQL 骨架、提交信息格式——凡是变量占位符出现的地方都行。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -66,7 +53,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function PromptTemplateFillerContent(): ReactNode {
   const { locale } = useApp()

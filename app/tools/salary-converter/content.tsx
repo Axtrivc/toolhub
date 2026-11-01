@@ -5,10 +5,10 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * Salary Converter 长文正文 —— 四语 dispatcher
+ * Salary Converter 长文正文 —— 三语 dispatcher
  *
  * en 分支等价于原 ToolContent 渲染输出(<h2>What Is This Tool?</h2> + intro
- * + 各 section 包在 <div> 中),faqs 已丢弃(FAQ 在别处渲染)。zh/es/de 仅客户端
+ * + 各 section 包在 <div> 中),faqs 已丢弃(FAQ 在别处渲染)。es/de 仅客户端
  * hydration 后按 locale 切换。变量名 (A)、<code> 内容、$ 金额保持不变。
  */
 
@@ -57,44 +57,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具?</h2>
-    <p>
-      这个转换器可以在<strong>年薪</strong>、<strong>月薪</strong>、<strong>双周薪</strong>和
-      <strong>时薪</strong>之间换算薪资。输入你实际拿到的金额并选择单位——工具会把一切统一成年薪总额,
-      再推导出其余数字,这样你就能比较报价方式不同的工作机会。
-    </p>
-    <div>
-      <h2>换算公式</h2>
-      <p>
-        每个结果都从年薪总额算起。一年按 12 个月、26 个双周发薪周期、52 个带薪周计算。给定年薪
-        <code>A</code>:<code>monthly = A ÷ 12</code>、<code>bi-weekly = A ÷ 26</code>,
-        而 <code>hourly = A ÷ (52 × hours/week)</code>。默认每周工作 40 小时(全年 2,080
-        小时);兼职或合同制岗位可自行调整。
-      </p>
-    </div>
-    <div>
-      <h2>常见薪资等价对照(每周 40 小时)</h2>
-      <ul>
-        <li>$40,000/年 ≈ $3,333/月 ≈ $1,538 双周 ≈ $19.23/时</li>
-        <li>$60,000/年 ≈ $5,000/月 ≈ $2,308 双周 ≈ $28.85/时</li>
-        <li>$75,000/年 ≈ $6,250/月 ≈ $2,885 双周 ≈ $36.06/时</li>
-        <li>$100,000/年 ≈ $8,333/月 ≈ $3,846 双周 ≈ $48.08/时</li>
-        <li>$150,000/年 ≈ $12,500/月 ≈ $5,769 双周 ≈ $72.12/时</li>
-      </ul>
-    </div>
-    <div>
-      <h2>双周薪与半月薪的区别</h2>
-      <p>
-        双周薪(每两周发一次)一年发 <strong>26</strong> 次工资——这意味着有两个月你会领到三次工资,
-        而不是两次。半月薪(每月发两次)一年正好发 <strong>24</strong> 次。全年来看,$60,000
-        的年薪每张双周支票是 $2,308,而每张半月薪支票是 $2,500。本工具采用标准的双周(26 周期)惯例。
-      </p>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -183,7 +145,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function SalaryConverterContent(): ReactNode {
   const { locale } = useApp()

@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * BodySurfaceAreaCalculator 长文正文 —— 四语 dispatcher
+ * BodySurfaceAreaCalculator 长文正文 —— 三语 dispatcher
  *
- * en 分支与 SSR 输出一致。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支与 SSR 输出一致。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -24,19 +24,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>九个蜡模与一个平方根</h2>
-    <p>DuBois 父子 1916 年的公式来自给整整九名受试者做蜡模测量——其中一位受试者就是 DuBois 本人。Mosteller 1987 年的改写 √(身高 × 体重 ÷ 3600) 用一行算式拟合同样的数据,在普通成人身上误差约 2% 以内,因此在床旁取代了旧公式。</p>
-    <h2>医学为什么用 BSA 归一化</h2>
-    <p>化疗剂量按 mg/m² 书写,因为药物清除率与体表面积的相关性优于体重。心脏指数把心输出量除以 BSA(正常 2.5-4.0 L/min/m²),让 50 公斤和 100 公斤的病人共用一套参考范围。儿科补液规则和烧伤面积图也依赖同一思路。</p>
-    <h2>肥胖的坑</h2>
-    <p>两个公式都建立在偏瘦到正常体型上,在重度肥胖时会低估体表面积。肿瘤科方案常给 BSA 封顶 2.2-2.5 m² 以避免过量——这也是本页只做参考的原因之一,剂量决策永远归治疗团队。</p>
-    <h2>该报哪个数</h2>
-    <p>多数机构默认 Mostelier;一些旧方案和日本文献仍指定 DuBois。计算器同时给出两者和差值,你可以照表格实际要求抄写——并且看到这个选择很少让结果移动超过几个百分点。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -66,7 +53,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function BodySurfaceAreaCalculatorContent(): ReactNode {
   const { locale } = useApp()

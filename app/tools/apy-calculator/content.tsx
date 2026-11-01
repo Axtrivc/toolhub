@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * APY Calculator 长文正文 —— 四语 dispatcher
+ * APY Calculator 长文正文 —— 三语 dispatcher
  *
- * en 分支等价于原 ToolContent 渲染输出。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支等价于原 ToolContent 渲染输出。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en(与改造前渲染输出一致) ────────────────────────────
@@ -37,32 +37,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具?</h2>
-    <p><strong>APY</strong>(年化收益率)是考虑复利后储蓄的真实回报。APR 是单利利率;APY 是一年内复利超过一次时你实际赚到的收益。</p>
-
-    <div>
-      <h2>APR vs APY</h2>
-      <p>以 5% APR 储蓄账户为例:按月复利得 APY 5.116%;按日复利得 5.127%。复利越频繁,APY 越高——APR 和 APY 之间的差距也越大。</p>
-    </div>
-
-    <div>
-      <h2>公式</h2>
-      <p>APY = (1 + APR/n)ⁿ − 1,其中 n 是每年复利次数。本工具可为任意频率计算。</p>
-    </div>
-
-    <div>
-      <h2>需要注意什么</h2>
-      <ul>
-        <li>高收益储蓄账户标注 APY(看起来比 APR 更高)</li>
-        <li>信用卡和贷款标注 APR(看起来比 APY 更低)</li>
-        <li>货比三家时一定要对比同一个指标</li>
-      </ul>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -118,7 +92,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function APYCalculatorContent(): ReactNode {
   const { locale } = useApp()

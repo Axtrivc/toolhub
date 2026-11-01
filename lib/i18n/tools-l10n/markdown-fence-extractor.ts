@@ -5,28 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const MarkdownFenceExtractorL10n: ToolL10n = {
-  zh: {
-    useCases: [
-      '从 ChatGPT / Claude 的长回答里一键抽出全部代码块,不再逐段手选复制',
-      '处理 README 或技术文档:按语言芯片过滤,只留 shell 命令或 Python 示例',
-      '批量收集教程中的命令片段,拼成可执行的安装脚本',
-      'AI 生成的多文件代码,逐块复制到 IDE 里验证能否跑通',
-    ],
-    faqs: [
-      { q: '支持哪些代码块格式?', a: '标准三反引号围栏(```lang ... ```),这是 GitHub Flavored Markdown 的代码块语法。缩进 4 空格的老式代码块被刻意忽略——它们常与列表缩进混淆,误报代价高于漏报。' },
-      { q: '语言过滤是怎么匹配的?', a: '对围栏标注的语言标签做子串匹配:输入 "py" 能命中 python 和 py3,"ts" 命中 typescript。未标注语言的裸围栏会标成 "text",同样作为一个可点的过滤芯片。' },
-      { q: '能处理 AI 的回答吗?', a: '这正是主要场景:ChatGPT、Claude、Copilot 的回答都是 Markdown,代码以三反引号围栏给出。整段回答粘贴进来,全部代码块自动按出现顺序拆出并标注行数。' },
-      { q: '文本会被上传吗?', a: '不会。提取在浏览器本地用正则完成,零网络请求——含内部代码或未公开文档的回答可以放心粘贴。' },
-    ],
-    ui: {
-      'copyAll': '复制全部',
-      'filterBy': '按语言过滤',
-      'inputLabel': 'Markdown / AI 回答',
-      'lines': '行',
-      'noBlocks': '未找到围栏代码块。',
-      'note': '🧾 适用于任何含三反引号围栏的 Markdown——ChatGPT/Claude 回答、README、文档皆可。语言芯片可过滤(如 "py" 匹配 python);刻意忽略缩进 4 空格的代码块。',
-    },
-  },
+
   es: {
     useCases: [
       'Extraer de un clic todos los bloques de código de una respuesta larga de ChatGPT / Claude, sin seleccionar a mano',

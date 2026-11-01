@@ -5,74 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const reverseStripeFeeCalculatorL10n: ToolL10n = {
-  zh: {
-    ui: {
-      'chartTitle': '收款金额的去向',
-      'cmpCharge': '收款金额',
-      'segKeep': '你净得',
-      'segFees': '手续费',
-      'afterFees': '扣费后',
-      'amountYouCharge': '你收取的金额',
-      'amountYouNeedToNet': '你需要净得的金额',
-      'chargeMinusFeeNote': '收款 − 手续费(应与目标一致)',
-      'copySummary': '复制摘要',
-      'customFixedFee': '自定义固定费用',
-      'customPercentageFee': '自定义百分比费率',
-      'effectiveFeeRate': '实际费率',
-      'errInvalidNumbers': '请输入有效的非负数。',
-      'errPctBelow100': '百分比费率必须低于 100%。',
-      'feeDividedByCharge': '手续费 ÷ 收款金额',
-      'feePreset': '费率预设',
-      'netCheck': '净额核对',
-      'noteText': '⚠️ 把手续费转嫁给客户(加收)受法规约束,因国家、美国各州和卡组织而异——有些地区禁止,有些设上限或要求披露。加收前请查当地规定。所示费率为 2026 年常见预设;你的 Stripe/PayPal 方案可能不同。',
-      'presetCustom': '自定义费率',
-      'presetPaypalUs': 'PayPal 美国 (3.49% + $0.49)',
-      'presetStripeIntl': 'Stripe + 国际卡 (4.4% + $0.30)',
-      'presetStripeIntlFx': 'Stripe + 国际卡 + 货币转换 (5.4% + $0.30)',
-      'presetStripeUs': 'Stripe 美国在线 (2.9% + $0.30)',
-      'processingFee': '手续费',
-      'sEffectiveFee': '实际费率: ',
-      'sNetCheck': '净额核对: ',
-      'sProcessingFee': '手续费: ',
-      'sRate': '费率: ',
-      'sYouCharge': '你收取: ',
-      'sYouMustCharge': '你必须收取: ',
-      'sYouNeedToNet': '你需要净得: ',
-      'sYouReceive': '你到账: ',
-      'summaryPrefix': '支付手续费计算器: ',
-      'summaryTitle': '支付手续费摘要',
-      'summaryTitleReverse': '支付手续费摘要(反向)',
-      'tabForward': '我收取 X',
-      'tabReverse': '我需要净得 X',
-      'toNetYourTarget': '以净得你的目标金额',
-      'youMustCharge': '你必须收取',
-      'youReceive': '你到账',
-    },
-    formula: {
-      formula: 'Charge = ( target + fixed ) / (1 − rate%)',
-      explain: '反向手续费计算:要在扣除百分比 rate 加固定费用后净得目标金额,就除以 (1 − rate) 再加回固定部分。这就是向客户收取的价格。',
-    },
-    useCases: [
-      '收多少钱才能覆盖 Stripe 手续费',
-      'PayPal 反向手续费计算器',
-      'Stripe 手续费补足计算器',
-      '把支付手续费转嫁给客户的计算器',
-    ],
-    faqs: [
-      {
-        q: '为什么到账比收款金额少?',
-        a: 'Stripe 会从每笔交易里扣除一个百分比加一个固定费用,所以进入你账户的钱总是低于收款总额。小额交易里固定费用占比很大,这就是为什么小额收款感觉特别亏。',
-      },
-      {
-        q: '反向模式怎么用?',
-        a: '你输入想要实际到手的金额,它就按费用公式倒推,算出你必须收多少价格,才能在扣费后恰好净得目标金额。这就是把手续费干净地转嫁给客户的方法。',
-      },
-      {
-        q: 'Stripe 现在的手续费是多少?',
-        a: '美国标准费率约为每笔成功银行卡收款 2.9% + $0.30,但会因国家、支付方式和交易量而异。预设值可编辑,所以请按你 Stripe 后台里的真实费率更新。',
-      },
-    ],
-  },
+
   es: {
     ui: {
       'chartTitle': 'A dónde va el importe cobrado',

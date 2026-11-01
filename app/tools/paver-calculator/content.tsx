@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * PaverCalculator 长文正文 —— 四语 dispatcher
+ * PaverCalculator 长文正文 —— 三语 dispatcher
  *
- * en 分支与既有工具页渲染一致。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支与既有工具页渲染一致。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -24,19 +24,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>尺寸决定块数</h2>
-    <p>混凝土铺石尺寸固定,覆盖率是公开常数:4×8 每平方英尺 4.5 块,6×6 为 4 块,8×8 为 2.25 块,12×12 为 1 块。16×12 的院子用 4×8 精确需要 864 块——加 10% 切割余量订 951 块。</p>
-    <h2>垫层才是庭院本体</h2>
-    <p>铺石从下面坏,不从上面坏。庭院与园路要 4 英寸压实碎石;车道要 6-12 英寸,底下加土工布。192 ft²、4 英寸厚是 64 ft³——要送 2.37 码碎石。</p>
-    <h2>铺沙永远只有一英寸</h2>
-    <p>铺沙是刮平层,不是找平拐杖:恰好 1 英寸的粗混凝土砂。更厚的砂层泵水、受载蠕变、一季之内出辙。压实后把聚合砂扫进缝里。</p>
-    <h2>损耗跟着图案走</h2>
-    <p>直排错缝 10% 够了;人字纹与 45° 斜铺切边更多,留 15%。所有铺石买同一窑次——和瓷砖、石膏板一样,批次间色差肉眼可见。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -66,7 +53,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function PaverCalculatorContent(): ReactNode {
   const { locale } = useApp()

@@ -5,42 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const passwordStrengthCheckerL10n: ToolL10n = {
-  zh: {
-    ui: {
-      'atLeast12Chars': '至少 12 个字符',
-      'bits': '比特',
-      'checklist': '检查清单',
-      'commonPasswordWarning': '这是最常用的密码之一——几乎能被瞬间破解。',
-      'enterPasswordLabel': '输入要测试的密码',
-      'entropy': '熵',
-      'length': '长度',
-      'localPrivacyNote': '🔒 在你的浏览器本地测试。你的密码绝不外传。',
-      'lowercaseLetters': '小写字母',
-      'numbers': '数字',
-      'passwordPlaceholder': '输入你的密码…',
-      'sequenceWarning': '重复或连续的字符(如 aaa、abc123)很容易被猜到。',
-      'strength': '强度',
-      'strengthEmpty': '空',
-      'strengthStrong': '强',
-      'strengthVeryStrong': '极强',
-      'strengthVeryWeak': '极弱',
-      'strengthWeak': '弱',
-      'symbols': '符号',
-      'uppercaseLetters': '大写字母',
-    },
-    useCases: [
-      '我的密码有多强',
-      '密码强度熵值检测器',
-      '密码安全检查清单',
-      '密码破解时间估算',
-    ],
-    faqs: [
-      { q: '在这里输入真实密码安全吗?', a: '安全。本工具完全在你的浏览器本地处理,不会发起任何网络请求——你的密码绝不会离开你的设备。你也可以测试各种变体。' },
-      { q: '如果我的密码已经出现在数据泄露中怎么办?', a: '强度只衡量「可猜测性」,并不代表它是否已经泄露。请到 Have I Been Pwned 查询你的密码是否出现在已知泄露里。' },
-      { q: '多少比特的熵才算够?', a: '粗略基准:40 比特以下几小时内可被离线暴力破解;60 比特能扛数十年;75 比特以上对离线攻击基本免疫。长度比字符种类更有效——12 位随机小写(约 56 比特)强于 8 位全字符混排(约 52 比特)。' },
-      { q: '一堆密码记不住,怎么办?', a: '只记一条口令短语:用 4 个以上随机词拼成(20 个字符以上),熵高又好记;其余密码交给密码管理器生成 16 位随机串,并给关键账户开启两步验证。' },
-    ],
-  },
+
   es: {
     ui: {
       'atLeast12Chars': 'Al menos 12 caracteres',

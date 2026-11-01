@@ -5,29 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const gradeCalculatorL10n: ToolL10n = {
-  zh: {
-    formula: {
-      formula: 'grade = Σ ( scoreᵢ × weightᵢ ) / Σ weightᵢ',
-      explain: '加权平均。每项分数乘以其权重(如考试 40%、作业 60%),再除以总权重。权重高的项目对成绩影响更大。',
-    },
-    ui: {
-      'in.earned': '得分点数',
-      'in.possible': '满分点数',
-      'out.pct': '百分比',
-      'out.grade': '字母等级',
-      note: '📚 美国标准字母等级制。部分学校使用 +/-(B+、B、B-);本工具使用基础 A-F 等级。',
-      chartTitle: '你的落点',
-    },
-    useCases: [
-      '按得分点数计算成绩',
-      '把考试分数换算成百分比成绩',
-      '由得分点数得出字母等级',
-      '计算加权成绩',
-    ],
-    faqs: [
-      { q: '那「+/-」等级怎么办?', a: '很多学校使用更细的划分(A-、B+ 等)。本工具使用基础的五档制。请查询你所在学校对于「+/-」等级的具体分数线。' },
-    ],
-  },
+
   es: {
     formula: {
       formula: 'grade = Σ ( scoreᵢ × weightᵢ ) / Σ weightᵢ',

@@ -1,5 +1,5 @@
 /**
- * 博客长文 i18n 数据层 ——《How I Built ToolHub》正文翻译(en/zh/es/de)。
+ * 博客长文 i18n 数据层 ——《How I Built ToolHub》正文翻译(en/es/de)。
  *
  * 与 lib/i18n/pages.ts 的区别:
  * - pages.ts 的静态页正文较简单(p / list / h3 + 内联链接)。
@@ -44,14 +44,14 @@ export interface ArticleSection {
   blocks: ArticleBlock[]
 }
 
-/** 单个标题类文案的四语映射(缺翻译的语种以 en 值占位,回退安全) */
+/** 单个标题类文案的三语映射(缺翻译的语种以 en 值占位,回退安全) */
 export type LocalizedText = Record<Locale, string>
 
 /** 一篇文章的完整内容 */
 export interface ArticleContent {
-  /** 页面可见 H1(四语;metadata/JSON-LD 的英文 SEO 标题仍由 page.tsx 管理,不在此列) */
+  /** 页面可见 H1(三语;metadata/JSON-LD 的英文 SEO 标题仍由 page.tsx 管理,不在此列) */
   articleTitle: LocalizedText
-  /** 面包屑最后一节的短标题(四语) */
+  /** 面包屑最后一节的短标题(三语) */
   breadcrumbTitle: LocalizedText
   /** 阅读时长(分钟;展示文案由渲染层按 locale 格式化) */
   readMinutes: number
@@ -60,47 +60,12 @@ export interface ArticleContent {
   sections: ArticleSection[]
 }
 
-/** 4 语完整内容映射 */
+/** 3 语完整内容映射 */
 export type LocalizedArticle = Record<Locale, ArticleContent>
 
 // ─────────────────────────────────────────────────────────────────────────────
 // 代码块常量(跨语言复用,不翻译源码)
 // ─────────────────────────────────────────────────────────────────────────────
-const CODE_NEXT_CONFIG = `// next.config.ts
-const nextConfig = {
-  output: 'export',        // 每个路由 → CDN 上的静态 HTML
-  images: { unoptimized: true },
-  trailingSlash: true,
-  reactStrictMode: true,
-}`
-
-const CODE_SW = `// public/sw.js — 资源的 stale-while-revalidate 策略
-async function staleWhileRevalidate(request) {
-  const cache = await caches.open(RUNTIME_CACHE)
-  const cached = await cache.match(request)
-  const networkPromise = fetch(request)
-    .then((fresh) => {
-      if (fresh && fresh.ok && fresh.type === 'basic') {
-        cache.put(request, fresh.clone()).catch(() => {})
-      }
-      return fresh
-    })
-    .catch(() => cached)
-  // 立即返回缓存,后台刷新
-  return cached || networkPromise
-}`
-
-const CODE_AD = `// components/AdSlot.tsx(简化版)
-<div
-  data-placement={placement}
-  data-ad-slot={adSlotId}
-  className="min-h-[250px] w-full rounded-xl
-             border border-dashed
-             bg-slate-100/50 dark:bg-slate-900/30"
->
-  <span>ADVERTISEMENT</span>
-</div>`
-
 // 把英文代码注释也保留英文原貌(代码块在三语里完全相同)
 const CODE_NEXT_CONFIG_EN = `// next.config.ts
 const nextConfig = {
@@ -146,15 +111,15 @@ const EN_CRUMB_TITLE = 'How I Built ToolHub'
 
 export const howIBuiltToolHubArticle: LocalizedArticle = {
   en: {
-    articleTitle: { en: EN_TITLE, zh: '我是如何打造 ToolHub 的:始终亚秒级的静态 PWA', es: 'Cómo construí ToolHub: una PWA estática que sigue siendo sub-segundo', de: 'Wie ich ToolHub gebaut habe: eine statische PWA, die unter einer Sekunde bleibt' },
-    breadcrumbTitle: { en: EN_CRUMB_TITLE, zh: EN_CRUMB_TITLE, es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
+    articleTitle: { en: EN_TITLE,  es: 'Cómo construí ToolHub: una PWA estática que sigue siendo sub-segundo', de: 'Wie ich ToolHub gebaut habe: eine statische PWA, die unter einer Sekunde bleibt' },
+    breadcrumbTitle: { en: EN_CRUMB_TITLE,  es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
     readMinutes: 9,
     lead: 'A retrospective on the original architecture, with a current project log covering 350 tools, structured data, advertising, and privacy.',
     sections: [
       {
         heading: 'Project log — October 29, 2026',
         blocks: [
-          'This article was originally published with **169 tools and 676 tool-level structured-data blocks**. ToolHub now has **350 tools across 15 categories**, four interface languages, and **1,400 tool-level JSON-LD blocks (350 × 4)**. The 169/676 figures below are preserved as the August 2026 historical snapshot, not presented as the current count.',
+          'This article was originally published with **169 tools and 676 tool-level structured-data blocks**. ToolHub now has **350 tools across 15 categories**, three interface languages, and **1,400 tool-level JSON-LD blocks (350 × 4)**. The 169/676 figures below are preserved as the August 2026 historical snapshot, not presented as the current count.',
           'The implementation has also evolved: result cards show final values without animation intermediates, synthetic ratings have been removed, ad units require real numeric IDs, and the privacy policy distinguishes local computation from values placed in shareable URLs. Reserving ad space reduces layout shift; it is not a guarantee of measured zero CLS in every scenario.',
         ],
       },
@@ -243,14 +208,14 @@ export const howIBuiltToolHubArticle: LocalizedArticle = {
         ],
       },
       {
-        heading: '5. Client-Side 4-Language i18n: Zero Route-Splitting, Graceful Fallbacks',
+        heading: '5. Client-Side 3-Language i18n: Zero Route-Splitting, Graceful Fallbacks',
         blocks: [
-          'Supporting multiple languages on a static export is usually a nightmare: either you duplicate every route into `/zh/...`, `/es/...` (which dilutes canonical SEO link equity and requires complex `hreflang` maps), or you rely on heavy SSR.',
+          'Supporting multiple languages on a static export is usually a nightmare: either you duplicate every route into `/es/...`, `/de/...` (which dilutes canonical SEO link equity and requires complex `hreflang` maps), or you rely on heavy SSR.',
           'ToolHub takes a client-side dictionary approach:',
           {
             list: [
               '**Canonical English URLs**: The core HTML routes and SEO schema remain clean in English for high-RPM search indexing.',
-              '**Isolated Dictionary Files**: Translations for 169+ tools are split into per-locale modules (`lib/i18n/tools.{zh,es,de}.ts`), mapped by tool `slug`, with English as the base data in `lib/tools.ts`.',
+              '**Isolated Dictionary Files**: Translations for 169+ tools are split into per-locale modules (`lib/i18n/tools.{es,de}.ts`), mapped by tool `slug`, with English as the base data in `lib/tools.ts`.',
               '**Automatic Fallback & Detection**: The app auto-detects `navigator.language` on first visit. If a specific translation key is missing in German or Spanish, it gracefully falls back to English without crashing or leaving blank text.',
             ],
           },
@@ -299,170 +264,18 @@ export const howIBuiltToolHubArticle: LocalizedArticle = {
     ],
   },
 
-  zh: {
-    articleTitle: { en: EN_TITLE, zh: '我是如何打造 ToolHub 的:始终亚秒级的静态 PWA', es: 'Cómo construí ToolHub: una PWA estática que sigue siendo sub-segundo', de: 'Wie ich ToolHub gebaut habe: eine statische PWA, die unter einer Sekunde bleibt' },
-    breadcrumbTitle: { en: EN_CRUMB_TITLE, zh: EN_CRUMB_TITLE, es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
-    readMinutes: 9,
-    lead: '一篇关于原始架构的复盘,并补充当前 350 个工具、结构化数据、广告与隐私口径的项目日志。',
-    sections: [
-      {
-        heading: '项目日志 —— 2026 年 10 月 29 日',
-        blocks: [
-          '本文最初发布时,站点有 **169 个工具和 676 个工具级结构化数据块**。现在 ToolHub 有 **15 个分类、350 个工具**、4 种界面语言,以及 **1,400 个工具级 JSON-LD 块(350 × 4)**。下文中的 169/676 保留为 2026 年 8 月的历史快照,不再代表当前数量。',
-          '实现也已演进:结果卡直接显示终值、合成评分已移除、广告单元要求真实数字 ID,隐私政策则区分本地计算与分享 URL 中的参数。预留广告空间可以减少布局偏移,但不等于承诺所有场景实测 CLS 都为零。',
-        ],
-      },
-      {
-        heading: '1. 问题:现代在线工具其实都坏得悄无声息',
-        blocks: [
-          '随便打开 Google 第一页某个"免费在线工具"。你几乎总会得到这样的体验:',
-          {
-            list: [
-              '**臃肿。** 一个只有一个文本框的工具,塞了 2–4 MB JavaScript、一个客户端路由、一个统计 SDK、一个客服挂件、三个 cookie 横幅 —— 就为了算一个 slug。',
-              '**追踪。** 你一粘贴,输入就离开设备了。所谓"工具"其实是个表单,POST 到服务器,你的数据被记录、存储、最终卖掉。',
-              '**布局偏移(CLS)。** 广告位空了 800 毫秒,然后突然出现,把你在读的结果往下推 250 像素。每页 3 个广告位,乘起来。',
-              '**服务端渲染慢。** 一个本可以是静态 HTML 文件的工具,非要做成 Node/PHP 渲染,冷启动 TTFB 600–1200 毫秒,因为有人觉得每个 URL 都得"动态"。',
-            ],
-          },
-          '这些都没必要。一个*单位换算器*不需要数据库。一个 *JSON 格式化器*不需要后端。这些工具诚实的样子是:一个 HTML 文件、一小段脚本、在你的标签页里跑、关掉就忘掉一切。ToolHub 是我尝试在 **169 个工具**的规模上,把这种诚实版本做出来。',
-          {
-            card: {
-              title: 'JSON 格式化器',
-              href: '/tools/json-formatter/',
-              desc: '在浏览器本地格式化和校验 JSON,无需后端计算 API。',
-            },
-          },
-          {
-            card: {
-              title: 'Slug 生成器',
-              href: '/tools/slug-generator/',
-              desc: '任意标题一键转成干净的 URL slug——"就为了算一个 slug"的诚实版本。',
-            },
-          },
-        ],
-      },
-      {
-        heading: '2. 架构选择:静态导出 + 惰性 Service Worker 缓存',
-        blocks: [
-          '整个站点是一个 **Next.js 静态导出**:',
-          { code: CODE_NEXT_CONFIG },
-          '这一行干了大部分活。没有源站服务器、没有 SSR 冷启动、没有要扩容的数据库。每个工具页都是一个预渲染的 HTML 文件,放在边缘节点上。TTFB 就是你的 CDN 的水平 —— 通常 50 毫秒以内。',
-          '纯静态站点的麻烦在于:回访用户在硬刷新时仍要重新下载一切,而且没有离线方案。所以我手写了一个 **Service Worker**(`public/sw.js`),干两件事:',
-          {
-            list: [
-              '**HTML 导航 → 网络优先。** 在线时你永远看到最新版;网络断了就回退到缓存副本,再不行回退到缓存的主页作为离线外壳。',
-              '**静态资源 → stale-while-revalidate。** 第一次回访是即时的(走缓存),SW 在后台刷新资源。因为 `_next/static/*` 文件是按内容哈希命名的,激进缓存是安全的。',
-            ],
-          },
-          'SWR 处理器就十几行:',
-          { code: CODE_SW },
-          '有两个细节很关键:(a) SW 明确**不缓存跨域请求** —— AdSense 和分析流量直接放行,所以我绝不会误缓存广告素材,也不会破坏曝光计数;(b) SW 每次部署都把 `VERSION` 常量往上推一档,并在 `activate` 阶段配合 `skipWaiting()` + 旧缓存清理,绕过浏览器对 `sw.js` 的 24 小时 max-age,让新代码几分钟内到达用户。注册那一端还在每次页面加载时调 `registration.update()`。',
-          '结果就是"惰性"缓存:只有访客实际打开过的页面才会被缓存。169 个工具页我不会去预缓存长尾 —— 那会让安装时间膨胀。人们获得的是*他们用到的工具*的离线访问,这才是唯一有意义的离线访问。',
-        ],
-      },
-      {
-        heading: '3. pSEO 引擎:169+ JSON-LD schema + 自动化内链网',
-        blocks: [
-          '程序化 SEO(pSEO)名声不好,因为大部分都是稀薄、模板化的垃圾。真正有效的版本有两半:**每页真实的结构化数据**,以及**真实的内链图谱**,让爬虫能发现并信任这一切。',
-          '每个工具在唯一事实源(`lib/tools.ts`)里描述一次,然后自动生成四个 JSON-LD 块:',
-          {
-            list: [
-              '`WebApplication` + `SoftwareApplication` —— 告诉 Google"这是一个免费的浏览器内应用",带一个价格 0 的 `Offer` 和正确的 `applicationCategory`(Finance / Developer / Health / …)。',
-              '`BreadcrumbList` —— 首页 › 分类 › 工具,既渲染为可见的 `<nav>`,也作为机器可读的 schema。',
-              '`FAQPage` —— 从渲染页面上可见 FAQ 的同一份数据文件里取,所以 schema 和可见内容不可能对不上(divergence 不会发生;只有对不上才会招致人工处罚)。',
-              '`HowTo` —— 标准三步(输入 → 查看 → 复制/导出),带一个 `totalTime` 估算。',
-            ],
-          },
-          '也就是 **169 页 × 4 schema = 676+ 结构化数据块**,全部从一个配置文件生成。加一个工具真的就三步:丢一个 `page.tsx`,在 `tools.ts` 加一条,标 `published: true`。主页、sitemap、面包屑、相关工具、四个 schema 全部自动更新。',
-          '另一半是内链网。每个工具页结尾都有一个按分类计算的**相关工具**网格(同分类优先、置顶工具钉住、用全站热门回填以填满网格)。主页把 169 个工具按分类分组,构建干净的主题簇。净效果:爬虫在 ≤ 3 跳内到达任意工具,链接权重从高流量工具流向长尾。这就是 pSEO 里那无聊的 80% —— 没有 AI 内容,只有一张真实的图。',
-        ],
-      },
-      {
-        heading: '4. AdSense 与性能:零 CLS 占位、亚秒级加载',
-        blocks: [
-          '靠广告变现的工具站上,最大的性能杀手是迟加载广告带来的**累计布局偏移(CLS)**。修复办法笨且绝对:*在广告出现之前就把空间留出来*。',
-          'ToolHub 在每个工具页渲染一个 `AdSlot` 组件,永远占一个固定 `min-height: 250px` 的盒子,不管 AdSense 填没填:',
-          { code: CODE_AD },
-          'AdSense 注入素材时,它渲染在*已经预留好尺寸的盒子*里。页面永远不动。广告带来的 CLS 实际为零。这也正是 AdSense 审核员想看到的样子,而且是直接的 Core Web Vitals 排名信号 —— 所以一个为 UX 做的决定,同时也是个 SEO 决定。',
-          '把这个和第 2 节的静态导出 + SWR 故事结合起来,加载的数学会无聊到恰到好处:',
-          {
-            list: [
-              'HTML 在 CDN 上,几十毫秒内送达。',
-              'JS 按工具分包;交互 chunk 很小。',
-              '回访是即时的(SWR 缓存)。',
-              '广告不挪动布局,所以 CWV 的"良好"区间是稳定的。',
-            ],
-          },
-          '现实结果是:热缓存下亚秒级首次内容绘制,冷缓存下干净的 Lighthouse 通过。我不追 100 分;我追"对人类来说页面显然很快",这个门槛低得多,也是用户唯一真正注意到的门槛。',
-        ],
-      },
-      {
-        heading: '5. 客户端四语言 i18n:零路由拆分、优雅回退',
-        blocks: [
-          '在静态导出站点上做多语言通常是场噩梦:要么把每条路由复制成 `/zh/...`、`/es/...`(这会稀释 canonical SEO 的链接权重,还需要复杂的 `hreflang` 映射),要么依赖沉重的 SSR。',
-          'ToolHub 采用客户端字典方案:',
-          {
-            list: [
-              '**Canonical 英文 URL**:核心 HTML 路由和 SEO schema 保持干净的英文,服务高 RPM 的搜索索引。',
-              '**隔离的字典文件**:169+ 个工具的翻译按语言拆成独立模块(`lib/i18n/tools.{zh,es,de}.ts`),按工具 `slug` 映射,英文作为基准数据放在 `lib/tools.ts`。',
-              '**自动回退与检测**:首次访问时自动检测 `navigator.language`。如果德语或西语缺某个翻译键,会优雅回退到英文,不会崩溃,也不会留下空白文本。',
-            ],
-          },
-          '这样既把 bundle 体积控制在最小,又能给欧洲和亚洲流量带来原生般的体验。',
-        ],
-      },
-      {
-        heading: '6. 微交互与环境极光辉光,稳在 60 FPS',
-        blocks: [
-          '快的工具不必长得像上世纪 90 年代的纯文本文档。为了让 ToolHub 有"活着"的感觉、又不拖垮 Core Web Vitals,我用 Framer Motion(弹簧物理)和 CSS 环境辉光搭了一个轻量动画层:',
-          {
-            list: [
-              '**环境极光辉光(Ambient Aurora Glow)**:纯 CSS 的背景网格辉光,用 `blur-[100px]` 加 8 秒 keyframe 循环,营造轻微呼吸感的背景,主线程 JS 开销为零。',
-              '**弹簧物理微交互**:自定义圆角胶囊下拉、分类 chip 滑块(`layoutId` 滑动指示器)、卡片悬停效果,严格只跑在 `transform` 和 `opacity` 上,避免布局回流(Reflow)。',
-              '**减弱动效支持**:完整遵守 `@media (prefers-reduced-motion)`,为偏好静态界面的用户禁用重型变换。',
-            ],
-          },
-        ],
-      },
-      {
-        heading: '7. 关键结论与公开指标',
-        blocks: [
-          '如果要把整个项目压缩成几行:',
-          {
-            list: [
-              '**默认走静态。** 95% 的"工具"根本不该是服务端渲染的。`output: \'export\'` 直接删掉一整类延迟和运维问题。',
-              '**Service Worker 是缓存层,不是框架。** 不到 200 行原生 JS 就给了我跨 169 页的离线 + SWR。不用 `workbox`,不做抽象。',
-              '**pSEO 是数据模型,不是内容农场。** 一个配置文件 → 676+ 结构化数据块 + 自动内链网。schema 和可见页共享同一事实源,所以永远不会产生分歧。',
-              '**永远预留广告空间。** 零 CLS 不是打磨任务,而是一个组件级的架构决策,在 UX、CWV、广告审核三处都回报。',
-              '**隐私需要精确边界。** 计算在本地进行,但分享 URL 可能把设置暴露给请求日志和分析服务,因此敏感数值不应放进分享链接。',
-            ],
-          },
-          { heading: '公开指标(截至本文发布时)' },
-          '我信奉用真实数字 build in public,所以这里是诚实的当前状态,而不是庆功:',
-          {
-            list: [
-              '**已上线工具:** 169 个。',
-              '**支持语言:** 4 种(英语、中文、西班牙语、德语)。',
-              '**结构化数据块:** 676+(每工具 4 个)。',
-              '**构建目标:** 完全静态导出;零源站服务器。',
-            ],
-          },
-          '如果你想戳一下工具箱,下面的精选工具是个好起点。如果你也做工具站、想对笔记 —— 尤其是 pSEO 规模化、以及带广告时如何保持 CWV 干净 —— 那正是我想进行的对话。',
-        ],
-      },
-    ],
-  },
+
 
   es: {
-    articleTitle: { en: EN_TITLE, zh: '我是如何打造 ToolHub 的:始终亚秒级的静态 PWA', es: 'Cómo construí ToolHub: una PWA estática que sigue siendo sub-segundo', de: 'Wie ich ToolHub gebaut habe: eine statische PWA, die unter einer Sekunde bleibt' },
-    breadcrumbTitle: { en: EN_CRUMB_TITLE, zh: EN_CRUMB_TITLE, es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
+    articleTitle: { en: EN_TITLE,  es: 'Cómo construí ToolHub: una PWA estática que sigue siendo sub-segundo', de: 'Wie ich ToolHub gebaut habe: eine statische PWA, die unter einer Sekunde bleibt' },
+    breadcrumbTitle: { en: EN_CRUMB_TITLE,  es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
     readMinutes: 9,
     lead: 'Una retrospectiva de la arquitectura original, con un registro actualizado sobre 350 herramientas, datos estructurados, publicidad y privacidad.',
     sections: [
       {
         heading: 'Registro del proyecto — 29 de octubre de 2026',
         blocks: [
-          'El artículo se publicó originalmente con **169 herramientas y 676 bloques de datos estructurados**. Ahora ToolHub tiene **350 herramientas en 15 categorías**, cuatro idiomas y **1.400 bloques JSON-LD de herramientas (350 × 4)**. Las cifras 169/676 se conservan como la instantánea histórica de agosto de 2026, no como el recuento actual.',
+          'El artículo se publicó originalmente con **169 herramientas y 676 bloques de datos estructurados**. Ahora ToolHub tiene **350 herramientas en 15 categorías**, tres idiomas y **1.400 bloques JSON-LD de herramientas (350 × 4)**. Las cifras 169/676 se conservan como la instantánea histórica de agosto de 2026, no como el recuento actual.',
           'La implementación también ha cambiado: los resultados muestran valores finales sin interpolaciones, las valoraciones sintéticas se han eliminado, los anuncios exigen IDs numéricos reales y la privacidad distingue el cálculo local de los valores en URLs compartidas. Reservar espacio publicitario reduce el desplazamiento; no garantiza un CLS cero medido en todos los casos.',
         ],
       },
@@ -551,14 +364,14 @@ export const howIBuiltToolHubArticle: LocalizedArticle = {
         ],
       },
       {
-        heading: '5. i18n en 4 idiomas del lado cliente: cero división de rutas, fallbacks elegantes',
+        heading: '5. i18n en 3 idiomas del lado cliente: cero división de rutas, fallbacks elegantes',
         blocks: [
-          'Soportar varios idiomas en una exportación estática suele ser una pesadilla: o duplicas cada ruta en `/zh/...`, `/es/...` (lo que diluye la equidad de enlaces del SEO canónico y exige mapas `hreflang` complejos), o dependes de un SSR pesado.',
+          'Soportar varios idiomas en una exportación estática suele ser una pesadilla: o duplicas cada ruta en `/es/...`, `/de/...` (lo que diluye la equidad de enlaces del SEO canónico y exige mapas `hreflang` complejos), o dependes de un SSR pesado.',
           'ToolHub opta por un enfoque de diccionario del lado cliente:',
           {
             list: [
               '**URLs canónicas en inglés**: las rutas HTML centrales y el schema SEO se mantienen limpios en inglés para la indexación de búsqueda de alto RPM.',
-              '**Archivos de diccionario aislados**: las traducciones de las 169+ herramientas se dividen en módulos por idioma (`lib/i18n/tools.{zh,es,de}.ts`), mapeados por el `slug` de cada herramienta, con el inglés como datos base en `lib/tools.ts`.',
+              '**Archivos de diccionario aislados**: las traducciones de las 169+ herramientas se dividen en módulos por idioma (`lib/i18n/tools.{es,de}.ts`), mapeados por el `slug` de cada herramienta, con el inglés como datos base en `lib/tools.ts`.',
               '**Detección y fallback automáticos**: la app detecta `navigator.language` en la primera visita. Si falta una clave de traducción en alemán o español, recurre elegantemente al inglés sin romperse ni dejar texto en blanco.',
             ],
           },
@@ -608,15 +421,15 @@ export const howIBuiltToolHubArticle: LocalizedArticle = {
   },
 
   de: {
-    articleTitle: { en: EN_TITLE, zh: '我是如何打造 ToolHub 的:始终亚秒级的静态 PWA', es: 'Cómo construí ToolHub: una PWA estática que sigue siendo sub-segundo', de: 'Wie ich ToolHub gebaut habe: eine statische PWA, die unter einer Sekunde bleibt' },
-    breadcrumbTitle: { en: EN_CRUMB_TITLE, zh: EN_CRUMB_TITLE, es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
+    articleTitle: { en: EN_TITLE,  es: 'Cómo construí ToolHub: una PWA estática que sigue siendo sub-segundo', de: 'Wie ich ToolHub gebaut habe: eine statische PWA, die unter einer Sekunde bleibt' },
+    breadcrumbTitle: { en: EN_CRUMB_TITLE,  es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
     readMinutes: 9,
     lead: 'Ein Rückblick auf die ursprüngliche Architektur, ergänzt um ein aktuelles Projektprotokoll zu 350 Werkzeugen, strukturierten Daten, Werbung und Datenschutz.',
     sections: [
       {
         heading: 'Projektprotokoll — 29. Oktober 2026',
         blocks: [
-          'Der Artikel erschien ursprünglich mit **169 Werkzeugen und 676 strukturierten Datenblöcken**. ToolHub umfasst jetzt **350 Werkzeuge in 15 Kategorien**, vier Sprachen und **1.400 JSON-LD-Blöcke auf Werkzeugebene (350 × 4)**. Die Werte 169/676 bleiben als historischer Stand vom August 2026 erhalten und sind nicht die aktuelle Zahl.',
+          'Der Artikel erschien ursprünglich mit **169 Werkzeugen und 676 strukturierten Datenblöcken**. ToolHub umfasst jetzt **350 Werkzeuge in 15 Kategorien**, drei Sprachen und **1.400 JSON-LD-Blöcke auf Werkzeugebene (350 × 4)**. Die Werte 169/676 bleiben als historischer Stand vom August 2026 erhalten und sind nicht die aktuelle Zahl.',
           'Die Implementierung hat sich ebenfalls weiterentwickelt: Ergebniskarten zeigen Endwerte ohne Zwischenanimation, synthetische Bewertungen wurden entfernt, Werbung verlangt echte numerische IDs, und die Datenschutzerklärung trennt lokale Berechnung von Werten in teilbaren URLs. Reservierter Werbeplatz reduziert Layoutverschiebungen, garantiert aber nicht in jedem Szenario einen gemessenen CLS-Wert von null.',
         ],
       },
@@ -705,14 +518,14 @@ export const howIBuiltToolHubArticle: LocalizedArticle = {
         ],
       },
       {
-        heading: '5. Client-seitiges 4-Sprachen-i18n: kein Route-Splitting, sanfte Fallbacks',
+        heading: '5. Client-seitiges 3-Sprachen-i18n: kein Route-Splitting, sanfte Fallbacks',
         blocks: [
-          'Mehrsprachigkeit auf einem statischen Export ist normalerweise ein Albtraum: Entweder dupliziert man jede Route nach `/zh/...`, `/es/...` (was die kanonische SEO-Link-Equity verwässert und komplexe `hreflang`-Maps erfordert), oder man setzt auf schweres SSR.',
+          'Mehrsprachigkeit auf einem statischen Export ist normalerweise ein Albtraum: Entweder dupliziert man jede Route nach `/es/...`, `/de/...` (was die kanonische SEO-Link-Equity verwässert und komplexe `hreflang`-Maps erfordert), oder man setzt auf schweres SSR.',
           'ToolHub setzt auf einen client-seitigen Wörterbuch-Ansatz:',
           {
             list: [
               '**Kanonische englische URLs**: Die zentralen HTML-Routen und das SEO-Schema bleiben sauber auf Englisch für die Suchindexierung mit hohem RPM.',
-              '**Isolierte Wörterbuch-Dateien**: Übersetzungen für 169+ Werkzeuge sind in Module pro Sprache aufgeteilt (`lib/i18n/tools.{zh,es,de}.ts`), gemappt über den `slug` des Werkzeugs, mit Englisch als Basisdaten in `lib/tools.ts`.',
+              '**Isolierte Wörterbuch-Dateien**: Übersetzungen für 169+ Werkzeuge sind in Module pro Sprache aufgeteilt (`lib/i18n/tools.{es,de}.ts`), gemappt über den `slug` des Werkzeugs, mit Englisch als Basisdaten in `lib/tools.ts`.',
               '**Automatische Erkennung & Fallbacks**: Die App erkennt beim ersten Besuch `navigator.language`. Fehlt ein Übersetzungsschlüssel auf Deutsch oder Spanisch, fällt sie sauber auf Englisch zurück — ohne Absturz und ohne leere Texte.',
             ],
           },

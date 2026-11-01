@@ -218,7 +218,7 @@ export function TokenVisualizerClient() {
       <div>
         <label htmlFor="tv-text" className="mb-2 block text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>{L('inputLabel', 'Your text')}</label>
         <textarea id="tv-text" value={text} onChange={(e) => setText(e.target.value)} rows={4}
-          placeholder="The quick brown fox doesn't jump… 猫も杓子も"
+          placeholder="The quick brown fox doesn't jump…"
           className="w-full rounded-lg border p-4 text-sm outline-none transition focus:ring-2" style={selVars} />
       </div>
 

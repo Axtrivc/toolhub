@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * Date Difference Calculator 长文正文 —— 四语 dispatcher
+ * Date Difference Calculator 长文正文 —— 三语 dispatcher
  *
- * en 分支与改造前渲染输出一致。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支与改造前渲染输出一致。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en (与改造前渲染输出一致) ────────────────────────────
@@ -69,50 +69,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>日期差是如何计算的</h2>
-    <p>
-      计算两个日期之间的时间听起来简单,但要精确计算就必须处理不同的月份长度(28–31 天)、闰年以及基于日历的运算。本计算器分别统计<strong>已满的年、月、日</strong>,并提供天数、周数、小时数和工作日数的总和。
-    </p>
-
-    <h2>为什么要计算日期差?</h2>
-    <ul>
-      <li><strong>项目管理:</strong> 距离截止日期还有多少个工作日?</li>
-      <li><strong>合同与租约:</strong> 协议时长、通知期限</li>
-      <li><strong>孕期:</strong> 按预产期追踪周数</li>
-      <li><strong>年龄与纪念日:</strong> 某事件距今多久</li>
-      <li><strong>财务:</strong> 应计利息周期、贷款期限</li>
-      <li><strong>法律:</strong> 诉讼时效、申报截止日期</li>
-    </ul>
-
-    <h2>工作日与日历日</h2>
-    <p>
-      日历日统计每一天。<strong>工作日</strong>(也称营业日)排除周末,有时还排除节假日。从周五到周一,日历日是 3 天,但工作日只有 1 天。在估算送达时间、项目时间表或任何依赖人工作的安排时,请使用工作日。
-    </p>
-    <p>
-      本计算器排除周六和周日。它<strong>不</strong>扣除公共假日,因为公共假日因国家和地区而异——如果需要精确,请手动扣除。
-    </p>
-
-    <h2>闰年带来的麻烦</h2>
-    <p>
-      一年并不正好是 365 天——大约是 365.2422 天。闰年(每 4 年一次,但不能被 400 整除的世纪年除外)会加入 2 月 29 日,以保持日历与地球公转周期一致。这就是为什么简单地乘以 365 来做日期运算会随时间产生偏差。本计算器使用浏览器的日期处理,会自动考虑闰年。
-    </p>
-
-    <h2>常见的日期运算错误</h2>
-    <ul>
-      <li><strong>「30 天」≠「1 个月」。</strong> 月份有 28–31 天。从 1 月 31 日往后推一个月会落在 2 月 28 日(或 29 日),而不是 3 月 2 日。</li>
-      <li><strong>时区。</strong> 同一时刻在不同的时区可能落在不同的日历日期上。本计算器使用你的本地日期。</li>
-      <li><strong>包含式与不包含式计数。</strong> 「从 1 月 1 日到 1 月 31 日」的差值是 30 天,如果把两个端点都算上则是 31 天。请明确你使用的是哪种约定。</li>
-    </ul>
-
-    <h2>处理时间跨度</h2>
-    <p>
-      在做计划时,用<em>月</em>来思考往往比用天更有用,因为人类的活动(房租、工资、会议)都是按月循环的。本计算器同时提供两种视角:用于法律准确性的精确「年/月/日」分解,以及用于技术计算的总天数。
-    </p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -204,7 +160,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function DateDifferenceCalculatorContent(): ReactNode {
   const { locale } = useApp()

@@ -5,30 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const pressureConverterL10n: ToolL10n = {
-  zh: {
-    ui: {
-      'note': '🎈 用于胎压、气象和工程。1 大气压 = 101325 Pa = 14.7 psi。',
-      'unit.atm': '大气压 (atm)',
-      'unit.bar': '巴 (bar)',
-      'unit.inhg': '英寸汞柱 (inHg)',
-      'unit.kgfcm2': '千克力/平方厘米 (kgf/cm²)',
-      'unit.kpa': '千帕 (kPa)',
-      'unit.mbar': '毫巴 (mbar)',
-      'unit.mpa': '兆帕 (MPa)',
-      'unit.pa': '帕斯卡 (Pa)',
-      'unit.psi': '磅/平方英寸 (psi)',
-      'unit.torr': '托 (mmHg)',
-    },
-    useCases: [
-      '检查汽车轮胎气压(PSI ↔ bar)',
-      '换算血压的毫米汞柱(mmHg)值',
-      '在气象气压单位之间互转(mbar / hPa)',
-      '在工程计算中换算 Pa、bar 与 atm',
-    ],
-    faqs: [
-      { q: '汽车轮胎该打多少 PSI?', a: '查看驾驶员侧门框上的贴纸——大多数车为 30-35 PSI(2-2.4 bar)。轮胎侧壁上标注的数字是最大值,不是推荐胎压。' },
-    ],
-  },
+
   es: {
     ui: {
       'note': '🎈 Usado en presión de neumáticos, meteorología e ingeniería. 1 atm = 101325 Pa = 14,7 psi.',

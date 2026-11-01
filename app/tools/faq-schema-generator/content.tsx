@@ -5,7 +5,7 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * FaqSchemaGenerator 长文正文 —— 四语 dispatcher
+ * FaqSchemaGenerator 长文正文 —— 三语 dispatcher
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -22,19 +22,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>Google 到底要求什么</h2>
-    <p>FAQPage 标记是一个承诺:script 标签里的每个问答,页面上的访客也必须能看到。描述不可见内容的结构化数据会被视为误导,轻则丢富媒体结果,重则触发人工处罚——所以要用页面上已有的 FAQ 生成标记,而不是凭空造一份。</p>
-    <h2>为什么 JSON-LD 优于 microdata</h2>
-    <p>Google 明确偏好 JSON-LD:它装在一个自包含的 script 标签里,CMS 换主题不会像内联 microdata 属性那样被悄悄破坏,还能在服务端或标签管理器注入,完全不碰可见的 HTML。</p>
-    <h2>放哪里、怎么验证</h2>
-    <p>script 放 head 或 body 末尾都行——爬虫读的是整个渲染后的文档。上线前用 Google 的 Rich Results Test 验证;两类经典失败是 JSON 里多出的尾逗号,以及问答文字与页面展示的不一致。</p>
-    <h2>2023 年 8 月之后还能期待什么</h2>
-    <p>Google 现在几乎只给权威政府与健康网站展示 FAQ 富媒体结果,折叠摘要不再稳拿。但标记依然值得:其他搜索引擎和 AI 答题引擎会读它,它能澄清页面结构,而保持其有效几乎零成本。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -64,7 +51,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function FaqSchemaGeneratorContent(): ReactNode {
   const { locale } = useApp()

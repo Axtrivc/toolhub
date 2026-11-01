@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * Intermittent Fasting Calculator 长文正文 —— 四语 dispatcher
+ * Intermittent Fasting Calculator 长文正文 —— 三语 dispatcher
  *
- * en 分支与改造前渲染输出一致。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支与改造前渲染输出一致。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en(与改造前渲染输出一致) ────────────────────────────
@@ -48,30 +48,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>选择你的断食方案</h2>
-    <p>
-      <strong>间歇性断食(IF)</strong>限制的是<em>进食时间</em>而非吃什么。研究最多的四种方案是 <strong>16:8</strong>(断食 16 小时 / 进食 8 小时——最流行)、<strong>18:6</strong>(窗口更紧,燃脂更稳)、<strong>20:4</strong>(「战士饮食」,进阶)和 <strong>14:10</strong>(温和入门,多数人从这里起步)。坚持比激进更重要——能坚持的 14:10,胜过周四就放弃的 20:4。
-    </p>
-
-    <h2>逐小时会发生什么</h2>
-    <p>
-      最后一餐之后,身体按可预测的顺序推进:0-4 小时消化与胰岛素达到峰值,第 8 小时血糖趋于平稳,8-12 小时肝糖原逐渐耗尽,约 12 小时后<strong>燃脂(酮症)</strong>开始显著。16-24 小时之后,<strong>细胞自噬</strong>等细胞清理机制逐步增强——本工具的时间线会把每个预期阶段标在你的时钟上,让你看清一个 16:8 的一天究竟走到了哪一步。
-    </p>
-
-    <h2>进食时机为什么没你想的那么重要——又更重要</h2>
-    <p>
-      对照试验显示,IF 的效果主要来自自发减少热量摄入,而非魔法:更短的窗口只是砍掉了深夜零食。但依从性才是真正的机制——记不住热量的人,往往跟得上时钟。水、黑咖啡和清茶不断食;一杯 50 卡的「只加奶油」拿铁就算破功。
-    </p>
-
-    <h2>哪些人不适合断食</h2>
-    <p>
-      如果你处于孕期或哺乳期、体重过低、糖尿病且在用药、未满 18 岁,或有进食障碍史,跳过正餐并不适合你。运动员可以断食,但应在训练前后保证蛋白质。本排程器只是一般信息,不构成医疗建议——长时间断食前请咨询医生。
-    </p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -123,7 +99,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function IntermittentFastingContent(): ReactNode {
   const { locale } = useApp()

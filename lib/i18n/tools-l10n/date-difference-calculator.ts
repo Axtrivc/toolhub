@@ -5,51 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const dateDifferenceCalculatorL10n: ToolL10n = {
-  zh: {
-    ui: {
-      'barTitle': '时长构成',
-      'segYears': '年',
-      'segMonths': '月',
-      'segWeeks': '周',
-      'segDays': '天',
-      'chipsTitle': '里程碑',
-      'msYear': '年',
-      'msYears': '年',
-      'msDaysAgo': '天前',
-      'msDaysAway': '天后',
-      'businessDays': '工作日',
-      'daysWord': ' 天',
-      'duration': '时长',
-      'emptyState': '选择两个日期,查看它们之间的时长。',
-      'endDate': '结束日期',
-      'errEndBeforeStart': '结束日期早于开始日期。',
-      'errInvalidDate': '请按 YYYY-MM-DD 格式输入两个日期。',
-      'moAbbr': ' 月 ',
-      'monFri': '周一至周五',
-      'note': '📅 适用于项目规划、合同期限、年龄计算和截止日期跟踪。工作日不含周末(周六和周日)。',
-      'startDate': '开始日期',
-      'totalDays': '总天数',
-      'totalHours': '总小时数',
-      'totalMonths': '总月数',
-      'totalWeeks': '总周数',
-      'yrAbbr': ' 年 ',
-    },
-    formula: {
-      formula: 'days = date₂ − date₁',
-      explain: '两个日历日期之间的整天数,每跨过一个午夜计一次。时间和时区设置可能在边缘多算或少算一天。',
-    },
-    useCases: [
-      '统计到截止日期还有多少工作日',
-      '计算合同或租约的持续时长',
-      '按周追踪孕期进展',
-      '推算纪念日距今多久',
-    ],
-    faqs: [
-      { q: '它会算入开始日或结束日吗？', a: '本计算器统计两个日期之间的整天数(结束日期减开始日期),即不包含开始日本身。如果你需要「含端点」计数(两端都算),在结果上加 1 天即可。' },
-      { q: '闰年和时区怎么处理？', a: '使用浏览器内置的日期运算,能正确处理闰年、不同月份长度和夏令时。做跨时区规划时,建议只输入日期而非精确时间,以免出现差一天的结果。' },
-      { q: '一年有多少天？', a: '平年 365 天,闰年 366 天。按 400 年的格里高利周期平均,一年为 365.2425 天。粗略估算用 365 即可;跨越数十年的日期运算由工具自动处理闰年。' },
-    ],
-  },
+
   es: {
     ui: {
       'barTitle': 'Desglose de la duración',

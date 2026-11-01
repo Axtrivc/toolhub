@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * Epoch Converter 长文正文 —— 四语 dispatcher
+ * Epoch Converter 长文正文 —— 三语 dispatcher
  *
- * en 分支与改造前渲染输出一致。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支与改造前渲染输出一致。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en (与改造前渲染输出一致) ────────────────────────────
@@ -24,19 +24,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>什么是 Unix 时间戳?</h2>
-    <p>Unix 时间戳(也叫 epoch time 或 POSIX time)是从 <strong>1970-01-01 00:00:00 UTC</strong>——「Unix 纪元」——起经过的秒数。它是计算机存储时间点的标准方式:不需要时区,也不需要日历规则。</p>
-    <h2>秒还是毫秒</h2>
-    <p>传统 Unix 系统存秒(当前时代为 10 位数)。JavaScript、Java 以及许多 API 则用毫秒(13 位数)。如果换算结果落在 1970 年 1 月,几乎可以肯定你把秒当毫秒粘贴了,或者反过来。</p>
-    <h2>Unix 时间处理闰秒吗?</h2>
-    <p>不处理。每一天都固定按 86,400 秒计算。1970 年以来加入的少量闰秒被无形吸收,因此时间戳目前比天文时间超前约 27 秒。</p>
-    <h2>2038 年问题</h2>
-    <p>用有符号 32 位整数存储时间戳的系统会在 <strong>2038-01-19</strong> 溢出。现代 64 位系统不受影响,所以嵌入式设备才是主要隐患。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -66,7 +53,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function EpochConverterContent(): ReactNode {
   const { locale } = useApp()

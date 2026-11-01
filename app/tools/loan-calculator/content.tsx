@@ -5,10 +5,10 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * Loan Calculator 长文正文 —— 四语 dispatcher
+ * Loan Calculator 长文正文 —— 三语 dispatcher
  *
  * SEO 安全:SSR/预渲染时 locale 恒为 'en' → 渲染 en 分支(与改造前字节一致,
- * Google 索引不变)。zh/es/de 仅在客户端 hydration 后按 locale 切换。
+ * Google 索引不变)。es/de 仅在客户端 hydration 后按 locale 切换。
  * 缺失 locale → 回退 en。
  */
 
@@ -115,84 +115,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>月供是怎么算出来的</h2>
-    <p>
-      大多数分期贷款——房贷、车贷、个人贷款和学生贷款——都用一种叫<strong>等额本息(摊销)</strong>的公式。你每月偿还一个固定金额,同时覆盖已产生的利息和一部分本金。贷款前期,还款大部分是利息;到后期,大部分才是本金。
-    </p>
-    <p>月供的计算公式是:</p>
-    <p>
-      <code>M = P × [r(1+r)<sup>n</sup>] / [(1+r)<sup>n</sup> − 1]</code>
-    </p>
-    <ul>
-      <li><strong>M</strong> = 月供</li>
-      <li><strong>P</strong> = 本金(借款金额)</li>
-      <li><strong>r</strong> = 月利率(年利率 ÷ 12 ÷ 100)</li>
-      <li><strong>n</strong> = 还款总月数</li>
-    </ul>
-
-    <h2>什么影响你的月供?</h2>
-    <p>三个变量决定月供,搞懂它们能帮你省钱:</p>
-    <ul>
-      <li>
-        <strong>贷款金额(本金)。</strong>借得越多,月供越高——但这是线性关系。多借一倍,月供大约也翻一倍。
-      </li>
-      <li>
-        <strong>利率。</strong>利率影响很大,尤其是长期贷款。在 30 年房贷上,哪怕利率只差 1%,整个贷款期也可能相差数万美元。
-      </li>
-      <li>
-        <strong>期限。</strong>期限越长月供越低,但总利息会大幅增加。15 年房贷的月供比 30 年高,但往往能省下六位数的利息。
-      </li>
-    </ul>
-
-    <h2>权衡:月供 vs 总成本</h2>
-    <p>
-      多数借款人忽略的关键点是:<strong>拉长期限让贷款显得更便宜,但总成本要高得多。</strong>以一笔 20,000 美元、利率 7.5% 的贷款为例:
-    </p>
-    <ul>
-      <li><strong>3 年期:</strong>月供约 $622,总利息约 $2,400</li>
-      <li><strong>5 年期:</strong>月供约 $400,总利息约 $4,000</li>
-      <li><strong>7 年期:</strong>月供约 $306,总利息约 $5,770</li>
-    </ul>
-    <p>
-      把期限从 3 年拉到 7 年,月供减半——但利息成本翻了一倍多。永远要看<em>总利息</em>,别只盯着月供数字。
-    </p>
-
-    <h2>常见贷款类型</h2>
-    <ul>
-      <li>
-        <strong>房贷。</strong>买房用的 15–30 年贷款,通常是大多数人最大的一笔债务。以房产本身作抵押。
-      </li>
-      <li>
-        <strong>车贷。</strong>买车的 3–7 年贷款。以车辆作抵押,所以利率比无抵押贷款低。
-      </li>
-      <li>
-        <strong>个人贷款。</strong>1–7 年的无抵押贷款,用途不限。因为没有抵押物,利率更高。
-      </li>
-      <li>
-        <strong>学生贷款。</strong>10–25 年期限,在校期间常有延期还款。联邦贷款和私人贷款的利率差异很大。
-      </li>
-    </ul>
-
-    <h2>如何降低利息成本</h2>
-    <ol>
-      <li>
-        <strong>选较短的期限。</strong>如果你能承担较高的月供,利息能省下一大笔。
-      </li>
-      <li>
-        <strong>提前还款。</strong>哪怕一年多还一次,直接冲本金,也能让房贷少还好几年。先确认你的贷款机构允许提前还款且无违约金。
-      </li>
-      <li>
-        <strong>提升信用分。</strong>信用越好,能拿到的利率越低,长期累积下来能省不少。
-      </li>
-      <li>
-        <strong>利率下降时再融资。</strong>如果市场利率低于你现在的利率,再融资到更低利率的贷款能省几千美元——只是要权衡一下交割费用。
-      </li>
-    </ol>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -397,7 +319,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function LoanCalculatorContent(): ReactNode {
   const { locale } = useApp()

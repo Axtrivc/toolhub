@@ -5,24 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const textToBinaryL10n: ToolL10n = {
-  zh: {
-    ui: {
-      defaultInput: '你好',
-      inputLabel: '文本',
-      outputLabel: '二进制',
-      note: '💾 把文本转成 UTF-8 二进制——每个字符变成一个或多个 8 位字节。',
-      inputTooLarge: '⚠️ 输入过大——支持规模最多 20 万字符。请裁剪输入后再转换。',
-    },
-    useCases: [
-      '计算机科学作业',
-      '理解文本在计算机中的存储方式',
-      '调试底层数据格式',
-      '创作二进制主题的艺术或留言',
-    ],
-    faqs: [
-      { q: '为什么每个字符用 8 位?', a: '8 位(一个字节)可表示 256 个不同的值(0–255),足以覆盖英文文本、常用符号和 ASCII/扩展 ASCII 的控制字符。UTF-8 用 1–4 个字节表示一个字符,以支持完整的 Unicode。' },
-    ],
-  },
+
   es: {
     ui: {
       defaultInput: 'Hola',

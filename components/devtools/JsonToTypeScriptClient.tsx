@@ -67,7 +67,7 @@ function inferType(value: unknown, nameBase: string, interfaces: string[], reg: 
   if (t === 'number') return 'number'
   if (t === 'boolean') return 'boolean'
   if (t === 'object' && value !== null) {
-    // 空对象:直接内联 Record<string, unknown>(FAQ 四语承诺的形态;
+    // 空对象:直接内联 Record<string, unknown>(FAQ 三语承诺的形态;
     // 空 interface 既不能后续加键,也会触发 no-empty-interface)
     const obj = value as Record<string, unknown>
     if (Object.keys(obj).length === 0) return 'Record<string, unknown>'

@@ -34,35 +34,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具?</h2>
-    <p>这个计算器根据宽和高求出矩形的面积、周长和对角线长度。它是日常生活中最实用的计算之一。</p>
-    <div>
-      <h2>公式</h2>
-      <ul>
-        <li><strong>面积</strong> = 宽 × 高</li>
-        <li><strong>周长</strong> = 2 × (宽 + 高)</li>
-        <li><strong>对角线</strong> = √(宽² + 高²)</li>
-      </ul>
-    </div>
-    <div>
-      <h2>日常用途</h2>
-      <ul>
-        <li><strong>地板:</strong>需要买多少瓷砖或地毯</li>
-        <li><strong>油漆:</strong>估算墙面面积来估料</li>
-        <li><strong>屏幕:</strong>电视和显示器的尺寸(按对角线)</li>
-        <li><strong>土地:</strong>地块和房产的尺寸</li>
-        <li><strong>布料:</strong>窗帘、桌布的材料</li>
-      </ul>
-    </div>
-    <div>
-      <h2>平方英尺</h2>
-      <p>在美国,面积常用平方英尺衡量。对于一个 12 × 15 英尺的房间:<code>12 × 15 = 180 sq ft</code>。要换算成平方米,乘以 0.0929(180 sq ft ≈ 16.7 m²)。</p>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -124,7 +95,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function RectangleCalculatorContent(): ReactNode {
   const { locale } = useApp()

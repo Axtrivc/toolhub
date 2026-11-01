@@ -5,36 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const Match401kCalculatorL10n: ToolL10n = {
-  zh: {
-    useCases: ['算出雇主匹配一年到底值多少钱', '确认自缴比例是否拿满了匹配上限', '算出"没拿满的免费钱"还剩多少', '决定要不要把自缴比例提到匹配上限'],
-    faqs: [
-      { q: '"50% up to 6%" 是什么意思?', a: '你每缴 1 美元,雇主跟缴 50 美分,但只对你工资前 6% 的部分生效。年薪 $75,000 的人把自缴比例提到 6%,每年最多能拿 $2,250 匹配;只缴 4% 就只匹配 $1,500。' },
-      { q: '怎么算"留在桌上的免费钱"?', a: '满配匹配减去当前实际匹配就是差额。它一年一年累积——十年不拿满 6%,按上面的例子就是 $7,500 纯粹放弃的雇主款,还不算它后来的增值。' },
-      { q: '2026 年个人缴存上限是多少?', a: '2026 年 50 岁以下员工税前缴存上限是 $24,500(2025 年为 $23,500;50 岁以上另有追加额度)。匹配款是雇主出的,不占你的个人上限,但 IRS 对"员工+雇主"合计另有工资百分比上限。' },
-      { q: '归属进度(vesting)会影响结果吗?', a: '会。本工具算的是雇主"给"的匹配额;如果你未满归属期就离职,部分或全部匹配会被收回。常见的是 3-5 年悬崖式或逐年递增归属,明细看你公司的 plan 文件。' },
-    ],
-    ui: {
-      'chartTitle': '每年进入账户的钱',
-      'chartCenter': '年度合计',
-      'preset.0': '典型:50% up to 6%',
-      'preset.1': '一比一:100% up to 4%',
-      'preset.2': '慷慨:100% up to 5%',
-      'slice.yourContribution': '你的缴存',
-      'slice.employerMatch': '雇主匹配',
-      'slice.unclaimedMatch': '未拿满的匹配',
-      'in.salary': '年薪',
-      'in.contribPct': '你的缴存比例',
-      'in.matchPct': '雇主匹配率',
-      'in.matchLimitPct': '匹配适用的工资上限',
-      'out.yourContribution': '你的年缴存',
-      'out.employerMatch': '年雇主匹配',
-      'out.maxMatch': '满配可拿匹配',
-      'out.unclaimedMatch': '留在桌上的免费钱',
-      'outSub.unclaimedMatch': '提高自缴比例即可拿到',
-      'note': '💰 匹配公式五花八门:美元对美元(100% up to X%)最慷慨,50% up to 6% 最常见。缴到上限即止——多缴的部分照常免税增值,但不再有匹配。先拿满匹配,再谈其他理财。适用 IRS 2026 限额:个人缴存上限 $24,500/年,匹配按不超过 $360,000 的年薪酬计算。',
-      'errInvalid': '请输入有效的年薪与非负比例(匹配率 ≤ 100%)',
-    },
-  },
+
   es: {
     useCases: ['calcular cuánto vale al año el matching de tu empleador', 'comprobar si tu aporte alcanza el tope del matching', 'saber cuánto «dinero gratis» dejas sobre la mesa', 'decir si conviene subir tu porcentaje de aporte'],
     faqs: [

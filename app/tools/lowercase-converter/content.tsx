@@ -33,31 +33,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具?</h2>
-    <p>
-      本工具可将任意文本转换为<strong>小写</strong> —— 每个大写字母都会变成小写,其余内容保持不变。快速、免费、私密。
-    </p>
-    <div>
-      <h2>何时使用小写</h2>
-      <ul>
-        <li><strong>电子邮件地址</strong> —— 实践中通常按不区分大小写处理,但使用小写可避免混淆</li>
-        <li><strong>URL 和 slug</strong> —— 惯例是使用小写,以避免重复内容问题</li>
-        <li><strong>编程变量</strong> —— 大多数语言使用 camelCase 或 snake_case</li>
-        <li><strong>话题标签</strong> —— #lowercase 更清晰易读,并能避免无障碍问题</li>
-        <li><strong>日常聊天</strong> —— 很多人非正式地用小写打字</li>
-      </ul>
-    </div>
-    <div>
-      <h2>为什么 URL 应该使用小写</h2>
-      <p>
-        Web 服务器在许多系统(包括 Linux)上会将 <code>/About</code> 和 <code>/about</code> 视为不同的 URL。混用大小写会产生重复内容,从而分散 SEO 排名。所有 URL 和 slug 都应坚持使用小写。
-      </p>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -120,7 +95,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function LowercaseConverterContent(): ReactNode {
   const { locale } = useApp()

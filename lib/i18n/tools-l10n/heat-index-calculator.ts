@@ -5,40 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const HeatIndexCalculatorL10n: ToolL10n = {
-  zh: {
-    useCases: ['出门前看体感温度决定运动强度与补水', '户外作业与训练时对照中暑风险分级', '理解高温天湿度为什么比气温更致命', '对比干热(沙漠)与湿热(热带)的体感差异'],
-    faqs: [
-      { q: '用的是什么公式?', a: 'NWS 的 Rothfusz 回归 HI = −42.379 + 2.04901523T + 10.14333127R − 0.22475541TR − 0.00683783T² − 0.05481717R² + 0.00122874T²R + 0.00085282TR² − 0.00000199T²R²(T 为 °F、R 为 %),含 1984 年低/高湿度修正,80°F 以下回退简式。' },
-      { q: '为什么湿度大感觉更热?', a: '汗液靠蒸发带走热量;高湿度让蒸发停滞,身体失去主要散热通道。湿热指数把这个效应折算成一个体感温度。' },
-      { q: '湿热指数的适用范围是什么?', a: 'NWS 认为约 80°F、40% RH 以上才有意义。低于此公式仍能算,但看温度计就够了——工具在该区间用的是官方回退简式。' },
-      { q: '健康警戒分几级?', a: '80–90°F 注意(长时间暴露可能疲劳),90–103°F 极端注意(可能中暑痉挛),103–125°F 危险(易中暑衰竭),125°F 以上极端危险(热射病迫近)。烈日直晒再加最高 15°F;轻薄衣物、遮阳与补水都能把风险往下压。' },
-    ],
-    ui: {
-      'in.temp': '气温',
-      'in.tUnit': '温度单位',
-      'in.rh': '相对湿度',
-      'opt.tUnit.F': '°F',
-      'opt.tUnit.C': '°C',
-      'out.hi': '湿热指数(体感)',
-      'out.hiAlt': '另一单位',
-      'out.diff': '比温度计高出',
-      'out.risk': '风险等级',
-      'chartTitle': '当前气温下体感随湿度的变化',
-      'line.hi': '湿热指数',
-      'line.air': '实际气温',
-      'preset.0': '中西部热浪:92°F, 70%',
-      'preset.1': '干燥沙漠:105°F, 15%',
-      'preset.2': '热带:88°F, 90%',
-      'preset.3': '欧洲:34°C, 55%',
-      'note': '🔥 NWS Rothfusz 回归,含 1984 低/高湿度修正与 80°F 以下简式回退。烈日直晒最高加 15°F。指数定义域为 T ≥ 80°F 且 RH ≥ 40%;低于此范围温度计读数已接近真实体感。',
-      'errInput': '气温请填数字,湿度 0–100%',
-      'risk.extreme': '极端危险 —— 热射病迫近',
-      'risk.danger': '危险 —— 易发生热痉挛/热衰竭',
-      'risk.extremeCaution': '极端注意 —— 可能中暑',
-      'risk.caution': '注意 —— 长时间暴露可能疲劳',
-      'risk.below': '低于 80°F 的注意阈值',
-    },
-  },
+
   es: {
     useCases: ['mirar la sensación térmica antes de salir para dosificar ejercicio e hidratación', 'comparar con los niveles de riesgo de golpe de calor en trabajo y entrenamiento al aire libre', 'entender por qué la humedad mata más que el termómetro', 'contrastar calor seco (desierto) y húmedo (trópico)'],
     faqs: [

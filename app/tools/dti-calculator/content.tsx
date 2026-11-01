@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * DTI Calculator 长文正文 —— 四语 dispatcher
+ * DTI Calculator 长文正文 —— 三语 dispatcher
  *
- * en 分支等价于原 ToolContent 渲染输出。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支等价于原 ToolContent 渲染输出。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en(与改造前渲染输出一致) ────────────────────────────
@@ -42,37 +42,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具?</h2>
-    <p><strong>DTI</strong>(负债收入比)将你的月度偿债支出与税前收入进行对比。贷款机构在审批房贷、车贷和信用卡时,会把它作为关键指标。</p>
-
-    <div>
-      <h2>贷款机构的 DTI 阈值</h2>
-      <ul>
-        <li><strong>低于 36%:</strong> 健康——大多数贷款类型都很容易获批</li>
-        <li><strong>36-43%:</strong> 偏紧——许多贷款机构对房贷上限设为 43%</li>
-        <li><strong>高于 43%:</strong> 偏高——大多数贷款机构会拒批,建议先偿还部分债务</li>
-      </ul>
-    </div>
-
-    <div>
-      <h2>28/36 法则</h2>
-      <p>经典经验法则:房贷支出应不超过税前收入的 28%;总债务(含房贷)不超过 36%。许多常规房贷在信用良好的情况下,后端比例可放宽至 43-50%。</p>
-    </div>
-
-    <div>
-      <h2>哪些算作债务</h2>
-      <ul>
-        <li>房贷或房租(新贷款按拟议住房支出计算)</li>
-        <li>信用卡最低还款额</li>
-        <li>车贷、学贷和个人贷款</li>
-        <li>子女抚养费、赡养费</li>
-      </ul>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -138,7 +107,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function DTICalculatorContent(): ReactNode {
   const { locale } = useApp()

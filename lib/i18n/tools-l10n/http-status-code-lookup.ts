@@ -5,26 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const HttpStatusCodeLookupL10n: ToolL10n = {
-  zh: {
-    useCases: ['看日志时快速查某个状态码的含义', '调试 API 返回的 4xx/5xx', '区分 401/403、302/307 这类易混码', '给团队写事故报告时引用准确的排查建议'],
-    faqs: [
-      { q: '这里收录了全部状态码吗?', a: '覆盖 IANA 官方注册表的全部 62 个码(1xx-5xx,含 207/208/226)。云端厂商的私有扩展(如 Cloudflare 的 52x、某些 API 的 599)不在其中——它们不是标准,行为因厂商而异。' },
-      { q: '401 和 403 到底差在哪?', a: '401 是"你是谁?"——没有凭证或凭证无效,重新登录/刷新 token 通常能解决;403 是"认识你,但不行"——是授权问题,改凭证没用,得改权限。' },
-      { q: '301/302/307/308 怎么选?', a: '两个维度:是否永久、是否保留请求方法。301/302 是老码,浏览器历史上会把 POST 改成 GET;307/308 保证方法与请求体原样传递——临时重定向 POST 用 307,永久用 308。' },
-      { q: '哪些码对 SEO 重要?', a: '200 正常、301/308 永久迁移、302 临时、404 不存在、410 有意下线(比 404 更强的信号)、503 维护(配合 Retry-After 告诉爬虫稍后再来,别把临时下线当成永久删除)。' },
-    ],
-    ui: {
-      'searchPlaceholder': '按码(404)或关键词(timeout、redirect)搜索…',
-      'coverageNote': '全部 {n} 个 IANA 注册状态码',
-      'thCode': '码',
-      'thName': '名称',
-      'thClass': '类别',
-      'thCause': '典型原因',
-      'thTip': '排查建议',
-      'noMatch': '没有匹配的状态码',
-      'note': '🧭 经典易混点:401 是"你是谁",403 是"认识你——不行";307/308 保留请求方法而 301/302 可能不保留;502 是上游返回了垃圾,504 是上游根本没应答。表外的码(如 Cloudflare 52x、599)是厂商扩展,不是 IANA 注册标准。',
-    },
-  },
+
   es: {
     useCases: ['consultar rápido un código mientras lees logs', 'depurar un 4xx/5xx devuelto por tu API', 'distinguir pares confusos como 401/403 o 302/307', 'citar el consejo correcto en un informe de incidencias'],
     faqs: [

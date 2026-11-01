@@ -5,7 +5,7 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * RentalPropertyCalculator 长文正文 —— 四语 dispatcher
+ * RentalPropertyCalculator 长文正文 —— 三语 dispatcher
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -22,19 +22,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>同一套房,三种回报率</h2>
-    <p>"这笔买卖划算吗?"同一栋楼能给出三个答案。Cap rate(NOI ÷ 价格)给资产本身打分,完全无视融资——它让你能把加杠杆的双拼和全款房放在同一秤上。Cash-on-cash 用年现金流除以你实际投入的现金,杠杆放大收益的同时也放大它。月现金流是付账单的那个数;另外两个是横向比较用的。</p>
-    <h2>空置不是可选项</h2>
-    <p>每套房都会有时空着:换租客、租期间的维修、租赁市场转软。为空置预算 5-8%、并为税、保险、维修、管理计入诚实的运营支出——这才是"预计现金流"与"实际现金流"的分水岭。老派的 50% 规则假设月租的一半在轮到月供之前就会消失;任何比这更好的数字都应视为需要证据的激进假设。</p>
-    <h2>诚实地使用 1% 规则</h2>
-    <p>月租达到购入价 1% 是高收益率年代的 30 秒筛选法。本示例只有 0.73%——严格说不达标——却仍产生正现金流,因为 cap rate(6.56%)勉强盖过借贷成本(6.8%),且首付比例大。在昂贵的沿海市场这条规则已经失效;在中西部大片地区它仍然筛得飞快。用它排序房源,然后让现金流算式做决定。</p>
-    <h2>什么杀死首年回报</h2>
-    <p>第一年最贵:招租成本、验房没查出来的初始维修、一个总迟交租的租客。有经验的投资人对第一年 cash-on-cash 从保守取数,以第二年及以后"稳定期"来判断买卖。如果一笔交易只有在租金狂涨或永远零资本开支时才成立——那它不是成立,是附带房东义务的投机。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -64,7 +51,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function RentalPropertyCalculatorContent(): ReactNode {
   const { locale } = useApp()

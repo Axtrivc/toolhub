@@ -5,7 +5,7 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * LotteryOddsCalculator 长文正文 —— 四语 dispatcher
+ * LotteryOddsCalculator 长文正文 —— 三语 dispatcher
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -22,19 +22,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>"两亿九千二百万分之一"从哪来</h2>
-    <p>Powerball 要求从 69 个白球中匹配 5 个、再从 26 个红球中匹配 1 个。白球有 C(69,5) = 11,238,513 种开法,红球 26 种,共 292,201,338 张等概率彩票——头奖恰好只有一张。Mega Millions 同理,为 1/302,575,350;EuroMillions 因为要匹配 12 选 2 的幸运星,是 1/139,838,160。</p>
-    <h2>"任意中奖"的数字也只甜一点点</h2>
-    <p>Powerball 宣传"1 in 24.9 中任意奖",计算器把九个奖级概率加总即可复现。但这份额的大头是最底层的 $4 档(只中红球,1 in 38)。能改变人生的那几档,概率仍在几十万到几亿分之一——甜甜圈图大半是灰色,不是没有原因的。</p>
-    <h2>多买几张,感觉和现实差多远</h2>
-    <p>十张彩票把头奖概率放大十倍——约 1/2,920 万。比例上很可观,实际上仍是零;即便计入奖池规模,期望值依然为负,因为头奖要与赢家平分、税务还要先切一刀。为娱乐买一张与买一百张,区别在花费,不在命运。</p>
-    <h2>用自定义奖池算你身边的彩票</h2>
-    <p>多数国家的彩票都是同一个"双鼓"模板——主池选 k 个,再抽副号。切到自定义,输入你那款游戏的奖池(经典的 Lotto 6/49 + 27 选 1 特别号,主组合 13,983,816 × 27),超几何公式会处理剩下的一切。统计学家做"不放回抽样"用的正是同一个公式。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -64,7 +51,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function LotteryOddsCalculatorContent(): ReactNode {
   const { locale } = useApp()

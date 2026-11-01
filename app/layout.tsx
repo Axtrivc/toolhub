@@ -87,7 +87,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           </main>
           <Footer nav={footerNav} totalCount={footerTotalCount} />
           {/* Cookie 同意横幅 - 合规(AdSense/GDPR/CCPA),延迟挂载不影响首屏。
-              必须在 AppProviders 内:它消费 useApp() 读取 locale 做 4 语本地化。 */}
+              必须在 AppProviders 内:它消费 useApp() 读取 locale 做 3 语本地化。 */}
           <CookieConsent />
         </AppProviders>
         {/* GA4 SPA 客户端路由的 page_view 补发(CF beacon 自带,无需它管) */}

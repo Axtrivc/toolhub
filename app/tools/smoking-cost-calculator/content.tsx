@@ -5,7 +5,7 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * SmokingCostCalculator 长文正文 —— 四语 dispatcher
+ * SmokingCostCalculator 长文正文 —— 三语 dispatcher
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -22,19 +22,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>一天一包,就是一份车贷</h2>
-    <p>每天 20 支、每包 $12,一周 $84、一年 $4,380——一份体面的车贷,或大半份缴满的 Roth IRA。轻度烟民一年也在不知不觉里交出四位数,却从未收到过一张账单。</p>
-    <h2>投资的反事实</h2>
-    <p>没被烧掉的钱会复利。把每年这 $4,380 转投年化 7% 的指数基金,十年缴费期大约长成 $60,500——这还是假设烟价从此不涨,而烟草税让这种假设几乎不可能成立。</p>
-    <h2>价格只有一个方向</h2>
-    <p>密苏里一包 $6-7,纽约 $12-15,税收常常超过标价的一半。每次州消费税上调,都在悄悄给你的「习惯订阅」涨价——连个续费通知都不发。</p>
-    <h2>这个计算器算不出的部分</h2>
-    <p>医保的吸烟附加费(医疗市场计划最高加价 50%)、更高的寿险保费和损失的工作时间,都远超现金支出。把这里的美元数字当真实成本的下限,别当上限。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -64,7 +51,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function SmokingCostCalculatorContent(): ReactNode {
   const { locale } = useApp()

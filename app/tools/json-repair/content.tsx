@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * JsonRepair 长文正文 —— 四语 dispatcher
+ * JsonRepair 长文正文 —— 三语 dispatcher
  *
- * en 分支与改造前渲染输出一致。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支与改造前渲染输出一致。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en (与改造前渲染输出一致) ────────────────────────────
@@ -24,19 +24,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>LLM 为什么会输出坏 JSON</h2>
-    <p>模型会在 JSON 外面套 Markdown 围栏、撞上 token 上限时忘写闭合括号,或者顺手指望 Python 习惯(单引号、尾逗号)。每种翻车模式都有确定性的修法——本工具按顺序逐一应用,并记录每一次改动。</p>
-    <h2>哪些内容会被修复</h2>
-    <p>剥离围栏、截去外围正文、智能引号、裸键、单引号字符串、尾逗号、undefined/NaN/Infinity 字面量,以及基于字符串感知括号栈的截断补全。</p>
-    <h2>什么时候拒绝修复</h2>
-    <p>如果负载在所有修复之后仍然解析失败,你会拿到带位置的解析器报错,而不是编造的结果。安静的错误答案比响亮的失败更糟——对数据管道尤其如此。</p>
-    <h2>搭配校验使用</h2>
-    <p>修复完成后请校验数据形状:把输出接到 JSON Diff 与预期示例比对,或用我们的 JSON to Zod 转换器从合格样本生成 Zod schema。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -66,7 +53,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function JsonRepairContent(): ReactNode {
   const { locale } = useApp()

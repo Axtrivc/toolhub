@@ -5,62 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const chmodCalculatorL10n: ToolL10n = {
-  zh: {
-    ui: {
-      'command': '命令',
-      'copyCommand': '复制命令',
-      'copyOctal': '复制八进制',
-      'errInvalidMid': ')或 9 个符号字符(如 ',
-      'errInvalidPrefix': '无效格式——请用 3–4 位八进制(0–7,如 ',
-      'errInvalidSuffix': ')。',
-      'execute': '执行',
-      'executeAria': '执行',
-      'group': '属组',
-      'hintSetgid': '以文件属组身份运行',
-      'hintSetuid': '以文件属主身份运行',
-      'hintSticky': '受限删除',
-      'inputPlaceholder': '644 或 rw-r--r--',
-      'noteAnd': ' 和 ',
-      'noteF1': '🔒 八进制数字依次为属主 / 属组 / 其他,每位是 读取(4)+写入(2)+执行(1) 之和。前导第四位编码特殊位:setuid(4)、setgid(2)、sticky(1)——所以 ',
-      'noteF2': ' 表示 setuid + ',
-      'noteF3': '。在符号形式中它们出现在执行位之上,显示为 ',
-      'noteF4': '。',
-      'octal': '八进制',
-      'others': '其他人',
-      'owner': '属主',
-      'permission': '权限',
-      'read': '读取',
-      'readAria': '读取',
-      'symbolic': '符号',
-      'typeHint': '或输入八进制 / 符号——复选框会自动更新',
-      'write': '写入',
-      'writeAria': '写入',
-    },
-    formula: {
-      formula: 'octal digit = read(4) + write(2) + execute(1)',
-      explain: '三组(属主、属组、其他人)各成一个八进制位,把启用的权限值相加。rwx = 7,rw- = 6,r-x = 5。',
-    },
-    useCases: [
-      'chmod 755 的含义',
-      '八进制与符号权限互转',
-      'Linux 文件权限生成器',
-      '在线 chmod 命令构建器',
-    ],
-    faqs: [
-      {
-        q: 'chmod 777 是什么意思,安全吗?',
-        a: '777 给所有人(属主、属组、其他人)读、写、执行权限。测试时很方便,但在服务器上不安全,因为任何用户都能修改或运行该文件。目录和可执行脚本建议用 755,普通文件用 644。',
-      },
-      {
-        q: 'rwx 字母和八进制数字怎么对应?',
-        a: '每个权限位有一个数值:读 = 4,写 = 2,执行 = 1。按组把它们相加。所以 rwx = 7(4+2+1),r-x = 5(4+0+1),rw- = 6(4+2+0)。因此 755 就表示 rwxr-xr-x。',
-      },
-      {
-        q: '755 和 644 有什么区别?',
-        a: '755(rwxr-xr-x)让属主可读、写、执行,其他人只能读和执行——适合目录和脚本。644(rw-r--r--)让属主可读、写,其他人只能读——是 HTML、图片等静态文件的安全默认值。',
-      },
-    ],
-  },
+
   es: {
     ui: {
       'command': 'Comando',

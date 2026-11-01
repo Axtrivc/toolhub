@@ -29,30 +29,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具?</h2>
-    <p><strong>科学计数法</strong>把极大或极小的数表示为尾数乘以 10 的幂——例如阿伏伽德罗常数为 6.022 × 10²³,电子电荷为 1.6 × 10⁻¹⁹。本工具可在科学计数法、E 计数法和工程计数法之间转换。</p>
-    <div>
-      <h2>三种计数法</h2>
-      <ul>
-        <li><strong>科学计数法:</strong> a × 10ⁿ(尾数在 1 到 10 之间)</li>
-        <li><strong>E 计数法:</strong> ae±n(编程风格:6.022e23)</li>
-        <li><strong>工程计数法:</strong> 指数为 3 的倍数(对应 SI 词头:kilo、mega、giga)</li>
-      </ul>
-    </div>
-    <div>
-      <h2>何时会用到</h2>
-      <ul>
-        <li>物理和化学作业</li>
-        <li>处理极大或极小数字的编程</li>
-        <li>阅读科学论文</li>
-        <li>工程与电子学</li>
-      </ul>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -104,7 +80,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function ScientificNotationConverterContent(): ReactNode {
   const { locale } = useApp()

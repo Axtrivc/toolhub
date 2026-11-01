@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * SlopeCalculator 长文正文 —— 四语 dispatcher
+ * SlopeCalculator 长文正文 —— 三语 dispatcher
  *
- * en 分支与 SSR 渲染输出一致。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支与 SSR 渲染输出一致。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -24,19 +24,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>"高差比水平距离"的精确化</h2>
-    <p>斜率即 m = (y₂ − y₁)/(x₂ − x₁):两点之间每前进一个水平单位上升多少。斜率 2 表示每横移 1 就爬升 2;−0.5 表示每横移 1 就下降 0.5。求出 m 后,截距由 b = y₁ − m·x₁ 立即可得,整条直线方程 y = mx + b 就齐了。</p>
-    <h2>三种边界情形要读对</h2>
-    <p>两点重合时根本没有直线可谈;横坐标相同意味着竖直线,斜率无定义(分母为零,方程就是 x = c);纵坐标相同意味着水平线,m = 0。教材里在这三种情形上丢的分,往往比计算本身还多。</p>
-    <h2>斜率的两种"翻译":角度与坡度</h2>
-    <p>倾角 θ = arctan(m):m = 1 对应 45°,m = 2 对应 63.43°,m = √3 对应 60°。道路标志用的是坡度——rise/run × 100——所以看似吓人的 8% 坡道其实只有 arctan(0.08) ≈ 4.6°,这也解释了为什么汽车爬得动。</p>
-    <h2>平行线与垂直线</h2>
-    <p>平行线的斜率完全相同;垂直线的斜率乘积为 −1,所以垂线斜率是 −1/m——分数翻个面再变号。特例自动推出:水平线的垂线是竖直线,反之亦然——计算器会明说,而不是悄悄除以零。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -66,7 +53,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function SlopeCalculatorContent(): ReactNode {
   const { locale } = useApp()

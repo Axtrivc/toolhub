@@ -263,7 +263,7 @@ export function describeCron(expr: string, locale: Locale = 'en'): string {
     L('mon9', 'September'), L('mon10', 'October'), L('mon11', 'November'), L('mon12', 'December'),
   ]
   // 自然语名称列表的分隔符:中文用顿号,其余语言维持逗号(数字列表仍用 ', ')
-  const listSep = locale === 'zh' ? '、' : ', '
+  const listSep = ', '
 
   // 秒部分:6/7 字段且秒字段被限定(非 *、非 0)时,前置"第 N 秒"说明
   let secPart = ''

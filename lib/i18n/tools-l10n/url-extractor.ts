@@ -5,37 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const urlExtractorL10n: ToolL10n = {
-  zh: {
-    ui: {
-      defaultInput: '访问 https://example.com 或 http://test.org/page?q=1 了解更多！',
-      'noUrlsFound': '未找到 URL',
-      'clear': '清空',
-      'placeholder': '粘贴包含网址的文本…',
-      'resultPlaceholder': '结果将显示在这里…',
-      'inputLabel': '含网址的文本',
-      'outputLabel': '提取出的网址',
-      'viewLabel': '展示模式',
-      'viewUrls': '完整 URL',
-      'viewDomains': '唯一主域名',
-      'filterAssets': '过滤静态资源(图片/CSS/JS/字体)',
-      'foundN': '{n} 个唯一',
-      'domainsN': '{n} 个唯一域名',
-      'assetsN': '已隐藏 {n} 个静态资源',
-      'note': '🔗 从任意文本中提取所有网址。自动去重、剥离句尾标点;可隐藏图片/CSS/JS/字体等静态资源,也可按唯一主域名聚合展示。',
-    },
-    useCases: [
-      '从文章或邮件中抓取全部链接',
-      '基于内容建立链接清单',
-      '清理凌乱的复制粘贴 URL',
-      '审计文本中的外链',
-    ],
-    faqs: [
-      { q: '为什么抓不到没有 http 的「example.com」?', a: '本工具只抓取以 http:// 或 https:// 开头的 URL。没有协议的裸域名可能被误判成文件名或其他文本。如果想找裸域名,需要更激进的匹配规则。' },
-      { q: '带中文或空格的网址能抓全吗?', a: '匹配在空格等分隔符处截断,URL 中间不能有空格。未编码的裸中文虽不符合 URL 语法,但一般也能完整抓出;分享前建议先做百分号编码(如 %E4%BD%A0%E5%A5%BD),兼容性最好。' },
-      { q: '一次能处理多少文本?', a: '正则提取在浏览器里处理 10 万字符级的文本没问题;几 MB 的文本建议分段粘贴,避免界面卡顿。结果自动去重并按出现顺序排列。' },
-      { q: '提取后能批量验证链接有效性吗?', a: '本工具只做提取,不访问网络。验证需要逐个发请求(链接检查器或爬虫);把去重后的清单直接复制过去即可。' },
-    ],
-  },
+
   es: {
     ui: {
       defaultInput: 'Visita https://example.com o http://test.org/page?q=1 hoy!',

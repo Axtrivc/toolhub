@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * SelfEmploymentTaxCalculator 长文正文 —— 四语 dispatcher
+ * SelfEmploymentTaxCalculator 长文正文 —— 三语 dispatcher
  *
- * en 分支与首帧渲染一致。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支与首帧渲染一致。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -24,19 +24,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>让第一年自由职业者震惊的 15.3%</h2>
-    <p>自营税(SECA)就是把 FICA 的两半都压在一个人身上:社保 12.4%,到工资基数封顶(2025 年 $176,100);医保 2.9%,完全没有上限。雇员和雇主各自承担这同一张账单的 7.65%——而你两半都要自己付。</p>
-    <h2>为什么实际按 92.35% 计税</h2>
-    <p>套税率之前,净营收先按「净利润 × 0.9235」计算——法律允许你先把雇主那半的等价金额扣掉。所以 $80,000 利润对应的 SE 税约 $11,304:有效税率 14.13%,而不是字面的 15.3%。</p>
-    <h2>其中一半还能拿回来</h2>
-    <p>可抵扣的一半是「线上扣除项」:哪怕拿标准扣除,它也能降低 AGI,而且这一半本身不会再计入 SE 税的税基。季度预缴时记住它,不然每个季度都在多缴。</p>
-    <h2>有主业,算法就变了</h2>
-    <p>W-2 工资和自营收入共用同一个社保工资基数。如果主业工资已经盖满 $176,100,副业收入就完全跳过 12.4% 的社保层,只缴 2.9% 的医保部分——这正是「主业六位数、副业小生意」的人实际税负常比想象低得多的原因。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -66,7 +53,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function SelfEmploymentTaxCalculatorContent(): ReactNode {
   const { locale } = useApp()

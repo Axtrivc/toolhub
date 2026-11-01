@@ -5,28 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const EpochConverterL10n: ToolL10n = {
-  zh: {
-    useCases: ['把日志里的时间戳转成可读时间', '排查不同系统的时间戳位数差异', '给 API 调试取当前 Unix 时间', '把日期转成秒/毫秒时间戳'],
-    faqs: [
-      { q: '秒还是毫秒,怎么看出来?', a: '数位数:10 位是秒,13 位是毫秒(JavaScript 生态的惯例)。转换器两种都能自动识别;无法可靠解读的输入(混入非数字字符或超过 14 位)会给出提示,而不是给出错误猜测,不会悄悄算错。' },
-      { q: '能处理 1970 年以前的日期吗?', a: '可以。Unix 时间从 1970-01-01 00:00 UTC 起算,负数时间戳就代表更早的日期。粘贴一个负数,即可得到对应的 ISO 8601 UTC 时间和你的本地时间。' },
-      { q: '为什么会有 13 位时间戳?', a: 'JavaScript 的 Date 对象以毫秒为单位,所以浏览器日志、MongoDB、很多 API 都存 13 位数。Unix 工具和 MySQL 等数据库默认 10 位秒。两种惯例到处都是,这正是需要自动识别的原因。' },
-      { q: '闰秒算在内吗?', a: '不算。Unix 时间把每天都定义为恰好 86,400 秒,完全忽略闰秒。这让时间戳运算保持线性;与真实 UTC 的微小偏差由时间服务器在校时层面处理,不体现在时间戳本身。' },
-    ],
-    ui: {
-      'dateLabel': '或选择日期(本地时区)',
-      'digitHint': '时间戳通常是 10 位(秒)或 13 位(毫秒)。当前输入无法可靠解读,因此不显示结果,而不是给出错误猜测。',
-      'inputs': '输入',
-      'isoOut': 'ISO 8601 (UTC)',
-      'localOut': '你的本地时间',
-      'msOut': '毫秒级',
-      'note': '🕒 Unix 时间从 1970-01-01 UTC 起计秒,忽略闰秒。JavaScript 生态常用毫秒(13 位)。',
-      'secOut': '秒级',
-      'summaryTitle': 'Epoch 转换',
-      'tsLabel': 'Unix 时间戳(秒或毫秒)',
-      'useNow': '用当前时间',
-    },
-  },
+
   es: {
     useCases: ['convertir timestamps de logs a fechas legibles', 'resolver dudas de segundos frente a milisegundos', 'obtener el tiempo Unix actual para depurar APIs', 'convertir una fecha en timestamp de segundos o milisegundos'],
     faqs: [

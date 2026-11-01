@@ -5,38 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const LlmCostCalculatorL10n: ToolL10n = {
-  zh: {
-    useCases: [
-      '功能上线前对比 GPT / Claude / Gemini 的月成本,用真实 prompt 测出的 token 数而不是拍脑袋',
-      '评估提示词缓存的回报:重复率高的系统提示开缓存后输入成本可省 50-90%',
-      '给 AI 功能定售价时算清成本底线:每用户每日 20 次请求 × 平均 2K token 的毛利红线在哪',
-      '做异步批处理决策:非实时任务走 Batch API 输出约减半,延迟换折扣值不值,一算便知',
-    ],
-    faqs: [
-      { q: '月成本是怎么算的?', a: '(每次输入 token × 输入单价 + 每次输出 token × 输出单价)× 每日请求数 × 30.44 天,单价为每百万 token 美元。30.44 是一年的平均月天数,比直接乘 30 更贴近真实账单。' },
-      { q: '为什么输出比输入贵那么多?', a: '输出 token 要逐 token 串行生成,算力无法并行摊薄,定价通常是输入的 3-8 倍。降本的第一杠杆永远是压输出:让模型"只回 JSON"、"给结论别给推理过程",立竿见影。' },
-      { q: '缓存和批量折扣有多大?', a: '提示词缓存(重复的系统提示、少样本示例)命中后输入可省 50-90%;Batch/异步 API 的输出约半价,代价是分钟到小时级的延迟。本工具按未缓存标价计算,请把这两项当作"还可在结果上再减"的空间。' },
-      { q: '价格数据可靠吗?', a: '价格表于 2026-08 对照 tokencost.app 及各厂商价目核对,但 LLM 定价每个季度都在变。用于正式预算前,请以厂商官网当日价目为准重算一遍。' },
-    ],
-    ui: {
-      'cacheLabel': '提示词缓存命中率',
-      'chartTitle': '各模型月成本',
-      'costLabel': '每月',
-      'cheapest': '最便宜',
-      'copySummary': '复制摘要',
-      'inLabel': '每次请求输入 token',
-      'invalid': '所有字段请输入非负数',
-      'note': '💰 价格为未缓存输入的每百万 token 费率(tokencost.app,2026-08 核对)。缓存滑杆按「输入价 × (1 − 命中率) + 缓存价 × 命中率」混合出有效输入单价——Agent 高频场景下系统提示反复命中缓存,这才是贴近真实账单的算法。批量/异步 API 输出约减半。月度按 30.44 天计。',
-      'outLabel': '每次请求输出 token',
-      'rpdLabel': '每日请求数',
-      'thIn': '输入 $/1M',
-      'thModel': '模型',
-      'thOut': '输出 $/1M',
-      'thPerDay': '每日',
-      'thPerMonth': '每月',
-      'thPerReq': '每次请求',
-    },
-  },
+
   es: {
     useCases: [
       'Comparar el coste mensual de GPT / Claude / Gemini antes del lanzamiento, con tokens medidos de prompts reales, no estimados a ojo',

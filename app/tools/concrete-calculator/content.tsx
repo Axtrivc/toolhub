@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * ConcreteCalculator 长文正文 —— 四语 dispatcher
+ * ConcreteCalculator 长文正文 —— 三语 dispatcher
  *
- * en 分支与既有工具页渲染一致。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支与既有工具页渲染一致。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -24,19 +24,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>先算体积,再换袋数</h2>
-    <p>混凝土按立方码下单(每码 27 ft³),零售却按袋卖:80 磅袋出料 0.60 ft³,60 磅袋 0.45 ft³,40 磅袋 0.30 ft³。10×10、4 英寸厚的板是 33.3 ft³——1.23 码,含 10% 余量后折合 62 袋 80 磅装。</p>
-    <h2>81 平方英尺法则</h2>
-    <p>4 英寸厚时,一码恰好铺 81 ft²。用这一个换算就能给任何露台定价:20×20 是 400 ÷ 81 ≈ 5 码。超过一码后,现拌罐车更划算——45 袋速凝水泥是一整天的搅拌量。</p>
-    <h2>柱与台阶</h2>
-    <p>圆形基础按 π × (直径 ÷ 2)² × 高——12 英寸 × 3 英尺的现浇筒是 2.36 ft³,含损耗约 5 袋。台阶按三角棱柱浇筑:每级「踏步进深 × 高 ÷ 2 × 宽」。</p>
-    <h2>宁可多订,不可订少</h2>
-    <p>补送一车或跑第二趟的费用远高于剩料。10% 余量覆盖洒漏与垫层不平;人工开挖的模板尺寸跑偏时,15% 才是诚实的数字。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -66,7 +53,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function ConcreteCalculatorContent(): ReactNode {
   const { locale } = useApp()

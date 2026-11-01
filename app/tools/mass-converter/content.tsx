@@ -29,28 +29,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具?</h2>
-    <p>本工具用于在精确的质量单位之间换算 —— 包括克拉(用于宝石和珠宝)以及格令(用于弹药和历史上的药物剂量)。它与重量不同,重量严格来说是一种力。</p>
-    <p>
-      <strong>注意:</strong>质量与重量共用下方的同一个换算器 —— 每种单位(公制、英制、克拉、格令)都集中在一处。对于日常的体重换算(kg ↔ lb),我们的<a href="/tools/weight-converter/" className="text-brand-600 underline">体重换算器</a>显示的是同一个工具。可自由切换任意单位。
-    </p>
-    <div>
-      <h2>主要换算</h2>
-      <ul>
-        <li>1 克拉 = 200 mg = 0.2 g(钻石和宝石的标准)</li>
-        <li>1 格令 = 64.7989 mg(用于子弹和早期的药房剂量)</li>
-        <li>1 克 = 5 克拉 = 15.4324 格令</li>
-      </ul>
-    </div>
-    <div>
-      <h2>为何有这么多单位</h2>
-      <p>历史上,不同领域基于不同的基准确立了标准。珠宝商使用克拉,弹药复装者使用格令,科学家使用克。本工具将它们统一起来。</p>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -102,7 +80,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function MassConverterContent(): ReactNode {
   const { locale } = useApp()

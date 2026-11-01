@@ -33,32 +33,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具?</h2>
-    <p>
-      这个工具用于估算文本在不同格式下的存储大小——字节(UTF-8)、千字节、Base64,以及字符/单词/行数。适合规划数据库字段和
-      API 限制。
-    </p>
-    <div>
-      <h2>为什么 UTF-8 大小很重要</h2>
-      <p>
-        在 UTF-8 中,不同字符占用的字节数不同:ASCII 字母 = 1 字节,带重音的拉丁字母 = 2 字节,中文/CJK = 3 字节,emoji
-        = 4 字节。1000 个字符的中文文本约为 3000 字节,而不是 1000。
-      </p>
-    </div>
-    <div>
-      <h2>常见用途</h2>
-      <ul>
-        <li>规划数据库 VARCHAR 字段大小</li>
-        <li>检查 API 载荷限制</li>
-        <li>估算存储成本</li>
-        <li>校验文本字段约束</li>
-      </ul>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -118,7 +92,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function TextSizeEstimatorContent(): ReactNode {
   const { locale } = useApp()

@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * MarkdownFenceExtractor 长文正文 —— 四语 dispatcher
+ * MarkdownFenceExtractor 长文正文 —— 三语 dispatcher
  *
- * en 分支与改造前渲染输出一致。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支与改造前渲染输出一致。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en (与改造前渲染输出一致) ────────────────────────────
@@ -24,19 +24,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>为 AI 回答而生</h2>
-    <p>聊天回复里散文与可运行代码混在一起。本提取器把每个三反引号代码块都抽出来,保留语言标签,丢掉其余一切——终结在长回答里滚动选取的时代。</p>
-    <h2>语言筛选芯片</h2>
-    <p>检测到的语言会变成筛选芯片(点「python」只看 Python)。筛选按子串匹配,所以「py」能找到 python;也可以输入任意关键字做自定义匹配。</p>
-    <h2>缩进代码块怎么办?</h2>
-    <p>四空格缩进块(老式 Markdown 写法)被有意跳过——它们在 AI 输出里很罕见,而且经常误伤普通段落。确实需要时,先给该区域套上围栏。</p>
-    <h2>一键全部复制</h2>
-    <p>「全部复制」按钮把筛选后的所有代码块拼接在一起——一次操作就能把完整解答粘进编辑器或 gist。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -66,7 +53,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function MarkdownFenceExtractorContent(): ReactNode {
   const { locale } = useApp()

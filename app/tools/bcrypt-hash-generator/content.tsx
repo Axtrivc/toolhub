@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * Bcrypt Hash Generator 长文正文 —— 四语 dispatcher
+ * Bcrypt Hash Generator 长文正文 —— 三语 dispatcher
  *
- * en 分支等价于原 ToolContent 渲染输出。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支等价于原 ToolContent 渲染输出。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en (与改造前渲染输出一致) ────────────────────────────
@@ -63,36 +63,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具?</h2>
-    <p>
-      本工具把密码转换为 <strong>bcrypt 哈希</strong>(或加盐的 SHA-256/SHA-512 摘要),并可根据现有哈希校验密码——全部 100% 在你的浏览器中完成,不经过任何网络传输。它适合用来查看已存储的哈希到底包含什么、为配置文件或种子测试用户生成哈希,或者在把参数接入后端之前先了解密码哈希参数的行为。
-    </p>
-
-    <div>
-      <h2>bcrypt 的独特之处</h2>
-      <p>
-        bcrypt 是一种<strong>刻意缓慢、可调节</strong>的密码哈希,基于 Blowfish 加密算法构建。每个哈希都内嵌了校验所需的全部信息:版本(<code>$2a$</code>/<code>$2b$</code>)、成本因子和一个 16 字节的随机盐——因此像 <code>$2a$10$N9qo8uLOickgx2ZMRZoMye…</code> 这样的 bcrypt 字符串是完全自描述的。缓慢正是它的特性:窃取了你数据库的攻击者必须为<em>每一次猜测</em>付出同样昂贵的计算代价,从而让强密码的大规模破解变得不切实际。每个哈希的盐都是自动生成的,因此两个密码相同的用户得到的哈希依然不同。
-      </p>
-    </div>
-
-    <div>
-      <h2>如何选择成本因子</h2>
-      <p>
-        成本因子是指数级的:<strong>2^cost 次迭代</strong>,所以每提高一档,你和攻击者的计算量都翻倍。如今 <code>10</code>–<code>12</code> 是常见的最佳区间——在生产硬件上选择能让登录流程保持流畅的最高值,然后每隔一两年随着机器变快再回顾调整。高于 <code>12</code> 的值在浏览器标签页中会明显变慢(本工具会警告你),而这恰恰是你抵御离线破解所希望的阻力。请注意,bcrypt 只读取密码的<strong>前 72 个字节</strong>;超出部分在设计上会被静默忽略。
-      </p>
-    </div>
-
-    <div>
-      <h2>加盐 SHA-256/SHA-512——及其局限</h2>
-      <p>
-        加盐的 SHA-2 摘要(<code>sha256$salt$hash</code>)能阻止彩虹表和相同密码碰撞,但 SHA-2 是为<strong>速度</strong>而生的——一块 GPU 每秒可以测试数十亿个候选,因此它<em>并不</em>适合单独用来存储真实用户密码。这里的 SHA 选项可用于学习、校验和或验证遗留格式;凡是保护真实账户的场景,都应在<strong>服务端</strong>用 <code>argon2id</code> 或 <code>bcrypt</code>(至少是高迭代次数的 PBKDF2)进行哈希,哈希也保存在服务端,并且绝不记录明文密码。本页面绝不传输你输入的内容——但你的生产系统也不应信任客户端哈希。
-      </p>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -202,7 +172,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function BcryptHashGeneratorContent(): ReactNode {
   const { locale } = useApp()

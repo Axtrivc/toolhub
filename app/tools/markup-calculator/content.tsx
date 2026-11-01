@@ -5,10 +5,10 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * Markup Calculator 长文正文 —— 四语 dispatcher
+ * Markup Calculator 长文正文 —— 三语 dispatcher
  *
  * en 分支等价于原 ToolContent 渲染输出(<h2>What Is This Tool?</h2> + intro
- * + 各 section 包在 <div> 中),字节级 SEO 安全。zh/es/de 仅客户端 hydration
+ * + 各 section 包在 <div> 中),字节级 SEO 安全。es/de 仅客户端 hydration
  * 后按 locale 切换。公式 (<code> 标签内) 保持英文/数学符号不变,仅翻译周边文字。
  */
 
@@ -48,38 +48,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具?</h2>
-    <p>
-      这个计算器根据你的成本和加价百分比,算出售价和利润率。对零售商、餐厅以及任何需要给产品定价的生意都必不可少。
-    </p>
-    <div>
-      <h2>加价率与利润率:关键区别</h2>
-      <p>
-        这两个词经常被混淆,但含义截然不同:
-      </p>
-    </div>
-    <div>
-      <h2>各行业的典型加价率</h2>
-      <ul>
-        <li><strong>食品杂货:</strong>加价率 10-15%,利润率约 10%</li>
-        <li><strong>餐厅:</strong>毛利率 60-70%(食材成本约占菜单售价的 30-40%)</li>
-        <li><strong>服装:</strong>加价率 100-300%(翻倍定价 keystone:加价 100% = 利润率 50%)</li>
-        <li><strong>电子产品:</strong>加价率 20-40%,利润率薄</li>
-        <li><strong>珠宝:</strong>加价率 200-400%</li>
-      </ul>
-    </div>
-    <div>
-      <h2>为什么重要</h2>
-      <p>
-        混淆加价率和利润率会导致定价过低。如果你想要 30% 的利润率,成本是 $100,不能直接加 30%——那样得到 $130 的售价,利润率只有
-        23%($30 ÷ $130)。你需要用除法:<code>$100 &divide; (1 &minus; 0.30) = $142.86</code>。
-      </p>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -153,7 +121,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function MarkupCalculatorContent(): ReactNode {
   const { locale } = useApp()

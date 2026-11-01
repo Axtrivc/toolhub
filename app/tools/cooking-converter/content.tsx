@@ -5,10 +5,10 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * Cooking Converter 长文正文 —— 四语 dispatcher
+ * Cooking Converter 长文正文 —— 三语 dispatcher
  *
  * en 分支与改造前渲染输出一致(240 ml 表述已按工具实际的 1 cup = 236.588 ml 口径修正为 ~237)。
- * zh/es/de 仅客户端 hydration 后切换。
+ * es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en (与改造前渲染输出一致) ────────────────────────────
@@ -25,19 +25,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>为什么必须选对食材</h2>
-    <p>一美制杯装任何东西都是约 237 毫升,但重量取决于装的是什么:一杯面粉约 120 g,一杯蜂蜜却有 340 g。不说明食材就把「1 杯」直接换算,正是食谱翻车的常见原因。</p>
-    <h2>舀入、过筛还是勺舀刮平</h2>
-    <p>用量杯直接从袋子里舀面粉,一杯可能重达 140 g 以上;用勺舀入再刮平约为 120 g;过筛后会降到 114 g 附近。本工具采用「勺舀刮平」的平均值,这也是现代烘焙参考书的标准口径。</p>
-    <h2>黄油是例外</h2>
-    <p>块装黄油按重量出售,包装纸上本来就印好了汤匙刻度——直接信它。一美制杯黄油恰好等于 227 g,即两块标准装。</p>
-    <h2>什么时候精度真正重要</h2>
-    <p>烘焙(面包、蛋糕、马卡龙)值得用厨房秤;汤和炖菜则怎么都行。如果面团手感不对,相信手感而不是换算表。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -67,7 +54,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function CookingConverterContent(): ReactNode {
   const { locale } = useApp()

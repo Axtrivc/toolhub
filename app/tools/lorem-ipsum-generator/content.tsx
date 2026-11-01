@@ -42,36 +42,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具?</h2>
-    <p>
-      <strong>Lorem Ipsum</strong> 是设计师和开发者使用的占位文本,用于在真实内容准备好之前填充布局。这个生成器会生成伪拉丁语段落,看起来像自然文本又不会分散注意力。
-    </p>
-    <div>
-      <h2>为什么需要占位文本?</h2>
-      <p>
-        在设计页面时,真实文本会分散审阅者的注意力——他们会去读内容,而不是评判布局。Lorem Ipsum 具有语言的外观(词长、句子节奏),却没有实际含义,因此既能填充空间又不会吸引注意力。
-      </p>
-    </div>
-    <div>
-      <h2>起源</h2>
-      <p>
-        Lorem Ipsum 并非随机生成——它是公元前 1 世纪 Cicero(De finibus bonorum et malorum)一段拉丁语文本的拼凑片段。这种拼凑发生在 16 世纪,当时一位不知名的印刷工人将它用作字体样张。现代版本是在 20 世纪 60 年代随 Letraset 字母贴片流行起来的。
-      </p>
-    </div>
-    <div>
-      <h2>常见用途</h2>
-      <ul>
-        <li>原型图和线框图</li>
-        <li>网站模板和演示</li>
-        <li>最终文案前的印刷排版</li>
-        <li>测试文本在设计稿中的排版效果</li>
-      </ul>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -149,7 +119,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function LoremIpsumGeneratorContent(): ReactNode {
   const { locale } = useApp()

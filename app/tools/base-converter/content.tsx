@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * BaseConverter 长文正文 —— 四语 dispatcher
+ * BaseConverter 长文正文 —— 三语 dispatcher
  *
- * en 分支与改造前渲染输出一致。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支与改造前渲染输出一致。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en (与改造前渲染输出一致) ────────────────────────────
@@ -22,17 +22,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>超过 9 的数位</h2>
-    <p>十进制以上的进制需要额外的数位符号:a=10、b=11……一直到 z=35。因此 36 进制就是 0-9 再接 a-z,这也正是它出现在短链接服务和自动生成 ID 里的原因——在大小写不敏感的前提下足够紧凑。</p>
-    <h2>小数的换算规则不同</h2>
-    <p>十进制的 0.1 在二进制中没有精确表示——二进制小数会无限循环,就像十进制里的 1/3 一样。本转换器最多显示十位小数,用来检查绰绰有余,但不是比特级精确的存储运算。</p>
-    <h2>各进制的用武之地</h2>
-    <p>二进制是一切的底层;八进制仍活在文件权限里;十进制是给人看的;十六进制是程序员的默认选项(颜色、内存、哈希);base32 给数据中心和备份码编号;base36 把 ID 紧凑地打包进 URL。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -58,7 +47,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function BaseConverterContent(): ReactNode {
   const { locale } = useApp()

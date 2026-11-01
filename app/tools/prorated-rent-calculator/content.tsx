@@ -5,7 +5,7 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * ProratedRentCalculator 长文正文 —— 四语 dispatcher
+ * ProratedRentCalculator 长文正文 —— 三语 dispatcher
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -22,19 +22,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>拿钥匙几天,就付几天</h2>
-    <p>11 月 10 日搬进去,首月就不是完整月:你只需为实际占用的 21 天付租。房东在入住时把缺的天数折掉,或者在退租时只收到你交还钥匙前的那些天。美国租约处理这件事靠"按天比例"——把月租除成日租金,再乘以占用天数。</p>
-    <h2>两种口径,一场拉锯</h2>
-    <p>分歧出在日租金怎么算。美国常见口径按当月实际天数除——$1,800 的 11 月日租 $60.00;另一种按年租除以 365——$1,800 × 12 ÷ 365 = $59.18/天——房东偏爱它,因为全年统一。21 天的入住差额不过 $17,但摊到中型公寓组合就是笔钱,所以租约会在按比例条款里写死公式。</p>
-    <h2>二月是最贵的月份</h2>
-    <p>在月口径下,同样的月租在二月换到的日金额更少:$1,800 ÷ 28 = $64.29/天,比 31 天的月份贵 7%。短月末尾入住,每天折抵的金额最大;1 号入住则干脆绕开整个问题。而 365 天口径下这些都无所谓——它被发明出来正是为了这个。</p>
-    <h2>把按比例条款写进纸面</h2>
-    <p>入住折算应当以具体金额和日期区间写进租约或附件——"11 月 10-30 日,21 天,$1,260.00"。口头说"到时候算"的约定在退押金时必然蒸发;而首月折算恰恰是托管楼里账目漂移的高发区。再确认一句:第一天是入住日还是租约起始日——两者不一致的频率比租客以为的高得多。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -64,7 +51,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function ProratedRentCalculatorContent(): ReactNode {
   const { locale } = useApp()

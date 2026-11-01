@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * GraphqlFormatter 长文正文 —— 四语 dispatcher
+ * GraphqlFormatter 长文正文 —— 三语 dispatcher
  *
- * en 分支与改造前渲染输出一致。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支与改造前渲染输出一致。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -24,19 +24,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>GraphQL 为什么要有专用格式化器</h2>
-    <p>JSON 格式化器在这里帮不上忙:GraphQL 是一门带参数、指令、变量、fragment 展开与多行块字符串的语言,只会配对大括号的工具会把它们嚼碎。本工具对文档跑真正的词法分析,字符串里的花括号、井号、逗号都原样往返——美化输出的缩进从 token 流重建,而不是依赖源码里碰巧怎么排的空白。</p>
-    <h2>逗号是装饰,结构不是</h2>
-    <p>一个让新手意外的特性:GraphQL 里的逗号是无意义 token,纯粹的易读糖。格式化器会在人类期待的位置(参数之间、变量定义之间)把逗号规范地放回去;压缩器则可以安全地全部丢掉。但它永远不丢分隔两个相邻 name token 的空白——"query Q" 需要那个空格,"a&#123;b&#125;" 不需要。</p>
-    <h2>对半份文档大声报错</h2>
-    <p>编辑到一半粘贴不完整的查询才是常态而非例外。未闭合的括号、未终结的字符串、意外字符都会连同位置一起报告,而不是产出看起来很自信的垃圾——输入不平冲时格式化器拒绝输出,所以你复制走的东西要么正确,要么被明确拒绝。</p>
-    <h2>查询与 SDL,同一套文法</h2>
-    <p>schema 文件(type、interface、union、enum、input、三引号描述)与操作文档用同一套词法规则,.graphql 的 schema 也能在这里格式化。压缩操作文档仍然有回报:嵌在应用里的查询字符串、持久化查询注册、请求日志——带注释的长查询典型能减 40%。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -66,7 +53,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function GraphqlFormatterContent(): ReactNode {
   const { locale } = useApp()

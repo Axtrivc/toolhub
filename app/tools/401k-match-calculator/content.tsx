@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * Match401kCalculator 长文正文 —— 四语 dispatcher
+ * Match401kCalculator 长文正文 —— 三语 dispatcher
  *
- * en 分支与 SSR 渲染输出一致。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支与 SSR 渲染输出一致。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -24,19 +24,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>读懂匹配公式,别被话术绕进去</h2>
-    <p>"50% up to 6%"的意思是:你每缴 1 美元雇主跟 50 美分,但只对工资的前 6% 生效。年薪 $75,000 拿满匹配一年是 $2,250;只缴 4% 就悄悄缩水到 $1,500。同样一句话,钱差得很远。</p>
-    <h2>每份工资的处理顺序</h2>
-    <p>先把自缴比例提到匹配上限,再去加速还债或开应税账户——没有哪种合法投资能第一天就稳定回报 50-100%。拿满匹配之后,再优先高息债务和应急金;匹配是唯一"保证"的乘数。</p>
-    <h2>缴存上限,以及它管不到的部分</h2>
-    <p>2026 年员工税前缴存上限是 $24,500(2025 年为 $23,500),50 岁以上另有追加额度。雇主匹配是额外给的,不占你的个人上限,但"员工+雇主"合计受另一个工资百分比封顶——年薪接近 $300k 的高收入者要核对总额。</p>
-    <h2>归属进度:能把钱收回来的小字条款</h2>
-    <p>匹配款通常按进度归属——常见五年每年 20%,或三年悬崖式一次归属。悬崖前离职,未归属的匹配会从余额里消失。你自己的缴存从第一天起就永远是你的;本计算器显示的是雇主"放进来"的金额,归属与否另算。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -66,7 +53,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function Match401kCalculatorContent(): ReactNode {
   const { locale } = useApp()

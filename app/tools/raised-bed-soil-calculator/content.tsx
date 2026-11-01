@@ -5,7 +5,7 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * RaisedBedSoilCalculator 长文正文 —— 四语 dispatcher
+ * RaisedBedSoilCalculator 长文正文 —— 三语 dispatcher
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -22,19 +22,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>4×8 英尺的床就是 32 立方英尺,可它从不像你想的那么多</h2>
-    <p>8×4 英尺、填满 12 英寸,正好 32 ft³——约 906 升、1.19 立方码。散装土按码卖、袋装土按升卖,所以计算器两个口径都给。但它永远不像你想象中的那座"土山":袋子按蓬松状态计量,床会安安静静把它们吞掉。</p>
-    <h2>土为什么会变少,该买多少</h2>
-    <p>袋装土计量时是蓬松的,第一季在水分和根系的作用下会沉降 20-30%。想一次填满,就按几何体积买;想第二年春天还保持齐平,就按"沉降后"那栏预备补土。散装配送同样缩水——"5 码"的一车土,压进床里并不是五码。</p>
-    <h2>Mel 混合 vs 表土配方</h2>
-    <p>Mel Bartholomew 的方形园艺混合是堆肥、椰糠(或泥炭)、蛭石各三分之一:无草籽、排水极好,但每立方英尺不便宜。经济替代——约 50% 表土、30% 堆肥、20% 椰糠——成本减半,但持水性不同,雨后会压实。两种配方的分量都按组份列出,方便你直接去土场比价。</p>
-    <h2>深床别为"深度"付全款</h2>
-    <p>根菜类需要 12-18 英寸疏松土层,但大多数香草和叶菜只在顶部 6-8 英寸扎根。先铺纸板,再用树枝、落叶或未处理木料做"胡特尔堆填"垫底——24 英寸的床,真正需要买好土的可能只有一半深度。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -64,7 +51,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function RaisedBedSoilCalculatorContent(): ReactNode {
   const { locale } = useApp()

@@ -5,7 +5,7 @@ import { useApp } from './providers/AppProviders'
 import { t, SUPPORTED_LOCALES, LOCALE_LABELS, type Locale } from '@/lib/i18n'
 
 /**
- * 语言选择器 - 4 语自定义下拉(en / zh / es / de)· 胶囊形态
+ * 语言选择器 - 3 语自定义下拉(en / es / de)· 胶囊形态
  *
  * 为什么不用原生 <select>:原生 <option> 展开列表由操作系统渲染,
  * 无法定制圆角/字体/内边距/阴影,视觉与全站设计令牌脱节。故重写为

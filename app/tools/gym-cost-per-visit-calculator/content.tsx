@@ -5,7 +5,7 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * GymCostPerVisitCalculator 长文正文 —— 四语 dispatcher
+ * GymCostPerVisitCalculator 长文正文 —— 三语 dispatcher
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -22,19 +22,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>健身房为你的决心定价,而不是你的出勤</h2>
-    <p>会员制的商业模式正是建立在"办了卡却很少来"之上——行业调研一再发现,普通会员月均只去 4 次左右,远低于几乎所有的回本线。诚实地算一次,你再看月费的眼神就不一样了。</p>
-    <h2>怎么诚实地计数</h2>
-    <p>用上个月真实的打卡记录,而不是这个月的决心。年卡要多除一步:先 ÷ 12——$480 的年卡折合每月 $40,然后才谈得上比较。再除以次数:$40 ÷ 8 次 = 单次 $5.00。</p>
-    <h2>回本测试</h2>
-    <p>用月成本除以健身房的散客单次价,得到回本月次数:$45 ÷ $15 = 3 次。超过它,每次都在打折;低于它,你就在补贴一月新年决心大军。同一套算法适用于一切"按使用次数"摊销的订阅——联合办公、课程、SaaS 席位。</p>
-    <h2>年卡什么时候真的划算</h2>
-    <p>年卡通常比 12 个月的月付便宜 15-25%,所以一旦习惯已被证明,它在算术上就赢——合理的门槛是连续三个月超过回本线。在那之前,月付就是对照组:在习惯还未被证明时,它锁住你的最大损失。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -64,7 +51,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function GymCostPerVisitCalculatorContent(): ReactNode {
   const { locale } = useApp()

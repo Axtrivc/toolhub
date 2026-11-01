@@ -5,24 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const uppercaseConverterL10n: ToolL10n = {
-  zh: {
-    ui: {
-      defaultInput: 'hello world 你好世界',
-      inputLabel: '你的文本',
-      outputLabel: '大写',
-      placeholder: '输入或粘贴文本…',
-      note: '🔤 把每个字母转为大写。适合标题、表头和强调。',
-    },
-    useCases: [
-      '为标题或设计强调使用大写',
-      '书写首字母缩略词(如 NASA、HTML)',
-      '制作需要高辨识度的警示标签',
-      '格式化产品编号或序列号',
-    ],
-    faqs: [
-      { q: '非英文文本也能用吗?', a: '能。本工具使用 Unicode 感知的转换,所以像 café → CAFÉ 这样带音标的字母,以及希腊字母、西里尔字母等都能正确转换。' },
-    ],
-  },
+
   es: {
     ui: {
       defaultInput: 'hola mundo',

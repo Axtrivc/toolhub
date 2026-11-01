@@ -5,43 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const HeartRateZoneCalculatorL10n: ToolL10n = {
-  zh: {
-    useCases: ['按 Karvonen 法算五大心率区间', '规划 Zone 2 有氧基础训练', '给跑步训练定强度门槛', '用晨起静息心率个性化配速'],
-    faqs: [
-      { q: '为什么用 Karvonen 而不是最大心率百分比?', a: 'Karvonen 法使用心率储备——最大心率减静息心率——再按区间比例加回静息值。两个最大心率相同但静息心率不同的跑者会得到真正不同的训练区间,这是单纯按最大心率百分比算区间做不到的。' },
-      { q: '静息心率怎么量?', a: '早晨醒来、下床之前,完整数 60 秒脉搏,连续两三个早晨取平均。咖啡因、压力和睡眠不足都会抬高数值,所以晨起平均远比单次读数可靠——把这个平均值填进来。' },
-      { q: '220 减年龄准吗?', a: '它是人群平均值;个体最大心率会在其上下约 ±12 bpm 范围散布。一般区间训练用它没问题,但若精确阈值很关键(竞速、心脏康复),实验室测试或有监督的场地测试才能得到你个人的最大心率。' },
-      { q: '训练应该落在哪个区间?', a: '每周跑量的大头应放在 Zone 2(储备的 60-70%)——能正常聊天的有氧基础。Zone 4-5 是少量安排的高强度课。最常见的错误是长期泡在 Zone 3:恢复不过来,又不足以刺激适应。' },
-    ],
-    ui: {
-      'chartTitle': '训练区间阶梯',
-      'line.lower': '区间下限',
-      'line.upper': '区间上限',
-      'in.age': '年龄',
-      'in.max': '估计最大心率',
-      'in.resting': '静息心率',
-      'in.z1': '区间 1 · 恢复',
-      'in.z2': '区间 2 · 有氧基础',
-      'in.z3': '区间 3 · 节奏',
-      'in.z4': '区间 4 · 乳酸阈',
-      'in.z5': '区间 5 · 最大摄氧量',
-      'note': '❤️ Karvonen 区间使用心率储备(最大−静息),比单纯最大心率百分比更个性化。静息心率应在晨起即测。区间 2 打有氧基础——大部分训练时间应在此。',
-      'out.age': '年龄',
-      'out.max': '估计最大心率',
-      'out.resting': '静息心率',
-      'out.z1': '区间 1 · 恢复',
-      'out.z2': '区间 2 · 有氧基础',
-      'out.z3': '区间 3 · 节奏',
-      'out.z4': '区间 4 · 乳酸阈',
-      'out.z5': '区间 5 · 最大摄氧量',
-          'outSub.z1': "心率储备 50-60%",
-      'outSub.z2': "心率储备 60-70%",
-      'outSub.z3': "心率储备 70-80%",
-      'outSub.z4': "心率储备 80-90%",
-          'outSub.z5': "心率储备 90-100%",
-      'errInvalidInput': "请输入有效年龄(10-100)和静息心率(30-120)",
-},
-  },
+
   es: {
     useCases: ['calcular las cinco zonas con el método Karvonen', 'planificar el trabajo de base en Zona 2', 'fijar umbrales de intensidad para correr', 'personalizar el entrenamiento con tu pulso en reposo'],
     faqs: [

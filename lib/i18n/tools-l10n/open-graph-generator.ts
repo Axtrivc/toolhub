@@ -5,53 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const openGraphGeneratorL10n: ToolL10n = {
-  zh: {
-    ui: {
-      'cardLargeOption': 'summary_large_image(大卡片)',
-      'cardSmallOption': 'summary(小卡片)',
-      'copy': '复制',
-      'descCountAria': '描述字符数(建议不超过 200)',
-      'descDefault': '你的描述',
-      'descPlaceholder': '显示在标题下的简短摘要',
-      'descPreviewDefault': '你的描述会显示在这里',
-      'descriptionLabel': '描述',
-      'generatedMetaTags': '生成的 meta 标签',
-      'imageAltLabel': '图片替代文本(可选)',
-      'imageAltPlaceholder': '描述图片内容,供屏幕阅读器使用',
-      'imagePlaceholder': 'https://example.com/image.png(推荐 1200×630)',
-      'imageUrlLabel': '图片 URL',
-      'livePreview': '实时预览',
-      'noImage': '无图片',
-      'noImg': '无图',
-      'noteText': '🔒 100% 在客户端运行——预览在本地模拟。把生成的标签粘贴到你页面的',
-      'ogPreviewAlt': 'OG 预览',
-      'pageUrlLabel': '页面 URL',
-      'siteNameLabel': '站点名(可选)',
-      'siteNamePlaceholder': '我的站点',
-      'titleCountAria': '标题字符数(建议不超过 60)',
-      'titleDefault': '你的标题',
-      'titleLabel': '标题',
-      'titlePlaceholder': '你的页面标题',
-      'titlePreviewDefault': '你的标题会显示在这里',
-      'twitterCardTypeLabel': 'Twitter 卡片类型',
-      'twitterLargePreviewAlt': 'Twitter 大图预览',
-      'twitterPreviewAlt': 'Twitter 预览',
-      'urlPlaceholder': 'https://example.com/page',
-    },
-    useCases: [
-      '生成网页的 Open Graph 标签',
-      '预览链接在社交平台的分享卡片',
-      '同时输出 Twitter Card 标签',
-      '排查已部署却显示错误的链接预览',
-    ],
-    faqs: [
-      { q: 'Open Graph 和 Twitter Cards 有什么区别？', a: 'Open Graph(og:)标签会被 Facebook、LinkedIn、Slack、Discord 和大多数平台读取。Twitter Cards(twitter:)标签是 X/Twitter 专用的,但在缺失时会回退到 Open Graph。两者都生成,能以最少的重复确保所有平台都显示正确的预览。' },
-      { q: '图片应该用多大尺寸？', a: 'og:image 和 twitter:image 使用 1.91:1 比例、1200×630px,控制在 1 MB 以内(多数平台的上限是 5–8 MB)。1080×1080 的方形图在某些平台可用,但 1200×630 是链接预览最稳妥的通用选择。' },
-      { q: '部署后预览为什么还是没更新？', a: '平台会大量缓存分享预览。标签上线后,用 Facebook Sharing Debugger、Twitter Card Validator 或 LinkedIn Post Inspector 强制重新抓取。标签必须放在服务器返回的原始 HTML 中,而不是由 JavaScript 注入,否则不执行脚本的爬虫看不到。' },
-      { q: 'og:title 和 <title> 有什么区别？', a: '两者相互独立:<title> 显示在浏览器标签页和搜索结果里,og:title 只出现在社交分享卡片上。建议各写一版——分享标题可以更口语、带钩子,<title> 则保持关键词在前、60 字符以内。' },
-      { q: '国内平台(微信、知乎)也读这些标签吗？', a: '行为不一:微信内网页分享要通过 WeChat JS-SDK 配置标题、摘要和图;知乎、掘金等社区抓取页面标题与首图。og: 标签是国际平台的事实标准,国内平台仍需按各自文档单独适配。' },
-    ],
-  },
+
   es: {
     ui: {
       'cardLargeOption': 'summary_large_image (tarjeta grande)',

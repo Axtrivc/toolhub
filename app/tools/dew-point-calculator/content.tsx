@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * DewPointCalculator 长文正文 —— 四语 dispatcher
+ * DewPointCalculator 长文正文 —— 三语 dispatcher
  *
- * en 分支与 SSR 渲染输出一致。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支与 SSR 渲染输出一致。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -24,19 +24,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>露点与相对湿度的本质区别</h2>
-    <p>相对湿度是一个随气温摇摆的比值:同一团空气清晨读 90%、午后读 45%,水分却一点没变。露点是这团空气达到饱和时的温度——它直接代理了空气里实际装了多少水。气象学家、暖通工程师和长跑运动员开口只谈露点,正是因为太阳出来它也不会动。</p>
-    <h2>舒适度标尺</h2>
-    <p>通行的分级:露点低于 10°C 干燥,10-16°C 是多数建筑瞄准的舒适区间,16-18°C 开始明显潮湿,超过 18°C 多数人觉得黏腻,过了 21°C 就是真正的闷热——汗液蒸发效率崩塌,运动开始有风险。同样 25°C 气温,露点 12°C 是惬意,露点 21°C 是煎熬;只看温度计分辨不出这两者。</p>
-    <h2>Magnus-Tetens 与它的精度</h2>
-    <p>计算器先解 γ = ln(RH/100) + 17.27T/(237.7 + T),再算 Td = 237.7γ/(17.27 − γ)。这个 Magnus-Tetens 形式在 RH 高于 50% 时精度约 ±0.35°C,极干燥空气里略降。绝对湿度(g/m³)由 Magnus 饱和汽压导出——问题落在"字面含水量"上(干燥、仓储、乐器保养)时用它。</p>
-    <h2>结露:从冷饮到墙壁</h2>
-    <p>任何低于露点的表面都会挂水:25°C、60% 湿度(露点 16.7°C)的空气里,一罐 4°C 的饮料立刻出汗。同样的物理在冬天打湿地下室墙壁和窗玻璃内侧——解法要么提高表面温度,要么压低室内露点(除湿),只往冷侧加保温层是没用的。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -66,7 +53,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function DewPointCalculatorContent(): ReactNode {
   const { locale } = useApp()

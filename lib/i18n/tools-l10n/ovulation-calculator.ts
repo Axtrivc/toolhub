@@ -5,41 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const OvulationCalculatorL10n: ToolL10n = {
-  zh: {
-    useCases: ['按末次月经与周期长度推算排卵日', '圈出受孕概率最高的 6 天易孕窗口', '预测下次月经日期', '备孕安排同房时机'],
-    faqs: [
-      { q: '计算器怎么找到我的排卵日?', a: '排卵发生在下一次月经前固定的 14 天(黄体期),而不是上次月经后固定的天数。工具把周期长度加到末次月经首日,再往回数黄体期天数——这就是为什么周期长度比什么都关键。' },
-      { q: '易孕窗口里每天受孕概率一样吗?', a: '不一样:窗口是排卵前 5 天加排卵当天。精子最多能存活 5 天,卵子排出后只有约 24 小时寿命;实际上排卵前 1-2 天同房的受孕概率最高。' },
-      { q: '月经不规律还算得准吗?', a: '只能粗略参考。周期在 26-40 天之间波动时,排卵日可能相差两周;本工具接受 21-45 天输入,但请把结果当窗口而非精确日期。排卵试纸或基础体温能确认实际排卵日。' },
-      { q: '能用它来避孕吗?', a: '不能。日历推算本身不是可靠的避孕方式——精子存活时间和周期波动都会让真实窗口更宽。它是备孕规划助手;要避孕请使用经过验证的方法。' },
-    ],
-    ui: {
-      'in.lmp': '末次月经首日(YYYY-MM-DD)',
-      'in.cycle': '月经周期长度',
-      'inSuffix.cycle': '天',
-      'in.luteal': '黄体期长度',
-      'inSuffix.luteal': '天',
-      'out.ovulation': '预计排卵日',
-      'out.fertileStart': '易孕窗口开始',
-      'out.fertileEnd': '易孕窗口结束',
-      'out.nextPeriod': '预计下次月经',
-      'out.nextPeriodIn': '下次月经倒计时',
-      'out.status': '当前状态',
-      'outSub.status': '以今天为准',
-      'outSub.nextPeriodIn': '以今天为准',
-      'chartTitle': '周期里的易孕天数',
-      'slice.fertileDays': '易孕窗口(6 天)',
-      'slice.otherDays': '周期其余天数',
-      'errInvalid': '请输入合法日期(YYYY-MM-DD)、周期 21-45 天、黄体期 9-16 天',
-      'errTooOld': '末次月经在 60 个周期之前——请检查日期(年份是否输错)',
-      'statusFertile': '易孕窗口正在进行中',
-      'statusToday': '今天就是排卵日',
-      'statusIn': '下次排卵还有 {n} 天',
-      'periodToday': '预计就是今天',
-      'periodIn': '还有 {n} 天',
-      'note': '📅 排卵日 = 下次月经 − 14 天(黄体期)。精子最多存活 5 天、卵子约 24 小时,所以易孕窗口是排卵前 5 天加排卵当天,共 6 天。支持 21-45 天周期。',
-    },
-  },
+
   es: {
     useCases: ['calcular el día de ovulación desde tu última regla', 'marcar la ventana fértil de 6 días con mayores probabilidades', 'predecir la fecha de la próxima regla', 'planificar las relaciones si buscas embarazo'],
     faqs: [

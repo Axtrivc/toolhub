@@ -5,54 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const pngToWebpConverterL10n: ToolL10n = {
-  zh: {
-    ui: {
-      'alreadyCompressedPrefix': '此图片已压缩得很好——',
-      'alreadyCompressedSuffix': '质量的 WebP 比原图更大。试着调低质量。',
-      'bestQuality': '最佳质量',
-      'change': '更换',
-      'downloadWebp': '下载 WebP',
-      'errConversionFailed': '在画布上转换失败。',
-      'errDecodeImage': '无法解码图片文件。',
-      'errFileTooLarge': '文件太大——最大支持 20 MB 的图片。',
-      'errImageTooLarge': '图片过大,无法转换——单边不超过 8192 px 且总像素低于 4000 万。',
-      'errReadFile': '无法读取文件。',
-      'errUnsupportedWebp': '你的浏览器无法编码 WebP(画布回退为 PNG)。任何版本的 Safari 都无法编码 WebP——请使用 Chrome、Edge 或 Firefox 来转换。',
-      'errUploadPngJpg': '请上传 PNG 或 JPG 图片文件。',
-      'noteText': '🔒 100% 在客户端——编码在浏览器内的画布上通过',
-      'noteTextSuffix': ' 完成。你的图片绝不离开你的设备。',
-      'originalLabel': '原图',
-      'reading': '读取中…',
-      'savings': '节省',
-      'smallestFile': '最小文件',
-      'uploadHint': 'PNG 或 JPG 图片',
-      'uploadPrompt': '点击上传或拖放',
-      'uploadedSourceAlt': '已上传的原图',
-      'webpLabel': 'WebP',
-      'webpPreviewAlt': 'WebP 输出预览',
-      'webpQualityLabel': 'WebP 质量 —',
-    },
-    useCases: [
-      '带质量滑块的 PNG 转 WebP',
-      '在线将 PNG 压缩为 WebP',
-      '免上传把图片转为 WebP',
-      '用 WebP 减小图片体积',
-    ],
-    faqs: [
-      {
-        q: 'WebP 比 PNG 能小多少?',
-        a: '在视觉上几乎看不出差别的情况下,通常能小 25–35%,照片往往省得更多。PNG 是无损格式,存照片效率低,所以把照片类 PNG 转成 WebP 通常收益最大。',
-      },
-      {
-        q: 'WebP 支持透明吗?',
-        a: '支持。WebP 有和 PNG 一样的无损 alpha 透明,所以抠图、Logo、图标都能保留透明背景,同时进一步缩小文件。为保持锐利边缘,把质量调高即可。',
-      },
-      {
-        q: '质量应该设多少?',
-        a: '照片用 75–85,与原图视觉上几乎无差别且小很多。纯色或文字较多的图形,请把质量推到 90 以上(或用无损),以避免色带和模糊边缘。',
-      },
-    ],
-  },
+
   es: {
     ui: {
       'alreadyCompressedPrefix': 'Esta imagen ya está bien comprimida — WebP a',

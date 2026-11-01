@@ -11,67 +11,8 @@ import type { ToolL10n } from '../tool-l10n'
 const FORMULA = 'FV = C × ((1+r)ⁿ − 1)/r · Roth net = FV × (1 − t_now) · Trad net = FV × (1 − t_retire)'
 
 export const rothIraCalculatorL10n: ToolL10n = {
-  // ──────────────────────────── 中文 ────────────────────────────
-  zh: {
-    ui: {
-      'in.age': '当前年龄',
-      'in.retireAge': '预期退休年龄',
-      'in.contribution': '每年存入金额',
-      'in.currentTax': '当前边际税率',
-      'in.retireTax': '退休时的预期税率',
-      'in.returnRate': '预期年化投资回报率',
-      'out.verdict': '分析建议',
-      'out.rothNet': 'Roth IRA 税后到手价值',
-      'out.tradNet': 'Traditional IRA 税后价值',
-      'out.rothBalance': 'Roth 账户期末总额',
-      'outSub.rothBalance': '退休提取 100% 免税',
-      'out.tradBalance': 'Traditional 账户期末总额',
-      'outSub.tradBalance': '退休提取时全额纳税',
-      'out.taxOwed': '退休提取时应缴税款 (Trad.)',
-      'preset.0': '年轻职场人 (税率 24% → 12%)',
-      'preset.1': '收入巅峰期 (税率 32% → 22%)',
-      'preset.2': '税率持平 (税率 22% → 22%)',
-      'errInvalid': '请在所有字段中输入有效数字',
-      'errAge': '退休年龄必须大于当前年龄',
-      'errRange': '供款或税率超出合理范围，请检查输入',
-      'tie': '税率持平——根据取款灵活性 (Roth) 或即期减税需求 (Trad.) 进行选择',
-      'rothWins': 'Roth IRA 预计让你税后多拿',
-      'tradWins': 'Traditional IRA 预计让你税后多拿',
-      'more': '',
-      'chartTitle': 'Roth 与 Traditional 资产增长对比',
-      'line.trad': 'Traditional 余额（税前）',
-      'line.roth': 'Roth 余额（税后投入）',
-      'note': '💡 2026 年 IRA 限额为 7,500 美元（50 岁及以上为 8,600 美元）。Roth 与 Traditional 的本质区别仅在于纳税时间点：相同投资额、相同复合增长——胜负取决于你今天的税率与退休时的税率对比。',
-    },
-    useCases: [
-      '同样每年 7000 美元、7% 回报、存 30 年:两账户税前都约 66 万美元,输入 22% 与 32% 两档税率,税后差约 6.6 万美元',
-      '职业早期税率 12%-22% 时优先 Roth,进入 24%-32% 收入峰值期改用 Traditional,逐年比出切换点',
-      '50 岁以上追加供款场景:限额升到 8600 美元,每年多出的 1100 美元按 7% 年金复利 15 年累计约 2.8 万美元',
-      '压力测试「退休税率更高」的直觉:把 t_now 与 t_retire 对调各跑一遍,胜负和差距一目了然',
-    ],
-    faqs: [
-      {
-        q: 'Roth IRA 什么时候比 Traditional 更划算?',
-        a: '当现在的边际税率低于你预期的退休税率时,Roth 赢:职业生涯早期、低收入年份,或预判税率上行时。Traditional 在收入峰值年更优——现在按 24%-32% 抵扣,退休后按 10%-12% 提取。',
-      },
-      {
-        q: '每年能存多少?',
-        a: '2026 年上限 7500 美元,50 岁及以上另有 1100 美元追加(合计 8600)。该限额在 Roth 与 Traditional 之间共享,同时开两个不会翻倍;雇主 401(k) 的限额另算且高得多。',
-      },
-      {
-        q: '计算器考虑收入上限(phase-out)吗?',
-        a: '没有——它把两份相同投入分别复利,只隔离「何时缴税」这一个变量。2026 年 Roth 供款在单人约 15.3 万美元、夫妻合报约 24.2 万美元以上逐步取消;有雇主计划时 Traditional 的抵扣也有收入线。具体查 IRS 590-A 号刊物。',
-      },
-      {
-        q: '和国内个人养老金是什么关系?',
-        a: '国内个人养老金账户是缴费时抵税、领取时按 3% 单独计税,逻辑接近 Traditional;Roth 则是税后钱进去、领取免税。若预期未来税率高于当下,Roth 式的「先缴税」更优——这正是本工具让两个税率对打的意义。',
-      },
-    ],
-    formula: {
-      formula: FORMULA,
-      explain: '同样的年缴 C 以回报率 r 复利 n 年(年金终值)。Roth 先缴税:账户更小,领取免税;Traditional 现在抵税:账户更大,领取时按退休税率 t_retire 计税。税后胜负只取决于 t_now 与 t_retire 谁更高。',
-    },
-  },
+
+
 
   // ──────────────────────────── Español ────────────────────────────
   es: {

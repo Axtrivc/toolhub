@@ -37,71 +37,6 @@ export interface ToolInfoTemplate {
   whyBullets: Array<{ label: string; body: string }>
 }
 
-const zh: ToolInfoTemplate = {
-  aboutTitle: '关于 {name}',
-  howToTitle: '如何使用这个工具',
-  whyTitleByType: {
-    calculator: '为什么要用在线计算器?',
-    converter: '为什么要用在线换算器?',
-    generator: '为什么要用在线生成器?',
-    tool: '为什么要用在线工具?',
-  },
-  commonUsesLabel: '常见用途:',
-  commonUsesLead: '需要时,大家会用它来',
-  intros: {
-    calculator: [
-      '{name} 可以让你瞬间算出结果,无需打开电子表格或手动计算。无论你是在比较方案、核对数字,还是做作业,工具都会在后台套用正确的公式,你一输入数字就立刻显示结果。',
-      '和静态的图表或表格不同,这个计算器会根据你的输入实时调整。你可以修改任何一个数值,立即看到结果变化——方便你逐一改动输入,对比不同方案。',
-    ],
-    converter: [
-      '{name} 使用国际标准换算系数,把单位准确从一个换算到另一个。输入数值、选择源单位和目标单位,换算结果即时显示——无需等待、无需刷新。',
-      '手动换算容易出错,因为要记一堆比例(一米等于几英尺、一升等于几品脱)。这个工具消除了这种摩擦:换算系数已内置,全程全精度计算,只在最后显示时才四舍五入。',
-    ],
-    generator: [
-      '{name} 在浏览器中按需生成结果。设置好所需选项、点击生成,结果即可复制。生成过程完全在你的浏览器本地完成。',
-      '当你需要某个特定输出(密码、UUID、二维码、占位文本),又不想安装应用或把数据交给陌生网站时,这类生成器很有用。本工具免费、无使用次数限制,手机和电脑上体验一致。',
-    ],
-    tool: [
-      '{name} 直接在浏览器中处理你的内容。粘贴或输入内容,工具即时处理——无需注册、无需等待。它专为那些需要快速变换、又不想离开当前工作流的时刻而做。',
-      '由于工具在客户端运行,它又快又注重隐私。文本在浏览器中处理;分享链接可能把设置写进 URL。界面键盘友好,在任何装有现代浏览器的设备上都能用。',
-    ],
-  },
-  howTos: {
-    calculator: [
-      '输入上方表单要求的数值。',
-      '在工具提供选项的地方,选择正确的单位或选项。',
-      '检查单位和输入无误后,查看即时显示在输入框下方的结果。',
-      '调整任意字段以测试不同方案——结果无需刷新就会更新。',
-      '复制或记下结果。计算在浏览器本地完成。',
-    ],
-    converter: [
-      '在输入框中输入要换算的数值。',
-      '选择你正在换算的源单位。',
-      '选择你想换算成的目标单位。',
-      '换算值即时显示。可调整任一单位来做全面对比。',
-      '如需在别处使用,复制结果即可。换算在浏览器本地完成。',
-    ],
-    generator: [
-      '设置生成器提供的选项(长度、格式、数量等)。',
-      '点击生成按钮产出结果。',
-      '查看结果,如需调整选项再重新生成。',
-      '用复制按钮把输出复制到剪贴板。',
-    ],
-    tool: [
-      '把你的内容粘贴或输入到文本框。',
-      '调整工具提供的选项。',
-      '在你输入或修改选项时,输出会自动更新。',
-      '用复制按钮复制结果。',
-    ],
-  },
-  whyIntro: '像这样的浏览器工具,相比安装软件或手动方法,有几个实在的优势:',
-  whyBullets: [
-    { label: '无需安装。', body: '在任何浏览器、任何操作系统上都能即时打开。' },
-    { label: '默认私密。', body: '工具在本地处理输入;分享链接可能把设置写进 URL。' },
-    { label: '始终保持最新。', body: '无需更新——打开页面时你用的就是最新版本。' },
-    { label: '免费且无限制。', body: '想用几次用几次,无需账号、没有上限。' },
-  ],
-}
 
 const es: ToolInfoTemplate = {
   aboutTitle: 'Sobre {name}',
@@ -238,7 +173,7 @@ const de: ToolInfoTemplate = {
 }
 
 /** 非英文模板(en 在 ToolInfoSection 内走原 JSX)。 */
-export const toolInfoTemplates: Partial<Record<Locale, ToolInfoTemplate>> = { zh, es, de }
+export const toolInfoTemplates: Partial<Record<Locale, ToolInfoTemplate>> = {  es, de }
 
 /**
  * 把长尾 useCases 列表按语种自然连接(最多 4 条)。
@@ -250,7 +185,6 @@ export function joinUseCases(locale: Locale, items: string[]): string {
   if (phrases.length === 1) return phrases[0]
   const last = phrases[phrases.length - 1]
   const rest = phrases.slice(0, -1)
-  if (locale === 'zh') return `${rest.join('、')} 或 ${last}`
   if (locale === 'es') return `${rest.join(', ')} o ${last}`
   if (locale === 'de') return `${rest.join(', ')} oder ${last}`
   return `${rest.join(', ')} or ${last}`

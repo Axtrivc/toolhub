@@ -5,37 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const whitespaceRemoverL10n: ToolL10n = {
-  zh: {
-    ui: {
-      'characters': '字符',
-      'cleanedText': '清理后的文本',
-      'clear': '清空',
-      'collapseSpaces': '合并多余空格',
-      'dedupe': '移除重复行',
-      'dropEmptyLines': '移除空行',
-      'join': '拼接:',
-      'joinNewline': '换行(多行)',
-      'joinSingle': '单行',
-      'joinSpace': '空格(段落)',
-      'note': '🧹 把空白合并、空行移除、去重和排序整合到一个工具。勾选上方任意选项;一切都在你的浏览器本地运行。',
-      'placeholder': '粘贴含多余空格、空行或重复项的文本…',
-      'resultPlaceholder': '结果将显示在这里…',
-      'sortAZ': '按 A → Z 排序',
-      'trimEachLine': '修剪每行',
-      'words': '词',
-      'yourText': '你的文本',
-    },
-    useCases: [
-      '清理从网站或 PDF 复制的文本',
-      '在粘贴到电子表格前格式化数据',
-      '为代码准备文本(多余空格会破坏缩进)',
-      '规范表单中的用户输入',
-      '整理笔记和草稿',
-    ],
-    faqs: [
-      { q: '会删除所有换行吗?', a: '不会——换行会保留,但空行会被删除。如果你想把所有内容合并成一行,请使用「删除换行」工具。' },
-    ],
-  },
+
   es: {
     ui: {
       'characters': 'caracteres',

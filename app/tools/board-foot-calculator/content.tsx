@@ -5,7 +5,7 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * BoardFootCalculator 长文正文 —— 四语 dispatcher
+ * BoardFootCalculator 长文正文 —— 三语 dispatcher
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -22,19 +22,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>板英尺的诚实定义</h2>
-    <p>一板英尺 = 144 立方英寸的木料——一块 12×12×1 英寸的板。公式"厚(英寸)× 宽(英寸)× 长(英尺)÷ 12"就是单件板英尺数:一根 1.5×5.5 英寸、8 英尺长的木料正好 5.5 板英尺,买 10 根就是 55 板英尺。</p>
-    <h2>名义尺寸是你掏钱买的"谎言"</h2>
-    <p>"2×6"出厂时确实是 2×6 英寸的毛坯,经过刨光和干燥后只剩 1.5×5.5 英寸。按名义尺寸计算会把体积高估约 23%——一笔 200 板英尺的订单,就多算了 46 板英尺"你付了钱却没拿到"的木头。</p>
-    <h2>木料行怎么报价</h2>
-    <p>锯木厂和批发商按板英尺或 MBF(千板英尺,有时写作 FBM)给硬木定价。把他们的单价填进价格栏,工具会直接乘出订单总价和单件成本——正是你对账时要核对的两个数。</p>
-    <h2>公式在哪儿会失真</h2>
-    <p>粗锯材确实量得出名义尺寸,湿材就用名义值算;建材超市的规格材请读标签上的实际厚度与宽度。若木料按"每延英尺"报价,先用长度(英尺)除出单价,才能换算成可比的每板英尺价。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -64,7 +51,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function BoardFootCalculatorContent(): ReactNode {
   const { locale } = useApp()

@@ -17,16 +17,6 @@ const en: ReactNode = (
 )
 
 // ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>MIME 类型决定什么</h2>
-    <p>服务器声明 Content-Type,浏览器据此决定如何渲染字节。值错了会悄悄出问题:样式表以 text/plain 提供会被严格 MIME 检查拒载,SVG 变成下载而不是渲染,字体通不过 CORS 相关校验。</p>
-    <h2>最容易写错的几个</h2>
-    <p>JavaScript 现在的官方值是 <strong>text/javascript</strong>(application/javascript 已废弃)。字体 2017 年起归入 font/*(font/woff2)。Web App Manifest 必须精确写成 application/manifest+json。</p>
-    <h2>正确提供下载</h2>
-    <p>application/octet-stream 会强制下载而非显示。它用于希望用户保存的二进制文件;想内联展示的 PDF 和图片千万别用它。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -52,7 +42,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function MimeTypeLookupContent(): ReactNode {
   const { locale } = useApp()

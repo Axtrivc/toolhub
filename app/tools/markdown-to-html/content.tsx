@@ -5,10 +5,10 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * Markdown to HTML 长文正文 —— 四语 dispatcher
+ * Markdown to HTML 长文正文 —— 三语 dispatcher
  *
  * en 分支等价于原 ToolContent 渲染输出(<h2>What Is This Tool?</h2> + intro
- * + 各 section 包在 <div> 中,faqs 已丢弃),DOM 级 SEO 安全。zh/es/de 在客户端
+ * + 各 section 包在 <div> 中,faqs 已丢弃),DOM 级 SEO 安全。es/de 在客户端
  * hydration 后按 locale 切换。<code> 中的 Markdown 语法 (# H1、**bold** 等)、
  * 专有名词 (CommonMark、GFM、DOMPurify、XSS 等) 保持不变。
  */
@@ -72,52 +72,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具?</h2>
-    <p>
-      <strong>Markdown</strong> 是一种轻量级标记语言,被 GitHub、Reddit、Slack、Notion 和大多数开发者文档使用。浏览器无法直接渲染 Markdown——它们需要 <strong>HTML</strong>。这个转换器在左侧将 Markdown 转换为干净的 HTML,同时在右侧显示实时渲染预览,让你确切知道读者最终会看到什么。
-    </p>
-    <div>
-      <h2>支持的 Markdown 特性</h2>
-      <ul>
-        <li>
-          <strong>标题</strong> —— 从 <code># H1</code> 到 <code>###### H6</code>。
-        </li>
-        <li>
-          <strong>行内格式</strong> —— <code>**bold**</code>、<code>*italic*</code>、{' '}
-          <code>~~strikethrough~~</code> 和 <code>`code`</code>。
-        </li>
-        <li>
-          <strong>列表</strong> —— 无序列表(<code>-</code> 或 <code>*</code>)、有序列表(<code>1.</code>)和任务列表(<code>- [x]</code>)。
-        </li>
-        <li>
-          <strong>代码块</strong> —— 用三个反引号围起来,可选语言标签。
-        </li>
-        <li>
-          <strong>链接与图片</strong> —— <code>[text](url)</code> 和{' '}
-          <code>![alt](url)</code>。
-        </li>
-        <li>
-          <strong>GFM 表格</strong> —— 各行以竖线分隔,并带一行表头分隔符。
-        </li>
-      </ul>
-    </div>
-    <div>
-      <h2>CommonMark 与软换行规则</h2>
-      <p>
-        这个转换器遵循 <strong>CommonMark</strong> 规范,其中段落内的单个换行被视为软换行(渲染为一个空格)。若要强制硬换行,请在行末加两个空格,或用空行开启新段落。一些聊天式 Markdown 变体(用于即时通讯应用)会把每个换行都当作硬换行,但这并非标准,在此也不是默认行为。
-      </p>
-    </div>
-    <div>
-      <h2>关于安全性的提示</h2>
-      <p>
-        生成的 HTML 会对行内代码和代码块中的尖括号进行转义,但如果你要将输出插入到渲染用户提交 Markdown 的页面中,请务必先通过 <strong>DOMPurify</strong> 之类的清理器处理。原始 HTML 和精心构造的属性注入,是基于 Markdown 的评论系统和 wiki 中存储型 XSS 的典型攻击途径。
-      </p>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -237,7 +191,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function MarkdownToHtmlContent(): ReactNode {
   const { locale } = useApp()

@@ -5,23 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const markupCalculatorL10n: ToolL10n = {
-  zh: {
-    formula: {
-      formula: 'Selling price = cost × (1 + markup%)',
-      explain: '加成加在成本之上以设定售价。注意 markup% 相对成本,而 margin% 相对售价——两者不是同一个数。',
-    },
-    useCases: ['按成本和加价率算售价和利润率', '搞清加价率(markup)和利润率(margin)的区别', '为零售或餐饮定价', '按目标利润率反推售价'],
-    faqs: [
-      { q: '怎么按目标利润率算售价?', a: '售价 = 成本 ÷ (1 − 利润率)。成本 $60、目标利润率 40%:60 ÷ 0.60 = $100。' },
-    ],
-    ui: {
-      errNonNegative: '成本和加价率不能为负',
-      'in.cost': '成本', 'in.markup': '加价率',
-      'out.profit': '单位利润', 'out.price': '售价', 'out.margin': '利润率',
-      note: '💰 加价率(markup)基于成本(成本 × 加价率%)。利润率(margin)基于售价(利润/售价)。两者不一样。',
-      chartTitle: '售价:成本 vs 利润', chartCenter: '售价', 'slice.cost': '成本', 'slice.profit': '利润',
-    },
-  },
+
   es: {
     formula: {
       formula: 'Selling price = cost × (1 + markup%)',

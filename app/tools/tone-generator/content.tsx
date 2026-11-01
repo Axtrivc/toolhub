@@ -5,7 +5,7 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * ToneGenerator 长文正文 —— 四语 dispatcher
+ * ToneGenerator 长文正文 —— 三语 dispatcher
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -22,19 +22,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>听觉是对数的,滑杆也该是</h2>
-    <p>频率感知按倍频程走——每翻一倍听起来是相同的一"步"。所以本发生器的滑杆是对数刻度:20-200Hz、200Hz-2kHz、2-20kHz 各占三分之一行程,和耳朵解析音高的方式一致。</p>
-    <h2>等响不等于等声压</h2>
-    <p>Fletcher-Munson 等响曲线显示人耳对 2-4kHz 最敏感,往两端急剧滚降。60dB 的 100Hz 听起来远比 60dB 的 1kHz 轻——测低频和高频时,把电平推高才能在响度上对齐中频音。</p>
-    <h2>波形就是谐波配方</h2>
-    <p>正弦是纯音,别无他物。方波等幅叠加奇次谐波(1×、3×、5×……)——冲、合成器味。锯齿波包含全部谐波且平缓衰减,是模拟合成器弦乐与铜管的经典基底。三角波奇次谐波衰减更快,比方波柔和。</p>
-    <h2>从频率到音名</h2>
-    <p>音乐会标准音 A4 = 440Hz,每个半音乘 2 的十二分之一次方。读数会标出最近的音符与偏差音分——445Hz 是 A4 +20 音分,受训耳朵能明显听出偏高。拿来练调音、或查出冰箱嗡鸣到底是哪个音,都很顺手。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -64,7 +51,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function ToneGeneratorContent(): ReactNode {
   const { locale } = useApp()

@@ -4,56 +4,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const HouseFlipCalculatorL10n: ToolL10n = {
-  zh: {
-    useCases: [
-      '出价前用 70% 规则算出最高买价红线',
-      '把 ARV、修缮、持有成本合成一条利润与 ROI 曲线',
-      '对比"轻翻新"与"全屋翻建"两种策略的利润空间',
-      '下行压力测试:ARV 低 5%、修缮超 20% 还剩多少',
-    ],
-    faqs: [
-      { q: '翻房的 70% 规则是什么?', a: '出价最多为修缮后价值(ARV)的 70% 减去修缮成本:$450,000 ARV、$60,000 修缮,最高买价就是 $255,000。这个空间用来覆盖硬钱贷利息、两端过户费与修缮超支。' },
-      { q: '一次 flip 应该赚多少?', a: '有经验的翻新客目标为扣除全部成本后 ARV 的 10-20%——$450,000 ARV 对应 $45,000-90,000,因为更薄的利润一次意外就会蒸发。本示例预计 $73,200(ROI 21.2%),正好在职业区间。' },
-      { q: 'flip 的持有成本有哪些?', a: '持有期间每月烧掉的一切:房产税、空置房保险(常规的 2-3 倍)、水电,以及 10-12% 加点数的硬钱贷利息。每月 $1,000-2,000 的 carry 很典型——预算时比承包商承诺的工期再多加一个月。' },
-      { q: 'flip 必须用硬钱贷吗?', a: '不必须,但多数人用:银行很少给失修房产放贷,而硬钱贷按交易本身审批、几天放款。它的成本——点数加两位数利率——正是 70% 规则存在的原因:预留出付这笔钱的价差。' },
-    ],
-    ui: {
-      'in.arv': '修缮后价值 (ARV)',
-      'in.offer': '你的出价',
-      'in.repairs': '修缮预算',
-      'in.rehabMonths': '修缮工期',
-      'in.holdingMonthly': '每月持有成本',
-      'in.buyPct': '买入过户费',
-      'in.sellPct': '卖出成本(佣金等)',
-      'inSuffix.arv': '$',
-      'inSuffix.offer': '$',
-      'inSuffix.repairs': '$',
-      'inSuffix.rehabMonths': '个月',
-      'inSuffix.holdingMonthly': '$',
-      'inSuffix.buyPct': '%',
-      'inSuffix.sellPct': '%',
-      'out.maxPurchase': '70% 规则最高买价',
-      'out.profit': '预计利润',
-      'out.roi': '投资回报率 (ROI)',
-      'out.totalCost': '项目总成本',
-      'out.verdict': '出价 vs 70% 规则',
-      'underCap': '低于上限',
-      'overCap': '超出上限',
-      'errInvalid': '请输入正的 ARV 与非负的其余数值',
-      'chartTitle': 'ARV 的拆分',
-      'chartCenter': 'ARV',
-      'slice._buy': '购入',
-      'slice._rep': '修缮',
-      'slice._hold': '持有',
-      'slice._bc': '买入成本',
-      'slice._sc': '卖出成本',
-      'slice._prof': '利润',
-      'preset.0': '轻装修 flip',
-      'preset.1': '全屋翻建',
-      'preset.2': '快速翻新',
-      'note': '🔧 70% 规则——最多付 ARV 的 70% 减修缮——为硬钱贷利息与超支风险留出空间。本例 $270k 出价超上限 $15k 却仍预计 $73k 利润:规则是纪律不是法律。卖出成本按 6-10% 预算(佣金+转让税+返还),并永远给修缮加 15-20% 应急金。',
-    },
-  },
+
   es: {
     useCases: [
       'fijar tu techo de compra con la regla del 70% antes de ofertar',

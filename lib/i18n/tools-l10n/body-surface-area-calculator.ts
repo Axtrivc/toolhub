@@ -5,36 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const BodySurfaceAreaCalculatorL10n: ToolL10n = {
-  zh: {
-    useCases: ['查化疗 mg/m² 给药剂量用的体表面积', '计算心脏指数(心输出量 ÷ BSA)', '核对儿科与烧伤补液估算的基础值', '比较 Mosteller 与 DuBois 两种口径'],
-    faqs: [
-      { q: '为什么有两个公式?', a: 'DuBois(1916)只用 9 名受试者的蜡模测量拟合;Mosteller(1987)把它简化成一行 √(身高×体重/3600),在多数成人身上两者相差约 2%,于是成了床旁标准。极端身高体重时 Mosteller 略低于 DuBois。' },
-      { q: 'BSA 都用在哪些地方?', a: '化疗按 mg/m² 给药、心脏指数按 CO ÷ BSA 归一(正常 2.5-4.0 L/min/m²)、儿科用药与烧伤面积(%TBSA)估算,以及部分肾功能换算。' },
-      { q: '肥胖者准吗?', a: '两个公式在重度肥胖时都会低估。肿瘤科常见做法是给 BSA 封顶(约 2.2-2.5 m²)以避免过量,具体以治疗机构方案为准。' },
-      { q: '能输入磅和英寸吗?', a: '这里的公式常数按厘米/千克标定,请先换算(1 in = 2.54 cm,1 lb ≈ 0.4536 kg)。若只有英制,Mosteller 也有 √(磅×英寸/3131) 的等价形式。' },
-    ],
-    ui: {
-      'in.height': '身高',
-      'in.weight': '体重',
-      'out.mosteller': 'BSA(Mosteller)',
-      'outSub.mosteller': '√(身高 × 体重 ÷ 3600)',
-      'out.dubois': 'BSA(DuBois)',
-      'outSub.dubois': '0.007184 × 身高^0.725 × 体重^0.425',
-      'out.diff': '两口径差值',
-      'out.cardiac': '5 L/min 下的心脏指数',
-      'outSub.cardiac': '心输出量 ÷ BSA',
-      'errInvalid': '身高和体重必须为正数',
-      'chartTitle': 'Mosteller 与 DuBois 对比',
-      'cmp.0': 'Mosteller',
-      'cmp.1': 'DuBois',
-      // cmpseg.0 移除:图例段标签改为按行的 Mosteller/DuBois(人名,各语言同形),
-      // 共享键会把两行都覆写成同一文本,图例退化成单色单条
-      'preset.0': '普通成年人',
-      'preset.1': '高大壮实',
-      'preset.2': '娇小体型',
-      'note': '⚕️ Mosteller(1987)是床旁标准——一行公式与 DuBois 在多数成人身上相差不到 2%。BSA 用于化疗给药(mg/m²)、心脏指数(CO ÷ BSA,正常 2.5-4.0)与肾功能换算;成人平均约 1.7-1.9 m²。',
-    },
-  },
+
   es: {
     useCases: ['consultar la superficie corporal para dosis en mg/m²', 'calcular el índice cardíaco (gasto ÷ BSA)', 'base para líquidos pediátricos y valoración de quemaduras', 'comparar Mosteller con DuBois'],
     faqs: [

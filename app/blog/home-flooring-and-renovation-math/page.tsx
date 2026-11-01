@@ -15,7 +15,7 @@ import {
 } from '@/components/BlogArticleBody'
 
 /**
- * Pillar #10:家居施工材料估算与损耗系数指南(四语正文 + 工具内链卡)。
+ * Pillar #10:家居施工材料估算与损耗系数指南(三语正文 + 工具内链卡)。
  * 静态导出兼容:纯 server component;正文与页框文案(H1/面包屑/返回链接/阅读时长)
  * 交由 BlogArticleBody 系客户端组件跟随 locale 渲染(SSR 首帧英文)。
  */

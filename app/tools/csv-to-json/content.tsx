@@ -34,29 +34,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具?</h2>
-    <p>
-      将 CSV(逗号分隔值)数据转换为 JSON 对象数组。第一行作为键,后续每一行转换为一个对象。适合把电子表格数据导入到应用程序中。
-    </p>
-    <div>
-      <h2>工作原理</h2>
-      <p>
-        工具按完整的 CSV 引号规则解析——引号字段内可以包含逗号、换行和转义引号。分隔符(逗号/分号/制表符)根据首行自动探测,在输入末尾追加 &quot; ||| ;&quot; 或 &quot; ||| \t&quot; 可手动指定。第一行视为表头,每一行数据用这些表头作为键映射为一个对象。所有值都是字符串——如果需要,请在代码中自行转换为数字或布尔值。
-      </p>
-    </div>
-    <div>
-      <h2>局限性</h2>
-      <ul>
-        <li>引号内的字段保留原始空白;未加引号的字段会去掉首尾空白</li>
-        <li>所有值都是字符串,不会自动推断类型</li>
-        <li>假定第一行是表头</li>
-      </ul>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -121,7 +98,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function CSVtoJSONContent(): ReactNode {
   const { locale } = useApp()

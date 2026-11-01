@@ -242,13 +242,13 @@ export function BlogArticleByline({ updated }: { updated?: string }) {
   const { locale } = useApp()
   const bylines: Record<Locale, string> = {
     en: `By the ${SITE_NAME} maintainer`,
-    zh: `${SITE_NAME} 独立维护者出品`,
+
     es: `Por el responsable de ${SITE_NAME}`,
     de: `Vom ${SITE_NAME}-Betreuer`,
   }
   const updatedLabels: Record<Locale, string> = {
     en: 'Updated',
-    zh: '更新于',
+
     es: 'Actualizado',
     de: 'Aktualisiert',
   }

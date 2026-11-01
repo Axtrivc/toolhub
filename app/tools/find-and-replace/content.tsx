@@ -45,43 +45,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具?</h2>
-    <p>
-      本工具会查找文本中所有出现的搜索词,并将其替换为其他内容。把文本粘贴到主输入框,
-      在独立的「查找」「替换」框中输入内容,结果随输入实时更新。
-    </p>
-    <div>
-      <h2>如何使用</h2>
-      <p>
-        勾选<strong>区分大小写</strong>可精确匹配字母大小写;开启<strong>正则模式</strong>后可用正则表达式查找
-        (例如 <code>{'\\d{4}'}</code> 匹配任意四位数字),替换内容中支持 <code>$1</code> 等捕获组引用。
-      </p>
-    </div>
-    <div>
-      <h2>示例</h2>
-      <p>
-        文本:<code>I love cats and cats are great</code>
-        <br />
-        查找:<code>cats</code> → 替换:<code>dogs</code>
-        <br />
-        结果:<code>I love dogs and dogs are great</code>
-      </p>
-    </div>
-    <div>
-      <h2>常见用途</h2>
-      <ul>
-        <li>在长文档中批量重命名某个词</li>
-        <li>用真实值替换 [NAME] 等占位符</li>
-        <li>交换格式标记(例如把 「--」 换成破折号)</li>
-        <li>统一不一致的拼写(color → colour)</li>
-        <li>在分享文本前替换敏感数据</li>
-      </ul>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -165,7 +128,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function FindAndReplaceContent(): ReactNode {
   const { locale } = useApp()

@@ -5,45 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const codeBeautifierL10n: ToolL10n = {
-  zh: {
-    ui: {
-      'beautifiedOutput': '美化后的输出',
-      'code': '代码',
-      'copy': '复制',
-      'fourSpaces': '4 空格',
-      'indent': '缩进',
-      'note': '🔒 100% 在客户端——你的代码仅在你的浏览器中格式化,绝不发送到任何服务器。',
-      'pasteYour': '粘贴你的',
-      'pasteYourCode': '粘贴你的 {lang} 代码',
-      'twoSpaces': '2 空格',
-      'unableToFormat': '无法格式化输入',
-      'tooLong': '⚠️ 输入超过支持的大小(100,000 字符)。请缩减输入后再格式化。',
-    },
-    useCases: [
-      '在线美化压缩的 JavaScript',
-      '给 HTML 代码加上缩进',
-      '免费在线还原压缩 CSS',
-      '美化打印 JSON 数据',
-    ],
-    faqs: [
-      {
-        q: '它支持格式化哪些语言?',
-        a: 'HTML、CSS、JavaScript 和 JSON。每种都用对应语言感知的格式化器重新缩进并规范化空格,所以压缩或凌乱的代码会变得易读,且语义不变。',
-      },
-      {
-        q: '美化会改变代码的运行结果吗?',
-        a: '不会。格式化只调整空白、换行和缩进——不会改动 token、逻辑或数值。美化后的输出与输入功能完全一致,只是更易读。',
-      },
-      {
-        q: '该用 2 空格还是 4 空格?',
-        a: '与你项目现有风格保持一致。HTML、CSS、JSON 常用 2 空格;JavaScript 则多用 4 空格。代码库内部的一致性比具体数字更重要,所以选符合你团队约定的那个。',
-      },
-      {
-        q: '代码会被上传到服务器吗?',
-        a: '不会。格式化完全在你的浏览器里进行,输入不离开设备,所以私有代码和内部配置也能放心粘贴。超过 100,000 字符的输入会被拒绝,以保证页面不卡顿。',
-      },
-    ],
-  },
+
   es: {
     ui: {
       'beautifiedOutput': 'Salida embellecida',

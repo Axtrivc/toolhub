@@ -5,26 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const rectangleCalculatorL10n: ToolL10n = {
-  zh: {
-    ui: {
-      'chartTitle': '图形预览',
-      'in.w': '宽',
-      'in.h': '高',
-      'out.area': '面积',
-      'out.perimeter': '周长',
-      'out.diagonal': '对角线',
-      note: '▭ 面积 = 宽 × 高。对角线用勾股定理计算。',
-    },
-    useCases: [
-      '地板:买多少瓷砖或地毯',
-      '油漆:估算墙面面积',
-      '屏幕:电视和显示器尺寸(对角线)',
-      '地产:地块和房屋尺寸',
-    ],
-    faqs: [
-      { q: '地板应该多买多少?', a: '额外加 10% 用于损耗和切割误差。需要拼花的材料则加 15%–20%。宁可多订一点——不同批次的染色会有差异。' },
-    ],
-  },
+
   es: {
     ui: {
       'chartTitle': 'Vista previa',

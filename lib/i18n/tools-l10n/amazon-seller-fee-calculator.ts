@@ -5,50 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const AmazonSellerFeeCalculatorL10n: ToolL10n = {
-  zh: {
-    useCases: ['定价前算清 15% 佣金 + FBA 履约费后的净利', '对比 8% 电子类与 17% 服装类的利润差异', '用 ROI 判断这个 SKU 值不值得压库存', '快速验证"9.9 美元包邮"到底亏不亏'],
-    faqs: [
-      { q: '亚马逊每单抽多少?', a: '多数类目佣金 15%,区间从 8%(消费电子)到 45%(亚马逊设备配件),每件最低 $0.30。FBA 履约费是另一笔按尺寸档计的每件费用,与佣金分开。' },
-      { q: 'FBA 履约费是什么?', a: '这是亚马逊替你拣货、打包、发货的费用——2026 年标准尺寸件大约每件 $2-$7,按尺寸档与重量定。大件重件会贵得多,定价前务必对照 Seller Central 的最新费率表。' },
-      { q: 'FBA 比自发货(FBM)便宜吗?', a: '小而轻、周转快的商品 FBA 通常在单位成本和购物车赢得率上都占优;大件、慢销或低毛利商品的履约费可能吞掉全部利润——压库存前两种模式都算一遍。' },
-      { q: '这个计算器漏掉了哪些成本?', a: '月度仓储费(Q4 会飙升)、长期仓储附加费、广告费、退货处理,以及入仓运费(除非你把它折进准备成本栏)。经验法则:在算出的利润率下再留 15-20% 的缓冲。' },
-    ],
-    ui: {
-      'in.price': '售价',
-      'in.cogs': '单件商品成本',
-      'in.otherCost': '头程、包装与预处理',
-      'in.referral': '佣金类目',
-      'in.fbaFee': 'FBA 履约费',
-      'inSuffix.price': '$',
-      'inSuffix.cogs': '$',
-      'inSuffix.otherCost': '$',
-      'inSuffix.fbaFee': '$',
-      'out.referralFee': '类目佣金',
-      'out.fbaFeeOut': 'FBA 履约费',
-      'out.totalFees': '亚马逊费用合计',
-      'out.landedCost': '落地成本(货 + 准备)',
-      'out.netProfit': '单件净利',
-      'out.margin': '利润率',
-      'out.roi': '投入成本回报率',
-      'opt.referral.15': '多数类目 (15%)',
-      'opt.referral.8': '消费电子 (8%)',
-      'opt.referral.17': '服装与配饰 (17%)',
-      'opt.referral.20': '珠宝 (20%)',
-      'opt.referral.45': '亚马逊设备配件 (45%)',
-      'preset.0': '$25 自营小配件',
-      'preset.1': '$60 消费电子 (8%)',
-      'preset.2': '$35 服装 (17%)',
-      'chartTitle': '售价都花在哪了',
-      'cmp.0': '售价',
-      'cmpseg.0': '你的利润',
-      'cmpseg.1': '类目佣金',
-      'cmpseg.2': 'FBA 费用',
-      'cmpseg.3': '货品 + 准备',
-      'errPrice': '请输入有效的售价',
-      'errCosts': '成本不能为负,佣金须低于 100%',
-      'note': '📦 2026 年标准尺寸件的 FBA 履约费大约每件 $2-$7——精确数额请在 Seller Central 查你的尺寸档。不含仓储费、广告费,以及每件 $0.30 的佣金下限(低于 $2 的商品会受影响)。',
-    },
-  },
+
   es: {
     useCases: ['calcular el beneficio neto tras el 15% de comisión y FBA antes de fijar precio', 'comparar el margen de electrónica (8%) con ropa (17%)', 'decidir con el ROI si un SKU merece inventario', 'comprobar si un producto de 9,99 $ con envío incluido pierde dinero'],
     faqs: [

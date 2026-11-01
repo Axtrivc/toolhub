@@ -5,57 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const imageResizerL10n: ToolL10n = {
-  zh: {
-    ui: {
-      'byWord': '乘',
-      'change': '更换',
-      'download': '下载',
-      'errDecodeImage': '无法解码图片文件。',
-      'errDimsValid': '宽度和高度必须是至少 1 px 的整数。',
-      'errEncodeFailed': '编码失败——浏览器无法生成图片。请尝试更小的目标尺寸。',
-      'errReadFile': '无法读取文件。',
-      'errFileTooLarge': '文件过大({size})。最大支持 20 MB。',
-      'errTooLarge': '目标尺寸过大——单边不得超过 8192 px,总像素不得超过 4000 万。',
-      'errUploadImage': '请上传图片文件(PNG、JPG、GIF 或 WebP)。',
-      'errWebpUnsupported': '你的浏览器无法编码 WebP(canvas.toBlob 回退为 PNG)。请使用新版 Chrome、Edge、Firefox 或 Safari 14+,或改选 PNG 输出。',
-      'formatJpeg': 'JPEG',
-      'formatPng': 'PNG',
-      'formatWebp': 'WebP',
-      'keepOriginalFormat': '保持原格式',
-      'lockAspectRatio': '锁定宽高比',
-      'noteText': '🔒 100% 在客户端——缩放在浏览器内画布上完成,带高质量平滑。所示大小为真实编码输出,来自',
-      'originalInfo': '原图:',
-      'outputFormat': '输出格式',
-      'qualityLabel': '质量 —',
-      'resizedPreviewAlt': '缩放预览',
-      'smaller': '更小',
-      'targetHeight': '目标高度 (px)',
-      'targetWidth': '目标宽度 (px)',
-      'uploadHint': 'PNG、JPG、GIF 或 WebP',
-      'uploadPrompt': '点击上传或拖放',
-      'uploadedSourceAlt': '已上传的原图',
-    },
-    useCases: [
-      '在线按精确像素缩放图片',
-      '锁定宽高比的图片缩放器',
-      '压缩图片到目标大小',
-      '免上传缩放照片',
-    ],
-    faqs: [
-      {
-        q: '缩放会降低图片画质吗?',
-        a: '缩小会丢弃像素并做重采样,所以会有些发软,但在正常观看尺寸下几乎察觉不到。放大无法增加真实细节,会显得模糊,所以尽量从更大的原图来缩放。',
-      },
-      {
-        q: '能不变形地缩放吗(锁定宽高比)?',
-        a: '能。宽高比锁定会让宽和高保持比例,调整其中一个尺寸时,另一个会自动更新。只有需要强制非比例裁剪时才关闭它。',
-      },
-      {
-        q: '缩放后该选哪种输出格式?',
-        a: '想要最小文件用 WebP,照片用 JPG,需要无损画质或透明时用 PNG。工具会即时预览每种选项的输出文件大小,方便你在下载前选最佳折中。',
-      },
-    ],
-  },
+
   es: {
     ui: {
       'byWord': 'por',

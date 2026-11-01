@@ -5,46 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const FuelCostCalculatorL10n: ToolL10n = {
-  zh: {
-    useCases: ['算一趟自驾游的油费', '多人拼车时平摊油费', '对比往返与单程的用油成本', '算每 100 公里的油耗成本'],
-    faqs: [
-      { q: '油费是怎么算的?', a: '距离 × 油耗 ÷ 100 得出所需升数,再乘油价就是总费用。选往返会先把距离翻倍再计算,人均费用则是总额除以同行人数。' },
-      { q: '真实油耗哪里找?', a: '行车电脑的长期平均值最可靠——官方 WLTP/EPA 标称普遍乐观 10-20%。高速通常比市区省 20-30%,所以按你实际会跑的路况组合来填。' },
-      { q: '我用 MPG 计量,能用吗?', a: '可以,先换算一次:用 235.215 除以你的 US MPG 得 L/100km,每加仑油价除以 3.785 得每升价格。之后所有计算照常进行。' },
-      { q: '每 100 公里成本有什么用?', a: '它等于油耗 × 油价,剥离了距离因素,是对比不同车、不同油品或不同加油站最干净的指标。工具在行程总额旁边同时给出这个数。' },
-    ],
-    ui: {
-      'chartTitle': '单程 vs 往返',
-      'cmp.0': '单程',
-      'cmp.1': '往返',
-      'cmpseg.0': '油费',
-      'preset.0': '周末出游',
-      'preset.1': '每周通勤',
-      'preset.2': '1000 公里长途',
-      'in.consumption': '油耗',
-      'in.distance': '距离',
-      'in.liters': '所需油量',
-      'in.people': '分摊人数',
-      'in.per100': '每 100 km 成本',
-      'in.perPerson': '人均',
-      'in.price': '油价',
-      'in.roundTrip': '行程类型',
-      'in.totalCost': '总油费',
-      'note': '⛽ 高速油耗通常比市区低 20-30%;建议用车机电脑的真实均值。公制用户:输入 km/L/每升价格,英制用户先换算一次即可。',
-      'opt.roundTrip.one': '单程',
-      'opt.roundTrip.round': '往返(×2)',
-      'out.consumption': '油耗',
-      'out.distance': '距离',
-      'out.liters': '所需油量',
-      'out.people': '分摊人数',
-      'out.per100': '每 100 km 成本',
-      'out.perPerson': '人均',
-      'out.price': '油价',
-      'out.roundTrip': '行程类型',
-      'out.totalCost': '总油费',
-          'errNonNegative': "距离、油耗与油价不能为负",
-},
-  },
+
   es: {
     useCases: ['calcular el combustible de un viaje por carretera', 'repartir la gasolina entre ocupantes', 'comparar el coste de ida y vuelta frente a solo ida', 'saber cuánto cuesta cada 100 km'],
     faqs: [

@@ -5,56 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const sshKeyGeneratorL10n: ToolL10n = {
-  zh: {
-    ui: {
-      'comment': '注释(可选)',
-      'copyPrivateKey': '复制私钥',
-      'copyPublicKey': '复制公钥',
-      'ed25519Recommended': 'Ed25519(推荐)',
-      'errorKeyGenFailed': '生成密钥失败。',
-      'errorNoEd25519': '此浏览器不支持 Web Crypto API 中的 Ed25519。请改用较新版本的 Chrome、Edge、Firefox 或 Safari,或在下方切换为 RSA。',
-      'errorNoWebCrypto': '此处无法使用 Web Crypto API。它需要安全的(HTTPS)上下文和现代浏览器。',
-      'errorRsaExport': '无法导出 RSA 公钥参数。',
-      'fingerprint': '指纹 (SHA-256)',
-      'generateKeyPair': '生成密钥对',
-      'generating': '生成中…',
-      'hide': '隐藏',
-      'hidePrivateKeyAria': '隐藏私钥',
-      'keyType': '密钥类型',
-      'noteIntro': '🔒 请将私钥妥善保管,并用 ',
-      'noteMid1': ' 锁好。私钥以 PKCS#8 PEM 导出——许多工具(包括 OpenSSH ≥ 7.8)可直接读取,你也可以随时用 ',
-      'noteOutro': ' 把它转成 OpenSSH 原生格式。密钥完全在你的浏览器中生成并保存——不上传任何东西。',
-      'privateKeyMasked': '私钥(已遮蔽)',
-      'privateKeyPem': '私钥 (PKCS#8 PEM)',
-      'publicKeyPrefix': '公钥——粘贴到 ',
-      'reveal': '显示',
-      'revealPrivateKeyAria': '显示私钥',
-      'rsa': 'RSA',
-      'rsa4096Wait': 'RSA-4096 可能需要几秒…',
-      'rsaModulus': 'RSA 模数(位)',
-      'unencryptedBadge': '未加密——无口令',
-    },
-    useCases: [
-      '在线生成 Ed25519 密钥对',
-      'ssh-keygen 的在线替代',
-      '无需终端创建 SSH 密钥',
-      'authorized_keys 公钥生成器',
-    ],
-    faqs: [
-      {
-        q: 'Ed25519 和 RSA 该选哪个?',
-        a: '推荐 Ed25519:密钥更短、更快,安全性等同甚至优于 RSA-4096。只有在必须连接尚不支持 Ed25519 的老服务器或硬件时才用 RSA。',
-      },
-      {
-        q: '我的私钥会被上传到任何地方吗?',
-        a: '不会。密钥对在你的浏览器里用 Web Crypto API 本地生成,私钥从不离开你的设备。只有你能复制或下载它——没有任何服务端存储。',
-      },
-      {
-        q: 'RSA 应该用多大的密钥?',
-        a: '想要长期安全余量就用 4096 位;为了兼容性 2048 位也仍然可接受。更大的密钥生成和使用都更慢,所以大多数新场景 Ed25519 是更好的选择。',
-      },
-    ],
-  },
+
   es: {
     ui: {
       'comment': 'Comentario (opcional)',

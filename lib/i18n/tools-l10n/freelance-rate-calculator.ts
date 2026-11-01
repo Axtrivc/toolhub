@@ -5,71 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const freelanceRateCalculatorL10n: ToolL10n = {
-  zh: {
-    ui: {
-      'in.targetIncome': '期望年度税后净到手薪资',
-      'in.billableHours': '每周实际可计费工时',
-      'in.weeksPerYear': '全年实际工作周数 (扣除休假)',
-      'in.businessExpenses': '年度商业开销 (软件/硬件/会计)',
-      'in.taxRate': '预估综合税率 (个税 + 自雇社保)',
-      'in.profitMargin': '商业利润与抗风险缓冲比例',
-      'inSuffix.targetIncome': '$',
-      'inSuffix.businessExpenses': '$',
-      'inSuffix.taxRate': '%',
-      'inSuffix.profitMargin': '%',
-      'inSuffix.billableHours': '小时',
-      'inSuffix.weeksPerYear': '周',
-      'out.hourlyRate': '推荐建议时薪 (Hourly Rate)',
-      'outSub.hourlyRate': '含税收、运营成本与利润缓冲',
-      'out.dayRate': '建议日薪 (按 8 小时核算)',
-      'out.annualGross': '年度总开票目标 (Gross Target)',
-      'outSub.annualGross': '全年发票总额',
-      'out.minRate': '保本底线时薪 (零利润缓冲)',
-      'outSub.minRate': '仅能覆盖基本薪水与硬性开支',
-      'out.annualHours': '全年有效计费总工时',
-      'outSub.annualHours': '周工时 × 实际工作周数',
-      'slice.takeHomeSlice': '税后净到手薪酬',
-      'slice.taxSlice': '税费与自雇社保支出',
-      'slice.expenseSlice': '业务硬性运营开支',
-      'slice.profitSlice': '商业利润与风险缓冲金',
-      'preset.0': '咨询顾问 (目标到手 $12万)',
-      'preset.1': '独立设计师 (目标到手 $7.5万)',
-      'preset.2': '自由文案撰稿 (目标到手 $5万)',
-      'errInvalid': '请输入有效的正数薪资、工时与周数, 税率需小于 70%',
-      'hrsWord': '小时',
-      'chartTitle': '年度总开票构成拆解',
-      'chartCenter': '开票构成',
-      'note': '💡 全职上班族年工时约 2,080 小时，但自由职业者通常每年只能实际计费 1,000–1,200 小时。其余 30%–50% 的时间在处理获客沟通、方案编写与行政杂务。因此定价必须计入空窗期风险与自雇税费。',
-    },
-    useCases: [
-      '从全职跳槽自由职业: 期望到手 $10万, 计入 25% 税率、每周 20 计费小时与 46 个工作周, 即使不计开销与利润缓冲, 真实时薪也需约 $145 而非年薪÷2,080 得出的 $48',
-      '设定项目日薪底线: 针对多周中大型咨询项目, 根据 $800/天的建议日薪快速给出包周或包月方案',
-      '考虑休假与非计费杂务: 规划每年休假 6 周(工作 46 周), 明确获客杂务时间占比, 避免时间预算透支',
-      '商业开销抵扣测算: 将 MacBook、云服务、办公场地与商保等每年 $1.5万 的成本均摊进每个小时报价中',
-    ],
-    faqs: [
-      {
-        q: '为什么不能直接用上班时的年薪除以 2,080 小时来算时薪?',
-        a: '全职员工的 2,080 小时包含了带薪年假、病假和大量摸鱼/内部例会时间。自由职业者必须自己承担营销找客户、写方案、记账等非计费杂务, 每周能开出发票的工时通常仅有 20-25 小时。直接除以 2,080 会严重低估自身价值。',
-      },
-      {
-        q: '自由职业者需要考虑哪些额外开销?',
-        a: '包括但不限于: 自雇税务(社保医保全额自付)、商业保险、生产力软件订阅(Adobe/Figma/GitHub/Office)、电脑硬件折旧、办公场地以及财务做账服务费。',
-      },
-      {
-        q: '报价里为什么要加 10%–20% 的利润率?',
-        a: '这笔利润是你的企业安全垫, 用来抵御客户拖欠付款、项目结案后的空窗期断档, 以及为你未来的业务进修与设备换代储备资金。',
-      },
-      {
-        q: '给客户报时薪好还是日报/项目价好?',
-        a: '20 小时以内的零碎需求适合报时薪; 超过数周的项目建议报日薪(按 8 倍时薪计算)或总包价, 这能避免客户对每一刻钟的工作细节反复盘问, 聚焦交付价值。',
-      },
-    ],
-    formula: {
-      formula: 'Pre-tax Needed = Target Net ÷ (1 − Tax Rate)\nBreakeven Billing = Pre-tax Needed + Expenses\nTarget Gross = Breakeven ÷ (1 − Profit Margin)\nTarget Hourly = Target Gross ÷ (Weeks × Hours/Week)',
-      explain: '由期望税后净收入倒推税前需求, 累加硬性运营开支后加入商业利润垫, 最后除以全年真实可开票工时得出精准报价。',
-    },
-  },
+
   es: {
     ui: {
       'in.targetIncome': 'Salario neto anual deseado',

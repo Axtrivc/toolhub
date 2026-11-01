@@ -5,23 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const MarkdownTocGeneratorL10n: ToolL10n = {
-  zh: {
-    useCases: ['为长文 README 生成目录', '给 Markdown 文档加可点击锚点', '按层级深度裁剪目录', '生成与 GitHub 一致的锚点链接'],
-    faqs: [
-      { q: '目录为什么从 H2 开始?', a: '一个文档只有一个 H1——即页面标题——所以章节目录从 H2 起步。深度选择器(H2-H6)控制列表嵌套多深;超出所选层级的标题会被跳过。' },
-      { q: '锚点和 GitHub 完全一致吗?', a: '一致——slug 遵循 GitHub 算法:转小写、空格变连字符、删除标点,重复标题加 -1、-2 后缀。这样生成的链接在 GitHub 以及多数照搬该行为的静态站生成器上都能跳到正确标题。' },
-      { q: '代码块里的标题会被忽略吗?', a: '会——三反引号围栏内的"标题"会被跳过,因为渲染后它们是代码示例而非真实标题。提取器会逐行跟踪整个文档的围栏开关状态。' },
-      { q: '标题里有链接或加粗怎么办?', a: '生成 slug 前会先剥掉行内 Markdown:[text](url) 只取其文字,加粗/斜体标记会被移除。因此目录显示的是纯标题文本,与渲染后的锚点外观一致。' },
-    ],
-    ui: {
-      'depthLabel': '最大标题层级',
-      'inputLabel': '你的 Markdown',
-      'loadSample': '加载示例',
-      'noHeadings': '未找到所选层级以内的 H2-H6 标题。',
-      'note': '📑 锚点遵循 GitHub 算法:小写、空格转连字符、去标点,重复标题加 -1/-2 后缀——内链能真正落到正确标题。',
-      'outputLabel': '目录',
-    },
-  },
+
   es: {
     useCases: ['generar índices para README largos', 'añadir anclas clicables a un documento', 'recortar el índice por nivel de profundidad', 'crear enlaces ancla idénticos a los de GitHub'],
     faqs: [

@@ -5,10 +5,10 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * UUID Generator 长文正文 —— 四语 dispatcher
+ * UUID Generator 长文正文 —— 三语 dispatcher
  *
  * en 分支等价于原 ToolContent 渲染输出(<h2>What Is This Tool?</h2> + intro
- * + 各 section 包在 <div> 中,faqs 已丢弃),DOM 级 SEO 安全。zh/es/de 在客户端
+ * + 各 section 包在 <div> 中,faqs 已丢弃),DOM 级 SEO 安全。es/de 在客户端
  * hydration 后按 locale 切换。UUID、RFC 4122 等专有名词与十六进制示例保持不变。
  */
 
@@ -46,39 +46,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具?</h2>
-    <p>
-      <strong>UUID</strong>(通用唯一标识符)是一个 128 位的数字,在数据库、API、会话和分布式系统中用作唯一 ID。这个生成器使用你浏览器的加密随机源来创建 RFC 4122 版本 4(随机)的 UUID。
-    </p>
-    <div>
-      <h2>为什么需要 UUID?</h2>
-      <ul>
-        <li><strong>无需中心化机构</strong> —— 任何人无需协调即可生成</li>
-        <li><strong>实际唯一</strong> —— 冲突概率低到天文级别</li>
-        <li><strong>无处不在</strong> —— 数据库、OAuth、文件系统、消息队列</li>
-        <li><strong>匿名</strong> —— 不嵌入序列号或时间戳,不会泄露数量或顺序</li>
-      </ul>
-    </div>
-    <div>
-      <h2>UUID 的结构</h2>
-      <p>
-        一个 UUID 看起来像 <code>550e8400-e29b-41d4-a716-446655440000</code> —— 由连字符分隔的 5 组共 32 个十六进制数字。版本 4(最常见)除了版本指示位和变体指示位外,其余位均为随机。
-      </p>
-    </div>
-    <div>
-      <h2>常见用途</h2>
-      <ul>
-        <li>数据库中的主键(尤其是分布式系统)</li>
-        <li>会话令牌和 API 请求 ID</li>
-        <li>上传内容的文件名</li>
-        <li>标识设备、用户或事件</li>
-      </ul>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -148,7 +115,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function UUIDGeneratorContent(): ReactNode {
   const { locale } = useApp()

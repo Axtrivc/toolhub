@@ -5,43 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const macroCalculatorL10n: ToolL10n = {
-  zh: {
-    formula: {
-      formula: 'grams = ( calories × macro% ) / kcalPerGram',
-      explain: '把每日热量按百分比分成蛋白质、碳水、脂肪,再换算成克(蛋白质和碳水 4 kcal/g,脂肪 9 kcal/g)。',
-    },
-    ui: {
-      errCalories: '请输入大于 0 的每日热量目标',
-      'in.calories': '每日热量目标',
-      'in.goal': '目标',
-      'opt.goal.lose': '减脂(低碳)',
-      'opt.goal.maintain': '维持',
-      'opt.goal.gain': '增肌(高蛋白)',
-      'out.protein': '蛋白质',
-      'out.carbs': '碳水化合物',
-      'out.fat': '脂肪',
-      'out.total': '总热量',
-      'outSub.total': '千卡 / 天',
-      chartTitle: '按宏量营养素的卡路里分布',
-      chartCenter: '卡路里',
-      'slice.proteinCal': '蛋白质',
-      'slice.carbsCal': '碳水化合物',
-      'slice.fatCal': '脂肪',
-      note: '🍽️ 把每日热量拆分为蛋白质/碳水/脂肪。增肌建议每公斤体重摄入 1.6–2.2g 蛋白质。',
-    },
-    useCases: [
-      '把每日热量目标拆分为蛋白质/碳水/脂肪',
-      '为减脂或增肌选择合适的宏量配比',
-      '计算三大营养素各自对应的克数',
-      '按卡路里占比直观查看饮食结构',
-    ],
-    faqs: [
-      { q: '必须记录宏量营养素吗?', a: '不一定。很多人凭直觉吃也能减重或增肌。但记录几周宏量能教会你分量大小,并暴露隐藏热量——即使以后停记,这也是一次有价值的学习。' },
-      { q: '三大营养素每克多少千卡?', a: '蛋白质和碳水各 4 kcal/g,脂肪 9 kcal/g,酒精约 7。同样 200 kcal 可以是 50 g 蛋白质,也可以只有 22 g 脂肪——减脂期提高蛋白比例既保肌肉又更抗饿。' },
-      { q: '增肌、减脂、维持的配比差在哪?', a: '增肌常用 35% 蛋白 / 45% 碳水 / 20% 脂肪,并保证 1.6-2.2 g/kg 的蛋白质;减脂常用 40/30/30 来保肌肉、控食欲;维持回到 30/40/30 一类的均衡比例即可。' },
-      { q: '算出的克数要严格执行吗?', a: '不用。把它们当靶心而不是围栏:每天 ±5-10 g 的波动完全正常,按周平均达标比每天精确更有意义。优先盯住总热量和蛋白质这两项,碳水与脂肪弹性最大。' },
-    ],
-  },
+
   es: {
     formula: {
       formula: 'grams = ( calories × macro% ) / kcalPerGram',

@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * PregnancyWeightGainCalculator 长文正文 —— 四语 dispatcher
+ * PregnancyWeightGainCalculator 长文正文 —— 三语 dispatcher
  *
- * en 分支与站点既有渲染口径一致。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支与站点既有渲染口径一致。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -24,19 +24,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>推荐区间从哪里来</h2>
-    <p>2009 年 IOM 指南(现由美国国家医学院维护)把增重建议与孕前 BMI 挂钩,因为两个极端都有风险:增重太少升高低出生体重概率,增重太多升高妊娠糖尿病、高血压和剖宫产率。正常 BMI 的单胎孕妇全程建议增重 11.5-16 kg(25-35 磅)。</p>
-    <h2>增重不是一条直线</h2>
-    <p>孕早期通常只增 0.5-2 kg——有人不增,孕吐严重的人甚至会掉秤。从约 14 周起进入稳定速率:正常 BMI 约每周 0.42 kg,偏瘦 0.51,超重 0.28,肥胖 0.22。本计算器把这个结构折算到你当前的孕周,让"到这周应该长多少"得到一个诚实的区间,而不是一个孤零零的数字。</p>
-    <h2>双胎改变算法</h2>
-    <p>双胎目标更高:正常 BMI 17-25 kg,超重 14-23 kg,肥胖 11-19 kg,孕中期起每周速率也更陡。IOM 刻意没有给偏瘦双胎发布建议——因为数据不存在;编造数字的工具是在骗你,所以本工具选择如实说明。</p>
-    <h2>看趋势,不看单次称重</h2>
-    <p>水肿、便秘和一顿饱饭都能让体重一夜波动一公斤。产检关注的是跨次的趋势,并警惕突然跳升(可能是水潴留)或停滞。如果你的数字落在区间外,把趋势图带去下次产检——那是开场问题,绝不是判决,更不是自行节食的理由。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -66,7 +53,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function PregnancyWeightGainCalculatorContent(): ReactNode {
   const { locale } = useApp()
