@@ -5,7 +5,7 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * OptionsProfitCalculator 长文正文 —— 四语 dispatcher
+ * OptionsProfitCalculator 长文正文 —— 三语 dispatcher
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -22,19 +22,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>四种头寸,一张图</h2>
-    <p>每笔期权交易都是四种形态之一:买认购(上行曲棍球杆)、卖认购(上方封顶、上方风险)、买认沽(下行曲棍球杆)、卖认沽(收权利金、行权价下方有风险)。权利金就是支点——买方从零轴下方起步(付出的权利金),卖方从上方起步(收到的权利金)。</p>
-    <h2>盈亏平衡与 100 乘数</h2>
-    <p>到期盈亏平衡 = 行权价 ± 权利金:行权价 $100、权利金 $3.50 的买认购要涨到 $103.50 才保本,买认沽则要跌到 $96.50。一张美股期权合约对应 100 股,所以一张"$3.50 的便宜期权"是 $350 真金白银——买方的最大亏损就是这份权利金乘以张数。</p>
-    <h2>损益曲线看不到的东西</h2>
-    <p>这些数字是纯到期数学。到期之前,合约带着会衰减的时间价值交易——短期买方在最后几周衰减得尤其快——而且即使股价纹丝不动,隐含波动率的变化也会推动头寸盈亏。美式卖认购还可能被提前指派,最常发生在除息日前夕,一夜之间把你的曲线变成真实的股票。</p>
-    <h2>先管仓位,再谈预测</h2>
-    <p>活下来的交易者把"最大亏损"当作仓位本身,而不是"我能买几张"。很多人把单笔交易限制在账户的 1-2%,并把卖认沽视为按行权价冻结的一笔资金——卖认沽是"收钱承诺在低点接盘",不是免费权利金。先定义最坏情况,曲线才会从愿望变成计划。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -64,7 +51,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function OptionsProfitCalculatorContent(): ReactNode {
   const { locale } = useApp()

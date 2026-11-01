@@ -11,7 +11,7 @@
  * - 内联链接:文本里写 {key},同 section 的 links 字段提供 key→href 映射
  *   渲染器把 {key} 替换为 <a href={links[key]}>{key 对应的标签 = 占位符本身}</a>
  *
- * 为什么不用 React 节点直接存:数据要能 4 语对照、可序列化、好维护。
+ * 为什么不用 React 节点直接存:数据要能 3 语对照、可序列化、好维护。
  * 内联链接用占位符 + links 映射,避免在字符串里混 JSX。
  *
  * 缺失某 locale 的整页 → 回退 en(渲染器兜底)。
@@ -40,7 +40,7 @@ export interface PageContent {
   sections: PageSection[]
 }
 
-/** 4 语完整内容映射 */
+/** 3 语完整内容映射 */
 export type LocalizedPage = Record<Locale, PageContent>
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -69,7 +69,7 @@ export const aboutPage: LocalizedPage = {
         heading: 'What We Build',
         blocks: [
           'We focus on utilities for developers, writers, and anyone who works in a browser. Each tool is designed around a single, clearly defined task — like converting a blog post title into a clean URL slug — and is accompanied by a guide explaining how to get the most out of it.',
-          'Under the hood, the site is a static-exported Next.js + TypeScript app that installs as a PWA: pages are pre-rendered files, and every calculation runs browser-locally. It currently ships 350 tools across 15 categories, with the interface available in 4 languages (English, 中文, Español, Deutsch).',
+          'Under the hood, the site is a static-exported Next.js + TypeScript app that installs as a PWA: pages are pre-rendered files, and every calculation runs browser-locally. It currently ships 350 tools across 15 categories, with the interface available in 3 languages (English, Español, Deutsch).',
           'New tools are added regularly. If there is something you wish existed, {let us know} — reader requests have shaped more than one tool on this site.',
           'Curious how all of this fits together? There is a full {architecture write-up} on the blog.',
         ],
@@ -90,49 +90,7 @@ export const aboutPage: LocalizedPage = {
       },
     ],
   },
-  zh: {
-    title: '关于 ToolHub',
-    description: '快速、免费、注重隐私的工具 —— 为只想把事做完的人而打造。',
-    sections: [
-      {
-        heading: '我们的使命',
-        blocks: [
-          'ToolHub 是一组简单、专注的在线工具,用来解决日常问题、不打扰你。我们相信一个工具应该秒开、做好一件事、尊重你的时间与隐私。没有求你留邮箱的弹窗,没有挡住关键功能的付费墙,没有 12 步引导。',
-        ],
-      },
-      {
-        heading: '默认隐私',
-        blocks: [
-          '这里的大多数工具完全在你的浏览器中运行。你粘贴的文本、处理的文件和勾选的选项都在本地处理,不会发送给服务端计算 API。',
-          '站点本身可能展示广告并使用分析服务来维持工具免费。这些服务会单独处理网站层面的数据,而工具分享链接也可能包含设置。{隐私政策}会讲清这些数据流,以及为什么不应在链接中放敏感数值。',
-        ],
-        links: { '隐私政策': '/privacy/' },
-      },
-      {
-        heading: '我们做什么',
-        blocks: [
-          '我们专注为开发者、写作者,以及任何在浏览器里工作的人做工具。每个工具围绕一个清晰定义的任务设计 —— 比如把博客标题转成干净的 URL slug —— 并附上指南,教你如何发挥它最大的价值。',
-          '技术底座是一个静态导出的 Next.js + TypeScript 应用,可安装为 PWA:页面都是预渲染文件,所有计算都在浏览器本地完成。目前收录 350 个工具、15 个分类,界面提供 4 种语言(English、中文、Español、Deutsch)。',
-          '新工具持续更新。如果你希望某个工具存在,{告诉我们} —— 读者需求已经催生了本站不止一个工具。',
-          '想知道这一切是怎么拼起来的?博客上有一篇完整的{架构复盘}。',
-        ],
-        links: { '告诉我们': '/contact/', '架构复盘': '/blog/how-i-built-toolhub/' },
-      },
-      {
-        heading: '背后是谁',
-        blocks: [
-          'ToolHub 由一名独立开发者利用业余时间设计、开发和维护 —— 源于对臃肿、广告满屏的工具站的厌倦,靠不打扰人的广告覆盖成本。背后没有公司,也没有增长黑客的算计 —— 只是想让互联网稍微更有用一点。',
-        ],
-      },
-      {
-        heading: '联系我们',
-        blocks: [
-          '发现 bug?有想法?想要一个还不存在的工具?去我们的{联系页}看看。我们每条消息都读。',
-        ],
-        links: { '联系页': '/contact/' },
-      },
-    ],
-  },
+
   es: {
     title: 'Acerca de ToolHub',
     description: 'Herramientas rápidas, gratuitas y respetuosas con la privacidad — para quienes solo quieren hacer el trabajo.',
@@ -155,7 +113,7 @@ export const aboutPage: LocalizedPage = {
         heading: 'Qué construimos',
         blocks: [
           'Nos centramos en utilidades para desarrolladores, escritores y cualquiera que trabaje en un navegador. Cada herramienta gira en torno a una única tarea bien definida — como convertir el título de un artículo en un slug URL limpio — y viene con una guía para sacarle el máximo.',
-          'Bajo el capó, el sitio es una aplicación Next.js + TypeScript exportada estáticamente e instalable como PWA: las páginas son archivos prerenderizados y cada cálculo corre localmente en el navegador. Hoy reúne 350 herramientas en 15 categorías, con la interfaz disponible en 4 idiomas (English, 中文, Español, Deutsch).',
+          'Bajo el capó, el sitio es una aplicación Next.js + TypeScript exportada estáticamente e instalable como PWA: las páginas son archivos prerenderizados y cada cálculo corre localmente en el navegador. Hoy reúne 350 herramientas en 15 categorías, con la interfaz disponible en 3 idiomas (English, Español, Deutsch).',
           'Añadimos herramientas nuevas con regularidad. Si echas en falta algo, {dínoslo} — las peticiones de los lectores han dado forma a más de una herramienta en este sitio.',
           '¿Curioso por cómo encaja todo? En el blog hay un {repaso completo de la arquitectura}.',
         ],
@@ -198,7 +156,7 @@ export const aboutPage: LocalizedPage = {
         heading: 'Was wir bauen',
         blocks: [
           'Wir konzentrieren uns auf Helfer für Entwickler, Schreibende und alle, die im Browser arbeiten. Jedes Werkzeug ist um eine einzige klar definierte Aufgabe herum gebaut — etwa einen Blogtitel in einen sauberen URL-Slug umzuwandeln — und wird von einer Anleitung begleitet, die zeigt, wie du das Meiste herausholst.',
-          'Unter der Haube ist die Seite eine statisch exportierte Next.js-+-TypeScript-Anwendung, die sich als PWA installieren lässt: Seiten sind vorgerenderte Dateien, und jede Berechnung läuft lokal im Browser. Aktuell umfasst sie 350 Werkzeuge in 15 Kategorien, die Oberfläche gibt es in 4 Sprachen (English, 中文, Español, Deutsch).',
+          'Unter der Haube ist die Seite eine statisch exportierte Next.js-+-TypeScript-Anwendung, die sich als PWA installieren lässt: Seiten sind vorgerenderte Dateien, und jede Berechnung läuft lokal im Browser. Aktuell umfasst sie 350 Werkzeuge in 15 Kategorien, die Oberfläche gibt es in 3 Sprachen (English, Español, Deutsch).',
           'Neue Werkzeuge kommen regelmäßig dazu. Wenn du dir etwas wünschst, das es noch nicht gibt, {sag uns Bescheid} — Leserwünsche haben hier schon mehr als ein Werkzeug geprägt.',
           'Neugierig, wie das alles zusammengebaut ist? Im Blog gibt es eine {vollständige Architektur-Rückschau}.',
         ],
@@ -280,61 +238,7 @@ export const contactPage: LocalizedPage = {
       },
     ],
   },
-  zh: {
-    title: '联系我们',
-    description: '有问题、反馈,或希望某个工具存在?我们很乐意收到你的消息。',
-    sections: [
-      {
-        heading: '取得联系',
-        blocks: [
-          '我们每条消息都读,并尽量在几个工作日内回复。无论你发现了 bug、有功能建议,还是只想打个招呼 —— 你来对地方了。',
-        ],
-      },
-      {
-        heading: '',
-        blocks: [
-          { heading: '邮箱' },
-          '最可靠的联系方式。写信到:{contact@axtrivc.com}。',
-        ],
-        links: { 'contact@axtrivc.com': 'mailto:contact@axtrivc.com' },
-      },
-      {
-        heading: '',
-        blocks: [
-          { heading: '建议附上' },
-          '为了让我们更快帮你,请包含:',
-          {
-            list: [
-              '工具名称以及你当时所在页面的 URL。',
-              '简短描述发生了什么、你期望的结果是什么。',
-              '你的浏览器和设备(例如 Windows 上的 Chrome、iPhone 上的 Safari)。',
-              '触发问题的文本或输入(如相关)。',
-            ],
-          },
-        ],
-      },
-      {
-        heading: '',
-        blocks: [
-          { heading: '工具需求' },
-          '我们根据读者的真实需求开发新工具。如果有个工具你一直在找、却总找不到好用的版本,告诉我们。描述你想完成的事,我们会考虑放进未来的版本。',
-        ],
-      },
-      {
-        heading: '',
-        blocks: [
-          { heading: '商务与合作' },
-          '广告、赞助或合作咨询,请用同一个邮箱,主题写"Partnership"。',
-        ],
-      },
-      {
-        heading: '响应时间',
-        blocks: [
-          'ToolHub 由一名独立开发者维护,通常在 1–3 个工作日内回复。感谢你的耐心。',
-        ],
-      },
-    ],
-  },
+
   es: {
     title: 'Contacto',
     description: '¿Preguntas, comentarios o una herramienta que te gustaría que existiera? Nos encantaría leerte.',
@@ -539,89 +443,7 @@ export const termsPage: LocalizedPage = {
       },
     ],
   },
-  zh: {
-    title: '服务条款',
-    description: '最近更新:2026 年 1 月',
-    sections: [
-      {
-        heading: '',
-        blocks: [
-          '欢迎使用 ToolHub。本《服务条款》("条款")约束你访问和使用我们的网站与工具("服务")。使用服务即表示你同意本条款。如不同意,请不要使用服务。',
-        ],
-      },
-      {
-        heading: '1. 使用我们的工具',
-        blocks: [
-          '我们授予你一项个人的、非独占的、不可转让的许可,用于合法目的使用本服务。个人和商业用途都可以 —— 例如,为你公司博客生成 slug 是允许的。',
-          '你同意不:',
-          {
-            list: [
-              '出于任何非法活动或违反任何适用法律的目的使用服务。',
-              '试图扰乱、过载或未经授权地访问服务。',
-              '使用自动化脚本滥用服务或试图使其失效。',
-              '将服务作为自己的产品复制或转售。',
-            ],
-          },
-        ],
-      },
-      {
-        heading: '2. 你的内容',
-        blocks: [
-          '由于我们的工具在浏览器中本地处理输入,你对所输入的任何内容保留全部权利。我们不存储、不复制,也不对输入主张任何所有权。',
-        ],
-      },
-      {
-        heading: '3. 知识产权',
-        blocks: [
-          '本服务 —— 包括其设计、文本和代码 —— 归 ToolHub 所有,受知识产权法保护。工具基于你的输入产生的输出归你所有。',
-        ],
-      },
-      {
-        heading: '4. 免责声明',
-        blocks: [
-          '本服务按"现状"和"按可用性"提供,不附带任何明示或暗示的保证。我们不保证工具无错误、不中断,或对每个目的都能产出合适的结果。你自行斟酌使用输出。',
-        ],
-      },
-      {
-        heading: '5. 责任限制',
-        blocks: [
-          '在法律允许的最大范围内,ToolHub 对因你使用或无法使用服务而产生的任何间接、附带或后果性损害概不负责。由于服务免费提供,我们对任何索赔的总责任以你已向我们支付的金额为限,即为零。',
-        ],
-      },
-      {
-        heading: '6. 广告',
-        blocks: [
-          '本服务由广告支持。第三方广告网络可能按我们{隐私政策}中所述投放广告并使用 cookie。我们对第三方广告的内容不承担责任。',
-        ],
-        links: { '隐私政策': '/privacy/' },
-      },
-      {
-        heading: '7. 第三方链接',
-        blocks: [
-          '本服务可能包含指向第三方网站的链接。我们对任何第三方网站的内容、政策或做法不承担责任,也不对此承担任何责任。',
-        ],
-      },
-      {
-        heading: '8. 服务与条款的变更',
-        blocks: [
-          '我们可随时修改或停止服务,或更新本条款。条款变更时,我们会更新上方的"最近更新"日期。变更生效后继续使用服务,即视为接受新条款。',
-        ],
-      },
-      {
-        heading: '9. 适用法律',
-        blocks: [
-          '本条款受 ToolHub 运营所在司法管辖区的法律管辖,不考虑法律冲突原则。',
-        ],
-      },
-      {
-        heading: '10. 联系',
-        blocks: [
-          '对本条款有疑问?请{联系我们}。',
-        ],
-        links: { '联系我们': '/contact/' },
-      },
-    ],
-  },
+
   es: {
     title: 'Términos del Servicio',
     description: 'Última actualización: enero de 2026',

@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * Nginx Config Generator 长文正文 —— 四语 dispatcher
+ * Nginx Config Generator 长文正文 —— 三语 dispatcher
  *
- * en 分支等价于原 ToolContent 渲染输出。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支等价于原 ToolContent 渲染输出。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en (与改造前渲染输出一致) ────────────────────────────
@@ -61,40 +61,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具?</h2>
-    <p>
-      把 <strong>nginx 配置为反向代理</strong> —— 放在 Node.js 应用、Python API 或任意本地服务前面 —— 意味着要记住十几个指令:转发哪些头、如何终结 SSL、WebSocket 升级怎么工作。本生成器根据一个简单的表单,边输入边生成一份完整且带注释的 <code>sites-available</code> 配置。
-      一切都在浏览器中完成,结果可作为 <code>.conf</code> 文件下载,直接放到你的服务器上使用。
-    </p>
-
-    <div>
-      <h2>生成的配置包含哪些内容</h2>
-      <p>
-        每份配置都会转发你的应用识别真实客户端所需的请求头:<code>Host</code>、<code>X-Real-IP</code>、<code>X-Forwarded-For</code>、<code>X-Forwarded-Proto</code>,以及 <code>proxy_http_version 1.1</code>。
-        开启 <strong>SSL</strong> 可得到一个 <code>443 ssl http2</code> 监听器,带 Let's Encrypt 证书路径和 HTTP→HTTPS 跳转块;开启 <strong>WebSocket 支持</strong> 可加上 <code>Upgrade</code>/<code>Connection</code> 头以及必需的 <code>map</code> 块。可选的 <strong>gzip</strong> 与 <strong>静态资源缓存</strong>(<code>expires 30d</code>)让整套配置达到生产可用。
-      </p>
-    </div>
-
-    <div>
-      <h2>如何安装</h2>
-      <p>
-        把文件保存到 <code>/etc/nginx/sites-available/your-domain.conf</code>,用 <code>sudo ln -s /etc/nginx/sites-available/your-domain.conf /etc/nginx/sites-enabled/</code> 创建软链,然后运行 <code>sudo nginx -t</code> 验证,再用 <code>sudo systemctl reload nginx</code> 应用。
-        如果使用 SSL,请先用 <code>sudo certbot --nginx -d your-domain.com</code> 申请证书;也可以先关掉 SSL,以后再补。
-      </p>
-    </div>
-
-    <div>
-      <h2>需要检查的常见坑</h2>
-      <p>
-        大多数反向代理 bug 都源自三类错误。第一,缺失或错误的 <code>Host</code> 头会让按域名路由的应用出问题 —— 生成的配置始终会设置它。第二,没有 <code>Upgrade</code> 头和 <code>map $http_upgrade $connection_upgrade</code> 块,WebSocket 应用会悄无声息地卡住。第三,上传会以 <em>413 Request Entity Too Large</em> 失败,直到你调大 <code>client_max_body_size</code> —— 选一个与你预期的最大上传大小相符的值。
-        另外,请确保应用监听在代理目标端口上(<code>127.0.0.1</code> 最安全),并让防火墙放行 80/443 端口。
-      </p>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -166,7 +132,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function NginxConfigGeneratorContent(): ReactNode {
   const { locale } = useApp()

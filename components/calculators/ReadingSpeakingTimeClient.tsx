@@ -87,7 +87,7 @@ export function ReadingSpeakingTimeClient() {
   // P-1 门控:仅对前 MAX_ANALYZE_CHARS 字符做统计,超出部分跳过(下方横幅提示)
   const safeText = text.length > MAX_ANALYZE_CHARS ? text.slice(0, MAX_ANALYZE_CHARS) : text
   const truncated = text.length > MAX_ANALYZE_CHARS
-  const textIsZh = safeText.trim() ? hasCJK(safeText) : locale === 'zh'
+  const textIsZh = safeText.trim() ? hasCJK(safeText) : false
   // 滑块量程随语种切换(中文 50–800、西文 50–400):切换后把旧自定义值钳回
   // 当前量程,否则原生 range 会把指针钳在 max、而标签与计算仍用越界原值。
   const readMin = 50
@@ -99,7 +99,7 @@ export function ReadingSpeakingTimeClient() {
   // 语速单位随统计口径走:含 CJK 时数字是「字/分」而非词/分,读 cpmUnit
   // 词条;缺译时 zh 回退「字/分」,es/de/en 回退 chars/min。
   const speedUnit = textIsZh
-    ? L('cpmUnit', locale === 'zh' ? '字/分' : 'chars/min')
+    ? L('cpmUnit', 'chars/min')
     : L('wpmUnit', 'wpm')
 
   const stats = useMemo(() => {

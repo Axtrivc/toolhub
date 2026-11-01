@@ -5,24 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const fuelEconomyConverterL10n: ToolL10n = {
-  zh: {
-    ui: {
-      'note': '⛽ L/100km 与 mpg 成反比(越低越好):L/100km = 235.215 ÷ 美制 mpg。km/L 为线性关系:1 km/L ≈ 2.35215 美制 mpg。英制 mpg × 0.83267 = 美制 mpg(1 英制加仑 = 1.20095 美制加仑)。请输入大于 0 的数值(0 或负数无意义)。数值为近似值。',
-      'unit.kml': '公里/升 (km/L)',
-      'unit.l100km': '升/百公里 (L/100km)',
-      'unit.mpg-uk': '英制英里/加仑 (mpg)',
-      'unit.mpg-us': '美制英里/加仑 (mpg)',
-    },
-    useCases: [
-      '对比汽车的 MPG 和百公里油耗(升)',
-      '估算美制和英制加仑对应的油耗差异',
-      '在购车时换算油耗单位做横向比较',
-      '把公里/升(km/L)与 MPG 互相换算',
-    ],
-    faqs: [
-      { q: '40 MPG 和 5 L/100km 哪个更省油?', a: '5 L/100km 更省油——约等于 47 MPG(美制)。40 MPG 约等于 5.9 L/100km。' },
-    ],
-  },
+
   es: {
     ui: {
       'note': '⛽ L/100km es inversamente proporcional al mpg (menor = mejor): L/100km = 235,215 ÷ mpg EE. UU. km/L es lineal: 1 km/L ≈ 2,35215 mpg EE. UU. mpg UK × 0,83267 = mpg EE. UU. (1 galón UK = 1,20095 galones EE. UU.). Introduce un valor mayor que 0 (0 o negativo no está definido). Valores aproximados.',

@@ -5,38 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const emailExtractorL10n: ToolL10n = {
-  zh: {
-    ui: {
-      defaultInput: '欢迎通过 hello@example.com 或 support@test.org 联系我们。',
-      'noEmailsFound': '未找到邮箱',
-      'clear': '清空',
-      'placeholder': '粘贴包含邮箱地址的文本…',
-      'resultPlaceholder': '结果将显示在这里…',
-      'inputLabel': '含邮箱的文本',
-      'outputLabel': '提取出的邮箱',
-      'formatLabel': '导出格式',
-      'fmtNewline': '换行',
-      'fmtComma': '逗号分隔(抄送用)',
-      'filterPublic': '过滤公共邮箱(Gmail、QQ、Yahoo 等)',
-      'foundN': '{n} 个唯一邮箱',
-      'filteredN': '已滤除 {n} 个公共邮箱',
-      'domainTitle': '按域名归类',
-      'exportCsv': '导出 CSV',
-      'note': '📧 从任意文本中提取所有邮箱地址,自动去重。逗号格式可直接粘贴进邮件抄送栏;域名过滤器剔除 Gmail、QQ、Yahoo 等公共邮箱,让企业专有域名一目了然。',
-    },
-    useCases: [
-      '从文档中提取联系方式',
-      '整理散落的联系人列表',
-      '从已有资料构建邮件列表(请合规使用)',
-      '核查旧文件里都有哪些邮箱',
-    ],
-    faqs: [
-      { q: '这个工具会验证邮箱是否有效吗?', a: '它只检测格式是否匹配。真正的验证需要发送一封邮件——没有任何工具能在不发邮件的情况下确认地址存在。联系提取到的地址时,请务必遵守反垃圾邮件相关法律。' },
-      { q: '重复的邮箱会被保留吗?', a: '不会——工具自动去重,同一个地址无论在文本里出现多少次,结果里只留一条。先在这里提取一遍,比在 Excel 里手动删重复行快得多。' },
-      { q: '能识别带 + 号或子域名的地址吗?', a: '可以,user.name+tag@gmail.com 这类常见格式都能匹配。不过它按模式识别,不保证语法 100% 合规(比如本地部分带引号这类极罕见的写法);批量提取后建议先抽查几条再使用。' },
-      { q: '用提取到的邮箱发营销邮件合法吗?', a: '分场景:欧盟按 GDPR 需要明确同意,德国还要求双重确认(Double Opt-in);中国《个人信息保护法》同样要求事先取得同意;美国 CAN-SPAM 允许冷邮件但必须提供退订。没有同意基础的名单,不要群发。' },
-    ],
-  },
+
   es: {
     ui: {
       defaultInput: 'Contáctanos en hola@example.com o soporte@test.org para ayuda.',

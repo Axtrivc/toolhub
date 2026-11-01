@@ -32,30 +32,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具?</h2>
-    <p>
-      将 JSON 对象数组转换为 CSV 格式。适合把应用数据导出到电子表格、数据分析工具,或用于数据库导入。
-    </p>
-    <div>
-      <h2>工作原理</h2>
-      <p>
-        工具会收集所有对象的键作为 CSV 表头(按首次出现的顺序),然后将每个对象写为一行。包含逗号、引号或换行符的字段会自动用引号包裹并正确转义。
-      </p>
-    </div>
-    <div>
-      <h2>何时会用到它</h2>
-      <ul>
-        <li>从应用中导出数据用于电子表格分析</li>
-        <li>为数据库导入准备数据</li>
-        <li>与非技术相关方共享数据</li>
-        <li>将数据导入 BI 工具,例如 Tableau 或 Power BI</li>
-      </ul>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -115,7 +91,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function JSONtoCSVContent(): ReactNode {
   const { locale } = useApp()

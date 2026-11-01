@@ -5,45 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const AmortizationTableGeneratorL10n: ToolL10n = {
-  zh: {
-    useCases: ['生成逐期还款的完整摊销表', '看每期还款里本金和利息各占多少', '导出全周期 CSV 给 Excel', '看清提前还款为何能省大量利息'],
-    faqs: [
-      { q: '明细表到底展示什么?', a: '按顺序列出每一期:期数、还款额、本金与利息的拆分、剩余余额。前期利息占大头——常见利率下,第一期还款大部分付的是利息——本金反超的拐点在表里一目了然。' },
-      { q: '月供是怎么算的?', a: '标准摊销公式 P × r(1+r)^n ÷ ((1+r)^n − 1),r 为月利率、n 为期数。之后每行套用"利息 = 余额 × 月利率,本金 = 月供 − 利息",完整模拟放贷方的记账过程。' },
-      { q: '能导出完整计划吗?', a: '能——下载的是完整 CSV(带 UTF-8 BOM,Excel 打开不乱码),整个期限每期一行。页面默认预览前 12 期并提供展开按钮,但导出文件永远是全表。' },
-      { q: '提前还款会改变这张表吗?', a: '本工具只展示合同计划表。但这张表恰恰解释了提前还款为何有效:多还的每一块钱都直接冲本金,之后所有利息都按更小的余额计提——这就是适度多还能把 30 年贷款缩短好几年的原因。' },
-    ],
-    ui: {
-      'scheduleLabel': '逐期还款明细',
-      'thNum': '期数',
-      'thPayment': '月供',
-      'thPrincipal': '本金',
-      'thInterest': '利息',
-      'thBalance': '余额',
-      'expand': '展开全部 {n} 行',
-      'collapse': '只看前 12 行',
-      'chartBalance': '剩余余额',
-      'chartTitle': '余额随时间变化',
-      'csvNum': '期数',
-      'csvPayment': '月供',
-      'csvPrincipal': '本金',
-      'csvInterest': '利息',
-      'csvBalance': '剩余余额',
-      'copySummary': '复制摘要',
-      'errInvalidLoan': '请输入有效的贷款金额、利率与期限',
-      'inputs': '输入',
-      'summaryTitle': '计算摘要',
-      'in.principal': '贷款金额',
-      'in.rate': '年利率',
-      'in.years': '期限',
-      'in.yearsSuffix': '年',
-      'note': '📋 点击上方按钮下载逐期还款 CSV 明细——每行把固定月供拆为利息(余额 × 月利率)与本金,并附运行余额。前期以利息为主。',
-      'out.interestShare': '利息占还款比例',
-      'out.monthly': '月供',
-      'out.totalInterest': '总利息',
-      'out.totalPaid': '总还款',
-    },
-  },
+
   es: {
     useCases: ['generar la tabla de amortización completa', 'ver cuánto capital e intereses paga cada mes', 'exportar el CSV completo para Excel', 'entender por qué adelantar pagos ahorra tanto'],
     faqs: [

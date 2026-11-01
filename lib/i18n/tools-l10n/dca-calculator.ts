@@ -4,43 +4,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const DcaCalculatorL10n: ToolL10n = {
-  zh: {
-    useCases: ['算出定投期间的实际平均买入成本', '对比定投与一次性全仓的期末市值', '规划每月/每两周的工资定投金额', '在下跌行情中看清定投摊低成本的作用'],
-    faqs: [
-      { q: '平均成本是怎么算的?', a: '每期投入按当期价格买入份额,总投入现金 ÷ 累计份额 = 平均成本。在假设的线性价格路径下,下跌时它会略低于区间中点价——因为便宜的时候买到的份额更多。' },
-      { q: '定投什么时候跑赢一次性买入?', a: '从数学上讲,当期末价低于期初价时定投占优(同样的钱在更低位买得更多)。但历史上一次性买入约三分之二的时间更赚,因为市场上涨的次数更多;定投真正的优势在纪律性与波动中的摊低成本。' },
-      { q: '定投能降低风险吗?', a: '它把入场时点风险摊到各期,消除择时焦虑;但代价是一部分现金迟迟没有入市,拉低了期望收益。它更像纪律工具,而不是收益最大化工具。' },
-      { q: '该选什么定投频率?', a: '跟着发薪节奏走——月投或双周投。同样的总金额下,提高频率对平均成本的改善非常有限;坚持才是主要变量。' },
-    ],
-    ui: {
-      'in.amount': '每期定投金额',
-      'in.freq': '定投频率',
-      'in.months': '总月数',
-      'in.startPrice': '期初价格',
-      'in.endPrice': '期末价格',
-      'opt.freq.weekly': '每周',
-      'opt.freq.biweekly': '每两周',
-      'opt.freq.monthly': '每月',
-      'out.totalInvested': '累计投入',
-      'out.sharesBought': '累计份额',
-      'out.avgCost': '平均成本/份',
-      'out.finalValue': '期末组合市值',
-      'out.dcaPL': '定投盈亏',
-      'out.lumpValue': '一次性买入市值(同额现金)',
-      'out.advantage': '定投 vs 一次性',
-      'chartTitle': '组合市值:定投 vs 一次性',
-      'line.dca': '定投策略',
-      'line.lump': '首日一次性买入',
-      'preset.0': '下跌行情',
-      'preset.1': '上涨行情',
-      'preset.2': '五年阴跌',
-      'errInvalid': '请输入正的金额与价格,且至少 1 个月',
-      'errTooLong': '时间跨度请控制在 480 个月以内',
-      'dcaWins': '定投胜出',
-      'lumpWins': '一次性胜出',
-      'note': '📈 价格路径假设为期初到期末的线性变化,因此这里的“平均成本”是单边行情下的诚实算术。真实市场是曲折的——端点之间的波动正是让真实定投平均成本更低的原因。频率换算:每周 = 每年 52 次,每两周 = 26 次,每月 = 12 次。',
-    },
-  },
+
   es: {
     useCases: ['calcular el coste medio real de tus aportaciones periódicas', 'comparar la DCA con invertir todo el primer día', 'planificar cuánto aportar cada mes o cada dos semanas', 'ver cuánto rebaja el coste medio invertir en un mercado a la baja'],
     faqs: [

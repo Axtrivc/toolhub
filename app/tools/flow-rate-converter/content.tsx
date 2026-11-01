@@ -29,30 +29,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具?</h2>
-    <p><strong>流量</strong>衡量单位时间内通过某一点的流体数量。本工具可在升/秒、升/分钟、立方米/小时、加仑/分钟和立方英尺/分钟之间换算。</p>
-    <div>
-      <h2>常用换算</h2>
-      <ul>
-        <li>1 L/s = 60 L/min = 3.6 m³/h</li>
-        <li>1 加仑/分钟(US)≈ 3.785 L/min ≈ 0.063 L/s</li>
-        <li>1 CFM(ft³/分钟)≈ 28.32 L/min ≈ 0.472 L/s</li>
-      </ul>
-    </div>
-    <div>
-      <h2>现实中的流量</h2>
-      <ul>
-        <li>花洒:~8-10 L/min</li>
-        <li>花园水管:~15-20 L/min</li>
-        <li>消防栓:~1000+ L/min</li>
-        <li>小河:~10,000 m³/h</li>
-      </ul>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -104,7 +80,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function FlowRateConverterContent(): ReactNode {
   const { locale } = useApp()

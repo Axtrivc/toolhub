@@ -15,7 +15,7 @@ import {
 } from '@/components/BlogArticleBody'
 
 /**
- * Pillar #3:FIRE 提前退休行动手册(四语正文 + 工具内链卡)。
+ * Pillar #3:FIRE 提前退休行动手册(三语正文 + 工具内链卡)。
  * 静态导出兼容:纯 server component;正文与页框文案(H1/面包屑/返回链接/阅读时长)
  * 交由 BlogArticleBody 系客户端组件跟随 locale 渲染(SSR 首帧英文)。
  */

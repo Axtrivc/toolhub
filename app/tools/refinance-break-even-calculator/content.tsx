@@ -5,7 +5,7 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * RefinanceBreakEvenCalculator 长文正文 —— 四语 dispatcher
+ * RefinanceBreakEvenCalculator 长文正文 —— 三语 dispatcher
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -22,19 +22,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>唯一的问题:几个月回本</h2>
-    <p>再融资是用一次性成本换更低月供,所以数学上就是一场赛跑:一边是过户费,一边是每月节省。$4,800 成本除以每月 $303 节省,新贷款 15.8 个月回本。在此之后多持有一个月就净赚一个月;在此之前卖房或再次再融资,这笔交易就是亏的。</p>
-    <h2>月供陷阱:期限重置</h2>
-    <p>月供更低不等于贷款更便宜。把还剩 27 年的余额重组成崭新的 30 年期,月供下降有一部分来自把本金重新摊回 360 个月——你可能每月付得更少,贷款总利息反而更多。永远把"利息变化"那一栏和月度节省放在一起读;也可以考虑让新期限对齐你实际剩余的年数。</p>
-    <h2>哪些该算进过户费</h2>
-    <p>只算"不 refinancing 就不用付"的钱:评估费($500-800)、发起费或点数、产权检索与贷款方产权保险、登记费、escrow 开户——$320,000 余额通常 $3,000-6,000(贷款额的 2-5%)。预付利息和 escrow 存款不算:不管是否 refinancing,这些钱你都要付。</p>
-    <h2>"降满一个点再动手"是老黄历</h2>
-    <p>"等利率降满 1 个百分点"是 8% 房贷年代的口诀。在今天余额动辄三十几万的情况下,0.375% 也能在两年内回本。跑一下你自己的数字:计算器画出累计节省曲线越过成本线的那个交点——那才是这条老口诀的诚实版本。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -64,7 +51,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function RefinanceBreakEvenCalculatorContent(): ReactNode {
   const { locale } = useApp()

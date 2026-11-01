@@ -40,7 +40,7 @@ const VID_KEY = 'toolhub-vid'
 /** 数字按语言本地化分隔(en 12,345 / de 12.345 / zh 12,345) */
 const NUMBER_LOCALE: Record<Locale, string> = {
   en: 'en-US',
-  zh: 'zh-CN',
+
   es: 'es-ES',
   de: 'de-DE',
 }

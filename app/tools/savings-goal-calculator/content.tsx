@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * Savings Goal Calculator 长文正文 —— 四语 dispatcher
+ * Savings Goal Calculator 长文正文 —— 三语 dispatcher
  *
- * en 分支等价于原 ToolContent 渲染输出。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支等价于原 ToolContent 渲染输出。es/de 仅客户端 hydration 后切换。
  * 公式 (<code> 标签内) 保持英文/数学符号不变,仅翻译周边文字。
  */
 
@@ -44,38 +44,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具?</h2>
-    <p>计算达成任意储蓄目标所需的每月供款——买房首付、买车、应急基金或度假——并考虑你已有积蓄的投资增长。</p>
-
-    <div>
-      <h2>工作原理</h2>
-      <p>计算器先估算你当前储蓄的未来价值,再求出填补目标缺口所需的每月供款。回报率越高,每月所需供款就越小——但风险也更大。</p>
-    </div>
-
-    <div>
-      <h2>背后的公式</h2>
-      <p>本工具使用“系列终值”(普通年金)结合起始余额的复利增长。所需每月供款 <code>M</code> 满足: <code>Goal = P(1+r)^n + M × [((1+r)^n − 1) / r]</code>, 其中 <code>P</code> 是你当前的储蓄, <code>r</code> 是月回报率(年利率 ÷ 12), <code>n</code> 是月数。计算器替你完成代数运算——你只需输入目标、期限和预期回报率。</p>
-    </div>
-
-    <div>
-      <h2>计算示例</h2>
-      <p>假设你想在 <strong>5 年</strong>内存够 <strong>$30,000</strong> 作为买房首付,你已经有 <strong>$5,000</strong> 存款,预期 <strong>年回报率 5%</strong>。你的 $5,000 自身会增长到约 $6,417,留下约 $23,583 的缺口。按 5% 的增长率分摊到 60 个月,大约需要每月存 <strong>$347</strong>。若把回报率提高到 7%,所需每月供款会降到约 $320——增长在帮你分担更多。</p>
-    </div>
-
-    <div>
-      <h2>设定合理目标</h2>
-      <ul>
-        <li><strong>应急基金:</strong>3-6 个月的生活开支</li>
-        <li><strong>买房首付:</strong>房价的 10-20%</li>
-        <li><strong>购车:</strong>尽量全款支付以避免贷款利息</li>
-        <li><strong>婚礼:</strong>差异很大——先确定你的金额</li>
-      </ul>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -143,7 +111,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function SavingsGoalCalculatorContent(): ReactNode {
   const { locale } = useApp()

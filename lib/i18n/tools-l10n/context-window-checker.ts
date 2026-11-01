@@ -5,29 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const ContextWindowCheckerL10n: ToolL10n = {
-  zh: {
-    useCases: [
-      '发送前检查:把整段系统提示 + 文档粘贴进来,确认没有顶爆目标模型的上下文窗口',
-      'RAG 切块验收:估算每个检索片段的 token 占用,反推单次请求最多塞几个片段',
-      '对比同一内容的中英文版本——中文按约 1.1 token/字计,往往比英文翻译贵 30% 以上',
-      '为输出反推输入上限:128K 窗口要留 4K 给回复,输入就得控制在 124K 以内',
-    ],
-    faqs: [
-      { q: '这个估算有多准?', a: '采用业界通行的启发式:拉丁文本按字符数 ÷ 4、CJK 按每字约 1.1 token 估算,与真实分词器的误差通常在 ±10% 以内。要做计费级精确统计,请用官方的 tiktoken 或各厂商 tokenizer——本工具的定位是发送前的快速体检。' },
-      { q: '为什么中文比英文"贵"?', a: '主流 BPE 分词器的词表以英文为中心训练,一个英文单词常合并为 1 个 token,而一个汉字通常独占 1 个以上 token。同样语义的提示词,中文 token 消耗普遍高出三成,长文档场景务必实测。' },
-      { q: '上下文窗口只算输入吗?', a: '不是。输入(系统提示 + 历史消息 + 文档)与模型输出共享同一个窗口。若窗口 128K 而你塞了 126K 输入,模型只剩 2K 可写——长文生成任务务必预留输出余量。' },
-      { q: '超窗口会发生什么?', a: '多数 API 直接报 context_length_exceeded 错误;部分框架会静默截断最早的消息,导致模型"失忆"却不报错。与其事后排查,不如发送前在这里把文本量校准。' },
-    ],
-    ui: {
-      'estimate': '≈ {n} tokens · {c} 字符',
-      'exceeds': '超出 {}',
-      'headroom': '剩余',
-      'inputLabel': '粘贴你的提示词 / 文档',
-      'note': '📏 token 数为近似估算(拉丁文本字符÷4,CJK 每字约 1.1)——5% 以内的波动视为噪声。输出与输入共享同一窗口,请为回复加系统提示预留空间。',
-      'ofWindow': '占窗口',
-      'placeholder': '粘贴你打算发送的文本…',
-    },
-  },
+
   es: {
     useCases: [
       'Chequeo antes de enviar: pega el system prompt completo + el documento y confirma que cabe en la ventana del modelo',

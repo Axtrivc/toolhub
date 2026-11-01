@@ -5,45 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const DogAgeCalculatorL10n: ToolL10n = {
-  zh: {
-    useCases: ['把狗的年龄换算成人类年龄', '按体型修正大型犬的衰老速度', '判断狗狗处于哪个生命阶段', '破除"乘 7"的狗龄迷思'],
-    faqs: [
-      { q: '为什么不直接乘以 7?', a: '"×7"在两端都不成立:一岁的狗已经性成熟、行为上相当于青少年(约 15 人岁),而且狗在前两年老得最快。本工具用 AVMA 共识曲线——第一年 15 人岁、第二年 24,之后按体型每狗年加 4-6.5 人岁。' },
-      { q: '体型怎么影响计算?', a: '两岁之后,小型犬(小于 9 kg)每狗年约加 4 人岁,中型 5,大型 6.5。所以 13 岁的吉娃娃约相当于 68 岁,而 13 岁的大丹犬已约 96 岁——大型犬成熟速度相同,之后老得更快。' },
-      { q: '狗几岁算老年?', a: '大致相当于人类等效年龄过了 55 岁——大型犬约 7-9 岁、小型犬 10-12 岁,生命阶段输出会直接标出。即使看起来健康,兽医也建议从这些年龄开始做老年筛查。' },
-    ],
-    ui: {
-      'chartTitle': '生命阶段',
-      'zone.0': '幼犬',
-      'zone.1': '少年',
-      'zone.2': '壮年',
-      'zone.3': '中年',
-      'zone.4': '老年',
-      'in.dogAge': '狗狗年龄',
-      'in.humanAge': '近似人类等效年龄',
-      'in.lifeStage': '生命阶段',
-      'in.mythNote': '关于"×7"迷思',
-      'in.size': '犬型大小',
-      'inSuffix.dogAge': '年',
-      'note': '🐶 狗一岁就达到青少年成熟度(约人类 15 岁),两岁即为成年——×7 规则解释不了。此后大型犬衰老更快,比玩具犬早数年进入老年。',
-      'opt.size.large': '大型(> 23 kg)',
-      'opt.size.medium': '中型(9-23 kg)',
-      'opt.size.small': '小型(< 9 kg)',
-      'out.dogAge': '狗狗年龄',
-      'out.humanAge': '近似人类等效年龄',
-      'out.lifeStage': '生命阶段',
-      'out.mythNote': '关于"×7"迷思',
-      'out.size': '犬型大小',
-          'errInvalidAge': "请输入 0-30 年之间的狗龄",
-      'unit.humanYears': "人岁",
-      'myth': "×7 法则忽略了成熟的节奏",
-      'stage.puppy': '幼犬',
-      'stage.junior': '少年',
-      'stage.adult': '壮年',
-      'stage.mature': '中年',
-      'stage.senior': '老年',
-},
-  },
+
   es: {
     useCases: ['convertir la edad de tu perro a años humanos', 'ajustar el envejecimiento por tamaño de raza', 'saber en qué etapa vital está tu perro', 'deshacer el mito del «por siete»'],
     faqs: [

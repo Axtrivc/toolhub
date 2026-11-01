@@ -5,33 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const weightConverterL10n: ToolL10n = {
-  zh: {
-    ui: {
-      'note': '⚖️ 同时覆盖日常重量(千克、磅、盎司、英石)和精密质量单位(宝石用克拉,弹药/药品用格令)。质量与重量共用此转换器。',
-      'unit.carat': '克拉 (ct)',
-      'unit.cg': '厘克 (cg)',
-      'unit.dag': '十克 (dag)',
-      'unit.g': '克 (g)',
-      'unit.grain': '格令 (gr)',
-      'unit.kg': '千克 (kg)',
-      'unit.lb': '磅 (lb)',
-      'unit.mg': '毫克 (mg)',
-      'unit.oz': '盎司 (oz)',
-      'unit.st': '英石 (st)',
-      'unit.t': '公吨 (t)',
-    },
-    useCases: [
-      '在公斤和磅之间换算体重',
-      '把美国食谱的盎司/磅换算成克',
-      '换算国际物流的重量单位',
-    ],
-    faqs: [
-      { q: '一公斤等于多少磅?', a: '1 公斤 = 2.20462 磅。公斤换磅乘以 2.205;磅换公斤乘以 0.4536(或除以 2.205)。所以 70 kg ≈ 154 lb,180 lb ≈ 81.6 kg。' },
-      { q: '质量和重量有什么区别?', a: '质量(千克)是物体所含物质的多少,在任何地方都不变。重量(牛顿,即重力施加的力)会随引力变化——在月球上你的重量更小。日常生活中用磅或千克表示「体重」时把两者等同,这在地球上完全没问题。' },
-      { q: '一磅等于多少盎司?', a: '1 磅(lb)= 16 盎司(oz)。所以 8 oz = 0.5 lb,24 oz = 1.5 lb。注意这是常衡(日常物品);贵金属用金衡,1 金衡磅 = 12 金衡盎司。' },
-      { q: '中国市斤、两怎么换算?', a: '1 公斤 = 2 市斤 = 20 两,即 1 两 = 50 g;1 磅约等于 0.907 市斤。看美国食谱时,8 oz(半磅)≈ 227 g ≈ 4.5 两。' },
-    ],
-  },
+
   es: {
     ui: {
       'note': '⚖️ Cubre peso cotidiano (kg, lb, oz, stones) y unidades de masa precisas (quilates para gemas, granos para munición/medicina). Masa y peso comparten este conversor.',

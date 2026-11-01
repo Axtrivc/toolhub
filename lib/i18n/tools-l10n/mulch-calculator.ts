@@ -5,39 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const MulchCalculatorL10n: ToolL10n = {
-  zh: {
-    useCases: ['规划春季花床覆盖的补铺量', '对比 2/3/4 英寸铺厚的袋数与花费', '按安全标准核算游乐区铺厚', '在袋装与散装配送之间做取舍'],
-    faqs: [
-      { q: '覆盖物应该铺多厚?', a: '花床的黄金厚度是 2-3 英寸:足以压草保墒,又不至于闷根。超过 4 英寸可能让根系缺氧、诱发腐烂。' },
-      { q: '一立方码等于多少袋?', a: '一码是 27 ft³——14 袋 2 ft³ 装,或 9 袋 3 ft³ 装。项目超过约 6 码后,散装送到通常更划算。' },
-      { q: '为什么铺厚对价格影响这么大?', a: '体积随厚度线性增长:从 2 英寸加到 4 英寸,用量直接翻倍。深度对比图会按你的袋价展示各常见厚度的花费。' },
-      { q: '游乐场用的覆盖物不一样吗?', a: '不一样。儿童活动区需要 9-12 英寸、经过冲击衰减认证的工程木纤维;装饰性覆盖物没有防坠落等级,绝不能替代。' },
-    ],
-    ui: {
-      'in.length': '床长',
-      'in.width': '床宽',
-      'in.depth': '铺厚',
-      'in.bagSize': '袋装规格',
-      'opt.bagSize.2': '2 ft³ 袋',
-      'opt.bagSize.3': '3 ft³ 袋',
-      'in.price': '每袋价格',
-      'out.mulchYd': '覆盖物用量',
-      'out.mulchCf': '体积(立方英尺)',
-      'out.bags2cf': '袋数(2 ft³)',
-      'out.bags3cf': '袋数(3 ft³)',
-      'out.cost': '袋装总花费',
-      'chartTitle': '不同铺厚下的花费',
-      'cmp.0': '2 英寸厚',
-      'cmp.1': '3 英寸厚',
-      'cmp.2': '4 英寸厚',
-      'cmpseg.0': '花费',
-      'errDims': '请输入有效的花床尺寸',
-      'preset.0': '花床 10×4 @ 2″',
-      'preset.1': '补铺 20×10 @ 3″',
-      'preset.2': '游乐区 20×20 @ 9″',
-      'note': '🌿 1 立方码在 1 英寸厚时可铺 324 ft²——标准 3 英寸厚则铺 108 ft²。游乐区防坠区需 9-12 英寸的认证工程木纤维,不能用装饰覆盖物。',
-    },
-  },
+
   es: {
     useCases: ['planificar el refresco de primavera de los parterres', 'comparar sacos a 5, 7,5 y 10 cm de espesor', 'presupuestar la profundidad de una zona de juego', 'decidir entre sacos o entrega a granel'],
     faqs: [

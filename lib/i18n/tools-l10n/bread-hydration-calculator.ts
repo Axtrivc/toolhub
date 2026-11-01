@@ -5,38 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const BreadHydrationCalculatorL10n: ToolL10n = {
-  zh: {
-    useCases: ['算出面团的真实水合度(水÷粉)', '把液种/鲁邦种里的水粉折进有效水合度', '按烘焙百分比换算盐量与总面团重', '在换面粉或养种时保持水合口径一致'],
-    faqs: [
-      { q: '什么是烘焙百分比和水合度?', a: '烘焙百分比永远以面粉为 100%,其他材料按相对面粉的百分比计。水合度 = 水 ÷ 粉:500 克粉配 350 克水就是 70% 水合。' },
-      { q: '为什么水合度要算"有效值"?', a: '液种里也有水和粉:100% 水合的 100 克鲁邦种 = 50 克水 + 50 克粉。只看主面团会把加了种的面团算"偏干",有效水合度才反映真实的面筋与流变。' },
-      { q: '多高算高水合?', a: '60-68% 是稳妥的吐司/三明治区间;70-78% 是乡村欧包与佛卡夏,气孔更开放但操作更黏;80% 以上的夏巴塔基本离不开水解与叠抱面。' },
-      { q: '盐为什么也按百分比给?', a: '盐在 1.8-2.2% 之间调节发酵速度、紧实面筋并提味,按面粉量计算最稳:500 克粉 × 2% = 10 克盐。' },
-    ],
-    ui: {
-      'in.flour': '面粉',
-      'in.water': '水',
-      'in.levain': '液种/酵种',
-      'in.levainHyd': '液种水合度',
-      'in.saltPct': '盐(烘焙 %)',
-      'out.hydration': '面团水合度',
-      'out.effHydration': '有效水合度',
-      'out.levainPct': '液种占比',
-      'out.salt': '盐量',
-      'out.doughWeight': '面团总重',
-      'outSub.hydration': '水 ÷ 粉,不含液种',
-      'outSub.effHydration': '计入液种中的水与粉',
-      'outSub.levainPct': '液种 ÷ 粉',
-      'errPositive': '请输入正数的面粉量与非负水量',
-      'errLevain': '请输入 1-300% 之间的液种水合度与非负的盐量',
-      'chartTitle': '水合度分级',
-      'zone.0': '硬面团——贝果',
-      'zone.1': '标准吐司',
-      'zone.2': '高水合——乡村欧包',
-      'zone.3': '极高——夏巴塔',
-      'note': '🥖 烘焙百分比恒以面粉为 100%。水合度越高气孔越开、面团越瘫:70% 是友好的三明治面包,80% 以上就需要水解与叠抱面。100% 水合的液种会随用量推高有效水合度。',
-    },
-  },
+
   es: {
     useCases: ['calcular la hidratación real de tu masa (agua ÷ harina)', 'repartir el agua y la harina del fermento en la hidratación efectiva', 'sacar la sal y el peso total en porcentaje de panadero', 'mantener la hidratación al cambiar de harina o de masa madre'],
     faqs: [

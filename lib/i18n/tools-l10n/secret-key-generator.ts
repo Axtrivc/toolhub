@@ -5,62 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const secretKeyGeneratorL10n: ToolL10n = {
-  zh: {
-    ui: {
-      'entropyGauge': '熵值强度',
-      'strengthExcellent': '极佳',
-      'bits': '位',
-      'bytes': '字节',
-      'chars': '字符',
-      'copy': '复制',
-      'copyAll': '全部复制',
-      'entropy': '熵:',
-      'fmtAlnum': '字母数字 (A–Z a–z 0–9)',
-      'fmtApiKey': 'API key 风格(前缀 + 随机)',
-      'fmtBase64': 'Base64',
-      'fmtBase64Url': 'Base64URL',
-      'fmtHex': '十六进制',
-      'fmtUuid': 'UUID v4',
-      'format': '格式',
-      'generate': '生成',
-      'length': '长度:',
-      'noteIntro': '🔒 用 ',
-      'noteMid1': ' ——你的浏览器 CSPRNG——完全在本设备生成;不上传任何东西。字母数字输出使用 ',
-      'noteOutro': ',所以每个字符均匀分布(无取模偏差)。请把生成的密钥存到密码管理器或平台密钥库里;任何出现在日志、工单或截图里的密钥都要轮换。',
-      'noteRejectionSampling': '拒绝采样',
-      'prefix': '前缀',
-      'randomChars': '随机字符',
-      'randomPart': '随机部分:',
-      'regenerateAll': '全部重新生成',
-      'strengthGood': '一般',
-      'strengthStrong': '强',
-      'strengthWeak': '弱',
-    },
-    useCases: [
-      '在线随机 API 密钥生成器',
-      '为 JWT 生成密钥',
-      '密码学安全的令牌生成器',
-      '十六进制密钥生成器',
-    ],
-    faqs: [
-      {
-        q: '这些密钥是密码学安全的吗?',
-        a: '是。它们用的是浏览器的安全随机源(crypto.getRandomValues),和 TLS 密钥用的是同一个 CSPRNG,所以输出适合用于 API 密钥、会话令牌等安全敏感的值——而不是 Math.random()。',
-      },
-      {
-        q: 'API 密钥应该多长?',
-        a: '32 个十六进制字符(128 位)是合理的下限,64 个十六进制字符(256 位)则留有充足余量。对抗暴力破解时,长度远比字符表更重要,所以宁可更长,也不要更花哨的字符。',
-      },
-      {
-        q: '十六进制和 Base64 输出有什么区别?',
-        a: '在随机量相同的情况下,十六进制只用 0-9 和 a-f(字符串更长),Base64 用更大的字符表(字符串更短)。在相同位数下两者同样安全——选你下游系统期望的那种即可。',
-      },
-      {
-        q: 'UUID v4 能当密钥用吗?',
-        a: '有折中:UUID v4 只含 122 位随机量,低于 128 位的 hex 串,连字符还让它更占位。当 request ID 或数据库主键很合适;API 密钥这类安全凭据建议用 256 位 hex 或 Base64。',
-      },
-    ],
-  },
+
   es: {
     ui: {
       'entropyGauge': 'Fuerza de entropía',

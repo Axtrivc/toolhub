@@ -43,37 +43,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具?</h2>
-    <p>
-      HTML 转义会将特殊字符(<code>&amp; &lt; &gt; &quot;</code>)转换成对应的实体形式(<code>&amp;amp; &amp;lt; &amp;gt; &amp;quot;</code>),使它们能在浏览器中正确显示,并防止 XSS 攻击。
-    </p>
-    <div>
-      <h2>为什么转义很重要</h2>
-      <p>
-        如果用户输入包含 <code>&lt;script&gt;</code>,而你未加转义就插入到页面中,浏览器就会执行该脚本——这是典型的 XSS(跨站脚本)攻击。转义会把它变成无害的文本,显示为 <code>&lt;script&gt;</code>,而不会被执行。
-      </p>
-    </div>
-    <div>
-      <h2>哪些字符会被转义</h2>
-      <ul>
-        <li><code>&amp;</code> → <code>&amp;amp;</code>(必须最先转义)</li>
-        <li><code>&lt;</code> → <code>&amp;lt;</code></li>
-        <li><code>&gt;</code> → <code>&amp;gt;</code></li>
-        <li><code>&quot;</code> → <code>&amp;quot;</code></li>
-        <li><code>&#39;</code> → <code>&amp;#39;</code></li>
-      </ul>
-    </div>
-    <div>
-      <h2>针对不同上下文的转义</h2>
-      <p>
-        转义规则取决于文本将出现的位置。HTML 正文转义(本工具)与属性转义、URL 转义或 JavaScript 字符串转义不同。务必针对具体场景进行转义——用错可能会留下安全漏洞。
-      </p>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -155,7 +124,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function HTMLEscapeContent(): ReactNode {
   const { locale } = useApp()

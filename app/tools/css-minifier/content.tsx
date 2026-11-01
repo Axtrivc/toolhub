@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * CssMinifier 长文正文 —— 四语 dispatcher
+ * CssMinifier 长文正文 —— 三语 dispatcher
  *
- * en 分支与改造前渲染输出一致。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支与改造前渲染输出一致。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -25,18 +25,6 @@ const en: ReactNode = (
 )
 
 // ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>字节到底花在哪</h2>
-    <p>手写 CSS 大半是空气:缩进、一行一条声明、分节注释。剥掉注释、折叠空白通常省 15-30%——但 gzip 本身就极擅长压空白,网络层的真实收益比字节计数器暗示的小。压缩真正买到的是解析时间、更小产物对应的稳定缓存指纹,以及小到可以内联进首屏而不拖累 HTML 的 CSS。</p>
-    <h2>压缩器绝不能踩的坑</h2>
-    <p>calc() 内 + 和 − 两侧必须有空白——删掉,整条声明就死了。div :hover 与 div:hover 是两个选择器,所以冒号前的空格要保留。0% 与 0 在 flex-basis 里不能互换。字符串内容(content: "…"、字体名、url())更是碰都碰不得。本工具先把字符串与 /*! 横幅抽成占位符再做空白处理,之后只做可证明安全的折叠:0px→0、0.5→.5、末尾分号、空规则。</p>
-    <h2>为什么拒绝合并规则</h2>
-    <p>激进压缩器会把 .a&#123;color:red&#125; .b&#123;color:red&#125; 改写成 .a,.b&#123;color:red&#125;——一旦被合并的选择器优先级不同或依赖覆盖顺序,层叠就变了,两千行之外的页面悄悄坏掉。字节级折叠永不改变语义;选择器合并偶尔会。多压 5-10% 不值得让样式表必须靠视觉回归测试才能信任。</p>
-    <h2>何时压缩,何时不</h2>
-    <p>该用压缩产物的:生产 bundle、内联关键 CSS、要发布的组件内样式块。该保留可读的:队友会在 devtools 里翻、且能拿到原始源码的场景——source map 才是正确的桥,构建管线(esbuild、cssnano、Lightning CSS)会自动完成。本工具服务的是一次性粘贴:邮件模板、CMS 主题字段、当下就要变小的临时修补。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -66,7 +54,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function CssMinifierContent(): ReactNode {
   const { locale } = useApp()

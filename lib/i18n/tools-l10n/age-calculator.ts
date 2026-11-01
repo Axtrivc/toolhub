@@ -5,46 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const ageCalculatorL10n: ToolL10n = {
-  zh: {
-    ui: {
-      birthdayToday: '🎂 生日快乐 — 就是今天!',
-      'ageAtDate': '截止日期时的年龄',
-      'asOfSelectedDate': '截至所选日期',
-      'dateOfBirth': '出生日期',
-      'lifeWeeksTitle': '你的人生周格',
-      'legendLived': '已度过的周',
-      'legendRemaining': '剩余的周(到 90 岁)',
-      'legendCurrent': '当前周',
-      'lifeSummary': '已过 {x} 周 · 还剩 {y} 周 · 网格的 {p}%',
-      'day': '天',
-      'days': '天',
-      'daysAbbr': ' 天',
-      'dayAbbr': ' 天',
-      'emptyState': '「截止日期」必须晚于出生日期',
-      'moAbbr': ' 月 ',
-      'monthAbbr': ' 月 ',
-      'nextBirthdayIn': '🎂 距下次生日还有 ',
-      'note': '📅 你可以更改「截止日期」来计算任意过去或将来日期时的年龄——适合推算截止日期、验证年龄或进行历史计算。',
-      'totalDays': '总天数',
-      'totalHours': '总小时数',
-      'totalMonths': '总月数',
-      'totalWeeks': '总周数',
-      'yourAge': '你的年龄',
-      'yrsAbbr': ' 岁 ',
-      'yrAbbr': ' 岁 ',
-    },
-    useCases: [
-      '核验年龄是否达到法定门槛',
-      '算出你已经活了多少天',
-      '按月追踪婴儿的发育进度',
-      '查询某历史事件距今的时长',
-    ],
-    faqs: [
-      { q: '我怎么算自己活了多少天？', a: '输入你的出生日期,把「截止日期」留作今天。计算器会显示你的总存活天数——大多数成年人的天数在 7000 到 30000 之间。' },
-      { q: '怎么计算两个日期之间的时间？', a: '把「出生日期」字段当作开始日期,把「截止日期」字段当作结束日期。结果会以年、月、日、周、小时为单位精确显示两者之间的时长——适用于项目、合同或纪念日。' },
-      { q: '计算结果准确吗？', a: '完全准确。计算器使用浏览器内置的日期处理,能正确处理闰年、不同月份长度和夏令时,没有任何近似。' },
-    ],
-  },
+
   es: {
     ui: {
       birthdayToday: '🎂 ¡Feliz cumpleaños — hoy es el día!',

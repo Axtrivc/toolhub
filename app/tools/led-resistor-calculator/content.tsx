@@ -5,7 +5,7 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * LedResistorCalculator 长文正文 —— 四语 dispatcher
+ * LedResistorCalculator 长文正文 —— 三语 dispatcher
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -22,19 +22,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>为什么每颗 LED 都需要"监护人"</h2>
-    <p>LED 的电流随电压指数上升:多加半伏,毫安就能变成几百毫安,结温瞬间烧毁。电阻的全部职责,就是吃掉电源电压与正向压降之间的差值,把它换成你选定的电流。</p>
-    <h2>值得记住的正向压降</h2>
-    <p>红、黄 LED 约 1.8-2.2V,绿 2.0-2.4V,蓝、白 3.0-3.4V——白光本质是蓝光 LED 加荧光粉。正向压降重要两次:一次决定电阻值,一次决定串联时各压降之和必须低于电源电压。</p>
-    <h2>E12 的取舍方向</h2>
-    <p>标准电阻按 E12 阶梯出品:10、12、15、18、22、27、33、39、47、56、68、82 乘十的各次幂。永远向上取整:电阻大意味着电流小——电流小只损失百分之几亮度,电流大损失的是 LED 本尊。</p>
-    <h2>功率降额的实战法则</h2>
-    <p>计算器给出电阻的耗散功率;选型至少留 2 倍余量,密闭外壳取 4 倍。1/4W 电阻跑 200mW 在面包板上没事,塞进 3D 打印外壳就发烫——密封盒里的热量无处可去。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -64,7 +51,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function LedResistorCalculatorContent(): ReactNode {
   const { locale } = useApp()

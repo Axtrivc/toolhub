@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * CsvToFinetuneJsonl 长文正文 —— 四语 dispatcher
+ * CsvToFinetuneJsonl 长文正文 —— 三语 dispatcher
  *
- * en 分支与改造前渲染输出一致。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支与改造前渲染输出一致。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en(与改造前渲染输出一致) ────────────────────────────
@@ -24,19 +24,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>微调格式是什么样的</h2>
-    <p>每条训练样本是一行 JSON,包含一个 messages 数组——与 API 的 chat 结构完全一致。本转换器把你的 CSV 列映射到 system/user/assistant 角色,直接输出合法的 .jsonl。</p>
-    <h2>列映射</h2>
-    <p>在上方三个输入框里填列名;system 列可选,单元格为空的行会省略该字段。表头行只用于解析,不会导出。</p>
-    <h2>花钱之前先校验</h2>
-    <p>assistant 为空的行会连同行号一起被标记出来,而不是被静默丢弃——拿空 completion 去微调会悄悄毁掉整个训练。引号与内嵌逗号按 RFC 4180 处理。</p>
-    <h2>样本数量的预期</h2>
-    <p>几百条样本教风格,几千条教行为。真要微调之前,先试试 few-shot 提示——很多「需要微调」的任务其实是提示工程任务。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -66,7 +53,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function CsvToFinetuneJsonlContent(): ReactNode {
   const { locale } = useApp()

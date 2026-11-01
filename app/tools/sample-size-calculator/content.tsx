@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * SampleSizeCalculator 长文正文 —— 四语 dispatcher
+ * SampleSizeCalculator 长文正文 —— 三语 dispatcher
  *
- * en 分支与 SSR 渲染输出一致。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支与 SSR 渲染输出一致。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -24,19 +24,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>著名的 385 从哪来</h2>
-    <p>95% 置信、±5% 误差、p = 50% 时,公式 n = z²p(1−p)/e² 给出 3.8416 × 0.25 / 0.0025 = 384.16,向上取整即 385。这个数字撑起了大多数消费与学术调查——因为 p = 50% 就是最坏情形:任何其他比例达到同样精度都只需要更少的样本。</p>
-    <h2>精度按平方计价</h2>
-    <p>样本量按 1/e² 缩放:从 ±5% 收紧到 ±2.5%,需求从 385 翻到 1,537;±1% 需要 9,604。在向客户承诺"±1% 读数"之前,先把预算乘上去——计算器里的曲线让这道悬崖一目了然。</p>
-    <h2>总体小的时候</h2>
-    <p>385 这个数默认总体近乎无限。有限总体修正 n = n₀/(1 + n₀/N) 要到总体小于约 20,000 才开始起作用:N = 100,000 只省 2 个访问;而调查一家 500 人的公司只需覆盖其中 218 人。全国样本可以忽略修正,但调查一所学校、一座工厂或一个团队时绝不能忽略。</p>
-    <h2>向上取整,并为流失留量</h2>
-    <p>算出的 n 永远向上取整——世上没有 0.16 个受访者。然后再按现实加量:20% 无回应率意味着邀约 481 人才能收回 385 份有效问卷。在线样本库的甄别淘汰、重复提交都在啃食名义数字,而误差幅度只对"完成样本"成立。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -66,7 +53,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function SampleSizeCalculatorContent(): ReactNode {
   const { locale } = useApp()

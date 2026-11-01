@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * OpenaiToolsBuilder 长文正文 —— 四语 dispatcher
+ * OpenaiToolsBuilder 长文正文 —— 三语 dispatcher
  *
- * en 分支与改造前渲染输出一致。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支与改造前渲染输出一致。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en (与改造前渲染输出一致) ────────────────────────────
@@ -24,19 +24,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>一屏看懂格式</h2>
-    <p>tools 参数要的是一个函数对象数组,每个对象带 name、description 和参数的 JSON Schema。手写这层嵌套最容易打错字;表单把这件事变成结构化操作。</p>
-    <h2>描述决定准确率</h2>
-    <p>模型主要靠你的描述来选工具、填参数。一条精确的参数描述(「城市名,如 San Francisco」)胜过任何取巧的 schema 技巧。</p>
-    <h2>枚举当护栏</h2>
-    <p>逗号分隔的枚举值会变成模型必须从中选择的严格选项——在非法参数抵达你的函数之前就把它拦下,这是成本最低的办法。</p>
-    <h2>可移植性</h2>
-    <p>输出面向 OpenAI tools 数组。Anthropic 接受同样的形状,只是 parameters 换成 input_schema;其他大多数供应商遵循两者之一,只需少量改名。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -66,7 +53,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function OpenaiToolsBuilderContent(): ReactNode {
   const { locale } = useApp()

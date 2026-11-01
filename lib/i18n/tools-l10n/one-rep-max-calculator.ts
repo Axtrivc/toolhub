@@ -5,42 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const OneRepMaxCalculatorL10n: ToolL10n = {
-  zh: {
-    useCases: ['用 5×5 或 3×8 的正式组推算 1RM', '生成 50-95% 强度百分比训练表', '比较 Epley、Brzycki、Lander 三公式差异', '不测真极限也能周期性调整训练重量'],
-    faqs: [
-      { q: '该信哪个公式?', a: '三公式在 5 次以内高度一致(差距 2-4%):Epley 通常最高,Lander/Brzycki 略保守。取三者的平均值是稳妥默认;备赛或保守训练块选最低值。' },
-      { q: '为什么不直接测真极限?', a: '真 1RM 测试疲劳深、受伤风险高,还需要保护员。用 10 次以内的正式组估算,误差通常在 5-10% 以内,周期中段足够精确,恢复成本却低得多。' },
-      { q: '训练该用哪个百分比?', a: '力量期 85-95% 做 1-3 次;增肌期 65-80% 做 6-12 次;爆发力与减载周 50-60%。表中的百分比基于三公式平均值,记训练日志时注明口径即可保持一致。' },
-      { q: '高次数组也准吗?', a: '超过 10-12 次后肌肉耐力开始主导,公式系统性偏高(Epley 尤其明显)。想刷新估算,用能做 3-5 次的更大重量重测一次,比继续用 15 次组外推可靠得多。' },
-    ],
-    ui: {
-      'in.weight': '举起的重量',
-      'in.reps': '完成次数',
-      'in.unit': '单位',
-      'opt.unit.kg': '千克(kg)',
-      'opt.unit.lb': '磅(lb)',
-      'out.epley': 'Epley 1RM',
-      'out.brzycki': 'Brzycki 1RM',
-      'out.lander': 'Lander 1RM',
-      'out.avg': '三公式平均值',
-      'out.w90': '1RM 的 90%',
-      'out.w80': '1RM 的 80%',
-      'out.w70': '1RM 的 70%',
-      'out.w60': '1RM 的 60%',
-      'outSub.epley': 'w × (1 + 次数/30)',
-      'outSub.w90': '大重量单次/双次',
-      'outSub.w80': '力量组 3-5 次',
-      'outSub.w70': '增肌组 8-12 次',
-      'outSub.w60': '热身与速度训练',
-      'errInvalid': '请输入正的重量和 1-12 次的次数',
-      'chartTitle': '训练重量阶梯',
-      'line.weight': '训练重量',
-      'preset.0': '卧推 5×5 顶组',
-      'preset.1': '深蹲大重量三次',
-      'preset.2': '硬拉 8 次',
-      'note': '🏋️ 公式假设这一组停在离力竭 1-2 次的位置。超过约 10 次后 Epley 明显偏高,保守编排请取最低估算;真极限测试务必有保护员。',
-    },
-  },
+
   es: {
     useCases: ['estimar tu 1RM desde una serie dura de 5×5 o 3×8', 'generar una tabla de entrenamiento al 50-95%', 'comparar las fórmulas de Epley, Brzycki y Lander', 'ajustar los pesos del programa sin testear tu máximo real'],
     faqs: [

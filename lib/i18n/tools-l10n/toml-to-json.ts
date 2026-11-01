@@ -5,22 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const TomlToJsonL10n: ToolL10n = {
-  zh: {
-    useCases: ['把 TOML 配置转成 JSON', '给需要 JSON 输入的 API 备料', '检查 TOML 的语法错误', '迁移配置文件格式'],
-    faqs: [
-      { q: '支持哪些 TOML 特性?', a: 'TOML 1.0 核心:具名表、数组表、内联表、点分键、全部数字格式(0x/0o/0b、inf、nan)、布尔值与日期时间——日期时间会转为字符串,因为 JSON 没有日期类型。多行字符串会带行号拒绝,而不是误解析。' },
-      { q: '日期为什么变成字符串?', a: 'JSON 没有原生日期类型——RFC 8259 只定义了字符串、数字、布尔、数组、对象和 null。转换器按原样保留日期时间文本,这也与多数 JSON API 处理 ISO 8601 字符串的方式一致。' },
-      { q: '错误怎么报告?', a: '解析失败会给出出错行号和简短原因,少个引号或键写坏了都能快速定位。整个文档解析通过前不会输出任何结果——绝不给半截转换。' },
-      { q: 'Cargo.toml、pyproject.toml 能直接转吗?', a: '可以:它们用的正是 TOML 1.0 的具名表、数组表([[dependencies]])和点分键;内联表值({ version = "1.0" })原样转成 JSON 对象。多行字符串暂不支持,会带行号拒绝。' },
-      { q: '转出的 JSON 还想格式化或压缩怎么办?', a: '复制结果丢进本站的 JSON 格式化/压缩工具即可;键序与 TOML 文档一致,数值和布尔保持类型,只有日期时间以字符串呈现。' },
-    ],
-    ui: {
-      'inputLabel': '你的 TOML',
-      'loadSample': '加载示例',
-      'inputTooLarge': '输入超过 {n} 字符——为保证输入流畅已跳过转换。请精简或拆分 TOML 后再试。',
-      'note': '📦 TOML 1.0 子集解析器——支持表格、数组表、内联表、点分键与全部数字格式。日期时间保留为字符串(JSON 无日期类型)。多行字符串会带行号拒绝而不是误解析。',
-    },
-  },
+
   es: {
     useCases: ['convertir configuración TOML a JSON', 'preparar datos para APIs que piden JSON', 'detectar errores de sintaxis TOML', 'migrar el formato de archivos de configuración'],
     faqs: [

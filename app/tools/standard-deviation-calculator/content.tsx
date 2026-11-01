@@ -24,25 +24,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具?</h2>
-    <p><strong>标准差</strong>衡量一组数字偏离平均值的离散程度。标准差小,说明数值紧密聚集在均值附近;标准差大,说明数值分布得很分散。这是数据分析中最有用的统计量之一。</p>
-    <div>
-      <h2>标准差能告诉你什么</h2>
-      <p>如果考试成绩的均值为 75,标准差为 5,大多数分数会落在 70 到 80 之间。若均值相同但标准差变为 15,分数就会分散在 60 到 90 之间。同样的均值——截然不同的画面。</p>
-    </div>
-    <div>
-      <h2>68-95-99.7 法则</h2>
-      <p>对于正态分布的数据:约 68% 的数值落在均值 ±1 个标准差范围内,约 95% 落在 ±2 个标准差内,约 99.7% 落在 ±3 个标准差内。因此,如果成年人平均身高为 170 cm、标准差为 7,那么大约 95% 的人身高在 156 到 184 cm 之间。</p>
-    </div>
-    <div>
-      <h2>总体 vs 样本</h2>
-      <p>本计算器使用<strong>总体</strong>标准差(除以 N)。如果你的数据是从更大总体中抽取的样本,应使用<strong>样本</strong>标准差(除以 N−1)以获得无偏估计。将本计算器的结果乘以 <code>√(N/(N−1))</code> 即可换算。</p>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -84,7 +65,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function StandardDeviationCalculatorContent(): ReactNode {
   const { locale } = useApp()

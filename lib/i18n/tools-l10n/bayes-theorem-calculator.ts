@@ -5,38 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const BayesTheoremCalculatorL10n: ToolL10n = {
-  zh: {
-    useCases: ['解读医学筛查阳性结果的真实患病概率', '理解基础率谬误:罕见病为何大多报假阳性', '评估检测手段:提升特异度还是敏感度更划算', '把先验证据更新为后验概率的课程与面试练习'],
-    faqs: [
-      { q: '计算器怎么用贝叶斯定理?', a: 'P(患病|阳性) = 敏感度 × 先验 ÷ P(阳性),其中 P(阳性) = 敏感度 × 先验 + (1 − 特异度) × (1 − 先验)。全部按医学筛查口径表达:基础率、敏感度、特异度。' },
-      { q: '为什么 95% 敏感度的检测,阳性了也只有 8.8% 患病概率?', a: '1% 的基础率意味着 10,000 人里 9,900 人健康,而 10% 的假阳性率会把其中 990 人变成阳性——远超 95 个真阳性。图表展示的正是一份阳性结果的这种构成。' },
-      { q: '什么是基础率谬误?', a: '把 P(阳性|患病) 与 P(患病|阳性) 混为一谈。前者高达 95%;后者取决于病有多罕见,先验越低后验越低——这就是对罕见病做全民筛查会制造海量误报的原因。' },
-      { q: '怎样让这个数字变好?', a: '提升特异度而不是敏感度:假阳性率从 10% 降到 1%,同样 1% 的先验下后验能从 8.8% 升到约 49%。复检有效的原理也一样——第一次阳性把第二次的先验抬高了。' },
-    ],
-    ui: {
-      'in.prior': '先验(基础率)',
-      'in.sens': '敏感度',
-      'in.spec': '特异度',
-      'out.posterior': 'P(患病 | 阳性)',
-      'out.rate': '阳性意味着什么',
-      'out.tp': '真阳性',
-      'out.fp': '假阳性',
-      'outSub.tp': '每 10,000 名受检者',
-      'outSub.fp': '每 10,000 名受检者',
-      'chartTitle': '一份阳性结果的构成(每 10,000 人)',
-      'chartCenter': '阳性检测',
-      'slice.tp': '真阳性',
-      'slice.fp': '假阳性',
-      'preset.0': '罕见病筛查:1%, 95%, 90%',
-      'preset.1': '常见病:10%, 95%, 90%',
-      'preset.2': '近完美检测:1%, 99%, 99%',
-      'note': '🩺 后验 = 敏感度 × 先验 ÷ P(阳性)。基础率 1%、敏感度 95%、特异度 90% 时,阳性仍只意味着约 8.8% 的患病可能——9,900 名健康人的假阳性淹没了 95 个真阳性。这个落差就是基础率谬误;病越罕见越糟,而能修复它的是特异度(不是敏感度)。',
-      'errInput': '先验 0–100%(须大于 0),敏感度与特异度 0–100%',
-      'errZero': '这个检测永远不会返回阳性结果',
-      'ratePrefix': '每',
-      'rateSuffix': '个阳性中才有 1 个真阳性',
-    },
-  },
+
   es: {
     useCases: ['interpretar la probabilidad real de enfermedad tras un cribado positivo', 'entender la falacia de la tasa base', 'evaluar si compensa subir la sensibilidad o la especificidad', 'practicar la actualización de prior a posterior'],
     faqs: [

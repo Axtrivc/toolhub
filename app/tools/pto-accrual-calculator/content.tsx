@@ -5,7 +5,7 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * PtoAccrualCalculator 长文正文 —— 四语 dispatcher
+ * PtoAccrualCalculator 长文正文 —— 三语 dispatcher
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -22,19 +22,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>累积制,不是一次性到账</h2>
-    <p>多数美国雇主不会在 1 月 1 日一次性给你 120 小时——而是随工资逐期滴灌:120 小时摊到 26 个双周发薪,每期 4.62 小时。年中你只能花"已累积"的部分;"当前余额"一行回答的正是这个问题,"年底余额"则假设你此后一假不休。</p>
-    <h2>余额为什么会变负</h2>
-    <p>预支年假——假期还没累积就先休——很常见,政策通常也允许,但代价是余额跌破零。风险在离职时:多数政策会从未累积部分从最后一张工资单里扣回。这里出现负数不是 bug,而是一笔你需要用时间还上的债。</p>
-    <h2>过期作废的算术</h2>
-    <p>一旦适用结转上限(比如 40 小时),12 月 31 日的"理发"是机械的:超过上限的部分全部蒸发。年底余额 80、上限 40,意味着 40 小时——按 8 小时工作日整整两周——作废。解法枯燥但有效:10 月初就把 11、12 月的假排掉,别等别人的申请把日历填满。</p>
-    <h2>一个很"美国"的工具</h2>
-    <p>美国联邦法律不强制带薪年假:私营部门平均入职一年约 11 天、二十年约 20 天,"无限假期"则把记账交给经理裁量。欧盟读者活在另一套体系——法定最低 20 个工作日(多国 24-30 天),结转受保护或自动折现。这里的算式照用,只是"作废"那一行基本恒为零。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -64,7 +51,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function PtoAccrualCalculatorContent(): ReactNode {
   const { locale } = useApp()

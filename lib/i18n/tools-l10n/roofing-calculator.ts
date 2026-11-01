@@ -5,40 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const RoofingCalculatorL10n: ToolL10n = {
-  zh: {
-    useCases: ['打电话询价前估算瓦束数', '按 squares 核对屋顶报价', '看坡度如何改变材料需求', '为换顶规划防水层卷数'],
-    faqs: [
-      { q: '怎么在地面量出屋面尺寸?', a: '用房长 × 房宽——即涵盖两个坡面的投影面积——再乘坡度系数。30×20 的房子在 6/12 坡度下:600 × 1.118 ≈ 671 ft² 实际屋面。' },
-      { q: '什么是 roofing square?', a: '100 ft² 屋面面积——行业用来报材料与人工的单位。三片式沥青瓦 3 束盖一个 square,所以束数 = squares × 3。' },
-      { q: '坡度为什么会改变面积?', a: '同样的投影下坡越陡表面积越大。乘数从 4/12 的 1.054 升到 9/12 的 1.25——一栋 30×20 的屋顶在这两档之间多出约 1.2 个 square、三四束瓦。' },
-      { q: '3 束一个 square 永远成立吗?', a: '只对标准三片式成立。建筑师瓦与高端瓦更厚,常见要 4-5 束一个 square——下单前看包装说明再调整。' },
-    ],
-    ui: {
-      'in.length': '房屋长',
-      'in.width': '房屋宽(含两个坡面)',
-      'in.pitch': '屋面坡度',
-      'in.waste': '损耗余量',
-      'out.bundles': '瓦束数',
-      'out.roofArea': '屋面表面积',
-      'out.squares': '屋面方数',
-      'out.buySq': '需购方数',
-      'out.rolls': '防水层卷数',
-      'outSub.bundles': '每方 3 束',
-      'outSub.squares': '1 方 = 100 平方英尺',
-      'outSub.buySq': '含损耗',
-      'outSub.rolls': '每卷铺 400 ft²',
-      'chartTitle': '束数随坡度上升',
-      'cmp.0': '4/12 坡度',
-      'cmp.1': '6/12 坡度',
-      'cmp.2': '9/12 坡度',
-      'cmpseg.0': '束数',
-      'errDims': '请输入有效的房屋投影尺寸',
-      'preset.0': '双坡 30×20, 6/12',
-      'preset.1': '平房 40×30, 8/12',
-      'preset.2': '棚屋 12×10, 4/12',
-      'note': '🏠 「一个 square 三束」只对三片式沥青瓦成立——建筑师瓦常见每 square 4-5 束,下单前核对包装。在地面量投影,坡度系数会换算成实际屋面。',
-    },
-  },
+
   es: {
     useCases: ['estimar manojos de tejas antes de pedir presupuestos', 'verificar una oferta de tejado por squares', 'ver cómo la pendiente cambia los materiales', 'planificar rollos de subcapa para renovar'],
     faqs: [

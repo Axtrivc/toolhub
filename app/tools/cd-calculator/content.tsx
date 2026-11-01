@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * CD Calculator 长文正文 —— 四语 dispatcher
+ * CD Calculator 长文正文 —— 三语 dispatcher
  *
- * en 分支与改造前渲染输出一致。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支与改造前渲染输出一致。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en(与改造前渲染输出一致) ────────────────────────────
@@ -45,30 +45,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>什么是定期存单(CD)?</h2>
-    <p>
-      <strong>定期存单(Certificate of Deposit,CD)</strong>用灵活性换收益:把一笔钱锁定固定期限(3 个月到 5 年),银行支付保证利率——通常高于普通储蓄账户。代价是<strong>提前支取罚金</strong>:提前解约要损失几个月的利息。
-    </p>
-
-    <h2>到期金额如何计算</h2>
-    <p>
-      余额按 <code>A = P × (1 + r/n)^(n·t)</code> 增长,其中 r 是年利率,n 是复利频率(按日、按月或按季),t 是以年计的期限。由于利率固定,到期金额在第一天就能精确到分——这份确定性正是 CD 的全部意义。
-    </p>
-
-    <h2>提前退出罚金的建模</h2>
-    <p>
-      美国银行的惯例是:12 个月以下的 CD 罚<strong>1 个月利息</strong>,12-48 个月期限罚<strong>3 个月</strong>,5 年期 CD 罚<strong>6-12 个月</strong>。罚金从已产生利息中扣除,从不动本金——但如果你在 3 个月期 CD 的第 2 个月就退出,罚金可能把赚到的利息全部抹掉。拖动「提前支取时点」滑块,可以精确看到在任何时点解约的代价。
-    </p>
-
-    <h2>CD 阶梯策略</h2>
-    <p>
-      别只买一张 5 年期 CD,把钱拆到 1/2/3/4/5 年期上。每到期一档,你要么取现,要么按 5 年期利率续投——既有年度流动性,又拿到长期利率。降息周期正是阶梯法的高光时刻:到期的每一档都滚动续投到当下的新利率上。
-    </p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -120,7 +96,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function CdCalculatorContent(): ReactNode {
   const { locale } = useApp()

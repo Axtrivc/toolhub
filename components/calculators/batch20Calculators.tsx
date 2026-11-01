@@ -4,7 +4,7 @@
  * 第二十批:高意图商业与财务计算器
  *  - runway-calculator:初创公司与独立开发者资金跑道计算器;
  *  - freelance-rate-calculator:自由职业与远程工作时薪/日薪定价计算器。
- * 均基于 makeCalculatorClient 配置驱动,遵循四语 l10n 与确定性首帧规范。
+ * 均基于 makeCalculatorClient 配置驱动,遵循三语 l10n 与确定性首帧规范。
  */
 
 import { makeCalculatorClient } from '../calculator/makeCalculatorClient'
@@ -84,7 +84,7 @@ export const RunwayCalculatorClient = makeCalculatorClient({
       dateStr = T('never', 'Never (Cash-flow positive)')
       profitStr = `✅ ${T('alreadyProfitable', 'Already profitable')}`
     } else if (reachedProfit && balance > 0) {
-      // zh/es/de 的 defaultAlive 文案含 {month} 占位符,英文 fallback 无 → replace 无害
+      // es/de 的 defaultAlive 文案含 {month} 占位符,英文 fallback 无 → replace 无害
       runwayStr = `∞ (${T('defaultAlive', 'Default Alive').replace('{month}', String(breakevenMonth))})`
       dateStr = T('neverBreakeven', 'Never (Reaches breakeven first)')
       profitStr = `✅ ${T('breakevenIn', 'Breakeven in {n} months').replace('{n}', String(breakevenMonth))}`

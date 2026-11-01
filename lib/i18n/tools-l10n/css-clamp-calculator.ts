@@ -5,71 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const cssClampCalculatorL10n: ToolL10n = {
-  zh: {
-    ui: {
-      'fluidCurveTitle': '流式字号曲线',
-      'lineMin': '下限钳制',
-      'lineFluid': '流式字号',
-      'lineMax': '上限钳制',
-      'clampedEnd': 'px),而不再继续缩放。',
-      'clampedPxOutside': 'px 的宽度超出你的 ',
-      'clampedRange': 'px 视口范围之外,所以字号被钳制在 ',
-      'clampedTheMaximum': '最大值',
-      'clampedTheMinimum': '最小值',
-      'commonViewportsTitle': '常见视口下的计算尺寸',
-      'copyCss': '复制 CSS',
-      'enterWidthAbove': '请输入有效的视口宽度',
-      'errFontSizesPositive': '字号必须大于 0。',
-      'errMinSmallerThanMax': '最小字号必须小于最大字号。',
-      'errMinVpSmallerThanMaxVp': '最小视口必须小于最大视口。',
-      'errRootPositive': '根字号必须大于 0。',
-      'errValidNumbers': '所有字段必须是有效数字。',
-      'intercept': '截距',
-      'interceptSublabel': '视口宽 0 时的首选字号',
-      'maxFontSize': '最大字号',
-      'maxViewport': '最大视口',
-      'minFontSize': '最小字号',
-      'minViewport': '最小视口',
-      'noteAnd': ' 计的增长,而 ',
-      'noteGrowth': ' 给出以 ',
-      'noteMath': '📐 原理:流式排版在你的两个视口点之间线性缩放。',
-      'notePinsRange': ' 把它限制在你的字号范围内。rem 输出使用你的根字号,所以结果尊重用户的缩放偏好。',
-      'notePxOffset': ' 是 px 偏移。首选值 ',
-      'noteScalesWith': ' 随视口缩放,而 ',
-      'rootFontSize': '根字号(用于 rem)',
-      'sizeAt': '在 ',
-      'slope': '斜率',
-      'slopeSublabel': '每 100px 视口宽的增长',
-      'stateClampedMax': '已钳制(最大)',
-      'stateClampedMin': '已钳制(最小)',
-      'stateScaling': '缩放中',
-      'testAtViewport': '测试视口宽度',
-      'testViewport': '测试视口',
-      'thFluidSize': '流式尺寸',
-      'thState': '状态',
-      'thViewport': '视口',
-    },
-    useCases: [
-      'CSS clamp 字号生成器',
-      'clamp 流式排版计算器',
-      '无需媒体查询的响应式字号',
-      'clamp 最小/首选/最大 计算器',
-    ],
-    faqs: [
-      {
-        q: 'clamp() 到底是做什么的?',
-        a: 'clamp(min, preferred, max) 让一个值随视口(通过 preferred 里的 vw 部分)伸缩,但永不低于 min、不高于 max。这是实现字号和间距流式变化最干净的方式,无需媒体查询。',
-      },
-      {
-        q: '为什么我的字号在手机上太大、在桌面上太小?',
-        a: '通常是 min/max 边界或视口范围设错了。把最小字号设给最小屏幕、最大字号设给最大屏幕,再给出横跨这两个断点的视口范围——计算器会据此构建 preferred 值,让缩放在两端之间保持平滑。',
-      },
-      {
-        q: '什么是「流式排版」?',
-        a: '指字号随视口平滑变化,而不是在断点之间跳变固定值。用 clamp() 一条规则就能覆盖所有屏宽,感觉更自然,而且比一堆媒体查询需要的 CSS 少得多。',
-      },
-    ],
-  },
+
   es: {
     ui: {
       'fluidCurveTitle': 'Curva de tamaño fluido',

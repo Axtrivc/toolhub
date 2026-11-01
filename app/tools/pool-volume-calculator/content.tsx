@@ -5,7 +5,7 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * PoolVolumeCalculator 长文正文 —— 四语 dispatcher
+ * PoolVolumeCalculator 长文正文 —— 三语 dispatcher
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -22,19 +22,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>一立方英尺水 = 7.48 加仑</h2>
-    <p>泳池计算就是几何体积乘常数:长 × 宽 × 平均深度(英尺)再乘 7.48(每立方英尺的美制加仑数)。32×16 英尺、平均深 5 英尺的矩形池约 19,150 加仑——所以送水车按千加仑报价,泳池服务商开口先问你的加仑数。</p>
-    <h2>平均深度的正确取法</h2>
-    <p>斜底池的平均深度 ≈(浅端 + 深端)÷ 2:3 英尺与 9 英尺取 6 英尺。这个近似对跳水坑偏小、对真漏斗底偏大,但对循环选型来说误差在 10% 以内——而这正是这里需要的精度。</p>
-    <h2>圆形与肾形</h2>
-    <p>圆池用直径:体积 = π ×(直径 ÷ 2)² × 深度。24 英尺圆池、平均 4.5 英尺约装 15,300 加仑。肾形池用测量学近似公式 0.45 ×(宽 A + 宽 B)× 长,在两个最宽的"腰"处取值——是估算,但对水泵与热泵选型足够。</p>
-    <h2>只做循环,不做水处理</h2>
-    <p>住宅泳池建议每 8-12 小时把整池水循环一遍;商用池更快。用加仑数除以泵的 GPM 得到单次周转,再看每天能否翻两到三遍。本工具只做流量选型——化学品投加量取决于实测的游离氯、pH 和稳定剂,绝不能只看体积。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -64,7 +51,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function PoolVolumeCalculatorContent(): ReactNode {
   const { locale } = useApp()

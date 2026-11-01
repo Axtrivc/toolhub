@@ -5,7 +5,7 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * GpsCoordinateConverter 长文正文 —— 四语 dispatcher
+ * GpsCoordinateConverter 长文正文 —— 三语 dispatcher
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -22,19 +22,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>三种格式,三个世界</h2>
-    <p>十进制度(40.7128, -74.0060)统治软件世界:Google Maps 链接、GeoJSON、PostGIS 以及几乎全部 API。度分秒(40° 42' 46.1" N, 74° 0' 21.6" W)活在海图、航空、地理缓存打印件和土地法律文书里。度分(40° 42.768' N)则是手持 GPS 与 NMEA 语句的当家写法。三者互转是精确的——不会损失任何精度。</p>
-    <h2>方位字母、符号与负号惯例</h2>
-    <p>纬度赤道以北为正、以南为负;经度本初子午线以东为正、以西为负。"74.0060° W" 与 "-74.0060" 是同一个点——这也意味着,把西经位置粘成正经度,你的图钉会从曼哈顿掉到蒙古。多数坐标顺序 bug 本质是符号 bug:永远先抽查一下"纽约约在 +41, -74"。</p>
-    <h2>小数点后留几位才够?</h2>
-    <p>一度纬度约 111 公里,小数每多一位、误差除以十:4 位小数约 11 米(够定位到门牌),5 位约 1.1 米(一个车位),6 位约 0.11 米(寻宝与测量标志)。经度圈随纬度余弦收缩——北纬 60° 处一经度只有 55.8 公里——但"一位小数一数量级"的经验到处成立。</p>
-    <h2>经度在前的陷阱</h2>
-    <p>人类口语说"纬度,经度";GeoJSON、shapely、PostGIS 和多数地图库却要求 [经度, 纬度] 的 x-y 顺序。一交换,你的点就落进大洋或极地荒原——地图图层渲染成空白的经典原因。上面输出里专门给了一行可直接粘贴的"经度在前"坐标对,顺序不用记,照抄即可。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -64,7 +51,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function GpsCoordinateConverterContent(): ReactNode {
   const { locale } = useApp()

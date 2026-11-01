@@ -5,40 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const DewPointCalculatorL10n: ToolL10n = {
-  zh: {
-    useCases: ['判断室内外空气是干还是黏,而非只看湿度百分比', 'HVAC 与除湿机选型时确定目标露点', '干燥、仓储、乐器保养等对绝对含湿量的要求', '预测结露:露点接近气温时警惕雾、露水与返潮'],
-    faqs: [
-      { q: '用的是什么公式?', a: 'Magnus-Tetens:γ = ln(RH/100) + 17.27T/(237.7 + T),Td = 237.7γ/(17.27 − γ),T 为 °C。RH 高于 50% 时精度约 ±0.35°C。' },
-      { q: '为什么说露点比相对湿度更能反映体感?', a: '相对湿度随气温一天内大幅波动——水分没变它也在变;露点直接度量空气中的实际含水量,所以与闷感对应得更稳:露点低于 10°C 干燥,10–16°C 舒适,超过 18°C 黏腻。' },
-      { q: '绝对湿度是什么?', a: '每立方米空气中水汽的真实克数(此处由 Magnus 饱和汽压公式算出)。25°C、60% RH 时约 13.8 g/m³——比较干燥、仓储或控湿任务时最直观。' },
-      { q: '露点接近气温意味着什么?', a: '两者的差值就是蒸发"余量"。相等时空气饱和(RH = 100%),雾、露或雨随时可能形成;差值大则空气干渴、晾晒除湿都快。' },
-    ],
-    ui: {
-      'in.temp': '气温',
-      'in.tUnit': '温度单位',
-      'in.rh': '相对湿度',
-      'opt.tUnit.C': '°C',
-      'opt.tUnit.F': '°F',
-      'out.dewPoint': '露点',
-      'out.dewAlt': '另一单位',
-      'out.absHumidity': '绝对湿度',
-      'out.comfort': '舒适度',
-      'chartTitle': '当前气温下露点随湿度的变化',
-      'line.dew': '露点',
-      'line.air': '气温',
-      'preset.0': '舒适居室:23°C, 50%',
-      'preset.1': '潮湿夏晨:28°C, 85%',
-      'preset.2': '沙漠空气:35°C, 15%',
-      'preset.3': '冬季供暖:21°C, 25%',
-      'note': '💧 Magnus-Tetens 系数 a = 17.27、b = 237.7°C —— RH > 50% 时精度约 ±0.35°C。露点反映空气的真实含水量,衡量体感比相对湿度更可靠:露点低于 10°C 干燥,超过 18°C 无论温度计读多少都觉得黏。RH = 100% 时露点等于气温。',
-      'errInput': '气温请填数字,湿度 1–100%',
-      'comfort.dry': '干燥 —— 皮肤与鼻腔都会感觉到',
-      'comfort.ok': '舒适 —— 室内目标区间',
-      'comfort.humid': '明显潮湿',
-      'comfort.sticky': '黏腻,多数人感到不适',
-      'comfort.oppressive': '闷热难耐 —— 热带气流,运动有风险',
-    },
-  },
+
   es: {
     useCases: ['saber si el aire es seco o pegajoso, no solo el porcentaje de humedad', 'fijar el punto de rocío objetivo al elegir climatización o deshumidificadores', 'requisitos de humedad absoluta para secado, almacenaje o instrumentos', 'predecir condensación: rocío cerca de la temperatura advierte niebla y humedad'],
     faqs: [

@@ -5,7 +5,7 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * Tip Calculator 长文正文 —— 四语 dispatcher
+ * Tip Calculator 长文正文 —— 三语 dispatcher
  *
  * 原文件即为独立 <section>(非 ToolContent),沿用其自有 h2 结构。en 分支与原文
  * 渲染输出一致。<code> 内容、$ 金额保持不变;es/de 采用十进制逗号、百分号前加空格。
@@ -66,54 +66,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>你该给多少小费?</h2>
-    <p>
-      小费习俗因国家而异,但在美国和加拿大,大多数堂食服务都期望给小费。餐饮服务的标准范围是税前账单的
-      <strong>15-20%</strong>,其中 18% 是最常见的默认比例。这个计算器能即时完成计算,
-      并把结果在任意人数之间平均分摊。
-    </p>
-
-    <h2>标准小费比例</h2>
-    <ul>
-      <li><strong>15%</strong> —— 服务尚可</li>
-      <li><strong>18%</strong> —— 服务不错(最常见的默认值)</li>
-      <li><strong>20%</strong> —— 服务出色</li>
-      <li><strong>25%+</strong> —— 服务极佳或高档餐厅</li>
-    </ul>
-
-    <h2>不同场合的小费礼仪</h2>
-    <ul>
-      <li><strong>餐厅(堂食):</strong> 税前账单的 15-20%</li>
-      <li><strong>酒吧:</strong> 每杯 $1-2,或账单的 15-20%</li>
-      <li><strong>外卖配送:</strong> 15-20%,最少 $3-5</li>
-      <li><strong>出租车 / 网约车:</strong> 10-20%</li>
-      <li><strong>理发师:</strong> 15-20%</li>
-      <li><strong>酒店客房清洁:</strong> 每晚 $2-5</li>
-    </ul>
-
-    <h2>如何计算小费</h2>
-    <p>
-      手动计算小费时,把账单的小数点左移一位得到 10%,再翻倍得到 20%,或减半得到 5%。例如,
-      $45 的账单:10% 是 $4.50,所以 20% 是 $9.00,15% 大约是 $6.75(两者中间)。当然,
-      你也可以直接用这个计算器,省去心算。
-    </p>
-
-    <h2>世界各地的小费</h2>
-    <p>
-      小费规范因国家差异巨大。在日本,给小费实际上会被视为失礼。在欧洲大部分地区,账单里已经包含了服务费,
-      把账单向上取整就很受欢迎。旅行时务必了解当地习俗——在一个国家「合适」的小费,在另一个国家可能是冒犯。
-    </p>
-
-    <h2>小费要按含税金额算吗?</h2>
-    <p>
-      惯例是按<strong>税前金额</strong>给小费,因为税不属于服务。不过为了省事,很多人按总额给,
-      差别通常也不大。两种做法都可以;这个计算器按你输入的账单金额来算。
-    </p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -229,7 +181,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function TipCalculatorContent(): ReactNode {
   const { locale } = useApp()

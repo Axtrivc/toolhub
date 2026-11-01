@@ -5,37 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const CollegeSavingsCalculatorL10n: ToolL10n = {
-  zh: {
-    useCases: ['按孩子年龄倒推每月要存多少大学学费', '对比公立本州、外州与私立大学的总花费', '把学费通胀(而非普通通胀)算进目标额', '检验现有 529 余额按预期收益复利后还差多少'],
-    faqs: [
-      { q: '学费通胀为什么不用普通 CPI?', a: '美国高等教育费用的历史增速长期在每年 4-6%,明显高于整体通胀。按 2-3% 的普通通胀做目标,几乎必然在入学那年差出一大截;本工具默认 5% 即来自这段历史区间。' },
-      { q: '总费用是怎么算出来的?', a: '今天的年费用先按通胀率复利到入学那一年,之后每一学年再继续通胀一年——四年制的总费用是四笔逐年递增的数字之和,而不是入学年费用简单乘四。' },
-      { q: '已存金额和每月存款怎么处理?', a: '已存余额按月复利到入学年;每月定存按普通年金终值折算。两者相抵后剩下的缺口,除以年金系数就是"每月还需存多少"。' },
-      { q: '529 计划有什么税务优势?', a: '增值部分用于合格教育支出时联邦免税,很多州还有州税抵扣。它只是存钱的"容器",本工具算的是要存多少——钱可以放 529、Coverdell 或普通应税账户,预期收益自行对应调整。' },
-    ],
-    ui: {
-      'chartTitle': '储蓄增长 vs 入学总费用',
-      'line.balance': '预计账户余额',
-      'line.target': '在校总费用目标',
-      'preset.0': '公立本州',
-      'preset.1': '公立外州',
-      'preset.2': '私立大学',
-      'in.childAge': '孩子年龄',
-      'in.annualCost': '当前年度总费用',
-      'in.years': '大学年限',
-      'in.inflation': '费用通胀率',
-      'in.currentSavings': '已存金额',
-      'in.returnRate': '预期年化收益',
-      'out.costAtStart': '入学那年的一年费用',
-      'out.totalCost': '在校总费用',
-      'out.savingsFV': '入学时已有存款终值',
-      'out.monthlyNeed': '每月还需定存',
-      'outSub.costAtStart': '含通胀复利',
-      'outSub.monthlyNeed': '含已存金额的复利抵扣',
-      'note': '🎓 预设用的是 2024-25 学年全部入学成本(学费+食宿+杂费)的典型值:公立本州约 $30k、外州约 $49k、私立约 $68k。529 里的钱按教育用途免税增值——但先得知道目标是多少。',
-      'errInvalid': '请输入有效的年龄(0-17)、正的年费用与合理的比率',
-    },
-  },
+
   es: {
     useCases: ['calcular cuánto ahorrar al mes para la universidad según la edad del hijo', 'comparar el coste total de universidad pública estatal, fuera del estado y privada', 'incluir la inflación educativa (no la general) en la meta', 'comprobar cuánto falta tras capitalizar el saldo actual del plan 529'],
     faqs: [

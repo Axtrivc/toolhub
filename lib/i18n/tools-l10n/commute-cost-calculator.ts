@@ -4,56 +4,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const CommuteCostCalculatorL10n: ToolL10n = {
-  zh: {
-    useCases: [
-      '算出每周通勤的年成本:里程 × 天数 × 每英里费率',
-      '用自家 MPG 与油价按真实油耗定价通勤',
-      '把通勤时间按税后时薪折成钱,看时间成本',
-      '比较近贵租房与远便宜买房的真实代价',
-    ],
-    faqs: [
-      { q: '通勤里程能抵税吗?', a: '不能。家与固定办公场所之间的里程从来不算商务里程;2017 年税改后雇员连未报销的商务里程都不能在联邦层面扣除。要算可抵扣的商务出行,请用里程报销计算器。' },
-      { q: '每英里费率法和油耗法哪个对?', a: '每英里 70¢(2025 年 IRS 口径)覆盖整辆车:油、胎、保养、保险、折旧;MPG × 油价只算了油钱,通常会低估真实成本一半左右。要精算用油耗法,要诚实用车价法。' },
-      { q: '时间成本是怎么算的?', a: '单程分钟 × 2 × 每周天数 × 每年工作周 ÷ 60 得年小时数,再乘你的税后时薪。30 分钟单程、每周 5 天,一年约 240 小时——整整 6 个工作周。' },
-      { q: '这个计算器没算什么?', a: '停车费、过路费、公交月票和偶发的远程办公周都在外,需要自己加上。另外它算的是当下成本,不是承诺成本:能随时退租的通勤和绑了 30 年房贷的通勤是两种决策。' },
-    ],
-    ui: {
-      'in.distance': '单程距离',
-      'in.days': '每周天数',
-      'in.weeks': '每年工作周',
-      'in.method': '计价方式',
-      'in.rate': '每英里费率',
-      'in.mpg': '油耗',
-      'in.gasPrice': '油价',
-      'in.minutes': '单程通勤时间',
-      'in.wage': '税后时薪',
-      'inSuffix.distance': '英里',
-      'inSuffix.days': '天',
-      'inSuffix.weeks': '周',
-      'inSuffix.rate': '$',
-      'inSuffix.mpg': 'MPG',
-      'inSuffix.gasPrice': '$/加仑',
-      'inSuffix.minutes': '分钟',
-      'inSuffix.wage': '$',
-      'opt.method.irs': '每英里费率',
-      'opt.method.fuel': '油耗法',
-      'errDistance': '请输入大于 0 的单程距离',
-      'out.annualCost': '年通勤成本',
-      'out.annualMiles': '每年里程',
-      'out.monthly': '折合每月',
-      'out.hours': '每年驾驶小时',
-      'out.timeValue': '这些时间的价值',
-      'preset.0': '典型郊区通勤',
-      'preset.1': '混合办公每周 2 天',
-      'preset.2': '市区油耗法',
-      'errInvalid': '其余输入不能为负',
-      'chartTitle': '钱与时间',
-      'cmp.0': '车辆成本',
-      'cmp.1': '时间价值',
-      'cmpseg.0': '年度金额',
-      'note': '🚙 每英里费率法(76¢ 为 2026 年下半年 IRS 口径)给整辆车定价:燃油、轮胎、折旧、保险。MPG 法只算油钱,会低估约一半的真实成本。无论哪种算法,单程 30 分钟的通勤一年要花掉约 6 个 40 小时工作周的时间。',
-    },
-  },
+
   es: {
     useCases: [
       'calcular el coste anual del trayecto: distancia × días × tarifa por milla',

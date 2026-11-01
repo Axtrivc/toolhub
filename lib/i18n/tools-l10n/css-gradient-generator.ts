@@ -5,66 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const cssGradientGeneratorL10n: ToolL10n = {
-  zh: {
-    ui: {
-      'addStop': '+ 添加色标',
-      'angleLabel': '角度 — ',
-      'colorStops': '色标',
-      'copyCss': '复制 CSS',
-      'gradientPreviewAria': '渐变实时预览',
-      'meshColorAria': '网格颜色 ',
-      'meshPreset.0': '均衡',
-      'meshPreset.1': '四角',
-      'meshPreset.2': '顶部光晕',
-      'meshPreset.3': '对角',
-      'meshPreset.4': '中心迸发',
-      'mode.linear': '线性',
-      'mode.mesh': '网格',
-      'mode.radial': '径向',
-      'noteIntro': '💡 网格渐变用堆叠的 ',
-      'noteMid': ' 层模拟——每种颜色向 ',
-      'noteOutro': ' 之上。这在所有现代浏览器中都无需图片、SVG 或 JavaScript 即可工作。',
-      'noteOverBase': ' 渐隐,垫在底色 ',
-      'optionCircle': '圆形',
-      'optionEllipse': '椭圆',
-      'pos.bottom': '下',
-      'pos.bottom left': '左下',
-      'pos.bottom right': '右下',
-      'pos.center': '中心',
-      'pos.left': '左',
-      'pos.right': '右',
-      'pos.top': '上',
-      'pos.top left': '左上',
-      'pos.top right': '右上',
-      'position': '位置',
-      'positionPreset': '位置预设',
-      'randomPalette': '随机调色板',
-      'remove': '移除',
-      'shape': '形状',
-      'stopColorAria': '色标颜色 ',
-      'stopPositionAria': '色标位置百分比',
-    },
-    useCases: [
-      'CSS mesh 渐变生成器',
-      '带角度的线性渐变制作器',
-      'CSS 渐变背景生成器',
-      '复制 CSS 渐变代码',
-    ],
-    faqs: [
-      {
-        q: '线性渐变和径向渐变有什么区别?',
-        a: '线性渐变沿你设定角度的直线混合颜色,径向渐变则从中心点向外放射成圆或椭圆。背景和按钮常用线性,聚光灯、球体效果用径向。',
-      },
-      {
-        q: '怎么加超过两个色标?',
-        a: '点「+ 添加色标」新增一个色标,再用每个色标旁的百分比数字框(0-100)设定位置。生成器会把完整色标列表写进 CSS,所以多色混合和硬边色带都能一键复制粘贴。',
-      },
-      {
-        q: '输出能在所有浏览器里用吗?',
-        a: '能。它输出标准的 linear-gradient() / radial-gradient() CSS,所有现代浏览器都支持。旧引擎可以在渐变下面加一层纯色兜底,但现代浏览器不需要额外前缀。',
-      },
-    ],
-  },
+
   es: {
     ui: {
       'addStop': '+ Añadir parada',

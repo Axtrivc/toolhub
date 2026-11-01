@@ -5,27 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const numeralSystemConverterL10n: ToolL10n = {
-  zh: {
-    ui: {
-      'baseBinary': '二进制(基数 2)',
-      'baseDecimal': '十进制(基数 10)',
-      'baseHex': '十六进制(基数 16)',
-      'baseOctal': '八进制(基数 8)',
-      'emptyState': '请输入所选进制的有效数字',
-      'fromBase': '原始进制',
-      'note': '🔢 常见用途:编程(十六进制颜色、内存地址)、数字电子(二进制)、文件权限(八进制)。试试十进制 255 = 十六进制 FF。',
-      'number': '数字',
-    },
-    useCases: [
-      '在网页设计里用十六进制颜色(如 #FFFFFF)',
-      '查看调试器中以十六进制显示的内存地址',
-      '理解 Unix 文件权限(八进制的 chmod 755)',
-      '在二进制和十六进制之间互转(如位掩码)',
-    ],
-    faqs: [
-      { q: '程序员为什么用十六进制?', a: '因为一个十六进制数字正好表示 4 位二进制(一个「半字节」)。这让冗长的二进制数变得短得多、好读得多。FF 比 11111111 紧凑得多。' },
-    ],
-  },
+
   es: {
     ui: {
       'baseBinary': 'Binario (base 2)',

@@ -5,24 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const htmlTagStripperL10n: ToolL10n = {
-  zh: {
-    ui: {
-      defaultInput: '<h1>标题</h1><p>这是<strong>加粗</strong>文本。</p>',
-      inputLabel: 'HTML 源码',
-      outputLabel: '纯文本(已移除标签)',
-      'tooLongNote': '⚠️ 输入太长,无法在此处理——请控制在约 100,000 字符以内。',
-      note: '🌐 剥离所有 HTML 标签,留下可读文本。使用浏览器 DOM 解析器——仅在客户端运行。',
-    },
-    useCases: [
-      '清理从网页抓取下来的文本',
-      '把 HTML 邮件转成纯文本',
-      '从 CMS 导出中提取文章正文',
-      '粘贴进纯文本编辑器前先去掉格式',
-    ],
-    faqs: [
-      { q: '会保留换行吗?', a: '会。<p>、<div> 等块级标签在移除时会在其后补一个换行,所以段落分隔得以保留;行内标签(<b>、<span>)直接消失,不影响间距。' },
-    ],
-  },
+
   es: {
     ui: {
       defaultInput: '<h1>Título</h1><p>Este es texto <strong>en negrita</strong>.</p>',

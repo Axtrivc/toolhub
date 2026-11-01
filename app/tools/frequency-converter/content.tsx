@@ -37,38 +37,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具?</h2>
-    <p>本工具用于在频率单位之间换算:<strong>赫兹</strong>、千赫、兆赫、吉赫、每分钟转数 (RPM) 以及角速度单位(度/秒、弧度/秒)。频率衡量某事物每秒重复多少次。</p>
-    <div>
-      <h2>关键换算</h2>
-      <ul>
-        <li>1 千赫 (kHz) = 1,000 Hz</li>
-        <li>1 兆赫 (MHz) = 1,000,000 Hz</li>
-        <li>1 吉赫 (GHz) = 1,000 MHz = 10 亿 Hz</li>
-        <li>1 RPM = 1/60 Hz ≈ 0.0167 Hz</li>
-        <li>1 弧度/秒 (rad/s) = 1/(2π) Hz ≈ 0.159 Hz</li>
-      </ul>
-    </div>
-    <div>
-      <h2>你常遇到的频率</h2>
-      <ul>
-        <li><strong>心率:</strong>60-100 次/分 = 1-1.7 Hz</li>
-        <li><strong>音频(人耳听觉):</strong>20 Hz - 20 kHz</li>
-        <li><strong>调幅广播 (AM):</strong>530-1710 kHz</li>
-        <li><strong>调频广播 (FM):</strong>88-108 MHz</li>
-        <li><strong>WiFi:</strong>2.4 GHz 或 5 GHz</li>
-        <li><strong>CPU 时钟频率:</strong>现代计算机为 2-5 GHz</li>
-      </ul>
-    </div>
-    <div>
-      <h2>频率为什么重要</h2>
-      <p>在电子和通信领域,频段决定了信号能做什么。较低频率(调幅广播)传输更远但承载的数据更少;较高频率(WiFi、5G)承载更多数据但传输距离更短。这种权衡决定了整个无线系统的设计。</p>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -136,7 +104,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function FrequencyConverterContent(): ReactNode {
   const { locale } = useApp()

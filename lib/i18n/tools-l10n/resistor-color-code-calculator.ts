@@ -5,47 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const ResistorColorCodeCalculatorL10n: ToolL10n = {
-  zh: {
-    useCases: ['读出 4/5/6 环色环电阻的阻值与容差', '核对废旧元件箱里无标记电阻的标称值', '由目标阻值反查该买什么色环的电阻', '教学演示色环编码规则'],
-    faqs: [
-      { q: '色环从哪一端开始读?', a: '把金色或银色容差环转到右边——那一环与邻环之间的间距明显更宽。无金银环的 5 环电阻,则把多出的那位数字环放在左侧。' },
-      { q: '4 环、5 环、6 环有什么区别?', a: '4 环给两位有效数字+倍率+容差(常见 ±5%/±10%);5 环多一位数字,用于 ±1% 及更精的电阻;罕见的第 6 环是温度系数,单位 ppm/K。' },
-      { q: '10Ω 以下的阻值怎么读?', a: '倍率环会出现金色和银色:金色 ×0.1、银色 ×0.01。棕黑金金就读 1.0Ω ±5%——小数点藏在倍率环里。' },
-      { q: '为什么万用表读数和色环对不上?', a: '在容差之内就是对得上的:±5% 的 470Ω 合法范围是 446.5-493.5Ω。如果差得更多,多半是在路测量——并联支路会把读数拉偏。' },
-    ],
-    formula: {
-      formula: '阻值 = (数字₁数字₂[数字₃]) × 倍率\n范围 = 阻值 × (1 ± 容差%)\n倍率环:黑 ×1、棕 ×10、红 ×100 … 白 ×1G;金 ×0.1、银 ×0.01',
-      variables: '数字环 = 有效数字(黑 0 … 白 9)\n倍率环 = 十的幂,含金 ×0.1 与银 ×0.01\n容差环 = 允许偏差(金 ±5%、银 ±10%、棕 ±1%)\n温度系数(第 6 环)= 漂移,单位 ppm/°C(棕 100、红 50、紫 5)',
-      explain: '前几环拼出有效数字,下一环把它们乘上十的幂;容差把标称值变成零件实测的合法区间。',
-      example: '第 1 步:黄紫红金 → 数字 4、7,倍率 ×100。\n第 2 步:阻值 = 47 × 100 = 4,700 Ω = 4.7 kΩ。\n第 3 步:金环 = ±5% → 4,700 × 0.05 = 235 Ω。\n第 4 步:范围 = 4,700 − 235 = 4,465 Ω 至 4,700 + 235 = 4,935 Ω。\n结果:4.7 kΩ ±5%,实测落在 4.465-4.935 kΩ 之间都算合格。',
-    },
-    ui: {
-      'modeDecode': '色环 → 阻值',
-      'modeEncode': '阻值 → 色环',
-      'bandsCount': '色环数',
-      'band.d1': '环 1(数字)',
-      'band.d2': '环 2(数字)',
-      'band.d3': '环 3(数字)',
-      'band.mult': '倍率环',
-      'band.tol': '容差环',
-      'band.temp': '温度系数环',
-      'valueLabel': '阻值',
-      'tolLabel': '容差',
-      'minLabel': '下限',
-      'maxLabel': '上限',
-      'tempLabel': '温度系数',
-      'encInput': '阻值(如 4.7k、470、1.2M)',
-      'encTol': '容差',
-      'encBands': '色环数',
-      'encErr': '无法解析该阻值——试试 470、4.7k、1M 或 0.22 这样的写法',
-      'errBands': '该色环组合无法解析——请检查各环颜色',
-      'colorNames': '色环颜色',
-      'color.black': '黑', 'color.brown': '棕', 'color.red': '红', 'color.orange': '橙', 'color.yellow': '黄',
-      'color.green': '绿', 'color.blue': '蓝', 'color.violet': '紫', 'color.grey': '灰', 'color.white': '白',
-      'color.gold': '金', 'color.silver': '银',
-      'note': '📖 从间距更宽的那端读起:金/银容差环靠右。5 环多一位数字(±1% 精度),第 6 环(少见)是 ppm/K 温漂。±5% 的 470Ω 实测落在 446.5-493.5Ω 都算合格;在路测量会把读数拉偏,要拆下来量。',
-    },
-  },
+
   es: {
     useCases: ['leer el valor y la tolerancia de resistencias de 4/5/6 bandas', 'identificar piezas sueltas sin marcar del cajón', 'averiguar qué colores pedir para un valor objetivo', 'practicar el código de colores en clase'],
     faqs: [

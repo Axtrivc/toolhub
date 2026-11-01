@@ -1,72 +1,55 @@
 /**
- * i18n 字典 - 翻译界面框架(导航/按钮/Footer 等)
+ * i18n dictionary for shared interface copy (navigation, buttons, footer, etc.).
  *
- * 策略说明:
- * - 站点定位英文站(赚高 RPM),工具 SEO 字段(title/description/h1/keywords)保持英文,
- *   不做翻译;语言切换只影响界面元素 + 工具卡片展示文案(name/shortIntro/category)
- * - 支持 4 种语言:en(默认)/ zh / es / de
- * - 工具卡片的 name/shortIntro 翻译放在 lib/i18n/tools.<locale>.ts,按 slug 映射
- *
- * 加新的界面文案:在四个字典里都加一个 key。
+ * Tool SEO fields stay English; locale switching affects interface elements and
+ * localized tool-card names, introductions, and categories.
+ * Supported locales: English (default), Español, and Deutsch.
+ * Add every new interface key to all three dictionaries.
  */
 
-import { zhTools } from './i18n/tools.zh'
 import { esTools } from './i18n/tools.es'
 import { deTools } from './i18n/tools.de'
 
-export type Locale = 'en' | 'zh' | 'es' | 'de'
+export type Locale = 'en' | 'es' | 'de'
 
-/** 支持的语言列表(下拉/迭代用) */
-export const SUPPORTED_LOCALES: Locale[] = ['en', 'zh', 'es', 'de']
+/** Supported locales, used by the switcher and locale iterators. */
+export const SUPPORTED_LOCALES: Locale[] = ['en', 'es', 'de']
 
-/** 语言下拉的展示标签(母语 + ISO 码) */
+/** Native-language labels for the locale switcher. */
 export const LOCALE_LABELS: Record<Locale, string> = {
   en: 'English',
-  zh: '中文',
   es: 'Español',
   de: 'Deutsch',
 }
 
-/** 语言下拉的短码(选中态徽章用) */
+/** Short badges for the selected locale. */
 export const LOCALE_CODES: Record<Locale, string> = {
   en: 'EN',
-  zh: '中',
   es: 'ES',
   de: 'DE',
 }
 
-/**
- * 首访检测浏览器语言 → 匹配支持列表。
- * 匹配不到任何支持语言 → 返回 'en'(默认)。
- *
- * 匹配规则:navigator.language 形如 'zh-CN' / 'es-AR' / 'de-AT' / 'en-US',
- * 取主语言前缀小写后比对。
- */
+/** Detect the primary browser language and fall back to English when unsupported. */
 export function detectBrowserLocale(): Locale {
   if (typeof navigator === 'undefined') return 'en'
-  const langs = [navigator.language, ...(navigator.languages ?? [])]
-    .filter(Boolean)
-    .map((l) => l.toLowerCase())
-  for (const l of langs) {
-    const primary = l.split('-')[0]
-    if (primary === 'zh') return 'zh'
-    if (primary === 'es') return 'es'
-    if (primary === 'de') return 'de'
-    if (primary === 'en') return 'en'
-  }
+  const browserLanguage = (navigator.language || navigator.languages?.[0] || '').toLowerCase()
+  const primary = browserLanguage.split('-')[0]
+  if (primary === 'es') return 'es'
+  if (primary === 'de') return 'de'
   return 'en'
 }
 
-/** 校验字符串是否为合法 Locale(读取 localStorage 后用) */
+/** Validate persisted or URL-provided locale values. */
 export function isLocale(v: unknown): v is Locale {
-  return v === 'en' || v === 'zh' || v === 'es' || v === 'de'
+  return v === 'en' || v === 'es' || v === 'de'
 }
 
-/** URL 显式语言优先于本地偏好;非法/缺失值交由调用方继续回退。 */
+/** A present but unsupported URL locale explicitly falls back to English. */
 export function getUrlLocale(): Locale | null {
   if (typeof window === 'undefined') return null
   const value = new URLSearchParams(window.location.search).get('lang')
-  return isLocale(value) ? value : null
+  if (value === null) return null
+  return isLocale(value) ? value : 'en'
 }
 
 /** 切换语言时保留当前路径、其他 query 与 hash,不新增浏览器历史记录。 */
@@ -99,7 +82,7 @@ export interface Dict {
   heroTitle2: string // "That Just Work"
   heroSubtitle: string
   heroOfflineBadge: string // PWA/隐私卖点徽章 "⚡ Tools Run In-Browser & Work Offline"
-  heroMultilingualBadge: string // 多语卖点徽章 "🌐 Available in 4 Languages: EN | 中文 | Español | Deutsch"
+  heroMultilingualBadge: string // 多语卖点徽章 "🌐 Available in 3 Languages: EN | Español | Deutsch"
   heroCtaExplore: string // Hero 快捷操作栏主 CTA "Explore {count}+ Free Tools"
   // 搜索 & 筛选
   searchPlaceholder: string
@@ -521,7 +504,7 @@ const en: Dict = {
   skipToContent: 'Skip to content',
   errorDigest: 'Error code: {digest} — include this code if you report the issue.',
   loading: 'Loading…',
-  heroMultilingualBadge: '🌐 Available in 4 Languages: EN | 中文 | Español | Deutsch',
+  heroMultilingualBadge: '🌐 Available in 3 Languages: EN | Español | Deutsch',
   // Cookie 同意横幅
   cookieAriaLabel: 'Cookie consent',
   cookieBody: 'We use cookies to keep tools free and improve your experience. By using the site you consent to cookies — see our {privacy}.',
@@ -622,257 +605,6 @@ const en: Dict = {
   textToolOutputLen: 'Output length',
 }
 
-const zh: Dict = {
-  navAllTools: '全部工具',
-  toolsDirHeroBody: "{count}+ 个免费在线工具,覆盖金融、数学、健康、单位换算、文本和开发者实用程序。在下方选择分类,或从首页搜索。",
-  toolsDirCta: "从首页搜索",
-  toolsDirCategoriesAria: "工具分类",
-  toolsDirSeoTitle: "一个工具箱,搞定日常所有任务",
-  toolsDirSeoP1: "不必再为每个小任务翻找不同的网站——ToolHub 把你最常用的实用工具集中在一处。公斤换算磅、计算房贷月供、格式化 JSON、生成强密码?全都在这里,而且全部在你的浏览器本地运行。",
-  toolsDirSeoP2: "本页所有工具免费、无需注册,计算在浏览器本地完成。带分享链接的工具可能把设置写进 URL,分享敏感数值前请先查看隐私政策。收藏本页——我们会根据读者的真实搜索持续新增工具。",
-  navAbout: '关于',
-  navBlog: '博客',
-  navContact: '联系',
-  heroBadge: '{count}+',
-  heroTitle1: '免费在线工具',
-  heroTitle2: '简单好用',
-  heroSubtitle:
-    '为开发者、学生和日常任务打造的快速、注重隐私的实用工具。计算在浏览器本地完成,无需注册。',
-  heroOfflineBadge: '⚡ 工具浏览器内运行 · 支持离线',
-  heroCtaExplore: '探索 {count}+ 免费工具',
-  searchPlaceholder: '搜索 {count} 个工具...',
-  heroSearchLabel: '搜索工具',
-  categoryAll: '全部',
-  showingAll: '显示全部 {count} 个工具',
-  showingFiltered: '共 {total} 个中的 {filtered} 个',
-  noResults: '没有匹配 "{query}" 的工具。',
-  noResultsHint: '清除搜索',
-  clearSearch: '清除搜索',
-  featuredTitle: '热门工具',
-  featuredBadgePopular: '热门',
-  featuredBadgeNew: '新',
-  badgePro: '专业',
-  badgeFree: '免费',
-  footerAbout: '关于',
-  footerContact: '联系',
-  footerPrivacy: '隐私',
-  footerTerms: '条款',
-  footerTagline:
-    '免费、快速、注重隐私的在线工具。计算在浏览器本地完成,无需账号。',
-  footerRights: '个工具,持续增加中。保留所有权利。',
-  footerMore: '还有 {count} 个',
-  statsTotalVisits: '总访问',
-  statsTodayVisits: '今日访问',
-  statsTodayVisitors: '今日访客',
-  statsAriaLabel: '站点访客统计',
-  toolHome: '首页',
-  toolResult: '结果',
-  toolCopy: '复制',
-  toolCopied: '✓ 已复制',
-  toolLoadSample: '加载示例',
-  toolSampleOverwrite: '覆盖当前输入?',
-  toolSampleLoaded: '✓ 已加载示例',
-  toolLoadSampleTitle: '自动填充一个真实示例',
-  toolCopySummary: '复制摘要',
-  shareLink: '分享链接',
-  linkCopied: '链接已复制!',
-  nextStepsTitle: '下一步',
-  ratingRatings: '{count}+ 条评价',
-  toolDownload: '下载',
-  toolDownloaded: '✓ 已下载',
-  toolPrintReport: '打印报告',
-  printReportGenerated: '生成时间',
-  historyButton: '历史',
-  historyTitle: '计算历史',
-  historyEmpty: '暂无记录 —— 完成一次计算后会自动出现在这里。',
-  historyClear: '清空记录',
-  historyExportCsv: '导出 CSV',
-  historyPrivate: '🔒 100% 私密 —— 仅存储在你的设备本地',
-  historyLoadHint: '点击任意记录即可一键载入该方案',
-  draftRestored: '草稿已恢复',
-  relatedTitle: '相关工具',
-  relatedSubtitle: '你可能还会用到的工具',
-  recentTitle: '最近使用与收藏',
-  recentSubtitle: '从上次离开的地方继续',
-  // Workspace 仪表盘
-  workspaceEyebrow: '工作台 / 开发者与创作者工具中心',
-  workspaceStatus: '本地计算引擎 · 无需账号',
-  workspaceBadgeEngines: '{count}+ 个实用引擎',
-  workspaceBadgeInstant: '即时本地计算',
-  workspaceBadgeZeroLogs: '浏览器本地处理',
-  workspaceQuickAccess: '快速访问',
-  workspacePinnedTitle: '已固定工具',
-  workspacePinnedEmpty: '还没有固定工具 —— 点击任意工具卡片上的图钉,把它固定到这里。',
-  workspaceRecentTitle: '最近使用',
-  workspaceRecentClear: '清空',
-  workspacePin: '固定到工作台',
-  workspaceUnpin: '取消固定',
-  scratchpadTitle: '随手记与快捷工具',
-  scratchpadSubtitle: '自动保存到浏览器 —— 内容不会上传。',
-  scratchpadPlaceholder: '粘贴 JSON、Base64、令牌或临时笔记,就地快速变换…',
-  scratchpadClear: '清空',
-  scratchpadStats: '{words} 词 · {chars} 字符',
-  scratchpadSaved: '已保存',
-  scratchpadFormatJson: '格式化 JSON',
-  scratchpadB64Enc: 'Base64 编码',
-  scratchpadB64Dec: 'Base64 解码',
-  scratchpadUpper: '大写',
-  scratchpadLower: '小写',
-  scratchpadTrim: '清理空白',
-  scratchpadErrorJson: 'JSON 无效',
-  scratchpadErrorBase64: 'Base64 无效',
-  workspaceTabDeveloper: '开发',
-  workspaceTabDesign: '设计与颜色',
-  workspaceTabText: '文本与写作',
-  workspaceTabConverters: '转换器',
-  workspaceTabUtilities: '实用工具',
-  hubTitleAI: 'AI 与大模型工具',
-  hubTitleDeveloper: '开发与代码',
-  hubTitleDesign: '设计与 CSS 工具',
-  hubTitleText: '文本与内容创作',
-  hubTitleFinance: '金融与 SaaS 计算器',
-  hubTitleConverters: '转换器与格式',
-  hubTitleUtilities: '实用工具与数学',
-  hubTaglineAI: '估算 token 成本、修复 JSON 输出、构造函数调用——服务 AI 开发工作流。',
-  hubTaglineDeveloper: '现代开发与 API 任务的必备工具',
-  hubTaglineDesign: '颜色、渐变与布局工具,打造像素级 UI',
-  hubTaglineText: '快速写作、统计、转换与润色文本',
-  hubTaglineFinance: '贷款、按揭、ROI 与定价计算,一算即得',
-  hubTaglineConverters: '单位、时间与数字格式,即时转换',
-  hubTaglineUtilities: '日常数学、健康、时间与教育小助手',
-  hubExploreAll: '浏览全部 {count} 个工具',
-  toolsCount: '{count} 个工具',
-  hubBackToThemes: '全部主题',
-  workspaceDrawerSubtitle: '固定工具、最近使用与随手记',
-  sitemapDirectory: '站点目录',
-  adLabel: '广告',
-  themeToggle: '切换主题',
-  themeLight: '浅色',
-  themeDark: '深色',
-  languageToggle: '切换语言',
-  menuToggle: '切换菜单',
-  menuClose: '关闭菜单',
-  menuLabel: '菜单',
-  // 全局搜索弹窗(Cmd/Ctrl+K)
-  searchOpen: '搜索工具(Ctrl+K)',
-  searchPaletteTitle: '搜索工具',
-  searchPalettePlaceholder: '按名称或关键词搜索工具…',
-  searchPaletteHint: '{count} 个工具',
-  searchNoResults: '没有匹配的工具,换个关键词试试。',
-  searchClose: '关闭搜索',
-  searchKbdSelect: '选择',
-  searchKbdMove: '移动',
-  searchKbdClose: '关闭',
-  // 404 页面
-  notFoundTitle: '页面不存在',
-  notFoundBody: '抱歉,找不到这个页面。它可能已被移动或从未存在。试试下面这些热门工具:',
-  notFoundBack: '← 返回全部工具',
-  errorTitle: '出错了',
-  errorBody: '发生了意外错误。请重试,或返回首页。',
-  errorRetry: '重试',
-  errorHome: '返回首页',
-  skipToContent: '跳到主要内容',
-  errorDigest: '错误代码:{digest}——反馈问题时请附上此代码。',
-  loading: '加载中…',
-  heroMultilingualBadge: '🌐 已支持 4 种语言:EN | 中文 | Español | Deutsch',
-  // Cookie 同意横幅
-  cookieAriaLabel: 'Cookie 同意',
-  cookieBody: '我们使用 cookie 以保持工具免费并改善体验。使用本站即表示你同意使用 cookie —— 见{privacy}。',
-  cookiePrivacyLink: '隐私政策',
-  cookieAcceptAll: '全部接受',
-  cookieNecessaryOnly: '仅必要',
-  // 博客索引页
-  blogIndexTitle: '博客',
-  blogIndexSubtitle: '实用指南、可验算示例、计算器教程与工程笔记。',
-  blogReadMore: '阅读全文',
-  blogReadTime: '阅读 {time}',
-  blogIndexEmpty: '暂无文章 —— 欢迎稍后再来。',
-  blogCtaBody: '比起阅读更想动手?直接进入工具箱。',
-  blogCtaExplore: '探索全部工具',
-  blogCtaAbout: '关于 {site}',
-  blogBannerEyebrow: '试试工具箱',
-  blogBannerTitle: '精选工具,免费、浏览器内运行',
-  blogBannerBody:
-    '无需注册 —— 下面的工具全部在你的浏览器标签页内运行,输入就地处理 —— 正如本文所描述的架构。',
-  blogBannerBrowse: '浏览全部 {count}+ 个工具',
-  blogBackToSite: '返回 {site}',
-  blogArticleReadTime: '{count} 分钟阅读',
-  // 首页底部 SEO 文案区
-  seoWhyTitle: '为什么要用我们的在线工具?',
-  seoWhyBody1: '大多数在线工具都要你注册、接受 cookie,或把文件上传到无法审计的服务器。我们不一样:这里的每个工具都完全在你的浏览器中运行。这对你意味着三件事:',
-  seoWhyPrivacy: '隐私优先。',
-  seoWhyPrivacyBody: ' 你的文本和文件在浏览器本地处理。分享链接可能把设置写进 URL,请勿在链接中放入敏感数值。',
-  seoWhyInstant: '即时结果。',
-  seoWhyInstantBody: '无需往返服务器,意味着无需等待。工具响应速度和你打字一样快。',
-  seoWhyNoFriction: '零摩擦。',
-  seoWhyNoFrictionBody: '没有账号、没有付费墙、没有"升级以继续"。打开页面就能用。',
-  seoWhyBody2: '我们专注把单一问题解决好的实用工具 —— 从计算贷款、单位换算,到格式化 JSON、生成二维码。涵盖金融、数学、健康、单位换算和开发者工具的 {count}+ 个工具,大概率有你需要的。新工具持续更新,欢迎收藏本页。',
-  seoBrowseTitle: '按分类浏览工具',
-  seoBrowseBody: '想找特定的工具?直接跳到某个分类,或打开{fullDir}搜索全部 {count} 个工具。',
-  seoBrowseFullDir: '完整工具目录',
-  seoBrowseCountSuffix: '({count} 个工具)',
-  seoPopularTitle: '热门工具',
-  seoPopularBody: '我们最常用的几款工具,适合从这里开始:',
-  whatifTitle: '假如当时买了 · WhatIf',
-  whatifBody: '假如 1996 年买入微软、2013 年买入比特币,今天值多少钱?选一只股票、一个年份、一笔本金,看复利逐日回放的动画。',
-  whatifCta: '去看回放 →',
-  bentoTitle: '现在就上手试一个',
-  bentoSubtitle: '无需注册、无需安装——所有工具都在浏览器里运行。',
-  bentoPercentTitle: '快速算百分比',
-  bentoPercentOf: '多少是',
-  bentoPercentIs: '% 的',
-  bentoPercentResultLabel: '答案',
-  bentoConverterTitle: '厘米 ↔ 英寸',
-  bentoConverterSwap: '交换单位',
-  bentoMortgageTitle: '房贷月供',
-  bentoMortgageMonthly: '每月',
-  bentoMortgageDemo: '正在演示实时示例',
-  bentoMortgageParams: '$400,000 · 20% 首付 · 30 年',
-  bentoVisitorsTitle: '实时访客',
-  bentoVisitorsToday: '今日',
-  bentoVisitorsTotal: '累计访问',
-  bentoTodayTitle: '今天',
-  bentoTodayWeekN: '一年中的第 {n} 周',
-  bentoTodayDaysLeft: '距 {y} 年结束还有 {n} 天',
-  bentoOpenTool: '打开完整工具 →',
-  searchQuickAnswer: '快速答案——回车打开完整工具',
-  shareResult: '复制为图片',
-  shareCopied: '已复制!',
-  searchMatchesCount: '{count} 条结果',
-  // ── 工具页共享组件 chrome ──
-  favSave: '收藏',
-  favSaved: '已收藏',
-  favAddAria: '将 {name} 加入收藏',
-  favRemoveAria: '将 {name} 移出收藏',
-  favSaveTitle: '加入收藏',
-  favSavedTitle: '已收藏',
-  faqsTitle: '常见问题',
-  embedTitle: '将此免费工具嵌入你的博客',
-  embedSubtitle: '复制粘贴即可,无需注明出处',
-  embedBody: '把这段 HTML 粘贴到你网站的任意位置即可嵌入 {name}。可按需调整 height 与 max-width 以适配你的版式。',
-  embedCopyLabel: '复制嵌入代码',
-  disclaimerFinance:
-    '免责声明:本计算器仅供信息与教育用途,不构成金融、投资或法律建议。计算结果基于你输入的数值估算,实际数字可能有所不同。做出金融决策前请务必咨询合格的专业人士。',
-  disclaimerHealth:
-    '免责声明:本工具仅供教育用途,不能替代专业的医疗建议、诊断或治疗。结果仅为估算值,做出与健康相关的决定前请与合格的医疗服务提供者商讨。',
-  formulaTitle: '公式与原理',
-  formulaIntro: '{name} 基于以下公式:',
-  formulaVariables: '变量说明',
-  formulaExample: '算例演示',
-  textToolClear: '清空',
-  textToolInputPlaceholder: '在此输入或粘贴文本…',
-  textToolResultPlaceholder: '结果将显示在这里…',
-  textToolChars: '{count} 字符',
-  textToolWords: '{count} 词',
-  textToolLines: '{count} 行',
-  textToolReading: '阅读 {time}',
-  textToolCharsLabel: '字符',
-  textToolWordsLabel: '词',
-  textToolLinesLabel: '行',
-  textToolReadingLabel: '阅读时长',
-  textToolInputLen: '输入长度',
-  textToolOutputLen: '输出长度',
-}
 
 const es: Dict = {
   navAllTools: 'Todas las herramientas',
@@ -1027,7 +759,7 @@ const es: Dict = {
   skipToContent: 'Saltar al contenido',
   errorDigest: 'Código de error: {digest}; inclúyelo si informas del problema.',
   loading: 'Cargando…',
-  heroMultilingualBadge: '🌐 Disponible en 4 idiomas: EN | 中文 | Español | Deutsch',
+  heroMultilingualBadge: '🌐 Disponible en 3 idiomas: EN | Español | Deutsch',
   // Cookie 同意横幅
   cookieAriaLabel: 'Consentimiento de cookies',
   cookieBody: 'Usamos cookies para mantener las herramientas gratuitas y mejorar tu experiencia. Al usar el sitio aceptas las cookies — consulta nuestra {privacy}.',
@@ -1280,7 +1012,7 @@ const de: Dict = {
   skipToContent: 'Zum Inhalt springen',
   errorDigest: 'Fehlercode: {digest} — gib diesen Code an, wenn du das Problem meldest.',
   loading: 'Wird geladen…',
-  heroMultilingualBadge: '🌐 In 4 Sprachen verfügbar: EN | 中文 | Español | Deutsch',
+  heroMultilingualBadge: '🌐 In 3 Sprachen verfügbar: EN | Español | Deutsch',
   // Cookie 同意横幅
   cookieAriaLabel: 'Cookie-Einwilligung',
   cookieBody: 'Wir verwenden Cookies, um die Werkzeuge kostenlos zu halten und deine Erfahrung zu verbessern. Mit der Nutzung der Seite stimmst du Cookies zu — siehe unsere {privacy}.',
@@ -1380,10 +1112,10 @@ const de: Dict = {
   textToolOutputLen: 'Ausgabelänge',
 }
 
-export const dicts: Record<Locale, Dict> = { en, zh, es, de }
+export const dicts: Record<Locale, Dict> = { en, es, de }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// 分类标签本地化(11 个英文分类键 → 4 语映射)
+// 分类标签本地化(11 个英文分类键 → 3 语映射)
 //
 // tools.ts 的 category 字段始终是英文键(如 'Finance Calculators'),用作 i18n key。
 // tc() 取不到映射时回退到原英文键,保证永不破图。
@@ -1408,23 +1140,7 @@ export type CategoryKey =
 
 const categoryDicts: Record<Locale, Partial<Record<CategoryKey, string>>> = {
   en: {},
-  zh: {
-    'Finance Calculators': '金融计算器',
-    'Developer Tools': '开发者工具',
-    'Text Tools': '文本工具',
-    'Unit Converters': '单位换算器',
-    'Math Calculators': '数学计算器',
-    'Health Calculators': '健康计算器',
-    'Education Calculators': '教育计算器',
-    'Time Calculators': '时间计算器',
-    'Web Design Tools': '网页设计工具',
-    'Business Tools': '商业工具',
-    'Security Tools': '安全工具',
-    'AI Tools': 'AI 工具',
-    'Game Tools': '游戏工具',
-    'Pet Tools': '宠物工具',
-    'Home Calculators': '家居计算器',
-  },
+
   es: {
     'Finance Calculators': 'Calculadoras financieras',
     'Developer Tools': 'Herramientas para desarrolladores',
@@ -1499,7 +1215,7 @@ type ToolI18nMap = Record<string, ToolI18nEntry>
 
 const toolI18nMaps: Record<Locale, ToolI18nMap> = {
   en: {}, // 英文回退到 tools.ts 原值
-  zh: zhTools as ToolI18nMap,
+
   es: esTools as ToolI18nMap,
   de: deTools as ToolI18nMap,
 }

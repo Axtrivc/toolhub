@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * PaintCalculator 长文正文 —— 四语 dispatcher
+ * PaintCalculator 长文正文 —— 三语 dispatcher
  *
- * en 分支与改造前渲染输出一致。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支与改造前渲染输出一致。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -24,19 +24,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>涂布率假设</h2>
-    <p>光滑底漆墙面上,每升约可涂 10 m²(一遍);一美制加仑 ≈37 m²(400 ft²)。纹理墙面、裸石膏板或大幅改色可能要多耗 20-40%。</p>
-    <h2>扣除门窗</h2>
-    <p>每扇标准门扣 1.85 m²,每扇窗扣 1.4 m²。踢脚线和门框会吃掉一部分省下的量,所以这个扣减只是近似——这正是我们留余量的原因。</p>
-    <h2>为什么至少两遍</h2>
-    <p>大多数涂料都注明两遍才有真实色彩和可擦洗性;"一遍覆盖"的说法需要高级漆配接近的底色。计算器会自动乘以遍数。</p>
-    <h2>采购策略</h2>
-    <p>批次很重要:不同生产批次的漆混用,色差可能肉眼可见。一次买齐总量,保留收据,未开封的桶通常都能退。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -66,7 +53,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function PaintCalculatorContent(): ReactNode {
   const { locale } = useApp()

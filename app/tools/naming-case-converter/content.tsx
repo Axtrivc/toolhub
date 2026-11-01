@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * Naming Case Converter 长文正文 —— 四语 dispatcher
+ * Naming Case Converter 长文正文 —— 三语 dispatcher
  *
- * en 分支等价于原 ToolContent 渲染输出。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支等价于原 ToolContent 渲染输出。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en (与改造前渲染输出一致) ────────────────────────────
@@ -59,40 +59,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具?</h2>
-    <p>
-      每种语言和框架都有自己的命名约定 —— JavaScript 偏好 <strong>camelCase</strong>,Python 用 <strong>snake_case</strong>,CSS 类名用 <strong>kebab-case</strong>,而常量通常用 <strong>CONSTANT_CASE</strong>。本转换器接受任意短语 —— 或在批量模式下接受一整列短语 —— 并即时转换成十种常见的命名风格。
-      它完全在浏览器中运行,每行都有独立的复制按钮,想用哪个变体,一键复制即可。
-    </p>
-
-    <div>
-      <h2>单词是如何拆分的</h2>
-      <p>
-        输入会先按<strong>空格、下划线、连字符、点和斜杠</strong>拆分,因此 <code>user profile-settings</code> 与 <code>user/profile_settings</code> 会得到相同的单词。
-        接着会检测 camelCase 与 PascalCase 的边界(包括连续缩写),所以 <code>getHTTPResponse</code> 会被正确拆分为 <code>get</code>、<code>http</code>、<code>response</code>,而不是 <code>gethttpresponse</code>。所有单词在应用目标命名风格前都会先被转为小写。
-      </p>
-    </div>
-
-    <div>
-      <h2>应该用哪种命名风格?</h2>
-      <p>
-        经验法则:JS/Java 中的变量和函数用 <code>camelCase</code>;类、组件和类型用 <code>PascalCase</code>;Python、Ruby 和数据库列用 <code>snake_case</code>;环境变量和常量用 <code>CONSTANT_CASE</code>;CSS 类名和 URL slug 用 <code>kebab-case</code>;HTTP 头用 <code>Train-Case</code>;配置键和带命名空间的标识符用 <code>dot.case</code> 或 <code>path/case</code>。
-        拿不准时,跟随所在文件的约定即可。
-      </p>
-    </div>
-
-    <div>
-      <h2>用于重命名的批量模式</h2>
-      <p>
-        打开 <strong>批量模式</strong>,每行粘贴一个短语 —— 在批量重命名变量、迁移配置键,或根据设计稿生成 CSS 类名时尤为好用。每一行输出都会显示所有转换后的结果,该行的复制按钮可一次复制整块内容。
-        空行会被忽略,转换在你输入时实时更新。
-      </p>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -164,7 +130,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function NamingCaseConverterContent(): ReactNode {
   const { locale } = useApp()

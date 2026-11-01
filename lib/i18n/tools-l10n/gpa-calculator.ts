@@ -6,44 +6,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const gpaCalculatorL10n: ToolL10n = {
-  zh: {
-    ui: {
-      'chartTitle': '你的 GPA 所处区间',
-      'zoneFailing': '不及格',
-      'zoneBelowAvg': '低于平均',
-      'zoneAvg': '平均',
-      'zoneGood': '良好',
-      'zoneExcellent': '优秀',
-      'addCourse': '+ 添加课程',
-      'courseName': '课程名',
-      'credits': '学分',
-      'grade': '等级',
-      'gradePoints': '绩点',
-      'note': '📚 使用标准 4.0 GPA 量表。荣誉/AP 课程在你所在的学校可能权重不同——请调整等级以匹配你所在学校的体系。',
-      'on4Scale': '4.0 量表',
-      'remove': '移除',
-      'thCourseName': '课程名',
-      'thCredits': '学分',
-      'thGrade': '等级',
-      'totalCredits': '总学分',
-      'yourGpa': '你的 GPA',
-    },
-    formula: {
-      formula: 'GPA = Σ ( gradePoint × credits ) / Σ credits',
-      explain: '平均绩点。把每个字母等级换成积分(A = 4.0),乘以学分,求和,再除以总学分。加权 GPA 给荣誉/AP 课程加分。',
-    },
-    useCases: [
-      '按学分加权的 GPA 计算器',
-      '4.0 制大学 GPA 计算',
-      '高中 GPA 计算器',
-      '按各科学分计算累计 GPA',
-    ],
-    faqs: [
-      { q: '4.0 制 GPA 是怎么算的?', a: '每个字母等级对应一个积分(A=4、B=3、C=2、D=1)。把每门课的积分乘以其学分时数,求和后再除以总学分时数。一门 4 学分的课拿到 A 贡献 16 分;一门 3 学分的课拿到 C 贡献 6 分。加权平均值就是你的 GPA。' },
-      { q: '加权 GPA 和不加权 GPA 有什么区别?', a: '不加权 GPA 上限为 4.0,所有课程一视同仁。加权 GPA 会对荣誉课程、AP 或 IB 课程额外加分(通常最高可达 5.0),以此奖励更有难度的课程。各大学会按自己的方式重新计算 GPA,因此请按你所在学校使用的类型来填报。' },
-      { q: '上大学需要多少 GPA?', a: '差异很大。录取门槛较低的学校,录取学生的平均 GPA 大约在 3.0 左右;而选拔性强的大学平均往往在 3.7–3.9(不加权)。GPA 会结合课程难度和你所在学校的评分标准综合评估,而不是只看一个绝对数字。' },
-    ],
-  },
+
   es: {
     ui: {
       'chartTitle': 'Tu GPA en la escala',

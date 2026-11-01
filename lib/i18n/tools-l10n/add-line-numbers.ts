@@ -5,23 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const addLineNumbersL10n: ToolL10n = {
-  zh: {
-    ui: {
-      defaultInput: '第一行\n第二行\n第三行',
-      inputLabel: '你的文本',
-      outputLabel: '带行号结果',
-      note: '🔢 给每一行加上行号。适合代码评审、文字记录和引用。',
-    },
-    useCases: [
-      '代码评审——便于引用「第 42 行有个 bug」',
-      '整理访谈记录和逐字稿',
-      '分析日志文件',
-      '编写教学材料与教程',
-    ],
-    faqs: [
-      { q: '为什么行号要右对齐?', a: '右对齐能让文本列在行数增加时保持稳定——第 9 行和第 10 行的起始位置一致。这是代码编辑器和印刷出版物的通行做法。' },
-    ],
-  },
+
   es: {
     ui: {
       defaultInput: 'Primera línea\nSegunda línea\nTercera línea',

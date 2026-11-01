@@ -5,30 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const timeConverterL10n: ToolL10n = {
-  zh: {
-    ui: {
-      'note': '⏱️ 月和年用平均值(每月 30.44 天,每年 365.25 天)。',
-      'unit.day': '天 (d)',
-      'unit.h': '小时 (h)',
-      'unit.min': '分钟 (min)',
-      'unit.month': '月 (mo)',
-      'unit.ms': '毫秒 (ms)',
-      'unit.ns': '纳秒 (ns)',
-      'unit.s': '秒 (s)',
-      'unit.us': '微秒 (µs)',
-      'unit.week': '周 (wk)',
-      'unit.year': '年 (yr)',
-    },
-    useCases: [
-      '换算跑步配速(分钟/公里 ↔ 分钟/英里)',
-      '计算工作时长和报酬',
-      '规划视频和音频的时长',
-      '估算项目时间线',
-    ],
-    faqs: [
-      { q: '一年有多少小时?', a: '平均 8766 小时(365.25 × 24)。闰年有 8784 小时,平年有 8760 小时。' },
-    ],
-  },
+
   es: {
     ui: {
       'note': '⏱️ Meses y años usan promedios (30,44 días/mes, 365,25 días/año).',

@@ -5,48 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const PtoAccrualCalculatorL10n: ToolL10n = {
-  zh: {
-    useCases: ['查当前这一刻实际累积了多少年假', '预测年底结转会不会撞上限、被清零多少', '换算每个发薪周期到账的假期小时数', '计划假前把负余额(预支假期)补回来'],
-    faqs: [
-      { q: '"当前余额"和"年底余额"有什么区别?', a: '当前余额只算已经累积的部分(每期累积 × 已过周期数)减去已用;年底余额假设你不再休假,等于全年额度减已用。年中看余额必须用前者——很多公司只让你花已累积的额度。' },
-      { q: '结转上限怎么生效?', a: '年底余额超过上限的部分在 rollover 时被清零:结转 = min(年底余额, 上限),差额就是"过期作废"那一栏。上限填 0 表示 use-it-or-lose-it,额度年底全部清零。' },
-      { q: '余额是负数怎么回事?', a: '说明你用了还没累积到的假期(预支)。多数政策允许,但离职时要按未累积部分扣回工资;工具会直接标注为负余额。' },
-      { q: '美国有法定年假吗?', a: '没有——美国联邦法律不强制带薪年假,一切按公司政策,2 周(80 小时)起步最常见。欧盟法定最少 20 个工作日,部分国家 24-30 天,且多数不允许年底清零。' },
-    ],
-    ui: {
-      'in.annualHours': '年度假额度',
-      'in.frequency': '发薪频率(52 每周 · 26 双周 · 24 半月 · 12 每月)',
-      'in.periodsElapsed': '今年已过的发薪周期数',
-      'in.usedHours': '已用 PTO 小时',
-      'in.carryCap': '结转上限(0 = 年底全清零)',
-      'inSuffix.annualHours': '小时',
-      'inSuffix.usedHours': '小时',
-      'inSuffix.carryCap': '小时',
-      'opt.frequency.52': '52/年',
-      'opt.frequency.26': '26/年',
-      'opt.frequency.24': '24/年',
-      'opt.frequency.12': '12/年',
-      'out.balance': '当前余额(累积 − 已用)',
-      'out.accrued': '已累积',
-      'out.perPeriod': '每期累积',
-      'out.usedDisp': '已用',
-      'out.yearEnd': '年底余额(如不再休假)',
-      'out.carried': '结转至明年',
-      'out.forfeited': '年末作废',
-      'chartTitle': '年额度:已用 vs 剩余',
-      'slice.usedDisp': '已用',
-      'slice.yearEnd': '剩余',
-      'note': '🌴 美国法律不强制带薪年假——余额完全取决于公司的累积政策(每期累积 = 年额度 ÷ 发薪期数)。"当前余额"只计已累积部分;年底一行假设你不再休假。欧盟读者:法定最低 20 天让清零政策少见。',
-      'errInput': '额度、周期数、已用与上限不能为负',
-      'negative': '负数——预支了未累积的假期',
-      'useIt': '12 月 31 日前安排休假',
-      'noneLost': '无——全部结转',
-      'chartCenter': '年度额度',
-      'preset.0': '美国标准(2 周)',
-      'preset.1': '科技公司优厚(4 周)',
-      'preset.2': '过期作废制',
-    },
-  },
+
   es: {
     useCases: ['ver cuántas vacaciones has acumulado de verdad a día de hoy', 'predecir si al cierre del año chocarás con el tope de acumulación', 'convertir la asignación anual en horas por nómina', 'planificar cómo recuperar un saldo negativo (vacaciones anticipadas)'],
     faqs: [

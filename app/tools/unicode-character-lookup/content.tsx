@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * UnicodeCharacterLookup 长文正文 —— 四语 dispatcher
+ * UnicodeCharacterLookup 长文正文 —— 三语 dispatcher
  *
- * en 分支与改造前渲染输出一致。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支与改造前渲染输出一致。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en (与改造前渲染输出一致) ────────────────────────────
@@ -22,17 +22,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>Unicode 到底是什么</h2>
-    <p>它是一个统一的目录,为每种文字系统里的每个字符分配一个编号(码点)——条目超过 15 万。字形外观由字体决定,字符身份由 Unicode 决定。U+2014 在哪里都是破折号,无论字体把它画成什么样。</p>
-    <h2>复制粘贴的隐患</h2>
-    <p>同形字(西里尔字母 а 与拉丁字母 a)看起来一模一样,却会在密码、域名和代码搜索里无声地埋雷。当两段文本「看起来相同」、比较却失败时,把两个版本都粘贴进来对比码点。</p>
-    <h2>这套精选集与完整字库</h2>
-    <p>15 万个字符只会是噪音。这里收录的是搜索真正会查的东西:箭头、数学运算符、排版引号、货币符号和制表符,每一个都带正式名称和码点。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -58,7 +47,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function UnicodeCharacterLookupContent(): ReactNode {
   const { locale } = useApp()

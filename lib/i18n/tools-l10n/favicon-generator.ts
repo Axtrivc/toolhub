@@ -5,48 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const faviconGeneratorL10n: ToolL10n = {
-  zh: {
-    ui: {
-      'errDecodeImage': '无法解码该图片文件。',
-      'errImageEmpty': '图片没有可用尺寸(文件为空或损坏)。',
-      'errTooLarge': '文件过大({size})。最大为 20 MB。',
-      'change': '更换',
-      'copy': '复制',
-      'croppedNote': '图片先裁剪为居中正方形,再缩放到各尺寸。',
-      'downloadAllSizes': '下载所有尺寸',
-      'downloadIco': '下载 favicon.ico',
-      'downloadPng': '下载 PNG',
-      'errCouldNotRead': '无法读取文件。',
-      'errIcoBuild': '生成 favicon.ico 失败(PNG 编码出错)。',
-      'errUploadImage': '请上传图片文件(PNG、JPG、GIF 或 WebP)。',
-      'htmlSnippetHint': '把下载的文件重命名为对应名称(或修改路径),放在站点根目录。',
-      'htmlSnippetLabel': 'HTML 片段——粘贴到 <head> 内',
-      'noteIntro': '🔒 100% 本地处理——你的图片加载到浏览器内的画布并经 ',
-      'noteOutro': ' 导出。它绝不离开你的设备。',
-      'previewWord': ' 预览',
-      'sizeDesc.16': '浏览器标签页(经典)',
-      'sizeDesc.180': 'Apple Touch Icon (iOS)',
-      'sizeDesc.32': 'Retina 标签页与任务栏',
-      'sizeDesc.48': 'Windows 快捷方式图标',
-      'sizeDesc.192': '安卓主屏幕 (PWA)',
-      'sizeDesc.512': '启动画面与应用商店 (PWA)',
-      'uploadHint': 'PNG、JPG、GIF 或 WebP——推荐 ≥ 256×256',
-      'uploadPrompt': '点击上传或拖放',
-      'uploadedSourceAlt': '已上传的原图',
-    },
-    useCases: [
-      '导出多尺寸的 PNG favicon',
-      '生成 iOS 用的 Apple Touch Icon',
-      '把 logo 裁剪为居中正方形图标',
-      '一键生成 16×16 和 32×32 图标',
-    ],
-    faqs: [
-      { q: '可以上传哪些图片格式？', a: 'PNG、JPG/JPEG、GIF 和 WebP。推荐使用带透明通道的 PNG,因为 favicon 在彩色浏览器标签页上效果最好。SVG 源文件也可以,但会在此被栅格化为 PNG favicon,因为 16×16 和 32×32 的栅格 favicon 拥有最广泛的浏览器支持。' },
-      { q: '为什么需要多个尺寸？', a: '不同场景使用不同尺寸:16×16 用于浏览器标签页,32×32 用于 Retina 标签页和 Windows 任务栏,180×180(Apple Touch Icon)用于 iOS 主屏幕书签。只提供一张大图让浏览器缩放,在 16×16 时会显得模糊。' },
-      { q: '我的图片会被上传到服务器吗？', a: '不会。图片加载到浏览器内的 canvas 中,裁剪并缩放后通过 canvas.toBlob 导出——全部在本地完成。你的文件绝不会离开你的设备,这也意味着页面加载后即可离线使用。' },
-      { q: '生成的 favicon.ico 里是什么?', a: '它把 16、32、48 px 的 PNG 打包成单个 .ico 文件,浏览器会按场景自动挑选尺寸。配合 180×180 的 apple-touch-icon.png 和 192/512 px 的 PWA 图标,附带的 HTML 片段即可覆盖全部场景。' },
-    ],
-  },
+
   es: {
     ui: {
       'errDecodeImage': 'No se pudo decodificar el archivo de imagen.',

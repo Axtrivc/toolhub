@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * Code Beautifier 长文正文 —— 四语 dispatcher
+ * Code Beautifier 长文正文 —— 三语 dispatcher
  *
- * en 分支等价于原 ToolContent 渲染输出。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支等价于原 ToolContent 渲染输出。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en (与改造前渲染输出一致) ────────────────────────────
@@ -60,43 +60,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具？</h2>
-    <p>
-      压缩后的打包文件、复制来的代码片段、机器生成的标记，挤在一行里几乎没法读。这个<strong>代码美化工具</strong>会在你粘贴的同时，用一致的 2 空格或 4 空格缩进实时重排{' '}
-      <strong>HTML、CSS、JavaScript 和 JSON</strong>。它完全在你的浏览器里运行——不上传、不经过服务器——因此对专有代码是安全的，结果可以复制或下载为{' '}
-      <code>beautified.html</code>、<code>.css</code>、<code>.js</code> 或 <code>.json</code>。
-    </p>
-
-    <div>
-      <h2>格式化器是如何工作的</h2>
-      <p>
-        <strong>JSON</strong> 会被解析并重新序列化，因此无效的输入会产生一个带精确位置的解析错误。<strong>CSS</strong> 和 <strong>JavaScript</strong> 会经过能识别字符串与注释的分词器：花括号开启新的缩进层级，语句在分号处结束，而在括号、{' '}
-        <code>&apos;quotes&apos;</code>、模板字面量或 <code>// comments</code> 内部不会出错——JS{' '}
-        格式化器甚至用一种启发式方法让 <code>/regex literals/</code> 保持原样。{' '}
-        <strong>HTML</strong> 会缩进块级元素，同时把像 <code>&lt;a&gt;</code>、{' '}
-        <code>&lt;span&gt;</code> 和 <code>&lt;strong&gt;</code> 这样的内联标签连同它们的文本保留在同一行。
-      </p>
-    </div>
-
-    <div>
-      <h2>什么时候用它</h2>
-      <p>
-        典型用法：还原一段 <code>.min.js</code> 片段以理解它的作用；在提交前规范化一个配置文件；清理从浏览器「查看源代码」里复制出来的 HTML；或者美化打印一个压缩过的 API 响应。对于日常编辑，项目里完整的 Prettier/ESLint 配置仍然是正确的工具——这个工具适合快速、一次性的格式化，无需安装任何东西。
-      </p>
-    </div>
-
-    <div>
-      <h2>已知限制</h2>
-      <p>
-        这些格式化器追求的是<strong>「够用就行」的健壮性，而非完美</strong>。它们不会对长行重新折行，不会重排规则，也不会修复语法错误，而且一些奇特的边界情况——HTML 属性值里出现一个{' '}
-        <code>&gt;</code>、JS 中右括号紧跟一个除号——可能会让轻量级分词器产生困惑。JSON 输入必须是严格的 JSON（不能有注释或尾随逗号）；只有先把 JS/JSON5 风格的对象变成合法的 JSON 之后，才能对其使用美化器。
-      </p>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -196,7 +159,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function CodeBeautifierContent(): ReactNode {
   const { locale } = useApp()

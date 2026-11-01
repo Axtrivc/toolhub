@@ -5,29 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const densityConverterL10n: ToolL10n = {
-  zh: {
-    ui: {
-      'note': '🧪 密度 = 质量 ÷ 体积。水 = 1000 kg/m³ = 1 g/cm³。金 = 19,320 kg/m³。',
-      'unit.gcm3': 'g/cm³',
-      'unit.gl': 'g/L',
-      'unit.gml': 'g/mL',
-      'unit.kgm3': 'kg/m³',
-      'unit.lbft3': 'lb/ft³',
-      'unit.lbgal': 'lb/US gal',
-      'unit.lbin3': 'lb/in³',
-    },
-    useCases: [
-      '判断物体在液体中会上浮还是下沉',
-      '通过密度辅助识别未知材料',
-      '做工程中的强度重量比计算',
-    ],
-    faqs: [
-      { q: '冰为什么会浮在水面上?', a: '水很特别——结冰时体积会膨胀,使冰的密度比液态水更低。大多数物质固态时密度更高。如果没有这个特性,湖泊会从底部开始结冰。' },
-      { q: 'kg/m³ 和 g/cm³ 怎么互转?', a: '差 1000 倍:1 g/cm³ = 1000 kg/m³ = 1 g/mL = 1 kg/L。水的密度是 1000 kg/m³,记住"水 = 1 g/cm³"就能心算大部分换算。' },
-      { q: '测量密度最简单的方法是什么?', a: '用电子秤称质量,用量筒读排开的水的体积,两者相除即得。82 g 的金属块排开 10 mL 水,密度约 8.2 g/cm³——接近铜(8.96),材质范围一下子就缩小了。' },
-      { q: '水温会影响密度吗?', a: '会。水在 4 °C 时密度最大(约 999.97 kg/m³),20 °C 时降到约 998 kg/m³,接近沸点时约 958 kg/m³。做精确配液或校准仪器时应按实际水温取值。' },
-    ],
-  },
+
   es: {
     ui: {
       'note': '🧪 Densidad = masa ÷ volumen. Agua = 1000 kg/m³ = 1 g/cm³. Oro = 19.320 kg/m³.',

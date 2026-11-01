@@ -33,34 +33,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具?</h2>
-    <p>这个计算器根据半径求出圆的面积、周长和直径。数学课堂、工程设计以及任何涉及圆形的项目都离不开它。</p>
-    <div>
-      <h2>公式</h2>
-      <ul>
-        <li><strong>面积</strong> = π × r²</li>
-        <li><strong>周长</strong> = 2 × π × r</li>
-        <li><strong>直径</strong> = 2 × r</li>
-      </ul>
-    </div>
-    <div>
-      <h2>为什么是 π?</h2>
-      <p>π(圆周率)是圆的周长与直径之比,约为 3.14159。它出现在每一个圆的公式里,因为它是圆的基本属性——也同样属于波动、旋转和许多自然现象。</p>
-    </div>
-    <div>
-      <h2>现实用途</h2>
-      <ul>
-        <li><strong>建筑:</strong>计算圆柱所需的混凝土用量</li>
-        <li><strong>披萨:</strong>对比 12 英寸和 16 英寸披萨的大小</li>
-        <li><strong>工程:</strong>管道流量、车轮转速、齿轮</li>
-        <li><strong>农业:</strong>中心支轴式灌溉</li>
-      </ul>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -120,7 +92,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function CircleCalculatorContent(): ReactNode {
   const { locale } = useApp()

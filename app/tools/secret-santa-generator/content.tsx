@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * SecretSantaGenerator 长文正文 —— 四语 dispatcher
+ * SecretSantaGenerator 长文正文 —— 三语 dispatcher
  *
- * en 分支与英文站渲染输出一致。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支与英文站渲染输出一致。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -24,19 +24,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>公平抽取到底要求什么</h2>
-    <p>秘密圣诞的抽取是一个错排:闭环里每人恰好送一份、收一份,且没人抽到自己。4 个人时,24 种排列里只有 9 种合格;人多了,大约只有 1/e(约 36.8%)的排列可行。本生成器用 crypto 洗牌 + 回溯搜索——要么找到有效配对,要么告诉你规则无解,绝不悄悄放宽。</p>
-    <h2>互斥才是难点</h2>
-    <p>不该互抽的夫妻、去年交换过的队友、兄弟姐妹——每禁一对,解空间就小一圈。禁得太多闭环就不存在了(经典翻车:三个人把每一对都禁了)。这是数学事实不是 bug,工具会如实报告,让你放宽一条规则,而不是对着转圈纳闷。</p>
-    <h2>不剧透的公布方式</h2>
-    <p>一台设备传一圈:每人从名单里选自己的名字,只看到自己的送礼对象,再把文案复制进备忘录。默认不显示任何人的配对,组织者也全程不用看——这正是意义所在:什么都知道的组织者,下意识也会偏心。</p>
-    <h2>先约定好的家规</h2>
-    <p>抽之前定好预算(心愿单场景,「$20-30」这种区间比单一数字好用)、设截止日、说清允不允许整蛊礼物。远程团队就在视频会议里抽,各自在自己设备上打开本页——结果只存在浏览器里,什么都不外发。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -66,7 +53,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function SecretSantaGeneratorContent(): ReactNode {
   const { locale } = useApp()

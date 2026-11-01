@@ -5,31 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const powerConverterL10n: ToolL10n = {
-  zh: {
-    ui: {
-      'note': '⚡ 发动机功率用马力,电力用千瓦,大型电厂用兆瓦。1 马力 ≈ 746 瓦。',
-      'unit.bs': 'BTU/秒',
-      'unit.cal-s': '卡路里/秒 (cal/s)',
-      'unit.gigawatt': '吉瓦 (GW)',
-      'unit.hp': '马力 (hp)',
-      'unit.hp-metric': '公制马力 (PS)',
-      'unit.kw': '千瓦 (kW)',
-      'unit.milliwatt': '毫瓦 (mW)',
-      'unit.mw': '兆瓦 (MW)',
-      'unit.w': '瓦特 (W)',
-    },
-    useCases: [
-      '比较汽车发动机的马力与千瓦',
-      '把电器瓦数换算成千瓦',
-      '评估供暖制冷设备的 BTU 功率',
-    ],
-    faqs: [
-      { q: '为什么有两种马力?', a: '机械马力(hp,约 746 W)由詹姆斯·瓦特提出。公制马力(PS,约 735 W)是欧洲的对应单位。欧洲销售的汽车用 PS 标注,美国汽车用 hp。两者相差约 1.4%。' },
-      { q: '空调铭牌上的 BTU 和瓦怎么对应?', a: '制冷量 1 W ≈ 3.412 BTU/h。常见的「1 匹」空调制冷量约 2500 W,合 8500 BTU/h 左右,适合 12–18 m² 的房间;9000 BTU/h 的小型机约 2600 W。' },
-      { q: 'kW 和 kWh 有什么区别?', a: 'kW 是功率(瞬时速率),kWh 是能量(功率 × 时间)。2 kW 的取暖器开 3 小时耗 6 kWh;按每千瓦时 0.5–0.6 元计算,电费约 3–3.6 元。' },
-      { q: '常见电器的功率是多少?', a: '电水壶 1500–2200 W、微波炉 700–1200 W、冰箱压缩机 100–200 W(间歇工作)、LED 灯 5–15 W、手机充电器 5–65 W。算电费时注意冰箱这类电器是间歇运行的。' },
-    ],
-  },
+
   es: {
     ui: {
       'note': '⚡ Potencia de motor en hp, eléctrica en kW, grandes plantas en MW. 1 hp ≈ 746 W.',

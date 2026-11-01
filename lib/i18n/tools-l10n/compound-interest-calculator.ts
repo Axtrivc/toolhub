@@ -12,70 +12,7 @@ import type { ToolL10n } from '../tool-l10n'
 const FORMULA = 'A = P × (1 + r/n)^(n·t) + PMT × [((1 + r/n)^(n·t) − 1) / (r/n)]'
 
 export const compoundInterestCalculatorL10n: ToolL10n = {
-  // ──────────────────────────── 中文 ────────────────────────────
-  zh: {
-    useCases: [
-      '查看带每月定投的复利计算器',
-      '计算带定期存款的复利',
-      '对比不同复利频率',
-      '计算带定期投入的未来值',
-    ],
-    faqs: [
-      {
-        q: '复利和单利有什么区别?',
-        a: '单利只在你最初的本金上产生。复利在本金和已累积的利息上共同产生——所以你的余额呈指数增长。长期来看,同样利率下复利远超单利。',
-      },
-      {
-        q: '按日复利好还是按月复利好?',
-        a: '复利频率越高收益略多,但差距很小。5% 利率下一年期:按年复利得 5.000%,按月得 5.116%,按日得 5.127%。按日比按月的边际增益微乎其微——真正重要的是利率和时间。',
-      },
-      {
-        q: '复利利息怎么交税?',
-        a: '普通储蓄或券商账户中赚到的利息在当年按普通收入征税,这会拖慢复利。税收优惠账户(IRA、401k、HSA)让利息免税或递延复利,这是它们长期跑赢的主要原因之一。',
-      },
-      {
-        q: '这个计算器包含定期投入吗?',
-        a: '包含。你可以输入每月定投金额,它在初始存款之上用年金终值公式计算。这反映了大多数人真正的储蓄方式——长期坚持小额投入。',
-      },
-    ],
-    formula: {
-      formula: FORMULA,
-      explain:
-        '复利(终值)。P = 初始本金,PMT = 每期定期投入,r = 年利率,n = 每年复利次数,t = 年数。A 是期末总余额:第一项让本金增长,第二项是定期投入的终值。',
-    },
-    ui: {
-      errNonNegative: '数值不能为负',
-      'in.principal': '初始投资',
-      'inSuffix.monthly': '$',
-      'inSuffix.principal': '$',
-      'inSuffix.rate': '%',
-      'in.monthly': '每月定投',
-      'in.rate': '年利率',
-      'in.years': '年数',
-      'out.futureValue': '未来价值',
-      'out.totalContributed': '你的投入',
-      'out.interestEarned': '赚取的利息',
-      'outSub.interestEarned': '复利增长',
-      note: '📈 复利就是「利滚利」——时间越长,增长越惊人。早开始比多投入更重要。',
-      chartTitle: '你的投入 vs. 复利增长',
-      chartCenter: '未来价值',
-      'slice.totalContributed': '你投入的钱',
-      'slice.interestEarned': '利息(白赚的钱)',
-      chartTitleGrowth: '随时间的增长',
-      'preset.0': '标普 500 指数 (10%)',
-      'preset.1': '高收益储蓄 (4.5%)',
-      'preset.2': '保守债券 (4%)',
-      'line.contributed': '你投入的',
-      'line.balance': '总余额',
-      'band.contributed-balance': '赚到的利息',
-      'line.balanceLate': '晚 10 年才开始',
-      chartTitleCompare: '现在开始 vs 晚 10 年',
-      'cmp.0': '现在开始',
-      'cmp.1': '晚 10 年',
-      'cmpseg.0': '你投入的',
-      'cmpseg.1': '赚到的利息',
-    },
-  },
+
 
   // ──────────────────────────── Español ────────────────────────────
   es: {

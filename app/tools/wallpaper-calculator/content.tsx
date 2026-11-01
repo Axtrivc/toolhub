@@ -5,7 +5,7 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * WallpaperCalculator 长文正文 —— 四语 dispatcher
+ * WallpaperCalculator 长文正文 —— 三语 dispatcher
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -22,19 +22,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>按"条"数,别按平方英尺</h2>
-    <p>壁纸按卷宽一条一条垂直上墙,而且每条都要从花纹的同一起点裁起。用墙面积除以每卷覆盖面积会丢掉这个几何关系,结果常常差一卷。本计算器用周长(扣掉门窗宽度)除以卷宽,再算一卷能裁出几条。</p>
-    <h2>对花重复怎么吃掉长度</h2>
-    <p>素色壁纸每条只需墙高加约 4 英寸修边;带花纹的必须花位对花位,实际裁到下一个重复整数倍——相当于"墙高 + 重复"。8 英尺墙配 20 英寸重复,每条从约 8.3 英尺涨到 10 英尺,27 英尺的双卷从 3 条掉到 2 条;大重复甚至能让产量减半。</p>
-    <h2>美式双卷 vs 欧式卷</h2>
-    <p>美国壁纸按单卷计价、按双卷出货:27 英寸宽 × 27 英尺。欧式卷常见 21 × 33 英尺。因为产量取决于"每卷几条"而不是标称面积,卷宽一变条数就变——27 英寸卷条数更少,21 英寸卷条数多但末条浪费小。图表把你输入的卷与 13.5 英尺美式单卷直接对比。</p>
-    <h2>多买一卷</h2>
-    <p>壁纸按染缸分批印刷,相邻批号可能明显色差。贴到九成再满城找同批号是经典 DIY 事故——多一卷是廉价保险,而且未拆封的卷商家通常可退。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -64,7 +51,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function WallpaperCalculatorContent(): ReactNode {
   const { locale } = useApp()

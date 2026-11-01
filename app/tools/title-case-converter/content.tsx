@@ -38,31 +38,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具?</h2>
-    <p>
-      <strong>标题大小写</strong>会把每个单词的首字母大写。本工具可即时对任意文本应用此格式。它是书名、歌曲名、文章标题和按钮标签的标准写法。
-    </p>
-    <div>
-      <h2>标题大小写 vs. 首字母大写</h2>
-      <p>
-        本工具会将<em>每个</em>单词的首字母大写。专业排版指南(如 APA、Chicago)通常会将「the」「of」「in」等短词保持小写。例如:「The Lord of the Rings」(排版指南)与「The Lord Of The Rings」(本工具)。对于营销文案和 UI 按钮,每个单词都大写是完全可以的,而且通常看起来更整洁。
-      </p>
-    </div>
-    <div>
-      <h2>常见用途</h2>
-      <ul>
-        <li>博客文章标题和新闻标题</li>
-        <li>YouTube 视频标题</li>
-        <li>书籍、电影和歌曲名称</li>
-        <li>应用中的按钮和菜单标签</li>
-        <li>文档中的章节标题</li>
-      </ul>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -128,7 +103,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function TitleCaseConverterContent(): ReactNode {
   const { locale } = useApp()

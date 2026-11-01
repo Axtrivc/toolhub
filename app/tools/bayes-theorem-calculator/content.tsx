@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * BayesTheoremCalculator 长文正文 —— 四语 dispatcher
+ * BayesTheoremCalculator 长文正文 —— 三语 dispatcher
  *
- * en 分支与 SSR 渲染输出一致。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支与 SSR 渲染输出一致。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -24,19 +24,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>让每个患者都吃惊的筛查结果</h2>
-    <p>假设一项检测敏感度 95%、特异度 90%,筛查患病率 1% 的疾病。10,000 名受检者中:95 名患者被正确标出,但同时 990 名健康人也呈阳性——10% 的假阳性率作用在 9,900 名健康人身上,压倒了一切。阳性只意味着 8.8% 的患病可能:大约 11 个人里 1 个。</p>
-    <h2>基础率才是主角</h2>
-    <p>贝叶斯定理 P(D|+) = 敏感度 × 先验 ÷ P(+) 把先验强行拉进算式。检测质量不动,把患病率提到 10%:同一个阳性现在意味着 51.4% 的可能;把患病率降到 0.1%,它又塌到 1% 以下。检测从未改变——变的是人群。</p>
-    <h2>敏感度不是该拧的旋钮</h2>
-    <p>假阳性来自健康的多数人群,所以真正推动后验的是特异度。把假阳性率从 10% 降到 1%(特异度 90% → 99%),1% 患病率下的后验从 8.8% 升到约 49%;而把敏感度从 95% 提到 99% 几乎不动。筛查项目买的是特异度,复检买到的是更好的先验。</p>
-    <h2>同一个陷阱还埋伏在哪里</h2>
-    <p>基础率谬误不是医学专属。一个"准确率 99%"的垃圾邮件过滤器仍会用假阳性淹没你,因为垃圾邮件在有些文件夹里(但愿)很稀有。安全告警、欺诈标记、兴奋剂检测、罕见病基因组学,全都遵循同一套代数——也全都重复着同一个人为错误:把 P(+|D) 当成 P(D|+) 来引用。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -66,7 +53,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function BayesTheoremCalculatorContent(): ReactNode {
   const { locale } = useApp()

@@ -5,29 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const hourlyToSalaryCalculatorL10n: ToolL10n = {
-  zh: {
-    formula: {
-      formula: 'Annual salary = hourly rate × hours/week × weeks/year',
-      explain: '把时薪换算成年薪。标准假设为每周 40 小时、每年 52 周(2,080 小时),可按兼职或无薪休假调整。',
-    },
-    useCases: ['把时薪换算成年薪/月薪/周薪', '按每周工时算年度收入', '对比两份 offer 的真实报酬', '算兼职或加班后的收入'],
-    faqs: [
-      { q: '薪资制和时薪制哪个更好?', a: '薪资制通常提供福利和稳定性;时薪制有加班费和灵活性。年薪 $50,000 但每周工作 50 小时,相当于约 $19/小时——还不如每周 40 小时、时薪 $25 的工作。' },
-    ],
-    ui: {
-      'chartTitle': '你的一周(168 小时)',
-      'cmp.0': '一周',
-      'cmpseg.0': '工作',
-      'cmpseg.1': '其余时间',
-      'preset.0': '兼职 20 小时',
-      'preset.1': '全职 40 小时',
-      'preset.2': '旺季 55 小时',
-      errNonNegative: '数值不能为负',
-      'in.hourly': '时薪', 'in.hours': '每周工时',
-      'out.annual': '年薪', 'out.monthly': '月薪', 'out.weekly': '周薪', 'out.daily': '日薪(8 小时)',
-      note: '💵 假设一年 52 个带薪周。按兼职或加班调整工时。',
-    },
-  },
+
   es: {
     formula: {
       formula: 'Annual salary = hourly rate × hours/week × weeks/year',

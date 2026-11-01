@@ -5,36 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const BorderRadiusGeneratorL10n: ToolL10n = {
-  zh: {
-    useCases: ['四角独立调圆角并实时预览', '生成椭圆斜杠语法的 border-radius', '卡片/药丸/叶子/异形 Blobs 一键预设', '按平台长度限制输出最短合法简写'],
-    faqs: [
-      { q: '斜杠语法是什么?', a: '`border-radius: 30% 70% / 40% 60%` 里斜杠前是四角的水平半径,斜杠后是垂直半径,合成椭圆角。不带斜杠的单值就是圆弧。' },
-      { q: '该用 px 还是 %?', a: '像素可预测,但盒子改变尺寸时会失配;百分比参照各自所在的边长,非正方形盒子给 50% 会得到椭圆。流式布局用 %,固定组件用 px。' },
-      { q: '简写是怎么折叠的?', a: '四个值从左上角顺时针排列(TL TR BR BL);TR 等于 BL 时可省成三值,再满足 TL 等于 BR 时可折叠成两值——本工具输出最短的合法形式。' },
-      { q: '怎么做完美胶囊形/圆形?', a: '半径不小于短边一半就是胶囊——999px 是常见写法。圆形要求宽高相等再加 50% 半径。' },
-    ],
-    ui: {
-      'preview': '实时预览',
-      'linkAll': '四角联动',
-      'elliptical': '椭圆(/)',
-      'allCorners': '全部四角',
-      'allCornersV': '全部四角',
-      'tl': '左上',
-      'tr': '右上',
-      'br': '右下',
-      'bl': '左下',
-      'horizontal': '水平半径',
-      'vertical': '垂直半径',
-      'copyCss': '复制 CSS',
-      'presetCard': '卡片',
-      'presetPill': '胶囊',
-      'presetSquircle': '超椭圆',
-      'presetLeaf': '叶片',
-      'presetBlob': '异形',
-      'presetTicket': '票券',
-      'note': '📐 角的顺序从左上角顺时针:TL TR BR BL。椭圆形式用斜杠分隔水平/垂直半径——两组各 50% 且成对相等时渲染出标准椭圆。百分比参照所在边长,所以异形在缩放下比像素值更稳。',
-    },
-  },
+
   es: {
     useCases: ['ajustar las cuatro esquinas con vista previa en vivo', 'generar border-radius elíptico con sintaxis de barra', 'aplicar presets de tarjeta, píldora, hoja o blob', 'obtener la forma abreviada más corta y válida'],
     faqs: [

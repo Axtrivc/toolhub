@@ -5,34 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const standardDeviationCalculatorL10n: ToolL10n = {
-  zh: {
-    formula: {
-      formula: 'σ = √[ Σ(xᵢ − x̄)² / n ]',
-      explain: '总体标准差。x̄ 是均值,n 是数据点个数。样本标准差的分母用 n−1。',
-    },
-    ui: {
-      'chartTitle': '数据 vs 平均值',
-      'line.value': '数值',
-      'line.mean': '平均值',
-      'in.numbers': '数字(逗号分隔)',
-      'out.mean': '平均值',
-      'out.stddev': '标准差(总体)',
-      'out.sampleStddev': '标准差(样本,n−1)',
-      'out.variance': '方差(总体)',
-      'out.count': '个数',
-      'datasetTruncated': '仅统计前 10,000 个数字',
-      note: '📊 总体标准差除以 N;样本标准差(贝塞尔校正)除以 N−1。两种口径已在上方并列显示。',
-    },
-    useCases: [
-      '分析考试成绩的离散程度',
-      '评估数据集的波动性与稳定性',
-      '质量控制:衡量产品一致性',
-      '研究报告:给出均值 ± 标准差',
-    ],
-    faqs: [
-      { q: '什么时候用总体标准差,什么时候用样本标准差?', a: '当你的数据就是整个研究对象时用总体标准差(例如一个班的全部学生)。当你的数据代表一个更大的总体时用样本标准差(例如调查 100 名选民来估计全国)。' },
-    ],
-  },
+
   es: {
     formula: {
       formula: 'σ = √[ Σ(xᵢ − x̄)² / n ]',

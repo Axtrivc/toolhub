@@ -5,10 +5,10 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * Rent-vs-Buy Calculator 长文正文 —— 四语 dispatcher
+ * Rent-vs-Buy Calculator 长文正文 —— 三语 dispatcher
  *
  * en 分支等价于原 ToolContent 渲染输出(<h2>What Is This Tool?</h2> + intro
- * + 各 section 包在 <div> 中),字节级 SEO 安全。zh/es/de 仅客户端 hydration
+ * + 各 section 包在 <div> 中),字节级 SEO 安全。es/de 仅客户端 hydration
  * 后按 locale 切换。SSR/预渲染恒渲染 en → Google 索引英文不变。
  */
 
@@ -51,44 +51,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具?</h2>
-    <p>租还是买,是大多数人一生中最大的财务决策之一。本计算器比较持有期内的总成本,但请注意这只是简化视角——真正的答案取决于诸多因素。</p>
-    <div>
-      <h2>本计算器展示什么</h2>
-      <p>买房的全部成本(首付 + 贷款 + 利息)与同一时期租住相当房源的对比。它不包括房产税、保险、维护费用(通常为房屋价值的 1-2%/年)、交易成本,以及房屋可能获得的(或损失的)升值。</p>
-    </div>
-    <div>
-      <h2>买房的隐性成本</h2>
-      <ul>
-        <li>交易成本(约为价格的 2-5%)</li>
-        <li>房产税(每年 0.5-2.5%)</li>
-        <li>保险,首付不足 20% 还需 PMI</li>
-        <li>维护与维修(约为房屋价值/年的 1-2%)</li>
-        <li>物业费(HOA),大房子水电通常更高</li>
-      </ul>
-    </div>
-    <div>
-      <h2>租房的隐性成本</h2>
-      <ul>
-        <li>租金随时间上涨</li>
-        <li>没有资产积累</li>
-        <li>对居住空间的掌控权较少</li>
-        <li>宠物/装修选择可能受限</li>
-      </ul>
-    </div>
-    <div>
-      <h2>5 年法则</h2>
-      <p>一个常见准则:如果你 5 年内会搬家,由于交易成本,租房通常更便宜。超过 5-7 年,买房往往更划算——前提是房价温和升值且工作稳定。</p>
-    </div>
-    <div>
-      <h2>计算示例</h2>
-      <p>考虑一套 <strong>$400,000</strong> 的房子,首付 20%($80,000),30 年期贷款利率 6.5%,对比租住相当房源 <strong>$2,000/月</strong>,期限 <strong>7 年</strong>。本工具将首付加贷款利息与所付租金对比——买房在该期间利息约为 $139,000,而租房花费 $168,000。但加上交易成本(约 $12,000)、房产税(7 年约 $42,000)和维护费用(约 $28,000),差距会大幅缩小。真正的决胜因素是房屋升值,以及那 $80,000 首付的机会成本。</p>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -168,7 +130,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function RentVsBuyCalculatorContent(): ReactNode {
   const { locale } = useApp()

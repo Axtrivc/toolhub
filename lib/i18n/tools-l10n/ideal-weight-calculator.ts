@@ -6,42 +6,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const idealWeightCalculatorL10n: ToolL10n = {
-  zh: {
-    formula: {
-      formula: 'Devine: men 50 + 2.3×(height_in − 60)\n         women 45.5 + 2.3×(height_in − 60)',
-      explain: '一个常用公式(Devine)按身高超过 5 英尺的部分估算理想体重(千克)。它是人群参考,不是个人健康目标——体型和肌肉量差异很大。',
-    },
-    ui: {
-      metric: '公制 (cm / kg)',
-      imperial: '英制 (ft/in / lb)',
-      gender: '性别',
-      optMale: '男',
-      optFemale: '女',
-      height: '身高',
-      heightFt: '身高(英尺)',
-      heightIn: '身高(英寸)',
-      outDevine: 'Devine 公式',
-      outRobinson: 'Robinson 公式',
-      outHamwi: 'Hamwi 公式',
-      outBmi: '健康 BMI 范围(18.5-24.9)',
-      emptyState: '输入性别和身高即可查看理想体重估算',
-      note: '⚖️ 理想体重只是粗略估算。肌肉量、体型和整体健康状况比单一数字更重要。',
-      gaugeTitle: 'Devine 公式 vs BMI 健康区间',
-      zoneUnder: '低于健康 BMI',
-      zoneHealthy: 'BMI 健康区间',
-      zoneOver: '超重 BMI',
-      zoneObese: '肥胖 BMI',
-    },
-    useCases: [
-      '用 Devine、Robinson、Hamwi 三种公式估算理想体重',
-      '查看基于 BMI 的健康体重区间',
-      '为健身或减重设定参考目标',
-      '了解不同公式为何结果略有差异',
-    ],
-    faqs: [
-      { q: '该相信哪个公式?', a: '哪个都不完美。把 BMI 健康体重区间作为主要参考,把公式给出的数值当作大致参照。肌肉量和身体成分比任何一个单一目标体重都更重要。' },
-    ],
-  },
+
   es: {
     formula: {
       formula: 'Devine: men 50 + 2.3×(height_in − 60)\n         women 45.5 + 2.3×(height_in − 60)',

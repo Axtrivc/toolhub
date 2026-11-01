@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * ROI Calculator 长文正文 —— 四语 dispatcher
+ * ROI Calculator 长文正文 —— 三语 dispatcher
  *
- * en 分支等价于原 ToolContent 渲染输出。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支等价于原 ToolContent 渲染输出。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en(与改造前渲染输出一致) ────────────────────────────
@@ -50,41 +50,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具?</h2>
-    <p>
-      <strong>ROI</strong>(投资回报率)衡量一笔投资相对于成本的盈利。本计算器显示总 ROI 和年化回报(CAGR),方便你比较持有时间不同的投资。
-    </p>
-
-    <div>
-      <h2>计算公式</h2>
-      <ul>
-        <li><strong>总 ROI</strong> = (期末价值 − 初始成本) ÷ 初始成本 × 100</li>
-        <li><strong>年化(CAGR)</strong> = (期末/初始)^(1/年数) − 1</li>
-      </ul>
-    </div>
-
-    <div>
-      <h2>总 ROI vs. 年化 ROI</h2>
-      <p>
-        总 ROI 不考虑时间。1 年赚 50% 很优秀;但 10 年才赚 50% 就一般了(年化约 4%)。年化回报(CAGR)让你能把 5 年股票投资和 20 年房产投资放在同一标准上比较。
-      </p>
-    </div>
-
-    <div>
-      <h2>常见年化回报</h2>
-      <ul>
-        <li><strong>标普 500(长期平均):</strong>约 10%(通胀后 7%)</li>
-        <li><strong>债券:</strong>约 4–5%</li>
-        <li><strong>房产:</strong>约 8–10%(含租金+升值)</li>
-        <li><strong>储蓄账户:</strong>约 2–5%(随利率波动)</li>
-        <li><strong>通胀(美国):</strong>历史平均约 3%</li>
-      </ul>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -169,7 +134,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function ROIcalculatorContent(): ReactNode {
   const { locale } = useApp()

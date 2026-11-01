@@ -5,7 +5,7 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * PropertyTaxCalculator 长文正文 —— 四语 dispatcher
+ * PropertyTaxCalculator 长文正文 —— 三语 dispatcher
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -22,19 +22,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>mill、评估率与数字魔术</h2>
-    <p>房产税看起来像三个数字联手藏住一个真数。县政府先按市场价的一个比例评估你的房子(本例 80%),再按 mill 费率征税——每 $1,000 评估值征 $1。$400,000 的房子、80% 评估率、20 mills,一年缴 $6,400。不看评估率直接比较各县的 mill 数毫无意义;有效税率——年税额除以市场价——才是唯一诚实的跨州标尺。</p>
-    <h2>你的成交价可能重置你的税</h2>
-    <p>评估涨幅上限(加州 Prop 13、佛州 Save Our Homes)保护的是现业主免受行情暴涨——代价由买家承接。以今日价格买下一套长期持有的房子,许多辖区会按你的成交价或接近值重新评估,前业主的账单一夜翻倍。买房做预算时,按你的购入价估税,而不是按卖家现在的账单。</p>
-    <h2>豁免额是白捡的钱</h2>
-    <p>自住豁免(homestead exemption)从评估值里直接砍掉一笔固定金额或比例——佛州 $50,000,别处还有丰厚的老人与退伍军人减免。多数县不会自动生效:搬进去时要自己申报一次。错过申报截止日,可能让你持有这套房的每一年都多缴几百块。</p>
-    <h2>评估值漂移了就去申诉</h2>
-    <p>评估员按片区批量估值,看不见你这一套的个体状况——老旧厨房、地基问题、更差的成交案例。如果评估涨幅超出了可比成交价能支撑的范围,就去申诉:多数辖区的窗口很短(通常通知后 30-60 天),费用不高,而且申诉成功会为以后各年重置基数。申诉前先拉三到五个近期可比案例。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -64,7 +51,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function PropertyTaxCalculatorContent(): ReactNode {
   const { locale } = useApp()

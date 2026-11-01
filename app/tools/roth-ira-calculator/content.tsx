@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * Roth IRA Calculator 长文正文 —— 四语 dispatcher
+ * Roth IRA Calculator 长文正文 —— 三语 dispatcher
  *
- * en 分支与改造前渲染输出一致。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支与改造前渲染输出一致。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en (与改造前渲染输出一致) ────────────────────────────
@@ -50,31 +50,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>Roth 与 Traditional:唯一的区别是纳税时点</h2>
-    <p>
-      两类账户共享相同的 7,500 美元年度供款限额(2026 年:50 岁及以上为 8,600 美元),账户内增值均免税。整个决策只归结为<em>何时缴税</em>:<strong>Traditional IRA</strong> 今天抵扣供款(降低今年的税单),但退休后每笔提取都要纳税;<strong>Roth IRA</strong> 现在投入税后资金,之后每笔合格提取——本金<em>和</em>收益——都 100% 免税。
-    </p>
-
-    <h2>决定胜负的唯一法则</h2>
-    <p>
-      把你<strong>今天的边际税率</strong>与<strong>退休后预期的实际税率</strong>作对比。如果今天的税率更高(收入巅峰期常见),Traditional 胜出——今天避开 24% 以上的税,退休后也许只缴 12%。如果今天的税率更低(职业早期、休整期、低收入年份),Roth 把这个划算的税率永远锁定。本计算器让两个账户跑同一套增长数学,直接把税后差距换算成美元。
-    </p>
-
-    <h2>计算做了哪些假设</h2>
-    <p>
-      供款按你的预期年回报复利增长,采用年金终值公式:
-      <code>FV = C × ((1+r)<sup>n</sup> − 1) / r</code>。Traditional 余额在税前资金上增长(余额更大,提取时纳税);Roth 余额在税后资金上增长(余额更小,取出时零税)。两者可比,是因为今天自掏腰包的成本完全相同。
-    </p>
-
-    <h2>盈亏平衡点之外的考量</h2>
-    <p>
-      即使 Traditional 略微领先,Roth 也有战略优势:持有人终身没有最低提取要求(RMD)(Traditional 从 73 岁起强制提取)、受益人继承免税,以及对未来税率上升的对冲。许多人<em>两个</em>都持有——高收入年份用 Traditional 抵扣,用 Roth 换取灵活性与税务多元化。每当税率档位变化时,就重新跑一遍对比。
-    </p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -155,7 +130,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function RothIraCalculatorContent(): ReactNode {
   const { locale } = useApp()

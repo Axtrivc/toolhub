@@ -5,39 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const DrywallCalculatorL10n: ToolL10n = {
-  zh: {
-    useCases: ['为房间或车库翻新清点板材', '对比 4×8 与 4×12 的板数', '一趟买齐螺丝与嵌缝膏', '核对承包商的材料单'],
-    faqs: [
-      { q: '该用 4×8 还是 4×12 的板?', a: '12 英尺板接缝更少(8 英寸墙上嵌缝量省约四分之一),但要两个人抬、也吃搬运空间。独干的新手通常选 4×8;有升降机的班组会横铺 4×12。' },
-      { q: '为什么要留 10% 损耗?', a: '洞口切割、磕碰的阴角、异形角度都会耗板。10% 是标准余量,房间凹凸多时加到 15%。板材只能整张买,数量永远向上取整。' },
-      { q: '嵌缝膏是怎么估的?', a: '按贴带加两道面层约每 100 ft² 用 1 加仑——一个普通房间正好一桶 4.5 加仑。要做肌理面层再加 25-50%。' },
-      { q: '螺丝呢?', a: '约每平方英尺 1 颗(顶棚 12″、墙面 16″ 间距),折合约每 250 ft² 一磅。螺丝便宜,宁可多买一盒也别拉大间距。' },
-    ],
-    ui: {
-      'in.perimeter': '墙面总周长',
-      'in.height': '墙高',
-      'in.ceilL': '顶棚长(0 = 无)',
-      'in.ceilW': '顶棚宽(0 = 无)',
-      'in.panel': '板规格',
-      'opt.panel.4x8': '4 × 8 ft(32 ft²)',
-      'opt.panel.4x12': '4 × 12 ft(48 ft²)',
-      'out.sheets': '石膏板张数',
-      'out.totalArea': '铺板面积',
-      'out.screws': '螺丝',
-      'out.mud': '嵌缝膏',
-      'outSub.sheets': '含 10% 损耗',
-      'outSub.screws': '约 300 颗/磅',
-      'chartTitle': '不同板规格的张数',
-      'cmp.0': '4×8 板',
-      'cmp.1': '4×12 板',
-      'cmpseg.0': '张数',
-      'errDims': '请输入有效的周长与墙高',
-      'preset.0': '卧室 12×10',
-      'preset.1': '车库 24×24',
-      'preset.2': '地下室 30×14',
-      'note': '🔨 8 英尺墙上横铺 12 英尺板,接缝总长能省四分之一。螺丝间距:顶棚 12 英寸、墙面 16 英寸。板材一次买齐——不同批次饰面肉眼可见。',
-    },
-  },
+
   es: {
     useCases: ['contar placas para una habitación o garaje', 'comparar el número de placas 4×8 y 4×12', 'comprar tornillos y masilla en un solo viaje', 'revisar la lista de materiales de un contratista'],
     faqs: [

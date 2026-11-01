@@ -148,6 +148,6 @@ export function getNextToolsLite(slug: string): ToolLiteMeta[] {
 writeFileSync(new URL('../lib/related-tools.ts', import.meta.url), out, 'utf8')
 const bytes = Buffer.byteLength(out, 'utf8')
 console.log(
-  `lib/related-tools.ts 已生成:${published.length} 个工具,` +
-    `${Object.keys(relatedIndex).length} 条 related 索引,${featuredLite.length} 个 featured,${bytes} bytes`,
+  `Generated lib/related-tools.ts:${published.length} tools,` +
+    `${Object.keys(relatedIndex).length} related index entries,${featuredLite.length} featured entries,${bytes} bytes`,
 )

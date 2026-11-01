@@ -5,45 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const DeckBoardCalculatorL10n: ToolL10n = {
-  zh: {
-    useCases: ['按库存料长清点甲板板材', '按 16 英寸间距规划托梁数', '比较板宽与缝隙的影响', '为新甲板列一张完整木料单'],
-    faqs: [
-      { q: '甲板板材怎么算?', a: '甲板面积 ÷ 每线性英尺的覆盖宽度=(板宽 + 缝隙)换算成英尺。16×12 的甲板用 5.5 英寸板、留 1/8 英寸缝需要 410 线性英尺——含损耗是 29 根 16 英尺料。' },
-      { q: '板缝应该留多大?', a: '防腐木留 1/8-1/4 英寸(它会干缩);塑木按厂家规格常要 3/16 英寸以上。防腐木现在拼紧,干缩后自然出缝;塑木不缩,缝必须一次留足。' },
-      { q: '托梁数怎么来的?', a: '甲板长度 ÷ 中距间距再加一根。16 英寸中距下,16 英尺长的甲板是 13 根托梁。24 英寸中距只适用于板材垂直于托梁的铺法。' },
-      { q: '甲板板和室内地板有什么不同?', a: '本工具按室外结构口径:明装紧固件、排水缝、16 英寸中距框架,再加 10% 损耗应对端裂。室内地板公差更紧、用饰面材料——那是 flooring 计算器的活。' },
-    ],
-    ui: {
-      'in.length': '甲板长',
-      'in.width': '甲板宽',
-      'in.boardW': '板材宽度',
-      'in.gap': '板缝',
-      'in.boardLen': '料长',
-      'in.joist': '托梁间距(中距)',
-      'opt.boardLen.8': '8 英尺',
-      'opt.boardLen.12': '12 英尺',
-      'opt.boardLen.16': '16 英尺',
-      'opt.boardLen.20': '20 英尺',
-      'opt.joist.12': '12 英寸',
-      'opt.joist.16': '16 英寸',
-      'opt.joist.24': '24 英寸',
-      'out.boards': '甲板板材',
-      'out.lineal': '板材线性英尺',
-      'out.joists': '托梁数',
-      'out.area': '甲板面积',
-      'outSub.boards': '含 10% 损耗',
-      'chartTitle': '不同料长的板材数',
-      'cmp.0': '12 英尺料',
-      'cmp.1': '16 英尺料',
-      'cmp.2': '20 英尺料',
-      'cmpseg.0': '板材数',
-      'errDims': '请输入有效的甲板与板材尺寸',
-      'preset.0': '平台 16×12',
-      'preset.1': '小型 10×10',
-      'preset.2': '低台 20×14',
-      'note': '🪵 防腐木留 1/8-1/4 英寸缝——干了会缩;塑木按厂家规格(常见 3/16 英寸以上)。16 英寸中距适配绝大多数铺板;24 英寸只用于板垂直于托梁的铺法。',
-    },
-  },
+
   es: {
     useCases: ['contar tablones por longitud de stock', 'planificar los viguetas a 16 pulgadas', 'comparar anchos de tabla y efectos de la junta', 'preparar la lista completa de madera de un deck nuevo'],
     faqs: [

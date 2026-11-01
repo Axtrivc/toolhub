@@ -52,46 +52,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>公制与英制重量单位</h2>
-    <p>
-      重量(更准确地说是质量)在全球主要有两种度量体系。<strong>公制</strong>(毫克、克、千克、公吨)几乎被所有国家使用,并以 10 的幂为基础。<strong>英制</strong>(盎司、磅、英石)主要在美国使用,在英国和爱尔兰则用于衡量体重。
-    </p>
-
-    <h2>关键换算系数</h2>
-    <ul>
-      <li><strong>1 千克</strong> = 2.20462 磅</li>
-      <li><strong>1 磅</strong> = 0.453592 千克 = 16 盎司</li>
-      <li><strong>1 盎司</strong> = 28.3495 克</li>
-      <li><strong>1 英石</strong> = 14 磅 = 6.35029 千克</li>
-      <li><strong>1 公吨</strong> = 1000 千克 = 2204.62 磅</li>
-    </ul>
-
-    <h2>常见用途</h2>
-    <ul>
-      <li><strong>体重:</strong>大多数国家用 kg,美国/英国用 lb 或 st</li>
-      <li><strong>烹饪:</strong>全球食谱用克,美国食谱用盎司/磅</li>
-      <li><strong>运输与货运:</strong>全球用 kg,美国国内用 lb</li>
-      <li><strong>贵金属:</strong>金衡盎司(与普通盎司不同)</li>
-      <li><strong>婴儿:</strong>公制国家出生时用克,美国用磅/盎司</li>
-    </ul>
-
-    <h2>快速心算换算</h2>
-    <ul>
-      <li><strong>kg 转 lb:</strong>乘以 2.2(或翻倍再加 10%)</li>
-      <li><strong>lb 转 kg:</strong>除以 2.2(或减半再减 10%)</li>
-      <li><strong>oz 转 g:</strong>乘以 28</li>
-      <li>80 kg ≈ 176 lb,150 lb ≈ 68 kg</li>
-    </ul>
-
-    <h2>质量与重量的区别</h2>
-    <p>
-      从技术上讲,<strong>质量</strong>(千克)衡量一个物体所含物质的多少,而<strong>重量</strong>(牛顿,或磅力)衡量作用在该质量上的引力。你在地球和月球上的质量相同;而你在月球上的重量约为地球的 1/6。在日常使用中,我们把两者视为可互换,本换算器也是如此。
-    </p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -189,7 +149,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function WeightConverterContent(): ReactNode {
   const { locale } = useApp()

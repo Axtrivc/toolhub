@@ -9,55 +9,7 @@ const FORMULA =
   'Running load = Σ(Running watts × Qty)\nSurge = Running load + max[(Surge watts − Running watts) × Qty]\nRecommended = smallest standard size ≥ Surge\nStandard sizes = 2,000 / 3,000 / 4,000 / 5,000 / 6,500 / 7,500 / 10,000 / 12,000 / 15,000 / 18,000 / 22,000 / 24,000 W'
 
 export const GeneratorWattageCalculatorL10n: ToolL10n = {
-  zh: {
-    formula: {
-      formula: FORMULA,
-      variables:
-        'Running watts = 每台电器的稳态运行功率\nSurge watts = 瞬时启动功率(电机为运行功率的 2-3 倍)\nQty = 该电器同时运行的台数\nmax(...) = 假定其余电器照常运行时一起启动的最大电机组(先启大电机)',
-      explain:
-        '发电机有两个额定值:可持续输出的运行功率,和只能维持数秒的浪涌功率。由于启动可以排队,选型只需在合计运行负载上叠加最大一份浪涌裕量,再向上对齐到下一个标准功率档。',
-      example:
-        '第 1 步:选中——冰箱 700/2,200 W、供暖风机 800/2,350 W、LED 灯 100/100 W、微波炉 1,000/1,000 W。\n第 2 步:运行 = 700 + 800 + 100 + 1,000 = 2,600 W。\n第 3 步:浪涌裕量:1,500 / 1,550 / 0 / 0 → 最大为 1,550 W。\n第 4 步:浪涌 = 2,600 + 1,550 = 4,150 W。\n第 5 步:≥ 4,150 的最小标准档是 5,000 W。\n结果:一台 5,000 W 档发电机——点"加载示例"正好算出这些数字。',
-    },
-    useCases: ['停电时挑一台够带动冰箱与供暖风机的发电机', '搞清"启动浪涌"和"运行瓦"差多少再下单', '按常见功率档(2k-24kW)对齐型号与预算', '工地电锯/水泵的组合负载估算'],
-    faqs: [
-      { q: '启动瓦和运行瓦为什么差这么多?', a: '电机(压缩机、水泵、风机)启动瞬间要克服惯性,通常拉 2-3 倍于运行时的电流。发电机按启动浪涌选型,而不是运行瓦。' },
-      { q: '怎么算总的浪涌?', a: '本工具的口径是:全部选中电器同时运行,加上其中最大一台电机的额外浪涌(也就是"先启最大那台,再开其他"的推荐顺序)。多台同型电机同时启动会把浪涌再推高。' },
-      { q: '变频(逆变)发电机值不值?', a: '它的输出 THD 低,可安全带笔记本、电视与充电设备,油耗和噪音也更低;但带大电机时仍要看浪涌额定,不是看"变频"三个字。' },
-      { q: '为什么电热水器、电磁炉不太建议上发电机?', a: '它们是纯阻性负载、没有浪涌,但持续数千瓦,一两小时就能吃掉一台中型发电机的全部容量。停电优先级通常给冰箱、供暖、照明。' },
-    ],
-    ui: {
-      'pickAppliances': '勾选需要同时运行的电器',
-      'qty': '数量',
-      'runningLoad': '运行负载',
-      'surgeLoad': '启动浪涌',
-      'recommended': '建议发电机功率',
-      'tooBig': '超出单台便携机组范围',
-      'copySummary': '复制摘要',
-      'reset': '重置',
-      'preset.0': '停电基本款',
-      'preset.1': '风暴应急',
-      'preset.2': '工地组合',
-      'item.fridge': '冰箱/冷柜',
-      'item.furnace': '供暖风机(½ 马力)',
-      'item.windowAC': '窗式空调(10,000 BTU)',
-      'item.sumpPump': '污水泵(½ 马力)',
-      'item.wellPump': '井泵(¾ 马力)',
-      'item.microwave': '微波炉(1,000 W)',
-      'item.coffeeMaker': '咖啡机',
-      'item.washer': '洗衣机',
-      'item.spaceHeater': '取暖器',
-      'item.range': '电灶(单眼)',
-      'item.waterHeater': '电热水器',
-      'item.hairDryer': '吹风机',
-      'item.circularSaw': '圆锯(7¼ 英寸)',
-      'item.garageOpener': '车库门电机(½ 马力)',
-      'item.tv': 'LED 电视',
-      'item.lights': 'LED 灯(×10)',
-      'item.laptop': '笔记本+充电器',
-      'note': '⚡ 按启动瓦选型:电机启动瞬间要 2-3 倍运行功率。先启最大那台电机,再依次开其他。变频发电机对电子设备更安全;240V 井泵与空调压缩机需要转换开关和电工。',
-    },
-  },
+
   es: {
     formula: {
       formula: FORMULA,

@@ -33,33 +33,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具?</h2>
-    <p>
-      这个工具用于格式化和校验 JSON。粘贴压缩或混乱的 JSON,即可获得正确缩进、便于阅读的输出。出现语法错误时会显示提示信息。
-    </p>
-    <div>
-      <h2>为什么要格式化 JSON?</h2>
-      <ul>
-        <li>调试 API 响应</li>
-        <li>阅读配置文件</li>
-        <li>开发期间审查大型数据载荷</li>
-        <li>部署前捕捉语法错误</li>
-      </ul>
-    </div>
-    <div>
-      <h2>常见的 JSON 错误</h2>
-      <ul>
-        <li>尾随逗号(严格 JSON 不允许)</li>
-        <li>用单引号代替双引号</li>
-        <li>注释(JSON 不支持注释)</li>
-        <li>键未加引号</li>
-      </ul>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -120,7 +93,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function JSONFormatterContent(): ReactNode {
   const { locale } = useApp()

@@ -5,45 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const CatFoodCalculatorL10n: ToolL10n = {
-  zh: {
-    useCases: ['按体重算出猫咪每日热量需求(RER×系数)', '把日热量折算成湿粮罐数', '把日热量折算成干粮克数', '给绝育室内猫调整喂食量'],
-    faqs: [
-      { q: '猫一天需要多少热量?', a: 'RER = 70 × 体重(kg)^0.75 得出静息需求——4 kg 的猫约 198 kcal——再乘以生命阶段系数:绝育室内猫 ×1.2,减肥期 ×0.8,幼猫最高 ×2.5。' },
-      { q: '结果怎么换算成罐数或克数?', a: '湿粮填罐体标注的每罐 kcal(和罐重),干粮填每 100 g 的 kcal;工具用日热量除以密度——例如 238 kcal ≈ 2.5 罐 95 kcal 的罐头,或 380 kcal/100g 干粮的 63 g。' },
-      { q: '为什么绝育后猫会发胖?', a: '绝育会让能量需求下降约 20-30%,食欲反而上升。典型室内绝育猫的诚实基线是 ×1.2,而不是未绝育的 ×1.4。' },
-      { q: '能用它给猫减肥吗?', a: '只能当起点。猫必须缓慢减重(每周体重的 0.5-1%),急速节食会引发致命的肝脂沉积症。减肥方案请与兽医一起制定。' },
-    ],
-    ui: {
-      'in.weight': '猫的体重',
-      'in.factor': '生命阶段与活动量(MER 系数)',
-      'opt.factor.0.8': '减肥期 (×0.8)',
-      'opt.factor.1.2': '绝育成年猫 (×1.2)',
-      'opt.factor.1.4': '未绝育成年猫 (×1.4)',
-      'opt.factor.1.6': '活跃 / 散养 (×1.6)',
-      'opt.factor.2.5': '幼猫 4-12 月 (×2.5)',
-      'in.basis': '包装标注口径',
-      'opt.basis.can': 'kcal / 罐',
-      'opt.basis.100g': 'kcal / 100 g',
-      'in.density': '包装标注热量密度',
-      'in.canWeight': '每罐克重(罐装用)',
-      'out.mer': '每日能量需求 (MER)',
-      'out.rer': '静息能量 (RER)',
-      'out.activityExtra': '活动增量 (MER − RER)',
-      'out.cans': '每日罐数',
-      'out.grams': '每日克数',
-      'out.perMeal': '每餐克数',
-      'outSub.perMeal': '按每日 2 餐',
-      'chartTitle': '每日热量的构成',
-      'slice.chartRer': '静息需求 (RER)',
-      'slice.chartActivity': '活动系数部分',
-      'preset.0': '绝育室内猫 (4 kg)',
-      'preset.1': '减肥计划 (6 kg)',
-      'preset.2': '幼猫 (2 kg)',
-      'cupsWord': '罐/天',
-      'errInvalid': '请输入 0.5-15 kg 的体重与正值标注数据',
-      'note': '🐟 RER = 70 × 体重(kg)^0.75 kcal/天,再乘生命阶段系数(室内绝育猫只需 ×1.2)。每日量至少分成 2 餐;大多数湿粮约 1 kcal/g。猫减重必须循序渐进——快速节食会诱发肝脂沉积症,方案请先问兽医。',
-    },
-  },
+
   es: {
     useCases: ['calcular las kcal diarias de tu gato (RER × factor)', 'convertir las kcal diarias en latas de alimento húmedo', 'convertir las kcal diarias en gramos de pienso', 'ajustar la ración de un gato interior esterilizado'],
     faqs: [

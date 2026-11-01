@@ -5,44 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const ipCheckerL10n: ToolL10n = {
-  zh: {
-    ui: {
-      'asn': 'ASN',
-      'cfColo': 'CF 节点',
-      'customQueryAria': '自定义 IP 或域名查询',
-      'edgeFrankfurt': '法兰克福(AWS eu-central-1)',
-      'edgeSingapore': '新加坡(AWS ap-southeast-1)',
-      'edgeTokyo': '东京(AWS ap-northeast-1)',
-      'edgeUsEast': '美东(AWS 北弗吉尼亚)',
-      'edgeUsWest': '美西(AWS 俄勒冈)',
-      'mapTitle': 'IP 位置地图 (OpenStreetMap)',
-      'of100': '/ 100',
-      'outOf5Stars': '/ 5 星',
-      'riskScoreAria': '风险评分',
-      'statusOk': '正常',
-      'uaPrefix': 'UA',
-    },
-    useCases: [
-      'IP 欺诈评分查询',
-      '住宅 IP 与机房 IP 检测',
-      'TikTok 专用 IP 质量检测',
-      '免费在线代理 VPN 检测器',
-    ],
-    faqs: [
-      {
-        q: '什么是 IP 欺诈评分?它是怎么算出来的?',
-        a: '欺诈评分是一个 0–100 的启发式评级,衡量在线平台眼中这个 IP 有多可疑。它综合了 ASN 类型(机房还是住宅)、设备时区与 IP 归属地时区是否一致、以及 ASN 所有者名称中的托管/代理关键词等信号。分数越高,这个 IP 越像机器人、VPN 或代理出口节点。',
-      },
-      {
-        q: '住宅 ISP IP 和机房(IDC)IP 有什么区别?',
-        a: '住宅 IP 由面向消费者的 ISP 分配给真实家庭,所以平台把它的流量当作真人来对待。机房 IP 来自 AWS、Google Cloud、DigitalOcean 这类云厂商,可以低成本批量获取,TikTok、亚马逊等平台因此会重点标记它们——跑在机房 IP 上的账号会遇到多得多的验证挑战和封号。',
-      },
-      {
-        q: '为什么我的设备时区和 IP 时区不一致?',
-        a: '设备时区来自浏览器/操作系统设置,而 IP 时区是对出口 IP 做地理定位得出的。两者若不一致——比如设备是 Asia/Shanghai 而 IP 解析到 America/New_York——几乎可以肯定你在用 VPN 或代理,反欺诈系统正是把这种不一致当作泄漏信号。',
-      },
-    ],
-  },
+
   es: {
     ui: {
       'asn': 'ASN',

@@ -5,36 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const discountCalculatorL10n: ToolL10n = {
-  zh: {
-    formula: {
-      formula: 'saved = price × discount%\nfinal = price × (1 − discount%)',
-      explain: '百分比折扣降低原价。多个折扣叠加时要依次应用——每一个都作用在已打折的价格上。',
-    },
-    useCases: ['算出打折后的实付价格和省下的金额', '处理叠加折扣(先打第一轮,再用结果当原价)', '根据到手价和折扣率反推原价', '购物时判断折扣是否真的划算'],
-    faqs: [
-      { q: '怎么算 5 折(50% off)?', a: '直接把价格减半。打 5 折意味着你付一半——这是最简单的折扣计算。' },
-      { q: '两个折扣怎么叠加?', a: '不能直接相加。先用第一个折扣算出新价,再用第二个折扣对新价打折。两个 30% 折扣叠加是总共 51%,不是 60%。' },
-      { q: '「percent off」是什么意思?', a: '指原价被减去的百分比。30% off 表示你付原价的 70%。' },
-      { q: '满减和折扣能直接比吗?', a: '不能。满 300 减 50 在恰好 300 元时相当于约 83 折,买 250 元反而一分不省;折扣对任何金额都成立。把满减折算成等效折扣率再比才公平。' },
-      { q: '怎么识破「先涨价再打折」?', a: '查 30 天内最低价记录或比价工具。若原价是活动前临时抬上去的,标 7 折可能比平日原价还贵;真实折扣只看到手价和历史最低价的差距。' },
-    ],
-    ui: {
-      'chartTitle': '实付 vs 省下',
-      'cmp.0': '原价',
-      'cmpseg.0': '实付',
-      'cmpseg.1': '省下',
-      'preset.0': '9 折',
-      'preset.1': '75 折',
-      'preset.2': '5 折',
-      'preset.3': '3 折',
-      errDiscountRange: '折扣必须在 0–100% 之间',
-      errNonNegativePrice: '原价不能为负',
-      ofOriginal: '占原价',
-      'in.price': '原价', 'inSuffix.price': '$', 'in.discount': '折扣', 'inSuffix.discount': '%',
-      'out.savings': '你省下', 'out.final': '最终价格', 'out.paid': '你支付', 'outSub.paid': '含折扣后',
-      note: '🛍️ 叠加两个折扣时,先算第一个折扣,再把结果当作新的原价算第二个。',
-    },
-  },
+
   es: {
     formula: {
       formula: 'saved = price × discount%\nfinal = price × (1 − discount%)',

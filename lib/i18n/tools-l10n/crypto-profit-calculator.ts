@@ -4,35 +4,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const CryptoProfitCalculatorL10n: ToolL10n = {
-  zh: {
-    useCases: ['算出扣除双边手续费后的真实净利润与 ROI', '反推要达到目标利润所需的卖价(挂限价单)', '对比不同交易所费率对收益的侵蚀', '复盘一笔已完成的买卖'],
-    faqs: [
-      { q: '手续费是怎么扣的?', a: '买卖两侧各收一次百分比手续费:买入按投入资金计,卖出按卖出总额计。哪怕单边 0.1%,一个来回也约 0.2%,还没算点差。' },
-      { q: '“目标卖价”是什么意思?', a: '它反推出扣完双边手续费后正好净赚目标金额的卖出价:S =(目标 + 投入 ×(1+f))÷(数量 ×(1−f))。直接用它挂限价单即可。' },
-      { q: '为什么 ROI 比价格涨幅低一点?', a: 'ROI 按投入本金计、且扣除双边费用。价格上涨 30% 的仓位,经 0.1% 双边费率后净 ROI 约 29.8%——杠杆仓位的资金费率另计。' },
-      { q: '包含税费吗?', a: '不包含。在美国和多数国家,卖出加密货币是应税事件;请预留一部分收益,或查你所在辖区的资本利得规则。' },
-    ],
-    ui: {
-      'in.qty': '买入数量(币)',
-      'in.buy': '买入价',
-      'in.sell': '卖出价',
-      'in.feePct': '每笔交易手续费率',
-      'in.targetProfit': '目标净利润',
-      'out.netProfit': '扣除手续费后的净利润',
-      'out.roiPct': 'ROI',
-      'out.totalFees': '总手续费',
-      'out.exitValue': '卖出总市值',
-      'out.priceForTarget': '达成目标所需卖价',
-      'chartTitle': '投入 vs 到手',
-      'cmp.0': '现金流出(买入+费)',
-      'cmp.1': '现金流入(卖出−费)',
-      'preset.0': 'BTC 波段',
-      'preset.1': '山寨币波段',
-      'preset.2': '长线持有',
-      'errInvalid': '请输入正的数量与买入价,费率需低于 10%',
-      'note': '⚖️ 手续费对买卖两腿各计一次(多数交易所每边收 taker/maker 百分比)。“所需卖价”是扣完双边费用后命中目标利润的出场价——挂限价单时直接用它。',
-    },
-  },
+
   es: {
     useCases: ['calcular el beneficio neto y el ROI reales tras las comisiones de ambas piernas', 'deducir el precio de venta necesario para tu objetivo de beneficio (orden limit)', 'comparar cuánto te comen las tarifas de distintos exchanges', 'hacer post-mortem de una operación ya cerrada'],
     faqs: [

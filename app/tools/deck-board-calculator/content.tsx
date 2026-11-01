@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * DeckBoardCalculator 长文正文 —— 四语 dispatcher
+ * DeckBoardCalculator 长文正文 —— 三语 dispatcher
  *
- * en 分支与既有工具页渲染一致。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支与既有工具页渲染一致。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -24,19 +24,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>先算覆盖,再数板数</h2>
-    <p>甲板算术按线性英尺走:面积 ÷ 每英尺的覆盖宽度。5.5 英寸板加 1/8 英寸缝,每线性英尺覆盖 0.469 ft²,所以 16×12 的甲板要 410 线性英尺——含 10% 切割余量是 29 根 16 英尺料。</p>
-    <h2>留缝是材料决策</h2>
-    <p>防腐木是湿卖干缩的:现在拼紧,日后自然出 1/8-1/4 英寸缝,所以施工直接预留 1/8 英寸。塑木不动但需要排水:多数规格至少 3/16 英寸。重蚁木等硬木按紧固件体系留缝。</p>
-    <h2>托梁是隐形的另一半</h2>
-    <p>16 英寸中距下,16 英尺长的甲板要 13 根托梁;放到 24 英寸,薄的塑木板会在中间发颤。斜铺要 12 英寸间距。计算器按你填的长度方向数托梁——下单前对着框架图核一遍。</p>
-    <h2>只管室外规则</h2>
-    <p>本工具按室外结构口径:排水缝、明装紧固件或卡件、10% 损耗应对劈裂与端切。室内地板公差更紧、用饰面材料——那是 flooring 计算器的领域。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -66,7 +53,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function DeckBoardCalculatorContent(): ReactNode {
   const { locale } = useApp()

@@ -5,34 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const downPaymentCalculatorL10n: ToolL10n = {
-  zh: {
-    formula: {
-      formula: 'Down payment = price × rate\nLoan = price − down payment',
-      explain: '首付是前期支付的现金部分,通常以售价百分比表示。贷款覆盖其余部分;首付越高,本金、月供往往还有利率都更低。',
-    },
-    useCases: ['按房价算首付金额', '算买房需要多少首付', '查 20% PMI 阈值', '算免 PMI 需要多少首付'],
-    faqs: [
-      { q: 'PMI 什么时候能取消?', a: '常规贷款的 PMI 在贷款价值比降到 78% 时自动取消,你也可以在 80% 时主动申请取消。FHA 贷款(2013 年后)除非再融资,否则终身需要 PMI。' },
-      { q: '首付必须凑到 20% 吗?', a: '不是硬性要求。常规贷款最低可 3%–5% 首付、FHA 3.5%,但低于 20% 通常要付 PMI(约为贷款额的 0.5%–2%/年)。要不要凑足 20%,取决于省下的 PMI 与保持应急现金哪个更值。' },
-      { q: '首付之外还要准备哪些钱?', a: '还有过户结算费,通常占房价 2%–5%,外加预付税费、保险和评估费。以 $400,000 的房子为例,20% 首付是 $80,000,结算费另需 $8,000–$20,000。' },
-      { q: '国内买房适用这套 PMI 规则吗?', a: '不适用。PMI 是美国房贷概念;国内对应的是商业贷款首付比例(首套普遍 15%–30%,各城市不同)和公积金贷款规则。本工具的 20% 阈值按美国市场设计。' },
-    ],
-    ui: {
-      'chartTitle': '房价构成',
-      'cmp.0': '房价',
-      'cmpseg.0': '首付',
-      'cmpseg.1': '贷款额',
-      'preset.0': 'FHA 3.5%',
-      'preset.1': '常规 10%',
-      'preset.2': '20%(免 PMI)',
-      pmiNo: '否(首付 ≥ 20%)', pmiYes: '是(首付不足 20%)',
-      errDownOver100: '首付款不能超过 100%',
-      errNonNegative: '房价和首付比例不能为负',
-      'in.price': '房价', 'in.down': '首付',
-      'out.amount': '首付金额', 'out.loan': '贷款金额', 'out.pmi': '需要 PMI?',
-      note: '🏠 首付低于 20% 通常需要 PMI（$50–300/月）。20% 以上可完全避免这笔费用。',
-    },
-  },
+
   es: {
     formula: {
       formula: 'Down payment = price × rate\nLoan = price − down payment',

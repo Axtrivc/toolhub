@@ -5,7 +5,7 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * EmergencyFundCalculator 长文正文 —— 四语 dispatcher
+ * EmergencyFundCalculator 长文正文 —— 三语 dispatcher
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -22,19 +22,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>到底几个月才够</h2>
-    <p>双职工、工作可替代性强,3 个月够用。单职工或行业波动大,6 个月是标准建议。自由职业、提成销售和季节性工作者应按 9-12 个月想——储备金要桥接的是整个淡季,而不只是失业的头一个月。</p>
-    <h2>算必要支出,别算生活方式</h2>
-    <p>目标由「必须支付」构成:房租或房贷、吃饭、水电燃气、保险费、债务最低还款,以及让你能继续上班的托育。外出就餐和订阅是真正紧急状况里最先砍掉的——别把它们算进目标。</p>
-    <h2>让它无聊且流动</h2>
-    <p>这笔钱属于高收益活期或货币基金:当日可取、零波动。拿去投资就失去意义——市场完全可能在你失业的那个季度跌 30%,逼你在底部割肉。</p>
-    <h2>也别攒过头</h2>
-    <p>超过目标的现金会拖累收益。攒满之后按顺序改道:先还高息债(还掉 20% 年利率的卡等于稳赚 20%),再吃满雇主 401(k) 匹配,然后才是长期投资。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -64,7 +51,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function EmergencyFundCalculatorContent(): ReactNode {
   const { locale } = useApp()

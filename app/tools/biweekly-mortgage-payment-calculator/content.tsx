@@ -5,7 +5,7 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * BiweeklyMortgagePaymentCalculator 长文正文 —— 四语 dispatcher
+ * BiweeklyMortgagePaymentCalculator 长文正文 —— 三语 dispatcher
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -22,19 +22,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>为什么 26 个半月供能赢 12 个整月供</h2>
-    <p>一年有 52 周,每两周还月供的一半意味着一年 26 笔半月供——等于 13 个月供而不是 12 个。多出来的那一笔全部砸进本金,而提前消失的本金在未来几十年里不再生息。以 $320,000、6.5%、30 年的贷款为例:还清时间从 360 个月缩短到约 290 个月,省下约 $93,000 利息。</p>
-    <h2>机制很朴素,而这正是要点</h2>
-    <p>双周供不是黑科技,也不是银行的恩惠——它是强制储蓄。按周或双周发薪的人让半月供对齐每张工资单,一年里那两个"三薪月"就把额外的半月供悄悄塞了进去。同样效果可以免费获得:在每月支票上多加月供的 1/12($2,022 的月供加 $168),注明"冲抵本金"。</p>
-    <h2>小心收费版的双周供</h2>
-    <p>第三方双周供服务商收 $300-500 开通费再加每笔手续费,做的只是你自己免费就能做的自律;有些还把你的半月供扣在他们的 escrow 里吃浮存利息,你的贷款机构直到月底才看到钱。只有当你的服务商免费且逐笔即时入账时才值得开双周供;否则 DIY 加本金永远完胜。</p>
-    <h2>什么时候双周供是错的工具</h2>
-    <p>在 3.5% 的疫情期利率下,提前还房贷本金的"收益"跑不赢 4-5% 的货币基金——省下的利息少于放弃的回报,还损失了流动性;在美国,房贷利息抵扣与标准扣除额的互动也会削弱收益。利率越高双周供越香;大约 5% 以下,先把闲钱放别处。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -64,7 +51,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function BiweeklyMortgagePaymentCalculatorContent(): ReactNode {
   const { locale } = useApp()

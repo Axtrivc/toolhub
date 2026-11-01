@@ -5,25 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const sortLinesL10n: ToolL10n = {
-  zh: {
-    ui: {
-      defaultInput: '樱桃\n苹果\n椰枣\n香蕉',
-      inputLabel: '列表(每行一项)',
-      outputLabel: '已排序',
-      note: '🔤 按字母顺序排序各行。空行会被移除。相等的行保持原有相对顺序(稳定排序)。可选指令:列表末尾加 " ||| numeric"(按数值自然排序)、" ||| desc"(降序)或 " ||| numeric,desc"。',
-    },
-    useCases: [
-      '整理头脑风暴产生的想法列表',
-      '按字母顺序排序姓名,制作通讯录',
-      '给产品 SKU 或编号排序',
-      '整理关键词或标签以便审阅',
-      '清理从文档复制来的文本',
-    ],
-    faqs: [
-      { q: '能倒序排序吗(Z 到 A)?', a: '能。在列表末尾加 " ||| desc" 即可降序(Z → A);加 " ||| numeric,desc" 则按数值从大到小排列。' },
-      { q: '数字怎么排序?', a: '默认按文本排序,「10」会排在「9」前面(因为「1」<「9」)。在列表末尾加 " ||| numeric" 指令后按数值自然排序,「9」排在「10」前面。' },
-    ],
-  },
+
   es: {
     ui: {
       defaultInput: 'cereza\nmanzana\ndátil\nplátano',

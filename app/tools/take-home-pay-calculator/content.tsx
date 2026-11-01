@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * TakeHomePayCalculator 长文正文 —— 四语 dispatcher
+ * TakeHomePayCalculator 长文正文 —— 三语 dispatcher
  *
- * en 分支与改造前渲染输出一致。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支与改造前渲染输出一致。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -24,19 +24,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>美国工资单上扣掉什么</h2>
-    <p>共四层:联邦所得税(预扣)、FICA(社保 6.2%,至年度工资基数封顶,外加全部工资 1.45% 的医保)、401(k) 与医保保费等税前扣除,最后是适用地区的州税。</p>
-    <h2>为什么 401(k) 缴存没有看起来那么疼</h2>
-    <p>传统 401(k) 在所得税前扣除,所以缴 6% 并不会让工资缩水 6%——通常只缩水约 4.5-5%。这一联动,本计算器已直接算进结果。</p>
-    <h2>标准扣除假设</h2>
-    <p>估算采用标准扣除(2025 年:单身 $15,000 / 已婚合并申报 $30,000)。因大额房贷利息或慈善捐赠而逐项扣除的人,实际预扣可能更低。</p>
-    <h2>未包含的项目</h2>
-    <p>州和地方所得税、Roth 缴存(税后)、HSA、法院扣款和税收抵免。请把结果当作一阶近似,而不是工资系统级的精确输出。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -66,7 +53,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function TakeHomePayCalculatorContent(): ReactNode {
   const { locale } = useApp()

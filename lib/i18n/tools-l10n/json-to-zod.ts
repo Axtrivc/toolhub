@@ -5,28 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const JsonToZodL10n: ToolL10n = {
-  zh: {
-    useCases: [
-      '拿到第三方 API 的响应样例,秒级生成 zod schema 作为运行时校验的起点',
-      '为 tRPC / React Hook Form 流程生成校验骨架,再手工补 .optional() 与业务约束',
-      '混合数组(如 API 返回的多形态列表)自动生成 z.union,省去逐条手写判别',
-      '把 JSON 配置文件的形状固化成 schema,配置变更时立即在校验层报错',
-    ],
-    faqs: [
-      { q: '值为 null 的字段会怎么处理?', a: '生成 z.null()——只接受 null,因为样本里这个键的值就是 null。若该字段实际可能出现真实值,请手动放宽;很多 API 遇到空值会干脆省略字段,这种情况请在键上手动加 .optional(),工具无法从单一样本推断省略行为。' },
-      { q: '整数和浮点数有区分吗?', a: '有。样本值为整数的字段生成 z.number().int(),带小数的生成 z.number()。如果你的 API 文档允许整数字段偶尔返回浮点(如价格有时是 19、有时是 19.99),请手动去掉 .int()。' },
-      { q: '数组里的对象结构不一致怎么办?', a: '工具采样数组元素,最多归纳出 3 种形状并生成 z.union([...]);空数组没有形状信息,保守回退为 z.unknown()。元素超过 3 种形态的极端情况,请以 z.unknown() 兜底再手工细化。' },
-      { q: '和 json-to-typescript 有什么区别?', a: 'TypeScript 类型只在编译期有效,运行时拿到脏 JSON 照样崩;zod schema 在运行时逐字段校验并能 .parse() 出强类型结果。典型用法是两者都用:TS 类型写代码,zod 守边界。' },
-    ],
-    ui: {
-      'copySchema': '复制 Schema',
-      'inputLabel': '你的 JSON',
-      'loadSample': '加载示例',
-      'note': '🧬 整数生成 z.number().int();混合数组生成最多 3 种样本形状的 z.union;空数组回退 z.unknown。观察到 null 的键生成 z.null()——若实际会出现真实值请手动放宽,在 API 会省略字段的地方请手动加 .optional()。',
-      'rootObj': '根节点必须是 JSON 对象({ … })',
-      'tooLong': 'JSON 超过 {n} 字符上限——仅为开头部分生成 schema。',
-    },
-  },
+
   es: {
     useCases: [
       'Generar al instante un esquema zod a partir de la respuesta de ejemplo de una API de terceros como base de validación en runtime',

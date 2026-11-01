@@ -5,10 +5,10 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * Simple Interest Calculator 长文正文 —— 四语 dispatcher
+ * Simple Interest Calculator 长文正文 —— 三语 dispatcher
  *
  * en 分支等价于原 ToolContent 渲染输出(<h2>What Is This Tool?</h2> + intro
- * + 各 section 包在 <div> 中),字节级 SEO 安全。zh/es/de 仅客户端 hydration
+ * + 各 section 包在 <div> 中),字节级 SEO 安全。es/de 仅客户端 hydration
  * 后按 locale 切换。公式 (<code> 标签内) 保持英文/数学符号不变,仅翻译周边文字。
  */
 
@@ -51,41 +51,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具?</h2>
-    <p>
-      <strong>单利</strong>是仅按原始本金计算的利息。公式很简单: <code>I = P &times; r &times; t</code> (利息 = 本金 × 利率 ×
-      时间)。与复利不同,你不会对已累积的利息再计息。
-    </p>
-    <div>
-      <h2>公式</h2>
-      <ul>
-        <li><strong>I</strong> = 赚取(或支付)的利息</li>
-        <li><strong>P</strong> = 本金(起始金额)</li>
-        <li><strong>r</strong> = 年利率(以小数表示)</li>
-        <li><strong>t</strong> = 时间(以年为单位)</li>
-      </ul>
-    </div>
-    <div>
-      <h2>单利与复利对比</h2>
-      <p>
-        单利线性增长,复利指数增长。以 $10,000 本金、5% 利率存放 10 年为例: 单利共赚取
-        $5,000; 复利(按年复利)赚取 $6,289。对于长期投资,请始终使用复利计算器。
-      </p>
-    </div>
-    <div>
-      <h2>单利的适用场景</h2>
-      <ul>
-        <li>短期个人贷款和汽车贷款</li>
-        <li>部分支付固定票息的债券</li>
-        <li>短期的基础储蓄计算</li>
-        <li>在校期间的大多数学生贷款(复利开始之前)</li>
-      </ul>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -164,7 +129,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function SimpleInterestCalculatorContent(): ReactNode {
   const { locale } = useApp()

@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * CsvToSqlConverter 长文正文 —— 四语 dispatcher
+ * CsvToSqlConverter 长文正文 —— 三语 dispatcher
  *
- * en 分支与改造前渲染输出一致。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支与改造前渲染输出一致。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -24,19 +24,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>批量是导入提速的关键</h2>
-    <p>一行一条 INSERT 意味着每行一次往返、一次事务记录、一次 fsync——一万行的导入能拖上几分钟。多行 INSERT(本工具默认每批 25 行)把它折叠成几百条语句,在 MySQL 与 Postgres 上通常快一个数量级。但每条语句超过几百行就会撞解析器上限、锁窗口也不再帮忙,甜点区间是 25-100 行。</p>
-    <h2>转义没得商量</h2>
-    <p>生成的脚本把每个单引号翻倍('It''s')——这是 SQL 标准,所有引擎通吃。来自 CSV 表头的列名、表名先清洗成 [A-Za-z0-9_] 再加引号:表头 "First Name!" 变成 First_Name,文件里的任何内容都不会以裸语法进入语句。它是导入脚本的生成器;运行时处理不受信输入,参数化查询才是唯一正确的工具。</p>
-    <h2>类型推断是便利,不是 schema</h2>
-    <p>某列所有非空单元格都能解析为数字,就输出为不带引号的数字,其余按字符串。这省了给 ID、金额列修引号的功夫——但 CSV 没有真正的类型:邮编列的 01234 作为数字会丢前导零,空字符串与 NULL 也无法区分。相信默认值之前先过一遍开关;表头行就是你 CREATE TABLE 的列清单。</p>
-    <h2>分隔符嗅探与残缺行</h2>
-    <p>欧洲版 Excel 导出常用分号;粘贴来的数据有时是制表符分隔。解析器统计前几行引号外的候选分隔符数量并选出赢家。带内嵌逗号的引号字段、翻倍的引号、CRLF 或 LF 行尾都能往返;偏短的行用空单元格补齐并在头部注释里标注,而不是让你的列悄悄错位。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -66,7 +53,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function CsvToSqlConverterContent(): ReactNode {
   const { locale } = useApp()

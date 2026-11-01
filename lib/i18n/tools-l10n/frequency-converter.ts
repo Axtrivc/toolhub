@@ -5,30 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const frequencyConverterL10n: ToolL10n = {
-  zh: {
-    ui: {
-      'note': '📡 CPU 时钟用 GHz,音频用 Hz–kHz,转速用 RPM。',
-      'unit.deg-s': '度/秒 (°/s)',
-      'unit.ghz': '吉赫 (GHz)',
-      'unit.hz': '赫兹 (Hz)',
-      'unit.khz': '千赫 (kHz)',
-      'unit.mhz': '兆赫 (MHz)',
-      'unit.rad-s': '弧度/秒 (rad/s)',
-      'unit.rpm': '转/分 (RPM)',
-    },
-    useCases: [
-      '把电机转速(RPM)换算成赫兹',
-      '在无线电频率单位之间互转(kHz/MHz/GHz)',
-      '换算心率(次/分 → Hz)',
-      '换算 kHz 与 MHz 之间的电台频率',
-    ],
-    faqs: [
-      { q: '怎样把 RPM 换算成 Hz?', a: '用 RPM 除以 60。一台 3600 RPM 的电机运行在 60 Hz。这就是为什么美国的交流电是 60 Hz——发电机转速为 3600 RPM。' },
-      { q: '为什么欧洲电网是 50 Hz,美国是 60 Hz?', a: '历史选择,并无绝对优劣:欧洲和中国(220-230V)用 50 Hz,美国(120V)用 60 Hz。50 Hz 对应发电机 3000 RPM,60 Hz 对应 3600 RPM。跨国带电器前先看铭牌是否兼容宽频。' },
-      { q: 'rad/s 和 Hz 怎么互转?', a: '1 Hz = 2π rad/s ≈ 6.283 rad/s,例如 60 Hz 对应约 377 rad/s。工程里转角量用 rad/s、周期量用 Hz,这个 2π 换算在电机和振动分析里天天用到。' },
-      { q: '人耳能听到什么频率范围?', a: '大约 20 Hz 到 20 kHz(20,000 Hz)。低音炮下限常做到 20-30 Hz,CD 音质上限 22.05 kHz;随年龄增长高频听力先退化,40 岁后很多人已听不到 15 kHz 以上。' },
-    ],
-  },
+
   es: {
     ui: {
       'note': '📡 Relojes de CPU en GHz, audio en Hz-kHz, rotación en RPM.',

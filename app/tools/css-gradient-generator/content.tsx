@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * CSS Gradient Generator 长文正文 —— 四语 dispatcher
+ * CSS Gradient Generator 长文正文 —— 三语 dispatcher
  *
- * en 分支等价于原 ToolContent 渲染输出。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支等价于原 ToolContent 渲染输出。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en (与改造前渲染输出一致) ────────────────────────────
@@ -58,36 +58,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具？</h2>
-    <p>
-      手写渐变语法很繁琐 —— 逗号、角度、色标位置、各浏览器差异。本生成器为你提供 <strong>linear</strong>、<strong>radial</strong> 和 <strong>mesh</strong> 渐变的实时画布，并输出干净、可直接复制粘贴的 CSS。所有内容都用纯 CSS 在浏览器中渲染：无需库、无需账号、不上传任何内容。
-    </p>
-
-    <div>
-      <h2>linear、radial 与 mesh 的对比</h2>
-      <p>
-        <strong>linear</strong> 沿某个角度扫过颜色（0° 朝上，90° 朝右），是按钮和首屏横幅的主力。<strong>radial</strong> 从某个位置向外辐射 —— 圆形或椭圆形 —— 适合光晕和暗角。<strong>mesh</strong> 是现代落地页上常见的柔和、多色模糊效果；浏览器原生并不支持 mesh 渐变，因此本工具叠加了四层 <code>radial-gradient</code>，每层都在底色上向 <code>transparent</code> 渐隐。最终效果看起来像 mesh，但其实是纯粹的、被广泛支持的 CSS。
-      </p>
-    </div>
-
-    <div>
-      <h2>让色标显得有设计感</h2>
-      <p>
-        两个色标只是过渡；三个或更多才是设计。让相邻色标保持在同一色系内以获得平滑过渡 —— 比如直接从蓝色跳到黄色，在 RGB 插值下会经过浑浊的灰色。<strong>随机调色板</strong>按钮只会挑选能自然融合的柔和双色或三色组合，是个不错的起点。把某个色标的位置向相邻色标移近，就能得到更硬的边缘：两个相同百分比的色标会形成一条毫无过渡的清晰条纹。
-      </p>
-    </div>
-
-    <div>
-      <h2>上线前的实用建议</h2>
-      <p>
-        渐变的渲染成本很低，但巨大的动画渐变仍可能拖累低端 GPU —— 在全屏区块上尽量使用静态背景。对于 mesh 或 radial 光晕上的文字，请加一层淡淡的遮罩，或检查对比度，因为亮度会随渐变位置变化。另外，当设计需要背景图加一层色调时，请记住你可以在同一个 <code>background</code> 简写属性里把 <code>linear-gradient</code> 叠加在 <code>url(...)</code> 之上，而不必去编辑图像本身。
-      </p>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -151,7 +121,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function CssGradientGeneratorContent(): ReactNode {
   const { locale } = useApp()

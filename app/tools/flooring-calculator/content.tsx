@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * Flooring Calculator 长文正文 —— 四语 dispatcher
+ * Flooring Calculator 长文正文 —— 三语 dispatcher
  *
- * en 分支与改造前渲染输出一致。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支与改造前渲染输出一致。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en (与改造前渲染输出一致) ────────────────────────────
@@ -53,36 +53,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>从房间尺寸到整箱购买</h2>
-    <p>
-      地板不按平方英尺拆零卖——它按<strong>箱</strong>卖。所以地板预算有三步:长 × 宽算出房间面积,加上切割与瑕疵的<strong>损耗系数</strong>,再除以箱身标注的覆盖面积并<em>向上取整</em>。本计算器三步全包,而且无论你的卷尺刻度是什么,都同时显示 ft² 与 m² 两套结果。
-    </p>
-
-    <h2>该加多少损耗?</h2>
-    <p>
-      <strong>5–10%</strong> 覆盖简单矩形房间里的顺铺板材和常规瓷砖。斜铺或人字拼、大规格瓷砖、拐角和壁橱很多的房间,或需要配色一致的实木地板,用 <strong>10–15%</strong>。损耗不是可选项:板材必须切割错缝,最后一条几乎总要顺长裁窄。
-    </p>
-
-    <h2>每箱的典型覆盖面积</h2>
-    <ul>
-      <li><strong>陶瓷砖:</strong>每箱约 1.44 m²(15.5 ft²)——随规格变化</li>
-      <li><strong>工程实木地板:</strong>每箱约 2.23 m²(24 ft²)</li>
-      <li><strong>石塑/乙烯地板(LVP):</strong>每箱约 2.59 m²(27.9 ft²)</li>
-      <li><strong>大理石/石材:</strong>每箱约 1.5 m²(16.1 ft²)</li>
-    </ul>
-    <p>
-      务必核对箱身实际标签——各家规格不同——并留一箱未拆封的备箱用于日后维修;染缸批次和规格会停产,多年后想配上同一款地板几乎不可能。
-    </p>
-
-    <h2>像专业师傅那样测量</h2>
-    <p>
-      每个区域分别量最长的宽和长,按各自面积分别计算再合并(按最大截面购买,然后把箱数相加)。L 形房间先拆成矩形、加上总面积再算损耗。防潮垫、过渡压条、踢脚线和胶水通常在材料总价之外再加 10–20%——在你爱上展厅样品之前,先把它们列进预算。
-    </p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -168,7 +138,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function FlooringCalculatorContent(): ReactNode {
   const { locale } = useApp()

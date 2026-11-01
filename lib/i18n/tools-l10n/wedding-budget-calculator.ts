@@ -5,44 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const WeddingBudgetCalculatorL10n: ToolL10n = {
-  zh: {
-    useCases: ['把婚礼总预算拆到各项目', '看每位宾客的真实成本', '决定请多少人最划算', '给各供应商定支出上限'],
-    faqs: [
-      { q: '这些百分比靠谱吗?', a: '它们来自美国常见的婚礼规划指引——场地加餐饮共占 55%,与真实预算的落点一致。城市婚礼偏场地、目的地婚礼偏行程,各不相同;把这套比例当作合理的初稿再按需调整,而不是圣旨。' },
-      { q: '为什么宾客数影响这么大?', a: '餐饮按人头计价,场地也有人均最低消费,宾客数会同时撬动多个条目。人均成本把这根杠杆摆上台面:按每位 150 美元算,少请 10 位宾客就省 1,500 美元——通常比砍掉伴手礼或升级布景省得多。' },
-      { q: '备用金那 10% 覆盖什么?', a: '文具、伴手礼,以及免不了的意外:切蛋糕费、供应商小费、超时费、临时加座。策划师建议 10-15% 的应急金不是没有道理——真没花掉,就当蜜月升级。' },
-    ],
-    ui: {
-      'chartTitle': '预算分配',
-      'slice.venue': '场地与租赁',
-      'slice.catering': '餐饮与酒水',
-      'slice.photo': '摄影摄像',
-      'slice.attire': '礼服与妆造',
-      'slice.music': '音乐与花艺',
-      'slice.misc': '文具与备用金',
-      'chartCenter': '总计',
-      'in.attire': '礼服与妆造 (10%)',
-      'in.catering': '餐饮与酒水 (30%)',
-      'in.guests': '宾客人数',
-      'in.misc': '纸品/回礼与备用金 (10%)',
-      'in.music': '音乐/DJ 与花艺 (10%)',
-      'in.perGuest': '每宾客人均',
-      'in.photo': '摄影摄像 (15%)',
-      'in.total': '总预算',
-      'in.venue': '场地与租赁 (25%)',
-      'note': '💍 百分比反映美国常见规划指引;场地+餐饮通常吃掉一半以上。每宾客成本是撬动全局的杠杆——减 10 位宾客比省掉回礼更有效。',
-      'out.attire': '礼服与妆造 (10%)',
-      'out.catering': '餐饮与酒水 (30%)',
-      'out.guests': '宾客人数',
-      'out.misc': '纸品/回礼与备用金 (10%)',
-      'out.music': '音乐/DJ 与花艺 (10%)',
-      'out.perGuest': '每宾客人均',
-      'out.photo': '摄影摄像 (15%)',
-      'out.total': '总预算',
-      'out.venue': '场地与租赁 (25%)',
-          'errInvalidBudget': "请输入有效的预算",
-},
-  },
+
   es: {
     useCases: ['repartir el presupuesto total de la boda', 'ver el coste real por invitado', 'decidir cuántos invitados te convienen', 'fijar topes de gasto por proveedor'],
     faqs: [

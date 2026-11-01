@@ -5,43 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const htmlEscapeL10n: ToolL10n = {
-  zh: {
-    ui: {
-      'inputTooLarge': '⚠️ 输入过大——支持规模最多 10 万字符。请裁剪输入后再转换。',
-      'invalidInput': '⚠️ 此方向的输入无效',
-      'defaultInputDecode': '&lt;a href=&quot;x&quot;&gt;汤姆 &amp; 杰瑞&lt;/a&gt;',
-      'defaultInputEncode': '<a href="x">汤姆 & 杰瑞</a>',
-      'characters': '字符',
-      'clear': '清空',
-      'swapToDecode': '⇄ 切换为解码',
-      'swapToEncode': '⇄ 切换为编码',
-      'decode': '解码',
-      'decodeInputLabel': '转义后的 HTML',
-      'decodeNote': '🌐 把 HTML 实体反转义回字符。安全——使用一个独立的 textarea 元素。',
-      'decodeOutputLabel': '反转义后的文本',
-      'encode': '编码',
-      'encodeInputLabel': '文本或 HTML',
-      'encodeNote': '🌐 转义 & < > " 和 \'。在把用户输入插入 HTML 前使用,以防 XSS。',
-      'encodeOutputLabel': '转义后的 HTML',
-      'mode': '模式',
-      'modeAria': '编码/解码模式',
-      'placeholder': '在此输入或粘贴…',
-      'resultPlaceholder': '结果将显示在这里…',
-      'words': '词',
-    },
-    useCases: [
-      '转义用户输入以防 XSS 攻击',
-      '在页面安全展示代码片段',
-      '把 & < > " 编码为 HTML 实体',
-      '清理从网页复制的内容',
-    ],
-    faqs: [
-      { q: '这样就能防止所有 XSS 吗?', a: 'HTML 正文转义覆盖了最常见的情况,但 XSS 有多种变体(基于属性、脚本、URL)。对不受信任的 HTML,请使用 DOMPurify 等可靠库。' },
-      { q: '具体转义了哪些字符?', a: '五个核心字符:& 转成 &amp;、< 转成 &lt;、> 转成 &gt;、" 转成 &quot;、\' 转成 &#39;(或 &#x27;)。这是 OWASP 推荐的 HTML 实体转义集合,覆盖标签注入和属性逃逸两条常规路径。' },
-      { q: '转义(escape)和净化(sanitize)有什么区别?', a: '转义把特殊字符变成实体,让浏览器原样显示文本而不解析标签;净化则过滤或删除危险标签和属性,保留一部分 HTML。展示用户输入用转义;确实要允许富文本(如评论加粗)时才需要净化。' },
-      { q: '转义后文本变长,有影响吗?', a: '有一定膨胀:&amp; 是原字符的 5 倍长,长文本转义后可能增大 10-20%,要注意数据库字段或输入框的长度上限。展示时浏览器会还原回原字符,读者看到的长度不变。' },
-    ],
-  },
+
   es: {
     ui: {
       'inputTooLarge': '⚠️ Entrada demasiado grande: el tamaño admitido es de hasta 100 000 caracteres. Recorta la entrada para convertir.',

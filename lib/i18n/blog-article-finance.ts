@@ -13,8 +13,8 @@ const EN_CRUMB_TITLE = 'Mortgage & Loan Calculators'
 
 export const mortgageLoanCalculatorsArticle: LocalizedArticle = {
   en: {
-    articleTitle: { en: EN_TITLE, zh: '房贷与贷款计算器:PITI、PMI 与还款曲线的诚实指南', es: 'Calculadoras de hipoteca y préstamos: la guía honesta (PITI, PMI y curvas de liquidación)', de: 'Hypotheken- und Kreditrechner: der ehrliche Ratgeber (PITI, PMI und Tilgungskurven)' },
-    breadcrumbTitle: { en: EN_CRUMB_TITLE, zh: EN_CRUMB_TITLE, es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
+    articleTitle: { en: EN_TITLE,  es: 'Calculadoras de hipoteca y préstamos: la guía honesta (PITI, PMI y curvas de liquidación)', de: 'Hypotheken- und Kreditrechner: der ehrliche Ratgeber (PITI, PMI und Tilgungskurven)' },
+    breadcrumbTitle: { en: EN_CRUMB_TITLE,  es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
     readMinutes: 7,
     lead: 'Lenders quote you a monthly payment that quietly excludes taxes, insurance, and PMI. Here is the math they skip — PITI, extra payments, the rent-vs-buy crossover — with calculators that run entirely in your browser.',
     sections: [
@@ -120,117 +120,10 @@ export const mortgageLoanCalculatorsArticle: LocalizedArticle = {
       },
     ],
   },
-  zh: {
-    articleTitle: { en: EN_TITLE, zh: '房贷与贷款计算器:PITI、PMI 与还款曲线的诚实指南', es: 'Calculadoras de hipoteca y préstamos: la guía honesta (PITI, PMI y curvas de liquidación)', de: 'Hypotheken- und Kreditrechner: der ehrliche Ratgeber (PITI, PMI und Tilgungskurven)' },
-    breadcrumbTitle: { en: EN_CRUMB_TITLE, zh: EN_CRUMB_TITLE, es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
-    readMinutes: 7,
-    lead: '银行报给你的月供悄悄剔除了税费、保险和 PMI。这里把他们跳过的算给你看——PITI 全口径、提前还款、租房买房的交叉年——所有计算器都在浏览器本地运行。',
-    sections: [
-      {
-        heading: '1. 真实月供是 PITI,不只是本息',
-        blocks: [
-          '银行宣传的数字只含本金和利息。实际月成本还要加上房产税、房屋保险、HOA,以及首付不足 20% 时的 PMI——$400,000 的房子 10% 首付,仅 PMI 一项每月就多出约 $150,而广告利率从不会提。',
-          '完整的 PITI 计算器把每一项单列,且 PMI 只在首付低于 20% 时自动计入,20% 以上自动归零——和真实放贷方的处理完全一致。',
-          {
-            card: {
-              title: '房贷计算器(含 PMI 与税费)',
-              href: '/tools/mortgage-calculator/',
-              desc: '完整 PITI 分解、20% 以下首付自动 PMI、提前还款对比与省息曲线。',
-            },
-          },
-        ],
-      },
-      {
-        heading: '2. 提前还款:五位数级别的杠杆',
-        blocks: [
-          '每月多还 $100–$500 直接冲本金,且效果是非线性的:6.8% 的 30 年贷款每月多还 $200,通常缩短约 6 年期限、省下超过 $100,000 的利息。单看一个数字感受不到——你需要看到两条余额曲线分开的过程。',
-          '上面的房贷计算器画的就是它:有/无提前还款的余额双曲线,中间阴影区就是你永远不会付的利息。',
-        ],
-      },
-      {
-        heading: '3. 租 vs 买:找到你的交叉年',
-        blocks: [
-          '“租房是扔钱”从第 N 年开始成立——关键是 N 是几。买房前置了首付与摩擦成本;租房逐年上涨。昂贵市场的累计成本曲线常在第 5–8 年交叉,便宜市场可能第 2 年就交叉。',
-          {
-            card: {
-              title: '租房 vs 买房计算器',
-              href: '/tools/rent-vs-buy-calculator/',
-              desc: '逐年累计租金 vs 购房净成本曲线,交点就是答案。',
-            },
-          },
-        ],
-      },
-      {
-        heading: '4. 任意贷款 + 完整摊销表',
-        blocks: [
-          '车贷与个人贷款的数学和房贷完全相同。多数计算器藏起的是摊销表本身:逐月的本金/利息拆分——你会发现在第一年的还款里大头其实是利息。',
-          {
-            card: {
-              title: '贷款计算器(含摊销表)',
-              href: '/tools/loan-calculator/',
-              desc: '月供、总利息,以及逐期还款明细表与余额曲线。',
-            },
-          },
-          {
-            card: {
-              title: '车贷计算器',
-              href: '/tools/auto-loan-calculator/',
-              desc: '车价、首付、置换与消费税——开走那一刻的真实成本。',
-            },
-          },
-        ],
-      },
-      {
-        heading: '5. 最低还款陷阱',
-        blocks: [
-          '信用卡最低还款被设计成把清偿拖到几十年:$5,000 余额、20% APR 只还最低,可能要还 15 年以上、真实成本翻倍。每月多还 $50 就能击穿这个时间线。',
-          {
-            card: {
-              title: '信用卡最低还款计算器',
-              href: '/tools/credit-card-minimum-payment-calculator/',
-              desc: '看最低还款里有多少进了本金,以及最低 vs 每月多还 $50 的还款曲线。',
-            },
-          },
-          {
-            card: {
-              title: '信用卡清偿计算器',
-              href: '/tools/credit-card-payoff-calculator/',
-              desc: '设定固定月供,得到精确还清日期、总利息与余额曲线。',
-            },
-          },
-        ],
-      },
-      {
-        heading: '6. 让复利为你工作',
-        blocks: [
-          '把卡债拖到 15 年的数学,同样能让退休金增长——只要你给它时间。复利计算器画出你的投入与其上的增长,还有一条“同样一笔钱、晚 10 年开始”的虚线——两条线的差距,是多数人付出过的最贵的拖延。',
-          {
-            card: {
-              title: '复利计算器',
-              href: '/tools/compound-interest-calculator/',
-              desc: '投入 vs 复利增长,附“现在开始 vs 晚 10 年”对比。',
-            },
-          },
-          {
-            card: {
-              title: '退休计算器',
-              href: '/tools/retirement-calculator/',
-              desc: '从年龄、现有储蓄与月供推算退休金规模,附 4% 法则月收入。',
-            },
-          },
-        ],
-      },
-      {
-        heading: '为什么这些计算器这么快',
-        blocks: [
-          '上面每个计算器都是静态页面,100% 在浏览器里运行。你的薪资、余额、生日不会离开设备——根本不存在可发送的服务器。这也是拖动滑杆时结果即时刷新的原因:没有往返,没有加载图标。',
-        ],
-      },
-    ],
-  },
+
   es: {
-    articleTitle: { en: EN_TITLE, zh: '房贷与贷款计算器:PITI、PMI 与还款曲线的诚实指南', es: 'Calculadoras de hipoteca y préstamos: la guía honesta (PITI, PMI y curvas de liquidación)', de: 'Hypotheken- und Kreditrechner: der ehrliche Ratgeber (PITI, PMI und Tilgungskurven)' },
-    breadcrumbTitle: { en: EN_CRUMB_TITLE, zh: EN_CRUMB_TITLE, es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
+    articleTitle: { en: EN_TITLE,  es: 'Calculadoras de hipoteca y préstamos: la guía honesta (PITI, PMI y curvas de liquidación)', de: 'Hypotheken- und Kreditrechner: der ehrliche Ratgeber (PITI, PMI und Tilgungskurven)' },
+    breadcrumbTitle: { en: EN_CRUMB_TITLE,  es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
     readMinutes: 7,
     lead: 'El banco te cotiza una cuota que excluye silenciosamente impuestos, seguro y PMI. Aquí está el cálculo que omiten — PITI completo, pagos extra y el año de cruce entre alquilar y comprar — con calculadoras que corren 100 % en tu navegador.',
     sections: [
@@ -335,8 +228,8 @@ export const mortgageLoanCalculatorsArticle: LocalizedArticle = {
     ],
   },
   de: {
-    articleTitle: { en: EN_TITLE, zh: '房贷与贷款计算器:PITI、PMI 与还款曲线的诚实指南', es: 'Calculadoras de hipoteca y préstamos: la guía honesta (PITI, PMI y curvas de liquidación)', de: 'Hypotheken- und Kreditrechner: der ehrliche Ratgeber (PITI, PMI und Tilgungskurven)' },
-    breadcrumbTitle: { en: EN_CRUMB_TITLE, zh: EN_CRUMB_TITLE, es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
+    articleTitle: { en: EN_TITLE,  es: 'Calculadoras de hipoteca y préstamos: la guía honesta (PITI, PMI y curvas de liquidación)', de: 'Hypotheken- und Kreditrechner: der ehrliche Ratgeber (PITI, PMI und Tilgungskurven)' },
+    breadcrumbTitle: { en: EN_CRUMB_TITLE,  es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
     readMinutes: 7,
     lead: 'Die Bank nennt dir eine Rate, die Steuern, Versicherung und PMI still ausklammert. Hier ist die Rechnung, die sie weglassen — volle PITI, Sondertilgung und das Mieter-Käufer-Schnittpunkt-Jahr — mit Rechnern, die komplett im Browser laufen.',
     sections: [

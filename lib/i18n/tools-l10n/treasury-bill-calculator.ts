@@ -4,36 +4,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const TreasuryBillCalculatorL10n: ToolL10n = {
-  zh: {
-    useCases: ['算出短期国债拍卖的折价买入价', '把贴现率换算成可比的投资收益率(365 天口径)', '对比 4 周 / 13 周 / 26 周 / 52 周各期限', '估算持有到期能拿到的利息'],
-    faqs: [
-      { q: '为什么有两种收益率?', a: '拍卖报的是银行贴现率:贴现额 ÷ 面值 ×(360/天数),按 360 天年化。投资收益率(等价票息率)则除以你实际付的买入价、按 365 天年化——与其他产品比较时用它,且总是略高。' },
-      { q: '买入价怎么算?', a: '价格 = 面值 ×(1 − 贴现率 × 天数/360)。例如 13 周 bills、贴现率 4.5% 时,每 $1,000 面值付 $988.63。' },
-      { q: 'T-Bill 收益要交税吗?', a: '利息免州税和地方税,但全额计入联邦应税所得(1099-INT 申报)。二级市场折溢价买卖的税务处理略有不同,请咨询税务师。' },
-      { q: '到期前卖会怎样?', a: '按当时市价成交,而市价随利率波动——只有持有到期收益率才是锁定的。短期 bills 的利率敏感度很小,但并非为零。' },
-    ],
-    ui: {
-      'in.face': '到期面值',
-      'in.rate': '年化贴现率',
-      'in.days': '距到期天数',
-      'out.price': '买入价',
-      'out.interest': '贴现利息收入',
-      'out.per100': '每 $100 面值价格',
-      'out.invYield': '投资收益率(365 天)',
-      'out.discYield': '银行贴现率(360 天)',
-      'chartTitle': '面值的构成',
-      'chartCenter': '面值',
-      'slice.price': '买入价',
-      'slice.interest': '贴现利息',
-      'preset.0': '4 周 bill',
-      'preset.1': '13 周 bill',
-      'preset.2': '26 周 bill',
-      'preset.3': '52 周 bill',
-      'errInvalid': '请输入正的面值,期限最长两年',
-      'errDeep': '贴现率 × 期限超过了面值本身',
-      'note': '🏦 T-Bill 不付票息——折价买入、到期按面值兑付。拍卖报出的利率是银行贴现率(360 天年化、以面值为基);投资收益率(365 天、以实付价为基)才是与其他收益率诚实比较的口径,且总是略高。',
-    },
-  },
+
   es: {
     useCases: ['calcular el precio de compra con descuento en una subasta de letras', 'convertir la tasa de descuento en rendimiento de inversión comparable (base 365)', 'comparar plazos de 4 / 13 / 26 / 52 semanas', 'estimar el interés que recibirás manteniendo hasta el vencimiento'],
     faqs: [

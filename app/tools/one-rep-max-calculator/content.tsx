@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * OneRepMaxCalculator 长文正文 —— 四语 dispatcher
+ * OneRepMaxCalculator 长文正文 —— 三语 dispatcher
  *
- * en 分支与 SSR 输出一致。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支与 SSR 输出一致。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -24,19 +24,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>三个公式,三种性格</h2>
-    <p>Epley(w × (1 + 次数/30))读数最高,也是健身房文化里的主流;Brzycki(w × 36/(37 − 次数))和 Lander(w ÷ (1.0278 − 0.0278 × 次数))要低 3-5%。5 次以内三者相差不过一两公斤;到 10 次就拉开了差距——所以编排训练时,这里的平均值才是最诚实的选择。</p>
-    <h2>为什么用估算而不是冲真极限</h2>
-    <p>真 1RM 测试需要保护员、需要状态好的一周,还要为一个月都不会再用的数字承担真实的受伤风险。一组接近力竭的 3-8 次硬组,落点通常在真实极限的 5-10% 以内——拿来定训练重量足够准,恢复成本却低得多。</p>
-    <h2>百分比表怎么用</h2>
-    <p>力量期在 85-95% 做 1-3 次;增肌期 65-80% 做 6-12 次反应最好;爆发力、热身和减载周放在 50-60%。表里的百分比基于三公式平均值——跨训练块对比时,记下你用的是哪一列。</p>
-    <h2>公式什么时候失灵</h2>
-    <p>超过 12 次,你测的是肌肉耐力而不是最大力量——所有公式都向上漂移,Epley 最严重。如果你最好的一组是 20 次的"磨",先用能标准完成 3-5 次的重量重测再谈估算。而借力弹起、行程打折的一组,无论套哪个公式得到的都是虚构数字。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -66,7 +53,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function OneRepMaxCalculatorContent(): ReactNode {
   const { locale } = useApp()

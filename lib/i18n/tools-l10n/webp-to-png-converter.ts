@@ -5,60 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const webpToPngConverterL10n: ToolL10n = {
-  zh: {
-    ui: {
-      'bgColorLabel': '背景色(压平透明)',
-      'change': '更换',
-      'downloadJpg': '下载 JPG',
-      'downloadPng': '下载 PNG',
-      'errConversionFailed': '在画布上转换失败。',
-      'errDecodeImage': '无法解码图片文件。',
-      'errFileTooLarge': '文件太大——最大支持 20 MB 的图片。',
-      'errImageTooLarge': '图片过大,无法转换——单边不超过 8192 px 且总像素低于 4000 万。',
-      'errReadFile': '无法读取文件。',
-      'errUploadWebp': '请上传 WebP 图片文件 (.webp)。',
-      'jpegOutputLabel': 'JPEG 输出',
-      'jpegQualityLabel': 'JPEG 质量 —',
-      'jpegSmallerLossy': 'JPEG(更小,有损)',
-      'largerThanOriginal': '(比原图更大——试着调低质量)',
-      'noteText': '🔒 100% 在客户端——转换在浏览器内画布上经',
-      'noteTextSuffix': ' 完成。你的图片绝不离开你的设备。',
-      'outputFormat': '输出格式',
-      'outputPreviewAlt': '输出预览',
-      'pngOutputLabel': 'PNG 输出',
-      'pngLargerNote': '(比原图更大——PNG 是无损格式,从有损 WebP 转换通常会变大;想要更小的输出请选 JPEG)',
-      'pngLossless': 'PNG(无损)',
-      'reading': '读取中…',
-      'uploadHint': '仅 WebP 图片 (.webp)',
-      'uploadPrompt': '点击上传或拖放',
-      'uploadedWebpSourceAlt': '已上传的 WebP 原图',
-      'webpLabel': 'WebP',
-    },
-    useCases: [
-      '免上传将 WebP 转 PNG',
-      '免费在线 WebP 转 JPG',
-      '把 WebP 图片另存为 PNG',
-      '无损 WebP 转换器',
-    ],
-    faqs: [
-      {
-        q: '把 WebP 转成 PNG 会丢失透明通道吗?',
-        a: '不会。PNG 支持完整的 alpha 透明度且无损,所以带透明的 WebP 会变成带透明的 PNG,没有任何画质损失。当必须把图片交给不支持 WebP 的软件时,PNG 是最安全的格式。',
-      },
-      {
-        q: '把 WebP 转成 JPG 会损失画质吗?',
-        a: 'JPG 始终是有损格式且不支持透明,所以透明区域会被填上背景色,细节会被重新压缩。需要无损或透明效果时请用 PNG;只有在更小的文件比完美画质更重要时才用 JPG。',
-      },
-      {
-        q: '我的图片会被上传到服务器吗?',
-        a: '不会。转换完全在你的浏览器里完成,图片从不离开你的设备。这让私密素材保持私密,也让这个工具可以离线使用。',
-      },
-      {
-        q: '为什么转出来的 PNG 反而比原 WebP 大?',
-        a: 'WebP 原文件通常是有损压缩,而 PNG 无损——把已压缩的像素重新无损保存通常变大(常见 2–5 倍)。想要更小的输出,选 JPEG 并把质量调到 80–85,或保留原 WebP。',
-      },
-    ],
-  },
+
   es: {
     ui: {
       'bgColorLabel': 'Color de fondo (aplana transparencia)',

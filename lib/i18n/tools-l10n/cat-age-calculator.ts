@@ -5,40 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const CatAgeCalculatorL10n: ToolL10n = {
-  zh: {
-    useCases: ['把猫的实际年龄换算成人类等效年龄', '判断猫处于哪个生命阶段(幼猫到超级老年)', '理解为什么 ×7 换算法则对猫不适用', '为新猫评估年龄与照护需求'],
-    faqs: [
-      { q: '猫年龄怎么换算成人类年龄?', a: '第一年约等于人类 15 岁,第二年再加 9 岁(累计 24),之后每年加 4——所以 5 岁的猫大约相当于人类 36 岁。与狗不同,这条曲线基本不随品种体型变化。' },
-      { q: '为什么 ×7 法则对猫是错的?', a: '它会把幼猫算得离谱地年轻(1 岁的猫已完全成熟,×7 只有"7 岁"),又把老年猫算得太老。15/24/+4 曲线才符合猫真实的成熟与衰老节奏。' },
-      { q: '猫几岁算老年?', a: '大约 11 岁(约人类 60 岁)进入老年,15 岁以上算超级老年。室内猫活到 18-20 岁很常见——约人类 88-96 岁。' },
-      { q: '户外猫老得更快吗?', a: '统计上是的——户外猫平均寿命只有 2-5 年(车祸、天敌、疾病),但衰老速度本身没变快,变的是风险。室内散养(有封网阳台)是寿命与丰富度的折中。' },
-    ],
-    ui: {
-      'in.catAge': '猫的年龄',
-      'inSuffix.catAge': '年',
-      'out.humanAge': '人类等效年龄',
-      'out.lifeStage': '生命阶段',
-      'out.nextStage': '下一生命阶段',
-      'out.mythNote': '关于 ×7 法则',
-      'stage.kitten': '幼猫',
-      'stage.youngAdult': '青年成年',
-      'stage.matureAdult': '壮年成年',
-      'stage.senior': '老年',
-      'stage.superSenior': '超级老年',
-      'chartTitle': '生命阶段',
-      'zone.0': '幼猫',
-      'zone.1': '青年成年',
-      'zone.2': '壮年成年',
-      'zone.3': '老年',
-      'zone.4': '超级老年',
-      'unit.humanYears': '人类岁',
-      'nextStageAt': '{stage}(满 {n} 岁)',
-      'stageFinal': '已是最后阶段',
-      'myth': '×7 法则忽略了猫的成熟节奏',
-      'errInvalidAge': '请输入 0-25 岁之间的年龄',
-      'note': '🐱 1 岁的猫约等于人类 15 岁,2 岁对应 24 岁,之后每年加 4——与狗不同,曲线几乎不随品种变化。室内猫普遍能活到 15-20 岁(约人类 76-96 岁)。',
-    },
-  },
+
   es: {
     useCases: ['convertir la edad real de tu gato a años humanos', 'saber en qué etapa vital está (de gatito a súper senior)', 'entender por qué la regla del ×7 falla en gatos', 'estimar edad y cuidados de un gato recién adoptado'],
     faqs: [

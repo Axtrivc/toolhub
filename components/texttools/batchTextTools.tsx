@@ -231,7 +231,7 @@ export function FindReplaceClient() {
   const wordCount = countWords(text)
   const lineCount = text === '' ? 0 : text.split('\n').length
   // zh 每分钟 300 字(5 字/秒)直接得秒数;en 200 wpm 为分钟口径,需 ×60 折成秒
-  const readingSec = Math.round(locale === 'zh' ? charCount / 5 : (wordCount / 200) * 60)
+  const readingSec = Math.round((wordCount / 200) * 60)
   const readingLabel =
     readingSec < 60 ? `${Math.max(readingSec, text ? 1 : 0)}s` : `${Math.floor(readingSec / 60)}m ${readingSec % 60}s`
   const numberLocale = locale === 'en' ? 'en-US' : locale

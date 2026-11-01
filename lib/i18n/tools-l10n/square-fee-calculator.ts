@@ -5,39 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const SquareFeeCalculatorL10n: ToolL10n = {
-  zh: {
-    useCases: ['算一笔拍卡收款实际到手多少钱', '比较拍卡、键入、在线三种费率的差异', '看小票额下固定 15¢ 把实际费率推高了多少', '想让客户实付后净收整数时倒推应收'],
-    faqs: [
-      { q: 'Square 的费率是多少?', a: '拍卡/插卡/扫码为 2.6% + 15¢(固定费 2026 年初从 10¢ 上调);免费档的 Square Online 电商与发票卡支付均为 3.3% + 30¢,付费 Plus/Premium 档在线 2.9% + 30¢;手动键入卡号为 3.5% + 15¢。免费方案无月费。' },
-      { q: '为什么我的实际费率高于 2.6%?', a: '15¢ 固定费在小票额里占比很大:$5 的咖啡光固定费就占 3%,实际费率变成 5.6%。有意义的是全天混合客单的平均费率,不是单笔。' },
-      { q: '怎么把手续费转嫁给客户?', a: '美国不少州限制刷卡附加费,Square 自身也对转嫁方式有要求——常见做法是设现金折扣价。想净收某个数就切到反算模式:应收 =(净额 + 固定费)÷(1 − 费率)。先查你所在州的附加费法规。' },
-      { q: 'Square 收月费吗?', a: '标准方案只按笔收费,没有月费、开通费或 PCI 合规费。可选的付费订阅提供忠诚度计划、团队管理等功能,但基础收单始终是按量付费。' },
-    ],
-    ui: {
-      'in.mode': '模式',
-      'in.amount': '金额',
-      'in.pct': '百分比费率',
-      'in.fixed': '固定手续费',
-      'inSuffix.amount': '$',
-      'inSuffix.pct': '%',
-      'inSuffix.fixed': '$',
-      'out.toCharge': '向客户收取',
-      'out.feeTotal': 'Square 手续费',
-      'out.net': '你的净收入',
-      'out.effective': '实际费率',
-      'opt.mode.forward': '实付 → 净收入',
-      'opt.mode.reverse': '净收目标 → 应收',
-      'preset.0': '到店拍卡/插卡 (2.6% + 15¢)',
-      'preset.1': '在线收款 (3.3% + 30¢)',
-      'preset.2': '手动键入卡号 (3.5% + 15¢)',
-      'preset.3': '在线—付费 Plus 档 (2.9% + 30¢)',
-      'chartTitle': '不同客单价下的实际费率',
-      'line.eff': '实际费率',
-      'errAmount': '请输入有效金额',
-      'errRate': '费率需在 0-100% 之间,固定费不能为负',
-      'note': '📲 Square 美国费率(2026 年起):拍卡/插卡/扫码 2.6% + 15¢(由 10¢ 上调),免费档在线与发票 3.3% + 30¢(Plus/Premium 档 2.9% + 30¢),键入 3.5% + 15¢。固定那几美分在小客单里占比惊人——$5 拍卡的实际费率是 5.6%。免费方案无月费。',
-    },
-  },
+
   es: {
     useCases: ['calcular cuánto te queda de un cobro con tarjeta', 'comparar la tasa de tap, digitación manual y online', 'ver cuánto inflan los 15 ¢ fijos en tickets pequeños', 'averiguar cuánto cobrar para recibir neto una cantidad exacta'],
     faqs: [

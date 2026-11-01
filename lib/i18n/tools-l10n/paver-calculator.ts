@@ -5,40 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const PaverCalculatorL10n: ToolL10n = {
-  zh: {
-    useCases: ['估算庭院或园路的铺石块数', '一次性订齐碎石基料与铺沙', '按块数比较不同铺石尺寸', '为车道垫层做用量预算'],
-    faqs: [
-      { q: '一平方英尺有多少块 4×8 铺石?', a: '4.5 块——所以 16×12 的院子(192 ft²)精确需要 864 块,加 10% 损耗订 951 块。大尺寸掉得快:12×12 每英尺只要 1 块。' },
-      { q: '垫层应该多厚?', a: '庭院与园路用 4 英寸压实碎石;车道要 6-12 英寸。碎石才是结构层——砂永远只做 1 英寸的找平层。' },
-      { q: '为什么铺沙只有 1 英寸?', a: '更厚的砂层存水、受载蠕变、还会出辙。刮平到 1 英寸、铺完砖再把聚合砂扫进缝里。' },
-      { q: '损耗余量重要吗?', a: '重要——边缘切割、破损的角、图案变化都耗砖。10% 覆盖直排铺法;人字纹与斜铺切割更多,要留 15%。' },
-    ],
-    ui: {
-      'in.length': '区域长',
-      'in.width': '区域宽',
-      'in.paver': '铺石尺寸',
-      'in.base': '碎石垫层厚',
-      'in.waste': '损耗余量',
-      'opt.paver.4x8': '4×8',
-      'opt.paver.6x6': '6×6',
-      'opt.paver.8x8': '8×8',
-      'opt.paver.12x12': '12×12',
-      'out.pavers': '需购铺石数',
-      'out.area': '铺装面积',
-      'out.gravelYd': '碎石垫层',
-      'out.sandYd': '铺沙(1 英寸)',
-      'outSub.pavers': '含损耗',
-      'chartTitle': '基层构成体积',
-      'chartCenter': '基层材料',
-      'slice.gravelYd': '碎石垫层',
-      'slice.sandYd': '铺沙层',
-      'errDims': '请输入有效的区域尺寸',
-      'preset.0': '庭院 16×12',
-      'preset.1': '园路 3×20',
-      'preset.2': '车道 24×20 @ 6″ 垫层',
-      'note': '🧱 每平方英尺用量:4×8 约 4.5 块、6×6 = 4、8×8 = 2.25、12×12 = 1。垫层厚度跟着荷载走:庭院园路 4 英寸,车道 6-12 英寸。铺沙固定 1 英寸——更厚的砂床会蠕变、出辙、毁掉平整度。',
-    },
-  },
+
   es: {
     useCases: ['estimar adoquines para un patio o camino', 'pedir a la vez base de grava y arena de asiento', 'comparar tamaños de adoquín por número de piezas', 'presupuestar la base de una entrada'],
     faqs: [

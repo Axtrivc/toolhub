@@ -5,43 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const ProteinIntakeCalculatorL10n: ToolL10n = {
-  zh: {
-    useCases: ['按体重算每日蛋白质需求', '规划增肌期的蛋白质摄入', '设定减脂保肌的高蛋白目标', '把蛋白质目标分摊到每餐'],
-    faqs: [
-      { q: '我到底需要多少蛋白质?', a: '取决于体重和训练量。久坐成年人约 0.8 g/kg 是 RDA 下限,中等运动量适合 1.2-1.6 g/kg,认真的力量或耐力训练会推到 1.6-2.2 g/kg——这里的区间遵循 ISSN 与 ACSM 的立场声明。' },
-      { q: '减脂期要吃更多蛋白质吗?', a: '要。热量缺口下,1.6-2.7 g/kg 有助于保住肌肉并延长饱腹感。选择减脂目标后,计算器会自动把你的个人区间上调到这一档。' },
-      { q: '高蛋白摄入有危险吗?', a: '对健康成人,试验显示每天约 2.8 g/kg 以内的摄入没有危害——肾脏完全能处理。已有肾病的人应先咨询医生;这一提醒只针对他们,不适用于一般人群。' },
-      { q: '一天内怎么分配重要吗?', a: '有一定影响。肌肉蛋白质合成对一天 3-5 次、每次约 0.4 g/kg 以上的摄入反应更好,远胜一次吃一大顿——所以结果里附带了按四餐计算的每餐目标。' },
-    ],
-    ui: {
-      'errInvalid': '请输入有效的体重(kg)',
-      'in.activity': '活动水平',
-      'in.basis': '计算依据',
-      'in.goal': '目标',
-      'in.perMeal': '每餐(4 餐)',
-      'in.range': '每日蛋白质目标',
-      'in.weight': '体重',
-      'inSuffix.weight': 'kg',
-      'note': '🥩 区间依据 ISSN 与 ACSM 立场声明:0.8 g/kg 是久坐成人的 RDA 下限;训练与热量缺口会提高需求。建议分摊到 3-5 餐。',
-      chartTitle: '你的区间在 g/kg 标尺上的位置',
-      'zone.0': '低于你的区间',
-      'zone.1': '你的目标区间',
-      'zone.2': '高于区间',
-      'opt.activity.athlete': '高强度/力量训练',
-      'opt.activity.light': '轻度活动',
-      'opt.activity.moderate': '中度活动',
-      'opt.activity.sedentary': '久坐(几乎不运动)',
-      'opt.goal.gain': '增肌',
-      'opt.goal.lose': '减脂',
-      'opt.goal.maintain': '维持体重',
-      'out.activity': '活动水平',
-      'out.basis': '计算依据',
-      'out.goal': '目标',
-      'out.perMeal': '每餐(4 餐)',
-      'out.range': '每日蛋白质目标',
-      'out.weight': '体重',
-    },
-  },
+
   es: {
     useCases: ['calcular tu proteína diaria según el peso', 'planificar la ingesta en fase de volumen', 'fijar un objetivo alto en proteína al definir', 'repartir el objetivo de proteína entre comidas'],
     faqs: [

@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * DogAgeCalculator 长文正文 —— 四语 dispatcher
+ * DogAgeCalculator 长文正文 —— 三语 dispatcher
  *
- * en 分支与改造前渲染输出一致。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支与改造前渲染输出一致。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -24,19 +24,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>×7 从哪来——又为何失灵</h2>
-    <p>老规则用人类寿命除以狗的寿命得出倍数。它忽略了狗在两年之内就成年:一岁的拉布拉多更接近 15 岁的人类,而不是 7 岁的孩童。</p>
-    <h2>体型改变曲线</h2>
-    <p>两岁之后,小型犬每狗年约增加 4 人岁,中型犬 5,巨型犬 6.5+。尽管日历年龄相同,大丹犬比吉娃娃早好几年进入老年。</p>
-    <h2>需要提前规划的生命阶段</h2>
-    <p>幼犬(1 岁以下)、少年(1-2 岁)、壮年(2-7 岁,因体型而异)、中年、老年。进入老年段后,兽医筛查频率应该提高——血液检查从两年一次改为一年一次。</p>
-    <h2>比任何图表都管用</h2>
-    <p>体况比生日更有说服力:同龄的狗里,喂得精瘦、运动充足的那只在生物学上更年轻。控制体重、做好牙齿护理——这两件事比别的任何办法都更能拉低狗的"人类年龄"。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -66,7 +53,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function DogAgeCalculatorContent(): ReactNode {
   const { locale } = useApp()

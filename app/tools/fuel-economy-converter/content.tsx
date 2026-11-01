@@ -44,38 +44,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具?</h2>
-    <p>
-      本工具在油耗单位之间换算:<strong>MPG</strong>(英里/加仑,含美制和英制)、<strong>L/100km</strong>(升/百公里)和 <strong>km/L</strong>(公里/升)——即「距离/体积」与「体积/距离」这两大衡量车辆燃油效率的主流口径。
-    </p>
-    <div>
-      <h2>反向关系</h2>
-      <p>
-        MPG 和 L/100km 的方向正好相反。MPG 越高越好(每加仑跑的英里更多);L/100km 越低越好(同样距离耗油更少)。这就是为什么两者换算不是简单的乘法——而是倒数关系。
-      </p>
-    </div>
-    <div>
-      <h2>近似换算</h2>
-      <ul>
-        <li>30 MPG(US)≈ 7.8 L/100km</li>
-        <li>40 MPG(US)≈ 5.9 L/100km</li>
-        <li>50 MPG(US)≈ 4.7 L/100km</li>
-        <li>10 L/100km ≈ 23.5 MPG(US)</li>
-        <li>6 L/100km ≈ 39 MPG(US)</li>
-        <li>30 MPG(US)≈ 12.8 km/L</li>
-      </ul>
-    </div>
-    <div>
-      <h2>为什么美制和英制 MPG 不同</h2>
-      <p>
-        美制加仑(3.785 升)比英制帝国加仑(4.546 升)小,因此相同效率下英制 MPG 数值大约高出 20%。比较前务必确认数据来源用的是哪种加仑。
-      </p>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -159,7 +127,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function FuelEconomyConverterContent(): ReactNode {
   const { locale } = useApp()

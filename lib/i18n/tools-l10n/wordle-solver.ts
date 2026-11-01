@@ -5,64 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const wordleSolverL10n: ToolL10n = {
-  zh: {
-    ui: {
-      'anagramEmpty': '输入至少 3 个字母即可查找可拼出的词。',
-      'anagramHint': '找出仅用这些字母就能拼出的词典词(词长不超过你输入的字母数)。',
-      'anagramLabel': '可用字母(3–10)',
-      'anagramMode': '易位构词模式',
-      'anagramNoMatch': '没有词能由这些字母拼出。试着加更多字母,或在下方粘贴额外词汇。',
-      'anagramPlaceholder': '如 least',
-      'clear': '清空',
-      'clickAnyWordToCopy': '点击任意词即可复制',
-      'clickToCopy': '点击复制',
-      'commonFirst': '最常见优先',
-      'extraWordsLabel': '额外词汇(可选——每行一个或用空格分隔,会并入本次会话的词典)',
-      'foundClickToCopy': '——点击任意词即可复制',
-      'inDictionary': '词典共 {n} 词',
-      'knownPositions': '已知位置(绿色)',
-      'letterPosition': '第 {n} 位的字母',
-      'matchingWordPlural': '个匹配词',
-      'matchingWordSingular': '个匹配词',
-      'more': '更多',
-      'mustContain': '必须包含(黄色)',
-      'mustNotContain': '不能包含(灰色)',
-      'mustPlaceholder': '如 ar',
-      'notPlaceholder': '如 xyz',
-      'privacyIntro': '🔒 100% 在客户端——一个 ',
-      'privacyOutro': ' 词的词典随页面打包;不联网查询。',
-      'solverEmpty': '在上方输入至少一个约束——一个绿色位置、必须包含的字母或要排除的字母——匹配的词会显示在这里。',
-      'solverMode': 'Wordle 求解器',
-      'solverNoMatch': '没有词匹配这些约束。请检查灰色字母是否又被标成了绿色或黄色。',
-      'summaryConstraints': '必含 {m}|排除 {x}|绿位 {g}',
-      'wordPlural': '个词',
-      'wordSingular': '个词',
-    },
-    useCases: [
-      '按字母位置的 Wordle 求解器',
-      'Wordle 五字母单词查找器',
-      'Wordle 绿黄灰提示助手',
-      '文字游戏易位构词查找器',
-    ],
-    faqs: [
-      {
-        q: '它用的是官方的 Wordle 答案表吗?',
-        a: '它用一个很大的内置英文词表,覆盖 Wordle 风格的五字母答案,所以给出的建议与游戏接受的词汇类型相符。它是很强的解题辅助,但没有任何第三方词表能保证在未来的每一天都与游戏完全一致。',
-      },
-      {
-        q: '绿、黄、灰提示怎么对应到输入框?',
-        a: '绿色(位置正确)的字母填进「已知位置」字段;黄色(在词中但位置不对)填进「必须包含」框;灰色(不在词中)填进「不能包含」。求解器会用这三类约束同时过滤词典,缩小候选范围。',
-      },
-      {
-        q: '支持易位构词和模式求解吗?',
-        a: '支持。除了标准的提示过滤,它还能匹配易位构词模式和已知字母位置,当你有打乱的字母或部分信息、想找出所有符合条件的词典单词时很有帮助。',
-      },
-      {
-        q: '为什么不建议直接抄第一个候选词?',
-        a: '列表默认把最常见词排在前面(同档内按字母序),但 Wordle 的博弈价值不完全等于词频:候选剩好几个时,先试一个含未测高频字母的词(哪怕不是候选)常常更快锁定答案。把求解器当过滤引擎,而不是答案生成器。',
-      },
-    ],
-  },
+
   es: {
     ui: {
       'anagramEmpty': 'Escribe al menos 3 letras para encontrar palabras que puedas formar.',

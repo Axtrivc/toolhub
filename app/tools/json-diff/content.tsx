@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * JSON Diff 长文正文 —— 四语 dispatcher
+ * JSON Diff 长文正文 —— 三语 dispatcher
  *
- * en 分支与改造前渲染输出一致。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支与改造前渲染输出一致。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en (与改造前渲染输出一致) ────────────────────────────
@@ -24,19 +24,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>为什么要做结构化比对?</h2>
-    <p>两个 JSON 对象可能数据完全相同、只是键的顺序不同。纯文本比对会把每一行都标成改动;本工具会解析两份文档并按结构比较,因此只有真正的差异会显示出来。</p>
-    <h2>数组怎么比较</h2>
-    <p>对象的键顺序无关紧要,但数组的顺序有关:<code>[&quot;a&quot;,&quot;b&quot;]</code> 和 <code>[&quot;b&quot;,&quot;a&quot;]</code> 会被视为已更改。这与大多数应用消费 JSON 的方式一致。</p>
-    <h2>如何读懂输出</h2>
-    <p>每一行用点号路径标出差异的确切位置(<code>user.address.city</code>)。绿色表示新增,红色表示删除,琥珀色以「旧值 → 新值」展示值变化。</p>
-    <h2>隐私</h2>
-    <p>两份文档都在你的浏览器里解析,不上传任何内容,因此即使是含令牌或个人数据的 API 响应也可以放心比对。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -66,7 +53,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function JsonDiffContent(): ReactNode {
   const { locale } = useApp()

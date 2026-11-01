@@ -5,24 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const XmlFormatterL10n: ToolL10n = {
-  zh: {
-    useCases: ['格式化压缩成一行的 XML', '校验 XML 是否格式正确', '把杂乱的配置文件整理可读', '压缩 XML 减小体积'],
-    faqs: [
-      { q: '能校验 XML 吗?', a: '能——解析走浏览器自带的 DOMParser,格式错误会直接给出 parsererror 的原始报错信息。只有解析完全通过才会格式化,所以输出永远是良构的 XML。' },
-      { q: '标签之间的空白怎么处理?', a: '美化时,元素之间只含空白的文本节点会被丢弃,整棵树从头重新缩进——漂亮的输出不依赖输入原本的排布。元素内部的文本内容则原样保留。' },
-      { q: '也能压缩吗?', a: '能——"压缩"会把解析后的 DOM 重新序列化,不加任何空白。因为经过了真实解析器往返,结果是规范化 XML,而不只是把输入的换行删掉。' },
-      { q: '支持命名空间吗?', a: '支持,因为浏览器 XML 引擎本身就能感知命名空间:xmlns 声明和带前缀的元素都按符合规范的方式解析,报错也与规范一致——全程没有正则式的偷懒处理。' },
-    ],
-    ui: {
-      'beautify': '美化',
-      'indentLabel': '缩进',
-      'inputLabel': '你的 XML',
-      'loadSample': '加载示例',
-      'minify': '压缩',
-      'note': '📄 解析使用浏览器自带 XML 引擎——支持命名空间、符合规范。美化时元素间的纯空白文本会被丢弃。',
-      'outputLabel': '结果',
-    },
-  },
+
   es: {
     useCases: ['formatear XML comprimido en una línea', 'validar si un XML está bien formado', 'ordenar archivos de configuración ilegibles', 'minificar XML para reducir su tamaño'],
     faqs: [

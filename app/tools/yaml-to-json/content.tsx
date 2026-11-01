@@ -64,50 +64,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具?</h2>
-    <p>
-      <strong>YAML</strong>(YAML Ain't Markup Language)是一种对人类友好的配置格式,被 Docker Compose、Kubernetes、GitHub Actions、Ansible 以及许多 CI 工具使用。{' '}
-      <strong>JSON</strong> 是每个 API 都在使用的通用数据交换格式。当需要把配置喂给只接受 JSON 的工具时,YAML 转 JSON 是常见需求——而且 YAML 的缩进规则很容易让人手工出错。本工具在本地解析 YAML,并输出干净的 JSON。
-    </p>
-    <div>
-      <h2>本解析器支持什么</h2>
-      <ul>
-        <li>
-          <strong>映射与序列</strong> —— 嵌套的键值对和列表({`- item`})。
-        </li>
-        <li>
-          <strong>内联流</strong> —— 用 <code>[a, b]</code> 表示数组,用{' '}
-          <code>{`{key: value}`}</code> 表示对象。
-        </li>
-        <li>
-          <strong>标量</strong> —— 字符串(带引号的和纯文本的)、数字、布尔值(<code>true</code> /<code>false</code>),以及 <code>null</code>(也可以是 <code>~</code>)。
-        </li>
-        <li>
-          <strong>注释</strong> —— 空格后的 <code>#</code>(引号外)开始一段注释,该行其余内容会被忽略。
-        </li>
-        <li>
-          <strong>块标量</strong> —— <code>|</code>(字面量)和 <code>&gt;</code>(折叠)。
-        </li>
-      </ul>
-    </div>
-    <div>
-      <h2>为什么 YAML 解析很棘手</h2>
-      <p>
-        与 JSON 不同,YAML 对 <strong>缩进敏感</strong> —— 用两个空格还是四个空格,得到的结构完全不同。缩进禁止使用制表符(只能用空格)。纯标量还会被隐式推断类型:<code>yes</code>、<code>no</code>、<code>on</code> 和{' '}
-        <code>off</code> 在旧版 YAML 1.1 解析器中会变成布尔值,这是一个著名的 bug 来源(即「Norway problem」,<code>NO</code> 被解释成了 <code>false</code>)。如果需要把它们当作字符串,请加上引号。
-      </p>
-    </div>
-    <div>
-      <h2>当转换失败时</h2>
-      <p>
-        最常见的原因是缩进不一致——混合使用 2 空格和 4 空格,或者复制粘贴时混入了制表符。错误信息会指向出错的那一行。此外还要留意同一个映射中是否有重复键:虽然有些 YAML 库会静默覆盖,但本解析器会将其报告为错误,因为重复键几乎总是意味着真实的错误。
-      </p>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -201,7 +157,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function YamlToJsonContent(): ReactNode {
   const { locale } = useApp()

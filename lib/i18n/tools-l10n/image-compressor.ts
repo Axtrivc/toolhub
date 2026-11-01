@@ -5,35 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const ImageCompressorL10n: ToolL10n = {
-  zh: {
-    useCases: ['把照片压到能发邮件/上传附件的大小', 'JPG 转 WebP 进一步省 25-35% 体积', '在质量滑杆上找肉眼无差的最小体积', '给网页 hero 图减负提速'],
-    faqs: [
-      { q: '压缩会改变尺寸吗?', a: '不会——像素按原始宽高重绘,变的只是有损编码(JPEG/WebP 质量)。要缩小分辨率请用图片缩放工具。' },
-      { q: '质量选多少合适?', a: '70-85 是通常的甜蜜点,伪影肉眼不可见;90 以上几乎不再减小体积。同质量下 WebP 通常比 JPEG 再小 25-35%。' },
-      { q: '为什么我的文件反而变大了?', a: '对已优化过的 JPEG 用高质量重编码、或把小 PNG 转成 JPEG,都可能膨胀——降低质量、换 WebP,或保留原图。' },
-      { q: '照片会被上传吗?', a: '不会——解码和重编码都在浏览器本地 canvas 里完成,什么都不离开本页,下载链接指向本地 blob。' },
-    ],
-    ui: {
-      'uploadPrompt': '点击上传或拖拽到此处',
-      'uploadHint': 'PNG、JPG 或 WebP——绝不上传',
-      'sourceAlt': '已上传的原图',
-      'change': '更换',
-      'outputFormat': '输出格式',
-      'qualityLabel': '质量 —',
-      'compressedAlt': '压缩后预览',
-      'smaller': '更小',
-      'larger': '更大——调低质量或改用 WebP',
-      'download': '下载',
-      'errUploadImage': '请上传图片文件(PNG、JPG 或 WebP)。',
-      'errFileTooLarge': '文件太大({size})。最大支持 20 MB。',
-      'errReadFile': '无法读取该文件。',
-      'errDecodeImage': '无法解码该图片文件。',
-      'errTooLarge': '这张图太大,浏览器内无法重编码——请保持单边 ≤8192 px、总像素 <4000 万。',
-      'errEncodeFailed': '编码失败——浏览器无法生成图片。换个质量试试。',
-      'errWebpUnsupported': '你的浏览器不支持编码 WebP。请用新版 Chrome、Edge、Firefox 或 Safari 14+,或改选 JPEG 输出。',
-      'note': '🔒 100% 客户端:图片在浏览器 canvas 里按原始分辨率解码并重编码——不上传任何数据。显示的输出体积是 canvas.toBlob 实测的真实文件,不是估算。70-85 质量通常是最佳区间;同质量下 WebP 比 JPEG 小 25-35%。',
-    },
-  },
+
   es: {
     useCases: ['reducir fotos al tamaño de un adjunto o subida', 'convertir JPG a WebP y ahorrar otro 25-35 %', 'encontrar el mínimo tamaño sin pérdida visible', 'aligerar la imagen principal de una web'],
     faqs: [

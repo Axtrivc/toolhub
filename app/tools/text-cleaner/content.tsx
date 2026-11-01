@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * Text Cleaner 长文正文 —— 四语 dispatcher
+ * Text Cleaner 长文正文 —— 三语 dispatcher
  *
- * en 分支等价于原 ToolContent 渲染输出。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支等价于原 ToolContent 渲染输出。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en (与改造前渲染输出一致) ────────────────────────────
@@ -59,36 +59,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具？</h2>
-    <p>
-      一个 <strong>深度文本清理器</strong>，把粘贴进来的文字清洗成你真正想保留的样子：去除 emoji 与图形符号、移除重音与变音符号、删除特殊字符、剔除 URL 与 HTML 标签、合并多余空白、删除空行，以及全部转为小写。在你清洗复制的网页内容、为导入准备数据，或规范化用户生成内容时格外好用。所有处理 100% 在浏览器中完成——文本绝不外发。
-    </p>
-
-    <div>
-      <h2>每个清理项都是独立开关</h2>
-      <p>
-        除非你主动要求，否则什么都不会发生。只勾选你需要的操作——你打字或切换开关时输出会实时更新。<strong>移除特殊字符</strong> 选项会保留字母、数字和空格，以及你填入 <em>要保留的字符</em> 字段的内容（默认为 <code>.,!?-&apos;&quot;</code>），这样你在意的标点得以保留，而 ™、© 等多余符号则被清除。重音移除使用 Unicode 规范化（<code>NFD</code>）把 <code>é</code> 拆成 <code>e</code> + 重音，再剥除重音——于是 <em>café</em> 干净地变成 <em>cafe</em>。
-      </p>
-    </div>
-
-    <div>
-      <h2>操作顺序很重要</h2>
-      <p>
-        处理流水线按精心设计的顺序运行：HTML 标签和 URL 会在特殊字符剥离之 <em>前</em> 先被移除——否则 URL 会先被切成碎片，让网址清理规则无从识别。重音折叠同样在特殊字符剥离之前进行，于是带重音的字母会变成普通 ASCII，而不是被直接删除。空白操作（合并空格、修剪行、删除空行）放在最后，把前面步骤留下的杂乱一并收拾干净。清洗前后的字符数对比会准确显示移除了多少。
-      </p>
-    </div>
-
-    <div>
-      <h2>技巧与陷阱</h2>
-      <p>
-        emoji 剥离也会移除装饰符号和符号区段，例如 ✓ 和 ❤——这是有意为之，但如果你的对勾很重要，就值得注意。全部转小写会作用于整段文本，所以当大小写承载含义时（缩写、用于出版的句首大写）并不适用。如果你需要保留特定符号——比如用作标题的 <code>#</code> 或用作提及的 <code>@</code>——只要把它们加进保留列表即可。拿不准时，一次只开一个清理项，并留意实时预览。
-      </p>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -152,7 +122,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function TextCleanerContent(): ReactNode {
   const { locale } = useApp()

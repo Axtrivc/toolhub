@@ -7,53 +7,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const bodyFatCalculatorL10n: ToolL10n = {
-  zh: {
-    formula: {
-      formula: 'BF% (US Navy) from height, neck, waist (and hip for women)',
-      explain: '美国海军法用身高、颈围、腰围(女性加臀围)估算体脂率。方便免费,但不如 DEXA 或水下称重等临床方法精确。',
-    },
-    ui: {
-      errWaist: '腰围必须大于颈围',
-      errInvalid: '测量值无效',
-      catEssential: '必需脂肪', catAthlete: '运动员', catFitness: '健康体型', catAverage: '平均水平', catHigh: '偏高',
-      gaugeTitle: '你的落点',
-      metric: '公制 (cm / kg)',
-      imperial: '英制 (ft/in / lb)',
-      method: '方法',
-      methodNavy: '海军法(皮尺)',
-      methodBmi: 'BMI 法(Deurenberg)',
-      gender: '性别',
-      optMale: '男',
-      optFemale: '女',
-      height: '身高',
-      heightFt: '身高(英尺)',
-      heightIn: '身高(英寸)',
-      neck: '颈围',
-      waist: '腰围',
-      hip: '臀围(仅女性)',
-      weight: '体重',
-      age: '年龄',
-      yrsSuffix: '岁',
-      outBodyfat: '体脂率',
-      outCategory: '类别',
-      subNavy: '美国海军法',
-      subDeurenberg: 'Deurenberg 公式',
-      emptyState: '输入测量数据即可估算你的体脂率',
-      note: '⚖️ 美国海军法用皮尺围度估算体脂率;BMI 法(Deurenberg 公式)基于 BMI、年龄和性别估算。两者都不如 DEXA 扫描精确,但适合居家估算。',
-    },
-    useCases: [
-      '在家用皮尺估算体脂率',
-      '区分肌肉与脂肪(BMI 做不到)',
-      '追踪健身或减脂期间的身体成分变化',
-      '了解自己的体脂属于哪个区间',
-    ],
-    faqs: [
-      { q: '美国海军法准吗?', a: '与 DEXA 扫描相比,误差约为 ±3–4 %。对接近平均体型的人最准。对非常精瘦或肌肉发达的人,皮褶钳、DEXA、水下称重等方法更准确。' },
-      { q: '男女的健康体脂范围各是多少?', a: 'ACE 参考:必需脂肪男性 2–5 %、女性 10–13 %;运动员 6–13 % 与 14–20 %;健康体型 14–17 % 与 21–24 %。女性必需脂肪天然更高,拿男性标准套自己是错的。' },
-      { q: '怎么测量误差最小?', a: '固定条件:早晨起床、排空膀胱、未训练时量。皮尺贴皮肤不勒紧,颈围在喉结下方,腰围在肚脐水平(女性另加最大臀围);同一部位量三次取中位数。' },
-      { q: '和健身房的 InBody 比哪个准?', a: '生物电阻抗(InBody 等)误差同样在 ±3–4 %,且对饮水、进食敏感。皮尺法的优势是可复现:同样手法每天量,趋势一致——减脂看趋势,别纠结单次绝对值。' },
-    ],
-  },
+
   es: {
     formula: {
       formula: 'BF% (US Navy) from height, neck, waist (and hip for women)',

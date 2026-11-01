@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * CarLeaseCalculator 长文正文 —— 四语 dispatcher
+ * CarLeaseCalculator 长文正文 —— 三语 dispatcher
  *
- * en 分支与 SSR 渲染输出一致。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支与 SSR 渲染输出一致。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -24,19 +24,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>月供是一个数字,两种费用</h2>
-    <p>折旧部分覆盖车子贬掉的价值:(调整后资本成本 − 残值)÷ 月数。租金部分则是 money factor 乘以(调整后资本成本 + 残值)——注意是加号:你为一整辆车融资,而不只是消耗掉的那部分。典型的 36 期租约里,月供约四分之三是折旧、四分之一是租金。</p>
-    <h2>money factor:伪装起来的 APR</h2>
-    <p>经销商用 0.00225 这样的小数报价利率。乘 2400 就是熟悉的 APR——这里是 5.4%。这张换算表是谈价时最快的 sanity check:0.004 的 money factor 就是 9.6% 的 APR,该皱的眉头一点不能少。</p>
-    <h2>月供的"注水"藏在哪里</h2>
-    <p>收购费、文件费以及其他一切被资本化的费用都计入调整后资本成本,悄悄抬高月供。租约里真正可谈的是成交价——残值与 money factor 由租赁公司给定。像买车一样先把车价谈下来,再让结构发挥作用。</p>
-    <h2>期末买断很少在算术上获胜</h2>
-    <p>全部租金加残值买断,几乎总是高于一开始直接买下同款车的成本——本工具把两个数字并排列出。期末买断合理的情形是:残值低于市场价、车况知根知底、或者你愿意为省去看车跑腿付点溢价——而不是因为数学站在它那边。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -66,7 +53,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function CarLeaseCalculatorContent(): ReactNode {
   const { locale } = useApp()

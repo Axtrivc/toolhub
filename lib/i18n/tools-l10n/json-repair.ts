@@ -5,39 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const JsonRepairL10n: ToolL10n = {
-  zh: {
-    useCases: [
-      '修复 LLM 输出在对象中途被 max tokens 截断的 JSON',
-      '剥掉模型回复外层的 Markdown 代码围栏再喂给解析器',
-      '清理带尾逗号、单引号或无引号键的自动生成配置',
-      '排查智能引号、NaN 字面量导致的解析失败',
-    ],
-    faqs: [
-      { q: '它能修哪几类坏 JSON?', a: 'LLM 的经典翻车模式:输出截断(未闭合的对象/数组/字符串)、尾逗号、单引号或无引号键、包裹正文的 Markdown 代码围栏、智能引号、NaN/Infinity 字面量以及裸控制字符。每处修复都会记录下来,方便审计。' },
-      { q: '修复会产出错误的数据吗?', a: '有可能——修复是尽力推断,不是魔法。截断的字符串可能在猜测的边界被闭合,无引号键按字面处理。务必查看修复日志,并在喂给生产代码前做语义校验。' },
-      { q: 'LLM 为什么会输出非法 JSON?', a: '采样机制使然:模型逐 token 生成文本,可能在对象中途撞上 max tokens 停下,或偏离 JSON 指令。根治靠供应商的结构化输出/JSON 模式,再配一层修复作为兜底。' },
-      { q: '有大小限制或隐私顾虑吗?', a: '修复完全在浏览器本地运行,内容不上传,机密数据不出机器。实际限制是浏览器内存:几十 MB 量级的负载处理起来没问题。' },
-    ],
-    ui: {
-      'appliedAnyway': '失败前尝试过的修复：',
-      'copyJson': '复制 JSON',
-      'inputLabel': '损坏的 JSON',
-      'loadSample': '加载示例',
-      'logBareKeys': '给裸键补上了双引号',
-      'logClosed': '补全了截断的括号/字符串',
-      'logControlChars': '移除了控制字符',
-      'logFence': '剥离了 Markdown 代码围栏',
-      'logSingleQuotes': '单引号字符串转成了双引号',
-      'logSmartQuotes': '智能引号转成了直引号',
-      'logTrailingCommas': '移除了尾逗号',
-      'logTrimmed': '截去了最外层 { } 或 [ ] 之外的正文',
-      'note': '覆盖 LLM 经典翻车模式：markdown 围栏、尾逗号、单引号、裸键、智能引号、token 上限导致的截断。深度畸形输入会带解析器位置大声报错，而不是瞎猜。',
-      'repairsApplied': '已应用的修复',
-      'stillBroken': '修复后仍无法解析——下方错误指出位置：',
-      'validJson': '有效的 JSON',
-      'inputTooLarge': '输入超过 {n} 字符——为保证输入流畅已跳过修复。请精简或拆分后再试。',
-    },
-  },
+
   es: {
     useCases: [
       'rescatar JSON truncado cuando la respuesta del LLM corta a mitad de objeto',

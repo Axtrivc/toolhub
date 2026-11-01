@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * Grade Calculator 长文正文 —— 四语 dispatcher
+ * Grade Calculator 长文正文 —— 三语 dispatcher
  *
- * en 分支等价于原 ToolContent 渲染输出。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支等价于原 ToolContent 渲染输出。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en (与改造前渲染输出一致) ────────────────────────────
@@ -29,24 +29,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具?</h2>
-    <p>把得分点数换算成百分比和字母等级。采用标准美国字母等级制(A-F)。</p>
-
-    <div>
-      <h2>标准字母等级</h2>
-      <ul>
-        <li>A:90-100%</li>
-        <li>B:80-89%</li>
-        <li>C:70-79%</li>
-        <li>D:60-69%</li>
-        <li>F:60% 以下</li>
-      </ul>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -86,7 +68,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function GradeCalculatorContent(): ReactNode {
   const { locale } = useApp()

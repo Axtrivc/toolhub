@@ -71,7 +71,7 @@ function discoverRoutes() {
 let routes = discoverRoutes()
 if (ONLY) routes = routes.filter((r) => r.includes(ONLY))
 if (LIMIT > 0) routes = routes.slice(0, LIMIT)
-console.log(`审计 ${routes.length} 个路由 @ ${WIDTH}×${HEIGHT}  base=${BASE}`)
+console.log(`Auditing ${routes.length} routes @ ${WIDTH}×${HEIGHT}  base=${BASE}`)
 
 // ---------- 浏览器 ----------
 const CHROME_CANDIDATES = [
@@ -80,7 +80,7 @@ const CHROME_CANDIDATES = [
 ]
 const exe = CHROME_CANDIDATES.find((p) => fs.existsSync(p))
 if (!exe) {
-  console.error('未找到系统 Chrome/Edge')
+  console.error('No system Chrome/Edge found')
   process.exit(1)
 }
 
@@ -248,7 +248,7 @@ async function worker() {
     done++
     const hasOverflow = r.issues?.overflow || r.issues?.outOfView?.length
     if (done % 25 === 0 || hasOverflow || r.error)
-      console.log(`[${done}/${routes.length}] ${r.route} ${r.error ? 'ERR' : hasOverflow ? '⚠️ 溢出' : 'ok'}`)
+      console.log(`[${done}/${routes.length}] ${r.route} ${r.error ? 'ERR' : hasOverflow ? '⚠️ overflow' : 'ok'}`)
   }
 }
 await Promise.all(Array.from({ length: CONCURRENCY }, worker))
@@ -285,12 +285,12 @@ const report = {
 fs.mkdirSync(path.dirname(path.resolve(OUT)), { recursive: true })
 fs.writeFileSync(OUT, JSON.stringify(report, null, 1))
 
-console.log('\n════════ 审计摘要 ════════')
-console.log(`页面总数: ${final.length}(错误 ${errors.length})`)
-console.log(`横向溢出: ${withOverflow.length} 页`)
-console.log(`越界元素(无页面级溢出): ${withOutOfView.length} 页`)
-console.log(`小触控目标: ${withSmallTargets.length} 页`)
-console.log(`小字号(<11px): ${withTinyText.length} 页`)
-console.log('\n高频越界元素类名:')
+console.log('\n════════ AUDIT SUMMARY ════════')
+console.log(`Pages: ${final.length} (errors: ${errors.length})`)
+console.log(`Horizontal overflow: ${withOverflow.length} pages`)
+console.log(`Out-of-view elements (no page-level overflow): ${withOutOfView.length} pages`)
+console.log(`Small touch targets: ${withSmallTargets.length} pages`)
+console.log(`Text below 11px: ${withTinyText.length} pages`)
+console.log('\nMost frequent out-of-view element class names:')
 for (const [k, v] of Object.entries(report.classHistogram)) console.log(`  ${v}×  ${k}`)
-console.log(`\n完整报告: ${OUT}`)
+console.log(`\nFull report: ${OUT}`)

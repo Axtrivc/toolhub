@@ -5,7 +5,7 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * BpmTapCounter 长文正文 —— 四语 dispatcher
+ * BpmTapCounter 长文正文 —— 三语 dispatcher
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -22,19 +22,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>单次点按不构成速度</h2>
-    <p>只按一下读不出任何东西——速度藏在点按的间隔里。本计数器对最近八次间隔取均值,每次新点按都会轻微推动读数,开头的乱拍会滑出窗口。一直点到数字不再动为止;这种收敛比任何一次单独读数都可信。</p>
-    <h2>按你会点头的那拍</h2>
-    <p>最经典的失败是按错细分:half-time 曲目里你感受到的是八分音,读数就翻倍。按你会跟着点头的那拍——四分音符。如果结果仍是曲感的两倍或一半,就有意识地调整:half-time drop 这类流派手法确实会把体感速度砍半。</p>
-    <h2>一致性指示的含义</h2>
-    <p>它显示的是间隔的变异系数——离散度相对均值的比例。低于 2% 是机器级稳定,低于 5% 就足够可信。节奏稳的歌却显示高离散,通常问题在手指不在音乐——重新点一组。rubato 曲目上数字会诚实摆动,把它当均值,别当定律。</p>
-    <h2>拿到 BPM 之后做什么</h2>
-    <p>用它设置延迟踏板(延迟时间计算器能把 BPM 换成毫秒)、给 DJ 曲库打标让和声匹配的混合在速度上也兼容、或记录排练速度看乐队一周周的漂移。当曲目自己不报 BPM 时,点按计数器就是速度的来源。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -64,7 +51,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function BpmTapCounterContent(): ReactNode {
   const { locale } = useApp()

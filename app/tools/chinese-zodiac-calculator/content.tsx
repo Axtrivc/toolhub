@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * ChineseZodiacCalculator 长文正文 —— 四语 dispatcher
+ * ChineseZodiacCalculator 长文正文 —— 三语 dispatcher
  *
- * en 分支与站点既有渲染口径一致。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支与站点既有渲染口径一致。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -24,19 +24,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>立春是最容易被忽略的那条线</h2>
-    <p>传统上生肖年在立春——二十四节气之首,落在 2 月 3-5 日——切换,而不是元旦。大约每 12 个人中就有 1 个生于 1 月或 2 月上旬、实际属上一年生肖却毫不知情。民俗口径则从农历新年起算(在 1 月 21 日-2 月 20 日之间浮动);八字命理与多数公开的年柱资料用立春,本工具亦然,并让你显式选择"1-2 月生日"的情形。</p>
-    <h2>生肖、五行、阴阳:60 年的机器</h2>
-    <p>十二生肖逐年轮换,十天干把五行各分阴阳两版:阳木鼠(1984)、阴木牛(1985)、阳火虎(1986)……整个组合 60 年才重复一轮——2026 是阳火马(丙午),下一个阳火马要等到 2086 年。你的"本命年"(所属生肖每 12 年重现一次)传统上是穿红、行事谨慎的一年,不是"中大奖"之年。</p>
-    <h2>1924-2031 速查表</h2>
-    <p>鼠 1924 · 牛 1925 · 虎 1926 · 兔 1927 · 龙 1928 · 蛇 1929 · 马 1930 · 羊 1931 · 猴 1932 · 鸡 1933 · 狗 1934 · 猪 1935——此后每 12 年轮回一次:龙年为 1928、1940、1952、1964、1976、1988、2000、2012、2024;马年为 1930、1942、1954、1966、1978、1990、2002、2014、2026。记住:2 月生日先对照立春。</p>
-    <h2>三合六冲之说,配该配的盐</h2>
-    <p>民俗把十二生肖分成三合组(猴鼠龙、蛇鸡牛、虎马狗、兔羊猪)与六个相冲(鼠马、牛羊、虎猴、兔鸡、龙狗、蛇猪)。它是一套有趣的社会剧本,没有任何预测记录——各种配对的婚姻幸福率并无系统差异。属相照看,五行照聊,但别把什么事都怪到羊头上。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -66,7 +53,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function ChineseZodiacCalculatorContent(): ReactNode {
   const { locale } = useApp()

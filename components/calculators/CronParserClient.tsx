@@ -162,7 +162,7 @@ export function CronParserClient() {
               )}
               {now && result.reboot && (
                 <li className="text-sm" style={{ color: 'rgb(var(--text-muted))' }}>
-                  {/* @reboot:启动时执行一次,无触发时刻可预览;描述已四语本地化(atReboot) */}
+                  {/* @reboot:启动时执行一次,无触发时刻可预览;描述已三语本地化(atReboot) */}
                   {result.description}
                 </li>
               )}

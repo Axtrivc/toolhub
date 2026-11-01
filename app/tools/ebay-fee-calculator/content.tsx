@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * eBay Fee Calculator 长文正文 —— 四语 dispatcher
+ * eBay Fee Calculator 长文正文 —— 三语 dispatcher
  *
- * en 分支等价于原 ToolContent 渲染输出。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支等价于原 ToolContent 渲染输出。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en (与改造前渲染输出一致) ────────────────────────────
@@ -58,40 +58,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具？</h2>
-    <p>
-      这个<strong>卖家手续费计算器</strong>展示 eBay 或 Etsy 实际从一笔销售中抽走多少——以及你留下多少。输入你的成交价、运费和成本，即可看到总手续费、净到账、净利润、利润率，以及盈亏平衡价。所有计算都在你的浏览器本地完成；任何销售数据都不会被上传。
-    </p>
-
-    <div>
-      <h2>手续费是如何计算的</h2>
-      <p>
-        两个平台都按<strong>销售总额</strong>的一定比例收费——即商品价格{' '}
-        <em>加上</em>向买家收取的运费。对 eBay 而言，这意味着成交费（<code>13.6%</code>，适用于大多数类目），加上每笔订单 <code>$0.40</code> 的费用（$10 及以下的订单为{' '}
-        <code>$0.30</code>），以及如果你投放广告时可选的 Promoted Listings 广告费率。对 Etsy 而言，则是一笔 <code>$0.20</code> 的上架费、一笔{' '}
-        <code>6.5%</code> 的交易费，以及支付处理费（美国预设：<code>3% + $0.25</code>）。通过「高级」开关，当你的类目或地区费率不同时，可以手动覆盖该百分比。
-      </p>
-    </div>
-
-    <div>
-      <h2>如何解读各项结果</h2>
-      <p>
-        <strong>净到账</strong>是销售总额减去平台手续费——真正进入你账户的钱。{' '}
-        <strong>净利润</strong>从到账额里再扣掉你的商品成本和真实运费；如果它变成负数，说明你在倒贴钱卖东西。<strong>盈亏平衡价</strong>反向求解手续费公式，找到能覆盖所有成本的最低价格——在决定是否接受报价或搞折扣时，把它当作底线。
-      </p>
-    </div>
-
-    <div>
-      <h2>给卖家的定价建议</h2>
-      <p>
-        「包邮」从来都不是免费的：因为手续费会作用在你收取的运费上，把运费并入商品价格对手续费没有任何影响，但可能改善搜索排名。留意广告费率——一场 10% 的 Promoted Listings 推广可能悄悄让你的实际手续费翻倍。另外请记住，这些都是 2026 年时的近似值：店铺订阅、顶尖卖家折扣、国际销售以及类目专属费率都会改变计算结果，因此在敲定价格前，请对照平台当前的费率表核实。
-      </p>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -189,7 +155,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function EbayFeeCalculatorClientContent(): ReactNode {
   const { locale } = useApp()

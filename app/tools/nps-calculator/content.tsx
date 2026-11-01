@@ -5,7 +5,7 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * NpsCalculator 长文正文 —— 四语 dispatcher
+ * NpsCalculator 长文正文 —— 三语 dispatcher
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -22,19 +22,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>一个问题,三档人群,一个分数</h2>
-    <p>问"你有多大可能把我们推荐给朋友?"(0-10 分)。9-10 是推荐者,7-8 是中立者,0-6 是贬损者。NPS = 推荐者百分比 − 贬损者百分比,取值从 -100(人人贬损)到 +100(人人推荐)。</p>
-    <h2>诚实地读这个分数</h2>
-    <p>Bain 的档位——0-30 good、31-70 great、71+ excellent——是参照不是评级。多数行业均值在 30 上下,而首次出现负分往往说明的是最近一次故障,而不是产品本身。对比顺序:先和自己的行业比,再和自己的上一季度比。</p>
-    <h2>为什么中立者依然重要</h2>
-    <p>中立者不拉动分数,却是成本最低的转化对象:他们本来就喜欢你。把十个中立者变成推荐者,与安抚十个贬损者对 NPS 的拉动完全相同,而且通常更容易。分数停滞时,盯住中立者那一行。</p>
-    <h2>样本量的纪律</h2>
-    <p>100 份样本时,±10 分的波动可能纯粹是噪声;400 份时收紧到约 ±5。用同一个问题、同一个渠道跨季度发放——趋势线胜过单次波次,而样本量稳定下的 NPS 上升,是给董事会看的最干净的忠诚度信号。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -64,7 +51,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function NpsCalculatorContent(): ReactNode {
   const { locale } = useApp()

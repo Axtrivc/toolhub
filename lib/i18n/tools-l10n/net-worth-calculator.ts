@@ -5,25 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const netWorthCalculatorL10n: ToolL10n = {
-  zh: {
-    formula: {
-      formula: 'Net worth = total assets − total liabilities',
-      explain: '资产是你拥有的(现金、投资、房产、车),负债是你欠的(房贷、贷款、卡账)。净资产为正意味着资产超过债务。',
-    },
-    useCases: ['算出资产减去负债后的净资产', '追踪净资产随时间的变化', '看自己处于哪个财富区间', '区分「可投资资产」与含自住的净资产'],
-    faqs: [
-      { q: '自住房算不算资产?', a: '算,但要减去房贷。剩下的净值是真实资产。有些计算器会剔除自住房,只看「可投资」净资产——两种做法都成立,只要逐年比较时口径一致即可。' },
-      { q: '净资产是负数怎么办?', a: '对背着助学贷款、积蓄不多的年轻人来说很常见。负数不是道德失败——它是一个起点。目标是稳步改善:每 6-12 个月记一次,先专注还高息债、建立应急基金。' },
-      { q: '多久重新算一次?', a: '大多数人每 6 到 12 个月算一次就够了。更频繁只会增加噪音(市场波动)而不增加洞察。多年的趋势比任何单次快照更重要——净资产每年增长 8-12% 就算很强了。' },
-    ],
-    ui: {
-      noDebt: '无负债',
-      'in.assets': '总资产(现金、房产、投资)', 'in.liabilities': '总负债(房贷、贷款、债务)',
-      'out.networth': '你的净资产', 'out.ratio': '资产负债比',
-      note: '💎 净资产 = 你拥有的减去你欠的。美国净资产中位数约 $192,000;净资产达到 $1M 以上,大致可让一个家庭跻身前 10-15%。',
-      chartTitle: '资产 vs 负债', chartCenter: '总计', 'slice.assetsOut': '资产(你拥有的)', 'slice.liabilitiesOut': '负债(你欠的)',
-    },
-  },
+
   es: {
     formula: {
       formula: 'Net worth = total assets − total liabilities',

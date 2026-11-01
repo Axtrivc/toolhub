@@ -5,31 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const permutationCalculatorL10n: ToolL10n = {
-  zh: {
-    formula: {
-      formula: 'P(n, k) = n! / (n − k)!',
-      explain: '从 n 个物品中选出 k 个的有序排列数。与组合不同,顺序有关,所以 P(n,k) ≥ C(n,k)。',
-    },
-    ui: {
-      errRange: '需要 0 ≤ r ≤ n',
-      errIntegers: '请为 n 和 r 输入整数',
-      errTooBig: 'n 不能超过 10,000(结果太大,无法显示)',
-      'in.n': '总数 (n)',
-      'in.r': '排列 (r)',
-      'out.result': '排列数 P(n,r)',
-      'out.formula': '公式',
-      note: '🎰 排列:从 n 个中排列 r 个,考虑顺序。密码可能性就用这个。',
-    },
-    useCases: [
-      '密码:4 位 PIN = 10⁴ 种排列',
-      '比赛名次:8 名选手的前 3 名(有序)',
-      '座位安排:桌边谁坐哪里',
-      'ID 与代码生成',
-    ],
-    faqs: [
-      { q: 'P(n,r) 什么时候等于 n!?', a: '当 r = n 时——你在排列全部物品。排列 n 个不同物品的方式数就是 n!(n 的阶乘)。例如 5 本书放在书架上:5! = 120 种排法。' },
-    ],
-  },
+
   es: {
     formula: {
       formula: 'P(n, k) = n! / (n − k)!',

@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * StudentLoanCalculator 长文正文 —— 四语 dispatcher
+ * StudentLoanCalculator 长文正文 —— 三语 dispatcher
  *
- * en 分支与 SSR 渲染输出一致。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支与 SSR 渲染输出一致。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -24,19 +24,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>三种还款计划,一次诚实的对比</h2>
-    <p>$35,000、6.8%、6 个月宽限期后:标准 10 年计划月供约 $416;拉长到 25 年降到约 $251——但还款期利息从约 $13,800 跳到 $39,200。阶梯计划从约 $269 起步、每两年上调一档,总成本落在两者之间。</p>
-    <h2>宽限期利息为什么是陷阱</h2>
-    <p>非补贴联邦贷款在你整个在校期和毕业后的六个月宽限期内照常计息。因为不用还款,感觉不到任何异样——到期末利息资本化,并入本金。之后的每一笔月供都按更大的基数计算,利滚利能跑几十年。</p>
-    <h2>各计划真正的适用场景</h2>
-    <p>标准计划是默认项,因为总利息最少。延长与阶梯计划用长期成本换眼前喘息——收入暂时偏低时是理性选择,变成常态时就只剩昂贵。涨薪就是信号:要么切回标准,要么更好——在现有计划上超额还款。</p>
-    <h2>提前还款胜过来回换计划</h2>
-    <p>联邦贷款没有提前还款罚金,结清当期利息后,多余的钱直接冲本金。哪怕在标准计划上每月多还 $50,也能砍掉数年期限、省下四位数利息——这通常是毕业生能做的回报最高的无风险动作。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -66,7 +53,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function StudentLoanCalculatorContent(): ReactNode {
   const { locale } = useApp()

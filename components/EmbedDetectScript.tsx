@@ -16,7 +16,7 @@ export function EmbedDetectScript() {
           document.documentElement.classList.add('embed');
         }
       } catch (e) {
-        // 跨域 iframe 访问 window.top 可能抛错,此时也按嵌入处理
+        // Cross-origin iframe access may throw; treat the page as embedded.
         document.documentElement.classList.add('embed');
       }
     })();

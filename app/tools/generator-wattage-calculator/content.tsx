@@ -5,7 +5,7 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * GeneratorWattageCalculator 长文正文 —— 四语 dispatcher
+ * GeneratorWattageCalculator 长文正文 —— 三语 dispatcher
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -22,19 +22,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>运行瓦与启动浪涌</h2>
-    <p>凡是带电机的设备——冰箱压缩机、供暖风机、井泵、空调——启动瞬间都要拉 2-3 倍于铭牌运行瓦的电流来克服惯性。发电机参数表会同时给出运行(额定)功率和一个更高的浪涌功率(可耐受数秒)。按浪涌数选发电机,不要按运行数。</p>
-    <h2>正确的加总方法</h2>
-    <p>先把同时运行的设备运行瓦加起来,再叠加上其中最大一台的浪涌裕量——因为启动可以排队:先开井泵,等它转稳了再开冰箱。这正是本工具的口径,也是"调整启动顺序"能成为你最便宜的扩容手段的原因。</p>
-    <h2>对齐标准功率档</h2>
-    <p>发电机按档位生产:约 2,000 W 的变频机适合尾随派对,3,000-5,000 W 覆盖"冰箱+供暖风机"基本盘,7,500-12,000 W 带 240V 才能扛井泵与空调,15-24 kW 待机机组可备份整个配电箱。工具会把浪涌总数向上对齐到下一个标准档,方便你直接按型号下单。</p>
-    <h2>阻性负载与"别写进清单"的设备</h2>
-    <p>电热类——取暖器、吹风机、电水壶、热水器加热管——完全没有浪涌,但会持续吞噬瓦数,一台电热水器就独占 4,000 W 达数小时。停电时优先保障冷藏、取暖、污水泵和照明;把阻性"大胃王"留给电网。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -64,7 +51,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function GeneratorWattageCalculatorContent(): ReactNode {
   const { locale } = useApp()

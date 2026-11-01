@@ -5,7 +5,7 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * TreasuryBillCalculator 长文正文 —— 四语 dispatcher
+ * TreasuryBillCalculator 长文正文 —— 三语 dispatcher
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -22,19 +22,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>为什么 T-Bill 用贴现方式报价</h2>
-    <p>短期国债不付票息。你今天付出的金额低于面值——13 周、贴现率 4.5% 的 bill 只要 $988.63——到期收回 $1,000;差额就是你全部的收益。价格是机械推导的:价格 = 面值 ×(1 − 利率 × 天数/360),与拍卖所用公式相同。</p>
-    <h2>银行贴现率 vs 投资收益率</h2>
-    <p>报价的贴现率从两方面低估了你的实际收益:它按 360 天年化,而且分母是面值而不是你实际付的钱。改用 365 天、除以买入价重新年化,就得到投资收益率——这才是能与定期存款、货币基金、附息债券放在一起比较的数字。同一张 bill 它总是略高(本例 4.615% 对 4.5%)。</p>
-    <h2>拍卖申购 vs 二级市场</h2>
-    <p>TreasuryDirect 和多数券商都以 $100 为整数倍无手续费卖新发 bill;非竞争性竞价者接受市场定出的利率,竞争性竞价者自报价、并可能一无所获。二级市场任何交易日都能买到任意期限,但你锁定的贴现率每天跟着美联储预期波动。</p>
-    <h2>大家真正关心的税务差别</h2>
-    <p>T-Bill 利息免州税和地方税——在高税州是实打实的优势——但全额计入联邦普通所得税,到期时按贴现额开 1099-INT。正是这项州税豁免,让 bill 在加州、纽约州居民手里常常胜过名义收益率更高的替代品。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -64,7 +51,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function TreasuryBillCalculatorContent(): ReactNode {
   const { locale } = useApp()

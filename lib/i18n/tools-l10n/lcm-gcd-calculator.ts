@@ -5,30 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const lcmGcdCalculatorL10n: ToolL10n = {
-  zh: {
-    formula: {
-      formula: 'GCD via Euclid\nLCM(a, b) = (a × b) / GCD(a, b)',
-      explain: '用反复取余(欧几里得算法)求 GCD。LCM 由连接两者的恒等式得出——两数相乘再除以 GCD。',
-    },
-    ui: {
-      errNoValid: '请输入非 0 的整数(如 12, 18, 24)',
-      ignoredEntries: '已忽略:{list}',
-      absUsed: '负数按绝对值处理',
-      'in.numbers': '数字(逗号分隔)',
-      'out.gcd': 'GCD(最大公约数)',
-      'out.lcm': 'LCM(最小公倍数)',
-      note: '🔢 GCD = 能整除所有输入的最大数。LCM = 能被所有输入整除的最小数。',
-    },
-    useCases: [
-      '为分数加法求公分母',
-      '安排周期性事件的会合时间',
-      '寻找能整铺矩形地面的最大方砖',
-      '理解 RSA 加密算法的数论基础',
-    ],
-    faqs: [
-      { q: '如果只输入一个数字会怎样?', a: '单个数字的 GCD 就是它本身,其 LCM 也是它本身。本计算器能正确处理这种情况。' },
-    ],
-  },
+
   es: {
     formula: {
       formula: 'GCD via Euclid\nLCM(a, b) = (a × b) / GCD(a, b)',

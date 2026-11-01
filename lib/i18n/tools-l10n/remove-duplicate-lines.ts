@@ -5,24 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const removeDuplicateLinesL10n: ToolL10n = {
-  zh: {
-    ui: {
-      defaultInput: '苹果\n香蕉\n苹果\n樱桃\n香蕉\n椰枣',
-      inputLabel: '列表(每行一项)',
-      outputLabel: '去重后的项',
-      note: '🗑️ 移除重复行并保留原顺序。比较前会去掉行首尾空格;区分大小写(「Apple」≠「apple」)。非常适合清理列表。',
-    },
-    useCases: [
-      '清理邮箱订阅列表(去除重复订阅者)',
-      'SEO 关键词去重后再做分析',
-      '整理库存与 SKU 产品清单',
-      '清理日志文件中重复的错误行',
-    ],
-    faqs: [
-      { q: '会对列表排序吗?', a: '不会——顺序保持不变。如果你还想要按字母排序,请使用「排序行」工具。' },
-      { q: '有大小限制吗?', a: '没有硬性限制,但非常大的输入(数百万行)可能拖慢浏览器。本工具在本地运行。' },
-    ],
-  },
+
   es: {
     ui: {
       defaultInput: 'manzana\nplátano\nmanzana\ncereza\nplátano\ndátil',

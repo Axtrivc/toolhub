@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * HmacGenerator 长文正文 —— 四语 dispatcher
+ * HmacGenerator 长文正文 —— 三语 dispatcher
  *
- * en 分支与改造前渲染输出一致。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支与改造前渲染输出一致。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -24,19 +24,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>HMAC 与普通哈希的区别</h2>
-    <p>单独的 SHA-256 意味着任何人都能对篡改后的消息重新算出摘要。HMAC 在计算中混入一个密钥,没有密钥就无法伪造——这正是 Webhook 采用它的原因。</p>
-    <h2>验证 Webhook 签名</h2>
-    <p>Stripe、GitHub 和 Slack 都用你的签名密钥对原始请求体计算 HMAC-SHA256 来签名。粘贴一字不差的原始请求体(而不是重新序列化的 JSON),再把算出的 hex 与请求头里的值比对。</p>
-    <h2>hex 与 base64 输出</h2>
-    <p>同一份字节,不同的编码。各家服务不同:Stripe 按 hex 风格比对,AWS SigV4 用 hex,OAuth1 用 base64。本工具两种都给,省去一步转换。</p>
-    <h2>密钥卫生</h2>
-    <p>短密钥会削弱 HMAC。请使用 32 字节以上的随机值。轮换已泄露的密钥会立刻让旧签名失效——轮换后先重新算一遍期望签名,再去排查不匹配的问题。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -66,7 +53,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function HmacGeneratorContent(): ReactNode {
   const { locale } = useApp()

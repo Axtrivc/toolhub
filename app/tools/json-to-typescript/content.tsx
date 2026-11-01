@@ -60,49 +60,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具?</h2>
-    <p>
-      为大型 API 响应手动编写 TypeScript 类型既繁琐又容易出错。本工具接收任意合法的 JSON,并
-      <strong>递归推断其结构</strong>,生成干净、嵌套的 <code>interface</code> 声明,可直接粘贴到你的代码库中。它能处理嵌套对象、数组、可选(可空)字段,甚至混合类型数组。
-    </p>
-    <div>
-      <h2>类型是如何推断的</h2>
-      <ul>
-        <li>
-          <strong>基本类型</strong> —— 字符串变为 <code>string</code>,数字变为{' '}
-          <code>number</code>,布尔值变为 <code>boolean</code>。
-        </li>
-        <li>
-          <strong>对象</strong> —— 每个对象都会成为独立的 <code>interface</code>,按其父键的 PascalCase 形式命名(例如 <code>address</code> → <code>Address</code>)。嵌套对象会递归处理,因此深层结构的响应会生成完整的类型树。
-        </li>
-        <li>
-          <strong>数组</strong> —— 类型为元素类型加上 <code>[]</code>。如果每个元素都是同一类型,会得到 <code>string[]</code>;如果类型不同,则会得到联合类型,例如{' '}
-          <code>(string | number)[]</code>。
-        </li>
-        <li>
-          <strong>空值</strong> —— JSON 的 <code>null</code> 会被推断为 <code>null</code>,该属性被标记为可选(<code>?:</code>),因为可空的 API 字段在为空时通常也是缺失的。
-        </li>
-      </ul>
-    </div>
-    <div>
-      <h2>接口与类型别名</h2>
-      <p>
-        本生成器使用 <code>interface</code> 声明,因为这是对象结构最可扩展的约定——它支持声明合并,后续也更易于扩充。如果你的代码库更偏好 <code>type</code> 别名,只需对输出做一次简单的查找替换:{' '}
-        <code>interface Foo {'{'}</code> → <code>type Foo = {'{'}</code> 即可完成转换。两种方式推断出的成员类型完全相同。
-      </p>
-    </div>
-    <div>
-      <h2>当示例数据不完整时</h2>
-      <p>
-        推断出的类型 <em>精确</em> 反映了你粘贴的 JSON,而非 API 可能返回的完整模式。如果某个字段在你的示例中是 <code>string</code>,但在生产环境中也可能是{' '}
-        <code>null</code>,请手动放宽其类型。对于你能控制的 API,建议使用一个包含可选和空状态的示例来生成类型,这样联合类型才能反映真实情况。
-      </p>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -190,7 +147,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function JsonToTypeScriptContent(): ReactNode {
   const { locale } = useApp()

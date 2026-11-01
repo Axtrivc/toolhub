@@ -20,21 +20,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具?</h2>
-    <p>本工具可将 URL slug 还原为可读的标题。连字符和下划线会变为空格,每个单词首字母大写。</p>
-    <div>
-      <h2>常见用途</h2>
-      <ul>
-        <li>导入旧博客文章时,从 URL 中恢复标题</li>
-        <li>清理导出的 CMS 数据</li>
-        <li>从机器格式的字符串生成可读名称</li>
-      </ul>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -68,7 +53,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function SlugToTitleContent(): ReactNode {
   const { locale } = useApp()

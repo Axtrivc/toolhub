@@ -5,29 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const RandomTeamGeneratorL10n: ToolL10n = {
-  zh: {
-    useCases: [
-      '团建或课堂随机分组:名单贴进来,一键生成人数均衡的小组,杜绝"抱团"',
-      '球赛分队:20 人分 4 队,轮流发牌式分配保证各队人数最多差一人',
-      '黑客马拉松开场随机成队——先输入名字的人不会有任何位置优势',
-      '分组结果不满意点"重新打乱",每次洗牌都是加密级随机的全新结果',
-    ],
-    faqs: [
-      { q: '分组真的公平吗?', a: '公平。算法是 Fisher-Yates 洗牌 + 轮流发牌:先用加密级随机数(crypto.getRandomValues)把名单彻底洗乱——数学上每种排列概率完全相等——再依次把第 1、2、3… 人轮流发给各队。不存在任何位置或顺序偏好。' },
-      { q: '人数不能被队数整除怎么办?', a: '轮流发牌天然处理余数:23 人分 4 队,前三队 6 人、最后一队 5 人,各队人数至多少一人,不会出现一队独大的情况。' },
-      { q: '名单顺序会影响结果吗?', a: '不会。洗牌发生在分牌之前,输入顺序在洗牌后被完全打乱——第一个输入的名字和最后一个进入各队的概率完全相同。' },
-      { q: '名单会被保存或上传吗?', a: '不会。整个分组过程在浏览器本地完成,刷新页面名单即消失。涉及真实姓名或工号的内部名单可以放心使用。' },
-    ],
-    ui: {
-      'generate': '生成分组',
-      'nNames': '已输入 {n} 人',
-      'namesLabel': '名单 — 每行一个',
-      'note': '👥 加密级随机的 Fisher-Yates 洗牌 + 轮流发牌保证各队人数至多差一。先输入的名字没有任何优势。',
-      'reshuffle': '重新打乱',
-      'teamN': '第 {n} 队',
-      'teamsLabel': '队伍数量',
-    },
-  },
+
   es: {
     useCases: [
       'Grupos aleatorios para team building o clase: pega la lista y genera equipos equilibrados de un clic, sin «grupitos»',

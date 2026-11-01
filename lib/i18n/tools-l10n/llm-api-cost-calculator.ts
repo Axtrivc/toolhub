@@ -11,59 +11,8 @@ import type { ToolL10n } from '../tool-l10n'
 const FORMULA = 'monthly cost = (input tokens ÷ 1M × price_in) + (output tokens ÷ 1M × price_out)'
 
 export const llmApiCostCalculatorL10n: ToolL10n = {
-  // ──────────────────────────── 中文 ────────────────────────────
-  zh: {
-    ui: {
-      'inLabel': '每月提示词输入 Token 总量',
-      'outLabel': '每月补全输出 Token 总量',
-      'preset.0': '业余小项目 (5M 输入 / 1M 输出)',
-      'preset.1': '客服聊天 SaaS (20M / 5M)',
-      'preset.2': 'Agent 高频工作流 (100M / 30M)',
-      'chartTitle': '各模型月度账单对比',
-      'cheapest': '最经济',
-      'costLabel': '每月费用',
-      'thModel': '模型名称',
-      'thIn': '输入 $/1M',
-      'thOut': '输出 $/1M',
-      'thMonthly': '预计月度总账单',
-      'thVsCheapest': '相比最低价',
-      'thSavings': '相比顶配模型省下',
-      'invalid': '请输入非负的 Token 调用量',
-      'summaryTitle': 'LLM API 月度成本对比摘要',
-      'sIn': '月度输入 Tokens',
-      'sOut': '月度输出 Tokens',
-      'copySummary': '复制成本对比摘要',
-      'note': '💸 月账单以百万 Token 未缓存基准单价测算（tokencost.app，2026-08 核对）。开启提示词缓存（Prompt Caching）可降低 50%-90% 输入成本，异步 Batch API 约可节省一半输出开销——实际账单通常低于此处的全量峰值预算。',
-    },
-    useCases: [
-      '给模型账单排序:月 2000 万输入 + 400 万输出 token,按各家牌价算出月费,最便宜的排最前',
-      '诊断输出占比:长回答应用输出 token 常吃掉账单一半,把 max_tokens 从 4096 收到 1024 立省一大截',
-      '估算缓存红利:prompt caching 输入侧可省 50-90%(OpenAI/Anthropic/DeepSeek);表格是未缓存牌价,实际账单更低',
-      '做预算护栏:按 30 天折算成月费给应用设上限,防止一次改版把 API 账单翻倍',
-    ],
-    faqs: [
-      {
-        q: '每月账单怎么算?',
-        a: '账单 = (月输入 token ÷ 1M × 输入单价) + (月输出 token ÷ 1M × 输出单价),逐模型计算。输入一次用量,表格按预估月费给所有主流模型排序,最便宜在前。',
-      },
-      {
-        q: '为什么输出 token 这么贵?',
-        a: '生成比读提示词更耗算力,几乎每个模型的输出单价都是输入的 3-8 倍。写长回答的应用在输出上花的钱可能比大得多的输入还多——收紧 max_tokens 往往是最大的省钱杠杆。',
-      },
-      {
-        q: '包含缓存价或批量价吗?',
-        a: '表格是未缓存牌价——最坏情况。OpenAI、Anthropic、DeepSeek 的 prompt caching 能把输入成本砍 50-90%,批量/异步 API 大约对半砍输出成本,所以真实账单通常低于这里的预测。',
-      },
-      {
-        q: '中文 token 怎么估?',
-        a: '粗略参考:英文约 1 token ≈ 4 个字符,中文约 1 token ≈ 0.6-0.7 个汉字,不同分词器差异不小。最稳的办法是跑一周线上日志,取每请求平均输入/输出 token,乘日均请求量再乘 30。',
-      },
-    ],
-    formula: {
-      formula: FORMULA,
-      explain: '按月 token 量逐模型计价。价格为未缓存牌价(每百万 token);缓存输入与批量折扣不计入,结果是偏保守的最坏情况规划数字。',
-    },
-  },
+
+
 
   // ──────────────────────────── Español ────────────────────────────
   es: {

@@ -5,41 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const ConversionRateCalculatorL10n: ToolL10n = {
-  zh: {
-    useCases: ['算落地页/店铺的真实转化率与 CPA', '评估"提升 20% 转化"值多少额外订单', '对比买量与优化转化哪个更划算', '给优化目标定一个可量化的转化数'],
-    faqs: [
-      { q: '转化率怎么算?', a: '转化人数除以访问数(或会话数)再乘 100:5,000 访问带来 120 次转化就是 2.4%。分母口径要始终一致——会话数与独立访客数会算出不同的转化率。' },
-      { q: '转化率多少算好?', a: '典型电商在 2-3%,优化得好的店铺能过 5%;面向精准热流量的落地页常常到 10% 以上。基准应该是你自己的流量质量,不是行业平均数。' },
-      { q: '提转化和买流量哪个更划算?', a: '数学上等价(转化 +20% 等于流量 +20%),成本上不等价:转化率的提升作用于你已经支付的广告费,而流量增长要求同步加预算。先提转化,再复投。' },
-      { q: '多拿 X 个转化需要多少流量?', a: '按当前转化率,额外转化需要等比的额外访问:2.4% 转化率下多 24 个转化约需 +1,000 访问。正因为这条线性关系,转化优化才有价值——它把直线掰弯。' },
-    ],
-    ui: {
-      'in.visitors': '访问数(或会话数)',
-      'in.conversions': '转化数',
-      'in.spend': '总花费(可选)',
-      'in.liftPct': '目标转化提升',
-      'inSuffix.spend': '$',
-      'inSuffix.liftPct': '%',
-      'out.convRate': '转化率',
-      'out.cpa': '单次获客成本 (CPA)',
-      'out.newTarget': '目标需要的转化数',
-      'out.extraConversions': '需要的额外转化',
-      'out.extraVisitors': '额外访问数(转化率不变)',
-      'out.newCpa': '提升后的 CPA',
-      'chartTitle': '当前 vs 目标转化数',
-      'cmp.0': '当前',
-      'cmp.1': '目标',
-      'cmpseg.0': '已转化',
-      'cmpseg.1': '未转化',
-      'preset.0': '电商典型 (~2.5%)',
-      'preset.1': '付费搜索 (~3.5%)',
-      'preset.2': '强落地页 (~8%)',
-      'errVisitors': '请输入有效的访问数',
-      'errConversions': '转化数不能超过访问数',
-      'errNonNegative': '花费与提升目标不能为负',
-      'note': '📈 典型电商转化率 2-3%,强落地页能过 5-10%。两个杠杆数学上可互换(+20% 转化 ≈ +20% 流量),成本上不可:转化率的收益叠加在你已支付的广告费之上。',
-    },
-  },
+
   es: {
     useCases: ['calcular la tasa de conversión y el CPA reales de tu página', 'valorar cuántos pedidos extra supone una mejora del 20%', 'comparar comprar tráfico con optimizar la conversión', 'poner una cifra concreta de conversiones como objetivo'],
     faqs: [

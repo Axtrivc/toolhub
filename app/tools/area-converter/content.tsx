@@ -62,53 +62,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>公制与英制面积单位</h2>
-    <p>
-      面积以平方单位计量——而由于长度本身就有两套体系,面积单位更让人困惑。<strong>公制</strong>使用 mm²、cm²、m²、公顷和 km²。<strong>英制</strong>使用 in²、ft²、yd² 和英亩。换算基于长度换算系数的平方。
-    </p>
-
-    <h2>关键换算系数</h2>
-    <ul>
-      <li><strong>1 平方米</strong> = 10.7639 平方英尺</li>
-      <li><strong>1 平方英尺</strong> = 0.092903 平方米 = 144 平方英寸</li>
-      <li><strong>1 英亩</strong> = 43,560 平方英尺 = 4,046.86 m²</li>
-      <li><strong>1 公顷</strong> = 10,000 m² = 2.47105 英亩</li>
-      <li><strong>1 平方千米</strong> = 0.386102 平方英里</li>
-      <li><strong>1 平方英里</strong> = 640 英亩 = 2.58999 km²</li>
-    </ul>
-
-    <h2>何时需要面积换算</h2>
-    <ul>
-      <li><strong>房地产:</strong> 房屋面积用 ft²(美国)或 m²(世界大多数地区)</li>
-      <li><strong>土地和农业:</strong> 用英亩(美国/英国)或公顷(其他地区)</li>
-      <li><strong>建筑施工:</strong> 材料覆盖面积(油漆、地板、屋顶)</li>
-      <li><strong>地理:</strong> 比较国家或城市的大小</li>
-      <li><strong>园艺:</strong> 种子和肥料的覆盖用量</li>
-    </ul>
-
-    <h2>英亩与公顷</h2>
-    <p>
-      这两个大面积单位最容易让人混淆。<strong>英亩</strong>是传统单位,大约相当于一个美式足球场的大小(不含端区)。<strong>公顷</strong>正好是 10,000 m²——一个边长 100 米的正方形。一公顷约等于 2.47 英亩。农田、牧场和森林通常根据国家不同而采用其中之一。
-    </p>
-
-    <h2>快速参考点</h2>
-    <ul>
-      <li><strong>网球场:</strong> ~260 m²(~2,800 ft²)</li>
-      <li><strong>美国平均独栋住宅:</strong> ~200-250 m²(~2,200-2,700 ft²)</li>
-      <li><strong>美式足球场:</strong> ~5,350 m²(~1.32 英亩)</li>
-      <li><strong>标准城市街区:</strong> ~8,000-10,000 m²(~2 英亩)</li>
-      <li><strong>纽约中央公园:</strong> ~3.4 km²(~843 英亩)</li>
-    </ul>
-
-    <h2>为什么平方单位让人困惑</h2>
-    <p>
-      如果 1 米 = 3.28 英尺,为什么 1 m² 不是 3.28 ft²?因为面积与长度的 <em>平方</em> 成正比:<code>1 m² = (3.28)² = 10.76 ft²</code>。体积也是同理,它与立方成正比。这就是为什么换算面积和体积需要对长度系数平方或立方,而不是直接相乘。
-    </p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -228,7 +181,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function AreaConverterContent(): ReactNode {
   const { locale } = useApp()

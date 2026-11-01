@@ -5,31 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const capitalGainsTaxEstimatorL10n: ToolL10n = {
-  zh: {
-    formula: {
-      formula: 'Gain = sale − basis\nTax = gain × rate\nNet = gain − tax',
-      explain: 'basis 通常是买入价加费用。收益按持有期长短适用短期(按收入)或长期(优惠)税率。',
-    },
-    useCases: ['估算股票/加密资产的资本利得税', '比较短期 vs 长期持有税率', '按持有期算税前应缴税款', '决定现在卖还是再持有一段时间'],
-    faqs: [
-      { q: '怎么计算资本利得税?', a: '按每个批次跟踪买入价和卖出价。利得 = 卖价 − 买价 − 手续费。长期利得按 0/15/20% 征税,依据你的应税总收入(含利得本身);短期利得按普通收入档位征税。' },
-      { q: '什么是税损收割?', a: '卖出亏损的投资来抵消已实现利得,从而降低税单。亏损按一比一抵消利得;若亏损超过利得,每年最多 $3,000 可抵减普通收入,其余结转以后年度。注意洗售规则:30 天内不得重新买入同一证券。' },
-      { q: '如果我把收益再投资,还要交税吗?', a: '要。卖出即触发应税事件,无论你是否再投资——IRS 对已实现利得征税。只有在税收优惠账户(IRA、401k)内持有才能递延,且只有特定结构能完全避免。' },
-    ],
-    ui: {
-      'chartTitle': '卖出所得去向',
-      'cmp.0': '卖出所得',
-      'cmpseg.0': '收回成本',
-      'cmpseg.1': '税后净收益',
-      'cmpseg.2': '应缴税款',
-      longTerm: '长期', shortTerm: '短期',
-      'outSub.rate': '按各档位份额混合的有效税率',
-      'in.purchase': '买入价', 'in.sale': '卖出价', 'in.years': '持有年限', 'in.taxableIncome': '应税收入', 'in.filing': '申报身份',
-      'opt.filing.single': '单身', 'opt.filing.married': '已婚,联合申报',
-      'out.gain': '资本利得', 'out.rate': '税率', 'out.tax': '预估应缴税款',
-      note: '📈 美国资本利得:持有超过 1 年 = 长期(按 2026 应税收入分 0/15/20%)。持有不足 1 年 = 短期(按普通收入税率)。判档时收益堆叠在普通收入之上(长期档位与短期边际税率均按收入 + 收益计算)。简化估算——未含 NIIT 和州税。',
-    },
-  },
+
   es: {
     formula: {
       formula: 'Gain = sale − basis\nTax = gain × rate\nNet = gain − tax',

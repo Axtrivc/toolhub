@@ -5,25 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const BaseConverterL10n: ToolL10n = {
-  zh: {
-    useCases: ['在二/八/十/十六进制间换算', '换算 Base32/Base36 编码', '转换带小数的进制表示', '做计算机组成课的进制作业'],
-    faqs: [
-      { q: '支持哪些进制?', a: '2 到 36 的所有整数进制,9 以上用字母 a-z 表示(base 36 即 0-9 加 a-z)。结果面板同时给出二、八、十、十六、Base32、Base36,每个都带复制按钮。' },
-      { q: '能转换小数吗?', a: '能——输入 255.5 这类值,小数部分按位转换,约 10 位处截断。注意很多十进制小数(包括 0.1)在二进制里是无限循环,工具选择截断而不是假装精确。' },
-      { q: '为什么和我的计算器结果不同?', a: '多半是浮点问题:数值经由 JavaScript number 处理,超过 2^53(约 9 千万亿)的整数会丢精度。日常范围——颜色值、权限掩码、内存容量——的换算是精确的。' },
-    ],
-    ui: {
-      'binary': '二进制 (2)',
-      'decimal': '十进制 (10)',
-      'hexadecimal': '十六进制 (16)',
-      'octal': '八进制 (8)',
-      'common': '常用',
-      'inBase': '输入进制',
-      'invalidDigit': '不是有效数字,当前进制:',
-      'note': '🔢 9 以上的数位用字母 a-z(因此 36 进制是 0-9 加 a-z)。小数转换约 10 位后截断;十进制 0.1 这类二进制小数天然无限循环。',
-      'valueLabel': '数值',
-    },
-  },
+
   es: {
     useCases: ['convertir entre binario, octal, decimal y hex', 'calcular codificaciones Base32/Base36', 'convertir números con parte fraccionaria', 'resolver ejercicios de sistemas numéricos'],
     faqs: [

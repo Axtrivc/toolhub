@@ -21,22 +21,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具?</h2>
-    <p>本工具会把多行文本转换为项目符号列表,在每个非空行开头添加项目符号(•)。非常适合把随手记录的笔记整理成结构化列表。</p>
-    <div>
-      <h2>常见用途</h2>
-      <ul>
-        <li>整理随手记录的笔记</li>
-        <li>把零散想法整理成大纲</li>
-        <li>准备购物或待办清单</li>
-        <li>为幻灯片和文档格式化数据</li>
-      </ul>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -72,7 +56,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function TextToListContent(): ReactNode {
   const { locale } = useApp()

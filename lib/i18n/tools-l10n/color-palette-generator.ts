@@ -5,45 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const ColorPaletteGeneratorL10n: ToolL10n = {
-  zh: {
-    useCases: ['从一个品牌主色推出整组协调配色', '按色轮角度挑选类似/互补/三角配色方案', '为设计系统的悬停/描边状态生成明暗梯度', '把基色随手转成 hex/rgb/hsl 三种格式'],
-    faqs: [
-      { q: '该选哪种调和方案?', a: '类似色(±30°)最稳最协调;互补色给出高对比的强调对;分裂互补保留对比但张力更低;三角适合活泼品牌;单色明度最显高级和安静。' },
-      { q: '为什么在 HSL 里计算?', a: '配色调和的本质是色相距离,HSL 把色相放在 0-360 的色轮上,旋转就是简单加法。色块同时给出 hex 和 rgb(),因为 CSS 三种写法都收。' },
-      { q: '什么是 60-30-10 法则?', a: '主色占约 60% 的视觉面,色板中的次色占 30%,对比最强的一档(常是互补色)只做约 10% 的点缀;明暗变体留给悬停和描边状态。' },
-      { q: '它和渐变生成器有什么区别?', a: '本工具产出一组扁平的协调色,供设计系统取用;CSS 渐变生成器是把两个以上的颜色混合成一张背景图。' },
-    ],
-    ui: {
-      'baseColor': '基色',
-      'errHex': '请输入 6 位十六进制颜色,如 #3b82f6',
-      'randomBase': '随机基色',
-      'harmony': '调和方案',
-      'schemeAnalogous': '类似色',
-      'schemeComplementary': '互补色',
-      'schemeSplit': '分裂互补',
-      'schemeTriadic': '三角',
-      'schemeMonochrome': '单色明度',
-      'copyHex': '复制',
-      'role.base': '基色',
-      'role.h+30': '+30°',
-      'role.h-30': '−30°',
-      'role.h+60': '+60°',
-      'role.h-60': '−60°',
-      'role.complement': '互补色',
-      'role.tint': '提亮',
-      'role.shade': '压暗',
-      'role.tintComp': '互补提亮',
-      'role.h+150': '+150°',
-      'role.h+210': '+210°',
-      'role.h+120': '+120°',
-      'role.h+240': '+240°',
-      'role.darker': '更深',
-      'role.dark': '深',
-      'role.light': '浅',
-      'role.lighter': '更浅',
-      'note': '🎨 调和角度沿用经典色轮:类似 ±30°/±60°、互补 180°、分裂互补 150°/210°、三角 120°/240°。单色保持色相与饱和度,只步进明度。每个色块都给出 hex、rgb()、hsl()——你的技术栈要哪种就复制哪种。',
-    },
-  },
+
   es: {
     useCases: ['derivar una paleta coherente de un color de marca', 'elegir esquemas análogos, complementarios o triádicos', 'generar tintes y sombras para hover y bordes', 'convertir el color base a hex, rgb y hsl de paso'],
     faqs: [

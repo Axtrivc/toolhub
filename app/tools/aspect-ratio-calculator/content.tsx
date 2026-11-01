@@ -60,51 +60,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具?</h2>
-    <p>
-      <strong>宽高比</strong>是宽度与高度之间的比例关系(表示为 <code>W:H</code>,如 16:9)。当你调整图片、视频或容器的尺寸时,保持比例不变可以避免拉伸和变形。本计算器只需输入任意比例和其中一个尺寸,即可算出另一个,并实时预览该比例的形状。
-    </p>
-    <div>
-      <h2>背后的数学原理</h2>
-      <p>
-        给定比例 <code>W:H</code>,宽和高始终保持成比例:<code>宽 ÷ 高 = W ÷ H</code>。因此,如果已知宽度,<code>高 = 宽 × (H ÷ W)</code>;如果已知高度,<code>宽 = 高 × (W ÷ H)</code>。对于宽 1920px 的 16:9 视频,高度为 <code>1920 × (9 ÷ 16) = 1080</code>。本计算器可为任意比例算出缺失的尺寸,包括 5:4、21:9 这类少见比例。
-      </p>
-    </div>
-    <div>
-      <h2>常见比例及其应用场景</h2>
-      <ul>
-        <li>
-          <strong>16:9</strong> —— YouTube、Netflix、现代显示器、大多数手机视频。
-        </li>
-        <li>
-          <strong>9:16</strong> —— 竖屏视频(TikTok、Instagram Reels、Stories)。
-        </li>
-        <li>
-          <strong>4:3</strong> —— 老式电视、部分相机、Instagram 横屏。
-        </li>
-        <li>
-          <strong>1:1</strong> —— Instagram 信息流方图、头像。
-        </li>
-        <li>
-          <strong>21:9</strong> —— 带鱼屏显示器、电影画面。
-        </li>
-        <li>
-          <strong>3:2</strong> —— 大多数单反和无反相机。
-        </li>
-      </ul>
-    </div>
-    <div>
-      <h2>适应(contain)与填充(cover)</h2>
-      <p>
-        把某个比例嵌入固定方框时,<strong>contain</strong>(适应)会缩放图片使整体完全可见,可能留下黑边。<strong>cover</strong>(填充)则缩放到方框完全填满,裁掉溢出部分。CSS 的 <code>object-fit</code> 和{' '}
-        <code>background-size</code> 用的就是这些术语。当你必须显示完整图片时选 contain;当方框必须保持填满(如 hero 背景图)时选 cover。
-      </p>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -198,7 +153,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function AspectRatioContent(): ReactNode {
   const { locale } = useApp()

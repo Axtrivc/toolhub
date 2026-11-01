@@ -5,39 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const TypingSpeedTestL10n: ToolL10n = {
-  zh: {
-    useCases: [
-      '求职前自测:文员、客服、数据录入岗普遍要求 40+ WPM,先测一次再投简历',
-      '练盲打两周后量化进步:同一段文本重测,净 WPM 与准确率的变化就是训练效果',
-      '外语学习者测英文输入速度——母语 60 WPM 的人打英文往往只有一半,找出瓶颈',
-      '竞速玩家每日 benchmark:冲击 100+ WPM 时用这个工具做标准化热身',
-    ],
-    faqs: [
-      { q: 'WPM 是怎么算的?', a: '行业标准:每 5 个字符(含空格)折算为 1 个"词",再除以分钟数。总 WPM 只看速度;净 WPM 会从中扣除错误数,因此更能反映真实产出——快速度配低准确率毫无意义。' },
-      { q: '什么时候开始计时?', a: '首次击键即开始,打满整句后自动出结果。没有倒计时压力,测的是你自然状态下的稳定速度,不是冲刺速度。' },
-      { q: '多少 WPM 算快?', a: '普通成人 38-42;经常码字的职场人 50-60;专业速录员 80 以上;竞技选手可超 150。比绝对值更重要的是净 WPM:95% 以上的准确率才算有效速度。' },
-      { q: '我的输入会被记录吗?', a: '不会。测试完全在浏览器本地运行,键入的每一个字符都不会上传——可以直接拿工作邮件或真实文档来测。' },
-    ],
-    ui: {
-      'accuracy': '准确率',
-      'finishBtn': '结算 ⏎',
-      'fixHint': '可退格修正,或按现状结算',
-      'grossWpm': '总 WPM',
-      'modeCode': '代码片段',
-      'modeMulti': '多语言',
-      'modeQuotes': '英语金句',
-      'netExplain': '已扣除错误',
-      'netWpm': '净 WPM',
-      'note': '⌨️ 净 WPM 按标准公式:每分钟字符数 ÷ 5 再减错误。三种模式:经典英语金句、程序员代码片段、按当前语言匹配的多语言谚语。结尾打错字?退格修正后再结算。普通成人 38-42;专业速录员超过 80。',
-      'progress': '{n}/{m} 字符',
-      'reset': '重置',
-      'startTyping': '在此开始输入——首次击键即开始计时',
-      'timeSec': '时间',
-      'tryAgain': '换一句再测',
-      'typeHere': '在此输入',
-      'wpmUnit': 'WPM',
-    },
-  },
+
   es: {
     useCases: [
       'Autoevaluación antes de postular: los puestos de administración y datos suelen pedir 40+ PPM',

@@ -5,28 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const SleepCalculatorL10n: ToolL10n = {
-  zh: {
-    useCases: ['按起床时间倒推最佳入睡点', '规划 90 分钟睡眠周期', '让闹钟落在浅睡期醒来不犯困', '算现在入睡的合理起床时间'],
-    faqs: [
-      { q: '什么是 90 分钟法则?', a: '一个完整睡眠周期——浅睡、深睡加 REM——平均约 90 分钟。在周期边界醒来远比从深睡中被拽出来舒服,所以工具把入睡和起床时间都对齐到周期边界。' },
-      { q: '为什么减去 15 分钟?', a: '这是预设的入睡潜伏期——健康人平均 10-20 分钟才能睡着,15 分钟是常用的中点。所有建议时间都已把它扣掉;如果你入睡明显更快或更慢,按差额微调即可。' },
-      { q: '应该睡几个周期?', a: '多数成年人适合 5-6 个周期(7.5-9 小时),这些选项会被标记为推荐。偶尔只睡 4 个周期可以撑,但长期不足 7 小时的健康代价,不是巧妙的时间点能抵消的。' },
-      { q: '必须 6 点起,几点睡?', a: '切到「我想在……起床」模式,输入 06:00,就能得到按 90 分钟回推的就寝时间:22:15 上床对应 5 个周期,20:45 对应 6 个。选一个你能长期坚持的。' },
-    ],
-    ui: {
-      'bedTime': '就寝时间',
-      'cyclesN': '个睡眠周期',
-      'fallAsleepBy': '入睡时间',
-      'invalidTime': '请输入有效时间,如 07:00',
-      'modeSleep': '我现在/将在……就寝',
-      'modeWake': '我想在……起床',
-      'nextDay': '(次日)',
-      'note': '😴 一个睡眠周期约 90 分钟。在周期边界醒来远比深睡中被叫醒轻松。估算假定约 15 分钟入睡——按你实际入睡快慢调整。',
-      'recommended': '推荐',
-      'wakeTime': '起床时间',
-      'wakeUpAt': '起床时间',
-    },
-  },
+
   es: {
     useCases: ['deducir la hora de dormir según la de despertar', 'planificar ciclos de sueño de 90 minutos', 'hacer que el despertador suene en sueño ligero', 'calcular a qué hora despertar si te duermes ya'],
     faqs: [

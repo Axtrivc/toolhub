@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * PNG to WebP Converter 长文正文 —— 四语 dispatcher
+ * PNG to WebP Converter 长文正文 —— 三语 dispatcher
  *
- * en 分支等价于原 ToolContent 渲染输出。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支等价于原 ToolContent 渲染输出。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en (与改造前渲染输出一致) ────────────────────────────
@@ -56,36 +56,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具？</h2>
-    <p>
-      <strong>WebP</strong> 通常能在同等视觉质量下把 PNG 或 JPEG 缩小 25–70%，这正是 Google 推荐用它加速页面加载、改善 Core Web Vitals 的原因。本转换器完全在浏览器中把你的 PNG 或 JPG 重新编码为 WebP —— 图像会被绘制到本地画布，再用 <code>canvas.toBlob</code> 编码，因此不会上传任何内容，工具也可离线使用。
-    </p>
-
-    <div>
-      <h2>选择合适的质量</h2>
-      <p>
-        质量滑块直接对应编码器的设置：<strong>80%</strong>（默认值）是大多数照片的最佳选择；而 <code>90%+</code> 更适合带有锐利文字或 UI 细节的图像。拖动时请留意 <strong>节省条</strong> —— 它会把实际输出字节数与原始文件对比，让你能在画面依然清晰的前提下停在最低质量。如果 WebP 反而比源文件 <em>更大</em>，说明你的图像本来就已经压缩得很好了；降低质量或保留原图即可。
-      </p>
-    </div>
-
-    <div>
-      <h2>透明度与动画</h2>
-      <p>
-        WebP 支持 Alpha 通道，因此 <strong>透明 PNG 转换后仍然透明</strong> —— 不会填充任何背景色。但要注意：本工具只转换单张静态图像。动画内容和 EXIF 元数据（方向、相机数据）无法通过画布重新编码保留下来，因此请有意识地导出静帧，或谨慎处理需要去除敏感信息的文件。
-      </p>
-    </div>
-
-    <div>
-      <h2>关于浏览器支持的说明</h2>
-      <p>
-        所有现代浏览器都能 <em>显示</em> WebP，Chrome、Edge 和 Firefox 也都能 <em>编码</em> 它。Safari 是例外 —— 任何版本的 Safari 都无法通过 <code>canvas.toBlob</code> 编码 WebP，它会静默回退到 PNG。本工具会通过检查输出 MIME 类型来检测这种回退并提醒你，而不是交给你一个实为 PNG 的假 <code>.webp</code> 文件。如果看到这个提醒，请切换到 Chrome、Edge 或 Firefox，转换即可正常完成。
-      </p>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -149,7 +119,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function PngToWebpConverterContent(): ReactNode {
   const { locale } = useApp()

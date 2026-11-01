@@ -35,36 +35,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具?</h2>
-    <p>本工具用于在压力单位之间换算:<strong>帕斯卡</strong>、<strong>巴</strong>、<strong>PSI</strong>、<strong>大气压</strong> 和 <strong>托</strong>。压力无处不在,从给轮胎打气到天气预报都需要它。</p>
-    <div>
-      <h2>常用换算</h2>
-      <ul>
-        <li>1 大气压 (atm) = 101,325 Pa = 1.01325 bar = 14.696 PSI = 760 torr</li>
-        <li>1 bar = 100,000 Pa = 14.5038 PSI</li>
-        <li>1 PSI = 6,894.76 Pa = 0.0689 bar</li>
-        <li>1 torr ≈ 133.322 Pa(约等于 1 mmHg)</li>
-      </ul>
-    </div>
-    <div>
-      <h2>现实中的压力</h2>
-      <ul>
-        <li>汽车轮胎:30-35 PSI(~2-2.4 bar)</li>
-        <li>自行车轮胎:40-120 PSI,视类型而定</li>
-        <li>海平面大气压:1 atm = 1013 mbar</li>
-        <li>潜水气瓶(满):~200 bar</li>
-        <li>高空客舱:~0.75 atm</li>
-      </ul>
-    </div>
-    <div>
-      <h2>为什么单位这么多</h2>
-      <p>历史上不同领域采用了不同的单位。气象学使用毫巴(百帕);美国胎压使用 PSI;医学用 mmHg(托)表示血压;工程和科学使用帕斯卡。</p>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -128,7 +98,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function PressureConverterContent(): ReactNode {
   const { locale } = useApp()

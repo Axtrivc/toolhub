@@ -5,31 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const WeekNumberCalculatorL10n: ToolL10n = {
-  zh: {
-    useCases: ['确认交付/汇报属于第几周(ISO 口径)', '排产与周报统一周编号', '弄清 1 月 1 日属于上一年的 W52/W53 还是本年 W1', '算今年还剩几个整周'],
-    faqs: [
-      { q: 'ISO 8601 周是怎么编号的?', a: '周从周一开始;包含当年第一个星期四的那一周是第 1 周。由此一年有 52 或 53 个 ISO 周——当一年首尾恰逢周四(或闰年的周三)时是 53 周,2026 年就有 53 周。' },
-      { q: '为什么 2027 年 1 月 1 日是 2026-W53?', a: '那一周的周四是 2026 年 12 月 31 日,按"含当年第一个周四"规则整周归属 2026 年,所以 2026-12-28 到 2027-01-03 都记作 2026-W53。年底年初的日期最容易出现这种年号错位。' },
-      { q: '美国口径一样吗?', a: '不一样。美国常用"1 月 1 日所在周为第 1 周、周日起始"的编号,与 ISO 能差 1 周;做跨国的排期对表时,务必先约定用哪种口径。本工具按 ISO 8601 输出。' },
-      { q: '输入今天的日期能看到什么?', a: '除了所选日期的 ISO 周、周一起止日和剩余周数,挂载后还会单独补一行"本周(今天)"的 ISO 周号,方便和排期表对表。' },
-    ],
-    ui: {
-      'in.date': '日期',
-      'out.isoWeek': 'ISO 周',
-      'out.weekStart': '本周起始(周一)',
-      'out.weekEnd': '本周结束(周日)',
-      'out.isoYear': 'ISO 周号年份',
-      'out.weeksInYear': '该 ISO 年总周数',
-      'out.weeksRemaining': '本周之后剩余 ISO 周',
-      'out.thisWeek': '本周(今天)',
-      'note': '🗓️ ISO 8601 周从周一开始,包含当年第一个周四的那周为第 1 周——所以 1 月 1 日可能落在上一年的 W52/W53(2027-01-01 属于 2026-W53)。美国"含 1/1 的周为第 1 周"的口径在部分年份会偏移一周。',
-      'errDate': '日期请按 YYYY-MM-DD 填写',
-      'weekFmt': '{y}-W{w}',
-      'preset.0': '2026-01-01 → W1',
-      'preset.1': '2026-12-28 → W53',
-      'preset.2': '2027-01-01 → 仍是 2026 年!',
-    },
-  },
+
   es: {
     useCases: ['confirmar a qué semana ISO pertenece una entrega o informe', 'unificar la numeración de semanas en producción', 'entender si el 1 de enero cae en la W52/W53 del año anterior', 'saber cuántas semanas enteras quedan del año'],
     faqs: [

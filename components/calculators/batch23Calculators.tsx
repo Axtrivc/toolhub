@@ -11,7 +11,7 @@
  *  - commute-cost-calculator:周期性通勤年成本 + 通勤小时的时间成本;
  *  - smoking-cost-calculator:烟钱 周/年/十年 + 同额投资的复利值;
  *  - emergency-fund-calculator:3/6/9/12 个月储备金目标与攒够月数。
- * 均基于 makeCalculatorClient 配置驱动,遵循四语 l10n 与确定性首帧规范。
+ * 均基于 makeCalculatorClient 配置驱动,遵循三语 l10n 与确定性首帧规范。
  */
 
 import { makeCalculatorClient } from '../calculator/makeCalculatorClient'

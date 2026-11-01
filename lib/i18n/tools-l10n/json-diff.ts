@@ -5,27 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const JsonDiffL10n: ToolL10n = {
-  zh: {
-    useCases: ['比对两次 API 响应的差异', '检查配置文件改了哪些字段', '定位两份 JSON 的结构分歧点', '生成可粘贴到工单的差异摘要'],
-    faqs: [
-      { q: '键的顺序有影响吗?', a: '没有。比较是结构化的:只要键和值都一致,两个对象就算相同,与键出现的先后无关。但数组顺序有影响——[1,2] 和 [2,1] 会被报告为已更改,与 JSON 对列表的语义一致。' },
-      { q: '嵌套的改动怎么展示?', a: '每处差异都会给出点号路径(如 user.address.city)、变更类型(新增/删除/更改)以及前后值并排显示。无需肉眼翻原始文件,就能精确定位两份 API 响应从哪里开始不同。' },
-      { q: 'JSON 不合法会怎样?', a: '会用红色显示浏览器 JSON 引擎报出的解析错误——不猜测、不给残缺结果。修好出错一侧的语法,输入过程中对比结果会即时刷新。' },
-      { q: '能把差异导出吗?', a: '可以。「复制摘要」会按每行一条输出差异,前缀 + / − / ~,并附总数——可直接粘贴到 PR、工单或聊天里。同份数据也支持纯文本下载。' },
-    ],
-    ui: {
-      'exportFull': '「复制摘要」/下载始终包含全部差异。',
-      'moreDifferences': '+{n} 条差异未显示——请裁剪输入或缩小改动范围以查看其余部分。',
-      'tooLong': '⚠️ 输入超出支持规模(每侧 10 万字符)。请裁剪两侧文档后再比较。',
-      'compared': '对比 JSON',
-      'copySummary': '复制摘要',
-      'identical': '✓ 两份文档结构完全一致',
-      'note': '🔍 比较是结构化的:对象键顺序无关,数组顺序有关。值在 JSON 解析后做深度相等比较。',
-      'original': '原 JSON',
-      'thChange': '差异',
-      'thPath': '路径',
-    },
-  },
+
   es: {
     useCases: ['comparar dos respuestas de API', 'ver qué campos cambiaron en una configuración', 'localizar dónde divergen dos estructuras JSON', 'generar un resumen de diferencias para un ticket'],
     faqs: [

@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * Docker Run to Compose 长文正文 —— 四语 dispatcher
+ * Docker Run to Compose 长文正文 —— 三语 dispatcher
  *
- * en 分支等价于原单语文案的 DOM 结构,zh/es/de 在客户端 hydration 后按 locale
+ * en 分支等价于原单语文案的 DOM 结构,es/de 在客户端 hydration 后按 locale
  * 切换。<code> 中的 docker/compose 标志、YAML 片段与专有名词保持不变。
  */
 
@@ -48,41 +48,7 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── zh ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>为什么要把 docker run 转换为 Docker Compose?</h2>
-    <p>
-      <code>docker run</code> 适合快速的临时容器测试。但一旦加上端口映射、持久化数据卷、环境变量、重启策略和自定义网络规则,
-      一条命令就会膨胀成十几行带脆弱反斜杠续行的 bash,既难读也难维护。
-    </p>
-    <p>
-      把命令转换成 <code>docker-compose.yml</code> 文件,可以带来几个关键优势:
-    </p>
-    <ul>
-      <li><strong>版本控制:</strong> 在 Git 中与应用代码一起追踪基础设施变更。</li>
-      <li><strong>可复现性:</strong> 一条 <code>docker compose up -d</code> 即可启停复杂的多容器编排。</li>
-      <li><strong>安全性:</strong> 把敏感环境变量分离到 <code>.env</code> 文件,避免明文密码留在终端历史里。</li>
-      <li><strong>持久化:</strong> 用声明式 YAML 干净地定义命名数据卷与网络拓扑。</li>
-    </ul>
 
-    <h2>命名数据卷 vs. 宿主机绑定挂载</h2>
-    <p>
-      Docker 主要支持两类存储方式:
-    </p>
-    <ul>
-      <li><strong>命名数据卷(例如 <code>pgdata:/var/lib/postgresql/data</code>):</strong> 由 Docker 引擎管理,存放在 Docker 内部目录中,可在多个容器间共享。本工具会自动在根级 <code>volumes:</code> 段中声明它们。</li>
-      <li><strong>绑定挂载(例如 <code>./html:/usr/share/nginx/html</code>):</strong> 直接映射到宿主机指定路径,不需要根级数据卷声明。</li>
-    </ul>
-
-    <h2>现代 Compose 规范 vs. 旧版 v3</h2>
-    <p>
-      现代 Docker Compose(v2 CLI)遵循官方 <em>Compose Specification</em>,顶层的 <code>version:</code> 键已被弃用且可省略。
-      本工具默认输出干净、现代的 Compose YAML;如果你的 CI/CD 流水线仍依赖旧版 Compose v1,也可以勾选开关保留
-      <code>version: &apos;3.8&apos;</code> 声明头。
-    </p>
-  </section>
-)
 
 // ──────────────────────────── es ────────────────────────────
 const es: ReactNode = (
@@ -159,7 +125,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function DockerRunToComposeContent(): ReactNode {
   const { locale } = useApp()

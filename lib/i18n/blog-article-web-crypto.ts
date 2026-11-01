@@ -27,8 +27,8 @@ const EN_CRUMB_TITLE = 'In-Browser AES & PBKDF2 Guide'
 
 export const webCryptoGuideArticle: LocalizedArticle = {
   en: {
-    articleTitle: { en: EN_TITLE, zh: '一文讲透浏览器内 AES-256-GCM 与 PBKDF2:开发者实战指南', es: 'AES-256-GCM y PBKDF2 en el navegador, sin misterios: la guía práctica para desarrolladores', de: 'AES-256-GCM und PBKDF2 im Browser entmystifiziert: ein praktischer Leitfaden für Entwickler' },
-    breadcrumbTitle: { en: EN_CRUMB_TITLE, zh: EN_CRUMB_TITLE, es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
+    articleTitle: { en: EN_TITLE,  es: 'AES-256-GCM y PBKDF2 en el navegador, sin misterios: la guía práctica para desarrolladores', de: 'AES-256-GCM und PBKDF2 im Browser entmystifiziert: ein praktischer Leitfaden für Entwickler' },
+    breadcrumbTitle: { en: EN_CRUMB_TITLE,  es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
     readMinutes: 12,
     lead: 'The strongest privacy architecture is the one where the server never holds the plaintext. Browser-native WebCrypto makes AES-256-GCM + PBKDF2 available without a single dependency — here is how the pieces actually fit, and where developers still cut their fingers.',
     sections: [
@@ -121,104 +121,10 @@ export const webCryptoGuideArticle: LocalizedArticle = {
       },
     ],
   },
-  zh: {
-    articleTitle: { en: EN_TITLE, zh: '一文讲透浏览器内 AES-256-GCM 与 PBKDF2:开发者实战指南', es: 'AES-256-GCM y PBKDF2 en el navegador, sin misterios: la guía práctica para desarrolladores', de: 'AES-256-GCM und PBKDF2 im Browser entmystifiziert: ein praktischer Leitfaden für Entwickler' },
-    breadcrumbTitle: { en: EN_CRUMB_TITLE, zh: EN_CRUMB_TITLE, es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
-    readMinutes: 12,
-    lead: '最强的隐私架构是服务器根本拿不到明文的那种。浏览器原生 WebCrypto 让 AES-256-GCM + PBKDF2 零依赖可用——本文讲清各部件如何真正咬合,以及开发者仍会割到手的地方。',
-    sections: [
-      {
-        heading: '1. 为什么要在客户端加密:零知识论证',
-        blocks: [
-          '所有服务端加密方案都要求用户相信一句承诺。客户端加密把承诺换成*属性*:明文与密码永不离开设备,服务器被拖库也只捞到密文。对笔记、备份、合同草稿和个人档案而言,这是"我们承诺读不了"和"根本没东西可读"的区别。',
-          '代价是浏览器必须做真加密,而不是拿十六进制字符串做 XOR。这正是 Web Crypto API(`crypto.subtle`)存在的意义——原生、常数时间、有硬件支持的实现,任何纯 JS 库在安全性上都无法企及。',
-        ],
-      },
-      {
-        heading: '2. AES-256-GCM:自带测谎仪的加密',
-        blocks: [
-          'AES-GCM 是**认证加密**:除了密文还产出 128 位认证标签。解密时哪怕被翻转一个比特——或者密码错了——操作会响亮地失败,而不是返回看似合理的乱码。老式 CBC 模式会高高兴兴解密被篡改的数据,让你的应用用更疼的方式发现损坏。',
-          '那条绝不能破的规矩:**同一密钥绝不复用 IV/nonce**。GCM nonce 为 96 位,逐条消息随机生成——随机 12 字节 IV 下,同一密钥加密数十亿条消息后碰撞概率才有意义。每次加密都用 PBKDF2 的随机盐(等于每次拿到全新密钥),问题在构造上就不存在。',
-          {
-            card: {
-              title: 'AES-256-GCM 加密 / 解密',
-              href: '/tools/aes-encrypt-decrypt/',
-              desc: '口令式 AES-256-GCM + PBKDF2(15 万次迭代、随机盐)——全程浏览器本地,自包含 salt:iv:ciphertext 载荷。',
-            },
-          },
-        ],
-      },
-      {
-        heading: '3. PBKDF2:把人类密码拉伸成机器密钥',
-        blocks: [
-          '密码是糟糕的密钥:熵低、复用、可猜。**PBKDF2-HMAC-SHA256** 负责拉伸——把密码与随机 16 字节盐一起哈希,再重复 15 万次以上。盐让彩虹表失效(相同密码产出不同密钥),迭代次数给攻击者的每次猜测征税。',
-          'PBKDF2 救不了弱密码:15 万次迭代把单次猜测成本抬高约 2¹⁷ 倍,40 位的密码等效约 57 位工作量——依然可破。密钥拉伸买的是乘数,不是奇迹;密码本身必须扛起大部分熵。',
-          { code: CODE_WEBCRYPTO },
-          {
-            card: {
-              title: 'HMAC 生成器',
-              href: '/tools/hmac-generator/',
-              desc: 'PBKDF2 本质是迭代 15 万次的 HMAC-SHA256——亲手跑一遍这个底层原语:任意密钥与消息,输出 hex 或 base64。',
-            },
-          },
-        ],
-      },
-      {
-        heading: '4. 密钥与机密:以偏执狂的方式生成',
-        blocks: [
-          '任何被代码或用户依赖的机密都应来自**密码学安全 RNG**——`crypto.getRandomValues`,永远不是 `Math.random()`。用可预测 PRNG 生成的 API key 不是机密,是谜题。',
-          { list: [
-            '**API key / token**——至少 128 位(32 个十六进制字符),只用 CSPRNG。',
-            '**加密口令**——长度胜过复杂度:5 个随机单词强过 10 个拧巴字符。',
-            '**盐与 IV**——每次操作随机生成,与密文*一起存储*;它们不是机密,但必须唯一。',
-          ] },
-          {
-            card: {
-              title: '密钥生成器',
-              href: '/tools/secret-key-generator/',
-              desc: 'CSPRNG 生成的 API key 与 token(hex/base64)——你的安全假设悄悄依赖的那种随机性。',
-            },
-          },
-          {
-            card: {
-              title: '密码生成器',
-              href: '/tools/password-generator/',
-              desc: '本地生成高熵密码与口令短语——不键入、不传输。',
-            },
-          },
-        ],
-      },
-      {
-        heading: '5. JWT:解码不等于验证',
-        blocks: [
-          'JWT 的结构是 base64url(header).base64url(payload).signature。任何人都能解码前两段——它们是*签名而非加密*。开发者常踩两个推论:绝不要往 JWT payload 里放机密(用户拿任意解码器就能读);服务端必须**先验签再信任任何 claim**,并钉死 `alg` 白名单——经典的 "alg: none" 与 RS256→HS256 混淆攻击,都从跳过这一步开始。',
-          '客户端解码只用于*调试*:查看你手里 token 的过期时间、受众与 scope——验签永远放在服务端,密钥或公钥在哪里,验证就在哪里。',
-          {
-            card: {
-              title: 'JWT 解码器',
-              href: '/tools/jwt-decoder/',
-              desc: '本地检视 header 与 payload,过期时间与 claims 可读化呈现——解码留在浏览器里,token 本来就在那里。',
-            },
-          },
-        ],
-      },
-      {
-        heading: '客户端加密清单',
-        blocks: [
-          { list: [
-            '用 **AES-GCM**(或其他 AEAD 模式),绝不裸用 CBC/ECB。',
-            '密钥派生用 **PBKDF2/Argon2 级**拉伸:随机 16 字节盐,≥10 万次迭代。',
-            '一切机密出自 **crypto.getRandomValues**——审计安全路径上的每一个 `Math.random()`。',
-            '每条消息随机 IV;salt:iv:ciphertext 一起传输。',
-            'JWT 随便解码;**验签**只在持真实密钥、锁定算法白名单、未过期校验齐全的地方做。',
-          ] },
-        ],
-      },
-    ],
-  },
+
   es: {
-    articleTitle: { en: EN_TITLE, zh: '一文讲透浏览器内 AES-256-GCM 与 PBKDF2:开发者实战指南', es: 'AES-256-GCM y PBKDF2 en el navegador, sin misterios: la guía práctica para desarrolladores', de: 'AES-256-GCM und PBKDF2 im Browser entmystifiziert: ein praktischer Leitfaden für Entwickler' },
-    breadcrumbTitle: { en: EN_CRUMB_TITLE, zh: EN_CRUMB_TITLE, es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
+    articleTitle: { en: EN_TITLE,  es: 'AES-256-GCM y PBKDF2 en el navegador, sin misterios: la guía práctica para desarrolladores', de: 'AES-256-GCM und PBKDF2 im Browser entmystifiziert: ein praktischer Leitfaden für Entwickler' },
+    breadcrumbTitle: { en: EN_CRUMB_TITLE,  es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
     readMinutes: 12,
     lead: 'La arquitectura de privacidad más fuerte es aquella en la que el servidor nunca posee el texto en claro. WebCrypto, nativo del navegador, ofrece AES-256-GCM + PBKDF2 sin una sola dependencia — así encajan las piezas de verdad, y dónde se cortan los desarrolladores.',
     sections: [
@@ -312,8 +218,8 @@ export const webCryptoGuideArticle: LocalizedArticle = {
     ],
   },
   de: {
-    articleTitle: { en: EN_TITLE, zh: '一文讲透浏览器内 AES-256-GCM 与 PBKDF2:开发者实战指南', es: 'AES-256-GCM y PBKDF2 en el navegador, sin misterios: la guía práctica para desarrolladores', de: 'AES-256-GCM und PBKDF2 im Browser entmystifiziert: ein praktischer Leitfaden für Entwickler' },
-    breadcrumbTitle: { en: EN_CRUMB_TITLE, zh: EN_CRUMB_TITLE, es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
+    articleTitle: { en: EN_TITLE,  es: 'AES-256-GCM y PBKDF2 en el navegador, sin misterios: la guía práctica para desarrolladores', de: 'AES-256-GCM und PBKDF2 im Browser entmystifiziert: ein praktischer Leitfaden für Entwickler' },
+    breadcrumbTitle: { en: EN_CRUMB_TITLE,  es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
     readMinutes: 12,
     lead: 'Die stärkste Privacy-Architektur ist die, bei der der Server den Klartext nie besitzt. Das browser-native WebCrypto bringt AES-256-GCM + PBKDF2 ohne eine einzige Abhängigkeit — so passen die Teile wirklich zusammen, und wo sich Entwickler noch schneiden.',
     sections: [

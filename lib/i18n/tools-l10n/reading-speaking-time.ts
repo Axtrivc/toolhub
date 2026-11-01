@@ -5,76 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const readingSpeakingTimeL10n: ToolL10n = {
-  zh: {
-    ui: {
-      'statWords': '词数',
-      'statChars': '字符数',
-      'statReading': '阅读时长',
-      'statSpeaking': '演讲时长',
-      'statMinUnit': '分钟',
-      'at250WordsPerPage': '按每页 250 词',
-      'copySummary': '复制摘要',
-      'cpmUnit': '字/分',
-      'customSpeed': '自定义语速: ',
-      'noteText': '⏱️ 估算假设匀速:英文默读平均约 150–200 词/分、清晰演讲约 100–130 词/分;粘贴中文时自动按字/分计(默读约 200–400、演讲约 150–250 字/分)。实际现场会更慢(含停顿、幻灯片和互动)——现场演讲请预留 10–20% 余量。',
-      'pages': '页',
-      'pasteSomeTextFirst': '请先粘贴一些文本',
-      'pasteYourText': '粘贴你的文本',
-      'placeholder': '在此粘贴文章、脚本或演讲稿…',
-      'presetAverage': '平均',
-      'presetConversation': '对话',
-      'presetFast': '快速',
-      'presetFastSpeaker': '快语速',
-      'presetPresentation': '演讲',
-      'presetSkim': '略读',
-      'presetSlow': '慢速',
-      'readingTime': '阅读时长',
-      'readingTimeAt': '阅读时长 @ ',
-      'sCharacters': '字符数: ',
-      'sPages': '页数(每页 250 词): ',
-      'sReadingTime': '阅读时长 @ ',
-      'sSentences': '句数: ',
-      'sSpeakingTime': '演讲时长 @ ',
-      'sWords': '词数: ',
-      'selected': '已选',
-      'sentences': '句',
-      'speakingTime': '演讲时长',
-      'speakingTimeAt': '演讲时长 @ ',
-      'summaryTitle': '阅读与演讲时长',
-      'textExceeds': '文本超过',
-      'truncatedForSafety': '字符——为保证页面流畅,仅统计开头部分。',
-      'wordsUnit': '词',
-      'wpmUnit': '词/分',
-    },
-    useCases: [
-      '读 1000 字需要多长时间',
-      '演讲时长计算器',
-      '博客文章阅读时间估算器',
-      '语速(每分钟字数)计算器',
-    ],
-    faqs: [
-      {
-        q: '多快的阅读速度算「平均」?',
-        a: '成人非虚构类默读大约每分钟 150–200 词(中文口径约 200–400 字/分)。预设给出慢速、平均、快速几档,还有一个自定义滑块让你匹配自己的节奏或特定受众。',
-      },
-      {
-        q: '为什么演讲时间比阅读时间长?',
-        a: '人读得比说得快——开口时会有停顿、重音和换气。常见的公开演讲语速是每分钟 130–150 词,所以同样的文本用来讲比用来默读明显更久。',
-      },
-      {
-        q: '能设置自己的每分钟字数吗?',
-        a: '能。自定义语速滑块会覆盖预设,所以你可以精确匹配已知的旁白语速、幻灯片时间预算或播客脚本时长,而不必依赖平均值。',
-      },
-      {
-        q: '中文演讲语速大概是多少?',
-        a: '中文习惯用「字/分」衡量:新闻播报约 250–300 字/分,从容的授课或讲座约 180–220 字/分,大致相当于每分钟 130–160 个英文词。把自定义语速滑块调到自己的目标值最准。',
-      },
-      {
-        q: '页数是怎么折算的?',
-        a: '按每页 250 词、与标准稿件排版一致:3000 词约 12 页,适合给打印稿或剧本估篇幅。网页文章不用管页数,直接看阅读时长即可。',
-      },
-    ],
-  },
+
   es: {
     ui: {
       'statWords': 'Palabras',

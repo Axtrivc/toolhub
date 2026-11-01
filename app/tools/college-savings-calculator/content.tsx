@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * CollegeSavingsCalculator 长文正文 —— 四语 dispatcher
+ * CollegeSavingsCalculator 长文正文 —— 三语 dispatcher
  *
- * en 分支与 SSR 渲染输出一致。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支与 SSR 渲染输出一致。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -24,19 +24,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>学费通胀不等于普通通胀</h2>
-    <p>美国大学费用的历史增速是每年 4-6%,而整体 CPI 通常只有 2-3%。用普通通胀率设定学费目标,几乎注定在入学那年差出一大截——本工具默认 5%,原因正在于此。</p>
-    <h2>四年制为什么不是"今天的年费 ×4"</h2>
-    <p>每个学年单独计费:第一年付的是今天的费用按通胀推到入学年,第二年再多通胀一年,依此类推。今天 $30,000 的项目、十年后入学、5% 通胀,四年合计约 $210,000——而不是简单相乘得出的 $120,000。</p>
-    <h2>已存的钱如何缩小每月目标</h2>
-    <p>已经在 529 里的钱会免税复利到入学那天——今天存 $10,000,按 6% 收益十年后约 $17,900。计算器用这笔终值抵扣总费用,再把缺口换算成等额月供。越早放进去的钱,干的活越多。</p>
-    <h2>可以参考的真实数字</h2>
-    <p>2024-25 学年,含学费、食宿与杂费的全部入学成本:公立本州约 $30,000、外州约 $49,000、私立非营利约 $68,000。很多家庭实际上只从储蓄覆盖三分之一到一半,其余靠当期收入——存满当然理想,但并非必需。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -66,7 +53,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function CollegeSavingsCalculatorContent(): ReactNode {
   const { locale } = useApp()

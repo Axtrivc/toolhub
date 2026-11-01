@@ -48,49 +48,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具？</h2>
-    <p>「宏量营养素」是提供热量的三大营养素：蛋白质、碳水化合物和脂肪。本计算器根据你的目标，将每日热量目标拆分为宏量营养素配比。</p>
-    <div>
-      <h2>三大宏量营养素</h2>
-      <ul>
-        <li><strong>蛋白质（4 cal/g）：</strong>构建和修复肌肉。建议每公斤体重 1.6-2.2g。</li>
-        <li><strong>碳水化合物（4 cal/g）：</strong>主要能量来源，对高强度运动至关重要。</li>
-        <li><strong>脂肪（9 cal/g）：</strong>参与激素合成、维生素吸收和饱腹感调节。热量占比不要低于 20%。</li>
-      </ul>
-    </div>
-    <div>
-      <h2>按目标推荐的配比</h2>
-      <ul>
-        <li><strong>减脂：</strong>较高蛋白质（40/30/30），在热量缺口下保留肌肉</li>
-        <li><strong>维持：</strong>均衡配比（30/40/30）</li>
-        <li><strong>增肌：</strong>较高碳水（35/45/20），为训练提供能量</li>
-      </ul>
-    </div>
-    <div>
-      <h2>计算公式</h2>
-      <>
-        <p>每种宏量营养素的克数，由其热量占比除以每克所含热量得出：</p>
-        <p style={{ fontFamily: 'monospace', background: 'rgb(var(--bg-subtle))', padding: '0.75rem 1rem', borderRadius: '0.5rem', fontSize: '0.95rem' }}>
-          克数 = (每日热量 × 宏量营养素 %) ÷ 每克热量
-        </p>
-        <p>以 2,000 卡的维持目标为例（30% 蛋白质 / 40% 碳水 / 30% 脂肪）：</p>
-        <ul>
-          <li><strong>蛋白质：</strong>2000 × 0.30 ÷ 4 = 150 g</li>
-          <li><strong>碳水：</strong>2000 × 0.40 ÷ 4 = 200 g</li>
-          <li><strong>脂肪：</strong>2000 × 0.30 ÷ 9 = 67 g</li>
-        </ul>
-        <p>上方的饼图按热量显示了同样的配比——脂肪看起来更少，是因为每克脂肪所含热量是蛋白质或碳水的两倍多。</p>
-      </>
-    </div>
-    <div>
-      <h2>蛋白质是最重要的宏量营养素</h2>
-      <p>对大多数人来说，达到蛋白质目标比精确的碳水/脂肪配比更重要。充足的蛋白质能在减脂期间保留肌肉、支持肌肉增长，并增加饱腹感。建议每公斤体重摄入 1.6-2.2g。</p>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -180,7 +137,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function MacroCalculatorContent(): ReactNode {
   const { locale } = useApp()

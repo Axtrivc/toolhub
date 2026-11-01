@@ -5,42 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const DividendCalculatorL10n: ToolL10n = {
-  zh: {
-    useCases: ['估算持仓的年股息收入与股息率', '对比 DRIP 再投资与直接取现的长期差距', '规划每月股息现金流(如覆盖房租/生活费)', '按股息增长率压力测试未来收入'],
-    faqs: [
-      { q: '股息率是怎么算的?', a: '用年度每股股息除以当前股价——$50 的股票每年派 $2.40,股息率就是 4.8%。美股大多按季派息,输入前记得把季度股息乘以 4。' },
-      { q: 'DRIP 投影是怎么工作的?', a: '模型按年复利:每年的股息按你输入的股价买入新股,新股次年也产生股息。股价假设恒定、每股股息按你的增长率复利增长,所以它展示的是再投资的力量,不是股价预测。' },
-      { q: '多高的股息率算好?', a: '标普 500 的历史均值大约在 1.3%–2%;长期高于 6%–8% 的收益率常常是削减派息的前兆(股息陷阱)。稳定增长的历史记录比起点高收益更值钱。' },
-      { q: '股息是有保障的吗?', a: '没有——董事会任何季度都可以削减或暂停派息(2009 与 2020 年都出现过成批削减)。增长输入假设派息稳步提升;把它压到 0% 做一次压力测试更稳妥。' },
-    ],
-    ui: {
-      'in.shares': '持有股数',
-      'in.price': '股价',
-      'in.dps': '年度每股股息',
-      'in.growth': '股息年增长率',
-      'in.drip': '股息再投资',
-      'in.years': '投影年数',
-      'opt.drip.yes': '开启(DRIP)',
-      'opt.drip.no': '关闭(取现金)',
-      'out.annualIncome': '第一年股息收入',
-      'out.yieldPct': '股息率',
-      'out.monthlyAvg': '月均收入',
-      'out.endIncome': '最后一年的年度收入',
-      'out.cumDividends': '累计收到的股息',
-      'out.dripShares': 'DRIP 新增股数',
-      'chartTitle': '累计股息:DRIP vs 取现',
-      'line.drip': 'DRIP 再投资',
-      'line.cash': '股息取现',
-      'preset.0': '股息贵族',
-      'preset.1': '高收益 REIT',
-      'preset.2': '月度收入计划',
-      'errInvalid': '请输入正的股数与股价,年数 1–40',
-      'errGrowth': '股息增长率不能为负——恒定派息请填 0%',
-      'unit.shares': '股',
-      'dripOff': 'DRIP 已关闭',
-      'note': '💵 美股多数按季度派息——请输入年度每股股息(季度 × 4)。DRIP 投影按年复利、假设股价不变;它展示的是收入再投资的力量,不是股价预测。',
-    },
-  },
+
   es: {
     useCases: ['estimar la renta anual y la rentabilidad por dividendos de tu cartera', 'comparar reinvertir (DRIP) frente a cobrar en efectivo a largo plazo', 'planificar un flujo de dividendos mensual (por ejemplo, para cubrir el alquiler)', 'simular ingresos futuros según el crecimiento del dividendo'],
     faqs: [

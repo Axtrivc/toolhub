@@ -54,47 +54,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这个工具是什么?</h2>
-    <p>
-      这个计算器使用 <strong>Mifflin-St Jeor 公式</strong>(对大多数人最准确的公式)估算你每日所需的卡路里。它会显示你的 BMR(静息时消耗的卡路里)和 TDEE(包含活动在内的每日总消耗),以及减重或增重的目标值。
-    </p>
-
-    <div>
-      <h2>卡路里需求是如何计算的</h2>
-      <p>
-        Mifflin-St Jeor 公式根据你的体重、身高、年龄和性别估算 BMR。TDEE 等于 BMR 乘以一个活动系数(久坐为 1.2,非常活跃可达 1.9)。想减重,摄入要低于 TDEE;想增重,摄入要高于 TDEE。
-      </p>
-    </div>
-
-    <div>
-      <h2>安全的增减速度</h2>
-      <ul>
-        <li>
-          <strong>温和减重:</strong> −250 cal/天 ≈ 每周 −0.25 kg(0.5 lb)
-        </li>
-        <li>
-          <strong>标准减重:</strong> −500 cal/天 ≈ 每周 −0.5 kg(1 lb)
-        </li>
-        <li>
-          <strong>激进减重:</strong> −1000 cal/天 ≈ 每周 −1 kg(2 lb)(并不适合所有人)
-        </li>
-        <li>
-          在没有医生指导的情况下,女性不要低于 1,200 cal,男性不要低于 1,500 cal
-        </li>
-      </ul>
-    </div>
-
-    <div>
-      <h2>为什么估算值会有差异</h2>
-      <p>
-        这些公式对大多数人的准确度大约在 ±10% 以内,但个人代谢会因肌肉量、基因、激素和肠道健康而异。把这个数字当作起点,并根据 2-3 周的实际效果进行调整。
-      </p>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -198,7 +157,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function CalorieCalculatorContent(): ReactNode {
   const { locale } = useApp()

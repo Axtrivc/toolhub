@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * Chmod Calculator 长文正文 —— 四语 dispatcher
+ * Chmod Calculator 长文正文 —— 三语 dispatcher
  *
- * en 分支等价于原渲染输出。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支等价于原渲染输出。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en (与改造前渲染输出一致) ────────────────────────────
@@ -60,36 +60,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这个工具是什么?</h2>
-    <p>
-      Linux 文件权限决定了谁能读取、写入或执行每一个文件,而 <code>chmod</code> 就是用来修改它的命令。本计算器把抽象的八进制与符号表示法变成一个可点击的网格:勾选复选框,即可立即看到八进制值(<code>755</code>)、符号形式(<code>rwxr-xr-x</code>)以及一条可直接粘贴的 <code>chmod</code> 命令。它也支持反向操作——粘贴 <code>644</code> 或 <code>rw-r--r--</code>,网格会自动更新。所有运算都在你的浏览器本地完成。
-    </p>
-
-    <div>
-      <h2>读懂八进制权限</h2>
-      <p>
-        每个八进制位都是 <strong>读 = 4、写 = 2、执行 = 1</strong> 的加和,三个位依次对应属主、属组和其他人。因此 <code>755</code> 表示属主拥有 4+2+1(全部权限),而属组和其他人拥有 4+1(读 + 执行)——这是脚本和 Web 目录的标准权限。<code>644</code>(属主可读写,其他人只读)是普通文件的默认权限,而 <code>600</code> 将文件锁定为仅属主可访问——这是 SSH 私钥要求的权限模式。
-      </p>
-    </div>
-
-    <div>
-      <h2>特殊位:setuid、setgid、sticky</h2>
-      <p>
-        第四个前导八进制位编码了三个特殊标志。<strong>setuid</strong>(4)让可执行文件以文件属主的权限运行——<code>passwd</code> 正是借此编辑 <code>/etc/shadow</code>。<strong>setgid</strong>(2)对属组起到同样作用,当作用于目录时,它会强制新建文件继承该目录的属组。<strong>sticky 位</strong>(1)作用于目录时,只允许文件属主删除该文件——这对 <code>/tmp</code>(<code>1777</code>)等共享文件夹至关重要。在符号表示中,它们叠加在执行位上,显示为 <code>s</code>/<code>S</code> 和 <code>t</code>/<code>T</code>。
-      </p>
-    </div>
-
-    <div>
-      <h2>需要避免的常见陷阱</h2>
-      <p>
-        慎用 <code>chmod 777</code>:全局可写的文件是典型的安全漏洞,而真正的解决办法通常是用 <code>chown</code> 纠正属主。请记住<strong>目录需要执行位</strong>——没有它,你能列出名称(<code>r</code>),却无法进入或访问其中的任何内容。另外,除非传入 <code>-R</code>,否则 <code>chmod</code> 不会递归处理;而对整个目录树应用统一的权限模式会混淆文件与文件夹——请改用 <code>{'find . -type d -exec chmod 755 {} +'}</code>,并配合一次对应的 <code>-type f</code> 处理。
-      </p>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -153,7 +123,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function ChmodCalculatorClientContent(): ReactNode {
   const { locale } = useApp()

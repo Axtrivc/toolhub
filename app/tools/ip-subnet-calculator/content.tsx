@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * IP Subnet Calculator 长文正文 —— 四语 dispatcher
+ * IP Subnet Calculator 长文正文 —— 三语 dispatcher
  *
- * en 分支等价于原 ToolContent 渲染输出。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支等价于原 ToolContent 渲染输出。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en (与改造前渲染输出一致) ────────────────────────────
@@ -59,36 +59,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具?</h2>
-    <p>
-      子网划分是每位网络工程师每天都在做的算术:给定一个类似 <code>192.168.1.10/24</code> 的地址,它属于哪个网络?广播地址是什么?里面能容纳多少台主机?本计算器即时给出子网掩码、通配符掩码、网络地址和广播地址、可用主机范围、地址类别,以及 RFC 1918 私网/公网分类——全部在你的浏览器中通过精确的 32 位二进制运算完成。
-    </p>
-
-    <div>
-      <h2>CIDR 运算原理</h2>
-      <p>
-        IPv4 地址是一个 32 位的数字,前缀长度(<code>/24</code>)表示有多少个前导位用来标识网络。<strong>子网掩码</strong>就是这些位置 1 后的结果;<strong>通配符掩码</strong>是它的取反,用于 Cisco ACL 和 OSPF。将地址与掩码做 AND 运算得到<strong>网络地址</strong>;与通配符做 OR 运算得到<strong>广播地址</strong>。两者之间——扣除这两个保留地址——就是可用的主机范围:<code>2^(32−前缀) − 2</code> 台主机。
-      </p>
-    </div>
-
-    <div>
-      <h2>/31 和 /32 的特殊情况</h2>
-      <p>
-        有两个前缀打破了「减二」规则。<code>/31</code> 链路(RFC 3021)是点对点 WAN 链路,根本没有网络地址或广播地址——<strong>两个</strong>地址都可用,从而在路由器之间的链路上将地址浪费减半。<code>/32</code> 精确标识一台主机,常用于环回接口和防火墙规则。本工具能正确处理这两种情况,而不会报告「零个可用主机」。
-      </p>
-    </div>
-
-    <div>
-      <h2>地址类别、私网范围与实用建议</h2>
-      <p>
-        分类地址标签如今大多只存在于文档中:A 类(<code>1–126</code>)、B 类(<code>128–191</code>)、C 类(<code>192–223</code>)、D 类(组播)和 E 类(实验)。实际运维中真正重要的是 <strong>RFC 1918</strong>:<code>10.0.0.0/8</code>、<code>172.16.0.0/12</code> 和 <code>192.168.0.0/16</code> 是私网地址,在公网上不可路由,因此在不同站点重叠使用会破坏 VPN。规划时要预留增长空间——日后把一个 <code>/24</code> 拆成两个 <code>/25</code> 要比对整个网络重新编号轻松得多。
-      </p>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -187,7 +157,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function IpSubnetCalculatorClientContent(): ReactNode {
   const { locale } = useApp()

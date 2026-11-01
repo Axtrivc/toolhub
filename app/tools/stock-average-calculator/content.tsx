@@ -5,7 +5,7 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * StockAverageCalculator 长文正文 —— 四语 dispatcher
+ * StockAverageCalculator 长文正文 —— 三语 dispatcher
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -22,19 +22,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>与券商报表一致的加权平均成本</h2>
-    <p>每笔买入按 股数 × 价格 计入,佣金每单加一次,总和除以总股数——这正是报表上显示的加权平均成本基准。空缺的批次直接跳过:股数填 0,它就退出计算。</p>
-    <h2>摊平:数学与心理的拉扯</h2>
-    <p>下跌后加仓确实会拉低回本价——100 股 @$48、100 股 @$38、50 股 @$30 的平均成本是 $40.40。但它同时把更多仓位押在一个市场持续投反对票的判断上。下一笔的诚实检验不是"它拉低了平均价",而是"今天这个价格,我会从零开这个仓吗?"</p>
-    <h2>成本基准、手续费与洗售陷阱</h2>
-    <p>佣金应计入成本基准——税务申报正是这么处理的。如果你在 ±30 天内亏损卖出过这只股票,再买入(股息再投资也算)会触发洗售规则:亏损并入成本基准,当年不能抵扣。"税损卖出之后紧接着摊平"是投资者踩中这条规则的经典路径。</p>
-    <h2>知道什么时候停手</h2>
-    <p>提前定好"论点被证伪"的条件——而不是"价格更低"的条件。许多投资者给单一持仓设一个组合占比上限,并把触顶视为停止摊平的信号。在一个已经崩掉的故事上摊低平均价,不过是把小仓位的亏损换成大仓位的亏损。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -64,7 +51,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function StockAverageCalculatorContent(): ReactNode {
   const { locale } = useApp()

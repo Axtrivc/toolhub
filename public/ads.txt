@@ -1,11 +1,11 @@
 # ads.txt — Authorized Digital Sellers
 # =============================================================================
-# 当前没有声明授权卖方。不要把全零或示例 publisher ID 部署为正式记录。
+# No authorized sellers are currently declared. Do not deploy an all-zero or example publisher ID.
 #
-# 启用 AdSense 前:
-#   1. 在 AdSense 后台复制与你账号匹配的真实 ads.txt 记录。
-#   2. 在此文件新增该记录,格式:
+# Before enabling AdSense:
+#   1. Copy the real ads.txt record for your account from the AdSense dashboard.
+#   2. Add that record here in this format:
 #      google.com, pub-YOUR-REAL-ID, DIRECT, f08c47fec0942fa0
-#   3. 同时在部署环境配置合法 NEXT_PUBLIC_ADSENSE_CLIENT 和数字广告单元 ID。
-#   4. 重新部署并核对 https://toolhub.axtrivc.com/ads.txt 与 AdSense 后台状态。
+#   3. Configure a valid NEXT_PUBLIC_ADSENSE_CLIENT and numeric ad-unit ID in the deployment environment.
+#   4. Redeploy and verify https://toolhub.axtrivc.com/ads.txt against the AdSense dashboard.
 # =============================================================================

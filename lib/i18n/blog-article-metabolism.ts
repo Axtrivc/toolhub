@@ -22,8 +22,8 @@ const EN_CRUMB_TITLE = 'Metabolism & Calorie Deficit Guide'
 
 export const metabolismGuideArticle: LocalizedArticle = {
   en: {
-    articleTitle: { en: EN_TITLE, zh: '人体代谢的科学:算清 BMR、TDEE、热量缺口与 16:8 断食', es: 'La ciencia del metabolismo humano: calcular BMR, TDEE, el déficit calórico y el ayuno 16:8', de: 'Die Wissenschaft des menschlichen Stoffwechsels: BMR, TDEE, Kaloriendefizit und 16:8-Fasten berechnen' },
-    breadcrumbTitle: { en: EN_CRUMB_TITLE, zh: EN_CRUMB_TITLE, es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
+    articleTitle: { en: EN_TITLE,  es: 'La ciencia del metabolismo humano: calcular BMR, TDEE, el déficit calórico y el ayuno 16:8', de: 'Die Wissenschaft des menschlichen Stoffwechsels: BMR, TDEE, Kaloriendefizit und 16:8-Fasten berechnen' },
+    breadcrumbTitle: { en: EN_CRUMB_TITLE,  es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
     readMinutes: 11,
     lead: 'Weight change is not a morality play; it is an energy ledger with three entries — BMR, activity, and intake. Here is the equation set clinicians use, the honest math of deficits, and where 16:8 fasting actually helps (and where it does not).',
     sections: [
@@ -112,100 +112,10 @@ export const metabolismGuideArticle: LocalizedArticle = {
       },
     ],
   },
-  zh: {
-    articleTitle: { en: EN_TITLE, zh: '人体代谢的科学:算清 BMR、TDEE、热量缺口与 16:8 断食', es: 'La ciencia del metabolismo humano: calcular BMR, TDEE, el déficit calórico y el ayuno 16:8', de: 'Die Wissenschaft des menschlichen Stoffwechsels: BMR, TDEE, Kaloriendefizit und 16:8-Fasten berechnen' },
-    breadcrumbTitle: { en: EN_CRUMB_TITLE, zh: EN_CRUMB_TITLE, es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
-    readMinutes: 11,
-    lead: '体重变化不是道德剧,而是一本只有三个科目的能量账:BMR、活动量、摄入量。本文给出临床营养师实际使用的方程组、缺口计算的诚实数学,以及 16:8 断食真正有用(和没用)的地方。',
-    sections: [
-      {
-        heading: '1. BMR:仅仅是活着的成本',
-        blocks: [
-          '基础代谢率是身体在完全静止下的耗能——心跳、思考、细胞修复。在久坐成年人中它占总消耗的 **60–75%**。所以"我几乎不吃还长胖"通常意味着摄入估算错了,而不是代谢坏了。',
-          { code: CODE_MIFFLIN },
-          'Mifflin-St Jeor 方程在现代人群中优于老版 Harris-Benedict,至今是临床营养学的默认。注意它的驱动变量:**体重、身高、年龄、性别**——没有神秘变量。参数相同的两个人,BMR 相差通常在 ±10% 以内。',
-          {
-            card: {
-              title: 'BMR 计算器',
-              href: '/tools/bmr-calculator/',
-              desc: '用 Mifflin-St Jeor 算你的基础代谢——一切热量计划的地基数字。',
-            },
-          },
-        ],
-      },
-      {
-        heading: '2. TDEE:BMR 乘以你真实过的生活',
-        blocks: [
-          '每日总消耗 = BMR × 活动系数。陷阱在于自我美化:多数坐班、每周三次健身的人实际是 **1.4–1.5,不是 1.7**。活动量高估一档,每日预算虚增 200–300 kcal——足以把整个计划缺口清零。',
-          '一个校准方法:手环和健身器械普遍高估消耗 15–30%。如果体重秤连续三周与你的表格打架,第一嫌疑人是活动系数,不是你的自律。',
-          {
-            card: {
-              title: 'TDEE 计算器',
-              href: '/tools/tdee-calculator/',
-              desc: '由 BMR + 诚实活动量得出维持热量——选描述你平均一周的那档,而不是最好的一周。',
-            },
-          },
-        ],
-      },
-      {
-        heading: '3. 缺口账簿:每公斤脂肪 7,700 kcal',
-        blocks: [
-          '体脂大约每公斤储存 7,700 kcal,所以 **500 kcal/天的缺口,预计每周减脂约 0.45 kg**。预测会诚实地衰减:体重下降后 BMR 跟着降(要供养的身体变小了),同样的缺口逐渐缩小——平台期是算术,不是失败。',
-          '两条护栏保护账本健康:不要长期把摄入压到 BMR 以下——依从性会崩,瘦体重跟着走。用**每公斤体重 1.6–2.2 g 蛋白质**加抗阻训练保住肌肉;没有它们,减掉的重量一部分是脂肪,一部分是发动机。',
-          {
-            card: {
-              title: '宏量营养素计算器',
-              href: '/tools/macro-calculator/',
-              desc: '把每日热量目标拆成蛋白、碳水、脂肪——让 1.6–2.2 g/kg 的蛋白质护栏落到具体克数。',
-            },
-          },
-          {
-            card: {
-              title: '热量计算器',
-              href: '/tools/calorie-calculator/',
-              desc: '由你的 TDEE 得出减脂/维持/增肌的每日热量目标——含缺口对应的每周速度。',
-            },
-          },
-        ],
-      },
-      {
-        heading: '4. 16:8 断食:排程工具,不是代谢外挂',
-        blocks: [
-          '限时进食把摄入压缩进一个窗口——经典为 8 小时进食、16 小时断食。对照试验的一致结论是:在热量相等时,它的减重效果*与普通热量限制相当*。机制是行为层面的,不是魔法:窗口变小,深夜顺手多吃的 300–500 kcal 被物理移除。',
-          '16:8 真正有帮助的地方:食欲控制(多数人在 1–2 周适应后报告饥饿感下降)、日程简化(少了早餐决策)、以及早窗口变体中观察到的胰岛素敏感性改善。它做不到的地方:跑不赢热量盈余;也不适合孕期人群、有进食障碍史者,或一天两练的运动员。',
-          {
-            card: {
-              title: '间歇性断食计算器',
-              href: '/tools/intermittent-fasting-calculator/',
-              desc: '围绕你的一天规划 16:8(或 18:6 / 20:4)窗口——进食开始、断食结束与每周排程。',
-            },
-          },
-        ],
-      },
-      {
-        heading: '5. 适应性产热:为什么节食会反击',
-        blocks: [
-          '持续缺口会触发适应:NEAT(抖腿、站姿、零碎动作)下降,饥饿激素上升,TDEE 下降幅度超出体重下降本身能解释的范围——典型 **5–15%**。反制策略无聊但被反复验证:温和缺口(TDEE 之下 10–25%)、足量蛋白、抗阻训练、以月为单位的耐心。',
-          '实操闭环:估 TDEE → 定缺口 → 记录摄入 2–3 周 → 按*体重趋势*而不是 App 预测来微调。你的身体才握着真账本。',
-        ],
-      },
-      {
-        heading: '第一周,逐日执行',
-        blocks: [
-          { list: [
-            '第 1 天:算 **BMR** 与诚实的 **TDEE**——都写下来。',
-            '第 2 天:定 **500 kcal** 缺口目标,不再激进。',
-            '第 3–7 天:照常吃,但全部记录——先测量,再管理。',
-            '第 1 周末:对比实际摄入与计划;多数缺口藏在饮料、食用油和周末里。',
-            '之后每周:固定时间称重,只看 7 天趋势;趋势停滞 2 周以上才调 ±100–200 kcal。',
-          ] },
-        ],
-      },
-    ],
-  },
+
   es: {
-    articleTitle: { en: EN_TITLE, zh: '人体代谢的科学:算清 BMR、TDEE、热量缺口与 16:8 断食', es: 'La ciencia del metabolismo humano: calcular BMR, TDEE, el déficit calórico y el ayuno 16:8', de: 'Die Wissenschaft des menschlichen Stoffwechsels: BMR, TDEE, Kaloriendefizit und 16:8-Fasten berechnen' },
-    breadcrumbTitle: { en: EN_CRUMB_TITLE, zh: EN_CRUMB_TITLE, es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
+    articleTitle: { en: EN_TITLE,  es: 'La ciencia del metabolismo humano: calcular BMR, TDEE, el déficit calórico y el ayuno 16:8', de: 'Die Wissenschaft des menschlichen Stoffwechsels: BMR, TDEE, Kaloriendefizit und 16:8-Fasten berechnen' },
+    breadcrumbTitle: { en: EN_CRUMB_TITLE,  es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
     readMinutes: 11,
     lead: 'El cambio de peso no es una obra de moralidad; es un libro contable de energía con tres apuntes: BMR, actividad e ingesta. Aquí está el juego de ecuaciones que usan los clínicos, la matemática honesta del déficit y dónde ayuda de verdad el ayuno 16:8 (y dónde no).',
     sections: [
@@ -295,8 +205,8 @@ export const metabolismGuideArticle: LocalizedArticle = {
     ],
   },
   de: {
-    articleTitle: { en: EN_TITLE, zh: '人体代谢的科学:算清 BMR、TDEE、热量缺口与 16:8 断食', es: 'La ciencia del metabolismo humano: calcular BMR, TDEE, el déficit calórico y el ayuno 16:8', de: 'Die Wissenschaft des menschlichen Stoffwechsels: BMR, TDEE, Kaloriendefizit und 16:8-Fasten berechnen' },
-    breadcrumbTitle: { en: EN_CRUMB_TITLE, zh: EN_CRUMB_TITLE, es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
+    articleTitle: { en: EN_TITLE,  es: 'La ciencia del metabolismo humano: calcular BMR, TDEE, el déficit calórico y el ayuno 16:8', de: 'Die Wissenschaft des menschlichen Stoffwechsels: BMR, TDEE, Kaloriendefizit und 16:8-Fasten berechnen' },
+    breadcrumbTitle: { en: EN_CRUMB_TITLE,  es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
     readMinutes: 11,
     lead: 'Gewichtsveränderung ist kein Moralstück, sondern ein Energiekonto mit drei Positionen — BMR, Aktivität und Zufuhr. Hier der Gleichungssatz der Kliniker, die ehrliche Defizit-Mathematik und wo 16:8-Fasten wirklich hilft (und wo nicht).',
     sections: [

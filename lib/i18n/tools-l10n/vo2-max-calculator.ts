@@ -5,46 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const Vo2MaxCalculatorL10n: ToolL10n = {
-  zh: {
-    useCases: ['用 12 分钟跑距离估算 VO₂max', '用静息/最大心率比值快速估摄氧量', '对照分级表看自己的心肺水平', '跟踪有氧训练周期的进度'],
-    faqs: [
-      { q: '两种方法哪个更好?', a: 'Cooper 12 分钟跑是对实验室直接测量法的实地替代,通常在 ±3-5 ml/kg/min 内;心率比值法(Uth-Sørensen)只反映心血管效率,个体差异更大。能跑就用 Cooper,心率法留作无法测试时的粗估。' },
-      { q: '多少算好的 VO₂max?', a: '30 多岁属于认真锻炼的业余水平;40 以上在同龄人中已属优秀;男性精英 70-85、女性精英 60-75。分级标准随年龄和性别下移——40 岁的 45 与 25 岁的 45 不是一回事。' },
-      { q: 'Cooper 测试怎么做?', a: '充分热身后在标准跑道起跑,12 分钟内跑出最远距离。配速失误(前 2 分钟冲太狠)会显著压低成绩;测试前 24 小时避免大强度训练。' },
-      { q: 'VO₂max 能练上去吗?', a: '能。大量 Zone 2 有氧打底,配合每周 1-2 次 90-95% 最大心率的间歇;新手 8-12 周常见 10-15% 的提升,训练年限越长提升越慢(遗传上限约占三成)。' },
-    ],
-    ui: {
-      'in.distance': '12 分钟跑距离',
-      'in.hrmax': '最大心率',
-      'in.hrrest': '静息心率',
-      'out.vo2Cooper': 'VO₂max(Cooper 测试)',
-      'outSub.vo2Cooper': '由 12 分钟距离得出',
-      'out.vo2Rest': 'VO₂max(心率法)',
-      'outSub.vo2Rest': '15.3 × 最大心率 ÷ 静息心率',
-      'out.rating': '心肺水平分级',
-      'outSub.rating': '成人通用分级,随年龄性别浮动',
-      'out.pace12': '12 分钟跑配速',
-      'outSub.pace12': '每公里',
-      'rate.vpoor': '很低',
-      'rate.poor': '偏低',
-      'rate.fair': '一般',
-      'rate.good': '良好',
-      'rate.vgood': '很好',
-      'rate.exc': '优秀',
-      'errInvalid': '请输入 400-8000 m 的距离、100-230 的最大心率、30-120 的静息心率',
-      'chartTitle': '你的 VO₂max 分级',
-      'zone.0': '很低',
-      'zone.1': '偏低',
-      'zone.2': '一般',
-      'zone.3': '良好',
-      'zone.4': '很好',
-      'zone.5': '优秀',
-      'preset.0': '扎实跑者',
-      'preset.1': '休闲锻炼',
-      'preset.2': '竞技水平',
-      'note': '🏃 Cooper 公式:VO₂max = (距离 − 504.9) ÷ 44.73(米)。心率法(Uth-Sørensen):15.3 × 最大心率 ÷ 静息心率——快但粗。实测室值与场地估算相差 3-5 ml/kg/min 属正常。',
-    },
-  },
+
   es: {
     useCases: ['estimar tu VO₂max con la distancia de 12 minutos', 'usar el cociente de pulsiones como atajo', 'situarte en la tabla de niveles cardiovasculares', 'seguir el progreso de tu bloque aeróbico'],
     faqs: [

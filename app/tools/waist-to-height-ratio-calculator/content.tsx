@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * WaistToHeightRatioCalculator 长文正文 —— 四语 dispatcher
+ * WaistToHeightRatioCalculator 长文正文 —— 三语 dispatcher
  *
- * en 分支与 SSR 输出一致。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支与 SSR 输出一致。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -24,19 +24,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>一条皮尺,不用查表</h2>
-    <p>腰高比只需要一次测量和一次除法,但荟萃分析反复发现:它对心血管代谢风险的预测力至少与 BMI 持平,常常更好。0.5 这条界线从童年到老年、对两性都适用,让它在筛查工具里难得地不需要任何换算表。</p>
-    <h2>分级意味着什么</h2>
-    <p>低于 0.4 提示腹部脂肪极少——值得检查整体营养而不是庆祝。0.4 到 0.5 是健康区间,胰岛素敏感性和血脂通常最好看。0.5 到 0.6 风险稳步爬升;超过 0.6,统计上的声音已经够响,值得和临床医生聊一次。</p>
-    <h2>测量的规矩就是全部</h2>
-    <p>找最下缘肋骨与髋骨上缘的中点,皮尺水平、贴身、不勒,正常呼气末读数——绝不刻意呼气。牛仔裤的腰围号没有用:虚荣尺码和裤子的实际位置让它完全是另一个数字。</p>
-    <h2>减脂期为什么比体重秤好用</h2>
-    <p>减脂阶段,腰围往往先于体重下降——水分波动掩盖了体重变化,内脏脂肪却在悄悄退场。每周用同一手法量腰围,得到的是一条很难欺骗的趋势线,而这正是好的进度指标该有的样子。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -66,7 +53,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function WaistToHeightRatioCalculatorContent(): ReactNode {
   const { locale } = useApp()

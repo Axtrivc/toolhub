@@ -5,39 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const yamlToJsonL10n: ToolL10n = {
-  zh: {
-    ui: {
-      'clear': '清空',
-      'copy': '复制',
-      'errAnchors': '不支持 YAML 锚点(&)和别名(*)。如果值本应是字面字符串,请给它加上引号。',
-      'errDuplicateKey': '第 {line} 行存在重复键 "{key}"',
-      'errIndent': '第 {line} 行出现意外缩进',
-      'errMalformedFlow': '内联流值 "{value}" 格式有误——请检查括号与引号。',
-      'errMixedFlow': '不支持 "{value}" 中的混合/嵌套内联流。请把嵌套集合改写成各自缩进的行(块样式)。',
-      'errMixedMapSeq': '同一层级混用映射与序列不是合法的 YAML。',
-      'errNestedFlow': '不支持嵌套的内联流({pair} 中又出现 {pair})。请把嵌套集合改写成各自缩进的行(块样式)。',
-      'errParseLine': '无法解析第 {line} 行:"{content}"',
-      'errTabs': 'YAML 不允许用 Tab 缩进(请使用空格)。',
-      'errUnclosedFlow': '内联流 "{value}" 未闭合——缺少右括号 "{closer}"。',
-      'errUnexpectedCloser': '在 "{value}" 中发现了内联流之外的 "{closer}"。',
-      'inputLabel': '粘贴你的 YAML',
-      'invalidYaml': '无效 YAML',
-      'multiDocWarning': '检测到多个 YAML 文档(---)。仅转换第一个文档——请删除多余的 --- 分隔符,或一次只转换一个文档。',
-      'note': '🔒 100% 客户端本地运行——手写的 YAML 子集解析器。支持映射、序列、内联流、引号、注释和块标量(| 与 >)。',
-      'outputLabel': 'JSON 输出',
-    },
-    useCases: [
-      '把 Docker Compose / Kubernetes 配置转成 JSON',
-      '把 CI 配置喂给只接受 JSON 的工具',
-      '排查 YAML 缩进问题',
-      '转换 GitHub Actions 等工作流文件',
-    ],
-    faqs: [
-      { q: '支持哪些 YAML 特性?', a: '解析器支持映射、序列(列表)、嵌套结构、内联流语法([a,b] 和 {k: v})、单双引号字符串、纯标量、数字、布尔值、null、块标量(| 和 >)以及 # 注释。多文档流(---)不会被拆分,只转换第一个文档。' },
-      { q: '为什么我的 YAML 解析失败?', a: 'YAML 对缩进很敏感——Tab 和空格混用、缩进深度不一致是最常见的原因。请只用空格,并保持一致的缩进步长(通常为 2 个空格)。另外注意未加引号的特殊值(yes/no/on/off 会被解析成布尔值),如需把它们当作字符串,请加引号。' },
-      { q: '重复键如何处理?', a: '某些 YAML 库会悄悄覆盖重复键,而本解析器会在同一映射里出现重复键时报错,因为这通常意味着出了错,并会造成数据丢失。修正源 YAML 中的重复键后再重新转换。' },
-    ],
-  },
+
   es: {
     ui: {
       'clear': 'Limpiar',

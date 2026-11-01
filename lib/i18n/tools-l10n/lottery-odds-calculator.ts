@@ -4,45 +4,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const LotteryOddsCalculatorL10n: ToolL10n = {
-  zh: {
-    useCases: ['查看 Powerball / Mega Millions / EuroMillions 各奖级的中奖概率', '把“1 in 2.92 亿”翻译成中奖百分比', '验证自定义彩票(如 6/49 + 特别号)的头奖概率', '算出中任意奖项(哪怕最小的)的综合概率'],
-    faqs: [
-      { q: '概率是怎么算的?', a: '两个奖池都用精确的超几何分布:主池 C(K,a)·C(N−K,K−a)/C(N,K),再乘上副池的同式——结果与官方公布的 Powerball 头奖 1/292,201,338 完全一致。' },
-      { q: '多买几张彩票有用吗?', a: '每张都是独立组合:买 10 张头奖概率变成 10/292,201,338,即约 1 in 2,920 万——比例上翻了十倍,绝对概率依然约等于零。' },
-      { q: '哪个彩票更容易中?', a: 'EuroMillions 头奖 1 in 1.398 亿,约为 Powerball(2.922 亿)的一半;任意奖项概率 EuroMillions 约 1 in 13,也比美国两款(约 1 in 24–25)更容易,但奖池规模是另一回事。' },
-      { q: '自定义模式怎么用?', a: '输入主池大小 N、选取数 K,可选副池 M/J。头奖概率 = 1 ÷ [C(N,K)×C(M,J)];“任意中奖”此时显示“至少命中 1 个主号”的概率,因为各发行方的奖级表不同。' },
-    ],
-    ui: {
-      'in.game': '游戏',
-      'in.poolN': '自定义:主池大小',
-      'in.picksK': '自定义:选取个数',
-      'in.bonusPool': '自定义:副池大小',
-      'in.bonusPicks': '自定义:副号个数',
-      'opt.game.powerball': 'Powerball',
-      'opt.game.mega': 'Mega Millions',
-      'opt.game.euro': 'EuroMillions',
-      'opt.game.custom': '自定义',
-      'out.jackpot': '头奖概率',
-      'out.jackpotPct': '头奖中奖百分比',
-      'out.tier2': '第二档概率',
-      'out.tier3': '第三档概率',
-      'out.anyPrize': '任意奖项概率',
-      'out.noPrize': '颗粒无收概率',
-      'out.totalCombos': '总组合数',
-      'customNumbers': '自定义号码',
-      'chartTitle': '任意中奖 vs 落空(单注)',
-      'chartCenter': '单注',
-      'slice.anyPrize': '中任意奖项',
-      'slice.noPrize': '颗粒无收',
-      'preset.0': 'Powerball',
-      'preset.1': 'Mega Millions',
-      'preset.2': 'EuroMillions',
-      'preset.3': 'Lotto 6/49 + 特别号',
-      'errInvalid': '主池 2–99,选取 1–12 且不超过主池,副号 0–3 且不超过副池',
-      'match': '命中',
-      'note': '🎲 概率按两个奖池的精确超几何分布计算,与官方公布的 Powerball 1/292,201,338、EuroMillions 1/139,838,160 头奖口径一致。奖池结构:Powerball 5/69 + 1/26 · Mega Millions 5/70 + 1/25 · EuroMillions 5/50 + 2/12。自定义模式下“任意中奖”指“至少命中 1 个主号”——各发行方的奖级表并不相同。',
-    },
-  },
+
   es: {
     useCases: ['ver las probabilidades por premio de Powerball, Mega Millions y EuroMillions', 'traducir «1 entre 292 millones» a un porcentaje', 'comprobar el bote de una lotería propia (p. ej. 6/49 + complementario)', 'calcular la probabilidad de ganar cualquier premio, incluso el menor'],
     faqs: [

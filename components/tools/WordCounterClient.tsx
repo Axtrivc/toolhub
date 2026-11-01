@@ -79,7 +79,7 @@ function formatTime(minutes: number, L: (key: string, fb: string) => string): st
 /** 快速示例:几行有代表性的中英混排文本(与 texttools 家族 LoadSample 惯例一致) */
 const SAMPLE = `ToolHub runs entirely in your browser — fast, private, and free.
 Paste any article, essay, or script here to see live statistics.
-这一段是中文示例:统计口径对汉字按字计数,对英文按词计数。`
+This final sentence gives the live counter a little more text to measure.`
 
 // P-1 大输入防线:统计在每次输入时同步跑多趟线性扫描(码点展开/分词/断句/分段),
 // 超大粘贴会冻结 UI。超过 200k 字符只统计前 200k 并给出截断提示(阈值与 makeTextTool 底座一致)。

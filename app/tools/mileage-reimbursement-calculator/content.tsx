@@ -5,7 +5,7 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * MileageReimbursementCalculator 长文正文 —— 四语 dispatcher
+ * MileageReimbursementCalculator 长文正文 —— 三语 dispatcher
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -22,19 +22,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>2026 年标准费率</h2>
-    <p>2026 年出现了罕见的年中调整:IRS 商务费率 1–6 月为每英里 72.5 美分,7 月 1 日起上调到 76 美分。就医与搬家里程上半年 20.5 美分、下半年 23.5 美分,给合格慈善机构做志愿服务仍是成文法的 14 美分(2025 年为商务 70¢、就医/搬家 21¢)——最后这一档只有国会能让它动。</p>
-    <h2>费率买的到底是什么</h2>
-    <p>标准费率不是油价估算。它把燃油、机油、轮胎、保养、保险、注册和折旧打包成一个「每英里」价格——所以大约是纯油钱成本的两倍。实际费用法能选,但代价是全年留着收据和使用日志。</p>
-    <h2>搬家里程的陷阱</h2>
-    <p>2018 年之后,搬家里程只有奉命调防的现役军人可以扣。其他人哪怕为了一份跨城的新工作搬家,里程也一分不扣——这是税改留下的最常见也最贵的误解之一。</p>
-    <h2>雇主报销是另一套规则</h2>
-    <p>雇主按每英里多少钱报都可以,但在「可问责计划」下,不超过 IRS 费率的部分才免税,超出部分计入应税工资。另外:雇员开自己的车干未报销的商务,这些里程在联邦层面已经完全不能扣。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -64,7 +51,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function MileageReimbursementCalculatorContent(): ReactNode {
   const { locale } = useApp()

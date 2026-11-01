@@ -5,39 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const QuadraticEquationSolverL10n: ToolL10n = {
-  zh: {
-    useCases: ['解一元二次方程并判断实根/重根/复根', '求抛物线顶点与对称轴用于画图或求最值', '把三项式分解成 a(x − x₁)(x − x₂) 形式', '核对作业里判别式与韦达定理的结论'],
-    faqs: [
-      { q: '怎么解 ax² + bx + c = 0?', a: '求根公式 x = (−b ± √(b² − 4ac)) / (2a) 永远有效。判别式 b² − 4ac 在动笔前就告诉你根的类型:正数两个实根、零一个二重根、负数一对共轭复根。' },
-      { q: '顶点和对称轴是什么意思?', a: '顶点 (−b/2a, k) 是抛物线的拐点,对称轴 x = −b/2a 是穿过它的竖直镜像线。a > 0 时顶点是最低点,a < 0 时是最高点。' },
-      { q: '为什么结果是复数?', a: '判别式为负说明抛物线不与 x 轴相交,根只存在于复数中,呈 p ± qi 形式。几何上整个顶点在零线上方(或下方),此时因式分解改用配方式 a(x − h)² + k。' },
-      { q: 'a 可以是 0 吗?', a: '那就不是二次方程了——计算器会按一次方程 bx + c = 0 解出唯一根 x = −c/b。若 a、b 同时为 0,方程里没有未知项,无从解起。' },
-    ],
-    ui: {
-      'in.a': '系数 a',
-      'in.b': '系数 b',
-      'in.c': '系数 c',
-      'out.x1': '根 x₁',
-      'out.x2': '根 x₂',
-      'out.discriminant': '判别式 b² − 4ac',
-      'out.vertex': '顶点 (h, k)',
-      'out.axis': '对称轴',
-      'out.form': '因式/配方形式',
-      'chartTitle': '抛物线 y = ax² + bx + c',
-      'line.curve': 'y = ax² + bx + c',
-      'line.zero': 'y = 0',
-      'preset.0': '两个实根:x² − 3x + 2',
-      'preset.1': '二重根:x² − 4x + 4',
-      'preset.2': '复根:x² + x + 1',
-      'note': '📐 判别式 b² − 4ac 决定一切:正 → 两个实根,零 → 一个二重根,负 → 一对共轭复根。顶点恒在 x = −b/2a,两根存在时正好居于正中(韦达定理:x₁ + x₂ = −b/a,x₁·x₂ = c/a)。',
-      'errNumeric': 'a、b、c 请填数字',
-      'linear': '一次方程:单根',
-      'errDegenerate': 'a 和 b 都是 0 —— 这不是含 x 的方程',
-      'twoRoots': '两个实根',
-      'doubleRoot': '二重根',
-      'complexRoots': '共轭复根',
-    },
-  },
+
   es: {
     useCases: ['resolver ecuaciones cuadráticas y clasificar raíces reales/dobles/complejas', 'hallar vértice y eje de simetría de la parábola', 'factorizar trinomios como a(x − x₁)(x − x₂)', 'comprobar el discriminante y las fórmulas de Vieta de los deberes'],
     faqs: [

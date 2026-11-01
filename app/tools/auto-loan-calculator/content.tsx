@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * Auto Loan Calculator 长文正文 —— 四语 dispatcher
+ * Auto Loan Calculator 长文正文 —— 三语 dispatcher
  *
- * en 分支等价于原 ToolContent 渲染输出。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支等价于原 ToolContent 渲染输出。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en (与改造前渲染输出一致) ────────────────────────────
@@ -57,47 +57,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具？</h2>
-    <p>
-      这个<strong>汽车贷款计算器</strong>根据车辆价格、首付、以旧换新价值、销售税、APR 和贷款期限来估算你每月的车贷还款——然后生成一份可以
-      导出为 CSV 的完整摊销计划。它 100% 在你的浏览器中运行，你输入的数字永远不会离开你的设备。
-    </p>
-
-    <div>
-      <h2>贷款金额是如何计算的</h2>
-      <p>
-        你实际融资的金额是 <code>price − down payment − trade-in + sales tax</code>。税费会作用在
-        <strong>(price − trade-in)</strong>上，这是美国大多数州处理以旧换新抵扣的方式——但
-        有少数几个州按全价计税，因此请把这个数字当作估算值。月供使用标准
-        摊销公式 <code>M = P × r / (1 − (1 + r)^−n)</code>，其中 <code>r</code> 是月利率
-        （APR ÷ 12），<code>n</code> 是月数。0% APR 的贷款只是简单地把本金除以
-        期数。
-      </p>
-    </div>
-
-    <div>
-      <h2>如何解读结果</h2>
-      <p>
-        <strong>月供</strong>是每月到期的固定金额，并附带一个以今天为起点的预计还清日期。<strong>总利息</strong>是这笔贷款在本金之外让你额外付出的代价。{' '}
-        <strong>总成本</strong>把你的首付和以旧换新价值加到全部月供之上，因此它代表
-        这辆车的完整花费（不含保险、手续费和保养）。摊销表展示每笔还款如何在<em>本金</em>和<em>利息</em>之间分配——早期的还款主要是
-        利息，而且最初余额下降得很慢。
-      </p>
-    </div>
-
-    <div>
-      <h2>签字前的几点提示</h2>
-      <p>
-        更长的期限（72–84 个月）会降低月供，但会大幅抬高总利息——把同一辆车在
-        48 和 84 个月之间比较一下就能看出差别。更大的首付或以旧换新既能减少月供也能减少利息，还能让你避免<em>「倒挂」</em>（欠的比车本身的价值还多）。在看车之前先去银行或信用合作社拿到预批，这样你就可以比较各家 APR，并且
-        永远要谈车辆价格，而不是月供。
-      </p>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -191,7 +150,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function AutoLoanCalculatorClientContent(): ReactNode {
   const { locale } = useApp()

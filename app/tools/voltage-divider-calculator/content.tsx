@@ -5,7 +5,7 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * VoltageDividerCalculator 长文正文 —— 四语 dispatcher
+ * VoltageDividerCalculator 长文正文 —— 三语 dispatcher
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -22,19 +22,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>一个公式,一条链路电流</h2>
-    <p>分压器看起来是两个公式,其实是一个:链路电流 = Vin ÷ (R1 + R2),Vout 就是这个电流乘 R2。12V 加在 10kΩ 与 4.7kΩ 上,链路电流 0.816 mA,抽头电压 3.84V——自己验算:12 × 4,700 ÷ 14,700。</p>
-    <h2>负载永远是赢家</h2>
-    <p>接到 R2 上的任何东西都与 R2 并联,把 Vout 往下拽。实用法则是 10:1 电流比——让分压链烧掉负载电流的十倍,压降就有界(上界 R2⁄(R2 + RL)):中点附近(R1 ≈ R2)约 5%,顶重式分压(如 100k/10k,Vout 只有 Vin 的十分之一)会逼近 9% 的上限。要驱动低阻抗负载或需要更小压降?用运放跟随器缓冲,而不是一味减小电阻。</p>
-    <h2>反着解出一个基准</h2>
-    <p>比较器或 ADC 需要 3.3V?变形得 R2 = R1 × V目标 ÷ (Vin − V目标):12V 经 10kΩ 就是 3.79kΩ,最近的 E12 值 3.9kΩ——落点 3.37V,通常够用。计算器的反解模式替你做这套算术,还显示取整漂移。</p>
-    <h2>分压器的用武之地</h2>
-    <p>把电池电压缩进 ADC 量程、给三极管或运放输入偏置、以及电位器抽头——电位器不过是机械可调的分压器。它们绝不能干的事是供电:分压器为信号稳压,不为负载稳流。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -64,7 +51,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function VoltageDividerCalculatorContent(): ReactNode {
   const { locale } = useApp()

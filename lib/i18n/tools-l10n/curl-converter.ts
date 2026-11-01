@@ -5,25 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const curlConverterL10n: ToolL10n = {
-  zh: {
-    ui: {
-      'clear': '清空',
-      'copy': '复制',
-      'hasBody': '含请求体',
-      'headers': '个请求头',
-      'ignoredFlags': '不支持的选项已忽略',
-      'invalidCurl': '无效的 curl 命令',
-      'noUrl': '(无 URL)',
-      'note': '🔒 100% 本地运行——解析在你的浏览器中完成。不执行任何命令,仅转换文本。',
-      'pasteCurl': '粘贴你的 curl 命令',
-    },
-    useCases: ['把浏览器复制的 curl 命令转成 JavaScript/Python 代码', '根据同事 README 或文档里的 curl 生成可运行的请求', '在 Fetch、Axios 和 Python requests 之间选择', '在本地离线解析 curl(含请求头与请求体)'],
-    faqs: [
-      { q: '支持哪些 curl 功能?', a: '解析 URL、-X/--request 方法、-H/--header 请求头(含 Content-Type 和 Authorization)、-d/--data/--data-raw 请求体,以及 -k/--insecure。Shell 引号(单引号、双引号)和 $\'...\' ANSI-C 语法都能处理。不支持的选项会被忽略。' },
-      { q: '请求体怎么编码?', a: '原始请求体(-d "..." 或 --data-raw)原样传递。JavaScript Fetch 中变成 body: "...";Python requests 中变成 data="..."(若 Content-Type 为 JSON 则尽量用 json=)。multipart 文件上传(-F)不会转成 multipart 代码——请用专用的客户端处理。' },
-      { q: '我的 curl 命令会发到服务器吗?', a: '不会。解析和代码生成全部在浏览器本地由手写分词器完成。你的命令、令牌或请求头永远不会上传——这一点在你的 curl 含有令牌或密钥时也很重要,不过仍应避免在任何地方粘贴真实凭证。' },
-    ],
-  },
+
   es: {
     ui: {
       'clear': 'Limpiar',

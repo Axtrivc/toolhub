@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * FiberIntakeCalculator 长文正文 —— 四语 dispatcher
+ * FiberIntakeCalculator 长文正文 —— 三语 dispatcher
  *
- * en 分支与 SSR 输出一致。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支与 SSR 输出一致。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -24,19 +24,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>两个数字覆盖几乎所有人</h2>
-    <p>美国医学研究院的适宜摄入量可以浓缩成:19-50 岁男性每天 38 g、女性 25 g,51 岁后降到 30 与 21——对吃得像运动员的人,约合每 1000 kcal 配 14 g。多数成年人实际只吃到 15 g 上下,这就是"多吃纤维"能熬过所有营养风潮的原因。</p>
-    <h2>食物等价为什么重要</h2>
-    <p>克数目标是抽象的,"两杯半扁豆"才是食谱。一杯熟扁豆含 15.5 g,一杯树莓 8 g,一汤匙奇亚籽 4.1 g——把豆类、水果和种子摊到一天里,不用任何补充剂就能达标。</p>
-    <h2>加量要爬坡,不要跳崖</h2>
-    <p>肠道菌群需要数周时间繁殖出能从容发酵纤维的种群。一夜加 20 g 几乎必然换来腹胀和胀气;每周加约 5 g、配一两杯额外的水,让系统慢慢适应。"吃不了纤维"的人,多半只是加得太快。</p>
-    <h2>可溶与不可溶,都计入总量</h2>
-    <p>燕麦、大麦和豆类偏可溶性(降胆固醇、成凝胶那种);麦麸和蔬菜偏不溶性(管规律那种)。AI 目标按总纤维计,不必细拆——豆类、全谷物、水果和蔬菜的多样组合会自动把两种都送到。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -66,7 +53,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function FiberIntakeCalculatorContent(): ReactNode {
   const { locale } = useApp()

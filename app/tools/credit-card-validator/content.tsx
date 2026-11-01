@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * CreditCardValidator 长文正文 —— 四语 dispatcher
+ * CreditCardValidator 长文正文 —— 三语 dispatcher
  *
- * en 分支与改造前渲染输出一致。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支与改造前渲染输出一致。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -24,19 +24,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>Luhn 到底能挡住什么</h2>
-    <p>这套校验(IBM,1954)从右往左把每隔一位的数字翻倍、超过 9 就减 9,再要求总和是 10 的倍数。这个构造恰好抓住所有单字打错和几乎所有的相邻互换——正是人类抄写、口述号码时犯的错。它从来不是安全机制,而是一道防错栅栏,如今仍内嵌在地球上每一台刷卡终端和支付表单里。</p>
-    <h2>品牌规则看的是 IIN,不是卡面 logo</h2>
-    <p>卡号前 6-8 位是发卡行识别号。Visa 以 4 开头;Mastercard 是 51-55 或 2221-2720;Amex 是 34/37 且只有 15 位——所以 Amex 输入框按 4-6-5 分组而不是 4-4-4-4;Discover 用 6011、65、644-649 或 622126-622925。一个号码可能过了 Luhn 但长度不符合其品牌——两项检查都通过,"有效"才有意义。</p>
-    <h2>是格式有效,不是账户有效</h2>
-    <p>本工具完全在浏览器内运行,只查结构:形状、品牌、校验和。它无法知道账户是否开立、有没有余额、是否触发风控——只有发卡行在授权时才知道。支付测试号(如 Visa 的 4111 1111 1111 1111)能公开流传,正因为它们结构完美却不连接任何账户。</p>
-    <h2>它该放在表单的哪一环</h2>
-    <p>在调用支付 API 之前,Luhn 加品牌长度规则就是正确的客户端闸门:它让第 16 位打错的数字止步于本地,而不是变成一次失败的扣款尝试和一位困惑的用户。Amex 的 15 位与 4-6-5 分组值得单独的输入掩码;按前缀切换卡面图标虽小,却是用户能感觉到的信任信号。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -66,7 +53,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function CreditCardValidatorContent(): ReactNode {
   const { locale } = useApp()

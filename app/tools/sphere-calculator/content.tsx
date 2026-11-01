@@ -32,33 +32,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具?</h2>
-    <p>根据半径计算球体的体积和表面积。</p>
-    <div>
-      <h2>公式</h2>
-      <ul>
-        <li>体积 = ⁴⁄₃ π r³</li>
-        <li>表面积 = 4 π r²</li>
-      </ul>
-    </div>
-    <div>
-      <h2>现实中的球体</h2>
-      <ul>
-        <li>篮球:r ≈ 12 cm,体积 ≈ 7,238 cm³</li>
-        <li>足球:r ≈ 11 cm</li>
-        <li>网球:r ≈ 3.3 cm</li>
-        <li>地球(略呈椭球):r ≈ 6,371 km</li>
-      </ul>
-    </div>
-    <div>
-      <h2>体积与表面积之比</h2>
-      <p>在所有三维形状中,球体在给定体积下表面积最小。这就是为什么气泡、液滴和行星都是球形的——表面张力和引力使表面能最小。</p>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -116,7 +89,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function SphereCalculatorContent(): ReactNode {
   const { locale } = useApp()

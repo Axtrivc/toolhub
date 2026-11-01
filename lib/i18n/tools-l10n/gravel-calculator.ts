@@ -5,39 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const GravelCalculatorL10n: ToolL10n = {
-  zh: {
-    useCases: ['按吨位订购车道碎石', '计算排水暗沟的回填量', '同体积下比较不同材料重量', '为园路和庭院垫层做材料预算'],
-    faqs: [
-      { q: '一立方码砾石有多少吨?', a: '碎石约 2,700 磅(1.35 吨)/码,豌豆砾石约 2,600 磅,干砂约 2,500 磅。供应商按重量卖,比价前一定要先把体积折成吨。' },
-      { q: '碎石车道应该铺多厚?', a: '私家车 4-6 英寸压实碎石即可;重车要 6-12 英寸且底层用更大粒径。面层粒径接近豌豆砾石大小,走起来才舒适。' },
-      { q: '砾石和覆盖物,该用哪个计算器?', a: '涉及重量与压实(车道、垫层、排水)就用本工具——按吨计价;覆盖物按体积购买与摊铺,走 mulch 计算器。两者的计价单位也不同:吨 vs 袋。' },
-      { q: '一辆卡车能送多少?', a: '小型自卸车 1-5 码,大型三桥车可到 10 码以上(碎石约合 13-14 吨)。超出档位会加收附加费,所以按项目凑整装载能省下二次运费。' },
-    ],
-    ui: {
-      'in.length': '区域长',
-      'in.width': '区域宽',
-      'in.depth': '厚度',
-      'in.material': '材料',
-      'opt.material.crushed': '碎石',
-      'opt.material.pea': '豌豆砾石',
-      'opt.material.sand': '干砂',
-      'in.price': '每吨价格',
-      'out.tons': '需订购重量',
-      'out.yd3': '体积(立方码)',
-      'out.cf': '体积(立方英尺)',
-      'out.cost': '材料花费',
-      'chartTitle': '同体积,不同材料',
-      'cmp.0': '碎石',
-      'cmp.1': '豌豆砾石',
-      'cmp.2': '干砂',
-      'cmpseg.0': '重量',
-      'errDims': '请输入有效的面积与厚度',
-      'preset.0': '车道 20×30 @ 4″',
-      'preset.1': '园路 @ 2″',
-      'preset.2': '排水暗沟',
-      'note': '🪨 采石场按吨计价而非按码:碎石 2,700 lb/yd³(≈1.35 吨/码)、豌豆砾石 2,600、干砂 2,500;散装配送按 1-10 码分档。双车位车道(约 600 ft²、4 英寸厚)接近 10 吨。',
-    },
-  },
+
   es: {
     useCases: ['pedir grava para la entrada por toneladas', 'dimensionar el relleno de una zanja de drenaje', 'comparar materiales por peso al mismo volumen', 'presupuestar la base de caminos y patios'],
     faqs: [

@@ -38,36 +38,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具?</h2>
-    <p>
-      这个工具会移除 JSON 中的所有空白字符,以最小化文件大小。适用于 API 响应、内嵌数据以及每个字节都很重要的存储场景。
-    </p>
-    <div>
-      <h2>体积节省幅度</h2>
-      <p>
-        压缩后的 JSON 通常比格式化后的 JSON 小 20-50%。对于通过网络传输的大型负载,这些节省会积少成多——尤其在移动网络或按流量计费的连接上更是如此。
-      </p>
-    </div>
-    <div>
-      <h2>何时压缩</h2>
-      <ul>
-        <li>API 响应(通常还会再 gzip 压缩)</li>
-        <li>嵌入在 HTML 或 JavaScript 中的 JSON</li>
-        <li>存储在数据库中的配置</li>
-        <li>对带宽敏感的移动应用</li>
-      </ul>
-    </div>
-    <div>
-      <h2>何时不该压缩</h2>
-      <p>
-        不要压缩需要人工阅读或手动编辑的 JSON——例如配置文件、日志输出和调试产物。牺牲可读性换来的体积节省并不划算。
-      </p>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -140,7 +110,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function JSONMinifierContent(): ReactNode {
   const { locale } = useApp()

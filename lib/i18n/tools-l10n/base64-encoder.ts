@@ -5,38 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const base64EncoderL10n: ToolL10n = {
-  zh: {
-    ui: {
-      'inputTooLarge': '⚠️ 输入过大——支持规模最多 10 万字符。请裁剪输入后再转换。',
-      'invalidInput': '⚠️ 此方向的输入无效',
-      'defaultInputDecode': '5L2g5aW9',
-      'defaultInputEncode': '你好',
-      'characters': '字符',
-      'clear': '清空',
-      'swapToDecode': '⇄ 切换为解码',
-      'swapToEncode': '⇄ 切换为编码',
-      'decode': '解码',
-      'decodeInputLabel': '要解码的 Base64',
-      'decodeNote': '🔓 粘贴合法的 Base64 来解码。能正确处理 UTF-8。',
-      'decodeOutputLabel': '解码后的文本',
-      'encode': '编码',
-      'encodeInputLabel': '要编码的文本',
-      'encodeNote': '🔐 Base64 把二进制数据编码成文本。常见于邮件、data URI 和 API。注意:它不是加密。',
-      'encodeOutputLabel': 'Base64',
-      'mode': '模式',
-      'modeAria': '编码/解码模式',
-      'placeholder': '在此输入或粘贴…',
-      'resultPlaceholder': '结果将显示在这里…',
-      'b64GenericErr': '⚠️ 无效 Base64——请检查复制粘贴时内容是否被截断或损坏',
-      'b64UnexpectedChar': '⚠️ 无效 Base64——第 {n} 个字符处出现了不认识的字符「{c}」;合法字符为 A–Z a–z 0–9 + / - _(= 补位可省略)',
-      'encodeFailed': '⚠️ 无法编码该输入',
-      'words': '词',
-    },
-    useCases: ['把文本编码成 Base64 用于邮件或 API', '生成嵌入 HTML/CSS 的 data URI', '为 JWT 令牌编码 header/payload', '在不支持二进制的文本系统中传输数据'],
-    faqs: [
-      { q: '为什么我的非英文文本显示乱码?', a: '本工具使用正确的 UTF-8 处理,所以重音字母和 emoji 都能正确编码。如果你看到乱码,很可能是你用的解码器假定了不同的字符编码。' },
-    ],
-  },
+
   es: {
     ui: {
       'inputTooLarge': '⚠️ Entrada demasiado grande: el tamaño admitido es de hasta 100 000 caracteres. Recorta la entrada para convertir.',

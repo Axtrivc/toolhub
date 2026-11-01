@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * StepsToMilesCalculator 长文正文 —— 四语 dispatcher
+ * StepsToMilesCalculator 长文正文 —— 三语 dispatcher
  *
- * en 分支与 SSR 输出一致。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支与 SSR 输出一致。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -24,19 +24,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>"一英里两千步"从哪来</h2>
-    <p>步行步长平均约为身高的 0.414 倍(Hatano 关系式),175 cm 的成年人一步约 72 cm——折合约每英里 2,200 步。个子高的人每步走得更远,个子矮的人每英里步数更多,所以同样的步数对不同人意味着不同距离。</p>
-    <h2>校准一次,长期可信</h2>
-    <p>想要真正属于自己的数字:按平时步频走 10 步,量出从起步脚跟到终点脚跟的距离,除以 10。或者沿标准 400 m 跑道走一圈并数步数。两种校准都只要五分钟,却能消掉估算里的大部分误差。</p>
-    <h2>距离只是问题的一半</h2>
-    <p>本工具刻意只做步数→距离与时长的换算——不算卡路里,因为那取决于体重、地形和步速。想看能量消耗,请配合"步数换卡路里"计算器;用步行时长检查每天的步数预算是否真的排得进日程。</p>
-    <h2>设备计数是平面图,不是施工图</h2>
-    <p>腕带设备靠摆臂推断步数,洗碗也照计不误;手机在慢速、推婴儿车的步行中又会漏计。同一天不同设备差 10-20% 属正常。认准一台设备、看趋势,让距离换算保持一把稳定的尺子,而不是实验室仪器。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -66,7 +53,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function StepsToMilesCalculatorContent(): ReactNode {
   const { locale } = useApp()

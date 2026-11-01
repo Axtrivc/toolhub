@@ -5,38 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const percentileCalculatorL10n: ToolL10n = {
-  zh: {
-    formula: {
-      formula: 'rank = ( P / 100 ) × (n − 1)',
-      variables:
-        'rank = 排序后列表中的位置(从 0 开始)\nP = 要求的百分位数(0-100)\nn = 数据点个数',
-      explain: 'P 百分位在已排序的 n 个值中的位置。当 rank 不是整数时,在相邻排名之间插值。',
-      example:
-        '第 1 步:已排序的成绩 3、5、8、10、14(n = 5),求第 50 百分位数。\n第 2 步:rank = (50 / 100) × (5 − 1) = 0.5 × 4 = 2。\n第 3 步:rank 2 即第三个值:8。rank 为整数,无需插值。\n结果:第 50 百分位数(中位数)为 8。',
-    },
-    ui: {
-      'chartTitle': '分布',
-      'line.sorted': '排序后数值',
-      'in.numbers': '数字(逗号分隔)',
-      'in.p': '百分位数',
-      'inSuffix.p': '%',
-      'out.result': '百分位值',
-      'datasetTruncated': '仅统计前 10,000 个数字',
-      note: '📈 第 90 百分位表示 90% 的数值低于此数。采用线性插值(inclusive 口径,同 Excel 的 PERCENTILE.INC)。常用于考试成绩和性能指标。',
-    },
-    useCases: [
-      '考试成绩:SAT、GRE 百分位排名',
-      '薪资:收入百分位看自己的位置',
-      '健康:儿童身高/体重的生长曲线',
-      '性能:API 响应时间的 p95 延迟',
-    ],
-    faqs: [
-      { q: '百分位多少算「好」?', a: '要看场景。标准化考试中,第 90 百分位以上算优秀。健康指标方面,落在第 5–95 百分位之间通常都算正常。收入方面,百分位越高表示相对同侪收入越高。' },
-      { q: '监控里的 p95 延迟是什么?', a: '把请求响应时间排序后取第 95 百分位:95% 的请求比它快。平均值会掩盖长尾——均值 80 ms 时可能仍有一半请求超过 200 ms,p95/p99 才暴露这类尖刺。' },
-      { q: '和 Excel 的 PERCENTILE.INC 一致吗?', a: '一致。工具用 inclusive 线性插值,与 Excel 的 PERCENTILE.INC 和 numpy 默认的 linear 方法相同;PERCENTILE.EXC 与 SPSS 用排他口径,数值会略有出入。' },
-      { q: '孩子的身高在第几百分位算正常?', a: '生长曲线第 3–97 百分位之间都属正常;关键是轨迹稳定——沿自己的百分位线走就没问题,短期内跨越两条线以上才需要就医评估。' },
-    ],
-  },
+
   es: {
     formula: {
       formula: 'rank = ( P / 100 ) × (n − 1)',

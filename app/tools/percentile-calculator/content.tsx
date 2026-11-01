@@ -29,30 +29,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具?</h2>
-    <p><strong>百分位数</strong>告诉你有多大比例的数值低于某个给定数字。第 90 百分位数意味着 90% 的数据低于该值。本计算器可求出你指定的任意百分位数所对应的数值。</p>
-    <div>
-      <h2>百分位数的常见用途</h2>
-      <ul>
-        <li><strong>考试成绩:</strong>SAT、GRE ——「第 95 百分位数」表示你的得分高于 95% 的考生</li>
-        <li><strong>薪资:</strong>收入百分位数显示你在同侪中所处的位置</li>
-        <li><strong>健康:</strong>儿童身高/体重百分位数,用于追踪生长发育</li>
-        <li><strong>性能:</strong>API 响应时间 ——「p95 延迟」表示 95% 的请求比它更快</li>
-      </ul>
-    </div>
-    <div>
-      <h2>百分位数如何计算</h2>
-      <p>计算方法有多种。本计算器采用<strong>线性插值法</strong>(与 Excel 的 PERCENTILE 函数所用方法相同)。它先对数据排序,再对落在两个数据点之间的百分位数,在相邻数值之间进行插值。</p>
-    </div>
-    <div>
-      <h2>百分位数 vs 百分比</h2>
-      <p>二者不同。<strong>百分比</strong>是 100 中的份额(你答对了 85% 的题目)。<strong>百分位数</strong>则是将你与他人比较(你的得分高于 90% 的人)。一场考试考了 85%,你可能排在第 70 或第 99 百分位——取决于其他人的表现。</p>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -104,7 +80,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function PercentileCalculatorContent(): ReactNode {
   const { locale } = useApp()

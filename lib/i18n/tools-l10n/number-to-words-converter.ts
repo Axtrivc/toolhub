@@ -5,24 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const NumberToWordsConverterL10n: ToolL10n = {
-  zh: {
-    useCases: ['填写支票与法律文书时把金额拼写成英文单词', '生成邀请函、证书里的序数表述(如 forty-second)', '把数据表里的数字列批量转成英文读法', '核对英文文稿中数字拼写是否正确'],
-    faqs: [
-      { q: '最大能拼到多大的数?', a: '按美式英语的短级差制最大到 999 万亿(thousand、million、billion、trillion)。再往上需要 quadrillion,超出工具会明确提示超范围。' },
-      { q: '小数和负数怎么读?', a: '整数部分正常拼写,小数点读作 "point",其后数字逐个读:3.14 是 "three point one four"。负数在前面加 "negative"。' },
-      { q: '序数形式什么时候用?', a: '表示位置和日期用序数:21 → "twenty-first",42 → "forty-second"。法律与金融文书通常拼基数("forty-two")并括注数字以便核对。' },
-      { q: '英式英语里的 "and" 怎么处理?', a: '美式拼法不带 and:123 是 "one hundred twenty-three";英式会写成 "one hundred and twenty-three"。两种都正确,本工具采用美式惯例。' },
-    ],
-    ui: {
-      'inputLabel': '数字(每行一个)',
-      'outputLabel': '英文单词拼写(基数 + 序数)',
-      'placeholder': '42\n1,234\n-7\n3.14159',
-      'defaultInput': '42\n1,234\n1000000\n-7\n3.14159\n21',
-      'note': '🔢 支持万亿级、小数、负数与千分位逗号($ 与 % 也会被剥离)。合成数 21-99 一律连字符(twenty-one);美式拼法不含 "and"。每行同时给出基数与序数两种拼写。',
-      'errNotNumber': '不是有效数字',
-      'errRange': '超出范围(最大 999 万亿)',
-    },
-  },
+
   es: {
     useCases: ['escribir importes con palabras en cheques y documentos legales en inglés', 'generar ordinales para invitaciones y certificados (forty-second)', 'convertir columnas de números a su lectura en inglés', 'revisar la ortografía de cifras en textos en inglés'],
     faqs: [

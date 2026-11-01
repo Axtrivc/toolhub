@@ -70,63 +70,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>公制与美国体积单位</h2>
-    <p>
-      体积计量正是烹饪变得复杂的地方。<strong>公制</strong>(毫升、升、立方米)简单且一致。<strong>美制</strong>(茶匙、汤匙、杯、液量盎司、品脱、夸脱、加仑)使用需要记忆的不规则换算关系。
-    </p>
-
-    <h2>美式烹饪单位关系</h2>
-    <ul>
-      <li><strong>3 茶匙</strong> = 1 汤匙</li>
-      <li><strong>16 汤匙</strong> = 1 杯</li>
-      <li><strong>1 杯</strong> = 8 液量盎司</li>
-      <li><strong>2 杯</strong> = 1 品脱</li>
-      <li><strong>2 品脱</strong> = 1 夸脱</li>
-      <li><strong>4 夸脱</strong> = 1 加仑</li>
-    </ul>
-
-    <h2>公制到美制换算</h2>
-    <ul>
-      <li><strong>1 升</strong> = 0.264172 美制加仑 = 4.22675 杯</li>
-      <li><strong>1 美制加仑</strong> = 3.78541 升</li>
-      <li><strong>1 美制杯</strong> = 236.588 ml</li>
-      <li><strong>1 汤匙</strong> = 14.7868 ml</li>
-      <li><strong>1 茶匙</strong> = 4.92892 ml</li>
-      <li><strong>1 液量盎司(美制)</strong> = 29.5735 ml</li>
-    </ul>
-
-    <h2>注意:美制与英制(英国)的区别</h2>
-    <p>
-      美国和英国的体积单位<strong>并不相同</strong>。英制品脱为 568 ml;美制品脱为 473 ml——相差 20%。英制加仑、夸脱和液量盎司也更大。在按菜谱做菜或在异国加油时,这一点很重要。本换算器使用<strong>美制单位</strong>。
-    </p>
-
-    <h2>常见用途</h2>
-    <ul>
-      <li><strong>烹饪和烘焙:</strong> 在杯/匙与 ml 之间换算</li>
-      <li><strong>饮料:</strong> 汽水和葡萄酒用 ml/L,啤酒用品脱,牛奶用加仑</li>
-      <li><strong>燃料:</strong> 汽油视国家不同以升或加仑出售</li>
-      <li><strong>医药:</strong> 液体药剂以 ml 计量</li>
-      <li><strong>工程:</strong> 发动机排量、罐体容量用 m³</li>
-    </ul>
-
-    <h2>快速烹饪换算</h2>
-    <ul>
-      <li><strong>250 ml</strong> ≈ 1 杯</li>
-      <li><strong>1 升</strong> ≈ 4 杯 ≈ 1 夸脱</li>
-      <li><strong>4 升</strong> ≈ 1 加仑</li>
-      <li><strong>15 ml</strong> ≈ 1 汤匙</li>
-      <li><strong>5 ml</strong> ≈ 1 茶匙</li>
-    </ul>
-
-    <h2>大体积用立方米</h2>
-    <p>
-      在工业、建筑和航运领域,立方米(m³)是标准。 <code>1 m³ = 1,000 升</code>。集装箱、游泳池或混凝土浇筑都以这种方式计量。对于较小规模的工作,升和毫升更实用。
-    </p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -263,7 +206,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function VolumeConverterContent(): ReactNode {
   const { locale } = useApp()

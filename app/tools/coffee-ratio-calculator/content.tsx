@@ -5,7 +5,7 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * CoffeeRatioCalculator 长文正文 —— 四语 dispatcher
+ * CoffeeRatioCalculator 长文正文 —— 三语 dispatcher
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -22,19 +22,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>永远按重量计比例</h2>
-    <p>所有严肃的冲煮比例都是"水:粉"的质量比。克数让这件事毫无摩擦:1 克水 = 1 毫升,一个 1:16 从单人马克杯到派对大壶只需一次乘法。而"一勺"在浅烘与深烘豆之间能差 2-3 克——足以把一杯平衡的咖啡推向苦涩。</p>
-    <h2>每种冲法的惯例比例</h2>
-    <p>手冲与滴滤在 1:15-1:17;法压更浓,约 1:12,因为全浸泡萃取更慢、金属滤网会放过油脂与口感;冷萃浓缩到 1:8,出品时再兑水。浓缩是异类:1:2——18 克粉在 25-30 秒出 36 克液,粉量差半克在杯中清晰可辨。</p>
-    <h2>配方放大与缩小</h2>
-    <p>知道任意一边就能求另一边:粉 = 水 ÷ 比例,水 = 粉 × 比例。输入壶里要烧的水量读出粉量;输入袋里最后的 15 克豆,看它配得上多少水。杯数按 237 毫升(美制 8 盎司)计——两杯手冲约从 475 克水起步。</p>
-    <h2>先诊断研磨,再动比例</h2>
-    <p>一杯味道不对时,一次只改一个变量:又苦又涩指向磨太细(过萃);尖酸单薄指向磨太粗。比例决定浓度,不改变萃取的风味结构——先修研磨,再用"多加粉"提强度,而不是拉长萃取时间。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -64,7 +51,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function CoffeeRatioCalculatorContent(): ReactNode {
   const { locale } = useApp()

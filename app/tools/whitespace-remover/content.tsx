@@ -35,36 +35,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具?</h2>
-    <p>本工具用于清理杂乱的空白:去除每行首尾的空格,将连续的多个空格合并为一个,并删除空行。最终得到整洁、统一的文本。</p>
-    <div>
-      <h2>哪些内容会被清理</h2>
-      <ul>
-        <li>每行开头或结尾的空格 —— 被去除</li>
-        <li>连续的多个空格 —— 合并为单个空格</li>
-        <li>制表符与空格混用 —— 统一为单个空格</li>
-        <li>空行 —— 被完全删除</li>
-      </ul>
-    </div>
-    <div>
-      <h2>何时需要使用</h2>
-      <ul>
-        <li>清理从网站或 PDF 复制的文本</li>
-        <li>粘贴到电子表格前先格式化数据</li>
-        <li>为代码准备文本(多余的空格会破坏缩进)</li>
-        <li>规范化表单中的用户输入</li>
-        <li>整理笔记和草稿</li>
-      </ul>
-    </div>
-    <div>
-      <h2>保留刻意设置的格式</h2>
-      <p>本工具会删除<em>所有</em>多余的空白。如果你有刻意保留的缩进(如代码或诗歌),默认选项会把一切都铺平。如需保留缩进,请取消勾选上方的<em>「修剪每行」</em>与<em>「合并多余空格」</em>。</p>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -128,7 +98,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function WhitespaceRemoverContent(): ReactNode {
   const { locale } = useApp()

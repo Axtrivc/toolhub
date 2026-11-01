@@ -485,7 +485,7 @@ export function CurlConverterClient() {
 
   const handleLoadSample = useCallback(() => setInput(SAMPLE_CURL), [])
 
-  // 输出语言名(Axios/Fetch/requests)为库专名,四语均保持英文原值;走 L 仅为机制合规
+  // 输出语言名(Axios/Fetch/requests)为库专名,三语均保持英文原值;走 L 仅为机制合规
   const tabs: { label: string; code?: string }[] = [
     { label: L('tabFetch', 'JavaScript (Fetch)'), code: result.fetch },
     { label: L('tabAxios', 'Axios'), code: result.axios },

@@ -95,77 +95,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>什么是 BMI？</h2>
-    <p>
-      <strong>BMI</strong>（身体质量指数）是根据你的身高和体重计算出的一个数字，用于粗略判断你的体重是否处于健康范围。它是最广泛使用的体重类别筛查工具：体重过轻、健康体重、超重和肥胖。该标准由比利时数学家 Adolphe Quetelet 于 19 世纪 30 年代提出，并被世界卫生组织用于人群层面的健康统计。
-    </p>
-
-    <h2>BMI 公式</h2>
-    <p>计算很简单：</p>
-    <ul>
-      <li>
-        <strong>公制：</strong>BMI = 体重 (kg) ÷ 身高² (m²)
-      </li>
-      <li>
-        <strong>英制：</strong>BMI = (体重 (lb) ÷ 身高² (in²)) × 703
-      </li>
-    </ul>
-    <p>
-      例如，一位身高 170 cm、体重 65 kg 的人：<code>65 ÷ (1.70 × 1.70) = 22.5</code>，属于健康体重范围。
-    </p>
-
-    <h2>BMI 分类（WHO 标准）</h2>
-    <ul>
-      <li><strong>低于 18.5：</strong>体重过轻</li>
-      <li><strong>18.5 – 24.9：</strong>健康体重</li>
-      <li><strong>25.0 – 29.9：</strong>超重</li>
-      <li><strong>30.0 – 34.9：</strong>肥胖（I 级）</li>
-      <li><strong>35.0 – 39.9：</strong>肥胖（II 级）</li>
-      <li><strong>40.0 及以上：</strong>肥胖（III 级）</li>
-    </ul>
-
-    <h2>BMI 无法告诉你的事</h2>
-    <p>
-      BMI 是一个有用的筛查工具，但它确实存在局限性。它衡量的是相对于身高的总重量，却无法区分脂肪、肌肉、骨骼和水分。这一点很重要：
-    </p>
-    <ul>
-      <li>
-        <strong>运动员和健美者</strong>常被评为「超重」，因为肌肉的密度大于脂肪。一位体脂率 10% 的职业橄榄球运动员，BMI 可能在 28 左右。
-      </li>
-      <li>
-        <strong>老年人</strong>可能拥有「健康」的 BMI，但体脂率高、肌肉量少——这是 BMI 所忽略的风险。
-      </li>
-      <li>
-        <strong>体脂分布</strong>很重要。腰部脂肪比臀部脂肪带来更高的健康风险，但 BMI 无法区分。
-      </li>
-      <li>
-        <strong>儿童和青少年</strong>需要基于百分位的图表，而不是成人的范围。
-      </li>
-    </ul>
-
-    <h2>适合你身高的健康体重范围</h2>
-    <p>
-      本计算器还会显示与你的身高相对应、BMI 为 18.5–24.9 的体重范围。如果你当前的体重落在该范围内，你的 BMI 就属于健康类别。如果偏高或偏低，这个范围会给你一个具体的目标。
-    </p>
-
-    <h2>BMI 的替代方案</h2>
-    <p>想要更全面地了解健康状况，可以考虑以下互补的测量指标：</p>
-    <ul>
-      <li>
-        <strong>腰围。</strong>男性超过 40 英寸（102 cm）或女性超过 35 英寸（88 cm）提示较高的代谢风险。
-      </li>
-      <li>
-        <strong>腰臀比。</strong>比较腰围和臀围，用以评估脂肪分布。
-      </li>
-      <li>
-        <strong>体脂率。</strong>用卡尺、体脂秤或 DEXA 扫描测量。能够提供 BMI 无法提供的信息。
-      </li>
-    </ul>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -350,7 +279,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function BMICalculatorContent(): ReactNode {
   const { locale } = useApp()

@@ -5,42 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const TakeHomePayCalculatorL10n: ToolL10n = {
-  zh: {
-    useCases: ['估算新 offer 的税后到手', '算加薪实际多拿多少', '比较单身与联合报税的差额', '规划 401(k) 缴存比例'],
-    faqs: [
-      { q: '这个估算有多准?', a: '它采用真实的 2025 联邦税档与标准扣除(单身 $15,000、夫妻联合申报 $30,000),FICA 也用精确税率:社保 6.2%(上限 $176,100 工资基数)、医保 1.45%(无上限)。州税、税收抵免和补充预扣未建模——把它当基线,别当工资系统。' },
-      { q: '为什么 401(k) 降个税却不降 FICA?', a: '传统 401(k) 缴存不计入应税收入,计算器在套用税档前先扣掉它。但 FICA 对这部分照常征税——只扣除税前健康保费——与真实工资单的行为一致。' },
-      { q: '双周数字就是我到手的工资吗?', a: '接近,但它是年度净额 ÷ 26,没有平滑处理;你未录入的福利(HSA、牙科、寿险)也会让实际数字偏移。用它校验 offer 或涨薪是否合理,别拿它跟工资单逐分对账。' },
-      { q: '算州税吗?', a: '不算——州所得税从零(德州、佛州)到最高档超 10%(加州、夏威夷)都有,单一全国模型几乎会误导所有人。请单独估算州税,再从这里的年度净额中减去。' },
-    ],
-    ui: {
-      'chartTitle': '你的工资去哪了',
-      'slice.annualNet': '到手工资',
-      'slice.fedTax': '联邦所得税',
-      'slice.fica': '社保与医保 (FICA)',
-      'chartCenter': '税前总额',
-      'in.annualNet': '预计年度税后',
-      'in.fedTax': '联邦所得税估算',
-      'in.fica': 'FICA(社保+医保)',
-      'in.filing': '申报身份',
-      'in.gross': '年度税前工资',
-      'in.perPaycheck': '每两周薪资金额',
-      'in.preTaxPct': '401(k)/税前比例',
-      'in.premiums': '年度医保保费',
-      'note': '🇺🇸 简化估算:仅标准扣除,不含州税、抵免或补充预扣——实际工资单会有出入。FICA 按法定税率(社保 6.2% 至工资基数上限,医保 1.45%)。',
-      'opt.filing.married': '已婚合并申报',
-      'opt.filing.single': '单身申报',
-      'out.annualNet': '预计年度税后',
-      'out.fedTax': '联邦所得税估算',
-      'out.fica': 'FICA(社保+医保)',
-      'out.filing': '申报身份',
-      'out.gross': '年度税前工资',
-      'out.perPaycheck': '每两周薪资金额',
-      'out.preTaxPct': '401(k)/税前比例',
-      'out.premiums': '年度医保保费',
-          'errInvalidSalary': "请输入有效的工资",
-},
-  },
+
   es: {
     useCases: ['estimar el neto de una nueva oferta de trabajo', 'ver la mejora real de una subida', 'comparar la declaración individual con la conjunta', 'planificar el porcentaje de 401(k)'],
     faqs: [

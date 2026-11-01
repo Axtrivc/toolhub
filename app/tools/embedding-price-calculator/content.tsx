@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * EmbeddingPriceCalculator 长文正文 —— 四语 dispatcher
+ * EmbeddingPriceCalculator 长文正文 —— 三语 dispatcher
  *
- * en 分支与改造前渲染输出一致。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支与改造前渲染输出一致。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en(与改造前渲染输出一致) ────────────────────────────
@@ -24,19 +24,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>嵌入是最便宜的一环</h2>
-    <p>按 $0.02 / 百万 token 计,嵌入一个 10 万文档的语料(每条约 500 token)一次性只花约 1 美元。真正决定账单的是重算频率和文档规模,而不是 API 单价——月成本列把它直观呈现出来。</p>
-    <h2>维度决定存储</h2>
-    <p>3072 维向量的向量库存储开销是 1024 维的 3 倍。列出维度是为了让你在检索质量与基础设施成本之间权衡,而不只盯着 API 价格。</p>
-    <h2>small 还是 large 怎么选</h2>
-    <p>text-embedding-3-small 以约为 large 1/6.5 的价格拿下大多数检索任务;只有当你的数据上实测召回率确有提升时才升级。Cohere embed-v4 在同等 token 单价下可截断到 1024/512/256 维——向量更小、存储更省,账单不变。</p>
-    <h2>RAG 成本结构</h2>
-    <p>典型的 RAG 在生成 token 上的花费比嵌入 token 高出几个数量级。先优化分块大小与检索条数,再纠结嵌入模型选型。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -66,7 +53,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function EmbeddingPriceCalculatorContent(): ReactNode {
   const { locale } = useApp()

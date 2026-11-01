@@ -5,23 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const billSplitCalculatorL10n: ToolL10n = {
-  zh: {
-    useCases: ['算带小费的 AA 账单', '拆分含税含小费的账单', '按人数分摊餐厅账单', '算分摊后每人付多少'],
-    faqs: [
-      { q: '有人没喝酒怎么办?', a: '把酒水部分单算。从总额中减去酒水费用，由喝酒的人分摊，食物则所有人均摊。' },
-    ],
-    ui: {
-      'chartTitle': '账单 + 小费',
-      'cmp.0': '总计',
-      'cmpseg.0': '账单',
-      'cmpseg.1': '小费',
-      errMinOnePerson: '请至少输入 1 人',
-      errNonNegative: '各项数值不能为负',
-      'in.total': '账单总额', 'in.tip': '小费', 'in.people': '人数',
-      'out.perPerson': '每人应付', 'out.tipAmount': '小费总额', 'out.grandTotal': '总计',
-      note: '🍽️ 含小费均摊账单。如果需要按各自点的菜分摊，请单独计算每人的金额。',
-    },
-  },
+
   es: {
     useCases: ['dividir la cuenta con propina', 'repartir la cuenta con impuestos y propina', 'dividir la cuenta entre personas', 'calcular cuánto paga cada persona'],
     faqs: [

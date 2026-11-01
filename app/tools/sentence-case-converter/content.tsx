@@ -34,29 +34,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具?</h2>
-    <p>
-      <strong>句首大写</strong>只将每个句子的首字母大写,其余保持小写。它是正常书写最自然的大小写方式,也最适合用于段落正文。
-    </p>
-    <div>
-      <h2>何时使用句首大写</h2>
-      <ul>
-        <li>文章、邮件和文档中的<strong>正文</strong></li>
-        <li><strong>报纸标题</strong> —— 大多数平面新闻采用句首大写</li>
-        <li><strong>平实写作</strong>,可读性至关重要的场合</li>
-      </ul>
-    </div>
-    <div>
-      <h2>自动转换的局限性</h2>
-      <p>
-        本工具会在句子结束标点(. ! ?)之后将首字母大写,但无法识别人名、品牌、地名等专有名词。转换后,请手动将「john」改为「John」、「paris」改为「Paris」等。对于大多数清理任务(如全部用大写输入的文本),本工具能完成 95% 的工作。
-      </p>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -117,7 +94,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function SentenceCaseConverterContent(): ReactNode {
   const { locale } = useApp()

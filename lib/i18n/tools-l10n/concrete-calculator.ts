@@ -5,49 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const ConcreteCalculatorL10n: ToolL10n = {
-  zh: {
-    useCases: ['估算露台或工具棚垫层的混凝土用量', '为甲板、花架算基础方量', '小修补按袋备料', '浇筑入口台阶前核定体积'],
-    faqs: [
-      { q: '10×10 的板需要多少袋 80 磅混凝土?', a: '4 英寸厚时,10×10 的板体积是 33.3 ft³——约 1.23 立方码。加上 10% 损耗应订 1.36 yd³;若手工搅拌,折合 62 袋 80 磅装。' },
-      { q: '一立方码等于多少袋?', a: '一袋 80 磅出料 0.60 ft³,所以一整码要 45 袋;60 磅装要 60 袋,40 磅装要 90 袋。超过一码后,罐车送的现拌混凝土更便宜也省力得多。' },
-      { q: '为什么要加 10% 损耗?', a: '洒漏、垫层不平、开挖超深都会吃掉方量。10% 是支模浇筑的行业惯例;人工开挖的基础尺寸容易跑偏,可加到 15%。' },
-      { q: '柱和台阶是怎么算的?', a: '圆柱按 π × (直径 ÷ 2)² × 高 × 数量;台阶按三角棱柱近似——每级踏步的「进深 × 高 ÷ 2 × 宽」,正好对应贴房屋支模浇筑的实际方量。' },
-    ],
-    ui: {
-      'in.shape': '形状',
-      'in.length': '长度',
-      'in.width': '宽度',
-      'in.thickness': '厚度',
-      'in.diameter': '柱直径',
-      'in.height': '柱高',
-      'in.quantity': '柱数',
-      'in.run': '踏步进深',
-      'in.rise': '踏步高度',
-      'in.stepCount': '踏步级数',
-      'in.waste': '损耗余量',
-      'opt.shape.slab': '平板 / 垫层',
-      'opt.shape.column': '圆柱',
-      'opt.shape.steps': '台阶',
-      'out.buyYd': '需订购混凝土',
-      'out.volFt': '精确体积',
-      'out.bags80': '80 磅袋数',
-      'out.bags60': '60 磅袋数',
-      'out.bags40': '40 磅袋数',
-      'outSub.buyYd': '含损耗余量',
-      'outSub.bags80': '每袋出料 0.60 ft³',
-      'outSub.bags60': '每袋出料 0.45 ft³',
-      'outSub.bags40': '每袋出料 0.30 ft³',
-      'chartTitle': '精确体积 vs 订购体积',
-      'cmp.0': '精确需求',
-      'cmp.1': '订购量(含损耗)',
-      'cmpseg.0': '体积',
-      'errDims': '请为所选形状输入有效尺寸',
-      'preset.0': '露台板 10×10',
-      'preset.1': '甲板基础 12″×6 根',
-      'preset.2': '入口台阶 4 级',
-      'note': '🧱 4 英寸厚时 1 立方码可铺 81 ft²。超过约 1 整码(≈45 袋 80 磅)就该订罐车现拌——手拌 20 袋以上本身就是一整天的活。',
-    },
-  },
+
   es: {
     useCases: ['estimar hormigón para una losa de terraza o cobertizo', 'dimensionar zapatas para decks y pérgolas', 'comprar sacos para pequeñas reparaciones', 'calcular el volumen de unos escalones de entrada'],
     faqs: [

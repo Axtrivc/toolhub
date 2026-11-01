@@ -53,48 +53,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这个工具是什么?</h2>
-    <p>
-      这个计算器根据体重、运动量和气候,估算你每天应该喝多少水。它采用广泛引用的标准——每公斤体重约 35 ml——并根据活动和炎热程度进行调整。
-    </p>
-
-    <div>
-      <h2>一般建议</h2>
-      <ul>
-        <li>
-          <strong>久坐成年人:</strong> 每公斤体重约 35 ml
-        </li>
-        <li>
-          每运动 30 分钟<strong>增加约 360 ml</strong>
-        </li>
-        <li>
-          <strong>炎热/潮湿气候:</strong> 增加 10-20%
-        </li>
-        <li>
-          <strong>孕期或哺乳期:</strong> 增加 300-700 ml
-        </li>
-        <li>咖啡、茶和食物都计入你的总饮水量</li>
-      </ul>
-    </div>
-
-    <div>
-      <h2>倾听身体的声音</h2>
-      <p>
-        公式只是起点,不是硬性规定。对大多数人来说,口渴是可靠的信号。观察尿液颜色——浅黄色说明水分充足;深黄色说明该多喝水了。透明的尿液可能意味着饮水过量。
-      </p>
-    </div>
-
-    <div>
-      <h2>水喝多了会有问题吗?</h2>
-      <p>
-        是的。<strong>低钠血症</strong>(因饮水过量导致的血钠过低)虽然罕见但很危险,已有耐力运动员因饮水远超流失量而发病的案例。除非医生另有建议,否则不要在口渴之外硬灌好几升水。
-      </p>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -197,7 +155,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function WaterIntakeCalculatorContent(): ReactNode {
   const { locale } = useApp()

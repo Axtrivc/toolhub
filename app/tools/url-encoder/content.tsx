@@ -44,38 +44,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具?</h2>
-    <p>
-      URL 编码(也叫「百分比编码」)会把特殊字符转换成可以安全放进 URL 的格式。空格会变成 <code>%20</code>,<code>&amp;</code> 会变成 <code>%26</code>,以此类推。
-    </p>
-    <div>
-      <h2>为什么 URL 需要编码</h2>
-      <p>
-        URL 只能安全地包含有限的字符集。空格、引号、<code>&amp;</code>、<code>=</code> 以及非 ASCII 字母等字符具有特殊含义或根本不被允许,因此必须经过编码才能在网络中可靠传输。
-      </p>
-    </div>
-    <div>
-      <h2>常见编码</h2>
-      <ul>
-        <li>空格 → <code>%20</code>(查询字符串里也可用 <code>+</code>)</li>
-        <li><code>&amp;</code> → <code>%26</code></li>
-        <li><code>=</code> → <code>%3D</code></li>
-        <li><code>?</code> → <code>%3F</code></li>
-        <li><code>/</code> → <code>%2F</code></li>
-        <li>中文 → %E4%B8%AD%E6%96%87(UTF-8 字节)</li>
-      </ul>
-    </div>
-    <div>
-      <h2>encodeURI 与 encodeURIComponent 的区别</h2>
-      <p>
-        JavaScript 有两个函数。<code>encodeURI</code> 保留 URL 结构字符(<code>/ ? &amp; =</code>),用于整条 URL;<code>encodeURIComponent</code> 会编码所有字符,用于查询参数的值。本工具使用后者,这也正是你通常需要的。
-      </p>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -143,7 +111,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function URLencoderContent(): ReactNode {
   const { locale } = useApp()

@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * HeartRateZoneCalculator 长文正文 —— 四语 dispatcher
+ * HeartRateZoneCalculator 长文正文 —— 三语 dispatcher
  *
- * en 分支与改造前渲染输出一致。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支与改造前渲染输出一致。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -24,19 +24,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>为什么静息心率很重要</h2>
-    <p>直接按最大心率百分比划区间,会把训练有素的运动员和久坐新手一视同仁。Karvonen 法使用心率储备(最大 − 静息),区间随健康水平按比例拉开。</p>
-    <h2>如何正确测量静息心率</h2>
-    <p>醒来后立即测满一分钟,要在喝咖啡、下床之前,连续测几天取平均。训练良好的耐力运动员普遍在 40-50 bpm,普通成人在 60-80。</p>
-    <h2>"220 减年龄"的局限</h2>
-    <p>最大心率公式自带约 ±10-12 bpm 的个体误差。如果你在一场高强度比赛或实验室测试中见过更高的数值,就用那个当你的真实最大心率。</p>
-    <h2>在 Zone 2 里训练</h2>
-    <p>Zone 2(约储备的 60-70%)提升线粒体密度与脂肪氧化。多数业余跑者轻松日跑得太猛——用鼻子呼吸的配速通常正好落在 Z2。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -66,7 +53,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function HeartRateZoneCalculatorContent(): ReactNode {
   const { locale } = useApp()

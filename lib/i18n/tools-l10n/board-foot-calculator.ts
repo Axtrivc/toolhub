@@ -5,31 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const BoardFootCalculatorL10n: ToolL10n = {
-  zh: {
-    useCases: ['算一批木料的板英尺总量与订单总价', '核对锯木厂按 BDFT/MBF 的报价单', '用实际尺寸(非名义尺寸)避免多买 20% 木料', '单件板英尺快速心算校验'],
-    faqs: [
-      { q: '板英尺怎么算?', a: '板英尺 = 厚(英寸)× 宽(英寸)× 长(英尺)÷ 12。一块 1.5×5.5×8 英尺的木料 = 5.5 板英尺;10 块就是 55 板英尺。' },
-      { q: '名义尺寸和实际尺寸差多少?', a: '刨光后的"2×6"实际只有 1.5×5.5 英寸——直接按名义尺寸计算会高估约 23% 的体积,买料就会多花钱。' },
-      { q: 'BDFT、FBM、MBF 是什么?', a: 'BDFT 是单件板英尺;MBF(=FBM)是千板英尺,锯木厂批量报价的常用单位。本工具的单价按每板英尺填入即可。' },
-      { q: '一根 2×4×8 有多少板英尺?', a: '记住用实际尺寸:厚度 1.5 英寸、宽度 3.5 英寸,1.5×3.5×8÷12 = 3.5 板英尺。若按名义尺寸算是 5.33——这是个昂贵的错误。' },
-    ],
-    ui: {
-      'in.thickness': '厚度',
-      'in.width': '宽度',
-      'in.length': '长度',
-      'in.qty': '件数',
-      'in.price': '每板英尺单价',
-      'out.boardFeet': '板英尺总量',
-      'out.perPiece': '单件板英尺',
-      'out.totalCost': '订单总价',
-      'out.perPieceCost': '单件成本',
-      'errPositive': '请输入正数的尺寸与件数',
-      'preset.0': '2×6 × 8 ft 骨料(实际尺寸)',
-      'preset.1': '2×4 × 10 ft 骨料(实际尺寸)',
-      'preset.2': '4/4 × 8 in × 12 ft 硬木',
-      'note': '🪵 名义 vs 实际:刨光后的"2×6"实际是 1.5×5.5 英寸——这一差约占体积的 23%。锯木厂按板英尺(BDFT)或千板英尺(MBF)报价;本工具即行业通用的 T×W×(L÷12)。',
-    },
-  },
+
   es: {
     useCases: ['calcular los pies tablares de un pedido y su coste total', 'verificar presupuestos de aserradero en BDFT/MBF', 'usar medidas reales (no nominales) y no comprar un 20 % de más', 'comprobar a mano rápida el volumen de una pieza'],
     faqs: [

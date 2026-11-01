@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * Timezone Converter 长文正文 —— 四语 dispatcher
+ * Timezone Converter 长文正文 —— 三语 dispatcher
  *
- * en 分支等价于原 ToolContent 渲染输出。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支等价于原 ToolContent 渲染输出。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en (与改造前渲染输出一致) ────────────────────────────
@@ -59,36 +59,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具？</h2>
-    <p>
-      跨时区安排会议，常常是好会议的坟墓。这款<strong>时区转换器</strong>把一个本地日期和时间一次性换算成最多六个其他时区的对应当地时间 —— 附带 UTC 偏移、跨日提醒和一张工作时间热力图，让你一眼就能挑出一个人性化的会议时段。它完全在你的浏览器中基于内置的 <code>Intl</code> API 运行，因此你输入的任何内容都不会离开你的设备。
-    </p>
-
-    <div>
-      <h2>转换是如何进行的</h2>
-      <p>
-        你输入的时间会被当作<strong>源时区的本地钟面时间</strong>来解读，先转换成一个绝对时刻，再以正确的偏移渲染到每一个目标时区 —— 包括<strong>夏令时</strong>。由于 DST 由浏览器自带的时区数据库来应用，对于纽约或伦敦这样的时区，三月的同一场会议和十一月的同一场会议可能落在不同的 UTC 偏移上。<code>UTC 偏移</code> 这一列显示的是该时刻实际生效的偏移，而非全年平均值。
-      </p>
-    </div>
-
-    <div>
-      <h2>如何阅读这张表</h2>
-      <p>
-        被标为<strong>绿色</strong>的行落在当地工作时间（9:00–17:00）内 —— 尽量挑选每一行都变绿的时段。当换算后的时间落在与源时区不同的日历日期时，会出现一个<strong>跨日徽标</strong>（+1 天 / -1 天）；这正是与亚太地区队友协作时「等等，是你那里的周二还是我这边的周二？」这种困惑的经典来源。表格下方的小时条会为每个时区展示一条可视化的 0–23 小时条带，所选小时以蓝色标出。
-      </p>
-    </div>
-
-    <div>
-      <h2>提示与陷阱</h2>
-      <p>
-        <em>「我的本地时区」</em>是根据你的设备设置检测出来的，所以如果你出差或使用了被 VPN 调整过的系统时钟，请务必再次确认。请记住，输入始终是按<em>源</em>时区来读取的 —— 按下 <strong>现在</strong> 会填入该时区当前所见的时间，这可能与你自己时钟上的时间不同。在 DST 切换的那个周末前后，某个钟面时间在受影响的时区里可能有歧义或根本不存在；转换器会把它解析为最接近的合法时刻，但对于这些日期的关键活动，最好还是直接与参会者再次确认。
-      </p>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -186,7 +156,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function TimezoneConverterContent(): ReactNode {
   const { locale } = useApp()

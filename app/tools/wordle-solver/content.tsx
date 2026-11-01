@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * Wordle Solver 长文正文 —— 四语 dispatcher
+ * Wordle Solver 长文正文 —— 三语 dispatcher
  *
- * en 分支与改造前渲染输出一致。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支与改造前渲染输出一致。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en (与改造前渲染输出一致) ────────────────────────────
@@ -57,36 +57,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具?</h2>
-    <p>
-      一个 <strong>Wordle 求解器和找词工具</strong>,从一个内置的常用英语五字母词库中筛选出符合你已知条件的词:已确定位置的绿色字母、单词必须包含的字母,以及必须排除的字母。易位构词模式可以找出从一个字母池中能拼出的所有单词,你还可以合并自己的额外词汇。一切 100% 在你的浏览器中运行 —— 无查询、无网络。
-    </p>
-
-    <div>
-      <h2>把你的猜测对应到筛选条件</h2>
-      <p>
-        每次 Wordle 猜测后,把已确认的字母输入五个<strong>绿色</strong>方框(放在确切位置),把在单词中但位置错误的字母放入<em>必须包含</em>(黄色),把排除的字母列入<em>不能包含</em>(灰色)。列表会随每次按键更新,最多显示 200 个匹配项,并给出精确总数。点击任意词条即可把它直接复制到下一次猜测中。
-      </p>
-    </div>
-
-    <div>
-      <h2>棘手的情况:重复字母</h2>
-      <p>
-        当答案中某个字母的出现次数少于你猜测的次数时,Wordle 会把它标灰 —— 这会诱使你把该字母完全排除。本求解器能处理这种情况:同时出现在<em>灰色</em>列表和绿色/黄色约束中的字母不会被一刀切地禁用;答案只是不能包含超过你已确认次数的该字母。因此像 <code>sleet</code> 这样的答案,只要已有两个 <code>e</code> 被确认为绿色或黄色,就不会因一个灰色的 <code>e</code> 而被排除 —— 而包含第三个 <code>e</code> 的 <code>eerie</code> 则会被过滤掉。
-      </p>
-    </div>
-
-    <div>
-      <h2>易位构词模式与自定义词典</h2>
-      <p>
-        切换到<strong>易位构词模式</strong>,输入 3–10 个字母,即可找出词典中所有能由这些字母拼出的单词:长度不超过输入的字母数,按长度从长到短排序,且同一字母的使用次数不会超过你输入的份数。非常适合 Scrabble 类谜题。如果某个有效词不在内置列表中,把你的词(每行一个或用空格分隔)粘贴到<em>额外词汇</em>中,它们就会加入本次会话的词典,两种模式下都生效。
-      </p>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -186,7 +156,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function WordleSolverContent(): ReactNode {
   const { locale } = useApp()

@@ -5,38 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const ZScoreCalculatorL10n: ToolL10n = {
-  zh: {
-    useCases: ['把原始分换算成 z 分数再比不同量表的分布', '查某个分数对应的百分位(前面有多少人)', '算单侧/两侧 p 值辅助显著性判断', '反向求给定分位数对应的原始分(如前 5% 切点)'],
-    faqs: [
-      { q: 'z 分数怎么算?', a: 'z = (x − μ)/σ——减去均值再除以标准差。它衡量一个值离均值有多少个 σ,让 IQ、考试分、工艺参数这些不同量表变得可比。' },
-      { q: '百分位和两侧 p 值是什么?', a: 'Φ(z) 是低于该值的人群占比(百分位);两侧 p = 2·(1 − Φ(|z|)),是落在离均值同样远或更远的概率——常用的显著性标尺(超过 ±1.96 → p < 0.05)。' },
-      { q: '概率精度如何?', a: '正态 CDF 采用 Abramowitz-Stegun 26.2.17 有理近似,精度 |7.5×10⁻⁸|——比任何真实数据集能支撑的位数都多。' },
-      { q: '怎么从 z 反解回 x?', a: '把方向切到 z → x,按 x = μ + z·σ 计算。例如 μ=100、σ=15 的分布里前 5% 的切点是 100 + 1.645×15 = 124.7。' },
-    ],
-    ui: {
-      'in.mode': '方向',
-      'in.x': '原始分 x',
-      'in.z': 'z 分数',
-      'in.mu': '均值 μ',
-      'in.sigma': '标准差 σ',
-      'opt.mode.x2z': 'x → z',
-      'opt.mode.z2x': 'z → x',
-      'out.zScore': 'z 分数',
-      'out.xVal': '原始分 x',
-      'out.percentile': '百分位 Φ(z)',
-      'out.above': 'P(Z > z)',
-      'out.twoTailed': '两侧 p 值',
-      'chartTitle': '标准正态曲线(μ = 0, σ = 1)',
-      'line.pdf': 'φ(z) = e^(−z²/2)/√(2π)',
-      'preset.0': 'IQ 130(μ=100, σ=15)',
-      'preset.1': '前 5% 切点:z = 1.645',
-      'preset.2': '低于均值:IQ 85',
-      'note': '🔔 z = (x − μ)/σ 计量一个值离均值多少个标准差。概率用 Abramowitz-Stegun 26.2.17 正态 CDF 有理近似(|误差| < 7.5×10⁻⁸)。经验法则:68% 的值落在 ±1σ 内,95% 在 ±1.96σ,99.7% 在 ±3σ。',
-      'errInput': '请填有效的均值与大于 0 的标准差',
-      'errZ': 'z 分数请填数字',
-      'errX': '原始分请填数字',
-    },
-  },
+
   es: {
     useCases: ['convertir puntuaciones brutas en z para comparar escalas distintas', 'consultar el percentil de una puntuación', 'calcular p unilaterales y bilaterales para significancia', 'invertir: del cuantil a la puntuación original (p. ej. corte del 5% superior)'],
     faqs: [

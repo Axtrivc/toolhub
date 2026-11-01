@@ -5,11 +5,11 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * FuelCostCalculator 长文正文 —— 四语 dispatcher
+ * FuelCostCalculator 长文正文 —— 三语 dispatcher
  *
  * en 分支与改造前渲染输出一致(2026-10 审计修正:年通勤油费按
  * 60 km × ~255 工作日重算,原 "$2,200" 高估约 15%)。
- * zh/es/de 仅客户端 hydration 后切换。
+ * es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -26,19 +26,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>行程成本公式</h2>
-    <p>油费 = 距离 ÷(100 ÷ 百公里油耗)× 油价。计算器替你处理让实际行程变麻烦的两件事:往返翻倍与乘客分摊。</p>
-    <h2>真实油耗去哪找</h2>
-    <p>行车电脑显示的是真实路况平均值——别信宣传册上的实验室数字。市区开空调行车可能比高速巡航多耗 30%。</p>
-    <h2>通勤积累得很快</h2>
-    <p>单程 30 km 的通勤,按 7.5 L/100km 和 $1.65/L 算,一年要烧掉约 $1,900。在接受城市另一头的工作之前,先算一算这笔账。</p>
-    <h2>公平分摊</h2>
-    <p>人均分摊只除油费。如果朋友还要分摊过路费和车辆损耗,惯例是在纯油费之上再加 10-20%。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -68,7 +55,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function FuelCostCalculatorContent(): ReactNode {
   const { locale } = useApp()

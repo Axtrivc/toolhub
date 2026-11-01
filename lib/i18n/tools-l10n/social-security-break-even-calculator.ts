@@ -5,36 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const SocialSecurityBreakEvenCalculatorL10n: ToolL10n = {
-  zh: {
-    useCases: ['比较 62 岁、完全退休年龄与 70 岁三档申领的月额', '找出延迟申领的累计回补年龄', '看 80/85 岁时三种策略的累计总额', '用真实 PIA 而非估算值做申领决策'],
-    faqs: [
-      { q: '62 岁申领会打折多少?', a: '取决于你的完全退休年龄(FRA):1960 年及以后出生者 FRA 为 67 岁,62 岁申领打 7 折;FRA 为 66 岁的人则打 7.5 折。规则是提前 36 个月每月扣 5/9 个百分点,再往前的每个月扣 5/12 个百分点。' },
-      { q: '延迟到 70 岁奖励多少?', a: '1943 年及以后出生者每延迟一个月加 2/3 个百分点,即每年 8%。FRA 67 岁的人到 70 岁可拿 PIA 的 124%;FRA 66 岁的人最高 132%。70 岁之后没有进一步的延迟奖励。' },
-      { q: '回补年龄(break-even)是什么意思?', a: '早申领每月钱少但先拿;晚申领每月钱多但晚拿。回补年龄是晚申领者的累计总额追上早申领者的时点——活得比它久,延迟就"值";活不到,早领就更划算。本工具按月精确求解两两回补点。' },
-      { q: '这个计算有哪些简化?', a: '名义美元口径,不含 COLA 生活费调整、税、投资早领款项的收益,也不考虑配偶/遗属福利——这些都会移动真实的回补点。它回答的是最核心的问题:按给定的月额,累计曲线在哪里交叉。' },
-    ],
-    ui: {
-      'chartTitle': '累计领取总额(62-90 岁)',
-      'preset.0': '平均收入者($2,000)',
-      'preset.1': '较高收入者($2,800)',
-      'preset.2': '顶格($4,000+)',
-      'line.at62': '62 岁开始领',
-      'line.atFRA': 'FRA 开始领',
-      'line.at70': '70 岁开始领',
-      'in.birthYear': '出生年份',
-      'in.pia': '完全退休年龄的月额 (PIA)',
-      'out.benefit62': '62 岁申领月额',
-      'out.benefitFRA': 'FRA 申领月额',
-      'out.benefit70': '70 岁申领月额',
-      'out.breakEven1': 'FRA 追平 62 岁的年龄',
-      'out.breakEven2': '70 岁追平 FRA 的年龄',
-      'out.at85': '85 岁时累计领取',
-      'outSub.benefit62': '提前申领折扣后',
-      'outSub.benefit70': '含延迟奖励',
-      'note': '🎂 名义口径、不含 COLA 与税。提前申领折扣:36 个月内每月 5/9%,超出部分每月 5/12%;延迟奖励(1943 后出生)每月 2/3%。健康预期寿命明显超过回补年龄时,延迟申领通常占优;反之早领更稳。',
-      'errInvalid': '请输入 1943-2010 之间的出生年份与正的 PIA',
-    },
-  },
+
   es: {
     useCases: ['comparar la prestación mensual al reclamar a los 62, la FRA o los 70', 'hallar la edad de equilibrio del retraso', 'ver los totales acumulados a los 80 y 85 años', 'decidir con tu PIA real en vez de estimaciones'],
     faqs: [

@@ -5,26 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const GraphqlFormatterL10n: ToolL10n = {
-  zh: {
-    useCases: ['把压成一行的查询排成可读的多行结构', '代码评审前统一团队缩进风格', '压缩查询以缩小请求负载', '排查括号不匹配导致的语法错误'],
-    faqs: [
-      { q: '它能校验查询吗?', a: '做真正的词法分析与括号配平:未闭合的字符串、多余的闭括号、意外字符都会报出准确位置;文档不完整时原样提示、不输出半成品。但它不做 schema 层面的语义校验(字段是否存在之类)。' },
-      { q: '# 注释会保留吗?', a: '美化时保留并重排在对应缩进上;压缩时按惯例丢弃——压缩的目的就是去掉一切非必需字节。' },
-      { q: '支持 SDL/schema 文件吗?', a: '支持。type/interface/union/enum/input 以及 """ 描述字符串都能往返处理,Schema 定义与查询文档用的是同一套词法规则。' },
-      { q: '压缩能省多少?', a: '取决于注释与空白占比,常见查询约 30-40%。注意 gzip 本身对空白压缩率极高,收益主要在解析开销与日志可读性,而非网络体积。' },
-    ],
-    ui: {
-      'inputLabel': '你的 GraphQL',
-      'outputLabel': '结果',
-      'loadSample': '加载示例',
-      'beautify': '美化',
-      'minify': '压缩',
-      'indentLabel': '缩进',
-      'errPrefix': '无法格式化——输入不完整或非法:',
-      'tooLarge': '输入过大——支持的上限是 100,000 字符。',
-      'note': '⚡ 真正的词法器而非正则拼凑:字符串、三引号块字符串、# 注释、指令、变量与 fragment 都能安全往返。美化保留注释,压缩丢弃注释;GraphQL 中逗号无语法意义,输出按惯例重新规范化。',
-    },
-  },
+
   es: {
     useCases: ['expandir consultas de una sola línea a una estructura legible', 'unificar la indentación del equipo antes de una revisión de código', 'minificar consultas para reducir el payload', 'cazar errores de sintaxis por llaves sin cerrar'],
     faqs: [

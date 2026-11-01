@@ -5,36 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const BusinessDaysCalculatorL10n: ToolL10n = {
-  zh: {
-    useCases: ['推算合同交付日(顺延 N 个工作日)', '法定通知期到期日(如 10 个工作日)', '从截止日倒推开工日(减去 N 个工作日)', '考虑公司假日表后的项目排期'],
-    faqs: [
-      { q: '工作日怎么定义?', a: '周一至周五为工作日,周六日一律跳过;你粘贴的假日清单(YYYY-MM-DD,逗号分隔)中的日期同样跳过。落在周末的假日不会被重复扣除。' },
-      { q: '起始日当天算不算?', a: '不算——从起始日的下一个日历日开始逐日推进,数满 N 个工作日那天即目标日。加 10 个工作日从周一开始,会落在下下周一(中间隔一个周末)。' },
-      { q: '能倒着减吗?', a: '可以。选 Subtract,从起始日往回数 N 个工作日,常用于"截止日向前推 5 个工作日必须提交"这类场景。' },
-      { q: '与"两日期间工作日数"有什么区别?', a: '本工具是日期推算:已知起点和 N,求终点。若你已知两个日期、想数中间有几个工作日,请用日期差计算器——那是反向问题。' },
-    ],
-    ui: {
-      'in.startDate': '起始日期',
-      'in.direction': '方向',
-      'in.count': '工作日数',
-      'in.holidays': '假日清单(可选)',
-      'opt.direction.add': '向后加',
-      'opt.direction.sub': '向前减',
-      'out.targetDate': '目标日期',
-      'out.targetISO': '目标日期(ISO)',
-      'out.calendarDays': '跨过的日历天数',
-      'out.weekendDays': '跳过的周末天数',
-      'out.holidayHits': '跳过的假日数',
-      'note': '📅 周一至周五按工作日计,并逐日跨过你粘贴的假日清单(YYYY-MM-DD,逗号分隔)。要反过来——数两个日期之间有几个工作日——请用日期差计算器。',
-      'errDate': '起始日期请按 YYYY-MM-DD 填写',
-      'errCount': '工作日数至少为 1',
-      'errRange': '工作日数过多——逐日推算最多支持约 2,850 个工作日(约 11 年)',
-      'none': '区间内无',
-      'preset.0': '感恩节那一周',
-      'preset.1': '往后 30 个工作日',
-      'preset.2': '往前 10 个工作日',
-    },
-  },
+
   es: {
     useCases: ['calcular la fecha de entrega de un contrato (N días hábiles después)', 'cerrar el plazo de un aviso legal (p. ej. 10 días hábiles)', 'retroceder N días hábiles desde una fecha límite', 'planificar proyectos con el calendario de festivos de la empresa'],
     faqs: [

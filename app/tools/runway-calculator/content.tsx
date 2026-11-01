@@ -5,8 +5,8 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * Runway Calculator 长文正文 —— 四语 dispatcher
- * en 分支与改造前渲染输出一致;zh/es/de 仅客户端 hydration 后切换。
+ * Runway Calculator 长文正文 —— 三语 dispatcher
+ * en 分支与改造前渲染输出一致;es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -47,42 +47,7 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>初创公司与独立开发者为什么要盯紧资金跑道</h2>
-    <p>
-      <strong>资金跑道(Runway)</strong>指公司还能运营多少个月才会把账上的钱彻底花光。无论你是拿了风投的初创团队,
-      还是自负盈亏的独立开发者,能否清楚说出自己的确切跑道,决定了你是在从容地做战略性招聘决策,
-      还是在银行账户见底时才慌乱补救。
-    </p>
 
-    <h2>毛烧钱(Gross Burn)与净烧钱(Net Burn)</h2>
-    <p>
-      <strong>毛烧钱</strong>是每个月流出银行的全部现金(工资、云服务账单、办公室租金、营销软件订阅)。
-      <strong>净烧钱</strong>则是毛烧钱减去当月进账的营收:
-    </p>
-    <pre><code>Net Burn = 每月总支出 − 每月营收</code></pre>
-    <p>
-      如果公司每月支出 $30,000,而月度经常性收入(MRR)有 $10,000,那么毛烧钱是 $30,000,净烧钱是 $20,000。
-      决定资金跑道长短的是净烧钱,而不是毛烧钱。
-    </p>
-
-    <h2>你是 Default Alive 还是 Default Dead?</h2>
-    <p>
-      Paul Graham 造出了 <em>Default Alive</em>(默认活着)与 <em>Default Dead</em>(默认死亡)这对术语。
-      如果按当前营收增长率推算,公司能在现金烧完之前达到盈利,它就是 default alive;反之则是 default dead,
-      除非再融一轮或大幅削减成本,否则难逃一死。本计算器按月度复合增长模拟现金流,
-      直接告诉你最终是自然造血存活,还是撞上现金归零的那堵墙。
-    </p>
-
-    <h2>什么时候该启动融资</h2>
-    <p>
-      从第一次路演到资金到账,一轮机构融资通常需要 4 到 6 个月。千万别等到只剩 3 个月跑道才行动。
-      启动融资的最佳时机是账上还有 10 到 14 个月跑道的时候——这让你在谈判桌上握有最大的筹码。
-    </p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -167,7 +132,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function RunwayCalculatorContent(): ReactNode {
   const { locale } = useApp()

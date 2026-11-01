@@ -5,41 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const ElectricityCostCalculatorL10n: ToolL10n = {
-  zh: {
-    useCases: ['算某台电器一天/一个月的电费', '估算取暖器、烘干机的年度电费', '找出家里的耗电大户', '按当地电价折算 kWh 成本'],
-    faqs: [
-      { q: '电费是怎么算的?', a: '功率(W)× 小时 ÷ 1000 得出每天 kWh,再乘电价就是日成本。月度按 30.44 天(真实的年均天数)计算,年度按 365 天——对常年开着的设备,年度那行才是诚实的数字。' },
-      { q: '哪里查电器的功率?', a: '看铭牌、电源适配器或规格表,通常标 W 或 input。差距非常大:1500 W 的取暖器每小时电费约是 50 W 笔记本的 30 倍——这正是本工具帮你轻松完成的比较。' },
-      { q: '电价应该填多少?', a: '填最近账单上的边际电价;若按 kWh 单独计费,输配费用也要算进去。美国住宅均价约 $0.16-0.17/kWh,但各州、各套餐、各时段差异很大。' },
-      { q: '待机功耗要算吗?', a: '要。机顶盒、路由器、老电视的待机常年 5-15 W:一台 10 W 设备全天待机一年约 88 kWh,按 ¥0.55/kWh 就是 48 元。把每日使用小时填 24,就能算出"全天开机"设备的真实成本。' },
-    ],
-    ui: {
-      'chartTitle': '费用阶梯',
-      'cmp.0': '每天',
-      'cmp.1': '每月',
-      'cmp.2': '每年',
-      'cmpseg.0': '费用',
-      'errInvalid': '数值不能为负,小时数 ≤ 24',
-      'in.daily': '每日成本',
-      'in.hours': '每日使用小时',
-      'in.kwh': '每日耗电',
-      'in.monthly': '每月成本',
-      'in.rate': '电价',
-      'in.watts': '额定功率',
-      'in.yearly': '每年成本',
-      'inSuffix.hours': 'h',
-      'inSuffix.rate': '$/kWh',
-      'inSuffix.watts': 'W',
-      'note': '⚡ 功率见电器铭牌或规格表。取暖器和烘干机(1500-5000 W)远超笔记本(≈50 W);年度那行数字最能暴露意外。',
-      'out.daily': '每日成本',
-      'out.hours': '每日使用小时',
-      'out.kwh': '每日耗电',
-      'out.monthly': '每月成本',
-      'out.rate': '电价',
-      'out.watts': '额定功率',
-      'out.yearly': '每年成本',
-    },
-  },
+
   es: {
     useCases: ['calcular lo que cuesta un aparato al día o al mes', 'estimar el coste anual de calefactores y secadoras', 'descubrir los aparatos que más consumen en casa', 'convertir kWh a coste con tu tarifa local'],
     faqs: [

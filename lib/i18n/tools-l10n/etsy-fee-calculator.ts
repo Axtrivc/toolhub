@@ -5,52 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const EtsyFeeCalculatorL10n: ToolL10n = {
-  zh: {
-    useCases: ['算清一单 Etsy 订单到底被扣多少费', '把 Offsite Ads 的 15% 算进定价决策', '比较数字商品与实物手工品的费率差异', '按月订单量推算全月平台费用'],
-    faqs: [
-      { q: 'Etsy 每单抽走多少?', a: '每个商品收 $0.20 上架费,商品价 + 运费的 6.5% 交易费,再加支付处理费(美国为 3% + $0.25)。若订单来自 Offsite Ads 还要加 15%(年销超 $10k 为 12.5%)——一笔带广告的 $29 订单总费率约 26%。' },
-      { q: '什么是 Offsite Ads,什么时候触发?', a: '这是 Etsy 的站外广告:买家从 Google 或社交媒体的广告点进来下单,该单就加收订单总额的 15%;若你 12 个月销售额超过 $10k,费率降为 12.5%,且参与变为强制。' },
-      { q: '运费也要被抽成吗?', a: '要——6.5% 交易费和支付处理费都按"商品价 + 你收的运费"计算。把运费并进商品价做"包邮"并不能省手续费,只改变买家的观感。' },
-      { q: '怎么降低 Etsy 费用?', a: '可控的杠杆是 Offsite Ads(年销 $10k 以下时可退出)和商品结构:上架费按件计,做"少而贵"的列表比堆一堆便宜货花的 $0.20 更少。支付处理费率各国不同,收款银行与店铺国家要配套设置。' },
-    ],
-    ui: {
-      'in.price': '商品价格',
-      'in.shipping': '向买家收取的运费',
-      'in.quantity': '每单数量',
-      'in.ordersMonth': '每月订单数',
-      'in.procPct': '支付处理费率',
-      'in.procFixed': '处理固定费',
-      'in.offsiteAds': 'Offsite Ads 广告费(年销低于 $10k 为 15%,及以上为 12.5%)',
-      'inSuffix.price': '$',
-      'inSuffix.shipping': '$',
-      'inSuffix.procPct': '%',
-      'inSuffix.procFixed': '$',
-      'out.orderTotal': '订单总额 (价格 + 运费)',
-      'out.listingFee': '上架费 ($0.20 × 件数)',
-      'out.transactionFee': '交易费 (6.5%)',
-      'out.processingFee': '支付处理费',
-      'out.offsiteFee': 'Offsite Ads 广告费',
-      'out.totalFees': '每单费用合计',
-      'out.netPayout': '每单净收入',
-      'out.effectiveRate': '实际费率',
-      'out.monthlyFees': '每月费用',
-      'opt.offsiteAds.0': '无',
-      'opt.offsiteAds.15': '15%',
-      'opt.offsiteAds.12.5': '12.5%',
-      'preset.0': '数字商品(免运费)',
-      'preset.1': '手工品 + 运费',
-      'preset.2': '大卖家(12.5% 广告费)',
-      'chartTitle': '每单费用构成',
-      'slice.listingFee': '上架费',
-      'slice.transactionFee': '交易费',
-      'slice.processingFee': '支付处理费',
-      'slice.offsiteFee': 'Offsite Ads',
-      'chartCenter': '费用合计',
-      'errPrice': '请输入有效的商品价格',
-      'errFees': '各项费率不能为负,处理费率须低于 100%',
-      'note': '🧾 Etsy 的费用:每件(重新)上架 $0.20、商品价+运费的 6.5% 交易费、以及按卖家所在国变化的支付处理费(美国 3% + $0.25)。12 个月销售额超过 $10k 后 Offsite Ads 变为强制,费率 12.5%。',
-    },
-  },
+
   es: {
     useCases: ['ver exactamente cuánto te quedan las comisiones en cada pedido', 'incluir el 15% de Offsite Ads en tus decisiones de precio', 'comparar la tasa efectiva de descargas digitales frente a productos físicos', 'proyectar la comisión mensual según tus pedidos'],
     faqs: [

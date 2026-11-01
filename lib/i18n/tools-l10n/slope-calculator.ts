@@ -5,38 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const SlopeCalculatorL10n: ToolL10n = {
-  zh: {
-    useCases: ['由两个坐标点求斜率与截距', '把斜率换算成倾角或坡度百分比', '直接得到 y = mx + b 的直线方程', '求平行线与垂线的斜率'],
-    faqs: [
-      { q: '斜率怎么算?', a: 'm = (y₂ − y₁)/(x₂ − x₁),即两点间的"竖直变化除以水平变化"。代入任一点可得截距 b = y₁ − m·x₁,于是直线方程 y = mx + b 就齐了。' },
-      { q: '斜率为负或"无定义"是什么意思?', a: '负斜率表示从左到右下降;无定义对应竖直线(x₁ = x₂),分母为零。水平线的斜率恰好是 0。' },
-      {q: '怎么求平行线和垂线的斜率?', a: '平行线斜率完全相同;垂直线斜率乘积为 −1,即 m⊥ = −1/m。竖直线的垂线是水平线(m = 0),反之亦然。' },
-      { q: '倾角是什么?', a: 'θ = arctan(m),从 x 轴正方向量起——m = 1 是 45°,m = 2 是 63.43°。道路标志上的坡度百分比是 rise/run × 100,所以 8% 坡道对应 arctan(0.08) ≈ 4.6°。' },
-    ],
-    ui: {
-      'in.x1': 'x₁',
-      'in.y1': 'y₁',
-      'in.x2': 'x₂',
-      'in.y2': 'y₂',
-      'out.slope': '斜率 m',
-      'out.intercept': 'y 轴截距 b',
-      'out.angle': '倾角',
-      'out.equation': '直线方程',
-      'out.perp': '垂线斜率',
-      'chartTitle': '过两点的直线',
-      'line.line': 'y = mx + b',
-      'line.zero': 'y = 0',
-      'preset.0': '缓坡:(0, 0) → (100, 8)',
-      'preset.1': '下坡:(2, 7) → (6, 3)',
-      'preset.2': '陡坡 45°:(0, 0) → (5, 5)',
-      'note': '📏 m = (y₂ − y₁)/(x₂ − x₁) 即"高差除以水平距离";b = y₁ − m·x₁ 锚定直线。平行线共用 m;垂直线斜率相乘为 −1(m⊥ = −1/m)。竖直段斜率无定义,水平线 m = 0。',
-      'errNumeric': '两个点的坐标请填数字',
-      'errSamePoint': '两点重合 —— 斜率无定义',
-      'undefined': '无定义(竖直线)',
-      'horizontal': '水平线',
-      'perpVertical': '无定义(竖直线)',
-    },
-  },
+
   es: {
     useCases: ['calcular pendiente e intersección a partir de dos puntos', 'convertir la pendiente en ángulo o porcentaje de pendiente', 'obtener la ecuación y = mx + b directamente', 'hallar la pendiente de rectas paralelas y perpendiculares'],
     faqs: [

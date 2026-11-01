@@ -5,7 +5,7 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * HouseFlipCalculator 长文正文 —— 四语 dispatcher
+ * HouseFlipCalculator 长文正文 —— 三语 dispatcher
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -22,19 +22,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>70% 规则给痛苦留了价</h2>
-    <p>翻新客念叨"ARV 的 70% 减修缮费",是因为它打包预留了:硬钱贷利息、两端过户费、修缮超支、以及持有期的行情波动。$450,000 的 ARV、$60,000 修缮,买价上限就是 $255,000。它是纪律不是法律——活下来的,恰恰是那些没跳过纪律的买家。</p>
-    <h2>持有成本是无声杀手</h2>
-    <p>修缮的每个月都在烧你看不见的钱:房产税、保险(空置房保险是常规的 2-3 倍)、水电,以及若用了融资,10-12% 加点数的硬钱贷利息。"六个月"的工程拖到九个月,持有费多烧几千,还把你推向甩卖——那种退出方式会抹掉全部利润。诚实地按月预算持有成本和工期,然后再加一个月。</p>
-    <h2>修缮永远会超支</h2>
-    <p>承包商报价只是开价。每面墙后都藏着没人报价的腐朽、电路或管道;许可意外再添数周。职业翻新客给修缮预算垫 15-20% 还是会被惊到——一点不垫的,就是十二个月后亏本卖房的那批。出价之前,验房先把屋顶、地基和配电箱走一遍。</p>
-    <h2>利润在过户前只是计划</h2>
-    <p>预计 ROI 是假设之上的算术:ARV 是相熟经纪人拉的数,修缮是承包商许的诺,工期是你许的愿。只有结算单打印出来的那一刻,交易才变成真的。给下行情形建模——ARV 低 5%、修缮超 20%、多扛两个月——如果那个情形下本金还能回来,这笔交易才配得上你的定金。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -64,7 +51,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function HouseFlipCalculatorContent(): ReactNode {
   const { locale } = useApp()

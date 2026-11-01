@@ -10,45 +10,7 @@ import type { ToolL10n } from '../tool-l10n'
 const FORMULA = 'US men: foot length cm = 18 + US size;  UK = US − 0.5;  US women = US men + 1.5\nEU = 1.5 × (foot length cm + 1.5), rounded to the nearest 0.5 (Paris points on the last)\nKids: 8C = 14.5 cm, +0.4235 cm per half size (1Y ≈ 20.0 cm, 7Y ≈ 25.1 cm)'
 
 export const ShoeSizeConverterL10n: ToolL10n = {
-  zh: {
-    useCases: ['网购前把美码换算成欧码或厘米', '对照英码确认美码鞋款', '给孩子量脚长换算童鞋码', '核对男女鞋码差异(女码 ≈ 男码 +1.5)'],
-    formula: {
-      formula: FORMULA,
-      variables: '美码 = 男/女/童美码尺码数值\n英码 = 英制尺码,同一脚长下约比美码小 0.5 码\n欧码 = 欧洲尺码,以巴黎点计,量的是鞋楦并含余量\n脚长 (cm) = 较大那只脚从脚跟到最长脚趾的实测长度',
-      explain: '美码和英码都以"大麦粒"(1/3 英寸)为单位,但零点不同;欧码以 2/3 cm 的巴黎点量鞋楦,不是量脚。所以换算靠查表,没有一条通用公式——各品牌仍会差约一码。',
-      example: '步骤 1:男美码 9 → 脚长 = 18 + 9 = 27.0 cm。\n步骤 2:英码 = 9 − 0.5 = 8.5;欧码 = 1.5 × (27 + 1.5) = 1.5 × 28.5 = 42.75 → 取 43。\n步骤 3:女美码 8 = 男美码 6.5 → 24.5 cm,英码 6,欧码 = 1.5 × 26 = 39。\n步骤 4:童码 1Y = 20.0 cm → 英码 13.5(童英码 13.5 后重新起算),欧码 = 1.5 × 21.5 = 32.25 → 32.5。\n结果:男美码 9 ≈ 英码 8.5 / 欧码 43 / 27.0 cm;女美码 8 ≈ 英码 6 / 欧码 39 / 24.5 cm。',
-    },
-    faqs: [
-      { q: '美码、英码、欧码之间有统一换算公式吗?', a: '没有——这正是坑所在。美码与英码大约相差 0.5-1 码,美式男女码相差 1.5,而欧码用的是完全不同的"巴黎点"刻度。查表是唯一诚实的办法,即便如此各品牌仍会差 ±1 码。' },
-      { q: '在家怎么量脚长?', a: '站在纸上描出两只脚的轮廓,在傍晚(脚会肿胀)量脚跟到最长脚趾的厘米数,取较大的那只脚。这个厘米数可以换算成任何一种码数。' },
-      { q: '为什么男码和女码不一样?', a: '同样的脚长下,美式女码比男码大 1.5 号——女码 8.5 的内长等于男码 7。英码没有这种错位,所以美式女码换英码要减去约 2。' },
-      { q: '到底该买哪个码?', a: '优先信品牌自己的尺码表——Nike、Adidas、ASICS 对同一个美码给出的欧码各不相同。介于两码之间时,跑鞋建议加大半码(跑步时脚会胀大约一个码)。' },
-    ],
-    ui: {
-      'tab.men': '男鞋',
-      'tab.women': '女鞋',
-      'tab.kids': '童鞋',
-      'in.system': '从哪种码数换算',
-      'opt.system.us': 'US 码',
-      'opt.system.uk': 'UK 码',
-      'opt.system.eu': 'EU 码',
-      'opt.system.cm': '厘米(脚长)',
-      'in.value': '要换算的尺码',
-      'in.valueCm': '脚长 (cm)',
-      'out.us': 'US 码',
-      'out.usWomen': 'US 女码',
-      'out.uk': 'UK 码',
-      'out.eu': 'EU 码',
-      'out.cm': '脚长(厘米)',
-      'tableTitle': '常用码数对照',
-      'nearestNote': '按脚长取最接近的整/半码',
-      'summaryTitle': '鞋码换算结果',
-      'copySummary': '复制摘要',
-      'errInvalid': '请输入有效的尺码数值',
-      'errRange': '超出对照表范围({min}–{max} {unit})——请输入表内覆盖的尺码',
-      'note': '📏 换算采用查表法,不是线性公式:US 与 UK 约差 0.5 码,美式男女码差 1.5,EU 用巴黎点(2/3 cm)刻度。各品牌对照有 ±1 码出入,网购前请以品牌官方尺码表为准。',
-    },
-  },
+
   es: {
     useCases: ['convertir tallas US a EU o centímetros antes de comprar online', 'confirmar la talla UK de un zapato americano', 'medir el pie del niño y convertirla a talla infantil', 'entender la diferencia hombre/mujer (mujer ≈ hombre +1,5)'],
     formula: {

@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * IbanValidator 长文正文 —— 四语 dispatcher
+ * IbanValidator 长文正文 —— 三语 dispatcher
  *
- * en 分支与改造前渲染输出一致。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支与改造前渲染输出一致。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -24,19 +24,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>校验位为什么存在</h2>
-    <p>IBAN 长到人类必然常打错,所以 ISO 13616 在国家代码后设了两位校验位,用 ISO 7064 的 mod-97 方案计算:把前四个字符挪到末尾、字母转数字(A=10 … Z=35),整串除以 97 必须余 1。这一条模运算就能挡掉约 99% 的随机错误——错字、换位、漏字——让它们止步于转账之前。</p>
-    <h2>长度是身份的一部分</h2>
-    <p>每个国家在注册表里固定了 IBAN 长度:挪威 15 位(最短),德国与英国 22,法国 27,巴西 29,马耳他 31(最长)。长度不对,mod-97 通过了也仍是错的 IBAN——所以校验分两步:先查注册表长度,再查校验和。校验位 00、01、99 被规范保留,永不有效。</p>
-    <h2>校验和通过不等于账户有效</h2>
-    <p>mod-97 只证明 IBAN 格式正确,仅此而已。账户是否存在、归谁所有、能否收款,都是银行侧的事实,任何离线工具都无法知道。部分 SEPA 流程提供 IBAN-户名校验,正是因为单靠格式校验拦不住"格式正确但收错了人"。</p>
-    <h2>值得照抄的排版惯例</h2>
-    <p>纸质 IBAN 按 4 位一组排布是有道理的:人眼对照原始单据,核对小块远快于核对连成一串的 22 个字符。电子系统剥掉空格,纸面加上空格。内部的 BBAN 各国结构不同——英国是 sort code 加账号,德国是银行代码加账号——所以永远不要凭肉眼去"修"中间那一段。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -66,7 +53,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function IbanValidatorContent(): ReactNode {
   const { locale } = useApp()

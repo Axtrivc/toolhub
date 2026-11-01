@@ -5,48 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const GymCostPerVisitCalculatorL10n: ToolL10n = {
-  zh: {
-    useCases: ['算出每次健身的真实成本', '判断月卡/年卡到底值不值', '对比会员价与单次次卡的价格', '戒掉"办了卡=练了"的心理安慰'],
-    faqs: [
-      { q: '单次成本怎么算?', a: '用实际月均成本除以你真实去的次数:$45 的月卡每月去 8 次,单次成本就是 $5.63。年卡要先把年费除以 12,得到真实的月成本再算。' },
-      { q: '一个月去几次,办卡才划算?', a: '用月费除以健身房的散客单次价:$45 ÷ $15 = 每月 3 次刚好回本。而调研反复发现,普通会员月均只去 4 次左右——大多数人只是勉强及格。' },
-      { q: '年卡值得买吗?', a: '年卡通常比按月付便宜 15-25%,前提是你一直去。一旦习惯崩了,预付的钱就打了水漂——月付才是预付一年前最诚实的压力测试。' },
-      { q: '什么算"一次"?', a: '按你实际完成的训练算,而不是计划中的。只打卡洗个澡、一天两练,都会把这笔账拉向不同方向——选一种口径,然后保持一致。' },
-    ],
-    ui: {
-      'in.fee': '会员费',
-      'in.cycle': '账单周期',
-      'in.visits': '每月实际去几次(诚实点)',
-      'in.dropIn': '散客单次价',
-      'inSuffix.fee': '$',
-      'inSuffix.dropIn': '$',
-      'out.perMonth': '折合月成本',
-      'out.costPerVisit': '单次成本',
-      'out.breakEven': '回本月去次数',
-      'out.monthlySwing': '对比按次付费',
-      'out.yearlyCost': '年支出',
-      'out.verdict': '结论',
-      'opt.cycle.monthly': '按月',
-      'opt.cycle.yearly': '按年(一次付清)',
-      'chartTitle': '会员 vs 按次付费',
-      'cmp.0': '办会员',
-      'cmp.1': '按次付费',
-      'cmpseg.0': '月成本',
-      'preset.0': '平价连锁 ($15/月)',
-      'preset.1': '中端健身房 ($45/月)',
-      'preset.2': '精品工作室 ($185/月)',
-      'preset.3': '年卡预付 ($420/年)',
-      'verdict.zero': '零次到店',
-      'verdict.member': '那就办会员',
-      'verdict.worth': '值得办卡',
-      'verdict.dropIn': '不如按次买',
-      'verdict.border': '基本打平',
-      'unit.visitsMo': '次/月',
-      'errFee': '请输入有效的会员费',
-      'errNonNegative': '次数与散客价不能为负',
-      'note': '🏋️ 调研一再发现,普通会员月均只去 4 次左右——低于几乎所有的回本线。年卡通常比 12 个月付便宜 15-25%,但前提是习惯能坚持;月付才是最诚实的对照组。',
-    },
-  },
+
   es: {
     useCases: ['saber cuánto te cuesta de verdad cada sesión', 'decidir si la cuota mensual o anual compensa', 'comparar la membresía con pagar por visita', 'romper el consuelo de «ya tengo la suscripción»'],
     faqs: [

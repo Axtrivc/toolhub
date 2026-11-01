@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * Age Difference Calculator 长文正文 —— 四语 dispatcher
+ * Age Difference Calculator 长文正文 —— 三语 dispatcher
  *
- * en 分支等价于原 ToolContent 渲染输出。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支等价于原 ToolContent 渲染输出。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en (与改造前渲染输出一致) ────────────────────────────
@@ -28,23 +28,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具?</h2>
-    <p>本工具根据两人的出生年份计算年龄差。适用于恋爱关系、家族历史以及趣味问答等场景。</p>
-
-    <div>
-      <h2>常见用途</h2>
-      <ul>
-        <li>恋爱关系中的年龄差</li>
-        <li>兄弟姐妹之间的年龄差</li>
-        <li>历史人物的年龄对比</li>
-        <li>家谱研究</li>
-      </ul>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -82,7 +65,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function AgeDifferenceCalculatorContent(): ReactNode {
   const { locale } = useApp()

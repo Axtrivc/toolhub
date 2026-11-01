@@ -5,38 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const svgToImageL10n: ToolL10n = {
-  zh: {
-    ui: {
-      'convert': '转换',
-      'convertedPreviewAlt': '转换预览',
-      'download': '下载',
-      'errorConvertFailed': '转换失败。',
-      'errorEmpty': '请先粘贴 SVG 代码或上传文件。',
-      'errorEncodeFailed': '转换失败:浏览器无法编码图片。',
-      'errorFileTooLarge': '文件太大——最大支持 20 MB 的 SVG 文件。',
-      'errorInvalidSvg': '无效的 SVG 标记。',
-      'errorInvalidSvgMarkup': '无效的 SVG——请确保包含 xmlns,并且提供 viewBox 或 width/height。',
-      'errorReadFile': '读取文件失败。',
-      'errorTooLarge': '输出尺寸过大——单边不超过 8192 px 且总像素低于 4000 万。请缩小 viewBox 或降低缩放倍数。',
-      'format': '格式:',
-      'note': '🖼️ 转换完全在你的浏览器中通过 HTML5 canvas 完成——你的 SVG 绝不会被上传。想要在高 DPI 屏幕上获得清晰输出,请使用 2x 或 3x 缩放。自包含的 SVG(图片内联为 data URI、字体已内嵌)转换最可靠。',
-      'pasteSvgCode': '粘贴 SVG 代码',
-      'result': '结果',
-      'scale': '缩放:',
-      'uploadSvg': '上传 .svg',
-    },
-    useCases: [
-      '把 SVG logo 转成邮件用的 PNG',
-      '生成社交媒体通用的 WebP 缩略图',
-      '从 SVG 快速导出 favicon',
-      '以 2x / 3x 倍率导出高清设计稿',
-    ],
-    faqs: [
-      { q: '为什么转换后的 PNG 看起来很模糊？', a: 'PNG 和 WebP 是位图(像素)格式,而 SVG 是矢量,可以无限放大。如果以 1x 转换一个小 SVG,得到的像素很少。使用 2x 或 3x 缩放选项可以渲染更多像素,让输出在高分屏上更清晰;如果需要缩放,请保留原始 SVG。' },
-      { q: '能转换引用了外部图片或字体的 SVG 吗？', a: '只能转换自包含的 SVG。如果你的 SVG 通过 <image href="..."> 引用外部文件或加载网络字体,这些资源会受浏览器同源/canvas 污染规则的限制,可能无法渲染或导致导出失败。将图片内联为 data URI、把文字转换为路径,可以获得最可靠的转换效果。' },
-      { q: '我的 SVG 会被上传到服务器吗？', a: '不会。转换完全在你的浏览器内通过 HTML5 canvas 完成。你的 SVG 代码或文件只在本地读取,绝不会发送到服务器,这也意味着页面加载后即可离线使用。' },
-    ],
-  },
+
   es: {
     ui: {
       'convert': 'Convertir',

@@ -7,27 +7,7 @@ import type { ToolL10n } from '../tool-l10n'
 const FORMULA = 'Cash back = Σ ( spendᵢ × rateᵢ ) − annual fee'
 
 export const cashBackCalculatorL10n: ToolL10n = {
-  zh: {
-    useCases: ['算有年费的返现卡值不值', '算信用卡奖励的实际价值', '按消费找最佳返现卡', '对比返现 vs 积分价值'],
-    faqs: [
-      { q: '积分还是返现?', a: '返现更简单、价值确定。积分如果兑换旅行（尤其商务/头等舱）可能更值，但更费力且价值波动。' },
-      { q: '什么时候有年费的卡才划算?', a: '当你每年的奖励超过年费时。用年费除以返现比例就能找到盈亏平衡消费额——$95 年费、3% 餐饮返现的卡，盈亏平衡点大约是每年 $3,167 餐饮消费。低于这个数，免年费卡更划算。' },
-      { q: '返现奖励会过期吗?', a: '账户正常使用期间通常不会过期，但关卡或长期不活跃时发卡机构可能没收奖励。积分项目可能随时间贬值，而返现以对账单抵扣的形式保持固定美元价值。' },
-      { q: '多张卡搭配返现有意义吗?', a: '有——用 5% 类别卡（餐饮、加油、超市）叠加 2% 全能卡，消费重的家庭一年能多拿 $300-500。注意各卡需要激活的季度类别和奖励上限，没激活就拿不到高比例。' },
-    ],
-    formula: { formula: FORMULA, explain: '将每个类别的消费乘以其返现比例，跨类别求和，再减去卡年费。额外比例仅在其季度或年度消费上限内适用。' },
-    ui: {
-      'chartTitle': '返现 vs 年费',
-      'cmp.0': '每年返现',
-      'cmp.1': '年费',
-      'cmpseg.0': '返现',
-      'cmpseg.1': '年费',
-      'in.spend': '月消费额', 'in.rate': '返现比例', 'in.fee': '卡年费',
-      'out.monthly': '月返现', 'out.annual': '年返现（扣费前）', 'out.net': '净价值（扣费后）',
-      errNonNegative: '数值不能为负',
-      note: '💳 诚实比较各奖励卡。$95 年费只有当你额外赚到的奖励超过 $95 时才划算。',
-    },
-  },
+
   es: {
     useCases: ['calcular si una tarjeta con anualidad compensa', 'calcular el valor real de las recompensas', 'encontrar la mejor tarjeta por gasto', 'comparar reembolso frente a puntos'],
     faqs: [

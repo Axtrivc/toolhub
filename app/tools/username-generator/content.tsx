@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * UsernameGenerator 长文正文 —— 四语 dispatcher
+ * UsernameGenerator 长文正文 —— 三语 dispatcher
  *
- * en 分支与英文站渲染输出一致。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支与英文站渲染输出一致。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -24,19 +24,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>为什么同一个名字到处不通用</h2>
-    <p>每个平台都有自己的上限:Instagram 30 字符、X 15、Discord 现在 32、Twitch 25,很多游戏卡在 16 或 20——还会悄悄拒绝别站接受的符号。把最大长度设到你在意的最严平台,主用小写字母加数字——这是所有登录框都容忍的字母表。</p>
-    <h2>四种风格拆解</h2>
-    <p>游戏风用 xX…Xx 装饰和 leet 替换(a→4、e→3、s→5),血统来自 2000 年代的战队文化;复古风缀上 80/90 年代年份后缀——BBS 和街机排行榜的味道;极简风保持干净小写,专业耐看,扛得住平台改版;下划线风用经典 _ 连接两个词,当裸名被占时依然是最好读的破局法。</p>
-    <h2>用户名是公开身份,不是秘密</h2>
-    <p>昵称天生就是要被搜到、被@、被记住的——所以它当密码一定很糟。这是两份不同的工作:本工具发明身份,密码生成器保护身份背后的账号。永远不要把昵称派生的字符串再用作凭据。</p>
-    <h2>拿到你真正想要的名字</h2>
-    <p>单词短名几乎全被占了;关键词 + 名词、或加两位数字后缀,赢下可用性竞赛的速度最快。定名之前,先在你用的平台搜一遍这个 ID,顺手查一下域名——游戏、直播、GitHub 三处同名,值得多花那一分钟。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -66,7 +53,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function UsernameGeneratorContent(): ReactNode {
   const { locale } = useApp()

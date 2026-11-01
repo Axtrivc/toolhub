@@ -5,31 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const unitPriceCalculatorL10n: ToolL10n = {
-  zh: {
-    formula: {
-      formula: 'Unit price = total price / quantity',
-      explain: '单件价格(每盎司、每件、每米)。比较单价——而非整包价格——才能在规格不同时找到真正最划算的。',
-    },
-    useCases: ['按每克/每毫升/每件比较真实性价比', '看大包装是不是真的更划算', '对比不同单位的产品价格', '找到每单位最便宜的选项'],
-    faqs: [
-      { q: '这个工具能用在非食品上吗?', a: '能。卫生纸、纸尿裤、电池等按件数出售的,单位选「件」。液体用 ml,固体用 g。计算方法一样。' },
-    ],
-    ui: {
-      'chartTitle': '单价对决',
-      'cmp.0': '选项 1',
-      'cmp.1': '选项 2',
-      'cmpseg.0': '每基准单位',
-      'in.price1': '价格 1', 'in.size1': '规格 1', 'in.unit1': '单位 1', 'in.price2': '价格 2', 'in.size2': '规格 2', 'in.unit2': '单位 2',
-      'opt.unit1.g': '克 (g)', 'opt.unit1.ml': '毫升 (ml)', 'opt.unit1.ct': '件 (ct)', 'opt.unit1.kg': '千克 (kg)',
-      'opt.unit1.oz': '盎司 (oz)', 'opt.unit1.lb': '磅 (lb)', 'opt.unit1.l': '升 (l)', 'opt.unit1.mg': '毫克 (mg)',
-      'opt.unit2.g': '克 (g)', 'opt.unit2.ml': '毫升 (ml)', 'opt.unit2.ct': '件 (ct)', 'opt.unit2.kg': '千克 (kg)',
-      'opt.unit2.oz': '盎司 (oz)', 'opt.unit2.lb': '磅 (lb)', 'opt.unit2.l': '升 (l)', 'opt.unit2.mg': '毫克 (mg)',
-      'out.unit1price': '选项 1 单价', 'out.unit2price': '选项 2 单价', 'out.winner': '更划算',
-      note: '🛒 比较不同包装的真实性价比。大包装未必每单位更便宜。',
-          'errNonNegative': "价格不能为负",
-      'winnerCrossFamily': "单位类型不同,无法公平比较",
-},
-  },
+
   es: {
     formula: {
       formula: 'Unit price = total price / quantity',

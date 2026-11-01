@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * CronExpressionGenerator 长文正文 —— 四语 dispatcher
+ * CronExpressionGenerator 长文正文 —— 三语 dispatcher
  *
- * en 分支与改造前渲染输出一致。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支与改造前渲染输出一致。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en (与改造前渲染输出一致) ────────────────────────────
@@ -22,17 +22,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>读懂五个字段</h2>
-    <p>分钟、小时、日、月、星期,每个字段都支持 *、列表、范围和 */N 步进。表达式下方的描述行由本站自己的 cron 引擎生成,你读到的就是调度器将要执行的。</p>
-    <h2>常见的坑</h2>
-    <p>当「日」和「星期」都被限定时,二者按 OR 组合(标准 Vixie 行为)——这是人们最常踩的一条规则。另外:cron 没有时区字段,除非另行配置,服务器一律按 UTC 运行。</p>
-    <h2>预设与自定义</h2>
-    <p>预设覆盖了 90% 的真实调度场景:每 N 分钟、每小时第 :MM 分、每天/工作日/每周的固定时刻。更冷门的需求请交给带校验功能的专业 cron 编辑器——把这里的输出粘贴过去即可。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -58,7 +47,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function CronExpressionGeneratorContent(): ReactNode {
   const { locale } = useApp()

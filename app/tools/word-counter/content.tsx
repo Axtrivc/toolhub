@@ -99,80 +99,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>字数统计器是如何工作的?</h2>
-    <p>
-      本工具会在你打字时实时统计单词数、字符数、句子数、段落数以及估算的阅读时间。「单词」定义为任意非空白字符序列——因此 <code>hello</code>、<code>2026</code> 和 <code>don&apos;t</code> 各算作一个单词。所有计算都在你的浏览器本地完成,因此没有延迟,你的文本也绝不会离开你的设备。
-    </p>
-
-    <h2>为什么要统计字数?</h2>
-    <p>
-      字数统计在比你想象更多的场景中都很重要。以下是最常见的几种:
-    </p>
-    <ul>
-      <li>
-        <strong>学术写作。</strong>论文、学位论文和期刊投稿几乎总是有严格的字数限制。不足或超出都可能让你丢分或被拒稿。
-      </li>
-      <li>
-        <strong>SEO 与内容营销。</strong>搜索引擎往往偏好有深度的文章。支柱内容的常见基准是 1,000-2,000 字,不过质量永远胜过长度。
-      </li>
-      <li>
-        <strong>法律与专业文档。</strong>案情摘要、合同和报告通常有法院或客户设定的字数限制。
-      </li>
-      <li>
-        <strong>社交媒体。</strong>每个平台都有自己的限制:X (Twitter) 帖子、SEO 元描述(约 155 个字符)、广告文案等等。
-      </li>
-      <li>
-        <strong>翻译与自由撰稿。</strong>许多译者和作者按字计酬,因此准确的字数对开票至关重要。
-      </li>
-    </ul>
-
-    <h2>阅读时间与演讲时间</h2>
-    <p>
-      本工具基于你的字数,使用标准阅读速度估算两种时长:
-    </p>
-    <ul>
-      <li>
-        <strong>阅读时间:</strong>每分钟约 200 词(约为成年人阅读小说的平均速度;保守估计会用 150——参见我们的阅读时长工具)。
-      </li>
-      <li>
-        <strong>演讲时间:</strong>每分钟约 130 词(清晰演示或播客的平均语速)。
-      </li>
-      <li>
-        <strong>中日韩(CJK)文本:</strong>每个字符计为一个词,阅读速度按每分钟约 350 字、演讲速度按每分钟约 220 字计算。
-      </li>
-    </ul>
-    <p>
-      这些都是平均值——你的实际速度取决于内容密度、专业术语以及是否在略读。请把它们当作规划参考,而不是秒表。
-    </p>
-
-    <h2>常见平台的字符数限制</h2>
-    <p>以下是你写作时可能需要参照的各平台限制速查:</p>
-    <ul>
-      <li><strong>Google 元描述:</strong>约 155 个字符(超出会被截断)。</li>
-      <li><strong>X (Twitter) 帖子:</strong>280 个字符。</li>
-      <li><strong>Instagram 说明文字:</strong>2,200 个字符(只有前 125 个无需点击「更多」即可显示)。</li>
-      <li><strong>Facebook 帖子:</strong>没有严格限制,但较短的帖子互动率更高。</li>
-      <li><strong>LinkedIn 帖子:</strong>3,000 个字符。</li>
-      <li><strong>YouTube 标题:</strong>100 个字符(搜索中约可见 70 个)。</li>
-    </ul>
-
-    <h2>达到目标字数的技巧</h2>
-    <ol>
-      <li>
-        <strong>不要凑字数。</strong>堆砌废话会损害可读性和 SEO。如果字数不足,请增加实质内容——例子、数据或更深入的解释——而不是填充。
-      </li>
-      <li>
-        <strong>先列大纲。</strong>结构化的大纲让你更容易命中目标而不东拉西扯。给每个部分分配大致相等的字数。
-      </li>
-      <li>
-        <strong>果断删改。</strong>如果超出限制,寻找冗余的短语、副词和重复。删减通常能改善文章。
-      </li>
-    </ol>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -368,7 +294,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function WordCounterContent(): ReactNode {
   const { locale } = useApp()

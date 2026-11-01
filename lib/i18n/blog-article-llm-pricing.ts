@@ -23,8 +23,8 @@ const EN_CRUMB_TITLE = '2026 LLM Pricing Handbook'
 
 export const llmPricingGuideArticle: LocalizedArticle = {
   en: {
-    articleTitle: { en: EN_TITLE, zh: '2026 LLM 定价手册:算清 token 密度、上下文缓存与月度 API 预算', es: 'El manual de precios de LLM 2026: medir la densidad de tokens, el caché de contexto y el presupuesto API mensual', de: 'Das LLM-Preis-Handbuch 2026: Token-Dichte, Kontext-Caching und monatliche API-Budgets bemessen' },
-    breadcrumbTitle: { en: EN_CRUMB_TITLE, zh: EN_CRUMB_TITLE, es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
+    articleTitle: { en: EN_TITLE,  es: 'El manual de precios de LLM 2026: medir la densidad de tokens, el caché de contexto y el presupuesto API mensual', de: 'Das LLM-Preis-Handbuch 2026: Token-Dichte, Kontext-Caching und monatliche API-Budgets bemessen' },
+    breadcrumbTitle: { en: EN_CRUMB_TITLE,  es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
     readMinutes: 10,
     lead: 'LLM bills are not mysterious — they are multiplication. requests × tokens × price. What separates a $200/month feature from a $20,000/month one is usually three decisions: output length, caching, and model routing. This handbook prices each one.',
     sections: [
@@ -104,91 +104,10 @@ export const llmPricingGuideArticle: LocalizedArticle = {
       },
     ],
   },
-  zh: {
-    articleTitle: { en: EN_TITLE, zh: '2026 LLM 定价手册:算清 token 密度、上下文缓存与月度 API 预算', es: 'El manual de precios de LLM 2026: medir la densidad de tokens, el caché de contexto y el presupuesto API mensual', de: 'Das LLM-Preis-Handbuch 2026: Token-Dichte, Kontext-Caching und monatliche API-Budgets bemessen' },
-    breadcrumbTitle: { en: EN_CRUMB_TITLE, zh: EN_CRUMB_TITLE, es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
-    readMinutes: 10,
-    lead: 'LLM 账单并不神秘——它就是乘法:请求数 × token 数 × 单价。$200/月与 $20,000/月功能的差距,通常来自三个决策:输出长度、缓存、模型路由。本手册给每一项定价。',
-    sections: [
-      {
-        heading: '1. Token 是一切的计量单位',
-        blocks: [
-          '厂商按**百万 token** 计费,且拆成输入与输出。英文的经验比例是每 token 约 4 字符(¾ 个词);代码 token 密度更高,CJK 文本约 1 字 1 token——同一段提示词,中文版照例比英文翻译贵 30% 以上。',
-          '驱动预算的不对称性:**输出 token 价格是输入的 3–5 倍**,因为生成是串行的而提示词处理是并行的。一个读 2,000 token 答 200 token 的功能很便宜;同样功能答 2,000 个啰嗦 token,仅输出侧就贵出十倍。',
-          {
-            card: {
-              title: 'GPT Token 计数器',
-              href: '/tools/gpt-token-counter/',
-              desc: '定价之前,先粘贴真实 prompt 量出 token 数——实测密度永远胜过拍脑袋密度。',
-            },
-          },
-        ],
-      },
-      {
-        heading: '2. 先测 token 密度,再建成本模型',
-        blocks: [
-          '任何建立在假设 token 数上的成本模型都是虚构。诚实的流程:取 20 条真实生产 prompt,量出 token 数,取 p50 与 p95 各建一版。对话功能分布集中;RAG 功能是肥尾——带上 5 个检索块的 p95 prompt,成本可能是 p50 的 8 倍。',
-          { code: CODE_LLM_BUDGET },
-        ],
-      },
-      {
-        heading: '3. 上下文缓存:没人编进预算的 50–90% 折扣',
-        blocks: [
-          '如果你的 prompt 共享稳定前缀——系统提示、few-shot 示例、工具定义——**prompt 缓存**能复用厂商侧的处理结果。被缓存的输入 token 按标价的 **10–50%** 计费,首 token 延迟还顺带下降。对一个带 8,000 token 系统提示、日调 5 万次的 Agent,缓存把最大成本项变成零头。',
-          '为缓存而设计:稳定内容放前面、易变内容放最后;保持前缀逐字节一致(空格变动都会击穿缓存);长文档问答走缓存友好的布局,而不是每轮重发整个文档。',
-          {
-            card: {
-              title: 'LLM API 成本计算器',
-              href: '/tools/llm-cost-calculator/',
-              desc: '17 个模型的单次请求与月度成本——含缓存输入节省,50–90% 折扣直接进测算。',
-            },
-          },
-        ],
-      },
-      {
-        heading: '4. 批量 API 与模型路由:另外两半',
-        blocks: [
-          '非实时工作——评测、回填、夜间摘要——属于 **Batch API**:输出约半价,代价是分钟到小时级延迟。实时流量永远不该付批量价,批量流量永远不该付实时价;混在一起是 LLM 预算里最常见的非受迫失误。',
-          '然后按难度路由:分类、抽取用小模型,旗舰模型只留给真正的硬推理。一个把 80% 流量路由到便宜 10 倍模型的路由器,省下的钱超过任何 prompt 优化。',
-          {
-            card: {
-              title: 'LLM API 成本对比',
-              href: '/tools/llm-api-cost-calculator/',
-              desc: '按每次请求 token 数与每日请求数给出各模型月成本——并排对比路由方案。',
-            },
-          },
-        ],
-      },
-      {
-        heading: '5. 嵌入:可以停止焦虑的那一栏',
-        blocks: [
-          '嵌入模型定价在**每百万 token $0.02–$0.13**——十亿 token 的语料全量嵌入一次约 $20–$130。多数 RAG 系统里,嵌入 API 是账单上最小的一栏;真正的成本在向量存储(与维度成正比)与检索计算。嵌入预算做一次,然后把优化精力放对地方。',
-          {
-            card: {
-              title: '嵌入价格计算器',
-              href: '/tools/embedding-price-calculator/',
-              desc: '各厂商首次全量与每月重嵌成本——与它真正竞争的存储账单放在一起看。',
-            },
-          },
-        ],
-      },
-      {
-        heading: '每月预算复盘',
-        blocks: [
-          { list: [
-            '用**实测** p50/p95 token 数重算,绝不用假设值。',
-            '检查输出/输入比——超出计划说明输出纪律松懈了。',
-            '核对缓存命中率;被击穿的前缀是输入侧 2–10 倍的隐形税。',
-            '一切非实时流量迁往批量 API,每季度审计一次。',
-            '每季度按最新价目重算——LLM 降价速度快到上个季度的便宜模型可能已变成贵的那个。',
-          ] },
-        ],
-      },
-    ],
-  },
+
   es: {
-    articleTitle: { en: EN_TITLE, zh: '2026 LLM 定价手册:算清 token 密度、上下文缓存与月度 API 预算', es: 'El manual de precios de LLM 2026: medir la densidad de tokens, el caché de contexto y el presupuesto API mensual', de: 'Das LLM-Preis-Handbuch 2026: Token-Dichte, Kontext-Caching und monatliche API-Budgets bemessen' },
-    breadcrumbTitle: { en: EN_CRUMB_TITLE, zh: EN_CRUMB_TITLE, es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
+    articleTitle: { en: EN_TITLE,  es: 'El manual de precios de LLM 2026: medir la densidad de tokens, el caché de contexto y el presupuesto API mensual', de: 'Das LLM-Preis-Handbuch 2026: Token-Dichte, Kontext-Caching und monatliche API-Budgets bemessen' },
+    breadcrumbTitle: { en: EN_CRUMB_TITLE,  es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
     readMinutes: 10,
     lead: 'Las facturas de LLM no son misteriosas — son multiplicación: peticiones × tokens × precio. Lo que separa una función de $200/mes de una de $20 000/mes suele ser tres decisiones: longitud de salida, caché y enrutado de modelos. Este manual les pone precio.',
     sections: [
@@ -269,8 +188,8 @@ export const llmPricingGuideArticle: LocalizedArticle = {
     ],
   },
   de: {
-    articleTitle: { en: EN_TITLE, zh: '2026 LLM 定价手册:算清 token 密度、上下文缓存与月度 API 预算', es: 'El manual de precios de LLM 2026: medir la densidad de tokens, el caché de contexto y el presupuesto API mensual', de: 'Das LLM-Preis-Handbuch 2026: Token-Dichte, Kontext-Caching und monatliche API-Budgets bemessen' },
-    breadcrumbTitle: { en: EN_CRUMB_TITLE, zh: EN_CRUMB_TITLE, es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
+    articleTitle: { en: EN_TITLE,  es: 'El manual de precios de LLM 2026: medir la densidad de tokens, el caché de contexto y el presupuesto API mensual', de: 'Das LLM-Preis-Handbuch 2026: Token-Dichte, Kontext-Caching und monatliche API-Budgets bemessen' },
+    breadcrumbTitle: { en: EN_CRUMB_TITLE,  es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
     readMinutes: 10,
     lead: 'LLM-Rechnungen sind nicht mysteriös — sie sind Multiplikation: Anfragen × Tokens × Preis. Was ein $200/Monat-Feature von einem $20 000/Monat-Feature trennt, sind meist drei Entscheidungen: Ausgabelänge, Caching und Modell-Routing. Dieses Handbuch bepreist jede einzelne.',
     sections: [

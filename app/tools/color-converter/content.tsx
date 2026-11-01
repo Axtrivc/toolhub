@@ -52,48 +52,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具?</h2>
-    <p>
-      网页中的颜色主要有三种格式:<strong>HEX</strong>(如 #3b82f6)、<strong>RGB</strong>(如 rgb(59, 130, 246))和{' '}
-      <strong>HSL</strong>(如 hsl(217, 91%, 60%))。本工具可在三者之间即时转换——输入任意格式,或使用可视化取色器。
-    </p>
-    <div>
-      <h2>三种颜色格式</h2>
-      <ul>
-        <li>
-          <strong>HEX</strong> —— 六位十六进制数字(#RRGGBB),每两位代表一个颜色通道,取值 00-FF。在 CSS 和设计工具中最常见。
-        </li>
-        <li>
-          <strong>RGB</strong> —— 三个 0-255 的十进制数,分别表示红、绿、蓝。更便于程序读取。
-        </li>
-        <li>
-          <strong>HSL</strong> —— 色相(0-360°)、饱和度 %、亮度 %。对人最直观——「让它变暗」就是降低亮度。
-        </li>
-      </ul>
-    </div>
-    <div>
-      <h2>该用哪一种</h2>
-      <p>
-        <strong>HEX</strong> 是 CSS 和大多数设计工具的默认格式。<strong>RGB</strong>{' '}
-        适用于在代码中操作颜色通道或添加透明度(rgba)。<strong>HSL</strong>{' '}
-        最适合直观地调整颜色——在 HSL 下创建同一色相的变体比在 HEX 下容易得多。
-      </p>
-    </div>
-    <div>
-      <h2>常用颜色参考</h2>
-      <ul>
-        <li>白色:#FFFFFF / rgb(255,255,255) / hsl(0,0%,100%)</li>
-        <li>黑色:#000000 / rgb(0,0,0) / hsl(0,0%,0%)</li>
-        <li>红色:#FF0000 / rgb(255,0,0) / hsl(0,100%,50%)</li>
-        <li>蓝色:#0000FF / rgb(0,0,255) / hsl(240,100%,50%)</li>
-        <li>Tailwind blue-500:#3B82F6 / rgb(59,130,246) / hsl(217,91%,60%)</li>
-      </ul>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -193,7 +151,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function ColorConverterContent(): ReactNode {
   const { locale } = useApp()

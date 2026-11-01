@@ -22,23 +22,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具?</h2>
-    <p>本工具会为文本的每一行添加行号,行号右对齐、间距统一。适合用于代码审查、逐字稿整理,以及任何需要按行引用的文本。</p>
-    <div>
-      <h2>常见用途</h2>
-      <ul>
-        <li>代码审查 —— 引用「第 42 行有 bug」</li>
-        <li>逐字稿和访谈笔记</li>
-        <li>日志文件分析</li>
-        <li>文档审阅与编辑</li>
-        <li>教学材料与教程</li>
-      </ul>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -76,7 +59,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function AddLineNumbersContent(): ReactNode {
   const { locale } = useApp()

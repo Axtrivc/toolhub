@@ -5,41 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const ConfidenceIntervalCalculatorL10n: ToolL10n = {
-  zh: {
-    useCases: ['给样本均值算 90/95/99% 置信区间', '给比例(投票、转化率、满意率)算区间与误差幅度', '做调查/实验前看误差随样本量的收敛速度', '解读论文与新闻里的 ±3 个百分点'],
-    faqs: [
-      { q: '用的是什么公式?', a: '均值用 CI = x̄ ± z·s/√n;比例用 p̂ ± z·√(p̂(1−p̂)/n)(Wald 区间)。z 在 90/95/99% 置信水平下分别取 1.645、1.96、2.576。' },
-      { q: '"95% 置信"到底是什么意思?', a: '说的是方法而不是这一个区间:重复抽样并按此法构造的区间中,95% 会盖住真值。任何一个具体区间要么盖住、要么没盖住,不存在"真值有 95% 概率落在里面"。' },
-      { q: '为什么样本翻倍只稍微好一点?', a: '误差幅度按 1/√n 收缩——样本翻倍只省约 29% 的误差,翻四倍才减半。所以 ±1% 精度要花 ±2% 四倍的样本。' },
-      { q: '这个近似什么时候失效?', a: '正态(z)近似要求均值场景 n ≥ 30(更小请用 t 区间),比例场景 np̂ ≥ 5 且 n(1−p̂) ≥ 5。稀有事件或比例贴近 0/1 时应改用 Wilson 得分区间。' },
-    ],
-    ui: {
-      'in.mode': '数据类型',
-      'in.mean': '样本均值',
-      'in.sd': '样本标准差',
-      'in.p': '样本比例',
-      'in.n': '样本量',
-      'in.level': '置信水平',
-      'opt.mode.mean': '均值 (x̄, s, n)',
-      'opt.mode.prop': '比例 (p, n)',
-      'opt.level.90': '90%',
-      'opt.level.95': '95%',
-      'opt.level.99': '99%',
-      'out.ci': '置信区间',
-      'out.moe': '误差幅度',
-      'out.se': '标准误',
-      'out.z': '临界值 z',
-      'chartTitle': '误差幅度随 √n 收缩',
-      'line.moe': '误差幅度',
-      'preset.0': '配送时长:4.2 ± ?,95%',
-      'preset.1': '民调:55%,n = 1000,95%',
-      'preset.2': '临床试验:8.4 天,n = 64,99%',
-      'note': '📊 均值模式 CI = x̄ ± z·s/√n(σ 未知,n ≥ 30 才稳);比例模式是 Wald 区间 p̂ ± z·√(p̂(1−p̂)/n)。小样本或比例贴近 0/1 时请改用 t 区间或 Wilson 得分区间——Wald 在那里会低估覆盖率。',
-      'errN': '样本量至少为 2',
-      'errProp': '比例须在 0–100% 之间',
-      'errNumeric': '请填有效的均值与非负标准差',
-    },
-  },
+
   es: {
     useCases: ['calcular intervalos de confianza al 90/95/99% para una media', 'obtener el intervalo y el margen de error de una proporción', 'ver cómo converge el margen al crecer la muestra', 'interpretar el «±3 puntos» de encuestas y artículos'],
     faqs: [

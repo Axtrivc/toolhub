@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * RaceTimePredictor 长文正文 —— 四语 dispatcher
+ * RaceTimePredictor 长文正文 —— 三语 dispatcher
  *
- * en 分支与 SSR 输出一致。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支与 SSR 输出一致。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -24,19 +24,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是疲劳指数,不是拍脑袋</h2>
-    <p>Peter Riegel 1981 年对马拉松与路跑成绩的大样本分析发现:完赛时间约随距离的 1.06 次方增长——比赛翻倍,配速恰好按这个指数衰减。完全抗疲劳的跑者是 1.0;我们多数人落在 1.04 到 1.10 之间。</p>
-    <h2>喂它真比赛,不是训练课</h2>
-    <p>公式是按比赛强度标定的——肾上腺素、减量后的双腿、身前的对手。单独的训练课通常比比赛日慢 2-5%,这会把所有预测悄悄压低。手头只有训练数据时,把输出往乐观方向修正一点再用。</p>
-    <h2>全马是例外</h2>
-    <p>用 5K 推 42.195 公里,误差被放大到距离的 8.4 倍。Riegel 不知道糖原、不知道肠胃耐受、更不知道 32-38 公里那一段;首马跑者在预测值上加 3-5%,把它当冲刺目标而不是承诺。半马→全马是整张表里最可靠的一次跨越。</p>
-    <h2>输出怎么用才对</h2>
-    <p>真正实用的是等效配速那一行:它是"当前状态平移过去"时你应持有的配速,也正是教练在训练周期前定目标配速的方法。每场测试赛之后重跑一次预测,让目标配速随正赛临近而逐渐收窄。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -66,7 +53,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function RaceTimePredictorContent(): ReactNode {
   const { locale } = useApp()

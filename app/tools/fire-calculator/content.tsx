@@ -5,11 +5,11 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * FIRE Calculator 长文正文 —— 四语 dispatcher
+ * FIRE Calculator 长文正文 —— 三语 dispatcher
  *
  * en 分支与改造前渲染输出一致(仅修正 65% 储蓄率的年限表述:按本站默认
  * 5% 实际回报、4% SWR 实算约 10.5 年,原文「can drop under a decade」偏乐观)。
- * zh/es/de 仅客户端 hydration 后切换。
+ * es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -51,31 +51,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>什么是 FIRE?</h2>
-    <p>
-      <strong>FIRE</strong>(Financial Independence, Retire Early,财务自由、提前退休)指把投资组合积累到其收益能永远覆盖生活开支的策略。当你的投资足以稳妥支付你的生活,工作就变成了可选项。这场运动源自 4% 法则,以及一个观察:决定工作年限的真正杠杆是储蓄率,而不是收入。
-    </p>
-
-    <h2>你的 FIRE 目标金额:年支出 ÷ 提取率</h2>
-    <p>
-      著名的 <strong>4% 法则</strong>(出自 Trinity 研究)认为组合每年可以可持续地提取其价值的 4%。反过来推:FIRE 目标金额 = 年支出 ÷ 0.04 = <strong>年支出的 25 倍</strong>。每年花 40,000 美元 → 目标 1,000,000 美元。精简型 FIRE(年花 2.8 万)约需 70 万美元;年花 8 万的生活方式则需要 200 万。对 40 年以上的退休期,用 3.5%(28.6 倍)更稳妥。
-    </p>
-
-    <h2>惊人简单的储蓄率数学</h2>
-    <p>
-      多存钱是两头同时发力的杠杆:组合增长更快,<em>同时</em>所需目标金额更小。储蓄率 10% 时离 FIRE 约 50 年;50% 时约 15–17 年;65% 时大约十年。这正是本计算器逐一展示每 <strong>+10% 储蓄率</strong>能换来多少年的原因——压缩效应才是整场游戏的核心。
-    </p>
-
-    <h2>本计算器如何预测增长</h2>
-    <p>
-      你的组合按<em>实际</em>(扣除通胀)回报复利增长——默认 5%,对偏股组合属于保守假设——现有储蓄与每年新增投入都参与复利:{' '}
-      <code>balance(t) = P(1+r)<sup>t</sup> + S × ((1+r)<sup>t</sup> − 1) / r</code>。由于所有数字都是今日购买力,无需再做通胀调整。工具会求解余额跨过 FIRE 目标金额的确切年份,并换算成目标退休年份。
-    </p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -156,7 +131,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function FireCalculatorContent(): ReactNode {
   const { locale } = useApp()

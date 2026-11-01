@@ -50,38 +50,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具?</h2>
-    <p>
-      这个工具在你指定的任意范围内生成随机数。可用于抽取彩票号码、选出比赛获胜者、随机点名学生、运行模拟,或任何需要无偏随机选择的场景。
-    </p>
-    <div>
-      <h2>工作原理</h2>
-      <p>
-        这个生成器优先调用浏览器内置的密码学安全随机源(crypto.getRandomValues),并以拒绝采样保证数字在你选择的范围内均匀分布;仅当该接口不可用(或区间取值超过 2^32 个)时才回退到 JavaScript 的 Math.random。「不重复数字」选项确保不出现重复——适合抽奖和无放回抽样。
-      </p>
-    </div>
-    <div>
-      <h2>真随机 vs. 伪随机</h2>
-      <p>
-        大多数软件(包括本工具)使用<strong>伪随机</strong>数,由数学算法生成。对于游戏、模拟和日常使用已经足够,但它终究是算法产物,并非物理意义上的随机。经认证的彩票开奖或官方博彩抽签,要求使用来自物理源(放射性衰变、大气噪声)的「真」随机数——这方面可以参考 Random.org。
-      </p>
-    </div>
-    <div>
-      <h2>常见用途</h2>
-      <ul>
-        <li>公平地选出比赛或抽奖获奖者</li>
-        <li>生成彩票号码组合</li>
-        <li>随机选择学生或团队</li>
-        <li>运行 Monte Carlo 模拟</li>
-        <li>用随机输入测试代码</li>
-        <li>掷虚拟骰子(设最小值 1,最大值 6)</li>
-      </ul>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -170,7 +138,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function RandomNumberGeneratorContent(): ReactNode {
   const { locale } = useApp()

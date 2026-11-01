@@ -5,10 +5,10 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * ReadingLevelChecker 长文正文 —— 四语 dispatcher
+ * ReadingLevelChecker 长文正文 —— 三语 dispatcher
  *
  * en 分支与改造前渲染输出一致(仅修正"三个输入"句的实际枚举)。
- * zh/es/de 仅客户端 hydration 后切换。
+ * es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -23,17 +23,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>分数是什么意思</h2>
-    <p>Flesch 阅读容易度越高越好读,一般散文大致落在 0-100 之间(极短、极简单的句子可能超过 100);Flesch-Kincaid 年级估算美国学制下的阅读年级。一般网页文案瞄准 60-70 的容易度,大致相当于 8-9 年级——是把话说清楚,不是把内容变浅。</p>
-    <h2>公式如何工作</h2>
-    <p>两个公式最终只用到三个计数——词、句、音节——组合成"每句词数"和"每词音节数"。短句和短词会机械地拉高分数——这也解释了为什么列点和具体名词能自然而然地改善可读性。</p>
-    <h2>低分什么时候没问题</h2>
-    <p>学术论文、法律合同和诗歌本来就难读,分数低是正常的。匹配你的读者,而不是某个普适数字:医疗患教材料应该易读;物理论文不该。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -59,7 +48,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function ReadingLevelCheckerContent(): ReactNode {
   const { locale } = useApp()

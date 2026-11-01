@@ -4,14 +4,14 @@
 
 ### **350+ Free Online Tools — Calculators, Converters & Developer Utilities with Browser-Local Computation**
 
-**350+ 免费在线实用工具集 · 纯浏览器本地计算 · 零注册 · 支持中 / 英 / 西 / 德四语切换**
+**350+ free online utilities · Browser-local computation · No signup · English / Español / Deutsch**
 
 [![Next.js 16](https://img.shields.io/badge/Next.js-16-black?logo=nextdotjs&logoColor=white)](https://nextjs.org)
 [![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-design_tokens-06B6D4?logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
 [![Cloudflare Pages](https://img.shields.io/badge/Hosted_on-Cloudflare_Pages-F38020?logo=cloudflare&logoColor=white)](https://pages.cloudflare.com)
 [![PWA](https://img.shields.io/badge/PWA-installable-5A0FC8?logo=pwa&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps)
-![i18n](https://img.shields.io/badge/i18n-EN_%C2%B7_%E4%B8%AD%E6%96%87_%C2%B7_ES_%C2%B7_DE-2EA043)
+![i18n](https://img.shields.io/badge/i18n-EN_%C2%B7_ES_%C2%B7_DE-2EA043)
 
 [🌐 **Live Site**](https://toolhub.axtrivc.com) &nbsp;·&nbsp; [🧭 **Browse All Tools**](https://toolhub.axtrivc.com/tools)
 
@@ -26,14 +26,14 @@
 
 ---
 
-## ✨ Why ToolHub? (核心亮点)
+## ✨ Why ToolHub?
 
 > Every tool is a single static page — fast to load, free to use, and **all computation happens locally in your browser**. No accounts and no server-side calculation API. Tools with shareable URLs may encode settings in the link, as disclosed in the privacy policy.
 
 | | |
 |:---|:---|
 | 🔒 **Privacy-first** | Browser-local computation, with shareable URL and site-analytics boundaries documented |
-| 🌍 **Four languages** | English, 中文, Español, Deutsch — switchable from any page |
+| 🌍 **Three languages** | English, Español, Deutsch — switchable from any page |
 | ⌨️ **Command palette** | Press <kbd>Ctrl</kbd>/<kbd>Cmd</kbd> + <kbd>K</kbd> to fuzzy-search all 350 tools |
 | 📱 **Installable PWA** | Service-worker caching keeps repeat visits fast, even offline |
 | 🌗 **Dark & light themes** | Plus keyboard-friendly dialogs, skip links & reduced-motion support |
@@ -42,7 +42,7 @@
 | 📊 **Scenario A/B Comparison & Live Charts** | Financial & math calculators support side-by-side Scenario A vs. Scenario B comparison tables and real-time balance curves |
 ---
 
-## 🎬 See It In Action (实测界面预览)
+## 🎬 See It In Action
 
 <table>
 <tr>

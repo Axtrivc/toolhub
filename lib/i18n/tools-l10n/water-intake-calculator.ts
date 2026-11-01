@@ -8,43 +8,7 @@ import type { ToolL10n } from '../tool-l10n'
 const FORMULA = 'Water (ml) ≈ 35 ml × weight (kg)   [ ≈ 0.5 oz × weight (lb) ]'
 
 export const waterIntakeCalculatorL10n: ToolL10n = {
-  zh: {
-    ui: {
-      litersPerDay: '升/天', cupsUnit: '杯', ozUnit: '盎司',
-      metric: '公制 (cm / kg)',
-      imperial: '英制 (ft/in / lb)',
-      weight: '体重',
-      activity: '运动量(分钟/天)',
-      climate: '气候',
-      climateNormal: '正常 / 温带',
-      climateHot: '炎热 / 潮湿',
-      outLiters: '每日需水量',
-      gaugeTitle: '你的目标 vs 常规指导',
-      zoneLow: '低于指导',
-      zoneTypical: '常规充足',
-      zoneActive: '活跃生活方式',
-      zoneHigh: '高于常规',
-      outCups: '以杯计(250ml)',
-      outOz: '以盎司计(美制)',
-      emptyState: '输入体重、运动量和气候即可估算每日需水量',
-      note: '💧 一般建议:每公斤体重约 35 ml,运动或高温时需更多。个人需求因人而异。',
-    },
-    useCases: [
-      '根据体重估算每日饮水量',
-      '为运动或炎热天气调整补水',
-      '孕期或哺乳期额外补水参考',
-      '把咖啡、茶和食物计入水分摄入',
-    ],
-    formula: {
-      formula: FORMULA,
-      explain: '常见的补水基准:约为体重(磅)的一半,以盎司计——换算约每公斤体重 35 ml。计算器会在此基础上根据运动、炎热气候和孕期上调。',
-    },
-    faqs: [
-      { q: '咖啡和茶算水分吗?', a: '算。尽管它们有轻微利尿作用,含咖啡因的饮品仍会带来净正水分。「咖啡不算水」的旧说法已被推翻。' },
-      { q: '每天该喝多少水?', a: '常见基准是每公斤体重 30–35 ml——约合体重(磅)的一半,以盎司计。一个 70 kg 的成年人在未计入运动、炎热气候或孕期之前约为每天 2.45 L,本计算器会在这些基础上额外上调。' },
-      { q: '水喝多了会有害吗?', a: '会。水中毒(低钠血症)会稀释血钠,可能带来危险,多见于耐力赛事。健康的肾脏每小时约能排出 0.8–1.0 L,所以应把饮水分散到全天,而不是一次大量灌入。' },
-    ],
-  },
+
   es: {
     ui: {
       litersPerDay: 'litros/día', cupsUnit: 'tazas', ozUnit: 'oz',

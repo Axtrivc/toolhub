@@ -24,8 +24,8 @@ const EN_CRUMB_TITLE = 'SaaS Unit Economics'
 
 export const saasEconomicsArticle: LocalizedArticle = {
   en: {
-    articleTitle: { en: EN_TITLE, zh: '掌握 SaaS 单位经济:CAC、LTV 与流失率的数学关系', es: 'Dominar la economía unitaria de las SaaS: la relación matemática entre CAC, LTV y churn', de: 'SaaS-Unit-Economics meistern: die mathematische Beziehung zwischen CAC, LTV und Churn' },
-    breadcrumbTitle: { en: EN_CRUMB_TITLE, zh: EN_CRUMB_TITLE, es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
+    articleTitle: { en: EN_TITLE,  es: 'Dominar la economía unitaria de las SaaS: la relación matemática entre CAC, LTV y churn', de: 'SaaS-Unit-Economics meistern: die mathematische Beziehung zwischen CAC, LTV und Churn' },
+    breadcrumbTitle: { en: EN_CRUMB_TITLE,  es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
     readMinutes: 10,
     lead: 'SaaS businesses do not die from bad products; they die from inverted unit economics — paying $600 to acquire a customer worth $400. CAC, LTV, and churn are one equation, not three KPIs. Here is the math that decides whether growth is an engine or a bonfire.',
     sections: [
@@ -120,106 +120,10 @@ export const saasEconomicsArticle: LocalizedArticle = {
       },
     ],
   },
-  zh: {
-    articleTitle: { en: EN_TITLE, zh: '掌握 SaaS 单位经济:CAC、LTV 与流失率的数学关系', es: 'Dominar la economía unitaria de las SaaS: la relación matemática entre CAC, LTV y churn', de: 'SaaS-Unit-Economics meistern: die mathematische Beziehung zwischen CAC, LTV und Churn' },
-    breadcrumbTitle: { en: EN_CRUMB_TITLE, zh: EN_CRUMB_TITLE, es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
-    readMinutes: 10,
-    lead: 'SaaS 公司很少死于烂产品,它们死于倒挂的单位经济——花 $600 获取一个只值 $400 的客户。CAC、LTV、流失率不是三个 KPI,而是同一个方程。本文给出判断"增长是引擎还是篝火"的数学。',
-    sections: [
-      {
-        heading: '1. CAC:一个客户的全口径成本',
-        blocks: [
-          'CAC = 销售与市场总支出 ÷ 新增客户数——*全口径*:广告、工资、佣金、工具、代理费全算。每月花 $120,000 换来 200 个客户,CAC 就是 **$600**——不管广告后台的"单次点击成本"显得多便宜。',
-          '最常见的失败是半口径记账:只算广告费,不算操盘的人。如果你的"CAC"不含人力,那不是 CAC,是穿了戏服的媒介指标。',
-        ],
-      },
-      {
-        heading: '2. LTV:营收是虚荣,毛利 × 寿命才是真相',
-        blocks: [
-          '客户终身价值不是"离开前的总营收",而是离开前的**总毛利**。$50/月的客户在 80% 毛利率下每月贡献 $40;月流失 2% 意味着平均寿命 1/0.02 = **50 个月**,LTV = $40 × 50 = **$2,000**。',
-          { code: CODE_LTV },
-          '注意公式暴露了什么:**流失率坐在分母上**。流失减半,LTV 翻倍——不动价格、不动销售、不动市场。这就是为什么留存工作会复利,而获客工作只做加法。',
-          {
-            card: {
-              title: 'CAC 与 LTV 计算器',
-              href: '/tools/cac-ltv-calculator/',
-              desc: '由 ARPU、毛利、流失与 S&M 支出得出 LTV/CAC 与回本期——投资人级别的健全性检查。',
-            },
-          },
-          {
-            card: {
-              title: 'SaaS LTV 与流失计算器',
-              href: '/tools/saas-ltv-churn-calculator/',
-              desc: '不同流失情景下的 LTV——亲眼看月流失率变动一个百分点对终身价值的影响。',
-            },
-          },
-        ],
-      },
-      {
-        heading: '3. 决定生死的比值:LTV/CAC ≥ 3,回本 ≤ 12 个月',
-        blocks: [
-          '风投级的经验阈值自有其道理。**LTV/CAC < 1** 意味着每个客户都在烧钱——增长只是加速失血。**1 到 3 之间**模式成立但脆弱:任何流失尖峰或 CAC 通胀都会抹掉安全边际。**3 以上且回本在 12 个月内**,增长支出就是一台机器:投入 $1,客户生命周期内拿回 $3,第一年内先回 $1。',
-          '超过 5 不是"优秀"——通常说明增长*投入不足*,把市场让给了竞争对手。这个比值是方向盘,不是奖杯。',
-          {
-            card: {
-              title: '投资回报率计算器',
-              href: '/tools/roi-calculator/',
-              desc: 'LTV/CAC 本质就是获客支出的 ROI——同一套投入产出数学,去算任何其他赌注。',
-            },
-          },
-        ],
-      },
-      {
-        heading: '4. 流失会复利:月度到年度的换算陷阱',
-        blocks: [
-          '月流失率报出来小,因为听起来小。**3% 月流失 = 31% 年流失**(1 − 0.97¹²);5% 月流失 = 46% 年流失——原地不动也要每年换掉近一半客户。8% 月流失意味着平均寿命只有 12.5 个月,这门生意是跑步机,不是飞轮。',
-          '操作阈值:消费订阅可以忍 5–7% 月流失;SMB SaaS 必须压在 3% 以下;年合同的企业级,年度 logo 流失要个位数。月流失超过 4% 时,停止购买增长,先补漏——每一块钱获客预算都在往破桶里倒。',
-        ],
-      },
-      {
-        heading: '5. 从单位经济到公司经济',
-        blocks: [
-          '单位经济放大后变成运营者真正管理的两个数:**单位贡献**(客户在离开前能否回本)与**盈亏平衡点**(多少客户才够机器覆盖固定成本)。每客户月贡献 $40、固定成本 $100,000/月,意味着公司需要 2,500 个付费客户才能赚到第一块经营利润。',
-          {
-            card: {
-              title: '盈亏平衡计算器',
-              href: '/tools/break-even-calculator/',
-              desc: '固定成本 vs 单位贡献——你的 SaaS 从烧钱转赚钱的临界客户数。',
-            },
-          },
-          {
-            card: {
-              title: '利润率计算器',
-              href: '/tools/profit-margin-calculator/',
-              desc: '任意成本/售价组合的毛利、经营与净利率——LTV 公式里那个 m,验证一下。',
-            },
-          },
-          {
-            card: {
-              title: '现金跑道计算器',
-              href: '/tools/runway-calculator/',
-              desc: '按当前烧钱速度还剩几个月现金——单位经济与银行余额之间的那座桥。',
-            },
-          },
-        ],
-      },
-      {
-        heading: '每月例行功课',
-        blocks: [
-          { list: [
-            '重算**全口径 CAC**——含人力,否则数字在撒谎。',
-            '用滚动 3 个月流失率重算 **LTV**;单月流失数据是噪声。',
-            '盯紧**回本期**漂移——广告竞价通胀会让它悄悄恶化。',
-            '每份 BP 里把月流失换算成年流失;诚实也会复利。',
-            '拿不准时:留存优先,获客其次。分母说了算。',
-          ] },
-        ],
-      },
-    ],
-  },
+
   es: {
-    articleTitle: { en: EN_TITLE, zh: '掌握 SaaS 单位经济:CAC、LTV 与流失率的数学关系', es: 'Dominar la economía unitaria de las SaaS: la relación matemática entre CAC, LTV y churn', de: 'SaaS-Unit-Economics meistern: die mathematische Beziehung zwischen CAC, LTV und Churn' },
-    breadcrumbTitle: { en: EN_CRUMB_TITLE, zh: EN_CRUMB_TITLE, es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
+    articleTitle: { en: EN_TITLE,  es: 'Dominar la economía unitaria de las SaaS: la relación matemática entre CAC, LTV y churn', de: 'SaaS-Unit-Economics meistern: die mathematische Beziehung zwischen CAC, LTV und Churn' },
+    breadcrumbTitle: { en: EN_CRUMB_TITLE,  es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
     readMinutes: 10,
     lead: 'Las SaaS no mueren por malos productos; mueren por economía unitaria invertida: pagar $600 por un cliente que vale $400. CAC, LTV y churn no son tres KPI, son una sola ecuación. Aquí está la matemática que decide si el crecimiento es un motor o una hoguera.',
     sections: [
@@ -315,8 +219,8 @@ export const saasEconomicsArticle: LocalizedArticle = {
     ],
   },
   de: {
-    articleTitle: { en: EN_TITLE, zh: '掌握 SaaS 单位经济:CAC、LTV 与流失率的数学关系', es: 'Dominar la economía unitaria de las SaaS: la relación matemática entre CAC, LTV y churn', de: 'SaaS-Unit-Economics meistern: die mathematische Beziehung zwischen CAC, LTV und Churn' },
-    breadcrumbTitle: { en: EN_CRUMB_TITLE, zh: EN_CRUMB_TITLE, es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
+    articleTitle: { en: EN_TITLE,  es: 'Dominar la economía unitaria de las SaaS: la relación matemática entre CAC, LTV y churn', de: 'SaaS-Unit-Economics meistern: die mathematische Beziehung zwischen CAC, LTV und Churn' },
+    breadcrumbTitle: { en: EN_CRUMB_TITLE,  es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
     readMinutes: 10,
     lead: 'SaaS-Firmen sterben nicht an schlechten Produkten; sie sterben an umgedrehter Unit-Economics — $600 für einen Kunden, der $400 wert ist. CAC, LTV und Churn sind keine drei KPIs, sondern eine Gleichung. Hier die Mathematik, die entscheidet, ob Wachstum ein Motor oder ein Freudenfeuer ist.',
     sections: [

@@ -4,56 +4,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const RefinanceBreakEvenCalculatorL10n: ToolL10n = {
-  zh: {
-    useCases: [
-      '利率降了,算几个月回本再决定是否 refinancing',
-      '比较"降 0.5 点"与"降 1 点"两种情形的回本速度',
-      '看期限重置:月供更低但总利息反而多了多少',
-      '15 年期再融资与 30 年期再融资的净省对比',
-    ],
-    faqs: [
-      { q: '再融资的回本点怎么算?', a: '总过户费除以每月节省。每月省 $303、费用 $4,800,15.8 个月回本——此后持有新贷款就是净赚。本工具算出这个除法,并画出累计节省曲线越过成本线的交点。' },
-      { q: '降 1 个百分点值得 refinancing 吗?', a: '通常值得:$320,000 余额同期限降 1 点每月省 $200 以上(重摊成 30 年省得更多),$4,800 费用约两年回本。诚实阈值比老口诀低——0.5 点只要持有三四年也常能回本。' },
-      { q: '为什么月供降了、总利息反而涨了?', a: '期限重置:把还剩 27 年的余额重组成新的 30 年,月供下降有一部分来自把本金重新摊回 360 个月,不是真省。看"利息变化"那一栏,并考虑让新期限对齐实际剩余年数。' },
-      { q: '哪些算再融资的过户费?', a: '只算不 refinancing 就不用付的:评估费、发起费或点数、产权检索、贷款方产权保险、登记费、escrow 开户——通常为贷款额的 2-5%。预付利息与 escrow 存款不算,反正都要缴。' },
-    ],
-    ui: {
-      'in.balance': '当前贷款余额',
-      'in.oldRate': '当前利率',
-      'in.remainingYears': '剩余年限',
-      'in.newRate': '新利率',
-      'in.newTerm': '新贷款期限',
-      'in.costs': '再融资过户费',
-      'inSuffix.balance': '$',
-      'inSuffix.oldRate': '%',
-      'inSuffix.remainingYears': '年',
-      'inSuffix.newRate': '%',
-      'inSuffix.costs': '$',
-      'opt.newTerm.15': '15 年',
-      'opt.newTerm.20': '20 年',
-      'opt.newTerm.30': '30 年',
-      'out.monthlySavings': '每月节省',
-      'out.breakEven': '回本点',
-      'out.oldPayment': '当前月供',
-      'out.newPayment': '新月供',
-      'out.interestDelta': '全期利息变化',
-      'monthsWord': '个月',
-      'yearsWord': '年',
-      'daysWord': '天',
-      'underOneDay': '不足 1 天',
-      'moreInterest': '更多利息',
-      'lessInterest': '更少利息',
-      'errInvalid': '请输入正的余额与期限,非负的利率与费用',
-      'errNoSavings': '新月供并不更低——没有可回本的节省',
-      'chartTitle': '累计节省减去过户费',
-      'line.net': '净头寸',
-      'line.zero': '回本线',
-      'preset.0': '利率降 1.1 点',
-      'preset.1': '利率降 0.5 点',
-      'preset.2': '大额 $65万 / 降 1 点',
-      'note': '💡 回本点 = 过户费 ÷ 每月节省。经典法则:持有贷款超过回本点就值得 refinancing。盯住"利息变化"一栏——把剩余 27 年重摊成新的 30 年会降低月供,却可能多付总利息。',
-    },
-  },
+
   es: {
     useCases: [
       'decidir si refinanciar: cuántos meses tarda en pagarse el coste',

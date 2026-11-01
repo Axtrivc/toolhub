@@ -7,42 +7,11 @@
  */
 import type { ToolL10n } from '../tool-l10n'
 
-/** 与 lib/tool-formulas.ts 英文原值一致的公式行(数学记号,四语通用) */
+/** 与 lib/tool-formulas.ts 英文原值一致的公式行(数学记号,三语通用) */
 const SS_FORMULA = 'assign: bijection [0..n−1] → [0..n−1] with\nassign(i) ≠ i  and  assign(i) ∉ banned(i)\n!n = n! × Σ(k=0..n) (−1)^k / k!   (valid draws without exclusions)'
 
 export const SecretSantaGeneratorL10n: ToolL10n = {
-  zh: {
-    useCases: ['家庭/公司圣诞互抽一次成局', '保证夫妻/队友不会互相抽到', '传递设备逐人查看,谁也不剧透', '复制文案发给每个人做提醒'],
-    formula: {
-      formula: SS_FORMULA,
-      example: 'Step 1:n = 4、无互斥:排列总数 4! = 24。\nStep 2:错排 !4 = 24 × (1 − 1 + 1/2 − 1/6 + 1/24) = 9 个有效闭环。\nStep 3:Alice→Bob→Carla→Dev→Alice 是其中之一:没有人映射到自己,闭环成立。\nStep 4:互斥 Alice-Bob 一对是双向禁止:凡 Alice→Bob 或 Bob→Alice 的闭环都被排除,共 3 + 3 − 1 = 5 个,9 个里仅存活 4 个。\nResult:生成器从剩下的有效闭环中随机返回一个。',
-    },
-    faqs: [
-      { q: '互斥对怎么用?', a: '每行写一对,如 “Alice - Bob”——这两个人永远不会互相抽到(夫妻、队友、对头)。每个人仍然恰好送出并收到一份礼物。' },
-      { q: '有人会抽到自己吗?', a: '不会——抽取结果是一个错排:每个送礼人映射到不同接收者的闭环,展示结果前已校验通过。' },
-      { q: '规则无解怎么办?', a: '工具会明说,而不是悄悄放宽规则——比如三个人把每一对都互斥了。放宽一条互斥再抽即可。' },
-      { q: '怎么公布结果不剧透?', a: '把设备传一圈:每人从下拉里选自己的名字,只看到自己的送礼对象,再复制文案存到自己的备忘录。组织者全程无需看到任何配对。' },
-    ],
-    ui: {
-      'namesLabel': '参与者——每行一个(至少 3 人)',
-      'nNames': '{n} 位参与者',
-      'nExcl': '{n} 组互斥对',
-      'exclLabel': '互斥对——每行一组(可选)',
-      'exclHint': '不能互抽的人,如夫妻或队友,写法 Alice - Bob;分隔符支持 -> 、&、逗号,或两侧留空的连字符——名字自带的连字符(如 Mary-Jane)不受影响。',
-      'drawBtn': '开始抽取',
-      'redraw': '重新抽取',
-      'revealTitle': '逐人查看——把设备传一圈',
-      'whoLabel': '你是谁?',
-      'givesTo': '你要送礼的对象是',
-      'copyMsg': '复制文案',
-      'msgTemplate': '🎁 秘密圣诞\n{from},你要送礼的对象是:{to}\n保密!',
-      'errMin': '至少输入 3 位参与者。',
-      'errBadPair': '无法解析这对:{line}',
-      'errUnknown': '“{line}”用到了名单里不存在的名字。',
-      'errImpossible': '这些互斥规则下不存在有效抽取——每个人都被挡住了。放宽一条规则再抽。',
-      'note': '🎅 闭环抽取:每人送出一次、收到一次,没人抽到自己,互斥对(夫妻、队友)永不互抽。配对用 crypto 洗牌 + 回溯求得——要么给出有效结果,要么告诉你规则无解。结果不离开本页。',
-    },
-  },
+
   es: {
     useCases: ['sortear el amigo invisible de familia u oficina', 'evitar que parejas o compañeros se emparejen', 'pasar el dispositivo y revelar de uno en uno', 'copiar el mensaje de cada persona como recordatorio'],
     formula: {

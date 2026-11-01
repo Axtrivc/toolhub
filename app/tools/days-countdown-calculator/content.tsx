@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * Days Countdown Calculator 长文正文 —— 四语 dispatcher
+ * Days Countdown Calculator 长文正文 —— 三语 dispatcher
  *
- * en 分支与改造前渲染输出一致。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支与改造前渲染输出一致。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en (与改造前渲染输出一致) ────────────────────────────
@@ -58,36 +58,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具?</h2>
-    <p>
-      无论你是在为产品发布、婚礼,还是下一个公共假期倒计时,这个<strong>天数倒计时计算器</strong>都能回答两个日常问题:<em>距离某天还有多久</em>,以及<em>两个日期相差多远</em>。所有计算都在你的浏览器中本地完成 —— 你的日期不会被发送到任何地方。
-    </p>
-
-    <div>
-      <h2>倒计时标签页</h2>
-      <p>
-        选择一个目标日期(及可选的时间),显示会实时跳动,展示剩余的<strong>天、小时、分钟和秒</strong>。如果时刻已经过去,同样的卡片会切换为已过去时间 ——「X 天前」。明细卡片还会补充<strong>总天数</strong>(包含不足一天的零头)、以<strong>周 + 天</strong>表示的间隔,以及跳过周六、周日的<strong>工作日</strong>数量。预设按钮可一键跳到新年、圣诞节,或当前时间的 30/90 天后。
-      </p>
-    </div>
-
-    <div>
-      <h2>天数间隔标签页</h2>
-      <p>
-        输入任意两个日期,即可得到它们之间的<strong>总日历天数</strong>、以<strong>周 + 余下天数</strong>表示的同一间隔、<strong>近似月数</strong>(按平均 30.44 天/月计算),以及<strong>工作日</strong>与<strong>周末天数</strong>的拆分。起始日期记为第 0 天,因此「今天到明天」会显示为 1 天。结果带正负号:结束日期更早会得到负的间隔,但卡片展示的是绝对值。
-      </p>
-    </div>
-
-    <div>
-      <h2>值得了解的几点</h2>
-      <p>
-        所有运算都使用<strong>你设备的本地时区</strong>,因此倒计时到「新年午夜」指的是你所在地的午夜。天数统计是完整的日历天 —— 当天剩余的零头小时只会出现在跳动的时钟和小数形式的「总天数」数字里。<em>工作日</em>这个数字会忽略公共假期(各国和各公司各不相同),所以请把它当作工作日的估算值,而非官方日程。
-      </p>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -187,7 +157,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function DaysCountdownCalculatorContent(): ReactNode {
   const { locale } = useApp()

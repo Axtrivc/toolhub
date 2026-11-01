@@ -5,23 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const reverseTextL10n: ToolL10n = {
-  zh: {
-    ui: {
-      defaultInput: 'Hello World 你好',
-      inputLabel: '你的文本',
-      outputLabel: '反转结果',
-      note: '🔁 反转所有字符。ZWJ 组合 emoji(家庭、旗帜)与组合变音符可能被拆开。适合谜题和密码。',
-    },
-    useCases: [
-      '解谜和文字游戏(破译倒序信息)',
-      '制作双向图(ambigram)或对称设计',
-      '测试处理字符串的代码',
-      '反转邮箱地址以防基础爬虫抓取',
-    ],
-    faqs: [
-      { q: '为什么 emoji 有时会出错?', a: '部分 emoji(家庭、旗帜)由多个码位组合而成。本工具按 Unicode 码位反转,单个码位的 emoji 能正确反转,但由多个码位组合而成的复杂 emoji(ZWJ 序列、旗帜)仍可能被拆开。' },
-    ],
-  },
+
   es: {
     ui: {
       defaultInput: 'hola mundo',

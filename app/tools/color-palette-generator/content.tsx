@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * ColorPaletteGenerator 长文正文 —— 四语 dispatcher
+ * ColorPaletteGenerator 长文正文 —— 三语 dispatcher
  *
- * en 分支与英文站渲染输出一致。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支与英文站渲染输出一致。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -24,19 +24,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>色轮不过是算术</h2>
-    <p>每种颜色都落在 0°(红)→120°(绿)→240°(蓝)→回红的色相角上。调和就是相对基色的固定旋转:类似色 ±30°/±60°,互补 180°,分裂互补 150°/210°,三角 120°/240°。这也是本工具在 HSL 里计算的原因——旋转色相就是简单加法,提亮压暗只是明度步进。</p>
-    <h2>什么场景用哪种方案</h2>
-    <p>类似色在色轮上挨得近,几乎不会打架——仪表盘和图文版式最稳。互补对对比度最大,适合在安静底色上放一颗强调按钮;分裂互补保留冲击但振动更小;三角适合活泼多色的品牌;单色(同色相、明度步进)显高级和安静,所以金融科技和奢侈品牌偏爱它。</p>
-    <h2>用 60-30-10 落地</h2>
-    <p>基色占约 60% 的视觉面,色板里的次色占 30%,对比最强的一档——常是互补色或其提亮——只做 10% 的点缀。生成的明暗变体留给悬停、描边和背景:从同一色板里长出来的组件,不会再有「拼上去」的感觉。</p>
-    <h2>色板不是渐变</h2>
-    <p>色板是一组离散的扁平色,供设计系统取用;渐变是把多个颜色混成一张连续图像。hex 拿去当 CSS 变量或 Tailwind 配置,组件库要函数形式就复制 rgb()/hsl()——每个色块都按你的技术栈给格式。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -66,7 +53,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function ColorPaletteGeneratorContent(): ReactNode {
   const { locale } = useApp()

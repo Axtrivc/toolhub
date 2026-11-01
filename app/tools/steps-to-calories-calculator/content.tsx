@@ -5,12 +5,12 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * StepsToCaloriesCalculator 长文正文 —— 四语 dispatcher
+ * StepsToCaloriesCalculator 长文正文 —— 三语 dispatcher
  *
  * en 分支与改造前渲染输出一致(2026-10 审计修正:"快走 1 小时 ≈ 慢走
  * 90 分钟同距离热量" 不成立——同距离下中速/快走每公里热量差 <10%,
  * 慢走反而最贵,已改为按每公里口径表述)。
- * zh/es/de 仅客户端 hydration 后切换。
+ * es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -27,19 +27,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>估算原理</h2>
-    <p>距离来自步长(≈身高 × 0.414);卡路里来自 MET 法——步速决定强度,体重决定消耗率。体重更大的行走者每一步确实消耗更多。</p>
-    <h2>一万步有什么特别?</h2>
-    <p>它源自 1965 年一款日本计步器的营销口号。研究表明健康收益从约 7,000-8,000 步开始显现,超过 10,000 步后仍在增加但趋于平缓。</p>
-    <h2>为什么手环和我们不一致</h2>
-    <p>腕上设备把全天活动都记入,包括基础代谢的部分,而且它们对步长的估计偏长。手环数字通常比这种"只算运动"的估算高 10-25%。</p>
-    <h2>快走胜过久走</h2>
-    <p>走同样的距离,中速与快走的消耗相差约 10% 以内——MET 升高几乎正好抵消时间缩短。慢悠悠地走每公里反而最"贵",所以走快主要是省回时间。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -69,7 +56,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function StepsToCaloriesCalculatorContent(): ReactNode {
   const { locale } = useApp()

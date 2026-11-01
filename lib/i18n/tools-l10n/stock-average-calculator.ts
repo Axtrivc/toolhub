@@ -4,44 +4,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const StockAverageCalculatorL10n: ToolL10n = {
-  zh: {
-    useCases: ['算出多笔买入(含手续费)后的加权平均成本', '看清摊低成本后的真实盈亏与盈亏率', '决定是否值得在下跌中继续加仓摊平', '把券商成本基准与自己记账对账'],
-    faqs: [
-      { q: '平均成本是怎么算的?', a: '每笔买入的股数 × 价格,加上佣金,求和后除以总股数——与你券商报表里的加权平均成本基准是同一口径。' },
-      { q: '摊平(越跌越买)划算吗?', a: '它降低了回本点,但也在加大一个正在亏损的持仓。决策标准应当是把它当成一笔全新买入:今天这个价格,你还会开这个仓位吗?' },
-      { q: '洗售规则(wash-sale)会影响成本吗?', a: '会。如果你在亏损卖出该股的前后 30 天内买入(含 DRIP 自动买入),该亏损当年不能抵税,而是加进成本基准——本工具按你输入的成交与手续费计算,不替你判断洗售。' },
-      { q: '手续费怎么计入?', a: '输入每笔订单的佣金,工具对每个有效买入批次计一次,并直接折进成本基准——这也是税务申报的处理方式。' },
-    ],
-    ui: {
-      'in.q1': '第 1 笔股数',
-      'in.p1': '第 1 笔价格',
-      'in.q2': '第 2 笔股数',
-      'in.p2': '第 2 笔价格',
-      'in.q3': '第 3 笔股数',
-      'in.p3': '第 3 笔价格',
-      'in.q4': '第 4 笔股数',
-      'in.p4': '第 4 笔价格',
-      'in.fee': '每笔订单佣金',
-      'in.current': '当前股价',
-      'out.avgCost': '平均每股成本',
-      'out.totalShares': '总股数',
-      'out.totalCost': '总成本(含手续费)',
-      'out.currentValue': '当前市值',
-      'out.plTotal': '浮动盈亏',
-      'out.plPct': '盈亏率',
-      'chartTitle': '成本基准 vs 当前市值',
-      'cmp.0': '你的成本基准',
-      'cmp.1': '当前市值',
-      'preset.0': '下跌摊平',
-      'preset.1': '上涨加仓',
-      'preset.2': '单笔持仓',
-      'errInvalid': '请输入有效的股数与价格',
-      'errNegative': '数值不能为负',
-      'errEmpty': '请至少输入一笔买入(股数 > 0)',
-      'errLotPrice': '持仓股数大于 0 的批次需填写大于 0 的买入价',
-      'note': '🧮 佣金直接折进成本基准,与券商的税务口径一致。摊平降低了回本点,但把风险集中到了同一个判断上——这是加注,不是分散。若 30 天内有亏损卖出记录,注意洗售规则。',
-    },
-  },
+
   es: {
     useCases: ['calcular el coste medio ponderado de varias compras (con comisiones)', 'ver la ganancia o pérdida real tras promediar a la baja', 'decidir si merece la pena seguir comprando en caídas', 'conciliar tu coste base con el que reporta el bróker'],
     faqs: [

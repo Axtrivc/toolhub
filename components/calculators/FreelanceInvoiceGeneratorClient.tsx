@@ -56,7 +56,7 @@ const AUTO_PRINT_SCRIPT = '\n<script>window.onload = function () { window.print(
 export function FreelanceInvoiceGeneratorClient() {
   const { locale } = useApp()
   const L = (key: string, fb: string) => tui('freelance-invoice-generator', locale, key, fb)
-  // 数字/日期按应用 locale 格式化;en 首帧恒 en-US(与 SSR 一致),zh/es/de 得到本地格式
+  // 数字/日期按应用 locale 格式化;en 首帧恒 en-US(与 SSR 一致),es/de 得到本地格式
   const localeTag = locale === 'en' ? 'en-US' : locale
 
   const [yourName, setYourName] = useState('')

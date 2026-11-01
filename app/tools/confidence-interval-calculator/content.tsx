@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * ConfidenceIntervalCalculator 长文正文 —— 四语 dispatcher
+ * ConfidenceIntervalCalculator 长文正文 —— 三语 dispatcher
  *
- * en 分支与 SSR 渲染输出一致。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支与 SSR 渲染输出一致。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -24,19 +24,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>置信区间到底"置信"什么</h2>
-    <p>95% 区间说的是方法而不是你手里这一个样本:若反复重做研究,按此法构造的区间里有 95% 会盖住真值。你手上的这个区间要么盖住、要么没盖住——数字一旦落定,就没有概率可言。这个细微差别是入门统计里考得最多、也错得最多的概念。</p>
-    <h2>误差幅度为什么总让人失望</h2>
-    <p>误差随 √n 而不是 n 收缩:样本从 250 翻两番到 1,000,误差也只减半。这就是全国民调停在 ±3%(几千名受访者)的原因;±1% 要三倍精度,得约 9,600 人,几乎没人愿意买。</p>
-    <h2>90、95、99% 怎么选</h2>
-    <p>三个水平是在宽度与确定性之间做交易:99% 区间比 95% 宽约 31%(z = 2.576 对 1.96),90% 明显更窄。发表惯例是 95%;漏掉真实效应代价高的质量控制与工程常选 99%;探索性工作可以接受 90%。</p>
-    <h2>z 简化在哪里失效</h2>
-    <p>这些公式假设抽样分布近似正态。均值场景要求 n ≥ 30(或 σ 已知);比例场景的经验法则是 np̂ ≥ 5 且 n(1−p̂) ≥ 5。低于门槛时,均值改用 t 区间、比例改用 Wilson 得分区间——这里展示的 Wald 区间在贴近 0% 或 100% 时会系统性低估覆盖率。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -66,7 +53,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function ConfidenceIntervalCalculatorContent(): ReactNode {
   const { locale } = useApp()

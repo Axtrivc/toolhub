@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * CoinFlip 长文正文 —— 四语 dispatcher
+ * CoinFlip 长文正文 —— 三语 dispatcher
  *
- * en 分支与改造前渲染输出一致。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支与改造前渲染输出一致。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en (与改造前渲染输出一致) ────────────────────────────
@@ -22,17 +22,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>什么时候适合抛硬币</h2>
-    <p>任何"两个选项都能接受"的双选场景都适合:谁先发球、今晚吃哪家、化解"随便,你定"的僵持。行为研究表明,人们心里往往早已偏向其中一边——硬币落地那一刻,留意一下自己的反应就知道了。</p>
-    <h2>三局两胜还公平吗?</h2>
-    <p>公平。相互独立的公平抛掷连着抛依然公平;三局两胜只是改变了由其中哪个子集来定胜负。累计统计记录的是你的整个会话,偏差一眼可见——抛到几百次后,正反面比例会如期收敛到 ~50%。</p>
-    <h2>不适用于安全场景</h2>
-    <p>公平硬币了结的是游戏胜负,不是密钥或密码。密码学层面的决策需要正确使用密码学随机数,而不是单个可见的比特位。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -58,7 +47,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function CoinFlipContent(): ReactNode {
   const { locale } = useApp()

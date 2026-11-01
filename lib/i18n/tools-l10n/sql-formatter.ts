@@ -5,29 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const sqlFormatterL10n: ToolL10n = {
-  zh: {
-    ui: {
-      'copy': '复制',
-      'couldNotFormat': '无法格式化 SQL',
-      'formattedSql': '格式化后的 SQL',
-      'inputLabel': '粘贴你的 SQL',
-      'minifiedSql': '压缩后的 SQL',
-      'modeFormat': '格式化',
-      'modeMinify': '压缩',
-      'note': '🔒 100% 在客户端——通用 ANSI SQL 格式化器。关键字大写;缩进遵循子句层级。',
-    },
-    useCases: [
-      '格式化从日志复制的压缩 SQL',
-      '为代码审查准备可读查询',
-      '把 SQL 压缩成单行放进 JSON 载荷',
-      '美化第三方或供应商的 SQL',
-    ],
-    faqs: [
-      { q: '支持哪种 SQL 方言?', a: '它应用通用 ANSI SQL 格式,适用于 MySQL、PostgreSQL、SQLite、SQL Server 和 Oracle。主要关键字(SELECT、FROM、WHERE、JOIN、GROUP BY、ORDER BY、INSERT、UPDATE、DELETE)都能识别并大写。方言专有语法(PL/pgSQL 块、T-SQL 变量)的缩进可能不够完美。' },
-      { q: '它会校验或执行我的查询吗?', a: '不会。它只是纯粹的格式化工具——重新缩进并把关键字大写,但不会检查查询是否为合法 SQL,也不会拿去数据库执行。也就是说,即使查询有语法错误它也会照常格式化,只是让文本更好读而已。' },
-      { q: '除了美化还能压缩 SQL 吗?', a: '可以。用「压缩」选项把查询折叠成一行并规范化空白,便于紧凑地存储或发送查询。切回「格式化」即可再次展开以便编辑。' },
-    ],
-  },
+
   es: {
     ui: {
       'copy': 'Copiar',

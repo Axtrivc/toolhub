@@ -456,7 +456,7 @@ export const toolFaqs: Record<string, FaqPair[]> = {
   'binary-to-text': [
     {
       q: 'Does this handle UTF-8 / Unicode?',
-      a: 'Yes — each space-separated group is one byte, and consecutive groups decode together as full UTF-8, so multi-byte characters (Chinese, emoji) work as long as their bytes are entered as consecutive groups. Example: 你好 is three bytes per character (E4 BD A0 E5 A5 BD), so six groups decode both characters at once.',
+      a: 'Yes — each space-separated group is one byte, and consecutive groups decode together as full UTF-8, so multi-byte characters (accented letters, emoji) work as long as their bytes are entered as consecutive groups. Example: é is two bytes (C3 A9), so two groups decode it.',
     },
     {
       q: 'Why does my decoded text come out garbled?',

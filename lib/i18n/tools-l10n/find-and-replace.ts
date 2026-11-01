@@ -5,33 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const findAndReplaceL10n: ToolL10n = {
-  zh: {
-    ui: {
-      inputLabel: '你的文本',
-      outputLabel: '结果',
-      placeholder: '输入或粘贴文本...',
-      resultPlaceholder: '结果将显示在这里...',
-      findLabel: '查找',
-      replaceLabel: '替换为',
-      caseSensitive: '区分大小写',
-      matchCount: '匹配数:{n}',
-      regexLabel: '正则表达式',
-      invalidRegex: '⚠️ 正则表达式无效——请检查模式语法',
-      textTooLong: '⚠️ 文本超过 100,000 字符——超大文本已禁用正则模式以保证页面响应,请改用普通(非正则)模式',
-      clear: '清空',
-      note: '🔍 替换所有匹配。勾选「正则表达式」可用模式匹配(如 \\d+),替换串支持 $1 反向引用。默认不区分大小写,勾选「区分大小写」后区分。',
-    },
-    useCases: [
-      '在长文档里批量替换某个术语',
-      '把 [NAME] 等占位符替换成真实值',
-      '统一不一致的拼写(color → colour)',
-      '分享前抹掉敏感数据',
-    ],
-    faqs: [
-      { q: '搜索区分大小写吗?', a: '默认不区分——"Cat" 会匹配 "cat"。勾选「区分大小写」后,只有大小写完全一致才算匹配。' },
-      { q: '能用正则表达式吗?', a: '能。勾选「正则表达式」后,查找框按正则模式匹配(如 \\d+、[a-z]+),替换串可用 $1、$& 等反向引用;模式非法时会显示友好提示而不是报错。' },
-    ],
-  },
+
   es: {
     ui: {
       inputLabel: 'Tu texto',

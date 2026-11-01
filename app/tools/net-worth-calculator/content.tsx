@@ -5,10 +5,10 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * Net Worth Calculator 长文正文 —— 四语 dispatcher
+ * Net Worth Calculator 长文正文 —— 三语 dispatcher
  *
  * en 分支等价于原 ToolContent 渲染输出(<h2>What Is This Tool?</h2> + intro
- * + 各 section 包在 <div> 中),字节级 SEO 安全。zh/es/de 仅客户端 hydration
+ * + 各 section 包在 <div> 中),字节级 SEO 安全。es/de 仅客户端 hydration
  * 后按 locale 切换。公式 (<code> 标签内) 保持英文/数学符号不变,仅翻译周边文字。
  */
 
@@ -48,41 +48,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具?</h2>
-    <p>你的<strong>净资产</strong>是衡量财务健康状况的最佳单一快照——你所拥有的(资产)减去你所欠的(负债)。长期跟踪它能揭示你究竟是在积累财富,还是原地踏步。</p>
-    <div>
-      <h2>哪些算作资产</h2>
-      <ul>
-        <li>现金、储蓄和活期账户</li>
-        <li>投资账户(股票、债券、退休金)</li>
-        <li>房屋价值(减去房贷 = 净值)</li>
-        <li>车辆(当前市场价值)</li>
-        <li>贵重物品(珠宝、收藏品)</li>
-      </ul>
-    </div>
-    <div>
-      <h2>哪些算作负债</h2>
-      <ul>
-        <li>房贷余额</li>
-        <li>学生贷款、车贷和个人贷款</li>
-        <li>信用卡债务</li>
-        <li>欠税</li>
-        <li>任何其他欠款</li>
-      </ul>
-    </div>
-    <div>
-      <h2>你处于什么位置</h2>
-      <p>净资产因年龄而异,差异巨大。美国所有年龄段的净资产中位数约为 $192,000,但 30-34 岁年龄段的中位数仅约 $40,000。净资产达到 $1M 以上,大致可让一个家庭跻身前 10-15%。</p>
-    </div>
-    <div>
-      <h2>公式与计算示例</h2>
-      <p>净资产就是 <code>Assets &minus; Liabilities</code>。假设你有 $8,000 储蓄、$42,000 退休账户、一辆价值 $15,000 的车,以及一套价值 $320,000 的房——合计 $385,000 资产。对应的负债包括 $220,000 房贷、$12,000 车贷和 $3,000 信用卡欠款——合计 $235,000 负债。你的净资产是 <strong>$150,000</strong>。注意,仅房屋净值一项($100,000)就占了很大一块,这正是要把自住房(减去房贷)算进去的原因。</p>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -156,7 +121,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function NetWorthCalculatorContent(): ReactNode {
   const { locale } = useApp()

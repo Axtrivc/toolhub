@@ -29,30 +29,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具?</h2>
-    <p>比较两个列表是一项出人意料地常见的任务:哪些邮箱地址在电子表格 A 中却不在 B 中,哪些文件在这个文件夹里有、那个文件夹里却没有,哪些 SKU 出现在上个月的报告中、这个月却没有。只要项目超过寥寥几个,靠肉眼比对就行不通。本工具逐行比较两个列表,并将其拆分为四个集合,完整呈现两者的差异。</p>
-    <div>
-      <h2>四个结果集</h2>
-      <ul>
-        <li><strong>仅在 A 中</strong> —— 出现在第一个列表、但第二个列表中缺失的项目。也就是 A 有而 B 没有的内容。</li>
-        <li><strong>仅在 B 中</strong> —— 反过来:在第二个列表中、但不在第一个列表中的项目。</li>
-        <li><strong>两者都有(交集)</strong> —— 同时出现在两个列表中的项目。适合用于查找重叠部分或共有成员。</li>
-        <li><strong>并集</strong> —— 任一列表中的每个唯一项目,合并并去重后的结果。</li>
-      </ul>
-    </div>
-    <div>
-      <h2>修剪与大小写区分</h2>
-      <p>默认情况下,本工具会修剪每行的空白(因此 <code>&quot;apple &quot;</code> 与 <code>&quot;apple&quot;</code> 匹配),并以不区分大小写的方式比较(因此 <code>&quot;Apple&quot;</code> 与 <code>&quot;apple&quot;</code> 匹配)。如果行首空格对你很重要,可关闭修剪;如果 <code>SKU001</code> 与 <code>sku001</code> 确实是不同的项目,可开启区分大小写。每个结果集都有各自的复制按钮,可直接粘贴到电子表格或其他工具中。</p>
-    </div>
-    <div>
-      <h2>处理重复项</h2>
-      <p>在单个列表内,重复项会被合并 —— <code>apple</code> 在列表 A 中出现三次只算作一个项目。这与集合运算的数学定义一致,做差异比对时几乎总是你想要的结果。如果你需要知道 A 有三份而 B 有一份,请先用行计数器处理列表,再对唯一键进行比对。</p>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -104,7 +80,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function ListDiffContent(): ReactNode {
   const { locale } = useApp()

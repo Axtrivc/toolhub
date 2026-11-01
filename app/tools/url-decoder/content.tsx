@@ -33,30 +33,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具?</h2>
-    <p>
-      本工具会把经过百分比编码的 URL 解码回可读文本。粘贴任意 URL 编码字符串,即可还原原始字符,包括空格、符号以及国际文本。
-    </p>
-    <div>
-      <h2>什么时候会用到</h2>
-      <ul>
-        <li>读取服务器日志中的编码 URL</li>
-        <li>解析分析数据中的查询参数</li>
-        <li>清理抓取或导出的 URL</li>
-        <li>调试代码中的 URL 处理</li>
-      </ul>
-    </div>
-    <div>
-      <h2>双重编码</h2>
-      <p>
-        有时候 URL 会被意外编码两次 —— 空格会变成 <code>%2520</code>,而不是 <code>%20</code>。如果解码后的文本里仍然含有 <code>%</code> 序列,再把它放进本工具跑一次即可完全解码。
-      </p>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -108,7 +84,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function URLdecoderContent(): ReactNode {
   const { locale } = useApp()

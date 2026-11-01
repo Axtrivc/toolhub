@@ -5,40 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const OhmsLawCalculatorL10n: ToolL10n = {
-  zh: {
-    useCases: ['已知电压和阻值求流过电路的电流', '由电池电压与电流估算所需电阻', '核算电阻或元件的实际功耗选功率档', '验证电源、保险丝与线径的载流估算'],
-    faqs: [
-      { q: '为什么恰好要输入两个量?', a: 'V = I × R 与 P = V × I 把四个量约束成两个自由度:任意两个定,其余两个随之确定。多输会超定、少输则无解。' },
-      { q: '欧姆定律一共十二个公式是什么?', a: '把 V = IR 与 P = VI 组合可推出十二个式子:由 I 和 R 或 P 和 I 或 P 和 R 求 V,由 V 和 R 或 P 和 V 或 P 和 R 求 I,依此类推。本计算器按你给出的任意一对自动套用。' },
-      { q: '交流电路能用吗?', a: '能用,但要代入有效值(RMS)。对阻性负载,RMS 电压与电流完全适用这些公式;含电感电容时要用阻抗与功率因数,那是另一套算法。' },
-      { q: '为什么 9V 电池带负载后不到 9V?', a: '任何真实电源都有内阻,电流一上来端电压就被拉低。小 9V 电池超过约 100mA 就会明显跌落——要带载测量,别测开路电压。' },
-    ],
-    formula: {
-      formula: 'V = I × R\nP = V × I = I² × R = V² ÷ R',
-      variables: 'V = 电压(伏特)\nI = 电流(安培)\nR = 电阻(欧姆)\nP = 功率(瓦特)',
-      explain: '欧姆定律把电压、电流、电阻绑在一起,瓦特定律再补上功率。四个量中任意两个即可解出其余两个——所以计算器只要求输入两个。',
-      example: '第 1 步:9V 电池接 470Ω 电阻。\n第 2 步:I = V ÷ R = 9 ÷ 470 = 0.019149 A ≈ 19.15 mA。\n第 3 步:P = V × I = 9 × 0.019149 = 0.1723 W ≈ 172.3 mW。\n第 4 步(交叉验证):P = V² ÷ R = 81 ÷ 470 = 0.1723 W ✓\n结果:电流 19.15 mA,电阻耗散 172.3 mW——1/4W 电阻会偏热,选 1/2W 更从容。',
-    },
-    ui: {
-      'in.voltage': '电压',
-      'in.current': '电流',
-      'in.resistance': '电阻',
-      'in.power': '功率',
-      'out.voltage': '电压',
-      'out.current': '电流',
-      'out.resistance': '电阻',
-      'out.power': '功率',
-      'errEnterTwo': '请恰好输入两个值,其余两个留空',
-      'errDivZero': '出现除零——检查输入的两个量',
-      'preset.0': '9V 电池 + 470Ω',
-      'preset.1': 'USB 5V + 220Ω',
-      'preset.2': '120V 60W 灯泡',
-      'preset.3': '全部清空',
-      'chartTitle': '此电压下的电流-电阻曲线',
-      'line.current': '电流 (mA)',
-      'note': '⚡ 欧姆定律只对阻性负载严格成立:LED、电机启动电流都不是线性负载。电阻有 ±5% 公差、电池有内阻压降,临界设计请用最坏值核算。',
-    },
-  },
+
   es: {
     useCases: ['calcular la corriente de un circuito desde voltaje y resistencia', 'estimar la resistencia necesaria para una pila y una corriente', 'comprobar la disipación para elegir la potencia del resistor', 'verificar corrientes de fuente, fusibles y cableado'],
     faqs: [

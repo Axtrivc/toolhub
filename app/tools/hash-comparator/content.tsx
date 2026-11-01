@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * HashComparator 长文正文 —— 四语 dispatcher
+ * HashComparator 长文正文 —— 三语 dispatcher
  *
- * en 分支与改造前渲染输出一致。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支与改造前渲染输出一致。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en (与改造前渲染输出一致) ────────────────────────────
@@ -22,17 +22,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>为什么恒定时间比较很重要</h2>
-    <p>朴素的字符串比较在遇到第一个不同的字节时就返回 false,于是响应时间会泄露前缀有多少位相同。计时攻击正是利用这一点攻破签名校验的;对每个字节做异或累积,就能消除这个信号。</p>
-    <h2>校验下载文件</h2>
-    <p>发布方在版本旁边列出 SHA-256 摘要,正是为了让你能发现损坏或被篡改的文件。在本地计算哈希(sha256sum、shasum -a 256),然后把两边粘贴到这里。</p>
-    <h2>先做归一化</h2>
-    <p>哈希值可能大小写不一,有时还会成对加空格(Windows certutil 风格)。两个字段在比较前都会先归一化,格式差异永远不会造成误报。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -58,7 +47,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function HashComparatorContent(): ReactNode {
   const { locale } = useApp()

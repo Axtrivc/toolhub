@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * QuadraticEquationSolver 长文正文 —— 四语 dispatcher
+ * QuadraticEquationSolver 长文正文 —— 三语 dispatcher
  *
- * en 分支与 SSR 渲染输出一致。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支与 SSR 渲染输出一致。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -24,19 +24,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>判别式在动笔前就给出答案</h2>
-    <p>解 ax² + bx + c = 0 时先算 b² − 4ac。正数意味着两个不同实根,零意味着二重根(抛物线恰好擦到 x 轴),负数则意味着根只能以共轭复数形式存在。先看这一项,考试时就不会对着负数开平方发呆。</p>
-    <h2>根与顶点是一套机制</h2>
-    <p>求根公式 x = (−b ± √Δ)/2a 与顶点横坐标 x = −b/2a 用的是同一套结构:顶点正好落在两根正中间。韦达定理 x₁ + x₂ = −b/a、x₁·x₂ = c/a 让你几秒钟内验算——两根乘积不等于 c/a,就是分解错了。</p>
-    <h2>根变成复数时发生了什么</h2>
-    <p>判别式为负不是"无解",而是与 x 轴没有实交点。两根写成 p ± qi,其中 p = −b/2a 正是顶点横坐标。所以计算器此时切换成配方式 a(x − h)² + k:它在实数范围内依然成立,还顺带告诉你整条抛物线悬在零线上方或下方多远。</p>
-    <h2>能分解时分解最快</h2>
-    <p>如果两根是漂亮的整数,因式形 a(x − x₁)(x − x₂) 直接从求根结果里掉出来。老师的惯例是根为有理数时写分解式、否则写公式解——本工具两者都给,并附上以顶点为中心的抛物线图,让你看见刚算出的几何。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -66,7 +53,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function QuadraticEquationSolverContent(): ReactNode {
   const { locale } = useApp()

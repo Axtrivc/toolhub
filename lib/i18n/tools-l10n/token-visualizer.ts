@@ -5,31 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const TokenVisualizerL10n: ToolL10n = {
-  zh: {
-    useCases: [
-      '建立 token 直觉:亲眼看到 “strawberry” 被切成多块,理解模型为什么数不对里面的 r',
-      '向团队演示成本结构:同一段内容中文版按字计 token,明显比英文版“烧”得多',
-      '教学场景展示 BPE 行为:空格并入后续 token(显示为 ␣)、长词按约 4 字符切开',
-      '优化 prompt 前先看 token 分布——哪些修饰词占了预算却没贡献语义,一眼可辨',
-    ],
-    faqs: [
-      { q: '这是某个模型的真实分词器吗?', a: '不是。它是视觉近似:≤5 字符的词算 1 个 token,长词按 4 字符切分,CJK 每字约 1 token。各家真实分词器(tiktoken、SentencePiece 等)词表不同,计费级统计请用 GPT Token Counter——本工具的职责是建立直觉,不是出账单。' },
-      { q: '为什么空格显示成 ␣ 还并入下一个词?', a: '这模仿了真实 BPE 分词器的行为:词首空格通常与后面的词合并成单个 token(如 “ hello” 是一个 token)。所以删掉词间空格并不能省 token,反而可能改变切分方式。' },
-      { q: '为什么长词按 4 字符切?', a: '英语语料里 BPE 平均每 token 约 4 字符(0.75 个词),这是社区广泛使用的经验比例。常见短词完整留在词表里算 1 个;长词、生僻词、URL 会被拆成子词单元,拆分点因模型而异。' },
-      { q: '大段文本有上限吗?', a: '超长输入会跳过实时可视化以保证输入流畅;渲染只显示前若干块,但「复制 tokens / 下载」始终包含全部分块结果,不会丢内容。' },
-    ],
-    ui: {
-      'note': '🎨 这是一个相当接近的可视化近似(≤5 字符的词算 1 个 token,长词按 4 字符切分,CJK 约每字 1 token),并非任何具体模型的精确分词器——算成本请用 GPT Token Counter。适合建立直觉:为什么有的短语更贵。',
-      'approxTokens': '近似 token 数',
-      'charactersLabel': '字符',
-      'chunkTitle': '块 {n}',
-      'hint': '每个色块 ≈ 一个 token。空格显示为 ␣,与后续 token 合并——大致符合 BPE 分词器行为。',
-      'inputLabel': '你的文本',
-      'inputTooLarge': '输入超过 {n} 字符——为保证输入流畅已跳过可视化。请精简或清空文本后再分词。',
-      'renderCapped': '仅渲染前 {shown} 块(共 {total} 块)以保证渲染流畅——下方「复制 tokens / 下载」包含全部 {total} 块。',
-      'copyTokens': '复制 tokens',
-    },
-  },
+
   es: {
     useCases: [
       'Construir intuición sobre tokens: ver cómo «strawberry» se parte en varios trozos y entender por qué el modelo cuenta mal las erres',

@@ -5,7 +5,7 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * DownloadTimeCalculator 长文正文 —— 四语 dispatcher
+ * DownloadTimeCalculator 长文正文 —— 三语 dispatcher
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -22,19 +22,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>位、字节与 8 倍"税"</h2>
-    <p>运营商卖的是兆位/秒,文件按兆字节计——而 1 字节 = 8 位。100 Mbps 的线路在现实介入之前,上限就是 12.5 MB/s。十进制单位也在悄悄叠加:网络计算用 1 GB = 1000 MB,而 Windows 报告磁盘容量用二进制 GiB(1 GiB = 1024 MiB)——这就是"4.5 GB"的下载落到磁盘上显示 4.19 GB 的原因。</p>
-    <h2>为什么总有 10-15% 到不了</h2>
-    <p>每个包都背着 TCP/IP 头部,丢包要重传,TLS 有握手开销,Wi-Fi 的空口时间还要与范围内所有设备共享。顺畅的有线连接大约损失宣传速率的 10%,繁忙的无线环境 15% 起步。值得记住的是"有效吞吐"那个数——它才是文件管理器真实能达到的速度。</p>
-    <h2>上传是另一条瓶颈</h2>
-    <p>把同一公式套在上传速率上,云备份的现实就清楚了:典型的 1000/50 Mbps 套餐,下载 100 GB 约 15 分钟,上传同样 100 GB 要四个多小时。视频会议、云同步、发大附件都活在上传侧——这也是"上下行对等"光纤体验完全不同的原因。</p>
-    <h2>诚实地读估算值</h2>
-    <p>把结果当乐观下限。服务端限速、晚高峰拥塞、到 CDN 节点的距离、家里正在 4K 追剧的室友,都在削你的速率。估算说 40 分钟,就按 1 小时打算;还有,浏览器下载暂停再恢复,重置计时器的概率远比它应有的高。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -64,7 +51,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function DownloadTimeCalculatorContent(): ReactNode {
   const { locale } = useApp()

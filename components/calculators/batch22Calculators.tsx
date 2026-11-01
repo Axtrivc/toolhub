@@ -10,7 +10,7 @@
  *  - treasury-bill-calculator:T-Bill 折价买入价与两种收益率口径
  *  - bond-yield-calculator:债券当前收益率与 YTM 近似
  *  - lottery-odds-calculator:预设奖级结构的中奖概率(双池超几何)
- * 均基于 makeCalculatorClient 配置驱动,四语 l10n、确定性首帧。
+ * 均基于 makeCalculatorClient 配置驱动,三语 l10n、确定性首帧。
  */
 
 import { makeCalculatorClient } from '../calculator/makeCalculatorClient'

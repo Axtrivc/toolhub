@@ -5,22 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const IbanValidatorL10n: ToolL10n = {
-  zh: {
-    useCases: ['转账前确认收款 IBAN 没抄错', '排查因长度或校验位被银行系统拒绝的 IBAN', '把 IBAN 排成 4 位一组便于人工核对', '录入前清洗带空格/连字符的粘贴内容'],
-    faqs: [
-      { q: 'mod-97 校验到底证明了什么?', a: '把 IBAN 的前四位挪到末尾、字母换成数字后,整串除以 97 余 1。它能挡住几乎所有的抄写错误——但只证明"结构正确",不证明账户真实存在或可收款。' },
-      { q: '正确的 IBAN 为什么没通过?', a: '最常见的是国别长度不符(本工具内置官方注册表的长度表),其次是 O/I 被打成 0/1 这类形近字符。校验位为 00、01、99 的也直接无效——ISO 13616 保留了它们。' },
-      { q: '还需要 BIC/SWIFT 吗?', a: '本工具只校验 IBAN。欧盟/欧洲经济区内的 SEPA 汇款只凭 IBAN 就够;跨区汇款通常还要 BIC,那需要另一张注册表。' },
-      { q: '所有国家都用 IBAN 吗?', a: '大约 90 个国家和地区采用。美国、加拿大、澳大利亚仍在用各自的国内路由体系(如 ABA routing number),这些输入在本工具会提示"未收录国别"。' },
-    ],
-    ui: {
-      'inputLabel': 'IBAN',
-      'outputLabel': '校验结果',
-      'defaultInput': 'GB82 WEST 1234 5698 7654 32',
-      'inputTooLarge': '⚠️ 输入过大——支持的上限是 2,000 字符。请删减输入后再校验。',
-      'note': '🏦 只做结构校验:官方 IBAN 注册表的国别长度 + ISO 7064 mod-97 校验和,全部在浏览器内完成。校验通过代表 IBAN 格式正确——不能确认账户存在或可收款。',
-    },
-  },
+
   es: {
     useCases: ['confirmar que el IBAN del beneficiario está bien copiado antes de transferir', 'averiguar por qué un banco rechaza un IBAN por longitud o dígito de control', 'agrupar el IBAN de 4 en 4 para revisión manual', 'limpiar espacios y guiones al pegar antes de dar de alta'],
     faqs: [

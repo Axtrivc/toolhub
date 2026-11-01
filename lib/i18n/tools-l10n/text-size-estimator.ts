@@ -5,23 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const textSizeEstimatorL10n: ToolL10n = {
-  zh: {
-    ui: {
-      defaultInput: '你好，这是一段用于测量大小的示例文本。',
-      inputLabel: '你的文本',
-      outputLabel: '大小估算',
-      note: '📏 估算不同单位下的存储大小。适合在把文本存入数据库或经 API 传输前预估。',
-    },
-    useCases: [
-      '规划数据库 VARCHAR 字段长度',
-      '检查 API 载荷大小限制',
-      '估算存储成本',
-      '校验文本字段约束',
-    ],
-    faqs: [
-      { q: '为什么 Base64 会增加 33%?', a: 'Base64 把每 3 个字节编码为 4 个字符,大小增长为 4/3 ≈ 1.33。这是在文本格式中嵌入二进制数据的标准开销。' },
-    ],
-  },
+
   es: {
     ui: {
       defaultInput: 'Hola, este es un texto de ejemplo para medir.',

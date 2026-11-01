@@ -50,38 +50,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具?</h2>
-    <p>
-      当有人把你的链接粘贴到 Facebook、X、LinkedIn、Slack 或 Discord 时,平台会读取页面中特殊的{' '}
-      <code>&lt;meta&gt;</code> 标签来生成标题、描述和图片卡片。把这些标签写对,是决定链接被点击还是看起来像坏链的关键。本工具让你填写各字段,并在生成完整 Open Graph 与 Twitter Card 标签的同时<strong>实时预览</strong>效果。
-    </p>
-    <div>
-      <h2>Open Graph 与 Twitter Cards</h2>
-      <p>
-        <strong>Open Graph</strong>(<code>og:</code> 前缀)由 Facebook 创建,如今几乎被所有平台读取——Facebook、LinkedIn、Slack、Discord、Telegram、iMessage。{' '}
-        <strong>Twitter Cards</strong>(<code>twitter:</code> 前缀)是 X/Twitter 专属,但当其自身标签缺失时,Twitter 会回退到 Open Graph。同时生成两者,意味着你的预览在任何地方都正确,无需猜测。
-      </p>
-    </div>
-    <div>
-      <h2>选择合适的图片</h2>
-      <p>
-        对于 <code>og:image</code> 和 <code>twitter:image</code>,使用 <strong>1.91:1</strong> 比例、<strong>1200×630px</strong> 的图片,控制在约 1 MB 以内,格式为 JPG 或 PNG。正方形图片(1080×1080)适用于 <code>summary</code> 卡片类型,但在期望宽比例的平台上会被裁剪。图片务必使用绝对 URL(包含 <code>https://</code>)——相对路径无效。
-      </p>
-    </div>
-    <div>
-      <h2>为什么部署后预览仍然不对</h2>
-      <p>
-        平台会大量缓存预览,有时长达数天。部署标签后,使用{' '}
-        <strong>Facebook Sharing Debugger</strong>、{' '}
-        <strong>Twitter Card Validator</strong> 或{' '}
-        <strong>LinkedIn Post Inspector</strong> 强制重新抓取。关键在于,这些标签必须存在于服务器原始 HTML(SSR 或静态)中——不执行 JavaScript 的爬虫无法看到由客户端框架在运行时注入的标签。
-      </p>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -178,7 +146,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function OpenGraphGeneratorContent(): ReactNode {
   const { locale } = useApp()

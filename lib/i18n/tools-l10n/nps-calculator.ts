@@ -5,41 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const NpsCalculatorL10n: ToolL10n = {
-  zh: {
-    useCases: ['把调研答案快速折算成 NPS 分', '对照 Bain 等级判断"这个分算好还是坏"', '复盘一季度的口碑是变好还是变差', '给管理层汇报客户忠诚度趋势'],
-    faqs: [
-      { q: 'NPS 是怎么算的?', a: '用推荐者(9-10 分)的百分比减去贬损者(0-6 分)的百分比;中立者(7-8 分)只进分母、不计入得分。250 个推荐者、90 个中立、60 个贬损者:62.5% − 15% = 47.5,四舍五入为 +48。' },
-      { q: '多少分算好?', a: 'Bain 的常用读法:0-30 为 good,31-70 为 great,71 以上为 excellent,负分意味着贬损者多于推荐者。多数行业的均值在 30 上下——和自己的行业比,别和苹果比。' },
-      { q: '为什么中立者不计入得分?', a: 'NPS 衡量的是"主动推荐意愿"而非满意度。中立者满意但没热情,既不为你宣传也不损害你,所以只稀释分母。哪怕只把少量中立者转成推荐者,分数也会显著移动。' },
-      { q: '多少份样本才可靠?', a: '把 NPS 当带误差区间的统计量:100 份样本的误差约 ±8-10 分,400 份能压到约 ±5 分。跨周期看趋势,别对单次小样本的波动反应过度。' },
-    ],
-    ui: {
-      'in.promoters': '推荐者 (9-10 分)',
-      'in.passives': '中立者 (7-8 分)',
-      'in.detractors': '贬损者 (0-6 分)',
-      'out.totalResponses': '总回复数',
-      'out.npsScore': 'NPS 得分',
-      'out.promotersPct': '推荐者占比',
-      'out.passivesPct': '中立者占比',
-      'out.detractorsPct': '贬损者占比',
-      'out.level': 'Bain 等级',
-      'chartTitle': 'NPS 在 -100 到 +100 量表上的位置',
-      'zone.0': '负分区',
-      'zone.1': 'Good',
-      'zone.2': 'Great',
-      'zone.3': 'Excellent',
-      'level.low': '需要紧急改善',
-      'level.ok': 'Good(良好)',
-      'level.good': 'Great(优秀)',
-      'level.excellent': 'Excellent(卓越)',
-      'preset.0': '挣扎中 (-25,共 1000 份)',
-      'preset.1': '稳健 B2B (+45,共 1000 份)',
-      'preset.2': '世界级 (+74,共 1000 份)',
-      'errNonNegative': '各档人数不能为负',
-      'errEmpty': '请至少输入一份回复',
-      'note': '📊 问"你有多大可能把我们推荐给朋友?(0-10)"。Bain 的读法:0-30 good,31-70 great,71+ excellent;负分说明贬损者比推荐者多。中立者只进分母、不拉动分数——NPS 取整数。',
-    },
-  },
+
   es: {
     useCases: ['convertir las respuestas de la encuesta en puntuación NPS', 'saber si tu resultado es bueno según los niveles de Bain', 'comparar la evolución del boca a boca entre trimestres', 'informar a dirección de la tendencia de lealtad de clientes'],
     faqs: [

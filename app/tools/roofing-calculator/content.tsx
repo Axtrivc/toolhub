@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * RoofingCalculator 长文正文 —— 四语 dispatcher
+ * RoofingCalculator 长文正文 —— 三语 dispatcher
  *
- * en 分支与既有工具页渲染一致。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支与既有工具页渲染一致。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -24,19 +24,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>量投影,不上屋顶</h2>
-    <p>给屋面定量最安全的办法在地面完成:房长 × 房宽,再乘坡度系数。30×20 的房子在 6/12 下是 600 × 1.118 ≈ 671 ft² 实际屋面——6.7 个 square——全程不用梯子。</p>
-    <h2>square 是行话通货</h2>
-    <p>屋顶工的材料与人工都按 square 报价——100 ft² 屋面。三片式沥青瓦每束盖三分之一 square,所以 squares × 3 = 束数。报价单里没有 square 数,就是没法比的报价。</p>
-    <h2>坡度系数一行一个</h2>
-    <p>4/12 → 1.054,5/12 → 1.083,6/12 → 1.118,7/12 → 1.158,8/12 → 1.202,9/12 → 1.25。最平与最陡之间,30×20 的屋顶差出约 1.2 个 square——四束瓦,外加更高的人工档。</p>
-    <h2>损耗、天沟与现实</h2>
-    <p>10% 损耗覆盖起始层、屋脊盖帽与简单双坡的切割损失。四坡与天沟切得多——按 15%。另外建筑师瓦常见每 square 4-5 束;包装上的说明永远胜过经验法则。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -66,7 +53,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function RoofingCalculatorContent(): ReactNode {
   const { locale } = useApp()

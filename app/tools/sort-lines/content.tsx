@@ -32,33 +32,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具?</h2>
-    <p>本工具按字母顺序(A → Z)对文本行排序,删除空行并去除首尾空格。非常适合整理列表、清理数据以及准备内容。</p>
-    <div>
-      <h2>哪些内容会被排序</h2>
-      <ul>
-        <li>每一行都会成为排序中的一个条目</li>
-        <li>空行会被完全删除</li>
-        <li>每行开头和结尾的空格会被去除</li>
-        <li>排序不区分大小写(Apple 和 apple 排在一起)</li>
-        <li>数字排在字母之前(10 排在 apple 之前)</li>
-      </ul>
-    </div>
-    <div>
-      <h2>常见用途</h2>
-      <ul>
-        <li>整理头脑风暴得到的想法清单</li>
-        <li>按字母顺序为通讯录排序姓名</li>
-        <li>为产品 SKU 或代码排序</li>
-        <li>准备关键词或标签供审阅</li>
-        <li>清理从文档复制的文本</li>
-      </ul>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -116,7 +89,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function SortLinesContent(): ReactNode {
   const { locale } = useApp()

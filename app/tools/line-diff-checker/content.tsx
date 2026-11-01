@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * Line Diff Checker 长文正文 —— 四语 dispatcher
+ * Line Diff Checker 长文正文 —— 三语 dispatcher
  *
- * en 分支与改造前渲染输出一致。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支与改造前渲染输出一致。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en (与改造前渲染输出一致) ────────────────────────────
@@ -24,19 +24,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>工作原理</h2>
-    <p>比对采用最长公共子序列(LCS)算法——与 git diff 背后是同一族算法。两份文本共有的行作为锚点,其余内容一律按新增(+)或删除(−)报告。</p>
-    <h2>规模限制</h2>
-    <p>每侧最多支持约 10 万字符、2000 行,这保证了即使在普通硬件上比对也能即时完成。</p>
-    <h2>常见用途</h2>
-    <p>审阅合同修改、提交前检查配置文件改动、对比两次运行的日志输出,或确认清理脚本没有误删内容。</p>
-    <h2>空白字符有影响</h2>
-    <p>行按原样精确比较,包括行尾空格。如果不可见的空白噪声淹没了真正的改动,请先用文本清理工具预处理。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -66,7 +53,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function LineDiffCheckerContent(): ReactNode {
   const { locale } = useApp()

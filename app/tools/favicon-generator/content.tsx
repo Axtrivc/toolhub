@@ -55,46 +55,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具?</h2>
-    <p>
-      <strong>favicon</strong>(网站图标)是显示在浏览器标签页、书签和主屏幕快捷方式中的小图标。仅提供一张大图让浏览器缩小,在 16×16 时会显得模糊。本工具接收你上传的任意图片,将其裁剪为居中的正方形,并以浏览器实际请求的尺寸导出清晰的 PNG 图标——外加 iOS 所用的 Apple Touch Icon。所有操作都通过 canvas 在你的浏览器中完成。
-    </p>
-    <div>
-      <h2>你实际需要哪些尺寸</h2>
-      <ul>
-        <li>
-          <strong>16×16</strong> —— 经典的浏览器标签页图标。这是最小也最显眼的尺寸,因此这里的清晰度最为重要。
-        </li>
-        <li>
-          <strong>32×32</strong> —— 用于 Retina 标签页、Windows 任务栏以及现代书签。
-        </li>
-        <li>
-          <strong>180×180(Apple Touch Icon)</strong> —— 当用户将你的网站添加到主屏幕时,iOS 使用的高分辨率图标。
-        </li>
-      </ul>
-    </div>
-    <div>
-      <h2>如何在 HTML 中声明它们</h2>
-      <p>
-        下载后,将文件放到网站根目录,并在你的{' '}
-        <code>&lt;head&gt;</code> 中添加以下标签:{' '}
-        <code>&lt;link rel=&quot;icon&quot; type=&quot;image/png&quot; sizes=&quot;32x32&quot; href=&quot;/favicon-32x32.png&quot;&gt;</code>、{' '}
-        <code>&lt;link rel=&quot;icon&quot; type=&quot;image/png&quot; sizes=&quot;16x16&quot; href=&quot;/favicon-16x16.png&quot;&gt;</code> 以及{' '}
-        <code>&lt;link rel=&quot;apple-touch-icon&quot; sizes=&quot;180x180&quot; href=&quot;/apple-touch-icon.png&quot;&gt;</code>。浏览器会自动选择最匹配的图标。
-      </p>
-    </div>
-    <div>
-      <h2>设计在 16×16 下仍清晰可辨的图标</h2>
-      <p>
-        在 16 像素下,细节会消失。请使用与背景高对比的单一粗体形状或字母——避免细线、小号文字和复杂徽标。建议使用带透明度的 PNG,这样图标在浅色和深色浏览器标签页上都好看。如果需要可无限缩放的矢量图标,可使用{' '}
-        <code>&lt;link rel=&quot;icon&quot; type=&quot;image/svg+xml&quot;&gt;</code> 发布 SVG,并搭配 PNG 作为兜底。
-      </p>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -203,7 +163,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function FaviconGeneratorContent(): ReactNode {
   const { locale } = useApp()

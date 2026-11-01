@@ -45,7 +45,7 @@ let noConfig = 0;
 for (const [slug, sKeys] of Object.entries(samples)) {
   const cKeys = configs[slug];
   if (!cKeys) {
-    console.log(`[standalone] ${slug}: sample=${JSON.stringify(sKeys)}  (独立组件，未用 makeCalculatorClient，需手动核对字段)`);
+    console.log(`[standalone] ${slug}: sample=${JSON.stringify(sKeys)}  (standalone component without makeCalculatorClient; verify fields manually)`);
     noConfig++;
     continue;
   }

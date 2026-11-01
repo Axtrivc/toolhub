@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * SubscriptionCostCalculator 长文正文 —— 四语 dispatcher
+ * SubscriptionCostCalculator 长文正文 —— 三语 dispatcher
  *
- * en 分支与改造前渲染输出一致。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支与改造前渲染输出一致。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -24,19 +24,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>年度数字为何让人震惊</h2>
-    <p>$14.99 每月感觉毫无分量,但一项服务一年就是 $180。平均持有八项订阅的家庭,常在盘点时发现 $1,500-2,500 的年支出——事先一项都说不出名字。</p>
-    <h2>如何诚实地盘点</h2>
-    <p>翻最近三个月的信用卡账单,搜出所有周期性扣款。年付服务藏得最深:域名、云存储、杀毒软件、软件授权。</p>
-    <h2>账单周期陷阱</h2>
-    <p>服务故意把续费日期错开,让任何单月账单都看不到全貌。把一切折算成月度(就像本计算器做的那样)能恢复可见度。</p>
-    <h2>留还是砍的检验</h2>
-    <p>对每项订阅问一句:过去 30 天我是否主动用过它?"主动使用"指你特意打开它,而不是因为一封邮件提醒你想起了它的存在。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -66,7 +53,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function SubscriptionCostCalculatorContent(): ReactNode {
   const { locale } = useApp()

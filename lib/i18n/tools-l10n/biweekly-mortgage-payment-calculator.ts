@@ -4,47 +4,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const BiweeklyMortgagePaymentCalculatorL10n: ToolL10n = {
-  zh: {
-    useCases: [
-      '算双周供能提前几个月还清、总共省多少利息',
-      '比较 6.5% 与 3.5% 利率下加速还款的价值差异',
-      '把双周供方案与"每月多还 1/12"的 DIY 方案对齐',
-      '15 年期贷款再上双周供还有多少压缩空间',
-    ],
-    faqs: [
-      { q: '双周供能省多少?', a: '$320,000、6.5%、30 年的贷款,双周半月供约 290 个月还清(原 360 个月),省约 $93,000 利息。利率越高省得越多——3.5% 时同样的招数只省约 $28,000。' },
-      { q: '可以免费自己设双周供吗?', a: '可以——每张月供支票多加月供的 1/12 并注明"冲抵本金",效果几乎一样。第三方双周供计划收 $300-500 开通费,做的只是你自律就能免费完成的事。' },
-      { q: '为什么多付一期月供影响这么大?', a: '因为这笔钱在第一年就砸进本金,并在此后几十年停止复利:每一元提前偿还的本金,按你的票面利率跳过了 25 年以上的利息。26 个半月供 = 13 个月供,第 13 期就是全部引擎。' },
-      { q: '双周供和把余钱拿去投资哪个好?', a: '取决于利率。利率在 5-6% 以上时,提前还款的确定性省息胜过多数无风险替代品;3.5% 的疫情期利率下,收益率更高的货币基金更划算,还保住流动性。' },
-    ],
-    ui: {
-      'in.amount': '贷款金额',
-      'in.rate': '贷款利率',
-      'in.years': '贷款期限',
-      'inSuffix.amount': '$',
-      'inSuffix.rate': '%',
-      'opt.years.15': '15 年',
-      'opt.years.20': '20 年',
-      'opt.years.30': '30 年',
-      'out.interestSaved': '节省利息',
-      'out.biweeklyPayment': '双周供金额',
-      'out.monthlyPayment': '标准月供',
-      'out.payoffTime': '还清时间',
-      'out.totalInterestMonthly': '总利息(月供方案)',
-      'out.totalInterestBiweekly': '总利息(双周供方案)',
-      'weeksWord': '周',
-      'monthsWord': '个月',
-      'yearsWord': '年',
-      'errInvalid': '请输入正的贷款金额与期限',
-      'chartTitle': '贷款余额:月供 vs 双周供',
-      'line.monthly': '月供方案',
-      'line.biweekly': '双周供方案',
-      'preset.0': '7% 近期购房',
-      'preset.1': '3.5% 2021 锁定',
-      'preset.2': '15 年期 5.5%',
-      'note': '🗓️ 一年 26 个半月供 = 13 个月供——多出的那一期全部冲本金。你可以每月多还月供的 1/12 免费复刻;第三方双周供服务收 $300-500 开通费。确认多余还款被记入本金而非 escrow。',
-    },
-  },
+
   es: {
     useCases: [
       'ver cuántos meses antes liquidas y cuánto interés ahorras con pagos quincenales',

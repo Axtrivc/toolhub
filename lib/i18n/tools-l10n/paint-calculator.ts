@@ -5,49 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const PaintCalculatorL10n: ToolL10n = {
-  zh: {
-    useCases: ['算刷一面墙/一个房间要买几桶漆', '按门窗数量扣减涂刷面积', '估算多遍面漆的总用量', '按升或加仑规划采购量'],
-    faqs: [
-      { q: '到底需要多少漆?', a: '墙面面积 = 周长 × 层高,再减去每扇门 1.85 m²、每扇窗 1.4 m²。乘以遍数、除以涂布率(光滑底漆墙面 10 m²/L),最后自动加 10% 余量并向上取整到整桶 2.5 L 或加仑。' },
-      { q: '什么情况下要比显示的买更多?', a: '纹理墙面、裸石膏板或大幅改色(深盖浅或反向)会比标准涂布率多耗 20-40%——新石膏板最能"喝"漆。工具的提示里写了这一点;这类情况在计算结果之外再多买一桶。' },
-      { q: '门窗面积真的该减掉吗?', a: '该减——刷墙时是绕着它们刷的,开口面积基本不会被涂到,不减就会买多。但如果门框和线条也要刷,记得那部分通常要用另一种漆、单独按小面积计算。' },
-      { q: '为什么漆要一次买齐?', a: '不同生产批次的调色会略有差异——桶里看不出来,上墙就看得见。先算好总量、一次买齐;实在要补货,把新桶和旧桶剩漆混在一起("兑桶")抹平色差。' },
-    ],
-    ui: {
-      'chartTitle': '实际用量 vs 购买量',
-      'cmp.0': '实际用量',
-      'cmp.1': '购买量(含余量)',
-      'cmpseg.0': '升',
-      'in.assumption': '涂布率假设',
-      'in.cans': '标准罐/桶数',
-      'in.coats': '涂刷遍数',
-      'in.doors': '门',
-      'in.paintNeeded': '需购买油漆量',
-      'in.perimeter': '房间周长',
-      'in.unit': '油漆售卖单位',
-      'in.wallArea': '可涂刷墙面积',
-      'in.wallHeight': '墙面高度',
-      'in.windows': '窗户',
-      'note': '🎨 涂布率按光滑底漆墙面 10 m²/L 估。纹理面、裸石膏板或大幅改色会多耗 20-40%。一次买齐同批次油漆——不同批次色浆有差异。',
-      'opt.unit.gallon': '美制加仑',
-      'opt.unit.liter': '升',
-      'out.assumption': '涂布率假设',
-      'out.cans': '标准罐/桶数',
-      'out.coats': '涂刷遍数',
-      'out.doors': '门',
-      'out.paintNeeded': '需购买油漆量',
-      'out.perimeter': '房间周长',
-      'out.unit': '油漆售卖单位',
-      'out.wallArea': '可涂刷墙面积',
-      'out.wallHeight': '墙面高度',
-      'out.windows': '窗户',
-          'errInvalidDims': "请输入有效的房间尺寸",
-      'unit.coats': "遍",
-      'cans.gallon': "加仑桶",
-      'cans.liter': "2.5 L 桶",
-      'assumption': "10 m²/L(400 ft²/gal),+10% 余量",
-},
-  },
+
   es: {
     useCases: ['calcular cuántos botes de pintura comprar', 'descontar puertas y ventanas del área', 'estimar el total para varias manos', 'planificar la compra en litros o galones'],
     faqs: [

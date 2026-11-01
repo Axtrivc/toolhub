@@ -37,38 +37,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具?</h2>
-    <p>数字存储以<strong>字节</strong>及其倍数来衡量。本工具同时支持<strong>十进制单位</strong>(KB = 1,000 字节,硬盘标称与网速口径)和<strong>二进制单位</strong>(KiB = 1,024 字节,操作系统显示文件大小和磁盘空间的口径)的换算。</p>
-    <div>
-      <h2>二进制与十进制单位</h2>
-      <p>存在两种约定。<strong>十进制</strong>(1 KB = 1,000 字节)由存储厂商使用;<strong>二进制</strong>(1 KiB = 1,024 字节)由 Windows 和大多数软件使用——这就是为什么一块「500 GB」的硬盘在电脑上显示为 ~465 GiB。本工具两种都支持。</p>
-    </div>
-    <div>
-      <h2>常用换算</h2>
-      <ul>
-        <li>1 KB = 1,000 字节;1 KiB = 1,024 字节</li>
-        <li>1 MB = 1,000 KB;1 MiB = 1,024 KiB = 1,048,576 字节</li>
-        <li>1 GB = 1,000 MB ≈ 0.93 GiB;1 GiB = 1,024 MiB ≈ 10.7 亿字节</li>
-        <li>1 TB = 1,000 GB ≈ 0.91 TiB;1 TiB = 1,024 GiB ≈ 1.1 万亿字节</li>
-        <li>1 字节 = 8 比特(比特单位为十进制:1 Mb = 1,000,000 比特)</li>
-      </ul>
-    </div>
-    <div>
-      <h2>现实中的大小</h2>
-      <ul>
-        <li>短信:~1 KB</li>
-        <li>照片(手机):2-5 MB</li>
-        <li>MP3 歌曲:3-5 MB</li>
-        <li>高清电影:1-4 GB</li>
-        <li>手机存储:64-512 GB</li>
-        <li>笔记本固态硬盘:256 GB - 2 TB</li>
-      </ul>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -136,7 +104,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function DataStorageConverterContent(): ReactNode {
   const { locale } = useApp()

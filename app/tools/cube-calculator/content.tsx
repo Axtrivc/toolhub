@@ -28,29 +28,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具?</h2>
-    <p>根据边长计算正方体的体积和表面积。</p>
-    <div>
-      <h2>公式</h2>
-      <ul>
-        <li>体积 = s³(边长的立方)</li>
-        <li>表面积 = 6s²(6 个正方形面)</li>
-      </ul>
-    </div>
-    <div>
-      <h2>日常正方体</h2>
-      <ul>
-        <li>骰子(边长 16mm,体积约 4 cm³)</li>
-        <li>魔方(边长 57mm,约 185 cm³)</li>
-        <li>快递纸箱(为提高效率常接近正方体)</li>
-        <li>方糖(边长 16mm)</li>
-      </ul>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -100,7 +77,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function CubeCalculatorContent(): ReactNode {
   const { locale } = useApp()

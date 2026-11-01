@@ -5,35 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const RentBudgetCalculatorL10n: ToolL10n = {
-  zh: {
-    useCases: ['按 30% 规则算出可负担的月房租上限', '用 50/30/20 预算核对房租挤占了多少"必要开支"', '对比税前与税后口径下的 affordability', '看年房租总额与储蓄空间'],
-    faqs: [
-      { q: '30% 规则怎么用?', a: '房租不超过(税前)月收入的 30%——这是美国住房政策沿用几十年的经验线,超过就算"房租负担过重"(rent burden)。月入 $6,000 对应上限 $1,800。它是筛选工具而非铁律:高物价城市常被迫突破,低开销地区可以更保守。' },
-      { q: '50/30/20 下的房租上限为什么是 50% 而不是 30%?', a: '50/30/20 把税后收入分成必要 50%、想要 30%、储蓄 20%,房租属于"必要"桶。桶的总量是 50%,但房租只是必要项之一——食品、通勤、保险都要从这里出。实务上房租宜占税后 25-30%,给其他必要项留空间。' },
-      { q: '税前和税后口径差多少?', a: '30% 规则传统上用税前收入;50/30/20 用税后。本工具在你选"税前"时按约 22% 的有效税率折算税后(含联邦税+ FICA + 州税的粗略均值),两者并排显示,差异就是你要做判断的区间。' },
-      { q: '超了 30% 就一定不行吗?', a: '不一定,但要有意识地补:如果房租吃掉税后 40%,通常意味着储蓄率被压缩到 20% 以下——要么接受低储蓄阶段,要么在交通/饮食上找补,要么换更远的住处。规则的作用是让取舍显性化,不是替你决定。' },
-    ],
-    ui: {
-      'chartTitle': '50/30/20 预算分配',
-      'chartCenter': '税后收入',
-      'slice.rentCap50': '必要开支 50%',
-      'slice.wants30': '想要开支 30%',
-      'slice.savings20': '储蓄 20%',
-      'in.income': '月收入',
-      'in.basis': '收入口径',
-      'opt.basis.gross': '税前 (gross)',
-      'opt.basis.net': '税后 (net)',
-      'out.rent30': '30% 规则房租上限',
-      'out.rentCap50': '50/30/20 必要开支桶',
-      'out.wants30': '想要开支 30%',
-      'out.savings20': '储蓄 20%',
-      'out.annualRent': '年房租总额',
-      'outSub.rent30': '按所选口径的收入',
-      'outSub.rentCap50': '房租须与其他必要项共享',
-      'note': '🏠 30% 规则传统上按税前收入计;50/30/20 按税后(选"税前"时本工具按 ~22% 有效税率折算)。房租之外,水电网、租房保险、通勤都在"必要"桶里——签约前把整桶算满。',
-      'errInvalid': '请输入正的月收入',
-    },
-  },
+
   es: {
     useCases: ['calcular el tope de alquiler con la regla del 30%', 'ver cuánto del bloque de «necesidades» del 50/30/20 se come el alquiler', 'comparar la capacidad bruta vs neta', 'ver el alquiler anual y el hueco de ahorro'],
     faqs: [

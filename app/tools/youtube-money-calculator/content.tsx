@@ -5,7 +5,7 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * YouTubeMoneyCalculator 长文正文 —— 四语 dispatcher
+ * YouTubeMoneyCalculator 长文正文 —— 三语 dispatcher
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -22,19 +22,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>RPM 才是真正落袋的数字</h2>
-    <p>RPM——每千次观看收入——是 YouTube 抽走 45% 广告分成之后属于你的部分。CPM 是广告主每千次广告展示支付的价格;RPM 永远更低,也永远是预测收入的诚实口径。请用区间而非单值来做计划:一月的淡季与 Q4 广告旺季之间,RPM 能差 30-40%。</p>
-    <h2>题材决定量级</h2>
-    <p>长视频的财经/商业内容 RPM 可达 $8-15;科技评测 $4-10;一般 vlog $2-5;游戏 $1.5-3。Shorts 的 RPM 只有 $0.05-0.15——顶多长视频的十分之一。一百万次 Shorts 观看,可能还不如五万次财经视频的收入。</p>
-    <h2>不是每次观看都有钱</h2>
-    <p>只有真正展示广告的获利播放才有收入:重复观看、装广告拦截器的会话、受限模式或被取消获利的内容一律为零。实际到账通常比"观看数 × RPM"低 10-20%——这正是这里"保守"与"典型"两档滑杆之间的差距。</p>
-    <h2>广告是地板,不是生意本身</h2>
-    <p>月观看过 10 万后,商单、联盟链接、会员与自营产品通常都会超过 AdSense——一条 $500 的植入商单约等于 12.5 万次财经观看。把计算器的输出当成你谈其他一切合作的底价。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -64,7 +51,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function YouTubeMoneyCalculatorContent(): ReactNode {
   const { locale } = useApp()

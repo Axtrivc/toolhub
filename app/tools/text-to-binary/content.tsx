@@ -30,31 +30,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具?</h2>
-    <p>本工具将文本编码为二进制 — 每个字符变为一个或多个 8 位字节(1 和 0)。适合用来学习计算机如何表示文本,或用于底层数据检查。</p>
-    <div>
-      <h2>ASCII 参考表</h2>
-      <ul>
-        <li>A-Z:65-90 (01000001-01011010)</li>
-        <li>a-z:97-122 (01100001-01111010)</li>
-        <li>0-9:48-57 (00110000-00111001)</li>
-        <li>空格:32 (00100000)</li>
-      </ul>
-    </div>
-    <div>
-      <h2>何时会用到它</h2>
-      <ul>
-        <li>计算机科学作业</li>
-        <li>理解文本的存储方式</li>
-        <li>调试底层数据格式</li>
-        <li>创作二进制主题的艺术或留言</li>
-      </ul>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -108,7 +83,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function TextToBinaryContent(): ReactNode {
   const { locale } = useApp()

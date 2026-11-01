@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * TokenVisualizer 长文正文 —— 四语 dispatcher
+ * TokenVisualizer 长文正文 —— 三语 dispatcher
  *
- * en 分支与改造前渲染输出一致。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支与改造前渲染输出一致。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en(与改造前渲染输出一致) ────────────────────────────
@@ -24,19 +24,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>为什么要可视化 token</h2>
-    <p>LLM 看到的是块,不是词:一个长词可能要花 3 个 token,短词只花 1 个。亲眼看文本怎么被切开,能建立起让 prompt 更省、截断意外更少的直觉。</p>
-    <h2>近似算法怎么运作</h2>
-    <p>不超过 5 个字符的词算一个块,更长的词按 4 字符边界切分,CJK 逐字计数,空白并入下一个块——与 BPE 行为足够接近,足以建立直觉。</p>
-    <h2>不是计费工具</h2>
-    <p>精确分词因模型与分词器版本而异。算成本请用 GPT Token Counter;本工具用来理解结构:为什么代码烧 token、为什么换行有影响、为什么翻译结果出人意料。</p>
-    <h2>看懂颜色</h2>
-    <p>每个色块约等于一个 token;空格显示为 ␣ 并归入下一个块。长连续串(URL、哈希、base64)会肉眼可见地炸成一大堆块——这正是它们撑爆 prompt 的原因。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -66,7 +53,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function TokenVisualizerContent(): ReactNode {
   const { locale } = useApp()

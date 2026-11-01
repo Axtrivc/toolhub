@@ -5,7 +5,7 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * EtsyFeeCalculator 长文正文 —— 四语 dispatcher
+ * EtsyFeeCalculator 长文正文 —— 三语 dispatcher
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -22,19 +22,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>每单都躲不开的四层费用</h2>
-    <p>Etsy 每件商品收 $0.20 上架费、订单总额(商品 + 运费)的 6.5% 交易费、支付处理费(美国 3% + $0.25),以及买家经广告进店时的 Offsite Ads 费——15%,12 个月销售额超过 $10k 后降为 12.5%。</p>
-    <h2>Offsite Ads 的冲击</h2>
-    <p>一笔 $29(含运费)且带广告归因的订单要付约 $7.56 费用——实际费率 26%。卖家常会发现广告单的利润比自然单低三分之一;把计算器的广告费开关分别打开、关掉各算一次,就能看到自己的差距。</p>
-    <h2>运费不是避风港</h2>
-    <p>交易费和支付处理费都按你收的运费计。把运费并进商品价的"包邮"只改变买家观感——Etsy 的百分比照样碰到订单里的每一美元。</p>
-    <h2>可动的杠杆在哪</h2>
-    <p>上架费按件固定,所以"少而贵"的列表比一堆便宜货少浪费 $0.20 的增量。年销 $10k 以下可以退出 Offsite Ads——如果广告归因单的毛利已是负数,就退。支付处理费率还因卖家所在国而异,规划收款银行时要一并考虑。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -64,7 +51,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function EtsyFeeCalculatorContent(): ReactNode {
   const { locale } = useApp()

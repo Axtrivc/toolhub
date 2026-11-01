@@ -5,40 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const StepsToMilesCalculatorL10n: ToolL10n = {
-  zh: {
-    useCases: ['把 10,000 步换算成英里和公里', '按身高估步幅或手输实测步幅', '看每英里大约多少步', '估算一段步数要走多久'],
-    faqs: [
-      { q: '按身高估步幅准吗?', a: '步行步幅 ≈ 身高 × 0.414(Hatano 公式),对多数成年人的误差在 10% 以内。要更准:正常步频走 10 步量总距离再除以 10,或沿田径场内道走一圈数步数(400 m ÷ 步数)。' },
-      { q: '一英里大约多少步?', a: '成人普遍 2,000-2,500 步/英里,平均约 2,100:个子越高步幅越长,步数越少。反过来 10,000 步约 4-5 英里(7-8 公里)。' },
-      { q: '为什么不算卡路里?', a: '卡路里取决于体重、坡度和步速,是另一个问题——本工具专注距离换算。想看能耗请用配套的"步数换卡路里"计算器(见下方 Next Steps)。' },
-      { q: '手环和手机的步数一致吗?', a: '腕带靠摆臂加速度计数,推婴儿车或扶扶手时会漏计;手机放在口袋里、步频很慢时也会低 5-10%。同一天不同设备差 10-20% 很常见,追踪趋势比纠结绝对值更有意义。' },
-    ],
-    ui: {
-      'in.steps': '步数',
-      'in.mode': '步幅来源',
-      'opt.mode.auto': '按身高估算',
-      'opt.mode.manual': '手动输入',
-      'in.height': '身高',
-      'in.stride': '你的步幅',
-      'in.pace': '步行速度',
-      'opt.pace.slow': '慢走',
-      'opt.pace.moderate': '中速',
-      'opt.pace.brisk': '快走',
-      'out.miles': '距离',
-      'outSub.miles': '英里',
-      'out.km': '距离(公里)',
-      'out.perMile': '每英里步数',
-      'out.duration': '步行时长',
-      'outSub.duration': '按所选速度',
-      'errInvalid': '请输入正数(自动模式下身高需在 100-250 cm)',
-      'chartTitle': '步数越多,距离越长',
-      'line.miles': '英里数',
-      'preset.0': '一万步的一天',
-      'preset.1': '久坐日',
-      'preset.2': '活跃 15k',
-      'note': '👟 步行步幅 ≈ 身高 × 0.414(比跑步步幅短)。想拿真实数值:按正常步频走 10 步,量出距离除以 10。速度档:慢走 ≈3、中速 ≈5、快走 ≈6.5 km/h。手环连摆臂都计步,推婴儿车时则漏计——同一工具纵向比较最可靠。',
-    },
-  },
+
   es: {
     useCases: ['convertir 10.000 pasos a millas y kilómetros', 'estimar la zancada por talla o meter la medida real', 'ver cuántos pasos tiene una milla', 'calcular cuánto tardarás en caminarlos'],
     faqs: [

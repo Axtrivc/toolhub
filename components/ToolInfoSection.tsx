@@ -237,7 +237,7 @@ function EnglishToolInfo({ tool }: { tool: ToolMeta }): ReactNode {
 function LocalizedToolInfo({ tool, l10n }: { tool: ToolMeta; l10n?: ToolL10n }): ReactNode {
   const { locale } = useApp()
   const tpl = toolInfoTemplates[locale]
-  // 无模板(理论上不会发生,zh/es/de 都有)→ 回退英文路径,保证不破图。
+  // 无模板(理论上不会发生,es/de 都有)→ 回退英文路径,保证不破图。
   if (!tpl) return <EnglishToolInfo tool={tool} />
 
   const type = detectType(tool.name)

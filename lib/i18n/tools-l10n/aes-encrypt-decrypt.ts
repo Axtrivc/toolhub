@@ -5,47 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const AesEncryptDecryptL10n: ToolL10n = {
-  zh: {
-    useCases: [
-      '把含身份证号的表格文本加密后再发微信,口令走电话或另一个渠道告知',
-      '备份文件加一层口令加密后再存 U 盘或网盘,即使泄露也读不出明文',
-      '与同事约定共享口令,互发自包含的 AES-v1 密文,全程不经过第三方服务器',
-      '解密收到的载荷:密码错误会立即报 GCM 校验失败,直接提示数据被篡改或损坏',
-    ],
-    faqs: [
-      {
-        q: '这里用的是哪种加密?',
-        a: 'AES-256-GCM,走浏览器原生 WebCrypto——与 TLS 1.3 和政府系统相同的认证加密标准。GCM 自带认证标签:密文被篡改或密码不对时会明确报错,而不是输出乱码。',
-      },
-      {
-        q: '我的密码是怎么变成密钥的?',
-        a: '通过 PBKDF2-HMAC-SHA256:每次加密用随机的 16 字节盐、迭代 15 万次,把密码拉伸成 256 位密钥。加盐保证相同密码每次产出不同密文,并能抵御彩虹表攻击。',
-      },
-      {
-        q: '忘记密码还能找回数据吗?',
-        a: '不能,这是设计使然而非缺陷。AES-256 没有现实的暴力破解路径,没有后门,工具本身也看不到你的密码。放心加密,但请把密码当作不可找回的东西保管。',
-      },
-      {
-        q: '明文和密码会离开我的设备吗?',
-        a: '不会。全部运算在本地 Web Crypto API 完成;用 DevTools 的网络面板可以验证:加密解密全程零请求。唯一的环境要求是通过 HTTPS 或 localhost 打开本页。',
-      },
-    ],
-    ui: {
-      'badFormat': '不是 AES-v1 载荷(应为 salt:iv:ciphertext)',
-      'cipherOut': '密文(可移植 base64)',
-      'insecure': 'WebCrypto 需要 HTTPS 或 localhost',
-      'mDecrypt': '解密',
-      'mEncrypt': '加密',
-      'note': '🔐 AES-256-GCM + PBKDF2-SHA256(15 万次迭代),每次加密随机 16 字节盐——输出自包含(salt:iv:ciphertext),可在本页或任何支持 WebCrypto 的环境解密。GCM 认证保证密码错误会明确报错而非输出乱码。',
-      'passLabel': '密码',
-      'passPlaceholder': '高强度密码',
-      'payloadLabel': '加密载荷(AES-v1:…)',
-      'plainLabel': '要加密的文本',
-      'plainOut': '解密后的文本',
-      'plainPlaceholder': '秘密消息',
-      'wrongPassword': '密码错误或数据已损坏(GCM 校验失败)',
-    },
-  },
+
   es: {
     useCases: [
       'Cifrar un borrador de contrato o datos personales antes de enviarlo por chat y dar la contraseña por teléfono',

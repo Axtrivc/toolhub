@@ -16,17 +16,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>GitHub 锚点规则</h2>
-    <p>GitHub 会把标题转为小写、去掉标点、空格换成连字符,并为重复标题追加 -1/-2。别处生成的链接经常漏掉重复规则——这里不会。</p>
-    <h2>深度怎么选</h2>
-    <p>H2-H3 深度对常见文章足够清爽;纳入 H4+ 适合长篇技术文档,但会让 README 显得杂乱。上方选择器一改就即时重新生成。</p>
-    <h2>粘贴到哪里</h2>
-    <p>把列表放在开头段落之后即可。GitHub 上读者也能点自带的大纲图标跳转——但渲染出来的 TOC 在任何支持 Markdown 的地方都能用,包括博客和文档站。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -52,7 +41,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function MarkdownTocGeneratorContent(): ReactNode {
   const { locale } = useApp()

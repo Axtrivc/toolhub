@@ -5,7 +5,7 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * ConversionRateCalculator 长文正文 —— 四语 dispatcher
+ * ConversionRateCalculator 长文正文 —— 三语 dispatcher
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -22,19 +22,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>先把分母定义清楚再谈成绩</h2>
-    <p>公式是 转化 ÷ 访问 × 100,但"会话数"与"独立访客数"在同一批流量上会算出不同的转化率——一个老客可能在五个会话里才完成一次转化。选一种分母,写下来,并固定住,这样季度间的对比才有意义。</p>
-    <h2>"好"到底是多少</h2>
-    <p>典型电商在 2-3%,运营良好的店铺能过 5%,面向精准热流量的落地页常到 10% 以上。远超这些区间的数字通常意味着受众很窄或样本自选——先用自己的流量质量做基准。</p>
-    <h2>很少有人做的提升账</h2>
-    <p>相对提升 20%(2.4% → 2.88%)在 5,000 访问上意味着白得 24 个转化;而按当前转化率,同样目标要再买约 1,000 个访问。靠流量达标的价格是你的 CPC,靠转化达标的成本是一次测试加一次修复。这个不对称就是 CRO 的全部商业理由。</p>
-    <h2>CPA 才是钱进来的地方</h2>
-    <p>转化率本身不说明效率,CPA 用花费除以结果。注意计算器里 CPA 如何随转化上升而下降——花费不变时,提升转化率是唯一让每一美元存量预算更卖力的杠杆,而不是继续加钱。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -64,7 +51,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function ConversionRateCalculatorContent(): ReactNode {
   const { locale } = useApp()

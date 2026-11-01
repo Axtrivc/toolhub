@@ -5,45 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const RaceTimePredictorL10n: ToolL10n = {
-  zh: {
-    useCases: ['用一场 10K 预测全马完赛时间', '看 5K/10K/半马/全马的等效成绩', '为下个目标距离算出配速', '判断当前训练水平对应哪个比赛距离'],
-    faqs: [
-      { q: 'Riegel 公式有多准?', a: '对相邻距离、训练充分的跑者通常在 ±5% 以内。距离跨度越大误差越大——从 5K 直接推全马只能当作"如果我同时也把长距离练够了"的上限参考。' },
-      { q: '为什么全马预测看起来偏快?', a: 'Riegel 只外推耐力曲线,不建模补给、撞墙和脱销的糖原。首次跑全马建议在预测值上加 3-5%,并按每公斤体重 60-90 克糖原认真做赛内补给。' },
-      { q: '1.06 这个指数是什么?', a: '它是疲劳指数:1.0 意味着配速不随距离变慢,指数越大掉速越狠。Riegel 1981 年从大规模成绩数据拟合出 1.06;高水平跑者常接近 1.03-1.05,新手普遍更高。' },
-      { q: '能用日常训练数据吗?', a: '尽量用比赛成绩或全力以赴的计时测试;单独训练普遍比比赛日慢 2-5%(没有对手、补给和氛围),代进去会把预测整体压低。' },
-    ],
-    ui: {
-      'in.dist': '近期比赛距离',
-      'opt.dist.5': '5K',
-      'opt.dist.10': '10K',
-      'opt.dist.half': '半马',
-      'opt.dist.marathon': '全马',
-      'in.hours': '小时',
-      'in.minutes': '分钟',
-      'in.seconds': '秒',
-      'in.target': '预测目标距离',
-      'opt.target.5': '5K',
-      'opt.target.10': '10K',
-      'opt.target.half': '半马',
-      'opt.target.marathon': '全马',
-      'out.predicted': '预测完赛时间',
-      'outSub.predicted': 'Riegel 指数 1.06',
-      'out.pace': '目标配速',
-      'outSub.pace': '目标距离每公里',
-      'out.pred5k': '等效 5 公里',
-      'out.pred10k': '等效 10 公里',
-      'out.predHalf': '等效半程马拉松',
-      'out.predMara': '等效全程马拉松',
-      'errInvalid': '完赛时间必须大于零',
-      'chartTitle': '各距离等效成绩',
-      'line.predicted': '预测完赛时间',
-      'preset.0': '10K → 全马',
-      'preset.1': '5K 个人纪录 → 10K',
-      'preset.2': '半马 → 全马',
-      'note': '📐 Riegel 假设你为新距离做了相应训练——从 5K 直接跳全马通常要交 2-4% 的"现实税"。距离越长,补给与气温的影响越大。',
-    },
-  },
+
   es: {
     useCases: ['predecir tu maratón a partir de un 10K reciente', 'ver tiempos equivalentes de 5K a maratón', 'calcular el ritmo objetivo para tu próxima carrera', 'saber en qué distancia encaja tu forma actual'],
     faqs: [

@@ -5,7 +5,7 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * BondYieldCalculator 长文正文 —— 四语 dispatcher
+ * BondYieldCalculator 长文正文 —— 三语 dispatcher
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -22,19 +22,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>票面利率、收益率、价格是三个不同的数字</h2>
-    <p>票面利率在发行日就固定了——$1,000 面值的 5% 就是每年 $50,永远不变。收益率则是市场今天逼你接受的回报,它变动完全是因为价格在动。用 $950 买下这 $50 的现金流,当前收益率就是 5.26%;价格与面值之间的差,正是第三个数字——到期收益率——的燃料。</p>
-    <h2>近似 YTM 公式在做什么</h2>
-    <p>YTM 混合了两种收入:票息,以及回归面值的价差损益。经典近似式——[C + (F − P)/n] ÷ [(F + P)/2]——把你的成本基数为多年取平均,并把价差摊到各年。对 $950 的折价债券它算出 5.77%,与精确 IRR 只差几个基点;深度折价或超长期限时偏差会扩大。</p>
-    <h2>为什么价格和利率反向而行</h2>
-    <p>新发债券按当下利率付息,票息固定的老债券想竞争就只能变便宜——"利率升、价格跌"的全部机制尽在于此。折价买入的债券随着到期临近还会被慢慢拉回面值,所以哪怕利率起伏,债券最后几年的价格波动也会逐渐衰减。</p>
-    <h2>本计算器刻意忽略的东西</h2>
-    <p>美国债券半年付息一次(精确有效收益率比这里的年度口径略高);报价是净价,你实际支付的是全价——要加应计利息;可赎回债券还可能在收益率刚下降、你最想持有的时候提前还本。这些都不改变分析的形状,但都应进入最终决策。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -64,7 +51,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function BondYieldCalculatorContent(): ReactNode {
   const { locale } = useApp()

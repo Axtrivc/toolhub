@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * TimeCardCalculator 长文正文 —— 四语 dispatcher
+ * TimeCardCalculator 长文正文 —— 三语 dispatcher
  *
- * en 分支与既有工具页渲染口径一致。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支与既有工具页渲染口径一致。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -24,19 +24,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>打卡时刻与十进制小时</h2>
-    <p>考勤机记的是时分,工资系统乘的是十进制小时:7 小时 45 分进工资表必须是 7.75,而不是 745 或 7.45。换算就是分钟 ÷ 60——15 分钟是 0.25、30 是 0.50、45 是 0.75。本工具两个口径同时给出,照着抄不会错。</p>
-    <h2>跨夜班与休息扣除</h2>
-    <p>下班时刻早于上班时刻,说明班次跨过了午夜,工具自动加 24 小时:22:00 到 06:00 先算 8 小时,再扣休息。无薪午休要从总数里减掉,带薪休息则保留。如果公司按一刻钟取整(07:56 打卡记作 08:00),录入时先做同样的取整,合计才能对上账。</p>
-    <h2>40 小时这条线从哪来</h2>
-    <p>默认阈值沿用美国 FLSA:加班按"工作周超过 40 小时"累计,而不是按天。加州等少数州另有每日 8 小时加班,工会合同、科罗拉多州也有自己的门槛——阈值栏随便填。本工具管数小时;算钱的部分交给加班费计算器乘时薪。</p>
-    <h2>留一份自己的底</h2>
-    <p>纸卡会丢,考勤系统会被"更正"。每周五花五分钟自己核一次卡的人,总能在记忆还新鲜、工资期还没关账时发现漏打卡。每周给工时卡截个图或拍张照——真起争议时,同期记录永远比事后回忆有说服力。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -66,7 +53,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function TimeCardCalculatorContent(): ReactNode {
   const { locale } = useApp()

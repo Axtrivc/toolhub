@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * OvulationCalculator 长文正文 —— 四语 dispatcher
+ * OvulationCalculator 长文正文 —— 三语 dispatcher
  *
- * en 分支与站点既有渲染口径一致。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支与站点既有渲染口径一致。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -24,19 +24,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>为什么"往回数 14 天"有效</h2>
-    <p>黄体期——排卵到下次月经之间的那段——在大多数人身上稳定在 13-15 天,真正变化的是排卵前的卵泡期。所以本计算器从预计的下次月经往回推排卵日,而不是从上次月经往后数;这也是为什么 35 天周期和 24 天周期都可能在周期第 21 天排卵。</p>
-    <h2>易孕窗口是六天,不是一天</h2>
-    <p>精子在易孕宫颈黏液里最多能活 5 天,而卵子排出后只有约 24 小时寿命。排卵前 5 天中的任意一天加上排卵当天同房都可能受孕,其中排卵前 1-2 天的概率最高。单日"精准命中"在统计上反而不如覆盖整个窗口。</p>
-    <h2>周期长度的注意事项</h2>
-    <p>21-45 天的周期都算正常,但如果相邻两次周期相差超过 7-9 天,日历推算会迅速失灵——排卵可能偏移两周。产后、围绝经期、甲状腺问题和多囊卵巢都会放大这种不确定性。排卵试纸(LH 检测)和基础体温能确认日历只能估算的事。</p>
-    <h2>如何诚实地解读结果</h2>
-    <p>显示的日期是按你输入的周期长度推算的最可能排卵日,不是保证。基于超声定年的研究显示,约 80% 的实际排卵落在此法推算的窗口内——这正是为什么应该围绕窗口而不是单个日期来规划。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -66,7 +53,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function OvulationCalculatorContent(): ReactNode {
   const { locale } = useApp()

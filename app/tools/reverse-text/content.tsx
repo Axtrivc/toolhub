@@ -34,31 +34,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具?</h2>
-    <p>
-      本工具可反转任意文本 —— 最后一个字符变成第一个,第一个变成最后一个。文本按 Unicode 码位反转,多数表情符号和带重音的字母能保持完整;由多个码位组成的 emoji(ZWJ 序列、旗帜)和组合变音符则可能被拆开。
-    </p>
-    <div>
-      <h2>有趣与实用的用途</h2>
-      <ul>
-        <li><strong>谜题和文字游戏</strong> —— 解码反转的消息</li>
-        <li><strong>创作双向图(ambigram)</strong>或对称设计</li>
-        <li><strong>测试处理字符串的代码</strong></li>
-        <li><strong>隐私保护</strong> —— 反转邮箱地址可以迷惑基础的爬虫(john@example.com → moc.elpmaxe@nhoj)</li>
-        <li><strong>在从左到右的环境中处理希伯来语/阿拉伯语文本</strong></li>
-      </ul>
-    </div>
-    <div>
-      <h2>反转单词 vs. 反转字符</h2>
-      <p>
-        本工具反转的是<em>字符</em>。要反转单词顺序(「hello world」→「world hello」),你需要按空格分割、反转数组,再重新拼接。字符反转是更常见的需求,也是本工具所做的。
-      </p>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -123,7 +98,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function ReverseTextContent(): ReactNode {
   const { locale } = useApp()

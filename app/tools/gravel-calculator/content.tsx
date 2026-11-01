@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * GravelCalculator 长文正文 —— 四语 dispatcher
+ * GravelCalculator 长文正文 —— 三语 dispatcher
  *
- * en 分支与既有工具页渲染一致。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支与既有工具页渲染一致。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -24,19 +24,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>按吨卖,按码量</h2>
-    <p>采石场与园艺场按重量报价,而你量的是体积。桥梁是密度:碎石约 2,700 lb/yd³(1.35 吨),豌豆砾石约 2,600,干砂约 2,500。20×10 的区域铺 3 英寸是 50 ft³——1.85 码、碎石 2.5 吨。</p>
-    <h2>车道厚度分档</h2>
-    <p>私家车在合格垫层上铺 4-6 英寸压实碎石即可;卡车与房车要 6-12 英寸且底层用更大粒径。省厚度不省钱——买来的是车辙和两年后的返工。</p>
-    <h2>材料改变用途</h2>
-    <p>碎石压实后咬合锁定——适合车道与垫层。豌豆砾石滚动松散——适合园路与游乐观感,车轮转向处就是灾难。砂用来垫铺路石、改土,不承重。</p>
-    <h2>配送档位惩罚小单</h2>
-    <p>小型自卸车装 1-5 码,大型三桥车 10 码以上(碎石 13-14 吨)。运费常是包价,一整车胜过两半车。订单向上凑到车的档位,而不是向下凑计算值。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -66,7 +53,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function GravelCalculatorContent(): ReactNode {
   const { locale } = useApp()

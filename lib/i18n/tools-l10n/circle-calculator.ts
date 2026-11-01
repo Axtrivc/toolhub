@@ -5,31 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const circleCalculatorL10n: ToolL10n = {
-  zh: {
-    ui: {
-      'chartTitle': '图形预览',
-      'in.r': '半径',
-      'out.area': '面积',
-      'out.circumference': '周长',
-      'out.diameter': '直径',
-      note: '⭕ 面积 = π r²。周长 = 2 π r。直径 = 2 r。',
-    },
-    formula: {
-      formula: 'A = π·r²    C = 2π·r',
-      variables: 'A = 面积(平方单位)\nC = 周长(单位)\nr = 半径(单位)\nπ ≈ 3.14159',
-      explain: '圆的面积 A 与周长 C,其中 r 为半径。',
-      example: '第 1 步:r = 5 cm。\n第 2 步:A = π × 5² = 3.14159 × 25 ≈ 78.54 cm²。\n第 3 步:C = 2πr = 2 × 3.14159 × 5 ≈ 31.42 cm。\n结果:面积 ≈ 78.54 cm²,周长 ≈ 31.42 cm。',
-    },
-    useCases: [
-      '建筑:计算圆柱的混凝土用量',
-      '披萨:对比 12 寸和 16 寸大小',
-      '工程:管道流量、轮子转动、齿轮',
-      '农业:中心轴灌溉覆盖范围',
-    ],
-    faqs: [
-      { q: '为什么 16 寸披萨比 12 寸的大一倍多?', a: '面积与半径的平方成正比。16 寸披萨的面积是 π(8)² = 201 平方英寸;12 寸的是 π(6)² = 113 平方英寸。所以 16 寸大了 78 %,而不是 33 %。' },
-    ],
-  },
+
   es: {
     ui: {
       'chartTitle': 'Vista previa',

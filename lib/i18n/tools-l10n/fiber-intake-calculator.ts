@@ -5,50 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const FiberIntakeCalculatorL10n: ToolL10n = {
-  zh: {
-    useCases: ['查自己年龄段每日该吃多少克纤维', '看需要几杯扁豆/树莓/奇亚籽补齐缺口', '对照 14 g/1000 kcal 经验法则', '规划高纤维饮食的渐进加量'],
-    faqs: [
-      { q: '为什么 50 岁以后目标变低?', a: '这是美国医学研究院(IOM)的适宜摄入量(AI):它随平均能量摄入下调——51 岁以上男性 30 g、女性 21 g。如果依然活跃、吃得多,按 14 g/1000 kcal 法则可能高于 AI。' },
-      { q: '可溶性和不溶性纤维怎么算?', a: '两者都计入总量。燕麦、大麦、豆类偏可溶性(降胆固醇、稳血糖);麦麸、全麦和蔬菜偏不溶性(促排便)。混合的正常饮食不必刻意拆分。' },
-      { q: '吃不够能用补充剂吗?', a: '食物优先——顺便补进钾、镁和抗氧化物。要补的话,洋车前子壳是证据最足的形式;菊粉类过量容易胀气,从小剂量开始。' },
-      { q: '纤维会吃太多吗?', a: '每天 60-70 g 以上常见胀气、腹胀,并可能影响铁锌等矿物质吸收。每周加 5 g 地往上走、同时多喝水,肠道菌群适应后不适会明显减轻。' },
-    ],
-    ui: {
-      'in.age': '年龄',
-      'in.sex': '性别',
-      'opt.sex.male': '男',
-      'opt.sex.female': '女',
-      'out.target': '每日纤维目标',
-      'outSub.target': '适宜摄入量(AI)',
-      'out.basis': '适用档位',
-      'out.lentils': '熟扁豆',
-      'outSub.lentils': '每杯 15.5 g',
-      'out.raspberries': '树莓',
-      'outSub.raspberries': '每杯 8 g',
-      'out.chia': '奇亚籽',
-      'outSub.chia': '每汤匙 4.1 g',
-      'basis.child1': '幼儿 1-3 岁',
-      'basis.child2': '儿童 4-8 岁',
-      'basis.boy9': '男孩 9-13 岁',
-      'basis.boy14': '男性 14-18 岁',
-      'basis.m19': '男性 19-50 岁',
-      'basis.m51': '男性 51 岁以上',
-      'basis.girl9': '女孩 9-18 岁',
-      'basis.f19': '女性 19-50 岁',
-      'basis.f51': '女性 51 岁以上',
-      'errInvalid': '请输入 1-120 岁的年龄',
-      'chartTitle': '每份高纤食物的贡献',
-      'cmp.0': '每日目标',
-      'cmp.1': '熟扁豆 1 杯',
-      'cmp.2': '树莓 1 杯',
-      'cmp.3': '奇亚籽 1 汤匙',
-      'cmpseg.0': '纤维克数',
-      'preset.0': '30 多岁男性',
-      'preset.1': '60 多岁女性',
-      'preset.2': '少年男孩',
-      'note': '🥣 目标来自 IOM 适宜摄入量:19-50 岁男性 38 g、女性 25 g,51 岁后下调。经验法则:每 1000 kcal 配 14 g。加量要慢、水要喝够——一夜跳增 20 g 是腹胀的配方。',
-    },
-  },
+
   es: {
     useCases: ['consultar los gramos diarios según tu edad', 'ver cuántas tazas de lentejas o frambuesas cubren el hueco', 'contrastar con la regla de 14 g/1000 kcal', 'planificar el aumento gradual de fibra'],
     faqs: [

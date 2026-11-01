@@ -4,34 +4,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const BondYieldCalculatorL10n: ToolL10n = {
-  zh: {
-    useCases: ['用市价算出债券的当前收益率', '估算折价/溢价债券的到期收益率(YTM)', '对比票面利率与实际收益率的差异', '看清票息收入与到期面值损益的构成'],
-    faqs: [
-      { q: '当前收益率和 YTM 有什么区别?', a: '当前收益率 = 年票息 ÷ 价格,不管到期时发生什么。YTM 还把“回归面值”的价差年化进去:折价债券的 YTM 高于当前收益率,溢价债券相反。' },
-      { q: '这里的 YTM 准吗?', a: '用的是经典近似公式 [C + (F−P)/n] ÷ [(F+P)/2]。价格在面值 ±10% 以内时与精确解只差几个基点;深度折价或超长期限时误差会放大。' },
-      { q: '为什么债券价格和利率反向走?', a: '票息固定,而新发债券给的利率更高时,老债券必须更便宜才有竞争力——所以市价是输入项而非常数,利率涨、存量债券价格跌。' },
-      { q: '哪些因素没算进去?', a: '半年付息复利(美债惯例,会略微低估有效收益率)、应计利息与净价/全价口径、信用风险与赎回条款。' },
-    ],
-    ui: {
-      'in.face': '面值(平价)',
-      'in.coupon': '年票面利率',
-      'in.price': '市价(净价)',
-      'in.years': '距到期年数',
-      'out.currentYield': '当前收益率',
-      'out.ytm': 'YTM(近似)',
-      'out.annualCoupon': '每年票息收入',
-      'out.totalCoupons': '到期累计票息',
-      'out.capitalGain': '到期资本利得/损失',
-      'chartTitle': '现在支付 vs 到期收到',
-      'cmp.0': '今天支付',
-      'cmp.1': '到期前累计收到',
-      'preset.0': '折价债券',
-      'preset.1': '溢价债券',
-      'preset.2': '平价债券',
-      'errInvalid': '请输入正的面值与市价,年数 1–50',
-      'note': '📉 当前收益率 = 票息 ÷ 价格,忽略到期时的价差。YTM 用经典近似公式——把票息与“回归面值”的损益合起来年化,假设按年付息,常见价格区间内与精确 IRR 只差几个基点。',
-    },
-  },
+
   es: {
     useCases: ['calcular la rentabilidad corriente de un bono a su precio de mercado', 'estimar la TIR (YTM) de un bono con descuento o con prima', 'ver la diferencia entre cupón contractual y rentabilidad real', 'desglosar el cupón frente a la ganancia por convergencia al nominal'],
     faqs: [

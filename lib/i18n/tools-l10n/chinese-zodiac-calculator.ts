@@ -5,43 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const ChineseZodiacCalculatorL10n: ToolL10n = {
-  zh: {
-    useCases: ['按出生年份查生肖、五行与阴阳', '处理 1 月 / 2 月初生日的立春归属', '查生肖本命年(每逢 12 年一遇)', '快速核对 1924-2031 生肖对照'],
-    faqs: [
-      { q: '为什么按出生年份算有时会差一个生肖?', a: '生肖年从立春(2 月 3-5 日)开始,不是 1 月 1 日。生于 1 月或 2 月上旬的你,很可能属于上一年的生肖——选择"立春前"选项即可。' },
-      { q: '生肖、五行和阴阳是怎么循环的?', a: '十二生肖逐年轮换(鼠到猪),五行每两年一换(木、火、土、金、水),阴阳逐年交替——合起来是完整的 60 年一循环(如 1984 与 2044 都是阳木鼠)。' },
-      { q: '什么是"本命年"?', a: '你所属生肖每 12 年重现一次的年份(如属马者的 2026 年)——传统上认为是穿红色、行事需谨慎的一年,不是"中大奖"之年。' },
-      { q: '立春和春节,到底哪个算生肖年开始?', a: '两种传统并存:八字命理用立春,民俗日历用农历新年(公历 1 月 21 日-2 月 20 日之间浮动)。本工具采用八字命理使用的立春口径。' },
-    ],
-    ui: {
-      'in.year': '出生年份',
-      'in.edge': '生日相对立春(2 月 4 日前后)',
-      'opt.edge.after': '立春后',
-      'opt.edge.before': '立春前',
-      'opt.edge.unknown': '不确定',
-      'preset.0': '1990(马)',
-      'preset.1': '2000(龙)',
-      'preset.2': '2000 年 1 月生?',
-      'out.animal': '你的生肖',
-      'out.element': '五行与阴阳',
-      'out.yinYang': '阴阳',
-      'out.cyclePos': '甲子周期位置',
-      'outSub.cyclePos': '60 年一轮回',
-      'cyclePos': '第 {n} 年(共 60 年)',
-      'out.cycleYears': '本命年(近年)',
-      'out.edgeNote': '年份归属说明',
-      'animal.rat': '鼠', 'animal.ox': '牛', 'animal.tiger': '虎', 'animal.rabbit': '兔',
-      'animal.dragon': '龙', 'animal.snake': '蛇', 'animal.horse': '马', 'animal.goat': '羊',
-      'animal.monkey': '猴', 'animal.rooster': '鸡', 'animal.dog': '狗', 'animal.pig': '猪',
-      'element.wood': '木', 'element.fire': '火', 'element.earth': '土', 'element.metal': '金', 'element.water': '水',
-      'yang': '阳', 'yin': '阴',
-      'edgeAssumed': '按公历 {year} 年计算;若生于 1 月初至 2 月上旬,可能是上一年生肖',
-      'edgePrev': '出生在立春前,按 {year} 年(上一年)计算',
-      'edgeNext': '出生在立春后,按 {year} 年计算',
-      'errInvalidYear': '请输入 1924-2031 之间的年份',
-      'note': '🏮 生肖年以立春(2 月 3-5 日)为界,不是元旦——1 月和 2 月上旬出生者常差一个生肖。完整循环为 60 年:12 生肖 × 阴阳五行各两两配对。',
-    },
-  },
+
   es: {
     useCases: ['consultar animal, elemento y yin-yang por año de nacimiento', 'resolver cumpleaños de enero y principios de febrero con Lichun', 'averiguar los años de tu signo (cada 12 años)', 'revisar la tabla 1924-2031 de un vistazo'],
     faqs: [

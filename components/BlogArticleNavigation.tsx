@@ -8,7 +8,7 @@ import type { Locale } from '@/lib/i18n'
 
 const COPY: Record<Locale, { related: string; previous: string; next: string; navigation: string; readArticle: string }> = {
   en: { related: 'Related articles', previous: 'Previous article', next: 'Next article', navigation: 'Article navigation', readArticle: 'Read article' },
-  zh: { related: '相关文章', previous: '上一篇', next: '下一篇', navigation: '文章导航', readArticle: '阅读文章' },
+
   es: { related: 'Artículos relacionados', previous: 'Artículo anterior', next: 'Artículo siguiente', navigation: 'Navegación de artículos', readArticle: 'Leer artículo' },
   de: { related: 'Verwandte Artikel', previous: 'Vorheriger Artikel', next: 'Nächster Artikel', navigation: 'Artikelnavigation', readArticle: 'Artikel lesen' },
 }

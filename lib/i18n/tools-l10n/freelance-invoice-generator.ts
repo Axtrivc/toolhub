@@ -5,71 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const freelanceInvoiceGeneratorL10n: ToolL10n = {
-  zh: {
-    ui: {
-      'chartTitle': '发票构成',
-      'chartEmpty': '添加明细项后即可查看发票构成。',
-      'addItem': '+ 添加明细项',
-      'amount': '金额',
-      'billTo': '致',
-      'clientName': '客户名称',
-      'clientNamePlaceholder': '客户名称',
-      'currency': '货币',
-      'description': '描述',
-      'descriptionOfItem': '明细项描述 ',
-      'descriptionWord': '描述',
-      'downloadHtml': '下载 HTML',
-      'popupBlocked': '⚠️ 打印窗口被浏览器拦截。请改用「下载 HTML」,打开文件后打印。',
-      'dueDate': '到期日:',
-      'dueDateLabel': '到期日',
-      'invoiceLabel': '发票',
-      'invoiceNumber': '发票编号',
-      'invoiceTitle': '发票',
-      'issueDate': '开票日:',
-      'issueDateLabel': '开票日',
-      'itemPrefix': '明细项 ',
-      'lineItems': '明细项',
-      'noteP1': '🔒 一切都保留在你的浏览器里——不上传或保存到任何地方。这也意味着',
-      'noteP2': ',所以离开前请打印或下载 HTML。',
-      'noteStrong': '刷新页面会丢弃你的发票',
-      'notes': '备注',
-      'notesLabel': '备注(付款条款、致谢语…)',
-      'notesPlaceholder': '30 天内付款。感谢你的惠顾!',
-      'printSavePdf': '打印 / 另存为 PDF',
-      'qty': '数量',
-      'quantityWord': '数量',
-      'rate': '单价',
-      'removeItemPrefix': '移除明细项 ',
-      'subtotal': '小计',
-      'tax': '税费',
-      'taxOptional': '税费(可选)',
-      'total': '合计',
-      'unitRateWord': '单价',
-      'yourEmail': '你的邮箱',
-      'yourNameCompany': '你的姓名 / 公司',
-      'yourNamePlaceholder': '你的姓名',
-    },
-    useCases: [
-      '免注册发票生成器',
-      '在线自由职业发票制作工具',
-      '免费把发票打印为 PDF',
-      '简单发票模板生成器',
-    ],
-    faqs: [
-      {
-        q: '能把发票存成 PDF 吗?',
-        a: '能。发票是按打印布局排版的,用浏览器的「打印为 PDF」就能保存干净、无水印的 PDF。因为一切都在浏览器里运行,版面与预览完全一致。',
-      },
-      {
-        q: '它会保存我的客户或业务数据吗?',
-        a: '不会。所有信息——你的资料、客户资料、明细项和税费——只存在于当前会话的浏览器里;不会上传或持久化到服务器。刷新或关闭标签页,数据就没了。',
-      },
-      {
-        q: '能加税吗?',
-        a: '能。你设定一个税率应用到小计上,总机会自动更新,确保最终应付金额的计算始终一致。',
-      },
-    ],
-  },
+
   es: {
     ui: {
       'chartTitle': 'Desglose de la factura',

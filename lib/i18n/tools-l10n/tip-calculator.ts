@@ -5,35 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const tipCalculatorL10n: ToolL10n = {
-  zh: {
-    formula: {
-      formula: 'tip = bill × rate\ntotal = bill + tip',
-      explain: '小费是账单的一个自选百分比(美国堂食常见 15–20%)。把总额除以用餐人数得到每人分摊。',
-    },
-    useCases: ['在餐厅就餐后快速算出小费和平摊金额', '给外卖或打车算合适的小费比例', '多人聚餐时均摊账单', '旅行时参考各地小费惯例'],
-    faqs: [
-      { q: '小费该给多少?', a: '在美国,堂食服务一般给 15-20%,18% 是常见的默认比例。15% 表示服务尚可,20% 以上表示很满意。很多其他国家不期望小费或已含服务费——出国时请留意当地习惯。' },
-      { q: '该按税前还是税后金额给小费?', a: '传统上按税前小计给小费,但按含税总额给也越来越常见,差别通常很小。两种都可以;本工具按你输入的账单金额计算。' },
-      { q: '多人怎么分摊小费?', a: '先把小费加到总账单上,再除以人数即可均摊。如果各人消费差距大,可先算每人应付的餐费,再分别乘以相同的小费比例后求和。' },
-      { q: '在中国需要给小费吗?', a: '中国大陆餐厅一般不收小费,账单常已含服务费;港澳和东南亚部分场所会加收 10% 服务费。只有在美式消费场景(境外旅行、涉外酒店)才需要按 15-20% 计算。' },
-    ],
-    ui: {
-      'chartTitle': '账单 vs 小费',
-      'cmp.0': '账单总额',
-      'cmpseg.0': '账单',
-      'cmpseg.1': '小费',
-      'preset.0': '15% 尚可',
-      'preset.1': '18% 不错',
-      'preset.2': '20% 出色',
-      'preset.3': '25% 超预期',
-      errMinOnePerson: '请至少输入 1 人',
-      errNonNegativeBill: '账单金额不能为负',
-      errNonNegativeTip: '小费比例不能为负',
-      'in.bill': '账单金额', 'inSuffix.bill': '$', 'in.tipPct': '小费比例', 'inSuffix.tipPct': '%', 'in.people': '人数',
-      'out.tip': '小费金额', 'out.total': '总账单', 'out.perPerson': '人均', 'outSub.perPerson': '均摊',
-      note: '💡 常见小费比例:服务尚可 15%,服务不错 18%,服务很好 20% 以上。',
-    },
-  },
+
   es: {
     formula: {
       formula: 'tip = bill × rate\ntotal = bill + tip',

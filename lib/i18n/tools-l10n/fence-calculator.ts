@@ -5,47 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const FenceCalculatorL10n: ToolL10n = {
-  zh: {
-    useCases: ['清点隐私栅栏的桩、横杆与栏板数', '按桩洞尺寸算混凝土袋数', '对比 6/8/10 英尺桩距', '规划柱栏式边界围栏'],
-    faqs: [
-      { q: '栅栏桩间距多少合适?', a: '隐私板与栏板栅栏 6-8 英尺,柱栏式 8-10 英尺。桩距越大越省桩和混凝土,但跨中易下垂;绝不要超过板材的额定跨度。' },
-      { q: '每个桩洞要多少混凝土?', a: '直径 10 英寸、深 24 英寸的洞约 1.09 ft³——将近两袋 80 磅。工具会按你填的洞径洞深算出单洞用量再乘以桩数。' },
-      { q: '桩应该埋多深?', a: '低于当地冻土线,且不低于地上高度的三分之一(6 英尺栅栏要埋 2-3 英尺)。混凝土要在地面收出朝外的斜坡,别让水积在桩边。' },
-      { q: '栏板数为什么不用扣掉桩?', a: '栏板钉在横杆上而不是桩上,端头与转角的差异由现场切割吸收——数量就是总长度 ÷(栏板宽 + 缝隙),再向上取整。' },
-    ],
-    ui: {
-      'in.length': '栅栏长度',
-      'in.spacing': '桩距',
-      'in.style': '栅栏样式',
-      'in.picketW': '栏板宽度',
-      'in.gap': '栏板间缝隙',
-      'in.holeD': '桩洞直径',
-      'in.holeDepth': '桩洞深度',
-      'opt.spacing.4': '4 英尺',
-      'opt.spacing.6': '6 英尺',
-      'opt.spacing.8': '8 英尺',
-      'opt.spacing.10': '10 英尺',
-      'opt.style.privacy': '隐私式(栏板)',
-      'opt.style.rail': '柱栏式',
-      'out.posts': '桩数',
-      'out.sections': '跨数',
-      'out.pickets': '栏板数(隐私式)',
-      'out.rails': '横杆数',
-      'out.bags': '桩洞混凝土',
-      'outSub.bags': '80 磅袋',
-      'chartTitle': '不同桩距的桩数',
-      'cmp.0': '6 英尺桩距',
-      'cmp.1': '8 英尺桩距',
-      'cmp.2': '10 英尺桩距',
-      'cmpseg.0': '桩数',
-      'errDims': '请输入有效的栅栏长度与桩距',
-      'notApplicable': '柱栏式不适用',
-      'preset.0': '隐私栅栏 100 英尺, 8 英尺桩距',
-      'preset.1': '柱栏围栏 200 英尺',
-      'preset.2': '密桩 6 英尺桩距',
-      'note': '🪵 埋桩取地上高度的三分之一并低于当地冻土线——10″×24″ 的洞要将近两袋 80 磅。栏板会缩水:今天的密拼雪松,日后就是留缝栅栏。',
-    },
-  },
+
   es: {
     useCases: ['contar postes, travesaños y listones de una valla de privacidad', 'calcular sacos de hormigón para los hoyos', 'comparar separaciones de 6, 8 y 10 pies', 'planificar una cerca de postes y travesaños'],
     faqs: [

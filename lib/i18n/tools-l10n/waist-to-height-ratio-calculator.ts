@@ -5,40 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const WaistToHeightRatioCalculatorL10n: ToolL10n = {
-  zh: {
-    useCases: ['用"腰围不超过身高一半"规则快速自检', '识别 BMI 正常但内脏脂肪偏高的隐性肥胖', '获得把 WHtR 压回 0.5 的目标腰围', '跟踪减脂期腰围变化(比体重更早见效)'],
-    faqs: [
-      { q: '腰围量在哪里?', a: '量最下缘肋骨与髂嵴(胯骨上缘)之间的中点,皮尺水平贴身不勒紧,正常呼气末读数。隔着衣服、吸着气量是两个最常见的误差来源,能把比值压低 0.03-0.05。' },
-      { q: '为什么是 0.5 这个坎?', a: '多项系统综述(如 Ashwell 团队)支持:腰围达到身高一半即提示中心性肥胖与胰岛素抵抗风险上升。0.4-0.5 之间代谢指标普遍最好,0.5-0.6 风险渐增,超过 0.6 显著升高。' },
-      { q: 'WHtR 比 BMI 好在哪?', a: 'BMI 分不清肌肉和内脏脂肪——肌肉发达者常被误判超重,而"体重正常但腰围超标"的隐性肥胖会被 BMI 完全漏掉。WHtR 直接度量腹部囤积,且不需要按年龄性别换表。' },
-      { q: '小孩和老人也适用吗?', a: '从大约 5 岁起同一个 0.5 阈值就能当筛查工具,这是它相对 BMI 百分位曲线的便利之处;5 岁以下建议用年龄别百分位,必要时咨询儿科医生。' },
-    ],
-    ui: {
-      'in.waist': '腰围',
-      'in.height': '身高',
-      'out.whtr': '腰高比',
-      'outSub.whtr': '腰围 ÷ 身高',
-      'out.category': '健康风险分级',
-      'out.healthyWaist': 'WHtR 0.5 对应的腰围',
-      'outSub.healthyWaist': '身高的一半',
-      'out.toTrim': '回到健康区间还需',
-      'cat.slim': '偏瘦——关注整体营养',
-      'cat.healthy': '健康——保持',
-      'cat.increased': '风险升高——现在行动',
-      'cat.high': '高风险——建议咨询医生',
-      'already': '已在健康区间内',
-      'errInvalid': '腰围和身高必须大于零',
-      'chartTitle': '你的腰高比位置',
-      'zone.0': '偏瘦',
-      'zone.1': '健康',
-      'zone.2': '风险升高',
-      'zone.3': '高风险',
-      'preset.0': '健康 ≈ 0.45',
-      'preset.1': '风险渐增 ≈ 0.55',
-      'preset.2': '高风险 ≈ 0.65',
-      'note': '📏 量最下缘肋骨与髋骨上缘之间的中点,正常呼气后读数。"腰围不超过身高一半"这条 0.5 规则对心血管代谢风险的识别力优于单看 BMI,且无需按年龄性别调整。',
-    },
-  },
+
   es: {
     useCases: ['autochequeo con la regla «cintura menor que media talla»', 'detectar obesidad oculta con BMI normal', 'saber qué cintura te devuelve al 0,5', 'seguir el perímetro abdominal durante el cutting'],
     faqs: [

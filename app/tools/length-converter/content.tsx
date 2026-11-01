@@ -71,60 +71,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>公制与英制单位</h2>
-    <p>
-      世界上主要有两种长度计量系统。<strong>公制</strong>(毫米、厘米、米、公里)被几乎所有国家采用,基于 10 的幂次,换算简单。<strong>英制</strong>(英寸、英尺、码、英里)主要在美国使用,各单位之间的关系更不规则。
-    </p>
-
-    <h2>常用换算系数</h2>
-    <p>最常用的长度换算(精确值):</p>
-    <ul>
-      <li><strong>1 英寸</strong> = 2.54 厘米(精确)</li>
-      <li><strong>1 英尺</strong> = 0.3048 米(精确)</li>
-      <li><strong>1 码</strong> = 0.9144 米(精确)</li>
-      <li><strong>1 英里</strong> = 1.609344 公里(精确)</li>
-      <li><strong>1 米</strong> = 3.28084 英尺</li>
-      <li><strong>1 公里</strong> = 0.621371 英里</li>
-    </ul>
-
-    <h2>快速参考表</h2>
-    <p>值得记住的日常换算:</p>
-    <ul>
-      <li>5 km ≈ 3.1 英里(常见的「5K」比赛距离)</li>
-      <li>1.6 km ≈ 1 英里(心算时用 1.6)</li>
-      <li>30 cm ≈ 12 英寸(1 英尺)</li>
-      <li>1.8 米 ≈ 6 英尺(典型门高)</li>
-      <li>100 米 ≈ 328 英尺(足球场长度)</li>
-    </ul>
-
-    <h2>何时需要长度换算</h2>
-    <ul>
-      <li>
-        <strong>旅行。</strong>速度限制 km/h 与 mph、徒步距离、行李尺寸限制。
-      </li>
-      <li>
-        <strong>DIY 与建筑。</strong>公制建材搭配英制工具,或参照国际图纸。
-      </li>
-      <li>
-        <strong>科学与工程。</strong>几乎所有科研都用公制,但美国制造业仍用英制。
-      </li>
-      <li>
-        <strong>跑步与健身。</strong>比赛距离、跑步机速度、跑道长度。
-      </li>
-      <li>
-        <strong>购买家具或布料。</strong>标注尺寸与你的卷尺单位不同。
-      </li>
-    </ul>
-
-    <h2>美国为何仍用英制</h2>
-    <p>
-      美国在公制成为全球标准前就采用了英制,而切换的代价将极其高昂——每个路标、菜谱和制造规格都需要更改。英国采用混合制:距离用英里、燃料用升、啤酒用品脱。加拿大官方是公制,但受美国文化影响,许多日常测量仍用英制。
-    </p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -260,7 +206,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function LengthConverterContent(): ReactNode {
   const { locale } = useApp()

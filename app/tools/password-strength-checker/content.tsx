@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * Password Strength Checker 长文正文 —— 四语 dispatcher
+ * Password Strength Checker 长文正文 —— 三语 dispatcher
  *
- * en 分支等价于原 ToolContent 渲染输出。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支等价于原 ToolContent 渲染输出。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en (与改造前渲染输出一致) ────────────────────────────
@@ -51,39 +51,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具?</h2>
-    <p>
-      本工具实时分析你的密码强度,显示估算的熵值、强度评级,以及一份「如何让密码更强」的检查清单。所有运算都在你的浏览器中完成——你的密码绝不会被传输或存储。
-    </p>
-
-    <div>
-      <h2>强度是如何衡量的</h2>
-      <p>
-        强度取决于<strong>熵</strong>——也就是攻击者需要尝试多少种可能组合。密码越长、使用的字符类型越多,熵就越高。一个 12 位、同时包含大小写字母、数字和符号的密码大约有 78 比特的熵,实际上无法被破解。
-      </p>
-    </div>
-
-    <div>
-      <h2>强度等级</h2>
-      <ul>
-        <li><strong>极弱(&lt;40 比特):</strong>几秒即可破解,切勿使用。</li>
-        <li><strong>弱(40-59 比特):</strong>数小时到数天可破解。</li>
-        <li><strong>强(60-79 比特):</strong>需要数年才能破解,适合大多数账户。</li>
-        <li><strong>极强(80+ 比特):</strong>无法破解,用于邮箱、银行、密码管理器等关键账户。</li>
-      </ul>
-    </div>
-
-    <div>
-      <h2>为什么长度最重要</h2>
-      <p>
-        每多一个字符,可能的组合数就会再乘上一个字符集大小;而增加字符类型,平均每个字符只能多带来几个比特的熵。一个 16 位的全小写字母密码(75 比特的熵)比一个 8 位、包含全部四类字符的密码(52 比特的熵)更强。拿不准时,优先加长。
-      </p>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -168,7 +135,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function PasswordStrengthCheckerContent(): ReactNode {
   const { locale } = useApp()

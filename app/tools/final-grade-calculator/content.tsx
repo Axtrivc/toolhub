@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * Final Grade Calculator 长文正文 —— 四语 dispatcher
+ * Final Grade Calculator 长文正文 —— 三语 dispatcher
  *
- * en 分支等价于原 ToolContent 渲染输出。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支等价于原 ToolContent 渲染输出。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en (与改造前渲染输出一致) ────────────────────────────
@@ -28,23 +28,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这是什么工具?</h2>
-    <p>本计算器回答学生最经典的问题:「要想拿到 A,期末考试我需要考多少分?」输入你当前的成绩、目标成绩和期末考试的权重,即可看到所需的分数。</p>
-
-    <div>
-      <h2>计算原理</h2>
-      <p>使用加权平均公式求解期末考试分数:<code>target = current × (1 − w) + final × w</code>。整理后:<code>final = (target − current(1−w)) / w</code>。</p>
-    </div>
-
-    <div>
-      <h2>什么时候「不可能」</h2>
-      <p>如果所需的期末分数超过 100%,说明你的目标无法达成——即使期末满分也达不到。这种情况下工具会给出警告。</p>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -82,7 +65,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function FinalGradeCalculatorContent(): ReactNode {
   const { locale } = useApp()

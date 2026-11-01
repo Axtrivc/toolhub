@@ -5,26 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const markdownToHtmlL10n: ToolL10n = {
-  zh: {
-    ui: {
-      'clear': '清空',
-      'copy': '复制',
-      'couldNotConvert': '无法转换 Markdown',
-      'inputLabel': 'Markdown',
-      'note': '🔒 100% 在客户端——支持标题、列表、代码、表格、链接、加粗、斜体。',
-      'placeholder': '# 标题\n\n一些 **加粗** 文本。',
-      'preview': '预览',
-      'tooLong': '⚠️ 输入超过支持的上限(100,000 字符),请缩减后再转换。',
-    },
-    useCases: ['把 Markdown 转成干净的 HTML 并实时预览', '为博客或文档准备可发布的 HTML', '确认读者最终看到的渲染效果', '查看 GitHub 风格 Markdown(表格、任务列表)的 HTML 输出'],
-    faqs: [
-      { q: '支持哪些 Markdown 功能?', a: '标题(H1-H6)、粗体、斜体、行内代码、代码块、引用、有序和无序列表、链接、图片、水平线,以及 GFM 表格。遵循 CommonMark 基线,加上最常用的 GitHub Flavored Markdown 扩展(表格和任务列表)。' },
-      { q: '输出的 HTML 可以直接嵌入吗?', a: '生成的 HTML 会转义原始 HTML,不安全协议的链接会退化为纯文本,预览和复制的输出还会再经 DOMPurify 消毒。如果 Markdown 源含用户提交内容,插入自己的线上页面前,仍建议在你的渲染管线中用 DOMPurify 之类的清理器再处理一遍,以防 XSS。' },
-      { q: '为什么我的换行没显示?', a: '标准 Markdown 把单个换行当作空格,需要行尾两个空格或空行才能换行。如果你希望每个换行都渲染成 <br>,那是「硬换行」扩展——常见于聊天式 Markdown。本工具遵循标准的软换行行为。' },
-      { q: '转换是在本地进行还是上传到服务器?', a: '完全在浏览器本地完成,不上传任何内容,离线也能用,因此适合粘贴不能外发的内部文档。输入上限 10 万字符,超出会提示缩减后再转换。' },
-      { q: '表格里的竖线 | 怎么写?', a: '单元格内要显示竖线用 \\| 转义。列数由第二行的 --- 分隔符决定,源码里不需要空格对齐——对齐只是为了人读起来舒服。' },
-    ],
-  },
+
   es: {
     ui: {
       'clear': 'Limpiar',

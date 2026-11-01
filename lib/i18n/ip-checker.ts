@@ -1,5 +1,5 @@
 /**
- * ip-checker 工具 UI 文案 - 4 语字典
+ * ip-checker 工具 UI 文案 - 3 语字典
  *
  * 与 lib/i18n/pages.ts 同一模式:
  * - Record<Locale, IpCheckerDict>,en 为基准,缺失整包回退 en(组件内兜底)
@@ -170,81 +170,6 @@ const en: IpCheckerDict = {
     'Measures HTTP round-trip time from your browser to AWS regional endpoints via fetch + performance.now() (includes DNS/TLS handshake on first connect). For relative comparison only.',
 }
 
-const zh: IpCheckerDict = {
-  yourCurrentIp: '当前出口 IP',
-  copyIp: '复制 IP',
-  refresh: '刷新',
-  queryPlaceholder: '查询任意 IP 或域名,如 1.1.1.1 / 2606:4700::1111 / example.com',
-  analyze: '检测',
-  analyzing: '检测中…',
-  errorInvalidInput: '请输入合法的 IPv4 / IPv6 地址或域名(如 8.8.8.8 或 example.com)。',
-  errorSources: '所有数据源暂时不可用,请稍后重试(可能是免费 API 限流)。',
-  errorQuery: '查询失败:无法解析或定位该目标,请检查输入或稍后重试。',
-  loadingHint: '正在通过多源接口探测您的 IP 指纹… (Cloudflare → ipwho.is → DoH)',
-  cardIdentity: 'IP 身份',
-  locationUnknown: '未知',
-  tzUnknown: '时区未知',
-  badgeDatacenter: 'IDC 机房 IP',
-  badgeResidential: '原生住宅 ISP',
-  badgeUnverifiedHost: '机房(无 rDNS)',
-  badgeNativeIp: '原生 IP',
-  signalNaBadge: '仅本机 IP',
-  signalNaNote: '该信号仅在检测您自己的出口 IP 时有效。',
-  rowAsnOwner: 'ASN 归属',
-  rowIsp: 'ISP / 公司',
-  rowPostal: '邮编',
-  rowPtr: 'PTR(反向 DNS)',
-  rowSource: '数据源',
-  cardRisk: '风险 / 欺诈评分',
-  gaugeLabel: '欺诈评分 / 100',
-  riskLow: '低风险 · 干净',
-  riskMedium: '中风险 · 机房/VPN',
-  riskHigh: '高风险 · 代理/黑名单',
-  summaryDatacenter: '机房出口节点',
-  summaryResidential: '真实住宅信号',
-  summaryTzMismatch: ' + 时区不一致',
-  cardGeo: '地理定位',
-  mapUnavailable: '坐标不可用,无法渲染地图。',
-  cardProxyTitle: '代理 / VPN 检测',
-  proxyDetected: '检测到机房特征',
-  proxyClean: '未检测到公开代理',
-  proxyNote: '基于 ASN 归属关键词的启发式判定',
-  cardTzTitle: '时区一致性',
-  tzMismatchBadge: '时区不一致(代理信号)',
-  tzMatchBadge: '时区一致',
-  tzDevice: '设备',
-  tzIp: 'IP',
-  cardProtoTitle: 'IP 协议',
-  protoV6: '双栈 IPv6',
-  protoV4: 'IPv4 出口',
-  cardWebrtcTitle: 'WebRTC / 请求头泄漏',
-  webrtcTesting: '检测中…',
-  webrtcNoLeak: '无泄漏(浏览器已防护)',
-  webrtcLeak: '检测到 WebRTC 泄漏',
-  webrtcConsistent: 'WebRTC 与出口一致',
-  ratingsTitle: '跨境场景适用性评级',
-  useCaseLabels: {
-    tiktok: 'TikTok / 短视频出海',
-    ecom: '跨境电商(Amazon/eBay/Shopify)',
-    social: '社媒运营(X/Facebook/Instagram)',
-    ai: 'AI 服务(ChatGPT/Claude/Gemini)',
-  },
-  ratingRecommended: '推荐',
-  ratingCaution: '谨慎使用',
-  ratingNotRecommended: '不推荐',
-  ratingsNote: '评级基于 ASN 类型(住宅/机房)、时区一致性与目标国家服务可用性启发式推算,仅供参考。',
-  latencyTitle: '全球边缘延迟探测',
-  runPingTest: '开始测速',
-  thRegion: '区域',
-  thEndpoint: '端点',
-  thLatency: '延迟',
-  thStatus: '状态',
-  pingMeasuring: '测量中…',
-  pingTimeout: '超时 / 被阻断',
-  pingIdle: '待测',
-  latencyNote:
-    '通过 fetch + performance.now() 测量浏览器到各 AWS 区域端点的 HTTP 往返时间(含 DNS/TLS 首连开销),仅用于相对比较。',
-}
 
 const es: IpCheckerDict = {
   yourCurrentIp: 'Tu IP actual',
@@ -400,4 +325,4 @@ const de: IpCheckerDict = {
     'Misst die HTTP-Roundtrip-Zeit von deinem Browser zu regionalen AWS-Endpunkten via fetch + performance.now() (inkl. DNS/TLS beim ersten Connect). Nur für den relativen Vergleich.',
 }
 
-export const ipCheckerDicts: Record<Locale, IpCheckerDict> = { en, zh, es, de }
+export const ipCheckerDicts: Record<Locale, IpCheckerDict> = { en, es, de }

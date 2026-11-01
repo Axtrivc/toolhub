@@ -5,23 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const colorConverterL10n: ToolL10n = {
-  zh: {
-    ui: {
-      'colorPickerAria': '颜色选择器',
-      'colorValueLabel': '颜色值(hex、rgb 或 hsl)',
-      'emptyState': '输入有效的 hex (#3b82f6)、rgb(59,130,246) 或 hsl(217,91%,60%)',
-      'note': '🎨 用颜色选择器或输入任意格式——即时转换为三种格式。常用于网页设计、CSS 和品牌规范。',
-    },
-    useCases: [
-      '把 HEX 颜色代码转成 RGB',
-      '将 RGB 值反向转成 HEX',
-      '在线把 HSL 转成 RGB',
-      '用取色器直观挑选并转换颜色',
-    ],
-    faqs: [
-      { q: '那透明度(Alpha)怎么办？', a: 'HEX 用 8 位数字(#RRGGBBAA),RGB 变成 rgba(r,g,b,a),HSL 变成 hsla(h,s%,l%,a)。Alpha 值范围为 0–1,其中 0 为完全透明。' },
-    ],
-  },
+
   es: {
     ui: {
       'colorPickerAria': 'Selector de color',

@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * HttpStatusCodeLookup 长文正文 —— 四语 dispatcher
+ * HttpStatusCodeLookup 长文正文 —— 三语 dispatcher
  *
- * en 分支与改造前渲染输出一致。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支与改造前渲染输出一致。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -24,19 +24,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>五大类是一棵决策树</h2>
-    <p>1xx 是"稍等,还没完"。2xx 是"完成且成功"。3xx 是"你要的东西在别处"。4xx 是"你(客户端)得改点什么"。5xx 是"服务器坏了,原样重试基本没用"。最后这条分界最省调试时间:4xx 查你的请求,5xx 查服务器日志——别反过来。</p>
-    <h2>最常混淆的几对</h2>
-    <p>401 是认证("你是谁?"),403 是授权("认识你——不行")。301/302 是历史遗留的重定向,浏览器可能把 POST 改成 GET;307/308 保证方法与请求体原样到达。502 是上游回了垃圾,504 是上游压根没回——责任不同,修法不同。至于 402,从 1997 年起就"保留待用",后来的用途是 SaaS 计费 API。</p>
-    <h2>有 SEO 后果的状态码</h2>
-    <p>搜索引擎把状态码当指令读:404 是"不在这",410 是"故意下线,别再来了"——比 404 更快出索引。503 配 Retry-After 表示维护而非死亡,临时停机的站点能保住收录。重定向链也有讲究:每跳一次 301 都损耗一点速度与清晰度,把 A→B→C 折叠成 A→C。</p>
-    <h2>这张表里没有的东西</h2>
-    <p>IANA 注册的全部 62 个码都在这里;厂商扩展是刻意排除的。Cloudflare 的 52x 家族、nginx 的 499(客户端主动断开)、各家 API 自造的 599,行为全凭厂商定义,同一数字在不同栈里含义可能不同。撞见它们时,权威是厂商自己的文档,不是 HTTP 标准。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -66,7 +53,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function HttpStatusCodeLookupContent(): ReactNode {
   const { locale } = useApp()

@@ -48,37 +48,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>这个工具是什么？</h2>
-    <p>
-      <strong>TDEE</strong>（每日总能量消耗）是你一天中消耗的卡路里数，它把你的静息代谢（BMR）与你做的所有事情结合起来——走路、锻炼、消化食物。它是管理体重最有用的一个数字：吃得比它少可减脂，与它持平可维持，吃得比它多可增重。本计算器使用 Mifflin-St Jeor BMR 公式，这是无需实验室设备所能得到的最准确估算。
-    </p>
-    <div>
-      <h2>TDEE 是如何计算的</h2>
-      <p>
-        计算器首先使用 Mifflin-St Jeor 求出你的 <strong>BMR</strong>（基础代谢率）——即你的身体在静息状态下仅仅为了维持生命所消耗的卡路里：<code>10×weight(kg) + 6.25×height(cm) − 5×age + s</code>，其中 <code>s</code> 对男性为 +5，对女性为 −161。然后将 BMR 乘以一个从 1.2（久坐）到 1.9（每日两次训练或体力工作）的<strong>活动因子</strong>，得到你的 TDEE。
-      </p>
-    </div>
-    <div>
-      <h2>选择卡路里目标</h2>
-      <ul>
-        <li><strong>减脂（−10 到 −20%）：</strong>适度的热量缺口，在保留肌肉的同时减掉脂肪。</li>
-        <li><strong>维持：</strong>你的 TDEE——体重大致保持稳定。</li>
-        <li><strong>增肌（+10 到 +20%）：</strong>较小的热量盈余，以最少的脂肪增长来构建肌肉。</li>
-      </ul>
-    </div>
-    <div>
-      <h2>宏量营养素也很重要</h2>
-      <p>
-        卡路里决定你的体重是升还是降；<strong>宏量营养素</strong>（蛋白质、碳水、脂肪）决定这些体重由什么构成。保持高蛋白摄入（每公斤体重 1.6–2.2 g）以保留或增长肌肉。此处显示的分配（30/40/30）是一个均衡的默认值——参见我们的{' '}
-        <a href="/tools/macro-calculator/" className="text-brand-600 underline">「宏量营养素计算器」</a>了解针对特定目标的比例，或{' '}
-        <a href="/tools/calorie-calculator/" className="text-brand-600 underline">「卡路里计算器」</a>来规划每日膳食。
-      </p>
-    </div>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -144,7 +113,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function TdeeCalculatorContent(): ReactNode {
   const { locale } = useApp()

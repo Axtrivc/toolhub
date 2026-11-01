@@ -23,8 +23,8 @@ const EN_CRUMB_TITLE = 'Canine RER & MER Guide'
 
 export const canineNutritionArticle: LocalizedArticle = {
   en: {
-    articleTitle: { en: EN_TITLE, zh: '写给养狗人的兽医数学:读懂 RER、MER 与准确的每日热量摄入', es: 'Matemática veterinaria para dueños de perros: descifrar RER, MER y la ingesta calórica diaria exacta', de: 'Veterinär-Mathematik für Hundebesitzer: RER, MER und die exakte tägliche Kalorienzufuhr entschlüsselt' },
-    breadcrumbTitle: { en: EN_CRUMB_TITLE, zh: EN_CRUMB_TITLE, es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
+    articleTitle: { en: EN_TITLE,  es: 'Matemática veterinaria para dueños de perros: descifrar RER, MER y la ingesta calórica diaria exacta', de: 'Veterinär-Mathematik für Hundebesitzer: RER, MER und die exakte tägliche Kalorienzufuhr entschlüsselt' },
+    breadcrumbTitle: { en: EN_CRUMB_TITLE,  es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
     readMinutes: 9,
     lead: 'Feeding guidelines on kibble bags are written for intact, active, young dogs — and most pets are none of the three. The veterinary RER/MER framework gives you the actual number, and the 10% treat rule keeps you honest about where calories hide.',
     sections: [
@@ -93,80 +93,10 @@ export const canineNutritionArticle: LocalizedArticle = {
       },
     ],
   },
-  zh: {
-    articleTitle: { en: EN_TITLE, zh: '写给养狗人的兽医数学:读懂 RER、MER 与准确的每日热量摄入', es: 'Matemática veterinaria para dueños de perros: descifrar RER, MER y la ingesta calórica diaria exacta', de: 'Veterinär-Mathematik für Hundebesitzer: RER, MER und die exakte tägliche Kalorienzufuhr entschlüsselt' },
-    breadcrumbTitle: { en: EN_CRUMB_TITLE, zh: EN_CRUMB_TITLE, es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
-    readMinutes: 9,
-    lead: '狗粮袋上的喂食建议是按"未绝育、高活动、年轻犬"写的——而多数宠物犬三者皆非。兽医界的 RER/MER 框架给出真实数字,10% 零食规则则让你诚实面对热量藏在哪里。',
-    sections: [
-      {
-        heading: '1. RER:每一碗饭的基线',
-        blocks: [
-          '**静息能量需求(RER)**是狗在舒适室温下完全静止时消耗的热量——犬类版 BMR。公式是异速生长的,不是线性的:代谢随体重的 3/4 次幂缩放,所以 40 kg 的狗需要的远少于 20 kg 狗的两倍。',
-          { code: CODE_RER },
-          '这种非线性正是袋子上"每公斤喂多少"表格误导人的原因:它们假设一条直线穿过一条曲线。RER 是正确的起点——但它是*静息*数字,没有一只活狗是静息数字。',
-        ],
-      },
-      {
-        heading: '2. MER:决定一切的生命阶段乘数',
-        blocks: [
-          '**维持能量需求(MER)** = RER × 生命阶段系数——对应"你家狗真实是哪种狗"。差距极大:绝育成年犬 1.6×;未绝育 1.8×;4 月龄以下幼犬 **3.0×**;兽医监督减重期的狗只有 1.0×。',
-          '两只体重相同的狗,合理热量需求可以相差 2–3 倍。"该喂多少?"在回答"*哪只*狗——年龄、绝育状态、活动量、体况"之前,没有答案。',
-          {
-            card: {
-              title: '狗粮计算器',
-              href: '/tools/dog-food-calculator/',
-              desc: '用正确的生命阶段系数算 RER → MER,并按你家粮包装上的每杯或每 100 g 热量标注折算成每天该喂多少克。',
-            },
-          },
-        ],
-      },
-      {
-        heading: '3. 从热量到克数:像兽医一样读标签',
-        blocks: [
-          '热量目标在换算成你家柜子里的粮之前毫无用处。宠物粮标注能量为 **kcal/kg(或 kcal/杯)**——典型干粮 3,400–4,200 kcal/kg。一只 20 kg 绝育成年犬每天约需 1,060 kcal,折合 3,800 kcal/kg 的干粮约 280 g——而且是*全天总量*,包括当天吃的其他一切。',
-          '用厨房秤称粮,不要用勺:用量杯喂食的主人在研究里份量偏差 20–80%。一把 $10 的秤是犬类体重管理里投资回报率最高的单品。',
-        ],
-      },
-      {
-        heading: '4. 10% 零食规则与体况评分',
-        blocks: [
-          '零食、磨牙棒、餐桌残渣、训练奖励合计必须低于每日热量的 **10%**——且计入 MER *之内*,不是之外。一根洁齿骨 60–90 kcal;5 粒 8 kcal 的训练零食又是 40。在 1,060 kcal 的预算里,晚饭前零食额度已经用完。',
-          '然后对着狗验证计划,别对着表格验证:**体况评分(BCS,1–9 分)**才是现场仪器。薄脂肪层下可摸到肋骨、上方看有腰线、侧面看腹部收紧——这是 4–5 分。如果不用力压就摸不到肋骨,说明你选的 MER 系数太慷慨:摄入下调 10%,三周后重新评分。',
-        ],
-      },
-      {
-        heading: '5. 年龄是喂食变量:破除"乘 7"神话',
-        blocks: [
-          '"狗龄乘 7"失效的原因:狗早年成熟快、晚年放缓——1 岁狗约相当于人类 15 岁;第 2 年再加约 9;之后每年加 4–5。对喂食重要的是这种映射暴露的*生命阶段*:幼犬系数(3.0×)约 12 月龄结束(巨型犬 18–24 月),老年系数在 7 岁左右(巨型犬早至 5–6 岁)随活动量和瘦体重下降而启用。',
-          '从 2 岁到 12 岁喂同一杯,正是中年犬悄悄发胖的原因:系数动了,碗没动。',
-          {
-            card: {
-              title: '狗龄计算器',
-              href: '/tools/dog-age-calculator/',
-              desc: '按体型修正的人类年龄映射,带生命阶段标记——知道幼犬系数何时结束、老年调整何时开始。',
-            },
-          },
-        ],
-      },
-      {
-        heading: '每月称重协议',
-        blocks: [
-          { list: [
-            '用正确的生命阶段系数算 **RER → MER**,记录目标值。',
-            '按粮袋上的 kcal/kg 折算成**克数**,每餐用秤称。',
-            '零食+磨牙棒封顶 **10%,计入预算之内**,不是之上。',
-            '每月称重;任何持续趋势按 ±10% 调整——评估一次改动要等 3 周。',
-            '每次生命阶段转换(绝育、12 月龄、约 7 岁)都重跑系数。',
-          ] },
-          '摄入稳定却出现不明体重变化,或 BCS 漂出 4–5/9 区间,就该去看兽医——数学指导喂食,不做诊断。',
-        ],
-      },
-    ],
-  },
+
   es: {
-    articleTitle: { en: EN_TITLE, zh: '写给养狗人的兽医数学:读懂 RER、MER 与准确的每日热量摄入', es: 'Matemática veterinaria para dueños de perros: descifrar RER, MER y la ingesta calórica diaria exacta', de: 'Veterinär-Mathematik für Hundebesitzer: RER, MER und die exakte tägliche Kalorienzufuhr entschlüsselt' },
-    breadcrumbTitle: { en: EN_CRUMB_TITLE, zh: EN_CRUMB_TITLE, es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
+    articleTitle: { en: EN_TITLE,  es: 'Matemática veterinaria para dueños de perros: descifrar RER, MER y la ingesta calórica diaria exacta', de: 'Veterinär-Mathematik für Hundebesitzer: RER, MER und die exakte tägliche Kalorienzufuhr entschlüsselt' },
+    breadcrumbTitle: { en: EN_CRUMB_TITLE,  es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
     readMinutes: 9,
     lead: 'Las guías de los sacos de pienso están escritas para perros jóvenes, activos y sin esterilizar — y la mayoría de las mascotas no es ninguna de las tres. El marco veterinario RER/MER te da el número real, y la regla del 10 % de premios te obliga a ser honesto sobre dónde se esconden las calorías.',
     sections: [
@@ -236,8 +166,8 @@ export const canineNutritionArticle: LocalizedArticle = {
     ],
   },
   de: {
-    articleTitle: { en: EN_TITLE, zh: '写给养狗人的兽医数学:读懂 RER、MER 与准确的每日热量摄入', es: 'Matemática veterinaria para dueños de perros: descifrar RER, MER y la ingesta calórica diaria exacta', de: 'Veterinär-Mathematik für Hundebesitzer: RER, MER und die exakte tägliche Kalorienzufuhr entschlüsselt' },
-    breadcrumbTitle: { en: EN_CRUMB_TITLE, zh: EN_CRUMB_TITLE, es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
+    articleTitle: { en: EN_TITLE,  es: 'Matemática veterinaria para dueños de perros: descifrar RER, MER y la ingesta calórica diaria exacta', de: 'Veterinär-Mathematik für Hundebesitzer: RER, MER und die exakte tägliche Kalorienzufuhr entschlüsselt' },
+    breadcrumbTitle: { en: EN_CRUMB_TITLE,  es: EN_CRUMB_TITLE, de: EN_CRUMB_TITLE },
     readMinutes: 9,
     lead: 'Die Fütterungsempfehlungen auf Futtersäcken sind für intakte, aktive, junge Hunde geschrieben — und die meisten Haushunde sind nichts davon. Das veterinäre RER/MER-Framework liefert die echte Zahl, und die 10-%-Leckerli-Regel zwingt zur Ehrlichkeit, wo Kalorien sich verstecken.',
     sections: [

@@ -5,9 +5,9 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * Robots.txt Generator 长文正文 —— 四语 dispatcher
+ * Robots.txt Generator 长文正文 —— 三语 dispatcher
  *
- * en 分支与改造前渲染输出一致(CCBot 表述已按预设实际封禁清单修正)。zh/es/de 仅客户端 hydration 后切换。
+ * en 分支与改造前渲染输出一致(CCBot 表述已按预设实际封禁清单修正)。es/de 仅客户端 hydration 后切换。
  */
 
 // ──────────────────────────── en (与改造前渲染输出一致) ────────────────────────────
@@ -24,19 +24,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>文件放在哪里</h2>
-    <p>robots.txt 必须放在域名根目录——<code>https://example.com/robots.txt</code>。搜索引擎不会去别处找它,而且子域名需要各自独立的文件。</p>
-    <h2>预设说明</h2>
-    <p><strong>标准站点</strong>允许抓取除常见后台路径之外的一切。<strong>禁止全部</strong>适合预发布/测试站点。<strong>屏蔽 AI 爬虫</strong>会加入 GPTBot、ClaudeBot、PerplexityBot 等运营方目前遵守的封禁指令。</p>
-    <h2>Crawl-delay 的注意事项</h2>
-    <p>Google 明确忽略 Crawl-delay;Bing 和 Yandex 则遵守。如果 Googlebot 把你服务器打得吃紧,请改用 Search Console 里的抓取频率设置。</p>
-    <h2>robots.txt 只是约定</h2>
-    <p>守规矩的爬虫会遵守它,但它不是鉴权。真正私密的内容必须放在访问控制之后——Disallow 规则只是客气地提个请求。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -66,7 +53,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function RobotsTxtGeneratorContent(): ReactNode {
   const { locale } = useApp()

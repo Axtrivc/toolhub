@@ -5,22 +5,7 @@
 import type { ToolL10n } from '../tool-l10n'
 
 export const CreditCardValidatorL10n: ToolL10n = {
-  zh: {
-    useCases: ['检查表单里的卡号是否输对', '识别卡组织以选择对应的输入分组', '用测试卡号验证支付流程', '教学演示 Luhn 校验算法'],
-    faqs: [
-      { q: '它到底校验了什么?', a: '三件事:数字形状(12-19 位)、发卡行前缀对应的品牌与长度(Visa/Mastercard/Amex/Discover/JCB/Diners/UnionPay)、以及 Luhn 校验和。它不说账户是否存在、有没有余额——只说这串数字"形状合法"。' },
-      { q: '粘贴真实卡号安全吗?', a: '全部计算都在你的浏览器里完成,没有任何网络请求。但好习惯是用公开的测试号(如 Visa 的 4111 1111 1111 1111)——它通过 Luhn 却不对应任何真实账户。' },
-      { q: '为什么"有效"的卡还是被拒?', a: 'Luhn 通过只说明数字格式正确。真实拒付原因在别处:账户注销、余额不足、风控规则、过期日或 CVC 错误——这些只有发卡行知道。' },
-      { q: 'Luhn 校验是怎么算的?', a: '从右往左,偶数位乘 2 超过 9 就减 9,全部求和后应能被 10 整除。它是 1954 年 IBM 专利里的防错设计,抓得住几乎所有单字打错与相邻数字互换。' },
-    ],
-    ui: {
-      'inputLabel': '卡号',
-      'outputLabel': '校验结果',
-      'defaultInput': '4111 1111 1111 1111',
-      'inputTooLarge': '⚠️ 输入过大——支持的上限是 2,000 字符。请删减输入后再校验。',
-      'note': '🔒 仅校验格式:Luhn 校验和 + 品牌前缀/长度规则,全部在你的浏览器内完成。"有效"只代表格式合规——不代表账户存在,也不会向任何地方发送数据。',
-    },
-  },
+
   es: {
     useCases: ['comprobar que un número de tarjeta está bien tecleado', 'identificar la marca para agrupar bien los campos del formulario', 'probar flujos de pago con números de test', 'explicar el algoritmo de Luhn en clase'],
     faqs: [

@@ -5,7 +5,7 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * DelayTimeCalculator 长文正文 —— 四语 dispatcher
+ * DelayTimeCalculator 长文正文 —— 三语 dispatcher
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -22,19 +22,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>六万这个魔法数字</h2>
-    <p>一分钟有 60,000 毫秒,所以 60,000 ÷ BPM 就是一个四分音符的毫秒数——120 BPM 恰好 500 ms。表里其他数值都是四分音符乘固定系数:八分减半(250 ms)、十六分取四分之一(125 ms)、二分翻倍(1,000 ms)。</p>
-    <h2>附点更长,三连更短</h2>
-    <p>附点把音符延长原值的一半——120 BPM 下附点八分是 1.5 × 250 = 375 ms。三连音则是三个音挤两个音的时值,三连八分约 2/3 × 250 ≈ 333 ms。1.5 和 2/3 这两个系数,就是附点列与三连列背后的全部秘密。</p>
-    <h2>著名的附点八分延迟</h2>
-    <p>延迟设成附点八分,回声落在每拍四分之三处,与你晚一个十六分音的演奏交错——《Where the Streets Have No Name》《Run Like Hell》那种推着律动走的微光。它成立的原因是 3/4 拍间距永远撞不上正拍:回声与击弦永远在换位置。</p>
-    <h2>LFO 速率让调制锁进节拍</h2>
-    <p>合唱、镶边、颤音踏板以 Hz 为单位循环,1,000 ÷ ms 把任意音符时值换算成该速率——120 BPM 的四分音符就是 2 Hz。按音符设速率让扫频与音乐同步,而不是在律动外漂移;对慢镶边、脉冲颤音这类显眼的调制效果尤其要紧。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -64,7 +51,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function DelayTimeCalculatorContent(): ReactNode {
   const { locale } = useApp()

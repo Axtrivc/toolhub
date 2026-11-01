@@ -5,7 +5,7 @@ import type { Locale } from '@/lib/i18n'
 import { useApp } from '@/components/providers/AppProviders'
 
 /**
- * BusinessDaysCalculator 长文正文 —— 四语 dispatcher
+ * BusinessDaysCalculator 长文正文 —— 三语 dispatcher
  */
 
 // ──────────────────────────── en ────────────────────────────
@@ -22,19 +22,6 @@ const en: ReactNode = (
   </section>
 )
 
-// ──────────────────────────── 中文 ────────────────────────────
-const zh: ReactNode = (
-  <section className="prose-content mt-10 max-w-3xl">
-    <h2>为什么期限都用"工作日"报价</h2>
-    <p>合同、审批窗口、物流 SLA 都用工作日计,正是因为它天然剔除周末:"周一起 10 个工作日"落在两周后的周五,绝不会是周六。掰手指跨长周末数数最容易出错——窗口中间一个假日,日历跨度就悄悄多出两天周末。</p>
-    <h2>计数惯例</h2>
-    <p>通行规则是:起始日当天不计;逐日推进,凡是不在假日清单里的周一至周五各计一次。所以没有假日时,10 个工作日恰好跨 14 个日历日;若中间有一个工作日假日,就变成 16 天。减法完全对称——"截止日前 5 个工作日必须提交"这类条款就往回走。</p>
-    <h2>假日:计算器最容易错的地方</h2>
-    <p>不存在放之四海的假日表。美国联邦假日会挪动(7 月 4 日逢周末顺延到 3 日或 5 日),各州自添,公司多半还有两天浮动假。把你场景里真实生效的日期粘进来——落在周末的假日本来就会被周末规则跳过,不会重复扣除。</p>
-    <h2>工作日"往后推"与"两日期间数"是两件事</h2>
-    <p>本工具回答"从这天起加 N 天,落到哪天"——期限的推算。镜像问题"两个日期之间有几个工作日"是另一种计算,常用于计费周期与工龄;那个请用日期差计算器。</p>
-  </section>
-)
 
 // ──────────────────────────── Español ────────────────────────────
 const es: ReactNode = (
@@ -64,7 +51,7 @@ const de: ReactNode = (
   </section>
 )
 
-const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, zh, es, de }
+const CONTENT_BY_LOCALE: Record<Locale, ReactNode> = { en, es, de }
 
 export function BusinessDaysCalculatorContent(): ReactNode {
   const { locale } = useApp()
