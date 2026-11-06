@@ -25,9 +25,13 @@ const PUBLISH_DATE = '2026-09-05'
 const TITLE = 'The 2026 FIRE Playbook: Safe Withdrawal Rates, Coast FIRE, and Tax-Advantaged Stacking'
 const DESC = 'FIRE is a solvency equation, not a vibe: the Trinity Study’s real 4% rule, the Coast FIRE checkpoint you hit shockingly early, the account-stacking order that beats taxes, and guardrails for sequence risk.'
 
+/** Short SERP title/description (≤50 / ≤160 chars); TITLE stays the on-page H1 and article headline. */
+const SEO_TITLE = 'FIRE Playbook 2026: 4% Rule, Coast FIRE, Taxes'
+const SEO_DESC = 'The real 4% rule from the Trinity Study, the Coast FIRE checkpoint, the tax-smart account withdrawal order, and guardrails for sequence-of-returns risk.'
+
 export const metadata: Metadata = {
-  title: TITLE,
-  description: DESC,
+  title: SEO_TITLE,
+  description: SEO_DESC,
   keywords: [
     'fire calculator',
     '4 percent rule',
@@ -41,8 +45,8 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'article',
     url: `${SITE_URL}${SLUG}`,
-    title: TITLE,
-    description: DESC,
+    title: SEO_TITLE,
+    description: SEO_DESC,
     siteName: SITE_NAME,
     publishedTime: PUBLISH_DATE,
     modifiedTime: '2026-10-29',
@@ -51,8 +55,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: TITLE,
-    description: DESC,
+    title: SEO_TITLE,
+    description: SEO_DESC,
     images: ['/og.png'],
   },
 }
@@ -61,7 +65,7 @@ const articleJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'BlogPosting',
   headline: TITLE,
-  description: DESC,
+  description: SEO_DESC,
   datePublished: PUBLISH_DATE,
   dateModified: '2026-10-29',
   author: { '@type': 'Organization', name: SITE_NAME, url: SITE_URL },

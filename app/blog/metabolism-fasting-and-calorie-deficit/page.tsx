@@ -25,9 +25,13 @@ const PUBLISH_DATE = '2026-09-05'
 const TITLE = 'The Science of Human Metabolism: Calculating BMR, TDEE, Caloric Deficits, and 16:8 Fasting'
 const DESC = 'The clinician’s equation set — Mifflin-St Jeor BMR, honest TDEE activity tiers, the 7,700-kcal-per-kg deficit ledger, where 16:8 fasting actually helps, and how to fight adaptive thermogenesis.'
 
+/** Short SERP title/description (≤50 / ≤160 chars); TITLE stays the on-page H1 and article headline. */
+const SEO_TITLE = 'BMR, TDEE & Calorie Deficit Explained'
+const SEO_DESC = 'Mifflin-St Jeor BMR, realistic TDEE activity levels, the 7,700 kcal per kg rule, where 16:8 fasting helps, and how to handle adaptive thermogenesis.'
+
 export const metadata: Metadata = {
-  title: TITLE,
-  description: DESC,
+  title: SEO_TITLE,
+  description: SEO_DESC,
   keywords: [
     'bmr calculator mifflin st jeor',
     'tdee calculator',
@@ -40,8 +44,8 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'article',
     url: `${SITE_URL}${SLUG}`,
-    title: TITLE,
-    description: DESC,
+    title: SEO_TITLE,
+    description: SEO_DESC,
     siteName: SITE_NAME,
     publishedTime: PUBLISH_DATE,
     modifiedTime: '2026-10-29',
@@ -50,8 +54,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: TITLE,
-    description: DESC,
+    title: SEO_TITLE,
+    description: SEO_DESC,
     images: ['/og.png'],
   },
 }
@@ -60,7 +64,7 @@ const articleJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'BlogPosting',
   headline: TITLE,
-  description: DESC,
+  description: SEO_DESC,
   datePublished: PUBLISH_DATE,
   dateModified: '2026-10-29',
   author: { '@type': 'Organization', name: SITE_NAME, url: SITE_URL },

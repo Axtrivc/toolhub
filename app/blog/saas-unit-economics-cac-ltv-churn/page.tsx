@@ -25,9 +25,13 @@ const PUBLISH_DATE = '2026-09-05'
 const TITLE = 'Mastering SaaS Unit Economics: The Mathematical Relationship Between CAC, LTV, and Churn'
 const DESC = 'CAC, LTV, and churn are one equation, not three KPIs. Fully-loaded CAC, margin-based LTV with churn in the denominator, the LTV/CAC ≥ 3 rule, payback period, and why 3% monthly churn is really 31% a year.'
 
+/** Short SERP title/description (≤50 / ≤160 chars); TITLE stays the on-page H1 and article headline. */
+const SEO_TITLE = 'SaaS Unit Economics: CAC, LTV & Churn'
+const SEO_DESC = 'How CAC, LTV and churn fit together: the LTV:CAC ratio, payback period, cohort churn and the formulas behind healthy SaaS unit economics.'
+
 export const metadata: Metadata = {
-  title: TITLE,
-  description: DESC,
+  title: SEO_TITLE,
+  description: SEO_DESC,
   keywords: [
     'saas unit economics',
     'ltv cac ratio',
@@ -40,8 +44,8 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'article',
     url: `${SITE_URL}${SLUG}`,
-    title: TITLE,
-    description: DESC,
+    title: SEO_TITLE,
+    description: SEO_DESC,
     siteName: SITE_NAME,
     publishedTime: PUBLISH_DATE,
     modifiedTime: '2026-10-29',
@@ -50,8 +54,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: TITLE,
-    description: DESC,
+    title: SEO_TITLE,
+    description: SEO_DESC,
     images: ['/og.png'],
   },
 }
@@ -60,7 +64,7 @@ const articleJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'BlogPosting',
   headline: TITLE,
-  description: DESC,
+  description: SEO_DESC,
   datePublished: PUBLISH_DATE,
   dateModified: '2026-10-29',
   author: { '@type': 'Organization', name: SITE_NAME, url: SITE_URL },

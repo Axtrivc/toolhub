@@ -25,9 +25,13 @@ const PUBLISH_DATE = '2026-09-05'
 const TITLE = 'Markup vs. Margin: The Math of Profitable E-commerce and Retail Pricing'
 const DESC = 'A 50% markup is only a 33% margin — the gap is where profits leak. The formulas, price-from-target-margin, the real fee stack (2.9% + $0.30 is really 3.9% on a $30 order), freelance rates, and discount discipline.'
 
+/** Short SERP title/description (≤50 / ≤160 chars); TITLE stays the on-page H1 and article headline. */
+const SEO_TITLE = 'Markup vs Margin: Pricing Math for Sellers'
+const SEO_DESC = 'A 50% markup is only a 33% margin. Formulas, pricing from a target margin, the real payment fee stack, freelance rates and discount discipline.'
+
 export const metadata: Metadata = {
-  title: TITLE,
-  description: DESC,
+  title: SEO_TITLE,
+  description: SEO_DESC,
   keywords: [
     'markup vs margin',
     'profit margin calculator',
@@ -40,8 +44,8 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'article',
     url: `${SITE_URL}${SLUG}`,
-    title: TITLE,
-    description: DESC,
+    title: SEO_TITLE,
+    description: SEO_DESC,
     siteName: SITE_NAME,
     publishedTime: PUBLISH_DATE,
     modifiedTime: '2026-10-29',
@@ -50,8 +54,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: TITLE,
-    description: DESC,
+    title: SEO_TITLE,
+    description: SEO_DESC,
     images: ['/og.png'],
   },
 }
@@ -60,7 +64,7 @@ const articleJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'BlogPosting',
   headline: TITLE,
-  description: DESC,
+  description: SEO_DESC,
   datePublished: PUBLISH_DATE,
   dateModified: '2026-10-29',
   author: { '@type': 'Organization', name: SITE_NAME, url: SITE_URL },

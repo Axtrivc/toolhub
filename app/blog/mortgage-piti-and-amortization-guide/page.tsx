@@ -25,9 +25,13 @@ const PUBLISH_DATE = '2026-09-05'
 const TITLE = 'The Complete Guide to Mortgage Amortization, PITI Breakdown, and Prepayment Strategies'
 const DESC = 'Open the black box of a 30-year loan: the amortization formula, why 87% of your first payment is interest, the full PITI stack, and the prepayment math that saves five figures — with free in-browser calculators.'
 
+/** Short SERP title/description (≤50 / ≤160 chars); TITLE stays the on-page H1 and article headline. */
+const SEO_TITLE = 'Mortgage Amortization & PITI Guide'
+const SEO_DESC = 'How a 30-year mortgage amortizes, why most of your first payment is interest, the full PITI breakdown, and the prepayment math that saves thousands.'
+
 export const metadata: Metadata = {
-  title: TITLE,
-  description: DESC,
+  title: SEO_TITLE,
+  description: SEO_DESC,
   keywords: [
     'mortgage amortization schedule',
     'piti calculator',
@@ -41,8 +45,8 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'article',
     url: `${SITE_URL}${SLUG}`,
-    title: TITLE,
-    description: DESC,
+    title: SEO_TITLE,
+    description: SEO_DESC,
     siteName: SITE_NAME,
     publishedTime: PUBLISH_DATE,
     modifiedTime: '2026-10-29',
@@ -51,8 +55,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: TITLE,
-    description: DESC,
+    title: SEO_TITLE,
+    description: SEO_DESC,
     images: ['/og.png'],
   },
 }
@@ -61,7 +65,7 @@ const articleJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'BlogPosting',
   headline: TITLE,
-  description: DESC,
+  description: SEO_DESC,
   datePublished: PUBLISH_DATE,
   dateModified: '2026-10-29',
   author: { '@type': 'Organization', name: SITE_NAME, url: SITE_URL },
