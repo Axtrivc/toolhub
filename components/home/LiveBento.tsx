@@ -185,7 +185,9 @@ const DEMO_MONTHS = 360
 function MortgageDemoCell() {
   const { locale } = useApp()
   const reduceMotion = useReducedMotion()
-  const [typed, setTyped] = useState('')
+  // SSR / first paint renders the finished frame (6.8% → full payment) so crawlers
+  // and no-JS visitors never see a blank '—' placeholder; the typing loop starts after mount.
+  const [typed, setTyped] = useState(DEMO_RATE)
 
   useEffect(() => {
     // reduced-motion:跳过打字动画,挂载后直接呈现终帧(6.8% → 完整月供)
@@ -210,13 +212,15 @@ function MortgageDemoCell() {
         timer = setTimeout(tick, 900)
       }
     }
-    timer = setTimeout(tick, 1200)
+    // Start on the finished frame: hold it, then begin the loop.
+    step = DEMO_RATE.length
+    timer = setTimeout(tick, 2600)
     return () => clearTimeout(timer)
   }, [reduceMotion])
 
-  const rate = typed === '' ? null : parseFloat(typed)
-  const payment = rate != null && Number.isFinite(rate) ? monthlyPI(DEMO_PRINCIPAL, rate, DEMO_MONTHS) : null
   const showTyping = typed !== DEMO_RATE
+  // While the rate is being "typed", keep the final payment visible (dimmed) instead of '—'.
+  const payment = monthlyPI(DEMO_PRINCIPAL, parseFloat(DEMO_RATE), DEMO_MONTHS)
 
   return (
     <BentoCell title={t(locale, 'bentoMortgageTitle')} href="/tools/mortgage-calculator" className="col-span-2">
@@ -226,7 +230,7 @@ function MortgageDemoCell() {
             {t(locale, 'bentoMortgageParams')}
           </div>
           <div className="mt-1 text-xs" style={{ color: 'rgb(var(--text-muted))' }}>
-            {t(locale, 'bentoMortgageDemo')}: <span className="font-mono font-semibold">{typed || '…'}</span>%
+            {t(locale, 'bentoMortgageDemo')}: <span className="font-mono font-semibold">{typed || '\u00a0'}</span>%
           </div>
         </div>
         <div className="text-right">
@@ -234,7 +238,7 @@ function MortgageDemoCell() {
             className={`text-xl font-bold tabular-nums transition-opacity ${showTyping ? 'opacity-30' : 'opacity-100'}`}
             style={{ color: 'rgb(var(--text))' }}
           >
-            {payment == null ? '—' : fmtUSD(payment, 0)}
+            {fmtUSD(payment, 0)}
           </div>
           <div className="text-[10px] uppercase tracking-wide" style={{ color: 'rgb(var(--text-faint))' }}>
             {t(locale, 'bentoMortgageMonthly')}

@@ -25,9 +25,13 @@ const PUBLISH_DATE = '2026-09-05'
 const TITLE = 'The 2026 LLM Pricing Handbook: Measuring Token Density, Context Caching, and Monthly API Budgets'
 const DESC = 'LLM bills are multiplication: requests × tokens × price. Measure real p50/p95 token density, capture the 50–90% caching discount, split batch from interactive traffic, route easy work to small models, and stop over-optimizing embeddings.'
 
+/** Short SERP title/description (≤50 / ≤160 chars); TITLE stays the on-page H1 and article headline. */
+const SEO_TITLE = 'LLM API Pricing 2026: Tokens, Caching, Budgets'
+const SEO_DESC = 'Estimate LLM API costs: requests × tokens × price, real p50/p95 token counts, 50–90% prompt-caching discounts, batch vs interactive traffic and model routing.'
+
 export const metadata: Metadata = {
-  title: TITLE,
-  description: DESC,
+  title: SEO_TITLE,
+  description: SEO_DESC,
   keywords: [
     'llm api cost calculator',
     'token pricing 2026',
@@ -40,8 +44,8 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'article',
     url: `${SITE_URL}${SLUG}`,
-    title: TITLE,
-    description: DESC,
+    title: SEO_TITLE,
+    description: SEO_DESC,
     siteName: SITE_NAME,
     publishedTime: PUBLISH_DATE,
     modifiedTime: '2026-10-29',
@@ -50,8 +54,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: TITLE,
-    description: DESC,
+    title: SEO_TITLE,
+    description: SEO_DESC,
     images: ['/og.png'],
   },
 }
@@ -60,7 +64,7 @@ const articleJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'BlogPosting',
   headline: TITLE,
-  description: DESC,
+  description: SEO_DESC,
   datePublished: PUBLISH_DATE,
   dateModified: '2026-10-29',
   author: { '@type': 'Organization', name: SITE_NAME, url: SITE_URL },

@@ -26,9 +26,13 @@ const TITLE = 'Mortgage & Loan Calculators: The Honest Guide (PITI, PMI, Payoff 
 const DESC =
   'Lenders quote P&I and skip taxes, insurance, and PMI. This guide walks the real numbers — full PITI, the five-figure lever of extra payments, the rent-vs-buy crossover year, and the minimum-payment trap — with free calculators that run entirely in your browser.'
 
+/** Short SERP title/description (≤50 / ≤160 chars); TITLE stays the on-page H1 and article headline. */
+const SEO_TITLE = 'Mortgage & Loan Calculators: PITI, PMI, Payoff'
+const SEO_DESC = 'Lenders quote P&I and skip taxes, insurance and PMI. Full PITI, extra payments, rent vs buy and the minimum-payment trap, with free calculators.'
+
 export const metadata: Metadata = {
-  title: TITLE,
-  description: DESC,
+  title: SEO_TITLE,
+  description: SEO_DESC,
   keywords: [
     'mortgage calculator with pmi and taxes',
     'piti calculator',
@@ -43,8 +47,8 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'article',
     url: `${SITE_URL}${SLUG}`,
-    title: TITLE,
-    description: DESC,
+    title: SEO_TITLE,
+    description: SEO_DESC,
     siteName: SITE_NAME,
     publishedTime: PUBLISH_DATE,
     modifiedTime: '2026-10-29',
@@ -53,8 +57,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: TITLE,
-    description: DESC,
+    title: SEO_TITLE,
+    description: SEO_DESC,
     images: ['/og.png'],
   },
 }
@@ -63,7 +67,7 @@ const articleJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'BlogPosting',
   headline: TITLE,
-  description: DESC,
+  description: SEO_DESC,
   datePublished: PUBLISH_DATE,
   dateModified: '2026-10-29',
   author: { '@type': 'Organization', name: SITE_NAME, url: SITE_URL },
