@@ -179,6 +179,23 @@ export function Header() {
           </div>
         </div>
 
+        {/* 移动端:顶栏直达搜索按钮(md 及以上隐藏,桌面已有 Ctrl K 入口)。触控目标 40×40 */}
+        <button
+          type="button"
+          onClick={openSearch}
+          aria-label={t(locale, 'searchOpen')}
+          title={t(locale, 'searchOpen')}
+          className="flex h-10 w-10 items-center justify-center rounded-lg border transition hover:bg-slate-100 dark:border-slate-600 dark:hover:bg-slate-700 md:hidden"
+          style={{
+            borderColor: 'rgb(var(--border-strong))',
+            color: 'rgb(var(--text-muted))',
+          }}
+        >
+          <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-4.35-4.35M11 19a8 8 0 100-16 8 8 0 000 16z" />
+          </svg>
+        </button>
+
         {/* 移动端:汉堡按钮(md 及以上隐藏)。触控目标 40×40 */}
         <button
           type="button"

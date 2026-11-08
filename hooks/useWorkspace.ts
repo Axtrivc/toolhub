@@ -52,14 +52,15 @@ export interface WorkspaceState {
   setScratchpad: (value: string) => void
   clearScratchpad: () => void
   scratchpadReady: boolean
+  scratchpadSaved: boolean
 }
 
 /** 安全读取随手记(隐私模式 / 存储禁用 → 空串) */
-function readScratchpad(): string {
+function readScratchpad(): { text: string; saved: boolean } {
   try {
-    return localStorage.getItem(SCRATCHPAD_KEY) ?? ''
+    return { text: localStorage.getItem(SCRATCHPAD_KEY) ?? '', saved: true }
   } catch {
-    return ''
+    return { text: '', saved: false }
   }
 }
 
@@ -69,14 +70,21 @@ export function useWorkspace(): WorkspaceState {
 
   const [scratchpad, setScratchpadState] = useState('')
   const [scratchpadReady, setScratchpadReady] = useState(false)
+  const [scratchpadSaved, setScratchpadSaved] = useState(false)
 
   // 挂载时读取已存随手记;监听跨标签页同步
   useEffect(() => {
-    setScratchpadState(readScratchpad())
+    const stored = readScratchpad()
+    setScratchpadState(stored.text)
+    setScratchpadSaved(stored.saved)
     setScratchpadReady(true)
 
     const onStorage = (e: StorageEvent) => {
-      if (e.key === SCRATCHPAD_KEY) setScratchpadState(readScratchpad())
+      if (e.key === SCRATCHPAD_KEY || e.key === null) {
+        const next = readScratchpad()
+        if (next.saved) setScratchpadState(next.text)
+        setScratchpadSaved(next.saved)
+      }
     }
     window.addEventListener('storage', onStorage)
     return () => window.removeEventListener('storage', onStorage)
@@ -86,7 +94,9 @@ export function useWorkspace(): WorkspaceState {
     setScratchpadState(value)
     try {
       localStorage.setItem(SCRATCHPAD_KEY, value)
+      setScratchpadSaved(true)
     } catch {
+      setScratchpadSaved(false)
       // 隐私模式写入失败,静默忽略(内存态仍生效)
     }
   }, [])
@@ -95,7 +105,9 @@ export function useWorkspace(): WorkspaceState {
     setScratchpadState('')
     try {
       localStorage.removeItem(SCRATCHPAD_KEY)
+      setScratchpadSaved(true)
     } catch {
+      setScratchpadSaved(false)
       /* ignore */
     }
   }, [])
@@ -112,5 +124,6 @@ export function useWorkspace(): WorkspaceState {
     setScratchpad,
     clearScratchpad,
     scratchpadReady,
+    scratchpadSaved,
   }
 }

@@ -168,6 +168,10 @@ export interface Dict {
   // 首页 Scratchpad 随手记
   scratchpadTitle: string
   scratchpadSubtitle: string
+  scratchpadUndo: string
+  scratchpadUnsaved: string
+  scratchpadSaveWarning: string
+  scratchpadCopyError: string
   scratchpadPlaceholder: string
   scratchpadClear: string
   scratchpadStats: string // "{words} words · {chars} chars"
@@ -227,6 +231,10 @@ export interface Dict {
   searchPalettePlaceholder: string // 输入框 placeholder
   searchPaletteHint: string // 底部提示 "{count} tools"
   searchNoResults: string // 无结果
+  searchEmptyQueryEcho: string // 空结果回显搜索词
+  searchEmptyClear: string // 空结果-清除搜索
+  searchEmptyBrowse: string // 空结果-浏览全部工具
+  searchEmptyHint: string // 空结果-搜索建议
   searchClose: string // 关闭(aria-label)
   // 底部键盘提示
   searchKbdSelect: string // "select"
@@ -442,6 +450,10 @@ const en: Dict = {
   scratchpadClear: 'Clear',
   scratchpadStats: '{words} words · {chars} chars',
   scratchpadSaved: 'Saved',
+  scratchpadUndo: 'Undo',
+  scratchpadUnsaved: 'Not saved',
+  scratchpadSaveWarning: 'Browser storage is unavailable. Copy your notes before leaving this page.',
+  scratchpadCopyError: 'Copy failed. Select the text and copy it manually.',
   scratchpadFormatJson: 'Format JSON',
   scratchpadB64Enc: 'Base64 Enc',
   scratchpadB64Dec: 'Base64 Dec',
@@ -488,6 +500,10 @@ const en: Dict = {
   searchPalettePlaceholder: 'Search tools by name or keyword…',
   searchPaletteHint: '{count} tools',
   searchNoResults: 'No matching tools. Try another keyword.',
+  searchEmptyQueryEcho: 'You searched for "{query}"',
+  searchEmptyClear: 'Clear search',
+  searchEmptyBrowse: 'Browse all tools',
+  searchEmptyHint: 'Tips: try fewer or shorter keywords, or search by category name.',
   searchClose: 'Close search',
   searchKbdSelect: 'to select',
   searchKbdMove: 'to navigate',
@@ -697,6 +713,10 @@ const es: Dict = {
   scratchpadClear: 'Limpiar',
   scratchpadStats: '{words} palabras · {chars} caracteres',
   scratchpadSaved: 'Guardado',
+  scratchpadUndo: 'Deshacer',
+  scratchpadUnsaved: 'Sin guardar',
+  scratchpadSaveWarning: 'El almacenamiento del navegador no está disponible. Copia tus notas antes de salir.',
+  scratchpadCopyError: 'No se pudo copiar. Selecciona el texto y cópialo manualmente.',
   scratchpadFormatJson: 'Formatear JSON',
   scratchpadB64Enc: 'Base64 Cod',
   scratchpadB64Dec: 'Base64 Dec',
@@ -743,6 +763,10 @@ const es: Dict = {
   searchPalettePlaceholder: 'Busca herramientas por nombre o palabra clave…',
   searchPaletteHint: '{count} herramientas',
   searchNoResults: 'Sin coincidencias. Prueba con otra palabra clave.',
+  searchEmptyQueryEcho: 'Buscaste "{query}"',
+  searchEmptyClear: 'Borrar búsqueda',
+  searchEmptyBrowse: 'Ver todas las herramientas',
+  searchEmptyHint: 'Consejos: prueba menos palabras, más cortas o busca por categoría.',
   searchClose: 'Cerrar búsqueda',
   searchKbdSelect: 'para seleccionar',
   searchKbdMove: 'para navegar',
@@ -950,6 +974,10 @@ const de: Dict = {
   scratchpadClear: 'Leeren',
   scratchpadStats: '{words} Wörter · {chars} Zeichen',
   scratchpadSaved: 'Gespeichert',
+  scratchpadUndo: 'Rückgängig',
+  scratchpadUnsaved: 'Nicht gespeichert',
+  scratchpadSaveWarning: 'Der Browserspeicher ist nicht verfügbar. Kopiere deine Notizen vor dem Verlassen der Seite.',
+  scratchpadCopyError: 'Kopieren fehlgeschlagen. Markiere den Text und kopiere ihn manuell.',
   scratchpadFormatJson: 'JSON formatieren',
   scratchpadB64Enc: 'Base64 Enc',
   scratchpadB64Dec: 'Base64 Dec',
@@ -996,6 +1024,10 @@ const de: Dict = {
   searchPalettePlaceholder: 'Werkzeuge nach Name oder Stichwort suchen…',
   searchPaletteHint: '{count} Werkzeuge',
   searchNoResults: 'Keine Treffer. Versuche ein anderes Stichwort.',
+  searchEmptyQueryEcho: 'Gesucht nach "{query}"',
+  searchEmptyClear: 'Suche löschen',
+  searchEmptyBrowse: 'Alle Tools ansehen',
+  searchEmptyHint: 'Tipps: weniger oder kürzere Stichworte oder nach Kategorie suchen.',
   searchClose: 'Suche schließen',
   searchKbdSelect: 'zum Auswählen',
   searchKbdMove: 'zum Navigieren',

@@ -97,6 +97,7 @@ export function SearchPalette({ locale, open, onClose }: SearchPaletteProps) {
   useEffect(() => {
     if (!open) return
     const onKey = (e: KeyboardEvent) => {
+      if (e.isComposing || e.keyCode === 229) return
       if (e.key === 'Escape') {
         e.preventDefault()
         onClose()
@@ -138,8 +139,9 @@ export function SearchPalette({ locale, open, onClose }: SearchPaletteProps) {
     el?.scrollIntoView({ block: 'nearest' })
   }, [activeIndex, open])
 
-  // ── 键盘导航:在 input 上拦截 ↑↓Enter ──
+  // ── 键盘导航:input 拦截 ↑↓/Page 键;Tab 与 Home/End 保留原生焦点移动/文本编辑 ──
   const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.nativeEvent.isComposing || e.nativeEvent.keyCode === 229) return
     if (e.key === 'ArrowDown') {
       e.preventDefault()
       if (total === 0) return
@@ -147,6 +149,12 @@ export function SearchPalette({ locale, open, onClose }: SearchPaletteProps) {
     } else if (e.key === 'ArrowUp') {
       e.preventDefault()
       setActiveIndex((i) => Math.max(i - 1, 0))
+    } else if (e.key === 'PageUp') {
+      e.preventDefault()
+      if (total > 0) setActiveIndex((i) => Math.max(i - 5, 0))
+    } else if (e.key === 'PageDown') {
+      e.preventDefault()
+      if (total > 0) setActiveIndex((i) => Math.min(i + 5, total - 1))
     } else if (e.key === 'Enter') {
       // 内联答案行占据第 0 位:回车跳对应完整工具
       if (inline && activeIndex === 0) {
@@ -268,7 +276,7 @@ export function SearchPalette({ locale, open, onClose }: SearchPaletteProps) {
               aria-label={t(locale, 'searchPalettePlaceholder')}
               aria-controls={listId}
               aria-activedescendant={
-                results[activeIndex] ? `${listId}-opt-${activeIndex}` : undefined
+                activeIndex >= 0 && activeIndex < total ? `${listId}-opt-${activeIndex}` : undefined
               }
             />
             <kbd
@@ -281,14 +289,61 @@ export function SearchPalette({ locale, open, onClose }: SearchPaletteProps) {
 
           {/* 结果列表(隐藏原生滚动条,见 .scrollbar-none) */}
           {results.length === 0 && !inline ? (
-            <div
-              className="px-4 py-12 text-center text-sm"
-              style={{ color: 'rgb(var(--text-muted))' }}
-            >
-              {t(locale, 'searchNoResults')}
+            <div className="px-4 py-10 text-center sm:py-12">
+              <div
+                className="mx-auto flex h-10 w-10 items-center justify-center rounded-full border border-dashed"
+                style={{ borderColor: 'rgb(var(--border-strong))' }}
+                aria-hidden="true"
+              >
+                <svg
+                  className="h-5 w-5"
+                  style={{ color: 'rgb(var(--text-faint))' }}
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-4.35-4.35M11 19a8 8 0 100-16 8 8 0 000 16z" />
+                </svg>
+              </div>
+              <p className="mt-3 text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
+                {t(locale, 'searchNoResults')}
+              </p>
+              {query.trim() ? (
+                <p className="mt-1 truncate px-2 text-xs" style={{ color: 'rgb(var(--text-faint))' }}>
+                  {t(locale, 'searchEmptyQueryEcho', { query: query.trim() })}
+                </p>
+              ) : null}
+              <div className="mt-4 flex flex-wrap items-center justify-center gap-2">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setQuery('')
+                    setActiveIndex(0)
+                    inputRef.current?.focus()
+                  }}
+                  className="rounded-lg border px-3 py-2 text-xs font-medium transition hover:bg-slate-100 dark:hover:bg-slate-800"
+                  style={{ borderColor: 'rgb(var(--border-strong))', color: 'rgb(var(--text-muted))' }}
+                >
+                  {t(locale, 'searchEmptyClear')}
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    onClose()
+                    router.push('/tools/')
+                  }}
+                  className="rounded-lg px-3 py-2 text-xs font-medium text-brand-600 transition hover:underline dark:text-brand-400"
+                >
+                  {t(locale, 'searchEmptyBrowse')}
+                </button>
+              </div>
+              <p className="mt-4 text-xs" style={{ color: 'rgb(var(--text-faint))' }}>
+                {t(locale, 'searchEmptyHint')}
+              </p>
             </div>
           ) : (
-            <ul ref={listRef} id={listId} role="listbox" className="scrollbar-none flex-1 overflow-y-auto p-2">
+            <ul ref={listRef} id={listId} role="listbox" className="scrollbar-none flex-1 overflow-y-auto overscroll-contain p-2">
               {inline && (
                 <li data-idx={0} id={`${listId}-opt-0`} role="option" aria-selected={activeIndex === 0}>
                   <button

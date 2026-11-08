@@ -12,7 +12,7 @@
  *    有任意记录 → 左 QuickAccess(5)+ 右 Scratchpad(7)。
  */
 
-import { useState } from 'react'
+import { useEffect, useId, useState } from 'react'
 import { ChevronDown, LayoutGrid } from 'lucide-react'
 import { motion } from '@/components/motion/MotionPrimitives'
 import { useWorkspace } from '@/hooks/useWorkspace'
@@ -24,7 +24,23 @@ import { ScratchpadWidget } from './ScratchpadWidget'
 export function WorkspaceDashboard() {
   const { locale } = useApp()
   const { pinned, recent, pinnedReady, recentReady } = useWorkspace()
+  // 展开态持久化(localStorage,读写失败静默降级):刷新/回访保持用户偏好;
+  // 挂载后才恢复真实值,SSG/水合首帧按默认折叠渲染,不产生水合差异。
   const [open, setOpen] = useState(false)
+  const panelId = useId()
+  useEffect(() => {
+    try {
+      if (localStorage.getItem('toolhub-workspace-open') === '1') setOpen(true)
+    } catch {}
+  }, [])
+  const toggleOpen = () =>
+    setOpen((v) => {
+      const next = !v
+      try {
+        localStorage.setItem('toolhub-workspace-open', next ? '1' : '0')
+      } catch {}
+      return next
+    })
 
   const ready = pinnedReady && recentReady
   const showQuickAccess = ready && (pinned.length > 0 || recent.length > 0)
@@ -38,8 +54,9 @@ export function WorkspaceDashboard() {
       {/* 折叠条:整行可点;chevron 随展开态旋转 180° */}
       <button
         type="button"
-        onClick={() => setOpen((v) => !v)}
+        onClick={toggleOpen}
         aria-expanded={open}
+        aria-controls={panelId}
         className="flex w-full items-center gap-3 px-4 py-3 text-left transition-colors duration-200 hover:bg-slate-50/80 dark:hover:bg-slate-800/40"
       >
         <span
@@ -76,6 +93,7 @@ export function WorkspaceDashboard() {
           initial={{ opacity: 0, y: -6 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.2 }}
+          id={panelId}
           className="border-t border-slate-200/60 p-4 dark:border-slate-800/60"
         >
           <div className="grid grid-cols-1 gap-5 lg:grid-cols-12">

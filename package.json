@@ -9,7 +9,9 @@
     "start": "next start",
     "lint": "tsc --noEmit",
     "submit-urls": "node scripts/submit-urls.mjs",
-    "smoke": "node scripts/tool-smoke.mjs"
+    "smoke": "node scripts/tool-smoke.mjs",
+    "test:scratchpad": "node scripts/scratchpad-check.mjs",
+    "test:search": "node scripts/search-palette-check.mjs"
   },
   "dependencies": {
     "@types/qrcode": "^1.5.6",

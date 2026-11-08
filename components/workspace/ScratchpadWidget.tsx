@@ -17,10 +17,11 @@
  */
 
 import { useEffect, useRef, useState } from 'react'
-import { Check, Copy, NotebookPen, Trash2 } from 'lucide-react'
+import { Check, Copy, NotebookPen, Trash2, Undo2 } from 'lucide-react'
 import { useWorkspace } from '@/hooks/useWorkspace'
 import { useApp } from '@/components/providers/AppProviders'
 import { t } from '@/lib/i18n'
+import { copyScratchpad, transformScratchpad, type ScratchpadAction } from '@/lib/scratchpad'
 
 /** 词数统计:按空白切分;空串为 0 */
 function countWords(text: string): number {
@@ -28,40 +29,12 @@ function countWords(text: string): number {
   return trimmed ? trimmed.split(/\s+/).length : 0
 }
 
-/** Unicode 安全 Base64 编码(btoa 只接受 Latin1,先走 UTF-8 字节) */
-function b64Encode(text: string): string {
-  const bytes = new TextEncoder().encode(text)
-  let bin = ''
-  bytes.forEach((b) => {
-    bin += String.fromCharCode(b)
-  })
-  return btoa(bin)
-}
-
-/** Unicode 安全 Base64 解码;非法输入抛异常(由调用方捕获) */
-function b64Decode(text: string): string {
-  const bin = atob(text.trim())
-  const bytes = Uint8Array.from(bin, (c) => c.charCodeAt(0))
-  return new TextDecoder().decode(bytes)
-}
-
-/** Trim:去行尾空白 + 首尾空白 + 3 个以上连续空行压成 1 个空行 */
-function trimText(text: string): string {
-  return text
-    .split('\n')
-    .map((line) => line.trimEnd())
-    .join('\n')
-    .trim()
-    .replace(/\n{3,}/g, '\n\n')
-}
-
-type ActionKey = 'json' | 'b64enc' | 'b64dec' | 'upper' | 'lower' | 'trim'
-
 export function ScratchpadWidget() {
   const { locale } = useApp()
-  const { scratchpad, setScratchpad, clearScratchpad, scratchpadReady } = useWorkspace()
+  const { scratchpad, setScratchpad, clearScratchpad, scratchpadReady, scratchpadSaved } = useWorkspace()
 
   const [copied, setCopied] = useState(false)
+  const [undo, setUndo] = useState<{ before: string; after: string } | null>(null)
   // "已保存"指示:输入变化后短暂 pulse,提示自动保存已发生
   const [savePulse, setSavePulse] = useState(false)
   // 快捷操作错误反馈(非法 JSON / Base64)
@@ -86,6 +59,8 @@ export function ScratchpadWidget() {
 
   const handleChange = (value: string) => {
     setScratchpad(value)
+    setUndo(null)
+    setCopied(false)
     setActionError(null)
     setSavePulse(true)
     if (pulseTimer.current) clearTimeout(pulseTimer.current)
@@ -94,22 +69,10 @@ export function ScratchpadWidget() {
 
   const handleCopy = async () => {
     if (!scratchpad) return
-    try {
-      await navigator.clipboard.writeText(scratchpad)
-    } catch {
-      // 回退:旧浏览器 / 非安全上下文 → execCommand
-      const ta = document.createElement('textarea')
-      ta.value = scratchpad
-      ta.style.position = 'fixed'
-      ta.style.opacity = '0'
-      document.body.appendChild(ta)
-      ta.select()
-      try {
-        document.execCommand('copy')
-      } catch {
-        /* ignore */
-      }
-      document.body.removeChild(ta)
+    setCopied(false)
+    if (!(await copyScratchpad(scratchpad))) {
+      flashError(t(locale, 'scratchpadCopyError'))
+      return
     }
     setCopied(true)
     if (copyTimer.current) clearTimeout(copyTimer.current)
@@ -117,28 +80,14 @@ export function ScratchpadWidget() {
   }
 
   /** 快捷文本变换;json / b64dec 失败时闪现错误提示,不动文本 */
-  const runAction = (action: ActionKey) => {
+  const runAction = (action: ScratchpadAction) => {
     if (!scratchpad) return
     try {
-      switch (action) {
-        case 'json':
-          setScratchpad(JSON.stringify(JSON.parse(scratchpad), null, 2))
-          break
-        case 'b64enc':
-          setScratchpad(b64Encode(scratchpad))
-          break
-        case 'b64dec':
-          setScratchpad(b64Decode(scratchpad))
-          break
-        case 'upper':
-          setScratchpad(scratchpad.toUpperCase())
-          break
-        case 'lower':
-          setScratchpad(scratchpad.toLowerCase())
-          break
-        case 'trim':
-          setScratchpad(trimText(scratchpad))
-          break
+      const next = transformScratchpad(scratchpad, action)
+      if (next !== scratchpad) {
+        setUndo({ before: scratchpad, after: next })
+        setScratchpad(next)
+        setCopied(false)
       }
       setActionError(null)
     } catch {
@@ -153,7 +102,7 @@ export function ScratchpadWidget() {
   const words = countWords(scratchpad)
   const chars = scratchpad.length
 
-  const TOOLBAR_ACTIONS: { key: ActionKey; labelKey: 'scratchpadFormatJson' | 'scratchpadB64Enc' | 'scratchpadB64Dec' | 'scratchpadUpper' | 'scratchpadLower' | 'scratchpadTrim' }[] = [
+  const TOOLBAR_ACTIONS: { key: ScratchpadAction; labelKey: 'scratchpadFormatJson' | 'scratchpadB64Enc' | 'scratchpadB64Dec' | 'scratchpadUpper' | 'scratchpadLower' | 'scratchpadTrim' }[] = [
     { key: 'json', labelKey: 'scratchpadFormatJson' },
     { key: 'b64enc', labelKey: 'scratchpadB64Enc' },
     { key: 'b64dec', labelKey: 'scratchpadB64Dec' },
@@ -186,7 +135,9 @@ export function ScratchpadWidget() {
         {/* ● SAVED:输入后 1.2s 内显示脉冲绿点 */}
         <span
           className={`inline-flex shrink-0 items-center gap-1.5 rounded-full border px-2 py-0.5 font-mono text-[10px] uppercase tracking-wider transition-colors ${
-            savePulse
+            !scratchpadSaved && scratchpadReady
+              ? 'border-amber-200 bg-amber-50 text-amber-700 dark:border-amber-800 dark:bg-amber-950/40 dark:text-amber-400'
+              : savePulse
               ? 'border-emerald-200 bg-emerald-50 text-emerald-600 dark:border-emerald-800/60 dark:bg-emerald-950/40 dark:text-emerald-400'
               : 'border-slate-200/80 text-slate-400 dark:border-slate-700 dark:text-slate-500'
           }`}
@@ -194,10 +145,10 @@ export function ScratchpadWidget() {
         >
           <span
             className={`h-1.5 w-1.5 rounded-full ${
-              savePulse ? 'animate-pulse bg-emerald-500' : 'bg-slate-300 dark:bg-slate-600'
+              !scratchpadSaved && scratchpadReady ? 'bg-amber-500' : savePulse ? 'motion-safe:animate-pulse bg-emerald-500' : 'bg-slate-300 dark:bg-slate-600'
             }`}
           />
-          {t(locale, 'scratchpadSaved')}
+          {scratchpadReady ? t(locale, scratchpadSaved ? 'scratchpadSaved' : 'scratchpadUnsaved') : '…'}
         </span>
       </header>
 
@@ -226,6 +177,21 @@ export function ScratchpadWidget() {
         <div className="ml-auto flex items-center gap-1.5">
           <button
             type="button"
+            disabled={!undo || undo.after !== scratchpad}
+            className={toolButtonClass}
+            onClick={() => {
+              if (!undo || undo.after !== scratchpad) return
+              setScratchpad(undo.before)
+              setUndo(null)
+              setCopied(false)
+              setActionError(null)
+            }}
+          >
+            <Undo2 className="h-3 w-3" aria-hidden="true" />
+            {t(locale, 'scratchpadUndo')}
+          </button>
+          <button
+            type="button"
             onClick={handleCopy}
             disabled={!scratchpad}
             className={toolButtonClass}
@@ -239,7 +205,12 @@ export function ScratchpadWidget() {
           </button>
           <button
             type="button"
-            onClick={() => clearScratchpad()}
+            onClick={() => {
+              setUndo({ before: scratchpad, after: '' })
+              clearScratchpad()
+              setCopied(false)
+              setActionError(null)
+            }}
             disabled={!scratchpad}
             className={`${toolButtonClass} hover:border-red-200 hover:text-red-600 dark:hover:border-red-900/60 dark:hover:text-red-400`}
           >
@@ -250,7 +221,13 @@ export function ScratchpadWidget() {
       </div>
 
       {/* 输入区:等宽字体,紧凑 140px 高 */}
+      {scratchpadReady && !scratchpadSaved && (
+        <p role="status" className="px-4 pt-2 text-xs text-amber-700 dark:text-amber-400">
+          {t(locale, 'scratchpadSaveWarning')}
+        </p>
+      )}
       <textarea
+        disabled={!scratchpadReady}
         value={scratchpadReady ? scratchpad : ''}
         onChange={(e) => handleChange(e.target.value)}
         placeholder={t(locale, 'scratchpadPlaceholder')}
