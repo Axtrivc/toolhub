@@ -25,9 +25,13 @@ const PUBLISH_DATE = '2026-09-05'
 const TITLE = 'Veterinary Math for Dog Owners: Decoding RER, MER, and Accurate Daily Calorie Intake'
 const DESC = 'Bag guidelines are written for intact, active, young dogs — yours probably isn’t. The RER = 70 × kg^0.75 baseline, MER life-stage multipliers from 3.0× puppies to 1.0× weight loss, the 10% treat rule, and the body condition score.'
 
+/** Short SERP title/description (≤50 / ≤160 chars); TITLE stays the on-page H1 and article headline. */
+const SEO_TITLE = 'Dog Calorie Guide: RER, MER & Daily Intake'
+const SEO_DESC = 'How many calories does your dog need? RER = 70 × kg^0.75, MER life-stage multipliers, the 10% treat rule and body condition scoring, with a free calculator.'
+
 export const metadata: Metadata = {
-  title: TITLE,
-  description: DESC,
+  title: SEO_TITLE,
+  description: SEO_DESC,
   keywords: [
     'dog calorie calculator',
     'rer mer dog',
@@ -40,8 +44,8 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'article',
     url: `${SITE_URL}${SLUG}`,
-    title: TITLE,
-    description: DESC,
+    title: SEO_TITLE,
+    description: SEO_DESC,
     siteName: SITE_NAME,
     publishedTime: PUBLISH_DATE,
     modifiedTime: '2026-10-29',
@@ -50,8 +54,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: TITLE,
-    description: DESC,
+    title: SEO_TITLE,
+    description: SEO_DESC,
     images: ['/og.png'],
   },
 }
@@ -60,7 +64,7 @@ const articleJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'BlogPosting',
   headline: TITLE,
-  description: DESC,
+  description: SEO_DESC,
   datePublished: PUBLISH_DATE,
   dateModified: '2026-10-29',
   author: { '@type': 'Organization', name: SITE_NAME, url: SITE_URL },
