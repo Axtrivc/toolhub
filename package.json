@@ -5,9 +5,11 @@
   "description": "Free online tools collection - fast, privacy-friendly, no signup required.",
   "scripts": {
     "dev": "next dev",
+    "prebuild": "node scripts/gen-tool-lastmod.mjs",
     "build": "next build",
     "start": "next start",
     "lint": "tsc --noEmit",
+    "lastmod": "node scripts/gen-tool-lastmod.mjs",
     "submit-urls": "node scripts/submit-urls.mjs",
     "smoke": "node scripts/tool-smoke.mjs",
     "test:scratchpad": "node scripts/scratchpad-check.mjs",

@@ -79,6 +79,19 @@ for (const slug of slugs) {
   }
 }
 
+// Every tool URL must carry a real <lastmod> (sourced from lib/generated/tool-lastmod.json).
+const toolLastmod = new Map(
+  [...sitemap.matchAll(/<url>\s*<loc>([^<]+)<\/loc>([\s\S]*?)<\/url>/g)]
+    .filter((match) => match[1].startsWith(`${domain}/tools/`) && match[1] !== `${domain}/tools/`)
+    .map((match) => [match[1], match[2].match(/<lastmod>([^<]+)<\/lastmod>/)?.[1]]),
+)
+const today = new Date().toISOString().slice(0, 10)
+for (const [loc, lastmod] of toolLastmod) {
+  if (!lastmod) errors.push(`Missing <lastmod> for ${loc}`)
+  else if (!/^\d{4}-\d{2}-\d{2}/.test(lastmod) || lastmod.slice(0, 10) > today) errors.push(`Invalid <lastmod> ${lastmod} for ${loc}`)
+}
+const toolsWithLastmod = [...toolLastmod.values()].filter(Boolean).length
+
 if (errors.length) {
   for (const error of errors.slice(0, 50)) console.error('SEO ERROR:', error)
   console.error(`${errors.length} SEO verification failure(s)`)
@@ -86,3 +99,4 @@ if (errors.length) {
 }
 console.log(`SEO verification passed: ${slugs.length} tool HTML pages, ${locations.length} unique sitemap URLs`)
 console.log(`Related-link coverage passed: ${slugs.length - uncovered.length}/${slugs.length} tools have inbound recommendations (min ${relatedCoverage.min}, max ${relatedCoverage.max})`)
+console.log(`Sitemap lastmod passed: ${toolsWithLastmod}/${toolLastmod.size} tool URLs have <lastmod>`)
