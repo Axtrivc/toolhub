@@ -25,7 +25,7 @@ import { useApp } from './providers/AppProviders'
 import { t, tc, getToolName } from '@/lib/i18n'
 import { HUB_THEMES } from './workspace/hubThemes'
 
-/** 热门工具直达(与原首页 SEO 区同一组 slug,顺序保留) */
+/** 原 6 个高搜索量工具 + 2026-11-11 补齐的 5 个旗舰收录内链 */
 const POPULAR_TOOL_SLUGS = [
   'reading-speaking-time',
   'weight-converter',
@@ -33,6 +33,11 @@ const POPULAR_TOOL_SLUGS = [
   'wordle-solver',
   'remove-line-breaks',
   'days-countdown-calculator',
+  'tip-calculator',
+  'salary-converter',
+  'base64-encoder',
+  'qr-code-generator',
+  'sales-tax-calculator',
 ] as const
 
 /** 小节标题:mono 微字号大写 */
