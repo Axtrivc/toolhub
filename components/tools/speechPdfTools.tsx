@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { useApp } from "@/components/providers/AppProviders";
 import { tui } from "@/lib/i18n/tool-l10n-accessors/tools/speechPdfTools";
 import { PDFDocument } from "pdf-lib";
-import { zipSync } from "fflate";
+import { buildZip } from "@/lib/zip-store";
 
 // 主题感知的控件配色(与全站 var 体系一致,参照 QRCodeGeneratorClient)
 const inputStyle = {
@@ -481,12 +481,18 @@ export function PdfMergerClient() {
 // ─────────── PDF Splitter ───────────
 
 type RangeError = "rangeErrSyntax" | "rangeErrOrder" | "rangeErrBounds" | "rangeErrEmpty";
-type RangeResult = { ok: true; pages: number[] } | { ok: false; key: RangeError; vars: Record<string, string | number> };
+type RangeGroup = { a: number; b: number };
+// 解析保留用户输入的分组(供「每组一个 PDF 的 ZIP」用),同时输出摊平去重
+// 排序后的页列表(单 PDF 模式与预览用)。
+type RangeResult =
+  | { ok: true; pages: number[]; groups: RangeGroup[] }
+  | { ok: false; key: RangeError; vars: Record<string, string | number> };
 
 function parseRange(text: string, max: number): RangeResult {
   const t = text.trim();
   if (!t) return { ok: false, key: "rangeErrEmpty", vars: {} };
   const pages: number[] = [];
+  const groups: RangeGroup[] = [];
   for (const part of t.split(",")) {
     const seg = part.trim();
     const m = /^(\d{1,5})(?:\s*-\s*(\d{1,5}))?$/.exec(seg);
@@ -498,12 +504,13 @@ function parseRange(text: string, max: number): RangeResult {
     }
     if (b < a) return { ok: false, key: "rangeErrOrder", vars: { a, b } };
     if (a < 1 || b > max) return { ok: false, key: "rangeErrBounds", vars: { n: a < 1 ? a : b, t: max } };
+    groups.push({ a, b });
     for (let p = a; p <= b; p++) {
       if (!pages.includes(p)) pages.push(p);
     }
   }
   pages.sort((x, y) => x - y);
-  return { ok: true, pages };
+  return { ok: true, pages, groups };
 }
 
 const RANGE_FALLBACK: Record<RangeError, string> = {
@@ -522,7 +529,7 @@ export function PdfSplitterClient() {
   const [pages, setPages] = useState(0);
   const [loadError, setLoadError] = useState<"corrupt" | "encrypted" | "notpdf" | null>(null);
   const [range, setRange] = useState("");
-  const [mode, setMode] = useState<"single" | "zip">("single");
+  const [mode, setMode] = useState<"single" | "rangeZip" | "zip">("single");
   const [dragging, setDragging] = useState(false);
   const [processing, setProcessing] = useState(false);
   const [doneMsg, setDoneMsg] = useState("");
@@ -568,6 +575,22 @@ export function PdfSplitterClient() {
         const bytes = await out.save();
         setResult({ blob: new Blob([toBlobPart(bytes)], { type: "application/pdf" }), name: "split.pdf" });
         setDoneMsg(fmt(L("doneSingle", "Created split.pdf with {n} pages"), { n: parsed.pages.length }));
+      } else if (mode === "rangeZip") {
+        // 每个范围分组一个独立 PDF,按输入顺序打包 part-1.pdf、part-2.pdf…
+        const entries: { name: string; data: Uint8Array }[] = [];
+        let g = 0;
+        for (const group of parsed.groups) {
+          g++;
+          const part = await PDFDocument.create();
+          const partIndices: number[] = [];
+          for (let p = group.a; p <= group.b; p++) partIndices.push(p - 1);
+          const copied = await part.copyPages(src, partIndices);
+          for (const page of copied) part.addPage(page);
+          entries.push({ name: `part-${g}.pdf`, data: await part.save() });
+        }
+        const zipped = buildZip(entries);
+        setResult({ blob: new Blob([toBlobPart(zipped)], { type: "application/zip" }), name: "ranges.zip" });
+        setDoneMsg(fmt(L("doneRangeZip", "Created a ZIP with {n} PDFs, one per range group"), { n: entries.length }));
       } else {
         const files: Record<string, Uint8Array> = {};
         let i = 0;
@@ -578,7 +601,7 @@ export function PdfSplitterClient() {
           single.addPage(page);
           files["part-" + i + ".pdf"] = await single.save();
         }
-        const zipped = zipSync(files);
+        const zipped = buildZip(Object.entries(files).map(([name, data]) => ({ name, data })));
         setResult({ blob: new Blob([toBlobPart(zipped)], { type: "application/zip" }), name: "pages.zip" });
         setDoneMsg(fmt(L("doneZip", "Created a ZIP with {n} one-page PDFs"), { n: parsed.pages.length }));
       }
@@ -669,9 +692,13 @@ export function PdfSplitterClient() {
           </div>
 
           <div className="flex flex-wrap gap-2">
-            {(["single", "zip"] as const).map((m) => (
+            {(["single", "rangeZip", "zip"] as const).map((m) => (
               <button key={m} type="button" onClick={() => setMode(m)} className={"btn text-sm " + (mode === m ? "btn-primary" : "btn-secondary")}>
-                {m === "single" ? L("modeSingle", "One PDF with the chosen pages (split.pdf)") : L("modeZip", "One file per page (ZIP)")}
+                {m === "single"
+                  ? L("modeSingle", "One PDF with the chosen pages (split.pdf)")
+                  : m === "rangeZip"
+                    ? L("modeRangeZip", "One PDF per range group (ZIP)")
+                    : L("modeZip", "One file per page (ZIP)")}
               </button>
             ))}
           </div>
@@ -696,7 +723,7 @@ export function PdfSplitterClient() {
       )}
 
       <p className="text-sm" style={{ color: "rgb(var(--text-muted))" }}>
-        {L("note", "🔒 Splitting happens entirely in your browser with pdf-lib: the original file is never modified, nothing is uploaded and nothing is stored. Pick pages with the 1-3,5,8-10 syntax and download a single split.pdf or a ZIP of standalone pages.")}
+        {L("note", "🔒 Splitting happens entirely in your browser with pdf-lib: the original file is never modified, nothing is uploaded and nothing is stored. Pick pages with the 1-3,5,8-10 syntax and download a single split.pdf, a ZIP with one PDF per range group, or a ZIP of standalone pages.")}
       </p>
     </div>
   );
