@@ -30,6 +30,8 @@ const CATEGORY_ICONS: Record<string, string> = {
   'Game Tools': 'dices',
   'Pet Tools': 'dog',
   'Home Calculators': 'house',
+  'Speech to Text': 'mic',
+  'PDF Tools': 'file-text',
 }
 
 /**
@@ -38,6 +40,10 @@ const CATEGORY_ICONS: Record<string, string> = {
  * 命名跟 tool.slug 完全一致;CATEGORY_ICONS 仅作未列出工具的安全兜底。
  */
 const STAR_ICONS: Record<string, string> = {
+  'speech-to-text': 'mic',
+  'pdf-merger': 'layers',
+  'pdf-splitter': 'scissors',
+  'pdf-compressor': 'minimize-2',
   // ── 金融 Finance ──
   'apy-calculator': 'trending-up',
   'credit-card-minimum-payment-calculator': 'credit-card',

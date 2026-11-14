@@ -1445,5 +1445,20 @@ export const deTools: Record<string, { name: string; shortIntro: string }> = {
     name: 'ROT13-Konverter',
     shortIntro: 'ROT13 kodieren und dekodieren, optional ROT5 und ROT-N-Verschiebung.',
   },
-
+  'speech-to-text': {
+    name: 'Sprache-zu-Text',
+    shortIntro: 'Mit der Spracherkennung des Browsers in Echtzeit tippen.',
+  },
+  'pdf-merger': {
+    name: 'PDF zusammenführen',
+    shortIntro: 'Führe mehrere PDFs in der gewählten Reihenfolge zu einer Datei zusammen.',
+  },
+  'pdf-splitter': {
+    name: 'PDF teilen',
+    shortIntro: 'Extrahiere Seitenbereiche aus einem PDF oder speichere jede Seite einzeln.',
+  },
+  'pdf-compressor': {
+    name: 'PDF komprimieren',
+    shortIntro: 'Baut die interne Struktur eines PDFs neu auf, um die Größe zu senken.',
+  },
 }

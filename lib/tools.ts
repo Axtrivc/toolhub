@@ -1933,6 +1933,7 @@ export const tools: ToolMeta[] = [
     ],
     titleLongTail: 'Word & Character Counter - Reading Time',
     descriptionLongTail: 'Count words, characters, sentences, and reading time. Get text statistics for essays, articles, and social media, privately. Free, no signup.',
+    relatedTools: ['character-frequency', 'add-line-numbers', 'speech-to-text', 'reading-level-checker'],
   },
   {
     slug: 'text-diff', name: 'Text Diff Checker',
@@ -6256,6 +6257,109 @@ export const tools: ToolMeta[] = [
     descriptionLongTail: 'Draw a fair Secret Santa loop where nobody picks themselves and couples never match. Reveal one person at a time and copy each message. Free and private.',
     nextTools: ['random-team-generator', 'wheel-spinner'],
   },
+  // ─────────── 🎤 Speech to Text (1) ───────────
+  {
+    slug: 'speech-to-text', name: 'Speech to Text',
+    title: 'Free Speech to Text - Real-Time Voice Typing in Your Browser',
+    description:
+      'Free speech to text with live voice typing in your browser. Start, pause, and stop recognition, edit the transcript, then copy or download it as a .txt file.',
+    keywords: [
+      'speech to text',
+      'voice to text',
+      'voice typing',
+      'dictation online',
+      'transcribe voice online',
+    ],
+    intent: 'informational', category: 'Speech to Text', h1: 'Speech to Text',
+    shortIntro: 'Type with your voice using real-time browser speech recognition.',
+    published: true,
+    longTailKeywords: [
+      'speech to text online free no signup',
+      'voice typing in browser chrome',
+      'dictation tool english spanish german',
+      'speech recognition online without upload',
+    ],
+    titleLongTail: 'Speech to Text - Live Voice Typing in Your Browser',
+    descriptionLongTail: 'Free speech to text with live voice typing in your browser. Speak in English, Spanish, or German, edit the transcript, then copy or download it as a .txt file.',
+    nextTools: ['word-counter', 'add-line-numbers'],
+    relatedTools: ['word-counter', 'reading-level-checker', 'add-line-numbers', 'character-frequency'],
+  },
+  // ─────────── 📄 PDF Tools (3) ───────────
+  {
+    slug: 'pdf-merger', name: 'PDF Merger',
+    title: 'Merge PDF Files Online - Free, In-Browser, No Upload',
+    description:
+      'Merge multiple PDF files into one, in the exact order you choose. Drag, reorder, remove, and download the combined PDF. Files never leave your device.',
+    keywords: [
+      'merge pdf',
+      'combine pdf files',
+      'pdf merger online free',
+      'join pdf files',
+      'pdf combiner no upload',
+    ],
+    intent: 'informational', category: 'PDF Tools', h1: 'PDF Merger',
+    shortIntro: 'Combine multiple PDFs into one file, in the order you choose.',
+    published: true,
+    longTailKeywords: [
+      'merge pdf files without uploading',
+      'combine multiple pdfs into one free',
+      'pdf merger drag and drop reorder',
+      'offline pdf combiner browser',
+    ],
+    titleLongTail: 'Merge PDF Files Online - In-Browser, No Upload',
+    descriptionLongTail: 'Merge multiple PDFs into one file online, in any order you choose. Files are processed on your device and never uploaded. Free, no signup, no watermark.',
+    nextTools: ['pdf-splitter', 'pdf-compressor'],
+  },
+  {
+    slug: 'pdf-splitter', name: 'PDF Splitter',
+    title: 'Split PDF Online - Extract Page Ranges, Free & Private',
+    description:
+      'Split a PDF by page ranges like 1-3,5 or save each page as a separate file packed into a ZIP. Everything runs locally in your browser; nothing is uploaded.',
+    keywords: [
+      'split pdf',
+      'pdf splitter online free',
+      'extract pdf pages',
+      'pdf page range extractor',
+      'separate pdf pages',
+    ],
+    intent: 'informational', category: 'PDF Tools', h1: 'PDF Splitter',
+    shortIntro: 'Extract page ranges from a PDF or save every page separately.',
+    published: true,
+    longTailKeywords: [
+      'split pdf by page range online',
+      'extract specific pages from pdf free',
+      'pdf splitter no upload private',
+      'save each pdf page as separate file',
+    ],
+    titleLongTail: 'Split PDF by Page Ranges - Free, In-Browser',
+    descriptionLongTail: 'Split a PDF by page ranges like 1-3,5 or save every page as a separate file in one ZIP. All processing happens locally in your browser, never uploaded. Free.',
+    nextTools: ['pdf-merger', 'pdf-compressor'],
+  },
+  {
+    slug: 'pdf-compressor', name: 'PDF Compressor',
+    title: 'Compress PDF Online - Honest, In-Browser Size Reduction',
+    description:
+      'Compress a PDF by rebuilding its internal structure in your browser. See exact before-and-after sizes - scanned files may not shrink. Nothing is uploaded.',
+    keywords: [
+      'compress pdf',
+      'pdf compressor online free',
+      'reduce pdf file size',
+      'pdf size reducer',
+      'shrink pdf no upload',
+    ],
+    intent: 'informational', category: 'PDF Tools', h1: 'PDF Compressor',
+    shortIntro: 'Rebuild a PDF\'s structure to reduce size, with honest reporting.',
+    published: true,
+    longTailKeywords: [
+      'compress pdf without losing quality online',
+      'reduce pdf size without upload',
+      'pdf compressor honest results',
+      'why is my pdf so large',
+    ],
+    titleLongTail: 'Compress PDF Online - Honest Before & After Sizes',
+    descriptionLongTail: 'Compress a PDF by rebuilding its internal structure in your browser. See exact before and after sizes; scanned files may not shrink. No upload, no signup, free.',
+    nextTools: ['pdf-merger', 'pdf-splitter'],
+  },
 ]
 // 图标解析已拆分至 lib/tool-icons.ts(客户端安全的轻量模块),此处 re-export 保持兼容
 export { getToolIcon } from './tool-icons'
@@ -6326,6 +6430,14 @@ export function getRelatedTools(slug: string, limit = 4): ToolMeta[] {
   if (!current) return []
 
   const published = getPublishedTools()
+
+  // ① 显式配置的 tool.relatedTools 优先(已过滤未上线/自身/不存在者),
+  //    供跨分类或单成员分类工具稳定指定推荐(如唯一的 Speech to Text)。
+  const publishedSlugs = new Set(published.map((t) => t.slug))
+  const explicit = (current.relatedTools ?? []).filter((s) => s !== slug && publishedSlugs.has(s))
+  if (explicit.length > 0) {
+    return explicit.slice(0, limit).map((s) => getTool(s)!)
+  }
 
   // Walk a stable same-category ring instead of repeatedly selecting the same
   // featured tools. Every page still recommends close neighbors, while inbound

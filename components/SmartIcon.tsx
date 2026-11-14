@@ -81,6 +81,7 @@ import {
   Lock,
   LockOpen,
   Mail,
+  Mic,
   Minimize2,
   Monitor,
   MoveHorizontal,
@@ -139,6 +140,7 @@ import {
 
 /** 图标键 → Lucide 组件(全站唯一映射表) */
 const ICON_MAP: Record<string, LucideIcon> = {
+  mic: Mic,
   calculator: Calculator,
   'credit-card': CreditCard,
   banknote: Banknote,
