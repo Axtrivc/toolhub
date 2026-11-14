@@ -378,6 +378,10 @@ export const toolLiteMeta: Record<string, ToolLiteMeta> = {
   'cat-food-calculator': { slug: 'cat-food-calculator', name: 'Cat Food Calculator', shortIntro: 'Daily kcal, cans and grams for your cat, from RER x life stage.', category: 'Pet Tools', h1: 'Cat Food Calculator', keywords: ['cat food calculator', 'how much should i feed my cat', 'cat calorie calculator', 'cat food portions', 'rer calculator cat', 'wet food cans per day'], longTailKeywords: ['how much should i feed my cat', 'cat calories per day calculator', 'how many cans of wet food per day for a cat', 'kitten feeding amount calculator'] },
   'username-generator': { slug: 'username-generator', name: 'Username Generator', shortIntro: 'Keyword plus four styles, filtered to any platform length limit.', category: 'Game Tools', h1: 'Username Generator', keywords: ['username generator', 'random username generator', 'cool username generator', 'gamer tag generator', 'unique username generator', 'username ideas from name', 'name generator for games'], longTailKeywords: ['username generator with keyword', 'gamer tag generator with numbers', 'unique username generator for games', 'username ideas from your name', 'aesthetic username generator no ads'] },
   'secret-santa-generator': { slug: 'secret-santa-generator', name: 'Secret Santa Generator', shortIntro: 'Closed-loop draw with exclusion pairs and one-at-a-time reveals.', category: 'Game Tools', h1: 'Secret Santa Generator', keywords: ['secret santa generator', 'secret santa generator with exclusions', 'secret santa draw online', 'secret santa picker', 'secret santa pair generator', 'gift exchange generator', 'kris kringle generator'], longTailKeywords: ['secret santa generator with exclusion pairs', 'secret santa generator no email', 'secret santa draw with couples excluded', 'secret santa organizer tool free', 'gift exchange pair generator offline'] },
+  'speech-to-text': { slug: 'speech-to-text', name: 'Speech to Text', shortIntro: 'Type with your voice using real-time browser speech recognition.', category: 'Speech to Text', h1: 'Speech to Text', keywords: ['speech to text', 'voice to text', 'voice typing', 'dictation online', 'transcribe voice online'], longTailKeywords: ['speech to text online free no signup', 'voice typing in browser chrome', 'dictation tool english spanish german', 'speech recognition online without upload'] },
+  'pdf-merger': { slug: 'pdf-merger', name: 'PDF Merger', shortIntro: 'Combine multiple PDFs into one file, in the order you choose.', category: 'PDF Tools', h1: 'PDF Merger', keywords: ['merge pdf', 'combine pdf files', 'pdf merger online free', 'join pdf files', 'pdf combiner no upload'], longTailKeywords: ['merge pdf files without uploading', 'combine multiple pdfs into one free', 'pdf merger drag and drop reorder', 'offline pdf combiner browser'] },
+  'pdf-splitter': { slug: 'pdf-splitter', name: 'PDF Splitter', shortIntro: 'Extract page ranges from a PDF or save every page separately.', category: 'PDF Tools', h1: 'PDF Splitter', keywords: ['split pdf', 'pdf splitter online free', 'extract pdf pages', 'pdf page range extractor', 'separate pdf pages'], longTailKeywords: ['split pdf by page range online', 'extract specific pages from pdf free', 'pdf splitter no upload private', 'save each pdf page as separate file'] },
+  'pdf-compressor': { slug: 'pdf-compressor', name: 'PDF Compressor', shortIntro: 'Rebuild a PDF\'s structure to reduce size, with honest reporting.', category: 'PDF Tools', h1: 'PDF Compressor', keywords: ['compress pdf', 'pdf compressor online free', 'reduce pdf file size', 'pdf size reducer', 'shrink pdf no upload'], longTailKeywords: ['compress pdf without losing quality online', 'reduce pdf size without upload', 'pdf compressor honest results', 'why is my pdf so large'] },
 }
 
 /** 置顶热门工具(featured,顺序与 lib/tools.ts 声明一致;客户端按需 slice) */
@@ -497,7 +501,7 @@ export const relatedIndex: Record<string, string[]> = {
   'http-status-code-lookup': ['iban-validator', 'image-to-base64', 'ip-checker', 'ip-subnet-calculator'],
   'css-minifier': ['csv-to-json', 'csv-to-sql-converter', 'curl-converter', 'delay-time-calculator'],
   'csv-to-sql-converter': ['curl-converter', 'delay-time-calculator', 'docker-run-to-compose', 'epoch-converter'],
-  'word-counter': ['add-line-numbers', 'character-frequency', 'csv-to-markdown-table', 'email-extractor'],
+  'word-counter': ['character-frequency', 'add-line-numbers', 'speech-to-text', 'reading-level-checker'],
   'text-diff': ['text-to-list', 'title-case-converter', 'typing-speed-test', 'uppercase-converter'],
   'remove-line-breaks': ['reverse-text', 'rot13-converter', 'sentence-case-converter', 'slug-to-title'],
   'find-and-replace': ['html-tag-stripper', 'line-diff-checker', 'list-diff', 'lowercase-converter'],
@@ -746,6 +750,10 @@ export const relatedIndex: Record<string, string[]> = {
   'cat-food-calculator': ['dog-age-calculator', 'dog-food-calculator', 'cat-age-calculator', 'loan-calculator'],
   'username-generator': ['wheel-spinner', 'coin-flip', 'dice-roller', 'random-team-generator'],
   'secret-santa-generator': ['username-generator', 'wheel-spinner', 'coin-flip', 'dice-roller'],
+  'speech-to-text': ['word-counter', 'reading-level-checker', 'add-line-numbers', 'character-frequency'],
+  'pdf-merger': ['pdf-splitter', 'pdf-compressor', 'loan-calculator', 'compound-interest-calculator'],
+  'pdf-splitter': ['pdf-compressor', 'pdf-merger', 'loan-calculator', 'compound-interest-calculator'],
+  'pdf-compressor': ['pdf-merger', 'pdf-splitter', 'loan-calculator', 'compound-interest-calculator'],
 }
 
 /** slug → 工作流下一步推荐(显式 nextTools 优先,否则同分类前 2 款) */
@@ -851,7 +859,7 @@ export const nextIndex: Record<string, string[]> = {
   'http-status-code-lookup': ['iban-validator', 'image-to-base64'],
   'css-minifier': ['csv-to-json', 'csv-to-sql-converter'],
   'csv-to-sql-converter': ['curl-converter', 'delay-time-calculator'],
-  'word-counter': ['add-line-numbers', 'character-frequency'],
+  'word-counter': ['character-frequency', 'add-line-numbers'],
   'text-diff': ['text-to-list', 'title-case-converter'],
   'remove-line-breaks': ['reverse-text', 'rot13-converter'],
   'find-and-replace': ['html-tag-stripper', 'line-diff-checker'],
@@ -1100,6 +1108,10 @@ export const nextIndex: Record<string, string[]> = {
   'cat-food-calculator': ['cat-age-calculator'],
   'username-generator': ['password-generator'],
   'secret-santa-generator': ['random-team-generator', 'wheel-spinner'],
+  'speech-to-text': ['word-counter', 'add-line-numbers'],
+  'pdf-merger': ['pdf-splitter', 'pdf-compressor'],
+  'pdf-splitter': ['pdf-merger', 'pdf-compressor'],
+  'pdf-compressor': ['pdf-merger', 'pdf-splitter'],
 }
 
 /** 取某工具的相关工具轻量数据(缺失/未知 slug 一律安全回退空数组) */

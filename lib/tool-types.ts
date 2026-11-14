@@ -35,4 +35,6 @@ export interface ToolMeta {
   featured?: boolean
   /** 工作流下一步推荐(可选,slug 数组) */
   nextTools?: string[]
+  /** 相关工具推荐(可选,slug 数组;设置后优先于同分类轮转,用于跨分类或单成员分类工具) */
+  relatedTools?: string[]
 }

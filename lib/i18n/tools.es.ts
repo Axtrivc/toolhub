@@ -1445,5 +1445,20 @@ export const esTools: Record<string, { name: string; shortIntro: string }> = {
     name: 'Conversor ROT13',
     shortIntro: 'Codifica y decodifica ROT13, con ROT5 y desplazamientos ROT-N.',
   },
-
+  'speech-to-text': {
+    name: 'Voz a texto',
+    shortIntro: 'Escribe con tu voz usando el reconocimiento de voz en tiempo real del navegador.',
+  },
+  'pdf-merger': {
+    name: 'Fusionar PDF',
+    shortIntro: 'Combina varios PDF en un solo archivo, en el orden que elijas.',
+  },
+  'pdf-splitter': {
+    name: 'Dividir PDF',
+    shortIntro: 'Extrae rangos de páginas de un PDF o guarda cada página por separado.',
+  },
+  'pdf-compressor': {
+    name: 'Comprimir PDF',
+    shortIntro: 'Reconstruye la estructura interna de un PDF para reducir su tamaño.',
+  },
 }

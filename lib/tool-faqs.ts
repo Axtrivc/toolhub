@@ -5076,6 +5076,78 @@ export const toolFaqs: Record<string, FaqPair[]> = {
       a: 'Forum spoiler etiquette, puzzle hints, scrambled answer keys — the classic Usenet use case survives because a veil you must choose to lift is exactly right for "read only if you want to know".',
     },
   ],
+  'speech-to-text': [
+    {
+      q: 'Does my voice leave my device?',
+      a: 'The transcript appears in your browser, but the audio itself is processed by your browser vendor\'s speech service (for example, Google\'s servers in Chrome). ToolHub never receives, stores, or sees the audio or the transcript — there is no server round-trip to this site.',
+    },
+    {
+      q: 'Which browsers are supported?',
+      a: 'Any Chromium-based browser (Chrome, Edge, Brave, Opera) with live microphone input. Firefox and Safari do not expose the Web Speech API for speech recognition, so the tool shows a clear "not supported" notice instead of failing silently.',
+    },
+    {
+      q: 'Why does recognition need an internet connection?',
+      a: 'Browser vendors run the actual speech models on their own servers, so the audio must reach them. Recognition quality and availability are subject to the vendor\'s service — mic access alone is not enough for live transcription.',
+    },
+    {
+      q: 'How accurate is it?',
+      a: 'For clear, everyday speech in English, Spanish, or German it is usually good enough to edit rather than retype. Accents, technical jargon, and noisy rooms degrade it — always proofread the transcript before using it.',
+    },
+  ],
+  'pdf-merger': [
+    {
+      q: 'Are my PDFs uploaded anywhere?',
+      a: 'No. Files are read into your browser\'s memory with the File API and merged by pdf-lib running locally. You can verify in your browser\'s developer tools network tab: zero requests while merging.',
+    },
+    {
+      q: 'Is there a page or file count limit?',
+      a: 'No hard limit — only your device\'s memory. Merging dozens of typical documents is fine; hundreds of very large files may exhaust RAM, in which case merge in smaller batches.',
+    },
+    {
+      q: 'Can I reorder files before merging?',
+      a: 'Yes. Every added file appears in a list with move-up and move-down controls, and the merged PDF follows that exact order. Remove any file you added by mistake.',
+    },
+    {
+      q: 'What happens if one file is corrupted or password-protected?',
+      a: 'That file is flagged in the list with its error and excluded from the merge, so one bad apple does not ruin the batch. Password-protected PDFs must be unlocked first — removing encryption is deliberately not offered.',
+    },
+  ],
+  'pdf-splitter': [
+    {
+      q: 'How do page ranges work?',
+      a: 'Type ranges like 1-3,5,8-10 — comma-separated single pages and inclusive spans. The tool shows a live preview of exactly which pages will be extracted, and rejects out-of-range or inverted ranges like 5-2 before you download anything.',
+    },
+    {
+      q: 'Can I get every page as a separate file?',
+      a: 'Yes. Choose the ZIP output mode: each page (or each range) becomes its own PDF named part-1.pdf, part-2.pdf, and so on, packed into a single ZIP you download once.',
+    },
+    {
+      q: 'Does splitting reduce quality?',
+      a: 'No. Pages are copied byte-for-byte from the original document structure; text and images on the kept pages are untouched. Nothing is re-compressed or re-rendered.',
+    },
+    {
+      q: 'Why is my protected PDF rejected?',
+      a: 'Password-encrypted PDFs cannot be opened for splitting in the browser without the password, and this tool deliberately does not attempt decryption. Remove the protection with the owner\'s tool first, then split here.',
+    },
+  ],
+  'pdf-compressor': [
+    {
+      q: 'How does the compression work?',
+      a: 'The PDF is rebuilt with pdf-lib using compressed object streams: duplicate and obsolete internal objects are dropped and the file structure is rewritten more efficiently. Your page content and images are not re-encoded.',
+    },
+    {
+      q: 'Will my file definitely get smaller?',
+      a: 'Not guaranteed. Files produced by bloated exporters often shrink noticeably, but already-optimized or scanned PDFs can stay the same size — or even grow slightly. The tool always shows exact before-and-after sizes so you see the truth and can keep whichever file is smaller.',
+    },
+    {
+      q: 'Does it compress images inside the PDF?',
+      a: 'No — image data passes through unchanged, which keeps quality intact but means image-heavy files will not shrink much. Re-encoding images (with quality loss) is deliberately out of scope.',
+    },
+    {
+      q: 'Is my document uploaded to a server?',
+      a: 'No. The entire rebuild happens in your browser\'s memory and the result downloads straight back to your device. Nothing is transmitted; check the network tab and you will see no requests.',
+    },
+  ],
 }
 export function getToolFaqs(slug: string): FaqPair[] {
   return toolFaqs[slug] ?? []

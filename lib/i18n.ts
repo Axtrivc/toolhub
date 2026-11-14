@@ -1169,6 +1169,8 @@ export type CategoryKey =
   | 'Game Tools'
   | 'Pet Tools'
   | 'Home Calculators'
+  | 'Speech to Text'
+  | 'PDF Tools'
 
 const categoryDicts: Record<Locale, Partial<Record<CategoryKey, string>>> = {
   en: {},
@@ -1189,6 +1191,8 @@ const categoryDicts: Record<Locale, Partial<Record<CategoryKey, string>>> = {
     'Game Tools': 'Juegos',
     'Pet Tools': 'Mascotas',
     'Home Calculators': 'Calculadoras del hogar',
+    'Speech to Text': 'Voz a texto',
+    'PDF Tools': 'Herramientas PDF',
   },
   de: {
     'Finance Calculators': 'Finanzrechner',
@@ -1206,6 +1210,8 @@ const categoryDicts: Record<Locale, Partial<Record<CategoryKey, string>>> = {
     'Game Tools': 'Spiele',
     'Pet Tools': 'Haustiere',
     'Home Calculators': 'Haushaltsrechner',
+    'Speech to Text': 'Sprache-zu-Text',
+    'PDF Tools': 'PDF-Werkzeuge',
   },
 }
 
