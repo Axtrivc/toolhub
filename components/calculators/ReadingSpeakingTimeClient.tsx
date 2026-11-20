@@ -298,7 +298,7 @@ export function ReadingSpeakingTimeClient() {
       </div>
 
       <CalculatorNote>
-        {L('noteText', '⏱️ Estimates assume steady pacing: silent reading averages roughly 150–200 wpm for adults, while clear presentation speech sits near 100–130 wpm. Real delivery runs slower with pauses, slides, and audience interaction — budget a 10–20% buffer for live talks.')}
+        {L('noteText', 'The estimate assumes a steady pace. For a live talk, time yourself reading a sample aloud, set the speaking speed to match, and allow extra time for pauses and slides.')}
       </CalculatorNote>
     </div>
   )

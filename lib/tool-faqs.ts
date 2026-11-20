@@ -1852,8 +1852,8 @@ export const toolFaqs: Record<string, FaqPair[]> = {
   ],
   'reading-speaking-time': [
     {
-      q: 'What reading speed counts as "average"?',
-      a: 'Around 200–250 words per minute for silent reading of adult non-fiction. The presets give slow (~150), average (~230), and fast (~320) options, and a custom slider lets you match your own pace or a specific audience.',
+      q: 'How does the calculator estimate reading time for English text?',
+      a: 'The default is 150 words per minute. At that pace, 1,500 words take 10 minutes to read. Choose Slow (100), Average (150), Fast (200), or Skim (300), or use the slider to set your own pace.',
     },
     {
       q: 'Why is speaking time longer than reading time?',

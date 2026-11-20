@@ -26,7 +26,7 @@ const en: ReactNode = (
       <p>
         Words are counted by splitting the trimmed text on whitespace, and the time is simply{' '}
         <code>words ÷ words-per-minute</code>. Presets cover common speeds: <strong>slow reading</strong> (100
-        wpm), the <strong>adult average</strong> (~150 wpm), <strong>fast reading</strong> (200 wpm), and{' '}
+        wpm), the <strong>default reading pace</strong> (150 wpm), <strong>fast reading</strong> (200 wpm), and{' '}
         <strong>skimming</strong> (300 wpm), plus a custom slider from 50–400 wpm. Speaking presets reflect real
         delivery: a measured <strong>presentation</strong> (~100 wpm), normal <strong>conversation</strong> (~130
         wpm), and a <strong>fast speaker</strong> (~160 wpm). For Chinese, Japanese, or Korean text, every
@@ -78,7 +78,7 @@ const es: ReactNode = (
       <p>
         Las palabras se cuentan dividiendo por espacios en blanco el texto tras recortar los extremos, y el tiempo es simplemente{' '}
         <code>words ÷ words-per-minute</code>. Los preajustes cubren velocidades habituales:{' '}
-        <strong>lectura lenta</strong> (100 ppm), el <strong>promedio de adultos</strong> (~150 ppm),{' '}
+        <strong>lectura lenta</strong> (100 ppm), el <strong>ritmo predeterminado</strong> (150 ppm),{' '}
         <strong>lectura rápida</strong> (200 ppm) y <strong>lectura diagonal</strong> (300 ppm), además de un
         deslizador personalizado de 50–400 ppm. Los preajustes de habla reflejan una entrega real: una{' '}
         <strong>presentación</strong> mesurada (~100 ppm), una <strong>conversación</strong> normal (~130 ppm) y un{' '}
@@ -132,7 +132,7 @@ const de: ReactNode = (
         Wörter werden gezählt, indem der Text an Anfang und Ende von Leerzeichen befreit und anschließend an
         Leerzeichen aufgeteilt wird; die Zeit ist einfach{' '}
         <code>words ÷ words-per-minute</code>. Voreinstellungen decken gängige Geschwindigkeiten ab:{' '}
-        <strong>langsames Lesen</strong> (100 WpM), der <strong>Erwachsenen-Durchschnitt</strong> (~150 WpM),{' '}
+        <strong>langsames Lesen</strong> (100 WpM), das <strong>voreingestellte Lesetempo</strong> (150 WpM),{' '}
         <strong>schnelles Lesen</strong> (200 WpM) und <strong>überfliegendes Lesen</strong> (300 WpM), plus ein
         Schieberegler von 50–400 WpM. Sprech-Voreinstellungen spiegeln reales Sprechen wider: eine{' '}
         <strong>Präsentation</strong> in ruhigem Tempo (~100 WpM), ein normales <strong>Gespräch</strong> (~130 WpM) und ein{' '}

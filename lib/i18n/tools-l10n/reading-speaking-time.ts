@@ -17,7 +17,7 @@ export const readingSpeakingTimeL10n: ToolL10n = {
       'copySummary': 'Copiar resumen',
       'cpmUnit': 'caracteres/min',
       'customSpeed': 'Velocidad personalizada: ',
-      'noteText': '⏱️ Las estimaciones asumen ritmo constante: la lectura silenciosa adulta promedia ~150–200 ppm, mientras que el habla clara ronda los 100–130 ppm. La entrega real es más lenta con pausas, diapositivas e interacción — reserva un margen del 10–20 % en charlas en vivo.',
+      'noteText': 'El cálculo supone un ritmo constante. Para preparar una charla, cronometra la lectura en voz alta de un fragmento, ajusta la velocidad y añade tiempo para las pausas y las diapositivas.',
       'pages': 'Páginas',
       'pasteSomeTextFirst': 'pega algo de texto primero',
       'pasteYourText': 'Pega tu texto',
@@ -55,8 +55,8 @@ export const readingSpeakingTimeL10n: ToolL10n = {
     ],
     faqs: [
       {
-        q: '¿Qué velocidad de lectura cuenta como «media»?',
-        a: 'Alrededor de 150–200 palabras por minuto en lectura silenciosa de no ficción para adultos. Los preajustes ofrecen lento (~100), media (~150) y rápido (~200), y un deslizador personalizado te permite adaptar el cálculo a tu propio ritmo o a una audiencia concreta.',
+        q: '¿Cómo se calcula el tiempo de lectura de un texto en español?',
+        a: 'El ritmo inicial es de 150 palabras por minuto. A ese ritmo, leer 1.500 palabras lleva 10 minutos. Puedes elegir entre 100, 150, 200 y 300 palabras por minuto o ajustar el deslizador a tu propio ritmo.',
       },
       {
         q: '¿Por qué el tiempo de habla es mayor que el de lectura?',
@@ -87,7 +87,7 @@ export const readingSpeakingTimeL10n: ToolL10n = {
       'copySummary': 'Zusammenfassung kopieren',
       'cpmUnit': 'Zeichen/min',
       'customSpeed': 'Eigene Geschwindigkeit: ',
-      'noteText': '⏱️ Schätzungen setzen gleichmäßiges Tempo voraus: stilles Lesen liegt bei Erwachsenen bei ~150–200 WpM, klares Sprechen bei ~100–130 WpM. Echte Vorträge sind langsamer (Pausen, Folien, Interaktion) — für Live-Talks 10–20 % Puffer einplanen.',
+      'noteText': 'Die Schätzung geht von einem gleichmäßigen Tempo aus. Lies für einen Vortrag einen Abschnitt laut, stoppe die Zeit und stelle dein Sprechtempo ein. Plane zusätzlich Zeit für Pausen und Folien ein.',
       'pages': 'Seiten',
       'pasteSomeTextFirst': 'erst Text einfügen',
       'pasteYourText': 'Füge deinen Text ein',
@@ -125,8 +125,8 @@ export const readingSpeakingTimeL10n: ToolL10n = {
     ],
     faqs: [
       {
-        q: 'Welches Lesetempo gilt als „durchschnittlich“?',
-        a: 'Etwa 150–200 Wörter pro Minute beim stillen Lesen von Sachtexten für Erwachsene. Die Vorgaben bieten langsam (~100), durchschnittlich (~150) und schnell (~200), und über den Regler passt du das Tempo an deinen eigenen Lesefluss oder dein Publikum an.',
+        q: 'Wie berechnet der Rechner die Lesezeit für einen deutschen Text?',
+        a: 'Voreingestellt sind 150 Wörter pro Minute. Bei diesem Tempo dauert ein Text mit 1.500 Wörtern 10 Minuten. Du kannst zwischen 100, 150, 200 und 300 Wörtern pro Minute wählen oder dein eigenes Lesetempo mit dem Regler einstellen.',
       },
       {
         q: 'Warum ist die Sprechzeit länger als die Lesezeit?',
