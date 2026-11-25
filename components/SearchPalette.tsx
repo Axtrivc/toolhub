@@ -204,7 +204,7 @@ export function SearchPalette({ locale, open, onClose }: SearchPaletteProps) {
           aria-label={t(locale, 'searchClose')}
           tabIndex={-1}
           onClick={onClose}
-          className="fixed inset-0 z-50 h-screen w-screen bg-black/20 backdrop-blur-sm supports-[height:100dvh]:h-dvh dark:bg-black/50"
+          className="fixed inset-0 z-50 h-screen w-screen bg-black/35 supports-[height:100dvh]:h-dvh dark:bg-black/50"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0, transition: { duration: 0.15 } }}
@@ -235,11 +235,11 @@ export function SearchPalette({ locale, open, onClose }: SearchPaletteProps) {
             ref={panelRef}
             {...panelMotion}
             onClick={(e) => e.stopPropagation()}
-            className="relative flex max-h-[70vh] w-full max-w-xl flex-col overflow-hidden rounded-2xl border border-gray-100 shadow-2xl ring-1 ring-black/5 supports-[height:100dvh]:max-h-[70dvh] dark:border-gray-800 dark:ring-white/5"
+            className="relative flex max-h-[70vh] w-full max-w-xl flex-col overflow-hidden rounded-2xl border border-hairline supports-[height:100dvh]:max-h-[70dvh]"
             style={{ transformOrigin: '50% 0%', backgroundColor: 'rgb(var(--bg-card))' }}
           >
           {/* 搜索输入 */}
-          <div className="flex items-center gap-3 border-b border-gray-100 px-4 dark:border-gray-800">
+          <div className="flex items-center gap-3 border-b border-hairline px-4 focus-within:border-primary">
             <svg
               className="h-5 w-5 shrink-0"
               style={{ color: 'rgb(var(--text-subtle))' }}
@@ -265,7 +265,7 @@ export function SearchPalette({ locale, open, onClose }: SearchPaletteProps) {
               onKeyDown={onKeyDown}
               placeholder={t(locale, 'searchPalettePlaceholder')}
               enterKeyHint="search"
-              className="h-14 w-full bg-transparent text-base outline-none placeholder:opacity-60"
+              className="h-14 w-full bg-transparent text-base outline-none placeholder:text-muted-ink"
               style={{ color: 'rgb(var(--text))' }}
               autoFocus
               autoComplete="off"
@@ -280,7 +280,7 @@ export function SearchPalette({ locale, open, onClose }: SearchPaletteProps) {
               }
             />
             <kbd
-              className="hidden shrink-0 rounded border border-gray-200 px-1.5 py-0.5 text-xs font-medium dark:border-gray-700"
+              className="hidden shrink-0 rounded border border-hairline px-1.5 py-0.5 text-xs font-medium"
               style={{ color: 'rgb(var(--text-subtle))' }}
             >
               ESC
@@ -297,7 +297,7 @@ export function SearchPalette({ locale, open, onClose }: SearchPaletteProps) {
               >
                 <svg
                   className="h-5 w-5"
-                  style={{ color: 'rgb(var(--text-faint))' }}
+                  style={{ color: 'rgb(var(--text-subtle))' }}
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -310,7 +310,7 @@ export function SearchPalette({ locale, open, onClose }: SearchPaletteProps) {
                 {t(locale, 'searchNoResults')}
               </p>
               {query.trim() ? (
-                <p className="mt-1 truncate px-2 text-xs" style={{ color: 'rgb(var(--text-faint))' }}>
+                <p className="mt-1 truncate px-2 text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>
                   {t(locale, 'searchEmptyQueryEcho', { query: query.trim() })}
                 </p>
               ) : null}
@@ -322,7 +322,7 @@ export function SearchPalette({ locale, open, onClose }: SearchPaletteProps) {
                     setActiveIndex(0)
                     inputRef.current?.focus()
                   }}
-                  className="rounded-lg border px-3 py-2 text-xs font-medium transition hover:bg-slate-100 dark:hover:bg-slate-800"
+                  className="rounded-lg border px-3 py-2 text-xs font-medium transition hover:bg-surface-card"
                   style={{ borderColor: 'rgb(var(--border-strong))', color: 'rgb(var(--text-muted))' }}
                 >
                   {t(locale, 'searchEmptyClear')}
@@ -333,12 +333,12 @@ export function SearchPalette({ locale, open, onClose }: SearchPaletteProps) {
                     onClose()
                     router.push('/tools/')
                   }}
-                  className="rounded-lg px-3 py-2 text-xs font-medium text-brand-600 transition hover:underline dark:text-brand-400"
+                  className="rounded-lg px-3 py-2 text-xs font-medium text-brand-700 transition hover:underline dark:text-brand-400"
                 >
                   {t(locale, 'searchEmptyBrowse')}
                 </button>
               </div>
-              <p className="mt-4 text-xs" style={{ color: 'rgb(var(--text-faint))' }}>
+              <p className="mt-4 text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>
                 {t(locale, 'searchEmptyHint')}
               </p>
             </div>
@@ -356,12 +356,12 @@ export function SearchPalette({ locale, open, onClose }: SearchPaletteProps) {
                     className={
                       'flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-sm transition-colors duration-150 ' +
                       (activeIndex === 0
-                        ? 'bg-blue-50/80 dark:bg-gray-800/80'
-                        : 'hover:bg-blue-50/60 dark:hover:bg-gray-800/60')
+                        ? 'bg-surface-card'
+                        : 'hover:bg-surface-card')
                     }
                   >
                     <span
-                      className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md text-base"
+                      className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-base"
                       style={{ backgroundColor: 'rgb(var(--bg-subtle))' }}
                       aria-hidden="true"
                     >
@@ -370,7 +370,7 @@ export function SearchPalette({ locale, open, onClose }: SearchPaletteProps) {
                     <span className="min-w-0 flex-1">
                       <span className="block truncate font-medium">
                         {inline.expression} <span className="opacity-60">=</span>{' '}
-                        <span className="font-bold text-primary">{inline.result}</span>
+                        <span className="font-serif text-lg font-normal text-ink">{inline.result}</span>
                       </span>
                       <span className="block truncate text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>
                         {t(locale, 'searchQuickAnswer')}
@@ -409,16 +409,16 @@ export function SearchPalette({ locale, open, onClose }: SearchPaletteProps) {
                       className={
                         'flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm transition-colors duration-150 ' +
                         (isActive
-                          ? 'bg-blue-50/80 dark:bg-gray-800/80'
-                          : 'hover:bg-blue-50/60 dark:hover:bg-gray-800/60')
+                          ? 'bg-surface-card'
+                          : 'hover:bg-surface-card')
                       }
                       style={{ color: 'rgb(var(--text))' }}
                     >
                       <span
-                        className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md text-base transition-colors duration-150"
+                        className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-base transition-colors duration-150"
                         style={{
                           backgroundColor: isActive
-                            ? 'rgb(255 255 255 / 0.7)'
+                            ? 'rgb(var(--bg))'
                             : 'rgb(var(--bg-subtle))',
                         }}
                         aria-hidden="true"
@@ -472,7 +472,7 @@ export function SearchPalette({ locale, open, onClose }: SearchPaletteProps) {
 
           {/* 底部提示栏 */}
           <div
-            className="flex items-center justify-between gap-2 border-t border-gray-100 px-4 py-2.5 text-xs dark:border-gray-800"
+            className="flex items-center justify-between gap-2 border-t border-hairline bg-surface-soft px-4 py-2.5 text-xs"
             style={{ color: 'rgb(var(--text-subtle))' }}
           >
             <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
@@ -490,7 +490,7 @@ export function SearchPalette({ locale, open, onClose }: SearchPaletteProps) {
                 <span>{t(locale, 'searchKbdClose')}</span>
               </span>
             </div>
-            <span style={{ color: 'rgb(var(--text-faint))' }}>
+            <span style={{ color: 'rgb(var(--text-subtle))' }}>
               {query.trim()
                 ? `${t(locale, 'searchMatchesCount', { count: total })} · ${t(locale, 'searchPaletteHint', { count: TOOLS.length })}`
                 : t(locale, 'searchPaletteHint', { count: TOOLS.length })}
@@ -508,7 +508,7 @@ export function SearchPalette({ locale, open, onClose }: SearchPaletteProps) {
 function Kbd({ children }: { children: React.ReactNode }) {
   return (
     <kbd
-      className="inline-flex h-5 min-w-[1.25rem] items-center justify-center rounded border border-gray-200 px-1 font-sans text-[11px] font-semibold dark:border-gray-700"
+      className="inline-flex h-5 min-w-[1.25rem] items-center justify-center rounded border border-hairline px-1 font-mono text-xs font-semibold"
       style={{ color: 'rgb(var(--text-muted))' }}
     >
       {children}

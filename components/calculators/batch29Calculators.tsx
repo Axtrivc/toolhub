@@ -102,8 +102,8 @@ export const BtuCalculatorClient = makeCalculatorClient({
       (v.kitchen === 'yes' ? 4000 : 0)
     return {
       rows: [
-        { label: 'Area only (20 BTU/ft²)', segments: [{ label: 'Cooling load', value: area * 20, color: '#94a3b8' }] },
-        { label: 'With your corrections', segments: [{ label: 'Cooling load', value: Math.round(total / 500) * 500, color: '#3b82f6' }] },
+        { label: 'Area only (20 BTU/ft²)', segments: [{ label: 'Cooling load', value: area * 20, color: 'var(--chart-muted)' }] },
+        { label: 'With your corrections', segments: [{ label: 'Cooling load', value: Math.round(total / 500) * 500, color: 'var(--chart-coral)' }] },
       ],
       formatTotal: (n) => `${Math.round(n).toLocaleString('en-US')} BTU`,
     }
@@ -239,8 +239,8 @@ export const WallpaperCalculatorClient = makeCalculatorClient({
     if (dbl == null || single == null) return null
     return {
       rows: [
-        { label: 'Your roll', segments: [{ label: 'Rolls', value: dbl, color: '#3b82f6' }] },
-        { label: 'US single (13.5 ft)', segments: [{ label: 'Rolls', value: single, color: '#f59e0b' }] },
+        { label: 'Your roll', segments: [{ label: 'Rolls', value: dbl, color: 'var(--chart-coral)' }] },
+        { label: 'US single (13.5 ft)', segments: [{ label: 'Rolls', value: single, color: 'var(--chart-amber)' }] },
       ],
       formatTotal: (n) => `${Math.round(n)}`,
     }
@@ -322,16 +322,16 @@ export const RaisedBedSoilCalculatorClient = makeCalculatorClient({
     return {
       rows: [
         { label: "Mel's Mix (1:1:1)", segments: [
-          { label: 'Compost', value: ft3 / 3, color: '#22c55e' },
-          { label: 'Coir', value: ft3 / 3, color: '#a16207' },
+          { label: 'Compost', value: ft3 / 3, color: 'var(--chart-teal)' },
+          { label: 'Coir', value: ft3 / 3, color: 'var(--chart-tan)' },
           // 蛭石是本行末段:行尾白色总值标签压在它上面,深板岩灰
           // (#475569,含 0.92 不透明度合成后白字对比 ~6:1;原 #f59e0b 仅 ~2:1)
           { label: 'Vermiculite', value: ft3 / 3, color: '#475569' },
         ] },
         { label: 'Budget blend (50/30/20)', segments: [
-          { label: 'Compost', value: ft3 * 0.3, color: '#22c55e' },
-          { label: 'Coir', value: ft3 * 0.2, color: '#a16207' },
-          { label: 'Topsoil', value: ft3 * 0.5, color: '#78350f' },
+          { label: 'Compost', value: ft3 * 0.3, color: 'var(--chart-teal)' },
+          { label: 'Coir', value: ft3 * 0.2, color: 'var(--chart-tan)' },
+          { label: 'Topsoil', value: ft3 * 0.5, color: 'var(--chart-ink)' },
         ] },
       ],
       formatTotal: (n) => `${fmtNum(n, 1)} ft³`,
@@ -466,10 +466,10 @@ export const CoffeeRatioCalculatorClient = makeCalculatorClient({
     const g = (r: number) => water / r
     return {
       rows: [
-        { label: 'Espresso 1:2', segments: [{ label: 'Coffee', value: g(2), color: '#78350f' }] },
-        { label: 'Cold brew 1:8', segments: [{ label: 'Coffee', value: g(8), color: '#92400e' }] },
-        { label: 'French press 1:12', segments: [{ label: 'Coffee', value: g(12), color: '#b45309' }] },
-        { label: 'Pour-over 1:16', segments: [{ label: 'Coffee', value: g(16), color: '#f59e0b' }] },
+        { label: 'Espresso 1:2', segments: [{ label: 'Coffee', value: g(2), color: 'var(--chart-ink)' }] },
+        { label: 'Cold brew 1:8', segments: [{ label: 'Coffee', value: g(8), color: 'var(--chart-rust)' }] },
+        { label: 'French press 1:12', segments: [{ label: 'Coffee', value: g(12), color: 'var(--chart-amber)' }] },
+        { label: 'Pour-over 1:16', segments: [{ label: 'Coffee', value: g(16), color: 'var(--chart-amber)' }] },
       ],
       formatTotal: (n) => `${Math.round(n)} g`,
     }
@@ -548,10 +548,10 @@ export const BreadHydrationCalculatorClient = makeCalculatorClient({
       return isNaN(f) || f <= 0 || isNaN(w) || w < 0 ? 0 : 100
     },
     zones: [
-      { upTo: 58, color: '#94a3b8', label: 'Stiff — bagels' },
-      { upTo: 68, color: '#3b82f6', label: 'Standard loaf' },
-      { upTo: 78, color: '#22c55e', label: 'High — artisan' },
-      { upTo: 100, color: '#f97316', label: 'Very high — ciabatta' },
+      { upTo: 58, color: 'var(--chart-muted)', label: 'Stiff — bagels' },
+      { upTo: 68, color: 'var(--chart-coral)', label: 'Standard loaf' },
+      { upTo: 78, color: 'var(--chart-teal)', label: 'High — artisan' },
+      { upTo: 100, color: 'var(--chart-coral)', label: 'Very high — ciabatta' },
     ],
     formatValue: (n) => `${n.toFixed(1)}%`,
   },

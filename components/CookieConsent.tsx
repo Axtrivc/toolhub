@@ -64,18 +64,14 @@ export function CookieConsent() {
 
   return (
     <div
+      data-embed-hide
       role="dialog"
       aria-label={t(locale, 'cookieAriaLabel')}
-      className="fixed inset-x-0 bottom-0 z-50 mx-3 mb-[calc(0.75rem+env(safe-area-inset-bottom))] mt-3 max-w-2xl rounded-xl border p-4 shadow-lg sm:mx-4 sm:mb-[calc(1rem+env(safe-area-inset-bottom))]"
-      style={{
-        borderColor: 'rgb(var(--border))',
-        backgroundColor: 'rgb(var(--bg-card))',
-        color: 'rgb(var(--text))',
-      }}
+      className="fixed bottom-[calc(5.5rem+env(safe-area-inset-bottom))] right-4 z-50 w-[calc(100%-2rem)] max-w-[360px] rounded-xl border border-on-dark/15 bg-surface-dark p-6 text-on-dark sm:right-5"
     >
-      <p className="text-sm">
+      <p className="text-sm leading-relaxed">
         {bodyBefore}
-        <Link href="/privacy/" className="underline hover:opacity-80">
+        <Link href="/privacy/" className="text-primary underline decoration-primary/60 underline-offset-2">
           {privacyLabel}
         </Link>
         {bodyAfter}
@@ -91,7 +87,7 @@ export function CookieConsent() {
         <button
           type="button"
           onClick={() => decide('necessary')}
-          className="btn btn-secondary text-sm"
+          className="btn border border-on-dark/20 bg-dark-elevated text-sm text-on-dark"
         >
           {t(locale, 'cookieNecessaryOnly')}
         </button>

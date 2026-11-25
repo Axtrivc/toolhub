@@ -84,7 +84,7 @@ function Slider({
     <div>
       <div className="mb-1 flex items-center justify-between">
         <label htmlFor={id} className="text-xs font-medium text-slate-600 dark:text-slate-300">{label}</label>
-        <span className="font-mono text-xs text-slate-400">
+        <span className="font-mono text-xs text-muted-ink">
           {value}
           {unit}
         </span>
@@ -262,7 +262,7 @@ export function CssShadowGeneratorClient() {
           <span className="text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>{L('generatedCss', 'Generated CSS')}</span>
           <CopyButton value={cssCode} label={L('copy', 'Copy')} />
         </div>
-        <pre
+        <pre data-code-output
           className="overflow-x-auto rounded-lg border bg-slate-50 p-4 text-xs dark:bg-slate-800/60"
           style={{ borderColor: 'rgb(var(--border))' }}
         >

@@ -319,7 +319,7 @@ export function SvgMinifierClient() {
             />
             <span>
               <span className="font-medium">{t.label}</span>
-              <span className="block text-[11px]" style={{ color: 'rgb(var(--text-faint))' }}>
+              <span className="block text-[11px]" style={{ color: 'rgb(var(--text-subtle))' }}>
                 {t.hint}
               </span>
             </span>

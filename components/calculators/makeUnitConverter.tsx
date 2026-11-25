@@ -276,7 +276,7 @@ export function makeUnitConverter(config: {
         {/* ⇄ 交换 From/To:输入数值保持不变,语义跟随单位互换 */}
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div className="flex flex-wrap items-center gap-1.5">
-            <span className="mr-1 text-xs" style={{ color: 'rgb(var(--text-faint))' }}>
+            <span className="mr-1 text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>
               {LC('quickValues', 'Quick values')}
             </span>
             {QUICK_VALUES.map((qv) => (
@@ -285,7 +285,7 @@ export function makeUnitConverter(config: {
                 type="button"
                 onClick={() => setValue(String(qv))}
                 aria-pressed={toNum(value) === qv}
-                className="rounded-full px-2.5 py-1 text-xs font-medium tabular-nums transition-all duration-200 hover:-translate-y-px"
+                className="rounded-full px-2.5 py-1 text-xs font-medium tabular-nums transition-all duration-200"
                 style={
                   toNum(value) === qv
                     ? { backgroundColor: 'rgb(var(--primary))', color: '#fff' }
@@ -353,7 +353,7 @@ export function makeUnitConverter(config: {
             <span className="text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>
               {LC('allUnits', 'All units')}
             </span>
-            <span className="text-xs" style={{ color: 'rgb(var(--text-faint))' }}>
+            <span className="text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>
               {LC('allUnitsHint', 'Click a unit to set it as the target')}
             </span>
           </div>
@@ -379,7 +379,7 @@ export function makeUnitConverter(config: {
                       {isFrom && (
                         <span
                           className="ml-2 shrink-0 text-xs font-normal"
-                          style={{ color: 'rgb(var(--text-faint))' }}
+                          style={{ color: 'rgb(var(--text-subtle))' }}
                         >
                           ({LC('sourceUnitTag', 'input')})
                         </span>

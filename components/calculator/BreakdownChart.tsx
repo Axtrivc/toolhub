@@ -22,11 +22,11 @@ export interface ChartSlice {
 /** 预设配色 - 与品牌色协调,色盲友好(红/绿差异化) */
 export const CHART_COLORS = {
   /** 警示色:利息、成本、负债等"不利"部分 */
-  interest: '#ef4444', // red-500
+  interest: 'var(--chart-coral)',
   /** 正向色:本金、收益、储蓄等"有利"部分 */
-  principal: '#22c55e', // green-500
+  principal: 'var(--chart-teal)',
   /** 中性色:第二正向或对比 */
-  neutral: '#3b82f6', // brand-500
+  neutral: 'var(--chart-ink)',
 } as const
 
 interface BreakdownChartProps {
@@ -75,11 +75,11 @@ export function BreakdownChart({ slices, centerLabel, centerValue, title, emptyL
 
   return (
     <div
-      className="mt-4 rounded-lg border p-5"
+      className="tool-chart mt-4 min-w-0 rounded-xl border p-4 sm:p-6"
       style={{ borderColor: 'rgb(var(--border))', backgroundColor: 'rgb(var(--bg-card))' }}
     >
       {title && (
-        <div className="mb-3 text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>
+        <div className="tool-chart-title mb-4 text-sm" style={{ color: 'rgb(var(--text-muted))' }}>
           {title}
         </div>
       )}
@@ -132,12 +132,12 @@ export function BreakdownChart({ slices, centerLabel, centerValue, title, emptyL
           {(centerLabel || centerValue) && (
             <div className="absolute inset-0 flex flex-col items-center justify-center">
               {centerValue && (
-                <span className="text-lg font-bold" style={{ color: 'rgb(var(--text))' }}>
+                <span className="font-serif text-2xl font-normal" style={{ color: 'rgb(var(--text))' }}>
                   {centerValue}
                 </span>
               )}
               {centerLabel && (
-                <span className="text-[10px] uppercase tracking-wide" style={{ color: 'rgb(var(--text-faint))' }}>
+                <span className="text-[10px] uppercase tracking-wide" style={{ color: 'rgb(var(--text-subtle))' }}>
                   {centerLabel}
                 </span>
               )}

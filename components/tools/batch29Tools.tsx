@@ -157,7 +157,7 @@ export function GeneratorWattageCalculatorClient() {
                   {L(`item.${a.id}`, a.label)}
                 </span>
               </span>
-              <span className="flex shrink-0 items-center gap-2 text-xs" style={{ color: 'rgb(var(--text-faint))' }}>
+              <span className="flex shrink-0 items-center gap-2 text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>
                 <span>{a.run.toLocaleString('en-US')} W</span>
                 {q > 0 && (
                   <input

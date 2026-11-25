@@ -323,7 +323,7 @@ export function AutoLoanCalculatorClient() {
               {
                 key: 'balance',
                 label: L('lineBalance', 'Remaining balance'),
-                color: '#ef4444',
+                color: 'var(--chart-ink)',
                 points: yearlyBalanceSeries(parsed.schedule).points,
                 area: true,
               },

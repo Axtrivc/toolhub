@@ -103,7 +103,7 @@ export function JwtGeneratorClient() {
             <span className="text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>{L('tokenLabel', 'Signed token')}</span>
             <CopyButton value={token} />
           </div>
-          <pre className="max-h-72 overflow-x-auto overflow-y-auto rounded-lg border p-4 font-mono text-xs whitespace-pre-wrap break-all" style={{ borderColor: 'rgb(var(--border))', backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text))' }}>{token}</pre>
+          <pre data-code-output className="max-h-72 overflow-x-auto overflow-y-auto rounded-lg border p-4 font-mono text-xs whitespace-pre-wrap break-all" style={{ borderColor: 'rgb(var(--border))', backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text))' }}>{token}</pre>
         </div>
       )}
       <ResultActions summary={token} filename="token.jwt" downloadContent={token} mime="text/plain;charset=utf-8;" copyLabel={L('copyToken', 'Copy Token')} />
@@ -448,7 +448,7 @@ export function HtaccessRedirectGeneratorClient() {
               }}
               disabled={pairs.length <= 1}
               aria-label={L('removeRedirect', 'Remove redirect')}
-              className="rounded-lg px-3 text-sm text-slate-400 hover:text-red-500 dark:text-slate-500">✕</button>
+              className="rounded-lg px-3 text-sm text-muted-ink hover:text-red-500 dark:text-muted-ink">✕</button>
           </div>
         ))}
         <button type="button" onClick={() => setPairs([...pairs, mkPair('', '')])} className="text-sm font-medium text-brand-600 hover:underline dark:text-blue-400">
@@ -461,7 +461,7 @@ export function HtaccessRedirectGeneratorClient() {
           <span className="text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>.htaccess</span>
           <CopyButton value={output} />
         </div>
-        <pre className="overflow-x-auto rounded-lg border p-4 font-mono text-xs whitespace-pre-wrap" style={{ borderColor: 'rgb(var(--border))', backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text))' }}>{output}</pre>
+        <pre data-code-output className="overflow-x-auto rounded-lg border p-4 font-mono text-xs whitespace-pre-wrap" style={{ borderColor: 'rgb(var(--border))', backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text))' }}>{output}</pre>
       </div>
       <CalculatorNote>{L('note', '🔧 Requires Apache with mod_rewrite enabled (near-universal on shared hosting). Place your rules before any conflicting blocks. Test with R=302 first and switch to R=301 once verified, so browsers don’t cache a wrong permanent redirect.')}</CalculatorNote>
     </div>
@@ -519,7 +519,7 @@ export function UnicodeLookupClient() {
             <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md bg-slate-100 text-xl dark:bg-slate-800" aria-hidden="true">{u.ch}</span>
             <span className="min-w-0 flex-1">
               <span className="block truncate text-sm capitalize" style={{ color: 'rgb(var(--text))' }}>{u.name}</span>
-              <span className="font-mono text-xs" style={{ color: 'rgb(var(--text-faint))' }}>{codePoint(u.ch)}</span>
+              <span className="font-mono text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>{codePoint(u.ch)}</span>
             </span>
             <CopyButton value={u.ch} />
           </div>
@@ -527,7 +527,7 @@ export function UnicodeLookupClient() {
         {results.length === 0 && (
           <div
             className="rounded-lg border-2 border-dashed p-6 text-center text-sm sm:col-span-2 lg:col-span-3"
-            style={{ borderColor: 'rgb(var(--border-strong))', color: 'rgb(var(--text-faint))' }}
+            style={{ borderColor: 'rgb(var(--border-strong))', color: 'rgb(var(--text-subtle))' }}
           >
             {L('noMatch', 'No matches — try "arrow", "star", "quote"…')}
           </div>

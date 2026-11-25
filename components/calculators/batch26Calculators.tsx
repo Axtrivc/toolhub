@@ -99,7 +99,7 @@ export const OneRepMaxCalculatorClient = makeCalculatorClient({
     const unit = v.unit === 'lb' ? 'lb' : 'kg'
     return {
       xLabels: pcts.map((p) => `${p}%`),
-      lines: [{ key: 'weight', label: 'Working weight', color: '#3b82f6', points: pcts.map((p) => avg * (p / 100)), area: true }],
+      lines: [{ key: 'weight', label: 'Working weight', color: 'var(--chart-coral)', points: pcts.map((p) => avg * (p / 100)), area: true }],
       // y 轴带单位(与 weight-loss 的 kg、steps 的 mi 同口径),随 kg/lb 切换
       formatY: (n) => `${n.toFixed(1)} ${unit}`,
     }
@@ -192,7 +192,7 @@ export const RaceTimePredictorClient = makeCalculatorClient({
         dl('opt.dist.marathon', 'Marathon'),
       ],
       lines: [{
-        key: 'predicted', label: 'Predicted time', color: '#3b82f6',
+        key: 'predicted', label: 'Predicted time', color: 'var(--chart-coral)',
         points: [5, 10, 21.0975, 42.195].map((d) => t1 * Math.pow(d / d1, 1.06)),
         area: true,
       }],
@@ -266,12 +266,12 @@ export const Vo2MaxCalculatorClient = makeCalculatorClient({
     min: 15,
     max: 70,
     zones: [
-      { upTo: 28, color: '#ef4444', label: 'Very poor' },
-      { upTo: 36, color: '#f97316', label: 'Poor' },
-      { upTo: 44, color: '#eab308', label: 'Fair' },
-      { upTo: 52, color: '#22c55e', label: 'Good' },
-      { upTo: 60, color: '#3b82f6', label: 'Very good' },
-      { upTo: 70, color: '#a855f7', label: 'Excellent' },
+      { upTo: 28, color: 'var(--chart-ink)', label: 'Very poor' },
+      { upTo: 36, color: 'var(--chart-coral)', label: 'Poor' },
+      { upTo: 44, color: 'var(--chart-amber)', label: 'Fair' },
+      { upTo: 52, color: 'var(--chart-teal)', label: 'Good' },
+      { upTo: 60, color: 'var(--chart-coral)', label: 'Very good' },
+      { upTo: 70, color: 'var(--chart-rust)', label: 'Excellent' },
     ],
     formatValue: (n) => n.toFixed(1),
   },
@@ -337,8 +337,8 @@ export const BodySurfaceAreaCalculatorClient = makeCalculatorClient({
         // 段标签按行给(Mosteller/DuBois 是人名,各语言同形,无需词典):
         // StackedCompareChart 的图例按段标签去重,全部段同名 'BSA' 时
         // 只剩一个蓝色图例,与绿色 DuBois 条对不上
-        { label: 'Mosteller', segments: [{ label: 'Mosteller', value: mosteller, color: '#3b82f6' }] },
-        { label: 'DuBois', segments: [{ label: 'DuBois', value: dubois, color: '#22c55e' }] },
+        { label: 'Mosteller', segments: [{ label: 'Mosteller', value: mosteller, color: 'var(--chart-coral)' }] },
+        { label: 'DuBois', segments: [{ label: 'DuBois', value: dubois, color: 'var(--chart-teal)' }] },
       ],
       formatTotal: (n) => `${n.toFixed(2)} m²`,
     }
@@ -403,10 +403,10 @@ export const WaistToHeightRatioCalculatorClient = makeCalculatorClient({
     min: 0,
     max: 1,
     zones: [
-      { upTo: 0.4, color: '#38bdf8', label: 'Slim' },
-      { upTo: 0.5, color: '#22c55e', label: 'Healthy' },
-      { upTo: 0.6, color: '#f59e0b', label: 'Increased risk' },
-      { upTo: 0.8, color: '#ef4444', label: 'High risk' },
+      { upTo: 0.4, color: 'var(--chart-coral)', label: 'Slim' },
+      { upTo: 0.5, color: 'var(--chart-teal)', label: 'Healthy' },
+      { upTo: 0.6, color: 'var(--chart-amber)', label: 'Increased risk' },
+      { upTo: 0.8, color: 'var(--chart-ink)', label: 'High risk' },
     ],
     formatValue: (n) => n.toFixed(2),
   },
@@ -479,7 +479,7 @@ export const StepsToMilesCalculatorClient = makeCalculatorClient({
     return {
       xLabels: marks.map((n) => (n / 1000).toLocaleString('en-US') + 'k'),
       lines: [{
-        key: 'miles', label: 'Miles', color: '#3b82f6',
+        key: 'miles', label: 'Miles', color: 'var(--chart-coral)',
         points: marks.map((n) => (n * strideCm) / 100000 / 1.609344),
         area: true,
       }],
@@ -593,8 +593,8 @@ export const WeightLossGoalCalculatorClient = makeCalculatorClient({
     return {
       xLabels,
       lines: [
-        { key: 'weight', label: 'Weight', color: '#3b82f6', points: weight, area: true },
-        { key: 'goal', label: 'Goal weight', color: '#22c55e', points: goalLine, dashed: true },
+        { key: 'weight', label: 'Weight', color: 'var(--chart-coral)', points: weight, area: true },
+        { key: 'goal', label: 'Goal weight', color: 'var(--chart-teal)', points: goalLine, dashed: true },
       ],
       formatY: (n) => `${n.toFixed(1)} kg`,
     }
@@ -675,10 +675,10 @@ export const FiberIntakeCalculatorClient = makeCalculatorClient({
         // (段标签全部同名时图例按标签去重只剩一个蓝色方块,若各条异色
         // 就会出现"绿/粉/紫条配蓝色图例"的错配;食物名无法走 cmpseg.*
         // 按行翻译,故取统一色而非按行改标签)
-        { label: 'Daily target', segments: [{ label: 'Fiber grams', value: grams, color: '#3b82f6' }] },
-        { label: 'Lentils 1 cup', segments: [{ label: 'Fiber grams', value: 15.5, color: '#3b82f6' }] },
-        { label: 'Raspberries 1 cup', segments: [{ label: 'Fiber grams', value: 8, color: '#3b82f6' }] },
-        { label: 'Chia 1 tbsp', segments: [{ label: 'Fiber grams', value: 4.1, color: '#3b82f6' }] },
+        { label: 'Daily target', segments: [{ label: 'Fiber grams', value: grams, color: 'var(--chart-coral)' }] },
+        { label: 'Lentils 1 cup', segments: [{ label: 'Fiber grams', value: 15.5, color: 'var(--chart-coral)' }] },
+        { label: 'Raspberries 1 cup', segments: [{ label: 'Fiber grams', value: 8, color: 'var(--chart-coral)' }] },
+        { label: 'Chia 1 tbsp', segments: [{ label: 'Fiber grams', value: 4.1, color: 'var(--chart-coral)' }] },
       ],
       formatTotal: (n) => `${n.toFixed(1)} g`,
     }

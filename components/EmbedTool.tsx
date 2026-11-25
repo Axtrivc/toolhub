@@ -30,44 +30,33 @@ export function EmbedTool({ tool }: { tool: ToolMeta }) {
   const name = getToolName(locale, tool.slug, tool.name)
 
   return (
-    <section className="mt-10 max-w-3xl">
+    <section className="tool-embed mt-12 sm:mt-20 rounded-xl bg-surface-dark text-on-dark">
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
-        className="flex w-full items-center justify-between rounded-lg border px-4 py-3 text-left text-sm transition hover:opacity-80"
-        style={{
-          borderColor: 'rgb(var(--border))',
-          backgroundColor: 'rgb(var(--bg-card))',
-          color: 'rgb(var(--text))',
-        }}
+        className="flex w-full items-center justify-between gap-4 rounded-xl p-6 text-left sm:p-10"
         aria-expanded={open}
       >
         <span>
-          <strong>{t(locale, 'embedTitle')}</strong>
-          <span className="ml-2" style={{ color: 'rgb(var(--text-subtle))' }}>
+          <strong className="block font-serif text-2xl font-normal">{t(locale, 'embedTitle')}</strong>
+          <span className="mt-2 block text-sm text-on-dark-soft">
             {t(locale, 'embedSubtitle')}
           </span>
         </span>
-        <span aria-hidden="true" style={{ color: 'rgb(var(--text-subtle))' }}>
+        <span aria-hidden="true" className="text-on-dark-soft">
           {open ? '−' : '+'}
         </span>
       </button>
 
       {open && (
         <div
-          className="mt-2 rounded-lg border p-4"
-          style={{ borderColor: 'rgb(var(--border))', backgroundColor: 'rgb(var(--bg-card))' }}
+          className="px-6 pb-6 sm:px-10 sm:pb-10"
         >
-          <p className="mb-3 text-sm" style={{ color: 'rgb(var(--text-muted))' }}>
+          <p className="mb-3 text-sm text-on-dark-soft">
             {t(locale, 'embedBody', { name })}
           </p>
           <pre
-            className="overflow-x-auto rounded-md p-3 text-xs"
-            style={{
-              backgroundColor: 'rgb(var(--bg))',
-              color: 'rgb(var(--text))',
-              border: '1px solid rgb(var(--border))',
-            }}
+            className="overflow-x-auto whitespace-pre-wrap break-all rounded-lg bg-dark-soft p-4 font-mono text-sm text-accent-amber"
           >
             <code>{snippet}</code>
           </pre>

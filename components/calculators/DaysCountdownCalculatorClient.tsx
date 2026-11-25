@@ -359,11 +359,11 @@ export function DaysCountdownCalculatorClient() {
                             )}
                           </g>
                           {/* 今天指针(蓝点),在未旋转坐标系里按角度定位 */}
-                          <circle cx={dotX} cy={dotY} r="4.5" fill="#3b82f6" stroke="rgb(var(--bg-card))" strokeWidth="2" />
+                          <circle cx={dotX} cy={dotY} r="4.5" fill="var(--chart-coral)" stroke="rgb(var(--bg-card))" strokeWidth="2" />
                         </svg>
                         <div className="absolute inset-0 flex flex-col items-center justify-center">
-                          <span className="text-3xl font-bold tabular-nums text-primary">{countdown.clock.days}</span>
-                          <span className="text-[10px] uppercase tracking-wide" style={{ color: 'rgb(var(--text-faint))' }}>
+                          <span className="font-serif text-3xl font-normal tabular-nums text-primary">{countdown.clock.days}</span>
+                          <span className="text-[10px] uppercase tracking-wide" style={{ color: 'rgb(var(--text-subtle))' }}>
                             {countdown.future ? L('daysLeft', 'Days left') : L('daysAgo', 'Days ago')}
                           </span>
                         </div>
@@ -371,7 +371,7 @@ export function DaysCountdownCalculatorClient() {
                       {/* 图例 */}
                       <div className="flex-1 space-y-2">
                         <div className="flex items-center gap-2">
-                          <span className="inline-block h-2.5 w-2.5 rounded-full" style={{ backgroundColor: '#3b82f6' }} aria-hidden="true" />
+                          <span className="inline-block h-2.5 w-2.5 rounded-full" style={{ backgroundColor: 'var(--chart-coral)' }} aria-hidden="true" />
                           <span className="text-sm" style={{ color: 'rgb(var(--text-muted))' }}>
                             {L('todayLabel', 'Today')}
                           </span>

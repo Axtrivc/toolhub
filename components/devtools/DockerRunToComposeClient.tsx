@@ -664,7 +664,7 @@ export function DockerRunToComposeClient() {
     <div className="space-y-6">
       {/* Sample presets */}
       <div className="flex flex-wrap items-center gap-2">
-        <span className="text-xs font-medium text-slate-500 dark:text-slate-400">
+        <span className="text-xs font-medium text-muted-ink">
           {T('samplesLabel', 'Load Example:')}
         </span>
         {SAMPLES.map((s) => (
@@ -690,7 +690,7 @@ export function DockerRunToComposeClient() {
             <button
               type="button"
               onClick={() => setInputCmd('')}
-              className="text-xs text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 transition-colors"
+              className="text-xs text-muted-ink hover:text-slate-600 dark:hover:text-slate-200 transition-colors"
             >
               {T('clearBtn', 'Clear')}
             </button>
@@ -704,7 +704,7 @@ export function DockerRunToComposeClient() {
             spellCheck={false}
             className="w-full font-mono text-xs sm:text-sm p-3.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
-          <p className="text-xs text-slate-500 dark:text-slate-400">
+          <p className="text-xs text-muted-ink">
             {T(
               'inputHint',
               'Paste any docker run or docker create command with multiline backslashes, flags, ports, volumes, and env vars.',
@@ -723,7 +723,7 @@ export function DockerRunToComposeClient() {
             </div>
           </div>
           <div className="relative">
-            <pre
+            <pre data-code-output
               aria-label={T('outputTitle', 'docker-compose.yml')}
               className="w-full font-mono text-xs sm:text-sm p-3.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-950 text-slate-100 overflow-x-auto min-h-[300px] max-h-[460px]"
             >
@@ -750,7 +750,7 @@ export function DockerRunToComposeClient() {
                 className={`px-1.5 py-0.5 rounded ${
                   envFormat === 'list'
                     ? 'bg-blue-100 text-blue-700 dark:bg-blue-900/60 dark:text-blue-300 font-semibold'
-                    : 'text-slate-500 hover:text-slate-800'
+                    : 'text-muted-ink hover:text-slate-800'
                 }`}
               >
                 - KEY=VAL
@@ -761,7 +761,7 @@ export function DockerRunToComposeClient() {
                 className={`px-1.5 py-0.5 rounded ${
                   envFormat === 'map'
                     ? 'bg-blue-100 text-blue-700 dark:bg-blue-900/60 dark:text-blue-300 font-semibold'
-                    : 'text-slate-500 hover:text-slate-800'
+                    : 'text-muted-ink hover:text-slate-800'
                 }`}
               >
                 KEY: VAL

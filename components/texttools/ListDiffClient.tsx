@@ -199,13 +199,13 @@ export function ListDiffClient() {
               </div>
               {sec.items.length > 0 ? (
                 <>
-                  <pre className="mb-2 max-h-40 overflow-auto whitespace-pre-wrap break-words font-mono text-xs" style={{ color: 'rgb(var(--text))' }}>
+                  <pre data-code-output className="mb-2 max-h-40 overflow-auto whitespace-pre-wrap break-words font-mono text-xs" style={{ color: 'rgb(var(--text))' }}>
                     {sec.items.join('\n')}
                   </pre>
                   <CopyButton value={sec.items.join('\n')} label={L('copy', 'Copy')} />
                 </>
               ) : (
-                <p className="text-xs text-slate-400 dark:text-slate-500">{L('noItems', 'No items.')}</p>
+                <p className="text-xs text-muted-ink">{L('noItems', 'No items.')}</p>
               )}
             </div>
           ))}

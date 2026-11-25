@@ -118,18 +118,17 @@ function renderBlock(block: ArticleBlock, key: string): ReactNode {
       <Link
         key={key}
         href={href}
-        className="group my-5 flex items-center gap-4 rounded-xl border p-4 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md"
-        style={{ borderColor: 'rgb(var(--border))', backgroundColor: 'rgb(var(--bg-card))' }}
+        className="my-5 flex items-center gap-4 rounded-xl border border-hairline bg-canvas p-5 !no-underline"
       >
         <span className="min-w-0 flex-1">
-          <span className="block text-sm font-bold" style={{ color: 'rgb(var(--text))' }}>
+          <span className="block text-base font-medium" style={{ color: 'rgb(var(--text))' }}>
             {title}
           </span>
           <span className="mt-0.5 block text-sm" style={{ color: 'rgb(var(--text-muted))' }}>
             {desc}
           </span>
         </span>
-        <span className="shrink-0 font-mono text-sm font-semibold text-brand-600 transition-transform group-hover:translate-x-0.5 dark:text-brand-400">
+        <span className="shrink-0 font-mono text-sm text-brand-700 dark:text-brand-400">
           →
         </span>
       </Link>
@@ -173,15 +172,15 @@ export function BlogArticleBody({ articleKey }: BlogArticleBodyProps) {
 
   return (
     <>
-      {/* 副标题 lead —— 与原 server component 的 <p className="mt-4 max-w-2xl text-lg"> 视觉一致 */}
-      <p className="mt-4 max-w-2xl text-lg" style={{ color: 'rgb(var(--text-muted))' }}>
+      {/* 副标题 lead —— 与原 server component 的 <p className="mt-4 max-w-3xl text-lg leading-relaxed sm:text-xl"> 视觉一致 */}
+      <p className="mt-4 max-w-3xl text-lg leading-relaxed sm:text-xl" style={{ color: 'rgb(var(--text-muted))' }}>
         {content.lead}
       </p>
 
       {/* 正文 sections —— 复用全站 .prose-content 排版(主题感知) */}
-      <article className="prose-content mt-10 max-w-3xl">
+      <div className="prose-content mt-10 max-w-3xl">
         {content.sections.map((section, idx) => renderSection(section, idx))}
-      </article>
+      </div>
     </>
   )
 }

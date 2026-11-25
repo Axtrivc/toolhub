@@ -178,11 +178,11 @@ export function PasswordStrengthCheckerClient() {
             {/* A-2:组件内标题从 h2 起(ToolLayout 提供 h1),避免 h1→h3 跳级;样式由类名控制,改标签不改观感 */}
             <h2 className="mb-2 text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>{L('checklist', 'Checklist')}</h2>
             <ul className="space-y-1 text-sm">
-              <li className={analysis.hasUpper ? 'text-green-600 dark:text-green-400' : 'text-slate-400 dark:text-slate-600'}>{analysis.hasUpper ? '✓' : '✗'} {L('uppercaseLetters', 'Uppercase letters')}</li>
-              <li className={analysis.hasLower ? 'text-green-600 dark:text-green-400' : 'text-slate-400 dark:text-slate-600'}>{analysis.hasLower ? '✓' : '✗'} {L('lowercaseLetters', 'Lowercase letters')}</li>
-              <li className={analysis.hasNum ? 'text-green-600 dark:text-green-400' : 'text-slate-400 dark:text-slate-600'}>{analysis.hasNum ? '✓' : '✗'} {L('numbers', 'Numbers')}</li>
-              <li className={analysis.hasSym ? 'text-green-600 dark:text-green-400' : 'text-slate-400 dark:text-slate-600'}>{analysis.hasSym ? '✓' : '✗'} {L('symbols', 'Symbols')}</li>
-              <li className={pw.length >= 12 ? 'text-green-600 dark:text-green-400' : 'text-slate-400 dark:text-slate-600'}>{pw.length >= 12 ? '✓' : '✗'} {L('atLeast12Chars', 'At least 12 characters')}</li>
+              <li className={analysis.hasUpper ? 'text-green-600 dark:text-green-400' : 'text-muted-ink dark:text-slate-600'}>{analysis.hasUpper ? '✓' : '✗'} {L('uppercaseLetters', 'Uppercase letters')}</li>
+              <li className={analysis.hasLower ? 'text-green-600 dark:text-green-400' : 'text-muted-ink dark:text-slate-600'}>{analysis.hasLower ? '✓' : '✗'} {L('lowercaseLetters', 'Lowercase letters')}</li>
+              <li className={analysis.hasNum ? 'text-green-600 dark:text-green-400' : 'text-muted-ink dark:text-slate-600'}>{analysis.hasNum ? '✓' : '✗'} {L('numbers', 'Numbers')}</li>
+              <li className={analysis.hasSym ? 'text-green-600 dark:text-green-400' : 'text-muted-ink dark:text-slate-600'}>{analysis.hasSym ? '✓' : '✗'} {L('symbols', 'Symbols')}</li>
+              <li className={pw.length >= 12 ? 'text-green-600 dark:text-green-400' : 'text-muted-ink dark:text-slate-600'}>{pw.length >= 12 ? '✓' : '✗'} {L('atLeast12Chars', 'At least 12 characters')}</li>
             </ul>
           </div>
         </div>

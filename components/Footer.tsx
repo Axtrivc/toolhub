@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { useApp } from './providers/AppProviders'
 import { t, tc } from '@/lib/i18n'
 import { SITE_NAME } from '@/lib/constants'
+import { BrandWordmark } from './BrandWordmark'
 import { SiteStats } from './SiteStats'
 
 /**
@@ -34,64 +35,54 @@ export function Footer({ nav, totalCount }: { nav: FooterNavCategory[]; totalCou
   const { locale } = useApp()
 
   return (
-    <footer data-embed-hide className="mt-16 border-t" style={{ borderColor: 'rgb(var(--border))', backgroundColor: 'rgb(var(--bg-card))' }}>
-      <div className="container-page py-10">
+    <footer data-embed-hide className="bg-surface-dark text-on-dark-soft">
+      <div className="container-page py-12 sm:py-16">
         {/* 分类导航 - 大网格:每类一个链接(原 6 工具 + more 链接墙已精简) */}
-        <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 lg:grid-cols-4">
-          {nav.map(({ category }) => (
-            <div key={category}>
-              <h3 className="mb-3 text-sm font-semibold" style={{ color: 'rgb(var(--text))' }}>
+        <div className="grid gap-8 lg:grid-cols-[1.3fr_3fr] lg:gap-12">
+          <div>
+            <div className="text-on-dark"><BrandWordmark /></div>
+            <p className="mt-3 max-w-md text-sm">
+              {t(locale, 'footerTagline')}
+            </p>
+          </div>
+          <div className="grid grid-cols-2 gap-x-6 gap-y-3 sm:grid-cols-3 lg:grid-cols-4">
+            {nav.map(({ category }) => (
+              <h3 key={category} className="font-sans text-sm font-normal leading-relaxed">
                 <Link
                   href={`/?category=${encodeURIComponent(category)}#all-tools`}
-                  className="hover:text-brand-600"
+                  className="text-on-dark-soft underline-offset-4 hover:text-on-dark hover:underline"
                 >
                   {tc(locale, category)}
                 </Link>
               </h3>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
 
-        {/* 底部品牌 + 法律链接 */}
-        <div className="mt-10 grid grid-cols-1 gap-6 border-t pt-8 sm:grid-cols-2" style={{ borderColor: 'rgb(var(--border))' }}>
-          <div>
-            <div className="flex items-center gap-2 font-bold" style={{ color: 'rgb(var(--text))' }}>
-              <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-brand-600 text-white">
-                T
-              </span>
-              <span className="text-lg">{SITE_NAME}</span>
-            </div>
-            <p className="mt-3 max-w-md text-sm" style={{ color: 'rgb(var(--text-subtle))' }}>
-              {t(locale, 'footerTagline')}
-            </p>
-          </div>
-
-          <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm sm:justify-end">
-            <Link href="/#all-tools" className="hover:text-brand-600 max-sm:py-2" style={{ color: 'rgb(var(--text-muted))' }}>
-              {t(locale, 'navAllTools')}
-            </Link>
-            <Link href="/blog/" className="hover:text-brand-600 max-sm:py-2" style={{ color: 'rgb(var(--text-muted))' }}>
-              {t(locale, 'navBlog')}
-            </Link>
-            <Link href="/about/" className="hover:text-brand-600 max-sm:py-2" style={{ color: 'rgb(var(--text-muted))' }}>
-              {t(locale, 'footerAbout')}
-            </Link>
-            <Link href="/contact/" className="hover:text-brand-600 max-sm:py-2" style={{ color: 'rgb(var(--text-muted))' }}>
-              {t(locale, 'footerContact')}
-            </Link>
-            <Link href="/privacy/" className="hover:text-brand-600 max-sm:py-2" style={{ color: 'rgb(var(--text-muted))' }}>
-              {t(locale, 'footerPrivacy')}
-            </Link>
-            <Link href="/terms/" className="hover:text-brand-600 max-sm:py-2" style={{ color: 'rgb(var(--text-muted))' }}>
-              {t(locale, 'footerTerms')}
-            </Link>
-          </div>
+        <div className="mt-10 flex flex-wrap content-start gap-x-6 gap-y-2 text-sm">
+          <Link href="/#all-tools" className="hover:text-on-dark hover:underline underline-offset-4 max-sm:py-2">
+            {t(locale, 'navAllTools')}
+          </Link>
+          <Link href="/blog/" className="hover:text-on-dark hover:underline underline-offset-4 max-sm:py-2">
+            {t(locale, 'navBlog')}
+          </Link>
+          <Link href="/about/" className="hover:text-on-dark hover:underline underline-offset-4 max-sm:py-2">
+            {t(locale, 'footerAbout')}
+          </Link>
+          <Link href="/contact/" className="hover:text-on-dark hover:underline underline-offset-4 max-sm:py-2">
+            {t(locale, 'footerContact')}
+          </Link>
+          <Link href="/privacy/" className="hover:text-on-dark hover:underline underline-offset-4 max-sm:py-2">
+            {t(locale, 'footerPrivacy')}
+          </Link>
+          <Link href="/terms/" className="hover:text-on-dark hover:underline underline-offset-4 max-sm:py-2">
+            {t(locale, 'footerTerms')}
+          </Link>
         </div>
 
         {/* 底栏:版权 + 站内访客计数(计数组件拿到数据前不渲染,本地 dev 自动隐藏) */}
         <div
-          className="mt-6 flex flex-col gap-3 border-t pt-6 text-sm sm:flex-row sm:items-center sm:justify-between"
-          style={{ borderColor: 'rgb(var(--border))', color: 'rgb(var(--text-faint))' }}
+          className="mt-6 flex flex-col gap-3 border-t border-on-dark/15 pt-6 text-sm sm:flex-row sm:items-center sm:justify-between"
         >
           <div>
             © {year ?? ''} {SITE_NAME}. {totalCount} {t(locale, 'footerRights')}

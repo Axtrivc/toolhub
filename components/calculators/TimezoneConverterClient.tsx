@@ -482,7 +482,7 @@ export function TimezoneConverterClient() {
                   </div>
                 </div>
               ))}
-              <div className="flex flex-wrap gap-4 pt-1 text-xs" style={{ color: 'rgb(var(--text-faint))' }}>
+              <div className="flex flex-wrap gap-4 pt-1 text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>
                 <span className="flex items-center gap-1.5">
                   <span className="inline-block h-3 w-3 rounded-[2px]" style={{ backgroundColor: 'rgb(var(--primary))' }} />
                   {L('selectedHour', 'Selected hour')}

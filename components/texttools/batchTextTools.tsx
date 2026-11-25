@@ -254,7 +254,7 @@ export function FindReplaceClient() {
             <button
               type="button"
               onClick={() => setText('')}
-              className="-my-1 rounded-md px-2 py-1.5 text-xs text-slate-500 dark:text-slate-400 hover:text-red-500 sm:text-sm"
+              className="-my-1 rounded-md px-2 py-1.5 text-xs text-muted-ink hover:text-red-500 sm:text-sm"
             >
               {L('clear', 'Clear')}
             </button>
@@ -338,7 +338,7 @@ export function FindReplaceClient() {
           <div className="flex items-center gap-3">
             {/* 替换全部后的反馈计数:替换了几处一眼可见(0 处也明确提示) */}
             {findStr && !regexError && !tooLong && (
-              <span className="text-xs font-medium tabular-nums" style={{ color: 'rgb(var(--text-faint))' }}>
+              <span className="text-xs font-medium tabular-nums" style={{ color: 'rgb(var(--text-subtle))' }}>
                 {L('matchCount', 'Matches: {n}').replace('{n}', matchCount.toLocaleString(numberLocale))}
               </span>
             )}
@@ -384,12 +384,12 @@ export function FindReplaceClient() {
         ].map((cell) => (
           <div
             key={cell.label}
-            className="rounded-xl border border-border/60 bg-card/80 p-3 text-center shadow-sm backdrop-blur-md transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md"
+            className="min-w-0 rounded-xl border border-hairline bg-canvas p-4 text-center"
           >
-            <div className="text-xl font-bold tabular-nums sm:text-2xl" style={{ color: 'rgb(var(--text))' }}>
+            <div className="font-serif text-xl font-normal tabular-nums sm:text-2xl" style={{ color: 'rgb(var(--text))' }}>
               <AnimatedNumber value={cell.display} />
             </div>
-            <div className="mt-0.5 text-[11px] font-medium uppercase tracking-wide" style={{ color: 'rgb(var(--text-faint))' }}>
+            <div className="mt-0.5 text-[11px] font-medium uppercase tracking-wide" style={{ color: 'rgb(var(--text-subtle))' }}>
               {cell.label}
             </div>
           </div>
@@ -401,7 +401,7 @@ export function FindReplaceClient() {
       >
         {[
           { label: t(locale, 'textToolInputLen'), count: charCount, color: 'rgb(var(--primary))' },
-          { label: t(locale, 'textToolOutputLen'), count: outChars, color: '#22c55e' },
+          { label: t(locale, 'textToolOutputLen'), count: outChars, color: 'var(--chart-teal)' },
         ].map((row) => {
           const max = Math.max(charCount, outChars, 1)
           return (

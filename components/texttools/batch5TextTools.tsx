@@ -111,7 +111,7 @@ function HashResult({ label, value, warning }: { label: string; value: string; w
   return (
     <div className="rounded-lg border border-slate-200 bg-white p-4 dark:border-slate-700 dark:bg-slate-800">
       <div className="mb-1 flex items-center justify-between">
-        <span className="text-xs font-medium uppercase text-slate-500 dark:text-slate-400">{label}</span>
+        <span className="text-xs font-medium uppercase text-muted-ink">{label}</span>
         <CopyButton value={value} label="" />
       </div>
       {warning && <p className="mb-1 text-xs text-amber-600 dark:text-amber-400">{warning}</p>}

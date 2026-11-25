@@ -161,7 +161,7 @@ export function TextScrubberClient({
                 type="button"
                 onClick={() => setInput('')}
                 className="-my-1 rounded-md px-2 py-1.5 text-xs hover:text-red-500 sm:text-sm"
-                style={{ color: 'rgb(var(--text-faint))' }}
+                style={{ color: 'rgb(var(--text-subtle))' }}
               >
                 {L('clear', 'Clear')}
               </button>
@@ -197,7 +197,7 @@ export function TextScrubberClient({
             <span>
               <span className="block font-medium" style={{ color: 'rgb(var(--text))' }}>{L(`toggle.${t.key}`, t.label)}</span>
               {/* pre-wrap 保留 collapseSpaces 示例中的连续空格("a    b → a b"),否则被 HTML 折叠 */}
-              <span className="block whitespace-pre-wrap text-xs" style={{ color: 'rgb(var(--text-faint))' }}>{L(`toggleHint.${t.key}`, t.hint)}</span>
+              <span className="block whitespace-pre-wrap text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>{L(`toggleHint.${t.key}`, t.hint)}</span>
             </span>
           </label>
         ))}
@@ -227,7 +227,7 @@ export function TextScrubberClient({
           <div className="flex flex-wrap items-center justify-between gap-2">
             <span className="text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>
               {L('cleanedText', 'Cleaned text')} — {input.length.toLocaleString('en-US')} {L('chars', 'chars')} → {output.length.toLocaleString('en-US')} {L('chars', 'chars')}
-              <span style={{ color: 'rgb(var(--text-faint))' }}>
+              <span style={{ color: 'rgb(var(--text-subtle))' }}>
                 {' '}({(input.length - output.length).toLocaleString('en-US')} {L('removed', 'removed')})
               </span>
             </span>

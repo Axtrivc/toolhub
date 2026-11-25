@@ -1,76 +1,105 @@
 import type { Config } from 'tailwindcss'
 
+const warmGray = {
+  50: '#faf9f5',
+  100: '#f5f0e8',
+  200: '#e6dfd8',
+  300: '#d6cec2',
+  400: '#a09d96',
+  500: '#8e8b82',
+  600: '#6c6a64',
+  700: '#3d3d3a',
+  800: '#252320',
+  900: '#1f1e1b',
+  950: '#141413',
+}
+
+const coral = {
+  50: '#fcf5f1',
+  100: '#f8e7de',
+  200: '#f0d1bf',
+  300: '#e7b39e',
+  400: '#dc9981',
+  500: '#cc785c',
+  600: '#a9583e',
+  700: '#8c4632',
+  800: '#703b2b',
+  900: '#553024',
+  950: '#36221b',
+}
+
+const teal = {
+  50: '#f2f9f7',
+  100: '#e0f2ed',
+  200: '#c0e3db',
+  300: '#93d1c3',
+  400: '#5db8a6',
+  500: '#459c8b',
+  600: '#367c6f',
+  700: '#2a645b',
+  800: '#254f49',
+  900: '#203f3b',
+  950: '#122925',
+}
+
+const token = (name: string) => `rgb(var(--${name}) / <alpha-value>)`
+
 const config: Config = {
   darkMode: 'class',
-  // hover:* 变体仅在真正支持 hover 的设备(鼠标/触控板)生成
-  // @media (hover: hover) 规则:触屏手机上点击后不再残留"粘滞 hover 态"
-  // (卡片持续高亮、链接持续变色);桌面端行为完全不变。
-  future: {
-    hoverOnlyWhenSupported: true,
-  },
+  future: { hoverOnlyWhenSupported: true },
   content: [
     './app/**/*.{js,ts,jsx,tsx,mdx}',
     './components/**/*.{js,ts,jsx,tsx,mdx}',
     './hooks/**/*.{js,ts,jsx,tsx,mdx}',
     './lib/**/*.{js,ts,jsx,tsx,mdx}',
   ],
-  // safelist:防止动态拼接的颜色类被 purge。所有高亮态用到的色阶固定保留。
-  safelist: [
-    'text-blue-600',
-    'text-green-600',
-    'text-yellow-600',
-    'text-orange-600',
-    'text-red-600',
-    'text-red-700',
-    'text-brand-600',
-    // 置顶工具卡片高亮态(FeaturedTools 模块)
-    'border-blue-100',
-    'border-blue-200',
-    'dark:border-blue-900/40',
-    'dark:border-blue-800',
-    'from-blue-50/40',
-    // POPULAR Badge(柔和淡橙)
-    'bg-amber-50',
-    'text-amber-600',
-    'dark:bg-amber-950/50',
-    'dark:text-amber-400',
-    // NEW Badge(淡蓝)
-    'bg-blue-50',
-    'dark:bg-blue-950/50',
-    'dark:text-blue-400',
-  ],
+  safelist: ['text-blue-600', 'text-green-600', 'text-yellow-600', 'text-orange-600', 'text-red-600', 'text-red-700', 'text-brand-600'],
   theme: {
     extend: {
       colors: {
-        // 语义化令牌 —— 映射 globals.css 的 CSS 变量,支持 /alpha 修饰符。
-        // 让组件可用 border-border/80、bg-card、bg-primary/5、text-primary
-        // 等语义类,而不是散落 inline style 或硬编码 slate。
-        border: 'rgb(var(--border) / <alpha-value>)',
-        background: 'rgb(var(--bg) / <alpha-value>)',
-        card: 'rgb(var(--bg-card) / <alpha-value>)',
-        muted: 'rgb(var(--bg-subtle) / <alpha-value>)',
-        primary: 'rgb(var(--primary) / <alpha-value>)',
-        // 中性专业色调,适合工具站
-        brand: {
-          50: '#eff6ff',
-          100: '#dbeafe',
-          200: '#bfdbfe',
-          300: '#93c5fd',
-          400: '#60a5fa',
-          500: '#3b82f6',
-          600: '#2563eb',
-          700: '#1d4ed8',
-          800: '#1e40af',
-          900: '#1e3a8a',
-          950: '#172554',
-        },
+        'primary': token('primary'),
+        'primary-active': token('primary-active'),
+        'primary-disabled': token('primary-disabled'),
+        'ink': token('ink'),
+        'body': token('body'),
+        'body-strong': token('body-strong'),
+        'muted-soft': token('muted-soft'),
+        'hairline': token('hairline'),
+        'hairline-soft': token('hairline-soft'),
+        'canvas': token('canvas'),
+        'surface-soft': token('surface-soft'),
+        'surface-card': token('surface-card'),
+        'surface-strong': token('surface-strong'),
+        'surface-dark': token('surface-dark'),
+        'dark-elevated': token('dark-elevated'),
+        'dark-soft': token('dark-soft'),
+        'on-primary': token('on-primary'),
+        'on-dark': token('on-dark'),
+        'on-dark-soft': token('on-dark-soft'),
+        'accent-teal': token('accent-teal'),
+        'accent-amber': token('accent-amber'),
+        'success': token('success'),
+        'warning': token('warning'),
+        'error': token('error'),
+        'muted-ink': token('muted'),
+        'coral': { ...coral, DEFAULT: token('primary') },
+        background: token('canvas'),
+        card: token('canvas'),
+        border: token('hairline'),
+        muted: token('surface-card'),
+        brand: coral,
+        slate: warmGray, gray: warmGray, zinc: warmGray, neutral: warmGray,
+        blue: coral, indigo: coral, sky: coral, violet: coral, purple: coral, fuchsia: coral,
+        cyan: teal, teal,
       },
-      typography: {
-        DEFAULT: {
-          css: {
-            maxWidth: 'none',
-          },
-        },
+      fontFamily: {
+        serif: ['var(--font-serif)', 'Georgia', 'serif'],
+        sans: ['var(--font-sans)', 'system-ui', 'sans-serif'],
+        mono: ['var(--font-mono)', 'ui-monospace', 'monospace'],
+      },
+      boxShadow: {
+        sm: '0 1px 3px rgba(20,20,19,.08)',
+        DEFAULT: 'none', md: 'none', lg: 'none', xl: 'none', '2xl': 'none', inner: 'none',
       },
     },
   },

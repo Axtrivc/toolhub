@@ -294,7 +294,7 @@ export function CssGradientGeneratorClient() {
                   className="w-20 rounded-lg border p-2 text-sm shadow-sm outline-none transition focus:ring-2"
                   style={selectStyle}
                 />
-                <span className="text-xs" style={{ color: 'rgb(var(--text-faint))' }}>
+                <span className="text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>
                   %
                 </span>
                 <button
@@ -361,7 +361,7 @@ export function CssGradientGeneratorClient() {
           </span>
           <CopyButton value={cssText} label={L('copyCss', 'Copy CSS')} />
         </div>
-        <pre
+        <pre data-code-output
           className="w-full overflow-x-auto rounded-lg border p-4 font-mono text-sm shadow-sm"
           style={{
             borderColor: 'rgb(var(--border-strong))',

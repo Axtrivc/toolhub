@@ -150,7 +150,7 @@ export function NumeralSystemConverterClient() {
             ))}
           </div>
         ) : (
-          <div className="rounded-lg border-2 border-dashed p-6 text-center text-sm" style={{ borderColor: 'rgb(var(--border-strong))', color: 'rgb(var(--text-faint))' }}>
+          <div className="rounded-lg border-2 border-dashed p-6 text-center text-sm" style={{ borderColor: 'rgb(var(--border-strong))', color: 'rgb(var(--text-subtle))' }}>
             {L('emptyState', 'Enter a valid number for the selected base')}
           </div>
         )}

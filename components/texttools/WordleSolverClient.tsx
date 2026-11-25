@@ -227,7 +227,7 @@ export function WordleSolverClient() {
   const resultList = (
     <>
       {showCommonHeader && (
-        <p className="text-xs font-semibold uppercase tracking-wider" style={{ color: 'rgb(var(--text-faint))' }}>
+        <p className="text-xs font-semibold uppercase tracking-wider" style={{ color: 'rgb(var(--text-subtle))' }}>
           {L('commonFirst', 'Most common first')}
         </p>
       )}
@@ -252,7 +252,7 @@ export function WordleSolverClient() {
             </button>
           ))}
           {remaining > 0 && (
-            <span className="px-2 py-1.5 text-sm" style={{ color: 'rgb(var(--text-faint))' }}>
+            <span className="px-2 py-1.5 text-sm" style={{ color: 'rgb(var(--text-subtle))' }}>
               +{remaining} {L('more', 'more')}
             </span>
           )}
@@ -284,7 +284,7 @@ export function WordleSolverClient() {
         <button
           type="button"
           onClick={clearAll}
-          className="-my-1 rounded-md px-2 py-1.5 text-xs text-slate-400 hover:text-red-500 sm:text-sm"
+          className="-my-1 rounded-md px-2 py-1.5 text-xs text-muted-ink hover:text-red-500 sm:text-sm"
         >
           {L('clear', 'Clear')}
         </button>
@@ -363,7 +363,7 @@ export function WordleSolverClient() {
             <p
               className="text-xs leading-relaxed"
               aria-live="polite"
-              style={{ color: 'rgb(var(--text-faint))' }}
+              style={{ color: 'rgb(var(--text-subtle))' }}
             >
               {constraintSummary}
             </p>
@@ -390,7 +390,7 @@ export function WordleSolverClient() {
                 {results.length}{' '}
                 {results.length === 1 ? L('matchingWordSingular', 'matching word') : L('matchingWordPlural', 'matching words')}{' '}
                 — {L('clickAnyWordToCopy', 'click any word to copy it')}{' '}
-                <span className="font-normal" style={{ color: 'rgb(var(--text-faint))' }}>
+                <span className="font-normal" style={{ color: 'rgb(var(--text-subtle))' }}>
                   · {L('inDictionary', '{n} words in dictionary').replace('{n}', dictionary.length.toLocaleString('en-US'))}
                 </span>
               </span>
@@ -417,7 +417,7 @@ export function WordleSolverClient() {
               className="w-full max-w-md rounded-lg border p-3 font-mono text-sm shadow-sm outline-none transition focus:ring-2"
               style={inputStyle}
             />
-            <p className="mt-1.5 text-xs" style={{ color: 'rgb(var(--text-faint))' }}>
+            <p className="mt-1.5 text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>
               {L('anagramHint', 'Finds dictionary words (up to the number of letters you enter) that can be spelled using only these letters.')}
             </p>
           </div>

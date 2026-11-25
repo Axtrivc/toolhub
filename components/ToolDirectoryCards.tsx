@@ -17,34 +17,27 @@ export function ToolDirectoryCard({ tool }: { tool: ToolMeta }) {
   return (
     <Link
       href={`/tools/${tool.slug}/`}
-      className="group rounded-xl border p-6 shadow-sm transition-all hover:-translate-y-0.5 hover:border-brand-300 hover:shadow-md"
-      style={{
-        borderColor: 'rgb(var(--border))',
-        backgroundColor: 'rgb(var(--bg-card))',
-      }}
+      className="flex flex-col gap-2 rounded-xl border border-hairline bg-canvas p-5 text-ink"
     >
-      <div className="flex items-start justify-between">
+      <div className="flex items-center justify-between gap-3">
         <span
-          className="flex h-11 w-11 items-center justify-center rounded-xl transition-transform group-hover:scale-110"
-          style={{ backgroundColor: 'rgb(var(--bg-subtle))' }}
+          className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-surface-card text-ink"
           aria-hidden="true"
         >
           <SmartIcon icon={getToolIcon(tool)} className="h-5 w-5" />
         </span>
         <span
-          className="text-xs font-medium uppercase tracking-wide"
-          style={{ color: 'rgb(var(--text-faint))' }}
+          className="rounded-full bg-surface-card px-2.5 py-1 text-right text-xs leading-snug text-body"
         >
           {tc(locale, tool.category)}
         </span>
       </div>
       <h3
-        className="mt-4 text-lg font-semibold group-hover:text-brand-600"
-        style={{ color: 'rgb(var(--text))' }}
+        className="mt-2 font-serif text-[1.75rem] font-normal leading-tight tracking-[-.3px] text-ink"
       >
         {getToolName(locale, tool.slug, tool.name)}
       </h3>
-      <p className="mt-2 text-sm" style={{ color: 'rgb(var(--text-subtle))' }}>
+      <p className="text-sm leading-6 text-body">
         {getToolShortIntro(locale, tool.slug, tool.shortIntro)}
       </p>
     </Link>
@@ -61,9 +54,9 @@ export function ToolDirectoryHeading({
 }) {
   const { locale } = useApp()
   return (
-    <h2 className="mb-5 text-2xl font-bold" style={{ color: 'rgb(var(--text))' }}>
+    <h2 className="mb-6 border-t border-hairline pt-5 font-serif text-4xl font-normal tracking-[-.5px] text-ink">
       {tc(locale, category)}
-      <span className="ml-2 text-base font-normal" style={{ color: 'rgb(var(--text-faint))' }}>
+      <span className="ml-3 inline-block align-middle rounded-full bg-surface-card px-3 py-1 font-sans text-xs font-medium tracking-normal text-body">
         {count}
       </span>
     </h2>
@@ -79,9 +72,9 @@ export function ToolDirectoryHeroBody({ count }: { count: number }) {
   const idx = body.indexOf(cta)
   if (idx >= 0) {
     return (
-      <p className="mt-5 text-lg" style={{ color: 'rgb(var(--text-muted))' }}>
+      <p className="mt-5 text-lg leading-relaxed text-body">
         {body.slice(0, idx)}
-        <Link href="/" className="text-brand-600 underline">
+        <Link href="/" className="text-brand-700 underline underline-offset-2 dark:text-primary">
           {cta}
         </Link>
         {body.slice(idx + cta.length)}
@@ -89,9 +82,9 @@ export function ToolDirectoryHeroBody({ count }: { count: number }) {
     )
   }
   return (
-    <p className="mt-5 text-lg" style={{ color: 'rgb(var(--text-muted))' }}>
+    <p className="mt-5 text-lg leading-relaxed text-body">
       {body}{' '}
-      <Link href="/" className="text-brand-600 underline">
+      <Link href="/" className="text-brand-700 underline underline-offset-2 dark:text-primary">
         {cta}
       </Link>
     </p>
@@ -102,7 +95,7 @@ export function ToolDirectoryHeroBody({ count }: { count: number }) {
 export function ToolDirectoryTitle() {
   const { locale } = useApp()
   return (
-    <h1 className="text-4xl font-bold sm:text-5xl" style={{ color: 'rgb(var(--text))' }}>
+    <h1 className="font-serif text-[clamp(2.375rem,5vw,4rem)] font-normal leading-[1.05] tracking-[-.024em] text-ink">
       {t(locale, 'navAllTools')}
     </h1>
   )
@@ -116,19 +109,14 @@ export function ToolCategoryPills({ categories }: { categories: Array<[string, n
   const { locale } = useApp()
   return (
     <nav
-      className="mx-auto mb-10 flex max-w-4xl flex-wrap justify-center gap-2"
+      className="mb-14 flex flex-wrap gap-1 border-y border-hairline py-4"
       aria-label="Tool categories"
     >
       {categories.map(([category, count]) => (
         <Link
           key={category}
           href={`/?category=${encodeURIComponent(category)}#all-tools`}
-          className="rounded-full border px-4 py-1.5 text-sm font-medium transition hover:bg-brand-50"
-          style={{
-            borderColor: 'rgb(var(--border))',
-            backgroundColor: 'rgb(var(--bg-card))',
-            color: 'rgb(var(--text-muted))',
-          }}
+          className="rounded-lg px-3 py-2 text-sm font-medium text-body hover:bg-surface-card hover:text-ink"
         >
           {tc(locale, category)} ({count})
         </Link>

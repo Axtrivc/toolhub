@@ -213,7 +213,7 @@ export function UserAgentParserClient() {
                 {L('parsedResultLabel', 'Parsed result (JSON)')}
               </span>
             </div>
-            <pre
+            <pre data-code-output
               className="w-full overflow-x-auto rounded-lg border p-4 font-mono text-sm shadow-sm"
               style={{
                 borderColor: 'rgb(var(--border-strong))',

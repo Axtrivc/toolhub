@@ -223,23 +223,23 @@ export function ReadingSpeakingTimeClient() {
         ].map((cell) => (
           <div
             key={cell.label}
-            className="rounded-xl border border-border/60 bg-card/80 p-3 text-center shadow-sm backdrop-blur-md transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md"
+            className="min-w-0 rounded-xl border border-hairline bg-canvas p-4 text-center"
           >
-            <div className="text-xl font-bold tabular-nums sm:text-2xl" style={{ color: 'rgb(var(--text))' }}>
+            <div className="font-serif text-xl font-normal tabular-nums sm:text-2xl" style={{ color: 'rgb(var(--text))' }}>
               <AnimatedNumber value={cell.display} />
             </div>
-            <div className="mt-0.5 text-[11px] font-medium uppercase tracking-wide" style={{ color: 'rgb(var(--text-faint))' }}>
+            <div className="mt-0.5 text-[11px] font-medium uppercase tracking-wide" style={{ color: 'rgb(var(--text-subtle))' }}>
               {cell.label}
             </div>
             {cell.sub && (
-              <div className="mt-0.5 text-[10px] tabular-nums" style={{ color: 'rgb(var(--text-faint))' }}>
+              <div className="mt-0.5 text-[10px] tabular-nums" style={{ color: 'rgb(var(--text-subtle))' }}>
                 {cell.sub}
               </div>
             )}
           </div>
         ))}
       </div>
-      <div className="flex flex-wrap justify-center gap-x-4 gap-y-1 text-xs" style={{ color: 'rgb(var(--text-faint))' }}>
+      <div className="flex flex-wrap justify-center gap-x-4 gap-y-1 text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>
         <span className="tabular-nums">{sentences} {L('sentences', 'Sentences')}</span>
         <span className="tabular-nums">{words === 0 ? '0' : pages.toFixed(1)} {L('pages', 'Pages')} · {L('at250WordsPerPage', 'at 250 words per page')}</span>
       </div>

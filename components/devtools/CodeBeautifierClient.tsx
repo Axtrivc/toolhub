@@ -745,7 +745,7 @@ export function CodeBeautifierClient() {
             </span>
             <CopyButton value={result.output} label={L('copy', 'Copy')} />
           </div>
-          <pre
+          <pre data-code-output
             className="max-h-96 w-full overflow-auto rounded-lg border p-4 font-mono text-sm shadow-sm"
             style={{
               borderColor: 'rgb(var(--border-strong))',

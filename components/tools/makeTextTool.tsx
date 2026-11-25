@@ -167,7 +167,7 @@ export function makeTextTool(config: TextToolConfig): ComponentType {
               <button
                 type="button"
                 onClick={() => setInput('')}
-                className="-my-1 rounded-md px-2 py-1.5 text-xs text-slate-500 dark:text-slate-400 hover:text-red-500 sm:text-sm"
+                className="-my-1 rounded-md px-2 py-1.5 text-xs text-muted-ink hover:text-red-500 sm:text-sm"
               >
                 {t(locale, 'textToolClear')}
               </button>
@@ -209,12 +209,7 @@ export function makeTextTool(config: TextToolConfig): ComponentType {
               value={output}
               placeholder={t(locale, 'textToolResultPlaceholder')}
               rows={6}
-              className="w-full rounded-lg border-2 p-4 font-mono text-sm outline-none"
-              style={{
-                borderColor: 'rgb(var(--border))',
-                backgroundColor: 'rgb(var(--bg-subtle))',
-                color: 'rgb(var(--text))',
-              }}
+              className="w-full rounded-xl border border-transparent bg-dark-soft p-4 font-mono text-sm text-on-dark outline-none placeholder:text-on-dark-soft"
             />
           </PulseGlow>
         </div>
@@ -231,12 +226,12 @@ export function makeTextTool(config: TextToolConfig): ComponentType {
             ].map((cell) => (
               <div
                 key={cell.label}
-                className="rounded-xl border border-border/60 bg-card/80 p-3 text-center shadow-sm backdrop-blur-md transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md"
+                className="min-w-0 rounded-xl border border-hairline bg-canvas p-4 text-center"
               >
-                <div className="text-xl font-bold tabular-nums sm:text-2xl" style={{ color: 'rgb(var(--text))' }}>
+                <div className="font-serif text-xl font-normal tabular-nums sm:text-2xl" style={{ color: 'rgb(var(--text))' }}>
                   <AnimatedNumber value={cell.display} />
                 </div>
-                <div className="mt-0.5 text-[11px] font-medium uppercase tracking-wide" style={{ color: 'rgb(var(--text-faint))' }}>
+                <div className="mt-0.5 text-[11px] font-medium uppercase tracking-wide" style={{ color: 'rgb(var(--text-subtle))' }}>
                   {cell.label}
                 </div>
               </div>
@@ -250,7 +245,7 @@ export function makeTextTool(config: TextToolConfig): ComponentType {
           >
             {[
               { label: t(locale, 'textToolInputLen'), count: charCount, color: 'rgb(var(--primary))' },
-              { label: t(locale, 'textToolOutputLen'), count: outChars, color: '#22c55e' },
+              { label: t(locale, 'textToolOutputLen'), count: outChars, color: 'var(--chart-teal)' },
             ].map((row) => {
               const max = Math.max(charCount, outChars, 1)
               return (

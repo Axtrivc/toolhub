@@ -426,9 +426,9 @@ function clamp1to5(n: number): number {
 
 /** 风险等级 → 颜色样式;文案按等级从字典取(riskLow/riskMedium/riskHigh) */
 const LEVEL_STYLE: Record<RiskLevel, { color: string; bg: string }> = {
-  low: { color: '#16a34a', bg: 'rgba(34,197,94,0.12)' },
-  medium: { color: '#d97706', bg: 'rgba(245,158,11,0.12)' },
-  high: { color: '#dc2626', bg: 'rgba(239,68,68,0.12)' },
+  low: { color: 'var(--positive-text)', bg: 'rgba(34,197,94,0.12)' },
+  medium: { color: 'var(--warning-text)', bg: 'rgba(245,158,11,0.12)' },
+  high: { color: 'var(--negative-text)', bg: 'rgba(239,68,68,0.12)' },
 }
 
 function Badge({ color, bg, children }: { color: string; bg: string; children: React.ReactNode }) {
@@ -465,9 +465,9 @@ function RiskGauge({ score, level, gaugeLabel, riskLabel }: { score: number; lev
   return (
     <div className="flex flex-col items-center">
       <svg viewBox="0 0 200 104" className="w-full max-w-[240px]" role="img" aria-label={`${L('riskScoreAria', 'Risk score')} ${safeScore} ${L('of100', 'of 100')}`}>
-        <path d={arc(0, 20)} fill="none" stroke="#22c55e" strokeWidth="14" strokeLinecap="round" opacity="0.9" />
-        <path d={arc(21, 60)} fill="none" stroke="#f59e0b" strokeWidth="14" opacity="0.9" />
-        <path d={arc(61, 100)} fill="none" stroke="#ef4444" strokeWidth="14" strokeLinecap="round" opacity="0.9" />
+        <path d={arc(0, 20)} fill="none" stroke="var(--chart-teal)" strokeWidth="14" strokeLinecap="round" opacity="0.9" />
+        <path d={arc(21, 60)} fill="none" stroke="var(--chart-amber)" strokeWidth="14" opacity="0.9" />
+        <path d={arc(61, 100)} fill="none" stroke="var(--chart-ink)" strokeWidth="14" strokeLinecap="round" opacity="0.9" />
         <line x1={cx} y1={cy} x2={nx} y2={ny} stroke={style.color} strokeWidth="3.5" strokeLinecap="round" />
         <circle cx={cx} cy={cy} r="5" fill={style.color} />
         <text x={cx} y={cy - 26} textAnchor="middle" fontSize="26" fontWeight="800" fill={style.color}>
@@ -490,15 +490,15 @@ function StarRow({ stars }: { stars: number }) {
   return (
     <span className="text-lg tracking-wide" style={{ color: '#f59e0b' }} role="img" aria-label={`${stars} ${L('outOf5Stars', 'out of 5 stars')}`}>
       {'★'.repeat(stars)}
-      <span aria-hidden="true" style={{ color: 'rgb(var(--text-faint))' }}>{'★'.repeat(5 - stars)}</span>
+      <span aria-hidden="true" style={{ color: 'rgb(var(--text-subtle))' }}>{'★'.repeat(5 - stars)}</span>
     </span>
   )
 }
 
 function RatingPill({ stars, d }: { stars: number; d: IpCheckerDict }) {
-  if (stars >= 4) return <Badge color="#16a34a" bg="rgba(34,197,94,0.12)">{d.ratingRecommended}</Badge>
-  if (stars === 3) return <Badge color="#d97706" bg="rgba(245,158,11,0.12)">{d.ratingCaution}</Badge>
-  return <Badge color="#dc2626" bg="rgba(239,68,68,0.12)">{d.ratingNotRecommended}</Badge>
+  if (stars >= 4) return <Badge color="var(--positive-text)" bg="rgba(34,197,94,0.12)">{d.ratingRecommended}</Badge>
+  if (stars === 3) return <Badge color="var(--warning-text)" bg="rgba(245,158,11,0.12)">{d.ratingCaution}</Badge>
+  return <Badge color="var(--negative-text)" bg="rgba(239,68,68,0.12)">{d.ratingNotRecommended}</Badge>
 }
 
 function DetailRow({ label, value, mono }: { label: string; value: string; mono?: boolean }) {
@@ -643,7 +643,7 @@ export function IpCheckerClient() {
             <div className="mt-1 flex flex-wrap items-center gap-3">
               <span className="break-all font-mono text-2xl font-bold sm:text-3xl">{ipDisplay}</span>
               {trace?.colo && (
-                <Badge color="#2563eb" bg="rgba(37,99,235,0.12)">{L('cfColo', 'CF Colo')}: {trace.colo}</Badge>
+                <Badge color="rgb(var(--text))" bg="rgb(var(--primary) / 0.12)">{L('cfColo', 'CF Colo')}: {trace.colo}</Badge>
               )}
             </div>
           </div>
@@ -714,14 +714,14 @@ export function IpCheckerClient() {
               </div>
               <div className="mt-3 flex flex-wrap gap-1.5">
                 {analysis.isDatacenter ? (
-                  <Badge color="#dc2626" bg="rgba(239,68,68,0.12)">{d.badgeDatacenter}</Badge>
+                  <Badge color="var(--negative-text)" bg="rgba(239,68,68,0.12)">{d.badgeDatacenter}</Badge>
                 ) : (
-                  <Badge color="#16a34a" bg="rgba(34,197,94,0.12)">{d.badgeResidential}</Badge>
+                  <Badge color="var(--positive-text)" bg="rgba(34,197,94,0.12)">{d.badgeResidential}</Badge>
                 )}
                 {analysis.isUnverifiedHosting ? (
-                  <Badge color="#d97706" bg="rgba(245,158,11,0.12)">{d.badgeUnverifiedHost}</Badge>
+                  <Badge color="var(--warning-text)" bg="rgba(245,158,11,0.12)">{d.badgeUnverifiedHost}</Badge>
                 ) : (
-                  <Badge color="#16a34a" bg="rgba(34,197,94,0.12)">{d.badgeNativeIp}</Badge>
+                  <Badge color="var(--positive-text)" bg="rgba(34,197,94,0.12)">{d.badgeNativeIp}</Badge>
                 )}
               </div>
               <div className="mt-3 divide-y" style={{ borderColor: 'rgb(var(--border))' }}>
@@ -785,9 +785,9 @@ export function IpCheckerClient() {
               </p>
               <div className="mt-2">
                 {analysis.proxyKeyword || analysis.isDatacenter ? (
-                  <Badge color="#d97706" bg="rgba(245,158,11,0.12)">{d.proxyDetected}</Badge>
+                  <Badge color="var(--warning-text)" bg="rgba(245,158,11,0.12)">{d.proxyDetected}</Badge>
                 ) : (
-                  <Badge color="#16a34a" bg="rgba(34,197,94,0.12)">{d.proxyClean}</Badge>
+                  <Badge color="var(--positive-text)" bg="rgba(34,197,94,0.12)">{d.proxyClean}</Badge>
                 )}
               </div>
               <p className="mt-2 text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>
@@ -802,9 +802,9 @@ export function IpCheckerClient() {
               <div className="mt-2">
                 {isSelfIp ? (
                   analysis.tzMismatch ? (
-                    <Badge color="#d97706" bg="rgba(245,158,11,0.12)">{d.tzMismatchBadge}</Badge>
+                    <Badge color="var(--warning-text)" bg="rgba(245,158,11,0.12)">{d.tzMismatchBadge}</Badge>
                   ) : (
-                    <Badge color="#16a34a" bg="rgba(34,197,94,0.12)">{d.tzMatchBadge}</Badge>
+                    <Badge color="var(--positive-text)" bg="rgba(34,197,94,0.12)">{d.tzMatchBadge}</Badge>
                   )
                 ) : (
                   <Badge color="rgb(var(--text-muted))" bg="rgba(120,120,120,0.12)">{d.signalNaBadge}</Badge>
@@ -829,9 +829,9 @@ export function IpCheckerClient() {
               </p>
               <div className="mt-2">
                 {geo.ipType === 'IPv6' ? (
-                  <Badge color="#2563eb" bg="rgba(37,99,235,0.12)">{d.protoV6}</Badge>
+                  <Badge color="rgb(var(--text))" bg="rgb(var(--primary) / 0.12)">{d.protoV6}</Badge>
                 ) : (
-                  <Badge color="#2563eb" bg="rgba(37,99,235,0.12)">{d.protoV4}</Badge>
+                  <Badge color="rgb(var(--text))" bg="rgb(var(--primary) / 0.12)">{d.protoV4}</Badge>
                 )}
               </div>
               <p className="mt-2 font-mono text-xs break-all" style={{ color: 'rgb(var(--text-subtle))' }}>
@@ -846,13 +846,13 @@ export function IpCheckerClient() {
               <div className="mt-2">
                 {isSelfIp ? (
                   webRtcIps === null ? (
-                    <Badge color="#d97706" bg="rgba(245,158,11,0.12)">{d.webrtcTesting}</Badge>
+                    <Badge color="var(--warning-text)" bg="rgba(245,158,11,0.12)">{d.webrtcTesting}</Badge>
                   ) : webRtcIps.length === 0 ? (
-                    <Badge color="#16a34a" bg="rgba(34,197,94,0.12)">{d.webrtcNoLeak}</Badge>
+                    <Badge color="var(--positive-text)" bg="rgba(34,197,94,0.12)">{d.webrtcNoLeak}</Badge>
                   ) : webRtcIps.some((ip) => ip !== geo.ip) ? (
-                    <Badge color="#dc2626" bg="rgba(239,68,68,0.12)">{d.webrtcLeak}</Badge>
+                    <Badge color="var(--negative-text)" bg="rgba(239,68,68,0.12)">{d.webrtcLeak}</Badge>
                   ) : (
-                    <Badge color="#16a34a" bg="rgba(34,197,94,0.12)">{d.webrtcConsistent}</Badge>
+                    <Badge color="var(--positive-text)" bg="rgba(34,197,94,0.12)">{d.webrtcConsistent}</Badge>
                   )
                 ) : (
                   <Badge color="rgb(var(--text-muted))" bg="rgba(120,120,120,0.12)">{d.signalNaBadge}</Badge>
@@ -920,7 +920,7 @@ export function IpCheckerClient() {
                     </td>
                     <td className="py-2.5 pr-4 font-mono font-semibold">
                       {p.status === 'ok' && p.ms != null ? (
-                        <span style={{ color: p.ms < 150 ? '#16a34a' : p.ms < 350 ? '#d97706' : '#dc2626' }}>
+                        <span style={{ color: p.ms < 150 ? 'var(--positive-text)' : p.ms < 350 ? 'var(--warning-text)' : 'var(--negative-text)' }}>
                           {p.ms} ms
                         </span>
                       ) : p.status === 'running' ? '…' : '—'}

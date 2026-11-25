@@ -756,7 +756,7 @@ export function ToneGeneratorClient() {
             className="w-full accent-brand-600"
           />
         </div>
-        <div className="mt-1 flex justify-between text-[11px]" style={{ color: 'rgb(var(--text-faint))' }}>
+        <div className="mt-1 flex justify-between text-[11px]" style={{ color: 'rgb(var(--text-subtle))' }}>
           <span>20 Hz</span><span>200 Hz</span><span>2 kHz</span><span>20 kHz</span>
         </div>
         {/* 常用测试音一键直达:市电嗡鸣 / A4 标准音 / 中频参考 / 高频检查(标签纯单位,免译) */}
@@ -869,10 +869,10 @@ export function ToneGeneratorClient() {
 // ══════════════════ BPM Tap Counter(自定义)══════════════════
 
 const STABILITY_TIERS = [
-  { max: 0.02, key: 'stLocked', fb: 'locked', color: '#16a34a' },
-  { max: 0.05, key: 'stSteady', fb: 'steady', color: '#2563eb' },
-  { max: 0.12, key: 'stLoose', fb: 'loose', color: '#d97706' },
-  { max: Infinity, key: 'stUneven', fb: 'uneven', color: '#dc2626' },
+  { max: 0.02, key: 'stLocked', fb: 'locked', color: 'var(--positive-text)' },
+  { max: 0.05, key: 'stSteady', fb: 'steady', color: 'rgb(var(--primary))' },
+  { max: 0.12, key: 'stLoose', fb: 'loose', color: 'var(--warning-text)' },
+  { max: Infinity, key: 'stUneven', fb: 'uneven', color: 'var(--negative-text)' },
 ] as const
 
 export function BpmTapCounterClient() {
@@ -932,7 +932,7 @@ export function BpmTapCounterClient() {
         <span className="block text-2xl font-bold tracking-wide" style={{ color: 'rgb(var(--text))' }}>
           {L('tapPrompt', 'TAP')}
         </span>
-        <span className="mt-1 block text-sm" style={{ color: 'rgb(var(--text-faint))' }}>
+        <span className="mt-1 block text-sm" style={{ color: 'rgb(var(--text-subtle))' }}>
           {L('tapHint', 'Tap here, or press the T key')}
         </span>
       </button>

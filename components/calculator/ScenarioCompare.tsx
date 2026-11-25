@@ -149,10 +149,10 @@ export function ScenarioCompareResults({ rows }: { rows: CompareRowDef[] }) {
                 {headline.label}
               </div>
               <div className="mt-1 flex flex-wrap items-baseline gap-x-3 gap-y-1">
-                <span className="text-xl font-bold tabular-nums sm:text-2xl" style={{ color: 'rgb(var(--text))' }}>
+                <span className="font-serif text-xl font-normal tabular-nums sm:text-2xl" style={{ color: 'rgb(var(--text))' }}>
                   {tuiCalc('scenarioA', locale, 'Scenario A')}: {headline.a}
                 </span>
-                <span className="text-xl font-bold tabular-nums sm:text-2xl" style={{ color: 'rgb(var(--text-muted))' }}>
+                <span className="font-serif text-xl font-normal tabular-nums sm:text-2xl" style={{ color: 'rgb(var(--text-muted))' }}>
                   {tuiCalc('scenarioB', locale, 'Scenario B')}: {headline.b}
                 </span>
               </div>
@@ -162,14 +162,14 @@ export function ScenarioCompareResults({ rows }: { rows: CompareRowDef[] }) {
                 className="delta-badge inline-flex shrink-0 items-center gap-1.5 rounded-full px-3.5 py-1.5 text-base font-bold tabular-nums shadow-sm"
                 style={{
                   backgroundColor: headlineDelta.better === 'b' ? 'rgb(34 197 94 / 0.12)' : 'rgb(239 68 68 / 0.12)',
-                  color: headlineDelta.better === 'b' ? '#16a34a' : '#dc2626',
+                  color: headlineDelta.better === 'b' ? 'var(--positive-text)' : 'var(--negative-text)',
                   border: `1px solid ${headlineDelta.better === 'b' ? 'rgb(34 197 94 / 0.4)' : 'rgb(239 68 68 / 0.4)'}`,
                 }}
               >
                 {headlineDelta.text}
                 <span
                   className="text-[11px] font-semibold uppercase tracking-wide"
-                  style={{ color: headlineDelta.better === 'b' ? '#16a34a' : '#dc2626', opacity: 0.75 }}
+                  style={{ color: headlineDelta.better === 'b' ? 'var(--positive-text)' : 'var(--negative-text)', opacity: 0.75 }}
                 >
                   {tuiCalc('deltaCol', locale, 'B vs A')}
                 </span>
@@ -198,7 +198,7 @@ export function ScenarioCompareResults({ rows }: { rows: CompareRowDef[] }) {
                     {r.a}
                   </td>
                   <td className="px-3 py-2 text-right font-mono tabular-nums" style={{ color: 'rgb(var(--text))' }}>{r.b}</td>
-                  <td className="px-3 py-2 text-right font-mono font-semibold tabular-nums" style={{ color: d ? (d.better === 'b' ? '#16a34a' : '#dc2626') : 'rgb(var(--text-faint))' }}>
+                  <td className="px-3 py-2 text-right font-mono font-semibold tabular-nums" style={{ color: d ? (d.better === 'b' ? 'var(--positive-text)' : 'var(--negative-text)') : 'rgb(var(--text-subtle))' }}>
                     {d ? d.text : '—'}
                   </td>
                 </tr>

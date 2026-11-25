@@ -167,7 +167,7 @@ export function JsonToTypeScriptClient() {
               <button
                 type="button"
                 onClick={() => setInput('')}
-                className="-my-1 rounded-md px-2 py-1.5 text-xs text-slate-400 hover:text-red-500 sm:text-sm"
+                className="-my-1 rounded-md px-2 py-1.5 text-xs text-muted-ink hover:text-red-500 sm:text-sm"
               >
                 {L('clear', 'Clear')}
               </button>
@@ -204,7 +204,7 @@ export function JsonToTypeScriptClient() {
             <span className="text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>{L('tsInterfaces', 'TypeScript Interfaces')}</span>
             <CopyButton value={result.output} label={L('copy', 'Copy')} />
           </div>
-          <pre
+          <pre data-code-output
             className="max-h-96 overflow-auto rounded-lg border bg-slate-50 p-4 text-xs dark:bg-slate-800/60"
             style={{ borderColor: 'rgb(var(--border))' }}
           >

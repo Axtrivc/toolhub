@@ -261,18 +261,18 @@ export function OpenGraphGeneratorClient() {
                       key={v.image}
                       src={v.image}
                       alt={L('ogPreviewAlt', 'OG preview')}
-                      placeholder={<span className="text-xs text-slate-400">{L('noImage', 'No image')}</span>}
+                      placeholder={<span className="text-xs text-muted-ink">{L('noImage', 'No image')}</span>}
                     />
                   ) : (
-                    <span className="text-xs text-slate-400">{L('noImage', 'No image')}</span>
+                    <span className="text-xs text-muted-ink">{L('noImage', 'No image')}</span>
                   )}
                 </div>
                 <div className="px-3 py-2.5">
-                  <div className="text-[11px] uppercase text-slate-400">{host}</div>
+                  <div className="text-[11px] uppercase text-muted-ink">{host}</div>
                   <div className="mt-0.5 line-clamp-2 text-sm font-semibold text-slate-800 dark:text-slate-100">
                     {v.title || L('titlePreviewDefault', 'Your title appears here')}
                   </div>
-                  <div className="mt-1 line-clamp-2 text-xs text-slate-500 dark:text-slate-400">
+                  <div className="mt-1 line-clamp-2 text-xs text-muted-ink">
                     {v.description || L('descPreviewDefault', 'Your description appears here')}
                   </div>
                 </div>
@@ -288,18 +288,18 @@ export function OpenGraphGeneratorClient() {
                       key={v.image}
                       src={v.image}
                       alt={L('twitterPreviewAlt', 'Twitter preview')}
-                      placeholder={<span className="text-[10px] text-slate-400">{L('noImg', 'No img')}</span>}
+                      placeholder={<span className="text-[10px] text-muted-ink">{L('noImg', 'No img')}</span>}
                     />
                   ) : (
-                    <span className="text-[10px] text-slate-400">{L('noImg', 'No img')}</span>
+                    <span className="text-[10px] text-muted-ink">{L('noImg', 'No img')}</span>
                   )}
                 </div>
                 <div className="min-w-0 flex-1">
-                  <div className="truncate text-[11px] text-slate-400">{host}</div>
+                  <div className="truncate text-[11px] text-muted-ink">{host}</div>
                   <div className="mt-0.5 line-clamp-2 text-sm font-semibold text-slate-800 dark:text-slate-100">
                     {v.title || L('titleDefault', 'Your title')}
                   </div>
-                  <div className="mt-0.5 line-clamp-1 text-xs text-slate-500 dark:text-slate-400">
+                  <div className="mt-0.5 line-clamp-1 text-xs text-muted-ink">
                     {v.description || L('descDefault', 'Your description')}
                   </div>
                 </div>
@@ -314,18 +314,18 @@ export function OpenGraphGeneratorClient() {
                     key={v.image}
                     src={v.image}
                     alt={L('twitterLargePreviewAlt', 'Twitter large preview')}
-                    placeholder={<span className="text-xs text-slate-400">{L('noImage', 'No image')}</span>}
+                    placeholder={<span className="text-xs text-muted-ink">{L('noImage', 'No image')}</span>}
                   />
                 ) : (
-                  <span className="text-xs text-slate-400">{L('noImage', 'No image')}</span>
+                  <span className="text-xs text-muted-ink">{L('noImage', 'No image')}</span>
                 )}
               </div>
               <div className="px-3 py-2.5">
-                <div className="text-[11px] uppercase text-slate-400">{host}</div>
+                <div className="text-[11px] uppercase text-muted-ink">{host}</div>
                 <div className="mt-0.5 line-clamp-1 text-sm font-semibold text-slate-800 dark:text-slate-100">
                   {v.title || L('titleDefault', 'Your title')}
                 </div>
-                <div className="mt-0.5 line-clamp-2 text-xs text-slate-500 dark:text-slate-400">
+                <div className="mt-0.5 line-clamp-2 text-xs text-muted-ink">
                   {v.description || L('descDefault', 'Your description')}
                 </div>
               </div>
@@ -341,7 +341,7 @@ export function OpenGraphGeneratorClient() {
             <span className="text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>{L('generatedMetaTags', 'Generated Meta Tags')}</span>
             <CopyButton value={metaTags} label={L('copy', 'Copy')} />
           </div>
-          <pre
+          <pre data-code-output
             className="overflow-x-auto rounded-lg border bg-slate-50 p-4 text-xs dark:bg-slate-800/60"
             style={{ borderColor: 'rgb(var(--border))' }}
           >

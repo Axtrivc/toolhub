@@ -366,7 +366,7 @@ export function FaviconGeneratorClient() {
                         className="image-render-pixel"
                       />
                     ) : (
-                      <span className="text-xs text-slate-400">…</span>
+                      <span className="text-xs text-muted-ink">…</span>
                     )}
                   </div>
                   <div className="mt-2 text-sm font-semibold" style={{ color: 'rgb(var(--text))' }}>
@@ -406,13 +406,13 @@ export function FaviconGeneratorClient() {
                 </span>
                 <CopyButton value={htmlSnippet} label={L('copy', 'Copy')} />
               </div>
-              <pre
+              <pre data-code-output
                 className="overflow-x-auto rounded-lg border p-4 text-xs"
                 style={{ borderColor: 'rgb(var(--border))', backgroundColor: 'rgb(var(--bg-card))', color: 'rgb(var(--text))' }}
               >
                 <code>{htmlSnippet}</code>
               </pre>
-              <p className="mt-1.5 text-[11px]" style={{ color: 'rgb(var(--text-faint))' }}>
+              <p className="mt-1.5 text-[11px]" style={{ color: 'rgb(var(--text-subtle))' }}>
                 {L('htmlSnippetHint', 'Rename the downloaded files to match (or edit the paths) and place them in your site root.')}
               </p>
             </div>

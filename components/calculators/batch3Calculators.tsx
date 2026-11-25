@@ -346,10 +346,10 @@ export function CalorieCalculatorClient() {
             min={600}
             max={4000}
             zones={[
-              { upTo: 1400, color: '#3b82f6', label: L('zoneLow', 'Deficit / low activity') },
-              { upTo: 2200, color: '#22c55e', label: L('zoneTypical', 'Typical maintenance') },
-              { upTo: 3000, color: '#eab308', label: L('zoneActive', 'Active lifestyle') },
-              { upTo: 4000, color: '#f97316', label: L('zoneAthlete', 'Athlete / heavy labor') },
+              { upTo: 1400, color: 'var(--chart-coral)', label: L('zoneLow', 'Deficit / low activity') },
+              { upTo: 2200, color: 'var(--chart-teal)', label: L('zoneTypical', 'Typical maintenance') },
+              { upTo: 3000, color: 'var(--chart-amber)', label: L('zoneActive', 'Active lifestyle') },
+              { upTo: 4000, color: 'var(--chart-coral)', label: L('zoneAthlete', 'Athlete / heavy labor') },
             ]}
             formatValue={(n) => `${fmtNum(n, 0)} ${L('calPerDay', 'cal/day')}`}
           />
@@ -362,7 +362,7 @@ export function CalorieCalculatorClient() {
           />
         </>
       ) : (
-        <div role="status" aria-live="polite" className="rounded-lg border-2 border-dashed p-6 text-center text-sm" style={{ borderColor: 'rgb(var(--border-strong))', color: 'rgb(var(--text-faint))' }}>
+        <div role="status" aria-live="polite" className="rounded-lg border-2 border-dashed p-6 text-center text-sm" style={{ borderColor: 'rgb(var(--border-strong))', color: 'rgb(var(--text-subtle))' }}>
           {L('emptyState', 'Enter your weight, height, age, and activity level to see your calorie targets')}
         </div>
       )}
@@ -500,12 +500,12 @@ export function BMRCalculatorClient() {
             min={12}
             max={42}
             zones={[
-              { upTo: 18.5, color: '#3b82f6', label: L('zoneUnder', 'Underweight') },
-              { upTo: 25, color: '#22c55e', label: L('zoneHealthy', 'Healthy') },
-              { upTo: 30, color: '#eab308', label: L('zoneOver', 'Overweight') },
-              { upTo: 35, color: '#f97316', label: L('zoneObese1', 'Obese I') },
-              { upTo: 40, color: '#ef4444', label: L('zoneObese2', 'Obese II') },
-              { upTo: 42, color: '#b91c1c', label: L('zoneObese3', 'Obese III') },
+              { upTo: 18.5, color: 'var(--chart-coral)', label: L('zoneUnder', 'Underweight') },
+              { upTo: 25, color: 'var(--chart-teal)', label: L('zoneHealthy', 'Healthy') },
+              { upTo: 30, color: 'var(--chart-amber)', label: L('zoneOver', 'Overweight') },
+              { upTo: 35, color: 'var(--chart-coral)', label: L('zoneObese1', 'Obese I') },
+              { upTo: 40, color: 'var(--chart-ink)', label: L('zoneObese2', 'Obese II') },
+              { upTo: 42, color: 'var(--chart-rust)', label: L('zoneObese3', 'Obese III') },
             ]}
             formatValue={(n) => fmtNum(n, 1)}
           />
@@ -518,7 +518,7 @@ export function BMRCalculatorClient() {
           />
         </>
       ) : (
-        <div role="status" aria-live="polite" className="rounded-lg border-2 border-dashed p-6 text-center text-sm" style={{ borderColor: 'rgb(var(--border-strong))', color: 'rgb(var(--text-faint))' }}>
+        <div role="status" aria-live="polite" className="rounded-lg border-2 border-dashed p-6 text-center text-sm" style={{ borderColor: 'rgb(var(--border-strong))', color: 'rgb(var(--text-subtle))' }}>
           {L('emptyState', 'Enter your gender, age, weight, and height to calculate your BMR')}
         </div>
       )}
@@ -643,10 +643,10 @@ export function WaterIntakeCalculatorClient() {
             min={0}
             max={5}
             zones={[
-              { upTo: 1.5, color: '#3b82f6', label: L('zoneLow', 'Below guidance') },
-              { upTo: 2.6, color: '#22c55e', label: L('zoneTypical', 'Typical adequate') },
-              { upTo: 3.7, color: '#eab308', label: L('zoneActive', 'Active lifestyle') },
-              { upTo: 5, color: '#f97316', label: L('zoneHigh', 'Above typical') },
+              { upTo: 1.5, color: 'var(--chart-coral)', label: L('zoneLow', 'Below guidance') },
+              { upTo: 2.6, color: 'var(--chart-teal)', label: L('zoneTypical', 'Typical adequate') },
+              { upTo: 3.7, color: 'var(--chart-amber)', label: L('zoneActive', 'Active lifestyle') },
+              { upTo: 5, color: 'var(--chart-coral)', label: L('zoneHigh', 'Above typical') },
             ]}
             formatValue={(n) => `${fmtNum(n, 2)} L`}
           />
@@ -659,7 +659,7 @@ export function WaterIntakeCalculatorClient() {
           />
         </>
       ) : (
-        <div role="status" aria-live="polite" className="rounded-lg border-2 border-dashed p-6 text-center text-sm" style={{ borderColor: 'rgb(var(--border-strong))', color: 'rgb(var(--text-faint))' }}>
+        <div role="status" aria-live="polite" className="rounded-lg border-2 border-dashed p-6 text-center text-sm" style={{ borderColor: 'rgb(var(--border-strong))', color: 'rgb(var(--text-subtle))' }}>
           {L('emptyState', 'Enter your weight, exercise, and climate to estimate your daily water needs')}
         </div>
       )}
@@ -801,10 +801,10 @@ export function IdealWeightCalculatorClient() {
             min={0}
             max={w(result.high * 1.35)}
             zones={[
-              { upTo: w(result.low), color: '#3b82f6', label: L('zoneUnder', 'Below healthy BMI') },
-              { upTo: w(result.high), color: '#22c55e', label: L('zoneHealthy', 'Healthy BMI range') },
-              { upTo: w(result.high * 1.2), color: '#eab308', label: L('zoneOver', 'Overweight BMI') },
-              { upTo: w(result.high * 1.35), color: '#ef4444', label: L('zoneObese', 'Obese BMI') },
+              { upTo: w(result.low), color: 'var(--chart-coral)', label: L('zoneUnder', 'Below healthy BMI') },
+              { upTo: w(result.high), color: 'var(--chart-teal)', label: L('zoneHealthy', 'Healthy BMI range') },
+              { upTo: w(result.high * 1.2), color: 'var(--chart-amber)', label: L('zoneOver', 'Overweight BMI') },
+              { upTo: w(result.high * 1.35), color: 'var(--chart-ink)', label: L('zoneObese', 'Obese BMI') },
             ]}
             formatValue={(n) => `${fmtNum(n, 1)} ${wUnit}`}
           />
@@ -817,7 +817,7 @@ export function IdealWeightCalculatorClient() {
           />
         </>
       ) : (
-        <div role="status" aria-live="polite" className="rounded-lg border-2 border-dashed p-6 text-center text-sm" style={{ borderColor: 'rgb(var(--border-strong))', color: 'rgb(var(--text-faint))' }}>
+        <div role="status" aria-live="polite" className="rounded-lg border-2 border-dashed p-6 text-center text-sm" style={{ borderColor: 'rgb(var(--border-strong))', color: 'rgb(var(--text-subtle))' }}>
           {L('emptyState', 'Enter your gender and height to see your ideal weight estimates')}
         </div>
       )}
@@ -905,9 +905,9 @@ export const FractionCalculatorClient = makeCalculatorClient({
     if (![f1, f2, result].every((n) => isFinite(n) && n >= 0)) return null
     return {
       rows: [
-        { label: 'Fraction 1', segments: [{ label: 'Value', value: f1, color: '#3b82f6' }] },
-        { label: 'Fraction 2', segments: [{ label: 'Value', value: f2, color: '#a855f7' }] },
-        { label: 'Result', segments: [{ label: 'Value', value: result, color: '#22c55e' }] },
+        { label: 'Fraction 1', segments: [{ label: 'Value', value: f1, color: 'var(--chart-coral)' }] },
+        { label: 'Fraction 2', segments: [{ label: 'Value', value: f2, color: 'var(--chart-rust)' }] },
+        { label: 'Result', segments: [{ label: 'Value', value: result, color: 'var(--chart-teal)' }] },
       ],
       formatTotal: (n) => fmtNum(n, 3),
     }
@@ -949,12 +949,12 @@ export const RatioCalculatorClient = makeCalculatorClient({
     return {
       rows: [
         { label: 'A : B', segments: [
-          { label: 'A', value: a, color: '#3b82f6' },
-          { label: 'B', value: b, color: '#cbd5e1' },
+          { label: 'A', value: a, color: 'var(--chart-coral)' },
+          { label: 'B', value: b, color: 'var(--chart-pale)' },
         ] },
         { label: 'C : D', segments: [
-          { label: 'C', value: c, color: '#22c55e' },
-          { label: 'D', value: d, color: '#cbd5e1' },
+          { label: 'C', value: c, color: 'var(--chart-teal)' },
+          { label: 'D', value: d, color: 'var(--chart-pale)' },
         ] },
       ],
       formatTotal: (n) => fmtNum(n, 1),
@@ -1049,8 +1049,8 @@ export const MarkupCalculatorClient = makeCalculatorClient({
     title: 'Selling Price: Cost vs Profit',
     centerLabel: 'Price',
     slices: [
-      { valueKey: 'cost', label: 'Cost', color: '#64748b' },
-      { valueKey: 'profit', label: 'Profit', color: '#22c55e' },
+      { valueKey: 'cost', label: 'Cost', color: 'var(--chart-muted)' },
+      { valueKey: 'profit', label: 'Profit', color: 'var(--chart-teal)' },
     ],
   },
 })
@@ -1205,8 +1205,8 @@ export const MortgageCalculatorClient = makeCalculatorClient({
       title: 'Total Paid: Principal vs Interest',
       centerLabel: 'Total',
       slices: [
-        { valueKey: 'principal', label: 'Principal (loan amount)', color: '#22c55e' },
-        { valueKey: 'total', label: 'Interest (cost of borrowing)', color: '#ef4444' },
+        { valueKey: 'principal', label: 'Principal (loan amount)', color: 'var(--chart-teal)' },
+        { valueKey: 'total', label: 'Interest (cost of borrowing)', color: 'var(--chart-ink)' },
       ],
     },
     {
@@ -1250,8 +1250,8 @@ export const MortgageCalculatorClient = makeCalculatorClient({
     return {
       xLabels: base.map((_, i) => `Y${i}`),
       lines: [
-        { key: 'base', label: 'Standard payments', color: '#ef4444', points: base, area: true },
-        { key: 'extra', label: 'With extra payment', color: '#22c55e', points: withExtra },
+        { key: 'base', label: 'Standard payments', color: 'var(--chart-ink)', points: base, area: true },
+        { key: 'extra', label: 'With extra payment', color: 'var(--chart-teal)', points: withExtra },
       ],
       highlightBetween: extra > 0 ? { a: 'base', b: 'extra', label: 'Gap closed by extra payments' } : undefined,
       formatY: (n) => fmtUSD(n, 0),
@@ -1306,8 +1306,8 @@ export const HourlyToSalaryCalculatorClient = makeCalculatorClient({
     return {
       rows: [
         { label: 'One week', segments: [
-          { label: 'At work', value: h, color: '#3b82f6' },
-          { label: 'Everything else', value: 168 - h, color: '#cbd5e1' },
+          { label: 'At work', value: h, color: 'var(--chart-coral)' },
+          { label: 'Everything else', value: 168 - h, color: 'var(--chart-pale)' },
         ] },
       ],
       formatTotal: (n) => `${Math.round(n)} h`,
@@ -1362,8 +1362,8 @@ export const ROIcalculatorClient = makeCalculatorClient({
       return {
         rows: [
           { label: 'Final value', segments: [
-            { label: 'Initial investment', value: initial, color: '#3b82f6' },
-            { label: 'Profit', value: profit, color: '#22c55e' },
+            { label: 'Initial investment', value: initial, color: 'var(--chart-coral)' },
+            { label: 'Profit', value: profit, color: 'var(--chart-teal)' },
           ] },
         ],
         formatTotal: (n) => fmtUSD(n, 0),
@@ -1371,8 +1371,8 @@ export const ROIcalculatorClient = makeCalculatorClient({
     }
     return {
       rows: [
-        { label: 'Final value', segments: [{ label: 'Final value', value: final, color: '#ef4444' }] },
-        { label: 'Loss', segments: [{ label: 'Loss', value: -profit, color: '#f59e0b' }] },
+        { label: 'Final value', segments: [{ label: 'Final value', value: final, color: 'var(--chart-ink)' }] },
+        { label: 'Loss', segments: [{ label: 'Loss', value: -profit, color: 'var(--chart-amber)' }] },
       ],
       formatTotal: (n) => fmtUSD(n, 0),
     }
@@ -1465,8 +1465,8 @@ export const CreditCardPayoffCalculatorClient = makeCalculatorClient({
       title: 'Total Paid: Principal vs Interest',
       centerLabel: 'Total',
       slices: [
-        { valueKey: 'principal', label: 'Principal (what you borrowed)', color: '#22c55e' },
-        { valueKey: 'interest', label: 'Interest (cost of borrowing)', color: '#ef4444' },
+        { valueKey: 'principal', label: 'Principal (what you borrowed)', color: 'var(--chart-teal)' },
+        { valueKey: 'interest', label: 'Interest (cost of borrowing)', color: 'var(--chart-ink)' },
       ],
     },
     {
@@ -1495,7 +1495,7 @@ export const CreditCardPayoffCalculatorClient = makeCalculatorClient({
     if (balance > 0) return null
     return {
       xLabels,
-      lines: [{ key: 'balance', label: 'Remaining balance', color: '#ef4444', points, area: true }],
+      lines: [{ key: 'balance', label: 'Remaining balance', color: 'var(--chart-ink)', points, area: true }],
       formatY: (n) => fmtUSD(n, 0),
     }
   },
@@ -1570,9 +1570,9 @@ export const IncomeTaxEstimatorClient = makeCalculatorClient({
     title: 'Where Your Income Goes',
     centerLabel: 'Income',
     slices: [
-      { valueKey: 'tax', label: 'Federal tax', color: '#ef4444' },
-      { valueKey: 'fica', label: 'FICA (Social Security + Medicare)', color: '#f59e0b' },
-      { valueKey: 'takehome', label: 'Take-home pay', color: '#22c55e' },
+      { valueKey: 'tax', label: 'Federal tax', color: 'var(--chart-ink)' },
+      { valueKey: 'fica', label: 'FICA (Social Security + Medicare)', color: 'var(--chart-amber)' },
+      { valueKey: 'takehome', label: 'Take-home pay', color: 'var(--chart-teal)' },
     ],
   },
 })

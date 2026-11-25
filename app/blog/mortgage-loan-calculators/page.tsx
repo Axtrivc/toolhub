@@ -86,7 +86,7 @@ const articleJsonLd = {
 
 export default function MortgageLoanCalculatorsPost() {
   return (
-    <div className="container-page py-10">
+    <div className="mx-auto w-full max-w-4xl px-4 py-10 sm:px-8 sm:pb-24 sm:pt-14">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: jsonLdStringify(articleJsonLd) }}
@@ -99,15 +99,15 @@ export default function MortgageLoanCalculatorsPost() {
       </div>
 
       <nav aria-label="Breadcrumb" className="mb-6 text-sm" style={{ color: 'rgb(var(--text-subtle))' }}>
-        <ol className="flex items-center gap-2">
+        <ol className="flex flex-wrap items-center gap-2">
           <li>
-            <Link href="/" className="hover:text-brand-600">
+            <Link href="/" className="text-brand-700 dark:text-brand-400">
               <BlogCrumbHome />
             </Link>
           </li>
           <li aria-hidden="true">/</li>
           <li>
-            <Link href="/blog/" className="hover:text-brand-600">
+            <Link href="/blog/" className="text-brand-700 dark:text-brand-400">
               <BlogCrumbBlog />
             </Link>
           </li>
@@ -118,7 +118,7 @@ export default function MortgageLoanCalculatorsPost() {
         </ol>
       </nav>
 
-      <header className="mb-8">
+      <header className="border-b border-hairline pb-8">
         <div className="mb-3 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>
           <time dateTime={PUBLISH_DATE}>{PUBLISH_DATE}</time>
           <span aria-hidden="true">·</span>
@@ -126,7 +126,7 @@ export default function MortgageLoanCalculatorsPost() {
           <span aria-hidden="true">·</span>
           <BlogArticleByline />
         </div>
-        <h1 className="text-3xl font-bold tracking-tight sm:text-4xl" style={{ color: 'rgb(var(--text))' }}>
+        <h1 className="font-serif text-4xl font-normal leading-[1.1] tracking-[-.5px] sm:text-5xl sm:tracking-[-1px]" style={{ color: 'rgb(var(--text))' }}>
           <BlogArticleTitle articleKey="mortgage-loan-calculators" />
         </h1>
       </header>

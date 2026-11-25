@@ -140,8 +140,8 @@ export const TimeCardCalculatorClient = makeCalculatorClient({
   chart: {
     title: 'Regular vs overtime hours this week',
     slices: [
-      { valueKey: 'regular', label: 'Regular hours', color: '#3b82f6' },
-      { valueKey: 'overtime', label: 'Overtime hours', color: '#f59e0b' },
+      { valueKey: 'regular', label: 'Regular hours', color: 'var(--chart-coral)' },
+      { valueKey: 'overtime', label: 'Overtime hours', color: 'var(--chart-amber)' },
     ],
     centerLabel: 'Week total',
   },
@@ -365,8 +365,8 @@ export const PtoAccrualCalculatorClient = makeCalculatorClient({
   chart: {
     title: 'Annual allowance: used vs remaining',
     slices: [
-      { valueKey: 'usedDisp', label: 'Used', color: '#f59e0b' },
-      { valueKey: 'yearEnd', label: 'Remaining', color: '#22c55e' },
+      { valueKey: 'usedDisp', label: 'Used', color: 'var(--chart-amber)' },
+      { valueKey: 'yearEnd', label: 'Remaining', color: 'var(--chart-teal)' },
     ],
     centerLabel: 'Annual allowance',
   },
@@ -448,7 +448,7 @@ export const DownloadTimeCalculatorClient = makeCalculatorClient({
     return {
       rows: rows.map((r) => ({
         label: r.label,
-        segments: [{ label: 'Transfer time', value: megabits / (r.mbps * eff), color: '#3b82f6' }],
+        segments: [{ label: 'Transfer time', value: megabits / (r.mbps * eff), color: 'var(--chart-coral)' }],
       })),
       formatTotal: (n) => fmtDuration(n),
     }
@@ -544,8 +544,8 @@ export const TireSizeCalculatorClient = makeCalculatorClient({
     const t1 = parseTire(v.tire1)
     const t2 = v.tire2.trim() ? parseTire(v.tire2) : null
     if (!t1) return null
-    const rows = [{ label: `Current ${v.tire1.trim()}`, value: dims(t1), color: '#3b82f6' }]
-    if (t2) rows.push({ label: `New ${v.tire2.trim()}`, value: dims(t2), color: '#22c55e' })
+    const rows = [{ label: `Current ${v.tire1.trim()}`, value: dims(t1), color: 'var(--chart-coral)' }]
+    if (t2) rows.push({ label: `New ${v.tire2.trim()}`, value: dims(t2), color: 'var(--chart-teal)' })
     return {
       rows: rows.map((r) => ({ label: r.label, segments: [{ label: 'Diameter', value: r.value, color: r.color }] })),
       formatTotal: (n) => `${Math.round(n)} mm`,
@@ -632,8 +632,8 @@ export const WindChillCalculatorClient = makeCalculatorClient({
     return {
       xLabels: marks.map((m) => (Number.isInteger(m) ? `${m}` : m.toFixed(1))),
       lines: [
-        { key: 'chill', label: 'Wind chill', color: '#3b82f6', points: marks.map((m) => disp(chillAt(m))), area: true },
-        { key: 'air', label: 'Actual air temp', color: '#94a3b8', points: marks.map(() => disp(tc)), dashed: true },
+        { key: 'chill', label: 'Wind chill', color: 'var(--chart-coral)', points: marks.map((m) => disp(chillAt(m))), area: true },
+        { key: 'air', label: 'Actual air temp', color: 'var(--chart-muted)', points: marks.map(() => disp(tc)), dashed: true },
       ],
       highlightBetween: { a: 'air', b: 'chill' },
       formatY: (n) => `${n.toFixed(0)}°${outC ? 'C' : 'F'}`,

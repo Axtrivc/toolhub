@@ -44,13 +44,13 @@ export function RelatedTools({ slug, limit = 4 }: RelatedToolsProps) {
   return (
     <section
       aria-labelledby="related-tools-heading"
-      className="mt-12 border-t pt-10"
+      className="mt-12 border-t pt-10 sm:mt-20"
       style={{ borderColor: 'rgb(var(--border))' }}
     >
       <header className="mb-5">
         <h2
           id="related-tools-heading"
-          className="text-2xl font-bold"
+          className="font-serif text-3xl font-normal tracking-[-0.3px]"
           style={{ color: 'rgb(var(--text))' }}
         >
           {t(locale, 'relatedTitle')}
@@ -74,20 +74,20 @@ export function RelatedTools({ slug, limit = 4 }: RelatedToolsProps) {
               <div className="flex items-start justify-between">
                 {/* 工具图标(与首页 ToolCard 同款);Hover 弹簧缩放 1.08 */}
                 <span
-                  className="flex h-11 w-11 items-center justify-center rounded-lg bg-slate-100 p-2 text-slate-600 transition-transform dark:text-slate-300 duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:scale-[1.08] dark:border dark:border-blue-800/40 dark:bg-blue-950/30"
+                  className="flex h-10 w-10 items-center justify-center rounded-full bg-canvas text-ink"
                   aria-hidden="true"
                 >
                   <SmartIcon icon={getToolIcon(tool)} className="h-5 w-5" />
                 </span>
                 {/* 右上角分类标签 —— 小巧精致内嵌胶囊,与首页 ToolCard Badge 统一 */}
-                <span className="inline-flex items-center rounded-full bg-slate-100 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-slate-500 dark:bg-slate-800 dark:text-slate-400">
+                <span className="inline-flex items-center rounded-full bg-canvas px-2.5 py-1 text-xs font-medium text-body">
                   {tc(locale, tool.category)}
                 </span>
               </div>
-              <h3 className="mt-4 flex min-h-[2.5rem] items-center text-base font-medium text-slate-900 line-clamp-2 group-hover:text-brand-600 dark:text-white">
+              <h3 className="mt-4 line-clamp-2 font-serif text-xl font-normal leading-snug text-ink">
                 {localizedName}
               </h3>
-              <p className="mt-2 line-clamp-2 flex-1 text-xs text-slate-500 dark:text-slate-400">
+              <p className="mt-2 line-clamp-2 flex-1 text-sm leading-relaxed text-body">
                 {localizedIntro}
               </p>
             </AnimatedToolCard>

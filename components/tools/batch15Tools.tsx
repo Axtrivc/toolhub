@@ -63,7 +63,7 @@ export function LlmCostCalculatorClient() {
           title={L('chartTitle', 'Monthly cost by model')}
           rows={stats.rows.map(({ m, perMonth }, i) => ({
             label: m.label,
-            segments: [{ label: i === 0 ? L('cheapest', 'cheapest') : L('costLabel', 'per month'), value: perMonth, color: i === 0 ? '#22c55e' : '#3b82f6' }],
+            segments: [{ label: i === 0 ? L('cheapest', 'cheapest') : L('costLabel', 'per month'), value: perMonth, color: i === 0 ? 'var(--chart-teal)' : 'var(--chart-coral)' }],
           }))}
           formatTotal={(n) => `$${n < 0.01 ? n.toExponential(1) : fmtNum(n, 2)}`}
         />
@@ -85,14 +85,14 @@ export function LlmCostCalculatorClient() {
                     {m.label}
                     {i === 0 && <span className="ml-2 text-xs text-green-600 dark:text-green-400">{L('cheapest', 'cheapest')}</span>}
                   </td>
-                  <td className="px-3 py-2 font-mono text-xs" style={{ color: 'rgb(var(--text-faint))' }}>
+                  <td className="px-3 py-2 font-mono text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>
                     ${fmtNum(m.inputPer1M, 2)}
                     {/* 缓存率 > 0 时追加混合后有效输入价,绿色箭头直观显示降幅 */}
                     {stats.rate > 0 && effIn < m.inputPer1M && (
                       <span className="ml-1 whitespace-nowrap text-green-600 dark:text-green-400">→ ${fmtNum(effIn, 2)}</span>
                     )}
                   </td>
-                  <td className="px-3 py-2 font-mono text-xs" style={{ color: 'rgb(var(--text-faint))' }}>${fmtNum(m.outputPer1M, 2)}</td>
+                  <td className="px-3 py-2 font-mono text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>${fmtNum(m.outputPer1M, 2)}</td>
                   <td className="px-3 py-2 font-mono" style={{ color: 'rgb(var(--text))' }}>${perReq < 0.01 ? perReq.toExponential(1) : fmtNum(perReq, 4)}</td>
                   <td className="px-3 py-2 font-mono" style={{ color: 'rgb(var(--text))' }}>${fmtNum(perDay, 2)}</td>
                   <td className="px-3 py-2 font-mono font-semibold" style={{ color: 'rgb(var(--text))' }}>${fmtNum(perMonth, 0)}</td>
@@ -102,7 +102,7 @@ export function LlmCostCalculatorClient() {
           </table>
         </div>
       ) : (
-        <p className="text-sm" style={{ color: 'rgb(var(--text-faint))' }}>{L('invalid', 'Enter non-negative numbers in all fields')}</p>
+        <p className="text-sm" style={{ color: 'rgb(var(--text-subtle))' }}>{L('invalid', 'Enter non-negative numbers in all fields')}</p>
       )}
 
       <ResultActions
@@ -148,7 +148,7 @@ export function ContextWindowCheckerClient() {
           placeholder={L('placeholder', 'Paste the text you plan to send…')}
           className="w-full rounded-lg border p-4 font-mono text-sm outline-none transition focus:ring-2"
           style={selVars} />
-        <p className="mt-1 text-xs" style={{ color: 'rgb(var(--text-faint))' }}>
+        <p className="mt-1 text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>
           {L('estimate', '≈ {n} tokens · {c} characters').replace('{n}', tokens.toLocaleString('en-US')).replace('{c}', [...text].length.toLocaleString('en-US'))}
         </p>
       </div>
@@ -161,7 +161,7 @@ export function ContextWindowCheckerClient() {
             <div key={id} className="rounded-lg border p-3" style={{ borderColor: 'rgb(var(--border))' }}>
               <div className="mb-1.5 flex items-baseline justify-between gap-2 text-sm">
                 <span style={{ color: 'rgb(var(--text))' }}>{label}</span>
-                <span className={`font-mono text-xs ${fit ? '' : 'text-red-600 dark:text-red-400'}`} style={fit ? { color: 'rgb(var(--text-faint))' } : undefined}>
+                <span className={`font-mono text-xs ${fit ? '' : 'text-red-600 dark:text-red-400'}`} style={fit ? { color: 'rgb(var(--text-subtle))' } : undefined}>
                   {fit ? `${fmtNum(pct, 1)}% ${L('ofWindow', 'of window')}` : L('exceeds', `exceeds by ${'{}'}`).replace('{}', (tokens - ctx).toLocaleString('en-US'))}
                 </span>
               </div>
@@ -171,7 +171,7 @@ export function ContextWindowCheckerClient() {
                   style={{ width: `${Math.max(pct, tokens > 0 ? 1.5 : 0)}%` }}
                 />
               </div>
-              <div className="mt-1 font-mono text-[10px]" style={{ color: 'rgb(var(--text-faint))' }}>
+              <div className="mt-1 font-mono text-[10px]" style={{ color: 'rgb(var(--text-subtle))' }}>
                 {tokens.toLocaleString('en-US')} / {ctx.toLocaleString('en-US')} · {L('headroom', 'headroom')} {(Math.max(0, ctx - tokens)).toLocaleString('en-US')}
               </div>
             </div>
@@ -286,7 +286,7 @@ export function JsonToZodClient() {
             <span className="text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>Zod schema</span>
             {code && <CopyButton value={code} />}
           </div>
-          <pre className="h-[19rem] overflow-auto rounded-lg border p-4 font-mono text-xs whitespace-pre" style={{ borderColor: 'rgb(var(--border))', backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text))' }}>{code || '—'}</pre>
+          <pre data-code-output className="h-[19rem] overflow-auto rounded-lg border p-4 font-mono text-xs whitespace-pre" style={{ borderColor: 'rgb(var(--border))', backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text))' }}>{code || '—'}</pre>
         </div>
       </div>
 
@@ -416,7 +416,7 @@ export function AesEncryptDecryptClient() {
             <span className="text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>{mode === 'encrypt' ? L('cipherOut', 'Encrypted (portable base64)') : L('plainOut', 'Decrypted text')}</span>
             <CopyButton value={output} />
           </div>
-          <pre className="max-h-72 overflow-y-auto rounded-lg border p-4 font-mono text-xs whitespace-pre-wrap break-all" style={{ borderColor: 'rgb(var(--border))', backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text))' }}>{output}</pre>
+          <pre data-code-output className="max-h-72 overflow-y-auto rounded-lg border p-4 font-mono text-xs whitespace-pre-wrap break-all" style={{ borderColor: 'rgb(var(--border))', backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text))' }}>{output}</pre>
         </div>
       )}
       <CalculatorNote>{L('note', '🔐 AES-256-GCM with PBKDF2-SHA256 (150k iterations) and a random 16-byte salt per encryption — output is self-contained (salt:iv:ciphertext), decryptable here or in any WebCrypto-compatible runtime. GCM authentication means wrong passwords fail loudly instead of yielding garbage.')}</CalculatorNote>

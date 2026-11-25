@@ -127,7 +127,11 @@ export function StackedCompareChart({ title, rows, formatTotal = fmtCompact }: S
                     textAnchor={outside ? 'start' : 'end'}
                     fontSize={VALUE_FONT}
                     fontWeight={700}
-                    fill={outside ? 'rgb(var(--text))' : '#ffffff'}
+                    fill={outside ? 'rgb(var(--text))' : '#141413'}
+                    stroke={outside ? 'none' : '#faf9f5'}
+                    strokeWidth={3}
+                    strokeLinejoin="round"
+                    paintOrder="stroke"
                   >
                     {text}
                   </text>

@@ -116,7 +116,7 @@ export function ColorConverterClient() {
           </div>
         </>
       ) : (
-        <div className="rounded-lg border-2 border-dashed p-6 text-center text-sm" style={{ borderColor: 'rgb(var(--border-strong))', color: 'rgb(var(--text-faint))' }}>
+        <div className="rounded-lg border-2 border-dashed p-6 text-center text-sm" style={{ borderColor: 'rgb(var(--border-strong))', color: 'rgb(var(--text-subtle))' }}>
           {L('emptyState', 'Enter a valid hex (#3b82f6), rgb(59,130,246), or hsl(217,91%,60%)')}
         </div>
       )}

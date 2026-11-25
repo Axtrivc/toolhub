@@ -92,7 +92,7 @@ export function AspectRatioClient() {
             className={`${inputCls} w-24`}
             style={{ borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rgb(var(--bg-card))', color: 'rgb(var(--text))' }}
           />
-          <span className="text-lg text-slate-400">:</span>
+          <span className="text-lg text-muted-ink">:</span>
           <input
             id="ar-ratio-h"
             type="number"
@@ -189,23 +189,23 @@ export function AspectRatioClient() {
 
       {/* 结果(C1:与同族工具一致,结果可一键复制 "宽 × 高") */}
       {(computed.width || computed.height) && (
-        <div role="status" aria-live="polite" className="rounded-lg border border-blue-100 bg-gradient-to-b from-blue-50/40 to-transparent p-4 dark:border-blue-900/40 dark:from-blue-950/40">
+        <div role="status" aria-live="polite" className="rounded-lg border border-hairline bg-surface-soft p-4 dark:border-blue-900/40">
           <div className="mb-2 flex items-center justify-end">
             <CopyButton value={`${computed.width} × ${computed.height}`} label={L('copyResult', 'Copy')} />
           </div>
           <div className="grid grid-cols-2 gap-4 text-center">
             <div>
-              <div className="text-xs uppercase text-slate-400">{L('width', 'Width')}</div>
-              <div className="mt-1 text-2xl font-bold tabular-nums" style={{ color: 'rgb(var(--text))' }}>
+              <div className="text-xs uppercase text-muted-ink">{L('width', 'Width')}</div>
+              <div className="mt-1 font-serif text-2xl font-normal tabular-nums" style={{ color: 'rgb(var(--text))' }}>
                 {computed.width || '—'}
-                <span className="ml-1 text-sm font-normal text-slate-400">px</span>
+                <span className="ml-1 text-sm font-normal text-muted-ink">px</span>
               </div>
             </div>
             <div>
-              <div className="text-xs uppercase text-slate-400">{L('height', 'Height')}</div>
-              <div className="mt-1 text-2xl font-bold tabular-nums" style={{ color: 'rgb(var(--text))' }}>
+              <div className="text-xs uppercase text-muted-ink">{L('height', 'Height')}</div>
+              <div className="mt-1 font-serif text-2xl font-normal tabular-nums" style={{ color: 'rgb(var(--text))' }}>
                 {computed.height || '—'}
-                <span className="ml-1 text-sm font-normal text-slate-400">px</span>
+                <span className="ml-1 text-sm font-normal text-muted-ink">px</span>
               </div>
             </div>
           </div>

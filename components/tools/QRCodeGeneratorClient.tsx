@@ -217,7 +217,7 @@ export function QRCodeGeneratorClient() {
             style={inputStyle}
           />
           <div className="mt-2 flex flex-wrap gap-2">
-            <span className="text-xs text-slate-400 dark:text-slate-500">{L('quick', 'Quick:')}</span>
+            <span className="text-xs text-muted-ink">{L('quick', 'Quick:')}</span>
             {PRESET_URLS.map((p) => (
               <button
                 key={p}
@@ -375,7 +375,7 @@ export function QRCodeGeneratorClient() {
             <option value={256}>{L('sizeMedium', 'Medium (256px)')}</option>
             <option value={384}>{L('sizeLarge', 'Large (384px)')}</option>
           </select>
-          <p className="mt-1 text-xs text-slate-400 dark:text-slate-500">
+          <p className="mt-1 text-xs text-muted-ink">
             {L('sizeHint', 'Downloads are always rendered in high resolution (at least 512 px); this option only scales the on-screen preview.')}
           </p>
         </div>
@@ -421,7 +421,7 @@ export function QRCodeGeneratorClient() {
                 }}
                 title={`${p.fg} / ${p.bg}`}
                 aria-label={`${p.fg} / ${p.bg}`}
-                className="rounded-full border border-slate-200 p-1.5 transition hover:scale-110 hover:border-slate-400 dark:border-slate-700 dark:hover:border-slate-500"
+                className="rounded-full border border-slate-200 p-1.5 transition-colors hover:border-slate-400 dark:border-slate-700 dark:hover:border-slate-500"
               >
                 <span
                   className="block h-5 w-5 rounded-full ring-1 ring-black/10"
@@ -487,7 +487,7 @@ export function QRCodeGeneratorClient() {
             </div>
           </>
         ) : (
-          <p className="text-sm text-slate-400 dark:text-slate-500">
+          <p className="text-sm text-muted-ink">
             {mode === 'wifi' ? L('emptyWifi', 'Enter a network name to generate the code') : L('emptyContent', 'Enter content to generate a QR code')}
           </p>
         )}

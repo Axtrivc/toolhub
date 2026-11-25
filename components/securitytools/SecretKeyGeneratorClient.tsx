@@ -220,7 +220,7 @@ export function SecretKeyGeneratorClient() {
                 onChange={(e) => setByteLen(Number(e.target.value))}
                 className="w-full accent-blue-600"
               />
-              <div className="mt-1 flex justify-between text-xs" style={{ color: 'rgb(var(--text-faint))' }}>
+              <div className="mt-1 flex justify-between text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>
                 <span>8</span>
                 <span className="font-mono">{byteLen}</span>
                 <span>64</span>
@@ -244,7 +244,7 @@ export function SecretKeyGeneratorClient() {
             onChange={(e) => setByteLen(Number(e.target.value))}
             className="w-full accent-blue-600"
           />
-          <div className="mt-1 flex justify-between text-xs" style={{ color: 'rgb(var(--text-faint))' }}>
+          <div className="mt-1 flex justify-between text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>
             <span>8</span>
             <span>32</span>
             <span>64</span>
@@ -274,10 +274,10 @@ export function SecretKeyGeneratorClient() {
         min={0}
         max={512}
         zones={[
-          { upTo: 80, color: '#ef4444', label: L('strengthWeak', 'Weak') },
-          { upTo: 129, color: '#f59e0b', label: L('strengthGood', 'Good') },
-          { upTo: 256, color: '#22c55e', label: L('strengthStrong', 'Strong') },
-          { upTo: 512, color: '#3b82f6', label: L('strengthExcellent', 'Excellent') },
+          { upTo: 80, color: 'var(--chart-ink)', label: L('strengthWeak', 'Weak') },
+          { upTo: 129, color: 'var(--chart-amber)', label: L('strengthGood', 'Good') },
+          { upTo: 256, color: 'var(--chart-teal)', label: L('strengthStrong', 'Strong') },
+          { upTo: 512, color: 'var(--chart-coral)', label: L('strengthExcellent', 'Excellent') },
         ]}
         formatValue={(n) => `${Math.round(n)} ${L('bits', 'bits')}`}
       />

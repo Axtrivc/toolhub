@@ -14,7 +14,7 @@
  * 动画仅在挂载后由 framer-motion 驱动。
  */
 
-import { useEffect, useId, useMemo, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { motion, useReducedMotion } from '../motion/MotionPrimitives'
 import { ChartCard, LegendDot, fmtCompact, niceScale } from './chartKit'
 
@@ -57,7 +57,6 @@ const W_MAX = 640
 
 export function LineAreaChart({ title, xLabels, lines, highlightBetween, formatY = fmtCompact, emptyLabel = 'Enter your values to see the chart.' }: LineAreaChartProps) {
   const reduceMotion = useReducedMotion()
-  const gid = useId().replace(/[:]/g, '')
   const [hover, setHover] = useState<number | null>(null)
   const svgRef = useRef<SVGSVGElement>(null)
   const wrapRef = useRef<HTMLDivElement>(null)
@@ -220,14 +219,6 @@ export function LineAreaChart({ title, xLabels, lines, highlightBetween, formatY
             if (touchMovedRef.current) setHover(null)
           }}
         >
-          <defs>
-            {valid.map((l) => (
-              <linearGradient key={l.key} id={`${gid}-grad-${l.key}`} x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor={l.color} stopOpacity={0.22} />
-                <stop offset="100%" stopColor={l.color} stopOpacity={0.02} />
-              </linearGradient>
-            ))}
-          </defs>
 
           {/* 网格线 + y 刻度 */}
           {ticks.map((t, i) => (
@@ -246,7 +237,7 @@ export function LineAreaChart({ title, xLabels, lines, highlightBetween, formatY
                 y={y(t) + 3.5}
                 textAnchor="end"
                 fontSize={axisFont}
-                fill="rgb(var(--text-faint))"
+                fill="rgb(var(--text-subtle))"
               >
                 {formatY(t)}
               </text>
@@ -261,7 +252,7 @@ export function LineAreaChart({ title, xLabels, lines, highlightBetween, formatY
               y={H - 8}
               textAnchor={i === 0 ? 'start' : i === n - 1 ? 'end' : 'middle'}
               fontSize={axisFont}
-              fill="rgb(var(--text-faint))"
+              fill="rgb(var(--text-subtle))"
             >
               {xLabels[i]}
             </text>
@@ -271,7 +262,7 @@ export function LineAreaChart({ title, xLabels, lines, highlightBetween, formatY
           {geom.bandPath && (
             <motion.path
               d={geom.bandPath}
-              fill="#22c55e"
+              fill="var(--chart-teal)"
               fillOpacity={0.14}
               initial={reduceMotion ? false : { opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -285,7 +276,8 @@ export function LineAreaChart({ title, xLabels, lines, highlightBetween, formatY
               <motion.path
                 key={`${l.key}-area`}
                 d={geom.areaPath(l.points)}
-                fill={`url(#${gid}-grad-${l.key})`}
+                fill={l.color}
+                fillOpacity={0.12}
                 stroke="none"
                 initial={reduceMotion ? false : { opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -335,7 +327,7 @@ export function LineAreaChart({ title, xLabels, lines, highlightBetween, formatY
         {/* tooltip(HTML 层,不受 SVG viewBox 缩放影响) */}
         {hover != null && (
           <div
-            className="pointer-events-none absolute top-2 z-10 min-w-[7rem] rounded-md border p-2 text-xs shadow-md"
+            className="pointer-events-none absolute top-2 z-10 min-w-[7rem] rounded-md border p-2 text-xs"
             style={{
               borderColor: 'rgb(var(--border-strong))',
               backgroundColor: 'rgb(var(--bg-card))',
@@ -368,7 +360,7 @@ export function LineAreaChart({ title, xLabels, lines, highlightBetween, formatY
         ))}
         {highlightBetween?.label && (
           <span className="inline-flex items-center gap-1.5">
-            <span className="inline-block h-2.5 w-2.5 rounded-sm" style={{ backgroundColor: '#22c55e', opacity: 0.35 }} aria-hidden="true" />
+            <span className="inline-block h-2.5 w-2.5 rounded-sm" style={{ backgroundColor: 'var(--chart-teal)', opacity: 0.35 }} aria-hidden="true" />
             <span className="text-xs" style={{ color: 'rgb(var(--text-muted))' }}>
               {highlightBetween.label}
             </span>

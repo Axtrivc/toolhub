@@ -18,11 +18,10 @@ import { t } from '@/lib/i18n'
 
 export function FavoriteButton({ slug, name }: { slug: string; name: string }) {
   const { isFavorite, toggleFavorite, favoritesReady } = useFavorites()
-  const { locale, theme } = useApp()
+  const { locale } = useApp()
 
   // 挂载前统一按 false 渲染,保证 SSR 与首屏一致;挂载后才用真实状态
   const saved = favoritesReady ? isFavorite(slug) : false
-  const dark = theme === 'dark'
 
   return (
     <button
@@ -31,13 +30,9 @@ export function FavoriteButton({ slug, name }: { slug: string; name: string }) {
       aria-pressed={saved}
       aria-label={t(locale, saved ? 'favRemoveAria' : 'favAddAria', { name })}
       title={t(locale, saved ? 'favSavedTitle' : 'favSaveTitle')}
-      className="inline-flex shrink-0 self-start items-center gap-1.5 rounded-lg border px-3 py-2 text-sm font-medium transition hover:bg-slate-100 dark:border-slate-600 dark:hover:bg-slate-700"
-      style={{
-        borderColor: 'rgb(var(--border-strong))',
-        // 已收藏:亮色 red-600/red-100;深色改为 red-400 + 半透明暗红底,避免浅粉底刺眼
-        color: saved ? (dark ? 'rgb(248 113 113)' : 'rgb(220 38 38)') : 'rgb(var(--text-muted))',
-        backgroundColor: saved ? (dark ? 'rgb(127 29 29 / 0.35)' : 'rgb(254 226 226)') : 'rgb(var(--bg-card))',
-      }}
+      className={`btn min-h-10 shrink-0 gap-1.5 rounded-lg border px-4 text-sm font-medium ${
+        saved ? 'border-primary bg-primary/10 text-ink' : 'border-hairline bg-canvas text-ink hover:bg-surface-soft'
+      }`}
     >
       {/* 实心 / 空心 心形随状态切换 */}
       <svg

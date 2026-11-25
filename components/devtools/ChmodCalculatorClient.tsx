@@ -154,7 +154,7 @@ export function ChmodCalculatorClient() {
                       checked={(mode & bit) !== 0}
                       onChange={() => toggleBit(bit)}
                       className="h-4 w-4 cursor-pointer"
-                      style={{ accentColor: 'rgb(37 99 235)' }}
+                      style={{ accentColor: 'rgb(var(--primary))' }}
                       aria-label={`${groupL10n[g]} ${permAriaL10n[i]}`}
                     />
                   </td>
@@ -173,10 +173,10 @@ export function ChmodCalculatorClient() {
                 checked={(mode & bit) !== 0}
                 onChange={() => toggleBit(bit)}
                 className="h-4 w-4 cursor-pointer"
-                style={{ accentColor: 'rgb(37 99 235)' }}
+                style={{ accentColor: 'rgb(var(--primary))' }}
               />
               <span className="font-mono font-medium">{label}</span>
-              <span className="text-xs" style={{ color: 'rgb(var(--text-faint))' }}>
+              <span className="text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>
                 {specialHintL10n[idx]}
               </span>
             </label>

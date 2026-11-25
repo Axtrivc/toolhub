@@ -107,7 +107,7 @@ export function SlugGeneratorClient() {
         />
         {/* 快速示例 */}
         <div className="mt-2 flex flex-wrap gap-2">
-          <span className="text-xs text-slate-400 dark:text-slate-500">{L('try', 'Try:')}</span>
+          <span className="text-xs text-muted-ink">{L('try', 'Try:')}</span>
           {PRESET_EXAMPLES.map((ex) => (
             <button
               key={ex}
@@ -206,7 +206,7 @@ export function SlugGeneratorClient() {
             <button
               type="button"
               onClick={clearHistory}
-              className="-my-1 rounded-md px-2 py-1.5 text-xs text-slate-400 hover:text-red-500 dark:text-slate-500 dark:hover:text-red-400 sm:text-sm"
+              className="-my-1 rounded-md px-2 py-1.5 text-xs text-muted-ink hover:text-red-500 dark:text-muted-ink dark:hover:text-red-400 sm:text-sm"
             >
               {L('clear', 'Clear')}
             </button>
@@ -215,7 +215,7 @@ export function SlugGeneratorClient() {
             {history.map((item) => (
               <li key={item.ts} className="flex items-center justify-between gap-3 px-3 py-2.5 text-sm">
                 <div className="min-w-0 flex-1">
-                  <div className="truncate text-slate-500 dark:text-slate-400" title={item.input}>
+                  <div className="truncate text-muted-ink" title={item.input}>
                     {item.input}
                   </div>
                   <code className="font-mono text-brand-600 dark:text-brand-400">{item.slug}</code>

@@ -130,10 +130,10 @@ export const DividendCalculatorClient = makeCalculatorClient({
     // DRIP 关闭时两条累计曲线完全重合,只画「取现」一条,避免图例误标 "With DRIP"
     const lines: SeriesData['lines'] = drip
       ? [
-          { key: 'drip', label: 'With DRIP', color: '#22c55e', points: dripPts, area: true },
-          { key: 'cash', label: 'Dividends as cash', color: '#3b82f6', points: cashPts },
+          { key: 'drip', label: 'With DRIP', color: 'var(--chart-teal)', points: dripPts, area: true },
+          { key: 'cash', label: 'Dividends as cash', color: 'var(--chart-coral)', points: cashPts },
         ]
-      : [{ key: 'cash', label: 'Dividends as cash', color: '#22c55e', points: cashPts }]
+      : [{ key: 'cash', label: 'Dividends as cash', color: 'var(--chart-teal)', points: cashPts }]
     return { xLabels, lines, formatY: (n) => fmtUSD(n, 0) }
   },
   note: '💵 Most US payers distribute quarterly — enter the annual dividend per share (quarterly × 4). The DRIP projection compounds annually at a constant share price; it shows the power of reinvested income, not a price forecast.',
@@ -255,8 +255,8 @@ export const DcaCalculatorClient = makeCalculatorClient({
     return {
       xLabels,
       lines: [
-        { key: 'dca', label: 'DCA strategy', color: '#22c55e', points: dcaPts, area: true },
-        { key: 'lump', label: 'Lump sum day one', color: '#3b82f6', points: lumpPts },
+        { key: 'dca', label: 'DCA strategy', color: 'var(--chart-teal)', points: dcaPts, area: true },
+        { key: 'lump', label: 'Lump sum day one', color: 'var(--chart-coral)', points: lumpPts },
       ],
       formatY: (n) => fmtUSD(n, 0),
     }
@@ -348,8 +348,8 @@ export const StockAverageCalculatorClient = makeCalculatorClient({
     const totalCost = active.reduce((s, l) => s + l.q * l.p, 0) + fee * active.length
     return {
       rows: [
-        { label: 'Your cost basis', segments: [{ label: 'Cost incl. fees', value: totalCost, color: '#3b82f6' }] },
-        { label: 'Current value', segments: [{ label: 'Market value', value: totalShares * current, color: '#22c55e' }] },
+        { label: 'Your cost basis', segments: [{ label: 'Cost incl. fees', value: totalCost, color: 'var(--chart-coral)' }] },
+        { label: 'Current value', segments: [{ label: 'Market value', value: totalShares * current, color: 'var(--chart-teal)' }] },
       ],
       formatTotal: (n) => fmtUSD(n, 0),
     }
@@ -468,8 +468,8 @@ export const OptionsProfitCalculatorClient = makeCalculatorClient({
     return {
       xLabels,
       lines: [
-        { key: 'pl', label: 'P/L at expiry', color: '#3b82f6', points: pts, area: true },
-        { key: 'zero', label: 'Breakeven', color: '#ef4444', points: zero, dashed: true },
+        { key: 'pl', label: 'P/L at expiry', color: 'var(--chart-coral)', points: pts, area: true },
+        { key: 'zero', label: 'Breakeven', color: 'var(--chart-ink)', points: zero, dashed: true },
       ],
       formatY: (n) => fmtUSD(n, 0),
     }
@@ -542,8 +542,8 @@ export const CryptoProfitCalculatorClient = makeCalculatorClient({
     const outNet = qty * sell * (1 - f)
     return {
       rows: [
-        { label: 'Cash in (buy + fee)', segments: [{ label: 'Cost', value: inWithFee, color: '#ef4444' }] },
-        { label: 'Cash out (sell − fee)', segments: [{ label: 'Proceeds', value: outNet, color: '#22c55e' }] },
+        { label: 'Cash in (buy + fee)', segments: [{ label: 'Cost', value: inWithFee, color: 'var(--chart-ink)' }] },
+        { label: 'Cash out (sell − fee)', segments: [{ label: 'Proceeds', value: outNet, color: 'var(--chart-teal)' }] },
       ],
       formatTotal: (n) => fmtUSD(n, 0),
     }
@@ -604,8 +604,8 @@ export const TreasuryBillCalculatorClient = makeCalculatorClient({
   chart: {
     title: 'Where the face value goes',
     slices: [
-      { valueKey: 'price', label: 'Purchase price', color: '#3b82f6' },
-      { valueKey: 'interest', label: 'Discount interest', color: '#22c55e' },
+      { valueKey: 'price', label: 'Purchase price', color: 'var(--chart-coral)' },
+      { valueKey: 'interest', label: 'Discount interest', color: 'var(--chart-teal)' },
     ],
     centerLabel: 'Face value',
   },
@@ -669,10 +669,10 @@ export const BondYieldCalculatorClient = makeCalculatorClient({
     const annualCoupon = face * (coupon / 100)
     return {
       rows: [
-        { label: 'You pay today', segments: [{ label: 'Market price', value: price, color: '#ef4444' }] },
+        { label: 'You pay today', segments: [{ label: 'Market price', value: price, color: 'var(--chart-ink)' }] },
         { label: 'You receive by maturity', segments: [
-          { label: 'Coupons', value: annualCoupon * years, color: '#f59e0b' },
-          { label: 'Face value', value: face, color: '#22c55e' },
+          { label: 'Coupons', value: annualCoupon * years, color: 'var(--chart-amber)' },
+          { label: 'Face value', value: face, color: 'var(--chart-teal)' },
         ] },
       ],
       formatTotal: (n) => fmtUSD(n, 0),
@@ -808,8 +808,8 @@ export const LotteryOddsCalculatorClient = makeCalculatorClient({
   chart: {
     title: 'Any prize vs nothing (per ticket)',
     slices: [
-      { valueKey: 'anyPrize', label: 'Wins any prize', color: '#22c55e' },
-      { valueKey: 'noPrize', label: 'Wins nothing', color: '#94a3b8' },
+      { valueKey: 'anyPrize', label: 'Wins any prize', color: 'var(--chart-teal)' },
+      { valueKey: 'noPrize', label: 'Wins nothing', color: 'var(--chart-muted)' },
     ],
     centerLabel: 'Per ticket',
   },

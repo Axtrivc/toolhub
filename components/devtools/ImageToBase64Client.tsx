@@ -171,7 +171,7 @@ export function ImageToBase64Client() {
                 <span className="text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>{L('base64DataUri', 'Base64 Data URI')}</span>
                 <CopyButton value={img.dataUrl} label={L('copy', 'Copy')} />
               </div>
-              <pre
+              <pre data-code-output
                 className="overflow-x-auto rounded-lg border bg-slate-50 p-3 text-xs dark:bg-slate-800/60"
                 style={{ borderColor: 'rgb(var(--border))' }}
               >
@@ -185,7 +185,7 @@ export function ImageToBase64Client() {
                 <span className="text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>&lt;img&gt; {L('imgTag', 'tag')}</span>
                 <CopyButton value={imgTag} label={L('copy', 'Copy')} />
               </div>
-              <pre
+              <pre data-code-output
                 className="overflow-x-auto rounded-lg border bg-slate-50 p-3 text-xs dark:bg-slate-800/60"
                 style={{ borderColor: 'rgb(var(--border))' }}
               >
@@ -199,7 +199,7 @@ export function ImageToBase64Client() {
                 <span className="text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>{L('cssBg', 'CSS background-image')}</span>
                 <CopyButton value={cssBg} label={L('copy', 'Copy')} />
               </div>
-              <pre
+              <pre data-code-output
                 className="overflow-x-auto rounded-lg border bg-slate-50 p-3 text-xs dark:bg-slate-800/60"
                 style={{ borderColor: 'rgb(var(--border))' }}
               >

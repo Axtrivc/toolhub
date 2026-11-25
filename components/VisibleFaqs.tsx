@@ -27,39 +27,24 @@ export function VisibleFaqs({ slug, l10n }: { slug: string; l10n?: ToolL10n }) {
   if (faqs.length === 0) return null
 
   return (
-    <section className="prose-content mt-10 max-w-3xl">
+    <section className="prose-content mt-12 sm:mt-20">
       <h2>{t(locale, 'faqsTitle')}</h2>
-      <div className="not-prose space-y-2">
+      <div className="not-prose divide-y divide-hairline border-y border-hairline">
         {faqs.map((f, i) => (
           <details
             key={i}
             open={i === 0}
-            className="group rounded-lg border transition-colors"
-            style={{
-              borderColor: 'rgb(var(--border))',
-              backgroundColor: 'rgb(var(--bg-card))',
-            }}
+            className="group"
           >
             <summary
-              className="flex cursor-pointer list-none items-center justify-between gap-3 px-4 py-3 text-sm font-semibold transition-colors hover:bg-slate-50 dark:hover:bg-slate-700/50"
-              style={{ color: 'rgb(var(--text))' }}
+              className="flex cursor-pointer list-none items-center justify-between gap-4 py-5 text-base font-medium transition-colors hover:text-brand-700 dark:hover:text-brand-300"
             >
               <span>{f.q}</span>
               {/* 旋转箭头指示展开状态 */}
-              <svg
-                className="h-4 w-4 shrink-0 transition-transform group-open:rotate-180"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth={2}
-                aria-hidden="true"
-                style={{ color: 'rgb(var(--text-subtle))' }}
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-              </svg>
+              <span aria-hidden="true" className="tool-faq-marker text-xl leading-none text-body" />
             </summary>
             <div
-              className="px-4 pb-4 text-sm leading-relaxed"
+              className="max-w-prose pb-5 pr-6 text-sm leading-relaxed"
               style={{ color: 'rgb(var(--text-muted))' }}
             >
               {f.a}

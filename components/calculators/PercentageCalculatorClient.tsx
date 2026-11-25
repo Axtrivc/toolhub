@@ -68,8 +68,8 @@ export function PercentageCalculatorClient() {
                 {
                   label: L('cmpWhole', 'Whole'),
                   segments: [
-                    { label: L('cmpPart', 'Part'), value: r1, color: '#3b82f6' },
-                    { label: L('cmpRemainder', 'Remainder'), value: toNum(p1Value) - r1, color: '#cbd5e1' },
+                    { label: L('cmpPart', 'Part'), value: r1, color: 'var(--chart-coral)' },
+                    { label: L('cmpRemainder', 'Remainder'), value: toNum(p1Value) - r1, color: 'var(--chart-pale)' },
                   ],
                 },
               ]}
@@ -98,8 +98,8 @@ export function PercentageCalculatorClient() {
                 {
                   label: L('cmpWhole', 'Whole'),
                   segments: [
-                    { label: L('cmpPart', 'Part'), value: toNum(p2Part), color: '#3b82f6' },
-                    { label: L('cmpRemainder', 'Remainder'), value: r2Whole - toNum(p2Part), color: '#cbd5e1' },
+                    { label: L('cmpPart', 'Part'), value: toNum(p2Part), color: 'var(--chart-coral)' },
+                    { label: L('cmpRemainder', 'Remainder'), value: r2Whole - toNum(p2Part), color: 'var(--chart-pale)' },
                   ],
                 },
               ]}

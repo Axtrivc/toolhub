@@ -38,28 +38,28 @@ function getCategory(bmi: number): { key: string; label: string; color: string; 
     return {
       key: 'underweight',
       label: 'Underweight',
-      color: 'text-blue-600 dark:text-blue-400',
+      color: 'text-brand-700 dark:text-brand-300',
       advice: 'Below the healthy range. Consider consulting a nutritionist.',
     }
   if (bmi < 25)
     return {
       key: 'healthyWeight',
       label: 'Healthy weight',
-      color: 'text-green-600 dark:text-green-400',
+      color: 'text-green-700 dark:text-green-300',
       advice: 'In the healthy range. Keep up your current habits.',
     }
   if (bmi < 30)
     return {
       key: 'overweight',
       label: 'Overweight',
-      color: 'text-yellow-600 dark:text-yellow-400',
+      color: 'text-yellow-800 dark:text-yellow-300',
       advice: 'Slightly above the healthy range. Diet and exercise can help.',
     }
   if (bmi < 35)
     return {
       key: 'obeseI',
       label: 'Obese (Class I)',
-      color: 'text-orange-600 dark:text-orange-400',
+      color: 'text-orange-700 dark:text-orange-300',
       advice: 'Above the healthy range. Consider medical guidance.',
     }
   if (bmi < 40)
@@ -233,14 +233,14 @@ export function BMICalculatorClient() {
             <div className={`mt-1.5 text-2xl font-bold sm:text-3xl ${category?.color}`}>
               {category ? L('catLabel_' + category.key, category.label) : null}
             </div>
-            <div className="mt-1 text-xs" style={{ color: 'rgb(var(--text-faint))' }}>{category ? L('catAdvice_' + category.key, category.advice) : null}</div>
+            <div className="mt-1 text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>{category ? L('catAdvice_' + category.key, category.advice) : null}</div>
           </div>
           {healthyLow && healthyHigh && (
             <div className="rounded-lg border p-5 text-center sm:col-span-2" style={{ borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rgb(var(--bg-card))' }}>
               <div className="text-xs font-medium uppercase tracking-wide" style={{ color: 'rgb(var(--text-subtle))' }}>
                 {L('healthyWeightRange', 'Healthy weight range for your height')}
               </div>
-              <div className="mt-1.5 text-xl font-semibold tabular-nums" style={{ color: 'rgb(var(--text))' }}>
+              <div className="mt-1.5 font-serif text-xl font-normal tabular-nums" style={{ color: 'rgb(var(--text))' }}>
                 {healthyLow.toFixed(1)} – {healthyHigh.toFixed(1)}{' '}
                 {unit === 'metric' ? 'kg' : 'lb'}
               </div>
@@ -248,7 +248,7 @@ export function BMICalculatorClient() {
           )}
         </div>
       ) : (
-        <div className="rounded-lg border-2 border-dashed p-6 text-center text-sm" style={{ borderColor: 'rgb(var(--border-strong))', color: 'rgb(var(--text-faint))' }}>
+        <div className="rounded-lg border-2 border-dashed p-6 text-center text-sm" style={{ borderColor: 'rgb(var(--border-strong))', color: 'rgb(var(--text-subtle))' }}>
           {L('emptyState', 'Enter your height and weight to calculate your BMI')}
         </div>
       )}
@@ -261,11 +261,11 @@ export function BMICalculatorClient() {
           min={12}
           max={45}
           zones={[
-            { upTo: 18.5, color: '#3b82f6', label: L('catLabel_underweight', 'Underweight') },
-            { upTo: 25, color: '#22c55e', label: L('catLabel_healthyWeight', 'Healthy weight') },
-            { upTo: 30, color: '#eab308', label: L('catLabel_overweight', 'Overweight') },
-            { upTo: 35, color: '#f97316', label: L('catLabel_obeseI', 'Obese (Class I)') },
-            { upTo: 40, color: '#ef4444', label: L('catLabel_obeseII', 'Obese (Class II)') },
+            { upTo: 18.5, color: 'var(--chart-coral)', label: L('catLabel_underweight', 'Underweight') },
+            { upTo: 25, color: 'var(--chart-teal)', label: L('catLabel_healthyWeight', 'Healthy weight') },
+            { upTo: 30, color: 'var(--chart-amber)', label: L('catLabel_overweight', 'Overweight') },
+            { upTo: 35, color: 'var(--chart-coral)', label: L('catLabel_obeseI', 'Obese (Class I)') },
+            { upTo: 40, color: 'var(--chart-ink)', label: L('catLabel_obeseII', 'Obese (Class II)') },
             { upTo: 45, color: '#dc2626', label: L('catLabel_obeseIII', 'Obese (Class III)') },
           ]}
           formatValue={(n) => n.toFixed(1)}
@@ -283,10 +283,10 @@ export function BMICalculatorClient() {
             </tr>
           </thead>
           <tbody className="divide-y divide-slate-100 dark:divide-slate-700">
-            <tr><td className="px-4 py-2 font-mono">{L('rangeBelow', 'Below 18.5')}</td><td className="px-4 py-2 text-blue-600 dark:text-blue-400">{L('catLabel_underweight', 'Underweight')}</td></tr>
-            <tr><td className="px-4 py-2 font-mono">18.5 – 24.9</td><td className="px-4 py-2 text-green-600 dark:text-green-400">{L('catLabel_healthyWeight', 'Healthy weight')}</td></tr>
-            <tr><td className="px-4 py-2 font-mono">25.0 – 29.9</td><td className="px-4 py-2 text-yellow-600 dark:text-yellow-400">{L('catLabel_overweight', 'Overweight')}</td></tr>
-            <tr><td className="px-4 py-2 font-mono">30.0 – 34.9</td><td className="px-4 py-2 text-orange-600 dark:text-orange-400">{L('catLabel_obeseI', 'Obese (Class I)')}</td></tr>
+            <tr><td className="px-4 py-2 font-mono">{L('rangeBelow', 'Below 18.5')}</td><td className="px-4 py-2 text-brand-700 dark:text-brand-300">{L('catLabel_underweight', 'Underweight')}</td></tr>
+            <tr><td className="px-4 py-2 font-mono">18.5 – 24.9</td><td className="px-4 py-2 text-green-700 dark:text-green-300">{L('catLabel_healthyWeight', 'Healthy weight')}</td></tr>
+            <tr><td className="px-4 py-2 font-mono">25.0 – 29.9</td><td className="px-4 py-2 text-yellow-800 dark:text-yellow-300">{L('catLabel_overweight', 'Overweight')}</td></tr>
+            <tr><td className="px-4 py-2 font-mono">30.0 – 34.9</td><td className="px-4 py-2 text-orange-700 dark:text-orange-300">{L('catLabel_obeseI', 'Obese (Class I)')}</td></tr>
             <tr><td className="px-4 py-2 font-mono">35.0 – 39.9</td><td className="px-4 py-2 text-red-600 dark:text-red-300">{L('catLabel_obeseII', 'Obese (Class II)')}</td></tr>
             <tr><td className="px-4 py-2 font-mono">{L('range40Above', '40.0 and above')}</td><td className="px-4 py-2 text-red-700 dark:text-red-300">{L('catLabel_obeseIII', 'Obese (Class III)')}</td></tr>
           </tbody>

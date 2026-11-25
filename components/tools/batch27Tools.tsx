@@ -255,7 +255,7 @@ export function ShoeSizeConverterClient() {
           <ResultCard label={L('out.cm', 'Foot length (cm)')} value={`${fmtNum(matched.cm, 1)} cm`} />
         </div>
       ) : (
-        <div role="status" aria-live="polite" className="rounded-lg border-2 border-dashed p-6 text-center text-sm" style={{ borderColor: 'rgb(var(--border-strong))', color: 'rgb(var(--text-faint))' }}>
+        <div role="status" aria-live="polite" className="rounded-lg border-2 border-dashed p-6 text-center text-sm" style={{ borderColor: 'rgb(var(--border-strong))', color: 'rgb(var(--text-subtle))' }}>
           ⚠️ {range
             ? L('errRange', 'Outside the table range ({min}–{max} {unit}) - enter a size the table covers')
                 .replace('{min}', trim1(range.min))

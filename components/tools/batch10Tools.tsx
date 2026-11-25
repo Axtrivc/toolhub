@@ -349,12 +349,12 @@ export function LineDiffCheckerClient() {
           <div role="status" aria-live="polite" className="overflow-hidden rounded-lg border border-border bg-card">
             {result.lines.map((ln, idx) => (
               <div key={idx} className={`flex gap-3 px-4 py-1 font-mono text-xs ${rowCls(ln.type)}`}>
-                <span aria-hidden="true" className="shrink-0 select-none whitespace-pre" style={{ color: 'rgb(var(--text-faint))' }}>{sign(ln.type)}</span>
+                <span aria-hidden="true" className="shrink-0 select-none whitespace-pre" style={{ color: 'rgb(var(--text-subtle))' }}>{sign(ln.type)}</span>
                 <span className="whitespace-pre-wrap break-all" style={{ color: 'rgb(var(--text))' }}>{ln.text || ' '}</span>
               </div>
             ))}
             {result.lines.length === 0 && (
-              <p className="px-4 py-3 text-sm" style={{ color: 'rgb(var(--text-faint))' }}>—</p>
+              <p className="px-4 py-3 text-sm" style={{ color: 'rgb(var(--text-subtle))' }}>—</p>
             )}
           </div>
           <CopyButton
@@ -502,7 +502,7 @@ export function RobotsTxtGeneratorClient() {
                 if (neighbor) requestAnimationFrame(() => document.getElementById(`rt-agent-${neighbor.id}`)?.focus())
               }}
               aria-label={L('removeRule', 'Remove rule')}
-              className="rounded-lg px-3 text-sm text-slate-400 hover:text-red-500 dark:text-slate-500" disabled={rules.length <= 1}>
+              className="rounded-lg px-3 text-sm text-muted-ink hover:text-red-500 dark:text-muted-ink" disabled={rules.length <= 1}>
               ✕
             </button>
           </div>
@@ -520,7 +520,7 @@ export function RobotsTxtGeneratorClient() {
           <span className="text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>{L('outputLabel', 'robots.txt')}</span>
           <CopyButton value={output} />
         </div>
-        <pre className="overflow-x-auto rounded-lg border p-4 font-mono text-sm whitespace-pre-wrap" style={{ borderColor: 'rgb(var(--border))', backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text))' }}>{output}</pre>
+        <pre data-code-output className="overflow-x-auto rounded-lg border p-4 font-mono text-sm whitespace-pre-wrap" style={{ borderColor: 'rgb(var(--border))', backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text))' }}>{output}</pre>
       </div>
       <ResultActions summary={output} filename="robots.txt" downloadContent={output} mime="text/plain;charset=utf-8;" />
       <CalculatorNote>{L('note', '🤖 Place this file at your domain root (example.com/robots.txt). Google ignores Crawl-delay; Bing and Yandex honor it. The AI presets block the 2026 training crawlers (GPTBot, ClaudeBot, PerplexityBot, Bytespider, Google-Extended, Applebot-Extended, Cohere-ai, Amazonbot) — operators currently honor robots.txt. Google-Extended blocks Gemini training without affecting Google Search.')}</CalculatorNote>
@@ -596,12 +596,12 @@ export function SleepCalculatorClient() {
           const best = cycles === 6 || cycles === 5
           return (
             <div key={cycles}
-              className={`rounded-xl border p-5 text-center shadow-sm ${best ? 'border-primary/20 bg-gradient-to-br from-primary/5 to-primary/10' : 'border-border bg-card'}`}>
+              className={`rounded-xl border p-5 text-center shadow-sm ${best ? 'border-primary/20 bg-surface-card' : 'border-border bg-card'}`}>
               <div className="text-sm" style={{ color: 'rgb(var(--text-muted))' }}>
                 {mode === 'wakeAt' ? L('fallAsleepBy', 'Fall asleep by') : L('wakeUpAt', 'Wake up at')}
               </div>
-              <div className="mt-1 text-3xl font-bold tabular-nums" style={{ color: 'rgb(var(--text))' }}>
-                {clock} {tag && <span className="text-sm font-normal" style={{ color: 'rgb(var(--text-faint))' }}>{tag}</span>}
+              <div className="mt-1 font-serif text-3xl font-normal tabular-nums" style={{ color: 'rgb(var(--text))' }}>
+                {clock} {tag && <span className="text-sm font-normal" style={{ color: 'rgb(var(--text-subtle))' }}>{tag}</span>}
               </div>
               <div className="mt-1 text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>
                 {cycles} {L('cyclesN', 'cycles')} · {hoursSlept} h{best ? ` · ${L('recommended', 'recommended')}` : ''}
@@ -610,7 +610,7 @@ export function SleepCalculatorClient() {
           )
         })}
         {mounted && suggestions.length === 0 && (
-          <p className="text-sm" style={{ color: 'rgb(var(--text-faint))' }}>{L('invalidTime', 'Enter a valid time like 07:00')}</p>
+          <p className="text-sm" style={{ color: 'rgb(var(--text-subtle))' }}>{L('invalidTime', 'Enter a valid time like 07:00')}</p>
         )}
       </div>
 
@@ -723,7 +723,7 @@ export function CookingConverterClient() {
           </select>
           {/* B2/E1 引导:选中食材的克/杯密度直接亮出来——解释「为什么换食材结果会变」,
               也让下拉本身可被信任(与 note 的 USDA 口径互相印证) */}
-          <span className="mt-1 block text-xs" style={{ color: 'rgb(var(--text-faint))' }}>
+          <span className="mt-1 block text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>
             {INGREDIENT_DENSITY[ingredient].gPerCup.toLocaleString('en-US')} {L('gPerCup', 'g per US cup')}
           </span>
         </div>

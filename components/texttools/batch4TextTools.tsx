@@ -165,7 +165,7 @@ export function EmailExtractorClient() {
           </label>
           {text && (
             <button type="button" onClick={() => { pristineRef.current = false; setText('') }}
-              className="-my-1 rounded-md px-2 py-1.5 text-xs text-slate-500 hover:text-red-500 dark:text-slate-400 sm:text-sm">
+              className="-my-1 rounded-md px-2 py-1.5 text-xs text-muted-ink hover:text-red-500 dark:text-slate-400 sm:text-sm">
               {L('clear', 'Clear')}
             </button>
           )}
@@ -184,7 +184,7 @@ export function EmailExtractorClient() {
             <button key={key} type="button" onClick={() => setFormat(key)} aria-pressed={format === key}
               className={`px-3.5 py-1.5 text-sm font-medium transition-colors ${format === key ? 'text-white' : ''}`}
               style={format === key
-                ? { backgroundColor: 'rgb(37 99 235)' }
+                ? { backgroundColor: 'rgb(var(--primary))' }
                 : { backgroundColor: 'rgb(var(--bg-card))', color: 'rgb(var(--text-muted))' }}>
               {label}
             </button>
@@ -203,7 +203,7 @@ export function EmailExtractorClient() {
           <label className="text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
             {L('outputLabel', 'Extracted emails')}
             {analysis.kept.length > 0 && (
-              <span className="ml-2 font-normal text-xs" style={{ color: 'rgb(var(--text-faint))' }}>
+              <span className="ml-2 font-normal text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>
                 {L('foundN', '{n} unique').replace('{n}', analysis.kept.toLocaleString('en-US'))}
                 {filterPublic && analysis.all.length > analysis.kept.length && (
                   ` · ${L('filteredN', '{n} public removed').replace('{n}', String(analysis.all.length - analysis.kept.length))}`
@@ -311,7 +311,7 @@ export function URLExtractorClient() {
           </label>
           {text && (
             <button type="button" onClick={() => { pristineRef.current = false; setText('') }}
-              className="-my-1 rounded-md px-2 py-1.5 text-xs text-slate-500 hover:text-red-500 dark:text-slate-400 sm:text-sm">
+              className="-my-1 rounded-md px-2 py-1.5 text-xs text-muted-ink hover:text-red-500 dark:text-slate-400 sm:text-sm">
               {L('clear', 'Clear')}
             </button>
           )}
@@ -330,7 +330,7 @@ export function URLExtractorClient() {
             <button key={key} type="button" onClick={() => setView(key)} aria-pressed={view === key}
               className={`px-3.5 py-1.5 text-sm font-medium transition-colors ${view === key ? 'text-white' : ''}`}
               style={view === key
-                ? { backgroundColor: 'rgb(37 99 235)' }
+                ? { backgroundColor: 'rgb(var(--primary))' }
                 : { backgroundColor: 'rgb(var(--bg-card))', color: 'rgb(var(--text-muted))' }}>
               {label}
             </button>
@@ -349,7 +349,7 @@ export function URLExtractorClient() {
           <label className="text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>
             {L('outputLabel', 'Extracted URLs')}
             {analysis.urls.length > 0 && (
-              <span className="ml-2 font-normal text-xs" style={{ color: 'rgb(var(--text-faint))' }}>
+              <span className="ml-2 font-normal text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>
                 {view === 'domains'
                   ? L('domainsN', '{n} unique domains').replace('{n}', String(analysis.domains.length))
                   : L('foundN', '{n} unique').replace('{n}', analysis.urls.length.toLocaleString('en-US'))}

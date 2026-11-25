@@ -269,8 +269,8 @@ export function TdeeCalculatorClient() {
           <BreakdownChart
             title={L('donutTitle', 'TDEE breakdown')}
             slices={[
-              { label: L('bmrAtRest', 'BMR (at rest)'), value: result.bmr, color: '#3b82f6' },
-              { label: L('sliceActivity', 'Activity burn'), value: result.tdee - result.bmr, color: '#22c55e' },
+              { label: L('bmrAtRest', 'BMR (at rest)'), value: result.bmr, color: 'var(--chart-coral)' },
+              { label: L('sliceActivity', 'Activity burn'), value: result.tdee - result.bmr, color: 'var(--chart-teal)' },
             ]}
             centerValue={`${round(result.tdee)} kcal`}
             centerLabel={L('centerTdee', 'TDEE')}
@@ -328,9 +328,9 @@ export function TdeeCalculatorClient() {
           <StackedCompareChart
             title={L('cmpTitle', 'Daily calories by goal')}
             rows={[
-              { label: L('goalCut', 'Cut (−500)'), segments: [{ label: L('goalCut', 'Cut (−500)'), value: result.tdee - 500, color: '#22c55e' }] },
-              { label: L('goalMaintain', 'Maintain'), segments: [{ label: L('goalMaintain', 'Maintain'), value: result.tdee, color: '#3b82f6' }] },
-              { label: L('goalBulk', 'Bulk (+500)'), segments: [{ label: L('goalBulk', 'Bulk (+500)'), value: result.tdee + 500, color: '#f59e0b' }] },
+              { label: L('goalCut', 'Cut (−500)'), segments: [{ label: L('goalCut', 'Cut (−500)'), value: result.tdee - 500, color: 'var(--chart-teal)' }] },
+              { label: L('goalMaintain', 'Maintain'), segments: [{ label: L('goalMaintain', 'Maintain'), value: result.tdee, color: 'var(--chart-coral)' }] },
+              { label: L('goalBulk', 'Bulk (+500)'), segments: [{ label: L('goalBulk', 'Bulk (+500)'), value: result.tdee + 500, color: 'var(--chart-amber)' }] },
             ]}
             formatTotal={(n) => `${round(n)} kcal`}
           />
@@ -344,7 +344,7 @@ export function TdeeCalculatorClient() {
           />
         </>
       ) : (
-        <div className="rounded-lg border-2 border-dashed p-6 text-center text-sm" style={{ borderColor: 'rgb(var(--border-strong))', color: 'rgb(var(--text-faint))' }}>
+        <div className="rounded-lg border-2 border-dashed p-6 text-center text-sm" style={{ borderColor: 'rgb(var(--border-strong))', color: 'rgb(var(--text-subtle))' }}>
           {L('emptyState', 'Enter your weight, height, age, and activity level to see your TDEE and calorie targets')}
         </div>
       )}

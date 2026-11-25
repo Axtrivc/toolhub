@@ -137,7 +137,7 @@ export function CssClampCalculatorClient() {
             </span>
             <CopyButton value={output.css} label={L('copyCss', 'Copy CSS')} />
           </div>
-          <pre
+          <pre data-code-output
             className="w-full overflow-x-auto rounded-lg border p-4 font-mono text-sm shadow-sm"
             style={{
               borderColor: 'rgb(var(--border-strong))',
@@ -156,9 +156,9 @@ export function CssClampCalculatorClient() {
           title={L('fluidCurveTitle', 'Fluid size curve')}
           xLabels={[320, 480, 640, 768, 1024, 1280, 1440, 1920, 2560].map((v) => `${v}px`)}
           lines={[
-            { key: 'min', label: L('lineMin', 'Min clamp'), color: '#94a3b8', points: Array.from({ length: 9 }, () => c.minF), dashed: true },
-            { key: 'fluid', label: L('lineFluid', 'Fluid size'), color: '#3b82f6', points: [320, 480, 640, 768, 1024, 1280, 1440, 1920, 2560].map((v) => fluidPx(v)), area: true },
-            { key: 'max', label: L('lineMax', 'Max clamp'), color: '#f59e0b', points: Array.from({ length: 9 }, () => c.maxF), dashed: true },
+            { key: 'min', label: L('lineMin', 'Min clamp'), color: 'var(--chart-muted)', points: Array.from({ length: 9 }, () => c.minF), dashed: true },
+            { key: 'fluid', label: L('lineFluid', 'Fluid size'), color: 'var(--chart-coral)', points: [320, 480, 640, 768, 1024, 1280, 1440, 1920, 2560].map((v) => fluidPx(v)), area: true },
+            { key: 'max', label: L('lineMax', 'Max clamp'), color: 'var(--chart-amber)', points: Array.from({ length: 9 }, () => c.maxF), dashed: true },
           ]}
           formatY={(n) => `${Math.round(n)}px`}
         />
@@ -207,7 +207,7 @@ export function CssClampCalculatorClient() {
                       <td className="px-4 py-2.5 font-mono" style={{ color: 'rgb(var(--text-subtle))' }}>
                         {fmt(px / c.rootF)}rem
                       </td>
-                      <td className="whitespace-nowrap px-4 py-2.5 text-xs" style={{ color: 'rgb(var(--text-faint))' }}>
+                      <td className="whitespace-nowrap px-4 py-2.5 text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>
                         {clampedLow ? L('stateClampedMin', 'clamped (min)') : clampedHigh ? L('stateClampedMax', 'clamped (max)') : L('stateScaling', 'scaling')}
                       </td>
                     </tr>

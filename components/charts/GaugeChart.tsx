@@ -72,7 +72,6 @@ export function GaugeChart({ title, value, min, max, zones, formatValue, caption
   }
 
   // 当前值落在哪个区带(供指针小球取色)
-  const activeZone = zones.find((z) => clamped < z.upTo) ?? zones[zones.length - 1]
 
   // 指针:从圆心出发的细长三角 + 圆心点;旋转角 = -90°(正上) + frac*180°
   const angleDeg = -90 + frac * 180
@@ -106,10 +105,10 @@ export function GaugeChart({ title, value, min, max, zones, formatValue, caption
               />
             ))}
             {/* min/max 标注 */}
-            <text x={pointAt(START, R).x - 2} y={pointAt(START, R).y + 12} textAnchor="middle" fontSize={9} fill="rgb(var(--text-faint))">
+            <text x={pointAt(START, R).x - 2} y={pointAt(START, R).y + 12} textAnchor="middle" fontSize={9} fill="rgb(var(--text-subtle))">
               {Math.round(min)}
             </text>
-            <text x={pointAt(END, R).x + 2} y={pointAt(END, R).y + 12} textAnchor="middle" fontSize={9} fill="rgb(var(--text-faint))">
+            <text x={pointAt(END, R).x + 2} y={pointAt(END, R).y + 12} textAnchor="middle" fontSize={9} fill="rgb(var(--text-subtle))">
               {Math.round(max)}
             </text>
             {/* 指针(挂载后 spring 转动;reduced-motion 直接就位) */}
@@ -133,8 +132,8 @@ export function GaugeChart({ title, value, min, max, zones, formatValue, caption
               y={CY - 17}
               textAnchor="middle"
               fontSize={valueFontSize}
-              fontWeight={700}
-              fill={activeZone?.color ?? 'rgb(var(--text))'}
+              className="chart-number"
+              fill="rgb(var(--text))"
               stroke="rgb(var(--bg-card))"
               strokeWidth={4}
               strokeLinejoin="round"

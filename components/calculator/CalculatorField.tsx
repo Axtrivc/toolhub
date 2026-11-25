@@ -125,15 +125,15 @@ export function CalculatorField({
           // 密钥类输入不加 spellCheck 红线);其余类型维持 autoComplete="off"
           autoComplete={type === 'password' ? 'new-password' : 'off'}
           spellCheck={type === 'password' ? false : undefined}
-          className={`w-full rounded-lg border p-3 shadow-sm outline-none transition focus:ring-2 ${suffix ? 'pr-16' : ''}`}
+          className={`h-10 w-full rounded-lg border px-3 outline-none transition-colors ${suffix ? 'pr-16' : ''}`}
           style={{
-            borderColor: 'rgb(var(--border-strong))',
+            borderColor: 'rgb(var(--border))',
             backgroundColor: 'rgb(var(--bg-card))',
             color: 'rgb(var(--text))',
           }}
         />
         {suffix && (
-          <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-sm" style={{ color: 'rgb(var(--text-faint))' }}>
+          <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-sm" style={{ color: 'rgb(var(--text-subtle))' }}>
             {suffix}
           </span>
         )}
@@ -202,7 +202,7 @@ export function CalculatorSliderField({
       {bubble && (
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute bottom-4 z-10 -translate-x-1/2 whitespace-nowrap rounded-md px-2 py-1 text-xs font-semibold shadow-md"
+          className="pointer-events-none absolute bottom-4 z-10 -translate-x-1/2 whitespace-nowrap rounded-md px-2 py-1 text-xs font-medium"
           style={{
             left: bubbleLeft,
             backgroundColor: 'rgb(var(--primary))',
@@ -239,27 +239,24 @@ export function ResultCard({
     <div
       role="status"
       aria-live="polite"
-      className={`rounded-xl border p-5 text-center shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md ${
+      className={`tool-result min-w-0 rounded-xl border p-5 sm:p-6 ${
         error
           ? 'border-red-300/50 bg-red-50/70 dark:border-red-800/40 dark:bg-red-950/30'
           : highlight
-            ? 'border-primary/20 bg-gradient-to-br from-primary/5 to-primary/10 backdrop-blur-md'
-            : 'border-border/60 bg-card/80 backdrop-blur-md'
+            ? 'border-transparent bg-surface-dark text-on-dark'
+            : 'border-hairline bg-canvas text-ink'
       }`}
     >
-      <div className="text-xs font-medium uppercase tracking-wide" style={{ color: error ? 'rgb(var(--text-faint))' : 'rgb(var(--text-subtle))' }}>
+      <div className={`text-xs font-medium uppercase tracking-[1.5px] ${highlight && !error ? 'text-on-dark-soft' : 'text-body'}`}>
         {label}
       </div>
-      <div
-        className={`mt-1.5 ${error ? 'text-base font-semibold sm:text-lg' : 'text-2xl font-bold sm:text-3xl'} ${highlight ? 'text-primary' : ''}`}
-        style={error ? undefined : highlight ? undefined : { color: 'rgb(var(--text))' }}
-      >
+      <div className={error ? 'mt-2 text-base font-medium' : 'mt-2 break-words font-serif text-[2rem] font-normal leading-[1.1] tracking-[-0.8px] sm:text-[2.5rem]'}>
         {/* 全部分支等宽数字(值变化不抖动);error 文案串混排数字同样受益。
             权威结果直出终值不走 AnimatedNumber:避免 ~400ms tween 期间出现
             可复制的动画中间值(AnimatedNumber 仍供装饰性统计条使用) */}
         <span className={`tabular-nums${error ? ' text-red-600 dark:text-red-400' : ''}`}>{value}</span>
       </div>
-      {sublabel && <div className="mt-1 text-xs" style={{ color: 'rgb(var(--text-faint))' }}>{sublabel}</div>}
+      {sublabel && <div className={`mt-2 text-[13px] ${highlight && !error ? 'text-on-dark-soft' : 'text-body'}`}>{sublabel}</div>}
     </div>
   )
 }
@@ -276,8 +273,8 @@ export function CalculatorShell({
   return (
     <div className="space-y-6">
       <div
-        className="grid grid-cols-1 gap-4 rounded-lg p-4 sm:grid-cols-2"
-        style={{ backgroundColor: 'rgb(var(--bg-subtle))' }}
+        className="grid grid-cols-1 gap-5 rounded-xl p-4 sm:grid-cols-2 sm:p-6"
+        style={{ backgroundColor: 'rgb(var(--surface-soft))' }}
       >
         {inputs}
       </div>

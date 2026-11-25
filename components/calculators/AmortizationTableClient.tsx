@@ -177,7 +177,7 @@ export function AmortizationTableGeneratorClient() {
               <tbody>
                 {visibleRows.map(([n, pay, prin, int, bal]) => (
                   <tr key={n} className="border-b last:border-b-0 hover:bg-slate-100 dark:hover:bg-slate-800" style={{ borderColor: 'rgb(var(--border))' }}>
-                    <td className="px-3 py-1.5" style={{ color: 'rgb(var(--text-faint))' }}>{n}</td>
+                    <td className="px-3 py-1.5" style={{ color: 'rgb(var(--text-subtle))' }}>{n}</td>
                     <td className="px-3 py-1.5" style={{ color: 'rgb(var(--text))' }}>{fmtUSD(pay)}</td>
                     <td className="px-3 py-1.5 text-green-600 dark:text-green-400">{fmtUSD(prin)}</td>
                     <td className="px-3 py-1.5 text-red-600 dark:text-red-400">{fmtUSD(int)}</td>

@@ -140,7 +140,7 @@ function NextStepsBar({ slug }: { slug: string }) {
           >
             <SmartIcon icon={getToolIcon(nt)} className="h-4 w-4 shrink-0" />
             <span className="truncate">{getToolName(locale, nt.slug, nt.name)}</span>
-            <span aria-hidden="true" style={{ color: 'rgb(var(--text-faint))' }}>→</span>
+            <span aria-hidden="true" style={{ color: 'rgb(var(--text-subtle))' }}>→</span>
           </Link>
         ))}
       </div>
@@ -804,10 +804,10 @@ export function makeCalculatorClient(config: CalculatorConfig): ComponentType {
                       {outLabel(highlightOut.key, highlightOut.label)}
                     </div>
                     <div className="mt-1 flex flex-wrap items-baseline gap-x-3 gap-y-1">
-                      <span className="text-xl font-bold tabular-nums sm:text-2xl" style={{ color: 'rgb(var(--text))' }}>
+                      <span className="font-serif text-xl font-normal tabular-nums sm:text-2xl" style={{ color: 'rgb(var(--text))' }}>
                         {L('scenarioA', 'A')}: {highlightValue}
                       </span>
-                      <span className="text-xl font-bold tabular-nums sm:text-2xl" style={{ color: 'rgb(var(--text-muted))' }}>
+                      <span className="font-serif text-xl font-normal tabular-nums sm:text-2xl" style={{ color: 'rgb(var(--text-muted))' }}>
                         {L('scenarioB', 'B')}: {bResults[highlightOut.key] ?? '—'}
                       </span>
                     </div>
@@ -822,12 +822,12 @@ export function makeCalculatorClient(config: CalculatorConfig): ComponentType {
                         className="delta-badge inline-flex shrink-0 items-center gap-1.5 rounded-full px-3.5 py-1.5 text-base font-bold tabular-nums shadow-sm"
                         style={{
                           backgroundColor: isBetter ? 'rgb(34 197 94 / 0.12)' : 'rgb(239 68 68 / 0.12)',
-                          color: isBetter ? '#16a34a' : '#dc2626',
+                          color: isBetter ? 'var(--positive-text)' : 'var(--negative-text)',
                           border: `1px solid ${isBetter ? 'rgb(34 197 94 / 0.4)' : 'rgb(239 68 68 / 0.4)'}`,
                         }}
                       >
                         {d.text}
-                        <span className="text-[11px] font-semibold uppercase tracking-wide" style={{ color: isBetter ? '#16a34a' : '#dc2626', opacity: 0.75 }}>
+                        <span className="text-[11px] font-semibold uppercase tracking-wide" style={{ color: isBetter ? 'var(--positive-text)' : 'var(--negative-text)', opacity: 0.75 }}>
                           {L('deltaCol', 'B vs A')}
                         </span>
                       </span>
@@ -863,7 +863,7 @@ export function makeCalculatorClient(config: CalculatorConfig): ComponentType {
                         <td className="px-3 py-2 text-right font-mono tabular-nums" style={{ color: 'rgb(var(--text))' }}>
                           {bV}
                         </td>
-                        <td className="px-3 py-2 text-right font-mono font-semibold tabular-nums" style={{ color: d ? (d.better === 'b' ? '#16a34a' : '#dc2626') : 'rgb(var(--text-faint))' }}>
+                        <td className="px-3 py-2 text-right font-mono font-semibold tabular-nums" style={{ color: d ? (d.better === 'b' ? 'var(--positive-text)' : 'var(--negative-text)') : 'rgb(var(--text-subtle))' }}>
                           {d ? d.text : '—'}
                         </td>
                       </tr>
@@ -1110,8 +1110,8 @@ export function makeCalculatorClient(config: CalculatorConfig): ComponentType {
         {/* 移动端 sticky 结果条(越过结果区后出现;含安全区 padding) */}
         {stickyVisible && highlightOut && (
           <div
-            className="fixed inset-x-0 bottom-0 z-40 border-t pl-[max(1rem,env(safe-area-inset-left))] pr-[max(1rem,env(safe-area-inset-right))] pb-[calc(0.75rem+env(safe-area-inset-bottom))] pt-3 backdrop-blur-md sm:hidden"
-            style={{ borderColor: 'rgb(var(--border))', backgroundColor: 'rgb(var(--bg-card) / 0.92)' }}
+            className="fixed inset-x-0 bottom-0 z-40 border-t pl-[max(1rem,env(safe-area-inset-left))] pr-[max(1rem,env(safe-area-inset-right))] pb-[calc(0.75rem+env(safe-area-inset-bottom))] pt-3 sm:hidden"
+            style={{ borderColor: 'rgb(var(--border))', backgroundColor: 'rgb(var(--bg-card))' }}
           >
             <div className="mx-auto flex max-w-lg items-baseline justify-between gap-4">
               <span className="truncate text-xs font-medium uppercase tracking-wide" style={{ color: 'rgb(var(--text-subtle))' }}>

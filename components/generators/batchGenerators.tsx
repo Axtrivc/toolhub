@@ -369,8 +369,8 @@ export const StandardDeviationCalculatorClient = makeCalculatorClient({
     return {
       xLabels: nums.map((_, i) => (i % step === 0 || i === nums.length - 1 ? `#${i + 1}` : '')),
       lines: [
-        { key: 'value', label: 'Value', color: '#3b82f6', points: nums },
-        { key: 'mean', label: 'Mean', color: '#f59e0b', points: nums.map(() => mean), dashed: true },
+        { key: 'value', label: 'Value', color: 'var(--chart-coral)', points: nums },
+        { key: 'mean', label: 'Mean', color: 'var(--chart-amber)', points: nums.map(() => mean), dashed: true },
       ],
     }
   },
@@ -414,8 +414,8 @@ export const PercentileCalculatorClient = makeCalculatorClient({
     return {
       xLabels: nums.map((_, i) => `#${i + 1}`),
       lines: [
-        { key: 'sorted', label: 'Sorted values', color: '#3b82f6', points: nums },
-        { key: 'pct', label: `P${Math.round(p)}`, color: '#22c55e', points: nums.map(() => result), dashed: true },
+        { key: 'sorted', label: 'Sorted values', color: 'var(--chart-coral)', points: nums },
+        { key: 'pct', label: `P${Math.round(p)}`, color: 'var(--chart-teal)', points: nums.map(() => result), dashed: true },
       ],
     }
   },
@@ -467,8 +467,8 @@ export const InflationCalculatorClient = makeCalculatorClient({
     return {
       xLabels,
       lines: [
-        { key: 'today', label: 'Costs today', color: '#94a3b8', points: today, dashed: true },
-        { key: 'future', label: 'Costs then', color: '#ef4444', points: cost, area: true },
+        { key: 'today', label: 'Costs today', color: 'var(--chart-muted)', points: today, dashed: true },
+        { key: 'future', label: 'Costs then', color: 'var(--chart-ink)', points: cost, area: true },
       ],
       highlightBetween: { a: 'today', b: 'future', label: 'Inflation' },
       formatY: (n) => fmtUSDValue(n),
@@ -562,8 +562,8 @@ export const RetirementCalculatorClient = makeCalculatorClient({
     return {
       xLabels,
       lines: [
-        { key: 'contributed', label: 'You put in', color: '#3b82f6', points: contributed, area: true },
-        { key: 'balance', label: 'Nest egg', color: '#22c55e', points: balance, area: true },
+        { key: 'contributed', label: 'You put in', color: 'var(--chart-coral)', points: contributed, area: true },
+        { key: 'balance', label: 'Nest egg', color: 'var(--chart-teal)', points: balance, area: true },
       ],
       highlightBetween: { a: 'contributed', b: 'balance', label: 'Investment growth' },
       formatY: (n) => fmtUSDValue(n),
@@ -608,8 +608,8 @@ export const SimpleInterestCalculatorClient = makeCalculatorClient({
     return {
       rows: [
         { label: 'Total amount', segments: [
-          { label: 'Principal', value: p, color: '#3b82f6' },
-          { label: 'Interest', value: interest, color: '#22c55e' },
+          { label: 'Principal', value: p, color: 'var(--chart-coral)' },
+          { label: 'Interest', value: interest, color: 'var(--chart-teal)' },
         ] },
       ],
       formatTotal: (n) => fmtUSDValue(n),
@@ -699,8 +699,8 @@ export const UnitPriceCalculatorClient = makeCalculatorClient({
     const baseUnit = fam1 === 'weight' ? 'g' : fam1 === 'volume' ? 'ml' : 'ct'
     return {
       rows: [
-        { label: 'Option 1', segments: [{ label: 'Per ' + baseUnit, value: u1, color: u1 <= u2 ? '#22c55e' : '#3b82f6' }] },
-        { label: 'Option 2', segments: [{ label: 'Per ' + baseUnit, value: u2, color: u2 < u1 ? '#22c55e' : '#3b82f6' }] },
+        { label: 'Option 1', segments: [{ label: 'Per ' + baseUnit, value: u1, color: u1 <= u2 ? 'var(--chart-teal)' : 'var(--chart-coral)' }] },
+        { label: 'Option 2', segments: [{ label: 'Per ' + baseUnit, value: u2, color: u2 < u1 ? 'var(--chart-teal)' : 'var(--chart-coral)' }] },
       ],
       formatTotal: (n) => `$${n.toFixed(4)}`,
     }

@@ -88,8 +88,8 @@ export const PayPalFeeCalculatorClient = makeCalculatorClient({
     return {
       xLabels: marks.map((m) => `$${m.toLocaleString('en-US')}`),
       lines: [
-        { key: 'fee', label: 'PayPal fee', color: '#ef4444', points: marks.map((m) => m * (p / 100) + f) },
-        { key: 'net', label: 'You receive', color: '#22c55e', points: marks.map((m) => m - (m * (p / 100) + f)), area: true },
+        { key: 'fee', label: 'PayPal fee', color: 'var(--chart-ink)', points: marks.map((m) => m * (p / 100) + f) },
+        { key: 'net', label: 'You receive', color: 'var(--chart-teal)', points: marks.map((m) => m - (m * (p / 100) + f)), area: true },
       ],
       formatY: (n) => fmtUSD(n, 0),
     }
@@ -170,10 +170,10 @@ export const EtsyFeeCalculatorClient = makeCalculatorClient({
   chart: {
     title: 'Fee breakdown per order',
     slices: [
-      { valueKey: 'listingFee', label: 'Listing fees', color: '#f59e0b' },
-      { valueKey: 'transactionFee', label: 'Transaction fee', color: '#ef4444' },
-      { valueKey: 'processingFee', label: 'Payment processing', color: '#a855f7' },
-      { valueKey: 'offsiteFee', label: 'Offsite Ads', color: '#ec4899' },
+      { valueKey: 'listingFee', label: 'Listing fees', color: 'var(--chart-amber)' },
+      { valueKey: 'transactionFee', label: 'Transaction fee', color: 'var(--chart-ink)' },
+      { valueKey: 'processingFee', label: 'Payment processing', color: 'var(--chart-rust)' },
+      { valueKey: 'offsiteFee', label: 'Offsite Ads', color: 'var(--chart-tan)' },
     ],
     centerLabel: 'Total fees',
   },
@@ -259,10 +259,10 @@ export const AmazonSellerFeeCalculatorClient = makeCalculatorClient({
       return {
         rows: [
           { label: 'Sale price', segments: [
-            { label: 'Your profit', value: profit, color: '#22c55e' },
-            { label: 'Referral fee', value: referralFee, color: '#ef4444' },
-            { label: 'FBA fee', value: fba, color: '#f59e0b' },
-            { label: 'Goods + prep', value: landed, color: '#64748b' },
+            { label: 'Your profit', value: profit, color: 'var(--chart-teal)' },
+            { label: 'Referral fee', value: referralFee, color: 'var(--chart-ink)' },
+            { label: 'FBA fee', value: fba, color: 'var(--chart-amber)' },
+            { label: 'Goods + prep', value: landed, color: 'var(--chart-muted)' },
           ] },
         ],
         formatTotal: (n) => fmtUSD(n),
@@ -274,9 +274,9 @@ export const AmazonSellerFeeCalculatorClient = makeCalculatorClient({
     // $29.50 的条)。亏损本身由结果卡的负值净利明示,图只表达售价被吞到哪。
     let budget = price
     const capped = [
-      { label: 'Referral fee', value: referralFee, color: '#ef4444' },
-      { label: 'FBA fee', value: fba, color: '#f59e0b' },
-      { label: 'Goods + prep', value: landed, color: '#64748b' },
+      { label: 'Referral fee', value: referralFee, color: 'var(--chart-ink)' },
+      { label: 'FBA fee', value: fba, color: 'var(--chart-amber)' },
+      { label: 'Goods + prep', value: landed, color: 'var(--chart-muted)' },
     ].map((s) => {
       const value = Math.min(s.value, budget)
       budget -= value
@@ -352,7 +352,7 @@ export const SquareFeeCalculatorClient = makeCalculatorClient({
     return {
       xLabels: tickets.map((t) => `$${t}`),
       lines: [
-        { key: 'eff', label: 'Effective rate', color: '#3b82f6', points: tickets.map((t) => (p + (f / t) * 100)), area: true },
+        { key: 'eff', label: 'Effective rate', color: 'var(--chart-coral)', points: tickets.map((t) => (p + (f / t) * 100)), area: true },
       ],
       formatY: (n) => `${fmtNum(n, 1)}%`,
     }
@@ -422,9 +422,9 @@ export const YouTubeMoneyCalculatorClient = makeCalculatorClient({
     const k = views / 1000
     return {
       rows: [
-        { label: 'Conservative', segments: [{ label: 'AdSense', value: k * lo, color: '#94a3b8' }] },
-        { label: 'Typical', segments: [{ label: 'AdSense', value: k * mid, color: '#3b82f6' }] },
-        { label: 'Optimistic', segments: [{ label: 'AdSense', value: k * hi, color: '#22c55e' }] },
+        { label: 'Conservative', segments: [{ label: 'AdSense', value: k * lo, color: 'var(--chart-muted)' }] },
+        { label: 'Typical', segments: [{ label: 'AdSense', value: k * mid, color: 'var(--chart-coral)' }] },
+        { label: 'Optimistic', segments: [{ label: 'AdSense', value: k * hi, color: 'var(--chart-teal)' }] },
       ],
       formatTotal: (n) => fmtUSD(n),
     }
@@ -491,10 +491,10 @@ export const NpsCalculatorClient = makeCalculatorClient({
     min: -100,
     max: 100,
     zones: [
-      { upTo: 0, color: '#ef4444', label: 'Negative' },
-      { upTo: 30, color: '#eab308', label: 'Good' },
-      { upTo: 70, color: '#3b82f6', label: 'Great' },
-      { upTo: 100, color: '#22c55e', label: 'Excellent' },
+      { upTo: 0, color: 'var(--chart-ink)', label: 'Negative' },
+      { upTo: 30, color: 'var(--chart-amber)', label: 'Good' },
+      { upTo: 70, color: 'var(--chart-coral)', label: 'Great' },
+      { upTo: 100, color: 'var(--chart-teal)', label: 'Excellent' },
     ],
     formatValue: (n) => `${n > 0 ? '+' : ''}${Math.round(n)}`,
   },
@@ -568,12 +568,12 @@ export const ConversionRateCalculatorClient = makeCalculatorClient({
     return {
       rows: [
         { label: 'Now', segments: [
-          { label: 'Converted', value: con, color: '#22c55e' },
-          { label: 'Did not convert', value: vis - con, color: '#64748b' },
+          { label: 'Converted', value: con, color: 'var(--chart-teal)' },
+          { label: 'Did not convert', value: vis - con, color: 'var(--chart-muted)' },
         ] },
         { label: 'Target', segments: [
-          { label: 'Converted', value: target, color: '#3b82f6' },
-          { label: 'Did not convert', value: Math.max(0, vis - target), color: '#64748b' },
+          { label: 'Converted', value: target, color: 'var(--chart-coral)' },
+          { label: 'Did not convert', value: Math.max(0, vis - target), color: 'var(--chart-muted)' },
         ] },
       ],
       formatTotal: (n) => fmtNum(n, 0),
@@ -665,8 +665,8 @@ export const GymCostPerVisitCalculatorClient = makeCalculatorClient({
     const perMonth = v.cycle === 'yearly' ? fee / 12 : fee
     return {
       rows: [
-        { label: 'With membership', segments: [{ label: 'Monthly cost', value: perMonth, color: '#3b82f6' }] },
-        { label: 'Paying per visit', segments: [{ label: 'Monthly cost', value: visits * drop, color: '#f59e0b' }] },
+        { label: 'With membership', segments: [{ label: 'Monthly cost', value: perMonth, color: 'var(--chart-coral)' }] },
+        { label: 'Paying per visit', segments: [{ label: 'Monthly cost', value: visits * drop, color: 'var(--chart-amber)' }] },
       ],
       formatTotal: (n) => fmtUSD(n),
     }

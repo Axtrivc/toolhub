@@ -159,7 +159,7 @@ export function JwtDecoderClient() {
               <button
                 type="button"
                 onClick={() => setToken('')}
-                className="-my-1 rounded-md px-2 py-1.5 text-xs text-slate-500 dark:text-slate-400 hover:text-red-500 sm:text-sm"
+                className="-my-1 rounded-md px-2 py-1.5 text-xs text-muted-ink hover:text-red-500 sm:text-sm"
               >
                 {L('clear', 'Clear')}
               </button>
@@ -227,13 +227,13 @@ export function JwtDecoderClient() {
               <div className="mb-2 flex items-center justify-between">
                 <span className="text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>
                   {L('header', 'Header')}{' '}
-                  <span className="font-normal text-slate-400 dark:text-slate-500">
+                  <span className="font-normal text-muted-ink">
                     ({(result.decoded.header as { alg?: string })?.alg ?? 'alg'})
                   </span>
                 </span>
                 <CopyButton value={headerStr} label={L('copy', 'Copy')} />
               </div>
-              <pre className="max-h-96 overflow-auto rounded-lg border bg-slate-50 p-4 text-xs dark:bg-slate-800/60" style={{ borderColor: 'rgb(var(--border))' }}>
+              <pre data-code-output className="max-h-96 overflow-auto rounded-lg border bg-slate-50 p-4 text-xs dark:bg-slate-800/60" style={{ borderColor: 'rgb(var(--border))' }}>
                 <code>{headerStr}</code>
               </pre>
             </div>
@@ -244,7 +244,7 @@ export function JwtDecoderClient() {
                 <span className="text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>{L('payload', 'Payload')}</span>
                 <CopyButton value={payloadStr} label={L('copy', 'Copy')} />
               </div>
-              <pre className="max-h-96 overflow-auto rounded-lg border bg-slate-50 p-4 text-xs dark:bg-slate-800/60" style={{ borderColor: 'rgb(var(--border))' }}>
+              <pre data-code-output className="max-h-96 overflow-auto rounded-lg border bg-slate-50 p-4 text-xs dark:bg-slate-800/60" style={{ borderColor: 'rgb(var(--border))' }}>
                 <code>{payloadStr}</code>
               </pre>
               {/* 解码 → 生成闭环:一键复制 payload + 直达 JWT Generator 继续编辑重签 */}
@@ -268,11 +268,11 @@ export function JwtDecoderClient() {
             <div className="mb-2 flex items-center justify-between">
               <span className="text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>
                 {L('signature', 'Signature')}{' '}
-                <span className="font-normal text-slate-400 dark:text-slate-500">{L('signatureHint', '(verifying requires the secret/public key)')}</span>
+                <span className="font-normal text-muted-ink">{L('signatureHint', '(verifying requires the secret/public key)')}</span>
               </span>
               <CopyButton value={result.decoded.signature} label={L('copy', 'Copy')} />
             </div>
-            <pre className="max-h-96 overflow-auto rounded-lg border bg-slate-50 p-4 text-xs dark:bg-slate-800/60" style={{ borderColor: 'rgb(var(--border))' }}>
+            <pre data-code-output className="max-h-96 overflow-auto rounded-lg border bg-slate-50 p-4 text-xs dark:bg-slate-800/60" style={{ borderColor: 'rgb(var(--border))' }}>
               <code className="whitespace-pre-wrap break-all">{result.decoded.signature}</code>
             </pre>
           </div>

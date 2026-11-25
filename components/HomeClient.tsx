@@ -9,14 +9,8 @@ import { Boxes, Search, ShieldCheck, Terminal, TrendingUp, Zap } from 'lucide-re
 import { toolLiteMeta } from '@/lib/related-tools'
 import { AdSlot } from '@/components/AdSlot'
 import { ToolHubExplorer } from '@/components/workspace/ToolHubExplorer'
+import { HeroCodeWindow } from '@/components/home/HeroCodeWindow'
 import { LiveBento } from '@/components/home/LiveBento'
-import {
-  HeroGlow,
-  motion,
-  useReducedMotion,
-  heroStaggerContainerVariants,
-  heroItemVariants,
-} from '@/components/motion/MotionPrimitives'
 import { useApp } from '@/components/providers/AppProviders'
 import { t } from '@/lib/i18n'
 
@@ -35,7 +29,6 @@ export function HomeClient({ sitemap }: { sitemap: ReactNode }) {
   // 与 getPublishedTools() 同源同序(生成脚本保证),length/卡片/搜索结果完全一致
   const tools = Object.values(toolLiteMeta)
   const { locale } = useApp()
-  const reduceMotion = useReducedMotion()
 
   // Hero 搜索词:下传给 ToolHubExplorer,非空时切到搜索扁平网格(100% 客户端响应)
   const [query, setQuery] = useState('')
@@ -71,199 +64,147 @@ export function HomeClient({ sitemap }: { sitemap: ReactNode }) {
   ]
 
   return (
-    <div className="relative">
-      {/* ── Ambient Backdrop(规格:柔和分层工作台渐变)──
-          顶部 indigo 环境光洗墙 → slate-50 基底渐隐;暗色同构低饱和。
-          pointer-events-none + absolute,完全脱离布局流(CLS=0)。 */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 top-0 h-[560px] bg-gradient-to-b from-indigo-100/30 via-slate-50 to-transparent dark:from-indigo-950/20 dark:via-slate-950 dark:to-transparent"
-      />
-
-      <div className="relative mx-auto w-full max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-        {/* ════════ ① Workspace Header & Hero ════════ */}
-        <motion.section
-          variants={reduceMotion ? undefined : heroStaggerContainerVariants}
-          initial={reduceMotion ? false : 'hidden'}
-          animate="show"
-          className="relative mx-auto mb-10 max-w-5xl"
-        >
-          {/* 工作台顶栏:眉头等宽行 + 本地计算状态指示(脉冲绿点)。
-              玻璃胶囊容器,mono 微字号 —— Linear/Raycast 式的"控制台铭牌"。 */}
-          <motion.div
-            variants={heroItemVariants}
-            className="mb-10 flex flex-col items-center justify-between gap-3 rounded-2xl border border-slate-200/80 bg-white/80 px-4 py-2.5 font-mono text-[11px] uppercase tracking-wider text-slate-500 shadow-[0_2px_8px_rgba(15,23,42,0.04)] backdrop-blur-xl dark:border-slate-800/80 dark:bg-slate-900/70 dark:text-slate-400 dark:shadow-none sm:flex-row"
-          >
-            <span className="inline-flex items-center gap-2">
-              <Terminal className="h-3.5 w-3.5 text-slate-400 dark:text-slate-500" aria-hidden="true" />
-              {t(locale, 'workspaceEyebrow')}
-            </span>
-            <span className="inline-flex items-center gap-2 text-emerald-600 dark:text-emerald-400">
-              <span className="relative flex h-1.5 w-1.5">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75 motion-reduce:animate-none" />
-                <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-500" />
-              </span>
+    <div className="bg-canvas text-ink">
+      <section className="container-page py-12 md:pb-[72px] md:pt-[88px]">
+        <div className="grid items-center gap-9 md:grid-cols-2 md:gap-14">
+          <div className="min-w-0">
+            <p className="mb-7 flex items-center gap-2.5 text-xs font-medium uppercase tracking-[1.5px] text-muted-ink">
+              <span className="h-2 w-2 shrink-0 rounded-full bg-accent-teal" aria-hidden="true" />
               {t(locale, 'workspaceStatus')}
-            </span>
-          </motion.div>
-
-          <div className="text-center">
-            <motion.div variants={heroItemVariants} className="relative">
-              <HeroGlow />
-              <h1 className="text-5xl font-extrabold tracking-tight sm:text-6xl lg:text-7xl">
-                <span className="hero-animated-gradient bg-clip-text text-transparent">
-                  {t(locale, 'heroBadge', { count: String(roundedCount) })}{' '}
-                  {t(locale, 'heroTitle1')}
-                </span>
-                <span className="block" style={{ color: 'rgb(var(--text))' }}>
-                  {t(locale, 'heroTitle2')}
-                </span>
-              </h1>
-            </motion.div>
-            <motion.p
-              variants={heroItemVariants}
-              className="mx-auto mt-6 max-w-2xl text-base leading-relaxed sm:text-lg"
-              style={{ color: 'rgb(var(--text-muted))' }}
-            >
-              {t(locale, 'heroSubtitle')}
-            </motion.p>
-
-            {/* 价值徽章组:mono + tabular-nums 的精密工程感微标签 */}
-            <motion.div
-              variants={heroItemVariants}
-              className="mt-7 flex flex-wrap items-center justify-center gap-2.5"
-            >
+            </p>
+            <h1 className={`font-serif text-[clamp(2.375rem,5vw,4rem)] font-normal leading-[1.05] tracking-[-.024em] ${locale === 'en' ? 'lowercase' : ''}`}>
+              {t(locale, 'heroBadge', { count: String(roundedCount) })}{' '}{t(locale, 'heroTitle1')}
+              {' '}<em className="font-normal">{t(locale, 'heroTitle2')}</em>
+            </h1>
+            <p className="mt-5 max-w-xl text-lg leading-relaxed text-body">{t(locale, 'heroSubtitle')}</p>
+            <div className="relative mt-8 max-w-xl">
+              <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-body" aria-hidden="true" />
+              <input
+                type="search"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                placeholder={t(locale, 'searchPlaceholder', { count: tools.length })}
+                aria-label={t(locale, 'heroSearchLabel')}
+                enterKeyHint="search"
+                className="h-[52px] w-full rounded-xl border border-hairline bg-canvas pl-10 pr-3 text-base text-ink placeholder:text-muted-ink focus:border-primary focus:outline-none focus:ring-[3px] focus:ring-primary/15 sm:pr-20"
+              />
+              <button
+                type="button"
+                onClick={openSearchPalette}
+                aria-label={t(locale, 'searchOpen')}
+                title={t(locale, 'searchOpen')}
+                className="absolute right-2 top-1/2 hidden -translate-y-1/2 items-center rounded border border-hairline bg-surface-soft px-2 py-0.5 font-mono text-xs text-body sm:inline-flex"
+              >
+                {isMac ? '⌘K' : 'Ctrl K'}
+              </button>
+            </div>
+            <div className="mt-7 flex flex-wrap items-center gap-2">
               {valueBadges.map(({ icon: Icon, text }) => (
-                <span
-                  key={text}
-                  className="inline-flex items-center gap-1.5 rounded-full border border-slate-200/80 bg-white/80 px-3.5 py-1.5 font-mono text-[11px] uppercase tracking-wider text-slate-500 shadow-[0_2px_8px_rgba(15,23,42,0.04)] backdrop-blur-xl dark:border-slate-800/80 dark:bg-slate-900/70 dark:text-slate-400 dark:shadow-none"
-                >
-                  <Icon className="h-3.5 w-3.5 text-indigo-500 dark:text-indigo-400" aria-hidden="true" />
-                  <span className="tabular-nums">{text}</span>
+                <span key={text} className="inline-flex items-center gap-1.5 rounded-full bg-surface-card px-3 py-1.5 text-xs text-body">
+                  <Icon className="h-3.5 w-3.5" aria-hidden="true" />
+                  {text}
                 </span>
               ))}
-            </motion.div>
-
-            {/* 主搜索框:实时过滤下方 Hub 探索器;右侧 kbd 徽章点击唤起 ⌘K 命令面板 */}
-            <motion.div variants={heroItemVariants} className="mx-auto mt-9 max-w-2xl">
-              <div className="relative">
-                <Search
-                  className="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-slate-400 dark:text-slate-500"
-                  aria-hidden="true"
-                />
-                <input
-                  type="search"
-                  value={query}
-                  onChange={(e) => setQuery(e.target.value)}
-                  placeholder={t(locale, 'searchPlaceholder', { count: tools.length })}
-                  aria-label={t(locale, 'heroSearchLabel')}
-                  enterKeyHint="search"
-                  className="w-full rounded-2xl border border-slate-200/80 bg-white/80 py-4 pl-12 pr-12 text-lg text-slate-900 shadow-[0_8px_30px_rgba(15,23,42,0.06)] outline-none backdrop-blur-xl transition-all duration-200 placeholder:text-slate-400 hover:border-slate-300 focus:border-blue-400/60 focus:ring-2 focus:ring-blue-500/20 dark:border-slate-800/80 dark:bg-slate-900/70 dark:text-white dark:shadow-none dark:placeholder:text-slate-500 dark:hover:border-slate-700 dark:focus:border-blue-500/50 dark:focus:ring-blue-500/20 sm:pr-24"
-                />
-                <button
-                  type="button"
-                  onClick={openSearchPalette}
-                  aria-label={t(locale, 'searchOpen')}
-                  title={t(locale, 'searchOpen')}
-                  className="absolute right-3 top-1/2 hidden -translate-y-1/2 items-center gap-1 rounded-lg border border-slate-200 bg-slate-50 px-2 py-1 font-mono text-[10px] font-medium text-slate-400 transition-colors hover:border-slate-300 hover:text-slate-600 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-500 dark:hover:border-slate-600 dark:hover:text-slate-300 sm:inline-flex"
-                >
-                  {isMac ? '⌘K' : 'Ctrl K'}
-                </button>
-              </div>
-            </motion.div>
+            </div>
           </div>
-        </motion.section>
 
-        {/* ════════ ② Workspace 抽屉(Pinned/Recent + Scratchpad,默认折叠)════════ */}
-        <div className="mb-12">
-          <WorkspaceDashboard />
+          <HeroCodeWindow status={t(locale, 'workspaceEyebrow')} />
         </div>
+        <div className="mt-14"><WorkspaceDashboard /></div>
+      </section>
 
-        {/* ════════ ②′ Bento 活工具矩阵:首屏即可用的迷你工具 ════════ */}
-        <LiveBento />
-
-        {/* ════════ ③ ToolHubExplorer 主题 Hub 探索器 ════════ */}
-        <div id="all-tools" className="scroll-mt-24">
-          <ToolHubExplorer tools={tools} query={query} onQueryChange={setQuery} />
+      <div className="bg-surface-soft">
+        <div className="container-page py-16 md:py-24">
+          <LiveBento />
         </div>
+      </div>
 
-        {/* ════════ 姊妹站 WhatIf 外链横幅(whatif.axtrivc.com 投资回放动画) ════════ */}
-        <a
-          href="https://whatif.axtrivc.com"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="group mx-auto mt-12 flex max-w-3xl items-center gap-4 rounded-2xl border border-slate-200/80 bg-white/80 p-5 shadow-[0_2px_8px_rgba(15,23,42,0.04)] backdrop-blur-xl transition hover:border-red-300 hover:shadow-[0_4px_16px_rgba(239,68,68,0.08)] dark:border-slate-800/80 dark:bg-slate-900/70 dark:shadow-none dark:hover:border-red-500/40"
-        >
-          <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-red-500 to-orange-500 text-white shadow-[0_4px_12px_rgba(239,68,68,0.35)]">
+      <section id="all-tools" className="container-page scroll-mt-16 py-16 md:py-24">
+        <h2 className="mb-8 font-serif text-4xl font-normal tracking-[-.02em] md:text-5xl">{t(locale, 'hubBackToThemes')}</h2>
+        <ToolHubExplorer tools={tools} query={query} onQueryChange={setQuery} />
+      </section>
+
+      <section className="bg-surface-dark text-on-dark">
+        <div className="container-page grid items-center gap-12 py-16 md:grid-cols-2 md:gap-14 md:py-24">
+          <div>
+            <h2 className="mb-5 font-serif text-4xl font-normal leading-tight tracking-[-.02em] text-on-dark md:text-5xl">{t(locale, 'seoWhyTitle')}</h2>
+            <p className="leading-7 text-on-dark-soft">{t(locale, 'seoWhyBody1')}</p>
+            <ul className="mt-7 space-y-4 border-t border-on-dark/10 pt-5">
+              {([
+                ['seoWhyPrivacy', 'seoWhyPrivacyBody'],
+                ['seoWhyInstant', 'seoWhyInstantBody'],
+                ['seoWhyNoFriction', 'seoWhyNoFrictionBody'],
+              ] as const).map(([title, body]) => (
+                <li key={title} className="text-sm leading-6 text-on-dark-soft">
+                  <strong className="font-medium text-on-dark">{t(locale, title)}</strong>{t(locale, body)}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div aria-hidden="true" className="min-w-0 overflow-hidden rounded-xl border border-on-dark/10 bg-dark-soft font-mono">
+            <div className="flex items-center gap-2 border-b border-on-dark/10 px-5 py-4 text-xs text-on-dark-soft">
+              <Terminal className="h-4 w-4" />loan-calculator
+            </div>
+            <pre className="overflow-x-auto p-6 text-[13px] leading-7 text-on-dark-soft" dir="ltr"><code>
+              {'$ compute '}<span className="text-accent-teal">--local</span>{'\n\n'}
+              <span className="text-accent-amber">monthly_payment</span>{'   400.76\n'}
+              <span className="text-accent-amber">total_interest</span>{'  4,045.54\n'}
+              <span className="text-accent-amber">total_paid</span>{'     24,045.54\n\n'}
+              {'requests           '}<span className="text-accent-teal">0</span>{'\n'}
+              {'uploaded           '}<span className="text-accent-teal">0 B</span>
+            </code></pre>
+          </div>
+        </div>
+      </section>
+
+      <div className="container-page py-16 md:py-24">
+        <a href="https://whatif.axtrivc.com" target="_blank" rel="noopener noreferrer"
+          className="flex flex-wrap items-center gap-x-6 gap-y-4 rounded-xl bg-primary p-8 text-[#141413] sm:flex-nowrap md:p-12">
+          <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-current/40">
             <TrendingUp className="h-5 w-5" aria-hidden="true" />
           </span>
-          <span className="min-w-0 flex-1">
-            <span className="block text-sm font-bold" style={{ color: 'rgb(var(--text))' }}>
-              {t(locale, 'whatifTitle')}
-            </span>
-            <span
-              className="mt-0.5 block truncate text-xs leading-relaxed sm:whitespace-normal"
-              style={{ color: 'rgb(var(--text-muted))' }}
-            >
-              {t(locale, 'whatifBody')}
-            </span>
+          <span className="min-w-0 flex-[1_1_15rem]">
+            <span className="block font-serif text-3xl font-normal tracking-[-.015em] text-on-dark">{t(locale, 'whatifTitle')}</span>
+            <span className="mt-1 block leading-relaxed">{t(locale, 'whatifBody')}</span>
           </span>
-          <span className="shrink-0 font-mono text-xs font-semibold text-red-500 transition-transform group-hover:translate-x-0.5 dark:text-red-400">
-            {t(locale, 'whatifCta')}
-          </span>
+          <span className="shrink-0 rounded-lg bg-surface-dark px-5 py-2.5 text-sm font-medium text-on-dark">{t(locale, 'whatifCta')}</span>
         </a>
-
-        {/* 首页中部广告位 */}
         <AdSlot slot="homepage-mid" format="horizontal" fullWidth />
-
-        {/* ════════ ④ SEO 文案区(★ 文案绝对保留)════════ */}
-        <section className="prose-content mx-auto mt-16 max-w-4xl">
-          <h2>{t(locale, 'seoWhyTitle')}</h2>
-          <p>{t(locale, 'seoWhyBody1')}</p>
-          <ul>
-            <li>
-              <strong>{t(locale, 'seoWhyPrivacy')}</strong>
-              {t(locale, 'seoWhyPrivacyBody')}
-            </li>
-            <li>
-              <strong>{t(locale, 'seoWhyInstant')}</strong>
-              {t(locale, 'seoWhyInstantBody')}
-            </li>
-            <li>
-              <strong>{t(locale, 'seoWhyNoFriction')}</strong>
-              {t(locale, 'seoWhyNoFrictionBody')}
-            </li>
-          </ul>
-          <p>{t(locale, 'seoWhyBody2', { count: String(roundedCount) })}</p>
-
-          <h2>{t(locale, 'seoBrowseTitle')}</h2>
-          <p>
-            {(() => {
-              const fullDirLabel = t(locale, 'seoBrowseFullDir')
-              const body = t(locale, 'seoBrowseBody', {
-                fullDir: fullDirLabel,
-                count: String(tools.length),
-              })
-              const [before, after = ''] = body.split(fullDirLabel)
-              return (
-                <>
-                  {before}
-                  <Link href="/tools/">
-                    <strong>{fullDirLabel}</strong>
-                  </Link>
-                  {after}
-                </>
-              )
-            })()}
-          </p>
-
-          <h2>{t(locale, 'seoPopularTitle')}</h2>
-          <p>{t(locale, 'seoPopularBody')}</p>
-        </section>
-
-        {/* 底部玻璃目录由服务端 page 注入,与客户端首页壳解耦。 */}
-        <div className="mx-auto mt-10 max-w-6xl">{sitemap}</div>
       </div>
+
+      <section className="bg-surface-soft">
+        <div className="container-page py-16 md:py-24">
+          <div className="prose-content mx-auto mb-8 max-w-3xl">
+            <p>{t(locale, 'seoWhyBody2', { count: String(roundedCount) })}</p>
+            <h2>{t(locale, 'seoBrowseTitle')}</h2>
+            <p>
+              {(() => {
+                const fullDirLabel = t(locale, 'seoBrowseFullDir')
+                const body = t(locale, 'seoBrowseBody', {
+                  fullDir: fullDirLabel,
+                  count: String(tools.length),
+                })
+                const [before, after = ''] = body.split(fullDirLabel)
+                return (
+                  <>
+                    {before}
+                    <Link href="/tools/">
+                      <strong>{fullDirLabel}</strong>
+                    </Link>
+                    {after}
+                  </>
+                )
+              })()}
+            </p>
+
+          </div>
+          <div className="prose-content mx-auto mt-14 max-w-3xl">
+            <h2>{t(locale, 'seoPopularTitle')}</h2>
+            <p>{t(locale, 'seoPopularBody')}</p>
+          </div>
+          {sitemap}
+        </div>
+      </section>
     </div>
   )
 }

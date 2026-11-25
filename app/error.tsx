@@ -19,12 +19,12 @@ export default function Error({
   }, [error])
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center px-6 text-center">
-      <h1 className="text-2xl font-bold text-slate-800 dark:text-slate-100">{t(locale, 'errorTitle')}</h1>
-      <p className="mt-3 max-w-md text-sm text-slate-600 dark:text-slate-300">{t(locale, 'errorBody')}</p>
+    <div className="flex min-h-[65vh] flex-col items-center justify-center px-6 text-center">
+      <h1 className="font-serif text-4xl font-normal tracking-[-.5px] text-ink">{t(locale, 'errorTitle')}</h1>
+      <p className="mt-3 max-w-md text-base leading-relaxed text-body">{t(locale, 'errorBody')}</p>
       {/* digest 是 Next.js 服务端日志关联码:展示出来让用户反馈时能精确定位到具体报错 */}
       {error.digest && (
-        <p className="mt-3 max-w-md rounded-md bg-slate-100 p-2 font-mono text-xs break-all text-slate-500 dark:bg-slate-800 dark:text-slate-400">
+        <p className="mt-3 max-w-md rounded-lg bg-surface-card p-3 font-mono text-sm break-all text-body">
           {t(locale, 'errorDigest').replace('{digest}', error.digest)}
         </p>
       )}
@@ -32,13 +32,13 @@ export default function Error({
         <button
           type="button"
           onClick={reset}
-          className="rounded-lg bg-blue-600 px-5 py-2.5 text-sm font-medium text-white hover:bg-blue-700"
+          className="btn btn-primary text-sm"
         >
           {t(locale, 'errorRetry')}
         </button>
         <Link
           href="/"
-          className="rounded-lg border border-slate-300 px-5 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-50 dark:border-slate-600 dark:text-slate-200 dark:hover:bg-slate-800"
+          className="btn btn-secondary text-sm"
         >
           {t(locale, 'errorHome')}
         </Link>

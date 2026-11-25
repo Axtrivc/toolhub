@@ -254,7 +254,7 @@ export function SshKeyGeneratorClient() {
               </span>
               <CopyButton value={keys.publicLine} label={L('copyPublicKey', 'Copy public key')} />
             </div>
-            <pre
+            <pre data-code-output
               className="w-full overflow-x-auto whitespace-pre-wrap break-all rounded-lg border p-4 font-mono text-sm shadow-sm"
               style={{ borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rgb(var(--bg-card))', color: 'rgb(var(--text))' }}
             >

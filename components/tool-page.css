@@ -1,0 +1,75 @@
+/* Series inks stay distinct on both paper and charcoal surfaces. */
+:root {
+  --chart-coral: #cc785c;
+  --chart-ink: #3d3d3a;
+  --chart-teal: #5db8a6;
+  --chart-amber: #e8a55a;
+  --chart-muted: #8e8b82;
+  --chart-rust: #a9583e;
+  --chart-tan: #c9a47a;
+  --chart-pale: #d6cec2;
+  --positive-text: #23623f;
+  --warning-text: #845019;
+  --negative-text: #a33232;
+}
+html.dark {
+  --chart-ink: #cfcbc2;
+  --chart-pale: #646057;
+  --positive-text: #8bc99a;
+  --warning-text: #e8b976;
+  --negative-text: #ee9292;
+}
+
+.tool-faq-marker::before { content: '+'; }
+details[open] > summary .tool-faq-marker::before { content: '−'; }
+.tool-page summary::-webkit-details-marker { display: none; }
+
+@media screen and (min-width: 768px) {
+  .tool-notes:has(.tool-formula):has(.tool-disclaimer) {
+    display: grid;
+    grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+    gap: 20px;
+    align-items: start;
+  }
+  .tool-notes:has(.tool-formula) .tool-disclaimer { margin-top: 3rem; }
+  html.embed .tool-notes:has(.tool-formula):has(.tool-disclaimer) { display: block; }
+  html.embed .tool-notes:has(.tool-formula) .tool-disclaimer { margin-top: 1rem; }
+}
+
+@media screen {
+  .tool-page .tool-formula {
+    @apply rounded-2xl bg-surface-dark p-5 sm:p-8;
+  }
+  .tool-page .tool-formula h2 {
+    @apply mt-0 text-on-dark;
+  }
+  .tool-page .tool-formula p, .tool-page .tool-formula p strong { @apply text-on-dark-soft; }
+  .tool-formula p:last-child { @apply mb-0; }
+  .tool-page .tool-formula pre {
+    @apply my-4 rounded-xl border-0 bg-dark-soft p-5 text-on-dark sm:p-6;
+    overflow-wrap: anywhere;
+  }
+  /* Limit these local colors to tool-owned output, including inline legacy styles.
+     User-provided HTML, custom CSS previews, QR images and color swatches keep their own palette. */
+  .tool-shell :is(pre[data-code-output], textarea[readonly][class~='font-mono']) {
+    --bg: var(--dark-soft);
+    --bg-card: var(--dark-soft);
+    --bg-subtle: var(--dark-soft);
+    --text: var(--on-dark);
+    --text-muted: var(--on-dark);
+    --text-subtle: var(--on-dark-soft);
+    --border: var(--dark-elevated);
+    --border-strong: var(--dark-elevated);
+    @apply rounded-xl border border-dark-elevated bg-dark-soft p-4 text-on-dark shadow-none;
+    font-family: var(--font-mono), ui-monospace, monospace;
+  }
+  .tool-shell textarea[readonly][class~='font-mono']::placeholder { @apply text-on-dark-soft; }
+  .tool-embed .btn-secondary { @apply border-transparent bg-dark-elevated text-on-dark; }
+  .tool-embed .btn-secondary:hover { @apply border-primary; }
+  .tool-actions .btn { @apply min-h-9 px-3.5 py-2 text-[13px]; }
+  .tool-page .tool-shell { overflow-wrap: break-word; }
+  .tool-shell .tool-chart-title { @apply font-medium text-body; }
+  .tool-shell .tool-chart text { @apply font-mono; }
+  .tool-shell .tool-chart .chart-number { @apply font-serif font-normal; }
+  html.embed .tool-page { @apply p-2 sm:p-4; }
+}

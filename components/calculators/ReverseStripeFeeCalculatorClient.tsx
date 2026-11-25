@@ -210,8 +210,8 @@ export function ReverseStripeFeeCalculatorClient() {
                   {
                     label: L('cmpCharge', 'Charge amount'),
                     segments: [
-                      { label: L('segKeep', 'You keep'), value: parsed.net, color: '#22c55e' },
-                      { label: L('segFees', 'Fees'), value: parsed.fee, color: '#ef4444' },
+                      { label: L('segKeep', 'You keep'), value: parsed.net, color: 'var(--chart-teal)' },
+                      { label: L('segFees', 'Fees'), value: parsed.fee, color: 'var(--chart-ink)' },
                     ],
                   },
                 ]}

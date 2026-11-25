@@ -9,21 +9,22 @@ interface PageShellProps {
   title: string
   description?: string
   crumb?: string
+  prose?: boolean
   children: ReactNode
 }
 
 /**
  * 静态页面通用外壳(关于/隐私/联系/条款)- 主题感知 + i18n
  */
-export function PageShell({ title, description, crumb, children }: PageShellProps) {
+export function PageShell({ title, description, crumb, prose = true, children }: PageShellProps) {
   const { locale } = useApp()
 
   return (
-    <div className="container-page py-10">
+    <div className="mx-auto w-full max-w-4xl px-4 py-10 sm:px-8 sm:pb-24 sm:pt-14">
       <nav aria-label="Breadcrumb" className="mb-6 text-sm" style={{ color: 'rgb(var(--text-subtle))' }}>
-        <ol className="flex items-center gap-2">
+        <ol className="flex flex-wrap items-center gap-2">
           <li>
-            <Link href="/" className="hover:text-brand-600">
+            <Link href="/" className="text-brand-700 dark:text-brand-400">
               {t(locale, 'toolHome')}
             </Link>
           </li>
@@ -38,18 +39,18 @@ export function PageShell({ title, description, crumb, children }: PageShellProp
         </ol>
       </nav>
 
-      <header className="mb-8">
-        <h1 className="text-3xl font-bold sm:text-4xl" style={{ color: 'rgb(var(--text))' }}>
+      <header className="mb-10 border-b border-hairline pb-8 sm:mb-12 sm:pb-10">
+        <h1 className="font-serif text-4xl font-normal leading-[1.1] tracking-[-.5px] sm:text-5xl sm:tracking-[-1px]" style={{ color: 'rgb(var(--text))' }}>
           {title}
         </h1>
         {description && (
-          <p className="mt-3 max-w-2xl text-lg" style={{ color: 'rgb(var(--text-muted))' }}>
+          <p className="mt-5 max-w-2xl text-lg leading-relaxed" style={{ color: 'rgb(var(--text-muted))' }}>
             {description}
           </p>
         )}
       </header>
 
-      <div className="prose-content max-w-3xl">{children}</div>
+      <div className={prose ? 'prose-content max-w-3xl' : undefined}>{children}</div>
     </div>
   )
 }

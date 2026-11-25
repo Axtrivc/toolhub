@@ -181,7 +181,7 @@ export function ResultActions({
       {/* 打印抬头:屏显隐藏,进 @media print 后成为报告页眉
           (放在 .no-print 操作行之外,避免被打印隐藏规则吞掉) */}
       {enablePrint && <PrintReportHeader />}
-      <div className="flex flex-wrap items-center gap-3 no-print">
+      <div className="tool-actions no-print flex flex-wrap items-center gap-2">
       <CopyButton value={summary} label={copyLabel || t(locale, 'toolCopySummary')} disabled={disabled} />
       <motion.button
         type="button"

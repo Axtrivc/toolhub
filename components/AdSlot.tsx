@@ -144,7 +144,7 @@ export function AdSlot({ slot, format = 'auto', fullWidth = false }: AdSlotProps
         data-placement={slot}
         data-ad-format={format}
         aria-hidden="true"
-        className={`my-6 flex w-full items-center justify-center rounded-lg border border-dashed border-slate-300 bg-slate-100/50 text-xs text-slate-400 ${FORMAT_MIN_HEIGHT[format]} ${
+        className={`my-6 flex w-full items-center justify-center rounded-xl border border-dashed border-hairline bg-surface-soft text-xs text-muted-ink ${FORMAT_MIN_HEIGHT[format]} ${
           fullWidth ? 'w-full' : 'mx-auto max-w-[728px]'
         }`}
       >
@@ -168,7 +168,7 @@ export function AdSlot({ slot, format = 'auto', fullWidth = false }: AdSlotProps
         className={`relative flex w-full items-center justify-center ${FORMAT_MIN_HEIGHT[format]}`}
       >
         {/* 合规标识:右上角微型浅灰 ADVERTISEMENT(select-only 防误选) */}
-        <span className="absolute right-0 top-0 select-none text-[10px] uppercase tracking-wider text-slate-400">
+        <span className="absolute right-0 top-0 select-none text-[10px] uppercase tracking-wider text-muted-ink">
           Advertisement
         </span>
         {consent === 'allowed' && (

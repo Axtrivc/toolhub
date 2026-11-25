@@ -92,7 +92,7 @@ export function GPACalculatorClient() {
       {/* 课程列表 */}
       <div className="space-y-3">
         {/* 表头 */}
-        <div className="hidden grid-cols-12 gap-2 px-2 text-xs font-medium uppercase tracking-wide sm:grid" style={{ color: 'rgb(var(--text-faint))' }}>
+        <div className="hidden grid-cols-12 gap-2 px-2 text-xs font-medium uppercase tracking-wide sm:grid" style={{ color: 'rgb(var(--text-subtle))' }}>
           <div className="col-span-5">{L('thCourseName', 'Course name')}</div>
           <div className="col-span-2">{L('thCredits', 'Credits')}</div>
           <div className="col-span-3">{L('thGrade', 'Grade')}</div>
@@ -174,11 +174,11 @@ export function GPACalculatorClient() {
           min={0}
           max={4}
           zones={[
-            { upTo: 2, color: '#ef4444', label: L('zoneFailing', 'Failing') },
-            { upTo: 2.5, color: '#f97316', label: L('zoneBelowAvg', 'Below average') },
-            { upTo: 3, color: '#f59e0b', label: L('zoneAvg', 'Average') },
-            { upTo: 3.5, color: '#3b82f6', label: L('zoneGood', 'Good') },
-            { upTo: 4, color: '#22c55e', label: L('zoneExcellent', 'Excellent') },
+            { upTo: 2, color: 'var(--chart-ink)', label: L('zoneFailing', 'Failing') },
+            { upTo: 2.5, color: 'var(--chart-coral)', label: L('zoneBelowAvg', 'Below average') },
+            { upTo: 3, color: 'var(--chart-amber)', label: L('zoneAvg', 'Average') },
+            { upTo: 3.5, color: 'var(--chart-coral)', label: L('zoneGood', 'Good') },
+            { upTo: 4, color: 'var(--chart-teal)', label: L('zoneExcellent', 'Excellent') },
           ]}
           formatValue={(n) => n.toFixed(2)}
         />

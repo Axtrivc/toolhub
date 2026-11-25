@@ -147,8 +147,8 @@ export const QuadraticEquationSolverClient = makeCalculatorClient({
     return {
       xLabels: offs.map((o) => f(h + o, 1)),
       lines: [
-        { key: 'curve', label: 'y = ax² + bx + c', color: '#3b82f6', points: offs.map((o) => a * (h + o) ** 2 + b * (h + o) + c), area: true },
-        { key: 'zero', label: 'y = 0', color: '#94a3b8', points: offs.map(() => 0), dashed: true },
+        { key: 'curve', label: 'y = ax² + bx + c', color: 'var(--chart-coral)', points: offs.map((o) => a * (h + o) ** 2 + b * (h + o) + c), area: true },
+        { key: 'zero', label: 'y = 0', color: 'var(--chart-muted)', points: offs.map(() => 0), dashed: true },
       ],
     }
   },
@@ -223,8 +223,8 @@ export const SlopeCalculatorClient = makeCalculatorClient({
     return {
       xLabels: xs.map((x) => f(x, 1)),
       lines: [
-        { key: 'line', label: 'y = mx + b', color: '#3b82f6', points: xs.map((x) => m * x + b), area: true },
-        { key: 'zero', label: 'y = 0', color: '#94a3b8', points: xs.map(() => 0), dashed: true },
+        { key: 'line', label: 'y = mx + b', color: 'var(--chart-coral)', points: xs.map((x) => m * x + b), area: true },
+        { key: 'zero', label: 'y = 0', color: 'var(--chart-muted)', points: xs.map(() => 0), dashed: true },
       ],
     }
   },
@@ -323,7 +323,7 @@ export const ConfidenceIntervalCalculatorClient = makeCalculatorClient({
     return {
       xLabels: marks.map((m) => `${m}`),
       lines: [
-        { key: 'moe', label: 'Margin of error', color: '#3b82f6', points: marks.map((m) => z * se(m)), area: true },
+        { key: 'moe', label: 'Margin of error', color: 'var(--chart-coral)', points: marks.map((m) => z * se(m)), area: true },
       ],
       formatY: (x) => `±${x.toFixed(3)}`,
     }
@@ -405,7 +405,7 @@ export const SampleSizeCalculatorClient = makeCalculatorClient({
     return {
       xLabels: moes.map((m) => `±${m}%`),
       lines: [
-        { key: 'n', label: 'Required n (infinite population)', color: '#3b82f6', points: moes.map((m) => Math.ceil((z * z * q * (1 - q)) / (m / 100) ** 2)), area: true },
+        { key: 'n', label: 'Required n (infinite population)', color: 'var(--chart-coral)', points: moes.map((m) => Math.ceil((z * z * q * (1 - q)) / (m / 100) ** 2)), area: true },
       ],
       formatY: (x) => Math.round(x).toLocaleString('en-US'),
     }
@@ -481,7 +481,7 @@ export const ZScoreCalculatorClient = makeCalculatorClient({
     return {
       xLabels: xs.map((x) => `${x}`),
       lines: [
-        { key: 'pdf', label: 'φ(z) = e^(−z²/2)/√(2π)', color: '#3b82f6', points: xs.map((x) => Math.exp(-0.5 * x * x) / Math.sqrt(2 * Math.PI)), area: true },
+        { key: 'pdf', label: 'φ(z) = e^(−z²/2)/√(2π)', color: 'var(--chart-coral)', points: xs.map((x) => Math.exp(-0.5 * x * x) / Math.sqrt(2 * Math.PI)), area: true },
       ],
       formatY: (x) => x.toFixed(3),
     }
@@ -537,8 +537,8 @@ export const BayesTheoremCalculatorClient = makeCalculatorClient({
   chart: {
     title: 'What a positive result is made of (per 10,000)',
     slices: [
-      { valueKey: 'tp', label: 'True positives', color: '#22c55e' },
-      { valueKey: 'fp', label: 'False positives', color: '#ef4444' },
+      { valueKey: 'tp', label: 'True positives', color: 'var(--chart-teal)' },
+      { valueKey: 'fp', label: 'False positives', color: 'var(--chart-ink)' },
     ],
     centerLabel: 'Positive tests',
   },
@@ -614,8 +614,8 @@ export const HeatIndexCalculatorClient = makeCalculatorClient({
     return {
       xLabels: rhs.map((r) => `${r}%`),
       lines: [
-        { key: 'hi', label: 'Heat index', color: '#ef4444', points: rhs.map((r) => conv(rothfuszHI(tf, r))), area: true },
-        { key: 'air', label: 'Actual air temp', color: '#94a3b8', points: rhs.map(() => conv(tf)), dashed: true },
+        { key: 'hi', label: 'Heat index', color: 'var(--chart-ink)', points: rhs.map((r) => conv(rothfuszHI(tf, r))), area: true },
+        { key: 'air', label: 'Actual air temp', color: 'var(--chart-muted)', points: rhs.map(() => conv(tf)), dashed: true },
       ],
       formatY: (x) => `${x.toFixed(0)}°${outF ? 'F' : 'C'}`,
     }
@@ -696,8 +696,8 @@ export const DewPointCalculatorClient = makeCalculatorClient({
     return {
       xLabels: rhs.map((r) => `${r}%`),
       lines: [
-        { key: 'dew', label: 'Dew point', color: '#3b82f6', points: rhs.map((r) => conv(dewAt(r))), area: true },
-        { key: 'air', label: 'Air temperature', color: '#94a3b8', points: rhs.map(() => conv(tc)), dashed: true },
+        { key: 'dew', label: 'Dew point', color: 'var(--chart-coral)', points: rhs.map((r) => conv(dewAt(r))), area: true },
+        { key: 'air', label: 'Air temperature', color: 'var(--chart-muted)', points: rhs.map(() => conv(tc)), dashed: true },
       ],
       formatY: (x) => `${x.toFixed(0)}°${outC ? 'C' : 'F'}`,
     }

@@ -43,7 +43,7 @@ export default function ToolsHubPage() {
   const itemListLd = buildItemListJsonLd()
 
   return (
-    <div className="container-page py-12">
+    <div className="container-page py-12 md:py-24">
       {/* ItemList 结构化数据 */}
       <script
         type="application/ld+json"
@@ -51,7 +51,7 @@ export default function ToolsHubPage() {
       />
 
       {/* Hero(H1 与说明均经客户端组件取当前语言;SSR 恒英文,SEO 标题由 metadata 保证) */}
-      <section className="mx-auto mb-12 max-w-3xl text-center">
+      <section className="mb-10 max-w-3xl">
         <ToolDirectoryTitle />
         <ToolDirectoryHeroBody count={all.length} />
       </section>
@@ -66,9 +66,9 @@ export default function ToolsHubPage() {
       {/* 分类分组展示全量工具(卡片/标题由客户端组件本地化)。
           不设 id 锚点:分类名含空格不是合法 id,且分类跳转已统一走首页 ?category= 深链。 */}
       {categories.map(([category, categoryTools]) => (
-        <section key={category} className="mb-12">
+        <section key={category} className="mb-16 md:mb-24">
           <ToolDirectoryHeading category={category} count={categoryTools.length} />
-          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {categoryTools.map((tool) => (
               <ToolDirectoryCard key={tool.slug} tool={tool} />
             ))}

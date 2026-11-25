@@ -108,8 +108,8 @@ export const SelfEmploymentTaxCalculatorClient = makeCalculatorClient({
     const r = seTaxCalc(v, profit, w2)
     return {
       rows: [
-        { label: 'SECA (self-employed)', segments: [{ label: 'Tax', value: r.seTax, color: '#3b82f6' }] },
-        { label: 'FICA (W-2 employee)', segments: [{ label: 'Tax', value: r.employeeFica, color: '#22c55e' }] },
+        { label: 'SECA (self-employed)', segments: [{ label: 'Tax', value: r.seTax, color: 'var(--chart-coral)' }] },
+        { label: 'FICA (W-2 employee)', segments: [{ label: 'Tax', value: r.employeeFica, color: 'var(--chart-teal)' }] },
       ],
       formatTotal: (n) => fmtUSD(n),
     }
@@ -204,9 +204,9 @@ export const DepreciationCalculatorClient = makeCalculatorClient({
     return {
       xLabels: Array.from({ length: life + 1 }, (_, i) => `Y${i}`),
       lines: [
-        { key: 'sl', label: 'Straight line', color: '#3b82f6', points: books(s.sl) },
-        { key: 'ddb', label: 'Double declining', color: '#22c55e', points: books(s.ddb) },
-        { key: 'syd', label: 'Sum of years digits', color: '#f59e0b', points: books(s.syd) },
+        { key: 'sl', label: 'Straight line', color: 'var(--chart-coral)', points: books(s.sl) },
+        { key: 'ddb', label: 'Double declining', color: 'var(--chart-teal)', points: books(s.ddb) },
+        { key: 'syd', label: 'Sum of years digits', color: 'var(--chart-amber)', points: books(s.syd) },
       ],
       formatY: (n) => fmtUSD(n, 0),
     }
@@ -300,10 +300,10 @@ export const MileageReimbursementCalculatorClient = makeCalculatorClient({
     })
     return {
       rows: [
-        row('Business rate', rates.business, '#3b82f6'),
-        row('Medical rate', rates.medical, '#22c55e'),
-        row('Moving rate', rates.moving, '#f59e0b'),
-        row('Charitable rate', rates.charitable, '#a855f7'),
+        row('Business rate', rates.business, 'var(--chart-coral)'),
+        row('Medical rate', rates.medical, 'var(--chart-teal)'),
+        row('Moving rate', rates.moving, 'var(--chart-amber)'),
+        row('Charitable rate', rates.charitable, 'var(--chart-rust)'),
       ],
       formatTotal: (n) => fmtUSD(n),
     }
@@ -382,14 +382,14 @@ export const ContractorVsEmployeeCalculatorClient = makeCalculatorClient({
     return {
       rows: [
         { label: '1099 contractor', segments: [
-          { label: 'Taxes', value: r.seTax + r.tax1099, color: '#ef4444' },
-          { label: 'Benefits cost', value: health1099, color: '#f59e0b' },
-          { label: 'Take-home', value: r.net1099, color: '#22c55e' },
+          { label: 'Taxes', value: r.seTax + r.tax1099, color: 'var(--chart-ink)' },
+          { label: 'Benefits cost', value: health1099, color: 'var(--chart-amber)' },
+          { label: 'Take-home', value: r.net1099, color: 'var(--chart-teal)' },
         ] },
         { label: 'W-2 employee', segments: [
-          { label: 'Taxes', value: r.ficaW2 + r.taxW2, color: '#ef4444' },
-          { label: 'Benefits cost', value: premiumsW2, color: '#f59e0b' },
-          { label: 'Take-home + match', value: r.netW2, color: '#14b8a6' },
+          { label: 'Taxes', value: r.ficaW2 + r.taxW2, color: 'var(--chart-ink)' },
+          { label: 'Benefits cost', value: premiumsW2, color: 'var(--chart-amber)' },
+          { label: 'Take-home + match', value: r.netW2, color: 'var(--chart-teal)' },
         ] },
       ],
       formatTotal: (n) => fmtUSD(n),
@@ -441,8 +441,8 @@ export const GrossUpCalculatorClient = makeCalculatorClient({
     title: 'Net vs tax',
     centerLabel: 'Gross',
     slices: [
-      { valueKey: 'netCheck', label: 'Net you keep', color: '#22c55e' },
-      { valueKey: 'tax', label: 'Tax withheld', color: '#ef4444' },
+      { valueKey: 'netCheck', label: 'Net you keep', color: 'var(--chart-teal)' },
+      { valueKey: 'tax', label: 'Tax withheld', color: 'var(--chart-ink)' },
     ],
   },
   note: '🎯 Bonus preset: 22% federal supplemental withholding + 7.65% FICA = 29.65%, the standard combo for US bonus checks under $1M (over $1M the supplemental rate is 37%). Add your state rate for a realistic total. Remember: withholding is not your final tax — the difference settles at filing.',
@@ -526,8 +526,8 @@ export const CommuteCostCalculatorClient = makeCalculatorClient({
     const timeValue = ((minutes * 2 * days * weeks) / 60) * wage
     return {
       rows: [
-        { label: 'Car cost', segments: [{ label: 'Annual amount', value: annualCost, color: '#3b82f6' }] },
-        { label: 'Time value', segments: [{ label: 'Annual amount', value: timeValue, color: '#a855f7' }] },
+        { label: 'Car cost', segments: [{ label: 'Annual amount', value: annualCost, color: 'var(--chart-coral)' }] },
+        { label: 'Time value', segments: [{ label: 'Annual amount', value: timeValue, color: 'var(--chart-rust)' }] },
       ],
       formatTotal: (n) => fmtUSD(n),
     }
@@ -593,8 +593,8 @@ export const SmokingCostCalculatorClient = makeCalculatorClient({
       // 'Y10' 会与 'Y9' 像素级叠死;桌面刻度(Now/Y2/Y4/.../Y10)不含第 9 格,不受影响
       xLabels: years.map((y) => (y === 0 ? 'Now' : y === 9 ? '' : `Y${y}`)),
       lines: [
-        { key: 'smoked', label: 'Cigarette money', color: '#ef4444', points: years.map((y) => yearly * y) },
-        { key: 'invested', label: 'Same money invested', color: '#22c55e', points: years.map((y) => (r > 0 ? yearly * ((Math.pow(1 + r, y) - 1) / r) : yearly * y)), area: true },
+        { key: 'smoked', label: 'Cigarette money', color: 'var(--chart-ink)', points: years.map((y) => yearly * y) },
+        { key: 'invested', label: 'Same money invested', color: 'var(--chart-teal)', points: years.map((y) => (r > 0 ? yearly * ((Math.pow(1 + r, y) - 1) / r) : yearly * y)), area: true },
       ],
       formatY: (n) => fmtUSD(n, 0),
     }
@@ -677,8 +677,8 @@ export const EmergencyFundCalculatorClient = makeCalculatorClient({
     return {
       xLabels,
       lines: [
-        { key: 'balance', label: 'Savings balance', color: '#22c55e', points: balance, area: true },
-        { key: 'target', label: 'Target', color: '#ef4444', points: targetLine, dashed: true },
+        { key: 'balance', label: 'Savings balance', color: 'var(--chart-teal)', points: balance, area: true },
+        { key: 'target', label: 'Target', color: 'var(--chart-ink)', points: targetLine, dashed: true },
       ],
       formatY: (n2) => fmtUSD(n2, 0),
     }

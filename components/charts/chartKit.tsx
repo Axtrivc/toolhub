@@ -17,11 +17,11 @@ import type { ReactNode } from 'react'
 export function ChartCard({ title, children }: { title?: string; children: ReactNode }) {
   return (
     <div
-      className="mt-4 rounded-lg border p-5"
+      className="tool-chart mt-4 min-w-0 rounded-xl border p-4 sm:p-6"
       style={{ borderColor: 'rgb(var(--border))', backgroundColor: 'rgb(var(--bg-card))' }}
     >
       {title && (
-        <div className="mb-3 text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>
+        <div className="tool-chart-title mb-4 text-sm" style={{ color: 'rgb(var(--text-muted))' }}>
           {title}
         </div>
       )}

@@ -111,8 +111,8 @@ export const ConcreteCalculatorClient = makeCalculatorClient({
     }
     return {
       rows: [
-        { label: 'Exact need', segments: [{ label: 'Volume', value: ft3 / 27, color: '#3b82f6' }] },
-        { label: 'Order (with waste)', segments: [{ label: 'Volume', value: (ft3 * (1 + waste / 100)) / 27, color: '#f59e0b' }] },
+        { label: 'Exact need', segments: [{ label: 'Volume', value: ft3 / 27, color: 'var(--chart-coral)' }] },
+        { label: 'Order (with waste)', segments: [{ label: 'Volume', value: (ft3 * (1 + waste / 100)) / 27, color: 'var(--chart-amber)' }] },
       ],
       formatTotal: (n) => `${fmtNum(n, 2)} yd³`,
     }
@@ -179,9 +179,9 @@ export const MulchCalculatorClient = makeCalculatorClient({
     const costAt = (depth: number) => Math.ceil((l * w * depth) / 12 / bagSize) * price
     return {
       rows: [
-        { label: '2″ depth', segments: [{ label: 'Cost', value: costAt(2), color: '#22c55e' }] },
-        { label: '3″ depth', segments: [{ label: 'Cost', value: costAt(3), color: '#3b82f6' }] },
-        { label: '4″ depth', segments: [{ label: 'Cost', value: costAt(4), color: '#f59e0b' }] },
+        { label: '2″ depth', segments: [{ label: 'Cost', value: costAt(2), color: 'var(--chart-teal)' }] },
+        { label: '3″ depth', segments: [{ label: 'Cost', value: costAt(3), color: 'var(--chart-coral)' }] },
+        { label: '4″ depth', segments: [{ label: 'Cost', value: costAt(4), color: 'var(--chart-amber)' }] },
       ],
       formatTotal: (n) => fmtUSD(n),
     }
@@ -248,9 +248,9 @@ export const GravelCalculatorClient = makeCalculatorClient({
     const yd = (l * w * d) / 12 / 27
     return {
       rows: [
-        { label: 'Crushed stone', segments: [{ label: 'Weight', value: (yd * 2700) / 2000, color: '#3b82f6' }] },
-        { label: 'Pea gravel', segments: [{ label: 'Weight', value: (yd * 2600) / 2000, color: '#22c55e' }] },
-        { label: 'Sand (dry)', segments: [{ label: 'Weight', value: (yd * 2500) / 2000, color: '#f59e0b' }] },
+        { label: 'Crushed stone', segments: [{ label: 'Weight', value: (yd * 2700) / 2000, color: 'var(--chart-coral)' }] },
+        { label: 'Pea gravel', segments: [{ label: 'Weight', value: (yd * 2600) / 2000, color: 'var(--chart-teal)' }] },
+        { label: 'Sand (dry)', segments: [{ label: 'Weight', value: (yd * 2500) / 2000, color: 'var(--chart-amber)' }] },
       ],
       formatTotal: (n) => `${fmtNum(n, 2)} t`,
     }
@@ -321,8 +321,8 @@ export const DrywallCalculatorClient = makeCalculatorClient({
     const buy = (per * h + ceiling) * 1.1
     return {
       rows: [
-        { label: '4×8 panels', segments: [{ label: 'Sheets', value: Math.ceil(buy / 32), color: '#3b82f6' }] },
-        { label: '4×12 panels', segments: [{ label: 'Sheets', value: Math.ceil(buy / 48), color: '#22c55e' }] },
+        { label: '4×8 panels', segments: [{ label: 'Sheets', value: Math.ceil(buy / 32), color: 'var(--chart-coral)' }] },
+        { label: '4×12 panels', segments: [{ label: 'Sheets', value: Math.ceil(buy / 48), color: 'var(--chart-teal)' }] },
       ],
       formatTotal: (n) => `${fmtNum(Math.round(n), 0)}`,
     }
@@ -394,9 +394,9 @@ export const RoofingCalculatorClient = makeCalculatorClient({
     const bundlesAt = (factor: number) => Math.ceil((l * w * factor * (1 + waste / 100)) / 100 * 3)
     return {
       rows: [
-        { label: '4/12 pitch', segments: [{ label: 'Bundles', value: bundlesAt(1.054), color: '#22c55e' }] },
-        { label: '6/12 pitch', segments: [{ label: 'Bundles', value: bundlesAt(1.118), color: '#3b82f6' }] },
-        { label: '9/12 pitch', segments: [{ label: 'Bundles', value: bundlesAt(1.25), color: '#ef4444' }] },
+        { label: '4/12 pitch', segments: [{ label: 'Bundles', value: bundlesAt(1.054), color: 'var(--chart-teal)' }] },
+        { label: '6/12 pitch', segments: [{ label: 'Bundles', value: bundlesAt(1.118), color: 'var(--chart-coral)' }] },
+        { label: '9/12 pitch', segments: [{ label: 'Bundles', value: bundlesAt(1.25), color: 'var(--chart-ink)' }] },
       ],
       formatTotal: (n) => `${fmtNum(Math.round(n), 0)}`,
     }
@@ -476,9 +476,9 @@ export const FenceCalculatorClient = makeCalculatorClient({
     const postsAt = (s: number) => Math.ceil(len / s) + 1
     return {
       rows: [
-        { label: '6 ft spacing', segments: [{ label: 'Posts', value: postsAt(6), color: '#3b82f6' }] },
-        { label: '8 ft spacing', segments: [{ label: 'Posts', value: postsAt(8), color: '#22c55e' }] },
-        { label: '10 ft spacing', segments: [{ label: 'Posts', value: postsAt(10), color: '#f59e0b' }] },
+        { label: '6 ft spacing', segments: [{ label: 'Posts', value: postsAt(6), color: 'var(--chart-coral)' }] },
+        { label: '8 ft spacing', segments: [{ label: 'Posts', value: postsAt(8), color: 'var(--chart-teal)' }] },
+        { label: '10 ft spacing', segments: [{ label: 'Posts', value: postsAt(10), color: 'var(--chart-amber)' }] },
       ],
       formatTotal: (n) => `${fmtNum(Math.round(n), 0)}`,
     }
@@ -545,8 +545,8 @@ export const PaverCalculatorClient = makeCalculatorClient({
     title: 'Base build-up volume',
     centerLabel: 'Base layers',
     slices: [
-      { valueKey: 'gravelYd', label: 'Crushed base', color: '#3b82f6' },
-      { valueKey: 'sandYd', label: 'Bedding sand', color: '#f59e0b' },
+      { valueKey: 'gravelYd', label: 'Crushed base', color: 'var(--chart-coral)' },
+      { valueKey: 'sandYd', label: 'Bedding sand', color: 'var(--chart-amber)' },
     ],
   },
   note: '🧱 Coverage runs 4.5 pieces per ft² for 4×8, 4 for 6×6, 2.25 for 8×8 and 1 for 12×12. Base depth follows traffic: 4″ for patios and paths, 6-12″ under driveways. Bedding sand stays at 1″ — thicker sand beds creep, rut, and wreck the surface.',
@@ -622,9 +622,9 @@ export const DeckBoardCalculatorClient = makeCalculatorClient({
     const boardsAt = (len: number) => Math.ceil((lineal * 1.1) / len)
     return {
       rows: [
-        { label: '12 ft boards', segments: [{ label: 'Boards', value: boardsAt(12), color: '#3b82f6' }] },
-        { label: '16 ft boards', segments: [{ label: 'Boards', value: boardsAt(16), color: '#22c55e' }] },
-        { label: '20 ft boards', segments: [{ label: 'Boards', value: boardsAt(20), color: '#f59e0b' }] },
+        { label: '12 ft boards', segments: [{ label: 'Boards', value: boardsAt(12), color: 'var(--chart-coral)' }] },
+        { label: '16 ft boards', segments: [{ label: 'Boards', value: boardsAt(16), color: 'var(--chart-teal)' }] },
+        { label: '20 ft boards', segments: [{ label: 'Boards', value: boardsAt(20), color: 'var(--chart-amber)' }] },
       ],
       formatTotal: (n) => `${fmtNum(Math.round(n), 0)}`,
     }

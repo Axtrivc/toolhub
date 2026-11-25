@@ -320,7 +320,7 @@ export function TomlToJsonClient() {
             <span className="text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>JSON</span>
             <CopyButton value={jsonText} />
           </div>
-          <pre className="overflow-x-auto rounded-lg border p-4 font-mono text-xs whitespace-pre-wrap" style={{ borderColor: 'rgb(var(--border))', backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text))' }}>{jsonText}</pre>
+          <pre data-code-output className="overflow-x-auto rounded-lg border p-4 font-mono text-xs whitespace-pre-wrap" style={{ borderColor: 'rgb(var(--border))', backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text))' }}>{jsonText}</pre>
         </div>
       )}
       <ResultActions summary={jsonText} filename="converted.json" downloadContent={jsonText} mime="application/json;charset=utf-8;" />

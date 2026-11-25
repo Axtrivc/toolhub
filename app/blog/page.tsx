@@ -85,6 +85,7 @@ export default function BlogIndexPage() {
         title="ToolHub Guides & Engineering Notes"
         description="Practical guides, worked examples, calculator tutorials, and architecture notes from behind the toolbox."
         crumb="Blog"
+        prose={false}
       >
         {/* 卡片渲染交给客户端组件(随语言切换标题/描述/日期/按钮文案)。
             本页(server component)保留 metadata + JSON-LD(英文,SEO 稳定),

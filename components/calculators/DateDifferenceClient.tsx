@@ -129,7 +129,7 @@ export function DateDifferenceClient() {
       </div>
 
       {!result ? (
-        <div className="rounded-lg border-2 border-dashed p-6 text-center text-sm" style={{ borderColor: 'rgb(var(--border-strong))', color: 'rgb(var(--text-faint))' }}>
+        <div className="rounded-lg border-2 border-dashed p-6 text-center text-sm" style={{ borderColor: 'rgb(var(--border-strong))', color: 'rgb(var(--text-subtle))' }}>
           {L('emptyState', 'Pick two dates to see the duration between them.')}
         </div>
       ) : 'error' in result ? (
@@ -168,10 +168,10 @@ export function DateDifferenceClient() {
             const remWeeks = Math.floor(result.days / 7)
             const remDays = result.days % 7
             const segs = [
-              { key: 'y', days: result.years * 365.25, count: result.years, color: '#3b82f6', label: L('segYears', 'Years') },
-              { key: 'm', days: result.months * 30.4375, count: result.months, color: '#22c55e', label: L('segMonths', 'Months') },
-              { key: 'w', days: remWeeks * 7, count: remWeeks, color: '#f59e0b', label: L('segWeeks', 'Weeks') },
-              { key: 'd', days: remDays, count: remDays, color: '#a855f7', label: L('segDays', 'Days') },
+              { key: 'y', days: result.years * 365.25, count: result.years, color: 'var(--chart-coral)', label: L('segYears', 'Years') },
+              { key: 'm', days: result.months * 30.4375, count: result.months, color: 'var(--chart-teal)', label: L('segMonths', 'Months') },
+              { key: 'w', days: remWeeks * 7, count: remWeeks, color: 'var(--chart-amber)', label: L('segWeeks', 'Weeks') },
+              { key: 'd', days: remDays, count: remDays, color: 'var(--chart-rust)', label: L('segDays', 'Days') },
             ]
             const total = segs.reduce((s, x) => s + x.days, 0)
             if (total <= 0) return null
@@ -228,7 +228,7 @@ export function DateDifferenceClient() {
                         <span className="font-semibold tabular-nums" style={{ color: 'rgb(var(--text))' }}>
                           {s.count}
                         </span>{' '}
-                        <span className="tabular-nums" style={{ color: 'rgb(var(--text-faint))' }}>
+                        <span className="tabular-nums" style={{ color: 'rgb(var(--text-subtle))' }}>
                           ({((s.days / total) * 100).toFixed(0)}%)
                         </span>
                       </span>
@@ -238,7 +238,7 @@ export function DateDifferenceClient() {
                 {/* 就近里程碑 */}
                 {(prev || next) && (
                   <div className="mt-4 flex flex-wrap items-center gap-2">
-                    <span className="text-xs font-medium" style={{ color: 'rgb(var(--text-faint))' }}>
+                    <span className="text-xs font-medium" style={{ color: 'rgb(var(--text-subtle))' }}>
                       {L('chipsTitle', 'Milestones')}
                     </span>
                     {prev && (

@@ -112,40 +112,40 @@ export function ScratchpadWidget() {
   ]
 
   const toolButtonClass =
-    'inline-flex items-center rounded-md border border-slate-200/80 bg-white px-2 py-1 font-mono text-[10px] uppercase tracking-wide text-slate-500 transition-all duration-150 hover:-translate-y-px hover:border-slate-300 hover:text-slate-700 hover:shadow-sm disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:translate-y-0 disabled:hover:shadow-none dark:border-slate-700 dark:bg-slate-900 dark:text-slate-400 dark:hover:border-slate-600 dark:hover:text-slate-200'
+    'inline-flex items-center rounded-lg border border-hairline bg-canvas px-2 py-1 font-mono text-xs uppercase tracking-wide text-muted-ink transition-colors duration-150 hover:border-hairline hover:text-ink disabled:cursor-not-allowed disabled:opacity-40'
 
   return (
     <section
       aria-labelledby="scratchpad-heading"
-      className="flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200/80 bg-white/70 shadow-sm backdrop-blur-md dark:border-slate-800/80 dark:bg-slate-900/60 dark:shadow-none"
+      className="flex h-full flex-col overflow-hidden rounded-xl border border-hairline bg-canvas"
     >
       {/* 标题栏:图标 + 标题 + ● SAVED 指示(等宽 mono 微标签) */}
-      <header className="flex items-center justify-between gap-3 border-b border-slate-200/60 px-4 py-2.5 dark:border-slate-800/60">
+      <header className="flex items-center justify-between gap-3 border-b border-hairline px-4 py-2.5">
         <div className="flex min-w-0 items-center gap-2.5">
-          <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-indigo-50 text-indigo-600 dark:bg-indigo-950/50 dark:text-indigo-400">
+          <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-surface-card text-ink">
             <NotebookPen className="h-3.5 w-3.5" aria-hidden="true" />
           </span>
           <h2
             id="scratchpad-heading"
-            className="truncate text-sm font-semibold text-slate-900 dark:text-slate-100"
+            className="truncate text-sm font-semibold text-ink"
           >
             {t(locale, 'scratchpadTitle')}
           </h2>
         </div>
         {/* ● SAVED:输入后 1.2s 内显示脉冲绿点 */}
         <span
-          className={`inline-flex shrink-0 items-center gap-1.5 rounded-full border px-2 py-0.5 font-mono text-[10px] uppercase tracking-wider transition-colors ${
+          className={`inline-flex shrink-0 items-center gap-1.5 rounded-full border px-2 py-0.5 font-mono text-xs uppercase tracking-wider transition-colors ${
             !scratchpadSaved && scratchpadReady
               ? 'border-amber-200 bg-amber-50 text-amber-700 dark:border-amber-800 dark:bg-amber-950/40 dark:text-amber-400'
               : savePulse
               ? 'border-emerald-200 bg-emerald-50 text-emerald-600 dark:border-emerald-800/60 dark:bg-emerald-950/40 dark:text-emerald-400'
-              : 'border-slate-200/80 text-slate-400 dark:border-slate-700 dark:text-slate-500'
+              : 'border-hairline text-muted-ink'
           }`}
           aria-live="polite"
         >
           <span
             className={`h-1.5 w-1.5 rounded-full ${
-              !scratchpadSaved && scratchpadReady ? 'bg-amber-500' : savePulse ? 'motion-safe:animate-pulse bg-emerald-500' : 'bg-slate-300 dark:bg-slate-600'
+              !scratchpadSaved && scratchpadReady ? 'bg-amber-500' : savePulse ? 'bg-emerald-500' : 'bg-[rgb(var(--text-subtle))]'
             }`}
           />
           {scratchpadReady ? t(locale, scratchpadSaved ? 'scratchpadSaved' : 'scratchpadUnsaved') : '…'}
@@ -153,7 +153,7 @@ export function ScratchpadWidget() {
       </header>
 
       {/* 快捷工具栏:文本变换微按钮 + 右侧错误提示 / Copy / Clear */}
-      <div className="flex flex-wrap items-center gap-1.5 border-b border-slate-200/60 px-3 py-2 dark:border-slate-800/60">
+      <div className="flex flex-wrap items-center gap-1.5 border-b border-hairline px-3 py-2">
         {TOOLBAR_ACTIONS.map(({ key, labelKey }) => (
           <button
             key={key}
@@ -168,7 +168,7 @@ export function ScratchpadWidget() {
         {/* 错误提示(非法 JSON / Base64,1.6s 自动消失) */}
         <span
           aria-live="polite"
-          className={`ml-1 font-mono text-[10px] text-red-500 transition-opacity dark:text-red-400 ${
+          className={`ml-1 font-mono text-xs text-red-500 transition-opacity dark:text-red-400 ${
             actionError ? 'opacity-100' : 'opacity-0'
           }`}
         >
@@ -233,15 +233,15 @@ export function ScratchpadWidget() {
         placeholder={t(locale, 'scratchpadPlaceholder')}
         aria-label={t(locale, 'scratchpadTitle')}
         spellCheck={false}
-        className="h-[140px] w-full flex-1 resize-y bg-transparent px-4 py-3 font-mono text-sm leading-relaxed text-slate-800 placeholder:text-slate-400 focus:outline-none dark:text-slate-200 dark:placeholder:text-slate-500"
+        className="h-[140px] w-full flex-1 resize-y bg-transparent px-4 py-3 font-mono text-sm leading-relaxed text-ink placeholder:text-muted-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary"
       />
 
       {/* 状态栏:统计(等宽数字) */}
-      <footer className="flex items-center justify-between gap-3 border-t border-slate-200/60 px-4 py-2 dark:border-slate-800/60">
-        <span className="font-mono text-[11px] tabular-nums text-slate-400 dark:text-slate-500">
+      <footer className="flex items-center justify-between gap-3 border-t border-hairline px-4 py-2">
+        <span className="font-mono text-[11px] tabular-nums text-muted-ink">
           {t(locale, 'scratchpadStats', { words, chars })}
         </span>
-        <span className="font-mono text-[10px] uppercase tracking-wider text-slate-300 dark:text-slate-600">
+        <span className="font-mono text-xs uppercase tracking-wider text-muted-ink">
           localStorage · auto
         </span>
       </footer>

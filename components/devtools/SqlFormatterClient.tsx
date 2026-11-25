@@ -336,7 +336,7 @@ export function SqlFormatterClient() {
             <span className="text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>{mode === 'format' ? L('formattedSql', 'Formatted SQL') : L('minifiedSql', 'Minified SQL')}</span>
             <CopyButton value={result.output} label={L('copy', 'Copy')} />
           </div>
-          <pre
+          <pre data-code-output
             className="overflow-x-auto rounded-lg border bg-slate-50 p-4 text-xs dark:bg-slate-800/60"
             style={{ borderColor: 'rgb(var(--border))' }}
           >

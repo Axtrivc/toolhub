@@ -224,8 +224,8 @@ export const AverageCalculatorClient = makeCalculatorClient({
     return {
       xLabels,
       lines: [
-        { key: 'value', label: 'Value', color: '#3b82f6', points: nums },
-        { key: 'mean', label: 'Mean', color: '#f59e0b', points: nums.map(() => mean), dashed: true },
+        { key: 'value', label: 'Value', color: 'var(--chart-coral)', points: nums },
+        { key: 'mean', label: 'Mean', color: 'var(--chart-amber)', points: nums.map(() => mean), dashed: true },
       ],
     }
   },

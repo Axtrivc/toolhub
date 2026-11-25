@@ -199,16 +199,16 @@ export function GptTokenCounterClient() {
         </div>
         <div className="flex items-end">
           <div
-            className="w-full rounded-xl border border-primary/20 bg-gradient-to-br from-primary/5 to-primary/10 p-4 text-center shadow-sm"
+            className="w-full rounded-xl bg-surface-dark p-5 text-on-dark"
           >
-            <div className="text-xs font-medium uppercase tracking-wide" style={{ color: 'rgb(var(--text-subtle))' }}>
+            <div className="text-xs font-medium uppercase tracking-wide" style={{ color: 'rgb(var(--on-dark-soft))' }}>
               {L('estimatedTotalCost', 'Estimated total cost')} ({model.label})
             </div>
-            <div className="mt-1 font-mono text-2xl font-bold text-primary sm:text-3xl">{formatUsd(totalCost)}</div>
-            <div className="mt-1 text-xs" style={{ color: 'rgb(var(--text-faint))' }}>
+            <div className="mt-1 font-serif text-3xl font-normal sm:text-4xl">{formatUsd(totalCost)}</div>
+            <div className="mt-1 text-xs" style={{ color: 'rgb(var(--on-dark-soft))' }}>
               {L('inputCostLine', 'Input:')} {formatUsd(inputCost)} · ~{stats.tokens.toLocaleString('en-US')} {L('inputTokens', 'input tokens')}
             </div>
-            <div className="text-xs" style={{ color: 'rgb(var(--text-faint))' }}>
+            <div className="text-xs" style={{ color: 'rgb(var(--on-dark-soft))' }}>
               {L('outputCostLine', 'Output:')} {formatUsd(outputCost)} · {outputTok.toLocaleString('en-US')} {L('outputTokens', 'output tokens')}
             </div>
           </div>
@@ -222,8 +222,8 @@ export function GptTokenCounterClient() {
           centerLabel={L('chartCenter', 'Total')}
           centerValue={formatUsd(totalCost)}
           slices={[
-            { label: `${L('sliceInput', 'Input')} (${model.label})`, value: inputCost, color: '#3b82f6' },
-            { label: L('sliceOutput', 'Output'), value: outputCost, color: '#f59e0b' },
+            { label: `${L('sliceInput', 'Input')} (${model.label})`, value: inputCost, color: 'var(--chart-coral)' },
+            { label: L('sliceOutput', 'Output'), value: outputCost, color: 'var(--chart-amber)' },
           ]}
         />
       )}

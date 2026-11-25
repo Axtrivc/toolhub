@@ -230,7 +230,7 @@ export function EbayFeeCalculatorClient() {
                 placeholder={platform === 'ebay' ? String(EBAY_PRESETS[Number(ebayPreset)]?.pct ?? 13.6) : '6.5'}
               />
               {overridePct.trim() === '' && (
-                <p className="mt-1 text-xs" style={{ color: 'rgb(var(--text-faint))' }}>
+                <p className="mt-1 text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>
                   {L('keepPresetRate', 'Leave blank to keep the preset rate.')}
                 </p>
               )}
@@ -266,9 +266,9 @@ export function EbayFeeCalculatorClient() {
               {
                 label: L('cmpSale', 'Sale price (item + shipping)'),
                 segments: [
-                  { label: L('segKeep', 'You keep'), value: parsed.payout, color: '#22c55e' },
-                  { label: L('segFixedFees', 'Fixed fees'), value: parsed.fixedFees, color: '#f59e0b' },
-                  { label: L('segVarFees', 'Variable fees'), value: parsed.varFees, color: '#ef4444' },
+                  { label: L('segKeep', 'You keep'), value: parsed.payout, color: 'var(--chart-teal)' },
+                  { label: L('segFixedFees', 'Fixed fees'), value: parsed.fixedFees, color: 'var(--chart-amber)' },
+                  { label: L('segVarFees', 'Variable fees'), value: parsed.varFees, color: 'var(--chart-ink)' },
                 ],
               },
             ]}

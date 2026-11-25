@@ -124,7 +124,7 @@ export function CsvToFinetuneClient() {
             </span>
             <CopyButton value={result.jsonl} />
           </div>
-          <pre className="max-h-72 overflow-auto rounded-lg border p-4 font-mono text-xs whitespace-pre" style={{ borderColor: 'rgb(var(--border))', backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text))' }}>{result.jsonl}</pre>
+          <pre data-code-output className="max-h-72 overflow-auto rounded-lg border p-4 font-mono text-xs whitespace-pre" style={{ borderColor: 'rgb(var(--border))', backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text))' }}>{result.jsonl}</pre>
         </div>
       )}
       {result.jsonl && (
@@ -256,7 +256,7 @@ export function TokenVisualizerClient() {
                 .replace(/\{total\}/g, chunks.length.toLocaleString(numberLocale))}
             </p>
           )}
-          <p className="text-xs" style={{ color: 'rgb(var(--text-faint))' }}>
+          <p className="text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>
             {L('hint', 'Each colored block ≈ one token. Whitespace shown as ␣ merges into the following token — roughly how BPE tokenizers behave.')}
           </p>
           <ResultActions summary={tokenDump} filename="tokens.txt" downloadContent={tokenDump} mime="text/plain;charset=utf-8;" copyLabel={L('copyTokens', 'Copy tokens')} />
@@ -323,7 +323,7 @@ export function EmbeddingPriceClient() {
           title={L('chartTitle', 'Monthly cost by model')}
           rows={stats.rows.filter(({ monthly }) => monthly > 0).map(({ m, monthly }, i) => ({
             label: m.label,
-            segments: [{ label: i === 0 ? L('cheapestLabel', 'cheapest') : L('costLabel', 'per month'), value: monthly, color: i === 0 ? '#22c55e' : '#3b82f6' }],
+            segments: [{ label: i === 0 ? L('cheapestLabel', 'cheapest') : L('costLabel', 'per month'), value: monthly, color: i === 0 ? 'var(--chart-teal)' : 'var(--chart-coral)' }],
           }))}
           formatTotal={(n) => `$${n < 0.01 ? n.toExponential(1) : fmtNum(n, 2)}`}
         />
@@ -345,19 +345,19 @@ export function EmbeddingPriceClient() {
                     {m.label}
                     {i === 0 && <span className="ml-2 text-xs text-green-600 dark:text-green-400">{L('cheapest', 'cheapest')}</span>}
                   </td>
-                  <td className="px-3 py-2 font-mono text-xs" style={{ color: 'rgb(var(--text-faint))' }}>{m.dims.toLocaleString('en-US')}</td>
-                  <td className="px-3 py-2 font-mono text-xs" style={{ color: 'rgb(var(--text-faint))' }}>{m.ctx.toLocaleString('en-US')}</td>
-                  <td className="px-3 py-2 font-mono text-xs" style={{ color: 'rgb(var(--text-faint))' }}>${m.pricePer1M === 0 ? '0' : fmtNum(m.pricePer1M, 3)}</td>
+                  <td className="px-3 py-2 font-mono text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>{m.dims.toLocaleString('en-US')}</td>
+                  <td className="px-3 py-2 font-mono text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>{m.ctx.toLocaleString('en-US')}</td>
+                  <td className="px-3 py-2 font-mono text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>${m.pricePer1M === 0 ? '0' : fmtNum(m.pricePer1M, 3)}</td>
                   <td className="px-3 py-2 font-mono" style={{ color: 'rgb(var(--text))' }}>${perRun < 0.01 ? perRun.toExponential(1) : fmtNum(perRun, 4)}</td>
                   <td className="px-3 py-2 font-mono font-semibold" style={{ color: 'rgb(var(--text))' }}>${fmtNum(monthly, 2)}</td>
-                  <td className="px-3 py-2 font-mono text-xs whitespace-nowrap" style={{ color: 'rgb(var(--text-faint))' }}>{storage}</td>
+                  <td className="px-3 py-2 font-mono text-xs whitespace-nowrap" style={{ color: 'rgb(var(--text-subtle))' }}>{storage}</td>
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
       ) : (
-        <p className="text-sm" style={{ color: 'rgb(var(--text-faint))' }}>{L('invalid', 'Enter non-negative numbers')}</p>
+        <p className="text-sm" style={{ color: 'rgb(var(--text-subtle))' }}>{L('invalid', 'Enter non-negative numbers')}</p>
       )}
       <ResultActions
         summary={stats ? stats.rows.map(({ m, monthly }) => `${m.label}: $${fmtNum(monthly, 2)}/mo`).join('\n') : ''}

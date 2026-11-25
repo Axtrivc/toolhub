@@ -155,12 +155,12 @@ export function AgeCalculatorClient() {
               <span>
                 {result.years}
                 {/* 单位随数值取单/复数(1 year / 2 years),与下方 nextBirthday 的 day/days 同法 */}
-                <span className="text-base font-normal text-slate-500 dark:text-slate-400">{result.years === 1 ? L('yrAbbr', ' yr ') : L('yrsAbbr', ' yrs ')}</span>
+                <span className="text-base font-normal text-muted-ink">{result.years === 1 ? L('yrAbbr', ' yr ') : L('yrsAbbr', ' yrs ')}</span>
                 {/* months 是总月数(供 totalMonths 卡复用),此处展示取 12 的余数 */}
                 {result.months % 12}
-                <span className="text-base font-normal text-slate-500 dark:text-slate-400">{result.months % 12 === 1 ? L('monthAbbr', ' mo ') : L('moAbbr', ' mo ')}</span>
+                <span className="text-base font-normal text-muted-ink">{result.months % 12 === 1 ? L('monthAbbr', ' mo ') : L('moAbbr', ' mo ')}</span>
                 {result.days}
-                <span className="text-base font-normal text-slate-500 dark:text-slate-400">{result.days === 1 ? L('dayAbbr', ' day') : L('daysAbbr', ' days')}</span>
+                <span className="text-base font-normal text-muted-ink">{result.days === 1 ? L('dayAbbr', ' day') : L('daysAbbr', ' days')}</span>
               </span>
             }
             highlight
@@ -198,7 +198,7 @@ export function AgeCalculatorClient() {
           </div>
         </>
       ) : (
-        <div className="rounded-lg border-2 border-dashed p-6 text-center text-sm" style={{ borderColor: 'rgb(var(--border-strong))', color: 'rgb(var(--text-faint))' }}>
+        <div className="rounded-lg border-2 border-dashed p-6 text-center text-sm" style={{ borderColor: 'rgb(var(--border-strong))', color: 'rgb(var(--text-subtle))' }}>
           {L('emptyState', 'The "age at date" must be after the date of birth')}
         </div>
       )}

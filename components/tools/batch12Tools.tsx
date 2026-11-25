@@ -67,7 +67,7 @@ export function KeycodeInfoClient() {
           <div className="text-4xl font-bold" style={{ color: 'rgb(var(--text))' }}>
             {last ? String(last.key) : L('pressPrompt', 'Click here, then press any key')}
           </div>
-          {last && <div className="mt-1 font-mono text-xs" style={{ color: 'rgb(var(--text-faint))' }}>{String(last.code)}</div>}
+          {last && <div className="mt-1 font-mono text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>{String(last.code)}</div>}
         </div>
       </div>
 
@@ -84,7 +84,7 @@ export function KeycodeInfoClient() {
           <div className="mb-2 flex items-center justify-between">
             <span className="text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>{L('recentKeys', 'Recent keys')}</span>
             {/* A3:-my-1 抵消 padding 增量,触控高度补到 ~32px(与 makeTextTool 的 Clear 同款) */}
-            <button type="button" onClick={() => setHistory([])} className="-my-1 rounded-md px-2 py-1.5 text-xs text-slate-400 hover:text-red-500 dark:text-slate-500">
+            <button type="button" onClick={() => setHistory([])} className="-my-1 rounded-md px-2 py-1.5 text-xs text-muted-ink hover:text-red-500 dark:text-muted-ink">
               {L('clearHistory', 'Clear')}
             </button>
           </div>
@@ -170,7 +170,7 @@ export function MimeTypeLookupClient() {
               </tr>
             ))}
             {results.length === 0 && (
-              <tr><td colSpan={3} className="px-4 py-4 text-center text-sm" style={{ color: 'rgb(var(--text-faint))' }}>{L('noMatch', 'No matching types')}</td></tr>
+              <tr><td colSpan={3} className="px-4 py-4 text-center text-sm" style={{ color: 'rgb(var(--text-subtle))' }}>{L('noMatch', 'No matching types')}</td></tr>
             )}
           </tbody>
         </table>
@@ -330,7 +330,7 @@ export function XmlFormatterClient() {
             <span className="text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>{L('outputLabel', 'Result')}</span>
             <CopyButton value={output} />
           </div>
-          <pre className="overflow-x-auto rounded-lg border p-4 font-mono text-xs whitespace-pre-wrap" style={{ borderColor: 'rgb(var(--border))', backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text))' }}>{output}</pre>
+          <pre data-code-output className="overflow-x-auto rounded-lg border p-4 font-mono text-xs whitespace-pre-wrap" style={{ borderColor: 'rgb(var(--border))', backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text))' }}>{output}</pre>
         </div>
       )}
       <ResultActions summary={output} filename="formatted.xml" downloadContent={output} mime="application/xml;charset=utf-8;" disabled={!output} />
@@ -412,11 +412,11 @@ export function MarkdownTocGeneratorClient() {
             </span>
             <CopyButton value={toc} />
           </div>
-          <pre className="overflow-x-auto rounded-lg border p-4 font-mono text-xs whitespace-pre-wrap" style={{ borderColor: 'rgb(var(--border))', backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text))' }}>{toc}</pre>
+          <pre data-code-output className="overflow-x-auto rounded-lg border p-4 font-mono text-xs whitespace-pre-wrap" style={{ borderColor: 'rgb(var(--border))', backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text))' }}>{toc}</pre>
         </div>
       )}
       {md && count === 0 && (
-        <p className="text-sm" style={{ color: 'rgb(var(--text-faint))' }}>{L('noHeadings', 'No H2-H6 headings found above the chosen depth.')}</p>
+        <p className="text-sm" style={{ color: 'rgb(var(--text-subtle))' }}>{L('noHeadings', 'No H2-H6 headings found above the chosen depth.')}</p>
       )}
       <CalculatorNote>{L('note', '📑 Slugs follow GitHub’s algorithm: lowercase, spaces to dashes, punctuation stripped, and duplicate headings get -1/-2 suffixes — so anchor links actually land on the right heading.')}</CalculatorNote>
     </div>

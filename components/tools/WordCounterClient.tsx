@@ -125,27 +125,21 @@ export function WordCounterClient() {
         {metricCards.map((m) => (
           <div
             key={m.label}
-            className={`rounded-lg border p-4 text-center ${
-              m.highlight
-                ? 'border-brand-200 bg-brand-50 dark:border-brand-800/60 dark:bg-brand-900/30'
-                : 'border-slate-200 bg-white dark:border-slate-700 dark:bg-slate-800'
-            }`}
+            className={`min-w-0 rounded-xl border p-4 sm:p-5 ${m.highlight ? 'border-transparent bg-surface-dark text-on-dark' : 'border-hairline bg-canvas text-ink'}`}
           >
             <div
-              className={`text-2xl font-bold tabular-nums ${
-                m.highlight ? 'text-brand-600 dark:text-brand-400' : 'text-slate-900 dark:text-white'
-              }`}
+              className="break-words font-serif text-3xl font-normal leading-none tracking-tight tabular-nums sm:text-4xl"
             >
               {m.value}
             </div>
-            <div className="mt-1 text-xs font-medium text-slate-500 dark:text-slate-400">{m.label}</div>
+            <div className={`mt-2 text-xs font-medium ${m.highlight ? 'text-on-dark-soft' : 'text-body'}`}>{m.label}</div>
           </div>
         ))}
       </div>
 
       {/* 文本输入区 */}
       <div>
-        <div className="mb-2 flex items-center justify-between">
+        <div className="mb-2 flex flex-wrap items-center justify-between gap-2">
           <label htmlFor="text-input" className="text-sm font-medium text-slate-700 dark:text-slate-300">
             {L('yourText', 'Your text')}
           </label>
@@ -156,7 +150,7 @@ export function WordCounterClient() {
               <button
                 type="button"
                 onClick={() => setText('')}
-                className="-my-1 rounded-md px-2 py-1.5 text-xs text-slate-400 hover:text-red-500 dark:text-slate-500 dark:hover:text-red-400 sm:text-sm"
+                className="-my-1 rounded-md px-2 py-1.5 text-xs text-muted-ink hover:text-red-500 dark:text-muted-ink dark:hover:text-red-400 sm:text-sm"
               >
                 {L('clear', 'Clear')}
               </button>
@@ -173,7 +167,7 @@ export function WordCounterClient() {
         />
       </div>
 
-      <p className="rounded-md bg-slate-50 p-3 text-xs text-slate-500 dark:bg-slate-800/60 dark:text-slate-400">
+      <p className="rounded-md bg-slate-50 p-3 text-xs text-muted-ink dark:bg-slate-800/60 dark:text-slate-400">
         {L('privacyNote', '🔒 Your text is analyzed locally in your browser and never uploaded anywhere.')}
       </p>
     </div>

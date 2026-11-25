@@ -110,8 +110,8 @@ export const CollegeSavingsCalculatorClient = makeCalculatorClient({
     return {
       xLabels: marks.map((y) => (y === 0 ? 'Now' : `Y${y}`)),
       lines: [
-        { key: 'balance', label: 'Projected account balance', color: '#3b82f6', points: marks.map(balanceAt), area: true },
-        { key: 'target', label: 'Total cost of college', color: '#ef4444', points: marks.map(() => total), dashed: true },
+        { key: 'balance', label: 'Projected account balance', color: 'var(--chart-coral)', points: marks.map(balanceAt), area: true },
+        { key: 'target', label: 'Total cost of college', color: 'var(--chart-ink)', points: marks.map(() => total), dashed: true },
       ],
       formatY: (n2) => fmtUSD(n2, 0),
     }
@@ -173,9 +173,9 @@ export const Match401kCalculatorClient = makeCalculatorClient({
   chart: {
     title: 'Annual money going into your 401(k)',
     slices: [
-      { valueKey: 'yourContribution', label: 'Your contribution', color: '#3b82f6' },
-      { valueKey: 'employerMatch', label: 'Employer match', color: '#22c55e' },
-      { valueKey: 'unclaimedMatch', label: 'Unclaimed match', color: '#ef4444' },
+      { valueKey: 'yourContribution', label: 'Your contribution', color: 'var(--chart-coral)' },
+      { valueKey: 'employerMatch', label: 'Employer match', color: 'var(--chart-teal)' },
+      { valueKey: 'unclaimedMatch', label: 'Unclaimed match', color: 'var(--chart-ink)' },
     ],
     centerLabel: 'Annual total',
   },
@@ -267,9 +267,9 @@ export const SocialSecurityBreakEvenCalculatorClient = makeCalculatorClient({
     return {
       xLabels: ages.map((a) => `${a}`),
       lines: [
-        { key: 'at62', label: 'Claim at 62', color: '#3b82f6', points: ages.map((a) => cum(b62, 62 * 12, a)), area: true },
-        { key: 'atFRA', label: 'Claim at FRA', color: '#22c55e', points: ages.map((a) => cum(pia, fraM, a)) },
-        { key: 'at70', label: 'Claim at 70', color: '#f59e0b', points: ages.map((a) => cum(b70, 70 * 12, a)) },
+        { key: 'at62', label: 'Claim at 62', color: 'var(--chart-coral)', points: ages.map((a) => cum(b62, 62 * 12, a)), area: true },
+        { key: 'atFRA', label: 'Claim at FRA', color: 'var(--chart-teal)', points: ages.map((a) => cum(pia, fraM, a)) },
+        { key: 'at70', label: 'Claim at 70', color: 'var(--chart-amber)', points: ages.map((a) => cum(b70, 70 * 12, a)) },
       ],
       formatY: (n2) => fmtUSD(n2, 0),
     }
@@ -385,9 +385,9 @@ export const StudentLoanCalculatorClient = makeCalculatorClient({
     return {
       xLabels: marks.map((m) => `${Math.round(m / 12)}y`),
       lines: [
-        { key: 'std', label: 'Standard 10-yr', color: '#3b82f6', points: walk(() => stdPay), area: true },
-        { key: 'grad', label: 'Graduated 10-yr', color: '#a855f7', points: walk((m) => k * blocks[Math.min(4, Math.floor(m / 24))]) },
-        { key: 'ext', label: 'Extended 25-yr', color: '#f59e0b', points: walk(() => extPay) },
+        { key: 'std', label: 'Standard 10-yr', color: 'var(--chart-coral)', points: walk(() => stdPay), area: true },
+        { key: 'grad', label: 'Graduated 10-yr', color: 'var(--chart-rust)', points: walk((m) => k * blocks[Math.min(4, Math.floor(m / 24))]) },
+        { key: 'ext', label: 'Extended 25-yr', color: 'var(--chart-amber)', points: walk(() => extPay) },
       ],
       formatY: (n2) => fmtUSD(n2, 0),
     }
@@ -461,8 +461,8 @@ export const CarLeaseCalculatorClient = makeCalculatorClient({
   chart: {
     title: 'What makes up the payment',
     slices: [
-      { valueKey: 'depPart', label: 'Depreciation', color: '#3b82f6' },
-      { valueKey: 'rentPart', label: 'Rent charge', color: '#f59e0b' },
+      { valueKey: 'depPart', label: 'Depreciation', color: 'var(--chart-coral)' },
+      { valueKey: 'rentPart', label: 'Rent charge', color: 'var(--chart-amber)' },
     ],
     centerLabel: 'Monthly',
   },
@@ -542,10 +542,10 @@ export const EvChargingCostCalculatorClient = makeCalculatorClient({
     return {
       rows: [
         { label: 'EV charging', segments: [
-          { label: 'Annual cost', value: kwh * (1 - share) * home + kwh * share * pub, color: '#22c55e' },
+          { label: 'Annual cost', value: kwh * (1 - share) * home + kwh * share * pub, color: 'var(--chart-teal)' },
         ] },
         { label: 'Gas car', segments: [
-          { label: 'Annual cost', value: (miles / mpg) * gas, color: '#ef4444' },
+          { label: 'Annual cost', value: (miles / mpg) * gas, color: 'var(--chart-ink)' },
         ] },
       ],
       formatTotal: (n2) => fmtUSD(n2, 0),
@@ -595,9 +595,9 @@ export const RentBudgetCalculatorClient = makeCalculatorClient({
   chart: {
     title: '50/30/20 budget split',
     slices: [
-      { valueKey: 'rentCap50', label: 'Needs 50%', color: '#3b82f6' },
-      { valueKey: 'wants30', label: 'Wants 30%', color: '#f59e0b' },
-      { valueKey: 'savings20', label: 'Savings 20%', color: '#22c55e' },
+      { valueKey: 'rentCap50', label: 'Needs 50%', color: 'var(--chart-coral)' },
+      { valueKey: 'wants30', label: 'Wants 30%', color: 'var(--chart-amber)' },
+      { valueKey: 'savings20', label: 'Savings 20%', color: 'var(--chart-teal)' },
     ],
     centerLabel: 'After-tax income',
   },
@@ -654,9 +654,9 @@ export const ChristmasBudgetCalculatorClient = makeCalculatorClient({
   chart: {
     title: 'Holiday budget breakdown',
     slices: [
-      { valueKey: 'giftPool', label: 'Gifts 70%', color: '#ef4444' },
-      { valueKey: 'decor', label: 'Decorations 15%', color: '#22c55e' },
-      { valueKey: 'food', label: 'Food & hosting 15%', color: '#f59e0b' },
+      { valueKey: 'giftPool', label: 'Gifts 70%', color: 'var(--chart-ink)' },
+      { valueKey: 'decor', label: 'Decorations 15%', color: 'var(--chart-teal)' },
+      { valueKey: 'food', label: 'Food & hosting 15%', color: 'var(--chart-amber)' },
     ],
     centerLabel: 'Total',
   },

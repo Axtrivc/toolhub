@@ -74,13 +74,11 @@ export function BlogIndex({ posts }: BlogIndexProps) {
       {posts.length === 0 ? (
         <p>{t(locale, 'blogIndexEmpty')}</p>
       ) : (
-        <ul className="mt-2 space-y-8">
+        <ul className="grid gap-5">
           {posts.map((post) => (
             <li key={post.slug}>
-              <article
-                className="group rounded-2xl border border-slate-200/80 bg-white p-6 shadow-sm transition-all duration-300 hover:border-blue-400/80 hover:shadow-[0_20px_40px_-12px_rgba(37,99,235,0.22)] dark:border-slate-800/80 dark:bg-slate-900 dark:hover:border-blue-500/60"
-              >
-                <Link href={`/blog/${post.slug}/`} className="block">
+              <article className="rounded-xl bg-surface-card">
+                <Link href={`/blog/${post.slug}/`} className="block rounded-xl p-5 sm:p-8">
                   {/* 元信息行:日期 · 阅读时长 · 标签 */}
                   <div
                     className="mb-3 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs"
@@ -93,7 +91,7 @@ export function BlogIndex({ posts }: BlogIndexProps) {
 
                   {/* 文章标题(本地化) */}
                   <h2
-                    className="text-xl font-bold transition-colors group-hover:text-brand-600 sm:text-2xl"
+                    className="max-w-2xl font-serif text-[28px] font-normal leading-[1.15] tracking-[-.3px] sm:text-4xl sm:tracking-[-.5px]"
                     style={{ color: 'rgb(var(--text))' }}
                   >
                     {getPostTitle(locale, post)}
@@ -101,7 +99,7 @@ export function BlogIndex({ posts }: BlogIndexProps) {
 
                   {/* 文章摘要(本地化) */}
                   <p
-                    className="mt-3 line-clamp-2 text-sm leading-relaxed sm:text-base"
+                    className="mt-3 max-w-2xl text-base leading-relaxed"
                     style={{ color: 'rgb(var(--text-muted))' }}
                   >
                     {getPostDescription(locale, post)}
@@ -113,15 +111,14 @@ export function BlogIndex({ posts }: BlogIndexProps) {
                       {post.tags.map((tag) => (
                         <span
                           key={tag}
-                          className="inline-flex items-center rounded-full bg-slate-100 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-slate-500 dark:bg-slate-800 dark:text-slate-400"
+                          className="inline-flex items-center rounded-full bg-canvas px-3 py-1 text-xs font-medium text-body"
                         >
                           #{tag}
                         </span>
                       ))}
                     </div>
                     <span
-                      className="text-sm font-medium"
-                      style={{ color: 'rgb(var(--text-muted))' }}
+                      className="text-sm font-medium text-brand-700 dark:text-brand-400"
                     >
                       {t(locale, 'blogReadMore')} <span aria-hidden="true">→</span>
                     </span>
@@ -139,26 +136,15 @@ export function BlogIndex({ posts }: BlogIndexProps) {
           {t(locale, 'blogCtaBody')}
         </p>
         <div className="flex flex-wrap gap-3">
-          {/* ★ 按钮在 PageShell 的 .prose-content 内,该区域有规则
-              .prose-content a { color: rgb(37 99 235) } (specificity 0,1,1)。
-              它会压过 .btn-primary 的 text-white 和 Tailwind 普通 utility text-white(都是 0,1,0),
-              把文字染成 brand-600 蓝 → 与蓝色背景同色,文字彻底消失。
-              ★ 修复:用 Tailwind `!` important 前缀(!text-white / !no-underline)强制提升权重,
-              压过 prose-content a 的颜色与下划线。 */}
           <Link
             href="/"
-            className="inline-flex items-center gap-2 rounded-xl bg-blue-600 px-5 py-2.5 text-sm font-medium !text-white !no-underline shadow-sm hover:bg-blue-700 active:scale-95 transition-all duration-200"
+            className="btn btn-primary text-sm"
           >
             {t(locale, 'blogCtaExplore')} <span aria-hidden="true">→</span>
           </Link>
           <Link
             href="/about/"
-            className="inline-flex items-center gap-2 rounded-xl border px-5 py-2.5 text-sm font-medium !no-underline shadow-sm transition-all duration-200 hover:opacity-80 active:scale-95"
-            style={{
-              backgroundColor: 'rgb(var(--bg-card))',
-              borderColor: 'rgb(var(--border-strong))',
-              color: 'rgb(var(--text-muted))',
-            }}
+            className="btn btn-secondary text-sm"
           >
             {t(locale, 'blogCtaAbout', { site: SITE_NAME })}
           </Link>

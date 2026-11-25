@@ -71,8 +71,8 @@ export const FuelCostCalculatorClient = makeCalculatorClient({
     const cost = (dist: number) => (dist * c / 100) * p
     return {
       rows: [
-        { label: 'One way', segments: [{ label: 'Fuel cost', value: cost(d), color: '#3b82f6' }] },
-        { label: 'Round trip', segments: [{ label: 'Fuel cost', value: cost(d * 2), color: '#22c55e' }] },
+        { label: 'One way', segments: [{ label: 'Fuel cost', value: cost(d), color: 'var(--chart-coral)' }] },
+        { label: 'Round trip', segments: [{ label: 'Fuel cost', value: cost(d * 2), color: 'var(--chart-teal)' }] },
       ],
       formatTotal: (n) => fmtUSD(n),
     }
@@ -119,7 +119,7 @@ export const SubscriptionCostCalculatorClient = makeCalculatorClient({
     const marks = [0, 12, 24, 36, 48, 60]
     return {
       xLabels: ['Now', 'Y1', 'Y2', 'Y3', 'Y4', 'Y5'],
-      lines: [{ key: 'total', label: 'Total paid', color: '#3b82f6', points: marks.map((m) => perMonth * m), area: true }],
+      lines: [{ key: 'total', label: 'Total paid', color: 'var(--chart-coral)', points: marks.map((m) => perMonth * m), area: true }],
       formatY: (n) => fmtUSD(n),
     }
   },
@@ -170,8 +170,8 @@ export const OvertimeCalculatorClient = makeCalculatorClient({
   chart: {
     title: 'Weekly pay breakdown',
     slices: [
-      { valueKey: 'regularPay', label: 'Regular pay', color: '#3b82f6' },
-      { valueKey: 'otPay', label: 'Overtime pay', color: '#22c55e' },
+      { valueKey: 'regularPay', label: 'Regular pay', color: 'var(--chart-coral)' },
+      { valueKey: 'otPay', label: 'Overtime pay', color: 'var(--chart-teal)' },
     ],
     centerLabel: 'Total weekly',
   },
@@ -237,9 +237,9 @@ export const TakeHomePayCalculatorClient = makeCalculatorClient({
   chart: {
     title: 'Where your salary goes',
     slices: [
-      { valueKey: 'annualNet', label: 'Take-home pay', color: '#22c55e' },
-      { valueKey: 'fedTax', label: 'Federal income tax', color: '#ef4444' },
-      { valueKey: 'fica', label: 'FICA (SS + Medicare)', color: '#f59e0b' },
+      { valueKey: 'annualNet', label: 'Take-home pay', color: 'var(--chart-teal)' },
+      { valueKey: 'fedTax', label: 'Federal income tax', color: 'var(--chart-ink)' },
+      { valueKey: 'fica', label: 'FICA (SS + Medicare)', color: 'var(--chart-amber)' },
     ],
     centerLabel: 'Gross',
   },
@@ -286,12 +286,12 @@ export const WeddingBudgetCalculatorClient = makeCalculatorClient({
   chart: {
     title: 'Budget breakdown',
     slices: [
-      { valueKey: 'venue', label: 'Venue & rentals', color: '#3b82f6' },
-      { valueKey: 'catering', label: 'Catering & bar', color: '#22c55e' },
-      { valueKey: 'photo', label: 'Photo & video', color: '#a855f7' },
-      { valueKey: 'attire', label: 'Attire & beauty', color: '#ec4899' },
-      { valueKey: 'music', label: 'Music & flowers', color: '#f59e0b' },
-      { valueKey: 'misc', label: 'Stationery & buffer', color: '#64748b' },
+      { valueKey: 'venue', label: 'Venue & rentals', color: 'var(--chart-coral)' },
+      { valueKey: 'catering', label: 'Catering & bar', color: 'var(--chart-teal)' },
+      { valueKey: 'photo', label: 'Photo & video', color: 'var(--chart-rust)' },
+      { valueKey: 'attire', label: 'Attire & beauty', color: 'var(--chart-tan)' },
+      { valueKey: 'music', label: 'Music & flowers', color: 'var(--chart-amber)' },
+      { valueKey: 'misc', label: 'Stationery & buffer', color: 'var(--chart-muted)' },
     ],
     centerLabel: 'Total',
   },
@@ -348,8 +348,8 @@ export const HeartRateZoneCalculatorClient = makeCalculatorClient({
     return {
       xLabels: ['Z1', 'Z2', 'Z3', 'Z4', 'Z5'],
       lines: [
-        { key: 'lower', label: 'Zone lower bound', color: '#3b82f6', points: edges.slice(0, 5).map((e) => at(e)) },
-        { key: 'upper', label: 'Zone upper bound', color: '#22c55e', points: edges.slice(1).map((e) => at(e)), area: true },
+        { key: 'lower', label: 'Zone lower bound', color: 'var(--chart-coral)', points: edges.slice(0, 5).map((e) => at(e)) },
+        { key: 'upper', label: 'Zone upper bound', color: 'var(--chart-teal)', points: edges.slice(1).map((e) => at(e)), area: true },
       ],
       formatY: (n) => `${Math.round(n)} bpm`,
     }
@@ -404,10 +404,10 @@ export const CaffeineCalculatorClient = makeCalculatorClient({
     min: 0,
     max: 600,
     zones: [
-      { upTo: 100, color: '#22c55e', label: 'Light' },
-      { upTo: 200, color: '#eab308', label: 'Moderate' },
-      { upTo: 400, color: '#f97316', label: 'High' },
-      { upTo: 600, color: '#ef4444', label: 'Very high' },
+      { upTo: 100, color: 'var(--chart-teal)', label: 'Light' },
+      { upTo: 200, color: 'var(--chart-tan)', label: 'Moderate' },
+      { upTo: 400, color: 'var(--chart-coral)', label: 'High' },
+      { upTo: 600, color: 'var(--chart-ink)', label: 'Very high' },
     ],
     formatValue: (n) => `${Math.round(n)} mg`,
   },
@@ -464,10 +464,10 @@ export const StepsToCaloriesCalculatorClient = makeCalculatorClient({
     return {
       rows: [
         { label: 'Your day', segments: [
-          { label: 'Steps done', value: done, color: '#22c55e' },
-          { label: 'To goal', value: Math.max(0, 10000 - done), color: '#cbd5e1' },
+          { label: 'Steps done', value: done, color: 'var(--chart-teal)' },
+          { label: 'To goal', value: Math.max(0, 10000 - done), color: 'var(--chart-pale)' },
         ] },
-        { label: 'Daily goal', segments: [{ label: 'Goal', value: 10000, color: '#3b82f6' }] },
+        { label: 'Daily goal', segments: [{ label: 'Goal', value: 10000, color: 'var(--chart-coral)' }] },
       ],
       formatTotal: (n) => `${Math.round(n).toLocaleString('en-US')}`,
     }
@@ -531,8 +531,8 @@ export const PaintCalculatorClient = makeCalculatorClient({
     const buy = Math.ceil(exact * 1.1)
     return {
       rows: [
-        { label: 'Exact need', segments: [{ label: 'Liters', value: exact, color: '#3b82f6' }] },
-        { label: 'Buy (with margin)', segments: [{ label: 'Liters', value: buy, color: '#f59e0b' }] },
+        { label: 'Exact need', segments: [{ label: 'Liters', value: exact, color: 'var(--chart-coral)' }] },
+        { label: 'Buy (with margin)', segments: [{ label: 'Liters', value: buy, color: 'var(--chart-amber)' }] },
       ],
       formatTotal: (n) => `${n.toFixed(1)} L`,
     }
@@ -600,13 +600,13 @@ export const DogAgeCalculatorClient = makeCalculatorClient({
     min: 0,
     max: 80,
     zones: [
-      { upTo: 15, color: '#f97316', label: 'Puppy' },
-      { upTo: 24, color: '#f59e0b', label: 'Junior' },
-      { upTo: 40, color: '#22c55e', label: 'Adult (prime)' },
+      { upTo: 15, color: 'var(--chart-ink)', label: 'Puppy' },
+      { upTo: 24, color: 'var(--chart-amber)', label: 'Junior' },
+      { upTo: 40, color: 'var(--chart-teal)', label: 'Adult (prime)' },
       // 55 与 compute 的 stageIdx 阈值(human >= 55 → Senior)对齐;
       // 曾为 56:human=55 时文字标 Senior 而表盘仍落在 Mature 区
-      { upTo: 55, color: '#3b82f6', label: 'Mature' },
-      { upTo: 80, color: '#a855f7', label: 'Senior' },
+      { upTo: 55, color: 'var(--chart-coral)', label: 'Mature' },
+      { upTo: 80, color: 'var(--chart-rust)', label: 'Senior' },
     ],
     formatValue: (n) => `${Math.round(n)} yr`,
   },

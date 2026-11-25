@@ -28,7 +28,7 @@ export function FormulaSection({ slug, tool, l10n }: { slug: string; tool: ToolM
   const name = getToolName(locale, tool.slug, tool.name)
 
   return (
-    <section className="prose-content mt-10 max-w-3xl">
+    <section data-embed-hide className="tool-formula prose-content mt-12 max-w-3xl">
       <h2>{t(locale, 'formulaTitle')}</h2>
       <p>
         {t(locale, 'formulaIntro')
@@ -43,7 +43,13 @@ export function FormulaSection({ slug, tool, l10n }: { slug: string; tool: ToolM
       {/* 桌面端长行不再横向滚动截断(审计:zodiac/chinese-zodiac/heat-index/pregnancy
           四页右缘硬裁)——与 globals.css <640px 的移动端策略保持一致:安全换行
           (pre-wrap + break-words),保留 overflow-x-auto 兜底超长不可断 token。 */}
-      <pre className="overflow-x-auto whitespace-pre-wrap break-words">{formula.formula}</pre>
+      <pre className="overflow-x-auto whitespace-pre-wrap break-words font-mono">
+        {formula.formula.split(/(\b[A-Za-z]+\b|\b\d+(?:\.\d+)?\b)/g).map((part, i) =>
+          /^\d/.test(part) ? <span key={i} className="text-accent-teal">{part}</span>
+            : /^[A-Za-z]+$/.test(part) ? <span key={i} className="text-accent-amber">{part}</span>
+            : part
+        )}
+      </pre>
       {formula.variables && (
         <p>
           <strong>{t(locale, 'formulaVariables')}:</strong> {formula.variables}
@@ -51,7 +57,7 @@ export function FormulaSection({ slug, tool, l10n }: { slug: string; tool: ToolM
       )}
       {formula.explain && <p>{formula.explain}</p>}
       {formula.example && (
-        <p className="rounded-lg p-4 text-sm" style={{ backgroundColor: 'rgb(var(--bg-subtle))' }}>
+        <p className="rounded-lg bg-dark-elevated p-4 text-sm">
           <strong>{t(locale, 'formulaExample')}:</strong> {formula.example}
         </p>
       )}

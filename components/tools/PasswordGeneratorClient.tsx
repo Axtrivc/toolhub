@@ -145,7 +145,7 @@ export function PasswordGeneratorClient() {
         />
       </div>
 
-      <p className="rounded-md bg-slate-50 p-3 text-xs text-slate-500 dark:bg-slate-800 dark:text-slate-400">
+      <p className="rounded-md bg-slate-50 p-3 text-xs text-muted-ink dark:bg-slate-800 dark:text-slate-400">
         {L('privacyNote', '🔒 Privacy note: Passwords are generated locally in your browser using the Web Crypto API and never sent over the network.')}
       </p>
     </div>

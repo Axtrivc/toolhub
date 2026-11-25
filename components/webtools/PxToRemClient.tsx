@@ -89,7 +89,7 @@ export function PxToRemClient() {
         className="rounded-xl border p-4"
         style={{ borderColor: 'rgb(var(--border))', backgroundColor: 'rgb(var(--bg-card))' }}
       >
-        <div className="mb-2 text-xs font-medium uppercase tracking-wide" style={{ color: 'rgb(var(--text-faint))' }}>
+        <div className="mb-2 text-xs font-medium uppercase tracking-wide" style={{ color: 'rgb(var(--text-subtle))' }}>
           {L('livePreview', 'Live size preview')}
         </div>
         <div className="flex min-h-16 items-end gap-4">
@@ -130,13 +130,13 @@ export function PxToRemClient() {
           />
           <div role="status" aria-live="polite" className="mt-2 space-y-1 text-sm">
             <div className="flex items-center justify-between">
-              <span className="text-slate-500 dark:text-slate-400">rem:</span>
+              <span className="text-muted-ink">rem:</span>
               <code className="rounded bg-blue-50 px-2 py-0.5 text-blue-700 dark:bg-blue-950/50 dark:text-blue-300">
                 {fromPx.rem || '—'}
               </code>
             </div>
             <div className="flex items-center justify-between">
-              <span className="text-slate-500 dark:text-slate-400">{L('emParentRoot', 'em (parent = root)')}:</span>
+              <span className="text-muted-ink">{L('emParentRoot', 'em (parent = root)')}:</span>
               <code className="rounded bg-blue-50 px-2 py-0.5 text-blue-700 dark:bg-blue-950/50 dark:text-blue-300">
                 {fromPx.em || '—'}
               </code>
@@ -159,7 +159,7 @@ export function PxToRemClient() {
           />
           <div role="status" aria-live="polite" className="mt-2 space-y-1 text-sm">
             <div className="flex items-center justify-between">
-              <span className="text-slate-500 dark:text-slate-400">px:</span>
+              <span className="text-muted-ink">px:</span>
               <code className="rounded bg-blue-50 px-2 py-0.5 text-blue-700 dark:bg-blue-950/50 dark:text-blue-300">
                 {fromRem || '—'}
               </code>
@@ -193,7 +193,7 @@ export function PxToRemClient() {
                       <div className="h-1.5 overflow-hidden rounded-full" style={{ backgroundColor: 'rgb(var(--bg-subtle))' }}>
                         <div
                           className="h-full rounded-full transition-all duration-200"
-                          style={{ width: `${(p / 80) * 100}%`, backgroundColor: p === rootSize ? '#22c55e' : 'rgb(var(--primary))' }}
+                          style={{ width: `${(p / 80) * 100}%`, backgroundColor: p === rootSize ? 'var(--chart-teal)' : 'rgb(var(--primary))' }}
                         />
                       </div>
                     </td>

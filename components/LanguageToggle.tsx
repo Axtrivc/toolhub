@@ -16,7 +16,7 @@ import { t, SUPPORTED_LOCALES, LOCALE_LABELS, type Locale } from '@/lib/i18n'
  *  - 展开菜单:absolute right-0 mt-2 w-32;rounded-xl + shadow-xl +
  *    毛玻璃 + border;pure-CSS keyframes 淡入(scale 0.95→1 + opacity,
  *    transform/opacity only,GPU 合成)。
- *  - 选项 Item:button + rounded-lg,hover:bg-muted;当前选中项
+ *  - 选项 Item:button + rounded-lg,hover:bg-surface-card;当前选中项
  *    text-primary 高亮 + 右侧对勾。
  *  - 交互:useState(isOpen) 控制开合;pointerdown 监听实现点击外部
  *    自动收起,Escape 键关闭;切换语言时胶囊做一次快速回弹脉冲
@@ -76,7 +76,7 @@ export function LanguageToggle() {
         title={t(locale, 'languageToggle')}
         aria-haspopup="listbox"
         aria-expanded={isOpen}
-        className="flex h-9 items-center gap-1.5 rounded-full border border-border/80 bg-background/80 px-3 py-1.5 text-xs font-medium transition-colors hover:bg-muted"
+        className="flex h-9 items-center gap-1.5 rounded-lg border border-hairline bg-canvas px-3 py-1.5 text-xs font-medium transition-colors hover:bg-surface-card"
         style={{ color: 'rgb(var(--text-muted))' }}
       >
         {LOCALE_LABELS[locale]}
@@ -99,7 +99,7 @@ export function LanguageToggle() {
         <div
           role="listbox"
           aria-label={t(locale, 'languageToggle')}
-          className="animate-lang-menu absolute right-0 z-50 mt-2 w-32 rounded-xl border border-border/80 bg-card/90 p-1.5 shadow-xl backdrop-blur-md max-md:left-0 max-md:right-auto"
+          className="animate-lang-menu absolute right-0 z-50 mt-2 w-32 rounded-xl border border-hairline bg-canvas p-1.5 max-md:left-0 max-md:right-auto"
           style={{ transformOrigin: 'top right' }}
         >
           {SUPPORTED_LOCALES.map((l) => {
@@ -111,8 +111,8 @@ export function LanguageToggle() {
                 role="option"
                 aria-selected={selected}
                 onClick={() => handleSelect(l)}
-                className={`flex w-full items-center justify-between rounded-lg px-2.5 py-1.5 text-left text-xs font-medium transition-colors hover:bg-muted ${
-                  selected ? 'bg-muted/60 text-primary' : ''
+                className={`flex w-full items-center justify-between rounded-lg px-2.5 py-1.5 text-left text-xs font-medium transition-colors hover:bg-surface-card ${
+                  selected ? 'bg-surface-card text-ink' : ''
                 }`}
                 style={selected ? undefined : { color: 'rgb(var(--text-muted))' }}
               >

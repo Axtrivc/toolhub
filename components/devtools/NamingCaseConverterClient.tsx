@@ -127,7 +127,7 @@ export function NamingCaseConverterClient() {
             }}
           />
         )}
-        <p className="mt-1.5 text-xs" style={{ color: 'rgb(var(--text-faint))' }}>
+        <p className="mt-1.5 text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>
           {L('hint', 'Handles spaces, underscores, hyphens, dots, slashes and camelCase/PascalCase boundaries.')}
         </p>
       </div>
@@ -147,7 +147,7 @@ export function NamingCaseConverterClient() {
               <CopyButton value={r.value} label={L('copy', 'Copy')} disabled={!r.value} />
             </div>
             {bulk ? (
-              <pre
+              <pre data-code-output
                 className="whitespace-pre-wrap break-all font-mono text-sm"
                 style={{ color: 'rgb(var(--text))' }}
               >

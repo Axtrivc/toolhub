@@ -88,8 +88,8 @@ export const HysaCalculatorClient = makeCalculatorClient({
       title: 'Balance: Deposits vs Interest',
       centerLabel: 'Final',
       slices: [
-        { valueKey: 'totalDeposited', label: 'You deposited (principal)', color: '#3b82f6' },
-        { valueKey: 'totalInterest', label: 'Interest earned', color: '#22c55e' },
+        { valueKey: 'totalDeposited', label: 'You deposited (principal)', color: 'var(--chart-coral)' },
+        { valueKey: 'totalInterest', label: 'Interest earned', color: 'var(--chart-teal)' },
       ],
     },
     { kind: 'series', title: 'HYSA Growth Over Time', titleKey: 'chartTitleGrowth' },
@@ -116,8 +116,8 @@ export const HysaCalculatorClient = makeCalculatorClient({
     return {
       xLabels,
       lines: [
-        { key: 'balance', label: 'Account balance', color: '#22c55e', points: balance, area: true },
-        { key: 'deposited', label: 'Total deposited', color: '#3b82f6', points: deposited, dashed: true },
+        { key: 'balance', label: 'Account balance', color: 'var(--chart-teal)', points: balance, area: true },
+        { key: 'deposited', label: 'Total deposited', color: 'var(--chart-coral)', points: deposited, dashed: true },
       ],
       highlightBetween: { a: 'deposited', b: 'balance', label: 'Compound interest' },
       formatY: (nn) => fmtUSD(nn, 0),
@@ -232,16 +232,16 @@ export const CdCalculatorClient = makeCalculatorClient({
         {
           label: 'Hold to maturity',
           segments: [
-            { label: 'Principal', value: deposit, color: '#64748b' },
-            { label: 'Interest kept', value: maturityInterest, color: '#22c55e' },
+            { label: 'Principal', value: deposit, color: 'var(--chart-muted)' },
+            { label: 'Interest kept', value: maturityInterest, color: 'var(--chart-teal)' },
           ],
         },
         {
           label: 'Early exit',
           segments: [
-            { label: 'Principal', value: deposit, color: '#64748b' },
-            { label: 'Interest kept', value: Math.max(0, accrued - penalty), color: '#3b82f6' },
-            { label: 'Penalty forfeited', value: penalty, color: '#ef4444' },
+            { label: 'Principal', value: deposit, color: 'var(--chart-muted)' },
+            { label: 'Interest kept', value: Math.max(0, accrued - penalty), color: 'var(--chart-coral)' },
+            { label: 'Penalty forfeited', value: penalty, color: 'var(--chart-ink)' },
           ],
         },
       ],
@@ -310,8 +310,8 @@ export const BreakEvenCalculatorClient = makeCalculatorClient({
         {
           label: 'Price per unit',
           segments: [
-            { label: 'Variable cost', value: variable, color: '#ef4444' },
-            { label: 'Contribution margin', value: price - variable, color: '#22c55e' },
+            { label: 'Variable cost', value: variable, color: 'var(--chart-ink)' },
+            { label: 'Contribution margin', value: price - variable, color: 'var(--chart-teal)' },
           ],
         },
       ],
@@ -408,8 +408,8 @@ export const ProfitMarginCalculatorClient = makeCalculatorClient({
     title: 'Selling Price: Cost vs Profit',
     centerLabel: 'Price',
     slices: [
-      { valueKey: 'costOut', label: 'Cost', color: '#64748b' },
-      { valueKey: 'profit', label: 'Profit', color: '#22c55e' },
+      { valueKey: 'costOut', label: 'Cost', color: 'var(--chart-muted)' },
+      { valueKey: 'profit', label: 'Profit', color: 'var(--chart-teal)' },
     ],
   },
   note: '💡 Margin and markup are NOT the same: a 100% markup (doubling your cost) is only a 50% margin. Margin divides profit by PRICE; markup divides profit by COST. Mixing them up is the #1 pricing mistake in e-commerce.',
@@ -432,11 +432,11 @@ const IF_MODELS = [
  * 数值为研究界的常用经验区间(个体差异大),页面有免责声明。
  */
 const IF_PHASES = [
-  { from: 0, to: 4, label: 'Digesting', desc: 'Blood sugar & insulin rising', color: '#f59e0b' },
-  { from: 4, to: 8, label: 'Absorbing', desc: 'Blood sugar falling back', color: '#eab308' },
-  { from: 8, to: 12, label: 'Glycogen use', desc: 'Liver glycogen depleting', color: '#84cc16' },
-  { from: 12, to: 16, label: 'Fat burning', desc: 'Ketosis begins (fat → ketones)', color: '#22c55e' },
-  { from: 16, to: 24, label: 'Deep ketosis', desc: 'Autophagy ramping up (est.)', color: '#10b981' },
+  { from: 0, to: 4, label: 'Digesting', desc: 'Blood sugar & insulin rising', color: 'var(--chart-amber)' },
+  { from: 4, to: 8, label: 'Absorbing', desc: 'Blood sugar falling back', color: 'var(--chart-tan)' },
+  { from: 8, to: 12, label: 'Glycogen use', desc: 'Liver glycogen depleting', color: 'var(--chart-pale)' },
+  { from: 12, to: 16, label: 'Fat burning', desc: 'Ketosis begins (fat → ketones)', color: 'var(--chart-teal)' },
+  { from: 16, to: 24, label: 'Deep ketosis', desc: 'Autophagy ramping up (est.)', color: 'var(--chart-ink)' },
 ]
 
 /** "HH:MM" → 当日分钟数;非法输入返回 null */
@@ -506,7 +506,7 @@ export function IntermittentFastingClient() {
     segs.push({
       leftPct: 0,
       widthPct: (md.eat / 24) * 100,
-      color: '#3b82f6',
+      color: 'var(--chart-coral)',
       label: L('tlEating', 'Eating window'),
       title: `${fmtTime(eatStart)} – ${fmtTime(eatEnd)} (${md.eat}h)`,
     })
@@ -601,7 +601,7 @@ export function IntermittentFastingClient() {
             </button>
           ))}
         </div>
-        <p className="mt-1.5 text-xs" style={{ color: 'rgb(var(--text-faint))' }}>
+        <p className="mt-1.5 text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>
           {L(`blurb${md.key.replace(':', '-')}`, md.blurb)}
         </p>
       </div>
@@ -628,7 +628,7 @@ export function IntermittentFastingClient() {
           <span className="text-lg font-bold tabular-nums" style={{ color: 'rgb(var(--text))' }}>
             {fmtTime(eatStart)} → {fmtTime(eatEnd)}
           </span>
-          <span className="text-xs" style={{ color: 'rgb(var(--text-faint))' }}>
+          <span className="text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>
             {L('fastingWindow', 'Fasting window')}: {fmtTime(eatEnd)} → {fmtTime(fastEnd)} ({md.fast}h)
           </span>
         </div>
@@ -638,8 +638,8 @@ export function IntermittentFastingClient() {
       <div
         className="rounded-xl border p-4 text-center"
         style={{
-          borderColor: live ? (live.eating ? 'rgb(59 130 246 / 0.4)' : 'rgb(34 197 94 / 0.4)') : 'rgb(var(--border-strong))',
-          backgroundColor: live ? (live.eating ? 'rgb(59 130 246 / 0.06)' : 'rgb(34 197 94 / 0.06)') : 'rgb(var(--bg-subtle))',
+          borderColor: live ? (live.eating ? 'rgb(var(--primary) / 0.4)' : 'rgb(34 197 94 / 0.4)') : 'rgb(var(--border-strong))',
+          backgroundColor: live ? (live.eating ? 'rgb(var(--primary) / 0.06)' : 'rgb(34 197 94 / 0.06)') : 'rgb(var(--bg-subtle))',
         }}
         role="status"
         aria-live="polite"
@@ -649,15 +649,15 @@ export function IntermittentFastingClient() {
             <div className="text-xs font-semibold uppercase tracking-wide" style={{ color: 'rgb(var(--text-subtle))' }}>
               {live.eating ? L('statusEating', '🥗 Eating window — open') : L('statusFasting', '🔥 Fasting — fat burning mode')}
             </div>
-            <div className="mt-1 text-2xl font-bold tabular-nums" style={{ color: live.eating ? '#2563eb' : '#16a34a' }}>
+            <div className="mt-1 font-serif text-2xl font-normal tabular-nums" style={{ color: live.eating ? 'rgb(var(--primary))' : 'var(--positive-text)' }}>
               {live.h}h {live.m}m
             </div>
-            <div className="text-xs" style={{ color: 'rgb(var(--text-faint))' }}>
+            <div className="text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>
               {live.eating ? L('untilClose', 'until your fasting window starts') : L('untilOpen', 'until your eating window opens')}
             </div>
           </>
         ) : (
-          <div className="text-sm" style={{ color: 'rgb(var(--text-faint))' }}>
+          <div className="text-sm" style={{ color: 'rgb(var(--text-subtle))' }}>
             {L('statusLoading', 'Loading your live countdown…')}
           </div>
         )}
@@ -688,7 +688,7 @@ export function IntermittentFastingClient() {
             />
           )}
         </div>
-        <div className="mt-1 flex justify-between text-[10px]" style={{ color: 'rgb(var(--text-faint))' }}>
+        <div className="mt-1 flex justify-between text-[10px]" style={{ color: 'rgb(var(--text-subtle))' }}>
           <span>{fmtTime(eatStart)}</span>
           <span>+6h</span>
           <span>+12h</span>
@@ -844,7 +844,7 @@ export function LlmApiCostClient() {
                 {
                   label: i === 0 ? L('cheapest', 'cheapest') : L('costLabel', 'per month'),
                   value: monthly,
-                  color: i === 0 ? '#22c55e' : '#3b82f6',
+                  color: i === 0 ? 'var(--chart-teal)' : 'var(--chart-coral)',
                 },
               ],
             }))}
@@ -879,10 +879,10 @@ export function LlmApiCostClient() {
                       {m.label}
                       {i === 0 && <span className="ml-2 text-xs text-green-600 dark:text-green-400">{L('cheapest', 'cheapest')}</span>}
                     </td>
-                    <td className="px-3 py-2 font-mono text-xs" style={{ color: 'rgb(var(--text-faint))' }}>${fmtNum(m.inputPer1M, 2)}</td>
-                    <td className="px-3 py-2 font-mono text-xs" style={{ color: 'rgb(var(--text-faint))' }}>${fmtNum(m.outputPer1M, 2)}</td>
+                    <td className="px-3 py-2 font-mono text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>${fmtNum(m.inputPer1M, 2)}</td>
+                    <td className="px-3 py-2 font-mono text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>${fmtNum(m.outputPer1M, 2)}</td>
                     <td className="px-3 py-2 font-mono font-semibold" style={{ color: 'rgb(var(--text))' }}>{fmtCost(monthly)}</td>
-                    <td className="px-3 py-2 font-mono text-xs" style={{ color: monthly - stats.cheapest < 0.005 ? '#16a34a' : 'rgb(var(--text-faint))' }}>
+                    <td className="px-3 py-2 font-mono text-xs" style={{ color: monthly - stats.cheapest < 0.005 ? 'var(--positive-text)' : 'rgb(var(--text-subtle))' }}>
                       {monthly - stats.cheapest < 0.005 ? '—' : `+${fmtCost(monthly - stats.cheapest)}`}
                     </td>
                     <td className="px-3 py-2 font-mono text-xs text-green-600 dark:text-green-400">
@@ -895,7 +895,7 @@ export function LlmApiCostClient() {
           </div>
         </>
       ) : (
-        <p className="text-sm" style={{ color: 'rgb(var(--text-faint))' }}>{L('invalid', 'Enter non-negative token volumes')}</p>
+        <p className="text-sm" style={{ color: 'rgb(var(--text-subtle))' }}>{L('invalid', 'Enter non-negative token volumes')}</p>
       )}
 
       <ResultActions

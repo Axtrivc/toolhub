@@ -21,7 +21,7 @@ export function SkipToContent() {
           main.focus({ preventScroll: true })
         }
       }}
-      className="sr-only z-[100] focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:rounded-lg focus:bg-brand-600 focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:text-white focus:shadow-lg"
+      className="sr-only z-[100] focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:rounded-lg focus:bg-primary focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:text-white"
     >
       {t(locale, 'skipToContent')}
     </a>

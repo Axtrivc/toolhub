@@ -38,20 +38,17 @@ export function SegmentedControl({
       id={id}
       role="group"
       aria-label={ariaLabel}
-      className="relative flex w-full gap-0 rounded-xl p-1 text-sm"
-      style={{ backgroundColor: 'rgb(var(--bg-subtle))' }}
+      className="relative flex w-full gap-0 rounded-xl border border-hairline bg-canvas p-1 text-sm"
     >
       {/* 滑块指示器:绝对定位 + translateX 滑动(width 不含容器左右 padding) */}
       <div
         aria-hidden="true"
-        className="absolute inset-y-1 rounded-lg shadow-sm transition-transform duration-300"
+        className="absolute inset-y-1 rounded-lg bg-surface-card motion-safe:transition-transform"
         style={{
           width: `calc((100% - 0.5rem) / ${n})`,
           left: '0.25rem',
           transform: `translateX(${idx * 100}%)`,
           transitionTimingFunction: 'cubic-bezier(0.22, 1, 0.36, 1)',
-          backgroundColor: 'rgb(var(--bg-card))',
-          border: '1px solid rgb(var(--border))',
         }}
       />
       {options.map((o) => {

@@ -209,13 +209,13 @@ export function BcryptHashGeneratorClient() {
             onChange={(e) => setCost(Number(e.target.value))}
             className="w-full calc-slider"
           />
-          <div className="mt-1 flex justify-between text-xs" style={{ color: 'rgb(var(--text-faint))' }}>
+          <div className="mt-1 flex justify-between text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>
             <span>{L('costFastWeak', '4 (fast, weak)')}</span>
             <span>{L('costTypical', '10–12 (typical)')}</span>
             <span>{L('costSlowStrong', '15 (slow, strong)')}</span>
           </div>
           {/* E1:用户不知道拉到 cost 12/15 要等多久,给出数量级预估(比"能花几秒"更具体) */}
-          <p className="mt-1.5 text-xs" style={{ color: 'rgb(var(--text-faint))' }}>
+          <p className="mt-1.5 text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>
             {L('costTimeHint', '⏱️ ≈ {time} per hash on a typical desktop').replace('{time}', costTimeEstimate(cost))}
           </p>
           {cost > 12 && (
@@ -276,7 +276,7 @@ export function BcryptHashGeneratorClient() {
             </span>
             <CopyButton value={hash} label={L('copyHash', 'Copy hash')} />
           </div>
-          <pre
+          <pre data-code-output
             className="w-full overflow-x-auto whitespace-pre-wrap break-all rounded-lg border p-4 font-mono text-sm shadow-sm"
             style={{ borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rgb(var(--bg-card))', color: 'rgb(var(--text))' }}
           >

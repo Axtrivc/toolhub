@@ -29,8 +29,7 @@ export function PresetChips({
           key={i}
           type="button"
           onClick={() => onApply(p.values)}
-          className="rounded-full border px-3 py-1.5 text-xs font-medium transition-colors hover:bg-slate-100 dark:border-slate-600 dark:hover:bg-slate-800"
-          style={{ borderColor: 'rgb(var(--border-strong))', color: 'rgb(var(--text-muted))' }}
+          className="rounded-full border border-hairline bg-canvas px-3 py-1.5 text-xs font-medium text-body transition-colors hover:bg-surface-card"
         >
           {labelOf(p.label, i)}
         </button>

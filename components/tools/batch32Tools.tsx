@@ -139,7 +139,7 @@ export function UtmLinkBuilderClient() {
             <span className="text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>{L('outputLabel', 'Tracked link')}</span>
             <CopyButton value={result.link} disabled={!result.link} />
           </div>
-          <pre className="overflow-x-auto rounded-lg border p-4 font-mono text-xs whitespace-pre-wrap" style={outVars}>{result.link}</pre>
+          <pre data-code-output className="overflow-x-auto rounded-lg border p-4 font-mono text-xs whitespace-pre-wrap" style={outVars}>{result.link}</pre>
         </div>
       )}
 
@@ -563,7 +563,7 @@ export function GraphqlFormatterClient() {
             <span className="text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>{L('outputLabel', 'Result')}</span>
             <CopyButton value={output} />
           </div>
-          <pre className="overflow-x-auto rounded-lg border p-4 font-mono text-xs whitespace-pre-wrap" style={outVars}>{output}</pre>
+          <pre data-code-output className="overflow-x-auto rounded-lg border p-4 font-mono text-xs whitespace-pre-wrap" style={outVars}>{output}</pre>
         </div>
       )}
       <ResultActions summary={output} filename="query.graphql" downloadContent={output} mime="application/graphql;charset=utf-8;" disabled={!output} />
@@ -669,7 +669,7 @@ export function HttpStatusCodeLookupClient() {
         className="w-full rounded-lg border p-3 shadow-sm outline-none transition focus:ring-2"
         style={txtVars}
       />
-      <p className="text-xs" style={{ color: 'rgb(var(--text-faint))' }}>
+      <p className="text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>
         {results.length} / {HTTP_STATUS_DB.length} · {L('coverageNote', 'All {n} IANA-registered status codes').replace('{n}', String(HTTP_STATUS_DB.length))}
       </p>
       <div className="overflow-x-auto rounded-lg border border-border bg-card">
@@ -686,7 +686,7 @@ export function HttpStatusCodeLookupClient() {
           <tbody>
             {results.map((r) => (
               <tr key={r.code} className="border-b last:border-b-0" style={{ borderColor: 'rgb(var(--border))' }}>
-                <td className="px-4 py-2 font-mono text-xs font-bold" style={{ color: r.code < 400 ? '#059669' : r.code < 500 ? '#d97706' : '#dc2626' }}>{r.code}</td>
+                <td className="px-4 py-2 font-mono text-xs font-bold" style={{ color: r.code < 400 ? 'var(--positive-text)' : r.code < 500 ? 'var(--warning-text)' : 'var(--negative-text)' }}>{r.code}</td>
                 <td className="px-4 py-2 font-mono text-xs" style={{ color: 'rgb(var(--text))' }}>{r.name}</td>
                 <td className="px-4 py-2 text-xs" style={{ color: 'rgb(var(--text-muted))' }}>{STATUS_CLASS[String(r.code)[0]]}</td>
                 <td className="px-4 py-2 text-xs" style={{ color: 'rgb(var(--text))' }}>{r.cause}</td>
@@ -694,7 +694,7 @@ export function HttpStatusCodeLookupClient() {
               </tr>
             ))}
             {results.length === 0 && (
-              <tr><td colSpan={5} className="px-4 py-4 text-center text-sm" style={{ color: 'rgb(var(--text-faint))' }}>{L('noMatch', 'No matching status codes')}</td></tr>
+              <tr><td colSpan={5} className="px-4 py-4 text-center text-sm" style={{ color: 'rgb(var(--text-subtle))' }}>{L('noMatch', 'No matching status codes')}</td></tr>
             )}
           </tbody>
         </table>
@@ -802,7 +802,7 @@ export function CssMinifierClient() {
               <span className="text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>{L('outputLabel', 'Minified CSS')}</span>
               <CopyButton value={result.out} />
             </div>
-            <pre className="overflow-x-auto rounded-lg border p-4 font-mono text-xs whitespace-pre-wrap" style={outVars}>{result.out}</pre>
+            <pre data-code-output className="overflow-x-auto rounded-lg border p-4 font-mono text-xs whitespace-pre-wrap" style={outVars}>{result.out}</pre>
           </div>
         </div>
       )}
@@ -989,7 +989,7 @@ export function CsvToSqlConverterClient() {
             </span>
             <CopyButton value={result.sql} />
           </div>
-          <pre className="overflow-x-auto rounded-lg border p-4 font-mono text-xs whitespace-pre-wrap" style={outVars}>{result.sql}</pre>
+          <pre data-code-output className="overflow-x-auto rounded-lg border p-4 font-mono text-xs whitespace-pre-wrap" style={outVars}>{result.sql}</pre>
         </div>
       )}
       <ResultActions summary={result?.sql ?? ''} filename="import.sql" downloadContent={result?.sql ?? ''} mime="application/sql;charset=utf-8;" disabled={!result?.sql} />
@@ -1049,7 +1049,7 @@ export function Rot13ConverterClient() {
       <div>
         <div className="mb-2 flex items-center justify-between">
           <label htmlFor="rot-in" className="text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>{L('inputLabel', 'Input text')}</label>
-          {input && <button type="button" onClick={() => setInput('')} className="-my-1 rounded-md px-2 py-1.5 text-xs text-slate-500 dark:text-slate-400 hover:text-red-500">{L('clear', 'Clear')}</button>}
+          {input && <button type="button" onClick={() => setInput('')} className="-my-1 rounded-md px-2 py-1.5 text-xs text-muted-ink hover:text-red-500">{L('clear', 'Clear')}</button>}
         </div>
         <textarea id="rot-in" value={input} onChange={(e) => setInput(e.target.value)} rows={6}
           placeholder={'The quick brown fox…'}

@@ -10,6 +10,9 @@
  */
 
 import { useEffect } from 'react'
+import { ThemeInitScript } from '@/components/ThemeInitScript'
+import './globals.css'
+import { fontVariables } from './fonts'
 
 export default function GlobalError({
   error,
@@ -23,71 +26,32 @@ export default function GlobalError({
   }, [error])
 
   return (
-    <html lang="en">
+    <html lang="en" className={fontVariables} suppressHydrationWarning>
+      <head><ThemeInitScript /></head>
       <body>
-        <div
-          style={{
-            display: 'flex',
-            minHeight: '100vh',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center',
-            padding: '0 24px',
-            textAlign: 'center',
-            fontFamily: 'system-ui, sans-serif',
-          }}
-        >
-          <h1 style={{ fontSize: '1.5rem', fontWeight: 700, color: '#1e293b' }}>
+        <div className="flex min-h-screen flex-col items-center justify-center px-6 text-center">
+          <h1 className="font-serif text-4xl font-normal tracking-[-.5px] text-ink">
             Something went wrong
           </h1>
-          <p style={{ marginTop: 12, maxWidth: 448, fontSize: 14, color: '#475569' }}>
+          <p className="mt-3 max-w-md text-base leading-relaxed text-body">
             An unexpected error occurred. Please try again, or return to the homepage.
           </p>
           {error.digest && (
-            <p
-              style={{
-                marginTop: 12,
-                maxWidth: 448,
-                background: '#f1f5f9',
-                padding: 8,
-                borderRadius: 6,
-                fontFamily: 'monospace',
-                fontSize: 12,
-                wordBreak: 'break-all',
-                color: '#64748b',
-              }}
-            >
+            <p className="mt-3 max-w-md break-all rounded-lg bg-surface-card p-3 font-mono text-sm text-body">
               Error code: {error.digest}
             </p>
           )}
-          <div style={{ marginTop: 24, display: 'flex', gap: 12 }}>
+          <div className="mt-6 flex flex-wrap justify-center gap-3">
             <button
               type="button"
               onClick={reset}
-              style={{
-                borderRadius: 8,
-                background: '#2563eb',
-                color: '#fff',
-                padding: '10px 20px',
-                fontSize: 14,
-                fontWeight: 500,
-                border: 'none',
-                cursor: 'pointer',
-              }}
+              className="btn btn-primary text-sm"
             >
               Try again
             </button>
             <a
               href="/"
-              style={{
-                borderRadius: 8,
-                border: '1px solid #cbd5e1',
-                color: '#334155',
-                padding: '10px 20px',
-                fontSize: 14,
-                fontWeight: 500,
-                textDecoration: 'none',
-              }}
+              className="btn btn-secondary text-sm"
             >
               Back to home
             </a>

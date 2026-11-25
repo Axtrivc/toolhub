@@ -2,431 +2,163 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ══════════ 主题变量(明/暗)══════════ */
 @layer base {
   :root {
-    /* 默认浅色 —— 极微冷灰/浅蓝底色(slate-50),让纯白卡片有"悬浮"反差感 */
-    --bg: 248 250 252;        /* slate-50 极微冷灰,非纯白 */
-    --bg-card: 255 255 255;   /* white 卡片保持纯白,反差拉满 */
-    --bg-subtle: 241 245 249; /* slate-100 */
-    --border: 226 232 240;    /* slate-200 */
-    --border-strong: 203 213 225; /* slate-300 */
-    --text: 15 23 42;         /* slate-900 */
-    --text-muted: 71 85 105;  /* slate-600 */
-    --text-subtle: 100 116 139; /* slate-500 */
-    --text-faint: 148 163 184;  /* slate-400 */
-    /* 语义主色(结果高亮卡/焦点环/表格 hover 等),tailwind 令牌 primary 映射此变量 */
-    --primary: 37 99 235;     /* brand-600 */
-    /* brand 蓝色两种主题通用 */
+    color-scheme: light;
+    --primary: 204 120 92;
+    --primary-active: 169 88 62;
+    --primary-disabled: 230 223 216;
+    --ink: 20 20 19;
+    --body: 61 61 58;
+    --body-strong: 37 37 35;
+    --muted: 108 106 100;
+    --muted-soft: 142 139 130;
+    --hairline: 230 223 216;
+    --hairline-soft: 235 230 223;
+    --canvas: 250 249 245;
+    --surface-soft: 245 240 232;
+    --surface-card: 239 233 222;
+    --surface-strong: 232 224 210;
+    --surface-dark: 24 23 21;
+    --dark-elevated: 37 35 32;
+    --dark-soft: 31 30 27;
+    --on-primary: 255 255 255;
+    --on-dark: 250 249 245;
+    --on-dark-soft: 160 157 150;
+    --accent-teal: 93 184 166;
+    --accent-amber: 232 165 90;
+    --success: 93 184 114;
+    --warning: 212 160 23;
+    --error: 198 69 69;
+
+    /* Existing tools use RGB channels for opacity modifiers and inline styles. */
+    --bg: var(--canvas);
+    --bg-card: var(--canvas);
+    --bg-subtle: var(--surface-card);
+    --border: var(--hairline);
+    --border-strong: var(--hairline);
+    --text: var(--ink);
+    --text-muted: var(--body);
+    --text-subtle: var(--muted);
+    --text-faint: var(--muted-soft);
+    --max-width: 1200px;
   }
 
   html.dark {
-    /* 深色主题 —— slate-950 近黑底,卡片 slate-900 上浮,Vercel/Raycast 风格 */
-    --bg: 2 6 23;             /* slate-950 极深近黑(原 #090d16 略浅,改纯 slate-950 更沉稳) */
-    --bg-card: 15 23 42;      /* slate-900(卡片基底,配合 backdrop-blur 呈半透质感) */
-    --bg-subtle: 30 41 59;    /* slate-800(图标容器/次要表面) */
-    --border: 30 41 59;       /* slate-800(极细高级暗色边框) */
-    --border-strong: 51 65 85;  /* slate-700(搜索框聚焦等强调态) */
-    --text: 241 245 249;      /* slate-100(标题接近纯白) */
-    --text-muted: 203 213 225;  /* slate-300 */
-    --text-subtle: 148 163 184; /* slate-400(描述文案) */
-    --text-faint: 100 116 139;  /* slate-500(占位符/次要标签) */
-    /* 暗色下主色提亮一档,保证 text-primary / ring 对比度 */
-    --primary: 96 165 250;    /* blue-400 */
+    color-scheme: dark;
+    --ink: 250 249 245;
+    --body: 207 203 194;
+    --body-strong: 235 231 222;
+    --muted: 160 157 150;
+    --muted-soft: 127 124 117;
+    --hairline: 52 49 44;
+    --hairline-soft: 42 40 36;
+    --canvas: 24 23 21;
+    --surface-soft: 29 28 25;
+    --surface-card: 37 35 32;
+    --surface-strong: 46 43 39;
+    --surface-dark: 15 14 13;
+    --dark-elevated: 34 32 29;
+    --dark-soft: 22 21 19;
+    --primary-disabled: 58 54 49;
   }
 
-  :root {
-    /* 与 Tailwind max-w-7xl 对齐(80rem = 1280px)。
-       原 1100px 在宽屏下左右留白过大、3 列网格偏挤;调宽后卡片更舒展。 */
-    --max-width: 1280px;
-  }
-
-  html {
-    scroll-behavior: smooth;
-    /* clip 不创建滚动容器(sticky 头部不受影响),且会把裁切传播给
-       视口 —— 防止装饰性超宽元素(HeroGlow w-[680px] 等)撑大移动端
-       布局视口(实测仅 body 上的 clip 不传播,innerWidth 会被撑到 869)。
-       hidden 会破坏 sticky,不能用。 */
-    overflow-x: clip;
-  }
-
+  html { scroll-behavior: smooth; overflow-x: clip; }
   body {
-    background-color: rgb(var(--bg));
-    color: rgb(var(--text));
-    -webkit-font-smoothing: antialiased;
-    font-family:
-      -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
-      Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    transition: background-color 0.2s ease, color 0.2s ease;
-    /* 移除移动端点击灰色高亮(配合按钮 active transition) */
-    -webkit-tap-highlight-color: transparent;
-    /* 防止任何子元素撑宽导致横向滚动;clip 与 hidden 等价且不创建
-       新滚动容器 —— 此前 overflow-x: hidden 会让 position: sticky
-       头部失效(实测顶部导航不吸顶) */
+    @apply bg-canvas font-sans text-body antialiased;
+    line-height: 1.55;
     overflow-x: clip;
-    /* 移动端:允许平移/双指缩放、禁用双击缩放(iOS 快速连点不再触发
-       页面放大 + 消除 300ms 点击延迟);鼠标桌面端无任何影响 */
     touch-action: manipulation;
-    /* 刘海屏横屏(viewport-fit=cover):内容避开左右刘海/圆角。
-       桌面与竖屏浏览器恒为 0,零影响 */
-    padding-left: env(safe-area-inset-left);
-    padding-right: env(safe-area-inset-right);
+    -webkit-tap-highlight-color: transparent;
+    padding-inline: env(safe-area-inset-left) env(safe-area-inset-right);
   }
-
-  /* 移动端表单元素聚焦修复:iOS Safari 在 font-size < 16px 的
-     input/textarea/select 聚焦时会自动放大整页,体验突兀。
-     在小屏下统一强制 16px,消除意外缩放。 */
-  @media (max-width: 640px) {
-    input,
-    textarea,
-    select {
-      font-size: 16px !important;
-    }
-  }
-
-  /* 文章正文排版(适配主题) */
-  .prose-content h2 {
-    @apply mt-10 mb-4 text-2xl font-bold;
-    color: rgb(var(--text));
-  }
-  .prose-content h3 {
-    @apply mt-8 mb-3 text-xl font-semibold;
-    color: rgb(var(--text));
-  }
-  .prose-content p {
-    @apply mb-4 leading-relaxed;
-    color: rgb(var(--text-muted));
-  }
-  .prose-content ul {
-    @apply mb-4 ml-6 list-disc space-y-2;
-    color: rgb(var(--text-muted));
-  }
-  .prose-content ol {
-    @apply mb-4 ml-6 list-decimal space-y-2;
-    color: rgb(var(--text-muted));
-  }
-  /* 行内 code —— 克制的品牌色调,替代刺眼的 pink-600,提升高级感。
-     底色用 bg-subtle(主题感知),文字用 indigo(亮)/ sky(暗),不抢眼但清晰。 */
-  .prose-content code {
-    @apply rounded px-1.5 py-0.5 font-mono text-sm;
-    background-color: rgb(var(--bg-subtle));
-    color: rgb(79 70 229); /* indigo-600:亮色下稳重 */
-  }
-  html.dark .prose-content code {
-    color: rgb(56 189 248); /* sky-400:暗色下通透 */
-  }
-  /* ★ 代码块外层 <pre> —— 深邃 Slate-900 极客底色 + 细描边 + 大圆角。 */
-  .prose-content pre {
-    @apply overflow-x-auto rounded-xl p-5 text-sm;
-    background-color: rgb(15 23 42); /* slate-900 */
-    border: 1px solid rgb(30 41 59); /* slate-800 */
-    color: rgb(226 232 240); /* slate-200 */
-  }
-  html.dark .prose-content pre {
-    background-color: rgb(2 6 23); /* slate-950 */
-  }
-  /* ★ 彻底清除 <pre> 内部 <code> 的独立背景与内边距 ——
-     否则 .prose-content code 的 bg-subtle + padding 会污染块内 code,
-     在深色 pre 里形成杂乱的粉白小方块(Bug 根源)。
-     后代选择器 pre code 特异性(0,2,1)高于 code(0,1,1),无需 !important。 */
-  .prose-content pre code {
-    background-color: transparent;
-    color: rgb(226 232 240); /* slate-200,与 pre 统一 */
-    padding: 0;
-    border: none;
-    font-size: 0.875rem;
-    line-height: 1.7;
-  }
-  html.dark .prose-content pre code {
-    color: rgb(226 232 240);
-  }
-  .prose-content a {
-    @apply font-medium underline underline-offset-2;
-    color: rgb(37 99 235);
-  }
-  html.dark .prose-content a {
-    color: rgb(96 165 250);
-  }
-
-  /* 全局键盘焦点指示:任何获得焦点的可交互元素都有统一主色描边。
-     :focus-visible 只在键盘导航时出现,鼠标点击不触发;
-     outline-none 的组件(输入框走 box-shadow 环)不受影响。 */
-  :focus-visible {
-    outline: 2px solid rgb(var(--primary) / 0.7);
-    outline-offset: 2px;
-  }
+  h1, h2, h3 { @apply font-serif font-normal text-ink; }
+  code, kbd, samp, pre { @apply font-mono; }
+  :focus-visible { outline: 2px solid rgb(var(--primary)); outline-offset: 3px; }
+  input, select, textarea { accent-color: rgb(var(--primary)); }
+  select option { @apply bg-canvas text-ink; }
 }
 
 @layer components {
-  .container-page {
-    /* 版心:max-w-7xl(1280px)+ 响应式左右内边距。
-       宽屏下留出呼吸空间,3 列网格自然展开。 */
-    @apply mx-auto w-full max-w-[var(--max-width)] px-4 sm:px-6 lg:px-8;
-  }
-
-  /* 内容区里的 SEO 长文本块(.prose-content / max-w-3xl)统一居中。
-     否则 768px 的文本块在 1100px 容器内左对齐,宽屏下右侧出现大片
-     留白、左侧贴边,视觉上像排版错乱。加 mx-auto 让其左右对称。 */
-  .container-page .max-w-3xl {
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  /* 主题感知的卡片/表面 */
-  .surface {
-    background-color: rgb(var(--bg-card));
-    border-color: rgb(var(--border));
-    color: rgb(var(--text));
-  }
-  .surface-subtle {
-    background-color: rgb(var(--bg-subtle));
-  }
+  .container-page { @apply mx-auto w-full max-w-[var(--max-width)] px-5 md:px-8; }
+  .container-page .max-w-3xl { margin-inline: auto; }
+  .surface { @apply border-hairline bg-canvas text-ink; }
+  .surface-subtle { @apply bg-surface-card; }
 
   .btn {
-    @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2 font-medium transition-colors;
-    /* Apple 按压反馈:hover 微浮起、按下轻微缩小(spring 回弹),只动 transform */
-    transition-property: color, background-color, border-color, transform;
-    transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
-    transition-duration: 180ms;
+    @apply inline-flex min-h-10 items-center justify-center gap-2 rounded-lg border border-transparent px-5 py-2 text-sm font-medium leading-tight transition-colors;
   }
-  .btn:hover {
-    transform: translateY(-1px);
-  }
-  .btn:active {
-    transform: scale(0.97);
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .btn:hover,
-    .btn:active {
-      transform: none;
-    }
-  }
-  .btn-primary {
-    @apply text-white;
-    background-color: rgb(37 99 235); /* brand-600 */
-  }
-  .btn-primary:hover {
-    background-color: rgb(29 78 216); /* brand-700 */
-  }
-  .btn-secondary {
-    @apply border;
-    background-color: rgb(var(--bg-card));
-    border-color: rgb(var(--border-strong));
-    color: rgb(var(--text-muted));
-  }
-  .btn-secondary:hover {
-    background-color: rgb(var(--bg-subtle));
-  }
+  .btn-primary { @apply bg-primary text-white active:bg-primary-active; }
+  .btn-secondary { @apply border-hairline bg-canvas text-ink active:bg-surface-soft; }
+  .btn:disabled { @apply cursor-not-allowed bg-primary-disabled text-muted-ink; }
+
+  .prose-content { @apply text-body; overflow-wrap: break-word; }
+  .prose-content h2 { @apply mb-4 mt-12 font-serif text-3xl font-normal leading-tight tracking-[-.5px] text-ink; }
+  .prose-content h3 { @apply mb-3 mt-8 font-serif text-2xl font-normal leading-tight tracking-[-.3px] text-ink; }
+  .prose-content :where(p, ul, ol) { margin-bottom: 1rem; line-height: 1.7; }
+  .prose-content :where(ul, ol) { padding-inline-start: 1.4rem; }
+  .prose-content ul { list-style: disc; }
+  .prose-content ol { list-style: decimal; }
+  .prose-content li + li { margin-top: .4rem; }
+  .prose-content strong { @apply font-semibold text-ink; }
+  .prose-content a { @apply font-medium text-primary-active underline decoration-primary/40 underline-offset-2 dark:text-primary; }
+  .prose-content code { @apply rounded bg-dark-soft px-1.5 py-0.5 font-mono text-sm text-accent-amber; }
+  .prose-content pre { @apply overflow-x-auto rounded-xl bg-surface-dark p-5 font-mono text-sm leading-relaxed text-on-dark; }
+  .prose-content pre code { @apply bg-transparent p-0 text-inherit; }
 }
 
-/* ────────────────────────────────────────────────────────────
- * 隐藏原生滚动条工具类(命令面板等需要干净界面的容器用)。
- * - Chrome / Safari / Edge:用 ::-webkit-scrollbar 把滚动条宽度压到 0;
- * - Firefox:用 scrollbar-width: none(无 ::-webkit 前缀支持);
- * - 老版 IE / Edge:用 -ms-overflow-style: none。
- * 滚动行为本身不受影响(overflow 仍可滚、滚轮/触控板/键盘照常)。
- * ──────────────────────────────────────────────────────────── */
-.scrollbar-none {
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* IE10+ / legacy Edge */
-  /* 触屏滚动到列表头/尾时不再把滚动"穿透"到页面(弹层内列表用) */
-  overscroll-behavior: contain;
-}
-.scrollbar-none::-webkit-scrollbar {
-  width: 0;
-  height: 0;
-  display: none; /* Chrome / Safari / Edge */
+.scrollbar-none { scrollbar-width: none; overscroll-behavior: contain; }
+.scrollbar-none::-webkit-scrollbar { display: none; }
+.image-render-pixel { image-rendering: pixelated; }
+
+html.embed [data-embed-hide] { display: none !important; }
+html.embed body { min-height: auto; }
+
+/* Heading utility weights from older tool and article templates. */
+:is(h1, h2, h3):is(.font-bold, .font-semibold, .font-extrabold, .font-black) {
+  font-weight: 400;
 }
 
-/* ────────────────────────────────────────────────────────────
- * 像素风渲染工具类(Favicon Generator 预览用):16/32px 小图
- * 放大预览时按最近邻显示真实像素,而不是默认插值出的模糊边缘。
- * ──────────────────────────────────────────────────────────── */
-.image-render-pixel {
-  image-rendering: pixelated;
+.tool-shell :where(input:not([type]), input:is([type='text'], [type='number'], [type='url'], [type='email'], [type='search'], [type='password'], [type='date'], [type='time'], [type='datetime-local']), select) {
+  min-height: 40px;
+  border-radius: 8px;
 }
-
-/* ────────────────────────────────────────────────────────────
- * Embed 模式:页面被 iframe 嵌入时(见 EmbedDetectScript),隐藏
- * Header / Footer / 广告 / 面包屑 / 相关工具 / 嵌入邀请 / 信息区等
- * "chrome",只保留工具本体。让外站嵌入干净,鼓励反向链接。
- * 用 [data-embed-hide] 属性统一标记需要隐藏的元素。
- * ──────────────────────────────────────────────────────────── */
-html.embed [data-embed-hide] {
-  display: none !important;
+.tool-shell :is(input:not([type='range'], [type='checkbox'], [type='radio'], [type='color'], [type='file']), select, textarea):focus,
+:where(input, select, textarea):focus-visible {
+  border-color: rgb(var(--primary)) !important;
+  box-shadow: 0 0 0 3px rgb(var(--primary) / .15);
+  outline: 2px solid transparent;
 }
-
-/* ────────────────────────────────────────────────────────────
- * Hero 标题"色彩河流"(Gradient River):
- * 五色首尾相接的渐变带(蓝→靛→紫→靛→蓝)铺在 200% 宽的背景上,
- * background-position 从 0% 匀速平移到 200% —— 恰好走过一整块背景
- * 周期,与起点完全重合 → 无缝单向循环,文字内部的颜色如岩浆/河水般
- * 持续朝一个方向流动,永不停顿。
- *  - 14s + linear:极缓慢且匀速(ease 会让"河水"到站减速,破坏连续感)。
- *  - background-image 在此覆盖 Tailwind 的 bg-gradient-to-r:本文件样式
- *    不在 @layer 中,优先级高于 @tailwind utilities 层,暗色用 html.dark 覆写。
- *  - 仅重绘单元素背景(不重排、不动盒模型),CLS=0。
- *  - 开启 prefers-reduced-motion 时静止(尊重系统减少动画设置)。
- * ──────────────────────────────────────────────────────────── */
-@keyframes gradient-river {
-  0% {
-    background-position: 0% 50%;
-  }
-  100% {
-    background-position: 200% 50%;
-  }
+:is(button, a, summary, [tabindex]):focus-visible {
+  outline: 2px solid rgb(var(--primary));
+  outline-offset: 2px;
 }
-
-.hero-animated-gradient {
-  background-image: linear-gradient(
-    90deg,
-    #2563eb 0%,
-    #4f46e5 25%,
-    #7c3aed 50%,
-    #4f46e5 75%,
-    #2563eb 100%
-  );
-  background-size: 200% 100%;
-  animation: gradient-river 14s linear infinite;
+.tool-shell div:has(> table) { border-color: rgb(var(--hairline)); border-radius: 12px; }
+.tool-shell table { border-collapse: collapse; }
+.tool-shell thead, .prose-content thead { background-color: rgb(var(--surface-soft)); }
+.tool-shell th, .prose-content th {
+  color: rgb(var(--muted));
+  font: 500 .75rem/1.4 var(--font-sans), system-ui, sans-serif;
+  text-transform: uppercase;
+  letter-spacing: .075em;
 }
+.tool-shell tbody :is(td, th), .prose-content td { border-bottom: 1px solid rgb(var(--hairline-soft)); }
+.tool-shell td { font-variant-numeric: tabular-nums; }
+.tool-shell td:is(.text-right, .tabular-nums), .tool-shell td .tabular-nums { @apply font-mono; }
 
-html.dark .hero-animated-gradient {
-  background-image: linear-gradient(
-    90deg,
-    #60a5fa 0%,
-    #818cf8 25%,
-    #c084fc 50%,
-    #818cf8 75%,
-    #60a5fa 100%
-  );
+@media (max-width: 640px) {
+  input, textarea, select { font-size: 16px !important; }
+  .tool-shell :is(input[type='checkbox'], input[type='radio']) { width: 1.25rem; height: 1.25rem; }
+  .tool-shell button { min-height: 2.25rem; min-width: 2.25rem; }
+  .prose-content pre { white-space: pre-wrap; overflow-wrap: anywhere; }
+  .tool-shell pre { max-width: 100%; overflow-x: auto; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hero-animated-gradient {
-    animation: none;
-  }
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
 }
 
-/* ════════════════════════════════════════════════════════════
- * 暗黑模式高级感增强(Vercel / Raycast 风格)
- * 全站基调由上面的 CSS 变量驱动;这里是组件级精修。
- * ════════════════════════════════════════════════════════════ */
-
-/* ────────────────────────────────────────────────────────────
- * 通用淡入(fade-in):面包屑、标题区等入场用。
- * opacity + 4px 位移,0.5s ease-out,both 填充防首帧闪现。
- * ──────────────────────────────────────────────────────────── */
-@keyframes fade-in {
-  from {
-    opacity: 0;
-    transform: translateY(4px);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-
-.animate-fade-in {
-  animation: fade-in 0.5s ease-out both;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .animate-fade-in {
-    animation: none;
-  }
-}
-
-/* ────────────────────────────────────────────────────────────
- * 原生 <select> 下拉选项统一排版:内边距 + 字号 + 主题色,
- * 让 Windows Chrome / Firefox 桌面端的展开列表渲染更自然
- * (macOS/iOS 原生渲染忽略大部分 option 样式,无副作用)。
- * ──────────────────────────────────────────────────────────── */
-select option {
-  padding: 8px 12px;
-  font-size: 0.8125rem;
-  font-weight: 500;
-  background-color: rgb(var(--bg-card));
-  color: rgb(var(--text));
-}
-
-/* ════════════════════════════════════════════════════════════
- * 工具详情页 Shell(.tool-shell,见 ToolLayout 工具主体卡片)
- * 统一精修输入焦点态与数据表格 —— 130+ 工具页共享,无需逐个改组件。
- * ════════════════════════════════════════════════════════════ */
-
-/* 输入焦点:双层 Ring 高亮(内环卡片色留出间隙 + 外环主色 35%),
-   平滑过渡;排除 range/checkbox/radio/color 等非文本控件(阴影环会畸形)。
-   组件 inline borderColor 不变,仅靠 box-shadow 叠加,互不冲突。 */
-.tool-shell :where(input, select, textarea) {
-  transition: box-shadow 0.18s ease, border-color 0.18s ease;
-}
-.tool-shell
-  :where(
-    input:not([type='range']):not([type='checkbox']):not([type='radio']):not(
-        [type='color']
-      ),
-    select,
-    textarea
-  ):focus {
-  outline: none;
-  box-shadow:
-    0 0 0 2px rgb(var(--bg-card)),
-    0 0 0 4px rgb(var(--primary) / 0.4);
-}
-
-/* 数据表格:圆角边框容器 + 斑马纹 + hover 高亮。
-   全站数据表统一包在 overflow-x-auto rounded-lg border 的 div 里
-   (LoanCalculator/TDEE/BMI/PxToRem 等),故:
-   - div:has(> table) 选中该容器 → 升级 rounded-xl + 主题边框色;
-   - table 用 border-collapse: separate + border-spacing 0,
-     四角单元格补 ~11px 圆角,防表头/末行背景在容器圆角处溢出;
-   - 表头 bg-muted/50 + font-semibold;斑马纹;行 hover 主色微光。
-   :has() 不支持的老浏览器自动降级为仅表格内部样式,无破坏。 */
-.tool-shell div:has(> table) {
-  border-color: rgb(var(--border));
-  border-radius: 0.75rem;
-}
-.tool-shell table {
-  border-collapse: separate;
-  border-spacing: 0;
-}
-.tool-shell thead tr:first-child > :first-child {
-  border-top-left-radius: 11px;
-}
-.tool-shell thead tr:first-child > :last-child {
-  border-top-right-radius: 11px;
-}
-.tool-shell tbody tr:last-child > :first-child {
-  border-bottom-left-radius: 11px;
-}
-.tool-shell tbody tr:last-child > :last-child {
-  border-bottom-right-radius: 11px;
-}
-.tool-shell thead {
-  background-color: rgb(var(--bg-subtle) / 0.5);
-}
-.tool-shell thead th {
-  font-weight: 600;
-}
-.tool-shell tbody tr {
-  transition: background-color 0.15s ease;
-}
-.tool-shell tbody tr:nth-child(even) {
-  background-color: rgb(var(--bg-subtle) / 0.35);
-}
-.tool-shell tbody tr:hover {
-  background-color: rgb(var(--primary) / 0.07);
-}
-
-/* ════════════════════════════════════════════════════════════
- * 计算器数值滑杆(工厂 FieldDef.slider 字段,.calc-slider)。
- * 轨道填充色由组件内联 linear-gradient 控制(比例随值变化),
- * 这里只负责外观重置与 thumb 形状(主题变量取色)。
- * 触屏(pointer: coarse)优化:命中区扩到 32px 高、视觉轨道仍 6px
- * (background-size 把渐变压成中央 6px 横带),thumb 放大到 24px ——
- * 指针设备(桌面)保持原有 6px 轨道 + 18px thumb,零视觉变化。
- * ════════════════════════════════════════════════════════════ */
 input.calc-slider {
   -webkit-appearance: none;
   appearance: none;
@@ -461,7 +193,7 @@ input.calc-slider::-webkit-slider-thumb {
   border-radius: 50%;
   background: rgb(var(--primary));
   border: 2px solid rgb(var(--bg-card));
-  box-shadow: 0 1px 3px rgb(0 0 0 / 0.25);
+  box-shadow: 0 1px 3px rgb(20 20 19 / .08);
   transition: transform 0.15s ease;
 }
 @media (pointer: coarse) {
@@ -479,7 +211,7 @@ input.calc-slider::-moz-range-thumb {
   border-radius: 50%;
   background: rgb(var(--primary));
   border: 2px solid rgb(var(--bg-card));
-  box-shadow: 0 1px 3px rgb(0 0 0 / 0.25);
+  box-shadow: 0 1px 3px rgb(20 20 19 / .08);
 }
 @media (pointer: coarse) {
   input.calc-slider::-moz-range-thumb {
@@ -498,204 +230,6 @@ input.calc-slider:focus-visible {
   }
 }
 
-/* ════════════════════════════════════════════════════════════
- * 移动端触控目标兜底(<640px,仅小屏生效、桌面零影响):
- *  - 复选框/单选钮 16px → 20px(选择器特异性高于 Tailwind h-4/w-4);
- *  - 行内代码/代码块 <pre> 换行代替横向滚动(长配置输出免来回滑动);
- *  - 长单词/URL 强制断行,防单 token 撑破容器。
- * ════════════════════════════════════════════════════════════ */
-@media (max-width: 640px) {
-  .tool-shell input[type='checkbox'],
-  .tool-shell input[type='radio'] {
-    width: 1.25rem;
-    height: 1.25rem;
-  }
-  /* 触控目标兜底:工具卡内所有按钮至少 36×36(工厂/批量组件里
-     大量 px-2/py-1.5 的 26~30px 小按钮,逐个改不现实;统一在此抬升。
-     桌面端不受影响) */
-  .tool-shell button {
-    min-height: 2.25rem;
-    min-width: 2.25rem;
-  }
-  .tool-shell pre,
-  .prose-content pre {
-    white-space: pre-wrap;
-    word-break: break-word;
-  }
-  .prose-content code {
-    word-break: break-word;
-  }
-  /* 10px 微标签(分类 Pill/徽章等 uppercase 小字)小屏提到 11px:
-     375px 下 10px 已低于可读下限。选择器特异性高于单个工具类,
-     桌面端不命中,零影响。 */
-  main [class*='text-[10px]'] {
-    font-size: 0.6875rem;
-  }
-  /* 兜底:任何 <9px 的可见文本(SVG 刻度、装饰性 micro 标签等)
-     提到 9px;旧 iOS 上 text-size-adjust 对 <9px 的文本还会再放大,
-     反而打乱布局。仅匹配显式 8px 类(项目内无 7px 工具类)。 */
-  main [class*='text-[8px]'],
-  footer [class*='text-[8px]'],
-  .tool-shell [class*='text-[8px]'] {
-    font-size: 9px;
-  }
-}
-
-/* ════════════════════════════════════════════════════════════
- * 横向滚动容器边缘渐隐提示(触屏渐进增强):
- * 表格/代码块包在 overflow-x-auto 容器里,移动端没有可见滚动条,
- * 用户不知道能滑。用 CSS scroll-driven animation 让左右边缘浮现
- * 卡片底色渐变,滑到头自动消失 —— 天然的"可滑动"视觉暗示。
- * 浏览器不支持 animation-timeline(旧 iOS / 全部桌面场景不命中
- * pointer:coarse)时整段 @supports 跳过,零影响。
- * ════════════════════════════════════════════════════════════ */
-@supports (animation-timeline: scroll()) {
-  @media (pointer: coarse) {
-    .tool-shell div[class*='overflow-x-auto'],
-    .tool-shell div[class*='overflow-auto'],
-    .tool-shell pre[class*='overflow-x-auto'],
-    .prose-content pre[class*='overflow-x-auto'] {
-      /* 渐变浮层不挡点击、不参与滚动内容 */
-      position: relative;
-      scroll-timeline: --scrollx inline;
-    }
-    .tool-shell div[class*='overflow-x-auto']::after,
-    .tool-shell div[class*='overflow-auto']::after,
-    .tool-shell pre[class*='overflow-x-auto']::after,
-    .prose-content pre[class*='overflow-x-auto']::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      right: 0;
-      width: 2rem;
-      pointer-events: none;
-      z-index: 1;
-      opacity: 0.85;
-      background: linear-gradient(to left, rgb(var(--bg-card)), transparent);
-      animation: scroll-hint-fade linear both;
-      animation-timeline: --scrollx;
-    }
-    @keyframes scroll-hint-fade {
-      to {
-        opacity: 0;
-      }
-    }
-  }
-}
-
-/* ════════════════════════════════════════════════════════════
- * Apple 风格动态细节(2026-08 R17)——全部挂在 .tool-shell 上,
- * 225 个工具页共享,零组件改动、零水合风险(纯 CSS/装饰性)。
- * ════════════════════════════════════════════════════════════ */
-
-/* iOS 按压反馈:按下轻微缩小(0.97),松开经 easeOutQuart 快速回弹;
-   滑杆拇指由自身 :active 规则接管(transform 冲突) */
-.tool-shell button:not(input.calc-slider) {
-  transition:
-    transform 0.18s cubic-bezier(0.22, 1, 0.36, 1),
-    box-shadow 0.18s ease,
-    background-color 0.18s ease,
-    border-color 0.18s ease,
-    opacity 0.18s ease;
-  will-change: transform;
-}
-.tool-shell button:active:not(:disabled) {
-  transform: scale(0.97);
-}
-
-/* 内容入场:iOS 列表呈现感——直接子块淡入上浮,交错 40ms;首帧即开始
-   (纯 CSS 时间轴,SSR/水合零差异;animation-fill-mode both 兜底终态) */
-@keyframes ios-rise {
-  from {
-    opacity: 0;
-    transform: translateY(8px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-.tool-shell > * {
-  animation: ios-rise 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
-}
-.tool-shell > *:nth-child(2) { animation-delay: 0.04s; }
-.tool-shell > *:nth-child(3) { animation-delay: 0.08s; }
-.tool-shell > *:nth-child(4) { animation-delay: 0.12s; }
-.tool-shell > *:nth-child(5) { animation-delay: 0.16s; }
-.tool-shell > *:nth-child(6) { animation-delay: 0.2s; }
-.tool-shell > *:nth-child(n + 7) { animation-delay: 0.24s; }
-
-/* 滑杆拇指:按压放大(iOS scrubber 手感) */
-input.calc-slider:active::-webkit-slider-thumb {
-  transform: scale(1.18);
-}
-
-/* 减少动态:入场直出终态、按压/缩放全部关闭 */
-@media (prefers-reduced-motion: reduce) {
-  .tool-shell > * {
-    animation: none;
-  }
-  .tool-shell button:active:not(:disabled),
-  input.calc-slider:active::-webkit-slider-thumb {
-    transform: none;
-  }
-  .tool-shell button:not(input.calc-slider) {
-    transition: none;
-  }
-}
-
-/* 语言切换下拉(LanguageToggle):纯 CSS 动画,替代 framer-motion,
-   让动画库不必进入全站首屏 bundle(组件随 Header 每页加载) */
-@keyframes lang-menu-in {
-  from { opacity: 0; transform: scale(0.95) translateY(-4px); }
-  to { opacity: 1; transform: scale(1) translateY(0); }
-}
-.animate-lang-menu { animation: lang-menu-in 0.16s ease-out; }
-
-/* 切换语言时胶囊的快速回弹脉冲(scale 1→0.88→1) */
-@keyframes lang-pulse {
-  0% { transform: scale(1); }
-  50% { transform: scale(0.88); }
-  100% { transform: scale(1); }
-}
-.animate-lang-pulse { animation: lang-pulse 0.35s ease-out; }
-
-/* 计算历史抽屉(HistoryDrawer):移动端底部上滑,桌面(sm+)右侧滑入 */
-@keyframes drawer-slide-up {
-  from { opacity: 0; transform: translateY(24px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-@keyframes drawer-slide-right {
-  from { opacity: 0; transform: translateX(32px); }
-  to { opacity: 1; transform: translateX(0); }
-}
-.history-drawer-panel { animation: drawer-slide-up 0.25s ease-out; }
-@media (min-width: 640px) {
-  .history-drawer-panel { animation: drawer-slide-right 0.25s ease-out; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .animate-lang-menu,
-  .animate-lang-pulse { animation: none; }
-  .history-drawer-panel { animation: none; }
-}
-
-/* ════════════════════════════════════════════════════════════
- * 打印级评估报告(Print Report)—— 全站计算器共享。
- * ResultActions 的「Print Report」按钮触发 window.print(),本段
- * @media print 排版把工具页变成干净的 A4 机构级报告:
- *  - 隐藏全站干扰:Header / Footer / 面包屑 nav / 广告位 / 相关工具 /
- *    可见 FAQ / 嵌入邀请 / 中部 SEO 长文 / 操作按钮行 / Range 滑杆 /
- *    移动端 sticky 结果条(它们统一带 [data-embed-hide]、.no-print 或
- *    元素级 header/footer/nav 标记);
- *  - 顶部注入报告抬头(.print-only,.print-report-header):
- *    「ToolHub Calculation Report」+ 页面 URL + 生成日期;
- *  - 输入参数与计算结果区转为黑白双列数据表格:纯白底、黑字、
- *    细灰框线、去阴影去渐变,浏览器「另存为 PDF」即为汇报级产物。
- * ════════════════════════════════════════════════════════════ */
-
-/* 屏显时隐藏打印专用元素(报告抬头只在 @media print 可见) */
 .print-only {
   display: none;
 }
@@ -709,12 +243,12 @@ input.calc-slider:active::-webkit-slider-thumb {
   html,
   body {
     background: #ffffff !important;
-    color: #0f172a !important;
+    color: #141413 !important;
     overflow: visible !important;
   }
   html.dark body {
     background: #ffffff !important;
-    color: #0f172a !important;
+    color: #141413 !important;
   }
   /* 页面级背景/边框统一洗白,卡片悬浮感在纸上无意义 */
   .container-page {
@@ -751,20 +285,20 @@ input.calc-slider:active::-webkit-slider-thumb {
     top: 0;
     left: 0;
     right: 0;
-    border-bottom: 2px solid #0f172a;
+    border-bottom: 2px solid #141413;
     padding-bottom: 8px;
     margin-bottom: 16px;
   }
   .print-report-brand {
     font-size: 18pt;
     font-weight: 700;
-    color: #0f172a;
+    color: #141413;
     letter-spacing: 0.02em;
   }
   .print-report-meta {
     margin-top: 4px;
     font-size: 9pt;
-    color: #475569;
+    color: #3d3d3a;
   }
 
   /* ── 3. 工具卡片:白底黑字、去阴影圆角,铺满纸宽 ──
@@ -793,18 +327,18 @@ input.calc-slider:active::-webkit-slider-thumb {
     grid-template-columns: 1fr 1fr !important;
     gap: 0 !important;
     background: #ffffff !important;
-    border: 1px solid #64748b !important;
+    border: 1px solid #6c6a64 !important;
     border-radius: 0 !important;
     padding: 0 !important;
     break-inside: avoid;
   }
   .tool-shell .grid > * {
-    border-bottom: 1px solid #cbd5e1 !important;
+    border-bottom: 1px solid #d6cec2 !important;
     background: #ffffff !important;
     break-inside: avoid;
   }
   .tool-shell .grid > :nth-child(odd) {
-    border-right: 1px solid #cbd5e1 !important;
+    border-right: 1px solid #d6cec2 !important;
   }
   /* 末行 cells 去掉底边线,表格下缘干净收口 */
   .tool-shell .grid > :last-child,
@@ -816,7 +350,7 @@ input.calc-slider:active::-webkit-slider-thumb {
     border: none !important;
     box-shadow: none !important;
     background: transparent !important;
-    color: #0f172a !important;
+    color: #141413 !important;
     padding-left: 0 !important;
     appearance: none !important;
     -webkit-appearance: none !important;
@@ -827,7 +361,7 @@ input.calc-slider:active::-webkit-slider-thumb {
   .tool-shell label,
   .tool-shell .text-sm.font-medium,
   .tool-shell span[class*='font-medium'] {
-    color: #475569 !important;
+    color: #3d3d3a !important;
   }
   /* 结果卡:白底黑字,主结果去渐变/主色,全黑加粗;错误卡去红底 */
   .tool-shell [role='status'] {
@@ -836,12 +370,12 @@ input.calc-slider:active::-webkit-slider-thumb {
     border-radius: 0 !important;
     box-shadow: none !important;
     backdrop-filter: none !important;
-    color: #0f172a !important;
+    color: #141413 !important;
     text-align: left !important;
     padding: 6px 10px !important;
   }
   .tool-shell [role='status'] * {
-    color: #0f172a !important;
+    color: #141413 !important;
     background: transparent !important;
   }
   .tool-shell [role='status'] .text-2xl,
@@ -856,8 +390,8 @@ input.calc-slider:active::-webkit-slider-thumb {
   .tool-shell table th,
   .tool-shell table td {
     background: #ffffff !important;
-    color: #0f172a !important;
-    border-bottom: 1px solid #cbd5e1 !important;
+    color: #141413 !important;
+    border-bottom: 1px solid #d6cec2 !important;
   }
   /* 图表区:白底保留(SVG 曲线/环形图是报告的组成部分),避免跨页断裂 */
   .tool-shell svg {
@@ -866,20 +400,20 @@ input.calc-slider:active::-webkit-slider-thumb {
   /* Scenario B 参数面板与 Delta 徽章:打印转黑白(细实线描边、白底黑字),
      彩色虚线/红绿胶囊在纸上既费墨也不符合机构级报告观感 */
   .tool-shell .compare-panel {
-    border: 1px solid #64748b !important;
+    border: 1px solid #6c6a64 !important;
     background: #ffffff !important;
   }
   .tool-shell .delta-badge {
     background: #ffffff !important;
-    color: #0f172a !important;
-    border: 1.5px solid #0f172a !important;
+    color: #141413 !important;
+    border: 1.5px solid #141413 !important;
     box-shadow: none !important;
   }
   .tool-shell .delta-badge * {
-    color: #0f172a !important;
+    color: #141413 !important;
   }
   /* 深色主题下 SVG 文本可能用浅色 fill,打印统一压深 */
   html.dark .tool-shell svg text {
-    fill: #0f172a;
+    fill: #141413;
   }
 }

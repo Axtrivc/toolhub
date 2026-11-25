@@ -354,7 +354,7 @@ export function SvgToImageClient() {
         <div role="status" aria-live="polite" className="space-y-3">
           <div className="flex flex-wrap items-center justify-between gap-2">
             <span className="text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>
-              {L('result', 'Result')} {dims && <span className="font-normal text-slate-500 dark:text-slate-400">({dims.w} × {dims.h}px)</span>}
+              {L('result', 'Result')} {dims && <span className="font-normal text-muted-ink">({dims.w} × {dims.h}px)</span>}
             </span>
             <a
               href={downloadUrl}

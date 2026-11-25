@@ -150,9 +150,9 @@ export function TemperatureConverterClient() {
           ticks.push(Math.abs(t) < step / 1e6 ? 0 : Number(t.toFixed(6)))
         }
         const refs = [
-          { v: 0, color: '#3b82f6', label: '0°C', word: L('ptFreezing', 'Freezing') },
-          { v: 37, color: '#f59e0b', label: '37°C', word: L('ptBody', 'Body temp') },
-          { v: 100, color: '#ef4444', label: '100°C', word: L('ptBoiling', 'Boiling') },
+          { v: 0, color: 'var(--chart-coral)', label: '0°C', word: L('ptFreezing', 'Freezing') },
+          { v: 37, color: 'var(--chart-amber)', label: '37°C', word: L('ptBody', 'Body temp') },
+          { v: 100, color: 'var(--chart-ink)', label: '100°C', word: L('ptBoiling', 'Boiling') },
         ].filter((p) => p.v >= lo && p.v <= hi)
         return (
           <div
@@ -177,7 +177,7 @@ export function TemperatureConverterClient() {
                   />
                   <div
                     className="absolute bottom-0 -translate-x-1/2 text-[10px] tabular-nums"
-                    style={{ left: `${pos(t)}%`, color: 'rgb(var(--text-faint))' }}
+                    style={{ left: `${pos(t)}%`, color: 'rgb(var(--text-subtle))' }}
                   >
                     {t}
                   </div>
@@ -219,7 +219,7 @@ export function TemperatureConverterClient() {
                   left: `${pos(c)}%`,
                   transition: 'left 300ms cubic-bezier(0.22,1,0.36,1)',
                   backgroundColor: 'rgb(var(--primary))',
-                  boxShadow: '0 1px 3px rgb(0 0 0 / 0.3), 0 0 0 2px rgb(var(--bg-card))',
+                  outline: '2px solid rgb(var(--bg-card))',
                 }}
               />
             </div>

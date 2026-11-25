@@ -132,13 +132,12 @@ export function SiteStats() {
   return (
     <div
       className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs"
-      style={{ color: 'rgb(var(--text-faint))' }}
       aria-label={t(locale, 'statsAriaLabel')}
     >
       {items.map(([label, count]) => (
         <span key={label}>
           {label}{' '}
-          <span className="font-semibold tabular-nums" style={{ color: 'rgb(var(--text-muted))' }}>
+          <span className="font-mono tabular-nums text-on-dark">
             {count}
           </span>
         </span>

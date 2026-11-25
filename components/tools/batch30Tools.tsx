@@ -233,7 +233,7 @@ export function GpsCoordinateConverterClient() {
             <button
               type="button"
               onClick={() => setInput('')}
-              className="-my-1 rounded-md px-2 py-1.5 text-xs text-slate-500 dark:text-slate-400 hover:text-red-500 sm:text-sm"
+              className="-my-1 rounded-md px-2 py-1.5 text-xs text-muted-ink hover:text-red-500 sm:text-sm"
             >
               {t(locale, 'textToolClear')}
             </button>
@@ -276,7 +276,7 @@ export function GpsCoordinateConverterClient() {
           {output ? (
             <p className="whitespace-pre-wrap break-words leading-5">{output}</p>
           ) : (
-            <p className="leading-5" style={{ color: 'rgb(var(--text-faint))' }}>
+            <p className="leading-5" style={{ color: 'rgb(var(--text-subtle))' }}>
               {t(locale, 'textToolResultPlaceholder')}
             </p>
           )}

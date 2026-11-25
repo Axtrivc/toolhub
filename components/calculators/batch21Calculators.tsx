@@ -130,10 +130,10 @@ export const HouseAffordabilityCalculatorClient = makeCalculatorClient({
   chart: {
     title: 'Where the monthly payment goes',
     slices: [
-      { valueKey: '_pi', label: 'Principal & interest', color: '#3b82f6' },
-      { valueKey: '_tax', label: 'Property tax', color: '#f59e0b' },
-      { valueKey: '_ins', label: 'Insurance', color: '#22c55e' },
-      { valueKey: '_hoa', label: 'HOA', color: '#a855f7' },
+      { valueKey: '_pi', label: 'Principal & interest', color: 'var(--chart-coral)' },
+      { valueKey: '_tax', label: 'Property tax', color: 'var(--chart-amber)' },
+      { valueKey: '_ins', label: 'Insurance', color: 'var(--chart-teal)' },
+      { valueKey: '_hoa', label: 'HOA', color: 'var(--chart-rust)' },
     ],
     centerLabel: 'PITI',
   },
@@ -240,8 +240,8 @@ export const RefinanceBreakEvenCalculatorClient = makeCalculatorClient({
     return {
       xLabels: marks.map((m) => `${m}m`),
       lines: [
-        { key: 'net', label: 'Net position', color: '#22c55e', points: marks.map((m) => savings * m - costs), area: true },
-        { key: 'zero', label: 'Break-even', color: '#ef4444', points: marks.map(() => 0), dashed: true },
+        { key: 'net', label: 'Net position', color: 'var(--chart-teal)', points: marks.map((m) => savings * m - costs), area: true },
+        { key: 'zero', label: 'Break-even', color: 'var(--chart-ink)', points: marks.map(() => 0), dashed: true },
       ],
       formatY: (n) => fmtUSD(n, 0),
     }
@@ -336,8 +336,8 @@ export const BiweeklyMortgagePaymentCalculatorClient = makeCalculatorClient({
     return {
       xLabels,
       lines: [
-        { key: 'monthly', label: 'Monthly plan', color: '#94a3b8', points: lineMonthly },
-        { key: 'biweekly', label: 'Biweekly plan', color: '#22c55e', points: lineBiweekly, area: true },
+        { key: 'monthly', label: 'Monthly plan', color: 'var(--chart-muted)', points: lineMonthly },
+        { key: 'biweekly', label: 'Biweekly plan', color: 'var(--chart-teal)', points: lineBiweekly, area: true },
       ],
       formatY: (n2) => fmtUSD(n2, 0),
     }
@@ -417,10 +417,10 @@ export const ClosingCostCalculatorClient = makeCalculatorClient({
   chart: {
     title: 'Buyer closing cost breakdown',
     slices: [
-      { valueKey: '_lender', label: 'Lender fees', color: '#3b82f6' },
-      { valueKey: '_title', label: 'Title & escrow', color: '#f59e0b' },
-      { valueKey: '_fixed', label: 'Appraisal & fixed', color: '#a855f7' },
-      { valueKey: '_prepaid', label: 'Prepaids & escrow', color: '#22c55e' },
+      { valueKey: '_lender', label: 'Lender fees', color: 'var(--chart-coral)' },
+      { valueKey: '_title', label: 'Title & escrow', color: 'var(--chart-amber)' },
+      { valueKey: '_fixed', label: 'Appraisal & fixed', color: 'var(--chart-rust)' },
+      { valueKey: '_prepaid', label: 'Prepaids & escrow', color: 'var(--chart-teal)' },
     ],
     centerLabel: 'Buyer total',
   },
@@ -547,8 +547,8 @@ export const ProratedRentCalculatorClient = makeCalculatorClient({
     const days = v.period === 'last' ? d : daysInMonth - d + 1
     return {
       rows: [
-        { label: 'By days in month', segments: [{ label: 'Prorated rent', value: (rent / daysInMonth) * days, color: '#3b82f6' }] },
-        { label: 'By 365-day year', segments: [{ label: 'Prorated rent', value: ((rent * 12) / 365) * days, color: '#22c55e' }] },
+        { label: 'By days in month', segments: [{ label: 'Prorated rent', value: (rent / daysInMonth) * days, color: 'var(--chart-coral)' }] },
+        { label: 'By 365-day year', segments: [{ label: 'Prorated rent', value: ((rent * 12) / 365) * days, color: 'var(--chart-teal)' }] },
       ],
       formatTotal: (n) => fmtUSD(n, 2),
     }
@@ -634,10 +634,10 @@ export const RentalPropertyCalculatorClient = makeCalculatorClient({
   chart: {
     title: 'Where a year of rent goes',
     slices: [
-      { valueKey: '_debt', label: 'Debt service', color: '#3b82f6' },
-      { valueKey: '_opex', label: 'Operating expenses', color: '#f59e0b' },
-      { valueKey: '_vac', label: 'Vacancy loss', color: '#ef4444' },
-      { valueKey: '_cf', label: 'Cash flow', color: '#22c55e' },
+      { valueKey: '_debt', label: 'Debt service', color: 'var(--chart-coral)' },
+      { valueKey: '_opex', label: 'Operating expenses', color: 'var(--chart-amber)' },
+      { valueKey: '_vac', label: 'Vacancy loss', color: 'var(--chart-ink)' },
+      { valueKey: '_cf', label: 'Cash flow', color: 'var(--chart-teal)' },
     ],
     centerLabel: 'Year of rent',
   },
@@ -718,12 +718,12 @@ export const HouseFlipCalculatorClient = makeCalculatorClient({
   chart: {
     title: 'How the ARV splits',
     slices: [
-      { valueKey: '_buy', label: 'Purchase', color: '#3b82f6' },
-      { valueKey: '_rep', label: 'Repairs', color: '#f59e0b' },
-      { valueKey: '_hold', label: 'Holding', color: '#a855f7' },
-      { valueKey: '_bc', label: 'Buying costs', color: '#64748b' },
-      { valueKey: '_sc', label: 'Selling costs', color: '#ef4444' },
-      { valueKey: '_prof', label: 'Profit', color: '#22c55e' },
+      { valueKey: '_buy', label: 'Purchase', color: 'var(--chart-coral)' },
+      { valueKey: '_rep', label: 'Repairs', color: 'var(--chart-amber)' },
+      { valueKey: '_hold', label: 'Holding', color: 'var(--chart-rust)' },
+      { valueKey: '_bc', label: 'Buying costs', color: 'var(--chart-muted)' },
+      { valueKey: '_sc', label: 'Selling costs', color: 'var(--chart-ink)' },
+      { valueKey: '_prof', label: 'Profit', color: 'var(--chart-teal)' },
     ],
     centerLabel: 'ARV',
   },

@@ -279,7 +279,7 @@ export function PngToWebpConverterClient() {
               onChange={(e) => setQuality(Number(e.target.value))}
               className="w-full accent-blue-600"
             />
-            <div className="mt-1 flex justify-between text-[11px]" style={{ color: 'rgb(var(--text-faint))' }}>
+            <div className="mt-1 flex justify-between text-[11px]" style={{ color: 'rgb(var(--text-subtle))' }}>
               <span>{L('smallestFile', 'Smallest file')}</span>
               <span>{L('bestQuality', 'Best quality')}</span>
             </div>

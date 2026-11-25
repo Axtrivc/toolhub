@@ -70,8 +70,8 @@ export const TipCalculatorClient = makeCalculatorClient({
     return {
       rows: [
         { label: 'Total bill', segments: [
-          { label: 'Bill', value: bill, color: '#3b82f6' },
-          { label: 'Tip', value: tip, color: '#22c55e' },
+          { label: 'Bill', value: bill, color: 'var(--chart-coral)' },
+          { label: 'Tip', value: tip, color: 'var(--chart-teal)' },
         ] },
       ],
       formatTotal: (n) => fmtUSD(n),
@@ -129,8 +129,8 @@ export const DiscountCalculatorClient = makeCalculatorClient({
     return {
       rows: [
         { label: 'Original price', segments: [
-          { label: 'You pay', value: price - save, color: '#3b82f6' },
-          { label: 'You save', value: save, color: '#22c55e' },
+          { label: 'You pay', value: price - save, color: 'var(--chart-coral)' },
+          { label: 'You save', value: save, color: 'var(--chart-teal)' },
         ] },
       ],
       formatTotal: (n) => fmtUSD(n),
@@ -200,8 +200,8 @@ export const SalesTaxCalculatorClient = makeCalculatorClient({
       return {
         rows: [
           { label: 'Final amount', segments: [
-            { label: 'Net amount', value: net, color: '#3b82f6' },
-            { label: 'Tax', value: amount - net, color: '#f59e0b' },
+            { label: 'Net amount', value: net, color: 'var(--chart-coral)' },
+            { label: 'Tax', value: amount - net, color: 'var(--chart-amber)' },
           ] },
         ],
         formatTotal: (n) => fmtUSD(n),
@@ -211,8 +211,8 @@ export const SalesTaxCalculatorClient = makeCalculatorClient({
     return {
       rows: [
         { label: 'Final amount', segments: [
-          { label: 'Net amount', value: amount, color: '#3b82f6' },
-          { label: 'Tax', value: tax, color: '#f59e0b' },
+          { label: 'Net amount', value: amount, color: 'var(--chart-coral)' },
+          { label: 'Tax', value: tax, color: 'var(--chart-amber)' },
         ] },
       ],
       formatTotal: (n) => fmtUSD(n),
@@ -286,8 +286,8 @@ export const CompoundInterestCalculatorClient = makeCalculatorClient({
       title: 'Your Contributions vs. Compound Growth',
       centerLabel: 'Future Value',
       slices: [
-        { valueKey: 'totalContributed', label: 'Money you put in', color: '#3b82f6' },
-        { valueKey: 'interestEarned', label: 'Interest earned (free money)', color: '#22c55e' },
+        { valueKey: 'totalContributed', label: 'Money you put in', color: 'var(--chart-coral)' },
+        { valueKey: 'interestEarned', label: 'Interest earned (free money)', color: 'var(--chart-teal)' },
       ],
     },
     {
@@ -324,15 +324,15 @@ export const CompoundInterestCalculatorClient = makeCalculatorClient({
         {
           label: 'Start now',
           segments: [
-            { label: 'You put in', value: contributedNow, color: '#3b82f6' },
-            { label: 'Interest earned', value: Math.max(0, finalNow - contributedNow), color: '#22c55e' },
+            { label: 'You put in', value: contributedNow, color: 'var(--chart-coral)' },
+            { label: 'Interest earned', value: Math.max(0, finalNow - contributedNow), color: 'var(--chart-teal)' },
           ],
         },
         {
           label: 'Wait 10 years',
           segments: [
-            { label: 'You put in', value: contributedLate, color: '#3b82f6' },
-            { label: 'Interest earned', value: Math.max(0, finalLate - contributedLate), color: '#22c55e' },
+            { label: 'You put in', value: contributedLate, color: 'var(--chart-coral)' },
+            { label: 'Interest earned', value: Math.max(0, finalLate - contributedLate), color: 'var(--chart-teal)' },
           ],
         },
       ],
@@ -378,9 +378,9 @@ export const CompoundInterestCalculatorClient = makeCalculatorClient({
     return {
       xLabels,
       lines: [
-        { key: 'contributed', label: 'You put in', color: '#3b82f6', points: contributed, area: true },
-        { key: 'balance', label: 'Total balance', color: '#22c55e', points: balance, area: true },
-        ...(late ? [{ key: 'balanceLate', label: 'Start 10 years later', color: '#ef4444', points: late, dashed: true }] : []),
+        { key: 'contributed', label: 'You put in', color: 'var(--chart-coral)', points: contributed, area: true },
+        { key: 'balance', label: 'Total balance', color: 'var(--chart-teal)', points: balance, area: true },
+        ...(late ? [{ key: 'balanceLate', label: 'Start 10 years later', color: 'var(--chart-ink)', points: late, dashed: true }] : []),
       ],
       highlightBetween: { a: 'contributed', b: 'balance', label: 'Interest earned' },
       formatY: (n) => fmtUSD(n, 0),

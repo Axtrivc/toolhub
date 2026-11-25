@@ -115,7 +115,7 @@ export function URLCodecTool({ initialMode = 'encode', slug = 'url-encoder', l10
               className={`px-4 py-1.5 text-sm font-medium transition-colors ${opt.active ? 'text-white' : ''}`}
               style={
                 opt.active
-                  ? { backgroundColor: 'rgb(37 99 235)' } // brand-600
+                  ? { backgroundColor: 'rgb(var(--primary))' } // brand-600
                   : { backgroundColor: 'rgb(var(--bg-card))', color: 'rgb(var(--text-muted))' }
               }
             >

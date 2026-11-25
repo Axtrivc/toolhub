@@ -21,8 +21,7 @@ import { buildFaqJsonLd } from '@/lib/faq-jsonld'
 import { SITE_URL } from '@/lib/constants'
 import { type ToolMeta } from '@/lib/tool-types'
 import { type ToolL10n } from '@/lib/i18n/tool-l10n-core'
-import { getToolIcon } from '@/lib/tool-icons'
-import { SmartIcon } from '@/components/SmartIcon'
+import './tool-page.css'
 
 interface ToolLayoutProps {
   tool: ToolMeta
@@ -33,7 +32,7 @@ interface ToolLayoutProps {
    * 语义与原 getToolL10n 一致,而整表注册表不进客户端 chunk。未传 → 恒英文回退。
    */
   l10n?: ToolL10n
-  children?: ReactNode
+  children: [toolInterface: ReactNode, article: ReactNode]
 }
 
 // ──────────── 轻量 JSON-LD 构建(内联,工具数据全部来自 tool prop) ────────────
@@ -78,6 +77,7 @@ function buildBreadcrumbJsonLdFrom(tool: ToolMeta) {
  */
 export function ToolLayout({ tool, l10n, children }: ToolLayoutProps) {
   const { locale } = useApp()
+  const [toolInterface, article] = children
   // 可见标题/简介/面包屑本地化(en 回退 tool.h1/shortIntro/name 原值,SSR 恒英文)。
   // 注意:SEO <title>/meta/JSON-LD 仍走英文(见 buildToolMetadata/build*JsonLd),不受影响。
   const visibleH1 = getToolName(locale, tool.slug, tool.h1)
@@ -88,7 +88,7 @@ export function ToolLayout({ tool, l10n, children }: ToolLayoutProps) {
   const breadcrumbJsonLd = buildBreadcrumbJsonLdFrom(tool)
 
   return (
-    <div className="container-page py-8">
+    <div className="tool-page container-page pb-16 pt-7 sm:pb-24 sm:pt-12">
       {/* 最近使用记录 - 静默写入 localStorage(渲染 null,不影响布局) */}
       <RecentlyUsedTracker slug={tool.slug} />
 
@@ -111,7 +111,7 @@ export function ToolLayout({ tool, l10n, children }: ToolLayoutProps) {
       {/* ─────────── ① 顶层交互区 ─────────── */}
 
       {/* 面包屑(嵌入时隐藏;animate-fade-in 入场淡入,见 globals.css) */}
-      <nav data-embed-hide aria-label="Breadcrumb" className="mb-6 animate-fade-in text-sm" style={{ color: 'rgb(var(--text-subtle))' }}>
+      <nav data-embed-hide aria-label="Breadcrumb" className="mb-8 text-sm sm:mb-10" style={{ color: 'rgb(var(--text-subtle))' }}>
         <ol className="flex flex-wrap items-center gap-2">
           <li>
             <Link href="/" className="hover:text-brand-600">
@@ -134,37 +134,24 @@ export function ToolLayout({ tool, l10n, children }: ToolLayoutProps) {
       </nav>
 
       {/* 工具标题 + 收藏按钮 */}
-      <header data-embed-hide className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
-        <div className="flex min-w-0 items-start gap-4">
-          {/* 工具图标 Badge:与首页工具卡同一套 getToolIcon 映射,
-              主色淡底 + 细描边的圆角容器,给标题区一个视觉锚点 */}
-          <span
-            aria-hidden="true"
-            className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-primary/20 bg-primary/5 text-primary"
-          >
-            <SmartIcon icon={getToolIcon(tool)} className="h-6 w-6" />
+      <header data-embed-hide className="relative mb-8 sm:mb-10">
+        <div className="mb-4 flex flex-wrap items-center gap-2 sm:pr-28">
+          <span className="rounded-full bg-primary px-3 py-1 text-xs font-medium uppercase tracking-[1.5px] text-white">
+            {t(locale, 'badgeFree')}
           </span>
-          <div className="min-w-0">
-            <h1 className="text-3xl font-bold sm:text-4xl" style={{ color: 'rgb(var(--text))' }}>
-              {visibleH1}
-            </h1>
-            {/* 真实徽章:免费、无需注册。slug 哈希评分已移除(无真实评价来源,
-                星标与 "xxx+ ratings" 属无来源声称,不再展示) */}
-            <div className="mt-2 flex flex-wrap items-center gap-x-2 gap-y-1 text-sm">
-              <span className="inline-flex items-center rounded-full border border-primary/20 bg-primary/5 px-2.5 py-0.5 font-medium text-primary">
-                {t(locale, 'badgeFree')}
-              </span>
-              <span className="inline-flex items-center rounded-full border border-border/60 px-2.5 py-0.5 text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>
-                {visibleCategory}
-              </span>
-            </div>
-            <p className="mt-3 max-w-2xl text-lg leading-relaxed" style={{ color: 'rgb(var(--text-muted))' }}>
-              {visibleShortIntro}
-            </p>
-          </div>
+          <span className="inline-flex items-center gap-1.5 rounded-full bg-surface-card px-3 py-1 text-xs font-medium text-ink">
+            {visibleCategory}
+          </span>
         </div>
-        {/* ❤️ 收藏按钮:同步 localStorage.favorites,嵌入时随 header 一起隐藏 */}
-        <FavoriteButton slug={tool.slug} name={visibleName} />
+        <h1 className="max-w-5xl font-serif text-4xl font-normal leading-[1.06] tracking-[-0.5px] text-ink sm:pr-24 sm:text-5xl sm:tracking-[-1px]">
+          {visibleH1}
+        </h1>
+        <p className="mt-4 max-w-[48rem] text-base leading-relaxed text-body sm:text-lg">
+          {visibleShortIntro}
+        </p>
+        <div className="mt-4 sm:absolute sm:right-0 sm:top-0 sm:mt-0">
+          <FavoriteButton slug={tool.slug} name={visibleName} />
+        </div>
       </header>
 
       {/* 顶部广告位(嵌入时隐藏) */}
@@ -176,8 +163,8 @@ export function ToolLayout({ tool, l10n, children }: ToolLayoutProps) {
           .tool-shell 挂钩 globals.css:内部输入框双层 Ring 焦点态、
           数据表格圆角容器/斑马纹/表头/行 hover 统一由全局 CSS 提供;
           卡片自身 hover 升阴影(transition-all 平滑过渡)。 */}
-      <div className="tool-shell rounded-xl border border-border/60 bg-card p-6 shadow-sm transition-all hover:shadow-md sm:p-8">
-        {children}
+      <div className="tool-shell min-w-0 rounded-2xl border border-hairline bg-canvas p-4 sm:p-8">
+        {toolInterface}
       </div>
 
       {/* 黄金广告位 ① - 工具操作面板正下方:真实 <ins> + push,容器按
@@ -186,24 +173,17 @@ export function ToolLayout({ tool, l10n, children }: ToolLayoutProps) {
         <AdSlot slot={`${tool.slug}-in-content`} format="rectangle" />
       </div>
 
-      {/* YMYL 免责声明 - 金融/健康类工具渲染,降低 Google YMYL 算法降权风险。
-          嵌入时保留(YMYL 合规不能因嵌入而丢失)。 */}
-      <Disclaimer tool={tool} />
-
-      {/* ─────────── ② 中部 SEO 长文本区 ─────────── */}
-      <div data-embed-hide>
-                {/* 公式区 - 闭式公式工具渲染,无注册的工具返回 null 不渲染 */}
+      <div className="tool-notes">
         <FormulaSection slug={tool.slug} tool={tool} l10n={l10n} />
+        <Disclaimer tool={tool} />
+      </div>
 
-        {/* 黄金广告位 ② - 文章内容区(content)与 FAQ 模块之间:真实 <ins>,
-            horizontal 规格锁死 min-h(90/100px)防抖动 */}
+      <div data-embed-hide>
+        {article}
         <AdSlot slot={`${tool.slug}-mid`} format="horizontal" fullWidth />
 
         {/* 可见 FAQ 手风琴 - 与 FAQPage JSON-LD schema 同源(lib/tool-faqs.ts) */}
         <VisibleFaqs slug={tool.slug} l10n={l10n} />
-
-        {/* 嵌入工具区块 - 让博主复制 iframe 代码获取站外反向链接 */}
-        <EmbedTool tool={tool} />
 
         {/* 底部广告位 */}
         <AdSlot slot={`${tool.slug}-bottom`} format="horizontal" fullWidth />
@@ -213,6 +193,7 @@ export function ToolLayout({ tool, l10n, children }: ToolLayoutProps) {
       <div data-embed-hide>
         {/* 相关工具内链 - SEO 内链网络 + 降低跳出率,同分类优先 3~6 个 */}
         <RelatedTools slug={tool.slug} />
+        <EmbedTool tool={tool} />
       </div>
     </div>
   )

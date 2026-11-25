@@ -172,7 +172,7 @@ export function EncoderDecoderTool({ encode, decode, initialMode = 'encode', slu
                 }`}
                 style={
                   active
-                    ? { backgroundColor: 'rgb(37 99 235)' } // brand-600
+                    ? { backgroundColor: 'rgb(var(--primary))' } // brand-600
                     : { backgroundColor: 'rgb(var(--bg-card))', color: 'rgb(var(--text-muted))' }
                 }
               >
@@ -193,7 +193,7 @@ export function EncoderDecoderTool({ encode, decode, initialMode = 'encode', slu
             <button
               type="button"
               onClick={() => setInput('')}
-              className="-my-1 rounded-md px-2 py-1.5 text-xs text-slate-500 hover:text-red-500 dark:text-slate-400 sm:text-sm"
+              className="-my-1 rounded-md px-2 py-1.5 text-xs text-muted-ink hover:text-red-500 dark:text-slate-400 sm:text-sm"
             >
               {L('clear', 'Clear')}
             </button>

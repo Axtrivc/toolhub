@@ -202,7 +202,7 @@ export function JsonSchemaGeneratorClient() {
                 type="button"
                 onClick={() => setInput('')}
                 className="-my-1 rounded-md px-2 py-1.5 text-xs hover:text-red-500 sm:text-sm"
-                style={{ color: 'rgb(var(--text-faint))' }}
+                style={{ color: 'rgb(var(--text-subtle))' }}
               >
                 {L('clear', 'Clear')}
               </button>
@@ -241,7 +241,7 @@ export function JsonSchemaGeneratorClient() {
             </span>
             <CopyButton value={result.output} label={L('copy', 'Copy')} />
           </div>
-          <pre
+          <pre data-code-output
             className="max-h-96 w-full overflow-auto rounded-lg border p-4 font-mono text-sm shadow-sm"
             style={{
               borderColor: 'rgb(var(--border-strong))',

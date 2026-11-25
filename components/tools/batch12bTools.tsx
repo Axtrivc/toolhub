@@ -103,7 +103,7 @@ export function LogFilterClient() {
         </p>
       )}
       {logs && result.matched === 0 && !result.invalid && (
-        <p className="text-sm" style={{ color: 'rgb(var(--text-faint))' }}>{L('noLines', 'No lines match the current filters.')}</p>
+        <p className="text-sm" style={{ color: 'rgb(var(--text-subtle))' }}>{L('noLines', 'No lines match the current filters.')}</p>
       )}
       {result.out && (
         <div>
@@ -114,7 +114,7 @@ export function LogFilterClient() {
             </span>
             <CopyButton value={result.out} />
           </div>
-          <pre className="max-h-96 overflow-auto rounded-lg border p-4 font-mono text-xs whitespace-pre-wrap"
+          <pre data-code-output className="max-h-96 overflow-auto rounded-lg border p-4 font-mono text-xs whitespace-pre-wrap"
             style={{ borderColor: 'rgb(var(--border))', backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text))' }}>{result.out}</pre>
         </div>
       )}
@@ -185,8 +185,8 @@ export function AsciiTableClient() {
               <tr key={r.dec} className="border-b last:border-b-0 hover:bg-slate-100 dark:hover:bg-slate-800" style={{ borderColor: 'rgb(var(--border))' }}>
                 <td className="px-3 py-1.5" style={{ color: 'rgb(var(--text))' }}>{r.dec}</td>
                 <td className="px-3 py-1.5" style={{ color: 'rgb(var(--text))' }}>0x{r.hex}</td>
-                <td className="px-3 py-1.5" style={{ color: 'rgb(var(--text-faint))' }}>{r.oct}</td>
-                <td className="px-3 py-1.5" style={{ color: 'rgb(var(--text-faint))' }}>{r.bin}</td>
+                <td className="px-3 py-1.5" style={{ color: 'rgb(var(--text-subtle))' }}>{r.oct}</td>
+                <td className="px-3 py-1.5" style={{ color: 'rgb(var(--text-subtle))' }}>{r.bin}</td>
                 <td className="px-3 py-1.5" style={{ color: 'rgb(var(--text))' }}>{r.name ? `␃ ${r.name}` : r.ch}</td>
               </tr>
             ))}
@@ -240,7 +240,7 @@ export function ScreenTimeCalculatorClient() {
           />
         </div>
       ) : (
-        <p className="text-sm" style={{ color: 'rgb(var(--text-faint))' }}>{L('invalid', 'Enter valid hours (0-24) and age')}</p>
+        <p className="text-sm" style={{ color: 'rgb(var(--text-subtle))' }}>{L('invalid', 'Enter valid hours (0-24) and age')}</p>
       )}
 
       <ResultActions

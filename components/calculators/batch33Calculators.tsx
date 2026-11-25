@@ -156,7 +156,7 @@ export const OhmsLawCalculatorClient = makeCalculatorClient({
         {
           key: 'current',
           label: 'Current (mA)',
-          color: '#3b82f6',
+          color: 'var(--chart-coral)',
           points: rs.map((r) => (sol.V / r) * 1000),
           area: true,
         },
@@ -242,8 +242,8 @@ export const LedResistorCalculatorClient = makeCalculatorClient({
     title: 'Where the power goes',
     centerLabel: 'Total',
     slices: [
-      { valueKey: 'resistorPower', label: 'Resistor', color: '#f59e0b' },
-      { valueKey: 'ledPower', label: 'LED', color: '#22c55e' },
+      { valueKey: 'resistorPower', label: 'Resistor', color: 'var(--chart-amber)' },
+      { valueKey: 'ledPower', label: 'LED', color: 'var(--chart-teal)' },
     ],
   },
   note: '💡 Typical forward voltages: red/amber 1.8-2.2 V, green 2.0-2.4 V, blue/white 3.0-3.4 V. 20 mA is the classic indicator current; modern high-efficiency LEDs are bright enough at 2-5 mA. In series, add the forward voltages — and keep the total under the supply.',
@@ -347,7 +347,7 @@ export const VoltageDividerCalculatorClient = makeCalculatorClient({
         {
           key: 'vout',
           label: 'Vout',
-          color: '#3b82f6',
+          color: 'var(--chart-coral)',
           points: rs.map((r) => (vin * r) / (r1 + r)),
           area: true,
         },
@@ -427,7 +427,7 @@ export const DelayTimeCalculatorClient = makeCalculatorClient({
     const bpm = bpmOrNaN(v.bpm)
     if (isNaN(bpm)) return null
     const q = 60000 / bpm
-    const colors = ['#3b82f6', '#22c55e', '#f59e0b', '#ef4444', '#8b5cf6']
+    const colors = ['var(--chart-coral)', 'var(--chart-teal)', 'var(--chart-amber)', 'var(--chart-ink)', 'var(--chart-muted)']
     const rows = [q * 4, q * 2, q, q / 2, q / 4].map((msv, i) => ({
       label: ['1/1', '1/2', '1/4', '1/8', '1/16'][i],
       segments: [{ label: 'Delay time', value: msv, color: colors[i] }],

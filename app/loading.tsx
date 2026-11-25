@@ -8,7 +8,7 @@ export default function Loading() {
 
   return (
     <div role="status" aria-live="polite" className="flex min-h-[50vh] items-center justify-center">
-      <div className="text-sm text-slate-500">{t(locale, 'loading')}</div>
+      <div className="text-sm text-muted-ink">{t(locale, 'loading')}</div>
     </div>
   )
 }

@@ -19,9 +19,9 @@ export default function NotFound() {
   const popular = featuredLite.slice(0, 6)
 
   return (
-    <div className="container-page flex min-h-[60vh] flex-col items-center justify-center py-20 text-center">
-      <p className="text-7xl font-bold text-brand-600">404</p>
-      <h1 className="mt-4 text-3xl font-bold" style={{ color: 'rgb(var(--text))' }}>
+    <div className="container-page flex min-h-[60vh] flex-col items-center justify-center py-16 text-center sm:py-24">
+      <p className="font-serif text-7xl font-normal tracking-[-1.5px] text-primary">404</p>
+      <h1 className="mt-3 font-serif text-4xl font-normal tracking-[-.5px] sm:text-5xl" style={{ color: 'rgb(var(--text))' }}>
         {t(locale, 'notFoundTitle')}
       </h1>
       <p className="mt-3 max-w-md" style={{ color: 'rgb(var(--text-muted))' }}>
@@ -33,13 +33,9 @@ export default function NotFound() {
           <Link
             key={tool.slug}
             href={`/tools/${tool.slug}/`}
-            className="group rounded-lg border p-4 text-left transition hover:border-brand-300"
-            style={{
-              borderColor: 'rgb(var(--border))',
-              backgroundColor: 'rgb(var(--bg-card))',
-            }}
+            className="rounded-xl border border-hairline bg-canvas p-5 text-left"
           >
-            <div className="font-semibold group-hover:text-brand-600" style={{ color: 'rgb(var(--text))' }}>
+            <div className="font-serif text-xl font-normal leading-tight" style={{ color: 'rgb(var(--text))' }}>
               {getToolName(locale, tool.slug, tool.name)}
             </div>
             <div className="mt-1 text-sm" style={{ color: 'rgb(var(--text-subtle))' }}>

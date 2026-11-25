@@ -224,7 +224,7 @@ export function RandomChoicePickerClient() {
       >
         <span
           className={`text-2xl font-bold sm:text-3xl ${spinning ? 'animate-pulse' : ''}`}
-          style={{ color: display ? 'rgb(var(--text))' : 'rgb(var(--text-faint))' }}
+          style={{ color: display ? 'rgb(var(--text))' : 'rgb(var(--text-subtle))' }}
         >
           {spinning ? display : display || L('pressPickToChoose', 'Press Pick to choose')}
         </span>
@@ -242,7 +242,7 @@ export function RandomChoicePickerClient() {
           {winners.map((w, i) => (
             <div
               key={`${w}-${i}`}
-              className="rounded-xl border border-primary/20 bg-gradient-to-br from-primary/5 to-primary/10 px-4 py-2.5 text-lg font-bold text-primary shadow-sm"
+              className="rounded-xl border border-primary/20 bg-surface-card px-4 py-2.5 text-lg font-bold text-primary shadow-sm"
             >
               {w}
             </div>

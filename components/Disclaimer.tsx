@@ -34,8 +34,8 @@ export function Disclaimer({ tool }: { tool: ToolMeta }) {
 
   return (
     <p
-      className="mt-6 max-w-3xl text-xs leading-relaxed"
-      style={{ color: 'rgb(var(--text-subtle))' }}
+      className="tool-disclaimer mt-6 max-w-3xl rounded-xl bg-surface-card p-5 text-sm leading-relaxed sm:p-8"
+      style={{ color: 'rgb(var(--body))' }}
     >
       {t(locale, key)}
     </p>

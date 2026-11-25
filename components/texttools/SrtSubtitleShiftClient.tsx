@@ -214,7 +214,7 @@ export function SrtSubtitleShiftClient() {
                   setFileError(false)
                 }}
                 className="-my-1 rounded-md px-2 py-1.5 text-xs hover:text-red-500 sm:text-sm"
-                style={{ color: 'rgb(var(--text-faint))' }}
+                style={{ color: 'rgb(var(--text-subtle))' }}
               >
                 {L('clear', 'Clear')}
               </button>
@@ -251,7 +251,7 @@ export function SrtSubtitleShiftClient() {
             className="w-40 rounded-lg border p-3 font-mono text-sm shadow-sm outline-none transition focus:ring-2"
             style={inputStyle}
           />
-          <p className="mt-1 text-xs" style={{ color: 'rgb(var(--text-faint))' }}>
+          <p className="mt-1 text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>
             {L('offsetHint', 'Negative = subtitles appear earlier; positive = later.')}
           </p>
         </div>
@@ -313,7 +313,7 @@ export function SrtSubtitleShiftClient() {
               {L('clampClampedTo', 'clamped to 00:00:00,000.')}
             </p>
           )}
-          <pre
+          <pre data-code-output
             className="max-h-96 overflow-auto rounded-lg border p-4 font-mono text-sm"
             style={{ borderColor: 'rgb(var(--border))', backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text))' }}
           >

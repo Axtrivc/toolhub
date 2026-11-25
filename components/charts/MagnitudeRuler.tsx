@@ -71,7 +71,7 @@ export function MagnitudeRuler({
             />
             <div
               className="absolute top-[calc(50%+10px)] -translate-x-1/2 whitespace-nowrap text-[10px] tabular-nums"
-              style={{ left: `${t.left}%`, color: 'rgb(var(--text-faint))' }}
+              style={{ left: `${t.left}%`, color: 'rgb(var(--text-subtle))' }}
             >
               {t.label}
             </div>
@@ -93,7 +93,7 @@ export function MagnitudeRuler({
             left: `${pos(lgFrom)}%`,
             transition: slide,
             backgroundColor: 'rgb(var(--primary))',
-            boxShadow: '0 1px 3px rgb(0 0 0 / 0.3), 0 0 0 2px rgb(var(--bg-card))',
+            outline: '2px solid rgb(var(--bg-card))',
           }}
         />
         {/* 结果标记(下半区):绿色(与图表套件高亮色同族) */}
@@ -102,16 +102,16 @@ export function MagnitudeRuler({
           style={{
             left: `${pos(lgTo)}%`,
             transition: slide,
-            backgroundColor: '#22c55e',
-            boxShadow: '0 1px 3px rgb(0 0 0 / 0.3), 0 0 0 2px rgb(var(--bg-card))',
+            backgroundColor: 'var(--chart-teal)',
+            outline: '2px solid rgb(var(--bg-card))',
           }}
         />
         <div
           className="absolute bottom-0 flex h-[calc(50%-5px)] -translate-x-1/2 flex-col items-center"
           style={{ left: `${pos(lgTo)}%`, transition: slide }}
         >
-          <div className="w-px flex-1" style={{ backgroundColor: 'rgb(34 197 94 / 0.4)' }} />
-          <span className="max-w-32 truncate text-xs font-semibold tabular-nums" style={{ color: '#22c55e' }}>
+          <div className="w-px flex-1" style={{ backgroundColor: 'rgb(var(--accent-teal) / 0.4)' }} />
+          <span className="max-w-32 truncate text-xs font-semibold tabular-nums" style={{ color: 'rgb(var(--body))' }}>
             {to.display}
           </span>
         </div>

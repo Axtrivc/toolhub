@@ -39,16 +39,13 @@ function BentoCell({
   const { locale } = useApp()
   return (
     <div
-      className={`group flex flex-col rounded-xl border p-4 transition hover:border-brand-300 dark:hover:border-brand-700 ${className}`}
-      style={{ borderColor: 'rgb(var(--border))', backgroundColor: 'rgb(var(--bg-card))' }}
+      className={`flex min-w-0 flex-col gap-3 rounded-xl border border-hairline bg-canvas p-6 ${className}`}
     >
-      <div className="mb-2 text-xs font-semibold uppercase tracking-wide" style={{ color: 'rgb(var(--text-faint))' }}>
-        {title}
-      </div>
+      <h3 className="font-serif text-[1.75rem] font-normal leading-tight tracking-[-.3px] text-ink">{title}</h3>
       <div className="flex-1">{children}</div>
       <Link
         href={href}
-        className="mt-3 text-xs font-medium text-brand-600 opacity-70 transition group-hover:opacity-100 max-sm:inline-block max-sm:py-2 dark:text-brand-400"
+        className="mt-auto self-start pt-2 text-sm font-medium text-brand-700 dark:text-primary"
       >
         {t(locale, 'bentoOpenTool')}
       </Link>
@@ -77,15 +74,10 @@ function MiniInput({
         onChange={(e) => onChange(e.target.value)}
         aria-label={ariaLabel}
         autoComplete="off"
-        className="w-full rounded-lg border p-2 text-sm font-semibold outline-none focus:ring-2 focus:ring-brand-200"
-        style={{
-          borderColor: 'rgb(var(--border-strong))',
-          backgroundColor: 'rgb(var(--bg-card))',
-          color: 'rgb(var(--text))',
-        }}
+        className="h-10 w-full min-w-0 rounded-lg border border-hairline bg-canvas px-3 pr-7 text-base text-ink focus:border-primary focus:outline-none focus:ring-[3px] focus:ring-primary/15"
       />
       {suffix && (
-        <span className="pointer-events-none absolute right-2 top-1/2 -translate-y-1/2 text-xs" style={{ color: 'rgb(var(--text-faint))' }}>
+        <span className="pointer-events-none absolute right-2 top-1/2 -translate-y-1/2 text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>
           {suffix}
         </span>
       )}
@@ -104,7 +96,7 @@ function PercentCell() {
   const result = Number.isFinite(p) && Number.isFinite(v) ? (p / 100) * v : null
 
   return (
-    <BentoCell title={t(locale, 'bentoPercentTitle')} href="/tools/percentage-calculator" className="col-span-2">
+    <BentoCell title={t(locale, 'bentoPercentTitle')} href="/tools/percentage-calculator" className="sm:col-span-3 lg:col-span-2">
       <div className="flex items-end gap-2">
         <div className="w-24">
           <MiniInput value={pct} onChange={setPct} suffix="%" ariaLabel="percent" />
@@ -112,15 +104,15 @@ function PercentCell() {
         <span className="pb-2.5 text-sm" style={{ color: 'rgb(var(--text-muted))' }}>
           {t(locale, 'bentoPercentIs')}
         </span>
-        <div className="w-full flex-1">
+        <div className="w-full min-w-0 flex-1">
           <MiniInput value={val} onChange={setVal} ariaLabel="value" />
         </div>
       </div>
       <div className="mt-3 flex items-baseline gap-2">
-        <span className="text-xs" style={{ color: 'rgb(var(--text-faint))' }}>
+        <span className="text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>
           {t(locale, 'bentoPercentResultLabel')}
         </span>
-        <span className="text-2xl font-bold text-primary tabular-nums">
+        <span className="font-serif text-3xl font-normal tracking-[-.5px] text-ink tabular-nums">
           {result === null ? '—' : Number(result.toFixed(2)).toLocaleString('en-US')}
         </span>
       </div>
@@ -142,7 +134,7 @@ function ConverterCell() {
   const result = Number.isFinite(n) ? (dir === 'cm2in' ? n / CM_PER_IN : n * CM_PER_IN) : null
 
   return (
-    <BentoCell title={t(locale, 'bentoConverterTitle')} href="/tools/length-converter" className="col-span-2">
+    <BentoCell title={t(locale, 'bentoConverterTitle')} href="/tools/length-converter" className="sm:col-span-3 lg:col-span-2">
       <div className="flex items-center gap-2">
         <div className="w-24">
           <MiniInput value={raw} onChange={setRaw} suffix={fromUnit} ariaLabel={fromUnit} />
@@ -152,13 +144,13 @@ function ConverterCell() {
           onClick={() => setDir((d) => (d === 'cm2in' ? 'in2cm' : 'cm2in'))}
           aria-label={t(locale, 'bentoConverterSwap')}
           title={t(locale, 'bentoConverterSwap')}
-          className="shrink-0 rounded-lg border px-2.5 py-2 text-sm font-bold transition hover:bg-slate-100 dark:hover:bg-slate-800"
-          style={{ borderColor: 'rgb(var(--border-strong))', color: 'rgb(var(--text-muted))' }}
+          className="shrink-0 h-10 rounded-lg border bg-canvas px-2.5 text-sm font-medium"
+          style={{ borderColor: 'rgb(var(--border))', color: 'rgb(var(--text-muted))' }}
         >
           ⇄
         </button>
-        <div className="min-w-0 flex-1 truncate rounded-lg border p-2 text-right text-sm font-bold tabular-nums"
-          style={{ borderColor: 'rgb(var(--border-strong))', color: 'rgb(var(--text))', backgroundColor: 'rgb(var(--bg-subtle))' }}
+        <div className="min-w-0 flex-1 truncate rounded-lg border p-2 text-right font-serif text-xl font-normal leading-tight tabular-nums"
+          style={{ borderColor: 'rgb(var(--border))', color: 'rgb(var(--text))', backgroundColor: 'rgb(var(--bg-subtle))' }}
         >
           {result === null ? '—' : `${Number(result.toFixed(2)).toLocaleString('en-US')} ${toUnit}`}
         </div>
@@ -223,24 +215,24 @@ function MortgageDemoCell() {
   const payment = monthlyPI(DEMO_PRINCIPAL, parseFloat(DEMO_RATE), DEMO_MONTHS)
 
   return (
-    <BentoCell title={t(locale, 'bentoMortgageTitle')} href="/tools/mortgage-calculator" className="col-span-2">
+    <BentoCell title={t(locale, 'bentoMortgageTitle')} href="/tools/mortgage-calculator" className="sm:col-span-3 lg:col-span-2">
       <div className="flex items-center justify-between gap-3">
         <div>
-          <div className="text-xs" style={{ color: 'rgb(var(--text-faint))' }}>
+          <div className="text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>
             {t(locale, 'bentoMortgageParams')}
           </div>
           <div className="mt-1 text-xs" style={{ color: 'rgb(var(--text-muted))' }}>
-            {t(locale, 'bentoMortgageDemo')}: <span className="font-mono font-semibold">{typed || '\u00a0'}</span>%
+            {t(locale, 'bentoMortgageDemo')}: <span className="font-mono font-medium">{typed || '\u00a0'}</span>%
           </div>
         </div>
         <div className="text-right">
           <div
-            className={`text-xl font-bold tabular-nums transition-opacity ${showTyping ? 'opacity-30' : 'opacity-100'}`}
+            className={`font-serif text-3xl font-normal tracking-[-.5px] tabular-nums transition-opacity ${showTyping ? 'opacity-80' : 'opacity-100'}`}
             style={{ color: 'rgb(var(--text))' }}
           >
             {fmtUSD(payment, 0)}
           </div>
-          <div className="text-[10px] uppercase tracking-wide" style={{ color: 'rgb(var(--text-faint))' }}>
+          <div className="text-xs uppercase tracking-wide" style={{ color: 'rgb(var(--text-subtle))' }}>
             {t(locale, 'bentoMortgageMonthly')}
           </div>
         </div>
@@ -294,13 +286,13 @@ function VisitorsCell() {
   if (!stats) return null
 
   return (
-    <BentoCell title={t(locale, 'bentoVisitorsTitle')} href="/tools" className="col-span-2 md:col-span-1">
+    <BentoCell title={t(locale, 'bentoVisitorsTitle')} href="/tools" className="sm:col-span-3">
       <div className="flex items-baseline justify-between">
         <div>
-          <div className="text-2xl font-bold text-primary">
+          <div className="font-serif text-3xl font-normal tracking-[-.5px] text-ink tabular-nums">
             <CountUp to={stats.visitors} />
           </div>
-          <div className="text-[10px] uppercase tracking-wide" style={{ color: 'rgb(var(--text-faint))' }}>
+          <div className="text-xs uppercase tracking-wide" style={{ color: 'rgb(var(--text-subtle))' }}>
             {t(locale, 'bentoVisitorsToday')}
           </div>
         </div>
@@ -308,7 +300,7 @@ function VisitorsCell() {
           <div className="text-sm font-semibold tabular-nums" style={{ color: 'rgb(var(--text-muted))' }}>
             <CountUp to={stats.total} />
           </div>
-          <div className="text-[10px] uppercase tracking-wide" style={{ color: 'rgb(var(--text-faint))' }}>
+          <div className="text-xs uppercase tracking-wide" style={{ color: 'rgb(var(--text-subtle))' }}>
             {t(locale, 'bentoVisitorsTotal')}
           </div>
         </div>
@@ -344,8 +336,8 @@ function TodayCell() {
     : null
 
   return (
-    <BentoCell title={t(locale, 'bentoTodayTitle')} href="/tools/age-calculator" className="col-span-2 md:col-span-1">
-      <div className="text-2xl font-bold" style={{ color: 'rgb(var(--text))' }}>
+    <BentoCell title={t(locale, 'bentoTodayTitle')} href="/tools/age-calculator" className="sm:col-span-3">
+      <div className="font-serif text-3xl font-normal tracking-[-.5px] text-ink">
         {now ? now.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) : '—'}
       </div>
       <div className="mt-1 space-y-0.5 text-[11px]" style={{ color: 'rgb(var(--text-muted))' }}>
@@ -361,16 +353,16 @@ function TodayCell() {
 export function LiveBento() {
   const { locale } = useApp()
   return (
-    <section className="mb-12" aria-label={t(locale, 'bentoTitle')}>
-      <div className="mb-4">
-        <h2 className="text-xl font-bold sm:text-2xl" style={{ color: 'rgb(var(--text))' }}>
+    <section aria-label={t(locale, 'bentoTitle')}>
+      <div className="mb-10">
+        <h2 className="font-serif text-4xl font-normal leading-tight tracking-[-.02em] text-ink md:text-5xl">
           {t(locale, 'bentoTitle')}
         </h2>
-        <p className="mt-1 text-sm" style={{ color: 'rgb(var(--text-muted))' }}>
+        <p className="mt-3 leading-relaxed" style={{ color: 'rgb(var(--text-muted))' }}>
           {t(locale, 'bentoSubtitle')}
         </p>
       </div>
-      <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
+      <div className="grid grid-cols-1 gap-5 sm:grid-cols-6">
         <PercentCell />
         <ConverterCell />
         <MortgageDemoCell />

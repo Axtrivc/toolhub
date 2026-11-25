@@ -294,7 +294,7 @@ export function BorderRadiusGeneratorClient() {
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
         {/* 联动预览 */}
         <div className="flex flex-col gap-3">
-          <span className="text-xs font-medium uppercase tracking-wide" style={{ color: 'rgb(var(--text-faint))' }}>{L('preview', 'Live preview')}</span>
+          <span className="text-xs font-medium uppercase tracking-wide" style={{ color: 'rgb(var(--text-subtle))' }}>{L('preview', 'Live preview')}</span>
           <div className="flex flex-1 items-center justify-center rounded-xl border p-8" style={{ borderColor: 'rgb(var(--border))', backgroundColor: 'rgb(var(--bg-subtle))' }}>
             <div
               className="h-36 w-full max-w-[260px] border-2 shadow-inner"
@@ -333,7 +333,7 @@ export function BorderRadiusGeneratorClient() {
             </div>
           </div>
 
-          {elliptical && <p className="text-xs font-medium" style={{ color: 'rgb(var(--text-faint))' }}>{L('horizontal', 'Horizontal radii')}</p>}
+          {elliptical && <p className="text-xs font-medium" style={{ color: 'rgb(var(--text-subtle))' }}>{L('horizontal', 'Horizontal radii')}</p>}
           {/* linkAll 时只有一条滑杆,单列铺满整行——放进 2 列网格会只占左格,移动端右半留白 */}
           <div className={`grid gap-3 ${linkAll ? 'grid-cols-1' : 'grid-cols-2'}`}>
             {linkAll
@@ -348,7 +348,7 @@ export function BorderRadiusGeneratorClient() {
 
           {elliptical && (
             <>
-              <p className="text-xs font-medium" style={{ color: 'rgb(var(--text-faint))' }}>{L('vertical', 'Vertical radii')}</p>
+              <p className="text-xs font-medium" style={{ color: 'rgb(var(--text-subtle))' }}>{L('vertical', 'Vertical radii')}</p>
               <div className={`grid gap-3 ${linkAll ? 'grid-cols-1' : 'grid-cols-2'}`}>
                 {linkAll
                   ? sliderRow('br-vtl', L('allCornersV', 'All corners'), vtl, setVtl, true)
@@ -370,7 +370,7 @@ export function BorderRadiusGeneratorClient() {
           <span className="text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>CSS</span>
           <CopyButton value={css} label={L('copyCss', 'Copy CSS')} />
         </div>
-        <pre className="overflow-x-auto rounded-lg border p-4 font-mono text-sm" style={{ borderColor: 'rgb(var(--border))', backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text))' }}>{css}</pre>
+        <pre data-code-output className="overflow-x-auto rounded-lg border p-4 font-mono text-sm" style={{ borderColor: 'rgb(var(--border))', backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text))' }}>{css}</pre>
       </div>
       <CalculatorNote>{L('note', '📐 Corner order is clockwise from top left: TL TR BR BL. The elliptical form takes horizontal / vertical radii separated by a slash — 50% / 50% with equal pairs renders a perfect ellipse. Percentages reference the box side they sit on, which is why blobs survive resizing better than pixel values.')}</CalculatorNote>
     </div>
@@ -550,7 +550,7 @@ export function ColorPaletteGeneratorClient() {
                 {/* 窄屏色块收窄到 w-16,给右侧 rgb/hsl 留出整行宽度,避免值在括号中间折行 */}
                 <div className="h-14 w-16 shrink-0 rounded-lg border sm:w-24" style={{ backgroundColor: hex, borderColor: 'rgb(var(--border))' }} />
                 <div className="min-w-0 flex-1">
-                  <div className="text-xs font-semibold uppercase tracking-wide" style={{ color: 'rgb(var(--text-faint))' }}>
+                  <div className="text-xs font-semibold uppercase tracking-wide" style={{ color: 'rgb(var(--text-subtle))' }}>
                     {L(sw.role, ROLE_FB[sw.role] ?? sw.role)}
                   </div>
                   <div className="mt-1 flex flex-wrap gap-x-4 gap-y-1 font-mono text-xs" style={{ color: 'rgb(var(--text-muted))' }}>
@@ -937,7 +937,7 @@ export function UsernameGeneratorClient() {
           {names.map((n) => (
             <div key={n} className="flex items-center gap-3 rounded-lg border p-3" style={{ borderColor: 'rgb(var(--border))', backgroundColor: 'rgb(var(--bg-card))' }}>
               <code className="flex-1 truncate font-mono text-sm" style={{ color: 'rgb(var(--text))' }}>{n}</code>
-              <span className="shrink-0 text-xs tabular-nums" style={{ color: 'rgb(var(--text-faint))' }}>{n.length}/{limit}</span>
+              <span className="shrink-0 text-xs tabular-nums" style={{ color: 'rgb(var(--text-subtle))' }}>{n.length}/{limit}</span>
               <CopyButton value={n} />
             </div>
           ))}
@@ -1071,7 +1071,7 @@ export function SecretSantaGeneratorClient() {
             className="w-full rounded-lg border p-4 text-sm outline-none transition focus:ring-2"
             style={{ borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rgb(var(--bg-card))', color: 'rgb(var(--text))' }} />
           {names.length > 0 && (
-            <p className="mt-1 text-xs" style={{ color: 'rgb(var(--text-faint))' }}>
+            <p className="mt-1 text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>
               {L('nNames', '{n} participants').replace('{n}', String(names.length))}
               {exclPairs.length > 0 ? ` · ${L('nExcl', '{n} exclusion pairs').replace('{n}', String(exclPairs.length))}` : ''}
             </p>
@@ -1085,7 +1085,7 @@ export function SecretSantaGeneratorClient() {
             placeholder={'Alice - Bob\nCarla - Dev'}
             className="w-full rounded-lg border p-4 font-mono text-sm outline-none transition focus:ring-2"
             style={{ borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rgb(var(--bg-card))', color: 'rgb(var(--text))' }} />
-          <p className="mt-1 text-xs" style={{ color: 'rgb(var(--text-faint))' }}>
+          <p className="mt-1 text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>
             {L('exclHint', 'Couples or teammates who must not draw each other, e.g. Alice - Bob. Separators: ->, &, comma, or a hyphen with spaces on both sides — hyphenated names like Mary-Jane keep working.')}
           </p>
         </div>
@@ -1118,7 +1118,7 @@ export function SecretSantaGeneratorClient() {
           </select>
           {revealTarget && (
             <div role="status" aria-live="polite" className="rounded-xl border px-6 py-4" style={{ borderColor: 'rgb(var(--primary) / 0.3)', backgroundColor: 'rgb(var(--primary) / 0.06)' }}>
-              <div className="text-[10px] font-medium uppercase tracking-widest" style={{ color: 'rgb(var(--text-faint))' }}>
+              <div className="text-[10px] font-medium uppercase tracking-widest" style={{ color: 'rgb(var(--text-subtle))' }}>
                 {L('givesTo', 'You are buying a gift for')}
               </div>
               <div className="mt-1 text-2xl font-bold" style={{ color: 'rgb(var(--primary))' }}>🎁 {revealTarget}</div>

@@ -2,10 +2,11 @@
 
 import { useEffect, useId, useRef, useState } from 'react'
 import dynamic from 'next/dynamic'
+import { usePathname } from 'next/navigation'
 import Link from 'next/link'
 import { useApp } from './providers/AppProviders'
 import { t } from '@/lib/i18n'
-import { SITE_NAME } from '@/lib/constants'
+import { BrandWordmark } from './BrandWordmark'
 import { ThemeToggle } from './ThemeToggle'
 import { LanguageToggle } from './LanguageToggle'
 
@@ -18,6 +19,7 @@ const SearchPalette = dynamic(() => import('./SearchPalette').then((m) => m.Sear
 
 export function Header() {
   const { locale } = useApp()
+  const pathname = usePathname()
   const [menuOpen, setMenuOpen] = useState(false)
   const [searchOpen, setSearchOpen] = useState(false)
   // 首次打开后置 true 并常驻:让懒加载的 SearchPalette 保留退场动画
@@ -100,52 +102,48 @@ export function Header() {
   return (
     <header
       data-embed-hide
-      className="sticky top-0 z-40 border-b backdrop-blur-md"
+      className="sticky top-0 z-40 border-b border-hairline-soft bg-canvas"
       style={{
-        borderColor: 'rgb(var(--border))',
-        backgroundColor: 'rgb(var(--bg-card) / 0.8)',
         /* PWA standalone 模式下避开状态栏/刘海;浏览器内恒为 0,无影响 */
         paddingTop: 'env(safe-area-inset-top)',
       }}
     >
-      {/* Header 内层容器:全宽贴边流式布局(无 max-w 限制),
-          Logo 贴最左 / 菜单组贴最右,左右用响应式 padding 留呼吸空间。
-          ⚠️ 按用户要求保持顶部导航栏不动,不改版心居中。 */}
-      <div className="flex w-full items-center justify-between px-6 py-3.5 sm:px-8 lg:px-10">
-        <Link href="/" className="flex items-center gap-2 font-bold" style={{ color: 'rgb(var(--text))' }}>
-          <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-brand-600 text-white">
-            T
-          </span>
-          <span className="text-lg">{SITE_NAME}</span>
+      <div className="container-page flex min-h-16 items-center gap-2 md:gap-8 py-2.5">
+        <Link href="/" className="mr-auto inline-flex items-center text-ink md:mr-0">
+          <BrandWordmark />
         </Link>
 
         {/* 桌面端:水平导航 + 切换按钮(<md 隐藏) */}
-        <div className="hidden items-center gap-1 text-sm font-medium md:flex">
+        <div className="hidden min-w-0 flex-1 items-center justify-between gap-2 text-sm font-medium md:flex">
           <nav className="flex items-center gap-1" style={{ color: 'rgb(var(--text-muted))' }}>
             <Link
               href="/"
-              className="rounded-md px-3 py-2 transition-colors hover:bg-slate-100 dark:hover:bg-slate-700"
+              aria-current={pathname === '/' ? 'page' : undefined}
+              className="rounded-lg px-3 py-2 aria-[current=page]:bg-surface-card transition-colors hover:bg-surface-card"
               style={{ color: 'rgb(var(--text-muted))' }}
             >
               {t(locale, 'navAllTools')}
             </Link>
             <Link
               href="/blog/"
-              className="rounded-md px-3 py-2 transition-colors hover:bg-slate-100 dark:hover:bg-slate-700"
+              aria-current={pathname === '/blog/' ? 'page' : undefined}
+              className="rounded-lg px-3 py-2 aria-[current=page]:bg-surface-card transition-colors hover:bg-surface-card"
               style={{ color: 'rgb(var(--text-muted))' }}
             >
               {t(locale, 'navBlog')}
             </Link>
             <Link
               href="/about/"
-              className="rounded-md px-3 py-2 transition-colors hover:bg-slate-100 dark:hover:bg-slate-700"
+              aria-current={pathname === '/about/' ? 'page' : undefined}
+              className="rounded-lg px-3 py-2 aria-[current=page]:bg-surface-card transition-colors hover:bg-surface-card"
               style={{ color: 'rgb(var(--text-muted))' }}
             >
               {t(locale, 'navAbout')}
             </Link>
             <Link
               href="/contact/"
-              className="rounded-md px-3 py-2 transition-colors hover:bg-slate-100 dark:hover:bg-slate-700"
+              aria-current={pathname === '/contact/' ? 'page' : undefined}
+              className="rounded-lg px-3 py-2 aria-[current=page]:bg-surface-card transition-colors hover:bg-surface-card"
               style={{ color: 'rgb(var(--text-muted))' }}
             >
               {t(locale, 'navContact')}
@@ -153,24 +151,24 @@ export function Header() {
           </nav>
 
           {/* 搜索按钮 + 语言 + 主题切换 */}
-          <div className="ml-2 flex items-center gap-1">
+          <div className="flex items-center gap-2">
             <button
               type="button"
               onClick={openSearch}
               aria-label={t(locale, 'searchOpen')}
               title={t(locale, 'searchOpen')}
-              className="flex h-9 items-center gap-1.5 rounded-lg border pl-2.5 pr-2 transition hover:bg-slate-100 dark:hover:bg-slate-700"
+              className="flex h-9 items-center gap-1.5 rounded-lg border pl-2.5 pr-2 transition hover:bg-surface-card"
               style={{
-                borderColor: 'rgb(var(--border-strong))',
+                borderColor: 'rgb(var(--border))',
                 color: 'rgb(var(--text-muted))',
               }}
             >
-              <svg className="h-5 w-5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <svg className="h-4 w-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-4.35-4.35M11 19a8 8 0 100-16 8 8 0 000 16z" />
               </svg>
               {/* 键盘快捷键微型提示:桌面端可见,极隐蔽高质感。
                   Mac 显示 ⌘K,Windows/Linux 显示 Ctrl K;移动端 hidden。 */}
-              <kbd className="hidden items-center gap-0.5 rounded border border-gray-200 bg-gray-100 px-1.5 py-0.5 text-[10px] font-medium text-gray-400 opacity-70 transition-opacity hover:opacity-100 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-500 sm:inline-flex">
+              <kbd className="hidden items-center gap-0.5 rounded bg-surface-soft px-1.5 py-0.5 font-mono text-xs text-muted-ink sm:inline-flex">
                 {isMac ? '⌘K' : 'Ctrl K'}
               </kbd>
             </button>
@@ -185,9 +183,9 @@ export function Header() {
           onClick={openSearch}
           aria-label={t(locale, 'searchOpen')}
           title={t(locale, 'searchOpen')}
-          className="flex h-10 w-10 items-center justify-center rounded-lg border transition hover:bg-slate-100 dark:border-slate-600 dark:hover:bg-slate-700 md:hidden"
+          className="flex h-10 w-10 items-center justify-center rounded-lg border transition hover:bg-surface-card md:hidden"
           style={{
-            borderColor: 'rgb(var(--border-strong))',
+            borderColor: 'rgb(var(--border))',
             color: 'rgb(var(--text-muted))',
           }}
         >
@@ -203,9 +201,9 @@ export function Header() {
           aria-label={t(locale, 'menuToggle')}
           aria-expanded={menuOpen}
           aria-controls={panelId}
-          className="flex h-10 w-10 items-center justify-center rounded-lg border transition hover:bg-slate-100 dark:border-slate-600 dark:hover:bg-slate-700 md:hidden"
+          className="flex h-10 w-10 items-center justify-center rounded-lg border transition hover:bg-surface-card md:hidden"
           style={{
-            borderColor: 'rgb(var(--border-strong))',
+            borderColor: 'rgb(var(--border))',
             color: 'rgb(var(--text-muted))',
           }}
         >
@@ -241,7 +239,7 @@ export function Header() {
             role="dialog"
             aria-modal="true"
             aria-label={t(locale, 'menuLabel')}
-            className="absolute inset-x-0 top-full z-40 border-b shadow-lg"
+            className="absolute inset-x-0 top-full z-40 border-b"
             style={{
               borderColor: 'rgb(var(--border))',
               backgroundColor: 'rgb(var(--bg-card))',
@@ -250,29 +248,33 @@ export function Header() {
             <nav className="flex w-full flex-col px-6 py-2 sm:px-8 lg:px-10" style={{ color: 'rgb(var(--text))' }}>
               <Link
                 href="/"
+                aria-current={pathname === '/' ? 'page' : undefined}
                 onClick={close}
-                className="rounded-md px-3 py-3 text-base font-medium transition-colors hover:bg-slate-100 dark:hover:bg-slate-700"
+                className="rounded-lg px-3 py-3 aria-[current=page]:bg-surface-card text-base font-medium transition-colors hover:bg-surface-card"
               >
                 {t(locale, 'navAllTools')}
               </Link>
               <Link
                 href="/blog/"
+                aria-current={pathname === '/blog/' ? 'page' : undefined}
                 onClick={close}
-                className="rounded-md px-3 py-3 text-base font-medium transition-colors hover:bg-slate-100 dark:hover:bg-slate-700"
+                className="rounded-lg px-3 py-3 aria-[current=page]:bg-surface-card text-base font-medium transition-colors hover:bg-surface-card"
               >
                 {t(locale, 'navBlog')}
               </Link>
               <Link
                 href="/about/"
+                aria-current={pathname === '/about/' ? 'page' : undefined}
                 onClick={close}
-                className="rounded-md px-3 py-3 text-base font-medium transition-colors hover:bg-slate-100 dark:hover:bg-slate-700"
+                className="rounded-lg px-3 py-3 aria-[current=page]:bg-surface-card text-base font-medium transition-colors hover:bg-surface-card"
               >
                 {t(locale, 'navAbout')}
               </Link>
               <Link
                 href="/contact/"
+                aria-current={pathname === '/contact/' ? 'page' : undefined}
                 onClick={close}
-                className="rounded-md px-3 py-3 text-base font-medium transition-colors hover:bg-slate-100 dark:hover:bg-slate-700"
+                className="rounded-lg px-3 py-3 aria-[current=page]:bg-surface-card text-base font-medium transition-colors hover:bg-surface-card"
               >
                 {t(locale, 'navContact')}
               </Link>
@@ -284,7 +286,7 @@ export function Header() {
                   close()
                   openSearch()
                 }}
-                className="mt-1 flex items-center gap-2 rounded-md px-3 py-3 text-base font-medium transition-colors hover:bg-slate-100 dark:hover:bg-slate-700"
+                className="mt-1 flex items-center gap-2 rounded-lg px-3 py-3 aria-[current=page]:bg-surface-card text-base font-medium transition-colors hover:bg-surface-card"
                 style={{ color: 'rgb(var(--text))' }}
               >
                 <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>

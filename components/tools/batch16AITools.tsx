@@ -197,7 +197,7 @@ export function JsonRepairClient() {
         <div role="status" aria-live="polite" className="space-y-3">
           {result.log.length > 0 && (
             <div className="rounded-lg border p-3" style={{ borderColor: 'rgb(var(--border))', backgroundColor: 'rgb(var(--bg-subtle))' }}>
-              <div className="mb-1 text-xs font-semibold uppercase tracking-wide" style={{ color: 'rgb(var(--text-faint))' }}>{L('repairsApplied', 'Repairs applied')}</div>
+              <div className="mb-1 text-xs font-semibold uppercase tracking-wide" style={{ color: 'rgb(var(--text-subtle))' }}>{L('repairsApplied', 'Repairs applied')}</div>
               <ul className="list-inside list-disc space-y-0.5 text-xs" style={{ color: 'rgb(var(--text-muted))' }}>
                 {result.log.map((r, i) => <li key={i}>{logLabel(r)}</li>)}
               </ul>
@@ -208,7 +208,7 @@ export function JsonRepairClient() {
               <span className="text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>{L('validJson', 'Valid JSON')}</span>
               <CopyButton value={result.output} />
             </div>
-            <pre className="overflow-x-auto rounded-lg border p-4 font-mono text-xs whitespace-pre-wrap" style={{ borderColor: 'rgb(var(--border))', backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text))' }}>{result.output}</pre>
+            <pre data-code-output className="overflow-x-auto rounded-lg border p-4 font-mono text-xs whitespace-pre-wrap" style={{ borderColor: 'rgb(var(--border))', backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text))' }}>{result.output}</pre>
           </div>
           <ResultActions summary={result.output} filename="repaired.json" downloadContent={result.output} mime="application/json;charset=utf-8;" copyLabel={L('copyJson', 'Copy JSON')} />
         </div>
@@ -221,7 +221,7 @@ export function JsonRepairClient() {
             {result.log[result.log.length - 1]}
           </p>
           {result.log.length > 1 && (
-            <p className="text-xs" style={{ color: 'rgb(var(--text-faint))' }}>{L('appliedAnyway', 'Repairs attempted before failing:')} {result.log.slice(0, -1).map(logLabel).join(' / ')}</p>
+            <p className="text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>{L('appliedAnyway', 'Repairs attempted before failing:')} {result.log.slice(0, -1).map(logLabel).join(' / ')}</p>
           )}
         </div>
       ))}
@@ -271,7 +271,7 @@ export function FenceExtractorClient() {
 
       {blocks.length > 0 && (
         <div className="flex flex-wrap items-center gap-2">
-          <span className="text-xs" style={{ color: 'rgb(var(--text-faint))' }}>{L('filterBy', 'Filter language:')}</span>
+          <span className="text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>{L('filterBy', 'Filter language:')}</span>
           <input type="search" value={filter} onChange={(e) => setFilter(e.target.value)} placeholder="py" aria-label={L('filterBy', 'Filter language')}
             className="w-24 rounded border px-2 py-1 text-xs" style={selVars} />
           {langs.map((l) => (
@@ -292,7 +292,7 @@ export function FenceExtractorClient() {
                 <span className="font-mono text-xs font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>{b.lang} · {b.code.split('\n').length} {L('lines', 'lines')}</span>
                 <CopyButton value={b.code} />
               </div>
-              <pre className="overflow-x-auto rounded-lg border p-4 font-mono text-xs whitespace-pre" style={{ borderColor: 'rgb(var(--border))', backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text))' }}>{b.code}</pre>
+              <pre data-code-output className="overflow-x-auto rounded-lg border p-4 font-mono text-xs whitespace-pre" style={{ borderColor: 'rgb(var(--border))', backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text))' }}>{b.code}</pre>
             </div>
           ))}
           <ResultActions
@@ -303,7 +303,7 @@ export function FenceExtractorClient() {
           />
         </div>
       ) : md.trim() ? (
-        <p className="text-sm" style={{ color: 'rgb(var(--text-faint))' }}>{L('noBlocks', 'No fenced code blocks found.')}</p>
+        <p className="text-sm" style={{ color: 'rgb(var(--text-subtle))' }}>{L('noBlocks', 'No fenced code blocks found.')}</p>
       ) : null}
       <CalculatorNote>{L('note', '🧾 Works on any Markdown with triple-backtick fences — ChatGPT/Claude answers, README files, docs. The language chip filters (e.g. "py" matches python); indented 4-space code blocks are intentionally ignored.')}</CalculatorNote>
     </div>
@@ -372,7 +372,7 @@ export function PromptTemplateFillerClient() {
           <span className="text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>{L('filledLabel', 'Filled prompt')}</span>
           <CopyButton value={state.out} />
         </div>
-        <pre className="overflow-x-auto rounded-lg border p-4 font-mono text-xs whitespace-pre-wrap" style={{ borderColor: 'rgb(var(--border))', backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text))' }}>{state.out || '—'}</pre>
+        <pre data-code-output className="overflow-x-auto rounded-lg border p-4 font-mono text-xs whitespace-pre-wrap" style={{ borderColor: 'rgb(var(--border))', backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text))' }}>{state.out || '—'}</pre>
       </div>
       <ResultActions summary={state.out} filename="filled-prompt.txt" downloadContent={state.out} mime="text/plain;charset=utf-8;" copyLabel={L('copyPrompt', 'Copy Prompt')} />
       <CalculatorNote>{L('note', '🧩 Supports both {{double}} (mustache-style) and {single} (f-string-style) placeholders — double braces replace first, so mixed templates behave predictably. Non-string JSON values are stringified. Everything stays in your browser.')}</CalculatorNote>
@@ -459,7 +459,7 @@ export function ToolsBuilderClient() {
             </label>
             <button type="button" onClick={() => setParams(params.filter((_, j) => j !== i))} disabled={params.length <= 1}
               aria-label={L('removeParam', 'Remove parameter')}
-              className="rounded-lg px-2 text-sm text-slate-400 hover:text-red-500 dark:text-slate-500">✕</button>
+              className="rounded-lg px-2 text-sm text-muted-ink hover:text-red-500 dark:text-muted-ink">✕</button>
           </div>
         ))}
         <button type="button" onClick={() => setParams([...params, { id: toolParamUid++, name: '', type: 'string', description: '', required: false, enumValues: '' }])}
@@ -471,7 +471,7 @@ export function ToolsBuilderClient() {
           <span className="text-sm font-medium" style={{ color: 'rgb(var(--text-muted))' }}>{L('jsonLabel', 'tools JSON')}</span>
           <CopyButton value={toolsJson} />
         </div>
-        <pre className="overflow-x-auto rounded-lg border p-4 font-mono text-xs whitespace-pre" style={{ borderColor: 'rgb(var(--border))', backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text))' }}>{toolsJson}</pre>
+        <pre data-code-output className="overflow-x-auto rounded-lg border p-4 font-mono text-xs whitespace-pre" style={{ borderColor: 'rgb(var(--border))', backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text))' }}>{toolsJson}</pre>
       </div>
       <ResultActions summary={toolsJson} filename="tools.json" downloadContent={toolsJson} mime="application/json;charset=utf-8;" copyLabel={L('copyJson', 'Copy JSON')} />
       <CalculatorNote>{L('note', '🛠️ Output matches the OpenAI tools array (also accepted by Anthropic tool-use with minor key renames). "integer" maps to JSON Schema integer; enums become string unions the model must respect. Description quality drives calling accuracy more than anything else here.')}</CalculatorNote>

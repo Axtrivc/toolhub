@@ -202,14 +202,14 @@ export function HistoryDrawer({
     <div className="no-print fixed inset-0 z-50" role="dialog" aria-modal="true" aria-label={t(locale, 'historyTitle')}>
       {/* 背景遮罩:点击关闭 */}
       <div
-        className="absolute inset-0 bg-slate-900/40 backdrop-blur-[2px]"
+        className="absolute inset-0 bg-black/40"
         onClick={onClose}
         aria-hidden="true"
       />
 
       {/* 面板:移动端底部上滑(<sm),桌面右侧滑入(sm+) */}
       <div
-        className="history-drawer-panel absolute inset-x-0 bottom-0 flex max-h-[78vh] flex-col rounded-t-2xl border shadow-2xl sm:inset-y-0 sm:left-auto sm:right-0 sm:max-h-none sm:w-[24rem] sm:rounded-none sm:rounded-l-2xl"
+        className="history-drawer-panel absolute inset-x-0 bottom-0 flex max-h-[78vh] flex-col rounded-t-2xl border sm:inset-y-0 sm:left-auto sm:right-0 sm:max-h-none sm:w-[24rem] sm:rounded-none sm:rounded-l-2xl"
         style={{
           borderColor: 'rgb(var(--border-strong))',
           backgroundColor: 'rgb(var(--bg-card))',
@@ -252,7 +252,7 @@ export function HistoryDrawer({
             </p>
           ) : (
             <>
-              <p className="px-1 pb-1 text-[11px]" style={{ color: 'rgb(var(--text-faint))' }}>
+              <p className="px-1 pb-1 text-[11px]" style={{ color: 'rgb(var(--text-subtle))' }}>
                 {t(locale, 'historyLoadHint')}
               </p>
               {entries.map((e) => (
@@ -263,7 +263,7 @@ export function HistoryDrawer({
                   className="w-full rounded-xl border p-3 text-left transition-colors hover:border-brand-400 hover:bg-brand-50/50 dark:hover:bg-brand-950/20"
                   style={{ borderColor: 'rgb(var(--border))' }}
                 >
-                  <div className="text-[11px] tabular-nums" style={{ color: 'rgb(var(--text-faint))' }}>
+                  <div className="text-[11px] tabular-nums" style={{ color: 'rgb(var(--text-subtle))' }}>
                     {formatTime(e.ts)}
                   </div>
                   <div className="mt-0.5 flex flex-wrap items-baseline gap-x-2">
@@ -308,7 +308,7 @@ export function HistoryDrawer({
               {t(locale, 'historyClear')}
             </button>
           </div>
-          <p className="text-center text-[11px]" style={{ color: 'rgb(var(--text-faint))' }}>
+          <p className="text-center text-[11px]" style={{ color: 'rgb(var(--text-subtle))' }}>
             {t(locale, 'historyPrivate')}
           </p>
         </div>

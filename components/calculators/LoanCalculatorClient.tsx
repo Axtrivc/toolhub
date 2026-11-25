@@ -206,7 +206,7 @@ export function LoanCalculatorClient() {
         <span className="text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>{L('inputs', 'Inputs')}</span>
         <LoadSampleButton onLoad={handleLoadSample} />
       </div>
-      <div className="grid grid-cols-1 gap-4 rounded-lg p-4 sm:grid-cols-3" style={{ backgroundColor: 'rgb(var(--bg-subtle))' }}>
+      <div className="grid grid-cols-1 gap-5 rounded-xl bg-surface-soft p-4 sm:grid-cols-3 sm:p-6">
         <CalculatorField
           id="amount"
           label={L('loanAmount', 'Loan amount')}
@@ -280,7 +280,7 @@ export function LoanCalculatorClient() {
               ]}
             />
           ) : (
-            <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
               <ResultCard
                 label={L('monthlyPayment', 'Monthly payment')}
                 value={fmtMoney(result.monthlyPayment)}
@@ -299,6 +299,18 @@ export function LoanCalculatorClient() {
             </div>
           )}
 
+          {/* 结果操作行 - Copy Summary 复制纯文本摘要,Download 导出 CSV(含还款明细)。
+              copyLabel 不传 → ResultActions 自动用 i18n 的 toolCopySummary(已本地化)。 */}
+          <ResultActions
+            summary={summary}
+            filename="loan-calculator-result.csv"
+            downloadContent={csvContent}
+            mime="text/csv;charset=utf-8;"
+            shareParams={{ amount, rate, term: years }}
+            shareLabel={L('copyShareableLink', 'Copy Shareable Link')}
+            shareCopiedLabel={L('linkCopied', 'Link Copied')}
+          />
+
           {/* 余额递减曲线(年度采样,与下方摊销表同数据源) */}
           <LineAreaChart
             title={L('chartTitleBalance', 'Loan Balance Over Time')}
@@ -307,7 +319,7 @@ export function LoanCalculatorClient() {
               {
                 key: 'balance',
                 label: L('lineBalance', 'Remaining balance'),
-                color: '#ef4444',
+                color: 'var(--chart-coral)',
                 points: yearlyBalanceSeries(result.schedule).points,
                 area: true,
               },
@@ -347,12 +359,12 @@ export function LoanCalculatorClient() {
                 <tbody className="divide-y divide-slate-100 dark:divide-slate-700">
                   {displaySchedule.map((row) => (
                     <tr key={row.month}>
-                      <td className="px-3 py-2 font-mono" style={{ color: 'rgb(var(--text-faint))' }}>{row.month}</td>
+                      <td className="px-3 py-2 font-mono" style={{ color: 'rgb(var(--text-subtle))' }}>{row.month}</td>
                       <td className="px-3 py-2 text-right font-mono">{fmtMoney(row.payment)}</td>
-                      <td className="px-3 py-2 text-right font-mono text-green-600 dark:text-green-400">
+                      <td className="px-3 py-2 text-right font-mono text-body">
                         {fmtMoney(row.principal)}
                       </td>
-                      <td className="px-3 py-2 text-right font-mono text-orange-600 dark:text-orange-400">
+                      <td className="px-3 py-2 text-right font-mono text-body">
                         {fmtMoney(row.interest)}
                       </td>
                       <td className="px-3 py-2 text-right font-mono">{fmtMoney(row.balance)}</td>
@@ -363,20 +375,9 @@ export function LoanCalculatorClient() {
             </div>
           </div>
 
-          {/* 结果操作行 - Copy Summary 复制纯文本摘要,Download 导出 CSV(含还款明细)。
-              copyLabel 不传 → ResultActions 自动用 i18n 的 toolCopySummary(已本地化)。 */}
-          <ResultActions
-            summary={summary}
-            filename="loan-calculator-result.csv"
-            downloadContent={csvContent}
-            mime="text/csv;charset=utf-8;"
-            shareParams={{ amount, rate, term: years }}
-            shareLabel={L('copyShareableLink', 'Copy Shareable Link')}
-            shareCopiedLabel={L('linkCopied', 'Link Copied')}
-          />
         </>
       ) : (
-        <div className="rounded-lg border-2 border-dashed p-6 text-center text-sm" style={{ borderColor: 'rgb(var(--border-strong))', color: 'rgb(var(--text-faint))' }}>
+        <div className="rounded-lg border-2 border-dashed p-6 text-center text-sm" style={{ borderColor: 'rgb(var(--border-strong))', color: 'rgb(var(--text-subtle))' }}>
           {L('emptyState', 'Enter loan amount, interest rate, and term to see your monthly payment')}
         </div>
       )}

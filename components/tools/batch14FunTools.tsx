@@ -84,7 +84,7 @@ export function DiceRollerClient() {
               {r}
             </span>
           ))}
-          <span className="ml-2 text-xl font-semibold tabular-nums" style={{ color: 'rgb(var(--text-muted))' }}>
+          <span className="ml-2 font-serif text-xl font-normal tabular-nums" style={{ color: 'rgb(var(--text-muted))' }}>
             = {rolls.reduce((a, b) => a + b, 0)}
           </span>
         </div>
@@ -93,8 +93,8 @@ export function DiceRollerClient() {
       {history.length > 0 && (
         <div>
           <div className="mb-1.5 flex items-center justify-between">
-            <span className="text-xs font-medium uppercase tracking-wide" style={{ color: 'rgb(var(--text-faint))' }}>{L('history', 'Recent rolls')}</span>
-            <button type="button" onClick={() => setHistory([])} className="-my-1 rounded-md px-2 py-1.5 text-xs text-slate-400 hover:text-red-500 dark:text-slate-500">{L('clear', 'Clear')}</button>
+            <span className="text-xs font-medium uppercase tracking-wide" style={{ color: 'rgb(var(--text-subtle))' }}>{L('history', 'Recent rolls')}</span>
+            <button type="button" onClick={() => setHistory([])} className="-my-1 rounded-md px-2 py-1.5 text-xs text-muted-ink hover:text-red-500 dark:text-muted-ink">{L('clear', 'Clear')}</button>
           </div>
           <ul className="overflow-hidden rounded-lg border font-mono text-xs" style={{ borderColor: 'rgb(var(--border))' }}>
             {history.map((entry) => (
@@ -140,9 +140,9 @@ export function CoinFlipClient() {
     <div className="space-y-6">
       <div className="flex justify-center">
         <button type="button" onClick={flip}
-          className={`flex h-44 w-44 items-center justify-center rounded-full border-8 font-black shadow-lg transition-transform duration-300 ${
+          className={`flex h-44 w-44 items-center justify-center rounded-full border-8 font-black transition-transform duration-300 ${
             face.length > 4 ? 'text-4xl' : 'text-6xl'
-          } ${flipping ? '[transform:rotateY(180deg)_scale(0.9)]' : 'hover:scale-105'}`}
+          } ${flipping ? '[transform:rotateY(180deg)_scale(0.9)]' : ''}`}
           style={{ borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rgb(var(--bg-card))', color: 'rgb(var(--text))' }}>
           {face}
         </button>
@@ -165,7 +165,7 @@ export function CoinFlipClient() {
 }
 
 // ── 转盘选择器 ──
-const WHEEL_COLORS = ['#2563eb', '#7c3aed', '#db2777', '#ea580c', '#16a34a', '#0891b2', '#ca8a04', '#dc2626', '#4f46e5', '#059669', '#9333ea', '#e11d48']
+const WHEEL_COLORS = ['#cc785c', '#3d3d3a', '#5db8a6', '#e8a55a', '#8e8b82', '#a9583e', '#aacaaf', '#aa825c', '#65625d', '#dca38f', '#30776b', '#c4b7a3']
 
 export function WheelSpinnerClient() {
   const { locale } = useApp()
@@ -219,7 +219,7 @@ export function WheelSpinnerClient() {
             <div
               role="img"
               aria-label={L('wheelAlt', 'Prize wheel')}
-              className="h-full w-full rounded-full border-8 shadow-lg transition-transform duration-[4000ms] motion-reduce:transition-none"
+              className="h-full w-full rounded-full border-8 transition-transform duration-[4000ms] motion-reduce:transition-none"
               style={{
                 background: gradient,
                 borderColor: 'rgb(var(--bg-card))',
@@ -229,7 +229,7 @@ export function WheelSpinnerClient() {
             />
             <button
               type="button" onClick={spin} disabled={items.length < 2 || spinning}
-              className="absolute left-1/2 top-1/2 z-10 h-16 w-16 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white text-sm font-bold text-slate-800 shadow-lg transition hover:scale-110 disabled:cursor-not-allowed disabled:opacity-60 dark:bg-slate-800 dark:text-slate-100"
+              className="absolute left-1/2 top-1/2 z-10 h-16 w-16 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white text-sm font-bold text-slate-800 transition-colors disabled:cursor-not-allowed disabled:opacity-60 dark:bg-slate-800 dark:text-slate-100"
             >
               {L('spin', 'Spin')}
             </button>
@@ -241,7 +241,7 @@ export function WheelSpinnerClient() {
               className="mt-4 rounded-xl border px-6 py-4 text-center"
               style={{ borderColor: 'rgb(var(--primary) / 0.3)', backgroundColor: 'rgb(var(--primary) / 0.06)' }}
             >
-              <div className="text-[10px] font-medium uppercase tracking-widest" style={{ color: 'rgb(var(--text-faint))' }}>
+              <div className="text-[10px] font-medium uppercase tracking-widest" style={{ color: 'rgb(var(--text-subtle))' }}>
                 {L('winnerLabel', 'Winner')}
               </div>
               <div className="mt-1 text-2xl font-bold" style={{ color: 'rgb(var(--primary))' }}>
@@ -257,7 +257,7 @@ export function WheelSpinnerClient() {
           <textarea id="ws-items" value={itemsText} onChange={(e) => setItemsText(e.target.value)} rows={10}
             placeholder={'Pizza\nSushi\nTacos\nBurgers'}
             className="w-full rounded-lg border p-4 text-sm outline-none transition focus:ring-2" style={{ borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rgb(var(--bg-card))', color: 'rgb(var(--text))' }} />
-          <p className="mt-1 text-xs" style={{ color: 'rgb(var(--text-faint))' }}>
+          <p className="mt-1 text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>
             {overflowCount > 0
               ? L('itemsOverflow', '{extra} more ignored — the wheel holds max 12').replace('{extra}', String(overflowCount))
               : L('itemsHint', '{n} options on the wheel').replace('{n}', String(items.length))}
@@ -402,7 +402,7 @@ export function MorseCodeTranslatorClient() {
               <CopyButton value={output} />
             </div>
           </div>
-          <pre className="overflow-x-auto rounded-lg border p-4 font-mono text-sm whitespace-pre-wrap" style={{ borderColor: 'rgb(var(--border))', backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text))' }}>{output}</pre>
+          <pre data-code-output className="overflow-x-auto rounded-lg border p-4 font-mono text-sm whitespace-pre-wrap" style={{ borderColor: 'rgb(var(--border))', backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text))' }}>{output}</pre>
         </div>
       )}
       <CalculatorNote>{L('note', '📡 International Morse standard: dot = 1 unit, dash = 3, intra-character gap = 1, letter gap = 3, word gap = 7. Audio plays at 600 Hz with exactly that timing.')}</CalculatorNote>
@@ -570,7 +570,7 @@ export function TypingSpeedTestClient() {
           return (
             <span key={i}
               className={state === 'ok' ? 'text-green-600 dark:text-green-400' : state === 'bad' ? 'bg-red-200 text-red-800 line-through dark:bg-red-900/60 dark:text-red-200' : ''}
-              style={state === 'pending' ? { color: 'rgb(var(--text-faint))' } : undefined}>
+              style={state === 'pending' ? { color: 'rgb(var(--text-subtle))' } : undefined}>
               {ch}
             </span>
           )
@@ -600,7 +600,7 @@ export function TypingSpeedTestClient() {
           <ResultCard label={L('timeSec', 'Time')} value={`${done.elapsed}s`} />
         </div>
       ) : (
-        <div className="flex flex-wrap items-center justify-between gap-2 text-xs" style={{ color: 'rgb(var(--text-faint))' }}>
+        <div className="flex flex-wrap items-center justify-between gap-2 text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>
           <span>
             {L('progress', '{n}/{m} characters').replace('{n}', String(typed.length)).replace('{m}', String(prompt.length))}
             {liveWpm !== null && ` · ${liveWpm} ${L('wpmUnit', 'WPM')}`}
@@ -669,7 +669,7 @@ export function RandomTeamGeneratorClient() {
             placeholder={SAMPLE_NAMES}
             className="w-full rounded-lg border p-4 text-sm outline-none transition focus:ring-2"
             style={{ borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rgb(var(--bg-card))', color: 'rgb(var(--text))' }} />
-          {names.length > 0 && <p className="mt-1 text-xs" style={{ color: 'rgb(var(--text-faint))' }}>{L('nNames', '{n} people entered').replace('{n}', String(names.length))}</p>}
+          {names.length > 0 && <p className="mt-1 text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>{L('nNames', '{n} people entered').replace('{n}', String(names.length))}</p>}
         </div>
 
         <div className="flex flex-wrap items-end gap-3">
@@ -815,7 +815,7 @@ export function PasswordEntropyCheckerClient() {
                       className="font-medium text-brand-600 hover:underline dark:text-blue-400">
                       ↑ {L('analyzeIt', 'Analyze it')}
                     </button>
-                    <span style={{ color: 'rgb(var(--text-faint))' }}>
+                    <span style={{ color: 'rgb(var(--text-subtle))' }}>
                       {L('genStrongHint', '{n} chars · crypto-random · ≥128 bits of entropy').replace('{n}', String(GEN_LENGTH))}
                     </span>
                   </div>

@@ -174,7 +174,7 @@ export function SaasLtvChurnCalculatorClient() {
             {
               key: 'survive',
               label: L('lineSurvive', 'Surviving MRR'),
-              color: '#22c55e',
+              color: 'var(--chart-teal)',
               points: parsed.survMrr,
               area: true,
             },

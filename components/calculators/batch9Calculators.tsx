@@ -192,7 +192,7 @@ export const PaceCalculatorClient = makeCalculatorClient({
     const races: [string, number][] = [['5K', 5], ['10K', 10], ['Half', 21.0975], ['Marathon', 42.195]]
     return {
       xLabels: races.map(([n]) => n),
-      lines: [{ key: 'finish', label: 'Predicted finish time', color: '#3b82f6', points: races.map(([, km]) => (timeSec / distance) * km / 60), area: true }],
+      lines: [{ key: 'finish', label: 'Predicted finish time', color: 'var(--chart-coral)', points: races.map(([, km]) => (timeSec / distance) * km / 60), area: true }],
       formatY: (n) => formatDuration(n * 60),
     }
   },
@@ -279,9 +279,9 @@ export const ProteinIntakeCalculatorClient = makeCalculatorClient({
       }
       const cap = Math.max(60, Math.round(weight * 3))
       return [
-        { upTo: Math.round(weight * lo), color: '#3b82f6', label: 'Below your range' },
-        { upTo: Math.round(weight * hi), color: '#22c55e', label: 'Your target range' },
-        { upTo: cap, color: '#eab308', label: 'Above range' },
+        { upTo: Math.round(weight * lo), color: 'var(--chart-coral)', label: 'Below your range' },
+        { upTo: Math.round(weight * hi), color: 'var(--chart-teal)', label: 'Your target range' },
+        { upTo: cap, color: 'var(--chart-amber)', label: 'Above range' },
       ]
     },
     formatValue: (n) => `${Math.round(n)} g`,
@@ -327,9 +327,9 @@ export const ElectricityCostCalculatorClient = makeCalculatorClient({
     if (!(daily >= 0)) return null
     return {
       rows: [
-        { label: 'Per day', segments: [{ label: 'Cost', value: daily, color: '#3b82f6' }] },
-        { label: 'Per month', segments: [{ label: 'Cost', value: daily * 30.44, color: '#3b82f6' }] },
-        { label: 'Per year', segments: [{ label: 'Cost', value: daily * 365, color: '#22c55e' }] },
+        { label: 'Per day', segments: [{ label: 'Cost', value: daily, color: 'var(--chart-coral)' }] },
+        { label: 'Per month', segments: [{ label: 'Cost', value: daily * 30.44, color: 'var(--chart-coral)' }] },
+        { label: 'Per year', segments: [{ label: 'Cost', value: daily * 365, color: 'var(--chart-teal)' }] },
       ],
       formatTotal: (n) => fmtUSD(n),
     }
@@ -393,9 +393,9 @@ export const CarCostCalculatorClient = makeCalculatorClient({
   chart: {
     title: 'Where the money goes',
     slices: [
-      { valueKey: 'depreciation', label: 'Depreciation', color: '#3b82f6' },
-      { valueKey: 'fuel', label: 'Fuel', color: '#f59e0b' },
-      { valueKey: 'other', label: 'Insurance + maintenance', color: '#a855f7' },
+      { valueKey: 'depreciation', label: 'Depreciation', color: 'var(--chart-coral)' },
+      { valueKey: 'fuel', label: 'Fuel', color: 'var(--chart-amber)' },
+      { valueKey: 'other', label: 'Insurance + maintenance', color: 'var(--chart-rust)' },
     ],
     centerLabel: 'Total',
   },

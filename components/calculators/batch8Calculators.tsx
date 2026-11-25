@@ -94,8 +94,8 @@ export const APYCalculatorClient = makeCalculatorClient({
     return {
       xLabels,
       lines: [
-        { key: 'principal', label: 'Principal', color: '#3b82f6', points: xLabels.map(() => p) },
-        { key: 'balance', label: 'Balance', color: '#22c55e', points: balance, area: true },
+        { key: 'principal', label: 'Principal', color: 'var(--chart-coral)', points: xLabels.map(() => p) },
+        { key: 'balance', label: 'Balance', color: 'var(--chart-teal)', points: balance, area: true },
       ],
       highlightBetween: { a: 'principal', b: 'balance', label: 'Interest earned' },
       formatY: (n2) => fmtUSD(n2, 0),
@@ -174,8 +174,8 @@ export const CreditCardMinimumCalculatorClient = makeCalculatorClient({
       title: 'Where Your Minimum Payment Goes',
       centerLabel: 'Payment',
       slices: [
-        { valueKey: 'interest', label: 'Interest', color: '#ef4444' },
-        { valueKey: 'principal', label: 'Principal', color: '#22c55e' },
+        { valueKey: 'interest', label: 'Interest', color: 'var(--chart-ink)' },
+        { valueKey: 'principal', label: 'Principal', color: 'var(--chart-teal)' },
       ],
     },
     { kind: 'series', title: 'Balance on Minimums Only', titleKey: 'chartTitleBalance' },
@@ -208,15 +208,15 @@ export const CreditCardMinimumCalculatorClient = makeCalculatorClient({
         {
           label: 'Minimums only',
           segments: [
-            { label: 'Principal', value: bal, color: '#3b82f6' },
-            { label: 'Interest', value: minOnly.totalInt, color: '#ef4444' },
+            { label: 'Principal', value: bal, color: 'var(--chart-coral)' },
+            { label: 'Interest', value: minOnly.totalInt, color: 'var(--chart-ink)' },
           ],
         },
         {
           label: 'Pay $50 more',
           segments: [
-            { label: 'Principal', value: bal, color: '#3b82f6' },
-            { label: 'Interest', value: plus50.totalInt, color: '#ef4444' },
+            { label: 'Principal', value: bal, color: 'var(--chart-coral)' },
+            { label: 'Interest', value: plus50.totalInt, color: 'var(--chart-ink)' },
           ],
         },
       ],
@@ -244,7 +244,7 @@ export const CreditCardMinimumCalculatorClient = makeCalculatorClient({
     if (b > 0.005) return null // 600 月都还不完(月供≤利息):不出图
     return {
       xLabels,
-      lines: [{ key: 'balance', label: 'Remaining balance', color: '#ef4444', points, area: true }],
+      lines: [{ key: 'balance', label: 'Remaining balance', color: 'var(--chart-ink)', points, area: true }],
       formatY: (n) => fmtUSD(n, 0),
     }
   },
@@ -286,8 +286,8 @@ export const CashBackCalculatorClient = makeCalculatorClient({
     if (!(annual >= 0) || !(fee >= 0)) return null
     return {
       rows: [
-        { label: 'Cash back / year', segments: [{ label: 'Rewards', value: annual, color: '#22c55e' }] },
-        { label: 'Annual fee', segments: [{ label: 'Fee', value: fee, color: '#ef4444' }] },
+        { label: 'Cash back / year', segments: [{ label: 'Rewards', value: annual, color: 'var(--chart-teal)' }] },
+        { label: 'Annual fee', segments: [{ label: 'Fee', value: fee, color: 'var(--chart-ink)' }] },
       ],
       formatTotal: (n) => fmtUSD(n, 0),
     }
@@ -347,8 +347,8 @@ export const DownPaymentCalculatorClient = makeCalculatorClient({
     return {
       rows: [
         { label: 'Home price', segments: [
-          { label: 'Down payment', value: downAmt, color: '#3b82f6' },
-          { label: 'Loan amount', value: price - downAmt, color: '#94a3b8' },
+          { label: 'Down payment', value: downAmt, color: 'var(--chart-coral)' },
+          { label: 'Loan amount', value: price - downAmt, color: 'var(--chart-muted)' },
         ] },
       ],
       formatTotal: (n) => fmtUSD(n, 0),
@@ -403,10 +403,10 @@ export const DTICalculatorClient = makeCalculatorClient({
     min: 0,
     max: 60,
     zones: [
-      { upTo: 36, color: '#22c55e', label: 'Healthy' },
-      { upTo: 43, color: '#eab308', label: 'Tight' },
-      { upTo: 50, color: '#f97316', label: 'High' },
-      { upTo: 60, color: '#ef4444', label: 'Likely denied' },
+      { upTo: 36, color: 'var(--chart-teal)', label: 'Healthy' },
+      { upTo: 43, color: 'var(--chart-amber)', label: 'Tight' },
+      { upTo: 50, color: 'var(--chart-coral)', label: 'High' },
+      { upTo: 60, color: 'var(--chart-ink)', label: 'Likely denied' },
     ],
     formatValue: (n) => `${n.toFixed(1)}%`,
   },
@@ -446,8 +446,8 @@ export const CommissionCalculatorClient = makeCalculatorClient({
     return {
       rows: [
         { label: 'Total pay', segments: [
-          { label: 'Base salary', value: base, color: '#3b82f6' },
-          { label: 'Commission', value: comm, color: '#22c55e' },
+          { label: 'Base salary', value: base, color: 'var(--chart-coral)' },
+          { label: 'Commission', value: comm, color: 'var(--chart-teal)' },
         ] },
       ],
       formatTotal: (n) => fmtUSD(n, 0),
@@ -640,11 +640,11 @@ export const GradeCalculatorClient = makeCalculatorClient({
     max: 100,
     formatValue: (n) => `${n.toFixed(1)}%`,
     zones: [
-      { upTo: 60, color: '#ef4444', label: 'F' },
-      { upTo: 70, color: '#f97316', label: 'D' },
-      { upTo: 80, color: '#eab308', label: 'C' },
-      { upTo: 90, color: '#3b82f6', label: 'B' },
-      { upTo: 100, color: '#22c55e', label: 'A' },
+      { upTo: 60, color: 'var(--chart-ink)', label: 'F' },
+      { upTo: 70, color: 'var(--chart-coral)', label: 'D' },
+      { upTo: 80, color: 'var(--chart-amber)', label: 'C' },
+      { upTo: 90, color: 'var(--chart-coral)', label: 'B' },
+      { upTo: 100, color: 'var(--chart-teal)', label: 'A' },
     ],
   },
 })
@@ -682,9 +682,9 @@ export const FinalGradeCalculatorClient = makeCalculatorClient({
     max: 150,
     formatValue: (n) => `${n.toFixed(1)}%`,
     zones: [
-      { upTo: 70, color: '#22c55e', label: 'Comfortable' },
-      { upTo: 100, color: '#eab308', label: 'Tight but doable' },
-      { upTo: 150, color: '#ef4444', label: 'Needs over 100%' },
+      { upTo: 70, color: 'var(--chart-teal)', label: 'Comfortable' },
+      { upTo: 100, color: 'var(--chart-amber)', label: 'Tight but doable' },
+      { upTo: 150, color: 'var(--chart-ink)', label: 'Needs over 100%' },
     ],
   },
 })
@@ -727,8 +727,8 @@ export const BillSplitCalculatorClient = makeCalculatorClient({
     return {
       rows: [
         { label: 'Grand total', segments: [
-          { label: 'Bill', value: total, color: '#3b82f6' },
-          { label: 'Tip', value: tip, color: '#22c55e' },
+          { label: 'Bill', value: total, color: 'var(--chart-coral)' },
+          { label: 'Tip', value: tip, color: 'var(--chart-teal)' },
         ] },
       ],
       formatTotal: (n) => fmtUSD(n),
@@ -905,7 +905,7 @@ export const SalaryConverterClient = makeCalculatorClient({
     return {
       rows: rowsDef.map(([label, n]) => ({
         label,
-        segments: [{ label: 'Per period', value: annualized / n, color: label === 'Hourly' ? '#22c55e' : '#3b82f6' }],
+        segments: [{ label: 'Per period', value: annualized / n, color: label === 'Hourly' ? 'var(--chart-teal)' : 'var(--chart-coral)' }],
       })),
       formatTotal: (n) => fmtUSD(n, 0),
     }

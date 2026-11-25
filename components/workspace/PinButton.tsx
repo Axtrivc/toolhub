@@ -48,12 +48,12 @@ export function PinButton({ slug, name, className = '' }: PinButtonProps) {
       aria-pressed={pinned}
       aria-label={label}
       title={label}
-      className={`inline-flex h-7 w-7 items-center justify-center rounded-lg border transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/60 ${
+      className={`inline-flex h-7 w-7 items-center justify-center rounded-lg border transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/70 ${
         pinned
-          ? 'border-blue-200 bg-blue-50 text-blue-600 opacity-100 dark:border-blue-800/60 dark:bg-blue-950/50 dark:text-blue-400'
+          ? 'border-primary bg-surface-card text-ink opacity-100'
           : // Keep unpinned controls visible on coarse pointers where hover is unavailable.
             // Keyboard focus also reveals them; fine-pointer devices retain the hover treatment.
-            'border-slate-200/80 bg-white/80 text-slate-400 opacity-40 backdrop-blur-sm hover:border-slate-300 hover:text-slate-600 hover:opacity-100 group-hover:opacity-100 focus-visible:opacity-100 [@media(pointer:fine)]:opacity-0 dark:border-slate-700 dark:bg-slate-900/80 dark:text-slate-500 dark:hover:border-slate-600 dark:hover:text-slate-300'
+            'border-hairline bg-canvas text-muted-ink opacity-80 hover:border-hairline hover:text-muted-ink hover:opacity-100 group-hover:opacity-100 focus-visible:opacity-100 [@media(pointer:fine)]:opacity-0'
       } ${className}`}
     >
       <Pin

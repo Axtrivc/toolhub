@@ -96,7 +96,7 @@ const articleJsonLd = {
 
 export default function HowIBuiltToolHubPost() {
   return (
-    <div className="container-page py-10">
+    <div className="mx-auto w-full max-w-4xl px-4 py-10 sm:px-8 sm:pb-24 sm:pt-14">
       {/* JSON-LD:与站点其它页面一致,通过 raw script 注入 */}
       <script
         type="application/ld+json"
@@ -116,15 +116,15 @@ export default function HowIBuiltToolHubPost() {
         className="mb-6 text-sm"
         style={{ color: 'rgb(var(--text-subtle))' }}
       >
-        <ol className="flex items-center gap-2">
+        <ol className="flex flex-wrap items-center gap-2">
           <li>
-            <Link href="/" className="hover:text-brand-600">
+            <Link href="/" className="text-brand-700 dark:text-brand-400">
               <BlogCrumbHome />
             </Link>
           </li>
           <li aria-hidden="true">/</li>
           <li>
-            <Link href="/blog/" className="hover:text-brand-600">
+            <Link href="/blog/" className="text-brand-700 dark:text-brand-400">
               <BlogCrumbBlog />
             </Link>
           </li>
@@ -136,7 +136,7 @@ export default function HowIBuiltToolHubPost() {
       </nav>
 
       {/* 文章头部 */}
-      <header className="mb-10">
+      <header className="border-b border-hairline pb-8">
         <div
           className="mb-4 flex flex-wrap items-center gap-2 text-xs font-medium"
           style={{ color: 'rgb(var(--text-subtle))' }}
@@ -151,7 +151,7 @@ export default function HowIBuiltToolHubPost() {
             # seo
           </span>
         </div>
-        <h1 className="text-3xl font-bold leading-tight sm:text-4xl" style={{ color: 'rgb(var(--text))' }}>
+        <h1 className="font-serif text-4xl font-normal leading-[1.1] tracking-[-.5px] sm:text-5xl sm:tracking-[-1px]" style={{ color: 'rgb(var(--text))' }}>
           <BlogArticleTitle articleKey="how-i-built-toolhub" />
         </h1>
         <div

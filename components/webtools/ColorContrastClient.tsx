@@ -158,12 +158,12 @@ export function ColorContrastClient() {
 
       {/* 对比度结果 */}
       {!error && (
-        <div className="rounded-lg border border-blue-100 bg-gradient-to-b from-blue-50/40 to-transparent p-4 dark:border-blue-900/40">
+        <div className="rounded-lg border border-hairline bg-surface-soft p-4 dark:border-blue-900/40">
           <div className="text-center">
-            <div className="text-xs uppercase text-slate-400">{L('contrastRatio', 'Contrast Ratio')}</div>
+            <div className="text-xs uppercase text-muted-ink">{L('contrastRatio', 'Contrast Ratio')}</div>
             <div className="mt-1 text-4xl font-extrabold tabular-nums" style={{ color: 'rgb(var(--text))' }}>
               {ratio.toFixed(2)}
-              <span className="ml-1 text-lg font-normal text-slate-400">: 1</span>
+              <span className="ml-1 text-lg font-normal text-muted-ink">: 1</span>
             </div>
           </div>
 

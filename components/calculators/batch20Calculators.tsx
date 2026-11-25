@@ -144,8 +144,8 @@ export const RunwayCalculatorClient = makeCalculatorClient({
     return {
       xLabels,
       lines: [
-        { key: 'balance', label: 'Cash balance', color: '#22c55e', points: balances, area: true },
-        { key: 'zero', label: 'Zero cash', color: '#ef4444', points: zeroLine, dashed: true },
+        { key: 'balance', label: 'Cash balance', color: 'var(--chart-teal)', points: balances, area: true },
+        { key: 'zero', label: 'Zero cash', color: 'var(--chart-ink)', points: zeroLine, dashed: true },
       ],
       formatY: (n) => fmtUSD(n, 0),
     }
@@ -233,10 +233,10 @@ export const FreelanceRateCalculatorClient = makeCalculatorClient({
     title: 'Gross Billing Breakdown',
     centerLabel: 'Billing',
     slices: [
-      { valueKey: 'takeHomeSlice', label: 'Take-home salary', color: '#22c55e' },
-      { valueKey: 'taxSlice', label: 'Taxes', color: '#f59e0b' },
-      { valueKey: 'expenseSlice', label: 'Business expenses', color: '#64748b' },
-      { valueKey: 'profitSlice', label: 'Business profit buffer', color: '#3b82f6' },
+      { valueKey: 'takeHomeSlice', label: 'Take-home salary', color: 'var(--chart-teal)' },
+      { valueKey: 'taxSlice', label: 'Taxes', color: 'var(--chart-amber)' },
+      { valueKey: 'expenseSlice', label: 'Business expenses', color: 'var(--chart-muted)' },
+      { valueKey: 'profitSlice', label: 'Business profit buffer', color: 'var(--chart-coral)' },
     ],
   },
   note: '💡 Full-time employees work ~2,080 hours, but freelancers typically only bill ~1,000–1,200 hours per year due to non-billable client acquisition, admin, and unpaid vacation. Your pricing must cover self-employment taxes, equipment, subscriptions, and unpaid downtime.',

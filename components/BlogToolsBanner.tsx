@@ -55,12 +55,12 @@ export function BlogToolsBanner({
     >
       <header className="mb-6">
         <p
-          className="text-xs font-semibold uppercase tracking-widest"
-          style={{ color: 'rgb(var(--text-faint))' }}
+          className="text-xs font-medium uppercase tracking-[1.5px]"
+          style={{ color: 'rgb(var(--text-subtle))' }}
         >
           {t(locale, 'blogBannerEyebrow')}
         </p>
-        <h2 id="blog-tools-heading" className="mt-1 text-2xl font-bold" style={{ color: 'rgb(var(--text))' }}>
+        <h2 id="blog-tools-heading" className="mt-2 font-serif text-[28px] font-normal leading-tight tracking-[-.3px]" style={{ color: 'rgb(var(--text))' }}>
           {t(locale, 'blogBannerTitle')}
         </h2>
         <p className="mt-2 max-w-2xl text-sm" style={{ color: 'rgb(var(--text-muted))' }}>
@@ -79,19 +79,19 @@ export function BlogToolsBanner({
             <AnimatedToolCard key={tool.slug} index={index} href={href} title={titleAttr} ariaLabel={titleAttr}>
               <div className="flex items-start justify-between">
                 <span
-                  className="flex h-11 w-11 items-center justify-center rounded-lg bg-slate-100 p-2 text-slate-600 transition-transform dark:text-slate-300 duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:scale-[1.08] dark:border dark:border-blue-800/40 dark:bg-blue-950/30"
+                  className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-surface-card text-ink"
                   aria-hidden="true"
                 >
                   <SmartIcon icon={getToolIcon(tool)} className="h-5 w-5" />
                 </span>
-                <span className="inline-flex items-center rounded-full bg-slate-100 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-slate-500 dark:bg-slate-800 dark:text-slate-400">
+                <span className="ml-2 inline-flex items-center rounded-full bg-surface-card px-2.5 py-1 text-xs font-medium text-body">
                   {tc(locale, tool.category)}
                 </span>
               </div>
-              <h3 className="mt-4 flex min-h-[2.5rem] items-center text-base font-medium text-slate-900 line-clamp-2 group-hover:text-brand-600 dark:text-white">
+              <h3 className="mt-4 font-serif text-xl font-normal leading-tight text-ink">
                 {localizedName}
               </h3>
-              <p className="mt-2 line-clamp-2 flex-1 text-xs text-slate-500 dark:text-slate-400">{localizedIntro}</p>
+              <p className="mt-2 line-clamp-2 flex-1 text-sm leading-relaxed text-muted-ink">{localizedIntro}</p>
             </AnimatedToolCard>
           )
         })}

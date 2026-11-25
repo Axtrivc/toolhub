@@ -124,8 +124,8 @@ export const OvulationCalculatorClient = makeCalculatorClient({
     title: 'Fertile days in your cycle',
     centerLabel: 'Cycle',
     slices: [
-      { valueKey: 'fertileDays', label: 'Fertile window (6 days)', color: '#ec4899' },
-      { valueKey: 'otherDays', label: 'Rest of the cycle', color: '#cbd5e1' },
+      { valueKey: 'fertileDays', label: 'Fertile window (6 days)', color: 'var(--chart-tan)' },
+      { valueKey: 'otherDays', label: 'Rest of the cycle', color: 'var(--chart-pale)' },
     ],
   },
   note: '📅 Ovulation = next period − 14 days (the luteal phase), not a fixed time after the last one. Sperm survive up to 5 days and the egg ~24 hours, so the fertile window spans the 5 days before ovulation plus the day itself (6 days). Cycles of 21-45 days supported.',
@@ -246,12 +246,12 @@ export const PregnancyWeightGainCalculatorClient = makeCalculatorClient({
     zones: (v) => {
       const m = pregnancyModel(v)
       if (m === null || 'twinsUnder' in m) {
-        return [{ upTo: 20, color: '#cbd5e1', label: '—' }]
+        return [{ upTo: 20, color: 'var(--chart-pale)', label: '—' }]
       }
       return [
-        { upTo: m.expLo, color: '#3b82f6', label: 'Below range' },
-        { upTo: m.expHi, color: '#22c55e', label: 'On track' },
-        { upTo: Math.max(m.expHi * 1.5 + 2, m.gain + 1.5), color: '#f59e0b', label: 'Above' },
+        { upTo: m.expLo, color: 'var(--chart-coral)', label: 'Below range' },
+        { upTo: m.expHi, color: 'var(--chart-teal)', label: 'On track' },
+        { upTo: Math.max(m.expHi * 1.5 + 2, m.gain + 1.5), color: 'var(--chart-amber)', label: 'Above' },
       ]
     },
     formatValue: (n) => `${fmtNum(n, 1)} kg`,
@@ -318,8 +318,8 @@ export const DiaperCostCalculatorClient = makeCalculatorClient({
     const totalCost = perDay * cost * DAYS_PER_MONTH * months
     return {
       rows: [
-        { label: 'Disposable', segments: [{ label: 'Total cost', value: totalCost, color: '#3b82f6' }] },
-        { label: 'Cloth', segments: [{ label: 'Total cost', value: cloth, color: '#22c55e' }] },
+        { label: 'Disposable', segments: [{ label: 'Total cost', value: totalCost, color: 'var(--chart-coral)' }] },
+        { label: 'Cloth', segments: [{ label: 'Total cost', value: cloth, color: 'var(--chart-teal)' }] },
       ],
       formatTotal: (n) => fmtUSD(n, 0),
     }
@@ -402,11 +402,11 @@ export const CatAgeCalculatorClient = makeCalculatorClient({
     zones: [
       // 与 compute 的 stageIdx 阈值对齐(人年边界 = 15/24/+4 曲线在猫 1/7/11/15 岁处的取值):
       // 幼猫 <1 岁(human 15),青年 <7 岁(human 44),壮年 <11 岁(human 60),老年 <15 岁(human 76)
-      { upTo: 15, color: '#f97316', label: 'Kitten' },
-      { upTo: 44, color: '#22c55e', label: 'Young adult' },
-      { upTo: 60, color: '#3b82f6', label: 'Mature adult' },
-      { upTo: 76, color: '#a855f7', label: 'Senior' },
-      { upTo: 96, color: '#64748b', label: 'Super senior' },
+      { upTo: 15, color: 'var(--chart-coral)', label: 'Kitten' },
+      { upTo: 44, color: 'var(--chart-teal)', label: 'Young adult' },
+      { upTo: 60, color: 'var(--chart-coral)', label: 'Mature adult' },
+      { upTo: 76, color: 'var(--chart-rust)', label: 'Senior' },
+      { upTo: 96, color: 'var(--chart-muted)', label: 'Super senior' },
     ],
     formatValue: (n) => `${Math.round(n)} yr`,
   },
@@ -497,8 +497,8 @@ export const CatFoodCalculatorClient = makeCalculatorClient({
     title: 'Where the daily calories come from',
     centerLabel: 'MER',
     slices: [
-      { valueKey: 'chartRer', label: 'Resting need (RER)', color: '#3b82f6' },
-      { valueKey: 'chartActivity', label: 'Activity multiplier', color: '#22c55e' },
+      { valueKey: 'chartRer', label: 'Resting need (RER)', color: 'var(--chart-coral)' },
+      { valueKey: 'chartActivity', label: 'Activity multiplier', color: 'var(--chart-teal)' },
     ],
   },
   note: '🐟 RER = 70 × weight(kg)^0.75 kcal/day, then a life-stage factor — an indoor neutered cat needs just ×1.2. Split the daily amount into at least 2 meals; most wet foods run ≈1 kcal per gram. Cats must lose weight slowly (crash dieting causes hepatic lipidosis) — design diets with your vet.',

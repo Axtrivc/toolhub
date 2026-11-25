@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react'
 import type { Viewport } from 'next'
+import { fontVariables } from './fonts'
 import './globals.css'
 import { Header } from '@/components/Header'
 import { Footer, type FooterNavCategory } from '@/components/Footer'
@@ -47,8 +48,8 @@ export const viewport: Viewport = {
   initialScale: 1,
   viewportFit: 'cover',
   themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#ffffff' },
-    { media: '(prefers-color-scheme: dark)', color: '#1e293b' },
+    { media: '(prefers-color-scheme: light)', color: '#faf9f5' },
+    { media: '(prefers-color-scheme: dark)', color: '#181715' },
   ],
 }
 
@@ -62,7 +63,7 @@ const ADSENSE_PUB_ID = ADSENSE_CLIENT?.replace(/^ca-/, '') // 仅合法 ca-pub-�
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" className={fontVariables} suppressHydrationWarning>
       <head>
         {/* 主题防闪烁:在 React hydrate 前就应用主题,避免 FOUC */}
         <ThemeInitScript />

@@ -402,7 +402,7 @@ export function RegexTesterClient() {
         {/* min-w-0:input 固有 min-content 宽度会阻止 flex 收缩,窄视口(≤390px)下
             整行溢出卡片,把定宽 flags 输入框推出屏幕外(与 IpCheckerClient 同款处理) */}
         <div className="flex gap-2">
-          <div className="flex items-center gap-1 rounded-lg border px-3 font-mono text-xs text-slate-400" style={{ borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rgb(var(--bg-card))' }}>
+          <div className="flex items-center gap-1 rounded-lg border px-3 font-mono text-xs text-muted-ink" style={{ borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rgb(var(--bg-card))' }}>
             /
           </div>
           <input
@@ -415,7 +415,7 @@ export function RegexTesterClient() {
             className={`${inputCls} min-w-0 flex-1`}
             style={{ borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rgb(var(--bg-card))', color: 'rgb(var(--text))' }}
           />
-          <div className="flex items-center gap-1 rounded-lg border px-3 font-mono text-xs text-slate-400" style={{ borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rgb(var(--bg-card))' }}>
+          <div className="flex items-center gap-1 rounded-lg border px-3 font-mono text-xs text-muted-ink" style={{ borderColor: 'rgb(var(--border-strong))', backgroundColor: 'rgb(var(--bg-card))' }}>
             /
           </div>
           <input
@@ -443,7 +443,7 @@ export function RegexTesterClient() {
                 className={`rounded-md border px-2.5 py-1.5 font-mono text-[11px] transition ${
                   active
                     ? 'border-blue-200 bg-blue-50 text-blue-700 dark:border-blue-800 dark:bg-blue-950/50 dark:text-blue-300'
-                    : 'text-slate-400 hover:text-slate-600 dark:text-slate-500 dark:hover:text-slate-300'
+                    : 'text-muted-ink hover:text-slate-600 dark:text-muted-ink dark:hover:text-slate-300'
                 }`}
                 style={{ borderColor: active ? undefined : 'rgb(var(--border))' }}
               >
@@ -452,7 +452,7 @@ export function RegexTesterClient() {
             )
           })}
         </div>
-        <p className="mt-1 text-[11px] text-slate-400 dark:text-slate-500">
+        <p className="mt-1 text-[11px] text-muted-ink">
           {L('flagsLabel', 'Flags:')} <code>g</code> {L('flagGlobal', 'global')} · <code>i</code> {L('flagIgnoreCase', 'ignore case')} · <code>m</code> {L('flagMultiline', 'multiline')} · <code>s</code> {L('flagDotAll', 'dotAll')} · <code>u</code> {L('flagUnicode', 'unicode')} · <code>y</code> {L('flagSticky', 'sticky')}
         </p>
       </div>
@@ -503,14 +503,14 @@ export function RegexTesterClient() {
             <span className="text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>{L('highlightedMatches', 'Highlighted Matches')}</span>
             <CopyButton value={matches.map((m) => m.match).join('\n')} label={L('copyMatches', 'Copy Matches')} disabled={matches.length === 0} />
           </div>
-          <pre
-            className="whitespace-pre-wrap break-words rounded-lg border bg-slate-50 p-4 text-xs leading-relaxed dark:bg-slate-800/60"
-            style={{ borderColor: 'rgb(var(--border))' }}
+          <pre data-code-output
+            className="whitespace-pre-wrap break-words rounded-xl border border-transparent bg-dark-soft p-4 font-mono text-sm leading-relaxed text-on-dark"
+
           >
             <code>
               {segments.map((seg, i) =>
                 seg.matched ? (
-                  <mark key={i} className="rounded bg-yellow-200 px-0.5 text-slate-900 dark:bg-yellow-500/60 dark:text-white">
+                  <mark key={i} className="rounded bg-accent-amber px-0.5 text-[#141413]">
                     {seg.text}
                   </mark>
                 ) : (
@@ -530,9 +530,9 @@ export function RegexTesterClient() {
             {matches.slice(0, 50).map((m, i) => (
               <div key={i} className="rounded-md border p-2 text-xs" style={{ borderColor: 'rgb(var(--border))', backgroundColor: 'rgb(var(--bg-card))' }}>
                 <div className="flex items-center gap-2">
-                  <span className="font-semibold text-slate-500 dark:text-slate-400">#{i + 1}</span>
+                  <span className="font-semibold text-muted-ink">#{i + 1}</span>
                   <span className="font-mono text-slate-700 dark:text-slate-200">“{m.match}”</span>
-                  <span className="text-slate-400 dark:text-slate-500">{L('atIndex', '@ index')} {m.index}</span>
+                  <span className="text-muted-ink">{L('atIndex', '@ index')} {m.index}</span>
                 </div>
                 {m.groups.length > 0 && (
                   <div className="mt-1 flex flex-wrap gap-1.5">
@@ -585,9 +585,9 @@ export function RegexTesterClient() {
                 <span className="text-sm font-semibold" style={{ color: 'rgb(var(--text-muted))' }}>{L('replaceResult', 'Replaced Result')}</span>
                 <CopyButton value={replaceResultText} label={L('copyReplace', 'Copy Result')} disabled={!replaceResultText} />
               </div>
-              <pre
-                className="max-h-72 overflow-auto whitespace-pre-wrap break-all rounded-lg border bg-slate-50 p-4 font-mono text-xs leading-relaxed dark:bg-slate-800/60"
-                style={{ borderColor: 'rgb(var(--border))' }}
+              <pre data-code-output
+                className="max-h-72 overflow-auto whitespace-pre-wrap break-all rounded-xl border border-transparent bg-dark-soft p-4 font-mono text-sm leading-relaxed text-on-dark"
+
                 aria-live="polite"
               >
                 <code>
@@ -595,7 +595,7 @@ export function RegexTesterClient() {
                     ? replaceResultText
                     : replaceOut.segments.map((seg, i) =>
                         seg.replaced ? (
-                          <mark key={i} className="rounded bg-green-200 px-0.5 text-green-950 dark:bg-green-500/40 dark:text-green-50">
+                          <mark key={i} className="rounded bg-accent-teal px-0.5 text-[#141413]">
                             {seg.text}
                           </mark>
                         ) : (
@@ -604,7 +604,7 @@ export function RegexTesterClient() {
                       )}
                 </code>
               </pre>
-              <p className="mt-1 text-[11px] text-slate-400 dark:text-slate-500">
+              <p className="mt-1 text-[11px] text-muted-ink">
                 {L('replaceNote', 'References to missing capture groups become an empty string (native String.replace semantics); without the g flag only the first occurrence is replaced.')}
               </p>
             </div>

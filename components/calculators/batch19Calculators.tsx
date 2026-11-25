@@ -126,8 +126,8 @@ export const RothIraCalculatorClient = makeCalculatorClient({
     return {
       xLabels,
       lines: [
-        { key: 'trad', label: 'Traditional balance (pre-tax)', color: '#3b82f6', points: trad },
-        { key: 'roth', label: 'Roth balance (after-tax in)', color: '#22c55e', points: roth, area: true },
+        { key: 'trad', label: 'Traditional balance (pre-tax)', color: 'var(--chart-coral)', points: trad },
+        { key: 'roth', label: 'Roth balance (after-tax in)', color: 'var(--chart-teal)', points: roth, area: true },
       ],
       formatY: (n) => fmtUSD(n, 0),
     }
@@ -259,8 +259,8 @@ export const FireCalculatorClient = makeCalculatorClient({
     return {
       xLabels,
       lines: [
-        { key: 'portfolio', label: 'Portfolio value', color: '#22c55e', points: balance, area: true },
-        { key: 'target', label: 'FIRE target', color: '#f59e0b', points: fireLine, dashed: true },
+        { key: 'portfolio', label: 'Portfolio value', color: 'var(--chart-teal)', points: balance, area: true },
+        { key: 'target', label: 'FIRE target', color: 'var(--chart-amber)', points: fireLine, dashed: true },
       ],
       formatY: (n) => fmtUSD(n, 0),
     }
@@ -349,10 +349,10 @@ export const CacLtvCalculatorClient = makeCalculatorClient({
       return Math.min(12, Math.max(6, ratio * 1.4))
     },
     zones: [
-      { upTo: 1, color: '#ef4444', label: 'Danger' },
-      { upTo: 3, color: '#f59e0b', label: 'Below target' },
-      { upTo: 5, color: '#22c55e', label: 'Golden zone' },
-      { upTo: 99, color: '#3b82f6', label: 'Underinvesting' },
+      { upTo: 1, color: 'var(--chart-ink)', label: 'Danger' },
+      { upTo: 3, color: 'var(--chart-amber)', label: 'Below target' },
+      { upTo: 5, color: 'var(--chart-teal)', label: 'Golden zone' },
+      { upTo: 99, color: 'var(--chart-coral)', label: 'Underinvesting' },
     ],
     formatValue: (n) => `${n.toFixed(1)} : 1`,
     caption: '3:1 = golden rule',
@@ -526,8 +526,8 @@ export const DogFoodCalculatorClient = makeCalculatorClient({
     title: 'Where the daily calories come from',
     centerLabel: 'MER',
     slices: [
-      { valueKey: 'rer', label: 'Resting need (RER)', color: '#3b82f6' },
-      { valueKey: 'activityExtra', label: 'Activity multiplier', color: '#22c55e' },
+      { valueKey: 'rer', label: 'Resting need (RER)', color: 'var(--chart-coral)' },
+      { valueKey: 'activityExtra', label: 'Activity multiplier', color: 'var(--chart-teal)' },
     ],
   },
   note: '💡 Split the daily amount into 2 meals (3 for puppies). Weigh food in grams for accuracy — measuring cups vary by ±20%. Any diet change should transition over 7–10 days; for weight-loss plans ask your vet.',

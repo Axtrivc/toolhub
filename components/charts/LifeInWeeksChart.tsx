@@ -70,7 +70,7 @@ export function LifeInWeeksChart({
               if (idx === currentWeekIdx) {
                 // 当前周:脉冲高亮(唯一动效;reduced-motion 静止)
                 return reduceMotion ? (
-                  <rect key={col} x={x} y={y} width={CELL} height={CELL} rx={1.4} fill="#f59e0b" />
+                  <rect key={col} x={x} y={y} width={CELL} height={CELL} rx={1.4} fill="var(--chart-amber)" />
                 ) : (
                   <motion.rect
                     key={col}
@@ -79,7 +79,7 @@ export function LifeInWeeksChart({
                     width={CELL}
                     height={CELL}
                     rx={1.4}
-                    fill="#f59e0b"
+                    fill="var(--chart-amber)"
                     animate={{ opacity: [1, 0.35, 1] }}
                     transition={{ duration: 1.6, repeat: Infinity, ease: 'easeInOut' }}
                   />
@@ -122,7 +122,7 @@ export function LifeInWeeksChart({
               y={PAD_T + age * STEP + CELL - 1}
               textAnchor="end"
               fontSize={9.5}
-              fill="rgb(var(--text-faint))"
+              fill="rgb(var(--text-subtle))"
             >
               {age}
             </text>
@@ -142,7 +142,7 @@ export function LifeInWeeksChart({
             <span className="text-xs" style={{ color: 'rgb(var(--text-muted))' }}>{legendRemaining}</span>
           </div>
           <div className="flex items-center gap-1.5">
-            <span className="inline-block h-2.5 w-2.5 rounded-sm" style={{ backgroundColor: '#f59e0b' }} aria-hidden="true" />
+            <span className="inline-block h-2.5 w-2.5 rounded-sm" style={{ backgroundColor: 'var(--chart-amber)' }} aria-hidden="true" />
             <span className="text-xs" style={{ color: 'rgb(var(--text-muted))' }}>{legendCurrent}</span>
           </div>
           <p className="pt-1 text-sm font-semibold" style={{ color: 'rgb(var(--text))' }}>

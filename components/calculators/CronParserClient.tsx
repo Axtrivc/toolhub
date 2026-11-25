@@ -155,7 +155,7 @@ export function CronParserClient() {
               {!now && (
                 <li
                   className="rounded-md border px-4 py-2.5 text-sm"
-                  style={{ borderColor: 'rgb(var(--border))', backgroundColor: 'rgb(var(--bg-card))', color: 'rgb(var(--text-faint))' }}
+                  style={{ borderColor: 'rgb(var(--border))', backgroundColor: 'rgb(var(--bg-card))', color: 'rgb(var(--text-subtle))' }}
                 >
                   —
                 </li>
@@ -179,7 +179,7 @@ export function CronParserClient() {
                 >
                   <span
                     className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-xs font-bold text-white"
-                    style={{ backgroundColor: 'rgb(37 99 235)' }}
+                    style={{ backgroundColor: 'rgb(var(--primary))' }}
                   >
                     {i + 1}
                   </span>

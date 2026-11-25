@@ -348,26 +348,26 @@ ${itemRows}
           <div className="flex flex-wrap items-start justify-between gap-3">
             <div>
               <div className="text-xl font-bold">{yourName || <span className="text-slate-300">{L('yourNamePlaceholder', 'Your Name')}</span>}</div>
-              {yourEmail && <div className="mt-0.5 text-xs text-slate-500">{yourEmail}</div>}
+              {yourEmail && <div className="mt-0.5 text-xs text-muted-ink">{yourEmail}</div>}
             </div>
             <div className="text-right">
               <div className="text-2xl font-extrabold tracking-widest text-blue-600">{L('invoiceLabel', 'INVOICE')}</div>
-              <div className="mt-0.5 font-mono text-xs text-slate-500">{invoiceNumber}</div>
+              <div className="mt-0.5 font-mono text-xs text-muted-ink">{invoiceNumber}</div>
             </div>
           </div>
 
           <div className="mt-6 flex flex-wrap justify-between gap-4">
             <div>
-              <div className="text-[10px] font-medium uppercase tracking-wider text-slate-400">{L('billTo', 'Bill To')}</div>
+              <div className="text-[10px] font-medium uppercase tracking-wider text-muted-ink">{L('billTo', 'Bill To')}</div>
               <div className="mt-1 text-sm font-semibold">{clientName || <span className="text-slate-300">{L('clientNamePlaceholder', 'Client name')}</span>}</div>
             </div>
             <div className="text-right text-xs">
               <div>
-                <span className="text-slate-400">{L('issueDate', 'Issue date:')}</span>{' '}
+                <span className="text-muted-ink">{L('issueDate', 'Issue date:')}</span>{' '}
                 <span className="font-mono">{issueDate ? formatDate(issueDate, localeTag) : '—'}</span>
               </div>
               <div className="mt-1">
-                <span className="text-slate-400">{L('dueDate', 'Due date:')}</span>{' '}
+                <span className="text-muted-ink">{L('dueDate', 'Due date:')}</span>{' '}
                 <span className="font-mono">{dueDate ? formatDate(dueDate, localeTag) : '—'}</span>
               </div>
             </div>
@@ -377,7 +377,7 @@ ${itemRows}
           <div className="mt-6 overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
-                <tr className="bg-slate-100 text-[10px] uppercase tracking-wider text-slate-500">
+                <tr className="bg-slate-100 text-[10px] uppercase tracking-wider text-muted-ink">
                   <th scope="col" className="rounded-l-md px-3 py-2 text-left font-medium">{L('description', 'Description')}</th>
                   <th scope="col" className="px-3 py-2 text-right font-medium">{L('qty', 'Qty')}</th>
                   <th scope="col" className="px-3 py-2 text-right font-medium">{L('rate', 'Rate')}</th>
@@ -400,12 +400,12 @@ ${itemRows}
           <div className="mt-4 flex justify-end">
             <div className="w-56 text-sm">
               <div className="flex justify-between px-3 py-1.5">
-                <span className="text-slate-500">{L('subtotal', 'Subtotal')}</span>
+                <span className="text-muted-ink">{L('subtotal', 'Subtotal')}</span>
                 <span className="font-mono">{fmt(subtotal)}</span>
               </div>
               {taxRate > 0 && (
                 <div className="flex justify-between px-3 py-1.5">
-                  <span className="text-slate-500">{L('tax', 'Tax')} ({taxRate}%)</span>
+                  <span className="text-muted-ink">{L('tax', 'Tax')} ({taxRate}%)</span>
                   <span className="font-mono">{fmt(taxAmount)}</span>
                 </div>
               )}
@@ -418,7 +418,7 @@ ${itemRows}
 
           {notes.trim() && (
             <div className="mt-6 border-t border-slate-200 pt-4">
-              <div className="text-[10px] font-medium uppercase tracking-wider text-slate-400">{L('notes', 'Notes')}</div>
+              <div className="text-[10px] font-medium uppercase tracking-wider text-muted-ink">{L('notes', 'Notes')}</div>
               <div className="mt-1 whitespace-pre-wrap text-xs text-slate-600">{notes}</div>
             </div>
           )}
@@ -429,8 +429,8 @@ ${itemRows}
       <BreakdownChart
         title={L('chartTitle', 'Invoice breakdown')}
         slices={[
-          { label: L('subtotal', 'Subtotal'), value: subtotal, color: '#3b82f6' },
-          { label: L('tax', 'Tax'), value: taxAmount, color: '#f59e0b' },
+          { label: L('subtotal', 'Subtotal'), value: subtotal, color: 'var(--chart-coral)' },
+          { label: L('tax', 'Tax'), value: taxAmount, color: 'var(--chart-amber)' },
         ]}
         centerLabel={L('total', 'Total')}
         centerValue={fmt(total)}

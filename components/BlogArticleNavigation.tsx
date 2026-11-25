@@ -32,7 +32,7 @@ export function BlogArticleNavigation({ currentSlug }: { currentSlug: string }) 
     <>
       {related.length > 0 && (
         <section aria-labelledby="related-articles-heading" className="mt-16 border-t pt-10" style={{ borderColor: 'rgb(var(--border))' }}>
-          <h2 id="related-articles-heading" className="text-2xl font-bold" style={{ color: 'rgb(var(--text))' }}>
+          <h2 id="related-articles-heading" className="font-serif text-[28px] font-normal tracking-[-.3px]" style={{ color: 'rgb(var(--text))' }}>
             {copy.related}
           </h2>
           <div className="mt-6 grid gap-4 sm:grid-cols-2">
@@ -40,16 +40,15 @@ export function BlogArticleNavigation({ currentSlug }: { currentSlug: string }) 
               <Link
                 key={post.slug}
                 href={`/blog/${post.slug}/`}
-                className="group flex h-full flex-col rounded-xl border p-5 !no-underline transition-all duration-200 hover:-translate-y-0.5 hover:border-blue-400 hover:shadow-md"
-                style={{ borderColor: 'rgb(var(--border))', backgroundColor: 'rgb(var(--bg-card))' }}
+                className="flex h-full flex-col rounded-xl bg-surface-card p-6 !no-underline"
               >
-                <span className="text-base font-bold leading-snug group-hover:text-brand-600" style={{ color: 'rgb(var(--text))' }}>
+                <span className="font-serif text-2xl font-normal leading-tight" style={{ color: 'rgb(var(--text))' }}>
                   {getPostTitle(locale, post)}
                 </span>
                 <span className="mt-2 line-clamp-3 flex-1 text-sm leading-relaxed" style={{ color: 'rgb(var(--text-muted))' }}>
                   {getPostDescription(locale, post)}
                 </span>
-                <span className="mt-4 text-sm font-medium text-brand-600 dark:text-brand-400">
+                <span className="mt-4 text-sm font-medium text-brand-700 dark:text-brand-400">
                   {copy.readArticle} <span aria-hidden="true">→</span>
                 </span>
               </Link>
@@ -60,22 +59,22 @@ export function BlogArticleNavigation({ currentSlug }: { currentSlug: string }) 
 
       <nav aria-label={copy.navigation} className="mt-10 grid gap-4 sm:grid-cols-2">
         {previous ? (
-          <Link href={`/blog/${previous.slug}/`} className="group rounded-xl border p-5 !no-underline transition-colors hover:border-blue-400" style={{ borderColor: 'rgb(var(--border))', backgroundColor: 'rgb(var(--bg-card))' }}>
-            <span className="block text-xs font-semibold uppercase tracking-wider text-brand-600 dark:text-brand-400">
+          <Link href={`/blog/${previous.slug}/`} className="rounded-xl border border-hairline bg-canvas p-5 !no-underline">
+            <span className="block text-xs font-medium uppercase tracking-[1.5px] text-brand-700 dark:text-brand-400">
               <span aria-hidden="true">← </span>{copy.previous}
             </span>
-            <span className="mt-2 block text-sm font-medium leading-relaxed group-hover:text-brand-600" style={{ color: 'rgb(var(--text))' }}>
+            <span className="mt-2 block text-sm font-medium leading-relaxed" style={{ color: 'rgb(var(--text))' }}>
               {getPostTitle(locale, previous)}
             </span>
           </Link>
         ) : <span className="hidden sm:block" aria-hidden="true" />}
 
         {next && (
-          <Link href={`/blog/${next.slug}/`} className="group rounded-xl border p-5 !no-underline transition-colors hover:border-blue-400 sm:text-right" style={{ borderColor: 'rgb(var(--border))', backgroundColor: 'rgb(var(--bg-card))' }}>
-            <span className="block text-xs font-semibold uppercase tracking-wider text-brand-600 dark:text-brand-400">
+          <Link href={`/blog/${next.slug}/`} className="rounded-xl border border-hairline bg-canvas p-5 !no-underline sm:text-right">
+            <span className="block text-xs font-medium uppercase tracking-[1.5px] text-brand-700 dark:text-brand-400">
               {copy.next}<span aria-hidden="true"> →</span>
             </span>
-            <span className="mt-2 block text-sm font-medium leading-relaxed group-hover:text-brand-600" style={{ color: 'rgb(var(--text))' }}>
+            <span className="mt-2 block text-sm font-medium leading-relaxed" style={{ color: 'rgb(var(--text))' }}>
               {getPostTitle(locale, next)}
             </span>
           </Link>

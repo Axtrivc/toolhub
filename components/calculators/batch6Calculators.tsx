@@ -187,8 +187,8 @@ export const SavingsGoalCalculatorClient = makeCalculatorClient({
     return {
       xLabels,
       lines: [
-        { key: 'savings', label: 'Your savings', color: '#22c55e', points: balance, area: true },
-        { key: 'goal', label: 'Goal', color: '#3b82f6', points: xLabels.map(() => goal), dashed: true },
+        { key: 'savings', label: 'Your savings', color: 'var(--chart-teal)', points: balance, area: true },
+        { key: 'goal', label: 'Goal', color: 'var(--chart-coral)', points: xLabels.map(() => goal), dashed: true },
       ],
       formatY: (n) => fmtUSD(n, 0),
     }
@@ -225,8 +225,8 @@ export const NetWorthCalculatorClient = makeCalculatorClient({
     title: 'Assets vs Liabilities',
     centerLabel: 'Total',
     slices: [
-      { valueKey: 'assetsOut', label: 'Assets (what you own)', color: '#22c55e' },
-      { valueKey: 'liabilitiesOut', label: 'Liabilities (what you owe)', color: '#ef4444' },
+      { valueKey: 'assetsOut', label: 'Assets (what you own)', color: 'var(--chart-teal)' },
+      { valueKey: 'liabilitiesOut', label: 'Liabilities (what you owe)', color: 'var(--chart-ink)' },
     ],
   },
 })
@@ -279,7 +279,7 @@ export const AnnuityCalculatorClient = makeCalculatorClient({
     }
     return {
       xLabels,
-      lines: [{ key: 'balance', label: 'Remaining balance', color: '#3b82f6', points: balance, area: true }],
+      lines: [{ key: 'balance', label: 'Remaining balance', color: 'var(--chart-coral)', points: balance, area: true }],
       formatY: (n2) => fmtUSD(n2, 0),
     }
   },
@@ -393,9 +393,9 @@ export const CapitalGainsTaxEstimatorClient = makeCalculatorClient({
     return {
       rows: [
         { label: 'Sale proceeds', segments: [
-          { label: 'Purchase price back', value: purchase, color: '#3b82f6' },
-          { label: 'Net gain after tax', value: gain - tax, color: '#22c55e' },
-          { label: 'Tax owed', value: tax, color: '#ef4444' },
+          { label: 'Purchase price back', value: purchase, color: 'var(--chart-coral)' },
+          { label: 'Net gain after tax', value: gain - tax, color: 'var(--chart-teal)' },
+          { label: 'Tax owed', value: tax, color: 'var(--chart-ink)' },
         ] },
       ],
       formatTotal: (n) => fmtUSD(n, 0),
@@ -505,8 +505,8 @@ export const RentVsBuyCalculatorClient = makeCalculatorClient({
     return {
       xLabels,
       lines: [
-        { key: 'rent', label: 'Renting (cumulative)', color: '#3b82f6', points: rentPts },
-        { key: 'buy', label: 'Buying (net cost)', color: '#22c55e', points: buyPts },
+        { key: 'rent', label: 'Renting (cumulative)', color: 'var(--chart-coral)', points: rentPts },
+        { key: 'buy', label: 'Buying (net cost)', color: 'var(--chart-teal)', points: buyPts },
       ],
       formatY: (n) => fmtUSD(n, 0),
     }
@@ -756,7 +756,7 @@ export function BodyFatCalculatorClient() {
                   ]
               ).map((z, i) => ({
                 ...z,
-                color: ['#3b82f6', '#22c55e', '#a3e635', '#eab308', '#ef4444'][i],
+                color: ['var(--chart-coral)', 'var(--chart-teal)', 'var(--chart-tan)', 'var(--chart-amber)', 'var(--chart-ink)'][i],
               }))}
               formatValue={(n) => `${fmtNum(n, 1)}%`}
               caption={result.cat}
@@ -771,7 +771,7 @@ export function BodyFatCalculatorClient() {
           />
         </>
       ) : (
-        <div className="rounded-lg border-2 border-dashed p-6 text-center text-sm" style={{ borderColor: 'rgb(var(--border-strong))', color: 'rgb(var(--text-faint))' }}>
+        <div className="rounded-lg border-2 border-dashed p-6 text-center text-sm" style={{ borderColor: 'rgb(var(--border-strong))', color: 'rgb(var(--text-subtle))' }}>
           {L('emptyState', 'Enter your measurements to estimate your body fat')}
         </div>
       )}
@@ -835,9 +835,9 @@ export const MacroCalculatorClient = makeCalculatorClient({
     title: 'Calorie Breakdown by Macro',
     centerLabel: 'Calories',
     slices: [
-      { valueKey: 'proteinCal', label: 'Protein', color: '#3b82f6' },
-      { valueKey: 'carbsCal', label: 'Carbs', color: '#22c55e' },
-      { valueKey: 'fatCal', label: 'Fat', color: '#f59e0b' },
+      { valueKey: 'proteinCal', label: 'Protein', color: 'var(--chart-coral)' },
+      { valueKey: 'carbsCal', label: 'Carbs', color: 'var(--chart-teal)' },
+      { valueKey: 'fatCal', label: 'Fat', color: 'var(--chart-amber)' },
     ],
   },
 })
