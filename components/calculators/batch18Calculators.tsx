@@ -432,11 +432,11 @@ const IF_MODELS = [
  * 数值为研究界的常用经验区间(个体差异大),页面有免责声明。
  */
 const IF_PHASES = [
-  { from: 0, to: 4, label: 'Digesting', desc: 'Blood sugar & insulin rising', color: 'var(--chart-amber)' },
-  { from: 4, to: 8, label: 'Absorbing', desc: 'Blood sugar falling back', color: 'var(--chart-tan)' },
-  { from: 8, to: 12, label: 'Glycogen use', desc: 'Liver glycogen depleting', color: 'var(--chart-pale)' },
-  { from: 12, to: 16, label: 'Fat burning', desc: 'Ketosis begins (fat → ketones)', color: 'var(--chart-teal)' },
-  { from: 16, to: 24, label: 'Deep ketosis', desc: 'Autophagy ramping up (est.)', color: 'var(--chart-ink)' },
+  { from: 0, to: 4, label: 'Digesting', desc: 'Blood sugar & insulin rising', color: 'var(--chart-amber)', labelColor: 'var(--chart-amber-text)' },
+  { from: 4, to: 8, label: 'Absorbing', desc: 'Blood sugar falling back', color: 'var(--chart-tan)', labelColor: 'var(--chart-tan-text)' },
+  { from: 8, to: 12, label: 'Glycogen use', desc: 'Liver glycogen depleting', color: 'var(--chart-pale)', labelColor: 'var(--chart-pale-text)' },
+  { from: 12, to: 16, label: 'Fat burning', desc: 'Ketosis begins (fat → ketones)', color: 'var(--chart-teal)', labelColor: 'var(--chart-teal-text)' },
+  { from: 16, to: 24, label: 'Deep ketosis', desc: 'Autophagy ramping up (est.)', color: 'var(--chart-ink)', labelColor: 'var(--chart-ink-text)' },
 ]
 
 /** "HH:MM" → 当日分钟数;非法输入返回 null */
@@ -501,12 +501,13 @@ export function IntermittentFastingClient() {
 
   // 时间轴:24h 从第一餐起;进食窗(绿)+ 断食分段(黄→绿渐变按代谢阶段)
   const timeline = useMemo(() => {
-    const segs: { leftPct: number; widthPct: number; color: string; label: string; title: string }[] = []
+    const segs: { leftPct: number; widthPct: number; color: string; labelColor: string; label: string; title: string }[] = []
     // 进食窗
     segs.push({
       leftPct: 0,
       widthPct: (md.eat / 24) * 100,
       color: 'var(--chart-coral)',
+      labelColor: 'var(--chart-coral-text)',
       label: L('tlEating', 'Eating window'),
       title: `${fmtTime(eatStart)} – ${fmtTime(eatEnd)} (${md.eat}h)`,
     })
@@ -521,6 +522,7 @@ export function IntermittentFastingClient() {
         leftPct: (segStart / 24) * 100,
         widthPct: (w / 24) * 100,
         color: p.color,
+        labelColor: p.labelColor,
         label: L(`phase${p.from}`, p.label),
         title: `${L(`phase${p.from}`, p.label)} · ${L(`phaseDesc${p.from}`, p.desc)} (+${p.from}h fasted)`,
       })
@@ -676,7 +678,7 @@ export function IntermittentFastingClient() {
               style={{ left: `${s.leftPct}%`, width: `${s.widthPct}%`, backgroundColor: s.color }}
               title={s.title}
             >
-              <span className="truncate px-1 text-[10px] font-bold text-white sm:text-xs">{s.label}</span>
+              <span className="truncate px-1 text-[10px] font-bold sm:text-xs" style={{ color: s.labelColor }}>{s.label}</span>
             </div>
           ))}
           {/* 当前时刻游标(挂载后显示) */}

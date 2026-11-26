@@ -8,6 +8,13 @@
   --chart-rust: #a9583e;
   --chart-tan: #c9a47a;
   --chart-pale: #d6cec2;
+  /* 时间轴/堆叠条上分段标签的文字色:浅底深字,深底白字 */
+  --chart-coral-text: #ffffff;
+  --chart-teal-text: #ffffff;
+  --chart-amber-text: #141413;
+  --chart-tan-text: #141413;
+  --chart-pale-text: #141413;
+  --chart-ink-text: #ffffff;
   --positive-text: #23623f;
   --warning-text: #845019;
   --negative-text: #a33232;
@@ -15,6 +22,9 @@
 html.dark {
   --chart-ink: #cfcbc2;
   --chart-pale: #646057;
+  /* 深色主题下 ink/pale 翻面,标签色跟着翻 */
+  --chart-ink-text: #141413;
+  --chart-pale-text: #ffffff;
   --positive-text: #8bc99a;
   --warning-text: #e8b976;
   --negative-text: #ee9292;

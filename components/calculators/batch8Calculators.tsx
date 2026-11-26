@@ -35,7 +35,7 @@ export const APYCalculatorClient = makeCalculatorClient({
   inputs: [
     { key: 'principal', label: 'Principal', suffix: '$', default: '10000' },
     { key: 'apr', label: 'Annual rate (APR)', suffix: '%', default: '5', slider: { min: 0, max: 15, step: 0.05 } },
-    { key: 'compound', label: 'Compounding', default: 'monthly', options: [
+    { key: 'compound', label: 'Compounding', default: '12', options: [
       { label: 'Annually', value: '1' }, { label: 'Quarterly', value: '4' },
       { label: 'Monthly', value: '12' }, { label: 'Daily', value: '365' },
     ]},
@@ -53,6 +53,15 @@ export const APYCalculatorClient = makeCalculatorClient({
     const n = Number(v.compound)
     const t = toNumStrict(v.years)
     if (isNaN(p) || isNaN(r) || isNaN(t)) {
+      return {
+        apy: `⚠️ ${tui('apy-calculator', locale, 'errInvalidInput', 'Enter valid numbers in all fields')}`,
+        final: '—',
+        interest: '—',
+      }
+    }
+    // 防御:复利频次来自下拉框,正常值恒为 1/4/12/365;旧分享链接或手改 URL
+    // 可能带入 'monthly' 之类非法值 → Number() 为 NaN,此前会静默算出 '—'
+    if (!isFinite(n) || n <= 0) {
       return {
         apy: `⚠️ ${tui('apy-calculator', locale, 'errInvalidInput', 'Enter valid numbers in all fields')}`,
         final: '—',
