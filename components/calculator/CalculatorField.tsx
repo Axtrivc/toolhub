@@ -231,6 +231,10 @@ export function ResultCard({
   /** 错误态(⚠️):红色卡片,不用主色渐变,且不做数字滚动动画 */
   error?: boolean
 }) {
+  // 长数值(如西语 "32.100,00 US$" 13 字符)在 2.5rem 下会把卡片撑满断行:
+  // 字符串值超过 12 字符时降一档字号,宁可小一点也不要把金额断成两行;
+  // 非字符串值(节点)保持原字号
+  const longValue = typeof value === 'string' && value.length > 12
   return (
     // 高亮态:主色梯度淡底(from-primary/5 → to-primary/10)+ 主色细描边 +
     // 渐变大字号数字(text-primary,暗色主题自动切换为 blue-400);
@@ -250,7 +254,7 @@ export function ResultCard({
       <div className={`text-xs font-medium uppercase tracking-[1.5px] ${highlight && !error ? 'text-on-dark-soft' : 'text-body'}`}>
         {label}
       </div>
-      <div className={error ? 'mt-2 text-base font-medium' : 'mt-2 break-words font-serif text-[2rem] font-normal leading-[1.1] tracking-[-0.8px] sm:text-[2.5rem]'}>
+      <div className={error ? 'mt-2 text-base font-medium' : `mt-2 break-words font-serif font-normal leading-[1.1] tracking-[-0.8px] ${longValue ? 'text-[1.6rem] sm:text-[1.9rem]' : 'text-[2rem] sm:text-[2.5rem]'}`}>
         {/* 全部分支等宽数字(值变化不抖动);error 文案串混排数字同样受益。
             权威结果直出终值不走 AnimatedNumber:避免 ~400ms tween 期间出现
             可复制的动画中间值(AnimatedNumber 仍供装饰性统计条使用) */}
