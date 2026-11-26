@@ -120,9 +120,14 @@ export function StackedCompareChart({ title, rows, formatTotal = fmtCompact }: S
                 const fitsOutside = barEnd + 8 + estW <= barW
                 const fitsInside = barEnd - 8 >= estW
                 const outside = fitsOutside || !fitsInside
+                // 条内标签不能压住最后一段(可能是很窄的深色条):有空间时
+                // 让标签在最后一段开始前结束,否则保持原来的条内位置
+                const lastSegW = (r.segments[r.segments.length - 1].value / maxTotal) * barW
+                const fitsBeforeLastSeg = barEnd - lastSegW - 8 - estW >= 0
+                const insideX = fitsBeforeLastSeg ? barEnd - lastSegW - 8 : barEnd - 8
                 return (
                   <text
-                    x={outside ? barEnd + 8 : barEnd - 8}
+                    x={outside ? barEnd + 8 : insideX}
                     y={y0 + LABEL_H + BAR_H / 2 + 4}
                     textAnchor={outside ? 'start' : 'end'}
                     fontSize={VALUE_FONT}

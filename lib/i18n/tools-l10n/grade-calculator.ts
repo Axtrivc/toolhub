@@ -8,8 +8,8 @@ export const gradeCalculatorL10n: ToolL10n = {
 
   es: {
     formula: {
-      formula: 'grade = Σ ( scoreᵢ × weightᵢ ) / Σ weightᵢ',
-      explain: 'Promedio ponderado. Cada nota se multiplica por su peso (p. ej. examen 40 %, deberes 60 %) y se divide entre el peso total. Los elementos con más peso influyen más en la nota.',
+      formula: 'porcentaje = (puntos obtenidos ÷ puntos posibles) × 100',
+      explain: 'Divide los puntos obtenidos entre los puntos posibles y multiplica por 100 para obtener el porcentaje. La letra de la calificación sigue la escala estadounidense estándar A-F (A ≥ 90, B ≥ 80, C ≥ 70, D ≥ 60, F por debajo de 60).',
     },
     ui: {
       'in.earned': 'Puntos obtenidos',
@@ -23,7 +23,6 @@ export const gradeCalculatorL10n: ToolL10n = {
       'calcular la nota por puntos obtenidos',
       'convertir la puntuación de un examen en nota porcentual',
       'obtener la letra de calificación a partir de los puntos',
-      'calcular una nota ponderada',
     ],
     faqs: [
       { q: '¿Qué pasa con las notas con +/-?', a: 'Muchas escuelas usan divisiones más finas (A-, B+, etc.). Esta herramienta usa la escala básica de 5 niveles. Consulta los umbrales específicos de tu escuela para las notas con signo.' },
@@ -31,8 +30,8 @@ export const gradeCalculatorL10n: ToolL10n = {
   },
   de: {
     formula: {
-      formula: 'grade = Σ ( scoreᵢ × weightᵢ ) / Σ weightᵢ',
-      explain: 'Gewichteter Durchschnitt. Jede Note wird mit ihrer Gewichtung multipliziert (z. B. Klausur 40 %, Hausaufgaben 60 %) und durch das Gesamtgewicht geteilt. Stärker gewichtete Anteile wirken sich stärker auf die Note aus.',
+      formula: 'Prozentsatz = (erreichte Punkte ÷ mögliche Punkte) × 100',
+      explain: 'Teile die erreichten Punkte durch die möglichen Punkte und multipliziere mit 100, um den Prozentsatz zu erhalten. Die Note folgt der üblichen US-amerikanischen A-F-Skala (A ≥ 90, B ≥ 80, C ≥ 70, D ≥ 60, F unter 60).',
     },
     ui: {
       'in.earned': 'Erreichte Punkte',
@@ -46,7 +45,6 @@ export const gradeCalculatorL10n: ToolL10n = {
       'die Note aus erreichten Punkten berechnen',
       'die Punktzahl einer Prüfung in eine Prozentnote umrechnen',
       'aus Punkten die Buchstabennote ermitteln',
-      'eine gewichtete Note berechnen',
     ],
     faqs: [
       { q: 'Was ist mit +/- Noten?', a: 'Viele Schulen nutzen feinere Unterteilungen (A-, B+ usw.). Dieses Werkzeug verwendet die einfache 5-Stufen-Skala. Frag an deiner Schule nach den genauen Grenzwerten für Plus-/Minusnoten.' },

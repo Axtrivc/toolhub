@@ -609,10 +609,10 @@ export const toolFormulas: Record<string, ToolFormula> = {
     example: "Step 1: N = 47,300. Move the decimal 4 places left: a = 4.73.\nStep 2: n = 4, so N = 4.73 × 10^4.\nStep 3: Reverse direction: 0.0021 → move the decimal 3 places right: a = 2.1, n = −3.\nResult: 47,300 = 4.73 × 10^4 and 0.0021 = 2.1 × 10^−3.",
   },
   "grade-calculator": {
-    formula: "grade = Σ ( scoreᵢ × weightᵢ ) / Σ weightᵢ",
-    variables: "grade = Weighted course grade (%)\nscoreᵢ = Score on component i (%)\nweightᵢ = Weight of component i (share of the final grade)",
-    explain: "Weighted average. Each score is multiplied by its weight (e.g. exam 40%, homework 60%), then divided by the total weight. Higher-weighted items move the grade more.",
-    example: "Step 1: midterm 85% at 30%, homework 92% at 20%, final 78% at 50%.\nStep 2: weighted sum = 85 × 0.30 + 92 × 0.20 + 78 × 0.50 = 25.5 + 18.4 + 39 = 82.9.\nResult: the course grade is 82.9% — a B, with the 50% final doing most of the damage.",
+    formula: "percentage = (points earned ÷ points possible) × 100",
+    variables: "percentage = Percentage score (%)\npoints earned = Number of points earned\npoints possible = Maximum number of points possible",
+    explain: "Divide the points earned by the points possible and multiply by 100 to get the percentage. The letter grade follows the standard US A-F scale (A ≥ 90, B ≥ 80, C ≥ 70, D ≥ 60, F below 60).",
+    example: "Step 1: 85 points earned out of 100 possible.\nStep 2: 85 ÷ 100 × 100 = 85.\nResult: 85% — a B.",
   },
   "final-grade-calculator": {
     formula: "needed = ( target − current × (1 − w) ) / w",

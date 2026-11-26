@@ -51,7 +51,11 @@ export function AutoLoanCalculatorClient() {
   const localeTag = locale === 'en' ? 'en-US' : locale
   const fmtMoney = (n: number) =>
     isFinite(n)
-      ? n.toLocaleString(localeTag, { style: 'currency', currency: 'USD', maximumFractionDigits: 2 })
+      ? n
+          .toLocaleString(localeTag, { style: 'currency', currency: 'USD', maximumFractionDigits: 2 })
+          // 金额与货币符号之间的空格换成不换行空格:西语 "32.100,00 US$" 里
+          // 的普通空格会让 ResultCard(break-words)在 "US$" 前断行
+          .replace(/\s(\D+)$/, ' $1')
       : '—'
 
   // 典型场景:新车 60/36 期、二手车、大额皮卡(贴合真实购车行情)
