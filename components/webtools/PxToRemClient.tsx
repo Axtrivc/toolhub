@@ -37,7 +37,8 @@ export function PxToRemClient() {
   const [rootSize, setRootSize] = useState(16)
   // px 默认 16:旧版初始为空,所有换算结果与实时预览全显示 "—",像工具坏了一样
   const [px, setPx] = useState('16')
-  const [rem, setRem] = useState('')
+  // rem 默认 1(与 px 16 / 根字号 16 对应):反向换算加载时即有结果,不显示 "—"
+  const [rem, setRem] = useState('1')
 
   useEffect(() => {
     setRootSize(readStoredRootSize())

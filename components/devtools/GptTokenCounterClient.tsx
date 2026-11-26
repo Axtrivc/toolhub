@@ -71,6 +71,8 @@ export function GptTokenCounterClient() {
   const [text, setText] = useState(SAMPLE_TEXT)
   const [modelId, setModelId] = useState(DEFAULT_MODEL_ID)
   const [outputTokens, setOutputTokens] = useState('0')
+  // 负数提示锁存:失焦钳制为 0 后提示仍保留,直到用户再次编辑该输入框
+  const [negativeHint, setNegativeHint] = useState(false)
 
   // 超长输入截断:只统计前 MAX_INPUT_LEN 字符(计数器对前缀有代表性)
   const inputTruncated = text.length > MAX_INPUT_LEN
@@ -189,12 +191,12 @@ export function GptTokenCounterClient() {
               min={0}
               step={100}
               value={outputTokens}
-              onChange={(e) => setOutputTokens(e.target.value)}
+              onChange={(e) => { setOutputTokens(e.target.value); setNegativeHint(false) }}
               // 负数不跟随计算(计算时按 0 处理)还不够:失焦即修正为 0,
-              // 并在输入负数期间给出提示,避免"输了 -100 却没任何反馈"
+              // 并锁存提示(直到用户再次编辑),避免"输了 -100 却没任何反馈"
               onBlur={() => {
                 const n = Number(outputTokens)
-                if (outputTokens.trim() !== '' && Number.isFinite(n) && n < 0) setOutputTokens('0')
+                if (outputTokens.trim() !== '' && Number.isFinite(n) && n < 0) { setOutputTokens('0'); setNegativeHint(true) }
               }}
               aria-invalid={Number(outputTokens) < 0}
               aria-describedby="output-tokens-hint"
@@ -205,7 +207,7 @@ export function GptTokenCounterClient() {
                 color: 'rgb(var(--text))',
               }}
             />
-            {Number(outputTokens) < 0 && (
+            {(Number(outputTokens) < 0 || negativeHint) && (
               <p id="output-tokens-hint" className="mt-1.5 text-xs text-amber-600 dark:text-amber-400">
                 {L('negativeClamped', 'Negative values count as 0.')}
               </p>

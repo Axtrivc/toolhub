@@ -5,7 +5,7 @@ import { CalculatorField, CalculatorNote, CalculatorSliderField, ResultCard } fr
 import { StackedCompareChart } from '@/components/charts/StackedCompareChart'
 import { ResultActions } from '../ResultActions'
 import { CopyButton } from '@/components/CopyButton'
-import { fmtNum, fmtUSD } from '@/lib/format'
+import { fmtUSD } from '@/lib/format'
 import { useApp } from '@/components/providers/AppProviders'
 import { tui } from '@/lib/i18n/tool-l10n-accessors/tools/batch17AITools'
 import { getCalculatorSample } from '@/lib/tool-samples'
@@ -325,7 +325,7 @@ export function EmbeddingPriceClient() {
           // 旧版用 monthly > 0 过滤掉了免费行,图表把 OpenAI 3-small 标为
           // cheapest,与表格的 Gemini cheapest 自相矛盾。
           rows={stats.rows.map(({ m, monthly }, i) => ({
-            label: m.label,
+            label: i === 0 ? `${m.label} — ${L('cheapestLabel', 'cheapest')}` : m.label,
             segments: [{ label: i === 0 ? L('cheapestLabel', 'cheapest') : L('costLabel', 'per month'), value: monthly, color: i === 0 ? 'var(--chart-teal)' : 'var(--chart-coral)' }],
           }))}
           // 金额固定 2 位小数:旧版 <0.01 走 toExponential,免费行显示 $0.0e+0
@@ -351,11 +351,10 @@ export function EmbeddingPriceClient() {
                   </td>
                   <td className="px-3 py-2 font-mono text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>{m.dims.toLocaleString('en-US')}</td>
                   <td className="px-3 py-2 font-mono text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>{m.ctx.toLocaleString('en-US')}</td>
-                  <td className="px-3 py-2 font-mono text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>${m.pricePer1M === 0 ? '0' : fmtNum(m.pricePer1M, 3)}</td>
-                  {/* PER RUN:免费模型精确为 0 时显示 $0.00;其余固定 4 位小数。
-                      旧版 <0.01 走 toExponential(1),0 显示为 $0.0e+0 */}
-                  <td className="px-3 py-2 font-mono" style={{ color: 'rgb(var(--text))' }}>{perRun === 0 ? '$0.00' : fmtUSD(perRun, 4)}</td>
-                  {/* 月费固定 2 位小数:fmtNum 会去尾零,$5.5/$1 与 $0.01 混用 */}
+                  <td className="px-3 py-2 font-mono text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>{fmtUSD(m.pricePer1M, 2)}</td>
+                  {/* PER RUN:所有金额单元格统一固定 2 位小数,fmtUSD(0, 2) 即 $0.00,无需特判 */}
+                  <td className="px-3 py-2 font-mono" style={{ color: 'rgb(var(--text))' }}>{fmtUSD(perRun, 2)}</td>
+                  {/* 月费固定 2 位小数,与 $/1M、Per run 一致 */}
                   <td className="px-3 py-2 font-mono font-semibold" style={{ color: 'rgb(var(--text))' }}>{fmtUSD(monthly, 2)}</td>
                   <td className="px-3 py-2 font-mono text-xs whitespace-nowrap" style={{ color: 'rgb(var(--text-subtle))' }}>{storage}</td>
                 </tr>
