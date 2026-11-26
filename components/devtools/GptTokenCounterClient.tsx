@@ -33,8 +33,10 @@ Remember: real billing uses the provider's exact tokenizer (o200k_base for GPT-4
 const MODELS: ModelPrice[] = MODEL_PRICES
 
 /** 默认模型:显式常量固定,初始化与找不到选中项时的 fallback 都用它 ——
-    不再隐式依赖价格表首项,表内重排/删首项不会静默改变默认选择 */
-const DEFAULT_MODEL_ID = 'gpt-5.6-sol'
+    不再隐式依赖价格表首项,表内重排/删首项不会静默改变默认选择。
+    默认选标准命名的 Claude Sonnet 5,而非 GPT-5.6 Sol 这类带代号后缀的
+    非常规命名。 */
+const DEFAULT_MODEL_ID = 'claude-sonnet-5'
 
 const CJK_RE = /[\u3040-\u30ff\u3400-\u4dbf\u4e00-\u9fff\uf900-\ufaff\uac00-\ud7af]/g
 
@@ -188,6 +190,14 @@ export function GptTokenCounterClient() {
               step={100}
               value={outputTokens}
               onChange={(e) => setOutputTokens(e.target.value)}
+              // 负数不跟随计算(计算时按 0 处理)还不够:失焦即修正为 0,
+              // 并在输入负数期间给出提示,避免"输了 -100 却没任何反馈"
+              onBlur={() => {
+                const n = Number(outputTokens)
+                if (outputTokens.trim() !== '' && Number.isFinite(n) && n < 0) setOutputTokens('0')
+              }}
+              aria-invalid={Number(outputTokens) < 0}
+              aria-describedby="output-tokens-hint"
               className="w-full rounded-lg border p-3 font-mono text-sm shadow-sm outline-none transition focus:ring-2"
               style={{
                 borderColor: 'rgb(var(--border-strong))',
@@ -195,6 +205,11 @@ export function GptTokenCounterClient() {
                 color: 'rgb(var(--text))',
               }}
             />
+            {Number(outputTokens) < 0 && (
+              <p id="output-tokens-hint" className="mt-1.5 text-xs text-amber-600 dark:text-amber-400">
+                {L('negativeClamped', 'Negative values count as 0.')}
+              </p>
+            )}
           </div>
         </div>
         <div className="flex items-end">

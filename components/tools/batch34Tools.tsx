@@ -795,7 +795,7 @@ export function ImageCompressorClient() {
               </label>
               <input id="ic-quality" type="range" min={0.05} max={1} step={0.01} value={quality}
                 onChange={(e) => setQuality(Number(e.target.value))} className="calc-slider"
-                style={{ background: `linear-gradient(to right, rgb(var(--primary)) ${((quality - 0.05) / 0.95) * 100}%, rgb(var(--bg-subtle)) ${((quality - 0.05) / 0.95) * 100}%)` }} />
+                style={{ background: `linear-gradient(to right, rgb(var(--primary)) ${((quality - 0.05) / 0.95) * 100}%, rgb(var(--slider-track)) ${((quality - 0.05) / 0.95) * 100}%)` }} />
             </div>
           </div>
 

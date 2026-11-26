@@ -23,7 +23,7 @@ export const HUB_THEMES: readonly HubTheme[] = [
   {
     id: 'ai',
     icon: Brain,
-    categories: ['AI Tools'],
+    categories: ['AI Tools', 'Speech to Text'],
     featuredToolIds: ['llm-cost-calculator', 'json-repair', 'json-to-zod', 'gpt-token-counter'],
     titleKey: 'hubTitleAI',
     taglineKey: 'hubTaglineAI',
@@ -71,7 +71,7 @@ export const HUB_THEMES: readonly HubTheme[] = [
   {
     id: 'utilities',
     icon: Zap,
-    categories: ['Math Calculators', 'Health Calculators', 'Time Calculators', 'Education Calculators', 'Game Tools', 'Pet Tools', 'Home Calculators'],
+    categories: ['Math Calculators', 'Health Calculators', 'Time Calculators', 'Education Calculators', 'Game Tools', 'Pet Tools', 'Home Calculators', 'PDF Tools'],
     featuredToolIds: ['reading-speaking-time', 'days-countdown-calculator', 'water-intake-calculator', 'bmi-calculator'],
     titleKey: 'hubTitleUtilities',
     taglineKey: 'hubTaglineUtilities',

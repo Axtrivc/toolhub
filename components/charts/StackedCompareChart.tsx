@@ -62,15 +62,29 @@ export function StackedCompareChart({ title, rows, formatTotal = fmtCompact }: S
     return () => ro.disconnect()
   }, [])
 
+  // 零值行也保留:免费方案(月费 0)只剩行标签 + 总值、轨道留空,与表格的
+  // cheapest 排名一致。旧版直接丢弃零值行,图表与表格排名打架。
+  // 全 NaN 的行仍丢弃(没有一条有限分段)。
   const validRows = rows
-    .map((r) => ({ ...r, segments: r.segments.filter((s) => Number.isFinite(s.value) && s.value > 0) }))
-    .filter((r) => r.segments.length > 0)
+    .map((r) => {
+      const kept = r.segments.filter((s) => Number.isFinite(s.value) && s.value > 0)
+      const hasFinite = r.segments.some((s) => Number.isFinite(s.value))
+      return kept.length > 0 || hasFinite ? { ...r, segments: kept } : null
+    })
+    .filter((r): r is StackedRow => r !== null)
 
   if (validRows.length === 0) return null
 
   const totals = validRows.map((r) => r.segments.reduce((sum, s) => sum + s.value, 0))
-  const maxTotal = Math.max(...totals)
-  const barW = W // 条形满宽 = 全局最大总值
+  const maxTotal = Math.max(0, ...totals)
+  // 行尾总值预留位:按最长总值文本估宽,条形只占剩余宽度,总值永远有地方
+  // 落在条外。旧版条形占满全宽,条近满时总值被迫退回条内、深色字压在彩条
+  // 上,看上去就是"价格标签与柱状图重叠"。
+  const labelReserve = Math.min(
+    Math.max(48, estimateValueWidth(formatTotal(maxTotal)) + 16),
+    Math.round(W * 0.35),
+  )
+  const barW = W - labelReserve
   const H = validRows.length * (LABEL_H + BAR_H + ROW_GAP)
 
   // 图例:按 label 去重保序
@@ -92,7 +106,7 @@ export function StackedCompareChart({ title, rows, formatTotal = fmtCompact }: S
               {/* 轨道底 */}
               <rect x={0} y={y0 + LABEL_H} width={barW} height={BAR_H} rx={6} fill="rgb(var(--bg-subtle))" />
               {r.segments.map((s, si) => {
-                const w = (s.value / maxTotal) * barW
+                const w = maxTotal > 0 ? (s.value / maxTotal) * barW : 0
                 // 最小可见宽:极小分段(如 1/16 行在移动端)不至于塌缩成 0;
                 // 后续分段按真实 w 推进,兜宽最多 4 单位、被后绘制的分段盖住
                 const segW = Math.max(MIN_SEG_W, w - (si === r.segments.length - 1 ? 0 : 1.5))
@@ -114,15 +128,18 @@ export function StackedCompareChart({ title, rows, formatTotal = fmtCompact }: S
                   (落在浅灰轨道上也清晰);条外放不下(条近满)→ 退回
                   条内右端,锚定真实条末端(非图表右缘),白字必压在彩条上 */}
               {(() => {
-                const barEnd = (total / maxTotal) * barW
+                const barEnd = maxTotal > 0 ? (total / maxTotal) * barW : 0
                 const text = formatTotal(total)
                 const estW = estimateValueWidth(text)
-                const fitsOutside = barEnd + 8 + estW <= barW
+                // 预留位在 SVG 右侧,条外判定按整图宽度 W(不再按条宽 barW)
+                const fitsOutside = barEnd + 8 + estW <= W
                 const fitsInside = barEnd - 8 >= estW
                 const outside = fitsOutside || !fitsInside
                 // 条内标签不能压住最后一段(可能是很窄的深色条):有空间时
-                // 让标签在最后一段开始前结束,否则保持原来的条内位置
-                const lastSegW = (r.segments[r.segments.length - 1].value / maxTotal) * barW
+                // 让标签在最后一段开始前结束,否则保持原来的条内位置;
+                // 全零行没有分段,lastSegW 为 0
+                const lastSeg = r.segments[r.segments.length - 1]
+                const lastSegW = lastSeg && maxTotal > 0 ? (lastSeg.value / maxTotal) * barW : 0
                 const fitsBeforeLastSeg = barEnd - lastSegW - 8 - estW >= 0
                 const insideX = fitsBeforeLastSeg ? barEnd - lastSegW - 8 : barEnd - 8
                 return (

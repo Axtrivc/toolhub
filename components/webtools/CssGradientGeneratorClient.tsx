@@ -204,7 +204,7 @@ export function CssGradientGeneratorClient() {
               onChange={(e) => setAngle(Number(e.target.value))}
               className="calc-slider"
               style={{
-                background: `linear-gradient(to right, rgb(var(--primary)) ${(angle / 360) * 100}%, rgb(var(--bg-subtle)) ${(angle / 360) * 100}%)`,
+                background: `linear-gradient(to right, rgb(var(--primary)) ${(angle / 360) * 100}%, rgb(var(--slider-track)) ${(angle / 360) * 100}%)`,
               }}
             />
           </div>

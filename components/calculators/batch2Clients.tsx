@@ -26,19 +26,19 @@ export const WeightConverterClient = makeUnitConverter({
   digits: 4,
   units: {
     // metric 常用质量/重量
-    mg: { label: 'Milligrams (mg)', factor: 0.000001 },
-    cg: { label: 'Centigrams (cg)', factor: 0.00001 },
-    g: { label: 'Grams (g)', factor: 0.001 },
-    dag: { label: 'Decagrams (dag)', factor: 0.01 },
-    kg: { label: 'Kilograms (kg)', factor: 1 },
-    t: { label: 'Metric tons (t)', factor: 1000 },
+    mg: { label: 'Milligrams (mg)', singular: 'Milligram (mg)', factor: 0.000001 },
+    cg: { label: 'Centigrams (cg)', singular: 'Centigram (cg)', factor: 0.00001 },
+    g: { label: 'Grams (g)', singular: 'Gram (g)', factor: 0.001 },
+    dag: { label: 'Decagrams (dag)', singular: 'Decagram (dag)', factor: 0.01 },
+    kg: { label: 'Kilograms (kg)', singular: 'Kilogram (kg)', factor: 1 },
+    t: { label: 'Metric tons (t)', singular: 'Metric ton (t)', factor: 1000 },
     // imperial 重量(精确定义:1 lb = 453.59237 g,oz/st 为 lb 的整分)
-    oz: { label: 'Ounces (oz)', factor: 0.45359237 / 16 },
-    lb: { label: 'Pounds (lb)', factor: 0.45359237 },
-    st: { label: 'Stones (st)', factor: 0.45359237 * 14 },
+    oz: { label: 'Ounces (oz)', singular: 'Ounce (oz)', factor: 0.45359237 / 16 },
+    lb: { label: 'Pounds (lb)', singular: 'Pound (lb)', factor: 0.45359237 },
+    st: { label: 'Stones (st)', singular: 'Stone (st)', factor: 0.45359237 * 14 },
     // 精密/专用质量(mass-converter 合并过来)
-    carat: { label: 'Carats (ct)', factor: 0.0002 },
-    grain: { label: 'Grains (gr)', factor: 0.00006479891 },
+    carat: { label: 'Carats (ct)', singular: 'Carat (ct)', factor: 0.0002 },
+    grain: { label: 'Grains (gr)', singular: 'Grain (gr)', factor: 0.00006479891 },
   },
   note: '⚖️ Covers both everyday weight (kg, lb, oz, stones) and precise mass units (carats for gemstones, grains for ammunition/medicine). Mass and weight share this one converter.',
 })

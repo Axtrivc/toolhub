@@ -10,7 +10,6 @@ import { countWords } from '@/lib/text-stats'
 import { urlQueryParserL10n } from '@/lib/i18n/tools-l10n/url-query-parser'
 import { htmlTagStripperL10n } from '@/lib/i18n/tools-l10n/html-tag-stripper'
 import { characterFrequencyL10n } from '@/lib/i18n/tools-l10n/character-frequency'
-import { textDiffL10n } from '@/lib/i18n/tools-l10n/text-diff'
 import { textSizeEstimatorL10n } from '@/lib/i18n/tools-l10n/text-size-estimator'
 
 /** 第七批:开发者 + 文本工具 7 个 */
@@ -374,30 +373,15 @@ export function URLExtractorClient() {
 }
 
 // ── 文本差异比较 ──
-export const TextDiffClient = makeTextTool({
-  slug: 'text-diff',
-  l10n: textDiffL10n,
-  inputLabel: 'Format: text1 ||| text2',
-  outputLabel: 'Comparison',
-  defaultInput: 'the quick brown fox ||| the slow brown fox',
-  transform: (t, locale) => {
-    // 只在首个分隔符处切开:第二段文本自身含 ||| 时不再整单报错
-    const sepIdx = t.indexOf('|||')
-    const a = sepIdx === -1 ? t : t.slice(0, sepIdx).replace(/\s+$/, '')
-    const b = sepIdx === -1 ? '' : t.slice(sepIdx + 3).replace(/^\s+/, '')
+export function TextDiffClient() {
+  const { locale } = useApp()
+  const [a, setA] = useState('the quick brown fox')
+  const [b, setB] = useState('the slow brown fox')
+
+  const tokens = useMemo(() => {
     const aw = a.split(/\s+/).filter(Boolean)
     const bw = b.split(/\s+/).filter(Boolean)
-    // LCS 是 O(n×m) 且每次击键都重算:超长输入直接友好提示,避免页面卡死
-    if (aw.length > 3000 || bw.length > 3000 || a.length > 20000 || b.length > 20000) {
-      return tui(
-        'text-diff',
-        locale,
-        'tooLongNote',
-        '⚠️ These texts are too long to compare here — keep each side under about 3,000 words (or 20,000 characters).',
-      )
-    }
-    // 词级 LCS 对齐:中间插入/删除后,后续相同词不再被逐位误报为差异。
-    // dp[i][j] = aw[i:] 与 bw[j:] 的最长公共子序列长度
+    if (aw.length > 3000 || bw.length > 3000 || a.length > 20000 || b.length > 20000) return null
     const n = aw.length
     const m = bw.length
     const dp: number[][] = Array.from({ length: n + 1 }, () => new Array<number>(m + 1).fill(0))
@@ -406,34 +390,130 @@ export const TextDiffClient = makeTextTool({
         dp[i][j] = aw[i] === bw[j] ? dp[i + 1][j + 1] + 1 : Math.max(dp[i + 1][j], dp[i][j + 1])
       }
     }
-    const lines: string[] = []
+    const out: { text: string; kind: 'same' | 'del' | 'add' }[] = []
     let i = 0
     let j = 0
     while (i < n && j < m) {
-      if (aw[i] === bw[j]) {
-        lines.push(`  =  ${aw[i]}`)
-        i++
-        j++
-      } else if (dp[i + 1][j] >= dp[i][j + 1]) {
-        lines.push(`- ${aw[i]}`)
-        i++
-      } else {
-        lines.push(`+ ${bw[j]}`)
-        j++
-      }
+      if (aw[i] === bw[j]) { out.push({ text: aw[i], kind: 'same' }); i++; j++ }
+      else if (dp[i + 1][j] >= dp[i][j + 1]) { out.push({ text: aw[i], kind: 'del' }); i++ }
+      else { out.push({ text: bw[j], kind: 'add' }); j++ }
     }
-    while (i < n) {
-      lines.push(`- ${aw[i]}`)
-      i++
-    }
-    while (j < m) {
-      lines.push(`+ ${bw[j]}`)
-      j++
-    }
-    return lines.join('\n')
-  },
-  note: '🔍 Compare two texts word by word. Separate with " ||| ". Lines starting with - show original, + show changed.',
-})
+    while (i < n) { out.push({ text: aw[i], kind: 'del' }); i++ }
+    while (j < m) { out.push({ text: bw[j], kind: 'add' }); j++ }
+    return out
+  }, [a, b])
+
+  const hasBoth = a.trim().length > 0 && b.trim().length > 0
+  const tooLong = hasBoth && tokens === null
+  const diffText = tokens
+    ? tokens.map((t) => `${t.kind === 'same' ? '  =  ' : t.kind === 'del' ? '- ' : '+ '}${t.text}`).join('\n')
+    : ''
+
+  return (
+    <div className="space-y-4">
+      <div className="grid gap-4 sm:grid-cols-2">
+        <div className="space-y-1">
+          <label className="text-sm font-medium" htmlFor="text-diff-a">
+            {tui('text-diff', locale, 'originalLabel', 'Original text')}
+          </label>
+          <textarea
+            id="text-diff-a"
+            className="w-full rounded-lg border border-hairline bg-card p-3 font-mono text-sm"
+            rows={6}
+            value={a}
+            onChange={(e) => setA(e.target.value)}
+          />
+          <div className="text-xs opacity-70">
+            {[...a].length} {tui('text-diff', locale, 'charsLabel', 'characters')},{' '}
+            {countWords(a)} {tui('text-diff', locale, 'wordsLabel', 'words')}
+          </div>
+        </div>
+        <div className="space-y-1">
+          <label className="text-sm font-medium" htmlFor="text-diff-b">
+            {tui('text-diff', locale, 'changedLabel', 'Changed text')}
+          </label>
+          <textarea
+            id="text-diff-b"
+            className="w-full rounded-lg border border-hairline bg-card p-3 font-mono text-sm"
+            rows={6}
+            value={b}
+            onChange={(e) => setB(e.target.value)}
+          />
+          <div className="text-xs opacity-70">
+            {[...b].length} {tui('text-diff', locale, 'charsLabel', 'characters')},{' '}
+            {countWords(b)} {tui('text-diff', locale, 'wordsLabel', 'words')}
+          </div>
+        </div>
+      </div>
+
+      <div className="rounded-lg border border-hairline p-4 space-y-3">
+        <div className="flex items-center justify-between gap-2 flex-wrap">
+          <h3 className="text-sm font-semibold">{tui('text-diff', locale, 'diffTitle', 'Differences')}</h3>
+          <div className="flex items-center gap-3 text-xs">
+            <span className="flex items-center gap-1">
+              <span className="inline-block h-3 w-3 rounded bg-red-100 dark:bg-red-950/50" />
+              {tui('text-diff', locale, 'removedLabel', 'Removed')}
+            </span>
+            <span className="flex items-center gap-1">
+              <span className="inline-block h-3 w-3 rounded bg-green-100 dark:bg-green-950/50" />
+              {tui('text-diff', locale, 'addedLabel', 'Added')}
+            </span>
+            <span className="flex items-center gap-1">
+              <span className="inline-block h-3 w-3 rounded border border-hairline" />
+              {tui('text-diff', locale, 'unchangedLabel', 'Unchanged')}
+            </span>
+          </div>
+        </div>
+
+        {!hasBoth ? (
+          <p className="text-sm opacity-70">
+            {tui('text-diff', locale, 'emptyHint', 'Enter text on both sides to compare.')}
+          </p>
+        ) : tooLong ? (
+          <p className="text-sm opacity-70">
+            {tui(
+              'text-diff',
+              locale,
+              'tooLongNote',
+              '⚠️ These texts are too long to compare here — keep each side under about 3,000 words (or 20,000 characters).'
+            )}
+          </p>
+        ) : (
+          <>
+            <p className="text-sm leading-relaxed">
+              {tokens!.map((t, idx) => (
+                <span key={idx}>
+                  <span
+                    className={
+                      t.kind === 'del'
+                        ? 'bg-red-100 text-red-800 dark:bg-red-950/50 dark:text-red-300 rounded px-0.5'
+                        : t.kind === 'add'
+                          ? 'bg-green-100 text-green-800 dark:bg-green-950/50 dark:text-green-300 rounded px-0.5'
+                          : undefined
+                    }
+                  >
+                    {t.text}
+                  </span>
+                  {idx < tokens!.length - 1 ? ' ' : null}
+                </span>
+              ))}
+            </p>
+            <CopyButton value={diffText} label={tui('text-diff', locale, 'copyDiff', 'Copy diff as text')} disabled={!diffText} />
+          </>
+        )}
+      </div>
+
+      <p className="rounded-md p-3 text-xs" style={{ backgroundColor: 'rgb(var(--bg-subtle))', color: 'rgb(var(--text-subtle))' }}>
+        {tui(
+          'text-diff',
+          locale,
+          'note',
+          '🔍 Compare two texts word by word. Removed words are highlighted red, added words green.'
+        )}
+      </p>
+    </div>
+  )
+}
 
 // ── 文本大小估算 ──
 export const TextSizeEstimatorClient = makeTextTool({

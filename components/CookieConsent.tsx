@@ -69,7 +69,16 @@ export function CookieConsent() {
       aria-label={t(locale, 'cookieAriaLabel')}
       className="fixed bottom-[calc(5.5rem+env(safe-area-inset-bottom))] right-4 z-50 w-[calc(100%-2rem)] max-w-[360px] rounded-xl border border-on-dark/15 bg-surface-dark p-6 text-on-dark sm:right-5"
     >
-      <p className="text-sm leading-relaxed">
+      {/* 关闭 ×:与"仅必要"同义(只存 necessary,不再弹出),让横幅一键让出右下角内容 */}
+      <button
+        type="button"
+        onClick={() => decide('necessary')}
+        aria-label={t(locale, 'cookieDismiss')}
+        className="absolute right-3 top-3 flex h-7 w-7 items-center justify-center rounded-full text-lg leading-none text-on-dark-soft transition hover:bg-dark-elevated hover:text-on-dark"
+      >
+        ×
+      </button>
+      <p className="pr-6 text-sm leading-relaxed">
         {bodyBefore}
         <Link href="/privacy/" className="text-primary underline decoration-primary/60 underline-offset-2">
           {privacyLabel}

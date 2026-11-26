@@ -34,25 +34,28 @@ const LINK_CLASS =
 const UNDERLINE_CLASS =
   'absolute -bottom-0.5 left-0 h-px w-0 bg-current transition-all duration-200 group-hover:w-full'
 
-interface HomeSitemapProps {
-  tools: ToolLiteMeta[]
-}
-
-export function HomeSitemap({ tools }: HomeSitemapProps) {
-  const { locale } = useApp()
-
-  // 真实分类 → 工具数(主题小节链接的 mono 计数后缀)
+/** 真实分类 → 工具数(主题小节链接的 mono 计数后缀) */
+function useCategoryCounts(tools: ToolLiteMeta[]) {
   const counts = new Map<string, number>()
   for (const tool of tools) counts.set(tool.category, (counts.get(tool.category) ?? 0) + 1)
-  const bySlug = new Map(tools.map((tool) => [tool.slug, tool]))
+  return counts
+}
+
+/**
+ * 分类导航:6 大主题小节,直接跟在首页 "Browse Tools by Category" 标题
+ * 与说明段之后(旧版把整张 sitemap 堆在两个标题段落之后,两板块看上去
+ * 只有标题没有内容)。
+ */
+export function HomeSitemapHubs({ tools }: { tools: ToolLiteMeta[] }) {
+  const { locale } = useApp()
+  const counts = useCategoryCounts(tools)
 
   return (
     <nav
       aria-label={t(locale, 'seoBrowseTitle')}
-      className="mt-16 border-t border-hairline pt-12"
+      className="mt-10"
     >
       <div className="grid grid-cols-1 gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
-        {/* ── 6 大主题小节:链接到主题过滤视图(兼容旧 ?category= 映射)── */}
         {HUB_THEMES.map((hub) => (
           <div key={hub.id}>
             <p className={HEADING_CLASS}>
@@ -81,7 +84,25 @@ export function HomeSitemap({ tools }: HomeSitemapProps) {
             </ul>
           </div>
         ))}
+      </div>
+    </nav>
+  )
+}
 
+/**
+ * 热门工具 + 全站目录:直接跟在首页 "Popular Tools" 标题与说明段之后,
+ * 与分类导航分开,各板块标题下都有实际列表。
+ */
+export function HomeSitemapPopular({ tools }: { tools: ToolLiteMeta[] }) {
+  const { locale } = useApp()
+  const bySlug = new Map(tools.map((tool) => [tool.slug, tool]))
+
+  return (
+    <nav
+      aria-label={t(locale, 'featuredTitle')}
+      className="mt-10 border-t border-hairline pt-10"
+    >
+      <div className="grid grid-cols-1 gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
         {/* ── Popular:高搜索量工具深度内链 ── */}
         <div>
           <p className={HEADING_CLASS}>
