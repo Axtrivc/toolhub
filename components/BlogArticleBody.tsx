@@ -118,7 +118,7 @@ function renderBlock(block: ArticleBlock, key: string): ReactNode {
       <Link
         key={key}
         href={href}
-        className="my-5 flex items-center gap-4 rounded-xl border border-hairline bg-canvas p-5 !no-underline"
+        className="my-5 flex items-center gap-4 rounded-xl border border-hairline bg-card p-5 !no-underline"
       >
         <span className="min-w-0 flex-1">
           <span className="block text-base font-medium" style={{ color: 'rgb(var(--text))' }}>
