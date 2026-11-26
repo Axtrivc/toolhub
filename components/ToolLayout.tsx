@@ -163,7 +163,7 @@ export function ToolLayout({ tool, l10n, children }: ToolLayoutProps) {
           .tool-shell 挂钩 globals.css:内部输入框双层 Ring 焦点态、
           数据表格圆角容器/斑马纹/表头/行 hover 统一由全局 CSS 提供;
           卡片自身 hover 升阴影(transition-all 平滑过渡)。 */}
-      <div className="tool-shell min-w-0 rounded-2xl border border-hairline bg-canvas p-4 sm:p-8">
+      <div className="tool-shell min-w-0 rounded-2xl border border-hairline bg-card p-4 sm:p-8">
         {toolInterface}
       </div>
 

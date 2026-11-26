@@ -84,7 +84,7 @@ const config: Config = {
         'muted-ink': token('muted'),
         'coral': { ...coral, DEFAULT: token('primary') },
         background: token('canvas'),
-        card: token('canvas'),
+        card: token('surface-card'),
         border: token('hairline'),
         muted: token('surface-card'),
         brand: coral,
