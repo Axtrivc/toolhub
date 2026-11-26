@@ -30,6 +30,8 @@ import { tuiFromEntry, tuiUc, type ToolL10n } from '@/lib/i18n/tool-l10n-core'
  */
 export interface UnitDef {
   label: string
+  /** 单数形式的完整显示 label(可选,仅英文)。数值恰好为 1 时使用。 */
+  singular?: string
   /** 相对基准单位的换算系数(线性单位用,如 1 kg = 1000 g → factor 1000) */
   factor: number
   /**
@@ -190,8 +192,14 @@ export function makeUnitConverter(config: {
     const QUICK_VALUES = [1, 5, 10, 25, 50, 100, 500, 1000]
 
     // 单位 label(回退到 key),供摘要/公式/结果卡显示,避免暴露 raw key 如 'gb'
-    const fromLabel = L(`unit.${from}`, config.units[from]?.label ?? from)
-    const toLabel = L(`unit.${to}`, config.units[to]?.label ?? to)
+    // 英文且数值恰好为 1 时使用单数形式(若单位定义了 singular)
+    const unitLabel = (key: string, n: number): string => {
+      const def = config.units[key]
+      if (locale === 'en' && n === 1 && def?.singular) return def.singular
+      return L(`unit.${key}`, def?.label ?? key)
+    }
+    const fromLabel = unitLabel(from, toNum(value))
+    const toLabel = unitLabel(to, result)
 
     // 结果摘要(纯文本) - 供 Copy 用
     const summary = useMemo(() => {

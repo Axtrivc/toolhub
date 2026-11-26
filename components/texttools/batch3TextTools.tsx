@@ -25,7 +25,13 @@ export const JSONFormatterClient = makeTextTool({
   largeInputDebounceMs: 200,
   // P-1 大输入防线:>200k 字符跳过同步 parse/stringify(会冻结 UI),走 ⚠️ 提示
   maxInputChars: 200_000,
+  // 统计只留字符/行数:WORDS / READ TIME 是纯文本口径,对 JSON 没有意义
+  stats: ['chars', 'lines'],
+  // 格式化输出常为多行结构,输出框给 10 行(默认 6 行太矮)
+  outputRows: 10,
   transform: (t) => {
+    // 空输入是中性空状态,不要报 Invalid JSON(旧版空串会报 Unexpected end of JSON input)
+    if (!t.trim()) return ''
     try {
       return JSON.stringify(JSON.parse(t), null, 2)
     } catch (e) {
@@ -44,6 +50,8 @@ export const JSONMinifierClient = makeTextTool({
   defaultInput: '{\n  "name": "John",\n  "age": 30\n}',
   maxInputChars: 200_000,
   transform: (t) => {
+    // 空输入是中性空状态,不要报 Invalid JSON(与 JSON 格式化同款问题)
+    if (!t.trim()) return ''
     try {
       return JSON.stringify(JSON.parse(t))
     } catch (e) {

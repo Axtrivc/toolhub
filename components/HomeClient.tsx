@@ -1,14 +1,16 @@
 'use client'
 
-import { useEffect, useState, type ReactNode } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import Link from 'next/link'
 import dynamic from 'next/dynamic'
 import { Boxes, Search, ShieldCheck, Terminal, TrendingUp, Zap } from 'lucide-react'
 // 工具清单走轻量投影(lib/related-tools.ts,与注册表同序、展示/搜索字段齐全):
 // 首页直接 import lib/tools 会把全量 SEO 注册表拖进首屏 bundle。
 import { toolLiteMeta } from '@/lib/related-tools'
+import { searchTools } from '@/lib/tool-search'
 import { AdSlot } from '@/components/AdSlot'
 import { ToolHubExplorer } from '@/components/workspace/ToolHubExplorer'
+import { HomeSitemapHubs, HomeSitemapPopular } from '@/components/HomeSitemap'
 import { HeroCodeWindow } from '@/components/home/HeroCodeWindow'
 import { LiveBento } from '@/components/home/LiveBento'
 import { useApp } from '@/components/providers/AppProviders'
@@ -25,13 +27,26 @@ const WorkspaceDashboard = dynamic(
 /**
  * 首页客户端交互层。服务端 app/page.tsx 负责 metadata、JSON-LD 与 Sitemap 注入。
  */
-export function HomeClient({ sitemap }: { sitemap: ReactNode }) {
+export function HomeClient() {
   // 与 getPublishedTools() 同源同序(生成脚本保证),length/卡片/搜索结果完全一致
   const tools = Object.values(toolLiteMeta)
   const { locale } = useApp()
 
   // Hero 搜索词:下传给 ToolHubExplorer,非空时切到搜索扁平网格(100% 客户端响应)
   const [query, setQuery] = useState('')
+
+  // Hero 搜索实时匹配数(与下方 ToolHubExplorer 同一搜索引擎,无主题桶过滤):
+  // 输入即显示,避免"输了关键词却看不到任何反馈";点"查看结果"或按 Enter 滚到结果区。
+  const resultCount = useMemo(() => {
+    const q = query.trim()
+    if (!q) return 0
+    return searchTools(tools, q, tools.length, locale)?.length ?? 0
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [query, locale])
+
+  const scrollToResults = () => {
+    document.getElementById('all-tools')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }
 
   // 平台检测:搜索框 kbd 提示显示 ⌘K(Mac)还是 Ctrl K(Win/Linux)。
   // 客户端首帧后判定,SSR 默认 false,避免 hydration mismatch。
@@ -83,6 +98,12 @@ export function HomeClient({ sitemap }: { sitemap: ReactNode }) {
                 type="search"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' && query.trim()) {
+                    e.preventDefault()
+                    scrollToResults()
+                  }
+                }}
                 placeholder={t(locale, 'searchPlaceholder', { count: tools.length })}
                 aria-label={t(locale, 'heroSearchLabel')}
                 enterKeyHint="search"
@@ -98,6 +119,24 @@ export function HomeClient({ sitemap }: { sitemap: ReactNode }) {
                 {isMac ? '⌘K' : 'Ctrl K'}
               </button>
             </div>
+            {/* 搜索实时反馈:匹配数 + 查看结果(滚到下方结果区)。
+                旧版输入后无任何反馈,结果只在页面下方远处静默过滤。 */}
+            {query.trim() !== '' && (
+              <div className="mt-3 flex flex-wrap items-center gap-3 text-sm">
+                <span className="text-body" role="status">
+                  {t(locale, 'heroSearchResults', { count: resultCount })}
+                </span>
+                {resultCount > 0 && (
+                  <button
+                    type="button"
+                    onClick={scrollToResults}
+                    className="font-medium text-brand-700 underline underline-offset-2 hover:text-primary dark:text-primary"
+                  >
+                    {t(locale, 'heroSearchViewResults')}
+                  </button>
+                )}
+              </div>
+            )}
             <div className="mt-7 flex flex-wrap items-center gap-2">
               {valueBadges.map(({ icon: Icon, text }) => (
                 <span key={text} className="inline-flex items-center gap-1.5 rounded-full bg-surface-card px-3 py-1.5 text-xs text-body">
@@ -196,13 +235,15 @@ export function HomeClient({ sitemap }: { sitemap: ReactNode }) {
                 )
               })()}
             </p>
-
           </div>
+          {/* 分类导航紧跟 Browse 标题段(旧版整张 sitemap 堆在两个标题段之后,
+              两板块看上去只有标题没有内容) */}
+          <HomeSitemapHubs tools={tools} />
           <div className="prose-content mx-auto mt-14 max-w-3xl">
             <h2>{t(locale, 'seoPopularTitle')}</h2>
             <p>{t(locale, 'seoPopularBody')}</p>
           </div>
-          {sitemap}
+          <HomeSitemapPopular tools={tools} />
         </div>
       </section>
     </div>

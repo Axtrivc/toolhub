@@ -25,6 +25,9 @@
     --on-primary: 255 255 255;
     --on-dark: 250 249 245;
     --on-dark-soft: 160 157 150;
+    /* 滑杆未填充轨道:须与输入面板(surface-soft #f5f0e8)拉开对比,
+       旧值 bg-subtle(#efe9de)与面板几乎同色,低数值时整条轨道近乎隐形 */
+    --slider-track: 213 203 184;
     --accent-teal: 93 184 166;
     --accent-amber: 232 165 90;
     --success: 93 184 114;
@@ -61,6 +64,7 @@
     --dark-elevated: 34 32 29;
     --dark-soft: 22 21 19;
     --primary-disabled: 58 54 49;
+    --slider-track: 85 80 71;
   }
 
   html { scroll-behavior: smooth; overflow-x: clip; }
@@ -167,8 +171,8 @@ input.calc-slider {
   height: 6px;
   border-radius: 999px;
   /* 轨道底色不在这里:填充比例渐变由组件内联 backgroundImage 提供,
-     且已含未填充段颜色(bg-subtle);触屏 28px 命中区下若保留底色
-     会整条露出,故置 transparent */
+     且已含未填充段颜色(--slider-track,须与面板拉开对比);
+     触屏 28px 命中区下若保留底色会整条露出,故置 transparent */
   background-color: transparent;
   background-repeat: no-repeat;
   outline: none;

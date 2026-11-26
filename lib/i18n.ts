@@ -87,6 +87,8 @@ export interface Dict {
   // 搜索 & 筛选
   searchPlaceholder: string
   heroSearchLabel: string // 首页 Hero 主搜索框 aria-label "Search tools"
+  heroSearchResults: string // Hero 搜索实时匹配数 "{count} tools found"
+  heroSearchViewResults: string // Hero 搜索"查看结果"按钮 "View results"
   categoryAll: string
   showingAll: string // "Showing all {count} tools"
   showingFiltered: string // "{filtered} of {total} tools"
@@ -258,6 +260,7 @@ export interface Dict {
   cookiePrivacyLink: string // "Privacy Policy" 链接锚文本
   cookieAcceptAll: string // "Accept all"
   cookieNecessaryOnly: string // "Necessary only"
+  cookieDismiss: string // "Dismiss"(仅必要并关闭横幅)
   // 博客索引页(/blog/)
   blogIndexTitle: string // 页面 H1
   blogIndexSubtitle: string // 副标题
@@ -379,6 +382,8 @@ const en: Dict = {
   heroCtaExplore: 'Explore {count}+ Free Tools',
   searchPlaceholder: 'Search {count} tools...',
   heroSearchLabel: 'Search tools',
+  heroSearchResults: '{count} tools found',
+  heroSearchViewResults: 'View results',
   categoryAll: 'All',
   showingAll: 'Showing all {count} tools',
   showingFiltered: '{filtered} of {total} tools',
@@ -527,6 +532,7 @@ const en: Dict = {
   cookiePrivacyLink: 'Privacy Policy',
   cookieAcceptAll: 'Accept all',
   cookieNecessaryOnly: 'Necessary only',
+  cookieDismiss: 'Dismiss',
   // 博客索引页
   blogIndexTitle: 'Blog',
   blogIndexSubtitle: 'Practical guides, worked examples, calculator tutorials, and engineering notes.',
@@ -545,7 +551,7 @@ const en: Dict = {
   blogArticleReadTime: '{count} min read',
   // 首页底部 SEO 文案区
   seoWhyTitle: 'Why Use Our Online Tools?',
-  seoWhyBody1: 'Most online tools ask you to sign up, accept cookies, or upload your files to a server you can\'t audit. We do things differently: every tool here runs entirely in your browser. That means three things for you:',
+  seoWhyBody1: 'Most online tools ask you to sign up or upload your files to a server you can\'t audit. We do things differently: every tool here runs entirely in your browser. That means three things for you:',
   seoWhyPrivacy: 'Privacy by design.',
   seoWhyPrivacyBody: ' Your text and files are processed in your browser. Shareable links can place settings in the URL, so avoid sharing sensitive values.',
   seoWhyInstant: 'Instant results.',
@@ -642,6 +648,8 @@ const es: Dict = {
   heroCtaExplore: 'Explorar más de {count} herramientas gratuitas',
   searchPlaceholder: 'Buscar {count} herramientas...',
   heroSearchLabel: 'Buscar herramientas',
+  heroSearchResults: '{count} herramientas encontradas',
+  heroSearchViewResults: 'Ver resultados',
   categoryAll: 'Todas',
   showingAll: 'Mostrando las {count} herramientas',
   showingFiltered: '{filtered} de {total} herramientas',
@@ -790,6 +798,7 @@ const es: Dict = {
   cookiePrivacyLink: 'Política de Privacidad',
   cookieAcceptAll: 'Aceptar todas',
   cookieNecessaryOnly: 'Solo necesarias',
+  cookieDismiss: 'Descartar',
   // 博客索引页
   blogIndexTitle: 'Blog',
   blogIndexSubtitle: 'Guías prácticas, ejemplos verificables, tutoriales de calculadoras y notas de ingeniería.',
@@ -808,7 +817,7 @@ const es: Dict = {
   blogArticleReadTime: '{count} min de lectura',
   // 首页底部 SEO 文案区
   seoWhyTitle: '¿Por qué usar nuestras herramientas online?',
-  seoWhyBody1: 'La mayoría de herramientas online te piden registrarte, aceptar cookies o subir tus archivos a un servidor que no puedes auditar. Nosotros lo hacemos distinto: cada herramienta aquí se ejecuta por completo en tu navegador. Para ti eso significa tres cosas:',
+  seoWhyBody1: 'La mayoría de herramientas online te piden registrarte o subir tus archivos a un servidor que no puedes auditar. Nosotros lo hacemos distinto: cada herramienta aquí se ejecuta por completo en tu navegador. Para ti eso significa tres cosas:',
   seoWhyPrivacy: 'Privacidad por diseño.',
   seoWhyPrivacyBody: ' Tu texto y tus archivos se procesan en tu navegador. Los enlaces para compartir pueden incluir opciones en la URL; evita compartir valores sensibles.',
   seoWhyInstant: 'Resultados al instante.',
@@ -903,6 +912,8 @@ const de: Dict = {
   heroCtaExplore: 'Über {count} kostenlose Tools entdecken',
   searchPlaceholder: '{count} Werkzeuge durchsuchen...',
   heroSearchLabel: 'Werkzeuge suchen',
+  heroSearchResults: '{count} Werkzeuge gefunden',
+  heroSearchViewResults: 'Ergebnisse ansehen',
   categoryAll: 'Alle',
   showingAll: 'Zeige alle {count} Werkzeuge',
   showingFiltered: '{filtered} von {total} Werkzeugen',
@@ -1051,6 +1062,7 @@ const de: Dict = {
   cookiePrivacyLink: 'Datenschutzerklärung',
   cookieAcceptAll: 'Alle akzeptieren',
   cookieNecessaryOnly: 'Nur notwendige',
+  cookieDismiss: 'Schließen',
   // 博客索引页
   blogIndexTitle: 'Blog',
   blogIndexSubtitle: 'Praxis-Leitfäden, nachrechenbare Beispiele, Rechner-Tutorials und Engineering-Notizen.',
@@ -1069,7 +1081,7 @@ const de: Dict = {
   blogArticleReadTime: '{count} Min. Lesezeit',
   // 首页底部 SEO 文案区
   seoWhyTitle: 'Warum unsere Online-Werkzeuge nutzen?',
-  seoWhyBody1: 'Die meisten Online-Tools verlangen Anmeldung, Cookie-Zustimmung oder laden deine Dateien auf einen Server, den du nicht prüfen kannst. Wir machen es anders: Jedes Werkzeug hier läuft vollständig in deinem Browser. Für dich bedeutet das drei Dinge:',
+  seoWhyBody1: 'Die meisten Online-Tools verlangen Anmeldung oder laden deine Dateien auf einen Server, den du nicht prüfen kannst. Wir machen es anders: Jedes Werkzeug hier läuft vollständig in deinem Browser. Für dich bedeutet das drei Dinge:',
   seoWhyPrivacy: 'Datenschutz by Design.',
   seoWhyPrivacyBody: ' Text und Dateien werden im Browser verarbeitet. Teilbare Links können Einstellungen in die URL schreiben; teile darüber keine sensiblen Werte.',
   seoWhyInstant: 'Sofortige Ergebnisse.',

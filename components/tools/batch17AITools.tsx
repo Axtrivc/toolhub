@@ -5,7 +5,7 @@ import { CalculatorField, CalculatorNote, CalculatorSliderField, ResultCard } fr
 import { StackedCompareChart } from '@/components/charts/StackedCompareChart'
 import { ResultActions } from '../ResultActions'
 import { CopyButton } from '@/components/CopyButton'
-import { fmtNum } from '@/lib/format'
+import { fmtNum, fmtUSD } from '@/lib/format'
 import { useApp } from '@/components/providers/AppProviders'
 import { tui } from '@/lib/i18n/tool-l10n-accessors/tools/batch17AITools'
 import { getCalculatorSample } from '@/lib/tool-samples'
@@ -321,11 +321,15 @@ export function EmbeddingPriceClient() {
       {stats && (
         <StackedCompareChart
           title={L('chartTitle', 'Monthly cost by model')}
-          rows={stats.rows.filter(({ monthly }) => monthly > 0).map(({ m, monthly }, i) => ({
+          // 免费模型(Gemini,月费 0)也进图表:与下方表格的 cheapest 排名一致。
+          // 旧版用 monthly > 0 过滤掉了免费行,图表把 OpenAI 3-small 标为
+          // cheapest,与表格的 Gemini cheapest 自相矛盾。
+          rows={stats.rows.map(({ m, monthly }, i) => ({
             label: m.label,
             segments: [{ label: i === 0 ? L('cheapestLabel', 'cheapest') : L('costLabel', 'per month'), value: monthly, color: i === 0 ? 'var(--chart-teal)' : 'var(--chart-coral)' }],
           }))}
-          formatTotal={(n) => `$${n < 0.01 ? n.toExponential(1) : fmtNum(n, 2)}`}
+          // 金额固定 2 位小数:旧版 <0.01 走 toExponential,免费行显示 $0.0e+0
+          formatTotal={(n) => fmtUSD(n, 2)}
         />
       )}
       {stats ? (
@@ -348,8 +352,11 @@ export function EmbeddingPriceClient() {
                   <td className="px-3 py-2 font-mono text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>{m.dims.toLocaleString('en-US')}</td>
                   <td className="px-3 py-2 font-mono text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>{m.ctx.toLocaleString('en-US')}</td>
                   <td className="px-3 py-2 font-mono text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>${m.pricePer1M === 0 ? '0' : fmtNum(m.pricePer1M, 3)}</td>
-                  <td className="px-3 py-2 font-mono" style={{ color: 'rgb(var(--text))' }}>${perRun < 0.01 ? perRun.toExponential(1) : fmtNum(perRun, 4)}</td>
-                  <td className="px-3 py-2 font-mono font-semibold" style={{ color: 'rgb(var(--text))' }}>${fmtNum(monthly, 2)}</td>
+                  {/* PER RUN:免费模型精确为 0 时显示 $0.00;其余固定 4 位小数。
+                      旧版 <0.01 走 toExponential(1),0 显示为 $0.0e+0 */}
+                  <td className="px-3 py-2 font-mono" style={{ color: 'rgb(var(--text))' }}>{perRun === 0 ? '$0.00' : fmtUSD(perRun, 4)}</td>
+                  {/* 月费固定 2 位小数:fmtNum 会去尾零,$5.5/$1 与 $0.01 混用 */}
+                  <td className="px-3 py-2 font-mono font-semibold" style={{ color: 'rgb(var(--text))' }}>{fmtUSD(monthly, 2)}</td>
                   <td className="px-3 py-2 font-mono text-xs whitespace-nowrap" style={{ color: 'rgb(var(--text-subtle))' }}>{storage}</td>
                 </tr>
               ))}
@@ -360,7 +367,7 @@ export function EmbeddingPriceClient() {
         <p className="text-sm" style={{ color: 'rgb(var(--text-subtle))' }}>{L('invalid', 'Enter non-negative numbers')}</p>
       )}
       <ResultActions
-        summary={stats ? stats.rows.map(({ m, monthly }) => `${m.label}: $${fmtNum(monthly, 2)}/mo`).join('\n') : ''}
+        summary={stats ? stats.rows.map(({ m, monthly }) => `${m.label}: ${fmtUSD(monthly, 2)}/mo`).join('\n') : ''}
         filename="embedding-costs.csv"
         downloadContent={stats ? 'Model,Dims,Context,$/1M,Per run,Per month,Vector storage (float32)\n' + stats.rows.map(({ m, perRun, monthly, storage }) => `${m.label},${m.dims},${m.ctx},${m.pricePer1M},${perRun.toFixed(6)},${monthly.toFixed(2)},${storage}`).join('\n') : ''}
         mime="text/csv;charset=utf-8;"

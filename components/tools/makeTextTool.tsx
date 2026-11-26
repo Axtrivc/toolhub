@@ -3,7 +3,6 @@
 import { useState, useEffect, useMemo, useRef, type ComponentType } from 'react'
 import { CopyButton } from '@/components/CopyButton'
 import { PulseGlow } from '@/components/motion/PulseGlow'
-import { AnimatedNumber } from '@/components/calculator/CalculatorField'
 import { useApp } from '@/components/providers/AppProviders'
 import { t, type Locale } from '@/lib/i18n'
 import { tuiFromEntry, type ToolL10n } from '@/lib/i18n/tool-l10n-core'
@@ -59,6 +58,13 @@ export interface TextToolConfig {
   note?: string
   /** 是否显示字符/单词统计(默认 true) */
   showStats?: boolean
+  /**
+   * 统计卡片显示哪些指标(默认全部)。JSON 格式化这类结构化工具
+   * 不需要 WORDS / READ TIME(纯文本口径),只留 CHARACTERS / LINES。
+   */
+  stats?: Array<'chars' | 'words' | 'lines' | 'reading'>
+  /** 输出框行数(默认 6);JSON 格式化输出常为多行结构,给 10 行 */
+  outputRows?: number
   /**
    * 输入长度门控(字符数,R6 授权增强):粘贴超大文本时同步 transform 会冻结 UI,
    * 超过阈值则跳过 transform,输出走既有 ⚠️ 通道提示裁剪。
@@ -208,34 +214,39 @@ export function makeTextTool(config: TextToolConfig): ComponentType {
               id="text-output"
               value={output}
               placeholder={t(locale, 'textToolResultPlaceholder')}
-              rows={6}
+              rows={config.outputRows ?? 6}
               className="w-full rounded-xl border border-transparent bg-dark-soft p-4 font-mono text-sm text-on-dark outline-none placeholder:text-on-dark-soft"
             />
           </PulseGlow>
         </div>
 
-        {/* 统计仪表条:iOS 风格四格统计(字符/词/行/阅读时长,数字滚动)+
-            输入↔输出长度对比条(压缩/展开工具一眼看出变换幅度,宽度过渡动画) */}
+        {/* 统计仪表条:iOS 风格四格统计(字符/词/行/阅读时长)+
+            输入↔输出长度对比条(压缩/展开工具一眼看出变换幅度,宽度过渡动画)。
+            数字直出不做滚动动画:AnimatedNumber 的 400ms tween 会让精确计数
+            在变化瞬间显示中间值(如 57→7 途中闪过 39、清空时先闪 1 再到 0),
+            统计值必须时刻准确。 */}
         {showStats && (
           <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
             {[
-              { label: t(locale, 'textToolCharsLabel'), value: charCount, display: fmtC },
-              { label: t(locale, 'textToolWordsLabel'), value: wordCount, display: fmtW },
-              { label: t(locale, 'textToolLinesLabel'), value: lineCount, display: fmtL },
-              { label: t(locale, 'textToolReadingLabel'), value: readingSec, display: readingLabel },
-            ].map((cell) => (
-              <div
-                key={cell.label}
-                className="min-w-0 rounded-xl border border-hairline bg-canvas p-4 text-center"
-              >
-                <div className="font-serif text-xl font-normal tabular-nums sm:text-2xl" style={{ color: 'rgb(var(--text))' }}>
-                  <AnimatedNumber value={cell.display} />
+              { key: 'chars', label: t(locale, 'textToolCharsLabel'), display: fmtC },
+              { key: 'words', label: t(locale, 'textToolWordsLabel'), display: fmtW },
+              { key: 'lines', label: t(locale, 'textToolLinesLabel'), display: fmtL },
+              { key: 'reading', label: t(locale, 'textToolReadingLabel'), display: readingLabel },
+            ]
+              .filter((cell) => (config.stats ?? ['chars', 'words', 'lines', 'reading']).includes(cell.key as 'chars' | 'words' | 'lines' | 'reading'))
+              .map((cell) => (
+                <div
+                  key={cell.label}
+                  className="min-w-0 rounded-xl border border-hairline bg-canvas p-4 text-center"
+                >
+                  <div className="font-serif text-xl font-normal tabular-nums sm:text-2xl" style={{ color: 'rgb(var(--text))' }}>
+                    {cell.display}
+                  </div>
+                  <div className="mt-0.5 text-[11px] font-medium uppercase tracking-wide" style={{ color: 'rgb(var(--text-subtle))' }}>
+                    {cell.label}
+                  </div>
                 </div>
-                <div className="mt-0.5 text-[11px] font-medium uppercase tracking-wide" style={{ color: 'rgb(var(--text-subtle))' }}>
-                  {cell.label}
-                </div>
-              </div>
-            ))}
+              ))}
           </div>
         )}
         {showStats && (

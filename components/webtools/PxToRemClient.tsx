@@ -35,7 +35,8 @@ export function PxToRemClient() {
 
   // 首帧恒 16(SSR/水合一致),挂载后从 localStorage 恢复上次自定义值
   const [rootSize, setRootSize] = useState(16)
-  const [px, setPx] = useState('')
+  // px 默认 16:旧版初始为空,所有换算结果与实时预览全显示 "—",像工具坏了一样
+  const [px, setPx] = useState('16')
   const [rem, setRem] = useState('')
 
   useEffect(() => {
@@ -109,9 +110,13 @@ export function PxToRemClient() {
             />
           </div>
           <span className="self-center font-mono text-xs tabular-nums" style={{ color: 'rgb(var(--text-muted))' }}>
-            {px || '—'}
+            {px ? `${px} px` : '—'}
           </span>
         </div>
+        {/* 橙色横条含义:当前尺寸相对 80px 的比例尺(旧版无任何说明,看不懂横条是什么) */}
+        <p className="mt-2 text-xs" style={{ color: 'rgb(var(--text-subtle))' }}>
+          {L('previewBarHint', 'Bar: size relative to 80 px.')}
+        </p>
       </div>
 
       {/* 双向换算 */}
@@ -190,11 +195,17 @@ export function PxToRemClient() {
                     <td className="px-3 py-1.5 text-right font-mono tabular-nums">{r}</td>
                     <td className="px-3 py-1.5 text-right font-mono tabular-nums">{r}</td>
                     <td className="w-1/3 px-3 py-1.5">
-                      <div className="h-1.5 overflow-hidden rounded-full" style={{ backgroundColor: 'rgb(var(--bg-subtle))' }}>
-                        <div
-                          className="h-full rounded-full transition-all duration-200"
-                          style={{ width: `${(p / 80) * 100}%`, backgroundColor: p === rootSize ? 'var(--chart-teal)' : 'rgb(var(--primary))' }}
-                        />
+                      {/* SIZE 列旧版只有抽象短横条、没有数值:横条旁补 px 数值 */}
+                      <div className="flex items-center gap-2">
+                        <div className="h-1.5 flex-1 overflow-hidden rounded-full" style={{ backgroundColor: 'rgb(var(--bg-subtle))' }}>
+                          <div
+                            className="h-full rounded-full transition-all duration-200"
+                            style={{ width: `${(p / 80) * 100}%`, backgroundColor: p === rootSize ? 'var(--chart-teal)' : 'rgb(var(--primary))' }}
+                          />
+                        </div>
+                        <span className="shrink-0 font-mono text-[11px] tabular-nums" style={{ color: 'rgb(var(--text-muted))' }}>
+                          {p} px
+                        </span>
                       </div>
                     </td>
                   </tr>
