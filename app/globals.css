@@ -33,7 +33,7 @@
 
     /* Existing tools use RGB channels for opacity modifiers and inline styles. */
     --bg: var(--canvas);
-    --bg-card: var(--canvas);
+    --bg-card: var(--surface-card);
     --bg-subtle: var(--surface-card);
     --border: var(--hairline);
     --border-strong: var(--hairline);
@@ -82,13 +82,13 @@
 @layer components {
   .container-page { @apply mx-auto w-full max-w-[var(--max-width)] px-5 md:px-8; }
   .container-page .max-w-3xl { margin-inline: auto; }
-  .surface { @apply border-hairline bg-canvas text-ink; }
+  .surface { @apply border-hairline bg-card text-ink; }
   .surface-subtle { @apply bg-surface-card; }
 
   .btn {
     @apply inline-flex min-h-10 items-center justify-center gap-2 rounded-lg border border-transparent px-5 py-2 text-sm font-medium leading-tight transition-colors;
   }
-  .btn-primary { @apply bg-primary text-white active:bg-primary-active; }
+  .btn-primary { @apply bg-primary text-white hover:bg-primary-active active:bg-primary-active; }
   .btn-secondary { @apply border-hairline bg-canvas text-ink active:bg-surface-soft; }
   .btn:disabled { @apply cursor-not-allowed bg-primary-disabled text-muted-ink; }
 

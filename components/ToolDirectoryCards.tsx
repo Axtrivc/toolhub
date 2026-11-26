@@ -17,7 +17,7 @@ export function ToolDirectoryCard({ tool }: { tool: ToolMeta }) {
   return (
     <Link
       href={`/tools/${tool.slug}/`}
-      className="flex flex-col gap-2 rounded-xl border border-hairline bg-canvas p-5 text-ink"
+      className="flex flex-col gap-2 rounded-xl border border-hairline bg-card p-5 text-ink"
     >
       <div className="flex items-center justify-between gap-3">
         <span
