@@ -117,7 +117,7 @@ export function ScratchpadWidget() {
   return (
     <section
       aria-labelledby="scratchpad-heading"
-      className="flex h-full flex-col overflow-hidden rounded-xl border border-hairline bg-canvas"
+      className="flex h-full flex-col overflow-hidden rounded-xl border border-hairline bg-card"
     >
       {/* 标题栏:图标 + 标题 + ● SAVED 指示(等宽 mono 微标签) */}
       <header className="flex items-center justify-between gap-3 border-b border-hairline px-4 py-2.5">

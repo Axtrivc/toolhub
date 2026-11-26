@@ -71,7 +71,7 @@ export function QuickAccessPanel() {
   return (
     <section
       aria-label={t(locale, 'workspaceQuickAccess')}
-      className="flex h-full flex-col gap-4 rounded-xl border border-hairline bg-canvas p-4"
+      className="flex h-full flex-col gap-4 rounded-xl border border-hairline bg-card p-4"
     >
       {/* ── ① PINNED TOOLS ── */}
       <div>

@@ -59,7 +59,7 @@ export function BlogArticleNavigation({ currentSlug }: { currentSlug: string }) 
 
       <nav aria-label={copy.navigation} className="mt-10 grid gap-4 sm:grid-cols-2">
         {previous ? (
-          <Link href={`/blog/${previous.slug}/`} className="rounded-xl border border-hairline bg-canvas p-5 !no-underline">
+          <Link href={`/blog/${previous.slug}/`} className="rounded-xl border border-hairline bg-card p-5 !no-underline">
             <span className="block text-xs font-medium uppercase tracking-[1.5px] text-brand-700 dark:text-brand-400">
               <span aria-hidden="true">← </span>{copy.previous}
             </span>
@@ -70,7 +70,7 @@ export function BlogArticleNavigation({ currentSlug }: { currentSlug: string }) 
         ) : <span className="hidden sm:block" aria-hidden="true" />}
 
         {next && (
-          <Link href={`/blog/${next.slug}/`} className="rounded-xl border border-hairline bg-canvas p-5 !no-underline sm:text-right">
+          <Link href={`/blog/${next.slug}/`} className="rounded-xl border border-hairline bg-card p-5 !no-underline sm:text-right">
             <span className="block text-xs font-medium uppercase tracking-[1.5px] text-brand-700 dark:text-brand-400">
               {copy.next}<span aria-hidden="true"> →</span>
             </span>

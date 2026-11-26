@@ -39,7 +39,7 @@ function BentoCell({
   const { locale } = useApp()
   return (
     <div
-      className={`flex min-w-0 flex-col gap-3 rounded-xl border border-hairline bg-canvas p-6 ${className}`}
+      className={`flex min-w-0 flex-col gap-3 rounded-xl border border-hairline bg-card p-6 ${className}`}
     >
       <h3 className="font-serif text-[1.75rem] font-normal leading-tight tracking-[-.3px] text-ink">{title}</h3>
       <div className="flex-1">{children}</div>

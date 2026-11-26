@@ -117,7 +117,7 @@ export function ToolHubExplorer({ tools, query, onQueryChange }: ToolHubExplorer
     return (
       <div key={tool.slug} className="group relative h-full">
         <Link href={`/tools/${tool.slug}/`} title={title} aria-label={title}
-          className="flex h-full flex-col gap-2 rounded-xl border border-hairline bg-canvas p-5">
+          className="flex h-full flex-col gap-2 rounded-xl border border-hairline bg-card p-5">
           <span className="flex items-center gap-2.5 pr-6">
             <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-surface-card text-ink">
               <SmartIcon icon={getToolIcon(tool)} className="h-4 w-4" />

@@ -20,7 +20,7 @@ export function AnimatedToolCard({ href, title, ariaLabel, variant, badge, child
       href={href}
       title={title}
       aria-label={ariaLabel}
-      className={`group relative flex h-full min-w-0 flex-col rounded-xl border border-hairline p-5 ${variant === 'featured' ? 'bg-surface-soft' : 'bg-canvas'}`}
+      className={`group relative flex h-full min-w-0 flex-col rounded-xl border border-hairline p-5 ${variant === 'featured' ? 'bg-surface-soft' : 'bg-card'}`}
     >
       {badge}
       {children}
